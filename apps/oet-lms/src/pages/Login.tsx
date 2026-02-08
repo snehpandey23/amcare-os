@@ -34,68 +34,75 @@ export default function Login() {
   }
 
   return (
-    <div className="siya-login-container">
-      <div className="siya-login-box">
-        <h1 className="siya-login-title">Siya Health</h1>
-        <p className="siya-login-subtitle">Virtual Medical Assistant Chat Simulator</p>
-        <div className="siya-login-tabs">
-          <button
-            type="button"
-            className={mode === 'login' ? 'active' : ''}
-            onClick={() => setMode('login')}
-          >
-            Sign in
-          </button>
-          <button
-            type="button"
-            className={mode === 'register' ? 'active' : ''}
-            onClick={() => setMode('register')}
-          >
-            Create account
-          </button>
+    <div className="siya-login-page" data-login-layout="two-panel">
+      <div className="siya-login-branding">
+        <div className="siya-login-branding-inner">
+          <h1 className="siya-login-title">Siya Health</h1>
+          <p className="siya-login-subtitle">Virtual Medical Assistant Chat Simulator</p>
+          <p className="siya-login-tagline">Sign in or create an account to save your progress and get personalized feedback.</p>
         </div>
-        <form onSubmit={handleSubmit}>
-          {error && <div className="siya-login-error">{error}</div>}
-          {mode === 'register' && (
+      </div>
+      <div className="siya-login-form-panel">
+        <div className="siya-login-form-card">
+          <div className="siya-login-tabs">
+            <button
+              type="button"
+              className={mode === 'login' ? 'active' : ''}
+              onClick={() => setMode('login')}
+            >
+              Sign in
+            </button>
+            <button
+              type="button"
+              className={mode === 'register' ? 'active' : ''}
+              onClick={() => setMode('register')}
+            >
+              Create account
+            </button>
+          </div>
+          <form onSubmit={handleSubmit}>
+            {error && <div className="siya-login-error">{error}</div>}
+            {mode === 'register' && (
+              <div className="siya-form-group">
+                <label>Name (optional)</label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Your name"
+                />
+              </div>
+            )}
             <div className="siya-form-group">
-              <label>Name (optional)</label>
+              <label>Email</label>
               <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Your name"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                autoFocus
+                placeholder="you@example.com"
               />
             </div>
-          )}
-          <div className="siya-form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              autoFocus
-              placeholder="you@example.com"
-            />
-          </div>
-          <div className="siya-form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              minLength={6}
-              placeholder={mode === 'register' ? 'At least 6 characters' : ''}
-            />
-          </div>
-          <button type="submit" className="siya-btn siya-btn-primary siya-login-btn" disabled={loading}>
-            {loading ? 'Please wait...' : mode === 'login' ? 'Sign in' : 'Create account'}
-          </button>
-        </form>
-        <p className="siya-login-hint">
-          Sign in to save your progress and reports. You can still practice without an account (data stays on this device).
-        </p>
+            <div className="siya-form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                minLength={6}
+                placeholder={mode === 'register' ? 'At least 6 characters' : ''}
+              />
+            </div>
+            <button type="submit" className="siya-btn siya-btn-primary siya-login-btn" disabled={loading}>
+              {loading ? 'Please wait...' : mode === 'login' ? 'Sign in' : 'Create account'}
+            </button>
+          </form>
+          <p className="siya-login-hint">
+            Anyone can create an account. Your data is stored securely and tied to your email.
+          </p>
+        </div>
       </div>
     </div>
   )

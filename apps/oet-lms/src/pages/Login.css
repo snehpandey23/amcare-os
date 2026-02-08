@@ -1,53 +1,81 @@
-.siya-login-container {
+/* Full-page layout: two panels on desktop, stacked on mobile */
+.siya-login-page {
   min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+}
+
+.siya-login-branding {
+  background: linear-gradient(135deg, var(--siya-primary) 0%, var(--siya-primary-dark) 100%);
+  color: var(--text-light);
+  padding: 32px 24px 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--siya-primary) 0%, var(--siya-primary-dark) 100%);
-  padding: 24px;
 }
 
-.siya-login-box {
-  background: var(--bg-surface);
-  padding: 32px 40px;
-  border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  max-width: 400px;
+.siya-login-branding-inner {
+  max-width: 420px;
+  text-align: center;
 }
 
 .siya-login-title {
-  text-align: center;
-  margin-bottom: 4px;
-  color: var(--siya-primary);
+  margin-bottom: 8px;
+  color: #fff;
   font-size: 28px;
   font-weight: 700;
 }
 
 .siya-login-subtitle {
-  text-align: center;
-  color: var(--text-secondary);
-  margin-bottom: 24px;
+  font-size: 15px;
+  opacity: 0.95;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.siya-login-tagline {
   font-size: 13px;
+  opacity: 0.85;
+  line-height: 1.5;
+}
+
+.siya-login-form-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px 48px;
+  background: var(--bg-secondary);
+}
+
+.siya-login-form-card {
+  background: var(--bg-surface);
+  padding: 36px 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 420px;
 }
 
 .siya-login-tabs {
   display: flex;
   gap: 0;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
   border-bottom: 1px solid var(--border-color);
 }
 
 .siya-login-tabs button {
   flex: 1;
-  padding: 10px 16px;
+  padding: 12px 16px;
   border: none;
   background: none;
   color: var(--text-secondary);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   cursor: pointer;
-  border-bottom: 2px solid transparent;
+  border-bottom: 3px solid transparent;
   margin-bottom: -1px;
 }
 
@@ -61,12 +89,12 @@
 }
 
 .siya-form-group {
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .siya-form-group label {
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   color: var(--text-primary);
   font-weight: 500;
   font-size: 14px;
@@ -77,8 +105,8 @@
   padding: 12px 14px;
   border: 1px solid var(--border-color);
   border-radius: 10px;
-  font-size: 14px;
-  background: var(--bg-primary);
+  font-size: 15px;
+  background: var(--bg-surface);
   color: var(--text-primary);
   box-sizing: border-box;
 }
@@ -86,27 +114,84 @@
 .siya-form-group input:focus {
   outline: none;
   border-color: var(--siya-primary);
+  box-shadow: 0 0 0 3px rgba(13, 139, 139, 0.15);
 }
 
 .siya-login-error {
-  padding: 10px 14px;
-  margin-bottom: 16px;
-  background: rgba(200, 60, 60, 0.1);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  background: rgba(200, 60, 60, 0.08);
   color: var(--siya-danger);
-  border-radius: 8px;
-  font-size: 13px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  border: 1px solid rgba(200, 60, 60, 0.2);
 }
 
 .siya-login-btn {
   width: 100%;
-  padding: 12px 24px;
+  padding: 14px 24px;
   margin-top: 8px;
+  font-size: 15px;
 }
 
 .siya-login-hint {
-  margin-top: 20px;
-  font-size: 12px;
+  margin-top: 24px;
+  font-size: 13px;
   color: var(--text-secondary);
   text-align: center;
   line-height: 1.5;
+}
+
+/* Desktop: side-by-side panels so form is clearly the main content, not a small box */
+@media (min-width: 900px) {
+  .siya-login-page {
+    flex-direction: row;
+  }
+
+  .siya-login-branding {
+    width: 44%;
+    min-width: 380px;
+    max-width: 520px;
+    padding: 48px 40px;
+  }
+
+  .siya-login-branding-inner {
+    max-width: 360px;
+    text-align: left;
+  }
+
+  .siya-login-title {
+    font-size: 32px;
+  }
+
+  .siya-login-subtitle {
+    font-size: 16px;
+  }
+
+  .siya-login-form-panel {
+    flex: 1;
+    min-width: 0;
+    padding: 48px;
+  }
+
+  .siya-login-form-card {
+    max-width: 400px;
+    padding: 40px 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .siya-login-form-panel {
+    padding: 24px 16px 40px;
+  }
+
+  .siya-login-form-card {
+    padding: 28px 24px;
+  }
+
+  .siya-login-tabs button {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
 }
