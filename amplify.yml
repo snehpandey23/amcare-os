@@ -10,8 +10,9 @@ frontend:
     build:
       commands:
         - npm run build --workspace=@amcare/oet-lms
+        - cp -r apps/oet-lms/dist dist
   artifacts:
-    baseDirectory: apps/oet-lms/dist
+    baseDirectory: dist
     files:
       - "**/*"
   cache:
