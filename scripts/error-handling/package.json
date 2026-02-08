@@ -1,0 +1,22 @@
+{
+  "name": "@amcare/error-handling",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "monitor": "node dist/monitor.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "@amcare/database": "*",
+    "@amcare/audit": "*",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.3"
+  }
+}

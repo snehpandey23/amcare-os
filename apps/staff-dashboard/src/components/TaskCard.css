@@ -1,0 +1,140 @@
+.task-card {
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.task-card:hover {
+  border-color: #2563eb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.task-card.completed {
+  opacity: 0.7;
+  background: #f9fafb;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.task-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.task-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+  flex: 1;
+}
+
+.priority-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.task-description {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.task-patient,
+.task-due-date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.patient-label,
+.due-label {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.patient-name,
+.due-value {
+  color: #111827;
+  font-weight: 600;
+}
+
+.task-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.action-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.start-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.start-btn:hover {
+  background: #1e40af;
+}
+
+.complete-btn {
+  background: #10b981;
+  color: white;
+}
+
+.complete-btn:hover {
+  background: #059669;
+}
+
+.view-btn {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.view-btn:hover {
+  background: #e5e7eb;
+}
+
+.completed-indicator {
+  color: #10b981;
+  font-weight: 600;
+  font-size: 13px;
+}

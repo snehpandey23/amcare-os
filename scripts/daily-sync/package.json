@@ -1,0 +1,23 @@
+{
+  "name": "@amcare/daily-sync",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "@amcare/zoho-sync": "*",
+    "@amcare/klarity-sync": "*",
+    "@amcare/wellsync-api": "*",
+    "@amcare/database": "*",
+    "@amcare/audit": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.3"
+  }
+}

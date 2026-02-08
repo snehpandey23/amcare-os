@@ -1,0 +1,112 @@
+.siya-login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--siya-primary) 0%, var(--siya-primary-dark) 100%);
+  padding: 24px;
+}
+
+.siya-login-box {
+  background: var(--bg-surface);
+  padding: 32px 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 400px;
+}
+
+.siya-login-title {
+  text-align: center;
+  margin-bottom: 4px;
+  color: var(--siya-primary);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.siya-login-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  font-size: 13px;
+}
+
+.siya-login-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.siya-login-tabs button {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.siya-login-tabs button:hover {
+  color: var(--text-primary);
+}
+
+.siya-login-tabs button.active {
+  color: var(--siya-primary);
+  border-bottom-color: var(--siya-primary);
+}
+
+.siya-form-group {
+  margin-bottom: 18px;
+}
+
+.siya-form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.siya-form-group input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 14px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  box-sizing: border-box;
+}
+
+.siya-form-group input:focus {
+  outline: none;
+  border-color: var(--siya-primary);
+}
+
+.siya-login-error {
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  background: rgba(200, 60, 60, 0.1);
+  color: var(--siya-danger);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.siya-login-btn {
+  width: 100%;
+  padding: 12px 24px;
+  margin-top: 8px;
+}
+
+.siya-login-hint {
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.5;
+}

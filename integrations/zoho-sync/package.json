@@ -1,0 +1,25 @@
+{
+  "name": "@amcare/zoho-sync",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "sync": "node dist/index.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "@amcare/database": "*",
+    "@amcare/audit": "*"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2"
+  }
+}

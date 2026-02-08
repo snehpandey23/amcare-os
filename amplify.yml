@@ -1,0 +1,22 @@
+# AWS Amplify build spec for OET LMS (monorepo)
+# Builds apps/oet-lms and deploys the static output.
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build --workspace=@amcare/oet-lms
+  artifacts:
+    baseDirectory: apps/oet-lms/dist
+    files: '**/*'
+  cache:
+    paths:
+      - node_modules
+  customHeaders:
+    - pattern: '**/*'
+      headers:
+        - key: 'Cache-Control'
+          value: 'no-cache, no-store, must-revalidate'

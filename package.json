@@ -1,0 +1,33 @@
+{
+  "name": "amcare-os",
+  "version": "1.0.0",
+  "description": "AmCare Operating System - HIPAA-compliant healthcare operations platform",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "integrations/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=apps/staff-dashboard\" \"npm run dev --workspace=apps/patient-management\" \"npm run dev --workspace=apps/operations-hub\" \"npm run dev --workspace=apps/analytics-engine\" \"npm run dev --workspace=apps/oet-lms\"",
+    "dev:ai-scrum-master": "concurrently \"npm run dev --workspace=integrations/ai-scrum-master-api\" \"npm run dev --workspace=apps/ai-scrum-master\"",
+    "dev:oet-lms-chat": "concurrently \"npm run dev --workspace=integrations/oet-lms-chat\" \"npm run dev --workspace=apps/oet-lms\"",
+    "dev:oet-lms": "concurrently \"npm run dev --workspace=integrations/oet-lms-chat\" \"npm run dev --workspace=integrations/oet-lms-submissions\" \"npm run dev --workspace=apps/oet-lms\"",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "sync:daily": "node scripts/daily-sync/index.js",
+    "report:generate": "node scripts/report-generation/index.js",
+    "lint": "eslint . --ext .ts,.tsx",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "eslint": "^8.56.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

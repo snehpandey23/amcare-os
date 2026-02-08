@@ -1,0 +1,138 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:14
+    container_name: amcare-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: amcare_os
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis for Queue and Pub/Sub
+  redis:
+    image: redis:7-alpine
+    container_name: amcare-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # MongoDB (for patient encounters)
+  mongodb:
+    image: mongo:7
+    container_name: amcare-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Main API Server
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: amcare-api
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/amcare_os
+      MONGODB_URI: mongodb://admin:admin@mongodb:27017/amcare_os?authSource=admin
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET}
+      ZOHO_CLIENT_ID: ${ZOHO_CLIENT_ID}
+      ZOHO_CLIENT_SECRET: ${ZOHO_CLIENT_SECRET}
+      ZOHO_REFRESH_TOKEN: ${ZOHO_REFRESH_TOKEN}
+      SPRUCE_HEALTH_API_KEY: ${SPRUCE_HEALTH_API_KEY}
+      KLARITY_API_KEY: ${KLARITY_API_KEY}
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    volumes:
+      - ./logs:/app/logs
+
+  # Spruce Health Integration
+  spruce-integration:
+    build:
+      context: ./integrations/spruce-health
+      dockerfile: Dockerfile
+    container_name: amcare-spruce
+    environment:
+      REDIS_URL: redis://redis:6379
+      SPRUCE_HEALTH_API_KEY: ${SPRUCE_HEALTH_API_KEY}
+      SPRUCE_HEALTH_API_URL: ${SPRUCE_HEALTH_API_URL}
+      SPRUCE_WEBHOOK_SECRET: ${SPRUCE_WEBHOOK_SECRET}
+    ports:
+      - "3006:3006"
+    depends_on:
+      - redis
+      - api
+
+  # EMR Sync Service
+  emr-sync:
+    build:
+      context: ./integrations/klarity-sync
+      dockerfile: Dockerfile
+    container_name: amcare-emr-sync
+    environment:
+      REDIS_URL: redis://redis:6379
+      KLARITY_API_KEY: ${KLARITY_API_KEY}
+      KLARITY_API_URL: ${KLARITY_API_URL}
+      CAREPATRON_API_KEY: ${CAREPATRON_API_KEY}
+      CAREPATRON_API_URL: ${CAREPATRON_API_URL}
+    depends_on:
+      - redis
+
+  # Automation Engine
+  automation:
+    build:
+      context: ./scripts/automation-engine
+      dockerfile: Dockerfile
+    container_name: amcare-automation
+    environment:
+      REDIS_URL: redis://redis:6379
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/amcare_os
+      SPRUCE_HEALTH_API_KEY: ${SPRUCE_HEALTH_API_KEY}
+      ZOHO_CLIENT_ID: ${ZOHO_CLIENT_ID}
+      ZOHO_CLIENT_SECRET: ${ZOHO_CLIENT_SECRET}
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN}
+      SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
+    depends_on:
+      - redis
+      - postgres
+
+volumes:
+  postgres_data:
+  redis_data:
+  mongodb_data:

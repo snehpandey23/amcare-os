@@ -1,0 +1,23 @@
+{
+  "name": "@amcare/auth",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2"
+  }
+}
