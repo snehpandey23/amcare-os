@@ -44,10 +44,10 @@ export interface AdminSessionRecord extends SessionRecord {
 }
 
 function handleAuthResponse(res: Response, data: Record<string, unknown>, fallback: string): never {
-  if (res.status === 503) throw new Error('Service temporarily unavailable. Please try again in a moment.')
-  if (res.status >= 500) throw new Error('Server error. Please try again later.')
-  const msg = typeof data.error === 'string' ? data.error : fallback
-  throw new Error(msg)
+  const apiMsg = typeof data.error === 'string' ? data.error : ''
+  if (res.status === 503) throw new Error(apiMsg || 'Service temporarily unavailable. Please try again in a moment.')
+  if (res.status >= 500) throw new Error(apiMsg || 'Server error. Please try again later.')
+  throw new Error(apiMsg || fallback)
 }
 
 export async function register(email: string, password: string, name?: string): Promise<{ token: string; user: User }> {

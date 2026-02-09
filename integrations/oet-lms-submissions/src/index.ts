@@ -31,6 +31,11 @@ const app = express()
 app.use(cors({ origin: true }))
 app.use(express.json())
 
+app.get('/api/health', (_req, res) => {
+  const hasDb = !!getPool()
+  res.json({ ok: true, service: 'oet-lms-submissions', database: hasDb ? 'connected' : 'not configured' })
+})
+
 // ----- Auth & sessions (require DATABASE_URL) -----
 app.post('/api/auth/register', async (req: express.Request, res: express.Response) => {
   const pool = getPool()
@@ -54,10 +59,16 @@ app.post('/api/auth/register', async (req: express.Request, res: express.Respons
     const token = signToken({ userId: row.id, email: row.email, role: row.role })
     return res.status(201).json({ token, user: { id: row.id, email: row.email, name: row.name, role: row.role } })
   } catch (err: unknown) {
-    const msg = err && typeof err === 'object' && 'code' in err && (err as { code: string }).code === '23505'
-      ? 'Email already registered'
-      : 'Registration failed'
-    return res.status(400).json({ error: msg })
+    const code = err && typeof err === 'object' && 'code' in err ? (err as { code: string }).code : ''
+    if (code === '23505') {
+      return res.status(400).json({ error: 'Email already registered. Sign in instead.' })
+    }
+    if (code === '42P01' || code === 'ECONNREFUSED' || code === 'ENOTFOUND' || (err instanceof Error && err.message?.includes('connect'))) {
+      console.error('[oet-lms-submissions] Register DB error:', err)
+      return res.status(503).json({ error: 'Database not ready. Check DATABASE_URL and server logs.' })
+    }
+    console.error('[oet-lms-submissions] Register error:', err)
+    return res.status(500).json({ error: 'Registration failed. Please try again.' })
   }
 })
 
