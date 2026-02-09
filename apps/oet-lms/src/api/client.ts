@@ -43,8 +43,13 @@ export interface AdminSessionRecord extends SessionRecord {
   userName: string | null
 }
 
+function getErrorMessage(data: Record<string, unknown>): string {
+  const msg = data.error ?? data.message
+  return typeof msg === 'string' ? msg : ''
+}
+
 function handleAuthResponse(res: Response, data: Record<string, unknown>, fallback: string): never {
-  const apiMsg = typeof data.error === 'string' ? data.error : ''
+  const apiMsg = getErrorMessage(data)
   if (res.status === 503) throw new Error(apiMsg || 'Service temporarily unavailable. Please try again in a moment.')
   if (res.status >= 500) throw new Error(apiMsg || 'Server error. Please try again later.')
   throw new Error(apiMsg || fallback)
@@ -61,8 +66,14 @@ export async function register(email: string, password: string, name?: string): 
   } catch {
     throw new Error("Can't connect to the server. Check your connection and try again.")
   }
-  const data = await res.json().catch(() => ({})) as Record<string, unknown>
-  if (!res.ok) handleAuthResponse(res, data, 'Registration failed')
+  const data = (await res.json().catch(() => ({}))) as Record<string, unknown>
+  if (!res.ok) {
+    const apiMsg = getErrorMessage(data)
+    const fallback = res.status === 400
+      ? 'Registration failed. If you already have an account, try Sign in.'
+      : 'Registration failed'
+    handleAuthResponse(res, { ...data, error: apiMsg || fallback }, fallback)
+  }
   return data as { token: string; user: User }
 }
 

@@ -61,7 +61,14 @@ export default function Login() {
             </button>
           </div>
           <form onSubmit={handleSubmit}>
-            {error && <div className="siya-login-error">{error}</div>}
+            {error && (
+              <>
+                <div className="siya-login-error">{error}</div>
+                {mode === 'register' && (
+                  <p className="siya-login-error-hint">Already have an account? Switch to <button type="button" className="siya-login-error-link" onClick={() => { setMode('login'); setError(''); }}>Sign in</button>.</p>
+                )}
+              </>
+            )}
             {mode === 'register' && (
               <div className="siya-form-group">
                 <label>Name (optional)</label>
