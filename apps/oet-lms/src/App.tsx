@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, NavLink, Navigate, useLocation } from 'react-router-dom'
 import { useAuth } from './contexts/AuthContext'
 import Dashboard from './pages/Dashboard'
 import Simulator from './pages/Simulator'
@@ -12,14 +12,31 @@ import AdminReports from './pages/AdminReports'
 import './App.css'
 
 function AppContent() {
-  const { user, logout } = useAuth()
+  const { user, logout, loading } = useAuth()
+  const location = useLocation()
+
+  if (location.pathname === '/login') {
+    return user ? <Navigate to="/" replace /> : <Login />
+  }
+
+  if (loading) {
+    return (
+      <div className="siya-loading" style={{ padding: 48, textAlign: 'center', color: 'var(--siya-primary)' }}>
+        Loading…
+      </div>
+    )
+  }
+
+  if (!user) {
+    const redirect = location.pathname + location.search
+    return <Navigate to={redirect ? `/login?redirect=${encodeURIComponent(redirect)}` : '/login'} replace />
+  }
 
   return (
     <div className="siya-app">
       <aside className="siya-sidebar">
         <div className="siya-sidebar-header">
-          <div className="siya-sidebar-logo">S</div>
-          <div className="siya-sidebar-title">SIYA HEALTH</div>
+          <img src="/siya-health-logo.png" alt="Siya Health" className="siya-sidebar-logo" />
         </div>
         <nav className="siya-sidebar-nav">
           <NavLink to="/" className={({ isActive }) => `siya-nav-item${isActive ? ' active' : ''}`} end>Dashboard</NavLink>
@@ -28,30 +45,23 @@ function AppContent() {
           <NavLink to="/progress" className={({ isActive }) => `siya-nav-item${isActive ? ' active' : ''}`}>Progress Report</NavLink>
           <NavLink to="/resources" className={({ isActive }) => `siya-nav-item${isActive ? ' active' : ''}`}>Resources</NavLink>
           <NavLink to="/export" className={({ isActive }) => `siya-nav-item${isActive ? ' active' : ''}`}>Export & Share</NavLink>
-          {user?.role === 'admin' && (
+          {user.role === 'admin' && (
             <NavLink to="/admin/reports" className={({ isActive }) => `siya-nav-item${isActive ? ' active' : ''}`}>All reports</NavLink>
           )}
         </nav>
         <div className="siya-sidebar-section">
           <div className="siya-sidebar-section-title">Account</div>
-          {user ? (
-            <>
-              <span className="siya-nav-item" style={{ cursor: 'default', opacity: 0.9 }} title={user.email}>
-                {user.name || user.email}
-              </span>
-              <button type="button" className="siya-nav-item siya-nav-logout" onClick={logout}>
-                Sign out
-              </button>
-            </>
-          ) : (
-            <NavLink to="/login" className="siya-nav-item">Sign in</NavLink>
-          )}
+          <span className="siya-nav-item" style={{ cursor: 'default', opacity: 0.9 }} title={user.email}>
+            {user.name || user.email}
+          </span>
+          <button type="button" className="siya-nav-item siya-nav-logout" onClick={logout}>
+            Sign out
+          </button>
         </div>
       </aside>
       <main className="siya-main">
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/simulator" element={<Simulator />} />
           <Route path="/simulator/:personaId" element={<Simulator />} />
           <Route path="/personas" element={<Personas />} />

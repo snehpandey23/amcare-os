@@ -1,20 +1,20 @@
-/* Siya Health - MA Chat Simulator */
+/* Siya Health - MA Chat Simulator (magenta, white, gray theme) */
 
 :root {
-  --siya-primary: #0D8B8B;
-  --siya-primary-light: #1AA5A5;
-  --siya-primary-dark: #096666;
-  --siya-secondary: #E8F4F4;
-  --siya-accent: #D4A574;
+  --siya-primary: #9333ea;
+  --siya-primary-light: #a855f7;
+  --siya-primary-dark: #7e22ce;
+  --siya-secondary: #f5f3ff;
+  --siya-accent: #c084fc;
   --siya-danger: #C83C3C;
   --siya-success: #2E9B6F;
   --siya-warning: #D97B5C;
-  --text-primary: #1F2937;
-  --text-secondary: #6B7280;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
   --text-light: #F9FAFB;
   --bg-surface: #FFFFFF;
-  --bg-secondary: #F3F4F6;
-  --border-color: #E5E7EB;
+  --bg-secondary: #f9fafb;
+  --border-color: #e5e7eb;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
@@ -26,7 +26,7 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-  background-color: #F0F9F9;
+  background-color: #f9fafb;
   color: var(--text-primary);
   line-height: 1.6;
 }
@@ -35,12 +35,12 @@ body {
   display: grid;
   grid-template-columns: 280px 1fr;
   min-height: 100vh;
-  background-color: #F0F9F9;
+  background-color: #f9fafb;
 }
 
 /* Sidebar */
 .siya-sidebar {
-  background: linear-gradient(135deg, var(--siya-primary) 0%, var(--siya-primary-dark) 100%);
+  background: linear-gradient(180deg, var(--siya-primary-dark) 0%, var(--siya-primary) 50%, #7c3aed 100%);
   color: var(--text-light);
   padding: 24px 16px;
   box-shadow: var(--shadow-md);
@@ -54,29 +54,22 @@ body {
 .siya-sidebar-header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0;
   margin-bottom: 32px;
   padding-bottom: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .siya-sidebar-logo {
-  width: 40px;
-  height: 40px;
-  background: var(--siya-accent);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 20px;
-  color: var(--text-primary);
+  display: block;
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  object-fit: contain;
 }
 
 .siya-sidebar-title {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  display: none;
 }
 
 .siya-sidebar-nav {
@@ -105,8 +98,8 @@ body {
 }
 
 .siya-nav-item.active {
-  background: var(--siya-accent);
-  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
   font-weight: 600;
 }
 
@@ -144,6 +137,15 @@ body {
 /* Dashboard */
 .siya-dash-header {
   margin-bottom: 32px;
+}
+
+.siya-dash-logo {
+  display: block;
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  margin-bottom: 20px;
+  object-fit: contain;
 }
 
 .siya-user-greeting {

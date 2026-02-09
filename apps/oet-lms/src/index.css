@@ -5,12 +5,12 @@
 }
 
 :root {
-  --oet-green: #0d9488;
-  --oet-dark: #0f766e;
-  --oet-light: #ccfbf1;
-  --oet-surface: #f0fdfa;
-  --text: #134e4a;
-  --text-muted: #5eead4;
+  --oet-green: #9333ea;
+  --oet-dark: #7e22ce;
+  --oet-light: #f5f3ff;
+  --oet-surface: #f9fafb;
+  --text: #1f2937;
+  --text-muted: #6b7280;
 }
 
 body {

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
 import {
   getRecommendedTasks,
   getProgressOverTime,
@@ -9,6 +10,7 @@ import {
 } from '../data/dashboardData'
 
 export default function Dashboard() {
+  const { user } = useAuth()
   const navigate = useNavigate()
   const [supervisorEmail, setSupervisorEmail] = useState('')
   const [sendStatus, setSendStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
@@ -46,8 +48,13 @@ export default function Dashboard() {
   return (
     <>
       <div className="siya-dash-header">
-        <div className="siya-user-greeting">Welcome back, Sarah</div>
-        <div className="siya-user-subtext">Keep practicing to master difficult patient scenarios</div>
+        <img src="/siya-health-logo.png" alt="Siya Health" className="siya-dash-logo" />
+        <div className="siya-user-greeting">
+          Welcome back, {user?.name || user?.email?.split('@')[0] || 'there'}
+        </div>
+        <div className="siya-user-subtext">
+          Your dashboard and feedback are personalized for you. Keep practicing to master difficult patient scenarios.
+        </div>
       </div>
 
       <div className="siya-metrics-grid">

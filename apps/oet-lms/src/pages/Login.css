@@ -1,14 +1,14 @@
-/* Siya Health theme (www.siya.health) – login page only */
+/* Siya Health theme – magenta, white, gray (login page) */
 .siya-login-page {
-  --siya-login-primary: #0d9488;
-  --siya-login-primary-dark: #0f766e;
-  --siya-login-primary-light: #ccfbf1;
-  --siya-login-bg: #f0fdfa;
+  --siya-login-primary: #9333ea;
+  --siya-login-primary-dark: #7e22ce;
+  --siya-login-primary-light: #f5f3ff;
+  --siya-login-bg: #f9fafb;
   --siya-login-surface: #ffffff;
-  --siya-login-text: #134e4a;
-  --siya-login-text-muted: #5eead4;
-  --siya-login-border: #99f6e4;
-  --siya-login-accent-warm: #d4a574;
+  --siya-login-text: #1f2937;
+  --siya-login-text-muted: #6b7280;
+  --siya-login-border: #e5e7eb;
+  --siya-login-accent-warm: #c084fc;
 }
 
 /* Full-page layout – no small dialogue box */
@@ -21,7 +21,7 @@
 }
 
 .siya-login-branding {
-  background: linear-gradient(160deg, var(--siya-login-primary) 0%, var(--siya-login-primary-dark) 100%);
+  background: linear-gradient(180deg, var(--siya-login-primary-dark) 0%, var(--siya-login-primary) 100%);
   color: #fff;
   padding: 40px 28px 48px;
   display: flex;
@@ -70,7 +70,7 @@
   background: var(--siya-login-surface);
   padding: 44px 48px 48px;
   border-radius: 20px;
-  box-shadow: 0 4px 24px rgba(13, 148, 136, 0.08), 0 1px 3px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 24px rgba(147, 51, 234, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
   width: 100%;
   min-width: 340px;
   max-width: 480px;
@@ -148,7 +148,7 @@
 .siya-form-group input:focus {
   outline: none;
   border-color: var(--siya-login-primary);
-  box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.15);
+  box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.2);
 }
 
 .siya-login-error {
