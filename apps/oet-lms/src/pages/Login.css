@@ -1,44 +1,59 @@
-/* Full-page layout: two panels on desktop, stacked on mobile */
+/* Siya Health theme (www.siya.health) – login page only */
+.siya-login-page {
+  --siya-login-primary: #0d9488;
+  --siya-login-primary-dark: #0f766e;
+  --siya-login-primary-light: #ccfbf1;
+  --siya-login-bg: #f0fdfa;
+  --siya-login-surface: #ffffff;
+  --siya-login-text: #134e4a;
+  --siya-login-text-muted: #5eead4;
+  --siya-login-border: #99f6e4;
+  --siya-login-accent-warm: #d4a574;
+}
+
+/* Full-page layout – no small dialogue box */
 .siya-login-page {
   min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
-  background: var(--bg-surface);
+  background: var(--siya-login-bg);
 }
 
 .siya-login-branding {
-  background: linear-gradient(135deg, var(--siya-primary) 0%, var(--siya-primary-dark) 100%);
-  color: var(--text-light);
-  padding: 32px 24px 40px;
+  background: linear-gradient(160deg, var(--siya-login-primary) 0%, var(--siya-login-primary-dark) 100%);
+  color: #fff;
+  padding: 40px 28px 48px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .siya-login-branding-inner {
-  max-width: 420px;
+  max-width: 440px;
   text-align: center;
 }
 
-.siya-login-title {
-  margin-bottom: 8px;
-  color: #fff;
-  font-size: 28px;
-  font-weight: 700;
+.siya-login-logo {
+  display: block;
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  margin: 0 auto 20px;
+  object-fit: contain;
 }
 
 .siya-login-subtitle {
-  font-size: 15px;
+  font-size: 16px;
   opacity: 0.95;
   margin-bottom: 16px;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .siya-login-tagline {
-  font-size: 13px;
-  opacity: 0.85;
-  line-height: 1.5;
+  font-size: 14px;
+  opacity: 0.9;
+  line-height: 1.55;
 }
 
 .siya-login-form-panel {
@@ -46,152 +61,212 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px 24px 48px;
-  background: var(--bg-secondary);
+  padding: 40px 24px 56px;
+  background: var(--siya-login-bg);
 }
 
+/* Form card – wide and spacious, not a narrow vertical box */
 .siya-login-form-card {
-  background: var(--bg-surface);
-  padding: 36px 40px;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  background: var(--siya-login-surface);
+  padding: 44px 48px 48px;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(13, 148, 136, 0.08), 0 1px 3px rgba(0, 0, 0, 0.06);
   width: 100%;
-  max-width: 420px;
+  min-width: 340px;
+  max-width: 480px;
+  border: 1px solid var(--siya-login-border);
 }
 
 .siya-login-tabs {
   display: flex;
   gap: 0;
-  margin-bottom: 28px;
-  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 32px;
+  border-bottom: 2px solid var(--siya-login-border);
 }
 
 .siya-login-tabs button {
   flex: 1;
-  padding: 12px 16px;
+  padding: 14px 20px;
   border: none;
   background: none;
-  color: var(--text-secondary);
-  font-size: 15px;
-  font-weight: 500;
+  color: var(--siya-login-text);
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   border-bottom: 3px solid transparent;
-  margin-bottom: -1px;
+  margin-bottom: -2px;
+  opacity: 0.85;
 }
 
 .siya-login-tabs button:hover {
-  color: var(--text-primary);
+  opacity: 1;
+  color: var(--siya-login-primary-dark);
 }
 
 .siya-login-tabs button.active {
-  color: var(--siya-primary);
-  border-bottom-color: var(--siya-primary);
+  color: var(--siya-login-primary);
+  border-bottom-color: var(--siya-login-primary);
+  opacity: 1;
 }
 
+/* Form groups – generous spacing so it’s not “1 space each” */
 .siya-form-group {
-  margin-bottom: 20px;
+  margin-bottom: 26px;
 }
 
 .siya-form-group label {
   display: block;
-  margin-bottom: 8px;
-  color: var(--text-primary);
-  font-weight: 500;
-  font-size: 14px;
+  margin-bottom: 10px;
+  color: var(--siya-login-text);
+  font-weight: 600;
+  font-size: 15px;
 }
 
+/* Inputs – tall and readable, not single-line slits */
 .siya-form-group input {
   width: 100%;
-  padding: 12px 14px;
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  font-size: 15px;
-  background: var(--bg-surface);
-  color: var(--text-primary);
+  min-height: 52px;
+  padding: 16px 20px;
+  border: 2px solid var(--siya-login-border);
+  border-radius: 12px;
+  font-size: 16px;
+  background: var(--siya-login-surface);
+  color: var(--siya-login-text);
   box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.siya-form-group input::placeholder {
+  color: var(--siya-login-text-muted);
+  opacity: 0.9;
+}
+
+.siya-form-group input:hover {
+  border-color: var(--siya-login-primary);
 }
 
 .siya-form-group input:focus {
   outline: none;
-  border-color: var(--siya-primary);
-  box-shadow: 0 0 0 3px rgba(13, 139, 139, 0.15);
+  border-color: var(--siya-login-primary);
+  box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.15);
 }
 
 .siya-login-error {
-  padding: 12px 16px;
-  margin-bottom: 20px;
-  background: rgba(200, 60, 60, 0.08);
-  color: var(--siya-danger);
-  border-radius: 10px;
-  font-size: 14px;
-  line-height: 1.4;
-  border: 1px solid rgba(200, 60, 60, 0.2);
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  background: #fef2f2;
+  color: #b91c1c;
+  border-radius: 12px;
+  font-size: 15px;
+  line-height: 1.45;
+  border: 1px solid #fecaca;
 }
 
 .siya-login-btn {
   width: 100%;
-  padding: 14px 24px;
-  margin-top: 8px;
-  font-size: 15px;
+  min-height: 52px;
+  padding: 16px 24px;
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(180deg, var(--siya-login-primary) 0%, var(--siya-login-primary-dark) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.siya-login-btn:hover:not(:disabled) {
+  opacity: 0.95;
+}
+
+.siya-login-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 .siya-login-hint {
-  margin-top: 24px;
-  font-size: 13px;
-  color: var(--text-secondary);
+  margin-top: 28px;
+  font-size: 14px;
+  color: var(--siya-login-text);
   text-align: center;
-  line-height: 1.5;
+  line-height: 1.55;
+  opacity: 0.9;
 }
 
-/* Desktop: side-by-side panels so form is clearly the main content, not a small box */
+/* Desktop: two panels, form stays wide and readable */
 @media (min-width: 900px) {
   .siya-login-page {
     flex-direction: row;
   }
 
   .siya-login-branding {
-    width: 44%;
-    min-width: 380px;
-    max-width: 520px;
-    padding: 48px 40px;
+    width: 42%;
+    min-width: 400px;
+    max-width: 540px;
+    padding: 56px 48px;
   }
 
   .siya-login-branding-inner {
-    max-width: 360px;
+    max-width: 380px;
     text-align: left;
   }
 
-  .siya-login-title {
-    font-size: 32px;
+  .siya-login-logo {
+    max-width: 220px;
+    margin-left: 0;
+    margin-bottom: 24px;
   }
 
   .siya-login-subtitle {
-    font-size: 16px;
+    font-size: 17px;
   }
 
   .siya-login-form-panel {
     flex: 1;
     min-width: 0;
-    padding: 48px;
+    padding: 56px 48px;
   }
 
   .siya-login-form-card {
-    max-width: 400px;
-    padding: 40px 44px;
+    max-width: 460px;
+    padding: 48px 52px 52px;
+  }
+
+  .siya-form-group input {
+    min-height: 54px;
+    padding: 18px 20px;
+  }
+
+  .siya-login-btn {
+    min-height: 54px;
   }
 }
 
+/* Mobile: keep inputs tall and card padded */
 @media (max-width: 480px) {
   .siya-login-form-panel {
-    padding: 24px 16px 40px;
+    padding: 28px 20px 48px;
   }
 
   .siya-login-form-card {
-    padding: 28px 24px;
+    min-width: 0;
+    padding: 36px 28px 40px;
+  }
+
+  .siya-form-group {
+    margin-bottom: 22px;
+  }
+
+  .siya-form-group input {
+    min-height: 50px;
+    padding: 14px 18px;
+    font-size: 16px;
   }
 
   .siya-login-tabs button {
-    font-size: 14px;
-    padding: 10px 12px;
+    font-size: 15px;
+    padding: 12px 16px;
   }
 }

@@ -37,7 +37,7 @@ export default function Login() {
     <div className="siya-login-page" data-login-layout="two-panel">
       <div className="siya-login-branding">
         <div className="siya-login-branding-inner">
-          <h1 className="siya-login-title">Siya Health</h1>
+          <img src="/siya-health-logo.png" alt="Siya Health" className="siya-login-logo" />
           <p className="siya-login-subtitle">Virtual Medical Assistant Chat Simulator</p>
           <p className="siya-login-tagline">Sign in or create an account to save your progress and get personalized feedback.</p>
         </div>
