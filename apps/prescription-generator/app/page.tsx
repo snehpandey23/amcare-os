@@ -130,11 +130,8 @@ export default function Home() {
       letterheadImage: resolvedLetterhead,
       signatureImage: resolvedSignature,
       });
-    const arrayBuffer = pdfBytes.buffer.slice(
-      pdfBytes.byteOffset,
-      pdfBytes.byteOffset + pdfBytes.byteLength
-    );
-    const blob = new Blob([arrayBuffer], { type: "application/pdf" });
+    const safeBytes = Uint8Array.from(pdfBytes);
+    const blob = new Blob([safeBytes], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
