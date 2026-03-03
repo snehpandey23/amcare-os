@@ -15,6 +15,10 @@ export default function Home() {
     bytes: Uint8Array;
     mime: string;
   } | null>(null);
+  const [signatureImage, setSignatureImage] = useState<{
+    bytes: Uint8Array;
+    mime: string;
+  } | null>(null);
   const [letterheadPreview, setLetterheadPreview] = useState<string | null>(
     "/letterhead-logo.png"
   );
@@ -51,19 +55,58 @@ export default function Home() {
 
   const previewData = watch();
 
+  const fetchImageBytes = async (path: string) => {
+    const response = await fetch(path, { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error(`Image fetch failed: ${response.status}`);
+    }
+    const blob = await response.blob();
+    let mime = blob.type || "image/png";
+    let bytes: Uint8Array | null = null;
+    try {
+      const bitmap = await createImageBitmap(blob);
+      const canvas = document.createElement("canvas");
+      canvas.width = bitmap.width;
+      canvas.height = bitmap.height;
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        ctx.drawImage(bitmap, 0, 0);
+        const pngBlob = await new Promise<Blob | null>((resolve) => {
+          canvas.toBlob((output) => resolve(output), "image/png");
+        });
+        if (pngBlob) {
+          const buffer = await pngBlob.arrayBuffer();
+          bytes = new Uint8Array(buffer);
+          mime = "image/png";
+        }
+      }
+    } catch {
+      bytes = null;
+    }
+    if (!bytes) {
+      const buffer = await blob.arrayBuffer();
+      bytes = new Uint8Array(buffer);
+    }
+    return { bytes, mime };
+  };
+
   useEffect(() => {
-    const loadLetterhead = async () => {
+    const loadAssets = async () => {
       try {
-        const response = await fetch("/letterhead-logo.png");
-        const mime = response.headers.get("content-type") ?? "image/png";
-        const buffer = await response.arrayBuffer();
-        setLetterheadImage({ bytes: new Uint8Array(buffer), mime });
+        const letterhead = await fetchImageBytes("/letterhead-logo.png");
+        setLetterheadImage(letterhead);
       } catch {
         setLetterheadImage(null);
         setLetterheadPreview(null);
       }
+      try {
+        const signature = await fetchImageBytes("/signature-sneh-pandey.png");
+        setSignatureImage(signature);
+      } catch {
+        setSignatureImage(null);
+      }
     };
-    loadLetterhead();
+    loadAssets();
   }, []);
 
   const onSubmit = async (data: PrescriptionFormData) => {
@@ -77,11 +120,21 @@ export default function Home() {
     }
 
     try {
-      const pdfBytes = await generatePDF({
+    const resolvedLetterhead =
+      letterheadImage ?? (await fetchImageBytes("/letterhead-logo.png").catch(() => null));
+    const resolvedSignature =
+      signatureImage ?? (await fetchImageBytes("/signature-sneh-pandey.png").catch(() => null));
+
+    const pdfBytes = await generatePDF({
         ...data,
-        letterheadImage,
+      letterheadImage: resolvedLetterhead,
+      signatureImage: resolvedSignature,
       });
-      const blob = new Blob([pdfBytes], { type: "application/pdf" });
+    const arrayBuffer = pdfBytes.buffer.slice(
+      pdfBytes.byteOffset,
+      pdfBytes.byteOffset + pdfBytes.byteLength
+    );
+    const blob = new Blob([arrayBuffer], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
