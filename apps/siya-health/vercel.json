@@ -2,5 +2,13 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "mkdir -p public && cp *.html styles.css public/ && cp -r assets public/",
   "outputDirectory": "public",
-  "installCommand": "echo 'No install needed'"
+  "installCommand": "echo 'No install needed'",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "siya.health" }],
+      "destination": "https://www.siya.health/$1",
+      "permanent": true
+    }
+  ]
 }
