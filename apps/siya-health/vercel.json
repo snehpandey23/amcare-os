@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "mkdir -p public && cp index.html styles.css mental-health-adhd.html weight-loss-metabolic-health.html telehealth.html about.html terms.html privacy-policy.html book-appointment.html prescriptions.html labs.html primary-urgent-care.html mens-health-longevity.html public/ && cp -r assets public/",
+  "outputDirectory": "public",
+  "installCommand": "echo 'No install needed'"
+}
