@@ -1,0 +1,8 @@
+<svg width="600" height="360" viewBox="0 0 600 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="360" rx="12" fill="#E8F4F0"/>
+  <rect x="80" y="40" width="440" height="280" rx="12" fill="#fff" stroke="#A8D5C4" stroke-width="1"/>
+  <circle cx="220" cy="180" r="50" fill="#A8D5C4"/>
+  <rect x="300" y="140" width="180" height="20" rx="10" fill="#0D7A4A"/>
+  <rect x="300" y="170" width="140" height="16" rx="8" fill="#93C9B0"/>
+  <text x="320" y="220" fill="#64748B" font-family="system-ui,sans-serif" font-size="12">Weight loss · Metabolic health</text>
+</svg>
