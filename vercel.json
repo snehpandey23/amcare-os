@@ -1,6 +1,0 @@
-{
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "cd apps/siya-health && mkdir -p public && cp *.html styles.css public/ && cp -r assets public/",
-  "outputDirectory": "apps/siya-health/public",
-  "installCommand": "echo 'No install needed'"
-}
