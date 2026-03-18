@@ -26,15 +26,16 @@
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
+    <header class="site-header site-header-transparent" id="site-header">
       <div class="container">
-        <a class="header-logo" href="index.html"><img src="assets/images/siya-health-logo.png" alt="Siya Health" /></a>
+        <a class="header-logo" href="index.html"><img src="assets/images/siya-health-logo.png" alt="Siya Health" /><span class="logo-wordmark"><strong>SIYA</strong> <em>HEALTH</em></span></a>
         <nav class="nav-center" aria-label="Primary">
           <a href="index.html">Home</a>
           <a href="about.html">About</a>
+          <a href="mental-health-adhd.html">ADHD Care</a>
+          <a href="weight-loss-metabolic-health.html">Weight Loss</a>
+          <a href="telehealth.html">Telehealth</a>
           <a href="blog/index.html">Blog</a>
-          <a href="mental-health-adhd.html">ADHD Evaluation</a>
-          <a href="mailto:care@siya.health">Contact</a>
         </nav>
         <div class="nav-cta">
           <a class="button" href="adhd-screening.html">Start Free Screening</a>
@@ -44,23 +45,52 @@
         <div class="nav-mobile">
           <a href="index.html">Home</a>
           <a href="about.html">About</a>
+          <a href="mental-health-adhd.html">ADHD Care</a>
+          <a href="weight-loss-metabolic-health.html">Weight Loss</a>
+          <a href="telehealth.html">Telehealth</a>
           <a href="blog/index.html">Blog</a>
-          <a href="mental-health-adhd.html">ADHD Evaluation</a>
-          <a href="mailto:care@siya.health">Contact</a>
           <a class="button" href="adhd-screening.html">Start Free Screening</a>
         </div>
       </div>
     </header>
 
     <main id="main">
-      <!-- HERO: Full-width background -->
-      <section class="hero-fullwidth" style="background-image: url('assets/images/doctor-office.png');">
-        <div class="hero-fullwidth-overlay" aria-hidden="true"></div>
-        <div class="hero-fullwidth-inner container">
+      <!-- HERO: Merged with header, same layout as home -->
+      <section class="hero-merged" style="background-image: url('assets/images/doctor-office.png');">
+        <div class="hero-merged-content container">
           <h1>Our mission is better telehealth, built for real life</h1>
-          <p class="hero-fullwidth-lead">Siya Health provides modern, evidence-based medical care with a patient-first approach. We combine clinical expertise with a seamless virtual experience.</p>
-          <div class="hero-ctas">
-            <a class="button" href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Start Free ADHD Assessment</a>
+          <p class="hero-merged-lead">Siya Health provides modern, evidence-based medical care with a patient-first approach. We combine clinical expertise with a seamless virtual experience.</p>
+          <div class="hero-trust-mini">
+            <span>Compassionate care</span>
+            <span>•</span>
+            <span>Clear treatment plans</span>
+            <span>•</span>
+            <span>Ongoing support</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- KNOW OUR MEDICAL DIRECTOR -->
+      <section class="section" id="medical-director">
+        <div class="container">
+          <div class="section-header">
+            <h2>Know Our Medical Director</h2>
+          </div>
+          <div class="physician-card">
+            <div class="physician-card-main">
+              <img src="assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey, MD" width="96" height="96" loading="lazy" class="physician-photo" />
+              <div>
+                <h3>Dr. Sneh Pandey, MD</h3>
+                <p class="physician-credentials">Medical Director • Board-Certified Internal Medicine &amp; Obesity Medicine • ADHD-CCSP</p>
+                <p class="physician-licensed">Licensed in Texas, Pennsylvania, and Florida.</p>
+              </div>
+            </div>
+            <div class="physician-card-expand" id="physician-bio-expand" hidden>
+              <p>Dr. Pandey has extensive experience treating adult ADHD patients through telehealth, combining evidence-based assessment with personalized care plans. His ADHD-CCSP certification reflects specialized training in ADHD care for adults.</p>
+              <h4>Why I focus on ADHD care</h4>
+              <p>So many adults struggle silently with focus, organization, and follow-through—often for years. They've been told to "try harder" or that it's "just how they are." I believe everyone deserves a thorough evaluation and a clear path forward. ADHD is highly treatable, and getting the right diagnosis can be life-changing.</p>
+            </div>
+            <button type="button" class="physician-read-more" id="physician-read-more" aria-expanded="false" aria-controls="physician-bio-expand">Read More</button>
           </div>
         </div>
       </section>
@@ -92,9 +122,6 @@
               <img src="assets/images/care-team.png" alt="Siya Health care team" width="520" height="390" loading="lazy" />
             </div>
           </div>
-          <div class="cta-block" style="margin-top: 40px;">
-            <a class="button secondary" href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Book Consultation</a>
-          </div>
         </div>
       </section>
 
@@ -110,23 +137,6 @@
             <li>Coordinated care across specialties</li>
             <li>Guidance that fits your lifestyle</li>
           </ul>
-          <div class="service-cols" style="margin-top: 40px;">
-            <div class="service-col">
-              <img src="assets/images/icons/icon8.svg" alt="Men's Health" class="service-icon" width="80" height="80" />
-              <h3>Men's Health</h3>
-              <p>Hormonal health, ED treatment, and men's wellness via telehealth.</p>
-            </div>
-            <div class="service-col">
-              <img src="assets/images/icons/icon9.svg" alt="Women's Health" class="service-icon" width="80" height="80" />
-              <h3>Women's Health</h3>
-              <p>Birth control, hormonal care, and women's health support.</p>
-            </div>
-            <div class="service-col">
-              <img src="assets/images/icons/icon10.svg" alt="Skin / Dermatology" class="service-icon" width="80" height="80" />
-              <h3>Skin / Dermatology</h3>
-              <p>Skin conditions, rashes, and dermatology consultations.</p>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -137,6 +147,10 @@
             <h2>Trust &amp; telehealth safety</h2>
           </div>
           <div class="content-grid">
+            <div class="card">
+              <h3>Proven experience</h3>
+              <p>1,000+ ADHD evaluations and 500+ patients treated. Our track record speaks to safe, evidence-based care you can trust.</p>
+            </div>
             <div class="card">
               <h3>Board-certified physicians</h3>
               <p>Our clinicians maintain board certification and ongoing continuing medical education.</p>
@@ -177,9 +191,6 @@
           <p class="lead">Reach out to schedule a visit or ask questions about our telehealth services.</p>
           <p><strong>Email:</strong> <a href="mailto:care@siya.health">care@siya.health</a></p>
           <p><strong>Phone:</strong> <a href="tel:+12154451244">(215) 445-1244</a></p>
-          <div class="cta-block" style="margin-top: 24px;">
-            <a class="button" href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Start Free ADHD Assessment</a>
-          </div>
         </div>
       </section>
 
@@ -189,9 +200,6 @@
           <div class="section-header">
             <h2>States served</h2>
             <p class="lead">Siya Health providers are licensed to deliver telehealth care across Texas, Pennsylvania, and Florida.</p>
-          </div>
-          <div class="cta-block">
-            <a class="button" href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Start Free ADHD Assessment</a>
           </div>
         </div>
       </section>
@@ -207,19 +215,19 @@
             <div class="provider-card">
               <img src="assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey" width="96" height="96" loading="lazy" />
               <h4>Dr. Sneh Pandey, MD</h4>
-              <span>Internal Medicine • Obesity Medicine</span>
+              <span>Board-Certified Internal Medicine • ADHD-CCSP</span>
               <span>Licensed in TX, PA, FL</span>
             </div>
             <div class="provider-card">
               <img src="assets/images/dr-natasha-desai.png" alt="Dr. Natasha Desai" width="96" height="96" loading="lazy" />
               <h4>Dr. Natasha Desai, MD</h4>
-              <span>Family Medicine • Behavioral Medicine</span>
-              <span>Licensed in TX</span>
+              <span>Family Medicine • Behavioral Medicine • ADHD-CCSP</span>
+              <span>Licensed in TX, FL</span>
             </div>
             <div class="provider-card">
               <img src="assets/images/dr-swati-pandey.png" alt="Dr. Swati Pandey" width="96" height="96" loading="lazy" />
               <h4>Dr. Swati Pandey, MD</h4>
-              <span>Psychiatric &amp; Mental Health</span>
+              <span>Psychiatric &amp; Mental Health • ADHD-CCSP</span>
               <span>Licensed in PA</span>
             </div>
           </div>
@@ -274,8 +282,7 @@
             <h3>Ready to meet the team?</h3>
             <p>Book an appointment to connect with a Siya Health clinician and build your care plan.</p>
             <div class="cta-band-buttons">
-              <a class="button" href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Start Free ADHD Assessment</a>
-              <a class="button secondary" href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Book Consultation</a>
+              <a class="button" href="https://api.leadconnectorhq.com/widget/form/mnWpgh0IEgFvJymdZqHY" target="_blank" rel="noopener">Schedule Meet &amp; Greet</a>
             </div>
           </div>
         </div>
@@ -299,12 +306,34 @@
             <a href="https://www.pinterest.com/siyahealthus/" target="_blank" rel="noopener" aria-label="Pinterest"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.395 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
           </div>
         </div>
-        <div><h4>Services</h4><p><a href="mental-health-adhd.html">ADHD Care</a></p><p><a href="adhd-screening.html">Start Free Screening</a></p></div>
+        <div><h4>Services</h4><p><a href="mental-health-adhd.html">ADHD Care</a></p><p><a href="adhd-screening.html">Start Free Screening</a></p><p><a href="weight-loss-metabolic-health.html">Weight Loss</a></p><p><a href="telehealth.html">Telehealth</a></p></div>
         <div><h4>Contact</h4><p><a href="mailto:care@siya.health">care@siya.health</a></p><p><a href="tel:+12154451244">(215) 445-1244</a></p></div>
         <div><h4>Legal</h4><p><a href="https://adhd.siya.health/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a></p><p><a href="https://adhd.siya.health/terms-of-service" target="_blank" rel="noopener">Terms &amp; Conditions</a></p><p><a href="https://adhd.siya.health/notice-of-privacy-practices" target="_blank" rel="noopener">Notice of Privacy Practices</a></p></div>
       </div>
       <div class="container"><p class="footer-notice">All telehealth services are provided by licensed medical professionals in accordance with state regulations.</p><small>© 2026 Siya Health Inc. All rights reserved.</small></div>
     </footer>
+    <script>
+      (function() {
+        var btn = document.getElementById('physician-read-more');
+        var expand = document.getElementById('physician-bio-expand');
+        if (btn && expand) {
+          btn.addEventListener('click', function() {
+            var isExpanded = expand.hidden;
+            expand.hidden = !isExpanded;
+            btn.setAttribute('aria-expanded', isExpanded);
+            btn.textContent = isExpanded ? 'Read Less' : 'Read More';
+          });
+        }
+        var header = document.getElementById('site-header');
+        if (header && header.classList.contains('site-header-transparent')) {
+          function onScroll() {
+            header.classList.toggle('site-header-scrolled', window.scrollY > 200);
+          }
+          onScroll();
+          window.addEventListener('scroll', onScroll, { passive: true });
+        }
+      })();
+    </script>
     <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="69b2c1a40eb19972071e4ca0"></script>
   </body>
 </html>
