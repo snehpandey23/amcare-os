@@ -188,8 +188,6 @@ p {
   padding: 0;
   color: var(--text);
 }
-.site-header-transparent.site-header-scrolled .logo-siya,
-.site-header-transparent.site-header-scrolled .logo-health { color: var(--text); }
 .site-header-transparent.site-header-scrolled .button { background: var(--primary); color: var(--white); }
 .site-header-transparent.site-header-scrolled .button:hover { background: var(--primary-hover); }
 
@@ -202,39 +200,35 @@ p {
   max-width: none;
 }
 
-/* Text logo: Siya bold, Health thin - artistic wordmark */
+/* Logo image */
 .header-logo {
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  letter-spacing: 0.02em;
-  text-decoration: none;
-  transition: opacity 0.2s;
+  height: 44px;
+  width: auto;
+}
+
+.header-logo img {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
 }
 
 .header-logo:hover { opacity: 0.9; }
 
-.logo-siya {
-  font-weight: 700;
-  color: inherit;
+/* Transparent header: subtle backdrop for logo visibility */
+.site-header-transparent .header-logo img {
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
 }
-
-.logo-health {
-  font-weight: 300;
-  color: inherit;
-  letter-spacing: 0.08em;
-}
-
-/* Transparent header: logo inherits white from nav */
-.site-header-transparent .header-logo { color: var(--white); }
-.site-header-transparent .logo-siya,
-.site-header-transparent .logo-health { color: var(--white); }
 
 @media (max-width: 640px) {
-  .header-logo { font-size: 1.25rem; }
+  .header-logo, .header-logo img { height: 36px; }
 }
+
+/* Footer logo text (keep for footer) */
+.logo-siya { font-weight: 700; }
+.logo-health { font-weight: 300; letter-spacing: 0.08em; }
 
 .nav-center {
   display: none;
