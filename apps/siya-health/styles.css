@@ -163,7 +163,12 @@ p {
 .site-header-transparent .nav-toggle-label { color: var(--white); }
 .site-header-transparent .nav-toggle-label { border-color: rgba(255,255,255,0.5); background: transparent; }
 .site-header-transparent .nav-toggle-label::before { color: var(--white); }
-.site-header-transparent .header-logo { filter: brightness(0) invert(1); }
+/* Logo on transparent header: subtle backdrop for visibility */
+.site-header-transparent .header-logo {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 10px 16px;
+  border-radius: 8px;
+}
 .site-header-transparent .button { background: var(--white); color: var(--primary); }
 .site-header-transparent .button:hover { background: var(--bg-subtle); }
 
@@ -178,7 +183,13 @@ p {
 .site-header-transparent.site-header-scrolled .nav-toggle-label { color: var(--text); }
 .site-header-transparent.site-header-scrolled .nav-toggle-label { border-color: var(--border); background: var(--white); }
 .site-header-transparent.site-header-scrolled .nav-toggle-label::before { color: var(--text); }
-.site-header-transparent.site-header-scrolled .header-logo { filter: none; }
+.site-header-transparent.site-header-scrolled .header-logo {
+  background: transparent;
+  padding: 0;
+  color: var(--text);
+}
+.site-header-transparent.site-header-scrolled .logo-siya,
+.site-header-transparent.site-header-scrolled .logo-health { color: var(--text); }
 .site-header-transparent.site-header-scrolled .button { background: var(--primary); color: var(--white); }
 .site-header-transparent.site-header-scrolled .button:hover { background: var(--primary-hover); }
 
@@ -191,35 +202,38 @@ p {
   max-width: none;
 }
 
-/* Logo: 88% of original (shrunk 12%), pushed to far left */
+/* Text logo: Siya bold, Health thin - artistic wordmark */
 .header-logo {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  overflow: hidden;
   flex-shrink: 0;
-  height: 137px;  /* 156 * 0.88 */
-  width: 253px;   /* 288 * 0.88 */
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: opacity 0.2s;
 }
 
-.header-logo img {
-  height: 137px;
-  width: auto;
-  min-width: 100%;
-  object-fit: cover;
-  object-position: center;
-  transform: scale(1.25);
-  transform-origin: center center;
+.header-logo:hover { opacity: 0.9; }
+
+.logo-siya {
+  font-weight: 700;
+  color: inherit;
 }
+
+.logo-health {
+  font-weight: 300;
+  color: inherit;
+  letter-spacing: 0.08em;
+}
+
+/* Transparent header: logo inherits white from nav */
+.site-header-transparent .header-logo { color: var(--white); }
+.site-header-transparent .logo-siya,
+.site-header-transparent .logo-health { color: var(--white); }
 
 @media (max-width: 640px) {
-  .header-logo {
-    height: 103px;  /* 117 * 0.88 */
-    width: 190px;   /* 216 * 0.88 */
-  }
-  .header-logo img {
-    height: 103px;
-  }
+  .header-logo { font-size: 1.25rem; }
 }
 
 .nav-center {
@@ -1952,6 +1966,15 @@ img[loading="lazy"] { loading: lazy; }
   color: var(--white);
   margin-bottom: 16px;
 }
+
+.footer-logo {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+}
+
+.footer-logo .logo-siya { font-weight: 700; }
+.footer-logo .logo-health { font-weight: 300; letter-spacing: 0.08em; }
 
 .footer p { color: rgba(255, 255, 255, 0.85); margin-bottom: 8px; }
 
