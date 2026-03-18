@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google Analytics 4 - Replace G-XXXXXXXXXX with your Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="index, follow" />
@@ -28,216 +36,172 @@
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
+    <header class="site-header site-header-transparent" id="site-header">
       <div class="container">
         <a class="header-logo" href="index.html"><img src="assets/images/siya-health-logo.png" alt="Siya Health" /></a>
         <nav class="nav-center" aria-label="Primary">
           <a href="index.html">Home</a>
-          <a href="mental-health-adhd.html">ADHD Care</a>
-          <a href="weight-loss-metabolic-health.html">Weight Loss</a>
-          <a href="telehealth.html">Telehealth</a>
           <a href="about.html">About</a>
+          <a href="blog/index.html">Blog</a>
+          <a href="mental-health-adhd.html">ADHD Evaluation</a>
+          <a href="mailto:care@siya.health">Contact</a>
         </nav>
         <div class="nav-cta">
-          <a class="button" href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Start Free ADHD Assessment</a>
+          <a class="button" href="adhd-screening.html">Start Free Screening</a>
         </div>
         <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
         <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
         <div class="nav-mobile">
           <a href="index.html">Home</a>
-          <a href="mental-health-adhd.html">ADHD Care</a>
-          <a href="weight-loss-metabolic-health.html">Weight Loss</a>
-          <a href="telehealth.html">Telehealth</a>
           <a href="about.html">About</a>
-          <a class="button" href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Start Free ADHD Assessment</a>
+          <a href="blog/index.html">Blog</a>
+          <a href="mental-health-adhd.html">ADHD Evaluation</a>
+          <a href="mailto:care@siya.health">Contact</a>
+          <a class="button" href="adhd-screening.html">Start Free Screening</a>
         </div>
       </div>
     </header>
 
     <main id="main">
-      <!-- HERO: Full-width background -->
-      <section class="hero-fullwidth" style="background-image: url('assets/images/hero-telehealth-main.png');">
-        <div class="hero-fullwidth-overlay" aria-hidden="true"></div>
-        <div class="hero-fullwidth-inner container">
-          <h1>ADHD Diagnosis &amp; Treatment — Done Online</h1>
-          <p class="hero-fullwidth-lead">Get evaluated by board-certified physicians. Structured diagnosis, medication management, and follow-up — all from home.</p>
+      <!-- HERO: Merged with header, minimal whitespace -->
+      <section class="hero-merged" style="background-image: url('assets/images/hero-telehealth-main.png');">
+        <div class="hero-merged-overlay" aria-hidden="true"></div>
+        <div class="hero-merged-content container">
+          <h1>Get Clarity on ADHD — Without the Wait</h1>
+          <p class="hero-merged-lead">Struggling with focus, organization, or follow-through? Get evaluated by a board-certified physician from home—often within days.</p>
+          <div class="hero-trust-mini">
+            <span>Board-certified physicians</span>
+            <span>•</span>
+            <span>Transparent pricing</span>
+          </div>
           <div class="hero-ctas">
-            <a class="button" href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Start Free ADHD Assessment</a>
+            <a class="button" href="adhd-screening.html">Start Free Screening</a>
           </div>
         </div>
       </section>
 
-      <!-- SERVICES: ADHD dominant, others secondary row -->
-      <section class="section" id="services">
+      <!-- HOW IT WORKS: 3-step pictorial flow -->
+      <section class="section" id="how-it-works">
         <div class="container">
           <div class="section-header">
-            <h2>Care for everyday health needs</h2>
-            <p class="lead">Comprehensive telehealth services for primary care, ADHD, weight loss, and more.</p>
+            <h2>How It Works</h2>
+            <p class="lead">Three simple steps to clarity.</p>
           </div>
-          <div class="services-layout-adhd-dominant">
-            <div class="service-col service-col-featured">
-              <img src="assets/images/icons/icon1.svg" alt="ADHD Care" class="service-icon" width="80" height="80" />
-              <h3>ADHD Care</h3>
-              <p>Comprehensive ADHD evaluation and treatment via telehealth.</p>
-              <a class="button" href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Start Free ADHD Assessment</a>
+          <div class="flow-cards">
+            <div class="flow-card">
+              <div class="flow-card-icon"><img src="assets/images/icons/icon12.svg" alt="" width="48" height="48" /></div>
+              <h3>Quick Screening</h3>
+              <p>Online 2-minute assessment</p>
             </div>
-            <div class="services-secondary-row">
-              <div class="service-col service-col-secondary">
-                <img src="assets/images/icons/icon2.svg" alt="Medical Weight Loss" class="service-icon" width="64" height="64" />
-                <h3>Medical Weight Loss</h3>
-                <p>Physician-guided weight loss with GLP-1 options when appropriate.</p>
-                <a class="button secondary" href="weight-loss-metabolic-health.html">Learn More</a>
-              </div>
-              <div class="service-col service-col-secondary">
-                <img src="assets/images/icons/icon3.svg" alt="Primary Care" class="service-icon" width="64" height="64" />
-                <h3>Primary Care</h3>
-                <p>Treatment for infections, refills, and everyday conditions.</p>
-                <a class="button secondary" href="telehealth.html">Learn More</a>
-              </div>
+            <div class="flow-card">
+              <div class="flow-card-icon"><img src="assets/images/icons/icon1.svg" alt="" width="48" height="48" /></div>
+              <h3>Discovery Call</h3>
+              <p>Talk with provider about symptoms and alignment</p>
             </div>
+            <div class="flow-card">
+              <div class="flow-card-icon"><img src="assets/images/icons/icon5.svg" alt="" width="48" height="48" /></div>
+              <h3>Comprehensive Evaluation</h3>
+              <p>Assess comorbidities (ADHD, depression, anxiety, PTSD)</p>
+            </div>
+          </div>
+          <div class="cta-block">
+            <a class="button" href="adhd-screening.html">Start Free Screening</a>
           </div>
         </div>
       </section>
 
-      <!-- PRICING SECTION -->
+      <!-- PRICING: Simple transparent pricing -->
       <section class="section" id="pricing">
         <div class="container">
           <div class="section-header">
             <h2>Simple, Transparent Pricing</h2>
+            <p class="lead">No surprises. Clear protocols. Structured care.</p>
           </div>
-          <div class="pricing-grid pricing-grid-two">
-            <div class="pricing-card">
-              <h3>ADHD Evaluation</h3>
-              <p class="pricing-price">$199</p>
-              <p class="pricing-desc">Comprehensive 60–90 minute assessment</p>
-            </div>
+          <div class="pricing-grid-three">
             <div class="pricing-card pricing-card-featured">
-              <h3>ADHD Treatment</h3>
-              <p class="pricing-price">$149/month</p>
-              <p class="pricing-desc">Medication management and follow-up</p>
-            </div>
-          </div>
-          <div class="cta-block pricing-cta">
-            <a class="button" href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Start Free ADHD Assessment</a>
-            <a class="button secondary" href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Book Consultation</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- HOW IT WORKS: Section 3 - text left, image right -->
-      <section class="section" id="how-it-works">
-        <div class="container">
-          <div class="section-with-image">
-            <div class="section-content">
-              <h2>Simple, structured care</h2>
-              <div class="process-steps">
-                <div class="process-step">
-                  <span class="process-step-num">Step 1</span>
-                  <h3>Start your consultation</h3>
-                  <p>Complete a short intake and choose the type of visit you need.</p>
-                </div>
-                <div class="process-step">
-                  <span class="process-step-num">Step 2</span>
-                  <h3>Meet your clinician</h3>
-                  <p>Connect through secure telehealth with a licensed physician.</p>
-                </div>
-                <div class="process-step">
-                  <span class="process-step-num">Step 3</span>
-                  <h3>Receive treatment and follow-up</h3>
-                  <p>Get prescriptions, lab orders, and structured follow-up when needed.</p>
-                </div>
-              </div>
-              <div class="cta-block" style="margin-top: 24px;">
-                <a class="button" href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Start Free ADHD Assessment</a>
-              </div>
-            </div>
-            <div class="section-media">
-              <img src="assets/images/doctor-video-consult.png" alt="Doctor conducting telehealth video consultation" width="520" height="390" loading="lazy" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- TRUST SECTION: Section 4 - image left, text right -->
-      <section class="section" id="trust">
-        <div class="container">
-          <div class="section-with-image section-with-image-reverse">
-            <div class="section-content">
-              <h2>Why Siya Health</h2>
-              <ul class="list trust-value-list">
-                <li>Get diagnosed in days, not months</li>
-                <li>Direct physician access — no intermediaries</li>
-                <li>Transparent pricing — no surprise bills</li>
-                <li>Evening and weekend availability</li>
+              <h3>ADHD Care</h3>
+              <ul class="pricing-list">
+                <li><strong>Screening:</strong> $199</li>
+                <li><strong>Non-Controlled Treatment:</strong> $79/month</li>
+                <li><strong>Controlled Treatment:</strong> $150/month</li>
               </ul>
-              <div class="trust-stats">
-                <span>200+ verified patient reviews</span>
-                <span>4.7★ average patient rating</span>
-                <span>1,000+ ADHD screenings completed</span>
-                <span>500+ comprehensive ADHD evaluations</span>
-              </div>
-              <div class="cta-block" style="margin-top: 24px;">
-                <a class="button" href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Start Free ADHD Assessment</a>
-              </div>
+              <p class="pricing-note">Limited offer for first 100 clients.</p>
+              <p class="pricing-includes">Neurocognitive assessment • Comorbidity screening (depression, anxiety, PTSD) • Social media impact evaluation</p>
+              <a class="button" href="adhd-screening.html">Start Free Screening</a>
             </div>
-            <div class="section-media">
-              <img src="assets/images/telehealth-workspace.png" alt="Professional telehealth workspace" width="520" height="390" loading="lazy" />
+            <div class="pricing-card">
+              <h3>Primary Care</h3>
+              <p class="pricing-price">$79/month</p>
+              <p class="pricing-desc">Routine care, infections, refills.</p>
+              <a class="button secondary" href="telehealth.html">Learn More</a>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PATIENT STORY: Section 5 - text left, image right -->
-      <section class="section reviews" id="patient-story">
-        <div class="container">
-          <div class="section-with-image">
-            <div class="section-content">
-              <div class="section-header">
-                <h2>Trusted by hundreds of patients</h2>
-              </div>
-              <div class="card-grid review-grid">
-                <div class="review-card">
-                  <div class="review-stars">★★★★★</div>
-                  <p>"Dr. Pandey actually listened to my concerns and explained ADHD in a way that finally made sense."</p>
-                  <strong>— Patient, Austin TX</strong>
-                </div>
-                <div class="review-card">
-                  <div class="review-stars">★★★★★</div>
-                  <p>"The virtual visit was smooth and professional and I left with a clear treatment plan."</p>
-                  <strong>— Patient, Philadelphia PA</strong>
-                </div>
-                <div class="review-card">
-                  <div class="review-stars">★★★★★</div>
-                  <p>"Finally a clinic that feels thorough and respectful. The follow-up was easy and convenient."</p>
-                  <strong>— Patient, Houston TX</strong>
-                </div>
-              </div>
-              <p style="margin-top: 20px;">
-                <a class="reviews-link" href="https://www.helloklarity.com/provider/sneh-pandey" target="_blank" rel="noopener">Read all verified reviews on HelloKlarity →</a>
-              </p>
-            </div>
-            <div class="section-media">
-              <img src="assets/images/patient-laptop-smile.png" alt="Satisfied patient after telehealth visit" width="420" height="560" loading="lazy" class="img-testimonial" />
+            <div class="pricing-card">
+              <h3>Weight Loss</h3>
+              <p class="pricing-coming">Coming Soon</p>
+              <p class="pricing-desc">Physician-guided programs.</p>
+              <a class="button secondary" href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Join the Waitlist</a>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- DOCTOR PROFILE -->
-      <section class="section" id="doctor">
+      <!-- TRUSTED BY HUNDREDS + REVIEWS CAROUSEL -->
+      <section class="section reviews" id="reviews">
         <div class="container">
           <div class="section-header">
-            <h2>Meet your physician</h2>
+            <h2>Trusted by Hundreds of Patients</h2>
           </div>
-          <div class="physician-profile">
-            <img src="assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey, MD" width="120" height="120" loading="lazy" class="physician-photo" />
-            <div class="physician-details">
-              <h3>Dr. Sneh Pandey, MD</h3>
-              <p class="physician-credentials">Board-Certified in Internal Medicine and Obesity Medicine</p>
-              <p class="physician-credentials">ADHD-CCSP Certification</p>
-              <p class="physician-licensed">Licensed in Texas, Pennsylvania, and Florida.</p>
-              <p>Dr. Pandey has extensive experience treating adult ADHD patients through telehealth, combining evidence-based assessment with personalized care plans. His ADHD-CCSP certification reflects specialized training in ADHD care for adults.</p>
+          <div class="reviews-carousel">
+            <div class="reviews-carousel-track">
+              <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p>"I had been putting this off for years. The screening was quick, and within a week I finally had answers and a treatment plan."</p>
+                <strong>— Patient, Austin TX</strong>
+              </div>
+              <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p>"The virtual visit was smooth and professional. I left with a clear treatment plan."</p>
+                <strong>— Patient, Philadelphia PA</strong>
+              </div>
+              <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p>"Finally a clinic that feels thorough and respectful. The follow-up was easy."</p>
+                <strong>— Patient, Houston TX</strong>
+              </div>
+              <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p>"Dr. Pandey actually listened. Explained ADHD in a way that finally made sense."</p>
+                <strong>— Patient, Texas</strong>
+              </div>
             </div>
+          </div>
+          <p class="reviews-link-wrap">
+            <a class="reviews-link" href="https://www.helloklarity.com/provider/sneh-pandey" target="_blank" rel="noopener">Read all verified reviews on HelloKlarity →</a>
+          </p>
+        </div>
+      </section>
+
+      <!-- MEET OUR MEDICAL DIRECTOR (collapsible) -->
+      <section class="section" id="doctor">
+        <div class="container">
+          <div class="physician-card">
+            <div class="physician-card-main">
+              <img src="assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey, MD" width="96" height="96" loading="lazy" class="physician-photo" />
+              <div>
+                <h3>Dr. Sneh Pandey, MD</h3>
+                <p class="physician-credentials">Medical Director • Board-Certified Internal Medicine &amp; Obesity Medicine • ADHD-CCSP</p>
+                <p class="physician-licensed">Licensed in Texas, Pennsylvania, and Florida.</p>
+              </div>
+            </div>
+            <div class="physician-card-expand" id="physician-bio-expand" hidden>
+              <p>Dr. Pandey has extensive experience treating adult ADHD patients through telehealth, combining evidence-based assessment with personalized care plans. His ADHD-CCSP certification reflects specialized training in ADHD care for adults.</p>
+              <h4>Why I focus on ADHD care</h4>
+              <p>So many adults struggle silently with focus, organization, and follow-through—often for years. They've been told to "try harder" or that it's "just how they are." I believe everyone deserves a thorough evaluation and a clear path forward. ADHD is highly treatable, and getting the right diagnosis can be life-changing.</p>
+            </div>
+            <button type="button" class="physician-read-more" id="physician-read-more" aria-expanded="false" aria-controls="physician-bio-expand">Read More</button>
+          </div>
+          <div class="cta-block">
+            <a class="button" href="adhd-screening.html">Start Free Screening</a>
           </div>
         </div>
       </section>
@@ -246,11 +210,10 @@
       <section class="section">
         <div class="container">
           <div class="cta-band">
-            <h3>Start your care today</h3>
-            <p>Book a consultation and connect with a licensed physician through secure telehealth.</p>
+            <h3>Ready to get clarity?</h3>
+            <p>Start with a free screening. No pressure.</p>
             <div class="cta-band-buttons">
-              <a class="button" href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Start Free ADHD Assessment</a>
-              <a class="button secondary" href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Book Consultation</a>
+              <a class="button" href="adhd-screening.html">Start Free Screening</a>
             </div>
           </div>
         </div>
@@ -279,7 +242,8 @@
           <p><a href="mental-health-adhd.html">ADHD Care</a></p>
           <p><a href="weight-loss-metabolic-health.html">Weight Loss</a></p>
           <p><a href="telehealth.html">Telehealth</a></p>
-          <p><a href="https://api.leadconnectorhq.com/widget/form/JcppbNKyYlMVXwLq8nrS" target="_blank" rel="noopener">Start Free ADHD Assessment</a></p>
+          <p><a href="blog/index.html">Blog</a></p>
+          <p><a href="adhd-screening.html">Start Free Screening</a></p>
         </div>
         <div>
           <h4>Contact</h4>
@@ -298,5 +262,33 @@
         <small>© 2026 Siya Health Inc. All rights reserved.</small>
       </div>
     </footer>
+    <script src="trust-metrics.js"></script>
+    <script>
+      (function() {
+        var btn = document.getElementById('physician-read-more');
+        var expand = document.getElementById('physician-bio-expand');
+        if (btn && expand) {
+          btn.addEventListener('click', function() {
+            var isExpanded = expand.hidden;
+            expand.hidden = !isExpanded;
+            btn.setAttribute('aria-expanded', isExpanded);
+            btn.textContent = isExpanded ? 'Read Less' : 'Read More';
+          });
+        }
+        var header = document.getElementById('site-header');
+        if (header && header.classList.contains('site-header-transparent')) {
+          function onScroll() {
+            header.classList.toggle('site-header-scrolled', window.scrollY > 200);
+          }
+          onScroll();
+          window.addEventListener('scroll', onScroll, { passive: true });
+        }
+      })();
+    </script>
+    <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="69b2c1a40eb19972071e4ca0"></script>
+    <!-- MOBILE STICKY CTA -->
+    <div class="mobile-sticky-cta" aria-hidden="true">
+      <a class="button" href="adhd-screening.html">Start Free Screening</a>
+    </div>
   </body>
 </html>

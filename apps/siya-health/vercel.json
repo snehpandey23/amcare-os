@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "mkdir -p public && cp *.html styles.css public/ && cp -r assets public/",
+  "buildCommand": "mkdir -p public public/blog && cp *.html styles.css trust-metrics.js asrs-screener.js public/ 2>/dev/null; cp -r assets public/ && cp blog/*.html public/blog/",
   "outputDirectory": "public",
   "installCommand": "echo 'No install needed'",
   "redirects": [
