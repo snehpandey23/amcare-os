@@ -1,0 +1,9 @@
+<svg width="800" height="520" viewBox="0 0 800 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="520" rx="12" fill="#E8F0FE"/>
+  <rect x="80" y="60" width="640" height="400" rx="16" fill="#fff" stroke="#BBD4FF" stroke-width="2"/>
+  <circle cx="280" cy="240" r="70" fill="#BBD4FF"/>
+  <rect x="380" y="200" width="260" height="24" rx="12" fill="#1D5FBF"/>
+  <rect x="380" y="240" width="220" height="18" rx="9" fill="#93B8E8"/>
+  <rect x="380" y="268" width="200" height="18" rx="9" fill="#93B8E8"/>
+  <text x="400" y="320" fill="#64748B" font-family="system-ui,sans-serif" font-size="14">Telehealth consultation</text>
+</svg>

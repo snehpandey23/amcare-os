@@ -1,0 +1,10 @@
+{
+  "name": "@amcare/siya-health-rewrite",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Siya Health telehealth website",
+  "scripts": {
+    "build": "echo 'Static site - no build needed'",
+    "deploy": "vercel --prod"
+  }
+}

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17553537456"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-17553537456');</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <title>Free ADHD Screening | Siya Health</title>
+    <meta name="description" content="Take a quick 2-minute ADHD screening based on the WHO ASRS v1.1. Get instant results and book a free discovery call with a licensed physician." />
+    <link rel="canonical" href="https://siya.health/adhd-screening" />
+    <meta property="og:title" content="Free ADHD Screening | Siya Health" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container">
+        <a class="header-logo" href="/"><img src="assets/images/siya-health-logo.png" alt="Siya Health" /></a>
+        <nav class="nav-center" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/mental-health-adhd">ADHD Care</a>
+          <a href="/weight-loss-metabolic-health">Weight Loss</a>
+          <a href="/telehealth">Telehealth</a>
+          <a href="/blog">Blog</a>
+        </nav>
+        <div class="nav-cta">
+          <a class="button" href="/adhd-screening">Start Free Screening</a>
+        </div>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
+        <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
+        <div class="nav-mobile">
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/mental-health-adhd">ADHD Care</a>
+          <a href="/weight-loss-metabolic-health">Weight Loss</a>
+          <a href="/telehealth">Telehealth</a>
+          <a href="/blog">Blog</a>
+          <a class="button" href="/adhd-screening">Start Free Screening</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="section asrs-screener-section">
+        <div class="container">
+          <div class="asrs-screener" id="asrs-screener">
+            <!-- Step 0: Intro -->
+            <div class="asrs-step asrs-step-active" data-step="0" role="region" aria-label="Introduction">
+              <div class="asrs-intro">
+                <h1>Free ADHD Screening</h1>
+                <p class="asrs-intro-lead">This screening uses the WHO Adult ADHD Self-Report Scale (ASRS v1.1), a validated tool used by clinicians worldwide. It takes about 2 minutes.</p>
+                <p>Please think about how you have felt and conducted yourself over the past 6 months when answering.</p>
+                <p class="asrs-intro-note">This is a screening tool only—not a diagnosis. A licensed physician can provide a full evaluation.</p>
+                <div class="asrs-nav">
+                  <button type="button" class="button" id="asrs-start-btn">Start screening</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Steps 1–6: Questions -->
+            <div class="asrs-step" data-step="1" role="region" aria-label="Question 1 of 6" hidden>
+              <p class="asrs-progress" aria-live="polite">Question 1 of 6</p>
+              <h2 class="asrs-question">How often do you have trouble wrapping up the final details of a project, once the challenging parts have been done?</h2>
+              <fieldset class="asrs-options">
+                <legend class="sr-only">Select your response</legend>
+                <label><input type="radio" name="q1" value="0" /> Never</label>
+                <label><input type="radio" name="q1" value="0" /> Rarely</label>
+                <label><input type="radio" name="q1" value="0" /> Sometimes</label>
+                <label><input type="radio" name="q1" value="1" /> Often</label>
+                <label><input type="radio" name="q1" value="1" /> Very Often</label>
+              </fieldset>
+              <div class="asrs-nav">
+                <button type="button" class="button" id="asrs-next-1">Next</button>
+              </div>
+            </div>
+
+            <div class="asrs-step" data-step="2" role="region" aria-label="Question 2 of 6" hidden>
+              <p class="asrs-progress" aria-live="polite">Question 2 of 6</p>
+              <h2 class="asrs-question">How often do you have difficulty getting things in order when you have to do a task that requires organization?</h2>
+              <fieldset class="asrs-options">
+                <legend class="sr-only">Select your response</legend>
+                <label><input type="radio" name="q2" value="0" /> Never</label>
+                <label><input type="radio" name="q2" value="0" /> Rarely</label>
+                <label><input type="radio" name="q2" value="0" /> Sometimes</label>
+                <label><input type="radio" name="q2" value="1" /> Often</label>
+                <label><input type="radio" name="q2" value="1" /> Very Often</label>
+              </fieldset>
+              <div class="asrs-nav">
+                <button type="button" class="button secondary" id="asrs-back-2">Back</button>
+                <button type="button" class="button" id="asrs-next-2">Next</button>
+              </div>
+            </div>
+
+            <div class="asrs-step" data-step="3" role="region" aria-label="Question 3 of 6" hidden>
+              <p class="asrs-progress" aria-live="polite">Question 3 of 6</p>
+              <h2 class="asrs-question">How often do you have problems remembering appointments or obligations?</h2>
+              <fieldset class="asrs-options">
+                <legend class="sr-only">Select your response</legend>
+                <label><input type="radio" name="q3" value="0" /> Never</label>
+                <label><input type="radio" name="q3" value="0" /> Rarely</label>
+                <label><input type="radio" name="q3" value="0" /> Sometimes</label>
+                <label><input type="radio" name="q3" value="1" /> Often</label>
+                <label><input type="radio" name="q3" value="1" /> Very Often</label>
+              </fieldset>
+              <div class="asrs-nav">
+                <button type="button" class="button secondary" id="asrs-back-3">Back</button>
+                <button type="button" class="button" id="asrs-next-3">Next</button>
+              </div>
+            </div>
+
+            <div class="asrs-step" data-step="4" role="region" aria-label="Question 4 of 6" hidden>
+              <p class="asrs-progress" aria-live="polite">Question 4 of 6</p>
+              <h2 class="asrs-question">When you have a task that requires a lot of thought, how often do you avoid or delay getting started?</h2>
+              <fieldset class="asrs-options">
+                <legend class="sr-only">Select your response</legend>
+                <label><input type="radio" name="q4" value="0" /> Never</label>
+                <label><input type="radio" name="q4" value="0" /> Rarely</label>
+                <label><input type="radio" name="q4" value="0" /> Sometimes</label>
+                <label><input type="radio" name="q4" value="1" /> Often</label>
+                <label><input type="radio" name="q4" value="1" /> Very Often</label>
+              </fieldset>
+              <div class="asrs-nav">
+                <button type="button" class="button secondary" id="asrs-back-4">Back</button>
+                <button type="button" class="button" id="asrs-next-4">Next</button>
+              </div>
+            </div>
+
+            <div class="asrs-step" data-step="5" role="region" aria-label="Question 5 of 6" hidden>
+              <p class="asrs-progress" aria-live="polite">Question 5 of 6</p>
+              <h2 class="asrs-question">How often do you fidget or squirm with your hands or feet when you have to sit down for a long time?</h2>
+              <fieldset class="asrs-options">
+                <legend class="sr-only">Select your response</legend>
+                <label><input type="radio" name="q5" value="0" /> Never</label>
+                <label><input type="radio" name="q5" value="0" /> Rarely</label>
+                <label><input type="radio" name="q5" value="0" /> Sometimes</label>
+                <label><input type="radio" name="q5" value="1" /> Often</label>
+                <label><input type="radio" name="q5" value="1" /> Very Often</label>
+              </fieldset>
+              <div class="asrs-nav">
+                <button type="button" class="button secondary" id="asrs-back-5">Back</button>
+                <button type="button" class="button" id="asrs-next-5">Next</button>
+              </div>
+            </div>
+
+            <div class="asrs-step" data-step="6" role="region" aria-label="Question 6 of 6" hidden>
+              <p class="asrs-progress" aria-live="polite">Question 6 of 6</p>
+              <h2 class="asrs-question">How often do you feel overly active and compelled to do things, like you were driven by a motor?</h2>
+              <fieldset class="asrs-options">
+                <legend class="sr-only">Select your response</legend>
+                <label><input type="radio" name="q6" value="0" /> Never</label>
+                <label><input type="radio" name="q6" value="0" /> Rarely</label>
+                <label><input type="radio" name="q6" value="0" /> Sometimes</label>
+                <label><input type="radio" name="q6" value="1" /> Often</label>
+                <label><input type="radio" name="q6" value="1" /> Very Often</label>
+              </fieldset>
+              <div class="asrs-nav">
+                <button type="button" class="button secondary" id="asrs-back-6">Back</button>
+                <button type="button" class="button" id="asrs-next-6">Next</button>
+              </div>
+            </div>
+
+            <!-- Step 7: Results -->
+            <div class="asrs-step" data-step="7" role="region" aria-label="Results" hidden>
+              <div class="asrs-results" id="asrs-results">
+                <h2>Your Results</h2>
+                <p class="asrs-score" id="asrs-score-para"></p>
+                <div class="asrs-results-message" id="asrs-results-message"></div>
+                <div class="cta-block asrs-cta">
+                  <a class="button" href="https://api.leadconnectorhq.com/widget/form/mnWpgh0IEgFvJymdZqHY" target="_blank" rel="noopener">Book Your Free 15-Minute Discovery Call</a>
+                </div>
+                <p class="cta-microcopy">Talk to a licensed physician. No pressure. Real answers.</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="asrs-citation">ASRS v1.1 6-Question Screener. Kessler et al. (2005). Psychological Medicine. © Harvard/NYU. This screening tool is not a diagnosis. A licensed physician can provide a full evaluation.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div class="footer-logo-col">
+          <a href="/" class="footer-logo-link"><img src="assets/images/siya-health-logo.png" alt="Siya Health" class="footer-logo-img" /></a>
+        </div>
+        <div class="footer-brand">
+          <p>Board-certified physicians providing telehealth care across Texas, Pennsylvania, and Florida.</p>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <p><a href="/mental-health-adhd">ADHD Care</a></p>
+          <p><a href="/adhd-screening">Start Free Screening</a></p>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p><a href="mailto:care@siya.health">care@siya.health</a></p>
+          <p><a href="tel:+12154451244">(215) 445-1244</a></p>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <p><a href="https://adhd.siya.health/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a></p>
+          <p><a href="https://adhd.siya.health/terms-of-service" target="_blank" rel="noopener">Terms</a></p>
+        </div>
+      </div>
+      <div class="container"><p class="footer-notice">For emergencies, call 911. All telehealth services are provided by licensed medical professionals.</p><small>© 2026 Siya Health Inc.</small></div>
+    </footer>
+    <script src="asrs-screener.js"></script>
+    <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="69b2c1a40eb19972071e4ca0"></script>
+  </body>
+</html>

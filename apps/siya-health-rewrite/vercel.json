@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "buildCommand": "mkdir -p public public/blog && cp *.html styles.css trust-metrics.js asrs-screener.js public/ 2>/dev/null; cp -r assets public/ && cp blog/*.html public/blog/",
+  "outputDirectory": "public",
+  "installCommand": "echo 'No install needed'",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "siya.health" }],
+      "destination": "https://www.siya.health/$1",
+      "permanent": true
+    }
+  ]
+}
