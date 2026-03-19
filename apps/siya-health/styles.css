@@ -2216,6 +2216,64 @@ img[loading="lazy"] { loading: lazy; }
 .symptoms-card p { font-size: 14px; color: var(--text-secondary); }
 .symptoms-closing { margin-bottom: 20px; font-weight: 500; color: var(--text); }
 
+/* Why Choose ADHD Care - 6-card grid */
+.why-choose-section .section-header.why-choose-header { margin-bottom: 40px; }
+.why-choose-section .why-choose-header h2 { margin-bottom: 12px; }
+.why-choose-section .why-choose-header .lead { margin-bottom: 0; }
+.why-choose-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+@media (min-width: 600px) {
+  .why-choose-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 900px) {
+  .why-choose-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.why-choose-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.why-choose-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+.why-choose-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--primary);
+  margin-bottom: 14px;
+}
+.why-choose-icon svg { width: 100%; height: 100%; }
+.why-choose-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.why-choose-card p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+.why-choose-cta {
+  text-align: center;
+}
+.why-choose-cta-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.why-choose-cta .button { margin: 0; }
+
 /* How It Works process */
 .process-section {
   padding: 70px 0;
