@@ -58,28 +58,58 @@
     <main id="main">
       <!-- HERO: Full-width, centered. Layout: headline → subheadline → single CTA. -->
       <section class="hero-merged" style="background-image: url('assets/images/telehealth-visit.png');">
-        <div class="hero-merged-content container">
-          <h1>Fast. Simple. Accessible.</h1>
-          <p class="hero-merged-lead">Convenient care from licensed physicians. No waiting rooms. Prescriptions, urgent care, and ongoing support—from anywhere.</p>
+        <div class="container hero-inner">
+          <div class="hero-merged-content">
+          <h1>Telehealth Care — Fast, Simple, Accessible</h1>
+          <p class="hero-merged-lead">Board-certified physicians. No waiting rooms. Same-week appointments. Prescriptions, urgent care, and ongoing support—from anywhere.</p>
           <div class="hero-ctas">
-            <a class="button" href="https://api.leadconnectorhq.com/widget/form/mnWpgh0IEgFvJymdZqHY" target="_blank" rel="noopener">Book Free Consultation →</a>
+            <a class="button" href="/adhd-screening">Start Free Screening</a>
+            <a class="button hero-cta-secondary" href="https://api.leadconnectorhq.com/widget/form/mnWpgh0IEgFvJymdZqHY" target="_blank" rel="noopener">Schedule Meet &amp; Greet</a>
           </div>
+          <div class="hero-trust-bar">
+            <span>1,000+ Adults Evaluated</span>
+            <span>Same-Week Appointments</span>
+            <span>$199 Transparent Pricing</span>
+            <span>HIPAA-Compliant</span>
+          </div>
+        </div>
         </div>
       </section>
 
-      <!-- WHY CHOOSE SIYA TELEHEALTH: Concise trust block. Layout: centered or 2-col list with icons. -->
-      <section class="section" id="why-choose">
+      <!-- WHY CHOOSE SIYA TELEHEALTH -->
+      <section class="section section-tinted" id="why-choose">
         <div class="container">
-          <div class="section-header">
+          <div class="section-header why-choose-header">
             <h2>Why Choose Siya Telehealth</h2>
             <p class="lead">Care you can trust. Care that fits your life.</p>
           </div>
-          <ul class="list evaluation-includes">
-            <li><strong>Board-certified physicians</strong> — licensed in Texas, Pennsylvania, and Florida</li>
-            <li><strong>Secure, HIPAA-compliant telehealth</strong> — your privacy protected</li>
-            <li><strong>Transparent pricing</strong> — know the cost before your visit</li>
-            <li><strong>Wide scope of care</strong> — primary care, urgent care, prescriptions, labs, chronic disease management</li>
-          </ul>
+          <div class="why-choose-grid">
+            <article class="why-choose-card">
+              <div class="why-choose-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <h3>Board-Certified Physicians</h3>
+              <p>Licensed in Texas, Pennsylvania, and Florida.</p>
+            </article>
+            <article class="why-choose-card">
+              <div class="why-choose-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <h3>Secure &amp; Confidential</h3>
+              <p>HIPAA-compliant telehealth. Your privacy protected.</p>
+            </article>
+            <article class="why-choose-card">
+              <div class="why-choose-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+              <h3>Transparent Pricing</h3>
+              <p>Know the cost before your visit.</p>
+            </article>
+            <article class="why-choose-card">
+              <div class="why-choose-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></div>
+              <h3>Wide Scope of Care</h3>
+              <p>Primary care, urgent care, prescriptions, labs, and chronic disease management.</p>
+            </article>
+          </div>
+          <div class="why-choose-cta">
+            <p class="why-choose-cta-text">Ready to get clarity?</p>
+            <p class="cta-microcopy">Start with a free 2-minute ADHD screening.</p>
+            <a class="button" href="/adhd-screening">Start Free Screening</a>
+          </div>
         </div>
       </section>
 
@@ -132,7 +162,10 @@
               <p>Diabetes, hypertension, and ongoing care—managed virtually.</p>
             </div>
           </div>
-          <p class="note" style="margin-top: 24px; text-align: center;">Full telehealth catalog available—ask your provider during your consultation.</p>
+          <div class="info-card-note">
+            <span class="info-card-icon" aria-hidden="true">💬</span>
+            <p>Full telehealth catalog available—ask your provider during your consultation.</p>
+          </div>
         </div>
       </section>
 
@@ -152,8 +185,10 @@
 
     <footer class="footer">
       <div class="container footer-grid">
+        <div class="footer-logo-col">
+          <a href="/" class="footer-logo-link"><img src="assets/images/siya-health-logo.png" alt="Siya Health" class="footer-logo-img" /></a>
+        </div>
         <div class="footer-brand">
-          <h3 class="footer-logo"><span class="logo-siya">Siya</span><span class="logo-health"> Health</span></h3>
           <p>Board-certified physicians providing telehealth care across Texas, Pennsylvania, and Florida.</p>
           <div class="footer-trust-logos">
             <img src="assets/images/hipaa-compliant.png" alt="HIPAA Compliant" class="footer-trust-logo" width="50" height="50" />
@@ -171,7 +206,7 @@
         <div><h4>Contact</h4><p><a href="mailto:care@siya.health">care@siya.health</a></p><p><a href="tel:+12154451244">(215) 445-1244</a></p></div>
         <div><h4>Legal</h4><p><a href="https://adhd.siya.health/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a></p><p><a href="https://adhd.siya.health/terms-of-service" target="_blank" rel="noopener">Terms &amp; Conditions</a></p><p><a href="https://adhd.siya.health/notice-of-privacy-practices" target="_blank" rel="noopener">Notice of Privacy Practices</a></p></div>
       </div>
-      <div class="container"><p class="footer-notice">All telehealth services are provided by licensed medical professionals in accordance with state regulations.</p><small>© 2026 Siya Health Inc. All rights reserved.</small></div>
+      <div class="container"><p class="footer-notice">For emergencies, call 911. All telehealth services are provided by licensed medical professionals in accordance with state regulations.</p><small>© 2026 Siya Health Inc. All rights reserved.</small></div>
     </footer>
     <script>
       (function() {

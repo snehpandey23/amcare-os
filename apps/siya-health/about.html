@@ -57,38 +57,55 @@
     <main id="main">
       <!-- HERO: Merged with header, same layout as home -->
       <section class="hero-merged" style="background-image: url('assets/images/doctor-office.png');">
-        <div class="hero-merged-content container">
-          <h1>Our mission is better telehealth, built for real life</h1>
-          <p class="hero-merged-lead">Siya Health provides modern, evidence-based medical care with a patient-first approach. We combine clinical expertise with a seamless virtual experience.</p>
-          <div class="hero-trust-mini">
-            <span>Compassionate care</span>
-            <span>•</span>
-            <span>Clear treatment plans</span>
-            <span>•</span>
-            <span>Ongoing support</span>
+        <div class="container hero-inner">
+          <div class="hero-merged-content">
+          <h1>Evidence-Based Telehealth — Built for Real Life</h1>
+          <p class="hero-merged-lead">Board-certified physicians. Patient-first care. Same-week appointments. ADHD, weight loss, and primary care across TX, PA, and FL.</p>
+          <div class="hero-ctas">
+            <a class="button" href="/adhd-screening">Start Free Screening</a>
+            <a class="button hero-cta-secondary" href="https://api.leadconnectorhq.com/widget/form/mnWpgh0IEgFvJymdZqHY" target="_blank" rel="noopener">Schedule Meet &amp; Greet</a>
           </div>
+          <div class="hero-trust-bar">
+            <span>1,000+ Adults Evaluated</span>
+            <span>Same-Week Appointments</span>
+            <span>$199 Transparent Pricing</span>
+            <span>HIPAA-Compliant</span>
+          </div>
+        </div>
         </div>
       </section>
 
       <!-- KNOW OUR MEDICAL DIRECTOR -->
-      <section class="section" id="medical-director">
+      <section class="section section-tinted" id="medical-director">
         <div class="container">
           <div class="section-header">
             <h2>Know Our Medical Director</h2>
           </div>
-          <div class="physician-card">
-            <div class="physician-card-main">
+          <div class="physician-card-modern">
+            <div class="physician-card-header">
               <img src="assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey, MD" width="96" height="96" loading="lazy" class="physician-photo" />
-              <div>
+              <div class="physician-card-info">
                 <h3>Dr. Sneh Pandey, MD</h3>
-                <p class="physician-credentials">Medical Director • Board-Certified Internal Medicine &amp; Obesity Medicine • ADHD-CCSP</p>
+                <div class="physician-credentials-grid">
+                  <span class="cred-badge">👤 Medical Director</span>
+                  <span class="cred-badge">🩺 Board-Certified Internal Medicine</span>
+                  <span class="cred-badge">⚖️ Obesity Medicine</span>
+                  <span class="cred-badge">🧠 ADHD-CCSP</span>
+                </div>
                 <p class="physician-licensed">Licensed in Texas, Pennsylvania, and Florida.</p>
               </div>
             </div>
             <div class="physician-card-expand" id="physician-bio-expand" hidden>
-              <p>Dr. Pandey has extensive experience treating adult ADHD patients through telehealth, combining evidence-based assessment with personalized care plans. His ADHD-CCSP certification reflects specialized training in ADHD care for adults.</p>
-              <h4>Why I focus on ADHD care</h4>
-              <p>So many adults struggle silently with focus, organization, and follow-through—often for years. They've been told to "try harder" or that it's "just how they are." I believe everyone deserves a thorough evaluation and a clear path forward. ADHD is highly treatable, and getting the right diagnosis can be life-changing.</p>
+              <div class="physician-bio-blocks">
+                <div class="physician-bio-block">
+                  <h4>Experience</h4>
+                  <p>Dr. Pandey has extensive experience treating adult ADHD patients through telehealth, combining evidence-based assessment with personalized care plans. His ADHD-CCSP certification reflects specialized training in ADHD care for adults.</p>
+                </div>
+                <div class="physician-bio-block">
+                  <h4>Why I focus on ADHD care</h4>
+                  <p>So many adults struggle silently with focus, organization, and follow-through—often for years. They've been told to "try harder" or that it's "just how they are." I believe everyone deserves a thorough evaluation and a clear path forward. ADHD is highly treatable, and getting the right diagnosis can be life-changing.</p>
+                </div>
+              </div>
             </div>
             <button type="button" class="physician-read-more" id="physician-read-more" aria-expanded="false" aria-controls="physician-bio-expand">Read More</button>
           </div>
@@ -100,13 +117,25 @@
         <div class="container">
           <div class="section-header">
             <h2>Our Story</h2>
-            <p class="lead">We believe healthcare should be accessible, thoughtful, and easy to navigate. Our mission is to deliver high-quality telehealth visits that respect your time and address your goals.</p>
+            <p class="lead">We believe healthcare should be accessible, thoughtful, and easy to navigate.</p>
           </div>
-          <ul class="list">
-            <li>Compassionate, clinician-led care</li>
-            <li>Clear, actionable treatment plans</li>
-            <li>Ongoing support between visits</li>
-          </ul>
+          <div class="why-choose-grid">
+            <article class="why-choose-card">
+              <div class="why-choose-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+              <h3>Compassionate Care</h3>
+              <p>Clinician-led care that respects your time and goals.</p>
+            </article>
+            <article class="why-choose-card">
+              <div class="why-choose-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></div>
+              <h3>Clear Treatment Plans</h3>
+              <p>Actionable next steps you can follow.</p>
+            </article>
+            <article class="why-choose-card">
+              <div class="why-choose-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <h3>Ongoing Support</h3>
+              <p>Support between visits when you need it.</p>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -115,8 +144,19 @@
         <div class="container">
           <div class="section-with-image">
             <div class="section-content">
-              <h2>Founder story</h2>
-              <p>Siya Health was founded with a simple vision: make high-quality medical care more accessible through thoughtful telehealth. Our team brings together board-certified physicians, modern technology, and a patient-first philosophy.</p>
+              <h2>Founder Story</h2>
+              <div class="founder-highlight-cards">
+                <article class="icon-card founder-card">
+                  <span class="icon-card-icon" aria-hidden="true">🎯</span>
+                  <h4>Our Vision</h4>
+                  <p>Make high-quality medical care more accessible through thoughtful telehealth.</p>
+                </article>
+                <article class="icon-card founder-card">
+                  <span class="icon-card-icon" aria-hidden="true">👥</span>
+                  <h4>Our Team</h4>
+                  <p>Board-certified physicians, modern technology, and a patient-first philosophy.</p>
+                </article>
+              </div>
             </div>
             <div class="section-media">
               <img src="assets/images/care-team.png" alt="Siya Health care team" width="520" height="390" loading="lazy" />
@@ -126,59 +166,88 @@
       </section>
 
       <!-- CLINICAL APPROACH / SPECIALTIES -->
-      <section class="section" id="approach">
+      <section class="section section-tinted" id="approach">
         <div class="container">
           <div class="section-header">
-            <h2>Clinical approach</h2>
-            <p class="lead">We design every visit for clarity and continuity. You receive a summary after each appointment and know exactly what comes next.</p>
+            <h2>Clinical Approach</h2>
+            <p class="lead">Every visit designed for clarity and continuity.</p>
           </div>
-          <ul class="list">
-            <li>Secure virtual visits with minimal friction</li>
-            <li>Coordinated care across specialties</li>
-            <li>Guidance that fits your lifestyle</li>
-          </ul>
+          <div class="why-choose-grid">
+            <article class="why-choose-card">
+              <div class="why-choose-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <h3>Secure Virtual Visits</h3>
+              <p>Minimal friction. HIPAA-compliant technology.</p>
+            </article>
+            <article class="why-choose-card">
+              <div class="why-choose-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+              <h3>Coordinated Care</h3>
+              <p>Seamless care across specialties.</p>
+            </article>
+            <article class="why-choose-card">
+              <div class="why-choose-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+              <h3>Fits Your Lifestyle</h3>
+              <p>Guidance tailored to how you live.</p>
+            </article>
+          </div>
         </div>
       </section>
 
       <!-- TRUST & SAFETY -->
-      <section class="section" id="trust">
+      <section class="section section-tinted" id="trust">
         <div class="container">
           <div class="section-header">
-            <h2>Trust &amp; telehealth safety</h2>
+            <h2>Trust &amp; Telehealth Safety</h2>
+            <p class="lead">Safe, evidence-based care you can trust.</p>
           </div>
-          <div class="content-grid">
-            <div class="card">
-              <h3>Proven experience</h3>
-              <p>1,000+ ADHD evaluations and 500+ patients treated. Our track record speaks to safe, evidence-based care you can trust.</p>
-            </div>
-            <div class="card">
-              <h3>Board-certified physicians</h3>
-              <p>Our clinicians maintain board certification and ongoing continuing medical education.</p>
-            </div>
-            <div class="card">
-              <h3>LegitScript compliance</h3>
-              <p>We operate as a LegitScript-certified telehealth platform, meeting rigorous standards for online healthcare.</p>
-            </div>
-            <div class="card">
-              <h3>HIPAA compliant</h3>
-              <p>Your health information is protected with HIPAA-compliant technology and practices.</p>
-            </div>
+          <div class="why-choose-grid">
+            <article class="why-choose-card">
+              <div class="why-choose-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <h3>Proven Experience</h3>
+              <p>1,000+ ADHD evaluations. Evidence-based care you can trust.</p>
+            </article>
+            <article class="why-choose-card">
+              <div class="why-choose-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+              <h3>Board-Certified Physicians</h3>
+              <p>Ongoing certification and continuing education.</p>
+            </article>
+            <article class="why-choose-card">
+              <div class="why-choose-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></div>
+              <h3>LegitScript Certified</h3>
+              <p>Rigorous standards for online healthcare.</p>
+            </article>
+            <article class="why-choose-card">
+              <div class="why-choose-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <h3>Secure &amp; Confidential</h3>
+              <p>HIPAA-compliant technology protects your data.</p>
+            </article>
           </div>
         </div>
       </section>
 
       <!-- LEGAL & COMPLIANCE -->
-      <section class="section" id="legal">
+      <section class="section section-tinted" id="legal">
         <div class="container">
           <div class="section-header">
             <h2>Legal &amp; Compliance</h2>
             <p class="lead">Important documents and policies for our telehealth services.</p>
           </div>
-          <ul class="list list-links">
-            <li><a href="https://adhd.siya.health/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a></li>
-            <li><a href="https://adhd.siya.health/terms-of-service" target="_blank" rel="noopener">Terms &amp; Conditions</a></li>
-            <li><a href="https://adhd.siya.health/notice-of-privacy-practices" target="_blank" rel="noopener">Notice of Privacy Practices</a></li>
-          </ul>
+          <div class="link-cards-grid">
+            <a href="https://adhd.siya.health/privacy-policy" target="_blank" rel="noopener" class="link-card">
+              <span class="link-card-icon" aria-hidden="true">🔒</span>
+              <h4>Privacy Policy</h4>
+              <p>How we protect your information</p>
+            </a>
+            <a href="https://adhd.siya.health/terms-of-service" target="_blank" rel="noopener" class="link-card">
+              <span class="link-card-icon" aria-hidden="true">📄</span>
+              <h4>Terms &amp; Conditions</h4>
+              <p>Terms of use for our services</p>
+            </a>
+            <a href="https://adhd.siya.health/notice-of-privacy-practices" target="_blank" rel="noopener" class="link-card">
+              <span class="link-card-icon" aria-hidden="true">🩺</span>
+              <h4>Notice of Privacy Practices</h4>
+              <p>HIPAA and your health data</p>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -187,19 +256,46 @@
         <div class="container">
           <div class="section-header">
             <h2>Contact Information</h2>
+            <p class="lead">Reach out to schedule a visit or ask questions about our telehealth services.</p>
           </div>
-          <p class="lead">Reach out to schedule a visit or ask questions about our telehealth services.</p>
-          <p><strong>Email:</strong> <a href="mailto:care@siya.health">care@siya.health</a></p>
-          <p><strong>Phone:</strong> <a href="tel:+12154451244">(215) 445-1244</a></p>
+          <div class="contact-cards-grid">
+            <a href="mailto:care@siya.health" class="contact-card">
+              <span class="contact-card-icon" aria-hidden="true">✉️</span>
+              <h4>Email</h4>
+              <p>care@siya.health</p>
+            </a>
+            <a href="tel:+12154451244" class="contact-card">
+              <span class="contact-card-icon" aria-hidden="true">📞</span>
+              <h4>Phone</h4>
+              <p>(215) 445-1244</p>
+            </a>
+          </div>
         </div>
       </section>
 
       <!-- STATES SERVED -->
-      <section class="section" id="states">
+      <section class="section section-tinted" id="states">
         <div class="container">
           <div class="section-header">
-            <h2>States served</h2>
+            <h2>States Served</h2>
             <p class="lead">Siya Health providers are licensed to deliver telehealth care across Texas, Pennsylvania, and Florida.</p>
+          </div>
+          <div class="state-badges-grid">
+            <div class="state-badge">
+              <span class="state-badge-icon" aria-hidden="true">📍</span>
+              <h4>Texas</h4>
+              <p>Full telehealth coverage</p>
+            </div>
+            <div class="state-badge">
+              <span class="state-badge-icon" aria-hidden="true">📍</span>
+              <h4>Pennsylvania</h4>
+              <p>Full telehealth coverage</p>
+            </div>
+            <div class="state-badge">
+              <span class="state-badge-icon" aria-hidden="true">📍</span>
+              <h4>Florida</h4>
+              <p>Full telehealth coverage</p>
+            </div>
           </div>
         </div>
       </section>
@@ -291,8 +387,10 @@
 
     <footer class="footer">
       <div class="container footer-grid">
+        <div class="footer-logo-col">
+          <a href="/" class="footer-logo-link"><img src="assets/images/siya-health-logo.png" alt="Siya Health" class="footer-logo-img" /></a>
+        </div>
         <div class="footer-brand">
-          <h3 class="footer-logo"><span class="logo-siya">Siya</span><span class="logo-health"> Health</span></h3>
           <p>Board-certified physicians providing telehealth care across Texas, Pennsylvania, and Florida.</p>
           <div class="footer-trust-logos">
             <img src="assets/images/hipaa-compliant.png" alt="HIPAA Compliant" class="footer-trust-logo" width="50" height="50" />
@@ -310,7 +408,7 @@
         <div><h4>Contact</h4><p><a href="mailto:care@siya.health">care@siya.health</a></p><p><a href="tel:+12154451244">(215) 445-1244</a></p></div>
         <div><h4>Legal</h4><p><a href="https://adhd.siya.health/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a></p><p><a href="https://adhd.siya.health/terms-of-service" target="_blank" rel="noopener">Terms &amp; Conditions</a></p><p><a href="https://adhd.siya.health/notice-of-privacy-practices" target="_blank" rel="noopener">Notice of Privacy Practices</a></p></div>
       </div>
-      <div class="container"><p class="footer-notice">All telehealth services are provided by licensed medical professionals in accordance with state regulations.</p><small>© 2026 Siya Health Inc. All rights reserved.</small></div>
+      <div class="container"><p class="footer-notice">For emergencies, call 911. All telehealth services are provided by licensed medical professionals in accordance with state regulations.</p><small>© 2026 Siya Health Inc. All rights reserved.</small></div>
     </footer>
     <script>
       (function() {
