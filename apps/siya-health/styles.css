@@ -200,36 +200,20 @@ p {
   max-width: none;
 }
 
-/* Logo image */
+/* Logo image only */
 .header-logo {
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
-  height: 66px;
+  height: 121px;
   width: auto;
 }
 
 .header-logo img {
-  height: 66px;
+  height: 121px;
   width: auto;
   object-fit: contain;
 }
-
-/* Wordmark: SIYA (bold) HEALTH (italic) beside logo */
-.logo-wordmark {
-  margin-left: 12px;
-  font-size: 1.15rem;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-.logo-wordmark strong { font-weight: 700; font-style: normal; }
-.logo-wordmark em { font-weight: 500; font-style: italic; font-size: inherit; }
-
-.site-header-transparent .logo-wordmark { color: var(--white); }
-.site-header-transparent .logo-wordmark strong,
-.site-header-transparent .logo-wordmark em { color: inherit; }
-.site-header-transparent.site-header-scrolled .logo-wordmark { color: var(--text); }
 
 .header-logo:hover { opacity: 0.9; }
 
@@ -239,8 +223,7 @@ p {
 }
 
 @media (max-width: 640px) {
-  .header-logo, .header-logo img { height: 54px; }
-  .logo-wordmark { font-size: 1rem; margin-left: 8px; }
+  .header-logo, .header-logo img { height: 84px; }
 }
 
 /* Footer logo text (keep for footer) */
