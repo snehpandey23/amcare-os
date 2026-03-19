@@ -61,9 +61,9 @@
 
     if (messageEl) {
       if (score >= THRESHOLD) {
-        messageEl.innerHTML = '<p><strong>Your responses suggest ADHD may be worth exploring.</strong> A licensed physician can help you understand next steps and whether a full evaluation makes sense for you.</p>';
+        messageEl.innerHTML = '<p><strong>Your responses suggest ADHD may be worth exploring.</strong> A licensed provider can help you understand next steps and whether a full evaluation makes sense for you.</p>';
       } else {
-        messageEl.innerHTML = '<p><strong>Your responses don\'t strongly suggest ADHD,</strong> but if you still have concerns about focus, organization, or other symptoms, a discovery call can help. A licensed physician can answer your questions.</p>';
+        messageEl.innerHTML = '<p><strong>Your responses don\'t strongly suggest ADHD,</strong> but if you still have concerns about focus, organization, or other symptoms, a discovery call can help. A licensed provider can answer your questions.</p>';
       }
     }
   }

@@ -563,6 +563,20 @@ button.secondary:hover {
   color: #fff !important;
 }
 
+.hero-cta-link {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.hero-cta-link:hover {
+  color: #fff;
+}
+
 .hero-cta-microcopy,
 .cta-microcopy {
   margin-top: 12px;
@@ -827,6 +841,15 @@ button.secondary:hover {
     justify-content: center;
     align-items: flex-start;
   }
+}
+
+.founder-quote {
+  margin: 1.5em 0;
+  padding-left: 1.25em;
+  border-left: 4px solid var(--accent);
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 1.05em;
 }
 
 /* Cards */
@@ -1281,6 +1304,72 @@ button.secondary:hover {
 }
 
 .review-stars { color: #f59e0b; font-size: 1.1rem; letter-spacing: 0.05em; margin-bottom: 12px; }
+
+/* Premium testimonial cards */
+.testimonial-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+@media (min-width: 640px) {
+  .testimonial-cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .testimonial-cards-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.testimonial-card-premium {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+.testimonial-card-premium .testimonial-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.testimonial-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--primary);
+  background: rgba(30, 58, 138, 0.08);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+.testimonial-card-premium .testimonial-text {
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text);
+  margin: 0 0 16px;
+}
+.testimonial-footer {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.testimonial-verified {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.testimonial-cta {
+  text-align: center;
+  margin-top: 40px;
+}
+.testimonial-cta-text {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text);
+  margin: 0 0 16px;
+}
 
 .review-card strong, .testimonial-card strong { color: var(--primary); }
 
@@ -1999,12 +2088,13 @@ img[loading="lazy"] { loading: lazy; }
 }
 
 @media (min-width: 1024px) {
-  .footer-grid { grid-template-columns: auto 1fr 1fr 1fr 1fr; }
+  .footer-grid { grid-template-columns: minmax(140px, auto) 1fr 1fr 1fr 1fr; }
 }
 
 .footer-logo-col {
   display: flex;
   align-items: flex-start;
+  min-width: 0;
 }
 
 .footer h3, .footer h4 {
@@ -2013,7 +2103,14 @@ img[loading="lazy"] { loading: lazy; }
 }
 
 .footer-logo-link { display: block; margin-bottom: 16px; }
-.footer-logo-img { height: 56px; width: auto; object-fit: contain; display: block; }
+.footer .footer-logo-img {
+  height: 112px !important;
+  min-height: 112px;
+  width: auto !important;
+  max-width: none;
+  object-fit: contain;
+  display: block;
+}
 .footer-physician {
   display: flex;
   align-items: center;
@@ -2479,7 +2576,8 @@ img[loading="lazy"] { loading: lazy; }
   height: 96px;
   flex-shrink: 0;
 }
-.physician-card-info h3 { margin-bottom: 12px; }
+.physician-card-info h3 { margin-bottom: 4px; }
+.physician-role { font-size: 1rem; color: var(--primary); font-weight: 600; margin: 0 0 12px 0; }
 .physician-credentials-grid {
   display: flex;
   flex-wrap: wrap;
@@ -2496,7 +2594,8 @@ img[loading="lazy"] { loading: lazy; }
 .physician-licensed { font-size: 0.9rem; color: var(--text-secondary); margin: 0; }
 .physician-bio-blocks { display: flex; flex-direction: column; gap: 20px; }
 .physician-bio-block h4 { margin-bottom: 8px; font-size: 1.05rem; }
-.physician-bio-block p { margin: 0; }
+.physician-bio-block p { margin: 0 0 16px 0; }
+.physician-bio-block p:last-child { margin-bottom: 0; }
 
 /* Founder highlight cards */
 .founder-highlight-cards {
@@ -2514,15 +2613,30 @@ img[loading="lazy"] { loading: lazy; }
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
-  max-width: 880px;
+  max-width: 960px;
   margin: 0 auto;
 }
 @media (min-width: 768px) {
   .why-siya-two-col {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 280px 1fr;
     gap: 48px;
     align-items: start;
   }
+}
+.why-siya-photo {
+  order: -1;
+}
+.why-siya-founder-img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+.why-siya-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 .why-siya-story p {
   font-size: 1rem;
@@ -2993,3 +3107,36 @@ img[loading="lazy"] { loading: lazy; }
 .symptoms-card:nth-child(4) { transition-delay: 0.4s; }
 .symptoms-card:nth-child(5) { transition-delay: 0.5s; }
 .symptoms-card:nth-child(6) { transition-delay: 0.6s; }
+
+/* Membership pricing comparison table */
+.pricing-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.pricing-comparison-table th,
+.pricing-comparison-table td {
+  padding: 14px 16px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.pricing-comparison-table th {
+  font-weight: 600;
+  color: var(--text);
+  background: var(--bg-subtle);
+}
+.pricing-comparison-table th:first-child {
+  text-align: left;
+  background: transparent;
+}
+.pricing-comparison-table td:first-child {
+  text-align: left;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+.pricing-comparison-table tr:last-child td { border-bottom: none; }
+.pricing-comparison-table .col-featured { background: rgba(30, 58, 138, 0.04); }
+.pricing-comparison-table .check { color: var(--accent); font-weight: 600; }
+.pricing-comparison-table .dash { color: var(--text-muted); }
+.pricing-comparison-wrap { overflow-x: auto; margin: 0 -24px; padding: 0 24px; }
+@media (min-width: 769px) { .pricing-comparison-wrap { margin: 0; padding: 0; } }
