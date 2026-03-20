@@ -1,5 +1,27 @@
 # Deploy Siya Health to Netlify
 
+## Local preview
+
+From this folder (`apps/siya-health`):
+
+**Recommended** — same URLs as production (`/adhd-care`, `/about`, …):
+
+```bash
+python3 serve_local.py
+```
+
+Open **http://localhost:8888/** and use the header/footer links as usual.
+
+**Alternative** — plain Python (only `/` and `*.html` paths work; `/adhd-care` will 404):
+
+```bash
+python3 -m http.server 8888
+```
+
+Then you must type full filenames, e.g. `http://localhost:8888/adhd-care.html`.
+
+On **Vercel / Netlify**, pretty URLs like `/adhd-care` are handled by the host.
+
 ## Step 1: Create a New Netlify Site
 
 1. Go to [Netlify](https://app.netlify.com) → **Add new site** → **Import an existing project**
