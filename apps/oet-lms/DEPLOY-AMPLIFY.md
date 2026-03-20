@@ -2,6 +2,8 @@
 
 Get the Siya Health MA Chat Simulator on a public URL in a few steps.
 
+**Full Amplify setup (SPA redirect, env vars, sign-in):** see the root **[AMPLIFY-SETUP.md](../../AMPLIFY-SETUP.md)** in this repo.
+
 ## Prerequisites
 
 - AWS CLI configured (`aws configure` done, `aws sts get-caller-identity` works)

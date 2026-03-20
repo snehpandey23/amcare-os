@@ -1141,7 +1141,7 @@ button.secondary:hover {
   letter-spacing: 0.05em;
   margin-bottom: 12px;
 }
-.flow-card-icon { margin-bottom: 16px; }
+.flow-card-icon { margin-bottom: 16px; font-size: 2.5rem; }
 .flow-card-icon img { margin: 0 auto; }
 .flow-card h3 { margin-bottom: 8px; color: var(--primary); }
 .flow-card p { font-size: 0.95rem; margin: 0; color: var(--text-secondary); }
@@ -1360,6 +1360,12 @@ button.secondary:hover {
   font-weight: 500;
   color: var(--text-secondary);
 }
+.testimonial-context-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
 .testimonial-cta {
   text-align: center;
   margin-top: 40px;
@@ -1498,6 +1504,12 @@ button.secondary:hover {
 .cta-band p, .cta-section p {
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 24px;
+}
+.cta-band-subtext {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 16px;
+  margin-bottom: 0;
 }
 
 .cta-band-buttons {
@@ -2051,6 +2063,21 @@ img[loading="lazy"] { loading: lazy; }
 
 .provider-card h4 { color: var(--primary); margin-bottom: 8px; }
 .provider-card span { display: block; color: var(--text-secondary); font-size: 0.95rem; }
+.provider-card-extended { text-align: left; padding: 28px; }
+.provider-card-extended img { width: 120px; height: 120px; margin-bottom: 16px; }
+.provider-role { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 12px; }
+.provider-bio { font-size: 0.95rem; margin-bottom: 12px; line-height: 1.6; }
+.provider-quote { font-style: italic; color: var(--primary); margin: 16px 0 0; padding-left: 16px; border-left: 3px solid var(--primary); font-size: 0.95rem; }
+.providers-grid-rewrite { gap: 32px; }
+.credentials-list { list-style: none; padding: 0; margin: 0 0 16px; }
+.credentials-list li { padding: 8px 0; padding-left: 24px; position: relative; }
+.credentials-list li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.credentials-tagline { font-style: italic; color: var(--text-secondary); margin-top: 8px; }
+.mission-copy p { margin-bottom: 16px; }
+.mission-copy p:last-child { margin-bottom: 0; }
+.states-served-section { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); }
+.states-served-section h3 { font-size: 1.1rem; margin-bottom: 8px; }
+.states-served-section p { margin-bottom: 8px; color: var(--text-secondary); }
 
 /* Service icon cards */
 .service-icon-card .service-icon {
@@ -2351,6 +2378,7 @@ img[loading="lazy"] { loading: lazy; }
 }
 
 .symptoms-icon svg { width: 100%; height: 100%; }
+.symptoms-card-emoji { font-size: 1.75rem; display: block; margin-bottom: 12px; }
 .symptoms-card h3 { font-size: 1.05rem; margin-bottom: 6px; }
 .symptoms-card p { font-size: 14px; color: var(--text-secondary); }
 .symptoms-closing { margin-bottom: 20px; font-weight: 500; color: var(--text); }
@@ -2441,6 +2469,39 @@ img[loading="lazy"] { loading: lazy; }
 .comparison-cards-col .icon-cards-grid { gap: 16px; }
 .comparison-cards-col .icon-card {
   padding: 16px 20px;
+}
+
+/* Comparison table - Traditional vs Siya Health */
+.comparison-table-wrapper {
+  overflow-x: auto;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.comparison-table th,
+.comparison-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border: 1px solid var(--border);
+}
+.comparison-table thead th {
+  background: var(--primary);
+  color: var(--white);
+  font-weight: 600;
+}
+.comparison-table tbody tr:nth-child(even) {
+  background: var(--bg-subtle);
+}
+.comparison-table tbody td:first-child {
+  color: var(--text-secondary);
+}
+.comparison-table tbody td:last-child {
+  color: var(--primary);
+  font-weight: 500;
 }
 
 /* Link cards - Legal & Compliance */
@@ -2758,6 +2819,7 @@ img[loading="lazy"] { loading: lazy; }
   transform: translateY(-3px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
+.why-choose-emoji { font-size: 1.75rem; display: block; margin-bottom: 12px; }
 .why-choose-icon {
   width: 32px;
   height: 32px;

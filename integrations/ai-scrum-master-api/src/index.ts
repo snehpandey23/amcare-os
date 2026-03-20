@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url'
 import axios from 'axios'
 import FormData from 'form-data'
 import crypto from 'crypto'
+import fs from 'fs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 dotenv.config({ path: path.resolve(__dirname, '../../../.env') })
@@ -14,7 +15,9 @@ dotenv.config()
 const app = express()
 app.use(express.json({ limit: '1mb' }))
 
-const port = parseInt(process.env.AI_SCRUM_MASTER_PORT || '3010')
+const port = parseInt(
+  process.env.PORT || process.env.AI_SCRUM_MASTER_PORT || '3010',
+)
 const appOrigin = process.env.AI_SCRUM_MASTER_WEB_ORIGIN || 'http://localhost:3007'
 const zohoAccountsUrl =
   process.env.ZOHO_ACCOUNTS_URL || 'https://accounts.zoho.com'
@@ -22,6 +25,10 @@ const workdriveFileName =
   process.env.ZOHO_WORKDRIVE_FILE_NAME || 'ai-scrum-projects.json'
 const zohoCrmModule = process.env.ZOHO_CRM_MODULE || ''
 const cookieName = 'asm_session'
+const staticDir =
+  process.env.AI_SCRUM_MASTER_STATIC_DIR ||
+  path.resolve(__dirname, '../../../apps/ai-scrum-master/dist')
+const serveUi = process.env.SERVE_AI_SCRUM_UI === 'true'
 
 const openai = new OpenAI({
   apiKey: process.env.PPLX_API_KEY,
@@ -103,12 +110,13 @@ const getSessionId = (req: express.Request, res: express.Response) => {
   const cookies = parseCookies(req.headers.cookie)
   let sessionId = cookies[cookieName]
   if (!sessionId) {
+    const secureFlag = process.env.NODE_ENV === 'production' ? '; Secure' : ''
     sessionId = crypto.randomUUID()
     res.setHeader(
       'Set-Cookie',
       `${cookieName}=${encodeURIComponent(
         sessionId,
-      )}; Path=/; HttpOnly; SameSite=Lax`,
+      )}; Path=/; HttpOnly; SameSite=Lax${secureFlag}`,
     )
   }
   return sessionId
@@ -480,6 +488,13 @@ app.get('/api/projects/:id', async (req, res) => {
     res.status(500).json({ error: error?.message || 'Failed to load project.' })
   }
 })
+
+if (serveUi && fs.existsSync(staticDir)) {
+  app.use(express.static(staticDir))
+  app.get('*', (_req, res) => {
+    res.sendFile(path.join(staticDir, 'index.html'))
+  })
+}
 
 app.post('/api/chat', async (req, res) => {
   if (!process.env.PPLX_API_KEY) {

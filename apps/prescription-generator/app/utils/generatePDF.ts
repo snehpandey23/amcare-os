@@ -175,7 +175,7 @@ export const generatePDF = async (input: GeneratePDFInput) => {
       });
 
       const headerHeight = imgHeight + (headerTopY - textY) + 18;
-      cursorY -= headerHeight + 2;
+      cursorY -= headerHeight + 0.5;
     } else {
       input.letterheadImage = null;
     }
@@ -234,7 +234,7 @@ export const generatePDF = async (input: GeneratePDFInput) => {
       font: serif,
       color: rgb(0.2, 0.2, 0.2),
     });
-    cursorY -= 6;
+    cursorY -= 1;
   }
   page.drawLine({
     start: { x: marginX, y: cursorY },
@@ -242,7 +242,7 @@ export const generatePDF = async (input: GeneratePDFInput) => {
     thickness: 1.6,
     color: rgb(0.1, 0.1, 0.1),
   });
-  cursorY -= 12;
+  cursorY -= 8;
 
   const leftX = marginX;
   const safePatientName = sanitizeText(input.patientName || "--");

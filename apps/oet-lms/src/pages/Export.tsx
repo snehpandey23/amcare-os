@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { useAuth } from '../contexts/AuthContext'
 import { getLastTranscript, sendTranscriptToSupervisor } from '../data/dashboardData'
 
 export default function Export() {
+  const { user } = useAuth()
   const [showSuccess, setShowSuccess] = useState(false)
   const [email, setEmail] = useState('')
   const [sending, setSending] = useState(false)
@@ -23,7 +25,9 @@ export default function Export() {
     <>
       <div className="siya-dash-header">
         <div className="siya-user-greeting">Export & Share Performance</div>
-        <div className="siya-user-subtext">Send your chat transcripts and performance reports to supervisors</div>
+        <div className="siya-user-subtext">
+          Send your chat transcripts and performance reports to supervisors. Reports are sent from your account{user ? ` (${user.email})` : ''}.
+        </div>
       </div>
       <div className="siya-export-section">
         <div className="siya-export-header">📊 Export Recent Sessions</div>
