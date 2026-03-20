@@ -6,6 +6,11 @@
   "installCommand": "echo 'No install needed'",
   "redirects": [
     {
+      "source": "/mental-health-adhd",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "siya.health" }],
       "destination": "https://www.siya.health/$1",

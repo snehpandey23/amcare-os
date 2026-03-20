@@ -2,3 +2,9 @@
   # With Base directory = repo root (empty), publish must be the app subpath
   publish = "apps/siya-health"
   command = "echo 'Static site - no build required'"
+
+# Old URL → new (SEO + bookmarks)
+[[redirects]]
+  from = "/mental-health-adhd"
+  to = "/adhd-care"
+  status = 301
