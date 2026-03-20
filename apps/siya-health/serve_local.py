@@ -61,7 +61,7 @@ def main():
 
     with socketserver.TCPServer(("", port), SiyaHealthRequestHandler) as httpd:
         print(f"Siya Health — http://localhost:{port}/")
-        print("  Clean URLs work: /adhd-care, /about, /blog, …")
+        print("  Clean URLs work: /adhd-care, /about, /blog, /blog/adhd, /blog/all, …")
         print("  Ctrl+C to stop\n")
         try:
             httpd.serve_forever()

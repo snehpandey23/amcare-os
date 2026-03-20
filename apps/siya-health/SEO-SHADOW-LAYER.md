@@ -12,3 +12,15 @@
 **URLs list:** `seo-generated-urls.txt` (also reflected in `sitemap.xml`).
 
 **Quality:** Add unique FAQs and local copy when scaling; avoid thin/duplicate doorway pages.
+
+---
+
+## Blog content hub (separate from shadow pages)
+
+**Hub:** `/blog` — featured posts, category blocks, `?category=adhd|weight-loss|telehealth` scrolls to sections on the same page.
+
+**Indexable category listings (unique titles/meta):** `/blog/adhd`, `/blog/weight-loss`, `/blog/telehealth`, `/blog/all`.
+
+**New medication education posts:** Regenerate or extend with `python3 scripts/generate_medication_blog_posts.py` (outputs HTML under `blog/`).
+
+**Weight loss + general telehealth medication series:** `python3 scripts/generate_weight_telehealth_blogs.py` (content in `scripts/weight_telehealth_posts_data.py`).
