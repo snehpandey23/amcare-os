@@ -48,7 +48,7 @@ The repository root `package.json` **`build`** script runs **`npm run build --wo
 
 **Option A — recommended:** In Vercel: **Project → Settings → General → Root Directory** → **`apps/hipaa-training`**. Build command can stay **`npm run build`** (Next.js). Logs should **not** start with `amcare-os@1.0.0` / `npm run build --workspaces`.
 
-**Option B — works without changing dashboard:** At the **repository root**, **`vercel.json`** overrides the build to **`npm run build -w @amcare/hipaa-training`** so the default root-connected project only builds this app. Push that file and redeploy.
+**Option B — works without changing dashboard:** At the **repository root**, **`vercel.json`** runs **`npm run build -w @amcare/hipaa-training`** and **copies `apps/hipaa-training/.next` to `./.next`**, because Vercel’s Next.js integration expects `.next` at the repo root when the Git root is the project root.
 
 For other apps from the same repo, either set **Root Directory** to that app, or remove/override root `vercel.json` in a branch — see [Vercel monorepos](https://vercel.com/docs/monorepos).
 
