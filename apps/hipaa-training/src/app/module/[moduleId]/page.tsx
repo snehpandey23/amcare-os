@@ -1,0 +1,73 @@
+"use client";
+
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { MODULES } from "@/content/modules";
+
+export default function ModuleLearnPage() {
+  const params = useParams();
+  const moduleId = params.moduleId as string;
+  const mod = MODULES.find((m) => m.id === moduleId);
+
+  if (!mod) {
+    return (
+      <div className="p-8">
+        <p>Module not found.</p>
+        <Link href="/" className="text-teal-600">
+          Dashboard
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <div className="p-6 md:p-10">
+      <div className="mx-auto max-w-3xl">
+        <p className="text-sm text-teal-600 dark:text-teal-400">
+          {mod.outlineRef} • Module {mod.order}
+        </p>
+        <h1 className="mt-2 text-3xl font-semibold tracking-tight">{mod.title}</h1>
+
+        <section className="mt-8 rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
+          <h2 className="text-lg font-semibold">Summary</h2>
+          <p className="mt-2 leading-relaxed text-zinc-600 dark:text-zinc-400">{mod.summary}</p>
+        </section>
+
+        <section className="mt-6 rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
+          <h2 className="text-lg font-semibold">Key concepts</h2>
+          <ul className="mt-3 list-inside list-disc space-y-2 text-zinc-600 dark:text-zinc-400">
+            {mod.keyConcepts.map((c) => (
+              <li key={c.slice(0, 40)}>{c}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="mt-6 rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
+          <h2 className="text-lg font-semibold">Scenarios</h2>
+          <ul className="mt-3 space-y-3">
+            {mod.scenarios.map((s) => (
+              <li
+                key={s.slice(0, 48)}
+                className="rounded-lg border border-zinc-100 bg-zinc-50 p-4 text-sm leading-relaxed text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
+              >
+                {s}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <div className="mt-8 flex gap-3">
+          <Link
+            href={`/module/${moduleId}/quiz`}
+            className="rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700"
+          >
+            Take module quiz
+          </Link>
+          <Link href="/" className="rounded-lg border border-zinc-300 px-4 py-2 text-sm dark:border-zinc-600">
+            Back to dashboard
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
