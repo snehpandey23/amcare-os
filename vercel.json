@@ -1,4 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build -w @amcare/hipaa-training && rm -rf .next && cp -R apps/hipaa-training/.next .next"
+  "buildCommand": "npm run build -w @amcare/hipaa-training",
+  "outputDirectory": "apps/hipaa-training/.next"
 }
