@@ -42,6 +42,18 @@ Open [http://localhost:3000](http://localhost:3000).
 
 Build: `npm run build` then `npm run start`. Deploy to Vercel/Netlify like any Next.js app. For org-wide completion tracking, replace `progressStorage` with your API + DB (Supabase/SQLite/etc.).
 
+### Vercel (this monorepo)
+
+The repository root `package.json` **`build`** script runs **`npm run build --workspaces`**, which builds every package (some currently fail TypeScript checks).
+
+**Option A — recommended:** In Vercel: **Project → Settings → General → Root Directory** → **`apps/hipaa-training`**. Build command can stay **`npm run build`** (Next.js). Logs should **not** start with `amcare-os@1.0.0` / `npm run build --workspaces`.
+
+**Option B — works without changing dashboard:** At the **repository root**, **`vercel.json`** overrides the build to **`npm run build -w @amcare/hipaa-training`** so the default root-connected project only builds this app. Push that file and redeploy.
+
+For other apps from the same repo, either set **Root Directory** to that app, or remove/override root `vercel.json` in a branch — see [Vercel monorepos](https://vercel.com/docs/monorepos).
+
+Local full monorepo build remains: **`npm run build`** (all workspaces). That is unchanged by root `vercel.json` (Vercel reads `vercel.json`; local **`npm run build`** still uses `package.json`).
+
 ## Print certificate
 
 `/certificate` uses the browser print dialog (save as PDF). Text states this is an **organizational training record**, not a government credential.
