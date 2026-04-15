@@ -225,7 +225,7 @@ def header_for(kind: Kind) -> str:
 
             <p>If you are considering <strong>medically supervised weight loss</strong>, Siya Health offers provider-guided options for eligible adults—always anchored in clinical evaluation rather than trends.</p>
             <div class="cta-block blog-cta">
-              <a class="button" href="https://api.leadconnectorhq.com/widget/form/mnWpgh0IEgFvJymdZqHY" target="_blank" rel="noopener">Book a free consultation</a>
+              <a class="button" href="https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY" target="_blank" rel="noopener">Book a free consultation</a>
             </div>
 
             <h2>FAQ</h2>
@@ -340,7 +340,7 @@ def header_for(kind: Kind) -> str:
 
             <p><strong>Consult a licensed provider</strong> to determine if treatment is appropriate for you. Bring questions, medical history, and an open discussion of risks and alternatives.</p>
             <div class="cta-block blog-cta">
-              <a class="button" href="https://api.leadconnectorhq.com/widget/form/mnWpgh0IEgFvJymdZqHY" target="_blank" rel="noopener">Book a free consultation</a>
+              <a class="button" href="https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY" target="_blank" rel="noopener">Book a free consultation</a>
             </div>
 
             <h2>FAQ</h2>

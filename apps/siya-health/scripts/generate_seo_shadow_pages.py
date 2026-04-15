@@ -154,7 +154,7 @@ PRICING = """
             <h2>Transparent pricing</h2>
             <p class="lead">The comprehensive ADHD evaluation is <strong>$199</strong> one-time. Ongoing medication management is available on a monthly plan if clinically appropriate.</p>
           </div>
-          <p style="text-align:center; max-width: 560px; margin: 0 auto;"><a class="button" href="https://api.leadconnectorhq.com/widget/form/mnWpgh0IEgFvJymdZqHY" target="_blank" rel="noopener">Book ADHD evaluation online</a></p>
+          <p style="text-align:center; max-width: 560px; margin: 0 auto;"><a class="button" href="https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY" target="_blank" rel="noopener">Book ADHD evaluation online</a></p>
         </div>
       </section>"""
 
@@ -165,7 +165,7 @@ CTA_FINAL = """
             <h3>Ready for answers?</h3>
             <p>Book a virtual evaluation or take the free 2-minute screening first.</p>
             <div class="cta-band-buttons">
-              <a class="button" href="https://api.leadconnectorhq.com/widget/form/mnWpgh0IEgFvJymdZqHY" target="_blank" rel="noopener">Book evaluation ($199)</a>
+              <a class="button" href="https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY" target="_blank" rel="noopener">Book evaluation ($199)</a>
               <a class="button secondary" href="/adhd-screening">Free screening</a>
             </div>
           </div>
@@ -449,7 +449,7 @@ def render_page(spec: dict) -> str:
             <h1>{spec["h1"]}</h1>
             <p class="hero-merged-lead">{hero_lead}</p>
             <div class="hero-ctas hero-ctas-adhd-primary">
-              <a class="button" href="https://api.leadconnectorhq.com/widget/form/mnWpgh0IEgFvJymdZqHY" target="_blank" rel="noopener">Book ADHD evaluation</a>
+              <a class="button" href="https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY" target="_blank" rel="noopener">Book ADHD evaluation</a>
               <p class="hero-secondary-cta"><a href="/adhd-screening">Free 2-minute screening</a></p>
             </div>
           </div>
