@@ -1,10 +1,11 @@
 /**
- * ASRS v1.1 6-Question ADHD Screener
- * Step-by-step flow with instant results and CTA to book discovery call.
+ * Siya screening flow: topic chooser, then ASRS v1.1 6-Question ADHD Screener
+ * Deep link: /adhd-screening?adhd=1 or #adhd → skip chooser, show ADHD intro
  */
 (function () {
   'use strict';
 
+  var STEP_CHOOSE = -1;
   var STEP_INTRO = 0;
   var STEP_RESULTS = 7;
   var THRESHOLD = 4; // 4+ Often/Very Often = positive screen
@@ -13,12 +14,19 @@
   if (!container) return;
 
   var steps = container.querySelectorAll('.asrs-step');
-  var currentStep = 0;
+  var currentStep = STEP_CHOOSE;
   var answers = [null, null, null, null, null, null];
+
+  function shouldSkipChooser() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('adhd') === '1' || params.get('path') === 'adhd') return true;
+    if (window.location.hash === '#adhd') return true;
+    return false;
+  }
 
   function showStep(stepIndex) {
     currentStep = stepIndex;
-    steps.forEach(function (step, i) {
+    steps.forEach(function (step) {
       var stepNum = parseInt(step.getAttribute('data-step'), 10);
       if (stepNum === stepIndex) {
         step.classList.add('asrs-step-active');
@@ -71,7 +79,7 @@
   function goNext() {
     if (currentStep >= 0 && currentStep < 6) {
       var val = getSelectedValue(currentStep);
-      if (val === null && currentStep > 0) return; // require answer except on intro
+      if (val === null && currentStep > 0) return;
       if (currentStep > 0) answers[currentStep - 1] = val;
       showStep(currentStep + 1);
     } else if (currentStep === 6) {
@@ -85,10 +93,34 @@
   function goBack() {
     if (currentStep > 1) {
       showStep(currentStep - 1);
+    } else if (currentStep === 1) {
+      showStep(STEP_INTRO);
+    }
+  }
+
+  function applyInitialStep() {
+    if (shouldSkipChooser()) {
+      showStep(STEP_INTRO);
+    } else {
+      showStep(STEP_CHOOSE);
     }
   }
 
   function bindEvents() {
+    var chooseAdhd = document.getElementById('asrs-choose-adhd');
+    if (chooseAdhd) {
+      chooseAdhd.addEventListener('click', function () {
+        showStep(STEP_INTRO);
+      });
+    }
+
+    var backToChoose = document.getElementById('asrs-back-to-choose');
+    if (backToChoose) {
+      backToChoose.addEventListener('click', function () {
+        showStep(STEP_CHOOSE);
+      });
+    }
+
     var startBtn = document.getElementById('asrs-start-btn');
     if (startBtn) startBtn.addEventListener('click', function () { showStep(1); });
 
@@ -101,7 +133,6 @@
       })(i);
     }
 
-    // Allow Enter to advance when a radio is selected
     container.querySelectorAll('.asrs-options input[type="radio"]').forEach(function (radio) {
       radio.addEventListener('change', function () {
         if (currentStep >= 1 && currentStep <= 6) {
@@ -113,6 +144,7 @@
   }
 
   function init() {
+    applyInitialStep();
     bindEvents();
   }
 

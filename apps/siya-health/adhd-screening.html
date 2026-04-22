@@ -14,10 +14,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="index, follow" />
-    <title>Free ADHD Screening | Siya Health</title>
-    <meta name="description" content="Take a quick 2-minute ADHD screening based on the WHO ASRS v1.1. Get instant results and book a free discovery call with a licensed provider." />
+    <title>Start screening | Siya Health</title>
+    <meta name="description" content="Tell us what you need: free 2-minute ADHD screening (ASRS), medical weight loss, or telehealth. Guided next steps for Texas-area care." />
     <link rel="canonical" href="https://siya.health/adhd-screening" />
-    <meta property="og:title" content="Free ADHD Screening | Siya Health" />
+    <meta property="og:title" content="Start screening | Siya Health" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -62,16 +62,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <section class="section asrs-screener-section">
         <div class="container">
           <div class="asrs-screener" id="asrs-screener">
-            <!-- Step 0: Intro -->
-            <div class="asrs-step asrs-step-active" data-step="0" role="region" aria-label="Introduction">
+            <!-- Step -1: What are you here for? -->
+            <div class="asrs-step asrs-step-active" data-step="-1" role="region" aria-label="Choose a topic">
+              <div class="asrs-intro asrs-choose">
+                <h1>What are you looking for help with?</h1>
+                <p class="asrs-intro-lead">Choose a path. ADHD screening is a short questionnaire; for other services we&rsquo;ll take you to the right page on our site.</p>
+                <ul class="asrs-interest-list">
+                  <li>
+                    <button type="button" class="asrs-interest-btn" id="asrs-choose-adhd" data-gtm="screening-choose-adhd">
+                      <span class="asrs-interest-title">Free 2-minute ADHD screening</span>
+                      <span class="asrs-interest-desc">WHO ASRS questionnaire—instant, private results.</span>
+                    </button>
+                  </li>
+                  <li>
+                    <a class="asrs-interest-btn asrs-interest-link" href="/weight-loss-metabolic-health" data-gtm="screening-choose-weight">
+                      <span class="asrs-interest-title">Weight loss</span>
+                      <span class="asrs-interest-desc">Medical weight management and GLP-1 care with provider oversight.</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="asrs-interest-btn asrs-interest-link" href="/telehealth" data-gtm="screening-choose-telehealth">
+                      <span class="asrs-interest-title">Telehealth</span>
+                      <span class="asrs-interest-desc">Virtual care for a range of conditions and follow-ups.</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Step 0: ADHD / ASRS Intro -->
+            <div class="asrs-step" data-step="0" role="region" aria-label="ADHD screening introduction" hidden>
               <div class="asrs-intro">
                 <h1>Free ADHD Screening</h1>
                 <p class="asrs-intro-lead">This screening uses the WHO Adult ADHD Self-Report Scale (ASRS v1.1), a validated tool used by clinicians worldwide. It takes about 2 minutes.</p>
                 <p>Please think about how you have felt and conducted yourself over the past 6 months when answering.</p>
                 <p class="asrs-intro-note">This is a screening tool only—not a diagnosis. A licensed provider can provide a full evaluation.</p>
-                <div class="asrs-nav">
+                <div class="asrs-nav asrs-nav-intro">
                   <button type="button" class="button" id="asrs-start-btn">Start screening</button>
                 </div>
+                <p class="asrs-back-to-choose-wrap"><button type="button" class="asrs-text-back" id="asrs-back-to-choose">← Choose a different topic</button></p>
               </div>
             </div>
 
@@ -88,6 +117,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <label><input type="radio" name="q1" value="1" /> Very Often</label>
               </fieldset>
               <div class="asrs-nav">
+                <button type="button" class="button secondary" id="asrs-back-1">Back</button>
                 <button type="button" class="button" id="asrs-next-1">Next</button>
               </div>
             </div>
