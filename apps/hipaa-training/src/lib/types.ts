@@ -24,6 +24,11 @@ export interface Question {
   roles?: WorkforceRole[];
 }
 
+export interface LessonSection {
+  title: string;
+  paragraphs: string[];
+}
+
 export interface CourseModule {
   id: string;
   title: string;
@@ -32,6 +37,10 @@ export interface CourseModule {
   summary: string;
   keyConcepts: string[];
   scenarios: string[];
+  /** Deeper lesson narrative (headings + paragraphs) aligned to the official test. */
+  lessonSections?: LessonSection[];
+  /** Short bullets: what the module quiz is checking you understood. */
+  quizFocus?: string[];
   outlineRef: string;
   /** Empty = all roles */
   roles?: WorkforceRole[];
@@ -50,6 +59,8 @@ export interface ProgressState {
   version: string;
   courseVersion: string;
   role: WorkforceRole;
+  /** Shown on certificate and reports; stored locally only. */
+  learnerName?: string;
   startedAt: number;
   updatedAt: number;
   secondsInCourse: number;

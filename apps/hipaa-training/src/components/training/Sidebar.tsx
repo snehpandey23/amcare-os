@@ -4,6 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { CourseModule } from "@/lib/types";
 import type { ProgressState } from "@/lib/types";
+import { useAuth } from "@/context/AuthContext";
+import { isTrainingAuthRequired } from "@/lib/trainingConfig";
 
 export function Sidebar({
   modules,
@@ -12,6 +14,7 @@ export function Sidebar({
   modules: CourseModule[];
   progress: ProgressState | null;
 }) {
+  const { user, logout } = useAuth();
   const path = usePathname();
   const done = new Set(progress?.modulesCompleted ?? []);
 
@@ -32,6 +35,19 @@ export function Sidebar({
           />
         </div>
         <p className="mt-1 text-xs text-zinc-500">{pct}% modules completed</p>
+        {isTrainingAuthRequired() && user ? (
+          <div className="mt-3 border-t border-zinc-200 pt-3 text-xs dark:border-zinc-800">
+            <p className="truncate font-medium text-zinc-800 dark:text-zinc-200">{user.name || user.email}</p>
+            <p className="truncate text-zinc-500">{user.email}</p>
+            <button
+              type="button"
+              onClick={() => logout()}
+              className="mt-2 text-left text-teal-700 hover:underline dark:text-teal-400"
+            >
+              Sign out
+            </button>
+          </div>
+        ) : null}
       </div>
       <nav className="flex-1 overflow-y-auto p-2">
         <ul className="space-y-0.5 text-sm">

@@ -65,19 +65,46 @@ export function buildFinalSummary(attempts: QuizAttemptRecord[]): FinalSummary {
   return { percent, strengths, weaknesses, readiness };
 }
 
-export function explainResult(
-  question: Question,
-  selectedKey: string
-): { correct: boolean; headline: string; detail: string } {
+export function correctOptionLabel(question: Question): string {
+  const opt = question.options.find((o) => o.key === question.correctKey);
+  return opt ? `${opt.key.toUpperCase()}. ${opt.text}` : question.correctKey;
+}
+
+export function selectedOptionLabel(question: Question, selectedKey: string): string {
+  const opt = question.options.find((o) => o.key === selectedKey);
+  return opt ? `${opt.key.toUpperCase()}. ${opt.text}` : selectedKey;
+}
+
+export type QuizFeedback =
+  | { correct: true; headline: string; teaching: string }
+  | {
+      correct: false;
+      headline: string;
+      correctAnswer: string;
+      yourAnswer: string;
+      whyNot?: string;
+      teaching: string;
+    };
+
+export function explainResult(question: Question, selectedKey: string): QuizFeedback {
   const correct = selectedKey === question.correctKey;
   const wrongHint = question.distractorHints?.[selectedKey];
-  const detail = correct
-    ? question.explanation
-    : `${question.explanation}${wrongHint ? ` **Why not your choice:** ${wrongHint}` : ""}`;
+
+  if (correct) {
+    return {
+      correct: true,
+      headline: "Correct",
+      teaching: question.explanation,
+    };
+  }
+
   return {
-    correct,
-    headline: correct ? "Correct" : "Not quite — review the rationale",
-    detail,
+    correct: false,
+    headline: "Incorrect — study the correct answer, then continue",
+    correctAnswer: correctOptionLabel(question),
+    yourAnswer: selectedOptionLabel(question, selectedKey),
+    ...(wrongHint ? { whyNot: wrongHint } : {}),
+    teaching: question.explanation,
   };
 }
 

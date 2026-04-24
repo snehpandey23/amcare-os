@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AuthProvider } from "@/context/AuthContext";
 import ClientShell from "@/components/training/ClientShell";
 
 export const metadata: Metadata = {
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen antialiased">
-        <ClientShell>{children}</ClientShell>
+        <AuthProvider>
+          <ClientShell>{children}</ClientShell>
+        </AuthProvider>
       </body>
     </html>
   );

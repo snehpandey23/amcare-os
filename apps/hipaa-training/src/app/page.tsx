@@ -1,13 +1,19 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { getModulesForRole } from "@/content/modules";
 import { useClientProgress } from "@/hooks/useClientProgress";
 import { RolePicker } from "@/components/training/RolePicker";
 import type { WorkforceRole } from "@/lib/types";
 
 export default function DashboardPage() {
-  const { progress, updateRole, reset } = useClientProgress();
+  const { progress, updateRole, updateLearnerName, reset } = useClientProgress();
+  const [nameDraft, setNameDraft] = useState("");
+
+  useEffect(() => {
+    setNameDraft(progress?.learnerName ?? "");
+  }, [progress?.learnerName]);
   const role = progress?.role ?? "other";
   const modules = getModulesForRole(role);
   const done = new Set(progress?.modulesCompleted ?? []);
@@ -29,6 +35,33 @@ export default function DashboardPage() {
         </p>
 
         <section className="mt-8 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
+          <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">Your name (for certificate)</h2>
+          <p className="mt-1 text-sm text-zinc-500">
+            Stored only in this browser. Appears on the printable certificate after you complete the final assessment.
+          </p>
+          <div className="mt-3 flex flex-wrap items-end gap-2">
+            <label className="block min-w-[200px] flex-1">
+              <span className="sr-only">Full name</span>
+              <input
+                type="text"
+                autoComplete="name"
+                placeholder="e.g., Jordan Lee, RN"
+                value={nameDraft}
+                onChange={(e) => setNameDraft(e.target.value)}
+                className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-600 dark:bg-zinc-950"
+              />
+            </label>
+            <button
+              type="button"
+              onClick={() => updateLearnerName(nameDraft)}
+              className="rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700"
+            >
+              Save name
+            </button>
+          </div>
+        </section>
+
+        <section className="mt-6 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
           <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">Your role</h2>
           <p className="mt-1 text-sm text-zinc-500">
             Tailors which modules appear (e.g., administrative simplification for admin/clinical leadership). Content
@@ -98,7 +131,9 @@ export default function DashboardPage() {
           <button
             type="button"
             onClick={() => {
-              if (confirm("Reset all local progress on this browser?")) reset();
+              if (confirm("Reset all progress? This clears this account’s training data on the server if you are signed in.")) {
+                void reset();
+              }
             }}
             className="rounded-lg border border-zinc-300 px-4 py-2 text-sm text-zinc-600 hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-400 dark:hover:bg-zinc-800"
           >

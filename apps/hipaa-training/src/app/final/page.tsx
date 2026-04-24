@@ -3,17 +3,18 @@
 import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
 import { getModulesForRole } from "@/content/modules";
+import { topicLabel } from "@/content/topicLabels";
 import { getQuestionById } from "@/content/questionBank";
-import { buildFinalExam, evaluateAnswer, recordToAttempt } from "@/lib/quizEngine";
+import { buildFinalExam, recordToAttempt } from "@/lib/quizEngine";
 import { buildFinalSummary, explainResult } from "@/lib/scoring";
 import type { Question, QuizAttemptRecord } from "@/lib/types";
 import { useClientProgress } from "@/hooks/useClientProgress";
-import { updateFinalExam } from "@/lib/progressStorage";
+import { QuizFeedbackPanel } from "@/components/training/QuizFeedbackPanel";
 
 type Phase = "answer" | "feedback";
 
 export default function FinalExamPage() {
-  const { progress, refresh } = useClientProgress();
+  const { progress, refresh, afterFinalExam } = useClientProgress();
   const role = progress?.role ?? "other";
 
   const moduleIds = useMemo(() => getModulesForRole(role).map((m) => m.id), [role]);
@@ -57,8 +58,8 @@ export default function FinalExamPage() {
     setSelected(null);
     if (idx + 1 >= queue.length) {
       const summary = buildFinalSummary(attemptsRef.current);
-      updateFinalExam(attemptsRef.current, summary.readiness);
-      refresh();
+      afterFinalExam(attemptsRef.current, summary.readiness);
+      void refresh();
       setFinished(true);
       return;
     }
@@ -78,13 +79,21 @@ export default function FinalExamPage() {
           <div className="rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
             <h2 className="font-semibold text-teal-700 dark:text-teal-400">Strengths</h2>
             <ul className="mt-2 list-inside list-disc text-sm text-zinc-600 dark:text-zinc-400">
-              {summary.strengths.length ? summary.strengths.map((s) => <li key={s.tag}>{s.tag}</li>) : <li>—</li>}
+              {summary.strengths.length ? (
+                summary.strengths.map((s) => <li key={s.tag}>{topicLabel(s.tag)}</li>)
+              ) : (
+                <li>—</li>
+              )}
             </ul>
           </div>
           <div className="rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
             <h2 className="font-semibold text-amber-700 dark:text-amber-400">Weak areas</h2>
             <ul className="mt-2 list-inside list-disc text-sm text-zinc-600 dark:text-zinc-400">
-              {summary.weaknesses.length ? summary.weaknesses.map((s) => <li key={s.tag}>{s.tag}</li>) : <li>—</li>}
+              {summary.weaknesses.length ? (
+                summary.weaknesses.map((s) => <li key={s.tag}>{topicLabel(s.tag)}</li>)
+              ) : (
+                <li>—</li>
+              )}
             </ul>
           </div>
         </div>
@@ -125,22 +134,31 @@ export default function FinalExamPage() {
           <p className="text-xs text-teal-600 dark:text-teal-400">{current.sourceRef}</p>
           <p className="mt-2 text-lg font-medium leading-snug">{current.prompt}</p>
           <div className="mt-4 space-y-2">
-            {current.options.map((opt) => (
-              <button
-                key={opt.key}
-                type="button"
-                disabled={phase !== "answer"}
-                onClick={() => phase === "answer" && setSelected(opt.key)}
-                className={`flex w-full rounded-xl border px-4 py-3 text-left text-sm ${
-                  selected === opt.key
-                    ? "border-teal-600 bg-teal-50 dark:border-teal-500 dark:bg-teal-950/40"
-                    : "border-zinc-200 dark:border-zinc-700"
-                }`}
-              >
-                <span className="mr-3 font-mono text-xs text-zinc-400">{opt.key}.</span>
-                {opt.text}
-              </button>
-            ))}
+            {current.options.map((opt) => {
+              const isCorrect = opt.key === current.correctKey;
+              const isSelected = selected === opt.key;
+              let ring = "border-zinc-200 dark:border-zinc-700";
+              if (phase === "feedback") {
+                if (isCorrect) ring = "border-emerald-600 bg-emerald-50 dark:border-emerald-500 dark:bg-emerald-950/40";
+                else if (isSelected && !isCorrect)
+                  ring = "border-red-500 bg-red-50 dark:border-red-500 dark:bg-red-950/30";
+                else ring = "border-zinc-200 opacity-70 dark:border-zinc-700";
+              } else if (isSelected) {
+                ring = "border-teal-600 bg-teal-50 dark:border-teal-500 dark:bg-teal-950/40";
+              }
+              return (
+                <button
+                  key={opt.key}
+                  type="button"
+                  disabled={phase !== "answer"}
+                  onClick={() => phase === "answer" && setSelected(opt.key)}
+                  className={`flex w-full rounded-xl border px-4 py-3 text-left text-sm ${ring}`}
+                >
+                  <span className="mr-3 font-mono text-xs text-zinc-400">{opt.key}.</span>
+                  {opt.text}
+                </button>
+              );
+            })}
           </div>
           {phase === "answer" ? (
             <button
@@ -152,13 +170,7 @@ export default function FinalExamPage() {
               Submit
             </button>
           ) : feedback ? (
-            <div className="mt-6 rounded-xl border border-zinc-200 p-4 text-sm dark:border-zinc-800">
-              <p className="font-semibold">{feedback.headline}</p>
-              <p className="mt-2 whitespace-pre-wrap">{feedback.detail}</p>
-              <button type="button" onClick={goNext} className="mt-4 rounded-lg bg-zinc-900 px-4 py-2 text-white">
-                Next
-              </button>
-            </div>
+            <QuizFeedbackPanel feedback={feedback} continueLabel="Next question" onContinue={goNext} />
           ) : null}
         </div>
       </div>

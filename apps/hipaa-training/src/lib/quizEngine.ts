@@ -29,21 +29,13 @@ export function buildModuleQuizQueue(args: {
   seed: number;
 }): ModuleQuizPlan {
   const pool = getQuestionsForModule(args.moduleId, args.role);
-  let ordered = shuffle(pool, args.seed);
-
-  const weakTags = Object.entries(args.topicAccuracy)
-    .filter(([, acc]) => args.topicAccuracy && acc < 0.55 && acc > 0)
-    .map(([t]) => t);
-
-  const extras: Question[] = [];
-  for (const tag of weakTags) {
-    const add = pool.filter((q) => q.tags.includes(tag) && q.difficulty <= 2);
-    extras.push(...shuffle(add, args.seed + tag.length).slice(0, 2));
-  }
+  const ordered = shuffle(pool, args.seed);
 
   const seen = new Set<string>();
   const finalList: Question[] = [];
-  const strong = Object.values(args.topicAccuracy).length && Object.values(args.topicAccuracy).every((a) => a >= 0.85);
+  const strong =
+    Object.values(args.topicAccuracy).length > 0 &&
+    Object.values(args.topicAccuracy).every((a) => a >= 0.85);
 
   let skipRoll = args.seed % 100;
   for (const q of ordered) {
@@ -53,33 +45,8 @@ export function buildModuleQuizQueue(args: {
     seen.add(q.id);
     finalList.push(q);
   }
-  for (const q of extras) {
-    if (seen.has(q.id)) continue;
-    seen.add(q.id);
-    finalList.push(q);
-  }
 
   return { orderedIds: finalList.map((q) => q.id) };
-}
-
-export function pickReinforcementQuestion(args: {
-  moduleId: string;
-  wrongQuestion: Question;
-  usedIds: Set<string>;
-  role?: WorkforceRole;
-}): Question | null {
-  const pool = getQuestionsForModule(args.moduleId, args.role).filter(
-    (q) => !args.usedIds.has(q.id) && q.difficulty <= 2
-  );
-  const tag = primaryTag(args.wrongQuestion);
-  const tagged = pool.filter((q) => q.tags.includes(tag));
-  const pickFrom = tagged.length ? tagged : pool;
-  if (!pickFrom.length) return null;
-  const h =
-    [...args.wrongQuestion.id].reduce((acc, ch) => acc + ch.charCodeAt(0), 0) +
-    args.usedIds.size;
-  const choice = pickFrom[h % pickFrom.length];
-  return choice ?? null;
 }
 
 export function evaluateAnswer(question: Question, selectedKey: string): boolean {
