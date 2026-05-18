@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { MODULES } from "@/content/modules";
+import { getReferenceDocument } from "@/content/referenceDocuments";
 
 export default function ModuleLearnPage() {
   const params = useParams();
@@ -55,6 +56,26 @@ export default function ModuleLearnPage() {
                       )}
                     </p>
                   ))}
+                  {sec.readMoreSlugs?.length ? (
+                    <div className="rounded-xl border border-teal-100 bg-teal-50/40 px-4 py-3 dark:border-teal-900/60 dark:bg-teal-950/25">
+                      <p className="text-xs font-medium uppercase tracking-wide text-teal-800 dark:text-teal-200/90">
+                        Read more here
+                      </p>
+                      <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+                        {sec.readMoreSlugs.map((slug) => {
+                          const doc = getReferenceDocument(slug);
+                          if (!doc) return null;
+                          return (
+                            <li key={slug}>
+                              <Link href={`/resources/${slug}`} className="text-teal-700 underline underline-offset-2 hover:text-teal-900 dark:text-teal-400 dark:hover:text-teal-300">
+                                {doc.shortLabel}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             ))}

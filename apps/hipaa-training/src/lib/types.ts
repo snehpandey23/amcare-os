@@ -27,6 +27,8 @@ export interface Question {
 export interface LessonSection {
   title: string;
   paragraphs: string[];
+  /** Internal `/resources/[slug]` pages that link through to official documents */
+  readMoreSlugs?: string[];
 }
 
 export interface CourseModule {

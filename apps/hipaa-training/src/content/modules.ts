@@ -32,6 +32,7 @@ export const MODULES: CourseModule[] = [
     lessonSections: [
       {
         title: "Why this training matters",
+        readMoreSlugs: ["hhs-hipaa-overview"],
         paragraphs: [
           "Patients and workforce members need to understand that health information is regulated for good reasons: continuity of care, billing, public health, and trust all depend on responsible handling. When people believe protections are weak, they may avoid care, omit symptoms, or resist data sharing that could improve outcomes.",
           "Your official test ties **lower perceived protection** to **less support for EHRs and health information exchange**, and **more likelihood of withholding information** from a provider. Keep that causal pattern in mind—it appears directly on the exam.",
@@ -39,6 +40,7 @@ export const MODULES: CourseModule[] = [
       },
       {
         title: "Core rules you will see on the quiz",
+        readMoreSlugs: ["hhs-privacy-rule", "hhs-security-rule"],
         paragraphs: [
           "The Privacy Rule limits uses and disclosures of PHI and creates rights for individuals (access, amendment, accounting in defined circumstances, notice, and more). The Security Rule applies to **electronic** PHI and requires risk-based safeguards. Breach notification requires assessment and, when required, timely notice to individuals and often HHS (and sometimes media) depending on scale and facts.",
           "The **Omnibus Rule** is the regulatory package that, among other things, made **business associates** directly accountable under the Security Rule and Breach Notification Rule in line with HITECH. Exam items often use “Omnibus Rule” as the label for that extension, distinct from naming only the statute.",
@@ -46,6 +48,7 @@ export const MODULES: CourseModule[] = [
       },
       {
         title: "Enforcement at a glance",
+        readMoreSlugs: ["hhs-enforcement"],
         paragraphs: [
           "**OCR** within HHS is the agency identified on your test as responsible for **enforcement of HIPAA** in the civil context covered by your materials. Criminal enforcement may involve other components (e.g., DOJ) but is not the answer the test keys for “agency responsible for enforcement” in the standard item.",
         ],
@@ -83,6 +86,7 @@ export const MODULES: CourseModule[] = [
     lessonSections: [
       {
         title: "Covered entities in plain language",
+        readMoreSlugs: ["hhs-privacy-faq-definitions"],
         paragraphs: [
           "Your test bundles **health plans**, **health care clearinghouses** (e.g., billing/repricing services that meet the definition), and **provider entities** that transmit health information electronically in connection with transactions the standards cover. “If you bill electronically, you are not subject to HIPAA” is **False** in your keyed items—electronic transactions are often how provider CE status is triggered.",
           "Anyone who is **not** a CE or BA under the definitions generally **does not** need to comply with HIPAA—though other laws (state privacy, FTC, employment law) may still apply.",
@@ -90,6 +94,7 @@ export const MODULES: CourseModule[] = [
       },
       {
         title: "Business associates vs incidental access",
+        readMoreSlugs: ["hhs-business-associate-guidance"],
         paragraphs: [
           "A BA relationship exists when a person or entity **creates, receives, maintains, or transmits PHI** for a function or activity regulated under the Privacy Rule and performed **on behalf of** the CE (or another BA). Typical examples in your materials: utilization review for a hospital, legal services involving PHI for a health plan, or a TPA handling claims.",
           "By contrast, a **janitorial service** whose **only** exposure to PHI is **incidental** (e.g., passing through a clinic) is the stock **“not a BA”** example on your test. The exam is testing whether you can separate **incidental presence** from **performing regulated functions with PHI**.",
@@ -97,6 +102,7 @@ export const MODULES: CourseModule[] = [
       },
       {
         title: "Affiliated covered entity vs OHCA vs hybrid (study the contrast)",
+        readMoreSlugs: ["hhs-privacy-faq-definitions", "ecfr-45-cfr-164"],
         paragraphs: [
           "**Affiliated covered entity (ACE):** Separate legal entities that are **under common ownership or control** may, if they meet regulatory requirements, designate themselves as a **single covered entity** for specified HIPAA purposes. Your exam item on the difference between an ACE and an OHCA keys **common control or ownership** as the conceptual hinge—not geography, size, or academic ties.",
           "**Organized health care arrangement (OHCA):** A relationship in which **multiple CEs** participate in **joint activities** (for example, a hospital and its medical staff foundation arranging care). OHCAs have specific rules for how PHI may be shared among participants for certain operations—your Manual defines the arrangement; do not confuse it with ACE.",
@@ -106,6 +112,7 @@ export const MODULES: CourseModule[] = [
       },
       {
         title: "Business associate agreements",
+        readMoreSlugs: ["hhs-business-associate-guidance"],
         paragraphs: [
           "Before disclosing PHI to a BA, CEs generally need **satisfactory assurances** in writing (BAA) covering permitted uses and disclosures, safeguards, and how the BA will handle breaches and requests, consistent with your packet’s teaching. Your official test often uses **“all of the above”** when listing elements together.",
           "Your materials also note **limited situations** where a BAA is **not** always required—the exam marks **True** for “not always required.” Confirm edge cases with your compliance officer and Manual.",
@@ -138,6 +145,7 @@ export const MODULES: CourseModule[] = [
     lessonSections: [
       {
         title: "What counts as PHI",
+        readMoreSlugs: ["hhs-privacy-laws-regulations"],
         paragraphs: [
           "PHI is information that **identifies an individual** and relates to **past, present, or future** physical or mental health, provision of health care, or **payment** for care—held or transmitted by a CE (or created/received by a BA on behalf of a CE). The medium does not matter for PHI status; **ePHI** is PHI in electronic form and triggers Security Rule safeguards.",
           "Your test uses **payment information** tied to health context as a classic **PHI** example, while **employment records** in the employer role and many **education records** under FERPA are **not** PHI in the way the question frames them.",
@@ -145,6 +153,7 @@ export const MODULES: CourseModule[] = [
       },
       {
         title: "De-identification and limited data sets",
+        readMoreSlugs: ["hhs-privacy-laws-regulations"],
         paragraphs: [
           "**Safe harbor** removes specified identifiers and has no actual knowledge that residual information could identify the individual; **expert determination** applies statistical or scientific methods. Once properly de-identified under the rule, information is **not PHI** for HIPAA purposes as described in your training.",
           "A **limited data set** may contain dates and certain geographic details but not direct identifiers enumerated in the rule; it may be used only for **research, public health, or health care operations** with a **data use agreement**—your exam uses the comprehensive permitted-purpose answer.",
@@ -178,6 +187,7 @@ export const MODULES: CourseModule[] = [
     lessonSections: [
       {
         title: "Permitted paths and minimum necessary",
+        readMoreSlugs: ["hhs-privacy-rule"],
         paragraphs: [
           "Most day-to-day sharing for **treatment, payment, and health care operations** is built into the Privacy Rule framework without requiring a separate authorization each time, subject to policy and safeguards. **Minimum necessary** means uses, disclosures, and requests should be limited to the **minimum necessary** to accomplish the purpose—**except** where the rule says otherwise (your exam lists treatment, disclosure to the individual, and other carved-outs).",
           "**Incidental** disclosures that are a limited by-product of an otherwise permitted disclosure, with **reasonable safeguards**, may be permitted. The exam contrasts a controlled clinical environment with negligent public discussion.",
@@ -185,6 +195,7 @@ export const MODULES: CourseModule[] = [
       },
       {
         title: "Operational compliance",
+        readMoreSlugs: ["hhs-privacy-rule"],
         paragraphs: [
           "CEs need **policies and procedures**, **workforce training**, **sanctions** for violations, a **complaint process**, and documentation appropriate to their size and complexity. Your test may present a comprehensive checklist answer for administrative requirements.",
           "**Federal law** generally preempts **contrary state law** unless an exception applies or state law is **more protective** of privacy—the exact wording on your True/False item should match your Manual.",
@@ -218,6 +229,7 @@ export const MODULES: CourseModule[] = [
     lessonSections: [
       {
         title: "Access, DRS, and fees",
+        readMoreSlugs: ["hhs-individual-access-guidance"],
         paragraphs: [
           "The **right of access** allows individuals to inspect and obtain a copy of PHI in the **designated record set**, with exceptions for psychotherapy notes in some contexts and other limits your Manual details. Your exam pairs **what the individual may receive** with **what the provider may require** (e.g., reasonable formats, timelines, and **reasonable cost-based fees** where permitted).",
           "False statements about the DRS often test whether you know **what belongs** in the record set versus business records held only for billing legal defense in some frames—use your keyed rationale.",
@@ -225,6 +237,7 @@ export const MODULES: CourseModule[] = [
       },
       {
         title: "§164.522 restriction requests (packet framework)",
+        readMoreSlugs: ["hhs-privacy-rule", "ecfr-45-cfr-164"],
         paragraphs: [
           "Individuals may **request** restrictions on uses or disclosures of PHI for treatment, payment, or health care operations, and restrictions on disclosures to family involved in care. A CE **must agree** to a requested restriction when the situation matches the regulatory conditions your Manual teaches—**except** where the rule requires otherwise (for example, **emergency treatment** scenarios in your materials).",
           "Do not over-read restrictions as unlimited opt-out from all treatment communications; the exam tests the **conditional** nature of the right.",
@@ -232,6 +245,7 @@ export const MODULES: CourseModule[] = [
       },
       {
         title: "Notice, amendment, accounting, complaints",
+        readMoreSlugs: ["hhs-privacy-rule"],
         paragraphs: [
           "The **NPP** must describe uses/disclosures, rights, duties, and how to complain, and be available as your policies require (first delivery of service, posting, etc., per your checklist). **Amendment** requests follow a defined process with denials possible for specified reasons. **Accounting** has **exceptions** your test lists comprehensively (e.g., disclosures for TPO to or from the individual). Individuals may **complain** to the CE or to **OCR**.",
         ],
@@ -263,12 +277,14 @@ export const MODULES: CourseModule[] = [
     lessonSections: [
       {
         title: "CIA and risk",
+        readMoreSlugs: ["hhs-security-rule"],
         paragraphs: [
           "**Confidentiality, integrity, and availability** frame Security Rule goals. **Risk analysis** identifies risks to ePHI; organizations implement measures to reduce risks to reasonable levels and **document** decisions. When environments change (new systems, telehealth expansion, vendor swaps), revisit risk.",
         ],
       },
       {
         title: "Flexibility and state law",
+        readMoreSlugs: ["hhs-security-rule"],
         paragraphs: [
           "The Security Rule is **technology-neutral** and **scalable**—a small practice and a large health system will document different controls, but both must comply with applicable standards. Your exam’s preemption item mirrors Privacy Rule style: federal law controls unless an exception or more stringent state law applies as described.",
         ],
@@ -300,12 +316,14 @@ export const MODULES: CourseModule[] = [
     lessonSections: [
       {
         title: "Administrative safeguards",
+        readMoreSlugs: ["hhs-security-guidance"],
         paragraphs: [
           "Administrative safeguards are the **policies and procedures** and workforce training that govern how ePHI is protected: security management process, assigned security responsibility, workforce security, information access management, security awareness, contingency planning, evaluation, and BA oversight where applicable. **Security incidents** must be addressed through defined procedures.",
         ],
       },
       {
         title: "Physical and technical safeguards",
+        readMoreSlugs: ["hhs-security-guidance"],
         paragraphs: [
           "**Physical** safeguards control **facility access** and workstation/device security—your exam may ask which facility provisions belong in the category. **Technical** safeguards include **access control, audit controls, integrity, and transmission security** themes per your Manual.",
           "**Addressable** specifications must be analyzed: if you do not implement, document why an alternative is reasonable or why it is not needed; do not treat “addressable” as “ignore.” **Unique user IDs** are a standard exam point.",
@@ -338,6 +356,7 @@ export const MODULES: CourseModule[] = [
     lessonSections: [
       {
         title: "When notification is required",
+        readMoreSlugs: ["hhs-breach-notification"],
         paragraphs: [
           "Start from the regulatory definition: an **impermissible acquisition, access, use, or disclosure** of PHI that **compromises security or privacy**, unless an **exception** applies or the CE/BA demonstrates **low probability** of compromise through a required risk assessment where applicable.",
           "Your exam marks **False** for blanket statements like “notification is required **regardless** of circumstances”—context and exceptions matter.",
@@ -345,6 +364,7 @@ export const MODULES: CourseModule[] = [
       },
       {
         title: "Who gets notice and when",
+        readMoreSlugs: ["hhs-breach-notification"],
         paragraphs: [
           "**Individuals** generally receive notice without unreasonable delay (your materials cite **no later than 60 days** in common teaching scenarios). **HHS** notification depends on how many individuals are affected and other facts; **prominent media** may be required only at higher thresholds. Your test asks which party is notified **only in certain cases**—study the keyed distinction between individuals, HHS, and media.",
           "**Burden of proof** language on your exam reflects that regulated entities must **demonstrate** that notification was made or that an exception applied—shifting responsibility to document the analysis.",
@@ -376,12 +396,14 @@ export const MODULES: CourseModule[] = [
     lessonSections: [
       {
         title: "OCR processes",
+        readMoreSlugs: ["hhs-enforcement"],
         paragraphs: [
           "OCR **receives and reviews** complaints but follows **prioritization** policies—not every allegation becomes a formal investigation. During investigations, OCR may communicate with **complainants, CEs/BAs, and witnesses** as appropriate. **Compliance reviews** may be initiated through multiple pathways your exam lists with one “does not apply” distractor.",
         ],
       },
       {
         title: "Audits and penalties",
+        readMoreSlugs: ["hhs-enforcement"],
         paragraphs: [
           "Audit programs may include **onsite** or **desk (electronic)** reviews. Your exam marks **False** when claiming OCR audits incorporate **state-specific rules** as described in the item. **Civil money penalties** depend on **knowledge, neglect, harm, prior history**, and related factors in the comprehensive answer pattern.",
           "**Criminal** penalties for knowing wrongful disclosure with intent to sell, transfer, or use for commercial advantage, personal gain, or malicious harm carry **years of imprisonment** in the bracket your test uses—confirm current statute with your Manual.",
@@ -414,6 +436,7 @@ export const MODULES: CourseModule[] = [
     lessonSections: [
       {
         title: "Transactions, codes, identifiers",
+        readMoreSlugs: ["hhs-transactions-code-sets"],
         paragraphs: [
           "When a CE conducts a **standard transaction** electronically, it must use the **adopted standard** appropriate to the transaction (claims, payment, eligibility, etc.). **Code sets** (ICD, CPT, HCPCS where applicable) must be used as required for the transaction type—not a single code set for every transaction blindly, but the exam tests the **requirement** framing.",
           "Covered **health care providers** identify themselves on **standard transactions** using the **National Provider Identifier (NPI)** in the general rule your test states.",
