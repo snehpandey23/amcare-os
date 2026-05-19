@@ -4,7 +4,7 @@
   "private": true,
   "description": "Siya Health telehealth website",
   "scripts": {
-    "build": "echo 'Static site - no build needed'",
+    "build": "node scripts/seo-build.mjs",
     "deploy": "vercel --prod"
   }
 }

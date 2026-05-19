@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# Legacy mirror folder (duplicate HTML); crawlers should prefer extensionless URLs at site root.
+Disallow: /public/
+
 Sitemap: https://siya.health/sitemap.xml

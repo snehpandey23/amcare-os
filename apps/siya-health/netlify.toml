@@ -1,7 +1,7 @@
 [build]
   # With Base directory = repo root (empty), publish must be the app subpath
   publish = "apps/siya-health"
-  command = "echo 'Static site - no build required'"
+  command = "node apps/siya-health/scripts/seo-build.mjs"
 
 # Old URL → new (SEO + bookmarks)
 [[redirects]]
