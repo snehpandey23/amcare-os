@@ -1,7 +1,11 @@
 /**
- * Regenerates sitemap.xml and normalizes SEO metadata across static HTML.
+ * Regenerates sitemap.xml (with lastmod) and normalizes SEO metadata across static HTML.
+ *
  * Run from repo root: node apps/siya-health/scripts/seo-build.mjs
  * Or from apps/siya-health: node scripts/seo-build.mjs
+ *
+ * Optional env:
+ *   SIYA_GOOGLE_SITE_VERIFICATION or GOOGLE_SITE_VERIFICATION — real Search Console verification string (omit bogus placeholder meta).
  */
 import fs from 'fs';
 import path from 'path';
@@ -14,7 +18,8 @@ const BASE = 'https://siya.health';
 const GA4_ID = process.env.SIYA_GA4_MEASUREMENT_ID || 'G-9WTQWHCTFT';
 const AW_ID = 'AW-17553537456';
 const DEFAULT_OG_IMAGE = `${BASE}/assets/images/siya-health-logo.png`;
-const GSC_PLACEHOLDER = 'PASTE_VERIFICATION_CODE_HERE';
+/** Strip placeholder and only emit real verification when CI sets this */
+const GOOGLE_SITE_VERIFICATION = (process.env.SIYA_GOOGLE_SITE_VERIFICATION || process.env.GOOGLE_SITE_VERIFICATION || '').trim();
 
 const BLOG_HUB_FILES = new Set([
   'blog/index.html',
@@ -72,21 +77,38 @@ function generateSitemap(htmlFiles) {
     const loc = `${BASE}${fileToUrlPath(rel)}`;
     const pr = priorityFor(rel);
     const freq = rel.startsWith('blog/') && !BLOG_HUB_FILES.has(rel) ? 'monthly' : rel === 'index.html' ? 'weekly' : 'monthly';
-    lines.push(`  <url><loc>${loc}</loc><changefreq>${freq}</changefreq><priority>${pr}</priority></url>`);
+    let lastmodTag = '';
+    try {
+      const mtime = fs.statSync(path.join(SITE_ROOT, rel)).mtime;
+      lastmodTag = `<lastmod>${mtime.toISOString().split('T')[0]}</lastmod>`;
+    } catch {
+      lastmodTag = '';
+    }
+    lines.push(`  <url><loc>${loc}</loc>${lastmodTag}<changefreq>${freq}</changefreq><priority>${pr}</priority></url>`);
   }
   lines.push(`</urlset>`);
   fs.writeFileSync(path.join(SITE_ROOT, 'sitemap.xml'), lines.join('\n') + '\n', 'utf8');
   console.log('Wrote sitemap.xml with', sorted.length, 'URLs');
 }
 
+/** Meta `content=` often stores entities; decoded before re-encoding with escapeAttr avoids &amp;amp; */
+function decodeHtmlEntities(str) {
+  return String(str)
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>');
+}
+
 function extractTitle(html) {
   const m = html.match(/<title>([^<]+)<\/title>/i);
-  return m ? m[1].trim() : 'Siya Health';
+  return m ? decodeHtmlEntities(m[1].trim()) : 'Siya Health';
 }
 
 function extractDescription(html) {
   const m = html.match(/<meta\s+name="description"\s+content="([^"]*)"/i);
-  return m ? m[1].trim() : '';
+  return m ? decodeHtmlEntities(m[1].trim()) : '';
 }
 
 function extractCanonical(html) {
@@ -112,8 +134,16 @@ function normalizeGtag(html) {
 }
 
 function ensureGSC(html) {
-  if (html.includes('google-site-verification')) return html;
-  return html.replace(/(<meta\s+name="viewport"[^>]*\/?>)/i, `$1\n    <meta name="google-site-verification" content="${GSC_PLACEHOLDER}" />`);
+  // Remove bogus placeholder injected in older builds; real code comes from SIYA_GOOGLE_SITE_VERIFICATION
+  html = html.replace(/<meta\s+name="google-site-verification"\s+content="PASTE_VERIFICATION_CODE_HERE"\s*\/?>\s*\n?/gi, '');
+  if (!GOOGLE_SITE_VERIFICATION) return html;
+  if (html.includes('google-site-verification')) {
+    return html.replace(
+      /<meta\s+name="google-site-verification"\s+content="[^"]*"\s*\/?>/gi,
+      `<meta name="google-site-verification" content="${escapeAttr(GOOGLE_SITE_VERIFICATION)}" />`,
+    );
+  }
+  return html.replace(/(<meta\s+name="viewport"[^>]*\/?>)/i, (_, g1) => `${g1}\n    <meta name="google-site-verification" content="${escapeAttr(GOOGLE_SITE_VERIFICATION)}" />`);
 }
 
 function ensureCanonical(html, relPath) {
@@ -121,87 +151,108 @@ function ensureCanonical(html, relPath) {
   const full = urlPath === '/' ? `${BASE}/` : `${BASE}${urlPath}`;
   if (extractCanonical(html)) return html;
   if (html.match(/<meta\s+name="description"/i)) {
-    return html.replace(/(<meta\s+name="description"[^>]*\/?>)/i, `$1\n    <link rel="canonical" href="${full}" />`);
+    return html.replace(/(<meta\s+name="description"[^>]*\/?>)/i, (_, g1) => `${g1}\n    <link rel="canonical" href="${full}" />`);
   }
-  return html.replace(/(<meta\s+name="viewport"[^>]*\/?>)/i, `$1\n    <link rel="canonical" href="${full}" />`);
+  return html.replace(/(<meta\s+name="viewport"[^>]*\/?>)/i, (_, g1) => `${g1}\n    <link rel="canonical" href="${full}" />`);
 }
 
 function ensureOgTwitter(html, relPath, title, description, canonical) {
   let h = html;
+  // Older builds corrupted twitter metas ($199 became $1 regex replacement + "99").
+  if (/name="twitter:(?:title|description)"[^\n]*<link\s+rel="canonical"/i.test(h)) {
+    h = h.replace(/<meta name="twitter:title"[^\n]*\n?/gi, '');
+    h = h.replace(/<meta name="twitter:description"[^\n]*\n?/gi, '');
+  }
+  /** Orphan $199 twitter-meta tails rendered as visible text when left in `<head>` (patterns: ">99)", ">99,", etc.) */
+  h = h.replace(/^\s+>99[^<\n]*"\s*\/?>\s*$/gm, '');
+
+  /** One coherent block — avoids duplicate twitter:image/card from incremental inserts */
+  h = h.replace(/<meta\s+name="twitter:(?:card|title|description|image)"[^\n]*\/?>\s*/gi, '');
+
   const ogUrl = canonical || (fileToUrlPath(relPath) === '/' ? `${BASE}/` : `${BASE}${fileToUrlPath(relPath)}`);
   const desc = description || `${title} | Siya Health`;
   const img = DEFAULT_OG_IMAGE;
+  /** Title/desc can contain `$199`; String.replace `'$1' + literal` parses `$199` wrong — use callbacks. */
+  const qAttr = (s) => escapeAttr(String(s));
+
+  const twBlock = `\n    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${qAttr(title)}" />
+    <meta name="twitter:description" content="${qAttr(desc)}" />
+    <meta name="twitter:image" content="${img}" />`;
 
   if (!h.includes('property="og:url"')) {
     const insert = `
-    <meta property="og:url" content="${ogUrl.replace(/"/g, '&quot;')}" />
+    <meta property="og:url" content="${qAttr(ogUrl)}" />
     <meta property="og:image" content="${img}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Siya Health" />
     <meta property="og:locale" content="en_US" />`;
     if (h.includes('rel="canonical"')) {
-      h = h.replace(/(<link\s+rel="canonical"[^>]*\/?>)/i, `$1${insert}`);
+      h = h.replace(/(<link\s+rel="canonical"[^>]*\/?>)/i, (_, g1) => `${g1}${insert}`);
     } else {
-      h = h.replace(/(<title>[^<]+<\/title>)/i, `$1${insert}`);
+      h = h.replace(/(<title>[^<]+<\/title>)/i, (_, g1) => `${g1}${insert}`);
     }
   }
   if (!h.includes('property="og:description"') && desc) {
     if (h.includes('property="og:title"')) {
-      h = h.replace(/(<meta\s+property="og:title"[^>]*\/?>)/i, `$1\n    <meta property="og:description" content="${desc.replace(/"/g, '&quot;')}" />`);
+      h = h.replace(
+        /(<meta\s+property="og:title"[^>]*\/?>)/i,
+        (_, g1) => `${g1}\n    <meta property="og:description" content="${qAttr(desc)}" />`,
+      );
     }
   }
-  const hasTwitterTitle = h.includes('name="twitter:title"');
-  if (!hasTwitterTitle) {
-    const hasCard = h.includes('name="twitter:card"');
-    const tw = hasCard
-      ? `
-    <meta name="twitter:title" content="${title.replace(/"/g, '&quot;')}" />
-    <meta name="twitter:description" content="${desc.replace(/"/g, '&quot;')}" />
-    <meta name="twitter:image" content="${img}" />`
-      : `
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${title.replace(/"/g, '&quot;')}" />
-    <meta name="twitter:description" content="${desc.replace(/"/g, '&quot;')}" />
-    <meta name="twitter:image" content="${img}" />`;
+  if (!h.includes('name="twitter:card"')) {
     if (h.includes('property="og:locale"')) {
-      h = h.replace(/(<meta\s+property="og:locale"[^>]*\/?>)/i, `$1${tw}`);
+      h = h.replace(/(<meta\s+property="og:locale"[^>]*\/?>)/i, (_, g1) => `${g1}${twBlock}`);
     } else if (h.includes('property="og:image:height"')) {
-      h = h.replace(/(<meta\s+property="og:image:height"[^>]*\/?>)/i, `$1${tw}`);
+      h = h.replace(/(<meta\s+property="og:image:height"[^>]*\/?>)/i, (_, g1) => `${g1}${twBlock}`);
     } else if (h.includes('rel="canonical"')) {
-      h = h.replace(/(<link\s+rel="canonical"[^>]*\/?>)/i, `$1${tw}`);
+      h = h.replace(/(<link\s+rel="canonical"[^>]*\/?>)/i, (_, g1) => `${g1}${twBlock}`);
     } else {
-      h = h.replace(/(<meta\s+name="description"[^>]*\/?>)/i, `$1${tw}`);
+      h = h.replace(/(<meta\s+name="description"[^>]*\/?>)/i, (_, g1) => `${g1}${twBlock}`);
     }
   }
   if (!h.includes('property="og:image"')) {
     if (h.includes('property="og:url"')) {
-      h = h.replace(/(<meta\s+property="og:url"[^>]*\/?>)/i, `$1\n    <meta property="og:image" content="${img}" />\n    <meta property="og:image:width" content="1200" />\n    <meta property="og:image:height" content="630" />`);
+      h = h.replace(
+        /(<meta\s+property="og:url"[^>]*\/?>)/i,
+        (_, g1) => `${g1}\n    <meta property="og:image" content="${img}" />\n    <meta property="og:image:width" content="1200" />\n    <meta property="og:image:height" content="630" />`,
+      );
     }
   }
   if (!h.includes('property="og:site_name"')) {
     if (h.includes('property="og:type"')) {
-      h = h.replace(/(<meta\s+property="og:type"[^>]*\/?>)/i, `$1\n    <meta property="og:site_name" content="Siya Health" />`);
+      h = h.replace(/(<meta\s+property="og:type"[^>]*\/?>)/i, (_, g1) => `${g1}\n    <meta property="og:site_name" content="Siya Health" />`);
     }
   }
   if (!h.includes('property="og:locale"')) {
     if (h.includes('property="og:site_name"')) {
-      h = h.replace(/(<meta\s+property="og:site_name"[^>]*\/?>)/i, `$1\n    <meta property="og:locale" content="en_US" />`);
+      h = h.replace(/(<meta\s+property="og:site_name"[^>]*\/?>)/i, (_, g1) => `${g1}\n    <meta property="og:locale" content="en_US" />`);
     } else if (h.includes('property="og:type"')) {
-      h = h.replace(/(<meta\s+property="og:type"[^>]*\/?>)/i, `$1\n    <meta property="og:site_name" content="Siya Health" />\n    <meta property="og:locale" content="en_US" />`);
+      h = h.replace(
+        /(<meta\s+property="og:type"[^>]*\/?>)/i,
+        (_, g1) => `${g1}\n    <meta property="og:site_name" content="Siya Health" />\n    <meta property="og:locale" content="en_US" />`,
+      );
     }
   }
   if (!h.includes('property="og:title"')) {
-    h = h.replace(/(<link\s+rel="canonical"[^>]*\/?>)/i, `$1\n    <meta property="og:title" content="${title.replace(/"/g, '&quot;')}" />`);
+    h = h.replace(
+      /(<link\s+rel="canonical"[^>]*\/?>)/i,
+      (_, g1) => `${g1}\n    <meta property="og:title" content="${qAttr(title)}" />`,
+    );
   }
   if (!h.includes('property="og:type"')) {
     if (h.includes('property="og:title"')) {
-      h = h.replace(/(<meta\s+property="og:title"[^>]*\/?>)/i, `$1\n    <meta property="og:type" content="website" />`);
+      h = h.replace(/(<meta\s+property="og:title"[^>]*\/?>)/i, (_, g1) => `${g1}\n    <meta property="og:type" content="website" />`);
     }
   }
   if (!h.includes('property="og:description"') && desc) {
     if (h.includes('property="og:title"')) {
-      h = h.replace(/(<meta\s+property="og:title"[^>]*\/?>)/i, `$1\n    <meta property="og:description" content="${desc.replace(/"/g, '&quot;')}" />`);
+      h = h.replace(
+        /(<meta\s+property="og:title"[^>]*\/?>)/i,
+        (_, g1) => `${g1}\n    <meta property="og:description" content="${qAttr(desc)}" />`,
+      );
     }
   }
   return h;
@@ -296,6 +347,26 @@ function ensureOrganizationWebPage(html, relPath, title, desc, canonical) {
   return html.replace(/<\/head>/i, `${tag}\n  </head>`);
 }
 
+/**
+ * Refresh `description` on standalone `WebPage` JSON-LD when `ensureOrganizationWebPage` skipped the page
+ * (e.g. Organization block already present) so schema matches `meta name="description"`.
+ */
+function syncWebPageJsonDescriptions(html, pageUrl, description) {
+  if (!description || !pageUrl) return html;
+  return html.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi, (full, inner) => {
+    let o;
+    try {
+      o = JSON.parse(inner.trim());
+    } catch {
+      return full;
+    }
+    if (!o || o['@type'] !== 'WebPage') return full;
+    if (o.url != null && o.url !== pageUrl) return full;
+    o.description = description;
+    return `<script type="application/ld+json">${JSON.stringify(o)}</script>`;
+  });
+}
+
 function ensureWebSiteSchema(html, relPath) {
   if (relPath !== 'index.html') return html;
   if (html.includes('"@type":"WebSite"') || html.includes('"@type": "WebSite"')) return html;
@@ -355,10 +426,10 @@ function processHtml(relPath) {
     description = `Learn more about ${title.replace(/\s*\|\s*Siya Health\s*$/i, '').trim()} with Siya Health telehealth.`;
     html = html.replace(
       /(<meta\s+name="description"\s+content=")([^"]*)(")/i,
-      `$1${escapeAttr(description)}$3`
+      (_, g1, _mid, g3) => `${g1}${escapeAttr(description)}${g3}`
     );
     if (!html.includes('name="description"')) {
-      html = html.replace(/(<link\s+rel="canonical"[^>]*\/?>)/i, `\n    <meta name="description" content="${escapeAttr(description)}" />$1`);
+      html = html.replace(/(<link\s+rel="canonical"[^>]*\/?>)/i, (_, g1) => `\n    <meta name="description" content="${escapeAttr(description)}" />${g1}`);
     }
   }
 
@@ -378,6 +449,10 @@ function processHtml(relPath) {
 
   html = ensureOrganizationWebPage(html, relPath, title, description, canonical);
   html = ensureWebSiteSchema(html, relPath);
+
+  description = extractDescription(html) || description;
+  canonical = extractCanonical(html) || canonical;
+  html = syncWebPageJsonDescriptions(html, canonical, description);
 
   fs.writeFileSync(fullPath, html, 'utf8');
 }

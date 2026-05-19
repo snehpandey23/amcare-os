@@ -101,7 +101,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="google-site-verification" content="PASTE_VERIFICATION_CODE_HERE" />
     <meta name="robots" content="index, follow" />
     <title>${escAttr(post.title)}</title>
     <meta name="description" content="${escAttr(post.metaDescription)}" />
