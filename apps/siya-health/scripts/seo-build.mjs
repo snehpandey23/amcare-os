@@ -10,6 +10,12 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import {
+  getProviderBySlug,
+  injectBlogReviewedBy,
+  injectProviderPhysicianSchema,
+  pickReviewer,
+} from './clinical-entity.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -65,6 +71,8 @@ function priorityFor(rel) {
   if (rel === 'blog/index.html' || rel === 'blog/all.html') return '0.85';
   if (['blog/adhd.html', 'blog/weight-loss.html', 'blog/telehealth.html'].includes(rel)) return '0.82';
   if (rel.startsWith('blog/')) return '0.74';
+  if (rel.startsWith('answers/') && rel !== 'answers/index.html') return '0.76';
+  if (rel === 'answers/index.html') return '0.82';
   if (rel.startsWith('adhd-diagnosis-') || rel.includes('adult-adhd') || rel.includes('online-adhd') || rel.includes('creyos')) return '0.8';
   if (['privacy-policy.html', 'terms.html'].includes(rel)) return '0.3';
   return '0.78';
@@ -325,9 +333,28 @@ function ensureProviderBreadcrumb(html, title, canonical) {
   return html.replace(/<\/head>/i, `${tag}\n  </head>`);
 }
 
+function ensureAnswerBreadcrumb(html, relPath, title, canonical) {
+  if (!relPath.startsWith('answers/') || relPath === 'answers/index.html') return html;
+  if (html.includes('BreadcrumbList')) return html;
+  const itemName = title.replace(/\s*\|\s*Siya Health\s*$/i, '').trim().slice(0, 110);
+  const json = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE}/` },
+      { '@type': 'ListItem', position: 2, name: 'Answers', item: `${BASE}/answers` },
+      { '@type': 'ListItem', position: 3, name: itemName, item: canonical },
+    ],
+  };
+  const tag = `\n    <script type="application/ld+json">${JSON.stringify(json)}</script>`;
+  return html.replace(/<\/head>/i, `${tag}\n  </head>`);
+}
+
 function ensureOrganizationWebPage(html, relPath, title, desc, canonical) {
   if (html.includes('BlogPosting')) return html;
   if (html.includes('MedicalOrganization')) return html;
+  if (html.includes('MedicalWebPage')) return html;
+  if (html.includes('"@type":"Physician"') || html.includes('"@type": "Physician"')) return html;
   if (html.match(/"@type"\s*:\s*"Organization"/) || html.match(/'@type'\s*:\s*'Organization'/)) return html;
   const org = {
     '@context': 'https://schema.org',
@@ -437,15 +464,29 @@ function processHtml(relPath) {
 
   if (isBlogArticle(relPath)) {
     html = articleToBlogPosting(html);
+    const slug = relPath.replace(/^blog\//, '').replace(/\.html$/, '');
+    const reviewer = pickReviewer(slug, title);
+    html = injectBlogReviewedBy(html, reviewer);
     html = ensureBreadcrumbBlogArticle(html, relPath, title, canonical);
+  } else if (relPath.startsWith('answers/') && relPath !== 'answers/index.html') {
+    html = ensureAnswerBreadcrumb(html, relPath, title, canonical);
   } else {
     html = categoryBreadcrumb(relPath, html);
+  }
+
+  if (relPath.startsWith('providers/')) {
+    const slug = relPath.replace(/^providers\//, '').replace(/\.html$/, '');
+    const provider = getProviderBySlug(slug);
+    if (provider) {
+      html = injectProviderPhysicianSchema(html, provider, title, description || '', canonical);
+    }
+    html = ensureProviderBreadcrumb(html, title, canonical);
   }
 
   if (relPath === 'about.html') html = ensureBreadcrumbSimplePage(html, 'About', canonical);
   if (relPath === 'adhd-care.html') html = ensureBreadcrumbSimplePage(html, 'ADHD Care', canonical);
   if (relPath === 'membership-pricing.html') html = ensureBreadcrumbSimplePage(html, 'Membership & pricing', canonical);
-  if (relPath.startsWith('providers/')) html = ensureProviderBreadcrumb(html, title, canonical);
+  if (relPath === 'answers/index.html') html = ensureBreadcrumbSimplePage(html, 'Clinical answers', `${BASE}/answers`);
 
   html = ensureOrganizationWebPage(html, relPath, title, description, canonical);
   html = ensureWebSiteSchema(html, relPath);

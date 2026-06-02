@@ -46,6 +46,7 @@ function extractDescription(html) {
 
 function classifyPage(rel, title, desc) {
   if (rel.startsWith('providers/')) return 'provider';
+  if (rel.startsWith('answers/')) return rel === 'answers/index.html' ? 'answer-hub' : 'answer';
   if (rel.startsWith('blog/')) return 'article';
   if (rel.startsWith('adhd-') || rel.includes('adhd')) return 'service-adhd';
   if (rel.includes('weight-loss') || rel.includes('metabolic')) return 'service-weight-loss';
@@ -62,6 +63,7 @@ function topicTags(rel, title) {
   if (/adhd|adderall|vyvanse|focalin|stimulant|asrs|creyos/.test(t)) tags.push('adhd');
   if (/weight|glp|semaglutide|tirzepatide|phentermine|obesity|metabolic/.test(t)) tags.push('weight-loss');
   if (/telehealth|online diagnosis|prescription online/.test(t)) tags.push('telehealth');
+  if (rel.startsWith('answers/')) tags.push('clinical-answer');
   if (/california|\bca\b/.test(t)) tags.push('california');
   if (/texas|houston|austin|\btx\b/.test(t)) tags.push('texas');
   if (/pennsylvania|philadelphia|\bpa\b/.test(t)) tags.push('pennsylvania');
@@ -111,6 +113,7 @@ function writeLlmsTxt(pages) {
     `- Men's health / longevity: ${BASE}/mens-health-longevity`,
     '',
     '## Knowledge hubs',
+    `- Clinical answers (50+ Q&A): ${BASE}/answers`,
     `- ADHD articles: ${BASE}/blog/adhd`,
     `- Weight loss articles: ${BASE}/blog/weight-loss`,
     `- Telehealth articles: ${BASE}/blog/telehealth`,

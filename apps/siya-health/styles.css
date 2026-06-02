@@ -2259,6 +2259,67 @@ a.asrs-interest-btn:hover {
 
 .blog-disclaimer strong { color: var(--text); }
 
+.clinical-review {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  background: rgba(0, 107, 125, 0.06);
+  border-left: 4px solid var(--primary);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+}
+
+.clinical-review-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin: 0 0 6px;
+}
+
+.clinical-review p:last-child { margin: 0; }
+
+.clinical-review a { font-weight: 600; }
+
+.answer-page .answer-lead {
+  font-size: 1.125rem;
+  line-height: 1.65;
+  font-weight: 500;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+
+.answer-page section { margin-bottom: 32px; }
+
+.answer-page section h2 {
+  font-size: 1.35rem;
+  margin-bottom: 12px;
+}
+
+.answer-hub-section { margin-bottom: 48px; }
+
+.answer-hub-section h2 {
+  font-size: 1.35rem;
+  margin-bottom: 16px;
+}
+
+.answer-hub-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.answer-hub-list a {
+  font-weight: 500;
+  color: var(--primary);
+}
+
+.answer-hub-list a:hover { text-decoration: underline; }
+
 .blog-related {
   margin-top: 40px;
   padding-top: 28px;

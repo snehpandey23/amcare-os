@@ -1,7 +1,7 @@
 [build]
   # With Base directory = repo root (empty), publish must be the app subpath
   publish = "apps/siya-health"
-  command = "node apps/siya-health/scripts/seo-build.mjs && node apps/siya-health/scripts/generate-ai-indexes.mjs"
+  command = "node apps/siya-health/scripts/generate-answer-pages.mjs && node apps/siya-health/scripts/seo-build.mjs && node apps/siya-health/scripts/generate-ai-indexes.mjs"
 
 # Old URL → new (SEO + bookmarks)
 [[redirects]]

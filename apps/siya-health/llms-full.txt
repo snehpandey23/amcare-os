@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
 Generated: 2026-06-02
-Total pages: 83
+Total pages: 134
 
 ---
 
@@ -136,6 +136,261 @@ Total pages: 83
   URL: https://siya.health/adult-adhd-diagnosis
   Summary: Get an adult ADHD diagnosis online from board-certified providers. $199, 60–90 min, ASRS & Creyos. TX, PA, FL. Same-week telehealth appointments.
   Topics: adhd
+
+- Clinical Answers Hub | ADHD, Weight Loss &amp; Telehealth
+  URL: https://siya.health/answers
+  Summary: Direct answers to common ADHD, GLP-1, testosterone, and telehealth questions—medically reviewed by Siya Health physicians. Optimized for clarity and clinical accuracy.
+  Topics: adhd, weight-loss, telehealth, clinical-answer
+
+- Adderall vs Vyvanse for adults: what is the difference?
+  URL: https://siya.health/answers/adderall-vs-vyvanse-adults
+  Summary: Both are stimulant medications used for ADHD when clinically appropriate. Adderall (mixed amphetamine salts) has multiple formulations with varied onset/du…
+  Topics: adhd, clinical-answer
+
+- Is there a connection between ADHD and weight loss struggles?
+  URL: https://siya.health/answers/adhd-and-weight-loss-connection
+  Summary: Yes. Impulsivity, emotional eating, irregular meals, sleep debt, and stimulant effects on appetite all link ADHD and weight. Treating ADHD can help routine…
+  Topics: adhd, weight-loss, clinical-answer
+
+- How does adult ADHD present in men?
+  URL: https://siya.health/answers/adhd-in-men
+  Summary: Men may show more external restlessness, impulsivity, or risk-taking—but many men have primarily inattentive ADHD that looks like laziness or underperforma…
+  Topics: adhd, clinical-answer
+
+- How does ADHD present differently in women?
+  URL: https://siya.health/answers/adhd-in-women
+  Summary: Women more often present with inattentive symptoms—daydreaming, disorganization, emotional dysregulation—rather than obvious hyperactivity. Hormonal shifts…
+  Topics: adhd, clinical-answer
+
+- Do you have to take ADHD medication every day?
+  URL: https://siya.health/answers/adhd-medication-every-day
+  Summary: Some adults take medication daily; others use weekday-only or situational dosing when clinically appropriate. Skipping doses unpredictably on controlled st…
+  Topics: adhd, clinical-answer, medication
+
+- What are common ADHD medication side effects?
+  URL: https://siya.health/answers/adhd-medication-side-effects
+  Summary: Stimulants may cause decreased appetite, insomnia, increased heart rate or blood pressure, anxiety, or mood changes. Non-stimulants have their own profiles…
+  Topics: adhd, clinical-answer, medication
+
+- How do you tell ADHD apart from anxiety?
+  URL: https://siya.health/answers/adhd-vs-anxiety
+  Summary: Anxiety is often situational worry with physical tension; ADHD is a chronic pattern of attention regulation, organization, and impulse-control problems tha…
+  Topics: adhd, clinical-answer
+
+- Is it ADHD or burnout?
+  URL: https://siya.health/answers/adhd-vs-burnout
+  Summary: Burnout is usually tied to prolonged stress and improves with rest, boundaries, or job changes. ADHD is lifelong neurodevelopmental difficulty with attenti…
+  Topics: adhd, clinical-answer
+
+- What is the ASRS ADHD screening test?
+  URL: https://siya.health/answers/asrs-adhd-screening-explained
+  Summary: The Adult ADHD Self-Report Scale (ASRS) is a validated screening questionnaire—not a diagnosis. It helps clinicians decide whether a full evaluation is war…
+  Topics: adhd, clinical-answer
+
+- Can ADHD be diagnosed online?
+  URL: https://siya.health/answers/can-adhd-be-diagnosed-online
+  Summary: Yes—when a licensed clinician in your state conducts a full telehealth evaluation using clinical interview, validated tools, and safety screening. A free o…
+  Topics: adhd, clinical-answer
+
+- Can ADHD cause anxiety?
+  URL: https://siya.health/answers/can-adhd-cause-anxiety
+  Summary: ADHD does not directly “cause” anxiety in every patient, but living with untreated ADHD—missed deadlines, shame, chronic overwhelm—commonly leads to second…
+  Topics: adhd, clinical-answer
+
+- Can you get ADHD medication online?
+  URL: https://siya.health/answers/can-you-get-adhd-medication-online
+  Summary: In eligible states, yes—after a legitimate telehealth evaluation and ongoing relationship with a licensed prescriber. Online does not mean automatic; contr…
+  Topics: adhd, clinical-answer, medication
+
+- Compounded vs branded GLP-1: what is the difference?
+  URL: https://siya.health/answers/compounded-vs-branded-glp-1
+  Summary: Branded FDA-approved GLP-1 medicines undergo standardized manufacturing, labeling, and post-market safety tracking. Compounded versions may be used in spec…
+  Topics: weight-loss, clinical-answer
+
+- What is Creyos cognitive testing for ADHD?
+  URL: https://siya.health/answers/creyos-adhd-testing-explained
+  Summary: Creyos is a digital cognitive assessment battery sometimes used alongside clinical interview and rating scales. It provides objective performance data but …
+  Topics: adhd, clinical-answer
+
+- Is telehealth for erectile dysfunction legitimate?
+  URL: https://siya.health/answers/ed-telehealth-legitimate
+  Summary: Yes when a licensed clinician takes history, reviews medications (especially nitrates), discusses cardiovascular risk, and prescribes appropriately via HIP…
+  Topics: telehealth, clinical-answer, mens-health
+
+- What is executive dysfunction in adult ADHD?
+  URL: https://siya.health/answers/executive-dysfunction-adhd
+  Summary: Executive dysfunction refers to difficulty with planning, prioritizing, initiating tasks, working memory, and flexible thinking. In ADHD these skills are i…
+  Topics: adhd, clinical-answer
+
+- Can you use FSA or HSA for ADHD evaluation?
+  URL: https://siya.health/answers/fsa-hsa-adhd-evaluation
+  Summary: Many patients use FSA/HSA debit cards for qualified medical expenses including physician telehealth visits when documented as medical care. Confirm with yo…
+  Topics: adhd, clinical-answer
+
+- How do you manage GLP-1 nausea?
+  URL: https://siya.health/answers/glp-1-nausea-management
+  Summary: Clinicians start low and titrate slowly, advise smaller meals, avoid greasy foods, stay hydrated, and adjust timing. Persistent vomiting, dehydration, or s…
+  Topics: weight-loss, clinical-answer
+
+- What are GLP-1 side effects?
+  URL: https://siya.health/answers/glp-1-side-effects
+  Summary: Common GLP-1 receptor agonist side effects include nausea, vomiting, diarrhea, constipation, reflux, and reduced appetite. Most GI symptoms improve over we…
+  Topics: weight-loss, clinical-answer
+
+- Can you have ADHD and still be high-functioning?
+  URL: https://siya.health/answers/high-functioning-adhd
+  Summary: Yes. Many adults with ADHD perform well outwardly while struggling privately with exhaustion, procrastination, and emotional overload. “High functioning” i…
+  Topics: adhd, clinical-answer
+
+- How long does an ADHD evaluation take?
+  URL: https://siya.health/answers/how-long-adhd-evaluation
+  Summary: A thorough adult ADHD evaluation typically takes 60–90 minutes of face-to-face clinician time, plus intake forms and any cognitive screening completed befo…
+  Topics: adhd, clinical-answer
+
+- How much does ADHD testing cost?
+  URL: https://siya.health/answers/how-much-does-adhd-testing-cost
+  Summary: Costs vary widely: some clinics charge $500–$2,000+; Siya Health offers a transparent $199 comprehensive adult ADHD evaluation (60–90 minutes) including cl…
+  Topics: adhd, clinical-answer
+
+- How do online prescriptions work legally?
+  URL: https://siya.health/answers/how-online-prescriptions-work
+  Summary: A licensed clinician in your state evaluates you via telehealth, documents the visit, and sends prescriptions electronically to a pharmacy when clinically …
+  Topics: clinical-answer
+
+- Is ADHD medication safe long term?
+  URL: https://siya.health/answers/is-adhd-medication-safe-long-term
+  Summary: For many appropriately monitored adults, stimulant and non-stimulant ADHD medications have favorable benefit–risk profiles. Long-term care includes periodi…
+  Topics: adhd, clinical-answer, medication
+
+- Is online ADHD diagnosis legitimate?
+  URL: https://siya.health/answers/is-online-adhd-diagnosis-legitimate
+  Summary: Legitimate online ADHD diagnosis requires a licensed provider, sufficient visit length, standardized assessments as indicated, medical history review, and …
+  Topics: adhd, clinical-answer
+
+- Is telehealth legitimate for medical care?
+  URL: https://siya.health/answers/is-telehealth-legitimate
+  Summary: Legitimate telehealth uses licensed clinicians, HIPAA-compliant video or async tools where permitted, informed consent, and continuity of care—not anonymou…
+  Topics: telehealth, clinical-answer
+
+- Why are so many adults diagnosed with ADHD late in life?
+  URL: https://siya.health/answers/late-adhd-diagnosis-adults
+  Summary: Childhood ADHD was often missed—especially in girls, high achievers, and inattentive types without hyperactivity. Adults seek answers after burnout, job ch…
+  Topics: adhd, clinical-answer
+
+- Medical weight loss vs dieting: what works better?
+  URL: https://siya.health/answers/medical-weight-loss-vs-dieting
+  Summary: Sustainable weight change usually combines nutrition, movement, sleep, behavioral support, and—when indicated—FDA-approved medications. Diets alone often f…
+  Topics: weight-loss, clinical-answer
+
+- What happens in a telehealth Meet &amp; Greet?
+  URL: https://siya.health/answers/meet-and-greet-telehealth-expectations
+  Summary: A Meet & Greet is a low-pressure introduction to confirm telehealth fit, review services and pricing, and answer logistics—not a full diagnosis visit. You …
+  Topics: telehealth, clinical-answer
+
+- Does minoxidil work for hair loss?
+  URL: https://siya.health/answers/minoxidil-hair-loss-does-it-work
+  Summary: Topical minoxidil is FDA-approved for androgenetic alopecia in men and women and slows loss or regrows hair in many users after 3–6+ months of consistent u…
+  Topics: clinical-answer, hair-loss
+
+- What non-stimulant ADHD medications exist for adults?
+  URL: https://siya.health/answers/non-stimulant-adhd-medications
+  Summary: Options may include atomoxetine, viloxazine, guanfacine XR, clonidine XR, and bupropion (off-label in some cases)—depending on comorbidities and prescriber…
+  Topics: adhd, clinical-answer, medication
+
+- Oral vs injectable weight loss medications: pros and cons?
+  URL: https://siya.health/answers/oral-vs-injectable-weight-loss-meds
+  Summary: Injectables (weekly GLP-1 agents) dominate recent trial outcomes but require needles and titration. Oral options (where available) may suit needle-averse p…
+  Topics: weight-loss, clinical-answer, medication
+
+- Oral vs topical minoxidil: which is right?
+  URL: https://siya.health/answers/oral-vs-topical-minoxidil
+  Summary: Topical minoxidil is first-line for many patients due to localized action and established OTC/Rx formulations. Low-dose oral minoxidil may be considered of…
+  Topics: clinical-answer, hair-loss
+
+- Is phentermine safe for weight loss?
+  URL: https://siya.health/answers/phentermine-weight-loss-safety
+  Summary: Phentermine is an FDA-approved short-term appetite suppressant for select patients when benefits outweigh risks. It is contraindicated in many cardiovascul…
+  Topics: weight-loss, clinical-answer
+
+- What is rejection sensitive dysphoria (RSD) and ADHD?
+  URL: https://siya.health/answers/rejection-sensitivity-adhd
+  Summary: RSD describes intense emotional pain after perceived criticism or rejection. It is not an official DSM diagnosis but is frequently reported in ADHD. Clinic…
+  Topics: adhd, clinical-answer
+
+- What is the difference between ADHD screening and a full evaluation?
+  URL: https://siya.health/answers/screening-vs-adhd-evaluation
+  Summary: Screening (e.g., ASRS, short online quizzes) estimates likelihood and takes minutes. A full evaluation is a 60–90 minute clinician visit with history, stan…
+  Topics: adhd, clinical-answer
+
+- How does semaglutide work for weight loss?
+  URL: https://siya.health/answers/semaglutide-weight-loss-how-it-works
+  Summary: Semaglutide mimics GLP-1, slowing gastric emptying, reducing appetite signals, and improving glycemic control in eligible patients. Weight loss results fro…
+  Topics: weight-loss, clinical-answer
+
+- What are the signs of adult ADHD?
+  URL: https://siya.health/answers/signs-of-adult-adhd
+  Summary: Adult ADHD often shows up as chronic difficulty sustaining focus, disorganization, forgetfulness, time blindness, trouble finishing tasks, inner restlessne…
+  Topics: adhd, clinical-answer
+
+- What should you expect from sildenafil for erectile dysfunction?
+  URL: https://siya.health/answers/sildenafil-erectile-dysfunction-expectations
+  Summary: Sildenafil improves erectile response when sexual stimulation is present; it is not an automatic aphrodisiac. Onset is typically 30–60 minutes. Contraindic…
+  Topics: clinical-answer, mens-health
+
+- What should adults expect when starting ADHD medication?
+  URL: https://siya.health/answers/starting-adhd-medication-adults
+  Summary: Expect a gradual titration plan, clear follow-up dates, baseline vitals when indicated, and honest discussion of goals (work hours, driving, sleep). Improv…
+  Topics: adhd, clinical-answer, medication
+
+- How does ADHD telehealth work in California?
+  URL: https://siya.health/answers/telehealth-adhd-california
+  Summary: California residents may receive adult ADHD evaluation and follow-up via telehealth when treated by a clinician licensed in California, using secure video,…
+  Topics: adhd, telehealth, clinical-answer, california
+
+- How does ADHD telehealth work in Texas?
+  URL: https://siya.health/answers/telehealth-adhd-texas
+  Summary: Texas adults can complete structured ADHD telehealth evaluations with Texas-licensed clinicians, including history, standardized assessments, and follow-up…
+  Topics: adhd, telehealth, clinical-answer, texas
+
+- Can low testosterone mimic ADHD?
+  URL: https://siya.health/answers/testosterone-and-adhd-overlap
+  Summary: Low testosterone and ADHD can both cause fatigue, low motivation, and concentration problems. Labs and developmental history help separate them; some men h…
+  Topics: adhd, clinical-answer, mens-health
+
+- What is time blindness in ADHD?
+  URL: https://siya.health/answers/time-blindness-adhd
+  Summary: Time blindness describes difficulty sensing how long tasks take, losing track of time, or chronically underestimating deadlines. It is a common executive-f…
+  Topics: adhd, clinical-answer
+
+- Tirzepatide vs semaglutide: which is better for weight loss?
+  URL: https://siya.health/answers/tirzepatide-vs-semaglutide
+  Summary: Both are prescription GLP-1–based therapies with strong trial data in eligible adults. Tirzepatide (dual GIP/GLP-1 agonist) showed greater average weight l…
+  Topics: weight-loss, clinical-answer
+
+- What monitoring is required on testosterone therapy?
+  URL: https://siya.health/answers/trt-monitoring-requirements
+  Summary: Typical monitoring includes baseline and follow-up testosterone levels, hematocrit/hemoglobin, PSA (age-appropriate), lipids, and symptom review. Frequency…
+  Topics: clinical-answer, mens-health
+
+- What does low testosterone feel like?
+  URL: https://siya.health/answers/what-does-low-testosterone-feel-like
+  Summary: Possible symptoms include low energy, reduced libido, depressed mood, decreased muscle mass, increased body fat, poor sleep, and difficulty concentrating—t…
+  Topics: clinical-answer, mens-health
+
+- What is included in Siya Health’s $199 ADHD evaluation?
+  URL: https://siya.health/answers/what-included-199-adhd-evaluation
+  Summary: Siya Health’s $199 adult ADHD evaluation is a 60–90 minute telehealth visit with a board-certified, ADHD-CCSP–trained clinician—including clinical intervie…
+  Topics: adhd, clinical-answer
+
+- When is testosterone therapy appropriate?
+  URL: https://siya.health/answers/when-is-testosterone-therapy-appropriate
+  Summary: TRT may be appropriate for men with consistent symptoms and repeatedly low morning testosterone on proper assays, after ruling out reversible causes—and wh…
+  Topics: clinical-answer, mens-health
+
+- Who qualifies for GLP-1 weight loss medications?
+  URL: https://siya.health/answers/who-qualifies-glp-1-weight-loss
+  Summary: Eligibility generally follows FDA indications: typically BMI thresholds with comorbidities, or higher BMI cutoffs—plus no contraindications (certain thyroi…
+  Topics: weight-loss, clinical-answer, medication
 
 - Health Insights &amp; Blog Hub (2026) | ADHD, Weight Loss &amp; Telehealth
   URL: https://siya.health/blog
