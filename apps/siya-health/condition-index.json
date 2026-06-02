@@ -1,0 +1,61 @@
+{
+  "generated": "2026-06-02T06:59:19.243Z",
+  "conditions": [
+    {
+      "name": "Adult ADHD",
+      "hubUrl": "https://siya.health/adhd-care",
+      "blogHubUrl": "https://siya.health/blog/adhd",
+      "plannedKnowledgeHub": "https://siya.health/knowledge/adhd",
+      "subtopics": [
+        "symptoms",
+        "diagnosis",
+        "testing",
+        "medication",
+        "women",
+        "men",
+        "professionals",
+        "students",
+        "anxiety-overlap",
+        "depression-overlap",
+        "sleep-overlap",
+        "productivity",
+        "relationships"
+      ],
+      "providers": [
+        "https://siya.health/providers/dr-sneh-pandey#physician",
+        "https://siya.health/providers/dr-swati-pandey#physician",
+        "https://siya.health/providers/dr-natasha-desai#physician"
+      ]
+    },
+    {
+      "name": "Medical Weight Loss",
+      "hubUrl": "https://siya.health/weight-loss-metabolic-health",
+      "blogHubUrl": "https://siya.health/blog/weight-loss",
+      "plannedKnowledgeHub": "https://siya.health/knowledge/weight-loss",
+      "subtopics": [
+        "glp-1",
+        "semaglutide",
+        "tirzepatide",
+        "phentermine",
+        "metabolic-health"
+      ],
+      "providers": [
+        "https://siya.health/providers/dr-sneh-pandey#physician"
+      ]
+    },
+    {
+      "name": "Low Testosterone",
+      "hubUrl": "https://siya.health/mens-health-longevity",
+      "blogHubUrl": "https://siya.health/blog/telehealth",
+      "plannedKnowledgeHub": "https://siya.health/knowledge/mens-health",
+      "subtopics": [
+        "trt",
+        "symptoms",
+        "lab-testing"
+      ],
+      "providers": [
+        "https://siya.health/providers/dr-sneh-pandey#physician"
+      ]
+    }
+  ]
+}

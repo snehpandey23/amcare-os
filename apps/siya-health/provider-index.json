@@ -1,0 +1,94 @@
+{
+  "generated": "2026-06-02T06:59:19.243Z",
+  "providers": [
+    {
+      "name": "Dr. Sneh Pandey, MD",
+      "url": "https://siya.health/providers/dr-sneh-pandey",
+      "jobTitle": "Medical Director",
+      "medicalSpecialty": [
+        "Internal Medicine",
+        "Obesity Medicine",
+        "Adult ADHD"
+      ],
+      "statesLicensed": [
+        "California",
+        "Texas",
+        "Pennsylvania",
+        "Florida"
+      ],
+      "conditionsTreated": [
+        "Adult ADHD",
+        "Executive dysfunction",
+        "Metabolic health",
+        "Medical weight loss",
+        "ADHD and weight overlap"
+      ],
+      "relatedContent": [
+        "https://siya.health/adhd-care",
+        "https://siya.health/blog/adhd",
+        "https://siya.health/blog/weight-loss",
+        "https://siya.health/blog/how-to-know-if-you-have-adhd-adult",
+        "https://siya.health/blog/is-online-adhd-diagnosis-legit",
+        "https://siya.health/blog/adhd-evaluation-cost-texas",
+        "https://siya.health/blog/online-adhd-diagnosis-california",
+        "https://siya.health/blog/medical-weight-loss-glp1-semaglutide-texas",
+        "https://siya.health/blog/glp1-side-effects-and-how-to-manage-them"
+      ]
+    },
+    {
+      "name": "Dr. Swati Pandey, MD",
+      "url": "https://siya.health/providers/dr-swati-pandey",
+      "jobTitle": "Psychiatric Physician",
+      "medicalSpecialty": [
+        "Psychiatry",
+        "Mental Health",
+        "Adult ADHD"
+      ],
+      "statesLicensed": [
+        "Pennsylvania"
+      ],
+      "conditionsTreated": [
+        "Adult ADHD",
+        "Depression",
+        "Anxiety",
+        "Complex medication histories",
+        "ADHD with psychiatric comorbidity"
+      ],
+      "relatedContent": [
+        "https://siya.health/blog/vyvanse-vs-adderall-differences",
+        "https://siya.health/blog/focalin-vs-adderall-comparison",
+        "https://siya.health/blog/is-adhd-medication-safe-long-term",
+        "https://siya.health/blog/non-stimulant-adhd-medications-explained",
+        "https://siya.health/blog/adhd-medication-side-effects-what-to-expect"
+      ]
+    },
+    {
+      "name": "Dr. Natasha Desai, MD",
+      "url": "https://siya.health/providers/dr-natasha-desai",
+      "jobTitle": "Family & Behavioral Medicine Physician",
+      "medicalSpecialty": [
+        "Family Medicine",
+        "Behavioral Medicine",
+        "Adult ADHD"
+      ],
+      "statesLicensed": [
+        "Texas",
+        "Florida"
+      ],
+      "conditionsTreated": [
+        "Adult ADHD",
+        "Anxiety",
+        "Emotional dysregulation",
+        "ADHD with anxiety overlap",
+        "Behavioral health"
+      ],
+      "relatedContent": [
+        "https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd",
+        "https://siya.health/blog/adhd-symptoms-overlooked",
+        "https://siya.health/blog/how-to-know-if-you-have-adhd-adult",
+        "https://siya.health/blog/insomnia-treatment-options-beyond-medication",
+        "https://siya.health/blog/ambien-and-sleep-medications-risks-and-benefits"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "generated": "2026-06-02T06:59:19.243Z",
+  "services": [
+    {
+      "title": "Siya Health | Telehealth ADHD, Primary Care &amp; Weight Loss",
+      "url": "https://siya.health/",
+      "type": "home",
+      "description": "Provider-led telehealth: ADHD care, medical weight loss, and ongoing virtual care. Same-week appointments, transparent pricing. California, Texas, Pennsylvania, and Florida."
+    },
+    {
+      "title": "About Siya Health | Mission, Team &amp; How Care Works",
+      "url": "https://siya.health/about",
+      "type": "about",
+      "description": "Siya Health is a membership-friendly telehealth practice for adult ADHD, weight, and whole-person care—built for people who were told to try harder instead of getting evaluated. California, Texas, Pennsylvania, Florida."
+    },
+    {
+      "title": "Adult ADHD Diagnosis Online — Same-Week Evaluation ($199)",
+      "url": "https://siya.health/adhd-care",
+      "type": "service-adhd",
+      "description": "Adult ADHD diagnosis online — same-week evaluation ($199). 60–90 min visit with board-certified providers. No insurance needed. CA, TX, PA, FL. ASRS & Creyos. Book your evaluation."
+    },
+    {
+      "title": "ADHD Diagnosis Austin TX | Online $199 Evaluation",
+      "url": "https://siya.health/adhd-diagnosis-austin",
+      "type": "service-adhd",
+      "description": "Adult ADHD diagnosis in Austin, Texas—online. $199 evaluation, same-week telehealth, ADHD-CCSP providers. Book your virtual visit."
+    },
+    {
+      "title": "Online ADHD Diagnosis Florida | $199 Evaluation",
+      "url": "https://siya.health/adhd-diagnosis-florida",
+      "type": "service-adhd",
+      "description": "Adult ADHD diagnosis online in Florida. $199, 60–90 min evaluation, board-certified providers. Same-week telehealth. ASRS & Creyos. Book today."
+    },
+    {
+      "title": "ADHD Diagnosis Houston TX | Online $199 Evaluation",
+      "url": "https://siya.health/adhd-diagnosis-houston",
+      "type": "service-adhd",
+      "description": "Houston adult ADHD diagnosis online. $199 comprehensive evaluation, board-certified telehealth. Same-week appointments. ASRS & Creyos."
+    },
+    {
+      "title": "Online ADHD Diagnosis Pennsylvania | $199",
+      "url": "https://siya.health/adhd-diagnosis-pennsylvania",
+      "type": "service-adhd",
+      "description": "Pennsylvania adult ADHD diagnosis online. $199 virtual evaluation. Board-certified, ADHD-CCSP. Philadelphia, Pittsburgh & statewide telehealth."
+    },
+    {
+      "title": "ADHD Diagnosis Philadelphia PA | Online $199",
+      "url": "https://siya.health/adhd-diagnosis-philadelphia",
+      "type": "service-adhd",
+      "description": "Philadelphia adult ADHD diagnosis online. $199 evaluation, ADHD-CCSP providers, telehealth statewide in PA. Book today."
+    },
+    {
+      "title": "Online ADHD Diagnosis Texas | $199 Evaluation",
+      "url": "https://siya.health/adhd-diagnosis-texas",
+      "type": "service-adhd",
+      "description": "Adult ADHD diagnosis online in Texas. $199 evaluation, ADHD-CCSP providers, same-week telehealth. Austin, Houston, Dallas-area & statewide. Book now."
+    },
+    {
+      "title": "ADHD Evaluation Cost Online | $199 Flat Rate",
+      "url": "https://siya.health/adhd-evaluation-cost",
+      "type": "service-adhd",
+      "description": "ADHD evaluation cost: $199 transparent flat fee for 60–90 min online visit. No insurance surprise bills. FSA/HSA. Texas, Pennsylvania, Florida."
+    },
+    {
+      "title": "Start screening",
+      "url": "https://siya.health/adhd-screening",
+      "type": "service-adhd",
+      "description": "Tell us what you need: free 2-minute ADHD screening (ASRS), medical weight loss, or telehealth. Guided next steps for Texas-area care."
+    },
+    {
+      "title": "ADHD Treatment Online | Telehealth TX, PA, FL",
+      "url": "https://siya.health/adhd-treatment-online",
+      "type": "service-adhd",
+      "description": "Online ADHD treatment after diagnosis: medication management, follow-ups, telehealth in Texas, Pennsylvania & Florida. Start with $199 evaluation."
+    },
+    {
+      "title": "Adult ADHD Diagnosis Online | $199 Evaluation",
+      "url": "https://siya.health/adult-adhd-diagnosis",
+      "type": "service-adhd",
+      "description": "Get an adult ADHD diagnosis online from board-certified providers. $199, 60–90 min, ASRS & Creyos. TX, PA, FL. Same-week telehealth appointments."
+    },
+    {
+      "title": "Creyos ADHD Testing Online | Part of $199 Evaluation",
+      "url": "https://siya.health/creyos-adhd-testing",
+      "type": "service-adhd",
+      "description": "Creyos cognitive testing for ADHD as part of your $199 online evaluation. ASRS + Creyos + clinical interview. Licensed providers in TX, PA, FL."
+    },
+    {
+      "title": "Men's Health &amp; Longevity",
+      "url": "https://siya.health/mens-health-longevity",
+      "type": "service-mens-health",
+      "description": "Men's health services including testosterone therapy, metabolic health, and erectile dysfunction treatment across TX, PA, and FL."
+    },
+    {
+      "title": "Online ADHD Test &amp; Screening (Free)",
+      "url": "https://siya.health/online-adhd-test",
+      "type": "service-adhd",
+      "description": "Take a free online ADHD screening in 2 minutes. Not a diagnosis—see if a $199 clinical evaluation with a board-certified provider is right for you."
+    },
+    {
+      "title": "Concierge Primary Care",
+      "url": "https://siya.health/primary-urgent-care",
+      "type": "service-telehealth",
+      "description": "Virtual primary care and concierge visits with licensed providers. Telehealth services across Texas, Pennsylvania, and Florida."
+    },
+    {
+      "title": "Virtual Medical Care | Siya Health Telehealth",
+      "url": "https://siya.health/telehealth",
+      "type": "service-telehealth",
+      "description": "Fast, convenient telehealth from board-certified providers. Primary care, urgent care, prescriptions, labs. TX, PA, FL. No waiting rooms."
+    },
+    {
+      "title": "Provider-Guided Medical Weight Loss",
+      "url": "https://siya.health/weight-loss-metabolic-health",
+      "type": "service-weight-loss",
+      "description": "Board-certified obesity medicine. GLP-1, phentermine, semaglutide, tirzepatide when appropriate. Provider-guided programs across TX, PA, FL."
+    }
+  ]
+}

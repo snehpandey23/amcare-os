@@ -1,0 +1,497 @@
+# Siya Health — Full AI Retrieval Index
+
+Generated: 2026-06-02
+Total pages: 83
+
+---
+
+## Organization
+{
+  "@id": "https://siya.health/#organization",
+  "@type": "MedicalOrganization",
+  "name": "Siya Health",
+  "alternateName": "Siya Health Inc.",
+  "url": "https://siya.health/",
+  "logo": "https://siya.health/assets/images/siya-health-logo.png",
+  "email": "care@siya.health",
+  "telephone": "+1-215-445-1244",
+  "medicalSpecialty": [
+    "Psychiatry",
+    "Internal Medicine",
+    "Family Medicine",
+    "Obesity Medicine",
+    "Behavioral Medicine"
+  ],
+  "areaServed": [
+    {
+      "@type": "State",
+      "name": "California"
+    },
+    {
+      "@type": "State",
+      "name": "Texas"
+    },
+    {
+      "@type": "State",
+      "name": "Pennsylvania"
+    },
+    {
+      "@type": "State",
+      "name": "Florida"
+    }
+  ],
+  "knowsAbout": [
+    "Adult ADHD evaluation",
+    "ADHD telehealth",
+    "Medical weight loss",
+    "GLP-1 therapy",
+    "Obesity medicine",
+    "Men's health",
+    "Testosterone therapy",
+    "Telehealth primary care"
+  ],
+  "sameAs": [
+    "https://www.facebook.com/siyahealthofficial",
+    "https://www.instagram.com/siyahealth_official/",
+    "https://www.linkedin.com/company/siyahealthofficial/",
+    "https://www.pinterest.com/siyahealthus/"
+  ],
+  "employee": [
+    {
+      "@id": "https://siya.health/providers/dr-sneh-pandey#physician"
+    },
+    {
+      "@id": "https://siya.health/providers/dr-swati-pandey#physician"
+    },
+    {
+      "@id": "https://siya.health/providers/dr-natasha-desai#physician"
+    }
+  ]
+}
+
+---
+
+## All pages (title | URL | topics)
+
+- Siya Health | Telehealth ADHD, Primary Care &amp; Weight Loss
+  URL: https://siya.health/
+  Summary: Provider-led telehealth: ADHD care, medical weight loss, and ongoing virtual care. Same-week appointments, transparent pricing. California, Texas, Pennsylvania, and Florida.
+  Topics: adhd, weight-loss, telehealth
+
+- About Siya Health | Mission, Team &amp; How Care Works
+  URL: https://siya.health/about
+  Summary: Siya Health is a membership-friendly telehealth practice for adult ADHD, weight, and whole-person care—built for people who were told to try harder instead of getting evaluated. California, Texas, Pen…
+
+- Adult ADHD Diagnosis Online — Same-Week Evaluation ($199)
+  URL: https://siya.health/adhd-care
+  Summary: Adult ADHD diagnosis online — same-week evaluation ($199). 60–90 min visit with board-certified providers. No insurance needed. CA, TX, PA, FL. ASRS & Creyos. Book your evaluation.
+  Topics: adhd
+
+- ADHD Diagnosis Austin TX | Online $199 Evaluation
+  URL: https://siya.health/adhd-diagnosis-austin
+  Summary: Adult ADHD diagnosis in Austin, Texas—online. $199 evaluation, same-week telehealth, ADHD-CCSP providers. Book your virtual visit.
+  Topics: adhd, texas
+
+- Online ADHD Diagnosis Florida | $199 Evaluation
+  URL: https://siya.health/adhd-diagnosis-florida
+  Summary: Adult ADHD diagnosis online in Florida. $199, 60–90 min evaluation, board-certified providers. Same-week telehealth. ASRS & Creyos. Book today.
+  Topics: adhd, florida
+
+- ADHD Diagnosis Houston TX | Online $199 Evaluation
+  URL: https://siya.health/adhd-diagnosis-houston
+  Summary: Houston adult ADHD diagnosis online. $199 comprehensive evaluation, board-certified telehealth. Same-week appointments. ASRS & Creyos.
+  Topics: adhd, texas
+
+- Online ADHD Diagnosis Pennsylvania | $199
+  URL: https://siya.health/adhd-diagnosis-pennsylvania
+  Summary: Pennsylvania adult ADHD diagnosis online. $199 virtual evaluation. Board-certified, ADHD-CCSP. Philadelphia, Pittsburgh & statewide telehealth.
+  Topics: adhd, pennsylvania
+
+- ADHD Diagnosis Philadelphia PA | Online $199
+  URL: https://siya.health/adhd-diagnosis-philadelphia
+  Summary: Philadelphia adult ADHD diagnosis online. $199 evaluation, ADHD-CCSP providers, telehealth statewide in PA. Book today.
+  Topics: adhd, pennsylvania
+
+- Online ADHD Diagnosis Texas | $199 Evaluation
+  URL: https://siya.health/adhd-diagnosis-texas
+  Summary: Adult ADHD diagnosis online in Texas. $199 evaluation, ADHD-CCSP providers, same-week telehealth. Austin, Houston, Dallas-area & statewide. Book now.
+  Topics: adhd, texas
+
+- ADHD Evaluation Cost Online | $199 Flat Rate
+  URL: https://siya.health/adhd-evaluation-cost
+  Summary: ADHD evaluation cost: $199 transparent flat fee for 60–90 min online visit. No insurance surprise bills. FSA/HSA. Texas, Pennsylvania, Florida.
+  Topics: adhd
+
+- Start screening
+  URL: https://siya.health/adhd-screening
+  Summary: Tell us what you need: free 2-minute ADHD screening (ASRS), medical weight loss, or telehealth. Guided next steps for Texas-area care.
+  Topics: adhd
+
+- ADHD Treatment Online | Telehealth TX, PA, FL
+  URL: https://siya.health/adhd-treatment-online
+  Summary: Online ADHD treatment after diagnosis: medication management, follow-ups, telehealth in Texas, Pennsylvania & Florida. Start with $199 evaluation.
+  Topics: adhd, telehealth, texas, pennsylvania, florida
+
+- Adult ADHD Diagnosis Online | $199 Evaluation
+  URL: https://siya.health/adult-adhd-diagnosis
+  Summary: Get an adult ADHD diagnosis online from board-certified providers. $199, 60–90 min, ASRS & Creyos. TX, PA, FL. Same-week telehealth appointments.
+  Topics: adhd
+
+- Health Insights &amp; Blog Hub (2026) | ADHD, Weight Loss &amp; Telehealth
+  URL: https://siya.health/blog
+  Summary: Evidence-based ADHD, weight loss & telehealth articles (2026). Browse by category, read medication education, and book licensed providers in TX, PA & FL.
+  Topics: adhd, weight-loss, telehealth
+
+- Adderall for ADHD: How It Works in 2026 (Mechanism, Benefits &amp; Safety)
+  URL: https://siya.health/blog/adderall-for-adhd-how-it-works
+  Summary: How Adderall works for ADHD in adults (2026): brain mechanisms, who may benefit, risks, monitoring, and why only a licensed prescriber should decide.
+  Topics: adhd
+
+- Adderall IR vs XR for Adults: Timing, Duration &amp; What to Ask Your Prescriber
+  URL: https://siya.health/blog/adderall-ir-vs-xr-adults
+  Summary: Adderall immediate-release vs extended-release for adult ADHD: onset, how long effects last, dosing patterns, and how clinicians choose—education only, not medical advice.
+  Topics: adhd
+
+- ADHD Articles Hub (2026) — Diagnosis, Medication Education &amp; Care
+  URL: https://siya.health/blog/adhd
+  Summary: Explore Siya Health ADHD articles: evaluation, medication education for adults, symptoms, and online care—indexed for search with clear internal links.
+  Topics: adhd, medication
+
+- ADHD Evaluation in California: Online vs In-Person Options (2026)
+  URL: https://siya.health/blog/adhd-evaluation-california-online-vs-in-person
+  Summary: ADHD evaluation California: compare secure telehealth and in-office visits—timelines, costs, legitimacy, medication discussions, safety.
+  Topics: adhd, california
+
+- How Much Does an ADHD Evaluation Cost in California?
+  URL: https://siya.health/blog/adhd-evaluation-cost-california
+  Summary: ADHD evaluation cost California: typical price ranges, what drives fees, hidden add-ons to watch for, cash vs insurance angles, budgeting follow-up realistically.
+  Topics: adhd, california
+
+- ADHD Evaluation Cost in Texas: Full Breakdown (2026 Guide)
+  URL: https://siya.health/blog/adhd-evaluation-cost-texas
+  Summary: What does an ADHD evaluation cost in Texas in 2026? Compare options—insurance, cash pay, online—and see the real breakdown.
+  Topics: adhd, texas
+
+- Do You Need ADHD Medication Every Day? Daily vs As-Needed (Adults)
+  URL: https://siya.health/blog/adhd-medication-daily-or-as-needed-adults
+  Summary: Do adults need ADHD medication every day? Daily vs as-needed use, medication breaks, risks of inconsistent use, and why your prescriber should guide the plan.
+  Topics: adhd, medication
+
+- Can You Get ADHD Medication Online in California? (2026 Guide)
+  URL: https://siya.health/blog/adhd-medication-online-california
+  Summary: ADHD medication online California: telehealth rules, evaluation standards, red flags, and why no practice should promise instant stimulants—patient guide.
+  Topics: adhd, california, medication
+
+- Can You Get ADHD Medication Online in Texas? Rules &amp; Safety
+  URL: https://siya.health/blog/adhd-medication-online-texas-telehealth
+  Summary: ADHD medication via telehealth in Texas: what legitimate care includes, evaluation requirements, red flags, and why structured visits matter—education only.
+  Topics: adhd, telehealth, texas, medication
+
+- ADHD Medication Options in California: Stimulants, Non‑Stimulants &amp; FAQs
+  URL: https://siya.health/blog/adhd-medication-options-california
+  Summary: Compare ADHD meds in CA: ADHD medication options California—Vyvanse, Adderall, non‑stimulants, generics. Education only; no prescribing promises.
+  Topics: adhd, california, medication
+
+- ADHD Medication Options for Adults in 2026: Stimulants &amp; Non-Stimulants
+  URL: https://siya.health/blog/adhd-medication-options-for-adults
+  Summary: Adult ADHD medication options in 2026: stimulant vs non-stimulant classes, combination strategies, monitoring, and how licensed prescribers personalize treatment.
+  Topics: adhd, medication
+
+- ADHD Medication Side Effects in 2026: What to Expect &amp; When to Call a Doctor
+  URL: https://siya.health/blog/adhd-medication-side-effects-what-to-expect
+  Summary: ADHD medication side effects (2026): common stimulant and non-stimulant reactions, monitoring, mental health warnings, and when to seek urgent care.
+  Topics: adhd, medication
+
+- Adult ADHD Symptoms That Are Often Overlooked
+  URL: https://siya.health/blog/adhd-symptoms-overlooked
+  Summary: These ADHD symptoms in adults are easy to miss—or dismiss. Learn what clinicians look for beyond the obvious signs.
+  Topics: adhd
+
+- ADHD Telehealth in California: How Virtual Care Works (2026)
+  URL: https://siya.health/blog/adhd-telehealth-california
+  Summary: ADHD telehealth California explained: HIPAA visits, clinician roles, prescribing limits context, ADHD medication management Calif. cadence—all without gimmicks.
+  Topics: adhd, telehealth, california
+
+- ADHD Testing Online in California: Screening vs Full Evaluation
+  URL: https://siya.health/blog/adhd-testing-online-california-screening-vs-evaluation
+  Summary: ADHD test online California: know the difference between quick screens and clinician-led evaluation—tools, timing, limits, and choosing California providers wisely.
+  Topics: adhd, california
+
+- ADHD Treatment in Houston: Online Telehealth Options
+  URL: https://siya.health/blog/adhd-treatment-houston-online
+  Summary: ADHD treatment for Houston adults via telehealth: what online care includes, benefits, legitimacy, and who it fits—plus how to start with a licensed Texas clinician.
+  Topics: adhd, telehealth, texas
+
+- Adult ADHD Symptoms in California: Patterns Worth Taking Seriously
+  URL: https://siya.health/blog/adult-adhd-symptoms-california
+  Summary: Adult ADHD symptoms California: chronic patterns versus burnout mimics—attention drift, procrastination pits, rejection sensitivity arcs—and clinician evaluation norms.
+  Topics: adhd, california
+
+- Adult ADHD Treatment in California: Options in 2026
+  URL: https://siya.health/blog/adult-adhd-treatment-california-2026
+  Summary: Adult ADHD treatment California (2026): therapy, meds, routines, coaching, telehealth—not quick fixes. Medically grounded overview for skeptical adults researching care.
+  Topics: adhd, california
+
+- What Happens After an ADHD Diagnosis? Next Steps for Adults
+  URL: https://siya.health/blog/after-adhd-diagnosis-next-steps-adults
+  Summary: After an adult ADHD diagnosis: understanding the diagnosis, treatment options, building a personalized plan, and why ongoing care matters—education from Siya Health.
+  Topics: adhd
+
+- All Articles (2026) | ADHD, Weight Loss &amp; Telehealth | Siya Health Blog
+  URL: https://siya.health/blog/all
+  Summary: Browse every Siya Health article: ADHD evaluation, medication education, weight loss with GLP-1s, and telehealth—evidence-based guides for US adults.
+  Topics: adhd, weight-loss, telehealth
+
+- Ambien &amp; Sleep Medications: Risks and Benefits (2026)
+  URL: https://siya.health/blog/ambien-and-sleep-medications-risks-and-benefits
+  Summary: Ambien and sleep medications in 2026: Z-drugs, dependence, complex sleep behaviors, tapering—informational only; not dosing guidance.
+  Topics: sleep, medication
+
+- Combining ADHD Treatment &amp; Weight Loss Strategies (2026)
+  URL: https://siya.health/blog/combining-adhd-treatment-and-weight-loss-strategies
+  Summary: Combining ADHD treatment and weight loss in 2026: stimulant appetite effects, GLP-1 overlap, coaching, and coordinated prescribing—education only.
+  Topics: adhd, weight-loss
+
+- Compounded vs Branded GLP-1 Medications (2026): Safety &amp; Standards
+  URL: https://siya.health/blog/compounded-vs-branded-glp1-medications
+  Summary: Compounded vs branded GLP-1 in 2026: manufacturing standards, regulatory context, risks of unapproved copies, and why clinician oversight matters.
+  Topics: weight-loss, medication
+
+- Focalin vs Adderall for ADHD (2026): Methylphenidate vs Amphetamine
+  URL: https://siya.health/blog/focalin-vs-adderall-comparison
+  Summary: Focalin vs Adderall in 2026: methylphenidate vs amphetamine class, dosing ideas, duration, side effects, and how clinicians pick stimulants for adults.
+  Topics: adhd
+
+- GLP-1 Side Effects &amp; How to Manage Them (2026)
+  URL: https://siya.health/blog/glp1-side-effects-and-how-to-manage-them
+  Summary: GLP-1 side effects in 2026: nausea, GI symptoms, dehydration risks, rare warnings, and clinician-guided strategies—educational, not a substitute for care.
+  Topics: weight-loss
+
+- Glutathione &amp; Peptides: What Do They Actually Do? (2026)
+  URL: https://siya.health/blog/glutathione-and-peptides-what-do-they-actually-do
+  Summary: Glutathione and peptides in 2026: biology basics, evidence gaps, regulatory issues, and risks of wellness marketing—informational, non-promotional.
+
+- How ADHD Medication Is Prescribed Online in 2026 (Laws, Safety &amp; Standards)
+  URL: https://siya.health/blog/how-adhd-medication-is-prescribed-online
+  Summary: How online ADHD prescribing works in 2026: Ryan Haight context, telehealth rules, controlled substances, evaluation standards, and how to spot legitimate care.
+  Topics: adhd, medication
+
+- How Mental Health Affects Weight Loss Outcomes (2026)
+  URL: https://siya.health/blog/how-mental-health-affects-weight-loss-outcomes
+  Summary: Mental health and weight loss outcomes in 2026: depression, anxiety, ADHD, trauma, medications, and integrated care—evidence-anchored, non-stigmatizing.
+  Topics: weight-loss
+
+- How to Choose an ADHD Provider in California (Red Flags Included)
+  URL: https://siya.health/blog/how-to-choose-adhd-provider-california
+  Summary: Choose an ADHD provider in California: telehealth legitimacy, clinician transparency, visit length norms, prescribing ethics—and instant prescription funnel red flags.
+  Topics: adhd, california
+
+- How to Know If You Have ADHD as an Adult (Real Signs Explained)
+  URL: https://siya.health/blog/how-to-know-if-you-have-adhd-adult
+  Summary: Not sure if you have ADHD? Learn the real signs adults experience—beyond the stereotypes—and when it's worth getting evaluated.
+  Topics: adhd
+
+- How to Safely Get Prescriptions Online (2026 Checklist)
+  URL: https://siya.health/blog/how-to-safely-get-prescriptions-online
+  Summary: How to safely get prescriptions online in 2026: verify licensure, pharmacies, controlled substance rules, privacy—patient education, not legal advice.
+
+- Insomnia Treatment Options Beyond Medication (2026)
+  URL: https://siya.health/blog/insomnia-treatment-options-beyond-medication
+  Summary: Insomnia treatment beyond medication in 2026: CBT-I, sleep hygiene limits, circadian care, apnea evaluation—first-line education for adults.
+  Topics: sleep, medication
+
+- Is ADHD Medication Safe Long Term in 2026? Benefits, Monitoring &amp; Myths
+  URL: https://siya.health/blog/is-adhd-medication-safe-long-term
+  Summary: Long-term ADHD medication safety (2026): what studies suggest, cardiovascular monitoring, growth/weight, mental health, and why follow-up with a prescriber matters.
+  Topics: adhd, medication
+
+- Is Online ADHD Diagnosis Legit? What Patients Should Know
+  URL: https://siya.health/blog/is-online-adhd-diagnosis-legit
+  Summary: Skeptical about online ADHD diagnosis? Here's what makes it legitimate—and what to look for when choosing a provider.
+  Topics: adhd
+
+- Long-Term Weight Loss Medications: What to Expect in 2026
+  URL: https://siya.health/blog/long-term-weight-loss-medications-what-to-expect
+  Summary: Long-term weight loss medications in 2026: maintenance phases, plateaus, monitoring, mental health, and realistic expectations—no guaranteed outcomes.
+  Topics: weight-loss, medication
+
+- Medical Weight Loss in Texas: GLP-1, Semaglutide, Tirzepatide &amp; What Actually Works
+  URL: https://siya.health/blog/medical-weight-loss-glp1-semaglutide-texas
+  Summary: Evidence-based medical weight loss in Texas. GLP-1 medications, semaglutide, tirzepatide, phentermine—when they're appropriate and what to expect from provider-guided care.
+  Topics: weight-loss, texas
+
+- Medical Weight Loss vs Dieting: What Actually Works in 2026
+  URL: https://siya.health/blog/medical-weight-loss-vs-dieting-what-actually-works
+  Summary: Medical weight loss vs dieting in 2026: evidence on structured programs, biology, behavior, and when medications help—no blame, no miracle claims.
+  Topics: weight-loss
+
+- Minoxidil for Hair Loss: Does It Work? (2026 Evidence)
+  URL: https://siya.health/blog/minoxidil-for-hair-loss-does-it-work
+  Summary: Minoxidil for hair loss in 2026: mechanism, expected timelines, limits, side effects—informational only; consult a licensed clinician for diagnosis.
+  Topics: hair-loss
+
+- Modafinil for Focus &amp; Fatigue: Is It Safe? (2026)
+  URL: https://siya.health/blog/modafinil-for-focus-and-fatigue-is-it-safe
+  Summary: Modafinil for focus and fatigue in 2026: approved uses, off-label realities, cardiovascular and psychiatric risks, controlled status—education only.
+
+- Non-Stimulant ADHD Medications Explained (2026) — Options for Adults
+  URL: https://siya.health/blog/non-stimulant-adhd-medications-explained
+  Summary: Non-stimulant ADHD medications in 2026: atomoxetine, guanfacine, clonidine, viloxazine—how they work, timelines, side effects, and when prescribers choose them.
+  Topics: adhd, medication
+
+- Online ADHD Diagnosis in California (2026): Cost, Process &amp; What to Expect
+  URL: https://siya.health/blog/online-adhd-diagnosis-california
+  Summary: Online ADHD diagnosis California: costs, secure telehealth steps, and what a legitimate evaluation looks like—with licensed clinician oversight.
+  Topics: adhd, california
+
+- Online ADHD Diagnosis in Texas (2026): Cost, Process &amp; What to Expect
+  URL: https://siya.health/blog/online-adhd-diagnosis-texas
+  Summary: Online ADHD diagnosis in Texas (2026): real costs, telehealth steps, and what a legitimate evaluation includes—with board-certified providers.
+  Topics: adhd, texas
+
+- Oral vs Injectable Weight Loss Medications (2026): GLP-1 &amp; Beyond
+  URL: https://siya.health/blog/oral-vs-injectable-weight-loss-medications
+  Summary: Oral vs injectable weight loss meds in 2026: adherence, absorption, side effects, and how clinicians choose formats—education only, no dosing advice.
+  Topics: weight-loss, medication
+
+- Oral vs Topical Minoxidil for Hair Loss (2026)
+  URL: https://siya.health/blog/oral-vs-topical-minoxidil-which-is-right
+  Summary: Oral vs topical minoxidil in 2026: absorption, side effect profiles, monitoring, and why prescribing stays with licensed clinicians—education only.
+  Topics: hair-loss
+
+- Phentermine for Weight Loss: Safety &amp; Effectiveness in 2026
+  URL: https://siya.health/blog/phentermine-for-weight-loss-safety-and-effectiveness
+  Summary: Phentermine for weight loss in 2026: FDA history, cardiovascular cautions, short-term use norms, monitoring, and alternatives—educational only.
+  Topics: weight-loss
+
+- Semaglutide for Weight Loss: How It Works in 2026 (GLP-1 Science)
+  URL: https://siya.health/blog/semaglutide-for-weight-loss-how-it-works
+  Summary: Semaglutide for weight loss (2026): GLP-1 mechanism, appetite regulation, who may qualify, risks, and why provider supervision matters—education only.
+  Topics: weight-loss
+
+- Sildenafil for Erectile Dysfunction: What to Expect (2026)
+  URL: https://siya.health/blog/sildenafil-for-erectile-dysfunction-what-to-expect
+  Summary: Sildenafil for erectile dysfunction in 2026: mechanism, cardiovascular precautions, interactions, and telehealth norms—informational, not prescribing advice.
+  Topics: mens-health
+
+- Telehealth Articles (2026) — Online ADHD Diagnosis &amp; Safe Prescribing
+  URL: https://siya.health/blog/telehealth
+  Summary: Telehealth education: legitimate online ADHD diagnosis, evaluation costs, remote prescribing standards, and what US adults should verify with licensed providers.
+  Topics: adhd, telehealth
+
+- Telehealth Prescriptions: How Online Treatment Works (2026)
+  URL: https://siya.health/blog/telehealth-prescriptions-how-online-treatment-works
+  Summary: Telehealth prescriptions in 2026: visits, e-prescribing, controlled substances, state licensure, and safety—neutral overview for US adults.
+  Topics: telehealth
+
+- Tirzepatide vs Semaglutide for Weight Loss (2026): Compare GLP-1 Options
+  URL: https://siya.health/blog/tirzepatide-vs-semaglutide-which-is-better
+  Summary: Tirzepatide vs semaglutide in 2026: dual GIP/GLP-1 vs GLP-1 agonist, trial context, side effects, and how clinicians choose—no outcome promises.
+  Topics: weight-loss
+
+- Vyvanse vs Adderall for ADHD in 2026: Differences Adults Should Know
+  URL: https://siya.health/blog/vyvanse-vs-adderall-differences
+  Summary: Vyvanse vs Adderall (2026): prodrug design, duration, dosing, abuse-deterrence themes, side effects, and why your prescriber chooses one over the other.
+  Topics: adhd
+
+- Weight Loss Articles (2026) — GLP-1 &amp; Medical Metabolic Care | Siya Health Blog
+  URL: https://siya.health/blog/weight-loss
+  Summary: Siya Health weight loss articles: GLP-1 medications, semaglutide, tirzepatide, and evidence-based medical weight loss in Texas—with telehealth context.
+  Topics: weight-loss
+
+- When Is Testosterone Therapy Appropriate? (2026 Guide)
+  URL: https://siya.health/blog/when-is-testosterone-therapy-appropriate
+  Summary: When testosterone therapy is appropriate in 2026: hypogonadism diagnosis, monitoring, fertility, cardiovascular themes—no anti-aging hype, education only.
+  Topics: mens-health
+
+- You’re Not Lazy: Undiagnosed Adult ADHD Signs | TX, PA, FL
+  URL: https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd
+  Summary: Adult ADHD symptoms are often mistaken for laziness. Learn signs of undiagnosed ADHD in adults, why late diagnosis is common, and how care works in Texas—with supportive, non-judgmental next steps.
+  Topics: adhd, texas, pennsylvania, florida
+
+- Book an Appointment
+  URL: https://siya.health/book-appointment
+  Summary: Book a telehealth appointment with Siya Health using our secure external EHR system. No PHI collected on this site.
+
+- Creyos ADHD Testing Online | Part of $199 Evaluation
+  URL: https://siya.health/creyos-adhd-testing
+  Summary: Creyos cognitive testing for ADHD as part of your $199 online evaluation. ASRS + Creyos + clinical interview. Licensed providers in TX, PA, FL.
+  Topics: adhd
+
+- Diagnostic Lab Services
+  URL: https://siya.health/labs
+  Summary: Diagnostic lab services and monitoring tests are coming soon to Siya Health.
+
+- Membership &amp; Pricing
+  URL: https://siya.health/membership-pricing
+  Summary: Simple, transparent membership-based care. Direct access to board-certified providers. ADHD, weight loss, full-spectrum telehealth. TX, PA, FL.
+
+- Men's Health &amp; Longevity
+  URL: https://siya.health/mens-health-longevity
+  Summary: Men's health services including testosterone therapy, metabolic health, and erectile dysfunction treatment across TX, PA, and FL.
+  Topics: mens-health
+
+- Online ADHD Test &amp; Screening (Free)
+  URL: https://siya.health/online-adhd-test
+  Summary: Take a free online ADHD screening in 2 minutes. Not a diagnosis—see if a $199 clinical evaluation with a board-certified provider is right for you.
+  Topics: adhd
+
+- Online Prescription Services
+  URL: https://siya.health/prescriptions
+  Summary: Online prescription services for common conditions are coming soon to Siya Health.
+
+- Concierge Primary Care
+  URL: https://siya.health/primary-urgent-care
+  Summary: Virtual primary care and concierge visits with licensed providers. Telehealth services across Texas, Pennsylvania, and Florida.
+
+- Privacy Policy
+  URL: https://siya.health/privacy-policy
+  Summary: Siya Health privacy policy. How we collect, use, and protect your information.
+
+- Dr. Natasha Desai, MD | ADHD, Anxiety &amp; Behavioral Health
+  URL: https://siya.health/providers/dr-natasha-desai
+  Summary: Meet Dr. Natasha Desai—Family & Behavioral Medicine, ADHD-CCSP. Supportive telehealth for adult ADHD, emotional regulation, and anxiety overlap in TX & FL.
+  Topics: adhd
+
+- Dr. Sneh Pandey, MD | Adult ADHD &amp; Metabolic Care
+  URL: https://siya.health/providers/dr-sneh-pandey
+  Summary: Meet Dr. Sneh Pandey—Medical Director at Siya Health. Board-certified Internal Medicine, Obesity Medicine, ADHD-CCSP. Structured adult ADHD evaluations and weight-inclusive telehealth in CA, TX, PA & …
+  Topics: adhd, weight-loss
+
+- Dr. Swati Pandey, MD | ADHD, Anxiety &amp; Depression
+  URL: https://siya.health/providers/dr-swati-pandey
+  Summary: Meet Dr. Swati Pandey—Psychiatric & Mental Health physician, ADHD-CCSP. Depth-focused telehealth for adult ADHD with anxiety, depression, or complex psychiatric needs in Pennsylvania.
+  Topics: adhd
+
+- Virtual Medical Care | Siya Health Telehealth
+  URL: https://siya.health/telehealth
+  Summary: Fast, convenient telehealth from board-certified providers. Primary care, urgent care, prescriptions, labs. TX, PA, FL. No waiting rooms.
+  Topics: telehealth
+
+- Terms of Service
+  URL: https://siya.health/terms
+  Summary: Siya Health terms of service. Use of our telehealth website and services.
+
+- Provider-Guided Medical Weight Loss
+  URL: https://siya.health/weight-loss-metabolic-health
+  Summary: Board-certified obesity medicine. GLP-1, phentermine, semaglutide, tirzepatide when appropriate. Provider-guided programs across TX, PA, FL.
+  Topics: weight-loss
+
+---
+
+## Provider reviewer map (planned editorial standard)
+
+### Dr. Sneh Pandey, MD
+URL: https://siya.health/providers/dr-sneh-pandey
+Licensed: California, Texas, Pennsylvania, Florida
+Reviewer topics: adhd, weight-loss, glp-1, telehealth, metabolic
+
+### Dr. Swati Pandey, MD
+URL: https://siya.health/providers/dr-swati-pandey
+Licensed: Pennsylvania
+Reviewer topics: adhd-medication, adhd-psychiatric, mental-health
+
+### Dr. Natasha Desai, MD
+URL: https://siya.health/providers/dr-natasha-desai
+Licensed: Texas, Florida
+Reviewer topics: adhd-symptoms, adhd-anxiety, behavioral-health, sleep

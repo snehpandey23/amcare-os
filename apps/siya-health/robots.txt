@@ -5,3 +5,6 @@ Allow: /
 Disallow: /public/
 
 Sitemap: https://siya.health/sitemap.xml
+
+# AI retrieval (llms.txt convention)
+# https://siya.health/llms.txt
