@@ -1,8 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "buildCommand": "mkdir -p public public/blog public/providers && cp *.html styles.css trust-metrics.js asrs-screener.js sitemap.xml robots.txt public/ 2>/dev/null; cp -r assets public/ && cp blog/*.html public/blog/ && cp providers/*.html public/providers/",
-  "outputDirectory": "public",
+  "buildCommand": "node scripts/generate-answer-pages.mjs && node scripts/internal-link-audit.mjs && node scripts/seo-build.mjs && node scripts/generate-ai-indexes.mjs && node scripts/seo-deployment-qa-report.mjs",
+  "outputDirectory": ".",
   "installCommand": "echo 'No install needed'",
   "redirects": [
     {
