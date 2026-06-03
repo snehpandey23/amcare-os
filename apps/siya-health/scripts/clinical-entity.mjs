@@ -30,7 +30,7 @@ export function getAllProviders() {
 export function pickReviewer(slug, title = '') {
   const t = `${slug} ${title}`.toLowerCase();
   const swati =
-    /adderall|vyvanse|focalin|stimulant|non-stimulant|medication|modafinil|ir-vs-xr|side-effect|safe-long-term|daily-or-as-needed|prescribed-online|ambien|sleep-medications|oral-vs-injectable|compounded-vs-branded|long-term-weight-loss-medications|phentermine-for-weight/.test(
+    /adderall|vyvanse|focalin|stimulant|non-stimulant|medication|modafinil|ir-vs-xr|side-effect|safe-long-term|daily-or-as-needed|prescribed-online|ambien|sleep-medications|oral-vs-injectable|compounded-vs-branded|long-term-weight-loss-medications|phentermine-for-weight|food-noise|glp-1|glp1|semaglutide|tirzepatide/.test(
       t,
     );
   const natasha =

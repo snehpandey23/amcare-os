@@ -14,6 +14,7 @@ import {
   getProviderBySlug,
   physicianReviewedBy,
 } from './clinical-entity.mjs';
+import { MEET_GREET_URL } from './site-chrome.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -60,7 +61,11 @@ ${jsonLdScripts}
   </head>`;
 }
 
-function headerNav() {
+function headerNav(topic = 'general') {
+  const navCta =
+    topic === 'adhd'
+      ? `<a class="button" href="/adhd-screening">Start Free Screening</a>`
+      : `<a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>`;
   return `    <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container">
@@ -75,7 +80,7 @@ function headerNav() {
           <a href="/blog">Blog</a>
         </nav>
         <div class="nav-cta">
-          <a class="button" href="/adhd-screening?adhd=1">Start Free Screening</a>
+          ${navCta}
         </div>
         <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
         <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
@@ -87,7 +92,7 @@ function headerNav() {
           <a href="/telehealth">Telehealth</a>
           <a href="/answers">Answers</a>
           <a href="/blog">Blog</a>
-          <a class="button" href="/adhd-screening?adhd=1">Start Free Screening</a>
+          ${navCta}
         </div>
       </div>
     </header>`;
@@ -102,11 +107,29 @@ function footerBlock() {
         <div class="footer-brand">
           <p>Board-certified providers providing telehealth care across California, Texas, Pennsylvania, and Florida.</p>
         </div>
-        <div><h4>Services</h4><p><a href="/adhd-care">ADHD Care</a></p><p><a href="/answers">Clinical answers</a></p><p><a href="/weight-loss-metabolic-health">Weight Loss</a></p></div>
+        <div><h4>Services</h4><p><a href="/answers">Answers</a></p><p><a href="/adhd-care">ADHD Care</a></p><p><a href="/weight-loss-metabolic-health">Weight Loss</a></p><p><a href="/telehealth">Telehealth</a></p></div>
+        <div><h4>Healthcare Services</h4><p><a href="/primary-urgent-care">Primary &amp; urgent care</a></p><p><a href="/labs">Diagnostic labs</a></p><p><a href="/prescriptions">Prescriptions</a></p></div>
         <div><h4>Contact</h4><p><a href="mailto:care@siya.health">care@siya.health</a></p><p><a href="tel:+12154451244">(215) 445-1244</a></p></div>
       </div>
       <div class="container"><p class="footer-notice">For emergencies, call 911. Educational content only—not medical advice for your specific situation.</p><small>© 2026 Siya Health Inc.</small></div>
     </footer>`;
+}
+
+function nextStepsHtml(hub, topic = 'general') {
+  const items =
+    topic === 'adhd'
+      ? `<li><a href="/adhd-screening">Take a free 2-minute ADHD screening</a></li>
+                <li><a href="/adult-adhd-diagnosis">Book a $199 adult ADHD evaluation</a></li>
+                <li><a href="${hub.care}">Explore ${hub.label} care at Siya Health</a></li>`
+      : `<li><a href="${MEET_GREET_URL}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a></li>
+                <li><a href="${hub.care}">Explore ${hub.label} care</a></li>
+                <li><a href="/answers">Browse clinical answers</a></li>`;
+  return `            <section class="answer-next-steps" id="next-steps" aria-labelledby="next-steps-heading">
+              <h2 id="next-steps-heading">Next steps</h2>
+              <ul class="answer-next-steps-list">
+                ${items}
+              </ul>
+            </section>`;
 }
 
 function buildAnswerPage(seed) {
@@ -172,7 +195,7 @@ function buildAnswerPage(seed) {
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PLBD4TTQ"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-${headerNav()}
+${headerNav(seed.topic)}
     <main id="main">
       <article class="blog-article answer-page">
         <div class="container blog-container">
@@ -201,11 +224,12 @@ ${clinicalReviewHtml(reviewer)}
                 ${relatedHtml}
               </ul>
             </section>
+${nextStepsHtml(hub, seed.topic)}
             <div class="cta-block blog-cta">
-              <a class="button" href="${hub.care}">Explore ${hub.label} care</a>
-              <a class="button secondary" href="${BOOK}" target="_blank" rel="noopener">Schedule Meet &amp; Greet</a>
+              <a class="button" href="${BOOK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
+              <a class="button secondary" href="${hub.care}">Explore ${hub.label} care</a>
             </div>
-            <p class="cta-microcopy">Also read our <a href="${hub.url}">${hub.label} articles</a> · <a href="/providers/${reviewer.slug}">${reviewer.name}</a></p>
+            <p class="cta-microcopy">Also read our <a href="${hub.url}">${hub.label} articles</a>${seed.cornerstoneBlog ? ` · <a href="${seed.cornerstoneBlog}">Full clinical guide</a>` : ''} · <a href="/providers/${reviewer.slug}">${reviewer.name}</a></p>
           </div>
         </div>
       </article>

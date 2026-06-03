@@ -16,6 +16,7 @@ import {
   injectProviderPhysicianSchema,
   pickReviewer,
 } from './clinical-entity.mjs';
+import { applySiteChrome } from './site-chrome.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -494,6 +495,8 @@ function processHtml(relPath) {
   description = extractDescription(html) || description;
   canonical = extractCanonical(html) || canonical;
   html = syncWebPageJsonDescriptions(html, canonical, description);
+
+  html = applySiteChrome(html, relPath, title);
 
   fs.writeFileSync(fullPath, html, 'utf8');
 }

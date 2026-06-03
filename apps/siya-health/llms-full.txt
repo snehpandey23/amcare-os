@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
-Generated: 2026-06-02
-Total pages: 134
+Generated: 2026-06-03
+Total pages: 144
 
 ---
 
@@ -73,10 +73,10 @@ Total pages: 134
 
 ## All pages (title | URL | topics)
 
-- Siya Health | Telehealth ADHD, Primary Care &amp; Weight Loss
+- Siya Health | Virtual Care for Energy, Weight, Hormones &amp; Focus
   URL: https://siya.health/
-  Summary: Provider-led telehealth: ADHD care, medical weight loss, and ongoing virtual care. Same-week appointments, transparent pricing. California, Texas, Pennsylvania, and Florida.
-  Topics: adhd, weight-loss, telehealth
+  Summary: Modern physician-guided virtual care for energy, weight, hormones, focus, sleep, and everyday health. Medical weight loss, men's health, ADHD, and telehealth in CA, TX, PA, and FL.
+  Topics: weight-loss
 
 - About Siya Health | Mission, Team &amp; How Care Works
   URL: https://siya.health/about
@@ -257,6 +257,11 @@ Total pages: 134
   Summary: A licensed clinician in your state evaluates you via telehealth, documents the visit, and sends prescriptions electronically to a pharmacy when clinically …
   Topics: clinical-answer
 
+- Can you have insulin resistance without diabetes?
+  URL: https://siya.health/answers/insulin-resistance-without-diabetes
+  Summary: Yes. Insulin resistance often exists for years while blood sugar still looks normal, because the pancreas compensates with higher insulin output. You do no…
+  Topics: clinical-answer
+
 - Is ADHD medication safe long term?
   URL: https://siya.health/answers/is-adhd-medication-safe-long-term
   Summary: For many appropriately monitored adults, stimulant and non-stimulant ADHD medications have favorable benefit–risk profiles. Long-term care includes periodi…
@@ -296,6 +301,11 @@ Total pages: 134
   URL: https://siya.health/answers/non-stimulant-adhd-medications
   Summary: Options may include atomoxetine, viloxazine, guanfacine XR, clonidine XR, and bupropion (off-label in some cases)—depending on comorbidities and prescriber…
   Topics: adhd, clinical-answer, medication
+
+- Can you have insulin resistance with a normal A1C?
+  URL: https://siya.health/answers/normal-a1c-insulin-resistance
+  Summary: Yes. A1C reflects average blood glucose over roughly three months, not how hard your body works to keep glucose normal. Early insulin resistance is often h…
+  Topics: clinical-answer
 
 - Oral vs injectable weight loss medications: pros and cons?
   URL: https://siya.health/answers/oral-vs-injectable-weight-loss-meds
@@ -382,6 +392,21 @@ Total pages: 134
   Summary: Siya Health’s $199 adult ADHD evaluation is a 60–90 minute telehealth visit with a board-certified, ADHD-CCSP–trained clinician—including clinical intervie…
   Topics: adhd, clinical-answer
 
+- What is food noise?
+  URL: https://siya.health/answers/what-is-food-noise
+  Summary: Food noise is persistent, intrusive thinking about food—planning meals, craving, or mental “background chatter” about eating—that can occur even when you a…
+  Topics: clinical-answer
+
+- What is free testosterone?
+  URL: https://siya.health/answers/what-is-free-testosterone
+  Summary: Free testosterone is the small fraction of testosterone in your blood that is not bound to proteins—mainly sex hormone-binding globulin (SHBG) or albumin. …
+  Topics: clinical-answer, mens-health
+
+- What is insulin resistance?
+  URL: https://siya.health/answers/what-is-insulin-resistance
+  Summary: Insulin resistance means your cells respond less efficiently to insulin, so the pancreas often releases more insulin to keep blood sugar in range. It can e…
+  Topics: clinical-answer
+
 - When is testosterone therapy appropriate?
   URL: https://siya.health/answers/when-is-testosterone-therapy-appropriate
   Summary: TRT may be appropriate for men with consistent symptoms and repeatedly low morning testosterone on proper assays, after ruling out reversible causes—and wh…
@@ -391,6 +416,11 @@ Total pages: 134
   URL: https://siya.health/answers/who-qualifies-glp-1-weight-loss
   Summary: Eligibility generally follows FDA indications: typically BMI thresholds with comorbidities, or higher BMI cutoffs—plus no contraindications (certain thyroi…
   Topics: weight-loss, clinical-answer, medication
+
+- Why am I tired even after sleeping?
+  URL: https://siya.health/answers/why-am-i-tired-even-after-sleeping
+  Summary: Time in bed is not the same as restorative sleep. Common causes include obstructive sleep apnea, insomnia, poor sleep quality (fragmentation), ADHD-related…
+  Topics: clinical-answer, sleep
 
 - Health Insights &amp; Blog Hub (2026) | ADHD, Weight Loss &amp; Telehealth
   URL: https://siya.health/blog
@@ -517,6 +547,16 @@ Total pages: 134
   Summary: Focalin vs Adderall in 2026: methylphenidate vs amphetamine class, dosing ideas, duration, side effects, and how clinicians pick stimulants for adults.
   Topics: adhd
 
+- Food Noise and GLP-1: What It Means and What Actually Helps (2026)
+  URL: https://siya.health/blog/food-noise-and-glp-1-what-it-means-and-what-helps
+  Summary: Food noise—intrusive thoughts about eating—is not hunger or weak willpower. Learn how GLP-1 medications may quiet it, what evidence shows, myths, and when to seek medical care.
+  Topics: weight-loss
+
+- Free Testosterone vs Total Testosterone: What Patients Should Know
+  URL: https://siya.health/blog/free-testosterone-vs-total-testosterone-what-patients-should-know
+  Summary: Normal total testosterone but still feel terrible? Learn how free testosterone, SHBG, and lab methods explain the mismatch—and when evaluation is appropriate.
+  Topics: mens-health
+
 - GLP-1 Side Effects &amp; How to Manage Them (2026)
   URL: https://siya.health/blog/glp1-side-effects-and-how-to-manage-them
   Summary: GLP-1 side effects in 2026: nausea, GI symptoms, dehydration risks, rare warnings, and clinician-guided strategies—educational, not a substitute for care.
@@ -554,6 +594,11 @@ Total pages: 134
   URL: https://siya.health/blog/insomnia-treatment-options-beyond-medication
   Summary: Insomnia treatment beyond medication in 2026: CBT-I, sleep hygiene limits, circadian care, apnea evaluation—first-line education for adults.
   Topics: sleep, medication
+
+- Insulin Resistance and Weight Loss: A Clinician-Guided Overview
+  URL: https://siya.health/blog/insulin-resistance-and-weight-loss-clinician-overview
+  Summary: Insulin resistance can exist with a normal A1C and make weight loss harder. Learn early signs, visceral fat, cravings, sleep, ADHD overlap, evidence-based steps, and myths—without wellness clichés.
+  Topics: weight-loss
 
 - Is ADHD Medication Safe Long Term in 2026? Benefits, Monitoring &amp; Myths
   URL: https://siya.health/blog/is-adhd-medication-safe-long-term
@@ -658,6 +703,10 @@ Total pages: 134
   URL: https://siya.health/blog/when-is-testosterone-therapy-appropriate
   Summary: When testosterone therapy is appropriate in 2026: hypogonadism diagnosis, monitoring, fertility, cardiovascular themes—no anti-aging hype, education only.
   Topics: mens-health
+
+- Why Am I Always Tired? Causes and When to See a Doctor
+  URL: https://siya.health/blog/why-am-i-always-tired-causes-when-to-see-doctor
+  Summary: Exhausted despite 7–8 hours of sleep and normal labs? Evidence-based guide to sleep apnea, iron, thyroid, insulin resistance, ADHD, burnout, and when to seek care.
 
 - You’re Not Lazy: Undiagnosed Adult ADHD Signs | TX, PA, FL
   URL: https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd

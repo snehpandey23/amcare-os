@@ -2349,6 +2349,86 @@ a.asrs-interest-btn:hover {
 
 .blog-related a:hover { text-decoration: underline; }
 
+.continue-reading,
+.learn-more-cluster .learn-more-links {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+.continue-reading h2,
+.learn-more-cluster .section-header h2 {
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+}
+
+.continue-reading ul,
+.learn-more-cluster .learn-more-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.continue-reading li,
+.learn-more-cluster .learn-more-links li {
+  margin-bottom: 12px;
+}
+
+.continue-reading a,
+.learn-more-cluster .learn-more-links a {
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.continue-reading a:hover,
+.learn-more-cluster .learn-more-links a:hover {
+  text-decoration: underline;
+}
+
+.continue-reading-answer a::before {
+  content: "Answer: ";
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.continue-reading-service a::before {
+  content: "Care: ";
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.answer-next-steps {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+.answer-next-steps h2 {
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+}
+
+.answer-next-steps-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+}
+
+.answer-next-steps-list li {
+  margin-bottom: 12px;
+}
+
+.answer-next-steps-list a {
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.answer-next-steps-list a:hover {
+  text-decoration: underline;
+}
+
 .blog-internal-links {
   margin-bottom: 24px;
   padding: 16px 20px;

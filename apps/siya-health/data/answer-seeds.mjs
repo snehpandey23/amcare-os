@@ -11,7 +11,7 @@ export const ANSWER_SEEDS = [
     paragraphs: [
       'Clinicians look for persistent inattention, impulsivity, and/or hyperactivity that interferes with work, relationships, or daily life. In adults, inattentive presentation is common: mental fog, losing track of conversations, missed deadlines, and piles of unfinished projects.',
       'Many high-functioning adults compensate with anxiety, long hours, or rigid routines until burnout hits. That is why ADHD is frequently missed in people who appear successful on paper.',
-      'Other conditions—anxiety, depression, sleep apnea, thyroid disease—can mimic ADHD. A structured evaluation with a licensed clinician rules out look-alikes and clarifies next steps.',
+      'Other conditions—anxiety, depression, sleep apnea, thyroid disease, iron deficiency—can mimic ADHD. A structured evaluation with a licensed clinician rules out look-alikes and clarifies next steps.',
     ],
     evidence: ['DSM-5-TR criteria for ADHD in adults', 'NIMH: ADHD in adults overview', 'CHADD adult ADHD resources'],
     related: ['can-adhd-be-diagnosed-online', 'how-long-adhd-evaluation', 'adhd-vs-anxiety', 'high-functioning-adhd'],
@@ -464,6 +464,134 @@ export const ANSWER_SEEDS = [
     reviewerSlug: 'dr-sneh-pandey',
   },
   {
+    slug: 'what-is-insulin-resistance',
+    question: 'What is insulin resistance?',
+    shortAnswer:
+      'Insulin resistance means your cells respond less efficiently to insulin, so the pancreas often releases more insulin to keep blood sugar in range. It can exist for years before A1C rises into prediabetes or diabetes. It is closely tied to excess visceral fat, weight gain, cravings, and cardiometabolic risk—and it usually improves with sustained weight loss, activity, sleep, and clinician-guided care when needed.',
+    paragraphs: [
+      'Insulin resistance is not the same as type 2 diabetes, though it is a major pathway toward it. Standard screening uses fasting glucose, A1C, or an oral glucose tolerance test; fasting insulin or HOMA-IR can add context but are not routine on every panel and vary by lab.',
+      'Weight loss of roughly 5–7% of body weight—combined with regular movement—has strong trial evidence for improving insulin sensitivity and lowering diabetes risk in high-risk adults (Diabetes Prevention Program).',
+      'If you have waist gain, post-meal fatigue, strong carb cravings, or “food noise,” discuss metabolic labs and a structured plan with a clinician rather than relying on normal A1C alone.',
+    ],
+    evidence: [
+      'ADA Standards of Care in Diabetes—2025 (prediabetes, lifestyle)',
+      'Diabetes Prevention Program (NEJM 2002)',
+      'Visceral adipose tissue and insulin resistance meta-analysis (Sci Rep)',
+      'Dietary weight loss in insulin-resistant non-obese adults (PubMed 30497926)',
+    ],
+    related: [
+      'insulin-resistance-without-diabetes',
+      'normal-a1c-insulin-resistance',
+      'medical-weight-loss-vs-dieting',
+      'adhd-and-weight-loss-connection',
+      'semaglutide-weight-loss-how-it-works',
+    ],
+    topic: 'weight-loss',
+    reviewerSlug: 'dr-sneh-pandey',
+    cornerstoneBlog: '/blog/insulin-resistance-and-weight-loss-clinician-overview',
+  },
+  {
+    slug: 'insulin-resistance-without-diabetes',
+    question: 'Can you have insulin resistance without diabetes?',
+    shortAnswer:
+      'Yes. Insulin resistance often exists for years while blood sugar still looks normal, because the pancreas compensates with higher insulin output. You do not need a diabetes diagnosis to have impaired insulin sensitivity or rising metabolic risk.',
+    paragraphs: [
+      'Prediabetes (elevated A1C or glucose) is one checkpoint, but compensatory hyperinsulinemia can precede those changes. Clinicians may use fasting glucose, A1C, lipids, waist circumference, and sometimes fasting insulin in context—not as a DIY diagnosis.',
+    ],
+    evidence: ['ADA Standards of Care 2025 (prediabetes definition)', 'DPP outcomes on insulin sensitivity with lifestyle'],
+    related: ['what-is-insulin-resistance', 'normal-a1c-insulin-resistance', 'medical-weight-loss-vs-dieting'],
+    topic: 'weight-loss',
+    reviewerSlug: 'dr-sneh-pandey',
+  },
+  {
+    slug: 'normal-a1c-insulin-resistance',
+    question: 'Can you have insulin resistance with a normal A1C?',
+    shortAnswer:
+      'Yes. A1C reflects average blood glucose over roughly three months, not how hard your body works to keep glucose normal. Early insulin resistance is often hidden behind compensatory high insulin until A1C drifts into the prediabetes range.',
+    paragraphs: [
+      'Normal A1C does not rule out metabolic strain. Discuss symptoms (waist gain, post-meal fatigue, cravings), blood pressure, triglycerides, and whether additional labs are appropriate with your clinician.',
+    ],
+    evidence: ['ADA classification of prediabetes vs normoglycemia', 'Compensatory hyperinsulinemia literature'],
+    related: ['what-is-insulin-resistance', 'insulin-resistance-without-diabetes'],
+    topic: 'weight-loss',
+    reviewerSlug: 'dr-sneh-pandey',
+  },
+  {
+    slug: 'what-is-food-noise',
+    question: 'What is food noise?',
+    shortAnswer:
+      'Food noise is persistent, intrusive thinking about food—planning meals, craving, or mental “background chatter” about eating—that can occur even when you are not physically hungry. It overlaps with hedonic eating and reward-circuit biology and is not the same as normal appetite.',
+    paragraphs: [
+      'Patients often describe food noise as exhausting mental loops about what to eat next, distinct from homeostatic hunger after true energy need.',
+      'GLP-1 receptor agonists may reduce food preoccupation for some people, but response varies; behavioral support, sleep, ADHD-related impulsivity, and metabolic factors also matter.',
+      'See our in-depth guide on food noise and GLP-1 for evidence, myths, and when to seek medical care.',
+    ],
+    evidence: [
+      'STEP trial program (semaglutide 2.4 mg) appetite outcomes',
+      'Narrative reviews on hedonic eating and GLP-1 (2024–2025)',
+      'Patient-reported food noise surveys (EASD 2025, hypothesis-generating)',
+    ],
+    related: [
+      'glp-1-side-effects',
+      'semaglutide-weight-loss-how-it-works',
+      'what-is-insulin-resistance',
+      'adhd-and-weight-loss-connection',
+    ],
+    topic: 'weight-loss',
+    reviewerSlug: 'dr-sneh-pandey',
+    cornerstoneBlog: '/blog/food-noise-and-glp-1-what-it-means-and-what-helps',
+  },
+  {
+    slug: 'why-am-i-tired-even-after-sleeping',
+    question: 'Why am I tired even after sleeping?',
+    shortAnswer:
+      'Time in bed is not the same as restorative sleep. Common causes include obstructive sleep apnea, insomnia, poor sleep quality (fragmentation), ADHD-related circadian delay, depression, iron or B12 deficiency, thyroid disease, and medication effects—even when basic labs look normal. Fatigue (low energy) also differs from sleepiness (pressure to nap); describing both helps clinicians.',
+    paragraphs: [
+      'If you sleep enough hours but wake unrefreshed, ask about snoring, witnessed breathing pauses, morning headaches, and whether caffeine no longer helps. A sleep evaluation may be appropriate despite a “normal” routine.',
+      'Daytime fatigue with normal hemoglobin does not rule out low ferritin or vitamin B12 deficiency, especially with heavy periods, GI issues, or plant-based diets. Thyroid testing is guided by symptoms and exam, not fatigue alone.',
+      'See a clinician promptly for sudden severe fatigue, unintentional weight loss, fever, chest pain, shortness of breath, or thoughts of self-harm.',
+    ],
+    evidence: [
+      'AASM obstructive sleep apnea indicator report (undiagnosed prevalence)',
+      'Iron supplementation meta-analysis in non-anemic iron-deficient adults (PMID 29626044)',
+      'NICE NG239 vitamin B12 deficiency in adults',
+      'WHO ICD-11 burnout (QD85) occupational phenomenon',
+    ],
+    related: [
+      'adhd-vs-burnout',
+      'signs-of-adult-adhd',
+      'what-is-insulin-resistance',
+      'what-does-low-testosterone-feel-like',
+    ],
+    topic: 'telehealth',
+    reviewerSlug: 'dr-natasha-desai',
+    cornerstoneBlog: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+  },
+  {
+    slug: 'what-is-free-testosterone',
+    question: 'What is free testosterone?',
+    shortAnswer:
+      'Free testosterone is the small fraction of testosterone in your blood that is not bound to proteins—mainly sex hormone-binding globulin (SHBG) or albumin. It is biologically active and available to tissues. Total testosterone includes bound plus free; you can have normal total testosterone but low free testosterone when SHBG is high.',
+    paragraphs: [
+      'Most circulating testosterone is protein-bound. SHBG binds tightly; albumin binds loosely. Only free testosterone and the albumin-bound fraction are considered bioavailable.',
+      'Guidelines recommend measuring or calculating free testosterone when total testosterone is borderline or when SHBG may be altered—obesity, aging, thyroid disease, liver disease, or certain medications. Avoid relying on inaccurate direct free-testosterone immunoassays; equilibrium dialysis or validated calculations are preferred.',
+      'Symptoms such as low libido or fatigue require clinical context—sleep apnea, depression, and ADHD can mimic low testosterone even when labs look acceptable.',
+    ],
+    evidence: [
+      'Endocrine Society hypogonadism guideline (2018)',
+      'AUA testosterone deficiency guideline (reaffirmed 2024)',
+      'Rosner et al., measuring testosterone position statement',
+    ],
+    related: [
+      'what-does-low-testosterone-feel-like',
+      'when-is-testosterone-therapy-appropriate',
+      'testosterone-and-adhd-overlap',
+      'trt-monitoring-requirements',
+    ],
+    topic: 'mens-health',
+    reviewerSlug: 'dr-sneh-pandey',
+  },
+  {
     slug: 'what-does-low-testosterone-feel-like',
     question: 'What does low testosterone feel like?',
     shortAnswer:
@@ -472,7 +600,7 @@ export const ANSWER_SEEDS = [
       'Do not start testosterone based on online symptom quizzes alone.',
     ],
     evidence: ['Endocrine Society testosterone deficiency guidelines', 'FDA testosterone labeling'],
-    related: ['when-is-testosterone-therapy-appropriate', 'trt-monitoring-requirements', 'testosterone-and-adhd-overlap'],
+    related: ['what-is-free-testosterone', 'when-is-testosterone-therapy-appropriate', 'trt-monitoring-requirements', 'testosterone-and-adhd-overlap'],
     topic: 'mens-health',
     reviewerSlug: 'dr-sneh-pandey',
   },
@@ -485,7 +613,7 @@ export const ANSWER_SEEDS = [
       'Treatment requires ongoing lab monitoring and shared decision-making.',
     ],
     evidence: ['Endocrine Society clinical practice guideline', 'FDA TRT risk communications'],
-    related: ['what-does-low-testosterone-feel-like', 'trt-monitoring-requirements'],
+    related: ['what-is-free-testosterone', 'what-does-low-testosterone-feel-like', 'trt-monitoring-requirements'],
     topic: 'mens-health',
     reviewerSlug: 'dr-sneh-pandey',
   },
@@ -563,7 +691,7 @@ export const ANSWER_SEEDS = [
       'Stimulants and TRT each carry monitoring requirements; do not combine without medical oversight.',
     ],
     evidence: ['Endocrine Society differential diagnosis guidance', 'ADHD adult evaluation standards'],
-    related: ['what-does-low-testosterone-feel-like', 'signs-of-adult-adhd'],
+    related: ['what-is-free-testosterone', 'what-does-low-testosterone-feel-like', 'signs-of-adult-adhd'],
     topic: 'mens-health',
     reviewerSlug: 'dr-sneh-pandey',
   },
