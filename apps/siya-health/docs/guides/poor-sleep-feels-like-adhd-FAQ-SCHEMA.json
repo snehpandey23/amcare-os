@@ -1,0 +1,62 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can poor sleep feel like ADHD?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Chronic poor sleep—especially fragmented sleep from insomnia or obstructive sleep apnea—commonly mimics ADHD: brain fog, irritability, forgetfulness, restless inner tension, and difficulty focusing even when you are trying."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I know if I have ADHD or just bad sleep?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Clinicians compare timeline (lifelong vs sleep-related onset), sleep history (snoring, unrefreshing sleep, insomnia), and validated ADHD screening with childhood examples. A sleep evaluation may be appropriate even when you sleep enough hours. Many people have both."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why can't I focus anymore?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "New or worsening focus can come from sleep debt, sleep apnea, depression, anxiety, thyroid disease, iron deficiency, medication effects, menopause, or ADHD. Sudden severe changes warrant prompt medical review; gradual changes still deserve structured evaluation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does sleep deprivation cause brain fog?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Sleep restriction and apnea-related fragmentation are well linked to slowed cognition, memory lapses, and subjective brain fog in clinical and experimental data."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can treating sleep fix ADHD symptoms?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Treating sleep apnea, insomnia, or chronic restriction can improve attention for some people—sometimes dramatically. It does not rule out ADHD if childhood history and cross-setting impairment remain; both may need care."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is poor sleep making my ADHD medication less effective?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Untreated sleep disorders can blunt perceived stimulant benefit and worsen anxiety or blood pressure effects. Optimizing sleep is part of responsible ADHD pharmacotherapy, not an optional extra."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can lack of sleep mimic ADHD in adults?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Experimental and clinical literature show attention and executive-function impairment with sleep restriction and apnea-related fragmentation. Mimicry does not exclude true ADHD—many adults have both sleep and neurodevelopmental contributors."
+      }
+    }
+  ]
+}

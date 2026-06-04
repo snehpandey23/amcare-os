@@ -1,6 +1,6 @@
 {
   "generated": "2026-06-04",
-  "totalPages": 147,
+  "totalPages": 149,
   "zeroInbound": [
     "/privacy-policy",
     "/terms"
@@ -125,17 +125,17 @@
     {
       "path": "/",
       "outboundCount": 14,
-      "uniqueInbound": 147
+      "uniqueInbound": 149
     },
     {
       "path": "/adhd-care",
       "outboundCount": 20,
-      "uniqueInbound": 147
+      "uniqueInbound": 149
     },
     {
       "path": "/blog",
       "outboundCount": 32,
-      "uniqueInbound": 147
+      "uniqueInbound": 149
     },
     {
       "path": "/blog/adhd",
@@ -144,18 +144,18 @@
     },
     {
       "path": "/answers",
-      "outboundCount": 69,
-      "uniqueInbound": 147
+      "outboundCount": 71,
+      "uniqueInbound": 149
     },
     {
       "path": "/about",
       "outboundCount": 18,
-      "uniqueInbound": 147
+      "uniqueInbound": 149
     },
     {
       "path": "/weight-loss-metabolic-health",
       "outboundCount": 22,
-      "uniqueInbound": 147
+      "uniqueInbound": 149
     }
   ],
   "topSuggestions": [
@@ -515,14 +515,14 @@
         "title": "Adderall vs Vyvanse for adults: what is the difference?"
       },
       {
+        "p": "/answers/brain-fog-after-eating",
+        "score": 4,
+        "title": "Why do I get brain fog after eating?"
+      },
+      {
         "p": "/answers/signs-of-sleep-apnea-in-adults",
         "score": 4,
         "title": "What are the signs of sleep apnea in adults?"
-      },
-      {
-        "p": "/answers/meet-and-greet-telehealth-expectations",
-        "score": 3,
-        "title": "What happens in a telehealth Meet &amp; Greet?"
       }
     ],
     "/blog/ambien-and-sleep-medications-risks-and-benefits": [
@@ -1086,9 +1086,9 @@
         "title": "Compounded vs branded GLP-1: what is the difference?"
       },
       {
-        "p": "/answers/glp-1-nausea-management",
-        "score": 7,
-        "title": "How do you manage GLP-1 nausea?"
+        "p": "/answers/poor-sleep-feels-like-adhd",
+        "score": 4,
+        "title": "Can poor sleep feel like ADHD?"
       }
     ],
     "/blog/telehealth-prescriptions-how-online-treatment-works": [
@@ -1200,52 +1200,51 @@
     ]
   },
   "inboundCounts": {
-    "/about": 147,
-    "/adhd-care": 147,
-    "/answers": 147,
-    "/blog": 147,
-    "/": 147,
-    "/labs": 147,
-    "/prescriptions": 147,
-    "/primary-urgent-care": 147,
-    "/telehealth": 147,
-    "/weight-loss-metabolic-health": 147,
+    "/about": 149,
+    "/adhd-care": 149,
+    "/answers": 149,
+    "/blog": 149,
+    "/": 149,
+    "/labs": 149,
+    "/prescriptions": 149,
+    "/primary-urgent-care": 149,
+    "/telehealth": 149,
+    "/weight-loss-metabolic-health": 149,
     "/adhd-screening": 69,
     "/blog/adhd": 65,
-    "/answers/signs-of-adult-adhd": 45,
+    "/answers/signs-of-adult-adhd": 46,
     "/blog/is-online-adhd-diagnosis-legit": 37,
     "/adult-adhd-diagnosis": 36,
     "/answers/can-adhd-be-diagnosed-online": 36,
     "/answers/starting-adhd-medication-adults": 34,
     "/blog/adhd-symptoms-overlooked": 33,
     "/blog/how-to-know-if-you-have-adhd-adult": 33,
-    "/blog/weight-loss": 32,
+    "/blog/weight-loss": 33,
     "/online-adhd-test": 29,
     "/adhd-evaluation-cost": 28,
-    "/blog/telehealth": 27,
-    "/answers/what-is-food-noise": 23,
-    "/answers/glp-1-side-effects": 22,
-    "/blog/food-noise-and-glp-1-what-it-means-and-what-helps": 20,
+    "/blog/telehealth": 28,
+    "/answers/what-is-food-noise": 24,
+    "/answers/what-is-insulin-resistance": 22,
+    "/blog/food-noise-and-glp-1-what-it-means-and-what-helps": 21,
+    "/blog/insulin-resistance-and-weight-loss-clinician-overview": 20,
     "/mens-health-longevity": 20,
-    "/blog/insulin-resistance-and-weight-loss-clinician-overview": 19,
+    "/answers/brain-fog-after-eating": 19,
+    "/blog/why-am-i-always-tired-causes-when-to-see-doctor": 18,
     "/answers/what-does-low-testosterone-feel-like": 16,
-    "/blog/why-am-i-always-tired-causes-when-to-see-doctor": 16,
-    "/answers/glp-1-nausea-management": 14,
+    "/answers/why-am-i-tired-even-after-sleeping": 13,
     "/blog/how-to-safely-get-prescriptions-online": 13,
     "/creyos-adhd-testing": 13,
+    "/answers/can-sleep-apnea-cause-fatigue": 12,
     "/blog/semaglutide-for-weight-loss-how-it-works": 12,
+    "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign": 12,
     "/adhd-diagnosis-florida": 11,
     "/adhd-diagnosis-texas": 11,
-    "/answers/can-sleep-apnea-cause-fatigue": 11,
+    "/answers/glp-1-side-effects": 11,
+    "/answers/medical-weight-loss-vs-dieting": 11,
     "/answers/what-is-free-testosterone": 11,
-    "/answers/what-is-insulin-resistance": 11,
-    "/answers/why-am-i-tired-even-after-sleeping": 11,
     "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know": 11,
     "/blog/glp1-side-effects-and-how-to-manage-them": 11,
     "/blog/how-adhd-medication-is-prescribed-online": 11,
-    "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign": 11,
-    "/answers/medical-weight-loss-vs-dieting": 10,
-    "/answers/signs-of-sleep-apnea-in-adults": 10,
     "/answers/when-is-testosterone-therapy-appropriate": 10,
     "/blog/online-adhd-diagnosis-texas": 10,
     "/book-appointment": 10,
@@ -1253,24 +1252,26 @@
     "/blog/adhd-evaluation-cost-texas": 9,
     "/blog/insomnia-treatment-options-beyond-medication": 9,
     "/answers/semaglutide-weight-loss-how-it-works": 8,
+    "/answers/signs-of-sleep-apnea-in-adults": 8,
     "/answers/testosterone-and-adhd-overlap": 8,
     "/answers/can-you-get-adhd-medication-online": 7,
     "/answers/is-telehealth-legitimate": 7,
+    "/answers/poor-sleep-feels-like-adhd": 7,
     "/answers/screening-vs-adhd-evaluation": 7,
     "/blog/telehealth-prescriptions-how-online-treatment-works": 7,
     "/blog/when-is-testosterone-therapy-appropriate": 7,
     "/answers/adderall-vs-vyvanse-adults": 6,
     "/answers/adhd-medication-side-effects": 6,
+    "/answers/adhd-vs-burnout": 6,
+    "/answers/normal-a1c-insulin-resistance": 6,
     "/answers/telehealth-adhd-california": 6,
     "/answers/what-included-199-adhd-evaluation": 6,
     "/blog/adhd-medication-options-for-adults": 6,
     "/blog/medical-weight-loss-glp1-semaglutide-texas": 6,
     "/blog/online-adhd-diagnosis-california": 6,
-    "/answers/adhd-vs-burnout": 5,
     "/answers/how-long-adhd-evaluation": 5,
     "/answers/how-online-prescriptions-work": 5,
     "/answers/is-online-adhd-diagnosis-legitimate": 5,
-    "/answers/normal-a1c-insulin-resistance": 5,
     "/answers/who-qualifies-glp-1-weight-loss": 5,
     "/blog/adhd-medication-online-texas-telehealth": 5,
     "/blog/adhd-medication-side-effects-what-to-expect": 5,
@@ -1302,6 +1303,7 @@
     "/answers/can-adhd-cause-anxiety": 3,
     "/answers/ed-telehealth-legitimate": 3,
     "/answers/executive-dysfunction-adhd": 3,
+    "/answers/glp-1-nausea-management": 3,
     "/answers/minoxidil-hair-loss-does-it-work": 3,
     "/answers/oral-vs-injectable-weight-loss-meds": 3,
     "/answers/oral-vs-topical-minoxidil": 3,

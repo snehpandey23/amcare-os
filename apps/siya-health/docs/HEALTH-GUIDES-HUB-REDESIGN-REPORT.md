@@ -1,6 +1,6 @@
 # Health Guides hub redesign report
 
-Generated: 2026-06-04T02:33:22.723Z
+Generated: 2026-06-04T11:40:30.531Z
 
 ## Before
 
@@ -17,11 +17,11 @@ Generated: 2026-06-04T02:33:22.723Z
 
 ## Categories
 
-- **Metabolic Health**: 14 guides, 3 featured + 0 placeholder slot(s)
+- **Metabolic Health**: 15 guides, 3 featured + 0 placeholder slot(s)
 - **Energy & Fatigue**: 3 guides, 3 featured + 0 placeholder slot(s)
 - **Hormone Health**: 9 guides, 3 featured + 0 placeholder slot(s)
 - **ADHD & Focus**: 25 guides, 3 featured + 0 placeholder slot(s)
-- **Telehealth & Care**: 7 guides, 3 featured + 0 placeholder slot(s)
+- **Telehealth & Care**: 8 guides, 3 featured + 0 placeholder slot(s)
 
 ## Implementation
 

@@ -1,6 +1,6 @@
 # Copy consistency report
 
-Generated: 2026-06-04T02:33:22.723Z
+Generated: 2026-06-04T11:40:30.530Z
 
 ## Approved wording system
 

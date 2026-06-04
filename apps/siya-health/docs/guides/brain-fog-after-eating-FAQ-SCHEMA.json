@@ -1,0 +1,78 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why do I get brain fog after eating?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common drivers include large or high-glycemic meals, blood sugar peaks and drops, insulin resistance, dehydration, poor sleep, stress, and certain medications. Daily disabling fog warrants clinician review."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why am I tired after lunch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Post-lunch sleepiness can be normal after a big meal, but daily crashes may reflect glucose variability, insulin resistance, sleep apnea, anemia, thyroid issues, or depression."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a post meal crash?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A post-meal crash is fatigue, fog, or sleepiness 30–120 minutes after eating, often after high-carb or large lunches."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can insulin resistance cause brain fog?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It can contribute. Compensatory high insulin and glycemic swings may pair with fatigue, cravings, and cognitive sluggishness, especially with central weight gain."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is brain fog after eating a sign of diabetes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not always. It can occur with prediabetes, insulin resistance, or non-diabetic meal patterns. Increased thirst, urination, or weight loss raise urgency for glucose testing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why am I sleepy after eating carbs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Rapid carbohydrate absorption can spike insulin and shift autonomic balance toward rest-and-digest physiology."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can poor sleep make post-meal fatigue worse?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Sleep debt and sleep apnea lower daytime alertness, so lunch can feel like the tipping point."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does food noise relate to afternoon energy crashes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Often. Intrusive food thoughts can lead to grazing and larger meals, worsening glucose swings."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When should I see a doctor for fatigue after eating?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "See a clinician if symptoms are daily, worsening, paired with weight change or increased thirst/urination, or if you snore and wake unrefreshed."
+      }
+    }
+  ]
+}

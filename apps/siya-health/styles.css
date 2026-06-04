@@ -2803,6 +2803,47 @@ a.asrs-interest-btn:hover {
 
 .answer-hub-list a:hover { text-decoration: underline; }
 
+.answer-section,
+.answer-learn-more {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.answer-section h2,
+.answer-learn-more h2 {
+  font-size: 1.25rem;
+  margin: 0 0 12px;
+}
+
+.answer-section-list {
+  margin: 12px 0 16px;
+  padding-left: 1.25rem;
+  line-height: 1.55;
+}
+
+.answer-section-list li {
+  margin-bottom: 8px;
+}
+
+.answer-learn-more ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.answer-learn-more a {
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.answer-learn-more a:hover {
+  text-decoration: underline;
+}
+
 /* Health Guides hub — 3 featured cards per category */
 .health-guides-hub-categories {
   display: flex;

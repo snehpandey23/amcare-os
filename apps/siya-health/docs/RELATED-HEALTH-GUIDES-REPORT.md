@@ -1,6 +1,6 @@
 # Related Health Guides report
 
-Generated: 2026-06-04T02:58:52.543Z
+Generated: 2026-06-04T11:40:30.842Z
 
 ## Blogs scanned
 
@@ -19,8 +19,8 @@ Generated: 2026-06-04T02:58:52.543Z
 | Topic | Pool slugs |
 |-------|------------|
 | ADHD | signs-of-adult-adhd, can-adhd-be-diagnosed-online, starting-adhd-medication-adults, non-stimulant-adhd-medications, adhd-vs-burnout |
-| Metabolic / GLP-1 | what-is-food-noise, glp-1-side-effects, glp-1-nausea-management, who-qualifies-glp-1-weight-loss, medical-weight-loss-vs-dieting |
-| Energy / sleep | why-am-i-tired-even-after-sleeping, can-sleep-apnea-cause-fatigue, signs-of-sleep-apnea-in-adults |
+| Metabolic / GLP-1 | brain-fog-after-eating, what-is-food-noise, what-is-insulin-resistance, glp-1-side-effects, medical-weight-loss-vs-dieting |
+| Energy / sleep | brain-fog-after-eating, poor-sleep-feels-like-adhd, why-am-i-tired-even-after-sleeping, can-sleep-apnea-cause-fatigue |
 | Hormone | what-is-free-testosterone, what-does-low-testosterone-feel-like, when-is-testosterone-therapy-appropriate, trt-monitoring-requirements |
 | Telehealth | is-telehealth-legitimate, meet-and-greet-telehealth-expectations, how-online-prescriptions-work |
 

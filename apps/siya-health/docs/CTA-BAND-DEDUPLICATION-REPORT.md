@@ -1,6 +1,6 @@
 # CTA band deduplication report
 
-Generated: 2026-06-04T02:58:52.540Z
+Generated: 2026-06-04T11:40:30.837Z
 
 ## Blogs scanned
 
@@ -12,7 +12,7 @@ _None — prior audits counted `cta-band-buttons` as a second match; actual dupl
 
 ## Provider CTA blocks removed (redundant with final band)
 
-**29** articles had `blog-provider-cta` sections removed (duplicate conversion blocks before the standardized final band).
+0 articles had `blog-provider-cta` sections removed.
 
 
 

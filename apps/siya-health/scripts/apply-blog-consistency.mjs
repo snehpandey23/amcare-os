@@ -32,16 +32,17 @@ const GUIDE_POOLS = {
     'adhd-vs-burnout',
   ],
   metabolic: [
+    'brain-fog-after-eating',
     'what-is-food-noise',
+    'what-is-insulin-resistance',
     'glp-1-side-effects',
-    'glp-1-nausea-management',
-    'who-qualifies-glp-1-weight-loss',
     'medical-weight-loss-vs-dieting',
   ],
   energy: [
+    'brain-fog-after-eating',
+    'poor-sleep-feels-like-adhd',
     'why-am-i-tired-even-after-sleeping',
     'can-sleep-apnea-cause-fatigue',
-    'signs-of-sleep-apnea-in-adults',
   ],
   hormone: [
     'what-is-free-testosterone',

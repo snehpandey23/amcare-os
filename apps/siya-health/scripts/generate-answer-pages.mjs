@@ -54,8 +54,8 @@ const HEALTH_GUIDE_CATEGORIES = [
 
 /** Featured on hub (exactly 3 per category; remainder behind “View all”) */
 const FEATURED_BY_CATEGORY = {
-  metabolic: ['what-is-food-noise', 'what-is-insulin-resistance', 'semaglutide-weight-loss-how-it-works'],
-  energy: ['why-am-i-tired-even-after-sleeping', 'can-sleep-apnea-cause-fatigue', 'signs-of-sleep-apnea-in-adults'],
+  metabolic: ['brain-fog-after-eating', 'what-is-food-noise', 'what-is-insulin-resistance'],
+  energy: ['brain-fog-after-eating', 'poor-sleep-feels-like-adhd', 'why-am-i-tired-even-after-sleeping'],
   hormone: ['what-is-free-testosterone', 'what-does-low-testosterone-feel-like', 'when-is-testosterone-therapy-appropriate'],
   adhd: ['signs-of-adult-adhd', 'how-long-adhd-evaluation', 'can-adhd-be-diagnosed-online'],
   telehealth: ['is-telehealth-legitimate', 'meet-and-greet-telehealth-expectations', 'how-online-prescriptions-work'],
@@ -69,11 +69,18 @@ const CATEGORY_ICONS = {
   telehealth: '◇',
 };
 
+function categoriesForSeed(seed) {
+  if (seed.hubCategories?.length) return seed.hubCategories;
+  return [guideCategoryForSeed(seed)];
+}
+
 function guideCategoryForSeed(seed) {
+  if (seed.slug === 'brain-fog-after-eating') return 'metabolic';
   if (
     seed.slug === 'why-am-i-tired-even-after-sleeping' ||
     seed.slug === 'can-sleep-apnea-cause-fatigue' ||
-    seed.slug === 'signs-of-sleep-apnea-in-adults'
+    seed.slug === 'signs-of-sleep-apnea-in-adults' ||
+    seed.slug === 'poor-sleep-feels-like-adhd'
   ) {
     return 'energy';
   }
@@ -200,11 +207,73 @@ function nextStepsHtml(hub, topic = 'general') {
             </section>`;
 }
 
+function buildSectionsHtml(seed) {
+  if (seed.sections?.length) {
+    return seed.sections
+      .map((s) => {
+        const id = s.id || s.heading.toLowerCase().replace(/\W+/g, '-').slice(0, 40);
+        const paras = (s.paragraphs || []).map((p) => `<p>${esc(p)}</p>`).join('\n            ');
+        const list = s.listItems?.length
+          ? `<ul class="answer-section-list">\n                ${s.listItems.map((li) => `<li>${esc(li)}</li>`).join('\n                ')}\n              </ul>`
+          : '';
+        return `            <section class="answer-section" id="${id}" aria-labelledby="${id}-heading">
+              <h2 id="${id}-heading">${esc(s.heading)}</h2>
+            ${paras}
+            ${list}
+            </section>`;
+      })
+      .join('\n');
+  }
+  const paras = (seed.paragraphs || []).map((p) => `<p>${esc(p)}</p>`).join('\n            ');
+  return `            <section class="answer-detailed" id="detailed-answer" aria-labelledby="detailed-answer-heading">
+              <h2 id="detailed-answer-heading">Detailed answer</h2>
+            ${paras}
+            </section>`;
+}
+
+function buildLearnMoreHtml(seed) {
+  if (!seed.learnMore?.length) return '';
+  const items = seed.learnMore
+    .map((l) => `<li><a href="${esc(l.href)}">${esc(l.label)}</a></li>`)
+    .join('\n                ');
+  return `            <section class="answer-learn-more" id="learn-more" aria-labelledby="learn-more-heading">
+              <h2 id="learn-more-heading">Clinical guides &amp; care</h2>
+              <ul>
+                ${items}
+              </ul>
+            </section>`;
+}
+
+function buildFaqJson(seed) {
+  const bodyText = [
+    seed.shortAnswer,
+    ...(seed.paragraphs || []),
+    ...(seed.sections || []).flatMap((s) => [...(s.paragraphs || []), ...(s.listItems || [])]),
+  ].join(' ');
+  const entities = [
+    {
+      '@type': 'Question',
+      name: seed.question,
+      acceptedAnswer: { '@type': 'Answer', text: bodyText.slice(0, 5000) },
+    },
+  ];
+  for (const faq of seed.faqs || []) {
+    entities.push({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    });
+  }
+  return { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: entities };
+}
+
 function buildAnswerPage(seed) {
   const reviewRecord = resolveAnswerReviewRecord(seed.slug);
   const url = `${BASE}/answers/${seed.slug}`;
   const title = `${seed.question} | Siya Health`;
-  const metaDesc = seed.shortAnswer.slice(0, 155) + (seed.shortAnswer.length > 155 ? '…' : '');
+  const metaDesc =
+    (seed.metaDescription || seed.shortAnswer).slice(0, 155) +
+    ((seed.metaDescription || seed.shortAnswer).length > 155 ? '…' : '');
   const hub = TOPIC_HUBS[seed.topic] || TOPIC_HUBS.adhd;
 
   const relatedHtml = (seed.related || [])
@@ -217,19 +286,9 @@ function buildAnswerPage(seed) {
     .join('\n                ');
 
   const evidenceHtml = (seed.evidence || []).map((e) => `<li>${esc(e)}</li>`).join('\n              ');
-  const detailHtml = seed.paragraphs.map((p) => `<p>${esc(p)}</p>`).join('\n            ');
-
-  const faqJson = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: seed.question,
-        acceptedAnswer: { '@type': 'Answer', text: seed.shortAnswer + ' ' + seed.paragraphs.join(' ') },
-      },
-    ],
-  };
+  const sectionsHtml = buildSectionsHtml(seed);
+  const learnMoreHtml = buildLearnMoreHtml(seed);
+  const faqJson = buildFaqJson(seed);
 
   const medicalWebPage = {
     '@context': 'https://schema.org',
@@ -239,7 +298,10 @@ function buildAnswerPage(seed) {
     url,
     dateModified: reviewRecord.reviewDate || LAST_REVIEWED,
     publisher: { '@type': 'MedicalOrganization', name: 'Siya Health', url: BASE },
-    about: { '@type': 'MedicalCondition', name: seed.topic === 'adhd' ? 'Attention Deficit Hyperactivity Disorder' : 'Medical Condition' },
+    about: {
+      '@type': 'MedicalCondition',
+      name: seed.aboutCondition || (seed.topic === 'adhd' ? 'Attention Deficit Hyperactivity Disorder' : 'Medical Condition'),
+    },
   };
   if (reviewRecord.status === REVIEW_STATUS.CLINICALLY_REVIEWED && reviewRecord.reviewer) {
     medicalWebPage.reviewedBy = physicianReviewedBy(reviewRecord.reviewer);
@@ -280,20 +342,18 @@ ${clinicalReviewBlock(reviewRecord)}
               <h2 id="short-answer-heading">Short answer</h2>
               <p class="answer-lead">${esc(seed.shortAnswer)}</p>
             </section>
-            <section class="answer-detailed" id="detailed-answer" aria-labelledby="detailed-answer-heading">
-              <h2 id="detailed-answer-heading">Detailed answer</h2>
-            ${detailHtml}
-            </section>
+${sectionsHtml}
             <section class="answer-evidence" id="evidence" aria-labelledby="evidence-heading">
               <h2 id="evidence-heading">Evidence &amp; references</h2>
               <ul>${evidenceHtml}</ul>
             </section>
             <section class="answer-related" id="related-questions" aria-labelledby="related-heading">
-              <h2 id="related-heading">Related questions</h2>
+              <h2 id="related-heading">Related Health Guides</h2>
               <ul>
                 ${relatedHtml}
               </ul>
             </section>
+${learnMoreHtml}
 ${nextStepsHtml(hub, seed.topic)}
             <div class="cta-block blog-cta">
               <a class="button" href="${BOOK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
@@ -358,8 +418,11 @@ function placeholderCardHtml(catId) {
 function buildIndexPage() {
   const byCategory = Object.fromEntries(HEALTH_GUIDE_CATEGORIES.map((c) => [c.id, []]));
   for (const s of ANSWER_SEEDS) {
-    const cat = guideCategoryForSeed(s);
-    byCategory[cat].push(s);
+    for (const cat of categoriesForSeed(s)) {
+      if (!byCategory[cat].some((x) => x.slug === s.slug)) {
+        byCategory[cat].push(s);
+      }
+    }
   }
 
   const cards = HEALTH_GUIDE_CATEGORIES.map((cat) => {

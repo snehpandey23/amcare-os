@@ -1,5 +1,5 @@
 /**
- * 50 AI citation answer seeds — one question per page.
+ * Health Guide answer seeds — one question per page.
  * Run: node scripts/generate-answer-pages.mjs
  */
 export const ANSWER_SEEDS = [
@@ -618,6 +618,280 @@ export const ANSWER_SEEDS = [
     topic: 'telehealth',
     reviewerSlug: 'dr-sneh-pandey',
     cornerstoneBlog: '/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign',
+  },
+  {
+    slug: 'poor-sleep-feels-like-adhd',
+    question: 'Can poor sleep feel like ADHD?',
+    metaDescription:
+      'Poor sleep, sleep apnea, and sleep deprivation can mimic ADHD—brain fog, poor focus, and impulsivity. Learn how to tell sleep problems from ADHD and when to get evaluated.',
+    shortAnswer:
+      'Yes. Chronic poor sleep—especially fragmented sleep from insomnia or obstructive sleep apnea—commonly mimics ADHD: brain fog, irritability, forgetfulness, restless inner tension, and “why can’t I focus anymore” even when you are trying. Sleep deprivation alone impairs attention and executive function in research settings. That does not mean you have ADHD—but it does mean sleep should be evaluated before assuming a stimulant is the answer.',
+    sections: [
+      {
+        id: 'detailed-explanation',
+        heading: 'Detailed explanation',
+        paragraphs: [
+          'ADHD is a neurodevelopmental pattern of attention, impulse, and organization problems that usually trace back to childhood and show up across work, home, and relationships. Poor sleep is different: it is a reversible (treatable) driver of similar daytime symptoms when sleep quantity, quality, or timing is off.',
+          'Experimental sleep-restriction studies show that even short periods of insufficient sleep produce measurable lapses in attention, slower processing, and more errors—effects that overlap with what patients describe as “ADHD-like” days. Obstructive sleep apnea adds fragmentation and intermittent hypoxia, so time in bed may look adequate while restorative sleep is not.',
+          'Circadian delay (common in ADHD) and social jet lag can worsen both sleep and focus. Many adults have both ADHD and a sleep disorder; treating sleep alone rarely fixes lifelong executive dysfunction, but ignoring sleep can make ADHD care look like it “failed.”',
+          'Online forums and patient communities often describe the same arc: “I thought I had ADHD, fixed my sleep apnea, and focus improved,” or “sleep study was normal but CBT-I helped brain fog.” Those stories are not diagnoses—but they highlight why clinicians screen sleep before labeling symptoms as purely ADHD.',
+          'Quora and Reddit threads repeatedly ask whether “ADHD or sleep deprivation” explains lost focus after age 30, during perimenopause, or after night-shift work. In practice, both often need consideration until history, sleep testing, and structured ADHD evaluation rule one direction in or out.',
+          'Google “People also ask” clusters mirror this: brain fog and poor sleep, whether sleep apnea causes concentration problems, and whether adults can develop ADHD suddenly. Sudden-onset attention problems still warrant sleep and medical review; true ADHD typically has earlier roots, though late recognition is common.',
+        ],
+      },
+      {
+        id: 'common-signs',
+        heading: 'Common signs sleep—not ADHD—is driving symptoms',
+        listItems: [
+          'Focus crashed after a life phase of poor sleep (new baby, night shifts, insomnia) rather than a lifelong pattern since childhood.',
+          'You sleep enough hours but wake unrefreshed; a partner reports snoring, gasping, or breathing pauses.',
+          'Weekend catch-up sleep or vacation noticeably improves focus within days.',
+          'Caffeine used to help and now barely works; you feel wired-tired or foggy.',
+          'Irritability and impatience spike when sleep debt builds; organization falls apart mainly when exhausted.',
+          'Restless legs, frequent awakenings, or long sleep latency dominate the story more than classic childhood hyperactivity.',
+        ],
+        paragraphs: [
+          'Brain fog and poor sleep often travel together: concentration feels effortful, reading comprehension drops, and you re-read the same paragraph. That overlap is why “ADHD or sleep deprivation” is a common search—and why both deserve structured evaluation.',
+        ],
+      },
+      {
+        id: 'when-to-seek-evaluation',
+        heading: 'When to seek evaluation',
+        paragraphs: [
+          'Book medical care promptly for chest pain, shortness of breath, suicidal thoughts, sudden severe fatigue, or witnessed apnea with choking. For non-urgent but persistent symptoms, a licensed clinician can map sleep history, ADHD screening, mood, and basic labs rather than guessing from quizzes.',
+          'A practical sequence many clinicians use: (1) quantify sleep duration, timing, and quality; (2) screen for sleep apnea and insomnia; (3) use validated ADHD tools with a developmental history; (4) treat the primary driver—or both if comorbid. Telehealth can start this work; sleep testing and some labs may still need local coordination.',
+          'If stimulants are considered while sleep apnea is untreated, sleep and cardiovascular risk should be addressed first. If sleep treatment improves focus substantially, you may still need ADHD care for lifelong executive patterns—but the priority order matters.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'How do I know if I have ADHD or just bad sleep?',
+        answer:
+          'Clinicians compare timeline (lifelong vs sleep-related onset), sleep history (snoring, unrefreshing sleep, insomnia), and validated ADHD screening with childhood examples. A sleep evaluation may be appropriate even when you “sleep enough hours.” Many people have both.',
+      },
+      {
+        question: "Why can't I focus anymore?",
+        answer:
+          'New or worsening focus can come from sleep debt, sleep apnea, depression, anxiety, thyroid disease, iron deficiency, medication effects, menopause, or ADHD. Sudden severe changes warrant prompt medical review; gradual changes still deserve structured evaluation—not only a stimulant trial.',
+      },
+      {
+        question: 'Does sleep deprivation cause brain fog?',
+        answer:
+          'Yes. Sleep restriction and apnea-related fragmentation are well linked to slowed cognition, memory lapses, and subjective brain fog in clinical and experimental data.',
+      },
+      {
+        question: 'Can treating sleep fix ADHD symptoms?',
+        answer:
+          'Treating sleep apnea, insomnia, or chronic restriction can improve attention for some people—sometimes dramatically. It does not rule out ADHD if childhood history and cross-setting impairment remain; both may need care.',
+      },
+      {
+        question: 'Is poor sleep making my ADHD medication less effective?',
+        answer:
+          'Untreated sleep disorders can blunt perceived stimulant benefit and worsen anxiety or blood pressure effects. Optimizing sleep is part of responsible ADHD pharmacotherapy, not an optional extra. Tell your prescriber about snoring, unrefreshing sleep, or insomnia before dose increases.',
+      },
+      {
+        question: 'Can lack of sleep mimic ADHD in adults?',
+        answer:
+          'Yes. Experimental and clinical literature show attention and executive-function impairment with sleep restriction and apnea-related fragmentation. Mimicry does not exclude true ADHD—many adults have both sleep and neurodevelopmental contributors.',
+      },
+    ],
+    evidence: [
+      'Van Dongen HPA et al. The cumulative cost of additional wakefulness. Sleep. 2003 (PMID 12683469)',
+      'Killgore WDS. Effects of sleep deprivation on cognition. Prog Brain Res. 2010 (PMID 21075236)',
+      'Cortese S et al. Sleep in children and adolescents with ADHD. Sleep Med Rev. 2013 (PMID 23932233)',
+      'AASM Clinical Practice Guideline: Diagnostic Testing for Adult OSA (2017; updated screening advisories)',
+      'Wajman JR et al. Association between OSA and ADHD symptoms in adults. J Clin Sleep Med. 2021 (PMID 33443341)',
+      'CHADD: ADHD and sleep disorders (patient education crosswalk)',
+    ],
+    learnMore: [
+      { href: '/adhd-care', label: 'ADHD evaluation & telehealth care' },
+      {
+        href: '/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign',
+        label: 'Sleep apnea, fatigue & metabolic risk (clinical guide)',
+      },
+      {
+        href: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+        label: 'Why am I always tired? (fatigue cornerstone)',
+      },
+      { href: '/telehealth', label: 'Telehealth & virtual care' },
+    ],
+    related: [
+      'signs-of-adult-adhd',
+      'adhd-vs-burnout',
+      'why-am-i-tired-even-after-sleeping',
+      'can-sleep-apnea-cause-fatigue',
+      'signs-of-sleep-apnea-in-adults',
+    ],
+    topic: 'telehealth',
+    aboutCondition: 'Sleep Disorders and Attention Deficit Hyperactivity Disorder',
+    reviewerSlug: 'dr-natasha-desai',
+    cornerstoneBlog: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+  },
+  {
+    slug: 'brain-fog-after-eating',
+    question: 'Why do I get brain fog after eating?',
+    metaDescription:
+      'Brain fog after eating often links to blood sugar swings, insulin resistance, large or high-carb meals, poor sleep, and stress—not “just lunch.” Learn causes and when to seek evaluation.',
+    shortAnswer:
+      'Post-meal brain fog is common and usually multifactorial. Large or high-glycemic meals, reactive glucose swings, underlying insulin resistance, poor sleep, dehydration, and stress can all make you feel mentally slow, sleepy, or foggy within an hour of eating. It is not always diabetes—but persistent afternoon crashes, strong carb cravings, or “food noise” deserve a metabolic and sleep history with a licensed clinician, not guesswork from trending diets.',
+    sections: [
+      {
+        id: 'why-it-happens',
+        heading: 'Why it happens',
+        paragraphs: [
+          'After you eat, blood flow shifts toward digestion, hormones such as insulin rise, and parasympathetic tone increases—patterns that can feel like calm or drowsiness in some people, especially after a heavy lunch. That normal physiology is different from pathologic post-meal fog that happens daily and interferes with work.',
+          'Glycemic variability—how far glucose rises and how quickly it falls—may affect energy and cognition more than a single fasting glucose number. Adults with insulin resistance often mount higher insulin responses to carbohydrates, which can precede overt prediabetes on A1C.',
+          '“Food noise”—intrusive thoughts about eating—can drive grazing and larger meals, worsening the crash cycle. Treating metabolic health, sleep, and meal structure together usually beats blaming one food group without data.',
+        ],
+      },
+      {
+        id: 'common-causes',
+        heading: 'Common causes',
+        listItems: [
+          'Large portion or high-glycemic load (refined carbs, sugary drinks, low protein/fiber).',
+          'Skipped breakfast → oversized lunch → classic afternoon energy crash.',
+          'Hidden insulin resistance or prediabetes (normal fasting glucose, symptoms still present).',
+          'Reactive hypoglycemia symptoms in the hours after eating (clinician-guided testing clarifies).',
+          'Poor sleep or untreated sleep apnea amplifying daytime slump after meals.',
+          'Dehydration, alcohol at lunch, or sedating antihistamines/decongestants.',
+          'Post-infectious fatigue, anemia, thyroid disease, depression, or high stress cortisol patterns.',
+          'Rarely: postprandial hypotension, celiac disease, pancreatic insufficiency—needs directed workup.',
+        ],
+        paragraphs: [
+          'Misconception: “tired after lunch means I need more coffee.” Caffeine masks sleep debt and glucose swings temporarily but can worsen afternoon anxiety or sleep that night.',
+          'Misconception: “brain fog after eating is always gluten.” Only consider celiac or wheat allergy with appropriate testing and symptom patterns—not elimination alone.',
+        ],
+      },
+      {
+        id: 'insulin-resistance-blood-sugar',
+        heading: 'Insulin resistance and blood sugar swings',
+        paragraphs: [
+          'Insulin resistance means cells need more insulin to manage the same glucose load. Compensatory hyperinsulinemia can occur while A1C still looks “normal,” especially in adults with central adiposity or strong family history.',
+          'ADA Standards of Care emphasize screening for prediabetes in high-risk adults and lifestyle intervention (weight loss, activity, sleep) as first-line prevention—roughly 5–7% weight loss improves insulin sensitivity in many high-risk individuals (Diabetes Prevention Program).',
+          'AACE and obesity-medicine frameworks treat glycemic variability, cravings, and post-meal symptoms as part of metabolic syndrome risk—not isolated annoyances. Continuous glucose monitors are tools for education in select patients; they do not replace medical diagnosis.',
+          'GLP-1 therapies used for weight and diabetes can blunt post-meal glucose peaks and reduce food preoccupation for some patients, but they require clinician oversight, not cosmetic use.',
+        ],
+      },
+      {
+        id: 'sleep-stress',
+        heading: 'Sleep and stress contribution',
+        paragraphs: [
+          'Sleep restriction alone impairs attention and reaction time in controlled studies—so a tired brain after lunch may be “sleep debt + meal,” not food alone. Obstructive sleep apnea adds fragmentation even when total hours seem adequate.',
+          'Cortisol and autonomic stress from back-to-back meetings, caregiving, or anxiety can worsen perceived fog after eating because your nervous system is already taxed. Stress also pushes convenience carbs and larger portions.',
+          'If you are mentally slow only on workdays after desk lunch, timing, light exposure, movement breaks, and meal composition experiments (protein/fiber first) are reasonable—but persistent symptoms still warrant labs and sleep screening.',
+        ],
+      },
+      {
+        id: 'when-to-seek-evaluation',
+        heading: 'When to seek evaluation',
+        paragraphs: [
+          'Seek urgent care for chest pain, stroke symptoms, confusion with fever, or inability to stay awake while driving. Schedule non-urgent medical review if crashes are daily, you are losing weight unintentionally, thirst/urination increased, or fog worsens over weeks.',
+          'Useful clinician discussion points: meal timing and composition; fasting glucose and A1C; lipids and blood pressure; sleep history (snoring, unrefreshing sleep); mood; medications; waist trend. Continuous monitoring or mixed-meal tests may be appropriate case-by-case.',
+          'Telehealth can start metabolic and fatigue mapping; local labs and sleep testing may still be needed. Coordinate ADHD, sleep, and metabolic care when multiple guides in this cluster apply to you.',
+        ],
+      },
+      {
+        id: 'key-takeaways',
+        heading: 'Key takeaways',
+        listItems: [
+          'Brain fog after eating is often metabolic + behavioral + sleep—not one villain food.',
+          'Protein, fiber, and smaller lunches reduce many post-meal crashes without extreme restriction.',
+          'Insulin resistance can hide behind a normal A1C—symptoms still matter.',
+          'Poor sleep and apnea magnify afternoon fatigue after meals.',
+          'Persistent symptoms deserve labs and history, not only supplements or social media diets.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Why do I get brain fog after eating?',
+        answer:
+          'Common drivers include large or high-glycemic meals, blood sugar peaks and drops, insulin resistance, dehydration, poor sleep, stress, and certain medications. Daily disabling fog warrants clinician review—not self-diagnosis.',
+      },
+      {
+        question: 'Why am I tired after lunch?',
+        answer:
+          'Post-lunch sleepiness can be normal after a big meal, but daily crashes may reflect glucose variability, insulin resistance, sleep apnea, anemia, thyroid issues, or depression. Meal size, protein, fiber, and walk breaks often help; persistent symptoms need evaluation.',
+      },
+      {
+        question: 'What is a post meal crash?',
+        answer:
+          'A post-meal crash is fatigue, fog, or sleepiness 30–120 minutes after eating, often after high-carb or large lunches. It overlaps with reactive glucose changes and insulin surges in susceptible people.',
+      },
+      {
+        question: 'Can insulin resistance cause brain fog?',
+        answer:
+          'It can contribute. Compensatory high insulin and glycemic swings may pair with fatigue, cravings, and cognitive sluggishness, especially with central weight gain. Diagnosis and treatment are clinician-guided.',
+      },
+      {
+        question: 'Is brain fog after eating a sign of diabetes?',
+        answer:
+          'Not always. It can occur with prediabetes, insulin resistance, or non-diabetic meal patterns. Increased thirst, urination, weight loss, or recurrent infections raise urgency for glucose testing.',
+      },
+      {
+        question: 'Why am I sleepy after eating carbs?',
+        answer:
+          'Rapid carbohydrate absorption can spike insulin and shift autonomic balance toward rest-and-digest physiology. Pairing carbs with protein, fiber, and smaller portions often smooths the curve.',
+      },
+      {
+        question: 'Can poor sleep make post-meal fatigue worse?',
+        answer:
+          'Yes. Sleep debt and sleep apnea lower daytime alertness, so lunch can feel like the tipping point even when the meal is only part of the story.',
+      },
+      {
+        question: 'Does food noise relate to afternoon energy crashes?',
+        answer:
+          'Often. Intrusive food thoughts can lead to grazing and larger meals, worsening glucose swings. Metabolic care may address both cravings and post-meal symptoms when clinically appropriate.',
+      },
+      {
+        question: 'When should I see a doctor for fatigue after eating?',
+        answer:
+          'See a clinician if symptoms are daily, worsening, paired with weight change or polyuria/polydipsia, or if you snore and wake unrefreshed. Urgent symptoms (chest pain, stroke signs, severe confusion) need emergency care.',
+      },
+    ],
+    evidence: [
+      'ADA Standards of Care in Diabetes—2025 (prediabetes screening, lifestyle therapy)',
+      'Diabetes Prevention Program outcomes (NEJM 2002; PMID 12023865)',
+      'O’Keefe JH et al. Meals and circadian clocks. J Am Coll Cardiol. 2014 (PMID 25225201)',
+      'Sonnleitner A et al. Glycemic variability and cognitive function—systematic review themes',
+      'Stanley S, Russell JT. Postprandial “crash” and orexin/hypocretin literature (PMID 17071468)',
+      'AASM OSA and daytime sleepiness guidance',
+      'AACE obesity and cardiometabolic clinical guidance (algorithm summaries)',
+    ],
+    learnMore: [
+      { href: '/answers/what-is-insulin-resistance', label: 'What is insulin resistance?' },
+      { href: '/answers/why-am-i-tired-even-after-sleeping', label: 'Why am I tired after sleeping?' },
+      { href: '/answers/poor-sleep-feels-like-adhd', label: 'Can poor sleep feel like ADHD?' },
+      { href: '/answers/what-is-food-noise', label: 'What is food noise?' },
+      {
+        href: '/blog/food-noise-and-glp-1-what-it-means-and-what-helps',
+        label: 'Food noise & GLP-1 (cornerstone guide)',
+      },
+      {
+        href: '/blog/insulin-resistance-and-weight-loss-clinician-overview',
+        label: 'Insulin resistance & weight loss (cornerstone guide)',
+      },
+      {
+        href: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+        label: 'Why am I always tired? (fatigue cornerstone)',
+      },
+      { href: '/weight-loss-metabolic-health', label: 'Medical weight loss & metabolic health' },
+      { href: '/telehealth', label: 'Telehealth & virtual care' },
+    ],
+    related: [
+      'what-is-insulin-resistance',
+      'what-is-food-noise',
+      'why-am-i-tired-even-after-sleeping',
+      'poor-sleep-feels-like-adhd',
+      'normal-a1c-insulin-resistance',
+      'medical-weight-loss-vs-dieting',
+    ],
+    topic: 'weight-loss',
+    hubCategories: ['metabolic', 'energy'],
+    aboutCondition: 'Postprandial symptoms and insulin resistance',
+    reviewerSlug: 'dr-sneh-pandey',
+    cornerstoneBlog: '/blog/insulin-resistance-and-weight-loss-clinician-overview',
   },
   {
     slug: 'what-is-free-testosterone',

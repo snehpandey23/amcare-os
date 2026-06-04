@@ -1,15 +1,15 @@
 # Health Guides category balance
 
-Generated: 2026-06-04T02:33:22.724Z
+Generated: 2026-06-04T11:40:30.531Z
 
 ## Metabolic Health
 
 | Metric | Value |
 |--------|------:|
-| Total guides | 14 |
+| Total guides | 15 |
 | Featured (hub) | what-is-food-noise, what-is-insulin-resistance, semaglutide-weight-loss-how-it-works |
 | Placeholder slots on hub | 0 |
-| Guides behind “View all” | 11 |
+| Guides behind “View all” | 12 |
 
 ### Recommended next guides to create (planning only — not authored in this pass)
 
@@ -62,10 +62,10 @@ Generated: 2026-06-04T02:33:22.724Z
 
 | Metric | Value |
 |--------|------:|
-| Total guides | 7 |
+| Total guides | 8 |
 | Featured (hub) | is-telehealth-legitimate, meet-and-greet-telehealth-expectations, how-online-prescriptions-work |
 | Placeholder slots on hub | 0 |
-| Guides behind “View all” | 4 |
+| Guides behind “View all” | 5 |
 
 ### Recommended next guides to create (planning only — not authored in this pass)
 

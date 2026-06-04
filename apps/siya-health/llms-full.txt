@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
 Generated: 2026-06-04
-Total pages: 147
+Total pages: 149
 
 ---
 
@@ -187,6 +187,11 @@ Total pages: 147
   Summary: The Adult ADHD Self-Report Scale (ASRS) is a validated screening questionnaire—not a diagnosis. It helps clinicians decide whether a full evaluation is war…
   Topics: adhd, health-guide
 
+- Why do I get brain fog after eating?
+  URL: https://siya.health/answers/brain-fog-after-eating
+  Summary: Brain fog after eating often links to blood sugar swings, insulin resistance, large or high-carb meals, poor sleep, and stress—not “just lunch.” Learn caus…
+  Topics: health-guide
+
 - Can ADHD be diagnosed online?
   URL: https://siya.health/answers/can-adhd-be-diagnosed-online
   Summary: Yes—when a licensed clinician in your state conducts a full telehealth evaluation using clinical interview, validated tools, and safety screening. A free o…
@@ -326,6 +331,11 @@ Total pages: 147
   URL: https://siya.health/answers/phentermine-weight-loss-safety
   Summary: Phentermine is an FDA-approved short-term appetite suppressant for select patients when benefits outweigh risks. It is contraindicated in many cardiovascul…
   Topics: weight-loss, health-guide
+
+- Can poor sleep feel like ADHD?
+  URL: https://siya.health/answers/poor-sleep-feels-like-adhd
+  Summary: Poor sleep, sleep apnea, and sleep deprivation can mimic ADHD—brain fog, poor focus, and impulsivity. Learn how to tell sleep problems from ADHD and when t…
+  Topics: adhd, health-guide, sleep
 
 - What is rejection sensitive dysphoria (RSD) and ADHD?
   URL: https://siya.health/answers/rejection-sensitivity-adhd

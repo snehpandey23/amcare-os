@@ -1,15 +1,15 @@
 # Review status consistency report
 
-Generated: 2026-06-04T02:33:22.720Z
+Generated: 2026-06-04T11:40:30.525Z
 
 ## Pages scanned
 
 | Area | Count |
 |------|------:|
 | Blog articles | 55 |
-| Health Guide answer pages | 58 |
+| Health Guide answer pages | 60 |
 | Category hubs | 6 |
-| **Total** | **119** |
+| **Total** | **121** |
 
 ## Duplicates found (before fix)
 
