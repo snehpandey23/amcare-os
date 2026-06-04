@@ -1,6 +1,6 @@
 # Blog consistency report
 
-Generated: 2026-06-04T11:40:30.532Z
+Generated: 2026-06-04T11:43:24.877Z
 
 ## Articles audited
 

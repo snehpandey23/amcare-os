@@ -771,7 +771,7 @@ Total pages: 149
 
 - Concierge Primary Care
   URL: https://siya.health/primary-urgent-care
-  Summary: Virtual primary care and concierge visits with licensed providers. Telehealth services across California, Texas, Florida, and Pennsylvania.
+  Summary: Virtual primary care and concierge visits with licensed providers. Telehealth services across California, California, Texas, Pennsylvania, and Florida.
 
 - Privacy Policy
   URL: https://siya.health/privacy-policy

@@ -14,6 +14,7 @@
     "consistency:screenshots": "node scripts/capture-consistency-qa-screenshots.mjs",
     "blog:consistency:apply": "node scripts/apply-blog-consistency.mjs",
     "blog:consistency:screenshots": "node scripts/capture-blog-consistency-screenshots.mjs",
+    "parity:cert": "node scripts/production-parity-cert.mjs",
     "deploy": "vercel --prod"
   },
   "main": "asrs-screener.js",

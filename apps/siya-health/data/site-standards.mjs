@@ -1,14 +1,14 @@
 /**
  * Sitewide copy standards — states, footer, Health Guides naming.
  */
-export const LICENSED_STATES = ['California', 'Texas', 'Florida', 'Pennsylvania'];
+export const LICENSED_STATES = ['California', 'Texas', 'Pennsylvania', 'Florida'];
 
-/** Display: California • Texas • Florida • Pennsylvania */
+/** Display: California • Texas • Pennsylvania • Florida */
 export const STATES_BULLET = LICENSED_STATES.join(' • ');
 
-/** Prose: California, Texas, Florida, and Pennsylvania */
+/** Prose: California, Texas, Pennsylvania, and Florida */
 export const STATES_INLINE =
-  'California, Texas, Florida, and Pennsylvania';
+  'California, Texas, Pennsylvania, and Florida';
 
 export const FOOTER_STATES_LINE = `Board-certified providers providing telehealth care across ${STATES_INLINE}.`;
 
@@ -27,4 +27,5 @@ export const COPY_STANDARDS = {
 export const LEGACY_FOOTER_PATTERNS = [
   'Board-certified providers providing telehealth care across Texas, Pennsylvania, and Florida.',
   'Board-certified providers providing telehealth care across California, Texas, Pennsylvania, and Florida.',
+  'Board-certified providers providing telehealth care across California, Texas, Florida, and Pennsylvania.',
 ];

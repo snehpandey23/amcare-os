@@ -1,6 +1,6 @@
 # Health Guides category balance
 
-Generated: 2026-06-04T11:40:30.531Z
+Generated: 2026-06-04T11:43:24.877Z
 
 ## Metabolic Health
 

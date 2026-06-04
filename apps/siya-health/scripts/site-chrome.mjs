@@ -315,12 +315,16 @@ export function normalizeSitewideCopy(html) {
   html = html.replaceAll('California, California,', 'California,');
   html = html.replaceAll('Texas, Pennsylvania, and Florida.', `${STATES_INLINE}.`);
   html = html.replaceAll('Texas, Pennsylvania, and Florida via', `${STATES_INLINE} via`);
+  html = html.replaceAll('Texas, Florida, and Pennsylvania.', `${STATES_INLINE}.`);
+  html = html.replaceAll('Texas, Florida, and Pennsylvania via', `${STATES_INLINE} via`);
   html = html.replace(/serve Texas, Pennsylvania, and Florida/gi, `serve ${STATES_INLINE}`);
+  html = html.replace(/serve Texas, Florida, and Pennsylvania/gi, `serve ${STATES_INLINE}`);
   html = html.replaceAll('Licensed in Texas, Pennsylvania, and Florida', `Licensed in ${STATES_INLINE}`);
-  html = html.replace(
-    /(?<!California, )California, Texas, Pennsylvania, and Florida/g,
-    STATES_INLINE,
-  );
+  html = html.replaceAll('Licensed in Texas, Florida, and Pennsylvania', `Licensed in ${STATES_INLINE}`);
+  html = html.replaceAll('California, Texas, Florida, and Pennsylvania', STATES_INLINE);
+  html = html.replaceAll('California, Texas, Pennsylvania, and Florida', STATES_INLINE);
+  html = html.replaceAll('Licensed in CA, TX, PA, FL', `Licensed in ${STATES_BULLET}`);
+  html = html.replaceAll('Licensed in CA, TX, FL, PA', `Licensed in ${STATES_BULLET}`);
 
   html = html.replaceAll('Clinical Answers Hub', 'Health Guides Hub');
   html = html.replaceAll('Answers Hub', 'Health Guides Hub');

@@ -1,6 +1,6 @@
 # Related Health Guides report
 
-Generated: 2026-06-04T11:40:30.842Z
+Generated: 2026-06-04T11:43:25.208Z
 
 ## Blogs scanned
 
