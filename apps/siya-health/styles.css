@@ -2339,6 +2339,433 @@ a.asrs-interest-btn:hover {
   border-left-color: var(--primary);
 }
 
+/* Blog engagement components — cornerstone & long-form education */
+.blog-engage {
+  margin: 28px 0;
+  padding: 20px 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.blog-engage-label {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin: 0 0 14px;
+}
+
+.blog-engage-sub {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin: -8px 0 12px;
+}
+
+.blog-engage-body,
+.blog-engage-list li {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.blog-engage-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.blog-engage-list li { margin-bottom: 10px; }
+.blog-engage-list li:last-child { margin-bottom: 0; }
+
+.blog-engage--takeaway {
+  background: linear-gradient(135deg, rgba(30, 58, 138, 0.06) 0%, rgba(14, 165, 164, 0.08) 100%);
+  border-left: 4px solid var(--accent);
+}
+
+.blog-engage--evidence {
+  border-left: 4px solid var(--primary);
+  background: var(--bg-subtle);
+}
+
+.blog-engage-evidence { margin: 0; }
+
+.blog-engage-evidence-row {
+  display: grid;
+  gap: 4px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.blog-engage-evidence-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.blog-engage-evidence-row dt {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.blog-engage-evidence-row dd {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.blog-engage-cite {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.blog-engage--myth .blog-engage-myth-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.blog-engage-myth,
+.blog-engage-reality {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.blog-engage-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(239, 68, 68, 0.12);
+  color: #b91c1c;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.blog-engage-tag--ok {
+  background: rgba(14, 165, 164, 0.15);
+  color: #0f766e;
+}
+
+.blog-engage--reddit {
+  background: #fafafa;
+  border-left: 4px solid #94a3b8;
+}
+
+.blog-engage-quotes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.blog-engage-quotes li {
+  position: relative;
+  padding: 10px 0 10px 16px;
+  border-bottom: 1px dashed var(--border);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.blog-engage-quotes li::before {
+  content: "“";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.blog-engage-quotes li:last-child { border-bottom: none; }
+
+.blog-engage--pearl {
+  background: rgba(14, 165, 164, 0.08);
+  border-left: 4px solid var(--accent);
+}
+
+.blog-engage--infographic .blog-engage-infographic {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 600px) {
+  .blog-engage--infographic .blog-engage-infographic {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.blog-engage-stat {
+  text-align: center;
+  padding: 16px 12px;
+  background: var(--bg-subtle);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.blog-engage-stat-value {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+.blog-engage-stat-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 6px;
+}
+
+.blog-engage-stat-note {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.blog-engage-stat-note a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.blog-flowchart {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.blog-flowchart-step {
+  display: flex;
+  gap: 14px;
+  padding: 16px 0;
+  position: relative;
+}
+
+.blog-flowchart-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 48px;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(var(--accent), var(--border));
+}
+
+.blog-flowchart-num {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--white);
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog-flowchart-content strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.blog-flowchart-content p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.blog-flowchart-content a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.blog-decision-tree {
+  display: grid;
+  gap: 14px;
+}
+
+.blog-decision-node {
+  padding: 14px 16px;
+  background: var(--bg-subtle);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.blog-decision-node--branch {
+  margin-left: 12px;
+  border-left: 3px solid var(--accent);
+}
+
+.blog-decision-q {
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+}
+
+.blog-decision-yes,
+.blog-decision-no,
+.blog-decision-action {
+  margin: 6px 0 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.blog-decision-yes span,
+.blog-decision-no span {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.blog-service-link {
+  margin: 0 0 20px;
+  font-size: 0.95rem;
+}
+
+.blog-service-link a {
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.blog-service-card {
+  margin: 28px 0;
+  padding: 20px 22px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  border-left: 4px solid var(--accent);
+}
+
+.blog-service-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+  color: var(--primary);
+}
+
+.blog-service-card p {
+  margin: 0 0 14px;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.blog-snippet-def {
+  margin: 16px 0 20px;
+  padding: 14px 16px;
+  background: rgba(14, 165, 164, 0.06);
+  border-radius: 8px;
+  border-left: 3px solid var(--accent);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.blog-snippet-table-wrap {
+  margin: 20px 0 24px;
+  overflow-x: auto;
+}
+
+.blog-snippet-table-caption {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.blog-snippet-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.blog-snippet-table th,
+.blog-snippet-table td {
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.blog-snippet-table th {
+  background: var(--bg-subtle);
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.blog-snippet-list {
+  margin: 12px 0 20px;
+  padding-left: 1.25rem;
+}
+
+.related-health-guides {
+  margin: 32px 0;
+  padding: 20px 22px;
+  background: var(--bg-subtle);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.related-health-guides h2,
+.related-health-guides--service h3 {
+  margin: 0 0 12px;
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+.related-health-guides ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.related-health-guides li {
+  margin-bottom: 6px;
+}
+
+.related-health-guides--service {
+  margin-top: 28px;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+.cornerstone-articles-grid {
+  margin-top: 8px;
+}
+
+.cornerstone-articles-grid .blog-card h3 {
+  font-size: 1.1rem;
+  margin: 8px 0;
+}
+
+.cornerstone-hub .section-header {
+  margin-bottom: 24px;
+}
+
+.blog-cta--mid {
+  margin: 28px 0;
+}
+
 .answer-page .answer-lead {
   font-size: 1.125rem;
   line-height: 1.65;

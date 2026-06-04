@@ -322,15 +322,30 @@ export function normalizeSitewideCopy(html) {
   );
 
   html = html.replaceAll('Clinical Answers Hub', 'Health Guides Hub');
+  html = html.replaceAll('Answers Hub', 'Health Guides Hub');
+  html = html.replaceAll('Answer hub', 'Health Guides hub');
+  html = html.replaceAll('Answers hub', 'Health Guides hub');
   html = html.replaceAll('Browse clinical answers', 'Browse Health Guides');
   html = html.replaceAll('Browse clinical answer', 'Browse Health Guides');
+  html = html.replaceAll('Browse Answers', 'Browse Health Guides');
   html = html.replaceAll('clinical answers hub', 'Health Guides hub');
-  html = html.replaceAll('clinical answers', 'health guides');
-  html = html.replaceAll('Clinical answers', 'Health guides');
   html = html.replaceAll('Clinical Answers', 'Health Guides');
+  html = html.replaceAll('Clinical answers', 'Health guides');
+  html = html.replaceAll('clinical answers', 'health guides');
   html = html.replace(/ — clinical answer/gi, ' — health guide');
   html = html.replace(/\(quick clinical answer\)/gi, '(quick health guide)');
   html = html.replace(/clinical answer/gi, 'health guide');
+
+  // /answers nav and footer label (URL unchanged)
+  html = html.replace(
+    /(<a[^>]*href="\/answers"[^>]*>)\s*Answers\s*(<\/a>)/gi,
+    `$1${NAV_HEALTH_GUIDES.label}$2`,
+  );
+  html = html.replace(/"name"\s*:\s*"Answers"/g, `"name":"${NAV_HEALTH_GUIDES.label}"`);
+  html = html.replace(
+    /<title>\s*Answers\s*\|/gi,
+    `<title>${NAV_HEALTH_GUIDES.label} |`,
+  );
 
   html = html.replaceAll('Book Free Consultation →', 'Book a Meet &amp; Greet →');
   html = html.replaceAll('Book Free Consultation', 'Book a Meet &amp; Greet');
