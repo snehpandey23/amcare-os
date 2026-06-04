@@ -19,11 +19,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="index, follow" />
-    <title>Clinical Answers Hub | ADHD, Weight Loss &amp; Telehealth | Siya Health</title>
-    <meta name="description" content="Direct answers to common ADHD, GLP-1, testosterone, and telehealth questions—medically reviewed by Siya Health physicians. Optimized for clarity and clinical accuracy." />
+    <title>Health Guides | Metabolic, ADHD, Hormones &amp; Telehealth | Siya Health</title>
+    <meta name="description" content="Physician-led Health Guides: short answers, evidence, and related topics for metabolic health, fatigue, hormones, ADHD, and telehealth. Each page shows its clinical review status." />
     <link rel="canonical" href="https://siya.health/answers" />
-    <meta property="og:title" content="Clinical Answers Hub | ADHD, Weight Loss &amp; Telehealth | Siya Health" />
-    <meta property="og:description" content="Direct answers to common ADHD, GLP-1, testosterone, and telehealth questions—medically reviewed by Siya Health physicians. Optimized for clarity and clinical accuracy." />
+    <meta property="og:title" content="Health Guides | Metabolic, ADHD, Hormones &amp; Telehealth | Siya Health" />
+    <meta property="og:description" content="Physician-led Health Guides: short answers, evidence, and related topics for metabolic health, fatigue, hormones, ADHD, and telehealth. Each page shows its clinical review status." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://siya.health/answers" />
     <meta property="og:image" content="https://siya.health/assets/images/siya-health-logo.png" />
@@ -32,19 +32,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta property="og:site_name" content="Siya Health" />
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Clinical Answers Hub | ADHD, Weight Loss &amp; Telehealth | Siya Health" />
-    <meta name="twitter:description" content="Direct answers to common ADHD, GLP-1, testosterone, and telehealth questions—medically reviewed by Siya Health physicians. Optimized for clarity and clinical accuracy." />
+    <meta name="twitter:title" content="Health Guides | Metabolic, ADHD, Hormones &amp; Telehealth | Siya Health" />
+    <meta name="twitter:description" content="Physician-led Health Guides: short answers, evidence, and related topics for metabolic health, fatigue, hormones, ADHD, and telehealth. Each page shows its clinical review status." />
     <meta name="twitter:image" content="https://siya.health/assets/images/siya-health-logo.png" />
     <link rel="stylesheet" href="../styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;600;700&display=swap" rel="stylesheet" />
 
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Siya Health Clinical Answers","description":"Direct answers to common ADHD, GLP-1, testosterone, and telehealth questions—medically reviewed by Siya Health physicians. Optimized for clarity and clinical accuracy.","url":"https://siya.health/answers","numberOfItems":56}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Siya Health Health Guides Hub","description":"Physician-led Health Guides: short answers, evidence, and related topics for metabolic health, fatigue, hormones, ADHD, and telehealth. Each page shows its clinical review status.","url":"https://siya.health/answers","numberOfItems":56}</script>
+    <script>
+      document.querySelectorAll('.health-guides-more a').forEach((link) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const id = link.getAttribute('href').slice(1);
+          const list = document.getElementById(id);
+          if (list) {
+            list.hidden = false;
+            link.closest('li')?.remove();
+          }
+        });
+      });
+    </script>
   
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://siya.health/"},{"@type":"ListItem","position":2,"name":"Clinical answers","item":"https://siya.health/answers"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://siya.health/"},{"@type":"ListItem","position":2,"name":"Health guides","item":"https://siya.health/answers"}]}</script>
   
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Siya Health","url":"https://siya.health","logo":"https://siya.health/assets/images/siya-health-logo.png"}</script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Clinical Answers Hub | ADHD, Weight Loss & Telehealth | Siya Health","description":"Direct answers to common ADHD, GLP-1, testosterone, and telehealth questions—medically reviewed by Siya Health physicians. Optimized for clarity and clinical accuracy.","url":"https://siya.health/answers"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Health Guides | Metabolic, ADHD, Hormones & Telehealth | Siya Health","description":"Physician-led Health Guides: short answers, evidence, and related topics for metabolic health, fatigue, hormones, ADHD, and telehealth. Each page shows its clinical review status.","url":"https://siya.health/answers"}</script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -57,7 +70,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <a href="/adhd-care">ADHD Care</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
-          <a href="/answers">Answers</a>
+          <a href="/answers">Health Guides</a>
           <a href="/blog">Blog</a>
         </nav>
         <div class="nav-cta">
@@ -71,27 +84,100 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <a href="/adhd-care">ADHD Care</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
-          <a href="/answers">Answers</a>
+          <a href="/answers">Health Guides</a>
           <a href="/blog">Blog</a>
           <a class="button" href="https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
         </div>
       </div>
     </header>
     <main id="main">
-      <section class="section blog-index" style="padding-top: 120px;">
+      <section class="section blog-index health-guides-hub" style="padding-top: 120px;">
         <div class="container">
           <div class="section-header">
-            <h1>Clinical answers</h1>
-            <p class="lead">One question per page—short answer, detailed explanation, evidence, and related questions. Medically reviewed by Siya Health physicians. <a href="/llms.txt">Machine index</a> · <a href="/article-index.json">JSON index</a></p>
+            <h1>Health Guides</h1>
+            <p class="lead">One question per page—short answer, detailed explanation, evidence, and related questions. Reviewed pages display physician name and date; others show pending physician review. <a href="/llms.txt">Machine index</a> · <a href="/article-index.json">JSON index</a></p>
           </div>
+          <div class="health-guides-hub-grid">
 
-          <section class="answer-hub-section">
-            <h2>ADHD</h2>
-            <ul class="answer-hub-list">
+          <article class="health-guides-card" id="guides-metabolic">
+            <header class="health-guides-card-header">
+              <h2>Metabolic Health</h2>
+              <p class="health-guides-card-blurb">GLP-1, insulin resistance, food noise, and medical weight loss.</p>
+              <p class="health-guides-card-meta"><span class="health-guides-count">14</span> guides</p>
+            </header>
+            <ul class="health-guides-card-list">
+              <li><a href="/answers/glp-1-side-effects">What are GLP-1 side effects?</a></li>
+              <li><a href="/answers/semaglutide-weight-loss-how-it-works">How does semaglutide work for weight loss?</a></li>
+              <li><a href="/answers/tirzepatide-vs-semaglutide">Tirzepatide vs semaglutide: which is better for weight loss?</a></li>
+              <li><a href="/answers/compounded-vs-branded-glp-1">Compounded vs branded GLP-1: what is the difference?</a></li>
+              <li class="health-guides-more"><a href="#guides-metabolic-all">+ 10 more in this category</a></li>
+            </ul>
+            <ul class="health-guides-card-list health-guides-card-list--all" id="guides-metabolic-all" hidden>
+              <li><a href="/answers/phentermine-weight-loss-safety">Is phentermine safe for weight loss?</a></li>
+              <li><a href="/answers/oral-vs-injectable-weight-loss-meds">Oral vs injectable weight loss medications: pros and cons?</a></li>
+              <li><a href="/answers/medical-weight-loss-vs-dieting">Medical weight loss vs dieting: what works better?</a></li>
+              <li><a href="/answers/glp-1-nausea-management">How do you manage GLP-1 nausea?</a></li>
+              <li><a href="/answers/who-qualifies-glp-1-weight-loss">Who qualifies for GLP-1 weight loss medications?</a></li>
+              <li><a href="/answers/adhd-and-weight-loss-connection">Is there a connection between ADHD and weight loss struggles?</a></li>
+              <li><a href="/answers/what-is-insulin-resistance">What is insulin resistance?</a></li>
+              <li><a href="/answers/insulin-resistance-without-diabetes">Can you have insulin resistance without diabetes?</a></li>
+              <li><a href="/answers/normal-a1c-insulin-resistance">Can you have insulin resistance with a normal A1C?</a></li>
+              <li><a href="/answers/what-is-food-noise">What is food noise?</a></li>
+            </ul>
+            <p class="health-guides-card-cta"><a href="/weight-loss-metabolic-health">Explore Metabolic Health care →</a></p>
+          </article>
+
+          <article class="health-guides-card" id="guides-energy">
+            <header class="health-guides-card-header">
+              <h2>Energy &amp; Fatigue</h2>
+              <p class="health-guides-card-blurb">Sleep, burnout, and why rest does not always restore energy.</p>
+              <p class="health-guides-card-meta"><span class="health-guides-count">1</span> guides</p>
+            </header>
+            <ul class="health-guides-card-list">
+              <li><a href="/answers/why-am-i-tired-even-after-sleeping">Why am I tired even after sleeping?</a></li>
+              
+            </ul>
+            
+            <p class="health-guides-card-cta"><a href="/telehealth">Explore Energy &amp; Fatigue care →</a></p>
+          </article>
+
+          <article class="health-guides-card" id="guides-hormone">
+            <header class="health-guides-card-header">
+              <h2>Hormone Health</h2>
+              <p class="health-guides-card-blurb">Testosterone, men's health, hair loss, and related telehealth care.</p>
+              <p class="health-guides-card-meta"><span class="health-guides-count">9</span> guides</p>
+            </header>
+            <ul class="health-guides-card-list">
+              <li><a href="/answers/what-is-free-testosterone">What is free testosterone?</a></li>
+              <li><a href="/answers/what-does-low-testosterone-feel-like">What does low testosterone feel like?</a></li>
+              <li><a href="/answers/when-is-testosterone-therapy-appropriate">When is testosterone therapy appropriate?</a></li>
+              <li><a href="/answers/trt-monitoring-requirements">What monitoring is required on testosterone therapy?</a></li>
+              <li class="health-guides-more"><a href="#guides-hormone-all">+ 5 more in this category</a></li>
+            </ul>
+            <ul class="health-guides-card-list health-guides-card-list--all" id="guides-hormone-all" hidden>
+              <li><a href="/answers/sildenafil-erectile-dysfunction-expectations">What should you expect from sildenafil for erectile dysfunction?</a></li>
+              <li><a href="/answers/minoxidil-hair-loss-does-it-work">Does minoxidil work for hair loss?</a></li>
+              <li><a href="/answers/oral-vs-topical-minoxidil">Oral vs topical minoxidil: which is right?</a></li>
+              <li><a href="/answers/ed-telehealth-legitimate">Is telehealth for erectile dysfunction legitimate?</a></li>
+              <li><a href="/answers/testosterone-and-adhd-overlap">Can low testosterone mimic ADHD?</a></li>
+            </ul>
+            <p class="health-guides-card-cta"><a href="/mens-health-longevity">Explore Hormone Health care →</a></p>
+          </article>
+
+          <article class="health-guides-card" id="guides-adhd">
+            <header class="health-guides-card-header">
+              <h2>ADHD &amp; Focus</h2>
+              <p class="health-guides-card-blurb">Evaluation, medication, screening, and adult ADHD education.</p>
+              <p class="health-guides-card-meta"><span class="health-guides-count">25</span> guides</p>
+            </header>
+            <ul class="health-guides-card-list">
               <li><a href="/answers/signs-of-adult-adhd">What are the signs of adult ADHD?</a></li>
               <li><a href="/answers/can-adhd-cause-anxiety">Can ADHD cause anxiety?</a></li>
               <li><a href="/answers/adhd-vs-anxiety">How do you tell ADHD apart from anxiety?</a></li>
               <li><a href="/answers/adhd-vs-burnout">Is it ADHD or burnout?</a></li>
+              <li class="health-guides-more"><a href="#guides-adhd-all">+ 21 more in this category</a></li>
+            </ul>
+            <ul class="health-guides-card-list health-guides-card-list--all" id="guides-adhd-all" hidden>
               <li><a href="/answers/late-adhd-diagnosis-adults">Why are so many adults diagnosed with ADHD late in life?</a></li>
               <li><a href="/answers/high-functioning-adhd">Can you have ADHD and still be high-functioning?</a></li>
               <li><a href="/answers/adhd-in-women">How does ADHD present differently in women?</a></li>
@@ -114,57 +200,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <li><a href="/answers/creyos-adhd-testing-explained">What is Creyos cognitive testing for ADHD?</a></li>
               <li><a href="/answers/screening-vs-adhd-evaluation">What is the difference between ADHD screening and a full evaluation?</a></li>
             </ul>
-            <p class="blog-hub-see-all"><a href="/blog/adhd">More adhd articles →</a></p>
-          </section>
-          <section class="answer-hub-section">
-            <h2>Weight loss</h2>
-            <ul class="answer-hub-list">
-              <li><a href="/answers/glp-1-side-effects">What are GLP-1 side effects?</a></li>
-              <li><a href="/answers/semaglutide-weight-loss-how-it-works">How does semaglutide work for weight loss?</a></li>
-              <li><a href="/answers/tirzepatide-vs-semaglutide">Tirzepatide vs semaglutide: which is better for weight loss?</a></li>
-              <li><a href="/answers/compounded-vs-branded-glp-1">Compounded vs branded GLP-1: what is the difference?</a></li>
-              <li><a href="/answers/phentermine-weight-loss-safety">Is phentermine safe for weight loss?</a></li>
-              <li><a href="/answers/oral-vs-injectable-weight-loss-meds">Oral vs injectable weight loss medications: pros and cons?</a></li>
-              <li><a href="/answers/medical-weight-loss-vs-dieting">Medical weight loss vs dieting: what works better?</a></li>
-              <li><a href="/answers/glp-1-nausea-management">How do you manage GLP-1 nausea?</a></li>
-              <li><a href="/answers/who-qualifies-glp-1-weight-loss">Who qualifies for GLP-1 weight loss medications?</a></li>
-              <li><a href="/answers/adhd-and-weight-loss-connection">Is there a connection between ADHD and weight loss struggles?</a></li>
-              <li><a href="/answers/what-is-insulin-resistance">What is insulin resistance?</a></li>
-              <li><a href="/answers/insulin-resistance-without-diabetes">Can you have insulin resistance without diabetes?</a></li>
-              <li><a href="/answers/normal-a1c-insulin-resistance">Can you have insulin resistance with a normal A1C?</a></li>
-              <li><a href="/answers/what-is-food-noise">What is food noise?</a></li>
-            </ul>
-            <p class="blog-hub-see-all"><a href="/blog/weight-loss">More weight loss articles →</a></p>
-          </section>
-          <section class="answer-hub-section">
-            <h2>Telehealth</h2>
-            <ul class="answer-hub-list">
-              <li><a href="/answers/why-am-i-tired-even-after-sleeping">Why am I tired even after sleeping?</a></li>
+            <p class="health-guides-card-cta"><a href="/adhd-care">Explore ADHD &amp; Focus care →</a></p>
+          </article>
+
+          <article class="health-guides-card" id="guides-telehealth">
+            <header class="health-guides-card-header">
+              <h2>Telehealth &amp; Care</h2>
+              <p class="health-guides-card-blurb">How online care works, Meet &amp; Greet, prescriptions, and logistics.</p>
+              <p class="health-guides-card-meta"><span class="health-guides-count">7</span> guides</p>
+            </header>
+            <ul class="health-guides-card-list">
               <li><a href="/answers/how-online-prescriptions-work">How do online prescriptions work legally?</a></li>
               <li><a href="/answers/is-telehealth-legitimate">Is telehealth legitimate for medical care?</a></li>
               <li><a href="/answers/telehealth-adhd-california">How does ADHD telehealth work in California?</a></li>
               <li><a href="/answers/telehealth-adhd-texas">How does ADHD telehealth work in Texas?</a></li>
+              <li class="health-guides-more"><a href="#guides-telehealth-all">+ 3 more in this category</a></li>
+            </ul>
+            <ul class="health-guides-card-list health-guides-card-list--all" id="guides-telehealth-all" hidden>
               <li><a href="/answers/fsa-hsa-adhd-evaluation">Can you use FSA or HSA for ADHD evaluation?</a></li>
               <li><a href="/answers/what-included-199-adhd-evaluation">What is included in Siya Health’s $199 ADHD evaluation?</a></li>
               <li><a href="/answers/meet-and-greet-telehealth-expectations">What happens in a telehealth Meet &amp; Greet?</a></li>
             </ul>
-            <p class="blog-hub-see-all"><a href="/blog/telehealth">More telehealth articles →</a></p>
-          </section>
-          <section class="answer-hub-section">
-            <h2>Men's health</h2>
-            <ul class="answer-hub-list">
-              <li><a href="/answers/what-is-free-testosterone">What is free testosterone?</a></li>
-              <li><a href="/answers/what-does-low-testosterone-feel-like">What does low testosterone feel like?</a></li>
-              <li><a href="/answers/when-is-testosterone-therapy-appropriate">When is testosterone therapy appropriate?</a></li>
-              <li><a href="/answers/trt-monitoring-requirements">What monitoring is required on testosterone therapy?</a></li>
-              <li><a href="/answers/sildenafil-erectile-dysfunction-expectations">What should you expect from sildenafil for erectile dysfunction?</a></li>
-              <li><a href="/answers/minoxidil-hair-loss-does-it-work">Does minoxidil work for hair loss?</a></li>
-              <li><a href="/answers/oral-vs-topical-minoxidil">Oral vs topical minoxidil: which is right?</a></li>
-              <li><a href="/answers/ed-telehealth-legitimate">Is telehealth for erectile dysfunction legitimate?</a></li>
-              <li><a href="/answers/testosterone-and-adhd-overlap">Can low testosterone mimic ADHD?</a></li>
-            </ul>
-            <p class="blog-hub-see-all"><a href="/mens-health-longevity">More men's health articles →</a></p>
-          </section>
+            <p class="health-guides-card-cta"><a href="/telehealth">Explore Telehealth &amp; Care care →</a></p>
+          </article>
+          </div>
         </div>
       </section>
     </main>
@@ -173,10 +232,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="footer-logo-col">
           <a href="/" class="footer-logo-link"><img src="../assets/images/siya-health-logo.png" alt="Siya Health" class="footer-logo-img" /></a>
         </div>
-        <div class="footer-brand">
-          <p>Board-certified providers providing telehealth care across California, Texas, Pennsylvania, and Florida.</p>
-        </div>
-        <div><h4>Services</h4><p><a href="/answers">Answers</a></p><p><a href="/adhd-care">ADHD Care</a></p><p><a href="/weight-loss-metabolic-health">Weight Loss</a></p><p><a href="/telehealth">Telehealth</a></p></div>
+        <div class="footer-brand"><p>Board-certified providers providing telehealth care across California, Texas, Florida, and Pennsylvania.</p></div>
+        <div><h4>Services</h4><p><a href="/answers">Health Guides</a></p><p><a href="/adhd-care">ADHD Care</a></p><p><a href="/weight-loss-metabolic-health">Weight Loss</a></p><p><a href="/telehealth">Telehealth</a></p></div>
         <div><h4>Healthcare Services</h4><p><a href="/primary-urgent-care">Primary &amp; urgent care</a></p><p><a href="/labs">Diagnostic labs</a></p><p><a href="/prescriptions">Prescriptions</a></p></div>
         <div><h4>Contact</h4><p><a href="mailto:care@siya.health">care@siya.health</a></p><p><a href="tel:+12154451244">(215) 445-1244</a></p></div>
       </div>

@@ -214,7 +214,7 @@ for (const rel of blogArticles) {
   const topic = topicFromPath(src, pagesMeta.get(src).title);
   if (topic === 'adhd') {
     addSuggestion(src, '/adhd-care', 'ADHD evaluation and care', 'Convert educational readers to primary service');
-    addSuggestion(src, '/answers', 'Browse clinical answers', 'Deepen engagement + AI retrieval hub');
+    addSuggestion(src, '/answers', 'Browse Health Guides', 'Deepen engagement + AI retrieval hub');
   }
   if (topic === 'metabolic') {
     addSuggestion(src, '/weight-loss-metabolic-health', 'Medical weight loss programs', 'Service conversion path');

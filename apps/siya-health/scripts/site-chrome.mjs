@@ -6,9 +6,18 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { ANSWER_SEEDS } from '../data/answer-seeds.mjs';
+import {
+  FOOTER_STATES_LINE,
+  LEGACY_FOOTER_PATTERNS,
+  STATES_BULLET,
+  STATES_INLINE,
+} from '../data/site-standards.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
+
+/** Primary nav label for /answers (URL unchanged for SEO) */
+export const NAV_HEALTH_GUIDES = { path: '/answers', label: 'Health Guides', shortLabel: 'Health guides' };
 
 export const MEET_GREET_URL = 'https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY';
 
@@ -94,7 +103,7 @@ export const ANCHOR_LABELS = {
   '/blog/adhd': 'ADHD articles and clinical guides',
   '/blog/weight-loss': 'Medical weight loss articles',
   '/blog/telehealth': 'Telehealth and online care articles',
-  '/answers/signs-of-adult-adhd': 'Signs of adult ADHD (quick clinical answer)',
+  '/answers/signs-of-adult-adhd': 'Signs of adult ADHD (quick health guide)',
   '/answers/semaglutide-weight-loss-how-it-works': 'How semaglutide works for weight loss',
   '/answers/glp-1-side-effects': 'GLP-1 side effects explained',
   '/answers/adhd-and-weight-loss-connection': 'ADHD and weight loss struggles',
@@ -106,7 +115,7 @@ export const ANCHOR_LABELS = {
   '/weight-loss-metabolic-health': 'Medical weight loss program',
   '/adult-adhd-diagnosis': 'Book a $199 adult ADHD evaluation',
   '/adhd-screening': 'Free 2-minute ADHD screening',
-  '/answers': 'Browse all clinical answers',
+  '/answers': 'Browse all health guides',
   '/primary-urgent-care': 'Primary and urgent telehealth care',
   '/labs': 'Diagnostic lab services',
   '/prescriptions': 'Online prescription services',
@@ -127,13 +136,13 @@ const LEARN_MORE_ADHD = `<!-- SIYA:LEARN-MORE-ADHD -->
         <div class="container">
           <div class="section-header">
             <h2 id="learn-more-adhd-heading">Learn More About ADHD</h2>
-            <p class="lead">Explore guides, clinical answers, and evaluation resources from Siya Health physicians.</p>
+            <p class="lead">Explore Health Guides, articles, and evaluation resources from Siya Health physicians.</p>
           </div>
           <ul class="learn-more-links">
             <li><a href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">Why am I always tired? (clinician guide)</a></li>
             <li><a href="/blog/adhd">ADHD articles and state-specific guides</a></li>
-            <li><a href="/answers/why-am-i-tired-even-after-sleeping">Tired after sleeping — clinical answer</a></li>
-            <li><a href="/answers/signs-of-adult-adhd">Signs of adult ADHD — clinical answer</a></li>
+            <li><a href="/answers/why-am-i-tired-even-after-sleeping">Tired after sleeping — health guide</a></li>
+            <li><a href="/answers/signs-of-adult-adhd">Signs of adult ADHD — health guide</a></li>
             <li><a href="/creyos-adhd-testing">Creyos cognitive testing for ADHD evaluations</a></li>
             <li><a href="/adhd-evaluation-cost">ADHD evaluation cost and what is included</a></li>
             <li><a href="/blog/online-adhd-diagnosis-california">Online ADHD diagnosis in California</a></li>
@@ -148,7 +157,7 @@ const LEARN_MORE_WEIGHT = `<!-- SIYA:LEARN-MORE-WEIGHT -->
         <div class="container">
           <div class="section-header">
             <h2 id="learn-more-weight-heading">Learn More About Medical Weight Loss</h2>
-            <p class="lead">Evidence-based articles and short clinical answers on GLP-1 therapy, side effects, and ADHD–weight connections.</p>
+            <p class="lead">Evidence-based articles and short Health Guides on GLP-1 therapy, side effects, and ADHD–weight connections.</p>
           </div>
           <ul class="learn-more-links">
             <li><a href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">Why am I always tired? causes and when to see a doctor</a></li>
@@ -243,9 +252,13 @@ function anchorFor(path, fallbackTitle) {
 }
 
 function injectAnswersInNavBlock(navHtml) {
-  if (navHtml.includes('href="/answers">Answers</a>')) return navHtml;
+  const link = `<a href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a>`;
+  if (navHtml.includes(`href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a>`)) return navHtml;
+  if (navHtml.includes('href="/answers">Answers</a>')) {
+    return navHtml.replaceAll('href="/answers">Answers</a>', `href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a>`);
+  }
   if (!navHtml.includes('href="/blog">Blog</a>')) return navHtml;
-  return navHtml.replace(/(<a href="\/blog">Blog<\/a>)/, '<a href="/answers">Answers</a>\n          $1');
+  return navHtml.replace(/(<a href="\/blog">Blog<\/a>)/, `${link}\n          $1`);
 }
 
 export function injectAnswersNav(html) {
@@ -275,12 +288,64 @@ export function injectNavCta(html, relPath) {
   return html;
 }
 
+/** Standardize states, Health Guides naming, and legacy CTAs on every page */
+export function normalizeSitewideCopy(html) {
+  for (const legacy of LEGACY_FOOTER_PATTERNS) {
+    html = html.replaceAll(legacy, FOOTER_STATES_LINE);
+  }
+  html = html.replaceAll(
+    'Texas, Pennsylvania, and Florida. All care is delivered via secure telehealth.',
+    `${STATES_INLINE}. All care is delivered via secure telehealth.`,
+  );
+  html = html.replaceAll('California, California,', 'California,');
+  html = html.replaceAll('Texas, Pennsylvania, and Florida.', `${STATES_INLINE}.`);
+  html = html.replaceAll('Texas, Pennsylvania, and Florida via', `${STATES_INLINE} via`);
+  html = html.replace(/serve Texas, Pennsylvania, and Florida/gi, `serve ${STATES_INLINE}`);
+  html = html.replaceAll('Licensed in Texas, Pennsylvania, and Florida', `Licensed in ${STATES_INLINE}`);
+  html = html.replace(
+    /(?<!California, )California, Texas, Pennsylvania, and Florida/g,
+    STATES_INLINE,
+  );
+
+  html = html.replaceAll('Clinical Answers Hub', 'Health Guides Hub');
+  html = html.replaceAll('Browse clinical answers', 'Browse Health Guides');
+  html = html.replaceAll('Browse clinical answer', 'Browse Health Guides');
+  html = html.replaceAll('clinical answers hub', 'Health Guides hub');
+  html = html.replaceAll('clinical answers', 'health guides');
+  html = html.replaceAll('Clinical answers', 'Health guides');
+  html = html.replaceAll('Clinical Answers', 'Health Guides');
+  html = html.replace(/ — clinical answer/gi, ' — health guide');
+  html = html.replace(/\(quick clinical answer\)/gi, '(quick health guide)');
+  html = html.replace(/clinical answer/gi, 'health guide');
+
+  html = html.replaceAll('Book Free Consultation →', 'Book a Meet &amp; Greet →');
+  html = html.replaceAll('Book Free Consultation', 'Book a Meet &amp; Greet');
+  html = html.replace(
+    /<a([^>]*href="[^"]*yourmarketingai[^"]*"[^>]*)>Book a Meet &amp; Greet<\/a>/gi,
+    (m) => (m.includes('target=') ? m : m.replace('<a', '<a target="_blank" rel="noopener"')),
+  );
+
+  return html;
+}
+
 export function injectFooterChrome(html) {
   if (!html.includes('<footer')) return html;
 
+  if (html.includes('class="footer-brand"')) {
+    html = html.replace(
+      /<div class="footer-brand">\s*<p>[^<]*<\/p>\s*<\/div>/i,
+      `<div class="footer-brand"><p>${FOOTER_STATES_LINE}</p></div>`,
+    );
+  }
+
+  html = html.replaceAll('href="/answers">Answers</a>', `href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a>`);
+
   const footerHasAnswers = /<footer[\s\S]*<h4>Services<\/h4>[\s\S]{0,600}href="\/answers"/i.test(html);
   if (html.includes('<h4>Services</h4>') && !footerHasAnswers) {
-    html = html.replace(/<h4>Services<\/h4>/i, '<h4>Services</h4>\n          <p><a href="/answers">Answers</a></p>');
+    html = html.replace(
+      /<h4>Services<\/h4>/i,
+      `<h4>Services</h4>\n          <p><a href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a></p>`,
+    );
   }
 
   if (!html.includes('Healthcare Services')) {
@@ -483,5 +548,6 @@ export function applySiteChrome(html, relPath, title = '') {
   html = injectFooterChrome(html);
   html = injectLearnMoreSections(html, relPath);
   html = injectContinueReading(html, relPath, title, auditIndex);
+  html = normalizeSitewideCopy(html);
   return html;
 }

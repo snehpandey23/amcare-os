@@ -63,7 +63,7 @@ function topicTags(rel, title) {
   if (/adhd|adderall|vyvanse|focalin|stimulant|asrs|creyos/.test(t)) tags.push('adhd');
   if (/weight|glp|semaglutide|tirzepatide|phentermine|obesity|metabolic/.test(t)) tags.push('weight-loss');
   if (/telehealth|online diagnosis|prescription online/.test(t)) tags.push('telehealth');
-  if (rel.startsWith('answers/')) tags.push('clinical-answer');
+  if (rel.startsWith('answers/')) tags.push('health-guide');
   if (/california|\bca\b/.test(t)) tags.push('california');
   if (/texas|houston|austin|\btx\b/.test(t)) tags.push('texas');
   if (/pennsylvania|philadelphia|\bpa\b/.test(t)) tags.push('pennsylvania');
@@ -98,7 +98,7 @@ function writeLlmsTxt(pages) {
     '# Siya Health',
     '',
     '> Board-certified telehealth clinic for adult ADHD evaluation, medical weight loss, and whole-person care.',
-    '> Licensed providers in California, Texas, Pennsylvania, and Florida.',
+    '> Licensed providers in California, Texas, Florida, and Pennsylvania.',
     '',
     '## Primary entity',
     `- Organization: ${BASE}/`,
@@ -113,7 +113,7 @@ function writeLlmsTxt(pages) {
     `- Men's health / longevity: ${BASE}/mens-health-longevity`,
     '',
     '## Knowledge hubs',
-    `- Clinical answers (50+ Q&A): ${BASE}/answers`,
+    `- Health Guides hub (50+ Q&A): ${BASE}/answers`,
     `- ADHD articles: ${BASE}/blog/adhd`,
     `- Weight loss articles: ${BASE}/blog/weight-loss`,
     `- Telehealth articles: ${BASE}/blog/telehealth`,

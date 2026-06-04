@@ -11,10 +11,10 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {
+  applyAnswerReviewStatus,
+  applyBlogReviewStatus,
   getProviderBySlug,
-  injectBlogReviewedBy,
   injectProviderPhysicianSchema,
-  pickReviewer,
 } from './clinical-entity.mjs';
 import { applySiteChrome } from './site-chrome.mjs';
 
@@ -343,7 +343,7 @@ function ensureAnswerBreadcrumb(html, relPath, title, canonical) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE}/` },
-      { '@type': 'ListItem', position: 2, name: 'Answers', item: `${BASE}/answers` },
+      { '@type': 'ListItem', position: 2, name: 'Health Guides', item: `${BASE}/answers` },
       { '@type': 'ListItem', position: 3, name: itemName, item: canonical },
     ],
   };
@@ -466,10 +466,11 @@ function processHtml(relPath) {
   if (isBlogArticle(relPath)) {
     html = articleToBlogPosting(html);
     const slug = relPath.replace(/^blog\//, '').replace(/\.html$/, '');
-    const reviewer = pickReviewer(slug, title);
-    html = injectBlogReviewedBy(html, reviewer);
+    html = applyBlogReviewStatus(html, slug);
     html = ensureBreadcrumbBlogArticle(html, relPath, title, canonical);
   } else if (relPath.startsWith('answers/') && relPath !== 'answers/index.html') {
+    const slug = relPath.replace(/^answers\//, '').replace(/\.html$/, '');
+    html = applyAnswerReviewStatus(html, slug);
     html = ensureAnswerBreadcrumb(html, relPath, title, canonical);
   } else {
     html = categoryBreadcrumb(relPath, html);
@@ -487,7 +488,7 @@ function processHtml(relPath) {
   if (relPath === 'about.html') html = ensureBreadcrumbSimplePage(html, 'About', canonical);
   if (relPath === 'adhd-care.html') html = ensureBreadcrumbSimplePage(html, 'ADHD Care', canonical);
   if (relPath === 'membership-pricing.html') html = ensureBreadcrumbSimplePage(html, 'Membership & pricing', canonical);
-  if (relPath === 'answers/index.html') html = ensureBreadcrumbSimplePage(html, 'Clinical answers', `${BASE}/answers`);
+  if (relPath === 'answers/index.html') html = ensureBreadcrumbSimplePage(html, 'Health Guides', `${BASE}/answers`);
 
   html = ensureOrganizationWebPage(html, relPath, title, description, canonical);
   html = ensureWebSiteSchema(html, relPath);

@@ -2283,6 +2283,20 @@ a.asrs-interest-btn:hover {
 
 .clinical-review a { font-weight: 600; }
 
+.clinical-review--pending {
+  background: rgba(120, 113, 108, 0.08);
+  border-left-color: #9a948c;
+}
+
+.clinical-review--pending .clinical-review-label {
+  color: #6b6560;
+}
+
+.clinical-review--reviewed {
+  background: rgba(0, 107, 125, 0.06);
+  border-left-color: var(--primary);
+}
+
 .answer-page .answer-lead {
   font-size: 1.125rem;
   line-height: 1.65;
@@ -2319,6 +2333,97 @@ a.asrs-interest-btn:hover {
 }
 
 .answer-hub-list a:hover { text-decoration: underline; }
+
+/* Health Guides hub — category cards */
+.health-guides-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.health-guides-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.health-guides-card:hover {
+  border-color: rgba(0, 107, 125, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.health-guides-card-header h2 {
+  font-size: 1.25rem;
+  margin: 0 0 8px;
+  color: var(--text);
+}
+
+.health-guides-card-blurb {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0 0 12px;
+}
+
+.health-guides-card-meta {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--primary);
+  margin: 0 0 16px;
+}
+
+.health-guides-card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  flex: 1;
+  display: grid;
+  gap: 8px;
+}
+
+.health-guides-card-list a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.health-guides-card-list a:hover { text-decoration: underline; }
+
+.health-guides-more a {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.health-guides-card-cta {
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.health-guides-card-cta a {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.health-guides-card-cta a:hover { text-decoration: underline; }
+
+@media (max-width: 640px) {
+  .health-guides-hub-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 .blog-related {
   margin-top: 40px;

@@ -9,12 +9,57 @@ import { ANSWER_SEEDS, TOPIC_HUBS } from '../data/answer-seeds.mjs';
 import {
   BASE,
   LAST_REVIEWED,
-  clinicalReviewHtml,
+  clinicalReviewBlock,
   formatReviewDate,
-  getProviderBySlug,
   physicianReviewedBy,
+  resolveAnswerReviewRecord,
+  REVIEW_STATUS,
 } from './clinical-entity.mjs';
-import { MEET_GREET_URL } from './site-chrome.mjs';
+import { FOOTER_STATES_LINE } from '../data/site-standards.mjs';
+import { MEET_GREET_URL, NAV_HEALTH_GUIDES } from './site-chrome.mjs';
+
+/** UX hub groupings (display order) */
+const HEALTH_GUIDE_CATEGORIES = [
+  {
+    id: 'metabolic',
+    label: 'Metabolic Health',
+    blurb: 'GLP-1, insulin resistance, food noise, and medical weight loss.',
+    carePath: '/weight-loss-metabolic-health',
+  },
+  {
+    id: 'energy',
+    label: 'Energy & Fatigue',
+    blurb: 'Sleep, burnout, and why rest does not always restore energy.',
+    carePath: '/telehealth',
+  },
+  {
+    id: 'hormone',
+    label: 'Hormone Health',
+    blurb: 'Testosterone, men\'s health, hair loss, and related telehealth care.',
+    carePath: '/mens-health-longevity',
+  },
+  {
+    id: 'adhd',
+    label: 'ADHD & Focus',
+    blurb: 'Evaluation, medication, screening, and adult ADHD education.',
+    carePath: '/adhd-care',
+  },
+  {
+    id: 'telehealth',
+    label: 'Telehealth & Care',
+    blurb: 'How online care works, Meet & Greet, prescriptions, and logistics.',
+    carePath: '/telehealth',
+  },
+];
+
+function guideCategoryForSeed(seed) {
+  if (seed.slug === 'why-am-i-tired-even-after-sleeping') return 'energy';
+  if (seed.topic === 'adhd') return 'adhd';
+  if (seed.topic === 'mens-health') return 'hormone';
+  if (seed.topic === 'telehealth') return 'telehealth';
+  if (seed.topic === 'weight-loss') return 'metabolic';
+  return 'telehealth';
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -76,7 +121,7 @@ function headerNav(topic = 'general') {
           <a href="/adhd-care">ADHD Care</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
-          <a href="/answers">Answers</a>
+          <a href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a>
           <a href="/blog">Blog</a>
         </nav>
         <div class="nav-cta">
@@ -90,7 +135,7 @@ function headerNav(topic = 'general') {
           <a href="/adhd-care">ADHD Care</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
-          <a href="/answers">Answers</a>
+          <a href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a>
           <a href="/blog">Blog</a>
           ${navCta}
         </div>
@@ -105,9 +150,9 @@ function footerBlock() {
           <a href="/" class="footer-logo-link"><img src="../assets/images/siya-health-logo.png" alt="Siya Health" class="footer-logo-img" /></a>
         </div>
         <div class="footer-brand">
-          <p>Board-certified providers providing telehealth care across California, Texas, Pennsylvania, and Florida.</p>
+          <p>${FOOTER_STATES_LINE}</p>
         </div>
-        <div><h4>Services</h4><p><a href="/answers">Answers</a></p><p><a href="/adhd-care">ADHD Care</a></p><p><a href="/weight-loss-metabolic-health">Weight Loss</a></p><p><a href="/telehealth">Telehealth</a></p></div>
+        <div><h4>Services</h4><p><a href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a></p><p><a href="/adhd-care">ADHD Care</a></p><p><a href="/weight-loss-metabolic-health">Weight Loss</a></p><p><a href="/telehealth">Telehealth</a></p></div>
         <div><h4>Healthcare Services</h4><p><a href="/primary-urgent-care">Primary &amp; urgent care</a></p><p><a href="/labs">Diagnostic labs</a></p><p><a href="/prescriptions">Prescriptions</a></p></div>
         <div><h4>Contact</h4><p><a href="mailto:care@siya.health">care@siya.health</a></p><p><a href="tel:+12154451244">(215) 445-1244</a></p></div>
       </div>
@@ -123,7 +168,7 @@ function nextStepsHtml(hub, topic = 'general') {
                 <li><a href="${hub.care}">Explore ${hub.label} care at Siya Health</a></li>`
       : `<li><a href="${MEET_GREET_URL}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a></li>
                 <li><a href="${hub.care}">Explore ${hub.label} care</a></li>
-                <li><a href="/answers">Browse clinical answers</a></li>`;
+                <li><a href="/answers">Browse Health Guides</a></li>`;
   return `            <section class="answer-next-steps" id="next-steps" aria-labelledby="next-steps-heading">
               <h2 id="next-steps-heading">Next steps</h2>
               <ul class="answer-next-steps-list">
@@ -133,7 +178,7 @@ function nextStepsHtml(hub, topic = 'general') {
 }
 
 function buildAnswerPage(seed) {
-  const reviewer = getProviderBySlug(seed.reviewerSlug) || getProviderBySlug('dr-sneh-pandey');
+  const reviewRecord = resolveAnswerReviewRecord(seed.slug);
   const url = `${BASE}/answers/${seed.slug}`;
   const title = `${seed.question} | Siya Health`;
   const metaDesc = seed.shortAnswer.slice(0, 155) + (seed.shortAnswer.length > 155 ? '…' : '');
@@ -169,18 +214,20 @@ function buildAnswerPage(seed) {
     name: seed.question,
     description: seed.shortAnswer,
     url,
-    dateModified: LAST_REVIEWED,
-    reviewedBy: physicianReviewedBy(reviewer),
+    dateModified: reviewRecord.reviewDate || LAST_REVIEWED,
     publisher: { '@type': 'MedicalOrganization', name: 'Siya Health', url: BASE },
     about: { '@type': 'MedicalCondition', name: seed.topic === 'adhd' ? 'Attention Deficit Hyperactivity Disorder' : 'Medical Condition' },
   };
+  if (reviewRecord.status === REVIEW_STATUS.CLINICALLY_REVIEWED && reviewRecord.reviewer) {
+    medicalWebPage.reviewedBy = physicianReviewedBy(reviewRecord.reviewer);
+  }
 
   const breadcrumb = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE}/` },
-      { '@type': 'ListItem', position: 2, name: 'Answers', item: `${BASE}/answers` },
+      { '@type': 'ListItem', position: 2, name: 'Health Guides', item: `${BASE}/answers` },
       { '@type': 'ListItem', position: 3, name: seed.question, item: url },
     ],
   };
@@ -200,12 +247,12 @@ ${headerNav(seed.topic)}
       <article class="blog-article answer-page">
         <div class="container blog-container">
           <header class="blog-header">
-            <p class="blog-meta"><a href="/answers">Clinical answers</a> · <a href="${hub.url}">${hub.label}</a></p>
+            <p class="blog-meta"><a href="/answers">${NAV_HEALTH_GUIDES.label}</a> · <a href="${hub.url}">${hub.label}</a></p>
             <h1>${esc(seed.question)}</h1>
           </header>
           <div class="blog-content">
             <p class="blog-disclaimer"><strong>Educational only:</strong> This page is for general education—not personal medical advice, diagnosis, or treatment. See a licensed clinician for your situation.</p>
-${clinicalReviewHtml(reviewer)}
+${clinicalReviewBlock(reviewRecord)}
             <section class="answer-short" id="short-answer" aria-labelledby="short-answer-heading">
               <h2 id="short-answer-heading">Short answer</h2>
               <p class="answer-lead">${esc(seed.shortAnswer)}</p>
@@ -229,7 +276,7 @@ ${nextStepsHtml(hub, seed.topic)}
               <a class="button" href="${BOOK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
               <a class="button secondary" href="${hub.care}">Explore ${hub.label} care</a>
             </div>
-            <p class="cta-microcopy">Also read our <a href="${hub.url}">${hub.label} articles</a>${seed.cornerstoneBlog ? ` · <a href="${seed.cornerstoneBlog}">Full clinical guide</a>` : ''} · <a href="/providers/${reviewer.slug}">${reviewer.name}</a></p>
+            <p class="cta-microcopy">Also read our <a href="${hub.url}">${hub.label} articles</a>${seed.cornerstoneBlog ? ` · <a href="${seed.cornerstoneBlog}">Full clinical guide</a>` : ''}${reviewRecord.reviewer ? ` · <a href="/providers/${reviewRecord.reviewer.slug}">${reviewRecord.reviewer.name}</a>` : ''}</p>
           </div>
         </div>
       </article>
@@ -241,52 +288,76 @@ ${footerBlock()}
 }
 
 function buildIndexPage() {
-  const byTopic = {};
+  const byCategory = Object.fromEntries(HEALTH_GUIDE_CATEGORIES.map((c) => [c.id, []]));
   for (const s of ANSWER_SEEDS) {
-    byTopic[s.topic] = byTopic[s.topic] || [];
-    byTopic[s.topic].push(s);
+    const cat = guideCategoryForSeed(s);
+    byCategory[cat].push(s);
   }
 
-  let sections = '';
-  for (const [topic, seeds] of Object.entries(byTopic)) {
-    const hub = TOPIC_HUBS[topic];
-    sections += `
-          <section class="answer-hub-section">
-            <h2>${esc(hub.label)}</h2>
-            <ul class="answer-hub-list">
-              ${seeds.map((s) => `<li><a href="/answers/${s.slug}">${esc(s.question)}</a></li>`).join('\n              ')}
+  const cards = HEALTH_GUIDE_CATEGORIES.map((cat) => {
+    const seeds = byCategory[cat.id] || [];
+    const preview = seeds.slice(0, 4);
+    const more = seeds.length - preview.length;
+    return `
+          <article class="health-guides-card" id="guides-${cat.id}">
+            <header class="health-guides-card-header">
+              <h2>${esc(cat.label)}</h2>
+              <p class="health-guides-card-blurb">${esc(cat.blurb)}</p>
+              <p class="health-guides-card-meta"><span class="health-guides-count">${seeds.length}</span> guides</p>
+            </header>
+            <ul class="health-guides-card-list">
+              ${preview.map((s) => `<li><a href="/answers/${s.slug}">${esc(s.question)}</a></li>`).join('\n              ')}
+              ${more > 0 ? `<li class="health-guides-more"><a href="#guides-${cat.id}-all">+ ${more} more in this category</a></li>` : ''}
             </ul>
-            <p class="blog-hub-see-all"><a href="${hub.url}">More ${hub.label.toLowerCase()} articles →</a></p>
-          </section>`;
-  }
+            ${more > 0 ? `<ul class="health-guides-card-list health-guides-card-list--all" id="guides-${cat.id}-all" hidden>
+              ${seeds.slice(4).map((s) => `<li><a href="/answers/${s.slug}">${esc(s.question)}</a></li>`).join('\n              ')}
+            </ul>` : ''}
+            <p class="health-guides-card-cta"><a href="${cat.carePath}">Explore ${esc(cat.label)} care →</a></p>
+          </article>`;
+  }).join('\n');
 
   const url = `${BASE}/answers`;
-  const title = 'Clinical Answers Hub | ADHD, Weight Loss & Telehealth | Siya Health';
+  const title = 'Health Guides | Metabolic, ADHD, Hormones & Telehealth | Siya Health';
   const desc =
-    'Direct answers to common ADHD, GLP-1, testosterone, and telehealth questions—medically reviewed by Siya Health physicians. Optimized for clarity and clinical accuracy.';
+    'Physician-led Health Guides: short answers, evidence, and related topics for metabolic health, fatigue, hormones, ADHD, and telehealth. Each page shows its clinical review status.';
 
   const collection = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'Siya Health Clinical Answers',
+    name: 'Siya Health Health Guides Hub',
     description: desc,
     url,
     numberOfItems: ANSWER_SEEDS.length,
   };
 
-  const jsonLd = `\n    <script type="application/ld+json">${JSON.stringify(collection)}</script>`;
+  const jsonLd = `\n    <script type="application/ld+json">${JSON.stringify(collection)}</script>
+    <script>
+      document.querySelectorAll('.health-guides-more a').forEach((link) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const id = link.getAttribute('href').slice(1);
+          const list = document.getElementById(id);
+          if (list) {
+            list.hidden = false;
+            link.closest('li')?.remove();
+          }
+        });
+      });
+    </script>`;
 
   return `${headBlock(title, desc, url, jsonLd)}
   <body>
 ${headerNav()}
     <main id="main">
-      <section class="section blog-index" style="padding-top: 120px;">
+      <section class="section blog-index health-guides-hub" style="padding-top: 120px;">
         <div class="container">
           <div class="section-header">
-            <h1>Clinical answers</h1>
-            <p class="lead">One question per page—short answer, detailed explanation, evidence, and related questions. Medically reviewed by Siya Health physicians. <a href="/llms.txt">Machine index</a> · <a href="/article-index.json">JSON index</a></p>
+            <h1>Health Guides</h1>
+            <p class="lead">One question per page—short answer, detailed explanation, evidence, and related questions. Reviewed pages display physician name and date; others show pending physician review. <a href="/llms.txt">Machine index</a> · <a href="/article-index.json">JSON index</a></p>
           </div>
-${sections}
+          <div class="health-guides-hub-grid">
+${cards}
+          </div>
         </div>
       </section>
     </main>

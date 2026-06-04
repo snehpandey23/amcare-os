@@ -4,6 +4,11 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import {
+  REVIEW_STATUS,
+  getBlogReviewMeta,
+  getAnswerReviewMeta,
+} from '../data/content-review-registry.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BASE = 'https://siya.health';
@@ -26,7 +31,7 @@ export function getAllProviders() {
   return loadEntityGraph().providers;
 }
 
-/** Assign reviewing physician from slug + title keywords */
+/** @deprecated Use content-review-registry allowlist; kept for non-governed tooling only */
 export function pickReviewer(slug, title = '') {
   const t = `${slug} ${title}`.toLowerCase();
   const swati =
@@ -61,6 +66,61 @@ export function physicianReviewedBy(reviewer) {
     honorificSuffix: 'MD',
     url: reviewer.url,
   };
+}
+
+export function resolveBlogReviewRecord(slug) {
+  const meta = getBlogReviewMeta(slug);
+  if (!meta) {
+    return { status: REVIEW_STATUS.PENDING_REVIEW, slug, reviewer: null, reviewDate: null };
+  }
+  const reviewer = getProviderBySlug(meta.reviewerSlug);
+  return {
+    status: REVIEW_STATUS.CLINICALLY_REVIEWED,
+    slug,
+    reviewer,
+    reviewDate: meta.reviewDate || LAST_REVIEWED,
+  };
+}
+
+export function resolveAnswerReviewRecord(slug) {
+  const meta = getAnswerReviewMeta(slug);
+  if (!meta) {
+    return { status: REVIEW_STATUS.PENDING_REVIEW, slug, reviewer: null, reviewDate: null };
+  }
+  const reviewer = getProviderBySlug(meta.reviewerSlug);
+  return {
+    status: REVIEW_STATUS.CLINICALLY_REVIEWED,
+    slug,
+    reviewer,
+    reviewDate: meta.reviewDate || LAST_REVIEWED,
+  };
+}
+
+export function clinicalReviewBlock(record) {
+  if (record.status === REVIEW_STATUS.CLINICALLY_REVIEWED && record.reviewer) {
+    const date = formatReviewDate(record.reviewDate || LAST_REVIEWED);
+    return `
+            <aside class="clinical-review clinical-review--reviewed" aria-label="Clinical review">
+              <p class="clinical-review-label">Clinically Reviewed</p>
+              <p><strong>Reviewed by:</strong> <a href="${record.reviewer.url}">${record.reviewer.name}</a></p>
+              <p><strong>Review date:</strong> ${date}</p>
+            </aside>`;
+  }
+  return `
+            <aside class="clinical-review clinical-review--pending" aria-label="Clinical review status">
+              <p class="clinical-review-label">Clinical Review Status</p>
+              <p><strong>Pending physician review.</strong></p>
+              <p>This educational content is awaiting final physician review.</p>
+            </aside>`;
+}
+
+/** @deprecated Use clinicalReviewBlock(resolveAnswerReviewRecord(slug)) */
+export function clinicalReviewHtml(reviewer, date = LAST_REVIEWED) {
+  return clinicalReviewBlock({
+    status: REVIEW_STATUS.CLINICALLY_REVIEWED,
+    reviewer,
+    reviewDate: date,
+  });
 }
 
 export function buildPhysicianGraph(provider, pageTitle, pageDesc, canonical) {
@@ -101,14 +161,6 @@ export function buildPhysicianGraph(provider, pageTitle, pageDesc, canonical) {
   };
 }
 
-export function clinicalReviewHtml(reviewer, date = LAST_REVIEWED) {
-  return `
-            <aside class="clinical-review" aria-label="Clinical review">
-              <p class="clinical-review-label">Clinical review</p>
-              <p>Educational content from Siya Health. Medically reviewed by <a href="${reviewer.url}">${reviewer.name}</a> · Last reviewed: ${formatReviewDate(date)}</p>
-            </aside>`;
-}
-
 export function injectProviderPhysicianSchema(html, provider, title, description, canonical) {
   const graph = buildPhysicianGraph(provider, title, description, canonical);
   const tag = `<script type="application/ld+json">${JSON.stringify(graph)}</script>`;
@@ -126,31 +178,84 @@ export function injectProviderPhysicianSchema(html, provider, title, description
   return html;
 }
 
-export function injectBlogReviewedBy(html, reviewer) {
-  html = html.replace(
+const LEGACY_REVIEW_LINE =
+  /<p>\s*Educational content from Siya Health\.\s*Medically reviewed by[\s\S]*?<\/p>\s*/gi;
+
+function patchBlogPostingSchema(html, record) {
+  return html.replace(
     /<script type="application\/ld\+json">\s*(\{[\s\S]*?"@type"\s*:\s*"BlogPosting"[\s\S]*?\})\s*<\/script>/i,
     (_, jsonStr) => {
       try {
         const o = JSON.parse(jsonStr.trim());
         o.author = { '@type': 'Organization', name: 'Siya Health', url: BASE };
-        o.reviewedBy = physicianReviewedBy(reviewer);
-        o.dateModified = LAST_REVIEWED;
+        delete o.reviewedBy;
+        if (record.status === REVIEW_STATUS.CLINICALLY_REVIEWED && record.reviewer) {
+          o.reviewedBy = physicianReviewedBy(record.reviewer);
+          o.dateModified = record.reviewDate || LAST_REVIEWED;
+        }
         return `<script type="application/ld+json">${JSON.stringify(o)}</script>`;
       } catch {
         return _;
       }
     },
   );
+}
 
-  if (!html.includes('class="clinical-review"')) {
-    const block = clinicalReviewHtml(reviewer);
-    if (html.includes('class="blog-disclaimer"')) {
-      html = html.replace(/(<p class="blog-disclaimer"[\s\S]*?<\/p>)/i, `$1${block}`);
-    } else if (html.includes('<div class="blog-content">')) {
-      html = html.replace(/(<div class="blog-content">)/i, `$1${block}`);
-    }
+function patchMedicalWebPageSchema(html, record) {
+  return html.replace(
+    /<script type="application\/ld\+json">\s*(\{[\s\S]*?"@type"\s*:\s*"MedicalWebPage"[\s\S]*?\})\s*<\/script>/i,
+    (_, jsonStr) => {
+      try {
+        const o = JSON.parse(jsonStr.trim());
+        delete o.reviewedBy;
+        if (record.status === REVIEW_STATUS.CLINICALLY_REVIEWED && record.reviewer) {
+          o.reviewedBy = physicianReviewedBy(record.reviewer);
+          o.dateModified = record.reviewDate || LAST_REVIEWED;
+        } else {
+          o.dateModified = LAST_REVIEWED;
+        }
+        return `<script type="application/ld+json">${JSON.stringify(o)}</script>`;
+      } catch {
+        return _;
+      }
+    },
+  );
+}
+
+function syncClinicalReviewAside(html, record) {
+  const block = clinicalReviewBlock(record);
+  html = html.replace(LEGACY_REVIEW_LINE, '');
+  if (html.includes('class="clinical-review"')) {
+    return html.replace(/<aside class="clinical-review"[\s\S]*?<\/aside>/i, block);
+  }
+  if (html.includes('class="blog-disclaimer"')) {
+    return html.replace(/(<p class="blog-disclaimer"[\s\S]*?<\/p>)/i, `$1${block}`);
+  }
+  if (html.includes('<div class="blog-content">')) {
+    return html.replace(/(<div class="blog-content">)/i, `$1${block}`);
   }
   return html;
 }
 
-export { BASE, ORG_ID, LAST_REVIEWED };
+/** Apply governance review status to blog article HTML */
+export function applyBlogReviewStatus(html, slug) {
+  const record = resolveBlogReviewRecord(slug);
+  html = patchBlogPostingSchema(html, record);
+  html = syncClinicalReviewAside(html, record);
+  return html;
+}
+
+/** Apply governance review status to answer page HTML */
+export function applyAnswerReviewStatus(html, slug) {
+  const record = resolveAnswerReviewRecord(slug);
+  html = patchMedicalWebPageSchema(html, record);
+  html = syncClinicalReviewAside(html, record);
+  return html;
+}
+
+/** @deprecated Use applyBlogReviewStatus */
+export function injectBlogReviewedBy(html, reviewer) {
+  return applyBlogReviewStatus(html, '');
+}
+
+export { BASE, ORG_ID, LAST_REVIEWED, REVIEW_STATUS };

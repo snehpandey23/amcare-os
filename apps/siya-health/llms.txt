@@ -1,7 +1,7 @@
 # Siya Health
 
 > Board-certified telehealth clinic for adult ADHD evaluation, medical weight loss, and whole-person care.
-> Licensed providers in California, Texas, Pennsylvania, and Florida.
+> Licensed providers in California, Texas, Florida, and Pennsylvania.
 
 ## Primary entity
 - Organization: https://siya.health/
@@ -16,7 +16,7 @@
 - Men's health / longevity: https://siya.health/mens-health-longevity
 
 ## Knowledge hubs
-- Clinical answers (50+ Q&A): https://siya.health/answers
+- Health Guides hub (50+ Q&A): https://siya.health/answers
 - ADHD articles: https://siya.health/blog/adhd
 - Weight loss articles: https://siya.health/blog/weight-loss
 - Telehealth articles: https://siya.health/blog/telehealth
