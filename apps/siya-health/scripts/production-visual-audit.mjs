@@ -119,7 +119,7 @@ async function auditPage(page, url, pageId) {
       selAll('*')
         .slice(0, 400)
         .map((el) => getComputedStyle(el).fontFamily)
-        .filter((f) => /Merriweather|Georgia|Times/i.test(f)),
+        .filter((f) => /Merriweather/i.test(f)),
     )];
     const buttons = selAll('a.button, button.button').slice(0, 8).map((b) => {
       const cs = getComputedStyle(b);

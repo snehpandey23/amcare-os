@@ -41,7 +41,8 @@ async function probe(page, urlPath) {
   const url = BASE + urlPath;
   const resp = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
   await page.waitForTimeout(800);
-  return page.evaluate(
+  const status = resp?.status() ?? 0;
+  const data = await page.evaluate(
     ({ urlPath, targetBullet, targetInline }) => {
       const review = document.querySelectorAll('aside.clinical-review').length;
       const ctaBands = document.querySelectorAll('div.cta-band').length;
@@ -62,7 +63,6 @@ async function probe(page, urlPath) {
         .filter((i) => i.src && !i.src.startsWith('data:') && i.complete && i.naturalWidth === 0)
         .length;
       return {
-        status: resp?.status() ?? 0,
         review,
         ctaBands,
         schedule,
@@ -79,6 +79,7 @@ async function probe(page, urlPath) {
     },
     { urlPath, targetBullet: TARGET_STATES, targetInline: TARGET_STATES_INLINE },
   );
+  return { ...data, status };
 }
 
 async function main() {
