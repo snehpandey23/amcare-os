@@ -225,7 +225,28 @@ async function auditPage(page, url, pageId) {
     );
   }
 
+  const missingCalifornia =
+    !/California/.test(data.bodyText) &&
+    !/California/.test(data.footerSnippet) &&
+    /Texas/i.test(data.bodyText) &&
+    /Florida/i.test(data.bodyText);
+  if (missingCalifornia) {
+    findings.push(
+      issue({
+        url,
+        severity: 'High',
+        category: 'Legacy copy / states',
+        selector: 'footer, body',
+        detail: 'State list missing California',
+        screenshot: '',
+        fix: 'Run sitewide copy normalization on deploy',
+        impact: 'High — licensing trust',
+      }),
+    );
+  }
+
   for (const { re, label, id } of LEGACY_PATTERNS) {
+    if (id === 'states-without-ca') continue;
     if (re.test(data.bodyText) || re.test(data.footerSnippet)) {
       findings.push(
         issue({

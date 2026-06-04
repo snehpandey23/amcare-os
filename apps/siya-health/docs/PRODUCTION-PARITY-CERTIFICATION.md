@@ -56,7 +56,20 @@ Target state display: `California • Texas • Pennsylvania • Florida` or pro
 | schedule-/adhd-care | ✓ | https://www.siya.health/adhd-care | 0 Schedule Meet CTAs |
 | review-hub-/telehealth | ✓ | https://www.siya.health/telehealth | 0 clinical-review on hub |
 
+## Sprint actions completed
+
+| Step | Status |
+|------|--------|
+| `npm run consistency:apply` | Ran (repo already clean) |
+| `npm run blog:consistency:apply` | Ran — 55 blogs, 0 QA failures |
+| `npm run build` | 149 URLs, 0 broken links |
+| Merge + push `main` | `b2a830a`, `40efbfc` |
+| Vercel Git deploy | Live ~2026-06-04 11:46 UTC |
+
 ## Notes
 
-Production matches audited branch for all sampled gates. Full-site visual audit: `node scripts/production-visual-audit.mjs`.
+Production matches audited branch for all sampled gates.
+
+- Re-certify: `npm run parity:cert`
+- Full visual audit: `node scripts/production-visual-audit.mjs`
 
