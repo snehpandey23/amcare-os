@@ -72,6 +72,7 @@ export const CORNERSTONE_BLOG_PATHS = {
   FOOD_NOISE: '/blog/food-noise-and-glp-1-what-it-means-and-what-helps',
   INSULIN: '/blog/insulin-resistance-and-weight-loss-clinician-overview',
   FATIGUE: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+  SLEEP_APNEA: '/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign',
   FREE_T: '/blog/free-testosterone-vs-total-testosterone-what-patients-should-know',
 };
 
@@ -87,8 +88,13 @@ const CORNERSTONE_CONTINUE_READING = {
     service: SERVICE_BY_TOPIC.metabolic,
   },
   [CORNERSTONE_BLOG_PATHS.FATIGUE]: {
-    siblings: [CORNERSTONE_BLOG_PATHS.INSULIN, CORNERSTONE_BLOG_PATHS.FOOD_NOISE],
+    siblings: [CORNERSTONE_BLOG_PATHS.SLEEP_APNEA, CORNERSTONE_BLOG_PATHS.INSULIN],
     answer: '/answers/why-am-i-tired-even-after-sleeping',
+    service: SERVICE_BY_TOPIC.energy,
+  },
+  [CORNERSTONE_BLOG_PATHS.SLEEP_APNEA]: {
+    siblings: [CORNERSTONE_BLOG_PATHS.FATIGUE, CORNERSTONE_BLOG_PATHS.INSULIN],
+    answer: '/answers/can-sleep-apnea-cause-fatigue',
     service: SERVICE_BY_TOPIC.energy,
   },
   [CORNERSTONE_BLOG_PATHS.FREE_T]: {
@@ -122,7 +128,10 @@ export const ANCHOR_LABELS = {
   '/blog/food-noise-and-glp-1-what-it-means-and-what-helps': 'Food noise and GLP-1 guide',
   '/blog/insulin-resistance-and-weight-loss-clinician-overview': 'Insulin resistance and weight loss',
   '/blog/why-am-i-always-tired-causes-when-to-see-doctor': 'Why am I always tired?',
+  '/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign': 'Sleep apnea, fatigue, and metabolic risk',
   '/blog/free-testosterone-vs-total-testosterone-what-patients-should-know': 'Free vs total testosterone',
+  '/answers/can-sleep-apnea-cause-fatigue': 'Can sleep apnea cause fatigue?',
+  '/answers/signs-of-sleep-apnea-in-adults': 'Signs of sleep apnea in adults',
   '/answers/what-is-food-noise': 'What is food noise?',
   '/answers/what-is-insulin-resistance': 'What is insulin resistance?',
   '/answers/why-am-i-tired-even-after-sleeping': 'Tired after sleeping',
@@ -140,6 +149,7 @@ const LEARN_MORE_ADHD = `<!-- SIYA:LEARN-MORE-ADHD -->
           </div>
           <ul class="learn-more-links">
             <li><a href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">Why am I always tired? (clinician guide)</a></li>
+            <li><a href="/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign">Sleep apnea, fatigue, and metabolic risk</a></li>
             <li><a href="/blog/adhd">ADHD articles and state-specific guides</a></li>
             <li><a href="/answers/why-am-i-tired-even-after-sleeping">Tired after sleeping — health guide</a></li>
             <li><a href="/answers/signs-of-adult-adhd">Signs of adult ADHD — health guide</a></li>
@@ -161,6 +171,7 @@ const LEARN_MORE_WEIGHT = `<!-- SIYA:LEARN-MORE-WEIGHT -->
           </div>
           <ul class="learn-more-links">
             <li><a href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">Why am I always tired? causes and when to see a doctor</a></li>
+            <li><a href="/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign">Sleep apnea and metabolic risk (when snoring is not benign)</a></li>
             <li><a href="/blog/insulin-resistance-and-weight-loss-clinician-overview">Insulin resistance and weight loss (clinician overview)</a></li>
             <li><a href="/blog/food-noise-and-glp-1-what-it-means-and-what-helps">Food noise and GLP-1</a></li>
             <li><a href="/blog/free-testosterone-vs-total-testosterone-what-patients-should-know">Free vs total testosterone</a></li>
@@ -189,6 +200,7 @@ const LEARN_MORE_MENS = `<!-- SIYA:LEARN-MORE-MENS -->
             <li><a href="/blog/when-is-testosterone-therapy-appropriate">When is testosterone therapy appropriate?</a></li>
             <li><a href="/answers/testosterone-and-adhd-overlap">Testosterone and ADHD overlap</a></li>
             <li><a href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">Why am I always tired?</a></li>
+            <li><a href="/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign">Sleep apnea, fatigue, and metabolic risk</a></li>
             <li><a href="/blog/insulin-resistance-and-weight-loss-clinician-overview">Insulin resistance and weight loss</a></li>
             <li><a href="/blog/food-noise-and-glp-1-what-it-means-and-what-helps">Food noise and GLP-1</a></li>
             <li><a href="/answers/what-is-food-noise">What is food noise?</a></li>
@@ -206,7 +218,9 @@ const LEARN_MORE_TELE = `<!-- SIYA:LEARN-MORE-TELE -->
           </div>
           <ul class="learn-more-links">
             <li><a href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">Why am I always tired?</a></li>
+            <li><a href="/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign">Sleep apnea and metabolic risk</a></li>
             <li><a href="/answers/why-am-i-tired-even-after-sleeping">Tired even after sleeping</a></li>
+            <li><a href="/answers/can-sleep-apnea-cause-fatigue">Can sleep apnea cause fatigue?</a></li>
             <li><a href="/blog/insulin-resistance-and-weight-loss-clinician-overview">Insulin resistance overview</a></li>
             <li><a href="/blog/food-noise-and-glp-1-what-it-means-and-what-helps">Food noise &amp; GLP-1</a></li>
             <li><a href="/blog/free-testosterone-vs-total-testosterone-what-patients-should-know">Free vs total testosterone</a></li>

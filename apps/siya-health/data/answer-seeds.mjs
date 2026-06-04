@@ -558,6 +558,8 @@ export const ANSWER_SEEDS = [
       'WHO ICD-11 burnout (QD85) occupational phenomenon',
     ],
     related: [
+      'can-sleep-apnea-cause-fatigue',
+      'signs-of-sleep-apnea-in-adults',
       'adhd-vs-burnout',
       'signs-of-adult-adhd',
       'what-is-insulin-resistance',
@@ -566,6 +568,56 @@ export const ANSWER_SEEDS = [
     topic: 'telehealth',
     reviewerSlug: 'dr-natasha-desai',
     cornerstoneBlog: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+  },
+  {
+    slug: 'can-sleep-apnea-cause-fatigue',
+    question: 'Can sleep apnea cause fatigue?',
+    shortAnswer:
+      'Yes. Obstructive sleep apnea fragments sleep with repeated breathing reductions and intermittent hypoxia, so you may feel exhausted or unrefreshed even after adequate time in bed. Fatigue (low energy) and sleepiness (pressure to nap) can both occur. Diagnosis requires clinical evaluation and sleep testing when indicated—not guessing from snoring alone.',
+    paragraphs: [
+      'OSA prevents normal deep and REM sleep architecture. Your body spends the night in micro-arousal and sympathetic activation, which drains next-day energy and cognition.',
+      'Many patients report “brain fog,” exercise intolerance, or flat exhaustion without classic sleepiness. That is why sleep history matters when basic labs are normal.',
+      'Treating OSA with CPAP, weight loss, or other clinician-directed therapies can improve fatigue in adherent users, but results depend on severity, comorbidities, and consistent treatment.',
+    ],
+    evidence: [
+      'AASM obstructive sleep apnea screening and diagnostic testing guidelines',
+      'Mark et al., OSA in adults, Am Fam Physician 2024',
+      'Frontiers in Medicine 2024 meta-analysis: CPAP and metabolic syndrome in OSA',
+    ],
+    related: [
+      'signs-of-sleep-apnea-in-adults',
+      'why-am-i-tired-even-after-sleeping',
+      'what-is-insulin-resistance',
+      'testosterone-and-adhd-overlap',
+    ],
+    topic: 'telehealth',
+    reviewerSlug: 'dr-sneh-pandey',
+    cornerstoneBlog: '/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign',
+  },
+  {
+    slug: 'signs-of-sleep-apnea-in-adults',
+    question: 'What are the signs of sleep apnea in adults?',
+    shortAnswer:
+      'Clues include habitual snoring, witnessed breathing pauses or gasping, unrefreshing sleep, daytime sleepiness or fatigue, morning headaches, nocturia, resistant hypertension, mood changes, reduced libido, erectile dysfunction, and concentration problems. Not everyone snores loudly—especially women. Diagnosis requires sleep testing when clinically appropriate.',
+    paragraphs: [
+      'Bed-partner observations are often more informative than self-report. Ask whether you stop breathing, choke, or snort awake.',
+      'Cardiovascular red flags—hard-to-control blood pressure, atrial fibrillation, stroke history—raise pre-test probability per AASM high-risk screening frameworks.',
+      'Screening tools such as STOP-BANG are useful to prompt evaluation but do not replace polysomnography or an appropriate home sleep apnea test ordered by a clinician.',
+    ],
+    evidence: [
+      'AASM OSA Screening Health Advisory (HEARTS mnemonic)',
+      'AASM Clinical Practice Guideline: Diagnostic Testing for Adult OSA',
+      'Aurora RN, Quan SF, J Clin Sleep Med 2024 screening quality measure',
+    ],
+    related: [
+      'can-sleep-apnea-cause-fatigue',
+      'why-am-i-tired-even-after-sleeping',
+      'what-does-low-testosterone-feel-like',
+      'testosterone-and-adhd-overlap',
+    ],
+    topic: 'telehealth',
+    reviewerSlug: 'dr-sneh-pandey',
+    cornerstoneBlog: '/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign',
   },
   {
     slug: 'what-is-free-testosterone',
@@ -691,7 +743,13 @@ export const ANSWER_SEEDS = [
       'Stimulants and TRT each carry monitoring requirements; do not combine without medical oversight.',
     ],
     evidence: ['Endocrine Society differential diagnosis guidance', 'ADHD adult evaluation standards'],
-    related: ['what-is-free-testosterone', 'what-does-low-testosterone-feel-like', 'signs-of-adult-adhd'],
+    related: [
+      'can-sleep-apnea-cause-fatigue',
+      'signs-of-sleep-apnea-in-adults',
+      'what-is-free-testosterone',
+      'what-does-low-testosterone-feel-like',
+      'signs-of-adult-adhd',
+    ],
     topic: 'mens-health',
     reviewerSlug: 'dr-sneh-pandey',
   },

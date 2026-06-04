@@ -6,5 +6,13 @@
   "scripts": {
     "build": "node scripts/generate-answer-pages.mjs && node scripts/internal-link-audit.mjs && node scripts/seo-build.mjs && node scripts/generate-ai-indexes.mjs && node scripts/seo-deployment-qa-report.mjs",
     "deploy": "vercel --prod"
-  }
+  },
+  "main": "asrs-screener.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
 }

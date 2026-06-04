@@ -519,9 +519,26 @@ button.secondary:hover {
   align-items: flex-start;
   gap: 0;
 }
+.hero-ctas-adhd-primary.hero-ctas-row {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
 .hero-ctas-adhd-primary .button {
   flex: 0 0 auto;
   min-width: 220px;
+}
+@media (max-width: 599px) {
+  .hero-ctas-adhd-primary.hero-ctas-row {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .hero-ctas-adhd-primary.hero-ctas-row .button {
+    width: 100%;
+    min-width: 0;
+  }
 }
 .hero-secondary-cta {
   margin: 14px 0 0;
@@ -600,11 +617,21 @@ button.secondary:hover {
 @media (max-width: 899px) {
   .hero-merged,
   .hero-fullwidth {
-    min-height: 50vh;
-    padding: 100px 0 56px;
+    min-height: auto;
+    padding: 88px 0 40px;
   }
   .hero-merged-content,
   .hero-fullwidth-inner { padding: 20px 24px; }
+  .hero-merged .hero-trust-bar,
+  .hero-fullwidth .hero-trust-bar {
+    margin-top: 16px;
+    font-size: 0.82rem;
+    gap: 8px 14px;
+  }
+  .hero-inline-testimonial {
+    margin-top: 16px;
+    padding: 12px 14px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -1822,6 +1849,19 @@ button.secondary:hover {
 @media (max-width: 899px) {
   .mobile-sticky-cta { display: block; }
   body:has(.mobile-sticky-cta) main { padding-bottom: 80px; }
+  body:has(.mobile-sticky-cta) {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+}
+
+/* LeadConnector chat — avoid covering sticky CTAs on mobile */
+@media (max-width: 899px) {
+  body:has(.mobile-sticky-cta) lc-chat-widget,
+  body:has(.mobile-sticky-cta) #lc_text-widget,
+  body:has(.mobile-sticky-cta) [id*="chat-widget"],
+  body:has(.mobile-sticky-cta) iframe[src*="leadconnector"] {
+    bottom: 88px !important;
+  }
 }
 
 @media (min-width: 900px) {
@@ -2150,8 +2190,8 @@ a.asrs-interest-btn:hover {
   .blog-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-@media (min-width: 1100px) {
-  .blog-featured-grid { grid-template-columns: repeat(4, 1fr); }
+@media (min-width: 900px) {
+  .blog-featured-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 .blog-card {
@@ -2198,6 +2238,8 @@ a.asrs-interest-btn:hover {
 .blog-card-link {
   font-weight: 600;
   color: var(--primary);
+  margin-top: auto;
+  padding-top: 4px;
 }
 
 .blog-card-link:hover { text-decoration: underline; }
@@ -2334,12 +2376,21 @@ a.asrs-interest-btn:hover {
 
 .answer-hub-list a:hover { text-decoration: underline; }
 
-/* Health Guides hub — category cards */
+/* Health Guides hub — category cards (2×2 + full-width fifth) */
 .health-guides-hub-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: 1fr;
   gap: 24px;
   margin-top: 32px;
+}
+
+@media (min-width: 700px) {
+  .health-guides-hub-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .health-guides-card--full-row {
+    grid-column: 1 / -1;
+  }
 }
 
 .health-guides-card {
@@ -2405,7 +2456,7 @@ a.asrs-interest-btn:hover {
 }
 
 .health-guides-card-cta {
-  margin: 0;
+  margin: auto 0 0;
   padding-top: 12px;
   border-top: 1px solid var(--border);
 }
@@ -2419,11 +2470,6 @@ a.asrs-interest-btn:hover {
 
 .health-guides-card-cta a:hover { text-decoration: underline; }
 
-@media (max-width: 640px) {
-  .health-guides-hub-grid {
-    grid-template-columns: 1fr;
-  }
-}
 
 .blog-related {
   margin-top: 40px;

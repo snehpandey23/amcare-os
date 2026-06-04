@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
 Generated: 2026-06-04
-Total pages: 144
+Total pages: 147
 
 ---
 
@@ -197,6 +197,11 @@ Total pages: 144
   Summary: ADHD does not directly “cause” anxiety in every patient, but living with untreated ADHD—missed deadlines, shame, chronic overwhelm—commonly leads to second…
   Topics: adhd, health-guide
 
+- Can sleep apnea cause fatigue?
+  URL: https://siya.health/answers/can-sleep-apnea-cause-fatigue
+  Summary: Yes. Obstructive sleep apnea fragments sleep with repeated breathing reductions and intermittent hypoxia, so you may feel exhausted or unrefreshed even aft…
+  Topics: health-guide, sleep
+
 - Can you get ADHD medication online?
   URL: https://siya.health/answers/can-you-get-adhd-medication-online
   Summary: In eligible states, yes—after a legitimate telehealth evaluation and ongoing relationship with a licensed prescriber. Online does not mean automatic; contr…
@@ -341,6 +346,11 @@ Total pages: 144
   URL: https://siya.health/answers/signs-of-adult-adhd
   Summary: Adult ADHD often shows up as chronic difficulty sustaining focus, disorganization, forgetfulness, time blindness, trouble finishing tasks, inner restlessne…
   Topics: adhd, health-guide
+
+- What are the signs of sleep apnea in adults?
+  URL: https://siya.health/answers/signs-of-sleep-apnea-in-adults
+  Summary: Clues include habitual snoring, witnessed breathing pauses or gasping, unrefreshing sleep, daytime sleepiness or fatigue, morning headaches, nocturia, resi…
+  Topics: health-guide, sleep
 
 - What should you expect from sildenafil for erectile dysfunction?
   URL: https://siya.health/answers/sildenafil-erectile-dysfunction-expectations
@@ -673,6 +683,11 @@ Total pages: 144
   URL: https://siya.health/blog/sildenafil-for-erectile-dysfunction-what-to-expect
   Summary: Sildenafil for erectile dysfunction in 2026: mechanism, cardiovascular precautions, interactions, and telehealth norms—informational, not prescribing advice.
   Topics: mens-health
+
+- Sleep Apnea, Fatigue &amp; Metabolic Risk: When Snoring Is Not Benign
+  URL: https://siya.health/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign
+  Summary: Snoring plus fatigue, weight gain, or resistant hypertension? Evidence-based guide to obstructive sleep apnea, insulin resistance, testosterone, ADHD overlap, and next steps.
+  Topics: weight-loss, sleep
 
 - Telehealth Articles (2026) — Online ADHD Diagnosis &amp; Safe Prescribing
   URL: https://siya.health/blog/telehealth

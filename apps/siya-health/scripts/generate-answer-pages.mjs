@@ -53,7 +53,13 @@ const HEALTH_GUIDE_CATEGORIES = [
 ];
 
 function guideCategoryForSeed(seed) {
-  if (seed.slug === 'why-am-i-tired-even-after-sleeping') return 'energy';
+  if (
+    seed.slug === 'why-am-i-tired-even-after-sleeping' ||
+    seed.slug === 'can-sleep-apnea-cause-fatigue' ||
+    seed.slug === 'signs-of-sleep-apnea-in-adults'
+  ) {
+    return 'energy';
+  }
   if (seed.topic === 'adhd') return 'adhd';
   if (seed.topic === 'mens-health') return 'hormone';
   if (seed.topic === 'telehealth') return 'telehealth';
@@ -296,10 +302,12 @@ function buildIndexPage() {
 
   const cards = HEALTH_GUIDE_CATEGORIES.map((cat) => {
     const seeds = byCategory[cat.id] || [];
-    const preview = seeds.slice(0, 4);
+    const previewCount = cat.id === 'energy' ? Math.min(3, seeds.length) : Math.min(4, seeds.length);
+    const preview = seeds.slice(0, previewCount);
     const more = seeds.length - preview.length;
+    const fullRowClass = cat.id === 'telehealth' ? ' health-guides-card--full-row' : '';
     return `
-          <article class="health-guides-card" id="guides-${cat.id}">
+          <article class="health-guides-card${fullRowClass}" id="guides-${cat.id}">
             <header class="health-guides-card-header">
               <h2>${esc(cat.label)}</h2>
               <p class="health-guides-card-blurb">${esc(cat.blurb)}</p>
@@ -310,7 +318,7 @@ function buildIndexPage() {
               ${more > 0 ? `<li class="health-guides-more"><a href="#guides-${cat.id}-all">+ ${more} more in this category</a></li>` : ''}
             </ul>
             ${more > 0 ? `<ul class="health-guides-card-list health-guides-card-list--all" id="guides-${cat.id}-all" hidden>
-              ${seeds.slice(4).map((s) => `<li><a href="/answers/${s.slug}">${esc(s.question)}</a></li>`).join('\n              ')}
+              ${seeds.slice(previewCount).map((s) => `<li><a href="/answers/${s.slug}">${esc(s.question)}</a></li>`).join('\n              ')}
             </ul>` : ''}
             <p class="health-guides-card-cta"><a href="${cat.carePath}">Explore ${esc(cat.label)} care →</a></p>
           </article>`;
