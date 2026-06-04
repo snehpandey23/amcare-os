@@ -7,6 +7,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { ANSWER_SEEDS } from '../data/answer-seeds.mjs';
 import {
+  COPY_STANDARDS,
   FOOTER_STATES_LINE,
   LEGACY_FOOTER_PATTERNS,
   STATES_BULLET,
@@ -347,8 +348,20 @@ export function normalizeSitewideCopy(html) {
     `<title>${NAV_HEALTH_GUIDES.label} |`,
   );
 
-  html = html.replaceAll('Book Free Consultation →', 'Book a Meet &amp; Greet →');
-  html = html.replaceAll('Book Free Consultation', 'Book a Meet &amp; Greet');
+  html = html.replaceAll('Book Free Consultation →', `${COPY_STANDARDS.primaryCta} →`);
+  html = html.replaceAll('Book Free Consultation', COPY_STANDARDS.primaryCta);
+  html = html.replaceAll('Schedule Meet &amp; Greet', COPY_STANDARDS.primaryCta);
+  html = html.replaceAll('Schedule Meet & Greet', COPY_STANDARDS.primaryCta);
+  html = html.replaceAll('Book a meet &amp; greet', COPY_STANDARDS.primaryCta);
+  html = html.replaceAll('Explore care options', COPY_STANDARDS.secondaryCta);
+  html = html.replaceAll('Take Free Screening', COPY_STANDARDS.adhdSecondaryCta);
+  html = html.replaceAll('Book ADHD evaluation online', `${COPY_STANDARDS.adhdPrimaryCta} online`);
+  html = html.replaceAll('Book ADHD evaluation', COPY_STANDARDS.adhdPrimaryCta);
+  html = html.replaceAll('Schedule ADHD Evaluation', COPY_STANDARDS.adhdPrimaryCta);
+  html = html.replaceAll('Clinical Review Status', COPY_STANDARDS.reviewBadgePending);
+  html = html.replaceAll('Clinically Reviewed', COPY_STANDARDS.reviewBadgeReviewed);
+  html = html.replaceAll('Review needed', COPY_STANDARDS.reviewBadgePending);
+  html = html.replaceAll('Awaiting final physician review', 'awaiting final physician review');
   html = html.replace(
     /<a([^>]*href="[^"]*yourmarketingai[^"]*"[^>]*)>Book a Meet &amp; Greet<\/a>/gi,
     (m) => (m.includes('target=') ? m : m.replace('<a', '<a target="_blank" rel="noopener"')),

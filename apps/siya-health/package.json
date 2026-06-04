@@ -10,6 +10,8 @@
     "phase2:apply": "node scripts/apply-phase2-optimization.mjs",
     "phase2:qa": "node scripts/phase2-qa.mjs",
     "health-guides:fix": "node scripts/health-guides-production-fix.mjs",
+    "consistency:apply": "node scripts/apply-sitewide-consistency.mjs",
+    "consistency:screenshots": "node scripts/capture-consistency-qa-screenshots.mjs",
     "deploy": "vercel --prod"
   },
   "main": "asrs-screener.js",

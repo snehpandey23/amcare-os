@@ -12,6 +12,17 @@ export const STATES_INLINE =
 
 export const FOOTER_STATES_LINE = `Board-certified providers providing telehealth care across ${STATES_INLINE}.`;
 
+/** Approved user-facing copy — applied via normalizeSitewideCopy() */
+export const COPY_STANDARDS = {
+  primaryCta: 'Book a Meet & Greet',
+  secondaryCta: 'Explore Care Options',
+  adhdPrimaryCta: 'Book ADHD Evaluation',
+  adhdSecondaryCta: 'Start Free Screening',
+  educationHub: 'Health Guides',
+  reviewBadgePending: 'Pending physician review',
+  reviewBadgeReviewed: 'Physician reviewed',
+};
+
 /** Legacy footer strings to replace during seo-build */
 export const LEGACY_FOOTER_PATTERNS = [
   'Board-certified providers providing telehealth care across Texas, Pennsylvania, and Florida.',

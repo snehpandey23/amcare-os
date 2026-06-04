@@ -101,15 +101,14 @@ export function clinicalReviewBlock(record) {
     const date = formatReviewDate(record.reviewDate || LAST_REVIEWED);
     return `
             <aside class="clinical-review clinical-review--reviewed" aria-label="Clinical review">
-              <p class="clinical-review-label">Clinically Reviewed</p>
+              <p class="clinical-review-label">Physician reviewed</p>
               <p><strong>Reviewed by:</strong> <a href="${record.reviewer.url}">${record.reviewer.name}</a></p>
               <p><strong>Review date:</strong> ${date}</p>
             </aside>`;
   }
   return `
             <aside class="clinical-review clinical-review--pending" aria-label="Clinical review status">
-              <p class="clinical-review-label">Clinical Review Status</p>
-              <p><strong>Pending physician review.</strong></p>
+              <p class="clinical-review-label">Pending physician review</p>
               <p>This educational content is awaiting final physician review.</p>
             </aside>`;
 }
@@ -222,12 +221,11 @@ function patchMedicalWebPageSchema(html, record) {
   );
 }
 
-function syncClinicalReviewAside(html, record) {
-  const block = clinicalReviewBlock(record);
-  html = html.replace(LEGACY_REVIEW_LINE, '');
-  if (html.includes('class="clinical-review"')) {
-    return html.replace(/<aside class="clinical-review"[\s\S]*?<\/aside>/i, block);
-  }
+function stripClinicalReviewAsides(html) {
+  return html.replace(/\s*<aside class="clinical-review[\s\S]*?<\/aside>/g, '');
+}
+
+function insertClinicalReviewAside(html, block) {
   if (html.includes('class="blog-disclaimer"')) {
     return html.replace(/(<p class="blog-disclaimer"[\s\S]*?<\/p>)/i, `$1${block}`);
   }
@@ -235,6 +233,13 @@ function syncClinicalReviewAside(html, record) {
     return html.replace(/(<div class="blog-content">)/i, `$1${block}`);
   }
   return html;
+}
+
+function syncClinicalReviewAside(html, record) {
+  const block = clinicalReviewBlock(record);
+  html = html.replace(LEGACY_REVIEW_LINE, '');
+  html = stripClinicalReviewAsides(html);
+  return insertClinicalReviewAside(html, block);
 }
 
 /** Apply governance review status to blog article HTML */

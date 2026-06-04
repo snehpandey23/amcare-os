@@ -421,8 +421,7 @@ export const CORNERSTONE_ENGAGEMENT = {
 };
 
 const CLINICAL_REVIEW_SINGLE = `            <aside class="clinical-review clinical-review--pending" aria-label="Clinical review status">
-              <p class="clinical-review-label">Clinical Review Status</p>
-              <p><strong>Pending physician review.</strong></p>
+              <p class="clinical-review-label">Pending physician review</p>
               <p>This educational content is awaiting final physician review.</p>
             </aside>
 
@@ -442,7 +441,7 @@ export function l1ServiceLink({ href, text }) {
             <p class="blog-service-link"><a href="${href}">${text}</a></p>`;
 }
 
-export function midCtaBlock({ secondaryHref, secondaryLabel = 'Explore care options' }) {
+export function midCtaBlock({ secondaryHref, secondaryLabel = 'Explore Care Options' }) {
   return `
             <div class="cta-block blog-cta blog-cta--mid" aria-label="Book a visit">
               <a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
@@ -450,7 +449,7 @@ export function midCtaBlock({ secondaryHref, secondaryLabel = 'Explore care opti
             </div>`;
 }
 
-export function serviceCard({ title, body, href, ctaLabel = 'Explore care options' }) {
+export function serviceCard({ title, body, href, ctaLabel = 'Explore Care Options' }) {
   const id = title.replace(/\W+/g, '-').toLowerCase().slice(0, 40);
   return `
             <aside class="blog-service-card" aria-labelledby="service-card-${id}">
@@ -560,7 +559,7 @@ export const CORNERSTONE_CONVERSION = {
       { href: '/answers/glp-1-nausea-management', label: 'Managing GLP-1 nausea' },
       { href: '/answers/what-is-insulin-resistance', label: 'What is insulin resistance?' },
     ],
-    ctaBandSecondary: { href: '/weight-loss-metabolic-health', label: 'Explore care options' },
+    ctaBandSecondary: { href: '/weight-loss-metabolic-health', label: 'Explore Care Options' },
   },
   'insulin-resistance-and-weight-loss-clinician-overview': {
     l1: { href: '/weight-loss-metabolic-health', text: 'Explore metabolic health &amp; medical weight loss →' },
@@ -576,7 +575,7 @@ export const CORNERSTONE_CONVERSION = {
       { href: '/answers/insulin-resistance-without-diabetes', label: 'IR without diabetes' },
       { href: '/answers/medical-weight-loss-vs-dieting', label: 'Medical weight loss vs dieting' },
     ],
-    ctaBandSecondary: { href: '/weight-loss-metabolic-health', label: 'Explore care options' },
+    ctaBandSecondary: { href: '/weight-loss-metabolic-health', label: 'Explore Care Options' },
   },
   'why-am-i-always-tired-causes-when-to-see-doctor': {
     l1: { href: '/telehealth', text: 'Explore telehealth fatigue &amp; sleep workup →' },
@@ -592,7 +591,7 @@ export const CORNERSTONE_CONVERSION = {
       { href: '/answers/adhd-vs-burnout', label: 'ADHD vs burnout' },
       { href: '/answers/signs-of-sleep-apnea-in-adults', label: 'Signs of sleep apnea' },
     ],
-    ctaBandSecondary: { href: '/telehealth', label: 'Explore care options' },
+    ctaBandSecondary: { href: '/telehealth', label: 'Explore Care Options' },
   },
   'free-testosterone-vs-total-testosterone-what-patients-should-know': {
     l1: { href: '/mens-health-longevity', text: "Explore men's health &amp; hormone evaluation →" },
@@ -608,7 +607,7 @@ export const CORNERSTONE_CONVERSION = {
       { href: '/answers/testosterone-and-adhd-overlap', label: 'Testosterone and ADHD overlap' },
       { href: '/answers/can-sleep-apnea-cause-fatigue', label: 'Sleep apnea and fatigue' },
     ],
-    ctaBandSecondary: { href: '/mens-health-longevity', label: 'Explore care options' },
+    ctaBandSecondary: { href: '/mens-health-longevity', label: 'Explore Care Options' },
   },
   'sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign': {
     l1: { href: '/telehealth', text: 'Explore telehealth sleep &amp; fatigue care →' },
@@ -626,6 +625,6 @@ export const CORNERSTONE_CONVERSION = {
       { href: '/answers/why-am-i-tired-even-after-sleeping', label: 'Tired after sleeping' },
       { href: '/answers/what-is-insulin-resistance', label: 'What is insulin resistance?' },
     ],
-    ctaBandSecondary: { href: '/telehealth', label: 'Explore care options' },
+    ctaBandSecondary: { href: '/telehealth', label: 'Explore Care Options' },
   },
 };

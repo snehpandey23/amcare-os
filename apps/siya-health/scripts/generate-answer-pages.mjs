@@ -15,7 +15,7 @@ import {
   resolveAnswerReviewRecord,
   REVIEW_STATUS,
 } from './clinical-entity.mjs';
-import { FOOTER_STATES_LINE } from '../data/site-standards.mjs';
+import { COPY_STANDARDS, FOOTER_STATES_LINE } from '../data/site-standards.mjs';
 import { MEET_GREET_URL, NAV_HEALTH_GUIDES } from './site-chrome.mjs';
 
 /** UX hub groupings (display order) */
@@ -51,6 +51,23 @@ const HEALTH_GUIDE_CATEGORIES = [
     carePath: '/telehealth',
   },
 ];
+
+/** Featured on hub (exactly 3 per category; remainder behind “View all”) */
+const FEATURED_BY_CATEGORY = {
+  metabolic: ['what-is-food-noise', 'what-is-insulin-resistance', 'semaglutide-weight-loss-how-it-works'],
+  energy: ['why-am-i-tired-even-after-sleeping', 'can-sleep-apnea-cause-fatigue', 'signs-of-sleep-apnea-in-adults'],
+  hormone: ['what-is-free-testosterone', 'what-does-low-testosterone-feel-like', 'when-is-testosterone-therapy-appropriate'],
+  adhd: ['signs-of-adult-adhd', 'how-long-adhd-evaluation', 'can-adhd-be-diagnosed-online'],
+  telehealth: ['is-telehealth-legitimate', 'meet-and-greet-telehealth-expectations', 'how-online-prescriptions-work'],
+};
+
+const CATEGORY_ICONS = {
+  metabolic: '◆',
+  energy: '◎',
+  hormone: '△',
+  adhd: '▣',
+  telehealth: '◇',
+};
 
 function guideCategoryForSeed(seed) {
   if (
@@ -293,6 +310,51 @@ ${footerBlock()}
 `;
 }
 
+function guideOneLiner(seed) {
+  const t = seed.shortAnswer || '';
+  return t.length > 118 ? `${t.slice(0, 115)}…` : t;
+}
+
+function featuredSeedsForCategory(catId, allSeeds) {
+  const slugs = FEATURED_BY_CATEGORY[catId] || [];
+  const picked = [];
+  const used = new Set();
+  for (const slug of slugs) {
+    const s = allSeeds.find((x) => x.slug === slug);
+    if (s) {
+      picked.push(s);
+      used.add(s.slug);
+    }
+  }
+  for (const s of allSeeds) {
+    if (picked.length >= 3) break;
+    if (!used.has(s.slug)) {
+      picked.push(s);
+      used.add(s.slug);
+    }
+  }
+  return picked;
+}
+
+function featureCardHtml(seed, catId) {
+  return `
+              <article class="health-guide-feature-card">
+                <span class="health-guide-feature-icon health-guide-feature-icon--${catId}" aria-hidden="true">${CATEGORY_ICONS[catId] || '•'}</span>
+                <h3 class="health-guide-feature-title"><a href="/answers/${seed.slug}">${esc(seed.question)}</a></h3>
+                <p class="health-guide-feature-desc">${esc(guideOneLiner(seed))}</p>
+                <p class="health-guide-feature-link"><a href="/answers/${seed.slug}">Read guide →</a></p>
+              </article>`;
+}
+
+function placeholderCardHtml(catId) {
+  return `
+              <article class="health-guide-feature-card health-guide-feature-card--placeholder">
+                <span class="health-guide-feature-icon health-guide-feature-icon--${catId}" aria-hidden="true">${CATEGORY_ICONS[catId] || '•'}</span>
+                <h3 class="health-guide-feature-title">More guides coming soon</h3>
+                <p class="health-guide-feature-desc">We are adding physician-reviewed guides in this category.</p>
+              </article>`;
+}
+
 function buildIndexPage() {
   const byCategory = Object.fromEntries(HEALTH_GUIDE_CATEGORIES.map((c) => [c.id, []]));
   for (const s of ANSWER_SEEDS) {
@@ -302,26 +364,38 @@ function buildIndexPage() {
 
   const cards = HEALTH_GUIDE_CATEGORIES.map((cat) => {
     const seeds = byCategory[cat.id] || [];
-    const previewCount = cat.id === 'energy' ? Math.min(3, seeds.length) : Math.min(4, seeds.length);
-    const preview = seeds.slice(0, previewCount);
-    const more = seeds.length - preview.length;
-    const fullRowClass = cat.id === 'telehealth' ? ' health-guides-card--full-row' : '';
+    const featured = featuredSeedsForCategory(cat.id, seeds);
+    const featuredSlugs = new Set(featured.map((s) => s.slug));
+    const rest = seeds.filter((s) => !featuredSlugs.has(s.slug));
+    const featureSlots = [
+      ...featured.map((s) => featureCardHtml(s, cat.id)),
+      ...Array.from({ length: Math.max(0, 3 - featured.length) }, () => placeholderCardHtml(cat.id)),
+    ].join('\n');
+    const restList =
+      rest.length > 0
+        ? `<ul class="health-guides-category-all-list" id="guides-${cat.id}-all-list">
+              ${rest.map((s) => `<li><a href="/answers/${s.slug}">${esc(s.question)}</a></li>`).join('\n              ')}
+            </ul>`
+        : '';
     return `
-          <article class="health-guides-card${fullRowClass}" id="guides-${cat.id}">
-            <header class="health-guides-card-header">
-              <h2>${esc(cat.label)}</h2>
-              <p class="health-guides-card-blurb">${esc(cat.blurb)}</p>
-              <p class="health-guides-card-meta"><span class="health-guides-count">${seeds.length}</span> guides</p>
+          <section class="health-guides-category" id="guides-${cat.id}" aria-labelledby="guides-${cat.id}-heading">
+            <header class="health-guides-category-header">
+              <h2 id="guides-${cat.id}-heading">${esc(cat.label)}</h2>
+              <p class="health-guides-category-blurb">${esc(cat.blurb)}</p>
+              <p class="health-guides-category-meta"><span class="health-guides-count">${seeds.length}</span> guides</p>
             </header>
-            <ul class="health-guides-card-list">
-              ${preview.map((s) => `<li><a href="/answers/${s.slug}">${esc(s.question)}</a></li>`).join('\n              ')}
-              ${more > 0 ? `<li class="health-guides-more"><a href="#guides-${cat.id}-all">+ ${more} more in this category</a></li>` : ''}
-            </ul>
-            ${more > 0 ? `<ul class="health-guides-card-list health-guides-card-list--all" id="guides-${cat.id}-all" hidden>
-              ${seeds.slice(previewCount).map((s) => `<li><a href="/answers/${s.slug}">${esc(s.question)}</a></li>`).join('\n              ')}
-            </ul>` : ''}
-            <p class="health-guides-card-cta"><a href="${cat.carePath}">Explore ${esc(cat.label)} care →</a></p>
-          </article>`;
+            <div class="health-guides-featured-grid">
+${featureSlots}
+            </div>
+            <div class="health-guides-category-actions">
+              ${rest.length > 0 ? `<a class="button secondary health-guides-view-all" href="#guides-${cat.id}-all" data-category="${cat.id}">View all ${esc(cat.label)} guides</a>` : ''}
+              <a class="health-guides-care-link" href="${cat.carePath}">${COPY_STANDARDS.secondaryCta} →</a>
+            </div>
+            ${rest.length > 0 ? `<div class="health-guides-category-all" id="guides-${cat.id}-all" hidden>
+              <h3 class="health-guides-category-all-heading">All ${esc(cat.label)} guides</h3>
+              ${restList}
+            </div>` : ''}
+          </section>`;
   }).join('\n');
 
   const url = `${BASE}/answers`;
@@ -340,15 +414,16 @@ function buildIndexPage() {
 
   const jsonLd = `\n    <script type="application/ld+json">${JSON.stringify(collection)}</script>
     <script>
-      document.querySelectorAll('.health-guides-more a').forEach((link) => {
-        link.addEventListener('click', (e) => {
+      document.querySelectorAll('.health-guides-view-all').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          const id = btn.getAttribute('href')?.slice(1);
+          const panel = id && document.getElementById(id);
+          if (!panel) return;
           e.preventDefault();
-          const id = link.getAttribute('href').slice(1);
-          const list = document.getElementById(id);
-          if (list) {
-            list.hidden = false;
-            link.closest('li')?.remove();
-          }
+          const open = panel.hidden;
+          panel.hidden = !open;
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          btn.textContent = open ? btn.textContent.replace(/^View all/, 'Hide') : btn.textContent.replace(/^Hide/, 'View all');
         });
       });
     </script>`;
@@ -363,7 +438,7 @@ ${headerNav()}
             <h1>Health Guides</h1>
             <p class="lead">One question per page—short answer, detailed explanation, evidence, and related questions. Reviewed pages display physician name and date; others show pending physician review. <a href="/llms.txt">Machine index</a> · <a href="/article-index.json">JSON index</a></p>
           </div>
-          <div class="health-guides-hub-grid">
+          <div class="health-guides-hub-categories">
 ${cards}
           </div>
         </div>
