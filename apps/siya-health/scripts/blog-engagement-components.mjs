@@ -460,13 +460,40 @@ export function serviceCard({ title, body, href, ctaLabel = 'Explore Care Option
 }
 
 export function relatedHealthGuides({ items }) {
+  const picks = items.slice(0, 3);
   return `
             <section class="related-health-guides" aria-labelledby="related-health-guides-heading">
               <h2 id="related-health-guides-heading">Related Health Guides</h2>
               <ul>
-                ${items.map((i) => `<li><a href="${i.href}">${i.label}</a></li>`).join('\n                ')}
+                ${picks.map((i) => `<li><a href="${i.href}">${i.label}</a></li>`).join('\n                ')}
               </ul>
             </section>`;
+}
+
+/** Final exit CTA band — one per blog article, after article body */
+export function finalCtaBandSection({
+  adhd = false,
+  secondaryHref = '/telehealth',
+  secondaryLabel,
+}) {
+  const primaryLabel = adhd ? 'Book ADHD Evaluation' : 'Book a Meet &amp; Greet';
+  const secondary =
+    secondaryLabel || (adhd ? 'Start Free Screening' : 'Explore Care Options');
+  const primaryHref = MEET_GREET_URL;
+  const secHref = adhd ? '/adhd-screening' : secondaryHref;
+  return `
+      <section class="section blog-final-cta">
+        <div class="container">
+          <div class="cta-band">
+            <h3>Not sure where to start?</h3>
+            <p>A Meet &amp; Greet can help you understand your options and choose the right care path.</p>
+            <div class="cta-band-buttons">
+              <a class="button" href="${primaryHref}" target="_blank" rel="noopener">${primaryLabel}</a>
+              <a class="button secondary" href="${secHref}">${secondary}</a>
+            </div>
+          </div>
+        </div>
+      </section>`;
 }
 
 export function snippetDefinition({ term, text }) {

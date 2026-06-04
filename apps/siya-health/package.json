@@ -12,6 +12,8 @@
     "health-guides:fix": "node scripts/health-guides-production-fix.mjs",
     "consistency:apply": "node scripts/apply-sitewide-consistency.mjs",
     "consistency:screenshots": "node scripts/capture-consistency-qa-screenshots.mjs",
+    "blog:consistency:apply": "node scripts/apply-blog-consistency.mjs",
+    "blog:consistency:screenshots": "node scripts/capture-blog-consistency-screenshots.mjs",
     "deploy": "vercel --prod"
   },
   "main": "asrs-screener.js",

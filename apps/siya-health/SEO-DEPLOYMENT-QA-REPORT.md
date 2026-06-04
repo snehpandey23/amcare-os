@@ -1,6 +1,6 @@
 # SEO Deployment QA Report
 
-Generated: 2026-06-04T02:33:26.650Z
+Generated: 2026-06-04T02:57:50.916Z
 
 ## Summary
 
@@ -8,7 +8,7 @@ Generated: 2026-06-04T02:33:26.650Z
 |--------|------:|
 | HTML pages scanned | 147 |
 | Sitemap URLs | 147 |
-| Pages with Meet & Greet in nav | 120 |
+| Pages with Meet & Greet in nav | 121 |
 | Non-ADHD pages still referencing adhd-screening | 0 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
