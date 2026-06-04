@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-03",
+  "generated": "2026-06-04",
   "totalPages": 144,
   "zeroInbound": [
     "/privacy-policy",
@@ -63,10 +63,6 @@
       "count": 2
     },
     {
-      "path": "/answers/what-is-food-noise",
-      "count": 2
-    },
-    {
       "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
       "count": 2
     },
@@ -101,6 +97,10 @@
     {
       "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
       "count": 2
+    },
+    {
+      "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
+      "count": 2
     }
   ],
   "blogNoServiceLink": [],
@@ -118,13 +118,13 @@
     },
     {
       "path": "/blog",
-      "outboundCount": 45,
+      "outboundCount": 46,
       "uniqueInbound": 144
     },
     {
       "path": "/blog/adhd",
       "outboundCount": 46,
-      "uniqueInbound": 69
+      "uniqueInbound": 66
     },
     {
       "path": "/answers",
@@ -133,12 +133,12 @@
     },
     {
       "path": "/about",
-      "outboundCount": 19,
+      "outboundCount": 18,
       "uniqueInbound": 144
     },
     {
       "path": "/weight-loss-metabolic-health",
-      "outboundCount": 18,
+      "outboundCount": 20,
       "uniqueInbound": 144
     }
   ],
@@ -1167,35 +1167,38 @@
     "/primary-urgent-care": 144,
     "/telehealth": 144,
     "/weight-loss-metabolic-health": 144,
-    "/adhd-screening": 103,
     "/providers/dr-sneh-pandey": 70,
-    "/blog/adhd": 69,
+    "/blog/adhd": 66,
+    "/adhd-screening": 53,
     "/blog/is-online-adhd-diagnosis-legit": 37,
     "/adult-adhd-diagnosis": 36,
     "/blog/adhd-symptoms-overlooked": 34,
     "/blog/how-to-know-if-you-have-adhd-adult": 34,
     "/blog/weight-loss": 33,
     "/membership-pricing": 33,
-    "/online-adhd-test": 30,
-    "/adhd-evaluation-cost": 29,
+    "/online-adhd-test": 29,
+    "/adhd-evaluation-cost": 28,
     "/blog/telehealth": 25,
     "/answers/signs-of-adult-adhd": 21,
+    "/blog/food-noise-and-glp-1-what-it-means-and-what-helps": 20,
+    "/blog/insulin-resistance-and-weight-loss-clinician-overview": 18,
     "/mens-health-longevity": 18,
+    "/answers/what-is-food-noise": 17,
+    "/blog/why-am-i-always-tired-causes-when-to-see-doctor": 16,
     "/providers/dr-natasha-desai": 15,
-    "/blog/glp1-side-effects-and-how-to-manage-them": 14,
-    "/blog/semaglutide-for-weight-loss-how-it-works": 14,
     "/blog/how-to-safely-get-prescriptions-online": 13,
-    "/blog/medical-weight-loss-vs-dieting-what-actually-works": 13,
     "/creyos-adhd-testing": 13,
+    "/blog/glp1-side-effects-and-how-to-manage-them": 12,
     "/blog/online-adhd-diagnosis-texas": 12,
+    "/blog/semaglutide-for-weight-loss-how-it-works": 12,
     "/adhd-diagnosis-florida": 11,
     "/adhd-diagnosis-texas": 11,
     "/answers/glp-1-side-effects": 11,
     "/blog/how-adhd-medication-is-prescribed-online": 11,
-    "/blog/insomnia-treatment-options-beyond-medication": 11,
-    "/blog/why-am-i-always-tired-causes-when-to-see-doctor": 11,
     "/answers/medical-weight-loss-vs-dieting": 10,
     "/answers/what-does-low-testosterone-feel-like": 10,
+    "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know": 10,
+    "/blog/insomnia-treatment-options-beyond-medication": 10,
     "/book-appointment": 10,
     "/answers/adhd-and-weight-loss-connection": 9,
     "/answers/what-is-insulin-resistance": 9,
@@ -1208,7 +1211,6 @@
     "/answers/screening-vs-adhd-evaluation": 7,
     "/answers/starting-adhd-medication-adults": 7,
     "/answers/what-is-free-testosterone": 7,
-    "/blog/insulin-resistance-and-weight-loss-clinician-overview": 7,
     "/blog/online-adhd-diagnosis-california": 7,
     "/blog/telehealth-prescriptions-how-online-treatment-works": 7,
     "/blog/when-is-testosterone-therapy-appropriate": 7,
@@ -1218,12 +1220,8 @@
     "/answers/what-included-199-adhd-evaluation": 6,
     "/answers/when-is-testosterone-therapy-appropriate": 6,
     "/blog/adhd-medication-options-for-adults": 6,
-    "/blog/food-noise-and-glp-1-what-it-means-and-what-helps": 6,
     "/blog/medical-weight-loss-glp1-semaglutide-texas": 6,
-    "/blog/minoxidil-for-hair-loss-does-it-work": 6,
-    "/blog/sildenafil-for-erectile-dysfunction-what-to-expect": 6,
     "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd": 6,
-    "/answers/compounded-vs-branded-glp-1": 5,
     "/answers/how-long-adhd-evaluation": 5,
     "/answers/how-online-prescriptions-work": 5,
     "/answers/is-online-adhd-diagnosis-legitimate": 5,
@@ -1235,10 +1233,10 @@
     "/blog/adhd-medication-options-california": 5,
     "/blog/adhd-medication-side-effects-what-to-expect": 5,
     "/blog/adhd-testing-online-california-screening-vs-evaluation": 5,
-    "/blog/ambien-and-sleep-medications-risks-and-benefits": 5,
-    "/blog/modafinil-for-focus-and-fatigue-is-it-safe": 5,
+    "/blog/minoxidil-for-hair-loss-does-it-work": 5,
     "/answers/adhd-medication-every-day": 4,
     "/answers/adhd-vs-burnout": 4,
+    "/answers/compounded-vs-branded-glp-1": 4,
     "/answers/fsa-hsa-adhd-evaluation": 4,
     "/answers/high-functioning-adhd": 4,
     "/answers/how-much-does-adhd-testing-cost": 4,
@@ -1253,7 +1251,9 @@
     "/blog/adult-adhd-symptoms-california": 4,
     "/blog/adult-adhd-treatment-california-2026": 4,
     "/blog/all": 4,
+    "/blog/ambien-and-sleep-medications-risks-and-benefits": 4,
     "/blog/is-adhd-medication-safe-long-term": 4,
+    "/blog/modafinil-for-focus-and-fatigue-is-it-safe": 4,
     "/blog/non-stimulant-adhd-medications-explained": 4,
     "/answers/adhd-in-women": 3,
     "/answers/adhd-vs-anxiety": 3,
@@ -1273,8 +1273,8 @@
     "/blog/adhd-telehealth-california": 3,
     "/blog/adhd-treatment-houston-online": 3,
     "/blog/after-adhd-diagnosis-next-steps-adults": 3,
-    "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know": 3,
     "/blog/how-to-choose-adhd-provider-california": 3,
+    "/blog/medical-weight-loss-vs-dieting-what-actually-works": 3,
     "/blog/tirzepatide-vs-semaglutide-which-is-better": 3,
     "/blog/vyvanse-vs-adderall-differences": 3,
     "/adhd-diagnosis-houston": 2,
@@ -1283,7 +1283,6 @@
     "/answers/phentermine-weight-loss-safety": 2,
     "/answers/rejection-sensitivity-adhd": 2,
     "/answers/time-blindness-adhd": 2,
-    "/answers/what-is-food-noise": 2,
     "/blog/combining-adhd-treatment-and-weight-loss-strategies": 2,
     "/blog/compounded-vs-branded-glp1-medications": 2,
     "/blog/focalin-vs-adderall-comparison": 2,
@@ -1293,6 +1292,7 @@
     "/blog/oral-vs-injectable-weight-loss-medications": 2,
     "/blog/oral-vs-topical-minoxidil-which-is-right": 2,
     "/blog/phentermine-for-weight-loss-safety-and-effectiveness": 2,
+    "/blog/sildenafil-for-erectile-dysfunction-what-to-expect": 2,
     "/adhd-diagnosis-austin": 1,
     "/adhd-diagnosis-pennsylvania": 1,
     "/adhd-diagnosis-philadelphia": 1,

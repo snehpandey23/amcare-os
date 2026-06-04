@@ -58,6 +58,37 @@ const DEFAULT_ANSWER_BY_TOPIC = {
   general: '/answers/is-telehealth-legitimate',
 };
 
+/** Cornerstone cluster: forced Continue reading (2 sibling blogs + answer + service) */
+export const CORNERSTONE_BLOG_PATHS = {
+  FOOD_NOISE: '/blog/food-noise-and-glp-1-what-it-means-and-what-helps',
+  INSULIN: '/blog/insulin-resistance-and-weight-loss-clinician-overview',
+  FATIGUE: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+  FREE_T: '/blog/free-testosterone-vs-total-testosterone-what-patients-should-know',
+};
+
+const CORNERSTONE_CONTINUE_READING = {
+  [CORNERSTONE_BLOG_PATHS.FOOD_NOISE]: {
+    siblings: [CORNERSTONE_BLOG_PATHS.INSULIN, CORNERSTONE_BLOG_PATHS.FATIGUE],
+    answer: '/answers/what-is-food-noise',
+    service: SERVICE_BY_TOPIC.metabolic,
+  },
+  [CORNERSTONE_BLOG_PATHS.INSULIN]: {
+    siblings: [CORNERSTONE_BLOG_PATHS.FOOD_NOISE, CORNERSTONE_BLOG_PATHS.FATIGUE],
+    answer: '/answers/what-is-insulin-resistance',
+    service: SERVICE_BY_TOPIC.metabolic,
+  },
+  [CORNERSTONE_BLOG_PATHS.FATIGUE]: {
+    siblings: [CORNERSTONE_BLOG_PATHS.INSULIN, CORNERSTONE_BLOG_PATHS.FOOD_NOISE],
+    answer: '/answers/why-am-i-tired-even-after-sleeping',
+    service: SERVICE_BY_TOPIC.energy,
+  },
+  [CORNERSTONE_BLOG_PATHS.FREE_T]: {
+    siblings: [CORNERSTONE_BLOG_PATHS.FATIGUE, CORNERSTONE_BLOG_PATHS.INSULIN],
+    answer: '/answers/what-is-free-testosterone',
+    service: SERVICE_BY_TOPIC.hormone,
+  },
+};
+
 /** Descriptive anchors for Continue Reading / Learn More */
 export const ANCHOR_LABELS = {
   '/blog/adhd': 'ADHD articles and clinical guides',
@@ -123,6 +154,7 @@ const LEARN_MORE_WEIGHT = `<!-- SIYA:LEARN-MORE-WEIGHT -->
             <li><a href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">Why am I always tired? causes and when to see a doctor</a></li>
             <li><a href="/blog/insulin-resistance-and-weight-loss-clinician-overview">Insulin resistance and weight loss (clinician overview)</a></li>
             <li><a href="/blog/food-noise-and-glp-1-what-it-means-and-what-helps">Food noise and GLP-1</a></li>
+            <li><a href="/blog/free-testosterone-vs-total-testosterone-what-patients-should-know">Free vs total testosterone</a></li>
             <li><a href="/answers/what-is-food-noise">What is food noise?</a></li>
             <li><a href="/answers/what-is-insulin-resistance">What is insulin resistance?</a></li>
             <li><a href="/blog/weight-loss">More medical weight loss articles</a></li>
@@ -147,6 +179,10 @@ const LEARN_MORE_MENS = `<!-- SIYA:LEARN-MORE-MENS -->
             <li><a href="/answers/what-does-low-testosterone-feel-like">What does low testosterone feel like?</a></li>
             <li><a href="/blog/when-is-testosterone-therapy-appropriate">When is testosterone therapy appropriate?</a></li>
             <li><a href="/answers/testosterone-and-adhd-overlap">Testosterone and ADHD overlap</a></li>
+            <li><a href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">Why am I always tired?</a></li>
+            <li><a href="/blog/insulin-resistance-and-weight-loss-clinician-overview">Insulin resistance and weight loss</a></li>
+            <li><a href="/blog/food-noise-and-glp-1-what-it-means-and-what-helps">Food noise and GLP-1</a></li>
+            <li><a href="/answers/what-is-food-noise">What is food noise?</a></li>
           </ul>
         </div>
       </section>
@@ -164,6 +200,8 @@ const LEARN_MORE_TELE = `<!-- SIYA:LEARN-MORE-TELE -->
             <li><a href="/answers/why-am-i-tired-even-after-sleeping">Tired even after sleeping</a></li>
             <li><a href="/blog/insulin-resistance-and-weight-loss-clinician-overview">Insulin resistance overview</a></li>
             <li><a href="/blog/food-noise-and-glp-1-what-it-means-and-what-helps">Food noise &amp; GLP-1</a></li>
+            <li><a href="/blog/free-testosterone-vs-total-testosterone-what-patients-should-know">Free vs total testosterone</a></li>
+            <li><a href="/answers/what-is-food-noise">What is food noise?</a></li>
             <li><a href="/weight-loss-metabolic-health">Metabolic health services</a></li>
             <li><a href="/mens-health-longevity">Men's health &amp; longevity</a></li>
             <li><a href="/adhd-care">ADHD care</a></li>
@@ -315,7 +353,35 @@ function loadContinueReadingIndex() {
   }
 }
 
+function buildCornerstoneContinueReadingHtml(blogPath) {
+  const cfg = CORNERSTONE_CONTINUE_READING[blogPath];
+  if (!cfg) return null;
+
+  const items = [
+    ...cfg.siblings.map((p) => ({ path: p, label: anchorFor(p) })),
+    { path: cfg.answer, label: anchorFor(cfg.answer), kind: 'answer' },
+    { path: cfg.service.path, label: cfg.service.label, kind: 'service' },
+  ];
+
+  const lis = items
+    .map((item) => {
+      const cls = item.kind ? ` class="continue-reading-${item.kind}"` : '';
+      return `                <li${cls}><a href="${item.path}">${item.label}</a></li>`;
+    })
+    .join('\n');
+
+  return `<section class="continue-reading" aria-labelledby="continue-reading-heading">
+              <h2 id="continue-reading-heading">Continue reading</h2>
+              <ul>
+${lis}
+              </ul>
+            </section>`;
+}
+
 function buildContinueReadingHtml(blogPath, title, auditIndex) {
+  const cornerstoneBlock = buildCornerstoneContinueReadingHtml(blogPath);
+  if (cornerstoneBlock) return cornerstoneBlock;
+
   const slug = blogPath.replace(/^\/blog\//, '');
   const topic = topicFromPath(blogPath, title);
   const service = SERVICE_BY_TOPIC[topic] || SERVICE_BY_TOPIC.general;
