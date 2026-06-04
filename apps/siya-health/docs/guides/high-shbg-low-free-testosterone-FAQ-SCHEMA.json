@@ -1,0 +1,54 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does high SHBG with low free testosterone mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "More testosterone is protein-bound and less is bioavailable. Clinicians evaluate thyroid, liver, medications, symptoms, and repeat morning labs with proper free testosterone assessment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you have low free testosterone with normal total?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes—elevated SHBG is a common mechanism, especially with thyroid excess or certain medicines."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What causes high SHBG in men?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Aging, hyperthyroidism, liver disease, low insulin states, some drugs, and caloric restriction patterns—context determines which to test."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need TRT if free testosterone is low?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only when guideline criteria are met after reversible causes are addressed and risks/benefits are reviewed—not based on one screening line."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "High SHBG and fatigue—connected?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Possibly via low free testosterone, but fatigue also commonly reflects sleep apnea, depression, anemia, and metabolic issues—do not treat labs alone."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is free testosterone measured accurately?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Equilibrium dialysis or validated calculations from total testosterone, SHBG, and albumin—avoid unreliable direct free testosterone immunoassays when possible."
+      }
+    }
+  ]
+}

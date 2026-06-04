@@ -1,0 +1,54 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why am I gaining weight after stopping Ozempic?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Appetite and satiety signaling often return after discontinuation; many patients eat more without the pharmacologic brake. Ongoing structure or maintenance therapy may be appropriate—discuss with your prescriber."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How fast do you regain weight after stopping semaglutide?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Timelines vary. Some notice hunger within days; measurable regain over weeks to months is common in trial follow-up after withdrawal."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I restart Ozempic after gaining weight back?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Many patients do restart under medical supervision, subject to indications, side effects, insurance, and cardiovascular history. Not appropriate for everyone."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is weight regain after Wegovy permanent?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not necessarily. New treatment plans, sleep optimization, strength training, and metabolic monitoring can improve trajectory—outcomes are individual."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does stopping GLP-1 reverse diabetes benefits?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Glycemic improvements may lessen if weight and insulin resistance rebound. Repeat A1C and clinician review are prudent."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ozempic vs lifestyle only after stop?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lifestyle remains foundational; some patients need ongoing pharmacotherapy for chronic obesity management per guideline frameworks."
+      }
+    }
+  ]
+}

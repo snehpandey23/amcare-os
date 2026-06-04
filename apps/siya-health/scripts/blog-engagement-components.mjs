@@ -120,6 +120,29 @@ export function decisionTree({ title, nodes }) {
             </figure>`;
 }
 
+/** Comparison table for “vs” guides and option choosers */
+export function comparisonTable({ title, headers, rows }) {
+  const head = headers.map((h) => `<th scope="col">${h}</th>`).join('');
+  const body = rows
+    .map(
+      (cells) =>
+        `<tr>${cells.map((c, i) => `<${i === 0 ? 'th scope="row"' : 'td'}>${c}</${i === 0 ? 'th' : 'td'}>`).join('')}</tr>`,
+    )
+    .join('\n                ');
+  return `
+            <figure class="blog-engage blog-engage--comparison" aria-label="${title}">
+              <figcaption class="blog-engage-label">${title}</figcaption>
+              <div class="blog-engage-table-wrap">
+                <table class="blog-engage-table">
+                  <thead><tr>${head}</tr></thead>
+                  <tbody>
+                ${body}
+                  </tbody>
+                </table>
+              </div>
+            </figure>`;
+}
+
 /** Cornerstone-specific engagement bundles */
 export const CORNERSTONE_ENGAGEMENT = {
   'food-noise-and-glp-1-what-it-means-and-what-helps': {

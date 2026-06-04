@@ -1,0 +1,54 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why don't normal labs mean you're healthy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Labs screen specific markers at one point in time. Insulin resistance, sleep disorders, mental health conditions, and lifestyle factors can impair quality of life before standard thresholds are crossed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you have insulin resistance with normal A1C?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Many adults have compensatory hyperinsulinemia and post-meal glucose swings while A1C remains in the normal range—especially with central weight gain or strong family history."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What blood tests show metabolic health?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Clinicians often combine A1C, fasting glucose, lipids (including triglycerides), blood pressure, waist trend, and sometimes insulin or liver markers—interpreted with symptoms, not in isolation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my doctor say labs are fine but I feel terrible?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common reasons include sleep apnea, depression, thyroid edge cases, iron deficiency, medication effects, burnout, ADHD, or early metabolic strain. Structured history and targeted testing clarify next steps."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I get a second opinion if labs are normal?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Reasonable when symptoms persist, worsen, or impair work and relationships. Bring records, a symptom timeline, and specific goals for the visit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do normal labs rule out sleep apnea?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes—sleep apnea is diagnosed with sleep history and testing, not routine bloodwork. Snoring, unrefreshing sleep, and daytime sleepiness warrant sleep evaluation regardless of “normal” labs."
+      }
+    }
+  ]
+}

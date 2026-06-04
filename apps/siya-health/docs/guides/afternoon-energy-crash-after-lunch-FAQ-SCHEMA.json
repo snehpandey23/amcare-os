@@ -1,0 +1,54 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why do I crash every afternoon after lunch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Frequent drivers include large high-carb lunches, blood sugar peaks and drops, insulin resistance, poor sleep, and stress. Daily severe crashes deserve medical review."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why am I so tired after lunch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mild post-lunch sleepiness can be normal. Disabling fatigue suggests meal composition, metabolic, or sleep disorders worth evaluating."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is an afternoon energy crash?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A predictable slump in alertness and mood 1–3 hours after midday eating, often with brain fog and carb cravings."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is afternoon fatigue a sign of diabetes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It can occur with prediabetes or diabetes but is not specific. Polyuria, thirst, weight loss, or elevated A1C increase concern."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I stop post-lunch sleepiness at work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Smaller protein-forward lunches, post-meal walks, hydration, sleep optimization, and clinician-guided metabolic testing when persistent."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Afternoon crash vs brain fog after eating?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Overlapping topics. This guide centers afternoon timing; see brain fog after eating for wider differential and insulin resistance detail."
+      }
+    }
+  ]
+}

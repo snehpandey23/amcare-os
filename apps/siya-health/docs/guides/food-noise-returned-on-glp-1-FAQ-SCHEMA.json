@@ -1,0 +1,54 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why did food noise come back on GLP-1?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common drivers include missed doses, lower drug levels, stress, poor sleep, plateaus, and untreated emotional eating. Review timing and dose with your prescriber."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does semaglutide stop working for food noise?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Effectiveness can change with adherence, dose, side-effect limits, and biology. “Stopped working” often means the plan needs adjustment—not that the medicine is useless."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can stress bring back food noise on Ozempic or Wegovy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Cortisol and sleep loss increase hunger and reward seeking; GLP-1 may not fully override high stress periods."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I increase my GLP-1 dose if cravings return?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only with prescriber guidance. Higher doses raise GI side-effect risk and may not be appropriate for your history."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is food noise the same as binge eating disorder?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Related but not identical. Persistent binge episodes deserve specific screening and may need therapy plus medication—not only dose changes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is food noise?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Intrusive, repetitive thoughts about food and eating. See our dedicated Health Guide on food noise for baseline definitions."
+      }
+    }
+  ]
+}

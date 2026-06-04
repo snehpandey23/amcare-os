@@ -16,6 +16,7 @@ import {
   REVIEW_STATUS,
 } from './clinical-entity.mjs';
 import { COPY_STANDARDS, FOOTER_STATES_LINE } from '../data/site-standards.mjs';
+import { buildHealthGuideEngagement } from './answer-engagement-system.mjs';
 import { MEET_GREET_URL, NAV_HEALTH_GUIDES } from './site-chrome.mjs';
 
 /** UX hub groupings (display order) */
@@ -54,9 +55,21 @@ const HEALTH_GUIDE_CATEGORIES = [
 
 /** Featured on hub (exactly 3 per category; remainder behind “View all”) */
 const FEATURED_BY_CATEGORY = {
-  metabolic: ['brain-fog-after-eating', 'what-is-food-noise', 'what-is-insulin-resistance'],
-  energy: ['brain-fog-after-eating', 'poor-sleep-feels-like-adhd', 'why-am-i-tired-even-after-sleeping'],
-  hormone: ['what-is-free-testosterone', 'what-does-low-testosterone-feel-like', 'when-is-testosterone-therapy-appropriate'],
+  metabolic: [
+    'why-normal-labs-dont-mean-healthy',
+    'food-noise-returned-on-glp-1',
+    'what-is-insulin-resistance',
+  ],
+  energy: [
+    'afternoon-energy-crash-after-lunch',
+    'poor-sleep-feels-like-adhd',
+    'why-am-i-tired-even-after-sleeping',
+  ],
+  hormone: [
+    'high-shbg-low-free-testosterone',
+    'what-is-free-testosterone',
+    'what-does-low-testosterone-feel-like',
+  ],
   adhd: ['signs-of-adult-adhd', 'how-long-adhd-evaluation', 'can-adhd-be-diagnosed-online'],
   telehealth: ['is-telehealth-legitimate', 'meet-and-greet-telehealth-expectations', 'how-online-prescriptions-work'],
 };
@@ -75,8 +88,17 @@ function categoriesForSeed(seed) {
 }
 
 function guideCategoryForSeed(seed) {
-  if (seed.slug === 'brain-fog-after-eating') return 'metabolic';
+  if (seed.hubCategories?.length) return seed.hubCategories[0];
   if (
+    seed.slug === 'brain-fog-after-eating' ||
+    seed.slug === 'why-normal-labs-dont-mean-healthy' ||
+    seed.slug === 'food-noise-returned-on-glp-1' ||
+    seed.slug === 'weight-gain-after-stopping-ozempic'
+  ) {
+    return 'metabolic';
+  }
+  if (
+    seed.slug === 'afternoon-energy-crash-after-lunch' ||
     seed.slug === 'why-am-i-tired-even-after-sleeping' ||
     seed.slug === 'can-sleep-apnea-cause-fatigue' ||
     seed.slug === 'signs-of-sleep-apnea-in-adults' ||
@@ -84,6 +106,7 @@ function guideCategoryForSeed(seed) {
   ) {
     return 'energy';
   }
+  if (seed.slug === 'high-shbg-low-free-testosterone') return 'hormone';
   if (seed.topic === 'adhd') return 'adhd';
   if (seed.topic === 'mens-health') return 'hormone';
   if (seed.topic === 'telehealth') return 'telehealth';
@@ -207,20 +230,22 @@ function nextStepsHtml(hub, topic = 'general') {
             </section>`;
 }
 
-function buildSectionsHtml(seed) {
+function buildSectionsHtml(seed, midBreakHtml = '') {
   if (seed.sections?.length) {
     return seed.sections
-      .map((s) => {
+      .map((s, index) => {
         const id = s.id || s.heading.toLowerCase().replace(/\W+/g, '-').slice(0, 40);
         const paras = (s.paragraphs || []).map((p) => `<p>${esc(p)}</p>`).join('\n            ');
         const list = s.listItems?.length
           ? `<ul class="answer-section-list">\n                ${s.listItems.map((li) => `<li>${esc(li)}</li>`).join('\n                ')}\n              </ul>`
           : '';
+        const midAfterIndex = seed.sections.length > 1 ? 1 : 0;
+        const mid = index === midAfterIndex && midBreakHtml ? `\n${midBreakHtml}\n` : '';
         return `            <section class="answer-section" id="${id}" aria-labelledby="${id}-heading">
               <h2 id="${id}-heading">${esc(s.heading)}</h2>
             ${paras}
             ${list}
-            </section>`;
+            </section>${mid}`;
       })
       .join('\n');
   }
@@ -286,7 +311,12 @@ function buildAnswerPage(seed) {
     .join('\n                ');
 
   const evidenceHtml = (seed.evidence || []).map((e) => `<li>${esc(e)}</li>`).join('\n              ');
-  const sectionsHtml = buildSectionsHtml(seed);
+  const engagement = buildHealthGuideEngagement(seed);
+  const sectionsHtml = buildSectionsHtml(seed, engagement.midBreak);
+  const shortBodyExtra =
+    !seed.sections?.length && engagement.takeaway
+      ? `\n            ${engagement.takeaway}\n            ${engagement.midBreak}`
+      : '';
   const learnMoreHtml = buildLearnMoreHtml(seed);
   const faqJson = buildFaqJson(seed);
 
@@ -342,10 +372,13 @@ ${clinicalReviewBlock(reviewRecord)}
               <h2 id="short-answer-heading">Short answer</h2>
               <p class="answer-lead">${esc(seed.shortAnswer)}</p>
             </section>
-${sectionsHtml}
+${engagement.aboveFold}
+${sectionsHtml}${shortBodyExtra}
+${engagement.decisionSupport}
             <section class="answer-evidence" id="evidence" aria-labelledby="evidence-heading">
               <h2 id="evidence-heading">Evidence &amp; references</h2>
-              <ul>${evidenceHtml}</ul>
+${engagement.evidenceCard}
+              <ul class="answer-evidence-list">${evidenceHtml}</ul>
             </section>
             <section class="answer-related" id="related-questions" aria-labelledby="related-heading">
               <h2 id="related-heading">Related Health Guides</h2>
