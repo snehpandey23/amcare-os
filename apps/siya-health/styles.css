@@ -4577,6 +4577,22 @@ a.asrs-interest-btn:hover {
   color: var(--primary);
   border: 1px solid var(--border);
 }
+.provider-state-chip--license-only {
+  border-style: dashed;
+  opacity: 0.88;
+  background: var(--white);
+  color: var(--text-secondary);
+}
+.provider-license-disclaimer {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin: 8px 0 0;
+  line-height: 1.45;
+  max-width: 42rem;
+}
+.provider-license-disclaimer--hub {
+  margin: 6px 0 10px;
+}
 .provider-credential-card {
   background: var(--white);
   border: 1px solid var(--border);
@@ -4886,4 +4902,471 @@ a.asrs-interest-btn:hover {
 .about-hub-links {
   margin-top: 24px;
   text-align: center;
+}
+
+/* Counsel legal document pages — neutral layout, no marketing chrome */
+body.legal-page .legal-document-main {
+  padding: 32px 0 48px;
+}
+.legal-document-container {
+  max-width: 760px;
+}
+.legal-document-header {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.legal-document-header h1 {
+  margin: 0 0 8px;
+  font-size: 1.85rem;
+}
+.legal-document-meta {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+.legal-related ul {
+  margin: 14px 0 0;
+  padding-left: 1.2rem;
+}
+.legal-document-body h2 {
+  margin: 1.75rem 0 0.75rem;
+  font-size: 1.2rem;
+}
+.legal-document-body h3 {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 1.05rem;
+}
+.legal-document-body p,
+.legal-document-body li {
+  line-height: 1.65;
+  color: var(--text);
+}
+.legal-document-body ul {
+  margin: 0.5rem 0 1rem;
+  padding-left: 1.35rem;
+}
+.legal-meta {
+  margin-top: 36px;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-tinted, #f8fafc);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+.legal-hub-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+.legal-hub-table th,
+.legal-hub-table td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.legal-breadcrumb {
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+  color: var(--text-secondary);
+}
+.site-header--legal .nav-center a {
+  font-weight: 500;
+}
+
+/* GHL intake legal acceptance gate */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+body.ghl-legal-gate-open {
+  overflow: hidden;
+}
+.ghl-legal-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.ghl-legal-gate[hidden] {
+  display: none !important;
+}
+.ghl-legal-gate__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+}
+.ghl-legal-gate__panel {
+  position: relative;
+  z-index: 1;
+  width: min(560px, 100%);
+  max-height: min(90vh, 720px);
+  overflow: auto;
+  background: var(--surface, #fff);
+  border-radius: var(--radius, 12px);
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.18);
+  padding: 28px 28px 24px;
+}
+.ghl-legal-gate__title {
+  margin: 0 0 16px;
+  font-size: 1.35rem;
+}
+.ghl-legal-gate__checks {
+  border: 0;
+  margin: 0 0 16px;
+  padding: 0;
+}
+.ghl-legal-gate__check {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  cursor: pointer;
+}
+.ghl-legal-gate__check input {
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+.ghl-legal-gate__adhd {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--accent, #0d9488);
+  background: var(--surface-tinted, #f8fafc);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+.ghl-legal-gate__confirm {
+  margin: 0 0 12px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.ghl-legal-gate__links {
+  margin: 0 0 16px;
+  font-size: 0.9rem;
+}
+.ghl-legal-gate__error {
+  margin: 0 0 12px;
+  color: #b91c1c;
+  font-size: 0.9rem;
+}
+.ghl-legal-gate__actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+.intake-legal-panel {
+  max-width: 640px;
+  margin: 0 auto 32px;
+}
+.intake-legal-panel .ghl-legal-gate__check {
+  margin-bottom: 14px;
+}
+.intake-form-frame {
+  width: 100%;
+  min-height: 720px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 12px);
+  background: #fff;
+}
+.intake-form-frame[hidden] {
+  display: none !important;
+}
+
+/* Cookie notice — non-blocking */
+.cookie-notice {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: var(--surface, #fff);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.08);
+  padding: 14px 20px;
+}
+.cookie-notice__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+.cookie-notice__text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  flex: 1 1 280px;
+}
+.cookie-notice__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.cookie-notice .button {
+  padding: 8px 16px;
+  font-size: 0.88rem;
+}
+
+/* ===== Homepage symptom-centric + visual diagram system ===== */
+.hero-symptom-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 20px;
+}
+.hero-symptom-chips span {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+.symptoms-card--link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+.symptoms-card--link .symptoms-card-actions {
+  margin-top: auto;
+  padding-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.symptoms-card--link .text-link {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+.symptoms-card--link .symptoms-card-secondary {
+  font-size: 0.82rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+.symptoms-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.why-patients-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .why-patients-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.why-patients-copy p {
+  margin-bottom: 16px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.why-patients-copy p:last-child { margin-bottom: 0; }
+.flow-compliance-note {
+  margin-top: 20px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+.flow-compliance-note a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+.pathway-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .pathway-cards { grid-template-columns: repeat(2, 1fr); }
+}
+.pathway-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px 24px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: start;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.pathway-card:hover {
+  box-shadow: 0 8px 24px rgba(30, 58, 138, 0.08);
+  transform: translateY(-2px);
+}
+.pathway-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--bg-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+.pathway-card-body h3 {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+.pathway-card-body p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+.pathway-card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.pathway-card-links a {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+.pathway-card-links a.pathway-secondary {
+  color: var(--accent);
+  font-weight: 500;
+}
+.pathway-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--primary);
+  background: #dbeafe;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+.membership-band {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 55%, #0ea5a4 100%);
+  color: #fff;
+  border-radius: 16px;
+  padding: 36px 32px;
+  text-align: center;
+}
+.membership-band h2 {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+.membership-band .lead {
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 560px;
+  margin: 0 auto 20px;
+}
+.membership-band ul {
+  list-style: none;
+  margin: 0 auto 24px;
+  padding: 0;
+  max-width: 480px;
+  text-align: left;
+}
+.membership-band li {
+  padding: 6px 0 6px 24px;
+  position: relative;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+.membership-band li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #6ee7b7;
+  font-weight: 700;
+}
+.membership-band .button {
+  background: #fff;
+  color: var(--primary);
+}
+.membership-band .button:hover {
+  background: #f0f9ff;
+}
+.provider-entity-note {
+  margin-top: 16px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* Reusable Siya diagram components */
+.siya-diagram {
+  margin: 24px 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-subtle);
+}
+.siya-diagram img,
+.siya-diagram svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.siya-diagram figcaption {
+  padding: 12px 16px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+  background: var(--white);
+}
+.siya-diagram--inline {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.siya-diagram--wide {
+  max-width: 100%;
+}
+.siya-diagram--scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.siya-diagram--scroll img,
+.siya-diagram--scroll svg {
+  min-width: 560px;
+}
+@media (max-width: 640px) {
+  .symptoms-card-grid--home {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .symptoms-card-grid--home .symptoms-card {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
+  }
 }

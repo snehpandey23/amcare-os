@@ -238,14 +238,14 @@ export const ADDITIONAL_PROVIDERS = [
       'I’m Derek Timbs, FNP-BC. I lead telehealth visits for medical weight loss and men’s metabolic health—with experience supporting GLP-1 programs, phentermine where state law allows, and testosterone monitoring.',
     longBio: [
       'My background blends <strong>family nurse practitioner</strong> training with occupational and metabolic medicine experience—including work with employers and patients navigating complex weight and hormone questions.',
-      'At Siya, I see adults in <strong>Texas and Ohio</strong> who want clinician-led GLP-1 or metabolic care with clear monitoring and honest scope-of-practice boundaries.',
+      'At Siya, I see adults in <strong>Texas</strong> who want clinician-led GLP-1 or metabolic care with clear monitoring and honest scope-of-practice boundaries.',
     ],
     patientFit: {
-      deck: 'Texas and Ohio adults pursuing clinician-led weight loss or men’s metabolic telehealth',
+      deck: 'Texas adults pursuing clinician-led weight loss or men’s metabolic telehealth',
       bullets: [
         '<strong>GLP-1 &amp; metabolic expertise</strong>—semaglutide, tirzepatide, and adjunct options discussed transparently.',
         '<strong>Men\'s health monitoring</strong>—labs and follow-up when hormone therapy is on the table.',
-        '<strong>State-aware prescribing</strong>—options vary by Texas vs Ohio law; we confirm at scheduling.',
+        '<strong>Texas prescribing guardrails</strong>—options follow Texas law and medical appropriateness; we confirm at scheduling.',
       ],
       sectionTitle: 'Why patients choose Derek Timbs',
     },
@@ -258,7 +258,7 @@ export const ADDITIONAL_PROVIDERS = [
     ],
     trustCards: [
       { title: 'Credentials', text: 'Board-certified Family Nurse Practitioner (FNP-BC).' },
-      { title: 'States licensed', text: 'Telehealth where eligible: <strong>Texas</strong> and <strong>Ohio</strong>—confirm at scheduling.' },
+      { title: 'States licensed', text: 'Licensed in <strong>Texas</strong> and <strong>Ohio</strong>. Siya Healthcare, PLLC provides telehealth in <strong>Texas</strong> only; Ohio license displayed for transparency.' },
       { title: 'Supervision', text: 'Practice under collaborative physician agreements per state law.' },
     ],
     testimonials: [],
@@ -287,8 +287,8 @@ export const ADDITIONAL_PROVIDERS = [
     seo: {
       title: 'Derek Timbs, FNP-BC | Medical Weight Loss & Men\'s Health | Siya Health',
       description:
-        'Meet Derek Timbs, FNP-BC at Siya Health. GLP-1 weight loss and men\'s metabolic telehealth in Texas and Ohio.',
-      focusLead: 'NP-led weight loss and men\'s metabolic care (TX, OH).',
+        'Meet Derek Timbs, FNP-BC at Siya Health. GLP-1 weight loss and men\'s metabolic telehealth in Texas.',
+      focusLead: 'NP-led weight loss and men\'s metabolic care (TX).',
     },
     servicePageTagline: 'Weight loss & men\'s health',
     claimsNeedingVerification: [],

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="trt-flow-title">
+  <title id="trt-flow-title">Testosterone evaluation flowchart for men's health telehealth</title>
+  <rect width="640" height="400" fill="#f9fafb" rx="16"/>
+  <text x="320" y="32" text-anchor="middle" fill="#111827" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700">Testosterone evaluation pathway</text>
+  <g font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#111827">
+    <rect x="220" y="50" width="200" height="40" rx="8" fill="#1e3a8a"/><text x="320" y="76" text-anchor="middle" fill="#fff">Symptoms + history</text>
+    <rect x="220" y="120" width="200" height="40" rx="8" fill="#fff" stroke="#1e3a8a" stroke-width="2"/><text x="320" y="146" text-anchor="middle">Labs (total + free T)</text>
+    <rect x="220" y="190" width="200" height="40" rx="8" fill="#fff" stroke="#1e3a8a" stroke-width="2"/><text x="320" y="216" text-anchor="middle">Rule out other causes</text>
+    <rect x="170" y="270" width="180" height="40" rx="8" fill="#ecfdf5" stroke="#0ea5a4" stroke-width="2"/><text x="260" y="296" text-anchor="middle">Monitor &amp; follow-up</text>
+    <rect x="390" y="270" width="180" height="40" rx="8" fill="#fff" stroke="#6b7280" stroke-width="2"/><text x="480" y="296" text-anchor="middle">Lifestyle-first plan</text>
+  </g>
+  <line x1="320" y1="90" x2="320" y2="120" stroke="#1e3a8a" stroke-width="2"/>
+  <line x1="320" y1="160" x2="320" y2="190" stroke="#1e3a8a" stroke-width="2"/>
+  <line x1="320" y1="230" x2="260" y2="270" stroke="#1e3a8a" stroke-width="2"/>
+  <line x1="320" y1="230" x2="480" y2="270" stroke="#6b7280" stroke-width="2"/>
+  <text x="320" y="340" text-anchor="middle" fill="#6b7280" font-family="Inter,Arial,sans-serif" font-size="11">TRT only when clinically appropriatenot guaranteed</text>
+  <text x="320" y="358" text-anchor="middle" fill="#6b7280" font-family="Inter,Arial,sans-serif" font-size="11">Ongoing monitoring required when therapy is prescribed</text>
+</svg>

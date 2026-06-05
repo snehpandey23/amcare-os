@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="plateau-title">
+  <title id="plateau-title">Weight loss plateau explainer: expected stall points and clinical review triggers</title>
+  <rect width="640" height="360" fill="#f9fafb" rx="16"/>
+  <text x="320" y="32" text-anchor="middle" fill="#111827" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700">Weight loss plateaus are common</text>
+  <path d="M80 260 L180 220 L280 200 L380 198 L480 196 L560 195" fill="none" stroke="#0ea5a4" stroke-width="3"/>
+  <path d="M380 198 L480 196" fill="none" stroke="#d97706" stroke-width="3" stroke-dasharray="6 4"/>
+  <line x1="60" y1="280" x2="580" y2="280" stroke="#e5e7eb" stroke-width="2"/>
+  <line x1="60" y1="80" x2="60" y2="280" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="380" y="175" fill="#d97706" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="600">Plateau zone</text>
+  <rect x="400" y="60" width="200" height="100" rx="10" fill="#fff" stroke="#1e3a8a" stroke-width="2"/>
+  <text x="500" y="88" text-anchor="middle" fill="#111827" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600">When to review</text>
+  <g fill="#6b7280" font-family="Inter,Arial,sans-serif" font-size="10">
+    <text x="415" y="108">" Dose adequacy</text>
+    <text x="415" y="124">" Nutrition &amp; activity</text>
+    <text x="415" y="140">" Sleep &amp; stress</text>
+    <text x="415" y="156">" Medication adherence</text>
+  </g>
+  <text x="320" y="330" text-anchor="middle" fill="#6b7280" font-family="Inter,Arial,sans-serif" font-size="11">Plateaus don't mean failurea clinician can reassess the plan</text>
+</svg>

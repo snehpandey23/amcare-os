@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="symptom-loop-title">
+  <title id="symptom-loop-title">Symptom overlap loop: fatigue, focus, weight, hormones, and sleep often connect</title>
+  <defs>
+    <linearGradient id="siyaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#0ea5a4"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="400" fill="#f9fafb" rx="16"/>
+  <circle cx="320" cy="200" r="118" fill="none" stroke="url(#siyaGrad)" stroke-width="3" stroke-dasharray="8 6"/>
+  <circle cx="320" cy="200" r="52" fill="#1e3a8a"/>
+  <text x="320" y="196" text-anchor="middle" fill="#fff" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600">Structured</text>
+  <text x="320" y="214" text-anchor="middle" fill="#fff" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600">evaluation</text>
+  <g font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600" fill="#111827">
+    <rect x="268" y="28" width="104" height="36" rx="18" fill="#fff" stroke="#1e3a8a" stroke-width="2"/>
+    <text x="320" y="51" text-anchor="middle">Fatigue</text>
+    <rect x="488" y="108" width="104" height="36" rx="18" fill="#fff" stroke="#1e3a8a" stroke-width="2"/>
+    <text x="540" y="131" text-anchor="middle">Focus</text>
+    <rect x="488" y="256" width="104" height="36" rx="18" fill="#fff" stroke="#1e3a8a" stroke-width="2"/>
+    <text x="540" y="279" text-anchor="middle">Weight</text>
+    <rect x="268" y="336" width="104" height="36" rx="18" fill="#fff" stroke="#1e3a8a" stroke-width="2"/>
+    <text x="320" y="359" text-anchor="middle">Sleep</text>
+    <rect x="48" y="256" width="104" height="36" rx="18" fill="#fff" stroke="#1e3a8a" stroke-width="2"/>
+    <text x="100" y="279" text-anchor="middle">Hormones</text>
+    <rect x="48" y="108" width="104" height="36" rx="18" fill="#fff" stroke="#1e3a8a" stroke-width="2"/>
+    <text x="100" y="131" text-anchor="middle">Motivation</text>
+  </g>
+  <text x="320" y="388" text-anchor="middle" fill="#6b7280" font-family="Inter,Arial,sans-serif" font-size="11">Symptoms often overlapclinicians look at the full picture</text>
+</svg>

@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
 Generated: 2026-06-05
-Total pages: 163
+Total pages: 167
 
 ---
 
@@ -85,9 +85,9 @@ Total pages: 163
 
 ## All pages (title | URL | topics)
 
-- Siya Health | Virtual Care for Energy, Weight, Hormones &amp; Focus
+- Siya Health | When Focus, Energy, or Weight Won't Budge
   URL: https://siya.health/
-  Summary: Modern physician-guided virtual care for energy, weight, hormones, focus, sleep, and everyday health. Medical weight loss, men's health, ADHD, and telehealth in CA, TX, PA, and FL.
+  Summary: Physician-led telehealth for adults who feel tired, unfocused, or stuck—structured evaluation for fatigue, ADHD symptoms, weight, and hormones in CA, TX, PA, and FL.
   Topics: weight-loss
 
 - About Siya Health | Mission, Team &amp; How Care Works
@@ -784,6 +784,10 @@ Total pages: 163
   Summary: Creyos cognitive testing for ADHD as part of your $199 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL.
   Topics: adhd
 
+- Secure Intake
+  URL: https://siya.health/intake
+  Summary: Complete required policy acknowledgments before booking with Siya Health.
+
 - Diagnostic Lab Services
   URL: https://siya.health/labs
   Summary: Diagnostic lab services and monitoring tests are coming soon to Siya Health.
@@ -791,6 +795,14 @@ Total pages: 163
 - Legal &amp; Compliance
   URL: https://siya.health/legal
   Summary: Legal and compliance policies for Siya Health telehealth services.
+
+- Controlled Substance Treatment Agreement
+  URL: https://siya.health/legal/controlled-substance-treatment-agreement
+  Summary: Controlled Substance Treatment Agreement for Siya Health.
+
+- Cookie Policy
+  URL: https://siya.health/legal/cookie-policy
+  Summary: Cookie Policy for Siya Health.
 
 - Notice of Privacy Practices
   URL: https://siya.health/legal/notice-of-privacy-practices
@@ -826,9 +838,9 @@ Total pages: 163
   URL: https://siya.health/primary-urgent-care
   Summary: Virtual primary care and concierge visits with licensed providers. Telehealth services across California, Texas, Pennsylvania, and Florida.
 
-- Privacy Policy Redirect
+- Privacy Policy
   URL: https://siya.health/privacy-policy
-  Summary: Legacy privacy policy URL. The current Privacy Policy is published at siya.health/legal/privacy-policy.
+  Summary: Siya Health privacy policy. How we collect, use, and protect your information.
 
 - Our Care Team
   URL: https://siya.health/providers
@@ -836,7 +848,7 @@ Total pages: 163
 
 - Derek Timbs, FNP-BC | Medical Weight Loss &amp; Men's Health
   URL: https://siya.health/providers/derek-timbs
-  Summary: Meet Derek Timbs, FNP-BC at Siya Health. GLP-1 weight loss and men's metabolic telehealth in Texas and Ohio.
+  Summary: Meet Derek Timbs, FNP-BC at Siya Health. GLP-1 weight loss and men's metabolic telehealth in Texas.
   Topics: weight-loss
 
 - Dr. Natasha Desai, MD | Adult ADHD &amp; Behavioral Medicine
@@ -874,9 +886,13 @@ Total pages: 163
   Summary: Fast, convenient telehealth from board-certified providers. Primary care, urgent care, prescriptions, labs. TX, PA, FL. No waiting rooms.
   Topics: telehealth
 
-- Terms of Use Redirect
+- Terms of Service
   URL: https://siya.health/terms
-  Summary: Legacy terms URL. The current Terms of Use are published at siya.health/legal/terms-of-use.
+  Summary: Siya Health terms of service. Use of our telehealth website and services.
+
+- Siya Health Visual Component Library (Internal)
+  URL: https://siya.health/visual-components
+  Summary: Learn more about Siya Health Visual Component Library (Internal) with Siya Health telehealth.
 
 - Provider-Guided Medical Weight Loss
   URL: https://siya.health/weight-loss-metabolic-health

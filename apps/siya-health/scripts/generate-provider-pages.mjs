@@ -12,11 +12,49 @@ import {
   bookingLinkWithAttribution,
   getAllProviders,
   getProviderHubFilterTags,
+  providerServiceStates,
   resolveProviderPhoto,
   stateChipLabel,
 } from '../data/providers.mjs';
 import { formatCredentialMeta } from '../data/internal-provider-records.mjs';
 import { getReviewedContentForProvider } from '../data/provider-reviewed-content.mjs';
+import {
+  AVAILABLE_SERVICE_STATES,
+  PROVIDER_LICENSE_DISCLAIMER,
+  STATES_INLINE,
+} from '../data/site-standards.mjs';
+import { renderLegalFooter } from './site-chrome.mjs';
+
+const STATE_ABBREV = {
+  California: 'CA',
+  Texas: 'TX',
+  Pennsylvania: 'PA',
+  Florida: 'FL',
+  Ohio: 'OH',
+};
+
+function isServiceFootprintState(stateLabel) {
+  if (AVAILABLE_SERVICE_STATES.includes(stateLabel)) return true;
+  const match = Object.entries(STATE_ABBREV).find(([, abbr]) => abbr === stateLabel);
+  return match ? AVAILABLE_SERVICE_STATES.includes(match[0]) : false;
+}
+
+function renderLicenseStateChip(label) {
+  const licenseOnly = !isServiceFootprintState(label);
+  const cls = licenseOnly
+    ? 'provider-state-chip provider-state-chip--license-only'
+    : 'provider-state-chip';
+  const title = licenseOnly
+    ? ' title="Professional license — not organizational service availability"'
+    : '';
+  return `<span class="${cls}"${title}>${esc(label)}</span>`;
+}
+
+function renderStateChipsBlock(states) {
+  const chips = states.map((s) => renderLicenseStateChip(s)).join('\n                ');
+  return `<div class="provider-state-chips" aria-label="Licensed states">${chips}</div>
+              <p class="provider-license-disclaimer">${esc(PROVIDER_LICENSE_DISCLAIMER)}</p>`;
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -88,7 +126,7 @@ function buildPhysicianSchema(provider) {
     url: canonical,
     image,
     worksFor: { '@id': `${BASE_URL}/#organization` },
-    areaServed: provider.statesLicensed.map((name) => ({ '@type': 'State', name })),
+    areaServed: providerServiceStates(provider).map((name) => ({ '@type': 'State', name })),
     ...(provider.honorificPrefix ? { honorificPrefix: provider.honorificPrefix } : {}),
     ...(provider.honorificSuffix ? { honorificSuffix: provider.honorificSuffix } : {}),
     ...(provider.npi ? { identifier: { '@type': 'PropertyValue', name: 'NPI', value: provider.npi } } : {}),
@@ -157,7 +195,7 @@ function renderProviderPage(provider) {
     ? `<p class="provider-supervision-note">${esc(provider.supervisionNote)}</p>`
     : '';
   const chips = provider.credentialChips.map((c) => `<span>${c}</span>`).join('\n                ');
-  const stateChips = provider.statesLicensed.map((s) => `<span class="provider-state-chip">${s}</span>`).join('\n                ');
+  const stateChipsBlock = renderStateChipsBlock(provider.statesLicensed);
   const longBio = provider.longBio
     .map((p, i) => {
       const prefix =
@@ -293,7 +331,7 @@ ${verifiedTestimonials
               <p class="provider-lp-hero-deck">${provider.patientFit.deck}</p>
               <p class="provider-lp-hero-lead">${provider.shortBio}</p>
               <div class="provider-lp-badges" aria-label="Credentials">${chips}</div>
-              <div class="provider-state-chips" aria-label="Licensed states">${stateChips}</div>
+              ${stateChipsBlock}
               <div class="provider-lp-ctas">
                 ${screeningBtn}
                 <a class="button secondary" href="${bookingUrl}" target="_blank" rel="noopener" data-provider-cta="${provider.slug}">Book a Meet & Greet</a>
@@ -463,7 +501,7 @@ ${testimonialBlock}
           <p><a href="/answers">Health Guides</a></p><p><a href="/adhd-care">ADHD Care</a></p><p><a href="${BOOKING_LINK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a></p></div>
         <div><h4>Healthcare Services</h4><p><a href="/primary-urgent-care">Primary &amp; urgent care</a></p><p><a href="/labs">Diagnostic labs</a></p><p><a href="/prescriptions">Prescriptions</a></p></div>
         <div><h4>Contact</h4><p><a href="mailto:care@siya.health">care@siya.health</a></p><p><a href="tel:+12154451244">(215) 445-1244</a></p></div>
-        <div><h4>Legal</h4><p><a href="/privacy-policy">Privacy Policy</a></p><p><a href="/terms">Terms</a></p></div>
+        ${renderLegalFooter()}
       </div>
       <div class="container"><p class="footer-notice">For emergencies, call 911. All telehealth services are provided by licensed medical professionals.</p><small>© 2026 Siya Health Inc.</small></div>
     </footer>
@@ -480,7 +518,7 @@ function renderProviderIndexCard(p) {
       return `<span class="provider-index-tag">${esc(text)}</span>`;
     })
     .join('');
-  const states = p.stateAbbreviations.map((s) => `<span class="provider-state-chip">${s}</span>`).join(' ');
+  const stateChipsInner = p.stateAbbreviations.map((s) => renderLicenseStateChip(s)).join(' ');
   const hubTags = getProviderHubFilterTags(p);
   const accepting = p.acceptingNewPatients
     ? '<span class="provider-accepting-badge provider-accepting-badge--hub">Accepting patients</span>'
@@ -490,14 +528,16 @@ function renderProviderIndexCard(p) {
               ${photoMarkup}
               <h2><a href="/providers/${p.slug}">${esc(p.name)}</a></h2>
               <p class="provider-index-role">${esc(p.role)}${accepting}</p>
-              <div class="provider-state-chips" aria-label="Licensed states">${states}</div>
+              <div class="provider-state-chips" aria-label="Licensed states">${stateChipsInner}</div>
+              <p class="provider-license-disclaimer provider-license-disclaimer--hub">${esc(PROVIDER_LICENSE_DISCLAIMER)}</p>
               <div class="provider-index-tags">${focusTags}</div>
               <p class="provider-index-teaser">${esc(p.patientFit.deck)}</p>
               <a class="button secondary" href="/providers/${p.slug}">View profile</a>
             </article>`;
 }
 
-const HUB_FILTER_STATES = ['CA', 'TX', 'PA', 'FL', 'OH'];
+/** Hub filters reflect organizational service footprint only — not individual license states. */
+const HUB_FILTER_STATES = ['CA', 'TX', 'PA', 'FL'];
 const HUB_FILTER_SERVICES = [
   { key: 'adhd', label: 'ADHD' },
   { key: 'weight-loss', label: 'Weight Loss' },
@@ -554,7 +594,7 @@ function renderProvidersIndex() {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="index, follow" />
     <title>Our Care Team | Siya Health</title>
-    <meta name="description" content="Meet Siya Health physicians and advanced practice providers—primary care–led ADHD, metabolic, and telehealth care across California, Texas, Pennsylvania, Florida, and Ohio." />
+    <meta name="description" content="Meet Siya Health physicians and advanced practice providers—primary care–led ADHD, metabolic, and telehealth care across ${STATES_INLINE}." />
     <link rel="canonical" href="${BASE_URL}/providers" />
     <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
     <link rel="stylesheet" href="../styles.css" />
@@ -651,7 +691,7 @@ ${advancedCards}
         <div><h4>Services</h4>
           <p><a href="/answers">Health Guides</a></p><p><a href="/adhd-care">ADHD Care</a></p><p><a href="${BOOKING_LINK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a></p></div>
         <div><h4>Contact</h4><p><a href="mailto:care@siya.health">care@siya.health</a></p></div>
-        <div><h4>Legal</h4><p><a href="/privacy-policy">Privacy Policy</a></p><p><a href="/terms">Terms</a></p></div>
+        ${renderLegalFooter()}
       </div>
       <div class="container"><small>© 2026 Siya Health Inc.</small></div>
     </footer>

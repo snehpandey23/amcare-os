@@ -1,17 +1,17 @@
 # Provider Expansion — Implementation Report
 
-Generated: 2026-06-05T12:38:43.674Z
+Generated: 2026-06-05T14:58:17.531Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| Sitemap URLs | 159 |
+| Sitemap URLs | 167 |
 | Contracted providers in data | 7 |
 | Live profile pages | 7 |
 | Hub URL | https://siya.health/providers |
-| Pages linking to /providers hub | 159 |
-| Broken internal links (sample) | 2 |
+| Pages linking to /providers hub | 160 |
+| Broken internal links (sample) | 15 |
 | JSON-LD issues on profiles | 0 |
 
 ## Profile URLs
@@ -40,7 +40,7 @@ Generated: 2026-06-05T12:38:43.674Z
 
 | Target | Inbound pages |
 |--------|-------------:|
-| /providers hub | 159 |
+| /providers hub | 160 |
 | /providers/dr-sneh-pandey | 26 |
 | /providers/dr-vanessa-urbina | 9 |
 | /providers/dr-natasha-desai | 18 |
@@ -59,6 +59,19 @@ Generated: 2026-06-05T12:38:43.674Z
 
 - `answers/index.html` → `/llms.txt`
 - `answers/index.html` → `/article-index.json`
+- `intake/index.html` → `/styles.css`
+- `legal/controlled-substance-treatment-agreement/index.html` → `/assets/favicon.svg`
+- `legal/controlled-substance-treatment-agreement/index.html` → `/styles.css`
+- `legal/cookie-policy/index.html` → `/assets/favicon.svg`
+- `legal/cookie-policy/index.html` → `/styles.css`
+- `legal/index.html` → `/assets/favicon.svg`
+- `legal/index.html` → `/styles.css`
+- `legal/notice-of-privacy-practices/index.html` → `/assets/favicon.svg`
+- `legal/notice-of-privacy-practices/index.html` → `/styles.css`
+- `legal/privacy-policy/index.html` → `/assets/favicon.svg`
+- `legal/privacy-policy/index.html` → `/styles.css`
+- `legal/terms-of-use/index.html` → `/assets/favicon.svg`
+- `legal/terms-of-use/index.html` → `/styles.css`
 
 ## Operational note
 

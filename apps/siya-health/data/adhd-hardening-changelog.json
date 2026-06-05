@@ -1,13 +1,7 @@
 {
-  "generated": "2026-06-05T13:45:00.000Z",
+  "generated": "2026-06-05T14:58:15.940Z",
   "filesTouched": 85,
   "replacements": 71,
-  "summary": {
-    "toolReferenceUpdates": 42,
-    "medicationGuaranteeFixes": 8,
-    "psychiatryPositioningRemovals": 5,
-    "manualEdits": 6
-  },
   "changes": [
     {
       "file": "adhd-care.html",

@@ -116,17 +116,17 @@ HOW_IT_WORKS = """
             <div class="flow-card">
               <span class="flow-step-num">Step 1</span>
               <h3>Quick screening</h3>
-              <p>Start with a free 2-minute screening so we can see if a full evaluation is the right next step.</p>
+              <p>Start with a free 2-minute screening so we can see if a full evaluation is the right next step. Screening is not diagnosis.</p>
             </div>
             <div class="flow-card">
               <span class="flow-step-num">Step 2</span>
               <h3>60–90 minute visit</h3>
-              <p>Board-certified, ADHD-CCSP trained providers review your history, use validated assessment tools as clinically appropriate (such as ASRS, DIVA, Wender Utah, SWAN, or Creyos), and screen for common co-occurring conditions.</p>
+              <p>Board-certified, ADHD-CCSP trained providers review your history, use validated assessment tools as clinically appropriate (such as ASRS, DIVA, Wender Utah, SWAN, or Creyos), and screen for common co-occurring conditions. Assessment tools support clinical evaluation but do not independently establish a diagnosis.</p>
             </div>
             <div class="flow-card">
               <span class="flow-step-num">Step 3</span>
               <h3>Clear plan</h3>
-              <p>If criteria are met, you receive a formal diagnosis and a treatment plan you understand—including follow-up options.</p>
+              <p>If criteria are met, you receive a formal diagnosis and a documented plan you understand—including follow-up options. Medication, including stimulant medication, is not guaranteed and depends on clinical judgment, state law, safety considerations, and medical appropriateness.</p>
             </div>
           </div>
         </div>
@@ -273,7 +273,7 @@ PAGES: list[dict] = [
           <p>Siya Health offers licensed telehealth ADHD care for Florida residents: a comprehensive virtual evaluation, validated clinical tools, and a clear treatment plan. No insurance required for the visit; FSA/HSA often accepted.</p>""",
         "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">We serve patients statewide—from Miami and Orlando to Jacksonville and the Gulf Coast—through secure video visits.</p>""",
         "faqs": [
-            ("Can I get an ADHD diagnosis online in Florida?", "Yes. Florida residents can complete a full clinical evaluation via secure telehealth with a board-certified provider licensed in the state. If diagnostic criteria are met, you receive a formal diagnosis and plan."),
+            ("Can I get an ADHD diagnosis online in Florida?", "Yes. Florida residents can complete a full clinical evaluation via secure telehealth with a board-certified provider licensed in the state. If diagnostic criteria are met, you receive a formal diagnosis and documented plan. Medication, including stimulants, is not guaranteed."),
             ("How much does an ADHD evaluation cost?", "The initial comprehensive evaluation is $199. Pricing is transparent before you book."),
             ("Is this legitimate or just an online quiz?", "No. This is a 60–90 minute clinical visit with clinical interview, validated assessment tools as clinically appropriate, and screening for anxiety, depression, and PTSD—not a self-diagnosis quiz. Assessment tools support evaluation but do not alone establish a diagnosis."),
         ],
@@ -419,9 +419,9 @@ PAGES: list[dict] = [
         "meta": "ADHD evaluation cost: $199 transparent flat fee for 60–90 min online visit. No insurance surprise bills. FSA/HSA. Texas, Pennsylvania, Florida.",
         "h1": "ADHD Evaluation Cost: $199 (What You Get)",
         "geo": "online",
-        "intro": """<p>One of the biggest frustrations in healthcare is not knowing what you will owe. Our adult ADHD evaluation is <strong>$199</strong> upfront—a 60–90 minute visit with a board-certified provider, validated assessment tools as clinically appropriate, comorbidity screening, and a written plan.</p>
-          <p>Ongoing medication management, if you continue care with us, is billed as a separate monthly plan. There are no hidden facility fees for the initial evaluation.</p>""",
-        "extra": """<ul class="credentials-list" style="max-width:560px;margin:0 auto;"><li>60–90 minute video evaluation</li><li>validated tools as clinically appropriate cognitive tasks</li><li>Anxiety, depression, PTSD screening</li><li>Formal diagnosis if criteria met</li><li>Personalized treatment recommendations</li></ul>""",
+        "intro": """<p>One of the biggest frustrations in healthcare is not knowing what you will owe. Our adult ADHD evaluation is <strong>$199</strong> upfront—a 60–90 minute visit with a board-certified provider, validated assessment tools as clinically appropriate, comorbidity screening, and a documented plan. Medication, including stimulants, is not guaranteed.</p>
+          <p>Ongoing medication management, if you continue care with us and medication is clinically appropriate, is billed as a separate monthly plan. There are no hidden facility fees for the initial evaluation.</p>""",
+        "extra": """<ul class="credentials-list" style="max-width:560px;margin:0 auto;"><li>60–90 minute video evaluation</li><li>Validated tools as clinically appropriate</li><li>Anxiety, depression, PTSD screening</li><li>Formal diagnosis if criteria met (screening alone is not diagnosis)</li><li>Documented recommendations—medication never guaranteed</li></ul>""",
         "faqs": [
             ("Why is the evaluation $199?", "We are direct-pay to avoid insurance-driven visit compression and prior authorization delays."),
             ("Do you take insurance?", "We do not bill insurance for evaluations; many patients use FSA/HSA."),

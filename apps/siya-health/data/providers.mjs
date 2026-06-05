@@ -4,6 +4,7 @@
  */
 import { applyInternalRecords } from './internal-provider-records.mjs';
 import { ADDITIONAL_PROVIDERS } from './providers-additional.mjs';
+import { AVAILABLE_SERVICE_STATES } from './site-standards.mjs';
 export { BASE_URL, BOOKING_LINK, PROFILE_LAST_UPDATED, resolveProviderPhoto } from './providers-core.mjs';
 import { BASE_URL, BOOKING_LINK, PROFILE_LAST_UPDATED, resolveProviderPhoto } from './providers-core.mjs';
 
@@ -421,6 +422,11 @@ export function stateChipLabel(provider) {
   return provider.stateAbbreviations.join(', ');
 }
 
+/** Siya Healthcare, PLLC service footprint — excludes license-only states (e.g. OH on Derek). */
+export function providerServiceStates(provider) {
+  return provider.statesLicensed.filter((state) => AVAILABLE_SERVICE_STATES.includes(state));
+}
+
 export function toEntityGraphProvider(provider) {
   const photo = resolveProviderPhoto(provider);
   const entityId =
@@ -443,6 +449,7 @@ export function toEntityGraphProvider(provider) {
     medicalSpecialty: provider.schema.medicalSpecialty,
     hasCredential: provider.boardCertifications,
     statesLicensed: provider.statesLicensed,
+    serviceStates: providerServiceStates(provider),
     conditionsTreated: provider.conditionsTreated,
     npi: provider.npi || undefined,
     image: `${BASE_URL}/${photo.src}`,

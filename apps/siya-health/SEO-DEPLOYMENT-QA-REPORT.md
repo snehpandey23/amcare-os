@@ -1,13 +1,13 @@
 # SEO Deployment QA Report
 
-Generated: 2026-06-05T12:38:43.585Z
+Generated: 2026-06-05T14:58:17.322Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| HTML pages scanned | 159 |
-| Sitemap URLs | 159 |
+| HTML pages scanned | 167 |
+| Sitemap URLs | 167 |
 | Pages with Meet & Greet in nav | 133 |
 | Non-ADHD pages still referencing adhd-screening | 0 |
 | Broken internal links (sample) | 0 |
@@ -117,7 +117,8 @@ _None detected in static HTML scan._
 
 ## Orphan pages (low inbound links, sample)
 
-_No obvious orphans in sample._
+- `intake/index.html`
+- `visual-components.html`
 
 ## Recommendations
 

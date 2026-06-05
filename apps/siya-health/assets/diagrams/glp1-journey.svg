@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" role="img" aria-labelledby="glp1-journey-title">
+  <title id="glp1-journey-title">GLP-1 patient journey timeline: consult, titration, monitoring, and follow-up</title>
+  <rect width="720" height="200" fill="#f9fafb" rx="16"/>
+  <line x1="60" y1="100" x2="660" y2="100" stroke="#1e3a8a" stroke-width="3"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <circle cx="100" cy="100" r="14" fill="#1e3a8a"/>
+    <text x="100" y="70" text-anchor="middle" fill="#111827" font-size="12" font-weight="600">Meet &amp; Greet</text>
+    <text x="100" y="140" text-anchor="middle" fill="#6b7280" font-size="10">Goals + history</text>
+    <circle cx="260" cy="100" r="14" fill="#1e3a8a"/>
+    <text x="260" y="70" text-anchor="middle" fill="#111827" font-size="12" font-weight="600">Evaluation</text>
+    <text x="260" y="140" text-anchor="middle" fill="#6b7280" font-size="10">Labs if needed</text>
+    <circle cx="420" cy="100" r="14" fill="#0ea5a4"/>
+    <text x="420" y="70" text-anchor="middle" fill="#111827" font-size="12" font-weight="600">Titration</text>
+    <text x="420" y="140" text-anchor="middle" fill="#6b7280" font-size="10">Slow dose increases</text>
+    <circle cx="580" cy="100" r="14" fill="#0ea5a4"/>
+    <text x="580" y="70" text-anchor="middle" fill="#111827" font-size="12" font-weight="600">Monitoring</text>
+    <text x="580" y="140" text-anchor="middle" fill="#6b7280" font-size="10">Side effects, labs</text>
+    <circle cx="660" cy="100" r="14" fill="#1e3a8a"/>
+    <text x="660" y="70" text-anchor="middle" fill="#111827" font-size="12" font-weight="600">Follow-up</text>
+    <text x="660" y="140" text-anchor="middle" fill="#6b7280" font-size="10">Long-term plan</text>
+  </g>
+  <text x="360" y="185" text-anchor="middle" fill="#6b7280" font-family="Inter,Arial,sans-serif" font-size="11">Medication not guaranteeddepends on clinical appropriateness</text>
+</svg>

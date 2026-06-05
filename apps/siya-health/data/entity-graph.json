@@ -108,6 +108,12 @@
         "Pennsylvania",
         "Florida"
       ],
+      "serviceStates": [
+        "California",
+        "Texas",
+        "Pennsylvania",
+        "Florida"
+      ],
       "conditionsTreated": [
         "Adult ADHD",
         "Executive dysfunction",
@@ -194,6 +200,9 @@
       "statesLicensed": [
         "Florida"
       ],
+      "serviceStates": [
+        "Florida"
+      ],
       "conditionsTreated": [
         "Adult ADHD",
         "Primary care",
@@ -275,6 +284,10 @@
         "ADHD-CCSP"
       ],
       "statesLicensed": [
+        "Texas",
+        "Florida"
+      ],
+      "serviceStates": [
         "Texas",
         "Florida"
       ],
@@ -360,6 +373,9 @@
       "statesLicensed": [
         "Pennsylvania"
       ],
+      "serviceStates": [
+        "Pennsylvania"
+      ],
       "conditionsTreated": [
         "Adult ADHD",
         "Depression",
@@ -439,6 +455,9 @@
         "FNP-C"
       ],
       "statesLicensed": [
+        "Pennsylvania"
+      ],
+      "serviceStates": [
         "Pennsylvania"
       ],
       "conditionsTreated": [
@@ -521,6 +540,9 @@
         "Texas",
         "Ohio"
       ],
+      "serviceStates": [
+        "Texas"
+      ],
       "conditionsTreated": [
         "Medical weight loss",
         "Obesity",
@@ -600,6 +622,9 @@
         "NCCPA Certified PA"
       ],
       "statesLicensed": [
+        "California"
+      ],
+      "serviceStates": [
         "California"
       ],
       "conditionsTreated": [

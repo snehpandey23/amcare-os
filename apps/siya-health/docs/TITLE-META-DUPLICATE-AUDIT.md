@@ -1,14 +1,14 @@
 # Title & Meta Duplicate Audit
 
-Generated: 2026-06-05T12:38:42.288Z
+Generated: 2026-06-05T14:58:15.525Z
 
-## Duplicate title tags (0)
+## Duplicate title tags (1)
 
-_None after Phase 1 differentiation._
+- **"Privacy Policy"** — /legal/privacy-policy, /privacy-policy
 
-## Duplicate H1s (0)
+## Duplicate H1s (1)
 
-_None after Phase 1 differentiation._
+- **"Privacy Policy"** — /legal/privacy-policy, /privacy-policy
 
 ## Duplicate meta descriptions (0)
 

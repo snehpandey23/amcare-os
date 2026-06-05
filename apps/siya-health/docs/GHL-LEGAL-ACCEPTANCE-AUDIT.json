@@ -1,0 +1,1489 @@
+{
+  "generatedAt": "2026-06-05T14:58:17.153Z",
+  "formId": "mnWpgh0IEgFvJymdZqHY",
+  "bookingUrl": "https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY",
+  "legalDocumentVersion": "terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31",
+  "hiddenFields": {
+    "timestamp": "legal_acceptance_timestamp",
+    "source": "legal_acceptance_source",
+    "version": "legal_document_version",
+    "terms": "legal_acceptance_terms",
+    "privacy": "legal_acceptance_privacy",
+    "npp": "legal_acceptance_npp"
+  },
+  "summary": {
+    "htmlPagesScanned": 167,
+    "pagesWithGhlLinks": 159,
+    "totalGhlBookingLinks": 696,
+    "pagesWithAcceptanceScript": 161,
+    "pagesWithGhlMissingAcceptance": 0,
+    "intakeHub": true
+  },
+  "externalFunnels": [
+    {
+      "id": "ghl-primary-form",
+      "name": "Meet & Greet / booking widget",
+      "url": "https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY",
+      "formId": "mnWpgh0IEgFvJymdZqHY",
+      "siteCoverage": "clickwrap gate via ghl-legal-acceptance.js on all non-legal HTML pages",
+      "ghlAdminRequired": [
+        "Map URL/query hidden fields: legal_acceptance_timestamp, legal_acceptance_source, legal_document_version, legal_acceptance_terms, legal_acceptance_privacy, legal_acceptance_npp",
+        "Persist fields on contact record and workflow triggers",
+        "Add matching hidden fields in GHL form builder"
+      ]
+    },
+    {
+      "id": "leadconnector-chat",
+      "name": "LeadConnector chat widget",
+      "widgetId": "69be9ab3db1480f6799cdd18",
+      "siteCoverage": "NOT gated by clickwrap — configure acceptance in GHL chat funnel / workflow",
+      "ghlAdminRequired": [
+        "Add Terms, Privacy, and NPP checkboxes to chat-initiated intake",
+        "Map legal_acceptance_* custom fields on chat form submit"
+      ]
+    }
+  ],
+  "auditedPages": [
+    {
+      "path": "/about",
+      "file": "about.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 9,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/adhd-care",
+      "file": "adhd-care.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 7,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/adhd-diagnosis-austin",
+      "file": "adhd-diagnosis-austin.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/adhd-diagnosis-florida",
+      "file": "adhd-diagnosis-florida.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/adhd-diagnosis-houston",
+      "file": "adhd-diagnosis-houston.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/adhd-diagnosis-pennsylvania",
+      "file": "adhd-diagnosis-pennsylvania.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 6,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/adhd-diagnosis-philadelphia",
+      "file": "adhd-diagnosis-philadelphia.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 6,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/adhd-diagnosis-texas",
+      "file": "adhd-diagnosis-texas.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/adhd-evaluation-cost",
+      "file": "adhd-evaluation-cost.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 3,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/adhd-screening",
+      "file": "adhd-screening.html",
+      "category": "adhd-screening",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/adhd-treatment-online",
+      "file": "adhd-treatment-online.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 7,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/adult-adhd-diagnosis",
+      "file": "adult-adhd-diagnosis.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 7,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/answers/adderall-vs-vyvanse-adults",
+      "file": "answers/adderall-vs-vyvanse-adults.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/adhd-and-weight-loss-connection",
+      "file": "answers/adhd-and-weight-loss-connection.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/adhd-in-men",
+      "file": "answers/adhd-in-men.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/adhd-in-women",
+      "file": "answers/adhd-in-women.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/adhd-medication-every-day",
+      "file": "answers/adhd-medication-every-day.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/adhd-medication-side-effects",
+      "file": "answers/adhd-medication-side-effects.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/adhd-vs-anxiety",
+      "file": "answers/adhd-vs-anxiety.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/adhd-vs-burnout",
+      "file": "answers/adhd-vs-burnout.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/afternoon-energy-crash-after-lunch",
+      "file": "answers/afternoon-energy-crash-after-lunch.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/asrs-adhd-screening-explained",
+      "file": "answers/asrs-adhd-screening-explained.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/brain-fog-after-eating",
+      "file": "answers/brain-fog-after-eating.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/can-adhd-be-diagnosed-online",
+      "file": "answers/can-adhd-be-diagnosed-online.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/can-adhd-cause-anxiety",
+      "file": "answers/can-adhd-cause-anxiety.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/can-sleep-apnea-cause-fatigue",
+      "file": "answers/can-sleep-apnea-cause-fatigue.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/can-you-get-adhd-medication-online",
+      "file": "answers/can-you-get-adhd-medication-online.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/compounded-vs-branded-glp-1",
+      "file": "answers/compounded-vs-branded-glp-1.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/creyos-adhd-testing-explained",
+      "file": "answers/creyos-adhd-testing-explained.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/ed-telehealth-legitimate",
+      "file": "answers/ed-telehealth-legitimate.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/executive-dysfunction-adhd",
+      "file": "answers/executive-dysfunction-adhd.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/food-noise-returned-on-glp-1",
+      "file": "answers/food-noise-returned-on-glp-1.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/fsa-hsa-adhd-evaluation",
+      "file": "answers/fsa-hsa-adhd-evaluation.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/glp-1-nausea-management",
+      "file": "answers/glp-1-nausea-management.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/glp-1-side-effects",
+      "file": "answers/glp-1-side-effects.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/high-functioning-adhd",
+      "file": "answers/high-functioning-adhd.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/high-shbg-low-free-testosterone",
+      "file": "answers/high-shbg-low-free-testosterone.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/how-long-adhd-evaluation",
+      "file": "answers/how-long-adhd-evaluation.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/how-much-does-adhd-testing-cost",
+      "file": "answers/how-much-does-adhd-testing-cost.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/how-online-prescriptions-work",
+      "file": "answers/how-online-prescriptions-work.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers",
+      "file": "answers/index.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 2,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/insulin-resistance-without-diabetes",
+      "file": "answers/insulin-resistance-without-diabetes.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/is-adhd-medication-safe-long-term",
+      "file": "answers/is-adhd-medication-safe-long-term.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/is-online-adhd-diagnosis-legitimate",
+      "file": "answers/is-online-adhd-diagnosis-legitimate.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/is-telehealth-legitimate",
+      "file": "answers/is-telehealth-legitimate.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/late-adhd-diagnosis-adults",
+      "file": "answers/late-adhd-diagnosis-adults.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/medical-weight-loss-vs-dieting",
+      "file": "answers/medical-weight-loss-vs-dieting.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/meet-and-greet-telehealth-expectations",
+      "file": "answers/meet-and-greet-telehealth-expectations.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/minoxidil-hair-loss-does-it-work",
+      "file": "answers/minoxidil-hair-loss-does-it-work.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/non-stimulant-adhd-medications",
+      "file": "answers/non-stimulant-adhd-medications.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/normal-a1c-insulin-resistance",
+      "file": "answers/normal-a1c-insulin-resistance.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/oral-vs-injectable-weight-loss-meds",
+      "file": "answers/oral-vs-injectable-weight-loss-meds.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/oral-vs-topical-minoxidil",
+      "file": "answers/oral-vs-topical-minoxidil.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/phentermine-weight-loss-safety",
+      "file": "answers/phentermine-weight-loss-safety.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/poor-sleep-feels-like-adhd",
+      "file": "answers/poor-sleep-feels-like-adhd.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/rejection-sensitivity-adhd",
+      "file": "answers/rejection-sensitivity-adhd.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/screening-vs-adhd-evaluation",
+      "file": "answers/screening-vs-adhd-evaluation.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/semaglutide-weight-loss-how-it-works",
+      "file": "answers/semaglutide-weight-loss-how-it-works.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/signs-of-adult-adhd",
+      "file": "answers/signs-of-adult-adhd.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/signs-of-sleep-apnea-in-adults",
+      "file": "answers/signs-of-sleep-apnea-in-adults.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/sildenafil-erectile-dysfunction-expectations",
+      "file": "answers/sildenafil-erectile-dysfunction-expectations.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/starting-adhd-medication-adults",
+      "file": "answers/starting-adhd-medication-adults.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/telehealth-adhd-california",
+      "file": "answers/telehealth-adhd-california.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/telehealth-adhd-texas",
+      "file": "answers/telehealth-adhd-texas.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/testosterone-and-adhd-overlap",
+      "file": "answers/testosterone-and-adhd-overlap.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/time-blindness-adhd",
+      "file": "answers/time-blindness-adhd.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 1,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/tirzepatide-vs-semaglutide",
+      "file": "answers/tirzepatide-vs-semaglutide.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/trt-monitoring-requirements",
+      "file": "answers/trt-monitoring-requirements.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/weight-gain-after-stopping-ozempic",
+      "file": "answers/weight-gain-after-stopping-ozempic.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/what-does-low-testosterone-feel-like",
+      "file": "answers/what-does-low-testosterone-feel-like.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/what-included-199-adhd-evaluation",
+      "file": "answers/what-included-199-adhd-evaluation.html",
+      "category": "adhd-content",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/what-is-food-noise",
+      "file": "answers/what-is-food-noise.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/what-is-free-testosterone",
+      "file": "answers/what-is-free-testosterone.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/what-is-insulin-resistance",
+      "file": "answers/what-is-insulin-resistance.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/when-is-testosterone-therapy-appropriate",
+      "file": "answers/when-is-testosterone-therapy-appropriate.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/who-qualifies-glp-1-weight-loss",
+      "file": "answers/who-qualifies-glp-1-weight-loss.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/why-am-i-tired-even-after-sleeping",
+      "file": "answers/why-am-i-tired-even-after-sleeping.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/answers/why-normal-labs-dont-mean-healthy",
+      "file": "answers/why-normal-labs-dont-mean-healthy.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/blog/adderall-for-adhd-how-it-works",
+      "file": "blog/adderall-for-adhd-how-it-works.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 2,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/adderall-ir-vs-xr-adults",
+      "file": "blog/adderall-ir-vs-xr-adults.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 8,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/adhd-evaluation-california-online-vs-in-person",
+      "file": "blog/adhd-evaluation-california-online-vs-in-person.html",
+      "category": "adhd-related",
+      "ghlBookingLinks": 6,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/adhd-evaluation-cost-california",
+      "file": "blog/adhd-evaluation-cost-california.html",
+      "category": "adhd-related",
+      "ghlBookingLinks": 7,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/adhd-evaluation-cost-texas",
+      "file": "blog/adhd-evaluation-cost-texas.html",
+      "category": "adhd-related",
+      "ghlBookingLinks": 6,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/adhd-medication-daily-or-as-needed-adults",
+      "file": "blog/adhd-medication-daily-or-as-needed-adults.html",
+      "category": "adhd-related",
+      "ghlBookingLinks": 8,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/adhd-medication-online-california",
+      "file": "blog/adhd-medication-online-california.html",
+      "category": "adhd-related",
+      "ghlBookingLinks": 7,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/adhd-medication-online-texas-telehealth",
+      "file": "blog/adhd-medication-online-texas-telehealth.html",
+      "category": "adhd-related",
+      "ghlBookingLinks": 8,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/adhd-medication-options-california",
+      "file": "blog/adhd-medication-options-california.html",
+      "category": "adhd-related",
+      "ghlBookingLinks": 7,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/adhd-medication-options-for-adults",
+      "file": "blog/adhd-medication-options-for-adults.html",
+      "category": "adhd-related",
+      "ghlBookingLinks": 6,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/adhd-medication-side-effects-what-to-expect",
+      "file": "blog/adhd-medication-side-effects-what-to-expect.html",
+      "category": "adhd-related",
+      "ghlBookingLinks": 6,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/adhd-symptoms-overlooked",
+      "file": "blog/adhd-symptoms-overlooked.html",
+      "category": "adhd-related",
+      "ghlBookingLinks": 6,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/adhd-telehealth-california",
+      "file": "blog/adhd-telehealth-california.html",
+      "category": "adhd-related",
+      "ghlBookingLinks": 7,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/adhd-testing-online-california-screening-vs-evaluation",
+      "file": "blog/adhd-testing-online-california-screening-vs-evaluation.html",
+      "category": "adhd-related",
+      "ghlBookingLinks": 7,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/adhd-treatment-houston-online",
+      "file": "blog/adhd-treatment-houston-online.html",
+      "category": "adhd-related",
+      "ghlBookingLinks": 8,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/adhd",
+      "file": "blog/adhd.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 3,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/adult-adhd-symptoms-california",
+      "file": "blog/adult-adhd-symptoms-california.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 2,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/adult-adhd-treatment-california-2026",
+      "file": "blog/adult-adhd-treatment-california-2026.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 3,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/after-adhd-diagnosis-next-steps-adults",
+      "file": "blog/after-adhd-diagnosis-next-steps-adults.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 3,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/all",
+      "file": "blog/all.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/ambien-and-sleep-medications-risks-and-benefits",
+      "file": "blog/ambien-and-sleep-medications-risks-and-benefits.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+      "file": "blog/combining-adhd-treatment-and-weight-loss-strategies.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 2,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/compounded-vs-branded-glp1-medications",
+      "file": "blog/compounded-vs-branded-glp1-medications.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/focalin-vs-adderall-comparison",
+      "file": "blog/focalin-vs-adderall-comparison.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 6,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "file": "blog/food-noise-and-glp-1-what-it-means-and-what-helps.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+      "file": "blog/free-testosterone-vs-total-testosterone-what-patients-should-know.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/glp1-side-effects-and-how-to-manage-them",
+      "file": "blog/glp1-side-effects-and-how-to-manage-them.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/glutathione-and-peptides-what-do-they-actually-do",
+      "file": "blog/glutathione-and-peptides-what-do-they-actually-do.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/how-adhd-medication-is-prescribed-online",
+      "file": "blog/how-adhd-medication-is-prescribed-online.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 2,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/how-mental-health-affects-weight-loss-outcomes",
+      "file": "blog/how-mental-health-affects-weight-loss-outcomes.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/how-to-choose-adhd-provider-california",
+      "file": "blog/how-to-choose-adhd-provider-california.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 3,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/how-to-know-if-you-have-adhd-adult",
+      "file": "blog/how-to-know-if-you-have-adhd-adult.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 2,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/how-to-safely-get-prescriptions-online",
+      "file": "blog/how-to-safely-get-prescriptions-online.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog",
+      "file": "blog/index.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 6,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/blog/insomnia-treatment-options-beyond-medication",
+      "file": "blog/insomnia-treatment-options-beyond-medication.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "file": "blog/insulin-resistance-and-weight-loss-clinician-overview.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/is-adhd-medication-safe-long-term",
+      "file": "blog/is-adhd-medication-safe-long-term.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 2,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/is-online-adhd-diagnosis-legit",
+      "file": "blog/is-online-adhd-diagnosis-legit.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 2,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/long-term-weight-loss-medications-what-to-expect",
+      "file": "blog/long-term-weight-loss-medications-what-to-expect.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/medical-weight-loss-glp1-semaglutide-texas",
+      "file": "blog/medical-weight-loss-glp1-semaglutide-texas.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/medical-weight-loss-vs-dieting-what-actually-works",
+      "file": "blog/medical-weight-loss-vs-dieting-what-actually-works.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/minoxidil-for-hair-loss-does-it-work",
+      "file": "blog/minoxidil-for-hair-loss-does-it-work.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/modafinil-for-focus-and-fatigue-is-it-safe",
+      "file": "blog/modafinil-for-focus-and-fatigue-is-it-safe.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/non-stimulant-adhd-medications-explained",
+      "file": "blog/non-stimulant-adhd-medications-explained.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 2,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/online-adhd-diagnosis-california",
+      "file": "blog/online-adhd-diagnosis-california.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/online-adhd-diagnosis-texas",
+      "file": "blog/online-adhd-diagnosis-texas.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/oral-vs-injectable-weight-loss-medications",
+      "file": "blog/oral-vs-injectable-weight-loss-medications.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/oral-vs-topical-minoxidil-which-is-right",
+      "file": "blog/oral-vs-topical-minoxidil-which-is-right.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
+      "file": "blog/phentermine-for-weight-loss-safety-and-effectiveness.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/semaglutide-for-weight-loss-how-it-works",
+      "file": "blog/semaglutide-for-weight-loss-how-it-works.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
+      "file": "blog/sildenafil-for-erectile-dysfunction-what-to-expect.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign",
+      "file": "blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/telehealth-prescriptions-how-online-treatment-works",
+      "file": "blog/telehealth-prescriptions-how-online-treatment-works.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/telehealth",
+      "file": "blog/telehealth.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/tirzepatide-vs-semaglutide-which-is-better",
+      "file": "blog/tirzepatide-vs-semaglutide-which-is-better.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/vyvanse-vs-adderall-differences",
+      "file": "blog/vyvanse-vs-adderall-differences.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 6,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/weight-loss",
+      "file": "blog/weight-loss.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/when-is-testosterone-therapy-appropriate",
+      "file": "blog/when-is-testosterone-therapy-appropriate.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/why-am-i-always-tired-causes-when-to-see-doctor",
+      "file": "blog/why-am-i-always-tired-causes-when-to-see-doctor.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd",
+      "file": "blog/youre-not-lazy-signs-undiagnosed-adult-adhd.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 2,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/book-appointment",
+      "file": "book-appointment.html",
+      "category": "booking-hub",
+      "ghlBookingLinks": 7,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/creyos-adhd-testing",
+      "file": "creyos-adhd-testing.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 3,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/",
+      "file": "index.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 12,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/intake",
+      "file": "intake/index.html",
+      "category": "intake-hub",
+      "ghlBookingLinks": 0,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/labs",
+      "file": "labs.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 6,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/membership-pricing",
+      "file": "membership-pricing.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 3,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/mens-health-longevity",
+      "file": "mens-health-longevity.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 8,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/online-adhd-test",
+      "file": "online-adhd-test.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 7,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/prescriptions",
+      "file": "prescriptions.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 6,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/primary-urgent-care",
+      "file": "primary-urgent-care.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 10,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/privacy-policy",
+      "file": "privacy-policy.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/providers/derek-timbs",
+      "file": "providers/derek-timbs.html",
+      "category": "provider-page",
+      "ghlBookingLinks": 6,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/providers/dr-natasha-desai",
+      "file": "providers/dr-natasha-desai.html",
+      "category": "provider-page",
+      "ghlBookingLinks": 9,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/providers/dr-sneh-pandey",
+      "file": "providers/dr-sneh-pandey.html",
+      "category": "provider-page",
+      "ghlBookingLinks": 9,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/providers/dr-swati-pandey",
+      "file": "providers/dr-swati-pandey.html",
+      "category": "provider-page",
+      "ghlBookingLinks": 9,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/providers/dr-vanessa-urbina",
+      "file": "providers/dr-vanessa-urbina.html",
+      "category": "provider-page",
+      "ghlBookingLinks": 9,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/providers",
+      "file": "providers/index.html",
+      "category": "provider-page",
+      "ghlBookingLinks": 4,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/providers/megan-wunderlich",
+      "file": "providers/megan-wunderlich.html",
+      "category": "provider-page",
+      "ghlBookingLinks": 10,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/providers/wendy-delgado",
+      "file": "providers/wendy-delgado.html",
+      "category": "provider-page",
+      "ghlBookingLinks": 6,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/telehealth",
+      "file": "telehealth.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 13,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/terms",
+      "file": "terms.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 5,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": true
+    },
+    {
+      "path": "/weight-loss-metabolic-health",
+      "file": "weight-loss-metabolic-health.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 10,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    }
+  ],
+  "missingAcceptance": []
+}
