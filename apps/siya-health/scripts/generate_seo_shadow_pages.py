@@ -121,7 +121,7 @@ HOW_IT_WORKS = """
             <div class="flow-card">
               <span class="flow-step-num">Step 2</span>
               <h3>60–90 minute visit</h3>
-              <p>Board-certified, ADHD-CCSP trained providers review your history, use validated tools (ASRS, Creyos), and screen for common co-occurring conditions.</p>
+              <p>Board-certified, ADHD-CCSP trained providers review your history, use validated assessment tools as clinically appropriate (such as ASRS, DIVA, Wender Utah, SWAN, or Creyos), and screen for common co-occurring conditions.</p>
             </div>
             <div class="flow-card">
               <span class="flow-step-num">Step 3</span>
@@ -266,7 +266,7 @@ PAGES: list[dict] = [
     {
         "slug": "adhd-diagnosis-florida",
         "title": "Online ADHD Diagnosis Florida | $199 Evaluation | Siya Health",
-        "meta": "Adult ADHD diagnosis online in Florida. $199, 60–90 min evaluation, board-certified providers. Same-week telehealth. ASRS & Creyos. Book today.",
+        "meta": "Adult ADHD diagnosis online in Florida. $199, 60–90 min evaluation, board-certified providers. Same-week telehealth. individualized clinical assessment. Book today.",
         "h1": "Online ADHD Diagnosis in Florida ($199 Evaluation)",
         "geo": "Florida",
         "intro": """<p>If you live in Florida and have wondered whether ADHD explains years of overwhelm, procrastination, or &ldquo;almost keeping up,&rdquo; you are not alone. Many adults never received a childhood diagnosis—and primary care visits rarely leave time for a proper evaluation.</p>
@@ -275,7 +275,7 @@ PAGES: list[dict] = [
         "faqs": [
             ("Can I get an ADHD diagnosis online in Florida?", "Yes. Florida residents can complete a full clinical evaluation via secure telehealth with a board-certified provider licensed in the state. If diagnostic criteria are met, you receive a formal diagnosis and plan."),
             ("How much does an ADHD evaluation cost?", "The initial comprehensive evaluation is $199. Pricing is transparent before you book."),
-            ("Is this legitimate or just an online quiz?", "No. This is a 60–90 minute clinical visit using ASRS, Creyos cognitive testing, and screening for anxiety, depression, and PTSD—not a self-diagnosis quiz."),
+            ("Is this legitimate or just an online quiz?", "No. This is a 60–90 minute clinical visit with clinical interview, validated assessment tools as clinically appropriate, and screening for anxiety, depression, and PTSD—not a self-diagnosis quiz. Assessment tools support evaluation but do not alone establish a diagnosis."),
         ],
     },
     {
@@ -285,12 +285,12 @@ PAGES: list[dict] = [
         "h1": "Online ADHD Diagnosis in Texas ($199 Evaluation)",
         "geo": "Texas",
         "intro": """<p>Texas has long waitlists for psychiatry and ADHD specialists. If you are an adult in Texas seeking clarity—whether in a major metro or a smaller community—telehealth can remove distance and delay as barriers.</p>
-          <p>Our providers are licensed in Texas and trained in adult ADHD (ADHD-CCSP). Your evaluation includes structured interviews, ASRS and Creyos testing, and discussion of medication and non-medication options when appropriate.</p>""",
+          <p>Our providers are licensed in Texas and trained in adult ADHD (ADHD-CCSP). Your evaluation includes structured interviews, validated assessment tools as clinically appropriate, and discussion of medication and non-medication options when appropriate.</p>""",
         "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Serving Texans statewide, including <a href="/adhd-diagnosis-austin">Austin</a>, <a href="/adhd-diagnosis-houston">Houston</a>, and Dallas–Fort Worth.</p>""",
         "faqs": [
             ("Do you diagnose ADHD for adults in Texas?", "Yes. We provide adult ADHD evaluations via telehealth for Texas residents with licensed, board-certified clinicians."),
             ("How fast can I get an appointment?", "Many patients are seen the same week after completing intake and screening."),
-            ("Do you prescribe stimulants?", "When clinically appropriate, providers discuss all options and follow safety protocols including monitoring for controlled medications."),
+            ("Do you prescribe stimulants?", "Stimulant prescribing is never guaranteed. When clinically appropriate after evaluation, providers discuss all options and follow safety protocols including monitoring for controlled medications."),
         ],
     },
     {
@@ -300,11 +300,11 @@ PAGES: list[dict] = [
         "h1": "Online ADHD Diagnosis in Pennsylvania ($199 Evaluation)",
         "geo": "Pennsylvania",
         "intro": """<p>Pennsylvania adults juggling careers, education, or family responsibilities often suspect ADHD—but finding a specialist who understands adult presentation can take months.</p>
-          <p>Siya Health offers HIPAA-compliant video evaluations for Pennsylvania residents, with the same clinical rigor you would expect in person: full history, validated rating scales, cognitive testing, and personalized recommendations.</p>""",
+          <p>Siya Health offers HIPAA-compliant video evaluations for Pennsylvania residents, with the same clinical rigor you would expect in person: full history, validated assessment tools as clinically appropriate, and personalized recommendations. Diagnosis does not guarantee medication.</p>""",
         "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Including <a href="/adhd-diagnosis-philadelphia">Philadelphia</a>, Pittsburgh, Harrisburg, and rural areas—wherever you have reliable internet.</p>""",
         "faqs": [
             ("Is telehealth ADHD diagnosis legal in Pennsylvania?", "Yes, when provided by a clinician licensed in Pennsylvania using HIPAA-compliant technology."),
-            ("What is included in the $199 visit?", "A 60–90 minute evaluation, ASRS and Creyos, comorbidity screening, and a written treatment plan."),
+            ("What is included in the $199 visit?", "A 60–90 minute evaluation, validated tools as clinically appropriate, comorbidity screening, and a written treatment plan."),
             ("Can I use my HSA?", "Many patients pay with FSA or HSA cards; check with your plan administrator."),
         ],
     },
@@ -326,7 +326,7 @@ PAGES: list[dict] = [
     {
         "slug": "adhd-diagnosis-houston",
         "title": "ADHD Diagnosis Houston TX | Online $199 Evaluation | Siya Health",
-        "meta": "Houston adult ADHD diagnosis online. $199 comprehensive evaluation, board-certified telehealth. Same-week appointments. ASRS & Creyos.",
+        "meta": "Houston adult ADHD diagnosis online. $199 comprehensive evaluation, board-certified telehealth. Same-week appointments. individualized clinical assessment.",
         "h1": "ADHD Diagnosis in Houston, Texas (Online, $199)",
         "geo": "Greater Houston",
         "intro": """<p>From the Medical Center to the suburbs, Houstonians often work long hours—and undiagnosed ADHD can show up as burnout, missed deadlines, or relationship strain.</p>
@@ -345,7 +345,7 @@ PAGES: list[dict] = [
         "h1": "ADHD Diagnosis in Philadelphia, Pennsylvania (Online, $199)",
         "geo": "Philadelphia and southeastern PA",
         "intro": """<p>Philadelphia&rsquo;s density of students, healthcare workers, and shift-based jobs means many adults run on adrenaline for years before asking whether ADHD is part of the picture.</p>
-          <p>We offer Pennsylvania-licensed telehealth evaluations with structured diagnostic criteria, cognitive testing, and compassionate providers who understand inattentive and combined-type presentations.</p>""",
+          <p>We offer Pennsylvania-licensed telehealth evaluations with structured diagnostic criteria, individualized validated tools, and compassionate providers who understand inattentive and combined-type presentations.</p>""",
         "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Statewide coverage: <a href="/adhd-diagnosis-pennsylvania">Pennsylvania ADHD diagnosis</a>.</p>""",
         "faqs": [
             ("Do you serve patients outside Philadelphia city limits?", "Yes—anywhere in Pennsylvania where telehealth is appropriate and you have a stable connection."),
@@ -371,7 +371,7 @@ PAGES: list[dict] = [
     {
         "slug": "creyos-adhd-testing",
         "title": "Creyos ADHD Testing Online | Part of $199 Evaluation | Siya Health",
-        "meta": "Creyos cognitive testing for ADHD as part of your $199 online evaluation. ASRS + Creyos + clinical interview. Licensed providers in TX, PA, FL.",
+        "meta": "Creyos cognitive testing for ADHD as part of your $199 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL.",
         "h1": "Creyos ADHD Testing (Included in Your Evaluation)",
         "geo": "telehealth",
         "intro": """<p>Creyos (formerly Cambridge Brain Sciences) provides brief, scientifically validated cognitive tasks that measure attention, processing speed, and related domains—useful context alongside ADHD rating scales and your history.</p>
@@ -386,7 +386,7 @@ PAGES: list[dict] = [
     {
         "slug": "adult-adhd-diagnosis",
         "title": "Adult ADHD Diagnosis Online | $199 Evaluation | Siya Health",
-        "meta": "Get an adult ADHD diagnosis online from board-certified providers. $199, 60–90 min, ASRS & Creyos. TX, PA, FL. Same-week telehealth appointments.",
+        "meta": "Get an adult ADHD diagnosis online from board-certified providers. $199, 60–90 min, individualized clinical assessment. TX, PA, FL. Same-week telehealth appointments.",
         "h1": "Adult ADHD Diagnosis Online ($199 Comprehensive Evaluation)",
         "geo": "Texas, Pennsylvania, or Florida",
         "intro": """<p>Adult ADHD is often missed—especially in women and high achievers who compensate until burnout hits. If you have read every article and still need a clear answer, a structured evaluation is the next step.</p>
@@ -419,9 +419,9 @@ PAGES: list[dict] = [
         "meta": "ADHD evaluation cost: $199 transparent flat fee for 60–90 min online visit. No insurance surprise bills. FSA/HSA. Texas, Pennsylvania, Florida.",
         "h1": "ADHD Evaluation Cost: $199 (What You Get)",
         "geo": "online",
-        "intro": """<p>One of the biggest frustrations in healthcare is not knowing what you will owe. Our adult ADHD evaluation is <strong>$199</strong> upfront—a 60–90 minute visit with a board-certified provider, ASRS and Creyos testing, comorbidity screening, and a written plan.</p>
+        "intro": """<p>One of the biggest frustrations in healthcare is not knowing what you will owe. Our adult ADHD evaluation is <strong>$199</strong> upfront—a 60–90 minute visit with a board-certified provider, validated assessment tools as clinically appropriate, comorbidity screening, and a written plan.</p>
           <p>Ongoing medication management, if you continue care with us, is billed as a separate monthly plan. There are no hidden facility fees for the initial evaluation.</p>""",
-        "extra": """<ul class="credentials-list" style="max-width:560px;margin:0 auto;"><li>60–90 minute video evaluation</li><li>ASRS + Creyos cognitive tasks</li><li>Anxiety, depression, PTSD screening</li><li>Formal diagnosis if criteria met</li><li>Personalized treatment recommendations</li></ul>""",
+        "extra": """<ul class="credentials-list" style="max-width:560px;margin:0 auto;"><li>60–90 minute video evaluation</li><li>validated tools as clinically appropriate cognitive tasks</li><li>Anxiety, depression, PTSD screening</li><li>Formal diagnosis if criteria met</li><li>Personalized treatment recommendations</li></ul>""",
         "faqs": [
             ("Why is the evaluation $199?", "We are direct-pay to avoid insurance-driven visit compression and prior authorization delays."),
             ("Do you take insurance?", "We do not bill insurance for evaluations; many patients use FSA/HSA."),

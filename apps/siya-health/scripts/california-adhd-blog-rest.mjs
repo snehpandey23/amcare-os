@@ -35,7 +35,7 @@ export const CALIFORNIA_POSTS_REST = [
             </ul>
 
             <h2>In-Person Touchpoints Californians Occasionally Still Need</h2>
-            <p>Controlled substance prescribing complexity sometimes intersects clinician risk tolerance, payer instructions, mandated vitals timelines, pharmacies requesting confirmatory clinician documentation—none inherently invalidating thoughtful telepsychiatry when legally/clinically appropriate. Clinicians escalate transparently—they do not outsource judgment to templated disclaimers shrugged verbally once.</p>
+            <p>Controlled substance prescribing complexity sometimes intersects clinician risk tolerance, payer instructions, mandated vitals timelines, pharmacies requesting confirmatory clinician documentation—none inherently invalidating thoughtful primary care–led telehealth ADHD care when legally/clinically appropriate. Clinicians escalate transparently—they do not outsource judgment to templated disclaimers shrugged verbally once.</p>
 
             <h2>Adult ADHD Diagnosis California: Evaluating Credibility Quickly</h2>
             <p>Ask calmly: approximate visit length norms? What screening overlaps exist? ADHD medication—not guaranteed—or non-medication scaffolding when stimulants ill-advised clinically? Psychiatry comorbidity attention? HIPAA architecture? Credential verification comfort? Transparent pricing? Pharmacist communication facilitation if controlled substances contemplated later?</p>
@@ -420,7 +420,7 @@ export const CALIFORNIA_POSTS_REST = [
             <p class="blog-disclaimer"><strong>Educational only:</strong> This blog is for educational purposes only and does not replace medical advice. A licensed provider can help determine what care is appropriate for you.</p>
             <div class="blog-internal-links"><p>For evaluation standards primer read <a href="/blog/is-online-adhd-diagnosis-legit">is online ADHD diagnosis legit?</a>, California diagnosis overview <a href="/blog/online-adhd-diagnosis-california">here</a>, and prescribing stewardship <a href="/blog/how-adhd-medication-is-prescribed-online">here</a>.</p></div>
 
-            <p>Choosing <strong>ADHD telepsychiatry California</strong>-aligned care should resemble vetting any skilled clinician calmly: plainly named licensees, HIPAA-appropriate secure visits, articulated crisis escalation, realistic scheduling pacing, humane refusal framing—not scarcity countdown banners implying guaranteed stimulant fulfillment.</p>
+            <p>Choosing <strong>ADHD telehealth California</strong>-aligned care should resemble vetting any skilled clinician calmly: plainly named licensees, HIPAA-appropriate secure visits, articulated crisis escalation, realistic scheduling pacing, humane refusal framing—not scarcity countdown banners implying guaranteed stimulant fulfillment.</p>
 
             <p>Ethical ADHD teams calmly separate questionnaires from diagnosing, thoughtfully evaluate overlap—including burnout, PTSD, apnea, anemia, thyroid disease, mood disorders, substances, generalized anxiety—with documented clinician follow—even when prescribing never belongs clinically.</p>
 

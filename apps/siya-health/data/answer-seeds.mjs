@@ -395,7 +395,7 @@ const CORE_ANSWER_SEEDS = [
     shortAnswer:
       'The Adult ADHD Self-Report Scale (ASRS) is a validated screening questionnaire—not a diagnosis. It helps clinicians decide whether a full evaluation is warranted. Siya Health offers a free screening; positive screens should lead to clinician review, not self-treatment.',
     paragraphs: [
-      'Screeners cannot rule out anxiety, sleep disorders, or medical mimics.',
+      'Screeners cannot rule out anxiety, sleep disorders, or medical mimics. ASRS supports clinical evaluation but does not independently establish a diagnosis.',
     ],
     evidence: ['WHO ASRS v1.1 instrument documentation'],
     related: ['screening-vs-adhd-evaluation', 'signs-of-adult-adhd'],
@@ -419,7 +419,7 @@ const CORE_ANSWER_SEEDS = [
     slug: 'screening-vs-adhd-evaluation',
     question: 'What is the difference between ADHD screening and a full evaluation?',
     shortAnswer:
-      'Screening (e.g., ASRS, short online quizzes) estimates likelihood and takes minutes. A full evaluation is a 60–90 minute clinician visit with history, standardized tools, safety screening, and a written plan—required for formal diagnosis and prescribing when appropriate.',
+      'Screening (e.g., ASRS, short online quizzes) estimates likelihood and takes minutes. A full evaluation is a 60–90 minute clinician visit with history, standardized tools, safety screening, and a written plan—required for formal diagnosis. Prescribing when clinically appropriate is never guaranteed—including stimulants.',
     paragraphs: [
       'Never treat a screener result as a lifetime label.',
     ],
@@ -1191,9 +1191,9 @@ const CORE_ANSWER_SEEDS = [
     slug: 'what-included-199-adhd-evaluation',
     question: 'What is included in Siya Health’s $199 ADHD evaluation?',
     shortAnswer:
-      'Siya Health’s $199 adult ADHD evaluation is a 60–90 minute telehealth visit with a board-certified, ADHD-CCSP–trained clinician—including clinical interview, standardized tools (such as ASRS and Creyos when indicated), comorbidity screening, and a personalized treatment plan. No insurance required.',
+      'Siya Health’s $199 adult ADHD evaluation is a 60–90 minute telehealth visit with a licensed medical provider—including clinical interview, validated assessment tools as clinically appropriate (such as ASRS, DIVA, Wender Utah, SWAN, or Creyos when indicated), comorbidity screening, and a documented plan. No insurance required. Diagnosis does not guarantee medication.',
     paragraphs: [
-      'Ongoing medication management is separate membership pricing if you continue care.',
+      'Your clinician selects assessment tools based on clinical judgment—not every patient receives every instrument. Ongoing medication management is separate membership pricing if you continue care and medication is clinically appropriate.',
     ],
     evidence: ['Siya Health /adhd-care service description', 'Published pricing at /membership-pricing'],
     related: ['how-much-does-adhd-testing-cost', 'how-long-adhd-evaluation', 'screening-vs-adhd-evaluation'],

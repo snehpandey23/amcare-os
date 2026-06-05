@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-05T12:38:43.461Z",
+  "generated": "2026-06-05T13:42:25.814Z",
   "services": [
     {
       "title": "Siya Health | Virtual Care for Energy, Weight, Hormones &amp; Focus",
@@ -17,7 +17,7 @@
       "title": "Adult ADHD Diagnosis Online — Same-Week Evaluation ($199)",
       "url": "https://siya.health/adhd-care",
       "type": "service-adhd",
-      "description": "Primary care–led adult ADHD evaluation online — DSM-based assessment ($199). Licensed medical providers. ASRS, DIVA, Wender Utah, SWAN, optional Creyos. CA, TX, PA, FL."
+      "description": "Primary care–led adult ADHD evaluation online — DSM-based assessment ($199). Licensed medical providers. Individualized validated tools as clinically appropriate. CA, TX, PA, FL."
     },
     {
       "title": "ADHD Diagnosis Austin TX | Online $199 Evaluation",
@@ -29,13 +29,13 @@
       "title": "Online ADHD Diagnosis Florida | $199 Evaluation",
       "url": "https://siya.health/adhd-diagnosis-florida",
       "type": "service-adhd",
-      "description": "Adult ADHD diagnosis online in Florida. $199, 60–90 min evaluation, board-certified providers. Same-week telehealth. ASRS & Creyos. Book today."
+      "description": "Adult ADHD diagnosis online in Florida. $199, 60–90 min evaluation, board-certified providers. Same-week telehealth. individualized clinical assessment. Book today."
     },
     {
       "title": "ADHD Diagnosis Houston TX | Online $199 Evaluation",
       "url": "https://siya.health/adhd-diagnosis-houston",
       "type": "service-adhd",
-      "description": "Houston adult ADHD diagnosis online. $199 comprehensive evaluation, board-certified telehealth. Same-week appointments. ASRS & Creyos."
+      "description": "Houston adult ADHD diagnosis online. $199 comprehensive evaluation, board-certified telehealth. Same-week appointments. individualized clinical assessment."
     },
     {
       "title": "Online ADHD Diagnosis Pennsylvania | $199",
@@ -77,13 +77,13 @@
       "title": "Adult ADHD Diagnosis Online | $199 Evaluation",
       "url": "https://siya.health/adult-adhd-diagnosis",
       "type": "service-adhd",
-      "description": "Get an adult ADHD diagnosis online from board-certified providers. $199, 60–90 min, ASRS & Creyos. TX, PA, FL. Same-week telehealth appointments."
+      "description": "Get an adult ADHD diagnosis online from board-certified providers. $199, 60–90 min, individualized clinical assessment. TX, PA, FL. Same-week telehealth appointments."
     },
     {
       "title": "Creyos ADHD Testing Online | Part of $199 Evaluation",
       "url": "https://siya.health/creyos-adhd-testing",
       "type": "service-adhd",
-      "description": "Creyos cognitive testing for ADHD as part of your $199 online evaluation. ASRS + Creyos + clinical interview. Licensed providers in TX, PA, FL."
+      "description": "Creyos cognitive testing for ADHD as part of your $199 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL."
     },
     {
       "title": "Men's Health &amp; Longevity",

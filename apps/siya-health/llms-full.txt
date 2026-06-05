@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
 Generated: 2026-06-05
-Total pages: 159
+Total pages: 163
 
 ---
 
@@ -96,7 +96,7 @@ Total pages: 159
 
 - Adult ADHD Diagnosis Online — Same-Week Evaluation ($199)
   URL: https://siya.health/adhd-care
-  Summary: Primary care–led adult ADHD evaluation online — DSM-based assessment ($199). Licensed medical providers. ASRS, DIVA, Wender Utah, SWAN, optional Creyos. CA, TX, PA, FL.
+  Summary: Primary care–led adult ADHD evaluation online — DSM-based assessment ($199). Licensed medical providers. Individualized validated tools as clinically appropriate. CA, TX, PA, FL.
   Topics: adhd
 
 - ADHD Diagnosis Austin TX | Online $199 Evaluation
@@ -106,12 +106,12 @@ Total pages: 159
 
 - Online ADHD Diagnosis Florida | $199 Evaluation
   URL: https://siya.health/adhd-diagnosis-florida
-  Summary: Adult ADHD diagnosis online in Florida. $199, 60–90 min evaluation, board-certified providers. Same-week telehealth. ASRS & Creyos. Book today.
+  Summary: Adult ADHD diagnosis online in Florida. $199, 60–90 min evaluation, board-certified providers. Same-week telehealth. individualized clinical assessment. Book today.
   Topics: adhd, florida
 
 - ADHD Diagnosis Houston TX | Online $199 Evaluation
   URL: https://siya.health/adhd-diagnosis-houston
-  Summary: Houston adult ADHD diagnosis online. $199 comprehensive evaluation, board-certified telehealth. Same-week appointments. ASRS & Creyos.
+  Summary: Houston adult ADHD diagnosis online. $199 comprehensive evaluation, board-certified telehealth. Same-week appointments. individualized clinical assessment.
   Topics: adhd, texas
 
 - Online ADHD Diagnosis Pennsylvania | $199
@@ -146,7 +146,7 @@ Total pages: 159
 
 - Adult ADHD Diagnosis Online | $199 Evaluation
   URL: https://siya.health/adult-adhd-diagnosis
-  Summary: Get an adult ADHD diagnosis online from board-certified providers. $199, 60–90 min, ASRS & Creyos. TX, PA, FL. Same-week telehealth appointments.
+  Summary: Get an adult ADHD diagnosis online from board-certified providers. $199, 60–90 min, individualized clinical assessment. TX, PA, FL. Same-week telehealth appointments.
   Topics: adhd
 
 - Health Guides | Metabolic, ADHD, Hormones &amp; Telehealth
@@ -441,7 +441,7 @@ Total pages: 159
 
 - What is included in Siya Health’s $199 ADHD evaluation?
   URL: https://siya.health/answers/what-included-199-adhd-evaluation
-  Summary: Siya Health’s $199 adult ADHD evaluation is a 60–90 minute telehealth visit with a board-certified, ADHD-CCSP–trained clinician—including clinical intervie…
+  Summary: Siya Health’s $199 adult ADHD evaluation is a 60–90 minute telehealth visit with a licensed medical provider—including clinical interview, validated assess…
   Topics: adhd, health-guide
 
 - What is food noise?
@@ -781,12 +781,28 @@ Total pages: 159
 
 - Creyos ADHD Testing Online | Part of $199 Evaluation
   URL: https://siya.health/creyos-adhd-testing
-  Summary: Creyos cognitive testing for ADHD as part of your $199 online evaluation. ASRS + Creyos + clinical interview. Licensed providers in TX, PA, FL.
+  Summary: Creyos cognitive testing for ADHD as part of your $199 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL.
   Topics: adhd
 
 - Diagnostic Lab Services
   URL: https://siya.health/labs
   Summary: Diagnostic lab services and monitoring tests are coming soon to Siya Health.
+
+- Legal &amp; Compliance
+  URL: https://siya.health/legal
+  Summary: Legal and compliance policies for Siya Health telehealth services.
+
+- Notice of Privacy Practices
+  URL: https://siya.health/legal/notice-of-privacy-practices
+  Summary: Notice of Privacy Practices for Siya Health.
+
+- Privacy Policy
+  URL: https://siya.health/legal/privacy-policy
+  Summary: Privacy Policy for Siya Health.
+
+- Terms of Use
+  URL: https://siya.health/legal/terms-of-use
+  Summary: Terms of Use for Siya Health.
 
 - Membership &amp; Pricing
   URL: https://siya.health/membership-pricing
@@ -810,13 +826,13 @@ Total pages: 159
   URL: https://siya.health/primary-urgent-care
   Summary: Virtual primary care and concierge visits with licensed providers. Telehealth services across California, Texas, Pennsylvania, and Florida.
 
-- Privacy Policy
+- Privacy Policy Redirect
   URL: https://siya.health/privacy-policy
-  Summary: Siya Health privacy policy. How we collect, use, and protect your information.
+  Summary: Legacy privacy policy URL. The current Privacy Policy is published at siya.health/legal/privacy-policy.
 
 - Our Care Team
   URL: https://siya.health/providers
-  Summary: Meet Siya Health physicians and advanced practice providers—primary care–led ADHD, metabolic, and telehealth care across California, Texas, Pennsylvania, Florida, and Ohio.
+  Summary: Meet Siya Health physicians and advanced practice providers—primary care–led ADHD, metabolic, and telehealth care across California, Texas, Pennsylvania, and Florida.
 
 - Derek Timbs, FNP-BC | Medical Weight Loss &amp; Men's Health
   URL: https://siya.health/providers/derek-timbs
@@ -858,9 +874,9 @@ Total pages: 159
   Summary: Fast, convenient telehealth from board-certified providers. Primary care, urgent care, prescriptions, labs. TX, PA, FL. No waiting rooms.
   Topics: telehealth
 
-- Terms of Service
+- Terms of Use Redirect
   URL: https://siya.health/terms
-  Summary: Siya Health terms of service. Use of our telehealth website and services.
+  Summary: Legacy terms URL. The current Terms of Use are published at siya.health/legal/terms-of-use.
 
 - Provider-Guided Medical Weight Loss
   URL: https://siya.health/weight-loss-metabolic-health

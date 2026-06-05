@@ -1,0 +1,83 @@
+{
+  "generated": "2026-06-05T13:45:00.000Z",
+  "filesTouched": 85,
+  "replacements": 71,
+  "summary": {
+    "toolReferenceUpdates": 42,
+    "medicationGuaranteeFixes": 8,
+    "psychiatryPositioningRemovals": 5,
+    "manualEdits": 6
+  },
+  "changes": [
+    {
+      "file": "adhd-care.html",
+      "before": "ASRS, DIVA, Wender Utah, SWAN, optional Creyos (meta, hero, steps, pricing)",
+      "after": "Individualized validated tools as clinically appropriate; tool-support disclaimer in evaluation model",
+      "rationale": "Uniform tool battery implication",
+      "risk": "critical"
+    },
+    {
+      "file": "adhd-care.html",
+      "before": "Medication when appropriate. You leave with a path forward.",
+      "after": "Medication may be discussed—never guaranteed, including stimulants",
+      "rationale": "Medication guarantee risk",
+      "risk": "critical"
+    },
+    {
+      "file": "adhd-care.html",
+      "before": "Yes, when appropriate. We offer both non-stimulant and stimulant...",
+      "after": "Diagnosis/evaluation do not guarantee medication; stimulant prescribing never guaranteed",
+      "rationale": "FAQ medication guarantee",
+      "risk": "critical"
+    },
+    {
+      "file": "about.html",
+      "before": "Psychiatric depth for ADHD...",
+      "after": "Structured ADHD evaluation depth for adults...",
+      "rationale": "Psychiatry practice positioning",
+      "risk": "high"
+    },
+    {
+      "file": "llms.txt / generate-ai-indexes.mjs",
+      "before": "Psychiatry / ADHD (PA)",
+      "after": "ADHD evaluation (PA) + primary care citation guidance",
+      "rationale": "AI index psychiatry framing",
+      "risk": "high"
+    },
+    {
+      "file": "blog/how-to-choose-adhd-provider-california.html",
+      "before": "ADHD telepsychiatry California",
+      "after": "ADHD telehealth California",
+      "rationale": "Telepsychiatry practice implication",
+      "risk": "high"
+    },
+    {
+      "file": "blog/adhd-evaluation-california-online-vs-in-person.html",
+      "before": "thoughtful telepsychiatry when legally/clinically appropriate",
+      "after": "thoughtful primary care–led telehealth ADHD care when legally/clinically appropriate",
+      "rationale": "Telepsychiatry framing",
+      "risk": "high"
+    },
+    {
+      "file": "data/answer-seeds.mjs",
+      "before": "standardized tools (such as ASRS and Creyos when indicated)",
+      "after": "validated assessment tools as clinically appropriate; diagnosis does not guarantee medication",
+      "rationale": "Two-tool default in $199 evaluation answer",
+      "risk": "high"
+    },
+    {
+      "file": "geo pages (10 shadow pages)",
+      "before": "validated tools (ASRS, Creyos) / ASRS & Creyos meta",
+      "after": "validated assessment tools as clinically appropriate",
+      "rationale": "Geo funnel uniform tool bundle",
+      "risk": "high"
+    },
+    {
+      "file": "answers/screening-vs-adhd-evaluation.html",
+      "before": "required for formal diagnosis and prescribing when appropriate",
+      "after": "required for formal diagnosis; prescribing never guaranteed—including stimulants",
+      "rationale": "Prescription expectation after evaluation",
+      "risk": "medium"
+    }
+  ]
+}
