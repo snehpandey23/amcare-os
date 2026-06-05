@@ -5,6 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { GUIDE_CANNIBALIZATION_OVERRIDES, HIGH_OVERLAP_PAIRS } from '../data/cannibalization-phase1.mjs';
+import { isLegacyLegalPage } from '../data/site-standards.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -63,6 +64,7 @@ function main() {
   }
 
   for (const rel of files) {
+    if (isLegacyLegalPage(rel)) continue;
     const html = fs.readFileSync(path.join(SITE_ROOT, rel), 'utf8');
     const title = extractTitle(html);
     const h1 = extractH1(html);
