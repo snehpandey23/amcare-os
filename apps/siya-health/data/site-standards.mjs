@@ -28,4 +28,13 @@ export const LEGACY_FOOTER_PATTERNS = [
   'Board-certified providers providing telehealth care across Texas, Pennsylvania, and Florida.',
   'Board-certified providers providing telehealth care across California, Texas, Pennsylvania, and Florida.',
   'Board-certified providers providing telehealth care across California, Texas, Florida, and Pennsylvania.',
+  'Board-certified providers providing telehealth care across California, California, Texas, Pennsylvania, and Florida.',
+  'Modern telehealth care for ADHD, weight loss, and concierge primary care across California, California, Texas, Pennsylvania, and Florida.',
 ];
+
+/** Canonical on-site legal URLs (replaces adhd.siya.health) */
+export const LEGAL_LINKS = {
+  privacy: '/privacy-policy',
+  terms: '/terms',
+  noticeOfPrivacy: '/privacy-policy',
+};

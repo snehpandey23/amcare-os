@@ -1,19 +1,8 @@
 {
   "generated": "2026-06-05",
   "totalPages": 154,
-  "zeroInbound": [
-    "/privacy-policy",
-    "/terms"
-  ],
+  "zeroInbound": [],
   "under3Inbound": [
-    {
-      "path": "/privacy-policy",
-      "count": 0
-    },
-    {
-      "path": "/terms",
-      "count": 0
-    },
     {
       "path": "/adhd-diagnosis-austin",
       "count": 1
@@ -108,22 +97,22 @@
   "highAuthorityOutbound": [
     {
       "path": "/",
-      "outboundCount": 14,
+      "outboundCount": 17,
       "uniqueInbound": 154
     },
     {
       "path": "/adhd-care",
-      "outboundCount": 20,
+      "outboundCount": 25,
       "uniqueInbound": 154
     },
     {
       "path": "/blog",
-      "outboundCount": 32,
+      "outboundCount": 34,
       "uniqueInbound": 154
     },
     {
       "path": "/blog/adhd",
-      "outboundCount": 46,
+      "outboundCount": 48,
       "uniqueInbound": 65
     },
     {
@@ -133,12 +122,12 @@
     },
     {
       "path": "/about",
-      "outboundCount": 18,
+      "outboundCount": 20,
       "uniqueInbound": 154
     },
     {
       "path": "/weight-loss-metabolic-health",
-      "outboundCount": 22,
+      "outboundCount": 25,
       "uniqueInbound": 154
     }
   ],
@@ -1224,6 +1213,8 @@
     "/primary-urgent-care": 154,
     "/telehealth": 154,
     "/weight-loss-metabolic-health": 154,
+    "/privacy-policy": 88,
+    "/terms": 88,
     "/blog/adhd": 65,
     "/adhd-screening": 53,
     "/answers/signs-of-adult-adhd": 45,
@@ -1273,6 +1264,7 @@
     "/blog/when-is-testosterone-therapy-appropriate": 9,
     "/answers/adhd-and-weight-loss-connection": 8,
     "/answers/normal-a1c-insulin-resistance": 8,
+    "/providers/dr-sneh-pandey": 8,
     "/answers/adhd-medication-side-effects": 7,
     "/answers/can-you-get-adhd-medication-online": 7,
     "/answers/is-adhd-medication-safe-long-term": 7,
@@ -1299,6 +1291,8 @@
     "/blog/is-adhd-medication-safe-long-term": 5,
     "/blog/non-stimulant-adhd-medications-explained": 5,
     "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd": 5,
+    "/providers/dr-natasha-desai": 5,
+    "/providers/dr-swati-pandey": 5,
     "/answers/adhd-vs-anxiety": 4,
     "/answers/food-noise-returned-on-glp-1": 4,
     "/answers/fsa-hsa-adhd-evaluation": 4,
@@ -1341,9 +1335,6 @@
     "/blog/oral-vs-topical-minoxidil-which-is-right": 3,
     "/blog/phentermine-for-weight-loss-safety-and-effectiveness": 3,
     "/blog/sildenafil-for-erectile-dysfunction-what-to-expect": 3,
-    "/providers/dr-natasha-desai": 3,
-    "/providers/dr-sneh-pandey": 3,
-    "/providers/dr-swati-pandey": 3,
     "/adhd-diagnosis-houston": 2,
     "/answers/afternoon-energy-crash-after-lunch": 2,
     "/answers/oral-vs-injectable-weight-loss-meds": 2,
@@ -1365,8 +1356,6 @@
     "/adhd-treatment-online": 1,
     "/answers/adhd-in-men": 1,
     "/answers/creyos-adhd-testing-explained": 1,
-    "/answers/weight-gain-after-stopping-ozempic": 1,
-    "/privacy-policy": 0,
-    "/terms": 0
+    "/answers/weight-gain-after-stopping-ozempic": 1
   }
 }

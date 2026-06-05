@@ -10,6 +10,7 @@ import {
   COPY_STANDARDS,
   FOOTER_STATES_LINE,
   LEGACY_FOOTER_PATTERNS,
+  LEGAL_LINKS,
   STATES_BULLET,
   STATES_INLINE,
 } from '../data/site-standards.mjs';
@@ -166,6 +167,98 @@ const LEARN_MORE_ADHD = `<!-- SIYA:LEARN-MORE-ADHD -->
       </section>
       <!-- /SIYA:LEARN-MORE-ADHD -->`;
 
+const MEET_PHYSICIANS_ADHD = `<!-- SIYA:MEET-PHYSICIANS -->
+      <section class="section" id="meet-physicians" aria-labelledby="meet-physicians-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="meet-physicians-heading">Meet our physicians</h2>
+            <p class="lead">Board-certified clinicians on your ADHD care team.</p>
+          </div>
+          <div class="about-team-grid">
+            <article class="about-team-card">
+              <img src="assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey, MD" width="88" height="88" loading="lazy" />
+              <h3><a href="/providers/dr-sneh-pandey">Dr. Sneh Pandey, MD</a></h3>
+              <p class="about-team-tagline">Adult ADHD &amp; metabolic care · CA, TX, PA, FL</p>
+            </article>
+            <article class="about-team-card">
+              <img src="assets/images/dr-natasha-desai.png" alt="Dr. Natasha Desai, MD" width="88" height="88" loading="lazy" />
+              <h3><a href="/providers/dr-natasha-desai">Dr. Natasha Desai, MD</a></h3>
+              <p class="about-team-tagline">ADHD &amp; behavioral medicine · TX, FL</p>
+            </article>
+            <article class="about-team-card">
+              <img src="assets/images/dr-swati-pandey.png" alt="Dr. Swati Pandey, MD" width="88" height="88" loading="lazy" />
+              <h3><a href="/providers/dr-swati-pandey">Dr. Swati Pandey, MD</a></h3>
+              <p class="about-team-tagline">ADHD &amp; psychiatric depth · PA</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <!-- /SIYA:MEET-PHYSICIANS -->`;
+
+const MEET_PHYSICIANS_TELEHEALTH = `<!-- SIYA:MEET-PHYSICIANS -->
+      <section class="section" id="meet-physicians" aria-labelledby="meet-physicians-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="meet-physicians-heading">Meet our physicians</h2>
+            <p class="lead">Licensed telehealth clinicians—availability varies by state.</p>
+          </div>
+          <div class="about-team-grid">
+            <article class="about-team-card">
+              <img src="assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey, MD" width="88" height="88" loading="lazy" />
+              <h3><a href="/providers/dr-sneh-pandey">Dr. Sneh Pandey, MD</a></h3>
+              <p class="about-team-tagline">Internal medicine &amp; metabolic care · CA, TX, PA, FL</p>
+            </article>
+            <article class="about-team-card">
+              <img src="assets/images/dr-natasha-desai.png" alt="Dr. Natasha Desai, MD" width="88" height="88" loading="lazy" />
+              <h3><a href="/providers/dr-natasha-desai">Dr. Natasha Desai, MD</a></h3>
+              <p class="about-team-tagline">Family &amp; behavioral medicine · TX, FL</p>
+            </article>
+            <article class="about-team-card">
+              <img src="assets/images/dr-swati-pandey.png" alt="Dr. Swati Pandey, MD" width="88" height="88" loading="lazy" />
+              <h3><a href="/providers/dr-swati-pandey">Dr. Swati Pandey, MD</a></h3>
+              <p class="about-team-tagline">Psychiatric &amp; behavioral telehealth · PA</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <!-- /SIYA:MEET-PHYSICIANS -->`;
+
+const MEET_PHYSICIANS_WEIGHT = `<!-- SIYA:MEET-PHYSICIANS -->
+      <section class="section" id="meet-physicians" aria-labelledby="meet-physicians-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="meet-physicians-heading">Meet our physicians</h2>
+            <p class="lead">Provider-led medical weight loss and metabolic care.</p>
+          </div>
+          <div class="about-team-grid">
+            <article class="about-team-card">
+              <img src="assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey, MD" width="88" height="88" loading="lazy" />
+              <h3><a href="/providers/dr-sneh-pandey">Dr. Sneh Pandey, MD</a></h3>
+              <p class="about-team-tagline">Obesity medicine &amp; metabolic telehealth · CA, TX, PA, FL</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <!-- /SIYA:MEET-PHYSICIANS -->`;
+
+const MEET_PHYSICIANS_MENS = `<!-- SIYA:MEET-PHYSICIANS -->
+      <section class="section" id="meet-physicians" aria-labelledby="meet-physicians-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="meet-physicians-heading">Meet our physicians</h2>
+            <p class="lead">Evidence-based men's health and hormone care.</p>
+          </div>
+          <div class="about-team-grid">
+            <article class="about-team-card">
+              <img src="assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey, MD" width="88" height="88" loading="lazy" />
+              <h3><a href="/providers/dr-sneh-pandey">Dr. Sneh Pandey, MD</a></h3>
+              <p class="about-team-tagline">Men's health, hormones &amp; metabolic care · CA, TX, PA, FL</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <!-- /SIYA:MEET-PHYSICIANS -->`;
+
 const LEARN_MORE_WEIGHT = `<!-- SIYA:LEARN-MORE-WEIGHT -->
       <section class="section section-tinted learn-more-cluster" id="learn-more-weight-loss" aria-labelledby="learn-more-weight-heading">
         <div class="container">
@@ -306,24 +399,51 @@ export function injectNavCta(html, relPath) {
   return html;
 }
 
+/** Collapse duplicate California entries in state lists (source + JSON-LD). */
+function fixDuplicateCalifornia(html) {
+  const dupPattern = /California,\s*California(?:,\s*California)*/gi;
+  html = html.replace(dupPattern, 'California');
+  while (html.includes('California, California')) {
+    html = html.replaceAll('California, California', 'California');
+  }
+  html = html.replace(
+    /California,\s*Texas,\s*Pennsylvania,\s*and\s*Florida/gi,
+    STATES_INLINE,
+  );
+  return html;
+}
+
+/** Point legacy adhd.siya.health legal URLs to on-site pages. */
+export function normalizeLegalLinks(html) {
+  html = html.replaceAll('https://adhd.siya.health/privacy-policy', LEGAL_LINKS.privacy);
+  html = html.replaceAll('https://adhd.siya.health/terms-of-service', LEGAL_LINKS.terms);
+  html = html.replaceAll('https://adhd.siya.health/notice-of-privacy-practices', LEGAL_LINKS.noticeOfPrivacy);
+  html = html.replace(
+    /href="(\/privacy-policy|\/terms)"([^>]*)\s+target="_blank"\s+rel="noopener"/gi,
+    'href="$1"$2',
+  );
+  return html;
+}
+
 /** Standardize states, Health Guides naming, and legacy CTAs on every page */
 export function normalizeSitewideCopy(html) {
+  html = fixDuplicateCalifornia(html);
   for (const legacy of LEGACY_FOOTER_PATTERNS) {
     html = html.replaceAll(legacy, FOOTER_STATES_LINE);
   }
-  html = html.replaceAll(
-    'Texas, Pennsylvania, and Florida. All care is delivered via secure telehealth.',
+  /** Expand 3-state lists only when California is not already listed (avoids "California, California, …"). */
+  html = html.replace(
+    /(?<!California,\s*)Texas, Pennsylvania, and Florida\. All care is delivered via secure telehealth\./g,
     `${STATES_INLINE}. All care is delivered via secure telehealth.`,
   );
-  html = html.replaceAll('California, California,', 'California,');
-  html = html.replaceAll('Texas, Pennsylvania, and Florida.', `${STATES_INLINE}.`);
-  html = html.replaceAll('Texas, Pennsylvania, and Florida via', `${STATES_INLINE} via`);
-  html = html.replaceAll('Texas, Florida, and Pennsylvania.', `${STATES_INLINE}.`);
-  html = html.replaceAll('Texas, Florida, and Pennsylvania via', `${STATES_INLINE} via`);
-  html = html.replace(/serve Texas, Pennsylvania, and Florida/gi, `serve ${STATES_INLINE}`);
-  html = html.replace(/serve Texas, Florida, and Pennsylvania/gi, `serve ${STATES_INLINE}`);
-  html = html.replaceAll('Licensed in Texas, Pennsylvania, and Florida', `Licensed in ${STATES_INLINE}`);
-  html = html.replaceAll('Licensed in Texas, Florida, and Pennsylvania', `Licensed in ${STATES_INLINE}`);
+  html = html.replace(/(?<!California,\s*)Texas, Pennsylvania, and Florida\./g, `${STATES_INLINE}.`);
+  html = html.replace(/(?<!California,\s*)Texas, Pennsylvania, and Florida via/g, `${STATES_INLINE} via`);
+  html = html.replace(/(?<!California,\s*)Texas, Florida, and Pennsylvania\./g, `${STATES_INLINE}.`);
+  html = html.replace(/(?<!California,\s*)Texas, Florida, and Pennsylvania via/g, `${STATES_INLINE} via`);
+  html = html.replace(/(?<!California,\s*)serve Texas, Pennsylvania, and Florida/gi, `serve ${STATES_INLINE}`);
+  html = html.replace(/(?<!California,\s*)serve Texas, Florida, and Pennsylvania/gi, `serve ${STATES_INLINE}`);
+  html = html.replace(/(?<!California,\s*)Licensed in Texas, Pennsylvania, and Florida/g, `Licensed in ${STATES_INLINE}`);
+  html = html.replace(/(?<!California,\s*)Licensed in Texas, Florida, and Pennsylvania/g, `Licensed in ${STATES_INLINE}`);
   html = html.replaceAll('California, Texas, Florida, and Pennsylvania', STATES_INLINE);
   html = html.replaceAll('California, Texas, Pennsylvania, and Florida', STATES_INLINE);
   html = html.replaceAll('Licensed in CA, TX, PA, FL', `Licensed in ${STATES_BULLET}`);
@@ -374,6 +494,7 @@ export function normalizeSitewideCopy(html) {
     (m) => (m.includes('target=') ? m : m.replace('<a', '<a target="_blank" rel="noopener"')),
   );
 
+  html = fixDuplicateCalifornia(html);
   return html;
 }
 
@@ -382,8 +503,8 @@ export function injectFooterChrome(html) {
 
   if (html.includes('class="footer-brand"')) {
     html = html.replace(
-      /<div class="footer-brand">\s*<p>[^<]*<\/p>\s*<\/div>/i,
-      `<div class="footer-brand"><p>${FOOTER_STATES_LINE}</p></div>`,
+      /(<div class="footer-brand">)\s*<p>[^<]*<\/p>/i,
+      `$1<p>${FOOTER_STATES_LINE}</p>`,
     );
   }
 
@@ -442,6 +563,31 @@ export function injectLearnMoreSections(html, relPath) {
     } else if (html.includes('<!-- FINAL CTA -->')) {
       html = html.replace('<!-- FINAL CTA -->', `${LEARN_MORE_TELE}\n\n      <!-- FINAL CTA -->`);
     }
+  }
+  return html;
+}
+
+const MEET_PHYSICIANS_BY_PAGE = {
+  'adhd-care.html': MEET_PHYSICIANS_ADHD,
+  'telehealth.html': MEET_PHYSICIANS_TELEHEALTH,
+  'weight-loss-metabolic-health.html': MEET_PHYSICIANS_WEIGHT,
+  'mens-health-longevity.html': MEET_PHYSICIANS_MENS,
+};
+
+export function injectMeetPhysiciansSection(html, relPath) {
+  const block = MEET_PHYSICIANS_BY_PAGE[relPath];
+  if (!block) return html;
+  if (html.includes('SIYA:MEET-PHYSICIANS')) {
+    return html.replace(/<!-- SIYA:MEET-PHYSICIANS -->[\s\S]*?<!-- \/SIYA:MEET-PHYSICIANS -->/, block);
+  }
+  if (html.includes('<!-- FINAL CTA -->')) {
+    return html.replace('<!-- FINAL CTA -->', `${block}\n\n      <!-- FINAL CTA -->`);
+  }
+  if (relPath === 'mens-health-longevity.html' && html.includes('<!-- /SIYA:LEARN-MORE-MENS -->')) {
+    return html.replace(
+      '<!-- /SIYA:LEARN-MORE-MENS -->',
+      `<!-- /SIYA:LEARN-MORE-MENS -->\n\n      ${block}`,
+    );
   }
   return html;
 }
@@ -596,7 +742,9 @@ export function applySiteChrome(html, relPath, title = '') {
   html = injectAnswersNav(html);
   html = injectFooterChrome(html);
   html = injectLearnMoreSections(html, relPath);
+  html = injectMeetPhysiciansSection(html, relPath);
   html = injectContinueReading(html, relPath, title, auditIndex);
+  html = normalizeLegalLinks(html);
   html = normalizeSitewideCopy(html);
   return html;
 }
