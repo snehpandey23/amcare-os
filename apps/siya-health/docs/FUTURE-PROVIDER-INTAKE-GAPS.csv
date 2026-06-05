@@ -1,0 +1,133 @@
+Provider,Field,PublicValue,Status,Priority,ReadinessImpact,SourceURL,Notes
+"Megan Wunderlich, NP",name,Megan Wunderlich,Verified from public source,Nice to have,High,https://www.helloklarity.com/provider/megan-wunderlich,
+"Megan Wunderlich, NP",credentials,"MSN, APRN, FNP-C",Verified from public source,Required before publishing,High,https://www.helloklarity.com/provider/megan-wunderlich,
+"Megan Wunderlich, NP",role/type,"FNP; Mental Health, Family Medicine",Verified from public source,Required before publishing,High,https://www.helloklarity.com/provider/megan-wunderlich,External role only — Siya title missing
+"Megan Wunderlich, NP",states mentioned,Pennsylvania,Verified from public source,Required before publishing,High,https://www.helloklarity.com/provider/megan-wunderlich,Do not infer other states
+"Megan Wunderlich, NP",license type per state,—,Not found,Required before publishing,High,,
+"Megan Wunderlich, NP",license verification source,—,Not found,Required before publishing,High,,PA board profile URL required
+"Megan Wunderlich, NP",license status,—,Not found,Required before publishing,Medium,,
+"Megan Wunderlich, NP",license expiration,—,Not found,Required before publishing,Medium,,
+"Megan Wunderlich, NP",accepting new patients,Yes,Verified from public source,Required before publishing,High,https://www.helloklarity.com/provider/megan-wunderlich,Klarity only — confirm for Siya
+"Megan Wunderlich, NP",education school,"Duquesne BSN; Chatham MSN; Carlow PMC-FNP",Verified from public source,Required before publishing,High,https://www.helloklarity.com/provider/megan-wunderlich,
+"Megan Wunderlich, NP",residency,—,Not found,Required before publishing,Low,,NP — confirm training equivalent if required
+"Megan Wunderlich, NP",board certifications,FNP-C,Verified from public source,Required before publishing,Medium,https://www.helloklarity.com/provider/megan-wunderlich,Primary verification link missing
+"Megan Wunderlich, NP",ADHD-CCSP or equivalent,—,Not found,Required before publishing,High,,Needed if linked to ADHD content
+"Megan Wunderlich, NP",clinical focus,"Mental Health, Family Medicine, ADHD",Verified from public source,Required before publishing,High,https://www.helloklarity.com/provider/megan-wunderlich,
+"Megan Wunderlich, NP",services,Telehealth mental health/family medicine,Verified from public source,Required before publishing,High,https://www.helloklarity.com/provider/megan-wunderlich,Map to Siya service pages
+"Megan Wunderlich, NP",bio,Klarity About Megan,Verified from public source,Required before publishing,High,https://www.helloklarity.com/provider/megan-wunderlich,Needs provider approval for Siya
+"Megan Wunderlich, NP",care philosophy,Patient-centered / evidence-based,Verified from public source,Required before publishing,Medium,https://www.helloklarity.com/provider/megan-wunderlich,
+"Megan Wunderlich, NP",headshot URL,—,Not found,Required before publishing,High,,
+"Megan Wunderlich, NP",headshot publication consent,—,Not found,Required before publishing,High,,
+"Megan Wunderlich, NP",NPI,1629930532,Verified from public source,Nice to have,Medium,https://www.helloklarity.com/provider/megan-wunderlich,
+"Megan Wunderlich, NP",external profiles,Klarity profile,Verified from public source,Nice to have,Low,https://www.helloklarity.com/provider/megan-wunderlich,
+"Megan Wunderlich, NP",organization affiliations,VA Pittsburgh Healthcare System,Verified from public source,Nice to have,Medium,https://www.helloklarity.com/provider/megan-wunderlich,
+"Megan Wunderlich, NP",Siya role/title,—,Not found,Required before publishing,High,,
+"Megan Wunderlich, NP",credential verification admin,—,Not found,Required before publishing,High,,
+"Megan Wunderlich, NP",reviewer consent,—,Not found,Required before physician-reviewed content linkage,High,,
+"Megan Wunderlich, NP",reviewedContent,—,Not found,Required before physician-reviewed content linkage,High,,
+"Megan Wunderlich, NP",comphealthforyou.com profile,—,Not found,Nice to have,Low,https://www.comphealthforyou.com/,Listed source — no Megan content found
+"Megan Wunderlich, NP",readiness score,46,Mentioned but needs confirmation,Summary,High,,See FUTURE-PROVIDER-ENRICHMENT-AUDIT.md
+"Megan Wunderlich, NP",ready for Siya profile,No,Verified from public source,Summary,High,,
+"Megan Wunderlich, NP",ready for reviewedBy,No,Verified from public source,Summary,High,,
+"Megan Wunderlich, NP",ready for schema,Partial,Mentioned but needs confirmation,Summary,Medium,,
+"Megan Wunderlich, NP",recommended tier,Tier 2 — core clinician,Mentioned but needs confirmation,Summary,Medium,,
+"Megan Wunderlich, NP",recommended service pages,"/adhd-care; /telehealth",Mentioned but needs confirmation,Summary,Medium,,PA-only caveat
+"Vanessa Urbina, MD",name,Vanessa Urbina MD,Verified from public source,Nice to have,High,https://www.comphealthforyou.com/about-dr-vanessa-urbina,
+"Vanessa Urbina, MD",credentials,MD,Verified from public source,Required before publishing,High,https://www.comphealthforyou.com/about-dr-vanessa-urbina,
+"Vanessa Urbina, MD",role/type,Founder & Medical Director Comprehensive Health,Verified from public source,Required before publishing,High,https://www.comphealthforyou.com/,
+"Vanessa Urbina, MD",states mentioned,Florida,Verified from public source,Required before publishing,High,https://www.comphealthforyou.com/about-dr-vanessa-urbina,Mount Dora / Sanford FL
+"Vanessa Urbina, MD",license type per state,—,Not found,Required before publishing,High,,
+"Vanessa Urbina, MD",license verification source,—,Not found,Required before publishing,High,,FL DOH profile URL required
+"Vanessa Urbina, MD",license status,FL State Medical License (label only),Mentioned but needs confirmation,Required before publishing,High,https://www.comphealthforyou.com/about-dr-vanessa-urbina,No number or URL
+"Vanessa Urbina, MD",license expiration,—,Not found,Required before publishing,Medium,,
+"Vanessa Urbina, MD",accepting new patients,—,Not found,Required before publishing,High,,
+"Vanessa Urbina, MD",education school,University of Miami (2007); FAU bachelor's (2003),Verified from public source,Required before publishing,High,https://www.comphealthforyou.com/about-dr-vanessa-urbina,
+"Vanessa Urbina, MD",residency,Brookwood Baptist Health; general surgery Baptist Princeton,Mentioned but needs confirmation,Required before publishing,Medium,https://www.comphealthforyou.com/about-dr-vanessa-urbina,Timeline/specialty unclear
+"Vanessa Urbina, MD",board certifications,—,Not found,Required before publishing,High,,Not listed on practice site
+"Vanessa Urbina, MD",ADHD-CCSP or equivalent,—,Not found,Required before publishing,High,,ADHD services listed on site
+"Vanessa Urbina, MD",clinical focus,"Family medicine, DPC, ADHD, obesity, lifestyle",Verified from public source,Required before publishing,High,https://www.comphealthforyou.com/general-primary-care,
+"Vanessa Urbina, MD",services,"DPC, telemedicine, primary care, procedures",Verified from public source,Required before publishing,High,https://www.comphealthforyou.com/,
+"Vanessa Urbina, MD",bio,Long story on about page,Verified from public source,Required before publishing,High,https://www.comphealthforyou.com/about-dr-vanessa-urbina,15 vs 20 year inconsistency
+"Vanessa Urbina, MD",care philosophy,Patient-first DPC family care,Verified from public source,Required before publishing,Medium,https://www.comphealthforyou.com/,
+"Vanessa Urbina, MD",headshot URL,—,Not found,Required before publishing,High,,
+"Vanessa Urbina, MD",headshot publication consent,—,Not found,Required before publishing,High,,
+"Vanessa Urbina, MD",NPI,—,Not found,Nice to have,Medium,,
+"Vanessa Urbina, MD",external profiles,comphealthforyou.com,Verified from public source,Nice to have,Low,https://www.comphealthforyou.com/,
+"Vanessa Urbina, MD",organization affiliations,Comprehensive Health PLLC,Verified from public source,Nice to have,Medium,https://www.comphealthforyou.com/,
+"Vanessa Urbina, MD",Siya role/title,—,Not found,Required before publishing,High,,
+"Vanessa Urbina, MD",credential verification admin,—,Not found,Required before publishing,High,,
+"Vanessa Urbina, MD",reviewer consent,—,Not found,Required before physician-reviewed content linkage,High,,
+"Vanessa Urbina, MD",reviewedContent,—,Not found,Required before physician-reviewed content linkage,High,,
+"Vanessa Urbina, MD",readiness score,48,Mentioned but needs confirmation,Summary,High,,See FUTURE-PROVIDER-ENRICHMENT-AUDIT.md
+"Vanessa Urbina, MD",ready for Siya profile,No,Verified from public source,Summary,High,,
+"Vanessa Urbina, MD",ready for reviewedBy,No,Verified from public source,Summary,High,,
+"Vanessa Urbina, MD",ready for schema,Partial,Mentioned but needs confirmation,Summary,Medium,,
+"Vanessa Urbina, MD",recommended tier,Tier 1 candidate,Mentioned but needs confirmation,Summary,Medium,,Pending affiliation verification
+"Vanessa Urbina, MD",recommended service pages,"/adhd-care; /weight-loss-metabolic-health; /telehealth",Mentioned but needs confirmation,Summary,Medium,,
+"Derek Timbs, FNP-BC",name,Derek Timbs,Verified from public source,Nice to have,High,https://www.kiwihealth.com/provider/TX/Houston/Derek-Timbs,
+"Derek Timbs, FNP-BC",credentials,"FNP-BC; MSN APRN",Verified from public source,Required before publishing,High,https://cmdocc-med.com/about-us/,
+"Derek Timbs, FNP-BC",role/type,CEO C.M.D. Occ-Med; FNP CMD Wellness,Verified from public source,Required before publishing,High,https://cmdocc-med.com/about-us/,
+"Derek Timbs, FNP-BC",states mentioned,"Texas, Ohio",Mentioned but needs confirmation,Required before publishing,High,https://www.helloklarity.com/provider/derek-timbs,Directory listing — not board-verified
+"Derek Timbs, FNP-BC",license type per state,—,Not found,Required before publishing,High,,
+"Derek Timbs, FNP-BC",license verification source,—,Not found,Required before publishing,High,,TX and OH board URLs required
+"Derek Timbs, FNP-BC",license status,—,Not found,Required before publishing,Medium,,
+"Derek Timbs, FNP-BC",license expiration,—,Not found,Required before publishing,Medium,,
+"Derek Timbs, FNP-BC",accepting new patients,Yes,Verified from public source,Required before publishing,High,https://www.helloklarity.com/provider/derek-timbs,
+"Derek Timbs, FNP-BC",education school,Texas A&M University-Corpus Christi MSN FNP (2002-2005),Verified from public source,Required before publishing,High,https://www.kiwihealth.com/provider/TX/Houston/Derek-Timbs,
+"Derek Timbs, FNP-BC",residency,—,Not found,Required before publishing,Low,,NP
+"Derek Timbs, FNP-BC",board certifications,FNP-BC,Verified from public source,Required before publishing,Medium,https://www.helloklarity.com/provider/derek-timbs,ANCC link missing
+"Derek Timbs, FNP-BC",ADHD-CCSP or equivalent,—,Not found,Required before publishing,High,,No ADHD in public sources
+"Derek Timbs, FNP-BC",clinical focus,"Weight loss, obesity, HRT, preventive medicine",Verified from public source,Required before publishing,High,https://www.kiwihealth.com/provider/TX/Houston/Derek-Timbs,
+"Derek Timbs, FNP-BC",services,"Semaglutide, tirzepatide, phentermine (state-specific)",Verified from public source,Required before publishing,High,https://www.helloklarity.com/provider/derek-timbs,
+"Derek Timbs, FNP-BC",bio,Long bio Klarity/KiwiHealth,Verified from public source,Required before publishing,High,https://www.helloklarity.com/provider/derek-timbs,
+"Derek Timbs, FNP-BC",care philosophy,Person-focused individualized care,Verified from public source,Required before publishing,Medium,https://www.kiwihealth.com/provider/TX/Houston/Derek-Timbs,
+"Derek Timbs, FNP-BC",headshot URL,—,Not found,Required before publishing,High,,
+"Derek Timbs, FNP-BC",headshot publication consent,—,Not found,Required before publishing,High,,
+"Derek Timbs, FNP-BC",NPI,1609886910,Verified from public source,Nice to have,Medium,https://www.helloklarity.com/provider/derek-timbs,
+"Derek Timbs, FNP-BC",external profiles,"LinkedIn, KiwiHealth, Klarity, CMD",Verified from public source,Nice to have,Medium,https://www.linkedin.com/in/derek-timbs-a54247320/,
+"Derek Timbs, FNP-BC",organization affiliations,"CMD Wellness, CORE Occ-Med, C.M.D. Occ-Med",Verified from public source,Nice to have,Medium,https://cmdocc-med.com/about-us/,
+"Derek Timbs, FNP-BC",Siya affiliation,Siya tag on LinkedIn,Mentioned but needs confirmation,Required before publishing,High,https://www.linkedin.com/in/derek-timbs-a54247320/,Not employment verification
+"Derek Timbs, FNP-BC",credential verification admin,—,Not found,Required before publishing,High,,
+"Derek Timbs, FNP-BC",reviewer consent,—,Not found,Required before physician-reviewed content linkage,High,,
+"Derek Timbs, FNP-BC",reviewedContent,—,Not found,Required before physician-reviewed content linkage,High,,
+"Derek Timbs, FNP-BC",Klarity personal story,—,Not found,Nice to have,Low,https://www.helloklarity.com/post/personal-story-derek-timbs/,Fetch timeout
+"Derek Timbs, FNP-BC",readiness score,57,Mentioned but needs confirmation,Summary,High,,See FUTURE-PROVIDER-ENRICHMENT-AUDIT.md
+"Derek Timbs, FNP-BC",ready for Siya profile,No,Verified from public source,Summary,High,,
+"Derek Timbs, FNP-BC",ready for reviewedBy,No,Verified from public source,Summary,High,,
+"Derek Timbs, FNP-BC",ready for schema,Partial,Mentioned but needs confirmation,Summary,Medium,,
+"Derek Timbs, FNP-BC",recommended tier,Tier 2 — core clinician,Mentioned but needs confirmation,Summary,Medium,,
+"Derek Timbs, FNP-BC",recommended service pages,"/weight-loss-metabolic-health; /telehealth",Mentioned but needs confirmation,Summary,Medium,,Not /adhd-care
+"Wendy Delgado, PA-C",name,Wendy Delgado,Verified from public source,Nice to have,High,https://www.arrivehw.com/wendy-delgado,
+"Wendy Delgado, PA-C",credentials,PA-C,Verified from public source,Required before publishing,High,https://www.doximity.com/pub/wendy-delgado-pa,Arrive page says RN — conflict
+"Wendy Delgado, PA-C",role/type,Physician Associate,Verified from public source,Required before publishing,High,https://www.arrivehw.com/wendy-delgado,
+"Wendy Delgado, PA-C",states mentioned,California (license 20963),Verified from public source,Required before publishing,High,https://www.doximity.com/pub/wendy-delgado-pa,NPI index — CA only verified
+"Wendy Delgado, PA-C",multi-state licenses (LinkedIn),"AZ, CA, FL, IL, NY, PA, TX, UT",Mentioned but needs confirmation,Nice to have,Medium,,Self-reported — not in brief URLs
+"Wendy Delgado, PA-C",license type per state,—,Not found,Required before publishing,High,,
+"Wendy Delgado, PA-C",license verification source,—,Not found,Required before publishing,High,,CA board profile URL required
+"Wendy Delgado, PA-C",license status,Active (NPI enumeration),Mentioned but needs confirmation,Required before publishing,Medium,,NPI index only
+"Wendy Delgado, PA-C",license expiration,—,Not found,Required before publishing,Medium,,
+"Wendy Delgado, PA-C",accepting new patients,—,Not found,Required before publishing,High,,
+"Wendy Delgado, PA-C",education school,Western University of Health Sciences PA (2007-2009),Verified from public source,Required before publishing,High,https://www.doximity.com/pub/wendy-delgado-pa,
+"Wendy Delgado, PA-C",residency,—,Not found,Required before publishing,Low,,PA
+"Wendy Delgado, PA-C",board certifications,NCCPA Certified PA,Verified from public source,Required before publishing,Medium,https://www.doximity.com/pub/wendy-delgado-pa,
+"Wendy Delgado, PA-C",ADHD-CCSP or equivalent,—,Not found,Required before publishing,High,,
+"Wendy Delgado, PA-C",clinical focus,"Weight loss, aesthetics, telemedicine, allergy/asthma",Verified from public source,Required before publishing,High,https://www.arrivehw.com/wendy-delgado,
+"Wendy Delgado, PA-C",services,Telehealth weight-loss intake,Verified from public source,Required before publishing,High,https://www.arrivehw.com/wendy-delgado,
+"Wendy Delgado, PA-C",bio,Brief Arrive + Doximity summary,Verified from public source,Required before publishing,Medium,https://www.arrivehw.com/wendy-delgado,Thin copy
+"Wendy Delgado, PA-C",care philosophy,Collaborative patient support (brief),Mentioned but needs confirmation,Required before publishing,Medium,https://www.arrivehw.com/wendy-delgado,
+"Wendy Delgado, PA-C",headshot URL,—,Not found,Required before publishing,High,,
+"Wendy Delgado, PA-C",headshot publication consent,—,Not found,Required before publishing,High,,
+"Wendy Delgado, PA-C",NPI,1063725059,Verified from public source,Nice to have,Medium,https://www.doximity.com/pub/wendy-delgado-pa,
+"Wendy Delgado, PA-C",external profiles,"Doximity, Arrive HW",Verified from public source,Nice to have,Medium,https://www.doximity.com/pub/wendy-delgado-pa,
+"Wendy Delgado, PA-C",US News profile,—,Not found,Nice to have,Low,https://health.usnews.com/physician-assistants/wendy-delgado-2130416,Fetch failed
+"Wendy Delgado, PA-C",organization affiliations,Arrive Health and Wellness,Mentioned but needs confirmation,Nice to have,Medium,https://www.arrivehw.com/wendy-delgado,NPI lists different org — confirm current
+"Wendy Delgado, PA-C",Siya role/title,—,Not found,Required before publishing,High,,
+"Wendy Delgado, PA-C",credential verification admin,—,Not found,Required before publishing,High,,
+"Wendy Delgado, PA-C",reviewer consent,—,Not found,Required before physician-reviewed content linkage,High,,
+"Wendy Delgado, PA-C",reviewedContent,—,Not found,Required before physician-reviewed content linkage,High,,
+"Wendy Delgado, PA-C",readiness score,43,Mentioned but needs confirmation,Summary,High,,See FUTURE-PROVIDER-ENRICHMENT-AUDIT.md
+"Wendy Delgado, PA-C",ready for Siya profile,No,Verified from public source,Summary,High,,
+"Wendy Delgado, PA-C",ready for reviewedBy,No,Verified from public source,Summary,High,,
+"Wendy Delgado, PA-C",ready for schema,Partial,Mentioned but needs confirmation,Summary,Medium,,
+"Wendy Delgado, PA-C",recommended tier,Tier 3 — supporting clinician,Mentioned but needs confirmation,Summary,Medium,,
+"Wendy Delgado, PA-C",recommended service pages,"/weight-loss-metabolic-health; /telehealth",Mentioned but needs confirmation,Summary,Medium,,
