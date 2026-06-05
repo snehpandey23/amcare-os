@@ -119,10 +119,15 @@ function writeLlmsTxt(pages) {
     `- Telehealth articles: ${BASE}/blog/telehealth`,
     `- All articles: ${BASE}/blog/all`,
     '',
-    '## Providers (Physician entities)',
+    '## Providers (care team hub)',
+    `- All providers: ${BASE}/providers`,
     `- Dr. Sneh Pandey, MD — Medical Director (CA, TX, PA, FL): ${BASE}/providers/dr-sneh-pandey`,
-    `- Dr. Swati Pandey, MD — Psychiatry / ADHD (PA): ${BASE}/providers/dr-swati-pandey`,
+    `- Dr. Vanessa Urbina, MD — Family medicine / ADHD (FL): ${BASE}/providers/dr-vanessa-urbina`,
     `- Dr. Natasha Desai, MD — Behavioral / ADHD (TX, FL): ${BASE}/providers/dr-natasha-desai`,
+    `- Dr. Swati Pandey, MD — Psychiatry / ADHD (PA): ${BASE}/providers/dr-swati-pandey`,
+    `- Megan Wunderlich, FNP-C — ADHD & mental health (PA): ${BASE}/providers/megan-wunderlich`,
+    `- Derek Timbs, FNP-BC — Weight loss & men's health (TX, OH): ${BASE}/providers/derek-timbs`,
+    `- Wendy Delgado, PA-C — Medical weight loss (CA): ${BASE}/providers/wendy-delgado`,
     '',
     '## Machine-readable indexes',
     `- Full page index: ${BASE}/article-index.json`,
@@ -184,7 +189,8 @@ function writeLlmsFullTxt(pages, providers) {
     lines.push(`### ${prov.name}`);
     lines.push(`URL: ${prov.url}`);
     lines.push(`Licensed: ${prov.statesLicensed.join(', ')}`);
-    lines.push(`Reviewer topics: ${prov.reviewerForTopics.join(', ')}`);
+    const topics = prov.reviewerForTopics || prov.expertiseTopics || [];
+    lines.push(`Reviewer topics: ${topics.length ? topics.join(', ') : '—'}`);
     lines.push('');
   }
 
@@ -201,14 +207,19 @@ function main() {
 
   const providerIndex = {
     generated: new Date().toISOString(),
+    hubUrl: `${BASE}/providers`,
+    count: providers.length,
     providers: providers.map((p) => ({
       name: p.name,
+      slug: p.slug,
       url: p.url,
       jobTitle: p.jobTitle,
+      providerType: p.providerType,
       medicalSpecialty: p.medicalSpecialty,
       statesLicensed: p.statesLicensed,
       conditionsTreated: p.conditionsTreated,
-      relatedContent: p.relatedContent.map((u) => `${BASE}${u}`),
+      npi: p.npi || null,
+      relatedContent: (p.relatedContent || []).map((u) => `${BASE}${u}`),
     })),
   };
 

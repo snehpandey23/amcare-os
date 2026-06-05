@@ -1,10 +1,14 @@
 {
-  "generated": "2026-06-05T06:13:52.111Z",
+  "generated": "2026-06-05T12:38:43.461Z",
+  "hubUrl": "https://siya.health/providers",
+  "count": 7,
   "providers": [
     {
       "name": "Dr. Sneh Pandey, MD",
+      "slug": "dr-sneh-pandey",
       "url": "https://siya.health/providers/dr-sneh-pandey",
       "jobTitle": "Medical Director",
+      "providerType": "physician",
       "medicalSpecialty": [
         "Internal Medicine",
         "Obesity Medicine",
@@ -23,49 +27,39 @@
         "Medical weight loss",
         "ADHD and weight overlap"
       ],
-      "relatedContent": [
-        "https://siya.health/adhd-care",
-        "https://siya.health/blog/adhd",
-        "https://siya.health/blog/weight-loss",
-        "https://siya.health/blog/how-to-know-if-you-have-adhd-adult",
-        "https://siya.health/blog/is-online-adhd-diagnosis-legit",
-        "https://siya.health/blog/adhd-evaluation-cost-texas",
-        "https://siya.health/blog/online-adhd-diagnosis-california",
-        "https://siya.health/blog/medical-weight-loss-glp1-semaglutide-texas",
-        "https://siya.health/blog/glp1-side-effects-and-how-to-manage-them"
-      ]
+      "npi": null,
+      "relatedContent": []
     },
     {
-      "name": "Dr. Swati Pandey, MD",
-      "url": "https://siya.health/providers/dr-swati-pandey",
-      "jobTitle": "Psychiatric Physician",
+      "name": "Dr. Vanessa Urbina, MD",
+      "slug": "dr-vanessa-urbina",
+      "url": "https://siya.health/providers/dr-vanessa-urbina",
+      "jobTitle": "Family Medicine Physician",
+      "providerType": "physician",
       "medicalSpecialty": [
-        "Psychiatry",
-        "Mental Health",
+        "Family Medicine",
+        "Primary Care",
         "Adult ADHD"
       ],
       "statesLicensed": [
-        "Pennsylvania"
+        "Florida"
       ],
       "conditionsTreated": [
         "Adult ADHD",
-        "Depression",
-        "Anxiety",
-        "Complex medication histories",
-        "ADHD with psychiatric comorbidity"
+        "Primary care",
+        "Obesity",
+        "Chronic disease",
+        "Lifestyle medicine"
       ],
-      "relatedContent": [
-        "https://siya.health/blog/vyvanse-vs-adderall-differences",
-        "https://siya.health/blog/focalin-vs-adderall-comparison",
-        "https://siya.health/blog/is-adhd-medication-safe-long-term",
-        "https://siya.health/blog/non-stimulant-adhd-medications-explained",
-        "https://siya.health/blog/adhd-medication-side-effects-what-to-expect"
-      ]
+      "npi": null,
+      "relatedContent": []
     },
     {
       "name": "Dr. Natasha Desai, MD",
+      "slug": "dr-natasha-desai",
       "url": "https://siya.health/providers/dr-natasha-desai",
       "jobTitle": "Family & Behavioral Medicine Physician",
+      "providerType": "physician",
       "medicalSpecialty": [
         "Family Medicine",
         "Behavioral Medicine",
@@ -82,13 +76,102 @@
         "ADHD with anxiety overlap",
         "Behavioral health"
       ],
-      "relatedContent": [
-        "https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd",
-        "https://siya.health/blog/adhd-symptoms-overlooked",
-        "https://siya.health/blog/how-to-know-if-you-have-adhd-adult",
-        "https://siya.health/blog/insomnia-treatment-options-beyond-medication",
-        "https://siya.health/blog/ambien-and-sleep-medications-risks-and-benefits"
-      ]
+      "npi": null,
+      "relatedContent": []
+    },
+    {
+      "name": "Dr. Swati Pandey, MD",
+      "slug": "dr-swati-pandey",
+      "url": "https://siya.health/providers/dr-swati-pandey",
+      "jobTitle": "Licensed Medical Provider — ADHD & Mental Health Care",
+      "providerType": "physician",
+      "medicalSpecialty": [
+        "Adult ADHD",
+        "Mental Health",
+        "Primary Care"
+      ],
+      "statesLicensed": [
+        "Pennsylvania"
+      ],
+      "conditionsTreated": [
+        "Adult ADHD",
+        "Depression",
+        "Anxiety",
+        "Complex medication histories",
+        "ADHD with anxiety and mood overlap"
+      ],
+      "npi": null,
+      "relatedContent": []
+    },
+    {
+      "name": "Megan Wunderlich, FNP-C",
+      "slug": "megan-wunderlich",
+      "url": "https://siya.health/providers/megan-wunderlich",
+      "jobTitle": "Family Nurse Practitioner",
+      "providerType": "advanced-practice",
+      "medicalSpecialty": [
+        "Family Medicine",
+        "Mental Health",
+        "Adult ADHD"
+      ],
+      "statesLicensed": [
+        "Pennsylvania"
+      ],
+      "conditionsTreated": [
+        "Adult ADHD",
+        "Anxiety",
+        "Family medicine",
+        "Chronic disease"
+      ],
+      "npi": "1629930532",
+      "relatedContent": []
+    },
+    {
+      "name": "Derek Timbs, FNP-BC",
+      "slug": "derek-timbs",
+      "url": "https://siya.health/providers/derek-timbs",
+      "jobTitle": "Family Nurse Practitioner",
+      "providerType": "advanced-practice",
+      "medicalSpecialty": [
+        "Obesity Medicine",
+        "Family Medicine",
+        "Men's Health"
+      ],
+      "statesLicensed": [
+        "Texas",
+        "Ohio"
+      ],
+      "conditionsTreated": [
+        "Medical weight loss",
+        "Obesity",
+        "Metabolic health",
+        "Men's health",
+        "GLP-1 therapy"
+      ],
+      "npi": "1609886910",
+      "relatedContent": []
+    },
+    {
+      "name": "Wendy Delgado, PA-C",
+      "slug": "wendy-delgado",
+      "url": "https://siya.health/providers/wendy-delgado",
+      "jobTitle": "Physician Associate",
+      "providerType": "advanced-practice",
+      "medicalSpecialty": [
+        "Obesity Medicine",
+        "Family Medicine"
+      ],
+      "statesLicensed": [
+        "California"
+      ],
+      "conditionsTreated": [
+        "Medical weight loss",
+        "Obesity",
+        "Metabolic health",
+        "GLP-1 therapy"
+      ],
+      "npi": "1063725059",
+      "relatedContent": []
     }
   ]
 }

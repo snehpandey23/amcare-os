@@ -4561,6 +4561,217 @@ a.asrs-interest-btn:hover {
   width: 100%;
   justify-content: center;
 }
+.provider-state-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0 0;
+}
+.provider-state-chip {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--surface-tinted, #f0f4f8);
+  color: var(--primary);
+  border: 1px solid var(--border);
+}
+.provider-credential-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  box-shadow: var(--shadow);
+  max-width: 720px;
+}
+.provider-credential-list {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.provider-data-pending {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+.provider-profile-meta {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 12px;
+}
+.provider-profile-meta--footer {
+  margin-top: 20px;
+  text-align: center;
+}
+.provider-service-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.provider-service-links a {
+  font-weight: 600;
+}
+.provider-index-grid {
+  display: grid;
+  gap: 24px;
+}
+@media (min-width: 700px) {
+  .provider-index-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .provider-index-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.provider-index-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.provider-index-card img,
+.provider-index-card .provider-photo-img {
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 12px;
+}
+.provider-photo-wrap {
+  position: relative;
+  display: inline-block;
+}
+.provider-photo-wrap--pending {
+  text-align: center;
+}
+.provider-photo-wrap--compact .provider-photo-pending-note {
+  display: none;
+}
+.provider-photo-img--placeholder {
+  display: block;
+  object-fit: contain;
+  background: #e7f0ff;
+}
+.provider-photo-initials {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  transform: translate(-50%, -50%);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #1d5fbf;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+.provider-photo-pending-note {
+  margin: 8px 0 0;
+  font-size: 0.75rem;
+  color: var(--muted, #5c6b7a);
+}
+.about-team-card .provider-photo-wrap,
+.homepage-care-card .provider-photo-wrap,
+.provider-conversion-card .provider-photo-wrap {
+  margin: 0 auto 8px;
+}
+.about-team-card .provider-photo-img--placeholder,
+.homepage-care-card .provider-photo-img--placeholder {
+  border-radius: 50%;
+}
+.provider-index-card .provider-photo-wrap {
+  margin: 0 auto 12px;
+}
+.provider-index-card .provider-photo-img--placeholder {
+  border-radius: 50%;
+}
+.provider-index-role {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0 0 10px;
+}
+.provider-index-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin: 10px 0 14px;
+}
+.provider-index-tag {
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--surface-tinted, #f0f4f8);
+  color: var(--text-secondary);
+}
+.provider-index-teaser {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+.provider-index-hero .section-header {
+  margin-bottom: 20px;
+}
+.provider-hub-filters {
+  margin-bottom: 28px;
+  padding: 20px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.provider-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-bottom: 12px;
+}
+.provider-filter-row:last-of-type {
+  margin-bottom: 8px;
+}
+.provider-filter-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  min-width: 4.5rem;
+  color: var(--text-secondary);
+}
+.provider-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.provider-filter-chip {
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.provider-filter-chip.is-active {
+  background: var(--primary, #1e5a9e);
+  border-color: var(--primary, #1e5a9e);
+  color: #fff;
+}
+.provider-filter-status {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.provider-hub-section-gap {
+  margin-top: 2.5rem;
+}
+.provider-index-card[hidden] {
+  display: none;
+}
+.provider-accepting-badge--hub {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  vertical-align: middle;
+}
 .about-how-steps {
   display: grid;
   gap: 16px;

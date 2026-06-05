@@ -14,12 +14,40 @@ import {
   STATES_BULLET,
   STATES_INLINE,
 } from '../data/site-standards.mjs';
+import {
+  BOOKING_LINK,
+  getAllProviders,
+  getProvidersForServicePage,
+  bookingLinkWithAttribution,
+  resolveProviderPhoto,
+  stateChipLabel,
+} from '../data/providers.mjs';
+
+function escAttr(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;');
+}
+
+function renderCareTeamPhoto(p, width, height) {
+  const photo = resolveProviderPhoto(p);
+  const src = `/${photo.src}`;
+  if (!photo.pending) {
+    return `<img src="${src}" alt="${escAttr(photo.alt)}" width="${width}" height="${height}" loading="lazy" />`;
+  }
+  return `<div class="provider-photo-wrap provider-photo-wrap--pending provider-photo-wrap--compact">
+              <img src="${src}" alt="${escAttr(photo.alt)}" width="${width}" height="${height}" loading="lazy" class="provider-photo-img provider-photo-img--placeholder" />
+              <span class="provider-photo-initials" aria-hidden="true">${escAttr(photo.initials)}</span>
+            </div>`;
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
 
 /** Primary nav label for /answers (URL unchanged for SEO) */
 export const NAV_HEALTH_GUIDES = { path: '/answers', label: 'Health Guides', shortLabel: 'Health guides' };
+export const NAV_PROVIDERS = { path: '/providers', label: 'Our Care Team', shortLabel: 'Our Care Team' };
 
 export const MEET_GREET_URL = 'https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY';
 
@@ -167,97 +195,85 @@ const LEARN_MORE_ADHD = `<!-- SIYA:LEARN-MORE-ADHD -->
       </section>
       <!-- /SIYA:LEARN-MORE-ADHD -->`;
 
-const MEET_PHYSICIANS_ADHD = `<!-- SIYA:MEET-PHYSICIANS -->
+function buildMeetPhysiciansBlock(serviceKey, lead, stateAbbr = null) {
+  const providers = getProvidersForServicePage(serviceKey, { stateAbbr });
+  const stateNote = stateAbbr
+    ? `<p class="provider-state-filter-note">Showing clinicians licensed in <strong>${stateAbbr}</strong>.</p>`
+    : '';
+  const cards = providers
+    .map(
+      (p) => `            <article class="about-team-card" data-states="${p.stateAbbreviations.join(',')}">
+              ${renderCareTeamPhoto(p, 88, 88)}
+              <h3><a href="/providers/${p.slug}">${p.name}</a></h3>
+              <p class="about-team-tagline">${p.servicePageTagline} · ${stateChipLabel(p)}</p>
+              <a class="button secondary" href="${bookingLinkWithAttribution(p.slug, 'service-card')}" target="_blank" rel="noopener" data-provider-cta="${p.slug}">Book Meet &amp; Greet</a>
+            </article>`,
+    )
+    .join('\n');
+  return `<!-- SIYA:MEET-PHYSICIANS -->
       <section class="section" id="meet-physicians" aria-labelledby="meet-physicians-heading">
         <div class="container">
           <div class="section-header">
-            <h2 id="meet-physicians-heading">Meet our physicians</h2>
-            <p class="lead">Board-certified clinicians on your ADHD care team.</p>
+            <h2 id="meet-physicians-heading">Meet our care team</h2>
+            <p class="lead">${lead}</p>
+            ${stateNote}
           </div>
           <div class="about-team-grid">
-            <article class="about-team-card">
-              <img src="assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey, MD" width="88" height="88" loading="lazy" />
-              <h3><a href="/providers/dr-sneh-pandey">Dr. Sneh Pandey, MD</a></h3>
-              <p class="about-team-tagline">Adult ADHD &amp; metabolic care · CA, TX, PA, FL</p>
-            </article>
-            <article class="about-team-card">
-              <img src="assets/images/dr-natasha-desai.png" alt="Dr. Natasha Desai, MD" width="88" height="88" loading="lazy" />
-              <h3><a href="/providers/dr-natasha-desai">Dr. Natasha Desai, MD</a></h3>
-              <p class="about-team-tagline">ADHD &amp; behavioral medicine · TX, FL</p>
-            </article>
-            <article class="about-team-card">
-              <img src="assets/images/dr-swati-pandey.png" alt="Dr. Swati Pandey, MD" width="88" height="88" loading="lazy" />
-              <h3><a href="/providers/dr-swati-pandey">Dr. Swati Pandey, MD</a></h3>
-              <p class="about-team-tagline">ADHD &amp; psychiatric depth · PA</p>
-            </article>
+${cards}
           </div>
+          <p class="blog-hub-see-all"><a href="/providers">View full care team</a></p>
         </div>
       </section>
       <!-- /SIYA:MEET-PHYSICIANS -->`;
+}
 
-const MEET_PHYSICIANS_TELEHEALTH = `<!-- SIYA:MEET-PHYSICIANS -->
-      <section class="section" id="meet-physicians" aria-labelledby="meet-physicians-heading">
-        <div class="container">
-          <div class="section-header">
-            <h2 id="meet-physicians-heading">Meet our physicians</h2>
-            <p class="lead">Licensed telehealth clinicians—availability varies by state.</p>
-          </div>
-          <div class="about-team-grid">
-            <article class="about-team-card">
-              <img src="assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey, MD" width="88" height="88" loading="lazy" />
-              <h3><a href="/providers/dr-sneh-pandey">Dr. Sneh Pandey, MD</a></h3>
-              <p class="about-team-tagline">Internal medicine &amp; metabolic care · CA, TX, PA, FL</p>
-            </article>
-            <article class="about-team-card">
-              <img src="assets/images/dr-natasha-desai.png" alt="Dr. Natasha Desai, MD" width="88" height="88" loading="lazy" />
-              <h3><a href="/providers/dr-natasha-desai">Dr. Natasha Desai, MD</a></h3>
-              <p class="about-team-tagline">Family &amp; behavioral medicine · TX, FL</p>
-            </article>
-            <article class="about-team-card">
-              <img src="assets/images/dr-swati-pandey.png" alt="Dr. Swati Pandey, MD" width="88" height="88" loading="lazy" />
-              <h3><a href="/providers/dr-swati-pandey">Dr. Swati Pandey, MD</a></h3>
-              <p class="about-team-tagline">Psychiatric &amp; behavioral telehealth · PA</p>
-            </article>
-          </div>
-        </div>
-      </section>
-      <!-- /SIYA:MEET-PHYSICIANS -->`;
+const GEO_PAGE_STATE = {
+  'adhd-diagnosis-texas.html': 'TX',
+  'adhd-diagnosis-houston.html': 'TX',
+  'adhd-diagnosis-austin.html': 'TX',
+  'adhd-diagnosis-florida.html': 'FL',
+  'adhd-diagnosis-pennsylvania.html': 'PA',
+  'adhd-diagnosis-philadelphia.html': 'PA',
+  'blog/online-adhd-diagnosis-texas.html': 'TX',
+  'blog/online-adhd-diagnosis-california.html': 'CA',
+};
 
-const MEET_PHYSICIANS_WEIGHT = `<!-- SIYA:MEET-PHYSICIANS -->
-      <section class="section" id="meet-physicians" aria-labelledby="meet-physicians-heading">
-        <div class="container">
-          <div class="section-header">
-            <h2 id="meet-physicians-heading">Meet our physicians</h2>
-            <p class="lead">Provider-led medical weight loss and metabolic care.</p>
-          </div>
-          <div class="about-team-grid">
-            <article class="about-team-card">
-              <img src="assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey, MD" width="88" height="88" loading="lazy" />
-              <h3><a href="/providers/dr-sneh-pandey">Dr. Sneh Pandey, MD</a></h3>
-              <p class="about-team-tagline">Obesity medicine &amp; metabolic telehealth · CA, TX, PA, FL</p>
-            </article>
-          </div>
-        </div>
-      </section>
-      <!-- /SIYA:MEET-PHYSICIANS -->`;
+function resolveMeetPhysiciansConfig(relPath) {
+  if (MEET_PHYSICIANS_BY_PAGE[relPath]) {
+    const key = relPath.replace('.html', '').replace('weight-loss-metabolic-health', 'weight-loss-metabolic-health');
+    const map = {
+      'adhd-care.html': 'adhd-care',
+      'telehealth.html': 'telehealth',
+      'weight-loss-metabolic-health.html': 'weight-loss-metabolic-health',
+      'mens-health-longevity.html': 'mens-health-longevity',
+    };
+    return { serviceKey: map[relPath], stateAbbr: null };
+  }
+  if (relPath === 'primary-urgent-care.html') {
+    return { serviceKey: 'primary-urgent-care', stateAbbr: null };
+  }
+  if (/^adhd-diagnosis-/.test(relPath) || GEO_PAGE_STATE[relPath]) {
+    return { serviceKey: 'adhd-care', stateAbbr: GEO_PAGE_STATE[relPath] || null };
+  }
+  if (['adult-adhd-diagnosis.html', 'adhd-treatment-online.html', 'online-adhd-test.html'].includes(relPath)) {
+    return { serviceKey: 'adhd-care', stateAbbr: null };
+  }
+  if (/^blog\/online-adhd-diagnosis-/.test(relPath)) {
+    return { serviceKey: 'adhd-care', stateAbbr: GEO_PAGE_STATE[relPath] || null };
+  }
+  return null;
+}
 
-const MEET_PHYSICIANS_MENS = `<!-- SIYA:MEET-PHYSICIANS -->
-      <section class="section" id="meet-physicians" aria-labelledby="meet-physicians-heading">
-        <div class="container">
-          <div class="section-header">
-            <h2 id="meet-physicians-heading">Meet our physicians</h2>
-            <p class="lead">Evidence-based men's health and hormone care.</p>
-          </div>
-          <div class="about-team-grid">
-            <article class="about-team-card">
-              <img src="assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey, MD" width="88" height="88" loading="lazy" />
-              <h3><a href="/providers/dr-sneh-pandey">Dr. Sneh Pandey, MD</a></h3>
-              <p class="about-team-tagline">Men's health, hormones &amp; metabolic care · CA, TX, PA, FL</p>
-            </article>
-          </div>
-        </div>
-      </section>
-      <!-- /SIYA:MEET-PHYSICIANS -->`;
+const MEET_PHYSICIANS_BY_PAGE = {
+  'adhd-care.html': () => buildMeetPhysiciansBlock('adhd-care', 'Board-certified clinicians on your ADHD care team.'),
+  'telehealth.html': () => buildMeetPhysiciansBlock('telehealth', 'Licensed telehealth clinicians—availability varies by state.'),
+  'weight-loss-metabolic-health.html': () =>
+    buildMeetPhysiciansBlock('weight-loss-metabolic-health', 'Provider-led medical weight loss and metabolic care.'),
+  'mens-health-longevity.html': () =>
+    buildMeetPhysiciansBlock('mens-health-longevity', "Evidence-based men's health and hormone care."),
+  'primary-urgent-care.html': () =>
+    buildMeetPhysiciansBlock('primary-urgent-care', 'Family medicine clinicians for primary and urgent telehealth.'),
+};
 
 const LEARN_MORE_WEIGHT = `<!-- SIYA:LEARN-MORE-WEIGHT -->
       <section class="section section-tinted learn-more-cluster" id="learn-more-weight-loss" aria-labelledby="learn-more-weight-heading">
@@ -518,6 +534,13 @@ export function injectFooterChrome(html) {
     );
   }
 
+  if (html.includes('<h4>Services</h4>') && !html.includes(`href="${NAV_PROVIDERS.path}"`)) {
+    html = html.replace(
+      /(<h4>Services<\/h4>[\s\S]*?)(<p><a href="\/adhd-care">)/i,
+      `$1<p><a href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a></p>\n          $2`,
+    );
+  }
+
   if (!html.includes('Healthcare Services')) {
     const block =
       '        <div><h4>Healthcare Services</h4><p><a href="/primary-urgent-care">Primary &amp; urgent care</a></p><p><a href="/labs">Diagnostic labs</a></p><p><a href="/prescriptions">Prescriptions</a></p></div>\n';
@@ -567,21 +590,154 @@ export function injectLearnMoreSections(html, relPath) {
   return html;
 }
 
-const MEET_PHYSICIANS_BY_PAGE = {
-  'adhd-care.html': MEET_PHYSICIANS_ADHD,
-  'telehealth.html': MEET_PHYSICIANS_TELEHEALTH,
-  'weight-loss-metabolic-health.html': MEET_PHYSICIANS_WEIGHT,
-  'mens-health-longevity.html': MEET_PHYSICIANS_MENS,
-};
+function buildHomepageCareTeam() {
+  const providers = getAllProviders();
+  const cards = providers
+    .map(
+      (p) => `            <article class="about-team-card homepage-care-card" data-states="${p.stateAbbreviations.join(',')}">
+              ${renderCareTeamPhoto(p, 96, 96)}
+              <h3><a href="/providers/${p.slug}">${p.name}</a></h3>
+              <p class="about-team-tagline">${p.servicePageTagline} · ${stateChipLabel(p)}</p>
+              <a class="text-link" href="/providers/${p.slug}">View profile</a>
+            </article>`,
+    )
+    .join('\n');
+  return `<!-- SIYA:CARE-TEAM -->
+      <section class="section section-tinted" id="care-team" aria-labelledby="care-team-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="care-team-heading">Meet our care team</h2>
+            <p class="lead">Seven contracted clinicians across ADHD, weight loss, primary care, and telehealth—each card links to a full profile.</p>
+          </div>
+          <div class="about-team-grid homepage-care-grid">
+${cards}
+          </div>
+          <div class="provider-lp-ctas provider-lp-ctas--center">
+            <a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
+            <a class="button secondary" href="/providers">View Our Care Team</a>
+          </div>
+        </div>
+      </section>
+      <!-- /SIYA:CARE-TEAM -->`;
+}
+
+function buildHomepageProviderConversion() {
+  const featured = getAllProviders().filter((p) => p.featured).slice(0, 4);
+  const cards = featured
+    .map(
+      (p) => `            <article class="provider-conversion-card">
+              ${renderCareTeamPhoto(p, 72, 72)}
+              <div>
+                <h3><a href="/providers/${p.slug}">${p.name}</a></h3>
+                <p>${p.servicePageTagline}</p>
+                <a class="button secondary" href="${bookingLinkWithAttribution(p.slug, 'homepage-module')}" target="_blank" rel="noopener" data-provider-cta="${p.slug}">Book with ${p.givenName}</a>
+              </div>
+            </article>`,
+    )
+    .join('\n');
+  return `<!-- SIYA:PROVIDER-CONVERSION -->
+      <section class="section" id="provider-conversion" aria-labelledby="provider-conversion-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="provider-conversion-heading">Not sure who to see?</h2>
+            <p class="lead">Start with a Meet &amp; Greet—we match you with a licensed clinician for your state and goals.</p>
+          </div>
+          <div class="provider-conversion-grid">
+${cards}
+          </div>
+        </div>
+      </section>
+      <!-- /SIYA:PROVIDER-CONVERSION -->`;
+}
+
+export function injectHomepageCareTeam(html, relPath) {
+  if (relPath !== 'index.html') return html;
+  const careTeam = buildHomepageCareTeam();
+  const conversion = buildHomepageProviderConversion();
+  if (html.includes('SIYA:CARE-TEAM')) {
+    html = html.replace(/<!-- SIYA:CARE-TEAM -->[\s\S]*?<!-- \/SIYA:CARE-TEAM -->/, careTeam);
+  } else if (html.includes('id="why-siya-exists"')) {
+    html = html.replace(
+      /(<section class="section section-tinted why-siya-exists" id="why-siya-exists">)/,
+      `${careTeam}\n\n      $1`,
+    );
+  }
+  if (html.includes('SIYA:PROVIDER-CONVERSION')) {
+    html = html.replace(/<!-- SIYA:PROVIDER-CONVERSION -->[\s\S]*?<!-- \/SIYA:PROVIDER-CONVERSION -->/, conversion);
+  } else if (html.includes('class="faq-accordion-section"')) {
+    html = html.replace(
+      /(<section class="section faq-accordion-section")/,
+      `${conversion}\n\n      $1`,
+    );
+  }
+  return html;
+}
+
+export function injectProvidersNav(html) {
+  const link = `<a href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>`;
+  if (html.includes(`href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>`)) return html;
+  html = html.replaceAll('href="/providers">Our providers</a>', `href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>`);
+  html = html.replaceAll('href="/providers">Our physicians</a>', `href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>`);
+  const injectAfterAbout = (nav) => {
+    if (!nav.includes('href="/about"')) return nav;
+    if (nav.includes(NAV_PROVIDERS.path)) return nav;
+    return nav.replace(/(<a href="\/about">About<\/a>)/, `$1\n          ${link}`);
+  };
+  html = html.replace(/<nav class="nav-center"[\s\S]*?<\/nav>/gi, (nav) => injectAfterAbout(nav));
+  html = html.replace(/<div class="nav-mobile">[\s\S]*?<\/div>/gi, (nav) => injectAfterAbout(nav));
+  return html;
+}
+
+export function injectAboutProviderHub(html, relPath) {
+  if (relPath !== 'about.html') return html;
+  const hubLink = `<p class="blog-hub-see-all"><a href="/providers">View Our Care Team (7 clinicians)</a></p>`;
+  if (html.includes('View full care team')) return html;
+  if (html.includes('about-team-grid')) {
+    html = html.replace(/(<div class="about-team-grid">[\s\S]*?<\/div>)/, `$1\n          ${hubLink}`);
+  }
+  return html;
+}
+
+export function injectProviderAttribution(html) {
+  if (html.includes('SIYA:PROVIDER-ATTRIBUTION')) return html;
+  const script = `<!-- SIYA:PROVIDER-ATTRIBUTION -->
+    <script>
+      document.addEventListener('click', function (e) {
+        var el = e.target.closest('[data-provider-cta]');
+        if (!el || typeof gtag !== 'function') return;
+        gtag('event', 'provider_cta_click', {
+          provider_slug: el.getAttribute('data-provider-cta'),
+          link_url: el.href || '',
+          page_path: location.pathname
+        });
+      });
+    </script>
+    <!-- /SIYA:PROVIDER-ATTRIBUTION -->`;
+  return html.replace('</body>', `${script}\n  </body>`);
+}
 
 export function injectMeetPhysiciansSection(html, relPath) {
-  const block = MEET_PHYSICIANS_BY_PAGE[relPath];
-  if (!block) return html;
+  let build = MEET_PHYSICIANS_BY_PAGE[relPath];
+  let block;
+  if (build) {
+    block = typeof build === 'function' ? build() : build;
+  } else {
+    const cfg = resolveMeetPhysiciansConfig(relPath);
+    if (!cfg) return html;
+    block = buildMeetPhysiciansBlock(
+      cfg.serviceKey,
+      'Licensed clinicians for this service—confirm state eligibility when you book.',
+      cfg.stateAbbr,
+    );
+  }
   if (html.includes('SIYA:MEET-PHYSICIANS')) {
     return html.replace(/<!-- SIYA:MEET-PHYSICIANS -->[\s\S]*?<!-- \/SIYA:MEET-PHYSICIANS -->/, block);
   }
   if (html.includes('<!-- FINAL CTA -->')) {
     return html.replace('<!-- FINAL CTA -->', `${block}\n\n      <!-- FINAL CTA -->`);
+  }
+  if (html.includes('</main>')) {
+    return html.replace(/\s*<\/main>/, `\n\n      ${block}\n    </main>`);
   }
   if (relPath === 'mens-health-longevity.html' && html.includes('<!-- /SIYA:LEARN-MORE-MENS -->')) {
     return html.replace(
@@ -739,11 +895,15 @@ export function applySiteChrome(html, relPath, title = '') {
   const auditIndex = loadContinueReadingIndex();
   html = injectNavCta(html, relPath);
   html = injectSitewideCtas(html, relPath);
+  html = injectProvidersNav(html);
   html = injectAnswersNav(html);
   html = injectFooterChrome(html);
   html = injectLearnMoreSections(html, relPath);
+  html = injectHomepageCareTeam(html, relPath);
+  html = injectAboutProviderHub(html, relPath);
   html = injectMeetPhysiciansSection(html, relPath);
   html = injectContinueReading(html, relPath, title, auditIndex);
+  html = injectProviderAttribution(html);
   html = normalizeLegalLinks(html);
   html = normalizeSitewideCopy(html);
   return html;

@@ -68,7 +68,7 @@ function fileToUrlPath(rel) {
 function priorityFor(rel) {
   if (rel === 'index.html') return '1.0';
   if (['adhd-care.html', 'adhd-screening.html', 'weight-loss-metabolic-health.html', 'telehealth.html'].includes(rel)) return '0.95';
-  if (rel.startsWith('providers/')) return '0.85';
+  if (rel === 'providers/index.html' || rel.startsWith('providers/')) return '0.85';
   if (rel === 'blog/index.html' || rel === 'blog/all.html') return '0.85';
   if (['blog/adhd.html', 'blog/weight-loss.html', 'blog/telehealth.html'].includes(rel)) return '0.82';
   if (rel.startsWith('blog/')) return '0.74';
@@ -326,7 +326,7 @@ function ensureProviderBreadcrumb(html, title, canonical) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${BASE}/` },
-      { '@type': 'ListItem', position: 2, name: 'About', item: `${BASE}/about` },
+      { '@type': 'ListItem', position: 2, name: 'Our physicians', item: `${BASE}/providers` },
       { '@type': 'ListItem', position: 3, name: name, item: canonical },
     ],
   };
@@ -476,15 +476,16 @@ function processHtml(relPath) {
     html = categoryBreadcrumb(relPath, html);
   }
 
-  if (relPath.startsWith('providers/')) {
+  if (relPath.startsWith('providers/') && relPath !== 'providers/index.html') {
     const slug = relPath.replace(/^providers\//, '').replace(/\.html$/, '');
     const provider = getProviderBySlug(slug);
-    if (provider) {
+    if (provider && !html.includes('"@type":"ProfilePage"') && !html.includes('"@type": "ProfilePage"')) {
       html = injectProviderPhysicianSchema(html, provider, title, description || '', canonical);
     }
     html = ensureProviderBreadcrumb(html, title, canonical);
   }
 
+  if (relPath === 'providers/index.html') html = ensureBreadcrumbSimplePage(html, 'Our physicians', `${BASE}/providers`);
   if (relPath === 'about.html') html = ensureBreadcrumbSimplePage(html, 'About', canonical);
   if (relPath === 'adhd-care.html') html = ensureBreadcrumbSimplePage(html, 'ADHD Care', canonical);
   if (relPath === 'membership-pricing.html') html = ensureBreadcrumbSimplePage(html, 'Membership & pricing', canonical);

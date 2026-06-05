@@ -57,6 +57,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <nav class="nav-center" aria-label="Primary">
           <a href="/">Home</a>
           <a href="/about">About</a>
+          <a href="/providers">Our Care Team</a>
           <a href="/adhd-care">ADHD Care</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
@@ -71,6 +72,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="nav-mobile">
           <a href="/">Home</a>
           <a href="/about">About</a>
+          <a href="/providers">Our Care Team</a>
           <a href="/adhd-care">ADHD Care</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
@@ -278,5 +280,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </footer>
     <script src="asrs-screener.js"></script>
     <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="69be9ab3db1480f6799cdd18"></script>
+  <!-- SIYA:PROVIDER-ATTRIBUTION -->
+    <script>
+      document.addEventListener('click', function (e) {
+        var el = e.target.closest('[data-provider-cta]');
+        if (!el || typeof gtag !== 'function') return;
+        gtag('event', 'provider_cta_click', {
+          provider_slug: el.getAttribute('data-provider-cta'),
+          link_url: el.href || '',
+          page_path: location.pathname
+        });
+      });
+    </script>
+    <!-- /SIYA:PROVIDER-ATTRIBUTION -->
   </body>
 </html>

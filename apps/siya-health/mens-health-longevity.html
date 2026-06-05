@@ -64,6 +64,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            <a href="/weight-loss-metabolic-health">Weight Loss</a>
            <a href="/telehealth">Telehealth</a>
            <a href="/about">About</a>
+          <a href="/providers">Our Care Team</a>
            <a href="/answers">Health Guides</a>
           <a href="/blog">Blog</a>
          </nav>
@@ -78,6 +79,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            <a href="/weight-loss-metabolic-health">Weight Loss</a>
            <a href="/telehealth">Telehealth</a>
            <a href="/about">About</a>
+          <a href="/providers">Our Care Team</a>
            <a href="/answers">Health Guides</a>
           <a href="/blog">Blog</a>
            <a class="button" href="https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
@@ -253,16 +255,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <section class="section" id="meet-physicians" aria-labelledby="meet-physicians-heading">
         <div class="container">
           <div class="section-header">
-            <h2 id="meet-physicians-heading">Meet our physicians</h2>
+            <h2 id="meet-physicians-heading">Meet our care team</h2>
             <p class="lead">Evidence-based men's health and hormone care.</p>
+            
           </div>
           <div class="about-team-grid">
-            <article class="about-team-card">
-              <img src="assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey, MD" width="88" height="88" loading="lazy" />
+            <article class="about-team-card" data-states="CA,TX,PA,FL">
+              <img src="/assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey, MD" width="88" height="88" loading="lazy" />
               <h3><a href="/providers/dr-sneh-pandey">Dr. Sneh Pandey, MD</a></h3>
-              <p class="about-team-tagline">Men's health, hormones &amp; metabolic care · CA, TX, PA, FL</p>
+              <p class="about-team-tagline">Adult ADHD & metabolic care · CA, TX, PA, FL</p>
+              <a class="button secondary" href="https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY?utm_source=siya&utm_medium=provider&utm_campaign=dr-sneh-pandey&utm_content=service-card" target="_blank" rel="noopener" data-provider-cta="dr-sneh-pandey">Book Meet &amp; Greet</a>
+            </article>
+            <article class="about-team-card" data-states="TX,OH">
+              <div class="provider-photo-wrap provider-photo-wrap--pending provider-photo-wrap--compact">
+              <img src="/assets/provider-placeholder.svg" alt="Derek Timbs, FNP-BC — profile image pending" width="88" height="88" loading="lazy" class="provider-photo-img provider-photo-img--placeholder" />
+              <span class="provider-photo-initials" aria-hidden="true">DT</span>
+            </div>
+              <h3><a href="/providers/derek-timbs">Derek Timbs, FNP-BC</a></h3>
+              <p class="about-team-tagline">Weight loss & men's health · TX, OH</p>
+              <a class="button secondary" href="https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY?utm_source=siya&utm_medium=provider&utm_campaign=derek-timbs&utm_content=service-card" target="_blank" rel="noopener" data-provider-cta="derek-timbs">Book Meet &amp; Greet</a>
             </article>
           </div>
+          <p class="blog-hub-see-all"><a href="/providers">View full care team</a></p>
         </div>
       </section>
       <!-- /SIYA:MEET-PHYSICIANS -->
@@ -313,5 +327,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </footer>
     <script src="scripts/deferred-chat-widget.js" defer></script>
+  <!-- SIYA:PROVIDER-ATTRIBUTION -->
+    <script>
+      document.addEventListener('click', function (e) {
+        var el = e.target.closest('[data-provider-cta]');
+        if (!el || typeof gtag !== 'function') return;
+        gtag('event', 'provider_cta_click', {
+          provider_slug: el.getAttribute('data-provider-cta'),
+          link_url: el.href || '',
+          page_path: location.pathname
+        });
+      });
+    </script>
+    <!-- /SIYA:PROVIDER-ATTRIBUTION -->
   </body>
  </html>

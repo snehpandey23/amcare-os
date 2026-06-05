@@ -1,7 +1,7 @@
 {
   "@context": "https://schema.org",
   "@type": "KnowledgeGraph",
-  "version": "2026-05-19",
+  "version": "2026-06-05",
   "organization": {
     "@id": "https://siya.health/#organization",
     "@type": "MedicalOrganization",
@@ -12,17 +12,29 @@
     "email": "care@siya.health",
     "telephone": "+1-215-445-1244",
     "medicalSpecialty": [
-      "Psychiatry",
       "Internal Medicine",
       "Family Medicine",
       "Obesity Medicine",
+      "Adult ADHD",
       "Behavioral Medicine"
     ],
     "areaServed": [
-      { "@type": "State", "name": "California" },
-      { "@type": "State", "name": "Texas" },
-      { "@type": "State", "name": "Pennsylvania" },
-      { "@type": "State", "name": "Florida" }
+      {
+        "@type": "State",
+        "name": "California"
+      },
+      {
+        "@type": "State",
+        "name": "Texas"
+      },
+      {
+        "@type": "State",
+        "name": "Pennsylvania"
+      },
+      {
+        "@type": "State",
+        "name": "Florida"
+      }
     ],
     "knowsAbout": [
       "Adult ADHD evaluation",
@@ -41,9 +53,27 @@
       "https://www.pinterest.com/siyahealthus/"
     ],
     "employee": [
-      { "@id": "https://siya.health/providers/dr-sneh-pandey#physician" },
-      { "@id": "https://siya.health/providers/dr-swati-pandey#physician" },
-      { "@id": "https://siya.health/providers/dr-natasha-desai#physician" }
+      {
+        "@id": "https://siya.health/providers/dr-sneh-pandey#physician"
+      },
+      {
+        "@id": "https://siya.health/providers/dr-vanessa-urbina#physician"
+      },
+      {
+        "@id": "https://siya.health/providers/dr-natasha-desai#physician"
+      },
+      {
+        "@id": "https://siya.health/providers/dr-swati-pandey#physician"
+      },
+      {
+        "@id": "https://siya.health/providers/megan-wunderlich#practitioner"
+      },
+      {
+        "@id": "https://siya.health/providers/derek-timbs#practitioner"
+      },
+      {
+        "@id": "https://siya.health/providers/wendy-delgado#practitioner"
+      }
     ]
   },
   "providers": [
@@ -55,8 +85,13 @@
       "givenName": "Sneh",
       "familyName": "Pandey",
       "honorificPrefix": "Dr.",
+      "honorificSuffix": "MD",
+      "providerType": "physician",
+      "providerCategory": "physician",
       "jobTitle": "Medical Director",
-      "worksFor": { "@id": "https://siya.health/#organization" },
+      "worksFor": {
+        "@id": "https://siya.health/#organization"
+      },
       "medicalSpecialty": [
         "Internal Medicine",
         "Obesity Medicine",
@@ -67,7 +102,12 @@
         "Obesity Medicine",
         "ADHD-CCSP (ADHD Clinical Services Provider Program)"
       ],
-      "statesLicensed": ["California", "Texas", "Pennsylvania", "Florida"],
+      "statesLicensed": [
+        "California",
+        "Texas",
+        "Pennsylvania",
+        "Florida"
+      ],
       "conditionsTreated": [
         "Adult ADHD",
         "Executive dysfunction",
@@ -75,72 +115,140 @@
         "Medical weight loss",
         "ADHD and weight overlap"
       ],
+      "image": "https://siya.health/assets/images/dr-sneh-pandey.png",
+      "photoStatus": "approved",
       "expertiseTopics": [
         "adhd-diagnosis",
         "adhd-medication",
-        "adhd-evaluation-cost",
         "weight-loss",
         "glp-1",
-        "obesity-medicine",
-        "telehealth-adhd"
+        "metabolic-health",
+        "mens-health",
+        "telehealth"
       ],
-      "reviewerForTopics": ["adhd", "weight-loss", "glp-1", "telehealth", "metabolic"],
-      "publications": [],
-      "relatedContent": [
-        "/adhd-care",
-        "/blog/adhd",
-        "/blog/weight-loss",
-        "/blog/how-to-know-if-you-have-adhd-adult",
-        "/blog/is-online-adhd-diagnosis-legit",
-        "/blog/adhd-evaluation-cost-texas",
-        "/blog/online-adhd-diagnosis-california",
-        "/blog/medical-weight-loss-glp1-semaglutide-texas",
-        "/blog/glp1-side-effects-and-how-to-manage-them"
-      ]
+      "reviewerForTopics": [
+        "adhd-diagnosis",
+        "adhd-medication",
+        "weight-loss",
+        "glp-1",
+        "metabolic-health",
+        "mens-health",
+        "telehealth"
+      ],
+      "relatedContent": [],
+      "reviewerOwnership": {
+        "metabolic": {
+          "primary": "derek-timbs",
+          "secondary": "dr-sneh-pandey",
+          "support": "wendy-delgado"
+        },
+        "adhdEval": {
+          "primary": "dr-sneh-pandey",
+          "secondary": "dr-natasha-desai"
+        },
+        "adhdMedication": {
+          "primary": "dr-swati-pandey",
+          "secondary": "dr-sneh-pandey"
+        },
+        "adhdBehavioral": {
+          "primary": "dr-natasha-desai",
+          "secondary": "megan-wunderlich"
+        },
+        "telehealthTrust": {
+          "primary": "dr-sneh-pandey",
+          "secondary": "megan-wunderlich"
+        },
+        "primaryCare": {
+          "primary": "dr-vanessa-urbina",
+          "secondary": "dr-sneh-pandey"
+        },
+        "mensHealth": {
+          "primary": "derek-timbs",
+          "secondary": "dr-sneh-pandey"
+        }
+      }
     },
     {
-      "@id": "https://siya.health/providers/dr-swati-pandey#physician",
-      "slug": "dr-swati-pandey",
-      "url": "https://siya.health/providers/dr-swati-pandey",
-      "name": "Dr. Swati Pandey, MD",
-      "givenName": "Swati",
-      "familyName": "Pandey",
+      "@id": "https://siya.health/providers/dr-vanessa-urbina#physician",
+      "slug": "dr-vanessa-urbina",
+      "url": "https://siya.health/providers/dr-vanessa-urbina",
+      "name": "Dr. Vanessa Urbina, MD",
+      "givenName": "Vanessa",
+      "familyName": "Urbina",
       "honorificPrefix": "Dr.",
-      "jobTitle": "Psychiatric Physician",
-      "worksFor": { "@id": "https://siya.health/#organization" },
+      "honorificSuffix": "MD",
+      "providerType": "physician",
+      "providerCategory": "physician",
+      "jobTitle": "Family Medicine Physician",
+      "worksFor": {
+        "@id": "https://siya.health/#organization"
+      },
       "medicalSpecialty": [
-        "Psychiatry",
-        "Mental Health",
+        "Family Medicine",
+        "Primary Care",
         "Adult ADHD"
       ],
       "hasCredential": [
-        "Psychiatric & Mental Health Physician",
-        "ADHD-CCSP"
+        "Family Medicine"
       ],
-      "statesLicensed": ["Pennsylvania"],
+      "statesLicensed": [
+        "Florida"
+      ],
       "conditionsTreated": [
         "Adult ADHD",
-        "Depression",
-        "Anxiety",
-        "Complex medication histories",
-        "ADHD with psychiatric comorbidity"
+        "Primary care",
+        "Obesity",
+        "Chronic disease",
+        "Lifestyle medicine"
       ],
+      "image": "https://siya.health/assets/provider-placeholder.svg",
+      "photoStatus": "pending",
       "expertiseTopics": [
-        "adhd-medication",
-        "adhd-depression-overlap",
-        "adhd-anxiety-overlap",
-        "psychiatric-adhd",
-        "stimulant-monitoring"
+        "primary-care",
+        "adhd-diagnosis",
+        "weight-loss",
+        "lifestyle-medicine",
+        "telehealth"
       ],
-      "reviewerForTopics": ["adhd-medication", "adhd-psychiatric", "mental-health"],
-      "publications": [],
-      "relatedContent": [
-        "/blog/vyvanse-vs-adderall-differences",
-        "/blog/focalin-vs-adderall-comparison",
-        "/blog/is-adhd-medication-safe-long-term",
-        "/blog/non-stimulant-adhd-medications-explained",
-        "/blog/adhd-medication-side-effects-what-to-expect"
-      ]
+      "reviewerForTopics": [
+        "primary-care",
+        "adhd-diagnosis",
+        "weight-loss",
+        "lifestyle-medicine",
+        "telehealth"
+      ],
+      "relatedContent": [],
+      "reviewerOwnership": {
+        "metabolic": {
+          "primary": "derek-timbs",
+          "secondary": "dr-sneh-pandey",
+          "support": "wendy-delgado"
+        },
+        "adhdEval": {
+          "primary": "dr-sneh-pandey",
+          "secondary": "dr-natasha-desai"
+        },
+        "adhdMedication": {
+          "primary": "dr-swati-pandey",
+          "secondary": "dr-sneh-pandey"
+        },
+        "adhdBehavioral": {
+          "primary": "dr-natasha-desai",
+          "secondary": "megan-wunderlich"
+        },
+        "telehealthTrust": {
+          "primary": "dr-sneh-pandey",
+          "secondary": "megan-wunderlich"
+        },
+        "primaryCare": {
+          "primary": "dr-vanessa-urbina",
+          "secondary": "dr-sneh-pandey"
+        },
+        "mensHealth": {
+          "primary": "derek-timbs",
+          "secondary": "dr-sneh-pandey"
+        }
+      }
     },
     {
       "@id": "https://siya.health/providers/dr-natasha-desai#physician",
@@ -150,8 +258,13 @@
       "givenName": "Natasha",
       "familyName": "Desai",
       "honorificPrefix": "Dr.",
+      "honorificSuffix": "MD",
+      "providerType": "physician",
+      "providerCategory": "physician",
       "jobTitle": "Family & Behavioral Medicine Physician",
-      "worksFor": { "@id": "https://siya.health/#organization" },
+      "worksFor": {
+        "@id": "https://siya.health/#organization"
+      },
       "medicalSpecialty": [
         "Family Medicine",
         "Behavioral Medicine",
@@ -161,7 +274,10 @@
         "Family & Behavioral Medicine",
         "ADHD-CCSP"
       ],
-      "statesLicensed": ["Texas", "Florida"],
+      "statesLicensed": [
+        "Texas",
+        "Florida"
+      ],
       "conditionsTreated": [
         "Adult ADHD",
         "Anxiety",
@@ -169,22 +285,378 @@
         "ADHD with anxiety overlap",
         "Behavioral health"
       ],
+      "image": "https://siya.health/assets/images/dr-natasha-desai.png",
+      "photoStatus": "approved",
       "expertiseTopics": [
-        "adhd-symptoms",
-        "adhd-anxiety-overlap",
-        "adhd-women",
-        "behavioral-adhd",
-        "telehealth-adhd"
+        "adhd-diagnosis",
+        "adhd-anxiety",
+        "behavioral-health",
+        "burnout",
+        "telehealth"
       ],
-      "reviewerForTopics": ["adhd-symptoms", "adhd-anxiety", "behavioral-health", "sleep"],
-      "publications": [],
-      "relatedContent": [
-        "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd",
-        "/blog/adhd-symptoms-overlooked",
-        "/blog/how-to-know-if-you-have-adhd-adult",
-        "/blog/insomnia-treatment-options-beyond-medication",
-        "/blog/ambien-and-sleep-medications-risks-and-benefits"
-      ]
+      "reviewerForTopics": [
+        "adhd-diagnosis",
+        "adhd-anxiety",
+        "behavioral-health",
+        "burnout",
+        "telehealth"
+      ],
+      "relatedContent": [],
+      "reviewerOwnership": {
+        "metabolic": {
+          "primary": "derek-timbs",
+          "secondary": "dr-sneh-pandey",
+          "support": "wendy-delgado"
+        },
+        "adhdEval": {
+          "primary": "dr-sneh-pandey",
+          "secondary": "dr-natasha-desai"
+        },
+        "adhdMedication": {
+          "primary": "dr-swati-pandey",
+          "secondary": "dr-sneh-pandey"
+        },
+        "adhdBehavioral": {
+          "primary": "dr-natasha-desai",
+          "secondary": "megan-wunderlich"
+        },
+        "telehealthTrust": {
+          "primary": "dr-sneh-pandey",
+          "secondary": "megan-wunderlich"
+        },
+        "primaryCare": {
+          "primary": "dr-vanessa-urbina",
+          "secondary": "dr-sneh-pandey"
+        },
+        "mensHealth": {
+          "primary": "derek-timbs",
+          "secondary": "dr-sneh-pandey"
+        }
+      }
+    },
+    {
+      "@id": "https://siya.health/providers/dr-swati-pandey#physician",
+      "slug": "dr-swati-pandey",
+      "url": "https://siya.health/providers/dr-swati-pandey",
+      "name": "Dr. Swati Pandey, MD",
+      "givenName": "Swati",
+      "familyName": "Pandey",
+      "honorificPrefix": "Dr.",
+      "honorificSuffix": "MD",
+      "providerType": "physician",
+      "providerCategory": "physician",
+      "jobTitle": "Licensed Medical Provider — ADHD & Mental Health Care",
+      "worksFor": {
+        "@id": "https://siya.health/#organization"
+      },
+      "medicalSpecialty": [
+        "Adult ADHD",
+        "Mental Health",
+        "Primary Care"
+      ],
+      "hasCredential": [
+        "ADHD-CCSP (ADHD Clinical Services Provider Program)"
+      ],
+      "statesLicensed": [
+        "Pennsylvania"
+      ],
+      "conditionsTreated": [
+        "Adult ADHD",
+        "Depression",
+        "Anxiety",
+        "Complex medication histories",
+        "ADHD with anxiety and mood overlap"
+      ],
+      "image": "https://siya.health/assets/images/dr-swati-pandey.png",
+      "photoStatus": "approved",
+      "expertiseTopics": [
+        "adhd-medication",
+        "adhd-diagnosis",
+        "depression",
+        "anxiety",
+        "telehealth"
+      ],
+      "reviewerForTopics": [
+        "adhd-medication",
+        "adhd-diagnosis",
+        "depression",
+        "anxiety",
+        "telehealth"
+      ],
+      "relatedContent": [],
+      "reviewerOwnership": {
+        "metabolic": {
+          "primary": "derek-timbs",
+          "secondary": "dr-sneh-pandey",
+          "support": "wendy-delgado"
+        },
+        "adhdEval": {
+          "primary": "dr-sneh-pandey",
+          "secondary": "dr-natasha-desai"
+        },
+        "adhdMedication": {
+          "primary": "dr-swati-pandey",
+          "secondary": "dr-sneh-pandey"
+        },
+        "adhdBehavioral": {
+          "primary": "dr-natasha-desai",
+          "secondary": "megan-wunderlich"
+        },
+        "telehealthTrust": {
+          "primary": "dr-sneh-pandey",
+          "secondary": "megan-wunderlich"
+        },
+        "primaryCare": {
+          "primary": "dr-vanessa-urbina",
+          "secondary": "dr-sneh-pandey"
+        },
+        "mensHealth": {
+          "primary": "derek-timbs",
+          "secondary": "dr-sneh-pandey"
+        }
+      }
+    },
+    {
+      "@id": "https://siya.health/providers/megan-wunderlich#practitioner",
+      "slug": "megan-wunderlich",
+      "url": "https://siya.health/providers/megan-wunderlich",
+      "name": "Megan Wunderlich, FNP-C",
+      "givenName": "Megan",
+      "familyName": "Wunderlich",
+      "honorificSuffix": "FNP-C",
+      "providerType": "advanced-practice",
+      "providerCategory": "np",
+      "jobTitle": "Family Nurse Practitioner",
+      "worksFor": {
+        "@id": "https://siya.health/#organization"
+      },
+      "medicalSpecialty": [
+        "Family Medicine",
+        "Mental Health",
+        "Adult ADHD"
+      ],
+      "hasCredential": [
+        "FNP-C"
+      ],
+      "statesLicensed": [
+        "Pennsylvania"
+      ],
+      "conditionsTreated": [
+        "Adult ADHD",
+        "Anxiety",
+        "Family medicine",
+        "Chronic disease"
+      ],
+      "npi": "1629930532",
+      "image": "https://siya.health/assets/provider-placeholder.svg",
+      "photoStatus": "pending",
+      "expertiseTopics": [
+        "adhd-screening",
+        "mental-health",
+        "family-medicine",
+        "telehealth"
+      ],
+      "reviewerForTopics": [
+        "adhd-screening",
+        "mental-health",
+        "family-medicine",
+        "telehealth"
+      ],
+      "relatedContent": [],
+      "reviewerOwnership": {
+        "metabolic": {
+          "primary": "derek-timbs",
+          "secondary": "dr-sneh-pandey",
+          "support": "wendy-delgado"
+        },
+        "adhdEval": {
+          "primary": "dr-sneh-pandey",
+          "secondary": "dr-natasha-desai"
+        },
+        "adhdMedication": {
+          "primary": "dr-swati-pandey",
+          "secondary": "dr-sneh-pandey"
+        },
+        "adhdBehavioral": {
+          "primary": "dr-natasha-desai",
+          "secondary": "megan-wunderlich"
+        },
+        "telehealthTrust": {
+          "primary": "dr-sneh-pandey",
+          "secondary": "megan-wunderlich"
+        },
+        "primaryCare": {
+          "primary": "dr-vanessa-urbina",
+          "secondary": "dr-sneh-pandey"
+        },
+        "mensHealth": {
+          "primary": "derek-timbs",
+          "secondary": "dr-sneh-pandey"
+        }
+      }
+    },
+    {
+      "@id": "https://siya.health/providers/derek-timbs#practitioner",
+      "slug": "derek-timbs",
+      "url": "https://siya.health/providers/derek-timbs",
+      "name": "Derek Timbs, FNP-BC",
+      "givenName": "Derek",
+      "familyName": "Timbs",
+      "honorificSuffix": "FNP-BC",
+      "providerType": "advanced-practice",
+      "providerCategory": "np",
+      "jobTitle": "Family Nurse Practitioner",
+      "worksFor": {
+        "@id": "https://siya.health/#organization"
+      },
+      "medicalSpecialty": [
+        "Obesity Medicine",
+        "Family Medicine",
+        "Men's Health"
+      ],
+      "hasCredential": [
+        "FNP-BC"
+      ],
+      "statesLicensed": [
+        "Texas",
+        "Ohio"
+      ],
+      "conditionsTreated": [
+        "Medical weight loss",
+        "Obesity",
+        "Metabolic health",
+        "Men's health",
+        "GLP-1 therapy"
+      ],
+      "npi": "1609886910",
+      "image": "https://siya.health/assets/provider-placeholder.svg",
+      "photoStatus": "pending",
+      "expertiseTopics": [
+        "weight-loss",
+        "glp-1",
+        "mens-health",
+        "testosterone",
+        "telehealth"
+      ],
+      "reviewerForTopics": [
+        "weight-loss",
+        "glp-1",
+        "mens-health",
+        "testosterone",
+        "telehealth"
+      ],
+      "relatedContent": [],
+      "reviewerOwnership": {
+        "metabolic": {
+          "primary": "derek-timbs",
+          "secondary": "dr-sneh-pandey",
+          "support": "wendy-delgado"
+        },
+        "adhdEval": {
+          "primary": "dr-sneh-pandey",
+          "secondary": "dr-natasha-desai"
+        },
+        "adhdMedication": {
+          "primary": "dr-swati-pandey",
+          "secondary": "dr-sneh-pandey"
+        },
+        "adhdBehavioral": {
+          "primary": "dr-natasha-desai",
+          "secondary": "megan-wunderlich"
+        },
+        "telehealthTrust": {
+          "primary": "dr-sneh-pandey",
+          "secondary": "megan-wunderlich"
+        },
+        "primaryCare": {
+          "primary": "dr-vanessa-urbina",
+          "secondary": "dr-sneh-pandey"
+        },
+        "mensHealth": {
+          "primary": "derek-timbs",
+          "secondary": "dr-sneh-pandey"
+        }
+      }
+    },
+    {
+      "@id": "https://siya.health/providers/wendy-delgado#practitioner",
+      "slug": "wendy-delgado",
+      "url": "https://siya.health/providers/wendy-delgado",
+      "name": "Wendy Delgado, PA-C",
+      "givenName": "Wendy",
+      "familyName": "Delgado",
+      "honorificSuffix": "PA-C",
+      "providerType": "advanced-practice",
+      "providerCategory": "pa",
+      "jobTitle": "Physician Associate",
+      "worksFor": {
+        "@id": "https://siya.health/#organization"
+      },
+      "medicalSpecialty": [
+        "Obesity Medicine",
+        "Family Medicine"
+      ],
+      "hasCredential": [
+        "NCCPA Certified PA"
+      ],
+      "statesLicensed": [
+        "California"
+      ],
+      "conditionsTreated": [
+        "Medical weight loss",
+        "Obesity",
+        "Metabolic health",
+        "GLP-1 therapy"
+      ],
+      "npi": "1063725059",
+      "image": "https://siya.health/assets/provider-placeholder.svg",
+      "photoStatus": "pending",
+      "expertiseTopics": [
+        "weight-loss",
+        "glp-1",
+        "food-noise",
+        "patient-education",
+        "telehealth"
+      ],
+      "reviewerForTopics": [
+        "weight-loss",
+        "glp-1",
+        "food-noise",
+        "patient-education",
+        "telehealth"
+      ],
+      "relatedContent": [],
+      "reviewerOwnership": {
+        "metabolic": {
+          "primary": "derek-timbs",
+          "secondary": "dr-sneh-pandey",
+          "support": "wendy-delgado"
+        },
+        "adhdEval": {
+          "primary": "dr-sneh-pandey",
+          "secondary": "dr-natasha-desai"
+        },
+        "adhdMedication": {
+          "primary": "dr-swati-pandey",
+          "secondary": "dr-sneh-pandey"
+        },
+        "adhdBehavioral": {
+          "primary": "dr-natasha-desai",
+          "secondary": "megan-wunderlich"
+        },
+        "telehealthTrust": {
+          "primary": "dr-sneh-pandey",
+          "secondary": "megan-wunderlich"
+        },
+        "primaryCare": {
+          "primary": "dr-vanessa-urbina",
+          "secondary": "dr-sneh-pandey"
+        },
+        "mensHealth": {
+          "primary": "derek-timbs",
+          "secondary": "dr-sneh-pandey"
+        }
+      }
     }
   ],
   "conditions": [
@@ -223,8 +695,16 @@
       "hubUrl": "/weight-loss-metabolic-health",
       "knowledgeHubUrl": "/knowledge/weight-loss",
       "blogHubUrl": "/blog/weight-loss",
-      "providers": ["https://siya.health/providers/dr-sneh-pandey#physician"],
-      "subtopics": ["glp-1", "semaglutide", "tirzepatide", "phentermine", "metabolic-health"]
+      "providers": [
+        "https://siya.health/providers/dr-sneh-pandey#physician"
+      ],
+      "subtopics": [
+        "glp-1",
+        "semaglutide",
+        "tirzepatide",
+        "phentermine",
+        "metabolic-health"
+      ]
     },
     {
       "@id": "https://siya.health/conditions/low-testosterone",
@@ -233,8 +713,14 @@
       "hubUrl": "/mens-health-longevity",
       "knowledgeHubUrl": "/knowledge/mens-health",
       "blogHubUrl": "/blog/telehealth",
-      "providers": ["https://siya.health/providers/dr-sneh-pandey#physician"],
-      "subtopics": ["trt", "symptoms", "lab-testing"]
+      "providers": [
+        "https://siya.health/providers/dr-sneh-pandey#physician"
+      ],
+      "subtopics": [
+        "trt",
+        "symptoms",
+        "lab-testing"
+      ]
     }
   ],
   "stateHubs": [
@@ -249,7 +735,9 @@
         "/blog/adhd-medication-online-california",
         "/blog/adhd-telehealth-california"
       ],
-      "providers": ["https://siya.health/providers/dr-sneh-pandey#physician"]
+      "providers": [
+        "https://siya.health/providers/dr-sneh-pandey#physician"
+      ]
     },
     {
       "state": "Texas",
@@ -285,7 +773,9 @@
       "state": "Florida",
       "slug": "florida",
       "plannedUrl": "/states/florida",
-      "currentUrls": ["/adhd-diagnosis-florida"],
+      "currentUrls": [
+        "/adhd-diagnosis-florida"
+      ],
       "providers": [
         "https://siya.health/providers/dr-sneh-pandey#physician",
         "https://siya.health/providers/dr-natasha-desai#physician"
@@ -294,15 +784,41 @@
   ],
   "knowledgeHubs": {
     "planned": [
-      { "slug": "adhd", "url": "/knowledge/adhd", "replacesOrExtends": "/blog/adhd" },
-      { "slug": "weight-loss", "url": "/knowledge/weight-loss", "replacesOrExtends": "/blog/weight-loss" },
-      { "slug": "telehealth", "url": "/knowledge/telehealth", "replacesOrExtends": "/blog/telehealth" },
-      { "slug": "glp-1", "url": "/knowledge/glp-1" },
-      { "slug": "mens-health", "url": "/knowledge/mens-health" }
+      {
+        "slug": "adhd",
+        "url": "/knowledge/adhd",
+        "replacesOrExtends": "/blog/adhd"
+      },
+      {
+        "slug": "weight-loss",
+        "url": "/knowledge/weight-loss",
+        "replacesOrExtends": "/blog/weight-loss"
+      },
+      {
+        "slug": "telehealth",
+        "url": "/knowledge/telehealth",
+        "replacesOrExtends": "/blog/telehealth"
+      },
+      {
+        "slug": "glp-1",
+        "url": "/knowledge/glp-1"
+      },
+      {
+        "slug": "mens-health",
+        "url": "/knowledge/mens-health"
+      }
     ]
   },
   "citationPageTemplate": {
     "urlPattern": "/answers/{slug}",
-    "sections": ["question", "shortAnswer", "detailedAnswer", "evidence", "relatedQuestions", "reviewedBy", "lastReviewed"]
+    "sections": [
+      "question",
+      "shortAnswer",
+      "detailedAnswer",
+      "evidence",
+      "relatedQuestions",
+      "reviewedBy",
+      "lastReviewed"
+    ]
   }
 }

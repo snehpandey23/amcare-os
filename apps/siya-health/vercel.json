@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "buildCommand": "node scripts/generate-answer-pages.mjs && node scripts/internal-link-audit.mjs && node scripts/seo-build.mjs && node scripts/generate-ai-indexes.mjs && node scripts/seo-deployment-qa-report.mjs",
+  "buildCommand": "node scripts/generate-answer-pages.mjs && node scripts/apply-cannibalization-phase1.mjs && node scripts/generate-provider-pages.mjs && node scripts/generate-provider-audit-docs.mjs && node scripts/internal-link-audit.mjs && node scripts/seo-build.mjs && node scripts/generate-ai-indexes.mjs && node scripts/seo-deployment-qa-report.mjs && node scripts/cannibalization-phase1-final.mjs",
   "outputDirectory": ".",
   "installCommand": "echo 'No install needed'",
   "redirects": [

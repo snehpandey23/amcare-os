@@ -1,6 +1,6 @@
 # Link Equity Report — Canonical Winning Blogs
 
-Generated: 2026-06-05T06:13:51.248Z
+Generated: 2026-06-05T12:38:42.288Z
 
 ## Top 20 blogs needing more internal links
 
@@ -23,8 +23,8 @@ Generated: 2026-06-05T06:13:51.248Z
 | 15 | /blog/minoxidil-for-hair-loss-does-it-work | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 16 | /blog/medical-weight-loss-glp1-semaglutide-texas | 9 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 17 | /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 12 | ✓ | ✓ | ✗ | ✓ | ✓ | 4/5 |
-| 18 | /blog/glp1-side-effects-and-how-to-manage-them | 13 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
-| 19 | /blog/semaglutide-for-weight-loss-how-it-works | 13 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
+| 18 | /blog/semaglutide-for-weight-loss-how-it-works | 13 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
+| 19 | /blog/glp1-side-effects-and-how-to-manage-them | 14 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 20 | /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | 14 | ✓ | ✓ | ✗ | ✓ | ✓ | 4/5 |
 
 ## All canonical blogs
@@ -35,8 +35,8 @@ Generated: 2026-06-05T06:13:51.248Z
 | /blog/food-noise-and-glp-1-what-it-means-and-what-helps | 24 |
 | /blog/insulin-resistance-and-weight-loss-clinician-overview | 23 |
 | /blog/why-am-i-always-tired-causes-when-to-see-doctor | 21 |
+| /blog/glp1-side-effects-and-how-to-manage-them | 14 |
 | /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | 14 |
-| /blog/glp1-side-effects-and-how-to-manage-them | 13 |
 | /blog/semaglutide-for-weight-loss-how-it-works | 13 |
 | /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 12 |
 | /blog/when-is-testosterone-therapy-appropriate | 9 |

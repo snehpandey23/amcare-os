@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
 Generated: 2026-06-05
-Total pages: 154
+Total pages: 159
 
 ---
 
@@ -16,10 +16,10 @@ Total pages: 154
   "email": "care@siya.health",
   "telephone": "+1-215-445-1244",
   "medicalSpecialty": [
-    "Psychiatry",
     "Internal Medicine",
     "Family Medicine",
     "Obesity Medicine",
+    "Adult ADHD",
     "Behavioral Medicine"
   ],
   "areaServed": [
@@ -61,10 +61,22 @@ Total pages: 154
       "@id": "https://siya.health/providers/dr-sneh-pandey#physician"
     },
     {
-      "@id": "https://siya.health/providers/dr-swati-pandey#physician"
+      "@id": "https://siya.health/providers/dr-vanessa-urbina#physician"
     },
     {
       "@id": "https://siya.health/providers/dr-natasha-desai#physician"
+    },
+    {
+      "@id": "https://siya.health/providers/dr-swati-pandey#physician"
+    },
+    {
+      "@id": "https://siya.health/providers/megan-wunderlich#practitioner"
+    },
+    {
+      "@id": "https://siya.health/providers/derek-timbs#practitioner"
+    },
+    {
+      "@id": "https://siya.health/providers/wendy-delgado#practitioner"
     }
   ]
 }
@@ -84,7 +96,7 @@ Total pages: 154
 
 - Adult ADHD Diagnosis Online — Same-Week Evaluation ($199)
   URL: https://siya.health/adhd-care
-  Summary: Adult ADHD diagnosis online — same-week evaluation ($199). 60–90 min visit with board-certified providers. No insurance needed. CA, TX, PA, FL. ASRS & Creyos. Book your evaluation.
+  Summary: Primary care–led adult ADHD evaluation online — DSM-based assessment ($199). Licensed medical providers. ASRS, DIVA, Wender Utah, SWAN, optional Creyos. CA, TX, PA, FL.
   Topics: adhd
 
 - ADHD Diagnosis Austin TX | Online $199 Evaluation
@@ -802,9 +814,18 @@ Total pages: 154
   URL: https://siya.health/privacy-policy
   Summary: Siya Health privacy policy. How we collect, use, and protect your information.
 
-- Dr. Natasha Desai, MD | ADHD, Anxiety &amp; Behavioral Health
+- Our Care Team
+  URL: https://siya.health/providers
+  Summary: Meet Siya Health physicians and advanced practice providers—primary care–led ADHD, metabolic, and telehealth care across California, Texas, Pennsylvania, Florida, and Ohio.
+
+- Derek Timbs, FNP-BC | Medical Weight Loss &amp; Men's Health
+  URL: https://siya.health/providers/derek-timbs
+  Summary: Meet Derek Timbs, FNP-BC at Siya Health. GLP-1 weight loss and men's metabolic telehealth in Texas and Ohio.
+  Topics: weight-loss
+
+- Dr. Natasha Desai, MD | Adult ADHD &amp; Behavioral Medicine
   URL: https://siya.health/providers/dr-natasha-desai
-  Summary: Meet Dr. Natasha Desai—Family & Behavioral Medicine, ADHD-CCSP. Supportive telehealth for adult ADHD, emotional regulation, and anxiety overlap in TX & FL.
+  Summary: Meet Dr. Natasha Desai—Family & Behavioral Medicine physician at Siya Health. ADHD-CCSP. Adult ADHD with anxiety and emotional overlap via telehealth in TX & FL.
   Topics: adhd
 
 - Dr. Sneh Pandey, MD | Adult ADHD &amp; Metabolic Care
@@ -812,10 +833,25 @@ Total pages: 154
   Summary: Meet Dr. Sneh Pandey—Medical Director at Siya Health. Board-certified Internal Medicine, Obesity Medicine, ADHD-CCSP. Structured adult ADHD evaluations and weight-inclusive telehealth in CA, TX, PA & …
   Topics: adhd, weight-loss
 
-- Dr. Swati Pandey, MD | ADHD, Anxiety &amp; Depression
+- Dr. Swati Pandey, MD | Adult ADHD &amp; Mental Health Care
   URL: https://siya.health/providers/dr-swati-pandey
-  Summary: Meet Dr. Swati Pandey—Psychiatric & Mental Health physician, ADHD-CCSP. Depth-focused telehealth for adult ADHD with anxiety, depression, or complex psychiatric needs in Pennsylvania.
+  Summary: Meet Dr. Swati Pandey—licensed medical provider at Siya Health. ADHD-CCSP. Adult ADHD with depression, anxiety, and complex medication histories via telehealth in PA.
   Topics: adhd
+
+- Dr. Vanessa Urbina, MD | Family Medicine &amp; ADHD
+  URL: https://siya.health/providers/dr-vanessa-urbina
+  Summary: Meet Dr. Vanessa Urbina—family medicine physician at Siya Health. Adult ADHD, primary telehealth, and medical weight loss in Florida.
+  Topics: adhd
+
+- Megan Wunderlich, FNP-C | ADHD &amp; Mental Health Telehealth
+  URL: https://siya.health/providers/megan-wunderlich
+  Summary: Meet Megan Wunderlich, FNP-C at Siya Health. Mental health and family medicine telehealth with ADHD support in Pennsylvania.
+  Topics: adhd, telehealth
+
+- Wendy Delgado, PA-C | Medical Weight Loss Telehealth
+  URL: https://siya.health/providers/wendy-delgado
+  Summary: Meet Wendy Delgado, PA-C at Siya Health. GLP-1 and medical weight loss telehealth support in California.
+  Topics: weight-loss, telehealth, pennsylvania
 
 - Virtual Medical Care | Siya Health Telehealth
   URL: https://siya.health/telehealth
@@ -838,14 +874,34 @@ Total pages: 154
 ### Dr. Sneh Pandey, MD
 URL: https://siya.health/providers/dr-sneh-pandey
 Licensed: California, Texas, Pennsylvania, Florida
-Reviewer topics: adhd, weight-loss, glp-1, telehealth, metabolic
+Reviewer topics: adhd-diagnosis, adhd-medication, weight-loss, glp-1, metabolic-health, mens-health, telehealth
 
-### Dr. Swati Pandey, MD
-URL: https://siya.health/providers/dr-swati-pandey
-Licensed: Pennsylvania
-Reviewer topics: adhd-medication, adhd-psychiatric, mental-health
+### Dr. Vanessa Urbina, MD
+URL: https://siya.health/providers/dr-vanessa-urbina
+Licensed: Florida
+Reviewer topics: primary-care, adhd-diagnosis, weight-loss, lifestyle-medicine, telehealth
 
 ### Dr. Natasha Desai, MD
 URL: https://siya.health/providers/dr-natasha-desai
 Licensed: Texas, Florida
-Reviewer topics: adhd-symptoms, adhd-anxiety, behavioral-health, sleep
+Reviewer topics: adhd-diagnosis, adhd-anxiety, behavioral-health, burnout, telehealth
+
+### Dr. Swati Pandey, MD
+URL: https://siya.health/providers/dr-swati-pandey
+Licensed: Pennsylvania
+Reviewer topics: adhd-medication, adhd-diagnosis, depression, anxiety, telehealth
+
+### Megan Wunderlich, FNP-C
+URL: https://siya.health/providers/megan-wunderlich
+Licensed: Pennsylvania
+Reviewer topics: adhd-screening, mental-health, family-medicine, telehealth
+
+### Derek Timbs, FNP-BC
+URL: https://siya.health/providers/derek-timbs
+Licensed: Texas, Ohio
+Reviewer topics: weight-loss, glp-1, mens-health, testosterone, telehealth
+
+### Wendy Delgado, PA-C
+URL: https://siya.health/providers/wendy-delgado
+Licensed: California
+Reviewer topics: weight-loss, glp-1, food-noise, patient-education, telehealth

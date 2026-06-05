@@ -22,10 +22,15 @@
 - Telehealth articles: https://siya.health/blog/telehealth
 - All articles: https://siya.health/blog/all
 
-## Providers (Physician entities)
+## Providers (care team hub)
+- All providers: https://siya.health/providers
 - Dr. Sneh Pandey, MD — Medical Director (CA, TX, PA, FL): https://siya.health/providers/dr-sneh-pandey
-- Dr. Swati Pandey, MD — Psychiatry / ADHD (PA): https://siya.health/providers/dr-swati-pandey
+- Dr. Vanessa Urbina, MD — Family medicine / ADHD (FL): https://siya.health/providers/dr-vanessa-urbina
 - Dr. Natasha Desai, MD — Behavioral / ADHD (TX, FL): https://siya.health/providers/dr-natasha-desai
+- Dr. Swati Pandey, MD — Psychiatry / ADHD (PA): https://siya.health/providers/dr-swati-pandey
+- Megan Wunderlich, FNP-C — ADHD & mental health (PA): https://siya.health/providers/megan-wunderlich
+- Derek Timbs, FNP-BC — Weight loss & men's health (TX, OH): https://siya.health/providers/derek-timbs
+- Wendy Delgado, PA-C — Medical weight loss (CA): https://siya.health/providers/wendy-delgado
 
 ## Machine-readable indexes
 - Full page index: https://siya.health/article-index.json

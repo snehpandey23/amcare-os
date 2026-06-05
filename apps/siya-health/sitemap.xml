@@ -148,9 +148,14 @@
   <url><loc>https://siya.health/prescriptions</loc><lastmod>2026-06-05</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
   <url><loc>https://siya.health/primary-urgent-care</loc><lastmod>2026-06-05</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
   <url><loc>https://siya.health/privacy-policy</loc><lastmod>2026-06-05</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://siya.health/providers</loc><lastmod>2026-06-05</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://siya.health/providers/derek-timbs</loc><lastmod>2026-06-05</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://siya.health/providers/dr-natasha-desai</loc><lastmod>2026-06-05</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://siya.health/providers/dr-sneh-pandey</loc><lastmod>2026-06-05</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://siya.health/providers/dr-swati-pandey</loc><lastmod>2026-06-05</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://siya.health/providers/dr-vanessa-urbina</loc><lastmod>2026-06-05</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://siya.health/providers/megan-wunderlich</loc><lastmod>2026-06-05</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://siya.health/providers/wendy-delgado</loc><lastmod>2026-06-05</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://siya.health/telehealth</loc><lastmod>2026-06-05</lastmod><changefreq>monthly</changefreq><priority>0.95</priority></url>
   <url><loc>https://siya.health/terms</loc><lastmod>2026-06-05</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
   <url><loc>https://siya.health/weight-loss-metabolic-health</loc><lastmod>2026-06-05</lastmod><changefreq>monthly</changefreq><priority>0.95</priority></url>

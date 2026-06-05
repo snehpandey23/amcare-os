@@ -9,6 +9,7 @@ import {
   getBlogReviewMeta,
   getAnswerReviewMeta,
 } from '../data/content-review-registry.mjs';
+import { getProviderBySlug as getProviderFromData, toEntityGraphProvider } from '../data/providers.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BASE = 'https://siya.health';
@@ -24,6 +25,8 @@ export function loadEntityGraph() {
 }
 
 export function getProviderBySlug(slug) {
+  const fromData = getProviderFromData(slug);
+  if (fromData) return toEntityGraphProvider(fromData);
   return loadEntityGraph().providers.find((p) => p.slug === slug);
 }
 
@@ -58,12 +61,14 @@ export function formatReviewDate(iso = LAST_REVIEWED) {
 }
 
 export function physicianReviewedBy(reviewer) {
+  const suffix = reviewer.honorificSuffix || (reviewer.honorificPrefix ? 'MD' : undefined);
+  const name = reviewer.name || `${reviewer.givenName} ${reviewer.familyName}`;
   return {
     '@type': 'Physician',
     '@id': reviewer['@id'],
-    name: `${reviewer.givenName} ${reviewer.familyName}`,
-    honorificPrefix: reviewer.honorificPrefix || 'Dr.',
-    honorificSuffix: 'MD',
+    name,
+    ...(reviewer.honorificPrefix ? { honorificPrefix: reviewer.honorificPrefix } : {}),
+    ...(suffix ? { honorificSuffix: suffix } : {}),
     url: reviewer.url,
   };
 }
