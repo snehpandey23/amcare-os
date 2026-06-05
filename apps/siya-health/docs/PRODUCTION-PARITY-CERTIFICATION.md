@@ -2,7 +2,7 @@
 
 **Site:** https://www.siya.health  
 **Branch target:** `main` (latest audited parity sprint)  
-**Certified at:** 2026-06-04T12:15:25.583Z  
+**Certified at:** 2026-06-05T05:49:29.972Z  
 **Overall:** **PASS**
 
 Target state display: `California • Texas • Pennsylvania • Florida` or prose `California, Texas, Pennsylvania, and Florida`
