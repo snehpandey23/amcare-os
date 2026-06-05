@@ -3,6 +3,16 @@
  */
 import { LEGAL_HUB, LEGAL_PATHS } from './legal-documents.mjs';
 
+import { LEGAL_EFFECTIVE_DATE as LEGAL_EFFECTIVE_DATE_ISO } from './legal-documents.mjs';
+
+/** Counsel-approved effective date for published legal documents. */
+export const LEGAL_EFFECTIVE_DATE = LEGAL_EFFECTIVE_DATE_ISO;
+export const LEGAL_EFFECTIVE_DATE_DISPLAY = 'October 31, 2025';
+
+/** Canonical Inc./PLLC administrative vs clinical split — required on legal surfaces. */
+export const CANONICAL_ENTITY_STATEMENT =
+  'Siya Health Inc. provides administrative and non-clinical support services. Medical services are provided by Siya Healthcare, PLLC through licensed clinicians.';
+
 /** Organizational clinical service footprint — controls where Siya Healthcare, PLLC offers telehealth. */
 export const AVAILABLE_SERVICE_STATES = ['California', 'Texas', 'Pennsylvania', 'Florida'];
 
@@ -53,7 +63,9 @@ export const LEGAL_LINKS = {
   noticeOfPrivacy: LEGAL_PATHS['notice-of-privacy-practices'],
   telehealthConsent: LEGAL_PATHS['telehealth-consent'],
   cookie: LEGAL_PATHS['cookie-policy'],
-  controlledSubstance: LEGAL_PATHS['controlled-substance-policy'],
+  controlledSubstanceTreatment: LEGAL_PATHS['controlled-substance-treatment-agreement'],
+  /** @deprecated Use controlledSubstanceTreatment */
+  controlledSubstance: LEGAL_PATHS['controlled-substance-treatment-agreement'],
   prescription: LEGAL_PATHS['prescription-policy'],
   /** Legacy paths — redirect via vercel.json until cutover complete */
   legacyTerms: '/terms',
@@ -99,4 +111,8 @@ export const ADHD_POSITIONING = {
     'Diagnosis does not guarantee medication. Evaluation does not guarantee medication. Medication does not guarantee stimulants. Stimulant prescribing is never guaranteed.',
   metaDescription:
     'Primary care–led adult ADHD evaluation online — DSM-based assessment ($199). Licensed medical providers. Individualized validated tools as clinically appropriate. CA, TX, PA, FL.',
+  stimulantCaveat:
+    'Medication, including stimulant medication, is not guaranteed and depends on clinical judgment, state law, safety considerations, and medical appropriateness.',
+  screeningNotDiagnosis:
+    'Screening is not diagnosis. Assessment tools support clinical evaluation but do not independently establish a diagnosis.',
 };

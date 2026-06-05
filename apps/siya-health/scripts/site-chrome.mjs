@@ -22,6 +22,7 @@ import {
   resolveProviderPhoto,
   stateChipLabel,
 } from '../data/providers.mjs';
+import { buildClientIntakeConfig, GHL_BOOKING_URL } from '../data/ghl-intake-config.mjs';
 
 function escAttr(s) {
   return String(s)
@@ -70,6 +71,25 @@ const ADHD_FUNNEL_PATH = [
 export function isAdhdFunnelPage(relPath) {
   if (ADHD_FUNNEL_PATH.some((re) => re.test(relPath))) return true;
   if (/^blog\/.+adhd/i.test(relPath)) return true;
+  return false;
+}
+
+/** ADHD funnels that require the extended screening/medication disclaimer in legal gate */
+export function isAdhdLegalContext(relPath) {
+  if (isAdhdFunnelPage(relPath)) return true;
+  if (/^answers\/.*adhd/i.test(relPath)) return true;
+  return false;
+}
+
+/** Pages that must link to the Controlled Substance Treatment Agreement */
+export function isControlledSubstanceLinkPage(relPath) {
+  if (isAdhdFunnelPage(relPath) || isAdhdLegalContext(relPath)) return true;
+  if (/^adhd-diagnosis-/.test(relPath)) return true;
+  if (relPath === 'membership-pricing.html' || relPath === 'adhd-evaluation-cost.html') return true;
+  if (/^blog\/.+adhd/i.test(relPath)) return true;
+  if (/^blog\/.*(medication|vyvanse|adderall|focalin|stimulant|ritalin|prescribed-online)/i.test(relPath)) {
+    return true;
+  }
   return false;
 }
 
@@ -429,15 +449,55 @@ function fixDuplicateCalifornia(html) {
   return html;
 }
 
-/** Point legacy adhd.siya.health legal URLs to on-site pages. */
+/** Standard Legal column for sitewide footers — driven by LEGAL_LINKS registry. */
+export function renderLegalFooter({ includeControlledSubstance = false } = {}) {
+  const csLink = includeControlledSubstance
+    ? `<p><a href="${LEGAL_LINKS.controlledSubstanceTreatment}">Controlled Substance Treatment Agreement</a></p>`
+    : '';
+  return `<div><h4>Legal</h4>
+          <p><a href="${LEGAL_LINKS.hub}">Legal &amp; Compliance</a></p>
+          <p><a href="${LEGAL_LINKS.terms}">Terms of Use</a></p>
+          <p><a href="${LEGAL_LINKS.privacy}">Privacy Policy</a></p>
+          <p><a href="${LEGAL_LINKS.noticeOfPrivacy}">Notice of Privacy Practices</a></p>
+          <p><a href="${LEGAL_LINKS.cookie}">Cookie Policy</a></p>
+          ${csLink}</div>`;
+}
+
+/** Point legacy URLs to registry-driven /legal/* paths; standardize labels. */
 export function normalizeLegalLinks(html) {
   html = html.replaceAll('https://adhd.siya.health/privacy-policy', LEGAL_LINKS.privacy);
   html = html.replaceAll('https://adhd.siya.health/terms-of-service', LEGAL_LINKS.terms);
   html = html.replaceAll('https://adhd.siya.health/notice-of-privacy-practices', LEGAL_LINKS.noticeOfPrivacy);
+
+  // False NPP → privacy (legacy path and link-cards on /legal/privacy-policy)
+  html = html.replace(
+    /href="\/privacy-policy"([^>]*)>Notice of Privacy Practices/gi,
+    `href="${LEGAL_LINKS.noticeOfPrivacy}"$1>Notice of Privacy Practices`,
+  );
+  html = html.replace(
+    /<a([^>]*)\bhref="(?:\/privacy-policy|\/legal\/privacy-policy)"([^>]*)>([\s\S]*?<h4>\s*Notice of Privacy Practices\s*<\/h4>)/gi,
+    `<a$1href="${LEGAL_LINKS.noticeOfPrivacy}"$2>$3`,
+  );
+
+  html = html.replaceAll('href="/terms"', `href="${LEGAL_LINKS.terms}"`);
+  html = html.replaceAll('href="/privacy-policy"', `href="${LEGAL_LINKS.privacy}"`);
+
+  html = html.replaceAll('Terms &amp; Conditions', 'Terms of Use');
+  html = html.replace(/(<a[^>]*href="[^"]*\/legal\/terms-of-use"[^>]*>)\s*Terms\s*(<\/a>)/gi, '$1Terms of Use$2');
+  html = html.replace(
+    /(<a[^>]*href="[^"]*\/legal\/terms-of-use"[^>]*>)\s*Terms of Service\s*(<\/a>)/gi,
+    '$1Terms of Use$2',
+  );
+
+  html = html.replace(
+    /href="(\/legal\/[^"]+)"([^>]*)\s+target="_blank"\s+rel="noopener"/gi,
+    'href="$1"$2',
+  );
   html = html.replace(
     /href="(\/privacy-policy|\/terms)"([^>]*)\s+target="_blank"\s+rel="noopener"/gi,
     'href="$1"$2',
   );
+
   return html;
 }
 
@@ -514,7 +574,7 @@ export function normalizeSitewideCopy(html) {
   return html;
 }
 
-export function injectFooterChrome(html) {
+export function injectFooterChrome(html, relPath = '') {
   if (!html.includes('<footer')) return html;
 
   if (html.includes('class="footer-brand"')) {
@@ -555,7 +615,31 @@ export function injectFooterChrome(html) {
     }
   }
 
+  const includeCs = relPath ? isControlledSubstanceLinkPage(relPath) : false;
+  if (html.includes('<h4>Legal</h4>')) {
+    html = html.replace(/<div>\s*<h4>Legal<\/h4>[\s\S]*?<\/div>/i, renderLegalFooter({ includeControlledSubstance: includeCs }));
+  } else if (html.includes('footer-grid')) {
+    const legalBlock = renderLegalFooter({ includeControlledSubstance: includeCs });
+    html = html.replace(
+      /(\s*<\/div>\s*<div class="container">\s*<p class="footer-notice">)/i,
+      `\n        ${legalBlock}$1`,
+    );
+  }
+
   return html;
+}
+
+/** Non-blocking cookie notice — localStorage acceptance only */
+export function injectCookieNotice(html, relPath) {
+  if (isLegalContentPage(relPath)) return html;
+  if (html.includes('cookie-notice.js')) return html;
+  const block = `<!-- SIYA:COOKIE-NOTICE -->
+    <script src="/scripts/cookie-notice.js" defer></script>
+    <!-- /SIYA:COOKIE-NOTICE -->`;
+  if (html.includes('<!-- /SIYA:GHL-LEGAL-ACCEPTANCE -->')) {
+    return html.replace('<!-- /SIYA:GHL-LEGAL-ACCEPTANCE -->', `<!-- /SIYA:GHL-LEGAL-ACCEPTANCE -->\n${block}`);
+  }
+  return html.replace(/<\/body>/i, `${block}\n</body>`);
 }
 
 export function injectLearnMoreSections(html, relPath) {
@@ -891,19 +975,54 @@ export function injectContinueReading(html, relPath, title, auditIndex) {
   return html.replace(/<\/div>\s*<\/div>\s*<\/article>/, `${block}\n          </div>\n        </div>\n      </article>`);
 }
 
+function isLegalContentPage(relPath) {
+  return relPath.startsWith('legal/');
+}
+
+/** Sitewide clickwrap gate before external GHL intake/booking links */
+export function injectGhlLegalAcceptance(html, relPath) {
+  if (isLegalContentPage(relPath)) return html;
+  if (html.includes('ghl-legal-acceptance.js')) return html;
+
+  if (isAdhdLegalContext(relPath)) {
+    html = html.replace(/<body([^>]*)>/i, (match, attrs) => {
+      if (/\bdata-siya-funnel=/i.test(attrs)) return match;
+      return `<body${attrs} data-siya-funnel="adhd">`;
+    });
+  }
+
+  const config = buildClientIntakeConfig();
+  const configScript = `<script>window.SIYA_GHL_INTAKE=${JSON.stringify(config)};</script>`;
+  const loader = `<script src="/scripts/ghl-legal-acceptance.js" defer></script>`;
+  const block = `<!-- SIYA:GHL-LEGAL-ACCEPTANCE -->\n${configScript}\n${loader}\n<!-- /SIYA:GHL-LEGAL-ACCEPTANCE -->`;
+
+  if (html.includes('<!-- /SIYA:PROVIDER-ATTRIBUTION -->')) {
+    return html.replace('<!-- /SIYA:PROVIDER-ATTRIBUTION -->', `<!-- /SIYA:PROVIDER-ATTRIBUTION -->\n${block}`);
+  }
+  return html.replace(/<\/body>/i, `${block}\n</body>`);
+}
+
 export function applySiteChrome(html, relPath, title = '') {
+  if (isLegalContentPage(relPath)) {
+    html = injectFooterChrome(html, relPath);
+    html = normalizeLegalLinks(html);
+    return html;
+  }
+
   const auditIndex = loadContinueReadingIndex();
   html = injectNavCta(html, relPath);
   html = injectSitewideCtas(html, relPath);
   html = injectProvidersNav(html);
   html = injectAnswersNav(html);
-  html = injectFooterChrome(html);
+  html = injectFooterChrome(html, relPath);
   html = injectLearnMoreSections(html, relPath);
   html = injectHomepageCareTeam(html, relPath);
   html = injectAboutProviderHub(html, relPath);
   html = injectMeetPhysiciansSection(html, relPath);
   html = injectContinueReading(html, relPath, title, auditIndex);
   html = injectProviderAttribution(html);
+  html = injectGhlLegalAcceptance(html, relPath);
+  html = injectCookieNotice(html, relPath);
   html = normalizeLegalLinks(html);
   html = normalizeSitewideCopy(html);
   return html;
