@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-04",
+  "generated": "2026-06-05",
   "totalPages": 154,
   "zeroInbound": [
     "/privacy-policy",
@@ -51,7 +51,7 @@
       "count": 2
     },
     {
-      "path": "/answers/high-shbg-low-free-testosterone",
+      "path": "/answers/oral-vs-injectable-weight-loss-meds",
       "count": 2
     },
     {
@@ -71,10 +71,6 @@
       "count": 2
     },
     {
-      "path": "/blog/adhd-telehealth-california",
-      "count": 2
-    },
-    {
       "path": "/blog/after-adhd-diagnosis-next-steps-adults",
       "count": 2
     },
@@ -84,10 +80,6 @@
     },
     {
       "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
-      "count": 2
-    },
-    {
-      "path": "/blog/compounded-vs-branded-glp1-medications",
       "count": 2
     },
     {
@@ -108,22 +100,6 @@
     },
     {
       "path": "/blog/long-term-weight-loss-medications-what-to-expect",
-      "count": 2
-    },
-    {
-      "path": "/blog/oral-vs-injectable-weight-loss-medications",
-      "count": 2
-    },
-    {
-      "path": "/blog/oral-vs-topical-minoxidil-which-is-right",
-      "count": 2
-    },
-    {
-      "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
-      "count": 2
-    },
-    {
-      "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "count": 2
     }
   ],
@@ -191,24 +167,24 @@
       {
         "p": "/answers/adderall-vs-vyvanse-adults",
         "score": 9,
-        "title": "Adderall vs Vyvanse for adults: what is the difference?"
+        "title": "When might Vyvanse be preferred over Adderall for adults?"
       },
       {
-        "p": "/answers/adhd-and-weight-loss-connection",
-        "score": 7,
-        "title": "Is there a connection between ADHD and weight loss struggles?"
+        "p": "/answers/is-adhd-medication-safe-long-term",
+        "score": 8,
+        "title": "What does long-term ADHD medication safety monitoring include?"
       },
       {
-        "p": "/answers/medical-weight-loss-vs-dieting",
+        "p": "/answers/phentermine-weight-loss-safety",
         "score": 3,
-        "title": "Medical weight loss vs dieting: what works better?"
+        "title": "Who should avoid phentermine for weight loss?"
       }
     ],
     "/blog/adderall-ir-vs-xr-adults": [
       {
         "p": "/answers/adderall-vs-vyvanse-adults",
         "score": 11,
-        "title": "Adderall vs Vyvanse for adults: what is the difference?"
+        "title": "When might Vyvanse be preferred over Adderall for adults?"
       },
       {
         "p": "/answers/late-adhd-diagnosis-adults",
@@ -236,6 +212,11 @@
         "p": "/answers/how-online-prescriptions-work",
         "score": 4,
         "title": "How do online prescriptions work legally?"
+      },
+      {
+        "p": "/answers/when-is-testosterone-therapy-appropriate",
+        "score": 3,
+        "title": "What symptoms warrant testosterone therapy evaluation?"
       }
     ],
     "/blog/adhd-evaluation-cost-california": [
@@ -250,9 +231,9 @@
         "title": "How long does an ADHD evaluation take?"
       },
       {
-        "p": "/answers/screening-vs-adhd-evaluation",
-        "score": 9,
-        "title": "What is the difference between ADHD screening and a full evaluation?"
+        "p": "/answers/when-is-testosterone-therapy-appropriate",
+        "score": 3,
+        "title": "What symptoms warrant testosterone therapy evaluation?"
       }
     ],
     "/blog/adhd-evaluation-cost-texas": [
@@ -267,9 +248,9 @@
         "title": "How long does an ADHD evaluation take?"
       },
       {
-        "p": "/answers/screening-vs-adhd-evaluation",
-        "score": 9,
-        "title": "What is the difference between ADHD screening and a full evaluation?"
+        "p": "/answers/when-is-testosterone-therapy-appropriate",
+        "score": 3,
+        "title": "What symptoms warrant testosterone therapy evaluation?"
       }
     ],
     "/blog/adhd-medication-daily-or-as-needed-adults": [
@@ -287,6 +268,11 @@
         "p": "/answers/signs-of-sleep-apnea-in-adults",
         "score": 4,
         "title": "What are the signs of sleep apnea in adults?"
+      },
+      {
+        "p": "/answers/oral-vs-injectable-weight-loss-meds",
+        "score": 3,
+        "title": "When might oral weight-loss medication be preferred over injectable GLP-1?"
       }
     ],
     "/blog/adhd-medication-online-california": [
@@ -304,6 +290,11 @@
         "p": "/answers/how-online-prescriptions-work",
         "score": 4,
         "title": "How do online prescriptions work legally?"
+      },
+      {
+        "p": "/answers/oral-vs-injectable-weight-loss-meds",
+        "score": 3,
+        "title": "When might oral weight-loss medication be preferred over injectable GLP-1?"
       }
     ],
     "/blog/adhd-medication-online-texas-telehealth": [
@@ -328,9 +319,9 @@
         "title": "How do online prescriptions work legally?"
       },
       {
-        "p": "/answers/phentermine-weight-loss-safety",
+        "p": "/answers/oral-vs-injectable-weight-loss-meds",
         "score": 3,
-        "title": "Is phentermine safe for weight loss?"
+        "title": "When might oral weight-loss medication be preferred over injectable GLP-1?"
       }
     ],
     "/blog/adhd-medication-options-california": [
@@ -348,6 +339,11 @@
         "p": "/blog/insomnia-treatment-options-beyond-medication",
         "score": 4,
         "title": "Insomnia Treatment Options Beyond Medication (2026)"
+      },
+      {
+        "p": "/answers/oral-vs-injectable-weight-loss-meds",
+        "score": 3,
+        "title": "When might oral weight-loss medication be preferred over injectable GLP-1?"
       }
     ],
     "/blog/adhd-medication-options-for-adults": [
@@ -365,13 +361,18 @@
         "p": "/answers/signs-of-sleep-apnea-in-adults",
         "score": 4,
         "title": "What are the signs of sleep apnea in adults?"
+      },
+      {
+        "p": "/answers/oral-vs-injectable-weight-loss-meds",
+        "score": 3,
+        "title": "When might oral weight-loss medication be preferred over injectable GLP-1?"
       }
     ],
     "/blog/adhd-medication-side-effects-what-to-expect": [
       {
         "p": "/answers/adhd-medication-side-effects",
         "score": 11,
-        "title": "What are common ADHD medication side effects?"
+        "title": "What ADHD medication side effects are most common in the first weeks?"
       },
       {
         "p": "/answers/starting-adhd-medication-adults",
@@ -381,12 +382,7 @@
       {
         "p": "/answers/glp-1-side-effects",
         "score": 4,
-        "title": "What are GLP-1 side effects?"
-      },
-      {
-        "p": "/answers/sildenafil-erectile-dysfunction-expectations",
-        "score": 3,
-        "title": "What should you expect from sildenafil for erectile dysfunction?"
+        "title": "Which GLP-1 side effects usually improve with titration?"
       }
     ],
     "/blog/adhd-symptoms-overlooked": [
@@ -401,9 +397,9 @@
         "title": "Adult ADHD Symptoms in California: Patterns Worth Taking Seriously"
       },
       {
-        "p": "/adult-adhd-diagnosis",
-        "score": 8,
-        "title": "Adult ADHD Diagnosis Online | $199 Evaluation"
+        "p": "/answers/trt-monitoring-requirements",
+        "score": 3,
+        "title": "How often is TRT monitoring required?"
       }
     ],
     "/blog/adhd-telehealth-california": [
@@ -428,9 +424,9 @@
         "title": "Is telehealth legitimate for medical care?"
       },
       {
-        "p": "/answers/medical-weight-loss-vs-dieting",
+        "p": "/answers/semaglutide-weight-loss-how-it-works",
         "score": 3,
-        "title": "Medical weight loss vs dieting: what works better?"
+        "title": "How quickly does semaglutide start working for weight loss?"
       }
     ],
     "/blog/adhd-testing-online-california-screening-vs-evaluation": [
@@ -448,6 +444,11 @@
         "p": "/answers/how-online-prescriptions-work",
         "score": 4,
         "title": "How do online prescriptions work legally?"
+      },
+      {
+        "p": "/answers/when-is-testosterone-therapy-appropriate",
+        "score": 3,
+        "title": "What symptoms warrant testosterone therapy evaluation?"
       }
     ],
     "/blog/adhd-treatment-houston-online": [
@@ -489,9 +490,9 @@
         "title": "How does ADHD telehealth work in California?"
       },
       {
-        "p": "/blog/adult-adhd-treatment-california-2026",
-        "score": 9,
-        "title": "Adult ADHD Treatment in California: Options in 2026"
+        "p": "/answers/when-is-testosterone-therapy-appropriate",
+        "score": 3,
+        "title": "What symptoms warrant testosterone therapy evaluation?"
       }
     ],
     "/blog/adult-adhd-treatment-california-2026": [
@@ -520,7 +521,7 @@
       {
         "p": "/answers/adderall-vs-vyvanse-adults",
         "score": 9,
-        "title": "Adderall vs Vyvanse for adults: what is the difference?"
+        "title": "When might Vyvanse be preferred over Adderall for adults?"
       },
       {
         "p": "/answers/afternoon-energy-crash-after-lunch",
@@ -552,12 +553,12 @@
       {
         "p": "/answers/non-stimulant-adhd-medications",
         "score": 4,
-        "title": "What non-stimulant ADHD medications exist for adults?"
+        "title": "When are non-stimulant ADHD medications considered first?"
       },
       {
-        "p": "/answers/oral-vs-injectable-weight-loss-meds",
+        "p": "/answers/who-qualifies-glp-1-weight-loss",
         "score": 3,
-        "title": "Oral vs injectable weight loss medications: pros and cons?"
+        "title": "Who qualifies for GLP-1 weight loss medications?"
       }
     ],
     "/blog/combining-adhd-treatment-and-weight-loss-strategies": [
@@ -574,31 +575,31 @@
       {
         "p": "/answers/medical-weight-loss-vs-dieting",
         "score": 4,
-        "title": "Medical weight loss vs dieting: what works better?"
+        "title": "When does medical weight loss outperform dieting alone?"
       }
     ],
     "/blog/compounded-vs-branded-glp1-medications": [
       {
         "p": "/answers/compounded-vs-branded-glp-1",
         "score": 11,
-        "title": "Compounded vs branded GLP-1: what is the difference?"
+        "title": "What should you ask about compounded vs branded GLP-1?"
       },
       {
-        "p": "/answers/oral-vs-injectable-weight-loss-meds",
+        "p": "/answers/phentermine-weight-loss-safety",
         "score": 8,
-        "title": "Oral vs injectable weight loss medications: pros and cons?"
+        "title": "Who should avoid phentermine for weight loss?"
       },
       {
         "p": "/answers/non-stimulant-adhd-medications",
         "score": 4,
-        "title": "What non-stimulant ADHD medications exist for adults?"
+        "title": "When are non-stimulant ADHD medications considered first?"
       }
     ],
     "/blog/focalin-vs-adderall-comparison": [
       {
         "p": "/answers/adderall-vs-vyvanse-adults",
         "score": 9,
-        "title": "Adderall vs Vyvanse for adults: what is the difference?"
+        "title": "When might Vyvanse be preferred over Adderall for adults?"
       },
       {
         "p": "/answers/adhd-and-weight-loss-connection",
@@ -625,7 +626,7 @@
       {
         "p": "/answers/compounded-vs-branded-glp-1",
         "score": 7,
-        "title": "Compounded vs branded GLP-1: what is the difference?"
+        "title": "What should you ask about compounded vs branded GLP-1?"
       }
     ],
     "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know": [
@@ -643,13 +644,18 @@
         "p": "/answers/testosterone-and-adhd-overlap",
         "score": 4,
         "title": "Can low testosterone mimic ADHD?"
+      },
+      {
+        "p": "/answers/compounded-vs-branded-glp-1",
+        "score": 3,
+        "title": "What should you ask about compounded vs branded GLP-1?"
       }
     ],
     "/blog/glp1-side-effects-and-how-to-manage-them": [
       {
         "p": "/answers/glp-1-side-effects",
         "score": 9,
-        "title": "What are GLP-1 side effects?"
+        "title": "Which GLP-1 side effects usually improve with titration?"
       },
       {
         "p": "/answers/glp-1-nausea-management",
@@ -659,7 +665,7 @@
       {
         "p": "/answers/adhd-medication-side-effects",
         "score": 4,
-        "title": "What are common ADHD medication side effects?"
+        "title": "What ADHD medication side effects are most common in the first weeks?"
       }
     ],
     "/blog/glutathione-and-peptides-what-do-they-actually-do": [],
@@ -670,9 +676,9 @@
         "title": "Can you get ADHD medication online?"
       },
       {
-        "p": "/blog/adhd-medication-online-texas-telehealth",
+        "p": "/answers/is-adhd-medication-safe-long-term",
         "score": 10,
-        "title": "Can You Get ADHD Medication Online in Texas? Rules &amp; Safety"
+        "title": "What does long-term ADHD medication safety monitoring include?"
       },
       {
         "p": "/answers/how-online-prescriptions-work",
@@ -680,21 +686,21 @@
         "title": "How do online prescriptions work legally?"
       },
       {
-        "p": "/answers/phentermine-weight-loss-safety",
+        "p": "/answers/oral-vs-injectable-weight-loss-meds",
         "score": 3,
-        "title": "Is phentermine safe for weight loss?"
+        "title": "When might oral weight-loss medication be preferred over injectable GLP-1?"
       }
     ],
     "/blog/how-mental-health-affects-weight-loss-outcomes": [
       {
         "p": "/answers/medical-weight-loss-vs-dieting",
         "score": 9,
-        "title": "Medical weight loss vs dieting: what works better?"
+        "title": "When does medical weight loss outperform dieting alone?"
       },
       {
         "p": "/answers/oral-vs-injectable-weight-loss-meds",
         "score": 9,
-        "title": "Oral vs injectable weight loss medications: pros and cons?"
+        "title": "When might oral weight-loss medication be preferred over injectable GLP-1?"
       },
       {
         "p": "/answers/adhd-and-weight-loss-connection",
@@ -721,7 +727,7 @@
       {
         "p": "/answers/adderall-vs-vyvanse-adults",
         "score": 7,
-        "title": "Adderall vs Vyvanse for adults: what is the difference?"
+        "title": "When might Vyvanse be preferred over Adderall for adults?"
       }
     ],
     "/blog/how-to-know-if-you-have-adhd-adult": [
@@ -773,18 +779,23 @@
         "p": "/answers/adhd-medication-every-day",
         "score": 4,
         "title": "Do you have to take ADHD medication every day?"
+      },
+      {
+        "p": "/answers/oral-vs-injectable-weight-loss-meds",
+        "score": 3,
+        "title": "When might oral weight-loss medication be preferred over injectable GLP-1?"
       }
     ],
     "/blog/insulin-resistance-and-weight-loss-clinician-overview": [
       {
         "p": "/answers/medical-weight-loss-vs-dieting",
         "score": 9,
-        "title": "Medical weight loss vs dieting: what works better?"
+        "title": "When does medical weight loss outperform dieting alone?"
       },
       {
         "p": "/answers/oral-vs-injectable-weight-loss-meds",
         "score": 9,
-        "title": "Oral vs injectable weight loss medications: pros and cons?"
+        "title": "When might oral weight-loss medication be preferred over injectable GLP-1?"
       },
       {
         "p": "/answers/insulin-resistance-without-diabetes",
@@ -799,26 +810,31 @@
     ],
     "/blog/is-adhd-medication-safe-long-term": [
       {
+        "p": "/answers/is-adhd-medication-safe-long-term",
+        "score": 10,
+        "title": "What does long-term ADHD medication safety monitoring include?"
+      },
+      {
         "p": "/answers/adhd-medication-every-day",
         "score": 9,
         "title": "Do you have to take ADHD medication every day?"
       },
       {
-        "p": "/answers/adhd-medication-side-effects",
-        "score": 9,
-        "title": "What are common ADHD medication side effects?"
-      },
-      {
         "p": "/answers/trt-monitoring-requirements",
         "score": 4,
-        "title": "What monitoring is required on testosterone therapy?"
+        "title": "How often is TRT monitoring required?"
+      },
+      {
+        "p": "/answers/oral-vs-injectable-weight-loss-meds",
+        "score": 3,
+        "title": "When might oral weight-loss medication be preferred over injectable GLP-1?"
       }
     ],
     "/blog/is-online-adhd-diagnosis-legit": [
       {
         "p": "/answers/is-online-adhd-diagnosis-legitimate",
-        "score": 11,
-        "title": "Is online ADHD diagnosis legitimate?"
+        "score": 12,
+        "title": "What should you look for in a legitimate online ADHD diagnosis?"
       },
       {
         "p": "/adult-adhd-diagnosis",
@@ -834,28 +850,28 @@
         "p": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
         "score": 4,
         "title": "Free Testosterone vs Total Testosterone: What Patients Should Know"
+      },
+      {
+        "p": "/answers/compounded-vs-branded-glp-1",
+        "score": 3,
+        "title": "What should you ask about compounded vs branded GLP-1?"
       }
     ],
     "/blog/long-term-weight-loss-medications-what-to-expect": [
-      {
-        "p": "/answers/oral-vs-injectable-weight-loss-meds",
-        "score": 10,
-        "title": "Oral vs injectable weight loss medications: pros and cons?"
-      },
       {
         "p": "/answers/who-qualifies-glp-1-weight-loss",
         "score": 10,
         "title": "Who qualifies for GLP-1 weight loss medications?"
       },
       {
+        "p": "/answers/medical-weight-loss-vs-dieting",
+        "score": 9,
+        "title": "When does medical weight loss outperform dieting alone?"
+      },
+      {
         "p": "/answers/adhd-and-weight-loss-connection",
         "score": 4,
         "title": "Is there a connection between ADHD and weight loss struggles?"
-      },
-      {
-        "p": "/answers/sildenafil-erectile-dysfunction-expectations",
-        "score": 3,
-        "title": "What should you expect from sildenafil for erectile dysfunction?"
       }
     ],
     "/blog/medical-weight-loss-glp1-semaglutide-texas": [
@@ -865,9 +881,9 @@
         "title": "Medical Weight Loss vs Dieting: What Actually Works in 2026"
       },
       {
-        "p": "/answers/medical-weight-loss-vs-dieting",
+        "p": "/answers/semaglutide-weight-loss-how-it-works",
         "score": 12,
-        "title": "Medical weight loss vs dieting: what works better?"
+        "title": "How quickly does semaglutide start working for weight loss?"
       },
       {
         "p": "/answers/adhd-and-weight-loss-connection",
@@ -883,8 +899,8 @@
     "/blog/medical-weight-loss-vs-dieting-what-actually-works": [
       {
         "p": "/answers/medical-weight-loss-vs-dieting",
-        "score": 14,
-        "title": "Medical weight loss vs dieting: what works better?"
+        "score": 13,
+        "title": "When does medical weight loss outperform dieting alone?"
       },
       {
         "p": "/blog/medical-weight-loss-glp1-semaglutide-texas",
@@ -904,14 +920,14 @@
     ],
     "/blog/minoxidil-for-hair-loss-does-it-work": [
       {
-        "p": "/answers/minoxidil-hair-loss-does-it-work",
-        "score": 9,
-        "title": "Does minoxidil work for hair loss?"
+        "p": "/answers/oral-vs-topical-minoxidil",
+        "score": 10,
+        "title": "When is topical minoxidil enough vs oral minoxidil?"
       },
       {
-        "p": "/answers/oral-vs-topical-minoxidil",
+        "p": "/answers/minoxidil-hair-loss-does-it-work",
         "score": 9,
-        "title": "Oral vs topical minoxidil: which is right?"
+        "title": "How long does minoxidil take to show hair results?"
       },
       {
         "p": "/answers/ed-telehealth-legitimate",
@@ -939,13 +955,13 @@
     "/blog/non-stimulant-adhd-medications-explained": [
       {
         "p": "/answers/non-stimulant-adhd-medications",
-        "score": 12,
-        "title": "What non-stimulant ADHD medications exist for adults?"
+        "score": 11,
+        "title": "When are non-stimulant ADHD medications considered first?"
       },
       {
         "p": "/answers/adderall-vs-vyvanse-adults",
         "score": 9,
-        "title": "Adderall vs Vyvanse for adults: what is the difference?"
+        "title": "When might Vyvanse be preferred over Adderall for adults?"
       },
       {
         "p": "/answers/signs-of-sleep-apnea-in-adults",
@@ -953,16 +969,16 @@
         "title": "What are the signs of sleep apnea in adults?"
       },
       {
-        "p": "/answers/oral-vs-injectable-weight-loss-meds",
+        "p": "/answers/who-qualifies-glp-1-weight-loss",
         "score": 3,
-        "title": "Oral vs injectable weight loss medications: pros and cons?"
+        "title": "Who qualifies for GLP-1 weight loss medications?"
       }
     ],
     "/blog/online-adhd-diagnosis-california": [
       {
         "p": "/answers/is-online-adhd-diagnosis-legitimate",
         "score": 11,
-        "title": "Is online ADHD diagnosis legitimate?"
+        "title": "What should you look for in a legitimate online ADHD diagnosis?"
       },
       {
         "p": "/blog/online-adhd-diagnosis-texas",
@@ -973,18 +989,13 @@
         "p": "/answers/how-online-prescriptions-work",
         "score": 4,
         "title": "How do online prescriptions work legally?"
-      },
-      {
-        "p": "/answers/sildenafil-erectile-dysfunction-expectations",
-        "score": 3,
-        "title": "What should you expect from sildenafil for erectile dysfunction?"
       }
     ],
     "/blog/online-adhd-diagnosis-texas": [
       {
         "p": "/answers/is-online-adhd-diagnosis-legitimate",
         "score": 11,
-        "title": "Is online ADHD diagnosis legitimate?"
+        "title": "What should you look for in a legitimate online ADHD diagnosis?"
       },
       {
         "p": "/blog/online-adhd-diagnosis-california",
@@ -995,18 +1006,13 @@
         "p": "/answers/how-online-prescriptions-work",
         "score": 4,
         "title": "How do online prescriptions work legally?"
-      },
-      {
-        "p": "/answers/sildenafil-erectile-dysfunction-expectations",
-        "score": 3,
-        "title": "What should you expect from sildenafil for erectile dysfunction?"
       }
     ],
     "/blog/oral-vs-injectable-weight-loss-medications": [
       {
         "p": "/answers/oral-vs-injectable-weight-loss-meds",
-        "score": 12,
-        "title": "Oral vs injectable weight loss medications: pros and cons?"
+        "score": 11,
+        "title": "When might oral weight-loss medication be preferred over injectable GLP-1?"
       },
       {
         "p": "/answers/who-qualifies-glp-1-weight-loss",
@@ -1022,30 +1028,30 @@
     "/blog/oral-vs-topical-minoxidil-which-is-right": [
       {
         "p": "/answers/oral-vs-topical-minoxidil",
-        "score": 13,
-        "title": "Oral vs topical minoxidil: which is right?"
+        "score": 12,
+        "title": "When is topical minoxidil enough vs oral minoxidil?"
       },
       {
         "p": "/answers/minoxidil-hair-loss-does-it-work",
         "score": 9,
-        "title": "Does minoxidil work for hair loss?"
+        "title": "How long does minoxidil take to show hair results?"
       },
       {
-        "p": "/answers/tirzepatide-vs-semaglutide",
+        "p": "/answers/glp-1-side-effects",
         "score": 3,
-        "title": "Tirzepatide vs semaglutide: which is better for weight loss?"
+        "title": "Which GLP-1 side effects usually improve with titration?"
       }
     ],
     "/blog/phentermine-for-weight-loss-safety-and-effectiveness": [
       {
         "p": "/answers/phentermine-weight-loss-safety",
         "score": 12,
-        "title": "Is phentermine safe for weight loss?"
+        "title": "Who should avoid phentermine for weight loss?"
       },
       {
         "p": "/answers/medical-weight-loss-vs-dieting",
         "score": 9,
-        "title": "Medical weight loss vs dieting: what works better?"
+        "title": "When does medical weight loss outperform dieting alone?"
       },
       {
         "p": "/answers/adhd-and-weight-loss-connection",
@@ -1057,12 +1063,12 @@
       {
         "p": "/answers/semaglutide-weight-loss-how-it-works",
         "score": 12,
-        "title": "How does semaglutide work for weight loss?"
+        "title": "How quickly does semaglutide start working for weight loss?"
       },
       {
-        "p": "/answers/medical-weight-loss-vs-dieting",
+        "p": "/blog/medical-weight-loss-glp1-semaglutide-texas",
         "score": 10,
-        "title": "Medical weight loss vs dieting: what works better?"
+        "title": "Medical Weight Loss in Texas: GLP-1, Semaglutide, Tirzepatide &amp; What Actually Works"
       },
       {
         "p": "/answers/adhd-and-weight-loss-connection",
@@ -1073,8 +1079,8 @@
     "/blog/sildenafil-for-erectile-dysfunction-what-to-expect": [
       {
         "p": "/answers/sildenafil-erectile-dysfunction-expectations",
-        "score": 14,
-        "title": "What should you expect from sildenafil for erectile dysfunction?"
+        "score": 11,
+        "title": "How long does it take sildenafil to work?"
       },
       {
         "p": "/answers/ed-telehealth-legitimate",
@@ -1096,7 +1102,7 @@
       {
         "p": "/answers/compounded-vs-branded-glp-1",
         "score": 7,
-        "title": "Compounded vs branded GLP-1: what is the difference?"
+        "title": "What should you ask about compounded vs branded GLP-1?"
       },
       {
         "p": "/answers/poor-sleep-feels-like-adhd",
@@ -1121,38 +1127,33 @@
         "title": "Is telehealth for erectile dysfunction legitimate?"
       },
       {
-        "p": "/answers/medical-weight-loss-vs-dieting",
+        "p": "/answers/semaglutide-weight-loss-how-it-works",
         "score": 3,
-        "title": "Medical weight loss vs dieting: what works better?"
+        "title": "How quickly does semaglutide start working for weight loss?"
       }
     ],
     "/blog/tirzepatide-vs-semaglutide-which-is-better": [
       {
-        "p": "/answers/tirzepatide-vs-semaglutide",
-        "score": 14,
-        "title": "Tirzepatide vs semaglutide: which is better for weight loss?"
-      },
-      {
         "p": "/answers/semaglutide-weight-loss-how-it-works",
         "score": 11,
-        "title": "How does semaglutide work for weight loss?"
+        "title": "How quickly does semaglutide start working for weight loss?"
+      },
+      {
+        "p": "/answers/tirzepatide-vs-semaglutide",
+        "score": 11,
+        "title": "Who might consider tirzepatide instead of semaglutide?"
       },
       {
         "p": "/answers/adhd-and-weight-loss-connection",
         "score": 4,
         "title": "Is there a connection between ADHD and weight loss struggles?"
-      },
-      {
-        "p": "/answers/oral-vs-topical-minoxidil",
-        "score": 3,
-        "title": "Oral vs topical minoxidil: which is right?"
       }
     ],
     "/blog/vyvanse-vs-adderall-differences": [
       {
         "p": "/answers/adderall-vs-vyvanse-adults",
         "score": 13,
-        "title": "Adderall vs Vyvanse for adults: what is the difference?"
+        "title": "When might Vyvanse be preferred over Adderall for adults?"
       },
       {
         "p": "/answers/starting-adhd-medication-adults",
@@ -1165,16 +1166,16 @@
         "title": "What are the signs of sleep apnea in adults?"
       },
       {
-        "p": "/answers/sildenafil-erectile-dysfunction-expectations",
+        "p": "/answers/compounded-vs-branded-glp-1",
         "score": 3,
-        "title": "What should you expect from sildenafil for erectile dysfunction?"
+        "title": "What should you ask about compounded vs branded GLP-1?"
       }
     ],
     "/blog/when-is-testosterone-therapy-appropriate": [
       {
         "p": "/answers/when-is-testosterone-therapy-appropriate",
-        "score": 13,
-        "title": "When is testosterone therapy appropriate?"
+        "score": 12,
+        "title": "What symptoms warrant testosterone therapy evaluation?"
       },
       {
         "p": "/answers/high-shbg-low-free-testosterone",
@@ -1225,66 +1226,69 @@
     "/weight-loss-metabolic-health": 154,
     "/blog/adhd": 65,
     "/adhd-screening": 53,
-    "/answers/signs-of-adult-adhd": 46,
+    "/answers/signs-of-adult-adhd": 45,
     "/blog/is-online-adhd-diagnosis-legit": 39,
     "/adult-adhd-diagnosis": 37,
-    "/answers/can-adhd-be-diagnosed-online": 37,
     "/blog/weight-loss": 37,
+    "/answers/can-adhd-be-diagnosed-online": 36,
     "/blog/adhd-symptoms-overlooked": 35,
     "/blog/how-to-know-if-you-have-adhd-adult": 35,
-    "/answers/starting-adhd-medication-adults": 34,
-    "/answers/what-is-food-noise": 29,
+    "/answers/starting-adhd-medication-adults": 33,
     "/online-adhd-test": 29,
     "/adhd-evaluation-cost": 28,
+    "/answers/what-is-food-noise": 28,
     "/blog/telehealth": 28,
-    "/answers/what-is-insulin-resistance": 25,
-    "/answers/brain-fog-after-eating": 24,
     "/blog/food-noise-and-glp-1-what-it-means-and-what-helps": 24,
+    "/answers/what-is-insulin-resistance": 23,
     "/blog/insulin-resistance-and-weight-loss-clinician-overview": 23,
     "/blog/why-am-i-always-tired-causes-when-to-see-doctor": 21,
     "/mens-health-longevity": 21,
-    "/answers/what-does-low-testosterone-feel-like": 17,
+    "/answers/brain-fog-after-eating": 18,
     "/answers/why-am-i-tired-even-after-sleeping": 17,
+    "/answers/what-does-low-testosterone-feel-like": 16,
     "/blog/how-to-safely-get-prescriptions-online": 16,
+    "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know": 14,
     "/answers/glp-1-side-effects": 13,
     "/answers/what-is-free-testosterone": 13,
+    "/blog/glp1-side-effects-and-how-to-manage-them": 13,
+    "/blog/semaglutide-for-weight-loss-how-it-works": 13,
     "/creyos-adhd-testing": 13,
     "/answers/can-sleep-apnea-cause-fatigue": 12,
-    "/answers/medical-weight-loss-vs-dieting": 12,
-    "/answers/poor-sleep-feels-like-adhd": 12,
-    "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know": 12,
-    "/blog/semaglutide-for-weight-loss-how-it-works": 12,
+    "/answers/semaglutide-weight-loss-how-it-works": 12,
     "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign": 12,
     "/adhd-diagnosis-florida": 11,
     "/adhd-diagnosis-texas": 11,
+    "/answers/medical-weight-loss-vs-dieting": 11,
     "/answers/signs-of-sleep-apnea-in-adults": 11,
     "/answers/when-is-testosterone-therapy-appropriate": 11,
-    "/blog/glp1-side-effects-and-how-to-manage-them": 11,
     "/blog/how-adhd-medication-is-prescribed-online": 11,
-    "/answers/semaglutide-weight-loss-how-it-works": 10,
+    "/answers/poor-sleep-feels-like-adhd": 10,
     "/blog/online-adhd-diagnosis-texas": 10,
     "/book-appointment": 10,
     "/answers/testosterone-and-adhd-overlap": 9,
+    "/answers/who-qualifies-glp-1-weight-loss": 9,
     "/blog/adhd-evaluation-cost-texas": 9,
     "/blog/insomnia-treatment-options-beyond-medication": 9,
+    "/blog/medical-weight-loss-glp1-semaglutide-texas": 9,
+    "/blog/when-is-testosterone-therapy-appropriate": 9,
     "/answers/adhd-and-weight-loss-connection": 8,
     "/answers/normal-a1c-insulin-resistance": 8,
     "/answers/adhd-medication-side-effects": 7,
     "/answers/can-you-get-adhd-medication-online": 7,
+    "/answers/is-adhd-medication-safe-long-term": 7,
     "/answers/is-telehealth-legitimate": 7,
     "/answers/screening-vs-adhd-evaluation": 7,
     "/answers/what-included-199-adhd-evaluation": 7,
-    "/answers/who-qualifies-glp-1-weight-loss": 7,
-    "/blog/medical-weight-loss-glp1-semaglutide-texas": 7,
     "/blog/telehealth-prescriptions-how-online-treatment-works": 7,
-    "/blog/when-is-testosterone-therapy-appropriate": 7,
     "/membership-pricing": 7,
     "/answers/adderall-vs-vyvanse-adults": 6,
     "/answers/adhd-vs-burnout": 6,
     "/answers/how-online-prescriptions-work": 6,
-    "/answers/is-adhd-medication-safe-long-term": 6,
     "/answers/telehealth-adhd-california": 6,
+    "/answers/trt-monitoring-requirements": 6,
     "/blog/adhd-medication-options-for-adults": 6,
+    "/blog/adhd-medication-side-effects-what-to-expect": 6,
+    "/blog/minoxidil-for-hair-loss-does-it-work": 6,
     "/blog/online-adhd-diagnosis-california": 6,
     "/answers/compounded-vs-branded-glp-1": 5,
     "/answers/how-long-adhd-evaluation": 5,
@@ -1292,72 +1296,69 @@
     "/answers/is-online-adhd-diagnosis-legitimate": 5,
     "/answers/meet-and-greet-telehealth-expectations": 5,
     "/answers/telehealth-adhd-texas": 5,
-    "/answers/trt-monitoring-requirements": 5,
-    "/blog/adhd-medication-online-texas-telehealth": 5,
-    "/blog/adhd-medication-side-effects-what-to-expect": 5,
-    "/blog/minoxidil-for-hair-loss-does-it-work": 5,
+    "/blog/is-adhd-medication-safe-long-term": 5,
+    "/blog/non-stimulant-adhd-medications-explained": 5,
     "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd": 5,
-    "/answers/adhd-medication-every-day": 4,
     "/answers/adhd-vs-anxiety": 4,
+    "/answers/food-noise-returned-on-glp-1": 4,
     "/answers/fsa-hsa-adhd-evaluation": 4,
+    "/answers/glp-1-nausea-management": 4,
     "/answers/high-functioning-adhd": 4,
     "/answers/insulin-resistance-without-diabetes": 4,
     "/answers/late-adhd-diagnosis-adults": 4,
+    "/answers/oral-vs-topical-minoxidil": 4,
+    "/answers/why-normal-labs-dont-mean-healthy": 4,
     "/blog/adderall-for-adhd-how-it-works": 4,
+    "/blog/adhd-medication-daily-or-as-needed-adults": 4,
     "/blog/adhd-medication-online-california": 4,
+    "/blog/adhd-medication-online-texas-telehealth": 4,
     "/blog/adhd-medication-options-california": 4,
     "/blog/adhd-testing-online-california-screening-vs-evaluation": 4,
-    "/blog/adult-adhd-treatment-california-2026": 4,
     "/blog/all": 4,
-    "/blog/is-adhd-medication-safe-long-term": 4,
+    "/blog/medical-weight-loss-vs-dieting-what-actually-works": 4,
     "/blog/modafinil-for-focus-and-fatigue-is-it-safe": 4,
-    "/blog/non-stimulant-adhd-medications-explained": 4,
+    "/blog/tirzepatide-vs-semaglutide-which-is-better": 4,
+    "/blog/vyvanse-vs-adderall-differences": 4,
     "/answers/adhd-in-women": 3,
+    "/answers/adhd-medication-every-day": 3,
     "/answers/asrs-adhd-screening-explained": 3,
     "/answers/can-adhd-cause-anxiety": 3,
     "/answers/ed-telehealth-legitimate": 3,
     "/answers/executive-dysfunction-adhd": 3,
-    "/answers/food-noise-returned-on-glp-1": 3,
-    "/answers/glp-1-nausea-management": 3,
+    "/answers/high-shbg-low-free-testosterone": 3,
     "/answers/minoxidil-hair-loss-does-it-work": 3,
     "/answers/non-stimulant-adhd-medications": 3,
-    "/answers/oral-vs-injectable-weight-loss-meds": 3,
-    "/answers/oral-vs-topical-minoxidil": 3,
     "/answers/sildenafil-erectile-dysfunction-expectations": 3,
     "/answers/tirzepatide-vs-semaglutide": 3,
-    "/answers/why-normal-labs-dont-mean-healthy": 3,
     "/blog/adderall-ir-vs-xr-adults": 3,
     "/blog/adhd-evaluation-california-online-vs-in-person": 3,
-    "/blog/adhd-medication-daily-or-as-needed-adults": 3,
+    "/blog/adhd-telehealth-california": 3,
     "/blog/adhd-treatment-houston-online": 3,
     "/blog/adult-adhd-symptoms-california": 3,
-    "/blog/medical-weight-loss-vs-dieting-what-actually-works": 3,
-    "/blog/tirzepatide-vs-semaglutide-which-is-better": 3,
-    "/blog/vyvanse-vs-adderall-differences": 3,
+    "/blog/adult-adhd-treatment-california-2026": 3,
+    "/blog/compounded-vs-branded-glp1-medications": 3,
+    "/blog/oral-vs-injectable-weight-loss-medications": 3,
+    "/blog/oral-vs-topical-minoxidil-which-is-right": 3,
+    "/blog/phentermine-for-weight-loss-safety-and-effectiveness": 3,
+    "/blog/sildenafil-for-erectile-dysfunction-what-to-expect": 3,
     "/providers/dr-natasha-desai": 3,
     "/providers/dr-sneh-pandey": 3,
     "/providers/dr-swati-pandey": 3,
     "/adhd-diagnosis-houston": 2,
     "/answers/afternoon-energy-crash-after-lunch": 2,
-    "/answers/high-shbg-low-free-testosterone": 2,
+    "/answers/oral-vs-injectable-weight-loss-meds": 2,
     "/answers/phentermine-weight-loss-safety": 2,
     "/answers/rejection-sensitivity-adhd": 2,
     "/answers/time-blindness-adhd": 2,
     "/blog/adhd-evaluation-cost-california": 2,
-    "/blog/adhd-telehealth-california": 2,
     "/blog/after-adhd-diagnosis-next-steps-adults": 2,
     "/blog/ambien-and-sleep-medications-risks-and-benefits": 2,
     "/blog/combining-adhd-treatment-and-weight-loss-strategies": 2,
-    "/blog/compounded-vs-branded-glp1-medications": 2,
     "/blog/focalin-vs-adderall-comparison": 2,
     "/blog/glutathione-and-peptides-what-do-they-actually-do": 2,
     "/blog/how-mental-health-affects-weight-loss-outcomes": 2,
     "/blog/how-to-choose-adhd-provider-california": 2,
     "/blog/long-term-weight-loss-medications-what-to-expect": 2,
-    "/blog/oral-vs-injectable-weight-loss-medications": 2,
-    "/blog/oral-vs-topical-minoxidil-which-is-right": 2,
-    "/blog/phentermine-for-weight-loss-safety-and-effectiveness": 2,
-    "/blog/sildenafil-for-erectile-dysfunction-what-to-expect": 2,
     "/adhd-diagnosis-austin": 1,
     "/adhd-diagnosis-pennsylvania": 1,
     "/adhd-diagnosis-philadelphia": 1,

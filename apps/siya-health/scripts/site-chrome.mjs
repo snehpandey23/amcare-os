@@ -111,8 +111,11 @@ export const ANCHOR_LABELS = {
   '/blog/weight-loss': 'Medical weight loss articles',
   '/blog/telehealth': 'Telehealth and online care articles',
   '/answers/signs-of-adult-adhd': 'Signs of adult ADHD (quick health guide)',
-  '/answers/semaglutide-weight-loss-how-it-works': 'How semaglutide works for weight loss',
-  '/answers/glp-1-side-effects': 'GLP-1 side effects explained',
+  '/answers/semaglutide-weight-loss-how-it-works': 'How quickly semaglutide starts working (FAQ)',
+  '/answers/glp-1-side-effects': 'GLP-1 side effects that improve with titration (FAQ)',
+  '/answers/tirzepatide-vs-semaglutide': 'Who might consider tirzepatide instead of semaglutide (FAQ)',
+  '/answers/is-online-adhd-diagnosis-legitimate': 'Legitimate online ADHD diagnosis checklist (FAQ)',
+  '/answers/when-is-testosterone-therapy-appropriate': 'Symptoms that warrant TRT evaluation (FAQ)',
   '/answers/adhd-and-weight-loss-connection': 'ADHD and weight loss struggles',
   '/creyos-adhd-testing': 'Creyos cognitive testing for ADHD',
   '/adhd-evaluation-cost': 'ADHD evaluation cost and what is included',
@@ -179,8 +182,8 @@ const LEARN_MORE_WEIGHT = `<!-- SIYA:LEARN-MORE-WEIGHT -->
             <li><a href="/answers/what-is-food-noise">What is food noise?</a></li>
             <li><a href="/answers/what-is-insulin-resistance">What is insulin resistance?</a></li>
             <li><a href="/blog/weight-loss">More medical weight loss articles</a></li>
-            <li><a href="/answers/semaglutide-weight-loss-how-it-works">How semaglutide works for weight loss</a></li>
-            <li><a href="/answers/glp-1-side-effects">GLP-1 side effects — what to expect</a></li>
+            <li><a href="/answers/semaglutide-weight-loss-how-it-works">How quickly semaglutide starts working (FAQ)</a></li>
+            <li><a href="/answers/glp-1-side-effects">GLP-1 side effects that improve with titration (FAQ)</a></li>
             <li><a href="/answers/adhd-and-weight-loss-connection">ADHD and weight loss struggles</a></li>
           </ul>
         </div>

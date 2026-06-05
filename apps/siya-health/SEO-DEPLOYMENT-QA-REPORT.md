@@ -1,6 +1,6 @@
 # SEO Deployment QA Report
 
-Generated: 2026-06-04T12:14:55.513Z
+Generated: 2026-06-05T05:48:00.821Z
 
 ## Summary
 
@@ -29,8 +29,8 @@ Generated: 2026-06-04T12:14:55.513Z
 |------|:------:|:-------:|:----------------:|:-------------:|
 | what-is-food-noise | ✓ | ✓ | ✓ | ✓ |
 | what-is-insulin-resistance | ✓ | ✓ | ✓ | ✓ |
-| insulin-resistance-without-diabetes | ✓ | ✓ | ✓ | — |
-| normal-a1c-insulin-resistance | ✓ | ✓ | ✓ | — |
+| insulin-resistance-without-diabetes | ✓ | ✓ | ✓ | ✓ |
+| normal-a1c-insulin-resistance | ✓ | ✓ | ✓ | ✓ |
 | why-am-i-tired-even-after-sleeping | ✓ | ✓ | ✓ | ✓ |
 
 ## CTA repositioning

@@ -6,6 +6,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { ANSWER_SEEDS, TOPIC_HUBS } from '../data/answer-seeds.mjs';
+import { GUIDE_CANNIBALIZATION_OVERRIDES } from '../data/cannibalization-phase1.mjs';
 import {
   BASE,
   LAST_REVIEWED,
@@ -125,6 +126,39 @@ function esc(s) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
+}
+
+function resolveCanonicalBlog(seed) {
+  const raw = seed.canonicalBlog || seed.cornerstoneBlog;
+  if (!raw) return null;
+  if (typeof raw === 'string') {
+    return { path: raw, label: 'Read the full clinical guide' };
+  }
+  return raw;
+}
+
+function applyCannibalizationOverrides(seed) {
+  const patch = GUIDE_CANNIBALIZATION_OVERRIDES[seed.slug];
+  if (!patch) return seed;
+  return { ...seed, ...patch };
+}
+
+function canonicalBlogTopHtml(seed) {
+  const cb = resolveCanonicalBlog(seed);
+  if (!cb) return '';
+  return `            <aside class="answer-canonical-pointer" role="note" aria-label="Full clinical guide">
+              <p><strong>Quick FAQ.</strong> This page answers one focused question. For in-depth evidence, treatment discussion, and care pathways, see <a href="${esc(cb.path)}">${esc(cb.label)}</a>.</p>
+            </aside>`;
+}
+
+function canonicalBlogFullHtml(seed) {
+  const cb = resolveCanonicalBlog(seed);
+  if (!cb) return '';
+  return `            <section class="answer-full-guide-cta" id="full-guide" aria-labelledby="full-guide-heading">
+              <h2 id="full-guide-heading">Read the full guide</h2>
+              <p>This Health Guide is scoped for a single FAQ-style question. Our clinical article goes deeper on evidence, risks, monitoring, and what to discuss with your clinician.</p>
+              <p><a class="button secondary" href="${esc(cb.path)}">${esc(cb.label)}</a></p>
+            </section>`;
 }
 
 function headBlock(title, description, url, jsonLdScripts) {
@@ -367,6 +401,7 @@ ${headerNav(seed.topic)}
           </header>
           <div class="blog-content">
             <p class="blog-disclaimer"><strong>Educational only:</strong> This page is for general education—not personal medical advice, diagnosis, or treatment. See a licensed clinician for your situation.</p>
+${canonicalBlogTopHtml(seed)}
 ${clinicalReviewBlock(reviewRecord)}
             <section class="answer-short" id="short-answer" aria-labelledby="short-answer-heading">
               <h2 id="short-answer-heading">Short answer</h2>
@@ -375,6 +410,7 @@ ${clinicalReviewBlock(reviewRecord)}
 ${engagement.aboveFold}
 ${sectionsHtml}${shortBodyExtra}
 ${engagement.decisionSupport}
+${canonicalBlogFullHtml(seed)}
             <section class="answer-evidence" id="evidence" aria-labelledby="evidence-heading">
               <h2 id="evidence-heading">Evidence &amp; references</h2>
 ${engagement.evidenceCard}
@@ -392,7 +428,7 @@ ${nextStepsHtml(hub, seed.topic)}
               <a class="button" href="${BOOK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
               <a class="button secondary" href="${hub.care}">Explore ${hub.label} care</a>
             </div>
-            <p class="cta-microcopy">Also read our <a href="${hub.url}">${hub.label} articles</a>${seed.cornerstoneBlog ? ` · <a href="${seed.cornerstoneBlog}">Full clinical guide</a>` : ''}${reviewRecord.reviewer ? ` · <a href="/providers/${reviewRecord.reviewer.slug}">${reviewRecord.reviewer.name}</a>` : ''}</p>
+            <p class="cta-microcopy">Also read our <a href="${hub.url}">${hub.label} articles</a>${resolveCanonicalBlog(seed) ? ` · <a href="${resolveCanonicalBlog(seed).path}">Full clinical guide</a>` : ''}${reviewRecord.reviewer ? ` · <a href="/providers/${reviewRecord.reviewer.slug}">${reviewRecord.reviewer.name}</a>` : ''}</p>
           </div>
         </div>
       </article>
@@ -548,7 +584,7 @@ ${footerBlock()}
 
 function main() {
   fs.mkdirSync(ANSWERS_DIR, { recursive: true });
-  for (const seed of ANSWER_SEEDS) {
+  for (const seed of ANSWER_SEEDS.map(applyCannibalizationOverrides)) {
     const out = path.join(ANSWERS_DIR, `${seed.slug}.html`);
     fs.writeFileSync(out, buildAnswerPage(seed), 'utf8');
   }

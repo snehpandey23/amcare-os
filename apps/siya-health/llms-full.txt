@@ -1,6 +1,6 @@
 # Siya Health — Full AI Retrieval Index
 
-Generated: 2026-06-04
+Generated: 2026-06-05
 Total pages: 154
 
 ---
@@ -142,9 +142,9 @@ Total pages: 154
   Summary: Physician-led Health Guides: short answers, evidence, and related topics for metabolic health, fatigue, hormones, ADHD, and telehealth. Each page shows its clinical review status.
   Topics: adhd, weight-loss, telehealth, health-guide
 
-- Adderall vs Vyvanse for adults: what is the difference?
+- When might Vyvanse be preferred over Adderall for adults?
   URL: https://siya.health/answers/adderall-vs-vyvanse-adults
-  Summary: Both are stimulant medications used for ADHD when clinically appropriate. Adderall (mixed amphetamine salts) has multiple formulations with varied onset/du…
+  Summary: Quick FAQ on Vyvanse vs Adderall timing, smoothness, and prescriber trade-offs—not a full comparison. Read the complete guide.
   Topics: adhd, health-guide
 
 - Is there a connection between ADHD and weight loss struggles?
@@ -164,12 +164,12 @@ Total pages: 154
 
 - Do you have to take ADHD medication every day?
   URL: https://siya.health/answers/adhd-medication-every-day
-  Summary: Some adults take medication daily; others use weekday-only or situational dosing when clinically appropriate. Skipping doses unpredictably on controlled st…
+  Summary: Quick FAQ: daily vs as-needed ADHD dosing for adults. Full dosing guide linked for prescriber-aligned plans.
   Topics: adhd, health-guide, medication
 
-- What are common ADHD medication side effects?
+- What ADHD medication side effects are most common in the first weeks?
   URL: https://siya.health/answers/adhd-medication-side-effects
-  Summary: Stimulants may cause decreased appetite, insomnia, increased heart rate or blood pressure, anxiety, or mood changes. Non-stimulants have their own profiles…
+  Summary: Quick FAQ on early stimulant and non-stimulant side effects. Full expectations guide linked for depth and monitoring.
   Topics: adhd, health-guide, medication
 
 - How do you tell ADHD apart from anxiety?
@@ -209,7 +209,7 @@ Total pages: 154
 
 - Can sleep apnea cause fatigue?
   URL: https://siya.health/answers/can-sleep-apnea-cause-fatigue
-  Summary: Yes. Obstructive sleep apnea fragments sleep with repeated breathing reductions and intermittent hypoxia, so you may feel exhausted or unrefreshed even aft…
+  Summary: Quick FAQ: can sleep apnea cause fatigue? Full sleep apnea and metabolic risk guide linked.
   Topics: health-guide, sleep
 
 - Can you get ADHD medication online?
@@ -217,9 +217,9 @@ Total pages: 154
   Summary: In eligible states, yes—after a legitimate telehealth evaluation and ongoing relationship with a licensed prescriber. Online does not mean automatic; contr…
   Topics: adhd, health-guide, medication
 
-- Compounded vs branded GLP-1: what is the difference?
+- What should you ask about compounded vs branded GLP-1?
   URL: https://siya.health/answers/compounded-vs-branded-glp-1
-  Summary: Branded FDA-approved GLP-1 medicines undergo standardized manufacturing, labeling, and post-market safety tracking. Compounded versions may be used in spec…
+  Summary: Quick FAQ: questions to ask your clinician about compounded vs branded GLP-1. Full regulatory guide linked.
   Topics: weight-loss, health-guide
 
 - What is Creyos cognitive testing for ADHD?
@@ -239,7 +239,7 @@ Total pages: 154
 
 - Why did food noise come back on GLP-1?
   URL: https://siya.health/answers/food-noise-returned-on-glp-1
-  Summary: Food noise can return on GLP-1 therapy after dose gaps, tolerance, stress, sleep loss, or inadequate lifestyle support. Learn why cravings resurface and wh…
+  Summary: Quick FAQ: food noise returning on GLP-1 therapy. Full food noise cornerstone linked.
   Topics: weight-loss, health-guide
 
 - Can you use FSA or HSA for ADHD evaluation?
@@ -249,12 +249,12 @@ Total pages: 154
 
 - How do you manage GLP-1 nausea?
   URL: https://siya.health/answers/glp-1-nausea-management
-  Summary: Clinicians start low and titrate slowly, advise smaller meals, avoid greasy foods, stay hydrated, and adjust timing. Persistent vomiting, dehydration, or s…
+  Summary: Quick FAQ: practical GLP-1 nausea tips during titration. Full side-effect management guide linked.
   Topics: weight-loss, health-guide
 
-- What are GLP-1 side effects?
+- Which GLP-1 side effects usually improve with titration?
   URL: https://siya.health/answers/glp-1-side-effects
-  Summary: GLP-1 side effects: nausea, GI symptoms, rare serious risks, and when to call your clinician. Educational guide for semaglutide and tirzepatide.
+  Summary: Quick FAQ on GLP-1 side effects that often ease with titration. Full management guide linked.
   Topics: weight-loss, health-guide
 
 - Can you have ADHD and still be high-functioning?
@@ -264,7 +264,7 @@ Total pages: 154
 
 - What does high SHBG with low free testosterone mean?
   URL: https://siya.health/answers/high-shbg-low-free-testosterone
-  Summary: High SHBG binds more testosterone, lowering free T even when total testosterone looks normal. Learn causes, symptoms overlap, and guideline-based evaluatio…
+  Summary: Quick FAQ on high SHBG and low free testosterone—not a full hormone lab guide. Cornerstone article linked.
   Topics: health-guide, mens-health
 
 - How long does an ADHD evaluation take?
@@ -284,17 +284,17 @@ Total pages: 154
 
 - Can you have insulin resistance without diabetes?
   URL: https://siya.health/answers/insulin-resistance-without-diabetes
-  Summary: Insulin resistance without diabetes: compensatory insulin, prediabetes pathway, and prevention-focused evaluation.
+  Summary: Quick FAQ: insulin resistance before diabetes thresholds. Metabolic clinician guide linked.
   Topics: health-guide
 
-- Is ADHD medication safe long term?
+- What does long-term ADHD medication safety monitoring include?
   URL: https://siya.health/answers/is-adhd-medication-safe-long-term
-  Summary: For many appropriately monitored adults, stimulant and non-stimulant ADHD medications have favorable benefit–risk profiles. Long-term care includes periodi…
+  Summary: Quick FAQ on long-term ADHD medication monitoring—not a substitute for the full safety guide. Link to clinical article.
   Topics: adhd, health-guide, medication
 
-- Is online ADHD diagnosis legitimate?
+- What should you look for in a legitimate online ADHD diagnosis?
   URL: https://siya.health/answers/is-online-adhd-diagnosis-legitimate
-  Summary: Is online ADHD diagnosis legitimate? Red flags, green flags, and what responsible telehealth includes.
+  Summary: Quick FAQ: green flags, red flags, and what legitimate online ADHD telehealth includes. Read the full clinical guide for depth.
   Topics: adhd, health-guide
 
 - Is telehealth legitimate for medical care?
@@ -307,9 +307,9 @@ Total pages: 154
   Summary: Childhood ADHD was often missed—especially in girls, high achievers, and inattentive types without hyperactivity. Adults seek answers after burnout, job ch…
   Topics: adhd, health-guide
 
-- Medical weight loss vs dieting: what works better?
+- When does medical weight loss outperform dieting alone?
   URL: https://siya.health/answers/medical-weight-loss-vs-dieting
-  Summary: Sustainable weight change usually combines nutrition, movement, sleep, behavioral support, and—when indicated—FDA-approved medications. Diets alone often f…
+  Summary: Quick FAQ on when supervised medical weight loss beats dieting alone. Full evidence guide linked.
   Topics: weight-loss, health-guide
 
 - What happens in a telehealth Meet &amp; Greet?
@@ -317,34 +317,34 @@ Total pages: 154
   Summary: Telehealth Meet & Greet: what happens, what it is not, pricing fit, and next steps before a full ADHD or metabolic evaluation.
   Topics: telehealth, health-guide
 
-- Does minoxidil work for hair loss?
+- How long does minoxidil take to show hair results?
   URL: https://siya.health/answers/minoxidil-hair-loss-does-it-work
-  Summary: Topical minoxidil is FDA-approved for androgenetic alopecia in men and women and slows loss or regrows hair in many users after 3–6+ months of consistent u…
+  Summary: Quick FAQ on minoxidil timeline—not a full treatment guide. Clinical hair loss article linked.
   Topics: health-guide, hair-loss
 
-- What non-stimulant ADHD medications exist for adults?
+- When are non-stimulant ADHD medications considered first?
   URL: https://siya.health/answers/non-stimulant-adhd-medications
-  Summary: Non-stimulant ADHD medications for adults: atomoxetine, viloxazine, guanfacine XR, and when clinicians choose them. Expectations and monitoring.
+  Summary: Quick FAQ on when clinicians choose non-stimulant ADHD options. Full medication class guide linked.
   Topics: adhd, health-guide, medication
 
 - Can you have insulin resistance with a normal A1C?
   URL: https://siya.health/answers/normal-a1c-insulin-resistance
-  Summary: Can you have insulin resistance with a normal A1C? Yes—compensatory insulin, symptoms, and next labs to discuss with your clinician.
+  Summary: Quick FAQ: normal A1C with insulin resistance symptoms. Full metabolic guide linked.
   Topics: health-guide
 
-- Oral vs injectable weight loss medications: pros and cons?
+- When might oral weight-loss medication be preferred over injectable GLP-1?
   URL: https://siya.health/answers/oral-vs-injectable-weight-loss-meds
-  Summary: Injectables (weekly GLP-1 agents) dominate recent trial outcomes but require needles and titration. Oral options (where available) may suit needle-averse p…
+  Summary: Quick FAQ on oral vs injectable weight-loss routes—not a full comparison. Read the complete guide.
   Topics: weight-loss, health-guide, medication
 
-- Oral vs topical minoxidil: which is right?
+- When is topical minoxidil enough vs oral minoxidil?
   URL: https://siya.health/answers/oral-vs-topical-minoxidil
-  Summary: Topical minoxidil is first-line for many patients due to localized action and established OTC/Rx formulations. Low-dose oral minoxidil may be considered of…
+  Summary: Quick FAQ on topical vs oral minoxidil selection—not a full route comparison. Clinical guide linked.
   Topics: health-guide, hair-loss
 
-- Is phentermine safe for weight loss?
+- Who should avoid phentermine for weight loss?
   URL: https://siya.health/answers/phentermine-weight-loss-safety
-  Summary: Phentermine is an FDA-approved short-term appetite suppressant for select patients when benefits outweigh risks. It is contraindicated in many cardiovascul…
+  Summary: Quick FAQ on phentermine contraindications and short-term use—not a full safety review. Clinical guide linked.
   Topics: weight-loss, health-guide
 
 - Can poor sleep feel like ADHD?
@@ -362,9 +362,9 @@ Total pages: 154
   Summary: Screening (e.g., ASRS, short online quizzes) estimates likelihood and takes minutes. A full evaluation is a 60–90 minute clinician visit with history, stan…
   Topics: adhd, health-guide
 
-- How does semaglutide work for weight loss?
+- How quickly does semaglutide start working for weight loss?
   URL: https://siya.health/answers/semaglutide-weight-loss-how-it-works
-  Summary: How semaglutide works for weight loss: GLP-1 mechanism, trial evidence, expectations, and clinician oversight.
+  Summary: Quick FAQ on semaglutide onset and early appetite changes—not a full mechanism guide. Read the clinical article.
   Topics: weight-loss, health-guide
 
 - What are the signs of adult ADHD?
@@ -374,12 +374,12 @@ Total pages: 154
 
 - What are the signs of sleep apnea in adults?
   URL: https://siya.health/answers/signs-of-sleep-apnea-in-adults
-  Summary: Clues include habitual snoring, witnessed breathing pauses or gasping, unrefreshing sleep, daytime sleepiness or fatigue, morning headaches, nocturia, resi…
+  Summary: Quick adult sleep apnea symptom checklist—not a full risk overview. Clinical guide linked.
   Topics: health-guide, sleep
 
-- What should you expect from sildenafil for erectile dysfunction?
+- How long does it take sildenafil to work?
   URL: https://siya.health/answers/sildenafil-erectile-dysfunction-expectations
-  Summary: Sildenafil improves erectile response when sexual stimulation is present; it is not an automatic aphrodisiac. Onset is typically 30–60 minutes. Contraindic…
+  Summary: Quick FAQ on sildenafil onset and timing—not a full ED expectations guide. Clinical article linked.
   Topics: health-guide, mens-health
 
 - What should adults expect when starting ADHD medication?
@@ -389,7 +389,7 @@ Total pages: 154
 
 - How does ADHD telehealth work in California?
   URL: https://siya.health/answers/telehealth-adhd-california
-  Summary: California residents may receive adult ADHD evaluation and follow-up via telehealth when treated by a clinician licensed in California, using secure video,…
+  Summary: Quick FAQ on ADHD telehealth logistics in California. State-specific service article linked.
   Topics: adhd, telehealth, health-guide, california
 
 - How does ADHD telehealth work in Texas?
@@ -407,14 +407,14 @@ Total pages: 154
   Summary: Time blindness describes difficulty sensing how long tasks take, losing track of time, or chronically underestimating deadlines. It is a common executive-f…
   Topics: adhd, health-guide
 
-- Tirzepatide vs semaglutide: which is better for weight loss?
+- Who might consider tirzepatide instead of semaglutide?
   URL: https://siya.health/answers/tirzepatide-vs-semaglutide
-  Summary: Both are prescription GLP-1–based therapies with strong trial data in eligible adults. Tirzepatide (dual GIP/GLP-1 agonist) showed greater average weight l…
+  Summary: Quick FAQ on candidacy for tirzepatide vs semaglutide—not a head-to-head comparison. Full clinical guide linked.
   Topics: weight-loss, health-guide
 
-- What monitoring is required on testosterone therapy?
+- How often is TRT monitoring required?
   URL: https://siya.health/answers/trt-monitoring-requirements
-  Summary: TRT monitoring: hematocrit, PSA, lipids, follow-up intervals, and symptoms to report on testosterone therapy.
+  Summary: Quick FAQ on TRT lab and symptom monitoring intervals. Full appropriateness guide linked.
   Topics: health-guide, mens-health
 
 - Why am I gaining weight after stopping Ozempic?
@@ -424,7 +424,7 @@ Total pages: 154
 
 - What does low testosterone feel like?
   URL: https://siya.health/answers/what-does-low-testosterone-feel-like
-  Summary: Possible symptoms include low energy, reduced libido, depressed mood, decreased muscle mass, increased body fat, poor sleep, and difficulty concentrating—t…
+  Summary: Quick FAQ on low testosterone symptoms—not a lab guide. Full free vs total testosterone article linked.
   Topics: health-guide, mens-health
 
 - What is included in Siya Health’s $199 ADHD evaluation?
@@ -434,27 +434,27 @@ Total pages: 154
 
 - What is food noise?
   URL: https://siya.health/answers/what-is-food-noise
-  Summary: What is food noise? Intrusive food thoughts vs hunger, GLP-1 context, ADHD overlap, and when to seek metabolic care.
+  Summary: Quick definition of food noise—not a GLP-1 treatment guide. Full food noise & GLP-1 article linked.
   Topics: health-guide
 
 - What is free testosterone?
   URL: https://siya.health/answers/what-is-free-testosterone
-  Summary: What is free testosterone? Bound vs free fractions, SHBG, symptoms, and guideline-based testing.
+  Summary: Quick definition of free testosterone—not lab interpretation depth. Full free vs total guide linked.
   Topics: health-guide, mens-health
 
 - What is insulin resistance?
   URL: https://siya.health/answers/what-is-insulin-resistance
-  Summary: What is insulin resistance? Mechanism, symptoms, labs, lifestyle evidence, and when to seek metabolic evaluation.
+  Summary: Quick definition of insulin resistance for patients—not a clinician weight-loss overview. Full guide linked.
   Topics: health-guide
 
-- When is testosterone therapy appropriate?
+- What symptoms warrant testosterone therapy evaluation?
   URL: https://siya.health/answers/when-is-testosterone-therapy-appropriate
-  Summary: When is testosterone therapy appropriate? Guidelines, reversible causes, fertility, and shared decision-making.
+  Summary: Quick FAQ on symptoms that prompt TRT evaluation—not a full candidacy guide. Clinical article linked.
   Topics: health-guide, mens-health
 
 - Who qualifies for GLP-1 weight loss medications?
   URL: https://siya.health/answers/who-qualifies-glp-1-weight-loss
-  Summary: Eligibility generally follows FDA indications: typically BMI thresholds with comorbidities, or higher BMI cutoffs—plus no contraindications (certain thyroi…
+  Summary: Quick FAQ on GLP-1 weight-loss eligibility criteria. Texas medical weight-loss overview linked.
   Topics: weight-loss, health-guide, medication
 
 - Why am I tired even after sleeping?

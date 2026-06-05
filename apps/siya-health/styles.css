@@ -2301,6 +2301,39 @@ a.asrs-interest-btn:hover {
 
 .blog-disclaimer strong { color: var(--text); }
 
+.answer-canonical-pointer {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  background: rgba(14, 165, 164, 0.08);
+  border: 1px solid rgba(14, 165, 164, 0.25);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+
+.answer-canonical-pointer a {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.answer-full-guide-cta {
+  margin: 32px 0;
+  padding: 24px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.answer-full-guide-cta h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+}
+
+.answer-full-guide-cta p:last-child {
+  margin-bottom: 0;
+}
+
 .clinical-review {
   font-size: 0.9rem;
   line-height: 1.55;
