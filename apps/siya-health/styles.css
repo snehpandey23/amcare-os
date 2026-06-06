@@ -514,6 +514,22 @@ button.secondary:hover {
   color: var(--accent);
   font-weight: 700;
 }
+.hero-merged-lead--primary {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.hero-merged-lead--note {
+  font-size: 0.98rem;
+  margin-bottom: 16px;
+  opacity: 0.95;
+}
+.hero-state-line {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.95);
+}
 .hero-ctas-adhd-primary {
   flex-direction: column;
   align-items: flex-start;
@@ -1248,10 +1264,43 @@ button.secondary:hover {
   border-radius: var(--radius);
   padding: 28px;
   text-align: center;
-  transition: box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.flow-card:hover { box-shadow: var(--shadow); }
+.flow-card:hover {
+  border-color: rgba(30, 58, 138, 0.35);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.1);
+  transform: translateY(-2px);
+}
+.flow-cards--adhd-process .flow-card {
+  text-align: left;
+  padding: 32px 28px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.flow-cards--adhd-process .flow-card-icon img {
+  margin: 0;
+}
+.flow-cards--adhd-process .flow-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+}
+.flow-cards--adhd-process .flow-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.flow-cards--adhd-process .flow-card p:last-child {
+  margin-bottom: 0;
+}
+.flow-card-note {
+  font-size: 0.92rem !important;
+  font-weight: 500;
+  color: var(--text) !important;
+  margin-top: 12px !important;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
 .flow-step-num {
   display: block;
   font-size: 12px;
@@ -1652,6 +1701,12 @@ button.secondary:hover {
   font-weight: 700;
   color: var(--primary);
   margin: 0;
+}
+.trust-metrics-rewrite-meta {
+  margin: 16px 0 0;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.5;
 }
 
 /* CTA Band */
@@ -3577,18 +3632,22 @@ a.asrs-interest-btn:hover {
 }
 
 .symptoms-card {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(10px);
+  background: var(--white);
   border-radius: 16px;
   padding: 22px;
   text-align: left;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  transition: all 0.25s ease;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .symptoms-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  border-color: rgba(30, 58, 138, 0.35);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.1);
+  transform: translateY(-2px);
 }
 
 .symptoms-icon {
@@ -3602,6 +3661,118 @@ a.asrs-interest-btn:hover {
 .symptoms-card h3 { font-size: 1.05rem; margin-bottom: 6px; }
 .symptoms-card p { font-size: 14px; color: var(--text-secondary); }
 .symptoms-closing { margin-bottom: 20px; font-weight: 500; color: var(--text); }
+.symptoms-patient-context {
+  max-width: 42rem;
+  margin: 28px auto 0;
+  text-align: left;
+}
+.symptoms-patient-context p {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0 0 14px;
+}
+.symptoms-patient-context .symptoms-transition {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text);
+  font-weight: 500;
+}
+.executive-function-section {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+.executive-function-section .siya-diagram--inline {
+  max-width: min(720px, 100%);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+@media (max-width: 640px) {
+  .executive-function-section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .executive-function-section .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* ADHD evaluation model — 2×2 educational cards */
+.evaluation-model-section .section-header h2 {
+  text-transform: none;
+}
+.evaluation-model-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+@media (min-width: 640px) {
+  .evaluation-model-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+}
+.evaluation-model-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px 28px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.evaluation-model-card:hover {
+  border-color: rgba(30, 58, 138, 0.35);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.1);
+  transform: translateY(-2px);
+}
+.evaluation-model-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--bg-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+.evaluation-model-icon svg {
+  width: 22px;
+  height: 22px;
+}
+.evaluation-model-card h3 {
+  font-size: 1.12rem;
+  color: var(--primary);
+  margin: 0 0 10px;
+  line-height: 1.35;
+}
+.evaluation-model-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+  flex: 1;
+}
+.evaluation-model-disclaimer {
+  max-width: 42rem;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+.adhd-process-section .section-header {
+  text-align: center;
+}
+.adhd-process-section .section-header .lead {
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /* Section background tint for visual separation */
 .section-tinted { background: var(--bg-subtle); }
