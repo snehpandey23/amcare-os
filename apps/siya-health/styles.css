@@ -5924,6 +5924,58 @@ body.ghl-legal-gate-open {
 }
 
 @media (max-width: 767px) {
+  .footer-grid--seo {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 12px;
+    margin-bottom: 12px;
+  }
+
+  .footer-col h4 {
+    margin-bottom: 6px;
+    font-size: 0.72rem;
+  }
+
+  .footer-links li {
+    margin-bottom: 4px;
+  }
+
+  .footer-links a {
+    font-size: 0.84rem;
+  }
+
+  .footer-brand-bar {
+    gap: 14px;
+    margin-top: 14px;
+    padding-top: 14px;
+  }
+
+  .footer-brand-bar__left {
+    gap: 10px 14px;
+  }
+
+  .footer .footer-logo-img--compact {
+    height: 44px !important;
+  }
+
+  .footer-brand-tagline {
+    font-size: 0.78rem;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .footer-brand-bar .footer-trust-logos {
+    margin: 4px 0 6px;
+    gap: 8px;
+  }
+
+  .footer-brand-bar .footer-trust-logo {
+    max-height: 34px;
+  }
+
+  .footer-brand-bar .footer-social {
+    gap: 8px;
+  }
+
   .footer-brand-bar__right {
     text-align: left;
     width: 100%;
@@ -5931,5 +5983,21 @@ body.ghl-legal-gate-open {
 
   .footer-contact-block p {
     white-space: normal;
+    margin-bottom: 4px;
+    font-size: 0.86rem;
+  }
+
+  .footer-phone {
+    font-size: 0.95rem;
+  }
+
+  .footer-notice {
+    margin-top: 12px;
+    font-size: 0.76rem;
+    line-height: 1.45;
+  }
+
+  .footer small {
+    font-size: 0.74rem;
   }
 }
