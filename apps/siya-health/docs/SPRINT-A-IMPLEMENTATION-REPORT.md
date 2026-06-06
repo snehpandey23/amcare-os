@@ -158,8 +158,26 @@ node scripts/capture-sprint-a-screenshots.mjs
 
 ---
 
+## Deployment verification (June 6, 2026)
+
+| Check | Status |
+|-------|--------|
+| Hero: one primary CTA | PASS |
+| Final CTA: one button | PASS |
+| `?start=asrs` → ASRS intro | PASS |
+| `/adhd-screening` → chooser | PASS |
+| 7 dataLayer events | PASS |
+| GTM dataLayer (preview-ready) | PASS — wire triggers in GTM workspace |
+| Mobile render | PASS |
+
+**Commits pushed:** `4a9f298`, `58dc2a9`  
+**Measurement window:** See [`SPRINT-A-MEASUREMENT-WINDOW.md`](./SPRINT-A-MEASUREMENT-WINDOW.md)
+
+---
+
 ## Document History
 
 | Version | Notes |
 |---------|-------|
+| v1.1 | Deploy verification + measurement window |
 | v1.0 | Sprint A implementation complete |

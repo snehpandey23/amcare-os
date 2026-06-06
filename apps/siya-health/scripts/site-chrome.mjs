@@ -638,6 +638,46 @@ export function injectFooterChrome(html, relPath = '') {
   return html;
 }
 
+const FOOTER_GUIDE_HUB_LINKS = [
+  { href: '/answers/signs-of-adult-adhd', label: 'Adult ADHD signs' },
+  { href: '/answers/why-am-i-tired-even-after-sleeping', label: 'Fatigue & sleep' },
+  { href: '/answers/what-is-insulin-resistance', label: 'Insulin resistance' },
+  { href: '/answers/what-does-low-testosterone-feel-like', label: "Men's hormones" },
+  { href: '/answers/adhd-vs-burnout', label: 'ADHD vs burnout' },
+  { href: '/answers', label: 'Browse all guides' },
+];
+
+function renderFooterGuideHubColumn() {
+  const links = FOOTER_GUIDE_HUB_LINKS.map((l) => `          <p><a href="${l.href}">${l.label}</a></p>`).join('\n');
+  return `        <div class="footer-col footer-col--guides">
+          <h4>Popular guides</h4>
+${links}
+        </div>`;
+}
+
+/** Sprint B1: additive footer guide hub column (existing URLs only). */
+export function injectFooterGuideHubs(html) {
+  if (!html.includes('footer-grid') || html.includes('footer-col--guides')) return html;
+
+  html = html.replace(/class="container footer-grid"/g, 'class="container footer-grid footer-grid--enhanced"');
+
+  const hubBlock = renderFooterGuideHubColumn();
+  if (/<div class="footer-col footer-col--guides">/.test(html)) return html;
+
+  if (/<div><h4>Healthcare Services<\/h4>[\s\S]*?<\/div>\s*\n\s*<div>\s*\n\s*<h4>Contact<\/h4>/i.test(html)) {
+    return html.replace(
+      /(<div><h4>Healthcare Services<\/h4>[\s\S]*?<\/div>)\s*(\n\s*<div>\s*\n\s*<h4>Contact<\/h4>)/i,
+      `$1\n${hubBlock}$2`,
+    );
+  }
+
+  if (/<div>\s*<h4>Contact<\/h4>/i.test(html)) {
+    return html.replace(/(\n\s*<div>\s*\n\s*<h4>Contact<\/h4>)/i, `\n${hubBlock}$1`);
+  }
+
+  return html;
+}
+
 /** Non-blocking cookie notice — localStorage acceptance only */
 export function injectCookieNotice(html, relPath) {
   if (isLegalContentPage(relPath)) return html;
@@ -688,10 +728,10 @@ function buildHomepageCareTeam() {
   const cards = providers
     .map(
       (p) => `            <article class="about-team-card homepage-care-card" data-states="${p.stateAbbreviations.join(',')}">
-              ${renderCareTeamPhoto(p, 96, 96)}
+              ${renderCareTeamPhoto(p, 128, 128)}
               <h3><a href="/providers/${p.slug}">${p.name}</a></h3>
               <p class="about-team-tagline">${p.servicePageTagline} · ${stateChipLabel(p)}</p>
-              <a class="text-link" href="/providers/${p.slug}">View profile</a>
+              <a class="button secondary care-team-profile-btn" href="/providers/${p.slug}">View profile</a>
             </article>`,
     )
     .join('\n');
@@ -1146,6 +1186,7 @@ export function injectGhlLegalAcceptance(html, relPath) {
 export function applySiteChrome(html, relPath, title = '') {
   if (isLegalContentPage(relPath)) {
     html = injectFooterChrome(html, relPath);
+    html = injectFooterGuideHubs(html);
     html = normalizeLegalLinks(html);
     return html;
   }
@@ -1157,6 +1198,7 @@ export function applySiteChrome(html, relPath, title = '') {
   html = injectProvidersNav(html);
   html = injectAnswersNav(html);
   html = injectFooterChrome(html, relPath);
+  html = injectFooterGuideHubs(html);
   html = injectLearnMoreSections(html, relPath);
   html = injectHomepageCareTeam(html, relPath);
   html = injectAboutProviderHub(html, relPath);

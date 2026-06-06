@@ -1,6 +1,6 @@
 # GHL Legal Acceptance — Implementation Report
 
-Generated: 2026-06-06T04:07:24.205Z
+Generated: 2026-06-06T06:05:59.355Z
 
 ## Objective
 
@@ -48,13 +48,13 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - Pages with legacy GHL booking links: **0**
 - Total legacy GHL booking anchor targets: **0**
 - Pages with CarePatron booking links: **160**
-- Total CarePatron booking anchor targets: **503**
+- Total CarePatron booking anchor targets: **486**
 - Pages with acceptance script after build: **1**
 - Intake hub present: **yes**
 
 ## Forms audited (site touchpoints)
 
-- **/about** (general-cta) — 8 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/about** (general-cta) — 7 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/adhd-care** (adhd-funnel) — 5 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/adhd-diagnosis-austin** (adhd-funnel) — 5 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/adhd-diagnosis-florida** (adhd-funnel) — 5 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
@@ -133,20 +133,20 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/answers/why-am-i-tired-even-after-sleeping** (general-cta) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
 - **/answers/why-normal-labs-dont-mean-healthy** (general-cta) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
 - **/blog/adderall-for-adhd-how-it-works** (adhd-funnel) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
-- **/blog/adderall-ir-vs-xr-adults** (general-cta) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/adhd-evaluation-california-online-vs-in-person** (adhd-related) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/adhd-evaluation-cost-california** (adhd-related) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/adhd-evaluation-cost-texas** (adhd-related) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/adhd-medication-daily-or-as-needed-adults** (adhd-related) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/adhd-medication-online-california** (adhd-related) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/adhd-medication-online-texas-telehealth** (adhd-related) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/adhd-medication-options-california** (adhd-related) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/adhd-medication-options-for-adults** (adhd-related) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/adhd-medication-side-effects-what-to-expect** (adhd-related) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/adhd-symptoms-overlooked** (adhd-related) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/adhd-telehealth-california** (adhd-related) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/adhd-testing-online-california-screening-vs-evaluation** (adhd-related) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/adhd-treatment-houston-online** (adhd-related) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/blog/adderall-ir-vs-xr-adults** (general-cta) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/blog/adhd-evaluation-california-online-vs-in-person** (adhd-related) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/blog/adhd-evaluation-cost-california** (adhd-related) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/blog/adhd-evaluation-cost-texas** (adhd-related) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/blog/adhd-medication-daily-or-as-needed-adults** (adhd-related) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/blog/adhd-medication-online-california** (adhd-related) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/blog/adhd-medication-online-texas-telehealth** (adhd-related) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/blog/adhd-medication-options-california** (adhd-related) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/blog/adhd-medication-options-for-adults** (adhd-related) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/blog/adhd-medication-side-effects-what-to-expect** (adhd-related) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/blog/adhd-symptoms-overlooked** (adhd-related) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/blog/adhd-telehealth-california** (adhd-related) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/blog/adhd-testing-online-california-screening-vs-evaluation** (adhd-related) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/blog/adhd-treatment-houston-online** (adhd-related) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/adhd** (adhd-funnel) — 2 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/blog/adult-adhd-symptoms-california** (adhd-funnel) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/blog/adult-adhd-treatment-california-2026** (adhd-funnel) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
@@ -155,7 +155,7 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/blog/ambien-and-sleep-medications-risks-and-benefits** (general-cta) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/combining-adhd-treatment-and-weight-loss-strategies** (adhd-funnel) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/blog/compounded-vs-branded-glp1-medications** (general-cta) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/focalin-vs-adderall-comparison** (general-cta) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/blog/focalin-vs-adderall-comparison** (general-cta) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/food-noise-and-glp-1-what-it-means-and-what-helps** (general-cta) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/free-testosterone-vs-total-testosterone-what-patients-should-know** (general-cta) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/glp1-side-effects-and-how-to-manage-them** (general-cta) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
@@ -187,7 +187,7 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/blog/telehealth-prescriptions-how-online-treatment-works** (general-cta) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/telehealth** (general-cta) — 2 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/tirzepatide-vs-semaglutide-which-is-better** (general-cta) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/vyvanse-vs-adderall-differences** (general-cta) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/blog/vyvanse-vs-adderall-differences** (general-cta) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/weight-loss** (general-cta) — 2 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/when-is-testosterone-therapy-appropriate** (general-cta) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/why-am-i-always-tired-causes-when-to-see-doctor** (general-cta) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes

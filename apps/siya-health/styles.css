@@ -5604,3 +5604,147 @@ body.ghl-legal-gate-open {
 .siya-circle-home-band .button.secondary:hover {
   background: rgba(255, 255, 255, 0.12);
 }
+
+/* ============================================
+   Sprint B1 — Visual polish (measurement-safe)
+   ============================================ */
+
+@media (min-width: 900px) {
+  .nav-center a {
+    font-size: 1.2rem;
+    letter-spacing: 0.01em;
+  }
+}
+
+#care-team.section,
+.testimonials-premium.section,
+.why-siya-exists.section {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+
+#reviews .section-header,
+.testimonials-premium-header {
+  text-align: center;
+}
+
+.testimonials-premium-header .reviews-label {
+  margin: 0 auto 10px;
+}
+
+.testimonials-premium-header .lead {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.testimonials-premium .testimonial-cards-grid {
+  margin-top: 8px;
+}
+
+.homepage-care-grid {
+  gap: 24px;
+}
+
+@media (min-width: 640px) {
+  .homepage-care-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .homepage-care-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+}
+
+.homepage-care-card {
+  padding: 28px 22px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.homepage-care-card:hover {
+  border-color: rgba(30, 58, 138, 0.35);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.1);
+  transform: translateY(-2px);
+}
+
+.homepage-care-card img,
+.homepage-care-card .provider-photo-wrap {
+  width: 128px;
+  height: 128px;
+  margin: 0 auto 18px;
+}
+
+.homepage-care-card .provider-photo-wrap img {
+  width: 128px;
+  height: 128px;
+}
+
+.homepage-care-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.homepage-care-card .about-team-tagline {
+  margin-bottom: 18px;
+  min-height: 2.85em;
+}
+
+.care-team-profile-btn {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .why-siya-two-col {
+    grid-template-columns: minmax(300px, 2fr) 3fr;
+    gap: 56px;
+    align-items: start;
+    max-width: 1040px;
+  }
+
+  .why-siya-founder-img {
+    min-height: 380px;
+    object-position: center top;
+  }
+}
+
+.footer-grid--enhanced {
+  gap: 36px 28px;
+}
+
+@media (min-width: 1024px) {
+  .footer-grid--enhanced {
+    grid-template-columns: minmax(160px, auto) 1.15fr repeat(4, minmax(0, 1fr));
+  }
+}
+
+.footer-col h4 {
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.footer-col p {
+  margin-bottom: 10px;
+  line-height: 1.45;
+}
+
+.footer-col--guides p a {
+  font-size: 0.92rem;
+}
+
+.footer-brand p {
+  line-height: 1.55;
+}
+
+.footer-notice {
+  line-height: 1.55;
+  max-width: 52rem;
+}

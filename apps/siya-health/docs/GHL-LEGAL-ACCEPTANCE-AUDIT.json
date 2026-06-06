@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-06T04:07:24.205Z",
+  "generatedAt": "2026-06-06T06:05:59.355Z",
   "formId": "mnWpgh0IEgFvJymdZqHY",
   "bookingUrl": "https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4",
   "legalDocumentVersion": "terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31",
@@ -16,7 +16,7 @@
     "pagesWithGhlLinks": 0,
     "totalGhlBookingLinks": 0,
     "pagesWithCarepatronLinks": 160,
-    "totalCarepatronBookingLinks": 503,
+    "totalCarepatronBookingLinks": 486,
     "pagesWithAcceptanceScript": 1,
     "pagesWithGhlMissingAcceptance": 0,
     "intakeHub": true
@@ -59,7 +59,7 @@
       "file": "about.html",
       "category": "general-cta",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 8,
+      "carepatronBookingLinks": 7,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -849,7 +849,7 @@
       "file": "blog/adderall-ir-vs-xr-adults.html",
       "category": "general-cta",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 3,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -859,7 +859,7 @@
       "file": "blog/adhd-evaluation-california-online-vs-in-person.html",
       "category": "adhd-related",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 3,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -869,7 +869,7 @@
       "file": "blog/adhd-evaluation-cost-california.html",
       "category": "adhd-related",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 3,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -879,7 +879,7 @@
       "file": "blog/adhd-evaluation-cost-texas.html",
       "category": "adhd-related",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 3,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -889,7 +889,7 @@
       "file": "blog/adhd-medication-daily-or-as-needed-adults.html",
       "category": "adhd-related",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 3,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -899,7 +899,7 @@
       "file": "blog/adhd-medication-online-california.html",
       "category": "adhd-related",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 3,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -909,7 +909,7 @@
       "file": "blog/adhd-medication-online-texas-telehealth.html",
       "category": "adhd-related",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 3,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -919,7 +919,7 @@
       "file": "blog/adhd-medication-options-california.html",
       "category": "adhd-related",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 3,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -929,7 +929,7 @@
       "file": "blog/adhd-medication-options-for-adults.html",
       "category": "adhd-related",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 3,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -939,7 +939,7 @@
       "file": "blog/adhd-medication-side-effects-what-to-expect.html",
       "category": "adhd-related",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 3,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -949,7 +949,7 @@
       "file": "blog/adhd-symptoms-overlooked.html",
       "category": "adhd-related",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 3,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -959,7 +959,7 @@
       "file": "blog/adhd-telehealth-california.html",
       "category": "adhd-related",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 3,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -969,7 +969,7 @@
       "file": "blog/adhd-testing-online-california-screening-vs-evaluation.html",
       "category": "adhd-related",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 3,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -979,7 +979,7 @@
       "file": "blog/adhd-treatment-houston-online.html",
       "category": "adhd-related",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 3,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -1069,7 +1069,7 @@
       "file": "blog/focalin-vs-adderall-comparison.html",
       "category": "general-cta",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 3,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -1389,7 +1389,7 @@
       "file": "blog/vyvanse-vs-adderall-differences.html",
       "category": "general-cta",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 3,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
