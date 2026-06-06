@@ -885,6 +885,21 @@ export function normalizeCtaHierarchy(html, relPath) {
   if (html.includes('blog-final-cta')) {
     html = html.replace(/<div class="cta-block blog-cta blog-cta--mid"[\s\S]*?<\/div>\s*/g, '');
     html = html.replace(/<section class="blog-california-cta cta-block blog-cta"[\s\S]*?<\/section>\s*/g, '');
+    const blogPrimary = isAdhdFunnelPage(relPath) ? COPY_STANDARDS.adhdPrimaryCta : COPY_STANDARDS.primaryCta;
+    html = html.replace(
+      /<section class="section blog-final-cta">[\s\S]*?<\/section>/,
+      `<section class="section blog-final-cta">
+        <div class="container">
+          <div class="cta-band">
+            <h3>Not sure where to start?</h3>
+            <p>A brief clinician conversation can help you understand your options—no obligation.</p>
+            <div class="cta-band-buttons">
+              <a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">${blogPrimary}</a>
+            </div>
+          </div>
+        </div>
+      </section>`,
+    );
   }
 
   html = html.replace(
