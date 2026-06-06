@@ -27,7 +27,16 @@
 
     document.addEventListener('click', function (e) {
       var el = e.target.closest('[data-siya-track]');
-      if (!el) return;
+      if (!el) {
+        var navBtn = e.target.closest('.nav-cta a.button, .nav-mobile a.button');
+        if (navBtn && /carepatron/i.test(navBtn.href || '')) {
+          pushEvent('nav_cta_primary_click', {
+            cta_location: navBtn.closest('.nav-mobile') ? 'mobile-nav' : 'header-nav',
+            link_url: navBtn.getAttribute('href') || '',
+          });
+        }
+        return;
+      }
 
       var track = el.getAttribute('data-siya-track');
       var location = el.getAttribute('data-siya-location') || 'unknown';
