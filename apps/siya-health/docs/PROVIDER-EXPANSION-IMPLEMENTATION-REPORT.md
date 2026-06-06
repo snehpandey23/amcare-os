@@ -1,6 +1,6 @@
 # Provider Expansion — Implementation Report
 
-Generated: 2026-06-06T02:20:01.444Z
+Generated: 2026-06-06T02:48:04.923Z
 
 ## Summary
 
@@ -11,7 +11,7 @@ Generated: 2026-06-06T02:20:01.444Z
 | Live profile pages | 7 |
 | Hub URL | https://siya.health/providers |
 | Pages linking to /providers hub | 161 |
-| Broken internal links (sample) | 17 |
+| Broken internal links (sample) | 20 |
 | JSON-LD issues on profiles | 0 |
 
 ## Profile URLs
@@ -57,23 +57,26 @@ Generated: 2026-06-06T02:20:01.444Z
 
 ## Broken links (sample)
 
-- `answers/index.html` → `/llms.txt`
-- `answers/index.html` → `/article-index.json`
-- `intake/index.html` → `/styles.css`
-- `legal/controlled-substance-treatment-agreement/index.html` → `/assets/favicon.svg`
-- `legal/controlled-substance-treatment-agreement/index.html` → `/styles.css`
-- `legal/cookie-policy/index.html` → `/assets/favicon.svg`
-- `legal/cookie-policy/index.html` → `/styles.css`
-- `legal/index.html` → `/assets/favicon.svg`
-- `legal/index.html` → `/styles.css`
-- `legal/notice-of-privacy-practices/index.html` → `/assets/favicon.svg`
-- `legal/notice-of-privacy-practices/index.html` → `/styles.css`
-- `legal/privacy-policy/index.html` → `/assets/favicon.svg`
-- `legal/privacy-policy/index.html` → `/styles.css`
-- `legal/terms-of-use/index.html` → `/assets/favicon.svg`
-- `legal/terms-of-use/index.html` → `/styles.css`
-- `siya-circle.html` → `/assets/favicon.svg`
-- `siya-circle.html` → `/styles.css`
+- `about.html` → `/assets/favicon.svg`
+- `about.html` → `/assets/favicon.ico`
+- `about.html` → `/styles.css`
+- `about.html` → `/styles.css`
+- `adhd-care.html` → `/assets/favicon.svg`
+- `adhd-care.html` → `/assets/favicon.ico`
+- `adhd-care.html` → `/styles.css`
+- `adhd-care.html` → `/styles.css`
+- `adhd-diagnosis-austin.html` → `/assets/favicon.svg`
+- `adhd-diagnosis-austin.html` → `/assets/favicon.ico`
+- `adhd-diagnosis-austin.html` → `/styles.css`
+- `adhd-diagnosis-austin.html` → `/styles.css`
+- `adhd-diagnosis-florida.html` → `/assets/favicon.svg`
+- `adhd-diagnosis-florida.html` → `/assets/favicon.ico`
+- `adhd-diagnosis-florida.html` → `/styles.css`
+- `adhd-diagnosis-florida.html` → `/styles.css`
+- `adhd-diagnosis-houston.html` → `/assets/favicon.svg`
+- `adhd-diagnosis-houston.html` → `/assets/favicon.ico`
+- `adhd-diagnosis-houston.html` → `/styles.css`
+- `adhd-diagnosis-houston.html` → `/styles.css`
 
 ## Operational note
 
