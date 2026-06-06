@@ -216,7 +216,7 @@ export const INTERNAL_PROVIDER_RECORDS = {
     hubSection: 'advanced-practice',
     sortOrder: 7,
     featured: false,
-    photoStatus: 'approved',
+    photoStatus: 'pending',
     npi: '1063725059',
     licenses: [
       {
