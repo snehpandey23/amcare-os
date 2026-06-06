@@ -1,6 +1,6 @@
 # SEO Deployment QA Report
 
-Generated: 2026-06-06T06:05:59.588Z
+Generated: 2026-06-06T06:18:08.523Z
 
 ## Summary
 
@@ -9,7 +9,7 @@ Generated: 2026-06-06T06:05:59.588Z
 | HTML pages scanned | 168 |
 | Sitemap URLs | 168 |
 | Pages with Meet & Greet in nav | 54 |
-| Non-ADHD pages still referencing adhd-screening | 3 |
+| Non-ADHD pages still referencing adhd-screening | 64 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
 
@@ -39,13 +39,74 @@ Generated: 2026-06-06T06:05:59.588Z
 - **Default secondary CTA:** Explore Care Options → `#services` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, `adhd-screening.html`
 
-### Non-ADHD pages still containing `adhd-screening` (3)
+### Non-ADHD pages still containing `adhd-screening` (64)
 
 - `about.html`
+- `blog/adderall-ir-vs-xr-adults.html`
+- `blog/adhd-evaluation-california-online-vs-in-person.html`
+- `blog/adhd-evaluation-cost-california.html`
+- `blog/adhd-evaluation-cost-texas.html`
+- `blog/adhd-medication-daily-or-as-needed-adults.html`
+- `blog/adhd-medication-online-california.html`
+- `blog/adhd-medication-online-texas-telehealth.html`
+- `blog/adhd-medication-options-california.html`
+- `blog/adhd-medication-options-for-adults.html`
+- `blog/adhd-medication-side-effects-what-to-expect.html`
+- `blog/adhd-symptoms-overlooked.html`
+- `blog/adhd-telehealth-california.html`
+- `blog/adhd-testing-online-california-screening-vs-evaluation.html`
+- `blog/adhd-treatment-houston-online.html`
+- `blog/all.html`
+- `blog/ambien-and-sleep-medications-risks-and-benefits.html`
+- `blog/compounded-vs-branded-glp1-medications.html`
+- `blog/focalin-vs-adderall-comparison.html`
+- `blog/food-noise-and-glp-1-what-it-means-and-what-helps.html`
+- `blog/free-testosterone-vs-total-testosterone-what-patients-should-know.html`
+- `blog/glp1-side-effects-and-how-to-manage-them.html`
+- `blog/glutathione-and-peptides-what-do-they-actually-do.html`
+- `blog/how-mental-health-affects-weight-loss-outcomes.html`
+- `blog/how-to-safely-get-prescriptions-online.html`
+- `blog/index.html`
+- `blog/insomnia-treatment-options-beyond-medication.html`
+- `blog/insulin-resistance-and-weight-loss-clinician-overview.html`
+- `blog/long-term-weight-loss-medications-what-to-expect.html`
+- `blog/medical-weight-loss-glp1-semaglutide-texas.html`
+- `blog/medical-weight-loss-vs-dieting-what-actually-works.html`
+- `blog/minoxidil-for-hair-loss-does-it-work.html`
+- `blog/modafinil-for-focus-and-fatigue-is-it-safe.html`
+- `blog/oral-vs-injectable-weight-loss-medications.html`
+- `blog/oral-vs-topical-minoxidil-which-is-right.html`
+- `blog/phentermine-for-weight-loss-safety-and-effectiveness.html`
+- `blog/semaglutide-for-weight-loss-how-it-works.html`
+- `blog/sildenafil-for-erectile-dysfunction-what-to-expect.html`
+- `blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign.html`
+- `blog/telehealth-prescriptions-how-online-treatment-works.html`
+- `blog/telehealth.html`
+- `blog/tirzepatide-vs-semaglutide-which-is-better.html`
+- `blog/vyvanse-vs-adderall-differences.html`
+- `blog/weight-loss.html`
+- `blog/when-is-testosterone-therapy-appropriate.html`
+- `blog/why-am-i-always-tired-causes-when-to-see-doctor.html`
+- `book-appointment.html`
 - `index.html`
+- `labs.html`
+- `membership-pricing.html`
+- `mens-health-longevity.html`
+- `prescriptions.html`
+- `primary-urgent-care.html`
+- `privacy-policy.html`
+- `providers/derek-timbs.html`
+- `providers/dr-natasha-desai.html`
+- `providers/dr-sneh-pandey.html`
+- `providers/dr-swati-pandey.html`
+- `providers/dr-vanessa-urbina.html`
 - `providers/megan-wunderlich.html`
+- `providers/wendy-delgado.html`
+- `telehealth.html`
+- `terms.html`
+- `weight-loss-metabolic-health.html`
 
-### All pages with any `adhd-screening` reference (57)
+### All pages with any `adhd-screening` reference (158)
 
 - `about.html`
 - `adhd-care.html`
@@ -60,35 +121,35 @@ Generated: 2026-06-06T06:05:59.588Z
 - `adhd-treatment-online.html`
 - `adult-adhd-diagnosis.html`
 - `answers/adderall-vs-vyvanse-adults.html`
+- `answers/adhd-and-weight-loss-connection.html`
 - `answers/adhd-in-men.html`
 - `answers/adhd-in-women.html`
 - `answers/adhd-medication-every-day.html`
 - `answers/adhd-medication-side-effects.html`
 - `answers/adhd-vs-anxiety.html`
 - `answers/adhd-vs-burnout.html`
+- `answers/afternoon-energy-crash-after-lunch.html`
 - `answers/asrs-adhd-screening-explained.html`
+- `answers/brain-fog-after-eating.html`
 - `answers/can-adhd-be-diagnosed-online.html`
 - `answers/can-adhd-cause-anxiety.html`
+- `answers/can-sleep-apnea-cause-fatigue.html`
 - `answers/can-you-get-adhd-medication-online.html`
+- `answers/compounded-vs-branded-glp-1.html`
 - `answers/creyos-adhd-testing-explained.html`
+- `answers/ed-telehealth-legitimate.html`
 - `answers/executive-dysfunction-adhd.html`
+- `answers/food-noise-returned-on-glp-1.html`
+- `answers/fsa-hsa-adhd-evaluation.html`
+- `answers/glp-1-nausea-management.html`
+- `answers/glp-1-side-effects.html`
 - `answers/high-functioning-adhd.html`
+- `answers/high-shbg-low-free-testosterone.html`
 - `answers/how-long-adhd-evaluation.html`
 - `answers/how-much-does-adhd-testing-cost.html`
-- `answers/index.html`
-- `answers/is-adhd-medication-safe-long-term.html`
-- `answers/is-online-adhd-diagnosis-legitimate.html`
-- `answers/late-adhd-diagnosis-adults.html`
-- `answers/non-stimulant-adhd-medications.html`
-- `answers/rejection-sensitivity-adhd.html`
-- `answers/screening-vs-adhd-evaluation.html`
-- `answers/signs-of-adult-adhd.html`
-- `answers/starting-adhd-medication-adults.html`
-- `answers/time-blindness-adhd.html`
-- `blog/adderall-for-adhd-how-it-works.html`
-- `blog/adhd.html`
+- `answers/how-online-prescriptions-work.html`
 
-_…and 17 more (expected on ADHD funnels)._
+_…and 118 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 
@@ -119,6 +180,7 @@ _None detected in static HTML scan._
 
 ## Orphan pages (low inbound links, sample)
 
+- `adhd-diagnosis-florida.html`
 - `intake/index.html`
 - `visual-components.html`
 

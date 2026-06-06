@@ -459,13 +459,13 @@ export function renderLegalFooter({ includeControlledSubstance = false } = {}) {
   const csLink = includeControlledSubstance
     ? `<p><a href="${LEGAL_LINKS.controlledSubstanceTreatment}">Controlled Substance Treatment Agreement</a></p>`
     : '';
-  return `<div><h4>Legal</h4>
+  return `        <div class="footer-col footer-col--legal"><h4>Legal</h4>
           <p><a href="${LEGAL_LINKS.hub}">Legal &amp; Compliance</a></p>
           <p><a href="${LEGAL_LINKS.terms}">Terms of Use</a></p>
           <p><a href="${LEGAL_LINKS.privacy}">Privacy Policy</a></p>
           <p><a href="${LEGAL_LINKS.noticeOfPrivacy}">Notice of Privacy Practices</a></p>
           <p><a href="${LEGAL_LINKS.cookie}">Cookie Policy</a></p>
-          ${csLink}</div>`;
+          ${csLink}        </div>`;
 }
 
 /** Point legacy URLs to registry-driven /legal/* paths; standardize labels. */
@@ -583,98 +583,146 @@ export function normalizeSitewideCopy(html) {
   return html;
 }
 
-export function injectFooterChrome(html, relPath = '') {
-  if (!html.includes('<footer')) return html;
-
-  if (html.includes('class="footer-brand"')) {
-    html = html.replace(
-      /(<div class="footer-brand">)\s*<p>[^<]*<\/p>/i,
-      `$1<p>${FOOTER_STATES_LINE}</p>`,
-    );
-  }
-
-  html = html.replaceAll('href="/answers">Answers</a>', `href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a>`);
-
-  const footerHasAnswers = /<footer[\s\S]*<h4>Services<\/h4>[\s\S]{0,600}href="\/answers"/i.test(html);
-  if (html.includes('<h4>Services</h4>') && !footerHasAnswers) {
-    html = html.replace(
-      /<h4>Services<\/h4>/i,
-      `<h4>Services</h4>\n          <p><a href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a></p>`,
-    );
-  }
-
-  if (html.includes('<h4>Services</h4>') && !html.includes(`href="${NAV_PROVIDERS.path}"`)) {
-    html = html.replace(
-      /(<h4>Services<\/h4>[\s\S]*?)(<p><a href="\/adhd-care">)/i,
-      `$1<p><a href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a></p>\n          $2`,
-    );
-  }
-
-  if (!html.includes('Healthcare Services')) {
-    const block =
-      '        <div><h4>Healthcare Services</h4><p><a href="/primary-urgent-care">Primary &amp; urgent care</a></p><p><a href="/labs">Diagnostic labs</a></p><p><a href="/prescriptions">Prescriptions</a></p></div>\n';
-    if (/<div>\s*<h4>Contact<\/h4>/i.test(html)) {
-      html = html.replace(/(\n\s*<div>\s*\n\s*<h4>Contact<\/h4>)/, `\n${block}$1`);
-    }
-    if (!html.includes('Healthcare Services') && /<div><h4>Contact<\/h4>/i.test(html)) {
-      html = html.replace(/(<div><h4>Contact<\/h4>)/, `${block}$1`);
-    }
-    if (!html.includes('Healthcare Services') && html.includes('<h4>Legal</h4>')) {
-      html = html.replace(/(\n\s*<div>\s*\n\s*<h4>Legal<\/h4>)/, `\n${block}$1`);
-    }
-  }
-
-  const includeCs = relPath ? isControlledSubstanceLinkPage(relPath) : false;
-  if (html.includes('<h4>Legal</h4>')) {
-    html = html.replace(/<div>\s*<h4>Legal<\/h4>[\s\S]*?<\/div>/i, renderLegalFooter({ includeControlledSubstance: includeCs }));
-  } else if (html.includes('footer-grid')) {
-    const legalBlock = renderLegalFooter({ includeControlledSubstance: includeCs });
-    html = html.replace(
-      /(\s*<\/div>\s*<div class="container">\s*<p class="footer-notice">)/i,
-      `\n        ${legalBlock}$1`,
-    );
-  }
-
-  return html;
-}
-
-const FOOTER_GUIDE_HUB_LINKS = [
-  { href: '/answers/signs-of-adult-adhd', label: 'Adult ADHD signs' },
-  { href: '/answers/why-am-i-tired-even-after-sleeping', label: 'Fatigue & sleep' },
-  { href: '/answers/what-is-insulin-resistance', label: 'Insulin resistance' },
-  { href: '/answers/what-does-low-testosterone-feel-like', label: "Men's hormones" },
-  { href: '/answers/adhd-vs-burnout', label: 'ADHD vs burnout' },
-  { href: '/answers', label: 'Browse all guides' },
+/** HelloKlarity-style SEO footer columns — existing on-site URLs only (no hidden link spam). */
+const FOOTER_CARE_SERVICES_LINKS = [
+  { href: '/adhd-care', label: 'ADHD evaluation & care' },
+  { href: '/adhd-screening', label: 'Free ADHD screening' },
+  { href: '/weight-loss-metabolic-health', label: 'Medical weight loss' },
+  { href: '/mens-health-longevity', label: "Men's health & longevity" },
+  { href: '/primary-urgent-care', label: 'Primary & urgent care' },
+  { href: '/prescriptions', label: 'Online prescriptions' },
+  { href: '/labs', label: 'Diagnostic labs' },
+  { href: '/telehealth', label: 'Telehealth services' },
+  { href: '/book-appointment', label: 'Book appointment' },
 ];
 
-function renderFooterGuideHubColumn() {
-  const links = FOOTER_GUIDE_HUB_LINKS.map((l) => `          <p><a href="${l.href}">${l.label}</a></p>`).join('\n');
-  return `        <div class="footer-col footer-col--guides">
-          <h4>Popular guides</h4>
-${links}
+const FOOTER_HEALTH_GUIDES_LINKS = [
+  { href: NAV_HEALTH_GUIDES.path, label: 'Browse all Health Guides' },
+  { href: '/answers/signs-of-adult-adhd', label: 'Adult ADHD signs' },
+  { href: '/answers/is-online-adhd-diagnosis-legitimate', label: 'Legitimate online ADHD diagnosis' },
+  { href: '/answers/why-am-i-tired-even-after-sleeping', label: 'Fatigue & sleep' },
+  { href: '/answers/what-is-insulin-resistance', label: 'Insulin resistance' },
+  { href: '/answers/semaglutide-weight-loss-how-it-works', label: 'Semaglutide & weight loss' },
+  { href: '/answers/what-does-low-testosterone-feel-like', label: "Men's hormones" },
+  { href: '/answers/adhd-vs-burnout', label: 'ADHD vs burnout' },
+  { href: '/answers/glp-1-side-effects', label: 'GLP-1 side effects' },
+];
+
+const FOOTER_BLOG_LINKS = [
+  { href: '/blog', label: 'Health articles hub' },
+  { href: '/blog/adhd', label: 'ADHD articles' },
+  { href: '/blog/weight-loss', label: 'Weight loss articles' },
+  { href: '/blog/telehealth', label: 'Telehealth articles' },
+  { href: '/blog/how-to-know-if-you-have-adhd-adult', label: 'How to know if you have ADHD' },
+  { href: '/blog/is-online-adhd-diagnosis-legit', label: 'Is online ADHD diagnosis legit?' },
+  { href: '/blog/food-noise-and-glp-1-what-it-means-and-what-helps', label: 'Food noise & GLP-1' },
+  { href: '/blog/why-am-i-always-tired-causes-when-to-see-doctor', label: 'Why am I always tired?' },
+];
+
+const FOOTER_COMPANY_LINKS = [
+  { href: '/about', label: 'About Siya Health' },
+  { href: NAV_PROVIDERS.path, label: NAV_PROVIDERS.label },
+  { href: '/membership-pricing', label: 'Membership & pricing' },
+  { href: '/siya-circle', label: 'Siya Circle newsletter' },
+  { href: '/telehealth', label: 'How telehealth works' },
+  { href: '/book-appointment', label: 'Contact & booking' },
+];
+
+const FOOTER_GET_STARTED_LINKS = [
+  { href: BOOKING_LINK, label: COPY_STANDARDS.primaryCta, external: true },
+  { href: '/book-appointment', label: 'Book appointment' },
+  { href: 'mailto:care@siya.health', label: 'care@siya.health' },
+  { href: 'tel:+12154451244', label: '(215) 445-1244' },
+];
+
+function renderFooterLinkItem({ href, label, external = false }) {
+  const attrs = external ? ' target="_blank" rel="noopener"' : '';
+  return `          <p><a href="${href}"${attrs}>${label}</a></p>`;
+}
+
+function renderFooterLinkColumn(title, links, className = 'footer-col') {
+  const linkHtml = links.map((l) => renderFooterLinkItem(l)).join('\n');
+  const cls = className ? ` class="${className}"` : '';
+  return `        <div${cls}>
+          <h4>${title}</h4>
+${linkHtml}
         </div>`;
 }
 
-/** Sprint B1: additive footer guide hub column (existing URLs only). */
+function renderSeoFooterColumns(relPath = '') {
+  const includeCs = relPath ? isControlledSubstanceLinkPage(relPath) : false;
+  return [
+    renderFooterLinkColumn('Care &amp; Services', FOOTER_CARE_SERVICES_LINKS, 'footer-col footer-col--services'),
+    renderFooterLinkColumn('Health Guides', FOOTER_HEALTH_GUIDES_LINKS, 'footer-col footer-col--guides'),
+    renderFooterLinkColumn('Blog', FOOTER_BLOG_LINKS, 'footer-col footer-col--blog'),
+    renderFooterLinkColumn('Company', FOOTER_COMPANY_LINKS, 'footer-col footer-col--company'),
+    renderLegalFooter({ includeControlledSubstance: includeCs }),
+    renderFooterLinkColumn('Get started', FOOTER_GET_STARTED_LINKS, 'footer-col footer-col--contact'),
+  ].join('\n');
+}
+
+const FOOTER_BRAND_BLOCK_RE =
+  /<div class="footer-brand">[\s\S]*?(?:<div class="footer-trust-logos">[\s\S]*?<\/div>\s*)?(?:<div class="footer-social">[\s\S]*?<\/div>\s*)?<\/div>/i;
+
+function extractFooterBrandBlock(middle) {
+  const match = middle.match(FOOTER_BRAND_BLOCK_RE);
+  if (match) return match[0];
+
+  const start = middle.indexOf('<div class="footer-brand">');
+  if (start === -1) return '';
+
+  const colIdx = middle.indexOf('<div class="footer-col', start);
+  if (colIdx === -1) return middle.slice(start);
+
+  let brand = middle.slice(start, colIdx).trimEnd();
+  if (!brand.endsWith('</div>')) brand += '\n        </div>';
+  return brand;
+}
+
+function normalizeFooterBrandBlock(brand) {
+  if (!brand) return brand;
+  return brand.replace(
+    /(<div class="footer-brand">)\s*<p>[^<]*<\/p>/i,
+    `$1<p>${FOOTER_STATES_LINE}</p>`,
+  );
+}
+
+/** Replace legacy footer columns with HelloKlarity-style SEO architecture (visible links only). */
+export function injectSeoFooterArchitecture(html, relPath = '') {
+  if (!html.includes('footer-grid')) return html;
+
+  html = html.replace(/data-siya-footer="seo""/g, 'data-siya-footer="seo"');
+  html = html.replace(
+    /<div class="container footer-grid footer-grid--seo"(?:\s+data-siya-footer="seo")+>/gi,
+    '<div class="container footer-grid footer-grid--seo" data-siya-footer="seo">',
+  );
+
+  const footerCorrupted = /<div class="footer-brand">[\s\S]*<div class="footer-col/.test(html);
+  if (html.includes('footer-grid--seo') && html.includes('data-siya-footer="seo"') && !footerCorrupted) {
+    return html;
+  }
+
+  const columns = renderSeoFooterColumns(relPath);
+  const gridRe =
+    /(<div class="container footer-grid(?:\s+footer-grid--seo)?(?:\s+data-siya-footer="seo")?">)\s*(<div class="footer-logo-col">[\s\S]*?<\/div>\s*)([\s\S]*?)(\s*<\/div>\s*\n\s*<div class="container">\s*<p class="footer-notice">)/i;
+
+  const replaced = html.replace(gridRe, (_m, _gridOpen, logoCol, middle, suffix) => {
+    const brand = normalizeFooterBrandBlock(extractFooterBrandBlock(middle));
+    return `<div class="container footer-grid footer-grid--seo" data-siya-footer="seo">
+        ${logoCol}${brand}
+${columns}${suffix}`;
+  });
+
+  return replaced;
+}
+
+/** @deprecated Merged into injectSeoFooterArchitecture — kept for import compatibility. */
+export function injectFooterChrome(html, relPath = '') {
+  return injectSeoFooterArchitecture(html, relPath);
+}
+
+/** @deprecated Merged into injectSeoFooterArchitecture — kept for import compatibility. */
 export function injectFooterGuideHubs(html) {
-  if (!html.includes('footer-grid') || html.includes('footer-col--guides')) return html;
-
-  html = html.replace(/class="container footer-grid"/g, 'class="container footer-grid footer-grid--enhanced"');
-
-  const hubBlock = renderFooterGuideHubColumn();
-  if (/<div class="footer-col footer-col--guides">/.test(html)) return html;
-
-  if (/<div><h4>Healthcare Services<\/h4>[\s\S]*?<\/div>\s*\n\s*<div>\s*\n\s*<h4>Contact<\/h4>/i.test(html)) {
-    return html.replace(
-      /(<div><h4>Healthcare Services<\/h4>[\s\S]*?<\/div>)\s*(\n\s*<div>\s*\n\s*<h4>Contact<\/h4>)/i,
-      `$1\n${hubBlock}$2`,
-    );
-  }
-
-  if (/<div>\s*<h4>Contact<\/h4>/i.test(html)) {
-    return html.replace(/(\n\s*<div>\s*\n\s*<h4>Contact<\/h4>)/i, `\n${hubBlock}$1`);
-  }
-
   return html;
 }
 
@@ -1185,8 +1233,7 @@ export function injectGhlLegalAcceptance(html, relPath) {
 
 export function applySiteChrome(html, relPath, title = '') {
   if (isLegalContentPage(relPath)) {
-    html = injectFooterChrome(html, relPath);
-    html = injectFooterGuideHubs(html);
+    html = injectSeoFooterArchitecture(html, relPath);
     html = normalizeLegalLinks(html);
     return html;
   }
@@ -1197,8 +1244,7 @@ export function applySiteChrome(html, relPath, title = '') {
   html = injectAdhdFunnelBanner(html, relPath);
   html = injectProvidersNav(html);
   html = injectAnswersNav(html);
-  html = injectFooterChrome(html, relPath);
-  html = injectFooterGuideHubs(html);
+  html = injectSeoFooterArchitecture(html, relPath);
   html = injectLearnMoreSections(html, relPath);
   html = injectHomepageCareTeam(html, relPath);
   html = injectAboutProviderHub(html, relPath);

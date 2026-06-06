@@ -1,12 +1,12 @@
 # Link Equity Report — Canonical Winning Blogs
 
-Generated: 2026-06-06T06:05:57.423Z
+Generated: 2026-06-06T06:18:06.383Z
 
 ## Top 20 blogs needing more internal links
 
 | Rank | Blog | Inbound | Guide link | Reciprocal | Category hub | Related block | Service page | Score |
 |------|------|--------:|------------|------------|--------------|---------------|--------------|------:|
-| 1 | /blog/why-am-i-always-tired-causes-when-to-see-doctor | 21 | ✗ | ✗ | ✓ | ✓ | ✓ | 3/5 |
+| 1 | /blog/why-am-i-always-tired-causes-when-to-see-doctor | 91 | ✗ | ✗ | ✓ | ✓ | ✓ | 3/5 |
 | 2 | /blog/compounded-vs-branded-glp1-medications | 3 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 3 | /blog/phentermine-for-weight-loss-safety-and-effectiveness | 3 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 4 | /blog/oral-vs-injectable-weight-loss-medications | 3 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
@@ -31,10 +31,10 @@ Generated: 2026-06-06T06:05:57.423Z
 
 | Blog | Inbound |
 |------|--------:|
-| /blog/is-online-adhd-diagnosis-legit | 39 |
-| /blog/food-noise-and-glp-1-what-it-means-and-what-helps | 24 |
+| /blog/why-am-i-always-tired-causes-when-to-see-doctor | 91 |
+| /blog/food-noise-and-glp-1-what-it-means-and-what-helps | 90 |
+| /blog/is-online-adhd-diagnosis-legit | 88 |
 | /blog/insulin-resistance-and-weight-loss-clinician-overview | 23 |
-| /blog/why-am-i-always-tired-causes-when-to-see-doctor | 21 |
 | /blog/glp1-side-effects-and-how-to-manage-them | 14 |
 | /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | 14 |
 | /blog/semaglutide-for-weight-loss-how-it-works | 13 |
