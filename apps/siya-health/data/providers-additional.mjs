@@ -98,6 +98,9 @@ export const ADDITIONAL_PROVIDERS = [
       focusLead: 'Family medicine with ADHD and metabolic care in Florida.',
     },
     servicePageTagline: 'Family medicine & ADHD (FL)',
+    homepageRole: 'Family Medicine Physician',
+    homepageBio:
+      'Experienced in primary care, preventive health, ADHD evaluation and treatment, and caring for patients across a wide range of everyday health concerns.',
     claimsNeedingVerification: [],
     showScreeningCta: true,
   },
@@ -194,6 +197,9 @@ export const ADDITIONAL_PROVIDERS = [
       focusLead: 'NP-led telehealth with ADHD and mental health focus (PA).',
     },
     servicePageTagline: 'ADHD & mental health (PA)',
+    homepageRole: 'Family Nurse Practitioner',
+    homepageBio:
+      'Primary care provider with extensive telehealth experience, supporting patients with ADHD, mental health concerns, preventive care, and ongoing wellness needs.',
     claimsNeedingVerification: [],
     showScreeningCta: true,
   },
@@ -291,6 +297,9 @@ export const ADDITIONAL_PROVIDERS = [
       focusLead: 'NP-led weight loss and men\'s metabolic care (TX).',
     },
     servicePageTagline: 'Weight loss & men\'s health',
+    homepageRole: 'Family Nurse Practitioner',
+    homepageBio:
+      "Focus on weight management, men's health, hormone optimization, longevity-focused care, and helping patients improve energy, body composition, and overall health.",
     claimsNeedingVerification: [],
     showScreeningCta: false,
   },
@@ -386,6 +395,9 @@ export const ADDITIONAL_PROVIDERS = [
       focusLead: 'PA-led weight loss telehealth (CA).',
     },
     servicePageTagline: 'Weight loss telehealth (CA)',
+    homepageRole: 'Physician Assistant',
+    homepageBio:
+      'Primary care and telehealth provider experienced in ADHD care, preventive medicine, and helping patients navigate both acute and ongoing health concerns.',
     claimsNeedingVerification: [],
     showScreeningCta: false,
   },

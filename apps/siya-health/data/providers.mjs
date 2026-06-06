@@ -123,6 +123,9 @@ export const PROVIDERS = [
       focusLead: 'ADHD-first positioning—with room for the problems that often hide beside it.',
     },
     servicePageTagline: 'Adult ADHD & metabolic care',
+    homepageRole: 'Internal Medicine Physician',
+    homepageBio:
+      'Focus on metabolic health, weight management, hormone optimization, ADHD, and helping patients improve overall physical and mental well-being.',
     claimsNeedingVerification: ['5,000+ patients in structured weight-loss programs', 'verified testimonial attributions'],
     showScreeningCta: true,
   },
@@ -234,6 +237,9 @@ export const PROVIDERS = [
       focusLead: 'ADHD at the center—with behavioral and emotional overlap addressed honestly.',
     },
     servicePageTagline: 'ADHD & behavioral medicine',
+    homepageRole: 'Family Medicine Physician',
+    homepageBio:
+      'Focus on adult ADHD evaluation and treatment, behavioral health, and helping patients better understand symptoms affecting focus, productivity, and daily functioning.',
     claimsNeedingVerification: ['verified testimonial attributions'],
     showScreeningCta: true,
   },
@@ -345,6 +351,9 @@ export const PROVIDERS = [
       focusLead: 'ADHD in adults—with mood and anxiety overlap addressed within primary care scope.',
     },
     servicePageTagline: 'ADHD & behavioral health depth',
+    homepageRole: 'Internal Medicine Physician',
+    homepageBio:
+      "Primary care and women's health experience with a focus on preventive care, chronic disease management, mental health, and whole-person wellness.",
     claimsNeedingVerification: ['verified testimonial attributions'],
     showScreeningCta: true,
   },

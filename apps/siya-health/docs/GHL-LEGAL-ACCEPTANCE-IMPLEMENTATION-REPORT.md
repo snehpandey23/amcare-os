@@ -1,6 +1,6 @@
 # GHL Legal Acceptance — Implementation Report
 
-Generated: 2026-06-06T06:18:08.282Z
+Generated: 2026-06-06T07:02:00.122Z
 
 ## Objective
 
@@ -47,8 +47,8 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - HTML pages scanned: **168**
 - Pages with legacy GHL booking links: **0**
 - Total legacy GHL booking anchor targets: **0**
-- Pages with CarePatron booking links: **160**
-- Total CarePatron booking anchor targets: **635**
+- Pages with CarePatron booking links: **167**
+- Total CarePatron booking anchor targets: **644**
 - Pages with acceptance script after build: **1**
 - Intake hub present: **yes**
 
@@ -195,8 +195,14 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/book-appointment** (booking-hub) — 7 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/creyos-adhd-testing** (adhd-funnel) — 6 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/** (general-cta) — 7 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
-- **/intake** (intake-hub) — 0 CarePatron link(s), 0 legacy GHL link(s), acceptance script: yes
+- **/intake** (intake-hub) — 1 CarePatron link(s), 0 legacy GHL link(s), acceptance script: yes
 - **/labs** (general-cta) — 5 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/legal/controlled-substance-treatment-agreement** (general-cta) — 1 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
+- **/legal/cookie-policy** (general-cta) — 1 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
+- **/legal** (general-cta) — 1 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
+- **/legal/notice-of-privacy-practices** (general-cta) — 1 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
+- **/legal/privacy-policy** (general-cta) — 1 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
+- **/legal/terms-of-use** (general-cta) — 1 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
 - **/membership-pricing** (general-cta) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/mens-health-longevity** (general-cta) — 6 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
 - **/online-adhd-test** (adhd-funnel) — 7 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
@@ -208,10 +214,10 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/providers/dr-sneh-pandey** (provider-page) — 5 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
 - **/providers/dr-swati-pandey** (provider-page) — 5 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
 - **/providers/dr-vanessa-urbina** (provider-page) — 5 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
-- **/providers** (provider-page) — 3 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
+- **/providers** (provider-page) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
 - **/providers/megan-wunderlich** (provider-page) — 5 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
 - **/providers/wendy-delgado** (provider-page) — 5 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
-- **/siya-circle** (general-cta) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
+- **/siya-circle** (general-cta) — 5 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
 - **/telehealth** (general-cta) — 5 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
 - **/terms** (general-cta) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/weight-loss-metabolic-health** (general-cta) — 4 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no

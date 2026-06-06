@@ -457,15 +457,18 @@ function fixDuplicateCalifornia(html) {
 /** Standard Legal column for sitewide footers — driven by LEGAL_LINKS registry. */
 export function renderLegalFooter({ includeControlledSubstance = false } = {}) {
   const csLink = includeControlledSubstance
-    ? `<p><a href="${LEGAL_LINKS.controlledSubstanceTreatment}">Controlled Substance Treatment Agreement</a></p>`
+    ? `            <li><a href="${LEGAL_LINKS.controlledSubstanceTreatment}">Controlled Substance Agreement</a></li>`
     : '';
   return `        <div class="footer-col footer-col--legal"><h4>Legal</h4>
-          <p><a href="${LEGAL_LINKS.hub}">Legal &amp; Compliance</a></p>
-          <p><a href="${LEGAL_LINKS.terms}">Terms of Use</a></p>
-          <p><a href="${LEGAL_LINKS.privacy}">Privacy Policy</a></p>
-          <p><a href="${LEGAL_LINKS.noticeOfPrivacy}">Notice of Privacy Practices</a></p>
-          <p><a href="${LEGAL_LINKS.cookie}">Cookie Policy</a></p>
-          ${csLink}        </div>`;
+          <ul class="footer-links">
+            <li><a href="${LEGAL_LINKS.hub}">Legal &amp; Compliance</a></li>
+            <li><a href="${LEGAL_LINKS.terms}">Terms of Use</a></li>
+            <li><a href="${LEGAL_LINKS.privacy}">Privacy Policy</a></li>
+            <li><a href="${LEGAL_LINKS.noticeOfPrivacy}">Notice of Privacy Practices</a></li>
+            <li><a href="${LEGAL_LINKS.cookie}">Cookie Policy</a></li>
+${csLink}
+          </ul>
+        </div>`;
 }
 
 /** Point legacy URLs to registry-driven /legal/* paths; standardize labels. */
@@ -583,69 +586,70 @@ export function normalizeSitewideCopy(html) {
   return html;
 }
 
-/** HelloKlarity-style SEO footer columns — existing on-site URLs only (no hidden link spam). */
+/** HelloKlarity-style SEO footer — compact horizontal columns + brand/contact bar. */
+const FOOTER_NOTICE_DEFAULT =
+  'For emergencies, call 911. All telehealth services are provided by licensed medical professionals in accordance with state regulations.';
+const FOOTER_NOTICE_EDUCATIONAL =
+  'For emergencies, call 911. Educational content only—not medical advice for your specific situation.';
+
 const FOOTER_CARE_SERVICES_LINKS = [
   { href: '/adhd-care', label: 'ADHD evaluation & care' },
   { href: '/adhd-screening', label: 'Free ADHD screening' },
   { href: '/weight-loss-metabolic-health', label: 'Medical weight loss' },
   { href: '/mens-health-longevity', label: "Men's health & longevity" },
-  { href: '/primary-urgent-care', label: 'Primary & urgent care' },
-  { href: '/prescriptions', label: 'Online prescriptions' },
-  { href: '/labs', label: 'Diagnostic labs' },
   { href: '/telehealth', label: 'Telehealth services' },
-  { href: '/book-appointment', label: 'Book appointment' },
+  { href: '/labs', label: 'Diagnostic labs' },
 ];
 
 const FOOTER_HEALTH_GUIDES_LINKS = [
-  { href: NAV_HEALTH_GUIDES.path, label: 'Browse all Health Guides' },
+  { href: NAV_HEALTH_GUIDES.path, label: 'All Health Guides' },
   { href: '/answers/signs-of-adult-adhd', label: 'Adult ADHD signs' },
-  { href: '/answers/is-online-adhd-diagnosis-legitimate', label: 'Legitimate online ADHD diagnosis' },
+  { href: '/answers/is-online-adhd-diagnosis-legitimate', label: 'Online ADHD diagnosis' },
   { href: '/answers/why-am-i-tired-even-after-sleeping', label: 'Fatigue & sleep' },
   { href: '/answers/what-is-insulin-resistance', label: 'Insulin resistance' },
-  { href: '/answers/semaglutide-weight-loss-how-it-works', label: 'Semaglutide & weight loss' },
-  { href: '/answers/what-does-low-testosterone-feel-like', label: "Men's hormones" },
-  { href: '/answers/adhd-vs-burnout', label: 'ADHD vs burnout' },
-  { href: '/answers/glp-1-side-effects', label: 'GLP-1 side effects' },
 ];
 
 const FOOTER_BLOG_LINKS = [
-  { href: '/blog', label: 'Health articles hub' },
+  { href: '/blog', label: 'Health articles' },
   { href: '/blog/adhd', label: 'ADHD articles' },
   { href: '/blog/weight-loss', label: 'Weight loss articles' },
   { href: '/blog/telehealth', label: 'Telehealth articles' },
-  { href: '/blog/how-to-know-if-you-have-adhd-adult', label: 'How to know if you have ADHD' },
-  { href: '/blog/is-online-adhd-diagnosis-legit', label: 'Is online ADHD diagnosis legit?' },
-  { href: '/blog/food-noise-and-glp-1-what-it-means-and-what-helps', label: 'Food noise & GLP-1' },
-  { href: '/blog/why-am-i-always-tired-causes-when-to-see-doctor', label: 'Why am I always tired?' },
+  { href: '/blog/how-to-know-if-you-have-adhd-adult', label: 'Signs of adult ADHD' },
 ];
 
 const FOOTER_COMPANY_LINKS = [
   { href: '/about', label: 'About Siya Health' },
   { href: NAV_PROVIDERS.path, label: NAV_PROVIDERS.label },
   { href: '/membership-pricing', label: 'Membership & pricing' },
-  { href: '/siya-circle', label: 'Siya Circle newsletter' },
   { href: '/telehealth', label: 'How telehealth works' },
-  { href: '/book-appointment', label: 'Contact & booking' },
+  { href: '/siya-circle', label: 'Siya Circle newsletter' },
 ];
 
-const FOOTER_GET_STARTED_LINKS = [
-  { href: BOOKING_LINK, label: COPY_STANDARDS.primaryCta, external: true },
-  { href: '/book-appointment', label: 'Book appointment' },
-  { href: 'mailto:care@siya.health', label: 'care@siya.health' },
-  { href: 'tel:+12154451244', label: '(215) 445-1244' },
-];
+const FOOTER_TRUST_BLOCK = `          <div class="footer-trust-logos">
+            <img src="/assets/images/hipaa-compliant.png" alt="HIPAA Compliant" class="footer-trust-logo" width="50" height="50" />
+            <a href="https://www.legitscript.com/websites/?checker_keywords=siya.health" target="_blank" rel="noopener" title="Verify LegitScript Approval for www.siya.health"><img src="https://static.legitscript.com/seals/46197681.png" alt="Verify Approval for www.siya.health" class="footer-trust-logo" width="73" height="79" /></a>
+            <img src="/assets/images/creyos-logo.png" alt="Creyos Cognitive Testing" class="footer-trust-logo" width="90" height="50" />
+          </div>`;
+
+const FOOTER_SOCIAL_BLOCK = `          <div class="footer-social">
+            <a href="https://www.facebook.com/siyahealthofficial" target="_blank" rel="noopener" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+            <a href="https://www.instagram.com/siyahealth_official/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+            <a href="https://www.linkedin.com/company/siyahealthofficial/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://www.pinterest.com/siyahealthus/" target="_blank" rel="noopener" aria-label="Pinterest"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.395 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
+          </div>`;
 
 function renderFooterLinkItem({ href, label, external = false }) {
   const attrs = external ? ' target="_blank" rel="noopener"' : '';
-  return `          <p><a href="${href}"${attrs}>${label}</a></p>`;
+  return `            <li><a href="${href}"${attrs}>${label}</a></li>`;
 }
 
 function renderFooterLinkColumn(title, links, className = 'footer-col') {
   const linkHtml = links.map((l) => renderFooterLinkItem(l)).join('\n');
-  const cls = className ? ` class="${className}"` : '';
-  return `        <div${cls}>
+  return `        <div class="${className}">
           <h4>${title}</h4>
+          <ul class="footer-links">
 ${linkHtml}
+          </ul>
         </div>`;
 }
 
@@ -657,63 +661,50 @@ function renderSeoFooterColumns(relPath = '') {
     renderFooterLinkColumn('Blog', FOOTER_BLOG_LINKS, 'footer-col footer-col--blog'),
     renderFooterLinkColumn('Company', FOOTER_COMPANY_LINKS, 'footer-col footer-col--company'),
     renderLegalFooter({ includeControlledSubstance: includeCs }),
-    renderFooterLinkColumn('Get started', FOOTER_GET_STARTED_LINKS, 'footer-col footer-col--contact'),
   ].join('\n');
 }
 
-const FOOTER_BRAND_BLOCK_RE =
-  /<div class="footer-brand">[\s\S]*?(?:<div class="footer-trust-logos">[\s\S]*?<\/div>\s*)?(?:<div class="footer-social">[\s\S]*?<\/div>\s*)?<\/div>/i;
-
-function extractFooterBrandBlock(middle) {
-  const match = middle.match(FOOTER_BRAND_BLOCK_RE);
-  if (match) return match[0];
-
-  const start = middle.indexOf('<div class="footer-brand">');
-  if (start === -1) return '';
-
-  const colIdx = middle.indexOf('<div class="footer-col', start);
-  if (colIdx === -1) return middle.slice(start);
-
-  let brand = middle.slice(start, colIdx).trimEnd();
-  if (!brand.endsWith('</div>')) brand += '\n        </div>';
-  return brand;
+function resolveFooterNotice(html, relPath = '') {
+  const match = html.match(/<p class="footer-notice">([^<]*)<\/p>/);
+  if (match) return match[1].trim();
+  if (relPath.startsWith('answers/') || relPath.startsWith('blog/')) return FOOTER_NOTICE_EDUCATIONAL;
+  return FOOTER_NOTICE_DEFAULT;
 }
 
-function normalizeFooterBrandBlock(brand) {
-  if (!brand) return brand;
-  return brand.replace(
-    /(<div class="footer-brand">)\s*<p>[^<]*<\/p>/i,
-    `$1<p>${FOOTER_STATES_LINE}</p>`,
-  );
-}
-
-/** Replace legacy footer columns with HelloKlarity-style SEO architecture (visible links only). */
-export function injectSeoFooterArchitecture(html, relPath = '') {
-  if (!html.includes('footer-grid')) return html;
-
-  html = html.replace(/data-siya-footer="seo""/g, 'data-siya-footer="seo"');
-  html = html.replace(
-    /<div class="container footer-grid footer-grid--seo"(?:\s+data-siya-footer="seo")+>/gi,
-    '<div class="container footer-grid footer-grid--seo" data-siya-footer="seo">',
-  );
-
-  const footerCorrupted = /<div class="footer-brand">[\s\S]*<div class="footer-col/.test(html);
-  if (html.includes('footer-grid--seo') && html.includes('data-siya-footer="seo"') && !footerCorrupted) {
-    return html;
-  }
-
+function renderSeoFooterMarkup(relPath = '', notice = FOOTER_NOTICE_DEFAULT) {
   const columns = renderSeoFooterColumns(relPath);
-  const gridRe =
-    /(<div class="container footer-grid(?:\s+footer-grid--seo)?(?:\s+data-siya-footer="seo")?">)\s*(<div class="footer-logo-col">[\s\S]*?<\/div>\s*)([\s\S]*?)(\s*<\/div>\s*\n\s*<div class="container">\s*<p class="footer-notice">)/i;
+  return `      <div class="container container--footer-wide footer-grid footer-grid--seo" data-siya-footer="seo-v2">
+${columns}
+      </div>
+      <div class="container container--footer-wide footer-brand-bar">
+        <div class="footer-brand-bar__left">
+          <a href="/" class="footer-logo-link footer-logo-link--compact"><img src="/assets/images/siya-health-logo.png" alt="Siya Health" class="footer-logo-img footer-logo-img--compact" /></a>
+          <div class="footer-brand-meta">
+            <p class="footer-brand-tagline">${FOOTER_STATES_LINE}</p>
+${FOOTER_TRUST_BLOCK}
+${FOOTER_SOCIAL_BLOCK}
+          </div>
+        </div>
+        <div class="footer-brand-bar__right footer-contact-block">
+          <p class="footer-contact-phone"><a href="tel:+12154451244" class="footer-phone">(215)&nbsp;445-1244</a></p>
+          <p><a href="mailto:care@siya.health">care@siya.health</a></p>
+          <p><a href="${BOOKING_LINK}" target="_blank" rel="noopener">${COPY_STANDARDS.primaryCta}</a></p>
+          <p><a href="/book-appointment">Book appointment</a></p>
+        </div>
+      </div>
+      <div class="container container--footer-wide">
+        <p class="footer-notice">${notice}</p>
+        <small>© 2026 Siya Health Inc. All rights reserved.</small>
+      </div>`;
+}
 
-  const replaced = html.replace(gridRe, (_m, _gridOpen, logoCol, middle, suffix) => {
-    const brand = normalizeFooterBrandBlock(extractFooterBrandBlock(middle));
-    return `<div class="container footer-grid footer-grid--seo" data-siya-footer="seo">
-        ${logoCol}${brand}
-${columns}${suffix}`;
-  });
+/** Replace footer with HelloKlarity-style horizontal SEO architecture (visible links only). */
+export function injectSeoFooterArchitecture(html, relPath = '') {
+  if (!html.includes('<footer')) return html;
 
-  return replaced;
+  const notice = resolveFooterNotice(html, relPath);
+  const markup = renderSeoFooterMarkup(relPath, notice);
+  return html.replace(/<footer class="footer">[\s\S]*?<\/footer>/i, `<footer class="footer">\n${markup}\n    </footer>`);
 }
 
 /** @deprecated Merged into injectSeoFooterArchitecture — kept for import compatibility. */
@@ -778,25 +769,25 @@ function buildHomepageCareTeam() {
       (p) => `            <article class="about-team-card homepage-care-card" data-states="${p.stateAbbreviations.join(',')}">
               ${renderCareTeamPhoto(p, 128, 128)}
               <h3><a href="/providers/${p.slug}">${p.name}</a></h3>
-              <p class="about-team-tagline">${p.servicePageTagline} · ${stateChipLabel(p)}</p>
+              <p class="about-team-role">${p.homepageRole ?? p.role}</p>
+              <p class="about-team-states">Licensed in ${stateChipLabel(p)}</p>
+              <p class="about-team-bio">${p.homepageBio ?? p.servicePageTagline}</p>
               <a class="button secondary care-team-profile-btn" href="/providers/${p.slug}">View profile</a>
             </article>`,
     )
     .join('\n');
   return `<!-- SIYA:CARE-TEAM -->
-      <section class="section section-tinted" id="care-team" aria-labelledby="care-team-heading">
+      <section class="section" id="care-team" aria-labelledby="care-team-heading">
         <div class="container">
-          <div class="section-header">
-            <h2 id="care-team-heading">Meet our care team</h2>
-            <p class="lead">Seven contracted clinicians across ADHD, weight loss, primary care, and telehealth—each card links to a full profile.</p>
+          <div class="section-header care-team-header">
+            <h2 id="care-team-heading">Meet Our Care Team</h2>
+            <p class="lead">Healthcare is personal.</p>
+            <p>Our physicians and advanced practice clinicians help adults seeking clarity on focus, fatigue, weight, hormones, and everyday health—through listening, thoughtful evaluation, and clear communication.</p>
           </div>
           <div class="about-team-grid homepage-care-grid">
 ${cards}
           </div>
-          <div class="provider-lp-ctas provider-lp-ctas--center">
-            <a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
-            <a class="button secondary" href="/providers">View Our Care Team</a>
-          </div>
+          <p class="care-team-hub-link"><a href="/providers" class="text-link">View full care team →</a></p>
         </div>
       </section>
       <!-- /SIYA:CARE-TEAM -->`;
@@ -1002,10 +993,6 @@ export function normalizeCtaHierarchy(html, relPath) {
 
   if (relPath === 'index.html') {
     html = html.replace(/<div class="provider-lp-ctas provider-lp-ctas--center">[\s\S]*?<\/div>/g, '');
-    html = html.replace(
-      /<div class="testimonial-cta">[\s\S]*?<\/div>/g,
-      `<p class="testimonial-cta-text">Start with a conversation—not a commitment. <a href="${MEET_GREET_URL}" class="text-link" target="_blank" rel="noopener">Talk to a clinician →</a></p>`,
-    );
   }
 
   if (isAdhdFunnelPage(relPath) && !relPath.startsWith('blog/') && html.includes('<!-- FINAL CTA -->')) {

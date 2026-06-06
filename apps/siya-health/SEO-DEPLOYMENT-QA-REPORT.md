@@ -1,6 +1,6 @@
 # SEO Deployment QA Report
 
-Generated: 2026-06-06T06:18:08.523Z
+Generated: 2026-06-06T07:02:00.324Z
 
 ## Summary
 
@@ -9,7 +9,7 @@ Generated: 2026-06-06T06:18:08.523Z
 | HTML pages scanned | 168 |
 | Sitemap URLs | 168 |
 | Pages with Meet & Greet in nav | 54 |
-| Non-ADHD pages still referencing adhd-screening | 64 |
+| Non-ADHD pages still referencing adhd-screening | 73 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
 
@@ -39,7 +39,7 @@ Generated: 2026-06-06T06:18:08.523Z
 - **Default secondary CTA:** Explore Care Options → `#services` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, `adhd-screening.html`
 
-### Non-ADHD pages still containing `adhd-screening` (64)
+### Non-ADHD pages still containing `adhd-screening` (73)
 
 - `about.html`
 - `blog/adderall-ir-vs-xr-adults.html`
@@ -89,7 +89,14 @@ Generated: 2026-06-06T06:18:08.523Z
 - `blog/why-am-i-always-tired-causes-when-to-see-doctor.html`
 - `book-appointment.html`
 - `index.html`
+- `intake/index.html`
 - `labs.html`
+- `legal/controlled-substance-treatment-agreement/index.html`
+- `legal/cookie-policy/index.html`
+- `legal/index.html`
+- `legal/notice-of-privacy-practices/index.html`
+- `legal/privacy-policy/index.html`
+- `legal/terms-of-use/index.html`
 - `membership-pricing.html`
 - `mens-health-longevity.html`
 - `prescriptions.html`
@@ -100,13 +107,15 @@ Generated: 2026-06-06T06:18:08.523Z
 - `providers/dr-sneh-pandey.html`
 - `providers/dr-swati-pandey.html`
 - `providers/dr-vanessa-urbina.html`
+- `providers/index.html`
 - `providers/megan-wunderlich.html`
 - `providers/wendy-delgado.html`
+- `siya-circle.html`
 - `telehealth.html`
 - `terms.html`
 - `weight-loss-metabolic-health.html`
 
-### All pages with any `adhd-screening` reference (158)
+### All pages with any `adhd-screening` reference (167)
 
 - `about.html`
 - `adhd-care.html`
@@ -149,7 +158,7 @@ Generated: 2026-06-06T06:18:08.523Z
 - `answers/how-much-does-adhd-testing-cost.html`
 - `answers/how-online-prescriptions-work.html`
 
-_…and 118 more (expected on ADHD funnels)._
+_…and 127 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 

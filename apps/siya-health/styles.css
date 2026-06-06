@@ -15,7 +15,7 @@
   --bg-subtle: #f9fafb;
   
   /* Layout - Stripe/modern SaaS */
-  --section-padding: 80px;
+  --section-padding: 72px;
   --section-padding-mobile: 40px;
   --container-max: 1100px;
   --gap: 24px;
@@ -1436,7 +1436,7 @@ button.secondary:hover {
   .testimonial-cards-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 1024px) {
-  .testimonial-cards-grid { grid-template-columns: repeat(3, 1fr); }
+  .testimonial-cards-grid { grid-template-columns: repeat(2, 1fr); }
 }
 .testimonial-card-premium {
   background: var(--white);
@@ -1465,24 +1465,45 @@ button.secondary:hover {
 }
 .testimonial-card-premium .testimonial-text {
   flex: 1;
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1.6;
   color: var(--text);
   margin: 0 0 16px;
 }
 .testimonial-footer {
   margin-top: auto;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 .testimonial-verified {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
 }
 .testimonial-cta {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 48px;
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.testimonial-cta-headline {
+  font-size: 1.35rem;
+  margin: 0 0 10px;
+  color: var(--primary);
+}
+.testimonial-cta-subtext {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin: 0 0 20px;
+}
+.testimonial-cta .button {
+  margin-bottom: 4px;
+}
+.testimonial-cta .reviews-link-wrap {
+  margin-top: 16px;
 }
 .testimonial-cta-text {
   font-size: 1.05rem;
@@ -3290,7 +3311,7 @@ a.asrs-interest-btn:hover {
 .footer {
   background: var(--primary);
   color: rgba(255, 255, 255, 0.9);
-  padding: 48px 0 24px;
+  padding: 36px 0 20px;
   margin-top: 0;
 }
 
@@ -3519,11 +3540,17 @@ a.asrs-interest-btn:hover {
 
 .symptoms-section.section-tinted { background: var(--bg-subtle); }
 
+.symptoms-section .section-header {
+  text-align: center;
+}
+
 .symptoms-section .section-header h2 {
   margin-bottom: 12px;
 }
 
 .symptoms-section .section-header .lead {
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 24px;
 }
 
@@ -5147,7 +5174,8 @@ body.ghl-legal-gate-open {
   text-decoration: none;
   color: inherit;
 }
-.symptoms-card--link .symptoms-card-actions {
+.symptoms-card--link .symptoms-card-actions,
+.symptoms-card--dual .symptoms-card-actions {
   margin-top: auto;
   padding-top: 12px;
   display: flex;
@@ -5155,15 +5183,31 @@ body.ghl-legal-gate-open {
   gap: 12px;
   align-items: center;
 }
-.symptoms-card--link .text-link {
+.symptoms-card--link .text-link,
+.symptoms-card--dual .symptoms-card-actions .text-link {
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--primary);
+  text-decoration: none;
 }
-.symptoms-card--link .symptoms-card-secondary {
+.symptoms-card--link .text-link:hover,
+.symptoms-card--dual .symptoms-card-actions .text-link:hover {
+  text-decoration: underline;
+}
+.symptoms-card--link .symptoms-card-secondary,
+.symptoms-card--dual .symptoms-card-actions .symptoms-card-secondary {
   font-size: 0.82rem;
   color: var(--accent);
   font-weight: 500;
+  text-decoration: none;
+}
+.symptoms-card--dual .symptoms-card-actions .symptoms-card-secondary:hover {
+  text-decoration: underline;
+}
+.symptoms-card--dual {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 .symptoms-eyebrow {
   font-size: 0.8rem;
@@ -5190,6 +5234,9 @@ body.ghl-legal-gate-open {
   line-height: 1.7;
 }
 .why-patients-copy p:last-child { margin-bottom: 0; }
+.why-patients-header {
+  text-align: center;
+}
 .flow-compliance-note {
   margin-top: 20px;
   font-size: 0.88rem;
@@ -5232,6 +5279,11 @@ body.ghl-legal-gate-open {
   align-items: center;
   justify-content: center;
   font-size: 1.4rem;
+  color: var(--primary);
+}
+.pathway-card-icon svg {
+  width: 22px;
+  height: 22px;
 }
 .pathway-card-body h3 {
   font-size: 1.05rem;
@@ -5268,49 +5320,23 @@ body.ghl-legal-gate-open {
   border-radius: 6px;
   margin-bottom: 6px;
 }
-.membership-band {
-  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 55%, #0ea5a4 100%);
-  color: #fff;
-  border-radius: 16px;
-  padding: 36px 32px;
+.ongoing-care-bridge {
   text-align: center;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 8px 0;
 }
-.membership-band h2 {
-  color: #fff;
-  font-size: 1.5rem;
+.ongoing-care-bridge h2 {
+  font-size: 1.45rem;
   margin-bottom: 10px;
 }
-.membership-band .lead {
-  color: rgba(255, 255, 255, 0.9);
-  max-width: 560px;
-  margin: 0 auto 20px;
+.ongoing-care-bridge .lead {
+  color: var(--text-secondary);
+  margin: 0 auto 16px;
+  max-width: 36rem;
 }
-.membership-band ul {
-  list-style: none;
-  margin: 0 auto 24px;
-  padding: 0;
-  max-width: 480px;
-  text-align: left;
-}
-.membership-band li {
-  padding: 6px 0 6px 24px;
-  position: relative;
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.92);
-}
-.membership-band li::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: #6ee7b7;
-  font-weight: 700;
-}
-.membership-band .button {
-  background: #fff;
-  color: var(--primary);
-}
-.membership-band .button:hover {
-  background: #f0f9ff;
+.ongoing-care-link {
+  margin: 0;
 }
 .provider-entity-note {
   margin-top: 16px;
@@ -5616,9 +5642,14 @@ body.ghl-legal-gate-open {
   }
 }
 
+#symptoms.section,
+#why-patients.section,
+#pathways.section,
 #care-team.section,
 .testimonials-premium.section,
-.why-siya-exists.section {
+#membership.section,
+.why-siya-exists.section,
+.faq-accordion-section.section {
   padding-top: 72px;
   padding-bottom: 72px;
 }
@@ -5660,6 +5691,9 @@ body.ghl-legal-gate-open {
 
 .homepage-care-card {
   padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
@@ -5686,18 +5720,46 @@ body.ghl-legal-gate-open {
   margin-bottom: 10px;
 }
 
-.homepage-care-card .about-team-tagline {
-  margin-bottom: 18px;
-  min-height: 2.85em;
+.homepage-care-card .about-team-role {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0 0 8px;
+  line-height: 1.35;
+}
+
+.homepage-care-card .about-team-states {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+  line-height: 1.35;
+}
+.homepage-care-card .about-team-bio {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin: 0 0 18px;
+  line-height: 1.5;
+  flex: 1 1 auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .care-team-profile-btn {
   width: 100%;
   max-width: 200px;
-  margin: 0 auto;
+  margin: auto auto 0;
   padding: 10px 18px;
   font-size: 0.9rem;
   font-weight: 600;
+}
+.care-team-hub-link {
+  text-align: center;
+  margin-top: 28px;
+}
+.care-team-header .lead {
+  margin-bottom: 8px;
 }
 
 @media (min-width: 768px) {
@@ -5709,14 +5771,27 @@ body.ghl-legal-gate-open {
   }
 
   .why-siya-founder-img {
-    min-height: 380px;
+    min-height: 420px;
     object-position: center top;
   }
 }
 
+.footer .container--footer-wide {
+  max-width: min(1400px, 100%);
+  padding-left: clamp(16px, 3vw, 40px);
+  padding-right: clamp(16px, 3vw, 40px);
+}
+
 .footer-grid--enhanced,
 .footer-grid--seo {
-  gap: 36px 24px;
+  gap: 20px clamp(16px, 2.5vw, 32px);
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .footer-grid--seo {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 1024px) {
@@ -5725,39 +5800,136 @@ body.ghl-legal-gate-open {
   }
 
   .footer-grid--seo {
-    grid-template-columns: minmax(140px, auto) minmax(200px, 1.1fr) repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1280px) {
-  .footer-grid--seo {
-    grid-template-columns: minmax(140px, auto) minmax(200px, 1.05fr) repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
 
 .footer-col h4 {
-  font-size: 0.95rem;
-  letter-spacing: 0.03em;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.footer-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.footer-links a {
+  font-size: 0.88rem;
 }
 
 .footer-col p {
-  margin-bottom: 10px;
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.footer-brand-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px 32px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.footer-brand-bar__left {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 20px 24px;
+  flex: 1 1 320px;
+  min-width: 0;
+}
+
+.footer-brand-bar__right {
+  flex: 0 1 auto;
+  text-align: right;
+}
+
+.footer-logo-link--compact {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.footer .footer-logo-img--compact {
+  height: 52px !important;
+  min-height: 0;
+  width: auto !important;
+  object-fit: contain;
+}
+
+.footer-brand-meta {
+  min-width: 0;
+  flex: 1 1 200px;
+}
+
+.footer-brand-tagline {
+  margin: 0 0 10px;
+  font-size: 0.82rem;
   line-height: 1.45;
+  max-width: 36rem;
+  color: rgba(255, 255, 255, 0.78);
 }
 
-.footer-col--guides p a,
-.footer-col--blog p a,
-.footer-col--services p a {
-  font-size: 0.92rem;
+.footer-brand-bar .footer-trust-logos {
+  margin: 8px 0 10px;
+  gap: 10px;
 }
 
-.footer-brand p {
-  line-height: 1.55;
+.footer-brand-bar .footer-trust-logo {
+  max-height: 40px;
+}
+
+.footer-brand-bar .footer-social {
+  gap: 10px;
+}
+
+.footer-contact-block p {
+  margin-bottom: 6px;
+  white-space: nowrap;
+}
+
+.footer-contact-block a {
+  font-size: 0.9rem;
+}
+
+.footer-contact-phone {
+  margin-bottom: 8px !important;
+}
+
+.footer-phone {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .footer-notice {
-  line-height: 1.55;
-  max-width: 52rem;
+  line-height: 1.5;
+  max-width: none;
+  font-size: 0.82rem;
+  margin-top: 20px;
+}
+
+@media (max-width: 767px) {
+  .footer-brand-bar__right {
+    text-align: left;
+    width: 100%;
+  }
+
+  .footer-contact-block p {
+    white-space: normal;
+  }
 }

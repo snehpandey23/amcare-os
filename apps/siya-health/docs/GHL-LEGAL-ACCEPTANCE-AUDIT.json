@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-06T06:18:08.282Z",
+  "generatedAt": "2026-06-06T07:02:00.122Z",
   "formId": "mnWpgh0IEgFvJymdZqHY",
   "bookingUrl": "https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4",
   "legalDocumentVersion": "terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31",
@@ -15,8 +15,8 @@
     "htmlPagesScanned": 168,
     "pagesWithGhlLinks": 0,
     "totalGhlBookingLinks": 0,
-    "pagesWithCarepatronLinks": 160,
-    "totalCarepatronBookingLinks": 635,
+    "pagesWithCarepatronLinks": 167,
+    "totalCarepatronBookingLinks": 644,
     "pagesWithAcceptanceScript": 1,
     "pagesWithGhlMissingAcceptance": 0,
     "intakeHub": true
@@ -1469,7 +1469,7 @@
       "file": "intake/index.html",
       "category": "intake-hub",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 0,
+      "carepatronBookingLinks": 1,
       "hasLegalAcceptanceScript": true,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": false
@@ -1483,6 +1483,66 @@
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
+    },
+    {
+      "path": "/legal/controlled-substance-treatment-agreement",
+      "file": "legal/controlled-substance-treatment-agreement/index.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 0,
+      "carepatronBookingLinks": 1,
+      "hasLegalAcceptanceScript": false,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/legal/cookie-policy",
+      "file": "legal/cookie-policy/index.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 0,
+      "carepatronBookingLinks": 1,
+      "hasLegalAcceptanceScript": false,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/legal",
+      "file": "legal/index.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 0,
+      "carepatronBookingLinks": 1,
+      "hasLegalAcceptanceScript": false,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/legal/notice-of-privacy-practices",
+      "file": "legal/notice-of-privacy-practices/index.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 0,
+      "carepatronBookingLinks": 1,
+      "hasLegalAcceptanceScript": false,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/legal/privacy-policy",
+      "file": "legal/privacy-policy/index.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 0,
+      "carepatronBookingLinks": 1,
+      "hasLegalAcceptanceScript": false,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/legal/terms-of-use",
+      "file": "legal/terms-of-use/index.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 0,
+      "carepatronBookingLinks": 1,
+      "hasLegalAcceptanceScript": false,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
     },
     {
       "path": "/membership-pricing",
@@ -1599,7 +1659,7 @@
       "file": "providers/index.html",
       "category": "provider-page",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 3,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": false
@@ -1629,7 +1689,7 @@
       "file": "siya-circle.html",
       "category": "general-cta",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 5,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": false
