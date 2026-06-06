@@ -1,6 +1,6 @@
 /**
  * Siya screening flow: topic chooser, then ASRS v1.1 6-Question ADHD Screener
- * Deep link: /adhd-screening?adhd=1 or #adhd → skip chooser, show ADHD intro
+ * Deep link: /adhd-screening?start=asrs (Sprint A), ?adhd=1, ?path=adhd, or #adhd → skip chooser
  */
 (function () {
   'use strict';
@@ -16,9 +16,22 @@
   var steps = container.querySelectorAll('.asrs-step');
   var currentStep = STEP_CHOOSE;
   var answers = [null, null, null, null, null, null];
+  var asrsEntrySource = 'organic_chooser';
+
+  function pushSiyaEvent(eventName, detail) {
+    window.dataLayer = window.dataLayer || [];
+    var payload = { event: eventName, page_path: window.location.pathname };
+    if (detail) {
+      Object.keys(detail).forEach(function (key) {
+        payload[key] = detail[key];
+      });
+    }
+    window.dataLayer.push(payload);
+  }
 
   function shouldSkipChooser() {
     var params = new URLSearchParams(window.location.search);
+    if (params.get('start') === 'asrs') return true;
     if (params.get('adhd') === '1' || params.get('path') === 'adhd') return true;
     if (window.location.hash === '#adhd') return true;
     return false;
@@ -41,6 +54,13 @@
 
     if (stepIndex === STEP_RESULTS) {
       showResults();
+    }
+
+    if (stepIndex === STEP_INTRO) {
+      pushSiyaEvent('asrs_intro_view', {
+        entry_source: asrsEntrySource,
+        query_string: window.location.search || '',
+      });
     }
   }
 
@@ -100,6 +120,7 @@
 
   function applyInitialStep() {
     if (shouldSkipChooser()) {
+      asrsEntrySource = 'deep_link';
       showStep(STEP_INTRO);
     } else {
       showStep(STEP_CHOOSE);
@@ -110,6 +131,7 @@
     var chooseAdhd = document.getElementById('asrs-choose-adhd');
     if (chooseAdhd) {
       chooseAdhd.addEventListener('click', function () {
+        asrsEntrySource = 'chooser';
         showStep(STEP_INTRO);
       });
     }
