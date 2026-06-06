@@ -435,18 +435,32 @@ function categoryBreadcrumb(relPath, html) {
   return ensureBreadcrumbCategory(html, relPath, entry.name, `${BASE}${entry.path}`);
 }
 
-/** Root-relative diagram paths — relative paths break on cleanUrls routes (/visual-components, /answers/*, etc.). */
-function normalizeDiagramAssetPaths(html) {
-  return html
-    .replace(/src="(?:\.\.\/)*assets\/diagrams\//g, 'src="/assets/diagrams/')
-    .replace(/src='(?:\.\.\/)*assets\/diagrams\//g, "src='/assets/diagrams/")
-    .replace(/&lt;img src="(?:\.\.\/)*assets\/diagrams\//g, '&lt;img src="/assets/diagrams/');
+/**
+ * Root-relative static asset paths — relative paths break on cleanUrls routes
+ * (/weight-loss-metabolic-health, /answers/*, /providers/*, etc.).
+ */
+function normalizeRootAssetPaths(html) {
+  let h = html;
+  h = h.replace(/\bhref="styles\.css"/g, 'href="/styles.css"');
+  h = h.replace(/\bhref="\.\.\/styles\.css"/g, 'href="/styles.css"');
+  h = h.replace(/\bsrc="scripts\//g, 'src="/scripts/');
+  h = h.replace(/\bsrc="\.\.\/scripts\//g, 'src="/scripts/');
+  h = h.replace(/\bhref="scripts\//g, 'href="/scripts/');
+  h = h.replace(/\bhref="\.\.\/scripts\//g, 'href="/scripts/');
+  h = h.replace(/\bsrc="(?:\.\.\/)+assets\//g, 'src="/assets/');
+  h = h.replace(/\bsrc="assets\//g, 'src="/assets/');
+  h = h.replace(/\bhref="(?:\.\.\/)+assets\//g, 'href="/assets/');
+  h = h.replace(/\bhref="assets\//g, 'href="/assets/');
+  h = h.replace(/url\(\s*(['"])(?:\.\.\/)+assets\//g, 'url($1/assets/');
+  h = h.replace(/url\(\s*(['"])assets\//g, 'url($1/assets/');
+  h = h.replace(/&lt;img src="(?:\.\.\/)*assets\//g, '&lt;img src="/assets/');
+  return h;
 }
 
 function processHtml(relPath) {
   const fullPath = path.join(SITE_ROOT, relPath);
   let html = fs.readFileSync(fullPath, 'utf8');
-  html = normalizeDiagramAssetPaths(html);
+  html = normalizeRootAssetPaths(html);
   const title = extractTitle(html);
   let description = extractDescription(html);
   let canonical = extractCanonical(html);
