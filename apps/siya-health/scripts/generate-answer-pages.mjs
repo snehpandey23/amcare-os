@@ -19,6 +19,8 @@ import {
 import { COPY_STANDARDS, FOOTER_STATES_LINE } from '../data/site-standards.mjs';
 import { buildHealthGuideEngagement } from './answer-engagement-system.mjs';
 import { MEET_GREET_URL, NAV_HEALTH_GUIDES } from './site-chrome.mjs';
+import { ANSWER_DIAGRAM_EMBEDS, renderDiagramFigure } from '../data/visual-diagrams.mjs';
+import { SIYA_CIRCLE_PROMO_HTML } from '../data/siya-circle-config.mjs';
 
 /** UX hub groupings (display order) */
 const HEALTH_GUIDE_CATEGORIES = [
@@ -352,6 +354,10 @@ function buildAnswerPage(seed) {
       ? `\n            ${engagement.takeaway}\n            ${engagement.midBreak}`
       : '';
   const learnMoreHtml = buildLearnMoreHtml(seed);
+  const diagramConfig = ANSWER_DIAGRAM_EMBEDS[seed.slug];
+  const diagramHtml = diagramConfig
+    ? `\n${renderDiagramFigure(diagramConfig.key, { figcaption: diagramConfig.figcaption })}\n`
+    : '';
   const faqJson = buildFaqJson(seed);
 
   const medicalWebPage = {
@@ -401,7 +407,7 @@ ${headerNav(seed.topic)}
           </header>
           <div class="blog-content">
             <p class="blog-disclaimer"><strong>Educational only:</strong> This page is for general education—not personal medical advice, diagnosis, or treatment. See a licensed clinician for your situation.</p>
-${canonicalBlogTopHtml(seed)}
+${diagramHtml}${canonicalBlogTopHtml(seed)}
 ${clinicalReviewBlock(reviewRecord)}
             <section class="answer-short" id="short-answer" aria-labelledby="short-answer-heading">
               <h2 id="short-answer-heading">Short answer</h2>
@@ -570,6 +576,7 @@ ${headerNav()}
             <h1>Health Guides</h1>
             <p class="lead">One question per page—short answer, detailed explanation, evidence, and related questions. Reviewed pages display physician name and date; others show pending physician review. <a href="/llms.txt">Machine index</a> · <a href="/article-index.json">JSON index</a></p>
           </div>
+${SIYA_CIRCLE_PROMO_HTML}
           <div class="health-guides-hub-categories">
 ${cards}
           </div>

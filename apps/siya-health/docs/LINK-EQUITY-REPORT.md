@@ -1,6 +1,6 @@
 # Link Equity Report — Canonical Winning Blogs
 
-Generated: 2026-06-05T14:58:15.525Z
+Generated: 2026-06-06T02:19:59.238Z
 
 ## Top 20 blogs needing more internal links
 
@@ -22,7 +22,7 @@ Generated: 2026-06-05T14:58:15.525Z
 | 14 | /blog/adhd-medication-side-effects-what-to-expect | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 15 | /blog/minoxidil-for-hair-loss-does-it-work | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 16 | /blog/medical-weight-loss-glp1-semaglutide-texas | 9 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
-| 17 | /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 12 | ✓ | ✓ | ✗ | ✓ | ✓ | 4/5 |
+| 17 | /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 11 | ✓ | ✓ | ✗ | ✓ | ✓ | 4/5 |
 | 18 | /blog/semaglutide-for-weight-loss-how-it-works | 13 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 19 | /blog/glp1-side-effects-and-how-to-manage-them | 14 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 20 | /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | 14 | ✓ | ✓ | ✗ | ✓ | ✓ | 4/5 |
@@ -38,7 +38,7 @@ Generated: 2026-06-05T14:58:15.525Z
 | /blog/glp1-side-effects-and-how-to-manage-them | 14 |
 | /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | 14 |
 | /blog/semaglutide-for-weight-loss-how-it-works | 13 |
-| /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 12 |
+| /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 11 |
 | /blog/when-is-testosterone-therapy-appropriate | 9 |
 | /blog/medical-weight-loss-glp1-semaglutide-texas | 9 |
 | /blog/adhd-medication-side-effects-what-to-expect | 6 |

@@ -1,7 +1,7 @@
 {
   "@context": "https://schema.org",
   "@type": "KnowledgeGraph",
-  "version": "2026-06-05",
+  "version": "2026-06-06",
   "organization": {
     "@id": "https://siya.health/#organization",
     "@type": "MedicalOrganization",
@@ -210,8 +210,8 @@
         "Chronic disease",
         "Lifestyle medicine"
       ],
-      "image": "https://siya.health/assets/provider-placeholder.svg",
-      "photoStatus": "pending",
+      "image": "https://siya.health/assets/images/dr-vanessa-urbina.png",
+      "photoStatus": "approved",
       "expertiseTopics": [
         "primary-care",
         "adhd-diagnosis",
@@ -467,8 +467,8 @@
         "Chronic disease"
       ],
       "npi": "1629930532",
-      "image": "https://siya.health/assets/provider-placeholder.svg",
-      "photoStatus": "pending",
+      "image": "https://siya.health/assets/images/megan-wunderlich.png",
+      "photoStatus": "approved",
       "expertiseTopics": [
         "adhd-screening",
         "mental-health",
@@ -551,8 +551,8 @@
         "GLP-1 therapy"
       ],
       "npi": "1609886910",
-      "image": "https://siya.health/assets/provider-placeholder.svg",
-      "photoStatus": "pending",
+      "image": "https://siya.health/assets/images/derek-timbs.png",
+      "photoStatus": "approved",
       "expertiseTopics": [
         "weight-loss",
         "glp-1",
@@ -634,8 +634,8 @@
         "GLP-1 therapy"
       ],
       "npi": "1063725059",
-      "image": "https://siya.health/assets/provider-placeholder.svg",
-      "photoStatus": "pending",
+      "image": "https://siya.health/assets/images/wendy-delgado.png",
+      "photoStatus": "approved",
       "expertiseTopics": [
         "weight-loss",
         "glp-1",

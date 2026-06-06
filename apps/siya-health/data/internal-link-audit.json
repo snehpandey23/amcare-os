@@ -1,6 +1,6 @@
 {
-  "generated": "2026-06-05",
-  "totalPages": 167,
+  "generated": "2026-06-06",
+  "totalPages": 168,
   "zeroInbound": [
     "/intake",
     "/privacy-policy",
@@ -115,17 +115,17 @@
     {
       "path": "/",
       "outboundCount": 36,
-      "uniqueInbound": 166
+      "uniqueInbound": 167
     },
     {
       "path": "/adhd-care",
       "outboundCount": 31,
-      "uniqueInbound": 160
+      "uniqueInbound": 161
     },
     {
       "path": "/blog",
-      "outboundCount": 38,
-      "uniqueInbound": 159
+      "outboundCount": 39,
+      "uniqueInbound": 160
     },
     {
       "path": "/blog/adhd",
@@ -134,18 +134,18 @@
     },
     {
       "path": "/answers",
-      "outboundCount": 76,
-      "uniqueInbound": 159
+      "outboundCount": 77,
+      "uniqueInbound": 160
     },
     {
       "path": "/about",
       "outboundCount": 24,
-      "uniqueInbound": 165
+      "uniqueInbound": 166
     },
     {
       "path": "/weight-loss-metabolic-health",
       "outboundCount": 32,
-      "uniqueInbound": 159
+      "uniqueInbound": 160
     }
   ],
   "topSuggestions": [
@@ -1220,25 +1220,25 @@
     ]
   },
   "inboundCounts": {
-    "/": 166,
-    "/about": 165,
-    "/adhd-care": 160,
-    "/answers": 159,
-    "/blog": 159,
-    "/telehealth": 159,
-    "/weight-loss-metabolic-health": 159,
+    "/": 167,
+    "/about": 166,
+    "/adhd-care": 161,
+    "/answers": 160,
+    "/blog": 160,
+    "/telehealth": 160,
+    "/weight-loss-metabolic-health": 160,
     "/labs": 158,
     "/prescriptions": 158,
     "/primary-urgent-care": 158,
-    "/legal": 100,
+    "/legal": 101,
     "/legal/notice-of-privacy-practices": 100,
     "/legal/privacy-policy": 100,
     "/legal/terms-of-use": 100,
     "/legal/cookie-policy": 99,
-    "/providers": 94,
+    "/providers": 95,
     "/blog/adhd": 63,
-    "/adhd-screening": 55,
-    "/answers/signs-of-adult-adhd": 46,
+    "/adhd-screening": 54,
+    "/answers/signs-of-adult-adhd": 47,
     "/legal/controlled-substance-treatment-agreement": 45,
     "/blog/is-online-adhd-diagnosis-legit": 39,
     "/adult-adhd-diagnosis": 37,
@@ -1247,19 +1247,19 @@
     "/blog/adhd-symptoms-overlooked": 35,
     "/blog/how-to-know-if-you-have-adhd-adult": 35,
     "/answers/starting-adhd-medication-adults": 33,
-    "/answers/what-is-food-noise": 30,
+    "/answers/what-is-food-noise": 31,
     "/adhd-evaluation-cost": 29,
     "/online-adhd-test": 29,
     "/blog/telehealth": 28,
+    "/answers/what-is-insulin-resistance": 25,
     "/providers/dr-sneh-pandey": 25,
-    "/answers/what-is-insulin-resistance": 24,
     "/blog/food-noise-and-glp-1-what-it-means-and-what-helps": 24,
     "/blog/insulin-resistance-and-weight-loss-clinician-overview": 23,
     "/mens-health-longevity": 23,
     "/blog/why-am-i-always-tired-causes-when-to-see-doctor": 21,
+    "/answers/why-am-i-tired-even-after-sleeping": 19,
     "/answers/brain-fog-after-eating": 18,
-    "/answers/why-am-i-tired-even-after-sleeping": 18,
-    "/answers/what-does-low-testosterone-feel-like": 17,
+    "/answers/what-does-low-testosterone-feel-like": 18,
     "/providers/dr-natasha-desai": 17,
     "/blog/how-to-safely-get-prescriptions-online": 16,
     "/answers/glp-1-side-effects": 14,
@@ -1339,6 +1339,7 @@
     "/blog/modafinil-for-focus-and-fatigue-is-it-safe": 4,
     "/blog/tirzepatide-vs-semaglutide-which-is-better": 4,
     "/blog/vyvanse-vs-adderall-differences": 4,
+    "/siya-circle": 4,
     "/answers/adhd-in-women": 3,
     "/answers/adhd-medication-every-day": 3,
     "/answers/afternoon-energy-crash-after-lunch": 3,

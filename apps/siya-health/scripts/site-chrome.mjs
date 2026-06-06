@@ -23,6 +23,7 @@ import {
   stateChipLabel,
 } from '../data/providers.mjs';
 import { buildClientIntakeConfig, GHL_BOOKING_URL } from '../data/ghl-intake-config.mjs';
+import { buildSiyaCircleClientConfig } from '../data/siya-circle-config.mjs';
 
 function escAttr(s) {
   return String(s)
@@ -980,6 +981,21 @@ function isLegalContentPage(relPath) {
 }
 
 /** Sitewide clickwrap gate before external GHL intake/booking links */
+export function injectSiyaCircleSignup(html, relPath) {
+  if (relPath !== 'siya-circle.html') return html;
+  if (html.includes('siya-circle-signup.js')) return html;
+
+  const config = buildSiyaCircleClientConfig();
+  const configScript = `<script>window.SIYA_CIRCLE_CONFIG=${JSON.stringify(config)};</script>`;
+  const loader = `<script src="/scripts/siya-circle-signup.js" defer></script>`;
+  const block = `<!-- SIYA:CIRCLE-SIGNUP -->\n${configScript}\n${loader}\n<!-- /SIYA:CIRCLE-SIGNUP -->`;
+
+  if (html.includes('<!-- SIYA:CIRCLE-SIGNUP -->')) {
+    return html.replace(/<!-- SIYA:CIRCLE-SIGNUP -->[\s\S]*?(?:<!-- \/SIYA:CIRCLE-SIGNUP -->)?/, block);
+  }
+  return html.replace(/<\/body>/i, `${block}\n</body>`);
+}
+
 export function injectGhlLegalAcceptance(html, relPath) {
   if (isLegalContentPage(relPath)) return html;
   if (html.includes('ghl-legal-acceptance.js')) return html;
@@ -1021,6 +1037,7 @@ export function applySiteChrome(html, relPath, title = '') {
   html = injectMeetPhysiciansSection(html, relPath);
   html = injectContinueReading(html, relPath, title, auditIndex);
   html = injectProviderAttribution(html);
+  html = injectSiyaCircleSignup(html, relPath);
   html = injectGhlLegalAcceptance(html, relPath);
   html = injectCookieNotice(html, relPath);
   html = normalizeLegalLinks(html);

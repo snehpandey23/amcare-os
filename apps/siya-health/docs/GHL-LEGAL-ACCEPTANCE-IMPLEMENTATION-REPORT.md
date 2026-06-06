@@ -1,6 +1,6 @@
 # GHL Legal Acceptance — Implementation Report
 
-Generated: 2026-06-05T14:58:17.153Z
+Generated: 2026-06-06T02:20:01.086Z
 
 ## Objective
 
@@ -44,10 +44,10 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 
 ## Audit totals
 
-- HTML pages scanned: **167**
-- Pages with GHL booking links: **159**
-- Total GHL booking anchor targets: **696**
-- Pages with acceptance script after build: **161**
+- HTML pages scanned: **168**
+- Pages with GHL booking links: **160**
+- Total GHL booking anchor targets: **700**
+- Pages with acceptance script after build: **162**
 - Intake hub present: **yes**
 
 ## Forms audited (site touchpoints)
@@ -209,6 +209,7 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/providers** (provider-page) — 4 GHL link(s), acceptance script: yes
 - **/providers/megan-wunderlich** (provider-page) — 10 GHL link(s), acceptance script: yes
 - **/providers/wendy-delgado** (provider-page) — 6 GHL link(s), acceptance script: yes
+- **/siya-circle** (general-cta) — 4 GHL link(s), acceptance script: yes
 - **/telehealth** (general-cta) — 13 GHL link(s), acceptance script: yes
 - **/terms** (general-cta) — 5 GHL link(s), acceptance script: yes, chat widget: yes
 - **/weight-loss-metabolic-health** (general-cta) — 10 GHL link(s), acceptance script: yes

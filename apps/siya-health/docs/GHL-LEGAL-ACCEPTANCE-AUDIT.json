@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-05T14:58:17.153Z",
+  "generatedAt": "2026-06-06T02:20:01.086Z",
   "formId": "mnWpgh0IEgFvJymdZqHY",
   "bookingUrl": "https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY",
   "legalDocumentVersion": "terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31",
@@ -12,10 +12,10 @@
     "npp": "legal_acceptance_npp"
   },
   "summary": {
-    "htmlPagesScanned": 167,
-    "pagesWithGhlLinks": 159,
-    "totalGhlBookingLinks": 696,
-    "pagesWithAcceptanceScript": 161,
+    "htmlPagesScanned": 168,
+    "pagesWithGhlLinks": 160,
+    "totalGhlBookingLinks": 700,
+    "pagesWithAcceptanceScript": 162,
     "pagesWithGhlMissingAcceptance": 0,
     "intakeHub": true
   },
@@ -1453,6 +1453,15 @@
       "file": "providers/wendy-delgado.html",
       "category": "provider-page",
       "ghlBookingLinks": 6,
+      "hasLegalAcceptanceScript": true,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/siya-circle",
+      "file": "siya-circle.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 4,
       "hasLegalAcceptanceScript": true,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": false

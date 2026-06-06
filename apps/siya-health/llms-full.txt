@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
-Generated: 2026-06-05
-Total pages: 167
+Generated: 2026-06-06
+Total pages: 168
 
 ---
 
@@ -880,6 +880,10 @@ Total pages: 167
   URL: https://siya.health/providers/wendy-delgado
   Summary: Meet Wendy Delgado, PA-C at Siya Health. GLP-1 and medical weight loss telehealth support in California.
   Topics: weight-loss, telehealth, pennsylvania
+
+- Siya Circle™ | Free Health Education Newsletter
+  URL: https://siya.health/siya-circle
+  Summary: Join Siya Circle™, a free health education newsletter from Siya Health with clinician-informed guides on focus, energy, weight, mood, hormones, and everyday health.
 
 - Virtual Medical Care | Siya Health Telehealth
   URL: https://siya.health/telehealth

@@ -435,9 +435,18 @@ function categoryBreadcrumb(relPath, html) {
   return ensureBreadcrumbCategory(html, relPath, entry.name, `${BASE}${entry.path}`);
 }
 
+/** Root-relative diagram paths — relative paths break on cleanUrls routes (/visual-components, /answers/*, etc.). */
+function normalizeDiagramAssetPaths(html) {
+  return html
+    .replace(/src="(?:\.\.\/)*assets\/diagrams\//g, 'src="/assets/diagrams/')
+    .replace(/src='(?:\.\.\/)*assets\/diagrams\//g, "src='/assets/diagrams/")
+    .replace(/&lt;img src="(?:\.\.\/)*assets\/diagrams\//g, '&lt;img src="/assets/diagrams/');
+}
+
 function processHtml(relPath) {
   const fullPath = path.join(SITE_ROOT, relPath);
   let html = fs.readFileSync(fullPath, 'utf8');
+  html = normalizeDiagramAssetPaths(html);
   const title = extractTitle(html);
   let description = extractDescription(html);
   let canonical = extractCanonical(html);
@@ -490,6 +499,7 @@ function processHtml(relPath) {
   if (relPath === 'adhd-care.html') html = ensureBreadcrumbSimplePage(html, 'ADHD Care', canonical);
   if (relPath === 'membership-pricing.html') html = ensureBreadcrumbSimplePage(html, 'Membership & pricing', canonical);
   if (relPath === 'answers/index.html') html = ensureBreadcrumbSimplePage(html, 'Health Guides', `${BASE}/answers`);
+  if (relPath === 'siya-circle.html') html = ensureBreadcrumbSimplePage(html, 'Siya Circle', `${BASE}/siya-circle`);
 
   html = ensureOrganizationWebPage(html, relPath, title, description, canonical);
   html = ensureWebSiteSchema(html, relPath);

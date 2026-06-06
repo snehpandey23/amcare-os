@@ -1,8 +1,21 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const SITE_ROOT = path.join(__dirname, '..');
+
 export const BASE_URL = 'https://siya.health';
 export const BOOKING_LINK = 'https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY';
 export const PROFILE_LAST_UPDATED = '2026-06-05';
 
 export const PROVIDER_PHOTO_PLACEHOLDER = 'assets/provider-placeholder.svg';
+
+function providerPhotoFileExists(photoPath) {
+  if (!photoPath) return false;
+  const rel = String(photoPath).replace(/^\//, '');
+  return fs.existsSync(path.join(SITE_ROOT, rel));
+}
 
 export function providerPhotoInitials(provider) {
   const g = provider.givenName?.[0] || '';
@@ -12,7 +25,10 @@ export function providerPhotoInitials(provider) {
 
 /** @returns {{ src: string, alt: string, pending: boolean, initials: string, pendingNote: string }} */
 export function resolveProviderPhoto(provider) {
-  const status = provider.photoStatus || 'approved';
+  let status = provider.photoStatus || 'approved';
+  if (status === 'pending' && providerPhotoFileExists(provider.photo)) {
+    status = 'approved';
+  }
   const credential = provider.honorificSuffix || provider.credentials?.[0] || '';
   const name = provider.displayName || provider.name;
 

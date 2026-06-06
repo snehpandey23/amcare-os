@@ -141,7 +141,7 @@ export const INTERNAL_PROVIDER_RECORDS = {
     hubSection: 'physicians',
     sortOrder: 2,
     featured: true,
-    photoStatus: 'pending',
+    photoStatus: 'approved',
     npi: null,
     licenses: licenseEntries(['Florida'], 'MD'),
     education: {
@@ -165,7 +165,7 @@ export const INTERNAL_PROVIDER_RECORDS = {
     hubSection: 'advanced-practice',
     sortOrder: 5,
     featured: false,
-    photoStatus: 'pending',
+    photoStatus: 'approved',
     npi: '1629930532',
     licenses: licenseEntries(['Pennsylvania'], 'APRN-FNP'),
     education: {
@@ -190,7 +190,7 @@ export const INTERNAL_PROVIDER_RECORDS = {
     hubSection: 'advanced-practice',
     sortOrder: 6,
     featured: false,
-    photoStatus: 'pending',
+    photoStatus: 'approved',
     npi: '1609886910',
     licenses: licenseEntries(['Texas', 'Ohio'], 'APRN-FNP'),
     education: {
@@ -216,7 +216,7 @@ export const INTERNAL_PROVIDER_RECORDS = {
     hubSection: 'advanced-practice',
     sortOrder: 7,
     featured: false,
-    photoStatus: 'pending',
+    photoStatus: 'approved',
     npi: '1063725059',
     licenses: [
       {
