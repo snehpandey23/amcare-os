@@ -51,7 +51,7 @@ const SITE_ROOT = path.join(__dirname, '..');
 export const NAV_HEALTH_GUIDES = { path: '/answers', label: 'Health Guides', shortLabel: 'Health guides' };
 export const NAV_PROVIDERS = { path: '/providers', label: 'Our Care Team', shortLabel: 'Our Care Team' };
 
-export const MEET_GREET_URL = 'https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY';
+export const MEET_GREET_URL = BOOKING_LINK;
 
 const NAV_CTA_MEET_GREET = `<a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>`;
 const NAV_CTA_SCREENING = `<a class="button" href="/adhd-screening">Start Free Screening</a>`;
@@ -525,6 +525,10 @@ export function normalizeSitewideCopy(html) {
   html = html.replaceAll('California, Texas, Pennsylvania, and Florida', STATES_INLINE);
   html = html.replaceAll('Licensed in CA, TX, PA, FL', `Licensed in ${STATES_BULLET}`);
   html = html.replaceAll('Licensed in CA, TX, FL, PA', `Licensed in ${STATES_BULLET}`);
+  html = html.replace(/(?<!CA,\s*)across TX, PA, FL/g, 'across CA, TX, PA, FL');
+  html = html.replace(/(?<!CA,\s*)Licensed in TX, PA, FL/g, `Licensed in ${STATES_BULLET}`);
+  html = html.replace(/(?<!CA,\s*)HIPAA-compliant\. TX, PA, FL\./g, 'HIPAA-compliant. CA, TX, PA, FL.');
+  html = html.replace(/Full telehealth coverage in three states\./g, 'Full telehealth coverage in four states.');
 
   html = html.replaceAll('Clinical Answers Hub', 'Health Guides Hub');
   html = html.replaceAll('Answers Hub', 'Health Guides Hub');
@@ -980,7 +984,7 @@ function isLegalContentPage(relPath) {
   return relPath.startsWith('legal/');
 }
 
-/** Sitewide clickwrap gate before external GHL intake/booking links */
+/** Legal acceptance gate — intake hub only (direct CarePatron booking elsewhere) */
 export function injectSiyaCircleSignup(html, relPath) {
   if (relPath !== 'siya-circle.html') return html;
   if (html.includes('siya-circle-signup.js')) return html;
@@ -996,8 +1000,17 @@ export function injectSiyaCircleSignup(html, relPath) {
   return html.replace(/<\/body>/i, `${block}\n</body>`);
 }
 
+/** Remove legacy sitewide legal gate from pages that now use direct CarePatron booking */
+export function stripGhlLegalAcceptance(html, relPath) {
+  if (relPath === 'intake/index.html') return html;
+  html = html.replace(/<!-- SIYA:GHL-LEGAL-ACCEPTANCE -->[\s\S]*?<!-- \/SIYA:GHL-LEGAL-ACCEPTANCE -->\n?/g, '');
+  html = html.replace(/<script>window\.SIYA_GHL_INTAKE=[\s\S]*?<\/script>\n?/g, '');
+  html = html.replace(/<script src="\/scripts\/ghl-legal-acceptance\.js" defer><\/script>\n?/g, '');
+  return html;
+}
+
 export function injectGhlLegalAcceptance(html, relPath) {
-  if (isLegalContentPage(relPath)) return html;
+  if (relPath !== 'intake/index.html') return html;
   if (html.includes('ghl-legal-acceptance.js')) return html;
 
   if (isAdhdLegalContext(relPath)) {
@@ -1038,6 +1051,7 @@ export function applySiteChrome(html, relPath, title = '') {
   html = injectContinueReading(html, relPath, title, auditIndex);
   html = injectProviderAttribution(html);
   html = injectSiyaCircleSignup(html, relPath);
+  html = stripGhlLegalAcceptance(html, relPath);
   html = injectGhlLegalAcceptance(html, relPath);
   html = injectCookieNotice(html, relPath);
   html = normalizeLegalLinks(html);

@@ -6,7 +6,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
 
 export const BASE_URL = 'https://siya.health';
-export const BOOKING_LINK = 'https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY';
+export const BOOKING_LINK = 'https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4';
 export const PROFILE_LAST_UPDATED = '2026-06-05';
 
 export const PROVIDER_PHOTO_PLACEHOLDER = 'assets/provider-placeholder.svg';

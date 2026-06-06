@@ -1,5 +1,5 @@
 /**
- * CI gate — GHL legal acceptance script present on intake touchpoints.
+ * CI gate — legal acceptance script present on intake hub only (CarePatron direct booking elsewhere).
  */
 import fs from 'fs';
 import path from 'path';
@@ -43,20 +43,21 @@ for (const field of [
   if (!gateJs.includes(field)) errors.push(`ghl-legal-acceptance.js missing field: ${field}`);
 }
 
-const ghlPattern = /link\.yourmarketingai\.com\/widget\/form\//i;
+const ghlBookingHrefPattern = /href="[^"]*link\.yourmarketingai\.com\/widget\/form\//i;
 for (const rel of walkHtml('.')) {
   if (rel.startsWith('legal/')) continue;
   const html = read(rel);
-  if (!ghlPattern.test(html)) continue;
-  if (!html.includes('ghl-legal-acceptance.js')) {
-    errors.push(`GHL link without acceptance gate: ${rel}`);
-  }
-  if (!html.includes('SIYA_GHL_INTAKE')) {
-    errors.push(`Missing SIYA_GHL_INTAKE config: ${rel}`);
-  }
+  if (!ghlBookingHrefPattern.test(html)) continue;
+  errors.push(`Legacy GHL booking CTA still present: ${rel}`);
 }
 
 const intake = read('intake/index.html');
+if (!intake.includes('ghl-legal-acceptance.js')) {
+  errors.push('intake/index.html missing ghl-legal-acceptance.js');
+}
+if (!intake.includes('SIYA_GHL_INTAKE')) {
+  errors.push('intake/index.html missing SIYA_GHL_INTAKE config');
+}
 for (const slug of ['terms-of-use', 'privacy-policy', 'notice-of-privacy-practices']) {
   if (!intake.includes(`/legal/${slug}`)) errors.push(`intake page missing link: /legal/${slug}`);
 }

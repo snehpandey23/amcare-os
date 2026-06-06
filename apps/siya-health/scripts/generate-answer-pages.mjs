@@ -18,6 +18,7 @@ import {
 } from './clinical-entity.mjs';
 import { COPY_STANDARDS, FOOTER_STATES_LINE } from '../data/site-standards.mjs';
 import { buildHealthGuideEngagement } from './answer-engagement-system.mjs';
+import { BOOKING_LINK } from '../data/providers-core.mjs';
 import { MEET_GREET_URL, NAV_HEALTH_GUIDES } from './site-chrome.mjs';
 import { ANSWER_DIAGRAM_EMBEDS, renderDiagramFigure } from '../data/visual-diagrams.mjs';
 import { SIYA_CIRCLE_PROMO_HTML } from '../data/siya-circle-config.mjs';
@@ -120,7 +121,7 @@ function guideCategoryForSeed(seed) {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
 const ANSWERS_DIR = path.join(SITE_ROOT, 'answers');
-const BOOK = 'https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY';
+const BOOK = BOOKING_LINK;
 
 function esc(s) {
   return String(s)

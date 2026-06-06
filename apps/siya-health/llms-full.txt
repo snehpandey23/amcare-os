@@ -900,7 +900,7 @@ Total pages: 168
 
 - Provider-Guided Medical Weight Loss
   URL: https://siya.health/weight-loss-metabolic-health
-  Summary: Board-certified obesity medicine. GLP-1, phentermine, semaglutide, tirzepatide when appropriate. Provider-guided programs across TX, PA, FL.
+  Summary: Board-certified obesity medicine. GLP-1, phentermine, semaglutide, tirzepatide when appropriate. Provider-guided programs across CA, TX, PA, FL.
   Topics: weight-loss
 
 ---

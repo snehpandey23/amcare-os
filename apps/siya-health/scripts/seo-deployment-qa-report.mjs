@@ -6,12 +6,13 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { ANSWER_SEEDS } from '../data/answer-seeds.mjs';
+import { BOOKING_LINK } from '../data/providers-core.mjs';
 import { isAdhdFunnelPage } from './site-chrome.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
 const OUT = path.join(SITE_ROOT, 'SEO-DEPLOYMENT-QA-REPORT.md');
-const MEET_GREET = 'https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY';
+const MEET_GREET = BOOKING_LINK;
 
 const DEPLOY_BLOGS = [
   '/blog/food-noise-and-glp-1-what-it-means-and-what-helps',

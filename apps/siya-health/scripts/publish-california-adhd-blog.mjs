@@ -6,12 +6,13 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import { BOOKING_LINK } from '../data/providers-core.mjs';
 import { CALIFORNIA_POSTS } from './california-adhd-blog-data.mjs';
 import { CALIFORNIA_POSTS_REST } from './california-adhd-blog-rest.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BLOG_DIR = path.join(__dirname, '..', 'blog');
-const BOOK = 'https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY';
+const BOOK = BOOKING_LINK;
 
 function escAttr(s) {
   return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');

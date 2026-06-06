@@ -1,5 +1,5 @@
 /**
- * Audit GHL intake touchpoints — booking CTAs, ADHD funnels, chat widget, acceptance coverage.
+ * Audit booking intake touchpoints — CarePatron CTAs, intake hub, chat widget, acceptance coverage.
  * Writes docs/GHL-LEGAL-ACCEPTANCE-AUDIT.json and docs/GHL-LEGAL-ACCEPTANCE-IMPLEMENTATION-REPORT.md
  */
 import fs from 'fs';
@@ -15,7 +15,8 @@ import { isAdhdLegalContext, isAdhdFunnelPage } from './site-chrome.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
-const GHL_PATTERN = /link\.yourmarketingai\.com\/widget\/form\//i;
+const GHL_BOOKING_HREF_PATTERN = /href="[^"]*link\.yourmarketingai\.com\/widget\/form\/[^"]*"/i;
+const CAREPATRON_HREF_PATTERN = /href="[^"]*book\.carepatron\.com\/Siya-Health[^"]*"/i;
 const CHAT_WIDGET_PATTERN = /widgets\.leadconnectorhq\.com\/loader\.js/i;
 const ACCEPTANCE_MARKER = 'ghl-legal-acceptance.js';
 
@@ -41,21 +42,24 @@ function categorize(relPath) {
   return 'general-cta';
 }
 
-function countGhlLinks(html) {
-  const matches = html.match(/href="[^"]*link\.yourmarketingai\.com\/widget\/form\/[^"]*"/gi) || [];
+function countBookingHrefLinks(html, pattern) {
+  const matches = html.match(new RegExp(pattern.source, 'gi')) || [];
   return matches.length;
 }
 
 const pages = walkHtml('.');
 const audited = [];
 let totalGhlLinks = 0;
+let totalCarepatronLinks = 0;
 let pagesWithGhl = 0;
+let pagesWithCarepatron = 0;
 let pagesWithAcceptance = 0;
 let pagesWithGhlMissingAcceptance = [];
 
 for (const rel of pages.sort()) {
   const html = fs.readFileSync(path.join(SITE_ROOT, rel), 'utf8');
-  const ghlCount = countGhlLinks(html);
+  const ghlCount = countBookingHrefLinks(html, GHL_BOOKING_HREF_PATTERN);
+  const carepatronCount = countBookingHrefLinks(html, CAREPATRON_HREF_PATTERN);
   const hasChat = CHAT_WIDGET_PATTERN.test(html);
   const hasAcceptance = html.includes(ACCEPTANCE_MARKER);
   const category = categorize(rel);
@@ -64,17 +68,22 @@ for (const rel of pages.sort()) {
     pagesWithGhl += 1;
     totalGhlLinks += ghlCount;
   }
+  if (carepatronCount > 0) {
+    pagesWithCarepatron += 1;
+    totalCarepatronLinks += carepatronCount;
+  }
   if (hasAcceptance) pagesWithAcceptance += 1;
   if (ghlCount > 0 && !hasAcceptance && !rel.startsWith('legal/')) {
     pagesWithGhlMissingAcceptance.push(rel);
   }
 
-  if (ghlCount > 0 || hasChat || rel === 'intake/index.html') {
+  if (ghlCount > 0 || carepatronCount > 0 || hasChat || rel === 'intake/index.html') {
     audited.push({
       path: `/${rel.replace(/index\.html$/, '').replace(/\.html$/, '')}`.replace(/\/$/, '') || '/',
       file: rel,
       category,
       ghlBookingLinks: ghlCount,
+      carepatronBookingLinks: carepatronCount,
       hasLegalAcceptanceScript: hasAcceptance,
       adhdDisclaimerRequired: isAdhdLegalContext(rel),
       hasChatWidget: hasChat,
@@ -84,16 +93,22 @@ for (const rel of pages.sort()) {
 
 const externalOnly = [
   {
-    id: 'ghl-primary-form',
-    name: 'Meet & Greet / booking widget',
+    id: 'carepatron-booking',
+    name: 'CarePatron direct scheduling',
     url: GHL_BOOKING_URL,
-    formId: GHL_FORM_ID,
-    siteCoverage: 'clickwrap gate via ghl-legal-acceptance.js on all non-legal HTML pages',
-    ghlAdminRequired: [
-      `Map URL/query hidden fields: ${Object.values(GHL_LEGAL_FIELDS).join(', ')}`,
-      'Persist fields on contact record and workflow triggers',
-      'Add matching hidden fields in GHL form builder',
+    siteCoverage: 'Direct booking CTAs sitewide; legal gate on /intake only',
+    opsRequired: [
+      'Confirm CarePatron intake captures policy acceptance if required by compliance',
+      `Optional: map ${Object.values(GHL_LEGAL_FIELDS).join(', ')} from /intake redirect query params`,
     ],
+  },
+  {
+    id: 'ghl-legacy-form',
+    name: 'Legacy GHL form (deprecated for booking)',
+    url: `https://link.yourmarketingai.com/widget/form/${GHL_FORM_ID}`,
+    formId: GHL_FORM_ID,
+    siteCoverage: 'No longer used for Meet & Greet / discovery CTAs',
+    ghlAdminRequired: ['Retain for historical contact records only'],
   },
   {
     id: 'leadconnector-chat',
@@ -117,6 +132,8 @@ const audit = {
     htmlPagesScanned: pages.length,
     pagesWithGhlLinks: pagesWithGhl,
     totalGhlBookingLinks: totalGhlLinks,
+    pagesWithCarepatronLinks: pagesWithCarepatron,
+    totalCarepatronBookingLinks: totalCarepatronLinks,
     pagesWithAcceptanceScript: pagesWithAcceptance,
     pagesWithGhlMissingAcceptance: pagesWithGhlMissingAcceptance.length,
     intakeHub: fs.existsSync(path.join(SITE_ROOT, 'intake/index.html')),
@@ -135,18 +152,18 @@ Generated: ${audit.generatedAt}
 
 ## Objective
 
-Enforceable intake acceptance for Siya Health booking, consultation, ADHD evaluation, screening, and contact funnels before external GHL form submission.
+Enforceable intake acceptance before CarePatron booking; direct scheduling links sitewide without modal friction.
 
 ## Implementation summary
 
 | Layer | Status | Notes |
 |-------|--------|-------|
-| Sitewide clickwrap gate | **Deployed** | \`scripts/ghl-legal-acceptance.js\` intercepts all \`link.yourmarketingai.com/widget/form/\` anchor clicks |
+| Direct CarePatron booking | **Deployed** | All Meet & Greet / discovery CTAs link to \`${GHL_BOOKING_URL}\` |
+| Intake legal gate | **Deployed** | \`/intake\` — on-page acceptance then redirect to CarePatron |
 | Policy links | **Deployed** | \`/legal/terms-of-use\`, \`/legal/privacy-policy\`, \`/legal/notice-of-privacy-practices\` |
-| Hidden field capture (URL params) | **Deployed** | \`${GHL_LEGAL_FIELDS.timestamp}\`, \`${GHL_LEGAL_FIELDS.source}\`, \`${GHL_LEGAL_FIELDS.version}\` + boolean acceptance flags |
-| ADHD disclaimer variant | **Deployed** | Shown on ADHD funnel pages, ADHD CTAs, and \`/intake?funnel=adhd\` |
-| Dedicated intake hub | **Deployed** | \`/intake\` — on-page acceptance + embedded GHL iframe |
-| GHL workflow persistence | **Ops required** | Map custom fields in GHL admin (see below) |
+| Hidden field capture (URL params) | **Deployed** | \`${GHL_LEGAL_FIELDS.timestamp}\`, \`${GHL_LEGAL_FIELDS.source}\`, \`${GHL_LEGAL_FIELDS.version}\` + boolean acceptance flags appended on /intake redirect |
+| ADHD disclaimer variant | **Deployed** | Shown on \`/intake?funnel=adhd\` |
+| Legacy GHL form | **Deprecated** | No booking CTAs to \`link.yourmarketingai.com/widget/form/\` |
 
 ## Policy version string
 
@@ -176,14 +193,16 @@ ${legalDocumentVersionString()}
 ## Audit totals
 
 - HTML pages scanned: **${audit.summary.htmlPagesScanned}**
-- Pages with GHL booking links: **${audit.summary.pagesWithGhlLinks}**
-- Total GHL booking anchor targets: **${audit.summary.totalGhlBookingLinks}**
+- Pages with legacy GHL booking links: **${audit.summary.pagesWithGhlLinks}**
+- Total legacy GHL booking anchor targets: **${audit.summary.totalGhlBookingLinks}**
+- Pages with CarePatron booking links: **${audit.summary.pagesWithCarepatronLinks}**
+- Total CarePatron booking anchor targets: **${audit.summary.totalCarepatronBookingLinks}**
 - Pages with acceptance script after build: **${audit.summary.pagesWithAcceptanceScript}**
 - Intake hub present: **${audit.summary.intakeHub ? 'yes' : 'no'}**
 
 ## Forms audited (site touchpoints)
 
-${audited.map((p) => `- **${p.path}** (${p.category}) — ${p.ghlBookingLinks} GHL link(s), acceptance script: ${p.hasLegalAcceptanceScript ? 'yes' : 'no'}${p.adhdDisclaimerRequired ? ', ADHD disclaimer: yes' : ''}${p.hasChatWidget ? ', chat widget: yes' : ''}`).join('\n')}
+${audited.map((p) => `- **${p.path}** (${p.category}) — ${p.carepatronBookingLinks} CarePatron link(s), ${p.ghlBookingLinks} legacy GHL link(s), acceptance script: ${p.hasLegalAcceptanceScript ? 'yes' : 'no'}${p.adhdDisclaimerRequired ? ', ADHD disclaimer: yes' : ''}${p.hasChatWidget ? ', chat widget: yes' : ''}`).join('\n')}
 
 ## External funnels (GHL-side only)
 
@@ -193,7 +212,7 @@ ${externalOnly.map((f) => `- **${f.name}** (\`${f.id}\`) — ${f.siteCoverage}`)
 
 ### Site (HTML) — after \`npm run build\`
 
-${pagesWithGhlMissingAcceptance.length === 0 ? '_None — all pages with GHL links include the acceptance gate._' : pagesWithGhlMissingAcceptance.map((p) => `- \`${p}\``).join('\n')}
+${pagesWithGhlMissingAcceptance.length === 0 ? '_None — no legacy GHL booking CTAs remain._' : pagesWithGhlMissingAcceptance.map((p) => `- \`${p}\``).join('\n')}
 
 ### GHL / LeadConnector (ops — cannot be completed in repo)
 
@@ -205,8 +224,8 @@ ${pagesWithGhlMissingAcceptance.length === 0 ? '_None — all pages with GHL lin
 
 - \`data/ghl-intake-config.mjs\` — form ID, field keys, policy versions, copy
 - \`scripts/ghl-legal-acceptance.js\` — clickwrap modal + link interception
-- \`scripts/site-chrome.mjs\` — inject config + script on all non-legal pages
-- \`scripts/generate-intake-page.mjs\` — \`/intake\` hub
+- \`scripts/site-chrome.mjs\` — CarePatron CTAs; legal gate on /intake only
+- \`scripts/generate-intake-page.mjs\` — \`/intake\` hub with CarePatron redirect
 - \`scripts/audit-ghl-forms.mjs\` — this report
 - \`scripts/validate-ghl-legal-acceptance.mjs\` — CI gate
 - \`styles.css\` — modal + intake panel styles
@@ -218,4 +237,4 @@ ${pagesWithGhlMissingAcceptance.length === 0 ? '_None — all pages with GHL lin
 `;
 
 fs.writeFileSync(path.join(SITE_ROOT, 'docs/GHL-LEGAL-ACCEPTANCE-IMPLEMENTATION-REPORT.md'), report);
-console.log(`GHL audit: ${pagesWithGhl} pages, ${totalGhlLinks} links, ${pagesWithGhlMissingAcceptance.length} missing acceptance`);
+console.log(`Booking audit: ${pagesWithCarepatron} CarePatron pages (${totalCarepatronLinks} links), ${pagesWithGhl} legacy GHL pages (${totalGhlLinks} links)`);

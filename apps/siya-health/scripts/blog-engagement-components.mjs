@@ -2,6 +2,7 @@
  * Reusable blog engagement components — Siya Health branding.
  * Import in apply scripts or paste HTML from buildEngagementBlock().
  */
+import { BOOKING_LINK } from '../data/providers-core.mjs';
 
 export function keyTakeaway({ title = 'Key takeaways', items }) {
   return `
@@ -456,8 +457,7 @@ export function dedupeClinicalReview(html) {
   return html.replace(/(\s*<aside class="clinical-review[\s\S]*?<\/aside>)+/g, CLINICAL_REVIEW_SINGLE);
 }
 
-export const MEET_GREET_URL =
-  'https://link.yourmarketingai.com/widget/form/mnWpgh0IEgFvJymdZqHY';
+export const MEET_GREET_URL = BOOKING_LINK;
 
 export function l1ServiceLink({ href, text }) {
   return `

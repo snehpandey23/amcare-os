@@ -1,12 +1,14 @@
 /**
- * GHL intake legal acceptance — single source of truth for form IDs, field keys, and policy versions.
- * Client bundle: scripts/ghl-legal-acceptance.js (loaded sitewide via site-chrome.mjs)
+ * Intake legal acceptance — field keys, policy versions, and booking URL.
+ * Booking is CarePatron (BOOKING_LINK); GHL form IDs retained for legacy intake field mapping.
+ * Client bundle: scripts/ghl-legal-acceptance.js (loaded on /intake only via site-chrome.mjs)
  */
 import { BOOKING_LINK } from './providers-core.mjs';
 import { LEGAL_EFFECTIVE_DATE, PUBLISHED_LEGAL_DOCUMENTS } from './legal-documents.mjs';
 
 export const GHL_FORM_ID = 'mnWpgh0IEgFvJymdZqHY';
 export const GHL_FORM_HOST_PATTERN = 'link.yourmarketingai.com/widget/form/';
+/** Primary booking URL — CarePatron direct scheduling */
 export const GHL_BOOKING_URL = BOOKING_LINK;
 
 /** Hidden / custom field keys — must match GHL form + workflow field mapping */

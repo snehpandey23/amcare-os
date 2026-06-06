@@ -1,5 +1,5 @@
 /**
- * Generates /intake — on-page legal acceptance before embedded GHL booking form.
+ * Generates /intake — on-page legal acceptance before redirect to CarePatron booking.
  */
 import fs from 'fs';
 import path from 'path';
@@ -54,7 +54,7 @@ const html = `<!DOCTYPE html>
     <div class="container">
       <div class="section-header">
         <h1>Secure intake &amp; booking</h1>
-        <p class="lead">Review and accept our policies before continuing to the booking form. No PHI is collected on this page.</p>
+        <p class="lead">Review and accept our policies before continuing to schedule your visit. No PHI is collected on this page.</p>
       </div>
 
       <div class="intake-legal-panel" id="intake-acceptance-panel">
@@ -84,18 +84,9 @@ const html = `<!DOCTYPE html>
             <a href="${LEGAL_LINK_PATHS.npp}" target="_blank" rel="noopener">Notice of Privacy Practices</a>
           </p>
           <p class="ghl-legal-gate__error" id="intake-acceptance-error" role="alert" hidden>Please accept all three policies to continue.</p>
-          <button type="submit" class="button">Continue to booking form</button>
+          <button type="submit" class="button">Continue to booking</button>
         </form>
       </div>
-
-      <iframe
-        id="intake-ghl-frame"
-        class="intake-form-frame"
-        title="Siya Health booking form"
-        hidden
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
     </div>
   </main>
   <footer class="footer">
@@ -117,8 +108,6 @@ const html = `<!DOCTYPE html>
         if (adhdEl) adhdEl.hidden = false;
       }
       var form = document.getElementById('intake-acceptance-form');
-      var frame = document.getElementById('intake-ghl-frame');
-      var panel = document.getElementById('intake-acceptance-panel');
       var err = document.getElementById('intake-acceptance-error');
       form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -134,10 +123,7 @@ const html = `<!DOCTYPE html>
         var gate = window.SiyaGhlLegalGate;
         var src = location.pathname + location.search;
         var url = gate ? gate.buildAcceptanceUrl(dest, src) : dest;
-        frame.src = url;
-        frame.hidden = false;
-        panel.hidden = true;
-        frame.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.location.href = url;
       });
     })();
   </script>
