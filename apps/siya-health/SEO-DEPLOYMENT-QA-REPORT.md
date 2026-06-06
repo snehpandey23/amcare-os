@@ -1,6 +1,6 @@
 # SEO Deployment QA Report
 
-Generated: 2026-06-06T02:55:48.960Z
+Generated: 2026-06-06T04:07:24.415Z
 
 ## Summary
 
@@ -8,8 +8,8 @@ Generated: 2026-06-06T02:55:48.960Z
 |--------|------:|
 | HTML pages scanned | 168 |
 | Sitemap URLs | 168 |
-| Pages with Meet & Greet in nav | 134 |
-| Non-ADHD pages still referencing adhd-screening | 0 |
+| Pages with Meet & Greet in nav | 95 |
+| Non-ADHD pages still referencing adhd-screening | 2 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
 
@@ -39,11 +39,12 @@ Generated: 2026-06-06T02:55:48.960Z
 - **Default secondary CTA:** Explore Care Options → `#services` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, `adhd-screening.html`
 
-### Non-ADHD pages still containing `adhd-screening` (0)
+### Non-ADHD pages still containing `adhd-screening` (2)
 
-_None detected._
+- `index.html`
+- `providers/megan-wunderlich.html`
 
-### All pages with any `adhd-screening` reference (54)
+### All pages with any `adhd-screening` reference (56)
 
 - `adhd-care.html`
 - `adhd-diagnosis-austin.html`
@@ -86,7 +87,7 @@ _None detected._
 - `blog/adhd.html`
 - `blog/adult-adhd-symptoms-california.html`
 
-_…and 14 more (expected on ADHD funnels)._
+_…and 16 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 

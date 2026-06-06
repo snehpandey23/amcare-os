@@ -53,6 +53,10 @@
       "count": 1
     },
     {
+      "path": "/book-appointment",
+      "count": 1
+    },
+    {
       "path": "/adhd-diagnosis-houston",
       "count": 2
     },
@@ -114,7 +118,7 @@
   "highAuthorityOutbound": [
     {
       "path": "/",
-      "outboundCount": 36,
+      "outboundCount": 37,
       "uniqueInbound": 167
     },
     {
@@ -1230,18 +1234,17 @@
     "/labs": 158,
     "/prescriptions": 158,
     "/primary-urgent-care": 158,
+    "/providers": 135,
     "/legal": 101,
     "/legal/notice-of-privacy-practices": 100,
     "/legal/privacy-policy": 100,
     "/legal/terms-of-use": 100,
     "/legal/cookie-policy": 99,
-    "/providers": 95,
     "/blog/adhd": 63,
-    "/adhd-screening": 54,
+    "/adhd-screening": 55,
     "/answers/signs-of-adult-adhd": 47,
     "/legal/controlled-substance-treatment-agreement": 45,
     "/blog/is-online-adhd-diagnosis-legit": 39,
-    "/adult-adhd-diagnosis": 37,
     "/blog/weight-loss": 37,
     "/answers/can-adhd-be-diagnosed-online": 36,
     "/blog/adhd-symptoms-overlooked": 35,
@@ -1261,6 +1264,7 @@
     "/answers/brain-fog-after-eating": 18,
     "/answers/what-does-low-testosterone-feel-like": 18,
     "/providers/dr-natasha-desai": 17,
+    "/adult-adhd-diagnosis": 16,
     "/blog/how-to-safely-get-prescriptions-online": 16,
     "/answers/glp-1-side-effects": 14,
     "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know": 14,
@@ -1282,7 +1286,6 @@
     "/answers/poor-sleep-feels-like-adhd": 10,
     "/answers/who-qualifies-glp-1-weight-loss": 10,
     "/blog/online-adhd-diagnosis-texas": 10,
-    "/book-appointment": 10,
     "/answers/testosterone-and-adhd-overlap": 9,
     "/blog/adhd-evaluation-cost-texas": 9,
     "/blog/medical-weight-loss-glp1-semaglutide-texas": 9,
@@ -1384,6 +1387,7 @@
     "/answers/adhd-in-men": 1,
     "/answers/creyos-adhd-testing-explained": 1,
     "/answers/weight-gain-after-stopping-ozempic": 1,
+    "/book-appointment": 1,
     "/intake": 0,
     "/privacy-policy": 0,
     "/terms": 0,

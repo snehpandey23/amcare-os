@@ -445,8 +445,8 @@ export const CORNERSTONE_ENGAGEMENT = {
 };
 
 const CLINICAL_REVIEW_SINGLE = `            <aside class="clinical-review clinical-review--pending" aria-label="Clinical review status">
-              <p class="clinical-review-label">Pending physician review</p>
-              <p>This educational content is awaiting final physician review.</p>
+              <p class="clinical-review-label">Clinician-informed</p>
+              <p>Educational content informed by clinical practice patterns—not personal medical advice.</p>
             </aside>
 
 `;
@@ -464,12 +464,8 @@ export function l1ServiceLink({ href, text }) {
             <p class="blog-service-link"><a href="${href}">${text}</a></p>`;
 }
 
-export function midCtaBlock({ secondaryHref, secondaryLabel = 'Explore Care Options' }) {
-  return `
-            <div class="cta-block blog-cta blog-cta--mid" aria-label="Book a visit">
-              <a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
-              <a class="button secondary" href="${secondaryHref}">${secondaryLabel}</a>
-            </div>`;
+export function midCtaBlock() {
+  return '';
 }
 
 export function serviceCard({ title, body, href, ctaLabel = 'Explore Care Options' }) {
@@ -494,25 +490,17 @@ export function relatedHealthGuides({ items }) {
 }
 
 /** Final exit CTA band — one per blog article, after article body */
-export function finalCtaBandSection({
-  adhd = false,
-  secondaryHref = '/telehealth',
-  secondaryLabel,
-}) {
-  const primaryLabel = adhd ? 'Book ADHD Evaluation' : 'Book a Meet &amp; Greet';
-  const secondary =
-    secondaryLabel || (adhd ? 'Start Free Screening' : 'Explore Care Options');
+export function finalCtaBandSection({ adhd = false }) {
+  const primaryLabel = adhd ? 'Book ADHD Evaluation' : 'Talk to a Clinician';
   const primaryHref = MEET_GREET_URL;
-  const secHref = adhd ? '/adhd-screening' : secondaryHref;
   return `
       <section class="section blog-final-cta">
         <div class="container">
           <div class="cta-band">
             <h3>Not sure where to start?</h3>
-            <p>A Meet &amp; Greet can help you understand your options and choose the right care path.</p>
+            <p>A brief clinician conversation can help you understand your options—no obligation.</p>
             <div class="cta-band-buttons">
               <a class="button" href="${primaryHref}" target="_blank" rel="noopener">${primaryLabel}</a>
-              <a class="button secondary" href="${secHref}">${secondary}</a>
             </div>
           </div>
         </div>

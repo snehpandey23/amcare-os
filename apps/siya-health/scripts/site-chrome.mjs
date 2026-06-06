@@ -53,8 +53,9 @@ export const NAV_PROVIDERS = { path: '/providers', label: 'Our Care Team', short
 
 export const MEET_GREET_URL = BOOKING_LINK;
 
-const NAV_CTA_MEET_GREET = `<a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>`;
-const NAV_CTA_SCREENING = `<a class="button" href="/adhd-screening">Start Free Screening</a>`;
+const NAV_CTA_MEET_GREET = `<a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">${COPY_STANDARDS.primaryCta}</a>`;
+const NAV_CTA_ADHD_EVAL = `<a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">${COPY_STANDARDS.adhdPrimaryCta}</a>`;
+const NAV_CTA_SCREENING = `<a class="button" href="/adhd-screening">${COPY_STANDARDS.adhdSecondaryCta}</a>`;
 
 /** Pages that keep ADHD screening as the primary nav CTA */
 const ADHD_FUNNEL_PATH = [
@@ -227,7 +228,7 @@ function buildMeetPhysiciansBlock(serviceKey, lead, stateAbbr = null) {
               ${renderCareTeamPhoto(p, 88, 88)}
               <h3><a href="/providers/${p.slug}">${p.name}</a></h3>
               <p class="about-team-tagline">${p.servicePageTagline} · ${stateChipLabel(p)}</p>
-              <a class="button secondary" href="${bookingLinkWithAttribution(p.slug, 'service-card')}" target="_blank" rel="noopener" data-provider-cta="${p.slug}">Book Meet &amp; Greet</a>
+              <a class="text-link" href="/providers/${p.slug}">View profile →</a>
             </article>`,
     )
     .join('\n');
@@ -415,12 +416,11 @@ export function injectAnswersNav(html) {
   return html;
 }
 
-/** Sitewide nav CTA: Meet & Greet default; ADHD screening on ADHD funnels only */
+/** Sitewide nav CTA: Talk to a Clinician default; Book ADHD Evaluation on ADHD funnels */
 export function injectNavCta(html, relPath) {
-  if (isAdhdFunnelPage(relPath)) return html;
   if (relPath.startsWith('answers/')) return html;
 
-  const meetBtn = NAV_CTA_MEET_GREET;
+  const meetBtn = isAdhdFunnelPage(relPath) ? NAV_CTA_ADHD_EVAL : NAV_CTA_MEET_GREET;
   html = html.replace(
     /<div class="nav-cta">\s*<a class="button"[^>]*>[\s\S]*?<\/a>\s*<\/div>/gi,
     `<div class="nav-cta">\n          ${meetBtn}\n        </div>`,
@@ -431,6 +431,10 @@ export function injectNavCta(html, relPath) {
   );
   html = html.replace(
     /(<div class="nav-mobile">[\s\S]*?)<a class="button"[^>]*href="[^"]*yourmarketingai[^"]*"[^>]*>Book Free Consultation<\/a>/gi,
+    `$1${meetBtn}`,
+  );
+  html = html.replace(
+    /(<div class="nav-mobile">[\s\S]*?)<a class="button"[^>]*href="[^"]*carepatron[^"]*"[^>]*>[\s\S]*?<\/a>/gi,
     `$1${meetBtn}`,
   );
   return html;
@@ -837,14 +841,107 @@ export function injectMeetPhysiciansSection(html, relPath) {
   return html;
 }
 
-/** Replace remaining ADHD screening links in body/footer on non-ADHD funnels */
-export function injectSitewideCtas(html, relPath) {
-  if (isAdhdFunnelPage(relPath)) return html;
-  if (relPath.startsWith('answers/')) return html;
+/** Preserve screening links — do not route educational screening CTAs to booking. */
+export function injectSitewideCtas(html) {
+  return html;
+}
 
-  const meet = MEET_GREET_URL;
-  html = html.replace(/href="\/adhd-screening(\?adhd=1)?"/gi, `href="${meet}" target="_blank" rel="noopener"`);
-  html = html.replace(/>Start Free Screening</g, '>Book a Meet &amp; Greet<');
+const THIN_ADHD_LANDERS = new Set([
+  'adult-adhd-diagnosis.html',
+  'adhd-treatment-online.html',
+  'online-adhd-test.html',
+  'adhd-evaluation-cost.html',
+  'creyos-adhd-testing.html',
+]);
+
+function isThinAdhdLander(relPath) {
+  return THIN_ADHD_LANDERS.has(relPath) || /^adhd-diagnosis-.+\.html$/.test(relPath);
+}
+
+function buildAdhdFunnelBanner() {
+  return `<!-- SIYA:ADHD-FUNNEL-BANNER -->
+      <div class="adhd-funnel-banner section-tinted" role="note">
+        <div class="container">
+          <p><strong>Main ADHD pathway:</strong> <a href="/adhd-care">ADHD Care</a> is our canonical starting point for evaluation, screening, and treatment planning.</p>
+        </div>
+      </div>
+      <!-- /SIYA:ADHD-FUNNEL-BANNER -->`;
+}
+
+export function injectAdhdFunnelBanner(html, relPath) {
+  if (!isThinAdhdLander(relPath)) return html;
+  const block = buildAdhdFunnelBanner();
+  if (html.includes('SIYA:ADHD-FUNNEL-BANNER')) {
+    return html.replace(/<!-- SIYA:ADHD-FUNNEL-BANNER -->[\s\S]*?<!-- \/SIYA:ADHD-FUNNEL-BANNER -->/, block);
+  }
+  if (html.includes('<main id="main">')) {
+    return html.replace('<main id="main">', `<main id="main">\n${block}`);
+  }
+  return html;
+}
+
+/** Reduce duplicate booking modules; enforce single end-of-page CTAs on blogs/guides. */
+export function normalizeCtaHierarchy(html, relPath) {
+  if (html.includes('blog-final-cta')) {
+    html = html.replace(/<div class="cta-block blog-cta blog-cta--mid"[\s\S]*?<\/div>\s*/g, '');
+    html = html.replace(/<section class="blog-california-cta cta-block blog-cta"[\s\S]*?<\/section>\s*/g, '');
+  }
+
+  html = html.replace(
+    /(<div class="faq-accordion-cta">[\s\S]*?)<a class="button"[^>]*>[\s\S]*?<\/a>/g,
+    '$1<p class="cta-microcopy"><a href="#book-telehealth" class="text-link">Talk to a clinician when you\'re ready →</a></p>',
+  );
+
+  html = html.replace(
+    /<p><a href="[^"]*(?:carepatron|yourmarketingai)[^"]*"[^>]*>Book a Meet[^<]*<\/a><\/p>/gi,
+    '',
+  );
+
+  if (relPath === 'index.html') {
+    html = html.replace(/<div class="provider-lp-ctas provider-lp-ctas--center">[\s\S]*?<\/div>/g, '');
+    html = html.replace(
+      /<div class="testimonial-cta">[\s\S]*?<\/div>/g,
+      `<p class="testimonial-cta-text">Start with a conversation—not a commitment. <a href="${MEET_GREET_URL}" class="text-link" target="_blank" rel="noopener">Talk to a clinician →</a></p>`,
+    );
+  }
+
+  if (isAdhdFunnelPage(relPath) && !relPath.startsWith('blog/') && html.includes('<!-- FINAL CTA -->')) {
+    html = html.replace(
+      /(<!-- FINAL CTA -->[\s\S]*?<div class="cta-band-buttons">)[\s\S]*?(<\/div>)/,
+      `$1
+              <a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">${COPY_STANDARDS.adhdPrimaryCta}</a>
+              <a class="button secondary" href="/adhd-screening">${COPY_STANDARDS.adhdSecondaryCta}</a>
+            $2`,
+    );
+    html = html.replace(/Start Free Screening/g, COPY_STANDARDS.adhdSecondaryCta);
+  }
+
+  if (relPath === 'telehealth.html' && html.includes('<!-- FINAL CTA -->')) {
+    html = html.replace(
+      /(<!-- FINAL CTA -->[\s\S]*?<div class="cta-band-buttons">)[\s\S]*?(<\/div>)/,
+      `$1
+              <a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">${COPY_STANDARDS.primaryCta}</a>
+              <a class="button secondary" href="#why-choose">${COPY_STANDARDS.secondaryCta}</a>
+            $2`,
+    );
+  }
+
+  if (relPath.startsWith('answers/') && relPath !== 'answers/index.html') {
+    html = html.replace(
+      /<div class="cta-block blog-cta(?!\s+answer-final-cta)">[\s\S]*?<\/div>/g,
+      '',
+    );
+  }
+
+  // Screening-labeled links must never route to booking — always /adhd-screening (ASRS tool).
+  html = html.replace(
+    /<a([^>]*href="[^"]*(?:carepatron|yourmarketingai)[^"]*"[^>]*)>([^<]*(?:Screen|screening)[^<]*)<\/a>/gi,
+    (_m, _attrs, label) => {
+      const text = /ADHD/i.test(label) ? COPY_STANDARDS.adhdSecondaryCta : 'Free ADHD Screening';
+      return `<a href="/adhd-screening">${text}</a>`;
+    },
+  );
+
   return html;
 }
 
@@ -1040,7 +1137,8 @@ export function applySiteChrome(html, relPath, title = '') {
 
   const auditIndex = loadContinueReadingIndex();
   html = injectNavCta(html, relPath);
-  html = injectSitewideCtas(html, relPath);
+  html = injectSitewideCtas(html);
+  html = injectAdhdFunnelBanner(html, relPath);
   html = injectProvidersNav(html);
   html = injectAnswersNav(html);
   html = injectFooterChrome(html, relPath);
@@ -1056,5 +1154,6 @@ export function applySiteChrome(html, relPath, title = '') {
   html = injectCookieNotice(html, relPath);
   html = normalizeLegalLinks(html);
   html = normalizeSitewideCopy(html);
+  html = normalizeCtaHierarchy(html, relPath);
   return html;
 }

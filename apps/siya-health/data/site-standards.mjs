@@ -30,12 +30,12 @@ export const FOOTER_STATES_LINE = `Board-certified providers providing telehealt
 
 /** Approved user-facing copy — applied via normalizeSitewideCopy() */
 export const COPY_STANDARDS = {
-  primaryCta: 'Book a Meet & Greet',
-  secondaryCta: 'Explore Care Options',
+  primaryCta: 'Talk to a Clinician',
+  secondaryCta: 'Find the Right Starting Point',
   adhdPrimaryCta: 'Book ADHD Evaluation',
-  adhdSecondaryCta: 'Start Free Screening',
+  adhdSecondaryCta: 'Free ADHD Screening',
   educationHub: 'Health Guides',
-  reviewBadgePending: 'Pending physician review',
+  reviewBadgePending: 'Clinician-informed',
   reviewBadgeReviewed: 'Physician reviewed',
 };
 

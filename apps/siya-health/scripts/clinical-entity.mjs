@@ -113,8 +113,8 @@ export function clinicalReviewBlock(record) {
   }
   return `
             <aside class="clinical-review clinical-review--pending" aria-label="Clinical review status">
-              <p class="clinical-review-label">Pending physician review</p>
-              <p>This educational content is awaiting final physician review.</p>
+              <p class="clinical-review-label">Clinician-informed</p>
+              <p>Educational content informed by clinical practice patterns—not personal medical advice.</p>
             </aside>`;
 }
 

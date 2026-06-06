@@ -1,6 +1,6 @@
 # Provider Expansion — Implementation Report
 
-Generated: 2026-06-06T02:55:49.154Z
+Generated: 2026-06-06T04:07:24.616Z
 
 ## Summary
 
@@ -18,11 +18,11 @@ Generated: 2026-06-06T02:55:49.154Z
 
 | Provider | URL | In sitemap | Schema | Breadcrumb | CTAs | States |
 |----------|-----|:----------:|:------:|:----------:|:----:|:------:|
-| dr-sneh-pandey | https://siya.health/providers/dr-sneh-pandey | ✓ | ✓ | ✓ | ✓ | ✓ |
+| dr-sneh-pandey | https://siya.health/providers/dr-sneh-pandey | ✓ | ✓ | ✓ | ✗ | ✓ |
 | dr-vanessa-urbina | https://siya.health/providers/dr-vanessa-urbina | ✓ | ✓ | ✓ | ✓ | ✓ |
-| dr-natasha-desai | https://siya.health/providers/dr-natasha-desai | ✓ | ✓ | ✓ | ✓ | ✓ |
-| dr-swati-pandey | https://siya.health/providers/dr-swati-pandey | ✓ | ✓ | ✓ | ✓ | ✓ |
-| megan-wunderlich | https://siya.health/providers/megan-wunderlich | ✓ | ✓ | ✓ | ✓ | ✓ |
+| dr-natasha-desai | https://siya.health/providers/dr-natasha-desai | ✓ | ✓ | ✓ | ✗ | ✓ |
+| dr-swati-pandey | https://siya.health/providers/dr-swati-pandey | ✓ | ✓ | ✓ | ✗ | ✓ |
+| megan-wunderlich | https://siya.health/providers/megan-wunderlich | ✓ | ✓ | ✓ | ✗ | ✓ |
 | derek-timbs | https://siya.health/providers/derek-timbs | ✓ | ✓ | ✓ | ✓ | ✓ |
 | wendy-delgado | https://siya.health/providers/wendy-delgado | ✓ | ✓ | ✓ | ✓ | ✓ |
 

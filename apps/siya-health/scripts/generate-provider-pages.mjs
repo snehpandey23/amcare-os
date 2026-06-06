@@ -228,12 +228,9 @@ function renderProviderPage(provider) {
   const languages =
     provider.languages.length > 0 ? `<p><strong>Languages:</strong> ${provider.languages.join(', ')}</p>` : '';
   const inlineCtas = provider.inlineCtas
-    .map((c) =>
-      c.primary
-        ? `<a class="button" href="${c.path}">${esc(c.label)}</a>`
-        : `<a class="button secondary" href="${c.path}">${esc(c.label)}</a>`,
-    )
+    .map((c) => `<a class="text-link" href="${c.path}">${esc(c.label)} →</a>`)
     .join('\n                ');
+  const bookWithLabel = provider.givenName ? `Book with ${esc(provider.givenName)}` : 'Book with Provider';
   const verifiedTestimonials = provider.testimonials.filter((t) => !t.needsVerification);
   const testimonialBlock =
     verifiedTestimonials.length > 0
@@ -258,9 +255,7 @@ ${verifiedTestimonials
         </div>
       </section>`
       : '';
-  const screeningBtn = provider.showScreeningCta
-    ? `<a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Start Free ADHD Screening</a>`
-    : '';
+  const screeningBtn = '';
   const schemaJson = JSON.stringify(buildPhysicianSchema(provider));
   const breadcrumbJson = JSON.stringify(buildProviderBreadcrumb(provider));
 
@@ -302,7 +297,7 @@ ${verifiedTestimonials
           <a href="/blog">Blog</a>
         </nav>
         <div class="nav-cta">
-          <a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
+          <a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Talk to a Clinician</a>
         </div>
         <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
         <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
@@ -315,7 +310,7 @@ ${verifiedTestimonials
           <a href="/telehealth">Telehealth</a>
           <a href="/answers">Health Guides</a>
           <a href="/blog">Blog</a>
-          <a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
+          <a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Talk to a Clinician</a>
         </div>
       </div>
     </header>
@@ -333,8 +328,8 @@ ${verifiedTestimonials
               <div class="provider-lp-badges" aria-label="Credentials">${chips}</div>
               ${stateChipsBlock}
               <div class="provider-lp-ctas">
-                ${screeningBtn}
-                <a class="button secondary" href="${bookingUrl}" target="_blank" rel="noopener" data-provider-cta="${provider.slug}">Book a Meet & Greet</a>
+                <a class="button" href="${bookingUrl}" target="_blank" rel="noopener" data-provider-cta="${provider.slug}">${bookWithLabel}</a>
+                <a class="button secondary" href="#services-supported">View Services</a>
               </div>
             </div>
             <div class="provider-lp-photo-wrap">
@@ -422,7 +417,7 @@ ${longBio}
         </div>
       </section>
 
-      <section class="provider-lp-section section-tinted">
+      <section class="provider-lp-section section-tinted" id="services-supported">
         <div class="container">
           <div class="section-header">
             <h2>Services supported</h2>
@@ -439,10 +434,6 @@ ${longBio}
             <h2>Treatment approach</h2>
           </div>
           ${carePhil}
-          <div class="provider-lp-ctas">
-            ${screeningBtn}
-            <a class="button secondary" href="${bookingUrl}" target="_blank" rel="noopener" data-provider-cta="${provider.slug}">Book a Meet & Greet</a>
-          </div>
         </div>
       </section>
 
@@ -478,8 +469,8 @@ ${testimonialBlock}
             <h3>${esc(provider.finalCta.title)}</h3>
             <p>${esc(provider.finalCta.subtitle)}</p>
             <div class="cta-band-buttons">
-              ${screeningBtn}
-              <a class="button secondary" href="${bookingUrl}" target="_blank" rel="noopener" data-provider-cta="${provider.slug}">Book a Meet & Greet</a>
+              <a class="button" href="${bookingUrl}" target="_blank" rel="noopener" data-provider-cta="${provider.slug}">${bookWithLabel}</a>
+              <a class="button secondary" href="#services-supported">View Services</a>
             </div>
           </div>
           <p class="blog-disclaimer provider-lp-disclaimer-below-cta"><strong>Disclaimer:</strong> ${esc(provider.disclaimer)}</p>
@@ -498,7 +489,7 @@ ${testimonialBlock}
         </div>
         <div class="footer-brand"><p>Board-certified providers providing telehealth care across California, Texas, Pennsylvania, and Florida.</p></div>
         <div><h4>Services</h4>
-          <p><a href="/answers">Health Guides</a></p><p><a href="/adhd-care">ADHD Care</a></p><p><a href="${BOOKING_LINK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a></p></div>
+          <p><a href="/answers">Health Guides</a></p><p><a href="/adhd-care">ADHD Care</a></p><p><a href="/telehealth">Telehealth</a></p></div>
         <div><h4>Healthcare Services</h4><p><a href="/primary-urgent-care">Primary &amp; urgent care</a></p><p><a href="/labs">Diagnostic labs</a></p><p><a href="/prescriptions">Prescriptions</a></p></div>
         <div><h4>Contact</h4><p><a href="mailto:care@siya.health">care@siya.health</a></p><p><a href="tel:+12154451244">(215) 445-1244</a></p></div>
         ${renderLegalFooter()}
@@ -635,7 +626,7 @@ function renderProvidersIndex() {
           <a href="/blog">Blog</a>
         </nav>
         <div class="nav-cta">
-          <a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
+          <a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Talk to a Clinician</a>
         </div>
         <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
         <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
@@ -648,7 +639,7 @@ function renderProvidersIndex() {
           <a href="/telehealth">Telehealth</a>
           <a href="/answers">Health Guides</a>
           <a href="/blog">Blog</a>
-          <a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
+          <a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Talk to a Clinician</a>
         </div>
       </div>
     </header>
@@ -661,7 +652,7 @@ function renderProvidersIndex() {
             <p class="lead">Contracted physicians and advanced practice providers actively seeing patients via Siya Health telehealth—licensed where listed.</p>
           </div>
           <div class="provider-lp-ctas">
-            <a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
+            <a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Talk to a Clinician</a>
             <a class="button secondary" href="/adhd-care">Explore ADHD care</a>
           </div>
         </div>
@@ -689,7 +680,7 @@ ${advancedCards}
         </div>
         <div class="footer-brand"><p>Board-certified providers providing telehealth care across California, Texas, Pennsylvania, and Florida.</p></div>
         <div><h4>Services</h4>
-          <p><a href="/answers">Health Guides</a></p><p><a href="/adhd-care">ADHD Care</a></p><p><a href="${BOOKING_LINK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a></p></div>
+          <p><a href="/answers">Health Guides</a></p><p><a href="/adhd-care">ADHD Care</a></p><p><a href="/telehealth">Telehealth</a></p></div>
         <div><h4>Contact</h4><p><a href="mailto:care@siya.health">care@siya.health</a></p></div>
         ${renderLegalFooter()}
       </div>

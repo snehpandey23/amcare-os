@@ -253,12 +253,12 @@ function footerBlock() {
 function nextStepsHtml(hub, topic = 'general') {
   const items =
     topic === 'adhd'
-      ? `<li><a href="/adhd-screening">Take a free 2-minute ADHD screening</a></li>
-                <li><a href="/adult-adhd-diagnosis">Book a $199 adult ADHD evaluation</a></li>
-                <li><a href="${hub.care}">Explore ${hub.label} care at Siya Health</a></li>`
-      : `<li><a href="${MEET_GREET_URL}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a></li>
-                <li><a href="${hub.care}">Explore ${hub.label} care</a></li>
-                <li><a href="/answers">Browse Health Guides</a></li>`;
+      ? `<li><a href="/adhd-care">Explore ADHD evaluation pathways</a></li>
+                <li><a href="/adhd-screening">Free ADHD screening (not a diagnosis)</a></li>
+                <li><a href="${hub.url}">Read ${hub.label} articles</a></li>`
+      : `<li><a href="${hub.care}">Explore ${hub.label} care</a></li>
+                <li><a href="/answers">Browse Health Guides</a></li>
+                <li><a href="/providers">Meet our care team</a></li>`;
   return `            <section class="answer-next-steps" id="next-steps" aria-labelledby="next-steps-heading">
               <h2 id="next-steps-heading">Next steps</h2>
               <ul class="answer-next-steps-list">
@@ -431,9 +431,8 @@ ${engagement.evidenceCard}
             </section>
 ${learnMoreHtml}
 ${nextStepsHtml(hub, seed.topic)}
-            <div class="cta-block blog-cta">
-              <a class="button" href="${BOOK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
-              <a class="button secondary" href="${hub.care}">Explore ${hub.label} care</a>
+            <div class="cta-block blog-cta answer-final-cta">
+              <a class="button" href="${BOOK}" target="_blank" rel="noopener">Talk to a Clinician</a>
             </div>
             <p class="cta-microcopy">Also read our <a href="${hub.url}">${hub.label} articles</a>${resolveCanonicalBlog(seed) ? ` · <a href="${resolveCanonicalBlog(seed).path}">Full clinical guide</a>` : ''}${reviewRecord.reviewer ? ` · <a href="/providers/${reviewRecord.reviewer.slug}">${reviewRecord.reviewer.name}</a>` : ''}</p>
           </div>

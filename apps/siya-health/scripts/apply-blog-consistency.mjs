@@ -137,9 +137,10 @@ function ensureMidCtaClass(html) {
   if (contentEnd < 0) return html;
   const head = html.slice(0, contentEnd);
   const tail = html.slice(contentEnd);
-  const fixed = head.replace(
+  const stripped = head.replace(/<div class="cta-block blog-cta blog-cta--mid"[\s\S]*?<\/div>\s*/g, '');
+  const fixed = stripped.replace(
     /<div class="cta-block blog-cta(?!\s+blog-cta--mid)">/g,
-    '<div class="cta-block blog-cta blog-cta--mid">',
+    '',
   );
   return fixed + tail;
 }
