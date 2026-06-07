@@ -519,7 +519,7 @@ function renderProviderIndexCard(p) {
   const focusTags = focusItems
     .map((text) => `<span class="provider-index-tag">${esc(text)}</span>`)
     .join('');
-  const licensedStatesLine = formatLicensedStatesLine(p.statesLicensed);
+  const licensedStatesLine = p.statesDisplayHub || formatLicensedStatesLine(p.statesLicensed);
   const statesMarkup = licensedStatesLine
     ? `<p class="provider-index-states">${esc(licensedStatesLine)}</p>`
     : '';

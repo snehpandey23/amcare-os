@@ -3,6 +3,7 @@
  * Credential truth merged from data/internal-provider-records.mjs at export.
  */
 import { applyInternalRecords } from './internal-provider-records.mjs';
+import { applyCanonicalToProvider } from './provider-canonical.mjs';
 import { ADDITIONAL_PROVIDERS } from './providers-additional.mjs';
 import { AVAILABLE_SERVICE_STATES } from './site-standards.mjs';
 export { BASE_URL, BOOKING_LINK, PROFILE_LAST_UPDATED, resolveProviderPhoto } from './providers-core.mjs';
@@ -18,7 +19,6 @@ export const PROVIDERS = [
     honorificPrefix: 'Dr.',
     honorificSuffix: 'MD',
     credentials: ['MD'],
-    role: 'Medical Director',
     photo: 'assets/images/dr-sneh-pandey.png',
     altText: 'Dr. Sneh Pandey, MD',
     statesLicensed: ['California', 'Texas', 'Pennsylvania', 'Florida'],
@@ -72,7 +72,6 @@ export const PROVIDERS = [
       ],
       sectionTitle: 'Why patients choose Dr. Pandey',
     },
-    credentialChips: ['Internal Medicine', 'Obesity Medicine', 'ADHD-CCSP', 'Medical Director'],
     whatToExpect: [
       { title: 'Free ADHD screening', text: 'a short, honest check-in to see if evaluation is a sensible next step.' },
       { title: 'Meet & Greet', text: 'ask questions, learn how telehealth visits work, and see if Siya feels like a fit—no pressure.' },
@@ -114,18 +113,7 @@ export const PROVIDERS = [
     schema: {
       medicalSpecialty: ['Internal Medicine', 'Obesity Medicine', 'Adult ADHD'],
       knowsAbout: ['Adult ADHD', 'Executive dysfunction', 'Metabolic health', 'Medical weight loss', 'ADHD and weight overlap'],
-      jobTitle: 'Medical Director',
     },
-    seo: {
-      title: 'Dr. Sneh Pandey, MD | Adult ADHD & Metabolic Care | Siya Health',
-      description:
-        'Meet Dr. Sneh Pandey—Medical Director at Siya Health. Board-certified Internal Medicine, Obesity Medicine, ADHD-CCSP. Structured adult ADHD evaluations and weight-inclusive telehealth in CA, TX, PA & FL.',
-      focusLead: 'ADHD-first positioning—with room for the problems that often hide beside it.',
-    },
-    servicePageTagline: 'Adult ADHD & metabolic care',
-    homepageRole: 'Internal Medicine Physician',
-    homepageBio:
-      'Focus on metabolic health, weight management, hormone optimization, ADHD, and helping patients improve overall physical and mental well-being.',
     claimsNeedingVerification: ['5,000+ patients in structured weight-loss programs', 'verified testimonial attributions'],
     showScreeningCta: true,
   },
@@ -138,7 +126,6 @@ export const PROVIDERS = [
     honorificPrefix: 'Dr.',
     honorificSuffix: 'MD',
     credentials: ['MD'],
-    role: 'Family & Behavioral Medicine Physician',
     photo: 'assets/images/dr-natasha-desai.png',
     altText: 'Dr. Natasha Desai, MD',
     statesLicensed: ['Texas', 'Florida'],
@@ -186,10 +173,9 @@ export const PROVIDERS = [
       ],
       sectionTitle: 'Why patients choose Dr. Desai',
     },
-    credentialChips: ['Family Medicine', 'Behavioral Medicine', 'ADHD-CCSP'],
     whatToExpect: [
       { title: 'Screening', text: 'quick clarity on whether a full evaluation makes sense.' },
-      { title: 'Meet & Greet', text: 'match expectations, ask anything awkward—you’ve probably been holding it in awhile.' },
+      { title: 'First telehealth visit', text: 'match expectations, ask anything awkward—you’ve probably been holding it in awhile.' },
       { title: 'Evaluation', text: 'structured interview + standardized tools; discussion of diagnosis and coexisting conditions.' },
       { title: 'Follow-up', text: 'medication titration, behavioral homework, or coordinated referrals as needed.' },
     ],
@@ -228,18 +214,7 @@ export const PROVIDERS = [
     schema: {
       medicalSpecialty: ['Family Medicine', 'Behavioral Medicine', 'Adult ADHD'],
       knowsAbout: ['Adult ADHD', 'Anxiety', 'Emotional dysregulation', 'ADHD with anxiety overlap', 'Behavioral health'],
-      jobTitle: 'Family & Behavioral Medicine Physician',
     },
-    seo: {
-      title: 'Dr. Natasha Desai, MD | Adult ADHD & Behavioral Medicine | Siya Health',
-      description:
-        'Meet Dr. Natasha Desai—Family & Behavioral Medicine physician at Siya Health. ADHD-CCSP. Adult ADHD with anxiety and emotional overlap via telehealth in TX & FL.',
-      focusLead: 'ADHD at the center—with behavioral and emotional overlap addressed honestly.',
-    },
-    servicePageTagline: 'ADHD & behavioral medicine',
-    homepageRole: 'Family Medicine Physician',
-    homepageBio:
-      'Focus on adult ADHD evaluation and treatment, behavioral health, and helping patients better understand symptoms affecting focus, productivity, and daily functioning.',
     claimsNeedingVerification: ['verified testimonial attributions'],
     showScreeningCta: true,
   },
@@ -252,7 +227,6 @@ export const PROVIDERS = [
     honorificPrefix: 'Dr.',
     honorificSuffix: 'MD',
     credentials: ['MD'],
-    role: 'Internal Medicine Physician',
     photo: 'assets/images/dr-swati-pandey.png',
     altText: 'Dr. Swati Pandey, MD',
     statesLicensed: ['Pennsylvania'],
@@ -300,15 +274,14 @@ export const PROVIDERS = [
       ],
       sectionTitle: 'Why patients choose Dr. Swati Pandey',
     },
-    credentialChips: ['Licensed Medical Provider', 'ADHD-CCSP', 'Mental Health Care'],
     whatToExpect: [
       { title: 'Screening', text: 'fast signal on whether a full ADHD evaluation is the right next step.' },
-      { title: 'Meet & Greet', text: 'logistics, fit, and your questions—especially if you’ve had bad experiences elsewhere.' },
+      { title: 'First telehealth visit', text: 'logistics, fit, and your questions—especially if you’ve had bad experiences elsewhere.' },
       { title: 'Comprehensive evaluation', text: 'sufficient time to unpack overlapping symptoms responsibly.' },
       { title: 'Ongoing care', text: 'monitoring, dose changes, or step-up/step-down plans with clear communication.' },
     ],
     trustCards: [
-      { title: 'Scope', text: 'Licensed medical provider; ADHD-CCSP for structured ADHD assessment within primary care scope.' },
+      { title: 'Scope', text: 'Internal medicine physician; ADHD-CCSP for structured ADHD assessment within primary care scope.' },
       { title: 'States licensed', text: 'Telehealth where eligible: <strong>Pennsylvania</strong>—confirm at scheduling.' },
       { title: 'Safety', text: 'HIPAA-compliant platform; crisis resources provided when urgent risk is present.' },
     ],
@@ -342,24 +315,14 @@ export const PROVIDERS = [
     schema: {
       medicalSpecialty: ['Adult ADHD', 'Mental Health', 'Primary Care'],
       knowsAbout: ['Adult ADHD', 'Depression', 'Anxiety', 'Complex medication histories', 'ADHD with anxiety and mood overlap'],
-      jobTitle: 'Internal Medicine Physician',
     },
-    seo: {
-      title: 'Dr. Swati Pandey, MD | Adult ADHD & Mental Health Care | Siya Health',
-      description:
-        'Meet Dr. Swati Pandey—licensed medical provider at Siya Health. ADHD-CCSP. Adult ADHD with depression, anxiety, and complex medication histories via telehealth in PA.',
-      focusLead: 'ADHD in adults—with mood and anxiety overlap addressed within primary care scope.',
-    },
-    servicePageTagline: 'ADHD & behavioral health depth',
-    homepageRole: 'Internal Medicine Physician',
-    homepageBio:
-      "Primary care and women's health experience with a focus on preventive care, chronic disease management, mental health, and whole-person wellness.",
     claimsNeedingVerification: ['verified testimonial attributions'],
     showScreeningCta: true,
   },
   ...ADDITIONAL_PROVIDERS,
 ]
   .map(applyInternalRecords)
+  .map(applyCanonicalToProvider)
   .sort((a, b) => (a.sortOrder ?? 99) - (b.sortOrder ?? 99));
 
 export function getProviderBySlug(slug) {

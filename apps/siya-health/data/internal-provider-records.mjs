@@ -133,7 +133,6 @@ export const INTERNAL_PROVIDER_RECORDS = {
     acceptingNewPatients: true,
     sameAs: ['https://www.helloklarity.com/provider/swati-pandey'],
     supervisionNote: null,
-    role: 'Licensed Medical Provider — ADHD & Mental Health Care',
   },
   'dr-vanessa-urbina': {
     providerType: 'physician',
@@ -157,7 +156,6 @@ export const INTERNAL_PROVIDER_RECORDS = {
     acceptingNewPatients: true,
     sameAs: ['https://www.comphealthforyou.com/about-dr-vanessa-urbina'],
     supervisionNote: null,
-    role: 'Family Medicine Physician',
   },
   'megan-wunderlich': {
     providerType: 'advanced-practice',
@@ -181,7 +179,6 @@ export const INTERNAL_PROVIDER_RECORDS = {
     acceptingNewPatients: true,
     sameAs: ['https://www.helloklarity.com/provider/megan-wunderlich'],
     supervisionNote: 'Practice under collaborative physician agreements per state law.',
-    role: 'Family Nurse Practitioner',
     languages: ['English'],
   },
   'derek-timbs': {
@@ -207,7 +204,6 @@ export const INTERNAL_PROVIDER_RECORDS = {
       'https://www.linkedin.com/in/derek-timbs-a54247320/',
     ],
     supervisionNote: 'Practice under collaborative physician agreements per state law.',
-    role: 'Family Nurse Practitioner',
     languages: ['English'],
   },
   'wendy-delgado': {
@@ -242,7 +238,6 @@ export const INTERNAL_PROVIDER_RECORDS = {
       'https://www.arrivehw.com/wendy-delgado',
     ],
     supervisionNote: 'Practice under physician supervision per state law.',
-    role: 'Physician Associate',
     languages: ['English'],
   },
 };
@@ -263,7 +258,6 @@ export function applyInternalRecords(provider) {
     hubSection: internal.hubSection,
     sortOrder: internal.sortOrder,
     featured: internal.featured,
-    role: internal.role || provider.role,
     photoStatus: internal.photoStatus || 'pending',
     photo: photo.src,
     altText: photo.alt,

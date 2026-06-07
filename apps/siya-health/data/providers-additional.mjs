@@ -13,7 +13,6 @@ export const ADDITIONAL_PROVIDERS = [
     honorificPrefix: 'Dr.',
     honorificSuffix: 'MD',
     credentials: ['MD'],
-    role: 'Family Medicine Physician',
     photo: 'assets/images/dr-vanessa-urbina.png',
     altText: 'Dr. Vanessa Urbina, MD',
     statesLicensed: ['Florida'],
@@ -56,9 +55,8 @@ export const ADDITIONAL_PROVIDERS = [
       ],
       sectionTitle: 'Why patients choose Dr. Urbina',
     },
-    credentialChips: ['Family Medicine', 'Primary Care', 'ADHD', 'Lifestyle Medicine'],
     whatToExpect: [
-      { title: 'Meet & Greet', text: 'logistics, fit, and your questions about Florida telehealth eligibility.' },
+      { title: 'First telehealth visit', text: 'logistics, fit, and your questions about Florida telehealth eligibility.' },
       { title: 'Evaluation', text: 'structured history and standardized tools when ADHD or metabolic care is on the table.' },
       { title: 'Treatment plan', text: 'lifestyle, medication, or referral options with clear monitoring.' },
       { title: 'Follow-up', text: 'ongoing primary or specialty-aligned care as your plan evolves.' },
@@ -89,18 +87,7 @@ export const ADDITIONAL_PROVIDERS = [
     schema: {
       medicalSpecialty: ['Family Medicine', 'Primary Care', 'Adult ADHD'],
       knowsAbout: ['Adult ADHD', 'Primary care', 'Obesity', 'Chronic disease', 'Lifestyle medicine'],
-      jobTitle: 'Family Medicine Physician',
     },
-    seo: {
-      title: 'Dr. Vanessa Urbina, MD | Family Medicine & ADHD | Siya Health',
-      description:
-        'Meet Dr. Vanessa Urbina—family medicine physician at Siya Health. Adult ADHD, primary telehealth, and medical weight loss in Florida.',
-      focusLead: 'Family medicine with ADHD and metabolic care in Florida.',
-    },
-    servicePageTagline: 'Family medicine & ADHD (FL)',
-    homepageRole: 'Family Medicine Physician',
-    homepageBio:
-      'Experienced in primary care, preventive health, ADHD evaluation and treatment, and caring for patients across a wide range of everyday health concerns.',
     claimsNeedingVerification: [],
     showScreeningCta: true,
   },
@@ -113,7 +100,6 @@ export const ADDITIONAL_PROVIDERS = [
     honorificPrefix: '',
     honorificSuffix: 'FNP-C',
     credentials: ['MSN', 'APRN', 'FNP-C'],
-    role: 'Family Nurse Practitioner',
     photo: 'assets/images/megan-wunderlich.png',
     altText: 'Megan Wunderlich, FNP-C',
     statesLicensed: ['Pennsylvania'],
@@ -155,10 +141,9 @@ export const ADDITIONAL_PROVIDERS = [
       ],
       sectionTitle: 'Why patients choose Megan Wunderlich',
     },
-    credentialChips: ['FNP-C', 'Mental Health', 'Family Medicine'],
     whatToExpect: [
       { title: 'Screening', text: 'quick clarity on whether a full evaluation makes sense.' },
-      { title: 'Meet & Greet', text: 'fit, logistics, and questions about NP-led telehealth in PA.' },
+      { title: 'First telehealth visit', text: 'fit, logistics, and questions about NP-led telehealth in PA.' },
       { title: 'Visit', text: 'structured interview and validated tools when clinically appropriate.' },
       { title: 'Follow-up', text: 'monitoring, referrals, or coordinated care as your plan evolves.' },
     ],
@@ -188,18 +173,7 @@ export const ADDITIONAL_PROVIDERS = [
     schema: {
       medicalSpecialty: ['Family Medicine', 'Mental Health', 'Adult ADHD'],
       knowsAbout: ['Adult ADHD', 'Anxiety', 'Family medicine', 'Chronic disease'],
-      jobTitle: 'Family Nurse Practitioner',
     },
-    seo: {
-      title: 'Megan Wunderlich, FNP-C | ADHD & Mental Health Telehealth | Siya Health',
-      description:
-        'Meet Megan Wunderlich, FNP-C at Siya Health. Mental health and family medicine telehealth with ADHD support in Pennsylvania.',
-      focusLead: 'NP-led telehealth with ADHD and mental health focus (PA).',
-    },
-    servicePageTagline: 'ADHD & mental health (PA)',
-    homepageRole: 'Family Nurse Practitioner',
-    homepageBio:
-      'Primary care provider with extensive telehealth experience, supporting patients with ADHD, mental health concerns, preventive care, and ongoing wellness needs.',
     claimsNeedingVerification: [],
     showScreeningCta: true,
   },
@@ -212,7 +186,6 @@ export const ADDITIONAL_PROVIDERS = [
     honorificPrefix: '',
     honorificSuffix: 'FNP-BC',
     credentials: ['MSN', 'FNP-BC'],
-    role: 'Family Nurse Practitioner',
     photo: 'assets/images/derek-timbs.png',
     altText: 'Derek Timbs, FNP-BC',
     statesLicensed: ['Texas', 'Ohio'],
@@ -255,9 +228,8 @@ export const ADDITIONAL_PROVIDERS = [
       ],
       sectionTitle: 'Why patients choose Derek Timbs',
     },
-    credentialChips: ['FNP-BC', 'Weight Loss', "Men's Health"],
     whatToExpect: [
-      { title: 'Meet & Greet', text: 'goals, state eligibility, and medication questions answered upfront.' },
+      { title: 'First telehealth visit', text: 'goals, state eligibility, and medication questions answered upfront.' },
       { title: 'Intake & labs', text: 'history and labs when GLP-1 or hormone therapy requires baseline data.' },
       { title: 'Treatment plan', text: 'titration schedule, side-effect counseling, and lifestyle context.' },
       { title: 'Follow-up', text: 'monitoring visits aligned to medication class and state regulations.' },
@@ -288,18 +260,7 @@ export const ADDITIONAL_PROVIDERS = [
     schema: {
       medicalSpecialty: ['Obesity Medicine', 'Family Medicine', "Men's Health"],
       knowsAbout: ['Medical weight loss', 'Obesity', 'Metabolic health', "Men's health", 'GLP-1 therapy'],
-      jobTitle: 'Family Nurse Practitioner',
     },
-    seo: {
-      title: 'Derek Timbs, FNP-BC | Medical Weight Loss & Men\'s Health | Siya Health',
-      description:
-        'Meet Derek Timbs, FNP-BC at Siya Health. GLP-1 weight loss and men\'s metabolic telehealth in Texas.',
-      focusLead: 'NP-led weight loss and men\'s metabolic care (TX).',
-    },
-    servicePageTagline: 'Weight loss & men\'s health',
-    homepageRole: 'Family Nurse Practitioner',
-    homepageBio:
-      "Focus on weight management, men's health, hormone optimization, longevity-focused care, and helping patients improve energy, body composition, and overall health.",
     claimsNeedingVerification: [],
     showScreeningCta: false,
   },
@@ -312,7 +273,6 @@ export const ADDITIONAL_PROVIDERS = [
     honorificPrefix: '',
     honorificSuffix: 'PA-C',
     credentials: ['PA-C'],
-    role: 'Physician Associate',
     photo: 'assets/images/wendy-delgado.png',
     altText: 'Wendy Delgado, PA-C',
     statesLicensed: ['California'],
@@ -353,9 +313,8 @@ export const ADDITIONAL_PROVIDERS = [
       ],
       sectionTitle: 'Why patients choose Wendy Delgado',
     },
-    credentialChips: ['PA-C', 'Weight Loss', 'Telehealth'],
     whatToExpect: [
-      { title: 'Meet & Greet', text: 'California eligibility, goals, and medication questions.' },
+      { title: 'First telehealth visit', text: 'California eligibility, goals, and medication questions.' },
       { title: 'Intake', text: 'history and labs when required for GLP-1 or metabolic therapy.' },
       { title: 'Education visit', text: 'side effects, lifestyle context, and monitoring schedule.' },
       { title: 'Follow-up', text: 'titration support and escalation when symptoms need clinician review.' },
@@ -386,18 +345,7 @@ export const ADDITIONAL_PROVIDERS = [
     schema: {
       medicalSpecialty: ['Obesity Medicine', 'Family Medicine'],
       knowsAbout: ['Medical weight loss', 'Obesity', 'Metabolic health', 'GLP-1 therapy'],
-      jobTitle: 'Physician Associate',
     },
-    seo: {
-      title: 'Wendy Delgado, PA-C | Medical Weight Loss Telehealth | Siya Health',
-      description:
-        'Meet Wendy Delgado, PA-C at Siya Health. GLP-1 and medical weight loss telehealth support in California.',
-      focusLead: 'PA-led weight loss telehealth (CA).',
-    },
-    servicePageTagline: 'Weight loss telehealth (CA)',
-    homepageRole: 'Physician Assistant',
-    homepageBio:
-      'Telehealth medical weight loss and metabolic care for adults in California—GLP-1 education, monitoring support, and collaborative follow-up.',
     claimsNeedingVerification: [],
     showScreeningCta: false,
   },

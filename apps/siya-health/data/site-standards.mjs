@@ -2,6 +2,7 @@
  * Sitewide copy standards — states, footer, Health Guides naming.
  */
 import { LEGAL_HUB, LEGAL_PATHS, LEGAL_EFFECTIVE_DATE as LEGAL_EFFECTIVE_DATE_ISO } from './legal-documents.mjs';
+import { buildProviderAuditCanonical } from './provider-canonical.mjs';
 import { BOOKING_LINK } from './providers-core.mjs';
 import { SIYA_CIRCLE_GHL_FORM_URL } from './siya-circle-config.mjs';
 
@@ -132,44 +133,8 @@ export const LEGACY_MARKETPLACE_PHRASES = [
   { from: /Join the Waitlist/gi, to: CTA_SYSTEM.primary.label },
 ];
 
-/** Canonical provider positioning — clinical + marketing source of truth */
-export const PROVIDER_CANONICAL = {
-  'dr-sneh-pandey': {
-    role: 'Medical Director · Internal Medicine Physician',
-    credentials: 'Board-certified Internal Medicine · Diplomate, American Board of Obesity Medicine · ADHD-CCSP',
-    focus: ['Internal Medicine', 'Obesity Medicine', 'ADHD', 'Metabolic Health', 'Weight Management', 'Primary Care'],
-  },
-  'dr-natasha-desai': {
-    role: 'Family Medicine Physician',
-    credentials: 'ADHD-CCSP',
-    focus: ['Family Medicine', 'ADHD', 'Mental Health'],
-  },
-  'dr-swati-pandey': {
-    role: 'Internal Medicine Physician',
-    credentials: '',
-    focus: ["Internal Medicine", "Women's Health", 'ADHD', 'Mental Health', 'Metabolic Health'],
-  },
-  'dr-vanessa-urbina': {
-    role: 'Family Medicine Physician',
-    credentials: 'Family Medicine',
-    focus: ['Family Medicine', 'Primary Care', 'ADHD', 'Weight Management', 'Community Practice Experience'],
-  },
-  'megan-wunderlich': {
-    role: 'Family Nurse Practitioner',
-    credentials: 'FNP-C',
-    focus: ['Mental Health', 'ADHD', 'Family Medicine'],
-  },
-  'derek-timbs': {
-    role: 'Family Nurse Practitioner',
-    credentials: 'FNP-BC',
-    focus: ['Weight Loss', "Men's Health", 'Metabolic Care'],
-  },
-  'wendy-delgado': {
-    role: 'Physician Assistant',
-    credentials: 'PA-C',
-    focus: ['Weight Loss', 'Metabolic Care'],
-  },
-};
+/** Canonical provider positioning — generated from provider-canonical.json */
+export const PROVIDER_CANONICAL = buildProviderAuditCanonical();
 
 /** Approved user-facing copy — applied via normalizeSitewideCopy() */
 export const COPY_STANDARDS = {

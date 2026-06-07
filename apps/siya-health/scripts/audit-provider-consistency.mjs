@@ -7,7 +7,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { getAllProviders, providerServiceStates } from '../data/providers.mjs';
-import { PROVIDER_HUB_PRESENTATION } from '../data/provider-hub-presentation.mjs';
+import { getProviderHubPresentation } from '../data/provider-canonical.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -167,7 +167,7 @@ function scanFile(relPath, content, provider) {
 }
 
 function buildCanonicalTruth(provider) {
-  const hub = PROVIDER_HUB_PRESENTATION[provider.slug] || {};
+  const hub = getProviderHubPresentation(provider.slug) || {};
   return {
     slug: provider.slug,
     name: provider.name,
@@ -249,49 +249,6 @@ function detectIssues(provider, truth, allOccurrences) {
         message: 'Profile uses "Physician Associate" (NCCPA/modern PA title); surface uses "Physician Assistant"',
       });
     }
-  }
-
-  // Swati role hub vs profile
-  if (provider.slug === 'dr-swati-pandey') {
-    if (truth.roleProfile !== truth.roleHub && truth.roleHub) {
-      issues.push({
-        type: 'role',
-        severity: 'high',
-        file: 'data/providers.mjs vs data/provider-hub-presentation.mjs',
-        field: 'role',
-        current: `Profile: "${truth.roleProfile}" | Hub: "${truth.roleHub}"`,
-        expected: truth.roleHub,
-        message: 'Founder-approved hub says Internal Medicine Physician; profile page says Licensed Medical Provider',
-      });
-    }
-  }
-
-  // Natasha role
-  if (provider.slug === 'dr-natasha-desai') {
-    if (truth.roleProfile !== truth.roleHub) {
-      issues.push({
-        type: 'role',
-        severity: 'medium',
-        file: 'data/providers.mjs vs data/provider-hub-presentation.mjs',
-        field: 'role',
-        current: `Profile: "${truth.roleProfile}" | Hub: "${truth.roleHub}"`,
-        expected: truth.roleHub,
-        message: 'Profile role includes Behavioral Medicine; hub uses Family Medicine Physician',
-      });
-    }
-  }
-
-  // Wendy bio ADHD vs weight focus
-  if (provider.slug === 'wendy-delgado' && truth.homepageBio?.match(/ADHD/i)) {
-    issues.push({
-      type: 'positioning',
-      severity: 'high',
-      file: 'data/providers-additional.mjs',
-      field: 'homepageBio',
-      current: truth.homepageBio,
-      expected: 'Weight-loss / GLP-1 telehealth focus (hub: Medical weight loss, not primary ADHD)',
-      message: 'homepageBio and hub presentation claim ADHD/primary care; profile clinical focus is weight loss only',
-    });
   }
 
   // State mismatches on cards
@@ -446,36 +403,12 @@ const crossCutting = [
     fix: 'Use "Licensed, ADHD-CCSP–trained clinicians" on pages listing mixed roster',
   },
   {
-    id: 'CC-05',
-    type: 'bio',
-    severity: 'medium',
-    message: 'homepageBio fields in providers.mjs diverge from hub presentation descriptions for several providers',
-    surfaces: ['data/providers.mjs', 'data/provider-hub-presentation.mjs', 'index.html', 'providers/index.html'],
-    fix: 'Align homepageBio to hub.description or regenerate homepage cards from hub overlay',
-  },
-  {
     id: 'CC-06',
     type: 'states',
     severity: 'low',
     message: 'Derek Timbs OH license shown on cards (TX, OH) but Siya service footprint is TX only; profile explains this but compact cards do not',
     surfaces: ['index.html', 'telehealth.html', 'weight-loss-metabolic-health.html', 'mens-health-longevity.html'],
     fix: 'Add license-only styling (site-chrome already has provider-state-chip--license-only on profiles); extend to homepage cards',
-  },
-  {
-    id: 'CC-07',
-    type: 'credentials',
-    severity: 'medium',
-    message: 'Wendy Delgado: role "Physician Associate" on profile vs "Physician Assistant" on homepage, hub, and index',
-    surfaces: ['index.html', 'providers/index.html', 'data/provider-hub-presentation.mjs', 'data/providers-additional.mjs homepageRole'],
-    fix: 'Use "Physician Associate" sitewide (California PA modern title) unless legal prefers PA',
-  },
-  {
-    id: 'CC-08',
-    type: 'bio',
-    severity: 'high',
-    message: 'Wendy Delgado hub/homepage claim ADHD support and primary care; profile and clinicalFocus are weight-loss/GLP-1 only',
-    surfaces: ['data/provider-hub-presentation.mjs', 'data/providers-additional.mjs', 'index.html', 'providers/index.html'],
-    fix: 'Remove ADHD from Wendy hub focus unless clinically confirmed; align to weight loss telehealth',
   },
 ];
 

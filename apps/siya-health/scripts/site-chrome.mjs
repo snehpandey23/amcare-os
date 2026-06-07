@@ -27,6 +27,7 @@ import {
   stateChipLabel,
 } from '../data/providers.mjs';
 import { buildClientIntakeConfig, GHL_BOOKING_URL } from '../data/ghl-intake-config.mjs';
+import { getServiceTagline } from '../data/provider-canonical.mjs';
 import {
   SIYA_CIRCLE_GHL_FORM_URL,
   SIYA_CIRCLE_JOIN_TRACK,
@@ -221,19 +222,6 @@ const LEARN_MORE_ADHD = `<!-- SIYA:LEARN-MORE-ADHD -->
       </section>
       <!-- /SIYA:LEARN-MORE-ADHD -->`;
 
-const ADHD_CARE_PROVIDER_TAGLINES = {
-  'dr-sneh-pandey': 'Medical Director · Adult ADHD evaluation & care',
-  'dr-vanessa-urbina': 'Adult ADHD & primary care',
-  'dr-natasha-desai': 'Adult ADHD & behavioral medicine',
-  'dr-swati-pandey': 'Adult ADHD & mental health',
-  'megan-wunderlich': 'Adult ADHD & mental health',
-  'wendy-delgado': 'Medical weight loss & metabolic care',
-};
-
-function adhdCareProviderTagline(provider) {
-  return ADHD_CARE_PROVIDER_TAGLINES[provider.slug] || provider.servicePageTagline;
-}
-
 function buildMeetPhysiciansBlock(serviceKey, lead, stateAbbr = null, { gridClass = 'about-team-grid', heading = 'Meet our care team' } = {}) {
   const providers = getProvidersForServicePage(serviceKey, { stateAbbr });
   const stateNote = stateAbbr
@@ -242,7 +230,7 @@ function buildMeetPhysiciansBlock(serviceKey, lead, stateAbbr = null, { gridClas
   const cards = providers
     .map(
       (p) => {
-        const tagline = serviceKey === 'adhd-care' ? adhdCareProviderTagline(p) : p.servicePageTagline;
+        const tagline = getServiceTagline(p.slug, serviceKey) ?? p.servicePageTagline;
         return `            <article class="about-team-card" data-states="${p.stateAbbreviations.join(',')}">
               ${renderCareTeamPhoto(p, 88, 88)}
               <h3><a href="/providers/${p.slug}">${p.name}</a></h3>

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-07T11:23:09.767Z",
+  "generated": "2026-06-07T12:15:14.453Z",
   "hubUrl": "https://siya.health/providers",
   "count": 7,
   "providers": [
@@ -67,12 +67,12 @@
       "name": "Dr. Natasha Desai, MD",
       "slug": "dr-natasha-desai",
       "url": "https://siya.health/providers/dr-natasha-desai",
-      "jobTitle": "Family & Behavioral Medicine Physician",
+      "jobTitle": "Family Medicine Physician",
       "providerType": "physician",
       "medicalSpecialty": [
         "Family Medicine",
-        "Behavioral Medicine",
-        "Adult ADHD"
+        "Adult ADHD",
+        "Behavioral health"
       ],
       "statesLicensed": [
         "Texas",
@@ -99,9 +99,9 @@
       "jobTitle": "Internal Medicine Physician",
       "providerType": "physician",
       "medicalSpecialty": [
+        "Internal Medicine",
         "Adult ADHD",
-        "Mental Health",
-        "Primary Care"
+        "Mental Health"
       ],
       "statesLicensed": [
         "Pennsylvania"
