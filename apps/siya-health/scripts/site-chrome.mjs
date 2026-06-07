@@ -203,13 +203,12 @@ const LEARN_MORE_ADHD = `<!-- SIYA:LEARN-MORE-ADHD -->
             <p class="lead">Explore Health Guides, articles, and evaluation resources from Siya Health physicians.</p>
           </div>
           <ul class="learn-more-links">
-            <li><a href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">Why am I always tired? (clinician guide)</a></li>
-            <li><a href="/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign">Sleep apnea, fatigue, and metabolic risk</a></li>
-            <li><a href="/blog/adhd">ADHD articles and state-specific guides</a></li>
-            <li><a href="/answers/why-am-i-tired-even-after-sleeping">Tired after sleeping — health guide</a></li>
             <li><a href="/answers/signs-of-adult-adhd">Signs of adult ADHD — health guide</a></li>
-            <li><a href="/creyos-adhd-testing">Creyos cognitive testing for ADHD evaluations</a></li>
+            <li><a href="/answers/is-online-adhd-diagnosis-legitimate">Is online ADHD diagnosis legitimate?</a></li>
+            <li><a href="/blog/adhd">ADHD articles and state-specific guides</a></li>
+            <li><a href="/blog/how-to-know-if-you-have-adhd-adult">How to know if you have ADHD as an adult</a></li>
             <li><a href="/adhd-evaluation-cost">ADHD evaluation cost and what is included</a></li>
+            <li><a href="/creyos-adhd-testing">Creyos cognitive testing for ADHD evaluations</a></li>
             <li><a href="/blog/online-adhd-diagnosis-california">Online ADHD diagnosis in California</a></li>
             <li><a href="/blog/online-adhd-diagnosis-texas">Online ADHD diagnosis in Texas</a></li>
           </ul>
@@ -217,19 +216,35 @@ const LEARN_MORE_ADHD = `<!-- SIYA:LEARN-MORE-ADHD -->
       </section>
       <!-- /SIYA:LEARN-MORE-ADHD -->`;
 
-function buildMeetPhysiciansBlock(serviceKey, lead, stateAbbr = null) {
+const ADHD_CARE_PROVIDER_TAGLINES = {
+  'dr-sneh-pandey': 'Medical Director · Adult ADHD evaluation & care',
+  'dr-vanessa-urbina': 'Adult ADHD & primary care',
+  'dr-natasha-desai': 'Adult ADHD & behavioral medicine',
+  'dr-swati-pandey': 'Adult ADHD & mental health',
+  'megan-wunderlich': 'Adult ADHD & mental health',
+  'wendy-delgado': 'Adult ADHD & telehealth care',
+};
+
+function adhdCareProviderTagline(provider) {
+  return ADHD_CARE_PROVIDER_TAGLINES[provider.slug] || provider.servicePageTagline;
+}
+
+function buildMeetPhysiciansBlock(serviceKey, lead, stateAbbr = null, { gridClass = 'about-team-grid' } = {}) {
   const providers = getProvidersForServicePage(serviceKey, { stateAbbr });
   const stateNote = stateAbbr
     ? `<p class="provider-state-filter-note">Showing clinicians licensed in <strong>${stateAbbr}</strong>.</p>`
     : '';
   const cards = providers
     .map(
-      (p) => `            <article class="about-team-card" data-states="${p.stateAbbreviations.join(',')}">
+      (p) => {
+        const tagline = serviceKey === 'adhd-care' ? adhdCareProviderTagline(p) : p.servicePageTagline;
+        return `            <article class="about-team-card" data-states="${p.stateAbbreviations.join(',')}">
               ${renderCareTeamPhoto(p, 88, 88)}
               <h3><a href="/providers/${p.slug}">${p.name}</a></h3>
-              <p class="about-team-tagline">${p.servicePageTagline} · ${stateChipLabel(p)}</p>
+              <p class="about-team-tagline">${tagline} · ${stateChipLabel(p)}</p>
               <a class="text-link" href="/providers/${p.slug}">View profile →</a>
-            </article>`,
+            </article>`;
+      },
     )
     .join('\n');
   return `<!-- SIYA:MEET-PHYSICIANS -->
@@ -240,7 +255,7 @@ function buildMeetPhysiciansBlock(serviceKey, lead, stateAbbr = null) {
             <p class="lead">${lead}</p>
             ${stateNote}
           </div>
-          <div class="about-team-grid">
+          <div class="${gridClass}">
 ${cards}
           </div>
           <p class="blog-hub-see-all"><a href="/providers">View full care team</a></p>
@@ -287,7 +302,10 @@ function resolveMeetPhysiciansConfig(relPath) {
 }
 
 const MEET_PHYSICIANS_BY_PAGE = {
-  'adhd-care.html': () => buildMeetPhysiciansBlock('adhd-care', 'Board-certified clinicians on your ADHD care team.'),
+  'adhd-care.html': () =>
+    buildMeetPhysiciansBlock('adhd-care', 'Board-certified clinicians on your ADHD care team.', null, {
+      gridClass: 'about-team-grid about-team-grid--adhd',
+    }),
   'telehealth.html': () => buildMeetPhysiciansBlock('telehealth', 'Licensed telehealth clinicians—availability varies by state.'),
   'weight-loss-metabolic-health.html': () =>
     buildMeetPhysiciansBlock('weight-loss-metabolic-health', 'Provider-led medical weight loss and metabolic care.'),
@@ -925,6 +943,18 @@ export function injectSitewideCtas(html) {
   return html;
 }
 
+const ADHD_SCREENING_DEEP_LINK = '/adhd-screening?start=asrs';
+
+const ADHD_FAQ_CTA = `            <div class="faq-accordion-cta">
+              <p class="faq-accordion-cta-headline">Still deciding?</p>
+              <div class="faq-accordion-cta-buttons">
+                <a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">${COPY_STANDARDS.adhdPrimaryCta}</a>
+                <a class="button secondary" href="${ADHD_SCREENING_DEEP_LINK}" data-siya-track="screening-cta-click" data-siya-location="faq-cta">${COPY_STANDARDS.adhdSecondaryCta}</a>
+              </div>
+              <p class="faq-accordion-cta-subtext">Most patients start with a screening or book directly.</p>
+              <p class="faq-accordion-cta-phone"><a href="tel:+12154451244">(215) 445-1244</a></p>
+            </div>`;
+
 const THIN_ADHD_LANDERS = new Set([
   'adult-adhd-diagnosis.html',
   'adhd-treatment-online.html',
@@ -983,8 +1013,15 @@ export function normalizeCtaHierarchy(html, relPath) {
 
   html = html.replace(
     /(<div class="faq-accordion-cta">[\s\S]*?)<a class="button"[^>]*>[\s\S]*?<\/a>/g,
-    '$1<p class="cta-microcopy"><a href="#book-telehealth" class="text-link">Talk to a clinician when you\'re ready →</a></p>',
+    (match, prefix) => {
+      if (relPath === 'adhd-care.html') return match;
+      return `${prefix}<p class="cta-microcopy"><a href="#book-telehealth" class="text-link">Talk to a clinician when you're ready →</a></p>`;
+    },
   );
+
+  if (relPath === 'adhd-care.html' && html.includes('faq-accordion-cta')) {
+    html = html.replace(/<div class="faq-accordion-cta">[\s\S]*?<\/div>\s*(?=\n\s*<\/div>\s*\n\s*<script>)/, `${ADHD_FAQ_CTA}\n`);
+  }
 
   html = html.replace(
     /<p><a href="[^"]*(?:carepatron|yourmarketingai)[^"]*"[^>]*>Book a Meet[^<]*<\/a><\/p>/gi,
@@ -1000,7 +1037,7 @@ export function normalizeCtaHierarchy(html, relPath) {
       /(<!-- FINAL CTA -->[\s\S]*?<div class="cta-band-buttons">)[\s\S]*?(<\/div>)/,
       `$1
               <a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">${COPY_STANDARDS.adhdPrimaryCta}</a>
-              <a class="button secondary" href="/adhd-screening">${COPY_STANDARDS.adhdSecondaryCta}</a>
+              <a class="button secondary" href="${ADHD_SCREENING_DEEP_LINK}" data-siya-track="screening-cta-click" data-siya-location="final-cta">${COPY_STANDARDS.adhdSecondaryCta}</a>
             $2`,
     );
     html = html.replace(/Start Free Screening/g, COPY_STANDARDS.adhdSecondaryCta);

@@ -372,7 +372,7 @@ export function getAllProviders() {
 
 /** Service page → contracted provider slugs (clinical scope; state chips on cards). */
 export const SERVICE_PROVIDER_SLUGS = {
-  'adhd-care': ['dr-sneh-pandey', 'dr-natasha-desai', 'dr-swati-pandey', 'megan-wunderlich'],
+  'adhd-care': ['dr-sneh-pandey', 'dr-vanessa-urbina', 'dr-natasha-desai', 'dr-swati-pandey', 'megan-wunderlich', 'wendy-delgado'],
   telehealth: [
     'dr-sneh-pandey',
     'dr-natasha-desai',

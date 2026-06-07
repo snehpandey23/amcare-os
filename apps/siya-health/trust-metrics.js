@@ -1,11 +1,26 @@
 /**
- * Trust metrics - rolling number animation on scroll into view
+ * Trust metrics - rolling number animation on scroll into view.
+ * Final values are rendered immediately so metrics never show as zero.
  */
 (function () {
   'use strict';
 
-  var DURATION = 1800; // ms
-  var EASING = function (t) { return 1 - Math.pow(1 - t, 3); }; // ease-out cubic
+  var DURATION = 1800;
+  var EASING = function (t) { return 1 - Math.pow(1 - t, 3); };
+
+  function formatMetricValue(target, suffix) {
+    var isDecimal = target % 1 !== 0;
+    if (isDecimal) return target.toFixed(1) + (suffix || '');
+    return Math.round(target).toLocaleString('en-US') + (suffix || '');
+  }
+
+  function setFinalMetricValues(container) {
+    container.querySelectorAll('.trust-metric-value').forEach(function (el) {
+      var target = parseFloat(el.getAttribute('data-target'));
+      if (isNaN(target)) return;
+      el.textContent = formatMetricValue(target, el.getAttribute('data-suffix') || '');
+    });
+  }
 
   function animateValue(el) {
     var target = parseFloat(el.getAttribute('data-target')) || 0;
@@ -30,7 +45,7 @@
       if (progress < 1) {
         requestAnimationFrame(step);
       } else {
-        el.textContent = (isDecimal ? target.toFixed(1) : Math.round(target)) + suffix;
+        el.textContent = formatMetricValue(target, suffix);
       }
     }
 
@@ -38,27 +53,39 @@
   }
 
   function init() {
-    var section = document.querySelector('.trust-metrics');
-    if (!section) return;
+    var sections = document.querySelectorAll('.trust-metrics');
+    if (!sections.length) return;
 
-    var values = section.querySelectorAll('.trust-metric-value');
-    if (!values.length) return;
+    sections.forEach(function (section) {
+      setFinalMetricValues(section);
 
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          var container = entry.target;
-          if (container.classList.contains('trust-metrics-animated')) return;
-          container.classList.add('trust-metrics-animated');
-          container.querySelectorAll('.trust-metric-value').forEach(animateValue);
-          observer.unobserve(container);
-        });
-      },
-      { threshold: 0.2, rootMargin: '0px 0px -50px 0px' }
-    );
+      var values = section.querySelectorAll('.trust-metric-value');
+      if (!values.length) return;
 
-    observer.observe(section);
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        section.classList.add('trust-metrics-animated');
+        return;
+      }
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var container = entry.target;
+            if (container.classList.contains('trust-metrics-animated')) return;
+            container.classList.add('trust-metrics-animated');
+            container.querySelectorAll('.trust-metric-value').forEach(function (el) {
+              el.textContent = '0' + (el.getAttribute('data-suffix') || '');
+              animateValue(el);
+            });
+            observer.unobserve(container);
+          });
+        },
+        { threshold: 0.2, rootMargin: '0px 0px -50px 0px' }
+      );
+
+      observer.observe(section);
+    });
   }
 
   if (document.readyState === 'loading') {
