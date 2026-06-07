@@ -667,8 +667,8 @@ function renderProvidersIndex() {
             <p>Our team brings different training backgrounds, but shares one standard: thoughtful evaluation, clear communication, and patient-centered care.</p>
           </div>
           <div class="provider-lp-ctas">
-            <a class="button" href="${MEET_GREET_BOOKING_LINK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
-            <a class="button secondary" href="/telehealth">Explore Services</a>
+            <a class="button" href="${MEET_GREET_BOOKING_LINK}" target="_blank" rel="noopener">Talk to a Clinician</a>
+            <a class="button secondary" href="/telehealth">Explore Telehealth Care</a>
           </div>
         </div>
       </section>

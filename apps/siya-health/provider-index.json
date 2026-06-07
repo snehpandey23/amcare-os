@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-07T07:20:59.076Z",
+  "generated": "2026-06-07T07:46:11.895Z",
   "hubUrl": "https://siya.health/providers",
   "count": 7,
   "providers": [
@@ -96,7 +96,7 @@
       "name": "Dr. Swati Pandey, MD",
       "slug": "dr-swati-pandey",
       "url": "https://siya.health/providers/dr-swati-pandey",
-      "jobTitle": "Licensed Medical Provider — ADHD & Mental Health Care",
+      "jobTitle": "Internal Medicine Physician",
       "providerType": "physician",
       "medicalSpecialty": [
         "Adult ADHD",

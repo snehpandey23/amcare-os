@@ -30,7 +30,6 @@ const GOOGLE_SITE_VERIFICATION = (process.env.SIYA_GOOGLE_SITE_VERIFICATION || p
 
 const BLOG_HUB_FILES = new Set([
   'blog/index.html',
-  'blog/all.html',
   'blog/adhd.html',
   'blog/weight-loss.html',
   'blog/telehealth.html',
@@ -69,7 +68,7 @@ function priorityFor(rel) {
   if (rel === 'index.html') return '1.0';
   if (['adhd-care.html', 'adhd-screening.html', 'weight-loss-metabolic-health.html', 'telehealth.html'].includes(rel)) return '0.95';
   if (rel === 'providers/index.html' || rel.startsWith('providers/')) return '0.85';
-  if (rel === 'blog/index.html' || rel === 'blog/all.html') return '0.85';
+  if (rel === 'blog/index.html') return '0.85';
   if (['blog/adhd.html', 'blog/weight-loss.html', 'blog/telehealth.html'].includes(rel)) return '0.82';
   if (rel.startsWith('blog/')) return '0.74';
   if (rel.startsWith('answers/') && rel !== 'answers/index.html') return '0.76';
@@ -428,7 +427,6 @@ function categoryBreadcrumb(relPath, html) {
     'blog/adhd.html': { name: 'ADHD articles', path: '/blog/adhd' },
     'blog/weight-loss.html': { name: 'Weight loss articles', path: '/blog/weight-loss' },
     'blog/telehealth.html': { name: 'Telehealth articles', path: '/blog/telehealth' },
-    'blog/all.html': { name: 'All articles', path: '/blog/all' },
   };
   const entry = map[relPath];
   if (!entry) return html;
@@ -511,7 +509,7 @@ function processHtml(relPath) {
   if (relPath === 'providers/index.html') html = ensureBreadcrumbSimplePage(html, 'Our physicians', `${BASE}/providers`);
   if (relPath === 'about.html') html = ensureBreadcrumbSimplePage(html, 'About', canonical);
   if (relPath === 'adhd-care.html') html = ensureBreadcrumbSimplePage(html, 'ADHD Care', canonical);
-  if (relPath === 'membership-pricing.html') html = ensureBreadcrumbSimplePage(html, 'Membership & pricing', canonical);
+  if (relPath === 'membership-pricing.html' || relPath === 'pricing.html') html = ensureBreadcrumbSimplePage(html, 'Pricing', canonical);
   if (relPath === 'answers/index.html') html = ensureBreadcrumbSimplePage(html, 'Health Guides', `${BASE}/answers`);
   if (relPath === 'siya-circle.html') html = ensureBreadcrumbSimplePage(html, 'Siya Circle', `${BASE}/siya-circle`);
 

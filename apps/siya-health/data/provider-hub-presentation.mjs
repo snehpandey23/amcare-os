@@ -68,9 +68,9 @@ export const PROVIDER_HUB_PRESENTATION = {
   },
   'wendy-delgado': {
     role: 'Physician Assistant',
-    focus: ['Primary care', 'Telehealth', 'ADHD support', 'Medical weight loss'],
+    focus: ['Weight Loss', 'Metabolic Care'],
     description:
-      "Wendy supports patients through telehealth visits for primary care, ADHD-related concerns, and weight-management care within Siya Health's physician-led model.",
+      'Wendy supports patients through telehealth visits for medical weight loss and metabolic care within Siya Health\'s physician-led model.',
   },
 };
 

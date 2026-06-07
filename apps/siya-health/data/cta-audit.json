@@ -1,0 +1,4894 @@
+{
+  "generated": "2026-06-07T07:46:15.748Z",
+  "indexablePageCount": 166,
+  "recommendedSystem": {
+    "primary": {
+      "label": "Talk to a Clinician",
+      "url": "https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4"
+    },
+    "secondary": {
+      "label": "Explore Services",
+      "url": "/telehealth"
+    },
+    "newsletter": {
+      "label": "Siya Circle",
+      "url": "https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl"
+    }
+  },
+  "summary": {
+    "totalCtaInstances": 1169,
+    "uniqueLabels": 66,
+    "uniquePatterns": 95,
+    "bookingLabelVariants": 7,
+    "bookingLabels": [
+      "Talk to a Clinician",
+      "Book ADHD Evaluation",
+      "Talk to a Clinician →",
+      "Start Free ADHD Assessment",
+      "ADHD Care",
+      "Weight Loss Consultation",
+      "schedule a visit"
+    ],
+    "keepInstances": 323,
+    "consolidateInstances": 528,
+    "removeInstances": 318,
+    "pagesWithMainCtaOver3": 28,
+    "pagesWithDuplicateBookingInMain": 23,
+    "chaosScore": 357
+  },
+  "patterns": [
+    {
+      "label": "Talk to a Clinician",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "nav",
+      "count": 204,
+      "pages": [
+        "/",
+        "/about",
+        "/answers",
+        "/answers/adhd-and-weight-loss-connection",
+        "/answers/afternoon-energy-crash-after-lunch",
+        "/answers/brain-fog-after-eating",
+        "/answers/can-sleep-apnea-cause-fatigue",
+        "/answers/compounded-vs-branded-glp-1"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "primary",
+      "note": "Nav booking — keep one label: Talk to a Clinician"
+    },
+    {
+      "label": "Talk to a Clinician",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "footer",
+      "count": 162,
+      "pages": [
+        "/",
+        "/about",
+        "/adhd-care",
+        "/adhd-diagnosis-austin",
+        "/adhd-diagnosis-florida",
+        "/adhd-diagnosis-houston",
+        "/adhd-diagnosis-pennsylvania",
+        "/adhd-diagnosis-philadelphia"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "primary",
+      "note": "Footer booking duplicate — inventory only; footer frozen per prior sprint"
+    },
+    {
+      "label": "Free ADHD screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "footer-links",
+      "count": 161,
+      "pages": [
+        "/",
+        "/about",
+        "/adhd-care",
+        "/adhd-diagnosis-austin",
+        "/adhd-diagnosis-florida",
+        "/adhd-diagnosis-houston",
+        "/adhd-diagnosis-pennsylvania",
+        "/adhd-diagnosis-philadelphia"
+      ],
+      "recommendation": "KEEP",
+      "slot": null,
+      "note": "Footer nav link — not a main CTA slot"
+    },
+    {
+      "label": "Siya Circle",
+      "url": "https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl",
+      "type": "newsletter",
+      "zone": "footer-links",
+      "count": 161,
+      "pages": [
+        "/",
+        "/about",
+        "/adhd-care",
+        "/adhd-diagnosis-austin",
+        "/adhd-diagnosis-florida",
+        "/adhd-diagnosis-houston",
+        "/adhd-diagnosis-pennsylvania",
+        "/adhd-diagnosis-philadelphia"
+      ],
+      "recommendation": "KEEP",
+      "slot": "newsletter",
+      "note": "Footer newsletter — do not modify footer in prior sprints"
+    },
+    {
+      "label": "Talk to a Clinician",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "main",
+      "count": 115,
+      "pages": [
+        "/",
+        "/adhd-screening",
+        "/answers/adderall-vs-vyvanse-adults",
+        "/answers/adhd-and-weight-loss-connection",
+        "/answers/adhd-in-men",
+        "/answers/adhd-in-women",
+        "/answers/adhd-medication-every-day",
+        "/answers/adhd-medication-side-effects"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Mid-page booking — use hero OR final band only"
+    },
+    {
+      "label": "Book ADHD Evaluation",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "nav",
+      "count": 56,
+      "pages": [
+        "/adhd-care",
+        "/adhd-diagnosis-austin",
+        "/adhd-diagnosis-florida",
+        "/adhd-diagnosis-houston",
+        "/adhd-diagnosis-pennsylvania",
+        "/adhd-diagnosis-philadelphia",
+        "/adhd-diagnosis-texas",
+        "/adhd-evaluation-cost"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "primary",
+      "note": "Nav booking — keep one label: Talk to a Clinician"
+    },
+    {
+      "label": "Start Free Screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "nav",
+      "count": 50,
+      "pages": [
+        "/answers/adderall-vs-vyvanse-adults",
+        "/answers/adhd-in-men",
+        "/answers/adhd-in-women",
+        "/answers/adhd-medication-every-day",
+        "/answers/adhd-medication-side-effects",
+        "/answers/adhd-vs-anxiety",
+        "/answers/adhd-vs-burnout",
+        "/answers/asrs-adhd-screening-explained"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Talk to a Clinician",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "main",
+      "count": 38,
+      "pages": [
+        "/about",
+        "/adhd-diagnosis-austin",
+        "/adhd-diagnosis-florida",
+        "/adhd-diagnosis-houston",
+        "/adhd-diagnosis-pennsylvania",
+        "/adhd-diagnosis-philadelphia",
+        "/adhd-diagnosis-texas",
+        "/adhd-evaluation-cost"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "primary",
+      "note": "Hero primary — one per page; unify label to Talk to a Clinician"
+    },
+    {
+      "label": "Free ADHD screening (not a diagnosis)",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 25,
+      "pages": [
+        "/answers/adderall-vs-vyvanse-adults",
+        "/answers/adhd-in-men",
+        "/answers/adhd-in-women",
+        "/answers/adhd-medication-every-day",
+        "/answers/adhd-medication-side-effects",
+        "/answers/adhd-vs-anxiety",
+        "/answers/adhd-vs-burnout",
+        "/answers/asrs-adhd-screening-explained"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Book ADHD Evaluation",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "main",
+      "count": 18,
+      "pages": [
+        "/adhd-care",
+        "/blog/adderall-for-adhd-how-it-works",
+        "/blog/adult-adhd-symptoms-california",
+        "/blog/adult-adhd-treatment-california-2026",
+        "/blog/after-adhd-diagnosis-next-steps-adults",
+        "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+        "/blog/how-adhd-medication-is-prescribed-online",
+        "/blog/how-to-choose-adhd-provider-california"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Extra main booking beyond hero/final band"
+    },
+    {
+      "label": "online ADHD screening",
+      "url": "/online-adhd-test",
+      "type": "screening",
+      "zone": "main",
+      "count": 17,
+      "pages": [
+        "/blog/adderall-for-adhd-how-it-works",
+        "/blog/adhd",
+        "/blog/adhd-evaluation-cost-texas",
+        "/blog/adhd-medication-options-for-adults",
+        "/blog/adhd-medication-side-effects-what-to-expect",
+        "/blog/adhd-symptoms-overlooked",
+        "/blog/adhd-testing-online-california-screening-vs-evaluation",
+        "/blog/adult-adhd-symptoms-california"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Talk to a Clinician",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "provider-booking",
+      "zone": "main",
+      "count": 14,
+      "pages": [
+        "/providers/derek-timbs",
+        "/providers/dr-natasha-desai",
+        "/providers/dr-sneh-pandey",
+        "/providers/dr-swati-pandey",
+        "/providers/dr-vanessa-urbina",
+        "/providers/megan-wunderlich",
+        "/providers/wendy-delgado"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "primary",
+      "note": "Provider page — consolidate to Talk to a Clinician with UTM retained"
+    },
+    {
+      "label": "View Services",
+      "url": "#services-supported",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 14,
+      "pages": [
+        "/providers/derek-timbs",
+        "/providers/dr-natasha-desai",
+        "/providers/dr-sneh-pandey",
+        "/providers/dr-swati-pandey",
+        "/providers/dr-vanessa-urbina",
+        "/providers/megan-wunderlich",
+        "/providers/wendy-delgado"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "Book ADHD Evaluation",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "main",
+      "count": 12,
+      "pages": [
+        "/adhd-diagnosis-austin",
+        "/adhd-diagnosis-florida",
+        "/adhd-diagnosis-houston",
+        "/adhd-diagnosis-pennsylvania",
+        "/adhd-diagnosis-philadelphia",
+        "/adhd-diagnosis-texas",
+        "/adhd-evaluation-cost",
+        "/adhd-treatment-online"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "primary",
+      "note": "Hero primary — one per page; unify label to Talk to a Clinician"
+    },
+    {
+      "label": "Free 2-minute screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 11,
+      "pages": [
+        "/adhd-diagnosis-austin",
+        "/adhd-diagnosis-florida",
+        "/adhd-diagnosis-houston",
+        "/adhd-diagnosis-pennsylvania",
+        "/adhd-diagnosis-philadelphia",
+        "/adhd-diagnosis-texas",
+        "/adhd-evaluation-cost",
+        "/adhd-treatment-online"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "ADHD funnel secondary — optional one max; consider Explore Services on non-ADHD pages"
+    },
+    {
+      "label": "Free screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 11,
+      "pages": [
+        "/adhd-diagnosis-austin",
+        "/adhd-diagnosis-florida",
+        "/adhd-diagnosis-houston",
+        "/adhd-diagnosis-pennsylvania",
+        "/adhd-diagnosis-philadelphia",
+        "/adhd-diagnosis-texas",
+        "/adhd-evaluation-cost",
+        "/adhd-treatment-online"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "ADHD funnel secondary — optional one max; consider Explore Services on non-ADHD pages"
+    },
+    {
+      "label": "Free ADHD Screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 3,
+      "pages": [
+        "/adhd-care"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "ADHD funnel secondary — optional one max; consider Explore Services on non-ADHD pages"
+    },
+    {
+      "label": "Read the full clinical guide",
+      "url": "/blog/why-am-i-always-tired-causes-when-to-see-doctor",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 3,
+      "pages": [
+        "/answers/afternoon-energy-crash-after-lunch",
+        "/answers/poor-sleep-feels-like-adhd",
+        "/answers/why-am-i-tired-even-after-sleeping"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Free vs total testosterone: what patients should know (full guide)",
+      "url": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 3,
+      "pages": [
+        "/answers/high-shbg-low-free-testosterone",
+        "/answers/what-does-low-testosterone-feel-like",
+        "/answers/what-is-free-testosterone"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Insulin resistance and weight loss (clinician overview)",
+      "url": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 3,
+      "pages": [
+        "/answers/insulin-resistance-without-diabetes",
+        "/answers/normal-a1c-insulin-resistance",
+        "/answers/what-is-insulin-resistance"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Join Siya Circle",
+      "url": "https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl",
+      "type": "newsletter",
+      "zone": "main",
+      "count": 3,
+      "pages": [
+        "/blog",
+        "/siya-circle"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Newsletter CTA belongs in footer or dedicated hub section only"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/dr-swati-pandey",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/",
+        "/about"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "Explore Telehealth Care",
+      "url": "/telehealth",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/about",
+        "/providers"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "Read the full clinical guide",
+      "url": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/answers/brain-fog-after-eating",
+        "/answers/why-normal-labs-dont-mean-healthy"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Sleep apnea, fatigue, and metabolic risk (full guide)",
+      "url": "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/answers/can-sleep-apnea-cause-fatigue",
+        "/answers/signs-of-sleep-apnea-in-adults"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Food noise and GLP-1: what it means and what helps (full guide)",
+      "url": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/answers/food-noise-returned-on-glp-1",
+        "/answers/what-is-food-noise"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "GLP-1 side effects and how to manage them (full guide)",
+      "url": "/blog/glp1-side-effects-and-how-to-manage-them",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/answers/glp-1-nausea-management",
+        "/answers/glp-1-side-effects"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "When is testosterone therapy appropriate? (full guide)",
+      "url": "/blog/when-is-testosterone-therapy-appropriate",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/answers/trt-monitoring-requirements",
+        "/answers/when-is-testosterone-therapy-appropriate"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Explore Care Options",
+      "url": "/weight-loss-metabolic-health",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+        "/blog/insulin-resistance-and-weight-loss-clinician-overview"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "Learn More",
+      "url": "#coming-soon",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/labs",
+        "/prescriptions"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "View Legal Documents",
+      "url": "/legal",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/privacy-policy",
+        "/terms"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "Explore Health Guides",
+      "url": "/answers",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/siya-circle"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "See pricing",
+      "url": "/pricing",
+      "type": "secondary-text",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "Free screening →",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Free ADHD screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Free ADHD Screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/dr-sneh-pandey",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/dr-vanessa-urbina",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/dr-natasha-desai",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/megan-wunderlich",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/derek-timbs",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/wendy-delgado",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "free ADHD screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "View Dr. Pandey's Profile",
+      "url": "/providers/dr-sneh-pandey",
+      "type": "button-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/about"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Misc button — not part of 3-slot system"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/dr-sneh-pandey",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/about"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/dr-natasha-desai",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/about"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "free screening",
+      "url": "/online-adhd-test",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/adhd-diagnosis-austin"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "ADHD funnel secondary — optional one max; consider Explore Services on non-ADHD pages"
+    },
+    {
+      "label": "Join Siya Circle",
+      "url": "https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl",
+      "type": "newsletter",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers"
+      ],
+      "recommendation": "KEEP",
+      "slot": "newsletter",
+      "note": "Dedicated Siya Circle section (answers hub)"
+    },
+    {
+      "label": "View all Metabolic Health guides",
+      "url": "#guides-metabolic-all",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "View all Energy & Fatigue guides",
+      "url": "#guides-energy-all",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "View all Hormone Health guides",
+      "url": "#guides-hormone-all",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "View all ADHD & Focus guides",
+      "url": "#guides-adhd-all",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "View all Telehealth & Care guides",
+      "url": "#guides-telehealth-all",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "Vyvanse vs Adderall: full comparison guide",
+      "url": "/blog/vyvanse-vs-adderall-differences",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/adderall-vs-vyvanse-adults"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "ADHD medication daily or as-needed (full guide)",
+      "url": "/blog/adhd-medication-daily-or-as-needed-adults",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/adhd-medication-every-day"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "ADHD medication side effects: what to expect (full guide)",
+      "url": "/blog/adhd-medication-side-effects-what-to-expect",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/adhd-medication-side-effects"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Free ADHD screening (ASRS)",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/adhd-vs-anxiety"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Compounded vs branded GLP-1 medications (full guide)",
+      "url": "/blog/compounded-vs-branded-glp1-medications",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/compounded-vs-branded-glp-1"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Is ADHD medication safe long-term? (full guide)",
+      "url": "/blog/is-adhd-medication-safe-long-term",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/is-adhd-medication-safe-long-term"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Is online ADHD diagnosis legit? (full clinical guide)",
+      "url": "/blog/is-online-adhd-diagnosis-legit",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/is-online-adhd-diagnosis-legitimate"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Medical weight loss vs dieting: what actually works (full guide)",
+      "url": "/blog/medical-weight-loss-vs-dieting-what-actually-works",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/medical-weight-loss-vs-dieting"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Minoxidil for hair loss: does it work? (full guide)",
+      "url": "/blog/minoxidil-for-hair-loss-does-it-work",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/minoxidil-hair-loss-does-it-work"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Non-stimulant ADHD medications explained (full guide)",
+      "url": "/blog/non-stimulant-adhd-medications-explained",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/non-stimulant-adhd-medications"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Oral vs injectable weight-loss medications (full guide)",
+      "url": "/blog/oral-vs-injectable-weight-loss-medications",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/oral-vs-injectable-weight-loss-meds"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Oral vs topical minoxidil: which is right? (full guide)",
+      "url": "/blog/oral-vs-topical-minoxidil-which-is-right",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/oral-vs-topical-minoxidil"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Phentermine for weight loss: safety and effectiveness (full guide)",
+      "url": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/phentermine-weight-loss-safety"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Semaglutide for weight loss: how it works (full guide)",
+      "url": "/blog/semaglutide-for-weight-loss-how-it-works",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/semaglutide-weight-loss-how-it-works"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Free ASRS screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/signs-of-adult-adhd"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Sildenafil for erectile dysfunction: what to expect (full guide)",
+      "url": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/sildenafil-erectile-dysfunction-expectations"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "ADHD telehealth in California (full overview)",
+      "url": "/blog/adhd-telehealth-california",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/telehealth-adhd-california"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Tirzepatide vs semaglutide: full comparison guide",
+      "url": "/blog/tirzepatide-vs-semaglutide-which-is-better",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/tirzepatide-vs-semaglutide"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Read the full clinical guide",
+      "url": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/weight-gain-after-stopping-ozempic"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Medical weight loss with GLP-1 in Texas (full overview)",
+      "url": "/blog/medical-weight-loss-glp1-semaglutide-texas",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/who-qualifies-glp-1-weight-loss"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Browse Health Guides",
+      "url": "/answers",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/blog"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "Browse all articles →",
+      "url": "/blog",
+      "type": "button-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/blog"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Misc button — not part of 3-slot system"
+    },
+    {
+      "label": "Talk to a Clinician →",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/blog"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "primary",
+      "note": "Hero primary — one per page; unify label to Talk to a Clinician"
+    },
+    {
+      "label": "Explore Care Options",
+      "url": "/mens-health-longevity",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "Explore metabolic health",
+      "url": "/weight-loss-metabolic-health",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "screening tool",
+      "url": "/online-adhd-test",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/blog/telehealth"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Explore Care Options",
+      "url": "/telehealth",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/blog/why-am-i-always-tired-causes-when-to-see-doctor"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "Choose Visit Type",
+      "url": "#book-visit",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/book-appointment"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "Start Free ADHD Assessment",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/book-appointment"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Mid-page booking — use hero OR final band only"
+    },
+    {
+      "label": "ADHD Care",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/book-appointment"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Mid-page booking — use hero OR final band only"
+    },
+    {
+      "label": "Weight Loss Consultation",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/book-appointment"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Mid-page booking — use hero OR final band only"
+    },
+    {
+      "label": "Explore Care Options",
+      "url": "#services",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/mens-health-longevity"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "Explore Care Options",
+      "url": "#conditions",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/primary-urgent-care"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "View Profile",
+      "url": "/providers/dr-sneh-pandey",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/providers"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "View Profile",
+      "url": "/providers/dr-vanessa-urbina",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/providers"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "View Profile",
+      "url": "/providers/dr-natasha-desai",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/providers"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "View Profile",
+      "url": "/providers/dr-swati-pandey",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/providers"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "View Profile",
+      "url": "/providers/megan-wunderlich",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/providers"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "View Profile",
+      "url": "/providers/derek-timbs",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/providers"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "View Profile",
+      "url": "/providers/wendy-delgado",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/providers"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "Free ADHD screening →",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/providers/megan-wunderlich"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "schedule a visit",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/siya-circle"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "primary",
+      "note": "Hero primary — one per page; unify label to Talk to a Clinician"
+    }
+  ],
+  "excessivePages": [
+    {
+      "path": "/",
+      "mainCtaCount": 15,
+      "bookingInMain": 3,
+      "ctas": [
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "testimonials",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "See pricing",
+          "type": "secondary-text",
+          "context": "testimonials",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Free screening →",
+          "type": "screening",
+          "context": "testimonials",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Free ADHD screening",
+          "type": "screening",
+          "context": "testimonials",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Free ADHD Screening",
+          "type": "screening",
+          "context": "symptoms-grid",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "View profile",
+          "type": "secondary-service",
+          "context": "symptoms-grid",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "View profile",
+          "type": "secondary-service",
+          "context": "symptoms-grid",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "View profile",
+          "type": "secondary-service",
+          "context": "symptoms-grid",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "View profile",
+          "type": "secondary-service",
+          "context": "symptoms-grid",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "View profile",
+          "type": "secondary-service",
+          "context": "symptoms-grid",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "View profile",
+          "type": "secondary-service",
+          "context": "symptoms-grid",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "View profile",
+          "type": "secondary-service",
+          "context": "symptoms-grid",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "provider-grid",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "free ADHD screening",
+          "type": "screening",
+          "context": "provider-grid",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "testimonials",
+          "recommendation": "REMOVE"
+        }
+      ],
+      "remove": [
+        "Talk to a Clinician",
+        "See pricing",
+        "Free screening →",
+        "Free ADHD screening",
+        "Free ADHD Screening",
+        "View profile",
+        "View profile",
+        "View profile",
+        "View profile",
+        "View profile",
+        "View profile",
+        "View profile",
+        "Talk to a Clinician",
+        "free ADHD screening",
+        "Talk to a Clinician"
+      ]
+    },
+    {
+      "path": "/providers",
+      "mainCtaCount": 9,
+      "bookingInMain": 1,
+      "ctas": [
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Explore Telehealth Care",
+          "type": "secondary-service",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Profile",
+          "type": "secondary-service",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Profile",
+          "type": "secondary-service",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Profile",
+          "type": "secondary-service",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Profile",
+          "type": "secondary-service",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Profile",
+          "type": "secondary-service",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Profile",
+          "type": "secondary-service",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Profile",
+          "type": "secondary-service",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": []
+    },
+    {
+      "path": "/about",
+      "mainCtaCount": 8,
+      "bookingInMain": 3,
+      "ctas": [
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Dr. Pandey's Profile",
+          "type": "button-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Explore Telehealth Care",
+          "type": "secondary-service",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View profile",
+          "type": "secondary-service",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View profile",
+          "type": "secondary-service",
+          "context": "cta-band",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View profile",
+          "type": "secondary-service",
+          "context": "main-body",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": [
+        "View Dr. Pandey's Profile",
+        "View profile"
+      ]
+    },
+    {
+      "path": "/adhd-care",
+      "mainCtaCount": 7,
+      "bookingInMain": 4,
+      "ctas": [
+        {
+          "label": "Book ADHD Evaluation",
+          "type": "booking",
+          "context": "symptoms-grid",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Free ADHD Screening",
+          "type": "screening",
+          "context": "symptoms-grid",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Book ADHD Evaluation",
+          "type": "booking",
+          "context": "symptoms-grid",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Book ADHD Evaluation",
+          "type": "booking",
+          "context": "symptoms-grid",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Free ADHD Screening",
+          "type": "screening",
+          "context": "symptoms-grid",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Book ADHD Evaluation",
+          "type": "booking",
+          "context": "symptoms-grid",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Free ADHD Screening",
+          "type": "screening",
+          "context": "symptoms-grid",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": [
+        "Book ADHD Evaluation",
+        "Book ADHD Evaluation",
+        "Book ADHD Evaluation",
+        "Book ADHD Evaluation"
+      ]
+    },
+    {
+      "path": "/adhd-diagnosis-austin",
+      "mainCtaCount": 6,
+      "bookingInMain": 3,
+      "ctas": [
+        {
+          "label": "Book ADHD Evaluation",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free 2-minute screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "cta-band",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "free screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": []
+    },
+    {
+      "path": "/answers",
+      "mainCtaCount": 6,
+      "bookingInMain": 0,
+      "ctas": [
+        {
+          "label": "Join Siya Circle",
+          "type": "newsletter",
+          "context": "newsletter-section",
+          "recommendation": "KEEP"
+        },
+        {
+          "label": "View all Metabolic Health guides",
+          "type": "secondary-other",
+          "context": "newsletter-section",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "View all Energy & Fatigue guides",
+          "type": "secondary-other",
+          "context": "newsletter-section",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "View all Hormone Health guides",
+          "type": "secondary-other",
+          "context": "newsletter-section",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "View all ADHD & Focus guides",
+          "type": "secondary-other",
+          "context": "newsletter-section",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "View all Telehealth & Care guides",
+          "type": "secondary-other",
+          "context": "newsletter-section",
+          "recommendation": "REMOVE"
+        }
+      ],
+      "remove": [
+        "View all Metabolic Health guides",
+        "View all Energy & Fatigue guides",
+        "View all Hormone Health guides",
+        "View all ADHD & Focus guides",
+        "View all Telehealth & Care guides"
+      ]
+    },
+    {
+      "path": "/online-adhd-test",
+      "mainCtaCount": 6,
+      "bookingInMain": 4,
+      "ctas": [
+        {
+          "label": "Book ADHD Evaluation",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free 2-minute screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Book ADHD Evaluation",
+          "type": "booking",
+          "context": "cta-band",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "cta-band",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": []
+    },
+    {
+      "path": "/siya-circle",
+      "mainCtaCount": 6,
+      "bookingInMain": 2,
+      "ctas": [
+        {
+          "label": "Join Siya Circle",
+          "type": "newsletter",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Explore Health Guides",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "schedule a visit",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Join Siya Circle",
+          "type": "newsletter",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "cta-band",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Explore Health Guides",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": [
+        "Join Siya Circle",
+        "Join Siya Circle"
+      ]
+    },
+    {
+      "path": "/adhd-diagnosis-florida",
+      "mainCtaCount": 5,
+      "bookingInMain": 3,
+      "ctas": [
+        {
+          "label": "Book ADHD Evaluation",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free 2-minute screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "cta-band",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": []
+    },
+    {
+      "path": "/adhd-diagnosis-houston",
+      "mainCtaCount": 5,
+      "bookingInMain": 3,
+      "ctas": [
+        {
+          "label": "Book ADHD Evaluation",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free 2-minute screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "cta-band",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": []
+    },
+    {
+      "path": "/adhd-diagnosis-pennsylvania",
+      "mainCtaCount": 5,
+      "bookingInMain": 3,
+      "ctas": [
+        {
+          "label": "Book ADHD Evaluation",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free 2-minute screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "cta-band",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": []
+    },
+    {
+      "path": "/adhd-diagnosis-philadelphia",
+      "mainCtaCount": 5,
+      "bookingInMain": 3,
+      "ctas": [
+        {
+          "label": "Book ADHD Evaluation",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free 2-minute screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "cta-band",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": []
+    },
+    {
+      "path": "/adhd-diagnosis-texas",
+      "mainCtaCount": 5,
+      "bookingInMain": 3,
+      "ctas": [
+        {
+          "label": "Book ADHD Evaluation",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free 2-minute screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "cta-band",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": []
+    },
+    {
+      "path": "/adhd-evaluation-cost",
+      "mainCtaCount": 5,
+      "bookingInMain": 3,
+      "ctas": [
+        {
+          "label": "Book ADHD Evaluation",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free 2-minute screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "cta-band",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": []
+    },
+    {
+      "path": "/adhd-treatment-online",
+      "mainCtaCount": 5,
+      "bookingInMain": 3,
+      "ctas": [
+        {
+          "label": "Book ADHD Evaluation",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free 2-minute screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "cta-band",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": []
+    },
+    {
+      "path": "/adult-adhd-diagnosis",
+      "mainCtaCount": 5,
+      "bookingInMain": 3,
+      "ctas": [
+        {
+          "label": "Book ADHD Evaluation",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free 2-minute screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "cta-band",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": []
+    },
+    {
+      "path": "/blog",
+      "mainCtaCount": 5,
+      "bookingInMain": 2,
+      "ctas": [
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Browse Health Guides",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Join Siya Circle",
+          "type": "newsletter",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Browse all articles →",
+          "type": "button-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Talk to a Clinician →",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": [
+        "Join Siya Circle",
+        "Browse all articles →"
+      ]
+    },
+    {
+      "path": "/book-appointment",
+      "mainCtaCount": 5,
+      "bookingInMain": 4,
+      "ctas": [
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "main-body",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Choose Visit Type",
+          "type": "secondary-other",
+          "context": "main-body",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Start Free ADHD Assessment",
+          "type": "booking",
+          "context": "main-body",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "ADHD Care",
+          "type": "booking",
+          "context": "main-body",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Weight Loss Consultation",
+          "type": "booking",
+          "context": "main-body",
+          "recommendation": "REMOVE"
+        }
+      ],
+      "remove": [
+        "Talk to a Clinician",
+        "Choose Visit Type",
+        "Start Free ADHD Assessment",
+        "ADHD Care",
+        "Weight Loss Consultation"
+      ]
+    },
+    {
+      "path": "/creyos-adhd-testing",
+      "mainCtaCount": 5,
+      "bookingInMain": 3,
+      "ctas": [
+        {
+          "label": "Book ADHD Evaluation",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free 2-minute screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": []
+    },
+    {
+      "path": "/providers/megan-wunderlich",
+      "mainCtaCount": 5,
+      "bookingInMain": 0,
+      "ctas": [
+        {
+          "label": "Talk to a Clinician",
+          "type": "provider-booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Services",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Free ADHD screening →",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "provider-booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Services",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        }
+      ],
+      "remove": [
+        "View Services",
+        "Free ADHD screening →",
+        "View Services"
+      ]
+    },
+    {
+      "path": "/mens-health-longevity",
+      "mainCtaCount": 4,
+      "bookingInMain": 3,
+      "ctas": [
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Explore Care Options",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "main-body",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": [
+        "Explore Care Options",
+        "Talk to a Clinician"
+      ]
+    },
+    {
+      "path": "/primary-urgent-care",
+      "mainCtaCount": 4,
+      "bookingInMain": 3,
+      "ctas": [
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Explore Care Options",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": [
+        "Explore Care Options"
+      ]
+    },
+    {
+      "path": "/providers/derek-timbs",
+      "mainCtaCount": 4,
+      "bookingInMain": 0,
+      "ctas": [
+        {
+          "label": "Talk to a Clinician",
+          "type": "provider-booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Services",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "provider-booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Services",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        }
+      ],
+      "remove": [
+        "View Services",
+        "View Services"
+      ]
+    },
+    {
+      "path": "/providers/dr-natasha-desai",
+      "mainCtaCount": 4,
+      "bookingInMain": 0,
+      "ctas": [
+        {
+          "label": "Talk to a Clinician",
+          "type": "provider-booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Services",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "provider-booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Services",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        }
+      ],
+      "remove": [
+        "View Services",
+        "View Services"
+      ]
+    },
+    {
+      "path": "/providers/dr-sneh-pandey",
+      "mainCtaCount": 4,
+      "bookingInMain": 0,
+      "ctas": [
+        {
+          "label": "Talk to a Clinician",
+          "type": "provider-booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Services",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "provider-booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Services",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        }
+      ],
+      "remove": [
+        "View Services",
+        "View Services"
+      ]
+    },
+    {
+      "path": "/providers/dr-swati-pandey",
+      "mainCtaCount": 4,
+      "bookingInMain": 0,
+      "ctas": [
+        {
+          "label": "Talk to a Clinician",
+          "type": "provider-booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Services",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "provider-booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Services",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        }
+      ],
+      "remove": [
+        "View Services",
+        "View Services"
+      ]
+    },
+    {
+      "path": "/providers/dr-vanessa-urbina",
+      "mainCtaCount": 4,
+      "bookingInMain": 0,
+      "ctas": [
+        {
+          "label": "Talk to a Clinician",
+          "type": "provider-booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Services",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "provider-booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Services",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        }
+      ],
+      "remove": [
+        "View Services",
+        "View Services"
+      ]
+    },
+    {
+      "path": "/providers/wendy-delgado",
+      "mainCtaCount": 4,
+      "bookingInMain": 0,
+      "ctas": [
+        {
+          "label": "Talk to a Clinician",
+          "type": "provider-booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Services",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "provider-booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Services",
+          "type": "secondary-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        }
+      ],
+      "remove": [
+        "View Services",
+        "View Services"
+      ]
+    }
+  ],
+  "duplicateBookingPages": [
+    {
+      "path": "/adhd-care",
+      "bookingInMain": 4
+    },
+    {
+      "path": "/book-appointment",
+      "bookingInMain": 4
+    },
+    {
+      "path": "/online-adhd-test",
+      "bookingInMain": 4
+    },
+    {
+      "path": "/",
+      "bookingInMain": 3
+    },
+    {
+      "path": "/about",
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adhd-diagnosis-austin",
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adhd-diagnosis-florida",
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adhd-diagnosis-houston",
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adhd-diagnosis-pennsylvania",
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adhd-diagnosis-philadelphia",
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adhd-diagnosis-texas",
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adhd-evaluation-cost",
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adhd-treatment-online",
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adult-adhd-diagnosis",
+      "bookingInMain": 3
+    },
+    {
+      "path": "/creyos-adhd-testing",
+      "bookingInMain": 3
+    },
+    {
+      "path": "/mens-health-longevity",
+      "bookingInMain": 3
+    },
+    {
+      "path": "/primary-urgent-care",
+      "bookingInMain": 3
+    },
+    {
+      "path": "/telehealth",
+      "bookingInMain": 3
+    },
+    {
+      "path": "/blog",
+      "bookingInMain": 2
+    },
+    {
+      "path": "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd",
+      "bookingInMain": 2
+    },
+    {
+      "path": "/labs",
+      "bookingInMain": 2
+    },
+    {
+      "path": "/prescriptions",
+      "bookingInMain": 2
+    },
+    {
+      "path": "/siya-circle",
+      "bookingInMain": 2
+    }
+  ],
+  "removalList": [
+    {
+      "label": "Talk to a Clinician",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "main",
+      "count": 115,
+      "pages": [
+        "/",
+        "/adhd-screening",
+        "/answers/adderall-vs-vyvanse-adults",
+        "/answers/adhd-and-weight-loss-connection",
+        "/answers/adhd-in-men",
+        "/answers/adhd-in-women",
+        "/answers/adhd-medication-every-day",
+        "/answers/adhd-medication-side-effects"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Mid-page booking — use hero OR final band only"
+    },
+    {
+      "label": "Start Free Screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "nav",
+      "count": 50,
+      "pages": [
+        "/answers/adderall-vs-vyvanse-adults",
+        "/answers/adhd-in-men",
+        "/answers/adhd-in-women",
+        "/answers/adhd-medication-every-day",
+        "/answers/adhd-medication-side-effects",
+        "/answers/adhd-vs-anxiety",
+        "/answers/adhd-vs-burnout",
+        "/answers/asrs-adhd-screening-explained"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Free ADHD screening (not a diagnosis)",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 25,
+      "pages": [
+        "/answers/adderall-vs-vyvanse-adults",
+        "/answers/adhd-in-men",
+        "/answers/adhd-in-women",
+        "/answers/adhd-medication-every-day",
+        "/answers/adhd-medication-side-effects",
+        "/answers/adhd-vs-anxiety",
+        "/answers/adhd-vs-burnout",
+        "/answers/asrs-adhd-screening-explained"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Book ADHD Evaluation",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "main",
+      "count": 18,
+      "pages": [
+        "/adhd-care",
+        "/blog/adderall-for-adhd-how-it-works",
+        "/blog/adult-adhd-symptoms-california",
+        "/blog/adult-adhd-treatment-california-2026",
+        "/blog/after-adhd-diagnosis-next-steps-adults",
+        "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+        "/blog/how-adhd-medication-is-prescribed-online",
+        "/blog/how-to-choose-adhd-provider-california"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Extra main booking beyond hero/final band"
+    },
+    {
+      "label": "online ADHD screening",
+      "url": "/online-adhd-test",
+      "type": "screening",
+      "zone": "main",
+      "count": 17,
+      "pages": [
+        "/blog/adderall-for-adhd-how-it-works",
+        "/blog/adhd",
+        "/blog/adhd-evaluation-cost-texas",
+        "/blog/adhd-medication-options-for-adults",
+        "/blog/adhd-medication-side-effects-what-to-expect",
+        "/blog/adhd-symptoms-overlooked",
+        "/blog/adhd-testing-online-california-screening-vs-evaluation",
+        "/blog/adult-adhd-symptoms-california"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "View Services",
+      "url": "#services-supported",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 14,
+      "pages": [
+        "/providers/derek-timbs",
+        "/providers/dr-natasha-desai",
+        "/providers/dr-sneh-pandey",
+        "/providers/dr-swati-pandey",
+        "/providers/dr-vanessa-urbina",
+        "/providers/megan-wunderlich",
+        "/providers/wendy-delgado"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "Read the full clinical guide",
+      "url": "/blog/why-am-i-always-tired-causes-when-to-see-doctor",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 3,
+      "pages": [
+        "/answers/afternoon-energy-crash-after-lunch",
+        "/answers/poor-sleep-feels-like-adhd",
+        "/answers/why-am-i-tired-even-after-sleeping"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Free vs total testosterone: what patients should know (full guide)",
+      "url": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 3,
+      "pages": [
+        "/answers/high-shbg-low-free-testosterone",
+        "/answers/what-does-low-testosterone-feel-like",
+        "/answers/what-is-free-testosterone"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Insulin resistance and weight loss (clinician overview)",
+      "url": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 3,
+      "pages": [
+        "/answers/insulin-resistance-without-diabetes",
+        "/answers/normal-a1c-insulin-resistance",
+        "/answers/what-is-insulin-resistance"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Join Siya Circle",
+      "url": "https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl",
+      "type": "newsletter",
+      "zone": "main",
+      "count": 3,
+      "pages": [
+        "/blog",
+        "/siya-circle"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Newsletter CTA belongs in footer or dedicated hub section only"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/dr-swati-pandey",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/",
+        "/about"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "Read the full clinical guide",
+      "url": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/answers/brain-fog-after-eating",
+        "/answers/why-normal-labs-dont-mean-healthy"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Sleep apnea, fatigue, and metabolic risk (full guide)",
+      "url": "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/answers/can-sleep-apnea-cause-fatigue",
+        "/answers/signs-of-sleep-apnea-in-adults"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Food noise and GLP-1: what it means and what helps (full guide)",
+      "url": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/answers/food-noise-returned-on-glp-1",
+        "/answers/what-is-food-noise"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "GLP-1 side effects and how to manage them (full guide)",
+      "url": "/blog/glp1-side-effects-and-how-to-manage-them",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/answers/glp-1-nausea-management",
+        "/answers/glp-1-side-effects"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "When is testosterone therapy appropriate? (full guide)",
+      "url": "/blog/when-is-testosterone-therapy-appropriate",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/answers/trt-monitoring-requirements",
+        "/answers/when-is-testosterone-therapy-appropriate"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Explore Care Options",
+      "url": "/weight-loss-metabolic-health",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+        "/blog/insulin-resistance-and-weight-loss-clinician-overview"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "Learn More",
+      "url": "#coming-soon",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/labs",
+        "/prescriptions"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "View Legal Documents",
+      "url": "/legal",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/privacy-policy",
+        "/terms"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "See pricing",
+      "url": "/pricing",
+      "type": "secondary-text",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "Free screening →",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Free ADHD screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Free ADHD Screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/dr-sneh-pandey",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/dr-vanessa-urbina",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/dr-natasha-desai",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/megan-wunderlich",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/derek-timbs",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/wendy-delgado",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "free ADHD screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "View Dr. Pandey's Profile",
+      "url": "/providers/dr-sneh-pandey",
+      "type": "button-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/about"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Misc button — not part of 3-slot system"
+    },
+    {
+      "label": "View all Metabolic Health guides",
+      "url": "#guides-metabolic-all",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "View all Energy & Fatigue guides",
+      "url": "#guides-energy-all",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "View all Hormone Health guides",
+      "url": "#guides-hormone-all",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "View all ADHD & Focus guides",
+      "url": "#guides-adhd-all",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "View all Telehealth & Care guides",
+      "url": "#guides-telehealth-all",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "Vyvanse vs Adderall: full comparison guide",
+      "url": "/blog/vyvanse-vs-adderall-differences",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/adderall-vs-vyvanse-adults"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "ADHD medication daily or as-needed (full guide)",
+      "url": "/blog/adhd-medication-daily-or-as-needed-adults",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/adhd-medication-every-day"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "ADHD medication side effects: what to expect (full guide)",
+      "url": "/blog/adhd-medication-side-effects-what-to-expect",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/adhd-medication-side-effects"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Free ADHD screening (ASRS)",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/adhd-vs-anxiety"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Compounded vs branded GLP-1 medications (full guide)",
+      "url": "/blog/compounded-vs-branded-glp1-medications",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/compounded-vs-branded-glp-1"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Is ADHD medication safe long-term? (full guide)",
+      "url": "/blog/is-adhd-medication-safe-long-term",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/is-adhd-medication-safe-long-term"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Is online ADHD diagnosis legit? (full clinical guide)",
+      "url": "/blog/is-online-adhd-diagnosis-legit",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/is-online-adhd-diagnosis-legitimate"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Medical weight loss vs dieting: what actually works (full guide)",
+      "url": "/blog/medical-weight-loss-vs-dieting-what-actually-works",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/medical-weight-loss-vs-dieting"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Minoxidil for hair loss: does it work? (full guide)",
+      "url": "/blog/minoxidil-for-hair-loss-does-it-work",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/minoxidil-hair-loss-does-it-work"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Non-stimulant ADHD medications explained (full guide)",
+      "url": "/blog/non-stimulant-adhd-medications-explained",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/non-stimulant-adhd-medications"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Oral vs injectable weight-loss medications (full guide)",
+      "url": "/blog/oral-vs-injectable-weight-loss-medications",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/oral-vs-injectable-weight-loss-meds"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Oral vs topical minoxidil: which is right? (full guide)",
+      "url": "/blog/oral-vs-topical-minoxidil-which-is-right",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/oral-vs-topical-minoxidil"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Phentermine for weight loss: safety and effectiveness (full guide)",
+      "url": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/phentermine-weight-loss-safety"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Semaglutide for weight loss: how it works (full guide)",
+      "url": "/blog/semaglutide-for-weight-loss-how-it-works",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/semaglutide-weight-loss-how-it-works"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Free ASRS screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/signs-of-adult-adhd"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Sildenafil for erectile dysfunction: what to expect (full guide)",
+      "url": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/sildenafil-erectile-dysfunction-expectations"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "ADHD telehealth in California (full overview)",
+      "url": "/blog/adhd-telehealth-california",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/telehealth-adhd-california"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Tirzepatide vs semaglutide: full comparison guide",
+      "url": "/blog/tirzepatide-vs-semaglutide-which-is-better",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/tirzepatide-vs-semaglutide"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Read the full clinical guide",
+      "url": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/weight-gain-after-stopping-ozempic"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Medical weight loss with GLP-1 in Texas (full overview)",
+      "url": "/blog/medical-weight-loss-glp1-semaglutide-texas",
+      "type": "content-crosslink",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/answers/who-qualifies-glp-1-weight-loss"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Styled content cross-link — use text links in body, not button CTAs"
+    },
+    {
+      "label": "Browse all articles →",
+      "url": "/blog",
+      "type": "button-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/blog"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Misc button — not part of 3-slot system"
+    },
+    {
+      "label": "Explore Care Options",
+      "url": "/mens-health-longevity",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "Explore metabolic health",
+      "url": "/weight-loss-metabolic-health",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "screening tool",
+      "url": "/online-adhd-test",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/blog/telehealth"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Explore Care Options",
+      "url": "/telehealth",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/blog/why-am-i-always-tired-causes-when-to-see-doctor"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "Choose Visit Type",
+      "url": "#book-visit",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/book-appointment"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "Start Free ADHD Assessment",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/book-appointment"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Mid-page booking — use hero OR final band only"
+    },
+    {
+      "label": "ADHD Care",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/book-appointment"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Mid-page booking — use hero OR final band only"
+    },
+    {
+      "label": "Weight Loss Consultation",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/book-appointment"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Mid-page booking — use hero OR final band only"
+    },
+    {
+      "label": "Explore Care Options",
+      "url": "#services",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/mens-health-longevity"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "Explore Care Options",
+      "url": "#conditions",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/primary-urgent-care"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "In-page anchor button — not a sitewide CTA slot"
+    },
+    {
+      "label": "Free ADHD screening →",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/providers/megan-wunderlich"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    }
+  ],
+  "byPageType": {
+    "Homepage": {
+      "instances": 21,
+      "remove": 15,
+      "keep": 2,
+      "consolidate": 4
+    },
+    "About": {
+      "instances": 13,
+      "remove": 2,
+      "keep": 2,
+      "consolidate": 9
+    },
+    "Service Page": {
+      "instances": 127,
+      "remove": 19,
+      "keep": 28,
+      "consolidate": 80
+    },
+    "Geo SEO Landing": {
+      "instances": 61,
+      "remove": 0,
+      "keep": 12,
+      "consolidate": 49
+    },
+    "Health Guide Hub": {
+      "instances": 11,
+      "remove": 5,
+      "keep": 3,
+      "consolidate": 3
+    },
+    "Health Guide": {
+      "instances": 454,
+      "remove": 179,
+      "keep": 130,
+      "consolidate": 145
+    },
+    "Blog Hub": {
+      "instances": 27,
+      "remove": 4,
+      "keep": 8,
+      "consolidate": 15
+    },
+    "Blog Article": {
+      "instances": 334,
+      "remove": 73,
+      "keep": 104,
+      "consolidate": 157
+    },
+    "Legal": {
+      "instances": 18,
+      "remove": 0,
+      "keep": 12,
+      "consolidate": 6
+    },
+    "Legacy": {
+      "instances": 14,
+      "remove": 4,
+      "keep": 4,
+      "consolidate": 6
+    },
+    "Provider Hub": {
+      "instances": 14,
+      "remove": 0,
+      "keep": 2,
+      "consolidate": 12
+    },
+    "Provider Profile": {
+      "instances": 64,
+      "remove": 15,
+      "keep": 14,
+      "consolidate": 35
+    },
+    "Utility": {
+      "instances": 11,
+      "remove": 2,
+      "keep": 2,
+      "consolidate": 7
+    }
+  },
+  "pageResults": [
+    {
+      "path": "/",
+      "file": "index.html",
+      "pageType": "Homepage",
+      "mainCtaCount": 15,
+      "bookingInMain": 3
+    },
+    {
+      "path": "/about",
+      "file": "about.html",
+      "pageType": "About",
+      "mainCtaCount": 8,
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adhd-care",
+      "file": "adhd-care.html",
+      "pageType": "Service Page",
+      "mainCtaCount": 7,
+      "bookingInMain": 4
+    },
+    {
+      "path": "/adhd-diagnosis-austin",
+      "file": "adhd-diagnosis-austin.html",
+      "pageType": "Geo SEO Landing",
+      "mainCtaCount": 6,
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adhd-diagnosis-florida",
+      "file": "adhd-diagnosis-florida.html",
+      "pageType": "Geo SEO Landing",
+      "mainCtaCount": 5,
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adhd-diagnosis-houston",
+      "file": "adhd-diagnosis-houston.html",
+      "pageType": "Geo SEO Landing",
+      "mainCtaCount": 5,
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adhd-diagnosis-pennsylvania",
+      "file": "adhd-diagnosis-pennsylvania.html",
+      "pageType": "Geo SEO Landing",
+      "mainCtaCount": 5,
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adhd-diagnosis-philadelphia",
+      "file": "adhd-diagnosis-philadelphia.html",
+      "pageType": "Geo SEO Landing",
+      "mainCtaCount": 5,
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adhd-diagnosis-texas",
+      "file": "adhd-diagnosis-texas.html",
+      "pageType": "Geo SEO Landing",
+      "mainCtaCount": 5,
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adhd-evaluation-cost",
+      "file": "adhd-evaluation-cost.html",
+      "pageType": "Service Page",
+      "mainCtaCount": 5,
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adhd-screening",
+      "file": "adhd-screening.html",
+      "pageType": "Service Page",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/adhd-treatment-online",
+      "file": "adhd-treatment-online.html",
+      "pageType": "Service Page",
+      "mainCtaCount": 5,
+      "bookingInMain": 3
+    },
+    {
+      "path": "/adult-adhd-diagnosis",
+      "file": "adult-adhd-diagnosis.html",
+      "pageType": "Service Page",
+      "mainCtaCount": 5,
+      "bookingInMain": 3
+    },
+    {
+      "path": "/answers",
+      "file": "answers/index.html",
+      "pageType": "Health Guide Hub",
+      "mainCtaCount": 6,
+      "bookingInMain": 0
+    },
+    {
+      "path": "/answers/adderall-vs-vyvanse-adults",
+      "file": "answers/adderall-vs-vyvanse-adults.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 3,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/adhd-and-weight-loss-connection",
+      "file": "answers/adhd-and-weight-loss-connection.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/adhd-in-men",
+      "file": "answers/adhd-in-men.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/adhd-in-women",
+      "file": "answers/adhd-in-women.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/adhd-medication-every-day",
+      "file": "answers/adhd-medication-every-day.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 3,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/adhd-medication-side-effects",
+      "file": "answers/adhd-medication-side-effects.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 3,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/adhd-vs-anxiety",
+      "file": "answers/adhd-vs-anxiety.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 3,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/adhd-vs-burnout",
+      "file": "answers/adhd-vs-burnout.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/afternoon-energy-crash-after-lunch",
+      "file": "answers/afternoon-energy-crash-after-lunch.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/asrs-adhd-screening-explained",
+      "file": "answers/asrs-adhd-screening-explained.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/brain-fog-after-eating",
+      "file": "answers/brain-fog-after-eating.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/can-adhd-be-diagnosed-online",
+      "file": "answers/can-adhd-be-diagnosed-online.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/can-adhd-cause-anxiety",
+      "file": "answers/can-adhd-cause-anxiety.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/can-sleep-apnea-cause-fatigue",
+      "file": "answers/can-sleep-apnea-cause-fatigue.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/can-you-get-adhd-medication-online",
+      "file": "answers/can-you-get-adhd-medication-online.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/compounded-vs-branded-glp-1",
+      "file": "answers/compounded-vs-branded-glp-1.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/creyos-adhd-testing-explained",
+      "file": "answers/creyos-adhd-testing-explained.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/ed-telehealth-legitimate",
+      "file": "answers/ed-telehealth-legitimate.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/executive-dysfunction-adhd",
+      "file": "answers/executive-dysfunction-adhd.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/food-noise-returned-on-glp-1",
+      "file": "answers/food-noise-returned-on-glp-1.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/fsa-hsa-adhd-evaluation",
+      "file": "answers/fsa-hsa-adhd-evaluation.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/glp-1-nausea-management",
+      "file": "answers/glp-1-nausea-management.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/glp-1-side-effects",
+      "file": "answers/glp-1-side-effects.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/high-functioning-adhd",
+      "file": "answers/high-functioning-adhd.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/high-shbg-low-free-testosterone",
+      "file": "answers/high-shbg-low-free-testosterone.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/how-long-adhd-evaluation",
+      "file": "answers/how-long-adhd-evaluation.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/how-much-does-adhd-testing-cost",
+      "file": "answers/how-much-does-adhd-testing-cost.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/how-online-prescriptions-work",
+      "file": "answers/how-online-prescriptions-work.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/insulin-resistance-without-diabetes",
+      "file": "answers/insulin-resistance-without-diabetes.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/is-adhd-medication-safe-long-term",
+      "file": "answers/is-adhd-medication-safe-long-term.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 3,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/is-online-adhd-diagnosis-legitimate",
+      "file": "answers/is-online-adhd-diagnosis-legitimate.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 3,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/is-telehealth-legitimate",
+      "file": "answers/is-telehealth-legitimate.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/late-adhd-diagnosis-adults",
+      "file": "answers/late-adhd-diagnosis-adults.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/medical-weight-loss-vs-dieting",
+      "file": "answers/medical-weight-loss-vs-dieting.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/meet-and-greet-telehealth-expectations",
+      "file": "answers/meet-and-greet-telehealth-expectations.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/minoxidil-hair-loss-does-it-work",
+      "file": "answers/minoxidil-hair-loss-does-it-work.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/non-stimulant-adhd-medications",
+      "file": "answers/non-stimulant-adhd-medications.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 3,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/normal-a1c-insulin-resistance",
+      "file": "answers/normal-a1c-insulin-resistance.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/oral-vs-injectable-weight-loss-meds",
+      "file": "answers/oral-vs-injectable-weight-loss-meds.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/oral-vs-topical-minoxidil",
+      "file": "answers/oral-vs-topical-minoxidil.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/phentermine-weight-loss-safety",
+      "file": "answers/phentermine-weight-loss-safety.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/poor-sleep-feels-like-adhd",
+      "file": "answers/poor-sleep-feels-like-adhd.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/rejection-sensitivity-adhd",
+      "file": "answers/rejection-sensitivity-adhd.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/screening-vs-adhd-evaluation",
+      "file": "answers/screening-vs-adhd-evaluation.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/semaglutide-weight-loss-how-it-works",
+      "file": "answers/semaglutide-weight-loss-how-it-works.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/signs-of-adult-adhd",
+      "file": "answers/signs-of-adult-adhd.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 3,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/signs-of-sleep-apnea-in-adults",
+      "file": "answers/signs-of-sleep-apnea-in-adults.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/sildenafil-erectile-dysfunction-expectations",
+      "file": "answers/sildenafil-erectile-dysfunction-expectations.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/starting-adhd-medication-adults",
+      "file": "answers/starting-adhd-medication-adults.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/telehealth-adhd-california",
+      "file": "answers/telehealth-adhd-california.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/telehealth-adhd-texas",
+      "file": "answers/telehealth-adhd-texas.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/testosterone-and-adhd-overlap",
+      "file": "answers/testosterone-and-adhd-overlap.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/time-blindness-adhd",
+      "file": "answers/time-blindness-adhd.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/tirzepatide-vs-semaglutide",
+      "file": "answers/tirzepatide-vs-semaglutide.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/trt-monitoring-requirements",
+      "file": "answers/trt-monitoring-requirements.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/weight-gain-after-stopping-ozempic",
+      "file": "answers/weight-gain-after-stopping-ozempic.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/what-does-low-testosterone-feel-like",
+      "file": "answers/what-does-low-testosterone-feel-like.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/what-included-199-adhd-evaluation",
+      "file": "answers/what-included-199-adhd-evaluation.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/what-is-food-noise",
+      "file": "answers/what-is-food-noise.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/what-is-free-testosterone",
+      "file": "answers/what-is-free-testosterone.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/what-is-insulin-resistance",
+      "file": "answers/what-is-insulin-resistance.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/when-is-testosterone-therapy-appropriate",
+      "file": "answers/when-is-testosterone-therapy-appropriate.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/who-qualifies-glp-1-weight-loss",
+      "file": "answers/who-qualifies-glp-1-weight-loss.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/why-am-i-tired-even-after-sleeping",
+      "file": "answers/why-am-i-tired-even-after-sleeping.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/answers/why-normal-labs-dont-mean-healthy",
+      "file": "answers/why-normal-labs-dont-mean-healthy.html",
+      "pageType": "Health Guide",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog",
+      "file": "blog/index.html",
+      "pageType": "Blog Hub",
+      "mainCtaCount": 5,
+      "bookingInMain": 2
+    },
+    {
+      "path": "/blog/adderall-for-adhd-how-it-works",
+      "file": "blog/adderall-for-adhd-how-it-works.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/adderall-ir-vs-xr-adults",
+      "file": "blog/adderall-ir-vs-xr-adults.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/adhd",
+      "file": "blog/adhd.html",
+      "pageType": "Blog Hub",
+      "mainCtaCount": 1,
+      "bookingInMain": 0
+    },
+    {
+      "path": "/blog/adhd-evaluation-california-online-vs-in-person",
+      "file": "blog/adhd-evaluation-california-online-vs-in-person.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/adhd-evaluation-cost-california",
+      "file": "blog/adhd-evaluation-cost-california.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/adhd-evaluation-cost-texas",
+      "file": "blog/adhd-evaluation-cost-texas.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/adhd-medication-daily-or-as-needed-adults",
+      "file": "blog/adhd-medication-daily-or-as-needed-adults.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/adhd-medication-online-california",
+      "file": "blog/adhd-medication-online-california.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/adhd-medication-online-texas-telehealth",
+      "file": "blog/adhd-medication-online-texas-telehealth.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/adhd-medication-options-california",
+      "file": "blog/adhd-medication-options-california.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/adhd-medication-options-for-adults",
+      "file": "blog/adhd-medication-options-for-adults.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/adhd-medication-side-effects-what-to-expect",
+      "file": "blog/adhd-medication-side-effects-what-to-expect.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/adhd-symptoms-overlooked",
+      "file": "blog/adhd-symptoms-overlooked.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/adhd-telehealth-california",
+      "file": "blog/adhd-telehealth-california.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/adhd-testing-online-california-screening-vs-evaluation",
+      "file": "blog/adhd-testing-online-california-screening-vs-evaluation.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/adhd-treatment-houston-online",
+      "file": "blog/adhd-treatment-houston-online.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/adult-adhd-symptoms-california",
+      "file": "blog/adult-adhd-symptoms-california.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/adult-adhd-treatment-california-2026",
+      "file": "blog/adult-adhd-treatment-california-2026.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/after-adhd-diagnosis-next-steps-adults",
+      "file": "blog/after-adhd-diagnosis-next-steps-adults.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/all",
+      "file": "blog/all.html"
+    },
+    {
+      "path": "/blog/ambien-and-sleep-medications-risks-and-benefits",
+      "file": "blog/ambien-and-sleep-medications-risks-and-benefits.html"
+    },
+    {
+      "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+      "file": "blog/combining-adhd-treatment-and-weight-loss-strategies.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/compounded-vs-branded-glp1-medications",
+      "file": "blog/compounded-vs-branded-glp1-medications.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/focalin-vs-adderall-comparison",
+      "file": "blog/focalin-vs-adderall-comparison.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "file": "blog/food-noise-and-glp-1-what-it-means-and-what-helps.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+      "file": "blog/free-testosterone-vs-total-testosterone-what-patients-should-know.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/glp1-side-effects-and-how-to-manage-them",
+      "file": "blog/glp1-side-effects-and-how-to-manage-them.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/glutathione-and-peptides-what-do-they-actually-do",
+      "file": "blog/glutathione-and-peptides-what-do-they-actually-do.html"
+    },
+    {
+      "path": "/blog/how-adhd-medication-is-prescribed-online",
+      "file": "blog/how-adhd-medication-is-prescribed-online.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/how-mental-health-affects-weight-loss-outcomes",
+      "file": "blog/how-mental-health-affects-weight-loss-outcomes.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/how-to-choose-adhd-provider-california",
+      "file": "blog/how-to-choose-adhd-provider-california.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/how-to-know-if-you-have-adhd-adult",
+      "file": "blog/how-to-know-if-you-have-adhd-adult.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/how-to-safely-get-prescriptions-online",
+      "file": "blog/how-to-safely-get-prescriptions-online.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/insomnia-treatment-options-beyond-medication",
+      "file": "blog/insomnia-treatment-options-beyond-medication.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "file": "blog/insulin-resistance-and-weight-loss-clinician-overview.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/is-adhd-medication-safe-long-term",
+      "file": "blog/is-adhd-medication-safe-long-term.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/is-online-adhd-diagnosis-legit",
+      "file": "blog/is-online-adhd-diagnosis-legit.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/long-term-weight-loss-medications-what-to-expect",
+      "file": "blog/long-term-weight-loss-medications-what-to-expect.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/medical-weight-loss-glp1-semaglutide-texas",
+      "file": "blog/medical-weight-loss-glp1-semaglutide-texas.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/medical-weight-loss-vs-dieting-what-actually-works",
+      "file": "blog/medical-weight-loss-vs-dieting-what-actually-works.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/minoxidil-for-hair-loss-does-it-work",
+      "file": "blog/minoxidil-for-hair-loss-does-it-work.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/modafinil-for-focus-and-fatigue-is-it-safe",
+      "file": "blog/modafinil-for-focus-and-fatigue-is-it-safe.html"
+    },
+    {
+      "path": "/blog/non-stimulant-adhd-medications-explained",
+      "file": "blog/non-stimulant-adhd-medications-explained.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/online-adhd-diagnosis-california",
+      "file": "blog/online-adhd-diagnosis-california.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/online-adhd-diagnosis-texas",
+      "file": "blog/online-adhd-diagnosis-texas.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/oral-vs-injectable-weight-loss-medications",
+      "file": "blog/oral-vs-injectable-weight-loss-medications.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/oral-vs-topical-minoxidil-which-is-right",
+      "file": "blog/oral-vs-topical-minoxidil-which-is-right.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
+      "file": "blog/phentermine-for-weight-loss-safety-and-effectiveness.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/semaglutide-for-weight-loss-how-it-works",
+      "file": "blog/semaglutide-for-weight-loss-how-it-works.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
+      "file": "blog/sildenafil-for-erectile-dysfunction-what-to-expect.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign",
+      "file": "blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/telehealth",
+      "file": "blog/telehealth.html",
+      "pageType": "Blog Hub",
+      "mainCtaCount": 1,
+      "bookingInMain": 0
+    },
+    {
+      "path": "/blog/telehealth-prescriptions-how-online-treatment-works",
+      "file": "blog/telehealth-prescriptions-how-online-treatment-works.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/tirzepatide-vs-semaglutide-which-is-better",
+      "file": "blog/tirzepatide-vs-semaglutide-which-is-better.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/vyvanse-vs-adderall-differences",
+      "file": "blog/vyvanse-vs-adderall-differences.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/weight-loss",
+      "file": "blog/weight-loss.html",
+      "pageType": "Blog Hub",
+      "mainCtaCount": 0,
+      "bookingInMain": 0
+    },
+    {
+      "path": "/blog/when-is-testosterone-therapy-appropriate",
+      "file": "blog/when-is-testosterone-therapy-appropriate.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/why-am-i-always-tired-causes-when-to-see-doctor",
+      "file": "blog/why-am-i-always-tired-causes-when-to-see-doctor.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd",
+      "file": "blog/youre-not-lazy-signs-undiagnosed-adult-adhd.html",
+      "pageType": "Blog Article",
+      "mainCtaCount": 3,
+      "bookingInMain": 2
+    },
+    {
+      "path": "/book-appointment",
+      "file": "book-appointment.html",
+      "pageType": "Service Page",
+      "mainCtaCount": 5,
+      "bookingInMain": 4
+    },
+    {
+      "path": "/creyos-adhd-testing",
+      "file": "creyos-adhd-testing.html",
+      "pageType": "Service Page",
+      "mainCtaCount": 5,
+      "bookingInMain": 3
+    },
+    {
+      "path": "/labs",
+      "file": "labs.html",
+      "pageType": "Service Page",
+      "mainCtaCount": 3,
+      "bookingInMain": 2
+    },
+    {
+      "path": "/legal",
+      "file": "legal/index.html",
+      "pageType": "Legal",
+      "mainCtaCount": 0,
+      "bookingInMain": 0
+    },
+    {
+      "path": "/legal/controlled-substance-treatment-agreement",
+      "file": "legal/controlled-substance-treatment-agreement/index.html",
+      "pageType": "Legal",
+      "mainCtaCount": 0,
+      "bookingInMain": 0
+    },
+    {
+      "path": "/legal/cookie-policy",
+      "file": "legal/cookie-policy/index.html",
+      "pageType": "Legal",
+      "mainCtaCount": 0,
+      "bookingInMain": 0
+    },
+    {
+      "path": "/legal/notice-of-privacy-practices",
+      "file": "legal/notice-of-privacy-practices/index.html",
+      "pageType": "Legal",
+      "mainCtaCount": 0,
+      "bookingInMain": 0
+    },
+    {
+      "path": "/legal/privacy-policy",
+      "file": "legal/privacy-policy/index.html",
+      "pageType": "Legal",
+      "mainCtaCount": 0,
+      "bookingInMain": 0
+    },
+    {
+      "path": "/legal/terms-of-use",
+      "file": "legal/terms-of-use/index.html",
+      "pageType": "Legal",
+      "mainCtaCount": 0,
+      "bookingInMain": 0
+    },
+    {
+      "path": "/membership-pricing",
+      "file": "membership-pricing.html"
+    },
+    {
+      "path": "/mens-health-longevity",
+      "file": "mens-health-longevity.html",
+      "pageType": "Service Page",
+      "mainCtaCount": 4,
+      "bookingInMain": 3
+    },
+    {
+      "path": "/online-adhd-test",
+      "file": "online-adhd-test.html",
+      "pageType": "Service Page",
+      "mainCtaCount": 6,
+      "bookingInMain": 4
+    },
+    {
+      "path": "/prescriptions",
+      "file": "prescriptions.html",
+      "pageType": "Service Page",
+      "mainCtaCount": 3,
+      "bookingInMain": 2
+    },
+    {
+      "path": "/primary-urgent-care",
+      "file": "primary-urgent-care.html",
+      "pageType": "Service Page",
+      "mainCtaCount": 4,
+      "bookingInMain": 3
+    },
+    {
+      "path": "/privacy-policy",
+      "file": "privacy-policy.html",
+      "pageType": "Legacy",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/providers",
+      "file": "providers/index.html",
+      "pageType": "Provider Hub",
+      "mainCtaCount": 9,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/providers/derek-timbs",
+      "file": "providers/derek-timbs.html",
+      "pageType": "Provider Profile",
+      "mainCtaCount": 4,
+      "bookingInMain": 0
+    },
+    {
+      "path": "/providers/dr-natasha-desai",
+      "file": "providers/dr-natasha-desai.html",
+      "pageType": "Provider Profile",
+      "mainCtaCount": 4,
+      "bookingInMain": 0
+    },
+    {
+      "path": "/providers/dr-sneh-pandey",
+      "file": "providers/dr-sneh-pandey.html",
+      "pageType": "Provider Profile",
+      "mainCtaCount": 4,
+      "bookingInMain": 0
+    },
+    {
+      "path": "/providers/dr-swati-pandey",
+      "file": "providers/dr-swati-pandey.html",
+      "pageType": "Provider Profile",
+      "mainCtaCount": 4,
+      "bookingInMain": 0
+    },
+    {
+      "path": "/providers/dr-vanessa-urbina",
+      "file": "providers/dr-vanessa-urbina.html",
+      "pageType": "Provider Profile",
+      "mainCtaCount": 4,
+      "bookingInMain": 0
+    },
+    {
+      "path": "/providers/megan-wunderlich",
+      "file": "providers/megan-wunderlich.html",
+      "pageType": "Provider Profile",
+      "mainCtaCount": 5,
+      "bookingInMain": 0
+    },
+    {
+      "path": "/providers/wendy-delgado",
+      "file": "providers/wendy-delgado.html",
+      "pageType": "Provider Profile",
+      "mainCtaCount": 4,
+      "bookingInMain": 0
+    },
+    {
+      "path": "/siya-circle",
+      "file": "siya-circle.html",
+      "pageType": "Utility",
+      "mainCtaCount": 6,
+      "bookingInMain": 2
+    },
+    {
+      "path": "/telehealth",
+      "file": "telehealth.html",
+      "pageType": "Service Page",
+      "mainCtaCount": 3,
+      "bookingInMain": 3
+    },
+    {
+      "path": "/terms",
+      "file": "terms.html",
+      "pageType": "Legacy",
+      "mainCtaCount": 2,
+      "bookingInMain": 1
+    },
+    {
+      "path": "/weight-loss-metabolic-health",
+      "file": "weight-loss-metabolic-health.html",
+      "pageType": "Service Page",
+      "mainCtaCount": 1,
+      "bookingInMain": 1
+    }
+  ]
+}

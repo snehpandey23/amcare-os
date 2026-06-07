@@ -1,16 +1,16 @@
 # Provider Expansion — Implementation Report
 
-Generated: 2026-06-07T07:20:59.848Z
+Generated: 2026-06-07T07:46:12.602Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| Sitemap URLs | 168 |
+| Sitemap URLs | 164 |
 | Contracted providers in data | 7 |
 | Live profile pages | 7 |
 | Hub URL | https://siya.health/providers |
-| Pages linking to /providers hub | 167 |
+| Pages linking to /providers hub | 162 |
 | Broken internal links (sample) | 20 |
 | JSON-LD issues on profiles | 0 |
 
@@ -19,19 +19,19 @@ Generated: 2026-06-07T07:20:59.848Z
 | Provider | URL | In sitemap | Schema | Breadcrumb | CTAs | States |
 |----------|-----|:----------:|:------:|:----------:|:----:|:------:|
 | dr-sneh-pandey | https://siya.health/providers/dr-sneh-pandey | ✓ | ✓ | ✓ | ✗ | ✓ |
-| dr-vanessa-urbina | https://siya.health/providers/dr-vanessa-urbina | ✓ | ✓ | ✓ | ✓ | ✓ |
+| dr-vanessa-urbina | https://siya.health/providers/dr-vanessa-urbina | ✓ | ✓ | ✓ | ✗ | ✓ |
 | dr-natasha-desai | https://siya.health/providers/dr-natasha-desai | ✓ | ✓ | ✓ | ✗ | ✓ |
 | dr-swati-pandey | https://siya.health/providers/dr-swati-pandey | ✓ | ✓ | ✓ | ✗ | ✓ |
 | megan-wunderlich | https://siya.health/providers/megan-wunderlich | ✓ | ✓ | ✓ | ✗ | ✓ |
-| derek-timbs | https://siya.health/providers/derek-timbs | ✓ | ✓ | ✓ | ✓ | ✓ |
-| wendy-delgado | https://siya.health/providers/wendy-delgado | ✓ | ✓ | ✓ | ✓ | ✓ |
+| derek-timbs | https://siya.health/providers/derek-timbs | ✓ | ✓ | ✓ | ✗ | ✓ |
+| wendy-delgado | https://siya.health/providers/wendy-delgado | ✓ | ✓ | ✓ | ✗ | ✓ |
 
 ## Service coverage matrix
 
 | Service | Path | Providers | Count |
 |---------|------|-----------|------:|
-| adhd-care | /adhd-care | Dr. Sneh Pandey, MD; Dr. Vanessa Urbina, MD; Dr. Natasha Desai, MD; Dr. Swati Pandey, MD; Megan Wunderlich, FNP-C; Wendy Delgado, PA-C | 6 |
-| telehealth | /telehealth | Dr. Sneh Pandey, MD; Dr. Natasha Desai, MD; Dr. Swati Pandey, MD; Dr. Vanessa Urbina, MD; Megan Wunderlich, FNP-C; Derek Timbs, FNP-BC; Wendy Delgado, PA-C | 7 |
+| adhd-care | /adhd-care | Dr. Sneh Pandey, MD; Dr. Vanessa Urbina, MD; Dr. Natasha Desai, MD; Dr. Swati Pandey, MD; Megan Wunderlich, FNP-C | 5 |
+| telehealth | /telehealth | Dr. Sneh Pandey, MD; Dr. Natasha Desai, MD; Dr. Swati Pandey, MD; Dr. Vanessa Urbina, MD; Megan Wunderlich, FNP-C; Derek Timbs, FNP-BC | 6 |
 | weight-loss-metabolic-health | /weight-loss-metabolic-health | Dr. Sneh Pandey, MD; Dr. Vanessa Urbina, MD; Derek Timbs, FNP-BC; Wendy Delgado, PA-C | 4 |
 | primary-urgent-care | /primary-urgent-care | Dr. Vanessa Urbina, MD; Dr. Natasha Desai, MD; Dr. Sneh Pandey, MD | 3 |
 | mens-health-longevity | /mens-health-longevity | Dr. Sneh Pandey, MD; Derek Timbs, FNP-BC | 2 |
@@ -40,14 +40,14 @@ Generated: 2026-06-07T07:20:59.848Z
 
 | Target | Inbound pages |
 |--------|-------------:|
-| /providers hub | 167 |
+| /providers hub | 162 |
 | /providers/dr-sneh-pandey | 26 |
 | /providers/dr-vanessa-urbina | 14 |
 | /providers/dr-natasha-desai | 18 |
 | /providers/dr-swati-pandey | 13 |
 | /providers/megan-wunderlich | 12 |
 | /providers/derek-timbs | 9 |
-| /providers/wendy-delgado | 12 |
+| /providers/wendy-delgado | 6 |
 
 ## Hub features
 

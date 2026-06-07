@@ -1,0 +1,5176 @@
+{
+  "generated": "2026-06-07T07:43:25.182Z",
+  "summary": {
+    "currentPageCount": 166,
+    "recommendedPageCount": 76,
+    "KEEP": 62,
+    "KEEP + REWRITE": 11,
+    "MERGE": 3,
+    "REDIRECT": 82,
+    "DELETE": 8,
+    "cornerstoneCount": 30,
+    "maintenance": {
+      "currentPages": 166,
+      "recommendedPages": 76,
+      "pagesRemoved": 90,
+      "percentReduction": 54,
+      "duplicateContentStreamsEliminated": 90,
+      "guideBlogPairsRedirected": 17
+    }
+  },
+  "cornerstones": [
+    "/",
+    "/about",
+    "/adhd-care",
+    "/adhd-diagnosis-texas",
+    "/adhd-screening",
+    "/answers",
+    "/answers/can-adhd-be-diagnosed-online",
+    "/answers/signs-of-adult-adhd",
+    "/answers/what-is-food-noise",
+    "/answers/what-is-free-testosterone",
+    "/answers/what-is-insulin-resistance",
+    "/answers/why-am-i-tired-even-after-sleeping",
+    "/blog",
+    "/blog/adhd-telehealth-california",
+    "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+    "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+    "/blog/how-to-know-if-you-have-adhd-adult",
+    "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+    "/blog/is-online-adhd-diagnosis-legit",
+    "/blog/medical-weight-loss-glp1-semaglutide-texas",
+    "/blog/online-adhd-diagnosis-california",
+    "/blog/online-adhd-diagnosis-texas",
+    "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign",
+    "/blog/why-am-i-always-tired-causes-when-to-see-doctor",
+    "/book-appointment",
+    "/membership-pricing",
+    "/mens-health-longevity",
+    "/providers",
+    "/telehealth",
+    "/weight-loss-metabolic-health"
+  ],
+  "phases": {
+    "phase1": [
+      {
+        "path": "/adhd-diagnosis-austin",
+        "classification": "REDIRECT",
+        "redirectTarget": "/adhd-diagnosis-texas",
+        "rationale": "City geo page with 1 inbound; Texas state cornerstone absorbs Austin intent.",
+        "phase": 1,
+        "groups": [
+          "Core Revenue Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 1,
+        "wordCount": 448,
+        "pageType": "Geo SEO Landing"
+      },
+      {
+        "path": "/adhd-diagnosis-florida",
+        "classification": "DELETE",
+        "redirectTarget": "/adhd-care",
+        "rationale": "Thin geo landing; zero inbound links, orphan. Florida not a licensed priority state in entity-graph.",
+        "phase": 1,
+        "groups": [
+          "Orphan Pages",
+          "Core Revenue Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 0,
+        "wordCount": 525,
+        "pageType": "Geo SEO Landing"
+      },
+      {
+        "path": "/adhd-diagnosis-houston",
+        "classification": "REDIRECT",
+        "redirectTarget": "/adhd-diagnosis-texas",
+        "rationale": "City geo page with 2 inbound; consolidate to single Texas geo cornerstone.",
+        "phase": 1,
+        "groups": [
+          "Core Revenue Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 2,
+        "wordCount": 417,
+        "pageType": "Geo SEO Landing"
+      },
+      {
+        "path": "/adhd-diagnosis-pennsylvania",
+        "classification": "REDIRECT",
+        "redirectTarget": "/adhd-care",
+        "rationale": "Thin state geo (451 words, 1 inbound); PA coverage belongs as section on /adhd-care until traffic justifies standalone.",
+        "phase": 1,
+        "groups": [
+          "Core Revenue Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 1,
+        "wordCount": 451,
+        "pageType": "Geo SEO Landing"
+      },
+      {
+        "path": "/adhd-diagnosis-philadelphia",
+        "classification": "REDIRECT",
+        "redirectTarget": "/adhd-diagnosis-pennsylvania",
+        "rationale": "City duplicate of PA state page; 1 inbound each, same offer.",
+        "phase": 1,
+        "groups": [
+          "Core Revenue Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 1,
+        "wordCount": 452,
+        "pageType": "Geo SEO Landing"
+      },
+      {
+        "path": "/adhd-evaluation-cost",
+        "classification": "REDIRECT",
+        "redirectTarget": "/membership-pricing",
+        "rationale": "Standalone pricing page duplicates membership-pricing and adhd-care; consolidate single pricing source.",
+        "phase": 1,
+        "groups": [
+          "Core Revenue Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 19,
+        "wordCount": 407,
+        "pageType": "Service Page"
+      },
+      {
+        "path": "/adhd-treatment-online",
+        "classification": "REDIRECT",
+        "redirectTarget": "/adhd-care",
+        "rationale": "Post-diagnosis treatment belongs as section on /adhd-care; 1 inbound, thin duplicate.",
+        "phase": 1,
+        "groups": [
+          "Core Revenue Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 1,
+        "wordCount": 476,
+        "pageType": "Service Page"
+      },
+      {
+        "path": "/adult-adhd-diagnosis",
+        "classification": "REDIRECT",
+        "redirectTarget": "/adhd-care",
+        "rationale": "Overlaps /adhd-care H1 and offer; splits ADHD commercial intent across 3 URLs.",
+        "phase": 1,
+        "groups": [
+          "Core Revenue Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 6,
+        "wordCount": 502,
+        "pageType": "Service Page"
+      },
+      {
+        "path": "/answers/adhd-in-men",
+        "classification": "REDIRECT",
+        "redirectTarget": "/answers/signs-of-adult-adhd",
+        "rationale": "Thin gender variant (348 words, 1 inbound); signs-of-adult-adhd covers presentation.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 1,
+        "wordCount": 348,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/adhd-in-women",
+        "classification": "REDIRECT",
+        "redirectTarget": "/answers/signs-of-adult-adhd",
+        "rationale": "Thin gender variant (356 words, 3 inbound); consolidate to adult signs cornerstone guide.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 3,
+        "wordCount": 356,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/creyos-adhd-testing-explained",
+        "classification": "REDIRECT",
+        "redirectTarget": "/adhd-care",
+        "rationale": "Creyos FAQ with 1 inbound; merge into adhd-care evaluation section.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 1,
+        "wordCount": 355,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/glp-1-nausea-management",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/glp1-side-effects-and-how-to-manage-them",
+        "rationale": "Cannibalization owner Blog; nausea subset fully covered in GLP-1 side effects cornerstone.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 4,
+        "wordCount": 402,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/high-functioning-adhd",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/how-to-know-if-you-have-adhd-adult",
+        "rationale": "Thin guide (350 words); high-functioning narrative covered in adult ADHD cornerstone blog.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 4,
+        "wordCount": 350,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/how-much-does-adhd-testing-cost",
+        "classification": "REDIRECT",
+        "redirectTarget": "/membership-pricing",
+        "rationale": "Pricing FAQ duplicates membership-pricing and adhd-care pricing sections.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 5,
+        "wordCount": 358,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/rejection-sensitivity-adhd",
+        "classification": "REDIRECT",
+        "redirectTarget": "/answers/signs-of-adult-adhd",
+        "rationale": "Niche ADHD symptom (365 words, 2 inbound); low search volume vs maintenance cost.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 2,
+        "wordCount": 365,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/telehealth-adhd-texas",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/online-adhd-diagnosis-texas",
+        "rationale": "TX telehealth FAQ duplicates TX diagnosis blog; geo FAQ → geo cornerstone.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 5,
+        "wordCount": 340,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/time-blindness-adhd",
+        "classification": "REDIRECT",
+        "redirectTarget": "/answers/signs-of-adult-adhd",
+        "rationale": "Micro-topic guide (358 words, 2 inbound); consolidate to adult signs cornerstone guide.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 2,
+        "wordCount": 358,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/weight-gain-after-stopping-ozempic",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+        "rationale": "Ozempic cessation FAQ with 1 inbound; food-noise cornerstone owns GLP-1 rebound narrative.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 1,
+        "wordCount": 1172,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/what-included-199-adhd-evaluation",
+        "classification": "REDIRECT",
+        "redirectTarget": "/adhd-care",
+        "rationale": "Evaluation scope FAQ belongs on /adhd-care offer section.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 7,
+        "wordCount": 382,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/blog/adderall-ir-vs-xr-adults",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/adderall-for-adhd-how-it-works",
+        "rationale": "IR/XR variant duplicates Adderall mechanism article.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 3,
+        "wordCount": 657,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/blog/adhd-evaluation-california-online-vs-in-person",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/online-adhd-diagnosis-california",
+        "rationale": "CA geo cluster consolidation; online diagnosis cornerstone absorbs comparison intent.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 3,
+        "wordCount": 713,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/blog/adhd-evaluation-cost-california",
+        "classification": "REDIRECT",
+        "redirectTarget": "/membership-pricing",
+        "rationale": "State-specific pricing duplicate; membership-pricing is canonical pricing page.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 2,
+        "wordCount": 368,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/blog/adhd-evaluation-cost-texas",
+        "classification": "REDIRECT",
+        "redirectTarget": "/membership-pricing",
+        "rationale": "State-specific pricing duplicate of /adhd-evaluation-cost and membership-pricing.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 8,
+        "wordCount": 591,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/blog/adhd-medication-online-california",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/adhd-medication-options-for-adults",
+        "rationale": "CA medication blog duplicates general adult medication guide.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 4,
+        "wordCount": 467,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/blog/adhd-medication-online-texas-telehealth",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/online-adhd-diagnosis-texas",
+        "rationale": "TX medication logistics covered by TX diagnosis cornerstone + /adhd-care.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 4,
+        "wordCount": 460,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/blog/adhd-medication-options-california",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/adhd-medication-options-for-adults",
+        "rationale": "State variant of general medication options article; cannibalizes adult guide.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 4,
+        "wordCount": 751,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/blog/adhd-testing-online-california-screening-vs-evaluation",
+        "classification": "REDIRECT",
+        "redirectTarget": "/adhd-screening",
+        "rationale": "Screening vs evaluation intent owned by /adhd-screening + /adhd-care.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 4,
+        "wordCount": 390,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/blog/adhd-treatment-houston-online",
+        "classification": "REDIRECT",
+        "redirectTarget": "/adhd-diagnosis-texas",
+        "rationale": "Houston blog duplicates Texas geo landing; 3 inbound.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 3,
+        "wordCount": 446,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/blog/adult-adhd-symptoms-california",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/how-to-know-if-you-have-adhd-adult",
+        "rationale": "Symptoms content duplicates sitewide ADHD symptoms cornerstone (167 inbound).",
+        "phase": 1,
+        "groups": [
+          "Educational Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 3,
+        "wordCount": 827,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/blog/adult-adhd-treatment-california-2026",
+        "classification": "REDIRECT",
+        "redirectTarget": "/adhd-care",
+        "rationale": "Treatment commercial intent belongs on service page, not geo blog.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 3,
+        "wordCount": 532,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/blog/after-adhd-diagnosis-next-steps-adults",
+        "classification": "REDIRECT",
+        "redirectTarget": "/adhd-care",
+        "rationale": "Post-diagnosis journey belongs on /adhd-care; 2 inbound thin article.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 2,
+        "wordCount": 474,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/blog/all",
+        "classification": "DELETE",
+        "redirectTarget": "/blog",
+        "rationale": "Redundant article index duplicating /blog hub; 4 inbound only from footer. High maintenance, no unique SEO value.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 4,
+        "wordCount": 1164,
+        "pageType": "Blog Hub"
+      },
+      {
+        "path": "/blog/ambien-and-sleep-medications-risks-and-benefits",
+        "classification": "DELETE",
+        "redirectTarget": "/blog/insomnia-treatment-options-beyond-medication",
+        "rationale": "Off-scope sleep Rx content; Siya does not promote Ambien prescribing. 2 inbound, no conversion path.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 2,
+        "wordCount": 1652,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+        "classification": "REDIRECT",
+        "redirectTarget": "/weight-loss-metabolic-health",
+        "rationale": "Cross-service article with 2 inbound; metabolic service page owns dual-condition positioning.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 2,
+        "wordCount": 1621,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/blog/focalin-vs-adderall-comparison",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/vyvanse-vs-adderall-differences",
+        "rationale": "Third stimulant comparison page; consolidate ADHD med comparisons to canonical pair.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 2,
+        "wordCount": 1200,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/blog/glutathione-and-peptides-what-do-they-actually-do",
+        "classification": "DELETE",
+        "redirectTarget": "/mens-health-longevity",
+        "rationale": "Peptide marketing content outside current service scope; 2 inbound, maintenance with no revenue tie.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 2,
+        "wordCount": 1649,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/blog/how-to-choose-adhd-provider-california",
+        "classification": "REDIRECT",
+        "redirectTarget": "/providers",
+        "rationale": "Provider selection intent better served by /providers hub + profiles.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 2,
+        "wordCount": 526,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/blog/modafinil-for-focus-and-fatigue-is-it-safe",
+        "classification": "DELETE",
+        "redirectTarget": "/adhd-care",
+        "rationale": "Modafinil not a Siya service line; risks implying off-label prescribing. 4 inbound only.",
+        "phase": 1,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 4,
+        "wordCount": 1668,
+        "pageType": "Blog Article"
+      },
+      {
+        "path": "/creyos-adhd-testing",
+        "classification": "REDIRECT",
+        "redirectTarget": "/adhd-care",
+        "rationale": "Creyos is included in $199 evaluation; standalone page fragments ADHD funnel (3 inbound).",
+        "phase": 1,
+        "groups": [
+          "Core Revenue Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 3,
+        "wordCount": 380,
+        "pageType": "Service Page"
+      },
+      {
+        "path": "/labs",
+        "classification": "REDIRECT",
+        "redirectTarget": "/telehealth",
+        "rationale": "102-word coming-soon placeholder; no unique content. Defer until labs launch.",
+        "phase": 1,
+        "groups": [
+          "Core Revenue Pages",
+          "Utility Pages"
+        ],
+        "internalLinksIn": 167,
+        "wordCount": 102,
+        "pageType": "Service Page"
+      },
+      {
+        "path": "/online-adhd-test",
+        "classification": "REDIRECT",
+        "redirectTarget": "/adhd-screening",
+        "rationale": "Duplicate screening funnel intent with /adhd-screening; CTA audit flags cross-link confusion.",
+        "phase": 1,
+        "groups": [
+          "Core Revenue Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 19,
+        "wordCount": 485,
+        "pageType": "Service Page"
+      },
+      {
+        "path": "/prescriptions",
+        "classification": "REDIRECT",
+        "redirectTarget": "/telehealth",
+        "rationale": "92-word coming-soon placeholder; 1 inbound. Telehealth owns prescription narrative.",
+        "phase": 1,
+        "groups": [
+          "Core Revenue Pages",
+          "Utility Pages"
+        ],
+        "internalLinksIn": 1,
+        "wordCount": 92,
+        "pageType": "Service Page"
+      },
+      {
+        "path": "/primary-urgent-care",
+        "classification": "REDIRECT",
+        "redirectTarget": "/telehealth",
+        "rationale": "Secondary service with 1 inbound; telehealth page covers virtual primary care positioning.",
+        "phase": 1,
+        "groups": [
+          "Core Revenue Pages",
+          "Utility Pages"
+        ],
+        "internalLinksIn": 1,
+        "wordCount": 250,
+        "pageType": "Service Page"
+      },
+      {
+        "path": "/privacy-policy",
+        "classification": "DELETE",
+        "redirectTarget": "/legal/privacy-policy",
+        "rationale": "Legacy legal stub; canonical is /legal/privacy-policy. Zero inbound. Remove file after 301.",
+        "phase": 1,
+        "groups": [
+          "Orphan Pages",
+          "Legacy Pages"
+        ],
+        "internalLinksIn": 0,
+        "wordCount": 65,
+        "pageType": "Legacy"
+      },
+      {
+        "path": "/siya-circle",
+        "classification": "DELETE",
+        "redirectTarget": "https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl",
+        "rationale": "Orphan utility page (0 inbound). Newsletter signup belongs in footer only per CTA audit.",
+        "phase": 1,
+        "groups": [
+          "Orphan Pages",
+          "Utility Pages"
+        ],
+        "internalLinksIn": 0,
+        "wordCount": 295,
+        "pageType": "Utility"
+      },
+      {
+        "path": "/terms",
+        "classification": "DELETE",
+        "redirectTarget": "/legal/terms-of-use",
+        "rationale": "Legacy legal stub; canonical is /legal/terms-of-use. Zero inbound. Remove file after 301.",
+        "phase": 1,
+        "groups": [
+          "Orphan Pages",
+          "Legacy Pages"
+        ],
+        "internalLinksIn": 0,
+        "wordCount": 70,
+        "pageType": "Legacy"
+      }
+    ],
+    "phase2": [
+      {
+        "path": "/",
+        "classification": "KEEP + REWRITE",
+        "redirectTarget": null,
+        "rationale": "Homepage MVP polish needed; consolidate CTAs and link all provider cards per provider audit.",
+        "phase": 2,
+        "groups": [
+          "Core Revenue Pages"
+        ],
+        "internalLinksIn": 167,
+        "wordCount": 1316,
+        "pageType": "Homepage"
+      },
+      {
+        "path": "/about",
+        "classification": "KEEP + REWRITE",
+        "redirectTarget": null,
+        "rationale": "Fix team image alt text, link providers, reduce duplicate CTAs.",
+        "phase": 2,
+        "groups": [
+          "Trust Pages"
+        ],
+        "internalLinksIn": 167,
+        "wordCount": 669,
+        "pageType": "About"
+      },
+      {
+        "path": "/adhd-care",
+        "classification": "KEEP + REWRITE",
+        "redirectTarget": null,
+        "rationale": "Core revenue page; add state availability sections, Creyos/pricing blocks, provider cards.",
+        "phase": 2,
+        "groups": [
+          "Core Revenue Pages"
+        ],
+        "internalLinksIn": 167,
+        "wordCount": 1345,
+        "pageType": "Service Page"
+      },
+      {
+        "path": "/adhd-diagnosis-texas",
+        "classification": "KEEP + REWRITE",
+        "redirectTarget": null,
+        "rationale": "Geo cornerstone; add provider routing and state-specific trust signals.",
+        "phase": 2,
+        "groups": [
+          "Core Revenue Pages",
+          "SEO Pages"
+        ],
+        "internalLinksIn": 2,
+        "wordCount": 456,
+        "pageType": "Geo SEO Landing"
+      },
+      {
+        "path": "/adhd-screening",
+        "classification": "KEEP + REWRITE",
+        "redirectTarget": null,
+        "rationale": "Top-of-funnel; align copy with /adhd-care after online-adhd-test redirect.",
+        "phase": 2,
+        "groups": [
+          "Core Revenue Pages"
+        ],
+        "internalLinksIn": 167,
+        "wordCount": 371,
+        "pageType": "Service Page"
+      },
+      {
+        "path": "/answers",
+        "classification": "KEEP + REWRITE",
+        "redirectTarget": null,
+        "rationale": "Hub needs pillar restructure after guide pruning; reduce 87 outbound links.",
+        "phase": 2,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 167,
+        "wordCount": 994,
+        "pageType": "Health Guide Hub"
+      },
+      {
+        "path": "/blog",
+        "classification": "KEEP + REWRITE",
+        "redirectTarget": null,
+        "rationale": "Simplify discovery; remove blog/all dependency; category hubs may merge.",
+        "phase": 2,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 167,
+        "wordCount": 755,
+        "pageType": "Blog Hub"
+      },
+      {
+        "path": "/blog/adhd",
+        "classification": "MERGE",
+        "redirectTarget": "/blog",
+        "rationale": "Category hub duplicates /blog index; merge ADHD article list into main blog hub.",
+        "phase": 2,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 167,
+        "wordCount": 700,
+        "pageType": "Blog Hub"
+      },
+      {
+        "path": "/blog/telehealth",
+        "classification": "MERGE",
+        "redirectTarget": "/blog",
+        "rationale": "Category hub duplicates /blog; low unique value (327 words).",
+        "phase": 2,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 167,
+        "wordCount": 327,
+        "pageType": "Blog Hub"
+      },
+      {
+        "path": "/blog/weight-loss",
+        "classification": "MERGE",
+        "redirectTarget": "/blog",
+        "rationale": "Category hub duplicates /blog; merge weight-loss articles into filtered blog index.",
+        "phase": 2,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 167,
+        "wordCount": 304,
+        "pageType": "Blog Hub"
+      },
+      {
+        "path": "/membership-pricing",
+        "classification": "KEEP + REWRITE",
+        "redirectTarget": null,
+        "rationale": "Single pricing source of truth; absorb adhd-evaluation-cost redirects.",
+        "phase": 2,
+        "groups": [
+          "Core Revenue Pages"
+        ],
+        "internalLinksIn": 167,
+        "wordCount": 539,
+        "pageType": "Service Page"
+      },
+      {
+        "path": "/mens-health-longevity",
+        "classification": "KEEP + REWRITE",
+        "redirectTarget": null,
+        "rationale": "Core revenue; align scope to actual services, add hormone cornerstone links.",
+        "phase": 2,
+        "groups": [
+          "Core Revenue Pages"
+        ],
+        "internalLinksIn": 167,
+        "wordCount": 387,
+        "pageType": "Service Page"
+      },
+      {
+        "path": "/telehealth",
+        "classification": "KEEP + REWRITE",
+        "redirectTarget": null,
+        "rationale": "Core routing hub; absorb redirected coming-soon services, simplify service grid.",
+        "phase": 2,
+        "groups": [
+          "Core Revenue Pages"
+        ],
+        "internalLinksIn": 167,
+        "wordCount": 855,
+        "pageType": "Service Page"
+      },
+      {
+        "path": "/weight-loss-metabolic-health",
+        "classification": "KEEP + REWRITE",
+        "redirectTarget": null,
+        "rationale": "Core revenue; add provider authority (Sneh), simplify CTA bands per CTA audit.",
+        "phase": 2,
+        "groups": [
+          "Core Revenue Pages"
+        ],
+        "internalLinksIn": 167,
+        "wordCount": 1383,
+        "pageType": "Service Page"
+      }
+    ],
+    "phase3": [
+      {
+        "path": "/answers/adderall-vs-vyvanse-adults",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/vyvanse-vs-adderall-differences",
+        "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+        "phase": 3,
+        "groups": [
+          "Duplicate Pages",
+          "Educational Pages"
+        ],
+        "internalLinksIn": 6,
+        "wordCount": 414,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/adhd-and-weight-loss-connection",
+        "redirectTarget": "/adhd-care",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 8,
+        "wordCount": 347,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/adhd-care",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+      },
+      {
+        "path": "/answers/adhd-medication-side-effects",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/adhd-medication-side-effects-what-to-expect",
+        "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+        "phase": 3,
+        "groups": [
+          "Duplicate Pages",
+          "Educational Pages"
+        ],
+        "internalLinksIn": 7,
+        "wordCount": 426,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/adhd-vs-anxiety",
+        "redirectTarget": "/adhd-care",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 4,
+        "wordCount": 934,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/adhd-care",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+      },
+      {
+        "path": "/answers/adhd-vs-burnout",
+        "redirectTarget": "/adhd-care",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 5,
+        "wordCount": 1065,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/adhd-care",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+      },
+      {
+        "path": "/answers/afternoon-energy-crash-after-lunch",
+        "redirectTarget": "/answers",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 2,
+        "wordCount": 1181,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/answers",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /answers."
+      },
+      {
+        "path": "/answers/asrs-adhd-screening-explained",
+        "redirectTarget": "/adhd-care",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 3,
+        "wordCount": 356,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/adhd-care",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+      },
+      {
+        "path": "/answers/brain-fog-after-eating",
+        "redirectTarget": "/answers",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 19,
+        "wordCount": 1209,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/answers",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /answers."
+      },
+      {
+        "path": "/answers/can-adhd-cause-anxiety",
+        "redirectTarget": "/adhd-care",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 3,
+        "wordCount": 844,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/adhd-care",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+      },
+      {
+        "path": "/answers/can-you-get-adhd-medication-online",
+        "redirectTarget": "/adhd-care",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 7,
+        "wordCount": 343,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/adhd-care",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+      },
+      {
+        "path": "/answers/compounded-vs-branded-glp-1",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/compounded-vs-branded-glp1-medications",
+        "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+        "phase": 3,
+        "groups": [
+          "Duplicate Pages",
+          "Educational Pages"
+        ],
+        "internalLinksIn": 5,
+        "wordCount": 404,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/ed-telehealth-legitimate",
+        "redirectTarget": "/telehealth",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 3,
+        "wordCount": 316,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/telehealth",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /telehealth."
+      },
+      {
+        "path": "/answers/executive-dysfunction-adhd",
+        "redirectTarget": "/adhd-care",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 3,
+        "wordCount": 338,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/adhd-care",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+      },
+      {
+        "path": "/answers/food-noise-returned-on-glp-1",
+        "redirectTarget": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 4,
+        "wordCount": 1226,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/food-noise-and-glp-1-what-it-means-and-what-helps."
+      },
+      {
+        "path": "/answers/fsa-hsa-adhd-evaluation",
+        "redirectTarget": "/adhd-care",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 4,
+        "wordCount": 351,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/adhd-care",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+      },
+      {
+        "path": "/answers/glp-1-side-effects",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/glp1-side-effects-and-how-to-manage-them",
+        "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+        "phase": 3,
+        "groups": [
+          "Duplicate Pages",
+          "Educational Pages"
+        ],
+        "internalLinksIn": 14,
+        "wordCount": 1015,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/high-shbg-low-free-testosterone",
+        "redirectTarget": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 3,
+        "wordCount": 1162,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/free-testosterone-vs-total-testosterone-what-patients-should-know."
+      },
+      {
+        "path": "/answers/how-long-adhd-evaluation",
+        "redirectTarget": "/adhd-care",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 5,
+        "wordCount": 318,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/adhd-care",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+      },
+      {
+        "path": "/answers/how-online-prescriptions-work",
+        "redirectTarget": "/answers",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 7,
+        "wordCount": 815,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/answers",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /answers."
+      },
+      {
+        "path": "/answers/insulin-resistance-without-diabetes",
+        "redirectTarget": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 4,
+        "wordCount": 875,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/insulin-resistance-and-weight-loss-clinician-overview."
+      },
+      {
+        "path": "/answers/is-adhd-medication-safe-long-term",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/is-adhd-medication-safe-long-term",
+        "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+        "phase": 3,
+        "groups": [
+          "Duplicate Pages",
+          "Educational Pages"
+        ],
+        "internalLinksIn": 7,
+        "wordCount": 418,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/is-online-adhd-diagnosis-legitimate",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/is-online-adhd-diagnosis-legit",
+        "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+        "phase": 3,
+        "groups": [
+          "Duplicate Pages",
+          "Educational Pages"
+        ],
+        "internalLinksIn": 167,
+        "wordCount": 891,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/late-adhd-diagnosis-adults",
+        "redirectTarget": "/adhd-care",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 4,
+        "wordCount": 360,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/adhd-care",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+      },
+      {
+        "path": "/answers/medical-weight-loss-vs-dieting",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/medical-weight-loss-vs-dieting-what-actually-works",
+        "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+        "phase": 3,
+        "groups": [
+          "Duplicate Pages",
+          "Educational Pages"
+        ],
+        "internalLinksIn": 11,
+        "wordCount": 409,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/meet-and-greet-telehealth-expectations",
+        "redirectTarget": "/telehealth",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 6,
+        "wordCount": 845,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/telehealth",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /telehealth."
+      },
+      {
+        "path": "/answers/minoxidil-hair-loss-does-it-work",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/minoxidil-for-hair-loss-does-it-work",
+        "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+        "phase": 3,
+        "groups": [
+          "Duplicate Pages",
+          "Educational Pages"
+        ],
+        "internalLinksIn": 3,
+        "wordCount": 410,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/non-stimulant-adhd-medications",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/non-stimulant-adhd-medications-explained",
+        "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+        "phase": 3,
+        "groups": [
+          "Duplicate Pages",
+          "Educational Pages"
+        ],
+        "internalLinksIn": 3,
+        "wordCount": 990,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/normal-a1c-insulin-resistance",
+        "redirectTarget": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 8,
+        "wordCount": 918,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/insulin-resistance-and-weight-loss-clinician-overview."
+      },
+      {
+        "path": "/answers/oral-vs-injectable-weight-loss-meds",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/oral-vs-injectable-weight-loss-medications",
+        "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+        "phase": 3,
+        "groups": [
+          "Duplicate Pages",
+          "Educational Pages"
+        ],
+        "internalLinksIn": 2,
+        "wordCount": 414,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/oral-vs-topical-minoxidil",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/oral-vs-topical-minoxidil-which-is-right",
+        "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+        "phase": 3,
+        "groups": [
+          "Duplicate Pages",
+          "Educational Pages"
+        ],
+        "internalLinksIn": 4,
+        "wordCount": 383,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/phentermine-weight-loss-safety",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
+        "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+        "phase": 3,
+        "groups": [
+          "Duplicate Pages",
+          "Educational Pages"
+        ],
+        "internalLinksIn": 2,
+        "wordCount": 404,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/poor-sleep-feels-like-adhd",
+        "redirectTarget": "/adhd-care",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 10,
+        "wordCount": 1102,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/adhd-care",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+      },
+      {
+        "path": "/answers/semaglutide-weight-loss-how-it-works",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/semaglutide-for-weight-loss-how-it-works",
+        "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+        "phase": 3,
+        "groups": [
+          "Duplicate Pages",
+          "Educational Pages"
+        ],
+        "internalLinksIn": 12,
+        "wordCount": 976,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/signs-of-sleep-apnea-in-adults",
+        "redirectTarget": "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 10,
+        "wordCount": 548,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign."
+      },
+      {
+        "path": "/answers/sildenafil-erectile-dysfunction-expectations",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
+        "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+        "phase": 3,
+        "groups": [
+          "Duplicate Pages",
+          "Educational Pages"
+        ],
+        "internalLinksIn": 3,
+        "wordCount": 400,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/starting-adhd-medication-adults",
+        "redirectTarget": "/adhd-care",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 33,
+        "wordCount": 906,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/adhd-care",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+      },
+      {
+        "path": "/answers/testosterone-and-adhd-overlap",
+        "redirectTarget": "/adhd-care",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 9,
+        "wordCount": 351,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/adhd-care",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+      },
+      {
+        "path": "/answers/tirzepatide-vs-semaglutide",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/tirzepatide-vs-semaglutide-which-is-better",
+        "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+        "phase": 3,
+        "groups": [
+          "Duplicate Pages",
+          "Educational Pages"
+        ],
+        "internalLinksIn": 3,
+        "wordCount": 404,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/trt-monitoring-requirements",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/when-is-testosterone-therapy-appropriate",
+        "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+        "phase": 3,
+        "groups": [
+          "Duplicate Pages",
+          "Educational Pages"
+        ],
+        "internalLinksIn": 6,
+        "wordCount": 880,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/what-does-low-testosterone-feel-like",
+        "redirectTarget": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 17,
+        "wordCount": 406,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/free-testosterone-vs-total-testosterone-what-patients-should-know."
+      },
+      {
+        "path": "/answers/when-is-testosterone-therapy-appropriate",
+        "classification": "REDIRECT",
+        "redirectTarget": "/blog/when-is-testosterone-therapy-appropriate",
+        "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+        "phase": 3,
+        "groups": [
+          "Duplicate Pages",
+          "Educational Pages"
+        ],
+        "internalLinksIn": 11,
+        "wordCount": 904,
+        "pageType": "Health Guide"
+      },
+      {
+        "path": "/answers/why-normal-labs-dont-mean-healthy",
+        "redirectTarget": "/answers",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 5,
+        "wordCount": 1266,
+        "pageType": "Health Guide",
+        "classification": "REDIRECT",
+        "target": "/answers",
+        "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /answers."
+      },
+      {
+        "path": "/blog/how-mental-health-affects-weight-loss-outcomes",
+        "redirectTarget": "/weight-loss-metabolic-health",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 2,
+        "wordCount": 1650,
+        "pageType": "Blog Article",
+        "classification": "REDIRECT",
+        "target": "/weight-loss-metabolic-health",
+        "rationale": "Blog not in minimum viable whitelist; redirect to preserve link equity on /weight-loss-metabolic-health."
+      },
+      {
+        "path": "/blog/long-term-weight-loss-medications-what-to-expect",
+        "redirectTarget": "/weight-loss-metabolic-health",
+        "phase": 3,
+        "groups": [
+          "Educational Pages"
+        ],
+        "internalLinksIn": 2,
+        "wordCount": 1705,
+        "pageType": "Blog Article",
+        "classification": "REDIRECT",
+        "target": "/weight-loss-metabolic-health",
+        "rationale": "Blog not in minimum viable whitelist; redirect to preserve link equity on /weight-loss-metabolic-health."
+      }
+    ]
+  },
+  "deletes": [
+    {
+      "path": "/adhd-diagnosis-florida",
+      "classification": "DELETE",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Thin geo landing; zero inbound links, orphan. Florida not a licensed priority state in entity-graph.",
+      "phase": 1,
+      "groups": [
+        "Orphan Pages",
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 0,
+      "wordCount": 525,
+      "pageType": "Geo SEO Landing"
+    },
+    {
+      "path": "/blog/all",
+      "classification": "DELETE",
+      "redirectTarget": "/blog",
+      "rationale": "Redundant article index duplicating /blog hub; 4 inbound only from footer. High maintenance, no unique SEO value.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 1164,
+      "pageType": "Blog Hub"
+    },
+    {
+      "path": "/blog/ambien-and-sleep-medications-risks-and-benefits",
+      "classification": "DELETE",
+      "redirectTarget": "/blog/insomnia-treatment-options-beyond-medication",
+      "rationale": "Off-scope sleep Rx content; Siya does not promote Ambien prescribing. 2 inbound, no conversion path.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 1652,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/glutathione-and-peptides-what-do-they-actually-do",
+      "classification": "DELETE",
+      "redirectTarget": "/mens-health-longevity",
+      "rationale": "Peptide marketing content outside current service scope; 2 inbound, maintenance with no revenue tie.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 1649,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/modafinil-for-focus-and-fatigue-is-it-safe",
+      "classification": "DELETE",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Modafinil not a Siya service line; risks implying off-label prescribing. 4 inbound only.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 1668,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/privacy-policy",
+      "classification": "DELETE",
+      "redirectTarget": "/legal/privacy-policy",
+      "rationale": "Legacy legal stub; canonical is /legal/privacy-policy. Zero inbound. Remove file after 301.",
+      "phase": 1,
+      "groups": [
+        "Orphan Pages",
+        "Legacy Pages"
+      ],
+      "internalLinksIn": 0,
+      "wordCount": 65,
+      "pageType": "Legacy"
+    },
+    {
+      "path": "/siya-circle",
+      "classification": "DELETE",
+      "redirectTarget": "https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl",
+      "rationale": "Orphan utility page (0 inbound). Newsletter signup belongs in footer only per CTA audit.",
+      "phase": 1,
+      "groups": [
+        "Orphan Pages",
+        "Utility Pages"
+      ],
+      "internalLinksIn": 0,
+      "wordCount": 295,
+      "pageType": "Utility"
+    },
+    {
+      "path": "/terms",
+      "classification": "DELETE",
+      "redirectTarget": "/legal/terms-of-use",
+      "rationale": "Legacy legal stub; canonical is /legal/terms-of-use. Zero inbound. Remove file after 301.",
+      "phase": 1,
+      "groups": [
+        "Orphan Pages",
+        "Legacy Pages"
+      ],
+      "internalLinksIn": 0,
+      "wordCount": 70,
+      "pageType": "Legacy"
+    }
+  ],
+  "redirects": [
+    {
+      "path": "/adhd-diagnosis-austin",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-diagnosis-texas",
+      "rationale": "City geo page with 1 inbound; Texas state cornerstone absorbs Austin intent.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 448,
+      "pageType": "Geo SEO Landing"
+    },
+    {
+      "path": "/adhd-diagnosis-houston",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-diagnosis-texas",
+      "rationale": "City geo page with 2 inbound; consolidate to single Texas geo cornerstone.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 417,
+      "pageType": "Geo SEO Landing"
+    },
+    {
+      "path": "/adhd-diagnosis-pennsylvania",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Thin state geo (451 words, 1 inbound); PA coverage belongs as section on /adhd-care until traffic justifies standalone.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 451,
+      "pageType": "Geo SEO Landing"
+    },
+    {
+      "path": "/adhd-diagnosis-philadelphia",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-diagnosis-pennsylvania",
+      "rationale": "City duplicate of PA state page; 1 inbound each, same offer.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 452,
+      "pageType": "Geo SEO Landing"
+    },
+    {
+      "path": "/adhd-evaluation-cost",
+      "classification": "REDIRECT",
+      "redirectTarget": "/membership-pricing",
+      "rationale": "Standalone pricing page duplicates membership-pricing and adhd-care; consolidate single pricing source.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 19,
+      "wordCount": 407,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/adhd-treatment-online",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Post-diagnosis treatment belongs as section on /adhd-care; 1 inbound, thin duplicate.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 476,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/adult-adhd-diagnosis",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Overlaps /adhd-care H1 and offer; splits ADHD commercial intent across 3 URLs.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 6,
+      "wordCount": 502,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/answers/adderall-vs-vyvanse-adults",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/vyvanse-vs-adderall-differences",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 6,
+      "wordCount": 414,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/adhd-and-weight-loss-connection",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 8,
+      "wordCount": 347,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/adhd-in-men",
+      "classification": "REDIRECT",
+      "redirectTarget": "/answers/signs-of-adult-adhd",
+      "rationale": "Thin gender variant (348 words, 1 inbound); signs-of-adult-adhd covers presentation.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 348,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/adhd-in-women",
+      "classification": "REDIRECT",
+      "redirectTarget": "/answers/signs-of-adult-adhd",
+      "rationale": "Thin gender variant (356 words, 3 inbound); consolidate to adult signs cornerstone guide.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 356,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/adhd-medication-side-effects",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/adhd-medication-side-effects-what-to-expect",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 7,
+      "wordCount": 426,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/adhd-vs-anxiety",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 934,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/adhd-vs-burnout",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 5,
+      "wordCount": 1065,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/afternoon-energy-crash-after-lunch",
+      "redirectTarget": "/answers",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 1181,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/answers",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /answers."
+    },
+    {
+      "path": "/answers/asrs-adhd-screening-explained",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 356,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/brain-fog-after-eating",
+      "redirectTarget": "/answers",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 19,
+      "wordCount": 1209,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/answers",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /answers."
+    },
+    {
+      "path": "/answers/can-adhd-cause-anxiety",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 844,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/can-you-get-adhd-medication-online",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 7,
+      "wordCount": 343,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/compounded-vs-branded-glp-1",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/compounded-vs-branded-glp1-medications",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 5,
+      "wordCount": 404,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/creyos-adhd-testing-explained",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Creyos FAQ with 1 inbound; merge into adhd-care evaluation section.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 355,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/ed-telehealth-legitimate",
+      "redirectTarget": "/telehealth",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 316,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/telehealth",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /telehealth."
+    },
+    {
+      "path": "/answers/executive-dysfunction-adhd",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 338,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/food-noise-returned-on-glp-1",
+      "redirectTarget": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 1226,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/food-noise-and-glp-1-what-it-means-and-what-helps."
+    },
+    {
+      "path": "/answers/fsa-hsa-adhd-evaluation",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 351,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/glp-1-nausea-management",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/glp1-side-effects-and-how-to-manage-them",
+      "rationale": "Cannibalization owner Blog; nausea subset fully covered in GLP-1 side effects cornerstone.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 402,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/glp-1-side-effects",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/glp1-side-effects-and-how-to-manage-them",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 14,
+      "wordCount": 1015,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/high-functioning-adhd",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/how-to-know-if-you-have-adhd-adult",
+      "rationale": "Thin guide (350 words); high-functioning narrative covered in adult ADHD cornerstone blog.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 350,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/high-shbg-low-free-testosterone",
+      "redirectTarget": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 1162,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/free-testosterone-vs-total-testosterone-what-patients-should-know."
+    },
+    {
+      "path": "/answers/how-long-adhd-evaluation",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 5,
+      "wordCount": 318,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/how-much-does-adhd-testing-cost",
+      "classification": "REDIRECT",
+      "redirectTarget": "/membership-pricing",
+      "rationale": "Pricing FAQ duplicates membership-pricing and adhd-care pricing sections.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 5,
+      "wordCount": 358,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/how-online-prescriptions-work",
+      "redirectTarget": "/answers",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 7,
+      "wordCount": 815,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/answers",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /answers."
+    },
+    {
+      "path": "/answers/insulin-resistance-without-diabetes",
+      "redirectTarget": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 875,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/insulin-resistance-and-weight-loss-clinician-overview."
+    },
+    {
+      "path": "/answers/is-adhd-medication-safe-long-term",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/is-adhd-medication-safe-long-term",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 7,
+      "wordCount": 418,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/is-online-adhd-diagnosis-legitimate",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/is-online-adhd-diagnosis-legit",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 891,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/late-adhd-diagnosis-adults",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 360,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/medical-weight-loss-vs-dieting",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/medical-weight-loss-vs-dieting-what-actually-works",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 11,
+      "wordCount": 409,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/meet-and-greet-telehealth-expectations",
+      "redirectTarget": "/telehealth",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 6,
+      "wordCount": 845,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/telehealth",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /telehealth."
+    },
+    {
+      "path": "/answers/minoxidil-hair-loss-does-it-work",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/minoxidil-for-hair-loss-does-it-work",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 410,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/non-stimulant-adhd-medications",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/non-stimulant-adhd-medications-explained",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 990,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/normal-a1c-insulin-resistance",
+      "redirectTarget": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 8,
+      "wordCount": 918,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/insulin-resistance-and-weight-loss-clinician-overview."
+    },
+    {
+      "path": "/answers/oral-vs-injectable-weight-loss-meds",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/oral-vs-injectable-weight-loss-medications",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 414,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/oral-vs-topical-minoxidil",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/oral-vs-topical-minoxidil-which-is-right",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 383,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/phentermine-weight-loss-safety",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 404,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/poor-sleep-feels-like-adhd",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 10,
+      "wordCount": 1102,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/rejection-sensitivity-adhd",
+      "classification": "REDIRECT",
+      "redirectTarget": "/answers/signs-of-adult-adhd",
+      "rationale": "Niche ADHD symptom (365 words, 2 inbound); low search volume vs maintenance cost.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 365,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/semaglutide-weight-loss-how-it-works",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/semaglutide-for-weight-loss-how-it-works",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 12,
+      "wordCount": 976,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/signs-of-sleep-apnea-in-adults",
+      "redirectTarget": "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 10,
+      "wordCount": 548,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign."
+    },
+    {
+      "path": "/answers/sildenafil-erectile-dysfunction-expectations",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 400,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/starting-adhd-medication-adults",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 33,
+      "wordCount": 906,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/telehealth-adhd-texas",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/online-adhd-diagnosis-texas",
+      "rationale": "TX telehealth FAQ duplicates TX diagnosis blog; geo FAQ → geo cornerstone.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 5,
+      "wordCount": 340,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/testosterone-and-adhd-overlap",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 9,
+      "wordCount": 351,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/time-blindness-adhd",
+      "classification": "REDIRECT",
+      "redirectTarget": "/answers/signs-of-adult-adhd",
+      "rationale": "Micro-topic guide (358 words, 2 inbound); consolidate to adult signs cornerstone guide.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 358,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/tirzepatide-vs-semaglutide",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/tirzepatide-vs-semaglutide-which-is-better",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 404,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/trt-monitoring-requirements",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/when-is-testosterone-therapy-appropriate",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 6,
+      "wordCount": 880,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/weight-gain-after-stopping-ozempic",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "rationale": "Ozempic cessation FAQ with 1 inbound; food-noise cornerstone owns GLP-1 rebound narrative.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 1172,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/what-does-low-testosterone-feel-like",
+      "redirectTarget": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 17,
+      "wordCount": 406,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/free-testosterone-vs-total-testosterone-what-patients-should-know."
+    },
+    {
+      "path": "/answers/what-included-199-adhd-evaluation",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Evaluation scope FAQ belongs on /adhd-care offer section.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 7,
+      "wordCount": 382,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/when-is-testosterone-therapy-appropriate",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/when-is-testosterone-therapy-appropriate",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 11,
+      "wordCount": 904,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/why-normal-labs-dont-mean-healthy",
+      "redirectTarget": "/answers",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 5,
+      "wordCount": 1266,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/answers",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /answers."
+    },
+    {
+      "path": "/blog/adderall-ir-vs-xr-adults",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/adderall-for-adhd-how-it-works",
+      "rationale": "IR/XR variant duplicates Adderall mechanism article.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 657,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adhd-evaluation-california-online-vs-in-person",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/online-adhd-diagnosis-california",
+      "rationale": "CA geo cluster consolidation; online diagnosis cornerstone absorbs comparison intent.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 713,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adhd-evaluation-cost-california",
+      "classification": "REDIRECT",
+      "redirectTarget": "/membership-pricing",
+      "rationale": "State-specific pricing duplicate; membership-pricing is canonical pricing page.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 368,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adhd-evaluation-cost-texas",
+      "classification": "REDIRECT",
+      "redirectTarget": "/membership-pricing",
+      "rationale": "State-specific pricing duplicate of /adhd-evaluation-cost and membership-pricing.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 8,
+      "wordCount": 591,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adhd-medication-online-california",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/adhd-medication-options-for-adults",
+      "rationale": "CA medication blog duplicates general adult medication guide.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 467,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adhd-medication-online-texas-telehealth",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/online-adhd-diagnosis-texas",
+      "rationale": "TX medication logistics covered by TX diagnosis cornerstone + /adhd-care.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 460,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adhd-medication-options-california",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/adhd-medication-options-for-adults",
+      "rationale": "State variant of general medication options article; cannibalizes adult guide.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 751,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adhd-testing-online-california-screening-vs-evaluation",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-screening",
+      "rationale": "Screening vs evaluation intent owned by /adhd-screening + /adhd-care.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 390,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adhd-treatment-houston-online",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-diagnosis-texas",
+      "rationale": "Houston blog duplicates Texas geo landing; 3 inbound.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 446,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adult-adhd-symptoms-california",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/how-to-know-if-you-have-adhd-adult",
+      "rationale": "Symptoms content duplicates sitewide ADHD symptoms cornerstone (167 inbound).",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 827,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adult-adhd-treatment-california-2026",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Treatment commercial intent belongs on service page, not geo blog.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 532,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/after-adhd-diagnosis-next-steps-adults",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Post-diagnosis journey belongs on /adhd-care; 2 inbound thin article.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 474,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+      "classification": "REDIRECT",
+      "redirectTarget": "/weight-loss-metabolic-health",
+      "rationale": "Cross-service article with 2 inbound; metabolic service page owns dual-condition positioning.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 1621,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/focalin-vs-adderall-comparison",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/vyvanse-vs-adderall-differences",
+      "rationale": "Third stimulant comparison page; consolidate ADHD med comparisons to canonical pair.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 1200,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/how-mental-health-affects-weight-loss-outcomes",
+      "redirectTarget": "/weight-loss-metabolic-health",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 1650,
+      "pageType": "Blog Article",
+      "classification": "REDIRECT",
+      "target": "/weight-loss-metabolic-health",
+      "rationale": "Blog not in minimum viable whitelist; redirect to preserve link equity on /weight-loss-metabolic-health."
+    },
+    {
+      "path": "/blog/how-to-choose-adhd-provider-california",
+      "classification": "REDIRECT",
+      "redirectTarget": "/providers",
+      "rationale": "Provider selection intent better served by /providers hub + profiles.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 526,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/long-term-weight-loss-medications-what-to-expect",
+      "redirectTarget": "/weight-loss-metabolic-health",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 1705,
+      "pageType": "Blog Article",
+      "classification": "REDIRECT",
+      "target": "/weight-loss-metabolic-health",
+      "rationale": "Blog not in minimum viable whitelist; redirect to preserve link equity on /weight-loss-metabolic-health."
+    },
+    {
+      "path": "/creyos-adhd-testing",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Creyos is included in $199 evaluation; standalone page fragments ADHD funnel (3 inbound).",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 380,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/labs",
+      "classification": "REDIRECT",
+      "redirectTarget": "/telehealth",
+      "rationale": "102-word coming-soon placeholder; no unique content. Defer until labs launch.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "Utility Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 102,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/online-adhd-test",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-screening",
+      "rationale": "Duplicate screening funnel intent with /adhd-screening; CTA audit flags cross-link confusion.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 19,
+      "wordCount": 485,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/prescriptions",
+      "classification": "REDIRECT",
+      "redirectTarget": "/telehealth",
+      "rationale": "92-word coming-soon placeholder; 1 inbound. Telehealth owns prescription narrative.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "Utility Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 92,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/primary-urgent-care",
+      "classification": "REDIRECT",
+      "redirectTarget": "/telehealth",
+      "rationale": "Secondary service with 1 inbound; telehealth page covers virtual primary care positioning.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "Utility Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 250,
+      "pageType": "Service Page"
+    }
+  ],
+  "merges": [
+    {
+      "path": "/blog/adhd",
+      "classification": "MERGE",
+      "redirectTarget": "/blog",
+      "rationale": "Category hub duplicates /blog index; merge ADHD article list into main blog hub.",
+      "phase": 2,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 700,
+      "pageType": "Blog Hub"
+    },
+    {
+      "path": "/blog/telehealth",
+      "classification": "MERGE",
+      "redirectTarget": "/blog",
+      "rationale": "Category hub duplicates /blog; low unique value (327 words).",
+      "phase": 2,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 327,
+      "pageType": "Blog Hub"
+    },
+    {
+      "path": "/blog/weight-loss",
+      "classification": "MERGE",
+      "redirectTarget": "/blog",
+      "rationale": "Category hub duplicates /blog; merge weight-loss articles into filtered blog index.",
+      "phase": 2,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 304,
+      "pageType": "Blog Hub"
+    }
+  ],
+  "rewrites": [
+    {
+      "path": "/",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Homepage MVP polish needed; consolidate CTAs and link all provider cards per provider audit.",
+      "phase": 2,
+      "groups": [
+        "Core Revenue Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 1316,
+      "pageType": "Homepage"
+    },
+    {
+      "path": "/about",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Fix team image alt text, link providers, reduce duplicate CTAs.",
+      "phase": 2,
+      "groups": [
+        "Trust Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 669,
+      "pageType": "About"
+    },
+    {
+      "path": "/adhd-care",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Core revenue page; add state availability sections, Creyos/pricing blocks, provider cards.",
+      "phase": 2,
+      "groups": [
+        "Core Revenue Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 1345,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/adhd-diagnosis-texas",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Geo cornerstone; add provider routing and state-specific trust signals.",
+      "phase": 2,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 456,
+      "pageType": "Geo SEO Landing"
+    },
+    {
+      "path": "/adhd-screening",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Top-of-funnel; align copy with /adhd-care after online-adhd-test redirect.",
+      "phase": 2,
+      "groups": [
+        "Core Revenue Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 371,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/answers",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Hub needs pillar restructure after guide pruning; reduce 87 outbound links.",
+      "phase": 2,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 994,
+      "pageType": "Health Guide Hub"
+    },
+    {
+      "path": "/blog",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Simplify discovery; remove blog/all dependency; category hubs may merge.",
+      "phase": 2,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 755,
+      "pageType": "Blog Hub"
+    },
+    {
+      "path": "/membership-pricing",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Single pricing source of truth; absorb adhd-evaluation-cost redirects.",
+      "phase": 2,
+      "groups": [
+        "Core Revenue Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 539,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/mens-health-longevity",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Core revenue; align scope to actual services, add hormone cornerstone links.",
+      "phase": 2,
+      "groups": [
+        "Core Revenue Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 387,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/telehealth",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Core routing hub; absorb redirected coming-soon services, simplify service grid.",
+      "phase": 2,
+      "groups": [
+        "Core Revenue Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 855,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/weight-loss-metabolic-health",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Core revenue; add provider authority (Sneh), simplify CTA bands per CTA audit.",
+      "phase": 2,
+      "groups": [
+        "Core Revenue Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 1383,
+      "pageType": "Service Page"
+    }
+  ],
+  "pages": [
+    {
+      "path": "/",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Homepage MVP polish needed; consolidate CTAs and link all provider cards per provider audit.",
+      "phase": 2,
+      "groups": [
+        "Core Revenue Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 1316,
+      "pageType": "Homepage"
+    },
+    {
+      "path": "/about",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Fix team image alt text, link providers, reduce duplicate CTAs.",
+      "phase": 2,
+      "groups": [
+        "Trust Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 669,
+      "pageType": "About"
+    },
+    {
+      "path": "/adhd-care",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Core revenue page; add state availability sections, Creyos/pricing blocks, provider cards.",
+      "phase": 2,
+      "groups": [
+        "Core Revenue Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 1345,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/adhd-diagnosis-austin",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-diagnosis-texas",
+      "rationale": "City geo page with 1 inbound; Texas state cornerstone absorbs Austin intent.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 448,
+      "pageType": "Geo SEO Landing"
+    },
+    {
+      "path": "/adhd-diagnosis-florida",
+      "classification": "DELETE",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Thin geo landing; zero inbound links, orphan. Florida not a licensed priority state in entity-graph.",
+      "phase": 1,
+      "groups": [
+        "Orphan Pages",
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 0,
+      "wordCount": 525,
+      "pageType": "Geo SEO Landing"
+    },
+    {
+      "path": "/adhd-diagnosis-houston",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-diagnosis-texas",
+      "rationale": "City geo page with 2 inbound; consolidate to single Texas geo cornerstone.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 417,
+      "pageType": "Geo SEO Landing"
+    },
+    {
+      "path": "/adhd-diagnosis-pennsylvania",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Thin state geo (451 words, 1 inbound); PA coverage belongs as section on /adhd-care until traffic justifies standalone.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 451,
+      "pageType": "Geo SEO Landing"
+    },
+    {
+      "path": "/adhd-diagnosis-philadelphia",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-diagnosis-pennsylvania",
+      "rationale": "City duplicate of PA state page; 1 inbound each, same offer.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 452,
+      "pageType": "Geo SEO Landing"
+    },
+    {
+      "path": "/adhd-diagnosis-texas",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Geo cornerstone; add provider routing and state-specific trust signals.",
+      "phase": 2,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 456,
+      "pageType": "Geo SEO Landing"
+    },
+    {
+      "path": "/adhd-evaluation-cost",
+      "classification": "REDIRECT",
+      "redirectTarget": "/membership-pricing",
+      "rationale": "Standalone pricing page duplicates membership-pricing and adhd-care; consolidate single pricing source.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 19,
+      "wordCount": 407,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/adhd-screening",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Top-of-funnel; align copy with /adhd-care after online-adhd-test redirect.",
+      "phase": 2,
+      "groups": [
+        "Core Revenue Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 371,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/adhd-treatment-online",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Post-diagnosis treatment belongs as section on /adhd-care; 1 inbound, thin duplicate.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 476,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/adult-adhd-diagnosis",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Overlaps /adhd-care H1 and offer; splits ADHD commercial intent across 3 URLs.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 6,
+      "wordCount": 502,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/answers",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Hub needs pillar restructure after guide pruning; reduce 87 outbound links.",
+      "phase": 2,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 994,
+      "pageType": "Health Guide Hub"
+    },
+    {
+      "path": "/answers/adderall-vs-vyvanse-adults",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/vyvanse-vs-adderall-differences",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 6,
+      "wordCount": 414,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/adhd-and-weight-loss-connection",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 8,
+      "wordCount": 347,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/adhd-in-men",
+      "classification": "REDIRECT",
+      "redirectTarget": "/answers/signs-of-adult-adhd",
+      "rationale": "Thin gender variant (348 words, 1 inbound); signs-of-adult-adhd covers presentation.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 348,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/adhd-in-women",
+      "classification": "REDIRECT",
+      "redirectTarget": "/answers/signs-of-adult-adhd",
+      "rationale": "Thin gender variant (356 words, 3 inbound); consolidate to adult signs cornerstone guide.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 356,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/adhd-medication-every-day",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 390,
+      "pageType": "Health Guide",
+      "classification": "KEEP",
+      "rationale": "Primary PAA guide for cornerstone cluster; paired blog owns long-form depth."
+    },
+    {
+      "path": "/answers/adhd-medication-side-effects",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/adhd-medication-side-effects-what-to-expect",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 7,
+      "wordCount": 426,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/adhd-vs-anxiety",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 934,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/adhd-vs-burnout",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 5,
+      "wordCount": 1065,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/afternoon-energy-crash-after-lunch",
+      "redirectTarget": "/answers",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 1181,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/answers",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /answers."
+    },
+    {
+      "path": "/answers/asrs-adhd-screening-explained",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 356,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/brain-fog-after-eating",
+      "redirectTarget": "/answers",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 19,
+      "wordCount": 1209,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/answers",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /answers."
+    },
+    {
+      "path": "/answers/can-adhd-be-diagnosed-online",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 36,
+      "wordCount": 845,
+      "pageType": "Health Guide",
+      "classification": "KEEP",
+      "rationale": "Primary PAA guide for cornerstone cluster; paired blog owns long-form depth."
+    },
+    {
+      "path": "/answers/can-adhd-cause-anxiety",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 844,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/can-sleep-apnea-cause-fatigue",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 12,
+      "wordCount": 579,
+      "pageType": "Health Guide",
+      "classification": "KEEP",
+      "rationale": "Primary PAA guide for cornerstone cluster; paired blog owns long-form depth."
+    },
+    {
+      "path": "/answers/can-you-get-adhd-medication-online",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 7,
+      "wordCount": 343,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/compounded-vs-branded-glp-1",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/compounded-vs-branded-glp1-medications",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 5,
+      "wordCount": 404,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/creyos-adhd-testing-explained",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Creyos FAQ with 1 inbound; merge into adhd-care evaluation section.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 355,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/ed-telehealth-legitimate",
+      "redirectTarget": "/telehealth",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 316,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/telehealth",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /telehealth."
+    },
+    {
+      "path": "/answers/executive-dysfunction-adhd",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 338,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/food-noise-returned-on-glp-1",
+      "redirectTarget": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 1226,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/food-noise-and-glp-1-what-it-means-and-what-helps."
+    },
+    {
+      "path": "/answers/fsa-hsa-adhd-evaluation",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 351,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/glp-1-nausea-management",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/glp1-side-effects-and-how-to-manage-them",
+      "rationale": "Cannibalization owner Blog; nausea subset fully covered in GLP-1 side effects cornerstone.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 402,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/glp-1-side-effects",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/glp1-side-effects-and-how-to-manage-them",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 14,
+      "wordCount": 1015,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/high-functioning-adhd",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/how-to-know-if-you-have-adhd-adult",
+      "rationale": "Thin guide (350 words); high-functioning narrative covered in adult ADHD cornerstone blog.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 350,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/high-shbg-low-free-testosterone",
+      "redirectTarget": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 1162,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/free-testosterone-vs-total-testosterone-what-patients-should-know."
+    },
+    {
+      "path": "/answers/how-long-adhd-evaluation",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 5,
+      "wordCount": 318,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/how-much-does-adhd-testing-cost",
+      "classification": "REDIRECT",
+      "redirectTarget": "/membership-pricing",
+      "rationale": "Pricing FAQ duplicates membership-pricing and adhd-care pricing sections.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 5,
+      "wordCount": 358,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/how-online-prescriptions-work",
+      "redirectTarget": "/answers",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 7,
+      "wordCount": 815,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/answers",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /answers."
+    },
+    {
+      "path": "/answers/insulin-resistance-without-diabetes",
+      "redirectTarget": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 875,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/insulin-resistance-and-weight-loss-clinician-overview."
+    },
+    {
+      "path": "/answers/is-adhd-medication-safe-long-term",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/is-adhd-medication-safe-long-term",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 7,
+      "wordCount": 418,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/is-online-adhd-diagnosis-legitimate",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/is-online-adhd-diagnosis-legit",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 891,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/is-telehealth-legitimate",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 9,
+      "wordCount": 821,
+      "pageType": "Health Guide",
+      "classification": "KEEP",
+      "rationale": "Primary PAA guide for cornerstone cluster; paired blog owns long-form depth."
+    },
+    {
+      "path": "/answers/late-adhd-diagnosis-adults",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 360,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/medical-weight-loss-vs-dieting",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/medical-weight-loss-vs-dieting-what-actually-works",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 11,
+      "wordCount": 409,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/meet-and-greet-telehealth-expectations",
+      "redirectTarget": "/telehealth",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 6,
+      "wordCount": 845,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/telehealth",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /telehealth."
+    },
+    {
+      "path": "/answers/minoxidil-hair-loss-does-it-work",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/minoxidil-for-hair-loss-does-it-work",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 410,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/non-stimulant-adhd-medications",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/non-stimulant-adhd-medications-explained",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 990,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/normal-a1c-insulin-resistance",
+      "redirectTarget": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 8,
+      "wordCount": 918,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/insulin-resistance-and-weight-loss-clinician-overview."
+    },
+    {
+      "path": "/answers/oral-vs-injectable-weight-loss-meds",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/oral-vs-injectable-weight-loss-medications",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 414,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/oral-vs-topical-minoxidil",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/oral-vs-topical-minoxidil-which-is-right",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 383,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/phentermine-weight-loss-safety",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 404,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/poor-sleep-feels-like-adhd",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 10,
+      "wordCount": 1102,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/rejection-sensitivity-adhd",
+      "classification": "REDIRECT",
+      "redirectTarget": "/answers/signs-of-adult-adhd",
+      "rationale": "Niche ADHD symptom (365 words, 2 inbound); low search volume vs maintenance cost.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 365,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/screening-vs-adhd-evaluation",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 8,
+      "wordCount": 356,
+      "pageType": "Health Guide",
+      "classification": "KEEP",
+      "rationale": "Primary PAA guide for cornerstone cluster; paired blog owns long-form depth."
+    },
+    {
+      "path": "/answers/semaglutide-weight-loss-how-it-works",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/semaglutide-for-weight-loss-how-it-works",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 12,
+      "wordCount": 976,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/signs-of-adult-adhd",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 886,
+      "pageType": "Health Guide",
+      "classification": "KEEP",
+      "rationale": "Primary PAA guide for cornerstone cluster; paired blog owns long-form depth."
+    },
+    {
+      "path": "/answers/signs-of-sleep-apnea-in-adults",
+      "redirectTarget": "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 10,
+      "wordCount": 548,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign."
+    },
+    {
+      "path": "/answers/sildenafil-erectile-dysfunction-expectations",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 400,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/starting-adhd-medication-adults",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 33,
+      "wordCount": 906,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/telehealth-adhd-california",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 6,
+      "wordCount": 429,
+      "pageType": "Health Guide",
+      "classification": "KEEP",
+      "rationale": "Primary PAA guide for cornerstone cluster; paired blog owns long-form depth."
+    },
+    {
+      "path": "/answers/telehealth-adhd-texas",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/online-adhd-diagnosis-texas",
+      "rationale": "TX telehealth FAQ duplicates TX diagnosis blog; geo FAQ → geo cornerstone.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 5,
+      "wordCount": 340,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/testosterone-and-adhd-overlap",
+      "redirectTarget": "/adhd-care",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 9,
+      "wordCount": 351,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/adhd-care",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
+    },
+    {
+      "path": "/answers/time-blindness-adhd",
+      "classification": "REDIRECT",
+      "redirectTarget": "/answers/signs-of-adult-adhd",
+      "rationale": "Micro-topic guide (358 words, 2 inbound); consolidate to adult signs cornerstone guide.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 358,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/tirzepatide-vs-semaglutide",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/tirzepatide-vs-semaglutide-which-is-better",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 404,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/trt-monitoring-requirements",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/when-is-testosterone-therapy-appropriate",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 6,
+      "wordCount": 880,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/weight-gain-after-stopping-ozempic",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "rationale": "Ozempic cessation FAQ with 1 inbound; food-noise cornerstone owns GLP-1 rebound narrative.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 1172,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/what-does-low-testosterone-feel-like",
+      "redirectTarget": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 17,
+      "wordCount": 406,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/free-testosterone-vs-total-testosterone-what-patients-should-know."
+    },
+    {
+      "path": "/answers/what-included-199-adhd-evaluation",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Evaluation scope FAQ belongs on /adhd-care offer section.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 7,
+      "wordCount": 382,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/what-is-food-noise",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 29,
+      "wordCount": 996,
+      "pageType": "Health Guide",
+      "classification": "KEEP",
+      "rationale": "Primary PAA guide for cornerstone cluster; paired blog owns long-form depth."
+    },
+    {
+      "path": "/answers/what-is-free-testosterone",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 13,
+      "wordCount": 901,
+      "pageType": "Health Guide",
+      "classification": "KEEP",
+      "rationale": "Primary PAA guide for cornerstone cluster; paired blog owns long-form depth."
+    },
+    {
+      "path": "/answers/what-is-insulin-resistance",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 1070,
+      "pageType": "Health Guide",
+      "classification": "KEEP",
+      "rationale": "Primary PAA guide for cornerstone cluster; paired blog owns long-form depth."
+    },
+    {
+      "path": "/answers/when-is-testosterone-therapy-appropriate",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/when-is-testosterone-therapy-appropriate",
+      "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
+      "phase": 3,
+      "groups": [
+        "Duplicate Pages",
+        "Educational Pages"
+      ],
+      "internalLinksIn": 11,
+      "wordCount": 904,
+      "pageType": "Health Guide"
+    },
+    {
+      "path": "/answers/who-qualifies-glp-1-weight-loss",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 10,
+      "wordCount": 390,
+      "pageType": "Health Guide",
+      "classification": "KEEP",
+      "rationale": "Primary PAA guide for cornerstone cluster; paired blog owns long-form depth."
+    },
+    {
+      "path": "/answers/why-am-i-tired-even-after-sleeping",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 614,
+      "pageType": "Health Guide",
+      "classification": "KEEP",
+      "rationale": "Primary PAA guide for cornerstone cluster; paired blog owns long-form depth."
+    },
+    {
+      "path": "/answers/why-normal-labs-dont-mean-healthy",
+      "redirectTarget": "/answers",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 5,
+      "wordCount": 1266,
+      "pageType": "Health Guide",
+      "classification": "REDIRECT",
+      "target": "/answers",
+      "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /answers."
+    },
+    {
+      "path": "/blog",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Simplify discovery; remove blog/all dependency; category hubs may merge.",
+      "phase": 2,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 755,
+      "pageType": "Blog Hub"
+    },
+    {
+      "path": "/blog/adderall-for-adhd-how-it-works",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 1624,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/adderall-ir-vs-xr-adults",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/adderall-for-adhd-how-it-works",
+      "rationale": "IR/XR variant duplicates Adderall mechanism article.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 657,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adhd",
+      "classification": "MERGE",
+      "redirectTarget": "/blog",
+      "rationale": "Category hub duplicates /blog index; merge ADHD article list into main blog hub.",
+      "phase": 2,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 700,
+      "pageType": "Blog Hub"
+    },
+    {
+      "path": "/blog/adhd-evaluation-california-online-vs-in-person",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/online-adhd-diagnosis-california",
+      "rationale": "CA geo cluster consolidation; online diagnosis cornerstone absorbs comparison intent.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 713,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adhd-evaluation-cost-california",
+      "classification": "REDIRECT",
+      "redirectTarget": "/membership-pricing",
+      "rationale": "State-specific pricing duplicate; membership-pricing is canonical pricing page.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 368,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adhd-evaluation-cost-texas",
+      "classification": "REDIRECT",
+      "redirectTarget": "/membership-pricing",
+      "rationale": "State-specific pricing duplicate of /adhd-evaluation-cost and membership-pricing.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 8,
+      "wordCount": 591,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adhd-medication-daily-or-as-needed-adults",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 521,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/adhd-medication-online-california",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/adhd-medication-options-for-adults",
+      "rationale": "CA medication blog duplicates general adult medication guide.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 467,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adhd-medication-online-texas-telehealth",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/online-adhd-diagnosis-texas",
+      "rationale": "TX medication logistics covered by TX diagnosis cornerstone + /adhd-care.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 460,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adhd-medication-options-california",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/adhd-medication-options-for-adults",
+      "rationale": "State variant of general medication options article; cannibalizes adult guide.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 751,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adhd-medication-options-for-adults",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 6,
+      "wordCount": 1248,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/adhd-medication-side-effects-what-to-expect",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 6,
+      "wordCount": 1207,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/adhd-symptoms-overlooked",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 35,
+      "wordCount": 718,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/adhd-telehealth-california",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 362,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/adhd-testing-online-california-screening-vs-evaluation",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-screening",
+      "rationale": "Screening vs evaluation intent owned by /adhd-screening + /adhd-care.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 390,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adhd-treatment-houston-online",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-diagnosis-texas",
+      "rationale": "Houston blog duplicates Texas geo landing; 3 inbound.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 446,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adult-adhd-symptoms-california",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/how-to-know-if-you-have-adhd-adult",
+      "rationale": "Symptoms content duplicates sitewide ADHD symptoms cornerstone (167 inbound).",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 827,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/adult-adhd-treatment-california-2026",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Treatment commercial intent belongs on service page, not geo blog.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 532,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/after-adhd-diagnosis-next-steps-adults",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Post-diagnosis journey belongs on /adhd-care; 2 inbound thin article.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 474,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/all",
+      "classification": "DELETE",
+      "redirectTarget": "/blog",
+      "rationale": "Redundant article index duplicating /blog hub; 4 inbound only from footer. High maintenance, no unique SEO value.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 1164,
+      "pageType": "Blog Hub"
+    },
+    {
+      "path": "/blog/ambien-and-sleep-medications-risks-and-benefits",
+      "classification": "DELETE",
+      "redirectTarget": "/blog/insomnia-treatment-options-beyond-medication",
+      "rationale": "Off-scope sleep Rx content; Siya does not promote Ambien prescribing. 2 inbound, no conversion path.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 1652,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+      "classification": "REDIRECT",
+      "redirectTarget": "/weight-loss-metabolic-health",
+      "rationale": "Cross-service article with 2 inbound; metabolic service page owns dual-condition positioning.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 1621,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/compounded-vs-branded-glp1-medications",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 1878,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/focalin-vs-adderall-comparison",
+      "classification": "REDIRECT",
+      "redirectTarget": "/blog/vyvanse-vs-adderall-differences",
+      "rationale": "Third stimulant comparison page; consolidate ADHD med comparisons to canonical pair.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 1200,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 23,
+      "wordCount": 3260,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 13,
+      "wordCount": 2460,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/glp1-side-effects-and-how-to-manage-them",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 14,
+      "wordCount": 1688,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/glutathione-and-peptides-what-do-they-actually-do",
+      "classification": "DELETE",
+      "redirectTarget": "/mens-health-longevity",
+      "rationale": "Peptide marketing content outside current service scope; 2 inbound, maintenance with no revenue tie.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 1649,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/how-adhd-medication-is-prescribed-online",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 11,
+      "wordCount": 1194,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/how-mental-health-affects-weight-loss-outcomes",
+      "redirectTarget": "/weight-loss-metabolic-health",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 1650,
+      "pageType": "Blog Article",
+      "classification": "REDIRECT",
+      "target": "/weight-loss-metabolic-health",
+      "rationale": "Blog not in minimum viable whitelist; redirect to preserve link equity on /weight-loss-metabolic-health."
+    },
+    {
+      "path": "/blog/how-to-choose-adhd-provider-california",
+      "classification": "REDIRECT",
+      "redirectTarget": "/providers",
+      "rationale": "Provider selection intent better served by /providers hub + profiles.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 526,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/how-to-know-if-you-have-adhd-adult",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 692,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/how-to-safely-get-prescriptions-online",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 16,
+      "wordCount": 1619,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/insomnia-treatment-options-beyond-medication",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 8,
+      "wordCount": 1650,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 23,
+      "wordCount": 2780,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/is-adhd-medication-safe-long-term",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 5,
+      "wordCount": 1261,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/is-online-adhd-diagnosis-legit",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 39,
+      "wordCount": 833,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/long-term-weight-loss-medications-what-to-expect",
+      "redirectTarget": "/weight-loss-metabolic-health",
+      "phase": 3,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 2,
+      "wordCount": 1705,
+      "pageType": "Blog Article",
+      "classification": "REDIRECT",
+      "target": "/weight-loss-metabolic-health",
+      "rationale": "Blog not in minimum viable whitelist; redirect to preserve link equity on /weight-loss-metabolic-health."
+    },
+    {
+      "path": "/blog/medical-weight-loss-glp1-semaglutide-texas",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 9,
+      "wordCount": 1087,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/medical-weight-loss-vs-dieting-what-actually-works",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 1673,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/minoxidil-for-hair-loss-does-it-work",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 6,
+      "wordCount": 1755,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/modafinil-for-focus-and-fatigue-is-it-safe",
+      "classification": "DELETE",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Modafinil not a Siya service line; risks implying off-label prescribing. 4 inbound only.",
+      "phase": 1,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 1668,
+      "pageType": "Blog Article"
+    },
+    {
+      "path": "/blog/non-stimulant-adhd-medications-explained",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 5,
+      "wordCount": 1150,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/online-adhd-diagnosis-california",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 7,
+      "wordCount": 967,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/online-adhd-diagnosis-texas",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 10,
+      "wordCount": 740,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/oral-vs-injectable-weight-loss-medications",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 1822,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/oral-vs-topical-minoxidil-which-is-right",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 1677,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 1795,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/semaglutide-for-weight-loss-how-it-works",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 13,
+      "wordCount": 2220,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 1688,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 10,
+      "wordCount": 2280,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/telehealth",
+      "classification": "MERGE",
+      "redirectTarget": "/blog",
+      "rationale": "Category hub duplicates /blog; low unique value (327 words).",
+      "phase": 2,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 327,
+      "pageType": "Blog Hub"
+    },
+    {
+      "path": "/blog/telehealth-prescriptions-how-online-treatment-works",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 7,
+      "wordCount": 1672,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/tirzepatide-vs-semaglutide-which-is-better",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 1989,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/vyvanse-vs-adderall-differences",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 1296,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/weight-loss",
+      "classification": "MERGE",
+      "redirectTarget": "/blog",
+      "rationale": "Category hub duplicates /blog; merge weight-loss articles into filtered blog index.",
+      "phase": 2,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 304,
+      "pageType": "Blog Hub"
+    },
+    {
+      "path": "/blog/when-is-testosterone-therapy-appropriate",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 9,
+      "wordCount": 1647,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/why-am-i-always-tired-causes-when-to-see-doctor",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 20,
+      "wordCount": 2644,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd",
+      "redirectTarget": null,
+      "phase": null,
+      "groups": [
+        "Educational Pages"
+      ],
+      "internalLinksIn": 4,
+      "wordCount": 1138,
+      "pageType": "Blog Article",
+      "classification": "KEEP",
+      "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
+    },
+    {
+      "path": "/book-appointment",
+      "classification": "KEEP",
+      "redirectTarget": null,
+      "rationale": "Core revenue, trust, or legal page in minimum viable site.",
+      "phase": null,
+      "groups": [
+        "Core Revenue Pages",
+        "Utility Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 112,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/creyos-adhd-testing",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-care",
+      "rationale": "Creyos is included in $199 evaluation; standalone page fragments ADHD funnel (3 inbound).",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 3,
+      "wordCount": 380,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/labs",
+      "classification": "REDIRECT",
+      "redirectTarget": "/telehealth",
+      "rationale": "102-word coming-soon placeholder; no unique content. Defer until labs launch.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "Utility Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 102,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/legal",
+      "classification": "KEEP",
+      "redirectTarget": null,
+      "rationale": "Core revenue, trust, or legal page in minimum viable site.",
+      "phase": null,
+      "groups": [
+        "Utility Pages",
+        "Trust Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 148,
+      "pageType": "Legal"
+    },
+    {
+      "path": "/legal/controlled-substance-treatment-agreement",
+      "classification": "KEEP",
+      "redirectTarget": null,
+      "rationale": "Core revenue, trust, or legal page in minimum viable site.",
+      "phase": null,
+      "groups": [
+        "Utility Pages",
+        "Trust Pages"
+      ],
+      "internalLinksIn": 76,
+      "wordCount": 829,
+      "pageType": "Legal"
+    },
+    {
+      "path": "/legal/cookie-policy",
+      "classification": "KEEP",
+      "redirectTarget": null,
+      "rationale": "Core revenue, trust, or legal page in minimum viable site.",
+      "phase": null,
+      "groups": [
+        "Utility Pages",
+        "Trust Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 475,
+      "pageType": "Legal"
+    },
+    {
+      "path": "/legal/notice-of-privacy-practices",
+      "classification": "KEEP",
+      "redirectTarget": null,
+      "rationale": "Core revenue, trust, or legal page in minimum viable site.",
+      "phase": null,
+      "groups": [
+        "Utility Pages",
+        "Trust Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 1547,
+      "pageType": "Legal"
+    },
+    {
+      "path": "/legal/privacy-policy",
+      "classification": "KEEP",
+      "redirectTarget": null,
+      "rationale": "Core revenue, trust, or legal page in minimum viable site.",
+      "phase": null,
+      "groups": [
+        "Utility Pages",
+        "Trust Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 2874,
+      "pageType": "Legal"
+    },
+    {
+      "path": "/legal/terms-of-use",
+      "classification": "KEEP",
+      "redirectTarget": null,
+      "rationale": "Core revenue, trust, or legal page in minimum viable site.",
+      "phase": null,
+      "groups": [
+        "Utility Pages",
+        "Trust Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 4490,
+      "pageType": "Legal"
+    },
+    {
+      "path": "/membership-pricing",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Single pricing source of truth; absorb adhd-evaluation-cost redirects.",
+      "phase": 2,
+      "groups": [
+        "Core Revenue Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 539,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/mens-health-longevity",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Core revenue; align scope to actual services, add hormone cornerstone links.",
+      "phase": 2,
+      "groups": [
+        "Core Revenue Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 387,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/online-adhd-test",
+      "classification": "REDIRECT",
+      "redirectTarget": "/adhd-screening",
+      "rationale": "Duplicate screening funnel intent with /adhd-screening; CTA audit flags cross-link confusion.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "SEO Pages"
+      ],
+      "internalLinksIn": 19,
+      "wordCount": 485,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/prescriptions",
+      "classification": "REDIRECT",
+      "redirectTarget": "/telehealth",
+      "rationale": "92-word coming-soon placeholder; 1 inbound. Telehealth owns prescription narrative.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "Utility Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 92,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/primary-urgent-care",
+      "classification": "REDIRECT",
+      "redirectTarget": "/telehealth",
+      "rationale": "Secondary service with 1 inbound; telehealth page covers virtual primary care positioning.",
+      "phase": 1,
+      "groups": [
+        "Core Revenue Pages",
+        "Utility Pages"
+      ],
+      "internalLinksIn": 1,
+      "wordCount": 250,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/privacy-policy",
+      "classification": "DELETE",
+      "redirectTarget": "/legal/privacy-policy",
+      "rationale": "Legacy legal stub; canonical is /legal/privacy-policy. Zero inbound. Remove file after 301.",
+      "phase": 1,
+      "groups": [
+        "Orphan Pages",
+        "Legacy Pages"
+      ],
+      "internalLinksIn": 0,
+      "wordCount": 65,
+      "pageType": "Legacy"
+    },
+    {
+      "path": "/providers",
+      "classification": "KEEP",
+      "redirectTarget": null,
+      "rationale": "Core revenue, trust, or legal page in minimum viable site.",
+      "phase": null,
+      "groups": [
+        "Trust Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 474,
+      "pageType": "Provider Hub"
+    },
+    {
+      "path": "/providers/derek-timbs",
+      "classification": "KEEP",
+      "redirectTarget": null,
+      "rationale": "Provider profile — required for E-E-A-T and booking conversion.",
+      "phase": null,
+      "groups": [
+        "Trust Pages"
+      ],
+      "internalLinksIn": 8,
+      "wordCount": 608,
+      "pageType": "Provider Profile"
+    },
+    {
+      "path": "/providers/dr-natasha-desai",
+      "classification": "KEEP",
+      "redirectTarget": null,
+      "rationale": "Provider profile — required for E-E-A-T and booking conversion.",
+      "phase": null,
+      "groups": [
+        "Trust Pages"
+      ],
+      "internalLinksIn": 17,
+      "wordCount": 713,
+      "pageType": "Provider Profile"
+    },
+    {
+      "path": "/providers/dr-sneh-pandey",
+      "classification": "KEEP",
+      "redirectTarget": null,
+      "rationale": "Provider profile — required for E-E-A-T and booking conversion.",
+      "phase": null,
+      "groups": [
+        "Trust Pages"
+      ],
+      "internalLinksIn": 25,
+      "wordCount": 855,
+      "pageType": "Provider Profile"
+    },
+    {
+      "path": "/providers/dr-swati-pandey",
+      "classification": "KEEP",
+      "redirectTarget": null,
+      "rationale": "Provider profile — required for E-E-A-T and booking conversion.",
+      "phase": null,
+      "groups": [
+        "Trust Pages"
+      ],
+      "internalLinksIn": 12,
+      "wordCount": 728,
+      "pageType": "Provider Profile"
+    },
+    {
+      "path": "/providers/dr-vanessa-urbina",
+      "classification": "KEEP",
+      "redirectTarget": null,
+      "rationale": "Provider profile — required for E-E-A-T and booking conversion.",
+      "phase": null,
+      "groups": [
+        "Trust Pages"
+      ],
+      "internalLinksIn": 13,
+      "wordCount": 655,
+      "pageType": "Provider Profile"
+    },
+    {
+      "path": "/providers/megan-wunderlich",
+      "classification": "KEEP",
+      "redirectTarget": null,
+      "rationale": "Provider profile — required for E-E-A-T and booking conversion.",
+      "phase": null,
+      "groups": [
+        "Trust Pages"
+      ],
+      "internalLinksIn": 11,
+      "wordCount": 605,
+      "pageType": "Provider Profile"
+    },
+    {
+      "path": "/providers/wendy-delgado",
+      "classification": "KEEP",
+      "redirectTarget": null,
+      "rationale": "Provider profile — required for E-E-A-T and booking conversion.",
+      "phase": null,
+      "groups": [
+        "Trust Pages"
+      ],
+      "internalLinksIn": 11,
+      "wordCount": 585,
+      "pageType": "Provider Profile"
+    },
+    {
+      "path": "/siya-circle",
+      "classification": "DELETE",
+      "redirectTarget": "https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl",
+      "rationale": "Orphan utility page (0 inbound). Newsletter signup belongs in footer only per CTA audit.",
+      "phase": 1,
+      "groups": [
+        "Orphan Pages",
+        "Utility Pages"
+      ],
+      "internalLinksIn": 0,
+      "wordCount": 295,
+      "pageType": "Utility"
+    },
+    {
+      "path": "/telehealth",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Core routing hub; absorb redirected coming-soon services, simplify service grid.",
+      "phase": 2,
+      "groups": [
+        "Core Revenue Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 855,
+      "pageType": "Service Page"
+    },
+    {
+      "path": "/terms",
+      "classification": "DELETE",
+      "redirectTarget": "/legal/terms-of-use",
+      "rationale": "Legacy legal stub; canonical is /legal/terms-of-use. Zero inbound. Remove file after 301.",
+      "phase": 1,
+      "groups": [
+        "Orphan Pages",
+        "Legacy Pages"
+      ],
+      "internalLinksIn": 0,
+      "wordCount": 70,
+      "pageType": "Legacy"
+    },
+    {
+      "path": "/weight-loss-metabolic-health",
+      "classification": "KEEP + REWRITE",
+      "redirectTarget": null,
+      "rationale": "Core revenue; add provider authority (Sneh), simplify CTA bands per CTA audit.",
+      "phase": 2,
+      "groups": [
+        "Core Revenue Pages"
+      ],
+      "internalLinksIn": 167,
+      "wordCount": 1383,
+      "pageType": "Service Page"
+    }
+  ],
+  "inputs": {
+    "websiteInventory": "data/website-inventory.json",
+    "cannibalization": "data/cannibalization-phase1.mjs",
+    "internalLinkAudit": "data/internal-link-audit.json",
+    "zeroInboundPages": [
+      "/adhd-diagnosis-florida",
+      "/intake",
+      "/privacy-policy",
+      "/siya-circle",
+      "/terms",
+      "/visual-components"
+    ]
+  }
+}

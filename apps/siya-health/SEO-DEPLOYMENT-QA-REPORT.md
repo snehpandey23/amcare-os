@@ -1,15 +1,15 @@
 # SEO Deployment QA Report
 
-Generated: 2026-06-07T07:20:59.623Z
+Generated: 2026-06-07T07:46:12.405Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| HTML pages scanned | 168 |
-| Sitemap URLs | 168 |
-| Pages with Meet & Greet in nav | 56 |
-| Non-ADHD pages still referencing adhd-screening | 73 |
+| HTML pages scanned | 164 |
+| Sitemap URLs | 164 |
+| Pages with Meet & Greet in nav | 0 |
+| Non-ADHD pages still referencing adhd-screening | 68 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
 
@@ -39,7 +39,7 @@ Generated: 2026-06-07T07:20:59.623Z
 - **Default secondary CTA:** Explore Care Options → `#services` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, `adhd-screening.html`
 
-### Non-ADHD pages still containing `adhd-screening` (73)
+### Non-ADHD pages still containing `adhd-screening` (68)
 
 - `about.html`
 - `blog/adderall-ir-vs-xr-adults.html`
@@ -56,14 +56,11 @@ Generated: 2026-06-07T07:20:59.623Z
 - `blog/adhd-telehealth-california.html`
 - `blog/adhd-testing-online-california-screening-vs-evaluation.html`
 - `blog/adhd-treatment-houston-online.html`
-- `blog/all.html`
-- `blog/ambien-and-sleep-medications-risks-and-benefits.html`
 - `blog/compounded-vs-branded-glp1-medications.html`
 - `blog/focalin-vs-adderall-comparison.html`
 - `blog/food-noise-and-glp-1-what-it-means-and-what-helps.html`
 - `blog/free-testosterone-vs-total-testosterone-what-patients-should-know.html`
 - `blog/glp1-side-effects-and-how-to-manage-them.html`
-- `blog/glutathione-and-peptides-what-do-they-actually-do.html`
 - `blog/how-mental-health-affects-weight-loss-outcomes.html`
 - `blog/how-to-safely-get-prescriptions-online.html`
 - `blog/index.html`
@@ -73,7 +70,6 @@ Generated: 2026-06-07T07:20:59.623Z
 - `blog/medical-weight-loss-glp1-semaglutide-texas.html`
 - `blog/medical-weight-loss-vs-dieting-what-actually-works.html`
 - `blog/minoxidil-for-hair-loss-does-it-work.html`
-- `blog/modafinil-for-focus-and-fatigue-is-it-safe.html`
 - `blog/oral-vs-injectable-weight-loss-medications.html`
 - `blog/oral-vs-topical-minoxidil-which-is-right.html`
 - `blog/phentermine-for-weight-loss-safety-and-effectiveness.html`
@@ -97,7 +93,6 @@ Generated: 2026-06-07T07:20:59.623Z
 - `legal/notice-of-privacy-practices/index.html`
 - `legal/privacy-policy/index.html`
 - `legal/terms-of-use/index.html`
-- `membership-pricing.html`
 - `mens-health-longevity.html`
 - `prescriptions.html`
 - `primary-urgent-care.html`
@@ -115,7 +110,7 @@ Generated: 2026-06-07T07:20:59.623Z
 - `terms.html`
 - `weight-loss-metabolic-health.html`
 
-### All pages with any `adhd-screening` reference (167)
+### All pages with any `adhd-screening` reference (162)
 
 - `about.html`
 - `adhd-care.html`
@@ -158,7 +153,7 @@ Generated: 2026-06-07T07:20:59.623Z
 - `answers/how-much-does-adhd-testing-cost.html`
 - `answers/how-online-prescriptions-work.html`
 
-_…and 127 more (expected on ADHD funnels)._
+_…and 122 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 

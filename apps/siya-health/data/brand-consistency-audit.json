@@ -1,0 +1,4042 @@
+{
+  "generated": "2026-06-07T07:46:15.850Z",
+  "brandPillars": [
+    "physicianLed",
+    "adhd",
+    "weightLoss",
+    "metabolic",
+    "primaryCare",
+    "transparentPricing",
+    "longTerm",
+    "evidenceBased",
+    "wholePerson"
+  ],
+  "summary": {
+    "pagesAudited": 160,
+    "avgMission": 7.7,
+    "avgBrand": 6.7,
+    "byRecommendation": {
+      "DELETE": 4,
+      "MERGE": 85,
+      "REWRITE": 13,
+      "KEEP": 58
+    },
+    "flagCounts": {
+      "Duplicate messaging": 17,
+      "Outdated language": 3,
+      "Excessive CTAs": 28
+    }
+  },
+  "pages": [
+    {
+      "path": "/",
+      "pageType": "Homepage",
+      "title": "Siya Health | When Focus, Energy, or Weight Won't Budge",
+      "h1": "Something feels off—and you're tired of guessing why.",
+      "missionAlignment": 9,
+      "brandAlignment": 7,
+      "composite": 8,
+      "flags": [
+        "Excessive CTAs",
+        "Outdated language"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "metabolic",
+        "primaryCare",
+        "transparentPricing",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 15
+    },
+    {
+      "path": "/about",
+      "pageType": "About",
+      "title": "About Siya Health | Mission, Team & How Care Works",
+      "h1": "Care for adults who are done guessing about their health",
+      "missionAlignment": 10,
+      "brandAlignment": 10,
+      "composite": 10,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "primaryCare",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 8
+    },
+    {
+      "path": "/adhd-care",
+      "pageType": "Service Page",
+      "title": "Adult ADHD Diagnosis Online — Same-Week Evaluation ($199)",
+      "h1": "Adult ADHD Evaluation Online",
+      "missionAlignment": 9,
+      "brandAlignment": 6,
+      "composite": 7.5,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "adhd",
+        "primaryCare",
+        "transparentPricing",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 7
+    },
+    {
+      "path": "/adhd-diagnosis-austin",
+      "pageType": "Geo SEO Landing",
+      "title": "ADHD Diagnosis Austin TX | Online $199 Evaluation",
+      "h1": "ADHD Diagnosis in Austin, Texas (Online, $199)",
+      "missionAlignment": 7,
+      "brandAlignment": 7,
+      "composite": 7,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 6
+    },
+    {
+      "path": "/adhd-diagnosis-florida",
+      "pageType": "Geo SEO Landing",
+      "title": "Online ADHD Diagnosis Florida | $199 Evaluation",
+      "h1": "Online ADHD Diagnosis in Florida ($199 Evaluation)",
+      "missionAlignment": 4,
+      "brandAlignment": 8,
+      "composite": 6,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "primaryCare",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "DELETE",
+      "duplicateOf": null,
+      "mainCtaCount": 5
+    },
+    {
+      "path": "/adhd-diagnosis-houston",
+      "pageType": "Geo SEO Landing",
+      "title": "ADHD Diagnosis Houston TX | Online $199 Evaluation",
+      "h1": "ADHD Diagnosis in Houston, Texas (Online, $199)",
+      "missionAlignment": 7,
+      "brandAlignment": 7,
+      "composite": 7,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 5
+    },
+    {
+      "path": "/adhd-diagnosis-pennsylvania",
+      "pageType": "Geo SEO Landing",
+      "title": "Online ADHD Diagnosis Pennsylvania | $199",
+      "h1": "Online ADHD Diagnosis in Pennsylvania ($199 Evaluation)",
+      "missionAlignment": 7,
+      "brandAlignment": 7,
+      "composite": 7,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 5
+    },
+    {
+      "path": "/adhd-diagnosis-philadelphia",
+      "pageType": "Geo SEO Landing",
+      "title": "ADHD Diagnosis Philadelphia PA | Online $199",
+      "h1": "ADHD Diagnosis in Philadelphia, Pennsylvania (Online, $199)",
+      "missionAlignment": 7,
+      "brandAlignment": 7,
+      "composite": 7,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 5
+    },
+    {
+      "path": "/adhd-diagnosis-texas",
+      "pageType": "Geo SEO Landing",
+      "title": "Online ADHD Diagnosis Texas | $199 Evaluation",
+      "h1": "Online ADHD Diagnosis in Texas ($199 Evaluation)",
+      "missionAlignment": 7,
+      "brandAlignment": 7,
+      "composite": 7,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 5
+    },
+    {
+      "path": "/adhd-evaluation-cost",
+      "pageType": "Service Page",
+      "title": "ADHD Evaluation Cost Online | $199 Flat Rate",
+      "h1": "ADHD Evaluation Cost: $199 (What You Get)",
+      "missionAlignment": 9,
+      "brandAlignment": 7,
+      "composite": 8,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 5
+    },
+    {
+      "path": "/adhd-screening",
+      "pageType": "Service Page",
+      "title": "Start screening",
+      "h1": "What are you looking for help with?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "weightLoss",
+        "evidenceBased"
+      ],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/adhd-treatment-online",
+      "pageType": "Service Page",
+      "title": "ADHD Treatment Online | Telehealth TX, PA, FL",
+      "h1": "ADHD Treatment Online (After Your Diagnosis)",
+      "missionAlignment": 9,
+      "brandAlignment": 7,
+      "composite": 8,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 5
+    },
+    {
+      "path": "/adult-adhd-diagnosis",
+      "pageType": "Service Page",
+      "title": "Adult ADHD Diagnosis Online | $199 Evaluation",
+      "h1": "Adult ADHD Diagnosis Online ($199 Comprehensive Evaluation)",
+      "missionAlignment": 9,
+      "brandAlignment": 7,
+      "composite": 8,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 5
+    },
+    {
+      "path": "/answers",
+      "pageType": "Health Guide Hub",
+      "title": "Health Guides | Metabolic, ADHD, Hormones & Telehealth",
+      "h1": "Health Guides",
+      "missionAlignment": 8,
+      "brandAlignment": 6,
+      "composite": 7,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 6
+    },
+    {
+      "path": "/answers/adderall-vs-vyvanse-adults",
+      "pageType": "Health Guide",
+      "title": "When might Vyvanse be preferred over Adderall for adults?",
+      "h1": "When might Vyvanse be preferred over Adderall for adults?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/vyvanse-vs-adderall-differences",
+      "mainCtaCount": 3
+    },
+    {
+      "path": "/answers/adhd-and-weight-loss-connection",
+      "pageType": "Health Guide",
+      "title": "Is there a connection between ADHD and weight loss struggles?",
+      "h1": "Is there a connection between ADHD and weight loss struggles?",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/answers/adhd-in-men",
+      "pageType": "Health Guide",
+      "title": "How does adult ADHD present in men?",
+      "h1": "How does adult ADHD present in men?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/adhd-in-women",
+      "pageType": "Health Guide",
+      "title": "How does ADHD present differently in women?",
+      "h1": "How does ADHD present differently in women?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/adhd-medication-every-day",
+      "pageType": "Health Guide",
+      "title": "Do you have to take ADHD medication every day?",
+      "h1": "Do you have to take ADHD medication every day?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 3
+    },
+    {
+      "path": "/answers/adhd-medication-side-effects",
+      "pageType": "Health Guide",
+      "title": "What ADHD medication side effects are most common in the first weeks?",
+      "h1": "What ADHD medication side effects are most common in the first weeks?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/adhd-medication-side-effects-what-to-expect",
+      "mainCtaCount": 3
+    },
+    {
+      "path": "/answers/adhd-vs-anxiety",
+      "pageType": "Health Guide",
+      "title": "How do you tell ADHD apart from anxiety?",
+      "h1": "How do you tell ADHD apart from anxiety?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 3
+    },
+    {
+      "path": "/answers/adhd-vs-burnout",
+      "pageType": "Health Guide",
+      "title": "Is it ADHD or burnout?",
+      "h1": "Is it ADHD or burnout?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "evidenceBased"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/afternoon-energy-crash-after-lunch",
+      "pageType": "Health Guide",
+      "title": "Why do I crash every afternoon after lunch?",
+      "h1": "Why do I crash every afternoon after lunch?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/asrs-adhd-screening-explained",
+      "pageType": "Health Guide",
+      "title": "What is the ASRS ADHD screening test?",
+      "h1": "What is the ASRS ADHD screening test?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/brain-fog-after-eating",
+      "pageType": "Health Guide",
+      "title": "Why do I get brain fog after eating?",
+      "h1": "Why do I get brain fog after eating?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/can-adhd-be-diagnosed-online",
+      "pageType": "Health Guide",
+      "title": "Can ADHD be diagnosed online?",
+      "h1": "Can ADHD be diagnosed online?",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/can-adhd-cause-anxiety",
+      "pageType": "Health Guide",
+      "title": "Can ADHD cause anxiety?",
+      "h1": "Can ADHD cause anxiety?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "primaryCare",
+        "evidenceBased"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/can-sleep-apnea-cause-fatigue",
+      "pageType": "Health Guide",
+      "title": "Can sleep apnea cause fatigue?",
+      "h1": "Can sleep apnea cause fatigue?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/can-you-get-adhd-medication-online",
+      "pageType": "Health Guide",
+      "title": "Can you get ADHD medication online?",
+      "h1": "Can you get ADHD medication online?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/compounded-vs-branded-glp-1",
+      "pageType": "Health Guide",
+      "title": "What should you ask about compounded vs branded GLP-1?",
+      "h1": "What should you ask about compounded vs branded GLP-1?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/compounded-vs-branded-glp1-medications",
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/creyos-adhd-testing-explained",
+      "pageType": "Health Guide",
+      "title": "What is Creyos cognitive testing for ADHD?",
+      "h1": "What is Creyos cognitive testing for ADHD?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/ed-telehealth-legitimate",
+      "pageType": "Health Guide",
+      "title": "Is telehealth for erectile dysfunction legitimate?",
+      "h1": "Is telehealth for erectile dysfunction legitimate?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/answers/executive-dysfunction-adhd",
+      "pageType": "Health Guide",
+      "title": "What is executive dysfunction in adult ADHD?",
+      "h1": "What is executive dysfunction in adult ADHD?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/food-noise-returned-on-glp-1",
+      "pageType": "Health Guide",
+      "title": "Why did food noise come back on GLP-1?",
+      "h1": "Why did food noise come back on GLP-1?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/fsa-hsa-adhd-evaluation",
+      "pageType": "Health Guide",
+      "title": "Can you use FSA or HSA for ADHD evaluation?",
+      "h1": "Can you use FSA or HSA for ADHD evaluation?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "evidenceBased"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/answers/glp-1-nausea-management",
+      "pageType": "Health Guide",
+      "title": "How do you manage GLP-1 nausea?",
+      "h1": "How do you manage GLP-1 nausea?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/glp-1-side-effects",
+      "pageType": "Health Guide",
+      "title": "Which GLP-1 side effects usually improve with titration?",
+      "h1": "Which GLP-1 side effects usually improve with titration?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "longTerm"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/glp1-side-effects-and-how-to-manage-them",
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/high-functioning-adhd",
+      "pageType": "Health Guide",
+      "title": "Can you have ADHD and still be high-functioning?",
+      "h1": "Can you have ADHD and still be high-functioning?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/high-shbg-low-free-testosterone",
+      "pageType": "Health Guide",
+      "title": "What does high SHBG with low free testosterone mean?",
+      "h1": "What does high SHBG with low free testosterone mean?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/how-long-adhd-evaluation",
+      "pageType": "Health Guide",
+      "title": "How long does an ADHD evaluation take?",
+      "h1": "How long does an ADHD evaluation take?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/how-much-does-adhd-testing-cost",
+      "pageType": "Health Guide",
+      "title": "How much does ADHD testing cost?",
+      "h1": "How much does ADHD testing cost?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/how-online-prescriptions-work",
+      "pageType": "Health Guide",
+      "title": "How do online prescriptions work legally?",
+      "h1": "How do online prescriptions work legally?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "longTerm"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/answers/insulin-resistance-without-diabetes",
+      "pageType": "Health Guide",
+      "title": "Can you have insulin resistance without diabetes?",
+      "h1": "Can you have insulin resistance without diabetes?",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/is-adhd-medication-safe-long-term",
+      "pageType": "Health Guide",
+      "title": "What does long-term ADHD medication safety monitoring include?",
+      "h1": "What does long-term ADHD medication safety monitoring include?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/is-adhd-medication-safe-long-term",
+      "mainCtaCount": 3
+    },
+    {
+      "path": "/answers/is-online-adhd-diagnosis-legitimate",
+      "pageType": "Health Guide",
+      "title": "What should you look for in a legitimate online ADHD diagnosis?",
+      "h1": "What should you look for in a legitimate online ADHD diagnosis?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/is-online-adhd-diagnosis-legit",
+      "mainCtaCount": 3
+    },
+    {
+      "path": "/answers/is-telehealth-legitimate",
+      "pageType": "Health Guide",
+      "title": "Is telehealth legitimate for medical care?",
+      "h1": "Is telehealth legitimate for medical care?",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "metabolic",
+        "transparentPricing",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/answers/late-adhd-diagnosis-adults",
+      "pageType": "Health Guide",
+      "title": "Why are so many adults diagnosed with ADHD late in life?",
+      "h1": "Why are so many adults diagnosed with ADHD late in life?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/medical-weight-loss-vs-dieting",
+      "pageType": "Health Guide",
+      "title": "When does medical weight loss outperform dieting alone?",
+      "h1": "When does medical weight loss outperform dieting alone?",
+      "missionAlignment": 8,
+      "brandAlignment": 8,
+      "composite": 8,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/medical-weight-loss-vs-dieting-what-actually-works",
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/meet-and-greet-telehealth-expectations",
+      "pageType": "Health Guide",
+      "title": "What happens in a telehealth Meet & Greet?",
+      "h1": "What happens in a telehealth Meet & Greet?",
+      "missionAlignment": 9,
+      "brandAlignment": 9,
+      "composite": 9,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "primaryCare",
+        "transparentPricing",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/answers/minoxidil-hair-loss-does-it-work",
+      "pageType": "Health Guide",
+      "title": "How long does minoxidil take to show hair results?",
+      "h1": "How long does minoxidil take to show hair results?",
+      "missionAlignment": 6,
+      "brandAlignment": 5,
+      "composite": 5.5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/minoxidil-for-hair-loss-does-it-work",
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/non-stimulant-adhd-medications",
+      "pageType": "Health Guide",
+      "title": "When are non-stimulant ADHD medications considered first?",
+      "h1": "When are non-stimulant ADHD medications considered first?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/non-stimulant-adhd-medications-explained",
+      "mainCtaCount": 3
+    },
+    {
+      "path": "/answers/normal-a1c-insulin-resistance",
+      "pageType": "Health Guide",
+      "title": "Can you have insulin resistance with a normal A1C?",
+      "h1": "Can you have insulin resistance with a normal A1C?",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/oral-vs-injectable-weight-loss-meds",
+      "pageType": "Health Guide",
+      "title": "When might oral weight-loss medication be preferred over injectable GLP-1?",
+      "h1": "When might oral weight-loss medication be preferred over injectable GLP-1?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/oral-vs-injectable-weight-loss-medications",
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/oral-vs-topical-minoxidil",
+      "pageType": "Health Guide",
+      "title": "When is topical minoxidil enough vs oral minoxidil?",
+      "h1": "When is topical minoxidil enough vs oral minoxidil?",
+      "missionAlignment": 6,
+      "brandAlignment": 4,
+      "composite": 5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "longTerm"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/oral-vs-topical-minoxidil-which-is-right",
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/phentermine-weight-loss-safety",
+      "pageType": "Health Guide",
+      "title": "Who should avoid phentermine for weight loss?",
+      "h1": "Who should avoid phentermine for weight loss?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/phentermine-for-weight-loss-safety-and-effectiveness",
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/poor-sleep-feels-like-adhd",
+      "pageType": "Health Guide",
+      "title": "Can poor sleep feel like ADHD?",
+      "h1": "Can poor sleep feel like ADHD?",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/rejection-sensitivity-adhd",
+      "pageType": "Health Guide",
+      "title": "What is rejection sensitive dysphoria (RSD) and ADHD?",
+      "h1": "What is rejection sensitive dysphoria (RSD) and ADHD?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/screening-vs-adhd-evaluation",
+      "pageType": "Health Guide",
+      "title": "What is the difference between ADHD screening and a full evaluation?",
+      "h1": "What is the difference between ADHD screening and a full evaluation?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/semaglutide-weight-loss-how-it-works",
+      "pageType": "Health Guide",
+      "title": "How quickly does semaglutide start working for weight loss?",
+      "h1": "How quickly does semaglutide start working for weight loss?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "longTerm"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/semaglutide-for-weight-loss-how-it-works",
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/signs-of-adult-adhd",
+      "pageType": "Health Guide",
+      "title": "What are the signs of adult ADHD?",
+      "h1": "What are the signs of adult ADHD?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "evidenceBased"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 3
+    },
+    {
+      "path": "/answers/signs-of-sleep-apnea-in-adults",
+      "pageType": "Health Guide",
+      "title": "What are the signs of sleep apnea in adults?",
+      "h1": "What are the signs of sleep apnea in adults?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "metabolic",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/sildenafil-erectile-dysfunction-expectations",
+      "pageType": "Health Guide",
+      "title": "How long does it take sildenafil to work?",
+      "h1": "How long does it take sildenafil to work?",
+      "missionAlignment": 6,
+      "brandAlignment": 5,
+      "composite": 5.5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/starting-adhd-medication-adults",
+      "pageType": "Health Guide",
+      "title": "What should adults expect when starting ADHD medication?",
+      "h1": "What should adults expect when starting ADHD medication?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "longTerm",
+        "evidenceBased"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/telehealth-adhd-california",
+      "pageType": "Health Guide",
+      "title": "How does ADHD telehealth work in California?",
+      "h1": "How does ADHD telehealth work in California?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "longTerm",
+        "evidenceBased"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/telehealth-adhd-texas",
+      "pageType": "Health Guide",
+      "title": "How does ADHD telehealth work in Texas?",
+      "h1": "How does ADHD telehealth work in Texas?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/answers/testosterone-and-adhd-overlap",
+      "pageType": "Health Guide",
+      "title": "Can low testosterone mimic ADHD?",
+      "h1": "Can low testosterone mimic ADHD?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/answers/time-blindness-adhd",
+      "pageType": "Health Guide",
+      "title": "What is time blindness in ADHD?",
+      "h1": "What is time blindness in ADHD?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/tirzepatide-vs-semaglutide",
+      "pageType": "Health Guide",
+      "title": "Who might consider tirzepatide instead of semaglutide?",
+      "h1": "Who might consider tirzepatide instead of semaglutide?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/tirzepatide-vs-semaglutide-which-is-better",
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/trt-monitoring-requirements",
+      "pageType": "Health Guide",
+      "title": "How often is TRT monitoring required?",
+      "h1": "How often is TRT monitoring required?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/when-is-testosterone-therapy-appropriate",
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/weight-gain-after-stopping-ozempic",
+      "pageType": "Health Guide",
+      "title": "Why am I gaining weight after stopping Ozempic?",
+      "h1": "Why am I gaining weight after stopping Ozempic?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/what-does-low-testosterone-feel-like",
+      "pageType": "Health Guide",
+      "title": "What does low testosterone feel like?",
+      "h1": "What does low testosterone feel like?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/what-included-199-adhd-evaluation",
+      "pageType": "Health Guide",
+      "title": "What is included in Siya Health’s $199 ADHD evaluation?",
+      "h1": "What is included in Siya Health’s $199 ADHD evaluation?",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "primaryCare",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/answers/what-is-food-noise",
+      "pageType": "Health Guide",
+      "title": "What is food noise?",
+      "h1": "What is food noise?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/what-is-free-testosterone",
+      "pageType": "Health Guide",
+      "title": "What is free testosterone?",
+      "h1": "What is free testosterone?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/what-is-insulin-resistance",
+      "pageType": "Health Guide",
+      "title": "What is insulin resistance?",
+      "h1": "What is insulin resistance?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/when-is-testosterone-therapy-appropriate",
+      "pageType": "Health Guide",
+      "title": "What symptoms warrant testosterone therapy evaluation?",
+      "h1": "What symptoms warrant testosterone therapy evaluation?",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/when-is-testosterone-therapy-appropriate",
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/who-qualifies-glp-1-weight-loss",
+      "pageType": "Health Guide",
+      "title": "Who qualifies for GLP-1 weight loss medications?",
+      "h1": "Who qualifies for GLP-1 weight loss medications?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/why-am-i-tired-even-after-sleeping",
+      "pageType": "Health Guide",
+      "title": "Why am I tired even after sleeping?",
+      "h1": "Why am I tired even after sleeping?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/why-normal-labs-dont-mean-healthy",
+      "pageType": "Health Guide",
+      "title": "Why don't normal labs mean you're healthy?",
+      "h1": "Why don't normal labs mean you're healthy?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog",
+      "pageType": "Blog Hub",
+      "title": "Health Insights & Blog Hub (2026) | ADHD, Weight Loss & Telehealth",
+      "h1": "Health Insights — Evidence-Based, Clinical",
+      "missionAlignment": 7,
+      "brandAlignment": 8,
+      "composite": 7.5,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "transparentPricing",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 5
+    },
+    {
+      "path": "/blog/adderall-for-adhd-how-it-works",
+      "pageType": "Blog Article",
+      "title": "Adderall for ADHD: How It Works in 2026 (Mechanism, Benefits & Safety)",
+      "h1": "Adderall for ADHD: How It Works (2026 Clinical Overview)",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "longTerm"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/adderall-ir-vs-xr-adults",
+      "pageType": "Blog Article",
+      "title": "Adderall IR vs XR for Adults: Timing, Duration & What to Ask Your Prescriber",
+      "h1": "Adderall IR vs XR — What Adults Should Know Before Starting Treatment",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "longTerm"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/adhd",
+      "pageType": "Blog Hub",
+      "title": "ADHD Articles Hub (2026) — Diagnosis, Medication Education & Care",
+      "h1": "ADHD articles",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "transparentPricing",
+        "longTerm"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/adhd-evaluation-california-online-vs-in-person",
+      "pageType": "Blog Article",
+      "title": "ADHD Evaluation in California: Online vs In-Person Options (2026)",
+      "h1": "ADHD Evaluation in California: Online vs In-Person Options",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/adhd-evaluation-cost-california",
+      "pageType": "Blog Article",
+      "title": "How Much Does an ADHD Evaluation Cost in California?",
+      "h1": "How Much Does an ADHD Evaluation Cost in California?",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "primaryCare",
+        "transparentPricing",
+        "longTerm"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/adhd-evaluation-cost-texas",
+      "pageType": "Blog Article",
+      "title": "ADHD Evaluation Cost in Texas: Full Breakdown (2026 Guide)",
+      "h1": "ADHD Evaluation Cost in Texas: Full Breakdown (2026 Guide)",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/adhd-medication-daily-or-as-needed-adults",
+      "pageType": "Blog Article",
+      "title": "Do You Need ADHD Medication Every Day? Daily vs As-Needed (Adults)",
+      "h1": "Do You Need ADHD Medication Every Day? What Adults Should Know",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/adhd-medication-online-california",
+      "pageType": "Blog Article",
+      "title": "Can You Get ADHD Medication Online in California? (2026 Guide)",
+      "h1": "Can You Get ADHD Medication Online in California? What Patients Should Know",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/adhd-medication-online-texas-telehealth",
+      "pageType": "Blog Article",
+      "title": "Can You Get ADHD Medication Online in Texas? Rules & Safety",
+      "h1": "Can You Get ADHD Medication Online in Texas? Here's What's Allowed",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "longTerm"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/adhd-medication-options-california",
+      "pageType": "Blog Article",
+      "title": "ADHD Medication Options in California: Stimulants, Non‑Stimulants & FAQs",
+      "h1": "ADHD Medication Options in California: What Exists (and What Is Decided Clinically)",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "longTerm"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/adhd-medication-options-for-adults",
+      "pageType": "Blog Article",
+      "title": "ADHD Medication Options for Adults in 2026: Stimulants & Non-Stimulants",
+      "h1": "ADHD Medication Options for Adults in 2026",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/adhd-medication-side-effects-what-to-expect",
+      "pageType": "Blog Article",
+      "title": "ADHD Medication Side Effects in 2026: What to Expect & When to Call a Doctor",
+      "h1": "ADHD Medication Side Effects: What to Expect (2026)",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "primaryCare",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/adhd-symptoms-overlooked",
+      "pageType": "Blog Article",
+      "title": "Adult ADHD Symptoms That Are Often Overlooked",
+      "h1": "Adult ADHD Symptoms That Are Often Overlooked",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "wholePerson"
+      ],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/adhd-telehealth-california",
+      "pageType": "Blog Article",
+      "title": "ADHD Telehealth in California: How Virtual Care Works (2026)",
+      "h1": "ADHD Telehealth in California: How Virtual Care Works",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "evidenceBased"
+      ],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/adhd-testing-online-california-screening-vs-evaluation",
+      "pageType": "Blog Article",
+      "title": "ADHD Testing Online in California: Screening vs Full Evaluation",
+      "h1": "ADHD Testing Online in California: Screening vs Full Evaluation",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "evidenceBased"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/adhd-treatment-houston-online",
+      "pageType": "Blog Article",
+      "title": "ADHD Treatment in Houston: Online Telehealth Options",
+      "h1": "ADHD Treatment in Houston — Online Options Explained",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "longTerm",
+        "evidenceBased"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/adult-adhd-symptoms-california",
+      "pageType": "Blog Article",
+      "title": "Adult ADHD Symptoms in California: Patterns Worth Taking Seriously",
+      "h1": "Adult ADHD Symptoms in California: Patterns Worth Taking Seriously",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/adult-adhd-treatment-california-2026",
+      "pageType": "Blog Article",
+      "title": "Adult ADHD Treatment in California: Options in 2026",
+      "h1": "Adult ADHD Treatment in California: What Your Options Are in 2026",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "longTerm",
+        "evidenceBased"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/after-adhd-diagnosis-next-steps-adults",
+      "pageType": "Blog Article",
+      "title": "What Happens After an ADHD Diagnosis? Next Steps for Adults",
+      "h1": "What Happens After an ADHD Diagnosis? Next Steps for Adults",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+      "pageType": "Blog Article",
+      "title": "Combining ADHD Treatment & Weight Loss Strategies (2026)",
+      "h1": "Combining ADHD Treatment and Weight Loss Strategies (2026)",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "evidenceBased"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/compounded-vs-branded-glp1-medications",
+      "pageType": "Blog Article",
+      "title": "Compounded vs Branded GLP-1 Medications (2026): Safety & Standards",
+      "h1": "Compounded vs Branded GLP-1 Medications: What Patients Should Know (2026)",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/focalin-vs-adderall-comparison",
+      "pageType": "Blog Article",
+      "title": "Focalin vs Adderall for ADHD (2026): Methylphenidate vs Amphetamine",
+      "h1": "Focalin vs Adderall: What Adults Should Know (2026)",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "longTerm"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "pageType": "Blog Article",
+      "title": "Food Noise and GLP-1: What It Means and What Actually Helps (2026)",
+      "h1": "Food Noise and GLP-1: What It Means and What Actually Helps (2026)",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+      "pageType": "Blog Article",
+      "title": "Free Testosterone vs Total Testosterone: What Patients Should Know",
+      "h1": "Free Testosterone vs Total Testosterone: What Patients Should Know",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "metabolic",
+        "primaryCare",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/glp1-side-effects-and-how-to-manage-them",
+      "pageType": "Blog Article",
+      "title": "GLP-1 Side Effects & How to Manage Them (2026)",
+      "h1": "GLP-1 Side Effects and How to Manage Them (2026)",
+      "missionAlignment": 9,
+      "brandAlignment": 9,
+      "composite": 9,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "primaryCare",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/how-adhd-medication-is-prescribed-online",
+      "pageType": "Blog Article",
+      "title": "How ADHD Medication Is Prescribed Online in 2026 (Laws, Safety & Standards)",
+      "h1": "How ADHD Medication Is Prescribed Online (2026)",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "longTerm",
+        "evidenceBased"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/how-mental-health-affects-weight-loss-outcomes",
+      "pageType": "Blog Article",
+      "title": "How Mental Health Affects Weight Loss Outcomes (2026)",
+      "h1": "How Mental Health Affects Weight Loss Outcomes (2026)",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/how-to-choose-adhd-provider-california",
+      "pageType": "Blog Article",
+      "title": "How to Choose an ADHD Provider in California (Red Flags Included)",
+      "h1": "How to Choose an ADHD Provider in California",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/how-to-know-if-you-have-adhd-adult",
+      "pageType": "Blog Article",
+      "title": "How to Know If You Have ADHD as an Adult (Real Signs Explained)",
+      "h1": "How to Know If You Have ADHD as an Adult (Real Signs Explained)",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "evidenceBased"
+      ],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/how-to-safely-get-prescriptions-online",
+      "pageType": "Blog Article",
+      "title": "How to Safely Get Prescriptions Online (2026 Checklist)",
+      "h1": "How to Safely Get Prescriptions Online (2026)",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "metabolic",
+        "primaryCare",
+        "longTerm"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/insomnia-treatment-options-beyond-medication",
+      "pageType": "Blog Article",
+      "title": "Insomnia Treatment Options Beyond Medication (2026)",
+      "h1": "Insomnia Treatment Beyond Medication (2026)",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "pageType": "Blog Article",
+      "title": "Insulin Resistance and Weight Loss: A Clinician-Guided Overview",
+      "h1": "Insulin Resistance and Weight Loss: A Clinician-Guided Overview",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/is-adhd-medication-safe-long-term",
+      "pageType": "Blog Article",
+      "title": "Is ADHD Medication Safe Long Term in 2026? Benefits, Monitoring & Myths",
+      "h1": "Is ADHD Medication Safe Long Term? Benefits & Monitoring (2026)",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/is-online-adhd-diagnosis-legit",
+      "pageType": "Blog Article",
+      "title": "Is Online ADHD Diagnosis Legit? What Patients Should Know",
+      "h1": "Is Online ADHD Diagnosis Legit? What Patients Should Know",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "longTerm",
+        "evidenceBased"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/long-term-weight-loss-medications-what-to-expect",
+      "pageType": "Blog Article",
+      "title": "Long-Term Weight Loss Medications: What to Expect in 2026",
+      "h1": "Long-Term Weight Loss Medications: What to Expect (2026)",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/medical-weight-loss-glp1-semaglutide-texas",
+      "pageType": "Blog Article",
+      "title": "Medical Weight Loss in Texas: GLP-1, Semaglutide, Tirzepatide & What Actually Works",
+      "h1": "Medical Weight Loss in Texas: GLP-1, Semaglutide, Tirzepatide & What Actually Works",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/medical-weight-loss-vs-dieting-what-actually-works",
+      "pageType": "Blog Article",
+      "title": "Medical Weight Loss vs Dieting: What Actually Works in 2026",
+      "h1": "Medical Weight Loss vs Dieting: What Actually Works (2026)",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/minoxidil-for-hair-loss-does-it-work",
+      "pageType": "Blog Article",
+      "title": "Minoxidil for Hair Loss: Does It Work? (2026 Evidence)",
+      "h1": "Minoxidil for Hair Loss: Does It Work? (2026)",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "metabolic"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/non-stimulant-adhd-medications-explained",
+      "pageType": "Blog Article",
+      "title": "Non-Stimulant ADHD Medications Explained (2026) — Options for Adults",
+      "h1": "Non-Stimulant ADHD Medications Explained (2026)",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/online-adhd-diagnosis-california",
+      "pageType": "Blog Article",
+      "title": "Online ADHD Diagnosis in California (2026): Cost, Process & What to Expect",
+      "h1": "Online ADHD Diagnosis in California: Cost, Process & What to Expect",
+      "missionAlignment": 8,
+      "brandAlignment": 5,
+      "composite": 6.5,
+      "flags": [
+        "Outdated language"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm"
+      ],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/online-adhd-diagnosis-texas",
+      "pageType": "Blog Article",
+      "title": "Online ADHD Diagnosis in Texas (2026): Cost, Process & What to Expect",
+      "h1": "Online ADHD Diagnosis in Texas: Cost, Process & What to Expect",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/oral-vs-injectable-weight-loss-medications",
+      "pageType": "Blog Article",
+      "title": "Oral vs Injectable Weight Loss Medications (2026): GLP-1 & Beyond",
+      "h1": "Oral vs Injectable Weight Loss Medications: What to Know (2026)",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/oral-vs-topical-minoxidil-which-is-right",
+      "pageType": "Blog Article",
+      "title": "Oral vs Topical Minoxidil for Hair Loss (2026)",
+      "h1": "Oral vs Topical Minoxidil: Which Is Right? (2026)",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "metabolic",
+        "longTerm"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
+      "pageType": "Blog Article",
+      "title": "Phentermine for Weight Loss: Safety & Effectiveness in 2026",
+      "h1": "Phentermine for Weight Loss: Safety and Effectiveness (2026)",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "evidenceBased"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/semaglutide-for-weight-loss-how-it-works",
+      "pageType": "Blog Article",
+      "title": "Semaglutide for Weight Loss: How It Works in 2026 (GLP-1 Science)",
+      "h1": "Semaglutide for Weight Loss: How It Works (2026 Clinical Overview)",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "longTerm"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
+      "pageType": "Blog Article",
+      "title": "Sildenafil for Erectile Dysfunction: What to Expect (2026)",
+      "h1": "Sildenafil for Erectile Dysfunction: What to Expect (2026)",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "metabolic",
+        "primaryCare"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign",
+      "pageType": "Blog Article",
+      "title": "Sleep Apnea, Fatigue & Metabolic Risk: When Snoring Is Not Benign",
+      "h1": "Sleep Apnea, Fatigue, and Metabolic Risk: When Snoring Is Not Benign",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "metabolic",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/telehealth",
+      "pageType": "Blog Hub",
+      "title": "Telehealth Articles (2026) — Online ADHD Diagnosis & Safe Prescribing",
+      "h1": "Telehealth articles",
+      "missionAlignment": 9,
+      "brandAlignment": 9,
+      "composite": 9,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "transparentPricing",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/telehealth-prescriptions-how-online-treatment-works",
+      "pageType": "Blog Article",
+      "title": "Telehealth Prescriptions: How Online Treatment Works (2026)",
+      "h1": "Telehealth Prescriptions: How Online Treatment Works (2026)",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "primaryCare",
+        "longTerm"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/tirzepatide-vs-semaglutide-which-is-better",
+      "pageType": "Blog Article",
+      "title": "Tirzepatide vs Semaglutide for Weight Loss (2026): Compare GLP-1 Options",
+      "h1": "Tirzepatide vs Semaglutide: Which Is Better for Weight Loss? (2026)",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "evidenceBased"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/vyvanse-vs-adderall-differences",
+      "pageType": "Blog Article",
+      "title": "Vyvanse vs Adderall for ADHD in 2026: Differences Adults Should Know",
+      "h1": "Vyvanse vs Adderall: Key Differences for Adults (2026)",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "longTerm"
+      ],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/weight-loss",
+      "pageType": "Blog Hub",
+      "title": "Weight Loss Articles (2026) — GLP-1 & Medical Metabolic Care | Siya Health Blog",
+      "h1": "Weight loss articles",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "evidenceBased"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 0
+    },
+    {
+      "path": "/blog/when-is-testosterone-therapy-appropriate",
+      "pageType": "Blog Article",
+      "title": "When Is Testosterone Therapy Appropriate? (2026 Guide)",
+      "h1": "When Is Testosterone Therapy Appropriate? (2026)",
+      "missionAlignment": 8,
+      "brandAlignment": 7,
+      "composite": 7.5,
+      "flags": [],
+      "pillarsHit": [
+        "weightLoss",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/why-am-i-always-tired-causes-when-to-see-doctor",
+      "pageType": "Blog Article",
+      "title": "Why Am I Always Tired? Causes and When to See a Doctor",
+      "h1": "Why Am I Always Tired? Causes and When to See a Doctor",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "primaryCare",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd",
+      "pageType": "Blog Article",
+      "title": "You’re Not Lazy: Undiagnosed Adult ADHD Signs | TX, PA, FL",
+      "h1": "You’re Not Lazy: Signs You May Have Undiagnosed Adult ADHD",
+      "missionAlignment": 7,
+      "brandAlignment": 3,
+      "composite": 5,
+      "flags": [
+        "Outdated language"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd"
+      ],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 3
+    },
+    {
+      "path": "/book-appointment",
+      "pageType": "Service Page",
+      "title": "Book an Appointment",
+      "h1": "Book Your Telehealth Visit — Same-Week",
+      "missionAlignment": 9,
+      "brandAlignment": 6,
+      "composite": 7.5,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "primaryCare",
+        "transparentPricing"
+      ],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 5
+    },
+    {
+      "path": "/creyos-adhd-testing",
+      "pageType": "Service Page",
+      "title": "Creyos ADHD Testing Online | Part of $199 Evaluation",
+      "h1": "Creyos ADHD Testing (Included in Your Evaluation)",
+      "missionAlignment": 9,
+      "brandAlignment": 7,
+      "composite": 8,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 5
+    },
+    {
+      "path": "/labs",
+      "pageType": "Service Page",
+      "title": "Diagnostic Lab Services",
+      "h1": "Lab Services — ADHD, Metabolic, Preventive",
+      "missionAlignment": 9,
+      "brandAlignment": 7,
+      "composite": 8,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "transparentPricing",
+        "longTerm"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 3
+    },
+    {
+      "path": "/legal/controlled-substance-treatment-agreement",
+      "pageType": "Legal",
+      "title": "Controlled Substance Treatment Agreement",
+      "h1": "Controlled Substance Treatment Agreement",
+      "missionAlignment": 6,
+      "brandAlignment": 6,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "longTerm",
+        "evidenceBased"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 0
+    },
+    {
+      "path": "/legal/cookie-policy",
+      "pageType": "Legal",
+      "title": "Cookie Policy",
+      "h1": "Cookie Policy",
+      "missionAlignment": 6,
+      "brandAlignment": 5,
+      "composite": 5.5,
+      "flags": [],
+      "pillarsHit": [],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 0
+    },
+    {
+      "path": "/legal/notice-of-privacy-practices",
+      "pageType": "Legal",
+      "title": "Notice of Privacy Practices",
+      "h1": "Notice of Privacy Practices",
+      "missionAlignment": 6,
+      "brandAlignment": 6,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "longTerm"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 0
+    },
+    {
+      "path": "/legal/privacy-policy",
+      "pageType": "Legal",
+      "title": "Privacy Policy",
+      "h1": "Privacy Policy",
+      "missionAlignment": 6,
+      "brandAlignment": 5,
+      "composite": 5.5,
+      "flags": [],
+      "pillarsHit": [],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 0
+    },
+    {
+      "path": "/legal/terms-of-use",
+      "pageType": "Legal",
+      "title": "Terms of Use",
+      "h1": "Terms of Use",
+      "missionAlignment": 6,
+      "brandAlignment": 5,
+      "composite": 5.5,
+      "flags": [],
+      "pillarsHit": [],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 0
+    },
+    {
+      "path": "/mens-health-longevity",
+      "pageType": "Service Page",
+      "title": "Men's Health & Longevity",
+      "h1": "Men's Health — Hormone, Performance, Longevity",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "metabolic",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 4
+    },
+    {
+      "path": "/online-adhd-test",
+      "pageType": "Service Page",
+      "title": "Online ADHD Test & Screening (Free)",
+      "h1": "Online ADHD Test & Screening (Free 2-Minute Check)",
+      "missionAlignment": 9,
+      "brandAlignment": 7,
+      "composite": 8,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 6
+    },
+    {
+      "path": "/prescriptions",
+      "pageType": "Service Page",
+      "title": "Online Prescription Services",
+      "h1": "Online Prescriptions — Nationwide Telehealth",
+      "missionAlignment": 7,
+      "brandAlignment": 6,
+      "composite": 6.5,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "primaryCare",
+        "transparentPricing"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 3
+    },
+    {
+      "path": "/primary-urgent-care",
+      "pageType": "Service Page",
+      "title": "Concierge Primary Care",
+      "h1": "Primary & Urgent Care — Virtual, Same-Week",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "metabolic",
+        "primaryCare",
+        "transparentPricing",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 4
+    },
+    {
+      "path": "/privacy-policy",
+      "pageType": "Legacy",
+      "title": "Privacy Policy",
+      "h1": "Privacy Policy",
+      "missionAlignment": 2,
+      "brandAlignment": 5,
+      "composite": 3.5,
+      "flags": [],
+      "pillarsHit": [
+        "transparentPricing"
+      ],
+      "recommendation": "DELETE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/providers",
+      "pageType": "Provider Hub",
+      "title": "Our Care Team",
+      "h1": "Our Care Team",
+      "missionAlignment": 10,
+      "brandAlignment": 10,
+      "composite": 10,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "primaryCare",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 9
+    },
+    {
+      "path": "/providers/derek-timbs",
+      "pageType": "Provider Profile",
+      "title": "Derek Timbs, FNP-BC | Medical Weight Loss & Men's Health",
+      "h1": "Derek Timbs, FNP-BC",
+      "missionAlignment": 9,
+      "brandAlignment": 6,
+      "composite": 7.5,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "evidenceBased"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 4
+    },
+    {
+      "path": "/providers/dr-natasha-desai",
+      "pageType": "Provider Profile",
+      "title": "Dr. Natasha Desai, MD | Adult ADHD & Behavioral Medicine",
+      "h1": "Dr. Natasha Desai, MD",
+      "missionAlignment": 9,
+      "brandAlignment": 7,
+      "composite": 8,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "primaryCare",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 4
+    },
+    {
+      "path": "/providers/dr-sneh-pandey",
+      "pageType": "Provider Profile",
+      "title": "Dr. Sneh Pandey, MD | Adult ADHD & Metabolic Care",
+      "h1": "Dr. Sneh Pandey, MD",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "transparentPricing",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 4
+    },
+    {
+      "path": "/providers/dr-swati-pandey",
+      "pageType": "Provider Profile",
+      "title": "Dr. Swati Pandey, MD | Adult ADHD & Mental Health Care",
+      "h1": "Dr. Swati Pandey, MD",
+      "missionAlignment": 9,
+      "brandAlignment": 7,
+      "composite": 8,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "metabolic",
+        "primaryCare",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 4
+    },
+    {
+      "path": "/providers/dr-vanessa-urbina",
+      "pageType": "Provider Profile",
+      "title": "Dr. Vanessa Urbina, MD | Family Medicine & ADHD",
+      "h1": "Dr. Vanessa Urbina, MD",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "primaryCare",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 4
+    },
+    {
+      "path": "/providers/megan-wunderlich",
+      "pageType": "Provider Profile",
+      "title": "Megan Wunderlich, FNP-C | ADHD & Mental Health Telehealth",
+      "h1": "Megan Wunderlich, FNP-C",
+      "missionAlignment": 9,
+      "brandAlignment": 7,
+      "composite": 8,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "primaryCare",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 5
+    },
+    {
+      "path": "/providers/wendy-delgado",
+      "pageType": "Provider Profile",
+      "title": "Wendy Delgado, PA-C | Medical Weight Loss Telehealth",
+      "h1": "Wendy Delgado, PA-C",
+      "missionAlignment": 9,
+      "brandAlignment": 6,
+      "composite": 7.5,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "longTerm"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 4
+    },
+    {
+      "path": "/siya-circle",
+      "pageType": "Utility",
+      "title": "Siya Circle | Free Health Education Newsletter",
+      "h1": "Join Siya Circle",
+      "missionAlignment": 4,
+      "brandAlignment": 7,
+      "composite": 5.5,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "metabolic",
+        "transparentPricing",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "DELETE",
+      "duplicateOf": null,
+      "mainCtaCount": 6
+    },
+    {
+      "path": "/telehealth",
+      "pageType": "Service Page",
+      "title": "Virtual Medical Care | Siya Health Telehealth",
+      "h1": "Need a doctor without rearranging your entire day?",
+      "missionAlignment": 10,
+      "brandAlignment": 10,
+      "composite": 10,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "metabolic",
+        "primaryCare",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 3
+    },
+    {
+      "path": "/terms",
+      "pageType": "Legacy",
+      "title": "Terms of Service",
+      "h1": "Terms of Service",
+      "missionAlignment": 2,
+      "brandAlignment": 5,
+      "composite": 3.5,
+      "flags": [],
+      "pillarsHit": [
+        "transparentPricing"
+      ],
+      "recommendation": "DELETE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/weight-loss-metabolic-health",
+      "pageType": "Service Page",
+      "title": "Provider-Guided Medical Weight Loss",
+      "h1": "When your appetite, energy, and weight stop making sense",
+      "missionAlignment": 9,
+      "brandAlignment": 9,
+      "composite": 9,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "primaryCare",
+        "transparentPricing",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    }
+  ],
+  "lowestBrand": [
+    {
+      "path": "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd",
+      "pageType": "Blog Article",
+      "title": "You’re Not Lazy: Undiagnosed Adult ADHD Signs | TX, PA, FL",
+      "h1": "You’re Not Lazy: Signs You May Have Undiagnosed Adult ADHD",
+      "missionAlignment": 7,
+      "brandAlignment": 3,
+      "composite": 5,
+      "flags": [
+        "Outdated language"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd"
+      ],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 3
+    },
+    {
+      "path": "/answers/oral-vs-topical-minoxidil",
+      "pageType": "Health Guide",
+      "title": "When is topical minoxidil enough vs oral minoxidil?",
+      "h1": "When is topical minoxidil enough vs oral minoxidil?",
+      "missionAlignment": 6,
+      "brandAlignment": 4,
+      "composite": 5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "longTerm"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/oral-vs-topical-minoxidil-which-is-right",
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/minoxidil-hair-loss-does-it-work",
+      "pageType": "Health Guide",
+      "title": "How long does minoxidil take to show hair results?",
+      "h1": "How long does minoxidil take to show hair results?",
+      "missionAlignment": 6,
+      "brandAlignment": 5,
+      "composite": 5.5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/minoxidil-for-hair-loss-does-it-work",
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/poor-sleep-feels-like-adhd",
+      "pageType": "Health Guide",
+      "title": "Can poor sleep feel like ADHD?",
+      "h1": "Can poor sleep feel like ADHD?",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/sildenafil-erectile-dysfunction-expectations",
+      "pageType": "Health Guide",
+      "title": "How long does it take sildenafil to work?",
+      "h1": "How long does it take sildenafil to work?",
+      "missionAlignment": 6,
+      "brandAlignment": 5,
+      "composite": 5.5,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/adderall-ir-vs-xr-adults",
+      "pageType": "Blog Article",
+      "title": "Adderall IR vs XR for Adults: Timing, Duration & What to Ask Your Prescriber",
+      "h1": "Adderall IR vs XR — What Adults Should Know Before Starting Treatment",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "longTerm"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/adhd-evaluation-california-online-vs-in-person",
+      "pageType": "Blog Article",
+      "title": "ADHD Evaluation in California: Online vs In-Person Options (2026)",
+      "h1": "ADHD Evaluation in California: Online vs In-Person Options",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/adhd-medication-online-texas-telehealth",
+      "pageType": "Blog Article",
+      "title": "Can You Get ADHD Medication Online in Texas? Rules & Safety",
+      "h1": "Can You Get ADHD Medication Online in Texas? Here's What's Allowed",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "longTerm"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/adhd-medication-options-california",
+      "pageType": "Blog Article",
+      "title": "ADHD Medication Options in California: Stimulants, Non‑Stimulants & FAQs",
+      "h1": "ADHD Medication Options in California: What Exists (and What Is Decided Clinically)",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "longTerm"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/adhd-symptoms-overlooked",
+      "pageType": "Blog Article",
+      "title": "Adult ADHD Symptoms That Are Often Overlooked",
+      "h1": "Adult ADHD Symptoms That Are Often Overlooked",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "wholePerson"
+      ],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/adhd-telehealth-california",
+      "pageType": "Blog Article",
+      "title": "ADHD Telehealth in California: How Virtual Care Works (2026)",
+      "h1": "ADHD Telehealth in California: How Virtual Care Works",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "evidenceBased"
+      ],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/adhd-testing-online-california-screening-vs-evaluation",
+      "pageType": "Blog Article",
+      "title": "ADHD Testing Online in California: Screening vs Full Evaluation",
+      "h1": "ADHD Testing Online in California: Screening vs Full Evaluation",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "evidenceBased"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/adult-adhd-symptoms-california",
+      "pageType": "Blog Article",
+      "title": "Adult ADHD Symptoms in California: Patterns Worth Taking Seriously",
+      "h1": "Adult ADHD Symptoms in California: Patterns Worth Taking Seriously",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/focalin-vs-adderall-comparison",
+      "pageType": "Blog Article",
+      "title": "Focalin vs Adderall for ADHD (2026): Methylphenidate vs Amphetamine",
+      "h1": "Focalin vs Adderall: What Adults Should Know (2026)",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "longTerm"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/how-to-choose-adhd-provider-california",
+      "pageType": "Blog Article",
+      "title": "How to Choose an ADHD Provider in California (Red Flags Included)",
+      "h1": "How to Choose an ADHD Provider in California",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/how-to-know-if-you-have-adhd-adult",
+      "pageType": "Blog Article",
+      "title": "How to Know If You Have ADHD as an Adult (Real Signs Explained)",
+      "h1": "How to Know If You Have ADHD as an Adult (Real Signs Explained)",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "evidenceBased"
+      ],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/online-adhd-diagnosis-california",
+      "pageType": "Blog Article",
+      "title": "Online ADHD Diagnosis in California (2026): Cost, Process & What to Expect",
+      "h1": "Online ADHD Diagnosis in California: Cost, Process & What to Expect",
+      "missionAlignment": 8,
+      "brandAlignment": 5,
+      "composite": 6.5,
+      "flags": [
+        "Outdated language"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm"
+      ],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/vyvanse-vs-adderall-differences",
+      "pageType": "Blog Article",
+      "title": "Vyvanse vs Adderall for ADHD in 2026: Differences Adults Should Know",
+      "h1": "Vyvanse vs Adderall: Key Differences for Adults (2026)",
+      "missionAlignment": 7,
+      "brandAlignment": 5,
+      "composite": 6,
+      "flags": [],
+      "pillarsHit": [
+        "adhd",
+        "longTerm"
+      ],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/legal/cookie-policy",
+      "pageType": "Legal",
+      "title": "Cookie Policy",
+      "h1": "Cookie Policy",
+      "missionAlignment": 6,
+      "brandAlignment": 5,
+      "composite": 5.5,
+      "flags": [],
+      "pillarsHit": [],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 0
+    },
+    {
+      "path": "/legal/privacy-policy",
+      "pageType": "Legal",
+      "title": "Privacy Policy",
+      "h1": "Privacy Policy",
+      "missionAlignment": 6,
+      "brandAlignment": 5,
+      "composite": 5.5,
+      "flags": [],
+      "pillarsHit": [],
+      "recommendation": "REWRITE",
+      "duplicateOf": null,
+      "mainCtaCount": 0
+    }
+  ],
+  "highestBrand": [
+    {
+      "path": "/about",
+      "pageType": "About",
+      "title": "About Siya Health | Mission, Team & How Care Works",
+      "h1": "Care for adults who are done guessing about their health",
+      "missionAlignment": 10,
+      "brandAlignment": 10,
+      "composite": 10,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "primaryCare",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 8
+    },
+    {
+      "path": "/providers",
+      "pageType": "Provider Hub",
+      "title": "Our Care Team",
+      "h1": "Our Care Team",
+      "missionAlignment": 10,
+      "brandAlignment": 10,
+      "composite": 10,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "primaryCare",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 9
+    },
+    {
+      "path": "/telehealth",
+      "pageType": "Service Page",
+      "title": "Virtual Medical Care | Siya Health Telehealth",
+      "h1": "Need a doctor without rearranging your entire day?",
+      "missionAlignment": 10,
+      "brandAlignment": 10,
+      "composite": 10,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "metabolic",
+        "primaryCare",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 3
+    },
+    {
+      "path": "/answers/meet-and-greet-telehealth-expectations",
+      "pageType": "Health Guide",
+      "title": "What happens in a telehealth Meet & Greet?",
+      "h1": "What happens in a telehealth Meet & Greet?",
+      "missionAlignment": 9,
+      "brandAlignment": 9,
+      "composite": 9,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "primaryCare",
+        "transparentPricing",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/glp1-side-effects-and-how-to-manage-them",
+      "pageType": "Blog Article",
+      "title": "GLP-1 Side Effects & How to Manage Them (2026)",
+      "h1": "GLP-1 Side Effects and How to Manage Them (2026)",
+      "missionAlignment": 9,
+      "brandAlignment": 9,
+      "composite": 9,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "primaryCare",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/telehealth",
+      "pageType": "Blog Hub",
+      "title": "Telehealth Articles (2026) — Online ADHD Diagnosis & Safe Prescribing",
+      "h1": "Telehealth articles",
+      "missionAlignment": 9,
+      "brandAlignment": 9,
+      "composite": 9,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "transparentPricing",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/weight-loss-metabolic-health",
+      "pageType": "Service Page",
+      "title": "Provider-Guided Medical Weight Loss",
+      "h1": "When your appetite, energy, and weight stop making sense",
+      "missionAlignment": 9,
+      "brandAlignment": 9,
+      "composite": 9,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "primaryCare",
+        "transparentPricing",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/adhd-diagnosis-florida",
+      "pageType": "Geo SEO Landing",
+      "title": "Online ADHD Diagnosis Florida | $199 Evaluation",
+      "h1": "Online ADHD Diagnosis in Florida ($199 Evaluation)",
+      "missionAlignment": 4,
+      "brandAlignment": 8,
+      "composite": 6,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "primaryCare",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "DELETE",
+      "duplicateOf": null,
+      "mainCtaCount": 5
+    },
+    {
+      "path": "/answers/adhd-and-weight-loss-connection",
+      "pageType": "Health Guide",
+      "title": "Is there a connection between ADHD and weight loss struggles?",
+      "h1": "Is there a connection between ADHD and weight loss struggles?",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/answers/can-adhd-be-diagnosed-online",
+      "pageType": "Health Guide",
+      "title": "Can ADHD be diagnosed online?",
+      "h1": "Can ADHD be diagnosed online?",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/insulin-resistance-without-diabetes",
+      "pageType": "Health Guide",
+      "title": "Can you have insulin resistance without diabetes?",
+      "h1": "Can you have insulin resistance without diabetes?",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/is-telehealth-legitimate",
+      "pageType": "Health Guide",
+      "title": "Is telehealth legitimate for medical care?",
+      "h1": "Is telehealth legitimate for medical care?",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "metabolic",
+        "transparentPricing",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/answers/medical-weight-loss-vs-dieting",
+      "pageType": "Health Guide",
+      "title": "When does medical weight loss outperform dieting alone?",
+      "h1": "When does medical weight loss outperform dieting alone?",
+      "missionAlignment": 8,
+      "brandAlignment": 8,
+      "composite": 8,
+      "flags": [
+        "Duplicate messaging"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": "https://siya.health/blog/medical-weight-loss-vs-dieting-what-actually-works",
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/normal-a1c-insulin-resistance",
+      "pageType": "Health Guide",
+      "title": "Can you have insulin resistance with a normal A1C?",
+      "h1": "Can you have insulin resistance with a normal A1C?",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/answers/what-included-199-adhd-evaluation",
+      "pageType": "Health Guide",
+      "title": "What is included in Siya Health’s $199 ADHD evaluation?",
+      "h1": "What is included in Siya Health’s $199 ADHD evaluation?",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "primaryCare",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog",
+      "pageType": "Blog Hub",
+      "title": "Health Insights & Blog Hub (2026) | ADHD, Weight Loss & Telehealth",
+      "h1": "Health Insights — Evidence-Based, Clinical",
+      "missionAlignment": 7,
+      "brandAlignment": 8,
+      "composite": 7.5,
+      "flags": [
+        "Excessive CTAs"
+      ],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "transparentPricing",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 5
+    },
+    {
+      "path": "/blog/adhd-evaluation-cost-texas",
+      "pageType": "Blog Article",
+      "title": "ADHD Evaluation Cost in Texas: Full Breakdown (2026 Guide)",
+      "h1": "ADHD Evaluation Cost in Texas: Full Breakdown (2026 Guide)",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "transparentPricing",
+        "longTerm",
+        "evidenceBased",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+      "pageType": "Blog Article",
+      "title": "Combining ADHD Treatment & Weight Loss Strategies (2026)",
+      "h1": "Combining ADHD Treatment and Weight Loss Strategies (2026)",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "evidenceBased"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    },
+    {
+      "path": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "pageType": "Blog Article",
+      "title": "Food Noise and GLP-1: What It Means and What Actually Helps (2026)",
+      "h1": "Food Noise and GLP-1: What It Means and What Actually Helps (2026)",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "KEEP",
+      "duplicateOf": null,
+      "mainCtaCount": 2
+    },
+    {
+      "path": "/blog/how-mental-health-affects-weight-loss-outcomes",
+      "pageType": "Blog Article",
+      "title": "How Mental Health Affects Weight Loss Outcomes (2026)",
+      "h1": "How Mental Health Affects Weight Loss Outcomes (2026)",
+      "missionAlignment": 9,
+      "brandAlignment": 8,
+      "composite": 8.5,
+      "flags": [],
+      "pillarsHit": [
+        "physicianLed",
+        "adhd",
+        "weightLoss",
+        "metabolic",
+        "longTerm",
+        "wholePerson"
+      ],
+      "recommendation": "MERGE",
+      "duplicateOf": null,
+      "mainCtaCount": 1
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Final Predeploy Compliance Report
 
-Generated: 2026-06-07T07:20:59.673Z
+Generated: 2026-06-07T07:46:12.444Z
 
 ## Executive summary
 
@@ -15,8 +15,8 @@ Generated: 2026-06-07T07:20:59.673Z
 
 | Metric | Value |
 |--------|------:|
-| HTML pages | 168 |
-| Sitemap URLs | 168 |
+| HTML pages | 164 |
+| Sitemap URLs | 164 |
 | Broken internal links | 0 |
 | JSON-LD errors | 0 |
 | Duplicate title tags | 1 |
@@ -41,8 +41,8 @@ Generated: 2026-06-07T07:20:59.673Z
 | Check | Status |
 |-------|--------|
 | CS agreement page exists | **PASS** |
-| Required pages with footer link | 74 / 74 |
-| Missing links | 0 |
+| Required pages with footer link | 72 / 73 |
+| Missing links | 1 |
 
 ---
 

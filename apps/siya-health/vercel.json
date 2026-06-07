@@ -5,26 +5,20 @@
   "outputDirectory": ".",
   "installCommand": "echo 'No install needed'",
   "redirects": [
-    {
-      "source": "/terms",
-      "destination": "/legal/terms-of-use",
-      "permanent": true
-    },
-    {
-      "source": "/privacy-policy",
-      "destination": "/legal/privacy-policy",
-      "permanent": true
-    },
-    {
-      "source": "/mental-health-adhd",
-      "destination": "/adhd-care",
-      "permanent": true
-    },
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "siya.health" }],
-      "destination": "https://www.siya.health/$1",
-      "permanent": true
-    }
+    { "source": "/terms", "destination": "/legal/terms-of-use", "permanent": true },
+    { "source": "/privacy-policy", "destination": "/legal/privacy-policy", "permanent": true },
+    { "source": "/membership-pricing", "destination": "/pricing", "permanent": true },
+    { "source": "/mental-health-adhd", "destination": "/adhd-care", "permanent": true },
+    { "source": "/online-adhd-test", "destination": "/adhd-screening", "permanent": true },
+    { "source": "/adult-adhd-diagnosis", "destination": "/adhd-care", "permanent": true },
+    { "source": "/adhd-treatment-online", "destination": "/adhd-care", "permanent": true },
+    { "source": "/adhd-evaluation-cost", "destination": "/pricing", "permanent": true },
+    { "source": "/adhd-diagnosis-florida", "destination": "/adhd-care", "permanent": true },
+    { "source": "/blog/all", "destination": "/blog", "permanent": true },
+    { "source": "/blog/ambien-and-sleep-medications-risks-and-benefits", "destination": "/blog/insomnia-treatment-options-beyond-medication", "permanent": true },
+    { "source": "/blog/glutathione-and-peptides-what-do-they-actually-do", "destination": "/mens-health-longevity", "permanent": true },
+    { "source": "/blog/modafinil-for-focus-and-fatigue-is-it-safe", "destination": "/adhd-care", "permanent": true },
+    { "source": "/siya-circle", "destination": "https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl", "permanent": false },
+    { "source": "/(.*)", "has": [{ "type": "host", "value": "siya.health" }], "destination": "https://www.siya.health/$1", "permanent": true }
   ]
 }

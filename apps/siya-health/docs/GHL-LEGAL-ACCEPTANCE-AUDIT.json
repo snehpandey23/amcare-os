@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-07T07:20:59.411Z",
+  "generatedAt": "2026-06-07T07:46:12.208Z",
   "formId": "mnWpgh0IEgFvJymdZqHY",
   "bookingUrl": "https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4",
   "legalDocumentVersion": "terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31",
@@ -12,13 +12,13 @@
     "npp": "legal_acceptance_npp"
   },
   "summary": {
-    "htmlPagesScanned": 168,
-    "pagesWithGhlLinks": 167,
-    "totalGhlBookingLinks": 171,
-    "pagesWithCarepatronLinks": 167,
-    "totalCarepatronBookingLinks": 644,
+    "htmlPagesScanned": 164,
+    "pagesWithGhlLinks": 162,
+    "totalGhlBookingLinks": 166,
+    "pagesWithCarepatronLinks": 163,
+    "totalCarepatronBookingLinks": 627,
     "pagesWithAcceptanceScript": 1,
-    "pagesWithGhlMissingAcceptance": 160,
+    "pagesWithGhlMissingAcceptance": 155,
     "intakeHub": true
   },
   "externalFunnels": [
@@ -1025,26 +1025,6 @@
       "hasChatWidget": true
     },
     {
-      "path": "/blog/all",
-      "file": "blog/all.html",
-      "category": "general-cta",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 3,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
-      "hasChatWidget": true
-    },
-    {
-      "path": "/blog/ambien-and-sleep-medications-risks-and-benefits",
-      "file": "blog/ambien-and-sleep-medications-risks-and-benefits.html",
-      "category": "general-cta",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
-      "hasChatWidget": true
-    },
-    {
       "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
       "file": "blog/combining-adhd-treatment-and-weight-loss-strategies.html",
       "category": "adhd-funnel",
@@ -1097,16 +1077,6 @@
     {
       "path": "/blog/glp1-side-effects-and-how-to-manage-them",
       "file": "blog/glp1-side-effects-and-how-to-manage-them.html",
-      "category": "general-cta",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
-      "hasChatWidget": true
-    },
-    {
-      "path": "/blog/glutathione-and-peptides-what-do-they-actually-do",
-      "file": "blog/glutathione-and-peptides-what-do-they-actually-do.html",
       "category": "general-cta",
       "ghlBookingLinks": 1,
       "carepatronBookingLinks": 4,
@@ -1247,16 +1217,6 @@
     {
       "path": "/blog/minoxidil-for-hair-loss-does-it-work",
       "file": "blog/minoxidil-for-hair-loss-does-it-work.html",
-      "category": "general-cta",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
-      "hasChatWidget": true
-    },
-    {
-      "path": "/blog/modafinil-for-focus-and-fatigue-is-it-safe",
-      "file": "blog/modafinil-for-focus-and-fatigue-is-it-safe.html",
       "category": "general-cta",
       "ghlBookingLinks": 1,
       "carepatronBookingLinks": 4,
@@ -1545,16 +1505,6 @@
       "hasChatWidget": false
     },
     {
-      "path": "/membership-pricing",
-      "file": "membership-pricing.html",
-      "category": "general-cta",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
-      "hasChatWidget": true
-    },
-    {
       "path": "/mens-health-longevity",
       "file": "mens-health-longevity.html",
       "category": "general-cta",
@@ -1583,6 +1533,16 @@
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
+    },
+    {
+      "path": "/pricing",
+      "file": "pricing.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 0,
+      "carepatronBookingLinks": 2,
+      "hasLegalAcceptanceScript": false,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
     },
     {
       "path": "/primary-urgent-care",
@@ -1823,15 +1783,12 @@
     "blog/adult-adhd-symptoms-california.html",
     "blog/adult-adhd-treatment-california-2026.html",
     "blog/after-adhd-diagnosis-next-steps-adults.html",
-    "blog/all.html",
-    "blog/ambien-and-sleep-medications-risks-and-benefits.html",
     "blog/combining-adhd-treatment-and-weight-loss-strategies.html",
     "blog/compounded-vs-branded-glp1-medications.html",
     "blog/focalin-vs-adderall-comparison.html",
     "blog/food-noise-and-glp-1-what-it-means-and-what-helps.html",
     "blog/free-testosterone-vs-total-testosterone-what-patients-should-know.html",
     "blog/glp1-side-effects-and-how-to-manage-them.html",
-    "blog/glutathione-and-peptides-what-do-they-actually-do.html",
     "blog/how-adhd-medication-is-prescribed-online.html",
     "blog/how-mental-health-affects-weight-loss-outcomes.html",
     "blog/how-to-choose-adhd-provider-california.html",
@@ -1846,7 +1803,6 @@
     "blog/medical-weight-loss-glp1-semaglutide-texas.html",
     "blog/medical-weight-loss-vs-dieting-what-actually-works.html",
     "blog/minoxidil-for-hair-loss-does-it-work.html",
-    "blog/modafinil-for-focus-and-fatigue-is-it-safe.html",
     "blog/non-stimulant-adhd-medications-explained.html",
     "blog/online-adhd-diagnosis-california.html",
     "blog/online-adhd-diagnosis-texas.html",
@@ -1868,7 +1824,6 @@
     "creyos-adhd-testing.html",
     "index.html",
     "labs.html",
-    "membership-pricing.html",
     "mens-health-longevity.html",
     "online-adhd-test.html",
     "prescriptions.html",

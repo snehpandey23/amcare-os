@@ -1,9 +1,9 @@
 /**
  * Sitewide copy standards — states, footer, Health Guides naming.
  */
-import { LEGAL_HUB, LEGAL_PATHS } from './legal-documents.mjs';
-
-import { LEGAL_EFFECTIVE_DATE as LEGAL_EFFECTIVE_DATE_ISO } from './legal-documents.mjs';
+import { LEGAL_HUB, LEGAL_PATHS, LEGAL_EFFECTIVE_DATE as LEGAL_EFFECTIVE_DATE_ISO } from './legal-documents.mjs';
+import { BOOKING_LINK } from './providers-core.mjs';
+import { SIYA_CIRCLE_GHL_FORM_URL } from './siya-circle-config.mjs';
 
 /** Counsel-approved effective date for published legal documents. */
 export const LEGAL_EFFECTIVE_DATE = LEGAL_EFFECTIVE_DATE_ISO;
@@ -28,12 +28,159 @@ export const STATES_INLINE =
 
 export const FOOTER_STATES_LINE = `Board-certified providers providing telehealth care across ${STATES_INLINE}.`;
 
+/** Canonical care-delivery pricing — NOT ADHD-specific; applies across service lines. */
+export const PRICING = {
+  path: '/pricing',
+  legacyPath: '/membership-pricing',
+  navLabel: 'Pricing',
+  pageTitle: 'Pricing | Siya Health',
+  initialEvaluation: {
+    label: 'Initial Evaluation',
+    amount: 199,
+    display: '$199',
+    period: 'one-time visit',
+    description:
+      'Structured clinician visit: history, goals, and a clear plan. Applies to ADHD, weight, metabolic, primary care, and telehealth pathways.',
+  },
+  nonControlledFollowUp: {
+    label: 'Non-Controlled Medication Follow-Up',
+    amount: 79,
+    display: '$79',
+    period: '/month',
+    description:
+      'Ongoing follow-up for non-controlled medications, lifestyle plans, labs review, and care coordination when appropriate.',
+  },
+  controlledFollowUp: {
+    label: 'Controlled Medication Follow-Up',
+    amount: 149,
+    display: '$149',
+    period: '/month',
+    description:
+      'Ongoing follow-up when controlled medications are part of your plan—including monitoring, dose adjustments, and safety checks per state law.',
+  },
+};
+
+/** Three-slot CTA system — applied via normalizeSitewideCopy() */
+export const CTA_SYSTEM = {
+  primary: { label: 'Talk to a Clinician', url: BOOKING_LINK },
+  newsletter: { label: 'Join Siya Circle', url: SIYA_CIRCLE_GHL_FORM_URL },
+  secondary: {
+    adhd: { label: 'Book ADHD Evaluation', url: BOOKING_LINK },
+    weight: { label: 'Start Weight Loss Evaluation', url: BOOKING_LINK },
+    telehealth: { label: 'Explore Telehealth Care', url: '/telehealth' },
+    default: { label: 'Explore Telehealth Care', url: '/telehealth' },
+  },
+};
+
+/** Booking CTAs consolidated to primary label (regex-safe literals). */
+export const REMOVED_BOOKING_CTA_LABELS = [
+  'Book a Meet & Greet',
+  'Book a Meet &amp; Greet',
+  'Schedule a Quick Call',
+  'Find the Right Starting Point',
+  'Explore ADHD Care',
+  'Explore ADHD care',
+  'Talk to a Provider When You\'re Ready',
+  'Start Here',
+  'Learn More First',
+  'Join the Waitlist',
+  'Join Waitlist',
+  'Schedule Meet & Greet',
+  'Schedule Meet &amp; Greet',
+  'Book a meet & greet',
+  'Book Free Consultation',
+  'Book Your Free 15-Minute Discovery Call',
+  'Schedule a Meet and Greet',
+  'Book Consultation',
+  'Book Appointment',
+  'Book evaluation ($199)',
+  'Book ADHD Evaluation online',
+  'Book with Sneh',
+  'Book with Natasha',
+  'Book with Swati',
+  'Book with Vanessa',
+  'Book with Derek',
+  'Book with Wendy',
+  'Book with Megan',
+];
+
+/** Deleted blog URLs → canonical replacement (internal links only; vercel.json handles external redirects). */
+export const REMOVED_BLOG_PATHS = {
+  '/blog/all': '/blog',
+  '/blog/modafinil-for-focus-and-fatigue-is-it-safe': '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+  '/blog/glutathione-and-peptides-what-do-they-actually-do': '/mens-health-longevity',
+  '/blog/ambien-and-sleep-medications-risks-and-benefits': '/blog/insomnia-treatment-options-beyond-medication',
+};
+
+/** Brand pillars — patient-facing language (not SEO keyword stuffing). */
+export const BRAND_PILLARS = [
+  'Physician-led telehealth',
+  'Whole-person care',
+  'Evidence-based medicine',
+  'Transparent pricing',
+  'Long-term relationships',
+  'Licensed clinicians',
+  'Board-certified physicians',
+  'HIPAA-compliant',
+];
+
+/** Phrases to replace sitewide (non-destructive) */
+export const LEGACY_MARKETPLACE_PHRASES = [
+  { from: /membership-based care/gi, to: 'physician-led telehealth' },
+  { from: /concierge membership/gi, to: 'transparent pricing' },
+  { from: /Join the Waitlist/gi, to: CTA_SYSTEM.primary.label },
+];
+
+/** Canonical provider positioning — clinical + marketing source of truth */
+export const PROVIDER_CANONICAL = {
+  'dr-sneh-pandey': {
+    role: 'Medical Director · Internal Medicine Physician',
+    credentials: 'Board-certified Internal Medicine · Diplomate, American Board of Obesity Medicine · ADHD-CCSP',
+    focus: ['Internal Medicine', 'Obesity Medicine', 'ADHD', 'Metabolic Health', 'Weight Management', 'Primary Care'],
+  },
+  'dr-natasha-desai': {
+    role: 'Family Medicine Physician',
+    credentials: 'ADHD-CCSP',
+    focus: ['Family Medicine', 'ADHD', 'Mental Health'],
+  },
+  'dr-swati-pandey': {
+    role: 'Internal Medicine Physician',
+    credentials: '',
+    focus: ["Internal Medicine", "Women's Health", 'ADHD', 'Mental Health', 'Metabolic Health'],
+  },
+  'dr-vanessa-urbina': {
+    role: 'Family Medicine Physician',
+    credentials: 'Family Medicine',
+    focus: ['Family Medicine', 'Primary Care', 'ADHD', 'Weight Management', 'Community Practice Experience'],
+  },
+  'megan-wunderlich': {
+    role: 'Family Nurse Practitioner',
+    credentials: 'FNP-C',
+    focus: ['Mental Health', 'ADHD', 'Family Medicine'],
+  },
+  'derek-timbs': {
+    role: 'Family Nurse Practitioner',
+    credentials: 'FNP-BC',
+    focus: ['Weight Loss', "Men's Health", 'Metabolic Care'],
+  },
+  'wendy-delgado': {
+    role: 'Physician Assistant',
+    credentials: 'PA-C',
+    focus: ['Weight Loss', 'Metabolic Care'],
+  },
+};
+
 /** Approved user-facing copy — applied via normalizeSitewideCopy() */
 export const COPY_STANDARDS = {
-  primaryCta: 'Talk to a Clinician',
-  secondaryCta: 'Find the Right Starting Point',
-  adhdPrimaryCta: 'Book ADHD Evaluation',
+  primaryCta: CTA_SYSTEM.primary.label,
+  secondaryCta: CTA_SYSTEM.secondary.default.label,
+  secondaryCtaTelehealth: CTA_SYSTEM.secondary.telehealth.label,
+  adhdPrimaryCta: CTA_SYSTEM.secondary.adhd.label,
+  weightPrimaryCta: CTA_SYSTEM.secondary.weight.label,
   adhdSecondaryCta: 'Free ADHD Screening',
+  newsletterCta: CTA_SYSTEM.newsletter.label,
+  pricingNavLabel: PRICING.navLabel,
+  pricingPath: PRICING.path,
   educationHub: 'Health Guides',
   reviewBadgePending: 'Clinician-informed',
   reviewBadgeReviewed: 'Physician reviewed',

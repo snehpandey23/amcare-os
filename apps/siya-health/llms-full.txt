@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
 Generated: 2026-06-07
-Total pages: 168
+Total pages: 164
 
 ---
 
@@ -579,16 +579,6 @@ Total pages: 168
   Summary: After an adult ADHD diagnosis: understanding the diagnosis, treatment options, building a personalized plan, and why ongoing care matters—education from Siya Health.
   Topics: adhd
 
-- All Articles (2026) | ADHD, Weight Loss &amp; Telehealth | Siya Health Blog
-  URL: https://siya.health/blog/all
-  Summary: Browse every Siya Health article: ADHD evaluation, medication education, weight loss with GLP-1s, and telehealth—evidence-based guides for US adults.
-  Topics: adhd, weight-loss, telehealth
-
-- Ambien &amp; Sleep Medications: Risks and Benefits (2026)
-  URL: https://siya.health/blog/ambien-and-sleep-medications-risks-and-benefits
-  Summary: Ambien and sleep medications in 2026: Z-drugs, dependence, complex sleep behaviors, tapering—informational only; not dosing guidance.
-  Topics: sleep, medication
-
 - Combining ADHD Treatment &amp; Weight Loss Strategies (2026)
   URL: https://siya.health/blog/combining-adhd-treatment-and-weight-loss-strategies
   Summary: Combining ADHD treatment and weight loss in 2026: stimulant appetite effects, GLP-1 overlap, coaching, and coordinated prescribing—education only.
@@ -618,10 +608,6 @@ Total pages: 168
   URL: https://siya.health/blog/glp1-side-effects-and-how-to-manage-them
   Summary: GLP-1 side effects in 2026: nausea, GI symptoms, dehydration risks, rare warnings, and clinician-guided strategies—educational, not a substitute for care.
   Topics: weight-loss
-
-- Glutathione &amp; Peptides: What Do They Actually Do? (2026)
-  URL: https://siya.health/blog/glutathione-and-peptides-what-do-they-actually-do
-  Summary: Glutathione and peptides in 2026: biology basics, evidence gaps, regulatory issues, and risks of wellness marketing—informational, non-promotional.
 
 - How ADHD Medication Is Prescribed Online in 2026 (Laws, Safety &amp; Standards)
   URL: https://siya.health/blog/how-adhd-medication-is-prescribed-online
@@ -686,10 +672,6 @@ Total pages: 168
   URL: https://siya.health/blog/minoxidil-for-hair-loss-does-it-work
   Summary: Minoxidil for hair loss in 2026: mechanism, expected timelines, limits, side effects—informational only; consult a licensed clinician for diagnosis.
   Topics: hair-loss
-
-- Modafinil for Focus &amp; Fatigue: Is It Safe? (2026)
-  URL: https://siya.health/blog/modafinil-for-focus-and-fatigue-is-it-safe
-  Summary: Modafinil for focus and fatigue in 2026: approved uses, off-label realities, cardiovascular and psychiatric risks, controlled status—education only.
 
 - Non-Stimulant ADHD Medications Explained (2026) — Options for Adults
   URL: https://siya.health/blog/non-stimulant-adhd-medications-explained
@@ -816,10 +798,6 @@ Total pages: 168
   URL: https://siya.health/legal/terms-of-use
   Summary: Terms of Use for Siya Health.
 
-- Membership &amp; Pricing
-  URL: https://siya.health/membership-pricing
-  Summary: Simple, transparent membership-based care. Direct access to board-certified providers. ADHD, weight loss, full-spectrum telehealth. TX, PA, FL.
-
 - Men's Health &amp; Longevity
   URL: https://siya.health/mens-health-longevity
   Summary: Men's health services including testosterone therapy, metabolic health, and erectile dysfunction treatment across TX, PA, and FL.
@@ -833,6 +811,10 @@ Total pages: 168
 - Online Prescription Services
   URL: https://siya.health/prescriptions
   Summary: Online prescription services for common conditions are coming soon to Siya Health.
+
+- Pricing
+  URL: https://siya.health/pricing
+  Summary: Transparent physician-led telehealth pricing: $199 initial evaluation, $79 or $149/month follow-up plans. ADHD, weight loss, primary care, and telehealth in California, Texas, Pennsylvania, and Florid…
 
 - Concierge Primary Care
   URL: https://siya.health/primary-urgent-care

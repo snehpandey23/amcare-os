@@ -1,6 +1,6 @@
 # GHL Legal Acceptance — Implementation Report
 
-Generated: 2026-06-07T07:20:59.411Z
+Generated: 2026-06-07T07:46:12.208Z
 
 ## Objective
 
@@ -44,11 +44,11 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 
 ## Audit totals
 
-- HTML pages scanned: **168**
-- Pages with legacy GHL booking links: **167**
-- Total legacy GHL booking anchor targets: **171**
-- Pages with CarePatron booking links: **167**
-- Total CarePatron booking anchor targets: **644**
+- HTML pages scanned: **164**
+- Pages with legacy GHL booking links: **162**
+- Total legacy GHL booking anchor targets: **166**
+- Pages with CarePatron booking links: **163**
+- Total CarePatron booking anchor targets: **627**
 - Pages with acceptance script after build: **1**
 - Intake hub present: **yes**
 
@@ -151,15 +151,12 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/blog/adult-adhd-symptoms-california** (adhd-funnel) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/blog/adult-adhd-treatment-california-2026** (adhd-funnel) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/blog/after-adhd-diagnosis-next-steps-adults** (adhd-funnel) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
-- **/blog/all** (general-cta) — 3 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/ambien-and-sleep-medications-risks-and-benefits** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/combining-adhd-treatment-and-weight-loss-strategies** (adhd-funnel) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/blog/compounded-vs-branded-glp1-medications** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/focalin-vs-adderall-comparison** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/food-noise-and-glp-1-what-it-means-and-what-helps** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/free-testosterone-vs-total-testosterone-what-patients-should-know** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/glp1-side-effects-and-how-to-manage-them** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/glutathione-and-peptides-what-do-they-actually-do** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/how-adhd-medication-is-prescribed-online** (adhd-funnel) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/blog/how-mental-health-affects-weight-loss-outcomes** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/how-to-choose-adhd-provider-california** (adhd-funnel) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
@@ -174,7 +171,6 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/blog/medical-weight-loss-glp1-semaglutide-texas** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/medical-weight-loss-vs-dieting-what-actually-works** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/minoxidil-for-hair-loss-does-it-work** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/blog/modafinil-for-focus-and-fatigue-is-it-safe** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/blog/non-stimulant-adhd-medications-explained** (adhd-funnel) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/blog/online-adhd-diagnosis-california** (adhd-funnel) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/blog/online-adhd-diagnosis-texas** (adhd-funnel) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
@@ -203,10 +199,10 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/legal/notice-of-privacy-practices** (general-cta) — 1 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/legal/privacy-policy** (general-cta) — 1 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/legal/terms-of-use** (general-cta) — 1 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
-- **/membership-pricing** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/mens-health-longevity** (general-cta) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/online-adhd-test** (adhd-funnel) — 7 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/prescriptions** (general-cta) — 5 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
+- **/pricing** (general-cta) — 2 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
 - **/primary-urgent-care** (general-cta) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/privacy-policy** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/providers/derek-timbs** (provider-page) — 5 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
@@ -329,15 +325,12 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - `blog/adult-adhd-symptoms-california.html`
 - `blog/adult-adhd-treatment-california-2026.html`
 - `blog/after-adhd-diagnosis-next-steps-adults.html`
-- `blog/all.html`
-- `blog/ambien-and-sleep-medications-risks-and-benefits.html`
 - `blog/combining-adhd-treatment-and-weight-loss-strategies.html`
 - `blog/compounded-vs-branded-glp1-medications.html`
 - `blog/focalin-vs-adderall-comparison.html`
 - `blog/food-noise-and-glp-1-what-it-means-and-what-helps.html`
 - `blog/free-testosterone-vs-total-testosterone-what-patients-should-know.html`
 - `blog/glp1-side-effects-and-how-to-manage-them.html`
-- `blog/glutathione-and-peptides-what-do-they-actually-do.html`
 - `blog/how-adhd-medication-is-prescribed-online.html`
 - `blog/how-mental-health-affects-weight-loss-outcomes.html`
 - `blog/how-to-choose-adhd-provider-california.html`
@@ -352,7 +345,6 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - `blog/medical-weight-loss-glp1-semaglutide-texas.html`
 - `blog/medical-weight-loss-vs-dieting-what-actually-works.html`
 - `blog/minoxidil-for-hair-loss-does-it-work.html`
-- `blog/modafinil-for-focus-and-fatigue-is-it-safe.html`
 - `blog/non-stimulant-adhd-medications-explained.html`
 - `blog/online-adhd-diagnosis-california.html`
 - `blog/online-adhd-diagnosis-texas.html`
@@ -374,7 +366,6 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - `creyos-adhd-testing.html`
 - `index.html`
 - `labs.html`
-- `membership-pricing.html`
 - `mens-health-longevity.html`
 - `online-adhd-test.html`
 - `prescriptions.html`

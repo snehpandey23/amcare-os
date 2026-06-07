@@ -92,7 +92,7 @@ export const PROVIDERS = [
       'Explore education: <a href="/blog/adhd-symptoms-overlooked">overlooked adult ADHD symptoms</a>, <a href="/blog/how-to-know-if-you-have-adhd-adult">signs it may be ADHD</a>, and <a href="/blog/online-adhd-diagnosis-texas">online diagnosis in Texas</a>.',
     inlineCtas: [
       { label: 'See ADHD evaluation & care', path: '/adhd-care', primary: true },
-      { label: 'View pricing', path: '/membership-pricing', primary: false },
+      { label: 'View pricing', path: '/pricing', primary: false },
     ],
     finalCta: {
       title: 'Ready to stop guessing?',
@@ -342,7 +342,7 @@ export const PROVIDERS = [
     schema: {
       medicalSpecialty: ['Adult ADHD', 'Mental Health', 'Primary Care'],
       knowsAbout: ['Adult ADHD', 'Depression', 'Anxiety', 'Complex medication histories', 'ADHD with anxiety and mood overlap'],
-      jobTitle: 'Licensed Medical Provider — ADHD & Mental Health Care',
+      jobTitle: 'Internal Medicine Physician',
     },
     seo: {
       title: 'Dr. Swati Pandey, MD | Adult ADHD & Mental Health Care | Siya Health',
@@ -372,7 +372,7 @@ export function getAllProviders() {
 
 /** Service page → contracted provider slugs (clinical scope; state chips on cards). */
 export const SERVICE_PROVIDER_SLUGS = {
-  'adhd-care': ['dr-sneh-pandey', 'dr-vanessa-urbina', 'dr-natasha-desai', 'dr-swati-pandey', 'megan-wunderlich', 'wendy-delgado'],
+  'adhd-care': ['dr-sneh-pandey', 'dr-vanessa-urbina', 'dr-natasha-desai', 'dr-swati-pandey', 'megan-wunderlich'],
   telehealth: [
     'dr-sneh-pandey',
     'dr-natasha-desai',
@@ -380,7 +380,6 @@ export const SERVICE_PROVIDER_SLUGS = {
     'dr-vanessa-urbina',
     'megan-wunderlich',
     'derek-timbs',
-    'wendy-delgado',
   ],
   'weight-loss-metabolic-health': ['dr-sneh-pandey', 'dr-vanessa-urbina', 'derek-timbs', 'wendy-delgado'],
   'primary-urgent-care': ['dr-vanessa-urbina', 'dr-natasha-desai', 'dr-sneh-pandey'],

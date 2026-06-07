@@ -10,7 +10,11 @@ import {
   COPY_STANDARDS,
   FOOTER_STATES_LINE,
   LEGACY_FOOTER_PATTERNS,
+  LEGACY_MARKETPLACE_PHRASES,
   LEGAL_LINKS,
+  PRICING,
+  REMOVED_BLOG_PATHS,
+  REMOVED_BOOKING_CTA_LABELS,
   STATES_BULLET,
   STATES_INLINE,
 } from '../data/site-standards.mjs';
@@ -90,7 +94,7 @@ export function isAdhdLegalContext(relPath) {
 export function isControlledSubstanceLinkPage(relPath) {
   if (isAdhdFunnelPage(relPath) || isAdhdLegalContext(relPath)) return true;
   if (/^adhd-diagnosis-/.test(relPath)) return true;
-  if (relPath === 'membership-pricing.html' || relPath === 'adhd-evaluation-cost.html') return true;
+  if (relPath === 'membership-pricing.html' || relPath === 'pricing.html' || relPath === 'adhd-evaluation-cost.html') return true;
   if (/^blog\/.+adhd/i.test(relPath)) return true;
   if (/^blog\/.*(medication|vyvanse|adderall|focalin|stimulant|ritalin|prescribed-online)/i.test(relPath)) {
     return true;
@@ -100,7 +104,6 @@ export function isControlledSubstanceLinkPage(relPath) {
 
 const BLOG_HUB_FILES = new Set([
   'blog/index.html',
-  'blog/all.html',
   'blog/adhd.html',
   'blog/weight-loss.html',
   'blog/telehealth.html',
@@ -533,8 +536,8 @@ export function normalizeLegalLinks(html) {
   return html;
 }
 
-/** Standardize states, Health Guides naming, and legacy CTAs on every page */
-export function normalizeSitewideCopy(html) {
+/** Standardize states, Health Guides naming, CTAs, pricing paths, and legacy copy on every page */
+export function normalizeSitewideCopy(html, relPath = '') {
   html = fixDuplicateCalifornia(html);
   for (const legacy of LEGACY_FOOTER_PATTERNS) {
     html = html.replaceAll(legacy, FOOTER_STATES_LINE);
@@ -589,18 +592,37 @@ export function normalizeSitewideCopy(html) {
 
   html = html.replaceAll('Book Free Consultation →', `${COPY_STANDARDS.primaryCta} →`);
   html = html.replaceAll('Book Free Consultation', COPY_STANDARDS.primaryCta);
-  html = html.replaceAll('Schedule Meet &amp; Greet', COPY_STANDARDS.primaryCta);
-  html = html.replaceAll('Schedule Meet & Greet', COPY_STANDARDS.primaryCta);
-  html = html.replaceAll('Book a meet &amp; greet', COPY_STANDARDS.primaryCta);
-  html = html.replaceAll('Explore care options', COPY_STANDARDS.secondaryCta);
+  for (const label of REMOVED_BOOKING_CTA_LABELS) {
+    if (label.includes('book.carepatron') || label.includes('yourmarketingai')) continue;
+    html = html.replaceAll(label, COPY_STANDARDS.primaryCta);
+  }
+  html = html.replaceAll('Explore care options', COPY_STANDARDS.secondaryCtaTelehealth);
+  html = html.replaceAll('Explore Services', COPY_STANDARDS.secondaryCtaTelehealth);
+  html = html.replaceAll('Explore Siya Health Services', COPY_STANDARDS.secondaryCtaTelehealth);
   html = html.replaceAll('Take Free Screening', COPY_STANDARDS.adhdSecondaryCta);
-  html = html.replaceAll('Book ADHD evaluation online', `${COPY_STANDARDS.adhdPrimaryCta} online`);
-  html = html.replaceAll('Book ADHD evaluation', COPY_STANDARDS.adhdPrimaryCta);
   html = html.replaceAll('Schedule ADHD Evaluation', COPY_STANDARDS.adhdPrimaryCta);
   html = html.replaceAll('Clinical Review Status', COPY_STANDARDS.reviewBadgePending);
   html = html.replaceAll('Clinically Reviewed', COPY_STANDARDS.reviewBadgeReviewed);
   html = html.replaceAll('Review needed', COPY_STANDARDS.reviewBadgePending);
   html = html.replaceAll('Awaiting final physician review', 'awaiting final physician review');
+  html = html.replaceAll('Membership &amp; pricing', COPY_STANDARDS.pricingNavLabel);
+  html = html.replaceAll('Membership & pricing', COPY_STANDARDS.pricingNavLabel);
+  html = html.replaceAll('Membership &amp; Pricing', COPY_STANDARDS.pricingNavLabel);
+  html = html.replaceAll('Membership & Pricing', COPY_STANDARDS.pricingNavLabel);
+  html = html.replaceAll('See pricing &amp; membership', `See ${COPY_STANDARDS.pricingNavLabel.toLowerCase()}`);
+  html = html.replaceAll('See pricing & membership', `See ${COPY_STANDARDS.pricingNavLabel.toLowerCase()}`);
+  html = html.replaceAll('View Membership &amp; Pricing', `View ${COPY_STANDARDS.pricingNavLabel}`);
+  html = html.replaceAll('View Membership & Pricing', `View ${COPY_STANDARDS.pricingNavLabel}`);
+  html = html.replaceAll(PRICING.legacyPath, PRICING.path);
+  for (const [from, to] of Object.entries(REMOVED_BLOG_PATHS)) {
+    html = html.replaceAll(`href="${from}"`, `href="${to}"`);
+  }
+  html = html.replaceAll('Siya Circle™', 'Siya Circle');
+  for (const { from, to } of LEGACY_MARKETPLACE_PHRASES) {
+    if (to) html = html.replace(from, to);
+  }
+  html = html.replace(/\$150(\s*<span>\/month<\/span>)/g, '$149$1');
+  html = html.replace(/\$150\/month/g, '$149/month');
   html = html.replace(
     /<a([^>]*href="[^"]*yourmarketingai[^"]*"[^>]*)>Book a Meet &amp; Greet<\/a>/gi,
     (m) => (m.includes('target=') ? m : m.replace('<a', '<a target="_blank" rel="noopener"')),
@@ -644,7 +666,7 @@ const FOOTER_BLOG_LINKS = [
 const FOOTER_COMPANY_LINKS = [
   { href: '/about', label: 'About Siya Health' },
   { href: NAV_PROVIDERS.path, label: NAV_PROVIDERS.label },
-  { href: '/membership-pricing', label: 'Membership & pricing' },
+  { href: PRICING.path, label: COPY_STANDARDS.pricingNavLabel },
   { href: '/telehealth', label: 'How telehealth works' },
   {
     href: SIYA_CIRCLE_GHL_FORM_URL,
@@ -1145,6 +1167,7 @@ function buildContinueReadingHtml(blogPath, title, auditIndex) {
 
   for (const c of picks) {
     if (c.p.startsWith('/blog/') && c.p !== blogPath && articles.length < 5) {
+      if (REMOVED_BLOG_PATHS[c.p]) continue;
       const label = anchorFor(c.p, c.title);
       if (!articles.some((a) => a.path === c.p)) articles.push({ path: c.p, label });
     }
@@ -1178,13 +1201,14 @@ function buildContinueReadingHtml(blogPath, title, auditIndex) {
       ],
       energy: [
         '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
-        '/blog/modafinil-for-focus-and-fatigue-is-it-safe',
+        '/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign',
         '/blog/insomnia-treatment-options-beyond-medication',
       ],
       general: ['/blog/telehealth-prescriptions-how-online-treatment-works', '/blog/how-to-safely-get-prescriptions-online', '/blog/is-online-adhd-diagnosis-legit'],
     }[topic];
     for (const p of fallbacks || []) {
       if (articles.length >= 5) break;
+      if (REMOVED_BLOG_PATHS[p]) continue;
       if (p !== blogPath && !articles.some((a) => a.path === p)) articles.push({ path: p, label: anchorFor(p) });
     }
     break;
@@ -1321,7 +1345,7 @@ export function applySiteChrome(html, relPath, title = '') {
   html = injectGhlLegalAcceptance(html, relPath);
   html = injectCookieNotice(html, relPath);
   html = normalizeLegalLinks(html);
-  html = normalizeSitewideCopy(html);
+  html = normalizeSitewideCopy(html, relPath);
   html = normalizeSiyaCircleJoinLinks(html);
   html = normalizeCtaHierarchy(html, relPath);
   return html;
