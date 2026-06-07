@@ -371,21 +371,19 @@ const LEARN_MORE_TELE = `<!-- SIYA:LEARN-MORE-TELE -->
       <section class="section section-tinted learn-more-cluster" id="learn-more-telehealth" aria-labelledby="learn-more-tele-heading">
         <div class="container">
           <div class="section-header">
-            <h2 id="learn-more-tele-heading">Learn More About Virtual Care</h2>
-            <p class="lead">Clinical guides on fatigue, metabolic health, hormones, and when telehealth is the right fit.</p>
+            <h2 id="learn-more-tele-heading">Explore guides by concern</h2>
+            <p class="lead">Forms &amp; work notes, medication refills, fatigue, diabetes, labs, preventive care, and sleep.</p>
           </div>
           <ul class="learn-more-links">
+            <li><a href="/answers/is-telehealth-legitimate">Is telehealth legitimate?</a></li>
+            <li><a href="/answers/meet-and-greet-telehealth-expectations">What to expect at a telehealth visit</a></li>
+            <li><a href="/answers/how-online-prescriptions-work">How online prescriptions work</a></li>
             <li><a href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">Why am I always tired?</a></li>
-            <li><a href="/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign">Sleep apnea and metabolic risk</a></li>
-            <li><a href="/answers/why-am-i-tired-even-after-sleeping">Tired even after sleeping</a></li>
+            <li><a href="/answers/brain-fog-after-eating">Brain fog after eating</a></li>
+            <li><a href="/answers/why-normal-labs-dont-mean-healthy">Why normal labs don&rsquo;t mean healthy</a></li>
+            <li><a href="/blog/insulin-resistance-and-weight-loss-clinician-overview">Insulin resistance and diabetes management</a></li>
             <li><a href="/answers/can-sleep-apnea-cause-fatigue">Can sleep apnea cause fatigue?</a></li>
-            <li><a href="/blog/insulin-resistance-and-weight-loss-clinician-overview">Insulin resistance overview</a></li>
-            <li><a href="/blog/food-noise-and-glp-1-what-it-means-and-what-helps">Food noise &amp; GLP-1</a></li>
-            <li><a href="/blog/free-testosterone-vs-total-testosterone-what-patients-should-know">Free vs total testosterone</a></li>
-            <li><a href="/answers/what-is-food-noise">What is food noise?</a></li>
-            <li><a href="/weight-loss-metabolic-health">Metabolic health services</a></li>
-            <li><a href="/mens-health-longevity">Men's health &amp; longevity</a></li>
-            <li><a href="/adhd-care">ADHD care</a></li>
+            <li><a href="/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign">Sleep apnea and metabolic risk</a></li>
           </ul>
         </div>
       </section>
@@ -960,6 +958,14 @@ const ADHD_FAQ_CTA = `            <div class="faq-accordion-cta">
               <p class="faq-accordion-cta-phone"><a href="tel:+12154451244">(215) 445-1244</a></p>
             </div>`;
 
+const TELE_FAQ_CTA = `            <div class="faq-accordion-cta">
+              <p class="faq-accordion-cta-headline">Still not sure where to start?</p>
+              <p class="faq-accordion-cta-subtext">A short conversation can help determine the right next step.</p>
+              <div class="faq-accordion-cta-buttons">
+                <a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">${COPY_STANDARDS.primaryCta}</a>
+              </div>
+            </div>`;
+
 const THIN_ADHD_LANDERS = new Set([
   'adult-adhd-diagnosis.html',
   'adhd-treatment-online.html',
@@ -1020,12 +1026,17 @@ export function normalizeCtaHierarchy(html, relPath) {
     /(<div class="faq-accordion-cta">[\s\S]*?)<a class="button"[^>]*>[\s\S]*?<\/a>/g,
     (match, prefix) => {
       if (relPath === 'adhd-care.html') return match;
+      if (relPath === 'telehealth.html') return match;
       return `${prefix}<p class="cta-microcopy"><a href="#book-telehealth" class="text-link">Talk to a clinician when you're ready →</a></p>`;
     },
   );
 
   if (relPath === 'adhd-care.html' && html.includes('faq-accordion-cta')) {
     html = html.replace(/<div class="faq-accordion-cta">[\s\S]*?<\/div>\s*(?=\n\s*<\/div>\s*\n\s*<script>)/, `${ADHD_FAQ_CTA}\n`);
+  }
+
+  if (relPath === 'telehealth.html' && html.includes('faq-accordion-cta')) {
+    html = html.replace(/<div class="faq-accordion-cta">[\s\S]*?<\/div>\s*(?=\n\s*<\/div>\s*\n\s*<script>)/, `${TELE_FAQ_CTA}\n`);
   }
 
   html = html.replace(
@@ -1053,7 +1064,6 @@ export function normalizeCtaHierarchy(html, relPath) {
       /(<!-- FINAL CTA -->[\s\S]*?<div class="cta-band-buttons">)[\s\S]*?(<\/div>)/,
       `$1
               <a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">${COPY_STANDARDS.primaryCta}</a>
-              <a class="button secondary" href="#why-choose">${COPY_STANDARDS.secondaryCta}</a>
             $2`,
     );
   }
@@ -1213,19 +1223,19 @@ function isLegalContentPage(relPath) {
   return relPath.startsWith('legal/');
 }
 
-/** Legal acceptance gate — intake hub only (direct CarePatron booking elsewhere) */
+/** Siya Circle — analytics config (signup via GHL embed in page HTML) */
 export function injectSiyaCircleSignup(html, relPath) {
   if (relPath !== 'siya-circle.html') return html;
-  if (html.includes('siya-circle-signup.js')) return html;
+
+  html = html.replace(/<!-- SIYA:CIRCLE-SIGNUP -->[\s\S]*?<!-- \/SIYA:CIRCLE-SIGNUP -->\n?/g, '');
+  html = html.replace(/<script>window\.SIYA_CIRCLE_CONFIG=[\s\S]*?<\/script>\n?/g, '');
+  html = html.replace(/<script src="\/scripts\/siya-circle-signup\.js" defer><\/script>\n?/g, '');
 
   const config = buildSiyaCircleClientConfig();
   const configScript = `<script>window.SIYA_CIRCLE_CONFIG=${JSON.stringify(config)};</script>`;
   const loader = `<script src="/scripts/siya-circle-signup.js" defer></script>`;
   const block = `<!-- SIYA:CIRCLE-SIGNUP -->\n${configScript}\n${loader}\n<!-- /SIYA:CIRCLE-SIGNUP -->`;
 
-  if (html.includes('<!-- SIYA:CIRCLE-SIGNUP -->')) {
-    return html.replace(/<!-- SIYA:CIRCLE-SIGNUP -->[\s\S]*?(?:<!-- \/SIYA:CIRCLE-SIGNUP -->)?/, block);
-  }
   return html.replace(/<\/body>/i, `${block}\n</body>`);
 }
 
