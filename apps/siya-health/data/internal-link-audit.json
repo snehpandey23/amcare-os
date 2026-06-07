@@ -1,6 +1,6 @@
 {
   "generated": "2026-06-07",
-  "totalPages": 164,
+  "totalPages": 163,
   "zeroInbound": [
     "/adhd-diagnosis-florida",
     "/intake",
@@ -164,42 +164,44 @@
     }
   ],
   "blogNoServiceLink": [],
-  "serviceNoBlogLink": [],
+  "serviceNoBlogLink": [
+    "/pricing"
+  ],
   "highAuthorityOutbound": [
     {
       "path": "/",
-      "outboundCount": 35,
-      "uniqueInbound": 162
+      "outboundCount": 34,
+      "uniqueInbound": 161
     },
     {
       "path": "/adhd-care",
-      "outboundCount": 36,
-      "uniqueInbound": 156
+      "outboundCount": 35,
+      "uniqueInbound": 155
     },
     {
       "path": "/blog",
       "outboundCount": 44,
-      "uniqueInbound": 156
+      "uniqueInbound": 155
     },
     {
       "path": "/blog/adhd",
-      "outboundCount": 57,
-      "uniqueInbound": 107
+      "outboundCount": 56,
+      "uniqueInbound": 106
     },
     {
       "path": "/answers",
       "outboundCount": 76,
-      "uniqueInbound": 156
+      "uniqueInbound": 155
     },
     {
       "path": "/about",
-      "outboundCount": 29,
-      "uniqueInbound": 162
+      "outboundCount": 33,
+      "uniqueInbound": 161
     },
     {
       "path": "/weight-loss-metabolic-health",
       "outboundCount": 40,
-      "uniqueInbound": 156
+      "uniqueInbound": 155
     }
   ],
   "topSuggestions": [],
@@ -245,9 +247,9 @@
         "title": "ADHD Testing Online in California: Screening vs Full Evaluation"
       },
       {
-        "p": "/adhd-evaluation-cost",
+        "p": "/answers/can-adhd-be-diagnosed-online",
         "score": 9,
-        "title": "ADHD Evaluation Cost Online | $199 Flat Rate"
+        "title": "Can ADHD be diagnosed online?"
       },
       {
         "p": "/answers/how-online-prescriptions-work",
@@ -424,6 +426,11 @@
         "p": "/answers/glp-1-side-effects",
         "score": 4,
         "title": "Which GLP-1 side effects usually improve with titration?"
+      },
+      {
+        "p": "/answers/meet-and-greet-telehealth-expectations",
+        "score": 3,
+        "title": "What should I expect from a first telehealth visit?"
       }
     ],
     "/blog/adhd-symptoms-overlooked": [
@@ -668,6 +675,11 @@
         "p": "/answers/compounded-vs-branded-glp-1",
         "score": 3,
         "title": "What should you ask about compounded vs branded GLP-1?"
+      },
+      {
+        "p": "/answers/meet-and-greet-telehealth-expectations",
+        "score": 3,
+        "title": "What should I expect from a first telehealth visit?"
       }
     ],
     "/blog/glp1-side-effects-and-how-to-manage-them": [
@@ -890,6 +902,11 @@
         "p": "/answers/adhd-and-weight-loss-connection",
         "score": 4,
         "title": "Is there a connection between ADHD and weight loss struggles?"
+      },
+      {
+        "p": "/answers/meet-and-greet-telehealth-expectations",
+        "score": 3,
+        "title": "What should I expect from a first telehealth visit?"
       }
     ],
     "/blog/medical-weight-loss-glp1-semaglutide-texas": [
@@ -1092,6 +1109,11 @@
         "p": "/answers/executive-dysfunction-adhd",
         "score": 4,
         "title": "What is executive dysfunction in adult ADHD?"
+      },
+      {
+        "p": "/answers/meet-and-greet-telehealth-expectations",
+        "score": 3,
+        "title": "What should I expect from a first telehealth visit?"
       }
     ],
     "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign": [
@@ -1170,6 +1192,11 @@
         "p": "/answers/compounded-vs-branded-glp-1",
         "score": 3,
         "title": "What should you ask about compounded vs branded GLP-1?"
+      },
+      {
+        "p": "/answers/meet-and-greet-telehealth-expectations",
+        "score": 3,
+        "title": "What should I expect from a first telehealth visit?"
       }
     ],
     "/blog/when-is-testosterone-therapy-appropriate": [
@@ -1215,35 +1242,35 @@
     ]
   },
   "inboundCounts": {
-    "/about": 162,
-    "/": 162,
-    "/telehealth": 157,
-    "/adhd-care": 156,
-    "/answers": 156,
-    "/blog": 156,
-    "/weight-loss-metabolic-health": 156,
-    "/labs": 155,
-    "/providers": 130,
-    "/adhd-screening": 108,
-    "/blog/adhd": 107,
-    "/blog/weight-loss": 101,
-    "/answers/signs-of-adult-adhd": 97,
-    "/legal/cookie-policy": 96,
-    "/legal": 96,
-    "/legal/notice-of-privacy-practices": 96,
-    "/legal/privacy-policy": 96,
-    "/legal/terms-of-use": 96,
-    "/mens-health-longevity": 95,
-    "/blog/telehealth": 93,
-    "/answers/what-is-insulin-resistance": 92,
-    "/answers/why-am-i-tired-even-after-sleeping": 91,
-    "/blog/how-to-know-if-you-have-adhd-adult": 85,
-    "/answers/is-online-adhd-diagnosis-legitimate": 84,
+    "/about": 161,
+    "/": 161,
+    "/telehealth": 156,
+    "/adhd-care": 155,
+    "/answers": 155,
+    "/blog": 155,
+    "/weight-loss-metabolic-health": 155,
+    "/labs": 154,
+    "/providers": 129,
+    "/adhd-screening": 107,
+    "/blog/adhd": 106,
+    "/blog/weight-loss": 100,
+    "/answers/signs-of-adult-adhd": 96,
+    "/legal/cookie-policy": 95,
+    "/legal": 95,
+    "/legal/notice-of-privacy-practices": 95,
+    "/legal/privacy-policy": 95,
+    "/legal/terms-of-use": 95,
+    "/mens-health-longevity": 94,
+    "/blog/telehealth": 92,
+    "/answers/what-is-insulin-resistance": 91,
+    "/answers/why-am-i-tired-even-after-sleeping": 90,
+    "/blog/how-to-know-if-you-have-adhd-adult": 84,
+    "/answers/is-online-adhd-diagnosis-legitimate": 83,
     "/pricing": 83,
-    "/book-appointment": 82,
+    "/book-appointment": 81,
     "/prescriptions": 73,
     "/primary-urgent-care": 73,
-    "/legal/controlled-substance-treatment-agreement": 43,
+    "/legal/controlled-substance-treatment-agreement": 42,
     "/blog/is-online-adhd-diagnosis-legit": 37,
     "/answers/can-adhd-be-diagnosed-online": 36,
     "/blog/adhd-symptoms-overlooked": 34,
@@ -1252,31 +1279,31 @@
     "/providers/dr-sneh-pandey": 25,
     "/blog/food-noise-and-glp-1-what-it-means-and-what-helps": 23,
     "/blog/insulin-resistance-and-weight-loss-clinician-overview": 23,
-    "/adhd-evaluation-cost": 19,
     "/online-adhd-test": 19,
     "/blog/why-am-i-always-tired-causes-when-to-see-doctor": 18,
     "/answers/brain-fog-after-eating": 17,
     "/providers/dr-natasha-desai": 17,
     "/answers/what-does-low-testosterone-feel-like": 16,
     "/answers/glp-1-side-effects": 14,
+    "/providers/dr-vanessa-urbina": 14,
     "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know": 13,
     "/blog/glp1-side-effects-and-how-to-manage-them": 13,
-    "/providers/dr-vanessa-urbina": 13,
     "/answers/semaglutide-weight-loss-how-it-works": 12,
     "/answers/what-is-free-testosterone": 12,
     "/blog/how-to-safely-get-prescriptions-online": 12,
     "/blog/semaglutide-for-weight-loss-how-it-works": 12,
     "/providers/dr-swati-pandey": 12,
+    "/providers/megan-wunderlich": 12,
     "/answers/medical-weight-loss-vs-dieting": 11,
-    "/providers/megan-wunderlich": 11,
+    "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign": 11,
     "/answers/can-sleep-apnea-cause-fatigue": 10,
     "/answers/signs-of-sleep-apnea-in-adults": 10,
     "/answers/when-is-testosterone-therapy-appropriate": 10,
     "/answers/who-qualifies-glp-1-weight-loss": 10,
     "/blog/how-adhd-medication-is-prescribed-online": 10,
-    "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign": 10,
     "/answers/testosterone-and-adhd-overlap": 9,
     "/blog/online-adhd-diagnosis-texas": 9,
+    "/providers/derek-timbs": 9,
     "/answers/adhd-and-weight-loss-connection": 8,
     "/answers/is-telehealth-legitimate": 8,
     "/answers/normal-a1c-insulin-resistance": 8,
@@ -1284,19 +1311,19 @@
     "/answers/screening-vs-adhd-evaluation": 8,
     "/blog/medical-weight-loss-glp1-semaglutide-texas": 8,
     "/blog/when-is-testosterone-therapy-appropriate": 8,
-    "/providers/derek-timbs": 8,
     "/answers/adhd-medication-side-effects": 7,
     "/answers/can-you-get-adhd-medication-online": 7,
-    "/answers/how-online-prescriptions-work": 7,
     "/answers/is-adhd-medication-safe-long-term": 7,
     "/answers/what-included-199-adhd-evaluation": 7,
     "/blog/adhd-evaluation-cost-texas": 7,
-    "/adult-adhd-diagnosis": 6,
     "/answers/adderall-vs-vyvanse-adults": 6,
+    "/answers/how-online-prescriptions-work": 6,
     "/answers/meet-and-greet-telehealth-expectations": 6,
     "/answers/telehealth-adhd-california": 6,
     "/answers/trt-monitoring-requirements": 6,
     "/blog/online-adhd-diagnosis-california": 6,
+    "/providers/wendy-delgado": 6,
+    "/adult-adhd-diagnosis": 5,
     "/answers/adhd-vs-burnout": 5,
     "/answers/compounded-vs-branded-glp-1": 5,
     "/answers/how-long-adhd-evaluation": 5,
@@ -1308,7 +1335,6 @@
     "/blog/insomnia-treatment-options-beyond-medication": 5,
     "/blog/minoxidil-for-hair-loss-does-it-work": 5,
     "/blog/telehealth-prescriptions-how-online-treatment-works": 5,
-    "/providers/wendy-delgado": 5,
     "/answers/adhd-vs-anxiety": 4,
     "/answers/food-noise-returned-on-glp-1": 4,
     "/answers/fsa-hsa-adhd-evaluation": 4,

@@ -1,6 +1,6 @@
 # GHL Legal Acceptance — Implementation Report
 
-Generated: 2026-06-07T07:46:12.208Z
+Generated: 2026-06-07T11:23:10.126Z
 
 ## Objective
 
@@ -44,82 +44,81 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 
 ## Audit totals
 
-- HTML pages scanned: **164**
-- Pages with legacy GHL booking links: **162**
-- Total legacy GHL booking anchor targets: **166**
-- Pages with CarePatron booking links: **163**
-- Total CarePatron booking anchor targets: **627**
+- HTML pages scanned: **163**
+- Pages with legacy GHL booking links: **161**
+- Total legacy GHL booking anchor targets: **165**
+- Pages with CarePatron booking links: **162**
+- Total CarePatron booking anchor targets: **666**
 - Pages with acceptance script after build: **1**
 - Intake hub present: **yes**
 
 ## Forms audited (site touchpoints)
 
 - **/about** (general-cta) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
-- **/adhd-care** (adhd-funnel) — 7 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/adhd-care** (adhd-funnel) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/adhd-diagnosis-austin** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/adhd-diagnosis-florida** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/adhd-diagnosis-houston** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/adhd-diagnosis-pennsylvania** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/adhd-diagnosis-philadelphia** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/adhd-diagnosis-texas** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
-- **/adhd-evaluation-cost** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/adhd-screening** (adhd-screening) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/adhd-treatment-online** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/adult-adhd-diagnosis** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
-- **/answers/adderall-vs-vyvanse-adults** (general-cta) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
+- **/answers/adderall-vs-vyvanse-adults** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/answers/adhd-and-weight-loss-connection** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/answers/adhd-in-men** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/answers/adhd-in-women** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/answers/adhd-medication-every-day** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/answers/adhd-medication-side-effects** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/answers/adhd-vs-anxiety** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/answers/adhd-vs-burnout** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/adhd-in-men** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/adhd-in-women** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/adhd-medication-every-day** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/adhd-medication-side-effects** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/adhd-vs-anxiety** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/adhd-vs-burnout** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/afternoon-energy-crash-after-lunch** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
-- **/answers/asrs-adhd-screening-explained** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/asrs-adhd-screening-explained** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/brain-fog-after-eating** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
-- **/answers/can-adhd-be-diagnosed-online** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/answers/can-adhd-cause-anxiety** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/can-adhd-be-diagnosed-online** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/can-adhd-cause-anxiety** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/can-sleep-apnea-cause-fatigue** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
-- **/answers/can-you-get-adhd-medication-online** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/can-you-get-adhd-medication-online** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/compounded-vs-branded-glp-1** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
-- **/answers/creyos-adhd-testing-explained** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/creyos-adhd-testing-explained** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/ed-telehealth-legitimate** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
-- **/answers/executive-dysfunction-adhd** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/executive-dysfunction-adhd** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/food-noise-returned-on-glp-1** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/answers/fsa-hsa-adhd-evaluation** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/glp-1-nausea-management** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/answers/glp-1-side-effects** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
-- **/answers/high-functioning-adhd** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/high-functioning-adhd** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/high-shbg-low-free-testosterone** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
-- **/answers/how-long-adhd-evaluation** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/answers/how-much-does-adhd-testing-cost** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/how-long-adhd-evaluation** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/how-much-does-adhd-testing-cost** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/how-online-prescriptions-work** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/answers** (general-cta) — 3 CarePatron link(s), 2 legacy GHL link(s), acceptance script: no
 - **/answers/insulin-resistance-without-diabetes** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
-- **/answers/is-adhd-medication-safe-long-term** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/answers/is-online-adhd-diagnosis-legitimate** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/is-adhd-medication-safe-long-term** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/is-online-adhd-diagnosis-legitimate** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/is-telehealth-legitimate** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
-- **/answers/late-adhd-diagnosis-adults** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/late-adhd-diagnosis-adults** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/medical-weight-loss-vs-dieting** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/answers/meet-and-greet-telehealth-expectations** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/answers/minoxidil-hair-loss-does-it-work** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
-- **/answers/non-stimulant-adhd-medications** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/non-stimulant-adhd-medications** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/normal-a1c-insulin-resistance** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/answers/oral-vs-injectable-weight-loss-meds** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/answers/oral-vs-topical-minoxidil** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/answers/phentermine-weight-loss-safety** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/answers/poor-sleep-feels-like-adhd** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/answers/rejection-sensitivity-adhd** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/answers/screening-vs-adhd-evaluation** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/rejection-sensitivity-adhd** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/screening-vs-adhd-evaluation** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/semaglutide-weight-loss-how-it-works** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
-- **/answers/signs-of-adult-adhd** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/signs-of-adult-adhd** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/signs-of-sleep-apnea-in-adults** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/answers/sildenafil-erectile-dysfunction-expectations** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
-- **/answers/starting-adhd-medication-adults** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/starting-adhd-medication-adults** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/telehealth-adhd-california** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/telehealth-adhd-texas** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/testosterone-and-adhd-overlap** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/answers/time-blindness-adhd** (adhd-content) — 2 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/answers/time-blindness-adhd** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/tirzepatide-vs-semaglutide** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/answers/trt-monitoring-requirements** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/answers/weight-gain-after-stopping-ozempic** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
@@ -190,7 +189,7 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/blog/youre-not-lazy-signs-undiagnosed-adult-adhd** (adhd-funnel) — 5 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/book-appointment** (booking-hub) — 7 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/creyos-adhd-testing** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
-- **/** (general-cta) — 7 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
+- **/** (general-cta) — 5 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/intake** (intake-hub) — 1 CarePatron link(s), 1 legacy GHL link(s), acceptance script: yes
 - **/labs** (general-cta) — 5 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/legal/controlled-substance-treatment-agreement** (general-cta) — 1 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
@@ -236,7 +235,6 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - `adhd-diagnosis-pennsylvania.html`
 - `adhd-diagnosis-philadelphia.html`
 - `adhd-diagnosis-texas.html`
-- `adhd-evaluation-cost.html`
 - `adhd-screening.html`
 - `adhd-treatment-online.html`
 - `adult-adhd-diagnosis.html`

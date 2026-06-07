@@ -73,7 +73,7 @@ function appendFaqDetails(post) {
                 <a class="button" href="/adhd-screening?adhd=1">Start ADHD screening</a>
                 <a class="button secondary" href="${BOOK}" target="_blank" rel="noopener">Schedule Meet &amp; Greet</a>
               </div>
-              <p class="blog-provider-cta-foot"><a href="/providers/dr-sneh-pandey">Meet Dr. Sneh Pandey, MD — Medical Director</a> · <a href="/adhd-care">ADHD care</a> · <a href="/membership-pricing">Pricing</a></p>
+              <p class="blog-provider-cta-foot"><a href="/providers/dr-sneh-pandey">Meet Dr. Sneh Pandey, MD — Medical Director</a> · <a href="/adhd-care">ADHD care</a> · <a href="/pricing">Pricing</a></p>
             </section>`
   );
 }

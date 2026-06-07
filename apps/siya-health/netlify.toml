@@ -8,3 +8,8 @@
   from = "/mental-health-adhd"
   to = "/adhd-care"
   status = 301
+
+[[redirects]]
+  from = "/adhd-evaluation-cost"
+  to = "/pricing"
+  status = 301

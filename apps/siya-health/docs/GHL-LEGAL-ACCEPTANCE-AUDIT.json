@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-07T07:46:12.208Z",
+  "generatedAt": "2026-06-07T11:23:10.126Z",
   "formId": "mnWpgh0IEgFvJymdZqHY",
   "bookingUrl": "https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4",
   "legalDocumentVersion": "terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31",
@@ -12,13 +12,13 @@
     "npp": "legal_acceptance_npp"
   },
   "summary": {
-    "htmlPagesScanned": 164,
-    "pagesWithGhlLinks": 162,
-    "totalGhlBookingLinks": 166,
-    "pagesWithCarepatronLinks": 163,
-    "totalCarepatronBookingLinks": 627,
+    "htmlPagesScanned": 163,
+    "pagesWithGhlLinks": 161,
+    "totalGhlBookingLinks": 165,
+    "pagesWithCarepatronLinks": 162,
+    "totalCarepatronBookingLinks": 666,
     "pagesWithAcceptanceScript": 1,
-    "pagesWithGhlMissingAcceptance": 155,
+    "pagesWithGhlMissingAcceptance": 154,
     "intakeHub": true
   },
   "externalFunnels": [
@@ -69,7 +69,7 @@
       "file": "adhd-care.html",
       "category": "adhd-funnel",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 7,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -135,16 +135,6 @@
       "hasChatWidget": true
     },
     {
-      "path": "/adhd-evaluation-cost",
-      "file": "adhd-evaluation-cost.html",
-      "category": "adhd-funnel",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 6,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": true,
-      "hasChatWidget": true
-    },
-    {
       "path": "/adhd-screening",
       "file": "adhd-screening.html",
       "category": "adhd-screening",
@@ -179,7 +169,7 @@
       "file": "answers/adderall-vs-vyvanse-adults.html",
       "category": "general-cta",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": false
@@ -199,7 +189,7 @@
       "file": "answers/adhd-in-men.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -209,7 +199,7 @@
       "file": "answers/adhd-in-women.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -219,7 +209,7 @@
       "file": "answers/adhd-medication-every-day.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -229,7 +219,7 @@
       "file": "answers/adhd-medication-side-effects.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -239,7 +229,7 @@
       "file": "answers/adhd-vs-anxiety.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -249,7 +239,7 @@
       "file": "answers/adhd-vs-burnout.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -269,7 +259,7 @@
       "file": "answers/asrs-adhd-screening-explained.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -289,7 +279,7 @@
       "file": "answers/can-adhd-be-diagnosed-online.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -299,7 +289,7 @@
       "file": "answers/can-adhd-cause-anxiety.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -319,7 +309,7 @@
       "file": "answers/can-you-get-adhd-medication-online.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -339,7 +329,7 @@
       "file": "answers/creyos-adhd-testing-explained.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -359,7 +349,7 @@
       "file": "answers/executive-dysfunction-adhd.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -409,7 +399,7 @@
       "file": "answers/high-functioning-adhd.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -429,7 +419,7 @@
       "file": "answers/how-long-adhd-evaluation.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -439,7 +429,7 @@
       "file": "answers/how-much-does-adhd-testing-cost.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -479,7 +469,7 @@
       "file": "answers/is-adhd-medication-safe-long-term.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -489,7 +479,7 @@
       "file": "answers/is-online-adhd-diagnosis-legitimate.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -509,7 +499,7 @@
       "file": "answers/late-adhd-diagnosis-adults.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -549,7 +539,7 @@
       "file": "answers/non-stimulant-adhd-medications.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -609,7 +599,7 @@
       "file": "answers/rejection-sensitivity-adhd.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -619,7 +609,7 @@
       "file": "answers/screening-vs-adhd-evaluation.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -639,7 +629,7 @@
       "file": "answers/signs-of-adult-adhd.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -669,7 +659,7 @@
       "file": "answers/starting-adhd-medication-adults.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -709,7 +699,7 @@
       "file": "answers/time-blindness-adhd.html",
       "category": "adhd-content",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 2,
+      "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": false
@@ -1419,7 +1409,7 @@
       "file": "index.html",
       "category": "general-cta",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 7,
+      "carepatronBookingLinks": 5,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": false
@@ -1694,7 +1684,6 @@
     "adhd-diagnosis-pennsylvania.html",
     "adhd-diagnosis-philadelphia.html",
     "adhd-diagnosis-texas.html",
-    "adhd-evaluation-cost.html",
     "adhd-screening.html",
     "adhd-treatment-online.html",
     "adult-adhd-diagnosis.html",

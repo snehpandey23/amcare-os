@@ -1453,7 +1453,7 @@ export const PHASE5_ANSWER_SEEDS = [
         listItems: [
           'Myth: “Telehealth is always lower quality.” Reality: Outcomes depend on clinical standards, not format alone.',
           'Myth: “Any app can prescribe controlled substances.” Reality: Federal and state rules require patient relationships and monitoring.',
-          'Myth: “Meet & Greet replaces diagnosis.” Reality: Intake visits differ from comprehensive evaluation.',
+          'Myth: “An introductory visit replaces diagnosis.” Reality: Intake visits differ from comprehensive evaluation.',
           'Myth: “Out-of-state care is always fine.” Reality: You generally need a clinician licensed where you are located.',
         ],
       },
@@ -1492,15 +1492,15 @@ export const PHASE5_ANSWER_SEEDS = [
           'Sometimes, following federal and state telemedicine rules, identity verification, PDMP checks, and follow-up—not automatic online checkout.',
       },
       {
-        question: 'What is a telehealth Meet & Greet?',
+        question: 'What should I expect from a first telehealth visit?',
         answer:
-          'A logistics and fit conversation—not a full diagnosis. See our Meet & Greet Health Guide.',
+          'A logistics and fit conversation—not a full diagnosis. See our first telehealth visit Health Guide.',
       },
     ],
     evidence: ['HHS telehealth best practices', 'State telehealth parity laws (varies by state)', 'DEA telemedicine prescribing policies'],
     learnMore: [
       { href: '/telehealth', label: 'Siya Health telehealth services' },
-      { href: '/answers/meet-and-greet-telehealth-expectations', label: 'Meet & Greet expectations' },
+      { href: '/answers/meet-and-greet-telehealth-expectations', label: 'First telehealth visit expectations' },
       { href: '/answers/how-online-prescriptions-work', label: 'How online prescriptions work' },
       { href: '/blog/how-to-safely-get-prescriptions-online', label: 'Safe online prescriptions (blog)' },
     ],
@@ -1509,13 +1509,13 @@ export const PHASE5_ANSWER_SEEDS = [
   {
     slug: 'meet-and-greet-telehealth-expectations',
     metaDescription:
-      'Telehealth Meet & Greet: what happens, what it is not, pricing fit, and next steps before a full ADHD or metabolic evaluation.',
+      'First telehealth visit: what happens, what it is not, follow-up plan pricing, and next steps before a full ADHD or metabolic evaluation.',
     shortAnswer:
-      'A telehealth Meet & Greet is a brief, low-pressure introduction to confirm service fit, review offerings and pricing, answer logistics (state licensure, visit length, follow-up), and plan next steps—it is not a full diagnosis or medication visit. Use it when you want clarity before committing to a comprehensive ADHD evaluation or ongoing metabolic care. Emergency symptoms require 911 or local urgent care, not a meet-and-greet slot.',
+      'A first telehealth visit is a brief, low-pressure introduction to confirm service fit, review offerings and follow-up plan pricing, answer logistics (state licensure, visit length, follow-up), and plan next steps—it is not a full diagnosis or medication visit. Use it when you want clarity before committing to a comprehensive ADHD evaluation or ongoing metabolic care. Emergency symptoms require 911 or local urgent care, not a scheduling slot for introductory logistics.',
     sections: [
       {
         id: 'what-happens',
-        heading: 'What typically happens in a Meet & Greet',
+        heading: 'What typically happens in a first telehealth visit',
         paragraphs: [
           'You meet a team member or clinician to discuss which programs apply (ADHD evaluation, weight management, men’s health), expected timelines, out-of-pocket pricing, and whether your state is in network for licensure.',
           'You can ask how 60–90 minute ADHD evaluations differ from free screeners, and what documents to prepare (ID, medication list, prior records).',
@@ -1523,7 +1523,7 @@ export const PHASE5_ANSWER_SEEDS = [
       },
       {
         id: 'what-it-is-not',
-        heading: 'What a Meet & Greet is not',
+        heading: 'What a first telehealth visit is not',
         listItems: [
           'Not a substitute for emergency care.',
           'Not a guarantee of stimulant or GLP-1 prescriptions.',
@@ -1533,9 +1533,9 @@ export const PHASE5_ANSWER_SEEDS = [
       },
       {
         id: 'when-to-seek-evaluation',
-        heading: 'When to book Meet & Greet vs full evaluation',
+        heading: 'When to Talk to a Clinician vs book full evaluation',
         paragraphs: [
-          'Book Meet & Greet when you are comparing telehealth options or unsure which pathway fits. Book comprehensive evaluation when you are ready for diagnosis-level assessment with prepared history.',
+          'Talk to a Clinician when you are comparing telehealth options or unsure which pathway fits. Book comprehensive evaluation when you are ready for diagnosis-level assessment with prepared history.',
           'If you already completed a thorough elsewhere evaluation, bring records to avoid duplicate testing.',
         ],
       },
@@ -1543,7 +1543,7 @@ export const PHASE5_ANSWER_SEEDS = [
         id: 'key-takeaways',
         heading: 'Key takeaways',
         listItems: [
-          'Meet & Greet reduces uncertainty before larger commitments.',
+          'An introductory visit reduces uncertainty before larger commitments.',
           'Full clinical evaluation is a separate, longer visit.',
           'Legitimate telehealth explains limits and licensure up front.',
         ],
@@ -1551,22 +1551,22 @@ export const PHASE5_ANSWER_SEEDS = [
     ],
     faqs: [
       {
-        question: 'What happens in a telehealth Meet & Greet?',
+        question: 'What should I expect from a first telehealth visit?',
         answer:
           'Service overview, pricing and logistics, state eligibility, and next-step planning—not comprehensive diagnosis in one short call.',
       },
       {
-        question: 'Does Meet & Greet include ADHD diagnosis?',
+        question: 'Does an introductory visit include ADHD diagnosis?',
         answer:
           'No. Diagnosis requires the full structured evaluation pathway.',
       },
       {
-        question: 'Is Meet & Greet free?',
+        question: 'Is the first visit free?',
         answer:
-          'Pricing depends on current Siya Health offerings—confirm during booking.',
+          'Pricing depends on current Siya Health offerings—confirm during booking or see /pricing.',
       },
       {
-        question: 'Can I get prescriptions at Meet & Greet?',
+        question: 'Can I get prescriptions at an introductory visit?',
         answer:
           'Controlled or new prescriptions generally require full medical evaluation and follow-up standards.',
       },
@@ -1574,8 +1574,8 @@ export const PHASE5_ANSWER_SEEDS = [
     evidence: ['Siya Health intake workflow documentation', 'Telehealth informed consent standards', 'State medical practice telehealth advisories'],
     learnMore: [
       { href: '/telehealth', label: 'Telehealth hub' },
-      { href: '/adult-adhd-diagnosis', label: 'Adult ADHD evaluation' },
-      { href: '/membership-pricing', label: 'Membership & pricing' },
+      { href: '/adhd-care', label: 'Adult ADHD evaluation' },
+      { href: '/pricing', label: 'Pricing & follow-up plans' },
       { href: '/answers/is-telehealth-legitimate', label: 'Is telehealth legitimate?' },
     ],
     related: ['is-telehealth-legitimate', 'can-adhd-be-diagnosed-online', 'how-online-prescriptions-work', 'what-included-199-adhd-evaluation'],

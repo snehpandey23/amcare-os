@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-07T07:46:15.748Z",
+  "generated": "2026-06-07T11:20:15.449Z",
   "indexablePageCount": 166,
   "recommendedSystem": {
     "primary": {
@@ -16,9 +16,9 @@
     }
   },
   "summary": {
-    "totalCtaInstances": 1169,
-    "uniqueLabels": 66,
-    "uniquePatterns": 95,
+    "totalCtaInstances": 1163,
+    "uniqueLabels": 67,
+    "uniquePatterns": 102,
     "bookingLabelVariants": 7,
     "bookingLabels": [
       "Talk to a Clinician",
@@ -29,12 +29,12 @@
       "Weight Loss Consultation",
       "schedule a visit"
     ],
-    "keepInstances": 323,
-    "consolidateInstances": 528,
-    "removeInstances": 318,
-    "pagesWithMainCtaOver3": 28,
-    "pagesWithDuplicateBookingInMain": 23,
-    "chaosScore": 357
+    "keepInstances": 321,
+    "consolidateInstances": 525,
+    "removeInstances": 317,
+    "pagesWithMainCtaOver3": 27,
+    "pagesWithDuplicateBookingInMain": 20,
+    "chaosScore": 354
   },
   "patterns": [
     {
@@ -62,7 +62,7 @@
       "url": "https://book.carepatron.com/Siya-Health",
       "type": "booking",
       "zone": "footer",
-      "count": 162,
+      "count": 161,
       "pages": [
         "/",
         "/about",
@@ -82,7 +82,7 @@
       "url": "/adhd-screening",
       "type": "screening",
       "zone": "footer-links",
-      "count": 161,
+      "count": 160,
       "pages": [
         "/",
         "/about",
@@ -102,7 +102,7 @@
       "url": "https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl",
       "type": "newsletter",
       "zone": "footer-links",
-      "count": 161,
+      "count": 160,
       "pages": [
         "/",
         "/about",
@@ -122,7 +122,7 @@
       "url": "https://book.carepatron.com/Siya-Health",
       "type": "booking",
       "zone": "main",
-      "count": 115,
+      "count": 113,
       "pages": [
         "/",
         "/adhd-screening",
@@ -142,7 +142,7 @@
       "url": "https://book.carepatron.com/Siya-Health",
       "type": "booking",
       "zone": "nav",
-      "count": 56,
+      "count": 54,
       "pages": [
         "/adhd-care",
         "/adhd-diagnosis-austin",
@@ -151,7 +151,7 @@
         "/adhd-diagnosis-pennsylvania",
         "/adhd-diagnosis-philadelphia",
         "/adhd-diagnosis-texas",
-        "/adhd-evaluation-cost"
+        "/adhd-screening"
       ],
       "recommendation": "CONSOLIDATE",
       "slot": "primary",
@@ -182,7 +182,7 @@
       "url": "https://book.carepatron.com/Siya-Health",
       "type": "booking",
       "zone": "main",
-      "count": 38,
+      "count": 36,
       "pages": [
         "/about",
         "/adhd-diagnosis-austin",
@@ -191,7 +191,7 @@
         "/adhd-diagnosis-pennsylvania",
         "/adhd-diagnosis-philadelphia",
         "/adhd-diagnosis-texas",
-        "/adhd-evaluation-cost"
+        "/adhd-treatment-online"
       ],
       "recommendation": "CONSOLIDATE",
       "slot": "primary",
@@ -218,26 +218,6 @@
       "note": "Screening CTA outside ADHD hero/symptoms"
     },
     {
-      "label": "Book ADHD Evaluation",
-      "url": "https://book.carepatron.com/Siya-Health",
-      "type": "booking",
-      "zone": "main",
-      "count": 18,
-      "pages": [
-        "/adhd-care",
-        "/blog/adderall-for-adhd-how-it-works",
-        "/blog/adult-adhd-symptoms-california",
-        "/blog/adult-adhd-treatment-california-2026",
-        "/blog/after-adhd-diagnosis-next-steps-adults",
-        "/blog/combining-adhd-treatment-and-weight-loss-strategies",
-        "/blog/how-adhd-medication-is-prescribed-online",
-        "/blog/how-to-choose-adhd-provider-california"
-      ],
-      "recommendation": "REMOVE",
-      "slot": null,
-      "note": "Extra main booking beyond hero/final band"
-    },
-    {
       "label": "online ADHD screening",
       "url": "/online-adhd-test",
       "type": "screening",
@@ -256,6 +236,26 @@
       "recommendation": "REMOVE",
       "slot": null,
       "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Book ADHD Evaluation",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "main",
+      "count": 15,
+      "pages": [
+        "/adhd-care",
+        "/blog/adderall-for-adhd-how-it-works",
+        "/blog/adult-adhd-symptoms-california",
+        "/blog/adult-adhd-treatment-california-2026",
+        "/blog/after-adhd-diagnosis-next-steps-adults",
+        "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+        "/blog/how-adhd-medication-is-prescribed-online",
+        "/blog/how-to-choose-adhd-provider-california"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Extra main booking beyond hero/final band"
     },
     {
       "label": "Talk to a Clinician",
@@ -300,7 +300,7 @@
       "url": "https://book.carepatron.com/Siya-Health",
       "type": "booking",
       "zone": "main",
-      "count": 12,
+      "count": 11,
       "pages": [
         "/adhd-diagnosis-austin",
         "/adhd-diagnosis-florida",
@@ -308,8 +308,8 @@
         "/adhd-diagnosis-pennsylvania",
         "/adhd-diagnosis-philadelphia",
         "/adhd-diagnosis-texas",
-        "/adhd-evaluation-cost",
-        "/adhd-treatment-online"
+        "/adhd-treatment-online",
+        "/adult-adhd-diagnosis"
       ],
       "recommendation": "CONSOLIDATE",
       "slot": "primary",
@@ -320,7 +320,7 @@
       "url": "/adhd-screening",
       "type": "screening",
       "zone": "main",
-      "count": 11,
+      "count": 10,
       "pages": [
         "/adhd-diagnosis-austin",
         "/adhd-diagnosis-florida",
@@ -328,8 +328,8 @@
         "/adhd-diagnosis-pennsylvania",
         "/adhd-diagnosis-philadelphia",
         "/adhd-diagnosis-texas",
-        "/adhd-evaluation-cost",
-        "/adhd-treatment-online"
+        "/adhd-treatment-online",
+        "/adult-adhd-diagnosis"
       ],
       "recommendation": "CONSOLIDATE",
       "slot": "secondary",
@@ -340,7 +340,7 @@
       "url": "/adhd-screening",
       "type": "screening",
       "zone": "main",
-      "count": 11,
+      "count": 10,
       "pages": [
         "/adhd-diagnosis-austin",
         "/adhd-diagnosis-florida",
@@ -348,8 +348,8 @@
         "/adhd-diagnosis-pennsylvania",
         "/adhd-diagnosis-philadelphia",
         "/adhd-diagnosis-texas",
-        "/adhd-evaluation-cost",
-        "/adhd-treatment-online"
+        "/adhd-treatment-online",
+        "/adult-adhd-diagnosis"
       ],
       "recommendation": "CONSOLIDATE",
       "slot": "secondary",
@@ -428,18 +428,31 @@
       "note": "Newsletter CTA belongs in footer or dedicated hub section only"
     },
     {
-      "label": "View profile",
-      "url": "/providers/dr-swati-pandey",
-      "type": "secondary-service",
+      "label": "Free ADHD Screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "free ADHD screening",
+      "url": "/adhd-screening",
+      "type": "screening",
       "zone": "main",
       "count": 2,
       "pages": [
         "/",
-        "/about"
+        "/blog/online-adhd-diagnosis-texas"
       ],
       "recommendation": "REMOVE",
       "slot": null,
-      "note": "Secondary explore link outside hero/final band"
+      "note": "Screening CTA outside ADHD hero/symptoms"
     },
     {
       "label": "Explore Telehealth Care",
@@ -454,6 +467,19 @@
       "recommendation": "CONSOLIDATE",
       "slot": "secondary",
       "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "Explore follow-up pricing",
+      "url": "/pricing",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/adhd-care"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
     },
     {
       "label": "Read the full clinical guide",
@@ -620,19 +646,6 @@
       "note": "Screening CTA outside ADHD hero/symptoms"
     },
     {
-      "label": "Free ADHD Screening",
-      "url": "/adhd-screening",
-      "type": "screening",
-      "zone": "main",
-      "count": 1,
-      "pages": [
-        "/"
-      ],
-      "recommendation": "REMOVE",
-      "slot": null,
-      "note": "Screening CTA outside ADHD hero/symptoms"
-    },
-    {
       "label": "View profile",
       "url": "/providers/dr-sneh-pandey",
       "type": "secondary-service",
@@ -661,6 +674,19 @@
     {
       "label": "View profile",
       "url": "/providers/dr-natasha-desai",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/dr-swati-pandey",
       "type": "secondary-service",
       "zone": "main",
       "count": 1,
@@ -711,9 +737,9 @@
       "note": "Secondary explore link outside hero/final band"
     },
     {
-      "label": "free ADHD screening",
-      "url": "/adhd-screening",
-      "type": "screening",
+      "label": "Explore Telehealth Care",
+      "url": "/adhd-care",
+      "type": "secondary-service",
       "zone": "main",
       "count": 1,
       "pages": [
@@ -721,7 +747,7 @@
       ],
       "recommendation": "REMOVE",
       "slot": null,
-      "note": "Screening CTA outside ADHD hero/symptoms"
+      "note": "Secondary explore link outside hero/final band"
     },
     {
       "label": "View Dr. Pandey's Profile",
@@ -751,7 +777,72 @@
     },
     {
       "label": "View profile",
+      "url": "/providers/dr-vanessa-urbina",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/about"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "View profile",
       "url": "/providers/dr-natasha-desai",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/about"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/dr-swati-pandey",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/about"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/megan-wunderlich",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/about"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/derek-timbs",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/about"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "secondary",
+      "note": "Consolidate to \"Explore Services\" → /telehealth (or contextual service path)"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/wendy-delgado",
       "type": "secondary-service",
       "zone": "main",
       "count": 1,
@@ -1404,7 +1495,7 @@
     {
       "path": "/",
       "mainCtaCount": 15,
-      "bookingInMain": 3,
+      "bookingInMain": 1,
       "ctas": [
         {
           "label": "Talk to a Clinician",
@@ -1479,20 +1570,20 @@
           "recommendation": "REMOVE"
         },
         {
-          "label": "Talk to a Clinician",
-          "type": "booking",
-          "context": "provider-grid",
-          "recommendation": "REMOVE"
-        },
-        {
           "label": "free ADHD screening",
           "type": "screening",
           "context": "provider-grid",
           "recommendation": "REMOVE"
         },
         {
-          "label": "Talk to a Clinician",
-          "type": "booking",
+          "label": "Explore Telehealth Care",
+          "type": "secondary-service",
+          "context": "testimonials",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Free ADHD Screening",
+          "type": "screening",
           "context": "testimonials",
           "recommendation": "REMOVE"
         }
@@ -1510,9 +1601,91 @@
         "View profile",
         "View profile",
         "View profile",
-        "Talk to a Clinician",
         "free ADHD screening",
-        "Talk to a Clinician"
+        "Explore Telehealth Care",
+        "Free ADHD Screening"
+      ]
+    },
+    {
+      "path": "/about",
+      "mainCtaCount": 12,
+      "bookingInMain": 3,
+      "ctas": [
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View Dr. Pandey's Profile",
+          "type": "button-other",
+          "context": "hero",
+          "recommendation": "REMOVE"
+        },
+        {
+          "label": "Explore Telehealth Care",
+          "type": "secondary-service",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View profile",
+          "type": "secondary-service",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View profile",
+          "type": "secondary-service",
+          "context": "cta-band",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View profile",
+          "type": "secondary-service",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View profile",
+          "type": "secondary-service",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View profile",
+          "type": "secondary-service",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View profile",
+          "type": "secondary-service",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "View profile",
+          "type": "secondary-service",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": [
+        "View Dr. Pandey's Profile"
       ]
     },
     {
@@ -1578,68 +1751,9 @@
       "remove": []
     },
     {
-      "path": "/about",
-      "mainCtaCount": 8,
-      "bookingInMain": 3,
-      "ctas": [
-        {
-          "label": "Talk to a Clinician",
-          "type": "booking",
-          "context": "hero",
-          "recommendation": "CONSOLIDATE"
-        },
-        {
-          "label": "View Dr. Pandey's Profile",
-          "type": "button-other",
-          "context": "hero",
-          "recommendation": "REMOVE"
-        },
-        {
-          "label": "Explore Telehealth Care",
-          "type": "secondary-service",
-          "context": "hero",
-          "recommendation": "CONSOLIDATE"
-        },
-        {
-          "label": "View profile",
-          "type": "secondary-service",
-          "context": "hero",
-          "recommendation": "CONSOLIDATE"
-        },
-        {
-          "label": "View profile",
-          "type": "secondary-service",
-          "context": "cta-band",
-          "recommendation": "CONSOLIDATE"
-        },
-        {
-          "label": "View profile",
-          "type": "secondary-service",
-          "context": "main-body",
-          "recommendation": "REMOVE"
-        },
-        {
-          "label": "Talk to a Clinician",
-          "type": "booking",
-          "context": "hero",
-          "recommendation": "CONSOLIDATE"
-        },
-        {
-          "label": "Talk to a Clinician",
-          "type": "booking",
-          "context": "hero",
-          "recommendation": "CONSOLIDATE"
-        }
-      ],
-      "remove": [
-        "View Dr. Pandey's Profile",
-        "View profile"
-      ]
-    },
-    {
       "path": "/adhd-care",
-      "mainCtaCount": 7,
-      "bookingInMain": 4,
+      "mainCtaCount": 6,
+      "bookingInMain": 1,
       "ctas": [
         {
           "label": "Book ADHD Evaluation",
@@ -1654,14 +1768,14 @@
           "recommendation": "CONSOLIDATE"
         },
         {
-          "label": "Book ADHD Evaluation",
-          "type": "booking",
+          "label": "Free ADHD Screening",
+          "type": "screening",
           "context": "symptoms-grid",
-          "recommendation": "REMOVE"
+          "recommendation": "CONSOLIDATE"
         },
         {
-          "label": "Book ADHD Evaluation",
-          "type": "booking",
+          "label": "Explore follow-up pricing",
+          "type": "secondary-other",
           "context": "symptoms-grid",
           "recommendation": "REMOVE"
         },
@@ -1672,23 +1786,16 @@
           "recommendation": "CONSOLIDATE"
         },
         {
-          "label": "Book ADHD Evaluation",
-          "type": "booking",
+          "label": "Explore follow-up pricing",
+          "type": "secondary-other",
           "context": "symptoms-grid",
           "recommendation": "REMOVE"
-        },
-        {
-          "label": "Free ADHD Screening",
-          "type": "screening",
-          "context": "symptoms-grid",
-          "recommendation": "CONSOLIDATE"
         }
       ],
       "remove": [
         "Book ADHD Evaluation",
-        "Book ADHD Evaluation",
-        "Book ADHD Evaluation",
-        "Book ADHD Evaluation"
+        "Explore follow-up pricing",
+        "Explore follow-up pricing"
       ]
     },
     {
@@ -2030,44 +2137,6 @@
     },
     {
       "path": "/adhd-diagnosis-texas",
-      "mainCtaCount": 5,
-      "bookingInMain": 3,
-      "ctas": [
-        {
-          "label": "Book ADHD Evaluation",
-          "type": "booking",
-          "context": "hero",
-          "recommendation": "CONSOLIDATE"
-        },
-        {
-          "label": "Free 2-minute screening",
-          "type": "screening",
-          "context": "hero",
-          "recommendation": "CONSOLIDATE"
-        },
-        {
-          "label": "Talk to a Clinician",
-          "type": "booking",
-          "context": "cta-band",
-          "recommendation": "CONSOLIDATE"
-        },
-        {
-          "label": "Talk to a Clinician",
-          "type": "booking",
-          "context": "hero",
-          "recommendation": "CONSOLIDATE"
-        },
-        {
-          "label": "Free screening",
-          "type": "screening",
-          "context": "hero",
-          "recommendation": "CONSOLIDATE"
-        }
-      ],
-      "remove": []
-    },
-    {
-      "path": "/adhd-evaluation-cost",
       "mainCtaCount": 5,
       "bookingInMain": 3,
       "ctas": [
@@ -2627,20 +2696,12 @@
   ],
   "duplicateBookingPages": [
     {
-      "path": "/adhd-care",
-      "bookingInMain": 4
-    },
-    {
       "path": "/book-appointment",
       "bookingInMain": 4
     },
     {
       "path": "/online-adhd-test",
       "bookingInMain": 4
-    },
-    {
-      "path": "/",
-      "bookingInMain": 3
     },
     {
       "path": "/about",
@@ -2668,10 +2729,6 @@
     },
     {
       "path": "/adhd-diagnosis-texas",
-      "bookingInMain": 3
-    },
-    {
-      "path": "/adhd-evaluation-cost",
       "bookingInMain": 3
     },
     {
@@ -2725,7 +2782,7 @@
       "url": "https://book.carepatron.com/Siya-Health",
       "type": "booking",
       "zone": "main",
-      "count": 115,
+      "count": 113,
       "pages": [
         "/",
         "/adhd-screening",
@@ -2781,26 +2838,6 @@
       "note": "Screening CTA outside ADHD hero/symptoms"
     },
     {
-      "label": "Book ADHD Evaluation",
-      "url": "https://book.carepatron.com/Siya-Health",
-      "type": "booking",
-      "zone": "main",
-      "count": 18,
-      "pages": [
-        "/adhd-care",
-        "/blog/adderall-for-adhd-how-it-works",
-        "/blog/adult-adhd-symptoms-california",
-        "/blog/adult-adhd-treatment-california-2026",
-        "/blog/after-adhd-diagnosis-next-steps-adults",
-        "/blog/combining-adhd-treatment-and-weight-loss-strategies",
-        "/blog/how-adhd-medication-is-prescribed-online",
-        "/blog/how-to-choose-adhd-provider-california"
-      ],
-      "recommendation": "REMOVE",
-      "slot": null,
-      "note": "Extra main booking beyond hero/final band"
-    },
-    {
       "label": "online ADHD screening",
       "url": "/online-adhd-test",
       "type": "screening",
@@ -2819,6 +2856,26 @@
       "recommendation": "REMOVE",
       "slot": null,
       "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Book ADHD Evaluation",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
+      "zone": "main",
+      "count": 15,
+      "pages": [
+        "/adhd-care",
+        "/blog/adderall-for-adhd-how-it-works",
+        "/blog/adult-adhd-symptoms-california",
+        "/blog/adult-adhd-treatment-california-2026",
+        "/blog/after-adhd-diagnosis-next-steps-adults",
+        "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+        "/blog/how-adhd-medication-is-prescribed-online",
+        "/blog/how-to-choose-adhd-provider-california"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Extra main booking beyond hero/final band"
     },
     {
       "label": "View Services",
@@ -2899,14 +2956,40 @@
       "note": "Newsletter CTA belongs in footer or dedicated hub section only"
     },
     {
-      "label": "View profile",
-      "url": "/providers/dr-swati-pandey",
-      "type": "secondary-service",
+      "label": "Free ADHD Screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "free ADHD screening",
+      "url": "/adhd-screening",
+      "type": "screening",
       "zone": "main",
       "count": 2,
       "pages": [
         "/",
-        "/about"
+        "/blog/online-adhd-diagnosis-texas"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
+      "label": "Explore follow-up pricing",
+      "url": "/pricing",
+      "type": "secondary-other",
+      "zone": "main",
+      "count": 2,
+      "pages": [
+        "/adhd-care"
       ],
       "recommendation": "REMOVE",
       "slot": null,
@@ -3064,19 +3147,6 @@
       "note": "Screening CTA outside ADHD hero/symptoms"
     },
     {
-      "label": "Free ADHD Screening",
-      "url": "/adhd-screening",
-      "type": "screening",
-      "zone": "main",
-      "count": 1,
-      "pages": [
-        "/"
-      ],
-      "recommendation": "REMOVE",
-      "slot": null,
-      "note": "Screening CTA outside ADHD hero/symptoms"
-    },
-    {
       "label": "View profile",
       "url": "/providers/dr-sneh-pandey",
       "type": "secondary-service",
@@ -3105,6 +3175,19 @@
     {
       "label": "View profile",
       "url": "/providers/dr-natasha-desai",
+      "type": "secondary-service",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Secondary explore link outside hero/final band"
+    },
+    {
+      "label": "View profile",
+      "url": "/providers/dr-swati-pandey",
       "type": "secondary-service",
       "zone": "main",
       "count": 1,
@@ -3155,9 +3238,9 @@
       "note": "Secondary explore link outside hero/final band"
     },
     {
-      "label": "free ADHD screening",
-      "url": "/adhd-screening",
-      "type": "screening",
+      "label": "Explore Telehealth Care",
+      "url": "/adhd-care",
+      "type": "secondary-service",
       "zone": "main",
       "count": 1,
       "pages": [
@@ -3165,7 +3248,7 @@
       ],
       "recommendation": "REMOVE",
       "slot": null,
-      "note": "Screening CTA outside ADHD hero/symptoms"
+      "note": "Secondary explore link outside hero/final band"
     },
     {
       "label": "View Dr. Pandey's Profile",
@@ -3670,16 +3753,16 @@
       "consolidate": 4
     },
     "About": {
-      "instances": 13,
-      "remove": 2,
+      "instances": 17,
+      "remove": 1,
       "keep": 2,
-      "consolidate": 9
+      "consolidate": 14
     },
     "Service Page": {
-      "instances": 127,
-      "remove": 19,
-      "keep": 28,
-      "consolidate": 80
+      "instances": 116,
+      "remove": 18,
+      "keep": 26,
+      "consolidate": 72
     },
     "Geo SEO Landing": {
       "instances": 61,
@@ -3706,8 +3789,8 @@
       "consolidate": 15
     },
     "Blog Article": {
-      "instances": 334,
-      "remove": 73,
+      "instances": 335,
+      "remove": 74,
       "keep": 104,
       "consolidate": 157
     },
@@ -3748,21 +3831,21 @@
       "file": "index.html",
       "pageType": "Homepage",
       "mainCtaCount": 15,
-      "bookingInMain": 3
+      "bookingInMain": 1
     },
     {
       "path": "/about",
       "file": "about.html",
       "pageType": "About",
-      "mainCtaCount": 8,
+      "mainCtaCount": 12,
       "bookingInMain": 3
     },
     {
       "path": "/adhd-care",
       "file": "adhd-care.html",
       "pageType": "Service Page",
-      "mainCtaCount": 7,
-      "bookingInMain": 4
+      "mainCtaCount": 6,
+      "bookingInMain": 1
     },
     {
       "path": "/adhd-diagnosis-austin",
@@ -3808,10 +3891,7 @@
     },
     {
       "path": "/adhd-evaluation-cost",
-      "file": "adhd-evaluation-cost.html",
-      "pageType": "Service Page",
-      "mainCtaCount": 5,
-      "bookingInMain": 3
+      "file": "adhd-evaluation-cost.html"
     },
     {
       "path": "/adhd-screening",
@@ -4603,7 +4683,7 @@
       "path": "/blog/online-adhd-diagnosis-texas",
       "file": "blog/online-adhd-diagnosis-texas.html",
       "pageType": "Blog Article",
-      "mainCtaCount": 2,
+      "mainCtaCount": 3,
       "bookingInMain": 1
     },
     {

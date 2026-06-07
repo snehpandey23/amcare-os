@@ -35,7 +35,7 @@ const PATTERNS = {
 };
 
 const PAGE_CATEGORIES = {
-  corePricing: ['/membership-pricing', '/adhd-evaluation-cost'],
+  corePricing: ['/pricing'],
   servicePages: [
     '/adhd-care', '/adhd-screening', '/weight-loss-metabolic-health', '/telehealth',
     '/mens-health-longevity', '/primary-urgent-care', '/prescriptions', '/labs', '/book-appointment',
@@ -244,7 +244,7 @@ function detectIssues(page) {
   }
 
   if (
-    (route.includes('adhd-evaluation-cost') || route === '/adhd-evaluation-cost') &&
+    route === '/adhd-evaluation-cost' &&
     flags.has199 &&
     !flags.has79 &&
     !flags.has149
@@ -264,7 +264,7 @@ function detectIssues(page) {
     });
   }
 
-  if (flags.hasAdhdEvaluationPricing && route !== '/adhd-care' && route !== '/adhd-evaluation-cost') {
+  if (flags.hasAdhdEvaluationPricing && route !== '/adhd-care' && route !== '/pricing') {
     const dupRoutes = PAGE_CATEGORIES.adhdFunnel.filter((r) => r !== '/adhd-care');
     if (dupRoutes.includes(route) || route === '/online-adhd-test' || route === '/creyos-adhd-testing' || route === '/adult-adhd-diagnosis' || route === '/adhd-treatment-online') {
       issues.push({

@@ -1,16 +1,16 @@
 # Provider Expansion — Implementation Report
 
-Generated: 2026-06-07T07:46:12.602Z
+Generated: 2026-06-07T11:23:10.552Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| Sitemap URLs | 164 |
+| Sitemap URLs | 163 |
 | Contracted providers in data | 7 |
 | Live profile pages | 7 |
 | Hub URL | https://siya.health/providers |
-| Pages linking to /providers hub | 162 |
+| Pages linking to /providers hub | 161 |
 | Broken internal links (sample) | 20 |
 | JSON-LD issues on profiles | 0 |
 
@@ -40,14 +40,14 @@ Generated: 2026-06-07T07:46:12.602Z
 
 | Target | Inbound pages |
 |--------|-------------:|
-| /providers hub | 162 |
+| /providers hub | 161 |
 | /providers/dr-sneh-pandey | 26 |
-| /providers/dr-vanessa-urbina | 14 |
+| /providers/dr-vanessa-urbina | 15 |
 | /providers/dr-natasha-desai | 18 |
 | /providers/dr-swati-pandey | 13 |
-| /providers/megan-wunderlich | 12 |
-| /providers/derek-timbs | 9 |
-| /providers/wendy-delgado | 6 |
+| /providers/megan-wunderlich | 13 |
+| /providers/derek-timbs | 10 |
+| /providers/wendy-delgado | 7 |
 
 ## Hub features
 

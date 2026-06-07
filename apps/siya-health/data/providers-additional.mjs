@@ -263,7 +263,7 @@ export const ADDITIONAL_PROVIDERS = [
       { title: 'Follow-up', text: 'monitoring visits aligned to medication class and state regulations.' },
     ],
     trustCards: [
-      { title: 'Credentials', text: 'Board-certified Family Nurse Practitioner (FNP-BC).' },
+      { title: 'Credentials', text: 'Family Nurse Practitioner (FNP-BC).' },
       { title: 'States licensed', text: 'Licensed in <strong>Texas</strong> and <strong>Ohio</strong>. Siya Healthcare, PLLC provides telehealth in <strong>Texas</strong> only; Ohio license displayed for transparency.' },
       { title: 'Supervision', text: 'Practice under collaborative physician agreements per state law.' },
     ],
@@ -397,7 +397,7 @@ export const ADDITIONAL_PROVIDERS = [
     servicePageTagline: 'Weight loss telehealth (CA)',
     homepageRole: 'Physician Assistant',
     homepageBio:
-      'Primary care and telehealth provider experienced in ADHD care, preventive medicine, and helping patients navigate both acute and ongoing health concerns.',
+      'Telehealth medical weight loss and metabolic care for adults in California—GLP-1 education, monitoring support, and collaborative follow-up.',
     claimsNeedingVerification: [],
     showScreeningCta: false,
   },

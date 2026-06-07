@@ -337,17 +337,22 @@ function detectIssues(provider, truth, allOccurrences) {
 
   // About page incomplete roster
   if (provider.slug === 'dr-vanessa-urbina') {
-    const aboutOccs = slugOccs.filter((o) => o.file === 'about.html');
-    if (aboutOccs.length === 0 || aboutOccs.every((o) => o.field === 'mention_count' && o.current === '0')) {
-      issues.push({
-        type: 'positioning',
-        severity: 'high',
-        file: 'about.html',
-        field: 'care-team section',
-        current: 'Not listed (only 3 of 7 providers on About page)',
-        expected: 'All 7 providers or explicit link to /providers',
-        message: 'About care team section omits 4 contracted clinicians including Dr. Urbina',
-      });
+    const aboutPath = path.join(SITE_ROOT, 'about.html');
+    if (fs.existsSync(aboutPath)) {
+      const aboutHtml = fs.readFileSync(aboutPath, 'utf8');
+      const cardCount = (aboutHtml.match(/about-team-card/g) || []).length;
+      const listedOnAbout = aboutHtml.includes('dr-vanessa-urbina');
+      if (cardCount < 7 || !listedOnAbout) {
+        issues.push({
+          type: 'positioning',
+          severity: 'high',
+          file: 'about.html',
+          field: 'care-team section',
+          current: `Lists ${cardCount} providers (Urbina ${listedOnAbout ? 'present' : 'missing'})`,
+          expected: 'All 7 providers or explicit link to /providers',
+          message: 'About care team section omits contracted clinicians from §2 roster',
+        });
+      }
     }
   }
 
@@ -422,9 +427,15 @@ const crossCutting = [
     id: 'CC-03',
     type: 'positioning',
     severity: 'high',
-    message: 'about.html care team lists only 3 physicians; omits Urbina, Megan, Derek, Wendy despite "View full care team (7 providers)" link',
+    message: 'about.html care team should list all 7 providers (resolved when 7-card grid present)',
     surfaces: ['about.html'],
     fix: 'Regenerate About care team from getAllProviders() or match homepage 7-card grid',
+    resolvedWhen: () => {
+      const aboutPath = path.join(SITE_ROOT, 'about.html');
+      if (!fs.existsSync(aboutPath)) return false;
+      const html = fs.readFileSync(aboutPath, 'utf8');
+      return (html.match(/about-team-card/g) || []).length >= 7;
+    },
   },
   {
     id: 'CC-04',
@@ -468,15 +479,17 @@ const crossCutting = [
   },
 ];
 
+const activeCrossCutting = crossCutting.filter((cc) => !(typeof cc.resolvedWhen === 'function' && cc.resolvedWhen()));
+
 const output = {
   generatedAt: new Date().toISOString().slice(0, 10),
   mentionCounts,
   issuesByType,
-  totalIssues: allIssues.length + crossCutting.length,
+  totalIssues: allIssues.length + activeCrossCutting.length,
   canonicalTruth: truths,
   occurrences: allOccurrences,
   issues: allIssues,
-  crossCutting,
+  crossCutting: activeCrossCutting,
 };
 
 fs.writeFileSync(OUT_JSON, JSON.stringify(output, null, 2));

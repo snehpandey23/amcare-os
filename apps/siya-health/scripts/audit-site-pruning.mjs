@@ -85,8 +85,8 @@ const EXPLICIT = {
   },
   '/adhd-evaluation-cost': {
     classification: 'REDIRECT',
-    target: '/membership-pricing',
-    rationale: 'Standalone pricing page duplicates membership-pricing and adhd-care; consolidate single pricing source.',
+    target: '/pricing',
+    rationale: 'Standalone pricing page duplicates /pricing and adhd-care; consolidate single pricing source.',
     phase: 1,
   },
   '/creyos-adhd-testing': {
@@ -147,14 +147,14 @@ const EXPLICIT = {
   },
   '/blog/adhd-evaluation-cost-california': {
     classification: 'REDIRECT',
-    target: '/membership-pricing',
-    rationale: 'State-specific pricing duplicate; membership-pricing is canonical pricing page.',
+    target: '/pricing',
+    rationale: 'State-specific pricing duplicate; /pricing is canonical pricing page.',
     phase: 1,
   },
   '/blog/adhd-evaluation-cost-texas': {
     classification: 'REDIRECT',
-    target: '/membership-pricing',
-    rationale: 'State-specific pricing duplicate of /adhd-evaluation-cost and membership-pricing.',
+    target: '/pricing',
+    rationale: 'State-specific pricing duplicate of /adhd-evaluation-cost and /pricing.',
     phase: 1,
   },
   '/blog/adhd-testing-online-california-screening-vs-evaluation': {
@@ -219,8 +219,8 @@ const EXPLICIT = {
   },
   '/answers/how-much-does-adhd-testing-cost': {
     classification: 'REDIRECT',
-    target: '/membership-pricing',
-    rationale: 'Pricing FAQ duplicates membership-pricing and adhd-care pricing sections.',
+    target: '/pricing',
+    rationale: 'Pricing FAQ duplicates /pricing and adhd-care pricing sections.',
     phase: 1,
   },
   '/answers/what-included-199-adhd-evaluation': {
@@ -306,7 +306,7 @@ const EXPLICIT = {
   '/weight-loss-metabolic-health': { classification: 'KEEP + REWRITE', rationale: 'Core revenue; add provider authority (Sneh), simplify CTA bands per CTA audit.', phase: 2 },
   '/mens-health-longevity': { classification: 'KEEP + REWRITE', rationale: 'Core revenue; align scope to actual services, add hormone cornerstone links.', phase: 2 },
   '/telehealth': { classification: 'KEEP + REWRITE', rationale: 'Core routing hub; absorb redirected coming-soon services, simplify service grid.', phase: 2 },
-  '/membership-pricing': { classification: 'KEEP + REWRITE', rationale: 'Single pricing source of truth; absorb adhd-evaluation-cost redirects.', phase: 2 },
+  '/pricing': { classification: 'KEEP', rationale: 'Single pricing source of truth; absorbs legacy redirects.', phase: 1 },
   '/about': { classification: 'KEEP + REWRITE', rationale: 'Fix team image alt text, link providers, reduce duplicate CTAs.', phase: 2 },
   '/answers': { classification: 'KEEP + REWRITE', rationale: 'Hub needs pillar restructure after guide pruning; reduce 87 outbound links.', phase: 2 },
   '/blog': { classification: 'KEEP + REWRITE', rationale: 'Simplify discovery; remove blog/all dependency; category hubs may merge.', phase: 2 },
@@ -339,7 +339,7 @@ const CORE_KEEP = new Set([
   '/weight-loss-metabolic-health',
   '/telehealth',
   '/mens-health-longevity',
-  '/membership-pricing',
+  '/pricing',
   '/book-appointment',
   '/providers',
   '/answers',
@@ -364,7 +364,7 @@ const CORNERSTONE_PATHS = new Set([
   '/weight-loss-metabolic-health',
   '/telehealth',
   '/mens-health-longevity',
-  '/membership-pricing',
+  '/pricing',
   '/book-appointment',
   '/answers',
   '/blog',

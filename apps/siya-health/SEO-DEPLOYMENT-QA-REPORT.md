@@ -1,13 +1,13 @@
 # SEO Deployment QA Report
 
-Generated: 2026-06-07T07:46:12.405Z
+Generated: 2026-06-07T11:23:10.340Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| HTML pages scanned | 164 |
-| Sitemap URLs | 164 |
+| HTML pages scanned | 163 |
+| Sitemap URLs | 163 |
 | Pages with Meet & Greet in nav | 0 |
 | Non-ADHD pages still referencing adhd-screening | 68 |
 | Broken internal links (sample) | 0 |
@@ -110,7 +110,7 @@ Generated: 2026-06-07T07:46:12.405Z
 - `terms.html`
 - `weight-loss-metabolic-health.html`
 
-### All pages with any `adhd-screening` reference (162)
+### All pages with any `adhd-screening` reference (161)
 
 - `about.html`
 - `adhd-care.html`
@@ -120,7 +120,6 @@ Generated: 2026-06-07T07:46:12.405Z
 - `adhd-diagnosis-pennsylvania.html`
 - `adhd-diagnosis-philadelphia.html`
 - `adhd-diagnosis-texas.html`
-- `adhd-evaluation-cost.html`
 - `adhd-screening.html`
 - `adhd-treatment-online.html`
 - `adult-adhd-diagnosis.html`
@@ -152,8 +151,9 @@ Generated: 2026-06-07T07:46:12.405Z
 - `answers/how-long-adhd-evaluation.html`
 - `answers/how-much-does-adhd-testing-cost.html`
 - `answers/how-online-prescriptions-work.html`
+- `answers/index.html`
 
-_…and 122 more (expected on ADHD funnels)._
+_…and 121 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 

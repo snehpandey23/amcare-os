@@ -110,6 +110,7 @@ export const REMOVED_BLOG_PATHS = {
   '/blog/modafinil-for-focus-and-fatigue-is-it-safe': '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
   '/blog/glutathione-and-peptides-what-do-they-actually-do': '/mens-health-longevity',
   '/blog/ambien-and-sleep-medications-risks-and-benefits': '/blog/insomnia-treatment-options-beyond-medication',
+  '/adhd-evaluation-cost': '/pricing',
 };
 
 /** Brand pillars — patient-facing language (not SEO keyword stuffing). */

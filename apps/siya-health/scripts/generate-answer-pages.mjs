@@ -52,7 +52,7 @@ const HEALTH_GUIDE_CATEGORIES = [
   {
     id: 'telehealth',
     label: 'Telehealth & Care',
-    blurb: 'How online care works, Meet & Greet, prescriptions, and logistics.',
+    blurb: 'How online care works, telehealth visits, prescriptions, and logistics.',
     carePath: '/telehealth',
   },
 ];
@@ -197,10 +197,7 @@ ${jsonLdScripts}
 }
 
 function headerNav(topic = 'general') {
-  const navCta =
-    topic === 'adhd'
-      ? `<a class="button" href="/adhd-screening">Start Free Screening</a>`
-      : `<a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>`;
+  const navCta = `<a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">Talk to a Clinician</a>`;
   return `    <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container">

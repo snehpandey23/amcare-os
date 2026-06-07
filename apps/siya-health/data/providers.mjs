@@ -252,7 +252,7 @@ export const PROVIDERS = [
     honorificPrefix: 'Dr.',
     honorificSuffix: 'MD',
     credentials: ['MD'],
-    role: 'Licensed Medical Provider — ADHD & Mental Health Care',
+    role: 'Internal Medicine Physician',
     photo: 'assets/images/dr-swati-pandey.png',
     altText: 'Dr. Swati Pandey, MD',
     statesLicensed: ['Pennsylvania'],
@@ -406,8 +406,13 @@ export function getProviderHubFilterTags(provider) {
     .filter((s) => s !== 'mens-health-longevity')
     .map((s) => Object.entries(HUB_FILTER_SERVICE_MAP).find(([, v]) => v === s)?.[0])
     .filter(Boolean);
+  const serviceStates = providerServiceStates(provider);
+  const states = serviceStates.map((name) => {
+    const i = provider.statesLicensed.indexOf(name);
+    return provider.stateAbbreviations[i] ?? name;
+  });
   return {
-    states: provider.stateAbbreviations,
+    states,
     services: [...new Set(services)],
   };
 }
@@ -427,6 +432,19 @@ export function bookingLinkWithAttribution(providerSlug, surface = 'profile') {
 }
 
 export function stateChipLabel(provider) {
+  const pairs = (provider.statesLicensed || []).map((state, i) => ({
+    state,
+    abbrev: provider.stateAbbreviations?.[i] ?? state,
+  }));
+  const serviceAbbrevs = pairs
+    .filter(({ state }) => AVAILABLE_SERVICE_STATES.includes(state))
+    .map(({ abbrev }) => abbrev);
+  const licenseOnlyAbbrevs = pairs
+    .filter(({ state }) => !AVAILABLE_SERVICE_STATES.includes(state))
+    .map(({ abbrev }) => abbrev);
+  if (licenseOnlyAbbrevs.length && serviceAbbrevs.length) {
+    return `${serviceAbbrevs.join(', ')} (${licenseOnlyAbbrevs.join(', ')} license only)`;
+  }
   return provider.stateAbbreviations.join(', ');
 }
 

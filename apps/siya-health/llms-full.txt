@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
 Generated: 2026-06-07
-Total pages: 164
+Total pages: 163
 
 ---
 
@@ -128,11 +128,6 @@ Total pages: 164
   URL: https://siya.health/adhd-diagnosis-texas
   Summary: Adult ADHD diagnosis online in Texas. $199 evaluation, ADHD-CCSP providers, same-week telehealth. Austin, Houston, Dallas-area & statewide. Book now.
   Topics: adhd, texas
-
-- ADHD Evaluation Cost Online | $199 Flat Rate
-  URL: https://siya.health/adhd-evaluation-cost
-  Summary: ADHD evaluation cost: $199 transparent flat fee for 60–90 min online visit. No insurance surprise bills. FSA/HSA. Texas, Pennsylvania, Florida.
-  Topics: adhd
 
 - Start screening
   URL: https://siya.health/adhd-screening
@@ -324,9 +319,9 @@ Total pages: 164
   Summary: Quick FAQ on when supervised medical weight loss beats dieting alone. Full evidence guide linked.
   Topics: weight-loss, health-guide
 
-- What happens in a telehealth Meet &amp; Greet?
+- What should I expect from a first telehealth visit?
   URL: https://siya.health/answers/meet-and-greet-telehealth-expectations
-  Summary: Telehealth Meet & Greet: what happens, what it is not, pricing fit, and next steps before a full ADHD or metabolic evaluation.
+  Summary: First telehealth visit: what happens, what it is not, follow-up plan pricing, and next steps before a full ADHD or metabolic evaluation.
   Topics: telehealth, health-guide
 
 - How long does minoxidil take to show hair results?
@@ -763,7 +758,7 @@ Total pages: 164
 
 - Creyos ADHD Testing Online | Part of $199 Evaluation
   URL: https://siya.health/creyos-adhd-testing
-  Summary: Creyos cognitive testing for ADHD as part of your $199 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL.
+  Summary: Creyos cognitive testing for ADHD as part of your $199 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in CA, TX, PA, FL.
   Topics: adhd
 
 - Secure Intake

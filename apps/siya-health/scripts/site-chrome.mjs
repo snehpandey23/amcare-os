@@ -70,7 +70,6 @@ const ADHD_FUNNEL_PATH = [
   /^adhd-screening\.html$/,
   /^adult-adhd-diagnosis\.html$/,
   /^adhd-treatment-online\.html$/,
-  /^adhd-evaluation-cost\.html$/,
   /^creyos-adhd-testing\.html$/,
   /^online-adhd-test\.html$/,
   /^adhd-diagnosis-.+\.html$/,
@@ -94,7 +93,7 @@ export function isAdhdLegalContext(relPath) {
 export function isControlledSubstanceLinkPage(relPath) {
   if (isAdhdFunnelPage(relPath) || isAdhdLegalContext(relPath)) return true;
   if (/^adhd-diagnosis-/.test(relPath)) return true;
-  if (relPath === 'membership-pricing.html' || relPath === 'pricing.html' || relPath === 'adhd-evaluation-cost.html') return true;
+  if (relPath === 'membership-pricing.html' || relPath === 'pricing.html') return true;
   if (/^blog\/.+adhd/i.test(relPath)) return true;
   if (/^blog\/.*(medication|vyvanse|adderall|focalin|stimulant|ritalin|prescribed-online)/i.test(relPath)) {
     return true;
@@ -175,7 +174,7 @@ export const ANCHOR_LABELS = {
   '/answers/when-is-testosterone-therapy-appropriate': 'Symptoms that warrant TRT evaluation (FAQ)',
   '/answers/adhd-and-weight-loss-connection': 'ADHD and weight loss struggles',
   '/creyos-adhd-testing': 'Creyos cognitive testing for ADHD',
-  '/adhd-evaluation-cost': 'ADHD evaluation cost and what is included',
+  '/pricing': 'Transparent care pricing ($199 / $79 / $149)',
   '/blog/online-adhd-diagnosis-california': 'Online ADHD diagnosis in California',
   '/blog/online-adhd-diagnosis-texas': 'Online ADHD diagnosis in Texas',
   '/adhd-care': 'ADHD evaluation and ongoing care',
@@ -213,7 +212,7 @@ const LEARN_MORE_ADHD = `<!-- SIYA:LEARN-MORE-ADHD -->
             <li><a href="/answers/is-online-adhd-diagnosis-legitimate">Is online ADHD diagnosis legitimate?</a></li>
             <li><a href="/blog/adhd">ADHD articles and state-specific guides</a></li>
             <li><a href="/blog/how-to-know-if-you-have-adhd-adult">How to know if you have ADHD as an adult</a></li>
-            <li><a href="/adhd-evaluation-cost">ADHD evaluation cost and what is included</a></li>
+            <li><a href="/adhd-care#pricing">ADHD care pricing ($199 / $79 / $149)</a></li>
             <li><a href="/creyos-adhd-testing">Creyos cognitive testing for ADHD evaluations</a></li>
             <li><a href="/blog/online-adhd-diagnosis-california">Online ADHD diagnosis in California</a></li>
             <li><a href="/blog/online-adhd-diagnosis-texas">Online ADHD diagnosis in Texas</a></li>
@@ -228,7 +227,7 @@ const ADHD_CARE_PROVIDER_TAGLINES = {
   'dr-natasha-desai': 'Adult ADHD & behavioral medicine',
   'dr-swati-pandey': 'Adult ADHD & mental health',
   'megan-wunderlich': 'Adult ADHD & mental health',
-  'wendy-delgado': 'Adult ADHD & telehealth care',
+  'wendy-delgado': 'Medical weight loss & metabolic care',
 };
 
 function adhdCareProviderTagline(provider) {
@@ -623,11 +622,19 @@ export function normalizeSitewideCopy(html, relPath = '') {
   }
   html = html.replace(/\$150(\s*<span>\/month<\/span>)/g, '$149$1');
   html = html.replace(/\$150\/month/g, '$149/month');
+  html = html.replaceAll('Related guides + Meet & Greet when ready.', 'Related guides — Talk to a Clinician when ready.');
+  html = html.replaceAll('Related guides + Meet &amp; Greet when ready.', 'Related guides — Talk to a Clinician when ready.');
+  html = html.replace(/Meet &amp; Greet when ready/gi, 'Talk to a Clinician when ready');
+  html = html.replace(/Meet & Greet when ready/gi, 'Talk to a Clinician when ready');
+  html = html.replace(/free discovery call/gi, 'free ADHD screening');
+  html = html.replace(/Find the Right Starting Point/g, COPY_STANDARDS.secondaryCtaTelehealth);
+  html = html.replace(/Schedule a quick call/gi, COPY_STANDARDS.primaryCta);
+  html = html.replace(/membership pricing/gi, 'follow-up plan pricing');
+  html = html.replace(/Talk to a clinician when you['']re ready/gi, 'Talk to a Clinician when ready');
   html = html.replace(
-    /<a([^>]*href="[^"]*yourmarketingai[^"]*"[^>]*)>Book a Meet &amp; Greet<\/a>/gi,
-    (m) => (m.includes('target=') ? m : m.replace('<a', '<a target="_blank" rel="noopener"')),
+    /Ongoing medication management is available on a monthly plan if clinically appropriate\./g,
+    'Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See <a href="/pricing">pricing</a>.',
   );
-
   html = fixDuplicateCalifornia(html);
   return html;
 }
@@ -922,6 +929,46 @@ export function injectAboutProviderHub(html, relPath) {
   return html;
 }
 
+function buildAboutCareTeamSection() {
+  const providers = getAllProviders();
+  const cards = providers
+    .map((p) => {
+      const displayName = p.name.replace(/, (MD|PA-C|FNP-C|FNP-BC)$/, '');
+      const tagline = p.homepageBio ?? p.servicePageTagline ?? p.shortBio?.replace(/<[^>]+>/g, '').slice(0, 120);
+      return `            <article class="about-team-card">
+              ${renderCareTeamPhoto(p, 88, 88)}
+              <h3><a href="/providers/${p.slug}">${displayName}</a></h3>
+              <p class="about-team-tagline">${tagline}</p>
+              <a class="button secondary" href="/providers/${p.slug}">View profile</a>
+            </article>`;
+    })
+    .join('\n');
+  return `<!-- SIYA:ABOUT-CARE-TEAM -->
+      <section class="section" id="care-team">
+        <div class="container">
+          <div class="section-header">
+            <h2>Meet Your Care Team</h2>
+            <p class="lead">Our clinicians bring experience across primary care, ADHD, behavioral health, obesity medicine, metabolic health, women&rsquo;s health, men&rsquo;s health, and telehealth.</p>
+          </div>
+          <div class="about-team-grid about-care-team-grid">
+${cards}
+          </div>
+          <p class="blog-hub-see-all"><a href="/providers">View full care team (7 clinicians)</a></p>
+          <p class="blog-hub-see-all about-hub-links"><a href="/telehealth">Explore Telehealth Care</a> · <a href="/pricing">View Pricing</a></p>
+        </div>
+      </section>
+      <!-- /SIYA:ABOUT-CARE-TEAM -->`;
+}
+
+export function injectAboutCareTeam(html, relPath) {
+  if (relPath !== 'about.html') return html;
+  const block = buildAboutCareTeamSection();
+  if (html.includes('SIYA:ABOUT-CARE-TEAM')) {
+    return html.replace(/<!-- SIYA:ABOUT-CARE-TEAM -->[\s\S]*?<!-- \/SIYA:ABOUT-CARE-TEAM -->/, block);
+  }
+  return html;
+}
+
 export function injectProviderAttribution(html) {
   if (html.includes('SIYA:PROVIDER-ATTRIBUTION')) return html;
   const script = `<!-- SIYA:PROVIDER-ATTRIBUTION -->
@@ -982,10 +1029,10 @@ const ADHD_SCREENING_DEEP_LINK = '/adhd-screening?start=asrs';
 const ADHD_FAQ_CTA = `            <div class="faq-accordion-cta">
               <p class="faq-accordion-cta-headline">Still deciding?</p>
               <div class="faq-accordion-cta-buttons">
-                <a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">${COPY_STANDARDS.adhdPrimaryCta}</a>
-                <a class="button secondary" href="${ADHD_SCREENING_DEEP_LINK}" data-siya-track="screening-cta-click" data-siya-location="faq-cta">${COPY_STANDARDS.adhdSecondaryCta}</a>
+                <a class="button" href="${ADHD_SCREENING_DEEP_LINK}" data-siya-track="screening-cta-click" data-siya-location="faq-cta">${COPY_STANDARDS.adhdSecondaryCta}</a>
+                <a class="button secondary" href="/pricing">Explore follow-up pricing</a>
               </div>
-              <p class="faq-accordion-cta-subtext">Most patients start with a screening or book directly.</p>
+              <p class="faq-accordion-cta-subtext">Most patients start with a screening or review pricing before booking.</p>
               <p class="faq-accordion-cta-phone"><a href="tel:+12154451244">(215) 445-1244</a></p>
             </div>`;
 
@@ -1001,7 +1048,6 @@ const THIN_ADHD_LANDERS = new Set([
   'adult-adhd-diagnosis.html',
   'adhd-treatment-online.html',
   'online-adhd-test.html',
-  'adhd-evaluation-cost.html',
   'creyos-adhd-testing.html',
 ]);
 
@@ -1083,8 +1129,8 @@ export function normalizeCtaHierarchy(html, relPath) {
     html = html.replace(
       /(<!-- FINAL CTA -->[\s\S]*?<div class="cta-band-buttons">)[\s\S]*?(<\/div>)/,
       `$1
-              <a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">${COPY_STANDARDS.adhdPrimaryCta}</a>
               <a class="button secondary" href="${ADHD_SCREENING_DEEP_LINK}" data-siya-track="screening-cta-click" data-siya-location="final-cta">${COPY_STANDARDS.adhdSecondaryCta}</a>
+              <a class="button secondary" href="/pricing">Explore follow-up pricing</a>
             $2`,
     );
     html = html.replace(/Start Free Screening/g, COPY_STANDARDS.adhdSecondaryCta);
@@ -1336,6 +1382,7 @@ export function applySiteChrome(html, relPath, title = '') {
   html = injectSeoFooterArchitecture(html, relPath);
   html = injectLearnMoreSections(html, relPath);
   html = injectHomepageCareTeam(html, relPath);
+  html = injectAboutCareTeam(html, relPath);
   html = injectAboutProviderHub(html, relPath);
   html = injectMeetPhysiciansSection(html, relPath);
   html = injectContinueReading(html, relPath, title, auditIndex);

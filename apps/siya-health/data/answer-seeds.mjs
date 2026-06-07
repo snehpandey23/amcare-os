@@ -26,7 +26,7 @@ function phase5CoordinationSection(slug, topic) {
     'when-is-testosterone-therapy-appropriate': 'TRT decisions should document informed consent and monitoring plans.',
     'trt-monitoring-requirements': 'Monitoring schedules should be calendarized—not remembered only at refills.',
     'is-telehealth-legitimate': 'Telehealth legitimacy is proven through licensure, privacy, and continuity.',
-    'meet-and-greet-telehealth-expectations': 'Meet & Greet visits clarify logistics before clinical commitments.',
+    'meet-and-greet-telehealth-expectations': 'First telehealth visits clarify logistics before clinical commitments.',
     'how-online-prescriptions-work': 'Prescribing laws apply equally to telehealth and in-person encounters.',
   };
   const intro = lead[slug] || 'This Health Guide supports—not replaces—clinician-led care.';
@@ -45,7 +45,7 @@ function phase5CoordinationSection(slug, topic) {
       `${intro} Medical weight-loss care combines nutrition, activity, sleep, behavioral support, and—when appropriate—FDA-approved pharmacotherapy with monitoring. Cornerstone blogs on insulin resistance and food noise provide deeper context than this summary page.`,
       'GLP-1 medicines require titration, GI counseling, and discussion of rare serious risks. Avoid unregulated compounded products or cosmetic use without clinician oversight. ADHD-related impulsive eating and sleep apnea can undermine weight outcomes if left untreated.',
       'Metabolic labs (glucose, A1C, lipids, blood pressure, waist trend) should be interpreted over time, not from one snapshot. Post-meal fatigue and brain fog may link to insulin resistance even when A1C is normal.',
-      'Book a Meet & Greet when you want help choosing between evaluation pathways before enrolling in a full metabolic or weight-loss program.',
+      'Talk to a Clinician when you want help choosing between evaluation pathways before enrolling in a full metabolic or weight-loss program.',
       'Pair this guide with cornerstone blogs on insulin resistance and food noise when symptoms cluster (cravings, post-meal fog, waist gain)—your clinician integrates labs, sleep, and medications.',
       'Educational content cannot promise a specific weight outcome; treatment plans follow FDA indications, monitoring, and individual tolerability.',
       'Document your symptom timeline (childhood vs adult onset, settings affected, best and worst weeks), sleep partners’ observations about snoring, medications and supplements, and three-month goals—those details speed responsible evaluation more than another online quiz.',
@@ -63,10 +63,10 @@ function phase5CoordinationSection(slug, topic) {
     ],
     telehealth: [
       `${intro} Legitimate telehealth documents encounters, uses HIPAA-compliant tools, and maintains follow-up for prescriptions—especially controlled substances with PDMP review where required.`,
-      'Compare services on clinician licensure in your state, visit length for diagnosis-level care, and transparency about pricing and limitations. Meet & Greet visits clarify fit; comprehensive ADHD or metabolic evaluation is a separate longer visit.',
+      'Compare services on clinician licensure in your state, visit length for diagnosis-level care, and transparency about pricing and limitations. Talk to a Clinician to clarify fit; comprehensive ADHD or metabolic evaluation is a separate longer visit.',
       'Keep medication lists, allergy history, and prior records available for upload. Emergency symptoms require local urgent or emergency care—not messaging queues.',
       'Educational blogs on safe online prescriptions complement this guide; they do not establish a clinician–patient relationship on their own.',
-      'Read related Health Guides on Meet & Greet logistics, online prescription law, and condition-specific evaluation (ADHD, metabolic, men’s health) to prepare questions for your first visit.',
+      'Read related Health Guides on first telehealth visit logistics, online prescription law, and condition-specific evaluation (ADHD, metabolic, men’s health) to prepare questions for your first visit.',
       'Pages remain in “pending physician review” status until clinically signed; content is educational and may be updated as guidelines evolve.',
       'Document your symptom timeline (childhood vs adult onset, settings affected, best and worst weeks), sleep partners’ observations about snoring, medications and supplements, and three-month goals—those details speed responsible evaluation more than another online quiz.',
       'When results are “normal” but you remain impaired, ask what was not measured (sleep testing, ferritin, insulin patterns, free testosterone calculation, mood screening) rather than closing the chart.',
@@ -1193,20 +1193,20 @@ const CORE_ANSWER_SEEDS = [
     shortAnswer:
       'Siya Health’s $199 adult ADHD evaluation is a 60–90 minute telehealth visit with a licensed medical provider—including clinical interview, validated assessment tools as clinically appropriate (such as ASRS, DIVA, Wender Utah, SWAN, or Creyos when indicated), comorbidity screening, and a documented plan. No insurance required. Diagnosis does not guarantee medication.',
     paragraphs: [
-      'Your clinician selects assessment tools based on clinical judgment—not every patient receives every instrument. Ongoing medication management is separate membership pricing if you continue care and medication is clinically appropriate.',
+      'Your clinician selects assessment tools based on clinical judgment—not every patient receives every instrument. Optional follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.',
     ],
-    evidence: ['Siya Health /adhd-care service description', 'Published pricing at /membership-pricing'],
+    evidence: ['Siya Health /adhd-care service description', 'Published pricing at /pricing'],
     related: ['how-much-does-adhd-testing-cost', 'how-long-adhd-evaluation', 'screening-vs-adhd-evaluation'],
     topic: 'telehealth',
     reviewerSlug: 'dr-sneh-pandey',
   },
   {
     slug: 'meet-and-greet-telehealth-expectations',
-    question: 'What happens in a telehealth Meet & Greet?',
+    question: 'What should I expect from a first telehealth visit?',
     shortAnswer:
-      'A Meet & Greet is a low-pressure introduction to confirm telehealth fit, review services and pricing, and answer logistics—not a full diagnosis visit. You can ask about evaluation length, state licensure, and next steps before committing to a comprehensive ADHD assessment.',
+      'A first telehealth visit is a low-pressure introduction to confirm service fit, review services and follow-up plan pricing, and answer logistics—not a full diagnosis visit. You can ask about evaluation length, state licensure, and next steps before committing to a comprehensive ADHD assessment.',
     paragraphs: [
-      'Emergency symptoms require 911 or local urgent care, not a meet-and-greet slot.',
+      'Emergency symptoms require 911 or local urgent care, not a scheduling slot for introductory logistics.',
     ],
     evidence: ['Siya Health intake workflow', 'Telehealth informed consent standards'],
     related: ['is-telehealth-legitimate', 'can-adhd-be-diagnosed-online'],
