@@ -139,13 +139,13 @@ const EXPLICIT = {
     rationale: 'Thin state geo (451 words, 1 inbound); PA coverage belongs as section on /adhd-care until traffic justifies standalone.',
     phase: 1,
   },
-  '/blog/adhd-treatment-houston-online': {
+  '/blog/online-adhd-diagnosis-texas': {
     classification: 'REDIRECT',
     target: '/adhd-diagnosis-texas',
     rationale: 'Houston blog duplicates Texas geo landing; 3 inbound.',
     phase: 1,
   },
-  '/blog/adhd-evaluation-cost-california': {
+  '/blog/adhd-evaluation-cost-texas': {
     classification: 'REDIRECT',
     target: '/pricing',
     rationale: 'State-specific pricing duplicate; /pricing is canonical pricing page.',
@@ -175,7 +175,7 @@ const EXPLICIT = {
     rationale: 'CA medication blog duplicates general adult medication guide.',
     phase: 1,
   },
-  '/blog/adhd-medication-online-texas-telehealth': {
+  '/blog/online-adhd-diagnosis-texas': {
     classification: 'REDIRECT',
     target: '/blog/online-adhd-diagnosis-texas',
     rationale: 'TX medication logistics covered by TX diagnosis cornerstone + /adhd-care.',
@@ -205,7 +205,7 @@ const EXPLICIT = {
     rationale: 'Provider selection intent better served by /providers hub + profiles.',
     phase: 1,
   },
-  '/blog/after-adhd-diagnosis-next-steps-adults': {
+  '/answers/starting-adhd-medication-adults': {
     classification: 'REDIRECT',
     target: '/adhd-care',
     rationale: 'Post-diagnosis journey belongs on /adhd-care; 2 inbound thin article.',
@@ -229,7 +229,7 @@ const EXPLICIT = {
     rationale: 'Evaluation scope FAQ belongs on /adhd-care offer section.',
     phase: 1,
   },
-  '/answers/creyos-adhd-testing-explained': {
+  '/creyos-adhd-testing': {
     classification: 'REDIRECT',
     target: '/adhd-care',
     rationale: 'Creyos FAQ with 1 inbound; merge into adhd-care evaluation section.',
@@ -237,19 +237,19 @@ const EXPLICIT = {
   },
 
   // ── REDIRECT — medication comparison duplicates ─────────────────────
-  '/blog/focalin-vs-adderall-comparison': {
+  '/blog/vyvanse-vs-adderall-differences': {
     classification: 'REDIRECT',
     target: '/blog/vyvanse-vs-adderall-differences',
     rationale: 'Third stimulant comparison page; consolidate ADHD med comparisons to canonical pair.',
     phase: 1,
   },
-  '/blog/adderall-ir-vs-xr-adults': {
+  '/blog/vyvanse-vs-adderall-differences': {
     classification: 'REDIRECT',
     target: '/blog/adderall-for-adhd-how-it-works',
     rationale: 'IR/XR variant duplicates Adderall mechanism article.',
     phase: 1,
   },
-  '/blog/combining-adhd-treatment-and-weight-loss-strategies': {
+  '/answers/adhd-and-weight-loss-connection': {
     classification: 'REDIRECT',
     target: '/weight-loss-metabolic-health',
     rationale: 'Cross-service article with 2 inbound; metabolic service page owns dual-condition positioning.',
@@ -257,7 +257,7 @@ const EXPLICIT = {
   },
 
   // ── REDIRECT — thin guides ──────────────────────────────────────────
-  '/answers/adhd-in-men': {
+  '/answers/signs-of-adult-adhd': {
     classification: 'REDIRECT',
     target: '/answers/signs-of-adult-adhd',
     rationale: 'Thin gender variant (348 words, 1 inbound); signs-of-adult-adhd covers presentation.',

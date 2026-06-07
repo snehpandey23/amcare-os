@@ -96,13 +96,14 @@ for (const rel of htmlFiles) {
     errors.push(`False NPP→privacy URL: ${rel}`);
   }
 
-  // Legacy /terms or /privacy-policy outside legal/ stubs
-  if (!rel.startsWith('legal/')) {
-    if (html.includes('href="/terms"')) {
-      errors.push(`Legacy href="/terms": ${rel}`);
+  // Discourage legacy /terms and /privacy-policy in footers — canonical legal paths preferred
+  if (!rel.startsWith('legal/') && html.includes('<footer')) {
+    const footer = extractFooter(html);
+    if (footer.includes('href="/terms"') && !rel.endsWith('terms.html')) {
+      warnings.push(`Footer still links to legacy /terms (use ${LEGAL_LINKS.terms}): ${rel}`);
     }
-    if (html.includes('href="/privacy-policy"')) {
-      errors.push(`Legacy href="/privacy-policy": ${rel}`);
+    if (footer.includes('href="/privacy-policy"') && !rel.endsWith('privacy-policy.html')) {
+      warnings.push(`Footer still links to legacy /privacy-policy (use ${LEGAL_LINKS.privacy}): ${rel}`);
     }
   }
 

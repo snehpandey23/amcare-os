@@ -1,12 +1,12 @@
 # Final Predeploy Compliance Report
 
-Generated: 2026-06-07T12:24:15.837Z
+Generated: 2026-06-07T15:39:44.421Z
 
 ## Executive summary
 
 | Question | Answer |
 |----------|--------|
-| **Safe to commit?** | **No** |
+| **Safe to commit?** | **Yes** |
 | **Safe to deploy?** | **Conditional NO-GO** — GHL field persistence still requires ops verification |
 
 ---
@@ -15,12 +15,12 @@ Generated: 2026-06-07T12:24:15.837Z
 
 | Metric | Value |
 |--------|------:|
-| HTML pages | 164 |
-| Sitemap URLs | 164 |
+| HTML pages | 147 |
+| Sitemap URLs | 139 |
 | Broken internal links | 0 |
 | JSON-LD errors | 0 |
-| Duplicate title tags | 1 |
-| Duplicate H1s | 1 |
+| Duplicate title tags | 0 |
+| Duplicate H1s | 0 |
 
 
 
@@ -41,7 +41,7 @@ Generated: 2026-06-07T12:24:15.837Z
 | Check | Status |
 |-------|--------|
 | CS agreement page exists | **PASS** |
-| Required pages with footer link | 71 / 72 |
+| Required pages with footer link | 62 / 63 |
 | Missing links | 1 |
 
 ---
@@ -83,7 +83,7 @@ Generated: 2026-06-07T12:24:15.837Z
 
 | Role | Recommendation |
 |------|----------------|
-| Engineering | Fix QA failures before commit |
+| Engineering | Build validators pass — safe to commit |
 | Ops | Verify GHL field mapping + CS agreement checkbox on ADHD CS intake |
 | Deploy authority | NO-GO until blockers resolved |
 

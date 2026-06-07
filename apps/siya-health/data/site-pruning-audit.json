@@ -166,7 +166,7 @@
         "pageType": "Service Page"
       },
       {
-        "path": "/answers/adhd-in-men",
+        "path": "/answers/signs-of-adult-adhd",
         "classification": "REDIRECT",
         "redirectTarget": "/answers/signs-of-adult-adhd",
         "rationale": "Thin gender variant (348 words, 1 inbound); signs-of-adult-adhd covers presentation.",
@@ -192,7 +192,7 @@
         "pageType": "Health Guide"
       },
       {
-        "path": "/answers/creyos-adhd-testing-explained",
+        "path": "/creyos-adhd-testing",
         "classification": "REDIRECT",
         "redirectTarget": "/adhd-care",
         "rationale": "Creyos FAQ with 1 inbound; merge into adhd-care evaluation section.",
@@ -309,7 +309,7 @@
         "pageType": "Health Guide"
       },
       {
-        "path": "/blog/adderall-ir-vs-xr-adults",
+        "path": "/blog/vyvanse-vs-adderall-differences",
         "classification": "REDIRECT",
         "redirectTarget": "/blog/adderall-for-adhd-how-it-works",
         "rationale": "IR/XR variant duplicates Adderall mechanism article.",
@@ -336,7 +336,7 @@
         "pageType": "Blog Article"
       },
       {
-        "path": "/blog/adhd-evaluation-cost-california",
+        "path": "/blog/adhd-evaluation-cost-texas",
         "classification": "REDIRECT",
         "redirectTarget": "/membership-pricing",
         "rationale": "State-specific pricing duplicate; membership-pricing is canonical pricing page.",
@@ -378,7 +378,7 @@
         "pageType": "Blog Article"
       },
       {
-        "path": "/blog/adhd-medication-online-texas-telehealth",
+        "path": "/blog/online-adhd-diagnosis-texas",
         "classification": "REDIRECT",
         "redirectTarget": "/blog/online-adhd-diagnosis-texas",
         "rationale": "TX medication logistics covered by TX diagnosis cornerstone + /adhd-care.",
@@ -420,7 +420,7 @@
         "pageType": "Blog Article"
       },
       {
-        "path": "/blog/adhd-treatment-houston-online",
+        "path": "/blog/online-adhd-diagnosis-texas",
         "classification": "REDIRECT",
         "redirectTarget": "/adhd-diagnosis-texas",
         "rationale": "Houston blog duplicates Texas geo landing; 3 inbound.",
@@ -462,7 +462,7 @@
         "pageType": "Blog Article"
       },
       {
-        "path": "/blog/after-adhd-diagnosis-next-steps-adults",
+        "path": "/answers/starting-adhd-medication-adults",
         "classification": "REDIRECT",
         "redirectTarget": "/adhd-care",
         "rationale": "Post-diagnosis journey belongs on /adhd-care; 2 inbound thin article.",
@@ -501,7 +501,7 @@
         "pageType": "Blog Article"
       },
       {
-        "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+        "path": "/answers/adhd-and-weight-loss-connection",
         "classification": "REDIRECT",
         "redirectTarget": "/weight-loss-metabolic-health",
         "rationale": "Cross-service article with 2 inbound; metabolic service page owns dual-condition positioning.",
@@ -514,7 +514,7 @@
         "pageType": "Blog Article"
       },
       {
-        "path": "/blog/focalin-vs-adderall-comparison",
+        "path": "/blog/vyvanse-vs-adderall-differences",
         "classification": "REDIRECT",
         "redirectTarget": "/blog/vyvanse-vs-adderall-differences",
         "rationale": "Third stimulant comparison page; consolidate ADHD med comparisons to canonical pair.",
@@ -1216,7 +1216,7 @@
         "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /telehealth."
       },
       {
-        "path": "/answers/minoxidil-hair-loss-does-it-work",
+        "path": "/blog/minoxidil-for-hair-loss-does-it-work",
         "classification": "REDIRECT",
         "redirectTarget": "/blog/minoxidil-for-hair-loss-does-it-work",
         "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -1230,7 +1230,7 @@
         "pageType": "Health Guide"
       },
       {
-        "path": "/answers/non-stimulant-adhd-medications",
+        "path": "/blog/non-stimulant-adhd-medications-explained",
         "classification": "REDIRECT",
         "redirectTarget": "/blog/non-stimulant-adhd-medications-explained",
         "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -1258,7 +1258,7 @@
         "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/insulin-resistance-and-weight-loss-clinician-overview."
       },
       {
-        "path": "/answers/oral-vs-injectable-weight-loss-meds",
+        "path": "/blog/oral-vs-injectable-weight-loss-medications",
         "classification": "REDIRECT",
         "redirectTarget": "/blog/oral-vs-injectable-weight-loss-medications",
         "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -1286,7 +1286,7 @@
         "pageType": "Health Guide"
       },
       {
-        "path": "/answers/phentermine-weight-loss-safety",
+        "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
         "classification": "REDIRECT",
         "redirectTarget": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
         "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -1342,7 +1342,7 @@
         "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign."
       },
       {
-        "path": "/answers/sildenafil-erectile-dysfunction-expectations",
+        "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
         "classification": "REDIRECT",
         "redirectTarget": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
         "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -1384,7 +1384,7 @@
         "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
       },
       {
-        "path": "/answers/tirzepatide-vs-semaglutide",
+        "path": "/blog/tirzepatide-vs-semaglutide-which-is-better",
         "classification": "REDIRECT",
         "redirectTarget": "/blog/tirzepatide-vs-semaglutide-which-is-better",
         "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -1468,7 +1468,7 @@
         "rationale": "Blog not in minimum viable whitelist; redirect to preserve link equity on /weight-loss-metabolic-health."
       },
       {
-        "path": "/blog/long-term-weight-loss-medications-what-to-expect",
+        "path": "/blog/semaglutide-for-weight-loss-how-it-works",
         "redirectTarget": "/weight-loss-metabolic-health",
         "phase": 3,
         "groups": [
@@ -1722,7 +1722,7 @@
       "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
     },
     {
-      "path": "/answers/adhd-in-men",
+      "path": "/answers/signs-of-adult-adhd",
       "classification": "REDIRECT",
       "redirectTarget": "/answers/signs-of-adult-adhd",
       "rationale": "Thin gender variant (348 words, 1 inbound); signs-of-adult-adhd covers presentation.",
@@ -1874,7 +1874,7 @@
       "pageType": "Health Guide"
     },
     {
-      "path": "/answers/creyos-adhd-testing-explained",
+      "path": "/creyos-adhd-testing",
       "classification": "REDIRECT",
       "redirectTarget": "/adhd-care",
       "rationale": "Creyos FAQ with 1 inbound; merge into adhd-care evaluation section.",
@@ -2122,7 +2122,7 @@
       "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /telehealth."
     },
     {
-      "path": "/answers/minoxidil-hair-loss-does-it-work",
+      "path": "/blog/minoxidil-for-hair-loss-does-it-work",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/minoxidil-for-hair-loss-does-it-work",
       "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -2136,7 +2136,7 @@
       "pageType": "Health Guide"
     },
     {
-      "path": "/answers/non-stimulant-adhd-medications",
+      "path": "/blog/non-stimulant-adhd-medications-explained",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/non-stimulant-adhd-medications-explained",
       "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -2164,7 +2164,7 @@
       "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/insulin-resistance-and-weight-loss-clinician-overview."
     },
     {
-      "path": "/answers/oral-vs-injectable-weight-loss-meds",
+      "path": "/blog/oral-vs-injectable-weight-loss-medications",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/oral-vs-injectable-weight-loss-medications",
       "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -2192,7 +2192,7 @@
       "pageType": "Health Guide"
     },
     {
-      "path": "/answers/phentermine-weight-loss-safety",
+      "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
       "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -2261,7 +2261,7 @@
       "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign."
     },
     {
-      "path": "/answers/sildenafil-erectile-dysfunction-expectations",
+      "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -2329,7 +2329,7 @@
       "pageType": "Health Guide"
     },
     {
-      "path": "/answers/tirzepatide-vs-semaglutide",
+      "path": "/blog/tirzepatide-vs-semaglutide-which-is-better",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/tirzepatide-vs-semaglutide-which-is-better",
       "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -2425,7 +2425,7 @@
       "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /answers."
     },
     {
-      "path": "/blog/adderall-ir-vs-xr-adults",
+      "path": "/blog/vyvanse-vs-adderall-differences",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/adderall-for-adhd-how-it-works",
       "rationale": "IR/XR variant duplicates Adderall mechanism article.",
@@ -2452,7 +2452,7 @@
       "pageType": "Blog Article"
     },
     {
-      "path": "/blog/adhd-evaluation-cost-california",
+      "path": "/blog/adhd-evaluation-cost-texas",
       "classification": "REDIRECT",
       "redirectTarget": "/membership-pricing",
       "rationale": "State-specific pricing duplicate; membership-pricing is canonical pricing page.",
@@ -2494,7 +2494,7 @@
       "pageType": "Blog Article"
     },
     {
-      "path": "/blog/adhd-medication-online-texas-telehealth",
+      "path": "/blog/online-adhd-diagnosis-texas",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/online-adhd-diagnosis-texas",
       "rationale": "TX medication logistics covered by TX diagnosis cornerstone + /adhd-care.",
@@ -2536,7 +2536,7 @@
       "pageType": "Blog Article"
     },
     {
-      "path": "/blog/adhd-treatment-houston-online",
+      "path": "/blog/online-adhd-diagnosis-texas",
       "classification": "REDIRECT",
       "redirectTarget": "/adhd-diagnosis-texas",
       "rationale": "Houston blog duplicates Texas geo landing; 3 inbound.",
@@ -2578,7 +2578,7 @@
       "pageType": "Blog Article"
     },
     {
-      "path": "/blog/after-adhd-diagnosis-next-steps-adults",
+      "path": "/answers/starting-adhd-medication-adults",
       "classification": "REDIRECT",
       "redirectTarget": "/adhd-care",
       "rationale": "Post-diagnosis journey belongs on /adhd-care; 2 inbound thin article.",
@@ -2591,7 +2591,7 @@
       "pageType": "Blog Article"
     },
     {
-      "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+      "path": "/answers/adhd-and-weight-loss-connection",
       "classification": "REDIRECT",
       "redirectTarget": "/weight-loss-metabolic-health",
       "rationale": "Cross-service article with 2 inbound; metabolic service page owns dual-condition positioning.",
@@ -2604,7 +2604,7 @@
       "pageType": "Blog Article"
     },
     {
-      "path": "/blog/focalin-vs-adderall-comparison",
+      "path": "/blog/vyvanse-vs-adderall-differences",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/vyvanse-vs-adderall-differences",
       "rationale": "Third stimulant comparison page; consolidate ADHD med comparisons to canonical pair.",
@@ -2645,7 +2645,7 @@
       "pageType": "Blog Article"
     },
     {
-      "path": "/blog/long-term-weight-loss-medications-what-to-expect",
+      "path": "/blog/semaglutide-for-weight-loss-how-it-works",
       "redirectTarget": "/weight-loss-metabolic-health",
       "phase": 3,
       "groups": [
@@ -3138,7 +3138,7 @@
       "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /adhd-care."
     },
     {
-      "path": "/answers/adhd-in-men",
+      "path": "/answers/signs-of-adult-adhd",
       "classification": "REDIRECT",
       "redirectTarget": "/answers/signs-of-adult-adhd",
       "rationale": "Thin gender variant (348 words, 1 inbound); signs-of-adult-adhd covers presentation.",
@@ -3329,7 +3329,7 @@
       "pageType": "Health Guide"
     },
     {
-      "path": "/answers/creyos-adhd-testing-explained",
+      "path": "/creyos-adhd-testing",
       "classification": "REDIRECT",
       "redirectTarget": "/adhd-care",
       "rationale": "Creyos FAQ with 1 inbound; merge into adhd-care evaluation section.",
@@ -3590,7 +3590,7 @@
       "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /telehealth."
     },
     {
-      "path": "/answers/minoxidil-hair-loss-does-it-work",
+      "path": "/blog/minoxidil-for-hair-loss-does-it-work",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/minoxidil-for-hair-loss-does-it-work",
       "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -3604,7 +3604,7 @@
       "pageType": "Health Guide"
     },
     {
-      "path": "/answers/non-stimulant-adhd-medications",
+      "path": "/blog/non-stimulant-adhd-medications-explained",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/non-stimulant-adhd-medications-explained",
       "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -3632,7 +3632,7 @@
       "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/insulin-resistance-and-weight-loss-clinician-overview."
     },
     {
-      "path": "/answers/oral-vs-injectable-weight-loss-meds",
+      "path": "/blog/oral-vs-injectable-weight-loss-medications",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/oral-vs-injectable-weight-loss-medications",
       "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -3660,7 +3660,7 @@
       "pageType": "Health Guide"
     },
     {
-      "path": "/answers/phentermine-weight-loss-safety",
+      "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
       "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -3755,7 +3755,7 @@
       "rationale": "Supporting/thin guide not in minimum viable whitelist; consolidate to /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign."
     },
     {
-      "path": "/answers/sildenafil-erectile-dysfunction-expectations",
+      "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -3836,7 +3836,7 @@
       "pageType": "Health Guide"
     },
     {
-      "path": "/answers/tirzepatide-vs-semaglutide",
+      "path": "/blog/tirzepatide-vs-semaglutide-which-is-better",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/tirzepatide-vs-semaglutide-which-is-better",
       "rationale": "Cannibalization Phase 1 duplicate; blog owns long-form. Guide narrowed to FAQ but still splits authority — redirect per pruning.",
@@ -4023,7 +4023,7 @@
       "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
     },
     {
-      "path": "/blog/adderall-ir-vs-xr-adults",
+      "path": "/blog/vyvanse-vs-adderall-differences",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/adderall-for-adhd-how-it-works",
       "rationale": "IR/XR variant duplicates Adderall mechanism article.",
@@ -4063,7 +4063,7 @@
       "pageType": "Blog Article"
     },
     {
-      "path": "/blog/adhd-evaluation-cost-california",
+      "path": "/blog/adhd-evaluation-cost-texas",
       "classification": "REDIRECT",
       "redirectTarget": "/membership-pricing",
       "rationale": "State-specific pricing duplicate; membership-pricing is canonical pricing page.",
@@ -4118,7 +4118,7 @@
       "pageType": "Blog Article"
     },
     {
-      "path": "/blog/adhd-medication-online-texas-telehealth",
+      "path": "/blog/online-adhd-diagnosis-texas",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/online-adhd-diagnosis-texas",
       "rationale": "TX medication logistics covered by TX diagnosis cornerstone + /adhd-care.",
@@ -4213,7 +4213,7 @@
       "pageType": "Blog Article"
     },
     {
-      "path": "/blog/adhd-treatment-houston-online",
+      "path": "/blog/online-adhd-diagnosis-texas",
       "classification": "REDIRECT",
       "redirectTarget": "/adhd-diagnosis-texas",
       "rationale": "Houston blog duplicates Texas geo landing; 3 inbound.",
@@ -4255,7 +4255,7 @@
       "pageType": "Blog Article"
     },
     {
-      "path": "/blog/after-adhd-diagnosis-next-steps-adults",
+      "path": "/answers/starting-adhd-medication-adults",
       "classification": "REDIRECT",
       "redirectTarget": "/adhd-care",
       "rationale": "Post-diagnosis journey belongs on /adhd-care; 2 inbound thin article.",
@@ -4294,7 +4294,7 @@
       "pageType": "Blog Article"
     },
     {
-      "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+      "path": "/answers/adhd-and-weight-loss-connection",
       "classification": "REDIRECT",
       "redirectTarget": "/weight-loss-metabolic-health",
       "rationale": "Cross-service article with 2 inbound; metabolic service page owns dual-condition positioning.",
@@ -4320,7 +4320,7 @@
       "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
     },
     {
-      "path": "/blog/focalin-vs-adderall-comparison",
+      "path": "/blog/vyvanse-vs-adderall-differences",
       "classification": "REDIRECT",
       "redirectTarget": "/blog/vyvanse-vs-adderall-differences",
       "rationale": "Third stimulant comparison page; consolidate ADHD med comparisons to canonical pair.",
@@ -4504,7 +4504,7 @@
       "rationale": "Whitelisted cornerstone or high-equity blog in minimum viable site."
     },
     {
-      "path": "/blog/long-term-weight-loss-medications-what-to-expect",
+      "path": "/blog/semaglutide-for-weight-loss-how-it-works",
       "redirectTarget": "/weight-loss-metabolic-health",
       "phase": 3,
       "groups": [

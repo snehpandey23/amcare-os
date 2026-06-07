@@ -52,14 +52,65 @@ function deriveTakeawayBullets(seed) {
   return bullets.slice(0, 4);
 }
 
+function normEvidenceText(s) {
+  return String(s).toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
 function evidenceRowsFromSeed(seed) {
   const ev = seed.evidence || [];
-  return ev.slice(0, 3).map((line) => {
-    const pmid = line.match(/PMID\s*(\d+)/i);
-    const cite = pmid ? `PMID ${pmid[1]}` : line.includes('FDA') ? 'FDA labeling' : line.includes('ADA') ? 'ADA' : '';
-    const label = line.split(/[—–(]/)[0].trim().slice(0, 48);
-    return { label, value: line.length > 90 ? `${line.slice(0, 87)}…` : line, cite };
-  });
+  const rows = [];
+  for (const line of ev.slice(0, 3)) {
+    const trimmed = line.replace(/\s+/g, ' ').trim();
+    if (!trimmed) continue;
+
+    const pmid = trimmed.match(/PMID\s*(\d+)/i);
+    const cite = pmid
+      ? `PMID ${pmid[1]}`
+      : trimmed.includes('FDA')
+        ? 'FDA labeling'
+        : trimmed.includes('ADA')
+          ? 'ADA'
+          : trimmed.includes('AASM')
+            ? 'AASM'
+            : trimmed.includes('NICE')
+              ? 'NICE'
+              : trimmed.includes('DSM')
+                ? 'DSM-5-TR'
+                : '';
+
+    let label;
+    let value;
+    const dashParts = trimmed.split(/\s*[—–]\s*/);
+    const paren = trimmed.match(/^([^(]+)\(([^)]+)\)\s*$/);
+
+    if (pmid) {
+      const beforePmid = trimmed.replace(/\s*PMID\s*\d+.*/i, '').trim();
+      label = (beforePmid || 'Published study').slice(0, 48);
+      value = beforePmid ? `${beforePmid} (${cite})` : cite;
+    } else if (dashParts.length >= 2 && dashParts[1].length > 8) {
+      label = dashParts[0].trim().slice(0, 48);
+      value = dashParts.slice(1).join(' — ').trim();
+    } else if (paren && paren[2].length > 8) {
+      label = paren[1].trim().slice(0, 48);
+      value = paren[2].trim();
+    } else if (cite) {
+      const base = trimmed.split(/[:(]/)[0].trim();
+      label = base.slice(0, 48);
+      value = `${base} (${cite})`;
+    } else {
+      continue;
+    }
+
+    if (normEvidenceText(label) === normEvidenceText(value)) continue;
+    if (value.length < 12) continue;
+
+    rows.push({
+      label,
+      value: value.length > 120 ? `${value.slice(0, 117)}…` : value,
+      cite,
+    });
+  }
+  return rows;
 }
 
 function defaultDecisionNodes(seed, topic) {
@@ -402,13 +453,11 @@ export function buildHealthGuideEngagement(seed) {
     type: 'evidence',
     placement: 'Before reference list (replaces bullet-only evidence)',
     component: 'evidenceSnapshot',
-    build: () =>
-      evidenceSnapshot({
-        title: 'Evidence snapshot',
-        rows: evidenceRowsFromSeed(seed).length
-          ? evidenceRowsFromSeed(seed)
-          : [{ label: 'Guideline-based care', value: 'See references below', cite: 'Educational summary' }],
-      }),
+    build: () => {
+      const rows = evidenceRowsFromSeed(seed);
+      if (!rows.length) return '';
+      return evidenceSnapshot({ title: 'Evidence snapshot', rows });
+    },
   };
 
   const decisionSupport = {

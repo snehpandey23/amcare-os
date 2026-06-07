@@ -68,7 +68,7 @@ HEADER = """<!DOCTYPE html>
           <div class="blog-content">
             <p class="blog-disclaimer"><strong>Important:</strong> This content is for educational purposes only and does not replace medical advice, diagnosis, or treatment. ADHD medication decisions require an in-person or telehealth evaluation with a licensed prescriber in your state. Never start, stop, or change a prescription without medical guidance.</p>
 
-            <div class="blog-internal-links"><p>If you are considering ADHD care, review our <a href="/adhd-care">ADHD diagnosis and care</a> overview, understand typical <a href="/adhd-evaluation-cost">ADHD evaluation cost</a> factors, and try a brief <a href="/online-adhd-test">online ADHD screening</a> to discuss results with a clinician.</p></div>
+            <div class="blog-internal-links"><p>If you are considering ADHD care, review our <a href="/adhd-care">ADHD diagnosis and care</a> overview, understand typical <a href="/pricing">ADHD evaluation cost</a> factors, and try a brief <a href="/adhd-screening">online ADHD screening</a> to discuss results with a clinician.</p></div>
 
 {body}
 

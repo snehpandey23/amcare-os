@@ -1,6 +1,6 @@
 # Cannibalization Phase 1 — Final Report
 
-Generated: 2026-06-07T12:24:16.097Z
+Generated: 2026-06-07T15:39:44.634Z
 
 ## Build validation
 
@@ -10,25 +10,21 @@ Generated: 2026-06-07T12:24:16.097Z
 | Duplicate title tags | ✓ 0 |
 | Duplicate H1s | ✓ 0 |
 | JSON-LD parse errors | ✓ 0 |
-| Sitemap URLs | 164 |
+| Sitemap URLs | 139 |
 | **Overall** | **PASS** |
 
 ## Pages modified
 
-### Health Guides (31 intent overrides)
+### Health Guides (25 intent overrides)
 
 - `/answers/is-online-adhd-diagnosis-legitimate`
 - `/answers/adderall-vs-vyvanse-adults`
 - `/answers/adhd-medication-side-effects`
 - `/answers/is-adhd-medication-safe-long-term`
-- `/answers/non-stimulant-adhd-medications`
 - `/answers/adhd-medication-every-day`
 - `/answers/glp-1-side-effects`
 - `/answers/semaglutide-weight-loss-how-it-works`
-- `/answers/tirzepatide-vs-semaglutide`
 - `/answers/compounded-vs-branded-glp-1`
-- `/answers/phentermine-weight-loss-safety`
-- `/answers/oral-vs-injectable-weight-loss-meds`
 - `/answers/medical-weight-loss-vs-dieting`
 - `/answers/glp-1-nausea-management`
 - `/answers/who-qualifies-glp-1-weight-loss`
@@ -43,15 +39,13 @@ Generated: 2026-06-07T12:24:16.097Z
 - `/answers/high-shbg-low-free-testosterone`
 - `/answers/when-is-testosterone-therapy-appropriate`
 - `/answers/trt-monitoring-requirements`
-- `/answers/minoxidil-hair-loss-does-it-work`
 - `/answers/oral-vs-topical-minoxidil`
-- `/answers/sildenafil-erectile-dysfunction-expectations`
 - `/answers/telehealth-adhd-california`
 - `/answers/food-noise-returned-on-glp-1`
 
 ### Canonical pointer blocks
 
-31/31 guides have top pointer + full-guide CTA.
+25/25 guides have top pointer + full-guide CTA.
 
 ## Titles / H1s changed (duplicate pairs)
 
@@ -61,29 +55,23 @@ Generated: 2026-06-07T12:24:16.097Z
 | /answers/adderall-vs-vyvanse-adults | When might Vyvanse be preferred over Adderall for adults? |
 | /answers/adhd-medication-side-effects | What ADHD medication side effects are most common in the first weeks? |
 | /answers/is-adhd-medication-safe-long-term | What does long-term ADHD medication safety monitoring include? |
-| /answers/non-stimulant-adhd-medications | When are non-stimulant ADHD medications considered first? |
 | /answers/glp-1-side-effects | Which GLP-1 side effects usually improve with titration? |
 | /answers/semaglutide-weight-loss-how-it-works | How quickly does semaglutide start working for weight loss? |
-| /answers/tirzepatide-vs-semaglutide | Who might consider tirzepatide instead of semaglutide? |
 | /answers/compounded-vs-branded-glp-1 | What should you ask about compounded vs branded GLP-1? |
-| /answers/phentermine-weight-loss-safety | Who should avoid phentermine for weight loss? |
-| /answers/oral-vs-injectable-weight-loss-meds | When might oral weight-loss medication be preferred over injectable GLP-1? |
 | /answers/medical-weight-loss-vs-dieting | When does medical weight loss outperform dieting alone? |
 | /answers/when-is-testosterone-therapy-appropriate | What symptoms warrant testosterone therapy evaluation? |
 | /answers/trt-monitoring-requirements | How often is TRT monitoring required? |
-| /answers/minoxidil-hair-loss-does-it-work | How long does minoxidil take to show hair results? |
 | /answers/oral-vs-topical-minoxidil | When is topical minoxidil enough vs oral minoxidil? |
-| /answers/sildenafil-erectile-dysfunction-expectations | How long does it take sildenafil to work? |
 
 ## Links added
 
-- Reciprocal blog ↔ guide links for 31 HIGH-overlap pairs
+- Reciprocal blog ↔ guide links for 25 HIGH-overlap pairs
 - Cornerstone blogs: expanded Related Health Guides sections
 - Continue reading: answer links on canonical winning blogs
 
 ## Duplicate pairs resolved
 
-17 pairs — blog owns long-form; guide narrowed to FAQ/PAA with canonical pointers.
+11 pairs — blog owns long-form; guide narrowed to FAQ/PAA with canonical pointers.
 
 ## Supporting pairs strengthened
 

@@ -1,6 +1,6 @@
 {
-  "generated": "2026-06-07T12:24:15.235Z",
-  "count": 56,
+  "generated": "2026-06-07T15:39:43.851Z",
+  "count": 48,
   "articles": [
     {
       "title": "Health Insights &amp; Blog Hub (2026) | ADHD, Weight Loss &amp; Telehealth",
@@ -21,14 +21,6 @@
       ]
     },
     {
-      "title": "Adderall IR vs XR for Adults: Timing, Duration &amp; What to Ask Your Prescriber",
-      "url": "https://siya.health/blog/adderall-ir-vs-xr-adults",
-      "description": "Adderall immediate-release vs extended-release for adult ADHD: onset, how long effects last, dosing patterns, and how clinicians choose—education only, not medical advice.",
-      "topics": [
-        "adhd"
-      ]
-    },
-    {
       "title": "ADHD Articles Hub (2026) — Diagnosis, Medication Education &amp; Care",
       "url": "https://siya.health/blog/adhd",
       "description": "Explore Siya Health ADHD articles: evaluation, medication education for adults, symptoms, and online care—indexed for search with clear internal links.",
@@ -41,15 +33,6 @@
       "title": "ADHD Evaluation in California: Online vs In-Person Options (2026)",
       "url": "https://siya.health/blog/adhd-evaluation-california-online-vs-in-person",
       "description": "ADHD evaluation California: compare secure telehealth and in-office visits—timelines, costs, legitimacy, medication discussions, safety.",
-      "topics": [
-        "adhd",
-        "california"
-      ]
-    },
-    {
-      "title": "How Much Does an ADHD Evaluation Cost in California?",
-      "url": "https://siya.health/blog/adhd-evaluation-cost-california",
-      "description": "ADHD evaluation cost California: typical price ranges, what drives fees, hidden add-ons to watch for, cash vs insurance angles, budgeting follow-up realistically.",
       "topics": [
         "adhd",
         "california"
@@ -80,17 +63,6 @@
       "topics": [
         "adhd",
         "california",
-        "medication"
-      ]
-    },
-    {
-      "title": "Can You Get ADHD Medication Online in Texas? Rules &amp; Safety",
-      "url": "https://siya.health/blog/adhd-medication-online-texas-telehealth",
-      "description": "ADHD medication via telehealth in Texas: what legitimate care includes, evaluation requirements, red flags, and why structured visits matter—education only.",
-      "topics": [
-        "adhd",
-        "telehealth",
-        "texas",
         "medication"
       ]
     },
@@ -150,16 +122,6 @@
       ]
     },
     {
-      "title": "ADHD Treatment in Houston: Online Telehealth Options",
-      "url": "https://siya.health/blog/adhd-treatment-houston-online",
-      "description": "ADHD treatment for Houston adults via telehealth: what online care includes, benefits, legitimacy, and who it fits—plus how to start with a licensed Texas clinician.",
-      "topics": [
-        "adhd",
-        "telehealth",
-        "texas"
-      ]
-    },
-    {
       "title": "Adult ADHD Symptoms in California: Patterns Worth Taking Seriously",
       "url": "https://siya.health/blog/adult-adhd-symptoms-california",
       "description": "Adult ADHD symptoms California: chronic patterns versus burnout mimics—attention drift, procrastination pits, rejection sensitivity arcs—and clinician evaluation norms.",
@@ -178,37 +140,12 @@
       ]
     },
     {
-      "title": "What Happens After an ADHD Diagnosis? Next Steps for Adults",
-      "url": "https://siya.health/blog/after-adhd-diagnosis-next-steps-adults",
-      "description": "After an adult ADHD diagnosis: understanding the diagnosis, treatment options, building a personalized plan, and why ongoing care matters—education from Siya Health.",
-      "topics": [
-        "adhd"
-      ]
-    },
-    {
-      "title": "Combining ADHD Treatment &amp; Weight Loss Strategies (2026)",
-      "url": "https://siya.health/blog/combining-adhd-treatment-and-weight-loss-strategies",
-      "description": "Combining ADHD treatment and weight loss in 2026: stimulant appetite effects, GLP-1 overlap, coaching, and coordinated prescribing—education only.",
-      "topics": [
-        "adhd",
-        "weight-loss"
-      ]
-    },
-    {
       "title": "Compounded vs Branded GLP-1 Medications (2026): Safety &amp; Standards",
       "url": "https://siya.health/blog/compounded-vs-branded-glp1-medications",
       "description": "Compounded vs branded GLP-1 in 2026: manufacturing standards, regulatory context, risks of unapproved copies, and why clinician oversight matters.",
       "topics": [
         "weight-loss",
         "medication"
-      ]
-    },
-    {
-      "title": "Focalin vs Adderall for ADHD (2026): Methylphenidate vs Amphetamine",
-      "url": "https://siya.health/blog/focalin-vs-adderall-comparison",
-      "description": "Focalin vs Adderall in 2026: methylphenidate vs amphetamine class, dosing ideas, duration, side effects, and how clinicians pick stimulants for adults.",
-      "topics": [
-        "adhd"
       ]
     },
     {
@@ -307,15 +244,6 @@
       "description": "Skeptical about online ADHD diagnosis? Here's what makes it legitimate—and what to look for when choosing a provider.",
       "topics": [
         "adhd"
-      ]
-    },
-    {
-      "title": "Long-Term Weight Loss Medications: What to Expect in 2026",
-      "url": "https://siya.health/blog/long-term-weight-loss-medications-what-to-expect",
-      "description": "Long-term weight loss medications in 2026: maintenance phases, plateaus, monitoring, mental health, and realistic expectations—no guaranteed outcomes.",
-      "topics": [
-        "weight-loss",
-        "medication"
       ]
     },
     {

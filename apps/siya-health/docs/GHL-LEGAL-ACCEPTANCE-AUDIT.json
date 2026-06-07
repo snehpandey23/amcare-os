@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-07T12:24:15.583Z",
+  "generatedAt": "2026-06-07T15:39:44.183Z",
   "formId": "mnWpgh0IEgFvJymdZqHY",
   "bookingUrl": "https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4",
   "legalDocumentVersion": "terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31",
@@ -12,13 +12,13 @@
     "npp": "legal_acceptance_npp"
   },
   "summary": {
-    "htmlPagesScanned": 164,
-    "pagesWithGhlLinks": 162,
-    "totalGhlBookingLinks": 166,
-    "pagesWithCarepatronLinks": 163,
-    "totalCarepatronBookingLinks": 671,
+    "htmlPagesScanned": 147,
+    "pagesWithGhlLinks": 146,
+    "totalGhlBookingLinks": 150,
+    "pagesWithCarepatronLinks": 147,
+    "totalCarepatronBookingLinks": 643,
     "pagesWithAcceptanceScript": 1,
-    "pagesWithGhlMissingAcceptance": 155,
+    "pagesWithGhlMissingAcceptance": 139,
     "intakeHub": true
   },
   "externalFunnels": [
@@ -195,16 +195,6 @@
       "hasChatWidget": false
     },
     {
-      "path": "/answers/adhd-in-men",
-      "file": "answers/adhd-in-men.html",
-      "category": "adhd-content",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": true,
-      "hasChatWidget": false
-    },
-    {
       "path": "/answers/adhd-in-women",
       "file": "answers/adhd-in-women.html",
       "category": "adhd-content",
@@ -332,16 +322,6 @@
       "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
-      "hasChatWidget": false
-    },
-    {
-      "path": "/answers/creyos-adhd-testing-explained",
-      "file": "answers/creyos-adhd-testing-explained.html",
-      "category": "adhd-content",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": true,
       "hasChatWidget": false
     },
     {
@@ -535,26 +515,6 @@
       "hasChatWidget": false
     },
     {
-      "path": "/answers/minoxidil-hair-loss-does-it-work",
-      "file": "answers/minoxidil-hair-loss-does-it-work.html",
-      "category": "general-cta",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
-      "hasChatWidget": false
-    },
-    {
-      "path": "/answers/non-stimulant-adhd-medications",
-      "file": "answers/non-stimulant-adhd-medications.html",
-      "category": "adhd-content",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": true,
-      "hasChatWidget": false
-    },
-    {
       "path": "/answers/normal-a1c-insulin-resistance",
       "file": "answers/normal-a1c-insulin-resistance.html",
       "category": "general-cta",
@@ -565,28 +525,8 @@
       "hasChatWidget": false
     },
     {
-      "path": "/answers/oral-vs-injectable-weight-loss-meds",
-      "file": "answers/oral-vs-injectable-weight-loss-meds.html",
-      "category": "general-cta",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
-      "hasChatWidget": false
-    },
-    {
       "path": "/answers/oral-vs-topical-minoxidil",
       "file": "answers/oral-vs-topical-minoxidil.html",
-      "category": "general-cta",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
-      "hasChatWidget": false
-    },
-    {
-      "path": "/answers/phentermine-weight-loss-safety",
-      "file": "answers/phentermine-weight-loss-safety.html",
       "category": "general-cta",
       "ghlBookingLinks": 1,
       "carepatronBookingLinks": 4,
@@ -655,16 +595,6 @@
       "hasChatWidget": false
     },
     {
-      "path": "/answers/sildenafil-erectile-dysfunction-expectations",
-      "file": "answers/sildenafil-erectile-dysfunction-expectations.html",
-      "category": "general-cta",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
-      "hasChatWidget": false
-    },
-    {
       "path": "/answers/starting-adhd-medication-adults",
       "file": "answers/starting-adhd-medication-adults.html",
       "category": "adhd-content",
@@ -712,16 +642,6 @@
       "carepatronBookingLinks": 4,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
-      "hasChatWidget": false
-    },
-    {
-      "path": "/answers/tirzepatide-vs-semaglutide",
-      "file": "answers/tirzepatide-vs-semaglutide.html",
-      "category": "general-cta",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
       "hasChatWidget": false
     },
     {
@@ -845,31 +765,11 @@
       "hasChatWidget": true
     },
     {
-      "path": "/blog/adderall-ir-vs-xr-adults",
-      "file": "blog/adderall-ir-vs-xr-adults.html",
-      "category": "general-cta",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
-      "hasChatWidget": true
-    },
-    {
       "path": "/blog/adhd-evaluation-california-online-vs-in-person",
       "file": "blog/adhd-evaluation-california-online-vs-in-person.html",
       "category": "adhd-related",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
-      "hasChatWidget": true
-    },
-    {
-      "path": "/blog/adhd-evaluation-cost-california",
-      "file": "blog/adhd-evaluation-cost-california.html",
-      "category": "adhd-related",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 7,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -899,17 +799,7 @@
       "file": "blog/adhd-medication-online-california.html",
       "category": "adhd-related",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
-      "hasChatWidget": true
-    },
-    {
-      "path": "/blog/adhd-medication-online-texas-telehealth",
-      "file": "blog/adhd-medication-online-texas-telehealth.html",
-      "category": "adhd-related",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 8,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -919,7 +809,7 @@
       "file": "blog/adhd-medication-options-california.html",
       "category": "adhd-related",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 8,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -959,7 +849,7 @@
       "file": "blog/adhd-telehealth-california.html",
       "category": "adhd-related",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 8,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -969,17 +859,7 @@
       "file": "blog/adhd-testing-online-california-screening-vs-evaluation.html",
       "category": "adhd-related",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
-      "hasChatWidget": true
-    },
-    {
-      "path": "/blog/adhd-treatment-houston-online",
-      "file": "blog/adhd-treatment-houston-online.html",
-      "category": "adhd-related",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 8,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": true
@@ -999,7 +879,7 @@
       "file": "blog/adult-adhd-symptoms-california.html",
       "category": "adhd-funnel",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 8,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": true
@@ -1009,27 +889,7 @@
       "file": "blog/adult-adhd-treatment-california-2026.html",
       "category": "adhd-funnel",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": true,
-      "hasChatWidget": true
-    },
-    {
-      "path": "/blog/after-adhd-diagnosis-next-steps-adults",
-      "file": "blog/after-adhd-diagnosis-next-steps-adults.html",
-      "category": "adhd-funnel",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": true,
-      "hasChatWidget": true
-    },
-    {
-      "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
-      "file": "blog/combining-adhd-treatment-and-weight-loss-strategies.html",
-      "category": "adhd-funnel",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 8,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": true
@@ -1037,16 +897,6 @@
     {
       "path": "/blog/compounded-vs-branded-glp1-medications",
       "file": "blog/compounded-vs-branded-glp1-medications.html",
-      "category": "general-cta",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
-      "hasChatWidget": true
-    },
-    {
-      "path": "/blog/focalin-vs-adderall-comparison",
-      "file": "blog/focalin-vs-adderall-comparison.html",
       "category": "general-cta",
       "ghlBookingLinks": 1,
       "carepatronBookingLinks": 4,
@@ -1109,7 +959,7 @@
       "file": "blog/how-to-choose-adhd-provider-california.html",
       "category": "adhd-funnel",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 8,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": true
@@ -1185,16 +1035,6 @@
       "hasChatWidget": true
     },
     {
-      "path": "/blog/long-term-weight-loss-medications-what-to-expect",
-      "file": "blog/long-term-weight-loss-medications-what-to-expect.html",
-      "category": "general-cta",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
-      "hasChatWidget": true
-    },
-    {
       "path": "/blog/medical-weight-loss-glp1-semaglutide-texas",
       "file": "blog/medical-weight-loss-glp1-semaglutide-texas.html",
       "category": "general-cta",
@@ -1239,7 +1079,7 @@
       "file": "blog/online-adhd-diagnosis-california.html",
       "category": "adhd-funnel",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 4,
+      "carepatronBookingLinks": 8,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": true
@@ -1519,7 +1359,7 @@
       "file": "online-adhd-test.html",
       "category": "adhd-funnel",
       "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 6,
+      "carepatronBookingLinks": 7,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": true
@@ -1700,7 +1540,6 @@
     "adult-adhd-diagnosis.html",
     "answers/adderall-vs-vyvanse-adults.html",
     "answers/adhd-and-weight-loss-connection.html",
-    "answers/adhd-in-men.html",
     "answers/adhd-in-women.html",
     "answers/adhd-medication-every-day.html",
     "answers/adhd-medication-side-effects.html",
@@ -1714,7 +1553,6 @@
     "answers/can-sleep-apnea-cause-fatigue.html",
     "answers/can-you-get-adhd-medication-online.html",
     "answers/compounded-vs-branded-glp-1.html",
-    "answers/creyos-adhd-testing-explained.html",
     "answers/ed-telehealth-legitimate.html",
     "answers/executive-dysfunction-adhd.html",
     "answers/food-noise-returned-on-glp-1.html",
@@ -1734,25 +1572,19 @@
     "answers/late-adhd-diagnosis-adults.html",
     "answers/medical-weight-loss-vs-dieting.html",
     "answers/meet-and-greet-telehealth-expectations.html",
-    "answers/minoxidil-hair-loss-does-it-work.html",
-    "answers/non-stimulant-adhd-medications.html",
     "answers/normal-a1c-insulin-resistance.html",
-    "answers/oral-vs-injectable-weight-loss-meds.html",
     "answers/oral-vs-topical-minoxidil.html",
-    "answers/phentermine-weight-loss-safety.html",
     "answers/poor-sleep-feels-like-adhd.html",
     "answers/rejection-sensitivity-adhd.html",
     "answers/screening-vs-adhd-evaluation.html",
     "answers/semaglutide-weight-loss-how-it-works.html",
     "answers/signs-of-adult-adhd.html",
     "answers/signs-of-sleep-apnea-in-adults.html",
-    "answers/sildenafil-erectile-dysfunction-expectations.html",
     "answers/starting-adhd-medication-adults.html",
     "answers/telehealth-adhd-california.html",
     "answers/telehealth-adhd-texas.html",
     "answers/testosterone-and-adhd-overlap.html",
     "answers/time-blindness-adhd.html",
-    "answers/tirzepatide-vs-semaglutide.html",
     "answers/trt-monitoring-requirements.html",
     "answers/weight-gain-after-stopping-ozempic.html",
     "answers/what-does-low-testosterone-feel-like.html",
@@ -1765,27 +1597,20 @@
     "answers/why-am-i-tired-even-after-sleeping.html",
     "answers/why-normal-labs-dont-mean-healthy.html",
     "blog/adderall-for-adhd-how-it-works.html",
-    "blog/adderall-ir-vs-xr-adults.html",
     "blog/adhd-evaluation-california-online-vs-in-person.html",
-    "blog/adhd-evaluation-cost-california.html",
     "blog/adhd-evaluation-cost-texas.html",
     "blog/adhd-medication-daily-or-as-needed-adults.html",
     "blog/adhd-medication-online-california.html",
-    "blog/adhd-medication-online-texas-telehealth.html",
     "blog/adhd-medication-options-california.html",
     "blog/adhd-medication-options-for-adults.html",
     "blog/adhd-medication-side-effects-what-to-expect.html",
     "blog/adhd-symptoms-overlooked.html",
     "blog/adhd-telehealth-california.html",
     "blog/adhd-testing-online-california-screening-vs-evaluation.html",
-    "blog/adhd-treatment-houston-online.html",
     "blog/adhd.html",
     "blog/adult-adhd-symptoms-california.html",
     "blog/adult-adhd-treatment-california-2026.html",
-    "blog/after-adhd-diagnosis-next-steps-adults.html",
-    "blog/combining-adhd-treatment-and-weight-loss-strategies.html",
     "blog/compounded-vs-branded-glp1-medications.html",
-    "blog/focalin-vs-adderall-comparison.html",
     "blog/food-noise-and-glp-1-what-it-means-and-what-helps.html",
     "blog/free-testosterone-vs-total-testosterone-what-patients-should-know.html",
     "blog/glp1-side-effects-and-how-to-manage-them.html",
@@ -1799,7 +1624,6 @@
     "blog/insulin-resistance-and-weight-loss-clinician-overview.html",
     "blog/is-adhd-medication-safe-long-term.html",
     "blog/is-online-adhd-diagnosis-legit.html",
-    "blog/long-term-weight-loss-medications-what-to-expect.html",
     "blog/medical-weight-loss-glp1-semaglutide-texas.html",
     "blog/medical-weight-loss-vs-dieting-what-actually-works.html",
     "blog/minoxidil-for-hair-loss-does-it-work.html",

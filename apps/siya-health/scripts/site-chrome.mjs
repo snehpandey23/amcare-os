@@ -171,7 +171,7 @@ export const ANCHOR_LABELS = {
   '/answers/signs-of-adult-adhd': 'Signs of adult ADHD (quick health guide)',
   '/answers/semaglutide-weight-loss-how-it-works': 'How quickly semaglutide starts working (FAQ)',
   '/answers/glp-1-side-effects': 'GLP-1 side effects that improve with titration (FAQ)',
-  '/answers/tirzepatide-vs-semaglutide': 'Who might consider tirzepatide instead of semaglutide (FAQ)',
+  '/blog/tirzepatide-vs-semaglutide-which-is-better': 'Who might consider tirzepatide instead of semaglutide (FAQ)',
   '/answers/is-online-adhd-diagnosis-legitimate': 'Legitimate online ADHD diagnosis checklist (FAQ)',
   '/answers/when-is-testosterone-therapy-appropriate': 'Symptoms that warrant TRT evaluation (FAQ)',
   '/answers/adhd-and-weight-loss-connection': 'ADHD and weight loss struggles',
@@ -502,8 +502,8 @@ export function normalizeLegalLinks(html) {
     `<a$1href="${LEGAL_LINKS.noticeOfPrivacy}"$2>$3`,
   );
 
-  html = html.replaceAll('href="/terms"', `href="${LEGAL_LINKS.terms}"`);
-  html = html.replaceAll('href="/privacy-policy"', `href="${LEGAL_LINKS.privacy}"`);
+  html = html.replaceAll('href="/legal/terms-of-use"', `href="${LEGAL_LINKS.terms}"`);
+  html = html.replaceAll('href="/legal/privacy-policy"', `href="${LEGAL_LINKS.privacy}"`);
 
   html = html.replaceAll('Terms &amp; Conditions', 'Terms of Use');
   html = html.replace(/(<a[^>]*href="[^"]*\/legal\/terms-of-use"[^>]*>)\s*Terms\s*(<\/a>)/gi, '$1Terms of Use$2');
@@ -620,6 +620,13 @@ export function normalizeSitewideCopy(html, relPath = '') {
   html = html.replace(/Schedule a quick call/gi, COPY_STANDARDS.primaryCta);
   html = html.replace(/membership pricing/gi, 'follow-up plan pricing');
   html = html.replace(/Board-certified, ADHD-CCSP trained providers/gi, MIXED_ROSTER_CLINICIAN_PHRASE);
+  html = html.replace(/ADHD-CCSP trained clinicians/gi, 'ADHD-CCSP–trained clinicians');
+  html = html.replace(/<strong>Meet &amp; Greet<\/strong>/gi, '<strong>first telehealth visit</strong>');
+  html = html.replace(/<strong>Meet & Greet<\/strong>/gi, '<strong>first telehealth visit</strong>');
+  html = html.replace(/\bMeet &amp; Greet\b/gi, 'first telehealth visit');
+  html = html.replace(/\bMeet & Greet\b/gi, 'first telehealth visit');
+  html = html.replace(/\bMeet and Greet\b/gi, 'first telehealth visit');
+  html = html.replace(/physician assistant/gi, 'Physician Associate');
   html = html.replace(/Meet &amp; Greets/gi, 'introductory visits');
   html = html.replace(/Meet & Greets/gi, 'introductory visits');
   html = html.replace(/book a Meet &amp; Greet/gi, COPY_STANDARDS.primaryCta);
@@ -1055,7 +1062,7 @@ function buildAdhdFunnelBanner() {
   return `<!-- SIYA:ADHD-FUNNEL-BANNER -->
       <div class="adhd-funnel-banner section-tinted" role="note">
         <div class="container">
-          <p><strong>Main ADHD pathway:</strong> <a href="/adhd-care">ADHD Care</a> is our canonical starting point for evaluation, screening, and treatment planning.</p>
+          <p><strong>Main ADHD pathway:</strong> <a href="/adhd-care">ADHD Care</a> is our main ADHD care page for evaluation, screening, and treatment planning.</p>
         </div>
       </div>
       <!-- /SIYA:ADHD-FUNNEL-BANNER -->`;

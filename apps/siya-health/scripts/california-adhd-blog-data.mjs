@@ -73,7 +73,7 @@ export const CALIFORNIA_POSTS = [
             <section class="blog-related" aria-label="Related articles">
               <h2>Related articles</h2>
               <ul>
-                <li><a href="/blog/adhd-evaluation-cost-california">ADHD evaluation cost in California</a></li>
+                <li><a href="/blog/adhd-evaluation-cost-texas">ADHD evaluation cost in California</a></li>
                 <li><a href="/blog/adhd-telehealth-california">ADHD telehealth in California</a></li>
                 <li><a href="/blog/how-to-choose-adhd-provider-california">Choosing an ADHD provider in California</a></li>
                 <li><a href="/adhd-care">ADHD care overview</a></li>

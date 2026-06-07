@@ -1,14 +1,14 @@
 # Title & Meta Duplicate Audit
 
-Generated: 2026-06-07T12:24:13.814Z
+Generated: 2026-06-07T15:39:42.092Z
 
-## Duplicate title tags (1)
+## Duplicate title tags (0)
 
-- **"Privacy Policy"** — /legal/privacy-policy, /privacy-policy
+_None after Phase 1 differentiation._
 
-## Duplicate H1s (1)
+## Duplicate H1s (0)
 
-- **"Privacy Policy"** — /legal/privacy-policy, /privacy-policy
+_None after Phase 1 differentiation._
 
 ## Duplicate meta descriptions (0)
 
@@ -23,5 +23,5 @@ _None detected._
 
 ## Fixes applied
 
-- 17 guide title/H1/meta narrowed for duplicate pairs
-- Canonical blog pointer blocks added to 31 guides
+- 11 guide title/H1/meta narrowed for duplicate pairs
+- Canonical blog pointer blocks added to 25 guides

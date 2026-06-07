@@ -11,14 +11,10 @@ export const HIGH_OVERLAP_PAIRS = [
   { guide: '/answers/adderall-vs-vyvanse-adults', blog: '/blog/vyvanse-vs-adderall-differences', classification: 'Duplicate', owner: 'Blog', action: 'Narrow guide to preference FAQ; link to full comparison blog' },
   { guide: '/answers/adhd-medication-side-effects', blog: '/blog/adhd-medication-side-effects-what-to-expect', classification: 'Duplicate', owner: 'Blog', action: 'Narrow guide to first-week side effects FAQ' },
   { guide: '/answers/is-adhd-medication-safe-long-term', blog: '/blog/is-adhd-medication-safe-long-term', classification: 'Duplicate', owner: 'Blog', action: 'Narrow guide to monitoring FAQ; blog owns long-term safety narrative' },
-  { guide: '/answers/non-stimulant-adhd-medications', blog: '/blog/non-stimulant-adhd-medications-explained', classification: 'Duplicate', owner: 'Blog', action: 'Narrow guide to when non-stimulants are considered' },
   { guide: '/answers/adhd-medication-every-day', blog: '/blog/adhd-medication-daily-or-as-needed-adults', classification: 'Supporting', owner: 'Both', action: 'Keep both; guide = daily vs PRN FAQ; reciprocal links' },
   { guide: '/answers/glp-1-side-effects', blog: '/blog/glp1-side-effects-and-how-to-manage-them', classification: 'Duplicate', owner: 'Blog', action: 'Narrow guide to titration-improving side effects FAQ' },
   { guide: '/answers/semaglutide-weight-loss-how-it-works', blog: '/blog/semaglutide-for-weight-loss-how-it-works', classification: 'Duplicate', owner: 'Blog', action: 'Narrow guide to onset/timeline FAQ; blog owns MOA depth' },
-  { guide: '/answers/tirzepatide-vs-semaglutide', blog: '/blog/tirzepatide-vs-semaglutide-which-is-better', classification: 'Duplicate', owner: 'Blog', action: 'Narrow guide to candidacy FAQ; blog owns comparison' },
   { guide: '/answers/compounded-vs-branded-glp-1', blog: '/blog/compounded-vs-branded-glp1-medications', classification: 'Duplicate', owner: 'Blog', action: 'Narrow guide to patient questions FAQ' },
-  { guide: '/answers/phentermine-weight-loss-safety', blog: '/blog/phentermine-for-weight-loss-safety-and-effectiveness', classification: 'Duplicate', owner: 'Blog', action: 'Narrow guide to short-term safety FAQ' },
-  { guide: '/answers/oral-vs-injectable-weight-loss-meds', blog: '/blog/oral-vs-injectable-weight-loss-medications', classification: 'Duplicate', owner: 'Blog', action: 'Narrow guide to route preference FAQ' },
   { guide: '/answers/medical-weight-loss-vs-dieting', blog: '/blog/medical-weight-loss-vs-dieting-what-actually-works', classification: 'Duplicate', owner: 'Blog', action: 'Narrow guide to when medical program wins FAQ' },
   { guide: '/answers/glp-1-nausea-management', blog: '/blog/glp1-side-effects-and-how-to-manage-them', classification: 'Supporting', owner: 'Blog', action: 'Guide = nausea tips FAQ; blog = full side-effect management' },
   { guide: '/answers/who-qualifies-glp-1-weight-loss', blog: '/blog/medical-weight-loss-glp1-semaglutide-texas', classification: 'Supporting', owner: 'Both', action: 'Guide = eligibility FAQ; blog = Texas service page' },
@@ -33,9 +29,7 @@ export const HIGH_OVERLAP_PAIRS = [
   { guide: '/answers/high-shbg-low-free-testosterone', blog: '/blog/free-testosterone-vs-total-testosterone-what-patients-should-know', classification: 'Supporting', owner: 'Both', action: 'Guide = SHBG edge case; blog = cornerstone' },
   { guide: '/answers/when-is-testosterone-therapy-appropriate', blog: '/blog/when-is-testosterone-therapy-appropriate', classification: 'Duplicate', owner: 'Blog', action: 'Narrow guide to symptom triggers FAQ' },
   { guide: '/answers/trt-monitoring-requirements', blog: '/blog/when-is-testosterone-therapy-appropriate', classification: 'Duplicate', owner: 'Blog', action: 'Narrow guide to monitoring interval FAQ' },
-  { guide: '/answers/minoxidil-hair-loss-does-it-work', blog: '/blog/minoxidil-for-hair-loss-does-it-work', classification: 'Duplicate', owner: 'Blog', action: 'Narrow guide to timeline FAQ' },
   { guide: '/answers/oral-vs-topical-minoxidil', blog: '/blog/oral-vs-topical-minoxidil-which-is-right', classification: 'Duplicate', owner: 'Blog', action: 'Narrow guide to route selection FAQ' },
-  { guide: '/answers/sildenafil-erectile-dysfunction-expectations', blog: '/blog/sildenafil-for-erectile-dysfunction-what-to-expect', classification: 'Duplicate', owner: 'Blog', action: 'Narrow guide to onset/timing FAQ' },
   { guide: '/answers/telehealth-adhd-california', blog: '/blog/adhd-telehealth-california', classification: 'Supporting', owner: 'Both', action: 'Guide = CA telehealth FAQ; blog = state service page' },
   { guide: '/answers/food-noise-returned-on-glp-1', blog: '/blog/food-noise-and-glp-1-what-it-means-and-what-helps', classification: 'Supporting', owner: 'Both', action: 'Guide = return-on-therapy FAQ; blog = food noise cornerstone' },
 ];
@@ -78,15 +72,6 @@ export const GUIDE_CANNIBALIZATION_OVERRIDES = {
       label: 'Is ADHD medication safe long-term? (full guide)',
     },
   },
-  'non-stimulant-adhd-medications': {
-    question: 'When are non-stimulant ADHD medications considered first?',
-    metaDescription:
-      'Quick FAQ on when clinicians choose non-stimulant ADHD options. Full medication class guide linked.',
-    canonicalBlog: {
-      path: '/blog/non-stimulant-adhd-medications-explained',
-      label: 'Non-stimulant ADHD medications explained (full guide)',
-    },
-  },
   'adhd-medication-every-day': {
     metaDescription:
       'Quick FAQ: daily vs as-needed ADHD dosing for adults. Full dosing guide linked for prescriber-aligned plans.',
@@ -113,15 +98,6 @@ export const GUIDE_CANNIBALIZATION_OVERRIDES = {
       label: 'Semaglutide for weight loss: how it works (full guide)',
     },
   },
-  'tirzepatide-vs-semaglutide': {
-    question: 'Who might consider tirzepatide instead of semaglutide?',
-    metaDescription:
-      'Quick FAQ on candidacy for tirzepatide vs semaglutide—not a head-to-head comparison. Full clinical guide linked.',
-    canonicalBlog: {
-      path: '/blog/tirzepatide-vs-semaglutide-which-is-better',
-      label: 'Tirzepatide vs semaglutide: full comparison guide',
-    },
-  },
   'compounded-vs-branded-glp-1': {
     question: 'What should you ask about compounded vs branded GLP-1?',
     metaDescription:
@@ -129,24 +105,6 @@ export const GUIDE_CANNIBALIZATION_OVERRIDES = {
     canonicalBlog: {
       path: '/blog/compounded-vs-branded-glp1-medications',
       label: 'Compounded vs branded GLP-1 medications (full guide)',
-    },
-  },
-  'phentermine-weight-loss-safety': {
-    question: 'Who should avoid phentermine for weight loss?',
-    metaDescription:
-      'Quick FAQ on phentermine contraindications and short-term use—not a full safety review. Clinical guide linked.',
-    canonicalBlog: {
-      path: '/blog/phentermine-for-weight-loss-safety-and-effectiveness',
-      label: 'Phentermine for weight loss: safety and effectiveness (full guide)',
-    },
-  },
-  'oral-vs-injectable-weight-loss-meds': {
-    question: 'When might oral weight-loss medication be preferred over injectable GLP-1?',
-    metaDescription:
-      'Quick FAQ on oral vs injectable weight-loss routes—not a full comparison. Read the complete guide.',
-    canonicalBlog: {
-      path: '/blog/oral-vs-injectable-weight-loss-medications',
-      label: 'Oral vs injectable weight-loss medications (full guide)',
     },
   },
   'medical-weight-loss-vs-dieting': {
@@ -264,15 +222,6 @@ export const GUIDE_CANNIBALIZATION_OVERRIDES = {
       label: 'When is testosterone therapy appropriate? (full guide)',
     },
   },
-  'minoxidil-hair-loss-does-it-work': {
-    question: 'How long does minoxidil take to show hair results?',
-    metaDescription:
-      'Quick FAQ on minoxidil timeline—not a full treatment guide. Clinical hair loss article linked.',
-    canonicalBlog: {
-      path: '/blog/minoxidil-for-hair-loss-does-it-work',
-      label: 'Minoxidil for hair loss: does it work? (full guide)',
-    },
-  },
   'oral-vs-topical-minoxidil': {
     question: 'When is topical minoxidil enough vs oral minoxidil?',
     metaDescription:
@@ -280,15 +229,6 @@ export const GUIDE_CANNIBALIZATION_OVERRIDES = {
     canonicalBlog: {
       path: '/blog/oral-vs-topical-minoxidil-which-is-right',
       label: 'Oral vs topical minoxidil: which is right? (full guide)',
-    },
-  },
-  'sildenafil-erectile-dysfunction-expectations': {
-    question: 'How long does it take sildenafil to work?',
-    metaDescription:
-      'Quick FAQ on sildenafil onset and timing—not a full ED expectations guide. Clinical article linked.',
-    canonicalBlog: {
-      path: '/blog/sildenafil-for-erectile-dysfunction-what-to-expect',
-      label: 'Sildenafil for erectile dysfunction: what to expect (full guide)',
     },
   },
   'telehealth-adhd-california': {
@@ -315,14 +255,10 @@ export const BLOG_RECIPROCAL_GUIDE_LINKS = {
   'vyvanse-vs-adderall-differences': { guide: '/answers/adderall-vs-vyvanse-adults', anchor: 'Quick FAQ: when Vyvanse may be preferred over Adderall' },
   'adhd-medication-side-effects-what-to-expect': { guide: '/answers/adhd-medication-side-effects', anchor: 'Quick FAQ: common ADHD medication side effects in the first weeks' },
   'is-adhd-medication-safe-long-term': { guide: '/answers/is-adhd-medication-safe-long-term', anchor: 'Quick FAQ: long-term ADHD medication monitoring' },
-  'non-stimulant-adhd-medications-explained': { guide: '/answers/non-stimulant-adhd-medications', anchor: 'Quick FAQ: when non-stimulants are considered first' },
   'adhd-medication-daily-or-as-needed-adults': { guide: '/answers/adhd-medication-every-day', anchor: 'Quick FAQ: daily vs as-needed ADHD dosing' },
   'glp1-side-effects-and-how-to-manage-them': { guide: '/answers/glp-1-side-effects', anchor: 'Quick FAQ: GLP-1 side effects that improve with titration' },
   'semaglutide-for-weight-loss-how-it-works': { guide: '/answers/semaglutide-weight-loss-how-it-works', anchor: 'Quick FAQ: how quickly semaglutide starts working' },
-  'tirzepatide-vs-semaglutide-which-is-better': { guide: '/answers/tirzepatide-vs-semaglutide', anchor: 'Quick FAQ: who might consider tirzepatide instead of semaglutide' },
   'compounded-vs-branded-glp1-medications': { guide: '/answers/compounded-vs-branded-glp-1', anchor: 'Quick FAQ: questions about compounded vs branded GLP-1' },
-  'phentermine-for-weight-loss-safety-and-effectiveness': { guide: '/answers/phentermine-weight-loss-safety', anchor: 'Quick FAQ: who should avoid phentermine' },
-  'oral-vs-injectable-weight-loss-medications': { guide: '/answers/oral-vs-injectable-weight-loss-meds', anchor: 'Quick FAQ: oral vs injectable weight-loss routes' },
   'medical-weight-loss-vs-dieting-what-actually-works': { guide: '/answers/medical-weight-loss-vs-dieting', anchor: 'Quick FAQ: when medical weight loss beats dieting alone' },
   'medical-weight-loss-glp1-semaglutide-texas': { guide: '/answers/who-qualifies-glp-1-weight-loss', anchor: 'Quick FAQ: who qualifies for GLP-1 weight loss' },
   'food-noise-and-glp-1-what-it-means-and-what-helps': { guide: '/answers/what-is-food-noise', anchor: 'Quick FAQ: what is food noise?' },
@@ -330,9 +266,7 @@ export const BLOG_RECIPROCAL_GUIDE_LINKS = {
   'sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign': { guide: '/answers/can-sleep-apnea-cause-fatigue', anchor: 'Quick FAQ: can sleep apnea cause fatigue?' },
   'free-testosterone-vs-total-testosterone-what-patients-should-know': { guide: '/answers/what-is-free-testosterone', anchor: 'Quick FAQ: what is free testosterone?' },
   'when-is-testosterone-therapy-appropriate': { guide: '/answers/when-is-testosterone-therapy-appropriate', anchor: 'Quick FAQ: symptoms that warrant TRT evaluation' },
-  'minoxidil-for-hair-loss-does-it-work': { guide: '/answers/minoxidil-hair-loss-does-it-work', anchor: 'Quick FAQ: how long minoxidil takes to work' },
   'oral-vs-topical-minoxidil-which-is-right': { guide: '/answers/oral-vs-topical-minoxidil', anchor: 'Quick FAQ: topical vs oral minoxidil' },
-  'sildenafil-for-erectile-dysfunction-what-to-expect': { guide: '/answers/sildenafil-erectile-dysfunction-expectations', anchor: 'Quick FAQ: how long sildenafil takes to work' },
   'adhd-telehealth-california': { guide: '/answers/telehealth-adhd-california', anchor: 'Quick FAQ: ADHD telehealth in California' },
 };
 

@@ -35,7 +35,7 @@ Generated: 2026-06-07
 | NPI | Missing | Supports accurate provider profiles and E-E-A-T. | What is your NPI? | Text or list as appropriate |
 | external profiles (sameAs) | Missing | Supports accurate provider profiles and E-E-A-T. | What is your external profiles (sameAs)? | Text or list as appropriate |
 
-**Claims requiring source documentation:** 5,000+ patients in structured weight-loss programs; verified testimonial attributions
+**Claims requiring source documentation:** verified testimonial attributions
 
 ## Dr. Vanessa Urbina, MD
 

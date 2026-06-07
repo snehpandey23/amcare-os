@@ -1,8 +1,8 @@
 # Cannibalization Phase 1 Audit
 
-Generated: 2026-06-07T12:24:13.804Z
+Generated: 2026-06-07T15:39:42.080Z
 
-## HIGH overlap pairs (31)
+## HIGH overlap pairs (25)
 
 | Guide URL | Blog URL | Classification | Recommended owner | Action |
 |-----------|----------|----------------|-------------------|--------|
@@ -10,14 +10,10 @@ Generated: 2026-06-07T12:24:13.804Z
 | /answers/adderall-vs-vyvanse-adults | /blog/vyvanse-vs-adderall-differences | Duplicate | Blog | Narrow guide to preference FAQ; link to full comparison blog |
 | /answers/adhd-medication-side-effects | /blog/adhd-medication-side-effects-what-to-expect | Duplicate | Blog | Narrow guide to first-week side effects FAQ |
 | /answers/is-adhd-medication-safe-long-term | /blog/is-adhd-medication-safe-long-term | Duplicate | Blog | Narrow guide to monitoring FAQ; blog owns long-term safety narrative |
-| /answers/non-stimulant-adhd-medications | /blog/non-stimulant-adhd-medications-explained | Duplicate | Blog | Narrow guide to when non-stimulants are considered |
 | /answers/adhd-medication-every-day | /blog/adhd-medication-daily-or-as-needed-adults | Supporting | Both | Keep both; guide = daily vs PRN FAQ; reciprocal links |
 | /answers/glp-1-side-effects | /blog/glp1-side-effects-and-how-to-manage-them | Duplicate | Blog | Narrow guide to titration-improving side effects FAQ |
 | /answers/semaglutide-weight-loss-how-it-works | /blog/semaglutide-for-weight-loss-how-it-works | Duplicate | Blog | Narrow guide to onset/timeline FAQ; blog owns MOA depth |
-| /answers/tirzepatide-vs-semaglutide | /blog/tirzepatide-vs-semaglutide-which-is-better | Duplicate | Blog | Narrow guide to candidacy FAQ; blog owns comparison |
 | /answers/compounded-vs-branded-glp-1 | /blog/compounded-vs-branded-glp1-medications | Duplicate | Blog | Narrow guide to patient questions FAQ |
-| /answers/phentermine-weight-loss-safety | /blog/phentermine-for-weight-loss-safety-and-effectiveness | Duplicate | Blog | Narrow guide to short-term safety FAQ |
-| /answers/oral-vs-injectable-weight-loss-meds | /blog/oral-vs-injectable-weight-loss-medications | Duplicate | Blog | Narrow guide to route preference FAQ |
 | /answers/medical-weight-loss-vs-dieting | /blog/medical-weight-loss-vs-dieting-what-actually-works | Duplicate | Blog | Narrow guide to when medical program wins FAQ |
 | /answers/glp-1-nausea-management | /blog/glp1-side-effects-and-how-to-manage-them | Supporting | Blog | Guide = nausea tips FAQ; blog = full side-effect management |
 | /answers/who-qualifies-glp-1-weight-loss | /blog/medical-weight-loss-glp1-semaglutide-texas | Supporting | Both | Guide = eligibility FAQ; blog = Texas service page |
@@ -32,9 +28,7 @@ Generated: 2026-06-07T12:24:13.804Z
 | /answers/high-shbg-low-free-testosterone | /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | Supporting | Both | Guide = SHBG edge case; blog = cornerstone |
 | /answers/when-is-testosterone-therapy-appropriate | /blog/when-is-testosterone-therapy-appropriate | Duplicate | Blog | Narrow guide to symptom triggers FAQ |
 | /answers/trt-monitoring-requirements | /blog/when-is-testosterone-therapy-appropriate | Duplicate | Blog | Narrow guide to monitoring interval FAQ |
-| /answers/minoxidil-hair-loss-does-it-work | /blog/minoxidil-for-hair-loss-does-it-work | Duplicate | Blog | Narrow guide to timeline FAQ |
 | /answers/oral-vs-topical-minoxidil | /blog/oral-vs-topical-minoxidil-which-is-right | Duplicate | Blog | Narrow guide to route selection FAQ |
-| /answers/sildenafil-erectile-dysfunction-expectations | /blog/sildenafil-for-erectile-dysfunction-what-to-expect | Duplicate | Blog | Narrow guide to onset/timing FAQ |
 | /answers/telehealth-adhd-california | /blog/adhd-telehealth-california | Supporting | Both | Guide = CA telehealth FAQ; blog = state service page |
 | /answers/food-noise-returned-on-glp-1 | /blog/food-noise-and-glp-1-what-it-means-and-what-helps | Supporting | Both | Guide = return-on-therapy FAQ; blog = food noise cornerstone |
 
@@ -42,5 +36,5 @@ Generated: 2026-06-07T12:24:13.804Z
 
 | Classification | Count |
 |----------------|------:|
-| Duplicate | 17 |
+| Duplicate | 11 |
 | Supporting | 14 |

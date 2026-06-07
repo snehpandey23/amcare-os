@@ -746,8 +746,8 @@ export const PHASE3_ANSWER_SEEDS = [
     ],
     evidence: [
       'Endocrine Society clinical practice guideline on testosterone deficiency in men (2018)',
-      'AUA guideline on testosterone deficiency (reaffirmed 2024)',
-      'Bhasin S et al. Testosterone therapy in men with hypogonadism (Endocrine Society)',
+      'AUA testosterone deficiency guideline — AUA clinical guideline, reaffirmed 2024',
+      'Bhasin S et al., Endocrine Society guideline — testosterone therapy in men with hypogonadism, J Clin Endocrinol Metab 2018',
       'Rosner W et al. Position statement on testosterone and SHBG measurement challenges',
       'Free testosterone calculation vs equilibrium dialysis literature themes',
     ],

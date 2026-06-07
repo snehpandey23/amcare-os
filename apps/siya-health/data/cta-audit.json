@@ -52,7 +52,7 @@
         "/answers",
         "/answers/adderall-vs-vyvanse-adults",
         "/answers/adhd-and-weight-loss-connection",
-        "/answers/adhd-in-men",
+        "/answers/signs-of-adult-adhd",
         "/answers/adhd-in-women"
       ],
       "recommendation": "CONSOLIDATE",
@@ -130,7 +130,7 @@
         "/adhd-screening",
         "/answers/adderall-vs-vyvanse-adults",
         "/answers/adhd-and-weight-loss-connection",
-        "/answers/adhd-in-men",
+        "/answers/signs-of-adult-adhd",
         "/answers/adhd-in-women",
         "/answers/adhd-medication-every-day",
         "/answers/adhd-medication-side-effects"
@@ -187,7 +187,7 @@
       "count": 25,
       "pages": [
         "/answers/adderall-vs-vyvanse-adults",
-        "/answers/adhd-in-men",
+        "/answers/signs-of-adult-adhd",
         "/answers/adhd-in-women",
         "/answers/adhd-medication-every-day",
         "/answers/adhd-medication-side-effects",
@@ -230,8 +230,8 @@
         "/blog/adderall-for-adhd-how-it-works",
         "/blog/adult-adhd-symptoms-california",
         "/blog/adult-adhd-treatment-california-2026",
-        "/blog/after-adhd-diagnosis-next-steps-adults",
-        "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+        "/answers/starting-adhd-medication-adults",
+        "/answers/adhd-and-weight-loss-connection",
         "/blog/how-adhd-medication-is-prescribed-online",
         "/blog/how-to-choose-adhd-provider-california"
       ],
@@ -1057,7 +1057,7 @@
       "zone": "main",
       "count": 1,
       "pages": [
-        "/answers/minoxidil-hair-loss-does-it-work"
+        "/blog/minoxidil-for-hair-loss-does-it-work"
       ],
       "recommendation": "REMOVE",
       "slot": null,
@@ -1070,7 +1070,7 @@
       "zone": "main",
       "count": 1,
       "pages": [
-        "/answers/non-stimulant-adhd-medications"
+        "/blog/non-stimulant-adhd-medications-explained"
       ],
       "recommendation": "REMOVE",
       "slot": null,
@@ -1083,7 +1083,7 @@
       "zone": "main",
       "count": 1,
       "pages": [
-        "/answers/oral-vs-injectable-weight-loss-meds"
+        "/blog/oral-vs-injectable-weight-loss-medications"
       ],
       "recommendation": "REMOVE",
       "slot": null,
@@ -1109,7 +1109,7 @@
       "zone": "main",
       "count": 1,
       "pages": [
-        "/answers/phentermine-weight-loss-safety"
+        "/blog/phentermine-for-weight-loss-safety-and-effectiveness"
       ],
       "recommendation": "REMOVE",
       "slot": null,
@@ -1148,7 +1148,7 @@
       "zone": "main",
       "count": 1,
       "pages": [
-        "/answers/sildenafil-erectile-dysfunction-expectations"
+        "/blog/sildenafil-for-erectile-dysfunction-what-to-expect"
       ],
       "recommendation": "REMOVE",
       "slot": null,
@@ -1174,7 +1174,7 @@
       "zone": "main",
       "count": 1,
       "pages": [
-        "/answers/tirzepatide-vs-semaglutide"
+        "/blog/tirzepatide-vs-semaglutide-which-is-better"
       ],
       "recommendation": "REMOVE",
       "slot": null,
@@ -2847,7 +2847,7 @@
         "/adhd-screening",
         "/answers/adderall-vs-vyvanse-adults",
         "/answers/adhd-and-weight-loss-connection",
-        "/answers/adhd-in-men",
+        "/answers/signs-of-adult-adhd",
         "/answers/adhd-in-women",
         "/answers/adhd-medication-every-day",
         "/answers/adhd-medication-side-effects"
@@ -2864,7 +2864,7 @@
       "count": 25,
       "pages": [
         "/answers/adderall-vs-vyvanse-adults",
-        "/answers/adhd-in-men",
+        "/answers/signs-of-adult-adhd",
         "/answers/adhd-in-women",
         "/answers/adhd-medication-every-day",
         "/answers/adhd-medication-side-effects",
@@ -2907,8 +2907,8 @@
         "/blog/adderall-for-adhd-how-it-works",
         "/blog/adult-adhd-symptoms-california",
         "/blog/adult-adhd-treatment-california-2026",
-        "/blog/after-adhd-diagnosis-next-steps-adults",
-        "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+        "/answers/starting-adhd-medication-adults",
+        "/answers/adhd-and-weight-loss-connection",
         "/blog/how-adhd-medication-is-prescribed-online",
         "/blog/how-to-choose-adhd-provider-california"
       ],
@@ -3478,7 +3478,7 @@
       "zone": "main",
       "count": 1,
       "pages": [
-        "/answers/minoxidil-hair-loss-does-it-work"
+        "/blog/minoxidil-for-hair-loss-does-it-work"
       ],
       "recommendation": "REMOVE",
       "slot": null,
@@ -3491,7 +3491,7 @@
       "zone": "main",
       "count": 1,
       "pages": [
-        "/answers/non-stimulant-adhd-medications"
+        "/blog/non-stimulant-adhd-medications-explained"
       ],
       "recommendation": "REMOVE",
       "slot": null,
@@ -3504,7 +3504,7 @@
       "zone": "main",
       "count": 1,
       "pages": [
-        "/answers/oral-vs-injectable-weight-loss-meds"
+        "/blog/oral-vs-injectable-weight-loss-medications"
       ],
       "recommendation": "REMOVE",
       "slot": null,
@@ -3530,7 +3530,7 @@
       "zone": "main",
       "count": 1,
       "pages": [
-        "/answers/phentermine-weight-loss-safety"
+        "/blog/phentermine-for-weight-loss-safety-and-effectiveness"
       ],
       "recommendation": "REMOVE",
       "slot": null,
@@ -3569,7 +3569,7 @@
       "zone": "main",
       "count": 1,
       "pages": [
-        "/answers/sildenafil-erectile-dysfunction-expectations"
+        "/blog/sildenafil-for-erectile-dysfunction-what-to-expect"
       ],
       "recommendation": "REMOVE",
       "slot": null,
@@ -3595,7 +3595,7 @@
       "zone": "main",
       "count": 1,
       "pages": [
-        "/answers/tirzepatide-vs-semaglutide"
+        "/blog/tirzepatide-vs-semaglutide-which-is-better"
       ],
       "recommendation": "REMOVE",
       "slot": null,
@@ -3991,7 +3991,7 @@
       "bookingInMain": 1
     },
     {
-      "path": "/answers/adhd-in-men",
+      "path": "/answers/signs-of-adult-adhd",
       "file": "answers/adhd-in-men.html",
       "pageType": "Health Guide",
       "mainCtaCount": 2,
@@ -4089,7 +4089,7 @@
       "bookingInMain": 1
     },
     {
-      "path": "/answers/creyos-adhd-testing-explained",
+      "path": "/creyos-adhd-testing",
       "file": "answers/creyos-adhd-testing-explained.html",
       "pageType": "Health Guide",
       "mainCtaCount": 2,
@@ -4222,14 +4222,14 @@
       "bookingInMain": 1
     },
     {
-      "path": "/answers/minoxidil-hair-loss-does-it-work",
+      "path": "/blog/minoxidil-for-hair-loss-does-it-work",
       "file": "answers/minoxidil-hair-loss-does-it-work.html",
       "pageType": "Health Guide",
       "mainCtaCount": 2,
       "bookingInMain": 1
     },
     {
-      "path": "/answers/non-stimulant-adhd-medications",
+      "path": "/blog/non-stimulant-adhd-medications-explained",
       "file": "answers/non-stimulant-adhd-medications.html",
       "pageType": "Health Guide",
       "mainCtaCount": 3,
@@ -4243,7 +4243,7 @@
       "bookingInMain": 1
     },
     {
-      "path": "/answers/oral-vs-injectable-weight-loss-meds",
+      "path": "/blog/oral-vs-injectable-weight-loss-medications",
       "file": "answers/oral-vs-injectable-weight-loss-meds.html",
       "pageType": "Health Guide",
       "mainCtaCount": 2,
@@ -4257,7 +4257,7 @@
       "bookingInMain": 1
     },
     {
-      "path": "/answers/phentermine-weight-loss-safety",
+      "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
       "file": "answers/phentermine-weight-loss-safety.html",
       "pageType": "Health Guide",
       "mainCtaCount": 2,
@@ -4306,7 +4306,7 @@
       "bookingInMain": 1
     },
     {
-      "path": "/answers/sildenafil-erectile-dysfunction-expectations",
+      "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "file": "answers/sildenafil-erectile-dysfunction-expectations.html",
       "pageType": "Health Guide",
       "mainCtaCount": 2,
@@ -4348,7 +4348,7 @@
       "bookingInMain": 1
     },
     {
-      "path": "/answers/tirzepatide-vs-semaglutide",
+      "path": "/blog/tirzepatide-vs-semaglutide-which-is-better",
       "file": "answers/tirzepatide-vs-semaglutide.html",
       "pageType": "Health Guide",
       "mainCtaCount": 2,
@@ -4446,7 +4446,7 @@
       "bookingInMain": 1
     },
     {
-      "path": "/blog/adderall-ir-vs-xr-adults",
+      "path": "/blog/vyvanse-vs-adderall-differences",
       "file": "blog/adderall-ir-vs-xr-adults.html",
       "pageType": "Blog Article",
       "mainCtaCount": 1,
@@ -4467,7 +4467,7 @@
       "bookingInMain": 1
     },
     {
-      "path": "/blog/adhd-evaluation-cost-california",
+      "path": "/blog/adhd-evaluation-cost-texas",
       "file": "blog/adhd-evaluation-cost-california.html",
       "pageType": "Blog Article",
       "mainCtaCount": 1,
@@ -4495,7 +4495,7 @@
       "bookingInMain": 1
     },
     {
-      "path": "/blog/adhd-medication-online-texas-telehealth",
+      "path": "/blog/online-adhd-diagnosis-texas",
       "file": "blog/adhd-medication-online-texas-telehealth.html",
       "pageType": "Blog Article",
       "mainCtaCount": 1,
@@ -4544,7 +4544,7 @@
       "bookingInMain": 1
     },
     {
-      "path": "/blog/adhd-treatment-houston-online",
+      "path": "/blog/online-adhd-diagnosis-texas",
       "file": "blog/adhd-treatment-houston-online.html",
       "pageType": "Blog Article",
       "mainCtaCount": 1,
@@ -4565,7 +4565,7 @@
       "bookingInMain": 1
     },
     {
-      "path": "/blog/after-adhd-diagnosis-next-steps-adults",
+      "path": "/answers/starting-adhd-medication-adults",
       "file": "blog/after-adhd-diagnosis-next-steps-adults.html",
       "pageType": "Blog Article",
       "mainCtaCount": 1,
@@ -4580,7 +4580,7 @@
       "file": "blog/ambien-and-sleep-medications-risks-and-benefits.html"
     },
     {
-      "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+      "path": "/answers/adhd-and-weight-loss-connection",
       "file": "blog/combining-adhd-treatment-and-weight-loss-strategies.html",
       "pageType": "Blog Article",
       "mainCtaCount": 1,
@@ -4594,7 +4594,7 @@
       "bookingInMain": 1
     },
     {
-      "path": "/blog/focalin-vs-adderall-comparison",
+      "path": "/blog/vyvanse-vs-adderall-differences",
       "file": "blog/focalin-vs-adderall-comparison.html",
       "pageType": "Blog Article",
       "mainCtaCount": 2,
@@ -4689,7 +4689,7 @@
       "bookingInMain": 1
     },
     {
-      "path": "/blog/long-term-weight-loss-medications-what-to-expect",
+      "path": "/blog/semaglutide-for-weight-loss-how-it-works",
       "file": "blog/long-term-weight-loss-medications-what-to-expect.html",
       "pageType": "Blog Article",
       "mainCtaCount": 1,

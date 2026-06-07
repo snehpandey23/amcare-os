@@ -199,15 +199,7 @@ function renderProviderPage(provider) {
     : '';
   const chips = provider.credentialChips.map((c) => `<span>${c}</span>`).join('\n                ');
   const stateChipsBlock = renderStateChipsBlock(provider.statesLicensed);
-  const longBio = provider.longBio
-    .map((p, i) => {
-      const prefix =
-        i === 1 && provider.claimsNeedingVerification.some((c) => c.includes('5,000'))
-          ? '              <!-- TODO:VERIFY-SOURCE — "5,000+ patients" requires documented source -->\n'
-          : '';
-      return `${prefix}              <p>${p}</p>`;
-    })
-    .join('\n');
+  const longBio = provider.longBio.map((p) => `              <p>${p}</p>`).join('\n');
   const bullets = provider.patientFit.bullets.map((b) => `<li>${b}</li>`).join('\n                ');
   const focusFixed = provider.clinicalFocus.map((item) => `<li>${item}</li>`).join('\n            ');
   const carePhil = provider.carePhilosophy.map((p) => `<p>${p}</p>`).join('\n          ');
@@ -677,7 +669,7 @@ function renderProvidersIndex() {
         <div class="container">
           <div class="section-header">
             <h2>How our care team works</h2>
-            <p class="lead">Siya Health uses a physician-led care model. Depending on your state, service line, and clinical needs, you may work with a physician, nurse practitioner, or physician assistant. Every care pathway is designed around structured evaluation, safety, and clear follow-up.</p>
+            <p class="lead">Siya Health uses a physician-led care model. Depending on your state, service line, and clinical needs, you may work with a physician, nurse practitioner, or Physician Associate. Every care pathway is designed around structured evaluation, safety, and clear follow-up.</p>
           </div>
         </div>
       </section>

@@ -5,7 +5,6 @@
 export const PHASE5_EXPANSION_SLUGS = [
   'adhd-vs-burnout',
   'adhd-vs-anxiety',
-  'non-stimulant-adhd-medications',
   'starting-adhd-medication-adults',
   'glp-1-side-effects',
   'semaglutide-weight-loss-how-it-works',
@@ -29,7 +28,6 @@ export const PHASE5_EXPANSION_SLUGS = [
 export const PHASE5_BEFORE_WORD_COUNTS = {
   'adhd-vs-burnout': 65,
   'adhd-vs-anxiety': 63,
-  'non-stimulant-adhd-medications': 40,
   'starting-adhd-medication-adults': 46,
   'glp-1-side-effects': 53,
   'semaglutide-weight-loss-how-it-works': 45,
@@ -130,7 +128,7 @@ export const PHASE5_ANSWER_SEEDS = [
     ],
     learnMore: [
       { href: '/adhd-care', label: 'ADHD evaluation & telehealth care' },
-      { href: '/adult-adhd-diagnosis', label: '$199 adult ADHD evaluation' },
+      { href: '/adhd-care', label: '$199 adult ADHD evaluation' },
       { href: '/blog/why-am-i-always-tired-causes-when-to-see-doctor', label: 'Fatigue & burnout cornerstone (blog)' },
       { href: '/answers/poor-sleep-feels-like-adhd', label: 'Can poor sleep feel like ADHD?' },
       { href: '/telehealth', label: 'Telehealth & virtual care' },
@@ -219,85 +217,6 @@ export const PHASE5_ANSWER_SEEDS = [
     related: ['can-adhd-cause-anxiety', 'signs-of-adult-adhd', 'asrs-adhd-screening-explained', 'poor-sleep-feels-like-adhd'],
   },
   {
-    slug: 'non-stimulant-adhd-medications',
-    metaDescription:
-      'Non-stimulant ADHD medications for adults: atomoxetine, viloxazine, guanfacine XR, and when clinicians choose them. Expectations and monitoring.',
-    shortAnswer:
-      'When stimulants are contraindicated, poorly tolerated, or insufficient, clinicians may consider FDA-approved non-stimulant ADHD medications such as atomoxetine, viloxazine extended-release, guanfacine XR, or clonidine XR—selection depends on comorbidities, blood pressure, sleep, substance-use history, and patient goals. Bupropion is sometimes used off-label in adults when depression or smoking cessation overlap. Onset is often slower than stimulants; several weeks of consistent dosing and follow-up are typical before judging response.',
-    sections: [
-      {
-        id: 'options-overview',
-        heading: 'Non-stimulant options clinicians discuss',
-        paragraphs: [
-          'Atomoxetine (norepinephrine reuptake inhibitor) is a common first non-stimulant for many adults. Viloxazine XR is a newer option with a different mechanism profile. Alpha-2 agonists (guanfacine XR, clonidine XR) may help when tics, insomnia, or stimulant intolerance are concerns but can lower blood pressure or cause sedation.',
-          'None of these agents are “mild” by default—they have labeled risks, drug interactions, and monitoring needs. Choice is individualized, not based on social media preference for “natural” stimulant avoidance.',
-        ],
-      },
-      {
-        id: 'common-misconceptions',
-        heading: 'Common misconceptions',
-        listItems: [
-          'Myth: “Non-stimulants have no side effects.” Reality: Appetite changes, sleep disturbance, mood shifts, and cardiovascular effects still occur.',
-          'Myth: “They work the first day.” Reality: Full benefit may take weeks.',
-          'Myth: “Non-stimulants are always safer.” Reality: Risk depends on patient factors, not category alone.',
-          'Myth: “I can skip follow-up labs.” Reality: Blood pressure, heart rate, and mood review remain important.',
-        ],
-      },
-      {
-        id: 'when-to-seek-evaluation',
-        heading: 'When to seek evaluation',
-        paragraphs: [
-          'Start with a formal ADHD diagnosis and cardiovascular review before any medication. Report chest pain, severe insomnia, suicidal thoughts, or allergic reactions promptly.',
-          'If non-stimulants fail after an adequate trial, clinicians may reconsider stimulants, adjust comorbidity treatment (sleep apnea, anxiety), or add coaching and occupational strategies.',
-        ],
-      },
-      {
-        id: 'key-takeaways',
-        heading: 'Key takeaways',
-        listItems: [
-          'Non-stimulants are legitimate tools—not “backup only” options.',
-          'Slower onset requires patience and structured follow-up.',
-          'Comorbid sleep, anxiety, and substance history guide selection.',
-        ],
-      },
-    ],
-    faqs: [
-      {
-        question: 'What non-stimulant ADHD medications exist for adults?',
-        answer:
-          'FDA-approved options include atomoxetine, viloxazine XR, guanfacine XR, and clonidine XR in appropriate patients. Off-label bupropion may be considered when comorbid depression is present—always with prescriber oversight.',
-      },
-      {
-        question: 'How long until non-stimulants work?',
-        answer:
-          'Many patients need several weeks at target dose before judging efficacy. Early side effects may improve with time or dose adjustment.',
-      },
-      {
-        question: 'Why choose a non-stimulant over Adderall or Vyvanse?',
-        answer:
-          'Common reasons include stimulant intolerance, substance-use concerns, certain cardiovascular risks, or preference after shared decision-making—not guaranteed superiority.',
-      },
-      {
-        question: 'Can I get non-stimulant ADHD medication online?',
-        answer:
-          'In eligible states, yes—after a legitimate telehealth evaluation and ongoing prescriber relationship. Instant prescriptions without assessment are a red flag.',
-      },
-      {
-        question: 'Do non-stimulants help anxiety?',
-        answer:
-          'Some patients improve; others worsen. Clinicians monitor mood and may treat anxiety disorders separately.',
-      },
-    ],
-    evidence: ['FDA medication guides (atomoxetine, viloxazine, guanfacine XR)', 'Adult ADHD treatment practice parameters', 'DEA: non-controlled status does not mean no monitoring'],
-    learnMore: [
-      { href: '/adhd-care', label: 'ADHD medication management' },
-      { href: '/answers/adderall-vs-vyvanse-adults', label: 'Adderall vs Vyvanse for adults' },
-      { href: '/answers/starting-adhd-medication-adults', label: 'Starting ADHD medication' },
-      { href: '/blog/adult-adhd-treatment-california-2026', label: 'Adult ADHD treatment options (blog)' },
-    ],
-    related: ['adderall-vs-vyvanse-adults', 'starting-adhd-medication-adults', 'adhd-medication-side-effects', 'is-adhd-medication-safe-long-term'],
-  },
-  {
     slug: 'starting-adhd-medication-adults',
     metaDescription:
       'Starting ADHD medication as an adult: titration, follow-up, vitals, and realistic expectations. Educational guide—not personal prescribing advice.',
@@ -374,7 +293,7 @@ export const PHASE5_ANSWER_SEEDS = [
       { href: '/answers/adhd-medication-side-effects', label: 'ADHD medication side effects' },
       { href: '/blog/how-to-safely-get-prescriptions-online', label: 'Safe online prescriptions (blog)' },
     ],
-    related: ['adhd-medication-side-effects', 'can-you-get-adhd-medication-online', 'non-stimulant-adhd-medications', 'is-adhd-medication-safe-long-term'],
+    related: ['adhd-medication-side-effects', 'can-you-get-adhd-medication-online', 'is-adhd-medication-safe-long-term', 'late-adhd-diagnosis-adults'],
   },
   {
     slug: 'signs-of-adult-adhd',
@@ -450,7 +369,7 @@ export const PHASE5_ANSWER_SEEDS = [
     learnMore: [
       { href: '/adhd-care', label: 'ADHD evaluation & care' },
       { href: '/adhd-screening', label: 'Free ASRS screening' },
-      { href: '/adult-adhd-diagnosis', label: '$199 comprehensive evaluation' },
+      { href: '/adhd-care', label: '$199 comprehensive evaluation' },
       { href: '/blog/how-to-know-if-you-have-adhd-adult', label: 'How to know if you have ADHD (blog)' },
       { href: '/blog/adhd-symptoms-overlooked', label: 'Overlooked ADHD symptoms (blog)' },
     ],
@@ -528,7 +447,7 @@ export const PHASE5_ANSWER_SEEDS = [
     ],
     evidence: ['State telehealth practice standards', 'HIPAA security rule overview', 'ASRS + clinical interview best practices', 'DEA telemedicine prescribing policies (evolving)'],
     learnMore: [
-      { href: '/adult-adhd-diagnosis', label: 'Book adult ADHD evaluation' },
+      { href: '/adhd-care', label: 'Book adult ADHD evaluation' },
       { href: '/adhd-care', label: 'ADHD care overview' },
       { href: '/blog/is-online-adhd-diagnosis-legit', label: 'Is online ADHD diagnosis legit? (blog)' },
       { href: '/answers/is-online-adhd-diagnosis-legitimate', label: 'Legitimacy checklist' },
@@ -675,7 +594,7 @@ export const PHASE5_ANSWER_SEEDS = [
     ],
     evidence: ['DEA telemedicine prescribing rules (evolving)', 'Clinical ADHD evaluation guidelines', 'State medical board telehealth advisories'],
     learnMore: [
-      { href: '/adult-adhd-diagnosis', label: 'Adult ADHD evaluation' },
+      { href: '/adhd-care', label: 'Adult ADHD evaluation' },
       { href: '/blog/is-online-adhd-diagnosis-legit', label: 'Online ADHD legitimacy (blog)' },
       { href: '/answers/can-adhd-be-diagnosed-online', label: 'Can ADHD be diagnosed online?' },
     ],
@@ -851,14 +770,14 @@ export const PHASE5_ANSWER_SEEDS = [
           'Appetite signals often return; weight regain is common without maintenance planning—discuss with your prescriber.',
       },
     ],
-    evidence: ['STEP trial program publications (semaglutide 2.4 mg)', 'FDA Wegovy and Ozempic labeling', 'ADA Standards of Care—obesity pharmacotherapy'],
+    evidence: ['STEP trial program publications — semaglutide 2.4 mg weight-loss outcomes in adults', 'FDA Wegovy and Ozempic labeling', 'ADA Standards of Care — obesity pharmacotherapy guidance'],
     learnMore: [
       { href: '/weight-loss-metabolic-health', label: 'Weight loss & metabolic health' },
-      { href: '/answers/tirzepatide-vs-semaglutide', label: 'Tirzepatide vs semaglutide' },
+      { href: '/blog/tirzepatide-vs-semaglutide-which-is-better', label: 'Tirzepatide vs semaglutide (blog)' },
       { href: '/blog/medical-weight-loss-glp1-semaglutide-texas', label: 'GLP-1 weight loss overview (blog)' },
       { href: '/answers/glp-1-side-effects', label: 'GLP-1 side effects' },
     ],
-    related: ['what-is-food-noise', 'glp-1-side-effects', 'tirzepatide-vs-semaglutide', 'what-is-insulin-resistance'],
+    related: ['what-is-food-noise', 'glp-1-side-effects', 'compounded-vs-branded-glp-1', 'what-is-insulin-resistance'],
     cornerstoneBlog: '/blog/medical-weight-loss-glp1-semaglutide-texas',
   },
   {
@@ -1497,7 +1416,7 @@ export const PHASE5_ANSWER_SEEDS = [
           'A logistics and fit conversation—not a full diagnosis. See our first telehealth visit Health Guide.',
       },
     ],
-    evidence: ['HHS telehealth best practices', 'State telehealth parity laws (varies by state)', 'DEA telemedicine prescribing policies'],
+    evidence: ['HHS telehealth best practices', 'State telehealth parity laws — coverage and practice rules vary by state', 'DEA telemedicine prescribing policies'],
     learnMore: [
       { href: '/telehealth', label: 'Siya Health telehealth services' },
       { href: '/answers/meet-and-greet-telehealth-expectations', label: 'First telehealth visit expectations' },

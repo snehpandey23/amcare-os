@@ -51,7 +51,7 @@ export const CALIFORNIA_POSTS_REST = [
 
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
               <li><a href="/blog/adhd-telehealth-california">ADHD telehealth in California</a></li>
-              <li><a href="/blog/adhd-evaluation-cost-california">ADHD evaluation cost in California</a></li>
+              <li><a href="/blog/adhd-evaluation-cost-texas">ADHD evaluation cost in California</a></li>
               <li><a href="/blog/adult-adhd-treatment-california-2026">Adult ADHD treatment paths</a></li>
               <li><a href="/providers/dr-sneh-pandey">Meet Medical Director Dr. Pandey</a></li>
             </ul></section>
@@ -102,7 +102,7 @@ export const CALIFORNIA_POSTS_REST = [
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
               <li><a href="/blog/online-adhd-diagnosis-california">Online ADHD diagnosis in California</a></li>
               <li><a href="/blog/adhd-telehealth-california">ADHD telehealth in California</a></li>
-              <li><a href="/blog/after-adhd-diagnosis-next-steps-adults">After diagnosis next steps</a></li>
+              <li><a href="/answers/starting-adhd-medication-adults">After diagnosis next steps</a></li>
             </ul></section>
 
             <h2>FAQ</h2>`,
@@ -172,7 +172,7 @@ export const CALIFORNIA_POSTS_REST = [
     ],
     bodyHtml: `
             <p class="blog-disclaimer"><strong>Educational only:</strong> This blog is for educational purposes only and does not replace medical advice. A licensed provider can help determine what care is appropriate for you.</p>
-            <div class="blog-internal-links"><p>Use <a href="/online-adhd-test">online ADHD screening</a>, read <a href="/blog/is-online-adhd-diagnosis-legit">legitimacy guide</a>, compare <a href="/blog/adhd-evaluation-california-online-vs-in-person">online vs in-person evaluation</a>.</p></div>
+            <div class="blog-internal-links"><p>Use <a href="/adhd-screening">online ADHD screening</a>, read <a href="/blog/is-online-adhd-diagnosis-legit">legitimacy guide</a>, compare <a href="/blog/adhd-evaluation-california-online-vs-in-person">online vs in-person evaluation</a>.</p></div>
 
             <p>A responsible <strong>ADHD test online California</strong> search should land you understanding layers: quick screening questionnaires estimate whether symptoms cluster enough historically to justify scheduling—not whether neurodevelopmental ADHD pathophysiology is proven instantly cosmetically glorified inaccurately.</p>
 
@@ -218,7 +218,7 @@ export const CALIFORNIA_POSTS_REST = [
     ],
     bodyHtml: `
             <p class="blog-disclaimer"><strong>Educational only:</strong> This blog is for educational purposes only and does not replace medical advice. A licensed provider can help determine what care is appropriate for you.</p>
-            <div class="blog-internal-links"><p>Compare Texas pricing deep dive <a href="/blog/adhd-evaluation-cost-texas">ADHD evaluation cost Texas</a> plus <a href="/adhd-evaluation-cost">general evaluation pricing page</a> for anchors.</p></div>
+            <div class="blog-internal-links"><p>Compare Texas pricing deep dive <a href="/blog/adhd-evaluation-cost-texas">ADHD evaluation cost Texas</a> plus <a href="/pricing">general evaluation pricing page</a> for anchors.</p></div>
 
             <p>Budget-minded Californians rightly interrogate transparent <strong>ADHD evaluation online California</strong> quoting—asking whether advertised fees include sufficiently long clinician face-time—not merely glamorous intake bots harvesting payment aggressively.</p>
 
@@ -235,7 +235,7 @@ export const CALIFORNIA_POSTS_REST = [
             <div class="cta-block blog-cta"><a class="button" href="/pricing">View Pricing</a></div>
 
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
-              <li><a href="/membership-pricing">Transparent membership framing</a></li>
+              <li><a href="/pricing">Transparent membership framing</a></li>
               <li><a href="/blog/online-adhd-diagnosis-california">Online diagnosis pathways</a></li>
               <li><a href="/blog/adhd-evaluation-california-online-vs-in-person">Online vs office evaluation nuances</a></li>
             </ul></section>
@@ -279,7 +279,7 @@ export const CALIFORNIA_POSTS_REST = [
 
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
               <li><a href="/blog/how-adhd-medication-is-prescribed-online">Medication prescribing online</a></li>
-              <li><a href="/blog/adhd-treatment-houston-online">Metro telehealth parallels (Texas reference)</a></li>
+              <li><a href="/blog/online-adhd-diagnosis-texas">Metro telehealth parallels (Texas reference)</a></li>
               <li><a href="/blog/how-to-choose-adhd-provider-california">Choosing ADHD providers wisely</a></li>
             </ul></section>
 
@@ -360,7 +360,7 @@ export const CALIFORNIA_POSTS_REST = [
     ],
     bodyHtml: `
             <p class="blog-disclaimer"><strong>Educational only:</strong> This blog is for educational purposes only and does not replace medical advice. A licensed provider can help determine what care is appropriate for you.</p>
-            <div class="blog-internal-links"><p>Start with structured triage tools like our <a href="/online-adhd-test">online ADHD screening</a>, then contrast <a href="/blog/how-to-know-if-you-have-adhd-adult">how adult ADHD is evaluated</a> with <a href="/blog/adhd-testing-online-california-screening-vs-evaluation">online screening versus full evaluation in California</a>.</p></div>
+            <div class="blog-internal-links"><p>Start with structured triage tools like our <a href="/adhd-screening">online ADHD screening</a>, then contrast <a href="/blog/how-to-know-if-you-have-adhd-adult">how adult ADHD is evaluated</a> with <a href="/blog/adhd-testing-online-california-screening-vs-evaluation">online screening versus full evaluation in California</a>.</p></div>
 
             <p>People searching <strong>adult ADHD symptoms California</strong> are often reacting to contradictions society hands them: coworkers saying you seem “successful enough,” TikTok diagnosing from two symptoms, burnout coaches blaming mindset, psychiatrists implying you should have flunked high school decades ago—the whole bundle can leave you cynical. Yet symptoms still merit careful parsing medically: adults with clinically significant ADHD commonly describe chronic restlessness mentally, drifting during conversations unintentionally despite caring, losing wallets or keys repetitively, paying late fees episodically, hyperfocusing fiercely on passion projects yet avoiding routine admin painfully, procrastinating until adrenaline panic unlocks urgency, texting apologies for lateness exhausting relationships, binge-scrolling paralysis numbing anxiety—all patterns that may occur with ADHD, but overlap heavily with exhaustion, untreated mood disorders, post-traumatic hypervigilance, iron deficiency anemia, untreated hypothyroidism, apnea-driven daytime sedation—requiring clinician distinction—not Tumblr certainty.</p>
 

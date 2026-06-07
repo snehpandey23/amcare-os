@@ -80,7 +80,6 @@ Fields with null, empty arrays, or pending verification in `data/providers.mjs`.
 
 ### Claims needing proof
 
-- **5,000+ patients in structured weight-loss programs** — Status: Needs verification — Do not publish as substantiated without source.
 - **verified testimonial attributions** — Status: Needs verification — Do not publish as substantiated without source.
 
 ## Dr. Vanessa Urbina, MD

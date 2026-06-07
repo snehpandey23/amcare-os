@@ -6,6 +6,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { ANSWER_SEEDS, TOPIC_HUBS } from '../data/answer-seeds.mjs';
+import { RETIRED_GUIDE_SLUGS } from '../data/content-consolidation-phase1.mjs';
 import { GUIDE_CANNIBALIZATION_OVERRIDES } from '../data/cannibalization-phase1.mjs';
 import {
   BASE,
@@ -489,7 +490,8 @@ function placeholderCardHtml(catId) {
 
 function buildIndexPage() {
   const byCategory = Object.fromEntries(HEALTH_GUIDE_CATEGORIES.map((c) => [c.id, []]));
-  for (const s of ANSWER_SEEDS) {
+  const activeSeeds = ANSWER_SEEDS.filter((s) => !RETIRED_GUIDE_SLUGS.has(s.slug));
+  for (const s of activeSeeds) {
     for (const cat of categoriesForSeed(s)) {
       if (!byCategory[cat].some((x) => x.slug === s.slug)) {
         byCategory[cat].push(s);
@@ -544,7 +546,7 @@ ${featureSlots}
     name: 'Siya Health Health Guides Hub',
     description: desc,
     url,
-    numberOfItems: ANSWER_SEEDS.length,
+    numberOfItems: activeSeeds.length,
   };
 
   const jsonLd = `\n    <script type="application/ld+json">${JSON.stringify(collection)}</script>
@@ -587,13 +589,14 @@ ${footerBlock()}
 }
 
 function main() {
+  const activeSeeds = ANSWER_SEEDS.filter((s) => !RETIRED_GUIDE_SLUGS.has(s.slug));
   fs.mkdirSync(ANSWERS_DIR, { recursive: true });
-  for (const seed of ANSWER_SEEDS.map(applyCannibalizationOverrides)) {
+  for (const seed of activeSeeds.map(applyCannibalizationOverrides)) {
     const out = path.join(ANSWERS_DIR, `${seed.slug}.html`);
     fs.writeFileSync(out, buildAnswerPage(seed), 'utf8');
   }
   fs.writeFileSync(path.join(ANSWERS_DIR, 'index.html'), buildIndexPage(), 'utf8');
-  console.log('Wrote', ANSWER_SEEDS.length, 'answer pages + answers/index.html');
+  console.log('Wrote', activeSeeds.length, 'answer pages + answers/index.html');
 }
 
 main();

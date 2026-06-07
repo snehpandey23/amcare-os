@@ -58,7 +58,7 @@ const GEO_BLOG_CLUSTERS = {
     '/blog/adhd-testing-online-california-screening-vs-evaluation',
     '/blog/adult-adhd-treatment-california-2026',
     '/blog/adult-adhd-symptoms-california',
-    '/blog/adhd-evaluation-cost-california',
+    '/blog/adhd-evaluation-cost-texas',
     '/blog/adhd-medication-online-california',
     '/blog/adhd-medication-options-california',
     '/blog/how-to-choose-adhd-provider-california',
@@ -68,15 +68,15 @@ const GEO_BLOG_CLUSTERS = {
   texas: [
     '/blog/online-adhd-diagnosis-texas',
     '/blog/adhd-evaluation-cost-texas',
-    '/blog/adhd-medication-online-texas-telehealth',
-    '/blog/adhd-treatment-houston-online',
+    '/blog/online-adhd-diagnosis-texas',
+    '/blog/online-adhd-diagnosis-texas',
   ],
 };
 
 const MED_COMPARE_CLUSTER = [
   '/blog/adderall-for-adhd-how-it-works',
-  '/blog/adderall-ir-vs-xr-adults',
-  '/blog/focalin-vs-adderall-comparison',
+  '/blog/vyvanse-vs-adderall-differences',
+  '/blog/vyvanse-vs-adderall-differences',
   '/blog/vyvanse-vs-adderall-differences',
   '/answers/adderall-vs-vyvanse-adults',
 ];
@@ -291,9 +291,9 @@ function classifyPage(ctx) {
     '/blog/adhd-testing-online-california-screening-vs-evaluation': '/blog/adhd-evaluation-california-online-vs-in-person',
     '/blog/adult-adhd-symptoms-california': '/blog/how-to-know-if-you-have-adhd-adult',
     '/blog/adhd-medication-options-california': '/blog/adhd-medication-options-for-adults',
-    '/blog/adhd-treatment-houston-online': '/blog/online-adhd-diagnosis-texas',
-    '/blog/focalin-vs-adderall-comparison': '/blog/vyvanse-vs-adderall-differences',
-    '/blog/adderall-ir-vs-xr-adults': '/blog/vyvanse-vs-adderall-differences',
+    '/blog/online-adhd-diagnosis-texas': '/blog/online-adhd-diagnosis-texas',
+    '/blog/vyvanse-vs-adderall-differences': '/blog/vyvanse-vs-adderall-differences',
+    '/blog/vyvanse-vs-adderall-differences': '/blog/vyvanse-vs-adderall-differences',
     '/blog/adderall-for-adhd-how-it-works': '/blog/adhd-medication-options-for-adults',
   };
 

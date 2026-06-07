@@ -35,6 +35,20 @@ const BLOG_HUB_FILES = new Set([
   'blog/telehealth.html',
 ]);
 
+/** HTML shells whose URLs 301 elsewhere (vercel.json) — never in sitemap */
+const REDIRECT_SHELLS = {
+  'terms.html': `${BASE}/legal/terms-of-use`,
+  'privacy-policy.html': `${BASE}/legal/privacy-policy`,
+  'adult-adhd-diagnosis.html': `${BASE}/adhd-care`,
+  'adhd-treatment-online.html': `${BASE}/adhd-care`,
+  'adhd-diagnosis-florida.html': `${BASE}/adhd-care`,
+  'adhd-evaluation-cost.html': `${BASE}/pricing`,
+  'online-adhd-test.html': `${BASE}/adhd-screening`,
+};
+
+/** External redirect shells + dev surfaces — never in sitemap */
+const SITEMAP_EXCLUDE = new Set(['visual-components.html', 'siya-circle.html', ...Object.keys(REDIRECT_SHELLS)]);
+
 const GTAG_BLOCK = `<script async src="https://www.googletagmanager.com/gtag/js?id=${GA4_ID}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -80,7 +94,7 @@ function priorityFor(rel) {
 
 function generateSitemap(htmlFiles) {
   const lines = [`<?xml version="1.0" encoding="UTF-8"?>`, `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`];
-  const sorted = [...htmlFiles].sort((a, b) => fileToUrlPath(a).localeCompare(fileToUrlPath(b)));
+  const sorted = [...htmlFiles].filter((r) => !SITEMAP_EXCLUDE.has(r)).sort((a, b) => fileToUrlPath(a).localeCompare(fileToUrlPath(b)));
   for (const rel of sorted) {
     const loc = `${BASE}${fileToUrlPath(rel)}`;
     const pr = priorityFor(rel);
@@ -128,9 +142,38 @@ function escapeJson(str) {
   return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
 }
 
-function ensureNoindexPublic(html, relPath) {
-  if (!['labs.html', 'prescriptions.html'].includes(relPath)) return html;
-  return html.replace(/<meta\s+name="robots"\s+content="noindex,\s*follow"\s*\/?>/gi, '<meta name="robots" content="index, follow" />');
+function ensureNoindexUtilityPages(html, relPath) {
+  return html;
+}
+
+/** External 302 shells — noindex, no self-referential canonical */
+function ensureExternalRedirectShell(html, relPath) {
+  if (relPath !== 'siya-circle.html') return html;
+  const tag = '<meta name="robots" content="noindex, nofollow" />';
+  if (html.match(/<meta\s+name="robots"/i)) {
+    html = html.replace(/<meta\s+name="robots"\s+content="[^"]*"\s*\/?>/i, tag);
+  } else {
+    html = html.replace(/(<meta\s+name="viewport"[^>]*\/?>)/i, `$1\n    ${tag}`);
+  }
+  html = html.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>\s*/i, '');
+  return html;
+}
+
+function ensureRedirectShellPages(html, relPath) {
+  const canonicalDest = REDIRECT_SHELLS[relPath];
+  if (!canonicalDest) return html;
+  const tag = '<meta name="robots" content="noindex, follow" />';
+  if (html.match(/<meta\s+name="robots"/i)) {
+    html = html.replace(/<meta\s+name="robots"\s+content="[^"]*"\s*\/?>/i, tag);
+  } else {
+    html = html.replace(/(<meta\s+name="viewport"[^>]*\/?>)/i, `$1\n    ${tag}`);
+  }
+  if (html.match(/<link\s+rel="canonical"/i)) {
+    html = html.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/i, `<link rel="canonical" href="${canonicalDest}" />`);
+  } else {
+    html = html.replace(/(<meta\s+name="viewport"[^>]*\/?>)/i, `$1\n    <link rel="canonical" href="${canonicalDest}" />`);
+  }
+  return html;
 }
 
 function normalizeGtag(html) {
@@ -155,6 +198,7 @@ function ensureGSC(html) {
 }
 
 function ensureCanonical(html, relPath) {
+  if (relPath === 'siya-circle.html') return html;
   const urlPath = fileToUrlPath(relPath);
   const full = urlPath === '/' ? `${BASE}/` : `${BASE}${urlPath}`;
   if (extractCanonical(html)) return html;
@@ -467,7 +511,9 @@ function processHtml(relPath) {
 
   html = normalizeGtag(html);
   html = ensureGSC(html);
-  html = ensureNoindexPublic(html, relPath);
+  html = ensureNoindexUtilityPages(html, relPath);
+  html = ensureExternalRedirectShell(html, relPath);
+  html = ensureRedirectShellPages(html, relPath);
   html = ensureCanonical(html, relPath);
   canonical = extractCanonical(html) || canonical;
 

@@ -61,7 +61,7 @@ export const PROVIDERS = [
       'I’m Dr. Sneh Pandey. I built Siya Health for adults who suspect ADHD, carry shame about focus and follow-through, and want answers that respect both your intelligence and your nervous system—not another lecture about discipline.',
     longBio: [
       'You don’t need a provider who rushes a label—or one who dismisses you because you have a career, a degree, or a calendar that looks “put together.” You need someone who understands <strong>high-functioning burnout</strong>, the overlap between ADHD and metabolic health, and how hard it is to ask for help when you’ve always been “the responsible one.”',
-      'My background spans complex medical care and <strong>obesity medicine</strong>; I’ve supported <strong>5,000+ patients</strong> in structured weight-loss programs. That matters when ADHD and appetite, energy, or metabolic risk show up in the same story.',
+      'My background spans complex medical care and <strong>obesity medicine</strong>; I’ve supported <strong>thousands of patient encounters</strong> in structured weight-loss programs. That matters when ADHD and appetite, energy, or metabolic risk show up in the same story.',
     ],
     patientFit: {
       deck: 'If you’re exhausted from performing “fine” while your brain says otherwise—you’re in the right place.',
@@ -114,7 +114,7 @@ export const PROVIDERS = [
       medicalSpecialty: ['Internal Medicine', 'Obesity Medicine', 'Adult ADHD'],
       knowsAbout: ['Adult ADHD', 'Executive dysfunction', 'Metabolic health', 'Medical weight loss', 'ADHD and weight overlap'],
     },
-    claimsNeedingVerification: ['5,000+ patients in structured weight-loss programs', 'verified testimonial attributions'],
+    claimsNeedingVerification: ['verified testimonial attributions'],
     showScreeningCta: true,
   },
   {

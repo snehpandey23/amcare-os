@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
 Generated: 2026-06-07
-Total pages: 164
+Total pages: 147
 
 ---
 
@@ -164,11 +164,6 @@ Total pages: 164
   Summary: Yes. Impulsivity, emotional eating, irregular meals, sleep debt, and stimulant effects on appetite all link ADHD and weight. Treating ADHD can help routine…
   Topics: adhd, weight-loss, health-guide
 
-- How does adult ADHD present in men?
-  URL: https://siya.health/answers/adhd-in-men
-  Summary: Men may show more external restlessness, impulsivity, or risk-taking—but many men have primarily inattentive ADHD that looks like laziness or underperforma…
-  Topics: adhd, health-guide
-
 - How does ADHD present differently in women?
   URL: https://siya.health/answers/adhd-in-women
   Summary: Women more often present with inattentive symptoms—daydreaming, disorganization, emotional dysregulation—rather than obvious hyperactivity. Hormonal shifts…
@@ -233,11 +228,6 @@ Total pages: 164
   URL: https://siya.health/answers/compounded-vs-branded-glp-1
   Summary: Quick FAQ: questions to ask your clinician about compounded vs branded GLP-1. Full regulatory guide linked.
   Topics: weight-loss, health-guide
-
-- What is Creyos cognitive testing for ADHD?
-  URL: https://siya.health/answers/creyos-adhd-testing-explained
-  Summary: Creyos is a digital cognitive assessment battery sometimes used alongside clinical interview and rating scales. It provides objective performance data but …
-  Topics: adhd, health-guide
 
 - Is telehealth for erectile dysfunction legitimate?
   URL: https://siya.health/answers/ed-telehealth-legitimate
@@ -329,35 +319,15 @@ Total pages: 164
   Summary: First telehealth visit: what happens, what it is not, follow-up plan pricing, and next steps before a full ADHD or metabolic evaluation.
   Topics: telehealth, health-guide
 
-- How long does minoxidil take to show hair results?
-  URL: https://siya.health/answers/minoxidil-hair-loss-does-it-work
-  Summary: Quick FAQ on minoxidil timeline—not a full treatment guide. Clinical hair loss article linked.
-  Topics: health-guide, hair-loss
-
-- When are non-stimulant ADHD medications considered first?
-  URL: https://siya.health/answers/non-stimulant-adhd-medications
-  Summary: Quick FAQ on when clinicians choose non-stimulant ADHD options. Full medication class guide linked.
-  Topics: adhd, health-guide, medication
-
 - Can you have insulin resistance with a normal A1C?
   URL: https://siya.health/answers/normal-a1c-insulin-resistance
   Summary: Quick FAQ: normal A1C with insulin resistance symptoms. Full metabolic guide linked.
   Topics: health-guide
 
-- When might oral weight-loss medication be preferred over injectable GLP-1?
-  URL: https://siya.health/answers/oral-vs-injectable-weight-loss-meds
-  Summary: Quick FAQ on oral vs injectable weight-loss routes—not a full comparison. Read the complete guide.
-  Topics: weight-loss, health-guide, medication
-
 - When is topical minoxidil enough vs oral minoxidil?
   URL: https://siya.health/answers/oral-vs-topical-minoxidil
   Summary: Quick FAQ on topical vs oral minoxidil selection—not a full route comparison. Clinical guide linked.
   Topics: health-guide, hair-loss
-
-- Who should avoid phentermine for weight loss?
-  URL: https://siya.health/answers/phentermine-weight-loss-safety
-  Summary: Quick FAQ on phentermine contraindications and short-term use—not a full safety review. Clinical guide linked.
-  Topics: weight-loss, health-guide
 
 - Can poor sleep feel like ADHD?
   URL: https://siya.health/answers/poor-sleep-feels-like-adhd
@@ -389,11 +359,6 @@ Total pages: 164
   Summary: Quick adult sleep apnea symptom checklist—not a full risk overview. Clinical guide linked.
   Topics: health-guide, sleep
 
-- How long does it take sildenafil to work?
-  URL: https://siya.health/answers/sildenafil-erectile-dysfunction-expectations
-  Summary: Quick FAQ on sildenafil onset and timing—not a full ED expectations guide. Clinical article linked.
-  Topics: health-guide, mens-health
-
 - What should adults expect when starting ADHD medication?
   URL: https://siya.health/answers/starting-adhd-medication-adults
   Summary: Starting ADHD medication as an adult: titration, follow-up, vitals, and realistic expectations. Educational guide—not personal prescribing advice.
@@ -418,11 +383,6 @@ Total pages: 164
   URL: https://siya.health/answers/time-blindness-adhd
   Summary: Time blindness describes difficulty sensing how long tasks take, losing track of time, or chronically underestimating deadlines. It is a common executive-f…
   Topics: adhd, health-guide
-
-- Who might consider tirzepatide instead of semaglutide?
-  URL: https://siya.health/answers/tirzepatide-vs-semaglutide
-  Summary: Quick FAQ on candidacy for tirzepatide vs semaglutide—not a head-to-head comparison. Full clinical guide linked.
-  Topics: weight-loss, health-guide
 
 - How often is TRT monitoring required?
   URL: https://siya.health/answers/trt-monitoring-requirements
@@ -489,11 +449,6 @@ Total pages: 164
   Summary: How Adderall works for ADHD in adults (2026): brain mechanisms, who may benefit, risks, monitoring, and why only a licensed prescriber should decide.
   Topics: adhd
 
-- Adderall IR vs XR for Adults: Timing, Duration &amp; What to Ask Your Prescriber
-  URL: https://siya.health/blog/adderall-ir-vs-xr-adults
-  Summary: Adderall immediate-release vs extended-release for adult ADHD: onset, how long effects last, dosing patterns, and how clinicians choose—education only, not medical advice.
-  Topics: adhd
-
 - ADHD Articles Hub (2026) — Diagnosis, Medication Education &amp; Care
   URL: https://siya.health/blog/adhd
   Summary: Explore Siya Health ADHD articles: evaluation, medication education for adults, symptoms, and online care—indexed for search with clear internal links.
@@ -502,11 +457,6 @@ Total pages: 164
 - ADHD Evaluation in California: Online vs In-Person Options (2026)
   URL: https://siya.health/blog/adhd-evaluation-california-online-vs-in-person
   Summary: ADHD evaluation California: compare secure telehealth and in-office visits—timelines, costs, legitimacy, medication discussions, safety.
-  Topics: adhd, california
-
-- How Much Does an ADHD Evaluation Cost in California?
-  URL: https://siya.health/blog/adhd-evaluation-cost-california
-  Summary: ADHD evaluation cost California: typical price ranges, what drives fees, hidden add-ons to watch for, cash vs insurance angles, budgeting follow-up realistically.
   Topics: adhd, california
 
 - ADHD Evaluation Cost in Texas: Full Breakdown (2026 Guide)
@@ -523,11 +473,6 @@ Total pages: 164
   URL: https://siya.health/blog/adhd-medication-online-california
   Summary: ADHD medication online California: telehealth rules, evaluation standards, red flags, and why no practice should promise instant stimulants—patient guide.
   Topics: adhd, california, medication
-
-- Can You Get ADHD Medication Online in Texas? Rules &amp; Safety
-  URL: https://siya.health/blog/adhd-medication-online-texas-telehealth
-  Summary: ADHD medication via telehealth in Texas: what legitimate care includes, evaluation requirements, red flags, and why structured visits matter—education only.
-  Topics: adhd, telehealth, texas, medication
 
 - ADHD Medication Options in California: Stimulants, Non‑Stimulants &amp; FAQs
   URL: https://siya.health/blog/adhd-medication-options-california
@@ -559,11 +504,6 @@ Total pages: 164
   Summary: ADHD test online California: know the difference between quick screens and clinician-led evaluation—tools, timing, limits, and choosing California providers wisely.
   Topics: adhd, california
 
-- ADHD Treatment in Houston: Online Telehealth Options
-  URL: https://siya.health/blog/adhd-treatment-houston-online
-  Summary: ADHD treatment for Houston adults via telehealth: what online care includes, benefits, legitimacy, and who it fits—plus how to start with a licensed Texas clinician.
-  Topics: adhd, telehealth, texas
-
 - Adult ADHD Symptoms in California: Patterns Worth Taking Seriously
   URL: https://siya.health/blog/adult-adhd-symptoms-california
   Summary: Adult ADHD symptoms California: chronic patterns versus burnout mimics—attention drift, procrastination pits, rejection sensitivity arcs—and clinician evaluation norms.
@@ -574,25 +514,10 @@ Total pages: 164
   Summary: Adult ADHD treatment California (2026): therapy, meds, routines, coaching, telehealth—not quick fixes. Medically grounded overview for skeptical adults researching care.
   Topics: adhd, california
 
-- What Happens After an ADHD Diagnosis? Next Steps for Adults
-  URL: https://siya.health/blog/after-adhd-diagnosis-next-steps-adults
-  Summary: After an adult ADHD diagnosis: understanding the diagnosis, treatment options, building a personalized plan, and why ongoing care matters—education from Siya Health.
-  Topics: adhd
-
-- Combining ADHD Treatment &amp; Weight Loss Strategies (2026)
-  URL: https://siya.health/blog/combining-adhd-treatment-and-weight-loss-strategies
-  Summary: Combining ADHD treatment and weight loss in 2026: stimulant appetite effects, GLP-1 overlap, coaching, and coordinated prescribing—education only.
-  Topics: adhd, weight-loss
-
 - Compounded vs Branded GLP-1 Medications (2026): Safety &amp; Standards
   URL: https://siya.health/blog/compounded-vs-branded-glp1-medications
   Summary: Compounded vs branded GLP-1 in 2026: manufacturing standards, regulatory context, risks of unapproved copies, and why clinician oversight matters.
   Topics: weight-loss, medication
-
-- Focalin vs Adderall for ADHD (2026): Methylphenidate vs Amphetamine
-  URL: https://siya.health/blog/focalin-vs-adderall-comparison
-  Summary: Focalin vs Adderall in 2026: methylphenidate vs amphetamine class, dosing ideas, duration, side effects, and how clinicians pick stimulants for adults.
-  Topics: adhd
 
 - Food Noise and GLP-1: What It Means and What Actually Helps (2026)
   URL: https://siya.health/blog/food-noise-and-glp-1-what-it-means-and-what-helps
@@ -652,11 +577,6 @@ Total pages: 164
   URL: https://siya.health/blog/is-online-adhd-diagnosis-legit
   Summary: Skeptical about online ADHD diagnosis? Here's what makes it legitimate—and what to look for when choosing a provider.
   Topics: adhd
-
-- Long-Term Weight Loss Medications: What to Expect in 2026
-  URL: https://siya.health/blog/long-term-weight-loss-medications-what-to-expect
-  Summary: Long-term weight loss medications in 2026: maintenance phases, plateaus, monitoring, mental health, and realistic expectations—no guaranteed outcomes.
-  Topics: weight-loss, medication
 
 - Medical Weight Loss in Texas: GLP-1, Semaglutide, Tirzepatide &amp; What Actually Works
   URL: https://siya.health/blog/medical-weight-loss-glp1-semaglutide-texas
@@ -772,7 +692,7 @@ Total pages: 164
 
 - Diagnostic Lab Services
   URL: https://siya.health/labs
-  Summary: Diagnostic lab services and monitoring tests are coming soon to Siya Health.
+  Summary: Laboratory orders and monitoring through Siya Health telehealth when clinically appropriate. Availability varies by state—contact us to learn more.
 
 - Legal &amp; Compliance
   URL: https://siya.health/legal
@@ -810,7 +730,7 @@ Total pages: 164
 
 - Online Prescription Services
   URL: https://siya.health/prescriptions
-  Summary: Online prescription services for common conditions are coming soon to Siya Health.
+  Summary: Provider-reviewed prescriptions through Siya Health telehealth when clinically appropriate. Availability varies by state—contact us to learn more.
 
 - Pricing
   URL: https://siya.health/pricing
@@ -820,9 +740,9 @@ Total pages: 164
   URL: https://siya.health/primary-urgent-care
   Summary: Virtual primary care and concierge visits with licensed providers. Telehealth services across California, Texas, Pennsylvania, and Florida.
 
-- Privacy Policy
+- Privacy Policy Redirect
   URL: https://siya.health/privacy-policy
-  Summary: Siya Health privacy policy. How we collect, use, and protect your information.
+  Summary: This URL has moved. Read the current Siya Health Privacy Policy at /legal/privacy-policy.
 
 - Our Care Team
   URL: https://siya.health/providers
@@ -872,13 +792,9 @@ Total pages: 164
   Summary: Fast, convenient telehealth from board-certified providers. Primary care, urgent care, prescriptions, labs. TX, PA, FL. No waiting rooms.
   Topics: telehealth
 
-- Terms of Service
+- Terms Redirect
   URL: https://siya.health/terms
-  Summary: Siya Health terms of service. Use of our telehealth website and services.
-
-- Siya Health Visual Component Library (Internal)
-  URL: https://siya.health/visual-components
-  Summary: Learn more about Siya Health Visual Component Library (Internal) with Siya Health telehealth.
+  Summary: This URL has moved. Read the current Siya Health Terms of Use at /legal/terms-of-use.
 
 - Provider-Guided Medical Weight Loss
   URL: https://siya.health/weight-loss-metabolic-health

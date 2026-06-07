@@ -11,7 +11,6 @@ Provider,Field,Priority,QuestionToAsk,ExampleAnswer,Owner,Status
 "Dr. Sneh Pandey, MD","authoredContent","Nice to have","Please provide authoredContent for Dr. Sneh Pandey, MD.","","Provider/Admin","Missing"
 "Dr. Sneh Pandey, MD","NPI","Nice to have","Please provide NPI for Dr. Sneh Pandey, MD.","","Provider/Admin","Missing"
 "Dr. Sneh Pandey, MD","external profiles (sameAs)","Nice to have","Please provide external profiles (sameAs) for Dr. Sneh Pandey, MD.","","Provider/Admin","Missing"
-"Dr. Sneh Pandey, MD","Claim: 5,000+ patients in structured weight-loss programs","Verification needed","Provide source documentation for: 5,000+ patients in structured weight-loss programs","","Admin","Needs verification"
 "Dr. Sneh Pandey, MD","Claim: verified testimonial attributions","Verification needed","Provide source documentation for: verified testimonial attributions","","Admin","Needs verification"
 "Dr. Vanessa Urbina, MD","license type per state","Required before adding provider #4","Please provide license type per state for Dr. Vanessa Urbina, MD.","","Provider/Admin","Missing"
 "Dr. Vanessa Urbina, MD","license verification source","Required before publishing","Please provide license verification source for Dr. Vanessa Urbina, MD.","","Provider/Admin","Missing"

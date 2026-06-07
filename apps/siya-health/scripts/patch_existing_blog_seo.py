@@ -9,7 +9,7 @@ import re
 BLOG = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "blog")
 
 DISCLAIMER_BLOCK = """            <p class="blog-disclaimer"><strong>Educational only:</strong> This content is for educational purposes only and does not replace medical advice. Diagnosis and prescribing require licensed providers.</p>
-            <div class="blog-internal-links"><p>Explore <a href="/adhd-care">ADHD diagnosis and care</a>, review typical <a href="/adhd-evaluation-cost">ADHD evaluation cost</a> factors, and try our <a href="/online-adhd-test">online ADHD screening</a> before your visit.</p></div>
+            <div class="blog-internal-links"><p>Explore <a href="/adhd-care">ADHD diagnosis and care</a>, review typical <a href="/pricing">ADHD evaluation cost</a> factors, and try our <a href="/adhd-screening">online ADHD screening</a> before your visit.</p></div>
 
 """
 

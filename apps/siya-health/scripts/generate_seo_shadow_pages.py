@@ -67,11 +67,11 @@ FOOTER = """    <footer class="footer">
         </div>
         <div class="footer-resources-seo">
           <h4>Resources</h4>
-          <p><a href="/adult-adhd-diagnosis">Adult ADHD Diagnosis</a></p>
-          <p><a href="/adhd-evaluation-cost">ADHD Evaluation Cost</a></p>
-          <p><a href="/online-adhd-test">Online ADHD Screening</a></p>
+          <p><a href="/adhd-care">Adult ADHD Diagnosis</a></p>
+          <p><a href="/pricing">ADHD Evaluation Cost</a></p>
+          <p><a href="/adhd-screening">Online ADHD Screening</a></p>
           <p><a href="/adhd-diagnosis-texas">ADHD Diagnosis Texas</a></p>
-          <p><a href="/adhd-diagnosis-florida">ADHD Diagnosis Florida</a></p>
+          <p><a href="/adhd-care">ADHD Diagnosis Florida</a></p>
           <p><a href="/creyos-adhd-testing">Creyos ADHD Testing</a></p>
         </div>
         <div>
@@ -320,7 +320,7 @@ PAGES: list[dict] = [
         "faqs": [
             ("Do I need to visit an office in Austin?", "No. The evaluation is fully virtual for eligible Texas residents."),
             ("How is adult ADHD different from childhood ADHD?", "Adults often show more internal restlessness, chronic disorganization, and emotional dysregulation than classic hyperactivity in children."),
-            ("What if I am not sure I have ADHD?", 'Start with our <a href="/online-adhd-test">free screening</a>—we will tell you honestly if a full evaluation makes sense.'),
+            ("What if I am not sure I have ADHD?", 'Start with our <a href="/adhd-screening">free screening</a>—we will tell you honestly if a full evaluation makes sense.'),
         ],
     },
     {
@@ -331,7 +331,7 @@ PAGES: list[dict] = [
         "geo": "Greater Houston",
         "intro": """<p>From the Medical Center to the suburbs, Houstonians often work long hours—and undiagnosed ADHD can show up as burnout, missed deadlines, or relationship strain.</p>
           <p>Siya Health connects you with Texas-licensed providers for a thorough virtual ADHD evaluation. You will have time to explain your story—not a rushed fifteen-minute visit.</p>""",
-        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Also read: <a href="/adhd-diagnosis-texas">Texas ADHD diagnosis</a> and <a href="/adhd-evaluation-cost">evaluation cost</a>.</p>""",
+        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Also read: <a href="/adhd-diagnosis-texas">Texas ADHD diagnosis</a> and <a href="/pricing">evaluation cost</a>.</p>""",
         "faqs": [
             ("Can Houston residents use insurance?", "We are a direct-pay practice for transparency; many patients use FSA/HSA."),
             ("What states do you serve from Houston?", "This page is for Texas residents; we also serve Florida and Pennsylvania."),
@@ -390,8 +390,8 @@ PAGES: list[dict] = [
         "h1": "Adult ADHD Diagnosis Online ($199 Comprehensive Evaluation)",
         "geo": "Texas, Pennsylvania, or Florida",
         "intro": """<p>Adult ADHD is often missed—especially in women and high achievers who compensate until burnout hits. If you have read every article and still need a clear answer, a structured evaluation is the next step.</p>
-          <p>Siya Health specializes in adult ADHD telehealth: extended visit length, ADHD-CCSP trained clinicians, and transparent pricing so you are not surprised by bills after the fact.</p>""",
-        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Compare: <a href="/adhd-treatment-online">ADHD treatment online</a> and our main <a href="/adhd-care">ADHD care</a> hub.</p>""",
+          <p>Siya Health specializes in adult ADHD telehealth: extended visit length, licensed ADHD-CCSP–trained clinicians, and transparent pricing so you are not surprised by bills after the fact.</p>""",
+        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Compare: <a href="/adhd-care">ADHD treatment online</a> and our main <a href="/adhd-care">ADHD care</a> hub.</p>""",
         "faqs": [
             ("At what age can adults be diagnosed?", "ADHD can be diagnosed in adults when criteria are met and symptoms are traced appropriately—your provider will review onset and impairment."),
             ("Will I automatically get stimulants?", "Not automatically. Treatment is individualized; some patients start with non-stimulant options or behavioral strategies."),
@@ -406,7 +406,7 @@ PAGES: list[dict] = [
         "geo": "telehealth",
         "intro": """<p>Effective ADHD treatment usually combines the right clinical support with follow-up—not a one-off prescription. After a proper evaluation, many patients continue with medication management and periodic visits.</p>
           <p>Siya Health offers ongoing care plans for non-stimulant and stimulant pathways where clinically appropriate, with monitoring that follows safety guidelines.</p>""",
-        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">New patient? Begin with <a href="/adult-adhd-diagnosis">adult ADHD diagnosis</a> or <a href="/adhd-care">ADHD care overview</a>.</p>""",
+        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">New patient? Begin with <a href="/adhd-care">adult ADHD diagnosis</a> or <a href="/adhd-care">ADHD care overview</a>.</p>""",
         "faqs": [
             ("Can I get treatment without an evaluation?", "If you are new to Siya Health, we begin with a full assessment to ensure safe, appropriate care."),
             ("What are monthly plans for?", "Ongoing medication management and follow-up visits after your initial evaluation."),

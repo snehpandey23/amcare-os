@@ -42,7 +42,17 @@ const GEO_SEO = [
 const LEGACY_PATHS = new Set([
   '/terms',
   '/privacy-policy',
-  '/visual-components',
+]);
+
+/** vercel.json 301 shells — not indexable inventory */
+const REDIRECT_SHELL_PATHS = new Set([
+  '/terms',
+  '/privacy-policy',
+  '/adult-adhd-diagnosis',
+  '/adhd-treatment-online',
+  '/adhd-diagnosis-florida',
+  '/adhd-evaluation-cost',
+  '/online-adhd-test',
 ]);
 
 const UTILITY_PATHS = new Set([
@@ -138,6 +148,7 @@ function extractLinks(html) {
 }
 
 function isIndexable(html, p) {
+  if (REDIRECT_SHELL_PATHS.has(p)) return false;
   const robots = extractMeta(html, 'robots').toLowerCase();
   if (robots.includes('noindex')) return false;
   return true;
