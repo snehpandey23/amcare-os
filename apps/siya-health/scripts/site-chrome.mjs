@@ -229,7 +229,7 @@ function adhdCareProviderTagline(provider) {
   return ADHD_CARE_PROVIDER_TAGLINES[provider.slug] || provider.servicePageTagline;
 }
 
-function buildMeetPhysiciansBlock(serviceKey, lead, stateAbbr = null, { gridClass = 'about-team-grid' } = {}) {
+function buildMeetPhysiciansBlock(serviceKey, lead, stateAbbr = null, { gridClass = 'about-team-grid', heading = 'Meet our care team' } = {}) {
   const providers = getProvidersForServicePage(serviceKey, { stateAbbr });
   const stateNote = stateAbbr
     ? `<p class="provider-state-filter-note">Showing clinicians licensed in <strong>${stateAbbr}</strong>.</p>`
@@ -251,7 +251,7 @@ function buildMeetPhysiciansBlock(serviceKey, lead, stateAbbr = null, { gridClas
       <section class="section" id="meet-physicians" aria-labelledby="meet-physicians-heading">
         <div class="container">
           <div class="section-header">
-            <h2 id="meet-physicians-heading">Meet our care team</h2>
+            <h2 id="meet-physicians-heading">${heading}</h2>
             <p class="lead">${lead}</p>
             ${stateNote}
           </div>
@@ -308,7 +308,12 @@ const MEET_PHYSICIANS_BY_PAGE = {
     }),
   'telehealth.html': () => buildMeetPhysiciansBlock('telehealth', 'Licensed telehealth clinicians—availability varies by state.'),
   'weight-loss-metabolic-health.html': () =>
-    buildMeetPhysiciansBlock('weight-loss-metabolic-health', 'Provider-led medical weight loss and metabolic care.'),
+    buildMeetPhysiciansBlock(
+      'weight-loss-metabolic-health',
+      'Our team includes physicians and advanced practice providers with experience in obesity medicine, ADHD, primary care, metabolic health, and long-term behavior change.',
+      null,
+      { heading: 'Meet the clinicians behind your care' },
+    ),
   'mens-health-longevity.html': () =>
     buildMeetPhysiciansBlock('mens-health-longevity', "Evidence-based men's health and hormone care."),
   'primary-urgent-care.html': () =>
