@@ -521,6 +521,10 @@ button.secondary:hover {
 .weight-recognition-section .section-header {
   margin-bottom: 32px;
 }
+#tele-recognition .symptoms-card {
+  opacity: 1;
+  transform: none;
+}
 
 /* Weight complexity section (Sprint 2) */
 .weight-complexity-section {
@@ -5875,7 +5879,7 @@ body.ghl-legal-gate-open {
   }
 }
 
-/* Siya Circle™ Phase 0 */
+/* Siya Circle */
 .siya-circle-hero .siya-circle-eyebrow {
   font-size: 0.82rem;
   font-weight: 600;
@@ -5903,6 +5907,19 @@ body.ghl-legal-gate-open {
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+}
+.siya-circle-ghl-embed {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 480px;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+}
+.siya-circle-ghl-embed iframe {
+  display: block;
+  width: 100%;
+  min-height: 480px;
 }
 .siya-circle-form .form-field {
   margin-bottom: 18px;
