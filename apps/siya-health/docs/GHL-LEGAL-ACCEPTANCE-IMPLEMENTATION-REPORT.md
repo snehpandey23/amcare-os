@@ -1,6 +1,6 @@
 # GHL Legal Acceptance — Implementation Report
 
-Generated: 2026-06-07T11:23:10.126Z
+Generated: 2026-06-07T12:24:15.583Z
 
 ## Objective
 
@@ -44,11 +44,11 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 
 ## Audit totals
 
-- HTML pages scanned: **163**
-- Pages with legacy GHL booking links: **161**
-- Total legacy GHL booking anchor targets: **165**
-- Pages with CarePatron booking links: **162**
-- Total CarePatron booking anchor targets: **666**
+- HTML pages scanned: **164**
+- Pages with legacy GHL booking links: **162**
+- Total legacy GHL booking anchor targets: **166**
+- Pages with CarePatron booking links: **163**
+- Total CarePatron booking anchor targets: **671**
 - Pages with acceptance script after build: **1**
 - Intake hub present: **yes**
 
@@ -62,6 +62,7 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/adhd-diagnosis-pennsylvania** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/adhd-diagnosis-philadelphia** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/adhd-diagnosis-texas** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
+- **/adhd-evaluation-cost** (adhd-related) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/adhd-screening** (adhd-screening) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/adhd-treatment-online** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/adult-adhd-diagnosis** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
@@ -199,7 +200,7 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/legal/privacy-policy** (general-cta) — 1 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/legal/terms-of-use** (general-cta) — 1 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/mens-health-longevity** (general-cta) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
-- **/online-adhd-test** (adhd-funnel) — 7 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
+- **/online-adhd-test** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/prescriptions** (general-cta) — 5 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
 - **/pricing** (general-cta) — 2 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
 - **/primary-urgent-care** (general-cta) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, chat widget: yes
@@ -235,6 +236,7 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - `adhd-diagnosis-pennsylvania.html`
 - `adhd-diagnosis-philadelphia.html`
 - `adhd-diagnosis-texas.html`
+- `adhd-evaluation-cost.html`
 - `adhd-screening.html`
 - `adhd-treatment-online.html`
 - `adult-adhd-diagnosis.html`

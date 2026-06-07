@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
 Generated: 2026-06-07
-Total pages: 163
+Total pages: 164
 
 ---
 
@@ -116,7 +116,7 @@ Total pages: 163
 
 - Online ADHD Diagnosis Pennsylvania | $199
   URL: https://siya.health/adhd-diagnosis-pennsylvania
-  Summary: Pennsylvania adult ADHD diagnosis online. $199 virtual evaluation. Board-certified, ADHD-CCSP. Philadelphia, Pittsburgh & statewide telehealth.
+  Summary: Pennsylvania adult ADHD diagnosis online. $199 virtual evaluation. Licensed, ADHD-CCSP–trained clinicians. Philadelphia, Pittsburgh & statewide telehealth.
   Topics: adhd, pennsylvania
 
 - ADHD Diagnosis Philadelphia PA | Online $199
@@ -128,6 +128,11 @@ Total pages: 163
   URL: https://siya.health/adhd-diagnosis-texas
   Summary: Adult ADHD diagnosis online in Texas. $199 evaluation, ADHD-CCSP providers, same-week telehealth. Austin, Houston, Dallas-area & statewide. Book now.
   Topics: adhd, texas
+
+- ADHD Evaluation Cost Online | $199 Flat Rate
+  URL: https://siya.health/adhd-evaluation-cost
+  Summary: ADHD evaluation cost: $199 transparent flat fee for 60–90 min online visit. No insurance surprise bills. FSA/HSA. Texas, Pennsylvania, Florida.
+  Topics: adhd
 
 - Start screening
   URL: https://siya.health/adhd-screening
@@ -758,7 +763,7 @@ Total pages: 163
 
 - Creyos ADHD Testing Online | Part of $199 Evaluation
   URL: https://siya.health/creyos-adhd-testing
-  Summary: Creyos cognitive testing for ADHD as part of your $199 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in CA, TX, PA, FL.
+  Summary: Creyos cognitive testing for ADHD as part of your $199 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL.
   Topics: adhd
 
 - Secure Intake
@@ -828,9 +833,9 @@ Total pages: 163
   Summary: Meet Derek Timbs, FNP-BC at Siya Health. GLP-1 weight loss and men's metabolic telehealth in Texas.
   Topics: weight-loss
 
-- Dr. Natasha Desai, MD | Adult ADHD &amp; Behavioral Medicine
+- Dr. Natasha Desai, MD | Adult ADHD &amp; Family Medicine
   URL: https://siya.health/providers/dr-natasha-desai
-  Summary: Meet Dr. Natasha Desai—Family & Behavioral Medicine physician at Siya Health. ADHD-CCSP. Adult ADHD with anxiety and emotional overlap via telehealth in TX & FL.
+  Summary: Meet Dr. Natasha Desai—Family Medicine Physician at Siya Health. ADHD-CCSP. Adult ADHD with anxiety and emotional overlap via telehealth in TX & FL.
   Topics: adhd
 
 - Dr. Sneh Pandey, MD | Adult ADHD &amp; Metabolic Care
@@ -838,9 +843,9 @@ Total pages: 163
   Summary: Meet Dr. Sneh Pandey—Medical Director at Siya Health. Board-certified Internal Medicine, Obesity Medicine, ADHD-CCSP. Structured adult ADHD evaluations and weight-inclusive telehealth in CA, TX, PA & …
   Topics: adhd, weight-loss
 
-- Dr. Swati Pandey, MD | Adult ADHD &amp; Mental Health Care
+- Dr. Swati Pandey, MD | Internal Medicine &amp; Adult ADHD
   URL: https://siya.health/providers/dr-swati-pandey
-  Summary: Meet Dr. Swati Pandey—licensed medical provider at Siya Health. ADHD-CCSP. Adult ADHD with depression, anxiety, and complex medication histories via telehealth in PA.
+  Summary: Meet Dr. Swati Pandey—Internal Medicine Physician at Siya Health. ADHD-CCSP. Adult ADHD with depression, anxiety, and complex medication histories via telehealth in PA.
   Topics: adhd
 
 - Dr. Vanessa Urbina, MD | Family Medicine &amp; ADHD

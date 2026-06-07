@@ -44,7 +44,7 @@ export const DIAGRAMS = {
     file: 'glp1-journey.svg',
     width: 720,
     height: 200,
-    alt: 'GLP-1 patient journey timeline: Meet and Greet, clinical evaluation, dose titration, monitoring, and follow-up planning.',
+    alt: 'GLP-1 patient journey timeline: first telehealth visit, clinical evaluation, dose titration, monitoring, and follow-up planning.',
   },
   'weight-plateau': {
     file: 'weight-plateau.svg',

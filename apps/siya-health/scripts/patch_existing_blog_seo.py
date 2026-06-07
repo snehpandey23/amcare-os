@@ -52,7 +52,7 @@ PATCHES: dict[str, dict] = {
             ("How long does an online ADHD evaluation take?", "A thorough evaluation takes 60–90 minutes. Quick online assessments that give you a result in 5 minutes are not the same as a proper clinical evaluation."),
             ("Can I use insurance for online ADHD diagnosis in Texas?", "We operate with transparent, cash-based pricing. Many patients prefer this because there are no surprise bills or prior-authorization delays."),
             ("Is the diagnosis valid for prescriptions?", "Yes. Our providers are licensed in Texas and can prescribe ADHD medication when clinically appropriate."),
-            ("What if I'm not sure I have ADHD?", "That's exactly what the free screening and discovery call are for. You can ask questions and decide whether a full evaluation makes sense for you."),
+            ("What if I'm not sure I have ADHD?", "That's exactly what the free ADHD screening and Talk to a Clinician visit are for. You can ask questions and decide whether a full evaluation makes sense for you."),
         ],
         "related": [
             ("adhd-evaluation-cost-texas", "ADHD evaluation cost in Texas"),
@@ -100,7 +100,7 @@ PATCHES: dict[str, dict] = {
             ("Can you have ADHD and still be successful?", "Absolutely. Many adults with ADHD succeed by compensating—working harder, building rigid systems, or finding roles that fit their strengths. Success doesn't rule out ADHD; it often masks it."),
             ("What if I've been told it's just anxiety?", "ADHD and anxiety often co-occur. A good evaluation will screen for both and help clarify which symptoms belong where. Treatment can look different depending on the answer."),
             ("Are online ADHD evaluations legitimate?", "Yes. When conducted by licensed providers using evidence-based protocols, online ADHD evaluations are valid and accepted for prescriptions and accommodations."),
-            ("How do I know if I should get evaluated?", "If these symptoms affect your work, relationships, or daily life—and they've been present since childhood—an evaluation can give you clarity. A free screening or discovery call is a low-commitment way to explore whether it's worth pursuing."),
+            ("How do I know if I should get evaluated?", "If these symptoms affect your work, relationships, or daily life—and they've been present since childhood—an evaluation can give you clarity. A free ADHD screening or Talk to a Clinician visit is a low-commitment way to explore whether it's worth pursuing."),
         ],
         "related": [
             ("how-to-know-if-you-have-adhd-adult", "How to know if you have ADHD as an adult"),

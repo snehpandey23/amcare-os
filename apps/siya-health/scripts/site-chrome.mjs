@@ -12,6 +12,7 @@ import {
   LEGACY_FOOTER_PATTERNS,
   LEGACY_MARKETPLACE_PHRASES,
   LEGAL_LINKS,
+  MIXED_ROSTER_CLINICIAN_PHRASE,
   PRICING,
   REMOVED_BLOG_PATHS,
   REMOVED_BOOKING_CTA_LABELS,
@@ -618,7 +619,14 @@ export function normalizeSitewideCopy(html, relPath = '') {
   html = html.replace(/Find the Right Starting Point/g, COPY_STANDARDS.secondaryCtaTelehealth);
   html = html.replace(/Schedule a quick call/gi, COPY_STANDARDS.primaryCta);
   html = html.replace(/membership pricing/gi, 'follow-up plan pricing');
-  html = html.replace(/Talk to a clinician when you['']re ready/gi, 'Talk to a Clinician when ready');
+  html = html.replace(/Board-certified, ADHD-CCSP trained providers/gi, MIXED_ROSTER_CLINICIAN_PHRASE);
+  html = html.replace(/Meet &amp; Greets/gi, 'introductory visits');
+  html = html.replace(/Meet & Greets/gi, 'introductory visits');
+  html = html.replace(/book a Meet &amp; Greet/gi, COPY_STANDARDS.primaryCta);
+  html = html.replace(/book a Meet & Greet/gi, COPY_STANDARDS.primaryCta);
+  html = html.replace(/Discuss pricing on a Meet and Greet/gi, 'View Pricing');
+  html = html.replace(/\bdiscovery call\b/gi, 'free ADHD screening');
+  html = html.replace(/Talk to a clinician when you['']re ready/gi, COPY_STANDARDS.primaryCta);
   html = html.replace(
     /Ongoing medication management is available on a monthly plan if clinically appropriate\./g,
     'Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See <a href="/pricing">pricing</a>.',
@@ -859,7 +867,7 @@ function buildHomepageProviderConversion() {
         <div class="container">
           <div class="section-header">
             <h2 id="provider-conversion-heading">Not sure who to see?</h2>
-            <p class="lead">Start with a Meet &amp; Greet—we match you with a licensed clinician for your state and goals.</p>
+            <p class="lead">Talk to a Clinician—we match you with a licensed clinician for your state and goals.</p>
           </div>
           <div class="provider-conversion-grid">
 ${cards}
@@ -1092,7 +1100,7 @@ export function normalizeCtaHierarchy(html, relPath) {
     (match, prefix) => {
       if (relPath === 'adhd-care.html') return match;
       if (relPath === 'telehealth.html') return match;
-      return `${prefix}<p class="cta-microcopy"><a href="#book-telehealth" class="text-link">Talk to a clinician when you're ready →</a></p>`;
+      return `${prefix}<p class="cta-microcopy"><a href="#book-telehealth" class="text-link">${COPY_STANDARDS.primaryCta} →</a></p>`;
     },
   );
 

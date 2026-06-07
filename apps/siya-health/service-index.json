@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-07T11:23:09.767Z",
+  "generated": "2026-06-07T12:24:15.235Z",
   "services": [
     {
       "title": "Siya Health | When Focus, Energy, or Weight Won't Budge",
@@ -41,7 +41,7 @@
       "title": "Online ADHD Diagnosis Pennsylvania | $199",
       "url": "https://siya.health/adhd-diagnosis-pennsylvania",
       "type": "service-adhd",
-      "description": "Pennsylvania adult ADHD diagnosis online. $199 virtual evaluation. Board-certified, ADHD-CCSP. Philadelphia, Pittsburgh & statewide telehealth."
+      "description": "Pennsylvania adult ADHD diagnosis online. $199 virtual evaluation. Licensed, ADHD-CCSP–trained clinicians. Philadelphia, Pittsburgh & statewide telehealth."
     },
     {
       "title": "ADHD Diagnosis Philadelphia PA | Online $199",
@@ -54,6 +54,12 @@
       "url": "https://siya.health/adhd-diagnosis-texas",
       "type": "service-adhd",
       "description": "Adult ADHD diagnosis online in Texas. $199 evaluation, ADHD-CCSP providers, same-week telehealth. Austin, Houston, Dallas-area & statewide. Book now."
+    },
+    {
+      "title": "ADHD Evaluation Cost Online | $199 Flat Rate",
+      "url": "https://siya.health/adhd-evaluation-cost",
+      "type": "service-adhd",
+      "description": "ADHD evaluation cost: $199 transparent flat fee for 60–90 min online visit. No insurance surprise bills. FSA/HSA. Texas, Pennsylvania, Florida."
     },
     {
       "title": "Start screening",
@@ -77,7 +83,7 @@
       "title": "Creyos ADHD Testing Online | Part of $199 Evaluation",
       "url": "https://siya.health/creyos-adhd-testing",
       "type": "service-adhd",
-      "description": "Creyos cognitive testing for ADHD as part of your $199 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in CA, TX, PA, FL."
+      "description": "Creyos cognitive testing for ADHD as part of your $199 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL."
     },
     {
       "title": "Men's Health &amp; Longevity",

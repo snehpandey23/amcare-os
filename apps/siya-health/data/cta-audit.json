@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-07T11:20:15.449Z",
+  "generated": "2026-06-07T12:24:18.909Z",
   "indexablePageCount": 166,
   "recommendedSystem": {
     "primary": {
@@ -16,25 +16,27 @@
     }
   },
   "summary": {
-    "totalCtaInstances": 1163,
-    "uniqueLabels": 67,
-    "uniquePatterns": 102,
-    "bookingLabelVariants": 7,
+    "totalCtaInstances": 1173,
+    "uniqueLabels": 69,
+    "uniquePatterns": 103,
+    "bookingLabelVariants": 9,
     "bookingLabels": [
       "Talk to a Clinician",
       "Book ADHD Evaluation",
+      "Book ADHD evaluation",
+      "Book ADHD evaluation online",
       "Talk to a Clinician →",
       "Start Free ADHD Assessment",
       "ADHD Care",
       "Weight Loss Consultation",
       "schedule a visit"
     ],
-    "keepInstances": 321,
-    "consolidateInstances": 525,
-    "removeInstances": 317,
-    "pagesWithMainCtaOver3": 27,
-    "pagesWithDuplicateBookingInMain": 20,
-    "chaosScore": 354
+    "keepInstances": 323,
+    "consolidateInstances": 582,
+    "removeInstances": 268,
+    "pagesWithMainCtaOver3": 28,
+    "pagesWithDuplicateBookingInMain": 21,
+    "chaosScore": 379
   },
   "patterns": [
     {
@@ -42,16 +44,16 @@
       "url": "https://book.carepatron.com/Siya-Health",
       "type": "booking",
       "zone": "nav",
-      "count": 204,
+      "count": 256,
       "pages": [
         "/",
         "/about",
+        "/adhd-evaluation-cost",
         "/answers",
+        "/answers/adderall-vs-vyvanse-adults",
         "/answers/adhd-and-weight-loss-connection",
-        "/answers/afternoon-energy-crash-after-lunch",
-        "/answers/brain-fog-after-eating",
-        "/answers/can-sleep-apnea-cause-fatigue",
-        "/answers/compounded-vs-branded-glp-1"
+        "/answers/adhd-in-men",
+        "/answers/adhd-in-women"
       ],
       "recommendation": "CONSOLIDATE",
       "slot": "primary",
@@ -62,7 +64,7 @@
       "url": "https://book.carepatron.com/Siya-Health",
       "type": "booking",
       "zone": "footer",
-      "count": 161,
+      "count": 162,
       "pages": [
         "/",
         "/about",
@@ -82,7 +84,7 @@
       "url": "/adhd-screening",
       "type": "screening",
       "zone": "footer-links",
-      "count": 160,
+      "count": 161,
       "pages": [
         "/",
         "/about",
@@ -102,7 +104,7 @@
       "url": "https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl",
       "type": "newsletter",
       "zone": "footer-links",
-      "count": 160,
+      "count": 161,
       "pages": [
         "/",
         "/about",
@@ -158,31 +160,11 @@
       "note": "Nav booking — keep one label: Talk to a Clinician"
     },
     {
-      "label": "Start Free Screening",
-      "url": "/adhd-screening",
-      "type": "screening",
-      "zone": "nav",
-      "count": 50,
-      "pages": [
-        "/answers/adderall-vs-vyvanse-adults",
-        "/answers/adhd-in-men",
-        "/answers/adhd-in-women",
-        "/answers/adhd-medication-every-day",
-        "/answers/adhd-medication-side-effects",
-        "/answers/adhd-vs-anxiety",
-        "/answers/adhd-vs-burnout",
-        "/answers/asrs-adhd-screening-explained"
-      ],
-      "recommendation": "REMOVE",
-      "slot": null,
-      "note": "Screening CTA outside ADHD hero/symptoms"
-    },
-    {
       "label": "Talk to a Clinician",
       "url": "https://book.carepatron.com/Siya-Health",
       "type": "booking",
       "zone": "main",
-      "count": 36,
+      "count": 27,
       "pages": [
         "/about",
         "/adhd-diagnosis-austin",
@@ -191,7 +173,7 @@
         "/adhd-diagnosis-pennsylvania",
         "/adhd-diagnosis-philadelphia",
         "/adhd-diagnosis-texas",
-        "/adhd-treatment-online"
+        "/adhd-evaluation-cost"
       ],
       "recommendation": "CONSOLIDATE",
       "slot": "primary",
@@ -296,7 +278,7 @@
       "note": "In-page anchor button — not a sitewide CTA slot"
     },
     {
-      "label": "Book ADHD Evaluation",
+      "label": "Book ADHD evaluation",
       "url": "https://book.carepatron.com/Siya-Health",
       "type": "booking",
       "zone": "main",
@@ -308,8 +290,8 @@
         "/adhd-diagnosis-pennsylvania",
         "/adhd-diagnosis-philadelphia",
         "/adhd-diagnosis-texas",
-        "/adhd-treatment-online",
-        "/adult-adhd-diagnosis"
+        "/adhd-evaluation-cost",
+        "/adhd-treatment-online"
       ],
       "recommendation": "CONSOLIDATE",
       "slot": "primary",
@@ -320,7 +302,7 @@
       "url": "/adhd-screening",
       "type": "screening",
       "zone": "main",
-      "count": 10,
+      "count": 11,
       "pages": [
         "/adhd-diagnosis-austin",
         "/adhd-diagnosis-florida",
@@ -328,19 +310,19 @@
         "/adhd-diagnosis-pennsylvania",
         "/adhd-diagnosis-philadelphia",
         "/adhd-diagnosis-texas",
-        "/adhd-treatment-online",
-        "/adult-adhd-diagnosis"
+        "/adhd-evaluation-cost",
+        "/adhd-treatment-online"
       ],
       "recommendation": "CONSOLIDATE",
       "slot": "secondary",
       "note": "ADHD funnel secondary — optional one max; consider Explore Services on non-ADHD pages"
     },
     {
-      "label": "Free screening",
-      "url": "/adhd-screening",
-      "type": "screening",
+      "label": "Book ADHD evaluation online",
+      "url": "https://book.carepatron.com/Siya-Health",
+      "type": "booking",
       "zone": "main",
-      "count": 10,
+      "count": 11,
       "pages": [
         "/adhd-diagnosis-austin",
         "/adhd-diagnosis-florida",
@@ -348,8 +330,28 @@
         "/adhd-diagnosis-pennsylvania",
         "/adhd-diagnosis-philadelphia",
         "/adhd-diagnosis-texas",
-        "/adhd-treatment-online",
-        "/adult-adhd-diagnosis"
+        "/adhd-evaluation-cost",
+        "/adhd-treatment-online"
+      ],
+      "recommendation": "CONSOLIDATE",
+      "slot": "primary",
+      "note": "Final-band primary — keep one per page; remove if hero already has booking"
+    },
+    {
+      "label": "Free screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 11,
+      "pages": [
+        "/adhd-diagnosis-austin",
+        "/adhd-diagnosis-florida",
+        "/adhd-diagnosis-houston",
+        "/adhd-diagnosis-pennsylvania",
+        "/adhd-diagnosis-philadelphia",
+        "/adhd-diagnosis-texas",
+        "/adhd-evaluation-cost",
+        "/adhd-treatment-online"
       ],
       "recommendation": "CONSOLIDATE",
       "slot": "secondary",
@@ -1361,6 +1363,19 @@
       "note": "In-page anchor button — not a sitewide CTA slot"
     },
     {
+      "label": "Start free ADHD screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/online-adhd-test"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
       "label": "Explore Care Options",
       "url": "#conditions",
       "type": "secondary-other",
@@ -1804,7 +1819,7 @@
       "bookingInMain": 3,
       "ctas": [
         {
-          "label": "Book ADHD Evaluation",
+          "label": "Book ADHD evaluation",
           "type": "booking",
           "context": "hero",
           "recommendation": "CONSOLIDATE"
@@ -1816,7 +1831,7 @@
           "recommendation": "CONSOLIDATE"
         },
         {
-          "label": "Talk to a Clinician",
+          "label": "Book ADHD evaluation online",
           "type": "booking",
           "context": "cta-band",
           "recommendation": "CONSOLIDATE"
@@ -1895,10 +1910,10 @@
     {
       "path": "/online-adhd-test",
       "mainCtaCount": 6,
-      "bookingInMain": 4,
+      "bookingInMain": 3,
       "ctas": [
         {
-          "label": "Book ADHD Evaluation",
+          "label": "Book ADHD evaluation",
           "type": "booking",
           "context": "hero",
           "recommendation": "CONSOLIDATE"
@@ -1910,13 +1925,13 @@
           "recommendation": "CONSOLIDATE"
         },
         {
-          "label": "Book ADHD Evaluation",
-          "type": "booking",
+          "label": "Start free ADHD screening",
+          "type": "screening",
           "context": "cta-band",
-          "recommendation": "CONSOLIDATE"
+          "recommendation": "REMOVE"
         },
         {
-          "label": "Talk to a Clinician",
+          "label": "Book ADHD evaluation online",
           "type": "booking",
           "context": "cta-band",
           "recommendation": "CONSOLIDATE"
@@ -1934,7 +1949,9 @@
           "recommendation": "CONSOLIDATE"
         }
       ],
-      "remove": []
+      "remove": [
+        "Start free ADHD screening"
+      ]
     },
     {
       "path": "/siya-circle",
@@ -1989,7 +2006,7 @@
       "bookingInMain": 3,
       "ctas": [
         {
-          "label": "Book ADHD Evaluation",
+          "label": "Book ADHD evaluation",
           "type": "booking",
           "context": "hero",
           "recommendation": "CONSOLIDATE"
@@ -2001,7 +2018,7 @@
           "recommendation": "CONSOLIDATE"
         },
         {
-          "label": "Talk to a Clinician",
+          "label": "Book ADHD evaluation online",
           "type": "booking",
           "context": "cta-band",
           "recommendation": "CONSOLIDATE"
@@ -2027,7 +2044,7 @@
       "bookingInMain": 3,
       "ctas": [
         {
-          "label": "Book ADHD Evaluation",
+          "label": "Book ADHD evaluation",
           "type": "booking",
           "context": "hero",
           "recommendation": "CONSOLIDATE"
@@ -2039,7 +2056,7 @@
           "recommendation": "CONSOLIDATE"
         },
         {
-          "label": "Talk to a Clinician",
+          "label": "Book ADHD evaluation online",
           "type": "booking",
           "context": "cta-band",
           "recommendation": "CONSOLIDATE"
@@ -2065,7 +2082,7 @@
       "bookingInMain": 3,
       "ctas": [
         {
-          "label": "Book ADHD Evaluation",
+          "label": "Book ADHD evaluation",
           "type": "booking",
           "context": "hero",
           "recommendation": "CONSOLIDATE"
@@ -2077,7 +2094,7 @@
           "recommendation": "CONSOLIDATE"
         },
         {
-          "label": "Talk to a Clinician",
+          "label": "Book ADHD evaluation online",
           "type": "booking",
           "context": "cta-band",
           "recommendation": "CONSOLIDATE"
@@ -2103,7 +2120,7 @@
       "bookingInMain": 3,
       "ctas": [
         {
-          "label": "Book ADHD Evaluation",
+          "label": "Book ADHD evaluation",
           "type": "booking",
           "context": "hero",
           "recommendation": "CONSOLIDATE"
@@ -2115,7 +2132,7 @@
           "recommendation": "CONSOLIDATE"
         },
         {
-          "label": "Talk to a Clinician",
+          "label": "Book ADHD evaluation online",
           "type": "booking",
           "context": "cta-band",
           "recommendation": "CONSOLIDATE"
@@ -2141,7 +2158,7 @@
       "bookingInMain": 3,
       "ctas": [
         {
-          "label": "Book ADHD Evaluation",
+          "label": "Book ADHD evaluation",
           "type": "booking",
           "context": "hero",
           "recommendation": "CONSOLIDATE"
@@ -2153,7 +2170,45 @@
           "recommendation": "CONSOLIDATE"
         },
         {
+          "label": "Book ADHD evaluation online",
+          "type": "booking",
+          "context": "cta-band",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
           "label": "Talk to a Clinician",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        }
+      ],
+      "remove": []
+    },
+    {
+      "path": "/adhd-evaluation-cost",
+      "mainCtaCount": 5,
+      "bookingInMain": 3,
+      "ctas": [
+        {
+          "label": "Book ADHD evaluation",
+          "type": "booking",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Free 2-minute screening",
+          "type": "screening",
+          "context": "hero",
+          "recommendation": "CONSOLIDATE"
+        },
+        {
+          "label": "Book ADHD evaluation online",
           "type": "booking",
           "context": "cta-band",
           "recommendation": "CONSOLIDATE"
@@ -2179,7 +2234,7 @@
       "bookingInMain": 3,
       "ctas": [
         {
-          "label": "Book ADHD Evaluation",
+          "label": "Book ADHD evaluation",
           "type": "booking",
           "context": "hero",
           "recommendation": "CONSOLIDATE"
@@ -2191,7 +2246,7 @@
           "recommendation": "CONSOLIDATE"
         },
         {
-          "label": "Talk to a Clinician",
+          "label": "Book ADHD evaluation online",
           "type": "booking",
           "context": "cta-band",
           "recommendation": "CONSOLIDATE"
@@ -2217,7 +2272,7 @@
       "bookingInMain": 3,
       "ctas": [
         {
-          "label": "Book ADHD Evaluation",
+          "label": "Book ADHD evaluation",
           "type": "booking",
           "context": "hero",
           "recommendation": "CONSOLIDATE"
@@ -2229,7 +2284,7 @@
           "recommendation": "CONSOLIDATE"
         },
         {
-          "label": "Talk to a Clinician",
+          "label": "Book ADHD evaluation online",
           "type": "booking",
           "context": "cta-band",
           "recommendation": "CONSOLIDATE"
@@ -2340,7 +2395,7 @@
       "bookingInMain": 3,
       "ctas": [
         {
-          "label": "Book ADHD Evaluation",
+          "label": "Book ADHD evaluation",
           "type": "booking",
           "context": "hero",
           "recommendation": "CONSOLIDATE"
@@ -2352,9 +2407,9 @@
           "recommendation": "CONSOLIDATE"
         },
         {
-          "label": "Talk to a Clinician",
+          "label": "Book ADHD evaluation online",
           "type": "booking",
-          "context": "hero",
+          "context": "cta-band",
           "recommendation": "CONSOLIDATE"
         },
         {
@@ -2700,10 +2755,6 @@
       "bookingInMain": 4
     },
     {
-      "path": "/online-adhd-test",
-      "bookingInMain": 4
-    },
-    {
       "path": "/about",
       "bookingInMain": 3
     },
@@ -2732,6 +2783,10 @@
       "bookingInMain": 3
     },
     {
+      "path": "/adhd-evaluation-cost",
+      "bookingInMain": 3
+    },
+    {
       "path": "/adhd-treatment-online",
       "bookingInMain": 3
     },
@@ -2745,6 +2800,10 @@
     },
     {
       "path": "/mens-health-longevity",
+      "bookingInMain": 3
+    },
+    {
+      "path": "/online-adhd-test",
       "bookingInMain": 3
     },
     {
@@ -2796,26 +2855,6 @@
       "recommendation": "REMOVE",
       "slot": null,
       "note": "Mid-page booking — use hero OR final band only"
-    },
-    {
-      "label": "Start Free Screening",
-      "url": "/adhd-screening",
-      "type": "screening",
-      "zone": "nav",
-      "count": 50,
-      "pages": [
-        "/answers/adderall-vs-vyvanse-adults",
-        "/answers/adhd-in-men",
-        "/answers/adhd-in-women",
-        "/answers/adhd-medication-every-day",
-        "/answers/adhd-medication-side-effects",
-        "/answers/adhd-vs-anxiety",
-        "/answers/adhd-vs-burnout",
-        "/answers/asrs-adhd-screening-explained"
-      ],
-      "recommendation": "REMOVE",
-      "slot": null,
-      "note": "Screening CTA outside ADHD hero/symptoms"
     },
     {
       "label": "Free ADHD screening (not a diagnosis)",
@@ -3719,6 +3758,19 @@
       "note": "In-page anchor button — not a sitewide CTA slot"
     },
     {
+      "label": "Start free ADHD screening",
+      "url": "/adhd-screening",
+      "type": "screening",
+      "zone": "main",
+      "count": 1,
+      "pages": [
+        "/online-adhd-test"
+      ],
+      "recommendation": "REMOVE",
+      "slot": null,
+      "note": "Screening CTA outside ADHD hero/symptoms"
+    },
+    {
       "label": "Explore Care Options",
       "url": "#conditions",
       "type": "secondary-other",
@@ -3759,10 +3811,10 @@
       "consolidate": 14
     },
     "Service Page": {
-      "instances": 116,
-      "remove": 18,
-      "keep": 26,
-      "consolidate": 72
+      "instances": 126,
+      "remove": 19,
+      "keep": 28,
+      "consolidate": 79
     },
     "Geo SEO Landing": {
       "instances": 61,
@@ -3778,9 +3830,9 @@
     },
     "Health Guide": {
       "instances": 454,
-      "remove": 179,
+      "remove": 129,
       "keep": 130,
-      "consolidate": 145
+      "consolidate": 195
     },
     "Blog Hub": {
       "instances": 27,
@@ -3891,7 +3943,10 @@
     },
     {
       "path": "/adhd-evaluation-cost",
-      "file": "adhd-evaluation-cost.html"
+      "file": "adhd-evaluation-cost.html",
+      "pageType": "Service Page",
+      "mainCtaCount": 5,
+      "bookingInMain": 3
     },
     {
       "path": "/adhd-screening",
@@ -4863,7 +4918,7 @@
       "file": "online-adhd-test.html",
       "pageType": "Service Page",
       "mainCtaCount": 6,
-      "bookingInMain": 4
+      "bookingInMain": 3
     },
     {
       "path": "/prescriptions",

@@ -398,7 +398,7 @@ const crossCutting = [
     id: 'CC-04',
     type: 'positioning',
     severity: 'medium',
-    message: 'State landing pages say "Board-certified, ADHD-CCSP trained providers" but NPs/PAs on roster are not board-certified physicians',
+    message: 'State landing pages should use "Licensed, ADHD-CCSP–trained clinicians" on mixed MD/NP/PA roster pages',
     surfaces: ['adhd-diagnosis-*.html', 'adult-adhd-diagnosis.html', 'adhd-treatment-online.html'],
     fix: 'Use "Licensed, ADHD-CCSP–trained clinicians" on pages listing mixed roster',
   },

@@ -121,7 +121,7 @@ HOW_IT_WORKS = """
             <div class="flow-card">
               <span class="flow-step-num">Step 2</span>
               <h3>60–90 minute visit</h3>
-              <p>Board-certified, ADHD-CCSP trained providers review your history, use validated assessment tools as clinically appropriate (such as ASRS, DIVA, Wender Utah, SWAN, or Creyos), and screen for common co-occurring conditions. Assessment tools support clinical evaluation but do not independently establish a diagnosis.</p>
+              <p>Licensed, ADHD-CCSP–trained clinicians review your history, use validated assessment tools as clinically appropriate (such as ASRS, DIVA, Wender Utah, SWAN, or Creyos), and screen for common co-occurring conditions. Assessment tools support clinical evaluation but do not independently establish a diagnosis.</p>
             </div>
             <div class="flow-card">
               <span class="flow-step-num">Step 3</span>
@@ -296,7 +296,7 @@ PAGES: list[dict] = [
     {
         "slug": "adhd-diagnosis-pennsylvania",
         "title": "Online ADHD Diagnosis Pennsylvania | $199 | Siya Health",
-        "meta": "Pennsylvania adult ADHD diagnosis online. $199 virtual evaluation. Board-certified, ADHD-CCSP. Philadelphia, Pittsburgh & statewide telehealth.",
+        "meta": "Pennsylvania adult ADHD diagnosis online. $199 virtual evaluation. Licensed, ADHD-CCSP–trained clinicians. Philadelphia, Pittsburgh & statewide telehealth.",
         "h1": "Online ADHD Diagnosis in Pennsylvania ($199 Evaluation)",
         "geo": "Pennsylvania",
         "intro": """<p>Pennsylvania adults juggling careers, education, or family responsibilities often suspect ADHD—but finding a specialist who understands adult presentation can take months.</p>

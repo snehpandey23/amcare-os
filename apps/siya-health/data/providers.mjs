@@ -74,7 +74,7 @@ export const PROVIDERS = [
     },
     whatToExpect: [
       { title: 'Free ADHD screening', text: 'a short, honest check-in to see if evaluation is a sensible next step.' },
-      { title: 'Meet & Greet', text: 'ask questions, learn how telehealth visits work, and see if Siya feels like a fit—no pressure.' },
+      { title: 'First telehealth visit', text: 'ask questions, learn how telehealth visits work, and see if Siya feels like a fit—no pressure.' },
       { title: 'Full evaluation', text: 'typically 60–90 minutes with a licensed, ADHD-CCSP–trained clinician; history, standardized tools, and discussion of diagnosis and options.' },
       { title: 'Ongoing care', text: 'follow-up tuned to medication monitoring, dose adjustments, or coaching referrals as your plan evolves.' },
     ],
@@ -95,7 +95,7 @@ export const PROVIDERS = [
     ],
     finalCta: {
       title: 'Ready to stop guessing?',
-      subtitle: 'Start with a free screening—or book a Meet & Greet if you want human answers first.',
+      subtitle: 'Start with a free screening—or Talk to a Clinician if you want human answers first.',
     },
     disclaimer:
       'This page describes our practice philosophy and typical workflows; it is not a guarantee of any clinical outcome. Diagnosis and treatment require an individual evaluation. Eligibility, prescribing, and follow-up depend on medical history, state law, and clinician judgment.',
@@ -297,7 +297,7 @@ export const PROVIDERS = [
     ],
     finalCta: {
       title: 'Your mind doesn’t have to feel this loud forever',
-      subtitle: 'Screening is free. Meet & Greets are human. Evaluations are thorough.',
+      subtitle: 'Screening is free. Intro visits are human. Evaluations are thorough.',
     },
     disclaimer:
       'This page describes our clinical philosophy, not a guarantee of outcomes. Treatment is individualized within licensed medical scope; some patients may require in-person care or higher levels of care than telehealth can offer. Emergency mental health crises require calling 988 or 911.',

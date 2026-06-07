@@ -1,6 +1,6 @@
 # CTA Audit — Siya Health
 
-Generated: 2026-06-07T11:20:15.449Z
+Generated: 2026-06-07T12:24:18.909Z
 
 > Audit-only deliverable. No pages were modified. Footer CTAs are inventoried but flagged as frozen per prior sprints.
 
@@ -12,18 +12,18 @@ Scanned **166** indexable pages (per `data/website-inventory.json`).
 
 | Metric | Value |
 |--------|------:|
-| Total CTA instances | 1163 |
-| Unique CTA labels | 67 |
-| Unique CTA patterns (label + URL + type + zone) | 102 |
-| Booking label variants | 7 |
-| Instances to **KEEP** | 321 |
-| Instances to **CONSOLIDATE** | 525 |
-| Instances to **REMOVE** | 317 |
-| Pages with >3 CTAs in `<main>` | 27 |
-| Pages with duplicate booking in `<main>` | 20 |
-| **Chaos score** (higher = worse) | **354** |
+| Total CTA instances | 1173 |
+| Unique CTA labels | 69 |
+| Unique CTA patterns (label + URL + type + zone) | 103 |
+| Booking label variants | 9 |
+| Instances to **KEEP** | 323 |
+| Instances to **CONSOLIDATE** | 582 |
+| Instances to **REMOVE** | 268 |
+| Pages with >3 CTAs in `<main>` | 28 |
+| Pages with duplicate booking in `<main>` | 21 |
+| **Chaos score** (higher = worse) | **379** |
 
-**Fragmentation:** 67 distinct labels and 7 booking variants across 166 pages — far above the target **3-slot** system. Prior UX sprint reduced buttons (~925→704) but label/URL duplication remains.
+**Fragmentation:** 69 distinct labels and 9 booking variants across 166 pages — far above the target **3-slot** system. Prior UX sprint reduced buttons (~925→704) but label/URL duplication remains.
 
 ## Recommended final CTA system
 
@@ -37,22 +37,22 @@ Scanned **166** indexable pages (per `data/website-inventory.json`).
 
 | Label | URL | Type | Zone | Count | Pages (sample) | Recommendation |
 |-------|-----|------|------|------:|----------------|----------------|
-| Talk to a Clinician | `https://book.carepatron.com/Siya-Health` | booking | nav | 204 | `/`, `/about`, `/answers`… | **CONSOLIDATE** (primary) |
-| Talk to a Clinician | `https://book.carepatron.com/Siya-Health` | booking | footer | 161 | `/`, `/about`, `/adhd-care`… | **CONSOLIDATE** (primary) |
-| Free ADHD screening | `/adhd-screening` | screening | footer-links | 160 | `/`, `/about`, `/adhd-care`… | **KEEP** |
-| Siya Circle | `https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl` | newsletter | footer-links | 160 | `/`, `/about`, `/adhd-care`… | **KEEP** (newsletter) |
+| Talk to a Clinician | `https://book.carepatron.com/Siya-Health` | booking | nav | 256 | `/`, `/about`, `/adhd-evaluation-cost`… | **CONSOLIDATE** (primary) |
+| Talk to a Clinician | `https://book.carepatron.com/Siya-Health` | booking | footer | 162 | `/`, `/about`, `/adhd-care`… | **CONSOLIDATE** (primary) |
+| Free ADHD screening | `/adhd-screening` | screening | footer-links | 161 | `/`, `/about`, `/adhd-care`… | **KEEP** |
+| Siya Circle | `https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl` | newsletter | footer-links | 161 | `/`, `/about`, `/adhd-care`… | **KEEP** (newsletter) |
 | Talk to a Clinician | `https://book.carepatron.com/Siya-Health` | booking | main | 113 | `/`, `/adhd-screening`, `/answers/adderall-vs-vyvanse-adults`… | **REMOVE** |
 | Book ADHD Evaluation | `https://book.carepatron.com/Siya-Health` | booking | nav | 54 | `/adhd-care`, `/adhd-diagnosis-austin`, `/adhd-diagnosis-florida`… | **CONSOLIDATE** (primary) |
-| Start Free Screening | `/adhd-screening` | screening | nav | 50 | `/answers/adderall-vs-vyvanse-adults`, `/answers/adhd-in-men`, `/answers/adhd-in-women`… | **REMOVE** |
-| Talk to a Clinician | `https://book.carepatron.com/Siya-Health` | booking | main | 36 | `/about`, `/adhd-diagnosis-austin`, `/adhd-diagnosis-florida`… | **CONSOLIDATE** (primary) |
+| Talk to a Clinician | `https://book.carepatron.com/Siya-Health` | booking | main | 27 | `/about`, `/adhd-diagnosis-austin`, `/adhd-diagnosis-florida`… | **CONSOLIDATE** (primary) |
 | Free ADHD screening (not a diagnosis) | `/adhd-screening` | screening | main | 25 | `/answers/adderall-vs-vyvanse-adults`, `/answers/adhd-in-men`, `/answers/adhd-in-women`… | **REMOVE** |
 | online ADHD screening | `/online-adhd-test` | screening | main | 17 | `/blog/adderall-for-adhd-how-it-works`, `/blog/adhd`, `/blog/adhd-evaluation-cost-texas`… | **REMOVE** |
 | Book ADHD Evaluation | `https://book.carepatron.com/Siya-Health` | booking | main | 15 | `/adhd-care`, `/blog/adderall-for-adhd-how-it-works`, `/blog/adult-adhd-symptoms-california`… | **REMOVE** |
 | Talk to a Clinician | `https://book.carepatron.com/Siya-Health` | provider-booking | main | 14 | `/providers/derek-timbs`, `/providers/dr-natasha-desai`, `/providers/dr-sneh-pandey`… | **CONSOLIDATE** (primary) |
 | View Services | `#services-supported` | secondary-other | main | 14 | `/providers/derek-timbs`, `/providers/dr-natasha-desai`, `/providers/dr-sneh-pandey`… | **REMOVE** |
-| Book ADHD Evaluation | `https://book.carepatron.com/Siya-Health` | booking | main | 11 | `/adhd-diagnosis-austin`, `/adhd-diagnosis-florida`, `/adhd-diagnosis-houston`… | **CONSOLIDATE** (primary) |
-| Free 2-minute screening | `/adhd-screening` | screening | main | 10 | `/adhd-diagnosis-austin`, `/adhd-diagnosis-florida`, `/adhd-diagnosis-houston`… | **CONSOLIDATE** (secondary) |
-| Free screening | `/adhd-screening` | screening | main | 10 | `/adhd-diagnosis-austin`, `/adhd-diagnosis-florida`, `/adhd-diagnosis-houston`… | **CONSOLIDATE** (secondary) |
+| Book ADHD evaluation | `https://book.carepatron.com/Siya-Health` | booking | main | 11 | `/adhd-diagnosis-austin`, `/adhd-diagnosis-florida`, `/adhd-diagnosis-houston`… | **CONSOLIDATE** (primary) |
+| Free 2-minute screening | `/adhd-screening` | screening | main | 11 | `/adhd-diagnosis-austin`, `/adhd-diagnosis-florida`, `/adhd-diagnosis-houston`… | **CONSOLIDATE** (secondary) |
+| Book ADHD evaluation online | `https://book.carepatron.com/Siya-Health` | booking | main | 11 | `/adhd-diagnosis-austin`, `/adhd-diagnosis-florida`, `/adhd-diagnosis-houston`… | **CONSOLIDATE** (primary) |
+| Free screening | `/adhd-screening` | screening | main | 11 | `/adhd-diagnosis-austin`, `/adhd-diagnosis-florida`, `/adhd-diagnosis-houston`… | **CONSOLIDATE** (secondary) |
 | Free ADHD Screening | `/adhd-screening` | screening | main | 3 | `/adhd-care` | **CONSOLIDATE** (secondary) |
 | Read the full clinical guide | `/blog/why-am-i-always-tired-causes-when-to-see-doctor` | content-crosslink | main | 3 | `/answers/afternoon-energy-crash-after-lunch`, `/answers/poor-sleep-feels-like-adhd`, `/answers/why-am-i-tired-even-after-sleeping` | **REMOVE** |
 | Free vs total testosterone: what patients should know (full guide) | `/blog/free-testosterone-vs-total-testosterone-what-patients-should-know` | content-crosslink | main | 3 | `/answers/high-shbg-low-free-testosterone`, `/answers/what-does-low-testosterone-feel-like`, `/answers/what-is-free-testosterone` | **REMOVE** |
@@ -117,7 +117,7 @@ Scanned **166** indexable pages (per `data/website-inventory.json`).
 | Tirzepatide vs semaglutide: full comparison guide | `/blog/tirzepatide-vs-semaglutide-which-is-better` | content-crosslink | main | 1 | `/answers/tirzepatide-vs-semaglutide` | **REMOVE** |
 | Read the full clinical guide | `/blog/food-noise-and-glp-1-what-it-means-and-what-helps` | content-crosslink | main | 1 | `/answers/weight-gain-after-stopping-ozempic` | **REMOVE** |
 | Medical weight loss with GLP-1 in Texas (full overview) | `/blog/medical-weight-loss-glp1-semaglutide-texas` | content-crosslink | main | 1 | `/answers/who-qualifies-glp-1-weight-loss` | **REMOVE** |
-| … | … | … | … | … | … | *22 more patterns in `data/cta-audit.json`* |
+| … | … | … | … | … | … | *23 more patterns in `data/cta-audit.json`* |
 
 ## Per-page-type rules
 
@@ -141,13 +141,14 @@ Scanned **166** indexable pages (per `data/website-inventory.json`).
 | `/adhd-care` | 6 | 1 | Book ADHD Evaluation; Explore follow-up pricing; Explore follow-up pricing |
 | `/adhd-diagnosis-austin` | 6 | 3 | — |
 | `/answers` | 6 | 0 | View all Metabolic Health guides; View all Energy & Fatigue guides; View all Hormone Health guides; View all ADHD & Focus guides… |
-| `/online-adhd-test` | 6 | 4 | — |
+| `/online-adhd-test` | 6 | 3 | Start free ADHD screening |
 | `/siya-circle` | 6 | 2 | Join Siya Circle; Join Siya Circle |
 | `/adhd-diagnosis-florida` | 5 | 3 | — |
 | `/adhd-diagnosis-houston` | 5 | 3 | — |
 | `/adhd-diagnosis-pennsylvania` | 5 | 3 | — |
 | `/adhd-diagnosis-philadelphia` | 5 | 3 | — |
 | `/adhd-diagnosis-texas` | 5 | 3 | — |
+| `/adhd-evaluation-cost` | 5 | 3 | — |
 | `/adhd-treatment-online` | 5 | 3 | — |
 | `/adult-adhd-diagnosis` | 5 | 3 | — |
 | `/blog` | 5 | 2 | Join Siya Circle; Browse all articles → |
@@ -165,10 +166,9 @@ Scanned **166** indexable pages (per `data/website-inventory.json`).
 
 ## Duplicate booking in `<main>` (same URL, multiple buttons)
 
-**20** pages shown (top 30 in JSON). Worst offenders:
+**21** pages shown (top 30 in JSON). Worst offenders:
 
 - `/book-appointment` — 4 booking CTAs in main
-- `/online-adhd-test` — 4 booking CTAs in main
 - `/about` — 3 booking CTAs in main
 - `/adhd-diagnosis-austin` — 3 booking CTAs in main
 - `/adhd-diagnosis-florida` — 3 booking CTAs in main
@@ -176,12 +176,13 @@ Scanned **166** indexable pages (per `data/website-inventory.json`).
 - `/adhd-diagnosis-pennsylvania` — 3 booking CTAs in main
 - `/adhd-diagnosis-philadelphia` — 3 booking CTAs in main
 - `/adhd-diagnosis-texas` — 3 booking CTAs in main
+- `/adhd-evaluation-cost` — 3 booking CTAs in main
 - `/adhd-treatment-online` — 3 booking CTAs in main
 - `/adult-adhd-diagnosis` — 3 booking CTAs in main
 - `/creyos-adhd-testing` — 3 booking CTAs in main
 - `/mens-health-longevity` — 3 booking CTAs in main
+- `/online-adhd-test` — 3 booking CTAs in main
 - `/primary-urgent-care` — 3 booking CTAs in main
-- `/telehealth` — 3 booking CTAs in main
 
 ## Exact removal list
 
@@ -190,7 +191,6 @@ CTA label + URL patterns flagged **REMOVE** sitewide (sorted by instance count):
 | Label | URL | Count | Note |
 |-------|-----|------:|------|
 | Talk to a Clinician | `https://book.carepatron.com/Siya-Health` | 113 | Mid-page booking — use hero OR final band only |
-| Start Free Screening | `/adhd-screening` | 50 | Screening CTA outside ADHD hero/symptoms |
 | Free ADHD screening (not a diagnosis) | `/adhd-screening` | 25 | Screening CTA outside ADHD hero/symptoms |
 | online ADHD screening | `/online-adhd-test` | 17 | Screening CTA outside ADHD hero/symptoms |
 | Book ADHD Evaluation | `https://book.carepatron.com/Siya-Health` | 15 | Extra main booking beyond hero/final band |
@@ -239,6 +239,7 @@ CTA label + URL patterns flagged **REMOVE** sitewide (sorted by instance count):
 | Non-stimulant ADHD medications explained (full guide) | `/blog/non-stimulant-adhd-medications-explained` | 1 | Styled content cross-link — use text links in body, not button CTAs |
 | Oral vs injectable weight-loss medications (full guide) | `/blog/oral-vs-injectable-weight-loss-medications` | 1 | Styled content cross-link — use text links in body, not button CTAs |
 | Oral vs topical minoxidil: which is right? (full guide) | `/blog/oral-vs-topical-minoxidil-which-is-right` | 1 | Styled content cross-link — use text links in body, not button CTAs |
+| Phentermine for weight loss: safety and effectiveness (full guide) | `/blog/phentermine-for-weight-loss-safety-and-effectiveness` | 1 | Styled content cross-link — use text links in body, not button CTAs |
 
 ## Booking label consolidation
 
@@ -246,6 +247,8 @@ Replace all variants with **Talk to a Clinician** → CarePatron canonical URL:
 
 - `Talk to a Clinician` (✓ canonical)
 - `Book ADHD Evaluation` (→ consolidate)
+- `Book ADHD evaluation` (→ consolidate)
+- `Book ADHD evaluation online` (→ consolidate)
 - `Talk to a Clinician →` (→ consolidate)
 - `Start Free ADHD Assessment` (→ consolidate)
 - `ADHD Care` (→ consolidate)
@@ -256,9 +259,9 @@ Replace all variants with **Talk to a Clinician** → CarePatron canonical URL:
 
 | Page type | Instances | KEEP | CONSOLIDATE | REMOVE |
 |-----------|----------:|-----:|------------:|-------:|
-| Health Guide | 454 | 130 | 145 | 179 |
+| Health Guide | 454 | 130 | 195 | 129 |
 | Blog Article | 335 | 104 | 157 | 74 |
-| Service Page | 116 | 26 | 72 | 18 |
+| Service Page | 126 | 28 | 79 | 19 |
 | Provider Profile | 64 | 14 | 35 | 15 |
 | Geo SEO Landing | 61 | 12 | 49 | 0 |
 | Blog Hub | 27 | 8 | 15 | 4 |

@@ -1,6 +1,6 @@
 # Final Predeploy Compliance Report
 
-Generated: 2026-06-07T11:23:10.388Z
+Generated: 2026-06-07T12:24:15.837Z
 
 ## Executive summary
 
@@ -15,8 +15,8 @@ Generated: 2026-06-07T11:23:10.388Z
 
 | Metric | Value |
 |--------|------:|
-| HTML pages | 163 |
-| Sitemap URLs | 163 |
+| HTML pages | 164 |
+| Sitemap URLs | 164 |
 | Broken internal links | 0 |
 | JSON-LD errors | 0 |
 | Duplicate title tags | 1 |

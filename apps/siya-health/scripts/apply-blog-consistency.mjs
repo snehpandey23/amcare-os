@@ -284,8 +284,8 @@ ${providerRemoved.slice(0, 15).map((r) => `- ${r.slug}`).join('\n')}${providerRe
 All articles now use one exit band:
 
 - **Title:** Not sure where to start?
-- **Body:** A Meet & Greet can help you understand your options and choose the right care path.
-- **Default primary:** Book a Meet & Greet
+- **Body:** Talk to a Clinician can help you understand your options and choose the right care path.
+- **Default primary:** Talk to a Clinician
 - **Default secondary:** Explore Care Options (topic service page)
 - **ADHD-specific primary:** Book ADHD Evaluation
 - **ADHD-specific secondary:** Start Free Screening

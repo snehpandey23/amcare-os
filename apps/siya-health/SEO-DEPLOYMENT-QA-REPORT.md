@@ -1,15 +1,15 @@
 # SEO Deployment QA Report
 
-Generated: 2026-06-07T11:23:10.340Z
+Generated: 2026-06-07T12:24:15.787Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| HTML pages scanned | 163 |
-| Sitemap URLs | 163 |
+| HTML pages scanned | 164 |
+| Sitemap URLs | 164 |
 | Pages with Meet & Greet in nav | 0 |
-| Non-ADHD pages still referencing adhd-screening | 68 |
+| Non-ADHD pages still referencing adhd-screening | 69 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
 
@@ -39,9 +39,10 @@ Generated: 2026-06-07T11:23:10.340Z
 - **Default secondary CTA:** Explore Care Options → `#services` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, `adhd-screening.html`
 
-### Non-ADHD pages still containing `adhd-screening` (68)
+### Non-ADHD pages still containing `adhd-screening` (69)
 
 - `about.html`
+- `adhd-evaluation-cost.html`
 - `blog/adderall-ir-vs-xr-adults.html`
 - `blog/adhd-evaluation-california-online-vs-in-person.html`
 - `blog/adhd-evaluation-cost-california.html`
@@ -110,7 +111,7 @@ Generated: 2026-06-07T11:23:10.340Z
 - `terms.html`
 - `weight-loss-metabolic-health.html`
 
-### All pages with any `adhd-screening` reference (161)
+### All pages with any `adhd-screening` reference (162)
 
 - `about.html`
 - `adhd-care.html`
@@ -120,6 +121,7 @@ Generated: 2026-06-07T11:23:10.340Z
 - `adhd-diagnosis-pennsylvania.html`
 - `adhd-diagnosis-philadelphia.html`
 - `adhd-diagnosis-texas.html`
+- `adhd-evaluation-cost.html`
 - `adhd-screening.html`
 - `adhd-treatment-online.html`
 - `adult-adhd-diagnosis.html`
@@ -151,9 +153,8 @@ Generated: 2026-06-07T11:23:10.340Z
 - `answers/how-long-adhd-evaluation.html`
 - `answers/how-much-does-adhd-testing-cost.html`
 - `answers/how-online-prescriptions-work.html`
-- `answers/index.html`
 
-_…and 121 more (expected on ADHD funnels)._
+_…and 122 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 
@@ -185,6 +186,7 @@ _None detected in static HTML scan._
 ## Orphan pages (low inbound links, sample)
 
 - `adhd-diagnosis-florida.html`
+- `adhd-evaluation-cost.html`
 - `intake/index.html`
 - `siya-circle.html`
 - `visual-components.html`

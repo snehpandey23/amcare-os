@@ -128,7 +128,7 @@ function auditBlogArticle(rel, html) {
 
 function scanCopyInconsistencies(allHtml) {
   const patterns = [
-    { label: 'Schedule Meet & Greet', re: />Schedule Meet &amp; Greet</ },
+    { label: 'Schedule Meet & Greet (legacy)', re: />Schedule Meet &amp; Greet</ },
     { label: 'Explore care options (lowercase)', re: />Explore care options</ },
     { label: 'Take Free Screening', re: />Take Free Screening</ },
     { label: 'Clinical Answers nav', re: />Clinical Answers</ },

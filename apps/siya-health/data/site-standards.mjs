@@ -29,6 +29,9 @@ export const STATES_INLINE =
 
 export const FOOTER_STATES_LINE = `Board-certified providers providing telehealth care across ${STATES_INLINE}.`;
 
+/** Mixed MD/NP/PA roster pages — avoid implying all clinicians are board-certified physicians. */
+export const MIXED_ROSTER_CLINICIAN_PHRASE = 'Licensed, ADHD-CCSP–trained clinicians';
+
 /** Canonical care-delivery pricing — NOT ADHD-specific; applies across service lines. */
 export const PRICING = {
   path: '/pricing',
@@ -131,6 +134,10 @@ export const LEGACY_MARKETPLACE_PHRASES = [
   { from: /membership-based care/gi, to: 'physician-led telehealth' },
   { from: /concierge membership/gi, to: 'transparent pricing' },
   { from: /Join the Waitlist/gi, to: CTA_SYSTEM.primary.label },
+  { from: /Join Waitlist/gi, to: CTA_SYSTEM.primary.label },
+  { from: /Board-certified, ADHD-CCSP trained providers/gi, to: MIXED_ROSTER_CLINICIAN_PHRASE },
+  { from: /membership plans/gi, to: 'follow-up plan pricing' },
+  { from: /\bdiscovery call\b/gi, to: 'free ADHD screening' },
 ];
 
 /** Canonical provider positioning — generated from provider-canonical.json */

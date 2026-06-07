@@ -135,9 +135,9 @@ export const PHASE5_EXTRA_SECTIONS = {
   'meet-and-greet-telehealth-expectations': [
     {
       id: 'search-themes',
-      heading: 'Questions worth asking in a Meet & Greet',
+      heading: 'Questions worth asking in a first telehealth visit',
       paragraphs: [
-        'Ask about evaluation length, whether cognitive testing is included, how refills work for ADHD or weight-loss pathways, and typical wait times for follow-up. Clarify whether labs or sleep studies are coordinated locally and how pricing differs between evaluation-only and membership follow-up.',
+        'Ask about evaluation length, whether cognitive testing is included, how refills work for ADHD or weight-loss pathways, and typical wait times for follow-up. Clarify whether labs or sleep studies are coordinated locally and how pricing differs between evaluation-only and follow-up plan pricing.',
         'If you are exploring GLP-1 therapy, ask about branded versus compounded policies, titration support, and nausea management protocols. If exploring men’s health, ask how sleep apnea screening fits before testosterone discussion.',
       ],
     },

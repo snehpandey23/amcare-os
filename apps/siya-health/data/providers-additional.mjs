@@ -75,7 +75,7 @@ export const ADDITIONAL_PROVIDERS = [
     ],
     finalCta: {
       title: 'Ready for primary care that feels personal?',
-      subtitle: 'Book a Meet & Greet to see if we are a fit for your Florida telehealth needs.',
+      subtitle: 'Talk to a Clinician to see if we are a fit for your Florida telehealth needs.',
     },
     disclaimer:
       'This page describes our clinical approach; it is not a guarantee of diagnosis or treatment. Eligibility depends on Florida licensure, medical history, and clinical appropriateness.',
@@ -161,7 +161,7 @@ export const ADDITIONAL_PROVIDERS = [
     ],
     finalCta: {
       title: 'Start with a screening or a conversation',
-      subtitle: 'Meet & Greets are low-pressure—ask anything before you commit to an evaluation.',
+      subtitle: 'Intro visits are low-pressure—ask anything before you commit to an evaluation.',
     },
     disclaimer:
       'This page is educational and describes typical NP-led workflows. Diagnosis and prescribing require individual evaluation and depend on Pennsylvania licensure, scope of practice, and collaborative agreements.',
@@ -248,7 +248,7 @@ export const ADDITIONAL_PROVIDERS = [
     ],
     finalCta: {
       title: 'Ready for a structured weight or hormone plan?',
-      subtitle: 'Book a Meet & Greet—we will confirm state eligibility and next steps.',
+      subtitle: 'Talk to a Clinician—we will confirm state eligibility and next steps.',
     },
     disclaimer:
       'This page describes typical NP-led metabolic workflows. Treatment requires individual evaluation. Medication availability varies by state law, medical history, and collaborative practice rules.',
@@ -333,7 +333,7 @@ export const ADDITIONAL_PROVIDERS = [
     ],
     finalCta: {
       title: 'Take the next step in medical weight loss',
-      subtitle: 'Book a Meet & Greet to confirm California eligibility and your care plan.',
+      subtitle: 'Talk to a Clinician to confirm California eligibility and your care plan.',
     },
     disclaimer:
       'This page is educational. Medical weight loss treatment requires individual evaluation. PA scope and prescribing follow California law and supervising physician protocols.',

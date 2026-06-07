@@ -1,8 +1,7 @@
 {
   "generated": "2026-06-07",
-  "totalPages": 163,
+  "totalPages": 164,
   "zeroInbound": [
-    "/adhd-diagnosis-florida",
     "/intake",
     "/privacy-policy",
     "/siya-circle",
@@ -10,10 +9,6 @@
     "/visual-components"
   ],
   "under3Inbound": [
-    {
-      "path": "/adhd-diagnosis-florida",
-      "count": 0
-    },
     {
       "path": "/intake",
       "count": 0
@@ -95,10 +90,6 @@
       "count": 2
     },
     {
-      "path": "/adhd-diagnosis-texas",
-      "count": 2
-    },
-    {
       "path": "/answers/afternoon-energy-crash-after-lunch",
       "count": 2
     },
@@ -171,37 +162,37 @@
     {
       "path": "/",
       "outboundCount": 34,
-      "uniqueInbound": 161
+      "uniqueInbound": 162
     },
     {
       "path": "/adhd-care",
       "outboundCount": 35,
-      "uniqueInbound": 155
+      "uniqueInbound": 156
     },
     {
       "path": "/blog",
       "outboundCount": 44,
-      "uniqueInbound": 155
+      "uniqueInbound": 156
     },
     {
       "path": "/blog/adhd",
       "outboundCount": 56,
-      "uniqueInbound": 106
+      "uniqueInbound": 96
     },
     {
       "path": "/answers",
       "outboundCount": 76,
-      "uniqueInbound": 155
+      "uniqueInbound": 145
     },
     {
       "path": "/about",
       "outboundCount": 33,
-      "uniqueInbound": 161
+      "uniqueInbound": 162
     },
     {
       "path": "/weight-loss-metabolic-health",
       "outboundCount": 40,
-      "uniqueInbound": 155
+      "uniqueInbound": 156
     }
   ],
   "topSuggestions": [],
@@ -1242,58 +1233,59 @@
     ]
   },
   "inboundCounts": {
-    "/about": 161,
-    "/": 161,
-    "/telehealth": 156,
-    "/adhd-care": 155,
-    "/answers": 155,
-    "/blog": 155,
-    "/weight-loss-metabolic-health": 155,
-    "/labs": 154,
-    "/providers": 129,
-    "/adhd-screening": 107,
-    "/blog/adhd": 106,
-    "/blog/weight-loss": 100,
-    "/answers/signs-of-adult-adhd": 96,
-    "/legal/cookie-policy": 95,
-    "/legal": 95,
-    "/legal/notice-of-privacy-practices": 95,
-    "/legal/privacy-policy": 95,
-    "/legal/terms-of-use": 95,
-    "/mens-health-longevity": 94,
-    "/blog/telehealth": 92,
-    "/answers/what-is-insulin-resistance": 91,
-    "/answers/why-am-i-tired-even-after-sleeping": 90,
-    "/blog/how-to-know-if-you-have-adhd-adult": 84,
-    "/answers/is-online-adhd-diagnosis-legitimate": 83,
-    "/pricing": 83,
-    "/book-appointment": 81,
+    "/about": 162,
+    "/": 162,
+    "/telehealth": 157,
+    "/adhd-care": 156,
+    "/blog": 156,
+    "/weight-loss-metabolic-health": 156,
+    "/answers": 145,
+    "/labs": 144,
+    "/providers": 119,
+    "/adhd-screening": 108,
+    "/blog/adhd": 96,
+    "/blog/weight-loss": 90,
+    "/answers/signs-of-adult-adhd": 86,
+    "/legal/cookie-policy": 85,
+    "/legal": 85,
+    "/legal/notice-of-privacy-practices": 85,
+    "/legal/privacy-policy": 85,
+    "/legal/terms-of-use": 85,
+    "/mens-health-longevity": 84,
+    "/blog/telehealth": 82,
+    "/answers/what-is-insulin-resistance": 81,
+    "/answers/why-am-i-tired-even-after-sleeping": 80,
+    "/blog/how-to-know-if-you-have-adhd-adult": 74,
+    "/answers/is-online-adhd-diagnosis-legitimate": 73,
     "/prescriptions": 73,
+    "/pricing": 73,
     "/primary-urgent-care": 73,
-    "/legal/controlled-substance-treatment-agreement": 42,
+    "/book-appointment": 71,
     "/blog/is-online-adhd-diagnosis-legit": 37,
     "/answers/can-adhd-be-diagnosed-online": 36,
     "/blog/adhd-symptoms-overlooked": 34,
     "/answers/starting-adhd-medication-adults": 33,
+    "/legal/controlled-substance-treatment-agreement": 32,
     "/answers/what-is-food-noise": 29,
-    "/providers/dr-sneh-pandey": 25,
+    "/online-adhd-test": 29,
     "/blog/food-noise-and-glp-1-what-it-means-and-what-helps": 23,
     "/blog/insulin-resistance-and-weight-loss-clinician-overview": 23,
-    "/online-adhd-test": 19,
     "/blog/why-am-i-always-tired-causes-when-to-see-doctor": 18,
     "/answers/brain-fog-after-eating": 17,
-    "/providers/dr-natasha-desai": 17,
     "/answers/what-does-low-testosterone-feel-like": 16,
+    "/providers/dr-sneh-pandey": 16,
+    "/adult-adhd-diagnosis": 15,
     "/answers/glp-1-side-effects": 14,
-    "/providers/dr-vanessa-urbina": 14,
     "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know": 13,
     "/blog/glp1-side-effects-and-how-to-manage-them": 13,
+    "/creyos-adhd-testing": 13,
     "/answers/semaglutide-weight-loss-how-it-works": 12,
     "/answers/what-is-free-testosterone": 12,
     "/blog/how-to-safely-get-prescriptions-online": 12,
     "/blog/semaglutide-for-weight-loss-how-it-works": 12,
-    "/providers/dr-swati-pandey": 12,
-    "/providers/megan-wunderlich": 12,
+    "/adhd-diagnosis-florida": 11,
+    "/adhd-diagnosis-texas": 11,
+    "/adhd-evaluation-cost": 11,
     "/answers/medical-weight-loss-vs-dieting": 11,
     "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign": 11,
     "/answers/can-sleep-apnea-cause-fatigue": 10,
@@ -1301,6 +1293,8 @@
     "/answers/when-is-testosterone-therapy-appropriate": 10,
     "/answers/who-qualifies-glp-1-weight-loss": 10,
     "/blog/how-adhd-medication-is-prescribed-online": 10,
+    "/providers/dr-natasha-desai": 10,
+    "/providers/dr-vanessa-urbina": 10,
     "/answers/testosterone-and-adhd-overlap": 9,
     "/blog/online-adhd-diagnosis-texas": 9,
     "/providers/derek-timbs": 9,
@@ -1316,6 +1310,8 @@
     "/answers/is-adhd-medication-safe-long-term": 7,
     "/answers/what-included-199-adhd-evaluation": 7,
     "/blog/adhd-evaluation-cost-texas": 7,
+    "/providers/dr-swati-pandey": 7,
+    "/providers/megan-wunderlich": 7,
     "/answers/adderall-vs-vyvanse-adults": 6,
     "/answers/how-online-prescriptions-work": 6,
     "/answers/meet-and-greet-telehealth-expectations": 6,
@@ -1323,7 +1319,6 @@
     "/answers/trt-monitoring-requirements": 6,
     "/blog/online-adhd-diagnosis-california": 6,
     "/providers/wendy-delgado": 6,
-    "/adult-adhd-diagnosis": 5,
     "/answers/adhd-vs-burnout": 5,
     "/answers/compounded-vs-branded-glp-1": 5,
     "/answers/how-long-adhd-evaluation": 5,
@@ -1366,9 +1361,7 @@
     "/blog/tirzepatide-vs-semaglutide-which-is-better": 3,
     "/blog/vyvanse-vs-adderall-differences": 3,
     "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd": 3,
-    "/creyos-adhd-testing": 3,
     "/adhd-diagnosis-houston": 2,
-    "/adhd-diagnosis-texas": 2,
     "/answers/afternoon-energy-crash-after-lunch": 2,
     "/answers/oral-vs-injectable-weight-loss-meds": 2,
     "/answers/phentermine-weight-loss-safety": 2,
@@ -1399,7 +1392,6 @@
     "/blog/how-mental-health-affects-weight-loss-outcomes": 1,
     "/blog/how-to-choose-adhd-provider-california": 1,
     "/blog/long-term-weight-loss-medications-what-to-expect": 1,
-    "/adhd-diagnosis-florida": 0,
     "/intake": 0,
     "/privacy-policy": 0,
     "/siya-circle": 0,
