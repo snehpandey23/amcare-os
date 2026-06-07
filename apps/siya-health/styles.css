@@ -4395,47 +4395,6 @@ a.asrs-interest-btn:hover {
   .pricing-grid-ongoing { grid-template-columns: 1fr 1fr; }
 }
 
-/* ADHD medical director message */
-.adhd-md-message-section .section-header {
-  margin-bottom: 28px;
-}
-.adhd-md-message {
-  display: grid;
-  gap: 28px;
-  align-items: start;
-  max-width: 820px;
-  margin: 0 auto;
-}
-@media (min-width: 768px) {
-  .adhd-md-message { grid-template-columns: 140px 1fr; align-items: center; }
-}
-.adhd-md-message img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin: 0 auto;
-}
-@media (min-width: 768px) {
-  .adhd-md-message img { width: 140px; height: 140px; margin: 0; }
-}
-.adhd-md-message-credentials {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--primary);
-  margin: 0 0 16px;
-  line-height: 1.5;
-}
-.adhd-md-message-body p {
-  font-size: 0.98rem;
-  line-height: 1.7;
-  color: var(--text-secondary);
-  margin: 0 0 14px;
-}
-.adhd-md-message-body p:last-child {
-  margin-bottom: 0;
-}
-
 /* FAQ dual CTA */
 .faq-accordion-section .faq-accordion-cta-buttons {
   display: flex;
