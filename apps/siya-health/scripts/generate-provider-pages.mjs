@@ -23,7 +23,10 @@ import {
   PROVIDER_LICENSE_DISCLAIMER,
   STATES_INLINE,
 } from '../data/site-standards.mjs';
+import { getProviderHubPresentation } from '../data/provider-hub-presentation.mjs';
 import { renderLegalFooter } from './site-chrome.mjs';
+
+const MEET_GREET_BOOKING_LINK = BOOKING_LINK;
 
 const STATE_ABBREV = {
   California: 'CA',
@@ -501,15 +504,26 @@ ${testimonialBlock}
 `;
 }
 
+function formatLicensedStatesLine(statesLicensed) {
+  if (!statesLicensed?.length) return '';
+  return `Licensed in: ${statesLicensed.join(' · ')}`;
+}
+
 function renderProviderIndexCard(p) {
-  const focusTags = p.clinicalFocus
-    .slice(0, 3)
-    .map((f) => {
-      const text = f.replace(/<[^>]+>/g, '').split('—')[0].trim();
-      return `<span class="provider-index-tag">${esc(text)}</span>`;
-    })
+  const hub = getProviderHubPresentation(p.slug);
+  const role = hub?.role ?? p.role;
+  const credentialsLine = hub?.credentials
+    ? `<p class="provider-index-credentials">${esc(hub.credentials)}</p>`
+    : '';
+  const focusItems = hub?.focus ?? p.clinicalFocus.map((f) => f.replace(/<[^>]+>/g, '').split('—')[0].trim());
+  const focusTags = focusItems
+    .map((text) => `<span class="provider-index-tag">${esc(text)}</span>`)
     .join('');
-  const stateChipsInner = p.stateAbbreviations.map((s) => renderLicenseStateChip(s)).join(' ');
+  const licensedStatesLine = formatLicensedStatesLine(p.statesLicensed);
+  const statesMarkup = licensedStatesLine
+    ? `<p class="provider-index-states">${esc(licensedStatesLine)}</p>`
+    : '';
+  const description = hub?.description ?? p.patientFit.deck;
   const hubTags = getProviderHubFilterTags(p);
   const accepting = p.acceptingNewPatients
     ? '<span class="provider-accepting-badge provider-accepting-badge--hub">Accepting patients</span>'
@@ -517,13 +531,13 @@ function renderProviderIndexCard(p) {
   const photoMarkup = renderProviderPhotoMarkup(p, { width: 120, height: 120, loading: 'lazy' });
   return `            <article class="provider-index-card" data-provider-type="${p.providerType || 'physician'}" data-states="${hubTags.states.join(',')}" data-services="${hubTags.services.join(',')}">
               ${photoMarkup}
-              <h2><a href="/providers/${p.slug}">${esc(p.name)}</a></h2>
-              <p class="provider-index-role">${esc(p.role)}${accepting}</p>
-              <div class="provider-state-chips" aria-label="Licensed states">${stateChipsInner}</div>
-              <p class="provider-license-disclaimer provider-license-disclaimer--hub">${esc(PROVIDER_LICENSE_DISCLAIMER)}</p>
+              <h2><a href="/providers/${p.slug}">${esc(p.displayName || p.name)}</a></h2>
+              <p class="provider-index-role">${esc(role)}${accepting}</p>
+              ${credentialsLine}
+              ${statesMarkup}
               <div class="provider-index-tags">${focusTags}</div>
-              <p class="provider-index-teaser">${esc(p.patientFit.deck)}</p>
-              <a class="button secondary" href="/providers/${p.slug}">View profile</a>
+              <p class="provider-index-teaser">${esc(description)}</p>
+              <a class="button secondary" href="/providers/${p.slug}">View Profile</a>
             </article>`;
 }
 
@@ -649,11 +663,21 @@ function renderProvidersIndex() {
         <div class="container">
           <div class="section-header">
             <h1>Our Care Team</h1>
-            <p class="lead">Contracted physicians and advanced practice providers actively seeing patients via Siya Health telehealth—licensed where listed.</p>
+            <p class="lead">Meet the physicians and advanced practice clinicians who support Siya Health patients across ADHD care, metabolic health, weight management, primary care, mental health, and telehealth.</p>
+            <p>Our team brings different training backgrounds, but shares one standard: thoughtful evaluation, clear communication, and patient-centered care.</p>
           </div>
           <div class="provider-lp-ctas">
-            <a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Talk to a Clinician</a>
-            <a class="button secondary" href="/adhd-care">Explore ADHD care</a>
+            <a class="button" href="${MEET_GREET_BOOKING_LINK}" target="_blank" rel="noopener">Book a Meet &amp; Greet</a>
+            <a class="button secondary" href="/telehealth">Explore Services</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section provider-hub-positioning" id="how-care-team-works">
+        <div class="container">
+          <div class="section-header">
+            <h2>How our care team works</h2>
+            <p class="lead">Siya Health uses a physician-led care model. Depending on your state, service line, and clinical needs, you may work with a physician, nurse practitioner, or physician assistant. Every care pathway is designed around structured evaluation, safety, and clear follow-up.</p>
           </div>
         </div>
       </section>

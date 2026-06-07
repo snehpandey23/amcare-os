@@ -1,6 +1,6 @@
 # Provider Expansion — Implementation Report
 
-Generated: 2026-06-06T07:02:00.554Z
+Generated: 2026-06-07T07:20:59.848Z
 
 ## Summary
 
@@ -30,7 +30,7 @@ Generated: 2026-06-06T07:02:00.554Z
 
 | Service | Path | Providers | Count |
 |---------|------|-----------|------:|
-| adhd-care | /adhd-care | Dr. Sneh Pandey, MD; Dr. Natasha Desai, MD; Dr. Swati Pandey, MD; Megan Wunderlich, FNP-C | 4 |
+| adhd-care | /adhd-care | Dr. Sneh Pandey, MD; Dr. Vanessa Urbina, MD; Dr. Natasha Desai, MD; Dr. Swati Pandey, MD; Megan Wunderlich, FNP-C; Wendy Delgado, PA-C | 6 |
 | telehealth | /telehealth | Dr. Sneh Pandey, MD; Dr. Natasha Desai, MD; Dr. Swati Pandey, MD; Dr. Vanessa Urbina, MD; Megan Wunderlich, FNP-C; Derek Timbs, FNP-BC; Wendy Delgado, PA-C | 7 |
 | weight-loss-metabolic-health | /weight-loss-metabolic-health | Dr. Sneh Pandey, MD; Dr. Vanessa Urbina, MD; Derek Timbs, FNP-BC; Wendy Delgado, PA-C | 4 |
 | primary-urgent-care | /primary-urgent-care | Dr. Vanessa Urbina, MD; Dr. Natasha Desai, MD; Dr. Sneh Pandey, MD | 3 |
@@ -42,12 +42,12 @@ Generated: 2026-06-06T07:02:00.554Z
 |--------|-------------:|
 | /providers hub | 167 |
 | /providers/dr-sneh-pandey | 26 |
-| /providers/dr-vanessa-urbina | 9 |
+| /providers/dr-vanessa-urbina | 14 |
 | /providers/dr-natasha-desai | 18 |
 | /providers/dr-swati-pandey | 13 |
 | /providers/megan-wunderlich | 12 |
 | /providers/derek-timbs | 9 |
-| /providers/wendy-delgado | 7 |
+| /providers/wendy-delgado | 12 |
 
 ## Hub features
 

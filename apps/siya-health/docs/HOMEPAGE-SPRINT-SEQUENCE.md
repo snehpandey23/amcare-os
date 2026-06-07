@@ -87,7 +87,7 @@ Rollback: **Low** = revert HTML/CSS/JS safely · **Med** = needs legal/content r
 | **P0-2** Hero CTA simplify | Founder sign-off on single primary CTA | **P2-2** reintroduces secondary CTA later; with **P0-8** nav change confounds above-fold measurement | **P0-3** (same pattern top + bottom) | **XS** | **H** | M | Low |
 | **P0-3** Final CTA band | **P0-2** (same decision) | Same as P0-2 | **P0-2** | **XS** | M | L | Low |
 | **P0-4** Trust compliance reshape | Draft relocated disclosures; **legal review recommended** before ship | **P1-7** (FAQ de-legaling) — same theme, don't ship together; **P2-5** overlaps scope | **P0-6, P0-5, P0-7** (voice bundle) OR isolate alone for clean trust metric | **S** | M | **VH** | **Med** (compliance) |
-| **P0-5** Remove Siya Circle™ | None | None | Any sprint as zero-cost tagalong | **XS** | L | L | Low |
+| **P0-5** Remove Siya Circle | None | None | Any sprint as zero-cost tagalong | **XS** | L | L | Low |
 | **P0-6** How care works rename | None | **P1-5** edits same section (ship P0-6 first, P1-5 later); **P2-4** further edits pathways/steps | **P0-7, P0-5** (copy voice) | **XS** | M | **H** | Low |
 | **P0-7** Medical home copy | None | None | **P0-6** | **XS** | L | M | Low |
 | **P0-8** Nav font bump | None | Confounds Sprint A hero/CTA experiment if shipped together | Ship **alone** or after Sprint A measurement window | **XS** | L | M | Low |
@@ -219,7 +219,7 @@ Revert: remove query param from links; restore hero/final secondary buttons. No 
 |----|------|--------|------------|-------|
 | P0-4 | Trust section compliance reshape | S | M | VH |
 | P0-6 | "How care works" + de-ADHD step 1 | XS | M | H |
-| P0-5 | Siya Circle™ removal | XS | L | L |
+| P0-5 | Siya Circle removal | XS | L | L |
 | P0-7 | "Medical home" → clearer telehealth title | XS | L | M |
 | P1-2 | Provider photos 128–160px, card affordance, warmer H2 | M | M | VH |
 | P1-9 | Testimonial subhead alignment | XS | L | M |

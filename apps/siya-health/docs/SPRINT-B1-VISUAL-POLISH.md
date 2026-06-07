@@ -44,7 +44,7 @@
 | Membership band copy / CTA prominence | Mid-funnel conversion narrative |
 | Hero / final CTA visual weight changes | Confounds Sprint A measurement |
 | Remove/reorder footer “Talk to a Clinician” | CTA hierarchy |
-| Siya Circle™ copy change | Copy change, not visual-only |
+| Siya Circle copy change | Copy change, not visual-only |
 
 ---
 

@@ -1,15 +1,18 @@
 /**
- * Siya Circle™ Phase 0 — newsletter & topic-demand learning (non-PHI).
- * GHL list/tag integration: set ghlFormId or ghlWebhookUrl when ops configures.
+ * Siya Circle — newsletter signup routes to GHL (no on-site email capture).
  */
 
 export const SIYA_CIRCLE_LIST_TAG = 'Siya Circle';
 
-/** @type {null | string} TODO: Create dedicated GHL newsletter form; map fields + tags in admin */
-export const SIYA_CIRCLE_GHL_FORM_ID = null;
+/** Direct GHL widget form URL (all join CTAs) */
+export const SIYA_CIRCLE_GHL_FORM_URL =
+  'https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl';
 
-/** @type {null | string} TODO: Optional GHL inbound webhook URL for contact create + tags */
-export const SIYA_CIRCLE_GHL_WEBHOOK_URL = null;
+export const SIYA_CIRCLE_GHL_FORM_ID = 'HmvqrDVq3tq3qv6rkCjl';
+
+export const SIYA_CIRCLE_JOIN_TRACK = 'siya-circle-join-click';
+
+export const SIYA_CIRCLE_JOIN_LINK_ATTRS = `href="${SIYA_CIRCLE_GHL_FORM_URL}" target="_blank" rel="noopener noreferrer" data-siya-track="${SIYA_CIRCLE_JOIN_TRACK}"`;
 
 export const SIYA_CIRCLE_TOPICS = [
   {
@@ -58,27 +61,22 @@ export const SIYA_CIRCLE_RECOMMENDED_GUIDES = [
   { href: '/answers/what-does-low-testosterone-feel-like', label: 'What does low testosterone feel like?' },
 ];
 
-export function buildSiyaCircleClientConfig() {
-  return {
-    listTag: SIYA_CIRCLE_LIST_TAG,
-    ghlFormId: SIYA_CIRCLE_GHL_FORM_ID,
-    ghlWebhookUrl: SIYA_CIRCLE_GHL_WEBHOOK_URL,
-    ghlFormBase: 'https://link.yourmarketingai.com/widget/form/',
-    topics: SIYA_CIRCLE_TOPICS.map(({ id, label, analyticsEvent, ghlTag }) => ({
-      id,
-      label,
-      analyticsEvent,
-      ghlTag,
-    })),
-    integrationReady: Boolean(SIYA_CIRCLE_GHL_FORM_ID || SIYA_CIRCLE_GHL_WEBHOOK_URL),
-  };
+/** Signup CTA block for /siya-circle (no on-site form fields) */
+export function buildSiyaCircleSignupCtaHtml() {
+  return `            <div class="siya-circle-signup-cta">
+              <h2 id="signup-heading">Join Siya Circle</h2>
+              <p class="lead">Get practical health insights from Siya Health on focus, energy, weight, metabolic health, hormones, and everyday care.</p>
+              <p class="siya-circle-compliance">Siya Circle is for general education only. It does not provide diagnosis, treatment, medication advice, emergency care, or a provider-patient relationship. For personal medical concerns, <a href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">schedule a visit</a> with a licensed clinician. For emergencies, call 911.</p>
+              <a class="button" ${SIYA_CIRCLE_JOIN_LINK_ATTRS}>Join Siya Circle</a>
+              <p class="siya-circle-ghl-note">You&rsquo;ll be taken to our secure signup form.</p>
+            </div>`;
 }
 
 /** Compact promo band for hub pages */
 export const SIYA_CIRCLE_PROMO_HTML = `          <aside class="siya-circle-promo" aria-labelledby="siya-circle-promo-heading">
             <div class="siya-circle-promo-inner">
-              <h2 id="siya-circle-promo-heading">Join Siya Circle™</h2>
-              <p>Free clinician-informed health explainers—tell us what topics matter to you. General education only; not medical advice.</p>
-              <a class="button" href="/siya-circle">Join free →</a>
+              <h2 id="siya-circle-promo-heading">Join Siya Circle</h2>
+              <p>Free clinician-informed health explainers on focus, energy, weight, and everyday health. General education only; not medical advice.</p>
+              <a class="button" ${SIYA_CIRCLE_JOIN_LINK_ATTRS}>Join Siya Circle</a>
             </div>
           </aside>`;

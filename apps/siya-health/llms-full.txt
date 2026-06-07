@@ -1,6 +1,6 @@
 # Siya Health — Full AI Retrieval Index
 
-Generated: 2026-06-06
+Generated: 2026-06-07
 Total pages: 168
 
 ---
@@ -92,7 +92,7 @@ Total pages: 168
 
 - About Siya Health | Mission, Team &amp; How Care Works
   URL: https://siya.health/about
-  Summary: Siya Health is a membership-friendly telehealth practice for adult ADHD, weight, and whole-person care—built for people who were told to try harder instead of getting evaluated. California, Texas, Pen…
+  Summary: Siya Health is physician-led virtual care for adults seeking clear answers about focus, energy, weight, mood, metabolism, hormones, and everyday health. California, Texas, Pennsylvania, Florida.
 
 - Adult ADHD Diagnosis Online — Same-Week Evaluation ($199)
   URL: https://siya.health/adhd-care
@@ -881,9 +881,9 @@ Total pages: 168
   Summary: Meet Wendy Delgado, PA-C at Siya Health. GLP-1 and medical weight loss telehealth support in California.
   Topics: weight-loss, telehealth, pennsylvania
 
-- Siya Circle™ | Free Health Education Newsletter
+- Siya Circle | Free Health Education Newsletter
   URL: https://siya.health/siya-circle
-  Summary: Join Siya Circle™, a free health education newsletter from Siya Health with clinician-informed guides on focus, energy, weight, mood, hormones, and everyday health.
+  Summary: Join Siya Circle, a free health education newsletter from Siya Health with clinician-informed guides on focus, energy, weight, mood, hormones, and everyday health.
 
 - Virtual Medical Care | Siya Health Telehealth
   URL: https://siya.health/telehealth

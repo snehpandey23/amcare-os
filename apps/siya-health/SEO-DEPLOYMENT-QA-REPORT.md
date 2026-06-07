@@ -1,6 +1,6 @@
 # SEO Deployment QA Report
 
-Generated: 2026-06-07T00:02:12.852Z
+Generated: 2026-06-07T07:20:59.623Z
 
 ## Summary
 
@@ -8,7 +8,7 @@ Generated: 2026-06-07T00:02:12.852Z
 |--------|------:|
 | HTML pages scanned | 168 |
 | Sitemap URLs | 168 |
-| Pages with Meet & Greet in nav | 54 |
+| Pages with Meet & Greet in nav | 56 |
 | Non-ADHD pages still referencing adhd-screening | 73 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
@@ -191,6 +191,7 @@ _None detected in static HTML scan._
 
 - `adhd-diagnosis-florida.html`
 - `intake/index.html`
+- `siya-circle.html`
 - `visual-components.html`
 
 ## Recommendations

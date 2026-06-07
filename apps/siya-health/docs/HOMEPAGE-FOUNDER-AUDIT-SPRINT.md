@@ -119,7 +119,7 @@ The founder correctly identifies a **positioning gap**: the homepage has improve
 |---|-------------|
 | B1 | “More Than A Single Visit” messaging feels weak / no emotional connection |
 | B2 | Focus on long-term health, continuity, education, relationship-based care |
-| B3 | Remove ™ — use “Siya Circle” not “Siya Circle™” sitewide |
+| B3 | Use “Siya Circle” (no trademark symbol) sitewide |
 | B4 | Siya Circle is newsletter/education today, not full ecosystem — messaging should reflect that |
 
 ### Founder Section
@@ -156,7 +156,7 @@ The founder correctly identifies a **positioning gap**: the homepage has improve
 | **ADHD centrality** | Screening links, pathway badge, step 1 copy, symptom card secondary CTA | Keep ADHD as pathway, not homepage identity |
 | **Copy craft / alignment** | Symptom intro, testimonial subhead placement, membership headline | Typography and layout passes, not just rewrites |
 | **Navigation architecture** | Weak footer, inconsistent pathway secondary links | Hub-and-spoke linking pattern sitewide |
-| **Brand legal hygiene** | Siya Circle™, MSO explanations in body copy | De-trademark newsletter; relocate corporate structure to legal/footer |
+| **Brand legal hygiene** | Siya Circle, MSO explanations in body copy | De-trademark newsletter; relocate corporate structure to legal/footer |
 
 ---
 
@@ -217,7 +217,7 @@ The founder correctly identifies a **positioning gap**: the homepage has improve
 | Consistent pathway secondary links (service + guide hub) | Improves UX and SEO simultaneously |
 | Replace “medical home” wording | Reduces patient confusion |
 | Larger provider photos + stronger View Profile affordance | Healthcare trust best practice |
-| Remove Siya Circle™ → Siya Circle | Simple brand hygiene; no legal need for ™ on newsletter |
+| Remove trademark from Siya Circle naming | Simple brand hygiene; no legal need for symbol on newsletter |
 | Rebalance founder image proportions | Founder-led positioning requires visual parity |
 | Humanization (photo/video) | Highest trust ROI for telehealth |
 | Footer enrichment with guide/care hubs | Low-risk SEO + navigation win |
@@ -268,7 +268,7 @@ The founder correctly identifies a **positioning gap**: the homepage has improve
 | Providers | 96px photos, corporate subhead | Larger, human intro | **Medium** |
 | Testimonials | Klarity external link | Evaluate leakage | **Medium** (needs data) |
 | Membership | “More than a single visit” | Emotional continuity | **Medium** |
-| Siya Circle | “Siya Circle™” | “Siya Circle” | Low (sitewide) |
+| Siya Circle | “Siya Circle” | “Siya Circle” | Low (sitewide) |
 | Founder photo | 320px column | Larger/balanced | Low |
 | Footer | 4 columns, minimal guides | Hub-style internal links | **Medium** |
 
@@ -284,7 +284,7 @@ The founder correctly identifies a **positioning gap**: the homepage has improve
 | P0-2 | **Hero CTA simplification:** Remove “Find the Right Starting Point” from hero; single primary “Talk to a Clinician”; keep pricing as text link | Eliminates false product promise + duplicate path to symptom grid | **High** — clearer first action, less funnel feel | **Low** | None | None |
 | P0-3 | **Final CTA band:** Remove duplicate “Find the Right Starting Point”; single button | Same as P0-2 at page bottom | **Medium** | **Low** | None | None |
 | P0-4 | **Trust section compliance reshape:** Split copy — empathy + clinical promise in body; move MSO/state/disclaimer to compact compliance aside or footnote linked to `/legal` | Care-first, regulated-second | **High** — trust perception | **Low** — copy restructure | None | **Medium** — must retain disclosures somewhere visible |
-| P0-5 | **Remove ™ from Siya Circle** sitewide (homepage + generators) | Brand hygiene per founder | Low direct; professionalism | **Low** | None | None |
+| P0-5 | **Remove trademark symbol from Siya Circle** sitewide (homepage + generators) | Brand hygiene per founder | Low direct; professionalism | **Low** | None | None |
 | P0-6 | **Rename “How getting clarity works”** → “How care works” + de-ADHD Step 1 copy | Less branded, more practice-like | **Medium** — positioning | **Low** | Low positive (plain language) | Low — keep controlled substance note |
 | P0-7 | **Replace “medical home”** pathway card title | Removes confusion | **Low–Medium** | **Low** | Neutral | None |
 | P0-8 | **Nav font size bump** (+1–2px or weight adjustment) | Accessibility + older demographic | **Low–Medium** | **Low** | None | None |

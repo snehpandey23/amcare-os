@@ -1,12 +1,12 @@
 # Link Equity Report — Canonical Winning Blogs
 
-Generated: 2026-06-06T07:01:58.259Z
+Generated: 2026-06-07T07:20:57.728Z
 
 ## Top 20 blogs needing more internal links
 
 | Rank | Blog | Inbound | Guide link | Reciprocal | Category hub | Related block | Service page | Score |
 |------|------|--------:|------------|------------|--------------|---------------|--------------|------:|
-| 1 | /blog/why-am-i-always-tired-causes-when-to-see-doctor | 21 | ✗ | ✗ | ✓ | ✓ | ✓ | 3/5 |
+| 1 | /blog/why-am-i-always-tired-causes-when-to-see-doctor | 20 | ✗ | ✗ | ✓ | ✓ | ✓ | 3/5 |
 | 2 | /blog/compounded-vs-branded-glp1-medications | 3 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 3 | /blog/phentermine-for-weight-loss-safety-and-effectiveness | 3 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 4 | /blog/oral-vs-injectable-weight-loss-medications | 3 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
@@ -22,23 +22,23 @@ Generated: 2026-06-06T07:01:58.259Z
 | 14 | /blog/adhd-medication-side-effects-what-to-expect | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 15 | /blog/minoxidil-for-hair-loss-does-it-work | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 16 | /blog/medical-weight-loss-glp1-semaglutide-texas | 9 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
-| 17 | /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 11 | ✓ | ✓ | ✗ | ✓ | ✓ | 4/5 |
+| 17 | /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 10 | ✓ | ✓ | ✗ | ✓ | ✓ | 4/5 |
 | 18 | /blog/semaglutide-for-weight-loss-how-it-works | 13 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
-| 19 | /blog/glp1-side-effects-and-how-to-manage-them | 14 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
-| 20 | /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | 14 | ✓ | ✓ | ✗ | ✓ | ✓ | 4/5 |
+| 19 | /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | 13 | ✓ | ✓ | ✗ | ✓ | ✓ | 4/5 |
+| 20 | /blog/glp1-side-effects-and-how-to-manage-them | 14 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 
 ## All canonical blogs
 
 | Blog | Inbound |
 |------|--------:|
-| /blog/is-online-adhd-diagnosis-legit | 90 |
-| /blog/food-noise-and-glp-1-what-it-means-and-what-helps | 24 |
+| /blog/is-online-adhd-diagnosis-legit | 39 |
+| /blog/food-noise-and-glp-1-what-it-means-and-what-helps | 23 |
 | /blog/insulin-resistance-and-weight-loss-clinician-overview | 23 |
-| /blog/why-am-i-always-tired-causes-when-to-see-doctor | 21 |
+| /blog/why-am-i-always-tired-causes-when-to-see-doctor | 20 |
 | /blog/glp1-side-effects-and-how-to-manage-them | 14 |
-| /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | 14 |
 | /blog/semaglutide-for-weight-loss-how-it-works | 13 |
-| /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 11 |
+| /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | 13 |
+| /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 10 |
 | /blog/when-is-testosterone-therapy-appropriate | 9 |
 | /blog/medical-weight-loss-glp1-semaglutide-texas | 9 |
 | /blog/adhd-medication-side-effects-what-to-expect | 6 |

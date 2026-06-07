@@ -1,6 +1,6 @@
 # Title & Meta Duplicate Audit
 
-Generated: 2026-06-06T07:01:58.259Z
+Generated: 2026-06-07T07:20:57.727Z
 
 ## Duplicate title tags (1)
 

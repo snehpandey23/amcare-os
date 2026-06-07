@@ -5213,6 +5213,20 @@ a.asrs-interest-btn:hover {
   font-size: 0.9rem;
   margin: 0 0 10px;
 }
+.provider-index-credentials {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  margin: 0 0 8px;
+  line-height: 1.45;
+}
+.provider-index-states {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  margin: 0 0 10px;
+}
+.provider-hub-positioning .section-header {
+  max-width: 52rem;
+}
 .provider-index-tags {
   display: flex;
   flex-wrap: wrap;
@@ -5373,6 +5387,15 @@ a.asrs-interest-btn:hover {
   color: var(--text-secondary);
   margin: 0;
   line-height: 1.5;
+}
+.trust-strip-compact--quad {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .trust-strip-compact--quad { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 960px) {
+  .trust-strip-compact--quad { grid-template-columns: repeat(4, 1fr); }
 }
 
 /* Blog: provider evaluation CTA */
@@ -5907,6 +5930,24 @@ body.ghl-legal-gate-open {
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+}
+.siya-circle-signup-cta {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+}
+.siya-circle-signup-cta .lead {
+  margin-bottom: 16px;
+}
+.siya-circle-signup-cta .button {
+  margin-top: 8px;
+}
+.siya-circle-ghl-note {
+  margin: 14px 0 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
 }
 .siya-circle-ghl-embed {
   background: var(--white);

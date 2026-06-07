@@ -4,6 +4,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { SIYA_CIRCLE_GHL_FORM_ID } from '../data/siya-circle-config.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -44,10 +45,19 @@ for (const field of [
 }
 
 const ghlBookingHrefPattern = /href="[^"]*link\.yourmarketingai\.com\/widget\/form\//i;
+const siyaCircleFormHrefPattern = new RegExp(
+  `href="[^"]*link\\.yourmarketingai\\.com/widget/form/${SIYA_CIRCLE_GHL_FORM_ID}[^"]*"`,
+  'gi',
+);
+
+function htmlWithoutSiyaCircleSignupLinks(html) {
+  return html.replace(siyaCircleFormHrefPattern, '');
+}
+
 for (const rel of walkHtml('.')) {
   if (rel.startsWith('legal/')) continue;
   const html = read(rel);
-  if (!ghlBookingHrefPattern.test(html)) continue;
+  if (!ghlBookingHrefPattern.test(htmlWithoutSiyaCircleSignupLinks(html))) continue;
   errors.push(`Legacy GHL booking CTA still present: ${rel}`);
 }
 
