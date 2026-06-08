@@ -938,6 +938,44 @@ button.secondary:hover {
   color: #fff !important;
 }
 
+.hero-edu-routing {
+  margin: 16px 0 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.92);
+  text-align: center;
+}
+.hero-edu-routing a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.hero-edu-routing a:hover {
+  opacity: 0.9;
+}
+.medication-decision-cluster ol {
+  margin: 0;
+  padding-left: 1.25rem;
+  max-width: 720px;
+}
+.medication-decision-cluster li {
+  margin-bottom: 0.75rem;
+  line-height: 1.55;
+}
+.blog-hub-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+.blog-hub-jump a {
+  color: var(--brand-primary, #1a6b5c);
+  font-weight: 500;
+}
+.blog-hub-section h2 {
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+}
 .hero-cta-link {
   display: block;
   width: 100%;
