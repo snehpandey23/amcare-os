@@ -1,11 +1,12 @@
 {
-  "generated": "2026-06-07",
-  "totalPages": 147,
+  "generated": "2026-06-26",
+  "totalPages": 148,
   "zeroInbound": [
     "/adhd-diagnosis-florida",
     "/adhd-evaluation-cost",
     "/adhd-treatment-online",
     "/adult-adhd-diagnosis",
+    "/adult-adhd-screening-california",
     "/intake",
     "/online-adhd-test",
     "/privacy-policy",
@@ -27,6 +28,10 @@
     },
     {
       "path": "/adult-adhd-diagnosis",
+      "count": 0
+    },
+    {
+      "path": "/adult-adhd-screening-california",
       "count": 0
     },
     {
@@ -110,11 +115,11 @@
       "count": 2
     },
     {
-      "path": "/blog/adderall-for-adhd-how-it-works",
+      "path": "/blog/adhd-evaluation-california-online-vs-in-person",
       "count": 2
     },
     {
-      "path": "/blog/adhd-evaluation-california-online-vs-in-person",
+      "path": "/blog/adhd-medication-options-california",
       "count": 2
     },
     {
@@ -142,12 +147,12 @@
     {
       "path": "/",
       "outboundCount": 34,
-      "uniqueInbound": 146
+      "uniqueInbound": 147
     },
     {
       "path": "/adhd-care",
-      "outboundCount": 35,
-      "uniqueInbound": 140
+      "outboundCount": 40,
+      "uniqueInbound": 141
     },
     {
       "path": "/blog",
@@ -201,9 +206,9 @@
         "title": "ADHD Testing Online in California: Screening vs Full Evaluation"
       },
       {
-        "p": "/answers/can-adhd-be-diagnosed-online",
+        "p": "/adult-adhd-screening-california",
         "score": 9,
-        "title": "Can ADHD be diagnosed online?"
+        "title": "Adult ADHD Evaluation Online in California | Free ADHD Screening"
       },
       {
         "p": "/answers/how-online-prescriptions-work",
@@ -269,14 +274,14 @@
     ],
     "/blog/adhd-medication-options-california": [
       {
-        "p": "/blog/adhd-medication-options-for-adults",
-        "score": 11,
-        "title": "ADHD Medication Options for Adults in 2026: Stimulants &amp; Non-Stimulants"
-      },
-      {
         "p": "/answers/adhd-medication-every-day",
         "score": 9,
         "title": "Do you have to take ADHD medication every day?"
+      },
+      {
+        "p": "/answers/adhd-medication-side-effects",
+        "score": 9,
+        "title": "What ADHD medication side effects are most common in the first weeks?"
       },
       {
         "p": "/blog/insomnia-treatment-options-beyond-medication",
@@ -291,9 +296,9 @@
         "title": "What should adults expect when starting ADHD medication?"
       },
       {
-        "p": "/blog/adhd-medication-options-california",
-        "score": 11,
-        "title": "ADHD Medication Options in California: Stimulants, Non‑Stimulants &amp; FAQs"
+        "p": "/answers/adderall-vs-vyvanse-adults",
+        "score": 9,
+        "title": "When might Vyvanse be preferred over Adderall for adults?"
       },
       {
         "p": "/answers/signs-of-sleep-apnea-in-adults",
@@ -326,7 +331,7 @@
     "/blog/adhd-symptoms-overlooked": [
       {
         "p": "/answers/signs-of-adult-adhd",
-        "score": 9,
+        "score": 11,
         "title": "What are the signs of adult ADHD?"
       },
       {
@@ -335,9 +340,14 @@
         "title": "Adult ADHD Symptoms in California: Patterns Worth Taking Seriously"
       },
       {
-        "p": "/answers/trt-monitoring-requirements",
+        "p": "/answers/signs-of-sleep-apnea-in-adults",
+        "score": 4,
+        "title": "What are the signs of sleep apnea in adults?"
+      },
+      {
+        "p": "/answers/when-is-testosterone-therapy-appropriate",
         "score": 3,
-        "title": "How often is TRT monitoring required?"
+        "title": "What symptoms warrant testosterone therapy evaluation?"
       }
     ],
     "/blog/adhd-telehealth-california": [
@@ -369,14 +379,14 @@
     ],
     "/blog/adhd-testing-online-california-screening-vs-evaluation": [
       {
+        "p": "/adult-adhd-screening-california",
+        "score": 11,
+        "title": "Adult ADHD Evaluation Online in California | Free ADHD Screening"
+      },
+      {
         "p": "/answers/screening-vs-adhd-evaluation",
         "score": 11,
         "title": "What is the difference between ADHD screening and a full evaluation?"
-      },
-      {
-        "p": "/blog/adhd-evaluation-california-online-vs-in-person",
-        "score": 11,
-        "title": "ADHD Evaluation in California: Online vs In-Person Options (2026)"
       },
       {
         "p": "/answers/how-online-prescriptions-work",
@@ -391,14 +401,14 @@
     ],
     "/blog/adult-adhd-symptoms-california": [
       {
+        "p": "/adult-adhd-screening-california",
+        "score": 9,
+        "title": "Adult ADHD Evaluation Online in California | Free ADHD Screening"
+      },
+      {
         "p": "/answers/signs-of-adult-adhd",
         "score": 9,
         "title": "What are the signs of adult ADHD?"
-      },
-      {
-        "p": "/answers/telehealth-adhd-california",
-        "score": 9,
-        "title": "How does ADHD telehealth work in California?"
       },
       {
         "p": "/answers/when-is-testosterone-therapy-appropriate",
@@ -408,14 +418,14 @@
     ],
     "/blog/adult-adhd-treatment-california-2026": [
       {
+        "p": "/adult-adhd-screening-california",
+        "score": 9,
+        "title": "Adult ADHD Evaluation Online in California | Free ADHD Screening"
+      },
+      {
         "p": "/answers/signs-of-adult-adhd",
         "score": 9,
         "title": "What are the signs of adult ADHD?"
-      },
-      {
-        "p": "/answers/telehealth-adhd-california",
-        "score": 9,
-        "title": "How does ADHD telehealth work in California?"
       },
       {
         "p": "/blog/insomnia-treatment-options-beyond-medication",
@@ -552,9 +562,9 @@
         "title": "What is included in Siya Health’s $199 ADHD evaluation?"
       },
       {
-        "p": "/answers/adderall-vs-vyvanse-adults",
+        "p": "/adult-adhd-screening-california",
         "score": 7,
-        "title": "When might Vyvanse be preferred over Adderall for adults?"
+        "title": "Adult ADHD Evaluation Online in California | Free ADHD Screening"
       }
     ],
     "/blog/how-to-know-if-you-have-adhd-adult": [
@@ -737,19 +747,14 @@
     ],
     "/blog/non-stimulant-adhd-medications-explained": [
       {
+        "p": "/answers/asrs-adhd-screening-explained",
+        "score": 8,
+        "title": "What is the ASRS ADHD screening test?"
+      },
+      {
         "p": "/answers/adderall-vs-vyvanse-adults",
-        "score": 9,
+        "score": 7,
         "title": "When might Vyvanse be preferred over Adderall for adults?"
-      },
-      {
-        "p": "/answers/late-adhd-diagnosis-adults",
-        "score": 9,
-        "title": "Why are so many adults diagnosed with ADHD late in life?"
-      },
-      {
-        "p": "/answers/signs-of-sleep-apnea-in-adults",
-        "score": 4,
-        "title": "What are the signs of sleep apnea in adults?"
       },
       {
         "p": "/answers/who-qualifies-glp-1-weight-loss",
@@ -940,28 +945,18 @@
     "/blog/vyvanse-vs-adderall-differences": [
       {
         "p": "/answers/adderall-vs-vyvanse-adults",
-        "score": 13,
+        "score": 11,
         "title": "When might Vyvanse be preferred over Adderall for adults?"
       },
       {
-        "p": "/answers/starting-adhd-medication-adults",
-        "score": 10,
-        "title": "What should adults expect when starting ADHD medication?"
+        "p": "/answers/signs-of-adult-adhd",
+        "score": 9,
+        "title": "What are the signs of adult ADHD?"
       },
       {
-        "p": "/answers/signs-of-sleep-apnea-in-adults",
-        "score": 4,
-        "title": "What are the signs of sleep apnea in adults?"
-      },
-      {
-        "p": "/answers/compounded-vs-branded-glp-1",
+        "p": "/answers/glp-1-side-effects",
         "score": 3,
-        "title": "What should you ask about compounded vs branded GLP-1?"
-      },
-      {
-        "p": "/answers/meet-and-greet-telehealth-expectations",
-        "score": 3,
-        "title": "What should I expect from a first telehealth visit?"
+        "title": "Which GLP-1 side effects usually improve with titration?"
       }
     ],
     "/blog/when-is-testosterone-therapy-appropriate": [
@@ -1007,24 +1002,24 @@
     ]
   },
   "inboundCounts": {
+    "/": 147,
     "/about": 146,
-    "/": 146,
+    "/adhd-care": 141,
     "/telehealth": 141,
-    "/adhd-care": 140,
     "/answers": 140,
     "/blog": 140,
     "/weight-loss-metabolic-health": 140,
     "/labs": 139,
     "/providers": 117,
-    "/adhd-screening": 97,
+    "/adhd-screening": 98,
     "/blog/adhd": 96,
     "/blog/weight-loss": 90,
+    "/legal/notice-of-privacy-practices": 89,
+    "/legal/privacy-policy": 89,
+    "/legal/terms-of-use": 89,
     "/answers/signs-of-adult-adhd": 88,
     "/legal/cookie-policy": 88,
     "/legal": 88,
-    "/legal/notice-of-privacy-practices": 88,
-    "/legal/privacy-policy": 88,
-    "/legal/terms-of-use": 88,
     "/blog/telehealth": 85,
     "/mens-health-longevity": 85,
     "/answers/what-is-insulin-resistance": 84,
@@ -1035,7 +1030,7 @@
     "/book-appointment": 74,
     "/prescriptions": 65,
     "/primary-urgent-care": 65,
-    "/legal/controlled-substance-treatment-agreement": 36,
+    "/legal/controlled-substance-treatment-agreement": 37,
     "/providers/dr-sneh-pandey": 33,
     "/blog/is-online-adhd-diagnosis-legit": 30,
     "/blog/adhd-symptoms-overlooked": 27,
@@ -1092,23 +1087,25 @@
     "/answers/telehealth-adhd-texas": 5,
     "/answers/why-normal-labs-dont-mean-healthy": 5,
     "/blog/minoxidil-for-hair-loss-does-it-work": 5,
-    "/answers/adderall-vs-vyvanse-adults": 4,
+    "/blog/non-stimulant-adhd-medications-explained": 5,
     "/answers/adhd-vs-anxiety": 4,
+    "/answers/asrs-adhd-screening-explained": 4,
     "/answers/food-noise-returned-on-glp-1": 4,
     "/answers/glp-1-nausea-management": 4,
     "/answers/insulin-resistance-without-diabetes": 4,
     "/answers/late-adhd-diagnosis-adults": 4,
     "/blog/adhd-evaluation-cost-texas": 4,
+    "/blog/adhd-medication-daily-or-as-needed-adults": 4,
     "/blog/adhd-medication-options-for-adults": 4,
     "/blog/adhd-medication-side-effects-what-to-expect": 4,
     "/blog/insomnia-treatment-options-beyond-medication": 4,
     "/blog/is-adhd-medication-safe-long-term": 4,
-    "/blog/non-stimulant-adhd-medications-explained": 4,
     "/blog/telehealth-prescriptions-how-online-treatment-works": 4,
     "/blog/tirzepatide-vs-semaglutide-which-is-better": 4,
+    "/blog/vyvanse-vs-adderall-differences": 4,
+    "/answers/adderall-vs-vyvanse-adults": 3,
     "/answers/adhd-in-women": 3,
     "/answers/adhd-medication-every-day": 3,
-    "/answers/asrs-adhd-screening-explained": 3,
     "/answers/can-adhd-cause-anxiety": 3,
     "/answers/ed-telehealth-legitimate": 3,
     "/answers/executive-dysfunction-adhd": 3,
@@ -1116,20 +1113,18 @@
     "/answers/high-functioning-adhd": 3,
     "/answers/high-shbg-low-free-testosterone": 3,
     "/answers/oral-vs-topical-minoxidil": 3,
-    "/blog/adhd-medication-daily-or-as-needed-adults": 3,
+    "/blog/adderall-for-adhd-how-it-works": 3,
     "/blog/adhd-medication-online-california": 3,
-    "/blog/adhd-medication-options-california": 3,
     "/blog/adhd-testing-online-california-screening-vs-evaluation": 3,
     "/blog/medical-weight-loss-vs-dieting-what-actually-works": 3,
-    "/blog/vyvanse-vs-adderall-differences": 3,
     "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd": 3,
     "/creyos-adhd-testing": 3,
     "/adhd-diagnosis-texas": 2,
     "/answers/afternoon-energy-crash-after-lunch": 2,
     "/answers/rejection-sensitivity-adhd": 2,
     "/answers/time-blindness-adhd": 2,
-    "/blog/adderall-for-adhd-how-it-works": 2,
     "/blog/adhd-evaluation-california-online-vs-in-person": 2,
+    "/blog/adhd-medication-options-california": 2,
     "/blog/adhd-telehealth-california": 2,
     "/blog/adult-adhd-symptoms-california": 2,
     "/blog/compounded-vs-branded-glp1-medications": 2,
@@ -1149,6 +1144,7 @@
     "/adhd-evaluation-cost": 0,
     "/adhd-treatment-online": 0,
     "/adult-adhd-diagnosis": 0,
+    "/adult-adhd-screening-california": 0,
     "/intake": 0,
     "/online-adhd-test": 0,
     "/privacy-policy": 0,

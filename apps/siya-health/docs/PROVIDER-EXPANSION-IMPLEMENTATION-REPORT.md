@@ -1,12 +1,12 @@
 # Provider Expansion — Implementation Report
 
-Generated: 2026-06-07T15:39:44.577Z
+Generated: 2026-06-26T08:04:53.875Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| Sitemap URLs | 139 |
+| Sitemap URLs | 140 |
 | Contracted providers in data | 7 |
 | Live profile pages | 7 |
 | Hub URL | https://siya.health/providers |

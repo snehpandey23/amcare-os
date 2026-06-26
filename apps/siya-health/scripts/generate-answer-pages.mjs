@@ -538,7 +538,7 @@ ${featureSlots}
   const url = `${BASE}/answers`;
   const title = 'Health Guides | Metabolic, ADHD, Hormones & Telehealth | Siya Health';
   const desc =
-    'Physician-led Health Guides: short answers, evidence, and related topics for metabolic health, fatigue, hormones, ADHD, and telehealth. Each page shows its clinical review status.';
+    'Physician-led Health Guides: short answers, evidence, and related topics for metabolic health, fatigue, hormones, ADHD, and telehealth.';
 
   const collection = {
     '@context': 'https://schema.org',
@@ -573,7 +573,7 @@ ${headerNav()}
         <div class="container">
           <div class="section-header">
             <h1>Health Guides</h1>
-            <p class="lead">One question per page—short answer, detailed explanation, evidence, and related questions. Reviewed pages display physician name and date; others show pending physician review. <a href="/llms.txt">Machine index</a> · <a href="/article-index.json">JSON index</a></p>
+            <p class="lead">Each guide answers one question with a short takeaway, a deeper explanation, cited evidence, and related topics—written for adults researching ADHD, metabolic health, hormones, fatigue, and telehealth. Educational only; not a substitute for care with your clinician.</p>
           </div>
 ${SIYA_CIRCLE_PROMO_HTML}
           <div class="health-guides-hub-categories">

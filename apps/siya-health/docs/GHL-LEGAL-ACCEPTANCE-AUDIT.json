@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-07T15:39:44.183Z",
+  "generatedAt": "2026-06-26T08:04:53.460Z",
   "formId": "mnWpgh0IEgFvJymdZqHY",
   "bookingUrl": "https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4",
   "legalDocumentVersion": "terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31",
@@ -12,11 +12,11 @@
     "npp": "legal_acceptance_npp"
   },
   "summary": {
-    "htmlPagesScanned": 147,
+    "htmlPagesScanned": 148,
     "pagesWithGhlLinks": 146,
     "totalGhlBookingLinks": 150,
-    "pagesWithCarepatronLinks": 147,
-    "totalCarepatronBookingLinks": 643,
+    "pagesWithCarepatronLinks": 148,
+    "totalCarepatronBookingLinks": 648,
     "pagesWithAcceptanceScript": 1,
     "pagesWithGhlMissingAcceptance": 139,
     "intakeHub": true
@@ -173,6 +173,16 @@
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
       "hasChatWidget": true
+    },
+    {
+      "path": "/adult-adhd-screening-california",
+      "file": "adult-adhd-screening-california.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 0,
+      "carepatronBookingLinks": 5,
+      "hasLegalAcceptanceScript": false,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
     },
     {
       "path": "/answers/adderall-vs-vyvanse-adults",

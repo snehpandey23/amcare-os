@@ -1,6 +1,6 @@
 # Provider Missing Information Audit
 
-Generated: 2026-06-07
+Generated: 2026-06-26
 
 Fields with null, empty arrays, or pending verification in `data/providers.mjs`.
 

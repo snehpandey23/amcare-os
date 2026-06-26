@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
-Generated: 2026-06-07
-Total pages: 147
+Generated: 2026-06-26
+Total pages: 148
 
 ---
 
@@ -149,9 +149,14 @@ Total pages: 147
   Summary: Get an adult ADHD diagnosis online from board-certified providers. $199, 60–90 min, individualized clinical assessment. TX, PA, FL. Same-week telehealth appointments.
   Topics: adhd
 
+- Adult ADHD Evaluation Online in California | Free ADHD Screening
+  URL: https://siya.health/adult-adhd-screening-california
+  Summary: Take a free 2-minute ADHD screening online with Siya Health. Adults in California can start with a self-screening, book a free evaluation walkthrough, or begin a $199 adult ADHD evaluation.
+  Topics: adhd, california
+
 - Health Guides | Metabolic, ADHD, Hormones &amp; Telehealth
   URL: https://siya.health/answers
-  Summary: Physician-led Health Guides: short answers, evidence, and related topics for metabolic health, fatigue, hormones, ADHD, and telehealth. Each page shows its clinical review status.
+  Summary: Physician-led Health Guides: short answers, evidence, and related topics for metabolic health, fatigue, hormones, ADHD, and telehealth.
   Topics: adhd, weight-loss, telehealth, health-guide
 
 - When might Vyvanse be preferred over Adderall for adults?
@@ -464,9 +469,9 @@ Total pages: 147
   Summary: What does an ADHD evaluation cost in Texas in 2026? Compare options—insurance, cash pay, online—and see the real breakdown.
   Topics: adhd, texas
 
-- Do You Need ADHD Medication Every Day? Daily vs As-Needed (Adults)
+- Do You Need ADHD Medication Every Day? (Daily vs PRN for Adults)
   URL: https://siya.health/blog/adhd-medication-daily-or-as-needed-adults
-  Summary: Do adults need ADHD medication every day? Daily vs as-needed use, medication breaks, risks of inconsistent use, and why your prescriber should guide the plan.
+  Summary: Daily ADHD dosing vs weekends off—what's safe for adults? Learn PRN vs daily trade-offs before changing your medication schedule.
   Topics: adhd, medication
 
 - Can You Get ADHD Medication Online in California? (2026 Guide)
@@ -479,9 +484,9 @@ Total pages: 147
   Summary: Compare ADHD meds in CA: ADHD medication options California—Vyvanse, Adderall, non‑stimulants, generics. Education only; no prescribing promises.
   Topics: adhd, california, medication
 
-- ADHD Medication Options for Adults in 2026: Stimulants &amp; Non-Stimulants
+- ADHD Medication Options for Adults: Stimulant vs Non-Stimulant Guide
   URL: https://siya.health/blog/adhd-medication-options-for-adults
-  Summary: Adult ADHD medication options in 2026: stimulant vs non-stimulant classes, combination strategies, monitoring, and how licensed prescribers personalize treatment.
+  Summary: First ADHD med visit? See how clinicians compare stimulant and non-stimulant options, combination strategies, and what trials usually look like.
   Topics: adhd, medication
 
 - ADHD Medication Side Effects in 2026: What to Expect &amp; When to Call a Doctor
@@ -489,9 +494,9 @@ Total pages: 147
   Summary: ADHD medication side effects (2026): common stimulant and non-stimulant reactions, monitoring, mental health warnings, and when to seek urgent care.
   Topics: adhd, medication
 
-- Adult ADHD Symptoms That Are Often Overlooked
+- 7 Adult ADHD Signs Doctors Miss (Not Just "Can't Focus")
   URL: https://siya.health/blog/adhd-symptoms-overlooked
-  Summary: These ADHD symptoms in adults are easy to miss—or dismiss. Learn what clinicians look for beyond the obvious signs.
+  Summary: Forgetfulness isn't the only sign. Hyperfocus, emotional swings, and procrastination despite caring—overlooked adult ADHD symptoms clinicians evaluate.
   Topics: adhd
 
 - ADHD Telehealth in California: How Virtual Care Works (2026)
@@ -593,9 +598,9 @@ Total pages: 147
   Summary: Minoxidil for hair loss in 2026: mechanism, expected timelines, limits, side effects—informational only; consult a licensed clinician for diagnosis.
   Topics: hair-loss
 
-- Non-Stimulant ADHD Medications Explained (2026) — Options for Adults
+- Non-Stimulant ADHD Meds: When Are They Used Instead of Stimulants?
   URL: https://siya.health/blog/non-stimulant-adhd-medications-explained
-  Summary: Non-stimulant ADHD medications in 2026: atomoxetine, guanfacine, clonidine, viloxazine—how they work, timelines, side effects, and when prescribers choose them.
+  Summary: Can't tolerate stimulants? Compare atomoxetine, guanfacine, and viloxazine—onset timelines, side effects, and when prescribers choose non-stimulant ADHD meds.
   Topics: adhd, medication
 
 - Online ADHD Diagnosis in California (2026): Cost, Process &amp; What to Expect
@@ -653,9 +658,9 @@ Total pages: 147
   Summary: Tirzepatide vs semaglutide in 2026: dual GIP/GLP-1 vs GLP-1 agonist, trial context, side effects, and how clinicians choose—no outcome promises.
   Topics: weight-loss
 
-- Vyvanse vs Adderall for ADHD in 2026: Differences Adults Should Know
+- Vyvanse vs Adderall: Which Lasts Longer for Adult ADHD?
   URL: https://siya.health/blog/vyvanse-vs-adderall-differences
-  Summary: Vyvanse vs Adderall (2026): prodrug design, duration, dosing, abuse-deterrence themes, side effects, and why your prescriber chooses one over the other.
+  Summary: Vyvanse vs Adderall for adults: compare duration, onset, crash patterns, and side effects—what to ask your prescriber before switching stimulants.
   Topics: adhd
 
 - Weight Loss Articles (2026) — GLP-1 &amp; Medical Metabolic Care | Siya Health Blog

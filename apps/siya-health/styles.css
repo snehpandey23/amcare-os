@@ -6575,3 +6575,901 @@ body.ghl-legal-gate-open {
     font-size: 0.74rem;
   }
 }
+
+/* —— Google Ads landing pages (.siya-landing-page) —— */
+.siya-landing-page {
+  --lp-header-h: 64px;
+}
+
+.siya-landing-page .site-header,
+.siya-landing-page .footer:not(.lp-footer) {
+  display: none !important;
+}
+
+/* Minimal LP header */
+.siya-landing-page .lp-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+}
+
+.siya-landing-page .lp-header-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px 20px;
+  min-height: var(--lp-header-h);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.siya-landing-page .lp-header-logo img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+.siya-landing-page .lp-header-label {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  flex: 1 1 auto;
+}
+
+.siya-landing-page .lp-header-phone {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--primary);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.siya-landing-page .lp-header-phone:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 479px) {
+  .siya-landing-page .lp-header-label {
+    display: none;
+  }
+}
+
+/* Hero */
+.siya-landing-page .lp-hero {
+  padding-top: 28px;
+  padding-bottom: 24px;
+  background: linear-gradient(180deg, var(--bg-subtle) 0%, var(--white) 100%);
+}
+
+.siya-landing-page .lp-hero-grid {
+  display: grid;
+  gap: 28px;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .siya-landing-page .lp-hero-grid {
+    grid-template-columns: 1fr minmax(280px, 42%);
+    gap: 40px;
+  }
+}
+
+.siya-landing-page .lp-hero-copy h1 {
+  font-size: clamp(1.65rem, 4.5vw, 2.35rem);
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.siya-landing-page .lp-hero-lead {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  max-width: 38rem;
+}
+
+.siya-landing-page .lp-hero-ctas {
+  margin-bottom: 12px;
+}
+
+.siya-landing-page .lp-cta-primary {
+  width: 100%;
+  justify-content: center;
+  font-size: 1rem;
+  padding: 14px 20px;
+}
+
+@media (min-width: 480px) {
+  .siya-landing-page .lp-cta-primary {
+    width: auto;
+  }
+}
+
+.siya-landing-page .lp-hero-secondary {
+  margin: 12px 0 0;
+  font-size: 0.92rem;
+}
+
+.siya-landing-page .lp-hero-secondary a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.siya-landing-page .lp-hero-visual img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  object-fit: cover;
+}
+
+.siya-landing-page .lp-disclaimer {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 40rem;
+}
+
+.siya-landing-page .lp-disclaimer--center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Trust mini-row */
+.siya-landing-page .lp-trust-row {
+  padding: 16px 0 20px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+
+.siya-landing-page .lp-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (min-width: 600px) {
+  .siya-landing-page .lp-trust-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .siya-landing-page .lp-trust-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.siya-landing-page .lp-trust-badge {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.siya-landing-page .lp-trust-value {
+  display: block;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+.siya-landing-page .lp-trust-label {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  line-height: 1.3;
+  margin-top: 2px;
+}
+
+/* Section CTAs */
+.siya-landing-page .lp-section-cta {
+  text-align: center;
+  margin-top: 24px;
+  margin-bottom: 0;
+}
+
+.siya-landing-page .lp-section-cta .button {
+  min-width: min(100%, 320px);
+  justify-content: center;
+}
+
+/* Screening explanation cards */
+.siya-landing-page .lp-screening-cards {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+  .siya-landing-page .lp-screening-cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+.siya-landing-page .lp-screening-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.siya-landing-page .lp-screening-card--muted {
+  background: var(--bg-subtle);
+}
+
+.siya-landing-page .lp-screening-card h3 {
+  margin: 0 0 12px;
+  font-size: 1.05rem;
+}
+
+.siya-landing-page .lp-screening-card ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.siya-landing-page .lp-screening-card li {
+  margin-bottom: 6px;
+}
+
+/* Pathway cards — secondary emphasis */
+.siya-landing-page .lp-pathway-cards {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .siya-landing-page .lp-pathway-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+.siya-landing-page .lp-pathway-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.siya-landing-page .lp-pathway-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.siya-landing-page .lp-pathway-card p {
+  margin: 0;
+  flex: 1 1 auto;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.siya-landing-page .lp-pathway-card .button {
+  align-self: flex-start;
+  width: 100%;
+  justify-content: center;
+}
+
+/* 4-step process */
+.siya-landing-page .lp-process-steps {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .siya-landing-page .lp-process-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .siya-landing-page .lp-process-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Pricing card */
+.siya-landing-page .lp-pricing-card {
+  max-width: 520px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.siya-landing-page .lp-pricing-card h3 {
+  margin-top: 8px;
+}
+
+.siya-landing-page .lp-pricing-card ul {
+  margin: 16px 0;
+}
+
+.siya-landing-page .lp-pricing-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+@media (min-width: 480px) {
+  .siya-landing-page .lp-pricing-ctas {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .siya-landing-page .lp-pricing-ctas .button {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
+/* California section */
+.siya-landing-page .lp-california-copy {
+  max-width: 42rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.siya-landing-page .lp-california-copy p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.siya-landing-page .lp-california-copy .lp-disclaimer {
+  margin-top: 12px;
+}
+
+/* Final CTA */
+.siya-landing-page .lp-final-cta .cta-band h2 {
+  font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+}
+
+.siya-landing-page .lp-final-cta .cta-band-buttons {
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 600px) {
+  .siya-landing-page .lp-final-cta .cta-band-buttons {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+/* Minimal footer */
+.siya-landing-page .lp-footer {
+  background: var(--bg-subtle);
+  border-top: 1px solid var(--border);
+  padding: 24px 0 32px;
+  margin-top: 0;
+}
+
+.siya-landing-page .lp-footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.siya-landing-page .lp-footer-legal a {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.siya-landing-page .lp-footer-legal a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.siya-landing-page .lp-footer-disclaimer {
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 48rem;
+  margin: 0 auto 12px;
+}
+
+.siya-landing-page .lp-footer small {
+  display: block;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+/* Sticky mobile CTA */
+.siya-landing-page .lp-mobile-sticky-cta {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .siya-landing-page .lp-mobile-sticky-cta {
+    display: block;
+  }
+
+  .siya-landing-page main {
+    padding-bottom: 80px;
+  }
+}
+
+.siya-landing-page .lp-mobile-sticky-cta .button {
+  width: 100%;
+  justify-content: center;
+  font-size: 1rem;
+  padding: 14px 20px;
+}
+
+/* Tighter section spacing on LP */
+.siya-landing-page .section {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+@media (max-width: 599px) {
+  .siya-landing-page .section {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+}
+
+/* ============================================
+   GOOGLE ADS LANDING PAGE — Adult ADHD CA
+   ============================================ */
+.siya-landing-page .lp-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+}
+.siya-landing-page .lp-header-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.siya-landing-page .lp-logo img {
+  height: 40px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+}
+.siya-landing-page .lp-header-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-right: auto;
+}
+.siya-landing-page .lp-header-phone {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.siya-landing-page .lp-hero {
+  padding: 32px 0 24px;
+  background: linear-gradient(180deg, #f0f7ff 0%, var(--white) 100%);
+}
+.siya-landing-page .lp-hero-grid {
+  display: grid;
+  gap: 28px;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .siya-landing-page .lp-hero-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+.siya-landing-page .lp-hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.65rem, 5vw, 2.35rem);
+  line-height: 1.2;
+  color: var(--primary);
+  margin-bottom: 14px;
+}
+.siya-landing-page .lp-hero-lead {
+  font-size: 1.05rem;
+  color: var(--text);
+  margin-bottom: 20px;
+  line-height: 1.55;
+}
+.siya-landing-page .lp-hero-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.siya-landing-page .lp-cta-primary {
+  width: 100%;
+  text-align: center;
+  padding: 16px 24px;
+  font-size: 1.05rem;
+}
+.siya-landing-page .lp-cta-secondary {
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.siya-landing-page .lp-disclaimer {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  max-width: 520px;
+}
+.siya-landing-page .lp-hero-visual img {
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  width: 100%;
+  height: auto;
+}
+.siya-landing-page .lp-trust-row {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 0;
+}
+.siya-landing-page .lp-trust-row li {
+  flex: 1 1 calc(50% - 10px);
+  min-width: 140px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .siya-landing-page .lp-trust-row li {
+    flex: 1 1 auto;
+  }
+}
+.siya-landing-page .lp-section {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+.siya-landing-page .lp-section--compact {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+.siya-landing-page .lp-section-cta {
+  text-align: center;
+  margin-top: 28px;
+}
+.siya-landing-page .lp-symptom-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 600px) {
+  .siya-landing-page .lp-symptom-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 900px) {
+  .siya-landing-page .lp-symptom-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.siya-landing-page .lp-symptom-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+.siya-landing-page .lp-symptom-icon {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+.siya-landing-page .lp-symptom-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+.siya-landing-page .lp-symptom-card p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.siya-landing-page .lp-dual-cards {
+  display: grid;
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .siya-landing-page .lp-dual-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.siya-landing-page .lp-info-card {
+  border-radius: 14px;
+  padding: 24px;
+  border: 1px solid var(--border);
+}
+.siya-landing-page .lp-info-card--yes {
+  background: #f0fdf9;
+  border-color: rgba(14, 165, 164, 0.25);
+}
+.siya-landing-page .lp-info-card--no {
+  background: var(--bg-subtle);
+}
+.siya-landing-page .lp-info-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+.siya-landing-page .lp-info-card ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+.siya-landing-page .lp-pathway-grid {
+  display: grid;
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .siya-landing-page .lp-pathway-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.siya-landing-page .lp-pathway-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.siya-landing-page .lp-pathway-card--featured {
+  border-color: var(--primary);
+  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.12);
+  grid-column: 1 / -1;
+}
+@media (min-width: 768px) {
+  .siya-landing-page .lp-pathway-card--featured {
+    grid-column: span 2;
+  }
+}
+.siya-landing-page .lp-pathway-card--muted {
+  background: var(--bg-subtle);
+}
+.siya-landing-page .lp-pathway-card h3 {
+  font-size: 1.05rem;
+  color: var(--primary);
+}
+.siya-landing-page .lp-pathway-card p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  flex: 1;
+  line-height: 1.5;
+}
+.siya-landing-page .lp-text-link {
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.siya-landing-page .lp-timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 20px;
+}
+@media (min-width: 900px) {
+  .siya-landing-page .lp-timeline {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+}
+.siya-landing-page .lp-timeline li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+@media (min-width: 900px) {
+  .siya-landing-page .lp-timeline li {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+}
+.siya-landing-page .lp-timeline-step {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.siya-landing-page .lp-timeline h3 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+  color: var(--primary);
+}
+.siya-landing-page .lp-timeline p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+.siya-landing-page .lp-pricing-card {
+  max-width: 520px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.siya-landing-page .lp-pricing-label {
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+.siya-landing-page .lp-pricing-amount {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+.siya-landing-page .lp-pricing-note {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+.siya-landing-page .lp-pricing-list {
+  text-align: left;
+  margin: 0 0 16px;
+  padding-left: 1.2rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.siya-landing-page .lp-pricing-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+.siya-landing-page .lp-final-cta {
+  background: var(--primary);
+  color: var(--white);
+  text-align: center;
+  padding: 48px 0 80px;
+}
+.siya-landing-page .lp-final-cta h2 {
+  color: var(--white);
+  margin-bottom: 12px;
+  font-size: clamp(1.4rem, 4vw, 1.85rem);
+}
+.siya-landing-page .lp-final-cta > .container > p {
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 560px;
+  margin: 0 auto 20px;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.siya-landing-page .lp-final-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  margin: 0 auto 16px;
+}
+.siya-landing-page .lp-final-cta .button:not(.secondary) {
+  background: var(--white);
+  color: var(--primary);
+}
+.siya-landing-page .lp-final-cta .button.secondary {
+  background: transparent;
+  color: var(--white);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+}
+.siya-landing-page .lp-final-cta .lp-disclaimer {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 auto;
+  max-width: 480px;
+}
+.siya-landing-page .lp-footer {
+  padding: 24px 0 100px;
+  background: var(--bg-subtle);
+  border-top: 1px solid var(--border);
+}
+.siya-landing-page .lp-footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  justify-content: center;
+  margin-bottom: 12px;
+  font-size: 0.82rem;
+}
+.siya-landing-page .lp-footer-legal a {
+  color: var(--text-secondary);
+  text-decoration: underline;
+}
+.siya-landing-page .lp-footer-disclaimer {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.45;
+  max-width: 640px;
+  margin: 0 auto 8px;
+}
+.siya-landing-page .lp-footer-copy {
+  text-align: center;
+  color: var(--text-muted);
+}
+.siya-landing-page .lp-sticky-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  padding: 12px 16px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+}
+.siya-landing-page .lp-sticky-cta .button {
+  width: 100%;
+  text-align: center;
+  padding: 16px;
+  font-size: 1.05rem;
+}
+@media (min-width: 768px) {
+  .siya-landing-page .lp-sticky-cta {
+    display: none;
+  }
+  .siya-landing-page .lp-footer {
+    padding-bottom: 32px;
+  }
+}
+.siya-landing-page .button {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

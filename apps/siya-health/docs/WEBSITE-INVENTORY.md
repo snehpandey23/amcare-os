@@ -1,11 +1,11 @@
 # Siya Health — Complete Website Inventory
 
-Generated: 2026-06-07
+Generated: 2026-06-26
 
 | Metric | Count |
 |--------|------:|
-| HTML files | 147 |
-| Indexable pages | 138 |
+| HTML files | 148 |
+| Indexable pages | 139 |
 | Non-indexable | 9 |
 
 ## Group summary
@@ -17,7 +17,7 @@ Generated: 2026-06-07
 | Educational Pages | 106 |
 | SEO Pages | 18 |
 | Utility Pages | 11 |
-| Orphan Pages | 0 |
+| Orphan Pages | 1 |
 | Duplicate Pages | 11 |
 | Legacy Pages | 0 |
 
@@ -39,14 +39,14 @@ Generated: 2026-06-07
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/](https://siya.health/) | Homepage | Brand entry; route patients to core services and booking | Talk to a Clinician → https://book.ca… | View profile → /providers/dr-sneh-pandey | Navigational / Commercial | Something feels off—and you're tired of guessin… | 1305 | 146 | 34 |
-| [/adhd-care](https://siya.health/adhd-care) | Service Page | Convert ADHD evaluation and treatment interest to booking | Book ADHD Evaluation → https://book.c… | Free ADHD Screening → /adhd-screening | Commercial / Transactional | Adult ADHD Evaluation Online | 1333 | 146 | 35 |
+| [/](https://siya.health/) | Homepage | Brand entry; route patients to core services and booking | Talk to a Clinician → https://book.ca… | View profile → /providers/dr-sneh-pandey | Navigational / Commercial | Something feels off—and you're tired of guessin… | 1321 | 147 | 34 |
+| [/adhd-care](https://siya.health/adhd-care) | Service Page | Convert ADHD evaluation and treatment interest to booking | Book ADHD Evaluation → https://book.c… | Free ADHD Screening → /adhd-screening | Commercial / Transactional | Adult ADHD Evaluation Online | 1449 | 147 | 40 |
 | [/adhd-diagnosis-austin](https://siya.health/adhd-diagnosis-austin) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Book ADHD evaluation → https://book.c… | Free screening → /adhd-screening | Local SEO / Commercial | ADHD Diagnosis in Austin, Texas (Online, $199) | 456 | 1 | 30 |
 | [/adhd-diagnosis-houston](https://siya.health/adhd-diagnosis-houston) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Book ADHD evaluation → https://book.c… | Free screening → /adhd-screening | Local SEO / Commercial | ADHD Diagnosis in Houston, Texas (Online, $199) | 425 | 1 | 30 |
 | [/adhd-diagnosis-pennsylvania](https://siya.health/adhd-diagnosis-pennsylvania) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Book ADHD evaluation → https://book.c… | Free screening → /adhd-screening | Local SEO / Commercial | Online ADHD Diagnosis in Pennsylvania ($199 Eva… | 460 | 1 | 31 |
 | [/adhd-diagnosis-philadelphia](https://siya.health/adhd-diagnosis-philadelphia) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Book ADHD evaluation → https://book.c… | Free screening → /adhd-screening | Local SEO / Commercial | ADHD Diagnosis in Philadelphia, Pennsylvania (O… | 461 | 1 | 32 |
 | [/adhd-diagnosis-texas](https://siya.health/adhd-diagnosis-texas) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Book ADHD evaluation → https://book.c… | Free screening → /adhd-screening | Local SEO / Commercial | Online ADHD Diagnosis in Texas ($199 Evaluation) | 464 | 2 | 31 |
-| [/adhd-screening](https://siya.health/adhd-screening) | Service Page | Top-of-funnel ADHD screening; lead to evaluation | Talk to a Clinician → https://book.ca… | — | Commercial / Transactional | What are you looking for help with? | 369 | 146 | 27 |
+| [/adhd-screening](https://siya.health/adhd-screening) | Service Page | Top-of-funnel ADHD screening; lead to evaluation | Talk to a Clinician → https://book.ca… | — | Commercial / Transactional | What are you looking for help with? | 369 | 147 | 27 |
 | [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Talk to a Clinician → https://book.ca… | Choose Visit Type → #book-visit | Commercial / Transactional | Book Your Telehealth Visit — Same-Week | 111 | 146 | 26 |
 | [/creyos-adhd-testing](https://siya.health/creyos-adhd-testing) | Service Page | Creyos cognitive testing for ADHD as part of your $199 on… | Book ADHD evaluation → https://book.c… | Free screening → /adhd-screening | Commercial / Transactional | Creyos ADHD Testing (Included in Your Evaluation) | 388 | 3 | 27 |
 | [/labs](https://siya.health/labs) | Service Page | Laboratory orders and monitoring through Siya Health tele… | Contact Siya Health → mailto:care@siy… | Talk to a Clinician → https://book.ca… | Commercial / Transactional | Diagnostic Lab Services | 137 | 146 | 26 |
@@ -64,11 +64,11 @@ Generated: 2026-06-07
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
 | [/about](https://siya.health/about) | About | Build trust; explain mission and care team | Talk to a Clinician → https://book.ca… | Explore Telehealth Care → /telehealth | Trust / Navigational | Care for adults who are done guessing about the… | 779 | 146 | 33 |
 | [/legal](https://siya.health/legal) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Legal & Compliance | 148 | 146 | 27 |
-| [/legal/controlled-substance-treatment-agreement](https://siya.health/legal/controlled-substance-treatment-agreement) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Controlled Substance Treatment Agreement | 829 | 64 | 26 |
+| [/legal/controlled-substance-treatment-agreement](https://siya.health/legal/controlled-substance-treatment-agreement) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Controlled Substance Treatment Agreement | 829 | 65 | 26 |
 | [/legal/cookie-policy](https://siya.health/legal/cookie-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Cookie Policy | 475 | 146 | 26 |
-| [/legal/notice-of-privacy-practices](https://siya.health/legal/notice-of-privacy-practices) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Notice of Privacy Practices | 1547 | 146 | 26 |
-| [/legal/privacy-policy](https://siya.health/legal/privacy-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Privacy Policy | 2874 | 146 | 26 |
-| [/legal/terms-of-use](https://siya.health/legal/terms-of-use) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Terms of Use | 4490 | 146 | 26 |
+| [/legal/notice-of-privacy-practices](https://siya.health/legal/notice-of-privacy-practices) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Notice of Privacy Practices | 1547 | 147 | 26 |
+| [/legal/privacy-policy](https://siya.health/legal/privacy-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Privacy Policy | 2874 | 147 | 26 |
+| [/legal/terms-of-use](https://siya.health/legal/terms-of-use) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Terms of Use | 4490 | 147 | 26 |
 | [/providers](https://siya.health/providers) | Provider Hub | Show clinician roster; drive profile views and booking | Talk to a Clinician → https://book.ca… | Explore Telehealth Care → /telehealth | Trust / Navigational | Our Care Team | 464 | 146 | 33 |
 | [/providers/derek-timbs](https://siya.health/providers/derek-timbs) | Provider Profile | Clinician credibility; convert to booking with this provider | Talk to a Clinician → https://book.ca… | View Services → #services-supported | Trust / Navigational | Derek Timbs, FNP-BC | 608 | 9 | 31 |
 | [/providers/dr-natasha-desai](https://siya.health/providers/dr-natasha-desai) | Provider Profile | Clinician credibility; convert to booking with this provider | Talk to a Clinician → https://book.ca… | View Services → #services-supported | Trust / Navigational | Dr. Natasha Desai, MD | 709 | 17 | 33 |
@@ -84,8 +84,8 @@ Generated: 2026-06-07
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/answers](https://siya.health/answers) | Health Guide Hub | FAQ/PAA discovery hub for AI and organic search | Join Siya Circle → https://link.yourm… | View all Metabolic Health guides → #g… | Informational / Navigational | Health Guides | 923 | 146 | 79 |
-| [/answers/adderall-vs-vyvanse-adults](https://siya.health/answers/adderall-vs-vyvanse-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | Vyvanse vs Adderall: full comparison … | Informational | When might Vyvanse be preferred over Adderall f… | 416 | 4 | 30 |
+| [/answers](https://siya.health/answers) | Health Guide Hub | FAQ/PAA discovery hub for AI and organic search | Join Siya Circle → https://link.yourm… | View all Metabolic Health guides → #g… | Informational / Navigational | Health Guides | 932 | 146 | 79 |
+| [/answers/adderall-vs-vyvanse-adults](https://siya.health/answers/adderall-vs-vyvanse-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | Vyvanse vs Adderall: full comparison … | Informational | When might Vyvanse be preferred over Adderall f… | 416 | 3 | 30 |
 | [/answers/adhd-and-weight-loss-connection](https://siya.health/answers/adhd-and-weight-loss-connection) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | — | Informational | Is there a connection between ADHD and weight l… | 323 | 8 | 29 |
 | [/answers/adhd-in-women](https://siya.health/answers/adhd-in-women) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | — | Informational | How does ADHD present differently in women? | 345 | 3 | 29 |
 | [/answers/adhd-medication-every-day](https://siya.health/answers/adhd-medication-every-day) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | ADHD medication daily or as-needed (f… | Informational | Do you have to take ADHD medication every day? | 379 | 3 | 30 |
@@ -93,9 +93,9 @@ Generated: 2026-06-07
 | [/answers/adhd-vs-anxiety](https://siya.health/answers/adhd-vs-anxiety) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | — | Informational | How do you tell ADHD apart from anxiety? | 926 | 4 | 30 |
 | [/answers/adhd-vs-burnout](https://siya.health/answers/adhd-vs-burnout) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | — | Informational | Is it ADHD or burnout? | 1045 | 5 | 32 |
 | [/answers/afternoon-energy-crash-after-lunch](https://siya.health/answers/afternoon-energy-crash-after-lunch) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | Read the full clinical guide → /blog/… | Informational | Why do I crash every afternoon after lunch? | 1180 | 2 | 31 |
-| [/answers/asrs-adhd-screening-explained](https://siya.health/answers/asrs-adhd-screening-explained) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | — | Informational | What is the ASRS ADHD screening test? | 345 | 3 | 28 |
+| [/answers/asrs-adhd-screening-explained](https://siya.health/answers/asrs-adhd-screening-explained) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | — | Informational | What is the ASRS ADHD screening test? | 345 | 4 | 28 |
 | [/answers/brain-fog-after-eating](https://siya.health/answers/brain-fog-after-eating) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | Read the full clinical guide → /blog/… | Informational | Why do I get brain fog after eating? | 1207 | 15 | 33 |
-| [/answers/can-adhd-be-diagnosed-online](https://siya.health/answers/can-adhd-be-diagnosed-online) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | — | Informational | Can ADHD be diagnosed online? | 816 | 23 | 31 |
+| [/answers/can-adhd-be-diagnosed-online](https://siya.health/answers/can-adhd-be-diagnosed-online) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | — | Informational | Can ADHD be diagnosed online? | 816 | 22 | 31 |
 | [/answers/can-adhd-cause-anxiety](https://siya.health/answers/can-adhd-cause-anxiety) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | — | Informational | Can ADHD cause anxiety? | 835 | 3 | 31 |
 | [/answers/can-sleep-apnea-cause-fatigue](https://siya.health/answers/can-sleep-apnea-cause-fatigue) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | Sleep apnea, fatigue, and metabolic r… | Informational | Can sleep apnea cause fatigue? | 542 | 10 | 29 |
 | [/answers/can-you-get-adhd-medication-online](https://siya.health/answers/can-you-get-adhd-medication-online) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | — | Informational | Can you get ADHD medication online? | 324 | 6 | 30 |
@@ -110,7 +110,7 @@ Generated: 2026-06-07
 | [/answers/high-shbg-low-free-testosterone](https://siya.health/answers/high-shbg-low-free-testosterone) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | Free vs total testosterone: what pati… | Informational | What does high SHBG with low free testosterone … | 1150 | 3 | 32 |
 | [/answers/how-long-adhd-evaluation](https://siya.health/answers/how-long-adhd-evaluation) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | — | Informational | How long does an ADHD evaluation take? | 303 | 5 | 29 |
 | [/answers/how-much-does-adhd-testing-cost](https://siya.health/answers/how-much-does-adhd-testing-cost) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | — | Informational | How much does ADHD testing cost? | 331 | 5 | 30 |
-| [/answers/how-online-prescriptions-work](https://siya.health/answers/how-online-prescriptions-work) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | — | Informational | How do online prescriptions work legally? | 800 | 6 | 31 |
+| [/answers/how-online-prescriptions-work](https://siya.health/answers/how-online-prescriptions-work) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | — | Informational | How do online prescriptions work legally? | 800 | 7 | 31 |
 | [/answers/insulin-resistance-without-diabetes](https://siya.health/answers/insulin-resistance-without-diabetes) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | Insulin resistance and weight loss (c… | Informational | Can you have insulin resistance without diabetes? | 842 | 4 | 29 |
 | [/answers/is-adhd-medication-safe-long-term](https://siya.health/answers/is-adhd-medication-safe-long-term) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | Is ADHD medication safe long-term? (f… | Informational | What does long-term ADHD medication safety moni… | 414 | 6 | 30 |
 | [/answers/is-online-adhd-diagnosis-legitimate](https://siya.health/answers/is-online-adhd-diagnosis-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | Is online ADHD diagnosis legit? (full… | Informational | What should you look for in a legitimate online… | 863 | 146 | 32 |
@@ -143,18 +143,18 @@ Generated: 2026-06-07
 | [/answers/why-am-i-tired-even-after-sleeping](https://siya.health/answers/why-am-i-tired-even-after-sleeping) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | Read the full clinical guide → /blog/… | Informational | Why am I tired even after sleeping? | 611 | 146 | 31 |
 | [/answers/why-normal-labs-dont-mean-healthy](https://siya.health/answers/why-normal-labs-dont-mean-healthy) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | Read the full clinical guide → /blog/… | Informational | Why don't normal labs mean you're healthy? | 1252 | 5 | 32 |
 | [/blog](https://siya.health/blog) | Blog Hub | Content discovery; distribute authority to articles | Talk to a Clinician → https://book.ca… | Browse Health Guides → /answers | Informational / Navigational | Health Insights — Evidence-Based, Clinical | 753 | 146 | 42 |
-| [/blog/adderall-for-adhd-how-it-works](https://siya.health/blog/adderall-for-adhd-how-it-works) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Evaluation → https://book.c… | — | Informational | Adderall for ADHD: How It Works (2026 Clinical … | 1624 | 2 | 32 |
-| [/blog/adhd](https://siya.health/blog/adhd) | Blog Hub | Content discovery; distribute authority to articles | — | — | Informational / Navigational | ADHD articles | 629 | 146 | 50 |
-| [/blog/adhd-evaluation-california-online-vs-in-person](https://siya.health/blog/adhd-evaluation-california-online-vs-in-person) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | ADHD Evaluation in California: Online vs In-Per… | 758 | 2 | 32 |
+| [/blog/adderall-for-adhd-how-it-works](https://siya.health/blog/adderall-for-adhd-how-it-works) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Evaluation → https://book.c… | — | Informational | Adderall for ADHD: How It Works (2026 Clinical … | 1624 | 3 | 32 |
+| [/blog/adhd](https://siya.health/blog/adhd) | Blog Hub | Content discovery; distribute authority to articles | — | — | Informational / Navigational | ADHD articles | 438 | 146 | 50 |
+| [/blog/adhd-evaluation-california-online-vs-in-person](https://siya.health/blog/adhd-evaluation-california-online-vs-in-person) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | ADHD Evaluation in California: Online vs In-Per… | 759 | 2 | 32 |
 | [/blog/adhd-evaluation-cost-texas](https://siya.health/blog/adhd-evaluation-cost-texas) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | ADHD Evaluation Cost in Texas: Full Breakdown (… | 611 | 4 | 31 |
-| [/blog/adhd-medication-daily-or-as-needed-adults](https://siya.health/blog/adhd-medication-daily-or-as-needed-adults) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | Do You Need ADHD Medication Every Day? What Adu… | 521 | 3 | 35 |
+| [/blog/adhd-medication-daily-or-as-needed-adults](https://siya.health/blog/adhd-medication-daily-or-as-needed-adults) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | Do Adults Need ADHD Medication Every Day? | 530 | 4 | 35 |
 | [/blog/adhd-medication-online-california](https://siya.health/blog/adhd-medication-online-california) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | Can You Get ADHD Medication Online in Californi… | 519 | 3 | 33 |
-| [/blog/adhd-medication-options-california](https://siya.health/blog/adhd-medication-options-california) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | ADHD Medication Options in California: What Exi… | 803 | 3 | 36 |
-| [/blog/adhd-medication-options-for-adults](https://siya.health/blog/adhd-medication-options-for-adults) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | ADHD Medication Options for Adults in 2026 | 1248 | 4 | 32 |
+| [/blog/adhd-medication-options-california](https://siya.health/blog/adhd-medication-options-california) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | ADHD Medication Options in California: What Exi… | 793 | 2 | 35 |
+| [/blog/adhd-medication-options-for-adults](https://siya.health/blog/adhd-medication-options-for-adults) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | ADHD Medication Options for Adults: Where to Start | 1258 | 4 | 31 |
 | [/blog/adhd-medication-side-effects-what-to-expect](https://siya.health/blog/adhd-medication-side-effects-what-to-expect) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | ADHD Medication Side Effects: What to Expect (2… | 1207 | 4 | 32 |
-| [/blog/adhd-symptoms-overlooked](https://siya.health/blog/adhd-symptoms-overlooked) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | Adult ADHD Symptoms That Are Often Overlooked | 719 | 27 | 30 |
+| [/blog/adhd-symptoms-overlooked](https://siya.health/blog/adhd-symptoms-overlooked) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | 7 Adult ADHD Signs Doctors Often Miss | 757 | 27 | 30 |
 | [/blog/adhd-telehealth-california](https://siya.health/blog/adhd-telehealth-california) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | ADHD Telehealth in California: How Virtual Care… | 437 | 2 | 32 |
-| [/blog/adhd-testing-online-california-screening-vs-evaluation](https://siya.health/blog/adhd-testing-online-california-screening-vs-evaluation) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | ADHD Testing Online in California: Screening vs… | 440 | 3 | 31 |
+| [/blog/adhd-testing-online-california-screening-vs-evaluation](https://siya.health/blog/adhd-testing-online-california-screening-vs-evaluation) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | ADHD Testing Online in California: Screening vs… | 431 | 3 | 31 |
 | [/blog/adult-adhd-symptoms-california](https://siya.health/blog/adult-adhd-symptoms-california) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | Adult ADHD Symptoms in California: Patterns Wor… | 875 | 2 | 31 |
 | [/blog/adult-adhd-treatment-california-2026](https://siya.health/blog/adult-adhd-treatment-california-2026) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | Adult ADHD Treatment in California: What Your O… | 583 | 1 | 32 |
 | [/blog/compounded-vs-branded-glp1-medications](https://siya.health/blog/compounded-vs-branded-glp1-medications) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | Compounded vs Branded GLP-1 Medications: What P… | 1878 | 2 | 34 |
@@ -173,7 +173,7 @@ Generated: 2026-06-07
 | [/blog/medical-weight-loss-glp1-semaglutide-texas](https://siya.health/blog/medical-weight-loss-glp1-semaglutide-texas) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | Medical Weight Loss in Texas: GLP-1, Semaglutid… | 1087 | 9 | 34 |
 | [/blog/medical-weight-loss-vs-dieting-what-actually-works](https://siya.health/blog/medical-weight-loss-vs-dieting-what-actually-works) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | Medical Weight Loss vs Dieting: What Actually W… | 1673 | 3 | 34 |
 | [/blog/minoxidil-for-hair-loss-does-it-work](https://siya.health/blog/minoxidil-for-hair-loss-does-it-work) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | Minoxidil for Hair Loss: Does It Work? (2026) | 1793 | 5 | 34 |
-| [/blog/non-stimulant-adhd-medications-explained](https://siya.health/blog/non-stimulant-adhd-medications-explained) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Evaluation → https://book.c… | — | Informational | Non-Stimulant ADHD Medications Explained (2026) | 1184 | 4 | 32 |
+| [/blog/non-stimulant-adhd-medications-explained](https://siya.health/blog/non-stimulant-adhd-medications-explained) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Evaluation → https://book.c… | — | Informational | When Do Adults Use Non-Stimulant ADHD Medications? | 1197 | 5 | 32 |
 | [/blog/online-adhd-diagnosis-california](https://siya.health/blog/online-adhd-diagnosis-california) | Blog Article | Educational SEO; nurture toward clinical services | Book Your Free 15-Minute ADHD Consult… | Talk to a Clinician → https://book.ca… | Informational | Online ADHD Diagnosis in California: Cost, Proc… | 1006 | 6 | 32 |
 | [/blog/online-adhd-diagnosis-texas](https://siya.health/blog/online-adhd-diagnosis-texas) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Evaluation → https://book.c… | — | Informational | Online ADHD Diagnosis in Texas: Cost, Process &… | 744 | 7 | 34 |
 | [/blog/oral-vs-injectable-weight-loss-medications](https://siya.health/blog/oral-vs-injectable-weight-loss-medications) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | Oral vs Injectable Weight Loss Medications: Wha… | 1820 | 1 | 34 |
@@ -185,7 +185,7 @@ Generated: 2026-06-07
 | [/blog/telehealth](https://siya.health/blog/telehealth) | Blog Hub | Content discovery; distribute authority to articles | — | — | Informational / Navigational | Telehealth articles | 269 | 146 | 38 |
 | [/blog/telehealth-prescriptions-how-online-treatment-works](https://siya.health/blog/telehealth-prescriptions-how-online-treatment-works) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | Telehealth Prescriptions: How Online Treatment … | 1672 | 4 | 31 |
 | [/blog/tirzepatide-vs-semaglutide-which-is-better](https://siya.health/blog/tirzepatide-vs-semaglutide-which-is-better) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | Tirzepatide vs Semaglutide: Which Is Better for… | 2041 | 4 | 35 |
-| [/blog/vyvanse-vs-adderall-differences](https://siya.health/blog/vyvanse-vs-adderall-differences) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | Vyvanse vs Adderall: Key Differences for Adults… | 1296 | 3 | 32 |
+| [/blog/vyvanse-vs-adderall-differences](https://siya.health/blog/vyvanse-vs-adderall-differences) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | Vyvanse vs Adderall: Which Lasts Longer for Adu… | 1315 | 4 | 32 |
 | [/blog/weight-loss](https://siya.health/blog/weight-loss) | Blog Hub | Content discovery; distribute authority to articles | — | — | Informational / Navigational | Weight loss articles | 305 | 146 | 39 |
 | [/blog/when-is-testosterone-therapy-appropriate](https://siya.health/blog/when-is-testosterone-therapy-appropriate) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | When Is Testosterone Therapy Appropriate? (2026) | 1647 | 8 | 33 |
 | [/blog/why-am-i-always-tired-causes-when-to-see-doctor](https://siya.health/blog/why-am-i-always-tired-causes-when-to-see-doctor) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | Explore Care Options → /telehealth | Informational | Why Am I Always Tired? Causes and When to See a… | 2644 | 18 | 36 |
@@ -202,12 +202,12 @@ Generated: 2026-06-07
 | [/adhd-diagnosis-pennsylvania](https://siya.health/adhd-diagnosis-pennsylvania) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Book ADHD evaluation → https://book.c… | Free screening → /adhd-screening | Local SEO / Commercial | Online ADHD Diagnosis in Pennsylvania ($199 Eva… | 460 | 1 | 31 |
 | [/adhd-diagnosis-philadelphia](https://siya.health/adhd-diagnosis-philadelphia) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Book ADHD evaluation → https://book.c… | Free screening → /adhd-screening | Local SEO / Commercial | ADHD Diagnosis in Philadelphia, Pennsylvania (O… | 461 | 1 | 32 |
 | [/adhd-diagnosis-texas](https://siya.health/adhd-diagnosis-texas) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Book ADHD evaluation → https://book.c… | Free screening → /adhd-screening | Local SEO / Commercial | Online ADHD Diagnosis in Texas ($199 Evaluation) | 464 | 2 | 31 |
-| [/blog/adhd-evaluation-california-online-vs-in-person](https://siya.health/blog/adhd-evaluation-california-online-vs-in-person) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | ADHD Evaluation in California: Online vs In-Per… | 758 | 2 | 32 |
+| [/blog/adhd-evaluation-california-online-vs-in-person](https://siya.health/blog/adhd-evaluation-california-online-vs-in-person) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | ADHD Evaluation in California: Online vs In-Per… | 759 | 2 | 32 |
 | [/blog/adhd-evaluation-cost-texas](https://siya.health/blog/adhd-evaluation-cost-texas) | Blog Article | Educational SEO; nurture toward clinical services | Talk to a Clinician → https://book.ca… | — | Informational | ADHD Evaluation Cost in Texas: Full Breakdown (… | 611 | 4 | 31 |
 | [/blog/adhd-medication-online-california](https://siya.health/blog/adhd-medication-online-california) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | Can You Get ADHD Medication Online in Californi… | 519 | 3 | 33 |
-| [/blog/adhd-medication-options-california](https://siya.health/blog/adhd-medication-options-california) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | ADHD Medication Options in California: What Exi… | 803 | 3 | 36 |
+| [/blog/adhd-medication-options-california](https://siya.health/blog/adhd-medication-options-california) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | ADHD Medication Options in California: What Exi… | 793 | 2 | 35 |
 | [/blog/adhd-telehealth-california](https://siya.health/blog/adhd-telehealth-california) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | ADHD Telehealth in California: How Virtual Care… | 437 | 2 | 32 |
-| [/blog/adhd-testing-online-california-screening-vs-evaluation](https://siya.health/blog/adhd-testing-online-california-screening-vs-evaluation) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | ADHD Testing Online in California: Screening vs… | 440 | 3 | 31 |
+| [/blog/adhd-testing-online-california-screening-vs-evaluation](https://siya.health/blog/adhd-testing-online-california-screening-vs-evaluation) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | ADHD Testing Online in California: Screening vs… | 431 | 3 | 31 |
 | [/blog/adult-adhd-symptoms-california](https://siya.health/blog/adult-adhd-symptoms-california) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | Adult ADHD Symptoms in California: Patterns Wor… | 875 | 2 | 31 |
 | [/blog/adult-adhd-treatment-california-2026](https://siya.health/blog/adult-adhd-treatment-california-2026) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | Adult ADHD Treatment in California: What Your O… | 583 | 1 | 32 |
 | [/blog/how-to-choose-adhd-provider-california](https://siya.health/blog/how-to-choose-adhd-provider-california) | Blog Article | Educational SEO; nurture toward clinical services | Book an Appointment → https://book.ca… | Talk to a Clinician → https://book.ca… | Informational | How to Choose an ADHD Provider in California | 578 | 1 | 33 |
@@ -225,14 +225,22 @@ Generated: 2026-06-07
 | [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Talk to a Clinician → https://book.ca… | Choose Visit Type → #book-visit | Commercial / Transactional | Book Your Telehealth Visit — Same-Week | 111 | 146 | 26 |
 | [/labs](https://siya.health/labs) | Service Page | Laboratory orders and monitoring through Siya Health tele… | Contact Siya Health → mailto:care@siy… | Talk to a Clinician → https://book.ca… | Commercial / Transactional | Diagnostic Lab Services | 137 | 146 | 26 |
 | [/legal](https://siya.health/legal) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Legal & Compliance | 148 | 146 | 27 |
-| [/legal/controlled-substance-treatment-agreement](https://siya.health/legal/controlled-substance-treatment-agreement) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Controlled Substance Treatment Agreement | 829 | 64 | 26 |
+| [/legal/controlled-substance-treatment-agreement](https://siya.health/legal/controlled-substance-treatment-agreement) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Controlled Substance Treatment Agreement | 829 | 65 | 26 |
 | [/legal/cookie-policy](https://siya.health/legal/cookie-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Cookie Policy | 475 | 146 | 26 |
-| [/legal/notice-of-privacy-practices](https://siya.health/legal/notice-of-privacy-practices) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Notice of Privacy Practices | 1547 | 146 | 26 |
-| [/legal/privacy-policy](https://siya.health/legal/privacy-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Privacy Policy | 2874 | 146 | 26 |
-| [/legal/terms-of-use](https://siya.health/legal/terms-of-use) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Terms of Use | 4490 | 146 | 26 |
+| [/legal/notice-of-privacy-practices](https://siya.health/legal/notice-of-privacy-practices) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Notice of Privacy Practices | 1547 | 147 | 26 |
+| [/legal/privacy-policy](https://siya.health/legal/privacy-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Privacy Policy | 2874 | 147 | 26 |
+| [/legal/terms-of-use](https://siya.health/legal/terms-of-use) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Terms of Use | 4490 | 147 | 26 |
 | [/prescriptions](https://siya.health/prescriptions) | Service Page | Provider-reviewed prescriptions through Siya Health teleh… | Contact Siya Health → mailto:care@siy… | Talk to a Clinician → https://book.ca… | Commercial / Transactional | Online Prescription Services | 138 | 1 | 26 |
 | [/pricing](https://siya.health/pricing) | Page | Transparent physician-led telehealth pricing: $199 initia… | Talk to a Clinician → https://book.ca… | — | Mixed | Transparent pricing for physician-led care | 329 | 146 | 1 |
 | [/primary-urgent-care](https://siya.health/primary-urgent-care) | Service Page | Virtual primary care and concierge visits with licensed p… | Talk to a Clinician → https://book.ca… | Explore Care Options → #conditions | Commercial / Transactional | Primary & Urgent Care — Virtual, Same-Week | 254 | 1 | 29 |
+
+---
+
+## Orphan Pages (1)
+
+| URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
+|-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
+| [/adult-adhd-screening-california](https://siya.health/adult-adhd-screening-california) | Page | Take a free 2-minute ADHD screening online with Siya Heal… | Start Free 2-Minute ADHD Screening → … | Already ready? Start $199 ADHD Evalua… | Mixed | Adult ADHD Evaluation Starts With a Free 2-Minu… | 803 | 0 | 7 |
 
 ---
 
@@ -240,7 +248,7 @@ Generated: 2026-06-07
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/answers/adderall-vs-vyvanse-adults](https://siya.health/answers/adderall-vs-vyvanse-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | Vyvanse vs Adderall: full comparison … | Informational | When might Vyvanse be preferred over Adderall f… | 416 | 4 | 30 |
+| [/answers/adderall-vs-vyvanse-adults](https://siya.health/answers/adderall-vs-vyvanse-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | Vyvanse vs Adderall: full comparison … | Informational | When might Vyvanse be preferred over Adderall f… | 416 | 3 | 30 |
 | [/answers/adhd-medication-side-effects](https://siya.health/answers/adhd-medication-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | ADHD medication side effects: what to… | Informational | What ADHD medication side effects are most comm… | 423 | 6 | 30 |
 | [/answers/compounded-vs-branded-glp-1](https://siya.health/answers/compounded-vs-branded-glp-1) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | Compounded vs branded GLP-1 medicatio… | Informational | What should you ask about compounded vs branded… | 396 | 5 | 29 |
 | [/answers/glp-1-side-effects](https://siya.health/answers/glp-1-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Talk to a Clinician → https://book.ca… | GLP-1 side effects and how to manage … | Informational | Which GLP-1 side effects usually improve with t… | 995 | 12 | 33 |
@@ -265,8 +273,8 @@ Generated: 2026-06-07
 - **Secondary CTA:** View profile → /providers/dr-sneh-pandey
 - **Traffic Intent:** Navigational / Commercial
 - **Target Keyword:** Something feels off—and you're tired of guessing why.
-- **Word Count:** 1305
-- **Internal Links In:** 146
+- **Word Count:** 1321
+- **Internal Links In:** 147
 - **Internal Links Out:** 34
 - **Groups:** Core Revenue Pages
 
@@ -293,9 +301,9 @@ Generated: 2026-06-07
 - **Secondary CTA:** Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Adult ADHD Evaluation Online
-- **Word Count:** 1333
-- **Internal Links In:** 146
-- **Internal Links Out:** 35
+- **Word Count:** 1449
+- **Internal Links In:** 147
+- **Internal Links Out:** 40
 - **Groups:** Core Revenue Pages
 
 ### /adhd-diagnosis-austin
@@ -378,9 +386,23 @@ Generated: 2026-06-07
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** What are you looking for help with?
 - **Word Count:** 369
-- **Internal Links In:** 146
+- **Internal Links In:** 147
 - **Internal Links Out:** 27
 - **Groups:** Core Revenue Pages
+
+### /adult-adhd-screening-california
+
+- **URL:** https://siya.health/adult-adhd-screening-california
+- **Page Type:** Page
+- **Primary Purpose:** Take a free 2-minute ADHD screening online with Siya Health. Adults in California can start with a self-screening, book a free evaluation walkthrough, or begin a $199 adult ADHD evaluation.
+- **Primary CTA:** Start Free 2-Minute ADHD Screening → /adhd-screening
+- **Secondary CTA:** Already ready? Start $199 ADHD Evaluation → https://book.carepatron.com/Siya-Health
+- **Traffic Intent:** Mixed
+- **Target Keyword:** Adult ADHD Evaluation Starts With a Free 2-Minute Screening
+- **Word Count:** 803
+- **Internal Links In:** 0
+- **Internal Links Out:** 7
+- **Groups:** Orphan Pages
 
 ### /answers
 
@@ -391,7 +413,7 @@ Generated: 2026-06-07
 - **Secondary CTA:** View all Metabolic Health guides → #guides-metabolic-all
 - **Traffic Intent:** Informational / Navigational
 - **Target Keyword:** Health Guides
-- **Word Count:** 923
+- **Word Count:** 932
 - **Internal Links In:** 146
 - **Internal Links Out:** 79
 - **Groups:** Educational Pages
@@ -406,7 +428,7 @@ Generated: 2026-06-07
 - **Traffic Intent:** Informational
 - **Target Keyword:** When might Vyvanse be preferred over Adderall for adults?
 - **Word Count:** 416
-- **Internal Links In:** 4
+- **Internal Links In:** 3
 - **Internal Links Out:** 30
 - **Groups:** Duplicate Pages, Educational Pages
 - **Duplicate of:** https://siya.health/blog/vyvanse-vs-adderall-differences
@@ -520,7 +542,7 @@ Generated: 2026-06-07
 - **Traffic Intent:** Informational
 - **Target Keyword:** What is the ASRS ADHD screening test?
 - **Word Count:** 345
-- **Internal Links In:** 3
+- **Internal Links In:** 4
 - **Internal Links Out:** 28
 - **Groups:** Educational Pages
 
@@ -548,7 +570,7 @@ Generated: 2026-06-07
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can ADHD be diagnosed online?
 - **Word Count:** 816
-- **Internal Links In:** 23
+- **Internal Links In:** 22
 - **Internal Links Out:** 31
 - **Groups:** Educational Pages
 
@@ -760,7 +782,7 @@ Generated: 2026-06-07
 - **Traffic Intent:** Informational
 - **Target Keyword:** How do online prescriptions work legally?
 - **Word Count:** 800
-- **Internal Links In:** 6
+- **Internal Links In:** 7
 - **Internal Links Out:** 31
 - **Groups:** Educational Pages
 
@@ -1229,7 +1251,7 @@ Generated: 2026-06-07
 - **Traffic Intent:** Informational
 - **Target Keyword:** Adderall for ADHD: How It Works (2026 Clinical Overview)
 - **Word Count:** 1624
-- **Internal Links In:** 2
+- **Internal Links In:** 3
 - **Internal Links Out:** 32
 - **Groups:** Educational Pages
 
@@ -1242,7 +1264,7 @@ Generated: 2026-06-07
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational / Navigational
 - **Target Keyword:** ADHD articles
-- **Word Count:** 629
+- **Word Count:** 438
 - **Internal Links In:** 146
 - **Internal Links Out:** 50
 - **Groups:** Educational Pages
@@ -1256,7 +1278,7 @@ Generated: 2026-06-07
 - **Secondary CTA:** Talk to a Clinician → https://book.carepatron.com/Siya-Health
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD Evaluation in California: Online vs In-Person Options
-- **Word Count:** 758
+- **Word Count:** 759
 - **Internal Links In:** 2
 - **Internal Links Out:** 32
 - **Groups:** Educational Pages, SEO Pages
@@ -1283,9 +1305,9 @@ Generated: 2026-06-07
 - **Primary CTA:** Talk to a Clinician → https://book.carepatron.com/Siya-Health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
-- **Target Keyword:** Do You Need ADHD Medication Every Day? What Adults Should Know
-- **Word Count:** 521
-- **Internal Links In:** 3
+- **Target Keyword:** Do Adults Need ADHD Medication Every Day?
+- **Word Count:** 530
+- **Internal Links In:** 4
 - **Internal Links Out:** 35
 - **Groups:** Educational Pages
 
@@ -1312,9 +1334,9 @@ Generated: 2026-06-07
 - **Secondary CTA:** Talk to a Clinician → https://book.carepatron.com/Siya-Health
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD Medication Options in California: What Exists (and What Is Decided Clinically)
-- **Word Count:** 803
-- **Internal Links In:** 3
-- **Internal Links Out:** 36
+- **Word Count:** 793
+- **Internal Links In:** 2
+- **Internal Links Out:** 35
 - **Groups:** Educational Pages, SEO Pages
 
 ### /blog/adhd-medication-options-for-adults
@@ -1325,10 +1347,10 @@ Generated: 2026-06-07
 - **Primary CTA:** Talk to a Clinician → https://book.carepatron.com/Siya-Health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
-- **Target Keyword:** ADHD Medication Options for Adults in 2026
-- **Word Count:** 1248
+- **Target Keyword:** ADHD Medication Options for Adults: Where to Start
+- **Word Count:** 1258
 - **Internal Links In:** 4
-- **Internal Links Out:** 32
+- **Internal Links Out:** 31
 - **Groups:** Educational Pages
 
 ### /blog/adhd-medication-side-effects-what-to-expect
@@ -1353,8 +1375,8 @@ Generated: 2026-06-07
 - **Primary CTA:** Talk to a Clinician → https://book.carepatron.com/Siya-Health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
-- **Target Keyword:** Adult ADHD Symptoms That Are Often Overlooked
-- **Word Count:** 719
+- **Target Keyword:** 7 Adult ADHD Signs Doctors Often Miss
+- **Word Count:** 757
 - **Internal Links In:** 27
 - **Internal Links Out:** 30
 - **Groups:** Educational Pages
@@ -1382,7 +1404,7 @@ Generated: 2026-06-07
 - **Secondary CTA:** Talk to a Clinician → https://book.carepatron.com/Siya-Health
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD Testing Online in California: Screening vs Full Evaluation
-- **Word Count:** 440
+- **Word Count:** 431
 - **Internal Links In:** 3
 - **Internal Links Out:** 31
 - **Groups:** Educational Pages, SEO Pages
@@ -1647,9 +1669,9 @@ Generated: 2026-06-07
 - **Primary CTA:** Book ADHD Evaluation → https://book.carepatron.com/Siya-Health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
-- **Target Keyword:** Non-Stimulant ADHD Medications Explained (2026)
-- **Word Count:** 1184
-- **Internal Links In:** 4
+- **Target Keyword:** When Do Adults Use Non-Stimulant ADHD Medications?
+- **Word Count:** 1197
+- **Internal Links In:** 5
 - **Internal Links Out:** 32
 - **Groups:** Educational Pages
 
@@ -1815,9 +1837,9 @@ Generated: 2026-06-07
 - **Primary CTA:** Talk to a Clinician → https://book.carepatron.com/Siya-Health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
-- **Target Keyword:** Vyvanse vs Adderall: Key Differences for Adults (2026)
-- **Word Count:** 1296
-- **Internal Links In:** 3
+- **Target Keyword:** Vyvanse vs Adderall: Which Lasts Longer for Adults?
+- **Word Count:** 1315
+- **Internal Links In:** 4
 - **Internal Links Out:** 32
 - **Groups:** Educational Pages
 
@@ -1943,7 +1965,7 @@ Generated: 2026-06-07
 - **Traffic Intent:** Compliance / Navigational
 - **Target Keyword:** Controlled Substance Treatment Agreement
 - **Word Count:** 829
-- **Internal Links In:** 64
+- **Internal Links In:** 65
 - **Internal Links Out:** 26
 - **Groups:** Utility Pages, Trust Pages
 
@@ -1971,7 +1993,7 @@ Generated: 2026-06-07
 - **Traffic Intent:** Compliance / Navigational
 - **Target Keyword:** Notice of Privacy Practices
 - **Word Count:** 1547
-- **Internal Links In:** 146
+- **Internal Links In:** 147
 - **Internal Links Out:** 26
 - **Groups:** Utility Pages, Trust Pages
 
@@ -1985,7 +2007,7 @@ Generated: 2026-06-07
 - **Traffic Intent:** Compliance / Navigational
 - **Target Keyword:** Privacy Policy
 - **Word Count:** 2874
-- **Internal Links In:** 146
+- **Internal Links In:** 147
 - **Internal Links Out:** 26
 - **Groups:** Utility Pages, Trust Pages
 
@@ -1999,7 +2021,7 @@ Generated: 2026-06-07
 - **Traffic Intent:** Compliance / Navigational
 - **Target Keyword:** Terms of Use
 - **Word Count:** 4490
-- **Internal Links In:** 146
+- **Internal Links In:** 147
 - **Internal Links Out:** 26
 - **Groups:** Utility Pages, Trust Pages
 

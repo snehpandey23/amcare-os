@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-07T15:39:43.851Z",
+  "generated": "2026-06-26T08:04:52.833Z",
   "services": [
     {
       "title": "Siya Health | When Focus, Energy, or Weight Won't Budge",
@@ -78,6 +78,12 @@
       "url": "https://siya.health/adult-adhd-diagnosis",
       "type": "service-adhd",
       "description": "Get an adult ADHD diagnosis online from board-certified providers. $199, 60–90 min, individualized clinical assessment. TX, PA, FL. Same-week telehealth appointments."
+    },
+    {
+      "title": "Adult ADHD Evaluation Online in California | Free ADHD Screening",
+      "url": "https://siya.health/adult-adhd-screening-california",
+      "type": "service-adhd",
+      "description": "Take a free 2-minute ADHD screening online with Siya Health. Adults in California can start with a self-screening, book a free evaluation walkthrough, or begin a $199 adult ADHD evaluation."
     },
     {
       "title": "Creyos ADHD Testing Online | Part of $199 Evaluation",

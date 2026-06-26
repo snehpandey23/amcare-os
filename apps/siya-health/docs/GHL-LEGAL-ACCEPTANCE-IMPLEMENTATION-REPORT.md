@@ -1,6 +1,6 @@
 # GHL Legal Acceptance — Implementation Report
 
-Generated: 2026-06-07T15:39:44.183Z
+Generated: 2026-06-26T08:04:53.460Z
 
 ## Objective
 
@@ -44,11 +44,11 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 
 ## Audit totals
 
-- HTML pages scanned: **147**
+- HTML pages scanned: **148**
 - Pages with legacy GHL booking links: **146**
 - Total legacy GHL booking anchor targets: **150**
-- Pages with CarePatron booking links: **147**
-- Total CarePatron booking anchor targets: **643**
+- Pages with CarePatron booking links: **148**
+- Total CarePatron booking anchor targets: **648**
 - Pages with acceptance script after build: **1**
 - Intake hub present: **yes**
 
@@ -66,6 +66,7 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/adhd-screening** (adhd-screening) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/adhd-treatment-online** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
 - **/adult-adhd-diagnosis** (adhd-funnel) — 6 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes, chat widget: yes
+- **/adult-adhd-screening-california** (adhd-funnel) — 5 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/adderall-vs-vyvanse-adults** (general-cta) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/answers/adhd-and-weight-loss-connection** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/adhd-in-women** (adhd-content) — 4 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes

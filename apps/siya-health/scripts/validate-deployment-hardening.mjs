@@ -137,6 +137,20 @@ if (cookieNoticeScript < 10) {
   errors.push(`cookie-notice.js injected on too few pages (${cookieNoticeScript})`);
 }
 
+// 9. Health Guides hub — no internal workflow or dev index links in public copy
+const answersHub = read('answers/index.html');
+const hubForbidden = [
+  /pending physician review/i,
+  /Machine index/i,
+  /article-index\.json/i,
+  /clinical review status/i,
+];
+for (const re of hubForbidden) {
+  if (re.test(answersHub)) {
+    errors.push(`Health Guides hub exposes internal/dev copy (${re}): answers/index.html`);
+  }
+}
+
 console.log('Deployment hardening validation');
 console.log('Legal effective date required:', LEGAL_EFFECTIVE_DATE_DISPLAY);
 console.log('Service states:', AVAILABLE_SERVICE_STATES.join(', '));

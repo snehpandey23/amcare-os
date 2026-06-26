@@ -1,13 +1,13 @@
 # SEO Deployment QA Report
 
-Generated: 2026-06-07T15:39:44.376Z
+Generated: 2026-06-26T08:04:53.655Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| HTML pages scanned | 147 |
-| Sitemap URLs | 139 |
+| HTML pages scanned | 148 |
+| Sitemap URLs | 140 |
 | Pages with Meet & Greet in nav | 0 |
 | Non-ADHD pages still referencing adhd-screening | 63 |
 | Broken internal links (sample) | 0 |
@@ -105,7 +105,7 @@ Generated: 2026-06-07T15:39:44.376Z
 - `terms.html`
 - `weight-loss-metabolic-health.html`
 
-### All pages with any `adhd-screening` reference (146)
+### All pages with any `adhd-screening` reference (147)
 
 - `about.html`
 - `adhd-care.html`
@@ -119,6 +119,7 @@ Generated: 2026-06-07T15:39:44.376Z
 - `adhd-screening.html`
 - `adhd-treatment-online.html`
 - `adult-adhd-diagnosis.html`
+- `adult-adhd-screening-california.html`
 - `answers/adderall-vs-vyvanse-adults.html`
 - `answers/adhd-and-weight-loss-connection.html`
 - `answers/adhd-in-women.html`
@@ -146,9 +147,8 @@ Generated: 2026-06-07T15:39:44.376Z
 - `answers/how-much-does-adhd-testing-cost.html`
 - `answers/how-online-prescriptions-work.html`
 - `answers/index.html`
-- `answers/insulin-resistance-without-diabetes.html`
 
-_…and 106 more (expected on ADHD funnels)._
+_…and 107 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 
@@ -183,6 +183,7 @@ _None detected in static HTML scan._
 - `adhd-evaluation-cost.html`
 - `adhd-treatment-online.html`
 - `adult-adhd-diagnosis.html`
+- `adult-adhd-screening-california.html`
 - `intake/index.html`
 - `online-adhd-test.html`
 - `siya-circle.html`

@@ -71,6 +71,7 @@ const ADHD_FUNNEL_PATH = [
   /^adhd-care\.html$/,
   /^adhd-screening\.html$/,
   /^adult-adhd-diagnosis\.html$/,
+  /^adult-adhd-screening-california\.html$/,
   /^adhd-treatment-online\.html$/,
   /^creyos-adhd-testing\.html$/,
   /^online-adhd-test\.html$/,
@@ -1305,6 +1306,12 @@ function isLegalContentPage(relPath) {
   return relPath.startsWith('legal/');
 }
 
+/** Google Ads / minimal landing pages — skip full nav/footer injection */
+export function isAdsLandingPage(relPath, html = '') {
+  if (relPath === 'adult-adhd-screening-california.html') return true;
+  return /\bclass="[^"]*siya-landing-page/.test(html) || /data-siya-landing=/.test(html);
+}
+
 /** Route legacy /siya-circle join CTAs to direct GHL form URL */
 export function normalizeSiyaCircleJoinLinks(html) {
   html = html.replace(
@@ -1372,6 +1379,12 @@ export function injectGhlLegalAcceptance(html, relPath) {
 export function applySiteChrome(html, relPath, title = '') {
   if (isLegalContentPage(relPath)) {
     html = injectSeoFooterArchitecture(html, relPath);
+    html = normalizeLegalLinks(html);
+    return html;
+  }
+
+  if (isAdsLandingPage(relPath, html)) {
+    html = injectCookieNotice(html, relPath);
     html = normalizeLegalLinks(html);
     return html;
   }
