@@ -45,24 +45,30 @@
     onScroll();
   }
 
+  var CTA_EVENT_MAP = {
+    'start-screening': 'click_start_screening',
+    'book-walkthrough': 'click_book_walkthrough',
+    'start-199-evaluation': 'click_start_199_evaluation',
+    'secure-chat': 'click_secure_chat',
+    'learn-more': 'click_learn_more',
+  };
+
   function initClickTracking() {
     document.addEventListener(
       'click',
       function (e) {
-        var el = e.target.closest('[data-siya-track]');
+        var el = e.target.closest('[data-cta], [data-siya-track]');
         if (!el) return;
-        var track = el.getAttribute('data-siya-track');
-        var location = el.getAttribute('data-siya-location') || 'unknown';
+        var cta = el.getAttribute('data-cta');
+        var track = el.getAttribute('data-siya-track') || (cta && CTA_EVENT_MAP[cta]);
+        var location = el.getAttribute('data-siya-location') || cta || 'unknown';
         var href = el.getAttribute('href') || '';
 
-        if (
-          track === 'click_start_screening' ||
-          track === 'click_book_walkthrough' ||
-          track === 'click_start_199_evaluation'
-        ) {
+        if (track) {
           gtagEvent(track, {
             cta_location: location,
             link_url: href,
+            data_cta: cta || undefined,
           });
         }
       },
