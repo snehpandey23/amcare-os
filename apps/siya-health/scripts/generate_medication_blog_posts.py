@@ -74,7 +74,7 @@ HEADER = """<!DOCTYPE html>
 
             <p>If you are considering ADHD evaluation, you can start with a licensed provider at <strong>Siya Health</strong>—including structured telehealth visits where clinically appropriate.</p>
             <div class="cta-block blog-cta">
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book a free consultation</a>
+              <a class="button" href="https://spruce.care/siyahealth" target="_blank" rel="noopener">Book a free consultation</a>
             </div>
 
             <h2>FAQ</h2>

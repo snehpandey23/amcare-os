@@ -10,7 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
 
 const BOOKING_CANONICAL =
-  'https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4';
+  'https://spruce.care/siyahealth';
 const GHL_CANONICAL = 'https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl';
 
 const RECOMMENDED = {

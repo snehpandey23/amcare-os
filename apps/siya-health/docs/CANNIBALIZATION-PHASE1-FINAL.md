@@ -1,6 +1,6 @@
 # Cannibalization Phase 1 — Final Report
 
-Generated: 2026-06-27T11:10:18.105Z
+Generated: 2026-06-27T11:28:23.890Z
 
 ## Build validation
 

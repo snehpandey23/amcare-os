@@ -1526,6 +1526,15 @@ export function normalizeCarePatronLinks(html, relPath) {
   return html;
 }
 
+/** Replace legacy CarePatron consultation slot (i=sysv73e4) with Spruce chat. */
+export function normalizeConsultationBookingToSpruce(html) {
+  const spruceHref = encCarepatronHref(SPRUCE_CHAT_URL);
+  return html.replace(
+    /href="([^"]*book\.carepatron\.com[^"]*i(?:=|%3D)sysv73e4[^"]*)"/gi,
+    `href="${spruceHref}"`,
+  );
+}
+
 /** Route legacy primary CTA links (CarePatron/YMA) to Spruce secure chat. */
 export function normalizeCtaUrls(html) {
   const primaryLabels = 'Talk to a Clinician|Talk to a clinician|Start Secure Medical Chat|Start Secure Chat';
@@ -1643,6 +1652,7 @@ export function applySiteChrome(html, relPath, title = '') {
   html = normalizeSiyaCircleJoinLinks(html);
   html = normalizeCtaUrls(html);
   html = normalizeCarePatronLinks(html, relPath);
+  html = normalizeConsultationBookingToSpruce(html);
   html = normalizeCtaHierarchy(html, relPath);
   return html;
 }
