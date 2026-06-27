@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
-Generated: 2026-06-26
-Total pages: 148
+Generated: 2026-06-27
+Total pages: 149
 
 ---
 
@@ -805,6 +805,11 @@ Total pages: 148
   URL: https://siya.health/weight-loss-metabolic-health
   Summary: Board-certified obesity medicine. GLP-1, phentermine, semaglutide, tirzepatide when appropriate. Provider-guided programs across CA, TX, PA, FL.
   Topics: weight-loss
+
+- Women's Health &amp; Hormone Care
+  URL: https://siya.health/womens-health
+  Summary: Women's health telehealth for PCOS, perimenopause, thyroid and metabolic concerns, ADHD in women, and preventive care across CA, TX, PA, and FL.
+  Topics: mens-health
 
 ---
 

@@ -160,7 +160,7 @@ function defaultDecisionNodes(seed, topic) {
   return [
     {
       question: `Does "${q}" affect your safety or daily function for weeks?`,
-      yes: 'Talk to a Clinician for structured next steps when clinically appropriate.',
+      yes: 'Start Secure Medical Chat for structured next steps when clinically appropriate.',
       no: 'Monitor symptoms; use related Health Guides for background education.',
     },
     {
@@ -206,7 +206,7 @@ function aboveFoldForSeed(seed) {
           segments: [
             { value: '1', label: 'Read short answer', note: 'Featured snippet summary' },
             { value: '2', label: 'Use decision tree', note: 'Below main sections' },
-            { value: '3', label: 'Talk to a Clinician', note: 'Telehealth next step' },
+            { value: '3', label: 'Start Secure Medical Chat', note: 'Telehealth next step' },
           ],
         }),
     };
@@ -262,7 +262,7 @@ function aboveFoldForSeed(seed) {
           { heading: 'Short answer', body: 'Start with the summary—educational, not personal advice.' },
           { heading: 'Sections', body: 'Read vignette & decision support for your situation.' },
           { heading: 'Evidence card', body: 'Guideline anchors before the reference list.' },
-          { heading: 'Next step', body: 'Related guides — Talk to a Clinician when ready.' },
+          { heading: 'Next step', body: 'Related guides — Start Secure Medical Chat when ready.' },
         ],
       }),
   };

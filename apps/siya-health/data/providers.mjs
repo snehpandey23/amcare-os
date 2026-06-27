@@ -6,7 +6,16 @@ import { applyInternalRecords } from './internal-provider-records.mjs';
 import { applyCanonicalToProvider } from './provider-canonical.mjs';
 import { ADDITIONAL_PROVIDERS } from './providers-additional.mjs';
 import { AVAILABLE_SERVICE_STATES } from './site-standards.mjs';
-export { BASE_URL, BOOKING_LINK, PROFILE_LAST_UPDATED, resolveProviderPhoto } from './providers-core.mjs';
+export {
+  BASE_URL,
+  BOOKING_LINK,
+  CAREPATRON_BASE,
+  ADHD_WALKTHROUGH_LINK,
+  ADHD_EVALUATION_199_LINK,
+  SPRUCE_CHAT_URL,
+  PROFILE_LAST_UPDATED,
+  resolveProviderPhoto,
+} from './providers-core.mjs';
 import { BASE_URL, BOOKING_LINK, PROFILE_LAST_UPDATED, resolveProviderPhoto } from './providers-core.mjs';
 
 export const PROVIDERS = [
@@ -95,7 +104,7 @@ export const PROVIDERS = [
     ],
     finalCta: {
       title: 'Ready to stop guessing?',
-      subtitle: 'Start with a free screening—or Talk to a Clinician if you want human answers first.',
+      subtitle: 'Start with a free screening—or Start Secure Medical Chat if you want human answers first.',
     },
     disclaimer:
       'This page describes our practice philosophy and typical workflows; it is not a guarantee of any clinical outcome. Diagnosis and treatment require an individual evaluation. Eligibility, prescribing, and follow-up depend on medical history, state law, and clinician judgment.',
@@ -347,6 +356,7 @@ export const SERVICE_PROVIDER_SLUGS = {
   'weight-loss-metabolic-health': ['dr-sneh-pandey', 'dr-vanessa-urbina', 'derek-timbs', 'wendy-delgado'],
   'primary-urgent-care': ['dr-vanessa-urbina', 'dr-natasha-desai', 'dr-sneh-pandey'],
   'mens-health-longevity': ['dr-sneh-pandey', 'derek-timbs'],
+  'womens-health': ['dr-swati-pandey', 'dr-vanessa-urbina', 'dr-natasha-desai'],
 };
 
 /** Hub filter keys → service page keys */

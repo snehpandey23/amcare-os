@@ -6,7 +6,15 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
 
 export const BASE_URL = 'https://siya.health';
-export const BOOKING_LINK = 'https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4';
+export const CAREPATRON_BASE = 'https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA';
+/** Schedule Consultation — general telehealth booking */
+export const BOOKING_LINK = `${CAREPATRON_BASE}&i=sysv73e4`;
+/** ADHD evaluation walkthrough (non-clinical) */
+export const ADHD_WALKTHROUGH_LINK = `${CAREPATRON_BASE}&i=ftxOxenx`;
+/** $199 adult ADHD evaluation booking */
+export const ADHD_EVALUATION_199_LINK = `${CAREPATRON_BASE}&i=bxrKBOuk`;
+/** Spruce secure medical chat — primary sitewide entry CTA (v2.0) */
+export const SPRUCE_CHAT_URL = 'https://spruce.care/siyahealth';
 export const PROFILE_LAST_UPDATED = '2026-06-05';
 
 export const PROVIDER_PHOTO_PLACEHOLDER = 'assets/provider-placeholder.svg';

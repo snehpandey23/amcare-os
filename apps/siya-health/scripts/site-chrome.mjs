@@ -27,12 +27,24 @@ import {
   resolveProviderPhoto,
   stateChipLabel,
 } from '../data/providers.mjs';
-import { buildClientIntakeConfig, GHL_BOOKING_URL } from '../data/ghl-intake-config.mjs';
+import { SPRUCE_CHAT_URL, ADHD_WALKTHROUGH_LINK, ADHD_EVALUATION_199_LINK } from '../data/providers-core.mjs';
 import { getServiceTagline } from '../data/provider-canonical.mjs';
 import {
   SIYA_CIRCLE_GHL_FORM_URL,
   SIYA_CIRCLE_JOIN_TRACK,
 } from '../data/siya-circle-config.mjs';
+import {
+  renderNavCtaMarkup,
+  renderFaqCtaInner,
+  renderBlogFinalCtaSection,
+  renderAboutTeamCard,
+  renderButton,
+  slotToButton,
+  resolveConversion,
+  isAdhdFunnelPath,
+} from '../design-system/components.mjs';
+import { resolveTrust, trustToRenderProps } from '../design-system/trust-system.mjs';
+import { CTA_SLOTS } from '../design-system/cta-system.mjs';
 
 function escAttr(s) {
   return String(s)
@@ -62,10 +74,6 @@ export const NAV_PROVIDERS = { path: '/providers', label: 'Our Care Team', short
 
 export const MEET_GREET_URL = BOOKING_LINK;
 
-const NAV_CTA_MEET_GREET = `<a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">${COPY_STANDARDS.primaryCta}</a>`;
-const NAV_CTA_ADHD_EVAL = `<a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">${COPY_STANDARDS.adhdPrimaryCta}</a>`;
-const NAV_CTA_SCREENING = `<a class="button" href="/adhd-screening">${COPY_STANDARDS.adhdSecondaryCta}</a>`;
-
 /** Pages that keep ADHD screening as the primary nav CTA */
 const ADHD_FUNNEL_PATH = [
   /^adhd-care\.html$/,
@@ -80,9 +88,7 @@ const ADHD_FUNNEL_PATH = [
 ];
 
 export function isAdhdFunnelPage(relPath) {
-  if (ADHD_FUNNEL_PATH.some((re) => re.test(relPath))) return true;
-  if (/^blog\/.+adhd/i.test(relPath)) return true;
-  return false;
+  return isAdhdFunnelPath(relPath);
 }
 
 /** ADHD funnels that require the extended screening/medication disclaimer in legal gate */
@@ -230,17 +236,14 @@ function buildMeetPhysiciansBlock(serviceKey, lead, stateAbbr = null, { gridClas
     ? `<p class="provider-state-filter-note">Showing clinicians licensed in <strong>${stateAbbr}</strong>.</p>`
     : '';
   const cards = providers
-    .map(
-      (p) => {
-        const tagline = getServiceTagline(p.slug, serviceKey) ?? p.servicePageTagline;
-        return `            <article class="about-team-card" data-states="${p.stateAbbreviations.join(',')}">
-              ${renderCareTeamPhoto(p, 88, 88)}
-              <h3><a href="/providers/${p.slug}">${p.name}</a></h3>
-              <p class="about-team-tagline">${tagline} · ${stateChipLabel(p)}</p>
-              <a class="text-link" href="/providers/${p.slug}">View profile →</a>
-            </article>`;
-      },
-    )
+    .map((p) => {
+      const tagline = `${getServiceTagline(p.slug, serviceKey) ?? p.servicePageTagline} · ${stateChipLabel(p)}`;
+      return renderAboutTeamCard(p, {
+        variant: 'meet',
+        photoHtml: renderCareTeamPhoto(p, 88, 88),
+        serviceTagline: tagline,
+      });
+    })
     .join('\n');
   return `<!-- SIYA:MEET-PHYSICIANS -->
       <section class="section" id="meet-physicians" aria-labelledby="meet-physicians-heading">
@@ -278,6 +281,7 @@ function resolveMeetPhysiciansConfig(relPath) {
       'telehealth.html': 'telehealth',
       'weight-loss-metabolic-health.html': 'weight-loss-metabolic-health',
       'mens-health-longevity.html': 'mens-health-longevity',
+      'womens-health.html': 'womens-health',
     };
     return { serviceKey: map[relPath], stateAbbr: null };
   }
@@ -311,6 +315,8 @@ const MEET_PHYSICIANS_BY_PAGE = {
     ),
   'mens-health-longevity.html': () =>
     buildMeetPhysiciansBlock('mens-health-longevity', "Evidence-based men's health and hormone care."),
+  'womens-health.html': () =>
+    buildMeetPhysiciansBlock('womens-health', "Evidence-based women's health and hormone care."),
   'primary-urgent-care.html': () =>
     buildMeetPhysiciansBlock('primary-urgent-care', 'Family medicine clinicians for primary and urgent telehealth.'),
 };
@@ -361,6 +367,29 @@ const LEARN_MORE_MENS = `<!-- SIYA:LEARN-MORE-MENS -->
         </div>
       </section>
       <!-- /SIYA:LEARN-MORE-MENS -->`;
+
+const LEARN_MORE_WOMENS = `<!-- SIYA:LEARN-MORE-WOMENS -->
+      <section class="section section-tinted learn-more-cluster" id="learn-more-womens-health" aria-labelledby="learn-more-womens-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="learn-more-womens-heading">Learn More About Women's Health</h2>
+            <p class="lead">Evidence-based guides on ADHD in women, metabolic health, fatigue, and hormone-related concerns.</p>
+          </div>
+          <ul class="learn-more-links">
+            <li><a href="/answers/adhd-in-women">ADHD in women: why symptoms are often missed</a></li>
+            <li><a href="/answers/what-is-insulin-resistance">What is insulin resistance?</a></li>
+            <li><a href="/answers/why-am-i-tired-even-after-sleeping">Why am I tired even after sleeping?</a></li>
+            <li><a href="/answers/poor-sleep-feels-like-adhd">When poor sleep feels like ADHD</a></li>
+            <li><a href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">Why am I always tired?</a></li>
+            <li><a href="/blog/insulin-resistance-and-weight-loss-clinician-overview">Insulin resistance and weight loss</a></li>
+            <li><a href="/blog/food-noise-and-glp-1-what-it-means-and-what-helps">Food noise and GLP-1</a></li>
+            <li><a href="/answers/what-is-food-noise">What is food noise?</a></li>
+            <li><a href="/adhd-care">ADHD evaluation &amp; care</a></li>
+            <li><a href="/weight-loss-metabolic-health">Medical weight loss</a></li>
+          </ul>
+        </div>
+      </section>
+      <!-- /SIYA:LEARN-MORE-WOMENS -->`;
 
 const LEARN_MORE_TELE = `<!-- SIYA:LEARN-MORE-TELE -->
       <section class="section section-tinted learn-more-cluster" id="learn-more-telehealth" aria-labelledby="learn-more-tele-heading">
@@ -432,26 +461,115 @@ export function injectAnswersNav(html) {
   return html;
 }
 
-/** Sitewide nav CTA: Talk to a Clinician default; Book ADHD Evaluation on ADHD funnels */
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+/** Replace landing-page trust strip from trust-system profile */
+function injectLandingTrust(html, relPath) {
+  if (!html.includes('lp-trust-row')) return html;
+  const { items } = resolveTrust(relPath, { variant: 'scroll' });
+  const props = trustToRenderProps({ items });
+  const lis = props.scrollItems
+    .map((i) => `<li><strong>${escHtml(i.strong)}</strong> ${escHtml(i.text)}</li>`)
+    .join('\n            ');
+  const block = `      <section class="lp-trust-row" aria-label="Trust highlights">
+        <div class="container">
+          <ul class="lp-trust-scroll ds-trust-scroll">
+            ${lis}
+          </ul>
+        </div>
+      </section>`;
+  return html.replace(/<section class="lp-trust-row"[\s\S]*?<\/section>/, block);
+}
+
+/** Sync hero trust bar from trust-system (homepage + cornerstone service pages) */
+const HERO_TRUST_PAGES = new Set([
+  'index.html',
+  'mens-health-longevity.html',
+  'womens-health.html',
+  'weight-loss-metabolic-health.html',
+  'telehealth.html',
+  'pricing.html',
+]);
+
+function injectHeroTrustBar(html, relPath) {
+  if (!HERO_TRUST_PAGES.has(relPath) || !html.includes('hero-trust-bar')) return html;
+  const { profile, items } = resolveTrust(relPath);
+  const props = trustToRenderProps({ items });
+  const spans = props.scrollItems
+    .slice(0, 4)
+    .map((i) => `<span><strong>${escHtml(i.strong)}</strong> ${escHtml(i.text)}</span>`)
+    .join('\n            ');
+  return html.replace(
+    /<div class="hero-trust-bar[^"]*">[\s\S]*?<\/div>/,
+    `<div class="hero-trust-bar ds-trust-row" data-trust-profile="${escAttr(profile)}">\n            ${spans}\n          </div>`,
+  );
+}
+
+/** Wire hero primary CTA through conversion-system with full analytics attrs */
+function injectHeroPrimaryCta(html, relPath) {
+  if (isAdsLandingPage(relPath, html)) return html;
+  const heroBlock = html.match(/<div class="hero-ctas[^"]*">[\s\S]*?<\/div>/i);
+  if (!heroBlock || heroBlock[0].includes('data-conversion-goal')) return html;
+  const { primary } = resolveConversion(relPath);
+  const slot = primary ?? CTA_SLOTS.primary;
+  const btn = renderButton({
+    ...slotToButton(slot, { location: 'hero', relPath }),
+    variant: 'primary',
+    ctaSlot: slot.id ?? 'primary',
+  });
+  return html.replace(
+    /(<div class="hero-ctas[^"]*">)\s*<a class="button[^"]*"[^>]*>[\s\S]*?<\/a>/i,
+    `$1\n            ${btn}`,
+  );
+}
+
+const REVENUE_TRUST_PAGES = new Set([
+  'adhd-care.html',
+  'weight-loss-metabolic-health.html',
+  'mens-health-longevity.html',
+  'womens-health.html',
+  'telehealth.html',
+  'pricing.html',
+]);
+
+/** Inject trust-metrics grid on cornerstone service pages when present */
+function injectServiceTrust(html, relPath) {
+  if (!REVENUE_TRUST_PAGES.has(relPath) || !html.includes('trust-metrics')) return html;
+  if (html.includes('data-trust-profile')) return html;
+  const { profile, items } = resolveTrust(relPath);
+  const props = trustToRenderProps({ items });
+  if (!props.metrics.length) return html;
+  const cards = props.metrics
+    .map(
+      (m) => `<div class="trust-metric-card ds-trust__metric" data-trust-item>
+              <span class="trust-metric-value ds-trust__value">${escHtml(m.value)}</span>
+              <span class="trust-metric-label ds-trust__label">${escHtml(m.label)}</span>
+            </div>`,
+    )
+    .join('\n            ');
+  return html.replace(
+    /<div class="trust-metrics-grid">[\s\S]*?<\/div>/,
+    `<div class="trust-metrics-grid ds-trust__grid" data-trust-profile="${escAttr(profile)}">\n            ${cards}\n          </div>`,
+  );
+}
+
+/** Sitewide nav CTA via conversion-system */
 export function injectNavCta(html, relPath) {
   if (relPath.startsWith('answers/')) return html;
-
-  const meetBtn = isAdhdFunnelPage(relPath) ? NAV_CTA_ADHD_EVAL : NAV_CTA_MEET_GREET;
+  const meetBtn = renderNavCtaMarkup(relPath, 'nav');
+  const mobileBtn = renderNavCtaMarkup(relPath, 'nav-mobile');
   html = html.replace(
     /<div class="nav-cta">\s*<a class="button"[^>]*>[\s\S]*?<\/a>\s*<\/div>/gi,
     `<div class="nav-cta">\n          ${meetBtn}\n        </div>`,
   );
   html = html.replace(
-    /(<div class="nav-mobile">[\s\S]*?)<a class="button"[^>]*href="[^"]*adhd-screening[^"]*"[^>]*>[\s\S]*?<\/a>/gi,
-    `$1${meetBtn}`,
-  );
-  html = html.replace(
-    /(<div class="nav-mobile">[\s\S]*?)<a class="button"[^>]*href="[^"]*yourmarketingai[^"]*"[^>]*>Book Free Consultation<\/a>/gi,
-    `$1${meetBtn}`,
-  );
-  html = html.replace(
-    /(<div class="nav-mobile">[\s\S]*?)<a class="button"[^>]*href="[^"]*carepatron[^"]*"[^>]*>[\s\S]*?<\/a>/gi,
-    `$1${meetBtn}`,
+    /(<div class="nav-mobile">[\s\S]*?)<a class="button"[^>]*>[\s\S]*?<\/a>(?=\s*<\/div>)/gi,
+    `$1${mobileBtn}`,
   );
   return html;
 }
@@ -588,8 +706,18 @@ export function normalizeSitewideCopy(html, relPath = '') {
   html = html.replaceAll('Explore care options', COPY_STANDARDS.secondaryCtaTelehealth);
   html = html.replaceAll('Explore Services', COPY_STANDARDS.secondaryCtaTelehealth);
   html = html.replaceAll('Explore Siya Health Services', COPY_STANDARDS.secondaryCtaTelehealth);
+  html = html.replace(
+    /(<a[^>]*>)\s*Join Siya Circle\s*(<\/a>)/gi,
+    `$1${COPY_STANDARDS.newsletterCta}$2`,
+  );
+  html = html.replaceAll('Get Health Guides', COPY_STANDARDS.newsletterCta);
+  // Screening labels — avoid nesting (e.g. "Free ADHD Screening" inside "Take Free ADHD Screening")
+  html = html.replace(/(Take )+Free ADHD Screening/g, COPY_STANDARDS.adhdSecondaryCta);
+  html = html.replace(/(?<!Take )Free ADHD Screening/g, COPY_STANDARDS.adhdSecondaryCta);
   html = html.replaceAll('Take Free Screening', COPY_STANDARDS.adhdSecondaryCta);
+  html = html.replaceAll('Start Free Screening', COPY_STANDARDS.adhdSecondaryCta);
   html = html.replaceAll('Schedule ADHD Evaluation', COPY_STANDARDS.adhdPrimaryCta);
+  html = html.replaceAll('Book ADHD Evaluation', COPY_STANDARDS.adhdPrimaryCta);
   html = html.replaceAll('Clinical Review Status', COPY_STANDARDS.reviewBadgePending);
   html = html.replaceAll('Clinically Reviewed', COPY_STANDARDS.reviewBadgeReviewed);
   html = html.replaceAll('Review needed', COPY_STANDARDS.reviewBadgePending);
@@ -612,10 +740,12 @@ export function normalizeSitewideCopy(html, relPath = '') {
   }
   html = html.replace(/\$150(\s*<span>\/month<\/span>)/g, '$149$1');
   html = html.replace(/\$150\/month/g, '$149/month');
-  html = html.replaceAll('Related guides + Meet & Greet when ready.', 'Related guides — Talk to a Clinician when ready.');
-  html = html.replaceAll('Related guides + Meet &amp; Greet when ready.', 'Related guides — Talk to a Clinician when ready.');
-  html = html.replace(/Meet &amp; Greet when ready/gi, 'Talk to a Clinician when ready');
-  html = html.replace(/Meet & Greet when ready/gi, 'Talk to a Clinician when ready');
+  html = html.replaceAll('Related guides + Meet & Greet when ready.', `Related guides — ${COPY_STANDARDS.primaryCta} when ready.`);
+  html = html.replaceAll('Related guides + Meet &amp; Greet when ready.', `Related guides — ${COPY_STANDARDS.primaryCta} when ready.`);
+  html = html.replace(/Meet &amp; Greet when ready/gi, `${COPY_STANDARDS.primaryCta} when ready`);
+  html = html.replace(/Meet & Greet when ready/gi, `${COPY_STANDARDS.primaryCta} when ready`);
+  html = html.replace(/Talk to a Clinician when ready/gi, `${COPY_STANDARDS.primaryCta} when ready`);
+  html = html.replace(/Talk to a clinician when ready/gi, `${COPY_STANDARDS.primaryCta} when ready`);
   html = html.replace(/free discovery call/gi, 'free ADHD screening');
   html = html.replace(/Find the Right Starting Point/g, COPY_STANDARDS.secondaryCtaTelehealth);
   html = html.replace(/Schedule a quick call/gi, COPY_STANDARDS.primaryCta);
@@ -654,6 +784,7 @@ const FOOTER_CARE_SERVICES_LINKS = [
   { href: '/adhd-screening', label: 'Free ADHD screening' },
   { href: '/weight-loss-metabolic-health', label: 'Medical weight loss' },
   { href: '/mens-health-longevity', label: "Men's health & longevity" },
+  { href: '/womens-health', label: "Women's health" },
   { href: '/telehealth', label: 'Telehealth services' },
   { href: '/labs', label: 'Diagnostic labs' },
 ];
@@ -751,7 +882,8 @@ ${FOOTER_SOCIAL_BLOCK}
         <div class="footer-brand-bar__right footer-contact-block">
           <p class="footer-contact-phone"><a href="tel:+12154451244" class="footer-phone">(215)&nbsp;445-1244</a></p>
           <p><a href="mailto:care@siya.health">care@siya.health</a></p>
-          <p><a href="${BOOKING_LINK}" target="_blank" rel="noopener">${COPY_STANDARDS.primaryCta}</a></p>
+          <p><a href="${SPRUCE_CHAT_URL}" target="_blank" rel="noopener">${COPY_STANDARDS.primaryCta}</a></p>
+          <p><a href="${BOOKING_LINK}" target="_blank" rel="noopener">${COPY_STANDARDS.secondaryCta}</a></p>
           <p><a href="/book-appointment">Book appointment</a></p>
         </div>
       </div>
@@ -815,6 +947,13 @@ export function injectLearnMoreSections(html, relPath) {
       html = html.replace(/\s*<\/main>/, `\n\n      ${LEARN_MORE_MENS}\n     </main>`);
     }
   }
+  if (relPath === 'womens-health.html') {
+    if (html.includes('SIYA:LEARN-MORE-WOMENS')) {
+      html = html.replace(/<!-- SIYA:LEARN-MORE-WOMENS -->[\s\S]*?<!-- \/SIYA:LEARN-MORE-WOMENS -->/, LEARN_MORE_WOMENS);
+    } else {
+      html = html.replace(/\s*<\/main>/, `\n\n      ${LEARN_MORE_WOMENS}\n     </main>`);
+    }
+  }
   if (relPath === 'telehealth.html') {
     if (html.includes('SIYA:LEARN-MORE-TELE')) {
       html = html.replace(/<!-- SIYA:LEARN-MORE-TELE -->[\s\S]*?<!-- \/SIYA:LEARN-MORE-TELE -->/, LEARN_MORE_TELE);
@@ -828,15 +967,11 @@ export function injectLearnMoreSections(html, relPath) {
 function buildHomepageCareTeam() {
   const providers = getAllProviders();
   const cards = providers
-    .map(
-      (p) => `            <article class="about-team-card homepage-care-card" data-states="${p.stateAbbreviations.join(',')}">
-              ${renderCareTeamPhoto(p, 128, 128)}
-              <h3><a href="/providers/${p.slug}">${p.name}</a></h3>
-              <p class="about-team-role">${p.homepageRole ?? p.role}</p>
-              <p class="about-team-states">Licensed in ${stateChipLabel(p)}</p>
-              <p class="about-team-bio">${p.homepageBio ?? p.servicePageTagline}</p>
-              <a class="button secondary care-team-profile-btn" href="/providers/${p.slug}">View profile</a>
-            </article>`,
+    .map((p) =>
+      renderAboutTeamCard(p, {
+        variant: 'homepage',
+        photoHtml: renderCareTeamPhoto(p, 128, 128),
+      }),
     )
     .join('\n');
   return `<!-- SIYA:CARE-TEAM -->
@@ -875,7 +1010,7 @@ function buildHomepageProviderConversion() {
         <div class="container">
           <div class="section-header">
             <h2 id="provider-conversion-heading">Not sure who to see?</h2>
-            <p class="lead">Talk to a Clinician—we match you with a licensed clinician for your state and goals.</p>
+            <p class="lead">Start Secure Medical Chat—we match you with a licensed clinician for your state and goals.</p>
           </div>
           <div class="provider-conversion-grid">
 ${cards}
@@ -936,16 +1071,12 @@ export function injectAboutProviderHub(html, relPath) {
 function buildAboutCareTeamSection() {
   const providers = getAllProviders();
   const cards = providers
-    .map((p) => {
-      const displayName = p.name.replace(/, (MD|PA-C|FNP-C|FNP-BC)$/, '');
-      const tagline = p.homepageBio ?? p.servicePageTagline ?? p.shortBio?.replace(/<[^>]+>/g, '').slice(0, 120);
-      return `            <article class="about-team-card">
-              ${renderCareTeamPhoto(p, 88, 88)}
-              <h3><a href="/providers/${p.slug}">${displayName}</a></h3>
-              <p class="about-team-tagline">${tagline}</p>
-              <a class="button secondary" href="/providers/${p.slug}">View profile</a>
-            </article>`;
-    })
+    .map((p) =>
+      renderAboutTeamCard(p, {
+        variant: 'about',
+        photoHtml: renderCareTeamPhoto(p, 88, 88),
+      }),
+    )
     .join('\n');
   return `<!-- SIYA:ABOUT-CARE-TEAM -->
       <section class="section" id="care-team">
@@ -1020,6 +1151,12 @@ export function injectMeetPhysiciansSection(html, relPath) {
       `<!-- /SIYA:LEARN-MORE-MENS -->\n\n      ${block}`,
     );
   }
+  if (relPath === 'womens-health.html' && html.includes('<!-- /SIYA:LEARN-MORE-WOMENS -->')) {
+    return html.replace(
+      '<!-- /SIYA:LEARN-MORE-WOMENS -->',
+      `<!-- /SIYA:LEARN-MORE-WOMENS -->\n\n      ${block}`,
+    );
+  }
   return html;
 }
 
@@ -1030,23 +1167,24 @@ export function injectSitewideCtas(html) {
 
 const ADHD_SCREENING_DEEP_LINK = '/adhd-screening?start=asrs';
 
-const ADHD_FAQ_CTA = `            <div class="faq-accordion-cta">
-              <p class="faq-accordion-cta-headline">Still deciding?</p>
-              <div class="faq-accordion-cta-buttons">
-                <a class="button" href="${ADHD_SCREENING_DEEP_LINK}" data-siya-track="screening-cta-click" data-siya-location="faq-cta">${COPY_STANDARDS.adhdSecondaryCta}</a>
-                <a class="button secondary" href="/pricing">Explore follow-up pricing</a>
-              </div>
-              <p class="faq-accordion-cta-subtext">Most patients start with a screening or review pricing before booking.</p>
-              <p class="faq-accordion-cta-phone"><a href="tel:+12154451244">(215) 445-1244</a></p>
-            </div>`;
-
-const TELE_FAQ_CTA = `            <div class="faq-accordion-cta">
-              <p class="faq-accordion-cta-headline">Still not sure where to start?</p>
-              <p class="faq-accordion-cta-subtext">A short conversation can help determine the right next step.</p>
-              <div class="faq-accordion-cta-buttons">
-                <a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">${COPY_STANDARDS.primaryCta}</a>
-              </div>
-            </div>`;
+/** Inject FAQ accordion CTA blocks via conversion-system + components.mjs */
+function injectFaqCtaBlocks(html, relPath) {
+  if (!html.includes('faq-accordion-cta')) return html;
+  if (relPath === 'adhd-care.html' || relPath === 'telehealth.html') {
+    const block = renderFaqCtaInner(relPath);
+    html = html.replace(/<div class="faq-accordion-cta">[\s\S]*?<\/div>\s*(?=\n\s*<\/div>\s*\n\s*(?:<script|<!-- SIYA))/m, `${block}\n`);
+    return html;
+  }
+  return html.replace(
+    /(<div class="faq-accordion-cta">[\s\S]*?)<a class="button"[^>]*>[\s\S]*?<\/a>/g,
+    (match, prefix) => {
+      if (relPath === 'adhd-care.html' || relPath === 'telehealth.html') return match;
+      const { primary } = resolveConversion(relPath);
+      const slot = primary ?? CTA_SLOTS.primary;
+      return `${prefix}${renderButton({ ...slotToButton(slot, { location: 'faq-cta' }), variant: 'primary' })}`;
+    },
+  );
+}
 
 const THIN_ADHD_LANDERS = new Set([
   'adult-adhd-diagnosis.html',
@@ -1086,39 +1224,13 @@ export function normalizeCtaHierarchy(html, relPath) {
   if (html.includes('blog-final-cta')) {
     html = html.replace(/<div class="cta-block blog-cta blog-cta--mid"[\s\S]*?<\/div>\s*/g, '');
     html = html.replace(/<section class="blog-california-cta cta-block blog-cta"[\s\S]*?<\/section>\s*/g, '');
-    const blogPrimary = isAdhdFunnelPage(relPath) ? COPY_STANDARDS.adhdPrimaryCta : COPY_STANDARDS.primaryCta;
     html = html.replace(
       /<section class="section blog-final-cta">[\s\S]*?<\/section>/,
-      `<section class="section blog-final-cta">
-        <div class="container">
-          <div class="cta-band">
-            <h3>Not sure where to start?</h3>
-            <p>A brief clinician conversation can help you understand your options—no obligation.</p>
-            <div class="cta-band-buttons">
-              <a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">${blogPrimary}</a>
-            </div>
-          </div>
-        </div>
-      </section>`,
+      renderBlogFinalCtaSection(relPath),
     );
   }
 
-  html = html.replace(
-    /(<div class="faq-accordion-cta">[\s\S]*?)<a class="button"[^>]*>[\s\S]*?<\/a>/g,
-    (match, prefix) => {
-      if (relPath === 'adhd-care.html') return match;
-      if (relPath === 'telehealth.html') return match;
-      return `${prefix}<p class="cta-microcopy"><a href="#book-telehealth" class="text-link">${COPY_STANDARDS.primaryCta} →</a></p>`;
-    },
-  );
-
-  if (relPath === 'adhd-care.html' && html.includes('faq-accordion-cta')) {
-    html = html.replace(/<div class="faq-accordion-cta">[\s\S]*?<\/div>\s*(?=\n\s*<\/div>\s*\n\s*<script>)/, `${ADHD_FAQ_CTA}\n`);
-  }
-
-  if (relPath === 'telehealth.html' && html.includes('faq-accordion-cta')) {
-    html = html.replace(/<div class="faq-accordion-cta">[\s\S]*?<\/div>\s*(?=\n\s*<\/div>\s*\n\s*<script>)/, `${TELE_FAQ_CTA}\n`);
-  }
+  html = injectFaqCtaBlocks(html, relPath);
 
   html = html.replace(
     /<p><a href="[^"]*(?:carepatron|yourmarketingai)[^"]*"[^>]*>Book a Meet[^<]*<\/a><\/p>/gi,
@@ -1141,11 +1253,12 @@ export function normalizeCtaHierarchy(html, relPath) {
   }
 
   if (relPath === 'telehealth.html' && html.includes('<!-- FINAL CTA -->')) {
+    const { primary } = resolveConversion(relPath);
+    const slot = primary ?? CTA_SLOTS.primary;
+    const btn = renderButton({ ...slotToButton(slot, { location: 'final-cta' }), variant: 'primary' });
     html = html.replace(
       /(<!-- FINAL CTA -->[\s\S]*?<div class="cta-band-buttons">)[\s\S]*?(<\/div>)/,
-      `$1
-              <a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">${COPY_STANDARDS.primaryCta}</a>
-            $2`,
+      `$1\n              ${btn}\n            $2`,
     );
   }
 
@@ -1376,6 +1489,112 @@ export function injectGhlLegalAcceptance(html, relPath) {
   return html.replace(/<\/body>/i, `${block}\n</body>`);
 }
 
+function encCarepatronHref(url) {
+  return url.replace(/&/g, '&amp;');
+}
+
+/** Ensure walkthrough, $199 evaluation, and geo ADHD hero CTAs use canonical CarePatron i= params. */
+export function normalizeCarePatronLinks(html, relPath) {
+  html = html.replace(/<a\s+([^>]*?)>/gi, (match, attrs) => {
+    if (!/book\.carepatron\.com/i.test(attrs)) return match;
+    if (/data-cta="book-walkthrough"/i.test(attrs)) {
+      return `<a ${attrs.replace(/href="[^"]*"/i, `href="${encCarepatronHref(ADHD_WALKTHROUGH_LINK)}"`)}>`;
+    }
+    if (/data-cta="start-199-evaluation"/i.test(attrs)) {
+      return `<a ${attrs.replace(/href="[^"]*"/i, `href="${encCarepatronHref(ADHD_EVALUATION_199_LINK)}"`)}>`;
+    }
+    return match;
+  });
+
+  html = html.replace(
+    /<a(\s[^>]*?)href="([^"]*book\.carepatron\.com[^"]*)"([^>]*>)([\s\S]*?)<\/a>/gi,
+    (match, pre, _href, post, inner) => {
+      const text = inner.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+      if (/walkthrough|15-Minute ADHD Consultation/i.test(text)) {
+        return `<a${pre}href="${encCarepatronHref(ADHD_WALKTHROUGH_LINK)}"${post}${inner}</a>`;
+      }
+      if (/(?:Start|start).*\$199|Already ready\?/i.test(text) && /evaluation/i.test(text)) {
+        return `<a${pre}href="${encCarepatronHref(ADHD_EVALUATION_199_LINK)}"${post}${inner}</a>`;
+      }
+      return match;
+    },
+  );
+
+  return html;
+}
+
+/** Route legacy primary CTA links (CarePatron/YMA) to Spruce secure chat. */
+export function normalizeCtaUrls(html) {
+  const primaryLabels = 'Talk to a Clinician|Talk to a clinician|Start Secure Medical Chat|Start Secure Chat';
+  html = html.replace(
+    new RegExp(`<a(\\s[^>]*?)href="[^"]*(?:carepatron|yourmarketingai)[^"]*"([^>]*)>\\s*(?:${primaryLabels})\\s*<\\/a>`, 'gi'),
+    (_m, before, after) => {
+      const attrs = `${before}${after}`
+        .replace(/\s*target="[^"]*"/gi, '')
+        .replace(/\s*rel="[^"]*"/gi, '')
+        .replace(/\s*data-siya-track="[^"]*"/gi, '');
+      return `<a${attrs} href="${SPRUCE_CHAT_URL}" target="_blank" rel="noopener" data-siya-track="primary-cta-click">${COPY_STANDARDS.primaryCta}</a>`;
+    },
+  );
+  html = html.replace(
+    /<a(\s[^>]*?)href="[^"]*(?:carepatron|yourmarketingai)[^"]*"([^>]*)>\s*Schedule Consultation\s*<\/a>/gi,
+    (_m, before, after) => {
+      const attrs = `${before}${after}`
+        .replace(/\s*target="[^"]*"/gi, '')
+        .replace(/\s*rel="[^"]*"/gi, '')
+        .replace(/\s*data-siya-track="[^"]*"/gi, '');
+      return `<a${attrs} href="${BOOKING_LINK}" target="_blank" rel="noopener" data-siya-track="schedule-consultation-click">${COPY_STANDARDS.secondaryCta}</a>`;
+    },
+  );
+  return html;
+}
+
+/** Remove per-page inline FAQ/header scripts superseded by shared assets. */
+export function stripInlineChromeScripts(html) {
+  if (html.includes('faq-accordion.js')) {
+    html = html.replace(
+      /<script>\s*\(function\s*\(\)\s*\{[\s\S]*?data-faq-trigger[\s\S]*?\}\)\(\);\s*<\/script>\s*/g,
+      '',
+    );
+  }
+  if (html.includes('header-scroll.js')) {
+    html = html.replace(
+      /<script>\s*\(function\s*\(\)\s*\{[\s\S]*?site-header-scrolled[\s\S]*?\}\)\(\);\s*<\/script>\s*/g,
+      '',
+    );
+  }
+  return html;
+}
+
+/** Shared FAQ accordion behavior (replaces per-page inline scripts). */
+export function injectFaqAccordion(html) {
+  if (!html.includes('faq-accordion') && !html.includes('data-faq-trigger')) return html;
+  if (html.includes('faq-accordion.js')) return html;
+  const block = `<!-- SIYA:FAQ-ACCORDION -->
+    <script src="/scripts/faq-accordion.js" defer></script>
+    <!-- /SIYA:FAQ-ACCORDION -->`;
+  if (html.includes('<!-- /SIYA:HEADER-SCROLL -->')) {
+    return html.replace('<!-- /SIYA:HEADER-SCROLL -->', `<!-- /SIYA:HEADER-SCROLL -->\n${block}`);
+  }
+  if (html.includes('<!-- /SIYA:COOKIE-NOTICE -->')) {
+    return html.replace('<!-- /SIYA:COOKIE-NOTICE -->', `<!-- /SIYA:COOKIE-NOTICE -->\n${block}`);
+  }
+  return html.replace(/<\/body>/i, `${block}\n</body>`);
+}
+
+/** Shared transparent-header scroll behavior (replaces per-page inline scripts). */
+export function injectHeaderScroll(html) {
+  if (!html.includes('site-header-transparent') && !html.includes('id="site-header"')) return html;
+  if (html.includes('header-scroll.js')) return html;
+  const block = `<!-- SIYA:HEADER-SCROLL -->
+    <script src="/scripts/header-scroll.js" defer></script>
+    <!-- /SIYA:HEADER-SCROLL -->`;
+  if (html.includes('<!-- /SIYA:COOKIE-NOTICE -->')) {
+    return html.replace('<!-- /SIYA:COOKIE-NOTICE -->', `<!-- /SIYA:COOKIE-NOTICE -->\n${block}`);
+  }
+  return html.replace(/<\/body>/i, `${block}\n</body>`);
+}
+
 export function applySiteChrome(html, relPath, title = '') {
   if (isLegalContentPage(relPath)) {
     html = injectSeoFooterArchitecture(html, relPath);
@@ -1385,6 +1604,9 @@ export function applySiteChrome(html, relPath, title = '') {
 
   if (isAdsLandingPage(relPath, html)) {
     html = injectCookieNotice(html, relPath);
+    html = injectLandingTrust(html, relPath);
+    html = injectFaqAccordion(html);
+    html = stripInlineChromeScripts(html);
     html = normalizeLegalLinks(html);
     return html;
   }
@@ -1407,9 +1629,17 @@ export function applySiteChrome(html, relPath, title = '') {
   html = stripGhlLegalAcceptance(html, relPath);
   html = injectGhlLegalAcceptance(html, relPath);
   html = injectCookieNotice(html, relPath);
+  html = injectHeaderScroll(html);
+  html = injectFaqAccordion(html);
+  html = injectHeroTrustBar(html, relPath);
+  html = injectHeroPrimaryCta(html, relPath);
+  html = injectServiceTrust(html, relPath);
+  html = stripInlineChromeScripts(html);
   html = normalizeLegalLinks(html);
   html = normalizeSitewideCopy(html, relPath);
   html = normalizeSiyaCircleJoinLinks(html);
+  html = normalizeCtaUrls(html);
+  html = normalizeCarePatronLinks(html, relPath);
   html = normalizeCtaHierarchy(html, relPath);
   return html;
 }

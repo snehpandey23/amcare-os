@@ -1,6 +1,6 @@
 # Link Equity Report — Canonical Winning Blogs
 
-Generated: 2026-06-26T08:04:50.446Z
+Generated: 2026-06-27T10:50:30.114Z
 
 ## Top 20 blogs needing more internal links
 
@@ -12,7 +12,7 @@ Generated: 2026-06-26T08:04:50.446Z
 | 4 | /blog/tirzepatide-vs-semaglutide-which-is-better | 4 | ✗ | ✗ | ✓ | ✓ | ✗ | 2/5 |
 | 5 | /blog/minoxidil-for-hair-loss-does-it-work | 5 | ✗ | ✗ | ✓ | ✓ | ✗ | 2/5 |
 | 6 | /blog/non-stimulant-adhd-medications-explained | 5 | ✗ | ✗ | ✓ | ✓ | ✓ | 3/5 |
-| 7 | /blog/why-am-i-always-tired-causes-when-to-see-doctor | 18 | ✗ | ✗ | ✓ | ✓ | ✓ | 3/5 |
+| 7 | /blog/why-am-i-always-tired-causes-when-to-see-doctor | 19 | ✗ | ✗ | ✓ | ✓ | ✓ | 3/5 |
 | 8 | /blog/compounded-vs-branded-glp1-medications | 2 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 9 | /blog/oral-vs-topical-minoxidil-which-is-right | 2 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 10 | /blog/adhd-telehealth-california | 2 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
@@ -32,9 +32,9 @@ Generated: 2026-06-26T08:04:50.446Z
 | Blog | Inbound |
 |------|--------:|
 | /blog/is-online-adhd-diagnosis-legit | 30 |
-| /blog/insulin-resistance-and-weight-loss-clinician-overview | 22 |
-| /blog/food-noise-and-glp-1-what-it-means-and-what-helps | 21 |
-| /blog/why-am-i-always-tired-causes-when-to-see-doctor | 18 |
+| /blog/insulin-resistance-and-weight-loss-clinician-overview | 23 |
+| /blog/food-noise-and-glp-1-what-it-means-and-what-helps | 22 |
+| /blog/why-am-i-always-tired-causes-when-to-see-doctor | 19 |
 | /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | 13 |
 | /blog/glp1-side-effects-and-how-to-manage-them | 12 |
 | /blog/semaglutide-for-weight-loss-how-it-works | 11 |

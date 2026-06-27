@@ -21,6 +21,7 @@ import { COPY_STANDARDS, FOOTER_STATES_LINE } from '../data/site-standards.mjs';
 import { buildHealthGuideEngagement } from './answer-engagement-system.mjs';
 import { BOOKING_LINK } from '../data/providers-core.mjs';
 import { MEET_GREET_URL, NAV_HEALTH_GUIDES } from './site-chrome.mjs';
+import { renderNavCtaMarkup, renderButton, slotToButton, resolveConversion } from '../design-system/components.mjs';
 import { ANSWER_DIAGRAM_EMBEDS, renderDiagramFigure } from '../data/visual-diagrams.mjs';
 import { SIYA_CIRCLE_PROMO_HTML } from '../data/siya-circle-config.mjs';
 
@@ -197,8 +198,10 @@ ${jsonLdScripts}
   </head>`;
 }
 
-function headerNav(topic = 'general') {
-  const navCta = `<a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">Talk to a Clinician</a>`;
+function headerNav(topic = 'general', slug = 'index') {
+  const relPath = slug === 'index' ? 'answers/index.html' : `answers/${slug}.html`;
+  const navCta = renderNavCtaMarkup(relPath, 'nav');
+  const mobileCta = renderNavCtaMarkup(relPath, 'nav-mobile');
   return `    <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container">
@@ -225,7 +228,7 @@ function headerNav(topic = 'general') {
           <a href="/telehealth">Telehealth</a>
           <a href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a>
           <a href="/blog">Blog</a>
-          ${navCta}
+          ${mobileCta}
         </div>
       </div>
     </header>`;
@@ -358,6 +361,11 @@ function buildAnswerPage(seed) {
     ? `\n${renderDiagramFigure(diagramConfig.key, { figcaption: diagramConfig.figcaption })}\n`
     : '';
   const faqJson = buildFaqJson(seed);
+  const answerRelPath = `answers/${seed.slug}.html`;
+  const answerCtaBtn = renderButton({
+    ...slotToButton(resolveConversion(answerRelPath).primary, { location: 'answer-final-cta', relPath: answerRelPath }),
+    variant: 'primary',
+  });
 
   const medicalWebPage = {
     '@context': 'https://schema.org',
@@ -396,7 +404,7 @@ function buildAnswerPage(seed) {
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PLBD4TTQ"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-${headerNav(seed.topic)}
+${headerNav(seed.topic, seed.slug)}
     <main id="main">
       <article class="blog-article answer-page">
         <div class="container blog-container">
@@ -430,7 +438,7 @@ ${engagement.evidenceCard}
 ${learnMoreHtml}
 ${nextStepsHtml(hub, seed.topic)}
             <div class="cta-block blog-cta answer-final-cta">
-              <a class="button" href="${BOOK}" target="_blank" rel="noopener">Talk to a Clinician</a>
+              ${answerCtaBtn}
             </div>
             <p class="cta-microcopy">Also read our <a href="${hub.url}">${hub.label} articles</a>${resolveCanonicalBlog(seed) ? ` · <a href="${resolveCanonicalBlog(seed).path}">Full clinical guide</a>` : ''}${reviewRecord.reviewer ? ` · <a href="/providers/${reviewRecord.reviewer.slug}">${reviewRecord.reviewer.name}</a>` : ''}</p>
           </div>

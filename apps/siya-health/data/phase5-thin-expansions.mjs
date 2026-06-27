@@ -1452,9 +1452,9 @@ export const PHASE5_ANSWER_SEEDS = [
       },
       {
         id: 'when-to-seek-evaluation',
-        heading: 'When to Talk to a Clinician vs book full evaluation',
+        heading: 'When to start secure chat vs book full evaluation',
         paragraphs: [
-          'Talk to a Clinician when you are comparing telehealth options or unsure which pathway fits. Book comprehensive evaluation when you are ready for diagnosis-level assessment with prepared history.',
+          'Start Secure Medical Chat when you are comparing telehealth options or unsure which pathway fits. Book comprehensive evaluation when you are ready for diagnosis-level assessment with prepared history.',
           'If you already completed a thorough elsewhere evaluation, bring records to avoid duplicate testing.',
         ],
       },

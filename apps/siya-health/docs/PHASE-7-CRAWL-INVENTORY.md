@@ -1,7 +1,7 @@
 # Phase 7 — Crawl Inventory
 
-**Generated:** 2026-06-26
-**HTML routes:** 148 · **Sitemap URLs:** 140
+**Generated:** 2026-06-27
+**HTML routes:** 149 · **Sitemap URLs:** 141
 
 ## Issue summary
 
@@ -16,8 +16,8 @@
 
 | URL | Status | Indexable | Sitemap | Inbound | Canonical | Redirect |
 |-----|--------|-----------|---------|--------:|-----------|----------|
-| /about | 200 | yes | yes | 437 | /about | — |
-| /adhd-care | 200 | yes | yes | 574 | /adhd-care | — |
+| /about | 200 | yes | yes | 440 | /about | — |
+| /adhd-care | 200 | yes | yes | 566 | /adhd-care | — |
 | /adhd-diagnosis-austin | 200 | yes | yes | 1 | /adhd-diagnosis-austin | — |
 | /adhd-diagnosis-florida | 301 | no | no | 0 | /adhd-care | /adhd-care |
 | /adhd-diagnosis-houston | 200 | yes | yes | 1 | /adhd-diagnosis-houston | — |
@@ -25,13 +25,13 @@
 | /adhd-diagnosis-philadelphia | 200 | yes | yes | 1 | /adhd-diagnosis-philadelphia | — |
 | /adhd-diagnosis-texas | 200 | yes | yes | 2 | /adhd-diagnosis-texas | — |
 | /adhd-evaluation-cost | 301 | no | no | 0 | /pricing | /pricing |
-| /adhd-screening | 200 | yes | yes | 229 | /adhd-screening | — |
+| /adhd-screening | 200 | yes | yes | 244 | /adhd-screening | — |
 | /adhd-treatment-online | 301 | no | no | 0 | /adhd-care | /adhd-care |
 | /adult-adhd-diagnosis | 301 | no | no | 0 | /adhd-care | /adhd-care |
 | /adult-adhd-screening-california | 200 | yes | yes | 0 | /adult-adhd-screening-california | — |
 | /answers/adderall-vs-vyvanse-adults | 200 | yes | yes | 3 | /answers/adderall-vs-vyvanse-adults | — |
 | /answers/adhd-and-weight-loss-connection | 200 | yes | yes | 9 | /answers/adhd-and-weight-loss-connection | — |
-| /answers/adhd-in-women | 200 | yes | yes | 3 | /answers/adhd-in-women | — |
+| /answers/adhd-in-women | 200 | yes | yes | 7 | /answers/adhd-in-women | — |
 | /answers/adhd-medication-every-day | 200 | yes | yes | 3 | /answers/adhd-medication-every-day | — |
 | /answers/adhd-medication-side-effects | 200 | yes | yes | 7 | /answers/adhd-medication-side-effects | — |
 | /answers/adhd-vs-anxiety | 200 | yes | yes | 5 | /answers/adhd-vs-anxiety | — |
@@ -58,14 +58,14 @@
 | /answers | 200 | yes | yes | 527 | /answers | — |
 | /answers/insulin-resistance-without-diabetes | 200 | yes | yes | 7 | /answers/insulin-resistance-without-diabetes | — |
 | /answers/is-adhd-medication-safe-long-term | 200 | yes | yes | 7 | /answers/is-adhd-medication-safe-long-term | — |
-| /answers/is-online-adhd-diagnosis-legitimate | 200 | yes | yes | 153 | /answers/is-online-adhd-diagnosis-legitimate | — |
+| /answers/is-online-adhd-diagnosis-legitimate | 200 | yes | yes | 154 | /answers/is-online-adhd-diagnosis-legitimate | — |
 | /answers/is-telehealth-legitimate | 200 | yes | yes | 12 | /answers/is-telehealth-legitimate | — |
 | /answers/late-adhd-diagnosis-adults | 200 | yes | yes | 4 | /answers/late-adhd-diagnosis-adults | — |
 | /answers/medical-weight-loss-vs-dieting | 200 | yes | yes | 14 | /answers/medical-weight-loss-vs-dieting | — |
 | /answers/meet-and-greet-telehealth-expectations | 200 | yes | yes | 9 | /answers/meet-and-greet-telehealth-expectations | — |
 | /answers/normal-a1c-insulin-resistance | 200 | yes | yes | 15 | /answers/normal-a1c-insulin-resistance | — |
 | /answers/oral-vs-topical-minoxidil | 200 | yes | yes | 3 | /answers/oral-vs-topical-minoxidil | — |
-| /answers/poor-sleep-feels-like-adhd | 200 | yes | yes | 11 | /answers/poor-sleep-feels-like-adhd | — |
+| /answers/poor-sleep-feels-like-adhd | 200 | yes | yes | 13 | /answers/poor-sleep-feels-like-adhd | — |
 | /answers/rejection-sensitivity-adhd | 200 | yes | yes | 2 | /answers/rejection-sensitivity-adhd | — |
 | /answers/screening-vs-adhd-evaluation | 200 | yes | yes | 7 | /answers/screening-vs-adhd-evaluation | — |
 | /answers/semaglutide-weight-loss-how-it-works | 200 | yes | yes | 14 | /answers/semaglutide-weight-loss-how-it-works | — |
@@ -78,14 +78,14 @@
 | /answers/time-blindness-adhd | 200 | yes | yes | 2 | /answers/time-blindness-adhd | — |
 | /answers/trt-monitoring-requirements | 200 | yes | yes | 7 | /answers/trt-monitoring-requirements | — |
 | /answers/weight-gain-after-stopping-ozempic | 200 | yes | yes | 1 | /answers/weight-gain-after-stopping-ozempic | — |
-| /answers/what-does-low-testosterone-feel-like | 200 | yes | yes | 23 | /answers/what-does-low-testosterone-feel-like | — |
+| /answers/what-does-low-testosterone-feel-like | 200 | yes | yes | 22 | /answers/what-does-low-testosterone-feel-like | — |
 | /answers/what-included-199-adhd-evaluation | 200 | yes | yes | 6 | /answers/what-included-199-adhd-evaluation | — |
 | /answers/what-is-food-noise | 200 | yes | yes | 35 | /answers/what-is-food-noise | — |
 | /answers/what-is-free-testosterone | 200 | yes | yes | 20 | /answers/what-is-free-testosterone | — |
-| /answers/what-is-insulin-resistance | 200 | yes | yes | 179 | /answers/what-is-insulin-resistance | — |
+| /answers/what-is-insulin-resistance | 200 | yes | yes | 181 | /answers/what-is-insulin-resistance | — |
 | /answers/when-is-testosterone-therapy-appropriate | 200 | yes | yes | 13 | /answers/when-is-testosterone-therapy-appropriate | — |
 | /answers/who-qualifies-glp-1-weight-loss | 200 | yes | yes | 11 | /answers/who-qualifies-glp-1-weight-loss | — |
-| /answers/why-am-i-tired-even-after-sleeping | 200 | yes | yes | 169 | /answers/why-am-i-tired-even-after-sleeping | — |
+| /answers/why-am-i-tired-even-after-sleeping | 200 | yes | yes | 171 | /answers/why-am-i-tired-even-after-sleeping | — |
 | /answers/why-normal-labs-dont-mean-healthy | 200 | yes | yes | 9 | /answers/why-normal-labs-dont-mean-healthy | — |
 | /blog/adderall-for-adhd-how-it-works | 200 | yes | yes | 5 | /blog/adderall-for-adhd-how-it-works | — |
 | /blog/adhd-evaluation-california-online-vs-in-person | 200 | yes | yes | 3 | /blog/adhd-evaluation-california-online-vs-in-person | — |
@@ -98,21 +98,21 @@
 | /blog/adhd-symptoms-overlooked | 200 | yes | yes | 28 | /blog/adhd-symptoms-overlooked | — |
 | /blog/adhd-telehealth-california | 200 | yes | yes | 5 | /blog/adhd-telehealth-california | — |
 | /blog/adhd-testing-online-california-screening-vs-evaluation | 200 | yes | yes | 5 | /blog/adhd-testing-online-california-screening-vs-evaluation | — |
-| /blog/adhd | 200 | yes | yes | 248 | /blog/adhd | — |
+| /blog/adhd | 200 | yes | yes | 249 | /blog/adhd | — |
 | /blog/adult-adhd-symptoms-california | 200 | yes | yes | 3 | /blog/adult-adhd-symptoms-california | — |
 | /blog/adult-adhd-treatment-california-2026 | 200 | yes | yes | 2 | /blog/adult-adhd-treatment-california-2026 | — |
 | /blog/compounded-vs-branded-glp1-medications | 200 | yes | yes | 5 | /blog/compounded-vs-branded-glp1-medications | — |
-| /blog/food-noise-and-glp-1-what-it-means-and-what-helps | 200 | yes | yes | 44 | /blog/food-noise-and-glp-1-what-it-means-and-what-helps | — |
+| /blog/food-noise-and-glp-1-what-it-means-and-what-helps | 200 | yes | yes | 45 | /blog/food-noise-and-glp-1-what-it-means-and-what-helps | — |
 | /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | 200 | yes | yes | 25 | /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | — |
 | /blog/glp1-side-effects-and-how-to-manage-them | 200 | yes | yes | 17 | /blog/glp1-side-effects-and-how-to-manage-them | — |
 | /blog/how-adhd-medication-is-prescribed-online | 200 | yes | yes | 12 | /blog/how-adhd-medication-is-prescribed-online | — |
 | /blog/how-mental-health-affects-weight-loss-outcomes | 200 | yes | yes | 2 | /blog/how-mental-health-affects-weight-loss-outcomes | — |
 | /blog/how-to-choose-adhd-provider-california | 200 | yes | yes | 2 | /blog/how-to-choose-adhd-provider-california | — |
-| /blog/how-to-know-if-you-have-adhd-adult | 200 | yes | yes | 177 | /blog/how-to-know-if-you-have-adhd-adult | — |
+| /blog/how-to-know-if-you-have-adhd-adult | 200 | yes | yes | 178 | /blog/how-to-know-if-you-have-adhd-adult | — |
 | /blog/how-to-safely-get-prescriptions-online | 200 | yes | yes | 15 | /blog/how-to-safely-get-prescriptions-online | — |
-| /blog | 200 | yes | yes | 435 | /blog | — |
+| /blog | 200 | yes | yes | 437 | /blog | — |
 | /blog/insomnia-treatment-options-beyond-medication | 200 | yes | yes | 6 | /blog/insomnia-treatment-options-beyond-medication | — |
-| /blog/insulin-resistance-and-weight-loss-clinician-overview | 200 | yes | yes | 56 | /blog/insulin-resistance-and-weight-loss-clinician-overview | — |
+| /blog/insulin-resistance-and-weight-loss-clinician-overview | 200 | yes | yes | 57 | /blog/insulin-resistance-and-weight-loss-clinician-overview | — |
 | /blog/is-adhd-medication-safe-long-term | 200 | yes | yes | 7 | /blog/is-adhd-medication-safe-long-term | — |
 | /blog/is-online-adhd-diagnosis-legit | 200 | yes | yes | 40 | /blog/is-online-adhd-diagnosis-legit | — |
 | /blog/medical-weight-loss-glp1-semaglutide-texas | 200 | yes | yes | 17 | /blog/medical-weight-loss-glp1-semaglutide-texas | — |
@@ -128,39 +128,40 @@
 | /blog/sildenafil-for-erectile-dysfunction-what-to-expect | 200 | yes | yes | 2 | /blog/sildenafil-for-erectile-dysfunction-what-to-expect | — |
 | /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 200 | yes | yes | 28 | /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | — |
 | /blog/telehealth-prescriptions-how-online-treatment-works | 200 | yes | yes | 6 | /blog/telehealth-prescriptions-how-online-treatment-works | — |
-| /blog/telehealth | 200 | yes | yes | 184 | /blog/telehealth | — |
+| /blog/telehealth | 200 | yes | yes | 185 | /blog/telehealth | — |
 | /blog/tirzepatide-vs-semaglutide-which-is-better | 200 | yes | yes | 6 | /blog/tirzepatide-vs-semaglutide-which-is-better | — |
 | /blog/vyvanse-vs-adderall-differences | 200 | yes | yes | 8 | /blog/vyvanse-vs-adderall-differences | — |
-| /blog/weight-loss | 200 | yes | yes | 195 | /blog/weight-loss | — |
+| /blog/weight-loss | 200 | yes | yes | 196 | /blog/weight-loss | — |
 | /blog/when-is-testosterone-therapy-appropriate | 200 | yes | yes | 14 | /blog/when-is-testosterone-therapy-appropriate | — |
-| /blog/why-am-i-always-tired-causes-when-to-see-doctor | 200 | yes | yes | 40 | /blog/why-am-i-always-tired-causes-when-to-see-doctor | — |
+| /blog/why-am-i-always-tired-causes-when-to-see-doctor | 200 | yes | yes | 43 | /blog/why-am-i-always-tired-causes-when-to-see-doctor | — |
 | /blog/youre-not-lazy-signs-undiagnosed-adult-adhd | 200 | yes | yes | 4 | /blog/youre-not-lazy-signs-undiagnosed-adult-adhd | — |
-| /book-appointment | 200 | yes | yes | 156 | /book-appointment | — |
+| /book-appointment | 200 | yes | yes | 148 | /book-appointment | — |
 | /creyos-adhd-testing | 200 | yes | yes | 3 | /creyos-adhd-testing | — |
-| / | 200 | yes | yes | 583 | / | — |
+| / | 200 | yes | yes | 587 | / | — |
 | /intake | 200 | no | yes | 0 | /intake | — |
-| /labs | 200 | yes | yes | 146 | /labs | — |
-| /legal/controlled-substance-treatment-agreement | 200 | yes | yes | 65 | /legal/controlled-substance-treatment-agreement | — |
-| /legal/cookie-policy | 200 | yes | yes | 147 | /legal/cookie-policy | — |
-| /legal | 200 | yes | yes | 160 | /legal | — |
-| /legal/notice-of-privacy-practices | 200 | yes | yes | 159 | /legal/notice-of-privacy-practices | — |
-| /legal/privacy-policy | 200 | yes | yes | 160 | /legal/privacy-policy | — |
-| /legal/terms-of-use | 200 | yes | yes | 156 | /legal/terms-of-use | — |
-| /mens-health-longevity | 200 | yes | yes | 196 | /mens-health-longevity | — |
+| /labs | 200 | yes | yes | 147 | /labs | — |
+| /legal/controlled-substance-treatment-agreement | 200 | yes | yes | 71 | /legal/controlled-substance-treatment-agreement | — |
+| /legal/cookie-policy | 200 | yes | yes | 148 | /legal/cookie-policy | — |
+| /legal | 200 | yes | yes | 159 | /legal | — |
+| /legal/notice-of-privacy-practices | 200 | yes | yes | 160 | /legal/notice-of-privacy-practices | — |
+| /legal/privacy-policy | 200 | yes | yes | 161 | /legal/privacy-policy | — |
+| /legal/terms-of-use | 200 | yes | yes | 157 | /legal/terms-of-use | — |
+| /mens-health-longevity | 200 | yes | yes | 197 | /mens-health-longevity | — |
 | /online-adhd-test | 301 | no | no | 0 | /adhd-screening | /adhd-screening |
 | /prescriptions | 200 | yes | yes | 1 | /prescriptions | — |
-| /pricing | 200 | yes | yes | 196 | /pricing | — |
+| /pricing | 200 | yes | yes | 193 | /pricing | — |
 | /primary-urgent-care | 200 | yes | yes | 3 | /primary-urgent-care | — |
 | /privacy-policy | 301 | no | no | 0 | /legal/privacy-policy | /legal/privacy-policy |
 | /providers/derek-timbs | 200 | yes | yes | 15 | /providers/derek-timbs | — |
-| /providers/dr-natasha-desai | 200 | yes | yes | 31 | /providers/dr-natasha-desai | — |
-| /providers/dr-sneh-pandey | 200 | yes | yes | 57 | /providers/dr-sneh-pandey | — |
-| /providers/dr-swati-pandey | 200 | yes | yes | 22 | /providers/dr-swati-pandey | — |
-| /providers/dr-vanessa-urbina | 200 | yes | yes | 25 | /providers/dr-vanessa-urbina | — |
-| /providers | 200 | yes | yes | 485 | /providers | — |
+| /providers/dr-natasha-desai | 200 | yes | yes | 33 | /providers/dr-natasha-desai | — |
+| /providers/dr-sneh-pandey | 200 | yes | yes | 56 | /providers/dr-sneh-pandey | — |
+| /providers/dr-swati-pandey | 200 | yes | yes | 24 | /providers/dr-swati-pandey | — |
+| /providers/dr-vanessa-urbina | 200 | yes | yes | 27 | /providers/dr-vanessa-urbina | — |
+| /providers | 200 | yes | yes | 489 | /providers | — |
 | /providers/megan-wunderlich | 200 | yes | yes | 22 | /providers/megan-wunderlich | — |
 | /providers/wendy-delgado | 200 | yes | yes | 10 | /providers/wendy-delgado | — |
 | /siya-circle | 301 | no | no | 0 | — | https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl |
-| /telehealth | 200 | yes | yes | 638 | /telehealth | — |
+| /telehealth | 200 | yes | yes | 640 | /telehealth | — |
 | /terms | 301 | no | no | 0 | /legal/terms-of-use | /legal/terms-of-use |
-| /weight-loss-metabolic-health | 200 | yes | yes | 505 | /weight-loss-metabolic-health | — |
+| /weight-loss-metabolic-health | 200 | yes | yes | 509 | /weight-loss-metabolic-health | — |
+| /womens-health | 200 | yes | yes | 147 | /womens-health | — |

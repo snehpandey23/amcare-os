@@ -3,6 +3,7 @@
  * Import in apply scripts or paste HTML from buildEngagementBlock().
  */
 import { BOOKING_LINK } from '../data/providers-core.mjs';
+import { renderBlogFinalCtaSection } from '../design-system/components.mjs';
 
 export function keyTakeaway({ title = 'Key takeaways', items }) {
   return `
@@ -490,21 +491,9 @@ export function relatedHealthGuides({ items }) {
 }
 
 /** Final exit CTA band — one per blog article, after article body */
-export function finalCtaBandSection({ adhd = false }) {
-  const primaryLabel = adhd ? 'Book ADHD Evaluation' : 'Talk to a Clinician';
-  const primaryHref = MEET_GREET_URL;
-  return `
-      <section class="section blog-final-cta">
-        <div class="container">
-          <div class="cta-band">
-            <h3>Not sure where to start?</h3>
-            <p>A brief clinician conversation can help you understand your options—no obligation.</p>
-            <div class="cta-band-buttons">
-              <a class="button" href="${primaryHref}" target="_blank" rel="noopener">${primaryLabel}</a>
-            </div>
-          </div>
-        </div>
-      </section>`;
+export function finalCtaBandSection({ adhd = false, relPath = '' } = {}) {
+  const path = relPath || (adhd ? 'blog/adhd.html' : 'blog/index.html');
+  return renderBlogFinalCtaSection(path);
 }
 
 export function snippetDefinition({ term, text }) {

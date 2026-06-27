@@ -27,7 +27,7 @@
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
+    <header class="site-header" id="site-header">
       <div class="container">
         <a class="header-logo" href="/"><img src="/assets/images/siya-health-logo.png" alt="Siya Health" /></a>
         <nav class="nav-center" aria-label="Primary">
@@ -41,7 +41,7 @@
           <a href="/blog">Blog</a>
         </nav>
         <div class="nav-cta">
-          <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Talk to a Clinician</a>
+          <a class="button ds-button ds-button--primary" data-siya-location="nav" data-page-type="provider" data-intent="provider" data-conversion-goal="consultation" data-cta-slot="secondary" data-component="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener" data-siya-track="schedule-consultation-click">Schedule Consultation</a>
         </div>
         <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
         <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
@@ -54,7 +54,7 @@
           <a href="/telehealth">Telehealth</a>
           <a href="/answers">Health Guides</a>
           <a href="/blog">Blog</a>
-          <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Talk to a Clinician</a>
+          <a class="button ds-button ds-button--primary" data-siya-location="nav-mobile" data-page-type="provider" data-intent="provider" data-conversion-goal="consultation" data-cta-slot="secondary" data-component="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener" data-siya-track="schedule-consultation-click">Schedule Consultation</a>
         </div>
       </div>
     </header>
@@ -75,8 +75,7 @@
               <div class="provider-state-chips" aria-label="Licensed states"><span class="provider-state-chip">Pennsylvania</span></div>
               <p class="provider-license-disclaimer">Provider licenses are displayed for transparency. Service availability is determined by Siya Healthcare, PLLC operational coverage.</p>
               <div class="provider-lp-ctas">
-                <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4&utm_source=siya&utm_medium=provider&utm_campaign=megan-wunderlich&utm_content=profile" target="_blank" rel="noopener" data-provider-cta="megan-wunderlich">Talk to a Clinician</a>
-                <a class="button secondary" href="#services-supported">View Services</a>
+                <a class="button ds-button ds-button--primary" data-siya-location="nav-mobile" data-page-type="provider" data-intent="provider" data-conversion-goal="consultation" data-cta-slot="secondary" data-component="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener" data-siya-track="schedule-consultation-click">Schedule Consultation</a>
               </div>
             </div>
             <div class="provider-lp-photo-wrap">
@@ -242,7 +241,7 @@
             <h3>Start with a screening or a conversation</h3>
             <p>Intro visits are low-pressure—ask anything before you commit to an evaluation.</p>
             <div class="cta-band-buttons">
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4&utm_source=siya&utm_medium=provider&utm_campaign=megan-wunderlich&utm_content=profile" target="_blank" rel="noopener" data-provider-cta="megan-wunderlich">Talk to a Clinician</a>
+              <a class="button" data-provider-cta="megan-wunderlich" href="https://spruce.care/siyahealth" target="_blank" rel="noopener" data-siya-track="primary-cta-click">Start Secure Medical Chat</a>
               <a class="button secondary" href="#services-supported">View Services</a>
             </div>
           </div>
@@ -264,6 +263,7 @@
             <li><a href="/adhd-screening">Free ADHD screening</a></li>
             <li><a href="/weight-loss-metabolic-health">Medical weight loss</a></li>
             <li><a href="/mens-health-longevity">Men's health & longevity</a></li>
+            <li><a href="/womens-health">Women's health</a></li>
             <li><a href="/telehealth">Telehealth services</a></li>
             <li><a href="/labs">Diagnostic labs</a></li>
           </ul>
@@ -330,7 +330,8 @@
         <div class="footer-brand-bar__right footer-contact-block">
           <p class="footer-contact-phone"><a href="tel:+12154451244" class="footer-phone">(215)&nbsp;445-1244</a></p>
           <p><a href="mailto:care@siya.health">care@siya.health</a></p>
-          <p><a href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Talk to a Clinician</a></p>
+          <p><a href="https://spruce.care/siyahealth" target="_blank" rel="noopener">Start Secure Medical Chat</a></p>
+          <p><a href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener" data-siya-track="schedule-consultation-click">Schedule Consultation</a></p>
           <p><a href="/book-appointment">Book appointment</a></p>
         </div>
       </div>
@@ -358,5 +359,8 @@
 <!-- SIYA:COOKIE-NOTICE -->
     <script src="/scripts/cookie-notice.js" defer></script>
     <!-- /SIYA:COOKIE-NOTICE -->
+<!-- SIYA:HEADER-SCROLL -->
+    <script src="/scripts/header-scroll.js" defer></script>
+    <!-- /SIYA:HEADER-SCROLL -->
 </body>
 </html>

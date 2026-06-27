@@ -193,6 +193,7 @@ function processArticle(filename) {
 
   const { html: html2, countBefore, countAfter } = replaceFinalCtaBand(html, {
     adhd,
+    relPath: `blog/${filename}`,
     secondaryHref: SECONDARY_BY_TOPIC[topic] || '/telehealth',
   });
   html = html2;

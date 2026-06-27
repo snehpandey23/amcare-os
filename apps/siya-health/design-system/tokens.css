@@ -1,0 +1,97 @@
+/**
+ * Siya Health Design System — Tokens (Pass 1)
+ * Source of truth for new ds-* components. Mirrors styles.css :root brand values.
+ * Pass 2: wire @import into styles.css after parity verification.
+ */
+
+:root {
+  /* ── Brand colors (from styles.css) ── */
+  --ds-color-white: #ffffff;
+  --ds-color-primary: #1e3a8a;
+  --ds-color-primary-hover: #1e40af;
+  --ds-color-accent: #0ea5a4;
+  --ds-color-accent-hover: #0d9392;
+  --ds-color-text: #111827;
+  --ds-color-text-secondary: #6b7280;
+  --ds-color-text-muted: #9ca3af;
+  --ds-color-border: #e5e7eb;
+  --ds-color-bg-subtle: #f9fafb;
+  --ds-color-bg-tinted: #f0f9ff;
+  --ds-color-star: #f59e0b;
+  --ds-color-hero-overlay: rgba(30, 58, 138, 0.75);
+  --ds-color-hero-content-bg: rgba(0, 0, 0, 0.45);
+
+  /* Aliases — backward-compatible with existing :root vars */
+  --ds-white: var(--ds-color-white);
+  --ds-primary: var(--ds-color-primary);
+  --ds-primary-hover: var(--ds-color-primary-hover);
+  --ds-accent: var(--ds-color-accent);
+  --ds-text: var(--ds-color-text);
+  --ds-text-secondary: var(--ds-color-text-secondary);
+  --ds-text-muted: var(--ds-color-text-muted);
+  --ds-border: var(--ds-color-border);
+  --ds-bg-subtle: var(--ds-color-bg-subtle);
+
+  /* ── Typography ── */
+  --ds-font-heading: "Poppins", "Inter", sans-serif;
+  --ds-font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --ds-line-height-body: 1.7;
+  --ds-line-height-heading: 1.25;
+
+  --ds-font-size-xs: 0.75rem;
+  --ds-font-size-sm: 0.875rem;
+  --ds-font-size-base: 1rem;
+  --ds-font-size-md: 1.125rem;
+  --ds-font-size-lg: clamp(1.35rem, 3.5vw, 1.65rem);
+  --ds-font-size-xl: clamp(1.5rem, 3vw, 1.75rem);
+  --ds-font-size-h2: clamp(28px, 4vw, 36px);
+  --ds-font-size-h1: clamp(32px, 5vw, 44px);
+  --ds-font-size-hero: clamp(1.85rem, 4.5vw, 2.5rem);
+
+  /* ── Spacing scale ── */
+  --ds-space-1: 4px;
+  --ds-space-2: 8px;
+  --ds-space-3: 12px;
+  --ds-space-4: 16px;
+  --ds-space-5: 20px;
+  --ds-space-6: 24px;
+  --ds-space-8: 32px;
+  --ds-space-10: 40px;
+  --ds-space-12: 48px;
+  --ds-space-16: 64px;
+  --ds-space-18: 72px;
+
+  /* ── Layout ── */
+  --ds-container-max: 1100px;
+  --ds-container-padding: 24px;
+  --ds-section-padding: 72px;
+  --ds-section-padding-mobile: 40px;
+  --ds-gap: 24px;
+  --ds-content-max: 720px;
+  --ds-lead-max: 600px;
+  --ds-hero-content-max: 560px;
+
+  /* ── Radii ── */
+  --ds-radius-sm: 8px;
+  --ds-radius: 10px;
+  --ds-radius-md: 14px;
+  --ds-radius-lg: 16px;
+  --ds-radius-pill: 999px;
+  --ds-radius-full: 50%;
+
+  /* ── Shadows ── */
+  --ds-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --ds-shadow: 0 4px 16px rgba(30, 58, 138, 0.08);
+  --ds-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --ds-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --ds-shadow-card-hover: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+  /* ── Motion ── */
+  --ds-transition-fast: 0.2s ease;
+  --ds-transition-base: 0.25s ease;
+
+  /* ── Z-index ── */
+  --ds-z-hero-overlay: 1;
+  --ds-z-hero-content: 2;
+  --ds-z-sticky: 100;
+}

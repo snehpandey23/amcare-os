@@ -1,7 +1,7 @@
 {
   "@context": "https://schema.org",
   "@type": "KnowledgeGraph",
-  "version": "2026-06-26",
+  "version": "2026-06-27",
   "organization": {
     "@id": "https://siya.health/#organization",
     "@type": "MedicalOrganization",

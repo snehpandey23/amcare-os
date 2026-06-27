@@ -25,6 +25,7 @@ import {
 } from '../data/site-standards.mjs';
 import { getProviderHubPresentation } from '../data/provider-hub-presentation.mjs';
 import { renderLegalFooter } from './site-chrome.mjs';
+import { renderNavCtaMarkup, renderButton, slotToButton, resolveConversion } from '../design-system/components.mjs';
 
 const MEET_GREET_BOOKING_LINK = BOOKING_LINK;
 
@@ -278,7 +279,7 @@ ${verifiedTestimonials
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
+    <header class="site-header" id="site-header">
       <div class="container">
         <a class="header-logo" href="/"><img src="../assets/images/siya-health-logo.png" alt="Siya Health" /></a>
         <nav class="nav-center" aria-label="Primary">
@@ -292,7 +293,7 @@ ${verifiedTestimonials
           <a href="/blog">Blog</a>
         </nav>
         <div class="nav-cta">
-          <a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Talk to a Clinician</a>
+          ${renderNavCtaMarkup(`providers/${provider.slug}.html`, 'nav')}
         </div>
         <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
         <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
@@ -305,7 +306,7 @@ ${verifiedTestimonials
           <a href="/telehealth">Telehealth</a>
           <a href="/answers">Health Guides</a>
           <a href="/blog">Blog</a>
-          <a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Talk to a Clinician</a>
+          ${renderNavCtaMarkup(`providers/${provider.slug}.html`, 'nav-mobile')}
         </div>
       </div>
     </header>
@@ -574,6 +575,15 @@ function renderProvidersIndex() {
   const advanced = all.filter((p) => p.hubSection === 'advanced-practice');
   const physicianCards = physicians.map(renderProviderIndexCard).join('\n');
   const advancedCards = advanced.map(renderProviderIndexCard).join('\n');
+  const indexConv = resolveConversion('providers/index.html');
+  const indexPrimaryBtn = renderButton({
+    ...slotToButton(indexConv.primary, { location: 'provider-index-hero', relPath: 'providers/index.html' }),
+    variant: 'primary',
+  });
+  const indexSecondaryBtn = renderButton({
+    ...slotToButton(indexConv.secondary, { location: 'provider-index-hero', relPath: 'providers/index.html' }),
+    variant: 'secondary',
+  });
 
   const breadcrumb = JSON.stringify({
     '@context': 'https://schema.org',
@@ -618,7 +628,7 @@ function renderProvidersIndex() {
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
+    <header class="site-header" id="site-header">
       <div class="container">
         <a class="header-logo" href="/"><img src="../assets/images/siya-health-logo.png" alt="Siya Health" /></a>
         <nav class="nav-center" aria-label="Primary">
@@ -632,7 +642,7 @@ function renderProvidersIndex() {
           <a href="/blog">Blog</a>
         </nav>
         <div class="nav-cta">
-          <a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Talk to a Clinician</a>
+          ${renderNavCtaMarkup('providers/index.html', 'nav')}
         </div>
         <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
         <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
@@ -645,7 +655,7 @@ function renderProvidersIndex() {
           <a href="/telehealth">Telehealth</a>
           <a href="/answers">Health Guides</a>
           <a href="/blog">Blog</a>
-          <a class="button" href="${BOOKING_LINK}" target="_blank" rel="noopener">Talk to a Clinician</a>
+          ${renderNavCtaMarkup('providers/index.html', 'nav-mobile')}
         </div>
       </div>
     </header>
@@ -659,8 +669,8 @@ function renderProvidersIndex() {
             <p>Our team brings different training backgrounds, but shares one standard: thoughtful evaluation, clear communication, and patient-centered care.</p>
           </div>
           <div class="provider-lp-ctas">
-            <a class="button" href="${MEET_GREET_BOOKING_LINK}" target="_blank" rel="noopener">Talk to a Clinician</a>
-            <a class="button secondary" href="/telehealth">Explore Telehealth Care</a>
+            ${indexPrimaryBtn}
+            ${indexSecondaryBtn}
           </div>
         </div>
       </section>

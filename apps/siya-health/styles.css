@@ -1,5 +1,10 @@
+@import url('/design-system/tokens.css');
+@import url('/design-system/components.css');
+
 /* ============================================
    SIYA HEALTH - Premium Telehealth Design System
+   Legacy styles below — migrating to design-system/
+   Import order: tokens → components → legacy
    ============================================ */
 
 :root {
@@ -8,6 +13,7 @@
   --primary: #1e3a8a;
   --primary-hover: #1e40af;
   --accent: #0ea5a4;
+  --accent-hover: #0d9392;
   --text: #111827;
   --text-secondary: #6b7280;
   --text-muted: #9ca3af;
@@ -19,6 +25,11 @@
   --section-padding-mobile: 40px;
   --container-max: 1100px;
   --gap: 24px;
+
+  /* Header (v2.0 — compact mobile chrome) */
+  --header-height: 56px;
+  --header-logo-height: 40px;
+  --header-logo-height-desktop: 48px;
   
   /* Typography */
   --font-heading: "Poppins", "Inter", sans-serif;
@@ -28,6 +39,7 @@
   /* Misc */
   --radius: 10px;
   --shadow: 0 4px 16px rgba(30, 58, 138, 0.08);
+  --shadow-header: 0 1px 12px rgba(30, 58, 138, 0.08);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -144,9 +156,17 @@ p {
 .site-header {
   position: sticky;
   top: 0;
-  background: var(--white);
-  border-bottom: 1px solid var(--border);
   z-index: 100;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.site-header.site-header-scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: var(--shadow-header);
 }
 
 /* Transparent header over hero */
@@ -157,17 +177,19 @@ p {
   right: 0;
   background: transparent;
   border-bottom: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .site-header-transparent .nav-center a,
 .site-header-transparent .nav-toggle-label { color: var(--white); }
-.site-header-transparent .nav-toggle-label { border-color: rgba(255,255,255,0.5); background: transparent; }
+.site-header-transparent .nav-toggle-label { border-color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.08); }
 .site-header-transparent .nav-toggle-label::before { color: var(--white); }
-/* Logo on transparent header: subtle backdrop for visibility */
 .site-header-transparent .header-logo {
-  background: rgba(255, 255, 255, 0.12);
-  padding: 10px 16px;
-  border-radius: 8px;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
 }
 .site-header-transparent .button { background: var(--white); color: var(--primary); }
 .site-header-transparent .button:hover { background: var(--bg-subtle); }
@@ -176,8 +198,13 @@ p {
 .site-header-transparent.site-header-scrolled {
   position: fixed;
   top: 0;
-  background: var(--white);
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.98);
   border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-header);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 .site-header-transparent.site-header-scrolled .nav-center a,
 .site-header-transparent.site-header-scrolled .nav-toggle-label { color: var(--text); }
@@ -195,9 +222,17 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 32px;
-  padding: 16px 24px 16px 12px;
+  gap: 16px;
+  padding: 10px 16px;
+  min-height: var(--header-height);
   max-width: none;
+}
+
+@media (min-width: 900px) {
+  .site-header .container {
+    gap: 24px;
+    padding: 10px 24px 10px 16px;
+  }
 }
 
 /* Logo image only */
@@ -205,25 +240,33 @@ p {
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
-  height: 121px;
+  height: var(--header-logo-height);
   width: auto;
 }
 
 .header-logo img {
-  height: 121px;
+  height: var(--header-logo-height);
   width: auto;
+  max-width: 140px;
   object-fit: contain;
 }
 
 .header-logo:hover { opacity: 0.9; }
 
-/* Transparent header: subtle backdrop for logo visibility */
+/* Transparent header: subtle shadow for logo visibility on hero */
 .site-header-transparent .header-logo img {
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.35));
 }
 
-@media (max-width: 640px) {
-  .header-logo, .header-logo img { height: 84px; }
+.site-header-transparent.site-header-scrolled .header-logo img {
+  filter: none;
+}
+
+@media (min-width: 900px) {
+  .header-logo, .header-logo img {
+    height: var(--header-logo-height-desktop);
+    max-width: 160px;
+  }
 }
 
 /* Footer logo text (keep for footer) */
@@ -257,6 +300,13 @@ p {
 
 .nav-cta {
   flex-shrink: 0;
+}
+
+.nav-cta .button {
+  padding: 10px 16px;
+  min-height: 42px;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 @media (max-width: 899px) {
@@ -374,6 +424,43 @@ button.secondary:hover {
 .cta-block .button { margin: 0; }
 
 /* ============================================
+   DESIGN SYSTEM UTILITIES (v2.0)
+   Reusable patterns — alias existing components
+   ============================================ */
+
+.ds-section { padding: var(--section-padding-mobile) 0; }
+@media (min-width: 768px) { .ds-section { padding: var(--section-padding) 0; } }
+.ds-section--tinted { background: var(--bg-subtle); }
+
+.ds-section-header { margin-bottom: 28px; text-align: center; max-width: 720px; margin-left: auto; margin-right: auto; }
+.ds-section-header .lead { margin-bottom: 0; }
+.ds-section-header--left { text-align: left; margin-left: 0; margin-right: 0; }
+
+.ds-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+.ds-card-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .ds-card-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .ds-card-grid--3 { grid-template-columns: repeat(3, 1fr); } }
+
+.ds-hero { position: relative; min-height: 58vh; display: flex; align-items: center; padding: calc(var(--header-height) + 32px) 0 48px; }
+.ds-hero__content { position: relative; z-index: 2; max-width: 560px; color: var(--white); }
+
+.ds-cta-band { background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%); color: var(--white); border-radius: 16px; padding: 40px 28px; text-align: center; }
+.ds-cta-band h3 { color: var(--white); margin-bottom: 12px; }
+.ds-cta-band p { color: rgba(255,255,255,0.92); margin-bottom: 20px; }
+.ds-cta-band .button { background: var(--accent); border: none; }
+.ds-cta-band .button:hover { background: var(--accent-hover); }
+.ds-cta-band .button.secondary { background: transparent; border: 2px solid rgba(255,255,255,0.9); color: var(--white); }
+.ds-cta-band .button.secondary:hover { background: rgba(255,255,255,0.15); color: var(--white); }
+
+.ds-trust-row { display: flex; flex-wrap: wrap; gap: 12px 20px; justify-content: center; font-size: 0.9rem; color: var(--text-secondary); }
+.ds-trust-row strong { color: var(--text); }
+
+/* Aliases — legacy class names map to ds-* patterns above */
+.section-header--compact { margin-bottom: 20px; }
+.section-header--compact h2 { margin-bottom: 8px; }
+.section-header--compact .lead { font-size: 1rem; }
+
+/* ============================================
    HERO
    ============================================ */
 
@@ -391,7 +478,7 @@ button.secondary:hover {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 120px 0 70px;
+  padding: calc(var(--header-height) + 64px) 0 70px;
   box-sizing: border-box;
   background-color: #1e3a8a;
   background-size: cover;
@@ -871,10 +958,14 @@ button.secondary:hover {
 .cta-block-with-subtext .cta-screening-subtext { margin-top: 10px; }
 
 @media (max-width: 899px) {
+  .site-header-transparent + main .hero-merged,
+  .site-header-transparent + main .hero-fullwidth {
+    padding-top: calc(var(--header-height) + 32px);
+  }
   .hero-merged,
   .hero-fullwidth {
     min-height: auto;
-    padding: 88px 0 40px;
+    padding: calc(var(--header-height) + 24px) 0 40px;
   }
   .hero-merged-content,
   .hero-fullwidth-inner { padding: 20px 24px; }

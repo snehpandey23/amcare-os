@@ -76,51 +76,9 @@
     );
   }
 
-  function initFaqAccordion() {
-    var container = document.getElementById('faq');
-    if (!container) return;
-    var triggers = container.querySelectorAll('[data-faq-trigger]');
-    var cards = container.querySelectorAll('[data-faq-item]');
-
-    function openCard(card) {
-      var btn = card.querySelector('[data-faq-trigger]');
-      var content = card.querySelector('[data-faq-content]');
-      if (!btn || !content) return;
-      card.classList.add('is-open');
-      btn.setAttribute('aria-expanded', 'true');
-      content.style.maxHeight = content.scrollHeight + 'px';
-    }
-
-    function closeCard(card) {
-      var btn = card.querySelector('[data-faq-trigger]');
-      var content = card.querySelector('[data-faq-content]');
-      if (!btn || !content) return;
-      card.classList.remove('is-open');
-      btn.setAttribute('aria-expanded', 'false');
-      content.style.maxHeight = '';
-    }
-
-    function closeAll() {
-      cards.forEach(closeCard);
-    }
-
-    triggers.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var card = this.closest('[data-faq-item]');
-        if (card.classList.contains('is-open')) {
-          closeCard(card);
-          return;
-        }
-        closeAll();
-        openCard(card);
-      });
-    });
-  }
-
   function init() {
     initScrollTracking();
     initClickTracking();
-    initFaqAccordion();
   }
 
   if (document.readyState === 'loading') {

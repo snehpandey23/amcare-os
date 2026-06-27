@@ -55,7 +55,7 @@
           <a href="/blog">Blog</a>
         </nav>
         <div class="nav-cta">
-          <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book ADHD Evaluation</a>
+          <a class="button ds-button ds-button--primary" data-siya-location="nav" data-page-type="adhd" data-intent="adhd" data-conversion-goal="screening" data-cta-slot="secondary" data-component="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener" data-siya-track="schedule-consultation-click">Schedule Consultation</a>
         </div>
         <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
         <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
@@ -68,7 +68,7 @@
           <a href="/telehealth">Telehealth</a>
           <a href="/answers">Health Guides</a>
           <a href="/blog">Blog</a>
-          <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book ADHD Evaluation</a>
+          <a class="button ds-button ds-button--primary" data-siya-location="nav-mobile" data-page-type="adhd" data-intent="adhd" data-conversion-goal="screening" data-cta-slot="secondary" data-component="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener" data-siya-track="schedule-consultation-click">Schedule Consultation</a>
         </div>
       </div>
     </header>
@@ -87,7 +87,7 @@
             <h1>ADHD Diagnosis in Philadelphia, Pennsylvania (Online, $199)</h1>
             <p class="hero-merged-lead">Licensed telehealth in Texas, Pennsylvania & Florida. Same-week appointments. <a href="/adhd-care" style="color:inherit;text-decoration:underline;">Main ADHD care page</a>.</p>
             <div class="hero-ctas hero-ctas-adhd-primary">
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book ADHD evaluation</a>
+            <a class="button ds-button ds-button--primary" href="/adhd-screening?adhd=1" data-siya-track="screening-cta-click" data-siya-location="hero" data-page-type="adhd" data-intent="adhd" data-conversion-goal="screening" data-cta-slot="lead-magnet" data-component="button">Take Free ADHD Screening</a>
               <p class="hero-secondary-cta"><a href="/adhd-screening">Free 2-minute screening</a></p>
             </div>
           </div>
@@ -197,40 +197,7 @@
             </div>
           </div>
 
-          <script>
-            (function() {{
-              var container = document.getElementById('faq');
-              if (!container) return;
-              var triggers = container.querySelectorAll('[data-faq-trigger]');
-              var cards = container.querySelectorAll('[data-faq-item]');
-              function openCard(card) {{
-                var btn = card.querySelector('[data-faq-trigger]');
-                var content = card.querySelector('[data-faq-content]');
-                if (!btn || !content) return;
-                card.classList.add('is-open');
-                btn.setAttribute('aria-expanded', 'true');
-                content.style.maxHeight = content.scrollHeight + 'px';
-              }}
-              function closeCard(card) {{
-                var btn = card.querySelector('[data-faq-trigger]');
-                var content = card.querySelector('[data-faq-content]');
-                if (!btn || !content) return;
-                card.classList.remove('is-open');
-                btn.setAttribute('aria-expanded', 'false');
-                content.style.maxHeight = '';
-              }}
-              function closeAll() {{ cards.forEach(closeCard); }}
-              triggers.forEach(function(btn) {{
-                btn.addEventListener('click', function() {{
-                  var card = this.closest('[data-faq-item]');
-                  if (card.classList.contains('is-open')) {{ closeCard(card); return; }}
-                  closeAll();
-                  openCard(card);
-                }});
-              }});
-            }})();
-          </script>
-        </div>
+          </div>
       </section>
 
       <section class="section">
@@ -239,7 +206,7 @@
             <h3>Ready for answers?</h3>
             <p>Book a virtual evaluation or take the free 2-minute screening first.</p>
             <div class="cta-band-buttons">
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Talk to a Clinician</a>
+              <a class="button" href="https://spruce.care/siyahealth" target="_blank" rel="noopener" data-siya-track="primary-cta-click">Start Secure Medical Chat</a>
               <a class="button secondary" href="/adhd-screening">Free screening</a>
             </div>
           </div>
@@ -255,22 +222,22 @@
             <p class="provider-state-filter-note">Showing clinicians licensed in <strong>PA</strong>.</p>
           </div>
           <div class="about-team-grid">
-            <article class="about-team-card" data-states="CA,TX,PA,FL">
+            <article class="about-team-card ds-provider-card" data-states="CA,TX,PA,FL">
               <img src="/assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey, MD" width="88" height="88" loading="lazy" />
               <h3><a href="/providers/dr-sneh-pandey">Dr. Sneh Pandey, MD</a></h3>
-              <p class="about-team-tagline">Medical Director · Adult ADHD evaluation & care · CA, TX, PA, FL</p>
+              <p class="about-team-tagline">Medical Director · Adult ADHD evaluation &amp; care · CA, TX, PA, FL</p>
               <a class="text-link" href="/providers/dr-sneh-pandey">View profile →</a>
             </article>
-            <article class="about-team-card" data-states="PA">
+            <article class="about-team-card ds-provider-card" data-states="PA">
               <img src="/assets/images/dr-swati-pandey.png" alt="Dr. Swati Pandey, MD" width="88" height="88" loading="lazy" />
               <h3><a href="/providers/dr-swati-pandey">Dr. Swati Pandey, MD</a></h3>
-              <p class="about-team-tagline">Adult ADHD & mental health · PA</p>
+              <p class="about-team-tagline">Adult ADHD &amp; mental health · PA</p>
               <a class="text-link" href="/providers/dr-swati-pandey">View profile →</a>
             </article>
-            <article class="about-team-card" data-states="PA">
+            <article class="about-team-card ds-provider-card" data-states="PA">
               <img src="/assets/images/megan-wunderlich.png" alt="Megan Wunderlich, FNP-C" width="88" height="88" loading="lazy" />
               <h3><a href="/providers/megan-wunderlich">Megan Wunderlich, FNP-C</a></h3>
-              <p class="about-team-tagline">Adult ADHD & mental health (PA) · PA</p>
+              <p class="about-team-tagline">Adult ADHD &amp; mental health (PA) · PA</p>
               <a class="text-link" href="/providers/megan-wunderlich">View profile →</a>
             </article>
           </div>
@@ -288,6 +255,7 @@
             <li><a href="/adhd-screening">Free ADHD screening</a></li>
             <li><a href="/weight-loss-metabolic-health">Medical weight loss</a></li>
             <li><a href="/mens-health-longevity">Men's health & longevity</a></li>
+            <li><a href="/womens-health">Women's health</a></li>
             <li><a href="/telehealth">Telehealth services</a></li>
             <li><a href="/labs">Diagnostic labs</a></li>
           </ul>
@@ -354,7 +322,8 @@
         <div class="footer-brand-bar__right footer-contact-block">
           <p class="footer-contact-phone"><a href="tel:+12154451244" class="footer-phone">(215)&nbsp;445-1244</a></p>
           <p><a href="mailto:care@siya.health">care@siya.health</a></p>
-          <p><a href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Talk to a Clinician</a></p>
+          <p><a href="https://spruce.care/siyahealth" target="_blank" rel="noopener">Start Secure Medical Chat</a></p>
+          <p><a href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener" data-siya-track="schedule-consultation-click">Schedule Consultation</a></p>
           <p><a href="/book-appointment">Book appointment</a></p>
         </div>
       </div>
@@ -363,16 +332,6 @@
         <small>© 2026 Siya Health Inc. All rights reserved.</small>
       </div>
     </footer>
-    <script>
-      (function() {{
-        var header = document.getElementById('site-header');
-        if (header && header.classList.contains('site-header-transparent')) {{
-          function onScroll() {{ header.classList.toggle('site-header-scrolled', window.scrollY > 200); }}
-          onScroll();
-          window.addEventListener('scroll', onScroll, {{ passive: true }});
-        }}
-      }})();
-    </script>
     <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="69be9ab3db1480f6799cdd18"></script>
   <!-- SIYA:PROVIDER-ATTRIBUTION -->
     <script>
@@ -393,5 +352,11 @@
 <!-- SIYA:COOKIE-NOTICE -->
     <script src="/scripts/cookie-notice.js" defer></script>
     <!-- /SIYA:COOKIE-NOTICE -->
+<!-- SIYA:HEADER-SCROLL -->
+    <script src="/scripts/header-scroll.js" defer></script>
+    <!-- /SIYA:HEADER-SCROLL -->
+<!-- SIYA:FAQ-ACCORDION -->
+    <script src="/scripts/faq-accordion.js" defer></script>
+    <!-- /SIYA:FAQ-ACCORDION -->
 </body>
 </html>

@@ -1,15 +1,15 @@
 # SEO Deployment QA Report
 
-Generated: 2026-06-26T08:04:53.655Z
+Generated: 2026-06-27T10:50:33.031Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| HTML pages scanned | 148 |
-| Sitemap URLs | 140 |
+| HTML pages scanned | 149 |
+| Sitemap URLs | 141 |
 | Pages with Meet & Greet in nav | 0 |
-| Non-ADHD pages still referencing adhd-screening | 63 |
+| Non-ADHD pages still referencing adhd-screening | 54 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
 
@@ -39,20 +39,10 @@ Generated: 2026-06-26T08:04:53.655Z
 - **Default secondary CTA:** Explore Care Options → `#services` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, `adhd-screening.html`
 
-### Non-ADHD pages still containing `adhd-screening` (63)
+### Non-ADHD pages still containing `adhd-screening` (54)
 
 - `about.html`
-- `adhd-evaluation-cost.html`
-- `blog/adhd-evaluation-california-online-vs-in-person.html`
-- `blog/adhd-evaluation-cost-texas.html`
-- `blog/adhd-medication-daily-or-as-needed-adults.html`
-- `blog/adhd-medication-online-california.html`
-- `blog/adhd-medication-options-california.html`
-- `blog/adhd-medication-options-for-adults.html`
-- `blog/adhd-medication-side-effects-what-to-expect.html`
-- `blog/adhd-symptoms-overlooked.html`
-- `blog/adhd-telehealth-california.html`
-- `blog/adhd-testing-online-california-screening-vs-evaluation.html`
+- `adult-adhd-screening-california.html`
 - `blog/compounded-vs-branded-glp1-medications.html`
 - `blog/food-noise-and-glp-1-what-it-means-and-what-helps.html`
 - `blog/free-testosterone-vs-total-testosterone-what-patients-should-know.html`
@@ -104,8 +94,9 @@ Generated: 2026-06-26T08:04:53.655Z
 - `telehealth.html`
 - `terms.html`
 - `weight-loss-metabolic-health.html`
+- `womens-health.html`
 
-### All pages with any `adhd-screening` reference (147)
+### All pages with any `adhd-screening` reference (148)
 
 - `about.html`
 - `adhd-care.html`
@@ -148,7 +139,7 @@ Generated: 2026-06-26T08:04:53.655Z
 - `answers/how-online-prescriptions-work.html`
 - `answers/index.html`
 
-_…and 107 more (expected on ADHD funnels)._
+_…and 108 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 

@@ -49,7 +49,7 @@ export const PHASE3_ANSWER_SEEDS = [
         paragraphs: [
           'If symptoms are new, severe, or worsening rapidly—chest pain, shortness of breath, suicidal thoughts, unintended major weight loss—seek urgent care. For persistent but non-emergency problems, bring a symptom diary: sleep hours, snoring, meal timing, energy by time of day, and mood.',
           'Ask whether additional labs are appropriate: fasting insulin (interpretation varies by lab), lipid panel with triglycerides, liver enzymes, ferritin, thyroid panel, or sleep evaluation. Continuous glucose monitors are education tools for some patients—not a substitute for medical diagnosis.',
-          'Telehealth can start metabolic and fatigue mapping; local imaging, sleep studies, or phlebotomy may still be needed. Talk to a Clinician to clarify which Siya services fit before you commit to a full evaluation pathway.',
+          'Telehealth can start metabolic and fatigue mapping; local imaging, sleep studies, or phlebotomy may still be needed. Start Secure Medical Chat to clarify which Siya services fit before you commit to a full evaluation pathway.',
         ],
       },
       {
@@ -82,7 +82,7 @@ export const PHASE3_ANSWER_SEEDS = [
         ],
         paragraphs: [
           'This Health Guide pairs with—but does not duplicate—the insulin resistance cornerstone blog or the “normal A1C” quick answer; use all three when building a metabolic care plan with your clinician.',
-          'Talk to a Clinician when you want help prioritizing labs, sleep evaluation, and metabolic telehealth pathways without committing to a full program on day one.',
+          'Start Secure Medical Chat when you want help prioritizing labs, sleep evaluation, and metabolic telehealth pathways without committing to a full program on day one.',
         ],
       },
     ],
@@ -395,7 +395,7 @@ export const PHASE3_ANSWER_SEEDS = [
           'Clinician-guided restart or switch beats unsupervised cycling.',
         ],
         paragraphs: [
-          'Talk to a Clinician to clarify whether Siya metabolic telehealth fits your state, goals, and prior GLP-1 history before you restart, switch, or pursue lifestyle-only maintenance.',
+          'Start Secure Medical Chat to clarify whether Siya metabolic telehealth fits your state, goals, and prior GLP-1 history before you restart, switch, or pursue lifestyle-only maintenance.',
         ],
       },
     ],
@@ -549,7 +549,7 @@ export const PHASE3_ANSWER_SEEDS = [
           'Treat sleep apnea and insomnia as energy multipliers.',
         ],
         paragraphs: [
-          'Talk to a Clinician to map fatigue, metabolic, and sleep pathways with a licensed clinician before you overhaul your diet based on social media lunch hacks alone.',
+          'Start Secure Medical Chat to map fatigue, metabolic, and sleep pathways with a licensed clinician before you overhaul your diet based on social media lunch hacks alone.',
         ],
       },
     ],
@@ -708,7 +708,7 @@ export const PHASE3_ANSWER_SEEDS = [
           'TRT is not automatic for every low free testosterone reading.',
         ],
         paragraphs: [
-          'Men’s health telehealth and Talk to a Clinician visits help interpret SHBG-aware labs with symptom context—not supplement stores selling “boosters” without monitoring.',
+          'Men’s health telehealth and secure medical chat visits help interpret SHBG-aware labs with symptom context—not supplement stores selling “boosters” without monitoring.',
         ],
       },
     ],

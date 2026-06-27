@@ -3,7 +3,7 @@
  */
 import { LEGAL_HUB, LEGAL_PATHS, LEGAL_EFFECTIVE_DATE as LEGAL_EFFECTIVE_DATE_ISO } from './legal-documents.mjs';
 import { buildProviderAuditCanonical } from './provider-canonical.mjs';
-import { BOOKING_LINK } from './providers-core.mjs';
+import { BOOKING_LINK, SPRUCE_CHAT_URL } from './providers-core.mjs';
 import { SIYA_CIRCLE_GHL_FORM_URL } from './siya-circle-config.mjs';
 
 /** Counsel-approved effective date for published legal documents. */
@@ -66,18 +66,33 @@ export const PRICING = {
 
 /** Three-slot CTA system — applied via normalizeSitewideCopy() */
 export const CTA_SYSTEM = {
-  primary: { label: 'Talk to a Clinician', url: BOOKING_LINK },
-  newsletter: { label: 'Join Siya Circle', url: SIYA_CIRCLE_GHL_FORM_URL },
+  primary: { label: 'Start Secure Medical Chat', url: SPRUCE_CHAT_URL },
+  newsletter: {
+    label: 'Join Our Health Guide',
+    microcopy: 'Weekly evidence-based health insights from Siya Health physicians.',
+    url: SIYA_CIRCLE_GHL_FORM_URL,
+  },
   secondary: {
-    adhd: { label: 'Book ADHD Evaluation', url: BOOKING_LINK },
-    weight: { label: 'Start Weight Loss Evaluation', url: BOOKING_LINK },
+    booking: { label: 'Schedule Consultation', url: BOOKING_LINK },
+    adhd: { label: 'Schedule Consultation', url: BOOKING_LINK },
+    weight: { label: 'Schedule Consultation', url: BOOKING_LINK },
     telehealth: { label: 'Explore Telehealth Care', url: '/telehealth' },
-    default: { label: 'Explore Telehealth Care', url: '/telehealth' },
+    default: { label: 'Schedule Consultation', url: BOOKING_LINK },
   },
 };
 
 /** Booking CTAs consolidated to primary label (regex-safe literals). */
 export const REMOVED_BOOKING_CTA_LABELS = [
+  'Talk to a Clinician',
+  'Talk to a clinician',
+  'Contact Care Team',
+  'Contact care team',
+  'Discovery Call',
+  'Book Discovery Call',
+  'Meet & Greet',
+  'Book Meet & Greet',
+  'Book Meet &amp; Greet',
+  'Start Secure Chat',
   'Book a Meet & Greet',
   'Book a Meet &amp; Greet',
   'Schedule a Quick Call',
@@ -146,12 +161,15 @@ export const PROVIDER_CANONICAL = buildProviderAuditCanonical();
 /** Approved user-facing copy — applied via normalizeSitewideCopy() */
 export const COPY_STANDARDS = {
   primaryCta: CTA_SYSTEM.primary.label,
-  secondaryCta: CTA_SYSTEM.secondary.default.label,
+  primaryCtaUrl: CTA_SYSTEM.primary.url,
+  secondaryCta: CTA_SYSTEM.secondary.booking.label,
+  secondaryCtaUrl: CTA_SYSTEM.secondary.booking.url,
   secondaryCtaTelehealth: CTA_SYSTEM.secondary.telehealth.label,
   adhdPrimaryCta: CTA_SYSTEM.secondary.adhd.label,
   weightPrimaryCta: CTA_SYSTEM.secondary.weight.label,
-  adhdSecondaryCta: 'Free ADHD Screening',
+  adhdSecondaryCta: 'Take Free ADHD Screening',
   newsletterCta: CTA_SYSTEM.newsletter.label,
+  newsletterMicrocopy: CTA_SYSTEM.newsletter.microcopy,
   pricingNavLabel: PRICING.navLabel,
   pricingPath: PRICING.path,
   educationHub: 'Health Guides',

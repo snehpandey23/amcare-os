@@ -70,7 +70,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <a href="/blog">Blog</a>
         </nav>
         <div class="nav-cta">
-          <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Talk to a Clinician</a>
+          <a class="button ds-button ds-button--primary" href="https://spruce.care/siyahealth" target="_blank" rel="noopener" data-siya-track="primary-cta-click" data-siya-location="nav">Start Secure Medical Chat</a>
         </div>
         <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
         <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
@@ -83,7 +83,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <a href="/telehealth">Telehealth</a>
           <a href="/answers">Health Guides</a>
           <a href="/blog">Blog</a>
-          <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Talk to a Clinician</a>
+          <a class="button ds-button ds-button--primary" href="https://spruce.care/siyahealth" target="_blank" rel="noopener" data-siya-track="primary-cta-click" data-siya-location="nav-mobile">Start Secure Medical Chat</a>
         </div>
       </div>
     </header>
@@ -129,6 +129,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li><a href="/adhd-screening">Free ADHD screening</a></li>
             <li><a href="/weight-loss-metabolic-health">Medical weight loss</a></li>
             <li><a href="/mens-health-longevity">Men's health & longevity</a></li>
+            <li><a href="/womens-health">Women's health</a></li>
             <li><a href="/telehealth">Telehealth services</a></li>
             <li><a href="/labs">Diagnostic labs</a></li>
           </ul>
@@ -195,7 +196,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="footer-brand-bar__right footer-contact-block">
           <p class="footer-contact-phone"><a href="tel:+12154451244" class="footer-phone">(215)&nbsp;445-1244</a></p>
           <p><a href="mailto:care@siya.health">care@siya.health</a></p>
-          <p><a href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Talk to a Clinician</a></p>
+          <p><a href="https://spruce.care/siyahealth" target="_blank" rel="noopener">Start Secure Medical Chat</a></p>
+          <p><a href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener" data-siya-track="schedule-consultation-click">Schedule Consultation</a></p>
           <p><a href="/book-appointment">Book appointment</a></p>
         </div>
       </div>
@@ -204,16 +206,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <small>© 2026 Siya Health Inc. All rights reserved.</small>
       </div>
     </footer>
-    <script>
-      (function() {
-        var header = document.getElementById('site-header');
-        if (header && header.classList.contains('site-header-transparent')) {
-          function onScroll() { header.classList.toggle('site-header-scrolled', window.scrollY > 200); }
-          onScroll();
-          window.addEventListener('scroll', onScroll, { passive: true });
-        }
-      })();
-    </script>
     <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="69be9ab3db1480f6799cdd18"></script>
   <!-- SIYA:PROVIDER-ATTRIBUTION -->
     <script>
@@ -231,6 +223,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- SIYA:COOKIE-NOTICE -->
     <script src="/scripts/cookie-notice.js" defer></script>
     <!-- /SIYA:COOKIE-NOTICE -->
+<!-- SIYA:HEADER-SCROLL -->
+    <script src="/scripts/header-scroll.js" defer></script>
+    <!-- /SIYA:HEADER-SCROLL -->
 <!-- SIYA:CIRCLE-ANALYTICS -->
 <script src="/scripts/siya-circle-signup.js" defer></script>
 <!-- /SIYA:CIRCLE-ANALYTICS -->

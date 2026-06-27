@@ -75,7 +75,7 @@ export const ADDITIONAL_PROVIDERS = [
     ],
     finalCta: {
       title: 'Ready for primary care that feels personal?',
-      subtitle: 'Talk to a Clinician to see if we are a fit for your Florida telehealth needs.',
+      subtitle: 'Start Secure Medical Chat to see if we are a fit for your Florida telehealth needs.',
     },
     disclaimer:
       'This page describes our clinical approach; it is not a guarantee of diagnosis or treatment. Eligibility depends on Florida licensure, medical history, and clinical appropriateness.',
@@ -248,7 +248,7 @@ export const ADDITIONAL_PROVIDERS = [
     ],
     finalCta: {
       title: 'Ready for a structured weight or hormone plan?',
-      subtitle: 'Talk to a Clinician—we will confirm state eligibility and next steps.',
+      subtitle: 'Start Secure Medical Chat—we will confirm state eligibility and next steps.',
     },
     disclaimer:
       'This page describes typical NP-led metabolic workflows. Treatment requires individual evaluation. Medication availability varies by state law, medical history, and collaborative practice rules.',
@@ -333,7 +333,7 @@ export const ADDITIONAL_PROVIDERS = [
     ],
     finalCta: {
       title: 'Take the next step in medical weight loss',
-      subtitle: 'Talk to a Clinician to confirm California eligibility and your care plan.',
+      subtitle: 'Start Secure Medical Chat to confirm California eligibility and your care plan.',
     },
     disclaimer:
       'This page is educational. Medical weight loss treatment requires individual evaluation. PA scope and prescribing follow California law and supervising physician protocols.',

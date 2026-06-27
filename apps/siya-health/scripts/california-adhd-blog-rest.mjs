@@ -413,7 +413,7 @@ export const CALIFORNIA_POSTS_REST = [
       ['Should Californians choose an ADHD evaluator based on price alone?', 'Price matters practically, but microscopic visit lengths paired with bold diagnosis certainty deserve more skepticism than moderately higher transparent fees paired with clinician time spelled out plainly. Evaluate what you receive—not only the sticker number.'],
       ['How should I verify clinician credibility?', 'Prefer named licensed clinicians alongside clear crisis guidance for emergencies (suicidal thoughts, chest pain, sudden neurologic deficits), HIPAA-appropriate video tooling, articulated visit pacing, refusal rights—not anonymous chat-checkout caricatures rushing diagnosis momentum before evaluations conclude thoughtfully.'],
       ['Do trustworthy ADHD clinicians discuss conditions that imitate ADHD?', 'Yes. Anxiety, burnout, PTSD, mood disorders, sleep apnea, anemia, thyroid disease, substances, and medication effects can imitate attention deficits—so thoughtful differential diagnosis beats checklist certainty alone.'],
-      ['Where should I explore scheduling next steps?', 'Use Talk to a Clinician or appointment buttons referenced in CTAs—including the California scheduling block—rather than gimmick scarcity banners implying guaranteed prescribing outcomes.'],
+      ['Where should I explore scheduling next steps?', 'Use Start Secure Medical Chat or appointment buttons referenced in CTAs—including the California scheduling block—rather than gimmick scarcity banners implying guaranteed prescribing outcomes.'],
     ],
     
     bodyHtml: `

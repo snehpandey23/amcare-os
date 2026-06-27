@@ -1,16 +1,16 @@
 # Provider Expansion — Implementation Report
 
-Generated: 2026-06-26T08:04:53.875Z
+Generated: 2026-06-27T10:50:33.284Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| Sitemap URLs | 140 |
+| Sitemap URLs | 141 |
 | Contracted providers in data | 7 |
 | Live profile pages | 7 |
 | Hub URL | https://siya.health/providers |
-| Pages linking to /providers hub | 146 |
+| Pages linking to /providers hub | 147 |
 | Broken internal links (sample) | 20 |
 | JSON-LD issues on profiles | 0 |
 
@@ -35,16 +35,17 @@ Generated: 2026-06-26T08:04:53.875Z
 | weight-loss-metabolic-health | /weight-loss-metabolic-health | Dr. Sneh Pandey, MD; Dr. Vanessa Urbina, MD; Derek Timbs, FNP-BC; Wendy Delgado, PA-C | 4 |
 | primary-urgent-care | /primary-urgent-care | Dr. Vanessa Urbina, MD; Dr. Natasha Desai, MD; Dr. Sneh Pandey, MD | 3 |
 | mens-health-longevity | /mens-health-longevity | Dr. Sneh Pandey, MD; Derek Timbs, FNP-BC | 2 |
+| womens-health | /womens-health | Dr. Swati Pandey, MD; Dr. Vanessa Urbina, MD; Dr. Natasha Desai, MD | 3 |
 
 ## Internal link counts (pages referencing profile)
 
 | Target | Inbound pages |
 |--------|-------------:|
-| /providers hub | 146 |
+| /providers hub | 147 |
 | /providers/dr-sneh-pandey | 34 |
-| /providers/dr-vanessa-urbina | 15 |
-| /providers/dr-natasha-desai | 18 |
-| /providers/dr-swati-pandey | 13 |
+| /providers/dr-vanessa-urbina | 16 |
+| /providers/dr-natasha-desai | 19 |
+| /providers/dr-swati-pandey | 14 |
 | /providers/megan-wunderlich | 13 |
 | /providers/derek-timbs | 10 |
 | /providers/wendy-delgado | 7 |

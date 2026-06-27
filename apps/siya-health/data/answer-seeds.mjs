@@ -44,7 +44,7 @@ function phase5CoordinationSection(slug, topic) {
       `${intro} Medical weight-loss care combines nutrition, activity, sleep, behavioral support, and—when appropriate—FDA-approved pharmacotherapy with monitoring. Cornerstone blogs on insulin resistance and food noise provide deeper context than this summary page.`,
       'GLP-1 medicines require titration, GI counseling, and discussion of rare serious risks. Avoid unregulated compounded products or cosmetic use without clinician oversight. ADHD-related impulsive eating and sleep apnea can undermine weight outcomes if left untreated.',
       'Metabolic labs (glucose, A1C, lipids, blood pressure, waist trend) should be interpreted over time, not from one snapshot. Post-meal fatigue and brain fog may link to insulin resistance even when A1C is normal.',
-      'Talk to a Clinician when you want help choosing between evaluation pathways before enrolling in a full metabolic or weight-loss program.',
+      'Start Secure Medical Chat when you want help choosing between evaluation pathways before enrolling in a full metabolic or weight-loss program.',
       'Pair this guide with cornerstone blogs on insulin resistance and food noise when symptoms cluster (cravings, post-meal fog, waist gain)—your clinician integrates labs, sleep, and medications.',
       'Educational content cannot promise a specific weight outcome; treatment plans follow FDA indications, monitoring, and individual tolerability.',
       'Document your symptom timeline (childhood vs adult onset, settings affected, best and worst weeks), sleep partners’ observations about snoring, medications and supplements, and three-month goals—those details speed responsible evaluation more than another online quiz.',
@@ -62,7 +62,7 @@ function phase5CoordinationSection(slug, topic) {
     ],
     telehealth: [
       `${intro} Legitimate telehealth documents encounters, uses HIPAA-compliant tools, and maintains follow-up for prescriptions—especially controlled substances with PDMP review where required.`,
-      'Compare services on clinician licensure in your state, visit length for diagnosis-level care, and transparency about pricing and limitations. Talk to a Clinician to clarify fit; comprehensive ADHD or metabolic evaluation is a separate longer visit.',
+      'Compare services on clinician licensure in your state, visit length for diagnosis-level care, and transparency about pricing and limitations. Start Secure Medical Chat to clarify fit; comprehensive ADHD or metabolic evaluation is a separate longer visit.',
       'Keep medication lists, allergy history, and prior records available for upload. Emergency symptoms require local urgent or emergency care—not messaging queues.',
       'Educational blogs on safe online prescriptions complement this guide; they do not establish a clinician–patient relationship on their own.',
       'Read related Health Guides on first telehealth visit logistics, online prescription law, and condition-specific evaluation (ADHD, metabolic, men’s health) to prepare questions for your first visit.',
