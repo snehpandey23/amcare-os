@@ -1516,6 +1516,9 @@ export function normalizeCarePatronLinks(html, relPath) {
       if (/(?:Start|start).*\$199|Already ready\?/i.test(text) && /evaluation/i.test(text)) {
         return `<a${pre}href="${encCarepatronHref(ADHD_EVALUATION_199_LINK)}"${post}${inner}</a>`;
       }
+      if (/Book Your ADHD Walkthrough|Book Free(?:\s+Evaluation)?\s+Walkthrough/i.test(text)) {
+        return `<a${pre}href="${encCarepatronHref(ADHD_WALKTHROUGH_LINK)}"${post}${inner}</a>`;
+      }
       return match;
     },
   );

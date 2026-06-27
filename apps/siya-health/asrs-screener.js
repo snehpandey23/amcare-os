@@ -54,6 +54,10 @@
 
     if (stepIndex === STEP_RESULTS) {
       showResults();
+      pushSiyaEvent('asrs_results_view', {
+        entry_source: asrsEntrySource,
+        score: calculateScore(),
+      });
     }
 
     if (stepIndex === STEP_INTRO) {

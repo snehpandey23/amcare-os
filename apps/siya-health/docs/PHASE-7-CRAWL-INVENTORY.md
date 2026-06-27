@@ -25,7 +25,7 @@
 | /adhd-diagnosis-philadelphia | 200 | yes | yes | 1 | /adhd-diagnosis-philadelphia | — |
 | /adhd-diagnosis-texas | 200 | yes | yes | 2 | /adhd-diagnosis-texas | — |
 | /adhd-evaluation-cost | 301 | no | no | 0 | /pricing | /pricing |
-| /adhd-screening | 200 | yes | yes | 244 | /adhd-screening | — |
+| /adhd-screening | 200 | yes | yes | 234 | /adhd-screening | — |
 | /adhd-treatment-online | 301 | no | no | 0 | /adhd-care | /adhd-care |
 | /adult-adhd-diagnosis | 301 | no | no | 0 | /adhd-care | /adhd-care |
 | /adult-adhd-screening-california | 200 | yes | yes | 0 | /adult-adhd-screening-california | — |
@@ -136,7 +136,7 @@
 | /blog/why-am-i-always-tired-causes-when-to-see-doctor | 200 | yes | yes | 43 | /blog/why-am-i-always-tired-causes-when-to-see-doctor | — |
 | /blog/youre-not-lazy-signs-undiagnosed-adult-adhd | 200 | yes | yes | 4 | /blog/youre-not-lazy-signs-undiagnosed-adult-adhd | — |
 | /book-appointment | 200 | yes | yes | 148 | /book-appointment | — |
-| /creyos-adhd-testing | 200 | yes | yes | 3 | /creyos-adhd-testing | — |
+| /creyos-adhd-testing | 200 | yes | yes | 2 | /creyos-adhd-testing | — |
 | / | 200 | yes | yes | 587 | / | — |
 | /intake | 200 | no | yes | 0 | /intake | — |
 | /labs | 200 | yes | yes | 147 | /labs | — |

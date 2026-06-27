@@ -41,14 +41,14 @@ Generated: 2026-06-27
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
 | [/](https://siya.health/) | Homepage | Brand entry; route patients to core services and booking | Start Secure Medical Chat → https://s… | View profile → /providers/dr-sneh-pandey | Navigational / Commercial | Something feels off—and you're tired of guessin… | 1328 | 148 | 35 |
 | [/adhd-care](https://siya.health/adhd-care) | Service Page | Convert ADHD evaluation and treatment interest to booking | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Commercial / Transactional | Adult ADHD Evaluation Online | 1445 | 147 | 41 |
-| [/adhd-diagnosis-austin](https://siya.health/adhd-diagnosis-austin) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Free screening → /adhd-screening | Local SEO / Commercial | ADHD Diagnosis in Austin, Texas (Online, $199) | 457 | 1 | 31 |
-| [/adhd-diagnosis-houston](https://siya.health/adhd-diagnosis-houston) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Free screening → /adhd-screening | Local SEO / Commercial | ADHD Diagnosis in Houston, Texas (Online, $199) | 426 | 1 | 31 |
-| [/adhd-diagnosis-pennsylvania](https://siya.health/adhd-diagnosis-pennsylvania) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Free screening → /adhd-screening | Local SEO / Commercial | Online ADHD Diagnosis in Pennsylvania ($199 Eva… | 461 | 1 | 32 |
-| [/adhd-diagnosis-philadelphia](https://siya.health/adhd-diagnosis-philadelphia) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Free screening → /adhd-screening | Local SEO / Commercial | ADHD Diagnosis in Philadelphia, Pennsylvania (O… | 462 | 1 | 33 |
-| [/adhd-diagnosis-texas](https://siya.health/adhd-diagnosis-texas) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Free screening → /adhd-screening | Local SEO / Commercial | Online ADHD Diagnosis in Texas ($199 Evaluation) | 465 | 2 | 32 |
-| [/adhd-screening](https://siya.health/adhd-screening) | Service Page | Top-of-funnel ADHD screening; lead to evaluation | Schedule Consultation → https://book.… | — | Commercial / Transactional | What are you looking for help with? | 368 | 148 | 28 |
+| [/adhd-diagnosis-austin](https://siya.health/adhd-diagnosis-austin) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Schedule Consultation → https://book.… | Local SEO / Commercial | ADHD Diagnosis in Austin, Texas (Online, $199) | 361 | 1 | 31 |
+| [/adhd-diagnosis-houston](https://siya.health/adhd-diagnosis-houston) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Schedule Consultation → https://book.… | Local SEO / Commercial | ADHD Diagnosis in Houston, Texas (Online, $199) | 351 | 1 | 31 |
+| [/adhd-diagnosis-pennsylvania](https://siya.health/adhd-diagnosis-pennsylvania) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Schedule Consultation → https://book.… | Local SEO / Commercial | Online ADHD Diagnosis in Pennsylvania ($199 Eva… | 373 | 1 | 32 |
+| [/adhd-diagnosis-philadelphia](https://siya.health/adhd-diagnosis-philadelphia) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Schedule Consultation → https://book.… | Local SEO / Commercial | ADHD Diagnosis in Philadelphia, Pennsylvania (O… | 361 | 1 | 32 |
+| [/adhd-diagnosis-texas](https://siya.health/adhd-diagnosis-texas) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Schedule Consultation → https://book.… | Local SEO / Commercial | Online ADHD Diagnosis in Texas ($199 Evaluation) | 368 | 2 | 32 |
+| [/adhd-screening](https://siya.health/adhd-screening) | Service Page | Top-of-funnel ADHD screening; lead to evaluation | Book Your ADHD Walkthrough → https://… | Start Secure Medical Chat → https://s… | Commercial / Transactional | What are you looking for help with? | 391 | 148 | 28 |
 | [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Start Secure Medical Chat → https://s… | — | Commercial / Transactional | Book Your Telehealth Visit — Same-Week | 103 | 147 | 27 |
-| [/creyos-adhd-testing](https://siya.health/creyos-adhd-testing) | Service Page | Creyos cognitive testing for ADHD as part of your $199 on… | Take Free ADHD Screening → /adhd-scre… | Free screening → /adhd-screening | Commercial / Transactional | Creyos ADHD Testing (Included in Your Evaluation) | 389 | 3 | 28 |
+| [/creyos-adhd-testing](https://siya.health/creyos-adhd-testing) | Service Page | Creyos cognitive testing for ADHD as part of your $199 on… | Take Free ADHD Screening → /adhd-scre… | Schedule Consultation → https://book.… | Commercial / Transactional | Creyos ADHD Testing (Included in Your Evaluation) | 299 | 2 | 28 |
 | [/labs](https://siya.health/labs) | Service Page | Laboratory orders and monitoring through Siya Health tele… | Start Secure Medical Chat → https://s… | — | Commercial / Transactional | Diagnostic Lab Services | 134 | 147 | 27 |
 | [/mens-health-longevity](https://siya.health/mens-health-longevity) | Service Page | Men's health / TRT / longevity service conversion | Start Secure Medical Chat → https://s… | — | Commercial / Transactional | Men's Health — Hormone, Performance, Longevity | 389 | 147 | 40 |
 | [/prescriptions](https://siya.health/prescriptions) | Service Page | Provider-reviewed prescriptions through Siya Health teleh… | Start Secure Medical Chat → https://s… | — | Commercial / Transactional | Online Prescription Services | 135 | 1 | 27 |
@@ -197,11 +197,11 @@ Generated: 2026-06-27
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/adhd-diagnosis-austin](https://siya.health/adhd-diagnosis-austin) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Free screening → /adhd-screening | Local SEO / Commercial | ADHD Diagnosis in Austin, Texas (Online, $199) | 457 | 1 | 31 |
-| [/adhd-diagnosis-houston](https://siya.health/adhd-diagnosis-houston) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Free screening → /adhd-screening | Local SEO / Commercial | ADHD Diagnosis in Houston, Texas (Online, $199) | 426 | 1 | 31 |
-| [/adhd-diagnosis-pennsylvania](https://siya.health/adhd-diagnosis-pennsylvania) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Free screening → /adhd-screening | Local SEO / Commercial | Online ADHD Diagnosis in Pennsylvania ($199 Eva… | 461 | 1 | 32 |
-| [/adhd-diagnosis-philadelphia](https://siya.health/adhd-diagnosis-philadelphia) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Free screening → /adhd-screening | Local SEO / Commercial | ADHD Diagnosis in Philadelphia, Pennsylvania (O… | 462 | 1 | 33 |
-| [/adhd-diagnosis-texas](https://siya.health/adhd-diagnosis-texas) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Free screening → /adhd-screening | Local SEO / Commercial | Online ADHD Diagnosis in Texas ($199 Evaluation) | 465 | 2 | 32 |
+| [/adhd-diagnosis-austin](https://siya.health/adhd-diagnosis-austin) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Schedule Consultation → https://book.… | Local SEO / Commercial | ADHD Diagnosis in Austin, Texas (Online, $199) | 361 | 1 | 31 |
+| [/adhd-diagnosis-houston](https://siya.health/adhd-diagnosis-houston) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Schedule Consultation → https://book.… | Local SEO / Commercial | ADHD Diagnosis in Houston, Texas (Online, $199) | 351 | 1 | 31 |
+| [/adhd-diagnosis-pennsylvania](https://siya.health/adhd-diagnosis-pennsylvania) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Schedule Consultation → https://book.… | Local SEO / Commercial | Online ADHD Diagnosis in Pennsylvania ($199 Eva… | 373 | 1 | 32 |
+| [/adhd-diagnosis-philadelphia](https://siya.health/adhd-diagnosis-philadelphia) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Schedule Consultation → https://book.… | Local SEO / Commercial | ADHD Diagnosis in Philadelphia, Pennsylvania (O… | 361 | 1 | 32 |
+| [/adhd-diagnosis-texas](https://siya.health/adhd-diagnosis-texas) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Schedule Consultation → https://book.… | Local SEO / Commercial | Online ADHD Diagnosis in Texas ($199 Evaluation) | 368 | 2 | 32 |
 | [/blog/adhd-evaluation-california-online-vs-in-person](https://siya.health/blog/adhd-evaluation-california-online-vs-in-person) | Blog Article | Educational SEO; nurture toward clinical services | Schedule Consultation → https://book.… | — | Informational | ADHD Evaluation in California: Online vs In-Per… | 480 | 2 | 34 |
 | [/blog/adhd-evaluation-cost-texas](https://siya.health/blog/adhd-evaluation-cost-texas) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | — | Informational | ADHD Evaluation Cost in Texas: Full Breakdown (… | 611 | 4 | 33 |
 | [/blog/adhd-medication-online-california](https://siya.health/blog/adhd-medication-online-california) | Blog Article | Educational SEO; nurture toward clinical services | Schedule Consultation → https://book.… | — | Informational | Can You Get ADHD Medication Online in Californi… | 495 | 3 | 34 |
@@ -214,7 +214,7 @@ Generated: 2026-06-27
 | [/blog/medical-weight-loss-glp1-semaglutide-texas](https://siya.health/blog/medical-weight-loss-glp1-semaglutide-texas) | Blog Article | Educational SEO; nurture toward clinical services | Schedule Consultation → https://book.… | — | Informational | Medical Weight Loss in Texas: GLP-1, Semaglutid… | 1085 | 9 | 35 |
 | [/blog/online-adhd-diagnosis-california](https://siya.health/blog/online-adhd-diagnosis-california) | Blog Article | Educational SEO; nurture toward clinical services | Schedule Consultation → https://book.… | — | Informational | Online ADHD Diagnosis in California: Cost, Proc… | 767 | 6 | 33 |
 | [/blog/online-adhd-diagnosis-texas](https://siya.health/blog/online-adhd-diagnosis-texas) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | — | Informational | Online ADHD Diagnosis in Texas: Cost, Process &… | 745 | 7 | 35 |
-| [/creyos-adhd-testing](https://siya.health/creyos-adhd-testing) | Service Page | Creyos cognitive testing for ADHD as part of your $199 on… | Take Free ADHD Screening → /adhd-scre… | Free screening → /adhd-screening | Commercial / Transactional | Creyos ADHD Testing (Included in Your Evaluation) | 389 | 3 | 28 |
+| [/creyos-adhd-testing](https://siya.health/creyos-adhd-testing) | Service Page | Creyos cognitive testing for ADHD as part of your $199 on… | Take Free ADHD Screening → /adhd-scre… | Schedule Consultation → https://book.… | Commercial / Transactional | Creyos ADHD Testing (Included in Your Evaluation) | 299 | 2 | 28 |
 
 ---
 
@@ -313,10 +313,10 @@ Generated: 2026-06-27
 - **Page Type:** Geo SEO Landing
 - **Primary Purpose:** Local/state ADHD intent capture; drive evaluation booking
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Free screening → /adhd-screening
+- **Secondary CTA:** Schedule Consultation → https://book.carepatron.com/Siya-Health
 - **Traffic Intent:** Local SEO / Commercial
 - **Target Keyword:** ADHD Diagnosis in Austin, Texas (Online, $199)
-- **Word Count:** 457
+- **Word Count:** 361
 - **Internal Links In:** 1
 - **Internal Links Out:** 31
 - **Groups:** Core Revenue Pages, SEO Pages
@@ -327,10 +327,10 @@ Generated: 2026-06-27
 - **Page Type:** Geo SEO Landing
 - **Primary Purpose:** Local/state ADHD intent capture; drive evaluation booking
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Free screening → /adhd-screening
+- **Secondary CTA:** Schedule Consultation → https://book.carepatron.com/Siya-Health
 - **Traffic Intent:** Local SEO / Commercial
 - **Target Keyword:** ADHD Diagnosis in Houston, Texas (Online, $199)
-- **Word Count:** 426
+- **Word Count:** 351
 - **Internal Links In:** 1
 - **Internal Links Out:** 31
 - **Groups:** Core Revenue Pages, SEO Pages
@@ -341,10 +341,10 @@ Generated: 2026-06-27
 - **Page Type:** Geo SEO Landing
 - **Primary Purpose:** Local/state ADHD intent capture; drive evaluation booking
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Free screening → /adhd-screening
+- **Secondary CTA:** Schedule Consultation → https://book.carepatron.com/Siya-Health
 - **Traffic Intent:** Local SEO / Commercial
 - **Target Keyword:** Online ADHD Diagnosis in Pennsylvania ($199 Evaluation)
-- **Word Count:** 461
+- **Word Count:** 373
 - **Internal Links In:** 1
 - **Internal Links Out:** 32
 - **Groups:** Core Revenue Pages, SEO Pages
@@ -355,12 +355,12 @@ Generated: 2026-06-27
 - **Page Type:** Geo SEO Landing
 - **Primary Purpose:** Local/state ADHD intent capture; drive evaluation booking
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Free screening → /adhd-screening
+- **Secondary CTA:** Schedule Consultation → https://book.carepatron.com/Siya-Health
 - **Traffic Intent:** Local SEO / Commercial
 - **Target Keyword:** ADHD Diagnosis in Philadelphia, Pennsylvania (Online, $199)
-- **Word Count:** 462
+- **Word Count:** 361
 - **Internal Links In:** 1
-- **Internal Links Out:** 33
+- **Internal Links Out:** 32
 - **Groups:** Core Revenue Pages, SEO Pages
 
 ### /adhd-diagnosis-texas
@@ -369,10 +369,10 @@ Generated: 2026-06-27
 - **Page Type:** Geo SEO Landing
 - **Primary Purpose:** Local/state ADHD intent capture; drive evaluation booking
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Free screening → /adhd-screening
+- **Secondary CTA:** Schedule Consultation → https://book.carepatron.com/Siya-Health
 - **Traffic Intent:** Local SEO / Commercial
 - **Target Keyword:** Online ADHD Diagnosis in Texas ($199 Evaluation)
-- **Word Count:** 465
+- **Word Count:** 368
 - **Internal Links In:** 2
 - **Internal Links Out:** 32
 - **Groups:** Core Revenue Pages, SEO Pages
@@ -382,11 +382,11 @@ Generated: 2026-06-27
 - **URL:** https://siya.health/adhd-screening
 - **Page Type:** Service Page
 - **Primary Purpose:** Top-of-funnel ADHD screening; lead to evaluation
-- **Primary CTA:** Schedule Consultation → https://book.carepatron.com/Siya-Health
-- **Secondary CTA:** —
+- **Primary CTA:** Book Your ADHD Walkthrough → https://book.carepatron.com/Siya-Health
+- **Secondary CTA:** Start Secure Medical Chat → https://spruce.care/siyahealth
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** What are you looking for help with?
-- **Word Count:** 368
+- **Word Count:** 391
 - **Internal Links In:** 148
 - **Internal Links Out:** 28
 - **Groups:** Core Revenue Pages
@@ -1920,11 +1920,11 @@ Generated: 2026-06-27
 - **Page Type:** Service Page
 - **Primary Purpose:** Creyos cognitive testing for ADHD as part of your $199 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL.
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Free screening → /adhd-screening
+- **Secondary CTA:** Schedule Consultation → https://book.carepatron.com/Siya-Health
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Creyos ADHD Testing (Included in Your Evaluation)
-- **Word Count:** 389
-- **Internal Links In:** 3
+- **Word Count:** 299
+- **Internal Links In:** 2
 - **Internal Links Out:** 28
 - **Groups:** Core Revenue Pages, SEO Pages
 

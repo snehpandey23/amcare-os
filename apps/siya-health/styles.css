@@ -2473,6 +2473,33 @@ img[loading="lazy"] { loading: lazy; }
 
 .asrs-cta { margin-top: 24px; margin-bottom: 12px; }
 
+.asrs-results-complete {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.asrs-cta-completion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+}
+
+@media (min-width: 600px) {
+  .asrs-cta-completion {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+.asrs-results-microcopy {
+  max-width: 36rem;
+  margin-top: 4px;
+  line-height: 1.55;
+}
+
 .asrs-citation {
   font-size: 0.8rem;
   color: var(--text-muted);
@@ -6724,7 +6751,48 @@ body.ghl-legal-gate-open {
   display: none;
 }
 
-/* Hero — visual-first with overlay */
+/* LP hero — reuse sitewide hero-merged (same as ADHD Care) */
+.siya-landing-page .hero-merged.lp-hero-merged {
+  padding-top: calc(var(--lp-header-h, 64px) + 32px);
+  padding-bottom: 48px;
+  min-height: min(72vh, 620px);
+}
+
+.siya-landing-page .hero-merged.lp-hero-merged .hero-merged-content {
+  max-width: 560px;
+}
+
+.siya-landing-page .hero-merged .lp-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 10px;
+}
+
+.siya-landing-page .hero-merged .lp-disclaimer,
+.siya-landing-page .hero-merged .hero-disclaimer {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+.siya-landing-page .hero-merged .lp-hero-secondary-link a {
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration: underline;
+}
+
+@media (max-width: 899px) {
+  .siya-landing-page .hero-merged.lp-hero-merged {
+    padding-top: calc(var(--lp-header-h, 64px) + 24px);
+    padding-bottom: 40px;
+    min-height: auto;
+  }
+}
+
+/* Hero — visual-first with overlay (legacy; prefer hero-merged.lp-hero-merged) */
 .siya-landing-page .lp-hero--visual {
   position: relative;
   padding: 0;
