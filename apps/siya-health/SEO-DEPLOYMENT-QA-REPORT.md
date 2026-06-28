@@ -1,6 +1,6 @@
 # SEO Deployment QA Report
 
-Generated: 2026-06-28T12:05:39.161Z
+Generated: 2026-06-28T15:14:21.024Z
 
 ## Summary
 
@@ -35,7 +35,7 @@ Generated: 2026-06-28T12:05:39.161Z
 
 ## CTA repositioning
 
-- **Default primary CTA:** Book a Meet & Greet → `https://spruce.care/siyahealth`
+- **Default primary CTA:** Book a Meet & Greet → `https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=ftxOxenx`
 - **Default secondary CTA:** Explore Care Options → `#services` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, `adhd-screening.html`
 

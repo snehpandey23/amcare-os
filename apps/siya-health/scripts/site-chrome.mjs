@@ -887,7 +887,7 @@ ${FOOTER_SOCIAL_BLOCK}
           <p><a href="mailto:care@siya.health">care@siya.health</a></p>
           <p><a href="${SPRUCE_CHAT_URL}" target="_blank" rel="noopener">${COPY_STANDARDS.primaryCta}</a></p>
           <p><a href="${BOOKING_LINK}" target="_blank" rel="noopener">${COPY_STANDARDS.secondaryCta}</a></p>
-          <p><a href="/book-appointment">Book appointment</a></p>
+          <p><a href="${BOOKING_LINK}" target="_blank" rel="noopener" data-siya-track="schedule-consultation-click">Book appointment</a></p>
         </div>
       </div>
       <div class="container container--footer-wide">
@@ -1541,13 +1541,37 @@ export function normalizeCarePatronLinks(html, relPath) {
   return html;
 }
 
-/** Replace legacy CarePatron consultation slot (i=sysv73e4) with Spruce chat. */
-export function normalizeConsultationBookingToSpruce(html) {
-  const spruceHref = encCarepatronHref(SPRUCE_CHAT_URL);
-  return html.replace(
+const CONSULTATION_CTA_LABEL_RE =
+  /Schedule Consultation|Book Consultation|Book Appointment|Book appointment|Book Free Consultation|Book Your ADHD Walkthrough|Book Your Free 15-Minute ADHD Consultation/i;
+
+/** Route consultation CTAs to ADHD walkthrough; keep Spruce for secure-chat wording only. */
+export function normalizeConsultationCtaRouting(html) {
+  const walkHref = encCarepatronHref(ADHD_WALKTHROUGH_LINK);
+  html = html.replace(
     /href="([^"]*book\.carepatron\.com[^"]*i(?:=|%3D)sysv73e4[^"]*)"/gi,
-    `href="${spruceHref}"`,
+    `href="${walkHref}"`,
   );
+  html = html.replace(
+    /<a(\s[^>]*?)href="([^"]*spruce\.care\/siyahealth[^"]*)"([^>]*>)([\s\S]*?)<\/a>/gi,
+    (match, pre, _href, post, inner) => {
+      const text = inner.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+      if (CONSULTATION_CTA_LABEL_RE.test(text)) {
+        return `<a${pre}href="${walkHref}"${post}${inner}</a>`;
+      }
+      return match;
+    },
+  );
+  html = html.replace(
+    /<a(\s[^>]*?)href="\/book-appointment"([^>]*>)([\s\S]*?)<\/a>/gi,
+    (match, pre, post, inner) => {
+      const text = inner.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+      if (/book appointment/i.test(text)) {
+        return `<a${pre}href="${walkHref}" target="_blank" rel="noopener" data-siya-track="schedule-consultation-click"${post}${inner}</a>`;
+      }
+      return match;
+    },
+  );
+  return html;
 }
 
 /** Normalize walkthrough/demo CTA button labels and ftxOxenx anchor text. */
@@ -1682,7 +1706,7 @@ export function applySiteChrome(html, relPath, title = '') {
   html = normalizeSiyaCircleJoinLinks(html);
   html = normalizeCtaUrls(html);
   html = normalizeCarePatronLinks(html, relPath);
-  html = normalizeConsultationBookingToSpruce(html);
+  html = normalizeConsultationCtaRouting(html);
   html = normalizeWalkthroughCtaLabels(html);
   html = normalizeCtaHierarchy(html, relPath);
   return html;

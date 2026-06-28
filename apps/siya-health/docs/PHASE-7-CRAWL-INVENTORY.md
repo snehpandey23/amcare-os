@@ -135,7 +135,7 @@
 | /blog/when-is-testosterone-therapy-appropriate | 200 | yes | yes | 14 | /blog/when-is-testosterone-therapy-appropriate | — |
 | /blog/why-am-i-always-tired-causes-when-to-see-doctor | 200 | yes | yes | 43 | /blog/why-am-i-always-tired-causes-when-to-see-doctor | — |
 | /blog/youre-not-lazy-signs-undiagnosed-adult-adhd | 200 | yes | yes | 4 | /blog/youre-not-lazy-signs-undiagnosed-adult-adhd | — |
-| /book-appointment | 200 | yes | yes | 148 | /book-appointment | — |
+| /book-appointment | 200 | yes | yes | 1 | /book-appointment | — |
 | /creyos-adhd-testing | 200 | yes | yes | 2 | /creyos-adhd-testing | — |
 | / | 200 | yes | yes | 587 | / | — |
 | /intake | 200 | no | yes | 0 | /intake | — |
