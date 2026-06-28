@@ -81,6 +81,26 @@ export const CTA_SYSTEM = {
   },
 };
 
+/** Non-clinical ADHD free consultation (CarePatron walkthrough slot) — button labels only */
+export const WALKTHROUGH_CTA = {
+  label: 'Book Free Consultation',
+  microcopy:
+    'A short, non-clinical call with the Siya Health care team to explain the ADHD evaluation process, pricing, Creyos testing, and next steps.',
+  disclaimer:
+    'This is a non-clinical informational call. It does not include diagnosis, treatment, prescriptions, or medical advice.',
+};
+
+/** Legacy walkthrough/demo button labels → canonical WALKTHROUGH_CTA.label */
+export const LEGACY_WALKTHROUGH_CTA_LABELS = [
+  'Book Free Walkthrough',
+  'Book Free Evaluation Walkthrough',
+  'Book Free ADHD Evaluation Walkthrough',
+  'Book ADHD Evaluation Walkthrough',
+  'Book Your ADHD Walkthrough',
+  'Book Free Demo',
+  'Book Demo',
+];
+
 /** Booking CTAs consolidated to primary label (regex-safe literals). */
 export const REMOVED_BOOKING_CTA_LABELS = [
   'Talk to a Clinician',
@@ -107,7 +127,6 @@ export const REMOVED_BOOKING_CTA_LABELS = [
   'Schedule Meet & Greet',
   'Schedule Meet &amp; Greet',
   'Book a meet & greet',
-  'Book Free Consultation',
   'Book Your Free 15-Minute Discovery Call',
   'Schedule a Meet and Greet',
   'Book Consultation',
@@ -168,6 +187,9 @@ export const COPY_STANDARDS = {
   adhdPrimaryCta: CTA_SYSTEM.secondary.adhd.label,
   weightPrimaryCta: CTA_SYSTEM.secondary.weight.label,
   adhdSecondaryCta: 'Take Free ADHD Screening',
+  walkthroughCta: WALKTHROUGH_CTA.label,
+  walkthroughMicrocopy: WALKTHROUGH_CTA.microcopy,
+  walkthroughDisclaimer: WALKTHROUGH_CTA.disclaimer,
   newsletterCta: CTA_SYSTEM.newsletter.label,
   newsletterMicrocopy: CTA_SYSTEM.newsletter.microcopy,
   pricingNavLabel: PRICING.navLabel,

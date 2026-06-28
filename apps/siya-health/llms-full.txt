@@ -1,6 +1,6 @@
 # Siya Health — Full AI Retrieval Index
 
-Generated: 2026-06-27
+Generated: 2026-06-28
 Total pages: 149
 
 ---
@@ -151,7 +151,7 @@ Total pages: 149
 
 - Adult ADHD Evaluation Online in California | Free ADHD Screening
   URL: https://siya.health/adult-adhd-screening-california
-  Summary: Take a free 2-minute ADHD screening online with Siya Health. Adults in California can start with a self-screening, book a free evaluation walkthrough, or begin a $199 adult ADHD evaluation.
+  Summary: Take a free 2-minute ADHD screening online with Siya Health. Adults in California can start with a self-screening, book a free consultation, or begin a $199 adult ADHD evaluation.
   Topics: adhd, california
 
 - Health Guides | Metabolic, ADHD, Hormones &amp; Telehealth

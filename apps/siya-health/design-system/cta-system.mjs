@@ -75,10 +75,14 @@ export const LANDING_CONVERSION_CTAS = {
   },
   walkthrough: {
     id: 'walkthrough',
-    label: 'Book Free Walkthrough',
+    label: 'Book Free Consultation',
     url: ADHD_WALKTHROUGH_LINK,
     external: true,
     track: 'click_book_walkthrough',
+    microcopy:
+      'A short, non-clinical call with the Siya Health care team to explain the ADHD evaluation process, pricing, Creyos testing, and next steps.',
+    disclaimer:
+      'This is a non-clinical informational call. It does not include diagnosis, treatment, prescriptions, or medical advice.',
   },
 };
 

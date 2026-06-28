@@ -16,6 +16,7 @@ import {
   PRICING,
   REMOVED_BLOG_PATHS,
   REMOVED_BOOKING_CTA_LABELS,
+  LEGACY_WALKTHROUGH_CTA_LABELS,
   STATES_BULLET,
   STATES_INLINE,
 } from '../data/site-standards.mjs';
@@ -697,8 +698,10 @@ export function normalizeSitewideCopy(html, relPath = '') {
     `<title>${NAV_HEALTH_GUIDES.label} |`,
   );
 
-  html = html.replaceAll('Book Free Consultation →', `${COPY_STANDARDS.primaryCta} →`);
-  html = html.replaceAll('Book Free Consultation', COPY_STANDARDS.primaryCta);
+  html = html.replaceAll('Book Free Consultation →', `${COPY_STANDARDS.walkthroughCta} →`);
+  for (const label of LEGACY_WALKTHROUGH_CTA_LABELS) {
+    html = html.replaceAll(label, COPY_STANDARDS.walkthroughCta);
+  }
   for (const label of REMOVED_BOOKING_CTA_LABELS) {
     if (label.includes('book.carepatron') || label.includes('yourmarketingai')) continue;
     html = html.replaceAll(label, COPY_STANDARDS.primaryCta);
@@ -1516,7 +1519,7 @@ export function normalizeCarePatronLinks(html, relPath) {
       if (/(?:Start|start).*\$199|Already ready\?/i.test(text) && /evaluation/i.test(text)) {
         return `<a${pre}href="${encCarepatronHref(ADHD_EVALUATION_199_LINK)}"${post}${inner}</a>`;
       }
-      if (/Book Your ADHD Walkthrough|Book Free(?:\s+Evaluation)?\s+Walkthrough/i.test(text)) {
+      if (/Book Free Consultation|Book Your ADHD Walkthrough|Book Free(?:\s+Evaluation)?\s+Walkthrough|Book Free Demo|Book Demo/i.test(text)) {
         return `<a${pre}href="${encCarepatronHref(ADHD_WALKTHROUGH_LINK)}"${post}${inner}</a>`;
       }
       return match;
@@ -1533,6 +1536,20 @@ export function normalizeConsultationBookingToSpruce(html) {
     /href="([^"]*book\.carepatron\.com[^"]*i(?:=|%3D)sysv73e4[^"]*)"/gi,
     `href="${spruceHref}"`,
   );
+}
+
+/** Normalize walkthrough/demo CTA button labels and ftxOxenx anchor text. */
+export function normalizeWalkthroughCtaLabels(html) {
+  const label = COPY_STANDARDS.walkthroughCta;
+  html = html.replace(
+    /<a(\s[^>]*data-cta="book-walkthrough"[^>]*)>[^<]*<\/a>/gi,
+    `<a$1>${label}</a>`,
+  );
+  html = html.replace(
+    /(<a[^>]*href="[^"]*i(?:=|%3D)ftxOxenx[^"]*"[^>]*>)\s*[^<]+\s*(<\/a>)/gi,
+    `$1${label}$2`,
+  );
+  return html;
 }
 
 /** Route legacy primary CTA links (CarePatron/YMA) to Spruce secure chat. */
@@ -1653,6 +1670,7 @@ export function applySiteChrome(html, relPath, title = '') {
   html = normalizeCtaUrls(html);
   html = normalizeCarePatronLinks(html, relPath);
   html = normalizeConsultationBookingToSpruce(html);
+  html = normalizeWalkthroughCtaLabels(html);
   html = normalizeCtaHierarchy(html, relPath);
   return html;
 }

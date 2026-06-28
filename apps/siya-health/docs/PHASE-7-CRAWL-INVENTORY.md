@@ -1,6 +1,6 @@
 # Phase 7 — Crawl Inventory
 
-**Generated:** 2026-06-27
+**Generated:** 2026-06-28
 **HTML routes:** 149 · **Sitemap URLs:** 141
 
 ## Issue summary

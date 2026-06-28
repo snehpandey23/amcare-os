@@ -1,6 +1,6 @@
 # Siya Health — Complete Website Inventory
 
-Generated: 2026-06-27
+Generated: 2026-06-28
 
 | Metric | Count |
 |--------|------:|
@@ -46,7 +46,7 @@ Generated: 2026-06-27
 | [/adhd-diagnosis-pennsylvania](https://siya.health/adhd-diagnosis-pennsylvania) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Schedule Consultation → https://spruc… | Local SEO / Commercial | Online ADHD Diagnosis in Pennsylvania ($199 Eva… | 373 | 1 | 32 |
 | [/adhd-diagnosis-philadelphia](https://siya.health/adhd-diagnosis-philadelphia) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Schedule Consultation → https://spruc… | Local SEO / Commercial | ADHD Diagnosis in Philadelphia, Pennsylvania (O… | 361 | 1 | 32 |
 | [/adhd-diagnosis-texas](https://siya.health/adhd-diagnosis-texas) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Schedule Consultation → https://spruc… | Local SEO / Commercial | Online ADHD Diagnosis in Texas ($199 Evaluation) | 368 | 2 | 32 |
-| [/adhd-screening](https://siya.health/adhd-screening) | Service Page | Top-of-funnel ADHD screening; lead to evaluation | Book Your ADHD Walkthrough → https://… | Start Secure Medical Chat → https://s… | Commercial / Transactional | What are you looking for help with? | 391 | 148 | 28 |
+| [/adhd-screening](https://siya.health/adhd-screening) | Service Page | Top-of-funnel ADHD screening; lead to evaluation | Book Free Consultation → https://book… | Start Secure Medical Chat → https://s… | Commercial / Transactional | What are you looking for help with? | 409 | 148 | 28 |
 | [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Start Secure Medical Chat → https://s… | — | Commercial / Transactional | Book Your Telehealth Visit — Same-Week | 103 | 147 | 27 |
 | [/creyos-adhd-testing](https://siya.health/creyos-adhd-testing) | Service Page | Creyos cognitive testing for ADHD as part of your $199 on… | Take Free ADHD Screening → /adhd-scre… | Schedule Consultation → https://spruc… | Commercial / Transactional | Creyos ADHD Testing (Included in Your Evaluation) | 299 | 2 | 28 |
 | [/labs](https://siya.health/labs) | Service Page | Laboratory orders and monitoring through Siya Health tele… | Start Secure Medical Chat → https://s… | — | Commercial / Transactional | Diagnostic Lab Services | 134 | 147 | 27 |
@@ -241,7 +241,7 @@ Generated: 2026-06-27
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/adult-adhd-screening-california](https://siya.health/adult-adhd-screening-california) | Page | Take a free 2-minute ADHD screening online with Siya Heal… | Start Free 2-Minute Screening → /adhd… | Book Free Walkthrough → https://book.… | Mixed | Adult ADHD Evaluation Starts With a Free 2-Minu… | 769 | 0 | 6 |
+| [/adult-adhd-screening-california](https://siya.health/adult-adhd-screening-california) | Page | Take a free 2-minute ADHD screening online with Siya Heal… | Start Free 2-Minute Screening → /adhd… | Book Free Consultation → https://book… | Mixed | Adult ADHD Evaluation Starts With a Free 2-Minu… | 781 | 0 | 6 |
 
 ---
 
@@ -382,11 +382,11 @@ Generated: 2026-06-27
 - **URL:** https://siya.health/adhd-screening
 - **Page Type:** Service Page
 - **Primary Purpose:** Top-of-funnel ADHD screening; lead to evaluation
-- **Primary CTA:** Book Your ADHD Walkthrough → https://book.carepatron.com/Siya-Health
+- **Primary CTA:** Book Free Consultation → https://book.carepatron.com/Siya-Health
 - **Secondary CTA:** Start Secure Medical Chat → https://spruce.care/siyahealth
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** What are you looking for help with?
-- **Word Count:** 391
+- **Word Count:** 409
 - **Internal Links In:** 148
 - **Internal Links Out:** 28
 - **Groups:** Core Revenue Pages
@@ -395,12 +395,12 @@ Generated: 2026-06-27
 
 - **URL:** https://siya.health/adult-adhd-screening-california
 - **Page Type:** Page
-- **Primary Purpose:** Take a free 2-minute ADHD screening online with Siya Health. Adults in California can start with a self-screening, book a free evaluation walkthrough, or begin a $199 adult ADHD evaluation.
+- **Primary Purpose:** Take a free 2-minute ADHD screening online with Siya Health. Adults in California can start with a self-screening, book a free consultation, or begin a $199 adult ADHD evaluation.
 - **Primary CTA:** Start Free 2-Minute Screening → /adhd-screening
-- **Secondary CTA:** Book Free Walkthrough → https://book.carepatron.com/Siya-Health
+- **Secondary CTA:** Book Free Consultation → https://book.carepatron.com/Siya-Health
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Adult ADHD Evaluation Starts With a Free 2-Minute Screening
-- **Word Count:** 769
+- **Word Count:** 781
 - **Internal Links In:** 0
 - **Internal Links Out:** 6
 - **Groups:** Orphan Pages
