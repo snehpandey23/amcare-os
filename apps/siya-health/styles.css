@@ -5775,7 +5775,7 @@ body.ghl-legal-gate-open {
   display: none !important;
 }
 
-/* Cookie notice — non-blocking */
+/* Cookie notice — non-blocking, healthcare-appropriate */
 .cookie-notice {
   position: fixed;
   bottom: 0;
@@ -5784,32 +5784,105 @@ body.ghl-legal-gate-open {
   z-index: 9999;
   background: var(--surface, #fff);
   border-top: 1px solid var(--border);
-  box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.08);
-  padding: 14px 20px;
+  box-shadow: 0 -8px 32px rgba(15, 23, 42, 0.1);
+  padding: 16px 20px calc(16px + env(safe-area-inset-bottom, 0px));
 }
 .cookie-notice__inner {
-  max-width: 1100px;
+  max-width: 960px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 20px;
-  align-items: center;
+  gap: 14px 24px;
+  align-items: flex-start;
   justify-content: space-between;
 }
 .cookie-notice__text {
   margin: 0;
   font-size: 0.9rem;
+  line-height: 1.5;
   color: var(--text-secondary);
   flex: 1 1 280px;
 }
-.cookie-notice__actions {
+.cookie-notice__controls {
+  flex: 1 1 260px;
   display: flex;
+  flex-direction: column;
+  align-items: stretch;
   gap: 10px;
-  flex-wrap: wrap;
+  min-width: min(100%, 320px);
 }
-.cookie-notice .button {
-  padding: 8px 16px;
+.cookie-notice__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+}
+.cookie-notice__btn {
+  appearance: none;
+  font: inherit;
   font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.25;
+  padding: 11px 14px;
+  border-radius: 8px;
+  border: 2px solid var(--brand, #0d9488);
+  background: var(--surface, #fff);
+  color: var(--brand, #0d9488);
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.cookie-notice__btn:hover,
+.cookie-notice__btn:focus-visible {
+  background: rgba(13, 148, 136, 0.08);
+  outline: none;
+}
+.cookie-notice__btn--accept,
+.cookie-notice__btn--reject {
+  /* Equal visual weight — same size, weight, and border treatment */
+}
+.cookie-notice__policy {
+  display: block;
+  text-align: center;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.cookie-notice__policy:hover,
+.cookie-notice__policy:focus-visible {
+  color: var(--brand, #0d9488);
+}
+body.cookie-notice-visible {
+  padding-bottom: var(--cookie-notice-height, 0px);
+}
+body.cookie-notice-visible .mobile-sticky-cta,
+body.cookie-notice-visible .lp-mobile-sticky-cta {
+  bottom: var(--cookie-notice-height, 0px);
+}
+@media (max-width: 640px) {
+  .cookie-notice {
+    padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px));
+  }
+  .cookie-notice__inner {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .cookie-notice__controls {
+    min-width: 100%;
+  }
+  .cookie-notice__actions {
+    grid-template-columns: 1fr;
+  }
+  .cookie-notice__btn {
+    width: 100%;
+  }
+}
+@media (min-width: 641px) and (max-width: 900px) {
+  .cookie-notice__actions {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 /* ===== Homepage symptom-centric + visual diagram system ===== */

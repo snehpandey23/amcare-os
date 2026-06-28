@@ -915,6 +915,18 @@ export function injectFooterGuideHubs(html) {
   return html;
 }
 
+/** Google Consent Mode bootstrap — must run before GTM/gtag */
+export function injectCookieConsentBootstrap(html) {
+  if (!html.includes('googletagmanager.com') && !html.includes('GTM-PLBD4TTQ')) return html;
+  const tag = '<script src="/scripts/cookie-consent-bootstrap.js"></script>';
+  html = html.replace(/\s*<script src="\/scripts\/cookie-consent-bootstrap\.js"><\/script>\s*/gi, '\n');
+  if (html.includes(tag)) return html;
+  if (/<head[^>]*>/i.test(html)) {
+    return html.replace(/(<head[^>]*>)/i, `$1\n    ${tag}`);
+  }
+  return html;
+}
+
 /** Non-blocking cookie notice — localStorage acceptance only */
 export function injectCookieNotice(html, relPath) {
   if (isLegalContentPage(relPath)) return html;
@@ -1625,6 +1637,7 @@ export function injectHeaderScroll(html) {
 }
 
 export function applySiteChrome(html, relPath, title = '') {
+  html = injectCookieConsentBootstrap(html);
   if (isLegalContentPage(relPath)) {
     html = injectSeoFooterArchitecture(html, relPath);
     html = normalizeLegalLinks(html);

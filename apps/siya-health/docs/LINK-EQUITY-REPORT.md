@@ -1,6 +1,6 @@
 # Link Equity Report — Canonical Winning Blogs
 
-Generated: 2026-06-28T11:54:48.682Z
+Generated: 2026-06-28T12:05:34.948Z
 
 ## Top 20 blogs needing more internal links
 
