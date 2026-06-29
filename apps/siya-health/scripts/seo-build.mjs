@@ -94,7 +94,9 @@ function priorityFor(rel) {
 
 function generateSitemap(htmlFiles) {
   const lines = [`<?xml version="1.0" encoding="UTF-8"?>`, `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`];
-  const sorted = [...htmlFiles].filter((r) => !SITEMAP_EXCLUDE.has(r)).sort((a, b) => fileToUrlPath(a).localeCompare(fileToUrlPath(b)));
+  const sorted = [...htmlFiles]
+    .filter((r) => !SITEMAP_EXCLUDE.has(r) && !r.startsWith('redirect/'))
+    .sort((a, b) => fileToUrlPath(a).localeCompare(fileToUrlPath(b)));
   for (const rel of sorted) {
     const loc = `${BASE}${fileToUrlPath(rel)}`;
     const pr = priorityFor(rel);

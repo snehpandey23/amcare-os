@@ -9,7 +9,11 @@ export const BASE_URL = 'https://siya.health';
 export const CAREPATRON_BASE = 'https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA';
 /** Spruce secure medical chat — questions / not ready to book */
 export const SPRUCE_CHAT_URL = 'https://spruce.care/siyahealth';
-/** ADHD evaluation walkthrough (non-clinical) — Schedule Consultation, Book Free Consultation */
+/** Internal transition pages (Google Ads conversion tracking) */
+export const REDIRECT_CHAT_URL = '/redirect/chat';
+export const REDIRECT_ADHD_WALKTHROUGH_URL = '/redirect/adhd-walkthrough';
+export const REDIRECT_ADHD_EVALUATION_URL = '/redirect/adhd-evaluation';
+/** ADHD evaluation walkthrough (non-clinical) */
 export const ADHD_WALKTHROUGH_LINK = `${CAREPATRON_BASE}&i=ftxOxenx`;
 /** $199 adult ADHD evaluation booking */
 export const ADHD_EVALUATION_199_LINK = `${CAREPATRON_BASE}&i=bxrKBOuk`;

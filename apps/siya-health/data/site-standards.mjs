@@ -83,7 +83,8 @@ export const CTA_SYSTEM = {
 
 /** Non-clinical ADHD free consultation (CarePatron walkthrough slot) — button labels only */
 export const WALKTHROUGH_CTA = {
-  label: 'Book Free Consultation',
+  label: 'Book ADHD Walkthrough',
+  screeningResultLabel: 'Book Your ADHD Walkthrough',
   microcopy:
     'A short, non-clinical call with the Siya Health care team to explain the ADHD evaluation process, pricing, Creyos testing, and next steps.',
   disclaimer:
@@ -96,7 +97,7 @@ export const LEGACY_WALKTHROUGH_CTA_LABELS = [
   'Book Free Evaluation Walkthrough',
   'Book Free ADHD Evaluation Walkthrough',
   'Book ADHD Evaluation Walkthrough',
-  'Book Your ADHD Walkthrough',
+  'Book Free Consultation',
   'Book Free Demo',
   'Book Demo',
 ];
@@ -188,6 +189,7 @@ export const COPY_STANDARDS = {
   weightPrimaryCta: CTA_SYSTEM.secondary.weight.label,
   adhdSecondaryCta: 'Take Free ADHD Screening',
   walkthroughCta: WALKTHROUGH_CTA.label,
+  walkthroughScreeningResultCta: WALKTHROUGH_CTA.screeningResultLabel,
   walkthroughMicrocopy: WALKTHROUGH_CTA.microcopy,
   walkthroughDisclaimer: WALKTHROUGH_CTA.disclaimer,
   newsletterCta: CTA_SYSTEM.newsletter.label,

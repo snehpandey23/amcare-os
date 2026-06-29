@@ -6,10 +6,11 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {
-  SPRUCE_CHAT_URL,
-  ADHD_WALKTHROUGH_LINK,
-  ADHD_EVALUATION_199_LINK,
+  REDIRECT_CHAT_URL,
+  REDIRECT_ADHD_WALKTHROUGH_URL,
+  REDIRECT_ADHD_EVALUATION_URL,
 } from '../data/providers-core.mjs';
+import { isAdhdFunnelPath } from '../design-system/conversion-system.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -37,29 +38,39 @@ function normalizeHref(href) {
   return decodeEntities(href).replace(/\/$/, '');
 }
 
-function classifyIntent(text, href = '') {
+function classifyIntent(text, href = '', relPath = '') {
   const t = text.replace(/\s+/g, ' ').trim();
+  const isAdhd = isAdhdFunnelPath(relPath) || relPath === 'adult-adhd-screening-california.html';
   if (/schedule consultation\s*→/i.test(t) && href.startsWith('/') && !href.includes('book')) {
     return { intent: 'service_explore', expected: null };
   }
   if (/start secure medical chat|start secure chat|talk to (a |our )?clinician|questions\?|talk to our team|need help deciding/i.test(t)) {
-    return { intent: 'spruce_chat', expected: SPRUCE_CHAT_URL };
+    return { intent: 'spruce_chat', expected: REDIRECT_CHAT_URL };
   }
   if (
-    /book free consultation|book your adhd walkthrough|schedule consultation|book consultation|book appointment|schedule appointment|schedule visit|book visit|initial consultation|adhd walkthrough|evaluation walkthrough|15-minute adhd consultation/i.test(
+    isAdhd &&
+    /book free consultation|book your adhd walkthrough|schedule consultation|book consultation|book appointment|schedule appointment|schedule visit|book visit|initial consultation|adhd walkthrough|evaluation walkthrough|15-minute adhd consultation|book adhd walkthrough/i.test(
       t,
     )
   ) {
-    return { intent: 'walkthrough', expected: ADHD_WALKTHROUGH_LINK };
+    return { intent: 'walkthrough', expected: REDIRECT_ADHD_WALKTHROUGH_URL };
+  }
+  if (
+    !isAdhd &&
+    /schedule consultation|book consultation|book appointment|schedule appointment|schedule visit|book visit|initial consultation|get started|book now/i.test(
+      t,
+    )
+  ) {
+    return { intent: 'spruce_chat', expected: REDIRECT_CHAT_URL };
   }
   if (/start \$199|\$199 evaluation|start \$199 evaluation|start the \$199/i.test(t)) {
-    return { intent: 'evaluation_199', expected: ADHD_EVALUATION_199_LINK };
+    return { intent: 'evaluation_199', expected: REDIRECT_ADHD_EVALUATION_URL };
   }
   if (/take free adhd screening|start free.*screening|free adhd screening|start screening|2-minute screening/i.test(t)) {
     return { intent: 'screening', expected: '/adhd-screening' };
   }
   if (/start secure medical chat/i.test(t)) {
-    return { intent: 'spruce_chat', expected: SPRUCE_CHAT_URL };
+    return { intent: 'spruce_chat', expected: REDIRECT_CHAT_URL };
   }
   if (/evaluation/i.test(t) && !/walkthrough|consultation/i.test(t)) {
     return { intent: 'evaluation_context', expected: null };
@@ -105,9 +116,10 @@ let incorrect = 0;
 let fixedNote = 0;
 
 for (const rel of files.sort()) {
+  if (rel.startsWith('redirect/')) continue;
   const html = fs.readFileSync(path.join(SITE_ROOT, rel), 'utf8');
   for (const row of extractAnchors(html)) {
-    const { intent, expected } = classifyIntent(row.text, row.href);
+    const { intent, expected } = classifyIntent(row.text, row.href, rel);
     const ok = expected ? hrefMatchesExpected(row.href, expected) : true;
     const isSpruceMisroute =
       row.href.includes('spruce.care/siyahealth') &&
@@ -127,9 +139,9 @@ const lines = [
   '',
   '| Intent | Example labels | Expected URL |',
   '|--------|----------------|--------------|',
-  `| Spruce chat | Start Secure Medical Chat, Questions? | \`${SPRUCE_CHAT_URL}\` |`,
-  `| Walkthrough | Schedule Consultation, Book Free Consultation | \`${ADHD_WALKTHROUGH_LINK}\` |`,
-  `| $199 evaluation | Start $199 Evaluation | \`${ADHD_EVALUATION_199_LINK}\` |`,
+  `| Secure chat | Start Secure Medical Chat, Questions? | \`${REDIRECT_CHAT_URL}\` → Spruce |`,
+  `| Walkthrough (ADHD only) | Book ADHD Walkthrough, Book Your ADHD Walkthrough | \`${REDIRECT_ADHD_WALKTHROUGH_URL}\` → CarePatron |`,
+  `| $199 evaluation | Start $199 Evaluation | \`${REDIRECT_ADHD_EVALUATION_URL}\` → CarePatron |`,
   '| Screening | Take Free ADHD Screening | `/adhd-screening` |',
   '',
   '## Summary',
@@ -143,11 +155,10 @@ const lines = [
   '',
   '## Fixes applied in this release',
   '',
-  '- `BOOKING_LINK` restored to ADHD walkthrough (`ftxOxenx`), not Spruce',
-  '- `normalizeConsultationCtaRouting()` rewrites Spruce/sysv73e4/`/book-appointment` on consultation labels → walkthrough',
-  '- Footer **Book appointment** now points to walkthrough booking',
-  '- California ADHD blog generator CTAs corrected',
-  '- Weight-loss page broken `#book-telehealth` anchors → Spruce',
+  '- External booking/chat URLs route through `/redirect/*` transition pages for Google Ads conversion tracking',
+  '- Non-ADHD service pages route all consultation/booking CTAs → `/redirect/chat` (Spruce)',
+  '- ADHD funnel pages route walkthrough CTAs → `/redirect/adhd-walkthrough`',
+  '- Footer **Book appointment** on non-ADHD pages → secure chat redirect',
   '',
 ];
 

@@ -28,7 +28,7 @@ import {
   resolveProviderPhoto,
   stateChipLabel,
 } from '../data/providers.mjs';
-import { SPRUCE_CHAT_URL, ADHD_WALKTHROUGH_LINK, ADHD_EVALUATION_199_LINK } from '../data/providers-core.mjs';
+import { SPRUCE_CHAT_URL, ADHD_WALKTHROUGH_LINK, ADHD_EVALUATION_199_LINK, REDIRECT_CHAT_URL, REDIRECT_ADHD_WALKTHROUGH_URL, REDIRECT_ADHD_EVALUATION_URL } from '../data/providers-core.mjs';
 import { getServiceTagline } from '../data/provider-canonical.mjs';
 import {
   SIYA_CIRCLE_GHL_FORM_URL,
@@ -515,7 +515,7 @@ function injectHeroTrustBar(html, relPath) {
 function injectHeroPrimaryCta(html, relPath) {
   if (isAdsLandingPage(relPath, html)) return html;
   const heroBlock = html.match(/<div class="hero-ctas[^"]*">[\s\S]*?<\/div>/i);
-  if (!heroBlock || heroBlock[0].includes('data-conversion-goal')) return html;
+  if (!heroBlock) return html;
   const { primary } = resolveConversion(relPath);
   const slot = primary ?? CTA_SLOTS.primary;
   const btn = renderButton({
@@ -523,8 +523,9 @@ function injectHeroPrimaryCta(html, relPath) {
     variant: 'primary',
     ctaSlot: slot.id ?? 'primary',
   });
+  if (heroBlock[0].includes('data-conversion-goal') && heroBlock[0].includes(slot.url)) return html;
   return html.replace(
-    /(<div class="hero-ctas[^"]*">)\s*<a class="button[^"]*"[^>]*>[\s\S]*?<\/a>/i,
+    /(<div class="hero-ctas[^"]*">)\s*<a class="[^"]*\bbutton\b[^"]*"[^>]*>[\s\S]*?<\/a>/i,
     `$1\n            ${btn}`,
   );
 }
@@ -565,11 +566,11 @@ export function injectNavCta(html, relPath) {
   const meetBtn = renderNavCtaMarkup(relPath, 'nav');
   const mobileBtn = renderNavCtaMarkup(relPath, 'nav-mobile');
   html = html.replace(
-    /<div class="nav-cta">\s*<a class="button"[^>]*>[\s\S]*?<\/a>\s*<\/div>/gi,
+    /<div class="nav-cta">\s*<a class="[^"]*\bbutton\b[^"]*"[^>]*>[\s\S]*?<\/a>\s*<\/div>/gi,
     `<div class="nav-cta">\n          ${meetBtn}\n        </div>`,
   );
   html = html.replace(
-    /(<div class="nav-mobile">[\s\S]*?)<a class="button"[^>]*>[\s\S]*?<\/a>(?=\s*<\/div>)/gi,
+    /(<div class="nav-mobile">[\s\S]*?)<a class="[^"]*\bbutton\b[^"]*"[^>]*>[\s\S]*?<\/a>(?=\s*<\/div>)/gi,
     `$1${mobileBtn}`,
   );
   return html;
@@ -1435,6 +1436,11 @@ function isLegalContentPage(relPath) {
 }
 
 /** Google Ads / minimal landing pages — skip full nav/footer injection */
+export function isRedirectTransitionPage(relPath) {
+  return relPath.startsWith('redirect/');
+}
+
+/** Google Ads / minimal landing pages — skip full nav/footer injection */
 export function isAdsLandingPage(relPath, html = '') {
   if (relPath === 'adult-adhd-screening-california.html') return true;
   return /\bclass="[^"]*siya-landing-page/.test(html) || /data-siya-landing=/.test(html);
@@ -1544,19 +1550,22 @@ export function normalizeCarePatronLinks(html, relPath) {
 const CONSULTATION_CTA_LABEL_RE =
   /Schedule Consultation|Book Consultation|Book Appointment|Book appointment|Book Free Consultation|Book Your ADHD Walkthrough|Book Your Free 15-Minute ADHD Consultation/i;
 
-/** Route consultation CTAs to ADHD walkthrough; keep Spruce for secure-chat wording only. */
-export function normalizeConsultationCtaRouting(html) {
-  const walkHref = encCarepatronHref(ADHD_WALKTHROUGH_LINK);
+/** Route consultation CTAs — ADHD funnel → walkthrough redirect; all else → secure chat redirect. */
+export function normalizeConsultationCtaRouting(html, relPath = '') {
+  const isAdhd = isAdhdFunnelPath(relPath) || relPath === 'adult-adhd-screening-california.html';
+  const walkHref = REDIRECT_ADHD_WALKTHROUGH_URL;
+  const chatHref = REDIRECT_CHAT_URL;
+  const targetHref = isAdhd ? walkHref : chatHref;
   html = html.replace(
     /href="([^"]*book\.carepatron\.com[^"]*i(?:=|%3D)sysv73e4[^"]*)"/gi,
-    `href="${walkHref}"`,
+    `href="${targetHref}"`,
   );
   html = html.replace(
     /<a(\s[^>]*?)href="([^"]*spruce\.care\/siyahealth[^"]*)"([^>]*>)([\s\S]*?)<\/a>/gi,
     (match, pre, _href, post, inner) => {
       const text = inner.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
       if (CONSULTATION_CTA_LABEL_RE.test(text)) {
-        return `<a${pre}href="${walkHref}"${post}${inner}</a>`;
+        return `<a${pre}href="${targetHref}"${post}${inner}</a>`;
       }
       return match;
     },
@@ -1565,26 +1574,78 @@ export function normalizeConsultationCtaRouting(html) {
     /<a(\s[^>]*?)href="\/book-appointment"([^>]*>)([\s\S]*?)<\/a>/gi,
     (match, pre, post, inner) => {
       const text = inner.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-      if (/book appointment/i.test(text)) {
-        return `<a${pre}href="${walkHref}" target="_blank" rel="noopener" data-siya-track="schedule-consultation-click"${post}${inner}</a>`;
+      if (/book appointment|schedule consultation/i.test(text)) {
+        const track = isAdhd ? 'schedule-consultation-click' : 'primary-cta-click';
+        return `<a${pre}href="${targetHref}" data-siya-track="${track}"${post}${inner}</a>`;
       }
       return match;
     },
   );
+  if (!isAdhd) {
+    html = html.replace(
+      /<a(\s[^>]*?)href="([^"]*redirect\/adhd-walkthrough[^"]*)"([^>]*>)([\s\S]*?)<\/a>/gi,
+      (match, pre, _href, post, inner) => {
+        const text = inner.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+        if (/walkthrough|consultation|appointment|schedule/i.test(text) && !/ADHD screening|Take Free/i.test(text)) {
+          return `<a${pre}href="${chatHref}" data-siya-track="primary-cta-click"${post}Start Secure Medical Chat</a>`;
+        }
+        return match;
+      },
+    );
+    html = html.replace(
+      /<a(\s[^>]*?)href="([^"]*book\.carepatron\.com[^"]*)"([^>]*>)([\s\S]*?)<\/a>/gi,
+      (match, pre, _href, post, inner) => {
+        const text = inner.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+        if (CONSULTATION_CTA_LABEL_RE.test(text) || /schedule|consultation|appointment/i.test(text)) {
+          return `<a${pre}href="${chatHref}" data-siya-track="primary-cta-click"${post}${inner}</a>`;
+        }
+        return match;
+      },
+    );
+  }
   return html;
 }
 
 /** Normalize walkthrough/demo CTA button labels and ftxOxenx anchor text. */
 export function normalizeWalkthroughCtaLabels(html) {
   const label = COPY_STANDARDS.walkthroughCta;
+  const screeningLabel = COPY_STANDARDS.walkthroughScreeningResultCta;
   html = html.replace(
     /<a(\s[^>]*data-cta="book-walkthrough"[^>]*)>[^<]*<\/a>/gi,
-    `<a$1>${label}</a>`,
+    `<a$1>${screeningLabel}</a>`,
   );
   html = html.replace(
-    /(<a[^>]*href="[^"]*i(?:=|%3D)ftxOxenx[^"]*"[^>]*>)\s*[^<]+\s*(<\/a>)/gi,
-    `$1${label}$2`,
+    /(<a[^>]*href="[^"]*(?:redirect\/adhd-walkthrough|i(?:=|%3D)ftxOxenx)[^"]*"[^>]*>)\s*[^<]+\s*(<\/a>)/gi,
+    (match, open, close) => {
+      if (/screening-results|book-walkthrough/i.test(match)) return `${open}${screeningLabel}${close}`;
+      return `${open}${label}${close}`;
+    },
   );
+  return html;
+}
+
+/** Route external booking/chat URLs through internal redirect transition pages for conversion tracking. */
+export function normalizeConversionRedirectUrls(html) {
+  html = html.replace(/href="https?:\/\/spruce\.care\/siyahealth[^"]*"/gi, `href="${REDIRECT_CHAT_URL}"`);
+  html = html.replace(
+    /href="([^"]*book\.carepatron\.com[^"]*i(?:=|%3D)ftxOxenx[^"]*)"/gi,
+    `href="${REDIRECT_ADHD_WALKTHROUGH_URL}"`,
+  );
+  html = html.replace(
+    /href="([^"]*book\.carepatron\.com[^"]*i(?:=|%3D)bxrKBOuk[^"]*)"/gi,
+    `href="${REDIRECT_ADHD_EVALUATION_URL}"`,
+  );
+  for (const internal of [REDIRECT_CHAT_URL, REDIRECT_ADHD_WALKTHROUGH_URL, REDIRECT_ADHD_EVALUATION_URL]) {
+    const esc = internal.replace(/\//g, '\\/');
+    html = html.replace(
+      new RegExp(`(<a\\s[^>]*href="${esc}"[^>]*)\\s*target="_blank"`, 'gi'),
+      '$1',
+    );
+    html = html.replace(
+      new RegExp(`(<a\\s[^>]*href="${esc}"[^>]*)\\s*rel="noopener noreferrer"`, 'gi'),
+      '$1',
+    );
+  }
   return html;
 }
 
@@ -1598,7 +1659,7 @@ export function normalizeCtaUrls(html) {
         .replace(/\s*target="[^"]*"/gi, '')
         .replace(/\s*rel="[^"]*"/gi, '')
         .replace(/\s*data-siya-track="[^"]*"/gi, '');
-      return `<a${attrs} href="${SPRUCE_CHAT_URL}" target="_blank" rel="noopener" data-siya-track="primary-cta-click">${COPY_STANDARDS.primaryCta}</a>`;
+      return `<a${attrs} href="${REDIRECT_CHAT_URL}" data-siya-track="primary-cta-click">${COPY_STANDARDS.primaryCta}</a>`;
     },
   );
   html = html.replace(
@@ -1608,7 +1669,7 @@ export function normalizeCtaUrls(html) {
         .replace(/\s*target="[^"]*"/gi, '')
         .replace(/\s*rel="[^"]*"/gi, '')
         .replace(/\s*data-siya-track="[^"]*"/gi, '');
-      return `<a${attrs} href="${BOOKING_LINK}" target="_blank" rel="noopener" data-siya-track="schedule-consultation-click">${COPY_STANDARDS.secondaryCta}</a>`;
+      return `<a${attrs} href="${REDIRECT_ADHD_WALKTHROUGH_URL}" data-siya-track="schedule-consultation-click">${COPY_STANDARDS.secondaryCta}</a>`;
     },
   );
   return html;
@@ -1662,9 +1723,15 @@ export function injectHeaderScroll(html) {
 
 export function applySiteChrome(html, relPath, title = '') {
   html = injectCookieConsentBootstrap(html);
+  if (isRedirectTransitionPage(relPath)) {
+    html = injectCookieNotice(html, relPath);
+    return html;
+  }
   if (isLegalContentPage(relPath)) {
     html = injectSeoFooterArchitecture(html, relPath);
     html = normalizeLegalLinks(html);
+    html = normalizeConsultationCtaRouting(html, relPath);
+    html = normalizeConversionRedirectUrls(html);
     return html;
   }
 
@@ -1672,8 +1739,13 @@ export function applySiteChrome(html, relPath, title = '') {
     html = injectCookieNotice(html, relPath);
     html = injectLandingTrust(html, relPath);
     html = injectFaqAccordion(html);
+    html = injectHeaderScroll(html);
     html = stripInlineChromeScripts(html);
     html = normalizeLegalLinks(html);
+    html = normalizeSitewideCopy(html, relPath);
+    html = normalizeConsultationCtaRouting(html, relPath);
+    html = normalizeWalkthroughCtaLabels(html);
+    html = normalizeConversionRedirectUrls(html);
     return html;
   }
 
@@ -1706,8 +1778,9 @@ export function applySiteChrome(html, relPath, title = '') {
   html = normalizeSiyaCircleJoinLinks(html);
   html = normalizeCtaUrls(html);
   html = normalizeCarePatronLinks(html, relPath);
-  html = normalizeConsultationCtaRouting(html);
+  html = normalizeConsultationCtaRouting(html, relPath);
   html = normalizeWalkthroughCtaLabels(html);
+  html = normalizeConversionRedirectUrls(html);
   html = normalizeCtaHierarchy(html, relPath);
   return html;
 }

@@ -21,14 +21,14 @@ export const USER_INTENT_RULES = {
   homepage: { intent: 'homepage', primaryGoal: 'secureChat', secondaryGoal: 'consultation' },
   adhd: { intent: 'adhd', primaryGoal: 'screening', secondaryGoal: 'secureChat' },
   blog: { intent: 'blog', primaryGoal: 'secureChat', secondaryGoal: 'newsletter' },
-  provider: { intent: 'provider', primaryGoal: 'consultation', secondaryGoal: 'secureChat' },
-  pricing: { intent: 'pricing', primaryGoal: 'consultation', secondaryGoal: 'secureChat' },
-  hormones: { intent: 'hormones', primaryGoal: 'secureChat', secondaryGoal: 'consultation' },
-  weight: { intent: 'weight', primaryGoal: 'consultation', secondaryGoal: 'secureChat' },
-  telehealth: { intent: 'telehealth', primaryGoal: 'secureChat', secondaryGoal: 'consultation' },
+  provider: { intent: 'provider', primaryGoal: 'secureChat', secondaryGoal: null },
+  pricing: { intent: 'pricing', primaryGoal: 'secureChat', secondaryGoal: null },
+  hormones: { intent: 'hormones', primaryGoal: 'secureChat', secondaryGoal: null },
+  weight: { intent: 'weight', primaryGoal: 'secureChat', secondaryGoal: null },
+  telehealth: { intent: 'telehealth', primaryGoal: 'secureChat', secondaryGoal: null },
   employer: { intent: 'employer', primaryGoal: 'bookDemo', secondaryGoal: 'secureChat' },
   landing: { intent: 'landing', primaryGoal: null, secondaryGoal: null },
-  default: { intent: 'default', primaryGoal: 'secureChat', secondaryGoal: 'consultation' },
+  default: { intent: 'default', primaryGoal: 'secureChat', secondaryGoal: null },
 };
 
 /** Custom slot for employer / demo flows (Pass 2 wiring) */
@@ -145,6 +145,7 @@ export function resolveConversion(relPath, overrides = {}) {
 }
 
 export function isAdhdFunnelPath(relPath) {
+  if (relPath === 'adult-adhd-screening-california.html') return true;
   return detectUserIntent(relPath) === 'adhd';
 }
 
@@ -154,7 +155,7 @@ export function isAdhdFunnelPath(relPath) {
  */
 export function resolveNavCtaSlot(relPath) {
   if (relPath.startsWith('answers/')) return null;
-  if (isAdhdFunnelPath(relPath)) return CTA_SLOTS.secondary;
+  if (isAdhdFunnelPath(relPath)) return CTA_SLOTS.walkthrough;
   return resolveConversion(relPath).primary;
 }
 

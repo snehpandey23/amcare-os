@@ -1,7 +1,7 @@
 # Phase 7 — Crawl Inventory
 
-**Generated:** 2026-06-28
-**HTML routes:** 149 · **Sitemap URLs:** 141
+**Generated:** 2026-06-29
+**HTML routes:** 152 · **Sitemap URLs:** 141
 
 ## Issue summary
 
@@ -16,8 +16,8 @@
 
 | URL | Status | Indexable | Sitemap | Inbound | Canonical | Redirect |
 |-----|--------|-----------|---------|--------:|-----------|----------|
-| /about | 200 | yes | yes | 440 | /about | — |
-| /adhd-care | 200 | yes | yes | 566 | /adhd-care | — |
+| /about | 200 | yes | yes | 442 | /about | — |
+| /adhd-care | 200 | yes | yes | 568 | /adhd-care | — |
 | /adhd-diagnosis-austin | 200 | yes | yes | 1 | /adhd-diagnosis-austin | — |
 | /adhd-diagnosis-florida | 301 | no | no | 0 | /adhd-care | /adhd-care |
 | /adhd-diagnosis-houston | 200 | yes | yes | 1 | /adhd-diagnosis-houston | — |
@@ -55,7 +55,7 @@
 | /answers/how-long-adhd-evaluation | 200 | yes | yes | 6 | /answers/how-long-adhd-evaluation | — |
 | /answers/how-much-does-adhd-testing-cost | 200 | yes | yes | 5 | /answers/how-much-does-adhd-testing-cost | — |
 | /answers/how-online-prescriptions-work | 200 | yes | yes | 12 | /answers/how-online-prescriptions-work | — |
-| /answers | 200 | yes | yes | 527 | /answers | — |
+| /answers | 200 | yes | yes | 529 | /answers | — |
 | /answers/insulin-resistance-without-diabetes | 200 | yes | yes | 7 | /answers/insulin-resistance-without-diabetes | — |
 | /answers/is-adhd-medication-safe-long-term | 200 | yes | yes | 7 | /answers/is-adhd-medication-safe-long-term | — |
 | /answers/is-online-adhd-diagnosis-legitimate | 200 | yes | yes | 154 | /answers/is-online-adhd-diagnosis-legitimate | — |
@@ -110,7 +110,7 @@
 | /blog/how-to-choose-adhd-provider-california | 200 | yes | yes | 2 | /blog/how-to-choose-adhd-provider-california | — |
 | /blog/how-to-know-if-you-have-adhd-adult | 200 | yes | yes | 178 | /blog/how-to-know-if-you-have-adhd-adult | — |
 | /blog/how-to-safely-get-prescriptions-online | 200 | yes | yes | 15 | /blog/how-to-safely-get-prescriptions-online | — |
-| /blog | 200 | yes | yes | 437 | /blog | — |
+| /blog | 200 | yes | yes | 439 | /blog | — |
 | /blog/insomnia-treatment-options-beyond-medication | 200 | yes | yes | 6 | /blog/insomnia-treatment-options-beyond-medication | — |
 | /blog/insulin-resistance-and-weight-loss-clinician-overview | 200 | yes | yes | 57 | /blog/insulin-resistance-and-weight-loss-clinician-overview | — |
 | /blog/is-adhd-medication-safe-long-term | 200 | yes | yes | 7 | /blog/is-adhd-medication-safe-long-term | — |
@@ -137,7 +137,7 @@
 | /blog/youre-not-lazy-signs-undiagnosed-adult-adhd | 200 | yes | yes | 4 | /blog/youre-not-lazy-signs-undiagnosed-adult-adhd | — |
 | /book-appointment | 200 | yes | yes | 1 | /book-appointment | — |
 | /creyos-adhd-testing | 200 | yes | yes | 2 | /creyos-adhd-testing | — |
-| / | 200 | yes | yes | 587 | / | — |
+| / | 200 | yes | yes | 592 | / | — |
 | /intake | 200 | no | yes | 0 | /intake | — |
 | /labs | 200 | yes | yes | 147 | /labs | — |
 | /legal/controlled-substance-treatment-agreement | 200 | yes | yes | 71 | /legal/controlled-substance-treatment-agreement | — |
@@ -157,11 +157,14 @@
 | /providers/dr-sneh-pandey | 200 | yes | yes | 56 | /providers/dr-sneh-pandey | — |
 | /providers/dr-swati-pandey | 200 | yes | yes | 24 | /providers/dr-swati-pandey | — |
 | /providers/dr-vanessa-urbina | 200 | yes | yes | 27 | /providers/dr-vanessa-urbina | — |
-| /providers | 200 | yes | yes | 489 | /providers | — |
+| /providers | 200 | yes | yes | 491 | /providers | — |
 | /providers/megan-wunderlich | 200 | yes | yes | 22 | /providers/megan-wunderlich | — |
 | /providers/wendy-delgado | 200 | yes | yes | 10 | /providers/wendy-delgado | — |
+| /redirect/adhd-evaluation | 200 | no | no | 2 | /redirect/adhd-evaluation | — |
+| /redirect/adhd-walkthrough | 200 | no | no | 186 | /redirect/adhd-walkthrough | — |
+| /redirect/chat | 200 | no | no | 590 | /redirect/chat | — |
 | /siya-circle | 301 | no | no | 0 | — | https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl |
-| /telehealth | 200 | yes | yes | 640 | /telehealth | — |
+| /telehealth | 200 | yes | yes | 642 | /telehealth | — |
 | /terms | 301 | no | no | 0 | /legal/terms-of-use | /legal/terms-of-use |
-| /weight-loss-metabolic-health | 200 | yes | yes | 509 | /weight-loss-metabolic-health | — |
+| /weight-loss-metabolic-health | 200 | yes | yes | 511 | /weight-loss-metabolic-health | — |
 | /womens-health | 200 | yes | yes | 147 | /womens-health | — |

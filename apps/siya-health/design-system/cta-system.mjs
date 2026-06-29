@@ -8,6 +8,9 @@ import {
   ADHD_WALKTHROUGH_LINK,
   ADHD_EVALUATION_199_LINK,
   SPRUCE_CHAT_URL,
+  REDIRECT_CHAT_URL,
+  REDIRECT_ADHD_WALKTHROUGH_URL,
+  REDIRECT_ADHD_EVALUATION_URL,
 } from '../data/providers-core.mjs';
 import {
   SIYA_CIRCLE_GHL_FORM_URL,
@@ -21,16 +24,23 @@ export const CTA_SLOTS = {
   primary: {
     id: 'primary',
     label: CTA_SYSTEM.primary.label,
-    url: SPRUCE_CHAT_URL,
-    external: true,
+    url: REDIRECT_CHAT_URL,
+    external: false,
     track: 'primary-cta-click',
   },
   secondary: {
     id: 'secondary',
     label: CTA_SYSTEM.secondary.booking.label,
-    url: BOOKING_LINK,
-    external: true,
+    url: REDIRECT_ADHD_WALKTHROUGH_URL,
+    external: false,
     track: 'schedule-consultation-click',
+  },
+  walkthrough: {
+    id: 'walkthrough',
+    label: 'Book ADHD Walkthrough',
+    url: REDIRECT_ADHD_WALKTHROUGH_URL,
+    external: false,
+    track: 'click_book_walkthrough',
   },
   leadMagnet: {
     id: 'lead-magnet',
@@ -69,15 +79,15 @@ export const LANDING_CONVERSION_CTAS = {
   evaluation: {
     id: 'evaluation',
     label: 'Start $199 Evaluation',
-    url: ADHD_EVALUATION_199_LINK,
-    external: true,
+    url: REDIRECT_ADHD_EVALUATION_URL,
+    external: false,
     track: 'click_start_199_evaluation',
   },
   walkthrough: {
     id: 'walkthrough',
-    label: 'Book Free Consultation',
-    url: ADHD_WALKTHROUGH_LINK,
-    external: true,
+    label: 'Book ADHD Walkthrough',
+    url: REDIRECT_ADHD_WALKTHROUGH_URL,
+    external: false,
     track: 'click_book_walkthrough',
     microcopy:
       'A short, non-clinical call with the Siya Health care team to explain the ADHD evaluation process, pricing, Creyos testing, and next steps.',

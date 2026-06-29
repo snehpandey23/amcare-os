@@ -1,14 +1,14 @@
 # Title & Meta Duplicate Audit
 
-Generated: 2026-06-28T15:14:17.207Z
+Generated: 2026-06-29T12:44:35.384Z
 
 ## Duplicate title tags (0)
 
 _None after Phase 1 differentiation._
 
-## Duplicate H1s (0)
+## Duplicate H1s (1)
 
-_None after Phase 1 differentiation._
+- **"Adult ADHD Evaluation Online"** — /adhd-care, /adult-adhd-screening-california
 
 ## Duplicate meta descriptions (0)
 

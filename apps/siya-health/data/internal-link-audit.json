@@ -1,6 +1,6 @@
 {
-  "generated": "2026-06-28",
-  "totalPages": 149,
+  "generated": "2026-06-29",
+  "totalPages": 152,
   "zeroInbound": [
     "/adhd-diagnosis-florida",
     "/adhd-evaluation-cost",
@@ -99,6 +99,14 @@
       "count": 1
     },
     {
+      "path": "/book-appointment",
+      "count": 1
+    },
+    {
+      "path": "/redirect/adhd-evaluation",
+      "count": 1
+    },
+    {
       "path": "/adhd-diagnosis-texas",
       "count": 2
     },
@@ -151,37 +159,37 @@
     {
       "path": "/",
       "outboundCount": 35,
-      "uniqueInbound": 148
+      "uniqueInbound": 151
     },
     {
       "path": "/adhd-care",
-      "outboundCount": 41,
-      "uniqueInbound": 141
+      "outboundCount": 42,
+      "uniqueInbound": 142
     },
     {
       "path": "/blog",
       "outboundCount": 43,
-      "uniqueInbound": 141
+      "uniqueInbound": 142
     },
     {
       "path": "/blog/adhd",
-      "outboundCount": 51,
+      "outboundCount": 52,
       "uniqueInbound": 97
     },
     {
       "path": "/answers",
       "outboundCount": 68,
-      "uniqueInbound": 141
+      "uniqueInbound": 142
     },
     {
       "path": "/about",
       "outboundCount": 34,
-      "uniqueInbound": 147
+      "uniqueInbound": 148
     },
     {
       "path": "/weight-loss-metabolic-health",
       "outboundCount": 41,
-      "uniqueInbound": 141
+      "uniqueInbound": 142
     }
   ],
   "topSuggestions": [],
@@ -212,7 +220,7 @@
       {
         "p": "/adult-adhd-screening-california",
         "score": 9,
-        "title": "Adult ADHD Evaluation Online in California | Free ADHD Screening"
+        "title": "Adult ADHD Evaluation Online in California | Take Free ADHD Screening"
       },
       {
         "p": "/answers/how-online-prescriptions-work",
@@ -385,7 +393,7 @@
       {
         "p": "/adult-adhd-screening-california",
         "score": 11,
-        "title": "Adult ADHD Evaluation Online in California | Free ADHD Screening"
+        "title": "Adult ADHD Evaluation Online in California | Take Free ADHD Screening"
       },
       {
         "p": "/answers/screening-vs-adhd-evaluation",
@@ -407,7 +415,7 @@
       {
         "p": "/adult-adhd-screening-california",
         "score": 9,
-        "title": "Adult ADHD Evaluation Online in California | Free ADHD Screening"
+        "title": "Adult ADHD Evaluation Online in California | Take Free ADHD Screening"
       },
       {
         "p": "/answers/signs-of-adult-adhd",
@@ -424,7 +432,7 @@
       {
         "p": "/adult-adhd-screening-california",
         "score": 9,
-        "title": "Adult ADHD Evaluation Online in California | Free ADHD Screening"
+        "title": "Adult ADHD Evaluation Online in California | Take Free ADHD Screening"
       },
       {
         "p": "/answers/signs-of-adult-adhd",
@@ -568,7 +576,7 @@
       {
         "p": "/adult-adhd-screening-california",
         "score": 7,
-        "title": "Adult ADHD Evaluation Online in California | Free ADHD Screening"
+        "title": "Adult ADHD Evaluation Online in California | Take Free ADHD Screening"
       }
     ],
     "/blog/how-to-know-if-you-have-adhd-adult": [
@@ -1006,15 +1014,16 @@
     ]
   },
   "inboundCounts": {
-    "/": 148,
-    "/about": 147,
-    "/telehealth": 142,
-    "/adhd-care": 141,
-    "/answers": 141,
-    "/blog": 141,
-    "/weight-loss-metabolic-health": 141,
+    "/": 151,
+    "/about": 148,
+    "/telehealth": 143,
+    "/adhd-care": 142,
+    "/answers": 142,
+    "/blog": 142,
+    "/weight-loss-metabolic-health": 142,
+    "/redirect/chat": 141,
     "/labs": 140,
-    "/providers": 118,
+    "/providers": 119,
     "/adhd-screening": 99,
     "/blog/adhd": 97,
     "/blog/weight-loss": 91,
@@ -1031,11 +1040,11 @@
     "/blog/how-to-know-if-you-have-adhd-adult": 78,
     "/pricing": 78,
     "/answers/is-online-adhd-diagnosis-legitimate": 77,
-    "/book-appointment": 75,
     "/womens-health": 75,
     "/prescriptions": 65,
     "/primary-urgent-care": 65,
     "/legal/controlled-substance-treatment-agreement": 43,
+    "/redirect/adhd-walkthrough": 37,
     "/providers/dr-sneh-pandey": 33,
     "/blog/is-online-adhd-diagnosis-legit": 30,
     "/blog/adhd-symptoms-overlooked": 27,
@@ -1145,6 +1154,8 @@
     "/blog/oral-vs-injectable-weight-loss-medications": 1,
     "/blog/phentermine-for-weight-loss-safety-and-effectiveness": 1,
     "/blog/sildenafil-for-erectile-dysfunction-what-to-expect": 1,
+    "/book-appointment": 1,
+    "/redirect/adhd-evaluation": 1,
     "/adhd-diagnosis-florida": 0,
     "/adhd-evaluation-cost": 0,
     "/adhd-treatment-online": 0,

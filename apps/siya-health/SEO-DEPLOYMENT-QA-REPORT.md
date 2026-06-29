@@ -1,15 +1,15 @@
 # SEO Deployment QA Report
 
-Generated: 2026-06-28T15:14:21.024Z
+Generated: 2026-06-29T12:44:40.035Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| HTML pages scanned | 149 |
+| HTML pages scanned | 152 |
 | Sitemap URLs | 141 |
 | Pages with Meet & Greet in nav | 0 |
-| Non-ADHD pages still referencing adhd-screening | 54 |
+| Non-ADHD pages still referencing adhd-screening | 53 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
 
@@ -27,11 +27,11 @@ Generated: 2026-06-28T15:14:21.024Z
 
 | Slug | Exists | Sitemap | Meet & Greet CTA | Blog backlink |
 |------|:------:|:-------:|:----------------:|:-------------:|
-| what-is-food-noise | ✓ | ✓ | ✓ | ✓ |
-| what-is-insulin-resistance | ✓ | ✓ | ✓ | ✓ |
-| insulin-resistance-without-diabetes | ✓ | ✓ | ✓ | ✓ |
-| normal-a1c-insulin-resistance | ✓ | ✓ | ✓ | ✓ |
-| why-am-i-tired-even-after-sleeping | ✓ | ✓ | ✓ | ✓ |
+| what-is-food-noise | ✓ | ✓ | ✗ | ✓ |
+| what-is-insulin-resistance | ✓ | ✓ | ✗ | ✓ |
+| insulin-resistance-without-diabetes | ✓ | ✓ | ✗ | ✓ |
+| normal-a1c-insulin-resistance | ✓ | ✓ | ✗ | ✓ |
+| why-am-i-tired-even-after-sleeping | ✓ | ✓ | ✗ | ✓ |
 
 ## CTA repositioning
 
@@ -39,10 +39,9 @@ Generated: 2026-06-28T15:14:21.024Z
 - **Default secondary CTA:** Explore Care Options → `#services` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, `adhd-screening.html`
 
-### Non-ADHD pages still containing `adhd-screening` (54)
+### Non-ADHD pages still containing `adhd-screening` (53)
 
 - `about.html`
-- `adult-adhd-screening-california.html`
 - `blog/compounded-vs-branded-glp1-medications.html`
 - `blog/food-noise-and-glp-1-what-it-means-and-what-helps.html`
 - `blog/free-testosterone-vs-total-testosterone-what-patients-should-know.html`
