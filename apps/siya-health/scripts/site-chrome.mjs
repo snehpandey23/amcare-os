@@ -471,6 +471,7 @@ function escHtml(s) {
 
 /** Replace landing-page trust strip from trust-system profile */
 function injectLandingTrust(html, relPath) {
+  if (html.includes('lp-trust-grid-section')) return html;
   if (!html.includes('lp-trust-row')) return html;
   const { items } = resolveTrust(relPath, { variant: 'scroll' });
   const props = trustToRenderProps({ items });

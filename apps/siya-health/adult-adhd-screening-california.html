@@ -57,7 +57,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </header>
 
     <main id="main">
-      <section class="lp-hero-conversion" aria-label="California ADHD screening">
+      <section class="lp-hero-conversion" style="--lp-hero-image: url('/assets/images/adhd-california-screening-hero.jpg')" aria-label="California ADHD screening">
+        <div class="lp-hero-conversion__bg" aria-hidden="true"></div>
         <div class="lp-hero-conversion__copy">
           <div class="container lp-hero-conversion__inner">
             <p class="lp-hero-conversion__eyebrow">Online ADHD screening in California</p>
@@ -68,7 +69,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <li><span aria-hidden="true">✓</span> No sign-up required</li>
               <li><span aria-hidden="true">✓</span> Takes just 2 minutes</li>
               <li><span aria-hidden="true">✓</span> Same-day appointments available</li>
-              <li><span aria-hidden="true">✓</span> 100% Online &amp; HIPAA Secure</li>
+              <li><span aria-hidden="true">✓</span> 100% Online &amp; Private Secure</li>
             </ul>
           </div>
         </div>
@@ -118,15 +119,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
       </section>
 
-      <!-- TRUST BAR -->
-                                                                                                                                          <section class="lp-trust-row" aria-label="Trust highlights">
+      <!-- TRUST METRICS -->
+      <section class="lp-trust-row lp-trust-grid-section" aria-label="Trust highlights">
         <div class="container">
-          <ul class="lp-trust-scroll ds-trust-scroll">
-            <li><strong>4.7★</strong> 450+ verified reviews</li>
-            <li><strong>750+</strong> ADHD evaluations completed</li>
-            <li><strong>$199</strong> transparent evaluation</li>
-            <li><strong>Online care</strong> California • TX • PA • FL</li>
-          </ul>
+          <div class="lp-trust-grid">
+            <article class="lp-trust-grid__card">
+              <span class="lp-trust-grid__icon" aria-hidden="true">⭐</span>
+              <p class="lp-trust-grid__title">4.7★ Patient Rating</p>
+              <p class="lp-trust-grid__meta">450+ verified reviews</p>
+            </article>
+            <article class="lp-trust-grid__card">
+              <span class="lp-trust-grid__icon" aria-hidden="true">🧠</span>
+              <p class="lp-trust-grid__title">750+ ADHD Evaluations</p>
+              <p class="lp-trust-grid__meta">Completed for adults</p>
+            </article>
+            <article class="lp-trust-grid__card">
+              <span class="lp-trust-grid__icon" aria-hidden="true">💲</span>
+              <p class="lp-trust-grid__title">Flat $199 Evaluation</p>
+              <p class="lp-trust-grid__meta">Transparent pricing</p>
+            </article>
+            <article class="lp-trust-grid__card">
+              <span class="lp-trust-grid__icon" aria-hidden="true">💻</span>
+              <p class="lp-trust-grid__title">100% Online Care</p>
+              <p class="lp-trust-grid__meta">Virtual ADHD care in CA</p>
+            </article>
+          </div>
         </div>
       </section>
 
