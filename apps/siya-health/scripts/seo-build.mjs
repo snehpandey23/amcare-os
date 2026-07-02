@@ -485,8 +485,12 @@ function categoryBreadcrumb(relPath, html) {
  */
 function normalizeRootAssetPaths(html) {
   let h = html;
-  h = h.replace(/\bhref="styles\.css"/g, 'href="/styles.css"');
-  h = h.replace(/\bhref="\.\.\/styles\.css"/g, 'href="/styles.css"');
+  const cssPath = path.join(SITE_ROOT, 'styles.css');
+  const cssVer = fs.existsSync(cssPath) ? fs.statSync(cssPath).mtimeMs : Date.now();
+  const cssHref = `/styles.css?v=${cssVer}`;
+  h = h.replace(/\bhref="styles\.css(?:\?[^"]*)?"/g, `href="${cssHref}"`);
+  h = h.replace(/\bhref="\.\.\/styles\.css(?:\?[^"]*)?"/g, `href="${cssHref}"`);
+  h = h.replace(/\bhref="\/styles\.css(?:\?[^"]*)?"/g, `href="${cssHref}"`);
   h = h.replace(/\bsrc="scripts\//g, 'src="/scripts/');
   h = h.replace(/\bsrc="\.\.\/scripts\//g, 'src="/scripts/');
   h = h.replace(/\bhref="scripts\//g, 'href="/scripts/');
