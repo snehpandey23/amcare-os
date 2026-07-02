@@ -7686,6 +7686,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
 
   .siya-landing-page--ca-screening .lp-hero-conversion__bg {
     display: block;
+    order: 0;
     flex: 0 0 auto;
     width: 100%;
     aspect-ratio: 5 / 4;
