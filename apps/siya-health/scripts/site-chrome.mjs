@@ -716,10 +716,20 @@ export function normalizeSitewideCopy(html, relPath = '') {
   );
   html = html.replaceAll('Get Health Guides', COPY_STANDARDS.newsletterCta);
   // Screening labels — avoid nesting (e.g. "Free ADHD Screening" inside "Take Free ADHD Screening")
-  html = html.replace(/(Take )+Free ADHD Screening/g, COPY_STANDARDS.adhdSecondaryCta);
-  html = html.replace(/(?<!Take )Free ADHD Screening/g, COPY_STANDARDS.adhdSecondaryCta);
-  html = html.replaceAll('Take Free Screening', COPY_STANDARDS.adhdSecondaryCta);
-  html = html.replaceAll('Start Free Screening', COPY_STANDARDS.adhdSecondaryCta);
+  const isCaAdsLp = relPath === 'adult-adhd-screening-california.html';
+  const lpScreeningPlaceholder = '%%SIYA_LP_CA_SCREENING_CTA%%';
+  if (isCaAdsLp) {
+    html = html.replaceAll('Start Free 2-Minute ADHD Screening', lpScreeningPlaceholder);
+  }
+  if (!isCaAdsLp) {
+    html = html.replace(/(Take )+Free ADHD Screening/g, COPY_STANDARDS.adhdSecondaryCta);
+    html = html.replace(/(?<!Take )Free ADHD Screening/g, COPY_STANDARDS.adhdSecondaryCta);
+    html = html.replaceAll('Take Free Screening', COPY_STANDARDS.adhdSecondaryCta);
+    html = html.replaceAll('Start Free Screening', COPY_STANDARDS.adhdSecondaryCta);
+  }
+  if (isCaAdsLp) {
+    html = html.replaceAll(lpScreeningPlaceholder, 'Start Free 2-Minute ADHD Screening');
+  }
   html = html.replaceAll('Schedule ADHD Evaluation', COPY_STANDARDS.adhdPrimaryCta);
   html = html.replaceAll('Book ADHD Evaluation', COPY_STANDARDS.adhdPrimaryCta);
   html = html.replaceAll('Clinical Review Status', COPY_STANDARDS.reviewBadgePending);

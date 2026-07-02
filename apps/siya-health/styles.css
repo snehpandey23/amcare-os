@@ -7553,3 +7553,233 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
     width: 100%;
   }
 }
+
+/* California Google Ads — conversion-first hero */
+.siya-landing-page--ca-screening {
+  --lp-header-h: 52px;
+}
+
+.siya-landing-page--ca-screening .lp-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom: 1px solid var(--border);
+}
+
+.siya-landing-page--ca-screening .lp-header-inner {
+  min-height: var(--lp-header-h);
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.siya-landing-page--ca-screening .lp-hero-conversion {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #f0fdfa 0%, #ffffff 72%);
+}
+
+.siya-landing-page--ca-screening .lp-hero-conversion__copy {
+  order: 1;
+  padding: 10px 0 8px;
+}
+
+.siya-landing-page--ca-screening .lp-hero-conversion__inner {
+  max-width: 560px;
+}
+
+.siya-landing-page--ca-screening .lp-hero-conversion__eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--teal-700, #0f766e);
+}
+
+.siya-landing-page--ca-screening .lp-hero-conversion h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.65rem, 5.2vw, 2.35rem);
+  line-height: 1.12;
+  color: var(--text-primary, #0f172a);
+}
+
+.siya-landing-page--ca-screening .lp-hero-conversion__sub {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  line-height: 1.45;
+  color: var(--text-secondary, #334155);
+}
+
+.siya-landing-page--ca-screening .lp-hero-conversion__cta {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  min-height: 52px;
+  margin-bottom: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 10px 24px rgba(13, 148, 136, 0.28);
+}
+
+.siya-landing-page--ca-screening .lp-hero-trust-bullets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: var(--text-secondary, #475569);
+}
+
+.siya-landing-page--ca-screening .lp-hero-trust-bullets li {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.siya-landing-page--ca-screening .lp-hero-trust-bullets span[aria-hidden="true"] {
+  color: var(--teal-600, #0d9488);
+  font-weight: 700;
+}
+
+.siya-landing-page--ca-screening .lp-hero-conversion__media {
+  order: 2;
+  margin: 0;
+  line-height: 0;
+}
+
+.siya-landing-page--ca-screening .lp-hero-conversion__media img {
+  width: 100%;
+  height: min(42vh, 300px);
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+.siya-landing-page--ca-screening .lp-how-it-works {
+  padding-top: 28px;
+  padding-bottom: 28px;
+}
+
+.siya-landing-page--ca-screening .lp-how-steps {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.siya-landing-page--ca-screening .lp-how-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--white);
+}
+
+.siya-landing-page--ca-screening .lp-how-step__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #ecfdf5;
+  color: #0d9488;
+}
+
+.siya-landing-page--ca-screening .lp-how-step h3 {
+  margin: 0 0 4px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.siya-landing-page--ca-screening .lp-how-step p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.siya-landing-page--ca-screening .lp-text-cta {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--teal-700, #0f766e);
+  text-decoration: none;
+}
+
+.siya-landing-page--ca-screening .lp-text-cta:hover {
+  text-decoration: underline;
+}
+
+.siya-landing-page--ca-screening .lp-pricing-alt {
+  margin: 10px 0 0;
+  text-align: center;
+}
+
+.siya-landing-page--ca-screening .lp-section-cta {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.siya-landing-page--ca-screening .lp-section-cta .button {
+  width: 100%;
+  max-width: 420px;
+}
+
+@media (min-width: 768px) {
+  .siya-landing-page--ca-screening .lp-hero-conversion {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 44%);
+    min-height: min(78vh, 640px);
+    align-items: stretch;
+  }
+
+  .siya-landing-page--ca-screening .lp-hero-conversion__copy {
+    display: flex;
+    align-items: center;
+    padding: 32px 0;
+  }
+
+  .siya-landing-page--ca-screening .lp-hero-conversion__media {
+    order: 2;
+    min-height: 100%;
+  }
+
+  .siya-landing-page--ca-screening .lp-hero-conversion__media img {
+    height: 100%;
+    min-height: 100%;
+    max-height: none;
+  }
+
+  .siya-landing-page--ca-screening .lp-hero-conversion__cta {
+    width: auto;
+    min-width: 320px;
+  }
+
+  .siya-landing-page--ca-screening .lp-how-steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (min-width: 480px) {
+  .siya-landing-page--ca-screening .lp-hero-conversion__cta,
+  .siya-landing-page--ca-screening .lp-section-cta .button,
+  .siya-landing-page--ca-screening .lp-final-ctas .button,
+  .siya-landing-page--ca-screening .lp-mobile-sticky-cta .button {
+    width: auto;
+    min-width: 300px;
+  }
+}
