@@ -7,6 +7,13 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { ANSWER_SEEDS } from '../data/answer-seeds.mjs';
 import {
+  landingForTopic,
+  loadBlogRegistry,
+  pickRelatedArticles,
+  renderRelatedArticlesSection,
+  topicFromBlog,
+} from '../data/blog-internal-linking.mjs';
+import {
   COPY_STANDARDS,
   FOOTER_STATES_LINE,
   LEGACY_FOOTER_PATTERNS,
@@ -222,10 +229,15 @@ const LEARN_MORE_ADHD = `<!-- SIYA:LEARN-MORE-ADHD -->
             <li><a href="/answers/is-online-adhd-diagnosis-legitimate">Is online ADHD diagnosis legitimate?</a></li>
             <li><a href="/blog/adhd">ADHD articles and state-specific guides</a></li>
             <li><a href="/blog/how-to-know-if-you-have-adhd-adult">How to know if you have ADHD as an adult</a></li>
+            <li><a href="/blog/adhd-symptoms-overlooked">7 adult ADHD signs doctors often miss</a></li>
+            <li><a href="/blog/is-online-adhd-diagnosis-legit">Is online ADHD diagnosis legit?</a></li>
+            <li><a href="/blog/adhd-testing-online-california-screening-vs-evaluation">ADHD screening vs full evaluation</a></li>
+            <li><a href="/adhd-screening">Free 2-minute ADHD screening</a></li>
             <li><a href="/adhd-care#pricing">ADHD care pricing ($199 / $79 / $149)</a></li>
             <li><a href="/creyos-adhd-testing">Creyos cognitive testing for ADHD evaluations</a></li>
             <li><a href="/blog/online-adhd-diagnosis-california">Online ADHD diagnosis in California</a></li>
             <li><a href="/blog/online-adhd-diagnosis-texas">Online ADHD diagnosis in Texas</a></li>
+            <li><a href="/blog/adhd">Browse all ADHD articles</a></li>
           </ul>
         </div>
       </section>
@@ -952,12 +964,23 @@ export function injectCookieNotice(html, relPath) {
   return html.replace(/<\/body>/i, `${block}\n</body>`);
 }
 
+const ADHD_LEARN_MORE_PAGES = new Set([
+  'adhd-care.html',
+  'adhd-screening.html',
+  'adult-adhd-diagnosis.html',
+  'adhd-treatment-online.html',
+  'online-adhd-test.html',
+  'creyos-adhd-testing.html',
+]);
+
 export function injectLearnMoreSections(html, relPath) {
-  if (relPath === 'adhd-care.html') {
+  if (ADHD_LEARN_MORE_PAGES.has(relPath)) {
     if (html.includes('SIYA:LEARN-MORE-ADHD')) {
       html = html.replace(/<!-- SIYA:LEARN-MORE-ADHD -->[\s\S]*?<!-- \/SIYA:LEARN-MORE-ADHD -->/, LEARN_MORE_ADHD);
     } else if (html.includes('<!-- FINAL CTA -->')) {
       html = html.replace('<!-- FINAL CTA -->', `${LEARN_MORE_ADHD}\n\n      <!-- FINAL CTA -->`);
+    } else if (html.includes('</main>')) {
+      html = html.replace(/\s*<\/main>/, `\n\n      ${LEARN_MORE_ADHD}\n    </main>`);
     }
   }
   if (relPath === 'weight-loss-metabolic-health.html') {
@@ -1318,118 +1341,32 @@ function loadContinueReadingIndex() {
   }
 }
 
-function buildCornerstoneContinueReadingHtml(blogPath) {
-  const cfg = CORNERSTONE_CONTINUE_READING[blogPath];
-  if (!cfg) return null;
+let blogRegistryCache = null;
 
-  const items = [
-    ...cfg.siblings.map((p) => ({ path: p, label: anchorFor(p) })),
-    { path: cfg.answer, label: anchorFor(cfg.answer), kind: 'answer' },
-    { path: cfg.service.path, label: cfg.service.label, kind: 'service' },
-  ];
-
-  const lis = items
-    .map((item) => {
-      const cls = item.kind ? ` class="continue-reading-${item.kind}"` : '';
-      return `                <li${cls}><a href="${item.path}">${item.label}</a></li>`;
-    })
-    .join('\n');
-
-  return `<section class="continue-reading" aria-labelledby="continue-reading-heading">
-              <h2 id="continue-reading-heading">Continue reading</h2>
-              <ul>
-${lis}
-              </ul>
-            </section>`;
+function getBlogRegistry() {
+  if (!blogRegistryCache) {
+    blogRegistryCache = loadBlogRegistry(path.join(SITE_ROOT, 'blog'));
+  }
+  return blogRegistryCache;
 }
 
-function buildContinueReadingHtml(blogPath, title, auditIndex) {
-  const cornerstoneBlock = buildCornerstoneContinueReadingHtml(blogPath);
-  if (cornerstoneBlock) return cornerstoneBlock;
-
+function buildRelatedArticlesHtml(blogPath, title) {
   const slug = blogPath.replace(/^\/blog\//, '');
-  const topic = topicFromPath(blogPath, title);
-  const service = SERVICE_BY_TOPIC[topic] || SERVICE_BY_TOPIC.general;
-
-  const picks = auditIndex[blogPath] || [];
-  const articles = [];
-  let answerPath = null;
-
-  for (const c of picks) {
-    if (c.p.startsWith('/blog/') && c.p !== blogPath && articles.length < 5) {
-      if (REMOVED_BLOG_PATHS[c.p]) continue;
-      const label = anchorFor(c.p, c.title);
-      if (!articles.some((a) => a.path === c.p)) articles.push({ path: c.p, label });
-    }
-    if (c.p.startsWith('/answers/') && !answerPath) answerPath = c.p;
-  }
-
-  if (!answerPath) {
-    const topicAnswer = DEFAULT_ANSWER_BY_TOPIC[topic];
-    const slugHint = slug.replace(/-/g, ' ');
-    const matched = ANSWER_SEEDS.find(
-      (s) =>
-        slug.includes(s.slug.replace(/-/g, '-')) ||
-        s.slug.replace(/-/g, ' ').split(' ').some((w) => w.length > 5 && slugHint.includes(w)),
-    );
-    answerPath = matched ? `/answers/${matched.slug}` : topicAnswer;
-  }
-
-  while (articles.length < 3) {
-    const fallbacks = {
-      adhd: ['/blog/how-to-know-if-you-have-adhd-adult', '/blog/is-online-adhd-diagnosis-legit', '/blog/adhd-symptoms-overlooked'],
-      metabolic: [
-        '/blog/food-noise-and-glp-1-what-it-means-and-what-helps',
-        '/blog/insulin-resistance-and-weight-loss-clinician-overview',
-        '/blog/glp1-side-effects-and-how-to-manage-them',
-        '/blog/semaglutide-for-weight-loss-how-it-works',
-      ],
-      hormone: [
-        '/blog/free-testosterone-vs-total-testosterone-what-patients-should-know',
-        '/blog/when-is-testosterone-therapy-appropriate',
-        '/blog/minoxidil-for-hair-loss-does-it-work',
-      ],
-      energy: [
-        '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
-        '/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign',
-        '/blog/insomnia-treatment-options-beyond-medication',
-      ],
-      general: ['/blog/telehealth-prescriptions-how-online-treatment-works', '/blog/how-to-safely-get-prescriptions-online', '/blog/is-online-adhd-diagnosis-legit'],
-    }[topic];
-    for (const p of fallbacks || []) {
-      if (articles.length >= 5) break;
-      if (REMOVED_BLOG_PATHS[p]) continue;
-      if (p !== blogPath && !articles.some((a) => a.path === p)) articles.push({ path: p, label: anchorFor(p) });
-    }
-    break;
-  }
-
-  const items = [
-    ...articles.slice(0, 5),
-    { path: answerPath, label: anchorFor(answerPath), kind: 'answer' },
-    { path: service.path, label: service.label, kind: 'service' },
-  ];
-
-  const lis = items
-    .map((item) => {
-      const cls = item.kind ? ` class="continue-reading-${item.kind}"` : '';
-      return `                <li${cls}><a href="${item.path}">${item.label}</a></li>`;
-    })
-    .join('\n');
-
-  return `<section class="continue-reading" aria-labelledby="continue-reading-heading">
-              <h2 id="continue-reading-heading">Continue reading</h2>
-              <ul>
-${lis}
-              </ul>
-            </section>`;
+  const registry = getBlogRegistry();
+  const entry = registry.find((e) => e.slug === slug);
+  const topic = entry?.topic || topicFromBlog(slug, title);
+  const related = pickRelatedArticles(slug, registry, 3);
+  const landing = landingForTopic(topic);
+  return renderRelatedArticlesSection({ articles: related, landing });
 }
 
-export function injectContinueReading(html, relPath, title, auditIndex) {
+export function injectContinueReading(html, relPath, title) {
   if (!relPath.startsWith('blog/') || BLOG_HUB_FILES.has(relPath)) return html;
-  const blogPath = `/${relPath.replace(/\.html$/, '')}`;
-  const block = buildContinueReadingHtml(blogPath, title, auditIndex);
+  const block = buildRelatedArticlesHtml(`/${relPath.replace(/\.html$/, '')}`, title);
 
+  if (html.includes('class="related-articles"')) {
+    return html.replace(/<section class="related-articles"[\s\S]*?<\/section>/, block);
+  }
   if (html.includes('class="continue-reading"')) {
     return html.replace(/<section class="continue-reading"[\s\S]*?<\/section>/, block);
   }
@@ -1760,7 +1697,6 @@ export function applySiteChrome(html, relPath, title = '') {
     return html;
   }
 
-  const auditIndex = loadContinueReadingIndex();
   html = injectNavCta(html, relPath);
   html = injectSitewideCtas(html);
   html = injectAdhdFunnelBanner(html, relPath);
@@ -1772,7 +1708,7 @@ export function applySiteChrome(html, relPath, title = '') {
   html = injectAboutCareTeam(html, relPath);
   html = injectAboutProviderHub(html, relPath);
   html = injectMeetPhysiciansSection(html, relPath);
-  html = injectContinueReading(html, relPath, title, auditIndex);
+  html = injectContinueReading(html, relPath, title);
   html = injectProviderAttribution(html);
   html = injectSiyaCircleAnalytics(html);
   html = stripGhlLegalAcceptance(html, relPath);

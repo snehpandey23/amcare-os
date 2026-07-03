@@ -1,6 +1,6 @@
 # SEO Deployment QA Report
 
-Generated: 2026-06-29T12:44:40.035Z
+Generated: 2026-07-03T11:31:34.933Z
 
 ## Summary
 
@@ -169,13 +169,9 @@ _None detected in static HTML scan._
 
 ## Orphan pages (low inbound links, sample)
 
-- `adhd-diagnosis-florida.html`
 - `adhd-evaluation-cost.html`
-- `adhd-treatment-online.html`
-- `adult-adhd-diagnosis.html`
-- `adult-adhd-screening-california.html`
 - `intake/index.html`
-- `online-adhd-test.html`
+- `prescriptions.html`
 - `siya-circle.html`
 
 ## Recommendations

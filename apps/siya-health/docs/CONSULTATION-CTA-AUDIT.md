@@ -1,6 +1,6 @@
 # Consultation CTA Routing Audit
 
-Generated: 2026-06-29T12:41:03.526Z
+Generated: 2026-06-29T15:16:04.091Z
 
 ## Intent mapping (source of truth)
 

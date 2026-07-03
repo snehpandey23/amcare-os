@@ -6,6 +6,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { ALL_REDIRECT_SOURCES, resolveCanonicalPath } from '../data/redirect-map.mjs';
+import { ADHD_COMMERCIAL_PATHS } from '../data/adhd-commercial-links.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -68,6 +69,7 @@ for (const rel of walkHtml(SITE_ROOT)) {
     if (!h.startsWith('/') || h.startsWith('//')) continue;
     if (h.endsWith('/') && h.length > 1) h = h.slice(0, -1);
     if (vercelRedirects[h] || ALL_REDIRECT_SOURCES.has(h)) {
+      if (ADHD_COMMERCIAL_PATHS.has(h)) continue;
       errors.push(`P0: ${src} links to redirect source ${h} (use ${resolveCanonicalPath(h)})`);
     }
   }

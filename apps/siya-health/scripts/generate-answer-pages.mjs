@@ -9,6 +9,15 @@ import { ANSWER_SEEDS, TOPIC_HUBS } from '../data/answer-seeds.mjs';
 import { RETIRED_GUIDE_SLUGS } from '../data/content-consolidation-phase1.mjs';
 import { GUIDE_CANNIBALIZATION_OVERRIDES } from '../data/cannibalization-phase1.mjs';
 import {
+  ADHD_TOPIC_CLUSTERS,
+  ASK_SIYA_CHAT_PATH,
+  BLOG_CLUSTER_ANCHORS,
+  clusterForGuide,
+  METABOLIC_TOPIC_CLUSTERS,
+  ENERGY_TOPIC_CLUSTERS,
+  resolveAnswerInternalLinks,
+} from '../data/content-topic-clusters.mjs';
+import {
   BASE,
   LAST_REVIEWED,
   clinicalReviewBlock,
@@ -24,6 +33,7 @@ import { MEET_GREET_URL, NAV_HEALTH_GUIDES } from './site-chrome.mjs';
 import { renderNavCtaMarkup, renderButton, slotToButton, resolveConversion } from '../design-system/components.mjs';
 import { ANSWER_DIAGRAM_EMBEDS, renderDiagramFigure } from '../data/visual-diagrams.mjs';
 import { SIYA_CIRCLE_PROMO_HTML } from '../data/siya-circle-config.mjs';
+import { renderAnswersHubCarePathwaysSection } from '../data/adhd-commercial-links.mjs';
 
 /** UX hub groupings (display order) */
 const HEALTH_GUIDE_CATEGORIES = [
@@ -256,7 +266,10 @@ function nextStepsHtml(hub, topic = 'general') {
     topic === 'adhd'
       ? `<li><a href="/adhd-care">Explore ADHD evaluation pathways</a></li>
                 <li><a href="/adhd-screening">Free ADHD screening (not a diagnosis)</a></li>
-                <li><a href="${hub.url}">Read ${hub.label} articles</a></li>`
+                <li><a href="/answers/signs-of-adult-adhd">Cornerstone guide: signs of adult ADHD</a></li>
+                <li><a href="/blog/how-to-know-if-you-have-adhd-adult">Cornerstone article: ADHD signs in adults</a></li>
+                <li><a href="${hub.url}">Browse ${hub.label} articles</a></li>
+                <li><a href="/answers#topic-cluster-explorer-heading">All ADHD topic clusters</a></li>`
       : `<li><a href="${hub.care}">Explore ${hub.label} care</a></li>
                 <li><a href="/answers">Browse Health Guides</a></li>
                 <li><a href="/providers">Meet our care team</a></li>`;
@@ -292,6 +305,89 @@ function buildSectionsHtml(seed, midBreakHtml = '') {
               <h2 id="detailed-answer-heading">Detailed answer</h2>
             ${paras}
             </section>`;
+}
+
+function guideLabel(slug) {
+  const seed = ANSWER_SEEDS.find((s) => s.slug === slug);
+  return seed?.question || slug.replace(/-/g, ' ');
+}
+
+function blogLabel(path) {
+  return BLOG_CLUSTER_ANCHORS[path] || path.replace(/^\/blog\//, '').replace(/-/g, ' ');
+}
+
+function buildAnswerInternalLinksHtml(seed) {
+  const canonical = resolveCanonicalBlog(seed);
+  const links = resolveAnswerInternalLinks(seed, canonical);
+  const relatedLis = links.relatedSlugs
+    .map((slug) => `<li><a href="/answers/${slug}">${esc(guideLabel(slug))}</a></li>`)
+    .join('\n                ');
+
+  return `            <section class="answer-internal-links" id="related-resources" aria-labelledby="answer-links-heading">
+              <h2 id="answer-links-heading">Related resources</h2>
+              <p class="answer-internal-links-intro">This page is a concise FAQ. For clinical depth, start with the full article below.</p>
+              <div class="answer-internal-links-grid">
+                <div class="answer-internal-links-col">
+                  <h3 class="answer-internal-links-col-title">Related questions</h3>
+                  <ul>
+                ${relatedLis}
+                  </ul>
+                </div>
+                <div class="answer-internal-links-col">
+                  <h3 class="answer-internal-links-col-title">Clinical article</h3>
+                  <p><a class="answer-internal-links-primary" href="${links.blogPath}">${esc(links.blogLabel)}</a></p>
+                </div>
+                <div class="answer-internal-links-col">
+                  <h3 class="answer-internal-links-col-title">Care</h3>
+                  <p><a class="answer-internal-links-primary" href="${links.landingPath}">${esc(links.landingLabel)}</a></p>
+                </div>
+              </div>
+            </section>
+            <aside class="answer-ask-siya" aria-label="Ask Siya">
+              <p>Still have a question? <a href="${ASK_SIYA_CHAT_PATH}" data-siya-track="primary-cta-click" data-siya-location="answer-ask-siya" data-conversion-goal="secureChat">Ask Siya</a>.</p>
+            </aside>`;
+}
+
+function buildIndexClusterExplorerHtml() {
+  const renderClusterGroup = (title, clusters) => {
+    const cards = clusters
+      .map((c) => {
+        const guideCount = c.guides.length;
+        const blogCount = c.blogs.length;
+        return `
+            <article class="topic-cluster-card" id="cluster-${c.id}">
+              <h3><a href="/answers/${c.cornerstoneGuide}">${esc(c.name)}</a></h3>
+              <p>${esc(c.blurb)}</p>
+              <ul class="topic-cluster-card-links">
+                <li><a href="/answers/${c.cornerstoneGuide}">Cornerstone guide →</a></li>
+                <li><a href="${c.cornerstoneBlog}">Cornerstone article →</a></li>
+                <li><a href="${c.service}">Service page →</a></li>
+                ${c.screening ? `<li><a href="${c.screening}">Free screening →</a></li>` : ''}
+              </ul>
+              <p class="topic-cluster-card-meta">${guideCount} guides · ${blogCount} articles</p>
+            </article>`;
+      })
+      .join('\n');
+    return `
+          <section class="topic-cluster-explorer-group" aria-labelledby="cluster-group-${title.replace(/\W+/g, '-').toLowerCase()}">
+            <h2 id="cluster-group-${title.replace(/\W+/g, '-').toLowerCase()}">${esc(title)}</h2>
+            <div class="topic-cluster-explorer-grid">
+${cards}
+            </div>
+          </section>`;
+  };
+
+  return `<!-- SIYA:ANSWERS-TOPIC-CLUSTERS -->
+          <section class="topic-cluster-explorer" aria-labelledby="topic-cluster-explorer-heading">
+            <div class="section-header">
+              <h2 id="topic-cluster-explorer-heading">Browse by topic cluster</h2>
+              <p class="lead">Each cluster links a cornerstone Health Guide, supporting FAQs, related clinical articles, and the right care pathway—so informational pages reinforce each other instead of competing.</p>
+            </div>
+${renderClusterGroup('ADHD', ADHD_TOPIC_CLUSTERS)}
+${renderClusterGroup('Metabolic health', METABOLIC_TOPIC_CLUSTERS)}
+${renderClusterGroup('Energy & sleep', ENERGY_TOPIC_CLUSTERS)}
+          </section>
+          <!-- /SIYA:ANSWERS-TOPIC-CLUSTERS -->`;
 }
 
 function buildLearnMoreHtml(seed) {
@@ -339,15 +435,6 @@ function buildAnswerPage(seed) {
     ((seed.metaDescription || seed.shortAnswer).length > 155 ? '…' : '');
   const hub = TOPIC_HUBS[seed.topic] || TOPIC_HUBS.adhd;
 
-  const relatedHtml = (seed.related || [])
-    .map((s) => {
-      const rel = ANSWER_SEEDS.find((x) => x.slug === s);
-      if (!rel) return '';
-      return `<li><a href="/answers/${rel.slug}">${esc(rel.question)}</a></li>`;
-    })
-    .filter(Boolean)
-    .join('\n                ');
-
   const evidenceHtml = (seed.evidence || []).map((e) => `<li>${esc(e)}</li>`).join('\n              ');
   const engagement = buildHealthGuideEngagement(seed);
   const sectionsHtml = buildSectionsHtml(seed, engagement.midBreak);
@@ -355,7 +442,7 @@ function buildAnswerPage(seed) {
     !seed.sections?.length && engagement.takeaway
       ? `\n            ${engagement.takeaway}\n            ${engagement.midBreak}`
       : '';
-  const learnMoreHtml = buildLearnMoreHtml(seed);
+  const learnMoreHtml = '';
   const diagramConfig = ANSWER_DIAGRAM_EMBEDS[seed.slug];
   const diagramHtml = diagramConfig
     ? `\n${renderDiagramFigure(diagramConfig.key, { figcaption: diagramConfig.figcaption })}\n`
@@ -423,24 +510,16 @@ ${clinicalReviewBlock(reviewRecord)}
 ${engagement.aboveFold}
 ${sectionsHtml}${shortBodyExtra}
 ${engagement.decisionSupport}
-${canonicalBlogFullHtml(seed)}
             <section class="answer-evidence" id="evidence" aria-labelledby="evidence-heading">
               <h2 id="evidence-heading">Evidence &amp; references</h2>
 ${engagement.evidenceCard}
               <ul class="answer-evidence-list">${evidenceHtml}</ul>
             </section>
-            <section class="answer-related" id="related-questions" aria-labelledby="related-heading">
-              <h2 id="related-heading">Related Health Guides</h2>
-              <ul>
-                ${relatedHtml}
-              </ul>
-            </section>
-${learnMoreHtml}
-${nextStepsHtml(hub, seed.topic)}
+${buildAnswerInternalLinksHtml(seed)}
             <div class="cta-block blog-cta answer-final-cta">
               ${answerCtaBtn}
             </div>
-            <p class="cta-microcopy">Also read our <a href="${hub.url}">${hub.label} articles</a>${resolveCanonicalBlog(seed) ? ` · <a href="${resolveCanonicalBlog(seed).path}">Full clinical guide</a>` : ''}${reviewRecord.reviewer ? ` · <a href="/providers/${reviewRecord.reviewer.slug}">${reviewRecord.reviewer.name}</a>` : ''}</p>
+            <p class="cta-microcopy">Browse <a href="/answers">all Health Guides</a> · <a href="${hub.url}">${hub.label} articles</a>${reviewRecord.reviewer ? ` · <a href="/providers/${reviewRecord.reviewer.slug}">${reviewRecord.reviewer.name}</a>` : ''}</p>
           </div>
         </div>
       </article>
@@ -582,8 +661,11 @@ ${headerNav()}
           <div class="section-header">
             <h1>Health Guides</h1>
             <p class="lead">Each guide answers one question with a short takeaway, a deeper explanation, cited evidence, and related topics—written for adults researching ADHD, metabolic health, hormones, fatigue, and telehealth. Educational only; not a substitute for care with your clinician.</p>
+            <p class="health-guides-hub-jump-links"><a href="#topic-cluster-explorer-heading">Topic clusters</a> · <a href="#guides-adhd">ADHD guides</a> · <a href="#guides-metabolic">Metabolic guides</a> · <a href="/blog/adhd">ADHD articles</a> · <a href="/adhd-care">ADHD care</a> · <a href="/adhd-screening">Free screening</a></p>
           </div>
 ${SIYA_CIRCLE_PROMO_HTML}
+${buildIndexClusterExplorerHtml()}
+${renderAnswersHubCarePathwaysSection()}
           <div class="health-guides-hub-categories">
 ${cards}
           </div>

@@ -6,9 +6,10 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { INTERNAL_LINK_CANONICAL } from '../data/redirect-map.mjs';
+import { ADHD_COMMERCIAL_PATHS } from '../data/adhd-commercial-links.mjs';
 
 /** Legacy legal shells — footers use LEGAL_LINKS; do not rewrite remaining /terms or /privacy-policy hrefs */
-const SKIP_HREF_REWRITE = new Set(['/terms', '/privacy-policy']);
+const SKIP_HREF_REWRITE = new Set(['/terms', '/privacy-policy', ...ADHD_COMMERCIAL_PATHS]);
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');

@@ -1,6 +1,6 @@
 # Cornerstone Protection Report
 
-Generated: 2026-06-29T12:44:35.380Z
+Generated: 2026-07-03T11:31:28.792Z
 
 ### Food Noise
 - **Cornerstone blog:** /blog/food-noise-and-glp-1-what-it-means-and-what-helps
@@ -64,7 +64,7 @@ Generated: 2026-06-29T12:44:35.380Z
 | Identical title? | ✓ No |
 | Identical H1? | ✓ No |
 | Identical meta? | ✓ No |
-| Canonical pointer to blog? | ✓ Yes |
+| Canonical pointer to blog? | ✗ No |
 
 ### Sleep Apnea
 - **Cornerstone blog:** /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign

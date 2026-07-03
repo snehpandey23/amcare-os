@@ -1,45 +1,15 @@
 {
-  "generated": "2026-06-29",
+  "generated": "2026-07-03",
   "totalPages": 152,
   "zeroInbound": [
-    "/adhd-diagnosis-florida",
-    "/adhd-evaluation-cost",
-    "/adhd-treatment-online",
-    "/adult-adhd-diagnosis",
-    "/adult-adhd-screening-california",
     "/intake",
-    "/online-adhd-test",
     "/privacy-policy",
     "/siya-circle",
     "/terms"
   ],
   "under3Inbound": [
     {
-      "path": "/adhd-diagnosis-florida",
-      "count": 0
-    },
-    {
-      "path": "/adhd-evaluation-cost",
-      "count": 0
-    },
-    {
-      "path": "/adhd-treatment-online",
-      "count": 0
-    },
-    {
-      "path": "/adult-adhd-diagnosis",
-      "count": 0
-    },
-    {
-      "path": "/adult-adhd-screening-california",
-      "count": 0
-    },
-    {
       "path": "/intake",
-      "count": 0
-    },
-    {
-      "path": "/online-adhd-test",
       "count": 0
     },
     {
@@ -55,47 +25,11 @@
       "count": 0
     },
     {
-      "path": "/adhd-diagnosis-austin",
-      "count": 1
-    },
-    {
-      "path": "/adhd-diagnosis-houston",
-      "count": 1
-    },
-    {
-      "path": "/adhd-diagnosis-pennsylvania",
-      "count": 1
-    },
-    {
-      "path": "/adhd-diagnosis-philadelphia",
+      "path": "/answers/afternoon-energy-crash-after-lunch",
       "count": 1
     },
     {
       "path": "/answers/weight-gain-after-stopping-ozempic",
-      "count": 1
-    },
-    {
-      "path": "/blog/adult-adhd-treatment-california-2026",
-      "count": 1
-    },
-    {
-      "path": "/blog/how-mental-health-affects-weight-loss-outcomes",
-      "count": 1
-    },
-    {
-      "path": "/blog/how-to-choose-adhd-provider-california",
-      "count": 1
-    },
-    {
-      "path": "/blog/oral-vs-injectable-weight-loss-medications",
-      "count": 1
-    },
-    {
-      "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
-      "count": 1
-    },
-    {
-      "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "count": 1
     },
     {
@@ -107,11 +41,27 @@
       "count": 1
     },
     {
-      "path": "/adhd-diagnosis-texas",
+      "path": "/answers/adderall-vs-vyvanse-adults",
       "count": 2
     },
     {
-      "path": "/answers/afternoon-energy-crash-after-lunch",
+      "path": "/answers/ed-telehealth-legitimate",
+      "count": 2
+    },
+    {
+      "path": "/answers/fsa-hsa-adhd-evaluation",
+      "count": 2
+    },
+    {
+      "path": "/answers/high-functioning-adhd",
+      "count": 2
+    },
+    {
+      "path": "/answers/high-shbg-low-free-testosterone",
+      "count": 2
+    },
+    {
+      "path": "/answers/oral-vs-topical-minoxidil",
       "count": 2
     },
     {
@@ -123,31 +73,11 @@
       "count": 2
     },
     {
-      "path": "/blog/adhd-evaluation-california-online-vs-in-person",
+      "path": "/blog/how-to-choose-adhd-provider-california",
       "count": 2
     },
     {
-      "path": "/blog/adhd-medication-options-california",
-      "count": 2
-    },
-    {
-      "path": "/blog/adhd-telehealth-california",
-      "count": 2
-    },
-    {
-      "path": "/blog/adult-adhd-symptoms-california",
-      "count": 2
-    },
-    {
-      "path": "/blog/compounded-vs-branded-glp1-medications",
-      "count": 2
-    },
-    {
-      "path": "/blog/oral-vs-topical-minoxidil-which-is-right",
-      "count": 2
-    },
-    {
-      "path": "/creyos-adhd-testing",
+      "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
       "count": 2
     }
   ],
@@ -163,33 +93,33 @@
     },
     {
       "path": "/adhd-care",
-      "outboundCount": 42,
-      "uniqueInbound": 142
+      "outboundCount": 56,
+      "uniqueInbound": 141
     },
     {
       "path": "/blog",
-      "outboundCount": 43,
-      "uniqueInbound": 142
+      "outboundCount": 70,
+      "uniqueInbound": 141
     },
     {
       "path": "/blog/adhd",
-      "outboundCount": 52,
-      "uniqueInbound": 97
+      "outboundCount": 63,
+      "uniqueInbound": 98
     },
     {
       "path": "/answers",
-      "outboundCount": 68,
-      "uniqueInbound": 142
+      "outboundCount": 88,
+      "uniqueInbound": 141
     },
     {
       "path": "/about",
       "outboundCount": 34,
-      "uniqueInbound": 148
+      "uniqueInbound": 147
     },
     {
       "path": "/weight-loss-metabolic-health",
       "outboundCount": 41,
-      "uniqueInbound": 142
+      "uniqueInbound": 141
     }
   ],
   "topSuggestions": [],
@@ -218,9 +148,9 @@
         "title": "ADHD Testing Online in California: Screening vs Full Evaluation"
       },
       {
-        "p": "/adult-adhd-screening-california",
+        "p": "/answers/can-adhd-be-diagnosed-online",
         "score": 9,
-        "title": "Adult ADHD Evaluation Online in California | Take Free ADHD Screening"
+        "title": "Can ADHD be diagnosed online?"
       },
       {
         "p": "/answers/how-online-prescriptions-work",
@@ -391,14 +321,14 @@
     ],
     "/blog/adhd-testing-online-california-screening-vs-evaluation": [
       {
-        "p": "/adult-adhd-screening-california",
-        "score": 11,
-        "title": "Adult ADHD Evaluation Online in California | Take Free ADHD Screening"
-      },
-      {
         "p": "/answers/screening-vs-adhd-evaluation",
         "score": 11,
         "title": "What is the difference between ADHD screening and a full evaluation?"
+      },
+      {
+        "p": "/blog/adhd-evaluation-california-online-vs-in-person",
+        "score": 11,
+        "title": "ADHD Evaluation in California: Online vs In-Person Options (2026)"
       },
       {
         "p": "/answers/how-online-prescriptions-work",
@@ -413,14 +343,14 @@
     ],
     "/blog/adult-adhd-symptoms-california": [
       {
-        "p": "/adult-adhd-screening-california",
-        "score": 9,
-        "title": "Adult ADHD Evaluation Online in California | Take Free ADHD Screening"
-      },
-      {
         "p": "/answers/signs-of-adult-adhd",
         "score": 9,
         "title": "What are the signs of adult ADHD?"
+      },
+      {
+        "p": "/answers/telehealth-adhd-california",
+        "score": 9,
+        "title": "How does ADHD telehealth work in California?"
       },
       {
         "p": "/answers/when-is-testosterone-therapy-appropriate",
@@ -430,14 +360,14 @@
     ],
     "/blog/adult-adhd-treatment-california-2026": [
       {
-        "p": "/adult-adhd-screening-california",
-        "score": 9,
-        "title": "Adult ADHD Evaluation Online in California | Take Free ADHD Screening"
-      },
-      {
         "p": "/answers/signs-of-adult-adhd",
         "score": 9,
         "title": "What are the signs of adult ADHD?"
+      },
+      {
+        "p": "/answers/telehealth-adhd-california",
+        "score": 9,
+        "title": "How does ADHD telehealth work in California?"
       },
       {
         "p": "/blog/insomnia-treatment-options-beyond-medication",
@@ -576,7 +506,7 @@
       {
         "p": "/adult-adhd-screening-california",
         "score": 7,
-        "title": "Adult ADHD Evaluation Online in California | Take Free ADHD Screening"
+        "title": "Online ADHD Screening in California | Free 2-Minute Test"
       }
     ],
     "/blog/how-to-know-if-you-have-adhd-adult": [
@@ -1015,154 +945,154 @@
   },
   "inboundCounts": {
     "/": 151,
-    "/about": 148,
-    "/telehealth": 143,
-    "/adhd-care": 142,
-    "/answers": 142,
-    "/blog": 142,
-    "/weight-loss-metabolic-health": 142,
+    "/about": 147,
+    "/telehealth": 142,
+    "/adhd-care": 141,
+    "/answers": 141,
+    "/blog": 141,
     "/redirect/chat": 141,
+    "/weight-loss-metabolic-health": 141,
     "/labs": 140,
-    "/providers": 119,
-    "/adhd-screening": 99,
-    "/blog/adhd": 97,
+    "/blog/adhd": 98,
     "/blog/weight-loss": 91,
     "/legal/notice-of-privacy-practices": 90,
     "/legal/privacy-policy": 90,
     "/legal/terms-of-use": 90,
-    "/answers/signs-of-adult-adhd": 89,
     "/legal/cookie-policy": 89,
     "/legal": 89,
+    "/answers/signs-of-adult-adhd": 88,
+    "/blog/how-to-know-if-you-have-adhd-adult": 87,
     "/blog/telehealth": 86,
     "/mens-health-longevity": 86,
-    "/answers/what-is-insulin-resistance": 85,
-    "/answers/why-am-i-tired-even-after-sleeping": 84,
-    "/blog/how-to-know-if-you-have-adhd-adult": 78,
-    "/pricing": 78,
+    "/answers/what-is-insulin-resistance": 83,
+    "/providers": 83,
+    "/answers/why-am-i-tired-even-after-sleeping": 81,
+    "/adhd-screening": 78,
     "/answers/is-online-adhd-diagnosis-legitimate": 77,
+    "/pricing": 76,
     "/womens-health": 75,
     "/prescriptions": 65,
     "/primary-urgent-care": 65,
     "/legal/controlled-substance-treatment-agreement": 43,
     "/redirect/adhd-walkthrough": 37,
     "/providers/dr-sneh-pandey": 33,
-    "/blog/is-online-adhd-diagnosis-legit": 30,
-    "/blog/adhd-symptoms-overlooked": 27,
-    "/answers/what-is-food-noise": 26,
-    "/blog/insulin-resistance-and-weight-loss-clinician-overview": 23,
-    "/answers/can-adhd-be-diagnosed-online": 22,
-    "/blog/food-noise-and-glp-1-what-it-means-and-what-helps": 22,
+    "/answers/can-adhd-be-diagnosed-online": 24,
+    "/answers/what-is-food-noise": 22,
+    "/blog/insulin-resistance-and-weight-loss-clinician-overview": 22,
+    "/blog/is-online-adhd-diagnosis-legit": 22,
     "/answers/starting-adhd-medication-adults": 19,
-    "/blog/why-am-i-always-tired-causes-when-to-see-doctor": 19,
+    "/blog/food-noise-and-glp-1-what-it-means-and-what-helps": 18,
+    "/blog/online-adhd-diagnosis-california": 18,
     "/providers/dr-natasha-desai": 18,
-    "/answers/brain-fog-after-eating": 15,
+    "/blog/why-am-i-always-tired-causes-when-to-see-doctor": 17,
+    "/blog/adhd-medication-options-for-adults": 15,
+    "/blog/adhd-testing-online-california-screening-vs-evaluation": 15,
+    "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know": 15,
     "/providers/dr-vanessa-urbina": 15,
-    "/answers/what-does-low-testosterone-feel-like": 14,
-    "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know": 13,
+    "/answers/what-is-free-testosterone": 14,
+    "/blog/adhd-medication-options-california": 14,
+    "/blog/online-adhd-diagnosis-texas": 14,
+    "/blog/adhd-symptoms-overlooked": 13,
     "/providers/dr-swati-pandey": 13,
+    "/answers/brain-fog-after-eating": 12,
     "/answers/glp-1-side-effects": 12,
-    "/answers/what-is-free-testosterone": 12,
-    "/blog/glp1-side-effects-and-how-to-manage-them": 12,
+    "/answers/what-does-low-testosterone-feel-like": 12,
+    "/blog/adhd-evaluation-california-online-vs-in-person": 12,
     "/blog/how-to-safely-get-prescriptions-online": 12,
+    "/blog/medical-weight-loss-glp1-semaglutide-texas": 12,
     "/providers/megan-wunderlich": 12,
-    "/answers/medical-weight-loss-vs-dieting": 11,
-    "/answers/semaglutide-weight-loss-how-it-works": 11,
-    "/blog/semaglutide-for-weight-loss-how-it-works": 11,
-    "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign": 11,
-    "/answers/can-sleep-apnea-cause-fatigue": 10,
-    "/answers/signs-of-sleep-apnea-in-adults": 10,
     "/answers/when-is-testosterone-therapy-appropriate": 10,
-    "/answers/poor-sleep-feels-like-adhd": 9,
-    "/answers/testosterone-and-adhd-overlap": 9,
-    "/answers/who-qualifies-glp-1-weight-loss": 9,
+    "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign": 10,
+    "/adhd-diagnosis-texas": 9,
     "/blog/how-adhd-medication-is-prescribed-online": 9,
-    "/blog/medical-weight-loss-glp1-semaglutide-texas": 9,
     "/providers/derek-timbs": 9,
-    "/answers/adhd-and-weight-loss-connection": 8,
+    "/adhd-diagnosis-pennsylvania": 8,
+    "/answers/can-sleep-apnea-cause-fatigue": 8,
     "/answers/is-telehealth-legitimate": 8,
-    "/answers/normal-a1c-insulin-resistance": 8,
-    "/blog/when-is-testosterone-therapy-appropriate": 8,
-    "/answers/how-online-prescriptions-work": 7,
+    "/answers/semaglutide-weight-loss-how-it-works": 8,
+    "/answers/what-included-199-adhd-evaluation": 8,
+    "/blog/adhd-medication-online-california": 8,
+    "/blog/how-mental-health-affects-weight-loss-outcomes": 8,
+    "/adhd-diagnosis-austin": 7,
+    "/adhd-diagnosis-florida": 7,
+    "/adhd-diagnosis-houston": 7,
+    "/adhd-diagnosis-philadelphia": 7,
+    "/answers/adhd-and-weight-loss-connection": 7,
+    "/answers/is-adhd-medication-safe-long-term": 7,
+    "/answers/medical-weight-loss-vs-dieting": 7,
+    "/answers/normal-a1c-insulin-resistance": 7,
     "/answers/screening-vs-adhd-evaluation": 7,
-    "/blog/online-adhd-diagnosis-texas": 7,
+    "/blog/adhd-medication-daily-or-as-needed-adults": 7,
+    "/blog/adhd-medication-side-effects-what-to-expect": 7,
+    "/blog/medical-weight-loss-vs-dieting-what-actually-works": 7,
+    "/blog/minoxidil-for-hair-loss-does-it-work": 7,
+    "/blog/oral-vs-topical-minoxidil-which-is-right": 7,
+    "/blog/semaglutide-for-weight-loss-how-it-works": 7,
+    "/creyos-adhd-testing": 7,
+    "/adhd-evaluation-cost": 6,
     "/answers/adhd-medication-side-effects": 6,
-    "/answers/can-you-get-adhd-medication-online": 6,
-    "/answers/is-adhd-medication-safe-long-term": 6,
+    "/answers/how-online-prescriptions-work": 6,
     "/answers/meet-and-greet-telehealth-expectations": 6,
+    "/answers/signs-of-sleep-apnea-in-adults": 6,
     "/answers/telehealth-adhd-california": 6,
-    "/answers/trt-monitoring-requirements": 6,
-    "/answers/what-included-199-adhd-evaluation": 6,
-    "/blog/online-adhd-diagnosis-california": 6,
+    "/blog/adhd-telehealth-california": 6,
+    "/blog/adult-adhd-symptoms-california": 6,
+    "/blog/compounded-vs-branded-glp1-medications": 6,
+    "/blog/glp1-side-effects-and-how-to-manage-them": 6,
+    "/blog/non-stimulant-adhd-medications-explained": 6,
+    "/blog/when-is-testosterone-therapy-appropriate": 6,
+    "/online-adhd-test": 6,
     "/providers/wendy-delgado": 6,
+    "/answers/adhd-vs-anxiety": 5,
     "/answers/adhd-vs-burnout": 5,
-    "/answers/compounded-vs-branded-glp-1": 5,
     "/answers/how-long-adhd-evaluation": 5,
-    "/answers/how-much-does-adhd-testing-cost": 5,
-    "/answers/telehealth-adhd-texas": 5,
-    "/answers/why-normal-labs-dont-mean-healthy": 5,
-    "/blog/minoxidil-for-hair-loss-does-it-work": 5,
-    "/blog/non-stimulant-adhd-medications-explained": 5,
+    "/answers/trt-monitoring-requirements": 5,
+    "/answers/who-qualifies-glp-1-weight-loss": 5,
+    "/blog/adderall-for-adhd-how-it-works": 5,
+    "/blog/adhd-evaluation-cost-texas": 5,
+    "/blog/is-adhd-medication-safe-long-term": 5,
+    "/blog/vyvanse-vs-adderall-differences": 5,
+    "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd": 5,
+    "/adult-adhd-diagnosis": 4,
+    "/adult-adhd-screening-california": 4,
     "/answers/adhd-in-women": 4,
-    "/answers/adhd-vs-anxiety": 4,
+    "/answers/adhd-medication-every-day": 4,
     "/answers/asrs-adhd-screening-explained": 4,
-    "/answers/food-noise-returned-on-glp-1": 4,
+    "/answers/can-you-get-adhd-medication-online": 4,
+    "/answers/compounded-vs-branded-glp-1": 4,
     "/answers/glp-1-nausea-management": 4,
+    "/answers/how-much-does-adhd-testing-cost": 4,
     "/answers/insulin-resistance-without-diabetes": 4,
-    "/answers/late-adhd-diagnosis-adults": 4,
-    "/blog/adhd-evaluation-cost-texas": 4,
-    "/blog/adhd-medication-daily-or-as-needed-adults": 4,
-    "/blog/adhd-medication-options-for-adults": 4,
-    "/blog/adhd-medication-side-effects-what-to-expect": 4,
+    "/answers/telehealth-adhd-texas": 4,
+    "/answers/testosterone-and-adhd-overlap": 4,
     "/blog/insomnia-treatment-options-beyond-medication": 4,
-    "/blog/is-adhd-medication-safe-long-term": 4,
+    "/blog/sildenafil-for-erectile-dysfunction-what-to-expect": 4,
     "/blog/telehealth-prescriptions-how-online-treatment-works": 4,
     "/blog/tirzepatide-vs-semaglutide-which-is-better": 4,
-    "/blog/vyvanse-vs-adderall-differences": 4,
-    "/answers/adderall-vs-vyvanse-adults": 3,
-    "/answers/adhd-medication-every-day": 3,
+    "/adhd-treatment-online": 3,
     "/answers/can-adhd-cause-anxiety": 3,
-    "/answers/ed-telehealth-legitimate": 3,
     "/answers/executive-dysfunction-adhd": 3,
-    "/answers/fsa-hsa-adhd-evaluation": 3,
-    "/answers/high-functioning-adhd": 3,
-    "/answers/high-shbg-low-free-testosterone": 3,
-    "/answers/oral-vs-topical-minoxidil": 3,
-    "/blog/adderall-for-adhd-how-it-works": 3,
-    "/blog/adhd-medication-online-california": 3,
-    "/blog/adhd-testing-online-california-screening-vs-evaluation": 3,
-    "/blog/medical-weight-loss-vs-dieting-what-actually-works": 3,
-    "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd": 3,
-    "/adhd-diagnosis-texas": 2,
-    "/answers/afternoon-energy-crash-after-lunch": 2,
+    "/answers/food-noise-returned-on-glp-1": 3,
+    "/answers/late-adhd-diagnosis-adults": 3,
+    "/answers/poor-sleep-feels-like-adhd": 3,
+    "/answers/why-normal-labs-dont-mean-healthy": 3,
+    "/blog/adult-adhd-treatment-california-2026": 3,
+    "/blog/oral-vs-injectable-weight-loss-medications": 3,
+    "/answers/adderall-vs-vyvanse-adults": 2,
+    "/answers/ed-telehealth-legitimate": 2,
+    "/answers/fsa-hsa-adhd-evaluation": 2,
+    "/answers/high-functioning-adhd": 2,
+    "/answers/high-shbg-low-free-testosterone": 2,
+    "/answers/oral-vs-topical-minoxidil": 2,
     "/answers/rejection-sensitivity-adhd": 2,
     "/answers/time-blindness-adhd": 2,
-    "/blog/adhd-evaluation-california-online-vs-in-person": 2,
-    "/blog/adhd-medication-options-california": 2,
-    "/blog/adhd-telehealth-california": 2,
-    "/blog/adult-adhd-symptoms-california": 2,
-    "/blog/compounded-vs-branded-glp1-medications": 2,
-    "/blog/oral-vs-topical-minoxidil-which-is-right": 2,
-    "/creyos-adhd-testing": 2,
-    "/adhd-diagnosis-austin": 1,
-    "/adhd-diagnosis-houston": 1,
-    "/adhd-diagnosis-pennsylvania": 1,
-    "/adhd-diagnosis-philadelphia": 1,
+    "/blog/how-to-choose-adhd-provider-california": 2,
+    "/blog/phentermine-for-weight-loss-safety-and-effectiveness": 2,
+    "/answers/afternoon-energy-crash-after-lunch": 1,
     "/answers/weight-gain-after-stopping-ozempic": 1,
-    "/blog/adult-adhd-treatment-california-2026": 1,
-    "/blog/how-mental-health-affects-weight-loss-outcomes": 1,
-    "/blog/how-to-choose-adhd-provider-california": 1,
-    "/blog/oral-vs-injectable-weight-loss-medications": 1,
-    "/blog/phentermine-for-weight-loss-safety-and-effectiveness": 1,
-    "/blog/sildenafil-for-erectile-dysfunction-what-to-expect": 1,
     "/book-appointment": 1,
     "/redirect/adhd-evaluation": 1,
-    "/adhd-diagnosis-florida": 0,
-    "/adhd-evaluation-cost": 0,
-    "/adhd-treatment-online": 0,
-    "/adult-adhd-diagnosis": 0,
-    "/adult-adhd-screening-california": 0,
     "/intake": 0,
-    "/online-adhd-test": 0,
     "/privacy-policy": 0,
     "/siya-circle": 0,
     "/terms": 0

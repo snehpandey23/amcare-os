@@ -1,6 +1,6 @@
 # Siya Health — Full AI Retrieval Index
 
-Generated: 2026-06-29
+Generated: 2026-07-03
 Total pages: 152
 
 ---
@@ -149,9 +149,9 @@ Total pages: 152
   Summary: Get an adult ADHD diagnosis online from board-certified providers. $199, 60–90 min, individualized clinical assessment. TX, PA, FL. Same-week telehealth appointments.
   Topics: adhd
 
-- Adult ADHD Evaluation Online in California | Take Free ADHD Screening
+- Online ADHD Screening in California | Free 2-Minute Test
   URL: https://siya.health/adult-adhd-screening-california
-  Summary: Take a free 2-minute ADHD screening online with Siya Health. Adults in California can start with a self-screening, book a free consultation, or begin a $199 adult ADHD evaluation.
+  Summary: Free online ADHD screening for adults in California. Take a 2-minute test with no sign-up, then explore virtual ADHD care with licensed physicians serving California.
   Topics: adhd, california
 
 - Health Guides | Metabolic, ADHD, Hormones &amp; Telehealth
