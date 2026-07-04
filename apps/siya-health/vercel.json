@@ -43,6 +43,13 @@
     { "source": "/visual-components", "destination": "/", "permanent": true },
     { "source": "/public", "destination": "/", "permanent": true },
     { "source": "/public/:path*", "destination": "/", "permanent": true },
+    { "source": "/docs", "destination": "/", "permanent": true },
+    { "source": "/docs/:path*", "destination": "/", "permanent": true },
+    { "source": "/data", "destination": "/", "permanent": true },
+    { "source": "/data/:path*", "destination": "/", "permanent": true },
+    { "source": "/design-system", "destination": "/", "permanent": true },
+    { "source": "/design-system/:path*", "destination": "/", "permanent": true },
+    { "source": "/(.*).mjs", "destination": "/", "permanent": true },
     { "source": "/siya-circle", "destination": "https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl", "permanent": false },
     { "source": "/(.*)", "has": [{ "type": "host", "value": "siya.health" }], "destination": "https://www.siya.health/$1", "permanent": true }
   ]
