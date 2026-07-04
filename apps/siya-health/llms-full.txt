@@ -1,6 +1,6 @@
 # Siya Health — Full AI Retrieval Index
 
-Generated: 2026-07-03
+Generated: 2026-07-04
 Total pages: 152
 
 ---
@@ -141,7 +141,7 @@ Total pages: 152
 
 - ADHD Treatment Online | Telehealth TX, PA, FL
   URL: https://siya.health/adhd-treatment-online
-  Summary: Online ADHD treatment after diagnosis: medication management, follow-ups, telehealth in Texas, Pennsylvania & Florida. Start with $199 evaluation.
+  Summary: Online ADHD treatment after diagnosis: medication management, follow-ups, telehealth in California, Texas, Pennsylvania & Florida. Start with $199 evaluation.
   Topics: adhd, telehealth, texas, pennsylvania, florida
 
 - Adult ADHD Diagnosis Online | $199 Evaluation

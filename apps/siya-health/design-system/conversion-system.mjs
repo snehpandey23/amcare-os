@@ -14,18 +14,24 @@ export const CONVERSION_GOAL_SLOTS = {
   screening: 'leadMagnet',
   newsletter: 'newsletter',
   bookDemo: 'bookDemo',
+  exploreCare: 'exploreCare',
+  viewPricing: 'viewPricing',
 };
 
-/** Intent-based defaults when no page config exists */
+/**
+ * Intent-based defaults when no page config exists.
+ * Secondary goals follow the approved CTA system: general/pricing → Explore Care Options;
+ * weight/telehealth/hormones service pages → View Pricing.
+ */
 export const USER_INTENT_RULES = {
-  homepage: { intent: 'homepage', primaryGoal: 'secureChat', secondaryGoal: 'consultation' },
+  homepage: { intent: 'homepage', primaryGoal: 'secureChat', secondaryGoal: 'exploreCare' },
   adhd: { intent: 'adhd', primaryGoal: 'screening', secondaryGoal: 'secureChat' },
   blog: { intent: 'blog', primaryGoal: 'secureChat', secondaryGoal: 'newsletter' },
   provider: { intent: 'provider', primaryGoal: 'secureChat', secondaryGoal: null },
-  pricing: { intent: 'pricing', primaryGoal: 'secureChat', secondaryGoal: null },
-  hormones: { intent: 'hormones', primaryGoal: 'secureChat', secondaryGoal: null },
-  weight: { intent: 'weight', primaryGoal: 'secureChat', secondaryGoal: null },
-  telehealth: { intent: 'telehealth', primaryGoal: 'secureChat', secondaryGoal: null },
+  pricing: { intent: 'pricing', primaryGoal: 'secureChat', secondaryGoal: 'exploreCare' },
+  hormones: { intent: 'hormones', primaryGoal: 'secureChat', secondaryGoal: 'viewPricing' },
+  weight: { intent: 'weight', primaryGoal: 'secureChat', secondaryGoal: 'viewPricing' },
+  telehealth: { intent: 'telehealth', primaryGoal: 'secureChat', secondaryGoal: 'viewPricing' },
   employer: { intent: 'employer', primaryGoal: 'bookDemo', secondaryGoal: 'secureChat' },
   landing: { intent: 'landing', primaryGoal: null, secondaryGoal: null },
   default: { intent: 'default', primaryGoal: 'secureChat', secondaryGoal: null },

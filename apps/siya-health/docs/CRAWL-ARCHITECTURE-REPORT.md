@@ -1,6 +1,6 @@
 # Crawl architecture report
 
-Generated: 2026-07-03T11:31:30.779Z
+Generated: 2026-07-04T07:01:50.010Z
 
 Internal link graph analysis only — not a general SEO audit.
 

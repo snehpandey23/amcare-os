@@ -40,6 +40,7 @@ const html = `<!DOCTYPE html>
             <p class="hero-merged-lead">One evaluation. Clear follow-up plans. No Bronze/Silver/Gold tiers—just care-delivery pricing that applies across ADHD, weight loss, metabolic health, primary care, and telehealth.</p>
             <div class="hero-ctas">
               <a class="button" href="${BOOK}" target="_blank" rel="noopener">${COPY_STANDARDS.primaryCta}</a>
+              <a class="button ds-button ds-button--secondary secondary" href="/telehealth" data-siya-track="explore-care-click" data-siya-location="hero" data-page-type="pricing" data-cta-slot="exploreCare" data-component="button">Explore Care Options</a>
             </div>
             <div class="hero-trust-bar">
               <span>Board-certified physicians</span>

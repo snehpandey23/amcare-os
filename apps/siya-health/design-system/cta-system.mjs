@@ -49,6 +49,20 @@ export const CTA_SLOTS = {
     external: false,
     track: 'screening-cta-click',
   },
+  exploreCare: {
+    id: 'exploreCare',
+    label: 'Explore Care Options',
+    url: '/telehealth',
+    external: false,
+    track: 'explore-care-click',
+  },
+  viewPricing: {
+    id: 'viewPricing',
+    label: 'View Pricing',
+    url: COPY_STANDARDS.pricingPath ?? '/pricing',
+    external: false,
+    track: 'view-pricing-click',
+  },
   newsletter: {
     id: 'newsletter',
     label: CTA_SYSTEM.newsletter.label,

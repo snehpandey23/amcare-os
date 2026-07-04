@@ -1,6 +1,6 @@
 # Phase 7 — Crawl Inventory
 
-**Generated:** 2026-07-03
+**Generated:** 2026-07-04
 **HTML routes:** 152 · **Sitemap URLs:** 141
 
 ## Issue summary
@@ -17,7 +17,7 @@
 | URL | Status | Indexable | Sitemap | Inbound | Canonical | Redirect |
 |-----|--------|-----------|---------|--------:|-----------|----------|
 | /about | 200 | yes | yes | 440 | /about | — |
-| /adhd-care | 200 | yes | yes | 573 | /adhd-care | — |
+| /adhd-care | 200 | yes | yes | 596 | /adhd-care | — |
 | /adhd-diagnosis-austin | 200 | yes | yes | 7 | /adhd-diagnosis-austin | — |
 | /adhd-diagnosis-florida | 301 | no | no | 7 | /adhd-care | /adhd-care |
 | /adhd-diagnosis-houston | 200 | yes | yes | 7 | /adhd-diagnosis-houston | — |
@@ -25,7 +25,7 @@
 | /adhd-diagnosis-philadelphia | 200 | yes | yes | 7 | /adhd-diagnosis-philadelphia | — |
 | /adhd-diagnosis-texas | 200 | yes | yes | 9 | /adhd-diagnosis-texas | — |
 | /adhd-evaluation-cost | 301 | no | no | 0 | /pricing | /pricing |
-| /adhd-screening | 200 | yes | yes | 228 | /adhd-screening | — |
+| /adhd-screening | 200 | yes | yes | 286 | /adhd-screening | — |
 | /adhd-treatment-online | 301 | no | no | 4 | /adhd-care | /adhd-care |
 | /adult-adhd-diagnosis | 301 | no | no | 5 | /adhd-care | /adhd-care |
 | /adult-adhd-screening-california | 200 | yes | yes | 6 | /adult-adhd-screening-california | — |
@@ -146,10 +146,10 @@
 | /legal/notice-of-privacy-practices | 200 | yes | yes | 160 | /legal/notice-of-privacy-practices | — |
 | /legal/privacy-policy | 200 | yes | yes | 161 | /legal/privacy-policy | — |
 | /legal/terms-of-use | 200 | yes | yes | 157 | /legal/terms-of-use | — |
-| /mens-health-longevity | 200 | yes | yes | 194 | /mens-health-longevity | — |
+| /mens-health-longevity | 200 | yes | yes | 199 | /mens-health-longevity | — |
 | /online-adhd-test | 301 | no | no | 7 | /adhd-screening | /adhd-screening |
 | /prescriptions | 200 | yes | yes | 0 | /prescriptions | — |
-| /pricing | 200 | yes | yes | 198 | /pricing | — |
+| /pricing | 200 | yes | yes | 224 | /pricing | — |
 | /primary-urgent-care | 200 | yes | yes | 3 | /primary-urgent-care | — |
 | /privacy-policy | 301 | no | no | 0 | /legal/privacy-policy | /legal/privacy-policy |
 | /providers/derek-timbs | 200 | yes | yes | 15 | /providers/derek-timbs | — |
@@ -161,10 +161,10 @@
 | /providers/megan-wunderlich | 200 | yes | yes | 22 | /providers/megan-wunderlich | — |
 | /providers/wendy-delgado | 200 | yes | yes | 10 | /providers/wendy-delgado | — |
 | /redirect/adhd-evaluation | 200 | no | no | 2 | /redirect/adhd-evaluation | — |
-| /redirect/adhd-walkthrough | 200 | no | no | 183 | /redirect/adhd-walkthrough | — |
-| /redirect/chat | 200 | no | no | 646 | /redirect/chat | — |
+| /redirect/adhd-walkthrough | 200 | no | no | 195 | /redirect/adhd-walkthrough | — |
+| /redirect/chat | 200 | no | no | 665 | /redirect/chat | — |
 | /siya-circle | 301 | no | no | 0 | — | https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl |
-| /telehealth | 200 | yes | yes | 628 | /telehealth | — |
+| /telehealth | 200 | yes | yes | 632 | /telehealth | — |
 | /terms | 301 | no | no | 0 | /legal/terms-of-use | /legal/terms-of-use |
-| /weight-loss-metabolic-health | 200 | yes | yes | 502 | /weight-loss-metabolic-health | — |
+| /weight-loss-metabolic-health | 200 | yes | yes | 514 | /weight-loss-metabolic-health | — |
 | /womens-health | 200 | yes | yes | 147 | /womens-health | — |

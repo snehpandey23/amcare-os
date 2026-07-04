@@ -685,6 +685,15 @@ export function normalizeSitewideCopy(html, relPath = '') {
   html = html.replace(/(?<!CA,\s*)Licensed in TX, PA, FL/g, `Licensed in ${STATES_BULLET}`);
   html = html.replace(/(?<!CA,\s*)HIPAA-compliant\. TX, PA, FL\./g, 'HIPAA-compliant. CA, TX, PA, FL.');
   html = html.replace(/Full telehealth coverage in three states\./g, 'Full telehealth coverage in four states.');
+  // ADHD shadow/geo pages + meta: "telehealth in Texas, Pennsylvania & Florida" omits California (idempotent).
+  html = html.replace(
+    /telehealth in (?:California, )?Texas, Pennsylvania (&amp;|&) Florida/g,
+    (_m, amp) => `telehealth in California, Texas, Pennsylvania ${amp} Florida`,
+  );
+  html = html.replace(
+    /at home in (?:California, )?Texas, Pennsylvania, or Florida/g,
+    'at home in California, Texas, Pennsylvania, or Florida',
+  );
 
   html = html.replaceAll('Clinical Answers Hub', 'Health Guides Hub');
   html = html.replaceAll('Answers Hub', 'Health Guides Hub');

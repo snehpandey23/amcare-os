@@ -1,6 +1,6 @@
 # Link Equity Report — Canonical Winning Blogs
 
-Generated: 2026-07-03T11:31:28.796Z
+Generated: 2026-07-04T07:01:47.264Z
 
 ## Top 20 blogs needing more internal links
 
@@ -31,10 +31,10 @@ Generated: 2026-07-03T11:31:28.796Z
 
 | Blog | Inbound |
 |------|--------:|
+| /blog/is-online-adhd-diagnosis-legit | 22 |
 | /blog/insulin-resistance-and-weight-loss-clinician-overview | 22 |
 | /blog/food-noise-and-glp-1-what-it-means-and-what-helps | 18 |
 | /blog/why-am-i-always-tired-causes-when-to-see-doctor | 17 |
-| /blog/is-online-adhd-diagnosis-legit | 16 |
 | /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | 15 |
 | /blog/medical-weight-loss-glp1-semaglutide-texas | 12 |
 | /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 10 |

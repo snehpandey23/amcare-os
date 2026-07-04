@@ -3497,6 +3497,104 @@ a.asrs-interest-btn:hover {
   text-decoration: underline;
 }
 
+/* Conversion-clarity cleanup — pricing strip, ADHD next steps, blog inline CTAs */
+.pricing-strip-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-subtle, #f8fafb);
+}
+
+.pricing-strip-title {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+}
+
+.pricing-strip-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px;
+  display: grid;
+  gap: 4px;
+}
+
+.pricing-strip-list li {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.pricing-strip-note {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  max-width: 60ch;
+}
+
+.pricing-strip-copy {
+  flex: 1 1 320px;
+}
+
+.pricing-strip-cta {
+  flex: 0 0 auto;
+}
+
+.adhd-next-steps-list {
+  margin: 16px 0 20px;
+  padding-left: 22px;
+  display: grid;
+  gap: 8px;
+  max-width: 640px;
+}
+
+.adhd-next-steps-list li {
+  line-height: 1.5;
+}
+
+.adhd-screening-disclaimer {
+  margin: 12px 0;
+  padding: 12px 16px;
+  border-left: 3px solid var(--primary);
+  background: var(--bg-subtle, #f8fafb);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  border-radius: 0 6px 6px 0;
+  max-width: 70ch;
+}
+
+.blog-inline-cta {
+  margin: 32px 0;
+  padding: 24px 26px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-subtle, #f8fafb);
+}
+
+.blog-inline-cta-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0 0 8px;
+}
+
+.blog-inline-cta p {
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
+.blog-inline-cta-actions {
+  margin: 16px 0 12px;
+}
+
+.blog-inline-cta-links {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
 .answer-internal-links {
   margin-top: 40px;
   padding-top: 28px;

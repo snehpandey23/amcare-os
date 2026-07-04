@@ -638,7 +638,7 @@ export function renderFaqCtaInner(relPath) {
               <p class="faq-accordion-cta-headline">Still deciding?</p>
               <div class="faq-accordion-cta-buttons">
                 ${screeningBtn}
-                <a class="button secondary" href="/pricing">Explore follow-up pricing</a>
+                <a class="button secondary" href="/pricing">View Pricing</a>
               </div>
               <p class="faq-accordion-cta-subtext">Most patients start with a screening or review pricing before booking.</p>
               <p class="faq-accordion-cta-phone"><a href="tel:+12154451244">(215) 445-1244</a></p>
