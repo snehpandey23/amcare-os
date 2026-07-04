@@ -37,10 +37,6 @@
       "count": 1
     },
     {
-      "path": "/redirect/adhd-evaluation",
-      "count": 1
-    },
-    {
       "path": "/answers/adderall-vs-vyvanse-adults",
       "count": 2
     },
@@ -78,6 +74,10 @@
     },
     {
       "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
+      "count": 2
+    },
+    {
+      "path": "/redirect/adhd-evaluation",
       "count": 2
     }
   ],
@@ -1088,10 +1088,10 @@
     "/answers/time-blindness-adhd": 2,
     "/blog/how-to-choose-adhd-provider-california": 2,
     "/blog/phentermine-for-weight-loss-safety-and-effectiveness": 2,
+    "/redirect/adhd-evaluation": 2,
     "/answers/afternoon-energy-crash-after-lunch": 1,
     "/answers/weight-gain-after-stopping-ozempic": 1,
     "/book-appointment": 1,
-    "/redirect/adhd-evaluation": 1,
     "/intake": 0,
     "/privacy-policy": 0,
     "/siya-circle": 0,

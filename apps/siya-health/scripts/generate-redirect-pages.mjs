@@ -27,13 +27,13 @@ const PAGES = [
   },
   {
     slug: 'adhd-walkthrough',
-    title: 'Booking Your ADHD Walkthrough | Siya Health',
-    heading: 'Booking your free ADHD walkthrough',
-    body: 'You are leaving Siya Health to schedule a short, non-clinical call with our care team about the ADHD evaluation process, pricing, and next steps.',
+    title: 'Booking Your Free ADHD Intro Call | Siya Health',
+    heading: 'Booking your free ADHD intro call',
+    body: 'You are leaving Siya Health to schedule a free ADHD intro call with our care team about the ADHD evaluation process, pricing, and next steps. This is a free process call, not a medical visit or diagnosis.',
     destination: ADHD_WALKTHROUGH_LINK,
     analyticsEvent: 'redirect_adhd_walkthrough',
     type: 'adhd_walkthrough',
-    ctaLabel: 'Continue to Book ADHD Walkthrough',
+    ctaLabel: 'Continue to Book Free ADHD Intro Call',
   },
   {
     slug: 'adhd-evaluation',

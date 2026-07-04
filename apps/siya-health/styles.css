@@ -594,6 +594,41 @@ button.secondary:hover {
   text-align: center;
 }
 
+/* Mobile UX polish (2026-07) — hero trust contrast + even trust chips.
+   Task 1: the hero trust bar also carries the design-system `ds-trust-row`
+   class, whose `strong` color is dark (var(--text)). On the dark gradient
+   hero that renders as dark-on-dark. Force light text (incl. stat numbers). */
+.hero-merged .hero-trust-bar,
+.hero-fullwidth .hero-trust-bar {
+  color: rgba(255, 255, 255, 0.95);
+}
+.hero-merged .hero-trust-bar strong,
+.hero-fullwidth .hero-trust-bar strong {
+  color: #fff;
+}
+/* Tasks 2 & 4: trust chips under the weight-loss / telehealth heroes wrapped
+   as uneven-width pills. Use an even 2-column grid on mobile so they read as
+   consistent, equal-height cards without feeling cramped. */
+@media (max-width: 640px) {
+  .hero-trust-bar--chips {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    align-items: stretch;
+  }
+  .hero-trust-bar--chips span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-height: 46px;
+    padding: 10px 12px;
+    text-align: center;
+    white-space: normal;
+  }
+}
+
 /* Weight loss hero + recognition (Sprint 1) */
 .weight-loss-hero .hero-merged-content {
   max-width: 720px;
@@ -3543,6 +3578,151 @@ a.asrs-interest-btn:hover {
   flex: 0 0 auto;
 }
 
+/* Task 7: keep the pricing strip reading as a calm trust/clarity block on
+   mobile — softer spacing, comfortable hierarchy, easy full-width tap target. */
+@media (max-width: 640px) {
+  .pricing-strip-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 22px 20px;
+  }
+  .pricing-strip-cta {
+    width: 100%;
+  }
+  .pricing-strip-cta .button,
+  .pricing-strip-cta .ds-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ============================================================
+   Reusable media block (Tasks 5 & 6) — calm, premium visual.
+   Two modes:
+   • Illustration (default, used on service pages): a soft brand-gradient
+     panel with inline line-art + a short caption. No photos, no patient
+     faces — a warm, lightweight visual accent.
+   • Video-ready facade: add a poster <img class="media-block__poster"
+     loading="lazy"> and a <button class="media-block__play"> inside the
+     frame, plus an optional <details class="media-block__transcript">.
+     No video autoplays and no audio plays until a user opts in. This ships
+     NO heavy media — it is a placeholder ready for a future approved video.
+   Example (video mode):
+     <figure class="media-block" data-media="video">
+       <div class="media-block__frame">
+         <img class="media-block__poster" src="/assets/…poster.jpg" alt="" loading="lazy" />
+         <button class="media-block__play" type="button" aria-label="Play video">…</button>
+       </div>
+       <figcaption class="media-block__caption">Short caption</figcaption>
+       <details class="media-block__transcript"><summary>Transcript</summary><p>…</p></details>
+     </figure>
+   ============================================================ */
+.media-block {
+  margin: 0;
+  max-width: 640px;
+}
+.media-block--center {
+  margin-left: auto;
+  margin-right: auto;
+}
+.media-block__frame {
+  position: relative;
+  border-radius: var(--radius-lg, 16px);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(30, 58, 138, 0.10) 0%, rgba(14, 165, 164, 0.12) 100%);
+  aspect-ratio: 16 / 9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  padding: 20px;
+}
+.media-block__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Illustration variant reads as a compact, filled band (not a tall empty box);
+   the 16:9 frame is reserved for the future video/poster variant. */
+.media-block[data-media="illustration"] .media-block__frame {
+  aspect-ratio: auto;
+  min-height: 180px;
+  padding: 36px 24px;
+}
+.media-block__art {
+  display: flex;
+  gap: 22px;
+  color: var(--primary);
+  opacity: 0.92;
+}
+.media-block__art svg {
+  width: 46px;
+  height: 46px;
+}
+.media-block__label {
+  position: relative;
+  margin: 0;
+  max-width: 42ch;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 1.02rem;
+  line-height: 1.4;
+}
+.media-block__play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.media-block__play:hover { transform: scale(1.06); background: #fff; }
+.media-block__play svg { width: 24px; height: 24px; margin-left: 3px; }
+.media-block__caption {
+  margin: 12px 2px 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.media-block__transcript {
+  margin: 8px 2px 0;
+}
+.media-block__transcript > summary {
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+.media-block__transcript[open] > summary { margin-bottom: 8px; }
+.media-block__transcript p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0 0 8px;
+}
+@media (max-width: 640px) {
+  .media-block__frame { aspect-ratio: 4 / 3; gap: 12px; padding: 18px; }
+  .media-block__art svg { width: 34px; height: 34px; }
+  .media-block__label { font-size: 0.96rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .media-block__play { transition: none; }
+}
+
 .adhd-next-steps-list {
   margin: 16px 0 20px;
   padding-left: 22px;
@@ -5436,23 +5616,40 @@ a.asrs-interest-btn:hover {
 }
 
 /* Fade-in animation */
+/* .fade-in previously started hidden and relied on a JS `.show` toggle that
+   is not present on the site, which left these content cards invisible
+   (the "blank area" after "Does any of this sound familiar?" on weight-loss,
+   and the same grid on adhd-care). Keep them visible by default and add a
+   gentle, non-blocking entrance only for motion-friendly users. */
 .fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s ease;
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in {
+    animation: siyaFadeInUp 0.6s ease both;
+  }
+}
+
+@keyframes siyaFadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
 }
 
 .fade-in.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
-.symptoms-card:nth-child(1) { transition-delay: 0.1s; }
-.symptoms-card:nth-child(2) { transition-delay: 0.2s; }
-.symptoms-card:nth-child(3) { transition-delay: 0.3s; }
-.symptoms-card:nth-child(4) { transition-delay: 0.4s; }
-.symptoms-card:nth-child(5) { transition-delay: 0.5s; }
-.symptoms-card:nth-child(6) { transition-delay: 0.6s; }
+/* Staggered entrance for the recognition cards (only applies where a
+   `.fade-in` animation is running; harmless on non-animated cards). */
+.symptoms-card.fade-in:nth-child(1) { animation-delay: 0.04s; }
+.symptoms-card.fade-in:nth-child(2) { animation-delay: 0.10s; }
+.symptoms-card.fade-in:nth-child(3) { animation-delay: 0.16s; }
+.symptoms-card.fade-in:nth-child(4) { animation-delay: 0.22s; }
+.symptoms-card.fade-in:nth-child(5) { animation-delay: 0.28s; }
+.symptoms-card.fade-in:nth-child(6) { animation-delay: 0.34s; }
 
 /* Membership pricing comparison table */
 .pricing-comparison-table {
@@ -7644,6 +7841,35 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   justify-content: center;
 }
 
+/* ADHD CTA architecture (2026-07): "not ready yet" intro-call bullets + the
+   high-intent $199 evaluation link under the bottom two-path CTA. */
+.siya-landing-page .lp-decision-list {
+  margin: 0 0 14px;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 6px;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--text-secondary, #475569);
+}
+
+.siya-landing-page .lp-decision-list li {
+  list-style: disc;
+}
+
+.siya-landing-page .lp-final-alt {
+  text-align: center;
+  margin: 0 auto 14px;
+  font-size: 0.9rem;
+}
+
+.siya-landing-page .lp-final-alt a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .siya-landing-page .lp-disclaimer--light {
   color: var(--text-muted);
   max-width: 32rem;
@@ -8086,10 +8312,42 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   justify-content: center;
   align-items: center;
   min-height: 52px;
-  margin: 0 0 calc(var(--lp-hero-space) + 0.35rem);
+  margin: 0 0 0.5rem;
   font-size: 1rem;
   font-weight: 600;
   box-shadow: 0 10px 24px rgba(13, 148, 136, 0.28);
+}
+
+/* ADHD CTA architecture (2026-07): low-friction "hesitation" secondary in the
+   hero — the free intro call. Visually subordinate to the teal screening CTA so
+   the primary lead-magnet stays dominant. */
+.siya-landing-page--ca-screening .lp-hero-conversion__secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  margin: 0 0 0.5rem;
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: 1.5px solid var(--primary, #1e3a8a);
+  background: #fff;
+  color: var(--primary, #1e3a8a);
+  font-size: 0.98rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.siya-landing-page--ca-screening .lp-hero-conversion__secondary:hover {
+  background: var(--bg-subtle, #f1f5f9);
+}
+
+.siya-landing-page--ca-screening .lp-hero-conversion__cta-note {
+  margin: 0 0 calc(var(--lp-hero-space) + 0.35rem);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--text-muted, #64748b);
 }
 
 .siya-landing-page--ca-screening .lp-hero-trust-bullets {
@@ -8378,6 +8636,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
 
 @media (min-width: 480px) {
   .siya-landing-page--ca-screening .lp-hero-conversion__cta,
+  .siya-landing-page--ca-screening .lp-hero-conversion__secondary,
   .siya-landing-page--ca-screening .lp-section-cta .button,
   .siya-landing-page--ca-screening .lp-final-ctas .button,
   .siya-landing-page--ca-screening .lp-mobile-sticky-cta .button {

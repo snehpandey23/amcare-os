@@ -160,9 +160,9 @@
 | /providers | 200 | yes | yes | 454 | /providers | — |
 | /providers/megan-wunderlich | 200 | yes | yes | 22 | /providers/megan-wunderlich | — |
 | /providers/wendy-delgado | 200 | yes | yes | 10 | /providers/wendy-delgado | — |
-| /redirect/adhd-evaluation | 200 | no | no | 2 | /redirect/adhd-evaluation | — |
-| /redirect/adhd-walkthrough | 200 | no | no | 195 | /redirect/adhd-walkthrough | — |
-| /redirect/chat | 200 | no | no | 665 | /redirect/chat | — |
+| /redirect/adhd-evaluation | 200 | no | no | 4 | /redirect/adhd-evaluation | — |
+| /redirect/adhd-walkthrough | 200 | no | no | 197 | /redirect/adhd-walkthrough | — |
+| /redirect/chat | 200 | no | no | 664 | /redirect/chat | — |
 | /siya-circle | 301 | no | no | 0 | — | https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl |
 | /telehealth | 200 | yes | yes | 632 | /telehealth | — |
 | /terms | 301 | no | no | 0 | /legal/terms-of-use | /legal/terms-of-use |

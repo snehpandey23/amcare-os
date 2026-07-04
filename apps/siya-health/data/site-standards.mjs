@@ -81,23 +81,31 @@ export const CTA_SYSTEM = {
   },
 };
 
-/** Non-clinical ADHD free consultation (CarePatron walkthrough slot) — button labels only */
+/** Non-clinical ADHD free intro call (CarePatron booking slot) — button labels only.
+ *  This is a free discovery/process call, NOT a medical visit, diagnosis, or treatment. */
 export const WALKTHROUGH_CTA = {
-  label: 'Book ADHD Walkthrough',
-  screeningResultLabel: 'Book Your ADHD Walkthrough',
+  label: 'Book Free ADHD Intro Call',
+  screeningResultLabel: 'Book Free ADHD Intro Call',
   microcopy:
-    'A short, non-clinical call with the Siya Health care team to explain the ADHD evaluation process, pricing, Creyos testing, and next steps.',
+    "This free intro call helps you understand Siya Health's ADHD evaluation process, pricing, and next steps. It is not a medical visit, diagnosis, or treatment recommendation.",
   disclaimer:
-    'This is a non-clinical informational call. It does not include diagnosis, treatment, prescriptions, or medical advice.',
+    'This is a free process call, not a medical visit or diagnosis.',
 };
 
-/** Legacy walkthrough/demo button labels → canonical WALKTHROUGH_CTA.label */
+/** Legacy walkthrough/demo/consultation button labels → canonical WALKTHROUGH_CTA.label.
+ *  Includes the retired "ADHD Walkthrough" / "Process Call" / consultation phrasings so
+ *  every ADHD funnel CTA normalizes to "Book Free ADHD Intro Call" at build time. */
 export const LEGACY_WALKTHROUGH_CTA_LABELS = [
   'Book Free Walkthrough',
   'Book Free Evaluation Walkthrough',
   'Book Free ADHD Evaluation Walkthrough',
   'Book ADHD Evaluation Walkthrough',
+  'Book Your ADHD Walkthrough',
+  'Book ADHD Walkthrough',
+  'Book Free ADHD Process Call',
+  'Book ADHD Process Call',
   'Book Free Consultation',
+  'Book Free ADHD Consultation',
   'Book Free Demo',
   'Book Demo',
 ];

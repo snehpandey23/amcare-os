@@ -1,6 +1,6 @@
 # Crawl architecture report
 
-Generated: 2026-07-04T10:54:32.088Z
+Generated: 2026-07-04T15:03:51.625Z
 
 Internal link graph analysis only — not a general SEO audit.
 
@@ -56,7 +56,7 @@ Internal link graph analysis only — not a general SEO audit.
 - `/intake` — Secure Intake
 - `/privacy-policy` — Privacy Policy Redirect
 - `/redirect/adhd-evaluation` — Starting Your ADHD Evaluation
-- `/redirect/adhd-walkthrough` — Booking Your ADHD Walkthrough
+- `/redirect/adhd-walkthrough` — Booking Your Free ADHD Intro Call
 - `/redirect/chat` — Connecting to Secure Medical Chat
 - `/siya-circle` — Siya Circle | Free Health Education Newsletter
 - `/terms` — Terms Redirect
@@ -69,7 +69,7 @@ Internal link graph analysis only — not a general SEO audit.
 - `/intake` (0 inbound) — Secure Intake
 - `/privacy-policy` (0 inbound) — Privacy Policy Redirect
 - `/redirect/adhd-evaluation` (0 inbound) — Starting Your ADHD Evaluation
-- `/redirect/adhd-walkthrough` (0 inbound) — Booking Your ADHD Walkthrough
+- `/redirect/adhd-walkthrough` (0 inbound) — Booking Your Free ADHD Intro Call
 - `/redirect/chat` (0 inbound) — Connecting to Secure Medical Chat
 - `/siya-circle` (0 inbound) — Siya Circle | Free Health Education Newsletter
 - `/terms` (0 inbound) — Terms Redirect

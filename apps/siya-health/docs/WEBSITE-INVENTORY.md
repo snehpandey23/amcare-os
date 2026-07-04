@@ -43,21 +43,21 @@ Generated: 2026-07-04
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
 | [/](https://siya.health/) | Homepage | Brand entry; route patients to core services and booking | Start Secure Medical Chat → /redirect… | Explore Care Options → /telehealth | Navigational / Commercial | Something feels off—and you're tired of guessin… | 1331 | 151 | 35 |
-| [/adhd-care](https://siya.health/adhd-care) | Service Page | Convert ADHD evaluation and treatment interest to booking | Take Free ADHD Screening → /adhd-scre… | View Pricing → /pricing | Commercial / Transactional | Adult ADHD Evaluation Online | 1724 | 147 | 55 |
-| [/adhd-diagnosis-austin](https://siya.health/adhd-diagnosis-austin) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book ADHD Walkthrough → /redirect/adh… | Local SEO / Commercial | ADHD Diagnosis in Austin, Texas (Online, $199) | 427 | 7 | 32 |
-| [/adhd-diagnosis-houston](https://siya.health/adhd-diagnosis-houston) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book ADHD Walkthrough → /redirect/adh… | Local SEO / Commercial | ADHD Diagnosis in Houston, Texas (Online, $199) | 417 | 7 | 32 |
-| [/adhd-diagnosis-pennsylvania](https://siya.health/adhd-diagnosis-pennsylvania) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book ADHD Walkthrough → /redirect/adh… | Local SEO / Commercial | Online ADHD Diagnosis in Pennsylvania ($199 Eva… | 439 | 8 | 33 |
-| [/adhd-diagnosis-philadelphia](https://siya.health/adhd-diagnosis-philadelphia) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book ADHD Walkthrough → /redirect/adh… | Local SEO / Commercial | ADHD Diagnosis in Philadelphia, Pennsylvania (O… | 427 | 7 | 33 |
-| [/adhd-diagnosis-texas](https://siya.health/adhd-diagnosis-texas) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book ADHD Walkthrough → /redirect/adh… | Local SEO / Commercial | Online ADHD Diagnosis in Texas ($199 Evaluation) | 434 | 9 | 33 |
-| [/adhd-screening](https://siya.health/adhd-screening) | Service Page | Top-of-funnel ADHD screening; lead to evaluation | Book Your ADHD Walkthrough → /redirec… | Questions? Start Secure Medical Chat … | Commercial / Transactional | What are you looking for help with? | 482 | 148 | 35 |
+| [/adhd-care](https://siya.health/adhd-care) | Service Page | Convert ADHD evaluation and treatment interest to booking | Take Free ADHD Screening → /adhd-scre… | View Pricing → /pricing | Commercial / Transactional | Adult ADHD Evaluation Online | 1728 | 147 | 55 |
+| [/adhd-diagnosis-austin](https://siya.health/adhd-diagnosis-austin) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free ADHD Intro Call → /redirect… | Local SEO / Commercial | ADHD Diagnosis in Austin, Texas (Online, $199) | 431 | 7 | 32 |
+| [/adhd-diagnosis-houston](https://siya.health/adhd-diagnosis-houston) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free ADHD Intro Call → /redirect… | Local SEO / Commercial | ADHD Diagnosis in Houston, Texas (Online, $199) | 421 | 7 | 32 |
+| [/adhd-diagnosis-pennsylvania](https://siya.health/adhd-diagnosis-pennsylvania) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free ADHD Intro Call → /redirect… | Local SEO / Commercial | Online ADHD Diagnosis in Pennsylvania ($199 Eva… | 443 | 8 | 33 |
+| [/adhd-diagnosis-philadelphia](https://siya.health/adhd-diagnosis-philadelphia) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free ADHD Intro Call → /redirect… | Local SEO / Commercial | ADHD Diagnosis in Philadelphia, Pennsylvania (O… | 431 | 7 | 33 |
+| [/adhd-diagnosis-texas](https://siya.health/adhd-diagnosis-texas) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free ADHD Intro Call → /redirect… | Local SEO / Commercial | Online ADHD Diagnosis in Texas ($199 Evaluation) | 438 | 9 | 33 |
+| [/adhd-screening](https://siya.health/adhd-screening) | Service Page | Top-of-funnel ADHD screening; lead to evaluation | Book Free ADHD Intro Call → /redirect… | Start $199 ADHD Evaluation → /redirec… | Commercial / Transactional | What are you looking for help with? | 488 | 148 | 36 |
 | [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Start Secure Medical Chat → /redirect… | — | Commercial / Transactional | Book Your Telehealth Visit — Same-Week | 103 | 1 | 27 |
-| [/creyos-adhd-testing](https://siya.health/creyos-adhd-testing) | Service Page | Creyos cognitive testing for ADHD as part of your $199 on… | Take Free ADHD Screening → /adhd-scre… | Book ADHD Walkthrough → /redirect/adh… | Commercial / Transactional | Creyos ADHD Testing (Included in Your Evaluation) | 456 | 7 | 35 |
+| [/creyos-adhd-testing](https://siya.health/creyos-adhd-testing) | Service Page | Creyos cognitive testing for ADHD as part of your $199 on… | Take Free ADHD Screening → /adhd-scre… | Book Free ADHD Intro Call → /redirect… | Commercial / Transactional | Creyos ADHD Testing (Included in Your Evaluation) | 460 | 7 | 35 |
 | [/labs](https://siya.health/labs) | Service Page | Laboratory orders and monitoring through Siya Health tele… | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Commercial / Transactional | Diagnostic Lab Services | 169 | 147 | 27 |
 | [/mens-health-longevity](https://siya.health/mens-health-longevity) | Service Page | Men's health / TRT / longevity service conversion | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Commercial / Transactional | Men's Health — Hormone, Performance, Longevity | 424 | 147 | 40 |
 | [/prescriptions](https://siya.health/prescriptions) | Service Page | Provider-reviewed prescriptions through Siya Health teleh… | Start Secure Medical Chat → /redirect… | — | Commercial / Transactional | Online Prescription Services | 135 | 0 | 27 |
 | [/primary-urgent-care](https://siya.health/primary-urgent-care) | Service Page | Virtual primary care and concierge visits with licensed p… | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Commercial / Transactional | Primary & Urgent Care — Virtual, Same-Week | 286 | 1 | 30 |
-| [/telehealth](https://siya.health/telehealth) | Service Page | Explain virtual care model; route to services | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Commercial / Transactional | Need a doctor without rearranging your entire day? | 883 | 148 | 42 |
-| [/weight-loss-metabolic-health](https://siya.health/weight-loss-metabolic-health) | Service Page | Convert GLP-1 / medical weight loss interest to consult | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Commercial / Transactional | When your appetite, energy, and weight stop mak… | 1418 | 147 | 41 |
+| [/telehealth](https://siya.health/telehealth) | Service Page | Explain virtual care model; route to services | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Commercial / Transactional | Need a doctor without rearranging your entire day? | 904 | 148 | 42 |
+| [/weight-loss-metabolic-health](https://siya.health/weight-loss-metabolic-health) | Service Page | Convert GLP-1 / medical weight loss interest to consult | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Commercial / Transactional | When your appetite, energy, and weight stop mak… | 1444 | 147 | 41 |
 
 ---
 
@@ -148,25 +148,25 @@ Generated: 2026-07-04
 | [/blog](https://siya.health/blog) | Blog Hub | Content discovery; distribute authority to articles | Start Secure Medical Chat → /redirect… | — | Informational / Navigational | Health Insights — Evidence-Based, Clinical | 1164 | 147 | 70 |
 | [/blog/adderall-for-adhd-how-it-works](https://siya.health/blog/adderall-for-adhd-how-it-works) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | — | Informational | Adderall for ADHD: How It Works (2026 Clinical … | 1671 | 5 | 34 |
 | [/blog/adhd](https://siya.health/blog/adhd) | Blog Hub | Content discovery; distribute authority to articles | — | — | Informational / Navigational | ADHD articles | 509 | 147 | 62 |
-| [/blog/adhd-evaluation-california-online-vs-in-person](https://siya.health/blog/adhd-evaluation-california-online-vs-in-person) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Evaluation in California: Online vs In-Per… | 531 | 12 | 34 |
+| [/blog/adhd-evaluation-california-online-vs-in-person](https://siya.health/blog/adhd-evaluation-california-online-vs-in-person) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Evaluation in California: Online vs In-Per… | 535 | 12 | 34 |
 | [/blog/adhd-evaluation-cost-texas](https://siya.health/blog/adhd-evaluation-cost-texas) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | — | Informational | ADHD Evaluation Cost in Texas: Full Breakdown (… | 662 | 5 | 34 |
 | [/blog/adhd-medication-daily-or-as-needed-adults](https://siya.health/blog/adhd-medication-daily-or-as-needed-adults) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | — | Informational | Do Adults Need ADHD Medication Every Day? | 589 | 7 | 36 |
-| [/blog/adhd-medication-online-california](https://siya.health/blog/adhd-medication-online-california) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | Can You Get ADHD Medication Online in Californi… | 553 | 8 | 34 |
-| [/blog/adhd-medication-options-california](https://siya.health/blog/adhd-medication-options-california) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Medication Options in California: What Exi… | 817 | 14 | 35 |
+| [/blog/adhd-medication-online-california](https://siya.health/blog/adhd-medication-online-california) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | Can You Get ADHD Medication Online in Californi… | 559 | 8 | 34 |
+| [/blog/adhd-medication-options-california](https://siya.health/blog/adhd-medication-options-california) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Medication Options in California: What Exi… | 823 | 14 | 35 |
 | [/blog/adhd-medication-options-for-adults](https://siya.health/blog/adhd-medication-options-for-adults) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | — | Informational | ADHD Medication Options for Adults: Where to Start | 1333 | 15 | 34 |
 | [/blog/adhd-medication-side-effects-what-to-expect](https://siya.health/blog/adhd-medication-side-effects-what-to-expect) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | — | Informational | ADHD Medication Side Effects: What to Expect (2… | 1276 | 7 | 35 |
 | [/blog/adhd-symptoms-overlooked](https://siya.health/blog/adhd-symptoms-overlooked) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | — | Informational | 7 Adult ADHD Signs Doctors Often Miss | 808 | 13 | 33 |
-| [/blog/adhd-telehealth-california](https://siya.health/blog/adhd-telehealth-california) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Telehealth in California: How Virtual Care… | 470 | 6 | 36 |
-| [/blog/adhd-testing-online-california-screening-vs-evaluation](https://siya.health/blog/adhd-testing-online-california-screening-vs-evaluation) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Testing Online in California: Screening vs… | 464 | 15 | 34 |
-| [/blog/adult-adhd-symptoms-california](https://siya.health/blog/adult-adhd-symptoms-california) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | Adult ADHD Symptoms in California: Patterns Wor… | 915 | 6 | 34 |
-| [/blog/adult-adhd-treatment-california-2026](https://siya.health/blog/adult-adhd-treatment-california-2026) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | Adult ADHD Treatment in California: What Your O… | 612 | 3 | 35 |
+| [/blog/adhd-telehealth-california](https://siya.health/blog/adhd-telehealth-california) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Telehealth in California: How Virtual Care… | 476 | 6 | 36 |
+| [/blog/adhd-testing-online-california-screening-vs-evaluation](https://siya.health/blog/adhd-testing-online-california-screening-vs-evaluation) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Testing Online in California: Screening vs… | 470 | 15 | 34 |
+| [/blog/adult-adhd-symptoms-california](https://siya.health/blog/adult-adhd-symptoms-california) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | Adult ADHD Symptoms in California: Patterns Wor… | 921 | 6 | 34 |
+| [/blog/adult-adhd-treatment-california-2026](https://siya.health/blog/adult-adhd-treatment-california-2026) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | Adult ADHD Treatment in California: What Your O… | 618 | 3 | 35 |
 | [/blog/compounded-vs-branded-glp1-medications](https://siya.health/blog/compounded-vs-branded-glp1-medications) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | — | Informational | Compounded vs Branded GLP-1 Medications: What P… | 1927 | 6 | 34 |
 | [/blog/food-noise-and-glp-1-what-it-means-and-what-helps](https://siya.health/blog/food-noise-and-glp-1-what-it-means-and-what-helps) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Explore Care Options → /weight-loss-m… | Informational | Food Noise and GLP-1: What It Means and What Ac… | 3339 | 18 | 38 |
 | [/blog/free-testosterone-vs-total-testosterone-what-patients-should-know](https://siya.health/blog/free-testosterone-vs-total-testosterone-what-patients-should-know) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Explore Care Options → /mens-health-l… | Informational | Free Testosterone vs Total Testosterone: What P… | 2528 | 15 | 39 |
 | [/blog/glp1-side-effects-and-how-to-manage-them](https://siya.health/blog/glp1-side-effects-and-how-to-manage-them) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | — | Informational | GLP-1 Side Effects and How to Manage Them (2026) | 1735 | 6 | 34 |
 | [/blog/how-adhd-medication-is-prescribed-online](https://siya.health/blog/how-adhd-medication-is-prescribed-online) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | — | Informational | How ADHD Medication Is Prescribed Online (2026) | 1253 | 9 | 34 |
 | [/blog/how-mental-health-affects-weight-loss-outcomes](https://siya.health/blog/how-mental-health-affects-weight-loss-outcomes) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | — | Informational | How Mental Health Affects Weight Loss Outcomes … | 1688 | 8 | 34 |
-| [/blog/how-to-choose-adhd-provider-california](https://siya.health/blog/how-to-choose-adhd-provider-california) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | How to Choose an ADHD Provider in California | 612 | 2 | 36 |
+| [/blog/how-to-choose-adhd-provider-california](https://siya.health/blog/how-to-choose-adhd-provider-california) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | How to Choose an ADHD Provider in California | 618 | 2 | 36 |
 | [/blog/how-to-know-if-you-have-adhd-adult](https://siya.health/blog/how-to-know-if-you-have-adhd-adult) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | — | Informational | How to Know If You Have ADHD as an Adult (Real … | 766 | 147 | 34 |
 | [/blog/how-to-safely-get-prescriptions-online](https://siya.health/blog/how-to-safely-get-prescriptions-online) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | — | Informational | How to Safely Get Prescriptions Online (2026) | 1627 | 12 | 34 |
 | [/blog/insomnia-treatment-options-beyond-medication](https://siya.health/blog/insomnia-treatment-options-beyond-medication) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | — | Informational | Insomnia Treatment Beyond Medication (2026) | 1699 | 4 | 34 |
@@ -177,7 +177,7 @@ Generated: 2026-07-04
 | [/blog/medical-weight-loss-vs-dieting-what-actually-works](https://siya.health/blog/medical-weight-loss-vs-dieting-what-actually-works) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | — | Informational | Medical Weight Loss vs Dieting: What Actually W… | 1700 | 7 | 33 |
 | [/blog/minoxidil-for-hair-loss-does-it-work](https://siya.health/blog/minoxidil-for-hair-loss-does-it-work) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | — | Informational | Minoxidil for Hair Loss: Does It Work? (2026) | 1842 | 7 | 35 |
 | [/blog/non-stimulant-adhd-medications-explained](https://siya.health/blog/non-stimulant-adhd-medications-explained) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | — | Informational | When Do Adults Use Non-Stimulant ADHD Medications? | 1250 | 6 | 34 |
-| [/blog/online-adhd-diagnosis-california](https://siya.health/blog/online-adhd-diagnosis-california) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | Online ADHD Diagnosis in California: Cost, Proc… | 846 | 18 | 36 |
+| [/blog/online-adhd-diagnosis-california](https://siya.health/blog/online-adhd-diagnosis-california) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | Online ADHD Diagnosis in California: Cost, Proc… | 852 | 18 | 36 |
 | [/blog/online-adhd-diagnosis-texas](https://siya.health/blog/online-adhd-diagnosis-texas) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | — | Informational | Online ADHD Diagnosis in Texas: Cost, Process &… | 827 | 14 | 37 |
 | [/blog/oral-vs-injectable-weight-loss-medications](https://siya.health/blog/oral-vs-injectable-weight-loss-medications) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | — | Informational | Oral vs Injectable Weight Loss Medications: Wha… | 1856 | 3 | 33 |
 | [/blog/oral-vs-topical-minoxidil-which-is-right](https://siya.health/blog/oral-vs-topical-minoxidil-which-is-right) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | — | Informational | Oral vs Topical Minoxidil: Which Is Right? (2026) | 1726 | 7 | 35 |
@@ -192,7 +192,7 @@ Generated: 2026-07-04
 | [/blog/weight-loss](https://siya.health/blog/weight-loss) | Blog Hub | Content discovery; distribute authority to articles | — | — | Informational / Navigational | Weight loss articles | 305 | 147 | 40 |
 | [/blog/when-is-testosterone-therapy-appropriate](https://siya.health/blog/when-is-testosterone-therapy-appropriate) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | — | Informational | When Is Testosterone Therapy Appropriate? (2026) | 1695 | 6 | 35 |
 | [/blog/why-am-i-always-tired-causes-when-to-see-doctor](https://siya.health/blog/why-am-i-always-tired-causes-when-to-see-doctor) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Explore Care Options → /telehealth | Informational | Why Am I Always Tired? Causes and When to See a… | 2715 | 17 | 38 |
-| [/blog/youre-not-lazy-signs-undiagnosed-adult-adhd](https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book ADHD Walkthrough → /redirect/adh… | Informational | You’re Not Lazy: Signs You May Have Undiagnosed… | 1139 | 5 | 36 |
+| [/blog/youre-not-lazy-signs-undiagnosed-adult-adhd](https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free ADHD Intro Call → /redirect… | Informational | You’re Not Lazy: Signs You May Have Undiagnosed… | 1141 | 5 | 36 |
 
 ---
 
@@ -200,24 +200,24 @@ Generated: 2026-07-04
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/adhd-diagnosis-austin](https://siya.health/adhd-diagnosis-austin) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book ADHD Walkthrough → /redirect/adh… | Local SEO / Commercial | ADHD Diagnosis in Austin, Texas (Online, $199) | 427 | 7 | 32 |
-| [/adhd-diagnosis-houston](https://siya.health/adhd-diagnosis-houston) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book ADHD Walkthrough → /redirect/adh… | Local SEO / Commercial | ADHD Diagnosis in Houston, Texas (Online, $199) | 417 | 7 | 32 |
-| [/adhd-diagnosis-pennsylvania](https://siya.health/adhd-diagnosis-pennsylvania) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book ADHD Walkthrough → /redirect/adh… | Local SEO / Commercial | Online ADHD Diagnosis in Pennsylvania ($199 Eva… | 439 | 8 | 33 |
-| [/adhd-diagnosis-philadelphia](https://siya.health/adhd-diagnosis-philadelphia) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book ADHD Walkthrough → /redirect/adh… | Local SEO / Commercial | ADHD Diagnosis in Philadelphia, Pennsylvania (O… | 427 | 7 | 33 |
-| [/adhd-diagnosis-texas](https://siya.health/adhd-diagnosis-texas) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book ADHD Walkthrough → /redirect/adh… | Local SEO / Commercial | Online ADHD Diagnosis in Texas ($199 Evaluation) | 434 | 9 | 33 |
-| [/blog/adhd-evaluation-california-online-vs-in-person](https://siya.health/blog/adhd-evaluation-california-online-vs-in-person) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Evaluation in California: Online vs In-Per… | 531 | 12 | 34 |
+| [/adhd-diagnosis-austin](https://siya.health/adhd-diagnosis-austin) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free ADHD Intro Call → /redirect… | Local SEO / Commercial | ADHD Diagnosis in Austin, Texas (Online, $199) | 431 | 7 | 32 |
+| [/adhd-diagnosis-houston](https://siya.health/adhd-diagnosis-houston) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free ADHD Intro Call → /redirect… | Local SEO / Commercial | ADHD Diagnosis in Houston, Texas (Online, $199) | 421 | 7 | 32 |
+| [/adhd-diagnosis-pennsylvania](https://siya.health/adhd-diagnosis-pennsylvania) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free ADHD Intro Call → /redirect… | Local SEO / Commercial | Online ADHD Diagnosis in Pennsylvania ($199 Eva… | 443 | 8 | 33 |
+| [/adhd-diagnosis-philadelphia](https://siya.health/adhd-diagnosis-philadelphia) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free ADHD Intro Call → /redirect… | Local SEO / Commercial | ADHD Diagnosis in Philadelphia, Pennsylvania (O… | 431 | 7 | 33 |
+| [/adhd-diagnosis-texas](https://siya.health/adhd-diagnosis-texas) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free ADHD Intro Call → /redirect… | Local SEO / Commercial | Online ADHD Diagnosis in Texas ($199 Evaluation) | 438 | 9 | 33 |
+| [/blog/adhd-evaluation-california-online-vs-in-person](https://siya.health/blog/adhd-evaluation-california-online-vs-in-person) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Evaluation in California: Online vs In-Per… | 535 | 12 | 34 |
 | [/blog/adhd-evaluation-cost-texas](https://siya.health/blog/adhd-evaluation-cost-texas) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | — | Informational | ADHD Evaluation Cost in Texas: Full Breakdown (… | 662 | 5 | 34 |
-| [/blog/adhd-medication-online-california](https://siya.health/blog/adhd-medication-online-california) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | Can You Get ADHD Medication Online in Californi… | 553 | 8 | 34 |
-| [/blog/adhd-medication-options-california](https://siya.health/blog/adhd-medication-options-california) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Medication Options in California: What Exi… | 817 | 14 | 35 |
-| [/blog/adhd-telehealth-california](https://siya.health/blog/adhd-telehealth-california) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Telehealth in California: How Virtual Care… | 470 | 6 | 36 |
-| [/blog/adhd-testing-online-california-screening-vs-evaluation](https://siya.health/blog/adhd-testing-online-california-screening-vs-evaluation) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Testing Online in California: Screening vs… | 464 | 15 | 34 |
-| [/blog/adult-adhd-symptoms-california](https://siya.health/blog/adult-adhd-symptoms-california) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | Adult ADHD Symptoms in California: Patterns Wor… | 915 | 6 | 34 |
-| [/blog/adult-adhd-treatment-california-2026](https://siya.health/blog/adult-adhd-treatment-california-2026) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | Adult ADHD Treatment in California: What Your O… | 612 | 3 | 35 |
-| [/blog/how-to-choose-adhd-provider-california](https://siya.health/blog/how-to-choose-adhd-provider-california) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | How to Choose an ADHD Provider in California | 612 | 2 | 36 |
+| [/blog/adhd-medication-online-california](https://siya.health/blog/adhd-medication-online-california) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | Can You Get ADHD Medication Online in Californi… | 559 | 8 | 34 |
+| [/blog/adhd-medication-options-california](https://siya.health/blog/adhd-medication-options-california) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Medication Options in California: What Exi… | 823 | 14 | 35 |
+| [/blog/adhd-telehealth-california](https://siya.health/blog/adhd-telehealth-california) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Telehealth in California: How Virtual Care… | 476 | 6 | 36 |
+| [/blog/adhd-testing-online-california-screening-vs-evaluation](https://siya.health/blog/adhd-testing-online-california-screening-vs-evaluation) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Testing Online in California: Screening vs… | 470 | 15 | 34 |
+| [/blog/adult-adhd-symptoms-california](https://siya.health/blog/adult-adhd-symptoms-california) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | Adult ADHD Symptoms in California: Patterns Wor… | 921 | 6 | 34 |
+| [/blog/adult-adhd-treatment-california-2026](https://siya.health/blog/adult-adhd-treatment-california-2026) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | Adult ADHD Treatment in California: What Your O… | 618 | 3 | 35 |
+| [/blog/how-to-choose-adhd-provider-california](https://siya.health/blog/how-to-choose-adhd-provider-california) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | How to Choose an ADHD Provider in California | 618 | 2 | 36 |
 | [/blog/medical-weight-loss-glp1-semaglutide-texas](https://siya.health/blog/medical-weight-loss-glp1-semaglutide-texas) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | — | Informational | Medical Weight Loss in Texas: GLP-1, Semaglutid… | 1117 | 12 | 34 |
-| [/blog/online-adhd-diagnosis-california](https://siya.health/blog/online-adhd-diagnosis-california) | Blog Article | Educational SEO; nurture toward clinical services | Book ADHD Walkthrough → /redirect/adh… | Take Free ADHD Screening → /adhd-scre… | Informational | Online ADHD Diagnosis in California: Cost, Proc… | 846 | 18 | 36 |
+| [/blog/online-adhd-diagnosis-california](https://siya.health/blog/online-adhd-diagnosis-california) | Blog Article | Educational SEO; nurture toward clinical services | Book Free ADHD Intro Call → /redirect… | Take Free ADHD Screening → /adhd-scre… | Informational | Online ADHD Diagnosis in California: Cost, Proc… | 852 | 18 | 36 |
 | [/blog/online-adhd-diagnosis-texas](https://siya.health/blog/online-adhd-diagnosis-texas) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | — | Informational | Online ADHD Diagnosis in Texas: Cost, Process &… | 827 | 14 | 37 |
-| [/creyos-adhd-testing](https://siya.health/creyos-adhd-testing) | Service Page | Creyos cognitive testing for ADHD as part of your $199 on… | Take Free ADHD Screening → /adhd-scre… | Book ADHD Walkthrough → /redirect/adh… | Commercial / Transactional | Creyos ADHD Testing (Included in Your Evaluation) | 456 | 7 | 35 |
+| [/creyos-adhd-testing](https://siya.health/creyos-adhd-testing) | Service Page | Creyos cognitive testing for ADHD as part of your $199 on… | Take Free ADHD Screening → /adhd-scre… | Book Free ADHD Intro Call → /redirect… | Commercial / Transactional | Creyos ADHD Testing (Included in Your Evaluation) | 460 | 7 | 35 |
 
 ---
 
@@ -225,7 +225,7 @@ Generated: 2026-07-04
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/adult-adhd-screening-california](https://siya.health/adult-adhd-screening-california) | Page | Free online ADHD screening for adults in California. Take… | Start Free 2-Minute ADHD Screening → … | — | Mixed | Think You Might Have ADHD? | 779 | 4 | 9 |
+| [/adult-adhd-screening-california](https://siya.health/adult-adhd-screening-california) | Page | Free online ADHD screening for adults in California. Take… | Start Free 2-Minute ADHD Screening → … | Book Free ADHD Intro Call → /redirect… | Mixed | Think You Might Have ADHD? | 854 | 4 | 9 |
 | [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Start Secure Medical Chat → /redirect… | — | Commercial / Transactional | Book Your Telehealth Visit — Same-Week | 103 | 1 | 27 |
 | [/labs](https://siya.health/labs) | Service Page | Laboratory orders and monitoring through Siya Health tele… | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Commercial / Transactional | Diagnostic Lab Services | 169 | 147 | 27 |
 | [/legal](https://siya.health/legal) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Legal & Compliance | 148 | 147 | 28 |
@@ -306,7 +306,7 @@ Generated: 2026-07-04
 - **Secondary CTA:** View Pricing → /pricing
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Adult ADHD Evaluation Online
-- **Word Count:** 1724
+- **Word Count:** 1728
 - **Internal Links In:** 147
 - **Internal Links Out:** 55
 - **Groups:** Core Revenue Pages
@@ -317,10 +317,10 @@ Generated: 2026-07-04
 - **Page Type:** Geo SEO Landing
 - **Primary Purpose:** Local/state ADHD intent capture; drive evaluation booking
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book ADHD Walkthrough → /redirect/adhd-walkthrough
+- **Secondary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Traffic Intent:** Local SEO / Commercial
 - **Target Keyword:** ADHD Diagnosis in Austin, Texas (Online, $199)
-- **Word Count:** 427
+- **Word Count:** 431
 - **Internal Links In:** 7
 - **Internal Links Out:** 32
 - **Groups:** Core Revenue Pages, SEO Pages
@@ -331,10 +331,10 @@ Generated: 2026-07-04
 - **Page Type:** Geo SEO Landing
 - **Primary Purpose:** Local/state ADHD intent capture; drive evaluation booking
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book ADHD Walkthrough → /redirect/adhd-walkthrough
+- **Secondary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Traffic Intent:** Local SEO / Commercial
 - **Target Keyword:** ADHD Diagnosis in Houston, Texas (Online, $199)
-- **Word Count:** 417
+- **Word Count:** 421
 - **Internal Links In:** 7
 - **Internal Links Out:** 32
 - **Groups:** Core Revenue Pages, SEO Pages
@@ -345,10 +345,10 @@ Generated: 2026-07-04
 - **Page Type:** Geo SEO Landing
 - **Primary Purpose:** Local/state ADHD intent capture; drive evaluation booking
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book ADHD Walkthrough → /redirect/adhd-walkthrough
+- **Secondary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Traffic Intent:** Local SEO / Commercial
 - **Target Keyword:** Online ADHD Diagnosis in Pennsylvania ($199 Evaluation)
-- **Word Count:** 439
+- **Word Count:** 443
 - **Internal Links In:** 8
 - **Internal Links Out:** 33
 - **Groups:** Core Revenue Pages, SEO Pages
@@ -359,10 +359,10 @@ Generated: 2026-07-04
 - **Page Type:** Geo SEO Landing
 - **Primary Purpose:** Local/state ADHD intent capture; drive evaluation booking
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book ADHD Walkthrough → /redirect/adhd-walkthrough
+- **Secondary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Traffic Intent:** Local SEO / Commercial
 - **Target Keyword:** ADHD Diagnosis in Philadelphia, Pennsylvania (Online, $199)
-- **Word Count:** 427
+- **Word Count:** 431
 - **Internal Links In:** 7
 - **Internal Links Out:** 33
 - **Groups:** Core Revenue Pages, SEO Pages
@@ -373,10 +373,10 @@ Generated: 2026-07-04
 - **Page Type:** Geo SEO Landing
 - **Primary Purpose:** Local/state ADHD intent capture; drive evaluation booking
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book ADHD Walkthrough → /redirect/adhd-walkthrough
+- **Secondary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Traffic Intent:** Local SEO / Commercial
 - **Target Keyword:** Online ADHD Diagnosis in Texas ($199 Evaluation)
-- **Word Count:** 434
+- **Word Count:** 438
 - **Internal Links In:** 9
 - **Internal Links Out:** 33
 - **Groups:** Core Revenue Pages, SEO Pages
@@ -386,13 +386,13 @@ Generated: 2026-07-04
 - **URL:** https://siya.health/adhd-screening
 - **Page Type:** Service Page
 - **Primary Purpose:** Top-of-funnel ADHD screening; lead to evaluation
-- **Primary CTA:** Book Your ADHD Walkthrough → /redirect/adhd-walkthrough
-- **Secondary CTA:** Questions? Start Secure Medical Chat → /redirect/chat
+- **Primary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
+- **Secondary CTA:** Start $199 ADHD Evaluation → /redirect/adhd-evaluation
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** What are you looking for help with?
-- **Word Count:** 482
+- **Word Count:** 488
 - **Internal Links In:** 148
-- **Internal Links Out:** 35
+- **Internal Links Out:** 36
 - **Groups:** Core Revenue Pages
 
 ### /adult-adhd-screening-california
@@ -401,10 +401,10 @@ Generated: 2026-07-04
 - **Page Type:** Page
 - **Primary Purpose:** Free online ADHD screening for adults in California. Take a 2-minute test with no sign-up, then explore virtual ADHD care with licensed physicians serving California.
 - **Primary CTA:** Start Free 2-Minute ADHD Screening → /adhd-screening
-- **Secondary CTA:** —
+- **Secondary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Think You Might Have ADHD?
-- **Word Count:** 779
+- **Word Count:** 854
 - **Internal Links In:** 4
 - **Internal Links Out:** 9
 - **Groups:** Utility Pages
@@ -1279,11 +1279,11 @@ Generated: 2026-07-04
 - **URL:** https://siya.health/blog/adhd-evaluation-california-online-vs-in-person
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book ADHD Walkthrough → /redirect/adhd-walkthrough
+- **Primary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD Evaluation in California: Online vs In-Person Options
-- **Word Count:** 531
+- **Word Count:** 535
 - **Internal Links In:** 12
 - **Internal Links Out:** 34
 - **Groups:** Educational Pages, SEO Pages
@@ -1321,11 +1321,11 @@ Generated: 2026-07-04
 - **URL:** https://siya.health/blog/adhd-medication-online-california
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book ADHD Walkthrough → /redirect/adhd-walkthrough
+- **Primary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can You Get ADHD Medication Online in California? What Patients Should Know
-- **Word Count:** 553
+- **Word Count:** 559
 - **Internal Links In:** 8
 - **Internal Links Out:** 34
 - **Groups:** Educational Pages, SEO Pages
@@ -1335,11 +1335,11 @@ Generated: 2026-07-04
 - **URL:** https://siya.health/blog/adhd-medication-options-california
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book ADHD Walkthrough → /redirect/adhd-walkthrough
+- **Primary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD Medication Options in California: What Exists (and What Is Decided Clinically)
-- **Word Count:** 817
+- **Word Count:** 823
 - **Internal Links In:** 14
 - **Internal Links Out:** 35
 - **Groups:** Educational Pages, SEO Pages
@@ -1391,11 +1391,11 @@ Generated: 2026-07-04
 - **URL:** https://siya.health/blog/adhd-telehealth-california
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book ADHD Walkthrough → /redirect/adhd-walkthrough
+- **Primary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD Telehealth in California: How Virtual Care Works
-- **Word Count:** 470
+- **Word Count:** 476
 - **Internal Links In:** 6
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages, SEO Pages
@@ -1405,11 +1405,11 @@ Generated: 2026-07-04
 - **URL:** https://siya.health/blog/adhd-testing-online-california-screening-vs-evaluation
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book ADHD Walkthrough → /redirect/adhd-walkthrough
+- **Primary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD Testing Online in California: Screening vs Full Evaluation
-- **Word Count:** 464
+- **Word Count:** 470
 - **Internal Links In:** 15
 - **Internal Links Out:** 34
 - **Groups:** Educational Pages, SEO Pages
@@ -1419,11 +1419,11 @@ Generated: 2026-07-04
 - **URL:** https://siya.health/blog/adult-adhd-symptoms-california
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book ADHD Walkthrough → /redirect/adhd-walkthrough
+- **Primary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** Adult ADHD Symptoms in California: Patterns Worth Taking Seriously
-- **Word Count:** 915
+- **Word Count:** 921
 - **Internal Links In:** 6
 - **Internal Links Out:** 34
 - **Groups:** Educational Pages, SEO Pages
@@ -1433,11 +1433,11 @@ Generated: 2026-07-04
 - **URL:** https://siya.health/blog/adult-adhd-treatment-california-2026
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book ADHD Walkthrough → /redirect/adhd-walkthrough
+- **Primary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** Adult ADHD Treatment in California: What Your Options Are in 2026
-- **Word Count:** 612
+- **Word Count:** 618
 - **Internal Links In:** 3
 - **Internal Links Out:** 35
 - **Groups:** Educational Pages, SEO Pages
@@ -1531,11 +1531,11 @@ Generated: 2026-07-04
 - **URL:** https://siya.health/blog/how-to-choose-adhd-provider-california
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book ADHD Walkthrough → /redirect/adhd-walkthrough
+- **Primary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** How to Choose an ADHD Provider in California
-- **Word Count:** 612
+- **Word Count:** 618
 - **Internal Links In:** 2
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages, SEO Pages
@@ -1685,11 +1685,11 @@ Generated: 2026-07-04
 - **URL:** https://siya.health/blog/online-adhd-diagnosis-california
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book ADHD Walkthrough → /redirect/adhd-walkthrough
+- **Primary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** Online ADHD Diagnosis in California: Cost, Process & What to Expect
-- **Word Count:** 846
+- **Word Count:** 852
 - **Internal Links In:** 18
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages, SEO Pages
@@ -1896,10 +1896,10 @@ Generated: 2026-07-04
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book ADHD Walkthrough → /redirect/adhd-walkthrough
+- **Secondary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Traffic Intent:** Informational
 - **Target Keyword:** You’re Not Lazy: Signs You May Have Undiagnosed Adult ADHD
-- **Word Count:** 1139
+- **Word Count:** 1141
 - **Internal Links In:** 5
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
@@ -1924,10 +1924,10 @@ Generated: 2026-07-04
 - **Page Type:** Service Page
 - **Primary Purpose:** Creyos cognitive testing for ADHD as part of your $199 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL.
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book ADHD Walkthrough → /redirect/adhd-walkthrough
+- **Secondary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Creyos ADHD Testing (Included in Your Evaluation)
-- **Word Count:** 456
+- **Word Count:** 460
 - **Internal Links In:** 7
 - **Internal Links Out:** 35
 - **Groups:** Core Revenue Pages, SEO Pages
@@ -2207,7 +2207,7 @@ Generated: 2026-07-04
 - **Secondary CTA:** View Pricing → /pricing
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Need a doctor without rearranging your entire day?
-- **Word Count:** 883
+- **Word Count:** 904
 - **Internal Links In:** 148
 - **Internal Links Out:** 42
 - **Groups:** Core Revenue Pages
@@ -2221,7 +2221,7 @@ Generated: 2026-07-04
 - **Secondary CTA:** View Pricing → /pricing
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** When your appetite, energy, and weight stop making sense
-- **Word Count:** 1418
+- **Word Count:** 1444
 - **Internal Links In:** 147
 - **Internal Links Out:** 41
 - **Groups:** Core Revenue Pages

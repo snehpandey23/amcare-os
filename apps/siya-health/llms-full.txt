@@ -793,9 +793,9 @@ Total pages: 152
   Summary: Learn more about Starting Your ADHD Evaluation with Siya Health telehealth.
   Topics: adhd
 
-- Booking Your ADHD Walkthrough
+- Booking Your Free ADHD Intro Call
   URL: https://siya.health/redirect/adhd-walkthrough
-  Summary: Learn more about Booking Your ADHD Walkthrough with Siya Health telehealth.
+  Summary: Learn more about Booking Your Free ADHD Intro Call with Siya Health telehealth.
   Topics: adhd
 
 - Connecting to Secure Medical Chat

@@ -18,7 +18,8 @@ The goal is to confirm that users can move through the website without broken li
 | Homepage                     | Mobile layout checked                         | Hero, CTAs, navigation, and footer display correctly         | TBD    |       |       |
 | Homepage                     | Desktop layout checked                        | Main sections and CTAs display correctly                     | TBD    |       |       |
 | ADHD page                    | Take Free ADHD Screening works                | Opens ADHD screening flow                                    | TBD    |       |       |
-| ADHD page                    | Book Free ADHD Consultation / approved evaluation CTA works | Opens correct consultation, booking, or approved evaluation flow | TBD    |       |       |
+| ADHD page                    | Book Free ADHD Intro Call opens correct booking link | Opens the approved ADHD intro-call booking (CarePatron via `/redirect/adhd-walkthrough`), NOT Spruce | TBD    |       |       |
+| ADHD page                    | Intro call disclaimer visible near CTA        | Disclaimer states the intro call is a free process call, not a medical visit or diagnosis | TBD    |       |       |
 | ADHD page                    | Pricing link works                            | Opens pricing page                                           | TBD    |       |       |
 | ADHD page                    | Screening disclaimer visible                  | Disclaimer clearly states screening is not a diagnosis       | TBD    |       |       |
 | ADHD page                    | Medication disclaimer visible where relevant  | Page does not imply medication is guaranteed                 | TBD    |       |       |
@@ -26,7 +27,7 @@ The goal is to confirm that users can move through the website without broken li
 | ADHD screening/results flow  | Screening starts                              | User can begin screening                                     | TBD    |       |       |
 | ADHD screening/results flow  | Screening completes                           | User can complete screening without errors                   | TBD    |       |       |
 | ADHD screening/results flow  | Results next step appears                     | User sees clear next action                                  | TBD    |       |       |
-| ADHD screening/results flow  | Consultation / evaluation CTA works           | CTA opens correct next step                                  | TBD    |       |       |
+| ADHD screening/results flow  | Results next-step CTAs work                   | Book Free ADHD Intro Call (primary) + Start $199 ADHD Evaluation (secondary) open the correct next step | TBD    |       |       |
 | Weight loss / metabolic page | Start Secure Medical Chat works               | Opens secure chat / correct redirect                         | TBD    |       |       |
 | Weight loss / metabolic page | View Pricing works                            | Opens pricing page                                           | TBD    |       |       |
 | Weight loss / metabolic page | State availability language checked           | Availability is accurate and not overclaimed                 | TBD    |       |       |
