@@ -1,6 +1,6 @@
 # Content architecture report
 
-Generated: 2026-07-04T07:01:48.241Z
+Generated: 2026-07-04T10:54:31.241Z
 
 ## Summary
 
