@@ -22,8 +22,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
 
 const BASE = 'https://siya.health';
-const GA4_ID = process.env.SIYA_GA4_MEASUREMENT_ID || 'G-9WTQWHCTFT';
-const AW_ID = 'AW-17553537456';
 const DEFAULT_OG_IMAGE = `${BASE}/assets/images/siya-health-logo.png`;
 /** Strip placeholder and only emit real verification when CI sets this */
 const GOOGLE_SITE_VERIFICATION = (process.env.SIYA_GOOGLE_SITE_VERIFICATION || process.env.GOOGLE_SITE_VERIFICATION || '').trim();
@@ -49,14 +47,10 @@ const REDIRECT_SHELLS = {
 /** External redirect shells + dev surfaces — never in sitemap */
 const SITEMAP_EXCLUDE = new Set(['visual-components.html', 'siya-circle.html', ...Object.keys(REDIRECT_SHELLS)]);
 
-const GTAG_BLOCK = `<script async src="https://www.googletagmanager.com/gtag/js?id=${GA4_ID}"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', '${GA4_ID}');
-  gtag('config', '${AW_ID}');
-</script>`;
+/** @deprecated Raw gtag removed — GA4/Ads are managed inside GTM via injectGtmAndTracking() */
+function normalizeGtag(html) {
+  return html;
+}
 
 function walkHtmlFiles(dir, baseRel = '') {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -176,14 +170,6 @@ function ensureRedirectShellPages(html, relPath) {
     html = html.replace(/(<meta\s+name="viewport"[^>]*\/?>)/i, `$1\n    <link rel="canonical" href="${canonicalDest}" />`);
   }
   return html;
-}
-
-function normalizeGtag(html) {
-  const re = /<script async src="https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=[^"]+"><\/script>\s*(?:<!--[^>]*-->\s*)?<script>[\s\S]*?<\/script>/gi;
-  if (!html.includes('googletagmanager.com/gtag/js')) return html;
-  let h = html.replace(re, GTAG_BLOCK);
-  h = h.replace(/\s*<!--\s*Google Analytics 4[^>]*-->\s*/gi, '\n');
-  return h;
 }
 
 function ensureGSC(html) {

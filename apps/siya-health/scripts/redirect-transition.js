@@ -19,13 +19,7 @@
     if (!dest.searchParams.has(key)) dest.searchParams.set(key, value);
   });
 
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: config.analyticsEvent || 'siya_redirect_transition',
-    redirect_type: config.type,
-    redirect_destination: config.destination,
-    page_path: window.location.pathname,
-  });
+  /* Page-view conversion events are fired by siya-tracking.js (adhd_walkthrough_redirect_view, etc.) */
 
   var link = document.getElementById('siya-redirect-fallback');
   if (link) link.href = dest.toString();

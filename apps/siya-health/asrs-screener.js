@@ -98,6 +98,16 @@
         messageEl.innerHTML = '<p><strong>Your responses don\'t strongly suggest ADHD,</strong> but if you still have concerns about focus, organization, or other symptoms, a free ADHD screening or secure medical chat can help. A licensed provider can answer your questions.</p>';
       }
     }
+
+    if (window.siyaTrack) {
+      window.siyaTrack('screening_complete', {
+        funnel: 'adhd_california',
+        page_path: window.location.pathname,
+        page_location: window.location.href,
+        conversion_type: 'screening_complete',
+        asrs_score: score,
+      });
+    }
   }
 
   function goNext() {

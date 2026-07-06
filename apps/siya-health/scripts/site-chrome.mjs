@@ -36,6 +36,7 @@ import {
   stateChipLabel,
 } from '../data/providers.mjs';
 import { SPRUCE_CHAT_URL, ADHD_WALKTHROUGH_LINK, ADHD_EVALUATION_199_LINK, REDIRECT_CHAT_URL, REDIRECT_ADHD_WALKTHROUGH_URL, REDIRECT_ADHD_EVALUATION_URL } from '../data/providers-core.mjs';
+import { TRACKING } from '../data/tracking-config.mjs';
 import { getServiceTagline } from '../data/provider-canonical.mjs';
 import {
   SIYA_CIRCLE_GHL_FORM_URL,
@@ -948,15 +949,103 @@ export function injectFooterGuideHubs(html) {
   return html;
 }
 
-/** Google Consent Mode bootstrap — must run before GTM/gtag */
+/** Google Consent Mode bootstrap — must run synchronously before GTM on every public page */
 export function injectCookieConsentBootstrap(html) {
-  if (!html.includes('googletagmanager.com') && !html.includes('GTM-PLBD4TTQ')) return html;
   const tag = '<script src="/scripts/cookie-consent-bootstrap.js"></script>';
   html = html.replace(/\s*<script src="\/scripts\/cookie-consent-bootstrap\.js"><\/script>\s*/gi, '\n');
   if (html.includes(tag)) return html;
   if (/<head[^>]*>/i.test(html)) {
     return html.replace(/(<head[^>]*>)/i, `$1\n    ${tag}`);
   }
+  return html;
+}
+
+const GTM_ID = TRACKING.GTM_CONTAINER_ID;
+
+const GTM_HEAD_SNIPPET = `<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_ID}');</script>
+<!-- End Google Tag Manager -->`;
+
+const GTM_NOSCRIPT_SNIPPET = `<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}"
+height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->`;
+
+const SIYA_TRACKING_BLOCK = `<!-- SIYA:TRACKING -->
+    <script src="/scripts/siya-tracking.js" defer></script>
+    <!-- /SIYA:TRACKING -->`;
+
+/** Remove duplicate GTM head / noscript blocks before canonical re-injection */
+export function stripExistingGtm(html) {
+  html = html.replace(
+    /<!--\s*Google Tag Manager\s*-->[\s\S]*?<!--\s*End Google Tag Manager\s*-->\s*/gi,
+    '',
+  );
+  html = html.replace(
+    /<!--\s*Google Tag Manager \(noscript\)\s*-->[\s\S]*?<!--\s*End Google Tag Manager \(noscript\)\s*-->\s*/gi,
+    '',
+  );
+  html = html.replace(
+    /<script>\s*\(function\(w,d,s,l,i\)\{[\s\S]*?googletagmanager\.com\/gtm\.js[\s\S]*?<\/script>\s*/gi,
+    '',
+  );
+  html = html.replace(
+    /<noscript>\s*<iframe[^>]*googletagmanager\.com\/ns\.html[^>]*>\s*<\/iframe>\s*<\/noscript>\s*/gi,
+    '',
+  );
+  return html;
+}
+
+/** Remove raw gtag / GA4 / Google Ads direct installs — GTM manages these tags */
+export function stripExistingGtag(html) {
+  html = html.replace(
+    /<script async src="https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=[^"]+"><\/script>\s*/gi,
+    '',
+  );
+  html = html.replace(
+    /<script>\s*window\.dataLayer\s*=\s*window\.dataLayer[\s\S]*?gtag\('config',\s*'AW-[^']+'\);[\s\S]*?<\/script>\s*/gi,
+    '',
+  );
+  html = html.replace(/\s*<!--\s*Google Analytics 4[^>]*-->\s*/gi, '\n');
+  return html;
+}
+
+/** Install GTM + sitewide dataLayer tracking on every public HTML page */
+export function injectGtmAndTracking(html) {
+  html = stripExistingGtm(html);
+  html = stripExistingGtag(html);
+
+  if (!html.includes(`gtm.js?id=${GTM_ID}`)) {
+    if (html.includes('cookie-consent-bootstrap.js')) {
+      html = html.replace(
+        /(<script src="\/scripts\/cookie-consent-bootstrap\.js"><\/script>)/i,
+        `$1\n${GTM_HEAD_SNIPPET}`,
+      );
+    } else if (/<head[^>]*>/i.test(html)) {
+      html = html.replace(/(<head[^>]*>)/i, `$1\n    ${GTM_HEAD_SNIPPET}`);
+    }
+  }
+
+  if (!html.includes(`googletagmanager.com/ns.html?id=${GTM_ID}`)) {
+    if (/<body[^>]*>/i.test(html)) {
+      html = html.replace(/(<body[^>]*>)/i, `$1\n    ${GTM_NOSCRIPT_SNIPPET}\n`);
+    }
+  }
+
+  if (!html.includes('siya-tracking.js')) {
+    if (html.includes('<!-- /SIYA:COOKIE-NOTICE -->')) {
+      html = html.replace('<!-- /SIYA:COOKIE-NOTICE -->', `${SIYA_TRACKING_BLOCK}\n<!-- /SIYA:COOKIE-NOTICE -->`);
+    } else if (html.includes('<!-- /SIYA:HEADER-SCROLL -->')) {
+      html = html.replace('<!-- /SIYA:HEADER-SCROLL -->', `${SIYA_TRACKING_BLOCK}\n<!-- /SIYA:HEADER-SCROLL -->`);
+    } else {
+      html = html.replace(/<\/body>/i, `${SIYA_TRACKING_BLOCK}\n</body>`);
+    }
+  }
+
   return html;
 }
 
@@ -1682,14 +1771,14 @@ export function applySiteChrome(html, relPath, title = '') {
   html = injectCookieConsentBootstrap(html);
   if (isRedirectTransitionPage(relPath)) {
     html = injectCookieNotice(html, relPath);
-    return html;
+    return injectGtmAndTracking(html);
   }
   if (isLegalContentPage(relPath)) {
     html = injectSeoFooterArchitecture(html, relPath);
     html = normalizeLegalLinks(html);
     html = normalizeConsultationCtaRouting(html, relPath);
     html = normalizeConversionRedirectUrls(html);
-    return html;
+    return injectGtmAndTracking(html);
   }
 
   if (isAdsLandingPage(relPath, html)) {
@@ -1703,7 +1792,7 @@ export function applySiteChrome(html, relPath, title = '') {
     html = normalizeConsultationCtaRouting(html, relPath);
     html = normalizeWalkthroughCtaLabels(html);
     html = normalizeConversionRedirectUrls(html);
-    return html;
+    return injectGtmAndTracking(html);
   }
 
   html = injectNavCta(html, relPath);
@@ -1738,5 +1827,5 @@ export function applySiteChrome(html, relPath, title = '') {
   html = normalizeWalkthroughCtaLabels(html);
   html = normalizeConversionRedirectUrls(html);
   html = normalizeCtaHierarchy(html, relPath);
-  return html;
+  return injectGtmAndTracking(html);
 }

@@ -1,6 +1,6 @@
 # Siya Health — Complete Website Inventory
 
-Generated: 2026-07-04
+Generated: 2026-07-06
 
 | Metric | Count |
 |--------|------:|
@@ -225,7 +225,7 @@ Generated: 2026-07-04
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/adult-adhd-screening-california](https://siya.health/adult-adhd-screening-california) | Page | Free online ADHD screening for adults in California. Take… | Start Free 2-Minute ADHD Screening → … | Book Free ADHD Intro Call → /redirect… | Mixed | Think You Might Have ADHD? | 854 | 4 | 9 |
+| [/adult-adhd-screening-california](https://siya.health/adult-adhd-screening-california) | Page | Free online ADHD screening for adults in California. Take… | Start Free 2-Minute ADHD Screening → … | Book Free ADHD Intro Call → /redirect… | Mixed | Think You Might Have ADHD? | 855 | 4 | 9 |
 | [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Start Secure Medical Chat → /redirect… | — | Commercial / Transactional | Book Your Telehealth Visit — Same-Week | 103 | 1 | 27 |
 | [/labs](https://siya.health/labs) | Service Page | Laboratory orders and monitoring through Siya Health tele… | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Commercial / Transactional | Diagnostic Lab Services | 169 | 147 | 27 |
 | [/legal](https://siya.health/legal) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Legal & Compliance | 148 | 147 | 28 |
@@ -404,7 +404,7 @@ Generated: 2026-07-04
 - **Secondary CTA:** Book Free ADHD Intro Call → /redirect/adhd-walkthrough
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Think You Might Have ADHD?
-- **Word Count:** 854
+- **Word Count:** 855
 - **Internal Links In:** 4
 - **Internal Links Out:** 9
 - **Groups:** Utility Pages

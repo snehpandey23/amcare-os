@@ -1,6 +1,6 @@
 # Blog internal linking report
 
-Generated: 2026-07-04T15:03:50.803Z
+Generated: 2026-07-06T11:42:58.409Z
 
 ## Summary
 

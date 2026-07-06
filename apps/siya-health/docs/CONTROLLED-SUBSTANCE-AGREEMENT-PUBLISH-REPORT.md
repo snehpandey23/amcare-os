@@ -1,6 +1,6 @@
 # Controlled Substance Treatment Agreement — Publish Report
 
-Generated: 2026-07-04T15:03:54.133Z
+Generated: 2026-07-06T11:43:01.684Z
 
 ## Published document
 
