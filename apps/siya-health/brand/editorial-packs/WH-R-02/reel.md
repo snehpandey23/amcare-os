@@ -1,6 +1,7 @@
 # 30-second Reel — WH-R-02
 
-**Status:** READY TO FILM  
+**Status:** READY TO POST (slideshow Reel generated)  
+**File:** `video/WH-R-02-reel.mp4` · Desktop: `Siya-WH-R-02-READY/WH-R-02-reel.mp4`  
 **Account:** Company IG / optional founder face-to-camera  
 **End card CTA:** Company only — “Women’s Midlife Health · link in bio”
 
