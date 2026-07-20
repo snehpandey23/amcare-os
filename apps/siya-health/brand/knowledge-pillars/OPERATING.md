@@ -10,56 +10,49 @@ Filter rule: AI strategy pastes are drafts. We keep leverage; we defer theater.
 ```text
 Knowledge Product   →  /womens-midlife-health
 Knowledge Articles  →  /blog/* spokes (rename URLs later, not now)
-Marketing Assets    →  social / newsletter / video (after hub is live)
+Creative Registry   →  Insight IDs (WH-R-02, …)
+Editorial Packs     →  distribute insight (not “weeks”)
 ```
 
-Moat we claim carefully: **systems medicine explained simply** — why fog, sleep, iron, hormones, mood, weight, and ADHD can travel together. Not “telemedicine,” not “we invent evidence.”
+Moat: **systems medicine explained simply.**
 
-## Tier-1 products (roadmap only — do not build yet)
+**Editorial desk, not campaign calendar.** Insights resurface; weeks don’t.
 
-1. Women’s Midlife Health ✅ hub drafted  
-2. Men’s Performance & Hormonal Health  
-3. Brain Health & ADHD  
-4. Metabolic Health  
-5. Sleep & Recovery  
-6. Preventive Primary Care  
+## Tier-1 products (cap at six)
 
-**Cap: these six.** No seventh until the first is live + measured.
+1. Women’s Midlife Health ✅ hub + 2 spokes pushed  
+2–6. Roadmap only until Product 1 measured  
 
 ## This sprint only
 
-1. Clinical review of 2 spokes (you)  
-2. Merge hub + spokes → main → deploy  
-3. Week 1 recognition: Perimenopause & Brain Fog → hub → spoke → Meet & Greet  
-4. Measure: hub→spoke clicks, not vanity post count  
+1. Formal clinical stamp when ready (disclaimer already live)  
+2. Confirm prod deploy of hub + spokes  
+3. Publish **Insight WH-R-02** via `EDITORIAL-PACK-WH-R-02.md`  
+   - Founder LI Draft A — **no CTA ever**  
+   - Company/social → hub → peri spoke → soft care path  
+4. Measure hub→spoke→care — not vanity weeks  
 
 ## Explicitly deferred
 
 | Idea | Why defer |
 |------|-----------|
-| Migrate `/blog/` → `/knowledge/` | Phase 2 SEO migration; don’t block deploy |
-| Sitewide “Knowledge Center” nav redesign | After Product 1 is live |
-| Separate “How everything connects” URL | Hub already has interaction section; enough for v1 |
-| Interactive checkbox care widget | Static pathway list is enough now |
-| Master 10-step mega-prompt as daily ops | Save slim version; run only when updating a product |
-| Next 5 hubs | Forbidden until Women’s Midlife is deployed + one campaign cycle |
+| `/blog/` → `/knowledge/` | Phase 2 |
+| Knowledge Center nav | After Product 1 live |
+| Separate “connects” URL | Hub section enough |
+| Products 2–6 | After one editorial cycle |
 
-## Slim production prompt (use after hub is live)
+## Pin
+
+- `EDITORIAL-TEST.md`  
+- `CREATIVE-DIRECTOR.md`  
+- Founder LinkedIn: never sells  
+
+## Slim prompt (post-deploy)
 
 ```text
-Publishing from Knowledge Product: Women's Midlife Health
-Canonical: /womens-midlife-health
-
-Choose the highest-priority unpublished insight from the registry.
-Generate campaign pack: LinkedIn (company + founder), IG carousel, Facebook, X, Pinterest, newsletter blurb, 30s Reel talking points.
-Every asset links: Product → relevant spoke → Meet & Greet or Screening by funnel.
-Flag medical claims for physician review. No DIY dosing. No HRT-as-ADHD. No overclaim.
-Do not invent evidence. Prefer recognition before education before CTA.
+Publishing Insight from Women's Midlife Health.
+Use Editorial Pack format (Insight ID, not Week).
+Founder LinkedIn: Draft A voice, zero CTA.
+Company/social may link Product → Spoke → Meet & Greet.
+Pass Editorial Test. No DIY dosing / HRT-as-ADHD / overclaim.
 ```
-
-## Files in elo (not yet on main)
-
-- `womens-midlife-health.html`
-- `blog/perimenopause-brain-fog.html`
-- `blog/adhd-hormones-women.html`
-- `brand/knowledge-pillars/womens-midlife-health/`
