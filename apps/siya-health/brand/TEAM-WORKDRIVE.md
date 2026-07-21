@@ -25,3 +25,7 @@ Statuses: Idea → Draft → In design → Ready → Scheduled → Published
 ## Rule
 
 Company/social rows need a **practical change**. Founder LinkedIn may be N/A (no CTA).
+
+## Standing ops (locked 2026-07-21)
+
+**Every future team deliverable** (carousels, statics, reels, banners, copy packs, brand rules) must be written into this Common Folder and logged in `04-Content-Tracker`. Desktop/git copies are optional extras — Common Folder is what the team uses.

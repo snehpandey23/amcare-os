@@ -46,6 +46,7 @@ Moat: **systems medicine explained simply.**
 - `EDITORIAL-TEST.md`  
 - `CREATIVE-DIRECTOR.md`  
 - `INSTAGRAM-STATIC.md`  
+- `TEAM-WORKDRIVE.md` — **sync all team deliverables to Zoho Common Folder → Siya Knowledge Editorial**  
 - Founder LinkedIn: never sells  
 - Company/social: useful + ≥1 evidence-based practical change  
 
