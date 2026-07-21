@@ -1,30 +1,9 @@
-# PAUSE AT 10 — feedback loop (locked 2026-07-21)
+# PAUSE AT 10 — feedback loop
 
-## Bank (10 ready carousels)
+## Image-ready (post these) — also in `00-READY-TO-POST-IMAGES/`
+WH-R-02 · MH-L-01 · AD-I-01 · AD-S-01 · AD-W-01 · WL-G-01 · WL-S-01 · PC-T-01 · MH-T-01 · SL-I-01
 
-Already shipped earlier:
-1. WH-R-02 — Midlife coping / women
-2. MH-L-01 — TRT fundamentals
-3. AD-I-01 — ADHD × iron
+## Copy-only (NO images — do not post)
+AD-L-01 · AD-M-01 · AD-O-01 · ED-S-01 · HL-M-01 · PC-S-01 · PE-G-01 · SL-A-01 · WL-C-01 · WL-D-01 · WL-F-01 · WL-P-01 · WL-T-01
 
-New in this wave:
-4. AD-S-01 — You’re not lazy
-5. AD-W-01 — ADHD in women / missed labels
-6. WL-G-01 — Semaglutide how it works
-7. WL-S-01 — GLP-1 side effects
-8. PC-T-01 — Telehealth prescriptions
-9. MH-T-01 — When TRT is appropriate
-10. SL-I-01 — Insomnia beyond medication
-
-Mix ≈ 30% ADHD (3) / 70% other (7). Batch-20 remainder ON HOLD.
-
-## Do not generate more posts until
-
-1. **Human observation feedback** (Alpana + team): attractiveness, photo, font, placement, caption clarity — write notes into `06-Statics/_design-lab/FEEDBACK.md` or tracker Notes.
-2. **Platform performance** after posting: saves, shares, profile visits, link taps, watch-through (Reels), comments quality — log in tracker columns / a Performance sheet.
-3. Apply learnings → update INSTAGRAM-STATIC + design-lab template → then resume batch.
-
-## Distribution next
-
-Post these 10 across IG/FB/LinkedIn/X/Pinterest using each pack’s `ready-to-post/captions/`.
-Mark Published date in Siya-Content-Tracker.xlsx.
+Batch remainder stays copy-only until feedback + performance loop completes.
