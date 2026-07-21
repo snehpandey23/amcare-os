@@ -60,3 +60,10 @@ Company/social: Recognition → useful explanation → ≥1 practical change
 (evidence-based / guideline-aligned; no DIY dosing / HRT-as-ADHD / overclaim).
 Link Product → Spoke → Meet & Greet. Pass Editorial Test.
 ```
+
+## Content production pause (2026-07-21)
+
+**Bank of 10 carousels ready.** Do not batch more until:
+1. Team visual/caption feedback written to WorkDrive `06-Statics/_design-lab/FEEDBACK.md`
+2. Posts distributed + performance logged (saves/shares/link taps)
+3. Template updated from learnings — then resume Batch-20 remainder
