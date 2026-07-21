@@ -15,11 +15,14 @@ Prototype: Perfect ONE slide before regenerating full carousels
 ## Rules (non-negotiable)
 
 ### Logo
-- **Submerged**, not stamped.
+- **Submerged**, not stamped — present but not loud.
 - No white box, no rounded plate, no opaque badge.
-- Place as a soft watermark (low opacity) in a quiet corner or faintly in the background texture.
+- Brand must be **recognizable**, not invisible. Target: noticeable at a glance, never competing with headline.
+- **Sizing (locked from prototype feedback 2026-07-21):**
+  - Corner wordmark ≈ **80–90px** tall on 1080×1350 (~2× early prototype)
+  - Ambient mark watermark ≈ **400–450px** tall at low opacity in a quiet field
+  - Opacity: wordmark ~30–35%; ambient mark ~10–14%
 - Headline and body text must remain fully readable **on top of** any logo presence.
-- Prefer logo mark alone (icon) at ~12–18% opacity if full wordmark competes; full wordmark only when space is calm.
 
 ### Footer (every slide)
 One quiet footnote line only — same treatment on every slide:
