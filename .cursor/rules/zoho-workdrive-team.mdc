@@ -29,3 +29,10 @@ Whenever creating or updating **team-facing** Siya Health materials (editorial p
 4. Git remains source of truth for **code**; WorkDrive for **editorial deliverables**.
 
 Do not sync secrets, `.env`, or the full `amcare-os` monorepo into WorkDrive.
+
+## Captions (required with every visual pack)
+
+Ship platform-specific caption docs **alongside images**:
+`05-Carousels/[ID]/captions/` and `ready-to-post/captions/`
+Include: Instagram, Facebook, LinkedIn Company, LinkedIn Founder (no CTA), X/Twitter, Pinterest.
+Also include `ALL-PLATFORMS.md` (or equivalent) for one-file copy-paste.

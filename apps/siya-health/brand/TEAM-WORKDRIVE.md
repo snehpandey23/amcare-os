@@ -13,7 +13,8 @@ Zoho WorkDrive → Common Folder → Siya Knowledge Editorial
 | `03-START-HERE` | How to use this space |
 | `00-Brand-System` | Editorial Test, IG static rules, Creative Director |
 | `04-Content-Tracker` | **`Siya-Content-Tracker.xlsx`** — log every post/asset |
-| `05-Carousels` | Multi-slide IG carousels by Insight ID (`WH-R-02`, …) |
+| `05-Carousels` | Multi-slide IG carousels by Insight ID (`WH-R-02`, `MH-L-01`, …) |
+| … `/captions/` | Platform posts: IG, FB, LinkedIn, X, Pinterest (alongside images) |
 | `06-Statics` | Single images (LinkedIn banners, one-off IG, ads) |
 
 ## Tracker columns (Posts sheet)
