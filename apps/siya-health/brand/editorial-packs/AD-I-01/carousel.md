@@ -1,76 +1,84 @@
-# Instagram Carousel — AD-I-01
+# Instagram Carousel — AD-I-01 (v2)
 
-**Insight:** ADHD and low iron can look alike — and stack  
-**Product:** Brain Health & ADHD · overlaps Women’s Midlife (heavy periods → iron)  
-**Spokes:** https://siya.health/blog/perimenopause-brain-fog · ADHD care pathways  
-**Format:** 4:5 · 6 slides · `INSTAGRAM-STATIC.md`  
-**Practical change:** Ask your clinician for **ferritin / iron studies** (not hemoglobin alone) before blaming “just ADHD” or self-supplementing iron.
-
----
-
-## Slide 1 — Hook
-**Copy:**
-ADHD fog…
-or low iron?
-
-**Support:**
-They can look alike — and they can stack.
+**Insight:** Women / ADHD care — low iron may be the missing piece  
+**Audience:** Women with ADHD symptoms or on ADHD treatment; heavy periods  
+**Spokes:** https://siya.health/blog/perimenopause-brain-fog · https://siya.health/adhd-care  
+**Voice:** Company only (no founder LinkedIn)  
+**Practical change:** Ask for **ferritin / iron studies** — not hemoglobin alone — especially if fog/fatigue persist.
 
 ---
 
-## Slide 2 — Recognition
+## Slide 1 — Hook (women × ADHD)
 **Copy:**
-Same week, different labels.
+Still foggy on ADHD treatment?
 
 **Support:**
-Brain fog · fatigue · restless legs ·  
-heavy periods · “my meds feel weaker”
+Women: low iron may be  
+what you’re missing.
 
 ---
 
-## Slide 3 — Explanation
+## Slide 2 — Curiosity
 **Copy:**
-Iron isn’t only about anemia.
+This isn’t “just anemia.”
 
 **Support:**
-Ferritin can be low while hemoglobin  
-still looks “fine” on a basic CBC.
+Iron status affects more than blood counts —  
+it matters for brain function too.
 
 ---
 
-## Slide 4 — Systems
+## Slide 3 — Mechanism (educational)
 **Copy:**
-Attention chemistry needs iron.
+Iron helps attention chemistry.
 
 **Support:**
-Iron helps pathways involved in focus.  
-Deficiency won’t “cause ADHD” —  
-but it can make focus feel harder.
+It’s involved in pathways tied to dopamine —  
+the same systems focus depends on.*
+
+**Subscript:**
+*Educational summary of established iron–neurotransmitter biology; not a claim that iron deficiency causes ADHD.
 
 ---
 
-## Slide 5 — Practical change
+## Slide 4 — Awareness
 **Copy:**
-Don’t guess. Don’t megadose.
+Low iron shows up alongside  
+mood and focus problems.
 
 **Support:**
-Ask your clinician for ferritin  
-(and iron studies when indicated).  
-Test first — especially with heavy periods.
+Research links iron deficiency with fatigue,  
+brain fog, and worse attention symptoms  
+in some people — including ADHD populations.*
+
+**Subscript:**
+*Associations in studies — not proof that iron “causes” or “cures” ADHD.
+
+---
+
+## Slide 5 — The twist + practical
+**Copy:**
+Your hemoglobin can look “normal.”
+
+**Support:**
+Ferritin (iron stores) can still be low.  
+If you have fog, fatigue, restless legs,  
+or heavy periods — ask for iron studies.
 
 ---
 
 ## Slide 6 — Path
 **Copy:**
-Fog has a differential.
+One lab question. Better clarity.
 
 **Support:**
-ADHD · sleep · mood · thyroid · iron  
-Start: siya.health/blog/perimenopause-brain-fog  
-ADHD care: siya.health/adhd-care
+Ask your clinician: “Can we check ferritin?”  
+Don’t megadose iron on your own.  
+siya.health/blog/perimenopause-brain-fog  
+siya.health/adhd-care
 
 ---
 
 ## Claim ladder
-Safe: overlap of symptoms; ferritin vs hemoglobin; ask for labs; no DIY high-dose iron; iron supports dopamine-related pathways (careful language); deficiency doesn’t cause ADHD.  
-Avoid: “Iron cures ADHD”; DIY dosing protocols; inventing ferritin cutoffs as Siya protocol; skipping clinician.
+Safe: women/ADHD audience hook; iron beyond anemia; dopamine pathway involvement (careful); study associations; ferritin vs Hb; ask clinician; no DIY.  
+Avoid: iron cures ADHD; DIY doses; ferritin cutoffs as Siya protocol; founder CTAs.

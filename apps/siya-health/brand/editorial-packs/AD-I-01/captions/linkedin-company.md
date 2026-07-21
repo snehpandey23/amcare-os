@@ -1,24 +1,17 @@
-# LinkedIn Company — AD-I-01
+# LinkedIn Company — AD-I-01 v2
 
-**Link:** https://siya.health/blog/perimenopause-brain-fog
+ADHD treatment isn’t complete if we never ask about iron — especially for women.
 
----
+Symptom overlap is real: persistent fog, fatigue, restless legs, heavy menstrual bleeding, “meds feel weaker.”
 
-## Post
+A normal hemoglobin does not rule out low ferritin.
 
-ADHD evaluation isn’t complete if we never ask about iron.
+Claim discipline:
+→ Iron deficiency does not cause ADHD
+→ It can still worsen how focus and energy feel
+→ The useful move is measurement, not DIY megadoses
 
-Symptom overlap is real: brain fog, fatigue, restless legs, heavy menstrual bleeding, “stimulants feel weaker.” A hemoglobin that looks fine does not rule out low ferritin.
-
-Important claim discipline:
-→ Low iron does not cause ADHD  
-→ Low iron can still worsen how focus and energy feel  
-→ The useful move is measurement — ferritin / iron studies — not DIY megadoses
-
-Systems medicine means holding ADHD and metabolic contributors in the same frame.
-
-Educational carousel + deeper fog differential:  
-https://siya.health/blog/perimenopause-brain-fog  
+https://siya.health/blog/perimenopause-brain-fog
 https://siya.health/adhd-care
 
-Educational only. Not a lab protocol or diagnosis.
+Educational only.

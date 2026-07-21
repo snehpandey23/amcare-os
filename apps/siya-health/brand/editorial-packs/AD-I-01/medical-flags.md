@@ -1,18 +1,15 @@
-# Medical flags — AD-I-01
+# Medical flags — AD-I-01 v2
 
-**Publish organic?** YES with educational disclaimer  
-**Paid?** Prefer clinical stamp if amplifying lab-interpretation claims
+**Publish organic?** YES with disclaimer
 
 ## Safe
-- Symptom overlap: fog, fatigue, RLS, heavy periods
-- Ferritin / iron studies vs hemoglobin-only CBC
-- Ask clinician before supplementing
-- Iron involved in pathways related to attention (not “causes ADHD”)
-- Link to differential thinking (ADHD + sleep + mood + thyroid + iron)
+- Women / ADHD audience hook
+- Iron beyond anemia; ferritin vs hemoglobin
+- Dopamine pathway involvement (careful educational language)
+- Study associations (not causation)
+- Ask clinician; no DIY megadose
 
-## Do not add
-- Iron cures / treats ADHD
-- Specific DIY dose (e.g. “take 65 mg elemental…”)
-- Absolute ferritin cutoffs as Siya medical protocol
-- Stop ADHD meds because of iron theories
-- Guaranteed lab interpretation from a carousel
+## Avoid
+- Iron cures ADHD
+- DIY dosing / cutoffs as protocol
+- Founder LinkedIn versions (paused)

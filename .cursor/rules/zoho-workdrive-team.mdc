@@ -14,7 +14,7 @@ Whenever creating or updating **team-facing** Siya Health materials (editorial p
 ## Folder map
 
 | Asset type | Put in |
-|------------|--------|
+|---|-----|
 | Brand / editorial rules | `00-Brand-System/` |
 | Tracker row + spreadsheet | `04-Content-Tracker/Siya-Content-Tracker.xlsx` |
 | Carousels (multi-slide) | `05-Carousels/[Insight-ID]/` |
@@ -34,5 +34,8 @@ Do not sync secrets, `.env`, or the full `amcare-os` monorepo into WorkDrive.
 
 Ship platform-specific caption docs **alongside images**:
 `05-Carousels/[ID]/captions/` and `ready-to-post/captions/`
-Include: Instagram, Facebook, LinkedIn Company, LinkedIn Founder (no CTA), X/Twitter, Pinterest.
-Also include `ALL-PLATFORMS.md` (or equivalent) for one-file copy-paste.
+Include: Instagram, Facebook, **LinkedIn Company only**, X/Twitter, Pinterest.
+Also include `ALL-PLATFORMS.md` for one-file copy-paste.
+
+**Do not produce Founder LinkedIn (Dr. Sneh / Dr. Swati) posts** unless explicitly requested.
+Company voice across platforms. Audience-specific angles belong in the creative.
