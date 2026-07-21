@@ -44,12 +44,15 @@ siya.health  ·  All content for educational purposes only
 ### Copy clarity (carousel content)
 - Every headline must be understandable in one glance without prior context
 - Avoid insider metaphors unless the support line explains them immediately
-  - Example problem: “What if it’s not one department?” needs a plain-language support line or rewrite
+- **Company carousels must include ≥1 practical, evidence-aligned change** (see `EDITORIAL-TEST.md`)
+  - Fail: open-ended vibe with no next step
+  - Pass: track → ask clinician for X / do Y for N days
 
 ### Production workflow
-1. Agree design theme on **one** perfected static (header + footer + submerged logo)
-2. Lock theme → then batch carousels
-3. Do not regenerate full sets until the prototype is approved
+1. Agree design theme on **one** perfected static (header + footer + submerged logo) ✅
+2. Lock useful copy (recognition → explanation → practical change)
+3. Batch regenerate carousel with locked theme + copy
+4. Caption must restate the practical change
 
 ## Prototype file
 

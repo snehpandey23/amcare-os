@@ -45,7 +45,9 @@ Moat: **systems medicine explained simply.**
 
 - `EDITORIAL-TEST.md`  
 - `CREATIVE-DIRECTOR.md`  
+- `INSTAGRAM-STATIC.md`  
 - Founder LinkedIn: never sells  
+- Company/social: useful + ≥1 evidence-based practical change  
 
 ## Slim prompt (post-deploy)
 
@@ -53,6 +55,7 @@ Moat: **systems medicine explained simply.**
 Publishing Insight from Women's Midlife Health.
 Use Editorial Pack format (Insight ID, not Week).
 Founder LinkedIn: Draft A voice, zero CTA.
-Company/social may link Product → Spoke → Meet & Greet.
-Pass Editorial Test. No DIY dosing / HRT-as-ADHD / overclaim.
+Company/social: Recognition → useful explanation → ≥1 practical change
+(evidence-based / guideline-aligned; no DIY dosing / HRT-as-ADHD / overclaim).
+Link Product → Spoke → Meet & Greet. Pass Editorial Test.
 ```

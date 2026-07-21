@@ -1,71 +1,72 @@
-# Instagram Carousel — WH-R-02
+# Instagram Carousel — WH-R-02 (v2 — useful)
 
-**Format:** 4:5 · 6 slides · warm editorial · Siya cream/soft earth tones · quiet logo corner · no stock clinic clichés
+**Format:** 4:5 · 6 slides · submerged logo · quiet footer  
+**Design:** `brand/INSTAGRAM-STATIC.md`  
+**Gate:** Recognition + explanation + **≥1 practical change** (Editorial Test)
+
+**Practical change (this pack):**  
+For 14 days, log sleep, heavy bleeding, and when fog is worst → bring the log to a clinician and ask to evaluate iron/ferritin, thyroid, sleep, and mood — not “stress” alone.
 
 ---
 
 ## Slide 1 — Hook
-**Copy (large):**
+**Copy:**
 Coping strategies that worked for 20 years…
+suddenly don’t.
 
-**Support (small):**
-…suddenly don’t.
-
-**Image prompt:** See `image-prompts.md` Slide 1
+**Support:** (none — let image carry)
 
 ---
 
-## Slide 2 — Recognition
+## Slide 2 — Recognition → useful frame
 **Copy:**
-“I used to hold everything in my head.”
+You’re not failing at adulting.
 
 **Support:**
-Now you walk into a room and forget why you’re there.
-
-**Image prompt:** Slide 2
+When planners, lists, and willpower stop working in your 40s, something in the system may have changed.
 
 ---
 
-## Slide 3 — Systems
+## Slide 3 — Explanation
 **Copy:**
-What if it’s not one department?
-
-**Support (list or nodes):**
-Sleep · Iron · Mood · Hormones · Attention
-
-**Image prompt:** Slide 3
-
----
-
-## Slide 4 — Contradiction
-**Copy:**
-Medicine is good at splitting humans into appointments.
+Midlife fog rarely has one cause.
 
 **Support:**
-Midlife rarely arrives that way.
-
-**Image prompt:** Slide 4
+Sleep · Iron · Mood · Hormones · Attention  
+can all move at once — so “try harder” often fails.
 
 ---
 
-## Slide 5 — Curiosity
+## Slide 4 — Practical change (part 1)
 **Copy:**
-Maybe the seams are just showing.
+Don’t add another planner first.
 
 **Support:**
-Not a character flaw. A systems question.
-
-**Image prompt:** Slide 5
+For 14 days, jot three things: hours slept, heavy bleeding (Y/N), and when fog hits hardest.
 
 ---
 
-## Slide 6 — Path (company CTA only)
+## Slide 5 — Practical change (part 2) ← the useful ask
+**Copy:**
+Bring that log to a clinician.
+
+**Support:**
+Ask them to check iron/ferritin, thyroid, sleep, and mood — not “stress” alone.  
+(Common reversible contributors to midlife brain fog.)
+
+---
+
+## Slide 6 — Path
 **Copy:**
 Women’s Midlife Health
 
 **Support:**
 Brain · Hormones · Metabolism  
-Start with Perimenopause & Brain Fog  
+Read Perimenopause & Brain Fog  
 siya.health/womens-midlife-health
 
-**Image prompt:** Slide 6
+---
+
+## Claim ladder
+Safe: pattern tracking; request evaluation of iron/thyroid/sleep/mood; systems framing.  
+Avoid: DIY stimulant dosing; HRT treats ADHD; hormones cause ADHD; guaranteed diagnosis.

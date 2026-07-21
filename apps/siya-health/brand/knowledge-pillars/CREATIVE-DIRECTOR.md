@@ -163,19 +163,21 @@ Every asset must answer:
 3. Which Knowledge Product?  
 4. Which spoke?  
 5. Journey stage + emotion?  
-6. What CTA (if any)? — founder LinkedIn answer is always **none**
+6. What **practical change** (company/social) — ≥1 evidence-based next step?  
+7. What CTA (if any)? — founder LinkedIn answer is always **none**
 
 Also pass [`EDITORIAL-TEST.md`](./EDITORIAL-TEST.md).
 
-If it strengthens nothing — don't make it.
+If it strengthens nothing — don't make it.  
+If company/social content only resonates but teaches no usable next step — don't make it.
 
 ---
 
 ## Writing style
 
 Warm · evidence-based · physician-led  
-Recognition before education · education before treatment · treatment before CTA  
-Trust > clicks
+Recognition before education · education before **practical change** · practical change before CTA  
+Trust > clicks · Useful > viral
 
 ---
 
