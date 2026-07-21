@@ -1,6 +1,6 @@
 # Zoho WorkDrive — Knowledge Editorial (live)
 
-TrueSync is connected for **Amcare Medical Consultancy India Pvt Ltd**.
+TrueSync: **Amcare Medical Consultancy India Pvt Ltd**
 
 ## Shared folder (team)
 
@@ -8,23 +8,20 @@ TrueSync is connected for **Amcare Medical Consultancy India Pvt Ltd**.
 Zoho WorkDrive → Common Folder → Siya Knowledge Editorial
 ```
 
-Mac path (TrueSync):
-`~/Library/CloudStorage/ZohoWorkDriveTrueSync-AmcareMedicalConsultancyIndiaPvtLtd/Common Folder/Siya Knowledge Editorial`
-
-| Subfolder | Contents |
-|-----------|----------|
+| Folder | Purpose |
+|--------|---------|
 | `03-START-HERE` | How to use this space |
-| `00-Brand-System` | Editorial Test, Instagram static rules, Creative Director |
-| `01-Editorial-Packs/WH-R-02` | Copy + ready-to-post carousel + reel |
-| `02-LinkedIn-Dr-Sneh` | Profile banners |
+| `00-Brand-System` | Editorial Test, IG static rules, Creative Director |
+| `04-Content-Tracker` | **`Siya-Content-Tracker.xlsx`** — log every post/asset |
+| `05-Carousels` | Multi-slide IG carousels by Insight ID (`WH-R-02`, …) |
+| `06-Statics` | Single images (LinkedIn banners, one-off IG, ads) |
 
-## Mirror (Siya Website/Social)
+## Tracker columns (Posts sheet)
 
-Also mirrored under:
-`My Folders / Siya Health / Website Social Media / Knowledge Editorial`
+Insight ID · Title · Format · Channel · Status · Practical change · Knowledge Product · Spoke URL · Folder path · dates · Owner · Approver · live link · Notes
+
+Statuses: Idea → Draft → In design → Ready → Scheduled → Published
 
 ## Rule
 
-Drop new packs into `01-Editorial-Packs/[Insight-ID]/` — TrueSync syncs for anyone with Common Folder access.
-
-Confirm teammates are members of **Common Folder** (or share `Siya Knowledge Editorial` with Editor access).
+Company/social rows need a **practical change**. Founder LinkedIn may be N/A (no CTA).
