@@ -43,6 +43,7 @@ Moat: **systems medicine explained simply.**
 
 ## Pin
 
+- `../marketing-os/DAILY-PLAN.md` — team daily checklist  
 - `EDITORIAL-TEST.md`  
 - `CREATIVE-DIRECTOR.md`  
 - `INSTAGRAM-STATIC.md`  

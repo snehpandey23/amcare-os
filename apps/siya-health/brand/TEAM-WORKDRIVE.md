@@ -12,18 +12,28 @@ Zoho WorkDrive → Common Folder → Siya Knowledge Editorial
 |--------|---------|
 | `03-START-HERE` | How to use this space |
 | `00-Brand-System` | Editorial Test, IG static rules, Creative Director |
-| `04-Content-Tracker` | **`Siya-Content-Tracker.xlsx`** — log every post/asset |
+| `04-Content-Tracker` | **Trackers** — Posts · Distribution · Research · Ads · Daily Log (see `marketing-os/README.md`) |
 | `05-Carousels/[Insight-ID]/` | **One pack folder** — images + captions together |
 | `…/ready-to-post/` | PNGs + `captions/` (post from here) |
 | `06-Statics` | Single images (LinkedIn banners, one-off IG, ads) |
 
 Do **not** create a separate top-level “READY” mirror folder. Keep assets inside each Insight ID pack.
 
-## Tracker columns (Posts sheet)
+## Trackers (Posts sheet + companions)
 
-Insight ID · Title · Format · Channel · Status · Practical change · Knowledge Product · Spoke URL · Folder path · dates · Owner · Approver · live link · Notes
+| File | Purpose |
+|------|---------|
+| `Siya-Content-Tracker-Posts.csv` | Asset lifecycle: Idea → Published |
+| `Siya-Distribution-Tracker.csv` | Cross-posts, engagement, per-platform metrics |
+| `Siya-Research-Backlog.csv` | Research → insight → pack pipeline |
+| `Siya-Ads-Tracker.csv` | Campaigns, spend, CPL, compliance |
+| `Siya-Daily-Log.csv` | End-of-day standup summary |
 
-Statuses: Idea → Draft → In design → Ready → Scheduled → Published
+**Posts columns:** Insight ID · Title · Format · Channel · Status · Practical change · Knowledge Product · Spoke URL · Folder path · dates · Owner · Approver · live link · Notes
+
+**Statuses:** Idea → Draft → In design → Ready → Scheduled → Published
+
+**Daily workflow:** [`marketing-os/DAILY-PLAN.md`](./marketing-os/DAILY-PLAN.md)
 
 ## Rule
 

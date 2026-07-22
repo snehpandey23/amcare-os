@@ -80,7 +80,7 @@ Phase 2 — Factory        ← NOW
   Content matrix         ✅ INDEX.md
         ↓
 Phase 3 — Research engine (paper → many assets)
-Phase 4 — Marketing OS loop (plan → publish → measure)
+Phase 4 — Marketing OS loop (plan → publish → measure)  ✅ [`marketing-os/`](./marketing-os/)
 Phase 5 — 05 Component System (website implementation consistency)
 Phase 6 — 06 AI Creative Guide (tiny orchestrator)
 ```
@@ -132,6 +132,7 @@ Intent → Message → Recognition → Trust → Structure → Visual → Decora
 | Service page structure | `docs/SERVICE-PAGE-BLUEPRINT.md` | **SoT** |
 | Positioning · CTAs · pricing · states | `docs/SIYA-STANDARDS.md` + `data/site-standards.mjs` | **SoT** |
 | Photography | `brand/photography/README.md` + `INVENTORY.md` | **SoT** |
+| Marketing operations | `brand/marketing-os/` + `04-Content-Tracker/` | **SoT** |
 | Allowed statistics | `data/homepage-trust-metrics.mjs` | **SoT** |
 | Pricing display | `data/pricing-display.mjs` + `site-standards` PRICING | **SoT** |
 | Runtime color / type / space | `styles.css` `:root` + `design-system/tokens.css` | **Implicit SoT** |
