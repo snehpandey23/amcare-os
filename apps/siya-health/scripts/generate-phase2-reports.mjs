@@ -182,7 +182,7 @@ function buildConversionReport() {
 | **L5** | \`cta-band\` (exit scroll) | Book a Meet & Greet | Contextual explore |
 | **L6** | Continue reading | — | Answer + sibling blog + service (already present) |
 
-**Exit-intent:** Deferred chat (\`deferred-chat-widget.js\`) on 4/5 cornerstones; sleep apnea still loads LeadConnector immediately. Recommend: service **card** component (not popup) at L2—not interstitial modals (hurts trust).
+**Exit-intent:** Chat widget removed sitewide. Prefer service **card** components at L2—not interstitial modals (hurts trust).
 
 ---
 
