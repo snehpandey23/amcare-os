@@ -101,7 +101,6 @@ FOOTER = """    <footer class="footer">
         }}
       }})();
     </script>
-    <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="69be9ab3db1480f6799cdd18"></script>
   </body>
 </html>"""
 

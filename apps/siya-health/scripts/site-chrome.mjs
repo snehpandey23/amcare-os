@@ -1246,7 +1246,11 @@ function buildContinueReadingHtml(blogPath, title, auditIndex) {
         '/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign',
         '/blog/insomnia-treatment-options-beyond-medication',
       ],
-      general: ['/blog/telehealth-prescriptions-how-online-treatment-works', '/blog/how-to-safely-get-prescriptions-online', '/blog/is-online-adhd-diagnosis-legit'],
+      general: [
+        '/blog/telehealth-prescriptions-how-online-treatment-works',
+        '/blog/how-to-safely-get-prescriptions-online',
+        '/blog/insomnia-treatment-options-beyond-medication',
+      ],
     }[topic];
     for (const p of fallbacks || []) {
       if (articles.length >= 5) break;
