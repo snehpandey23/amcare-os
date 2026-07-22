@@ -1,0 +1,17 @@
+{
+  "id": "AD-W-02",
+  "title": "ADHD in women often looks quiet",
+  "family": "Recognition",
+  "format": "static",
+  "knowledge_product": "/answers",
+  "spoke": "/answers/adhd-in-women",
+  "related": ["/blog/adhd-hormones-women", "/adhd-care", "/adhd-screening"],
+  "status": "Ready",
+  "clinical_review": "Educational static; Health Guide pending formal physician review — Clinician-informed framing only",
+  "practical_change": "Read Health Guide → Talk to a Clinician / Book ADHD Evaluation; screening is not diagnosis; medication never guaranteed",
+  "workdrive_path": "Common Folder/Siya Knowledge Editorial/06-Statics/AD-W-02/",
+  "founder_cta": false,
+  "company_cta": true,
+  "created": "2026-07-22",
+  "refined": "2026-07-22"
+}

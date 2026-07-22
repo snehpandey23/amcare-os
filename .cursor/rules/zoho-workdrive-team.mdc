@@ -1,0 +1,41 @@
+---
+description: Always sync team-facing Siya editorial/brand deliverables to Zoho WorkDrive Common Folder
+alwaysApply: true
+---
+
+# Zoho WorkDrive — team deliverables
+
+Whenever creating or updating **team-facing** Siya Health materials (editorial packs, carousels, statics, reels, LinkedIn banners, brand/editorial rules, captions, trackers), also update:
+
+```text
+~/Library/CloudStorage/ZohoWorkDriveTrueSync-AmcareMedicalConsultancyIndiaPvtLtd/Common Folder/Siya Knowledge Editorial/
+```
+
+## Folder map
+
+| Asset type | Put in |
+|---|-----|
+| Brand / editorial rules | `00-Brand-System/` |
+| Tracker row + spreadsheet | `04-Content-Tracker/Siya-Content-Tracker.xlsx` |
+| Carousels (multi-slide) | `05-Carousels/[Insight-ID]/` |
+| Statics / banners / singles | `06-Statics/...` |
+| How-to | `03-START-HERE/` |
+
+## Required habit
+
+1. Write files to the Common Folder path above (TrueSync syncs for the team).
+2. Add or update a row in `Siya-Content-Tracker.xlsx` (or the CSV) for every new post/asset.
+3. Do **not** leave team-ready assets only on Desktop or only in git — Common Folder is the team source of truth for deliverables.
+4. Git remains source of truth for **code**; WorkDrive for **editorial deliverables**.
+
+Do not sync secrets, `.env`, or the full `amcare-os` monorepo into WorkDrive.
+
+## Captions (required with every visual pack)
+
+Ship platform-specific caption docs **alongside images**:
+`05-Carousels/[ID]/captions/` and `ready-to-post/captions/`
+Include: Instagram, Facebook, **LinkedIn Company only**, X/Twitter, Pinterest.
+Also include `ALL-PLATFORMS.md` for one-file copy-paste.
+
+**Do not produce Founder LinkedIn (Dr. Sneh / Dr. Swati) posts** unless explicitly requested.
+Company voice across platforms. Audience-specific angles belong in the creative.
