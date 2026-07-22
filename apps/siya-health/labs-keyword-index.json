@@ -1,0 +1,107 @@
+{
+  "generated": "2026-07-21T06:58:13.665Z",
+  "hubUrl": "https://siya.health/labs",
+  "note": "Keyword → educational labs topic pages (Siya owns education; storefront is logistics only).",
+  "keywords": [
+    {
+      "terms": [
+        "thyroid",
+        "tsh",
+        "free t4"
+      ],
+      "path": "/labs/thyroid",
+      "also": [
+        "/labs",
+        "/labs/how-to-read-results"
+      ]
+    },
+    {
+      "terms": [
+        "ferritin",
+        "iron",
+        "iron deficiency"
+      ],
+      "path": "/labs/iron-ferritin",
+      "also": [
+        "/labs",
+        "/labs/fatigue-brain-fog"
+      ]
+    },
+    {
+      "terms": [
+        "testosterone",
+        "free testosterone",
+        "low t"
+      ],
+      "path": "/labs/mens-health",
+      "also": [
+        "/labs"
+      ]
+    },
+    {
+      "terms": [
+        "a1c",
+        "hemoglobin a1c",
+        "blood sugar",
+        "glucose"
+      ],
+      "path": "/labs/a1c-blood-sugar",
+      "also": [
+        "/labs"
+      ]
+    },
+    {
+      "terms": [
+        "b12",
+        "vitamin b12",
+        "cobalamin"
+      ],
+      "path": "/labs/vitamin-b12",
+      "also": [
+        "/labs",
+        "/labs/fatigue-brain-fog"
+      ]
+    },
+    {
+      "terms": [
+        "cholesterol",
+        "lipid",
+        "lipids"
+      ],
+      "path": "/labs/a1c-blood-sugar",
+      "also": [
+        "/labs/preventive"
+      ]
+    },
+    {
+      "terms": [
+        "insulin",
+        "insulin resistance"
+      ],
+      "path": "/labs/a1c-blood-sugar",
+      "also": [
+        "/labs"
+      ]
+    },
+    {
+      "terms": [
+        "vitamin d"
+      ],
+      "path": "/labs/fatigue-brain-fog",
+      "also": [
+        "/labs/womens-midlife"
+      ]
+    },
+    {
+      "terms": [
+        "lab results",
+        "how to read labs",
+        "reference range"
+      ],
+      "path": "/labs/how-to-read-results",
+      "also": [
+        "/labs"
+      ]
+    }
+  ]
+}

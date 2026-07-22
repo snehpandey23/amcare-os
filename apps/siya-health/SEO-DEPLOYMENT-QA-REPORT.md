@@ -1,15 +1,15 @@
 # SEO Deployment QA Report
 
-Generated: 2026-07-06T11:43:01.629Z
+Generated: 2026-07-21T06:58:14.520Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| HTML pages scanned | 152 |
-| Sitemap URLs | 141 |
+| HTML pages scanned | 192 |
+| Sitemap URLs | 179 |
 | Pages with Meet & Greet in nav | 0 |
-| Non-ADHD pages still referencing adhd-screening | 53 |
+| Non-ADHD pages still referencing adhd-screening | 66 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
 
@@ -35,11 +35,11 @@ Generated: 2026-07-06T11:43:01.629Z
 
 ## CTA repositioning
 
-- **Default primary CTA:** Book a Meet & Greet → `https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=ftxOxenx`
+- **Default primary CTA:** Book a Meet & Greet → `https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=kkarJfxH`
 - **Default secondary CTA:** Explore Care Options → `#services` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, `adhd-screening.html`
 
-### Non-ADHD pages still containing `adhd-screening` (53)
+### Non-ADHD pages still containing `adhd-screening` (66)
 
 - `about.html`
 - `blog/compounded-vs-branded-glp1-medications.html`
@@ -56,6 +56,7 @@ Generated: 2026-07-06T11:43:01.629Z
 - `blog/minoxidil-for-hair-loss-does-it-work.html`
 - `blog/oral-vs-injectable-weight-loss-medications.html`
 - `blog/oral-vs-topical-minoxidil-which-is-right.html`
+- `blog/perimenopause-brain-fog.html`
 - `blog/phentermine-for-weight-loss-safety-and-effectiveness.html`
 - `blog/semaglutide-for-weight-loss-how-it-works.html`
 - `blog/sildenafil-for-erectile-dysfunction-what-to-expect.html`
@@ -70,6 +71,16 @@ Generated: 2026-07-06T11:43:01.629Z
 - `book-appointment.html`
 - `index.html`
 - `intake/index.html`
+- `labs/a1c-blood-sugar.html`
+- `labs/adhd-support.html`
+- `labs/fatigue-brain-fog.html`
+- `labs/how-to-read-results.html`
+- `labs/iron-ferritin.html`
+- `labs/mens-health.html`
+- `labs/preventive.html`
+- `labs/thyroid.html`
+- `labs/vitamin-b12.html`
+- `labs/womens-midlife.html`
 - `labs.html`
 - `legal/controlled-substance-treatment-agreement/index.html`
 - `legal/cookie-policy/index.html`
@@ -79,6 +90,7 @@ Generated: 2026-07-06T11:43:01.629Z
 - `legal/terms-of-use/index.html`
 - `mens-health-longevity.html`
 - `prescriptions.html`
+- `pricing.html`
 - `primary-urgent-care.html`
 - `privacy-policy.html`
 - `providers/derek-timbs.html`
@@ -94,8 +106,9 @@ Generated: 2026-07-06T11:43:01.629Z
 - `terms.html`
 - `weight-loss-metabolic-health.html`
 - `womens-health.html`
+- `womens-midlife-health.html`
 
-### All pages with any `adhd-screening` reference (148)
+### All pages with any `adhd-screening` reference (187)
 
 - `about.html`
 - `adhd-care.html`
@@ -106,6 +119,7 @@ Generated: 2026-07-06T11:43:01.629Z
 - `adhd-diagnosis-philadelphia.html`
 - `adhd-diagnosis-texas.html`
 - `adhd-evaluation-cost.html`
+- `adhd-screening-results.html`
 - `adhd-screening.html`
 - `adhd-treatment-online.html`
 - `adult-adhd-diagnosis.html`
@@ -136,9 +150,8 @@ Generated: 2026-07-06T11:43:01.629Z
 - `answers/how-long-adhd-evaluation.html`
 - `answers/how-much-does-adhd-testing-cost.html`
 - `answers/how-online-prescriptions-work.html`
-- `answers/index.html`
 
-_…and 108 more (expected on ADHD funnels)._
+_…and 147 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 
@@ -170,8 +183,8 @@ _None detected in static HTML scan._
 ## Orphan pages (low inbound links, sample)
 
 - `adhd-evaluation-cost.html`
+- `docs/tint-options-preview.html`
 - `intake/index.html`
-- `prescriptions.html`
 - `siya-circle.html`
 
 ## Recommendations

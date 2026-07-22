@@ -137,7 +137,7 @@ function detectIssues(page) {
     issues.push({
       type: 'legacy-membership-tiers',
       severity: 'critical',
-      detail: 'Uses Bronze/Silver/Gold membership tiers instead of care-delivery $199/$79/$149 model',
+      detail: 'Uses Bronze/Silver/Gold membership tiers instead of care-delivery $149/$79/$149 model',
     });
   }
 
@@ -186,7 +186,7 @@ function detectIssues(page) {
 
   // ADHD-specific evaluation pricing on non-ADHD pages
   if (flags.has199 && route.includes('weight-loss')) {
-    // weight loss has no $199 in body — skip
+    // weight loss has no $149 in body — skip
   } else if (
     flags.has199 &&
     !route.includes('adhd') &&
@@ -198,12 +198,12 @@ function detectIssues(page) {
   ) {
     const adhdSpecificRoutes = PAGE_CATEGORIES.adhdFunnel;
     if (!adhdSpecificRoutes.includes(route) && ['service-page', 'hub', 'other'].includes(page.category)) {
-      const heroOnly = (page.amounts.length <= 1 && mainText.match(/\$199/g)?.length <= 2);
+      const heroOnly = (page.amounts.length <= 1 && mainText.match(/\$149/g)?.length <= 2);
       if (heroOnly || ['primary-urgent-care', 'mens-health-longevity', 'prescriptions', 'labs', 'book-appointment'].some((p) => route.includes(p.replace(/\//, '')))) {
         issues.push({
           type: 'hero-199-without-breakdown',
           severity: 'medium',
-          detail: 'Shows "$199 Transparent Pricing" hero badge without explaining universal Initial Evaluation model',
+          detail: 'Shows "$149 Transparent Pricing" hero badge without explaining universal Initial Evaluation model',
         });
       }
     }
@@ -221,7 +221,7 @@ function detectIssues(page) {
     issues.push({
       type: 'membership-without-evaluation-anchor',
       severity: 'high',
-      detail: 'Membership page omits $199 Initial Evaluation entry point',
+      detail: 'Membership page omits $149 Initial Evaluation entry point',
     });
   }
 
@@ -252,7 +252,7 @@ function detectIssues(page) {
     issues.push({
       type: 'evaluation-cost-page-missing-follow-up-tiers',
       severity: 'medium',
-      detail: 'ADHD evaluation cost page shows $199 only; follow-up plans ($79/$149) not enumerated',
+      detail: 'ADHD evaluation cost page shows $149 only; follow-up plans ($79/$149) not enumerated',
     });
   }
 
@@ -311,7 +311,7 @@ function analyzePage(rel) {
     hasTransparentPricing: PATTERNS.transparentPricing.test(mainText),
     hasWaitlist: /\bwaitlist\b/i.test(mainText),
     hasMonthlyPlanVague: /monthly plan/i.test(mainText) && !numeric.includes(79) && !numeric.includes(149),
-    hasAdhdEvaluationPricing: /ADHD evaluation.*\$199|\$199.*ADHD/i.test(mainText),
+    hasAdhdEvaluationPricing: /ADHD evaluation.*\$149|\$149.*ADHD/i.test(mainText),
     linksToMembershipPricing: /href=["']\/membership-pricing["']/i.test(html),
     linksToAdhdEvaluationCost: /href=["']\/adhd-evaluation-cost["']/i.test(html),
     footerMembershipLink: PATTERNS.footerMembership.test(html),

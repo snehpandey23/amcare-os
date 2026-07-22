@@ -5,6 +5,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { applyPricingTokens } from '../data/pricing-display.mjs';
 import { ANSWER_SEEDS, TOPIC_HUBS } from '../data/answer-seeds.mjs';
 import { RETIRED_GUIDE_SLUGS } from '../data/content-consolidation-phase1.mjs';
 import { GUIDE_CANNIBALIZATION_OVERRIDES } from '../data/cannibalization-phase1.mjs';
@@ -73,8 +74,8 @@ const HEALTH_GUIDE_CATEGORIES = [
 const FEATURED_BY_CATEGORY = {
   metabolic: [
     'why-normal-labs-dont-mean-healthy',
-    'food-noise-returned-on-glp-1',
-    'what-is-insulin-resistance',
+    'which-preventive-blood-tests-adults',
+    'what-to-do-after-lab-results',
   ],
   energy: [
     'afternoon-energy-crash-after-lunch',
@@ -442,7 +443,12 @@ function buildAnswerPage(seed) {
     !seed.sections?.length && engagement.takeaway
       ? `\n            ${engagement.takeaway}\n            ${engagement.midBreak}`
       : '';
-  const learnMoreHtml = '';
+  // Only emit learnMore for labs-funnel guides (avoids regenerating duplicate link blocks sitewide).
+  const learnMoreHtml = ['which-preventive-blood-tests-adults', 'what-to-do-after-lab-results'].includes(
+    seed.slug
+  )
+    ? buildLearnMoreHtml(seed)
+    : '';
   const diagramConfig = ANSWER_DIAGRAM_EMBEDS[seed.slug];
   const diagramHtml = diagramConfig
     ? `\n${renderDiagramFigure(diagramConfig.key, { figcaption: diagramConfig.figcaption })}\n`
@@ -515,6 +521,7 @@ ${engagement.decisionSupport}
 ${engagement.evidenceCard}
               <ul class="answer-evidence-list">${evidenceHtml}</ul>
             </section>
+${learnMoreHtml}
 ${buildAnswerInternalLinksHtml(seed)}
             <div class="cta-block blog-cta answer-final-cta">
               ${answerCtaBtn}
@@ -636,19 +643,34 @@ ${featureSlots}
     numberOfItems: activeSeeds.length,
   };
 
-  const jsonLd = `\n    <script type="application/ld+json">${JSON.stringify(collection)}</script>
+  const jsonLd = `\n    <script type="application/ld+json">${JSON.stringify(collection)}</script>`;
+
+  /* Must run after DOM exists — previously this lived in <head> and never attached listeners,
+     so “View all … guides” buttons looked dead (hash target is hidden). */
+  const hubViewAllScript = `
     <script>
-      document.querySelectorAll('.health-guides-view-all').forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-          const id = btn.getAttribute('href')?.slice(1);
-          const panel = id && document.getElementById(id);
-          if (!panel) return;
-          e.preventDefault();
-          const open = panel.hidden;
-          panel.hidden = !open;
-          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-          btn.textContent = open ? btn.textContent.replace(/^View all/, 'Hide') : btn.textContent.replace(/^Hide/, 'View all');
-        });
+      document.addEventListener('click', function (e) {
+        var btn = e.target.closest && e.target.closest('.health-guides-view-all');
+        if (!btn) return;
+        var href = btn.getAttribute('href') || '';
+        var id = href.charAt(0) === '#' ? href.slice(1) : '';
+        var panel = id && document.getElementById(id);
+        if (!panel) return;
+        e.preventDefault();
+        var open = panel.hidden;
+        panel.hidden = !open;
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        var label = btn.textContent || '';
+        btn.textContent = open
+          ? label.replace(/^View all/, 'Hide')
+          : label.replace(/^Hide/, 'View all');
+        if (typeof window.siyaTrack === 'function') {
+          window.siyaTrack('health_guides_click', {
+            action: open ? 'view_all' : 'hide_all',
+            category: btn.getAttribute('data-category') || '',
+            page_path: location.pathname,
+          });
+        }
       });
     </script>`;
 
@@ -673,6 +695,7 @@ ${cards}
       </section>
     </main>
 ${footerBlock()}
+${hubViewAllScript}
   </body>
 </html>
 `;
@@ -683,9 +706,9 @@ function main() {
   fs.mkdirSync(ANSWERS_DIR, { recursive: true });
   for (const seed of activeSeeds.map(applyCannibalizationOverrides)) {
     const out = path.join(ANSWERS_DIR, `${seed.slug}.html`);
-    fs.writeFileSync(out, buildAnswerPage(seed), 'utf8');
+    fs.writeFileSync(out, applyPricingTokens(buildAnswerPage(seed)), 'utf8');
   }
-  fs.writeFileSync(path.join(ANSWERS_DIR, 'index.html'), buildIndexPage(), 'utf8');
+  fs.writeFileSync(path.join(ANSWERS_DIR, 'index.html'), applyPricingTokens(buildIndexPage()), 'utf8');
   console.log('Wrote', activeSeeds.length, 'answer pages + answers/index.html');
 }
 

@@ -16,7 +16,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
 
 const CTA_TEXT_RE =
-  /schedule consultation|book consultation|book appointment|schedule appointment|schedule visit|book visit|book now|get started|adhd walkthrough|initial consultation|evaluation|secure chat|start secure medical chat|book free consultation|take free adhd screening|start \$199|\$199 evaluation|talk to our team|need help deciding|questions\?/i;
+  /schedule consultation|book consultation|book appointment|schedule appointment|schedule visit|book visit|book now|get started|adhd walkthrough|initial consultation|evaluation|secure chat|start secure medical chat|book free consultation|take free adhd screening|start \$149|\$149 evaluation|talk to our team|need help deciding|questions\?/i;
 
 function walkHtml(dir, baseRel = '') {
   const out = [];
@@ -63,7 +63,7 @@ function classifyIntent(text, href = '', relPath = '') {
   ) {
     return { intent: 'spruce_chat', expected: REDIRECT_CHAT_URL };
   }
-  if (/start \$199|\$199 evaluation|start \$199 evaluation|start the \$199/i.test(t)) {
+  if (/start \$149|\$149 evaluation|start \$149 evaluation|start the \$149/i.test(t)) {
     return { intent: 'evaluation_199', expected: REDIRECT_ADHD_EVALUATION_URL };
   }
   if (/take free adhd screening|start free.*screening|free adhd screening|start screening|2-minute screening/i.test(t)) {
@@ -141,7 +141,7 @@ const lines = [
   '|--------|----------------|--------------|',
   `| Secure chat | Start Secure Medical Chat, Questions? | \`${REDIRECT_CHAT_URL}\` → Spruce |`,
   `| Walkthrough (ADHD only) | Book ADHD Walkthrough, Book Your ADHD Walkthrough | \`${REDIRECT_ADHD_WALKTHROUGH_URL}\` → CarePatron |`,
-  `| $199 evaluation | Start $199 Evaluation | \`${REDIRECT_ADHD_EVALUATION_URL}\` → CarePatron |`,
+  `| $149 evaluation | Start $149 Evaluation | \`${REDIRECT_ADHD_EVALUATION_URL}\` → CarePatron |`,
   '| Screening | Take Free ADHD Screening | `/adhd-screening` |',
   '',
   '## Summary',

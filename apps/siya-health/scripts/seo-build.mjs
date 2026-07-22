@@ -45,7 +45,12 @@ const REDIRECT_SHELLS = {
 };
 
 /** External redirect shells + dev surfaces — never in sitemap */
-const SITEMAP_EXCLUDE = new Set(['visual-components.html', 'siya-circle.html', ...Object.keys(REDIRECT_SHELLS)]);
+const SITEMAP_EXCLUDE = new Set([
+  'visual-components.html',
+  'siya-circle.html',
+  'adhd-screening-results.html',
+  ...Object.keys(REDIRECT_SHELLS),
+]);
 
 /** @deprecated Raw gtag removed — GA4/Ads are managed inside GTM via injectGtmAndTracking() */
 function normalizeGtag(html) {
@@ -81,6 +86,8 @@ function priorityFor(rel) {
   if (rel.startsWith('blog/')) return '0.74';
   if (rel.startsWith('answers/') && rel !== 'answers/index.html') return '0.76';
   if (rel === 'answers/index.html') return '0.82';
+  if (rel === 'labs.html') return '0.88';
+  if (rel.startsWith('labs/')) return '0.8';
   if (rel.startsWith('adhd-diagnosis-') || rel.includes('adult-adhd') || rel.includes('online-adhd') || rel.includes('creyos')) return '0.8';
   if (['privacy-policy.html', 'terms.html'].includes(rel)) return '0.3';
   return '0.78';
@@ -198,12 +205,12 @@ function ensureCanonical(html, relPath) {
 
 function ensureOgTwitter(html, relPath, title, description, canonical) {
   let h = html;
-  // Older builds corrupted twitter metas ($199 became $1 regex replacement + "99").
+  // Older builds corrupted twitter metas ($149 became $1 regex replacement + "99").
   if (/name="twitter:(?:title|description)"[^\n]*<link\s+rel="canonical"/i.test(h)) {
     h = h.replace(/<meta name="twitter:title"[^\n]*\n?/gi, '');
     h = h.replace(/<meta name="twitter:description"[^\n]*\n?/gi, '');
   }
-  /** Orphan $199 twitter-meta tails rendered as visible text when left in `<head>` (patterns: ">99)", ">99,", etc.) */
+  /** Orphan $149 twitter-meta tails rendered as visible text when left in `<head>` (patterns: ">99)", ">99,", etc.) */
   h = h.replace(/^\s+>99[^<\n]*"\s*\/?>\s*$/gm, '');
 
   /** One coherent block — avoids duplicate twitter:image/card from incremental inserts */
@@ -212,7 +219,7 @@ function ensureOgTwitter(html, relPath, title, description, canonical) {
   const ogUrl = canonical || (fileToUrlPath(relPath) === '/' ? `${BASE}/` : `${BASE}${fileToUrlPath(relPath)}`);
   const desc = description || `${title} | Siya Health`;
   const img = DEFAULT_OG_IMAGE;
-  /** Title/desc can contain `$199`; String.replace `'$1' + literal` parses `$199` wrong — use callbacks. */
+  /** Title/desc can contain `$149`; String.replace `'$1' + literal` parses `$149` wrong — use callbacks. */
   const qAttr = (s) => escapeAttr(String(s));
 
   const twBlock = `\n    <meta name="twitter:card" content="summary_large_image" />

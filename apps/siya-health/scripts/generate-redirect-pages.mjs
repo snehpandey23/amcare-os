@@ -7,9 +7,10 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import {
   SPRUCE_CHAT_URL,
-  ADHD_WALKTHROUGH_LINK,
+  MEET_GREET_BOOKING_URL,
   ADHD_EVALUATION_199_LINK,
 } from '../data/providers-core.mjs';
+import { COPY_STANDARDS } from '../data/site-standards.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -19,31 +20,41 @@ const PAGES = [
     slug: 'chat',
     title: 'Connecting to Secure Medical Chat | Siya Health',
     heading: 'Connecting you to secure medical chat',
-    body: 'You are leaving Siya Health to message our care team securely in Spruce. This is the fastest way to ask questions before booking.',
+    body: 'You are leaving Siya Health to message our care team securely in Spruce. Use this when you have a care question and are not ready to book yet.',
     destination: SPRUCE_CHAT_URL,
     analyticsEvent: 'redirect_secure_chat',
     type: 'secure_chat',
     ctaLabel: 'Continue to Secure Medical Chat',
   },
   {
+    slug: 'meet-greet',
+    title: 'Booking Your Free Meet & Greet | Siya Health',
+    heading: 'Booking your free Meet & Greet',
+    body: 'You are leaving Siya Health to schedule a short, free call to understand your needs, explain care options (including labs interpretation when relevant), and help you choose the right next step. This is not a medical visit, diagnosis, or treatment recommendation. No medication will be prescribed during this call.',
+    destination: MEET_GREET_BOOKING_URL,
+    analyticsEvent: 'redirect_meet_greet',
+    type: 'meet_greet',
+    ctaLabel: COPY_STANDARDS.meetGreetCta,
+  },
+  {
     slug: 'adhd-walkthrough',
-    title: 'Booking Your Free ADHD Intro Call | Siya Health',
-    heading: 'Booking your free ADHD intro call',
-    body: 'You are leaving Siya Health to schedule a free ADHD intro call with our care team about the ADHD evaluation process, pricing, and next steps. This is a free process call, not a medical visit or diagnosis.',
-    destination: ADHD_WALKTHROUGH_LINK,
+    title: 'Booking Your Free Meet & Greet (Legacy Path) | Siya Health',
+    heading: 'Booking your free Meet & Greet',
+    body: 'You are leaving Siya Health to schedule a short, free call to understand your needs, explain care options (including labs interpretation when relevant), and help you choose the right next step. This is not a medical visit, diagnosis, or treatment recommendation. No medication will be prescribed during this call.',
+    destination: MEET_GREET_BOOKING_URL,
     analyticsEvent: 'redirect_adhd_walkthrough',
     type: 'adhd_walkthrough',
-    ctaLabel: 'Continue to Book Free ADHD Intro Call',
+    ctaLabel: COPY_STANDARDS.meetGreetCta,
   },
   {
     slug: 'adhd-evaluation',
     title: 'Starting Your ADHD Evaluation | Siya Health',
-    heading: 'Starting your $199 ADHD evaluation',
+    heading: 'Starting your ADHD evaluation',
     body: 'You are leaving Siya Health to begin the adult ADHD evaluation booking flow, including intake and testing before your provider visit.',
     destination: ADHD_EVALUATION_199_LINK,
     analyticsEvent: 'redirect_adhd_evaluation',
     type: 'adhd_evaluation',
-    ctaLabel: 'Continue to $199 Evaluation Booking',
+    ctaLabel: 'Continue to ADHD Evaluation Booking',
   },
 ];
 
@@ -59,7 +70,7 @@ function renderPage(page) {
     destination: page.destination,
     analyticsEvent: page.analyticsEvent,
     type: page.type,
-    delayMs: 1500,
+    delayMs: 2000,
   });
 
   return `<!DOCTYPE html>
@@ -75,7 +86,7 @@ function renderPage(page) {
     <style>
       .redirect-transition { min-height: 70vh; display: flex; align-items: center; justify-content: center; padding: 48px 20px; }
       .redirect-transition__card { max-width: 520px; text-align: center; }
-      .redirect-transition__logo { width: 160px; margin: 0 auto 24px; display: block; }
+      .redirect-transition__logo { height: 56px; width: auto; max-width: 200px; margin: 0 auto 24px; display: block; object-fit: contain; }
       .redirect-transition__spinner { width: 36px; height: 36px; border: 3px solid rgba(13,148,136,.2); border-top-color: #0d9488; border-radius: 50%; margin: 20px auto; animation: siya-spin .8s linear infinite; }
       @keyframes siya-spin { to { transform: rotate(360deg); } }
     </style>
@@ -84,7 +95,7 @@ function renderPage(page) {
   <body>
     <main class="redirect-transition" id="main">
       <div class="redirect-transition__card">
-        <a href="/"><img class="redirect-transition__logo" src="/assets/images/siya-health-logo.png" alt="Siya Health" width="160" height="48" /></a>
+        <a href="/"><img class="redirect-transition__logo" src="/assets/images/siya-health-logo-registered.png" alt="Siya Health" width="200" height="56" /></a>
         <h1>${esc(page.heading)}</h1>
         <p>${esc(page.body)}</p>
         <div class="redirect-transition__spinner" aria-hidden="true"></div>

@@ -128,7 +128,7 @@ export const PHASE5_ANSWER_SEEDS = [
     ],
     learnMore: [
       { href: '/adhd-care', label: 'ADHD evaluation & telehealth care' },
-      { href: '/adhd-care', label: '$199 adult ADHD evaluation' },
+      { href: '/adhd-care', label: 'Adult ADHD evaluation' },
       { href: '/blog/why-am-i-always-tired-causes-when-to-see-doctor', label: 'Fatigue & burnout cornerstone (blog)' },
       { href: '/answers/poor-sleep-feels-like-adhd', label: 'Can poor sleep feel like ADHD?' },
       { href: '/telehealth', label: 'Telehealth & virtual care' },
@@ -369,7 +369,7 @@ export const PHASE5_ANSWER_SEEDS = [
     learnMore: [
       { href: '/adhd-care', label: 'ADHD evaluation & care' },
       { href: '/adhd-screening', label: 'Free ASRS screening' },
-      { href: '/adhd-care', label: '$199 comprehensive evaluation' },
+      { href: '/adhd-care', label: 'Comprehensive ADHD evaluation' },
       { href: '/blog/how-to-know-if-you-have-adhd-adult', label: 'How to know if you have ADHD (blog)' },
       { href: '/blog/adhd-symptoms-overlooked', label: 'Overlooked ADHD symptoms (blog)' },
     ],
@@ -437,7 +437,7 @@ export const PHASE5_ANSWER_SEEDS = [
       {
         question: 'What does Siya Health include?',
         answer:
-          'A $199 adult evaluation with board-certified ADHD-CCSP–trained clinicians in eligible states, including interview and standardized tools when indicated.',
+          'An adult evaluation with board-certified ADHD-CCSP–trained clinicians in eligible states, including interview and standardized tools when indicated. Current pricing is on /pricing.',
       },
       {
         question: 'Can online doctors prescribe stimulants?',

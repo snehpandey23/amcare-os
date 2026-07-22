@@ -6,7 +6,6 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {
-  renderAdhdCarePathwaysSection,
   renderBlogAdhdCarePathwaysSection,
   renderOnlineTestCrossLinks,
   renderShadowLpGeoContext,
@@ -49,11 +48,7 @@ function patchFile(relPath, markerName, block, { insertBefore, insertBeforeFallb
 function main() {
   const results = [];
 
-  results.push(
-    patchFile('adhd-care.html', 'ADHD-CARE-PATHWAYS', renderAdhdCarePathwaysSection(), {
-      insertBefore: '<!-- SIYA:LEARN-MORE-ADHD -->',
-    }),
-  );
+  // adhd-care.html: pathways hub block retired in desktop polish (Suggested Reading replaces it)
 
   results.push(
     patchFile('blog/adhd.html', 'ADHD-BLOG-CARE-PATHWAYS', renderBlogAdhdCarePathwaysSection(), {

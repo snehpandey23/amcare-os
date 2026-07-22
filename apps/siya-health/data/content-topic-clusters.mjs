@@ -8,6 +8,54 @@
 
 export const ADHD_TOPIC_CLUSTERS = [
   {
+    id: 'adhd-executive-dysfunction',
+    name: 'Executive dysfunction',
+    blurb: 'Task initiation, working memory, planning, organization, decision fatigue, and time blindness in adult ADHD.',
+    cornerstoneGuide: 'executive-dysfunction-adhd',
+    cornerstoneBlog: '/blog/executive-dysfunction-adhd',
+    guides: [
+      'executive-dysfunction-adhd',
+      'time-blindness-adhd',
+      'high-functioning-adhd',
+      'adhd-vs-burnout',
+    ],
+    blogs: [
+      '/blog/executive-dysfunction-adhd',
+      '/blog/how-to-know-if-you-have-adhd-adult',
+      '/blog/youre-not-lazy-signs-undiagnosed-adult-adhd',
+      '/blog/adhd-in-women',
+      '/blog/iron-deficiency-brain-fog-adhd',
+      '/blog/pots-and-adhd',
+      '/blog/adhd-brain-imaging-subtypes',
+    ],
+    service: '/adhd-care',
+    screening: '/adhd-screening',
+  },
+  {
+    id: 'adhd-women',
+    name: 'ADHD in women',
+    blurb: 'Presentation, masking, hormones, late diagnosis, and evaluation for adult women.',
+    cornerstoneGuide: 'adhd-in-women',
+    cornerstoneBlog: '/blog/adhd-in-women',
+    guides: [
+      'adhd-in-women',
+      'late-adhd-diagnosis-adults',
+      'rejection-sensitivity-adhd',
+      'high-functioning-adhd',
+    ],
+    blogs: [
+      '/blog/adhd-in-women',
+      '/blog/how-to-know-if-you-have-adhd-adult',
+      '/blog/youre-not-lazy-signs-undiagnosed-adult-adhd',
+      '/blog/adhd-and-binge-eating',
+      '/blog/adhd-symptoms-overlooked',
+      '/blog/executive-dysfunction-adhd',
+      '/blog/iron-deficiency-brain-fog-adhd',
+    ],
+    service: '/adhd-care',
+    screening: '/adhd-screening',
+  },
+  {
     id: 'adhd-symptoms-evaluation',
     name: 'Symptoms & evaluation',
     blurb: 'Adult signs, differentials, and when structured evaluation makes sense.',
@@ -19,18 +67,20 @@ export const ADHD_TOPIC_CLUSTERS = [
       'adhd-vs-burnout',
       'can-adhd-cause-anxiety',
       'high-functioning-adhd',
-      'adhd-in-women',
       'late-adhd-diagnosis-adults',
-      'executive-dysfunction-adhd',
-      'time-blindness-adhd',
       'rejection-sensitivity-adhd',
       'poor-sleep-feels-like-adhd',
     ],
     blogs: [
       '/blog/how-to-know-if-you-have-adhd-adult',
+      '/blog/executive-dysfunction-adhd',
+      '/blog/adhd-in-women',
       '/blog/adhd-symptoms-overlooked',
       '/blog/youre-not-lazy-signs-undiagnosed-adult-adhd',
       '/blog/adult-adhd-symptoms-california',
+      '/blog/iron-deficiency-brain-fog-adhd',
+      '/blog/adhd-brain-imaging-subtypes',
+      '/blog/pots-and-adhd',
     ],
     service: '/adhd-care',
     screening: '/adhd-screening',
@@ -133,6 +183,8 @@ export const METABOLIC_TOPIC_CLUSTERS = [
       'insulin-resistance-without-diabetes',
       'normal-a1c-insulin-resistance',
       'why-normal-labs-dont-mean-healthy',
+      'which-preventive-blood-tests-adults',
+      'what-to-do-after-lab-results',
       'brain-fog-after-eating',
       'afternoon-energy-crash-after-lunch',
     ],
@@ -308,6 +360,11 @@ export const PRIORITY_INFORMATIONAL_PATHS = new Set([
   '/answers/why-am-i-tired-even-after-sleeping',
   '/answers/what-is-free-testosterone',
   '/blog/how-to-know-if-you-have-adhd-adult',
+  '/blog/adhd-in-women',
+  '/blog/executive-dysfunction-adhd',
+  '/blog/iron-deficiency-brain-fog-adhd',
+  '/blog/adhd-brain-imaging-subtypes',
+  '/blog/pots-and-adhd',
   '/blog/is-online-adhd-diagnosis-legit',
   '/blog/adhd-medication-options-for-adults',
   '/blog/food-noise-and-glp-1-what-it-means-and-what-helps',
@@ -332,9 +389,14 @@ export const PRIORITY_INFORMATIONAL_PATHS = new Set([
  */
 export const CONSOLIDATION_RECOMMENDATIONS = [
   {
-    keep: '/answers/signs-of-adult-adhd',
+    keep: '/blog/adhd-in-women',
     merge: '/answers/adhd-in-women',
-    reason: 'Thin gender variant; adult signs cornerstone covers women-specific patterns in body copy.',
+    reason: 'Women’s ADHD hub owns broad intent; answer page remains the concise FAQ companion.',
+  },
+  {
+    keep: '/blog/executive-dysfunction-adhd',
+    merge: '/answers/executive-dysfunction-adhd',
+    reason: 'Executive dysfunction pillar owns broad intent; answer page remains the concise FAQ companion.',
   },
   {
     keep: '/answers/signs-of-adult-adhd',
@@ -344,12 +406,7 @@ export const CONSOLIDATION_RECOMMENDATIONS = [
   {
     keep: '/answers/signs-of-adult-adhd',
     merge: '/answers/time-blindness-adhd',
-    reason: 'Micro-topic (time blindness) fully covered in signs cornerstone + blog.',
-  },
-  {
-    keep: '/answers/signs-of-adult-adhd',
-    merge: '/answers/executive-dysfunction-adhd',
-    reason: 'Executive dysfunction is an ADHD symptom cluster, not a separate intent.',
+    reason: 'Micro-topic (time blindness) covered in ED pillar + time-blindness FAQ; do not expand into broad ED intent.',
   },
   {
     keep: '/blog/how-to-know-if-you-have-adhd-adult',
@@ -394,6 +451,8 @@ export const CONSOLIDATION_RECOMMENDATIONS = [
 ];
 
 export const BLOG_CLUSTER_ANCHORS = {
+  '/blog/executive-dysfunction-adhd': 'Executive dysfunction in ADHD: domains & what helps (full guide)',
+  '/blog/adhd-in-women': 'ADHD in women: symptoms, masking & late diagnosis (full guide)',
   '/blog/how-to-know-if-you-have-adhd-adult': 'How to know if you have ADHD as an adult (cornerstone)',
   '/blog/is-online-adhd-diagnosis-legit': 'Is online ADHD diagnosis legit? (cornerstone)',
   '/blog/adhd-medication-options-for-adults': 'ADHD medication options for adults (cornerstone)',
@@ -404,4 +463,7 @@ export const BLOG_CLUSTER_ANCHORS = {
   '/blog/free-testosterone-vs-total-testosterone-what-patients-should-know': 'Free vs total testosterone (cornerstone)',
   '/blog/online-adhd-diagnosis-california': 'Online ADHD diagnosis in California',
   '/blog/online-adhd-diagnosis-texas': 'Online ADHD diagnosis in Texas',
+  '/blog/iron-deficiency-brain-fog-adhd': 'Iron deficiency, brain fog & ADHD (association vs causation)',
+  '/blog/adhd-brain-imaging-subtypes': 'ADHD brain imaging biotypes: emerging research explained',
+  '/blog/pots-and-adhd': 'POTS and ADHD: shared symptoms & diagnostic overlap',
 };

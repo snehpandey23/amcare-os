@@ -5,36 +5,36 @@
 import { getPageConversionConfig } from '../data/page-conversion-config.mjs';
 import { CTA_SLOTS, ctaTrackingAttrs } from './cta-system.mjs';
 
-/** @typedef {'secureChat'|'consultation'|'screening'|'newsletter'|'bookDemo'} ConversionGoal */
+/** @typedef {'meetGreet'|'secureChat'|'consultation'|'screening'|'newsletter'|'bookDemo'|'exploreCare'|'viewPricing'|'zocdoc'} ConversionGoal */
 
 /** Conversion goal → default CTA slot id */
 export const CONVERSION_GOAL_SLOTS = {
-  secureChat: 'primary',
-  consultation: 'secondary',
+  meetGreet: 'meetGreet',
+  secureChat: 'secureChat',
+  consultation: 'meetGreet',
   screening: 'leadMagnet',
   newsletter: 'newsletter',
   bookDemo: 'bookDemo',
   exploreCare: 'exploreCare',
   viewPricing: 'viewPricing',
+  zocdoc: 'zocdoc',
 };
 
 /**
  * Intent-based defaults when no page config exists.
- * Secondary goals follow the approved CTA system: general/pricing → Explore Care Options;
- * weight/telehealth/hormones service pages → View Pricing.
  */
 export const USER_INTENT_RULES = {
-  homepage: { intent: 'homepage', primaryGoal: 'secureChat', secondaryGoal: 'exploreCare' },
-  adhd: { intent: 'adhd', primaryGoal: 'screening', secondaryGoal: 'secureChat' },
-  blog: { intent: 'blog', primaryGoal: 'secureChat', secondaryGoal: 'newsletter' },
-  provider: { intent: 'provider', primaryGoal: 'secureChat', secondaryGoal: null },
-  pricing: { intent: 'pricing', primaryGoal: 'secureChat', secondaryGoal: 'exploreCare' },
-  hormones: { intent: 'hormones', primaryGoal: 'secureChat', secondaryGoal: 'viewPricing' },
-  weight: { intent: 'weight', primaryGoal: 'secureChat', secondaryGoal: 'viewPricing' },
-  telehealth: { intent: 'telehealth', primaryGoal: 'secureChat', secondaryGoal: 'viewPricing' },
+  homepage: { intent: 'homepage', primaryGoal: 'meetGreet', secondaryGoal: 'secureChat' },
+  adhd: { intent: 'adhd', primaryGoal: 'screening', secondaryGoal: 'meetGreet' },
+  blog: { intent: 'blog', primaryGoal: 'meetGreet', secondaryGoal: 'newsletter' },
+  provider: { intent: 'provider', primaryGoal: 'meetGreet', secondaryGoal: 'zocdoc' },
+  pricing: { intent: 'pricing', primaryGoal: 'meetGreet', secondaryGoal: 'exploreCare' },
+  hormones: { intent: 'hormones', primaryGoal: 'meetGreet', secondaryGoal: 'viewPricing' },
+  weight: { intent: 'weight', primaryGoal: 'meetGreet', secondaryGoal: 'viewPricing' },
+  telehealth: { intent: 'telehealth', primaryGoal: 'meetGreet', secondaryGoal: 'exploreCare' },
   employer: { intent: 'employer', primaryGoal: 'bookDemo', secondaryGoal: 'secureChat' },
   landing: { intent: 'landing', primaryGoal: null, secondaryGoal: null },
-  default: { intent: 'default', primaryGoal: 'secureChat', secondaryGoal: null },
+  default: { intent: 'default', primaryGoal: 'meetGreet', secondaryGoal: 'exploreCare' },
 };
 
 /** Custom slot for employer / demo flows (Pass 2 wiring) */
@@ -137,14 +137,22 @@ export function resolveConversion(relPath, overrides = {}) {
 
   if (primarySlot === secondarySlot) secondarySlot = null;
 
+  const primary = slotById(primarySlot) ?? goalToSlot(conversionGoal);
+  let secondary = slotById(secondarySlot) ?? goalToSlot(intentRules.secondaryGoal);
+
+  /** On telehealth hub, secondary Explore Care Options → Health Guides hub */
+  if (relPath === 'telehealth.html' && secondary?.id === 'exploreCare') {
+    secondary = { ...secondary, url: '/answers' };
+  }
+
   return {
     relPath,
     intent: pageConfig?.intent ?? intentKey,
     conversionGoal,
     funnel: pageConfig?.funnel ?? null,
     pageType: intentKey,
-    primary: slotById(primarySlot) ?? goalToSlot(conversionGoal),
-    secondary: slotById(secondarySlot) ?? goalToSlot(intentRules.secondaryGoal),
+    primary,
+    secondary,
     additionalCtas: pageConfig?.additionalCtas ?? [],
     config: pageConfig,
   };
@@ -152,16 +160,26 @@ export function resolveConversion(relPath, overrides = {}) {
 
 export function isAdhdFunnelPath(relPath) {
   if (relPath === 'adult-adhd-screening-california.html') return true;
+  if (relPath === 'adhd-screening-results.html') return true;
   return detectUserIntent(relPath) === 'adhd';
 }
 
+const ADHD_SCREENING_NAV_PAGES = new Set([
+  'adhd-care.html',
+  'adhd-screening.html',
+  'adult-adhd-screening-california.html',
+]);
+
 /**
- * Nav CTA slot — preserves legacy behavior: ADHD funnels → Schedule Consultation; else primary.
+ * Nav CTA slot — ADHD cornerstone → screening; results → meet & greet; else primary.
  * @param {string} relPath
  */
 export function resolveNavCtaSlot(relPath) {
   if (relPath.startsWith('answers/')) return null;
-  if (isAdhdFunnelPath(relPath)) return CTA_SLOTS.walkthrough;
+  if (relPath === 'index.html') return CTA_SLOTS.meetGreet;
+  if (relPath === 'adhd-screening-results.html') return CTA_SLOTS.meetGreet;
+  if (ADHD_SCREENING_NAV_PAGES.has(relPath)) return CTA_SLOTS.leadMagnet;
+  if (isAdhdFunnelPath(relPath)) return CTA_SLOTS.meetGreet;
   return resolveConversion(relPath).primary;
 }
 

@@ -11,14 +11,23 @@ export const CAREPATRON_BASE = 'https://book.carepatron.com/Siya-Health?p=X9PN3z
 export const SPRUCE_CHAT_URL = 'https://spruce.care/siyahealth';
 /** Internal transition pages (Google Ads conversion tracking) */
 export const REDIRECT_CHAT_URL = '/redirect/chat';
+export const REDIRECT_MEET_GREET_URL = '/redirect/meet-greet';
+/** @deprecated Legacy path — same destination as meet-greet; kept for tracking compatibility */
 export const REDIRECT_ADHD_WALKTHROUGH_URL = '/redirect/adhd-walkthrough';
 export const REDIRECT_ADHD_EVALUATION_URL = '/redirect/adhd-evaluation';
-/** ADHD evaluation walkthrough (non-clinical) */
-export const ADHD_WALKTHROUGH_LINK = `${CAREPATRON_BASE}&i=ftxOxenx`;
-/** $199 adult ADHD evaluation booking */
+export const ZOCDOC_BOOKING_URL =
+  'https://www.zocdoc.com/booking-link/practice/siya-healthcare-182234';
+/** Direct-pay laboratory storefront (Rupa Health) — browse tests & pricing externally */
+export const RUPA_LAB_STOREFRONT_URL =
+  'https://labs.rupahealth.com/store/storefront_42daXx7';
+/** Free 15-minute Meet & Greet / discovery call (non-clinical) */
+export const MEET_GREET_BOOKING_URL = `${CAREPATRON_BASE}&i=kkarJfxH`;
+/** @deprecated Alias — intro call / walkthrough now routes to Meet & Greet slot */
+export const ADHD_WALKTHROUGH_LINK = MEET_GREET_BOOKING_URL;
+/** $149 adult ADHD evaluation booking */
 export const ADHD_EVALUATION_199_LINK = `${CAREPATRON_BASE}&i=bxrKBOuk`;
-/** Schedule Consultation / book appointment — ADHD walkthrough slot */
-export const BOOKING_LINK = ADHD_WALKTHROUGH_LINK;
+/** Primary low-friction booking — Free Meet & Greet */
+export const BOOKING_LINK = MEET_GREET_BOOKING_URL;
 /** @deprecated Legacy CarePatron consultation slot — migrates to walkthrough */
 export const LEGACY_CAREPATRON_CONSULTATION_LINK = `${CAREPATRON_BASE}&i=sysv73e4`;
 export const PROFILE_LAST_UPDATED = '2026-06-05';

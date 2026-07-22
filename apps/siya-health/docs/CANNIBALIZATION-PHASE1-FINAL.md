@@ -1,6 +1,6 @@
 # Cannibalization Phase 1 — Final Report
 
-Generated: 2026-07-06T11:43:01.956Z
+Generated: 2026-07-21T06:58:15.042Z
 
 ## Build validation
 
@@ -8,15 +8,18 @@ Generated: 2026-07-06T11:43:01.956Z
 |-------|--------|
 | Broken internal links | ✓ 0 |
 | Duplicate title tags | ✓ 0 |
-| Duplicate H1s | ✓ 0 |
+| Duplicate H1s | ✗ 1 groups |
 | JSON-LD parse errors | ✓ 0 |
-| Sitemap URLs | 141 |
-| **Overall** | **PASS** |
+| Sitemap URLs | 179 |
+| **Overall** | **REVIEW** |
 
 ## Pages modified
 
-### Health Guides (25 intent overrides)
+### Health Guides (28 intent overrides)
 
+- `/answers/adhd-in-women`
+- `/answers/executive-dysfunction-adhd`
+- `/answers/time-blindness-adhd`
 - `/answers/is-online-adhd-diagnosis-legitimate`
 - `/answers/adderall-vs-vyvanse-adults`
 - `/answers/adhd-medication-side-effects`
@@ -45,7 +48,7 @@ Generated: 2026-07-06T11:43:01.956Z
 
 ### Canonical pointer blocks
 
-0/25 guides have top pointer + full-guide CTA.
+0/28 guides have top pointer + full-guide CTA.
 
 ## Titles / H1s changed (duplicate pairs)
 
@@ -65,7 +68,7 @@ Generated: 2026-07-06T11:43:01.956Z
 
 ## Links added
 
-- Reciprocal blog ↔ guide links for 25 HIGH-overlap pairs
+- Reciprocal blog ↔ guide links for 28 HIGH-overlap pairs
 - Cornerstone blogs: expanded Related Health Guides sections
 - Continue reading: answer links on canonical winning blogs
 

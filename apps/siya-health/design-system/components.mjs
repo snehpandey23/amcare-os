@@ -28,16 +28,30 @@ export function escHtml(s) {
     .replace(/>/g, '&gt;');
 }
 
+/** Slot ids that are also ConversionGoal values — prefer over page primary goal. */
+const CTA_SLOT_AS_GOAL = new Set([
+  'meetGreet',
+  'secureChat',
+  'consultation',
+  'screening',
+  'newsletter',
+  'bookDemo',
+  'exploreCare',
+  'viewPricing',
+  'zocdoc',
+]);
+
 function linkAttrs(href, opts = {}) {
   const { external = false, track = '', location = '', relPath = '', ctaSlot = '', analytics = null } = opts;
-  const ext = external ? ' target="_blank" rel="noopener"' : '';
+  const ext = external ? ' target="_blank" rel="noopener noreferrer"' : '';
   let meta = analytics;
   if (!meta && relPath) {
     const conv = resolveConversion(relPath);
+    const goalFromSlot = ctaSlot && CTA_SLOT_AS_GOAL.has(ctaSlot) ? ctaSlot : null;
     meta = {
       pageType: conv.pageType,
       intent: conv.intent,
-      conversionGoal: conv.conversionGoal ?? '',
+      conversionGoal: goalFromSlot || conv.conversionGoal || '',
       ctaSlot: ctaSlot || '',
     };
   }
@@ -627,21 +641,17 @@ export function renderNavCtaMarkup(relPath, location = 'nav') {
 /** Inner FAQ accordion CTA block (not full section) */
 export function renderFaqCtaInner(relPath) {
   if (relPath === 'adhd-care.html') {
-    const screeningBtn = renderButton({
-      label: CTA_SLOTS.leadMagnet.label,
-      href: '/adhd-screening?start=asrs',
+    const meetBtn = renderButton({
+      ...slotToButton(CTA_SLOTS.meetGreet, { location: 'faq-cta', relPath }),
       variant: 'primary',
-      track: CTA_SLOTS.leadMagnet.track,
-      location: 'faq-cta',
     });
     return `            <div class="ds-faq__cta faq-accordion-cta">
               <p class="faq-accordion-cta-headline">Still deciding?</p>
               <div class="faq-accordion-cta-buttons">
-                ${screeningBtn}
-                <a class="button secondary" href="/pricing">View Pricing</a>
+                ${meetBtn}
+                <a class="button ds-button ds-button--secondary secondary" href="tel:+12154451244" data-siya-track="phone_click" data-siya-location="faq-cta" data-page-type="adhd" data-intent="adhd" data-component="button">Call Us (215) 445-1244</a>
               </div>
-              <p class="faq-accordion-cta-subtext">Most patients start with a screening or review pricing before booking.</p>
-              <p class="faq-accordion-cta-phone"><a href="tel:+12154451244">(215) 445-1244</a></p>
+              <p class="faq-accordion-cta-subtext">Most patients start with a screening or <a href="/pricing">review pricing</a> before booking.</p>
             </div>`;
   }
   const { primary } = resolveConversion(relPath);
@@ -657,12 +667,24 @@ export function renderFaqCtaInner(relPath) {
 
 /** Blog / guide end-of-article CTA section */
 export function renderBlogFinalCtaSection(relPath) {
-  const { primary } = resolveConversion(relPath);
+  const { primary, secondary } = resolveConversion(relPath);
   const slot = primary ?? CTA_SLOTS.primary;
+  const ctas = [
+    slotToButton(slot, { location: 'blog-final-cta', relPath }),
+  ].filter(Boolean);
+  if (secondary) {
+    ctas.push(
+      slotToButton(secondary, {
+        variant: 'secondary',
+        location: 'blog-final-cta',
+        relPath,
+      }),
+    );
+  }
   const band = renderCtaBlock({
     title: 'Not sure where to start?',
     text: 'A brief clinician conversation can help you understand your options—no obligation.',
-    ctas: [slotToButton(slot, { location: 'blog-final-cta' })],
+    ctas,
   });
   return `<section class="section blog-final-cta">
         <div class="container">
@@ -710,10 +732,11 @@ export function renderAboutTeamCard(provider, { variant = 'homepage', photoHtml 
             </article>`;
   }
   const tagline = p.homepageBio ?? p.servicePageTagline ?? '';
+  const clean = String(tagline).replace(/<[^>]+>/g, '').trim();
   return `            <article class="${dualClass('about-team-card', 'ds-provider-card')}">
               ${photo}
               <h3><a href="/providers/${p.slug}">${escHtml(displayName)}</a></h3>
-              <p class="about-team-tagline">${escHtml(String(tagline).replace(/<[^>]+>/g, '').slice(0, 120))}</p>
+              <p class="about-team-tagline">${escHtml(clean)}</p>
               <a class="button secondary" href="/providers/${p.slug}">View profile</a>
             </article>`;
 }

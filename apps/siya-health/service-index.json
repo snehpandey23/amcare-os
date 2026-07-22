@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-06T11:43:00.617Z",
+  "generated": "2026-07-21T06:58:13.665Z",
   "services": [
     {
       "title": "Siya Health | When Focus, Energy, or Weight Won't Budge",
@@ -14,52 +14,52 @@
       "description": "Siya Health is physician-led virtual care for adults seeking clear answers about focus, energy, weight, mood, metabolism, hormones, and everyday health. California, Texas, Pennsylvania, Florida."
     },
     {
-      "title": "Adult ADHD Diagnosis Online — Same-Week Evaluation ($199)",
+      "title": "Adult ADHD Diagnosis Online — Same-Week Evaluation",
       "url": "https://siya.health/adhd-care",
       "type": "service-adhd",
-      "description": "Primary care–led adult ADHD evaluation online — DSM-based assessment ($199). Licensed medical providers. Individualized validated tools as clinically appropriate. CA, TX, PA, FL."
+      "description": "Primary care–led adult ADHD evaluation online — DSM-based assessment. Licensed medical providers. Individualized validated tools as clinically appropriate. CA, TX, PA, FL."
     },
     {
-      "title": "ADHD Diagnosis Austin TX | Online $199 Evaluation",
+      "title": "ADHD Diagnosis Austin TX | Online Evaluation",
       "url": "https://siya.health/adhd-diagnosis-austin",
       "type": "service-adhd",
-      "description": "Adult ADHD diagnosis in Austin, Texas—online. $199 evaluation, same-week telehealth, ADHD-CCSP providers. Book your virtual visit."
+      "description": "Adult ADHD diagnosis in Austin, Texas—online. $149 evaluation, same-week telehealth, ADHD-CCSP providers. Book your virtual visit."
     },
     {
-      "title": "Online ADHD Diagnosis Florida | $199 Evaluation",
+      "title": "Online ADHD Diagnosis Florida Evaluation",
       "url": "https://siya.health/adhd-diagnosis-florida",
       "type": "service-adhd",
-      "description": "Adult ADHD diagnosis online in Florida. $199, 60–90 min evaluation, board-certified providers. Same-week telehealth. individualized clinical assessment. Book today."
+      "description": "Adult ADHD diagnosis online in Florida. $149, 60–90 min evaluation, board-certified providers. Same-week telehealth. individualized clinical assessment. Book today."
     },
     {
-      "title": "ADHD Diagnosis Houston TX | Online $199 Evaluation",
+      "title": "ADHD Diagnosis Houston TX | Online Evaluation",
       "url": "https://siya.health/adhd-diagnosis-houston",
       "type": "service-adhd",
-      "description": "Houston adult ADHD diagnosis online. $199 comprehensive evaluation, board-certified telehealth. Same-week appointments. individualized clinical assessment."
+      "description": "Houston adult ADHD diagnosis online. $149 comprehensive evaluation, board-certified telehealth. Same-week appointments. individualized clinical assessment."
     },
     {
-      "title": "Online ADHD Diagnosis Pennsylvania | $199",
+      "title": "Online ADHD Diagnosis Pennsylvania",
       "url": "https://siya.health/adhd-diagnosis-pennsylvania",
       "type": "service-adhd",
-      "description": "Pennsylvania adult ADHD diagnosis online. $199 virtual evaluation. Licensed, ADHD-CCSP–trained clinicians. Philadelphia, Pittsburgh & statewide telehealth."
+      "description": "Pennsylvania adult ADHD diagnosis online. $149 virtual evaluation. Licensed, ADHD-CCSP–trained clinicians. Philadelphia, Pittsburgh & statewide telehealth."
     },
     {
-      "title": "ADHD Diagnosis Philadelphia PA | Online $199",
+      "title": "ADHD Diagnosis Philadelphia PA | Online",
       "url": "https://siya.health/adhd-diagnosis-philadelphia",
       "type": "service-adhd",
-      "description": "Philadelphia adult ADHD diagnosis online. $199 evaluation, ADHD-CCSP providers, telehealth statewide in PA. Book today."
+      "description": "Philadelphia adult ADHD diagnosis online. $149 evaluation, ADHD-CCSP providers, telehealth statewide in PA. Book today."
     },
     {
-      "title": "Online ADHD Diagnosis Texas | $199 Evaluation",
+      "title": "Online ADHD Diagnosis Texas",
       "url": "https://siya.health/adhd-diagnosis-texas",
       "type": "service-adhd",
-      "description": "Adult ADHD diagnosis online in Texas. $199 evaluation, ADHD-CCSP providers, same-week telehealth. Austin, Houston, Dallas-area & statewide. Book now."
+      "description": "Adult ADHD diagnosis online in Texas. $149 evaluation, ADHD-CCSP providers, same-week telehealth. Austin, Houston, Dallas-area & statewide. Book now."
     },
     {
-      "title": "ADHD Evaluation Cost Online | $199 Flat Rate",
+      "title": "ADHD Evaluation Cost Online | Flat-Rate Pricing",
       "url": "https://siya.health/adhd-evaluation-cost",
       "type": "service-adhd",
-      "description": "ADHD evaluation cost: $199 transparent flat fee for 60–90 min online visit. No insurance surprise bills. FSA/HSA. Texas, Pennsylvania, Florida."
+      "description": "ADHD evaluation cost: $149 transparent flat fee for 60–90 min online visit. No insurance surprise bills. FSA/HSA. Texas, Pennsylvania, Florida."
     },
     {
       "title": "Start screening",
@@ -68,16 +68,22 @@
       "description": "Tell us what you need: free 2-minute ADHD screening (ASRS), medical weight loss, or telehealth. Guided next steps for Texas-area care."
     },
     {
+      "title": "ADHD Screening Complete",
+      "url": "https://siya.health/adhd-screening-results",
+      "type": "service-adhd",
+      "description": "Your ADHD screening is complete. Choose next steps: book a free Meet & Greet, start an ADHD evaluation, or ask a question via secure medical chat."
+    },
+    {
       "title": "ADHD Treatment Online | Telehealth TX, PA, FL",
       "url": "https://siya.health/adhd-treatment-online",
       "type": "service-adhd",
-      "description": "Online ADHD treatment after diagnosis: medication management, follow-ups, telehealth in California, Texas, Pennsylvania & Florida. Start with $199 evaluation."
+      "description": "Online ADHD treatment after diagnosis: medication management, follow-ups, telehealth in California, Texas, Pennsylvania & Florida. Start with $149 evaluation."
     },
     {
-      "title": "Adult ADHD Diagnosis Online | $199 Evaluation",
+      "title": "Adult ADHD Diagnosis Online",
       "url": "https://siya.health/adult-adhd-diagnosis",
       "type": "service-adhd",
-      "description": "Get an adult ADHD diagnosis online from board-certified providers. $199, 60–90 min, individualized clinical assessment. TX, PA, FL. Same-week telehealth appointments."
+      "description": "Get an adult ADHD diagnosis online from board-certified providers. $149, 60–90 min, individualized clinical assessment. TX, PA, FL. Same-week telehealth appointments."
     },
     {
       "title": "Online ADHD Screening in California | Free 2-Minute Test",
@@ -86,28 +92,94 @@
       "description": "Free online ADHD screening for adults in California. Take a 2-minute test with no sign-up, then explore virtual ADHD care with licensed physicians serving California."
     },
     {
-      "title": "Creyos ADHD Testing Online | Part of $199 Evaluation",
+      "title": "Creyos ADHD Testing Online | Part of Your Evaluation",
       "url": "https://siya.health/creyos-adhd-testing",
       "type": "service-adhd",
-      "description": "Creyos cognitive testing for ADHD as part of your $199 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL."
+      "description": "Creyos cognitive testing for ADHD as part of your $149 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL."
+    },
+    {
+      "title": "Labs &amp; Blood Tests | Transparent Direct-Pay Testing",
+      "url": "https://siya.health/labs",
+      "type": "service-labs",
+      "description": "Explore transparent direct-pay laboratory testing for thyroid, blood sugar, vitamins, iron, metabolic health and preventive care. Physician guidance available through Siya Health."
+    },
+    {
+      "title": "A1c &amp; Blood Sugar Labs | Metabolic Testing",
+      "url": "https://siya.health/labs/a1c-blood-sugar",
+      "type": "service-labs",
+      "description": "Learn what hemoglobin A1c measures, how it relates to prediabetes and metabolic health, and when blood sugar testing may be appropriate. Transparent direct-pay options available."
+    },
+    {
+      "title": "Labs &amp; ADHD Evaluation Support | Not a Blood Test Diagnosis",
+      "url": "https://siya.health/labs/adhd-support",
+      "type": "service-labs",
+      "description": "Blood tests do not diagnose ADHD. Learn when selected labs may help evaluate other contributors to fatigue, concentration problems, or brain fog—and how Siya Health approaches testing."
+    },
+    {
+      "title": "Fatigue &amp; Brain Fog Labs | Blood Tests",
+      "url": "https://siya.health/labs/fatigue-brain-fog",
+      "type": "service-labs",
+      "description": "Learn which laboratory tests clinicians may consider for fatigue and brain fog—and why results need clinical context. Transparent direct-pay options available."
+    },
+    {
+      "title": "How to Read Your Lab Results",
+      "url": "https://siya.health/labs/how-to-read-results",
+      "type": "service-labs",
+      "description": "Got your results? Reference ranges don’t diagnose disease. Learn how to read labs calmly—and when to book interpretation with a Siya Health clinician."
+    },
+    {
+      "title": "Iron &amp; Ferritin Blood Tests | Direct-Pay Labs",
+      "url": "https://siya.health/labs/iron-ferritin",
+      "type": "service-labs",
+      "description": "Learn what ferritin and iron studies measure, when testing may be appropriate for fatigue or heavy periods, and why interpretation matters. Transparent direct-pay options available."
+    },
+    {
+      "title": "Men's Health Labs | Testosterone Context",
+      "url": "https://siya.health/labs/mens-health",
+      "type": "service-labs",
+      "description": "Learn when testosterone and related laboratory testing may be appropriate for energy, drive, or metabolic concerns—and why results need clinical context. Direct-pay options available."
+    },
+    {
+      "title": "Preventive Blood Tests &amp; Wellness Labs",
+      "url": "https://siya.health/labs/preventive",
+      "type": "service-labs",
+      "description": "Explore commonly ordered preventive laboratory tests—CBC, metabolic panel, lipids, A1c—and how physician-guided testing supports primary care. Transparent direct-pay options available."
+    },
+    {
+      "title": "Thyroid Blood Tests (TSH &amp; More)",
+      "url": "https://siya.health/labs/thyroid",
+      "type": "service-labs",
+      "description": "Learn when thyroid testing such as TSH and free T4 may be appropriate for fatigue, brain fog, or unexplained changes—and why thyroid disease should not be assumed. Direct-pay options available."
+    },
+    {
+      "title": "Vitamin B12 Blood Test | Nutritional Labs",
+      "url": "https://siya.health/labs/vitamin-b12",
+      "type": "service-labs",
+      "description": "Learn when vitamin B12 testing may be appropriate for fatigue, neurologic symptoms, or dietary risk—and why results need clinical interpretation. Direct-pay options available."
+    },
+    {
+      "title": "Women's Midlife Labs | Perimenopause Context",
+      "url": "https://siya.health/labs/womens-midlife",
+      "type": "service-labs",
+      "description": "Learn how laboratory testing may support women’s midlife concerns—fatigue, brain fog, iron, thyroid, and metabolic markers—without claiming a hormone panel diagnoses perimenopause."
     },
     {
       "title": "Men's Health &amp; Longevity",
       "url": "https://siya.health/mens-health-longevity",
       "type": "service-mens-health",
-      "description": "Men's health services including testosterone therapy, metabolic health, and erectile dysfunction treatment across TX, PA, and FL."
+      "description": "Physician-led men's health telehealth—testosterone evaluation, erectile dysfunction support, metabolic health, and longevity planning across CA, TX, PA, and FL."
     },
     {
       "title": "Online ADHD Test &amp; Screening (Free)",
       "url": "https://siya.health/online-adhd-test",
       "type": "service-adhd",
-      "description": "Take a free online ADHD screening in 2 minutes. Not a diagnosis—see if a $199 clinical evaluation with a board-certified provider is right for you."
+      "description": "Take a free online ADHD screening in 2 minutes. Not a diagnosis—see if a $149 clinical evaluation with a board-certified provider is right for you."
     },
     {
-      "title": "Concierge Primary Care",
+      "title": "Primary &amp; Urgent Care Telehealth",
       "url": "https://siya.health/primary-urgent-care",
       "type": "service-telehealth",
-      "description": "Virtual primary care and concierge visits with licensed providers. Telehealth services across California, Texas, Pennsylvania, and Florida."
+      "description": "Virtual primary and urgent care across California, Texas, Pennsylvania, and Florida. Annual wellness, chronic care, preventive labs review, and clear follow-up plans."
     },
     {
       "title": "Starting Your ADHD Evaluation",
@@ -116,16 +188,16 @@
       "description": "Learn more about Starting Your ADHD Evaluation with Siya Health telehealth."
     },
     {
-      "title": "Booking Your Free ADHD Intro Call",
+      "title": "Booking Your Free Meet &amp; Greet (Legacy Path)",
       "url": "https://siya.health/redirect/adhd-walkthrough",
       "type": "service-adhd",
-      "description": "Learn more about Booking Your Free ADHD Intro Call with Siya Health telehealth."
+      "description": "Learn more about Booking Your Free Meet & Greet (Legacy Path) with Siya Health telehealth."
     },
     {
       "title": "Virtual Medical Care | Siya Health Telehealth",
       "url": "https://siya.health/telehealth",
       "type": "service-telehealth",
-      "description": "Fast, convenient telehealth from board-certified providers. Primary care, urgent care, prescriptions, labs. TX, PA, FL. No waiting rooms."
+      "description": "Fast, convenient telehealth from board-certified providers. Primary care, urgent care, prescriptions, labs. CA, TX, PA, FL. No waiting rooms."
     },
     {
       "title": "Provider-Guided Medical Weight Loss",

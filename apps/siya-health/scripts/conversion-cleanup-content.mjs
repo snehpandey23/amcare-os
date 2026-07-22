@@ -5,15 +5,72 @@
  */
 import { renderButton } from '../design-system/components.mjs';
 import { PRICING } from '../data/site-standards.mjs';
+import { renderInitialEvaluationPrice } from '../data/pricing-display.mjs';
+import { REDIRECT_MEET_GREET_URL, REDIRECT_CHAT_URL } from '../data/providers-core.mjs';
 
 const SCREENING_URL = '/adhd-screening?adhd=1';
-const CONSULT_URL = '/redirect/adhd-walkthrough';
-const EVAL_URL = '/redirect/adhd-evaluation';
-const CHAT_URL = '/redirect/chat';
+const CONSULT_URL = REDIRECT_MEET_GREET_URL;
+const CHAT_URL = REDIRECT_CHAT_URL;
 const PRICING_URL = PRICING.path;
+
+function pricingItemsFor(variant) {
+  const evalItem = `<li><strong>Initial evaluation:</strong> ${renderInitialEvaluationPrice()}</li>`;
+  switch (variant) {
+    case 'weight':
+      return `${evalItem}
+                <li><strong>Weight / metabolic follow-up:</strong> ${PRICING.nonControlledFollowUp.display}/month</li>
+                <li><strong>Medication management (when appropriate):</strong> included in follow-up plan</li>`;
+    case 'mens':
+      return `${evalItem}
+                <li><strong>Men&rsquo;s health follow-up:</strong> ${PRICING.nonControlledFollowUp.display}/month</li>
+                <li><strong>Hormone / longevity monitoring:</strong> when clinically appropriate</li>`;
+    case 'womens':
+      return `${evalItem}
+                <li><strong>Women&rsquo;s health follow-up:</strong> ${PRICING.nonControlledFollowUp.display}/month</li>
+                <li><strong>Ongoing care:</strong> when clinically appropriate</li>`;
+    case 'telehealth':
+      return `${evalItem}
+                <li><strong>ADHD care follow-up:</strong> ${PRICING.nonControlledFollowUp.display}&ndash;${PRICING.controlledFollowUp.display}/month</li>
+                <li><strong>Weight / metabolic follow-up:</strong> ${PRICING.nonControlledFollowUp.display}/month</li>
+                <li><strong>Primary / chronic care follow-up:</strong> ${PRICING.nonControlledFollowUp.display}/month</li>`;
+    case 'primary':
+    case 'labs':
+      return `${evalItem}
+                <li><strong>Ongoing care follow-up:</strong> ${PRICING.nonControlledFollowUp.display}/month</li>
+                <li><strong>Labs &amp; care coordination:</strong> priced separately when ordered</li>`;
+    default:
+      return `${evalItem}
+                <li><strong>Non-controlled medication follow-up:</strong> ${PRICING.nonControlledFollowUp.display}/month</li>
+                <li><strong>Controlled medication follow-up:</strong> ${PRICING.controlledFollowUp.display}/month when clinically appropriate</li>`;
+  }
+}
+
+function pricingNoteFor(variant) {
+  if (variant === 'weight') {
+    return 'Medication costs (including GLP-1s when prescribed) are separate. Availability may vary by state.';
+  }
+  if (variant === 'telehealth') {
+    return 'Pricing varies by pathway. Medication costs are separate. Book a free Meet &amp; Greet to confirm eligibility.';
+  }
+  if (variant === 'mens') {
+    return 'Labs and medication costs are separate when ordered. Availability may vary by state.';
+  }
+  return 'Medication costs are separate. Availability may vary by state. Book a free Meet &amp; Greet to confirm eligibility.';
+}
+
+function variantForPath(relPath = '') {
+  if (relPath.includes('weight-loss')) return 'weight';
+  if (relPath.includes('mens-health')) return 'mens';
+  if (relPath.includes('womens-health')) return 'womens';
+  if (relPath.includes('telehealth')) return 'telehealth';
+  if (relPath.includes('primary')) return 'primary';
+  if (relPath.includes('labs')) return 'labs';
+  return 'default';
+}
 
 /** Compact pricing strip — Task 3. Marker: SIYA:PRICING-STRIP */
 export function renderPricingStrip(relPath = '') {
+  const variant = variantForPath(relPath);
   const viewPricing = renderButton({
     label: 'View Pricing',
     href: PRICING_URL,
@@ -29,11 +86,9 @@ export function renderPricingStrip(relPath = '') {
             <div class="pricing-strip-copy">
               <h2 id="pricing-strip-heading" class="pricing-strip-title">Transparent pricing</h2>
               <ul class="pricing-strip-list">
-                <li><strong>Initial evaluation:</strong> ${PRICING.initialEvaluation.display}</li>
-                <li><strong>Non-controlled medication follow-up:</strong> ${PRICING.nonControlledFollowUp.display}/month</li>
-                <li><strong>Controlled medication follow-up:</strong> ${PRICING.controlledFollowUp.display}/month when clinically appropriate</li>
+                ${pricingItemsFor(variant)}
               </ul>
-              <p class="pricing-strip-note">Medication costs are separate. Availability may vary by state. Start a secure medical chat to confirm eligibility.</p>
+              <p class="pricing-strip-note">${pricingNoteFor(variant)}</p>
             </div>
             <div class="pricing-strip-cta">
               ${viewPricing}
@@ -62,10 +117,10 @@ export function renderAdhdNextSteps(relPath = '') {
     relPath,
   });
   const consultBtn = renderButton({
-    label: 'Book Free ADHD Consultation',
+    label: 'Book Free Meet & Greet',
     href: CONSULT_URL,
     variant: 'secondary',
-    track: 'click_book_walkthrough',
+    track: 'meet_greet_click',
     location: 'adhd-what-next',
     relPath,
   });
@@ -73,14 +128,12 @@ export function renderAdhdNextSteps(relPath = '') {
       <section class="section adhd-next-steps" aria-labelledby="adhd-next-steps-heading">
         <div class="container">
           <h2 id="adhd-next-steps-heading">What happens next</h2>
-          <p class="adhd-screening-disclaimer" role="note">This screening is not a diagnosis. It is designed to help you decide whether a full ADHD evaluation may be appropriate.</p>
-          <ol class="adhd-next-steps-list">
+          <ol class="adhd-next-steps-list adhd-next-steps-list--compact">
             <li>Take the free 2-minute ADHD screening.</li>
-            <li>Review whether your symptoms may suggest ADHD.</li>
-            <li>Book a free consultation if you have questions.</li>
-            <li>Start your structured ${PRICING.initialEvaluation.display} ADHD evaluation.</li>
-            <li>Meet with a licensed provider online.</li>
+            <li>Book a free Meet &amp; Greet if you have questions.</li>
+            <li>Start a structured ADHD evaluation when ready (${renderInitialEvaluationPrice()}).</li>
           </ol>
+          <p class="adhd-next-steps-note">Screening is not a diagnosis. A licensed clinician determines next steps after evaluation.</p>
           <div class="adhd-next-steps-cta cta-band-buttons">
             ${screeningBtn}
             ${consultBtn}

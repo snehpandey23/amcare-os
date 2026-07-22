@@ -27,7 +27,7 @@ export const ADHD_SERVICE_LINKS = [
   {
     href: '/adult-adhd-diagnosis',
     label: 'Adult ADHD diagnosis online',
-    blurb: 'Structured $199 telehealth evaluation with licensed clinicians.',
+    blurb: 'Structured $149 telehealth evaluation with licensed clinicians.',
   },
   {
     href: '/adhd-treatment-online',
@@ -37,7 +37,7 @@ export const ADHD_SERVICE_LINKS = [
   {
     href: '/adhd-evaluation-cost',
     label: 'ADHD evaluation cost',
-    blurb: 'Transparent $199 flat-fee pricing—no insurance surprise bills.',
+    blurb: 'Transparent $149 flat-fee pricing—no insurance surprise bills.',
   },
 ];
 
@@ -108,7 +108,7 @@ export function renderBlogAdhdCarePathwaysSection() {
   return `<!-- SIYA:ADHD-BLOG-CARE-PATHWAYS -->
           <section class="blog-hub-section adhd-blog-care-pathways" id="care-pathways" aria-labelledby="adhd-blog-care-pathways-heading">
             <h2 id="adhd-blog-care-pathways-heading">From articles to clinical care</h2>
-            <p class="lead" style="max-width:720px;">Articles explain symptoms and legitimacy—clinical pages help you act. Try ${onlineTest} or ${caScreen} before booking. See ${link('/adhd-evaluation-cost', 'what the $199 evaluation includes')}, ${link('/adult-adhd-diagnosis', 'adult diagnosis pathways')}, and ${link('/adhd-treatment-online', 'ongoing treatment')} when you are ready.</p>
+            <p class="lead" style="max-width:720px;">Articles explain symptoms and legitimacy—clinical pages help you act. Try ${onlineTest} or ${caScreen} before booking. See ${link('/adhd-evaluation-cost', 'what the $149 evaluation includes')}, ${link('/adult-adhd-diagnosis', 'adult diagnosis pathways')}, and ${link('/adhd-treatment-online', 'ongoing treatment')} when you are ready.</p>
             <p style="max-width:720px;">State-specific evaluation: ${geoList}. Metro guides: ${metroList}.</p>
           </section>
           <!-- /SIYA:ADHD-BLOG-CARE-PATHWAYS -->`;

@@ -43,7 +43,7 @@ export const PAGE_RECIPES = {
       { slot: 'hero', component: 'renderHero', required: true, notes: 'accent CTA = screening; secondary = chat' },
       { slot: 'stats', component: 'renderStatsSection', required: false, notes: 'trust-metrics-adhd-rewrite persuasive copy' },
       { slot: 'how-it-works', component: 'renderTimeline', required: true },
-      { slot: 'pricing', component: 'renderPricingGrid', required: true, notes: '$199 eval + follow-up tiers' },
+      { slot: 'pricing', component: 'renderPricingGrid', required: true, notes: '$149 eval + follow-up tiers' },
       { slot: 'testimonials', component: 'renderTestimonial', required: false },
       { slot: 'faq', component: 'renderFaq', required: true, notes: 'ADHD_FAQ_CTA from site-chrome for adhd-care' },
       { slot: 'learn-more', component: 'renderSectionHeader', required: false, notes: 'SIYA:LEARN-MORE-ADHD cluster' },

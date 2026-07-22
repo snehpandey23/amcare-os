@@ -1,0 +1,28 @@
+id: 2026-07-M-01-001
+topic: sleep
+intent: Education
+family: Myth
+layout: M-01
+journey_stage: Considering
+persona: Adult_Fatigue
+emotion: Relieved
+tone: Direct
+message: "Myth: Every focus problem is ADHD. Reality: Sleep can mimic it."
+image: Two-panel type
+image_category: sleep
+image_ref: SOCIAL-HOOKS Hook 2
+headline_length: Short
+caption_length: Medium
+cta: Article
+cta_label: Read the Guide
+evidence_level: ClinicalPractice
+clinical_review: true
+platforms:
+  - LinkedIn
+  - Instagram
+variants: 1
+claims_ok: true
+source_refs:
+  - /answers/poor-sleep-feels-like-adhd
+status: seed
+source: SOCIAL-HOOKS Hook 2

@@ -263,7 +263,7 @@ const CORE_ANSWER_SEEDS = [
     slug: 'how-much-does-adhd-testing-cost',
     question: 'How much does ADHD testing cost?',
     shortAnswer:
-      'Costs vary widely: some clinics charge $500–$2,000+; Siya Health offers a transparent $199 comprehensive adult ADHD evaluation (60–90 minutes) including clinical interview and standardized tools when clinically indicated. Always confirm what is included before booking.',
+      'Costs vary widely: some clinics charge $500–$2,000+; Siya Health offers a transparent $149 comprehensive adult ADHD evaluation (60–90 minutes) including clinical interview and standardized tools when clinically indicated. Always confirm what is included before booking.',
     paragraphs: [
       'Insurance may cover some in-network evaluations but often involves prior authorization delays. Many patients use FSA/HSA for direct-pay telehealth.',
     ],
@@ -1087,7 +1087,7 @@ const CORE_ANSWER_SEEDS = [
     shortAnswer:
       'Texas adults can complete structured ADHD telehealth evaluations with Texas-licensed clinicians, including history, standardized assessments, and follow-up when indicated. Controlled medication rules apply with monitoring and PDMP review.',
     paragraphs: [
-      'Transparent $199 evaluation pricing is published at Siya Health for eligible patients.',
+      'Transparent $149 evaluation pricing is published at Siya Health for eligible patients.',
     ],
     evidence: ['Texas Medical Board telemedicine rules', 'Texas PDMP requirements'],
     related: ['telehealth-adhd-california', 'can-you-get-adhd-medication-online'],
@@ -1109,11 +1109,11 @@ const CORE_ANSWER_SEEDS = [
   },
   {
     slug: 'what-included-199-adhd-evaluation',
-    question: 'What is included in Siya Health’s $199 ADHD evaluation?',
+    question: 'What is included in a Siya Health ADHD evaluation?',
     shortAnswer:
-      'Siya Health’s $199 adult ADHD evaluation is a 60–90 minute telehealth visit with a licensed medical provider—including clinical interview, validated assessment tools as clinically appropriate (such as ASRS, DIVA, Wender Utah, SWAN, or Creyos when indicated), comorbidity screening, and a documented plan. No insurance required. Diagnosis does not guarantee medication.',
+      'Siya Health’s {{pricing.initialEvaluation}} adult ADHD evaluation is a 60–90 minute telehealth visit with a licensed medical provider—including clinical interview, validated assessment tools as clinically appropriate (such as ASRS, DIVA, Wender Utah, SWAN, or Creyos when indicated), comorbidity screening, and a documented plan. No insurance required. Diagnosis does not guarantee medication.',
     paragraphs: [
-      'Your clinician selects assessment tools based on clinical judgment—not every patient receives every instrument. Optional follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.',
+      'Your clinician selects assessment tools based on clinical judgment—not every patient receives every instrument. Optional follow-up plans start at {{pricing.nonControlledFollowUp}}/month for non-controlled medications, or {{pricing.controlledFollowUp}}/month for controlled-medication follow-up when clinically appropriate. See /pricing for the current fee schedule.',
     ],
     evidence: ['Siya Health /adhd-care service description', 'Published pricing at /pricing'],
     related: ['how-much-does-adhd-testing-cost', 'how-long-adhd-evaluation', 'screening-vs-adhd-evaluation'],
@@ -1136,6 +1136,23 @@ const CORE_ANSWER_SEEDS = [
 ];
 
 export const ANSWER_SEEDS = [...mergePhase5Seeds(CORE_ANSWER_SEEDS), ...PHASE3_ANSWER_SEEDS];
+
+/**
+ * Hand-maintained Health Guides that exist as HTML but are not in ANSWER_SEEDS.
+ * Do not delete these files. Prefer promoting them into seeds before regenerating answers.
+ * - afternoon-energy-crash-after-lunch
+ * - food-noise-returned-on-glp-1
+ * - high-shbg-low-free-testosterone
+ * - weight-gain-after-stopping-ozempic
+ * - why-normal-labs-dont-mean-healthy
+ */
+export const HAND_MAINTAINED_ANSWER_SLUGS = [
+  'afternoon-energy-crash-after-lunch',
+  'food-noise-returned-on-glp-1',
+  'high-shbg-low-free-testosterone',
+  'weight-gain-after-stopping-ozempic',
+  'why-normal-labs-dont-mean-healthy',
+];
 
 export const TOPIC_HUBS = {
   adhd: { label: 'ADHD', url: '/blog/adhd', care: '/adhd-care' },

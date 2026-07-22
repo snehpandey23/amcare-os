@@ -1,0 +1,146 @@
+{
+  "findings": [
+    {
+      "pageId": "home",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"Learn more\" 77×24; \"Free screening →\" 109×22; \"Explore Telehealth Care\" 162×24)"
+        }
+      ],
+      "title": "Siya Health | When Focus, Energy, or Weight Won't Budge",
+      "url": "https://www.siya.health/"
+    },
+    {
+      "pageId": "adhd-care",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"Dr. Sneh Pandey, MD\" 160×20; \"View Dr. Pandey’s profile →\" 206×20; \"Creyos cognitive testing\" 173×19)"
+        }
+      ],
+      "title": "Adult ADHD Diagnosis Online — Same-Week Evaluation | Siya Health",
+      "url": "https://www.siya.health/adhd-care"
+    },
+    {
+      "pageId": "weight-loss",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"pricing\" 47×17; \"Dr. Sneh Pandey, MD\" 160×20; \"View Dr. Pandey’s profile →\" 206×20)"
+        }
+      ],
+      "title": "Provider-Guided Medical Weight Loss | Siya Health",
+      "url": "https://www.siya.health/weight-loss-metabolic-health"
+    },
+    {
+      "pageId": "telehealth",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"physician-guided lab options\" 219×20; \"interpretation\" 101×20; \"primary and urgent care\" 173×19)"
+        }
+      ],
+      "title": "Virtual Medical Care | Siya Health Telehealth",
+      "url": "https://www.siya.health/telehealth"
+    },
+    {
+      "pageId": "mens-health",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"Labs\" 36×19; \"pricing\" 47×17; \"Browse health articles →\" 167×17)"
+        }
+      ],
+      "title": "Men's Health & Longevity | Siya Health",
+      "url": "https://www.siya.health/mens-health-longevity"
+    },
+    {
+      "pageId": "labs",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"Fatigue & Brain Fog Labs\" 221×24; \"Learn more\" 82×19; \"Iron & Ferritin Testing\" 193×24)"
+        }
+      ],
+      "title": "Labs & Blood Tests | Transparent Direct-Pay Testing | Siya Health",
+      "url": "https://www.siya.health/labs"
+    },
+    {
+      "pageId": "blog",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"Read More →\" 292×31; \"Read More →\" 292×31; \"Read More →\" 292×31)"
+        }
+      ],
+      "title": "Health Insights & Blog Hub (2026) | ADHD, Weight Loss & Telehealth | Siya Health",
+      "url": "https://www.siya.health/blog"
+    }
+  ],
+  "lhScores": [
+    {
+      "id": "home",
+      "path": "/",
+      "performance": 64,
+      "accessibility": 96,
+      "bestPractices": 100,
+      "seo": 92
+    },
+    {
+      "id": "adhd-care",
+      "path": "/adhd-care",
+      "performance": 59,
+      "accessibility": 96,
+      "bestPractices": 100,
+      "seo": 100
+    },
+    {
+      "id": "weight-loss",
+      "path": "/weight-loss-metabolic-health",
+      "performance": 65,
+      "accessibility": 96,
+      "bestPractices": 100,
+      "seo": 100
+    },
+    {
+      "id": "telehealth",
+      "path": "/telehealth",
+      "performance": 66,
+      "accessibility": 96,
+      "bestPractices": 100,
+      "seo": 100
+    },
+    {
+      "id": "mens-health",
+      "path": "/mens-health-longevity",
+      "performance": 66,
+      "accessibility": 96,
+      "bestPractices": 100,
+      "seo": 100
+    },
+    {
+      "id": "labs",
+      "path": "/labs",
+      "performance": 65,
+      "accessibility": 95,
+      "bestPractices": 100,
+      "seo": 92
+    },
+    {
+      "id": "blog",
+      "path": "/blog",
+      "performance": 65,
+      "accessibility": 96,
+      "bestPractices": 100,
+      "seo": 100
+    }
+  ]
+}

@@ -35,7 +35,8 @@ import {
   resolveProviderPhoto,
   stateChipLabel,
 } from '../data/providers.mjs';
-import { SPRUCE_CHAT_URL, ADHD_WALKTHROUGH_LINK, ADHD_EVALUATION_199_LINK, REDIRECT_CHAT_URL, REDIRECT_ADHD_WALKTHROUGH_URL, REDIRECT_ADHD_EVALUATION_URL } from '../data/providers-core.mjs';
+import { SPRUCE_CHAT_URL, MEET_GREET_BOOKING_URL, ADHD_EVALUATION_199_LINK, REDIRECT_CHAT_URL, REDIRECT_MEET_GREET_URL, REDIRECT_ADHD_WALKTHROUGH_URL, REDIRECT_ADHD_EVALUATION_URL, ZOCDOC_BOOKING_URL } from '../data/providers-core.mjs';
+import { applyPricingTokens, initialEvaluationPriceDisplay } from '../data/pricing-display.mjs';
 import { TRACKING } from '../data/tracking-config.mjs';
 import { getServiceTagline } from '../data/provider-canonical.mjs';
 import {
@@ -79,7 +80,35 @@ const SITE_ROOT = path.join(__dirname, '..');
 
 /** Primary nav label for /answers (URL unchanged for SEO) */
 export const NAV_HEALTH_GUIDES = { path: '/answers', label: 'Health Guides', shortLabel: 'Health guides' };
-export const NAV_PROVIDERS = { path: '/providers', label: 'Our Care Team', shortLabel: 'Our Care Team' };
+export const NAV_PROVIDERS = { path: '/providers', label: 'Care Team', shortLabel: 'Care Team' };
+export const NAV_MENS_HEALTH = { path: '/mens-health-longevity', label: "Men's Health", shortLabel: "Men's Health" };
+/** Circular brand mark (icon only). Wordmark is rendered in HTML via renderBrandLockup(). */
+export const BRAND_MARK_ICON = '/assets/images/siya-health-mark.png';
+/** @deprecated Use BRAND_MARK_ICON + renderBrandLockup(); kept for legacy src swaps. */
+export const BRAND_LOGO_MARK = BRAND_MARK_ICON;
+
+const BRAND_WORDMARK = 'Siya Health';
+
+/** Header, footer, or compact LP lockup: circular mark + Poppins wordmark with ®. */
+export function renderBrandLockup({ variant = 'header', href = '/' } = {}) {
+  const isFooter = variant === 'footer';
+  const isLp = variant === 'lp';
+  const markSize = isFooter ? 40 : isLp ? 36 : 44;
+  const linkClass = isFooter
+    ? 'footer-logo-link footer-logo-link--compact brand-lockup brand-lockup--footer'
+    : isLp
+      ? 'lp-header-logo brand-lockup brand-lockup--lp'
+      : 'header-logo brand-lockup';
+  return `<a class="${linkClass}" href="${href}" aria-label="${BRAND_WORDMARK} home">
+  <img class="brand-lockup__mark" src="${BRAND_MARK_ICON}" alt="" width="${markSize}" height="${markSize}" decoding="async" aria-hidden="true" />
+  <span class="brand-lockup__wordmark">${BRAND_WORDMARK}<sup class="brand-lockup__reg" aria-hidden="true">®</sup></span>
+</a>`;
+}
+
+const FAVICON_HEAD_TAGS = `    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />`;
 
 export const MEET_GREET_URL = BOOKING_LINK;
 
@@ -87,6 +116,7 @@ export const MEET_GREET_URL = BOOKING_LINK;
 const ADHD_FUNNEL_PATH = [
   /^adhd-care\.html$/,
   /^adhd-screening\.html$/,
+  /^adhd-screening-results\.html$/,
   /^adult-adhd-diagnosis\.html$/,
   /^adult-adhd-screening-california\.html$/,
   /^adhd-treatment-online\.html$/,
@@ -192,16 +222,25 @@ export const ANCHOR_LABELS = {
   '/answers/when-is-testosterone-therapy-appropriate': 'Symptoms that warrant TRT evaluation (FAQ)',
   '/answers/adhd-and-weight-loss-connection': 'ADHD and weight loss struggles',
   '/creyos-adhd-testing': 'Creyos cognitive testing for ADHD',
-  '/pricing': 'Transparent care pricing ($199 / $79 / $149)',
+  '/pricing': `Transparent care pricing (${initialEvaluationPriceDisplay()} evaluation · $79 / $149 follow-up)`,
   '/blog/online-adhd-diagnosis-california': 'Online ADHD diagnosis in California',
   '/blog/online-adhd-diagnosis-texas': 'Online ADHD diagnosis in Texas',
   '/adhd-care': 'ADHD evaluation and ongoing care',
   '/weight-loss-metabolic-health': 'Medical weight loss program',
-  '/adult-adhd-diagnosis': 'Book a $199 adult ADHD evaluation',
+  '/adult-adhd-diagnosis': 'Book an adult ADHD evaluation',
   '/adhd-screening': 'Free 2-minute ADHD screening',
   '/answers': 'Browse all health guides',
   '/primary-urgent-care': 'Primary and urgent telehealth care',
-  '/labs': 'Diagnostic lab services',
+  '/labs': 'Labs & blood tests',
+  '/labs/fatigue-brain-fog': 'Fatigue & brain fog labs',
+  '/labs/iron-ferritin': 'Iron & ferritin testing',
+  '/labs/thyroid': 'Thyroid testing',
+  '/labs/a1c-blood-sugar': 'A1c & blood sugar testing',
+  '/labs/womens-midlife': "Women's midlife labs",
+  '/labs/mens-health': "Men's health labs",
+  '/labs/vitamin-b12': 'Vitamin B12 testing',
+  '/labs/preventive': 'Preventive labs',
+  '/labs/adhd-support': 'Labs & ADHD evaluation support',
   '/prescriptions': 'Online prescription services',
   '/blog/food-noise-and-glp-1-what-it-means-and-what-helps': 'Food noise and GLP-1 guide',
   '/blog/insulin-resistance-and-weight-loss-clinician-overview': 'Insulin resistance and weight loss',
@@ -219,33 +258,64 @@ export const ANCHOR_LABELS = {
 const ANSWER_QUESTIONS = Object.fromEntries(ANSWER_SEEDS.map((s) => [`/answers/${s.slug}`, s.question]));
 
 const LEARN_MORE_ADHD = `<!-- SIYA:LEARN-MORE-ADHD -->
-      <section class="section section-tinted learn-more-cluster" id="learn-more-adhd" aria-labelledby="learn-more-adhd-heading">
+      <section class="section section-tinted learn-more-cluster adhd-suggested-reading" id="learn-more-adhd" aria-labelledby="learn-more-adhd-heading">
         <div class="container">
           <div class="section-header">
-            <h2 id="learn-more-adhd-heading">Learn More About ADHD</h2>
-            <p class="lead">Explore Health Guides, articles, and evaluation resources from Siya Health physicians.</p>
+            <h2 id="learn-more-adhd-heading">Suggested Reading</h2>
+            <p class="lead">Educational resources from Siya Health—so you can learn at your own pace before or after evaluation.</p>
           </div>
-          <ul class="learn-more-links">
-            <li><a href="/answers/signs-of-adult-adhd">Signs of adult ADHD — health guide</a></li>
-            <li><a href="/answers/is-online-adhd-diagnosis-legitimate">Is online ADHD diagnosis legitimate?</a></li>
-            <li><a href="/blog/adhd">ADHD articles and state-specific guides</a></li>
-            <li><a href="/blog/how-to-know-if-you-have-adhd-adult">How to know if you have ADHD as an adult</a></li>
-            <li><a href="/blog/adhd-symptoms-overlooked">7 adult ADHD signs doctors often miss</a></li>
-            <li><a href="/blog/is-online-adhd-diagnosis-legit">Is online ADHD diagnosis legit?</a></li>
-            <li><a href="/blog/adhd-testing-online-california-screening-vs-evaluation">ADHD screening vs full evaluation</a></li>
-            <li><a href="/adhd-screening">Free 2-minute ADHD screening</a></li>
-            <li><a href="/adhd-care#pricing">ADHD care pricing ($199 / $79 / $149)</a></li>
-            <li><a href="/creyos-adhd-testing">Creyos cognitive testing for ADHD evaluations</a></li>
-            <li><a href="/blog/online-adhd-diagnosis-california">Online ADHD diagnosis in California</a></li>
-            <li><a href="/blog/online-adhd-diagnosis-texas">Online ADHD diagnosis in Texas</a></li>
-            <li><a href="/blog/adhd">Browse all ADHD articles</a></li>
-          </ul>
+          <div class="adhd-reading-grid">
+            <a class="adhd-reading-card" href="/blog/adhd-in-women">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-hormones-pause.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>ADHD in Women</strong>
+              <span>Symptoms, masking, and late diagnosis.</span>
+            </a>
+            <a class="adhd-reading-card" href="/blog/adhd-medication-options-for-adults">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-adhd-consult.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>ADHD Medication Guide</strong>
+              <span>Stimulant vs non-stimulant paths adults ask about first.</span>
+            </a>
+            <a class="adhd-reading-card" href="/answers/adhd-vs-anxiety">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-adhd-racing.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>ADHD vs Anxiety</strong>
+              <span>How overlap happens—and why evaluation matters.</span>
+            </a>
+            <a class="adhd-reading-card" href="/blog/executive-dysfunction-adhd">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-adhd-unfinished.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Executive Dysfunction</strong>
+              <span>What it is and what actually helps day to day.</span>
+            </a>
+            <a class="adhd-reading-card" href="/answers/late-adhd-diagnosis-adults">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-finally-heard.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Late ADHD Diagnosis</strong>
+              <span>Why so many adults seek answers later in life.</span>
+            </a>
+            <a class="adhd-reading-card" href="/blog/iron-deficiency-brain-fog-adhd">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-exhausted-morning.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Iron Deficiency &amp; Brain Fog</strong>
+              <span>Recent clinical overlap many adults overlook.</span>
+            </a>
+          </div>
+          <p class="cta-microcopy adhd-reading-footer">Also useful: <a href="/pricing">evaluation pricing</a> · <a href="/blog/online-adhd-diagnosis-california">California ADHD care</a> · <a href="/blog/adhd-treatment-los-angeles-ca">Los Angeles</a> · <a href="/blog/adhd-treatment-san-francisco-ca">San Francisco</a> · <a href="/blog/adhd-treatment-san-diego-ca">San Diego</a> · <a href="/blog/adhd-treatment-san-jose-ca">San Jose</a> · <a href="/blog/adhd-treatment-sacramento-ca">Sacramento</a> · <a href="/blog/adhd-treatment-oakland-ca">Oakland</a> · <a href="/blog/adhd-treatment-orange-county-ca">Orange County</a> · <a href="/blog/online-adhd-diagnosis-texas">Texas</a> · <a href="/blog/adhd">Browse all ADHD articles →</a></p>
         </div>
       </section>
       <!-- /SIYA:LEARN-MORE-ADHD -->`;
 
-function buildMeetPhysiciansBlock(serviceKey, lead, stateAbbr = null, { gridClass = 'about-team-grid', heading = 'Meet our care team' } = {}) {
-  const providers = getProvidersForServicePage(serviceKey, { stateAbbr });
+function buildMeetPhysiciansBlock(serviceKey, lead, stateAbbr = null, { gridClass = 'about-team-grid', heading = 'Meet our care team', limit = null, sectionClass = 'section', seeAllClass = 'blog-hub-see-all' } = {}) {
+  let providers = getProvidersForServicePage(serviceKey, { stateAbbr });
+  if (typeof limit === 'number' && limit > 0) providers = providers.slice(0, limit);
   const stateNote = stateAbbr
     ? `<p class="provider-state-filter-note">Showing clinicians licensed in <strong>${stateAbbr}</strong>.</p>`
     : '';
@@ -260,7 +330,7 @@ function buildMeetPhysiciansBlock(serviceKey, lead, stateAbbr = null, { gridClas
     })
     .join('\n');
   return `<!-- SIYA:MEET-PHYSICIANS -->
-      <section class="section" id="meet-physicians" aria-labelledby="meet-physicians-heading">
+      <section class="${sectionClass}" id="meet-physicians" aria-labelledby="meet-physicians-heading">
         <div class="container">
           <div class="section-header">
             <h2 id="meet-physicians-heading">${heading}</h2>
@@ -270,7 +340,7 @@ function buildMeetPhysiciansBlock(serviceKey, lead, stateAbbr = null, { gridClas
           <div class="${gridClass}">
 ${cards}
           </div>
-          <p class="blog-hub-see-all"><a href="/providers">View full care team</a></p>
+          <p class="${seeAllClass}"><a href="/providers" class="text-link">View full care team →</a></p>
         </div>
       </section>
       <!-- /SIYA:MEET-PHYSICIANS -->`;
@@ -316,9 +386,17 @@ function resolveMeetPhysiciansConfig(relPath) {
 
 const MEET_PHYSICIANS_BY_PAGE = {
   'adhd-care.html': () =>
-    buildMeetPhysiciansBlock('adhd-care', 'Board-certified clinicians on your ADHD care team.', null, {
-      gridClass: 'about-team-grid about-team-grid--adhd',
-    }),
+    buildMeetPhysiciansBlock(
+      'adhd-care',
+      'Licensed clinicians who evaluate and treat adult ADHD—physician-led, not a psychiatry mill.',
+      null,
+      {
+        gridClass: 'about-team-grid about-team-grid--adhd about-team-grid--adhd-compact',
+        sectionClass: 'section adhd-care-team-compact',
+        seeAllClass: 'blog-hub-see-all care-team-hub-link',
+        limit: 3,
+      },
+    ),
   'telehealth.html': () => buildMeetPhysiciansBlock('telehealth', 'Licensed telehealth clinicians—availability varies by state.'),
   'weight-loss-metabolic-health.html': () =>
     buildMeetPhysiciansBlock(
@@ -336,48 +414,113 @@ const MEET_PHYSICIANS_BY_PAGE = {
 };
 
 const LEARN_MORE_WEIGHT = `<!-- SIYA:LEARN-MORE-WEIGHT -->
-      <section class="section section-tinted learn-more-cluster" id="learn-more-weight-loss" aria-labelledby="learn-more-weight-heading">
+      <section class="section section-tinted learn-more-cluster adhd-suggested-reading" id="learn-more-weight-loss" aria-labelledby="learn-more-weight-heading">
         <div class="container">
           <div class="section-header">
-            <h2 id="learn-more-weight-heading">Learn More About Medical Weight Loss</h2>
-            <p class="lead">Evidence-based articles and short Health Guides on GLP-1 therapy, side effects, and ADHD–weight connections.</p>
+            <h2 id="learn-more-weight-heading">Suggested Reading</h2>
+            <p class="lead">Educational resources from Siya Health—so you can learn at your own pace before or after a visit.</p>
           </div>
-          <ul class="learn-more-links">
-            <li><a href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">Why am I always tired? causes and when to see a doctor</a></li>
-            <li><a href="/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign">Sleep apnea and metabolic risk (when snoring is not benign)</a></li>
-            <li><a href="/blog/insulin-resistance-and-weight-loss-clinician-overview">Insulin resistance and weight loss (clinician overview)</a></li>
-            <li><a href="/blog/food-noise-and-glp-1-what-it-means-and-what-helps">Food noise and GLP-1</a></li>
-            <li><a href="/blog/free-testosterone-vs-total-testosterone-what-patients-should-know">Free vs total testosterone</a></li>
-            <li><a href="/answers/what-is-food-noise">What is food noise?</a></li>
-            <li><a href="/answers/what-is-insulin-resistance">What is insulin resistance?</a></li>
-            <li><a href="/blog/weight-loss">More medical weight loss articles</a></li>
-            <li><a href="/answers/semaglutide-weight-loss-how-it-works">How quickly semaglutide starts working (FAQ)</a></li>
-            <li><a href="/answers/glp-1-side-effects">GLP-1 side effects that improve with titration (FAQ)</a></li>
-            <li><a href="/answers/adhd-and-weight-loss-connection">ADHD and weight loss struggles</a></li>
-          </ul>
+          <div class="adhd-reading-grid">
+            <a class="adhd-reading-card" href="/blog/food-noise-and-glp-1-what-it-means-and-what-helps">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-weight-effort.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Food Noise &amp; GLP-1</strong>
+              <span>What food noise means and what may help.</span>
+            </a>
+            <a class="adhd-reading-card" href="/blog/insulin-resistance-and-weight-loss-clinician-overview">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-insulin-metabolic.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Insulin Resistance</strong>
+              <span>Clinician overview of IR and weight physiology.</span>
+            </a>
+            <a class="adhd-reading-card" href="/blog/semaglutide-for-weight-loss-how-it-works">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-glp1-consult.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Semaglutide Overview</strong>
+              <span>How it works when clinically appropriate.</span>
+            </a>
+            <a class="adhd-reading-card" href="/blog/medical-weight-loss-vs-dieting-what-actually-works">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-medical-vs-diet.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Medical Weight Loss vs Dieting</strong>
+              <span>Why regain happens—and what evaluation adds.</span>
+            </a>
+            <a class="adhd-reading-card" href="/blog/how-mental-health-affects-weight-loss-outcomes">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-weight-mood.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Mental Health &amp; Weight</strong>
+              <span>Stress, mood, and habits that affect outcomes.</span>
+            </a>
+            <a class="adhd-reading-card" href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-exhausted-morning.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Why Am I Always Tired?</strong>
+              <span>Energy, sleep, and metabolic overlap.</span>
+            </a>
+          </div>
+          <p class="cta-microcopy adhd-reading-footer">Also useful: <a href="/pricing">pricing</a> · <a href="/blog/weight-loss">Browse weight loss articles →</a></p>
         </div>
       </section>
       <!-- /SIYA:LEARN-MORE-WEIGHT -->`;
 
 const LEARN_MORE_MENS = `<!-- SIYA:LEARN-MORE-MENS -->
-      <section class="section section-tinted learn-more-cluster" id="learn-more-mens-health" aria-labelledby="learn-more-mens-heading">
+      <section class="section section-tinted learn-more-cluster adhd-suggested-reading" id="learn-more-mens-health" aria-labelledby="learn-more-mens-heading">
         <div class="container">
           <div class="section-header">
-            <h2 id="learn-more-mens-heading">Learn More About Men's Hormone Health</h2>
-            <p class="lead">Evidence-based guides on testosterone labs, symptoms, and when therapy is appropriate—not anti-aging hype.</p>
+            <h2 id="learn-more-mens-heading">Suggested Reading</h2>
+            <p class="lead">Educational resources from Siya Health—so you can learn at your own pace before or after a visit.</p>
           </div>
-          <ul class="learn-more-links">
-            <li><a href="/blog/free-testosterone-vs-total-testosterone-what-patients-should-know">Free vs total testosterone: what patients should know</a></li>
-            <li><a href="/answers/what-is-free-testosterone">What is free testosterone?</a></li>
-            <li><a href="/answers/what-does-low-testosterone-feel-like">What does low testosterone feel like?</a></li>
-            <li><a href="/blog/when-is-testosterone-therapy-appropriate">When is testosterone therapy appropriate?</a></li>
-            <li><a href="/answers/testosterone-and-adhd-overlap">Testosterone and ADHD overlap</a></li>
-            <li><a href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">Why am I always tired?</a></li>
-            <li><a href="/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign">Sleep apnea, fatigue, and metabolic risk</a></li>
-            <li><a href="/blog/insulin-resistance-and-weight-loss-clinician-overview">Insulin resistance and weight loss</a></li>
-            <li><a href="/blog/food-noise-and-glp-1-what-it-means-and-what-helps">Food noise and GLP-1</a></li>
-            <li><a href="/answers/what-is-food-noise">What is food noise?</a></li>
-          </ul>
+          <div class="adhd-reading-grid">
+            <a class="adhd-reading-card" href="/blog/when-is-testosterone-therapy-appropriate">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-trt-consult.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>When Is TRT Appropriate?</strong>
+              <span>Evidence-based criteria—not anti-aging hype.</span>
+            </a>
+            <a class="adhd-reading-card" href="/blog/free-testosterone-vs-total-testosterone-what-patients-should-know">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-mens-hero.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Free vs Total Testosterone</strong>
+              <span>What lab numbers actually mean.</span>
+            </a>
+            <a class="adhd-reading-card" href="/answers/what-does-low-testosterone-feel-like">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-mens-low-energy.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>What Low T Can Feel Like</strong>
+              <span>Symptoms that prompt evaluation.</span>
+            </a>
+            <a class="adhd-reading-card" href="/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-mens-recovery.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Sleep Apnea &amp; Fatigue</strong>
+              <span>When snoring signals more than noise.</span>
+            </a>
+            <a class="adhd-reading-card" href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-mens-low-energy.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Why Am I Always Tired?</strong>
+              <span>Energy workups that go beyond caffeine.</span>
+            </a>
+            <a class="adhd-reading-card" href="/answers/testosterone-and-adhd-overlap">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-mens-brain-fog.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Testosterone &amp; ADHD Overlap</strong>
+              <span>When focus and hormones intersect.</span>
+            </a>
+          </div>
+          <p class="cta-microcopy adhd-reading-footer">Also useful: <a href="/pricing">pricing</a> · <a href="/blog">Browse health articles →</a></p>
         </div>
       </section>
       <!-- /SIYA:LEARN-MORE-MENS -->`;
@@ -406,23 +549,57 @@ const LEARN_MORE_WOMENS = `<!-- SIYA:LEARN-MORE-WOMENS -->
       <!-- /SIYA:LEARN-MORE-WOMENS -->`;
 
 const LEARN_MORE_TELE = `<!-- SIYA:LEARN-MORE-TELE -->
-      <section class="section section-tinted learn-more-cluster" id="learn-more-telehealth" aria-labelledby="learn-more-tele-heading">
+      <section class="section section-tinted learn-more-cluster adhd-suggested-reading" id="learn-more-telehealth" aria-labelledby="learn-more-tele-heading">
         <div class="container">
           <div class="section-header">
-            <h2 id="learn-more-tele-heading">Explore guides by concern</h2>
-            <p class="lead">Forms &amp; work notes, medication refills, fatigue, diabetes, labs, preventive care, and sleep.</p>
+            <h2 id="learn-more-tele-heading">Suggested Reading</h2>
+            <p class="lead">Educational resources from Siya Health—so you can learn at your own pace before or after a visit.</p>
           </div>
-          <ul class="learn-more-links">
-            <li><a href="/answers/is-telehealth-legitimate">Is telehealth legitimate?</a></li>
-            <li><a href="/answers/meet-and-greet-telehealth-expectations">What to expect at a telehealth visit</a></li>
-            <li><a href="/answers/how-online-prescriptions-work">How online prescriptions work</a></li>
-            <li><a href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">Why am I always tired?</a></li>
-            <li><a href="/answers/brain-fog-after-eating">Brain fog after eating</a></li>
-            <li><a href="/answers/why-normal-labs-dont-mean-healthy">Why normal labs don&rsquo;t mean healthy</a></li>
-            <li><a href="/blog/insulin-resistance-and-weight-loss-clinician-overview">Insulin resistance and diabetes management</a></li>
-            <li><a href="/answers/can-sleep-apnea-cause-fatigue">Can sleep apnea cause fatigue?</a></li>
-            <li><a href="/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign">Sleep apnea and metabolic risk</a></li>
-          </ul>
+          <div class="adhd-reading-grid">
+            <a class="adhd-reading-card" href="/answers/is-telehealth-legitimate">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-finally-heard.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Is Telehealth Legitimate?</strong>
+              <span>What to expect from licensed virtual care.</span>
+            </a>
+            <a class="adhd-reading-card" href="/answers/meet-and-greet-telehealth-expectations">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-adhd-consult.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Meet &amp; Greet Expectations</strong>
+              <span>What the free call is—and is not.</span>
+            </a>
+            <a class="adhd-reading-card" href="/answers/how-online-prescriptions-work">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-adhd-keys.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>How Online Prescriptions Work</strong>
+              <span>Safety, oversight, and refill basics.</span>
+            </a>
+            <a class="adhd-reading-card" href="/blog/telehealth-prescriptions-how-online-treatment-works">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-energy-afternoon.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Online Treatment Overview</strong>
+              <span>How virtual treatment pathways work.</span>
+            </a>
+            <a class="adhd-reading-card" href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-exhausted-morning.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Why Am I Always Tired?</strong>
+              <span>Common reasons adults book a visit.</span>
+            </a>
+            <a class="adhd-reading-card" href="/blog/telehealth">
+              <figure class="adhd-reading-card-media">
+                <img src="/assets/images/editorial-burnout-afterwork.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+              </figure>
+              <strong>Telehealth Article Hub</strong>
+              <span>More guides on virtual care.</span>
+            </a>
+          </div>
+          <p class="cta-microcopy adhd-reading-footer">Also useful: <a href="/pricing">pricing</a> · <a href="/blog/telehealth">Browse telehealth articles →</a></p>
         </div>
       </section>
       <!-- /SIYA:LEARN-MORE-TELE -->`;
@@ -459,19 +636,64 @@ function anchorFor(path, fallbackTitle) {
   return slugToLabel(path.replace(/^\//, '').replace(/\//g, ' '));
 }
 
+/** Remove Health Guides from primary/mobile nav (keep Blog; guides remain in footer). */
+function stripHealthGuidesFromNavBlock(navHtml) {
+  return navHtml
+    .replace(/\n?\s*<a href="\/answers">(?:Health Guides|Answers)<\/a>/gi, '')
+    .replace(/\n?\s*<a href="\/answers\/?">[^<]*<\/a>/gi, (m) =>
+      /Health Guides|Answers/i.test(m) ? '' : m,
+    );
+}
+
 function injectAnswersInNavBlock(navHtml) {
-  const link = `<a href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a>`;
-  if (navHtml.includes(`href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a>`)) return navHtml;
-  if (navHtml.includes('href="/answers">Answers</a>')) {
-    return navHtml.replaceAll('href="/answers">Answers</a>', `href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a>`);
-  }
-  if (!navHtml.includes('href="/blog">Blog</a>')) return navHtml;
-  return navHtml.replace(/(<a href="\/blog">Blog<\/a>)/, `${link}\n          $1`);
+  /* Homepage / primary nav: Blog only — Health Guides live in footer. */
+  return stripHealthGuidesFromNavBlock(navHtml);
 }
 
 export function injectAnswersNav(html) {
   html = html.replace(/<nav class="nav-center"[\s\S]*?<\/nav>/gi, (nav) => injectAnswersInNavBlock(nav));
   html = html.replace(/<div class="nav-mobile">[\s\S]*?<\/div>/gi, (nav) => injectAnswersInNavBlock(nav));
+  return html;
+}
+
+function injectMensHealthInNavBlock(navHtml) {
+  const link = `<a href="${NAV_MENS_HEALTH.path}">${NAV_MENS_HEALTH.label}</a>`;
+  if (navHtml.includes(`href="${NAV_MENS_HEALTH.path}"`)) return navHtml;
+  if (navHtml.includes('href="/blog">Blog</a>')) {
+    return navHtml.replace(/(<a href="\/blog">Blog<\/a>)/, `${link}\n          $1`);
+  }
+  if (navHtml.includes('href="/telehealth">Telehealth</a>')) {
+    return navHtml.replace(/(<a href="\/telehealth">Telehealth<\/a>)/, `$1\n          ${link}`);
+  }
+  return navHtml;
+}
+
+export function injectMensHealthNav(html) {
+  html = html.replace(/<nav class="nav-center"[\s\S]*?<\/nav>/gi, (nav) => injectMensHealthInNavBlock(nav));
+  html = html.replace(/<div class="nav-mobile">[\s\S]*?<\/div>/gi, (nav) => injectMensHealthInNavBlock(nav));
+  return html;
+}
+
+const NAV_LABS = { path: '/labs', label: 'Labs' };
+
+function injectLabsInNavBlock(navHtml) {
+  const link = `<a href="${NAV_LABS.path}">${NAV_LABS.label}</a>`;
+  if (navHtml.includes(`href="${NAV_LABS.path}"`)) return navHtml;
+  if (navHtml.includes('href="/blog">Blog</a>')) {
+    return navHtml.replace(/(<a href="\/blog">Blog<\/a>)/, `${link}\n          $1`);
+  }
+  if (navHtml.includes(`href="${NAV_MENS_HEALTH.path}"`)) {
+    return navHtml.replace(
+      new RegExp(`(<a href="${NAV_MENS_HEALTH.path}">[^<]*</a>)`),
+      `$1\n          ${link}`,
+    );
+  }
+  return navHtml;
+}
+
+export function injectLabsNav(html) {
+  html = html.replace(/<nav class="nav-center"[\s\S]*?<\/nav>/gi, (nav) => injectLabsInNavBlock(nav));
+  html = html.replace(/<div class="nav-mobile">[\s\S]*?<\/div>/gi, (nav) => injectLabsInNavBlock(nav));
   return html;
 }
 
@@ -527,6 +749,7 @@ function injectHeroTrustBar(html, relPath) {
 
 /** Wire hero primary CTA through conversion-system with full analytics attrs */
 function injectHeroPrimaryCta(html, relPath) {
+  if (relPath === 'blog/index.html') return html;
   if (isAdsLandingPage(relPath, html)) return html;
   const heroBlock = html.match(/<div class="hero-ctas[^"]*">[\s\S]*?<\/div>/i);
   if (!heroBlock) return html;
@@ -537,11 +760,59 @@ function injectHeroPrimaryCta(html, relPath) {
     variant: 'primary',
     ctaSlot: slot.id ?? 'primary',
   });
-  if (heroBlock[0].includes('data-conversion-goal') && heroBlock[0].includes(slot.url)) return html;
-  return html.replace(
-    /(<div class="hero-ctas[^"]*">)\s*<a class="[^"]*\bbutton\b[^"]*"[^>]*>[\s\S]*?<\/a>/i,
-    `$1\n            ${btn}`,
-  );
+  if (heroBlock[0].includes('data-conversion-goal') && heroBlock[0].includes(slot.url)) {
+    /* Still refresh mobile sticky CTA if present */
+  } else {
+    html = html.replace(/<div class="hero-ctas[^"]*">[\s\S]*?<\/div>/i, (block) => {
+      if (BUTTON_ANCHOR_RE.test(block)) {
+        return block.replace(BUTTON_ANCHOR_RE, btn);
+      }
+      return `<div class="hero-ctas">\n            ${btn}\n          </div>`;
+    });
+  }
+  if (html.includes('mobile-sticky-cta')) {
+    const stickyBtn = renderButton({
+      ...slotToButton(slot, { location: 'mobile-sticky', relPath }),
+      variant: 'primary',
+      ctaSlot: slot.id ?? 'primary',
+    });
+    html = html.replace(
+      /<div class="mobile-sticky-cta"[^>]*>[\s\S]*?<\/div>/i,
+      `<div class="mobile-sticky-cta" aria-hidden="true">\n      ${stickyBtn}\n    </div>`,
+    );
+  }
+  return html;
+}
+
+/** Service heroes historically pair Meet & Greet + Secure Medical Chat — restore chat secondary if missing. */
+const HERO_SECURE_CHAT_PAGES = new Set([
+  'telehealth.html',
+  'weight-loss-metabolic-health.html',
+  'mens-health-longevity.html',
+  'womens-health.html',
+]);
+
+function restoreSecureChatSecondaryCtas(html, relPath) {
+  if (!HERO_SECURE_CHAT_PAGES.has(relPath)) return html;
+  const chatBtn = renderButton({
+    ...slotToButton(CTA_SLOTS.secureChat, { location: 'hero', relPath }),
+    variant: 'secondary',
+  });
+  return html.replace(/<div class="hero-ctas[^"]*">[\s\S]*?<\/div>/i, (block) => {
+    if (/\/redirect\/chat|data-cta-slot="secureChat"|secure_chat_click/i.test(block)) return block;
+    const buttons = block.match(/<a\s[^>]*\bclass="[^"]*\bbutton\b[^"]*"[^>]*>[\s\S]*?<\/a>/gi) || [];
+    if (!buttons.length) {
+      return block.replace(
+        /(<div class="hero-ctas[^"]*">)/i,
+        `$1\n            ${chatBtn}\n          `,
+      );
+    }
+    const primary = buttons[0];
+    return block.replace(
+      /(<div class="hero-ctas[^"]*">)[\s\S]*(<\/div>)/i,
+      `$1\n            ${primary}\n            ${chatBtn}\n          $2`,
+    );
+  });
 }
 
 const REVENUE_TRUST_PAGES = new Set([
@@ -574,19 +845,28 @@ function injectServiceTrust(html, relPath) {
   );
 }
 
+/** Match <a ... class="...button..."> regardless of attribute order (href may precede class). */
+const BUTTON_ANCHOR_RE = /<a\s+[^>]*\bclass="[^"]*\bbutton\b[^"]*"[^>]*>[\s\S]*?<\/a>/i;
+
 /** Sitewide nav CTA via conversion-system */
 export function injectNavCta(html, relPath) {
   if (relPath.startsWith('answers/')) return html;
   const meetBtn = renderNavCtaMarkup(relPath, 'nav');
   const mobileBtn = renderNavCtaMarkup(relPath, 'nav-mobile');
-  html = html.replace(
-    /<div class="nav-cta">\s*<a class="[^"]*\bbutton\b[^"]*"[^>]*>[\s\S]*?<\/a>\s*<\/div>/gi,
-    `<div class="nav-cta">\n          ${meetBtn}\n        </div>`,
-  );
-  html = html.replace(
-    /(<div class="nav-mobile">[\s\S]*?)<a class="[^"]*\bbutton\b[^"]*"[^>]*>[\s\S]*?<\/a>(?=\s*<\/div>)/gi,
-    `$1${mobileBtn}`,
-  );
+  html = html.replace(/<div class="nav-cta">\s*[\s\S]*?<\/div>/gi, (block) => {
+    if (BUTTON_ANCHOR_RE.test(block)) {
+      return block.replace(BUTTON_ANCHOR_RE, meetBtn);
+    }
+    return `<div class="nav-cta">\n          ${meetBtn}\n        </div>`;
+  });
+  // Scope to each nav-mobile block only — never span past its closing </div>
+  // into hero-ctas (previous regex required class-before-href and could replace Explore Care).
+  html = html.replace(/<div class="nav-mobile">[\s\S]*?<\/div>/gi, (block) => {
+    if (BUTTON_ANCHOR_RE.test(block)) {
+      return block.replace(BUTTON_ANCHOR_RE, mobileBtn);
+    }
+    return block.replace(/<\/div>\s*$/i, `          ${mobileBtn}\n        </div>`);
+  });
   return html;
 }
 
@@ -628,12 +908,13 @@ export function normalizeLegalLinks(html) {
   html = html.replaceAll('https://adhd.siya.health/notice-of-privacy-practices', LEGAL_LINKS.noticeOfPrivacy);
 
   // False NPP → privacy (legacy path and link-cards on /legal/privacy-policy)
+  // Do not cross </a> — otherwise a Privacy Policy card can match a later NPP <h4>.
   html = html.replace(
-    /href="\/privacy-policy"([^>]*)>Notice of Privacy Practices/gi,
-    `href="${LEGAL_LINKS.noticeOfPrivacy}"$1>Notice of Privacy Practices`,
+    /href="\/privacy-policy"([^>]*)>((?:(?!<\/a>)[\s\S])*?)Notice of Privacy Practices/gi,
+    `href="${LEGAL_LINKS.noticeOfPrivacy}"$1>$2Notice of Privacy Practices`,
   );
   html = html.replace(
-    /<a([^>]*)\bhref="(?:\/privacy-policy|\/legal\/privacy-policy)"([^>]*)>([\s\S]*?<h4>\s*Notice of Privacy Practices\s*<\/h4>)/gi,
+    /<a([^>]*)\bhref="(?:\/privacy-policy|\/legal\/privacy-policy)"([^>]*)>((?:(?!<\/a>)[\s\S])*?<h4>\s*Notice of Privacy Practices\s*<\/h4>)/gi,
     `<a$1href="${LEGAL_LINKS.noticeOfPrivacy}"$2>$3`,
   );
 
@@ -742,6 +1023,7 @@ export function normalizeSitewideCopy(html, relPath = '') {
   const isCaAdsLp = relPath === 'adult-adhd-screening-california.html';
   const lpScreeningPlaceholder = '%%SIYA_LP_CA_SCREENING_CTA%%';
   if (isCaAdsLp) {
+    html = html.replaceAll('Start Free 2-Minute Screening', lpScreeningPlaceholder);
     html = html.replaceAll('Start Free 2-Minute ADHD Screening', lpScreeningPlaceholder);
   }
   if (!isCaAdsLp) {
@@ -751,7 +1033,7 @@ export function normalizeSitewideCopy(html, relPath = '') {
     html = html.replaceAll('Start Free Screening', COPY_STANDARDS.adhdSecondaryCta);
   }
   if (isCaAdsLp) {
-    html = html.replaceAll(lpScreeningPlaceholder, 'Start Free 2-Minute ADHD Screening');
+    html = html.replaceAll(lpScreeningPlaceholder, 'Start Free 2-Minute Screening');
   }
   html = html.replaceAll('Schedule ADHD Evaluation', COPY_STANDARDS.adhdPrimaryCta);
   html = html.replaceAll('Book ADHD Evaluation', COPY_STANDARDS.adhdPrimaryCta);
@@ -783,24 +1065,18 @@ export function normalizeSitewideCopy(html, relPath = '') {
   html = html.replace(/Meet & Greet when ready/gi, `${COPY_STANDARDS.primaryCta} when ready`);
   html = html.replace(/Talk to a Clinician when ready/gi, `${COPY_STANDARDS.primaryCta} when ready`);
   html = html.replace(/Talk to a clinician when ready/gi, `${COPY_STANDARDS.primaryCta} when ready`);
-  html = html.replace(/free discovery call/gi, 'free ADHD screening');
   html = html.replace(/Find the Right Starting Point/g, COPY_STANDARDS.secondaryCtaTelehealth);
   html = html.replace(/Schedule a quick call/gi, COPY_STANDARDS.primaryCta);
   html = html.replace(/membership pricing/gi, 'follow-up plan pricing');
   html = html.replace(/Board-certified, ADHD-CCSP trained providers/gi, MIXED_ROSTER_CLINICIAN_PHRASE);
   html = html.replace(/ADHD-CCSP trained clinicians/gi, 'ADHD-CCSP–trained clinicians');
-  html = html.replace(/<strong>Meet &amp; Greet<\/strong>/gi, '<strong>first telehealth visit</strong>');
-  html = html.replace(/<strong>Meet & Greet<\/strong>/gi, '<strong>first telehealth visit</strong>');
-  html = html.replace(/\bMeet &amp; Greet\b/gi, 'first telehealth visit');
-  html = html.replace(/\bMeet & Greet\b/gi, 'first telehealth visit');
-  html = html.replace(/\bMeet and Greet\b/gi, 'first telehealth visit');
   html = html.replace(/physician assistant/gi, 'Physician Associate');
-  html = html.replace(/Meet &amp; Greets/gi, 'introductory visits');
-  html = html.replace(/Meet & Greets/gi, 'introductory visits');
+  /* Meet & Greet is the approved product CTA — do not rename body/CTA copy to "first telehealth visit". */
   html = html.replace(/book a Meet &amp; Greet/gi, COPY_STANDARDS.primaryCta);
   html = html.replace(/book a Meet & Greet/gi, COPY_STANDARDS.primaryCta);
   html = html.replace(/Discuss pricing on a Meet and Greet/gi, 'View Pricing');
-  html = html.replace(/\bdiscovery call\b/gi, 'free ADHD screening');
+  html = html.replace(/\bfree discovery call\b/gi, 'free Meet &amp; Greet');
+  html = html.replace(/\bdiscovery call\b/gi, 'Meet &amp; Greet');
   html = html.replace(/Talk to a clinician when you['']re ready/gi, COPY_STANDARDS.primaryCta);
   html = html.replace(
     /Ongoing medication management is available on a monthly plan if clinically appropriate\./g,
@@ -823,7 +1099,9 @@ const FOOTER_CARE_SERVICES_LINKS = [
   { href: '/mens-health-longevity', label: "Men's health & longevity" },
   { href: '/womens-health', label: "Women's health" },
   { href: '/telehealth', label: 'Telehealth services' },
-  { href: '/labs', label: 'Diagnostic labs' },
+  { href: '/primary-urgent-care', label: 'Primary & urgent care' },
+  { href: '/prescriptions', label: 'Online prescriptions' },
+  { href: '/labs', label: 'Labs & blood tests' },
 ];
 
 const FOOTER_HEALTH_GUIDES_LINKS = [
@@ -846,7 +1124,15 @@ const FOOTER_COMPANY_LINKS = [
   { href: '/about', label: 'About Siya Health' },
   { href: NAV_PROVIDERS.path, label: NAV_PROVIDERS.label },
   { href: PRICING.path, label: COPY_STANDARDS.pricingNavLabel },
-  { href: '/telehealth', label: 'How telehealth works' },
+  { href: '/telehealth', label: 'Explore Telehealth Care' },
+  { href: '/book-appointment', label: 'Book Appointment', track: 'book_appointment_click' },
+  { href: REDIRECT_CHAT_URL, label: COPY_STANDARDS.secureChatCta, track: 'secure_chat_click' },
+  {
+    href: ZOCDOC_BOOKING_URL,
+    label: 'Book Online via Zocdoc',
+    external: true,
+    track: 'zocdoc_booking_click',
+  },
   {
     href: SIYA_CIRCLE_GHL_FORM_URL,
     label: 'Siya Circle',
@@ -909,7 +1195,7 @@ ${columns}
       </div>
       <div class="container container--footer-wide footer-brand-bar">
         <div class="footer-brand-bar__left">
-          <a href="/" class="footer-logo-link footer-logo-link--compact"><img src="/assets/images/siya-health-logo.png" alt="Siya Health" class="footer-logo-img footer-logo-img--compact" /></a>
+          ${renderBrandLockup({ variant: 'footer' })}
           <div class="footer-brand-meta">
             <p class="footer-brand-tagline">${FOOTER_STATES_LINE}</p>
 ${FOOTER_TRUST_BLOCK}
@@ -919,9 +1205,10 @@ ${FOOTER_SOCIAL_BLOCK}
         <div class="footer-brand-bar__right footer-contact-block">
           <p class="footer-contact-phone"><a href="tel:+12154451244" class="footer-phone">(215)&nbsp;445-1244</a></p>
           <p><a href="mailto:care@siya.health">care@siya.health</a></p>
-          <p><a href="${SPRUCE_CHAT_URL}" target="_blank" rel="noopener">${COPY_STANDARDS.primaryCta}</a></p>
-          <p><a href="${BOOKING_LINK}" target="_blank" rel="noopener">${COPY_STANDARDS.secondaryCta}</a></p>
-          <p><a href="${BOOKING_LINK}" target="_blank" rel="noopener" data-siya-track="schedule-consultation-click">Book appointment</a></p>
+          <p><a href="${REDIRECT_MEET_GREET_URL}" data-siya-track="meet_greet_click">${COPY_STANDARDS.meetGreetCta}</a></p>
+          <p><a href="/book-appointment" data-siya-track="book_appointment_click">Book Appointment</a></p>
+          <p><a href="${REDIRECT_CHAT_URL}" data-siya-track="secure_chat_click">${COPY_STANDARDS.secureChatCta}</a></p>
+          <p class="footer-booking-alt"><a href="${ZOCDOC_BOOKING_URL}" target="_blank" rel="noopener noreferrer" data-siya-track="zocdoc_booking_click">Additional booking option</a></p>
         </div>
       </div>
       <div class="container container--footer-wide">
@@ -977,6 +1264,12 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
 
 const SIYA_TRACKING_BLOCK = `<!-- SIYA:TRACKING -->
     <script src="/scripts/siya-tracking.js" defer></script>
+    <script src="/scripts/lab-storefront-modal.js" defer></script>
+    <!-- /SIYA:TRACKING -->`;
+
+const SIYA_TRACKING_BLOCK_SYNC = `<!-- SIYA:TRACKING -->
+    <script src="/scripts/siya-tracking.js"></script>
+    <script src="/scripts/lab-storefront-modal.js"></script>
     <!-- /SIYA:TRACKING -->`;
 
 /** Remove duplicate GTM head / noscript blocks before canonical re-injection */
@@ -1015,7 +1308,7 @@ export function stripExistingGtag(html) {
 }
 
 /** Install GTM + sitewide dataLayer tracking on every public HTML page */
-export function injectGtmAndTracking(html) {
+export function injectGtmAndTracking(html, relPath = '') {
   html = stripExistingGtm(html);
   html = stripExistingGtag(html);
 
@@ -1036,8 +1329,20 @@ export function injectGtmAndTracking(html) {
     }
   }
 
+  /* Re-place tracking cleanly (redirect pages need sync load before redirect-transition.js) */
+  html = html.replace(/<!--\s*SIYA:TRACKING\s*-->[\s\S]*?<!--\s*\/SIYA:TRACKING\s*-->\s*/gi, '');
+  html = html.replace(/<script src="\/scripts\/siya-tracking\.js"(?:\s+defer)?><\/script>\s*/gi, '');
+  html = html.replace(/<script src="\/scripts\/lab-storefront-modal\.js"(?:\s+defer)?><\/script>\s*/gi, '');
+
+  const isRedirect = /^redirect\//.test(relPath);
+
   if (!html.includes('siya-tracking.js')) {
-    if (html.includes('<!-- /SIYA:COOKIE-NOTICE -->')) {
+    if (isRedirect && html.includes('redirect-transition.js')) {
+      html = html.replace(
+        /<script src="\/scripts\/redirect-transition\.js"><\/script>/i,
+        `${SIYA_TRACKING_BLOCK_SYNC}\n    <script src="/scripts/redirect-transition.js"></script>`,
+      );
+    } else if (html.includes('<!-- /SIYA:COOKIE-NOTICE -->')) {
       html = html.replace('<!-- /SIYA:COOKIE-NOTICE -->', `${SIYA_TRACKING_BLOCK}\n<!-- /SIYA:COOKIE-NOTICE -->`);
     } else if (html.includes('<!-- /SIYA:HEADER-SCROLL -->')) {
       html = html.replace('<!-- /SIYA:HEADER-SCROLL -->', `${SIYA_TRACKING_BLOCK}\n<!-- /SIYA:HEADER-SCROLL -->`);
@@ -1113,27 +1418,24 @@ export function injectLearnMoreSections(html, relPath) {
 }
 
 function buildHomepageCareTeam() {
-  const providers = getAllProviders();
-  const cards = providers
-    .map((p) =>
-      renderAboutTeamCard(p, {
-        variant: 'homepage',
-        photoHtml: renderCareTeamPhoto(p, 128, 128),
-      }),
-    )
-    .join('\n');
+  const director = getAllProviders().find((p) => p.slug === 'dr-sneh-pandey') || getAllProviders()[0];
   return `<!-- SIYA:CARE-TEAM -->
       <section class="section" id="care-team" aria-labelledby="care-team-heading">
         <div class="container">
           <div class="section-header care-team-header">
             <h2 id="care-team-heading">Meet Our Care Team</h2>
-            <p class="lead">Healthcare is personal.</p>
-            <p>Our physicians and advanced practice clinicians help adults seeking clarity on focus, fatigue, weight, hormones, and everyday health—through listening, thoughtful evaluation, and clear communication.</p>
+            <p class="lead">Physician-led telehealth with a full multidisciplinary team behind your care.</p>
           </div>
-          <div class="about-team-grid homepage-care-grid">
-${cards}
+          <div class="homepage-care-compact">
+            <article class="homepage-care-compact-card">
+              ${renderCareTeamPhoto(director, 72, 72)}
+              <div>
+                <h3><a href="/providers/${director.slug}">${director.name}</a></h3>
+                <p>${director.role || 'Medical Director'}</p>
+              </div>
+            </article>
+            <a class="button secondary" href="/providers">Meet the full care team</a>
           </div>
-          <p class="care-team-hub-link"><a href="/providers" class="text-link">View full care team →</a></p>
         </div>
       </section>
       <!-- /SIYA:CARE-TEAM -->`;
@@ -1192,17 +1494,53 @@ export function injectHomepageCareTeam(html, relPath) {
 }
 
 export function injectProvidersNav(html) {
-  const link = `<a href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>`;
-  if (html.includes(`href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>`)) return html;
+  const aboutDropdown = `<div class="nav-dropdown">
+          <button type="button" class="nav-dropdown__toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-about-menu" id="nav-about-toggle">About</button>
+          <div class="nav-dropdown__menu" id="nav-about-menu" role="menu">
+            <a href="/about" role="menuitem">About Us</a>
+            <a href="${NAV_PROVIDERS.path}" role="menuitem">${NAV_PROVIDERS.label}</a>
+          </div>
+        </div>`;
+  const aboutMobile = `<a href="/about">About Us</a>
+          <a href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>`;
+
+  html = html.replaceAll('href="/providers">Our Care Team</a>', `href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>`);
   html = html.replaceAll('href="/providers">Our providers</a>', `href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>`);
   html = html.replaceAll('href="/providers">Our physicians</a>', `href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>`);
-  const injectAfterAbout = (nav) => {
-    if (!nav.includes('href="/about"')) return nav;
-    if (nav.includes(NAV_PROVIDERS.path)) return nav;
-    return nav.replace(/(<a href="\/about">About<\/a>)/, `$1\n          ${link}`);
+
+  const DROPDOWN_RE =
+    /<div class="nav-dropdown">\s*<button[\s\S]*?<\/button>\s*<div class="nav-dropdown__menu"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*/gi;
+
+  const collapseDesktopNav = (nav) => {
+    if (!/class="nav-center"/i.test(nav)) return nav;
+    let next = nav
+      .replace(DROPDOWN_RE, '')
+      .replace(/<a href="\/about">About(?: Us)?<\/a>\s*/gi, '')
+      .replace(new RegExp(`<a href="${NAV_PROVIDERS.path}">[^<]*</a>\\s*`, 'gi'), '')
+      .replace(/<a href="\/providers">[^<]*<\/a>\s*/gi, '')
+      // Repair prior broken injects that closed nav early
+      .replace(/<\/div>\s*(?=<a href="\/(?:adhd-care|weight-loss|telehealth|mens-health|blog|answers)")/gi, '');
+    if (next.includes('nav-dropdown')) return next;
+    return next.replace(
+      /(<nav class="nav-center"[^>]*>\s*(?:<a href="\/">Home<\/a>\s*)?)/i,
+      `$1${aboutDropdown}\n          `,
+    );
   };
-  html = html.replace(/<nav class="nav-center"[\s\S]*?<\/nav>/gi, (nav) => injectAfterAbout(nav));
-  html = html.replace(/<div class="nav-mobile">[\s\S]*?<\/div>/gi, (nav) => injectAfterAbout(nav));
+
+  const collapseMobileNav = (nav) => {
+    if (!/class="nav-mobile"/i.test(nav)) return nav;
+    let next = nav
+      .replace(/<a href="\/about">About(?: Us)?<\/a>\s*/gi, '')
+      .replace(new RegExp(`<a href="${NAV_PROVIDERS.path}">[^<]*</a>\\s*`, 'gi'), '')
+      .replace(/<a href="\/providers">[^<]*<\/a>\s*/gi, '');
+    if (next.includes('href="/about">About Us</a>') && next.includes(`href="${NAV_PROVIDERS.path}"`)) {
+      return next;
+    }
+    return next.replace(/(<div class="nav-mobile">\s*(?:<a href="\/">Home<\/a>\s*)?)/i, `$1${aboutMobile}\n          `);
+  };
+
+  html = html.replace(/<nav class="nav-center"[\s\S]*?<\/nav>/gi, collapseDesktopNav);
+  html = html.replace(/<div class="nav-mobile">[\s\S]*?<\/div>/gi, collapseMobileNav);
   return html;
 }
 
@@ -1313,8 +1651,6 @@ export function injectSitewideCtas(html) {
   return html;
 }
 
-const ADHD_SCREENING_DEEP_LINK = '/adhd-screening?start=asrs';
-
 /** Inject FAQ accordion CTA blocks via conversion-system + components.mjs */
 function injectFaqCtaBlocks(html, relPath) {
   if (!html.includes('faq-accordion-cta')) return html;
@@ -1372,10 +1708,13 @@ export function normalizeCtaHierarchy(html, relPath) {
   if (html.includes('blog-final-cta')) {
     html = html.replace(/<div class="cta-block blog-cta blog-cta--mid"[\s\S]*?<\/div>\s*/g, '');
     html = html.replace(/<section class="blog-california-cta cta-block blog-cta"[\s\S]*?<\/section>\s*/g, '');
-    html = html.replace(
-      /<section class="section blog-final-cta">[\s\S]*?<\/section>/,
-      renderBlogFinalCtaSection(relPath),
-    );
+    // Pillar hubs keep Meet & Greet + Start an ADHD Evaluation (not screening/newsletter defaults).
+    if (relPath !== 'blog/adhd-in-women.html' && relPath !== 'blog/executive-dysfunction-adhd.html') {
+      html = html.replace(
+        /<section class="section blog-final-cta">[\s\S]*?<\/section>/,
+        renderBlogFinalCtaSection(relPath),
+      );
+    }
   }
 
   html = injectFaqCtaBlocks(html, relPath);
@@ -1390,23 +1729,100 @@ export function normalizeCtaHierarchy(html, relPath) {
   }
 
   if (isAdhdFunnelPage(relPath) && !relPath.startsWith('blog/') && html.includes('<!-- FINAL CTA -->')) {
+    const screeningBtn = renderButton({
+      label: COPY_STANDARDS.adhdSecondaryCta,
+      href: '/adhd-screening?adhd=1',
+      variant: 'primary',
+      track: 'adhd_screening_click',
+      location: 'final-cta',
+      pageType: 'adhd',
+      intent: 'adhd',
+      conversionGoal: 'screening',
+      ctaSlot: 'lead-magnet',
+    });
+    const meetBtn = renderButton({
+      ...slotToButton(CTA_SLOTS.meetGreet, { location: 'final-cta', relPath }),
+      variant: 'secondary',
+    });
     html = html.replace(
       /(<!-- FINAL CTA -->[\s\S]*?<div class="cta-band-buttons">)[\s\S]*?(<\/div>)/,
-      `$1
-              <a class="button secondary" href="${ADHD_SCREENING_DEEP_LINK}" data-siya-track="screening-cta-click" data-siya-location="final-cta">${COPY_STANDARDS.adhdSecondaryCta}</a>
-              <a class="button secondary" href="/pricing">Explore follow-up pricing</a>
-            $2`,
+      `$1\n              ${screeningBtn}\n              ${meetBtn}\n            $2`,
     );
     html = html.replace(/Start Free Screening/g, COPY_STANDARDS.adhdSecondaryCta);
   }
 
-  if (relPath === 'telehealth.html' && html.includes('<!-- FINAL CTA -->')) {
-    const { primary } = resolveConversion(relPath);
-    const slot = primary ?? CTA_SLOTS.primary;
-    const btn = renderButton({ ...slotToButton(slot, { location: 'final-cta' }), variant: 'primary' });
+  if (relPath === 'index.html' && html.includes('<!-- FINAL CTA -->')) {
+    const chatBtn = renderButton({
+      ...slotToButton(CTA_SLOTS.secureChat, { location: 'final-cta', relPath }),
+      variant: 'primary',
+    });
+    const meetBtn = renderButton({
+      ...slotToButton(CTA_SLOTS.meetGreet, { location: 'final-cta', relPath }),
+      variant: 'secondary',
+    });
     html = html.replace(
       /(<!-- FINAL CTA -->[\s\S]*?<div class="cta-band-buttons">)[\s\S]*?(<\/div>)/,
-      `$1\n              ${btn}\n            $2`,
+      `$1\n              ${chatBtn}\n              ${meetBtn}\n            $2`,
+    );
+  }
+
+  if (
+    (relPath === 'telehealth.html' ||
+      relPath === 'weight-loss-metabolic-health.html' ||
+      relPath === 'mens-health-longevity.html') &&
+    html.includes('<!-- FINAL CTA -->')
+  ) {
+    const meetBtn = renderButton({
+      ...slotToButton(CTA_SLOTS.meetGreet, { location: 'final-cta', relPath }),
+      variant: 'primary',
+    });
+    const chatBtn = renderButton({
+      ...slotToButton(CTA_SLOTS.secureChat, { location: 'final-cta', relPath }),
+      variant: 'secondary',
+    });
+    html = html.replace(
+      /(<!-- FINAL CTA -->[\s\S]*?<div class="cta-band-buttons">)[\s\S]*?(<\/div>)/,
+      `$1\n              ${meetBtn}\n              ${chatBtn}\n            $2`,
+    );
+  }
+
+  if (relPath === 'book-appointment.html' && html.includes('id="book-visit"')) {
+    const meetBtn = renderButton({
+      ...slotToButton(CTA_SLOTS.meetGreet, { location: 'book-visit-primary', relPath }),
+      variant: 'primary',
+    });
+    const zocdocBtn = renderButton({
+      ...slotToButton(CTA_SLOTS.zocdoc, { location: 'book-visit-zocdoc', relPath }),
+      variant: 'secondary',
+    });
+    const chatBtn = renderButton({
+      ...slotToButton(CTA_SLOTS.secureChat, { location: 'book-visit-chat', relPath }),
+      variant: 'secondary',
+    });
+    html = html.replace(
+      /(<div class="booking-buttons">)[\s\S]*?(<\/div>\s*<p class="note card-note">)/,
+      `$1
+               <div class="booking-option booking-option--featured">
+                 <h3>Start here — low-friction</h3>
+                 <p class="cta-microcopy">${COPY_STANDARDS.meetGreetMicrocopy}</p>
+                 ${meetBtn}
+                 <p class="cta-microcopy">${COPY_STANDARDS.meetGreetDisclaimer}</p>
+               </div>
+               <div class="booking-option booking-option--secondary">
+                 <h3>Additional booking option</h3>
+                 <p class="cta-microcopy">Prefer to schedule through a partner calendar?</p>
+                 ${zocdocBtn}
+               </div>
+               <div class="booking-option">
+                 <h3>Questions before booking?</h3>
+                 ${chatBtn}
+               </div>
+               <div class="booking-option">
+                 <h3>ADHD evaluation</h3>
+                 <p class="cta-microcopy">Already screened and ready for structured evaluation?</p>
+                 <a class="button ds-button ds-button--secondary secondary" href="${REDIRECT_ADHD_EVALUATION_URL}" data-siya-track="adhd_evaluation_click" data-siya-location="book-visit-adhd">Start ADHD Evaluation</a>
+               </div>
+             $2`,
     );
   }
 
@@ -1560,12 +1976,12 @@ function encCarepatronHref(url) {
   return url.replace(/&/g, '&amp;');
 }
 
-/** Ensure walkthrough, $199 evaluation, and geo ADHD hero CTAs use canonical CarePatron i= params. */
+/** Ensure walkthrough, $149 evaluation, and geo ADHD hero CTAs use canonical CarePatron i= params. */
 export function normalizeCarePatronLinks(html, relPath) {
   html = html.replace(/<a\s+([^>]*?)>/gi, (match, attrs) => {
     if (!/book\.carepatron\.com/i.test(attrs)) return match;
     if (/data-cta="book-walkthrough"/i.test(attrs)) {
-      return `<a ${attrs.replace(/href="[^"]*"/i, `href="${encCarepatronHref(ADHD_WALKTHROUGH_LINK)}"`)}>`;
+      return `<a ${attrs.replace(/href="[^"]*"/i, `href="${encCarepatronHref(MEET_GREET_BOOKING_URL)}"`)}>`;
     }
     if (/data-cta="start-199-evaluation"/i.test(attrs)) {
       return `<a ${attrs.replace(/href="[^"]*"/i, `href="${encCarepatronHref(ADHD_EVALUATION_199_LINK)}"`)}>`;
@@ -1577,14 +1993,14 @@ export function normalizeCarePatronLinks(html, relPath) {
     /<a(\s[^>]*?)href="([^"]*book\.carepatron\.com[^"]*)"([^>]*>)([\s\S]*?)<\/a>/gi,
     (match, pre, _href, post, inner) => {
       const text = inner.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-      if (/walkthrough|15-Minute ADHD Consultation/i.test(text)) {
-        return `<a${pre}href="${encCarepatronHref(ADHD_WALKTHROUGH_LINK)}"${post}${inner}</a>`;
+      if (/walkthrough|15-Minute ADHD Consultation|Meet & Greet|Meet &amp; Greet/i.test(text)) {
+        return `<a${pre}href="${encCarepatronHref(MEET_GREET_BOOKING_URL)}"${post}${inner}</a>`;
       }
-      if (/(?:Start|start).*\$199|Already ready\?/i.test(text) && /evaluation/i.test(text)) {
+      if (/(?:Start|start).*\$149|Already ready\?/i.test(text) && /evaluation/i.test(text)) {
         return `<a${pre}href="${encCarepatronHref(ADHD_EVALUATION_199_LINK)}"${post}${inner}</a>`;
       }
-      if (/Book Free Consultation|Book Your ADHD Walkthrough|Book Free(?:\s+Evaluation)?\s+Walkthrough|Book Free Demo|Book Demo/i.test(text)) {
-        return `<a${pre}href="${encCarepatronHref(ADHD_WALKTHROUGH_LINK)}"${post}${inner}</a>`;
+      if (/Book Free Consultation|Book Your ADHD Walkthrough|Book Free(?:\s+Evaluation)?\s+Walkthrough|Book Free Demo|Book Demo|Book Free Meet/i.test(text)) {
+        return `<a${pre}href="${encCarepatronHref(MEET_GREET_BOOKING_URL)}"${post}${inner}</a>`;
       }
       return match;
     },
@@ -1596,44 +2012,41 @@ export function normalizeCarePatronLinks(html, relPath) {
 const CONSULTATION_CTA_LABEL_RE =
   /Schedule Consultation|Book Consultation|Book Appointment|Book appointment|Book Free Consultation|Book Your ADHD Walkthrough|Book Your Free 15-Minute ADHD Consultation/i;
 
-/** Route consultation CTAs — ADHD funnel → walkthrough redirect; all else → secure chat redirect. */
+/** Route consultation CTAs — ADHD funnel → meet & greet redirect; general pages → meet & greet (not Spruce). */
 export function normalizeConsultationCtaRouting(html, relPath = '') {
   const isAdhd = isAdhdFunnelPath(relPath) || relPath === 'adult-adhd-screening-california.html';
-  const walkHref = REDIRECT_ADHD_WALKTHROUGH_URL;
-  const chatHref = REDIRECT_CHAT_URL;
-  const targetHref = isAdhd ? walkHref : chatHref;
+  const meetHref = REDIRECT_MEET_GREET_URL;
   html = html.replace(
     /href="([^"]*book\.carepatron\.com[^"]*i(?:=|%3D)sysv73e4[^"]*)"/gi,
-    `href="${targetHref}"`,
+    `href="${meetHref}"`,
   );
   html = html.replace(
     /<a(\s[^>]*?)href="([^"]*spruce\.care\/siyahealth[^"]*)"([^>]*>)([\s\S]*?)<\/a>/gi,
     (match, pre, _href, post, inner) => {
       const text = inner.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
       if (CONSULTATION_CTA_LABEL_RE.test(text)) {
-        return `<a${pre}href="${targetHref}"${post}${inner}</a>`;
-      }
-      return match;
-    },
-  );
-  html = html.replace(
-    /<a(\s[^>]*?)href="\/book-appointment"([^>]*>)([\s\S]*?)<\/a>/gi,
-    (match, pre, post, inner) => {
-      const text = inner.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-      if (/book appointment|schedule consultation/i.test(text)) {
-        const track = isAdhd ? 'schedule-consultation-click' : 'primary-cta-click';
-        return `<a${pre}href="${targetHref}" data-siya-track="${track}"${post}${inner}</a>`;
+        const attrs = `${pre}${post}`
+          .replace(/\s*data-siya-track="[^"]*"/gi, '')
+          .replace(/>$/, ` data-siya-track="meet_greet_click">`);
+        return `<a${attrs.replace(/^(\s*)/, `$1href="${meetHref}" `)}${inner}</a>`;
       }
       return match;
     },
   );
   if (!isAdhd) {
+    /* Canonicalize meet/walkthrough redirect CTAs — preserve href. */
     html = html.replace(
-      /<a(\s[^>]*?)href="([^"]*redirect\/adhd-walkthrough[^"]*)"([^>]*>)([\s\S]*?)<\/a>/gi,
+      /<a(\s[^>]*?)href="([^"]*redirect\/(?:adhd-walkthrough|meet-greet)[^"]*)"([^>]*>)([\s\S]*?)<\/a>/gi,
       (match, pre, _href, post, inner) => {
         const text = inner.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-        if (/walkthrough|consultation|appointment|schedule/i.test(text) && !/ADHD screening|Take Free/i.test(text)) {
-          return `<a${pre}href="${chatHref}" data-siya-track="primary-cta-click"${post}Start Secure Medical Chat</a>`;
+        if (
+          /walkthrough|consultation|appointment|schedule|meet & greet|meet &amp; greet/i.test(text) &&
+          !/ADHD screening|Take Free/i.test(text)
+        ) {
+          const attrs = `${pre}${post}`
+            .replace(/\s*data-siya-track="[^"]*"/gi, '')
+            .replace(/>$/, ' data-siya-track="meet_greet_click">');
+          return `<a${attrs.replace(/^(\s*)/, `$1href="${meetHref}" `)}${COPY_STANDARDS.meetGreetCta}</a>`;
         }
         return match;
       },
@@ -1642,8 +2055,11 @@ export function normalizeConsultationCtaRouting(html, relPath = '') {
       /<a(\s[^>]*?)href="([^"]*book\.carepatron\.com[^"]*)"([^>]*>)([\s\S]*?)<\/a>/gi,
       (match, pre, _href, post, inner) => {
         const text = inner.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-        if (CONSULTATION_CTA_LABEL_RE.test(text) || /schedule|consultation|appointment/i.test(text)) {
-          return `<a${pre}href="${chatHref}" data-siya-track="primary-cta-click"${post}${inner}</a>`;
+        if (CONSULTATION_CTA_LABEL_RE.test(text) || /schedule|consultation|appointment|meet & greet/i.test(text)) {
+          const attrs = `${pre}${post}`
+            .replace(/\s*data-siya-track="[^"]*"/gi, '')
+            .replace(/>$/, ' data-siya-track="meet_greet_click">');
+          return `<a${attrs.replace(/^(\s*)/, `$1href="${meetHref}" `)}${inner}</a>`;
         }
         return match;
       },
@@ -1652,8 +2068,64 @@ export function normalizeConsultationCtaRouting(html, relPath = '') {
   return html;
 }
 
-/** Normalize walkthrough/demo CTA button labels and ftxOxenx anchor text. */
-export function normalizeWalkthroughCtaLabels(html) {
+/** Icon + wordmark lockup in header/footer/LP chrome (OG/schema keep mark asset). */
+export function normalizeBrandLogos(html) {
+  const headerLockup = renderBrandLockup({ variant: 'header' });
+  const footerLockup = renderBrandLockup({ variant: 'footer' });
+  const lpLockup = renderBrandLockup({ variant: 'lp' });
+
+  html = html.replace(/<a class="header-logo(?:\s+brand-lockup)?"[^>]*>[\s\S]*?<\/a>/gi, headerLockup);
+  html = html.replace(/<a class="lp-header-logo(?:\s+brand-lockup)?"[^>]*>[\s\S]*?<\/a>/gi, lpLockup);
+  html = html.replace(
+    /<a[^>]*class="[^"]*footer-logo-link[^"]*"[^>]*>[\s\S]*?<\/a>/gi,
+    footerLockup,
+  );
+
+  const legacyMarks = [
+    '/assets/images/siya-health-logo.png',
+    '/assets/images/siya-health-logo-pre-registered.png',
+    '/assets/images/siya-health-logo-registered.png',
+    BRAND_MARK_ICON,
+  ];
+  for (const legacy of legacyMarks) {
+    const esc = legacy.replace(/\./g, '\\.');
+    html = html.replace(
+      new RegExp(`(class="footer-logo-img[^"]*"[^>]*\\bsrc=")${esc}(")`, 'gi'),
+      `$1${BRAND_MARK_ICON}$2`,
+    );
+  }
+  return html;
+}
+
+/** Ensure PNG favicons from the circular mark are linked in every page head. */
+export function normalizeFavicons(html) {
+  html = html.replace(/<link rel="icon"[^>]*href="[^"]*favicon\.svg"[^>]*>\s*/gi, '');
+  if (!html.includes('favicon-32x32')) {
+    if (/<meta charset="[^"]+"\s*\/?>/i.test(html)) {
+      html = html.replace(/(<meta charset="[^"]+"\s*\/?>)/i, `$1\n${FAVICON_HEAD_TAGS}`);
+    } else if (/<head[^>]*>/i.test(html)) {
+      html = html.replace(/(<head[^>]*>)/i, `$1\n${FAVICON_HEAD_TAGS}`);
+    }
+  }
+  return html;
+}
+
+/** Repair Meet & Greet CTAs that lost their href during prior chrome passes. */
+export function ensureMeetGreetHrefs(html) {
+  const meetHref = REDIRECT_MEET_GREET_URL;
+  html = html.replace(
+    /<a(\s[^>]*?)>(\s*Book Free Meet(?:\s|&amp;|\s&)*Greet\s*)<\/a>/gi,
+    (match, attrs, label) => {
+      if (/\bhref\s*=/i.test(attrs)) return match;
+      const cleaned = attrs.replace(/\s*data-siya-track="[^"]*"/gi, '');
+      return `<a${cleaned} href="${meetHref}" data-siya-track="meet_greet_click">${label}</a>`;
+    },
+  );
+  return html;
+}
+
+/** Normalize Meet & Greet / walkthrough CTA button labels and CarePatron/redirect anchors. */
+export function normalizeWalkthroughCtaLabels(html, relPath = '') {
   const label = COPY_STANDARDS.walkthroughCta;
   const screeningLabel = COPY_STANDARDS.walkthroughScreeningResultCta;
   html = html.replace(
@@ -1661,12 +2133,23 @@ export function normalizeWalkthroughCtaLabels(html) {
     `<a$1>${screeningLabel}</a>`,
   );
   html = html.replace(
-    /(<a[^>]*href="[^"]*(?:redirect\/adhd-walkthrough|i(?:=|%3D)ftxOxenx)[^"]*"[^>]*>)\s*[^<]+\s*(<\/a>)/gi,
+    /(<a[^>]*href="[^"]*(?:redirect\/(?:meet-greet|adhd-walkthrough)|i(?:=|%3D)(?:kkarJfxH|ftxOxenx))[^"]*"[^>]*>)\s*[^<]+\s*(<\/a>)/gi,
     (match, open, close) => {
       if (/screening-results|book-walkthrough/i.test(match)) return `${open}${screeningLabel}${close}`;
       return `${open}${label}${close}`;
     },
   );
+  /* Prefer canonical meet-greet redirect sitewide; keep legacy /redirect/adhd-walkthrough on CA ads LP for event continuity. */
+  if (relPath !== 'adult-adhd-screening-california.html') {
+    html = html.replace(
+      /(<a[^>]*data-siya-track="(?:meet_greet_click|click_book_walkthrough|adhd_intro_call_click|schedule-consultation-click)"[^>]*href=")\/redirect\/adhd-walkthrough(")/gi,
+      `$1${REDIRECT_MEET_GREET_URL}$2`,
+    );
+    html = html.replace(
+      /(<a[^>]*href=")\/redirect\/adhd-walkthrough("[^>]*data-siya-track="(?:meet_greet_click|click_book_walkthrough|adhd_intro_call_click|schedule-consultation-click)")/gi,
+      `$1${REDIRECT_MEET_GREET_URL}$2`,
+    );
+  }
   return html;
 }
 
@@ -1674,14 +2157,14 @@ export function normalizeWalkthroughCtaLabels(html) {
 export function normalizeConversionRedirectUrls(html) {
   html = html.replace(/href="https?:\/\/spruce\.care\/siyahealth[^"]*"/gi, `href="${REDIRECT_CHAT_URL}"`);
   html = html.replace(
-    /href="([^"]*book\.carepatron\.com[^"]*i(?:=|%3D)ftxOxenx[^"]*)"/gi,
-    `href="${REDIRECT_ADHD_WALKTHROUGH_URL}"`,
+    /href="([^"]*book\.carepatron\.com[^"]*i(?:=|%3D)(?:kkarJfxH|ftxOxenx)[^"]*)"/gi,
+    `href="${REDIRECT_MEET_GREET_URL}"`,
   );
   html = html.replace(
     /href="([^"]*book\.carepatron\.com[^"]*i(?:=|%3D)bxrKBOuk[^"]*)"/gi,
     `href="${REDIRECT_ADHD_EVALUATION_URL}"`,
   );
-  for (const internal of [REDIRECT_CHAT_URL, REDIRECT_ADHD_WALKTHROUGH_URL, REDIRECT_ADHD_EVALUATION_URL]) {
+  for (const internal of [REDIRECT_CHAT_URL, REDIRECT_MEET_GREET_URL, REDIRECT_ADHD_WALKTHROUGH_URL, REDIRECT_ADHD_EVALUATION_URL]) {
     const esc = internal.replace(/\//g, '\\/');
     html = html.replace(
       new RegExp(`(<a\\s[^>]*href="${esc}"[^>]*)\\s*target="_blank"`, 'gi'),
@@ -1695,27 +2178,29 @@ export function normalizeConversionRedirectUrls(html) {
   return html;
 }
 
-/** Route legacy primary CTA links (CarePatron/YMA) to Spruce secure chat. */
+/** Route legacy primary CTA links (CarePatron/YMA) to Meet & Greet redirect. */
 export function normalizeCtaUrls(html) {
-  const primaryLabels = 'Talk to a Clinician|Talk to a clinician|Start Secure Medical Chat|Start Secure Chat';
+  const meetGreetLabels = 'Book Free Meet & Greet|Book Free Consultation|Schedule Consultation|Talk to a Clinician|Talk to a clinician';
   html = html.replace(
-    new RegExp(`<a(\\s[^>]*?)href="[^"]*(?:carepatron|yourmarketingai)[^"]*"([^>]*)>\\s*(?:${primaryLabels})\\s*<\\/a>`, 'gi'),
+    new RegExp(`<a(\\s[^>]*?)href="[^"]*(?:carepatron|yourmarketingai)[^"]*"([^>]*)>\\s*(?:${meetGreetLabels})\\s*<\\/a>`, 'gi'),
     (_m, before, after) => {
       const attrs = `${before}${after}`
         .replace(/\s*target="[^"]*"/gi, '')
         .replace(/\s*rel="[^"]*"/gi, '')
         .replace(/\s*data-siya-track="[^"]*"/gi, '');
-      return `<a${attrs} href="${REDIRECT_CHAT_URL}" data-siya-track="primary-cta-click">${COPY_STANDARDS.primaryCta}</a>`;
+      return `<a${attrs} href="${REDIRECT_MEET_GREET_URL}" data-siya-track="meet_greet_click">${COPY_STANDARDS.meetGreetCta}</a>`;
     },
   );
+  // Keep Secure Chat CTAs on /redirect/chat (Spruce)
+  const chatLabels = 'Start Secure Medical Chat|Start Secure Chat';
   html = html.replace(
-    /<a(\s[^>]*?)href="[^"]*(?:carepatron|yourmarketingai)[^"]*"([^>]*)>\s*Schedule Consultation\s*<\/a>/gi,
+    new RegExp(`<a(\\s[^>]*?)href="[^"]*(?:carepatron|yourmarketingai)[^"]*"([^>]*)>\\s*(?:${chatLabels})\\s*<\\/a>`, 'gi'),
     (_m, before, after) => {
       const attrs = `${before}${after}`
         .replace(/\s*target="[^"]*"/gi, '')
         .replace(/\s*rel="[^"]*"/gi, '')
         .replace(/\s*data-siya-track="[^"]*"/gi, '');
-      return `<a${attrs} href="${REDIRECT_ADHD_WALKTHROUGH_URL}" data-siya-track="schedule-consultation-click">${COPY_STANDARDS.secondaryCta}</a>`;
+      return `<a${attrs} href="${REDIRECT_CHAT_URL}" data-siya-track="secure_chat_click">${COPY_STANDARDS.secureChatCta}</a>`;
     },
   );
   return html;
@@ -1754,12 +2239,35 @@ export function injectFaqAccordion(html) {
   return html.replace(/<\/body>/i, `${block}\n</body>`);
 }
 
-/** Shared transparent-header scroll behavior (replaces per-page inline scripts). */
+/** Shared transparent-header scroll + About dropdown behavior. */
 export function injectHeaderScroll(html) {
   if (!html.includes('site-header-transparent') && !html.includes('id="site-header"')) return html;
+
+  // Always ensure About dropdown script is present when the dropdown markup exists
+  if (html.includes('nav-dropdown') && !html.includes('nav-dropdown.js')) {
+    if (html.includes('header-scroll.js')) {
+      html = html.replace(
+        /(<script src="\/scripts\/header-scroll\.js"[^>]*><\/script>)/i,
+        `$1\n    <script src="/scripts/nav-dropdown.js" defer></script>`,
+      );
+    } else {
+      const block = `<!-- SIYA:HEADER-SCROLL -->
+    <script src="/scripts/header-scroll.js" defer></script>
+    <script src="/scripts/nav-dropdown.js" defer></script>
+    <!-- /SIYA:HEADER-SCROLL -->`;
+      if (html.includes('<!-- /SIYA:COOKIE-NOTICE -->')) {
+        html = html.replace('<!-- /SIYA:COOKIE-NOTICE -->', `<!-- /SIYA:COOKIE-NOTICE -->\n${block}`);
+      } else {
+        html = html.replace(/<\/body>/i, `${block}\n</body>`);
+      }
+    }
+    return html;
+  }
+
   if (html.includes('header-scroll.js')) return html;
   const block = `<!-- SIYA:HEADER-SCROLL -->
     <script src="/scripts/header-scroll.js" defer></script>
+    <script src="/scripts/nav-dropdown.js" defer></script>
     <!-- /SIYA:HEADER-SCROLL -->`;
   if (html.includes('<!-- /SIYA:COOKIE-NOTICE -->')) {
     return html.replace('<!-- /SIYA:COOKIE-NOTICE -->', `<!-- /SIYA:COOKIE-NOTICE -->\n${block}`);
@@ -1767,18 +2275,40 @@ export function injectHeaderScroll(html) {
   return html.replace(/<\/body>/i, `${block}\n</body>`);
 }
 
+/** Floating chat widgets paused — Messenger FAB + GHL LeadConnector only. Spruce Secure Chat CTAs stay. */
+export function injectContactFab(html) {
+  return stripChatWidgets(html);
+}
+
+/** Remove Messenger FAB and GHL LeadConnector widget scripts/DOM only. */
+export function stripChatChannels(html) {
+  return stripChatWidgets(html);
+}
+
+export function stripChatWidgets(html) {
+  if (!html) return html;
+  html = html.replace(/<!-- SIYA:CONTACT-FAB -->[\s\S]*?<!-- \/SIYA:CONTACT-FAB -->\s*/gi, '');
+  html = html.replace(/<script[^>]*src="\/scripts\/contact-fab\.js"[^>]*><\/script>\s*/gi, '');
+  html = html.replace(/<script[^>]*src="\/scripts\/deferred-chat-widget\.js"[^>]*><\/script>\s*/gi, '');
+  html = html.replace(/<script[^>]*widgets\.leadconnectorhq\.com[^>]*>[\s\S]*?<\/script>\s*/gi, '');
+  html = html.replace(/<script[^>]*src="https:\/\/widgets\.leadconnectorhq\.com[^"]*"[^>]*><\/script>\s*/gi, '');
+  html = html.replace(/<div[^>]*id="siya-contact-fab"[^>]*>[\s\S]*?<\/div>\s*/gi, '');
+  return html;
+}
+
 export function applySiteChrome(html, relPath, title = '') {
   html = injectCookieConsentBootstrap(html);
   if (isRedirectTransitionPage(relPath)) {
     html = injectCookieNotice(html, relPath);
-    return injectGtmAndTracking(html);
+    return injectGtmAndTracking(html, relPath);
   }
   if (isLegalContentPage(relPath)) {
     html = injectSeoFooterArchitecture(html, relPath);
     html = normalizeLegalLinks(html);
     html = normalizeConsultationCtaRouting(html, relPath);
     html = normalizeConversionRedirectUrls(html);
-    return injectGtmAndTracking(html);
+    html = stripChatChannels(html);
+    return injectGtmAndTracking(html, relPath);
   }
 
   if (isAdsLandingPage(relPath, html)) {
@@ -1790,15 +2320,19 @@ export function applySiteChrome(html, relPath, title = '') {
     html = normalizeLegalLinks(html);
     html = normalizeSitewideCopy(html, relPath);
     html = normalizeConsultationCtaRouting(html, relPath);
-    html = normalizeWalkthroughCtaLabels(html);
+    html = normalizeWalkthroughCtaLabels(html, relPath);
     html = normalizeConversionRedirectUrls(html);
-    return injectGtmAndTracking(html);
+    html = ensureMeetGreetHrefs(html);
+    html = stripChatChannels(html);
+    return injectGtmAndTracking(html, relPath);
   }
 
   html = injectNavCta(html, relPath);
   html = injectSitewideCtas(html);
   html = injectAdhdFunnelBanner(html, relPath);
   html = injectProvidersNav(html);
+  html = injectMensHealthNav(html);
+  html = injectLabsNav(html);
   html = injectAnswersNav(html);
   html = injectSeoFooterArchitecture(html, relPath);
   html = injectLearnMoreSections(html, relPath);
@@ -1816,6 +2350,7 @@ export function applySiteChrome(html, relPath, title = '') {
   html = injectFaqAccordion(html);
   html = injectHeroTrustBar(html, relPath);
   html = injectHeroPrimaryCta(html, relPath);
+  html = restoreSecureChatSecondaryCtas(html, relPath);
   html = injectServiceTrust(html, relPath);
   html = stripInlineChromeScripts(html);
   html = normalizeLegalLinks(html);
@@ -1824,8 +2359,13 @@ export function applySiteChrome(html, relPath, title = '') {
   html = normalizeCtaUrls(html);
   html = normalizeCarePatronLinks(html, relPath);
   html = normalizeConsultationCtaRouting(html, relPath);
-  html = normalizeWalkthroughCtaLabels(html);
+  html = normalizeWalkthroughCtaLabels(html, relPath);
   html = normalizeConversionRedirectUrls(html);
   html = normalizeCtaHierarchy(html, relPath);
-  return injectGtmAndTracking(html);
+  html = ensureMeetGreetHrefs(html);
+  html = normalizeBrandLogos(html);
+  html = normalizeFavicons(html);
+  html = applyPricingTokens(html);
+  html = stripChatChannels(html);
+  return injectGtmAndTracking(html, relPath);
 }

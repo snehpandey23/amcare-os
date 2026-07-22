@@ -1,0 +1,27 @@
+id: 2026-07-E-02-001
+topic: sleep
+intent: Education
+family: Explanation
+layout: E-02
+journey_stage: Considering
+persona: Adult_Fatigue
+emotion: Curious
+tone: Calm
+message: ADHD and poor sleep can look alike — map both before labeling.
+image: Editorial Photography
+image_category: sleep
+image_ref: SOCIAL-HOOKS carousel
+headline_length: Short
+caption_length: Long
+cta: Article
+cta_label: Read the Guide
+evidence_level: ClinicalPractice
+clinical_review: true
+platforms:
+  - Instagram
+variants: 1
+claims_ok: true
+source_refs:
+  - /answers/poor-sleep-feels-like-adhd
+status: seed
+source: SOCIAL-HOOKS carousel

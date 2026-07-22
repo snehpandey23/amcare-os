@@ -10,13 +10,22 @@ export {
   BASE_URL,
   BOOKING_LINK,
   CAREPATRON_BASE,
+  MEET_GREET_BOOKING_URL,
   ADHD_WALKTHROUGH_LINK,
   ADHD_EVALUATION_199_LINK,
   SPRUCE_CHAT_URL,
+  REDIRECT_MEET_GREET_URL,
+  ZOCDOC_BOOKING_URL,
   PROFILE_LAST_UPDATED,
   resolveProviderPhoto,
 } from './providers-core.mjs';
-import { BASE_URL, BOOKING_LINK, PROFILE_LAST_UPDATED, resolveProviderPhoto } from './providers-core.mjs';
+import {
+  BASE_URL,
+  BOOKING_LINK,
+  ZOCDOC_BOOKING_URL,
+  PROFILE_LAST_UPDATED,
+  resolveProviderPhoto,
+} from './providers-core.mjs';
 
 export const PROVIDERS = [
   {

@@ -5,21 +5,22 @@
  */
 
 :root {
-  /* ── Brand colors (from styles.css) ── */
+  /* ── Brand colors — Option C + soft yellow tint ── */
   --ds-color-white: #ffffff;
   --ds-color-primary: #1e3a8a;
   --ds-color-primary-hover: #1e40af;
-  --ds-color-accent: #0ea5a4;
-  --ds-color-accent-hover: #0d9392;
-  --ds-color-text: #111827;
-  --ds-color-text-secondary: #6b7280;
-  --ds-color-text-muted: #9ca3af;
-  --ds-color-border: #e5e7eb;
-  --ds-color-bg-subtle: #f9fafb;
-  --ds-color-bg-tinted: #f0f9ff;
+  --ds-color-accent: #0f766e;
+  --ds-color-accent-hover: #115e59;
+  --ds-color-text: #1c1917;
+  --ds-color-text-secondary: #57534e;
+  --ds-color-text-muted: #78716c;
+  --ds-color-border: #ebe5d6;
+  --ds-color-bg-subtle: #faf4e4;
+  --ds-color-bg-tinted: #faf4e4;
+  --ds-color-page: #fffdf6;
   --ds-color-star: #f59e0b;
-  --ds-color-hero-overlay: rgba(30, 58, 138, 0.75);
-  --ds-color-hero-content-bg: rgba(0, 0, 0, 0.45);
+  --ds-color-hero-overlay: rgba(28, 25, 23, 0.58);
+  --ds-color-hero-content-bg: rgba(28, 25, 23, 0.55);
 
   /* Aliases — backward-compatible with existing :root vars */
   --ds-white: var(--ds-color-white);
@@ -81,7 +82,7 @@
 
   /* ── Shadows ── */
   --ds-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
-  --ds-shadow: 0 4px 16px rgba(30, 58, 138, 0.08);
+  --ds-shadow: 0 4px 16px rgba(28, 25, 23, 0.06);
   --ds-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
   --ds-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
   --ds-shadow-card-hover: 0 10px 25px rgba(0, 0, 0, 0.08);

@@ -3,7 +3,7 @@
  */
 import { LEGAL_HUB, LEGAL_PATHS, LEGAL_EFFECTIVE_DATE as LEGAL_EFFECTIVE_DATE_ISO } from './legal-documents.mjs';
 import { buildProviderAuditCanonical } from './provider-canonical.mjs';
-import { BOOKING_LINK, SPRUCE_CHAT_URL } from './providers-core.mjs';
+import { BOOKING_LINK, REDIRECT_CHAT_URL, REDIRECT_MEET_GREET_URL } from './providers-core.mjs';
 import { SIYA_CIRCLE_GHL_FORM_URL } from './siya-circle-config.mjs';
 
 /** Counsel-approved effective date for published legal documents. */
@@ -40,8 +40,8 @@ export const PRICING = {
   pageTitle: 'Pricing | Siya Health',
   initialEvaluation: {
     label: 'Initial Evaluation',
-    amount: 199,
-    display: '$199',
+    amount: 149,
+    display: '$149',
     period: 'one-time visit',
     description:
       'Structured clinician visit: history, goals, and a clear plan. Applies to ADHD, weight, metabolic, primary care, and telehealth pathways.',
@@ -66,35 +66,39 @@ export const PRICING = {
 
 /** Three-slot CTA system — applied via normalizeSitewideCopy() */
 export const CTA_SYSTEM = {
-  primary: { label: 'Start Secure Medical Chat', url: SPRUCE_CHAT_URL },
+  primary: { label: 'Book Free Meet & Greet', url: REDIRECT_MEET_GREET_URL },
+  secureChat: { label: 'Start Secure Medical Chat', url: REDIRECT_CHAT_URL },
   newsletter: {
     label: 'Join Our Health Guide',
     microcopy: 'Weekly evidence-based health insights from Siya Health physicians.',
     url: SIYA_CIRCLE_GHL_FORM_URL,
   },
   secondary: {
-    booking: { label: 'Schedule Consultation', url: BOOKING_LINK },
-    adhd: { label: 'Schedule Consultation', url: BOOKING_LINK },
-    weight: { label: 'Schedule Consultation', url: BOOKING_LINK },
-    telehealth: { label: 'Explore Telehealth Care', url: '/telehealth' },
-    default: { label: 'Schedule Consultation', url: BOOKING_LINK },
+    booking: { label: 'View Telehealth Services', url: '/telehealth' },
+    adhd: { label: 'Take Free ADHD Screening', url: '/adhd-screening?adhd=1' },
+    weight: { label: 'View Pricing', url: '/pricing' },
+    telehealth: { label: 'View Telehealth Services', url: '/telehealth' },
+    default: { label: 'View Telehealth Services', url: '/telehealth' },
   },
 };
 
-/** Non-clinical ADHD free intro call (CarePatron booking slot) — button labels only.
- *  This is a free discovery/process call, NOT a medical visit, diagnosis, or treatment. */
-export const WALKTHROUGH_CTA = {
-  label: 'Book Free ADHD Intro Call',
-  screeningResultLabel: 'Book Free ADHD Intro Call',
+/** Non-clinical Free Meet & Greet (CarePatron booking slot) — button labels only.
+ *  This is a free discovery call, NOT a medical visit, diagnosis, or treatment. */
+export const MEET_GREET_CTA = {
+  label: 'Book Free Meet & Greet',
+  screeningResultLabel: 'Book Free Meet & Greet',
+  adhdMicrocopy:
+    "We'll explain the ADHD evaluation process, pricing, and next steps. This is not a medical visit or diagnosis.",
   microcopy:
-    "This free intro call helps you understand Siya Health's ADHD evaluation process, pricing, and next steps. It is not a medical visit, diagnosis, or treatment recommendation.",
+    'A short, free call to understand your needs, explain care options, and help you choose the right next step. This is not a medical visit, diagnosis, or treatment recommendation.',
   disclaimer:
-    'This is a free process call, not a medical visit or diagnosis.',
+    'This is not a medical visit, diagnosis, or treatment recommendation. No medication will be prescribed during this call.',
 };
 
-/** Legacy walkthrough/demo/consultation button labels → canonical WALKTHROUGH_CTA.label.
- *  Includes the retired "ADHD Walkthrough" / "Process Call" / consultation phrasings so
- *  every ADHD funnel CTA normalizes to "Book Free ADHD Intro Call" at build time. */
+/** @deprecated Use MEET_GREET_CTA — kept for import compatibility */
+export const WALKTHROUGH_CTA = MEET_GREET_CTA;
+
+/** Legacy walkthrough/demo/consultation button labels → canonical MEET_GREET_CTA.label. */
 export const LEGACY_WALKTHROUGH_CTA_LABELS = [
   'Book Free Walkthrough',
   'Book Free Evaluation Walkthrough',
@@ -106,6 +110,10 @@ export const LEGACY_WALKTHROUGH_CTA_LABELS = [
   'Book ADHD Process Call',
   'Book Free Consultation',
   'Book Free ADHD Consultation',
+  'Book Free ADHD Intro Call',
+  'Book ADHD Walkthrough',
+  'ADHD Evaluation Walkthrough',
+  'Schedule Consultation',
   'Book Free Demo',
   'Book Demo',
 ];
@@ -118,12 +126,6 @@ export const REMOVED_BOOKING_CTA_LABELS = [
   'Contact care team',
   'Discovery Call',
   'Book Discovery Call',
-  'Meet & Greet',
-  'Book Meet & Greet',
-  'Book Meet &amp; Greet',
-  'Start Secure Chat',
-  'Book a Meet & Greet',
-  'Book a Meet &amp; Greet',
   'Schedule a Quick Call',
   'Find the Right Starting Point',
   'Explore ADHD Care',
@@ -133,14 +135,9 @@ export const REMOVED_BOOKING_CTA_LABELS = [
   'Learn More First',
   'Join the Waitlist',
   'Join Waitlist',
-  'Schedule Meet & Greet',
-  'Schedule Meet &amp; Greet',
-  'Book a meet & greet',
   'Book Your Free 15-Minute Discovery Call',
-  'Schedule a Meet and Greet',
   'Book Consultation',
-  'Book Appointment',
-  'Book evaluation ($199)',
+  'Book evaluation ($149)',
   'Book ADHD Evaluation online',
   'Book with Sneh',
   'Book with Natasha',
@@ -180,7 +177,7 @@ export const LEGACY_MARKETPLACE_PHRASES = [
   { from: /Join Waitlist/gi, to: CTA_SYSTEM.primary.label },
   { from: /Board-certified, ADHD-CCSP trained providers/gi, to: MIXED_ROSTER_CLINICIAN_PHRASE },
   { from: /membership plans/gi, to: 'follow-up plan pricing' },
-  { from: /\bdiscovery call\b/gi, to: 'free ADHD screening' },
+  { from: /\bfree discovery call\b/gi, to: 'free Meet & Greet' },
 ];
 
 /** Canonical provider positioning — generated from provider-canonical.json */
@@ -190,16 +187,22 @@ export const PROVIDER_CANONICAL = buildProviderAuditCanonical();
 export const COPY_STANDARDS = {
   primaryCta: CTA_SYSTEM.primary.label,
   primaryCtaUrl: CTA_SYSTEM.primary.url,
+  secureChatCta: CTA_SYSTEM.secureChat.label,
+  secureChatUrl: CTA_SYSTEM.secureChat.url,
   secondaryCta: CTA_SYSTEM.secondary.booking.label,
   secondaryCtaUrl: CTA_SYSTEM.secondary.booking.url,
   secondaryCtaTelehealth: CTA_SYSTEM.secondary.telehealth.label,
   adhdPrimaryCta: CTA_SYSTEM.secondary.adhd.label,
   weightPrimaryCta: CTA_SYSTEM.secondary.weight.label,
   adhdSecondaryCta: 'Take Free ADHD Screening',
-  walkthroughCta: WALKTHROUGH_CTA.label,
-  walkthroughScreeningResultCta: WALKTHROUGH_CTA.screeningResultLabel,
-  walkthroughMicrocopy: WALKTHROUGH_CTA.microcopy,
-  walkthroughDisclaimer: WALKTHROUGH_CTA.disclaimer,
+  meetGreetCta: MEET_GREET_CTA.label,
+  meetGreetMicrocopy: MEET_GREET_CTA.microcopy,
+  meetGreetDisclaimer: MEET_GREET_CTA.disclaimer,
+  meetGreetAdhdMicrocopy: MEET_GREET_CTA.adhdMicrocopy,
+  walkthroughCta: MEET_GREET_CTA.label,
+  walkthroughScreeningResultCta: MEET_GREET_CTA.screeningResultLabel,
+  walkthroughMicrocopy: MEET_GREET_CTA.microcopy,
+  walkthroughDisclaimer: MEET_GREET_CTA.disclaimer,
   newsletterCta: CTA_SYSTEM.newsletter.label,
   newsletterMicrocopy: CTA_SYSTEM.newsletter.microcopy,
   pricingNavLabel: PRICING.navLabel,
@@ -280,7 +283,7 @@ export const ADHD_POSITIONING = {
   medicationNonGuarantee:
     'Diagnosis does not guarantee medication. Evaluation does not guarantee medication. Medication does not guarantee stimulants. Stimulant prescribing is never guaranteed.',
   metaDescription:
-    'Primary care–led adult ADHD evaluation online — DSM-based assessment ($199). Licensed medical providers. Individualized validated tools as clinically appropriate. CA, TX, PA, FL.',
+    'Primary care–led adult ADHD evaluation online — DSM-based assessment ($149). Licensed medical providers. Individualized validated tools as clinically appropriate. CA, TX, PA, FL.',
   stimulantCaveat:
     'Medication, including stimulant medication, is not guaranteed and depends on clinical judgment, state law, safety considerations, and medical appropriateness.',
   screeningNotDiagnosis:

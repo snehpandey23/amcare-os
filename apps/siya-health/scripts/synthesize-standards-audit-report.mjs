@@ -79,7 +79,7 @@ for (const issue of pricingAudit.summary.allIssues) {
 }
 
 // pricing.html is compliant — section 10
-add(10, 'Low', 'pricing.html', 'Compliant $199/$79/$149 care-delivery model per §3 (Bronze/Silver/Gold negation in hero is intentional)');
+add(10, 'Low', 'pricing.html', 'Compliant $149/$79/$149 care-delivery model per §3 (Bronze/Silver/Gold negation in hero is intentional)');
 
 // --- Section 2: Provider descriptions (§2) ---
 const npSlugs = new Set(['derek-timbs', 'megan-wunderlich', 'wendy-delgado']);
@@ -220,7 +220,7 @@ for (const issue of pricingAudit.summary.allIssues) {
   if (issue.file === 'pricing.html') continue;
   if (['vague-monthly-plan', 'adhd-only-follow-up-149', 'hero-199-without-breakdown'].includes(issue.type)) {
     if (!findings[9].some((f) => f.file === issue.file && f.finding.includes('pricing'))) {
-      add(9, 'Medium', issue.file, 'Pricing copy needs alignment with $199/$79/$149 model (§3)');
+      add(9, 'Medium', issue.file, 'Pricing copy needs alignment with $149/$79/$149 model (§3)');
     }
   }
 }

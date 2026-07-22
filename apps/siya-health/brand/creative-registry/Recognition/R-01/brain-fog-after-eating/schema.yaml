@@ -1,0 +1,29 @@
+id: 2026-07-R-01-002
+topic: metabolic
+intent: Recognition
+family: Recognition
+layout: R-01
+journey_stage: Recognizing
+persona: Adult_Metabolic
+emotion: Confused
+tone: Calm
+message: The meal ends. The fog doesn't.
+image: Editorial Photography
+image_category: metabolic-health
+image_ref: photography inventory
+headline_length: Short
+caption_length: Long
+cta: Article
+cta_label: Read the Guide
+evidence_level: Experiential
+clinical_review: false
+platforms:
+  - Instagram
+  - LinkedIn
+  - Newsletter
+variants: 1
+claims_ok: true
+source_refs:
+  - /answers/brain-fog-after-eating
+status: seed
+source: Health Guide pattern

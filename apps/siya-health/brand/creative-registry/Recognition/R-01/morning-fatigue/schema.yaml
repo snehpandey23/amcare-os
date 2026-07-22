@@ -1,0 +1,28 @@
+id: 2026-07-R-01-004
+topic: sleep
+intent: Recognition
+family: Recognition
+layout: R-01
+journey_stage: Recognizing
+persona: Adult_Fatigue
+emotion: Overwhelmed
+tone: Calm
+message: You slept. Why doesn't it feel like it?
+image: Editorial Photography
+image_category: morning-fatigue
+image_ref: brand/photography/morning-fatigue/editorial-exhausted-morning.jpg
+headline_length: Short
+caption_length: Long
+cta: Article
+cta_label: Read the Guide
+evidence_level: Experiential
+clinical_review: false
+platforms:
+  - Instagram
+  - LinkedIn
+variants: 1
+claims_ok: true
+source_refs:
+  - /answers/why-am-i-tired-even-after-sleeping
+status: seed
+source: morning-fatigue library

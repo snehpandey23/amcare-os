@@ -103,8 +103,8 @@
   background: linear-gradient(
     135deg,
     var(--ds-color-hero-overlay) 0%,
-    rgba(30, 58, 138, 0.5) 50%,
-    rgba(0, 0, 0, 0.4) 100%
+    rgba(28, 25, 23, 0.35) 50%,
+    rgba(0, 0, 0, 0.45) 100%
   );
   z-index: var(--ds-z-hero-overlay);
   pointer-events: none;
@@ -380,7 +380,7 @@
   width: 48px;
   height: 48px;
   border-radius: var(--ds-radius);
-  background: rgba(30, 58, 138, 0.08);
+  background: rgba(28, 25, 23, 0.08);
   color: var(--ds-primary);
   display: flex;
   align-items: center;
@@ -486,12 +486,12 @@
 }
 
 .ds-faq__item:hover {
-  border-color: rgba(30, 58, 138, 0.2);
+  border-color: rgba(28, 25, 23, 0.2);
 }
 
 .ds-faq__item.is-open {
   box-shadow: var(--ds-shadow);
-  border-color: rgba(30, 58, 138, 0.15);
+  border-color: rgba(28, 25, 23, 0.15);
 }
 
 .ds-faq__trigger {
@@ -1028,7 +1028,7 @@
 .ds-form__select:focus {
   outline: none;
   border-color: var(--ds-primary);
-  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+  box-shadow: 0 0 0 3px rgba(28, 25, 23, 0.1);
 }
 
 .ds-form__textarea {

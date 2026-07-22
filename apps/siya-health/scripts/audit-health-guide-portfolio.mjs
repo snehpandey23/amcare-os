@@ -39,7 +39,7 @@ const MEDICATION_TITLE = /\b(vs\.|versus|comparison|side effects|how it works|me
 const CLINICIAN_CONTEXT = /\b(clinician|physician|evaluation|diagnosis|prescriber|licensed|telehealth visit|medical history|monitoring|whole.?person|meet.?and.?greet|medically reviewed|clinically reviewed)\b/i;
 const ADHD_ONLY_MISFRAME = /\b(adhd only|only adhd|adhd specialist only|just adhd)\b/i;
 const ADHD_ONLY_PATH = /^\/blog\/(adderall|vyvanse|focalin|adhd-medication)/;
-const PRICING_SIGNAL = /\$199|\$|\bpricing\b|transparent|cost|fsa|hsa/i;
+const PRICING_SIGNAL = /\$149|\$|\bpricing\b|transparent|cost|fsa|hsa/i;
 const CONVERSION_PATHS = [
   { re: /\/adhd-care/, label: 'adhd-care' },
   { re: /\/weight-loss-metabolic-health/, label: 'weight-loss' },

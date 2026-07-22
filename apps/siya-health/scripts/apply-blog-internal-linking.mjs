@@ -10,7 +10,6 @@ import {
   loadBlogRegistry,
   landingForTopic,
   pickRelatedArticles,
-  renderMasterIndexHtml,
   renderRelatedArticlesSection,
   topicFromBlog,
 } from '../data/blog-internal-linking.mjs';
@@ -72,25 +71,14 @@ function processBlogArticle(filename, registry) {
   };
 }
 
-function updateBlogIndex(registry) {
+function updateBlogIndex() {
   const indexPath = path.join(BLOG_DIR, 'index.html');
   let html = fs.readFileSync(indexPath, 'utf8');
-  const block = renderMasterIndexHtml(registry);
-
-  if (html.includes('SIYA:BLOG-MASTER-INDEX')) {
-    html = html.replace(/<!-- SIYA:BLOG-MASTER-INDEX -->[\s\S]*?<!-- \/SIYA:BLOG-MASTER-INDEX -->/, block);
-  } else if (html.includes('blog-master-index')) {
-    html = html.replace(
-      /<section class="section blog-index blog-master-index"[\s\S]*?<\/section>/,
-      block.trim(),
-    );
-  } else {
-    html = html.replace(
-      /<section class="section blog-index">\s*<div class="container">\s*<div class="section-header" style="text-align: center;">\s*<h2>Master article index<\/h2>[\s\S]*?<\/section>/,
-      block.trim(),
-    );
-  }
-
+  html = html.replace(/<!-- SIYA:BLOG-MASTER-INDEX -->[\s\S]*?<!-- \/SIYA:BLOG-MASTER-INDEX -->\s*/g, '');
+  html = html.replace(
+    /<section class="section blog-index blog-master-index"[\s\S]*?<\/section>\s*/g,
+    '',
+  );
   fs.writeFileSync(indexPath, html, 'utf8');
 }
 
@@ -98,7 +86,7 @@ function main() {
   const registry = loadBlogRegistry(BLOG_DIR);
   const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith('.html') && !BLOG_HUB_FILES.has(f));
   const results = files.map((f) => processBlogArticle(f, registry));
-  updateBlogIndex(registry);
+  updateBlogIndex();
 
   const failing = results.filter((r) => !r.ok);
   const report = `# Blog internal linking report
@@ -116,7 +104,7 @@ Generated: ${new Date().toISOString()}
 
 ## Master index
 
-Blog index updated with **${registry.length}** articles across topic groups.
+Blog hub no longer renders the full article dump; category hubs remain the discovery path.
 
 ## Failures
 

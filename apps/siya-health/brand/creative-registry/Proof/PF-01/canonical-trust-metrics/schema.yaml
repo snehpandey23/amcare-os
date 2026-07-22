@@ -1,0 +1,29 @@
+id: 2026-07-PF-01-001
+topic: brand
+intent: Trust
+family: Proof
+layout: PF-01
+journey_stage: Considering
+persona: Any
+emotion: Hopeful
+tone: Calm
+message: Canonical trust metrics only — never invent numbers
+image: Editorial Photography
+image_category: physician-listening
+image_ref: data/homepage-trust-metrics.mjs
+headline_length: Short
+caption_length: Short
+cta: MeetGreet
+cta_label: Book Free Meet & Greet
+evidence_level: CanonicalMetric
+clinical_review: false
+platforms:
+  - LinkedIn
+  - Website
+  - Ads
+variants: 1
+claims_ok: true
+source_refs:
+  - data/homepage-trust-metrics.mjs
+status: seed
+source: homepage-trust-metrics.mjs

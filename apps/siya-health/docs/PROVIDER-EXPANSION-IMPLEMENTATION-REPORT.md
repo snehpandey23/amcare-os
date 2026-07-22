@@ -1,16 +1,16 @@
 # Provider Expansion — Implementation Report
 
-Generated: 2026-07-06T11:43:01.870Z
+Generated: 2026-07-21T06:58:14.946Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| Sitemap URLs | 141 |
+| Sitemap URLs | 179 |
 | Contracted providers in data | 7 |
 | Live profile pages | 7 |
 | Hub URL | https://siya.health/providers |
-| Pages linking to /providers hub | 147 |
+| Pages linking to /providers hub | 186 |
 | Broken internal links (sample) | 20 |
 | JSON-LD issues on profiles | 0 |
 
@@ -41,14 +41,14 @@ Generated: 2026-07-06T11:43:01.870Z
 
 | Target | Inbound pages |
 |--------|-------------:|
-| /providers hub | 147 |
-| /providers/dr-sneh-pandey | 34 |
-| /providers/dr-vanessa-urbina | 16 |
-| /providers/dr-natasha-desai | 19 |
-| /providers/dr-swati-pandey | 14 |
-| /providers/megan-wunderlich | 13 |
-| /providers/derek-timbs | 10 |
-| /providers/wendy-delgado | 7 |
+| /providers hub | 186 |
+| /providers/dr-sneh-pandey | 43 |
+| /providers/dr-vanessa-urbina | 15 |
+| /providers/dr-natasha-desai | 18 |
+| /providers/dr-swati-pandey | 12 |
+| /providers/megan-wunderlich | 11 |
+| /providers/derek-timbs | 9 |
+| /providers/wendy-delgado | 6 |
 
 ## Hub features
 
@@ -58,26 +58,26 @@ Generated: 2026-07-06T11:43:01.870Z
 
 ## Broken links (sample)
 
-- `about.html` → `/assets/favicon.svg`
+- `about.html` → `/assets/favicon-32x32.png`
+- `about.html` → `/assets/favicon-16x16.png`
+- `about.html` → `/assets/apple-touch-icon.png`
+- `about.html` → `/assets/favicon.ico`
 - `about.html` → `/assets/favicon.ico`
 - `about.html` → `/styles.css`
 - `about.html` → `/styles.css`
-- `adhd-care.html` → `/assets/favicon.svg`
+- `adhd-care.html` → `/assets/favicon-32x32.png`
+- `adhd-care.html` → `/assets/favicon-16x16.png`
+- `adhd-care.html` → `/assets/apple-touch-icon.png`
+- `adhd-care.html` → `/assets/favicon.ico`
 - `adhd-care.html` → `/assets/favicon.ico`
 - `adhd-care.html` → `/styles.css`
 - `adhd-care.html` → `/styles.css`
-- `adhd-diagnosis-austin.html` → `/assets/favicon.svg`
+- `adhd-diagnosis-austin.html` → `/assets/favicon-32x32.png`
+- `adhd-diagnosis-austin.html` → `/assets/favicon-16x16.png`
+- `adhd-diagnosis-austin.html` → `/assets/apple-touch-icon.png`
+- `adhd-diagnosis-austin.html` → `/assets/favicon.ico`
 - `adhd-diagnosis-austin.html` → `/assets/favicon.ico`
 - `adhd-diagnosis-austin.html` → `/styles.css`
-- `adhd-diagnosis-austin.html` → `/styles.css`
-- `adhd-diagnosis-florida.html` → `/assets/favicon.svg`
-- `adhd-diagnosis-florida.html` → `/assets/favicon.ico`
-- `adhd-diagnosis-florida.html` → `/styles.css`
-- `adhd-diagnosis-florida.html` → `/styles.css`
-- `adhd-diagnosis-houston.html` → `/assets/favicon.svg`
-- `adhd-diagnosis-houston.html` → `/assets/favicon.ico`
-- `adhd-diagnosis-houston.html` → `/styles.css`
-- `adhd-diagnosis-houston.html` → `/styles.css`
 
 ## Operational note
 

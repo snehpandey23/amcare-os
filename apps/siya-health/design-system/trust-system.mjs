@@ -1,8 +1,13 @@
 /**
  * Trust System — one source of truth for badges, metrics, and credibility signals.
  * Pages request a trust profile; they do not hand-pick copy per page.
+ *
+ * Patient/review volume figures come from data/homepage-trust-metrics.mjs
+ * (homepage is canonical — do not invent alternate counts per page).
  */
 import { getPageConversionConfig } from '../data/page-conversion-config.mjs';
+import { HOMEPAGE_TRUST_METRICS as M } from '../data/homepage-trust-metrics.mjs';
+import { PRICING } from '../data/site-standards.mjs';
 import { detectUserIntent } from './conversion-system.mjs';
 
 /** @typedef {'metric'|'badge'|'certification'|'review'|'editorial'} TrustItemType */
@@ -24,19 +29,31 @@ export const TRUST_ITEMS = {
   patientCount: {
     id: 'patientCount',
     type: 'metric',
-    headline: '750+',
-    subline: 'ADHD evaluations completed',
+    headline: M.patientsTreated.value,
+    subline: M.patientsTreated.label.toLowerCase(),
   },
   reviews: {
     id: 'reviews',
     type: 'review',
-    headline: '4.7★',
-    subline: '450+ verified reviews',
+    headline: `${M.googleRating.value}${M.googleRating.suffix}`,
+    subline: `${M.verifiedReviews.value} verified reviews`,
+  },
+  adhdEvaluations: {
+    id: 'adhdEvaluations',
+    type: 'metric',
+    headline: M.adhdEvaluations.value,
+    subline: M.adhdEvaluations.label,
+  },
+  googleReviews: {
+    id: 'googleReviews',
+    type: 'review',
+    headline: M.googleReviews.value,
+    subline: M.googleReviews.label,
   },
   transparentPricing: {
     id: 'transparentPricing',
     type: 'metric',
-    headline: '$199',
+    headline: PRICING.initialEvaluation.display,
     subline: 'transparent evaluation',
   },
   boardCertified: {
@@ -98,7 +115,7 @@ export const TRUST_ITEMS = {
 
 /** Trust profile → ordered item ids */
 export const TRUST_PROFILES = {
-  homepage: ['patientCount', 'legitscript', 'reviews', 'hipaa', 'telehealth'],
+  homepage: ['patientCount', 'adhdEvaluations', 'reviews', 'googleReviews', 'telehealth'],
   landing: ['boardCertified', 'patientCount', 'reviews', 'transparentPricing', 'telehealth'],
   'landing-adhd': ['reviews', 'patientCount', 'transparentPricing', 'telehealth'],
   adhd: ['reviews', 'patientCount', 'transparentPricing', 'creyos', 'hipaa'],

@@ -7,27 +7,26 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import {
   BASE_URL,
-  BOOKING_LINK,
   PROVIDERS,
-  bookingLinkWithAttribution,
+  ZOCDOC_BOOKING_URL,
   getAllProviders,
   getProviderHubFilterTags,
   providerServiceStates,
   resolveProviderPhoto,
   stateChipLabel,
 } from '../data/providers.mjs';
-import { formatCredentialMeta } from '../data/internal-provider-records.mjs';
-import { getReviewedContentForProvider } from '../data/provider-reviewed-content.mjs';
+import { REDIRECT_MEET_GREET_URL, REDIRECT_CHAT_URL } from '../data/providers-core.mjs';
 import {
   AVAILABLE_SERVICE_STATES,
+  COPY_STANDARDS,
   PROVIDER_LICENSE_DISCLAIMER,
   STATES_INLINE,
 } from '../data/site-standards.mjs';
+import { formatCredentialMeta } from '../data/internal-provider-records.mjs';
+import { getReviewedContentForProvider } from '../data/provider-reviewed-content.mjs';
 import { getProviderHubPresentation } from '../data/provider-hub-presentation.mjs';
 import { renderLegalFooter } from './site-chrome.mjs';
 import { renderNavCtaMarkup, renderButton, slotToButton, resolveConversion } from '../design-system/components.mjs';
-
-const MEET_GREET_BOOKING_LINK = BOOKING_LINK;
 
 const STATE_ABBREV = {
   California: 'CA',
@@ -191,7 +190,16 @@ function crossLinks(provider) {
 
 function renderProviderPage(provider) {
   const canonical = `${BASE_URL}/providers/${provider.slug}`;
-  const bookingUrl = bookingLinkWithAttribution(provider.slug, 'profile');
+  const isMedicalDirector = provider.slug === 'dr-sneh-pandey';
+  const meetGreetUrl = REDIRECT_MEET_GREET_URL;
+  const meetGreetLabel = COPY_STANDARDS.meetGreetCta;
+  const zocdocLabel = 'Book Online via Zocdoc';
+  const heroPrimaryCta = isMedicalDirector
+    ? `<a class="button" href="${meetGreetUrl}" data-siya-track="meet_greet_click" data-siya-location="provider-hero-meet-greet" data-provider-cta="${provider.slug}">${meetGreetLabel}</a>`
+    : `<a class="button" href="${REDIRECT_CHAT_URL}" data-siya-track="secure_chat_click" data-siya-location="provider-hero-chat" data-provider-cta="${provider.slug}">${COPY_STANDARDS.secureChatCta}</a>`;
+  const finalPrimaryCta = isMedicalDirector
+    ? `<a class="button" href="${meetGreetUrl}" data-siya-track="meet_greet_click" data-siya-location="provider-final-meet-greet" data-provider-cta="${provider.slug}">${meetGreetLabel}</a>`
+    : `<a class="button" href="${REDIRECT_CHAT_URL}" data-siya-track="secure_chat_click" data-siya-location="provider-final-chat" data-provider-cta="${provider.slug}">${COPY_STANDARDS.secureChatCta}</a>`;
   const acceptingBadge = provider.acceptingNewPatients
     ? '<span class="provider-accepting-badge">Accepting new patients</span>'
     : '';
@@ -226,7 +234,7 @@ function renderProviderPage(provider) {
   const inlineCtas = provider.inlineCtas
     .map((c) => `<a class="text-link" href="${c.path}">${esc(c.label)} →</a>`)
     .join('\n                ');
-  const bookWithLabel = provider.givenName ? `Book with ${esc(provider.givenName)}` : 'Book with Provider';
+  const bookWithLabel = meetGreetLabel;
   const verifiedTestimonials = provider.testimonials.filter((t) => !t.needsVerification);
   const testimonialBlock =
     verifiedTestimonials.length > 0
@@ -324,9 +332,11 @@ ${verifiedTestimonials
               <div class="provider-lp-badges" aria-label="Credentials">${chips}</div>
               ${stateChipsBlock}
               <div class="provider-lp-ctas">
-                <a class="button" href="${bookingUrl}" target="_blank" rel="noopener" data-provider-cta="${provider.slug}">${bookWithLabel}</a>
+                ${heroPrimaryCta}
+                <a class="button secondary" href="${ZOCDOC_BOOKING_URL}" target="_blank" rel="noopener noreferrer" data-siya-track="zocdoc_booking_click" data-siya-location="provider-hero-zocdoc">Book Online via Zocdoc</a>
                 <a class="button secondary" href="#services-supported">View Services</a>
               </div>
+              ${isMedicalDirector ? `<p class="cta-microcopy"><a href="${REDIRECT_CHAT_URL}" data-siya-track="secure_chat_click" data-siya-location="provider-hero-chat">${COPY_STANDARDS.secureChatCta}</a></p>` : ''}
             </div>
             <div class="provider-lp-photo-wrap">
               ${renderProviderPhotoMarkup(provider)}
@@ -465,8 +475,9 @@ ${testimonialBlock}
             <h3>${esc(provider.finalCta.title)}</h3>
             <p>${esc(provider.finalCta.subtitle)}</p>
             <div class="cta-band-buttons">
-              <a class="button" href="${bookingUrl}" target="_blank" rel="noopener" data-provider-cta="${provider.slug}">${bookWithLabel}</a>
-              <a class="button secondary" href="#services-supported">View Services</a>
+              ${finalPrimaryCta}
+              <a class="button secondary" href="${ZOCDOC_BOOKING_URL}" target="_blank" rel="noopener noreferrer" data-siya-track="zocdoc_booking_click" data-siya-location="provider-final-zocdoc">${zocdocLabel}</a>
+              ${isMedicalDirector ? `<a class="button secondary" href="${REDIRECT_CHAT_URL}" data-siya-track="secure_chat_click" data-siya-location="provider-final-chat">${COPY_STANDARDS.secureChatCta}</a>` : ''}
             </div>
           </div>
           <p class="blog-disclaimer provider-lp-disclaimer-below-cta"><strong>Disclaimer:</strong> ${esc(provider.disclaimer)}</p>
@@ -581,8 +592,13 @@ function renderProvidersIndex() {
     variant: 'primary',
   });
   const indexSecondaryBtn = renderButton({
-    ...slotToButton(indexConv.secondary, { location: 'provider-index-hero', relPath: 'providers/index.html' }),
+    label: 'Book Online via Zocdoc',
+    href: ZOCDOC_BOOKING_URL,
+    external: true,
+    track: 'zocdoc_booking_click',
+    location: 'provider-index-hero',
     variant: 'secondary',
+    relPath: 'providers/index.html',
   });
 
   const breadcrumb = JSON.stringify({
@@ -663,14 +679,21 @@ function renderProvidersIndex() {
     <main id="main">
       <section class="provider-index-hero section">
         <div class="container">
-          <div class="section-header">
-            <h1>Our Care Team</h1>
-            <p class="lead">Meet the physicians and advanced practice clinicians who support Siya Health patients across ADHD care, metabolic health, weight management, primary care, mental health, and telehealth.</p>
-            <p>Our team brings different training backgrounds, but shares one standard: thoughtful evaluation, clear communication, and patient-centered care.</p>
-          </div>
-          <div class="provider-lp-ctas">
-            ${indexPrimaryBtn}
-            ${indexSecondaryBtn}
+          <div class="provider-index-hero-layout">
+            <div class="provider-index-hero-copy">
+              <div class="section-header">
+                <h1>Our Care Team</h1>
+                <p class="lead">Physicians and advanced practice clinicians supporting ADHD care, metabolic health, weight management, primary care, mental health, and telehealth.</p>
+                <p>Different training backgrounds—one standard: thoughtful evaluation, clear communication, and patient-centered care.</p>
+              </div>
+              <div class="provider-lp-ctas">
+                ${indexPrimaryBtn}
+                ${indexSecondaryBtn}
+              </div>
+            </div>
+            <figure class="provider-index-hero-media">
+              <img src="/assets/images/care-team-group.jpg" alt="Siya Health care team of clinicians" width="640" height="420" loading="eager" decoding="async" />
+            </figure>
           </div>
         </div>
       </section>
@@ -679,7 +702,7 @@ function renderProvidersIndex() {
         <div class="container">
           <div class="section-header">
             <h2>How our care team works</h2>
-            <p class="lead">Siya Health uses a physician-led care model. Depending on your state, service line, and clinical needs, you may work with a physician, nurse practitioner, or Physician Associate. Every care pathway is designed around structured evaluation, safety, and clear follow-up.</p>
+            <p class="lead">Siya Health uses a physician-led care model. Depending on your state and clinical needs, you may work with a physician, nurse practitioner, or Physician Associate—always with structured evaluation and clear follow-up.</p>
           </div>
         </div>
       </section>

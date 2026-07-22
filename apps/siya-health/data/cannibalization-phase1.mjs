@@ -36,6 +36,28 @@ export const HIGH_OVERLAP_PAIRS = [
 
 /** Guide slug → narrowed PAA intent + canonical blog pointer */
 export const GUIDE_CANNIBALIZATION_OVERRIDES = {
+  'adhd-in-women': {
+    metaDescription:
+      'Quick FAQ: how ADHD often presents in women—inattentive symptoms, masking, and delayed diagnosis. Read the full clinical hub for depth.',
+    canonicalBlog: {
+      path: '/blog/adhd-in-women',
+      label: 'our full guide to ADHD in women',
+    },
+  },
+  'executive-dysfunction-adhd': {
+    metaDescription:
+      'Quick FAQ: what executive dysfunction means in adult ADHD. Read the full pillar on task initiation, working memory, planning, and supports.',
+    canonicalBlog: {
+      path: '/blog/executive-dysfunction-adhd',
+      label: 'our full guide to executive dysfunction in ADHD',
+    },
+  },
+  'time-blindness-adhd': {
+    canonicalBlog: {
+      path: '/blog/executive-dysfunction-adhd',
+      label: 'executive dysfunction and time blindness in ADHD',
+    },
+  },
   'is-online-adhd-diagnosis-legitimate': {
     question: 'What should you look for in a legitimate online ADHD diagnosis?',
     metaDescription:

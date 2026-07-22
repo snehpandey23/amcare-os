@@ -4,13 +4,11 @@
  */
 import { CTA_SYSTEM, COPY_STANDARDS } from '../data/site-standards.mjs';
 import {
-  BOOKING_LINK,
-  ADHD_WALKTHROUGH_LINK,
-  ADHD_EVALUATION_199_LINK,
-  SPRUCE_CHAT_URL,
   REDIRECT_CHAT_URL,
+  REDIRECT_MEET_GREET_URL,
   REDIRECT_ADHD_WALKTHROUGH_URL,
   REDIRECT_ADHD_EVALUATION_URL,
+  ZOCDOC_BOOKING_URL,
 } from '../data/providers-core.mjs';
 import {
   SIYA_CIRCLE_GHL_FORM_URL,
@@ -21,33 +19,54 @@ export { CTA_SYSTEM, COPY_STANDARDS };
 
 /** Canonical CTA slots */
 export const CTA_SLOTS = {
+  meetGreet: {
+    id: 'meetGreet',
+    label: COPY_STANDARDS.meetGreetCta,
+    url: REDIRECT_MEET_GREET_URL,
+    external: false,
+    track: 'meet_greet_click',
+    microcopy: COPY_STANDARDS.meetGreetMicrocopy,
+    disclaimer: COPY_STANDARDS.meetGreetDisclaimer,
+  },
+  /** Primary slot — Meet & Greet on general cold-traffic pages */
   primary: {
-    id: 'primary',
-    label: CTA_SYSTEM.primary.label,
+    id: 'meetGreet',
+    label: COPY_STANDARDS.meetGreetCta,
+    url: REDIRECT_MEET_GREET_URL,
+    external: false,
+    track: 'meet_greet_click',
+    microcopy: COPY_STANDARDS.meetGreetMicrocopy,
+    disclaimer: COPY_STANDARDS.meetGreetDisclaimer,
+  },
+  secureChat: {
+    id: 'secureChat',
+    label: COPY_STANDARDS.secureChatCta,
     url: REDIRECT_CHAT_URL,
     external: false,
-    track: 'primary-cta-click',
+    track: 'secure_chat_click',
   },
   secondary: {
     id: 'secondary',
     label: CTA_SYSTEM.secondary.booking.label,
-    url: REDIRECT_ADHD_WALKTHROUGH_URL,
+    url: CTA_SYSTEM.secondary.booking.url,
     external: false,
-    track: 'schedule-consultation-click',
+    track: 'explore-care-click',
   },
   walkthrough: {
     id: 'walkthrough',
-    label: 'Book ADHD Walkthrough',
-    url: REDIRECT_ADHD_WALKTHROUGH_URL,
+    label: COPY_STANDARDS.meetGreetCta,
+    url: REDIRECT_MEET_GREET_URL,
     external: false,
-    track: 'click_book_walkthrough',
+    track: 'meet_greet_click',
+    microcopy: COPY_STANDARDS.meetGreetAdhdMicrocopy,
+    disclaimer: COPY_STANDARDS.meetGreetDisclaimer,
   },
   leadMagnet: {
     id: 'lead-magnet',
     label: COPY_STANDARDS.adhdSecondaryCta,
     url: '/adhd-screening?adhd=1',
     external: false,
-    track: 'screening-cta-click',
+    track: 'adhd_screening_click',
   },
   exploreCare: {
     id: 'exploreCare',
@@ -63,6 +82,13 @@ export const CTA_SLOTS = {
     external: false,
     track: 'view-pricing-click',
   },
+  zocdoc: {
+    id: 'zocdoc',
+    label: 'Additional booking option',
+    url: ZOCDOC_BOOKING_URL,
+    external: true,
+    track: 'zocdoc_booking_click',
+  },
   newsletter: {
     id: 'newsletter',
     label: CTA_SYSTEM.newsletter.label,
@@ -77,12 +103,12 @@ export const CTA_SLOTS = {
  * @deprecated Use conversion-system resolveConversion(). Kept for migration reference.
  */
 export const PAGE_CTA_RULES = {
-  homepage: { primary: 'primary', secondary: 'secondary' },
-  adhd: { primary: 'leadMagnet', secondary: 'primary' },
+  homepage: { primary: 'primary', secondary: 'exploreCare' },
+  adhd: { primary: 'leadMagnet', secondary: 'meetGreet' },
   blog: { primary: 'primary', secondary: 'newsletter' },
-  provider: { primary: 'secondary', secondary: 'primary' },
+  provider: { primary: 'primary', secondary: 'zocdoc' },
   landing: { primary: null, secondary: null },
-  default: { primary: 'primary', secondary: 'secondary' },
+  default: { primary: 'primary', secondary: 'exploreCare' },
 };
 
 /**
@@ -92,22 +118,21 @@ export const LANDING_CONVERSION_CTAS = {
   screening: CTA_SLOTS.leadMagnet,
   evaluation: {
     id: 'evaluation',
-    label: 'Start $199 Evaluation',
+    label: 'Start ADHD Evaluation',
     url: REDIRECT_ADHD_EVALUATION_URL,
     external: false,
-    track: 'click_start_199_evaluation',
+    track: 'adhd_evaluation_click',
   },
   walkthrough: {
     id: 'walkthrough',
-    label: 'Book ADHD Walkthrough',
-    url: REDIRECT_ADHD_WALKTHROUGH_URL,
+    label: COPY_STANDARDS.meetGreetCta,
+    url: REDIRECT_MEET_GREET_URL,
     external: false,
-    track: 'click_book_walkthrough',
-    microcopy:
-      'A short, non-clinical call with the Siya Health care team to explain the ADHD evaluation process, pricing, Creyos testing, and next steps.',
-    disclaimer:
-      'This is a non-clinical informational call. It does not include diagnosis, treatment, prescriptions, or medical advice.',
+    track: 'meet_greet_click',
+    microcopy: COPY_STANDARDS.meetGreetAdhdMicrocopy,
+    disclaimer: COPY_STANDARDS.meetGreetDisclaimer,
   },
+  meetGreet: CTA_SLOTS.meetGreet,
 };
 
 /**

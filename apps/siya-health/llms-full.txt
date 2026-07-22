@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
-Generated: 2026-07-06
-Total pages: 152
+Generated: 2026-07-21
+Total pages: 192
 
 ---
 
@@ -94,44 +94,44 @@ Total pages: 152
   URL: https://siya.health/about
   Summary: Siya Health is physician-led virtual care for adults seeking clear answers about focus, energy, weight, mood, metabolism, hormones, and everyday health. California, Texas, Pennsylvania, Florida.
 
-- Adult ADHD Diagnosis Online — Same-Week Evaluation ($199)
+- Adult ADHD Diagnosis Online — Same-Week Evaluation
   URL: https://siya.health/adhd-care
-  Summary: Primary care–led adult ADHD evaluation online — DSM-based assessment ($199). Licensed medical providers. Individualized validated tools as clinically appropriate. CA, TX, PA, FL.
+  Summary: Primary care–led adult ADHD evaluation online — DSM-based assessment. Licensed medical providers. Individualized validated tools as clinically appropriate. CA, TX, PA, FL.
   Topics: adhd
 
-- ADHD Diagnosis Austin TX | Online $199 Evaluation
+- ADHD Diagnosis Austin TX | Online Evaluation
   URL: https://siya.health/adhd-diagnosis-austin
-  Summary: Adult ADHD diagnosis in Austin, Texas—online. $199 evaluation, same-week telehealth, ADHD-CCSP providers. Book your virtual visit.
+  Summary: Adult ADHD diagnosis in Austin, Texas—online. $149 evaluation, same-week telehealth, ADHD-CCSP providers. Book your virtual visit.
   Topics: adhd, texas
 
-- Online ADHD Diagnosis Florida | $199 Evaluation
+- Online ADHD Diagnosis Florida Evaluation
   URL: https://siya.health/adhd-diagnosis-florida
-  Summary: Adult ADHD diagnosis online in Florida. $199, 60–90 min evaluation, board-certified providers. Same-week telehealth. individualized clinical assessment. Book today.
+  Summary: Adult ADHD diagnosis online in Florida. $149, 60–90 min evaluation, board-certified providers. Same-week telehealth. individualized clinical assessment. Book today.
   Topics: adhd, florida
 
-- ADHD Diagnosis Houston TX | Online $199 Evaluation
+- ADHD Diagnosis Houston TX | Online Evaluation
   URL: https://siya.health/adhd-diagnosis-houston
-  Summary: Houston adult ADHD diagnosis online. $199 comprehensive evaluation, board-certified telehealth. Same-week appointments. individualized clinical assessment.
+  Summary: Houston adult ADHD diagnosis online. $149 comprehensive evaluation, board-certified telehealth. Same-week appointments. individualized clinical assessment.
   Topics: adhd, texas
 
-- Online ADHD Diagnosis Pennsylvania | $199
+- Online ADHD Diagnosis Pennsylvania
   URL: https://siya.health/adhd-diagnosis-pennsylvania
-  Summary: Pennsylvania adult ADHD diagnosis online. $199 virtual evaluation. Licensed, ADHD-CCSP–trained clinicians. Philadelphia, Pittsburgh & statewide telehealth.
+  Summary: Pennsylvania adult ADHD diagnosis online. $149 virtual evaluation. Licensed, ADHD-CCSP–trained clinicians. Philadelphia, Pittsburgh & statewide telehealth.
   Topics: adhd, pennsylvania
 
-- ADHD Diagnosis Philadelphia PA | Online $199
+- ADHD Diagnosis Philadelphia PA | Online
   URL: https://siya.health/adhd-diagnosis-philadelphia
-  Summary: Philadelphia adult ADHD diagnosis online. $199 evaluation, ADHD-CCSP providers, telehealth statewide in PA. Book today.
+  Summary: Philadelphia adult ADHD diagnosis online. $149 evaluation, ADHD-CCSP providers, telehealth statewide in PA. Book today.
   Topics: adhd, pennsylvania
 
-- Online ADHD Diagnosis Texas | $199 Evaluation
+- Online ADHD Diagnosis Texas
   URL: https://siya.health/adhd-diagnosis-texas
-  Summary: Adult ADHD diagnosis online in Texas. $199 evaluation, ADHD-CCSP providers, same-week telehealth. Austin, Houston, Dallas-area & statewide. Book now.
+  Summary: Adult ADHD diagnosis online in Texas. $149 evaluation, ADHD-CCSP providers, same-week telehealth. Austin, Houston, Dallas-area & statewide. Book now.
   Topics: adhd, texas
 
-- ADHD Evaluation Cost Online | $199 Flat Rate
+- ADHD Evaluation Cost Online | Flat-Rate Pricing
   URL: https://siya.health/adhd-evaluation-cost
-  Summary: ADHD evaluation cost: $199 transparent flat fee for 60–90 min online visit. No insurance surprise bills. FSA/HSA. Texas, Pennsylvania, Florida.
+  Summary: ADHD evaluation cost: $149 transparent flat fee for 60–90 min online visit. No insurance surprise bills. FSA/HSA. Texas, Pennsylvania, Florida.
   Topics: adhd
 
 - Start screening
@@ -139,14 +139,19 @@ Total pages: 152
   Summary: Tell us what you need: free 2-minute ADHD screening (ASRS), medical weight loss, or telehealth. Guided next steps for Texas-area care.
   Topics: adhd
 
+- ADHD Screening Complete
+  URL: https://siya.health/adhd-screening-results
+  Summary: Your ADHD screening is complete. Choose next steps: book a free Meet & Greet, start an ADHD evaluation, or ask a question via secure medical chat.
+  Topics: adhd
+
 - ADHD Treatment Online | Telehealth TX, PA, FL
   URL: https://siya.health/adhd-treatment-online
-  Summary: Online ADHD treatment after diagnosis: medication management, follow-ups, telehealth in California, Texas, Pennsylvania & Florida. Start with $199 evaluation.
+  Summary: Online ADHD treatment after diagnosis: medication management, follow-ups, telehealth in California, Texas, Pennsylvania & Florida. Start with $149 evaluation.
   Topics: adhd, telehealth, texas, pennsylvania, florida
 
-- Adult ADHD Diagnosis Online | $199 Evaluation
+- Adult ADHD Diagnosis Online
   URL: https://siya.health/adult-adhd-diagnosis
-  Summary: Get an adult ADHD diagnosis online from board-certified providers. $199, 60–90 min, individualized clinical assessment. TX, PA, FL. Same-week telehealth appointments.
+  Summary: Get an adult ADHD diagnosis online from board-certified providers. $149, 60–90 min, individualized clinical assessment. TX, PA, FL. Same-week telehealth appointments.
   Topics: adhd
 
 - Online ADHD Screening in California | Free 2-Minute Test
@@ -171,7 +176,7 @@ Total pages: 152
 
 - How does ADHD present differently in women?
   URL: https://siya.health/answers/adhd-in-women
-  Summary: Women more often present with inattentive symptoms—daydreaming, disorganization, emotional dysregulation—rather than obvious hyperactivity. Hormonal shifts…
+  Summary: Quick FAQ: how ADHD often presents in women—inattentive symptoms, masking, and delayed diagnosis. Read the full clinical hub for depth.
   Topics: adhd, health-guide
 
 - Do you have to take ADHD medication every day?
@@ -241,7 +246,7 @@ Total pages: 152
 
 - What is executive dysfunction in adult ADHD?
   URL: https://siya.health/answers/executive-dysfunction-adhd
-  Summary: Executive dysfunction refers to difficulty with planning, prioritizing, initiating tasks, working memory, and flexible thinking. In ADHD these skills are i…
+  Summary: Quick FAQ: what executive dysfunction means in adult ADHD. Read the full pillar on task initiation, working memory, planning, and supports.
   Topics: adhd, health-guide
 
 - Why did food noise come back on GLP-1?
@@ -272,7 +277,7 @@ Total pages: 152
 - What does high SHBG with low free testosterone mean?
   URL: https://siya.health/answers/high-shbg-low-free-testosterone
   Summary: Quick FAQ on high SHBG and low free testosterone—not a full hormone lab guide. Cornerstone article linked.
-  Topics: health-guide, mens-health
+  Topics: health-guide, labs, mens-health
 
 - How long does an ADHD evaluation take?
   URL: https://siya.health/answers/how-long-adhd-evaluation
@@ -281,7 +286,7 @@ Total pages: 152
 
 - How much does ADHD testing cost?
   URL: https://siya.health/answers/how-much-does-adhd-testing-cost
-  Summary: Costs vary widely: some clinics charge $500–$2,000+; Siya Health offers a transparent $199 comprehensive adult ADHD evaluation (60–90 minutes) including cl…
+  Summary: Costs vary widely: some clinics charge $500–$2,000+; Siya Health offers a transparent $149 comprehensive adult ADHD evaluation (60–90 minutes) including cl…
   Topics: adhd, health-guide
 
 - How do online prescriptions work legally?
@@ -292,7 +297,7 @@ Total pages: 152
 - Can you have insulin resistance without diabetes?
   URL: https://siya.health/answers/insulin-resistance-without-diabetes
   Summary: Quick FAQ: insulin resistance before diabetes thresholds. Metabolic clinician guide linked.
-  Topics: health-guide
+  Topics: health-guide, labs
 
 - What does long-term ADHD medication safety monitoring include?
   URL: https://siya.health/answers/is-adhd-medication-safe-long-term
@@ -327,7 +332,7 @@ Total pages: 152
 - Can you have insulin resistance with a normal A1C?
   URL: https://siya.health/answers/normal-a1c-insulin-resistance
   Summary: Quick FAQ: normal A1C with insulin resistance symptoms. Full metabolic guide linked.
-  Topics: health-guide
+  Topics: health-guide, labs
 
 - When is topical minoxidil enough vs oral minoxidil?
   URL: https://siya.health/answers/oral-vs-topical-minoxidil
@@ -382,7 +387,7 @@ Total pages: 152
 - Can low testosterone mimic ADHD?
   URL: https://siya.health/answers/testosterone-and-adhd-overlap
   Summary: Low testosterone and ADHD can both cause fatigue, low motivation, and concentration problems. Labs and developmental history help separate them; some men h…
-  Topics: adhd, health-guide, mens-health
+  Topics: adhd, health-guide, labs, mens-health
 
 - What is time blindness in ADHD?
   URL: https://siya.health/answers/time-blindness-adhd
@@ -402,11 +407,11 @@ Total pages: 152
 - What does low testosterone feel like?
   URL: https://siya.health/answers/what-does-low-testosterone-feel-like
   Summary: Quick FAQ on low testosterone symptoms—not a lab guide. Full free vs total testosterone article linked.
-  Topics: health-guide, mens-health
+  Topics: health-guide, labs, mens-health
 
-- What is included in Siya Health’s $199 ADHD evaluation?
+- What is included in a Siya Health ADHD evaluation?
   URL: https://siya.health/answers/what-included-199-adhd-evaluation
-  Summary: Siya Health’s $199 adult ADHD evaluation is a 60–90 minute telehealth visit with a licensed medical provider—including clinical interview, validated assess…
+  Summary: Siya Health’s $149 adult ADHD evaluation is a 60–90 minute telehealth visit with a licensed medical provider—including clinical in…
   Topics: adhd, health-guide
 
 - What is food noise?
@@ -417,17 +422,27 @@ Total pages: 152
 - What is free testosterone?
   URL: https://siya.health/answers/what-is-free-testosterone
   Summary: Quick definition of free testosterone—not lab interpretation depth. Full free vs total guide linked.
-  Topics: health-guide, mens-health
+  Topics: health-guide, labs, mens-health
 
 - What is insulin resistance?
   URL: https://siya.health/answers/what-is-insulin-resistance
   Summary: Quick definition of insulin resistance for patients—not a clinician weight-loss overview. Full guide linked.
+  Topics: health-guide, labs
+
+- What to do after you get lab results
+  URL: https://siya.health/answers/what-to-do-after-lab-results
+  Summary: Got lab results? Save the full report, don’t panic over one number, and bring findings to a clinician for interpretation. Learn calm next steps—not DIY dia…
   Topics: health-guide
 
 - What symptoms warrant testosterone therapy evaluation?
   URL: https://siya.health/answers/when-is-testosterone-therapy-appropriate
   Summary: Quick FAQ on symptoms that prompt TRT evaluation—not a full candidacy guide. Clinical article linked.
-  Topics: health-guide, mens-health
+  Topics: health-guide, labs, mens-health
+
+- Which preventive blood tests do adults usually need?
+  URL: https://siya.health/answers/which-preventive-blood-tests-adults
+  Summary: Adults often need individualized preventive labs—CBC, metabolic panel, lipids, and A1c when risk supports them—not a shopping list of every test. Learn wha…
+  Topics: health-guide, labs
 
 - Who qualifies for GLP-1 weight loss medications?
   URL: https://siya.health/answers/who-qualifies-glp-1-weight-loss
@@ -442,7 +457,7 @@ Total pages: 152
 - Why don't normal labs mean you're healthy?
   URL: https://siya.health/answers/why-normal-labs-dont-mean-healthy
   Summary: Normal A1C, cholesterol, and “fine” bloodwork can still hide insulin resistance, sleep apnea, fatty liver risk, and burnout. Learn what labs miss and when …
-  Topics: health-guide
+  Topics: health-guide, labs
 
 - Health Insights &amp; Blog Hub (2026) | ADHD, Weight Loss &amp; Telehealth
   URL: https://siya.health/blog
@@ -459,6 +474,16 @@ Total pages: 152
   Summary: Explore Siya Health ADHD articles: evaluation, medication education for adults, symptoms, and online care—indexed for search with clear internal links.
   Topics: adhd, medication
 
+- ADHD and Binge Eating: The Link, Food Noise & What Helps
+  URL: https://siya.health/blog/adhd-and-binge-eating
+  Summary: Adults with ADHD face higher rates of binge eating. Learn how common it is, ADHD vs emotional eating, food noise, Vyvanse for BED, and when an ADHD evaluation helps.
+  Topics: adhd
+
+- ADHD Brain Imaging Subtypes: What New Research May Mean
+  URL: https://siya.health/blog/adhd-brain-imaging-subtypes
+  Summary: Emerging JAMA Psychiatry research describes three ADHD-related brain patterns. Learn what biotypes may mean—and what they do not change about diagnosis today.
+  Topics: adhd
+
 - ADHD Evaluation in California: Online vs In-Person Options (2026)
   URL: https://siya.health/blog/adhd-evaluation-california-online-vs-in-person
   Summary: ADHD evaluation California: compare secure telehealth and in-office visits—timelines, costs, legitimacy, medication discussions, safety.
@@ -468,6 +493,16 @@ Total pages: 152
   URL: https://siya.health/blog/adhd-evaluation-cost-texas
   Summary: What does an ADHD evaluation cost in Texas in 2026? Compare options—insurance, cash pay, online—and see the real breakdown.
   Topics: adhd, texas
+
+- ADHD and Hormones in Women: Cycle, Perimenopause &amp; Shifts
+  URL: https://siya.health/blog/adhd-hormones-women
+  Summary: Why ADHD symptoms can shift with the menstrual cycle and perimenopause. Estrogen–attention biology in plain language, evidence limits, myths, and women-informed evaluation.
+  Topics: adhd
+
+- ADHD in Women: Symptoms, Masking &amp; Late Diagnosis
+  URL: https://siya.health/blog/adhd-in-women
+  Summary: Learn how ADHD can appear in adult women, including masking, late diagnosis, hormones, burnout, executive dysfunction, and treatment options.
+  Topics: adhd
 
 - Do You Need ADHD Medication Every Day? (Daily vs PRN for Adults)
   URL: https://siya.health/blog/adhd-medication-daily-or-as-needed-adults
@@ -509,6 +544,86 @@ Total pages: 152
   Summary: ADHD test online California: know the difference between quick screens and clinician-led evaluation—tools, timing, limits, and choosing California providers wisely.
   Topics: adhd, california
 
+- ADHD Treatment Austin TX | Virtual Adult Care
+  URL: https://siya.health/blog/adhd-treatment-austin-tx
+  Summary: Adult ADHD treatment in Austin via physician-led telehealth. Evaluation steps, medication management, virtual care for busy professionals—Meet & Greet or $149 evaluation.
+  Topics: adhd, texas
+
+- ADHD Treatment Dallas | Virtual Adult Care
+  URL: https://siya.health/blog/adhd-treatment-dallas-tx
+  Summary: Adult ADHD treatment in Dallas via physician-led telehealth. Learn evaluation steps, medication management, virtual care, and how to start—Meet & Greet or $149 evaluation.
+  Topics: adhd, texas
+
+- ADHD Treatment Fort Worth | Virtual Adult Care
+  URL: https://siya.health/blog/adhd-treatment-fort-worth-tx
+  Summary: Adult ADHD treatment in Fort Worth via physician-led telehealth. Evaluation steps, medication management, and virtual care—$149 evaluation, Meet & Greet available.
+  Topics: adhd, texas
+
+- ADHD Treatment Houston TX | Virtual Adult Care
+  URL: https://siya.health/blog/adhd-treatment-houston-tx
+  Summary: Adult ADHD treatment in Houston via physician-led telehealth. Evaluation steps, medication management, and virtual care built for shift and TMC schedules—Meet & Greet or $149 evaluation.
+  Topics: adhd, texas
+
+- ADHD Treatment Los Angeles CA | Virtual Care | Siya
+  URL: https://siya.health/blog/adhd-treatment-los-angeles-ca
+  Summary: Adult ADHD treatment in Los Angeles via physician-led telehealth for creative schedules and long drives—Meet & Greet or $149 evaluation.
+  Topics: adhd, california
+
+- ADHD Treatment Miami FL | Virtual Adult Care
+  URL: https://siya.health/blog/adhd-treatment-miami-fl
+  Summary: Adult ADHD treatment in Miami via physician-led telehealth. Evaluation steps, medication management, and bilingual-friendly virtual care—Meet & Greet or $149 evaluation.
+  Topics: adhd, florida
+
+- ADHD Treatment Oakland CA | Virtual Care | Siya
+  URL: https://siya.health/blog/adhd-treatment-oakland-ca
+  Summary: Adult ADHD treatment in Oakland via physician-led telehealth for East Bay, BART & creative–tech schedules—Meet & Greet or $149 evaluation.
+  Topics: adhd, california
+
+- ADHD Treatment Orange County CA | Virtual Care | Siya
+  URL: https://siya.health/blog/adhd-treatment-orange-county-ca
+  Summary: Adult ADHD treatment in Orange County via physician-led telehealth for Irvine, family suburbs & 405/55 life—Meet & Greet or $149 evaluation.
+  Topics: adhd, california
+
+- ADHD Treatment Orlando FL | Virtual Adult Care
+  URL: https://siya.health/blog/adhd-treatment-orlando-fl
+  Summary: Adult ADHD treatment in Orlando via physician-led telehealth. Evaluation steps, medication management, and virtual care built for theme park and shift schedules—Meet & Greet or $149 evaluation.
+  Topics: adhd, florida
+
+- ADHD Treatment Philadelphia PA | Virtual Adult Care
+  URL: https://siya.health/blog/adhd-treatment-philadelphia-pa
+  Summary: Adult ADHD treatment in Philadelphia via physician-led telehealth. Evaluation steps, medication management, and virtual care built for academic and healthcare schedules—Meet & Greet or $149 evaluation…
+  Topics: adhd, pennsylvania
+
+- ADHD Treatment Sacramento CA | Virtual Care | Siya
+  URL: https://siya.health/blog/adhd-treatment-sacramento-ca
+  Summary: Adult ADHD treatment in Sacramento via physician-led telehealth for capital, Central Valley & UC Davis schedules—Meet & Greet or $149 evaluation.
+  Topics: adhd, california
+
+- ADHD Treatment San Antonio TX | Virtual Adult Care
+  URL: https://siya.health/blog/adhd-treatment-san-antonio-tx
+  Summary: Physician-led ADHD treatment for San Antonio adults. Evaluation steps, medication management, and flexible virtual care built for military, healthcare, and bilingual households—$149 evaluation.
+  Topics: adhd, texas
+
+- ADHD Treatment San Diego CA | Virtual Care
+  URL: https://siya.health/blog/adhd-treatment-san-diego-ca
+  Summary: Adult ADHD treatment in San Diego via physician-led telehealth for military-adjacent, biotech, and coastal life—Meet & Greet or $149 evaluation.
+  Topics: adhd, california
+
+- ADHD Treatment San Francisco CA | Virtual Care | Siya
+  URL: https://siya.health/blog/adhd-treatment-san-francisco-ca
+  Summary: Adult ADHD treatment in San Francisco via physician-led telehealth for tech, transit, and hybrid remote life—Meet & Greet or $149 evaluation.
+  Topics: adhd, california
+
+- ADHD Treatment San Jose CA | Virtual Adult Care | Siya
+  URL: https://siya.health/blog/adhd-treatment-san-jose-ca
+  Summary: Adult ADHD treatment in San Jose via physician-led telehealth for Silicon Valley engineers and dual careers—Meet & Greet or $149 evaluation.
+  Topics: adhd, california
+
+- ADHD Treatment Texas | Physician-Led Virtual Care
+  URL: https://siya.health/blog/adhd-treatment-texas
+  Summary: Physician-led ADHD treatment for adults across Texas—Dallas, Houston, Austin, San Antonio, Fort Worth. Evaluation, medication management, and virtual care from $149.
+  Topics: adhd, texas
+
 - Adult ADHD Symptoms in California: Patterns Worth Taking Seriously
   URL: https://siya.health/blog/adult-adhd-symptoms-california
   Summary: Adult ADHD symptoms California: chronic patterns versus burnout mimics—attention drift, procrastination pits, rejection sensitivity arcs—and clinician evaluation norms.
@@ -524,6 +639,11 @@ Total pages: 152
   Summary: Compounded vs branded GLP-1 in 2026: manufacturing standards, regulatory context, risks of unapproved copies, and why clinician oversight matters.
   Topics: weight-loss, medication
 
+- Executive Dysfunction in ADHD: Signs, Domains &amp; What Helps
+  URL: https://siya.health/blog/executive-dysfunction-adhd
+  Summary: Learn how executive dysfunction shows up in adult ADHD—task initiation, working memory, planning, organization, decision fatigue, and when evaluation helps.
+  Topics: adhd
+
 - Food Noise and GLP-1: What It Means and What Actually Helps (2026)
   URL: https://siya.health/blog/food-noise-and-glp-1-what-it-means-and-what-helps
   Summary: Food noise—intrusive thoughts about eating—is not hunger or weak willpower. Learn how GLP-1 medications may quiet it, what evidence shows, myths, and when to seek medical care.
@@ -532,7 +652,7 @@ Total pages: 152
 - Free Testosterone vs Total Testosterone: What Patients Should Know
   URL: https://siya.health/blog/free-testosterone-vs-total-testosterone-what-patients-should-know
   Summary: Normal total testosterone but still feel terrible? Learn how free testosterone, SHBG, and lab methods explain the mismatch—and when evaluation is appropriate.
-  Topics: mens-health
+  Topics: labs, mens-health
 
 - GLP-1 Side Effects &amp; How to Manage Them (2026)
   URL: https://siya.health/blog/glp1-side-effects-and-how-to-manage-them
@@ -571,7 +691,12 @@ Total pages: 152
 - Insulin Resistance and Weight Loss: A Clinician-Guided Overview
   URL: https://siya.health/blog/insulin-resistance-and-weight-loss-clinician-overview
   Summary: Insulin resistance can exist with a normal A1C and make weight loss harder. Learn early signs, visceral fat, cravings, sleep, ADHD overlap, evidence-based steps, and myths—without wellness clichés.
-  Topics: weight-loss
+  Topics: weight-loss, labs
+
+- Iron Deficiency, Brain Fog &amp; ADHD: What Research Shows
+  URL: https://siya.health/blog/iron-deficiency-brain-fog-adhd
+  Summary: Low iron and low ferritin can worsen brain fog and ADHD-like symptoms. Learn association vs causation, dopamine biology, and what to discuss with a clinician.
+  Topics: adhd, labs
 
 - Is ADHD Medication Safe Long Term in 2026? Benefits, Monitoring &amp; Myths
   URL: https://siya.health/blog/is-adhd-medication-safe-long-term
@@ -623,10 +748,19 @@ Total pages: 152
   Summary: Oral vs topical minoxidil in 2026: absorption, side effect profiles, monitoring, and why prescribing stays with licensed clinicians—education only.
   Topics: hair-loss
 
+- Perimenopause Brain Fog: Focus &amp; Memory in Your 40s
+  URL: https://siya.health/blog/perimenopause-brain-fog
+  Summary: Perimenopause brain fog is common—but sleep, mood, thyroid, iron, and ADHD unmasking can look similar. Learn what to notice and when to seek evaluation.
+
 - Phentermine for Weight Loss: Safety &amp; Effectiveness in 2026
   URL: https://siya.health/blog/phentermine-for-weight-loss-safety-and-effectiveness
   Summary: Phentermine for weight loss in 2026: FDA history, cardiovascular cautions, short-term use norms, monitoring, and alternatives—educational only.
   Topics: weight-loss
+
+- POTS and ADHD: Shared Symptoms, Overlap &amp; What Research Shows
+  URL: https://siya.health/blog/pots-and-adhd
+  Summary: POTS and ADHD can share brain fog, fatigue, and attention problems. Learn orthostatic intolerance, current evidence, and why overlap creates diagnostic confusion.
+  Topics: adhd
 
 - Semaglutide for Weight Loss: How It Works in 2026 (GLP-1 Science)
   URL: https://siya.health/blog/semaglutide-for-weight-loss-how-it-works
@@ -671,7 +805,7 @@ Total pages: 152
 - When Is Testosterone Therapy Appropriate? (2026 Guide)
   URL: https://siya.health/blog/when-is-testosterone-therapy-appropriate
   Summary: When testosterone therapy is appropriate in 2026: hypogonadism diagnosis, monitoring, fertility, cardiovascular themes—no anti-aging hype, education only.
-  Topics: mens-health
+  Topics: labs, mens-health
 
 - Why Am I Always Tired? Causes and When to See a Doctor
   URL: https://siya.health/blog/why-am-i-always-tired-causes-when-to-see-doctor
@@ -686,18 +820,73 @@ Total pages: 152
   URL: https://siya.health/book-appointment
   Summary: Book a telehealth appointment with Siya Health using our secure external EHR system. No PHI collected on this site.
 
-- Creyos ADHD Testing Online | Part of $199 Evaluation
+- Creyos ADHD Testing Online | Part of Your Evaluation
   URL: https://siya.health/creyos-adhd-testing
-  Summary: Creyos cognitive testing for ADHD as part of your $199 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL.
+  Summary: Creyos cognitive testing for ADHD as part of your $149 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL.
   Topics: adhd
+
+- Siya Health — Tint Options A / B / C
+  URL: https://siya.health/docs/tint-options-preview
+  Summary: Learn more about Siya Health — Tint Options A / B / C with Siya Health telehealth.
 
 - Secure Intake
   URL: https://siya.health/intake
   Summary: Complete required policy acknowledgments before booking with Siya Health.
 
-- Diagnostic Lab Services
+- Labs &amp; Blood Tests | Transparent Direct-Pay Testing
   URL: https://siya.health/labs
-  Summary: Laboratory orders and monitoring through Siya Health telehealth when clinically appropriate. Availability varies by state—contact us to learn more.
+  Summary: Explore transparent direct-pay laboratory testing for thyroid, blood sugar, vitamins, iron, metabolic health and preventive care. Physician guidance available through Siya Health.
+  Topics: labs
+
+- A1c &amp; Blood Sugar Labs | Metabolic Testing
+  URL: https://siya.health/labs/a1c-blood-sugar
+  Summary: Learn what hemoglobin A1c measures, how it relates to prediabetes and metabolic health, and when blood sugar testing may be appropriate. Transparent direct-pay options available.
+  Topics: weight-loss, labs
+
+- Labs &amp; ADHD Evaluation Support | Not a Blood Test Diagnosis
+  URL: https://siya.health/labs/adhd-support
+  Summary: Blood tests do not diagnose ADHD. Learn when selected labs may help evaluate other contributors to fatigue, concentration problems, or brain fog—and how Siya Health approaches testing.
+  Topics: adhd, labs
+
+- Fatigue &amp; Brain Fog Labs | Blood Tests
+  URL: https://siya.health/labs/fatigue-brain-fog
+  Summary: Learn which laboratory tests clinicians may consider for fatigue and brain fog—and why results need clinical context. Transparent direct-pay options available.
+  Topics: labs
+
+- How to Read Your Lab Results
+  URL: https://siya.health/labs/how-to-read-results
+  Summary: Got your results? Reference ranges don’t diagnose disease. Learn how to read labs calmly—and when to book interpretation with a Siya Health clinician.
+  Topics: labs
+
+- Iron &amp; Ferritin Blood Tests | Direct-Pay Labs
+  URL: https://siya.health/labs/iron-ferritin
+  Summary: Learn what ferritin and iron studies measure, when testing may be appropriate for fatigue or heavy periods, and why interpretation matters. Transparent direct-pay options available.
+  Topics: labs
+
+- Men's Health Labs | Testosterone Context
+  URL: https://siya.health/labs/mens-health
+  Summary: Learn when testosterone and related laboratory testing may be appropriate for energy, drive, or metabolic concerns—and why results need clinical context. Direct-pay options available.
+  Topics: labs, mens-health
+
+- Preventive Blood Tests &amp; Wellness Labs
+  URL: https://siya.health/labs/preventive
+  Summary: Explore commonly ordered preventive laboratory tests—CBC, metabolic panel, lipids, A1c—and how physician-guided testing supports primary care. Transparent direct-pay options available.
+  Topics: labs
+
+- Thyroid Blood Tests (TSH &amp; More)
+  URL: https://siya.health/labs/thyroid
+  Summary: Learn when thyroid testing such as TSH and free T4 may be appropriate for fatigue, brain fog, or unexplained changes—and why thyroid disease should not be assumed. Direct-pay options available.
+  Topics: labs
+
+- Vitamin B12 Blood Test | Nutritional Labs
+  URL: https://siya.health/labs/vitamin-b12
+  Summary: Learn when vitamin B12 testing may be appropriate for fatigue, neurologic symptoms, or dietary risk—and why results need clinical interpretation. Direct-pay options available.
+  Topics: labs
+
+- Women's Midlife Labs | Perimenopause Context
+  URL: https://siya.health/labs/womens-midlife
+  Summary: Learn how laboratory testing may support women’s midlife concerns—fatigue, brain fog, iron, thyroid, and metabolic markers—without claiming a hormone panel diagnoses perimenopause.
+  Topics: labs
 
 - Legal &amp; Compliance
   URL: https://siya.health/legal
@@ -725,12 +914,12 @@ Total pages: 152
 
 - Men's Health &amp; Longevity
   URL: https://siya.health/mens-health-longevity
-  Summary: Men's health services including testosterone therapy, metabolic health, and erectile dysfunction treatment across TX, PA, and FL.
+  Summary: Physician-led men's health telehealth—testosterone evaluation, erectile dysfunction support, metabolic health, and longevity planning across CA, TX, PA, and FL.
   Topics: mens-health
 
 - Online ADHD Test &amp; Screening (Free)
   URL: https://siya.health/online-adhd-test
-  Summary: Take a free online ADHD screening in 2 minutes. Not a diagnosis—see if a $199 clinical evaluation with a board-certified provider is right for you.
+  Summary: Take a free online ADHD screening in 2 minutes. Not a diagnosis—see if a $149 clinical evaluation with a board-certified provider is right for you.
   Topics: adhd
 
 - Online Prescription Services
@@ -739,11 +928,12 @@ Total pages: 152
 
 - Pricing
   URL: https://siya.health/pricing
-  Summary: Transparent physician-led telehealth pricing: $199 initial evaluation, $79 or $149/month follow-up plans. ADHD, weight loss, primary care, and telehealth in California, Texas, Pennsylvania, and Florid…
+  Summary: Transparent physician-led telehealth pricing: $149 initial evaluation, $79 or $149/month follow-up plans. ADHD, weight loss, primary care, and telehealth in California, Texas, Pennsylvania, and Florid…
 
-- Concierge Primary Care
+- Primary &amp; Urgent Care Telehealth
   URL: https://siya.health/primary-urgent-care
-  Summary: Virtual primary care and concierge visits with licensed providers. Telehealth services across California, Texas, Pennsylvania, and Florida.
+  Summary: Virtual primary and urgent care across California, Texas, Pennsylvania, and Florida. Annual wellness, chronic care, preventive labs review, and clear follow-up plans.
+  Topics: telehealth
 
 - Privacy Policy Redirect
   URL: https://siya.health/privacy-policy
@@ -793,14 +983,18 @@ Total pages: 152
   Summary: Learn more about Starting Your ADHD Evaluation with Siya Health telehealth.
   Topics: adhd
 
-- Booking Your Free ADHD Intro Call
+- Booking Your Free Meet &amp; Greet (Legacy Path)
   URL: https://siya.health/redirect/adhd-walkthrough
-  Summary: Learn more about Booking Your Free ADHD Intro Call with Siya Health telehealth.
+  Summary: Learn more about Booking Your Free Meet & Greet (Legacy Path) with Siya Health telehealth.
   Topics: adhd
 
 - Connecting to Secure Medical Chat
   URL: https://siya.health/redirect/chat
   Summary: Learn more about Connecting to Secure Medical Chat with Siya Health telehealth.
+
+- Booking Your Free Meet &amp; Greet
+  URL: https://siya.health/redirect/meet-greet
+  Summary: Learn more about Booking Your Free Meet & Greet with Siya Health telehealth.
 
 - Siya Circle | Free Health Education Newsletter
   URL: https://siya.health/siya-circle
@@ -808,7 +1002,7 @@ Total pages: 152
 
 - Virtual Medical Care | Siya Health Telehealth
   URL: https://siya.health/telehealth
-  Summary: Fast, convenient telehealth from board-certified providers. Primary care, urgent care, prescriptions, labs. TX, PA, FL. No waiting rooms.
+  Summary: Fast, convenient telehealth from board-certified providers. Primary care, urgent care, prescriptions, labs. CA, TX, PA, FL. No waiting rooms.
   Topics: telehealth
 
 - Terms Redirect
@@ -824,6 +1018,10 @@ Total pages: 152
   URL: https://siya.health/womens-health
   Summary: Women's health telehealth for PCOS, perimenopause, thyroid and metabolic concerns, ADHD in women, and preventive care across CA, TX, PA, and FL.
   Topics: mens-health
+
+- Women&rsquo;s Midlife Health: Brain, Hormones &amp; Metabolism
+  URL: https://siya.health/womens-midlife-health
+  Summary: Women&rsquo;s midlife health is not one disease—it is brain, hormones, sleep, iron, weight, mood, and ADHD interacting. Explore Siya Health&rsquo;s knowledge hub and guides.
 
 ---
 

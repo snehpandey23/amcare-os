@@ -9,7 +9,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import {
   renderPricingStrip,
-  renderAdhdScreeningDisclaimer,
   renderAdhdNextSteps,
   renderBlogCtaAdhd,
   renderBlogCtaMetabolic,
@@ -19,7 +18,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
 
 const PRICING_STRIP_PAGES = [
-  'adhd-care.html',
+  // adhd-care.html intentionally omitted — primary pricing section lives on-page
   'weight-loss-metabolic-health.html',
   'telehealth.html',
   'mens-health-longevity.html',
@@ -29,7 +28,7 @@ const PRICING_STRIP_PAGES = [
 ];
 
 const ADHD_FUNNEL_PAGES = [
-  'adhd-care.html',
+  // adhd-care.html intentionally omitted — journey covered by 3-step + final CTA
   'online-adhd-test.html',
   'adult-adhd-diagnosis.html',
   'adhd-treatment-online.html',
@@ -121,10 +120,8 @@ function main() {
     }
   }
 
-  // Task 4 — inline screening disclaimer directly under the adhd-care hero CTA
-  if (patchFile('adhd-care.html', 'SIYA:ADHD-SCREENING-DISCLAIMER', renderAdhdScreeningDisclaimer(), ['          <blockquote class="hero-inline-testimonial">'])) {
-    counts.disclaimer++;
-  }
+  // Task 4 — screening disclaimer lives on /adhd-screening only (not adhd-care hero)
+  // Previously injected SIYA:ADHD-SCREENING-DISCLAIMER under adhd-care hero CTAs — retired.
 
   // Task 6 + 7 — blog CTA blocks (inject before Related Articles)
   const blogDir = path.join(SITE_ROOT, 'blog');
@@ -134,6 +131,8 @@ function main() {
     const rel = `blog/${file}`;
     const slug = file.replace(/\.html$/, '');
     if (isAdhdBlog(slug)) {
+      // Pillar hubs own Meet & Greet + Evaluation CTAs (restored post-build).
+      if (slug === 'adhd-in-women' || slug === 'executive-dysfunction-adhd') continue;
       if (patchFile(rel, 'SIYA:BLOG-CTA-ADHD', renderBlogCtaAdhd(rel), anchors)) counts.blogAdhd++;
       continue;
     }

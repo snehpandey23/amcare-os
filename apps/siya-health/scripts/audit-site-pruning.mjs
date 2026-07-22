@@ -92,7 +92,7 @@ const EXPLICIT = {
   '/creyos-adhd-testing': {
     classification: 'REDIRECT',
     target: '/adhd-care',
-    rationale: 'Creyos is included in $199 evaluation; standalone page fragments ADHD funnel (3 inbound).',
+    rationale: 'Creyos is included in $149 evaluation; standalone page fragments ADHD funnel (3 inbound).',
     phase: 1,
   },
   '/prescriptions': {

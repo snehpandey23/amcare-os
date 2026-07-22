@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-06T11:42:59.390Z",
-  "guidesWithEvidenceCard": 34,
+  "generatedAt": "2026-07-21T06:58:10.340Z",
+  "guidesWithEvidenceCard": 36,
   "guidesWithoutEvidenceCard": 23,
   "guidesWithoutCard": [
     "/answers/adhd-and-weight-loss-connection",
@@ -27,6 +27,13 @@
     "/answers/what-included-199-adhd-evaluation",
     "/answers/what-is-free-testosterone"
   ],
-  "flaggedRows": [],
-  "flaggedCount": 0
+  "flaggedRows": [
+    {
+      "url": "/answers/which-preventive-blood-tests-adults",
+      "label": "USPSTF recommendations on lipid disorders screen",
+      "value": "clinical summary",
+      "issue": "thin_value"
+    }
+  ],
+  "flaggedCount": 1
 }

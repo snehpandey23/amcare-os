@@ -268,7 +268,7 @@ Ranked by **impact** (H/M/L) and **effort** (H/M/L). Screenshot references are r
 | 7 | **Align header CTA with hero** (ADHD screening vs eval) | H | L | `1440/adhd-care-hero.png` |
 | 8 | **Stop repeating weightloss hero** in body | M | L | `1440/weight-loss-full.png` |
 | 9 | **Flex-grow card footers** on all `blog-card` / `health-guides-card` | H | M | Blog + Guides full |
-| 10 | **Cap hero H1 to 2 lines**; move $199 to badge | M | L | `1440/adhd-care-hero.png` |
+| 10 | **Cap hero H1 to 2 lines**; move $149 to badge | M | L | `1440/adhd-care-hero.png` |
 | 11 | **Provider hero: match button tokens** to global `.button` | M | L | `1440/provider-sneh-hero.png` |
 | 12 | **Health Guides hub hero** — add tinted band + icon grid | M | M | `iphone15pro/health-guides-hero.png` |
 | 13 | **Reduce chat widget overlap** on mobile (delay or bottom offset) | M | M | `android390/adhd-care-hero.png` |

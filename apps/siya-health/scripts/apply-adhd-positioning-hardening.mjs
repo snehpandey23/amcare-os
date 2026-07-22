@@ -19,7 +19,7 @@ const changelog = [];
 
 const REPLACEMENTS = [
   {
-    from: /Primary care–led adult ADHD evaluation online — DSM-based assessment \(\$199\)\. Licensed medical providers\. ASRS, DIVA, Wender Utah, SWAN, optional Creyos\. CA, TX, PA, FL\./g,
+    from: /Primary care–led adult ADHD evaluation online — DSM-based assessment \(\$149\)\. Licensed medical providers\. ASRS, DIVA, Wender Utah, SWAN, optional Creyos\. CA, TX, PA, FL\./g,
     to: ADHD_POSITIONING.metaDescription,
     rationale: 'Meta/schema: tool inventory implies uniform battery',
     risk: 'high',

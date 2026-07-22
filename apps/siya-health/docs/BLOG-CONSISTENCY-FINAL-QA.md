@@ -1,24 +1,29 @@
 # Blog consistency final QA
 
-Generated: 2026-06-04T11:43:25.444Z
+Generated: 2026-07-15T03:47:03.834Z
 
 ## Articles audited
 
-55
+44
 
 ## Pass summary
 
 | Check | Pass |
 |-------|------|
-| 1 clinical review block | 55/55 |
-| 1 H1 | 55/55 |
-| 1 final cta-band div | 55/55 |
-| Related Health Guides | 55/55 |
-| Continue reading | 55/55 |
-| No legacy review/copy | 55/55 |
+| 1 clinical review block | 44/44 |
+| 1 H1 | 44/44 |
+| 1 final cta-band div | 44/44 |
+| Related Health Guides | 38/44 |
+| Related Articles | 38/44 |
+| No legacy review/copy | 44/44 |
 
 ## Articles with issues
 
-_All checks passed._
+- `adhd-medication-online-california`: missing Related Articles
+- `adhd-medication-options-california`: missing Related Articles
+- `adhd-testing-online-california-screening-vs-evaluation`: missing Related Articles
+- `adult-adhd-symptoms-california`: missing Related Articles
+- `adult-adhd-treatment-california-2026`: missing Related Articles
+- `how-to-choose-adhd-provider-california`: missing Related Articles
 
-**QA gate:** PASS
+**QA gate:** FAIL
