@@ -22,4 +22,14 @@ Read the Health Guide on how ADHD presents in women → if it fits your history,
 - `captions/*` + `ready-to-post/`
 - WorkDrive mirror: `06-Statics/AD-W-02/`
 
+## Put into live TrueSync (Mac only)
+
+Cloud agents cannot see your Mac TrueSync mount. On the Mac:
+
+```bash
+bash apps/siya-health/brand/06-Statics/AD-W-02/COPY-TO-TRUESYNC.sh
+```
+
+Or paste the prompt in `brand/06-Statics/AD-W-02/LOCAL-MAC-AGENT.md` into a **local** Cursor agent.
+
 **Do not overwrite AD-W-01** (different spoke: `/blog/adhd-hormones-women`).
