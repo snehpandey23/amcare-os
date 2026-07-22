@@ -73,8 +73,11 @@ if [[ -n "$EXTRA_IDS" ]]; then
   READY_IDS="$READY_IDS ${EXTRA_IDS//,/ }"
 fi
 
-# Deduplicate IDs
-mapfile -t ID_LIST < <(echo "$READY_IDS" | tr ' ' '\n' | grep -E '^[A-Z0-9-]+$' | sort -u)
+# Deduplicate IDs (bash 3.x — no mapfile)
+ID_LIST=()
+while IFS= read -r _id; do
+  [[ -n "$_id" ]] && ID_LIST+=("$_id")
+done < <(echo "$READY_IDS" | tr ' ' '\n' | grep -E '^[A-Z0-9-]+$' | sort -u)
 
 if [[ ${#ID_LIST[@]} -eq 0 ]]; then
   log "No Ready/Scheduled Insight IDs — syncing tracker only."
