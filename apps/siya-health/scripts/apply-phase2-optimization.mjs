@@ -383,13 +383,6 @@ const SNIPPETS = {
       );
       log.push('sleep:cpap-faq');
     }
-    if (!h.includes('deferred-chat-widget')) {
-      h = h.replace(
-        '<script src="https://widgets.leadconnectorhq.com/loader.js"',
-        '<script src="../scripts/deferred-chat-widget.js" defer></script>\n    <script src="https://widgets.leadconnectorhq.com/loader.js"'
-      );
-      log.push('sleep:deferred-chat');
-    }
     return h;
   },
 };

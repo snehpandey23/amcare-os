@@ -2170,16 +2170,6 @@ button.secondary:hover {
   }
 }
 
-/* LeadConnector chat — avoid covering sticky CTAs on mobile */
-@media (max-width: 899px) {
-  body:has(.mobile-sticky-cta) lc-chat-widget,
-  body:has(.mobile-sticky-cta) #lc_text-widget,
-  body:has(.mobile-sticky-cta) [id*="chat-widget"],
-  body:has(.mobile-sticky-cta) iframe[src*="leadconnector"] {
-    bottom: 88px !important;
-  }
-}
-
 @media (min-width: 900px) {
   .mobile-sticky-cta { display: none !important; }
 }

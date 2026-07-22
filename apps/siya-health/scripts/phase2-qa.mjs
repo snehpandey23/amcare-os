@@ -66,7 +66,9 @@ function checkCornerstone(slug) {
     myth: html.includes('blog-engage--myth'),
     pearl: html.includes('blog-engage--pearl'),
     decision: html.includes('blog-engage--decision'),
-    deferredChat: html.includes('deferred-chat-widget'),
+    hasChatWidget:
+      html.includes('deferred-chat-widget') ||
+      /widgets\.leadconnectorhq\.com\/(?:loader|chat-widget)/i.test(html),
   };
 }
 
@@ -134,7 +136,7 @@ function main() {
         c.myth &&
         c.pearl &&
         c.decision &&
-        (c.slug !== 'sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign' || c.deferredChat),
+        !c.hasChatWidget,
     );
 
   const report = `# Phase 2 QA Report
@@ -176,7 +178,7 @@ ${(() => {
     ['Clinical pearl', s.pearl],
     ['Decision tree', s.decision],
     ['Mid CTA (L2)', s.l2],
-    ['Deferred chat', s.deferredChat],
+    ['Chat widget absent', !s.hasChatWidget],
   ]
     .map(([k, v]) => `| ${k} | ${v ? '✓' : '✗'} |`)
     .join('\n');

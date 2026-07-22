@@ -137,6 +137,20 @@ if (cookieNoticeScript < 10) {
   errors.push(`cookie-notice.js injected on too few pages (${cookieNoticeScript})`);
 }
 
+// Ban LeadConnector / GHL chat widget — must not reappear on any page
+const CHAT_BAN =
+  /widgets\.leadconnectorhq\.com\/(?:loader|chat-widget)|deferred-chat-widget|data-widget-id=["']69be9ab3db1480f6799cdd18["']/i;
+const chatHits = [];
+for (const rel of walkHtml('.')) {
+  if (CHAT_BAN.test(read(rel))) chatHits.push(rel);
+}
+if (fs.existsSync(path.join(SITE_ROOT, 'scripts', 'deferred-chat-widget.js'))) {
+  errors.push('scripts/deferred-chat-widget.js must remain deleted');
+}
+if (chatHits.length) {
+  errors.push(`Chat widget embed found on ${chatHits.length} page(s): ${chatHits.slice(0, 12).join(', ')}${chatHits.length > 12 ? '…' : ''}`);
+}
+
 console.log('Deployment hardening validation');
 console.log('Legal effective date required:', LEGAL_EFFECTIVE_DATE_DISPLAY);
 console.log('Service states:', AVAILABLE_SERVICE_STATES.join(', '));
