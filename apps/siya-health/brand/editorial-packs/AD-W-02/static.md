@@ -1,19 +1,28 @@
-# Static — AD-W-02
+# Static — AD-W-02 (brand-aligned)
+
+Aligned to `INSTAGRAM-STATIC.md` + AD-S-01 design-lab template (2026-07-22 edit).
 
 ## On-image (locked)
 
-**Brand:** SIYA HEALTH · Physician-led telehealth  
+**Logo:** Submerged corner mark + ambient watermark (no plate, no loud stamp)  
 **Headline:** ADHD in women often looks quiet.  
-**Support:** Inattention. Overwhelm. Emotional intensity. Not always hyperactivity.  
-**CTA:** Read the Health Guide → siya.health/answers/adhd-in-women  
-**Disclaimer:** Educational only · Not medical advice
+**Support:** Inattention, overwhelm, emotional intensity — not always hyperactivity.  
+**Practical step:** read the Health Guide on ADHD in women — then talk to a clinician if the pattern is lifelong.  
+**Footer only:** `siya.health  ·  All content for educational purposes only`
+
+## Removed (guideline violations from v1)
+
+- Dark navy/teal gradient background
+- Loud gradient SIYA wordmark / Physician-led tagline on image
+- URL CTA callout (`Read the Health Guide → siya.health/...`)
+- Second disclaimer box
 
 ## Assets
 
 | File | Use |
 |------|-----|
-| `images/ready/static-ig-square.png` | Instagram / FB square |
-| `images/ready/static-landscape.png` | LinkedIn / FB landscape / X |
+| `static-ig-square.png` | Instagram / FB square |
+| `static-landscape.png` | LinkedIn / FB landscape / X |
 | `ready-to-post/*` | Post from here |
 
 ## WorkDrive
