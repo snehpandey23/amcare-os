@@ -1,16 +1,16 @@
 # Provider Expansion — Implementation Report
 
-Generated: 2026-06-07T12:24:16.022Z
+Generated: 2026-07-21T06:58:14.946Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| Sitemap URLs | 164 |
+| Sitemap URLs | 179 |
 | Contracted providers in data | 7 |
 | Live profile pages | 7 |
 | Hub URL | https://siya.health/providers |
-| Pages linking to /providers hub | 162 |
+| Pages linking to /providers hub | 186 |
 | Broken internal links (sample) | 20 |
 | JSON-LD issues on profiles | 0 |
 
@@ -35,19 +35,20 @@ Generated: 2026-06-07T12:24:16.022Z
 | weight-loss-metabolic-health | /weight-loss-metabolic-health | Dr. Sneh Pandey, MD; Dr. Vanessa Urbina, MD; Derek Timbs, FNP-BC; Wendy Delgado, PA-C | 4 |
 | primary-urgent-care | /primary-urgent-care | Dr. Vanessa Urbina, MD; Dr. Natasha Desai, MD; Dr. Sneh Pandey, MD | 3 |
 | mens-health-longevity | /mens-health-longevity | Dr. Sneh Pandey, MD; Derek Timbs, FNP-BC | 2 |
+| womens-health | /womens-health | Dr. Swati Pandey, MD; Dr. Vanessa Urbina, MD; Dr. Natasha Desai, MD | 3 |
 
 ## Internal link counts (pages referencing profile)
 
 | Target | Inbound pages |
 |--------|-------------:|
-| /providers hub | 162 |
-| /providers/dr-sneh-pandey | 26 |
+| /providers hub | 186 |
+| /providers/dr-sneh-pandey | 43 |
 | /providers/dr-vanessa-urbina | 15 |
 | /providers/dr-natasha-desai | 18 |
-| /providers/dr-swati-pandey | 13 |
-| /providers/megan-wunderlich | 13 |
-| /providers/derek-timbs | 10 |
-| /providers/wendy-delgado | 7 |
+| /providers/dr-swati-pandey | 12 |
+| /providers/megan-wunderlich | 11 |
+| /providers/derek-timbs | 9 |
+| /providers/wendy-delgado | 6 |
 
 ## Hub features
 
@@ -57,26 +58,26 @@ Generated: 2026-06-07T12:24:16.022Z
 
 ## Broken links (sample)
 
-- `about.html` → `/assets/favicon.svg`
+- `about.html` → `/assets/favicon-32x32.png`
+- `about.html` → `/assets/favicon-16x16.png`
+- `about.html` → `/assets/apple-touch-icon.png`
+- `about.html` → `/assets/favicon.ico`
 - `about.html` → `/assets/favicon.ico`
 - `about.html` → `/styles.css`
 - `about.html` → `/styles.css`
-- `adhd-care.html` → `/assets/favicon.svg`
+- `adhd-care.html` → `/assets/favicon-32x32.png`
+- `adhd-care.html` → `/assets/favicon-16x16.png`
+- `adhd-care.html` → `/assets/apple-touch-icon.png`
+- `adhd-care.html` → `/assets/favicon.ico`
 - `adhd-care.html` → `/assets/favicon.ico`
 - `adhd-care.html` → `/styles.css`
 - `adhd-care.html` → `/styles.css`
-- `adhd-diagnosis-austin.html` → `/assets/favicon.svg`
+- `adhd-diagnosis-austin.html` → `/assets/favicon-32x32.png`
+- `adhd-diagnosis-austin.html` → `/assets/favicon-16x16.png`
+- `adhd-diagnosis-austin.html` → `/assets/apple-touch-icon.png`
+- `adhd-diagnosis-austin.html` → `/assets/favicon.ico`
 - `adhd-diagnosis-austin.html` → `/assets/favicon.ico`
 - `adhd-diagnosis-austin.html` → `/styles.css`
-- `adhd-diagnosis-austin.html` → `/styles.css`
-- `adhd-diagnosis-florida.html` → `/assets/favicon.svg`
-- `adhd-diagnosis-florida.html` → `/assets/favicon.ico`
-- `adhd-diagnosis-florida.html` → `/styles.css`
-- `adhd-diagnosis-florida.html` → `/styles.css`
-- `adhd-diagnosis-houston.html` → `/assets/favicon.svg`
-- `adhd-diagnosis-houston.html` → `/assets/favicon.ico`
-- `adhd-diagnosis-houston.html` → `/styles.css`
-- `adhd-diagnosis-houston.html` → `/styles.css`
 
 ## Operational note
 

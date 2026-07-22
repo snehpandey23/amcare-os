@@ -66,8 +66,8 @@ export function buildSiyaCircleSignupCtaHtml() {
   return `            <div class="siya-circle-signup-cta">
               <h2 id="signup-heading">Join Siya Circle</h2>
               <p class="lead">Get practical health insights from Siya Health on focus, energy, weight, metabolic health, hormones, and everyday care.</p>
-              <p class="siya-circle-compliance">Siya Circle is for general education only. It does not provide diagnosis, treatment, medication advice, emergency care, or a provider-patient relationship. For personal medical concerns, <a href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">schedule a visit</a> with a licensed clinician. For emergencies, call 911.</p>
-              <a class="button" ${SIYA_CIRCLE_JOIN_LINK_ATTRS}>Join Siya Circle</a>
+              <p class="siya-circle-compliance">Siya Circle is for general education only. It does not provide diagnosis, treatment, medication advice, emergency care, or a provider-patient relationship. For personal medical concerns, <a href="/redirect/chat" rel="noopener">schedule a visit</a> with a licensed clinician. For emergencies, call 911.</p>
+              <a class="button" ${SIYA_CIRCLE_JOIN_LINK_ATTRS}>Join Our Health Guide</a>
               <p class="siya-circle-ghl-note">You&rsquo;ll be taken to our secure signup form.</p>
             </div>`;
 }
@@ -76,7 +76,7 @@ export function buildSiyaCircleSignupCtaHtml() {
 export const SIYA_CIRCLE_PROMO_HTML = `          <aside class="siya-circle-promo" aria-labelledby="siya-circle-promo-heading">
             <div class="siya-circle-promo-inner">
               <h2 id="siya-circle-promo-heading">Join Siya Circle</h2>
-              <p>Free clinician-informed health explainers on focus, energy, weight, and everyday health. General education only; not medical advice.</p>
-              <a class="button" ${SIYA_CIRCLE_JOIN_LINK_ATTRS}>Join Siya Circle</a>
+              <p>Weekly evidence-based health insights from Siya Health physicians. General education only; not medical advice.</p>
+              <a class="button" ${SIYA_CIRCLE_JOIN_LINK_ATTRS}>Join Our Health Guide</a>
             </div>
           </aside>`;

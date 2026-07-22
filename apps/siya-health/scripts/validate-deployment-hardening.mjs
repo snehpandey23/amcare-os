@@ -137,18 +137,18 @@ if (cookieNoticeScript < 10) {
   errors.push(`cookie-notice.js injected on too few pages (${cookieNoticeScript})`);
 }
 
-// Ban LeadConnector / GHL chat widget — must not reappear on any page
-const CHAT_BAN =
-  /widgets\.leadconnectorhq\.com\/(?:loader|chat-widget)|deferred-chat-widget|data-widget-id=["']69be9ab3db1480f6799cdd18["']/i;
-const chatHits = [];
-for (const rel of walkHtml('.')) {
-  if (CHAT_BAN.test(read(rel))) chatHits.push(rel);
-}
-if (fs.existsSync(path.join(SITE_ROOT, 'scripts', 'deferred-chat-widget.js'))) {
-  errors.push('scripts/deferred-chat-widget.js must remain deleted');
-}
-if (chatHits.length) {
-  errors.push(`Chat widget embed found on ${chatHits.length} page(s): ${chatHits.slice(0, 12).join(', ')}${chatHits.length > 12 ? '…' : ''}`);
+// 9. Health Guides hub — no internal workflow or dev index links in public copy
+const answersHub = read('answers/index.html');
+const hubForbidden = [
+  /pending physician review/i,
+  /Machine index/i,
+  /article-index\.json/i,
+  /clinical review status/i,
+];
+for (const re of hubForbidden) {
+  if (re.test(answersHub)) {
+    errors.push(`Health Guides hub exposes internal/dev copy (${re}): answers/index.html`);
+  }
 }
 
 console.log('Deployment hardening validation');

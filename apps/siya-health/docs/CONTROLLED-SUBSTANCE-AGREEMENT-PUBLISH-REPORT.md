@@ -1,6 +1,6 @@
 # Controlled Substance Treatment Agreement — Publish Report
 
-Generated: 2026-06-07T12:24:15.837Z
+Generated: 2026-07-21T06:58:14.574Z
 
 ## Published document
 
@@ -27,12 +27,11 @@ Operational wording preserved from approved DPC / controlled-substance protocol 
 
 | Metric | Count |
 |--------|------:|
-| Pages requiring CS agreement link | 72 |
-| Pages with link after build | 71 |
-| Missing | 1 |
+| Pages requiring CS agreement link | 94 |
+| Pages with link after build | 94 |
+| Missing | 0 |
 
-### Missing links
-- `pricing.html`
+_All required pages include footer link._
 
 ## Out of scope
 

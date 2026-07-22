@@ -6,8 +6,26 @@ import { applyInternalRecords } from './internal-provider-records.mjs';
 import { applyCanonicalToProvider } from './provider-canonical.mjs';
 import { ADDITIONAL_PROVIDERS } from './providers-additional.mjs';
 import { AVAILABLE_SERVICE_STATES } from './site-standards.mjs';
-export { BASE_URL, BOOKING_LINK, PROFILE_LAST_UPDATED, resolveProviderPhoto } from './providers-core.mjs';
-import { BASE_URL, BOOKING_LINK, PROFILE_LAST_UPDATED, resolveProviderPhoto } from './providers-core.mjs';
+export {
+  BASE_URL,
+  BOOKING_LINK,
+  CAREPATRON_BASE,
+  MEET_GREET_BOOKING_URL,
+  ADHD_WALKTHROUGH_LINK,
+  ADHD_EVALUATION_199_LINK,
+  SPRUCE_CHAT_URL,
+  REDIRECT_MEET_GREET_URL,
+  ZOCDOC_BOOKING_URL,
+  PROFILE_LAST_UPDATED,
+  resolveProviderPhoto,
+} from './providers-core.mjs';
+import {
+  BASE_URL,
+  BOOKING_LINK,
+  ZOCDOC_BOOKING_URL,
+  PROFILE_LAST_UPDATED,
+  resolveProviderPhoto,
+} from './providers-core.mjs';
 
 export const PROVIDERS = [
   {
@@ -61,7 +79,7 @@ export const PROVIDERS = [
       'I’m Dr. Sneh Pandey. I built Siya Health for adults who suspect ADHD, carry shame about focus and follow-through, and want answers that respect both your intelligence and your nervous system—not another lecture about discipline.',
     longBio: [
       'You don’t need a provider who rushes a label—or one who dismisses you because you have a career, a degree, or a calendar that looks “put together.” You need someone who understands <strong>high-functioning burnout</strong>, the overlap between ADHD and metabolic health, and how hard it is to ask for help when you’ve always been “the responsible one.”',
-      'My background spans complex medical care and <strong>obesity medicine</strong>; I’ve supported <strong>5,000+ patients</strong> in structured weight-loss programs. That matters when ADHD and appetite, energy, or metabolic risk show up in the same story.',
+      'My background spans complex medical care and <strong>obesity medicine</strong>; I’ve supported <strong>thousands of patient encounters</strong> in structured weight-loss programs. That matters when ADHD and appetite, energy, or metabolic risk show up in the same story.',
     ],
     patientFit: {
       deck: 'If you’re exhausted from performing “fine” while your brain says otherwise—you’re in the right place.',
@@ -95,7 +113,7 @@ export const PROVIDERS = [
     ],
     finalCta: {
       title: 'Ready to stop guessing?',
-      subtitle: 'Start with a free screening—or Talk to a Clinician if you want human answers first.',
+      subtitle: 'Start with a free screening—or Start Secure Medical Chat if you want human answers first.',
     },
     disclaimer:
       'This page describes our practice philosophy and typical workflows; it is not a guarantee of any clinical outcome. Diagnosis and treatment require an individual evaluation. Eligibility, prescribing, and follow-up depend on medical history, state law, and clinician judgment.',
@@ -114,7 +132,7 @@ export const PROVIDERS = [
       medicalSpecialty: ['Internal Medicine', 'Obesity Medicine', 'Adult ADHD'],
       knowsAbout: ['Adult ADHD', 'Executive dysfunction', 'Metabolic health', 'Medical weight loss', 'ADHD and weight overlap'],
     },
-    claimsNeedingVerification: ['5,000+ patients in structured weight-loss programs', 'verified testimonial attributions'],
+    claimsNeedingVerification: ['verified testimonial attributions'],
     showScreeningCta: true,
   },
   {
@@ -347,6 +365,7 @@ export const SERVICE_PROVIDER_SLUGS = {
   'weight-loss-metabolic-health': ['dr-sneh-pandey', 'dr-vanessa-urbina', 'derek-timbs', 'wendy-delgado'],
   'primary-urgent-care': ['dr-vanessa-urbina', 'dr-natasha-desai', 'dr-sneh-pandey'],
   'mens-health-longevity': ['dr-sneh-pandey', 'derek-timbs'],
+  'womens-health': ['dr-swati-pandey', 'dr-vanessa-urbina', 'dr-natasha-desai'],
 };
 
 /** Hub filter keys → service page keys */

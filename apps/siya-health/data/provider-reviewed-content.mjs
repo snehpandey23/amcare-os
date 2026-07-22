@@ -21,7 +21,7 @@ const BLOG_TITLES = {
 const ANSWER_TITLES = {
   'what-is-food-noise': 'What is food noise?',
   'who-qualifies-glp-1-weight-loss': 'Who qualifies for GLP-1 weight loss?',
-  'what-included-199-adhd-evaluation': 'What is included in a $199 ADHD evaluation?',
+  'what-included-199-adhd-evaluation': 'What is included in a Siya Health ADHD evaluation?',
   'is-telehealth-legitimate': 'Is telehealth legitimate?',
   'telehealth-adhd-california': 'Telehealth ADHD in California',
   'screening-vs-adhd-evaluation': 'Screening vs ADHD evaluation',

@@ -1,0 +1,28 @@
+id: 2026-07-R-02-001
+topic: ADHD
+intent: Recognition
+family: Recognition
+layout: R-02
+journey_stage: Recognizing
+persona: Adult_ADHD
+emotion: Ashamed
+tone: Empathic
+message: Knowing what to do and still not starting is not laziness.
+image: Editorial Photography
+image_category: unfinished-work
+image_ref: brand/photography/unfinished-work/
+headline_length: Medium
+caption_length: Long
+cta: Screening
+cta_label: Take Free ADHD Screening
+evidence_level: Experiential
+clinical_review: false
+platforms:
+  - LinkedIn
+  - Instagram
+variants: 1
+claims_ok: true
+source_refs:
+  - /answers/executive-dysfunction-adhd
+status: seed
+source: executive dysfunction content

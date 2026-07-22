@@ -1,15 +1,15 @@
 # SEO Deployment QA Report
 
-Generated: 2026-06-07T12:24:15.787Z
+Generated: 2026-07-21T06:58:14.520Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| HTML pages scanned | 164 |
-| Sitemap URLs | 164 |
+| HTML pages scanned | 192 |
+| Sitemap URLs | 179 |
 | Pages with Meet & Greet in nav | 0 |
-| Non-ADHD pages still referencing adhd-screening | 69 |
+| Non-ADHD pages still referencing adhd-screening | 66 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
 
@@ -27,38 +27,22 @@ Generated: 2026-06-07T12:24:15.787Z
 
 | Slug | Exists | Sitemap | Meet & Greet CTA | Blog backlink |
 |------|:------:|:-------:|:----------------:|:-------------:|
-| what-is-food-noise | ✓ | ✓ | ✓ | ✓ |
-| what-is-insulin-resistance | ✓ | ✓ | ✓ | ✓ |
-| insulin-resistance-without-diabetes | ✓ | ✓ | ✓ | ✓ |
-| normal-a1c-insulin-resistance | ✓ | ✓ | ✓ | ✓ |
-| why-am-i-tired-even-after-sleeping | ✓ | ✓ | ✓ | ✓ |
+| what-is-food-noise | ✓ | ✓ | ✗ | ✓ |
+| what-is-insulin-resistance | ✓ | ✓ | ✗ | ✓ |
+| insulin-resistance-without-diabetes | ✓ | ✓ | ✗ | ✓ |
+| normal-a1c-insulin-resistance | ✓ | ✓ | ✗ | ✓ |
+| why-am-i-tired-even-after-sleeping | ✓ | ✓ | ✗ | ✓ |
 
 ## CTA repositioning
 
-- **Default primary CTA:** Book a Meet & Greet → `https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4`
+- **Default primary CTA:** Book a Meet & Greet → `https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=kkarJfxH`
 - **Default secondary CTA:** Explore Care Options → `#services` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, `adhd-screening.html`
 
-### Non-ADHD pages still containing `adhd-screening` (69)
+### Non-ADHD pages still containing `adhd-screening` (66)
 
 - `about.html`
-- `adhd-evaluation-cost.html`
-- `blog/adderall-ir-vs-xr-adults.html`
-- `blog/adhd-evaluation-california-online-vs-in-person.html`
-- `blog/adhd-evaluation-cost-california.html`
-- `blog/adhd-evaluation-cost-texas.html`
-- `blog/adhd-medication-daily-or-as-needed-adults.html`
-- `blog/adhd-medication-online-california.html`
-- `blog/adhd-medication-online-texas-telehealth.html`
-- `blog/adhd-medication-options-california.html`
-- `blog/adhd-medication-options-for-adults.html`
-- `blog/adhd-medication-side-effects-what-to-expect.html`
-- `blog/adhd-symptoms-overlooked.html`
-- `blog/adhd-telehealth-california.html`
-- `blog/adhd-testing-online-california-screening-vs-evaluation.html`
-- `blog/adhd-treatment-houston-online.html`
 - `blog/compounded-vs-branded-glp1-medications.html`
-- `blog/focalin-vs-adderall-comparison.html`
 - `blog/food-noise-and-glp-1-what-it-means-and-what-helps.html`
 - `blog/free-testosterone-vs-total-testosterone-what-patients-should-know.html`
 - `blog/glp1-side-effects-and-how-to-manage-them.html`
@@ -67,12 +51,12 @@ Generated: 2026-06-07T12:24:15.787Z
 - `blog/index.html`
 - `blog/insomnia-treatment-options-beyond-medication.html`
 - `blog/insulin-resistance-and-weight-loss-clinician-overview.html`
-- `blog/long-term-weight-loss-medications-what-to-expect.html`
 - `blog/medical-weight-loss-glp1-semaglutide-texas.html`
 - `blog/medical-weight-loss-vs-dieting-what-actually-works.html`
 - `blog/minoxidil-for-hair-loss-does-it-work.html`
 - `blog/oral-vs-injectable-weight-loss-medications.html`
 - `blog/oral-vs-topical-minoxidil-which-is-right.html`
+- `blog/perimenopause-brain-fog.html`
 - `blog/phentermine-for-weight-loss-safety-and-effectiveness.html`
 - `blog/semaglutide-for-weight-loss-how-it-works.html`
 - `blog/sildenafil-for-erectile-dysfunction-what-to-expect.html`
@@ -87,6 +71,16 @@ Generated: 2026-06-07T12:24:15.787Z
 - `book-appointment.html`
 - `index.html`
 - `intake/index.html`
+- `labs/a1c-blood-sugar.html`
+- `labs/adhd-support.html`
+- `labs/fatigue-brain-fog.html`
+- `labs/how-to-read-results.html`
+- `labs/iron-ferritin.html`
+- `labs/mens-health.html`
+- `labs/preventive.html`
+- `labs/thyroid.html`
+- `labs/vitamin-b12.html`
+- `labs/womens-midlife.html`
 - `labs.html`
 - `legal/controlled-substance-treatment-agreement/index.html`
 - `legal/cookie-policy/index.html`
@@ -96,6 +90,7 @@ Generated: 2026-06-07T12:24:15.787Z
 - `legal/terms-of-use/index.html`
 - `mens-health-longevity.html`
 - `prescriptions.html`
+- `pricing.html`
 - `primary-urgent-care.html`
 - `privacy-policy.html`
 - `providers/derek-timbs.html`
@@ -110,8 +105,10 @@ Generated: 2026-06-07T12:24:15.787Z
 - `telehealth.html`
 - `terms.html`
 - `weight-loss-metabolic-health.html`
+- `womens-health.html`
+- `womens-midlife-health.html`
 
-### All pages with any `adhd-screening` reference (162)
+### All pages with any `adhd-screening` reference (187)
 
 - `about.html`
 - `adhd-care.html`
@@ -122,12 +119,13 @@ Generated: 2026-06-07T12:24:15.787Z
 - `adhd-diagnosis-philadelphia.html`
 - `adhd-diagnosis-texas.html`
 - `adhd-evaluation-cost.html`
+- `adhd-screening-results.html`
 - `adhd-screening.html`
 - `adhd-treatment-online.html`
 - `adult-adhd-diagnosis.html`
+- `adult-adhd-screening-california.html`
 - `answers/adderall-vs-vyvanse-adults.html`
 - `answers/adhd-and-weight-loss-connection.html`
-- `answers/adhd-in-men.html`
 - `answers/adhd-in-women.html`
 - `answers/adhd-medication-every-day.html`
 - `answers/adhd-medication-side-effects.html`
@@ -141,7 +139,6 @@ Generated: 2026-06-07T12:24:15.787Z
 - `answers/can-sleep-apnea-cause-fatigue.html`
 - `answers/can-you-get-adhd-medication-online.html`
 - `answers/compounded-vs-branded-glp-1.html`
-- `answers/creyos-adhd-testing-explained.html`
 - `answers/ed-telehealth-legitimate.html`
 - `answers/executive-dysfunction-adhd.html`
 - `answers/food-noise-returned-on-glp-1.html`
@@ -154,7 +151,7 @@ Generated: 2026-06-07T12:24:15.787Z
 - `answers/how-much-does-adhd-testing-cost.html`
 - `answers/how-online-prescriptions-work.html`
 
-_…and 122 more (expected on ADHD funnels)._
+_…and 147 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 
@@ -185,11 +182,10 @@ _None detected in static HTML scan._
 
 ## Orphan pages (low inbound links, sample)
 
-- `adhd-diagnosis-florida.html`
 - `adhd-evaluation-cost.html`
+- `docs/tint-options-preview.html`
 - `intake/index.html`
 - `siya-circle.html`
-- `visual-components.html`
 
 ## Recommendations
 

@@ -1,0 +1,53 @@
+{
+  "executedAt": "2026-06-07T12:44:00.000Z",
+  "redirects": {
+    "/answers/adhd-in-men": "/answers/signs-of-adult-adhd",
+    "/answers/creyos-adhd-testing-explained": "/creyos-adhd-testing",
+    "/blog/adhd-evaluation-cost-california": "/blog/adhd-evaluation-cost-texas",
+    "/blog/after-adhd-diagnosis-next-steps-adults": "/answers/starting-adhd-medication-adults",
+    "/answers/phentermine-weight-loss-safety": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
+    "/answers/oral-vs-injectable-weight-loss-meds": "/blog/oral-vs-injectable-weight-loss-medications",
+    "/answers/non-stimulant-adhd-medications": "/blog/non-stimulant-adhd-medications-explained",
+    "/answers/tirzepatide-vs-semaglutide": "/blog/tirzepatide-vs-semaglutide-which-is-better",
+    "/answers/minoxidil-hair-loss-does-it-work": "/blog/minoxidil-for-hair-loss-does-it-work",
+    "/answers/sildenafil-erectile-dysfunction-expectations": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
+    "/blog/combining-adhd-treatment-and-weight-loss-strategies": "/answers/adhd-and-weight-loss-connection",
+    "/blog/focalin-vs-adderall-comparison": "/blog/vyvanse-vs-adderall-differences",
+    "/blog/long-term-weight-loss-medications-what-to-expect": "/blog/semaglutide-for-weight-loss-how-it-works",
+    "/blog/adderall-ir-vs-xr-adults": "/blog/vyvanse-vs-adderall-differences",
+    "/blog/adhd-treatment-houston-online": "/blog/online-adhd-diagnosis-texas",
+    "/blog/adhd-medication-online-texas-telehealth": "/blog/online-adhd-diagnosis-texas"
+  },
+  "filesDeleted": [
+    "/answers/adhd-in-men",
+    "/answers/creyos-adhd-testing-explained",
+    "/answers/phentermine-weight-loss-safety",
+    "/answers/oral-vs-injectable-weight-loss-meds",
+    "/answers/non-stimulant-adhd-medications",
+    "/answers/tirzepatide-vs-semaglutide",
+    "/answers/minoxidil-hair-loss-does-it-work",
+    "/answers/sildenafil-erectile-dysfunction-expectations",
+    "/blog/after-adhd-diagnosis-next-steps-adults",
+    "/blog/adhd-evaluation-cost-california",
+    "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+    "/blog/focalin-vs-adderall-comparison",
+    "/blog/long-term-weight-loss-medications-what-to-expect",
+    "/blog/adderall-ir-vs-xr-adults",
+    "/blog/adhd-treatment-houston-online",
+    "/blog/adhd-medication-online-texas-telehealth"
+  ],
+  "linksUpdated": 393,
+  "filesTouched": [
+    "about.html",
+    "adhd-care.html",
+    "answers/index.html",
+    "blog/adhd.html",
+    "blog/index.html",
+    "blog/non-stimulant-adhd-medications-explained.html",
+    "blog/tirzepatide-vs-semaglutide-which-is-better.html",
+    "blog/weight-loss.html",
+    "data/answer-seeds.mjs",
+    "data/cannibalization-phase1.mjs",
+    "data/phase5-thin-expansions.mjs"
+  ]
+}

@@ -10,7 +10,6 @@ function phase5CoordinationSection(slug, topic) {
   const lead = {
     'adhd-vs-burnout': 'Burnout recovery and ADHD evaluation can run in parallel when timeline supports both.',
     'adhd-vs-anxiety': 'Anxiety treatment and ADHD evaluation should be coordinated rather than guessed from one symptom.',
-    'non-stimulant-adhd-medications': 'Non-stimulant trials still require the same monitoring relationship as stimulant care.',
     'starting-adhd-medication-adults': 'Medication start visits should link to clear refill and crisis instructions.',
     'can-adhd-be-diagnosed-online': 'Online diagnosis still requires the same documentation standards as in-person care.',
     'signs-of-adult-adhd': 'Symptom lists on this page support—but do not replace—structured evaluation.',
@@ -45,7 +44,7 @@ function phase5CoordinationSection(slug, topic) {
       `${intro} Medical weight-loss care combines nutrition, activity, sleep, behavioral support, and—when appropriate—FDA-approved pharmacotherapy with monitoring. Cornerstone blogs on insulin resistance and food noise provide deeper context than this summary page.`,
       'GLP-1 medicines require titration, GI counseling, and discussion of rare serious risks. Avoid unregulated compounded products or cosmetic use without clinician oversight. ADHD-related impulsive eating and sleep apnea can undermine weight outcomes if left untreated.',
       'Metabolic labs (glucose, A1C, lipids, blood pressure, waist trend) should be interpreted over time, not from one snapshot. Post-meal fatigue and brain fog may link to insulin resistance even when A1C is normal.',
-      'Talk to a Clinician when you want help choosing between evaluation pathways before enrolling in a full metabolic or weight-loss program.',
+      'Start Secure Medical Chat when you want help choosing between evaluation pathways before enrolling in a full metabolic or weight-loss program.',
       'Pair this guide with cornerstone blogs on insulin resistance and food noise when symptoms cluster (cravings, post-meal fog, waist gain)—your clinician integrates labs, sleep, and medications.',
       'Educational content cannot promise a specific weight outcome; treatment plans follow FDA indications, monitoring, and individual tolerability.',
       'Document your symptom timeline (childhood vs adult onset, settings affected, best and worst weeks), sleep partners’ observations about snoring, medications and supplements, and three-month goals—those details speed responsible evaluation more than another online quiz.',
@@ -63,7 +62,7 @@ function phase5CoordinationSection(slug, topic) {
     ],
     telehealth: [
       `${intro} Legitimate telehealth documents encounters, uses HIPAA-compliant tools, and maintains follow-up for prescriptions—especially controlled substances with PDMP review where required.`,
-      'Compare services on clinician licensure in your state, visit length for diagnosis-level care, and transparency about pricing and limitations. Talk to a Clinician to clarify fit; comprehensive ADHD or metabolic evaluation is a separate longer visit.',
+      'Compare services on clinician licensure in your state, visit length for diagnosis-level care, and transparency about pricing and limitations. Start Secure Medical Chat to clarify fit; comprehensive ADHD or metabolic evaluation is a separate longer visit.',
       'Keep medication lists, allergy history, and prior records available for upload. Emergency symptoms require local urgent or emergency care—not messaging queues.',
       'Educational blogs on safe online prescriptions complement this guide; they do not establish a clinician–patient relationship on their own.',
       'Read related Health Guides on first telehealth visit logistics, online prescription law, and condition-specific evaluation (ADHD, metabolic, men’s health) to prepare questions for your first visit.',
@@ -106,6 +105,7 @@ const CORE_ANSWER_SEEDS = [
     paragraphs: [
       'Clinicians look for persistent inattention, impulsivity, and/or hyperactivity that interferes with work, relationships, or daily life. In adults, inattentive presentation is common: mental fog, losing track of conversations, missed deadlines, and piles of unfinished projects.',
       'Many high-functioning adults compensate with anxiety, long hours, or rigid routines until burnout hits. That is why ADHD is frequently missed in people who appear successful on paper.',
+      'In men, ADHD may show more external restlessness, impulsivity, or risk-taking—but many men have primarily inattentive ADHD that looks like laziness or underperformance. Relationship strain, job hopping, and substance use histories are common reasons men seek evaluation.',
       'Other conditions—anxiety, depression, sleep apnea, thyroid disease, iron deficiency—can mimic ADHD. A structured evaluation with a licensed clinician rules out look-alikes and clarifies next steps.',
     ],
     evidence: ['DSM-5-TR criteria for ADHD in adults', 'NIMH: ADHD in adults overview', 'CHADD adult ADHD resources'],
@@ -194,19 +194,6 @@ const CORE_ANSWER_SEEDS = [
     reviewerSlug: 'dr-natasha-desai',
   },
   {
-    slug: 'adhd-in-men',
-    question: 'How does adult ADHD present in men?',
-    shortAnswer:
-      'Men may show more external restlessness, impulsivity, or risk-taking—but many men have primarily inattentive ADHD that looks like laziness or underperformance. Relationship strain, job hopping, and substance use histories are common reasons men seek evaluation.',
-    paragraphs: [
-      'Clinicians still rule out sleep, mood, and medical mimics regardless of gender presentation.',
-    ],
-    evidence: ['Epidemiologic ADHD sex ratio literature', 'NIMH adult ADHD overview'],
-    related: ['signs-of-adult-adhd', 'high-functioning-adhd'],
-    topic: 'adhd',
-    reviewerSlug: 'dr-natasha-desai',
-  },
-  {
     slug: 'time-blindness-adhd',
     question: 'What is time blindness in ADHD?',
     shortAnswer:
@@ -276,7 +263,7 @@ const CORE_ANSWER_SEEDS = [
     slug: 'how-much-does-adhd-testing-cost',
     question: 'How much does ADHD testing cost?',
     shortAnswer:
-      'Costs vary widely: some clinics charge $500–$2,000+; Siya Health offers a transparent $199 comprehensive adult ADHD evaluation (60–90 minutes) including clinical interview and standardized tools when clinically indicated. Always confirm what is included before booking.',
+      'Costs vary widely: some clinics charge $500–$2,000+; Siya Health offers a transparent $149 comprehensive adult ADHD evaluation (60–90 minutes) including clinical interview and standardized tools when clinically indicated. Always confirm what is included before booking.',
     paragraphs: [
       'Insurance may cover some in-network evaluations but often involves prior authorization delays. Many patients use FSA/HSA for direct-pay telehealth.',
     ],
@@ -306,7 +293,7 @@ const CORE_ANSWER_SEEDS = [
     paragraphs: [
       'Side effects, cardiovascular risk, substance-use history, and sleep impact all influence selection.',
     ],
-    evidence: ['FDA prescribing information (medication guides)', 'Adult ADHD treatment guidelines'],
+    evidence: ['FDA medication guides — Adderall (mixed salts) and Vyvanse (lisdexamfetamine) prescribing information', 'Adult ADHD treatment guidelines'],
     related: ['adhd-medication-side-effects', 'starting-adhd-medication-adults', 'is-adhd-medication-safe-long-term'],
     topic: 'adhd',
     reviewerSlug: 'dr-swati-pandey',
@@ -332,21 +319,8 @@ const CORE_ANSWER_SEEDS = [
     paragraphs: [
       'Untreated ADHD carries its own risks: accidents, job loss, mood problems, and self-medication.',
     ],
-    evidence: ['Long-term stimulant safety literature (population studies)', 'ADHD treatment guideline monitoring schedules'],
+    evidence: ['Long-term stimulant safety literature — population studies and cohort follow-up data', 'ADHD treatment guideline monitoring schedules'],
     related: ['adhd-medication-side-effects', 'starting-adhd-medication-adults'],
-    topic: 'adhd',
-    reviewerSlug: 'dr-swati-pandey',
-  },
-  {
-    slug: 'non-stimulant-adhd-medications',
-    question: 'What non-stimulant ADHD medications exist for adults?',
-    shortAnswer:
-      'Options may include atomoxetine, viloxazine, guanfacine XR, clonidine XR, and bupropion (off-label in some cases)—depending on comorbidities and prescriber judgment. Non-stimulants can help when stimulants are contraindicated or poorly tolerated.',
-    paragraphs: [
-      'Onset is often slower than stimulants; patience and follow-up matter.',
-    ],
-    evidence: ['FDA-approved non-stimulant ADHD agents', 'Clinical practice parameters'],
-    related: ['adderall-vs-vyvanse-adults', 'starting-adhd-medication-adults'],
     topic: 'adhd',
     reviewerSlug: 'dr-swati-pandey',
   },
@@ -354,12 +328,36 @@ const CORE_ANSWER_SEEDS = [
     slug: 'starting-adhd-medication-adults',
     question: 'What should adults expect when starting ADHD medication?',
     shortAnswer:
-      'Expect a gradual titration plan, clear follow-up dates, baseline vitals when indicated, and honest discussion of goals (work hours, driving, sleep). Improvement should be tracked with structured check-ins—not guessed from social media timelines.',
+      'Expect a gradual titration plan, clear follow-up dates, baseline vitals when indicated, and honest discussion of goals (work hours, driving, sleep). After diagnosis, turn clarity into a plan: understand your symptom pattern, choose evidence-based options, and schedule structured follow-up. Improvement should be tracked with structured check-ins—not guessed from social media timelines.',
     paragraphs: [
       'Controlled substances require ID verification, prescription monitoring, and pharmacy coordination per state law.',
+      'Post-diagnosis care often combines medication (when appropriate), behavioral strategies, and lifestyle supports—sleep, planning systems, and treatment of co-occurring conditions like sleep apnea or depression.',
+      'Your treatment plan may include medication trials with clear targets, follow-up visits for benefits and side effects, and adjustments over time as life stress or health changes.',
+    ],
+    faqs: [
+      {
+        question: 'What is the first thing to do after an ADHD diagnosis?',
+        answer:
+          'Understand what the diagnosis means for your daily life—symptom pattern, functional impact, and what conditions were ruled out. Ask your clinician for a written summary or follow-up plan when possible.',
+      },
+      {
+        question: 'Do I have to take medication after an ADHD diagnosis?',
+        answer:
+          'No. Medication is one option. Some adults combine medication with behavioral strategies; others focus on non-stimulant options or therapy-forward plans depending on clinical appropriateness.',
+      },
+      {
+        question: 'How often will I need follow-up after starting ADHD medication?',
+        answer:
+          'Follow-up frequency depends on whether you start medication, how stable symptoms are, and monitoring needs. Many practices schedule visits more often early in treatment, then space out as you stabilize.',
+      },
+      {
+        question: 'Can an ADHD diagnosis be revisited if something changes?',
+        answer:
+          'Yes. New sleep problems, mood episodes, or life stressors can change the clinical picture. Good care includes reassessment when response to treatment is unexpected.',
+      },
     ],
     evidence: ['Prescriber monitoring norms for stimulants', 'State PDMP requirements'],
-    related: ['adhd-medication-side-effects', 'can-you-get-adhd-medication-online'],
+    related: ['adhd-medication-side-effects', 'can-you-get-adhd-medication-online', 'late-adhd-diagnosis-adults'],
     topic: 'adhd',
     reviewerSlug: 'dr-swati-pandey',
   },
@@ -403,19 +401,6 @@ const CORE_ANSWER_SEEDS = [
     reviewerSlug: 'dr-sneh-pandey',
   },
   {
-    slug: 'creyos-adhd-testing-explained',
-    question: 'What is Creyos cognitive testing for ADHD?',
-    shortAnswer:
-      'Creyos is a digital cognitive assessment battery sometimes used alongside clinical interview and rating scales. It provides objective performance data but does not alone diagnose ADHD—diagnosis requires DSM criteria and clinician judgment.',
-    paragraphs: [
-      'At Siya Health, Creyos may be incorporated into the evaluation package when clinically appropriate.',
-    ],
-    evidence: ['Creyos validated cognitive task library', 'ADHD diagnostic standard: multi-method assessment'],
-    related: ['screening-vs-adhd-evaluation', 'what-included-199-adhd-evaluation'],
-    topic: 'adhd',
-    reviewerSlug: 'dr-sneh-pandey',
-  },
-  {
     slug: 'screening-vs-adhd-evaluation',
     question: 'What is the difference between ADHD screening and a full evaluation?',
     shortAnswer:
@@ -449,20 +434,7 @@ const CORE_ANSWER_SEEDS = [
     paragraphs: [
       'Brand and compounding standards differ; discuss FDA-approved options and risks with a licensed obesity medicine clinician.',
     ],
-    evidence: ['STEP trial program publications (semaglutide 2.4 mg)', 'FDA Wegovy/Ozempic labeling'],
-    related: ['what-is-food-noise', 'glp-1-side-effects', 'tirzepatide-vs-semaglutide'],
-    topic: 'weight-loss',
-    reviewerSlug: 'dr-sneh-pandey',
-  },
-  {
-    slug: 'tirzepatide-vs-semaglutide',
-    question: 'Tirzepatide vs semaglutide: which is better for weight loss?',
-    shortAnswer:
-      'Both are prescription GLP-1–based therapies with strong trial data in eligible adults. Tirzepatide (dual GIP/GLP-1 agonist) showed greater average weight loss in some head-to-head trials, but individual response, side effects, cost, and insurance coverage vary. A clinician personalizes choice—there is no universal winner.',
-    paragraphs: [
-      'Monitoring includes GI tolerance, gallbladder symptoms, and metabolic labs as indicated.',
-    ],
-    evidence: ['SURMOUNT and STEP trial publications', 'FDA Mounjaro/Zepbound and Wegovy labels'],
+    evidence: ['STEP trial program publications — semaglutide 2.4 mg weight-loss outcomes in adults', 'FDA Wegovy/Ozempic labeling'],
     related: ['what-is-food-noise', 'glp-1-side-effects', 'compounded-vs-branded-glp-1'],
     topic: 'weight-loss',
     reviewerSlug: 'dr-sneh-pandey',
@@ -477,32 +449,6 @@ const CORE_ANSWER_SEEDS = [
     ],
     evidence: ['FDA compounding policy statements', 'State board of pharmacy regulations'],
     related: ['glp-1-side-effects', 'who-qualifies-glp-1-weight-loss'],
-    topic: 'weight-loss',
-    reviewerSlug: 'dr-sneh-pandey',
-  },
-  {
-    slug: 'phentermine-weight-loss-safety',
-    question: 'Is phentermine safe for weight loss?',
-    shortAnswer:
-      'Phentermine is an FDA-approved short-term appetite suppressant for select patients when benefits outweigh risks. It is contraindicated in many cardiovascular, hyperthyroid, and medication-interaction scenarios. Monitoring blood pressure, heart rate, mood, and sleep is essential.',
-    paragraphs: [
-      'It is not a first-line substitute for comprehensive obesity care in all patients.',
-    ],
-    evidence: ['FDA phentermine labeling', 'Obesity medicine society practice guidance'],
-    related: ['medical-weight-loss-vs-dieting', 'who-qualifies-glp-1-weight-loss'],
-    topic: 'weight-loss',
-    reviewerSlug: 'dr-sneh-pandey',
-  },
-  {
-    slug: 'oral-vs-injectable-weight-loss-meds',
-    question: 'Oral vs injectable weight loss medications: pros and cons?',
-    shortAnswer:
-      'Injectables (weekly GLP-1 agents) dominate recent trial outcomes but require needles and titration. Oral options (where available) may suit needle-averse patients but have different absorption, dosing schedules, and side-effect profiles. Adherence and insurance often drive the practical choice.',
-    paragraphs: [
-      'Lifestyle, coaching, and mental-health support remain foundations regardless of format.',
-    ],
-    evidence: ['Oral semaglutide (Rybelsus) vs injectable PK literature', 'Adherence studies in obesity pharmacotherapy'],
-    related: ['semaglutide-weight-loss-how-it-works', 'glp-1-side-effects'],
     topic: 'weight-loss',
     reviewerSlug: 'dr-sneh-pandey',
   },
@@ -700,7 +646,7 @@ const CORE_ANSWER_SEEDS = [
       'Screening tools such as STOP-BANG are useful to prompt evaluation but do not replace polysomnography or an appropriate home sleep apnea test ordered by a clinician.',
     ],
     evidence: [
-      'AASM OSA Screening Health Advisory (HEARTS mnemonic)',
+      'AASM OSA Screening Health Advisory — HEARTS mnemonic for high-risk adult screening',
       'AASM Clinical Practice Guideline: Diagnostic Testing for Adult OSA',
       'Aurora RN, Quan SF, J Clin Sleep Med 2024 screening quality measure',
     ],
@@ -1052,32 +998,6 @@ const CORE_ANSWER_SEEDS = [
     reviewerSlug: 'dr-sneh-pandey',
   },
   {
-    slug: 'sildenafil-erectile-dysfunction-expectations',
-    question: 'What should you expect from sildenafil for erectile dysfunction?',
-    shortAnswer:
-      'Sildenafil improves erectile response when sexual stimulation is present; it is not an automatic aphrodisiac. Onset is typically 30–60 minutes. Contraindicated with nitrates and requires cardiovascular review. Common side effects: headache, flushing, nasal congestion.',
-    paragraphs: [
-      'Telehealth can initiate ED care when clinically appropriate after history and medication review.',
-    ],
-    evidence: ['FDA sildenafil prescribing information', 'AUA ED guideline excerpts'],
-    related: ['ed-telehealth-legitimate', 'what-does-low-testosterone-feel-like'],
-    topic: 'mens-health',
-    reviewerSlug: 'dr-sneh-pandey',
-  },
-  {
-    slug: 'minoxidil-hair-loss-does-it-work',
-    question: 'Does minoxidil work for hair loss?',
-    shortAnswer:
-      'Topical minoxidil is FDA-approved for androgenetic alopecia in men and women and slows loss or regrows hair in many users after 3–6+ months of consistent use. Stopping usually reverses gains. Oral minoxidil is off-label in some cases and carries different side-effect risks.',
-    paragraphs: [
-      'Evaluate thyroid, iron, and medication causes of shedding before blaming genetics alone.',
-    ],
-    evidence: ['FDA minoxidil labeling', 'Dermatology society alopecia guidance'],
-    related: ['oral-vs-topical-minoxidil', 'ed-telehealth-legitimate'],
-    topic: 'mens-health',
-    reviewerSlug: 'dr-sneh-pandey',
-  },
-  {
     slug: 'oral-vs-topical-minoxidil',
     question: 'Oral vs topical minoxidil: which is right?',
     shortAnswer:
@@ -1086,7 +1006,7 @@ const CORE_ANSWER_SEEDS = [
       'Pregnancy and cardiovascular contraindications must be reviewed.',
     ],
     evidence: ['Peer-reviewed oral minoxidil dermatology literature', 'FDA topical formulations'],
-    related: ['minoxidil-hair-loss-does-it-work'],
+    related: ['ed-telehealth-legitimate'],
     topic: 'mens-health',
     reviewerSlug: 'dr-sneh-pandey',
   },
@@ -1099,7 +1019,7 @@ const CORE_ANSWER_SEEDS = [
       'ED can be an early marker for vascular disease—comprehensive care matters.',
     ],
     evidence: ['AUA telemedicine statements', 'FDA online pharmacy safety communications'],
-    related: ['sildenafil-erectile-dysfunction-expectations', 'is-telehealth-legitimate'],
+    related: ['is-telehealth-legitimate'],
     topic: 'mens-health',
     reviewerSlug: 'dr-sneh-pandey',
   },
@@ -1143,7 +1063,7 @@ const CORE_ANSWER_SEEDS = [
     paragraphs: [
       'Some conditions still require in-person exam or emergency department care.',
     ],
-    evidence: ['HHS telehealth best practices', 'State telehealth parity laws (varies)'],
+    evidence: ['HHS telehealth best practices', 'State telehealth parity laws — coverage and practice rules vary by state'],
     related: ['how-online-prescriptions-work', 'meet-and-greet-telehealth-expectations'],
     topic: 'telehealth',
     reviewerSlug: 'dr-sneh-pandey',
@@ -1167,7 +1087,7 @@ const CORE_ANSWER_SEEDS = [
     shortAnswer:
       'Texas adults can complete structured ADHD telehealth evaluations with Texas-licensed clinicians, including history, standardized assessments, and follow-up when indicated. Controlled medication rules apply with monitoring and PDMP review.',
     paragraphs: [
-      'Transparent $199 evaluation pricing is published at Siya Health for eligible patients.',
+      'Transparent $149 evaluation pricing is published at Siya Health for eligible patients.',
     ],
     evidence: ['Texas Medical Board telemedicine rules', 'Texas PDMP requirements'],
     related: ['telehealth-adhd-california', 'can-you-get-adhd-medication-online'],
@@ -1189,11 +1109,11 @@ const CORE_ANSWER_SEEDS = [
   },
   {
     slug: 'what-included-199-adhd-evaluation',
-    question: 'What is included in Siya Health’s $199 ADHD evaluation?',
+    question: 'What is included in a Siya Health ADHD evaluation?',
     shortAnswer:
-      'Siya Health’s $199 adult ADHD evaluation is a 60–90 minute telehealth visit with a licensed medical provider—including clinical interview, validated assessment tools as clinically appropriate (such as ASRS, DIVA, Wender Utah, SWAN, or Creyos when indicated), comorbidity screening, and a documented plan. No insurance required. Diagnosis does not guarantee medication.',
+      'Siya Health’s {{pricing.initialEvaluation}} adult ADHD evaluation is a 60–90 minute telehealth visit with a licensed medical provider—including clinical interview, validated assessment tools as clinically appropriate (such as ASRS, DIVA, Wender Utah, SWAN, or Creyos when indicated), comorbidity screening, and a documented plan. No insurance required. Diagnosis does not guarantee medication.',
     paragraphs: [
-      'Your clinician selects assessment tools based on clinical judgment—not every patient receives every instrument. Optional follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.',
+      'Your clinician selects assessment tools based on clinical judgment—not every patient receives every instrument. Optional follow-up plans start at {{pricing.nonControlledFollowUp}}/month for non-controlled medications, or {{pricing.controlledFollowUp}}/month for controlled-medication follow-up when clinically appropriate. See /pricing for the current fee schedule.',
     ],
     evidence: ['Siya Health /adhd-care service description', 'Published pricing at /pricing'],
     related: ['how-much-does-adhd-testing-cost', 'how-long-adhd-evaluation', 'screening-vs-adhd-evaluation'],
@@ -1216,6 +1136,23 @@ const CORE_ANSWER_SEEDS = [
 ];
 
 export const ANSWER_SEEDS = [...mergePhase5Seeds(CORE_ANSWER_SEEDS), ...PHASE3_ANSWER_SEEDS];
+
+/**
+ * Hand-maintained Health Guides that exist as HTML but are not in ANSWER_SEEDS.
+ * Do not delete these files. Prefer promoting them into seeds before regenerating answers.
+ * - afternoon-energy-crash-after-lunch
+ * - food-noise-returned-on-glp-1
+ * - high-shbg-low-free-testosterone
+ * - weight-gain-after-stopping-ozempic
+ * - why-normal-labs-dont-mean-healthy
+ */
+export const HAND_MAINTAINED_ANSWER_SLUGS = [
+  'afternoon-energy-crash-after-lunch',
+  'food-noise-returned-on-glp-1',
+  'high-shbg-low-free-testosterone',
+  'weight-gain-after-stopping-ozempic',
+  'why-normal-labs-dont-mean-healthy',
+];
 
 export const TOPIC_HUBS = {
   adhd: { label: 'ADHD', url: '/blog/adhd', care: '/adhd-care' },

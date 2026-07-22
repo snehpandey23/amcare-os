@@ -49,7 +49,7 @@ export const PHASE3_ANSWER_SEEDS = [
         paragraphs: [
           'If symptoms are new, severe, or worsening rapidly—chest pain, shortness of breath, suicidal thoughts, unintended major weight loss—seek urgent care. For persistent but non-emergency problems, bring a symptom diary: sleep hours, snoring, meal timing, energy by time of day, and mood.',
           'Ask whether additional labs are appropriate: fasting insulin (interpretation varies by lab), lipid panel with triglycerides, liver enzymes, ferritin, thyroid panel, or sleep evaluation. Continuous glucose monitors are education tools for some patients—not a substitute for medical diagnosis.',
-          'Telehealth can start metabolic and fatigue mapping; local imaging, sleep studies, or phlebotomy may still be needed. Talk to a Clinician to clarify which Siya services fit before you commit to a full evaluation pathway.',
+          'Telehealth can start metabolic and fatigue mapping; local imaging, sleep studies, or phlebotomy may still be needed. Start Secure Medical Chat to clarify which Siya services fit before you commit to a full evaluation pathway.',
         ],
       },
       {
@@ -82,7 +82,7 @@ export const PHASE3_ANSWER_SEEDS = [
         ],
         paragraphs: [
           'This Health Guide pairs with—but does not duplicate—the insulin resistance cornerstone blog or the “normal A1C” quick answer; use all three when building a metabolic care plan with your clinician.',
-          'Talk to a Clinician when you want help prioritizing labs, sleep evaluation, and metabolic telehealth pathways without committing to a full program on day one.',
+          'Start Secure Medical Chat when you want help prioritizing labs, sleep evaluation, and metabolic telehealth pathways without committing to a full program on day one.',
         ],
       },
     ],
@@ -144,6 +144,8 @@ export const PHASE3_ANSWER_SEEDS = [
     related: [
       'normal-a1c-insulin-resistance',
       'what-is-insulin-resistance',
+      'which-preventive-blood-tests-adults',
+      'what-to-do-after-lab-results',
       'why-am-i-tired-even-after-sleeping',
       'brain-fog-after-eating',
       'can-sleep-apnea-cause-fatigue',
@@ -395,7 +397,7 @@ export const PHASE3_ANSWER_SEEDS = [
           'Clinician-guided restart or switch beats unsupervised cycling.',
         ],
         paragraphs: [
-          'Talk to a Clinician to clarify whether Siya metabolic telehealth fits your state, goals, and prior GLP-1 history before you restart, switch, or pursue lifestyle-only maintenance.',
+          'Start Secure Medical Chat to clarify whether Siya metabolic telehealth fits your state, goals, and prior GLP-1 history before you restart, switch, or pursue lifestyle-only maintenance.',
         ],
       },
     ],
@@ -549,7 +551,7 @@ export const PHASE3_ANSWER_SEEDS = [
           'Treat sleep apnea and insomnia as energy multipliers.',
         ],
         paragraphs: [
-          'Talk to a Clinician to map fatigue, metabolic, and sleep pathways with a licensed clinician before you overhaul your diet based on social media lunch hacks alone.',
+          'Start Secure Medical Chat to map fatigue, metabolic, and sleep pathways with a licensed clinician before you overhaul your diet based on social media lunch hacks alone.',
         ],
       },
     ],
@@ -708,7 +710,7 @@ export const PHASE3_ANSWER_SEEDS = [
           'TRT is not automatic for every low free testosterone reading.',
         ],
         paragraphs: [
-          'Men’s health telehealth and Talk to a Clinician visits help interpret SHBG-aware labs with symptom context—not supplement stores selling “boosters” without monitoring.',
+          'Men’s health telehealth and secure medical chat visits help interpret SHBG-aware labs with symptom context—not supplement stores selling “boosters” without monitoring.',
         ],
       },
     ],
@@ -746,8 +748,8 @@ export const PHASE3_ANSWER_SEEDS = [
     ],
     evidence: [
       'Endocrine Society clinical practice guideline on testosterone deficiency in men (2018)',
-      'AUA guideline on testosterone deficiency (reaffirmed 2024)',
-      'Bhasin S et al. Testosterone therapy in men with hypogonadism (Endocrine Society)',
+      'AUA testosterone deficiency guideline — AUA clinical guideline, reaffirmed 2024',
+      'Bhasin S et al., Endocrine Society guideline — testosterone therapy in men with hypogonadism, J Clin Endocrinol Metab 2018',
       'Rosner W et al. Position statement on testosterone and SHBG measurement challenges',
       'Free testosterone calculation vs equilibrium dialysis literature themes',
     ],
@@ -775,5 +777,272 @@ export const PHASE3_ANSWER_SEEDS = [
     aboutCondition: 'Male hypogonadism and sex hormone-binding globulin',
     reviewerSlug: 'dr-sneh-pandey',
     cornerstoneBlog: '/blog/free-testosterone-vs-total-testosterone-what-patients-should-know',
+  },
+  {
+    slug: 'which-preventive-blood-tests-adults',
+    question: 'Which preventive blood tests do adults usually need?',
+    metaDescription:
+      'Adults often need individualized preventive labs—CBC, metabolic panel, lipids, and A1c when risk supports them—not a shopping list of every test. Learn what is commonly ordered and when to review results with a clinician.',
+    shortAnswer:
+      'There is no single “everyone gets these” blood panel. For many adults, clinicians commonly consider a complete blood count (CBC), a metabolic panel (kidney, liver, electrolytes, glucose context), a lipid panel, and hemoglobin A1c when age, family history, weight trend, blood pressure, or prior results support screening or monitoring. Thyroid, iron studies, vitamin B12, and other markers are added when history suggests them—not by default. Preventive labs establish baselines and track cardiometabolic risk over time; they do not replace blood pressure checks, cancer screening guidance, or a clinical conversation. Siya Health helps decide what is indicated and interprets results in context. Laboratory ordering logistics are separate from clinical judgment.',
+    sections: [
+      {
+        id: 'why-individualize',
+        heading: 'Why preventive labs are individualized',
+        paragraphs: [
+          'Guidelines and primary-care practice emphasize risk-based screening—not ordering every available marker “just in case.” Age, sex, pregnancy plans, medications, family history of diabetes or early heart disease, waist trend, and prior abnormal values all change what is worth checking this year.',
+          'More tests are not automatically better care. Extra markers can create false alarms, cascade testing, and cost without improving decisions. A calm plan usually starts with a short set of high-yield baselines, then expands only when symptoms or risk justify it.',
+          'People searching “annual blood work checklist” or “what labs should I get at 40” often want certainty. The honest clinical answer is a short list of common options plus a clinician who knows your history—not a universal shopping cart.',
+        ],
+      },
+      {
+        id: 'common-preventive-set',
+        heading: 'Tests adults often discuss',
+        listItems: [
+          'Complete blood count (CBC) — blood-count baseline and anemia clues when indicated.',
+          'Comprehensive or basic metabolic panel — kidney, liver, electrolytes, and glucose context.',
+          'Lipid panel — cholesterol and related cardiovascular risk markers.',
+          'Hemoglobin A1c — average blood sugar when screening or monitoring is appropriate.',
+          'Blood pressure and waist trend — not blood tests, but essential preventive context alongside labs.',
+        ],
+        paragraphs: [
+          'Thyroid (TSH), ferritin/iron studies, vitamin B12, and liver-focused follow-up appear when symptoms, diet, medications, heavy periods, neurologic changes, or prior results point that way. They are not automatic annual add-ons for every healthy adult.',
+          'Explore commonly ordered preventive options on Siya’s labs hub under preventive labs, then bring results back for interpretation—ordering logistics alone are not a diagnosis visit.',
+        ],
+      },
+      {
+        id: 'what-labs-cannot-do',
+        heading: 'What preventive blood tests cannot do',
+        listItems: [
+          'Replace history, exam findings, or age-appropriate cancer screening conversations.',
+          'Guarantee lifelong health when every number sits inside a reference range.',
+          'Diagnose sleep apnea, ADHD, depression, or burnout from a CBC alone.',
+          'Substitute for urgent evaluation of chest pain, severe shortness of breath, or other emergencies.',
+        ],
+        paragraphs: [
+          '“Normal” reference ranges are statistical bands for a lab’s method—not personalized wellness targets. Pair this guide with the Health Guide on why normal labs do not mean you are healthy when fatigue, cravings, or poor sleep persist despite green checkmarks.',
+        ],
+      },
+      {
+        id: 'siya-vs-logistics',
+        heading: 'Interpretation vs ordering logistics',
+        paragraphs: [
+          'Siya Health owns clinical interpretation: what to order, what the pattern means with your symptoms and medications, and whether follow-up care fits. Transparent direct-pay lab ordering handles logistics (scheduling draws, transmitting results)—it is not a substitute for a clinician’s read.',
+          'After results arrive, use how-to-read guidance to stay calm about reference ranges, then schedule review when findings are confusing, flagged, or connected to symptoms. Primary and urgent care pathways can set the annual wellness conversation; follow-up plan pricing is separate from lab order fees.',
+        ],
+      },
+      {
+        id: 'how-often',
+        heading: 'How often to repeat preventive labs',
+        paragraphs: [
+          'Intervals depend on prior results, risk factors, and clinical judgment—not a one-size-fits-all calendar. Someone with stable lipids and low cardiometabolic risk may recheck less often than someone with rising triglycerides, prediabetes-range A1c, or new medications that affect labs.',
+          'Bring prior reports when possible. Trends beat single snapshots. If you only have one portal PDF, a clinician can still help prioritize what to repeat and what can wait.',
+        ],
+      },
+      {
+        id: 'key-takeaways',
+        heading: 'Key takeaways',
+        listItems: [
+          'Common adult preventive sets often include CBC, metabolic panel, lipids, and A1c when risk supports them.',
+          'Individualize—more markers are not automatically better.',
+          'Siya interprets; lab logistics do not replace clinical judgment.',
+          'Normal ranges ≠ a full preventive plan.',
+        ],
+        paragraphs: [
+          'Start Secure Medical Chat or a meet-and-greet when you want help choosing a thoughtful panel before you order tests. Browse preventive lab education on the labs hub, then return for interpretation and ongoing care when appropriate.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Which preventive blood tests do adults usually need?',
+        answer:
+          'Many adults discuss CBC, a metabolic panel, lipids, and A1c when age and risk support them. Additional tests (thyroid, iron, B12, and others) are added based on history—not as a universal checklist.',
+      },
+      {
+        question: 'Do I need the same labs every year?',
+        answer:
+          'Not necessarily. Repeat intervals depend on prior results, risk factors, medications, and symptoms. Your clinician individualizes timing.',
+      },
+      {
+        question: 'Are normal preventive labs a clean bill of health?',
+        answer:
+          'No. Reference ranges screen specific markers at one point in time. Symptoms, blood pressure, sleep, and family history still matter.',
+      },
+      {
+        question: 'Who interprets my lab results at Siya Health?',
+        answer:
+          'Siya clinicians interpret findings in clinical context. Laboratory ordering partners handle logistics only—they do not replace physician-led interpretation or follow-up planning.',
+      },
+      {
+        question: 'Do I need insurance for preventive labs?',
+        answer:
+          'Siya’s laboratory pathway is designed for transparent direct-pay access. Insurance coverage is not guaranteed. Visit fees and follow-up plans are separate from lab order pricing—see /pricing.',
+      },
+      {
+        question: 'What should I do after I get results?',
+        answer:
+          'Save the full report, avoid panicking over a single flag, read how-to-read guidance, and book clinician review when results are confusing, abnormal, or tied to symptoms.',
+      },
+    ],
+    evidence: [
+      'USPSTF recommendations on lipid disorders screening in adults (clinical summary)',
+      'ADA Standards of Care in Diabetes—screening and diagnostic criteria themes (2025)',
+      'USPSTF hypertension screening in adults—blood pressure as essential preventive context',
+      'CDC / preventive clinical services education themes for cardiometabolic risk',
+      'AACE obesity and cardiometabolic clinical guidance (algorithm summaries)',
+    ],
+    learnMore: [
+      { href: '/labs/preventive', label: 'Preventive & wellness labs' },
+      { href: '/labs/how-to-read-results', label: 'How to read your lab results' },
+      { href: '/primary-urgent-care', label: 'Primary & urgent care' },
+      { href: '/pricing', label: 'Follow-up plans & pricing' },
+      { href: '/labs', label: 'Labs & blood tests hub' },
+      { href: '/answers/why-normal-labs-dont-mean-healthy', label: "Why normal labs don't mean healthy" },
+      { href: '/answers/what-to-do-after-lab-results', label: 'What to do after lab results' },
+    ],
+    related: [
+      'why-normal-labs-dont-mean-healthy',
+      'what-to-do-after-lab-results',
+      'what-is-insulin-resistance',
+      'normal-a1c-insulin-resistance',
+      'why-am-i-tired-even-after-sleeping',
+      'meet-and-greet-telehealth-expectations',
+    ],
+    topic: 'weight-loss',
+    hubCategories: ['metabolic', 'telehealth'],
+    aboutCondition: 'Preventive health screening and cardiometabolic laboratory testing',
+    reviewerSlug: 'dr-sneh-pandey',
+    cornerstoneBlog: '/blog/insulin-resistance-and-weight-loss-clinician-overview',
+  },
+  {
+    slug: 'what-to-do-after-lab-results',
+    question: 'What to do after you get lab results',
+    metaDescription:
+      'Got lab results? Save the full report, don’t panic over one number, and bring findings to a clinician for interpretation. Learn calm next steps—not DIY diagnosis from a portal PDF.',
+    shortAnswer:
+      'After labs arrive: save the full report (not only a screenshot of one line), note symptoms and medications, and avoid treating a single flag—or a fully green portal—as a complete diagnosis. Reference ranges are statistical bands for a lab’s method, not automatic disease labels. Mild outliers are common and often need context or a repeat; “normal” results can still miss sleep, mood, or early metabolic strain. Siya Health owns interpretation: a licensed clinician puts values next to your history and discusses next steps. Ordering logistics get results to you—they do not replace clinical review. When you are unsure, book a meet-and-greet or visit rather than starting supplements from social media alone.',
+    sections: [
+      {
+        id: 'first-24-hours',
+        heading: 'A calm first pass',
+        listItems: [
+          'Save the complete PDF or portal export with units, reference intervals, and collection date.',
+          'Write down symptoms, sleep, new medications, supplements, and whether you were fasting.',
+          'Circle values that are new, sharply changed from prior labs, or marked critical by the lab.',
+          'Do not start or stop prescription medicines based on a DIY read of one number.',
+        ],
+        paragraphs: [
+          'Most people feel a jolt when a portal lights up red or green. Pause. One value is a data point. Clinicians look at trends, related markers, and how you feel before deciding what matters.',
+          'Read Siya’s how-to-read-results guide for a frame on reference ranges—then decide whether you need a human review this week or a routine follow-up.',
+        ],
+      },
+      {
+        id: 'normal-vs-abnormal',
+        heading: 'What “normal” and “abnormal” usually mean',
+        paragraphs: [
+          'Reference intervals describe where most values fall for that lab’s method and population—not your personal “healthy” target. A mild flag can be insignificant. A result inside the band can still matter if it conflicts with symptoms, family history, or prior trends.',
+          'Critical or urgently flagged values (for example, severely abnormal potassium, glucose, or blood counts) warrant prompt clinical contact or emergency care—not waiting for a blog post. When in doubt about urgency, call your clinician or use local emergency services.',
+          'This page is educational. It does not diagnose disease from a screenshot.',
+        ],
+      },
+      {
+        id: 'bring-results-to-siya',
+        heading: 'Bring results back to Siya',
+        paragraphs: [
+          'Siya owns clinical interpretation and follow-up planning. Whether labs were ordered through Siya’s transparent direct-pay pathway or elsewhere, you can bring prior results to a visit when appropriate. We help put findings in context with symptoms, medications, and goals—without treating a portal PDF as a diagnosis.',
+          'Laboratory partners handle draw logistics and result delivery. They do not replace a physician-led conversation about what to repeat, what to watch, or whether a follow-up plan fits.',
+          'If you want a low-pressure logistics conversation first, book a free meet-and-greet. For ongoing monitoring after abnormal or borderline findings, review follow-up plan pricing separately from lab order fees.',
+        ],
+      },
+      {
+        id: 'when-to-book',
+        heading: 'When to book interpretation soon',
+        listItems: [
+          'Symptoms still do not make sense after reading the report.',
+          'Multiple markers are flagged, or values changed sharply from prior labs.',
+          'You ordered direct-pay labs and want help choosing what matters next.',
+          'You are unsure whether lifestyle change, further testing, or medication review is appropriate.',
+        ],
+        paragraphs: [
+          'Seek urgent or emergency care for chest pain, severe shortness of breath, suicidal thoughts, fainting, uncontrolled bleeding, or other emergency symptoms—do not wait for a routine telehealth slot.',
+          'For non-urgent confusion, a scheduled visit beats spiraling through forums overnight. Pair this guide with preventive-lab education if you are still choosing what to order next year.',
+        ],
+      },
+      {
+        id: 'key-takeaways',
+        heading: 'Key takeaways',
+        listItems: [
+          'Save the full report; one screenshot is incomplete.',
+          'Reference ranges ≠ diagnoses.',
+          'Siya interprets; logistics partners deliver results only.',
+          'Book review when results are confusing, flagged, or tied to symptoms.',
+        ],
+        paragraphs: [
+          'Start with how-to-read guidance, then meet-and-greet or a clinical visit when you need interpretation. Browse pricing when you are ready for ongoing follow-up—not as a substitute for understanding today’s numbers.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What should I do right after I get lab results?',
+        answer:
+          'Save the full report, note symptoms and medications, avoid DIY diagnosis from one flag, and schedule clinician review when results are confusing, abnormal, or linked to how you feel.',
+      },
+      {
+        question: 'Does an abnormal result mean I have a disease?',
+        answer:
+          'Not automatically. Reference ranges are statistical norms. Mild outliers often need context or confirmation. Clinicians interpret patterns—not single arrows on a portal.',
+      },
+      {
+        question: 'Can Siya interpret labs I ordered elsewhere?',
+        answer:
+          'Yes, when you are a Siya patient or book an appropriate visit. Bring prior results; we put findings in clinical context rather than treating a screenshot as a diagnosis.',
+      },
+      {
+        question: 'Who interprets labs—Siya or the laboratory?',
+        answer:
+          'Siya clinicians own interpretation and care planning. Laboratory ordering logistics get blood drawn and results delivered; they do not replace clinical judgment.',
+      },
+      {
+        question: 'Should I panic about one abnormal number?',
+        answer:
+          'Usually not. One value is a data point. Trends, related markers, and symptoms matter more. Critical flags still deserve prompt clinical contact.',
+      },
+      {
+        question: 'What if all my labs look normal but I still feel unwell?',
+        answer:
+          'Normal screening labs do not rule out sleep apnea, early metabolic strain, mood conditions, or other issues. Discuss symptoms and next steps with a clinician—see also our guide on why normal labs do not mean healthy.',
+      },
+    ],
+    evidence: [
+      'Clinical laboratory medicine teaching themes—reference intervals vs diagnosis',
+      'ADA Standards of Care—glycemic and lipid monitoring in context (2025)',
+      'USPSTF screening frameworks—test selection and follow-up as clinical decisions',
+      'NIDDK patient education themes on lab results and diabetes/prediabetes discussion',
+      'Choosing Wisely / high-value care themes—avoid cascade testing from isolated mild abnormalities',
+    ],
+    learnMore: [
+      { href: '/labs/how-to-read-results', label: 'How to read your lab results' },
+      { href: '/redirect/meet-greet', label: 'Book a free meet & greet' },
+      { href: '/pricing', label: 'Follow-up plans & pricing' },
+      { href: '/labs', label: 'Labs & blood tests hub' },
+      { href: '/labs/preventive', label: 'Preventive & wellness labs' },
+      { href: '/answers/which-preventive-blood-tests-adults', label: 'Which preventive blood tests adults need' },
+      { href: '/answers/why-normal-labs-dont-mean-healthy', label: "Why normal labs don't mean healthy" },
+    ],
+    related: [
+      'which-preventive-blood-tests-adults',
+      'why-normal-labs-dont-mean-healthy',
+      'meet-and-greet-telehealth-expectations',
+      'what-is-insulin-resistance',
+      'normal-a1c-insulin-resistance',
+      'why-am-i-tired-even-after-sleeping',
+    ],
+    topic: 'telehealth',
+    hubCategories: ['metabolic', 'telehealth'],
+    aboutCondition: 'Laboratory result interpretation and preventive follow-up',
+    reviewerSlug: 'dr-sneh-pandey',
+    cornerstoneBlog: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
   },
 ];

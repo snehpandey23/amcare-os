@@ -1,0 +1,193 @@
+# creative-opportunities.yaml
+# Compiled from women-hormones-adhd foundation research
+# Status: Idea — awaiting founder approval of NUANCES.md
+
+source: extract.yaml
+pillar: women-hormones-adhd
+pillar_url: /blog/adhd-hormones-women
+priority: High
+clinical_review: Required
+
+items:
+  # Recognition
+  - id: WH-R-01
+    family: R
+    layout: R-01
+    journey_stage: Recognizing
+    emotion: Overwhelmed
+    insight: I1
+    hook: "Why is my ADHD so much worse before my period?"
+    cta: Screening
+    cta_label: Take Free ADHD Screening
+    platforms: [Instagram, Facebook, Pinterest]
+
+  - id: WH-R-02
+    family: R
+    layout: R-02
+    journey_stage: Recognizing
+    emotion: Exhausted
+    insight: I3
+    hook: "The coping strategies that worked for 20 years stopped working in my 40s."
+    cta: MeetGreet
+    cta_label: Book Free Meet & Greet
+    platforms: [LinkedIn-Company, LinkedIn-Founder, Facebook]
+
+  - id: WH-R-03
+    family: R
+    layout: R-03
+    journey_stage: Recognizing
+    emotion: Validated
+    insight: I7
+    hook: "Carousels: does this sound like hormonal ADHD shifts?"
+    cta: Screening
+    platforms: [Instagram, Facebook]
+
+  - id: WH-R-04
+    family: R
+    layout: R-04
+    journey_stage: Recognizing
+    emotion: Frustrated
+    insight: I4
+    hook: "My ADHD meds suddenly feel like they stopped working."
+    cta: MeetGreet
+    platforms: [Instagram, X, LinkedIn-Founder]
+
+  # Explanation
+  - id: WH-E-01
+    family: E
+    layout: E-02
+    journey_stage: Considering
+    emotion: Curious
+    insight: I2
+    hook: "Estrogen, dopamine, and attention — in plain language"
+    cta: Article
+    platforms: [LinkedIn-Company, LinkedIn-Founder, YouTube]
+
+  - id: WH-E-02
+    family: E
+    layout: E-01
+    journey_stage: Considering
+    emotion: Curious
+    insight: I1
+    hook: "What happens to ADHD across the menstrual cycle?"
+    cta: Article
+    platforms: [Instagram, Pinterest, Facebook]
+
+  - id: WH-E-03
+    family: E
+    layout: E-02
+    journey_stage: Considering
+    emotion: Hopeful
+    insight: I3
+    hook: "Perimenopause brain fog vs ADHD — how clinicians tell them apart"
+    cta: MeetGreet
+    platforms: [LinkedIn-Company, YouTube, Facebook]
+
+  # Myth
+  - id: WH-M-01
+    family: M
+    layout: M-02
+    journey_stage: Considering
+    emotion: Relieved
+    insight: I6
+    hook: "Myth: Hormones cause ADHD. Reality: They can change how ADHD feels."
+    cta: Article
+    platforms: [Instagram, X, Facebook, Pinterest]
+
+  - id: WH-M-02
+    family: M
+    layout: M-01
+    journey_stage: Considering
+    emotion: Relieved
+    insight: I3
+    hook: "Myth: You can't be diagnosed with ADHD for the first time in your 40s."
+    cta: Screening
+    platforms: [Facebook, Instagram, LinkedIn-Company]
+
+  # Research
+  - id: WH-RS-01
+    family: RS
+    layout: RS-02
+    journey_stage: Considering
+    emotion: Curious
+    insight: I1
+    hook: "What a 2025 systematic review actually says about ADHD & sex hormones"
+    clinical_review: true
+    cta: Article
+    platforms: [LinkedIn-Company, LinkedIn-Founder, X]
+
+  - id: WH-RS-02
+    family: RS
+    layout: RS-01
+    journey_stage: Evaluating
+    emotion: Hopeful
+    insight: I5
+    hook: "Premenstrual stimulant adjustment — early evidence, not a DIY protocol"
+    clinical_review: true
+    cta: MeetGreet
+    platforms: [LinkedIn-Founder, LinkedIn-Company]
+
+  # Physician Perspective
+  - id: WH-PP-01
+    family: PP
+    layout: PP-02
+    journey_stage: Recognizing
+    emotion: Validated
+    insight: I3
+    hook: "I keep seeing women whose ADHD finally became undeniable in perimenopause."
+    cta: MeetGreet
+    platforms: [LinkedIn-Founder, Instagram, Facebook]
+
+  - id: WH-PP-02
+    family: PP
+    layout: PP-01
+    journey_stage: Considering
+    emotion: Hopeful
+    insight: I8
+    hook: "We ask about your cycle, sleep, and mood — not just focus."
+    cta: MeetGreet
+    platforms: [LinkedIn-Founder, LinkedIn-Company]
+
+  # Process
+  - id: WH-PR-01
+    family: PR
+    layout: PR-01
+    journey_stage: Evaluating
+    emotion: Hopeful
+    insight: I7
+    hook: "What a women-informed ADHD evaluation includes"
+    cta: MeetGreet
+    platforms: [Instagram, Facebook, YouTube, Pinterest]
+
+  # Proof / Action
+  - id: WH-PF-01
+    family: PF
+    layout: PF-02
+    journey_stage: Considering
+    emotion: Hopeful
+    insight: I7
+    hook: "Women-founded. Women-run. Built for the ADHD presentation research missed."
+    cta: MeetGreet
+    platforms: [LinkedIn-Company, Instagram, Facebook]
+
+  - id: WH-A-01
+    family: A
+    layout: A-01
+    journey_stage: Recognizing
+    emotion: Hopeful
+    insight: I1
+    hook: "Not sure if it's hormones, ADHD, or both? Start with free screening."
+    cta: Screening
+    cta_label: Take Free ADHD Screening
+    platforms: [Instagram, Facebook, Pinterest, X]
+
+  - id: WH-A-02
+    family: A
+    layout: A-02
+    journey_stage: Evaluating
+    emotion: Hopeful
+    insight: I3
+    hook: "Talk through your history before committing to evaluation."
+    cta: MeetGreet
+    cta_label: Book Free Meet & Greet
+    platforms: [LinkedIn-Company, Facebook, Instagram]

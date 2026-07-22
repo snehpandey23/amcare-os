@@ -1,0 +1,28 @@
+id: 2026-07-R-03-002
+topic: sleep
+intent: Education
+family: Recognition
+layout: R-03
+journey_stage: Considering
+persona: Adult_Fatigue
+emotion: Curious
+tone: Direct
+message: Your focus didn't disappear. Your sleep might be stealing it.
+image: Editorial Photography
+image_category: sleep
+image_ref: docs/guides/poor-sleep-feels-like-adhd-SOCIAL-HOOKS.md
+headline_length: Medium
+caption_length: Long
+cta: Article
+cta_label: Read the Guide
+evidence_level: ClinicalPractice
+clinical_review: true
+platforms:
+  - LinkedIn
+  - Instagram
+variants: 1
+claims_ok: true
+source_refs:
+  - /answers/poor-sleep-feels-like-adhd
+status: seed
+source: SOCIAL-HOOKS Hook 1

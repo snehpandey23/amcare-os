@@ -28,6 +28,19 @@
       card.hidden = !show;
       if (show) visible += 1;
     });
+
+    // Hide empty category headings when a group has no visible cards
+    document.querySelectorAll('.provider-index-grid').forEach(function (grid) {
+      var heading = grid.previousElementSibling;
+      var anyVisible = Array.prototype.some.call(grid.querySelectorAll('.provider-index-card'), function (c) {
+        return !c.hidden;
+      });
+      grid.hidden = !anyVisible;
+      if (heading && heading.classList && heading.classList.contains('section-header')) {
+        heading.hidden = !anyVisible;
+      }
+    });
+
     if (statusEl) {
       var parts = [];
       if (active.state !== 'all') parts.push('licensed in ' + active.state);

@@ -14,7 +14,7 @@ Paste this document into a new ChatGPT session as project memory. Do not assume 
 
 Siya Health is a **multi-state telehealth practice** focused on **adult ADHD evaluation and ongoing care**, with expanding lines in **medical weight loss (GLP-1)**, **men's health / testosterone**, and **membership-style primary care**. Patient acquisition flows through:
 
-- Free ADHD screening (ASRS) → evaluation ($199) → ongoing care / membership
+- Free ADHD screening (ASRS) → evaluation ($149) → ongoing care / membership
 - Meet & Greet discovery calls → GHL booking form
 - SEO content (Health Guides, blog, geo pages) → conversion CTAs
 
@@ -56,7 +56,7 @@ Provider licenses displayed for **transparency**; they do **not** expand service
 
 ## Growth goals
 
-1. **ADHD remains primary acquisition channel** (screening → $199 evaluation → care)
+1. **ADHD remains primary acquisition channel** (screening → $149 evaluation → care)
 2. **Weight loss / GLP-1** — second revenue line (TX, CA leads)
 3. **Men's health / testosterone** — Derek-led (TX)
 4. **Membership primary care** — DPC model (Vanessa Urbina in-person + telehealth expansion)

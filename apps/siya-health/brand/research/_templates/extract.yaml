@@ -1,0 +1,18 @@
+# extract.yaml template
+
+```yaml
+citation: ""
+url: ""
+year: null
+evidence_level: PeerReviewed   # PeerReviewed | ClinicalPractice | Experiential
+clinical_review_required: true
+insights:
+  - id: I1
+    claim: ""
+    patient_why: ""
+    emotion_hint: Curious
+limitations:
+  - ""
+out_of_scope:
+  - ""
+```

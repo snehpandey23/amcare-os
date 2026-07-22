@@ -41,7 +41,7 @@
       <div class="hero-trust-bar">
         <span>1,000+ Adults Evaluated</span>
         <span>Same-Week Appointments</span>
-        <span>$199 Transparent Pricing</span>
+        <span>$149 Transparent Pricing</span>
         <span>HIPAA-Compliant</span>
       </div>
     </div>

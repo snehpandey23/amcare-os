@@ -1110,7 +1110,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/minoxidil-hair-loss-does-it-work",
+      "path": "/blog/minoxidil-for-hair-loss-does-it-work",
       "type": "guide",
       "title": "How long does minoxidil take to show hair results?",
       "h1": "How long does minoxidil take to show hair results?",
@@ -1150,7 +1150,7 @@
       ],
       "duplicateOf": "https://siya.health/blog/minoxidil-for-hair-loss-does-it-work",
       "cannibalization": {
-        "guide": "/answers/minoxidil-hair-loss-does-it-work",
+        "guide": "/blog/minoxidil-for-hair-loss-does-it-work",
         "blog": "/blog/minoxidil-for-hair-loss-does-it-work",
         "classification": "Duplicate",
         "owner": "Blog",
@@ -1159,7 +1159,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/sildenafil-erectile-dysfunction-expectations",
+      "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "type": "guide",
       "title": "How long does it take sildenafil to work?",
       "h1": "How long does it take sildenafil to work?",
@@ -1199,7 +1199,7 @@
       ],
       "duplicateOf": "https://siya.health/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "cannibalization": {
-        "guide": "/answers/sildenafil-erectile-dysfunction-expectations",
+        "guide": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
         "blog": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
         "classification": "Duplicate",
         "owner": "Blog",
@@ -1484,7 +1484,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/oral-vs-injectable-weight-loss-meds",
+      "path": "/blog/oral-vs-injectable-weight-loss-medications",
       "type": "guide",
       "title": "When might oral weight-loss medication be preferred over injectable GLP-1?",
       "h1": "When might oral weight-loss medication be preferred over injectable GLP-1?",
@@ -1524,7 +1524,7 @@
       ],
       "duplicateOf": "https://siya.health/blog/oral-vs-injectable-weight-loss-medications",
       "cannibalization": {
-        "guide": "/answers/oral-vs-injectable-weight-loss-meds",
+        "guide": "/blog/oral-vs-injectable-weight-loss-medications",
         "blog": "/blog/oral-vs-injectable-weight-loss-medications",
         "classification": "Duplicate",
         "owner": "Blog",
@@ -1533,7 +1533,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/phentermine-weight-loss-safety",
+      "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
       "type": "guide",
       "title": "Who should avoid phentermine for weight loss?",
       "h1": "Who should avoid phentermine for weight loss?",
@@ -1573,7 +1573,7 @@
       ],
       "duplicateOf": "https://siya.health/blog/phentermine-for-weight-loss-safety-and-effectiveness",
       "cannibalization": {
-        "guide": "/answers/phentermine-weight-loss-safety",
+        "guide": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
         "blog": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
         "classification": "Duplicate",
         "owner": "Blog",
@@ -1625,7 +1625,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/tirzepatide-vs-semaglutide",
+      "path": "/blog/tirzepatide-vs-semaglutide-which-is-better",
       "type": "guide",
       "title": "Who might consider tirzepatide instead of semaglutide?",
       "h1": "Who might consider tirzepatide instead of semaglutide?",
@@ -1665,7 +1665,7 @@
       ],
       "duplicateOf": "https://siya.health/blog/tirzepatide-vs-semaglutide-which-is-better",
       "cannibalization": {
-        "guide": "/answers/tirzepatide-vs-semaglutide",
+        "guide": "/blog/tirzepatide-vs-semaglutide-which-is-better",
         "blog": "/blog/tirzepatide-vs-semaglutide-which-is-better",
         "classification": "Duplicate",
         "owner": "Blog",
@@ -1676,8 +1676,8 @@
     {
       "path": "/answers/what-included-199-adhd-evaluation",
       "type": "guide",
-      "title": "What is included in Siya Health’s $199 ADHD evaluation?",
-      "h1": "What is included in Siya Health’s $199 ADHD evaluation?",
+      "title": "What is included in Siya Health’s $149 ADHD evaluation?",
+      "h1": "What is included in Siya Health’s $149 ADHD evaluation?",
       "wordCount": 382,
       "mainWords": 382,
       "pillar": "ADHD",
@@ -1717,7 +1717,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/adhd-in-men",
+      "path": "/answers/signs-of-adult-adhd",
       "type": "guide",
       "title": "How does adult ADHD present in men?",
       "h1": "How does adult ADHD present in men?",
@@ -3267,7 +3267,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/blog/long-term-weight-loss-medications-what-to-expect",
+      "path": "/blog/semaglutide-for-weight-loss-how-it-works",
       "type": "blog",
       "title": "Long-Term Weight Loss Medications: What to Expect in 2026",
       "h1": "Long-Term Weight Loss Medications: What to Expect (2026)",
@@ -3832,7 +3832,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+      "path": "/answers/adhd-and-weight-loss-connection",
       "type": "blog",
       "title": "Combining ADHD Treatment & Weight Loss Strategies (2026)",
       "h1": "Combining ADHD Treatment and Weight Loss Strategies (2026)",
@@ -4674,7 +4674,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/blog/after-adhd-diagnosis-next-steps-adults",
+      "path": "/answers/starting-adhd-medication-adults",
       "type": "blog",
       "title": "What Happens After an ADHD Diagnosis? Next Steps for Adults",
       "h1": "What Happens After an ADHD Diagnosis? Next Steps for Adults",
@@ -4889,7 +4889,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/blog/adhd-medication-online-texas-telehealth",
+      "path": "/blog/online-adhd-diagnosis-texas",
       "type": "blog",
       "title": "Can You Get ADHD Medication Online in Texas? Rules & Safety",
       "h1": "Can You Get ADHD Medication Online in Texas? Here's What's Allowed",
@@ -5398,7 +5398,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/adhd-in-men",
+      "path": "/answers/signs-of-adult-adhd",
       "type": "guide",
       "title": "How does adult ADHD present in men?",
       "h1": "How does adult ADHD present in men?",
@@ -5570,7 +5570,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/creyos-adhd-testing-explained",
+      "path": "/creyos-adhd-testing",
       "type": "guide",
       "title": "What is Creyos cognitive testing for ADHD?",
       "h1": "What is Creyos cognitive testing for ADHD?",
@@ -5785,7 +5785,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/non-stimulant-adhd-medications",
+      "path": "/blog/non-stimulant-adhd-medications-explained",
       "type": "guide",
       "title": "When are non-stimulant ADHD medications considered first?",
       "h1": "When are non-stimulant ADHD medications considered first?",
@@ -5825,7 +5825,7 @@
       ],
       "duplicateOf": "https://siya.health/blog/non-stimulant-adhd-medications-explained",
       "cannibalization": {
-        "guide": "/answers/non-stimulant-adhd-medications",
+        "guide": "/blog/non-stimulant-adhd-medications-explained",
         "blog": "/blog/non-stimulant-adhd-medications-explained",
         "classification": "Duplicate",
         "owner": "Blog",
@@ -6147,7 +6147,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/oral-vs-injectable-weight-loss-meds",
+      "path": "/blog/oral-vs-injectable-weight-loss-medications",
       "type": "guide",
       "title": "When might oral weight-loss medication be preferred over injectable GLP-1?",
       "h1": "When might oral weight-loss medication be preferred over injectable GLP-1?",
@@ -6187,7 +6187,7 @@
       ],
       "duplicateOf": "https://siya.health/blog/oral-vs-injectable-weight-loss-medications",
       "cannibalization": {
-        "guide": "/answers/oral-vs-injectable-weight-loss-meds",
+        "guide": "/blog/oral-vs-injectable-weight-loss-medications",
         "blog": "/blog/oral-vs-injectable-weight-loss-medications",
         "classification": "Duplicate",
         "owner": "Blog",
@@ -6196,7 +6196,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/phentermine-weight-loss-safety",
+      "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
       "type": "guide",
       "title": "Who should avoid phentermine for weight loss?",
       "h1": "Who should avoid phentermine for weight loss?",
@@ -6236,7 +6236,7 @@
       ],
       "duplicateOf": "https://siya.health/blog/phentermine-for-weight-loss-safety-and-effectiveness",
       "cannibalization": {
-        "guide": "/answers/phentermine-weight-loss-safety",
+        "guide": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
         "blog": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
         "classification": "Duplicate",
         "owner": "Blog",
@@ -6288,7 +6288,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/tirzepatide-vs-semaglutide",
+      "path": "/blog/tirzepatide-vs-semaglutide-which-is-better",
       "type": "guide",
       "title": "Who might consider tirzepatide instead of semaglutide?",
       "h1": "Who might consider tirzepatide instead of semaglutide?",
@@ -6328,7 +6328,7 @@
       ],
       "duplicateOf": "https://siya.health/blog/tirzepatide-vs-semaglutide-which-is-better",
       "cannibalization": {
-        "guide": "/answers/tirzepatide-vs-semaglutide",
+        "guide": "/blog/tirzepatide-vs-semaglutide-which-is-better",
         "blog": "/blog/tirzepatide-vs-semaglutide-which-is-better",
         "classification": "Duplicate",
         "owner": "Blog",
@@ -6339,8 +6339,8 @@
     {
       "path": "/answers/what-included-199-adhd-evaluation",
       "type": "guide",
-      "title": "What is included in Siya Health’s $199 ADHD evaluation?",
-      "h1": "What is included in Siya Health’s $199 ADHD evaluation?",
+      "title": "What is included in Siya Health’s $149 ADHD evaluation?",
+      "h1": "What is included in Siya Health’s $149 ADHD evaluation?",
       "wordCount": 382,
       "mainWords": 382,
       "pillar": "ADHD",
@@ -6478,7 +6478,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/minoxidil-hair-loss-does-it-work",
+      "path": "/blog/minoxidil-for-hair-loss-does-it-work",
       "type": "guide",
       "title": "How long does minoxidil take to show hair results?",
       "h1": "How long does minoxidil take to show hair results?",
@@ -6518,7 +6518,7 @@
       ],
       "duplicateOf": "https://siya.health/blog/minoxidil-for-hair-loss-does-it-work",
       "cannibalization": {
-        "guide": "/answers/minoxidil-hair-loss-does-it-work",
+        "guide": "/blog/minoxidil-for-hair-loss-does-it-work",
         "blog": "/blog/minoxidil-for-hair-loss-does-it-work",
         "classification": "Duplicate",
         "owner": "Blog",
@@ -6527,7 +6527,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/sildenafil-erectile-dysfunction-expectations",
+      "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "type": "guide",
       "title": "How long does it take sildenafil to work?",
       "h1": "How long does it take sildenafil to work?",
@@ -6567,7 +6567,7 @@
       ],
       "duplicateOf": "https://siya.health/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "cannibalization": {
-        "guide": "/answers/sildenafil-erectile-dysfunction-expectations",
+        "guide": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
         "blog": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
         "classification": "Duplicate",
         "owner": "Blog",
@@ -6688,7 +6688,7 @@
       "rationale": "Near-duplicate or subset topic — consolidate link equity into stronger canonical article."
     },
     {
-      "source": "/blog/adderall-ir-vs-xr-adults",
+      "source": "/blog/vyvanse-vs-adderall-differences",
       "target": "/blog/vyvanse-vs-adderall-differences",
       "classification": "MERGE",
       "rationale": "Near-duplicate or subset topic — consolidate link equity into stronger canonical article."
@@ -6706,7 +6706,7 @@
       "rationale": "Near-duplicate or subset topic — consolidate link equity into stronger canonical article."
     },
     {
-      "source": "/blog/adhd-treatment-houston-online",
+      "source": "/blog/online-adhd-diagnosis-texas",
       "target": "/blog/online-adhd-diagnosis-texas",
       "classification": "MERGE",
       "rationale": "Near-duplicate or subset topic — consolidate link equity into stronger canonical article."
@@ -6718,7 +6718,7 @@
       "rationale": "Near-duplicate or subset topic — consolidate link equity into stronger canonical article."
     },
     {
-      "source": "/blog/focalin-vs-adderall-comparison",
+      "source": "/blog/vyvanse-vs-adderall-differences",
       "target": "/blog/vyvanse-vs-adderall-differences",
       "classification": "MERGE",
       "rationale": "Near-duplicate or subset topic — consolidate link equity into stronger canonical article."
@@ -6863,7 +6863,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/adhd-in-men",
+      "path": "/answers/signs-of-adult-adhd",
       "type": "guide",
       "title": "How does adult ADHD present in men?",
       "h1": "How does adult ADHD present in men?",
@@ -7489,7 +7489,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/creyos-adhd-testing-explained",
+      "path": "/creyos-adhd-testing",
       "type": "guide",
       "title": "What is Creyos cognitive testing for ADHD?",
       "h1": "What is Creyos cognitive testing for ADHD?",
@@ -8354,7 +8354,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/minoxidil-hair-loss-does-it-work",
+      "path": "/blog/minoxidil-for-hair-loss-does-it-work",
       "type": "guide",
       "title": "How long does minoxidil take to show hair results?",
       "h1": "How long does minoxidil take to show hair results?",
@@ -8394,7 +8394,7 @@
       ],
       "duplicateOf": "https://siya.health/blog/minoxidil-for-hair-loss-does-it-work",
       "cannibalization": {
-        "guide": "/answers/minoxidil-hair-loss-does-it-work",
+        "guide": "/blog/minoxidil-for-hair-loss-does-it-work",
         "blog": "/blog/minoxidil-for-hair-loss-does-it-work",
         "classification": "Duplicate",
         "owner": "Blog",
@@ -8403,7 +8403,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/non-stimulant-adhd-medications",
+      "path": "/blog/non-stimulant-adhd-medications-explained",
       "type": "guide",
       "title": "When are non-stimulant ADHD medications considered first?",
       "h1": "When are non-stimulant ADHD medications considered first?",
@@ -8443,7 +8443,7 @@
       ],
       "duplicateOf": "https://siya.health/blog/non-stimulant-adhd-medications-explained",
       "cannibalization": {
-        "guide": "/answers/non-stimulant-adhd-medications",
+        "guide": "/blog/non-stimulant-adhd-medications-explained",
         "blog": "/blog/non-stimulant-adhd-medications-explained",
         "classification": "Duplicate",
         "owner": "Blog",
@@ -8501,7 +8501,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/oral-vs-injectable-weight-loss-meds",
+      "path": "/blog/oral-vs-injectable-weight-loss-medications",
       "type": "guide",
       "title": "When might oral weight-loss medication be preferred over injectable GLP-1?",
       "h1": "When might oral weight-loss medication be preferred over injectable GLP-1?",
@@ -8541,7 +8541,7 @@
       ],
       "duplicateOf": "https://siya.health/blog/oral-vs-injectable-weight-loss-medications",
       "cannibalization": {
-        "guide": "/answers/oral-vs-injectable-weight-loss-meds",
+        "guide": "/blog/oral-vs-injectable-weight-loss-medications",
         "blog": "/blog/oral-vs-injectable-weight-loss-medications",
         "classification": "Duplicate",
         "owner": "Blog",
@@ -8599,7 +8599,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/phentermine-weight-loss-safety",
+      "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
       "type": "guide",
       "title": "Who should avoid phentermine for weight loss?",
       "h1": "Who should avoid phentermine for weight loss?",
@@ -8639,7 +8639,7 @@
       ],
       "duplicateOf": "https://siya.health/blog/phentermine-for-weight-loss-safety-and-effectiveness",
       "cannibalization": {
-        "guide": "/answers/phentermine-weight-loss-safety",
+        "guide": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
         "blog": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
         "classification": "Duplicate",
         "owner": "Blog",
@@ -8918,7 +8918,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/sildenafil-erectile-dysfunction-expectations",
+      "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "type": "guide",
       "title": "How long does it take sildenafil to work?",
       "h1": "How long does it take sildenafil to work?",
@@ -8958,7 +8958,7 @@
       ],
       "duplicateOf": "https://siya.health/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "cannibalization": {
-        "guide": "/answers/sildenafil-erectile-dysfunction-expectations",
+        "guide": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
         "blog": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
         "classification": "Duplicate",
         "owner": "Blog",
@@ -9188,7 +9188,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/answers/tirzepatide-vs-semaglutide",
+      "path": "/blog/tirzepatide-vs-semaglutide-which-is-better",
       "type": "guide",
       "title": "Who might consider tirzepatide instead of semaglutide?",
       "h1": "Who might consider tirzepatide instead of semaglutide?",
@@ -9228,7 +9228,7 @@
       ],
       "duplicateOf": "https://siya.health/blog/tirzepatide-vs-semaglutide-which-is-better",
       "cannibalization": {
-        "guide": "/answers/tirzepatide-vs-semaglutide",
+        "guide": "/blog/tirzepatide-vs-semaglutide-which-is-better",
         "blog": "/blog/tirzepatide-vs-semaglutide-which-is-better",
         "classification": "Duplicate",
         "owner": "Blog",
@@ -9380,8 +9380,8 @@
     {
       "path": "/answers/what-included-199-adhd-evaluation",
       "type": "guide",
-      "title": "What is included in Siya Health’s $199 ADHD evaluation?",
-      "h1": "What is included in Siya Health’s $199 ADHD evaluation?",
+      "title": "What is included in Siya Health’s $149 ADHD evaluation?",
+      "h1": "What is included in Siya Health’s $149 ADHD evaluation?",
       "wordCount": 382,
       "mainWords": 382,
       "pillar": "ADHD",
@@ -9833,7 +9833,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/blog/adderall-ir-vs-xr-adults",
+      "path": "/blog/vyvanse-vs-adderall-differences",
       "type": "blog",
       "title": "Adderall IR vs XR for Adults: Timing, Duration & What to Ask Your Prescriber",
       "h1": "Adderall IR vs XR — What Adults Should Know Before Starting Treatment",
@@ -9957,7 +9957,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/blog/adhd-evaluation-cost-california",
+      "path": "/blog/adhd-evaluation-cost-texas",
       "type": "blog",
       "title": "How Much Does an ADHD Evaluation Cost in California?",
       "h1": "How Much Does an ADHD Evaluation Cost in California?",
@@ -10129,7 +10129,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/blog/adhd-medication-online-texas-telehealth",
+      "path": "/blog/online-adhd-diagnosis-texas",
       "type": "blog",
       "title": "Can You Get ADHD Medication Online in Texas? Rules & Safety",
       "h1": "Can You Get ADHD Medication Online in Texas? Here's What's Allowed",
@@ -10430,7 +10430,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/blog/adhd-treatment-houston-online",
+      "path": "/blog/online-adhd-diagnosis-texas",
       "type": "blog",
       "title": "ADHD Treatment in Houston: Online Telehealth Options",
       "h1": "ADHD Treatment in Houston — Online Options Explained",
@@ -10559,7 +10559,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/blog/after-adhd-diagnosis-next-steps-adults",
+      "path": "/answers/starting-adhd-medication-adults",
       "type": "blog",
       "title": "What Happens After an ADHD Diagnosis? Next Steps for Adults",
       "h1": "What Happens After an ADHD Diagnosis? Next Steps for Adults",
@@ -10683,7 +10683,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+      "path": "/answers/adhd-and-weight-loss-connection",
       "type": "blog",
       "title": "Combining ADHD Treatment & Weight Loss Strategies (2026)",
       "h1": "Combining ADHD Treatment and Weight Loss Strategies (2026)",
@@ -10769,7 +10769,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/blog/focalin-vs-adderall-comparison",
+      "path": "/blog/vyvanse-vs-adderall-differences",
       "type": "blog",
       "title": "Focalin vs Adderall for ADHD (2026): Methylphenidate vs Amphetamine",
       "h1": "Focalin vs Adderall: What Adults Should Know (2026)",
@@ -11371,7 +11371,7 @@
       "trafficIntent": "Informational"
     },
     {
-      "path": "/blog/long-term-weight-loss-medications-what-to-expect",
+      "path": "/blog/semaglutide-for-weight-loss-how-it-works",
       "type": "blog",
       "title": "Long-Term Weight Loss Medications: What to Expect in 2026",
       "h1": "Long-Term Weight Loss Medications: What to Expect (2026)",

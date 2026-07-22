@@ -1,0 +1,5 @@
+# Stale HTML mirrors — not part of production surface
+public/
+
+# Brand asset library (source of truth for photography selection; not a public route)
+brand/

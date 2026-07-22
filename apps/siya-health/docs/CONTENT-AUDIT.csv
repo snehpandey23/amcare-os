@@ -1,0 +1,59 @@
+URL,Section,Current Issue,Issue Type,Recommended Rewrite,Compliance Risk,SEO Risk,Priority,Status
+/,CTA,Learn more,Vague CTA,Use specific label (Meet & Greet / Secure Chat / Screening),None,Low,P1,Open
+/adhd-care,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/weight-loss-metabolic-health,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/mens-health-longevity,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/telehealth,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/womens-health,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/primary-urgent-care,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/labs,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/prescriptions,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/about,CTA,Explore Care Options,Vague CTA,Use specific label (Meet & Greet / Secure Chat / Screening),None,Low,P1,Open
+/about,CTA,Explore Care / Explore Care Options,Deprecated CTA,Replace with Meet & Greet + Secure Chat hierarchy,None,Low,P1,Open
+/pricing,CTA,Explore Care Options,Vague CTA,Use specific label (Meet & Greet / Secure Chat / Screening),None,Low,P1,Open
+/pricing,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/pricing,CTA,Explore Care / Explore Care Options,Deprecated CTA,Replace with Meet & Greet + Secure Chat hierarchy,None,Low,P1,Open
+/book-appointment,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/adhd-screening,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/adult-adhd-screening-california,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/creyos-adhd-testing,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/blog,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/answers,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/answers,CTA,Explore Care / Explore Care Options,Deprecated CTA,Replace with Meet & Greet + Secure Chat hierarchy,None,Low,P1,Open
+/answers,Clinical language,Screening/diagnosis proximity without clear distinction,Terminology risk,Explicitly state screening is not a diagnosis,Med,Low,P1,Open
+/adhd-diagnosis-austin,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/adhd-diagnosis-houston,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/adhd-diagnosis-texas,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/adhd-diagnosis-pennsylvania,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/adhd-diagnosis-philadelphia,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/adult-adhd-screening-california,Disclaimer,"""Medication is not guaranteed"" appears 6 times",Redundant legal language,Keep hero note + FAQ + footer; trim mid-page repeats (attorney review first),Med,None,P2,Open
+/adult-adhd-screening-california,Pricing/Campaign,Limited-time / introductory California pricing language,Campaign pricing conflict,Align to sitewide $149 or explicitly expire; attorney + Ads review,High,Med,P1,Open
+/blog/adderall-for-adhd-how-it-works,Governance,No author/reviewer byline,Missing medical governance,Queue for physician review (see MEDICAL-CONTENT-REVIEW-QUEUE),Med,Med,P2,Open
+/blog/semaglutide-for-weight-loss-how-it-works,Governance,No author/reviewer byline,Missing medical governance,Queue for physician review (see MEDICAL-CONTENT-REVIEW-QUEUE),Med,Med,P2,Open
+/blog/when-is-testosterone-therapy-appropriate,Governance,No author/reviewer byline,Missing medical governance,Queue for physician review (see MEDICAL-CONTENT-REVIEW-QUEUE),Med,Med,P2,Open
+/blog/adhd-evaluation-cost-texas,Pricing,$199 in educational content,Outdated pricing,Update current Siya price to $149; preserve industry comparisons if historical,High,High,P1,Open
+/blog/adhd-evaluation-cost-texas,Governance,No author/reviewer byline,Missing medical governance,Queue for physician review (see MEDICAL-CONTENT-REVIEW-QUEUE),Med,Med,P2,Open
+/blog/vyvanse-vs-adderall-differences,Governance,No author/reviewer byline,Missing medical governance,Queue for physician review (see MEDICAL-CONTENT-REVIEW-QUEUE),Med,Med,P2,Open
+/answers/what-included-199-adhd-evaluation,Pricing,$199 in educational content,Outdated pricing,Update current Siya price to $149; preserve industry comparisons if historical,High,High,P1,Open
+/answers/what-included-199-adhd-evaluation,Governance,No author/reviewer byline,Missing medical governance,Queue for physician review (see MEDICAL-CONTENT-REVIEW-QUEUE),Med,Med,P2,Open
+/answers/how-much-does-adhd-testing-cost,Pricing,$199 in educational content,Outdated pricing,Update current Siya price to $149; preserve industry comparisons if historical,High,High,P1,Open
+/answers/how-much-does-adhd-testing-cost,Governance,No author/reviewer byline,Missing medical governance,Queue for physician review (see MEDICAL-CONTENT-REVIEW-QUEUE),Med,Med,P2,Open
+/answers/adderall-vs-vyvanse-adults,Governance,No author/reviewer byline,Missing medical governance,Queue for physician review (see MEDICAL-CONTENT-REVIEW-QUEUE),Med,Med,P2,Open
+/answers/glp-1-side-effects,Governance,No author/reviewer byline,Missing medical governance,Queue for physician review (see MEDICAL-CONTENT-REVIEW-QUEUE),Med,Med,P2,Open
+/answers/when-is-testosterone-therapy-appropriate,Governance,No author/reviewer byline,Missing medical governance,Queue for physician review (see MEDICAL-CONTENT-REVIEW-QUEUE),Med,Med,P2,Open
+/labs,Page,Thin commercial page (~421 visible words),Thin content / needs standardize,Apply lighter utility-service blueprint,None,Med,P1,Open
+/labs,Structure,Not aligned to service/utility blueprint,Inconsistent structure,"Standardize hero, includes, how it works, FAQ, final CTA",None,Low,P1,Open
+/prescriptions,Page,Thin commercial page (~385 visible words),Thin content / needs standardize,Apply lighter utility-service blueprint,None,Med,P1,Open
+/prescriptions,Structure,Not aligned to service/utility blueprint,Inconsistent structure,"Standardize hero, includes, how it works, FAQ, final CTA",None,Low,P1,Open
+/primary-urgent-care,Page,Thin commercial page (~537 visible words),Thin content / needs standardize,Apply lighter utility-service blueprint,None,Med,P1,Open
+/primary-urgent-care,Structure,Not aligned to service/utility blueprint,Inconsistent structure,"Standardize hero, includes, how it works, FAQ, final CTA",None,Low,P1,Open
+/about,Hero CTA,Secondary CTA is Explore Care/Telehealth,Deprecated CTA,Primary Meet & Greet; Secondary Secure Chat,None,Low,P1,Open
+/pricing,Hero CTA,Secondary CTA is Explore Care/Telehealth,Deprecated CTA,Primary Meet & Greet; Secondary Secure Chat,None,Low,P1,Open
+SITEWIDE,Trust claims,"2,200+ appears 16× across 12 files",Claims verification,Source: data/homepage-trust-metrics.mjs — verify owner date before next refresh,Med,Low,P2,Open
+SITEWIDE,Trust claims,4.8 appears 1563× across 156 files,Claims verification,Source: data/homepage-trust-metrics.mjs — verify owner date before next refresh,Med,Low,P2,Open
+SITEWIDE,Trust claims,600+ appears 7× across 6 files,Claims verification,Source: data/homepage-trust-metrics.mjs — verify owner date before next refresh,Med,Low,P2,Open
+SITEWIDE,Disclaimer chrome,Answers pages carry 2–3 overlapping educational disclaimers,Redundant legal language,Consolidate in site-chrome / answer generator (attorney sign-off),Low,None,P2,Open
+/adhd-screening,Heading,Page has 2 H1 elements,Accessibility / SEO,Reduce to one H1,None,Med,P2,Open
+/intake,Indexability,noindex page listed in sitemap,SEO conflict,Remove from sitemap or drop noindex intentionally,None,Med,P2,Open
+SITEWIDE,Internal links,18 links point at redirecting URLs (e.g. /online-adhd-test),Redirect hop,Point links at final destinations,None,Low,P1,Open
+/prescriptions,Internal linking,Commercially useful page with ~0 inbound links,Orphan page,Add footer + telehealth + related guide links,None,Med,P1,Open

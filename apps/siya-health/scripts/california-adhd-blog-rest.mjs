@@ -45,13 +45,13 @@ export const CALIFORNIA_POSTS_REST = [
             <section class="blog-california-cta cta-block blog-cta" aria-labelledby="ca-h2-eval">
               <h2 id="ca-h2-eval">Need ADHD care in California?</h2>
               <p>Siya Health offers virtual ADHD evaluation and treatment support for eligible patients.</p>
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book an Appointment</a>
+              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book an Appointment</a>
               <p class="cta-microcopy"><a href="tel:+12154451244">(215) 445-1244</a> · <a href="https://www.siya.health" target="_blank" rel="noopener">www.siya.health</a> · <a href="/book-appointment">Scheduling</a></p>
             </section>
 
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
               <li><a href="/blog/adhd-telehealth-california">ADHD telehealth in California</a></li>
-              <li><a href="/blog/adhd-evaluation-cost-california">ADHD evaluation cost in California</a></li>
+              <li><a href="/blog/adhd-evaluation-cost-texas">ADHD evaluation cost in California</a></li>
               <li><a href="/blog/adult-adhd-treatment-california-2026">Adult ADHD treatment paths</a></li>
               <li><a href="/providers/dr-sneh-pandey">Meet Medical Director Dr. Pandey</a></li>
             </ul></section>
@@ -93,16 +93,16 @@ export const CALIFORNIA_POSTS_REST = [
             <section class="blog-california-cta cta-block blog-cta" aria-labelledby="ca-h2-treat">
               <h2 id="ca-h2-treat">Need ADHD care in California?</h2>
               <p>Siya Health offers virtual ADHD evaluation and treatment support for eligible patients.</p>
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book an Appointment</a>
+              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book an Appointment</a>
               <p class="cta-microcopy"><a href="tel:+12154451244">(215) 445-1244</a> · <a href="https://www.siya.health" target="_blank" rel="noopener">www.siya.health</a> · <a href="/book-appointment">Scheduling</a></p>
             </section>
 
-            <div class="cta-block blog-cta"><a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book Your Free 15-Minute ADHD Consultation</a></div>
+            <div class="cta-block blog-cta"><a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book Your Free 15-Minute ADHD Consultation</a></div>
 
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
               <li><a href="/blog/online-adhd-diagnosis-california">Online ADHD diagnosis in California</a></li>
               <li><a href="/blog/adhd-telehealth-california">ADHD telehealth in California</a></li>
-              <li><a href="/blog/after-adhd-diagnosis-next-steps-adults">After diagnosis next steps</a></li>
+              <li><a href="/answers/starting-adhd-medication-adults">After diagnosis next steps</a></li>
             </ul></section>
 
             <h2>FAQ</h2>`,
@@ -139,11 +139,11 @@ export const CALIFORNIA_POSTS_REST = [
             <section class="blog-california-cta cta-block blog-cta" aria-labelledby="ca-med">
               <h2 id="ca-med">Need ADHD care in California?</h2>
               <p>Siya Health offers virtual ADHD evaluation and treatment support for eligible patients.</p>
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book an Appointment</a>
+              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book an Appointment</a>
               <p class="cta-microcopy"><a href="tel:+12154451244">(215) 445-1244</a> · <a href="https://www.siya.health" target="_blank" rel="noopener">www.siya.health</a> · <a href="/book-appointment">Scheduling</a></p>
             </section>
 
-            <div class="cta-block blog-cta"><a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book Your Free 15-Minute ADHD Consultation</a></div>
+            <div class="cta-block blog-cta"><a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book Your Free 15-Minute ADHD Consultation</a></div>
 
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
               <li><a href="/blog/online-adhd-diagnosis-california">Online ADHD diagnosis in California</a></li>
@@ -172,7 +172,7 @@ export const CALIFORNIA_POSTS_REST = [
     ],
     bodyHtml: `
             <p class="blog-disclaimer"><strong>Educational only:</strong> This blog is for educational purposes only and does not replace medical advice. A licensed provider can help determine what care is appropriate for you.</p>
-            <div class="blog-internal-links"><p>Use <a href="/online-adhd-test">online ADHD screening</a>, read <a href="/blog/is-online-adhd-diagnosis-legit">legitimacy guide</a>, compare <a href="/blog/adhd-evaluation-california-online-vs-in-person">online vs in-person evaluation</a>.</p></div>
+            <div class="blog-internal-links"><p>Use <a href="/adhd-screening">online ADHD screening</a>, read <a href="/blog/is-online-adhd-diagnosis-legit">legitimacy guide</a>, compare <a href="/blog/adhd-evaluation-california-online-vs-in-person">online vs in-person evaluation</a>.</p></div>
 
             <p>A responsible <strong>ADHD test online California</strong> search should land you understanding layers: quick screening questionnaires estimate whether symptoms cluster enough historically to justify scheduling—not whether neurodevelopmental ADHD pathophysiology is proven instantly cosmetically glorified inaccurately.</p>
 
@@ -185,7 +185,7 @@ export const CALIFORNIA_POSTS_REST = [
             <section class="blog-california-cta cta-block blog-cta" aria-labelledby="ca-test">
               <h2 id="ca-test">Need ADHD care in California?</h2>
               <p>Siya Health offers virtual ADHD evaluation and treatment support for eligible patients.</p>
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book an Appointment</a>
+              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book an Appointment</a>
               <p class="cta-microcopy"><a href="tel:+12154451244">(215) 445-1244</a> · <a href="https://www.siya.health" target="_blank" rel="noopener">www.siya.health</a> · <a href="/book-appointment">Scheduling</a></p>
             </section>
 
@@ -218,7 +218,7 @@ export const CALIFORNIA_POSTS_REST = [
     ],
     bodyHtml: `
             <p class="blog-disclaimer"><strong>Educational only:</strong> This blog is for educational purposes only and does not replace medical advice. A licensed provider can help determine what care is appropriate for you.</p>
-            <div class="blog-internal-links"><p>Compare Texas pricing deep dive <a href="/blog/adhd-evaluation-cost-texas">ADHD evaluation cost Texas</a> plus <a href="/adhd-evaluation-cost">general evaluation pricing page</a> for anchors.</p></div>
+            <div class="blog-internal-links"><p>Compare Texas pricing deep dive <a href="/blog/adhd-evaluation-cost-texas">ADHD evaluation cost Texas</a> plus <a href="/pricing">general evaluation pricing page</a> for anchors.</p></div>
 
             <p>Budget-minded Californians rightly interrogate transparent <strong>ADHD evaluation online California</strong> quoting—asking whether advertised fees include sufficiently long clinician face-time—not merely glamorous intake bots harvesting payment aggressively.</p>
 
@@ -228,14 +228,14 @@ export const CALIFORNIA_POSTS_REST = [
             <section class="blog-california-cta cta-block blog-cta" aria-labelledby="ca-cost">
               <h2 id="ca-cost">Need ADHD care in California?</h2>
               <p>Siya Health offers virtual ADHD evaluation and treatment support for eligible patients.</p>
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book an Appointment</a>
+              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book an Appointment</a>
               <p class="cta-microcopy"><a href="tel:+12154451244">(215) 445-1244</a> · <a href="https://www.siya.health" target="_blank" rel="noopener">www.siya.health</a> · <a href="/book-appointment">Scheduling</a></p>
             </section>
 
             <div class="cta-block blog-cta"><a class="button" href="/pricing">View Pricing</a></div>
 
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
-              <li><a href="/membership-pricing">Transparent membership framing</a></li>
+              <li><a href="/pricing">Transparent membership framing</a></li>
               <li><a href="/blog/online-adhd-diagnosis-california">Online diagnosis pathways</a></li>
               <li><a href="/blog/adhd-evaluation-california-online-vs-in-person">Online vs office evaluation nuances</a></li>
             </ul></section>
@@ -271,15 +271,15 @@ export const CALIFORNIA_POSTS_REST = [
             <section class="blog-california-cta cta-block blog-cta" aria-labelledby="ca-tel">
               <h2 id="ca-tel">Need ADHD care in California?</h2>
               <p>Siya Health offers virtual ADHD evaluation and treatment support for eligible patients.</p>
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book an Appointment</a>
+              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book an Appointment</a>
               <p class="cta-microcopy"><a href="tel:+12154451244">(215) 445-1244</a> · <a href="https://www.siya.health" target="_blank" rel="noopener">www.siya.health</a> · <a href="/book-appointment">Scheduling</a></p>
             </section>
 
-            <div class="cta-block blog-cta"><a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book Your Free 15-Minute ADHD Consultation</a></div>
+            <div class="cta-block blog-cta"><a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book Your Free 15-Minute ADHD Consultation</a></div>
 
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
               <li><a href="/blog/how-adhd-medication-is-prescribed-online">Medication prescribing online</a></li>
-              <li><a href="/blog/adhd-treatment-houston-online">Metro telehealth parallels (Texas reference)</a></li>
+              <li><a href="/blog/online-adhd-diagnosis-texas">Metro telehealth parallels (Texas reference)</a></li>
               <li><a href="/blog/how-to-choose-adhd-provider-california">Choosing ADHD providers wisely</a></li>
             </ul></section>
 
@@ -326,11 +326,11 @@ export const CALIFORNIA_POSTS_REST = [
             <section class="blog-california-cta cta-block blog-cta" aria-labelledby="ca-medopts">
               <h2 id="ca-medopts">Need ADHD care in California?</h2>
               <p>Siya Health offers virtual ADHD evaluation and treatment support for eligible patients.</p>
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book an Appointment</a>
+              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book an Appointment</a>
               <p class="cta-microcopy"><a href="tel:+12154451244">(215) 445-1244</a> · <a href="https://www.siya.health" target="_blank" rel="noopener">www.siya.health</a> · <a href="/book-appointment">Scheduling</a></p>
             </section>
 
-            <div class="cta-block blog-cta"><a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book Your Free 15-Minute ADHD Consultation</a></div>
+            <div class="cta-block blog-cta"><a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book Your Free 15-Minute ADHD Consultation</a></div>
 
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
               <li><a href="/blog/vyvanse-vs-adderall-differences">Vyvanse vs Adderall (educational)</a></li>
@@ -360,7 +360,7 @@ export const CALIFORNIA_POSTS_REST = [
     ],
     bodyHtml: `
             <p class="blog-disclaimer"><strong>Educational only:</strong> This blog is for educational purposes only and does not replace medical advice. A licensed provider can help determine what care is appropriate for you.</p>
-            <div class="blog-internal-links"><p>Start with structured triage tools like our <a href="/online-adhd-test">online ADHD screening</a>, then contrast <a href="/blog/how-to-know-if-you-have-adhd-adult">how adult ADHD is evaluated</a> with <a href="/blog/adhd-testing-online-california-screening-vs-evaluation">online screening versus full evaluation in California</a>.</p></div>
+            <div class="blog-internal-links"><p>Start with structured triage tools like our <a href="/adhd-screening">online ADHD screening</a>, then contrast <a href="/blog/how-to-know-if-you-have-adhd-adult">how adult ADHD is evaluated</a> with <a href="/blog/adhd-testing-online-california-screening-vs-evaluation">online screening versus full evaluation in California</a>.</p></div>
 
             <p>People searching <strong>adult ADHD symptoms California</strong> are often reacting to contradictions society hands them: coworkers saying you seem “successful enough,” TikTok diagnosing from two symptoms, burnout coaches blaming mindset, psychiatrists implying you should have flunked high school decades ago—the whole bundle can leave you cynical. Yet symptoms still merit careful parsing medically: adults with clinically significant ADHD commonly describe chronic restlessness mentally, drifting during conversations unintentionally despite caring, losing wallets or keys repetitively, paying late fees episodically, hyperfocusing fiercely on passion projects yet avoiding routine admin painfully, procrastinating until adrenaline panic unlocks urgency, texting apologies for lateness exhausting relationships, binge-scrolling paralysis numbing anxiety—all patterns that may occur with ADHD, but overlap heavily with exhaustion, untreated mood disorders, post-traumatic hypervigilance, iron deficiency anemia, untreated hypothyroidism, apnea-driven daytime sedation—requiring clinician distinction—not Tumblr certainty.</p>
 
@@ -383,7 +383,7 @@ export const CALIFORNIA_POSTS_REST = [
             <section class="blog-california-cta cta-block blog-cta" aria-labelledby="ca-sympt">
               <h2 id="ca-sympt">Need ADHD care in California?</h2>
               <p>Siya Health offers virtual ADHD evaluation and treatment support for eligible patients.</p>
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book an Appointment</a>
+              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book an Appointment</a>
               <p class="cta-microcopy"><a href="tel:+12154451244">(215) 445-1244</a> · <a href="https://www.siya.health" target="_blank" rel="noopener">www.siya.health</a> · <a href="/book-appointment">Scheduling</a></p>
             </section>
 
@@ -413,7 +413,7 @@ export const CALIFORNIA_POSTS_REST = [
       ['Should Californians choose an ADHD evaluator based on price alone?', 'Price matters practically, but microscopic visit lengths paired with bold diagnosis certainty deserve more skepticism than moderately higher transparent fees paired with clinician time spelled out plainly. Evaluate what you receive—not only the sticker number.'],
       ['How should I verify clinician credibility?', 'Prefer named licensed clinicians alongside clear crisis guidance for emergencies (suicidal thoughts, chest pain, sudden neurologic deficits), HIPAA-appropriate video tooling, articulated visit pacing, refusal rights—not anonymous chat-checkout caricatures rushing diagnosis momentum before evaluations conclude thoughtfully.'],
       ['Do trustworthy ADHD clinicians discuss conditions that imitate ADHD?', 'Yes. Anxiety, burnout, PTSD, mood disorders, sleep apnea, anemia, thyroid disease, substances, and medication effects can imitate attention deficits—so thoughtful differential diagnosis beats checklist certainty alone.'],
-      ['Where should I explore scheduling next steps?', 'Use Talk to a Clinician or appointment buttons referenced in CTAs—including the California scheduling block—rather than gimmick scarcity banners implying guaranteed prescribing outcomes.'],
+      ['Where should I explore scheduling next steps?', 'Use Start Secure Medical Chat or appointment buttons referenced in CTAs—including the California scheduling block—rather than gimmick scarcity banners implying guaranteed prescribing outcomes.'],
     ],
     
     bodyHtml: `
@@ -441,11 +441,11 @@ export const CALIFORNIA_POSTS_REST = [
 <section class="blog-california-cta cta-block blog-cta" aria-labelledby="ca-choose">
               <h2 id="ca-choose">Need ADHD care in California?</h2>
               <p>Siya Health offers virtual ADHD evaluation and treatment support for eligible patients.</p>
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book an Appointment</a>
+              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book an Appointment</a>
               <p class="cta-microcopy"><a href="tel:+12154451244">(215) 445-1244</a> · <a href="https://www.siya.health" target="_blank" rel="noopener">www.siya.health</a> · <a href="/book-appointment">Scheduling</a></p>
             </section>
 
-            <div class="cta-block blog-cta"><a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book Your Free 15-Minute ADHD Consultation</a></div>
+            <div class="cta-block blog-cta"><a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book Your Free 15-Minute ADHD Consultation</a></div>
 
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
               <li><a href="/blog/adhd-telehealth-california">ADHD telehealth in California</a></li>

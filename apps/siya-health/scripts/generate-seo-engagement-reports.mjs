@@ -155,7 +155,7 @@ function buildEnhancementReport(audits) {
       h2: ['Optional H2: “Post-meal fatigue and glucose — patient tracking”'],
       faq: ['PAA: “Does metformin help weight loss with insulin resistance?”'],
       links: ['Stronger bidirectional link to sleep apnea cornerstone in body (not only hub)'],
-      answers: ['/answers/oral-vs-injectable-weight-loss-meds'],
+      answers: ['/blog/oral-vs-injectable-weight-loss-medications'],
       entities: ['PCOS', 'fatty liver (MASLD) as comorbidity anchors'],
       reject: ['HOMA-IR cutoff tables marketed as diagnosis'],
     },

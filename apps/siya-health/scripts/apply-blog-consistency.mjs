@@ -28,7 +28,7 @@ const GUIDE_POOLS = {
     'signs-of-adult-adhd',
     'can-adhd-be-diagnosed-online',
     'starting-adhd-medication-adults',
-    'non-stimulant-adhd-medications',
+    'is-adhd-medication-safe-long-term',
     'adhd-vs-burnout',
   ],
   metabolic: [
@@ -66,7 +66,7 @@ const SECONDARY_BY_TOPIC = {
 };
 
 const CTA_BAND_SECTION_RE =
-  /<section class="section(?:\s+blog-final-cta)?">\s*<div class="container">\s*<div class="cta-band">[\s\S]*?<\/div>\s*<\/div>\s*<\/section>/g;
+  /<section class="section(?:\s+blog-final-cta)?">\s*<div class="container">\s*<div class="(?:ds-cta-block\s+)?cta-band(?:\s[^"]*)?">[\s\S]*?<\/section>/g;
 
 const PROVIDER_CTA_RE =
   /\s*<section class="blog-provider-cta"[\s\S]*?<\/section>/g;
@@ -129,7 +129,7 @@ function guideItemsForTopic(topic, slug) {
 }
 
 function countCtaBandDivs(html) {
-  return (html.match(/<div class="cta-band">/g) || []).length;
+  return (html.match(/<div class="[^"]*\bcta-band\b(?![-\w])[^"]*"/g) || []).length;
 }
 
 function ensureMidCtaClass(html) {
@@ -193,6 +193,7 @@ function processArticle(filename) {
 
   const { html: html2, countBefore, countAfter } = replaceFinalCtaBand(html, {
     adhd,
+    relPath: `blog/${filename}`,
     secondaryHref: SECONDARY_BY_TOPIC[topic] || '/telehealth',
   });
   html = html2;
@@ -226,9 +227,11 @@ function auditBlog(relPath, html) {
   const issues = [];
   const bands = countCtaBandDivs(html);
   if (bands !== 1) issues.push(`cta-band divs: ${bands}`);
-  if ((html.match(/cta-band/g) || []).length > 3) issues.push('possible cta-band string duplication');
+  if ((html.match(/<div class="[^"]*\bcta-band\b(?![-\w])[^"]*"/g) || []).length > 1) {
+    issues.push('possible cta-band string duplication');
+  }
   if (!html.includes('related-health-guides')) issues.push('missing Related Health Guides');
-  if (!html.includes('continue-reading')) issues.push('missing Continue reading');
+  if (!html.includes('related-articles')) issues.push('missing Related Articles');
   const reviews = (html.match(/<aside class="clinical-review/g) || []).length;
   if (reviews !== 1) issues.push(`clinical-review: ${reviews}`);
   const h1 = (html.match(/<h1[\s>]/gi) || []).length;
@@ -370,7 +373,7 @@ ${files.length}
 | 1 H1 | ${postAudit.filter((a) => !a.issues.some((i) => i.includes('h1'))).length}/${files.length} |
 | 1 final cta-band div | ${postAudit.filter((a) => !a.issues.some((i) => i.includes('cta-band div'))).length}/${files.length} |
 | Related Health Guides | ${postAudit.filter((a) => !a.issues.some((i) => i.includes('Related'))).length}/${files.length} |
-| Continue reading | ${postAudit.filter((a) => !a.issues.some((i) => i.includes('Continue'))).length}/${files.length} |
+| Related Articles | ${postAudit.filter((a) => !a.issues.some((i) => i.includes('Related'))).length}/${files.length} |
 | No legacy review/copy | ${postAudit.filter((a) => !a.issues.some((i) => i.includes('legacy') || i.includes('Answers'))).length}/${files.length} |
 
 ## Articles with issues

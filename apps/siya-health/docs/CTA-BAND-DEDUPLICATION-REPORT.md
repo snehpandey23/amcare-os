@@ -1,10 +1,10 @@
 # CTA band deduplication report
 
-Generated: 2026-06-04T11:43:25.205Z
+Generated: 2026-07-15T03:47:03.352Z
 
 ## Blogs scanned
 
-55 blog articles (excluding 5 category/index hubs).
+44 blog articles (excluding 5 category/index hubs).
 
 ## Duplicate `<div class="cta-band">` before fix
 
@@ -21,8 +21,8 @@ _None — prior audits counted `cta-band-buttons` as a second match; actual dupl
 All articles now use one exit band:
 
 - **Title:** Not sure where to start?
-- **Body:** A Meet & Greet can help you understand your options and choose the right care path.
-- **Default primary:** Book a Meet & Greet
+- **Body:** Talk to a Clinician can help you understand your options and choose the right care path.
+- **Default primary:** Talk to a Clinician
 - **Default secondary:** Explore Care Options (topic service page)
 - **ADHD-specific primary:** Book ADHD Evaluation
 - **ADHD-specific secondary:** Start Free Screening
@@ -31,7 +31,7 @@ All articles now use one exit band:
 
 | Result | Count |
 |--------|------:|
-| Exactly 1 `cta-band` div | 55 |
+| Exactly 1 `cta-band` div | 44 |
 | Exceptions | 0 |
 
 

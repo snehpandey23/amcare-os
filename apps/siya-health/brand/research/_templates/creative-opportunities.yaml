@@ -1,0 +1,26 @@
+# creative-opportunities.yaml template
+
+```yaml
+source: extract.yaml
+topic: ""
+items:
+  - intent: Recognition
+    family: R
+    layout: R-02
+    journey_stage: Recognizing
+    emotion: Validated
+    insight_id: I1
+    cta: Screening
+    cta_label: Take Free ADHD Screening
+    platforms: [Instagram, LinkedIn]
+    registry_clone: null
+  - intent: Education
+    family: RS
+    layout: RS-02
+    journey_stage: Considering
+    emotion: Curious
+    insight_id: I1
+    clinical_review: true
+    cta: Article
+    platforms: [LinkedIn]
+```

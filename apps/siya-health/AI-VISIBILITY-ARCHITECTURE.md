@@ -212,7 +212,7 @@ Build from existing FAQ extractions + search console queries:
 4. Can ADHD be diagnosed online?
 5. Is online ADHD diagnosis legitimate?
 6. How long does an ADHD evaluation take?
-7. What is included in a $199 ADHD evaluation?
+7. What is included in a $149 ADHD evaluation?
 8. Do you need insurance for ADHD telehealth?
 9. What is ASRS screening?
 10. What is Creyos cognitive testing?

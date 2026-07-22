@@ -82,7 +82,7 @@
     {
       "path": "/adhd-care",
       "pageType": "Service Page",
-      "title": "Adult ADHD Diagnosis Online — Same-Week Evaluation ($199)",
+      "title": "Adult ADHD Diagnosis Online — Same-Week Evaluation ($149)",
       "h1": "Adult ADHD Evaluation Online",
       "missionAlignment": 9,
       "brandAlignment": 6,
@@ -104,8 +104,8 @@
     {
       "path": "/adhd-diagnosis-austin",
       "pageType": "Geo SEO Landing",
-      "title": "ADHD Diagnosis Austin TX | Online $199 Evaluation",
-      "h1": "ADHD Diagnosis in Austin, Texas (Online, $199)",
+      "title": "ADHD Diagnosis Austin TX | Online $149 Evaluation",
+      "h1": "ADHD Diagnosis in Austin, Texas (Online, $149)",
       "missionAlignment": 7,
       "brandAlignment": 7,
       "composite": 7,
@@ -127,8 +127,8 @@
     {
       "path": "/adhd-diagnosis-florida",
       "pageType": "Geo SEO Landing",
-      "title": "Online ADHD Diagnosis Florida | $199 Evaluation",
-      "h1": "Online ADHD Diagnosis in Florida ($199 Evaluation)",
+      "title": "Online ADHD Diagnosis Florida | $149 Evaluation",
+      "h1": "Online ADHD Diagnosis in Florida ($149 Evaluation)",
       "missionAlignment": 4,
       "brandAlignment": 8,
       "composite": 6,
@@ -151,8 +151,8 @@
     {
       "path": "/adhd-diagnosis-houston",
       "pageType": "Geo SEO Landing",
-      "title": "ADHD Diagnosis Houston TX | Online $199 Evaluation",
-      "h1": "ADHD Diagnosis in Houston, Texas (Online, $199)",
+      "title": "ADHD Diagnosis Houston TX | Online $149 Evaluation",
+      "h1": "ADHD Diagnosis in Houston, Texas (Online, $149)",
       "missionAlignment": 7,
       "brandAlignment": 7,
       "composite": 7,
@@ -174,8 +174,8 @@
     {
       "path": "/adhd-diagnosis-pennsylvania",
       "pageType": "Geo SEO Landing",
-      "title": "Online ADHD Diagnosis Pennsylvania | $199",
-      "h1": "Online ADHD Diagnosis in Pennsylvania ($199 Evaluation)",
+      "title": "Online ADHD Diagnosis Pennsylvania | $149",
+      "h1": "Online ADHD Diagnosis in Pennsylvania ($149 Evaluation)",
       "missionAlignment": 7,
       "brandAlignment": 7,
       "composite": 7,
@@ -197,8 +197,8 @@
     {
       "path": "/adhd-diagnosis-philadelphia",
       "pageType": "Geo SEO Landing",
-      "title": "ADHD Diagnosis Philadelphia PA | Online $199",
-      "h1": "ADHD Diagnosis in Philadelphia, Pennsylvania (Online, $199)",
+      "title": "ADHD Diagnosis Philadelphia PA | Online $149",
+      "h1": "ADHD Diagnosis in Philadelphia, Pennsylvania (Online, $149)",
       "missionAlignment": 7,
       "brandAlignment": 7,
       "composite": 7,
@@ -220,8 +220,8 @@
     {
       "path": "/adhd-diagnosis-texas",
       "pageType": "Geo SEO Landing",
-      "title": "Online ADHD Diagnosis Texas | $199 Evaluation",
-      "h1": "Online ADHD Diagnosis in Texas ($199 Evaluation)",
+      "title": "Online ADHD Diagnosis Texas | $149 Evaluation",
+      "h1": "Online ADHD Diagnosis in Texas ($149 Evaluation)",
       "missionAlignment": 7,
       "brandAlignment": 7,
       "composite": 7,
@@ -243,8 +243,8 @@
     {
       "path": "/adhd-evaluation-cost",
       "pageType": "Service Page",
-      "title": "ADHD Evaluation Cost Online | $199 Flat Rate",
-      "h1": "ADHD Evaluation Cost: $199 (What You Get)",
+      "title": "ADHD Evaluation Cost Online | $149 Flat Rate",
+      "h1": "ADHD Evaluation Cost: $149 (What You Get)",
       "missionAlignment": 9,
       "brandAlignment": 7,
       "composite": 8,
@@ -307,8 +307,8 @@
     {
       "path": "/adult-adhd-diagnosis",
       "pageType": "Service Page",
-      "title": "Adult ADHD Diagnosis Online | $199 Evaluation",
-      "h1": "Adult ADHD Diagnosis Online ($199 Comprehensive Evaluation)",
+      "title": "Adult ADHD Diagnosis Online | $149 Evaluation",
+      "h1": "Adult ADHD Diagnosis Online ($149 Comprehensive Evaluation)",
       "missionAlignment": 9,
       "brandAlignment": 7,
       "composite": 8,
@@ -393,7 +393,7 @@
       "mainCtaCount": 1
     },
     {
-      "path": "/answers/adhd-in-men",
+      "path": "/answers/signs-of-adult-adhd",
       "pageType": "Health Guide",
       "title": "How does adult ADHD present in men?",
       "h1": "How does adult ADHD present in men?",
@@ -669,7 +669,7 @@
       "mainCtaCount": 2
     },
     {
-      "path": "/answers/creyos-adhd-testing-explained",
+      "path": "/creyos-adhd-testing",
       "pageType": "Health Guide",
       "title": "What is Creyos cognitive testing for ADHD?",
       "h1": "What is Creyos cognitive testing for ADHD?",
@@ -1054,7 +1054,7 @@
       "mainCtaCount": 1
     },
     {
-      "path": "/answers/minoxidil-hair-loss-does-it-work",
+      "path": "/blog/minoxidil-for-hair-loss-does-it-work",
       "pageType": "Health Guide",
       "title": "How long does minoxidil take to show hair results?",
       "h1": "How long does minoxidil take to show hair results?",
@@ -1074,7 +1074,7 @@
       "mainCtaCount": 2
     },
     {
-      "path": "/answers/non-stimulant-adhd-medications",
+      "path": "/blog/non-stimulant-adhd-medications-explained",
       "pageType": "Health Guide",
       "title": "When are non-stimulant ADHD medications considered first?",
       "h1": "When are non-stimulant ADHD medications considered first?",
@@ -1117,7 +1117,7 @@
       "mainCtaCount": 2
     },
     {
-      "path": "/answers/oral-vs-injectable-weight-loss-meds",
+      "path": "/blog/oral-vs-injectable-weight-loss-medications",
       "pageType": "Health Guide",
       "title": "When might oral weight-loss medication be preferred over injectable GLP-1?",
       "h1": "When might oral weight-loss medication be preferred over injectable GLP-1?",
@@ -1158,7 +1158,7 @@
       "mainCtaCount": 2
     },
     {
-      "path": "/answers/phentermine-weight-loss-safety",
+      "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
       "pageType": "Health Guide",
       "title": "Who should avoid phentermine for weight loss?",
       "h1": "Who should avoid phentermine for weight loss?",
@@ -1292,7 +1292,7 @@
       "mainCtaCount": 2
     },
     {
-      "path": "/answers/sildenafil-erectile-dysfunction-expectations",
+      "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "pageType": "Health Guide",
       "title": "How long does it take sildenafil to work?",
       "h1": "How long does it take sildenafil to work?",
@@ -1409,7 +1409,7 @@
       "mainCtaCount": 2
     },
     {
-      "path": "/answers/tirzepatide-vs-semaglutide",
+      "path": "/blog/tirzepatide-vs-semaglutide-which-is-better",
       "pageType": "Health Guide",
       "title": "Who might consider tirzepatide instead of semaglutide?",
       "h1": "Who might consider tirzepatide instead of semaglutide?",
@@ -1493,8 +1493,8 @@
     {
       "path": "/answers/what-included-199-adhd-evaluation",
       "pageType": "Health Guide",
-      "title": "What is included in Siya Health’s $199 ADHD evaluation?",
-      "h1": "What is included in Siya Health’s $199 ADHD evaluation?",
+      "title": "What is included in Siya Health’s $149 ADHD evaluation?",
+      "h1": "What is included in Siya Health’s $149 ADHD evaluation?",
       "missionAlignment": 9,
       "brandAlignment": 8,
       "composite": 8.5,
@@ -1695,7 +1695,7 @@
       "mainCtaCount": 2
     },
     {
-      "path": "/blog/adderall-ir-vs-xr-adults",
+      "path": "/blog/vyvanse-vs-adderall-differences",
       "pageType": "Blog Article",
       "title": "Adderall IR vs XR for Adults: Timing, Duration & What to Ask Your Prescriber",
       "h1": "Adderall IR vs XR — What Adults Should Know Before Starting Treatment",
@@ -1748,7 +1748,7 @@
       "mainCtaCount": 1
     },
     {
-      "path": "/blog/adhd-evaluation-cost-california",
+      "path": "/blog/adhd-evaluation-cost-texas",
       "pageType": "Blog Article",
       "title": "How Much Does an ADHD Evaluation Cost in California?",
       "h1": "How Much Does an ADHD Evaluation Cost in California?",
@@ -1824,7 +1824,7 @@
       "mainCtaCount": 1
     },
     {
-      "path": "/blog/adhd-medication-online-texas-telehealth",
+      "path": "/blog/online-adhd-diagnosis-texas",
       "pageType": "Blog Article",
       "title": "Can You Get ADHD Medication Online in Texas? Rules & Safety",
       "h1": "Can You Get ADHD Medication Online in Texas? Here's What's Allowed",
@@ -1946,7 +1946,7 @@
       "mainCtaCount": 2
     },
     {
-      "path": "/blog/adhd-treatment-houston-online",
+      "path": "/blog/online-adhd-diagnosis-texas",
       "pageType": "Blog Article",
       "title": "ADHD Treatment in Houston: Online Telehealth Options",
       "h1": "ADHD Treatment in Houston — Online Options Explained",
@@ -2000,7 +2000,7 @@
       "mainCtaCount": 1
     },
     {
-      "path": "/blog/after-adhd-diagnosis-next-steps-adults",
+      "path": "/answers/starting-adhd-medication-adults",
       "pageType": "Blog Article",
       "title": "What Happens After an ADHD Diagnosis? Next Steps for Adults",
       "h1": "What Happens After an ADHD Diagnosis? Next Steps for Adults",
@@ -2020,7 +2020,7 @@
       "mainCtaCount": 1
     },
     {
-      "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+      "path": "/answers/adhd-and-weight-loss-connection",
       "pageType": "Blog Article",
       "title": "Combining ADHD Treatment & Weight Loss Strategies (2026)",
       "h1": "Combining ADHD Treatment and Weight Loss Strategies (2026)",
@@ -2061,7 +2061,7 @@
       "mainCtaCount": 1
     },
     {
-      "path": "/blog/focalin-vs-adderall-comparison",
+      "path": "/blog/vyvanse-vs-adderall-differences",
       "pageType": "Blog Article",
       "title": "Focalin vs Adderall for ADHD (2026): Methylphenidate vs Amphetamine",
       "h1": "Focalin vs Adderall: What Adults Should Know (2026)",
@@ -2312,7 +2312,7 @@
       "mainCtaCount": 2
     },
     {
-      "path": "/blog/long-term-weight-loss-medications-what-to-expect",
+      "path": "/blog/semaglutide-for-weight-loss-how-it-works",
       "pageType": "Blog Article",
       "title": "Long-Term Weight Loss Medications: What to Expect in 2026",
       "h1": "Long-Term Weight Loss Medications: What to Expect (2026)",
@@ -2751,7 +2751,7 @@
     {
       "path": "/creyos-adhd-testing",
       "pageType": "Service Page",
-      "title": "Creyos ADHD Testing Online | Part of $199 Evaluation",
+      "title": "Creyos ADHD Testing Online | Part of $149 Evaluation",
       "h1": "Creyos ADHD Testing (Included in Your Evaluation)",
       "missionAlignment": 9,
       "brandAlignment": 7,
@@ -3282,7 +3282,7 @@
       "mainCtaCount": 2
     },
     {
-      "path": "/answers/minoxidil-hair-loss-does-it-work",
+      "path": "/blog/minoxidil-for-hair-loss-does-it-work",
       "pageType": "Health Guide",
       "title": "How long does minoxidil take to show hair results?",
       "h1": "How long does minoxidil take to show hair results?",
@@ -3319,7 +3319,7 @@
       "mainCtaCount": 2
     },
     {
-      "path": "/answers/sildenafil-erectile-dysfunction-expectations",
+      "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "pageType": "Health Guide",
       "title": "How long does it take sildenafil to work?",
       "h1": "How long does it take sildenafil to work?",
@@ -3339,7 +3339,7 @@
       "mainCtaCount": 2
     },
     {
-      "path": "/blog/adderall-ir-vs-xr-adults",
+      "path": "/blog/vyvanse-vs-adderall-differences",
       "pageType": "Blog Article",
       "title": "Adderall IR vs XR for Adults: Timing, Duration & What to Ask Your Prescriber",
       "h1": "Adderall IR vs XR — What Adults Should Know Before Starting Treatment",
@@ -3372,7 +3372,7 @@
       "mainCtaCount": 1
     },
     {
-      "path": "/blog/adhd-medication-online-texas-telehealth",
+      "path": "/blog/online-adhd-diagnosis-texas",
       "pageType": "Blog Article",
       "title": "Can You Get ADHD Medication Online in Texas? Rules & Safety",
       "h1": "Can You Get ADHD Medication Online in Texas? Here's What's Allowed",
@@ -3474,7 +3474,7 @@
       "mainCtaCount": 2
     },
     {
-      "path": "/blog/focalin-vs-adderall-comparison",
+      "path": "/blog/vyvanse-vs-adderall-differences",
       "pageType": "Blog Article",
       "title": "Focalin vs Adderall for ADHD (2026): Methylphenidate vs Amphetamine",
       "h1": "Focalin vs Adderall: What Adults Should Know (2026)",
@@ -3759,8 +3759,8 @@
     {
       "path": "/adhd-diagnosis-florida",
       "pageType": "Geo SEO Landing",
-      "title": "Online ADHD Diagnosis Florida | $199 Evaluation",
-      "h1": "Online ADHD Diagnosis in Florida ($199 Evaluation)",
+      "title": "Online ADHD Diagnosis Florida | $149 Evaluation",
+      "h1": "Online ADHD Diagnosis in Florida ($149 Evaluation)",
       "missionAlignment": 4,
       "brandAlignment": 8,
       "composite": 6,
@@ -3912,8 +3912,8 @@
     {
       "path": "/answers/what-included-199-adhd-evaluation",
       "pageType": "Health Guide",
-      "title": "What is included in Siya Health’s $199 ADHD evaluation?",
-      "h1": "What is included in Siya Health’s $199 ADHD evaluation?",
+      "title": "What is included in Siya Health’s $149 ADHD evaluation?",
+      "h1": "What is included in Siya Health’s $149 ADHD evaluation?",
       "missionAlignment": 9,
       "brandAlignment": 8,
       "composite": 8.5,
@@ -3976,7 +3976,7 @@
       "mainCtaCount": 2
     },
     {
-      "path": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+      "path": "/answers/adhd-and-weight-loss-connection",
       "pageType": "Blog Article",
       "title": "Combining ADHD Treatment & Weight Loss Strategies (2026)",
       "h1": "Combining ADHD Treatment and Weight Loss Strategies (2026)",

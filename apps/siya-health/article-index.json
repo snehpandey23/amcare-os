@@ -1,6 +1,6 @@
 {
-  "generated": "2026-06-07T12:24:15.235Z",
-  "count": 56,
+  "generated": "2026-07-21T06:58:13.665Z",
+  "count": 72,
   "articles": [
     {
       "title": "Health Insights &amp; Blog Hub (2026) | ADHD, Weight Loss &amp; Telehealth",
@@ -21,14 +21,6 @@
       ]
     },
     {
-      "title": "Adderall IR vs XR for Adults: Timing, Duration &amp; What to Ask Your Prescriber",
-      "url": "https://siya.health/blog/adderall-ir-vs-xr-adults",
-      "description": "Adderall immediate-release vs extended-release for adult ADHD: onset, how long effects last, dosing patterns, and how clinicians choose—education only, not medical advice.",
-      "topics": [
-        "adhd"
-      ]
-    },
-    {
       "title": "ADHD Articles Hub (2026) — Diagnosis, Medication Education &amp; Care",
       "url": "https://siya.health/blog/adhd",
       "description": "Explore Siya Health ADHD articles: evaluation, medication education for adults, symptoms, and online care—indexed for search with clear internal links.",
@@ -38,18 +30,25 @@
       ]
     },
     {
-      "title": "ADHD Evaluation in California: Online vs In-Person Options (2026)",
-      "url": "https://siya.health/blog/adhd-evaluation-california-online-vs-in-person",
-      "description": "ADHD evaluation California: compare secure telehealth and in-office visits—timelines, costs, legitimacy, medication discussions, safety.",
+      "title": "ADHD and Binge Eating: The Link, Food Noise & What Helps",
+      "url": "https://siya.health/blog/adhd-and-binge-eating",
+      "description": "Adults with ADHD face higher rates of binge eating. Learn how common it is, ADHD vs emotional eating, food noise, Vyvanse for BED, and when an ADHD evaluation helps.",
       "topics": [
-        "adhd",
-        "california"
+        "adhd"
       ]
     },
     {
-      "title": "How Much Does an ADHD Evaluation Cost in California?",
-      "url": "https://siya.health/blog/adhd-evaluation-cost-california",
-      "description": "ADHD evaluation cost California: typical price ranges, what drives fees, hidden add-ons to watch for, cash vs insurance angles, budgeting follow-up realistically.",
+      "title": "ADHD Brain Imaging Subtypes: What New Research May Mean",
+      "url": "https://siya.health/blog/adhd-brain-imaging-subtypes",
+      "description": "Emerging JAMA Psychiatry research describes three ADHD-related brain patterns. Learn what biotypes may mean—and what they do not change about diagnosis today.",
+      "topics": [
+        "adhd"
+      ]
+    },
+    {
+      "title": "ADHD Evaluation in California: Online vs In-Person Options (2026)",
+      "url": "https://siya.health/blog/adhd-evaluation-california-online-vs-in-person",
+      "description": "ADHD evaluation California: compare secure telehealth and in-office visits—timelines, costs, legitimacy, medication discussions, safety.",
       "topics": [
         "adhd",
         "california"
@@ -65,9 +64,25 @@
       ]
     },
     {
-      "title": "Do You Need ADHD Medication Every Day? Daily vs As-Needed (Adults)",
+      "title": "ADHD and Hormones in Women: Cycle, Perimenopause &amp; Shifts",
+      "url": "https://siya.health/blog/adhd-hormones-women",
+      "description": "Why ADHD symptoms can shift with the menstrual cycle and perimenopause. Estrogen–attention biology in plain language, evidence limits, myths, and women-informed evaluation.",
+      "topics": [
+        "adhd"
+      ]
+    },
+    {
+      "title": "ADHD in Women: Symptoms, Masking &amp; Late Diagnosis",
+      "url": "https://siya.health/blog/adhd-in-women",
+      "description": "Learn how ADHD can appear in adult women, including masking, late diagnosis, hormones, burnout, executive dysfunction, and treatment options.",
+      "topics": [
+        "adhd"
+      ]
+    },
+    {
+      "title": "Do You Need ADHD Medication Every Day? (Daily vs PRN for Adults)",
       "url": "https://siya.health/blog/adhd-medication-daily-or-as-needed-adults",
-      "description": "Do adults need ADHD medication every day? Daily vs as-needed use, medication breaks, risks of inconsistent use, and why your prescriber should guide the plan.",
+      "description": "Daily ADHD dosing vs weekends off—what's safe for adults? Learn PRN vs daily trade-offs before changing your medication schedule.",
       "topics": [
         "adhd",
         "medication"
@@ -84,17 +99,6 @@
       ]
     },
     {
-      "title": "Can You Get ADHD Medication Online in Texas? Rules &amp; Safety",
-      "url": "https://siya.health/blog/adhd-medication-online-texas-telehealth",
-      "description": "ADHD medication via telehealth in Texas: what legitimate care includes, evaluation requirements, red flags, and why structured visits matter—education only.",
-      "topics": [
-        "adhd",
-        "telehealth",
-        "texas",
-        "medication"
-      ]
-    },
-    {
       "title": "ADHD Medication Options in California: Stimulants, Non‑Stimulants &amp; FAQs",
       "url": "https://siya.health/blog/adhd-medication-options-california",
       "description": "Compare ADHD meds in CA: ADHD medication options California—Vyvanse, Adderall, non‑stimulants, generics. Education only; no prescribing promises.",
@@ -105,9 +109,9 @@
       ]
     },
     {
-      "title": "ADHD Medication Options for Adults in 2026: Stimulants &amp; Non-Stimulants",
+      "title": "ADHD Medication Options for Adults: Stimulant vs Non-Stimulant Guide",
       "url": "https://siya.health/blog/adhd-medication-options-for-adults",
-      "description": "Adult ADHD medication options in 2026: stimulant vs non-stimulant classes, combination strategies, monitoring, and how licensed prescribers personalize treatment.",
+      "description": "First ADHD med visit? See how clinicians compare stimulant and non-stimulant options, combination strategies, and what trials usually look like.",
       "topics": [
         "adhd",
         "medication"
@@ -123,9 +127,9 @@
       ]
     },
     {
-      "title": "Adult ADHD Symptoms That Are Often Overlooked",
+      "title": "7 Adult ADHD Signs Doctors Miss (Not Just \"Can't Focus\")",
       "url": "https://siya.health/blog/adhd-symptoms-overlooked",
-      "description": "These ADHD symptoms in adults are easy to miss—or dismiss. Learn what clinicians look for beyond the obvious signs.",
+      "description": "Forgetfulness isn't the only sign. Hyperfocus, emotional swings, and procrastination despite caring—overlooked adult ADHD symptoms clinicians evaluate.",
       "topics": [
         "adhd"
       ]
@@ -150,12 +154,146 @@
       ]
     },
     {
-      "title": "ADHD Treatment in Houston: Online Telehealth Options",
-      "url": "https://siya.health/blog/adhd-treatment-houston-online",
-      "description": "ADHD treatment for Houston adults via telehealth: what online care includes, benefits, legitimacy, and who it fits—plus how to start with a licensed Texas clinician.",
+      "title": "ADHD Treatment Austin TX | Virtual Adult Care",
+      "url": "https://siya.health/blog/adhd-treatment-austin-tx",
+      "description": "Adult ADHD treatment in Austin via physician-led telehealth. Evaluation steps, medication management, virtual care for busy professionals—Meet & Greet or $149 evaluation.",
       "topics": [
         "adhd",
-        "telehealth",
+        "texas"
+      ]
+    },
+    {
+      "title": "ADHD Treatment Dallas | Virtual Adult Care",
+      "url": "https://siya.health/blog/adhd-treatment-dallas-tx",
+      "description": "Adult ADHD treatment in Dallas via physician-led telehealth. Learn evaluation steps, medication management, virtual care, and how to start—Meet & Greet or $149 evaluation.",
+      "topics": [
+        "adhd",
+        "texas"
+      ]
+    },
+    {
+      "title": "ADHD Treatment Fort Worth | Virtual Adult Care",
+      "url": "https://siya.health/blog/adhd-treatment-fort-worth-tx",
+      "description": "Adult ADHD treatment in Fort Worth via physician-led telehealth. Evaluation steps, medication management, and virtual care—$149 evaluation, Meet & Greet available.",
+      "topics": [
+        "adhd",
+        "texas"
+      ]
+    },
+    {
+      "title": "ADHD Treatment Houston TX | Virtual Adult Care",
+      "url": "https://siya.health/blog/adhd-treatment-houston-tx",
+      "description": "Adult ADHD treatment in Houston via physician-led telehealth. Evaluation steps, medication management, and virtual care built for shift and TMC schedules—Meet & Greet or $149 evaluation.",
+      "topics": [
+        "adhd",
+        "texas"
+      ]
+    },
+    {
+      "title": "ADHD Treatment Los Angeles CA | Virtual Care | Siya",
+      "url": "https://siya.health/blog/adhd-treatment-los-angeles-ca",
+      "description": "Adult ADHD treatment in Los Angeles via physician-led telehealth for creative schedules and long drives—Meet & Greet or $149 evaluation.",
+      "topics": [
+        "adhd",
+        "california"
+      ]
+    },
+    {
+      "title": "ADHD Treatment Miami FL | Virtual Adult Care",
+      "url": "https://siya.health/blog/adhd-treatment-miami-fl",
+      "description": "Adult ADHD treatment in Miami via physician-led telehealth. Evaluation steps, medication management, and bilingual-friendly virtual care—Meet & Greet or $149 evaluation.",
+      "topics": [
+        "adhd",
+        "florida"
+      ]
+    },
+    {
+      "title": "ADHD Treatment Oakland CA | Virtual Care | Siya",
+      "url": "https://siya.health/blog/adhd-treatment-oakland-ca",
+      "description": "Adult ADHD treatment in Oakland via physician-led telehealth for East Bay, BART & creative–tech schedules—Meet & Greet or $149 evaluation.",
+      "topics": [
+        "adhd",
+        "california"
+      ]
+    },
+    {
+      "title": "ADHD Treatment Orange County CA | Virtual Care | Siya",
+      "url": "https://siya.health/blog/adhd-treatment-orange-county-ca",
+      "description": "Adult ADHD treatment in Orange County via physician-led telehealth for Irvine, family suburbs & 405/55 life—Meet & Greet or $149 evaluation.",
+      "topics": [
+        "adhd",
+        "california"
+      ]
+    },
+    {
+      "title": "ADHD Treatment Orlando FL | Virtual Adult Care",
+      "url": "https://siya.health/blog/adhd-treatment-orlando-fl",
+      "description": "Adult ADHD treatment in Orlando via physician-led telehealth. Evaluation steps, medication management, and virtual care built for theme park and shift schedules—Meet & Greet or $149 evaluation.",
+      "topics": [
+        "adhd",
+        "florida"
+      ]
+    },
+    {
+      "title": "ADHD Treatment Philadelphia PA | Virtual Adult Care",
+      "url": "https://siya.health/blog/adhd-treatment-philadelphia-pa",
+      "description": "Adult ADHD treatment in Philadelphia via physician-led telehealth. Evaluation steps, medication management, and virtual care built for academic and healthcare schedules—Meet & Greet or $149 evaluation.",
+      "topics": [
+        "adhd",
+        "pennsylvania"
+      ]
+    },
+    {
+      "title": "ADHD Treatment Sacramento CA | Virtual Care | Siya",
+      "url": "https://siya.health/blog/adhd-treatment-sacramento-ca",
+      "description": "Adult ADHD treatment in Sacramento via physician-led telehealth for capital, Central Valley & UC Davis schedules—Meet & Greet or $149 evaluation.",
+      "topics": [
+        "adhd",
+        "california"
+      ]
+    },
+    {
+      "title": "ADHD Treatment San Antonio TX | Virtual Adult Care",
+      "url": "https://siya.health/blog/adhd-treatment-san-antonio-tx",
+      "description": "Physician-led ADHD treatment for San Antonio adults. Evaluation steps, medication management, and flexible virtual care built for military, healthcare, and bilingual households—$149 evaluation.",
+      "topics": [
+        "adhd",
+        "texas"
+      ]
+    },
+    {
+      "title": "ADHD Treatment San Diego CA | Virtual Care",
+      "url": "https://siya.health/blog/adhd-treatment-san-diego-ca",
+      "description": "Adult ADHD treatment in San Diego via physician-led telehealth for military-adjacent, biotech, and coastal life—Meet & Greet or $149 evaluation.",
+      "topics": [
+        "adhd",
+        "california"
+      ]
+    },
+    {
+      "title": "ADHD Treatment San Francisco CA | Virtual Care | Siya",
+      "url": "https://siya.health/blog/adhd-treatment-san-francisco-ca",
+      "description": "Adult ADHD treatment in San Francisco via physician-led telehealth for tech, transit, and hybrid remote life—Meet & Greet or $149 evaluation.",
+      "topics": [
+        "adhd",
+        "california"
+      ]
+    },
+    {
+      "title": "ADHD Treatment San Jose CA | Virtual Adult Care | Siya",
+      "url": "https://siya.health/blog/adhd-treatment-san-jose-ca",
+      "description": "Adult ADHD treatment in San Jose via physician-led telehealth for Silicon Valley engineers and dual careers—Meet & Greet or $149 evaluation.",
+      "topics": [
+        "adhd",
+        "california"
+      ]
+    },
+    {
+      "title": "ADHD Treatment Texas | Physician-Led Virtual Care",
+      "url": "https://siya.health/blog/adhd-treatment-texas",
+      "description": "Physician-led ADHD treatment for adults across Texas—Dallas, Houston, Austin, San Antonio, Fort Worth. Evaluation, medication management, and virtual care from $149.",
+      "topics": [
+        "adhd",
         "texas"
       ]
     },
@@ -178,23 +316,6 @@
       ]
     },
     {
-      "title": "What Happens After an ADHD Diagnosis? Next Steps for Adults",
-      "url": "https://siya.health/blog/after-adhd-diagnosis-next-steps-adults",
-      "description": "After an adult ADHD diagnosis: understanding the diagnosis, treatment options, building a personalized plan, and why ongoing care matters—education from Siya Health.",
-      "topics": [
-        "adhd"
-      ]
-    },
-    {
-      "title": "Combining ADHD Treatment &amp; Weight Loss Strategies (2026)",
-      "url": "https://siya.health/blog/combining-adhd-treatment-and-weight-loss-strategies",
-      "description": "Combining ADHD treatment and weight loss in 2026: stimulant appetite effects, GLP-1 overlap, coaching, and coordinated prescribing—education only.",
-      "topics": [
-        "adhd",
-        "weight-loss"
-      ]
-    },
-    {
       "title": "Compounded vs Branded GLP-1 Medications (2026): Safety &amp; Standards",
       "url": "https://siya.health/blog/compounded-vs-branded-glp1-medications",
       "description": "Compounded vs branded GLP-1 in 2026: manufacturing standards, regulatory context, risks of unapproved copies, and why clinician oversight matters.",
@@ -204,9 +325,9 @@
       ]
     },
     {
-      "title": "Focalin vs Adderall for ADHD (2026): Methylphenidate vs Amphetamine",
-      "url": "https://siya.health/blog/focalin-vs-adderall-comparison",
-      "description": "Focalin vs Adderall in 2026: methylphenidate vs amphetamine class, dosing ideas, duration, side effects, and how clinicians pick stimulants for adults.",
+      "title": "Executive Dysfunction in ADHD: Signs, Domains &amp; What Helps",
+      "url": "https://siya.health/blog/executive-dysfunction-adhd",
+      "description": "Learn how executive dysfunction shows up in adult ADHD—task initiation, working memory, planning, organization, decision fatigue, and when evaluation helps.",
       "topics": [
         "adhd"
       ]
@@ -224,6 +345,7 @@
       "url": "https://siya.health/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
       "description": "Normal total testosterone but still feel terrible? Learn how free testosterone, SHBG, and lab methods explain the mismatch—and when evaluation is appropriate.",
       "topics": [
+        "labs",
         "mens-health"
       ]
     },
@@ -289,7 +411,17 @@
       "url": "https://siya.health/blog/insulin-resistance-and-weight-loss-clinician-overview",
       "description": "Insulin resistance can exist with a normal A1C and make weight loss harder. Learn early signs, visceral fat, cravings, sleep, ADHD overlap, evidence-based steps, and myths—without wellness clichés.",
       "topics": [
-        "weight-loss"
+        "weight-loss",
+        "labs"
+      ]
+    },
+    {
+      "title": "Iron Deficiency, Brain Fog &amp; ADHD: What Research Shows",
+      "url": "https://siya.health/blog/iron-deficiency-brain-fog-adhd",
+      "description": "Low iron and low ferritin can worsen brain fog and ADHD-like symptoms. Learn association vs causation, dopamine biology, and what to discuss with a clinician.",
+      "topics": [
+        "adhd",
+        "labs"
       ]
     },
     {
@@ -307,15 +439,6 @@
       "description": "Skeptical about online ADHD diagnosis? Here's what makes it legitimate—and what to look for when choosing a provider.",
       "topics": [
         "adhd"
-      ]
-    },
-    {
-      "title": "Long-Term Weight Loss Medications: What to Expect in 2026",
-      "url": "https://siya.health/blog/long-term-weight-loss-medications-what-to-expect",
-      "description": "Long-term weight loss medications in 2026: maintenance phases, plateaus, monitoring, mental health, and realistic expectations—no guaranteed outcomes.",
-      "topics": [
-        "weight-loss",
-        "medication"
       ]
     },
     {
@@ -344,9 +467,9 @@
       ]
     },
     {
-      "title": "Non-Stimulant ADHD Medications Explained (2026) — Options for Adults",
+      "title": "Non-Stimulant ADHD Meds: When Are They Used Instead of Stimulants?",
       "url": "https://siya.health/blog/non-stimulant-adhd-medications-explained",
-      "description": "Non-stimulant ADHD medications in 2026: atomoxetine, guanfacine, clonidine, viloxazine—how they work, timelines, side effects, and when prescribers choose them.",
+      "description": "Can't tolerate stimulants? Compare atomoxetine, guanfacine, and viloxazine—onset timelines, side effects, and when prescribers choose non-stimulant ADHD meds.",
       "topics": [
         "adhd",
         "medication"
@@ -388,11 +511,25 @@
       ]
     },
     {
+      "title": "Perimenopause Brain Fog: Focus &amp; Memory in Your 40s",
+      "url": "https://siya.health/blog/perimenopause-brain-fog",
+      "description": "Perimenopause brain fog is common—but sleep, mood, thyroid, iron, and ADHD unmasking can look similar. Learn what to notice and when to seek evaluation.",
+      "topics": []
+    },
+    {
       "title": "Phentermine for Weight Loss: Safety &amp; Effectiveness in 2026",
       "url": "https://siya.health/blog/phentermine-for-weight-loss-safety-and-effectiveness",
       "description": "Phentermine for weight loss in 2026: FDA history, cardiovascular cautions, short-term use norms, monitoring, and alternatives—educational only.",
       "topics": [
         "weight-loss"
+      ]
+    },
+    {
+      "title": "POTS and ADHD: Shared Symptoms, Overlap &amp; What Research Shows",
+      "url": "https://siya.health/blog/pots-and-adhd",
+      "description": "POTS and ADHD can share brain fog, fatigue, and attention problems. Learn orthostatic intolerance, current evidence, and why overlap creates diagnostic confusion.",
+      "topics": [
+        "adhd"
       ]
     },
     {
@@ -446,9 +583,9 @@
       ]
     },
     {
-      "title": "Vyvanse vs Adderall for ADHD in 2026: Differences Adults Should Know",
+      "title": "Vyvanse vs Adderall: Which Lasts Longer for Adult ADHD?",
       "url": "https://siya.health/blog/vyvanse-vs-adderall-differences",
-      "description": "Vyvanse vs Adderall (2026): prodrug design, duration, dosing, abuse-deterrence themes, side effects, and why your prescriber chooses one over the other.",
+      "description": "Vyvanse vs Adderall for adults: compare duration, onset, crash patterns, and side effects—what to ask your prescriber before switching stimulants.",
       "topics": [
         "adhd"
       ]
@@ -466,6 +603,7 @@
       "url": "https://siya.health/blog/when-is-testosterone-therapy-appropriate",
       "description": "When testosterone therapy is appropriate in 2026: hypogonadism diagnosis, monitoring, fertility, cardiovascular themes—no anti-aging hype, education only.",
       "topics": [
+        "labs",
         "mens-health"
       ]
     },

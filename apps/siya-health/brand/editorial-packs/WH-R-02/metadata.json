@@ -1,0 +1,25 @@
+{
+  "id": "WH-R-02",
+  "title": "When coping strategies suddenly stop working",
+  "family": "Recognition",
+  "layout": "R-02",
+  "knowledge_product": "/womens-midlife-health",
+  "spoke": "/blog/perimenopause-brain-fog",
+  "related": ["/blog/adhd-hormones-women", "/blog/adhd-in-women"],
+  "status": "Approved",
+  "clinical_review": "Spokes published with pending formal review disclaimer",
+  "scores": {
+    "recognition": 5,
+    "instagram": 5,
+    "linkedin_founder": 5,
+    "linkedin_company": 4,
+    "video": 5,
+    "pinterest": 3,
+    "newsletter": 4,
+    "facebook": 4,
+    "x": 4
+  },
+  "design_first": ["instagram_carousel", "reel", "linkedin_founder"],
+  "founder_cta": false,
+  "company_cta": true
+}

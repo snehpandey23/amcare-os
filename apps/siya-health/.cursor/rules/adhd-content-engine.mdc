@@ -1,0 +1,21 @@
+---
+description: ADHD Knowledge Architecture Content Engine — gate, pipeline, linking, EEAT for Siya ADHD content
+globs: blog/**/*,answers/**/*,docs/ADHD*.md,docs/BLOG*.md,docs/LOCAL*.md
+alwaysApply: false
+---
+
+# ADHD Content Engine
+
+Follow `docs/ADHD-CONTENT-ENGINE.md` and `docs/ADHD-KNOWLEDGE-ARCHITECTURE.md` for all ADHD blogs, FAQs, and pillars.
+
+**Gate:** definitive topic ownership OR material pillar strength — else don’t publish.
+
+**Pipeline:** Gap → Brief → SEO → Outline → Link Map → Medical checklist → Draft (brief+outline first unless “draft now”).
+
+**SOP links:** 1 pillar · 2 blogs · 1 FAQ · 1 service · 1 local if live.
+
+**CTA:** Awareness=screening · Trust=Meet & Greet · Evaluation=/adhd-care.
+
+**Quality:** Own the entity intersection; prevalence, tables, myths, practical day, meds search angles, evaluation process, EEAT, conversion close — not encyclopedia-only.
+
+**Local pages:** Follow `docs/LOCAL-ADHD-TREATMENT-PAGE-ENGINE.md` (Phase 5; anti-doorway).

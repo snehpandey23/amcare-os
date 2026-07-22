@@ -1,0 +1,39 @@
+{
+  "generatedAt": "2026-07-21T06:58:10.340Z",
+  "guidesWithEvidenceCard": 36,
+  "guidesWithoutEvidenceCard": 23,
+  "guidesWithoutCard": [
+    "/answers/adhd-and-weight-loss-connection",
+    "/answers/adhd-medication-every-day",
+    "/answers/asrs-adhd-screening-explained",
+    "/answers/can-adhd-be-diagnosed-online",
+    "/answers/can-you-get-adhd-medication-online",
+    "/answers/executive-dysfunction-adhd",
+    "/answers/glp-1-nausea-management",
+    "/answers/high-functioning-adhd",
+    "/answers/how-long-adhd-evaluation",
+    "/answers/how-much-does-adhd-testing-cost",
+    "/answers/insulin-resistance-without-diabetes",
+    "/answers/is-online-adhd-diagnosis-legitimate",
+    "/answers/late-adhd-diagnosis-adults",
+    "/answers/medical-weight-loss-vs-dieting",
+    "/answers/meet-and-greet-telehealth-expectations",
+    "/answers/rejection-sensitivity-adhd",
+    "/answers/screening-vs-adhd-evaluation",
+    "/answers/telehealth-adhd-california",
+    "/answers/telehealth-adhd-texas",
+    "/answers/testosterone-and-adhd-overlap",
+    "/answers/time-blindness-adhd",
+    "/answers/what-included-199-adhd-evaluation",
+    "/answers/what-is-free-testosterone"
+  ],
+  "flaggedRows": [
+    {
+      "url": "/answers/which-preventive-blood-tests-adults",
+      "label": "USPSTF recommendations on lipid disorders screen",
+      "value": "clinical summary",
+      "issue": "thin_value"
+    }
+  ],
+  "flaggedCount": 1
+}

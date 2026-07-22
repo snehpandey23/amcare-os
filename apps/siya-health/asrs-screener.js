@@ -8,7 +8,8 @@
   var STEP_CHOOSE = -1;
   var STEP_INTRO = 0;
   var STEP_RESULTS = 7;
-  var THRESHOLD = 4; // 4+ Often/Very Often = positive screen
+  var RESULTS_PAGE = '/adhd-screening-results';
+  var REDIRECT_DELAY_MS = 250;
 
   var container = document.getElementById('asrs-screener');
   if (!container) return;
@@ -17,6 +18,7 @@
   var currentStep = STEP_CHOOSE;
   var answers = [null, null, null, null, null, null];
   var asrsEntrySource = 'organic_chooser';
+  var completionRedirectScheduled = false;
 
   function pushSiyaEvent(eventName, detail) {
     window.dataLayer = window.dataLayer || [];
@@ -53,7 +55,7 @@
     });
 
     if (stepIndex === STEP_RESULTS) {
-      showResults();
+      completeScreeningAndRedirect();
     }
 
     if (stepIndex === STEP_INTRO) {
@@ -78,22 +80,69 @@
     return score;
   }
 
-  function showResults() {
+  function resultsPageUrl(score) {
+    var params = new URLSearchParams();
+    params.set('from', 'asrs');
+    params.set('score', String(score));
+    params.set('entry', asrsEntrySource);
+    return RESULTS_PAGE + '?' + params.toString();
+  }
+
+  /** Fire completion events, show brief handoff UI, then redirect to dedicated results page. */
+  function completeScreeningAndRedirect() {
     var score = calculateScore();
     var scoreEl = document.getElementById('asrs-score-para');
     var messageEl = document.getElementById('asrs-results-message');
+    var ctaBlock = container.querySelector('.asrs-cta-completion');
+    var destination = resultsPageUrl(score);
 
     if (scoreEl) {
       scoreEl.textContent = 'You had ' + score + ' response(s) in the "Often" or "Very Often" range.';
     }
 
     if (messageEl) {
-      if (score >= THRESHOLD) {
-        messageEl.innerHTML = '<p><strong>Your responses suggest ADHD may be worth exploring.</strong> A licensed provider can help you understand next steps and whether a full evaluation makes sense for you.</p>';
-      } else {
-        messageEl.innerHTML = '<p><strong>Your responses don\'t strongly suggest ADHD,</strong> but if you still have concerns about focus, organization, or other symptoms, a free ADHD screening or Talk to a Clinician visit can help. A licensed provider can answer your questions.</p>';
-      }
+      messageEl.innerHTML =
+        '<p><strong>Screening complete.</strong> Taking you to next-step options…</p>' +
+        '<p class="cta-microcopy">If you are not redirected, <a href="' +
+        destination +
+        '">continue to your ADHD screening results</a>.</p>';
     }
+
+    if (ctaBlock) {
+      ctaBlock.innerHTML =
+        '<a class="button ds-button ds-button--primary" href="' +
+        destination +
+        '" data-siya-track="screening-results-continue" data-siya-location="screening-results-handoff">Continue to next steps</a>';
+    }
+
+    var detail = {
+      funnel: 'adhd_california',
+      page_path: window.location.pathname,
+      page_location: window.location.href,
+      conversion_type: 'screening_complete',
+      asrs_score: score,
+      entry_source: asrsEntrySource,
+      next_page: RESULTS_PAGE,
+    };
+
+    pushSiyaEvent('adhd_screening_complete', detail);
+    pushSiyaEvent('asrs_results_view', {
+      entry_source: asrsEntrySource,
+      score: score,
+      next_page: RESULTS_PAGE,
+    });
+    /* Legacy alias preserved for existing GTM tags */
+    pushSiyaEvent('screening_complete', detail);
+    if (window.siyaTrack) {
+      window.siyaTrack('adhd_screening_complete', detail);
+      window.siyaTrack('screening_complete', detail);
+    }
+
+    if (completionRedirectScheduled) return;
+    completionRedirectScheduled = true;
+    window.setTimeout(function () {
+      window.location.assign(destination);
+    }, REDIRECT_DELAY_MS);
   }
 
   function goNext() {

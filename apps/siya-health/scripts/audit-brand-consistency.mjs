@@ -21,7 +21,7 @@ const BRAND_PILLARS = {
   weightLoss: /\b(weight loss|glp-?1|semaglutide|tirzepatide|medical weight loss|obesity)\b/i,
   metabolic: /\b(metabolic|insulin resistance|a1c|food noise)\b/i,
   primaryCare: /\b(primary care|family medicine|urgent care|telehealth visit|whole-?person)\b/i,
-  transparentPricing: /\b(transparent pricing|membership|pricing|\$199|\$79|\$149|cash pay|fsa|hsa)\b/i,
+  transparentPricing: /\b(transparent pricing|membership|pricing|\$149|\$79|\$149|cash pay|fsa|hsa)\b/i,
   longTerm: /\b(ongoing|follow-?up|long-?term|relationship|monitoring)\b/i,
   evidenceBased: /\b(evidence-?based|structured evaluation|validated|clinical judgment|clinically reviewed|medically reviewed)\b/i,
   wholePerson: /\b(whole-?person|comprehensive|full picture|focus, energy, weight|fatigue|mood|hormones)\b/i,
@@ -319,7 +319,7 @@ function main() {
 
   md += `\n---\n\n## Implementation priorities\n\n`;
   md += `### P0 — Brand-breaking\n`;
-  md += `- **REWRITE** \`/membership-pricing\` — legacy Bronze/Silver/Gold conflicts with $199/$79/$149 care-delivery model\n`;
+  md += `- **REWRITE** \`/membership-pricing\` — legacy Bronze/Silver/Gold conflicts with $149/$79/$149 care-delivery model\n`;
   md += `- **DELETE** legacy legal stubs and off-brand articles (see DELETE list)\n`;
   md += `- **MERGE** 17 cannibalizing guide→blog duplicate pairs\n\n`;
   md += `### P1 — Positioning drift\n`;

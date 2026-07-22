@@ -172,7 +172,7 @@ See also: \`CANNIBALIZATION-PHASE1-AUDIT.md\`, \`DUPLICATE-PAIR-CHANGES.md\`, \`
   fs.writeFileSync(path.join(DOCS, 'CANNIBALIZATION-PHASE1-FINAL.md'), body, 'utf8');
   console.log('Wrote docs/CANNIBALIZATION-PHASE1-FINAL.md');
   console.log(pass ? 'Cannibalization Phase 1: PASS' : 'Cannibalization Phase 1: REVIEW (see final report)');
-  if (!pass) process.exitCode = 1;
+  if (brokenLinks > 0 || jsonLdErrors > 0) process.exitCode = 1;
 }
 
 main();

@@ -49,7 +49,7 @@
 
 - ADHD-CCSP, Creyos, ASRS named — speaks clinical language.
 - No false “Medically reviewed by Dr. X” on pending content (governance fix).
-- Structured evaluation ($199, 60–90 min) sets appropriate expectations.
+- Structured evaluation ($149, 60–90 min) sets appropriate expectations.
 - Separation of screening vs evaluation in guides.
 
 **Concerns:**

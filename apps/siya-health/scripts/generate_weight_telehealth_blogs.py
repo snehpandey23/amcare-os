@@ -225,7 +225,7 @@ def header_for(kind: Kind) -> str:
 
             <p>If you are considering <strong>medically supervised weight loss</strong>, Siya Health offers provider-guided options for eligible adults—always anchored in clinical evaluation rather than trends.</p>
             <div class="cta-block blog-cta">
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book a free consultation</a>
+              <a class="button" href="https://spruce.care/siyahealth" target="_blank" rel="noopener">Book a free consultation</a>
             </div>
 
             <h2>FAQ</h2>
@@ -269,6 +269,7 @@ def header_for(kind: Kind) -> str:
       </div>
       <div class="container"><p class="footer-notice">For emergencies, call 911. All telehealth services are provided by licensed medical professionals.</p><small>© 2026 Siya Health Inc.</small></div>
     </footer>
+    <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="69be9ab3db1480f6799cdd18"></script>
   </body>
 </html>
 """
@@ -339,7 +340,7 @@ def header_for(kind: Kind) -> str:
 
             <p><strong>Consult a licensed provider</strong> to determine if treatment is appropriate for you. Bring questions, medical history, and an open discussion of risks and alternatives.</p>
             <div class="cta-block blog-cta">
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book a free consultation</a>
+              <a class="button" href="https://spruce.care/siyahealth" target="_blank" rel="noopener">Book a free consultation</a>
             </div>
 
             <h2>FAQ</h2>
@@ -383,6 +384,7 @@ def header_for(kind: Kind) -> str:
       </div>
       <div class="container"><p class="footer-notice">For emergencies, call 911. All telehealth services are provided by licensed medical professionals.</p><small>© 2026 Siya Health Inc.</small></div>
     </footer>
+    <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="69be9ab3db1480f6799cdd18"></script>
   </body>
 </html>
 """

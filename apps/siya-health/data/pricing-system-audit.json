@@ -115,7 +115,7 @@
         "category": "service-page",
         "type": "hero-199-without-breakdown",
         "severity": "medium",
-        "detail": "Shows \"$199 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
+        "detail": "Shows \"$149 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
       },
       {
         "route": "/creyos-adhd-testing",
@@ -131,7 +131,7 @@
         "category": "service-page",
         "type": "hero-199-without-breakdown",
         "severity": "medium",
-        "detail": "Shows \"$199 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
+        "detail": "Shows \"$149 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
       },
       {
         "route": "/mens-health-longevity",
@@ -139,7 +139,7 @@
         "category": "service-page",
         "type": "hero-199-without-breakdown",
         "severity": "medium",
-        "detail": "Shows \"$199 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
+        "detail": "Shows \"$149 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
       },
       {
         "route": "/online-adhd-test",
@@ -155,7 +155,7 @@
         "category": "service-page",
         "type": "hero-199-without-breakdown",
         "severity": "medium",
-        "detail": "Shows \"$199 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
+        "detail": "Shows \"$149 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
       },
       {
         "route": "/pricing",
@@ -163,7 +163,7 @@
         "category": "core-pricing",
         "type": "legacy-membership-tiers",
         "severity": "critical",
-        "detail": "Uses Bronze/Silver/Gold membership tiers instead of care-delivery $199/$79/$149 model"
+        "detail": "Uses Bronze/Silver/Gold membership tiers instead of care-delivery $149/$79/$149 model"
       },
       {
         "route": "/primary-urgent-care",
@@ -171,7 +171,7 @@
         "category": "service-page",
         "type": "hero-199-without-breakdown",
         "severity": "medium",
-        "detail": "Shows \"$199 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
+        "detail": "Shows \"$149 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
       }
     ],
     "totalInconsistencies": 17,
@@ -182,7 +182,7 @@
         "category": "core-pricing",
         "type": "legacy-membership-tiers",
         "severity": "critical",
-        "detail": "Uses Bronze/Silver/Gold membership tiers instead of care-delivery $199/$79/$149 model"
+        "detail": "Uses Bronze/Silver/Gold membership tiers instead of care-delivery $149/$79/$149 model"
       }
     ],
     "highIssues": [],
@@ -267,7 +267,7 @@
           ],
           "membership": []
         },
-        "title": "Adult ADHD Diagnosis Online — Same-Week Evaluation ($199) | Siya Health",
+        "title": "Adult ADHD Diagnosis Online — Same-Week Evaluation ($149) | Siya Health",
         "issueCount": 0
       },
       {
@@ -441,12 +441,12 @@
         },
         "snippets": {
           "perMonth": [
-            "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+            "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
             "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
           ],
           "membership": []
         },
-        "title": "ADHD Diagnosis Austin TX | Online $199 Evaluation | Siya Health",
+        "title": "ADHD Diagnosis Austin TX | Online $149 Evaluation | Siya Health",
         "issueCount": 1
       },
       {
@@ -468,12 +468,12 @@
         },
         "snippets": {
           "perMonth": [
-            "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+            "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
             "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
           ],
           "membership": []
         },
-        "title": "Online ADHD Diagnosis Florida | $199 Evaluation | Siya Health",
+        "title": "Online ADHD Diagnosis Florida | $149 Evaluation | Siya Health",
         "issueCount": 1
       },
       {
@@ -495,12 +495,12 @@
         },
         "snippets": {
           "perMonth": [
-            "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+            "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
             "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
           ],
           "membership": []
         },
-        "title": "ADHD Diagnosis Houston TX | Online $199 Evaluation | Siya Health",
+        "title": "ADHD Diagnosis Houston TX | Online $149 Evaluation | Siya Health",
         "issueCount": 1
       },
       {
@@ -522,12 +522,12 @@
         },
         "snippets": {
           "perMonth": [
-            "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+            "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
             "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
           ],
           "membership": []
         },
-        "title": "Online ADHD Diagnosis Pennsylvania | $199 | Siya Health",
+        "title": "Online ADHD Diagnosis Pennsylvania | $149 | Siya Health",
         "issueCount": 1
       },
       {
@@ -549,12 +549,12 @@
         },
         "snippets": {
           "perMonth": [
-            "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+            "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
             "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
           ],
           "membership": []
         },
-        "title": "ADHD Diagnosis Philadelphia PA | Online $199 | Siya Health",
+        "title": "ADHD Diagnosis Philadelphia PA | Online $149 | Siya Health",
         "issueCount": 1
       },
       {
@@ -576,12 +576,12 @@
         },
         "snippets": {
           "perMonth": [
-            "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+            "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
             "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
           ],
           "membership": []
         },
-        "title": "Online ADHD Diagnosis Texas | $199 Evaluation | Siya Health",
+        "title": "Online ADHD Diagnosis Texas | $149 Evaluation | Siya Health",
         "issueCount": 1
       },
       {
@@ -603,7 +603,7 @@
         },
         "snippets": {
           "perMonth": [
-            "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+            "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
             "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
           ],
           "membership": []
@@ -630,12 +630,12 @@
         },
         "snippets": {
           "perMonth": [
-            "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+            "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
             "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
           ],
           "membership": []
         },
-        "title": "Adult ADHD Diagnosis Online | $199 Evaluation | Siya Health",
+        "title": "Adult ADHD Diagnosis Online | $149 Evaluation | Siya Health",
         "issueCount": 1
       },
       {
@@ -657,12 +657,12 @@
         },
         "snippets": {
           "perMonth": [
-            "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+            "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
             "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
           ],
           "membership": []
         },
-        "title": "Creyos ADHD Testing Online | Part of $199 Evaluation | Siya Health",
+        "title": "Creyos ADHD Testing Online | Part of $149 Evaluation | Siya Health",
         "issueCount": 1
       },
       {
@@ -684,7 +684,7 @@
         },
         "snippets": {
           "perMonth": [
-            "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+            "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
             "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
           ],
           "membership": []
@@ -713,12 +713,12 @@
         },
         "snippets": {
           "perMonth": [
-            "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+            "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
             "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
           ],
           "membership": []
         },
-        "title": "ADHD Evaluation Cost Online | $199 Flat Rate | Siya Health",
+        "title": "ADHD Evaluation Cost Online | $149 Flat Rate | Siya Health",
         "issueCount": 0
       },
       {
@@ -812,7 +812,7 @@
         "issueCount": 0
       },
       {
-        "route": "/answers/creyos-adhd-testing-explained",
+        "route": "/creyos-adhd-testing",
         "file": "answers/creyos-adhd-testing-explained.html",
         "amounts": [
           199
@@ -1054,11 +1054,11 @@
         "snippets": {
           "perMonth": [
             "ery instrument. Optional follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
-            "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. Key takeaways Siya Health’s $199 adult ADHD"
+            "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. Key takeaways Siya Health’s $149 adult ADHD"
           ],
           "membership": []
         },
-        "title": "What is included in Siya Health’s $199 ADHD evaluation? | Siya Health",
+        "title": "What is included in Siya Health’s $149 ADHD evaluation? | Siya Health",
         "issueCount": 0
       }
     ],
@@ -1146,7 +1146,7 @@
         "issueCount": 1
       },
       {
-        "route": "/blog/after-adhd-diagnosis-next-steps-adults",
+        "route": "/answers/starting-adhd-medication-adults",
         "file": "blog/after-adhd-diagnosis-next-steps-adults.html",
         "amounts": [],
         "flags": {
@@ -1414,7 +1414,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199",
+          "$149",
           "$79",
           "$149"
         ],
@@ -1434,7 +1434,7 @@
         ],
         "membershipSnippets": [],
         "pricingTableDetected": true,
-        "title": "Adult ADHD Diagnosis Online — Same-Week Evaluation ($199) | Siya Health",
+        "title": "Adult ADHD Diagnosis Online — Same-Week Evaluation ($149) | Siya Health",
         "h1": "Adult ADHD Evaluation Online"
       },
       "issues": []
@@ -1469,7 +1469,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199",
+          "$149",
           "$79",
           "$149"
         ],
@@ -1484,13 +1484,13 @@
         "cashPayCount": 0,
         "transparentPricingCount": 1,
         "perMonthSnippets": [
-          "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+          "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
           "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
         ],
         "membershipSnippets": [],
         "pricingTableDetected": false,
-        "title": "ADHD Diagnosis Austin TX | Online $199 Evaluation | Siya Health",
-        "h1": "ADHD Diagnosis in Austin, Texas (Online, $199)"
+        "title": "ADHD Diagnosis Austin TX | Online $149 Evaluation | Siya Health",
+        "h1": "ADHD Diagnosis in Austin, Texas (Online, $149)"
       },
       "issues": [
         {
@@ -1530,7 +1530,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199",
+          "$149",
           "$79",
           "$149"
         ],
@@ -1545,13 +1545,13 @@
         "cashPayCount": 0,
         "transparentPricingCount": 1,
         "perMonthSnippets": [
-          "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+          "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
           "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
         ],
         "membershipSnippets": [],
         "pricingTableDetected": false,
-        "title": "Online ADHD Diagnosis Florida | $199 Evaluation | Siya Health",
-        "h1": "Online ADHD Diagnosis in Florida ($199 Evaluation)"
+        "title": "Online ADHD Diagnosis Florida | $149 Evaluation | Siya Health",
+        "h1": "Online ADHD Diagnosis in Florida ($149 Evaluation)"
       },
       "issues": [
         {
@@ -1591,7 +1591,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199",
+          "$149",
           "$79",
           "$149"
         ],
@@ -1606,13 +1606,13 @@
         "cashPayCount": 0,
         "transparentPricingCount": 1,
         "perMonthSnippets": [
-          "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+          "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
           "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
         ],
         "membershipSnippets": [],
         "pricingTableDetected": false,
-        "title": "ADHD Diagnosis Houston TX | Online $199 Evaluation | Siya Health",
-        "h1": "ADHD Diagnosis in Houston, Texas (Online, $199)"
+        "title": "ADHD Diagnosis Houston TX | Online $149 Evaluation | Siya Health",
+        "h1": "ADHD Diagnosis in Houston, Texas (Online, $149)"
       },
       "issues": [
         {
@@ -1652,7 +1652,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199",
+          "$149",
           "$79",
           "$149"
         ],
@@ -1667,13 +1667,13 @@
         "cashPayCount": 0,
         "transparentPricingCount": 1,
         "perMonthSnippets": [
-          "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+          "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
           "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
         ],
         "membershipSnippets": [],
         "pricingTableDetected": false,
-        "title": "Online ADHD Diagnosis Pennsylvania | $199 | Siya Health",
-        "h1": "Online ADHD Diagnosis in Pennsylvania ($199 Evaluation)"
+        "title": "Online ADHD Diagnosis Pennsylvania | $149 | Siya Health",
+        "h1": "Online ADHD Diagnosis in Pennsylvania ($149 Evaluation)"
       },
       "issues": [
         {
@@ -1713,7 +1713,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199",
+          "$149",
           "$79",
           "$149"
         ],
@@ -1728,13 +1728,13 @@
         "cashPayCount": 0,
         "transparentPricingCount": 1,
         "perMonthSnippets": [
-          "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+          "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
           "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
         ],
         "membershipSnippets": [],
         "pricingTableDetected": false,
-        "title": "ADHD Diagnosis Philadelphia PA | Online $199 | Siya Health",
-        "h1": "ADHD Diagnosis in Philadelphia, Pennsylvania (Online, $199)"
+        "title": "ADHD Diagnosis Philadelphia PA | Online $149 | Siya Health",
+        "h1": "ADHD Diagnosis in Philadelphia, Pennsylvania (Online, $149)"
       },
       "issues": [
         {
@@ -1774,7 +1774,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199",
+          "$149",
           "$79",
           "$149"
         ],
@@ -1789,13 +1789,13 @@
         "cashPayCount": 0,
         "transparentPricingCount": 1,
         "perMonthSnippets": [
-          "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+          "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
           "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
         ],
         "membershipSnippets": [],
         "pricingTableDetected": false,
-        "title": "Online ADHD Diagnosis Texas | $199 Evaluation | Siya Health",
-        "h1": "Online ADHD Diagnosis in Texas ($199 Evaluation)"
+        "title": "Online ADHD Diagnosis Texas | $149 Evaluation | Siya Health",
+        "h1": "Online ADHD Diagnosis in Texas ($149 Evaluation)"
       },
       "issues": [
         {
@@ -1835,7 +1835,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199",
+          "$149",
           "$79",
           "$149"
         ],
@@ -1850,13 +1850,13 @@
         "cashPayCount": 0,
         "transparentPricingCount": 1,
         "perMonthSnippets": [
-          "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+          "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
           "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
         ],
         "membershipSnippets": [],
         "pricingTableDetected": false,
-        "title": "ADHD Evaluation Cost Online | $199 Flat Rate | Siya Health",
-        "h1": "ADHD Evaluation Cost: $199 (What You Get)"
+        "title": "ADHD Evaluation Cost Online | $149 Flat Rate | Siya Health",
+        "h1": "ADHD Evaluation Cost: $149 (What You Get)"
       },
       "issues": []
     },
@@ -1930,7 +1930,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199",
+          "$149",
           "$79",
           "$149"
         ],
@@ -1945,7 +1945,7 @@
         "cashPayCount": 0,
         "transparentPricingCount": 1,
         "perMonthSnippets": [
-          "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+          "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
           "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
         ],
         "membershipSnippets": [],
@@ -1991,7 +1991,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199",
+          "$149",
           "$79",
           "$149"
         ],
@@ -2006,13 +2006,13 @@
         "cashPayCount": 0,
         "transparentPricingCount": 2,
         "perMonthSnippets": [
-          "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+          "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
           "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
         ],
         "membershipSnippets": [],
         "pricingTableDetected": false,
-        "title": "Adult ADHD Diagnosis Online | $199 Evaluation | Siya Health",
-        "h1": "Adult ADHD Diagnosis Online ($199 Comprehensive Evaluation)"
+        "title": "Adult ADHD Diagnosis Online | $149 Evaluation | Siya Health",
+        "h1": "Adult ADHD Diagnosis Online ($149 Comprehensive Evaluation)"
       },
       "issues": [
         {
@@ -2103,7 +2103,7 @@
       "issues": []
     },
     {
-      "route": "/answers/adhd-in-men",
+      "route": "/answers/signs-of-adult-adhd",
       "file": "answers/adhd-in-men.html",
       "category": "health-guide",
       "amounts": [],
@@ -2330,7 +2330,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199
@@ -2496,7 +2496,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199
@@ -2675,7 +2675,7 @@
       "issues": []
     },
     {
-      "route": "/answers/creyos-adhd-testing-explained",
+      "route": "/creyos-adhd-testing",
       "file": "answers/creyos-adhd-testing-explained.html",
       "category": "health-guide",
       "amounts": [
@@ -2702,7 +2702,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199
@@ -2868,7 +2868,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199
@@ -3077,7 +3077,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199
@@ -3127,7 +3127,7 @@
         "amounts": [
           "$500",
           "$2000",
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           500,
@@ -3215,7 +3215,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199
@@ -3501,7 +3501,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199
@@ -3520,7 +3520,7 @@
       "issues": []
     },
     {
-      "route": "/answers/minoxidil-hair-loss-does-it-work",
+      "route": "/blog/minoxidil-for-hair-loss-does-it-work",
       "file": "answers/minoxidil-hair-loss-does-it-work.html",
       "category": "health-guide",
       "amounts": [],
@@ -3560,7 +3560,7 @@
       "issues": []
     },
     {
-      "route": "/answers/non-stimulant-adhd-medications",
+      "route": "/blog/non-stimulant-adhd-medications-explained",
       "file": "answers/non-stimulant-adhd-medications.html",
       "category": "health-guide",
       "amounts": [],
@@ -3640,7 +3640,7 @@
       "issues": []
     },
     {
-      "route": "/answers/oral-vs-injectable-weight-loss-meds",
+      "route": "/blog/oral-vs-injectable-weight-loss-medications",
       "file": "answers/oral-vs-injectable-weight-loss-meds.html",
       "category": "health-guide",
       "amounts": [],
@@ -3720,7 +3720,7 @@
       "issues": []
     },
     {
-      "route": "/answers/phentermine-weight-loss-safety",
+      "route": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
       "file": "answers/phentermine-weight-loss-safety.html",
       "category": "health-guide",
       "amounts": [],
@@ -3947,7 +3947,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199
@@ -4006,7 +4006,7 @@
       "issues": []
     },
     {
-      "route": "/answers/sildenafil-erectile-dysfunction-expectations",
+      "route": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "file": "answers/sildenafil-erectile-dysfunction-expectations.html",
       "category": "health-guide",
       "amounts": [],
@@ -4155,7 +4155,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199
@@ -4254,7 +4254,7 @@
       "issues": []
     },
     {
-      "route": "/answers/tirzepatide-vs-semaglutide",
+      "route": "/blog/tirzepatide-vs-semaglutide-which-is-better",
       "file": "answers/tirzepatide-vs-semaglutide.html",
       "category": "health-guide",
       "amounts": [],
@@ -4443,7 +4443,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199",
+          "$149",
           "$79",
           "$149"
         ],
@@ -4459,12 +4459,12 @@
         "transparentPricingCount": 0,
         "perMonthSnippets": [
           "ery instrument. Optional follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
-          "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. Key takeaways Siya Health’s $199 adult ADHD"
+          "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. Key takeaways Siya Health’s $149 adult ADHD"
         ],
         "membershipSnippets": [],
         "pricingTableDetected": false,
-        "title": "What is included in Siya Health’s $199 ADHD evaluation? | Siya Health",
-        "h1": "What is included in Siya Health’s $199 ADHD evaluation?"
+        "title": "What is included in Siya Health’s $149 ADHD evaluation? | Siya Health",
+        "h1": "What is included in Siya Health’s $149 ADHD evaluation?"
       },
       "issues": []
     },
@@ -4789,7 +4789,7 @@
       "issues": []
     },
     {
-      "route": "/blog/adderall-ir-vs-xr-adults",
+      "route": "/blog/vyvanse-vs-adderall-differences",
       "file": "blog/adderall-ir-vs-xr-adults.html",
       "category": "blog",
       "amounts": [],
@@ -4869,7 +4869,7 @@
       "issues": []
     },
     {
-      "route": "/blog/adhd-evaluation-cost-california",
+      "route": "/blog/adhd-evaluation-cost-texas",
       "file": "blog/adhd-evaluation-cost-california.html",
       "category": "blog",
       "amounts": [],
@@ -4953,7 +4953,7 @@
           "$150",
           "$300",
           "$350",
-          "$199",
+          "$149",
           "$79",
           "$149",
           "$400"
@@ -5070,7 +5070,7 @@
       "issues": []
     },
     {
-      "route": "/blog/adhd-medication-online-texas-telehealth",
+      "route": "/blog/online-adhd-diagnosis-texas",
       "file": "blog/adhd-medication-online-texas-telehealth.html",
       "category": "blog",
       "amounts": [],
@@ -5258,7 +5258,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199",
+          "$149",
           "$149"
         ],
         "numericAmounts": [
@@ -5367,7 +5367,7 @@
       "issues": []
     },
     {
-      "route": "/blog/adhd-treatment-houston-online",
+      "route": "/blog/online-adhd-diagnosis-texas",
       "file": "blog/adhd-treatment-houston-online.html",
       "category": "blog",
       "amounts": [],
@@ -5527,7 +5527,7 @@
       "issues": []
     },
     {
-      "route": "/blog/after-adhd-diagnosis-next-steps-adults",
+      "route": "/answers/starting-adhd-medication-adults",
       "file": "blog/after-adhd-diagnosis-next-steps-adults.html",
       "category": "blog",
       "amounts": [],
@@ -5569,7 +5569,7 @@
       "issues": []
     },
     {
-      "route": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+      "route": "/answers/adhd-and-weight-loss-connection",
       "file": "blog/combining-adhd-treatment-and-weight-loss-strategies.html",
       "category": "blog",
       "amounts": [],
@@ -5649,7 +5649,7 @@
       "issues": []
     },
     {
-      "route": "/blog/focalin-vs-adderall-comparison",
+      "route": "/blog/vyvanse-vs-adderall-differences",
       "file": "blog/focalin-vs-adderall-comparison.html",
       "category": "blog",
       "amounts": [],
@@ -5958,7 +5958,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199",
+          "$149",
           "$79",
           "$149"
         ],
@@ -6051,7 +6051,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199
@@ -6217,7 +6217,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199
@@ -6236,7 +6236,7 @@
       "issues": []
     },
     {
-      "route": "/blog/long-term-weight-loss-medications-what-to-expect",
+      "route": "/blog/semaglutide-for-weight-loss-how-it-works",
       "file": "blog/long-term-weight-loss-medications-what-to-expect.html",
       "category": "blog",
       "amounts": [],
@@ -6507,7 +6507,7 @@
       "mentions": {
         "amounts": [
           "$1000",
-          "$199",
+          "$149",
           "$79",
           "$149"
         ],
@@ -7121,7 +7121,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199
@@ -7141,7 +7141,7 @@
         {
           "type": "hero-199-without-breakdown",
           "severity": "medium",
-          "detail": "Shows \"$199 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
+          "detail": "Shows \"$149 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
         }
       ]
     },
@@ -7175,7 +7175,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199",
+          "$149",
           "$79",
           "$149"
         ],
@@ -7190,12 +7190,12 @@
         "cashPayCount": 0,
         "transparentPricingCount": 1,
         "perMonthSnippets": [
-          "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+          "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
           "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
         ],
         "membershipSnippets": [],
         "pricingTableDetected": false,
-        "title": "Creyos ADHD Testing Online | Part of $199 Evaluation | Siya Health",
+        "title": "Creyos ADHD Testing Online | Part of $149 Evaluation | Siya Health",
         "h1": "Creyos ADHD Testing (Included in Your Evaluation)"
       },
       "issues": [
@@ -7317,7 +7317,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199
@@ -7337,7 +7337,7 @@
         {
           "type": "hero-199-without-breakdown",
           "severity": "medium",
-          "detail": "Shows \"$199 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
+          "detail": "Shows \"$149 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
         }
       ]
     },
@@ -7615,7 +7615,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199
@@ -7635,7 +7635,7 @@
         {
           "type": "hero-199-without-breakdown",
           "severity": "medium",
-          "detail": "Shows \"$199 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
+          "detail": "Shows \"$149 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
         }
       ]
     },
@@ -7669,7 +7669,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199",
+          "$149",
           "$79",
           "$149"
         ],
@@ -7684,7 +7684,7 @@
         "cashPayCount": 0,
         "transparentPricingCount": 1,
         "perMonthSnippets": [
-          "uation is $199 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
+          "uation is $149 one-time. Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate.",
           "t at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See pricing . Book ADHD evaluation online Fr"
         ],
         "membershipSnippets": [],
@@ -7728,7 +7728,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199
@@ -7748,7 +7748,7 @@
         {
           "type": "hero-199-without-breakdown",
           "severity": "medium",
-          "detail": "Shows \"$199 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
+          "detail": "Shows \"$149 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
         }
       ]
     },
@@ -7782,7 +7782,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199",
+          "$149",
           "$79",
           "$149"
         ],
@@ -7811,7 +7811,7 @@
         {
           "type": "legacy-membership-tiers",
           "severity": "critical",
-          "detail": "Uses Bronze/Silver/Gold membership tiers instead of care-delivery $199/$79/$149 model"
+          "detail": "Uses Bronze/Silver/Gold membership tiers instead of care-delivery $149/$79/$149 model"
         }
       ]
     },
@@ -7843,7 +7843,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199
@@ -7863,7 +7863,7 @@
         {
           "type": "hero-199-without-breakdown",
           "severity": "medium",
-          "detail": "Shows \"$199 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
+          "detail": "Shows \"$149 Transparent Pricing\" hero badge without explaining universal Initial Evaluation model"
         }
       ]
     },
@@ -7895,7 +7895,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199
@@ -8341,7 +8341,7 @@
       },
       "mentions": {
         "amounts": [
-          "$199"
+          "$149"
         ],
         "numericAmounts": [
           199

@@ -62,7 +62,14 @@
       var values = section.querySelectorAll('.trust-metric-value');
       if (!values.length) return;
 
-      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      // Inline/human trust blocks (e.g. ADHD care photo + stats) reflow when digits
+      // count up — skip animation so the adjacent image does not flicker.
+      if (
+        section.classList.contains('trust-metrics-adhd-human') ||
+        section.classList.contains('trust-metrics-human') ||
+        section.hasAttribute('data-no-countup') ||
+        (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+      ) {
         section.classList.add('trust-metrics-animated');
         return;
       }

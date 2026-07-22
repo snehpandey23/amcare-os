@@ -1,0 +1,28 @@
+id: 2026-07-PR-01-001
+topic: ADHD
+intent: Education
+family: Process
+layout: PR-01
+journey_stage: Evaluating
+persona: Adult_ADHD
+emotion: Hopeful
+tone: Calm
+message: Screening → evaluation → plan → follow-up
+image: Step diagram
+image_category: virtual-consult
+image_ref: /adhd-care how-it-works
+headline_length: Short
+caption_length: Medium
+cta: MeetGreet
+cta_label: Book Free Meet & Greet
+evidence_level: ClinicalPractice
+clinical_review: false
+platforms:
+  - Instagram
+  - LinkedIn
+variants: 1
+claims_ok: true
+source_refs:
+  - /adhd-care
+status: seed
+source: ADHD Care process sections

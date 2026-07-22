@@ -61,19 +61,19 @@ export const CALIFORNIA_POSTS = [
 
             <p>For readers across states: <a href="/blog/online-adhd-diagnosis-texas">Online ADHD diagnosis in Texas</a> illustrates parallel evaluation themes so you contrast regional pricing culture against California landscapes.</p>
 
-            <div class="cta-block blog-cta"><a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book Your Free 15-Minute ADHD Consultation</a></div><p class="cta-microcopy">Discuss whether structured evaluation aligns with your story.</p>
+            <div class="cta-block blog-cta"><a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book Your Free 15-Minute ADHD Consultation</a></div><p class="cta-microcopy">Discuss whether structured evaluation aligns with your story.</p>
 
             <section class="blog-california-cta cta-block blog-cta" aria-labelledby="ca-adhd-heading-1">
               <h2 id="ca-adhd-heading-1">Need ADHD care in California?</h2>
               <p>Siya Health offers virtual ADHD evaluation and treatment support for eligible patients.</p>
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book an Appointment</a>
+              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book an Appointment</a>
               <p class="cta-microcopy"><a href="tel:+12154451244">(215) 445-1244</a> · <a href="https://www.siya.health" target="_blank" rel="noopener">www.siya.health</a> · <a href="/book-appointment">Appointment info</a></p>
             </section>
 
             <section class="blog-related" aria-label="Related articles">
               <h2>Related articles</h2>
               <ul>
-                <li><a href="/blog/adhd-evaluation-cost-california">ADHD evaluation cost in California</a></li>
+                <li><a href="/blog/adhd-evaluation-cost-texas">ADHD evaluation cost in California</a></li>
                 <li><a href="/blog/adhd-telehealth-california">ADHD telehealth in California</a></li>
                 <li><a href="/blog/how-to-choose-adhd-provider-california">Choosing an ADHD provider in California</a></li>
                 <li><a href="/adhd-care">ADHD care overview</a></li>

@@ -67,11 +67,11 @@ FOOTER = """    <footer class="footer">
         </div>
         <div class="footer-resources-seo">
           <h4>Resources</h4>
-          <p><a href="/adult-adhd-diagnosis">Adult ADHD Diagnosis</a></p>
-          <p><a href="/adhd-evaluation-cost">ADHD Evaluation Cost</a></p>
-          <p><a href="/online-adhd-test">Online ADHD Screening</a></p>
+          <p><a href="/adhd-care">Adult ADHD Diagnosis</a></p>
+          <p><a href="/pricing">ADHD Evaluation Cost</a></p>
+          <p><a href="/adhd-screening">Online ADHD Screening</a></p>
           <p><a href="/adhd-diagnosis-texas">ADHD Diagnosis Texas</a></p>
-          <p><a href="/adhd-diagnosis-florida">ADHD Diagnosis Florida</a></p>
+          <p><a href="/adhd-care">ADHD Diagnosis Florida</a></p>
           <p><a href="/creyos-adhd-testing">Creyos ADHD Testing</a></p>
         </div>
         <div>
@@ -101,6 +101,7 @@ FOOTER = """    <footer class="footer">
         }}
       }})();
     </script>
+    <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="69be9ab3db1480f6799cdd18"></script>
   </body>
 </html>"""
 
@@ -139,7 +140,7 @@ WHY_SIYA = """
           </div>
           <ul class="credentials-list" style="max-width: 640px; margin: 0 auto;">
             <li>Same-week appointments—not multi-month waitlists</li>
-            <li>Transparent $199 evaluation; FSA/HSA eligible</li>
+            <li>Transparent $149 evaluation; FSA/HSA eligible</li>
             <li>Licensed in Texas, Pennsylvania, and Florida</li>
             <li>HIPAA-compliant video visits; LegitScript certified</li>
           </ul>
@@ -151,9 +152,9 @@ PRICING = """
         <div class="container">
           <div class="section-header">
             <h2>Transparent pricing</h2>
-            <p class="lead">The comprehensive ADHD evaluation is <strong>$199</strong> one-time. Ongoing medication management is available on a monthly plan if clinically appropriate.</p>
+            <p class="lead">The comprehensive ADHD evaluation is <strong>$149</strong> one-time. Ongoing medication management is available on a monthly plan if clinically appropriate.</p>
           </div>
-          <p style="text-align:center; max-width: 560px; margin: 0 auto;"><a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book ADHD evaluation online</a></p>
+          <p style="text-align:center; max-width: 560px; margin: 0 auto;"><a class="button" href="https://spruce.care/siyahealth" target="_blank" rel="noopener">Book ADHD evaluation online</a></p>
         </div>
       </section>"""
 
@@ -164,7 +165,7 @@ CTA_FINAL = """
             <h3>Ready for answers?</h3>
             <p>Book a virtual evaluation or take the free 2-minute screening first.</p>
             <div class="cta-band-buttons">
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book evaluation ($199)</a>
+              <a class="button" href="https://spruce.care/siyahealth" target="_blank" rel="noopener">Book evaluation ($149)</a>
               <a class="button secondary" href="/adhd-screening">Free screening</a>
             </div>
           </div>
@@ -264,24 +265,24 @@ def schema_org(faqs: list[tuple[str, str]]) -> str:
 PAGES: list[dict] = [
     {
         "slug": "adhd-diagnosis-florida",
-        "title": "Online ADHD Diagnosis Florida | $199 Evaluation | Siya Health",
-        "meta": "Adult ADHD diagnosis online in Florida. $199, 60–90 min evaluation, board-certified providers. Same-week telehealth. individualized clinical assessment. Book today.",
-        "h1": "Online ADHD Diagnosis in Florida ($199 Evaluation)",
+        "title": "Online ADHD Diagnosis Florida | $149 Evaluation | Siya Health",
+        "meta": "Adult ADHD diagnosis online in Florida. $149, 60–90 min evaluation, board-certified providers. Same-week telehealth. individualized clinical assessment. Book today.",
+        "h1": "Online ADHD Diagnosis in Florida ($149 Evaluation)",
         "geo": "Florida",
         "intro": """<p>If you live in Florida and have wondered whether ADHD explains years of overwhelm, procrastination, or &ldquo;almost keeping up,&rdquo; you are not alone. Many adults never received a childhood diagnosis—and primary care visits rarely leave time for a proper evaluation.</p>
           <p>Siya Health offers licensed telehealth ADHD care for Florida residents: a comprehensive virtual evaluation, validated clinical tools, and a clear treatment plan. No insurance required for the visit; FSA/HSA often accepted.</p>""",
         "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">We serve patients statewide—from Miami and Orlando to Jacksonville and the Gulf Coast—through secure video visits.</p>""",
         "faqs": [
             ("Can I get an ADHD diagnosis online in Florida?", "Yes. Florida residents can complete a full clinical evaluation via secure telehealth with a board-certified provider licensed in the state. If diagnostic criteria are met, you receive a formal diagnosis and documented plan. Medication, including stimulants, is not guaranteed."),
-            ("How much does an ADHD evaluation cost?", "The initial comprehensive evaluation is $199. Pricing is transparent before you book."),
+            ("How much does an ADHD evaluation cost?", "The initial comprehensive evaluation is $149. Pricing is transparent before you book."),
             ("Is this legitimate or just an online quiz?", "No. This is a 60–90 minute clinical visit with clinical interview, validated assessment tools as clinically appropriate, and screening for anxiety, depression, and PTSD—not a self-diagnosis quiz. Assessment tools support evaluation but do not alone establish a diagnosis."),
         ],
     },
     {
         "slug": "adhd-diagnosis-texas",
-        "title": "Online ADHD Diagnosis Texas | $199 Evaluation | Siya Health",
-        "meta": "Adult ADHD diagnosis online in Texas. $199 evaluation, ADHD-CCSP providers, same-week telehealth. Austin, Houston, Dallas-area & statewide. Book now.",
-        "h1": "Online ADHD Diagnosis in Texas ($199 Evaluation)",
+        "title": "Online ADHD Diagnosis Texas | $149 Evaluation | Siya Health",
+        "meta": "Adult ADHD diagnosis online in Texas. $149 evaluation, ADHD-CCSP providers, same-week telehealth. Austin, Houston, Dallas-area & statewide. Book now.",
+        "h1": "Online ADHD Diagnosis in Texas ($149 Evaluation)",
         "geo": "Texas",
         "intro": """<p>Texas has long waitlists for psychiatry and ADHD specialists. If you are an adult in Texas seeking clarity—whether in a major metro or a smaller community—telehealth can remove distance and delay as barriers.</p>
           <p>Our providers are licensed in Texas and trained in adult ADHD (ADHD-CCSP). Your evaluation includes structured interviews, validated assessment tools as clinically appropriate, and discussion of medication and non-medication options when appropriate.</p>""",
@@ -294,24 +295,24 @@ PAGES: list[dict] = [
     },
     {
         "slug": "adhd-diagnosis-pennsylvania",
-        "title": "Online ADHD Diagnosis Pennsylvania | $199 | Siya Health",
-        "meta": "Pennsylvania adult ADHD diagnosis online. $199 virtual evaluation. Licensed, ADHD-CCSP–trained clinicians. Philadelphia, Pittsburgh & statewide telehealth.",
-        "h1": "Online ADHD Diagnosis in Pennsylvania ($199 Evaluation)",
+        "title": "Online ADHD Diagnosis Pennsylvania | $149 | Siya Health",
+        "meta": "Pennsylvania adult ADHD diagnosis online. $149 virtual evaluation. Licensed, ADHD-CCSP–trained clinicians. Philadelphia, Pittsburgh & statewide telehealth.",
+        "h1": "Online ADHD Diagnosis in Pennsylvania ($149 Evaluation)",
         "geo": "Pennsylvania",
         "intro": """<p>Pennsylvania adults juggling careers, education, or family responsibilities often suspect ADHD—but finding a specialist who understands adult presentation can take months.</p>
           <p>Siya Health offers HIPAA-compliant video evaluations for Pennsylvania residents, with the same clinical rigor you would expect in person: full history, validated assessment tools as clinically appropriate, and personalized recommendations. Diagnosis does not guarantee medication.</p>""",
         "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Including <a href="/adhd-diagnosis-philadelphia">Philadelphia</a>, Pittsburgh, Harrisburg, and rural areas—wherever you have reliable internet.</p>""",
         "faqs": [
             ("Is telehealth ADHD diagnosis legal in Pennsylvania?", "Yes, when provided by a clinician licensed in Pennsylvania using HIPAA-compliant technology."),
-            ("What is included in the $199 visit?", "A 60–90 minute evaluation, validated tools as clinically appropriate, comorbidity screening, and a written treatment plan."),
+            ("What is included in the $149 visit?", "A 60–90 minute evaluation, validated tools as clinically appropriate, comorbidity screening, and a written treatment plan."),
             ("Can I use my HSA?", "Many patients pay with FSA or HSA cards; check with your plan administrator."),
         ],
     },
     {
         "slug": "adhd-diagnosis-austin",
-        "title": "ADHD Diagnosis Austin TX | Online $199 Evaluation | Siya Health",
-        "meta": "Adult ADHD diagnosis in Austin, Texas—online. $199 evaluation, same-week telehealth, ADHD-CCSP providers. Book your virtual visit.",
-        "h1": "ADHD Diagnosis in Austin, Texas (Online, $199)",
+        "title": "ADHD Diagnosis Austin TX | Online $149 Evaluation | Siya Health",
+        "meta": "Adult ADHD diagnosis in Austin, Texas—online. $149 evaluation, same-week telehealth, ADHD-CCSP providers. Book your virtual visit.",
+        "h1": "ADHD Diagnosis in Austin, Texas (Online, $149)",
         "geo": "the Austin area",
         "intro": """<p>Austin&rsquo;s fast pace and competitive job market can make untreated ADHD feel unbearable—yet local psychiatry waitlists often stretch for months.</p>
           <p>If you are in Travis County or the greater Austin metro, you can complete your evaluation from home. We are licensed throughout Texas and focus on adult ADHD, including high-masking professionals who &ldquo;seem fine&rdquo; on the outside.</p>""",
@@ -319,18 +320,18 @@ PAGES: list[dict] = [
         "faqs": [
             ("Do I need to visit an office in Austin?", "No. The evaluation is fully virtual for eligible Texas residents."),
             ("How is adult ADHD different from childhood ADHD?", "Adults often show more internal restlessness, chronic disorganization, and emotional dysregulation than classic hyperactivity in children."),
-            ("What if I am not sure I have ADHD?", 'Start with our <a href="/online-adhd-test">free screening</a>—we will tell you honestly if a full evaluation makes sense.'),
+            ("What if I am not sure I have ADHD?", 'Start with our <a href="/adhd-screening">free screening</a>—we will tell you honestly if a full evaluation makes sense.'),
         ],
     },
     {
         "slug": "adhd-diagnosis-houston",
-        "title": "ADHD Diagnosis Houston TX | Online $199 Evaluation | Siya Health",
-        "meta": "Houston adult ADHD diagnosis online. $199 comprehensive evaluation, board-certified telehealth. Same-week appointments. individualized clinical assessment.",
-        "h1": "ADHD Diagnosis in Houston, Texas (Online, $199)",
+        "title": "ADHD Diagnosis Houston TX | Online $149 Evaluation | Siya Health",
+        "meta": "Houston adult ADHD diagnosis online. $149 comprehensive evaluation, board-certified telehealth. Same-week appointments. individualized clinical assessment.",
+        "h1": "ADHD Diagnosis in Houston, Texas (Online, $149)",
         "geo": "Greater Houston",
         "intro": """<p>From the Medical Center to the suburbs, Houstonians often work long hours—and undiagnosed ADHD can show up as burnout, missed deadlines, or relationship strain.</p>
           <p>Siya Health connects you with Texas-licensed providers for a thorough virtual ADHD evaluation. You will have time to explain your story—not a rushed fifteen-minute visit.</p>""",
-        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Also read: <a href="/adhd-diagnosis-texas">Texas ADHD diagnosis</a> and <a href="/adhd-evaluation-cost">evaluation cost</a>.</p>""",
+        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Also read: <a href="/adhd-diagnosis-texas">Texas ADHD diagnosis</a> and <a href="/pricing">evaluation cost</a>.</p>""",
         "faqs": [
             ("Can Houston residents use insurance?", "We are a direct-pay practice for transparency; many patients use FSA/HSA."),
             ("What states do you serve from Houston?", "This page is for Texas residents; we also serve Florida and Pennsylvania."),
@@ -339,9 +340,9 @@ PAGES: list[dict] = [
     },
     {
         "slug": "adhd-diagnosis-philadelphia",
-        "title": "ADHD Diagnosis Philadelphia PA | Online $199 | Siya Health",
-        "meta": "Philadelphia adult ADHD diagnosis online. $199 evaluation, ADHD-CCSP providers, telehealth statewide in PA. Book today.",
-        "h1": "ADHD Diagnosis in Philadelphia, Pennsylvania (Online, $199)",
+        "title": "ADHD Diagnosis Philadelphia PA | Online $149 | Siya Health",
+        "meta": "Philadelphia adult ADHD diagnosis online. $149 evaluation, ADHD-CCSP providers, telehealth statewide in PA. Book today.",
+        "h1": "ADHD Diagnosis in Philadelphia, Pennsylvania (Online, $149)",
         "geo": "Philadelphia and southeastern PA",
         "intro": """<p>Philadelphia&rsquo;s density of students, healthcare workers, and shift-based jobs means many adults run on adrenaline for years before asking whether ADHD is part of the picture.</p>
           <p>We offer Pennsylvania-licensed telehealth evaluations with structured diagnostic criteria, individualized validated tools, and compassionate providers who understand inattentive and combined-type presentations.</p>""",
@@ -355,11 +356,11 @@ PAGES: list[dict] = [
     {
         "slug": "online-adhd-test",
         "title": "Online ADHD Test &amp; Screening (Free) | Siya Health",
-        "meta": "Take a free online ADHD screening in 2 minutes. Not a diagnosis—see if a $199 clinical evaluation with a board-certified provider is right for you.",
+        "meta": "Take a free online ADHD screening in 2 minutes. Not a diagnosis—see if a $149 clinical evaluation with a board-certified provider is right for you.",
         "h1": "Online ADHD Test &amp; Screening (Free 2-Minute Check)",
         "geo": "your state (TX, PA, or FL)",
         "intro": """<p>An online ADHD test can help you organize your symptoms and decide whether to seek a full evaluation—but only a licensed clinician can diagnose ADHD.</p>
-          <p>Our free screening takes about two minutes. Based on your responses, we will point you toward next steps, including the option to book a comprehensive $199 virtual evaluation if appropriate.</p>""",
+          <p>Our free screening takes about two minutes. Based on your responses, we will point you toward next steps, including the option to book a comprehensive $149 virtual evaluation if appropriate.</p>""",
         "extra": """<p style="text-align:center;margin:24px 0;"><a class="button" href="/adhd-screening">Start free ADHD screening</a></p>""",
         "faqs": [
             ("Is an online ADHD test a diagnosis?", "No. Screening tools estimate whether further evaluation is warranted. Diagnosis requires a clinical assessment."),
@@ -369,13 +370,13 @@ PAGES: list[dict] = [
     },
     {
         "slug": "creyos-adhd-testing",
-        "title": "Creyos ADHD Testing Online | Part of $199 Evaluation | Siya Health",
-        "meta": "Creyos cognitive testing for ADHD as part of your $199 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL.",
+        "title": "Creyos ADHD Testing Online | Part of $149 Evaluation | Siya Health",
+        "meta": "Creyos cognitive testing for ADHD as part of your $149 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL.",
         "h1": "Creyos ADHD Testing (Included in Your Evaluation)",
         "geo": "telehealth",
         "intro": """<p>Creyos (formerly Cambridge Brain Sciences) provides brief, scientifically validated cognitive tasks that measure attention, processing speed, and related domains—useful context alongside ADHD rating scales and your history.</p>
           <p>At Siya Health, Creyos is integrated into our adult ADHD evaluation—not sold as a standalone gimmick—so your provider can interpret results in light of sleep, anxiety, mood, and other factors.</p>""",
-        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Ready to book? The full evaluation—including Creyos—is <strong>$199</strong>.</p>""",
+        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Ready to book? The full evaluation—including Creyos—is <strong>$149</strong>.</p>""",
         "faqs": [
             ("Do I need to buy Creyos separately?", "No. When you book the evaluation, cognitive testing is part of the clinical package."),
             ("Can Creyos alone diagnose ADHD?", "No. Diagnosis is based on DSM criteria, interview, rating scales, and clinical judgment."),
@@ -384,13 +385,13 @@ PAGES: list[dict] = [
     },
     {
         "slug": "adult-adhd-diagnosis",
-        "title": "Adult ADHD Diagnosis Online | $199 Evaluation | Siya Health",
-        "meta": "Get an adult ADHD diagnosis online from board-certified providers. $199, 60–90 min, individualized clinical assessment. TX, PA, FL. Same-week telehealth appointments.",
-        "h1": "Adult ADHD Diagnosis Online ($199 Comprehensive Evaluation)",
+        "title": "Adult ADHD Diagnosis Online | $149 Evaluation | Siya Health",
+        "meta": "Get an adult ADHD diagnosis online from board-certified providers. $149, 60–90 min, individualized clinical assessment. TX, PA, FL. Same-week telehealth appointments.",
+        "h1": "Adult ADHD Diagnosis Online ($149 Comprehensive Evaluation)",
         "geo": "Texas, Pennsylvania, or Florida",
         "intro": """<p>Adult ADHD is often missed—especially in women and high achievers who compensate until burnout hits. If you have read every article and still need a clear answer, a structured evaluation is the next step.</p>
-          <p>Siya Health specializes in adult ADHD telehealth: extended visit length, ADHD-CCSP trained clinicians, and transparent pricing so you are not surprised by bills after the fact.</p>""",
-        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Compare: <a href="/adhd-treatment-online">ADHD treatment online</a> and our main <a href="/adhd-care">ADHD care</a> hub.</p>""",
+          <p>Siya Health specializes in adult ADHD telehealth: extended visit length, licensed ADHD-CCSP–trained clinicians, and transparent pricing so you are not surprised by bills after the fact.</p>""",
+        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Compare: <a href="/adhd-care">ADHD treatment online</a> and our main <a href="/adhd-care">ADHD care</a> hub.</p>""",
         "faqs": [
             ("At what age can adults be diagnosed?", "ADHD can be diagnosed in adults when criteria are met and symptoms are traced appropriately—your provider will review onset and impairment."),
             ("Will I automatically get stimulants?", "Not automatically. Treatment is individualized; some patients start with non-stimulant options or behavioral strategies."),
@@ -400,12 +401,12 @@ PAGES: list[dict] = [
     {
         "slug": "adhd-treatment-online",
         "title": "ADHD Treatment Online | Telehealth TX, PA, FL | Siya Health",
-        "meta": "Online ADHD treatment after diagnosis: medication management, follow-ups, telehealth in Texas, Pennsylvania & Florida. Start with $199 evaluation.",
+        "meta": "Online ADHD treatment after diagnosis: medication management, follow-ups, telehealth in Texas, Pennsylvania & Florida. Start with $149 evaluation.",
         "h1": "ADHD Treatment Online (After Your Diagnosis)",
         "geo": "telehealth",
         "intro": """<p>Effective ADHD treatment usually combines the right clinical support with follow-up—not a one-off prescription. After a proper evaluation, many patients continue with medication management and periodic visits.</p>
           <p>Siya Health offers ongoing care plans for non-stimulant and stimulant pathways where clinically appropriate, with monitoring that follows safety guidelines.</p>""",
-        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">New patient? Begin with <a href="/adult-adhd-diagnosis">adult ADHD diagnosis</a> or <a href="/adhd-care">ADHD care overview</a>.</p>""",
+        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">New patient? Begin with <a href="/adhd-care">adult ADHD diagnosis</a> or <a href="/adhd-care">ADHD care overview</a>.</p>""",
         "faqs": [
             ("Can I get treatment without an evaluation?", "If you are new to Siya Health, we begin with a full assessment to ensure safe, appropriate care."),
             ("What are monthly plans for?", "Ongoing medication management and follow-up visits after your initial evaluation."),
@@ -414,15 +415,15 @@ PAGES: list[dict] = [
     },
     {
         "slug": "adhd-evaluation-cost",
-        "title": "ADHD Evaluation Cost Online | $199 Flat Rate | Siya Health",
-        "meta": "ADHD evaluation cost: $199 transparent flat fee for 60–90 min online visit. No insurance surprise bills. FSA/HSA. Texas, Pennsylvania, Florida.",
-        "h1": "ADHD Evaluation Cost: $199 (What You Get)",
+        "title": "ADHD Evaluation Cost Online | $149 Flat Rate | Siya Health",
+        "meta": "ADHD evaluation cost: $149 transparent flat fee for 60–90 min online visit. No insurance surprise bills. FSA/HSA. Texas, Pennsylvania, Florida.",
+        "h1": "ADHD Evaluation Cost: $149 (What You Get)",
         "geo": "online",
-        "intro": """<p>One of the biggest frustrations in healthcare is not knowing what you will owe. Our adult ADHD evaluation is <strong>$199</strong> upfront—a 60–90 minute visit with a board-certified provider, validated assessment tools as clinically appropriate, comorbidity screening, and a documented plan. Medication, including stimulants, is not guaranteed.</p>
+        "intro": """<p>One of the biggest frustrations in healthcare is not knowing what you will owe. Our adult ADHD evaluation is <strong>$149</strong> upfront—a 60–90 minute visit with a board-certified provider, validated assessment tools as clinically appropriate, comorbidity screening, and a documented plan. Medication, including stimulants, is not guaranteed.</p>
           <p>Ongoing medication management, if you continue care with us and medication is clinically appropriate, is billed as a separate monthly plan. There are no hidden facility fees for the initial evaluation.</p>""",
         "extra": """<ul class="credentials-list" style="max-width:560px;margin:0 auto;"><li>60–90 minute video evaluation</li><li>Validated tools as clinically appropriate</li><li>Anxiety, depression, PTSD screening</li><li>Formal diagnosis if criteria met (screening alone is not diagnosis)</li><li>Documented recommendations—medication never guaranteed</li></ul>""",
         "faqs": [
-            ("Why is the evaluation $199?", "We are direct-pay to avoid insurance-driven visit compression and prior authorization delays."),
+            ("Why is the evaluation $149?", "We are direct-pay to avoid insurance-driven visit compression and prior authorization delays."),
             ("Do you take insurance?", "We do not bill insurance for evaluations; many patients use FSA/HSA."),
             ("Are there cheaper online ADHD options?", "Be cautious of instant-diagnosis mills. Quality evaluations take clinician time and validated tools."),
         ],
@@ -448,7 +449,7 @@ def render_page(spec: dict) -> str:
             <h1>{spec["h1"]}</h1>
             <p class="hero-merged-lead">{hero_lead}</p>
             <div class="hero-ctas hero-ctas-adhd-primary">
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book ADHD evaluation</a>
+              <a class="button" href="https://spruce.care/siyahealth" target="_blank" rel="noopener">Book ADHD evaluation</a>
               <p class="hero-secondary-cta"><a href="/adhd-screening">Free 2-minute screening</a></p>
             </div>
           </div>

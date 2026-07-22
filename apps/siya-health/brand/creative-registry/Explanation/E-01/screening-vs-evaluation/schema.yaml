@@ -1,0 +1,29 @@
+id: 2026-07-E-01-001
+topic: ADHD
+intent: Education
+family: Explanation
+layout: E-01
+journey_stage: Considering
+persona: Adult_ADHD
+emotion: Curious
+tone: Direct
+message: Screening suggests whether evaluation makes sense. It is not a diagnosis.
+image: Quiet diagram or photo
+image_category: virtual-consult
+image_ref: Editorial Style Guide terminology
+headline_length: Medium
+caption_length: Long
+cta: Screening
+cta_label: Take Free ADHD Screening
+evidence_level: ClinicalPractice
+clinical_review: false
+platforms:
+  - LinkedIn
+  - Newsletter
+  - Blog
+variants: 1
+claims_ok: true
+source_refs:
+  - /answers/screening-vs-adhd-evaluation
+status: seed
+source: Editorial + answer page

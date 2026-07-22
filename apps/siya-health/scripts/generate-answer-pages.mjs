@@ -5,8 +5,19 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { applyPricingTokens } from '../data/pricing-display.mjs';
 import { ANSWER_SEEDS, TOPIC_HUBS } from '../data/answer-seeds.mjs';
+import { RETIRED_GUIDE_SLUGS } from '../data/content-consolidation-phase1.mjs';
 import { GUIDE_CANNIBALIZATION_OVERRIDES } from '../data/cannibalization-phase1.mjs';
+import {
+  ADHD_TOPIC_CLUSTERS,
+  ASK_SIYA_CHAT_PATH,
+  BLOG_CLUSTER_ANCHORS,
+  clusterForGuide,
+  METABOLIC_TOPIC_CLUSTERS,
+  ENERGY_TOPIC_CLUSTERS,
+  resolveAnswerInternalLinks,
+} from '../data/content-topic-clusters.mjs';
 import {
   BASE,
   LAST_REVIEWED,
@@ -20,8 +31,10 @@ import { COPY_STANDARDS, FOOTER_STATES_LINE } from '../data/site-standards.mjs';
 import { buildHealthGuideEngagement } from './answer-engagement-system.mjs';
 import { BOOKING_LINK } from '../data/providers-core.mjs';
 import { MEET_GREET_URL, NAV_HEALTH_GUIDES } from './site-chrome.mjs';
+import { renderNavCtaMarkup, renderButton, slotToButton, resolveConversion } from '../design-system/components.mjs';
 import { ANSWER_DIAGRAM_EMBEDS, renderDiagramFigure } from '../data/visual-diagrams.mjs';
 import { SIYA_CIRCLE_PROMO_HTML } from '../data/siya-circle-config.mjs';
+import { renderAnswersHubCarePathwaysSection } from '../data/adhd-commercial-links.mjs';
 
 /** UX hub groupings (display order) */
 const HEALTH_GUIDE_CATEGORIES = [
@@ -61,8 +74,8 @@ const HEALTH_GUIDE_CATEGORIES = [
 const FEATURED_BY_CATEGORY = {
   metabolic: [
     'why-normal-labs-dont-mean-healthy',
-    'food-noise-returned-on-glp-1',
-    'what-is-insulin-resistance',
+    'which-preventive-blood-tests-adults',
+    'what-to-do-after-lab-results',
   ],
   energy: [
     'afternoon-energy-crash-after-lunch',
@@ -196,8 +209,10 @@ ${jsonLdScripts}
   </head>`;
 }
 
-function headerNav(topic = 'general') {
-  const navCta = `<a class="button" href="${MEET_GREET_URL}" target="_blank" rel="noopener">Talk to a Clinician</a>`;
+function headerNav(topic = 'general', slug = 'index') {
+  const relPath = slug === 'index' ? 'answers/index.html' : `answers/${slug}.html`;
+  const navCta = renderNavCtaMarkup(relPath, 'nav');
+  const mobileCta = renderNavCtaMarkup(relPath, 'nav-mobile');
   return `    <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container">
@@ -224,7 +239,7 @@ function headerNav(topic = 'general') {
           <a href="/telehealth">Telehealth</a>
           <a href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a>
           <a href="/blog">Blog</a>
-          ${navCta}
+          ${mobileCta}
         </div>
       </div>
     </header>`;
@@ -252,7 +267,10 @@ function nextStepsHtml(hub, topic = 'general') {
     topic === 'adhd'
       ? `<li><a href="/adhd-care">Explore ADHD evaluation pathways</a></li>
                 <li><a href="/adhd-screening">Free ADHD screening (not a diagnosis)</a></li>
-                <li><a href="${hub.url}">Read ${hub.label} articles</a></li>`
+                <li><a href="/answers/signs-of-adult-adhd">Cornerstone guide: signs of adult ADHD</a></li>
+                <li><a href="/blog/how-to-know-if-you-have-adhd-adult">Cornerstone article: ADHD signs in adults</a></li>
+                <li><a href="${hub.url}">Browse ${hub.label} articles</a></li>
+                <li><a href="/answers#topic-cluster-explorer-heading">All ADHD topic clusters</a></li>`
       : `<li><a href="${hub.care}">Explore ${hub.label} care</a></li>
                 <li><a href="/answers">Browse Health Guides</a></li>
                 <li><a href="/providers">Meet our care team</a></li>`;
@@ -288,6 +306,89 @@ function buildSectionsHtml(seed, midBreakHtml = '') {
               <h2 id="detailed-answer-heading">Detailed answer</h2>
             ${paras}
             </section>`;
+}
+
+function guideLabel(slug) {
+  const seed = ANSWER_SEEDS.find((s) => s.slug === slug);
+  return seed?.question || slug.replace(/-/g, ' ');
+}
+
+function blogLabel(path) {
+  return BLOG_CLUSTER_ANCHORS[path] || path.replace(/^\/blog\//, '').replace(/-/g, ' ');
+}
+
+function buildAnswerInternalLinksHtml(seed) {
+  const canonical = resolveCanonicalBlog(seed);
+  const links = resolveAnswerInternalLinks(seed, canonical);
+  const relatedLis = links.relatedSlugs
+    .map((slug) => `<li><a href="/answers/${slug}">${esc(guideLabel(slug))}</a></li>`)
+    .join('\n                ');
+
+  return `            <section class="answer-internal-links" id="related-resources" aria-labelledby="answer-links-heading">
+              <h2 id="answer-links-heading">Related resources</h2>
+              <p class="answer-internal-links-intro">This page is a concise FAQ. For clinical depth, start with the full article below.</p>
+              <div class="answer-internal-links-grid">
+                <div class="answer-internal-links-col">
+                  <h3 class="answer-internal-links-col-title">Related questions</h3>
+                  <ul>
+                ${relatedLis}
+                  </ul>
+                </div>
+                <div class="answer-internal-links-col">
+                  <h3 class="answer-internal-links-col-title">Clinical article</h3>
+                  <p><a class="answer-internal-links-primary" href="${links.blogPath}">${esc(links.blogLabel)}</a></p>
+                </div>
+                <div class="answer-internal-links-col">
+                  <h3 class="answer-internal-links-col-title">Care</h3>
+                  <p><a class="answer-internal-links-primary" href="${links.landingPath}">${esc(links.landingLabel)}</a></p>
+                </div>
+              </div>
+            </section>
+            <aside class="answer-ask-siya" aria-label="Ask Siya">
+              <p>Still have a question? <a href="${ASK_SIYA_CHAT_PATH}" data-siya-track="primary-cta-click" data-siya-location="answer-ask-siya" data-conversion-goal="secureChat">Ask Siya</a>.</p>
+            </aside>`;
+}
+
+function buildIndexClusterExplorerHtml() {
+  const renderClusterGroup = (title, clusters) => {
+    const cards = clusters
+      .map((c) => {
+        const guideCount = c.guides.length;
+        const blogCount = c.blogs.length;
+        return `
+            <article class="topic-cluster-card" id="cluster-${c.id}">
+              <h3><a href="/answers/${c.cornerstoneGuide}">${esc(c.name)}</a></h3>
+              <p>${esc(c.blurb)}</p>
+              <ul class="topic-cluster-card-links">
+                <li><a href="/answers/${c.cornerstoneGuide}">Cornerstone guide →</a></li>
+                <li><a href="${c.cornerstoneBlog}">Cornerstone article →</a></li>
+                <li><a href="${c.service}">Service page →</a></li>
+                ${c.screening ? `<li><a href="${c.screening}">Free screening →</a></li>` : ''}
+              </ul>
+              <p class="topic-cluster-card-meta">${guideCount} guides · ${blogCount} articles</p>
+            </article>`;
+      })
+      .join('\n');
+    return `
+          <section class="topic-cluster-explorer-group" aria-labelledby="cluster-group-${title.replace(/\W+/g, '-').toLowerCase()}">
+            <h2 id="cluster-group-${title.replace(/\W+/g, '-').toLowerCase()}">${esc(title)}</h2>
+            <div class="topic-cluster-explorer-grid">
+${cards}
+            </div>
+          </section>`;
+  };
+
+  return `<!-- SIYA:ANSWERS-TOPIC-CLUSTERS -->
+          <section class="topic-cluster-explorer" aria-labelledby="topic-cluster-explorer-heading">
+            <div class="section-header">
+              <h2 id="topic-cluster-explorer-heading">Browse by topic cluster</h2>
+              <p class="lead">Each cluster links a cornerstone Health Guide, supporting FAQs, related clinical articles, and the right care pathway—so informational pages reinforce each other instead of competing.</p>
+            </div>
+${renderClusterGroup('ADHD', ADHD_TOPIC_CLUSTERS)}
+${renderClusterGroup('Metabolic health', METABOLIC_TOPIC_CLUSTERS)}
+${renderClusterGroup('Energy & sleep', ENERGY_TOPIC_CLUSTERS)}
+          </section>
+          <!-- /SIYA:ANSWERS-TOPIC-CLUSTERS -->`;
 }
 
 function buildLearnMoreHtml(seed) {
@@ -335,15 +436,6 @@ function buildAnswerPage(seed) {
     ((seed.metaDescription || seed.shortAnswer).length > 155 ? '…' : '');
   const hub = TOPIC_HUBS[seed.topic] || TOPIC_HUBS.adhd;
 
-  const relatedHtml = (seed.related || [])
-    .map((s) => {
-      const rel = ANSWER_SEEDS.find((x) => x.slug === s);
-      if (!rel) return '';
-      return `<li><a href="/answers/${rel.slug}">${esc(rel.question)}</a></li>`;
-    })
-    .filter(Boolean)
-    .join('\n                ');
-
   const evidenceHtml = (seed.evidence || []).map((e) => `<li>${esc(e)}</li>`).join('\n              ');
   const engagement = buildHealthGuideEngagement(seed);
   const sectionsHtml = buildSectionsHtml(seed, engagement.midBreak);
@@ -351,12 +443,22 @@ function buildAnswerPage(seed) {
     !seed.sections?.length && engagement.takeaway
       ? `\n            ${engagement.takeaway}\n            ${engagement.midBreak}`
       : '';
-  const learnMoreHtml = buildLearnMoreHtml(seed);
+  // Only emit learnMore for labs-funnel guides (avoids regenerating duplicate link blocks sitewide).
+  const learnMoreHtml = ['which-preventive-blood-tests-adults', 'what-to-do-after-lab-results'].includes(
+    seed.slug
+  )
+    ? buildLearnMoreHtml(seed)
+    : '';
   const diagramConfig = ANSWER_DIAGRAM_EMBEDS[seed.slug];
   const diagramHtml = diagramConfig
     ? `\n${renderDiagramFigure(diagramConfig.key, { figcaption: diagramConfig.figcaption })}\n`
     : '';
   const faqJson = buildFaqJson(seed);
+  const answerRelPath = `answers/${seed.slug}.html`;
+  const answerCtaBtn = renderButton({
+    ...slotToButton(resolveConversion(answerRelPath).primary, { location: 'answer-final-cta', relPath: answerRelPath }),
+    variant: 'primary',
+  });
 
   const medicalWebPage = {
     '@context': 'https://schema.org',
@@ -395,7 +497,7 @@ function buildAnswerPage(seed) {
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PLBD4TTQ"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-${headerNav(seed.topic)}
+${headerNav(seed.topic, seed.slug)}
     <main id="main">
       <article class="blog-article answer-page">
         <div class="container blog-container">
@@ -414,24 +516,17 @@ ${clinicalReviewBlock(reviewRecord)}
 ${engagement.aboveFold}
 ${sectionsHtml}${shortBodyExtra}
 ${engagement.decisionSupport}
-${canonicalBlogFullHtml(seed)}
             <section class="answer-evidence" id="evidence" aria-labelledby="evidence-heading">
               <h2 id="evidence-heading">Evidence &amp; references</h2>
 ${engagement.evidenceCard}
               <ul class="answer-evidence-list">${evidenceHtml}</ul>
             </section>
-            <section class="answer-related" id="related-questions" aria-labelledby="related-heading">
-              <h2 id="related-heading">Related Health Guides</h2>
-              <ul>
-                ${relatedHtml}
-              </ul>
-            </section>
 ${learnMoreHtml}
-${nextStepsHtml(hub, seed.topic)}
+${buildAnswerInternalLinksHtml(seed)}
             <div class="cta-block blog-cta answer-final-cta">
-              <a class="button" href="${BOOK}" target="_blank" rel="noopener">Talk to a Clinician</a>
+              ${answerCtaBtn}
             </div>
-            <p class="cta-microcopy">Also read our <a href="${hub.url}">${hub.label} articles</a>${resolveCanonicalBlog(seed) ? ` · <a href="${resolveCanonicalBlog(seed).path}">Full clinical guide</a>` : ''}${reviewRecord.reviewer ? ` · <a href="/providers/${reviewRecord.reviewer.slug}">${reviewRecord.reviewer.name}</a>` : ''}</p>
+            <p class="cta-microcopy">Browse <a href="/answers">all Health Guides</a> · <a href="${hub.url}">${hub.label} articles</a>${reviewRecord.reviewer ? ` · <a href="/providers/${reviewRecord.reviewer.slug}">${reviewRecord.reviewer.name}</a>` : ''}</p>
           </div>
         </div>
       </article>
@@ -489,7 +584,8 @@ function placeholderCardHtml(catId) {
 
 function buildIndexPage() {
   const byCategory = Object.fromEntries(HEALTH_GUIDE_CATEGORIES.map((c) => [c.id, []]));
-  for (const s of ANSWER_SEEDS) {
+  const activeSeeds = ANSWER_SEEDS.filter((s) => !RETIRED_GUIDE_SLUGS.has(s.slug));
+  for (const s of activeSeeds) {
     for (const cat of categoriesForSeed(s)) {
       if (!byCategory[cat].some((x) => x.slug === s.slug)) {
         byCategory[cat].push(s);
@@ -536,7 +632,7 @@ ${featureSlots}
   const url = `${BASE}/answers`;
   const title = 'Health Guides | Metabolic, ADHD, Hormones & Telehealth | Siya Health';
   const desc =
-    'Physician-led Health Guides: short answers, evidence, and related topics for metabolic health, fatigue, hormones, ADHD, and telehealth. Each page shows its clinical review status.';
+    'Physician-led Health Guides: short answers, evidence, and related topics for metabolic health, fatigue, hormones, ADHD, and telehealth.';
 
   const collection = {
     '@context': 'https://schema.org',
@@ -544,22 +640,37 @@ ${featureSlots}
     name: 'Siya Health Health Guides Hub',
     description: desc,
     url,
-    numberOfItems: ANSWER_SEEDS.length,
+    numberOfItems: activeSeeds.length,
   };
 
-  const jsonLd = `\n    <script type="application/ld+json">${JSON.stringify(collection)}</script>
+  const jsonLd = `\n    <script type="application/ld+json">${JSON.stringify(collection)}</script>`;
+
+  /* Must run after DOM exists — previously this lived in <head> and never attached listeners,
+     so “View all … guides” buttons looked dead (hash target is hidden). */
+  const hubViewAllScript = `
     <script>
-      document.querySelectorAll('.health-guides-view-all').forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-          const id = btn.getAttribute('href')?.slice(1);
-          const panel = id && document.getElementById(id);
-          if (!panel) return;
-          e.preventDefault();
-          const open = panel.hidden;
-          panel.hidden = !open;
-          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-          btn.textContent = open ? btn.textContent.replace(/^View all/, 'Hide') : btn.textContent.replace(/^Hide/, 'View all');
-        });
+      document.addEventListener('click', function (e) {
+        var btn = e.target.closest && e.target.closest('.health-guides-view-all');
+        if (!btn) return;
+        var href = btn.getAttribute('href') || '';
+        var id = href.charAt(0) === '#' ? href.slice(1) : '';
+        var panel = id && document.getElementById(id);
+        if (!panel) return;
+        e.preventDefault();
+        var open = panel.hidden;
+        panel.hidden = !open;
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        var label = btn.textContent || '';
+        btn.textContent = open
+          ? label.replace(/^View all/, 'Hide')
+          : label.replace(/^Hide/, 'View all');
+        if (typeof window.siyaTrack === 'function') {
+          window.siyaTrack('health_guides_click', {
+            action: open ? 'view_all' : 'hide_all',
+            category: btn.getAttribute('data-category') || '',
+            page_path: location.pathname,
+          });
+        }
       });
     </script>`;
 
@@ -571,9 +682,12 @@ ${headerNav()}
         <div class="container">
           <div class="section-header">
             <h1>Health Guides</h1>
-            <p class="lead">One question per page—short answer, detailed explanation, evidence, and related questions. Reviewed pages display physician name and date; others show pending physician review. <a href="/llms.txt">Machine index</a> · <a href="/article-index.json">JSON index</a></p>
+            <p class="lead">Each guide answers one question with a short takeaway, a deeper explanation, cited evidence, and related topics—written for adults researching ADHD, metabolic health, hormones, fatigue, and telehealth. Educational only; not a substitute for care with your clinician.</p>
+            <p class="health-guides-hub-jump-links"><a href="#topic-cluster-explorer-heading">Topic clusters</a> · <a href="#guides-adhd">ADHD guides</a> · <a href="#guides-metabolic">Metabolic guides</a> · <a href="/blog/adhd">ADHD articles</a> · <a href="/adhd-care">ADHD care</a> · <a href="/adhd-screening">Free screening</a></p>
           </div>
 ${SIYA_CIRCLE_PROMO_HTML}
+${buildIndexClusterExplorerHtml()}
+${renderAnswersHubCarePathwaysSection()}
           <div class="health-guides-hub-categories">
 ${cards}
           </div>
@@ -581,19 +695,21 @@ ${cards}
       </section>
     </main>
 ${footerBlock()}
+${hubViewAllScript}
   </body>
 </html>
 `;
 }
 
 function main() {
+  const activeSeeds = ANSWER_SEEDS.filter((s) => !RETIRED_GUIDE_SLUGS.has(s.slug));
   fs.mkdirSync(ANSWERS_DIR, { recursive: true });
-  for (const seed of ANSWER_SEEDS.map(applyCannibalizationOverrides)) {
+  for (const seed of activeSeeds.map(applyCannibalizationOverrides)) {
     const out = path.join(ANSWERS_DIR, `${seed.slug}.html`);
-    fs.writeFileSync(out, buildAnswerPage(seed), 'utf8');
+    fs.writeFileSync(out, applyPricingTokens(buildAnswerPage(seed)), 'utf8');
   }
-  fs.writeFileSync(path.join(ANSWERS_DIR, 'index.html'), buildIndexPage(), 'utf8');
-  console.log('Wrote', ANSWER_SEEDS.length, 'answer pages + answers/index.html');
+  fs.writeFileSync(path.join(ANSWERS_DIR, 'index.html'), applyPricingTokens(buildIndexPage()), 'utf8');
+  console.log('Wrote', activeSeeds.length, 'answer pages + answers/index.html');
 }
 
 main();

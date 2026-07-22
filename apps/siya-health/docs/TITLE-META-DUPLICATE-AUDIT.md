@@ -1,14 +1,14 @@
 # Title & Meta Duplicate Audit
 
-Generated: 2026-06-07T12:24:13.814Z
+Generated: 2026-07-21T06:58:06.740Z
 
-## Duplicate title tags (1)
+## Duplicate title tags (0)
 
-- **"Privacy Policy"** — /legal/privacy-policy, /privacy-policy
+_None after Phase 1 differentiation._
 
 ## Duplicate H1s (1)
 
-- **"Privacy Policy"** — /legal/privacy-policy, /privacy-policy
+- **"Booking your free Meet & Greet"** — /redirect/adhd-walkthrough, /redirect/meet-greet
 
 ## Duplicate meta descriptions (0)
 
@@ -16,12 +16,13 @@ _None detected._
 
 ## Near-duplicate titles (≥75% token overlap)
 
-- 0.86: /adhd-care ↔ /adult-adhd-diagnosis
-- 0.75: /adhd-diagnosis-austin ↔ /adhd-diagnosis-houston
 - 0.75: /answers/telehealth-adhd-california ↔ /answers/telehealth-adhd-texas
+- 0.75: /blog/adhd-treatment-austin-tx ↔ /blog/adhd-treatment-houston-tx
+- 0.75: /blog/adhd-treatment-miami-fl ↔ /blog/adhd-treatment-orlando-fl
+- 0.75: /blog/adhd-treatment-oakland-ca ↔ /blog/adhd-treatment-sacramento-ca
 - 0.83: /blog/online-adhd-diagnosis-california ↔ /blog/online-adhd-diagnosis-texas
 
 ## Fixes applied
 
-- 17 guide title/H1/meta narrowed for duplicate pairs
-- Canonical blog pointer blocks added to 31 guides
+- 11 guide title/H1/meta narrowed for duplicate pairs
+- Canonical blog pointer blocks added to 28 guides

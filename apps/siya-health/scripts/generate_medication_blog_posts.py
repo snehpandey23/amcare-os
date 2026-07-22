@@ -68,13 +68,13 @@ HEADER = """<!DOCTYPE html>
           <div class="blog-content">
             <p class="blog-disclaimer"><strong>Important:</strong> This content is for educational purposes only and does not replace medical advice, diagnosis, or treatment. ADHD medication decisions require an in-person or telehealth evaluation with a licensed prescriber in your state. Never start, stop, or change a prescription without medical guidance.</p>
 
-            <div class="blog-internal-links"><p>If you are considering ADHD care, review our <a href="/adhd-care">ADHD diagnosis and care</a> overview, understand typical <a href="/adhd-evaluation-cost">ADHD evaluation cost</a> factors, and try a brief <a href="/online-adhd-test">online ADHD screening</a> to discuss results with a clinician.</p></div>
+            <div class="blog-internal-links"><p>If you are considering ADHD care, review our <a href="/adhd-care">ADHD diagnosis and care</a> overview, understand typical <a href="/pricing">ADHD evaluation cost</a> factors, and try a brief <a href="/adhd-screening">online ADHD screening</a> to discuss results with a clinician.</p></div>
 
 {body}
 
             <p>If you are considering ADHD evaluation, you can start with a licensed provider at <strong>Siya Health</strong>—including structured telehealth visits where clinically appropriate.</p>
             <div class="cta-block blog-cta">
-              <a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4" target="_blank" rel="noopener">Book a free consultation</a>
+              <a class="button" href="https://spruce.care/siyahealth" target="_blank" rel="noopener">Book a free consultation</a>
             </div>
 
             <h2>FAQ</h2>
@@ -118,6 +118,7 @@ HEADER = """<!DOCTYPE html>
       </div>
       <div class="container"><p class="footer-notice">For emergencies, call 911. All telehealth services are provided by licensed medical professionals.</p><small>© 2026 Siya Health Inc.</small></div>
     </footer>
+    <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="69be9ab3db1480f6799cdd18"></script>
   </body>
 </html>
 """

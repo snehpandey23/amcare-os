@@ -1,0 +1,28 @@
+id: 2026-07-R-02-002
+topic: ADHD
+intent: Recognition
+family: Recognition
+layout: R-02
+journey_stage: Recognizing
+persona: Adult_ADHD
+emotion: Overwhelmed
+tone: Calm
+message: Time doesn't feel the same for every brain.
+image: Editorial Photography
+image_category: unfinished-work
+image_ref: brand/photography/unfinished-work/editorial-adhd-time.jpg
+headline_length: Short
+caption_length: Long
+cta: Screening
+cta_label: Take Free ADHD Screening
+evidence_level: Experiential
+clinical_review: false
+platforms:
+  - Instagram
+  - LinkedIn
+variants: 1
+claims_ok: true
+source_refs:
+  - /answers/time-blindness-adhd
+status: seed
+source: time-blindness answer

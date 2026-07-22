@@ -9,7 +9,7 @@ import re
 BLOG = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "blog")
 
 DISCLAIMER_BLOCK = """            <p class="blog-disclaimer"><strong>Educational only:</strong> This content is for educational purposes only and does not replace medical advice. Diagnosis and prescribing require licensed providers.</p>
-            <div class="blog-internal-links"><p>Explore <a href="/adhd-care">ADHD diagnosis and care</a>, review typical <a href="/adhd-evaluation-cost">ADHD evaluation cost</a> factors, and try our <a href="/online-adhd-test">online ADHD screening</a> before your visit.</p></div>
+            <div class="blog-internal-links"><p>Explore <a href="/adhd-care">ADHD diagnosis and care</a>, review typical <a href="/pricing">ADHD evaluation cost</a> factors, and try our <a href="/adhd-screening">online ADHD screening</a> before your visit.</p></div>
 
 """
 
@@ -25,8 +25,8 @@ PATCHES: dict[str, dict] = {
             "url": "https://siya.health/blog/adhd-evaluation-cost-texas",
         },
         "faqs": [
-            ("Is $199 for an ADHD evaluation a good price?", "Yes. It's on the lower end for a comprehensive 60–90 minute evaluation with a licensed provider. Many traditional clinics charge $400–$800 or more."),
-            ("Does the $199 include the prescription?", "The evaluation fee covers the diagnostic visit. If medication is prescribed, you'll pay for the medication (often through your pharmacy or a prescription plan). Ongoing medication management is $149/month if you enroll."),
+            ("Is $149 for an ADHD evaluation a good price?", "Yes. It's on the lower end for a comprehensive 60–90 minute evaluation with a licensed provider. Many traditional clinics charge $400–$800 or more."),
+            ("Does the $149 include the prescription?", "The evaluation fee covers the diagnostic visit. If medication is prescribed, you'll pay for the medication (often through your pharmacy or a prescription plan). Ongoing medication management is $149/month if you enroll."),
             ("Can I use my FSA or HSA?", "Many patients use FSA/HSA funds for ADHD evaluation and treatment. Check with your plan administrator."),
             ("What if I don't get diagnosed with ADHD?", "You still get answers. Your provider will discuss what might be going on and recommend next steps—whether that's ruling out other conditions or exploring different supports."),
         ],

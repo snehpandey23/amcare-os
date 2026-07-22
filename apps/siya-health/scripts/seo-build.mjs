@@ -22,8 +22,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
 
 const BASE = 'https://siya.health';
-const GA4_ID = process.env.SIYA_GA4_MEASUREMENT_ID || 'G-9WTQWHCTFT';
-const AW_ID = 'AW-17553537456';
 const DEFAULT_OG_IMAGE = `${BASE}/assets/images/siya-health-logo.png`;
 /** Strip placeholder and only emit real verification when CI sets this */
 const GOOGLE_SITE_VERIFICATION = (process.env.SIYA_GOOGLE_SITE_VERIFICATION || process.env.GOOGLE_SITE_VERIFICATION || '').trim();
@@ -35,14 +33,29 @@ const BLOG_HUB_FILES = new Set([
   'blog/telehealth.html',
 ]);
 
-const GTAG_BLOCK = `<script async src="https://www.googletagmanager.com/gtag/js?id=${GA4_ID}"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', '${GA4_ID}');
-  gtag('config', '${AW_ID}');
-</script>`;
+/** HTML shells whose URLs 301 elsewhere (vercel.json) — never in sitemap */
+const REDIRECT_SHELLS = {
+  'terms.html': `${BASE}/legal/terms-of-use`,
+  'privacy-policy.html': `${BASE}/legal/privacy-policy`,
+  'adult-adhd-diagnosis.html': `${BASE}/adhd-care`,
+  'adhd-treatment-online.html': `${BASE}/adhd-care`,
+  'adhd-diagnosis-florida.html': `${BASE}/adhd-care`,
+  'adhd-evaluation-cost.html': `${BASE}/pricing`,
+  'online-adhd-test.html': `${BASE}/adhd-screening`,
+};
+
+/** External redirect shells + dev surfaces — never in sitemap */
+const SITEMAP_EXCLUDE = new Set([
+  'visual-components.html',
+  'siya-circle.html',
+  'adhd-screening-results.html',
+  ...Object.keys(REDIRECT_SHELLS),
+]);
+
+/** @deprecated Raw gtag removed — GA4/Ads are managed inside GTM via injectGtmAndTracking() */
+function normalizeGtag(html) {
+  return html;
+}
 
 function walkHtmlFiles(dir, baseRel = '') {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -73,6 +86,8 @@ function priorityFor(rel) {
   if (rel.startsWith('blog/')) return '0.74';
   if (rel.startsWith('answers/') && rel !== 'answers/index.html') return '0.76';
   if (rel === 'answers/index.html') return '0.82';
+  if (rel === 'labs.html') return '0.88';
+  if (rel.startsWith('labs/')) return '0.8';
   if (rel.startsWith('adhd-diagnosis-') || rel.includes('adult-adhd') || rel.includes('online-adhd') || rel.includes('creyos')) return '0.8';
   if (['privacy-policy.html', 'terms.html'].includes(rel)) return '0.3';
   return '0.78';
@@ -80,7 +95,9 @@ function priorityFor(rel) {
 
 function generateSitemap(htmlFiles) {
   const lines = [`<?xml version="1.0" encoding="UTF-8"?>`, `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`];
-  const sorted = [...htmlFiles].sort((a, b) => fileToUrlPath(a).localeCompare(fileToUrlPath(b)));
+  const sorted = [...htmlFiles]
+    .filter((r) => !SITEMAP_EXCLUDE.has(r) && !r.startsWith('redirect/'))
+    .sort((a, b) => fileToUrlPath(a).localeCompare(fileToUrlPath(b)));
   for (const rel of sorted) {
     const loc = `${BASE}${fileToUrlPath(rel)}`;
     const pr = priorityFor(rel);
@@ -128,17 +145,38 @@ function escapeJson(str) {
   return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
 }
 
-function ensureNoindexPublic(html, relPath) {
-  if (!['labs.html', 'prescriptions.html'].includes(relPath)) return html;
-  return html.replace(/<meta\s+name="robots"\s+content="noindex,\s*follow"\s*\/?>/gi, '<meta name="robots" content="index, follow" />');
+function ensureNoindexUtilityPages(html, relPath) {
+  return html;
 }
 
-function normalizeGtag(html) {
-  const re = /<script async src="https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=[^"]+"><\/script>\s*(?:<!--[^>]*-->\s*)?<script>[\s\S]*?<\/script>/gi;
-  if (!html.includes('googletagmanager.com/gtag/js')) return html;
-  let h = html.replace(re, GTAG_BLOCK);
-  h = h.replace(/\s*<!--\s*Google Analytics 4[^>]*-->\s*/gi, '\n');
-  return h;
+/** External 302 shells — noindex, no self-referential canonical */
+function ensureExternalRedirectShell(html, relPath) {
+  if (relPath !== 'siya-circle.html') return html;
+  const tag = '<meta name="robots" content="noindex, nofollow" />';
+  if (html.match(/<meta\s+name="robots"/i)) {
+    html = html.replace(/<meta\s+name="robots"\s+content="[^"]*"\s*\/?>/i, tag);
+  } else {
+    html = html.replace(/(<meta\s+name="viewport"[^>]*\/?>)/i, `$1\n    ${tag}`);
+  }
+  html = html.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>\s*/i, '');
+  return html;
+}
+
+function ensureRedirectShellPages(html, relPath) {
+  const canonicalDest = REDIRECT_SHELLS[relPath];
+  if (!canonicalDest) return html;
+  const tag = '<meta name="robots" content="noindex, follow" />';
+  if (html.match(/<meta\s+name="robots"/i)) {
+    html = html.replace(/<meta\s+name="robots"\s+content="[^"]*"\s*\/?>/i, tag);
+  } else {
+    html = html.replace(/(<meta\s+name="viewport"[^>]*\/?>)/i, `$1\n    ${tag}`);
+  }
+  if (html.match(/<link\s+rel="canonical"/i)) {
+    html = html.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/i, `<link rel="canonical" href="${canonicalDest}" />`);
+  } else {
+    html = html.replace(/(<meta\s+name="viewport"[^>]*\/?>)/i, `$1\n    <link rel="canonical" href="${canonicalDest}" />`);
+  }
+  return html;
 }
 
 function ensureGSC(html) {
@@ -155,6 +193,7 @@ function ensureGSC(html) {
 }
 
 function ensureCanonical(html, relPath) {
+  if (relPath === 'siya-circle.html') return html;
   const urlPath = fileToUrlPath(relPath);
   const full = urlPath === '/' ? `${BASE}/` : `${BASE}${urlPath}`;
   if (extractCanonical(html)) return html;
@@ -166,12 +205,12 @@ function ensureCanonical(html, relPath) {
 
 function ensureOgTwitter(html, relPath, title, description, canonical) {
   let h = html;
-  // Older builds corrupted twitter metas ($199 became $1 regex replacement + "99").
+  // Older builds corrupted twitter metas ($149 became $1 regex replacement + "99").
   if (/name="twitter:(?:title|description)"[^\n]*<link\s+rel="canonical"/i.test(h)) {
     h = h.replace(/<meta name="twitter:title"[^\n]*\n?/gi, '');
     h = h.replace(/<meta name="twitter:description"[^\n]*\n?/gi, '');
   }
-  /** Orphan $199 twitter-meta tails rendered as visible text when left in `<head>` (patterns: ">99)", ">99,", etc.) */
+  /** Orphan $149 twitter-meta tails rendered as visible text when left in `<head>` (patterns: ">99)", ">99,", etc.) */
   h = h.replace(/^\s+>99[^<\n]*"\s*\/?>\s*$/gm, '');
 
   /** One coherent block — avoids duplicate twitter:image/card from incremental inserts */
@@ -180,7 +219,7 @@ function ensureOgTwitter(html, relPath, title, description, canonical) {
   const ogUrl = canonical || (fileToUrlPath(relPath) === '/' ? `${BASE}/` : `${BASE}${fileToUrlPath(relPath)}`);
   const desc = description || `${title} | Siya Health`;
   const img = DEFAULT_OG_IMAGE;
-  /** Title/desc can contain `$199`; String.replace `'$1' + literal` parses `$199` wrong — use callbacks. */
+  /** Title/desc can contain `$149`; String.replace `'$1' + literal` parses `$149` wrong — use callbacks. */
   const qAttr = (s) => escapeAttr(String(s));
 
   const twBlock = `\n    <meta name="twitter:card" content="summary_large_image" />
@@ -439,8 +478,12 @@ function categoryBreadcrumb(relPath, html) {
  */
 function normalizeRootAssetPaths(html) {
   let h = html;
-  h = h.replace(/\bhref="styles\.css"/g, 'href="/styles.css"');
-  h = h.replace(/\bhref="\.\.\/styles\.css"/g, 'href="/styles.css"');
+  const cssPath = path.join(SITE_ROOT, 'styles.css');
+  const cssVer = fs.existsSync(cssPath) ? fs.statSync(cssPath).mtimeMs : Date.now();
+  const cssHref = `/styles.css?v=${cssVer}`;
+  h = h.replace(/\bhref="styles\.css(?:\?[^"]*)?"/g, `href="${cssHref}"`);
+  h = h.replace(/\bhref="\.\.\/styles\.css(?:\?[^"]*)?"/g, `href="${cssHref}"`);
+  h = h.replace(/\bhref="\/styles\.css(?:\?[^"]*)?"/g, `href="${cssHref}"`);
   h = h.replace(/\bsrc="scripts\//g, 'src="/scripts/');
   h = h.replace(/\bsrc="\.\.\/scripts\//g, 'src="/scripts/');
   h = h.replace(/\bhref="scripts\//g, 'href="/scripts/');
@@ -467,7 +510,9 @@ function processHtml(relPath) {
 
   html = normalizeGtag(html);
   html = ensureGSC(html);
-  html = ensureNoindexPublic(html, relPath);
+  html = ensureNoindexUtilityPages(html, relPath);
+  html = ensureExternalRedirectShell(html, relPath);
+  html = ensureRedirectShellPages(html, relPath);
   html = ensureCanonical(html, relPath);
   canonical = extractCanonical(html) || canonical;
 
