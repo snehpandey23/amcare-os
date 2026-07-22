@@ -1,0 +1,54 @@
+# Research extract — Women, Hormones & ADHD (foundation)
+
+```yaml
+pillar: women-hormones-adhd
+date: 2026-07-20
+clinical_review_required: true
+evidence_level: Emerging / Limited RCTs — systematic review + case series + clinical observation
+```
+
+## Citations
+
+### C1 — Systematic review
+- Osianlis E, Thomas EHX, Jenkins LM, Gurvich C. ADHD and Sex Hormones in Females: A Systematic Review. J Atten Disord. 2025.
+- URL: https://pmc.ncbi.nlm.nih.gov/articles/PMC12145478/
+- N studies: 11
+- Finding: Suggestive association between sex hormones / hormonal phases (puberty, menstrual cycle) and ADHD symptom change in females. Menopause under-researched.
+- Limitation: Small samples, heterogeneous methods — **do not overstate**.
+
+### C2 — Premenstrual stimulant adjustment (case series)
+- de Jong M et al. Female-specific pharmacotherapy in ADHD: premenstrual adjustment of psychostimulant dosage. Front Psychiatry. 2023.
+- URL: https://pmc.ncbi.nlm.nih.gov/articles/PMC10751335/
+- N: 9 women; +30–50% dose premenstrually; reported benefit for ADHD/mood; follow-up 6–24 mo.
+- Limitation: Not RCT; selected patients; **not a public dosing protocol**.
+
+### C3 — Lifelong hormonal interplay review
+- Research advances in female ADHD / hormonal fluctuations (2025). PMC12277363.
+- Themes: puberty, cycle, pregnancy, peri/menopause; estrogen–dopamine framing; high self-report of premenstrual mood/focus worsening in ADHD populations surveyed.
+- Limitation: Mix of review + survey — cite cautiously.
+
+### C4 — Experimental amphetamine × cycle
+- White TL et al. / related literature: subjective stimulant effects can differ follicular vs luteal.
+- Use: supports “meds may feel different across cycle,” not automatic dose change.
+
+## Insights (patient_why)
+
+| id | claim | patient_why | evidence |
+|----|-------|-------------|---------|
+| I1 | ADHD symptoms may worsen when estrogen is relatively lower (e.g. late luteal) | Explains “why am I a mess the week before my period?” | C1, C3 |
+| I2 | Estrogen modulates dopamine pathways relevant to attention | Makes the biology feel real without jargon | C1, C3 |
+| I3 | Perimenopause can unmask or intensify ADHD | Explains first diagnosis / crisis in 40s | C3 + clinical consensus |
+| I4 | Stimulant *subjective* effect may vary by cycle phase | Explains “my meds stopped working” without panic | C2, C4 |
+| I5 | Premenstrual dose adjustment is experimental / clinician-guided | Validates seeking help; blocks DIY dosing | C2 |
+| I6 | Hormones do not cause ADHD | Protects from myth content | C1 |
+| I7 | Masking + hormonal transition = late recognition | Brand-aligned recognition | Existing Siya pillar + reviews |
+| I8 | Sleep disruption in peri independently worsens cognition | Differential diagnosis | Clinical + peri literature |
+| I9 | PMDD can co-occur and must be distinguished | Avoids wrong treatment path | Clinical differential |
+| I10 | Contraception/HRT effects are individual | Avoids one-size claims | C1 gap + clinical |
+
+## Out of scope (for now)
+
+- Marketing HRT as ADHD therapy
+- Pregnancy stimulant prescribing advice
+- Guaranteed cycle-based dosing schedules
+- Claims that all women with ADHD have luteal worsening
