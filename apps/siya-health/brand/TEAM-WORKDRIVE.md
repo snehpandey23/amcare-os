@@ -29,6 +29,18 @@ Statuses: Idea → Draft → In design → Ready → Scheduled → Published
 
 Company/social rows need a **practical change**. Founder LinkedIn may be N/A (no CTA).
 
-## Standing ops (locked 2026-07-21)
+## Standing ops (locked 2026-07-21 · updated 2026-07-22)
 
-**Every future team deliverable** (carousels, statics, reels, banners, copy packs, brand rules) must be written into this Common Folder and logged in `04-Content-Tracker`. Desktop/git copies are optional extras — Common Folder is what the team uses.
+**Every future team deliverable** must land in this Common Folder and be logged in `04-Content-Tracker`. Common Folder is what the team uses.
+
+### Cloud → local fuse (locked 2026-07-22)
+
+```text
+Cloud agents (all day)  →  git brand/ packs + tracker CSV
+Local Mac agent (EOD)   →  EOD-LOCAL-FUSE-MASTER-PROMPT + eod-fuse-to-truesync.sh
+                         →  live TrueSync Knowledge Editorial
+```
+
+Marketing may keep creating on **cloud agents** in parallel. Do **not** expect cloud agents to write TrueSync. End-of-day local fuse is the WorkDrive sync step.
+
+See: `EOD-LOCAL-FUSE-MASTER-PROMPT.md` · `03-START-HERE/CLOUD-TO-LOCAL-WORKFLOW.md` · `scripts/eod-fuse-to-truesync.sh`

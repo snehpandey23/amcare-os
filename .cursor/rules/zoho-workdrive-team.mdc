@@ -1,11 +1,18 @@
 ---
-description: Always sync team-facing Siya editorial/brand deliverables to Zoho WorkDrive Common Folder
+description: Knowledge Editorial — cloud agents stage in git; local Mac agent fuses to TrueSync WorkDrive
 alwaysApply: true
 ---
 
 # Zoho WorkDrive — team deliverables
 
-Whenever creating or updating **team-facing** Siya Health materials (editorial packs, carousels, statics, reels, LinkedIn banners, brand/editorial rules, captions, trackers), also update:
+## Split of duties (locked 2026-07-22)
+
+| Who | Where | Duty |
+|-----|--------|------|
+| **Cloud agents** | `apps/siya-health/brand/` in git | Create packs, captions, creatives, tracker CSV rows. Marketing works in parallel. **Never claim WorkDrive sync.** |
+| **Local Mac agent (EOD)** | TrueSync mount | Fuse git → live Common Folder. Paste `brand/EOD-LOCAL-FUSE-MASTER-PROMPT.md` and run `brand/scripts/eod-fuse-to-truesync.sh`. |
+
+Live team path (Mac TrueSync only):
 
 ```text
 ~/Library/CloudStorage/ZohoWorkDriveTrueSync-AmcareMedicalConsultancyIndiaPvtLtd/Common Folder/Siya Knowledge Editorial/
@@ -13,29 +20,33 @@ Whenever creating or updating **team-facing** Siya Health materials (editorial p
 
 ## Folder map
 
-| Asset type | Put in |
-|---|-----|
-| Brand / editorial rules | `00-Brand-System/` |
-| Tracker row + spreadsheet | `04-Content-Tracker/Siya-Content-Tracker.xlsx` |
-| Carousels (multi-slide) | `05-Carousels/[Insight-ID]/` |
-| Statics / banners / singles | `06-Statics/...` |
-| How-to | `03-START-HERE/` |
+| Asset type | Git staging | WorkDrive (after EOD fuse) |
+|---|-----|-----|
+| Brand / editorial rules | `brand/` docs | `00-Brand-System/` |
+| Tracker | `brand/04-Content-Tracker/Siya-Content-Tracker.csv` | `04-Content-Tracker/` (+ merge `.xlsx`) |
+| Carousels | `brand/editorial-packs/[Insight-ID]/` | `05-Carousels/[Insight-ID]/` |
+| Statics | `brand/06-Statics/[Insight-ID]/` | `06-Statics/[Insight-ID]/` |
+| How-to | `brand/03-START-HERE/` | `03-START-HERE/` |
 
-## Required habit
+## Cloud agent habit
 
-1. Write files to the Common Folder path above (TrueSync syncs for the team).
-2. Add or update a row in `Siya-Content-Tracker.xlsx` (or the CSV) for every new post/asset.
-3. Do **not** leave team-ready assets only on Desktop or only in git — Common Folder is the team source of truth for deliverables.
-4. Git remains source of truth for **code**; WorkDrive for **editorial deliverables**.
+1. Use Insight IDs + Knowledge Editorial layout in **git only**.
+2. Log every asset in `04-Content-Tracker/Siya-Content-Tracker.csv`.
+3. Follow SIYA-STANDARDS CTAs (no Meet & Greet).
+4. Do **not** invent `zoho-common/` or write to fake TrueSync paths on Linux.
+5. Commit/PR so EOD fuse can pick it up.
 
-Do not sync secrets, `.env`, or the full `amcare-os` monorepo into WorkDrive.
+## Local EOD habit
 
-## Captions (required with every visual pack)
+1. Paste master prompt from `brand/EOD-LOCAL-FUSE-MASTER-PROMPT.md`.
+2. Run `bash apps/siya-health/brand/scripts/eod-fuse-to-truesync.sh`.
+3. Merge tracker CSV rows into `Siya-Content-Tracker.xlsx` if that is the live sheet.
 
-Ship platform-specific caption docs **alongside images**:
-`05-Carousels/[ID]/captions/` and `ready-to-post/captions/`
-Include: Instagram, Facebook, **LinkedIn Company only**, X/Twitter, Pinterest.
-Also include `ALL-PLATFORMS.md` for one-file copy-paste.
+Git = code + editorial staging. WorkDrive Common Folder = team deliverables after fuse.
 
-**Do not produce Founder LinkedIn (Dr. Sneh / Dr. Swati) posts** unless explicitly requested.
-Company voice across platforms. Audience-specific angles belong in the creative.
+Do not sync secrets, `.env`, or the full monorepo into WorkDrive.
+
+## Captions
+
+Ship platform captions with every visual pack (`captions/` + `ALL-PLATFORMS.md`).
+**No Founder LinkedIn** unless explicitly requested.

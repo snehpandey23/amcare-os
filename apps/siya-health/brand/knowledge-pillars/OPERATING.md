@@ -47,7 +47,8 @@ Moat: **systems medicine explained simply.**
 - `CREATIVE-DIRECTOR.md`  
 - `INSTAGRAM-STATIC.md`  
 - `TEAM-WORKDRIVE.md`
-- `FOUNDER-LINKEDIN-VOICE.md` — founder LI craft (memory > thesis; end on realization) — **sync all team deliverables to Zoho Common Folder → Siya Knowledge Editorial**  
+- `EOD-LOCAL-FUSE-MASTER-PROMPT.md` — cloud create all day → local Mac fuse to WorkDrive at EOD  
+- `FOUNDER-LINKEDIN-VOICE.md` — founder LI craft (memory > thesis; end on realization) — **EOD local fuse syncs deliverables to Zoho Common Folder → Siya Knowledge Editorial**  
 - Founder LinkedIn: never sells  
 - Company/social: useful + ≥1 evidence-based practical change  
 
@@ -59,7 +60,8 @@ Use Editorial Pack format (Insight ID, not Week).
 Founder LinkedIn: Draft A voice, zero CTA.
 Company/social: Recognition → useful explanation → ≥1 practical change
 (evidence-based / guideline-aligned; no DIY dosing / HRT-as-ADHD / overclaim).
-Link Product → Spoke → Meet & Greet. Pass Editorial Test.
+Link Product → Spoke → Talk to a Clinician. Pass Editorial Test.
+Cloud agents: stage in git brand/ only. WorkDrive sync = local EOD fuse.
 ```
 
 ## Content production pause (2026-07-21)
