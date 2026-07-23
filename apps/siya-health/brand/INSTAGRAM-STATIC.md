@@ -58,3 +58,7 @@ siya.health  ·  All content for educational purposes only
 
 `editorial-packs/WH-R-02/images/prototype/slide-01-prototype.png`
 Desktop: `~/Desktop/Siya-IG-Prototype/`
+
+## Related
+
+Full brand visual identity (palette, lighting, people, video): `SIYA-HEALTH-VISUAL-STYLE.md`.

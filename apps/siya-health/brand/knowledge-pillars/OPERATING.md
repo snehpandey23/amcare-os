@@ -45,6 +45,7 @@ Moat: **systems medicine explained simply.**
 
 - `EDITORIAL-TEST.md`  
 - `CREATIVE-DIRECTOR.md`  
+- `SIYA-HEALTH-VISUAL-STYLE.md` — premium healthcare visual identity (palette, light, people, video)
 - `INSTAGRAM-STATIC.md`  
 - `TEAM-WORKDRIVE.md`
 - `EOD-LOCAL-FUSE-MASTER-PROMPT.md` — cloud create all day → local Mac fuse to WorkDrive at EOD  
