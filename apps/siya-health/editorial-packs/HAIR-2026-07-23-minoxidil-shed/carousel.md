@@ -4,6 +4,7 @@
 **Focus:** Early shedding anxiety after starting Minoxidil.  
 **Format:** 5-slide Instagram carousel · 1:1 · simple English  
 **Logo:** Top-left only — no background watermark.
+**Style:** `SIYA-SOCIAL-POST-STYLE.md` (navy/magenta graphic system · 3D medical · `n/5` pills).
 
 ## On-image copy (locked)
 

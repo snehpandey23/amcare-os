@@ -1,12 +1,16 @@
 # SIYA HEALTH® Visual Style
 
 ```text
-Status: Locked 2026-07-23
-Applies to: All Siya Health educational / social / video creatives going forward
-Companion: INSTAGRAM-STATIC.md (slide layout rules) · EDITORIAL-TEST.md (content usefulness)
+Status: Locked 2026-07-23 (updated same day)
+Applies to: Photo / video / clinic atmosphere creatives
+Companion: SIYA-SOCIAL-POST-STYLE.md ← **graphic Instagram carousels + educational statics**
+Also: INSTAGRAM-STATIC.md · EDITORIAL-TEST.md
 ```
 
-Create a premium, modern healthcare visual identity.
+**Graphic social posts (carousels / illustrated statics):** follow `SIYA-SOCIAL-POST-STYLE.md`  
+(navy type · pink→purple keyword gradients · off-white + lavender curves · 3D medical illustrations · corner logo · `n/5` pills). That is the restored historical Siya social system.
+
+Create a premium, modern healthcare visual identity (for photo/video).
 
 The overall aesthetic should feel **clean, trustworthy, calming, and evidence-based**.
 
