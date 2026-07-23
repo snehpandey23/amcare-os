@@ -7,8 +7,9 @@ Companion: SIYA-SOCIAL-POST-STYLE.md ← **graphic Instagram carousels + educati
 Also: INSTAGRAM-STATIC.md · EDITORIAL-TEST.md
 ```
 
-**Graphic social posts (carousels / illustrated statics):** follow `SIYA-SOCIAL-POST-STYLE.md`  
-(navy type · pink→purple keyword gradients · off-white + lavender curves · 3D medical illustrations · corner logo · `n/5` pills). That is the restored historical Siya social system.
+**Graphic social posts:** follow `SIYA-SOCIAL-POST-STYLE.md` + `DESIGN-STATEMENT-FROM-SAMPLES.md`  
+(Canonical samples: `Common Folder/Marketing/Sample images/`).  
+Default = **Template A** human-first awareness. **Template B** = 3D mechanism carousels only.
 
 Create a premium, modern healthcare visual identity (for photo/video).
 
