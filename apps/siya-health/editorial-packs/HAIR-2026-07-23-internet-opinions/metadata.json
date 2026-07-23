@@ -1,0 +1,19 @@
+{
+  "id": "HAIR-2026-07-23-internet-opinions",
+  "title": "The internet offers opinions. A medical evaluation offers answers.",
+  "family": "Clarity",
+  "topic": "Hair loss",
+  "format": "static",
+  "knowledge_product": "/blog",
+  "spoke": "/blog/minoxidil-for-hair-loss-does-it-work",
+  "related": ["/answers/minoxidil-hair-loss-does-it-work", "/pricing"],
+  "status": "Ready",
+  "clinical_review": "Educational static — internet opinions vs structured hair-loss medical evaluation; Clinician-informed framing only",
+  "practical_change": "Talk to a Clinician about hair loss — pattern vs other causes; treatment expectations vary; meds never guaranteed",
+  "workdrive_path": "Common Folder/Siya Knowledge Editorial/06-Statics/HAIR-2026-07-23-internet-opinions/",
+  "founder_cta": false,
+  "company_cta": true,
+  "created": "2026-07-23",
+  "logo_rule": "Top-left corner only — no background watermark",
+  "imagery": "Wooden brush with shed strands on cream linen — hair-loss theme, not before/after"
+}
