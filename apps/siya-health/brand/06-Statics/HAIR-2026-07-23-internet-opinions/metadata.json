@@ -6,14 +6,28 @@
   "format": "static",
   "knowledge_product": "/blog",
   "spoke": "/blog/minoxidil-for-hair-loss-does-it-work",
-  "related": ["/answers/minoxidil-hair-loss-does-it-work", "/pricing"],
+  "related": [
+    "/answers/minoxidil-hair-loss-does-it-work",
+    "/pricing"
+  ],
   "status": "Ready",
-  "clinical_review": "Educational static — internet opinions vs structured hair-loss medical evaluation; Clinician-informed framing only",
-  "practical_change": "Talk to a Clinician about hair loss — pattern vs other causes; treatment expectations vary; meds never guaranteed",
+  "clinical_review": "Educational static \u2014 internet opinions vs structured hair-loss medical evaluation; Clinician-informed framing only",
+  "practical_change": "Talk to a Clinician about hair loss \u2014 pattern vs other causes; treatment expectations vary; meds never guaranteed",
   "workdrive_path": "Common Folder/Siya Knowledge Editorial/06-Statics/HAIR-2026-07-23-internet-opinions/",
   "founder_cta": false,
   "company_cta": true,
   "created": "2026-07-23",
-  "logo_rule": "Top-left corner only — no background watermark",
-  "imagery": "Wooden brush with shed strands on cream linen — hair-loss theme, not before/after"
+  "logo_rule": "Top-left corner only \u2014 no background watermark",
+  "imagery": "Wooden brush with shed strands on cream linen \u2014 hair-loss theme, not before/after",
+  "style": "premium-campaign-editorial",
+  "hero": "3D microscope + hair strand slide",
+  "refined": "2026-07-23",
+  "palette": [
+    "#4A2FA6",
+    "#6C3FD6",
+    "#E51E8A",
+    "#0F6BD9",
+    "#FAFAFC",
+    "#1E2A5A"
+  ]
 }
