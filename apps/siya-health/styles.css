@@ -10010,6 +10010,15 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+.adhd-reading-grid--compact {
+  max-width: 56rem;
+  margin-inline: auto;
+}
+@media (min-width: 700px) {
+  .adhd-reading-grid--compact {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 .adhd-reading-card {
   display: flex;
   flex-direction: column;

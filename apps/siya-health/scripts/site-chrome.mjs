@@ -262,15 +262,15 @@ const LEARN_MORE_ADHD = `<!-- SIYA:LEARN-MORE-ADHD -->
         <div class="container">
           <div class="section-header">
             <h2 id="learn-more-adhd-heading">Suggested Reading</h2>
-            <p class="lead">Educational resources from Siya Health—so you can learn at your own pace before or after evaluation.</p>
+            <p class="lead">A few starting points—before or after evaluation.</p>
           </div>
-          <div class="adhd-reading-grid">
-            <a class="adhd-reading-card" href="/blog/adhd-in-women">
+          <div class="adhd-reading-grid adhd-reading-grid--compact">
+            <a class="adhd-reading-card" href="/answers/late-adhd-diagnosis-adults">
               <figure class="adhd-reading-card-media">
-                <img src="/assets/images/editorial-hormones-pause.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
+                <img src="/assets/images/editorial-finally-heard.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
               </figure>
-              <strong>ADHD in Women</strong>
-              <span>Symptoms, masking, and late diagnosis.</span>
+              <strong>Late ADHD Diagnosis</strong>
+              <span>Why so many adults seek answers later in life.</span>
             </a>
             <a class="adhd-reading-card" href="/blog/adhd-medication-options-for-adults">
               <figure class="adhd-reading-card-media">
@@ -286,29 +286,8 @@ const LEARN_MORE_ADHD = `<!-- SIYA:LEARN-MORE-ADHD -->
               <strong>ADHD vs Anxiety</strong>
               <span>How overlap happens—and why evaluation matters.</span>
             </a>
-            <a class="adhd-reading-card" href="/blog/executive-dysfunction-adhd">
-              <figure class="adhd-reading-card-media">
-                <img src="/assets/images/editorial-adhd-unfinished.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
-              </figure>
-              <strong>Executive Dysfunction</strong>
-              <span>What it is and what actually helps day to day.</span>
-            </a>
-            <a class="adhd-reading-card" href="/answers/late-adhd-diagnosis-adults">
-              <figure class="adhd-reading-card-media">
-                <img src="/assets/images/editorial-finally-heard.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
-              </figure>
-              <strong>Late ADHD Diagnosis</strong>
-              <span>Why so many adults seek answers later in life.</span>
-            </a>
-            <a class="adhd-reading-card" href="/blog/iron-deficiency-brain-fog-adhd">
-              <figure class="adhd-reading-card-media">
-                <img src="/assets/images/editorial-exhausted-morning.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
-              </figure>
-              <strong>Iron Deficiency &amp; Brain Fog</strong>
-              <span>Recent clinical overlap many adults overlook.</span>
-            </a>
           </div>
-          <p class="cta-microcopy adhd-reading-footer">Also useful: <a href="/pricing">evaluation pricing</a> · <a href="/blog/online-adhd-diagnosis-california">California ADHD care</a> · <a href="/blog/adhd-treatment-los-angeles-ca">Los Angeles</a> · <a href="/blog/adhd-treatment-san-francisco-ca">San Francisco</a> · <a href="/blog/adhd-treatment-san-diego-ca">San Diego</a> · <a href="/blog/adhd-treatment-san-jose-ca">San Jose</a> · <a href="/blog/adhd-treatment-sacramento-ca">Sacramento</a> · <a href="/blog/adhd-treatment-oakland-ca">Oakland</a> · <a href="/blog/adhd-treatment-orange-county-ca">Orange County</a> · <a href="/blog/online-adhd-diagnosis-texas">Texas</a> · <a href="/blog/adhd">Browse all ADHD articles →</a></p>
+          <p class="cta-microcopy adhd-reading-footer">Also useful: <a href="/pricing">evaluation pricing</a> · <a href="/blog/adhd">Browse all ADHD articles →</a></p>
         </div>
       </section>
       <!-- /SIYA:LEARN-MORE-ADHD -->`;

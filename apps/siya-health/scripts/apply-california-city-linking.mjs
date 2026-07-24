@@ -230,38 +230,21 @@ for (const city of CITIES) {
   }
 }
 
-// 4) ADHD care service page — California-first metro strip (OUTSIDE LEARN-MORE block; chrome rewrites that)
+// 4) ADHD care service page — CA metro strip REMOVED (2026-07-24)
+// City SEO stays on /blog/adhd and state hubs; general care page stays clean.
 {
   const rel = 'adhd-care.html';
   if (exists(rel)) {
     let html = read(rel);
     const marker = 'CA-METRO-STRIP';
-    const block = `      <aside class="labs-pathway-chips" aria-label="California ADHD metros" style="margin:1.5rem 0;">
-        <h3>California ADHD care by metro</h3>
-        <p style="margin:0 0 0.65rem;">California is a primary service state. Explore physician-led virtual ADHD treatment guides for:</p>
-        <ul>
-            <li><a href="/blog/adhd-treatment-los-angeles-ca">Los Angeles</a></li>
-            <li><a href="/blog/adhd-treatment-san-diego-ca">San Diego</a></li>
-            <li><a href="/blog/adhd-treatment-san-francisco-ca">San Francisco</a></li>
-            <li><a href="/blog/adhd-treatment-san-jose-ca">San Jose</a></li>
-            <li><a href="/blog/adhd-treatment-sacramento-ca">Sacramento</a></li>
-            <li><a href="/blog/adhd-treatment-oakland-ca">Oakland</a></li>
-            <li><a href="/blog/adhd-treatment-orange-county-ca">Orange County</a></li>
-        </ul>
-        <p class="cta-microcopy" style="margin:0;"><a href="/blog/online-adhd-diagnosis-california">Online ADHD diagnosis in California</a> · <a href="/adult-adhd-screening-california">California screening</a></p>
-      </aside>`;
-    html = softStrip(html, marker);
-    if (html.includes('<!-- /SIYA:LEARN-MORE-ADHD -->')) {
-      html = html.replace(
-        '<!-- /SIYA:LEARN-MORE-ADHD -->',
-        `<!-- /SIYA:LEARN-MORE-ADHD -->\n<!-- SIYA:${marker} -->\n${block}\n<!-- /SIYA:${marker} -->`,
-      );
+    if (html.includes(`SIYA:${marker}`)) {
+      html = softStrip(html, marker);
+      write(rel, html);
+      console.log('OK adhd-care (removed CA metro strip)');
+      n += 1;
     } else {
-      html = upsertMarkerBlock(html, marker, block);
+      console.log('SKIP adhd-care (no CA metro strip)');
     }
-    write(rel, html);
-    console.log('OK adhd-care');
-    n += 1;
   }
 }
 
