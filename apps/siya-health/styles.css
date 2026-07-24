@@ -4817,9 +4817,9 @@ a.asrs-interest-btn:hover {
   object-fit: contain;
 }
 img.footer-trust-logo[src*="hipaa-compliant"] {
-  max-height: 56px;
-  width: 56px;
-  height: 56px;
+  max-height: 72px;
+  width: 72px;
+  height: 72px;
   background: #fffdf6;
   border-radius: 50%;
   padding: 2px;
@@ -7863,9 +7863,9 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   max-height: 48px;
 }
 .footer-brand-bar img.footer-trust-logo[src*="hipaa-compliant"] {
-  max-height: 52px;
-  width: 52px;
-  height: 52px;
+  max-height: 68px;
+  width: 68px;
+  height: 68px;
 }
 
 .footer-brand-bar .footer-social {
