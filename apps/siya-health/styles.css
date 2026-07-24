@@ -4810,11 +4810,23 @@ a.asrs-interest-btn:hover {
 }
 
 .footer-trust-logo {
-  max-height: 50px;
+  max-height: 52px;
   width: auto;
   height: auto;
   display: block;
   object-fit: contain;
+}
+img.footer-trust-logo[src*="hipaa-compliant"] {
+  max-height: 56px;
+  width: 56px;
+  height: 56px;
+  background: #fffdf6;
+  border-radius: 50%;
+  padding: 2px;
+  box-shadow: 0 0 0 1px rgba(255, 253, 246, 0.35);
+}
+img.footer-trust-logo[src*="legitscript"] {
+  max-height: 52px;
 }
 
 .footer-trust-logos a {
@@ -7848,7 +7860,12 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
 }
 
 .footer-brand-bar .footer-trust-logo {
-  max-height: 40px;
+  max-height: 48px;
+}
+.footer-brand-bar img.footer-trust-logo[src*="hipaa-compliant"] {
+  max-height: 52px;
+  width: 52px;
+  height: 52px;
 }
 
 .footer-brand-bar .footer-social {
