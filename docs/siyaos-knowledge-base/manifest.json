@@ -1,0 +1,147 @@
+{
+  "version": "1.0.0",
+  "name": "SiyaOS Knowledge Base",
+  "tagline": "Company memory for healthcare operating systems",
+  "modules": [
+    {
+      "id": "01-executive-vision",
+      "title": "Executive Vision",
+      "owner": "CEO",
+      "status": "stub",
+      "topics": ["mission", "decision-philosophy", "10-year-vision"]
+    },
+    {
+      "id": "02-company-structure",
+      "title": "Company Structure",
+      "owner": "CEO / Ops",
+      "status": "stub",
+      "topics": ["entities", "siya-health-vs-pllc", "decision-rights"]
+    },
+    {
+      "id": "03-culture",
+      "title": "Culture",
+      "owner": "Leadership",
+      "status": "stub",
+      "topics": ["documentation-first", "remote-work", "meetings"]
+    },
+    {
+      "id": "04-clinical-operations",
+      "title": "Clinical Operations",
+      "owner": "Clinical Program",
+      "status": "seeded",
+      "topics": ["daily-workflows", "escalation-clinical", "ma-vs-provider"]
+    },
+    {
+      "id": "05-marketing-os",
+      "title": "Marketing OS",
+      "owner": "Marketing",
+      "status": "seeded",
+      "topics": ["editorial-pipeline", "content-qa", "brand-os"]
+    },
+    {
+      "id": "06-growth",
+      "title": "Growth",
+      "owner": "Growth",
+      "status": "stub",
+      "topics": ["funnels", "seo", "ads", "landing-pages"]
+    },
+    {
+      "id": "07-product-vision",
+      "title": "Product Vision",
+      "owner": "Product / CEO",
+      "status": "stub",
+      "topics": ["patient-os", "provider-os", "admin-os", "agents"]
+    },
+    {
+      "id": "08-technology",
+      "title": "Technology",
+      "owner": "Engineering",
+      "status": "seeded",
+      "topics": ["amcare-os", "integrations", "audit"]
+    },
+    {
+      "id": "09-ai-strategy",
+      "title": "AI Strategy",
+      "owner": "Engineering / CEO",
+      "status": "seeded",
+      "topics": ["internal-assistant", "guardrails", "retrieval"]
+    },
+    {
+      "id": "10-hr",
+      "title": "HR",
+      "owner": "People / CEO",
+      "status": "stub",
+      "topics": ["hiring", "onboarding", "contractor-vs-employee"]
+    },
+    {
+      "id": "11-operations",
+      "title": "Operations",
+      "owner": "Clinical Program / Ops",
+      "status": "live",
+      "topics": ["escalation", "billing", "daily-tasks"]
+    },
+    {
+      "id": "12-finance",
+      "title": "Finance",
+      "owner": "Finance",
+      "status": "stub",
+      "topics": ["unit-economics", "mso", "pricing-canonical"]
+    },
+    {
+      "id": "13-legal-compliance",
+      "title": "Legal & Compliance",
+      "owner": "Privacy / Counsel",
+      "status": "live",
+      "topics": ["hipaa", "phi", "breach", "training"]
+    },
+    {
+      "id": "14-patient-journey",
+      "title": "Patient Journey",
+      "owner": "Product / Marketing",
+      "status": "stub",
+      "topics": ["search-to-retention", "touchpoints"]
+    },
+    {
+      "id": "15-employer-journey",
+      "title": "Employer Journey",
+      "owner": "BD",
+      "status": "stub",
+      "topics": ["pilot", "renewal"]
+    },
+    {
+      "id": "16-provider-journey",
+      "title": "Provider Journey",
+      "owner": "Clinical",
+      "status": "stub",
+      "topics": ["credentialing", "onboarding", "publishing-minimums"]
+    },
+    {
+      "id": "17-research-library",
+      "title": "Research Library",
+      "owner": "Editorial",
+      "status": "stub",
+      "topics": ["insights", "competitive", "reddit-pipeline"]
+    },
+    {
+      "id": "18-brand",
+      "title": "Brand",
+      "owner": "Brand / Editorial",
+      "status": "seeded",
+      "topics": ["voice", "entities", "visual-system"]
+    },
+    {
+      "id": "19-company-history",
+      "title": "Company History",
+      "owner": "CEO",
+      "status": "stub",
+      "topics": ["decision-log", "lessons"]
+    },
+    {
+      "id": "20-future-roadmap",
+      "title": "Future Roadmap",
+      "owner": "CEO",
+      "status": "stub",
+      "topics": ["6mo", "1y", "3y", "capr-vision"]
+    }
+  ]
+}

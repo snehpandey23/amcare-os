@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "kb:build": "node scripts/build-workspace-kb.mjs",
+    "prebuild": "npm run kb:build",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

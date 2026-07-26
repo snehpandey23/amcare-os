@@ -32,7 +32,7 @@ export function AssistantBrandPanel() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[rgba(30,58,138,0.55)] to-transparent" />
           <p className="absolute bottom-4 left-4 right-4 text-sm font-medium text-white">
-            HIPAA-aware workflows · Billing · Escalation paths
+            Company memory · Ops · Marketing · Compliance · Tech
           </p>
         </div>
 
@@ -45,8 +45,8 @@ export function AssistantBrandPanel() {
             className="h-[72px] w-[72px] shrink-0 object-contain"
           />
           <p className="text-xs leading-relaxed text-[var(--siya-text-muted)]">
-            Answers come from your internal playbook—not clinical advice. Escalate patient-specific issues to Privacy
-            Officer or billing.
+            Answers come from <strong>SiyaOS Knowledge Base</strong> topics—not clinical advice or the open internet.
+            Never paste PHI here; escalate account-specific issues to Privacy or billing.
           </p>
         </div>
 

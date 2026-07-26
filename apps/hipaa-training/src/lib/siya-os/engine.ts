@@ -15,7 +15,8 @@ export function runSiyaAssistant(message: string): SiyaReply {
   const text = message.trim();
   if (!text) {
     return {
-      message: "Ask me about HIPAA, billing workflow, escalation, or open **Training** for certification.",
+      message:
+        "Ask about ops, marketing, billing, compliance, tech, or **escalation** — or open **Training** for HIPAA certification.",
       chunks: [],
     };
   }
@@ -38,7 +39,7 @@ export function runSiyaAssistant(message: string): SiyaReply {
   if (!chunks.length) {
     return {
       message:
-        "I didn't find a strong match. Try: escalation, late cancel, no-show, breach, telehealth background, or **Training** for the full HIPAA course.",
+        "I didn't find a strong match in **company memory** yet. Try: escalation, payment check, portal chat SLA, content QA, brand entities, AmCare OS — or add a live topic under `docs/siyaos-knowledge-base`. Open **Training** for the HIPAA course.",
       chunks: [],
     };
   }
