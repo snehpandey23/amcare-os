@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-21T06:58:14.213Z",
+  "generatedAt": "2026-07-26T07:01:32.711Z",
   "formId": "mnWpgh0IEgFvJymdZqHY",
   "bookingUrl": "https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=kkarJfxH",
   "legalDocumentVersion": "terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31",
@@ -13,12 +13,12 @@
   },
   "summary": {
     "htmlPagesScanned": 192,
-    "pagesWithGhlLinks": 186,
-    "totalGhlBookingLinks": 199,
+    "pagesWithGhlLinks": 185,
+    "totalGhlBookingLinks": 198,
     "pagesWithCarepatronLinks": 3,
     "totalCarepatronBookingLinks": 3,
     "pagesWithAcceptanceScript": 1,
-    "pagesWithGhlMissingAcceptance": 179,
+    "pagesWithGhlMissingAcceptance": 178,
     "intakeHub": true
   },
   "externalFunnels": [
@@ -1115,16 +1115,6 @@
       "hasChatWidget": false
     },
     {
-      "path": "/blog/adult-adhd-treatment-california-2026",
-      "file": "blog/adult-adhd-treatment-california-2026.html",
-      "category": "adhd-funnel",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 0,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": true,
-      "hasChatWidget": false
-    },
-    {
       "path": "/blog/compounded-vs-branded-glp1-medications",
       "file": "blog/compounded-vs-branded-glp1-medications.html",
       "category": "general-cta",
@@ -2052,7 +2042,6 @@
     "blog/adhd-treatment-texas.html",
     "blog/adhd.html",
     "blog/adult-adhd-symptoms-california.html",
-    "blog/adult-adhd-treatment-california-2026.html",
     "blog/compounded-vs-branded-glp1-medications.html",
     "blog/executive-dysfunction-adhd.html",
     "blog/food-noise-and-glp-1-what-it-means-and-what-helps.html",

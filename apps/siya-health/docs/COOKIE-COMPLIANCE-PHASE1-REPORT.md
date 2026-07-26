@@ -1,6 +1,6 @@
 # Cookie Compliance — Phase 1 Report
 
-Generated: 2026-07-21T06:58:14.574Z
+Generated: 2026-07-26T07:01:33.057Z
 
 ## Published
 

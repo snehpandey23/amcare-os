@@ -20,6 +20,8 @@ const RAW = {
   '/blog/ambien-and-sleep-medications-risks-and-benefits': '/blog/insomnia-treatment-options-beyond-medication',
   '/blog/glutathione-and-peptides-what-do-they-actually-do': '/mens-health-longevity',
   '/blog/modafinil-for-focus-and-fatigue-is-it-safe': '/adhd-care',
+  // EG-P0-01: garbled California 2026 ADHD article retired (noindex stub + 301)
+  '/blog/adult-adhd-treatment-california-2026': '/adhd-care',
   '/visual-components': '/',
   '/public': '/',
   '/terms-of-service': '/legal/terms-of-use',

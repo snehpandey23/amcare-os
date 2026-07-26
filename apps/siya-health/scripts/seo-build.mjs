@@ -49,8 +49,19 @@ const SITEMAP_EXCLUDE = new Set([
   'visual-components.html',
   'siya-circle.html',
   'adhd-screening-results.html',
+  'blog/adult-adhd-treatment-california-2026.html', // EG-P0-01 retired stub
   ...Object.keys(REDIRECT_SHELLS),
 ]);
+
+/** Any page whose HTML declares robots noindex must never appear in the sitemap. */
+function isNoindexFile(rel) {
+  try {
+    const html = fs.readFileSync(path.join(SITE_ROOT, rel), 'utf8');
+    return /<meta\s+name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html);
+  } catch {
+    return false;
+  }
+}
 
 /** @deprecated Raw gtag removed — GA4/Ads are managed inside GTM via injectGtmAndTracking() */
 function normalizeGtag(html) {
@@ -96,7 +107,7 @@ function priorityFor(rel) {
 function generateSitemap(htmlFiles) {
   const lines = [`<?xml version="1.0" encoding="UTF-8"?>`, `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`];
   const sorted = [...htmlFiles]
-    .filter((r) => !SITEMAP_EXCLUDE.has(r) && !r.startsWith('redirect/'))
+    .filter((r) => !SITEMAP_EXCLUDE.has(r) && !r.startsWith('redirect/') && !isNoindexFile(r))
     .sort((a, b) => fileToUrlPath(a).localeCompare(fileToUrlPath(b)));
   for (const rel of sorted) {
     const loc = `${BASE}${fileToUrlPath(rel)}`;

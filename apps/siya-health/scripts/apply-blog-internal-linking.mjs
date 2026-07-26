@@ -82,9 +82,17 @@ function updateBlogIndex() {
   fs.writeFileSync(indexPath, html, 'utf8');
 }
 
+function isNoindex(html) {
+  return /<meta\s+name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html);
+}
+
 function main() {
   const registry = loadBlogRegistry(BLOG_DIR);
-  const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith('.html') && !BLOG_HUB_FILES.has(f));
+  const files = fs
+    .readdirSync(BLOG_DIR)
+    .filter((f) => f.endsWith('.html') && !BLOG_HUB_FILES.has(f))
+    // Skip retired / noindex stubs (e.g. EG-P0-01) — they carry no related links.
+    .filter((f) => !isNoindex(fs.readFileSync(path.join(BLOG_DIR, f), 'utf8')));
   const results = files.map((f) => processBlogArticle(f, registry));
   updateBlogIndex();
 

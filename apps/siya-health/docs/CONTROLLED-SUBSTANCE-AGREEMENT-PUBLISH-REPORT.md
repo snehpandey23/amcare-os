@@ -1,6 +1,6 @@
 # Controlled Substance Treatment Agreement — Publish Report
 
-Generated: 2026-07-21T06:58:14.574Z
+Generated: 2026-07-26T07:01:33.057Z
 
 ## Published document
 
@@ -28,10 +28,11 @@ Operational wording preserved from approved DPC / controlled-substance protocol 
 | Metric | Count |
 |--------|------:|
 | Pages requiring CS agreement link | 94 |
-| Pages with link after build | 94 |
-| Missing | 0 |
+| Pages with link after build | 93 |
+| Missing | 1 |
 
-_All required pages include footer link._
+### Missing links
+- `blog/adult-adhd-treatment-california-2026.html`
 
 ## Out of scope
 

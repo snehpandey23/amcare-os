@@ -105,6 +105,8 @@ export function loadBlogRegistry(blogDir) {
     if (!file.endsWith('.html') || BLOG_HUB_FILES.has(file)) continue;
     const slug = file.replace(/\.html$/, '');
     const html = fs.readFileSync(path.join(blogDir, file), 'utf8');
+    // Never surface retired / noindex stubs (e.g. EG-P0-01) as related articles.
+    if (/<meta\s+name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) continue;
     const title = extractBlogTitle(html);
     const topic = topicFromBlog(slug, title);
     entries.push({ slug, title, topic, path: `/blog/${slug}` });

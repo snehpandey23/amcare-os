@@ -1,13 +1,13 @@
 # SEO Deployment QA Report
 
-Generated: 2026-07-21T06:58:14.520Z
+Generated: 2026-07-26T07:01:33.009Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
 | HTML pages scanned | 192 |
-| Sitemap URLs | 179 |
+| Sitemap URLs | 177 |
 | Pages with Meet & Greet in nav | 0 |
 | Non-ADHD pages still referencing adhd-screening | 66 |
 | Broken internal links (sample) | 0 |
@@ -108,7 +108,7 @@ Generated: 2026-07-21T06:58:14.520Z
 - `womens-health.html`
 - `womens-midlife-health.html`
 
-### All pages with any `adhd-screening` reference (187)
+### All pages with any `adhd-screening` reference (186)
 
 - `about.html`
 - `adhd-care.html`
@@ -151,7 +151,7 @@ Generated: 2026-07-21T06:58:14.520Z
 - `answers/how-much-does-adhd-testing-cost.html`
 - `answers/how-online-prescriptions-work.html`
 
-_…and 147 more (expected on ADHD funnels)._
+_…and 146 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 
@@ -183,6 +183,7 @@ _None detected in static HTML scan._
 ## Orphan pages (low inbound links, sample)
 
 - `adhd-evaluation-cost.html`
+- `blog/adult-adhd-treatment-california-2026.html`
 - `docs/tint-options-preview.html`
 - `intake/index.html`
 - `siya-circle.html`

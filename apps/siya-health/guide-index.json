@@ -1,0 +1,552 @@
+{
+  "generated": "2026-07-26T07:01:32.122Z",
+  "hubUrl": "https://siya.health/answers",
+  "count": 59,
+  "guides": [
+    {
+      "title": "When might Vyvanse be preferred over Adderall for adults?",
+      "url": "https://siya.health/answers/adderall-vs-vyvanse-adults",
+      "description": "Quick FAQ on Vyvanse vs Adderall timing, smoothness, and prescriber trade-offs—not a full comparison. Read the complete guide.",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Is there a connection between ADHD and weight loss struggles?",
+      "url": "https://siya.health/answers/adhd-and-weight-loss-connection",
+      "description": "Yes. Impulsivity, emotional eating, irregular meals, sleep debt, and stimulant effects on appetite all link ADHD and weight. Treating ADHD can help routine…",
+      "topics": [
+        "adhd",
+        "weight-loss",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "How does ADHD present differently in women?",
+      "url": "https://siya.health/answers/adhd-in-women",
+      "description": "Quick FAQ: how ADHD often presents in women—inattentive symptoms, masking, and delayed diagnosis. Read the full clinical hub for depth.",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Do you have to take ADHD medication every day?",
+      "url": "https://siya.health/answers/adhd-medication-every-day",
+      "description": "Quick FAQ: daily vs as-needed ADHD dosing for adults. Full dosing guide linked for prescriber-aligned plans.",
+      "topics": [
+        "adhd",
+        "health-guide",
+        "medication"
+      ]
+    },
+    {
+      "title": "What ADHD medication side effects are most common in the first weeks?",
+      "url": "https://siya.health/answers/adhd-medication-side-effects",
+      "description": "Quick FAQ on early stimulant and non-stimulant side effects. Full expectations guide linked for depth and monitoring.",
+      "topics": [
+        "adhd",
+        "health-guide",
+        "medication"
+      ]
+    },
+    {
+      "title": "How do you tell ADHD apart from anxiety?",
+      "url": "https://siya.health/answers/adhd-vs-anxiety",
+      "description": "ADHD vs anxiety: how clinicians tell chronic attention problems from worry-driven distraction. Screening, overlap, and when to seek evaluation.",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Is it ADHD or burnout?",
+      "url": "https://siya.health/answers/adhd-vs-burnout",
+      "description": "ADHD vs burnout: timeline, rest response, and when focus problems need evaluation. Learn how clinicians tell lifelong ADHD from job-linked exhaustion.",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Why do I crash every afternoon after lunch?",
+      "url": "https://siya.health/answers/afternoon-energy-crash-after-lunch",
+      "description": "Afternoon energy crashes after lunch often tie to meal size, blood sugar swings, insulin resistance, poor sleep, and stress—not just “food coma.” Learn cau…",
+      "topics": [
+        "health-guide"
+      ]
+    },
+    {
+      "title": "What is the ASRS ADHD screening test?",
+      "url": "https://siya.health/answers/asrs-adhd-screening-explained",
+      "description": "The Adult ADHD Self-Report Scale (ASRS) is a validated screening questionnaire—not a diagnosis. It helps clinicians decide whether a full evaluation is war…",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Why do I get brain fog after eating?",
+      "url": "https://siya.health/answers/brain-fog-after-eating",
+      "description": "Brain fog after eating often links to blood sugar swings, insulin resistance, large or high-carb meals, poor sleep, and stress—not “just lunch.” Learn caus…",
+      "topics": [
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Can ADHD be diagnosed online?",
+      "url": "https://siya.health/answers/can-adhd-be-diagnosed-online",
+      "description": "Can ADHD be diagnosed online? When telehealth evaluation is legitimate, what is included, and red flags to avoid.",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Can ADHD cause anxiety?",
+      "url": "https://siya.health/answers/can-adhd-cause-anxiety",
+      "description": "Can ADHD cause anxiety? Secondary anxiety from untreated ADHD, overlap, and how clinicians evaluate both.",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Can sleep apnea cause fatigue?",
+      "url": "https://siya.health/answers/can-sleep-apnea-cause-fatigue",
+      "description": "Quick FAQ: can sleep apnea cause fatigue? Full sleep apnea and metabolic risk guide linked.",
+      "topics": [
+        "health-guide",
+        "sleep"
+      ]
+    },
+    {
+      "title": "Can you get ADHD medication online?",
+      "url": "https://siya.health/answers/can-you-get-adhd-medication-online",
+      "description": "In eligible states, yes—after a legitimate telehealth evaluation and ongoing relationship with a licensed prescriber. Online does not mean automatic; contr…",
+      "topics": [
+        "adhd",
+        "health-guide",
+        "medication"
+      ]
+    },
+    {
+      "title": "What should you ask about compounded vs branded GLP-1?",
+      "url": "https://siya.health/answers/compounded-vs-branded-glp-1",
+      "description": "Quick FAQ: questions to ask your clinician about compounded vs branded GLP-1. Full regulatory guide linked.",
+      "topics": [
+        "weight-loss",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Is telehealth for erectile dysfunction legitimate?",
+      "url": "https://siya.health/answers/ed-telehealth-legitimate",
+      "description": "Yes when a licensed clinician takes history, reviews medications (especially nitrates), discusses cardiovascular risk, and prescribes appropriately via HIP…",
+      "topics": [
+        "telehealth",
+        "health-guide",
+        "mens-health"
+      ]
+    },
+    {
+      "title": "What is executive dysfunction in adult ADHD?",
+      "url": "https://siya.health/answers/executive-dysfunction-adhd",
+      "description": "Quick FAQ: what executive dysfunction means in adult ADHD. Read the full pillar on task initiation, working memory, planning, and supports.",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Why did food noise come back on GLP-1?",
+      "url": "https://siya.health/answers/food-noise-returned-on-glp-1",
+      "description": "Quick FAQ: food noise returning on GLP-1 therapy. Full food noise cornerstone linked.",
+      "topics": [
+        "weight-loss",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Can you use FSA or HSA for ADHD evaluation?",
+      "url": "https://siya.health/answers/fsa-hsa-adhd-evaluation",
+      "description": "Many patients use FSA/HSA debit cards for qualified medical expenses including physician telehealth visits when documented as medical care. Confirm with yo…",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "How do you manage GLP-1 nausea?",
+      "url": "https://siya.health/answers/glp-1-nausea-management",
+      "description": "Quick FAQ: practical GLP-1 nausea tips during titration. Full side-effect management guide linked.",
+      "topics": [
+        "weight-loss",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Which GLP-1 side effects usually improve with titration?",
+      "url": "https://siya.health/answers/glp-1-side-effects",
+      "description": "Quick FAQ on GLP-1 side effects that often ease with titration. Full management guide linked.",
+      "topics": [
+        "weight-loss",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Can you have ADHD and still be high-functioning?",
+      "url": "https://siya.health/answers/high-functioning-adhd",
+      "description": "Yes. Many adults with ADHD perform well outwardly while struggling privately with exhaustion, procrastination, and emotional overload. “High functioning” i…",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "What does high SHBG with low free testosterone mean?",
+      "url": "https://siya.health/answers/high-shbg-low-free-testosterone",
+      "description": "Quick FAQ on high SHBG and low free testosterone—not a full hormone lab guide. Cornerstone article linked.",
+      "topics": [
+        "health-guide",
+        "labs",
+        "mens-health"
+      ]
+    },
+    {
+      "title": "How long does an ADHD evaluation take?",
+      "url": "https://siya.health/answers/how-long-adhd-evaluation",
+      "description": "A thorough adult ADHD evaluation typically takes 60–90 minutes of face-to-face clinician time, plus intake forms and any cognitive screening completed befo…",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "How much does ADHD testing cost?",
+      "url": "https://siya.health/answers/how-much-does-adhd-testing-cost",
+      "description": "Costs vary widely: some clinics charge $500–$2,000+; Siya Health offers a transparent $149 comprehensive adult ADHD evaluation (60–90 minutes) including cl…",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "How do online prescriptions work legally?",
+      "url": "https://siya.health/answers/how-online-prescriptions-work",
+      "description": "How online prescriptions work legally: telehealth visits, e-prescribing, controlled substances, and red flags.",
+      "topics": [
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Can you have insulin resistance without diabetes?",
+      "url": "https://siya.health/answers/insulin-resistance-without-diabetes",
+      "description": "Quick FAQ: insulin resistance before diabetes thresholds. Metabolic clinician guide linked.",
+      "topics": [
+        "health-guide",
+        "labs"
+      ]
+    },
+    {
+      "title": "What does long-term ADHD medication safety monitoring include?",
+      "url": "https://siya.health/answers/is-adhd-medication-safe-long-term",
+      "description": "Quick FAQ on long-term ADHD medication monitoring—not a substitute for the full safety guide. Link to clinical article.",
+      "topics": [
+        "adhd",
+        "health-guide",
+        "medication"
+      ]
+    },
+    {
+      "title": "What should you look for in a legitimate online ADHD diagnosis?",
+      "url": "https://siya.health/answers/is-online-adhd-diagnosis-legitimate",
+      "description": "Quick FAQ: green flags, red flags, and what legitimate online ADHD telehealth includes. Read the full clinical guide for depth.",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Is telehealth legitimate for medical care?",
+      "url": "https://siya.health/answers/is-telehealth-legitimate",
+      "description": "Is telehealth legitimate? HIPAA care, licensure, limits, and how to spot pill mills vs real medical practice.",
+      "topics": [
+        "telehealth",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Why are so many adults diagnosed with ADHD late in life?",
+      "url": "https://siya.health/answers/late-adhd-diagnosis-adults",
+      "description": "Childhood ADHD was often missed—especially in girls, high achievers, and inattentive types without hyperactivity. Adults seek answers after burnout, job ch…",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "When does medical weight loss outperform dieting alone?",
+      "url": "https://siya.health/answers/medical-weight-loss-vs-dieting",
+      "description": "Quick FAQ on when supervised medical weight loss beats dieting alone. Full evidence guide linked.",
+      "topics": [
+        "weight-loss",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "What should I expect from a first telehealth visit?",
+      "url": "https://siya.health/answers/meet-and-greet-telehealth-expectations",
+      "description": "First telehealth visit: what happens, what it is not, follow-up plan pricing, and next steps before a full ADHD or metabolic evaluation.",
+      "topics": [
+        "telehealth",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Can you have insulin resistance with a normal A1C?",
+      "url": "https://siya.health/answers/normal-a1c-insulin-resistance",
+      "description": "Quick FAQ: normal A1C with insulin resistance symptoms. Full metabolic guide linked.",
+      "topics": [
+        "health-guide",
+        "labs"
+      ]
+    },
+    {
+      "title": "When is topical minoxidil enough vs oral minoxidil?",
+      "url": "https://siya.health/answers/oral-vs-topical-minoxidil",
+      "description": "Quick FAQ on topical vs oral minoxidil selection—not a full route comparison. Clinical guide linked.",
+      "topics": [
+        "health-guide",
+        "hair-loss"
+      ]
+    },
+    {
+      "title": "Can poor sleep feel like ADHD?",
+      "url": "https://siya.health/answers/poor-sleep-feels-like-adhd",
+      "description": "Poor sleep, sleep apnea, and sleep deprivation can mimic ADHD—brain fog, poor focus, and impulsivity. Learn how to tell sleep problems from ADHD and when t…",
+      "topics": [
+        "adhd",
+        "health-guide",
+        "sleep"
+      ]
+    },
+    {
+      "title": "What is rejection sensitive dysphoria (RSD) and ADHD?",
+      "url": "https://siya.health/answers/rejection-sensitivity-adhd",
+      "description": "RSD describes intense emotional pain after perceived criticism or rejection. It is not an official DSM diagnosis but is frequently reported in ADHD. Clinic…",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "What is the difference between ADHD screening and a full evaluation?",
+      "url": "https://siya.health/answers/screening-vs-adhd-evaluation",
+      "description": "Screening (e.g., ASRS, short online quizzes) estimates likelihood and takes minutes. A full evaluation is a 60–90 minute clinician visit with history, stan…",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "How quickly does semaglutide start working for weight loss?",
+      "url": "https://siya.health/answers/semaglutide-weight-loss-how-it-works",
+      "description": "Quick FAQ on semaglutide onset and early appetite changes—not a full mechanism guide. Read the clinical article.",
+      "topics": [
+        "weight-loss",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "What are the signs of adult ADHD?",
+      "url": "https://siya.health/answers/signs-of-adult-adhd",
+      "description": "Signs of adult ADHD: inattention, time blindness, emotional sensitivity, and when to seek a structured evaluation—not just an online quiz.",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "What are the signs of sleep apnea in adults?",
+      "url": "https://siya.health/answers/signs-of-sleep-apnea-in-adults",
+      "description": "Quick adult sleep apnea symptom checklist—not a full risk overview. Clinical guide linked.",
+      "topics": [
+        "health-guide",
+        "sleep"
+      ]
+    },
+    {
+      "title": "What should adults expect when starting ADHD medication?",
+      "url": "https://siya.health/answers/starting-adhd-medication-adults",
+      "description": "Starting ADHD medication as an adult: titration, follow-up, vitals, and realistic expectations. Educational guide—not personal prescribing advice.",
+      "topics": [
+        "adhd",
+        "health-guide",
+        "medication"
+      ]
+    },
+    {
+      "title": "How does ADHD telehealth work in California?",
+      "url": "https://siya.health/answers/telehealth-adhd-california",
+      "description": "Quick FAQ on ADHD telehealth logistics in California. State-specific service article linked.",
+      "topics": [
+        "adhd",
+        "telehealth",
+        "health-guide",
+        "california"
+      ]
+    },
+    {
+      "title": "How does ADHD telehealth work in Texas?",
+      "url": "https://siya.health/answers/telehealth-adhd-texas",
+      "description": "Texas adults can complete structured ADHD telehealth evaluations with Texas-licensed clinicians, including history, standardized assessments, and follow-up…",
+      "topics": [
+        "adhd",
+        "telehealth",
+        "health-guide",
+        "texas"
+      ]
+    },
+    {
+      "title": "Can low testosterone mimic ADHD?",
+      "url": "https://siya.health/answers/testosterone-and-adhd-overlap",
+      "description": "Low testosterone and ADHD can both cause fatigue, low motivation, and concentration problems. Labs and developmental history help separate them; some men h…",
+      "topics": [
+        "adhd",
+        "health-guide",
+        "labs",
+        "mens-health"
+      ]
+    },
+    {
+      "title": "What is time blindness in ADHD?",
+      "url": "https://siya.health/answers/time-blindness-adhd",
+      "description": "Time blindness describes difficulty sensing how long tasks take, losing track of time, or chronically underestimating deadlines. It is a common executive-f…",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "How often is TRT monitoring required?",
+      "url": "https://siya.health/answers/trt-monitoring-requirements",
+      "description": "Quick FAQ on TRT lab and symptom monitoring intervals. Full appropriateness guide linked.",
+      "topics": [
+        "health-guide",
+        "mens-health"
+      ]
+    },
+    {
+      "title": "Why am I gaining weight after stopping Ozempic?",
+      "url": "https://siya.health/answers/weight-gain-after-stopping-ozempic",
+      "description": "Weight regain after stopping Ozempic (semaglutide) is common when appetite signaling returns. Learn rebound drivers, metabolic factors, and clinician-guide…",
+      "topics": [
+        "weight-loss",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "What does low testosterone feel like?",
+      "url": "https://siya.health/answers/what-does-low-testosterone-feel-like",
+      "description": "Quick FAQ on low testosterone symptoms—not a lab guide. Full free vs total testosterone article linked.",
+      "topics": [
+        "health-guide",
+        "labs",
+        "mens-health"
+      ]
+    },
+    {
+      "title": "What is included in a Siya Health ADHD evaluation?",
+      "url": "https://siya.health/answers/what-included-199-adhd-evaluation",
+      "description": "Siya Health’s $149 adult ADHD evaluation is a 60–90 minute telehealth visit with a licensed medical provider—including clinical in…",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "What is food noise?",
+      "url": "https://siya.health/answers/what-is-food-noise",
+      "description": "Quick definition of food noise—not a GLP-1 treatment guide. Full food noise & GLP-1 article linked.",
+      "topics": [
+        "health-guide"
+      ]
+    },
+    {
+      "title": "What is free testosterone?",
+      "url": "https://siya.health/answers/what-is-free-testosterone",
+      "description": "Quick definition of free testosterone—not lab interpretation depth. Full free vs total guide linked.",
+      "topics": [
+        "health-guide",
+        "labs",
+        "mens-health"
+      ]
+    },
+    {
+      "title": "What is insulin resistance?",
+      "url": "https://siya.health/answers/what-is-insulin-resistance",
+      "description": "Quick definition of insulin resistance for patients—not a clinician weight-loss overview. Full guide linked.",
+      "topics": [
+        "health-guide",
+        "labs"
+      ]
+    },
+    {
+      "title": "What to do after you get lab results",
+      "url": "https://siya.health/answers/what-to-do-after-lab-results",
+      "description": "Got lab results? Save the full report, don’t panic over one number, and bring findings to a clinician for interpretation. Learn calm next steps—not DIY dia…",
+      "topics": [
+        "health-guide"
+      ]
+    },
+    {
+      "title": "What symptoms warrant testosterone therapy evaluation?",
+      "url": "https://siya.health/answers/when-is-testosterone-therapy-appropriate",
+      "description": "Quick FAQ on symptoms that prompt TRT evaluation—not a full candidacy guide. Clinical article linked.",
+      "topics": [
+        "health-guide",
+        "labs",
+        "mens-health"
+      ]
+    },
+    {
+      "title": "Which preventive blood tests do adults usually need?",
+      "url": "https://siya.health/answers/which-preventive-blood-tests-adults",
+      "description": "Adults often need individualized preventive labs—CBC, metabolic panel, lipids, and A1c when risk supports them—not a shopping list of every test. Learn wha…",
+      "topics": [
+        "health-guide",
+        "labs"
+      ]
+    },
+    {
+      "title": "Who qualifies for GLP-1 weight loss medications?",
+      "url": "https://siya.health/answers/who-qualifies-glp-1-weight-loss",
+      "description": "Quick FAQ on GLP-1 weight-loss eligibility criteria. Texas medical weight-loss overview linked.",
+      "topics": [
+        "weight-loss",
+        "health-guide",
+        "medication"
+      ]
+    },
+    {
+      "title": "Why am I tired even after sleeping?",
+      "url": "https://siya.health/answers/why-am-i-tired-even-after-sleeping",
+      "description": "Time in bed is not the same as restorative sleep. Common causes include obstructive sleep apnea, insomnia, poor sleep quality (fragmentation), ADHD-related…",
+      "topics": [
+        "health-guide",
+        "sleep"
+      ]
+    },
+    {
+      "title": "Why don't normal labs mean you're healthy?",
+      "url": "https://siya.health/answers/why-normal-labs-dont-mean-healthy",
+      "description": "Normal A1C, cholesterol, and “fine” bloodwork can still hide insulin resistance, sleep apnea, fatty liver risk, and burnout. Learn what labs miss and when …",
+      "topics": [
+        "health-guide",
+        "labs"
+      ]
+    }
+  ]
+}

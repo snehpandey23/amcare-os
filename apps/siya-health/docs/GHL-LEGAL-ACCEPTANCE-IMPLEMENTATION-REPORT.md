@@ -1,6 +1,6 @@
 # GHL Legal Acceptance — Implementation Report
 
-Generated: 2026-07-21T06:58:14.213Z
+Generated: 2026-07-26T07:01:32.711Z
 
 ## Objective
 
@@ -45,8 +45,8 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 ## Audit totals
 
 - HTML pages scanned: **192**
-- Pages with legacy GHL booking links: **186**
-- Total legacy GHL booking anchor targets: **199**
+- Pages with legacy GHL booking links: **185**
+- Total legacy GHL booking anchor targets: **198**
 - Pages with CarePatron booking links: **3**
 - Total CarePatron booking anchor targets: **3**
 - Pages with acceptance script after build: **1**
@@ -160,7 +160,6 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/blog/adhd-treatment-texas** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/blog/adhd** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/blog/adult-adhd-symptoms-california** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/blog/adult-adhd-treatment-california-2026** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/blog/compounded-vs-branded-glp1-medications** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/blog/executive-dysfunction-adhd** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/blog/food-noise-and-glp-1-what-it-means-and-what-helps** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
@@ -360,7 +359,6 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - `blog/adhd-treatment-texas.html`
 - `blog/adhd.html`
 - `blog/adult-adhd-symptoms-california.html`
-- `blog/adult-adhd-treatment-california-2026.html`
 - `blog/compounded-vs-branded-glp1-medications.html`
 - `blog/executive-dysfunction-adhd.html`
 - `blog/food-noise-and-glp-1-what-it-means-and-what-helps.html`
