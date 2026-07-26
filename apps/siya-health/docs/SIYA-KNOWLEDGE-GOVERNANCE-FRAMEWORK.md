@@ -1,18 +1,24 @@
 # Siya Knowledge Governance Framework
 
 ```text
-Version: 1.0  (FROZEN)
-Frozen:  2026-07-26
-Owners:  Clinical (Pandey/Desai) · Editorial (Content OS) · Engineering (Generators)
-Scope:   Website · Health Guides · Labs · FAQs · Siya Guide (AI) · Internal linking ·
-         Structured data · Future patient education · Future voice · Future APIs
+Version:           1.0
+Status:            Production (FROZEN)
+Date:              2026-07-26
+Git tag:           governance-v1.0
+Breaking changes:  Architecture Review required
+Minor changes:     Version bump (v1.1+)
+Generator changes: Must pass `npm run governance`
+Owners:            Clinical (Pandey/Desai) · Editorial (Content OS) · Engineering (Generators)
+Scope:             Website · Health Guides · Labs · FAQs · Siya Guide · Provider tools ·
+                   Staff assistants · Mobile · Email · Care pathways · Future APIs
 ```
 
 > We are no longer governing blog posts. We are governing a single body of
 > knowledge that many surfaces consume. This document is the constitution of
-> that knowledge. **It is frozen at v1.0.** From here, improvement comes from
-> refining the knowledge graph and the generators — not from adding new layers
-> of governance.
+> that knowledge. **It is frozen at v1.0.** The framework must become boring —
+> innovation happens in content and product, not in governance rules every week.
+>
+> **One knowledge graph. Many products.** Never let each surface invent its own copy.
 
 ---
 
@@ -115,8 +121,46 @@ change touches.
 - Adding a governance layer requires an explicit version bump (v1.1, v2.0) and a
   written reason — otherwise the governance system itself accumulates the
   bureaucratic complexity it exists to prevent.
+- **Resist over-governance.** Another validator / score / checklist is justified only
+  by a real production incident. If authors spend more time satisfying governance
+  than helping readers, the framework has become the product.
 
-## 6. Run it
+## 6. Production KPI — Knowledge Integrity Score
+
+Leadership gets **one number**, not a stack of audit reports. Weights sum to 100:
+
+| Metric | Weight | Source |
+|--------|------:|--------|
+| Governance pass (`npm run governance`) | 20 | assembly + blocks + doc hygiene |
+| Clinical safety | 20 | Clinical Safety Audit |
+| Clinical context | 15 | Clinical Context Audit / block registry |
+| Editorial fingerprint | 15 | `editorialFingerprintDimensions().overall` |
+| AI readiness | 10 | AI Readiness Audit |
+| Accessibility | 10 | Accessibility Audit |
+| Technical SEO | 10 | SEO checks / Search Console |
+
+**Thresholds**
+
+| Score | Action |
+|------:|--------|
+| ≥95 | Healthy — publish freely |
+| 90–94 | Monitor — fix before next cluster ship |
+| &lt;90 | **Freeze publishing** until recovery |
+
+This is a **dashboard aggregation of existing components**, not a ninth audit type.
+
+## 7. Deferred to v1.1 — Knowledge Lifecycle
+
+Not in v1.0. Do not implement until a real staleness incident or Q4 planning.
+
+```
+Draft → Clinical Review → Editorial Review → Published
+  → Monitored → Needs Review → Archived → Redirected
+```
+
+v1.0 governs *quality*. Lifecycle will govern *time* (medical info ages; services change).
+
+## 8. Run it
 
 ```bash
 npm run governance          # full gate: assembly + blocks + doc hygiene
