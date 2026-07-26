@@ -9,6 +9,7 @@ import { getPageConversionConfig } from '../data/page-conversion-config.mjs';
 import { HOMEPAGE_TRUST_METRICS as M } from '../data/homepage-trust-metrics.mjs';
 import { PRICING } from '../data/site-standards.mjs';
 import { detectUserIntent } from './conversion-system.mjs';
+import { HIPAA_BADGE_PATH } from './hipaa-badge.mjs';
 
 /** @typedef {'metric'|'badge'|'certification'|'review'|'editorial'} TrustItemType */
 
@@ -76,7 +77,7 @@ export const TRUST_ITEMS = {
     type: 'certification',
     headline: 'HIPAA',
     subline: 'compliant care',
-    image: '/assets/images/hipaa-compliant.png',
+    image: HIPAA_BADGE_PATH,
     imageAlt: 'HIPAA compliant',
   },
   telehealth: {

@@ -1,6 +1,8 @@
 # Siya Assistant (internal workforce)
 
-Chat-first **Siya Assistant** at `/` — HIPAA, billing, escalation (internal KB). Optional **HIPAA certification** at `/training`.
+Chat-first **Siya Assistant** at `/` — internal workforce helper (KB + optional HIPAA certification at `/training`).
+
+**Favicon / app icons:** cream `#fffdf6`, navy ring `#1e3a8a`, Siya mark — regenerate with `npm run assets:icons -w @amcare/hipaa-training`.
 
 Design tokens match **Siya Health** (`#1e3a8a` primary, `#0f766e` accent, warm page `#fffdf6`) — same family as `apps/siya-assistant`.
 

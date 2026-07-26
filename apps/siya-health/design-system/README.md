@@ -11,6 +11,8 @@ Foundation for componentized UI — **standalone** until Pass 2 wires `component
 | `components.mjs` | Build-time HTML render helpers |
 | `cta-system.mjs` | CTA slots + page-type pairing rules |
 | `page-compositions.mjs` | Page recipes (Homepage, ADHD, Blog, Provider, Landing) |
+| `hipaa-badge.mjs` | HIPAA circle badge SVG specs + raster/display constants |
+| `trust-system.mjs` | Trust profiles and badge references |
 
 ## Usage (generators / scripts)
 
@@ -36,6 +38,18 @@ const hero = renderHero({
 | blog | Start Secure Medical Chat | Get Health Guides / Join Siya Circle |
 | provider | Schedule Consultation | Start Secure Medical Chat |
 | landing (ads) | Take Free ADHD Screening | *(conversion-specific: walkthrough / eval)* |
+
+## HIPAA compliant badge
+
+Source vector: `assets/images/hipaa-compliant.svg` (outer circle **r=136.4**, inner **r=125.4** in a 281×281 viewBox — **+10% radius** vs the 2026-06 baseline so “HIPAA” / “COMPLIANT” stay inside the ring).
+
+Regenerate sitewide PNG copies:
+
+```bash
+npm run assets:hipaa-badge -w @amcare/siya-health
+```
+
+Syncs to `siya-health-rewrite` and `hipaa-training` public assets. Footer display size remains **72×72px** (`styles.css` → `.footer-trust-logo[src*="hipaa-compliant"]`).
 
 ## Component registry
 

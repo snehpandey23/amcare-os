@@ -37,7 +37,13 @@ export function AssistantBrandPanel() {
         </div>
 
         <div className="mt-6 flex items-center gap-4">
-          <Image src="/assets/images/hipaa-compliant.png" alt="HIPAA compliant" width={72} height={72} className="h-14 w-auto" />
+          <Image
+            src="/assets/images/hipaa-compliant.png"
+            alt="HIPAA compliant"
+            width={72}
+            height={72}
+            className="h-[72px] w-[72px] shrink-0 object-contain"
+          />
           <p className="text-xs leading-relaxed text-[var(--siya-text-muted)]">
             Answers come from your internal playbook—not clinical advice. Escalate patient-specific issues to Privacy
             Officer or billing.

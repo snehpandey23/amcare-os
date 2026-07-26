@@ -30,7 +30,8 @@
     "docs:hygiene": "node scripts/validate-doc-hygiene.mjs",
     "governance": "npm run assembly:validate && npm run blocks:validate && npm run docs:hygiene",
     "deploy": "vercel --prod",
-    "guide:kb": "node ../siya-assistant/scripts/build-public-kb.mjs"
+    "guide:kb": "node ../siya-assistant/scripts/build-public-kb.mjs",
+    "assets:hipaa-badge": "node scripts/export-hipaa-badge.mjs"
   },
   "main": "asrs-screener.js",
   "directories": {
