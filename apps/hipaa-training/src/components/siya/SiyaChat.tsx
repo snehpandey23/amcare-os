@@ -6,7 +6,22 @@ import { SIYA_OPENING, SIYA_QUICK_PROMPTS } from "@/lib/siya-os/config";
 import { BRAND } from "@/lib/brand";
 
 type ChatLink = { label: string; href: string };
-type ChatMessage = { id: string; role: "assistant" | "user"; content: string; links?: ChatLink[] };
+type RoutingMeta = {
+  department: string;
+  task: string;
+  confidence: string;
+  followUpQuestions?: string[];
+};
+type SourceMeta = { title: string; id: string };
+type ChatMessage = {
+  id: string;
+  role: "assistant" | "user";
+  content: string;
+  links?: ChatLink[];
+  routing?: RoutingMeta | null;
+  sources?: SourceMeta[];
+  escalationPreview?: string | null;
+};
 
 function mdLite(text: string) {
   return text.split(/(\*\*[^*]+\*\*)/g).map((chunk, i) =>
@@ -18,6 +33,22 @@ function mdLite(text: string) {
   );
 }
 
+function RoutingBadge({ routing }: { routing: RoutingMeta }) {
+  return (
+    <div className="mb-2 flex flex-wrap gap-1.5 text-[11px] font-medium">
+      <span className="rounded-full bg-[var(--siya-bg-subtle)] px-2 py-0.5 text-[var(--siya-primary)]">
+        {routing.department}
+      </span>
+      <span className="rounded-full border border-[var(--siya-border)] px-2 py-0.5 text-[var(--siya-text-muted)]">
+        {routing.task}
+      </span>
+      <span className="rounded-full border border-[var(--siya-accent)]/30 px-2 py-0.5 text-[var(--siya-accent)]">
+        {routing.confidence} confidence
+      </span>
+    </div>
+  );
+}
+
 export function SiyaChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     { id: "open", role: "assistant", content: SIYA_OPENING },
@@ -25,6 +56,14 @@ export function SiyaChat() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
+
+  const historyPayload = useCallback(
+    () =>
+      messages
+        .filter((m) => m.id !== "open")
+        .map((m) => ({ role: m.role, content: m.content })),
+    [messages]
+  );
 
   const send = useCallback(
     async (text: string) => {
@@ -37,7 +76,7 @@ export function SiyaChat() {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: trimmed }),
+          body: JSON.stringify({ message: trimmed, history: historyPayload() }),
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error);
@@ -48,6 +87,9 @@ export function SiyaChat() {
             role: "assistant",
             content: data.message,
             links: data.links,
+            routing: data.routing,
+            sources: data.sources,
+            escalationPreview: data.escalationPreview,
           },
         ]);
       } catch {
@@ -60,8 +102,16 @@ export function SiyaChat() {
         listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
       }
     },
-    [loading]
+    [loading, historyPayload]
   );
+
+  const copyEscalation = useCallback(async (preview: string) => {
+    try {
+      await navigator.clipboard.writeText(preview);
+    } catch {
+      /* ignore */
+    }
+  }, []);
 
   return (
     <div className="flex h-full min-h-0 flex-col bg-white/50">
@@ -76,7 +126,13 @@ export function SiyaChat() {
                     : "border border-[var(--siya-border)] bg-white text-[var(--siya-text-secondary)]"
                 }`}
               >
+                {msg.routing ? <RoutingBadge routing={msg.routing} /> : null}
                 {msg.role === "assistant" ? mdLite(msg.content) : msg.content}
+                {msg.sources?.length ? (
+                  <p className="mt-2 border-t border-[var(--siya-border)] pt-2 text-[11px] text-[var(--siya-text-muted)]">
+                    Sources: {msg.sources.map((s) => s.title).join(" · ")}
+                  </p>
+                ) : null}
                 {msg.links?.length ? (
                   <ul className="mt-2 space-y-1 border-t border-[var(--siya-border)] pt-2">
                     {msg.links.map((l) => (
@@ -88,15 +144,27 @@ export function SiyaChat() {
                     ))}
                   </ul>
                 ) : null}
+                {msg.escalationPreview ? (
+                  <button
+                    type="button"
+                    onClick={() => void copyEscalation(msg.escalationPreview!)}
+                    className="mt-3 w-full rounded-lg border border-[var(--siya-primary)]/20 bg-[var(--siya-bg-subtle)] px-3 py-2 text-left text-xs font-semibold text-[var(--siya-primary)] hover:bg-[var(--siya-bg-page)]"
+                  >
+                    Copy escalation summary for Slack / email
+                  </button>
+                ) : null}
               </div>
             </div>
           ))}
-          {loading ? <p className="text-sm text-[var(--siya-text-muted)]">Siya is thinking…</p> : null}
+          {loading ? <p className="text-sm text-[var(--siya-text-muted)]">Routing and searching approved resources…</p> : null}
         </div>
       </div>
       <div className="border-t border-[var(--siya-border)] bg-white p-4 md:px-8">
         <div className="mx-auto max-w-2xl">
-          <div className="mb-3 flex flex-wrap gap-2">
+          <p className="mb-2 text-center font-[family-name:var(--font-poppins)] text-sm font-semibold text-[var(--siya-primary)]">
+            What do you need help with today?
+          </p>
+          <div className="mb-3 flex flex-wrap gap-2 justify-center">
             {SIYA_QUICK_PROMPTS.map((p) => (
               <button
                 key={p}
@@ -118,7 +186,7 @@ export function SiyaChat() {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask about HIPAA, billing, escalation…"
+              placeholder="Describe your task…"
               className="min-w-0 flex-1 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-4 py-2.5 text-sm outline-none focus:border-[var(--siya-accent)] focus:ring-2 focus:ring-[var(--siya-accent)]/20"
             />
             <button
@@ -132,7 +200,7 @@ export function SiyaChat() {
           <p className="mt-2 text-center text-xs text-[var(--siya-text-muted)]">
             {BRAND.internalBadge} ·{" "}
             <Link href="/training" className="text-[var(--siya-accent)] underline">
-              Certification course
+              HIPAA certification
             </Link>
           </p>
         </div>

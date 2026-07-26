@@ -21,7 +21,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: `${BRAND.appName} · Siya Health`,
   description:
-    "SiyaOS company memory for staff — ops, marketing, compliance, tech, escalation — plus optional HIPAA certification.",
+    "Siya Assistant — internal AI help desk: route requests, follow-ups, approved KB, escalation with context.",
   applicationName: BRAND.appName,
 };
 

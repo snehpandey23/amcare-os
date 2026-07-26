@@ -1,7 +1,7 @@
-/** Patient-facing design tokens — aligned with apps/siya-assistant & SIYA-STANDARDS. */
+/** Internal help desk — aligned with docs/siyaos-knowledge-base/PRODUCT.md */
 export const BRAND = {
   appName: "Siya Assistant",
-  appTagline: "Company memory · how we operate",
-  internalBadge: "Internal · SiyaOS Knowledge Base",
-  entityNote: "Siya Health Inc. · Workforce assistant (not patient-facing)",
+  appTagline: "Internal AI help desk",
+  internalBadge: "Internal · Approved KB only",
+  entityNote: "Siya Health Inc. · Route · Guide · Escalate",
 } as const;

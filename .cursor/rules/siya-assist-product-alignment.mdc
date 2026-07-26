@@ -1,0 +1,42 @@
+---
+description: Challenge misaligned builds; Siya Assist = internal help desk, not ERP/ops suite
+alwaysApply: true
+---
+
+# Siya Assist — product alignment (always challenge scope creep)
+
+## What we are building
+
+**Siya Assistant** (product) = one internal **AI help desk** with routing: intent → department → task-specific follow-ups → approved KB → action or escalation with context.
+
+**Not:** ERP, EMR, SAP-style modules, dashboard suite, 74-category nested menus, or “company handbook” as the primary UX.
+
+## Before implementing a user or pasted spec, ask (in chat) when any of these apply
+
+1. **Scope** — Adds dashboards, CRUD admin, project management, or multi-app navigation instead of **one chat + escalation**.
+2. **Taxonomy** — More than **~8 routing departments** for v1 without explicit approval.
+3. **Clinical/legal** — Bot makes clinical, legal, or refund **decisions** instead of SOP + escalate.
+4. **Knowledge** — Ingesting unapproved Drive dumps without metadata (owner, status, roles, review date).
+5. **Naming** — Conflicts with patient-facing **Siya Guide** (`apps/siya-assistant`) or public site KB governance.
+6. **Duplicate philosophy** — Re-documenting what already lives in `apps/siya-health/brand/` or governance v1.0 instead of **linking + retrieval**.
+
+Use **AskQuestion** or a short numbered list when the request is ambiguous. Do not silently build the enterprise version.
+
+## Approved v1 departments (routing only)
+
+Accounts · HR · Marketing · Clinical Operations · Compliance · Technology · Leadership · General
+
+## Knowledge layers (do not merge)
+
+| Layer | Path | Use |
+|-------|------|-----|
+| Internal help desk KB | `docs/siyaos-knowledge-base/` | Staff + Siya Assist retrieval |
+| Patient/public graph | `apps/siya-health/` + governance framework | Website, Siya Guide |
+
+## MVP checklist (prefer this order)
+
+Login (optional) → one prompt → router → follow-ups → retrieval + sources → escalate with collected context → admin upload (later).
+
+## Example pushback (copy tone)
+
+> “That sounds like an operations module inside an ERP. For Siya Assist v1 we’d route this to **Accounts → Reimbursement**, ask amount/date/receipt/approval, then pull an approved policy—or escalate with a filled summary. Want that flow added to the KB instead of a new app screen?”

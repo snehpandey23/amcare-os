@@ -1,8 +1,9 @@
 # SiyaOS Knowledge Base v1.0
 
-**Company memory — not an employee handbook.**
+**Company memory** behind **[Siya Assist](../../apps/hipaa-training/)** — the internal **AI help desk** (one chat, routing, escalation). Not an ERP and not the employee handbook UI.
 
-This is the canonical operating knowledge for how we run physician-led telehealth businesses today: decisions, SOPs, philosophy, and context for humans **and** internal AI (Siya Assistant). It is written to stay **organization-agnostic** where possible so future entities (Siya Health, SiyaOS, CAPR.AI portfolio companies) inherit the same operating system.
+- **Product definition:** [`PRODUCT.md`](./PRODUCT.md)
+- **Architecture (patient vs internal):** [`ARCHITECTURE.md`](./ARCHITECTURE.md)
 
 | Layer | Location | Audience |
 |-------|----------|----------|
