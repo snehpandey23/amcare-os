@@ -261,7 +261,7 @@ https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4
 |------|-------|-----|-----------------|
 | **Primary** | **Talk to a Clinician** | Booking URL above | Max **one** per page in hero **or** final `cta-band`; nav/footer may repeat. Consolidates all booking variants. |
 | **Secondary (contextual)** | See table below | Service path | Max **one** in hero or final band. Optional on service pages. |
-| **Newsletter** | **Join Siya Circle** (button) / **Siya Circle** (footer link) | `https://link.yourmarketingai.com/widget/form/HmvqrDVq3qv6rkCjl` | Footer Company column only; `/answers` hub promo; `/siya-circle` page. **Never** in hero or article bodies. |
+| **Newsletter** | **Join Siya Circle** (button) / **Siya Circle** (footer link) | `https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx` | Footer Company column only; `/answers` hub promo; `/siya-circle` page. **Never** in hero or article bodies. |
 
 ### Contextual secondary CTAs (`CTA_SYSTEM.secondary`)
 
@@ -403,7 +403,7 @@ Footer variant: **SEO v2** (`data-siya-footer="seo-v2"`) — five columns + bran
 | Our Care Team | `/providers` |
 | Pricing | `/pricing` |
 | How telehealth works | `/telehealth` |
-| Siya Circle | `https://link.yourmarketingai.com/widget/form/HmvqrDVq3qv6rkCjl` (external) |
+| Siya Circle | `https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx` (external) |
 
 ### Column: Legal
 
@@ -450,7 +450,7 @@ Free clinician-informed health education newsletter—**not** clinical care, dia
 
 | Element | Value |
 |---------|-------|
-| GHL form URL | `https://link.yourmarketingai.com/widget/form/HmvqrDVq3qv6rkCjl` |
+| GHL form URL | `https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx` |
 | Form ID | `HmvqrDVq3tq3qv6rkCjl` |
 | List tag | Siya Circle |
 | Analytics event | `siya-circle-join-click` |

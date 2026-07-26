@@ -54,7 +54,7 @@ Siya Health has **166 indexable pages** today. This audit recommends pruning to 
 | `/blog/glutathione-and-peptides-what-do-they-actually-do` | `/mens-health-longevity` | Peptide marketing content outside current service scope; 2 inbound, maintenance with no revenue tie. |
 | `/blog/modafinil-for-focus-and-fatigue-is-it-safe` | `/adhd-care` | Modafinil not a Siya service line; risks implying off-label prescribing. 4 inbound only. |
 | `/privacy-policy` | `/legal/privacy-policy` | Legacy legal stub; canonical is /legal/privacy-policy. Zero inbound. Remove file after 301. |
-| `/siya-circle` | `https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl` | Orphan utility page (0 inbound). Newsletter signup belongs in footer only per CTA audit. |
+| `/siya-circle` | `https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx` | Orphan utility page (0 inbound). Newsletter signup belongs in footer only per CTA audit. |
 | `/terms` | `/legal/terms-of-use` | Legacy legal stub; canonical is /legal/terms-of-use. Zero inbound. Remove file after 301. |
 
 ## Redirect map (full)
@@ -428,7 +428,7 @@ Monitor Search Console for 404s and ranking shifts 30 days post-redirect.
 | `/providers/dr-vanessa-urbina` | KEEP | — | Provider profile — required for E-E-A-T and booking conversion. |
 | `/providers/megan-wunderlich` | KEEP | — | Provider profile — required for E-E-A-T and booking conversion. |
 | `/providers/wendy-delgado` | KEEP | — | Provider profile — required for E-E-A-T and booking conversion. |
-| `/siya-circle` | DELETE | `https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl` | Orphan utility page (0 inbound). Newsletter signup belongs in footer only per CTA audit. |
+| `/siya-circle` | DELETE | `https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx` | Orphan utility page (0 inbound). Newsletter signup belongs in footer only per CTA audit. |
 | `/telehealth` | KEEP + REWRITE | — | Core routing hub; absorb redirected coming-soon services, simplify service grid. |
 | `/terms` | DELETE | `/legal/terms-of-use` | Legacy legal stub; canonical is /legal/terms-of-use. Zero inbound. Remove file after 301. |
 | `/weight-loss-metabolic-health` | KEEP + REWRITE | — | Core revenue; add provider authority (Sneh), simplify CTA bands per CTA audit. |
