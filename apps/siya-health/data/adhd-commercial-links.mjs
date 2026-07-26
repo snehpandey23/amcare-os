@@ -114,36 +114,26 @@ export function renderBlogAdhdCarePathwaysSection() {
           <!-- /SIYA:ADHD-BLOG-CARE-PATHWAYS -->`;
 }
 
-/** Educational care-pathways block for /answers hub */
+/**
+ * Educational next-step block for /answers hub.
+ *
+ * CONTENT ASSEMBLY RULE (see docs/CONTENT-ASSEMBLY-SYSTEM.md):
+ * A next-step CTA must (1) advance the reader's journey, (2) reference only
+ * relevant services, (3) NOT introduce a state directory, (4) not repeat
+ * navigation already present, (5) use at most 3 contextual links + one button.
+ * State availability = one sentence, never a link list.
+ */
 export function renderAnswersHubCarePathwaysSection() {
-  const screening = ADHD_SCREENING_LINKS.map((s) => link(s.href, s.label)).join(' and ');
-  const services = [
-    link('/adult-adhd-diagnosis', 'adult ADHD diagnosis online'),
-    link('/adhd-evaluation-cost', 'evaluation cost breakdown'),
-    link('/adhd-treatment-online', 'online treatment after diagnosis'),
-  ].join(', ');
-
-  const geoByRegion = {
-    TX: ADHD_GEO_LINKS.filter((g) => g.region === 'TX'),
-    FL: ADHD_GEO_LINKS.filter((g) => g.region === 'FL'),
-    PA: ADHD_GEO_LINKS.filter((g) => g.region === 'PA'),
-  };
-
-  const txLinks = geoByRegion.TX.map((g) => link(g.href, g.label)).join(', ');
-  const flLink = link('/adhd-diagnosis-florida', 'Florida ADHD diagnosis');
-  const paLinks = geoByRegion.PA.map((g) => link(g.href, g.label)).join(', ');
-
   return `<!-- SIYA:ANSWERS-ADHD-CARE-PATHWAYS -->
-          <section class="topic-cluster-explorer adhd-answers-care-pathways" aria-labelledby="answers-adhd-care-pathways-heading">
+          <section class="answers-next-step" aria-labelledby="answers-adhd-care-pathways-heading">
             <div class="section-header">
-              <h2 id="answers-adhd-care-pathways-heading">When you are ready for clinical care</h2>
-              <p class="lead">These guides are educational. If screening or evaluation is the next step, start with ${screening}—then review ${services}.</p>
+              <h2 id="answers-adhd-care-pathways-heading">Ready to take the next step?</h2>
+              <p class="lead">These guides are educational. If you're exploring whether ADHD could explain your symptoms, a few resources can help you decide what's next.</p>
             </div>
-            <div style="max-width:720px;margin:0 auto;">
-              <p><strong>Texas:</strong> ${txLinks}.</p>
-              <p><strong>Florida:</strong> ${flLink}.</p>
-              <p><strong>Pennsylvania:</strong> ${paLinks}.</p>
-              <p>California readers can use ${link('/adult-adhd-screening-california', 'state-specific ADHD screening')} before exploring <a href="/blog/online-adhd-diagnosis-california">California diagnosis articles</a>.</p>
+            <div class="answers-next-step-actions" style="max-width:640px;margin:0 auto;">
+              <p class="answers-next-step-links">${link('/adhd-screening', 'Take our free ADHD screening')} · ${link('/adult-adhd-diagnosis', 'How the evaluation works')} · ${link('/adhd-care', 'Treatment options')}</p>
+              <p><a class="button ds-button ds-button--primary" href="/adhd-care" data-siya-track="answers_next_step_click">Explore ADHD Care →</a></p>
+              <p class="answers-next-step-availability">Available in California, Texas, Pennsylvania, and Florida.</p>
             </div>
           </section>
           <!-- /SIYA:ANSWERS-ADHD-CARE-PATHWAYS -->`;

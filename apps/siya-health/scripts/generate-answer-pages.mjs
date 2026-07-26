@@ -685,6 +685,14 @@ ${headerNav()}
             <p class="lead">Each guide answers one question with a short takeaway, a deeper explanation, cited evidence, and related topics—written for adults researching ADHD, metabolic health, hormones, fatigue, and telehealth. Educational only; not a substitute for care with your clinician.</p>
             <p class="health-guides-hub-jump-links"><a href="#topic-cluster-explorer-heading">Topic clusters</a> · <a href="#guides-adhd">ADHD guides</a> · <a href="#guides-metabolic">Metabolic guides</a> · <a href="/blog/adhd">ADHD articles</a> · <a href="/adhd-care">ADHD care</a> · <a href="/adhd-screening">Free screening</a></p>
           </div>
+          <!-- SIYA:GUIDE-SEARCH -->
+          <div class="blog-search" role="search" aria-labelledby="guide-search-label">
+            <label id="guide-search-label" for="guide-search-input">Search health guides</label>
+            <input type="search" id="guide-search-input" name="q" placeholder="Try ADHD, GLP-1, thyroid, fatigue, perimenopause…" autocomplete="off" enterkeyhint="search" />
+            <p id="guide-search-status" class="blog-search-status" hidden aria-live="polite"></p>
+            <div id="guide-search-results" class="blog-search-results" hidden></div>
+          </div>
+          <!-- /SIYA:GUIDE-SEARCH -->
 ${SIYA_CIRCLE_PROMO_HTML}
 ${buildIndexClusterExplorerHtml()}
 ${renderAnswersHubCarePathwaysSection()}
@@ -696,6 +704,7 @@ ${cards}
     </main>
 ${footerBlock()}
 ${hubViewAllScript}
+    <script src="/scripts/guide-search.js" defer></script>
   </body>
 </html>
 `;
