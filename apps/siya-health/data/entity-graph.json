@@ -753,7 +753,22 @@
       "state": "California",
       "slug": "california",
       "plannedUrl": "/states/california",
+      "cornerstoneUrl": "/adult-adhd-california",
+      "entity": "adult_adhd_california",
+      "aliases": [
+        "California ADHD",
+        "Adult ADHD diagnosis California",
+        "ADHD treatment California",
+        "Online ADHD evaluation California"
+      ],
+      "relatedEntities": [
+        "executive-dysfunction",
+        "women-and-adhd",
+        "adhd-screening",
+        "adult-adhd"
+      ],
       "currentUrls": [
+        "/adult-adhd-california",
         "/blog/online-adhd-diagnosis-california",
         "/blog/adhd-evaluation-cost-texas",
         "/blog/adult-adhd-symptoms-california",

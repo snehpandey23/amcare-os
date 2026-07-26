@@ -48,7 +48,7 @@ Every new ADHD page must declare: entity owned, parent, children, inbound, outbo
 | Texas ADHD Treatment | `/blog/adhd-treatment-texas` | Complete | Local SEO | Local hub | National Treatment (planned) | Dallas, Houston, Austin, SA, Fort Worth | `/adhd-care` |
 | Florida ADHD Treatment | — | Missing hub | Local SEO | Local hub | National Treatment (planned) | Miami, Orlando (cities exist; hub missing) | `/adhd-care` |
 | Pennsylvania ADHD Treatment | — | Missing hub | Local SEO | Local hub | Treatment cluster | Philadelphia | `/adhd-care` |
-| California ADHD Treatment | — | **Blocked** (C3 cleanup) | Local SEO | Local hub | — | Do not expand until cleanup | `/adhd-care` |
+| Adult ADHD California (cornerstone) | `/adult-adhd-california` | **Canonical** (Governance v1.0 reference) | Answer-everything hub | Cornerstone | Screening, ADHD Care, Executive Dysfunction, Women & ADHD, Pricing | Free ADHD Screening (primary) | Canonical CA ADHD entity |
 | ADHD Care (commercial) | `/adhd-care` | Complete | Commercial | Commercial | — | Screening, Meet & Greet | Conversion |
 | ADHD Screening | `/adhd-screening` | Complete | Commercial | Commercial | `/adhd-care` | — | Evaluation |
 | Iron deficiency ∩ ADHD | `/blog/iron-deficiency-brain-fog-adhd` | Complete | Medical overlap | Supporting cornerstone | `/blog/adhd` | Ferritin, brain fog, women’s bleeding | `/adhd-care` · `/labs` |
@@ -65,7 +65,7 @@ Every new ADHD page must declare: entity owned, parent, children, inbound, outbo
 2. National ADHD Treatment pillar  
 3. Florida treatment hub  
 4. Pennsylvania treatment hub  
-5. California C3 cleanup  
+5. California cornerstone `/adult-adhd-california` — DONE (canonical entity, Governance v1.0 reference)  
 6. Brand Experience v2 (homepage first) — parallel when resourced  
 7. Then selectively expand supporting entities based on demand + GSC
 
@@ -76,7 +76,7 @@ Every new ADHD page must declare: entity owned, parent, children, inbound, outbo
 - Do **not** retitle or expand a Supporting Answer to target a Pillar’s primary keyword.
 - When a Pillar launches, set `canonicalBlog` on the matching Answer to the Pillar.
 - Local city pages never own national educational entities (e.g. “ADHD in women”).
-- California expansion is blocked until C3 cleanup.
+- California ADHD is now anchored by the canonical cornerstone `/adult-adhd-california`; all California ADHD articles link back to it and CA city clones redirect to it. Do not create a competing California cornerstone.
 
 ---
 

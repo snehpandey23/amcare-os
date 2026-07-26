@@ -53,6 +53,7 @@ const INTENT_DETECTORS = [
     test: (p) =>
       /^adhd-/.test(p) ||
       p === 'adult-adhd-diagnosis.html' ||
+      p === 'adult-adhd-california.html' ||
       p === 'creyos-adhd-testing.html' ||
       p === 'online-adhd-test.html' ||
       (/^blog\//.test(p) && /adhd/i.test(p)),
@@ -168,6 +169,7 @@ const ADHD_SCREENING_NAV_PAGES = new Set([
   'adhd-care.html',
   'adhd-screening.html',
   'adult-adhd-screening-california.html',
+  'adult-adhd-california.html',
 ]);
 
 /**

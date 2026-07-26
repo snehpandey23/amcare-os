@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
 Generated: 2026-07-26
-Total pages: 158
+Total pages: 159
 
 ---
 
@@ -108,6 +108,11 @@ Total pages: 158
   URL: https://siya.health/adhd-screening
   Summary: Tell us what you need: free 2-minute ADHD screening (ASRS), medical weight loss, or telehealth. Guided next steps for Texas-area care.
   Topics: adhd
+
+- Adult ADHD Care in California — Diagnosis, Treatment &amp; Screening
+  URL: https://siya.health/adult-adhd-california
+  Summary: The complete guide to adult ADHD in California: what it looks like, when evaluation helps, how online diagnosis works, treatment options, women & ADHD, executive dysfunction, pricing, and a free scree…
+  Topics: adhd, california
 
 - Online ADHD Screening in California | Free 2-Minute Test
   URL: https://siya.health/adult-adhd-screening-california

@@ -78,8 +78,8 @@ function upsertMarkerBlock(html, marker, block) {
 /** Capped statewide next-step — no metro directory (assembly ≤3 links + context). */
 function statewideNextStepBlock() {
   return `            <aside class="blog-internal-links ca-statewide-next" aria-label="California ADHD next steps" data-assembly="ca-statewide">
-              <p>For California adults: read <a href="/blog/online-adhd-diagnosis-california">online ADHD diagnosis in California</a>, <a href="/blog/adhd-telehealth-california">ADHD telehealth in California</a>, or start with <a href="/adult-adhd-screening-california">California ADHD screening</a>.</p>
-              <p><a class="button ds-button ds-button--primary" href="/adhd-care" data-siya-track="primary-cta-click" data-siya-location="ca-statewide-next">Explore ADHD Care →</a></p>
+              <p>For the full picture, start with our canonical guide to <a href="/adult-adhd-california">adult ADHD care in California</a>, or read <a href="/blog/online-adhd-diagnosis-california">online ADHD diagnosis in California</a> and <a href="/blog/adhd-telehealth-california">ADHD telehealth in California</a>.</p>
+              <p><a class="button ds-button ds-button--primary" href="/adult-adhd-california" data-siya-track="primary-cta-click" data-siya-location="ca-statewide-next">Adult ADHD in California →</a></p>
             </aside>`;
 }
 
@@ -91,7 +91,7 @@ for (const rel of CA_STATE_BLOGS) {
   let html = read(rel);
   for (const m of STRIP_MARKERS) html = softStrip(html, m);
   // Also strip bare legacy metro hrefs that aren't in markers
-  html = html.replace(/href="\/blog\/adhd-treatment-(los-angeles|san-diego|san-francisco|san-jose|sacramento|oakland|orange-county)-ca"/g, 'href="/adhd-care"');
+  html = html.replace(/href="\/blog\/adhd-treatment-(los-angeles|san-diego|san-francisco|san-jose|sacramento|oakland|orange-county)-ca"/g, 'href="/adult-adhd-california"');
   html = upsertMarkerBlock(html, 'CA-STATEWIDE-NEXT', statewideNextStepBlock());
   write(rel, html);
   console.log('OK state', rel);
@@ -102,7 +102,7 @@ for (const rel of CA_STATE_BLOGS) {
 if (exists('adult-adhd-screening-california.html')) {
   let html = read('adult-adhd-screening-california.html');
   for (const m of STRIP_MARKERS) html = softStrip(html, m);
-  html = html.replace(/href="\/blog\/adhd-treatment-(los-angeles|san-diego|san-francisco|san-jose|sacramento|oakland|orange-county)-ca"/g, 'href="/adhd-care"');
+  html = html.replace(/href="\/blog\/adhd-treatment-(los-angeles|san-diego|san-francisco|san-jose|sacramento|oakland|orange-county)-ca"/g, 'href="/adult-adhd-california"');
   write('adult-adhd-screening-california.html', html);
   console.log('OK screening adult-adhd-screening-california.html');
   n += 1;
@@ -126,7 +126,7 @@ if (exists('adhd-care.html')) {
 if (exists('blog/adhd.html')) {
   let html = read('blog/adhd.html');
   for (const m of STRIP_MARKERS) html = softStrip(html, m);
-  html = html.replace(/href="\/blog\/adhd-treatment-(los-angeles|san-diego|san-francisco|san-jose|sacramento|oakland|orange-county)-ca"/g, 'href="/adhd-care"');
+  html = html.replace(/href="\/blog\/adhd-treatment-(los-angeles|san-diego|san-francisco|san-jose|sacramento|oakland|orange-county)-ca"/g, 'href="/adult-adhd-california"');
   // Soft-replace TX/FL/PA city treatment links too (retired)
   html = html.replace(/href="\/blog\/adhd-treatment-(houston|austin|dallas|fort-worth|san-antonio)-tx"/g, 'href="/blog/adhd-treatment-texas"');
   html = html.replace(/href="\/blog\/adhd-treatment-(miami|orlando)-fl"/g, 'href="/adhd-care"');

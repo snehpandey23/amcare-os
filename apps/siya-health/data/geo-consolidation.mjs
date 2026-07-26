@@ -11,20 +11,20 @@
  *   CA screening  → /adult-adhd-screening-california (product page, not a city clone)
  *   National care → /adhd-care
  *
- * Deferred P1: /adult-adhd-california cornerstone will absorb CA commercial intent;
- * until then CA city treatment clones redirect to /adhd-care.
+ * CA cornerstone LIVE: /adult-adhd-california is the canonical California ADHD
+ * entity. California city treatment clones now redirect to it (single canonical).
  */
 
 /** @type {Record<string, string>} source path → permanent destination */
 export const GEO_CLONE_REDIRECTS = {
-  // California city treatment clones → national ADHD care (cornerstone deferred)
-  '/blog/adhd-treatment-los-angeles-ca': '/adhd-care',
-  '/blog/adhd-treatment-san-diego-ca': '/adhd-care',
-  '/blog/adhd-treatment-san-francisco-ca': '/adhd-care',
-  '/blog/adhd-treatment-san-jose-ca': '/adhd-care',
-  '/blog/adhd-treatment-sacramento-ca': '/adhd-care',
-  '/blog/adhd-treatment-oakland-ca': '/adhd-care',
-  '/blog/adhd-treatment-orange-county-ca': '/adhd-care',
+  // California city treatment clones → California ADHD cornerstone (canonical entity)
+  '/blog/adhd-treatment-los-angeles-ca': '/adult-adhd-california',
+  '/blog/adhd-treatment-san-diego-ca': '/adult-adhd-california',
+  '/blog/adhd-treatment-san-francisco-ca': '/adult-adhd-california',
+  '/blog/adhd-treatment-san-jose-ca': '/adult-adhd-california',
+  '/blog/adhd-treatment-sacramento-ca': '/adult-adhd-california',
+  '/blog/adhd-treatment-oakland-ca': '/adult-adhd-california',
+  '/blog/adhd-treatment-orange-county-ca': '/adult-adhd-california',
 
   // Texas city treatment clones → statewide TX treatment owner
   '/blog/adhd-treatment-houston-tx': '/blog/adhd-treatment-texas',

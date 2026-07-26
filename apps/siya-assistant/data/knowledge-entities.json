@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "source": "Siya Knowledge Governance Framework v1.0 — canonical entity registry",
+  "note": "Deterministic entity lookup for Siya Guide and future products. Given a query, resolve to a canonical entity BEFORE any LLM reasoning. Never invent URLs or CTAs; only use what is declared here.",
+  "entities": {
+    "adult_adhd_california": {
+      "entity": "adult_adhd_california",
+      "name": "Adult ADHD in California",
+      "canonical_page": "/adult-adhd-california",
+      "aliases": [
+        "california adhd",
+        "adult adhd california",
+        "adhd california",
+        "adult adhd diagnosis california",
+        "adhd diagnosis california",
+        "adhd treatment california",
+        "adhd medication california",
+        "online adhd evaluation california",
+        "online adhd diagnosis california",
+        "adhd telehealth california",
+        "adhd doctor california",
+        "get diagnosed with adhd in california"
+      ],
+      "geo": "California",
+      "topic": "adhd",
+      "primary_cta": { "id": "adhd_screening", "label": "Free ADHD Screening", "url": "/adhd-screening" },
+      "secondary_ctas": [
+        { "id": "adhd_care", "label": "Explore ADHD Care", "url": "/adhd-care" },
+        { "id": "pricing", "label": "Pricing", "url": "/pricing" }
+      ],
+      "related_entities": ["executive_dysfunction", "women_and_adhd", "adhd_screening", "adhd_care"]
+    },
+    "executive_dysfunction": {
+      "entity": "executive_dysfunction",
+      "name": "Executive Dysfunction in ADHD",
+      "canonical_page": "/blog/executive-dysfunction-adhd",
+      "aliases": ["executive dysfunction", "executive function adhd", "cant start tasks adhd", "task paralysis"],
+      "topic": "adhd",
+      "primary_cta": { "id": "adhd_screening", "label": "Free ADHD Screening", "url": "/adhd-screening" },
+      "secondary_ctas": [{ "id": "adhd_care", "label": "Explore ADHD Care", "url": "/adhd-care" }],
+      "related_entities": ["adult_adhd_california", "adhd_care"]
+    },
+    "women_and_adhd": {
+      "entity": "women_and_adhd",
+      "name": "ADHD in Women",
+      "canonical_page": "/blog/adhd-in-women",
+      "aliases": ["adhd in women", "women adhd", "adhd women hormones", "late diagnosis adhd women"],
+      "topic": "adhd",
+      "primary_cta": { "id": "adhd_screening", "label": "Free ADHD Screening", "url": "/adhd-screening" },
+      "secondary_ctas": [{ "id": "adhd_care", "label": "Explore ADHD Care", "url": "/adhd-care" }],
+      "related_entities": ["adult_adhd_california", "executive_dysfunction"]
+    }
+  }
+}
