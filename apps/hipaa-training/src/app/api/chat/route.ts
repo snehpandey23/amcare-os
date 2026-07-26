@@ -1,9 +1,19 @@
-import { runSiyaAssistant } from "@/lib/siya-os/engine";
+import { runSiyaAssistantAsync } from "@/lib/siya-os/engine";
+import { workforceLlmEnabled } from "@/lib/siya-os/model";
 import { SIYA_OPENING } from "@/lib/siya-os/config";
+import { SIYA_ASSISTANT_CANONICAL_URL } from "@/lib/siya-os/public-url";
 import { BRAND } from "@/lib/brand";
 
+export const maxDuration = 30;
+
 export async function GET() {
-  return Response.json({ name: BRAND.appName, openingMessage: SIYA_OPENING });
+  return Response.json({
+    name: BRAND.appName,
+    openingMessage: SIYA_OPENING,
+    product: "internal-helpdesk",
+    canonicalUrl: SIYA_ASSISTANT_CANONICAL_URL,
+    llmEnabled: workforceLlmEnabled(),
+  });
 }
 
 function parseHistory(raw: unknown) {
@@ -26,7 +36,7 @@ export async function POST(req: Request) {
       return Response.json({ error: "message required (max 2000 chars)" }, { status: 400 });
     }
     const history = parseHistory(body?.history);
-    const result = runSiyaAssistant(message, history);
+    const result = await runSiyaAssistantAsync(message, history);
     return Response.json({
       message: result.message,
       links: result.chunks.flatMap((c) => c.links ?? []).slice(0, 4),

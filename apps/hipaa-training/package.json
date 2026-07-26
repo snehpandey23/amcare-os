@@ -12,6 +12,8 @@
     "assets:icons": "node scripts/export-app-icons.mjs"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^3.0.0",
+    "ai": "^6.0.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "next": "15.5.14"

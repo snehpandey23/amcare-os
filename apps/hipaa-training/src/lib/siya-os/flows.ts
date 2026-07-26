@@ -136,9 +136,9 @@ export function routeIntent(message: string): RouteResult {
 
   return {
     department: "General",
-    task: "Find an SOP or policy",
+    task: "Company memory lookup",
     confidence: bestScore > 0 ? "low" : "medium",
-    followUpQuestions: ["Which team are you on?", "What outcome do you need today?"],
+    followUpQuestions: [],
     flowId: best?.id,
   };
 }

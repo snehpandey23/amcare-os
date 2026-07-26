@@ -18,10 +18,10 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "clinical",
       "IT"
     ],
-    "body": "Give the escalation order clearly. Remind: no PHI in Siya Assistant chat; no clinical advice; billing promises require billing lead. Offer Training link for HIPAA certification.",
+    "body": "Standard order for escalating issues when an MA, coordinator, or back-office teammate is stuck. Clear escalation prevents PHI leaks, unauthorized refunds, and clinical advice from non-clinicians. 1. **Supervisor / team lead** — schedule conflicts, same-day workflow, staffing. 2. **Billing lead** — refunds, invoices, late cancel, no-show, payment status in Clarity/Zoho. 3. **Privacy Officer** — PHI, breaches, third-party callers, authorization doubts. 4. **Clinical lead / provider** — any medical question, symptoms, meds, diagnosis. 5. **IT** — EHR, telehealth platform, access, devices. Never promise refunds or fee waivers without billing authorization. **Can I tell a family member about charges?** Only after identity and authorization checks — see Legal module third-party topic; when unsure, Privacy Officer. | Situation | Action | |-----------|--------| | Patient angry about refund | Document facts; billing lead decides | | Possible breach | Stop disclosure; Privacy Officer same day | Give the escalation order clearly. Remind: no PHI in Siya Assistant chat; no clinical advice; billing promises require billing lead. Offer Training link for HIPAA certification.",
     "links": [
       {
-        "label": "- label: HIPAA certification course",
+        "label": "HIPAA certification course",
         "href": "/training"
       }
     ]
@@ -40,10 +40,10 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "discovery",
       "adhd"
     ],
-    "body": "For pricing questions: cite **$149 initial**, **$79 / $149 monthly** follow-up tiers from the public site; mention Meet & Greet for entry; flag that internal legacy funnels differ and require founder confirmation; never promise refunds or discounts not in written policy.",
+    "body": "Staff must align patient-facing answers with **published** siya.health pricing unless billing leadership publishes an update. **Published (siya.health/pricing):** - **$149** — initial physician evaluation (one-time). - **$79/month** — follow-up plan (non-controlled medication management where applicable). - **$149/month** — follow-up plan when controlled-substance monitoring applies. **Homepage CTA:** Primary hero action is **Book Free Meet & Greet** (owned flow), not third-party marketplace checkout — see decision `homepage-cta-meet-and-greet`. **Internal drafts may conflict:** Legacy docs mention Discovery **$79**, intake **$199**, Bronze **$49**, neuro-spiritual bundle **$149**, **$69/mo** maintenance, ads at **$79 consult**. **Do not** state those as current policy in chat until `FOUNDER-RESOLVE` items are closed and this topic is updated. **Which price do I quote on Spruce?** Use the invoice type billing lead configured in Klarity/Carepatron. If unsure, escalate **Billing** — do not guess between $79 discovery and $149 eval. For pricing questions: cite **$149 initial**, **$79 / $149 monthly** follow-up tiers from the public site; mention Meet & Greet for entry; flag that internal legacy funnels differ and require founder confirmation; never promise refunds or discounts not in written policy.",
     "links": [
       {
-        "label": "- label: Public pricing page",
+        "label": "Public pricing page",
         "href": "https://siya.health/pricing"
       }
     ]
@@ -61,10 +61,10 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "background",
       "video"
     ],
-    "body": "Always escalate to Privacy Officer; never assess breach status in chat. Link to Training breach module. No patient identifiers in assistant.",
+    "body": "What staff do when PHI may have been disclosed improperly. Breach notification timelines and analysis are regulated — not frontline staff decisions. 1. Stop further disclosure. 2. Report **same day** to Privacy Officer. 3. Document what happened and what PHI may have been exposed. 4. Do not notify patients or media unless directed by compliance. **Someone on a video visit had family in frame — breach?** Treat as privacy risk; pause visit; report if PHI may have been heard/seen. | Symptom | Action | |---------|--------| | Email sent to wrong patient | Privacy Officer immediately | | Lost device | IT + Privacy Officer | Always escalate to Privacy Officer; never assess breach status in chat. Link to Training breach module. No patient identifiers in assistant.",
     "links": [
       {
-        "label": "- label: Breach training module",
+        "label": "Breach training module",
         "href": "/module/breach"
       }
     ],
@@ -83,7 +83,7 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "ingest",
       "legacy"
     ],
-    "body": "When asked about ingested legacy docs, MA workflows, Spruce scripts, or CMO strategy: state that only **live** git KB is in retrieval; WorkDrive holds drafts; never quote conflicting prices or 24/7 claims; use the public pricing topic for patient-facing fees; escalate operational contradictions to leadership.",
+    "body": "**Authoritative for staff AI (this assistant):** `docs/siyaos-knowledge-base/` topics with `status: live` only. **Extended company memory (drafts):** Zoho WorkDrive `Common Folder/SiyaOS/` — HR SOWs, MA playbooks, marketing strategy, clinical templates. Most legacy ingests are **`draft`** and **`bot_retrieve: false`** until founders mark **`live`** and copy approved sections into git. 1. Staff question → retrieve from **live git KB** first. 2. If answer missing or marked unresolved → **escalate** to owner in frontmatter; do not invent from memory. 3. Founders edit WorkDrive → resolve conflicts in `SiyaOS/00-START-HERE/FOUNDER-RESOLVE-from-legacy-docs.md` → promote slices to git `topics/*.md` → run `npm run kb:build -w @amcare/hipaa-training`. **Does the bot know the full 6-month ads plan or neuro-spiritual GTM?** Not until promoted. Summaries may exist in WorkDrive `marketing/strategy/` as **draft** — route marketing strategy questions to **CMO (Sonakshi Soni)**. **Patient-facing Siya Guide?** Separate app (`apps/siya-assistant`) uses **public** site content only, not WorkDrive. When asked about ingested legacy docs, MA workflows, Spruce scripts, or CMO strategy: state that only **live** git KB is in retrieval; WorkDrive holds drafts; never quote conflicting prices or 24/7 claims; use the public pricing topic for patient-facing fees; escalate operational contradictions to leadership.",
     "escalate": "CEO or document owner"
   },
   {
@@ -99,7 +99,7 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "knowledge base",
       "retrieval"
     ],
-    "body": "You are a workforce helper for all functions (ops, marketing, HR, eng, clinical coordination) — not a clinician. Prefer SOP and AI Context sections. Always show escalation contacts when relevant."
+    "body": "How **Siya Assistant** answers staff questions using **company memory**, not the open internet. General-purpose ChatGPT does not know our escalation paths, entity structure, or compliance boundaries. 1. Answers come from **SiyaOS Knowledge Base** topics with `status: live`. 2. **No PHI** in chat (names, DOB, MRN, etc.) — refused automatically. 3. **No clinical advice** — route to provider/clinical lead. 4. **No refund promises** — billing lead. 5. Optional **HIPAA certification** at `/training` for structured learning. 6. Public **Siya Guide** (`apps/siya-assistant`) is separate — patient/public KB only; **retrieval-only by default** (no LLM unless `SIYA_GUIDE_DETERMINISTIC=0`). 7. Persona + guardrails: [siya-helpdesk-assistant-persona.md](./siya-helpdesk-assistant-persona.md); LLM system prompt: `apps/hipaa-training/src/lib/siya-os/system-prompt.ts` when `SIYA_WORKFORCE_USE_LLM=1`. **How do we add what the bot knows?** Add a topic under `docs/siyaos-knowledge-base/**/topics/*.md`, set `status: live`, run `npm run kb:build -w @amcare/hipaa-training`. | Symptom | Action | |---------|--------| | Bot has no match | Add keywords + AI Context section; rebuild KB | | Wrong answer | Fix topic; revision history; never tune by hidden prompt alone | You are a workforce helper for all functions (ops, marketing, HR, eng, clinical coordination) — not a clinician. Prefer SOP and AI Context sections. Always show escalation contacts when relevant."
   },
   {
     "id": "medical-compliance-marketing",
@@ -117,8 +117,22 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "medical director",
       "LegitScript"
     ],
-    "body": "For staff questions about marketing medical claims, ads, testimonials, before/after, FDA/FTC risk, or who must approve healthcare copy: follow this SOP. Route clinical accuracy to Medical Director. Do not invent clinical claims. Do not authorize advertising language in chat — describe the review path and escalate. Point to the WorkDrive SOP file for the full document.",
+    "body": "How marketing content is created, reviewed, and approved so ads and posts stay medically compliant. Healthcare claims are regulated (FDA/FTC/DEA/state boards). Unreviewed copy creates legal and platform risk. 1. **Content Creator** drafts within this SOP and related compliance guidelines. 2. **Marketing** reviews for brand + process alignment; maintains this SOP. 3. **Medical Director** approves clinical accuracy and medical ethics before publish. 4. **Legal Counsel** reviews high-risk content when needed. 5. Track approvals in project management (who signed off, when). ### Medical claims standards - Substantiated (peer-reviewed / labeled evidence) - Balanced (limitations / side effects where required) - Current (latest approved labeling where relevant) - Physician-reviewed before publication ### Before / after - No before/after photos for prescription medications - Disclaimers for cosmetic-style results when used - Individual results may vary - Timeline / protocol disclosure when results are shown ### Testimonials - Compensation disclosure when required - No atypical-results promotion - Medical supervision disclaimers as required - Verify patient treatment completion before use ### Monitoring - Monthly: LegitScript / compliance documentation review - Quarterly: broader compliance audit - Annually: policy review + staff retraining **Can we run a weight-loss before/after ad with GLP-1?** Not with before/after photos for prescription meds. Escalate claim language to Medical Director. **Who approves clinical claims in a carousel?** Medical Director after Marketing review. High-risk → Legal. **Is this the same as HIPAA?** Related but separate — this SOP is advertising/claims compliance. PHI incidents use Legal/Compliance breach topics. | Symptom | Action | |---------|--------| | Creator wants unverified “cure / guaranteed” language | Block; rewrite; Medical Director | | Platform rejected ad for health claims | Pull live creative; Medical Director + Marketing | | Unclear if content is high-risk | Escalate Legal Counsel | For staff questions about marketing medical claims, ads, testimonials, before/after, FDA/FTC risk, or who must approve healthcare copy: follow this SOP. Route clinical accuracy to Medical Director. Do not invent clinical claims. Do not authorize advertising language in chat — describe the review path and escalate. Point to the WorkDrive SOP file for the full document.",
     "escalate": "Medical Director · Legal Counsel for high-risk"
+  },
+  {
+    "id": "siya-helpdesk-assistant-persona",
+    "category": "ai_strategy",
+    "title": "Siya Helpdesk (internal) — assistant persona & guardrails",
+    "keywords": [
+      "helpdesk",
+      "persona",
+      "custom gpt",
+      "internal assistant",
+      "guardrails",
+      "workforce"
+    ],
+    "body": "Canonical behavior for **Siya Helpdesk (Internal)** — workforce chat at the workforce Vercel app (not siya.health, not public Siya Guide). **Audience:** Siya Health US staff + Amcare India offshore concierge/MA support. **Source of truth:** `docs/siyaos-knowledge-base` topics with `status: live`. WorkDrive `SiyaOS/` drafts are not policy until promoted. **Departments (routing):** Accounts · HR · Marketing · Clinical Operations · Compliance · Technology · Leadership · General. **Answer shape:** intent → retrieve live KB → plain-language steps → cite topic title(s) → escalate if gap or conflict. **What pricing do staff quote?** Public site: **$149** initial eval; **$79/mo** or **$149/mo** follow-up. Legacy $79 discovery / conflicting drafts → escalate Billing lead or CEO; do not guess. **Reimbursement SOP?** If no live Accounts topic, say missing and notify Accounts owner. You are Siya Helpdesk (Internal). Retrieve-first from live Company Memory only. No PHI, no clinical dosing/prescribing advice, no refund promises, no 24/7 claims unless in sources. If sources conflict, explain conflict and escalate. Not patient-facing; not legal/HR authority when no approved guidance. Reference topic titles used (e.g. Escalation pathways, Third-party caller, Patient pricing public canonical). Use placeholders Billing lead, Privacy Officer, Clinical lead — do not invent emails or Slack channels."
   },
   {
     "id": "billing-late-cancel",
@@ -131,7 +145,7 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "same day",
       "billing"
     ],
-    "body": "Never authorize refunds. Point to written policy and billing lead. Suggest documenting cancel time.",
+    "body": "How staff talk about cancellations without promising refunds. Refund authority sits with billing; inconsistent promises create liability and patient conflict. 1. Follow **written billing policy** for the cancellation window. 2. Document cancel date/time in the record. 3. Do **not** promise refunds in chat or phone — use approved language. 4. Escalate exceptions to **billing lead**. **Patient says provider canceled — late fee?** Usually not patient late-cancel; offer reschedule; refunds are billing decision. | Symptom | Action | |---------|--------| | Patient demands refund in portal chat | Empathy + billing follow-up; no commitment | Never authorize refunds. Point to written policy and billing lead. Suggest documenting cancel time.",
     "escalate": "Billing lead"
   },
   {
@@ -147,7 +161,7 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "appointment",
       "daily task"
     ],
-    "body": "Describe the Zoho → appointment → EHR verification loop. Do not access live patient accounts in chat. Escalate payment disputes to billing lead."
+    "body": "Verify payment and pre-auth status before scheduled visits. Unpaid or unverified visits create front-desk conflict and compliance risk. 1. Review daily payment reports from Zoho Books. 2. Match payments to scheduled appointments. 3. Verify insurance pre-authorizations where required. 4. Flag issues for billing follow-up. 5. Update billing status in EHR before the visit. Deliverable: payments verified before patient visits. **Where do reports live?** Zoho Books sync — see Operations hub / integration runbooks in Technology module. | Symptom | Action | |---------|--------| | Payment shows paid but EHR not updated | Sync + document; billing if stuck | | Pre-auth missing | Hold scheduling per policy; billing lead | Describe the Zoho → appointment → EHR verification loop. Do not access live patient accounts in chat. Escalate payment disputes to billing lead."
   },
   {
     "id": "legacy-pricing-funnel-unresolved",
@@ -162,7 +176,7 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "klarity",
       "spruce"
     ],
-    "body": "When users cite pasted SOWs, ads plans, or WorkDrive drafts that conflict with live KB: acknowledge the conflict, point to this topic, give only **live** + **public pricing** facts, and offer escalation — never merge draft numbers into a single answer.",
+    "body": "Multiple legacy ingests disagree. Staff and the assistant must **not** pick a side without CEO/billing confirmation. | Topic | Conflict | |-------|----------| | Front-end offer | Discovery **$79** vs site **$149** eval vs neuro-assessment **$149** bundle in draft GTM | | Intake | **$199** with $79 credit vs **$149** initial evaluation on site | | Membership | **$69/mo** draft vs **$79 / $149** public follow-up | | No-show | **$40** vs **$79** vs full appointment fee | | Chat SLA | 5 min vs 24h vs 48h backlog in old decks | | Systems | Carepatron vs **Klarity** primary scheduling; Spruce for messaging | | Marketing | **24/7** in old job/5W1H vs founder direction **not 24/7** | **Action:** Escalate to **CEO** (or billing/clinical program lead) with the specific conflict. Quote **public pricing topic** for patient-facing fees until resolved. When users cite pasted SOWs, ads plans, or WorkDrive drafts that conflict with live KB: acknowledge the conflict, point to this topic, give only **live** + **public pricing** facts, and offer escalation — never merge draft numbers into a single answer.",
     "escalate": "CEO"
   },
   {
@@ -177,7 +191,7 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "verify",
       "authorization"
     ],
-    "body": "Never suggest sharing account details with unverified callers. Escalate to Privacy Officer when authorization is unclear.",
+    "body": "Minimum necessary rules when someone other than the patient contacts us. HIPAA authorization rules apply to billing and clinical information. Verify identity and documented authorization before any PHI or billing detail. Minimum necessary only. If unsure — do not release; escalate. Never suggest sharing account details with unverified callers. Escalate to Privacy Officer when authorization is unclear.",
     "escalate": "Privacy Officer / supervisor"
   },
   {
@@ -206,7 +220,7 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "clinical",
       "escalate provider"
     ],
-    "body": "Emphasize 24h for non-clinical, immediate provider escalation for clinical. Never give medical advice in assistant or chat without provider direction."
+    "body": "How to triage and respond to secure portal messages. Patients expect timely non-clinical replies; clinical content must reach licensed clinicians immediately. 1. Review new portal messages. 2. Classify: **routine** vs **clinical**. 3. Routine: respond within **24 hours**. 4. Clinical: escalate to **provider immediately** — do not advise. 5. Document communications in the chart. **Is scheduling clinical?** Usually routine unless symptoms or treatment change are involved — when unsure, escalate. | Symptom | Action | |---------|--------| | Message mentions side effects / suicidality | Provider immediately + emergency protocol | | Backlog > 24h | Supervisor + staffing | Emphasize 24h for non-clinical, immediate provider escalation for clinical. Never give medical advice in assistant or chat without provider direction."
   },
   {
     "id": "telehealth-privacy-background",
@@ -219,7 +233,7 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "camera",
       "private"
     ],
-    "body": "Explain pause-and-reposition workflow. Escalate to Privacy Officer if PHI may have been disclosed.",
+    "body": "Handling others visible or audible during a video visit. Require a private setting. If unauthorized viewers may hear/see PHI — pause visit, request private space, report if disclosure may have occurred. Explain pause-and-reposition workflow. Escalate to Privacy Officer if PHI may have been disclosed.",
     "escalate": "Privacy Officer if PHI exposed"
   },
   {
@@ -235,7 +249,7 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "physician-led",
       "health guides"
     ],
-    "body": "Summarize entity split and voice rules. For exact pricing/states, defer to site standards — do not guess. Internal staff asking for ad copy should also read Marketing OS content QA topic."
+    "body": "How we describe the company on any surface — internal or external. Entity confusion (admin vs clinical) and marketplace language create legal and trust risk. - **Siya Health Inc.** — administrative / non-clinical support. - **Siya Healthcare, PLLC** — medical services via licensed clinicians. - Position as **physician-led telehealth for adults** — not a membership marketplace or med vending. - Education hub: **Health Guides** at `/answers`. - Use SIYA-STANDARDS + `data/site-standards.mjs` for pricing, states, CTAs. **Can we guarantee medication?** No — evaluation and shared decision-making; see standards. | Symptom | Action | |---------|--------| | Copy says “psychiatry practice” | Fix to physician-led telehealth per standards | | Wrong state list | Run state availability audit doc | Summarize entity split and voice rules. For exact pricing/states, defer to site standards — do not guess. Internal staff asking for ad copy should also read Marketing OS content QA topic."
   },
   {
     "id": "adhd-wellness-platform-vision",
@@ -251,7 +265,7 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "siya circle",
       "telehealth"
     ],
-    "body": "Explain vision at a high level; route product launch dates, cohort pricing ($80/mo group), neuro-spiritual branding, and ad funnel details to **CMO**; route clinical eligibility and meds to **providers**; use public pricing topic for fees.",
+    "body": "Directional vision (not a promise of shipped products): **integrated ADHD care ecosystem** — evidence and whole-person care through community. Position as a **modern ADHD wellness platform**, not a traditional clinic brochure site. Differentiate from commodity stimulant telehealth and generic DPC; build retention through data (e.g. CREYOS where clinically appropriate), relationships, and community programs. **Near-term clinical products (in market or building):** diagnosis/evaluation, prescriptions per state rules, provider-led ADHD management, telehealth in licensed states (CA, TX, PA, FL per public site). **Long-term ideas (draft only — do not sell in chat):** parent programs (Siya Smart), self-management subscriptions, support communities, cohort experiences (e.g. Siya Circle), creative/network apps. Require Medical Director + Legal before marketing. **Support messaging:** Human Spruce support during **defined business hours** — do **not** claim **24/7 concierge** unless ops and legal approve updated copy. Explain vision at a high level; route product launch dates, cohort pricing ($80/mo group), neuro-spiritual branding, and ad funnel details to **CMO**; route clinical eligibility and meds to **providers**; use public pricing topic for fees.",
     "escalate": "CMO or Medical Director"
   },
   {
@@ -268,7 +282,7 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "seo",
       "editorial"
     ],
-    "body": "Point marketers to CONTENT-QA-CHECKLIST and Brand OS. Do not invent pricing or state lists — canonical values live in site standards. Company voice only unless exec requests founder voice."
+    "body": "Minimum QA before any patient-facing page, guide, or post ships. One knowledge graph feeds website, ads, and assistants — errors scale across surfaces. Run the ten checks in `apps/siya-health/docs/CONTENT-QA-CHECKLIST.md`: flow, geography/states, disclaimers, CTA caps, assembly rules, links, claims register alignment, etc. **Where does Reddit research go?** Editorial pipeline → insight pack → tracker (Marketing OS); not random Drive folders without a row in the content tracker. | Symptom | Action | |---------|--------| | New pricing claim | Update `site-standards.mjs` + claims register first | | Clinical promise | Clinical owner + medical flags on pack | Point marketers to CONTENT-QA-CHECKLIST and Brand OS. Do not invent pricing or state lists — canonical values live in site standards. Company voice only unless exec requests founder voice."
   },
   {
     "id": "hipaa-training-cert",
@@ -282,10 +296,10 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "quiz",
       "hipaa"
     ],
-    "body": "Direct staff to `/training` for certification; chat answers are supplements, not a substitute for completing modules.",
+    "body": "Structured HIPAA modules, quizzes, and final exam in Siya Assistant under **Training**. Direct staff to `/training` for certification; chat answers are supplements, not a substitute for completing modules.",
     "links": [
       {
-        "label": "- label: Open training",
+        "label": "Open training",
         "href": "/training"
       }
     ]
@@ -304,7 +318,7 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "audit",
       "hipaa"
     ],
-    "body": "Describe AmCare OS at architecture level only — no credentials, no internal URLs with secrets. Point developers to README and audit package. Future CAPR.AI inherits patterns, not Siya-only hacks."
+    "body": "Internal platform modules in `amcare-os` for staff, patients, ops, analytics, and integrations. Eventual **SiyaOS** product vision: one architecture reused across portfolio companies. - Staff workflows → `apps/staff-dashboard` - Patient chart/comms → `apps/patient-management` - Billing/scheduling integrations → `apps/operations-hub` - Audit trail → `@amcare/audit` (RBAC-aligned, retention) - Changes ship via monorepo with compliance docs in `docs/compliance/` **Is this the same as the public website?** No — `apps/siya-health` is patient-facing; AmCare OS is internal tooling. | Symptom | Action | |---------|--------| | Need API behavior | `docs/api-specs/` + audit logging requirements | | Zoho out of sync | `integrations/zoho-sync/README.md` | Describe AmCare OS at architecture level only — no credentials, no internal URLs with secrets. Point developers to README and audit package. Future CAPR.AI inherits patterns, not Siya-only hacks."
   },
   {
     "id": "legacy-website-social-archive",
@@ -324,7 +338,7 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "wix",
       "workdrive"
     ],
-    "body": "When Marketing staff ask about past website, social, ads, blogs, banners, Google Ads, or “what we used to say,” point them to the WorkDrive folder **Siya Knowledge Editorial → Website / Social Media** as background. Prefer live Brand System and content tracker for publishable work. Do not reuse historical insurance-bashing or hyper-urgency taglines as current website copy. For medical advertising rules, use the medical compliance marketing topic. Escalate ambiguous brand or clinical claims to Marketing Lead / Medical Director.",
+    "body": "Historical marketing dump under **Siya Knowledge Editorial → Website / Social Media**. Use as **background** for Siya Assist Marketing questions — not as live patient-facing brand copy. Staff need to find past ads, blogs, SOPs, and media plans without treating every old tagline as current policy. 1. Treat this folder as a **library**, not the source of truth for website voice. 2. For live brand / editorial rules, prefer `00-Brand-System/` and git Brand OS paths. 3. For medical claims in ads or posts, follow `medical-compliance-marketing` and escalate clinical claims to Medical Director. 4. Do **not** recommend old urgency / insurance-bashing taglines from `Main Tag Lines.docx` on the new coded site — current website brief is calm, transparent, direct-pay (no insurance-bashing). 5. Zoho Writer `.zwriterlnk` files are shortcuts only — ask Marketing to export if full text is required. **Can I paste old taglines onto the new website?** No. Use the approved website brand brief. Archive taglines are historical. **Where do I put new social posts?** Editorial pipeline → Content Tracker → `05-Carousels` / `06-Statics` — not a one-off dump in this archive. **Where is Website Content Final?** Zoho Writer link in the archive; export to `.docx`/`.md` before promoting anything to live KB or the coded site. | Symptom | Action | |---------|--------| | Staff treating archive as live brand | Point to Brand System + website brief; mark archive historical | | Need full Zoho doc text | Ask Marketing to export; do not invent content | | Ad claim risk | Route to medical-compliance-marketing + Medical Director | When Marketing staff ask about past website, social, ads, blogs, banners, Google Ads, or “what we used to say,” point them to the WorkDrive folder **Siya Knowledge Editorial → Website / Social Media** as background. Prefer live Brand System and content tracker for publishable work. Do not reuse historical insurance-bashing or hyper-urgency taglines as current website copy. For medical advertising rules, use the medical compliance marketing topic. Escalate ambiguous brand or clinical claims to Marketing Lead / Medical Director.",
     "escalate": "Marketing Lead"
   }
 ];

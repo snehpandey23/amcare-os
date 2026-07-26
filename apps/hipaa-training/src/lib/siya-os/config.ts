@@ -4,13 +4,14 @@ export const SIYA_OPENING =
   "**What do you need help with today?**\n\nSame place for everyone: expenses, marketing drafts, HR questions, tool access, SOPs, and who owns what. I pick the right team quietly, ask follow-ups, and only use **approved** company knowledge.\n\nIf we don't have a policy yet, you can **notify the owner** so we add it.";
 
 export const SIYA_QUICK_PROMPTS = [
-  "Draft or plan social content",
+  "How do I submit an employee reimbursement?",
   "Find an SOP or internal policy",
-  "Reimbursement for software I bought",
-  "Onboarding or HR question",
-  "Login / tool not working",
-  "Who do I escalate to?",
-  "Why did we change a recent decision?",
+  "What is the workflow for medication refill requests?",
+  "How do I escalate a privacy concern?",
+  "Where can I find our brand guidelines?",
+  "What is our public ADHD pricing?",
+  "Why Book Free Meet & Greet on the homepage?",
+  "I can't find a policy — how do I notify the owner?",
 ] as const;
 
 export function getEscalationContacts() {

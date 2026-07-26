@@ -11,7 +11,7 @@
 | **Patient / public knowledge** | `apps/siya-health/` | Website, Siya Guide |
 | **Company memory (this KB)** | `docs/siyaos-knowledge-base/` | Staff, leaders, internal AI |
 | **WorkDrive drafts** | `Common Folder/SiyaOS/` | Authors before git `live` |
-| **Live assistant retrieval** | `**/topics/*.md` + `decisions/` → `kb:build` | [Siya Assistant](https://hipaa-training-eight.vercel.app) |
+| **Live assistant retrieval** | `**/topics/*.md` + `decisions/` → `kb:build` | [Siya Assistant](https://siya-assistant.vercel.app) |
 
 ## Memory types (leadership)
 

@@ -33,13 +33,16 @@ function parseFrontmatter(raw) {
       .map((x) => x[1].trim());
   }
   let links = [];
-  const linkBlock = m[1].match(/links:\s*\n((?:\s+-\s+label:.+\n?\s+href:.+\n?)+)/);
-  if (linkBlock) {
-    const items = linkBlock[1].split(/\n\s+-\s+label:/).filter(Boolean);
-    for (const item of items) {
-      const label = item.match(/^(.+)/)?.[1]?.trim();
-      const href = item.match(/href:\s*(.+)/)?.[1]?.trim();
-      if (label && href) links.push({ label, href });
+  const linksSection = m[1].match(/links:\s*\n([\s\S]*?)(?=\n[A-Za-z_][\w-]*:|\n## |\n---|\n$)/);
+  if (linksSection) {
+    const block = linksSection[1];
+    const labelMatches = [...block.matchAll(/label:\s*(.+)/g)];
+    const hrefMatches = [...block.matchAll(/href:\s*(.+)/g)];
+    for (let i = 0; i < Math.min(labelMatches.length, hrefMatches.length); i++) {
+      links.push({
+        label: labelMatches[i][1].trim(),
+        href: hrefMatches[i][1].trim(),
+      });
     }
   }
   return { meta, body: m[2], keywords, links };
@@ -73,8 +76,11 @@ function compileBody(body, meta) {
   const ai = section(body, 'AI Context');
   const sop = section(body, 'SOP');
   const overview = section(body, 'Overview');
-  const chunk = ai || sop || overview;
-  return chunk.replace(/\n+/g, ' ').trim();
+  const why = section(body, 'Why');
+  const faq = section(body, 'FAQ');
+  const trouble = section(body, 'Troubleshooting');
+  const chunk = [overview, why, sop, faq, trouble, ai].filter(Boolean).join('\n\n');
+  return chunk.replace(/\n+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 4500);
 }
 
 function collectMdFiles() {
