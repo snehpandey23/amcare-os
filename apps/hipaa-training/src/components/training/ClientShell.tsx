@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { TrainingLayout } from "./TrainingLayout";
 import { AssistantShell } from "@/components/siya/AssistantShell";
+import { SiyaLoadingScreen } from "@/components/siya/SiyaLoadingScreen";
 import { useClientProgress } from "@/hooks/useClientProgress";
 import { useAuth } from "@/context/AuthContext";
 import { getModulesForRole } from "@/content/modules";
@@ -40,21 +41,13 @@ export default function ClientShell({ children }: { children: ReactNode }) {
   }, [authReady, authRequired, user, pathname, router]);
 
   if (!authReady) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <p className="text-zinc-500">Loading…</p>
-      </div>
-    );
+    return <SiyaLoadingScreen />;
   }
 
   if (pathname === "/login") return <>{children}</>;
 
   if (authRequired && !user) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <p className="text-zinc-500">Redirecting to sign in…</p>
-      </div>
-    );
+    return <SiyaLoadingScreen message="Redirecting to sign in…" />;
   }
 
   if (isAssistantRoute(pathname)) {
@@ -63,11 +56,7 @@ export default function ClientShell({ children }: { children: ReactNode }) {
 
   if (isTrainingRoute(pathname)) {
     if (!hydrated || (authRequired && user && !progress)) {
-      return (
-        <div className="flex min-h-screen items-center justify-center">
-          <p className="text-zinc-500">Loading training…</p>
-        </div>
-      );
+      return <SiyaLoadingScreen message="Loading certification progress…" />;
     }
     const modules = getModulesForRole(progress?.role ?? "other");
     return (
