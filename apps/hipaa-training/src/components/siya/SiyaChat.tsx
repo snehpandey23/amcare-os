@@ -4,6 +4,8 @@ import { useCallback, useRef, useState } from "react";
 import Link from "next/link";
 import { SIYA_OPENING, SIYA_QUICK_PROMPTS } from "@/lib/siya-os/config";
 import { BRAND } from "@/lib/brand";
+import { notifyOwnerForGap } from "@/lib/siya-os/knowledge-gap";
+import { recordQuestion, recordTimeToAnswer } from "@/lib/siya-os/metrics";
 
 type ChatLink = { label: string; href: string };
 type RoutingMeta = {
@@ -21,6 +23,9 @@ type ChatMessage = {
   routing?: RoutingMeta | null;
   sources?: SourceMeta[];
   escalationPreview?: string | null;
+  knowledgeGap?: boolean;
+  userQuestion?: string;
+  gapNotified?: boolean;
 };
 
 function mdLite(text: string) {
@@ -72,6 +77,7 @@ export function SiyaChat() {
       setMessages((m) => [...m, { id: `u-${Date.now()}`, role: "user", content: trimmed }]);
       setInput("");
       setLoading(true);
+      const t0 = Date.now();
       try {
         const res = await fetch("/api/chat", {
           method: "POST",
@@ -80,6 +86,12 @@ export function SiyaChat() {
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error);
+        recordTimeToAnswer(Date.now() - t0);
+        recordQuestion({
+          answered: !data.knowledgeGap,
+          escalated: false,
+          knowledgeGap: !!data.knowledgeGap,
+        });
         setMessages((m) => [
           ...m,
           {
@@ -90,6 +102,8 @@ export function SiyaChat() {
             routing: data.routing,
             sources: data.sources,
             escalationPreview: data.escalationPreview,
+            knowledgeGap: data.knowledgeGap,
+            userQuestion: trimmed,
           },
         ]);
       } catch {
@@ -104,6 +118,25 @@ export function SiyaChat() {
     },
     [loading, historyPayload]
   );
+
+  const notifyOwner = useCallback(async (msg: ChatMessage) => {
+    if (!msg.userQuestion || !msg.routing) return;
+    await fetch("/api/knowledge-gap", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        question: msg.userQuestion,
+        department: msg.routing.department,
+        task: msg.routing.task,
+      }),
+    });
+    notifyOwnerForGap({
+      question: msg.userQuestion,
+      department: msg.routing.department,
+      task: msg.routing.task,
+    });
+    setMessages((m) => m.map((x) => (x.id === msg.id ? { ...x, gapNotified: true } : x)));
+  }, []);
 
   const copyEscalation = useCallback(async (preview: string) => {
     try {
@@ -143,6 +176,27 @@ export function SiyaChat() {
                       </li>
                     ))}
                   </ul>
+                ) : null}
+                {msg.knowledgeGap ? (
+                  <div className="mt-3 rounded-xl border border-amber-200/80 bg-amber-50/60 p-3 text-xs">
+                    <p className="font-semibold text-amber-950">Unknown workflow</p>
+                    <p className="mt-1 text-[var(--siya-text-secondary)]">
+                      Suggested department: <strong>{msg.routing?.department ?? "General"}</strong>
+                    </p>
+                    {msg.gapNotified ? (
+                      <p className="mt-2 font-medium text-[var(--siya-primary)]">
+                        Question saved · Status: awaiting policy
+                      </p>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => void notifyOwner(msg)}
+                        className="mt-2 rounded-lg bg-[var(--siya-primary)] px-3 py-1.5 font-semibold text-white hover:bg-[var(--siya-primary-hover)]"
+                      >
+                        Notify owner
+                      </button>
+                    )}
+                  </div>
                 ) : null}
                 {msg.escalationPreview ? (
                   <button

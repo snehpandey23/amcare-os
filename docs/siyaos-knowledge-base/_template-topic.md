@@ -4,6 +4,9 @@ module: 11-operations
 title: Human-readable title
 status: draft
 owner: Name · Role
+confidence: official
+reviewDate: 2026-09-01
+supersedes: none
 keywords:
   - keyword one
   - keyword two

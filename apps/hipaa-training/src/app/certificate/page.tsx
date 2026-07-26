@@ -5,6 +5,7 @@ import Link from "next/link";
 import { buildFinalSummary } from "@/lib/scoring";
 import { useClientProgress } from "@/hooks/useClientProgress";
 import { COURSE_VERSION } from "@/content/modules";
+import { trainingLinkPrimaryClass } from "@/components/training/training-ui";
 
 export default function CertificatePage() {
   const { progress } = useClientProgress();
@@ -20,59 +21,54 @@ export default function CertificatePage() {
   const displayName = progress?.learnerName?.trim() || "";
 
   return (
-    <div className="p-6 md:p-10 print:p-10">
+    <div className="siya-cert p-6 md:p-10 print:p-10">
       <div className="no-print mx-auto mb-6 max-w-xl space-y-3">
-        <button
-          type="button"
-          onClick={() => window.print()}
-          className="rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white"
-        >
+        <button type="button" onClick={() => window.print()} className={trainingLinkPrimaryClass}>
           Print / Save as PDF
         </button>
-        <p className="text-xs text-zinc-500">Use your browser print dialog to save as PDF.</p>
+        <p className="text-xs text-[var(--siya-text-muted)]">Use your browser print dialog to save as PDF.</p>
         {!displayName ? (
-          <p className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-950 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-100">
+          <p className="rounded-xl border border-amber-200 bg-amber-50/70 px-3 py-2 text-sm text-amber-950">
             Add your name on the{" "}
-            <Link href="/" className="font-medium underline">
-              dashboard
+            <Link href="/training" className="font-medium underline">
+              certification dashboard
             </Link>{" "}
-            so it appears on this certificate.
+            before printing.
           </p>
         ) : null}
       </div>
 
-      <div className="mx-auto max-w-2xl rounded-2xl border-2 border-zinc-800 bg-white p-10 text-center text-zinc-900 shadow-lg print:border-zinc-900 print:shadow-none">
-        <p className="text-sm uppercase tracking-[0.2em] text-teal-700">Certificate of training completion</p>
-        <h1 className="mt-4 text-3xl font-semibold">HIPAA Workforce Training</h1>
-        <p className="mt-2 text-sm text-zinc-600">Course version {COURSE_VERSION}</p>
+      <div className="mx-auto max-w-2xl rounded-2xl border-2 border-[var(--siya-primary)] bg-white p-10 text-center shadow-[var(--siya-shadow-lg)] print:shadow-none">
+        <p className="text-sm uppercase tracking-[0.2em] text-[var(--siya-accent)]">Certificate of training completion</p>
+        <h1 className="mt-4 font-[family-name:var(--font-poppins)] text-3xl font-semibold text-[var(--siya-primary)]">
+          HIPAA Workforce Training
+        </h1>
+        <p className="mt-2 text-sm text-[var(--siya-text-muted)]">Course version {COURSE_VERSION}</p>
 
-        <div className="my-8 border-t border-b border-zinc-200 py-8">
-          <p className="text-xs font-medium uppercase tracking-wide text-zinc-500">Presented to</p>
-          <p className="mt-3 min-h-[2.5rem] text-3xl font-bold tracking-tight text-zinc-900 print:text-4xl">
+        <div className="my-8 border-t border-b border-[var(--siya-border)] py-8">
+          <p className="text-xs font-medium uppercase tracking-wide text-[var(--siya-text-muted)]">Presented to</p>
+          <p className="mt-3 min-h-[2.5rem] text-3xl font-bold tracking-tight text-[var(--siya-primary)] print:text-4xl">
             {displayName || "_______________________________"}
           </p>
-          {!displayName ? (
-            <p className="mt-2 text-xs text-zinc-400 no-print">Enter your legal name on the dashboard before printing.</p>
-          ) : null}
         </div>
 
-        <div className="text-left text-sm leading-relaxed text-zinc-600">
+        <div className="text-left text-sm leading-relaxed text-[var(--siya-text-secondary)]">
           <p>
-            This acknowledges completion of the interactive modules and assessment based on the{" "}
-            <strong>HIPAA Training Outline / HIPAA Test — Healthcare Providers</strong> (Gamma Compliance welcome kit
-            themes).
+            Acknowledges completion of interactive modules and assessment aligned with organizational HIPAA workforce
+            training requirements.
           </p>
         </div>
 
-        <p className="mt-8 text-5xl font-bold text-teal-700">{summary?.percent ?? "—"}%</p>
-        <p className="mt-2 text-sm">
+        <p className="mt-8 font-[family-name:var(--font-poppins)] text-5xl font-bold text-[var(--siya-accent)]">
+          {summary?.percent ?? "—"}%
+        </p>
+        <p className="mt-2 text-sm text-[var(--siya-text)]">
           Final readiness:{" "}
           <strong>{summary?.readiness === "ready" ? "Ready" : summary ? "Needs review" : "—"}</strong>
         </p>
-        <p className="mt-6 text-sm text-zinc-600">Completed (device local time): {when}</p>
-        <p className="mt-8 text-xs leading-relaxed text-zinc-500">
-          Organizational training record only. Not issued by HHS/OCR. Verify workforce member identity and retention in your
-          training log per your Workforce &amp; Training Policy.
+        <p className="mt-6 text-sm text-[var(--siya-text-muted)]">Completed: {when}</p>
+        <p className="mt-8 text-xs leading-relaxed text-[var(--siya-text-muted)]">
+          Organizational training record only. Not issued by HHS/OCR.
         </p>
       </div>
     </div>

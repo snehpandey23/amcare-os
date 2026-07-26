@@ -108,6 +108,19 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
     "escalate": "Privacy Officer / supervisor"
   },
   {
+    "id": "homepage-cta-meet-and-greet",
+    "category": "decisions",
+    "title": "Homepage primary CTA — Book Free Meet & Greet",
+    "keywords": [
+      "cta",
+      "homepage",
+      "meet and greet",
+      "zocdoc",
+      "booking"
+    ],
+    "body": "When staff ask why we don't lead with Zocdoc or alternate CTAs on the homepage, explain trust/friction rationale and point to SIYA-STANDARDS CTA section—not folklore. Standardize the primary homepage CTA to **Book Free Meet & Greet** (per SIYA-STANDARDS CTA hierarchy), not third-party marketplace checkout as the hero action. Highest trust and lower friction for physician-led telehealth positioning; keeps booking on owned flows."
+  },
+  {
     "id": "chat-review-sla",
     "category": "clinical_operations",
     "title": "Patient portal chat — response SLAs",

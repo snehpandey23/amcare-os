@@ -7,6 +7,7 @@ import type { ProgressState } from "@/lib/types";
 import { useAuth } from "@/context/AuthContext";
 import { isTrainingAuthRequired } from "@/lib/trainingConfig";
 import { BRAND } from "@/lib/brand";
+import { TrainingProgressBar } from "./training-ui";
 
 export function Sidebar({
   modules,
@@ -22,6 +23,19 @@ export function Sidebar({
   const total = modules.length;
   const pct = total ? Math.round((done.size / total) * 100) : 0;
 
+  const navLink = (href: string, label: string, active?: boolean) => (
+    <Link
+      href={href}
+      className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
+        active
+          ? "bg-[var(--siya-bg-subtle)] font-medium text-[var(--siya-primary)]"
+          : "text-[var(--siya-text-secondary)] hover:bg-[var(--siya-bg-page)]"
+      }`}
+    >
+      {label}
+    </Link>
+  );
+
   return (
     <aside className="flex w-64 shrink-0 flex-col border-r border-[var(--siya-border)] bg-white">
       <div className="border-b border-[var(--siya-border)] p-4">
@@ -29,21 +43,18 @@ export function Sidebar({
           ← {BRAND.appName}
         </Link>
         <p className="mt-1 text-xs text-[var(--siya-text-muted)]">Certification · {progress?.courseVersion ?? "…"}</p>
-        <div className="mt-3 h-2 overflow-hidden rounded-full bg-[var(--siya-bg-subtle)]">
-          <div
-            className="h-full rounded-full bg-[var(--siya-accent)] transition-all"
-            style={{ width: `${pct}%` }}
-          />
+        <div className="mt-3">
+          <TrainingProgressBar pct={pct} />
         </div>
-        <p className="mt-1 text-xs text-zinc-500">{pct}% modules completed</p>
+        <p className="mt-1 text-xs text-[var(--siya-text-muted)]">{pct}% modules completed</p>
         {isTrainingAuthRequired() && user ? (
-          <div className="mt-3 border-t border-zinc-200 pt-3 text-xs dark:border-zinc-800">
-            <p className="truncate font-medium text-zinc-800 dark:text-zinc-200">{user.name || user.email}</p>
-            <p className="truncate text-zinc-500">{user.email}</p>
+          <div className="mt-3 border-t border-[var(--siya-border)] pt-3 text-xs">
+            <p className="truncate font-medium text-[var(--siya-text)]">{user.name || user.email}</p>
+            <p className="truncate text-[var(--siya-text-muted)]">{user.email}</p>
             <button
               type="button"
               onClick={() => logout()}
-              className="mt-2 text-left text-teal-700 hover:underline dark:text-teal-400"
+              className="mt-2 text-left font-medium text-[var(--siya-accent)] hover:underline"
             >
               Sign out
             </button>
@@ -67,7 +78,9 @@ export function Sidebar({
                 >
                   <span
                     className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs ${
-                      complete ? "bg-[var(--siya-accent)] text-white" : "bg-[var(--siya-bg-subtle)] text-[var(--siya-text-muted)]"
+                      complete
+                        ? "bg-[var(--siya-accent)] text-white"
+                        : "bg-[var(--siya-bg-subtle)] text-[var(--siya-text-muted)]"
                     }`}
                   >
                     {complete ? "✓" : m.order}
@@ -78,31 +91,12 @@ export function Sidebar({
             );
           })}
         </ul>
-        <div className="mt-4 border-t border-[var(--siya-border)] pt-3">
-          <Link href="/training" className="block rounded-lg px-3 py-2 text-sm text-[var(--siya-text-secondary)] hover:bg-[var(--siya-bg-page)]">
-            Certification dashboard
-          </Link>
-          <Link href="/resources" className="block rounded-lg px-3 py-2 text-sm text-[var(--siya-text-secondary)] hover:bg-[var(--siya-bg-page)]">
-            Reference library
-          </Link>
-          <Link
-            href="/final"
-            className="block rounded-lg px-3 py-2 text-sm font-medium text-[var(--siya-text-secondary)] hover:bg-[var(--siya-bg-page)]"
-          >
-            Final assessment
-          </Link>
-          <Link
-            href="/results"
-            className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900"
-          >
-            Results & analytics
-          </Link>
-          <Link
-            href="/certificate"
-            className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900"
-          >
-            Certificate
-          </Link>
+        <div className="mt-4 border-t border-[var(--siya-border)] pt-3 space-y-0.5">
+          {navLink("/training", "Certification dashboard", path === "/training")}
+          {navLink("/resources", "Reference library", path.startsWith("/resources"))}
+          {navLink("/final", "Final assessment", path === "/final")}
+          {navLink("/results", "Results & analytics", path === "/results")}
+          {navLink("/certificate", "Certificate", path === "/certificate")}
         </div>
       </nav>
     </aside>

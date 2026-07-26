@@ -1,12 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { isTrainingAuthRequired } from "@/lib/trainingConfig";
 import { BRAND } from "@/lib/brand";
+import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
+import Image from "next/image";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -24,12 +25,13 @@ export default function LoginPage() {
 
   if (!isTrainingAuthRequired()) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-zinc-50 p-6 dark:bg-zinc-900">
-        <p className="max-w-md text-center text-zinc-600 dark:text-zinc-400">
-          Sign-in is not configured. Set <code className="rounded bg-zinc-200 px-1 dark:bg-zinc-800">NEXT_PUBLIC_HIPAA_TRAINING_API_URL</code>{" "}
-          to enable accounts, or open the{" "}
-          <Link href="/" className="text-teal-600 underline">
-            dashboard
+      <div className="siya-page-bg flex min-h-screen flex-col items-center justify-center p-6">
+        <p className="max-w-md text-center text-[var(--siya-text-secondary)]">
+          Sign-in is not configured. Set{" "}
+          <code className="rounded bg-[var(--siya-bg-subtle)] px-1">NEXT_PUBLIC_HIPAA_TRAINING_API_URL</code> to enable
+          accounts, or open the{" "}
+          <Link href="/" className="text-[var(--siya-accent)] underline">
+            assistant
           </Link>{" "}
           for local-only progress.
         </p>
@@ -67,16 +69,14 @@ export default function LoginPage() {
         <h1 className="mt-6 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
           Sign in to {BRAND.appName}
         </h1>
-        <p className="mt-1 text-sm text-[var(--siya-text-muted)]">
-          Workforce accounts sync certification progress to your organization.
-        </p>
+        <p className="mt-1 text-sm text-[var(--siya-text-muted)]">Workforce accounts sync certification progress.</p>
 
         {allowRegister ? (
-          <div className="mt-4 flex gap-2 rounded-lg bg-zinc-100 p-1 dark:bg-zinc-800">
+          <div className="mt-4 flex gap-2 rounded-lg bg-[var(--siya-bg-subtle)] p-1">
             <button
               type="button"
               className={`flex-1 rounded-md py-2 text-sm font-medium ${
-                mode === "login" ? "bg-white shadow dark:bg-zinc-900" : "text-zinc-600 dark:text-zinc-400"
+                mode === "login" ? "bg-white shadow text-[var(--siya-primary)]" : "text-[var(--siya-text-muted)]"
               }`}
               onClick={() => setMode("login")}
             >
@@ -85,7 +85,7 @@ export default function LoginPage() {
             <button
               type="button"
               className={`flex-1 rounded-md py-2 text-sm font-medium ${
-                mode === "register" ? "bg-white shadow dark:bg-zinc-900" : "text-zinc-600 dark:text-zinc-400"
+                mode === "register" ? "bg-white shadow text-[var(--siya-primary)]" : "text-[var(--siya-text-muted)]"
               }`}
               onClick={() => setMode("register")}
             >
@@ -93,54 +93,33 @@ export default function LoginPage() {
             </button>
           </div>
         ) : (
-          <p className="mt-3 text-xs text-amber-800 dark:text-amber-200/90">
-            Self-registration is off. Ask your administrator for an account (or enable{" "}
-            <code className="rounded bg-amber-100 px-1 dark:bg-amber-950">NEXT_PUBLIC_HIPAA_TRAINING_ALLOW_REGISTER</code>{" "}
-            only if appropriate).
-          </p>
+          <p className="mt-3 text-xs text-amber-900/90">Self-registration is off — ask your administrator for an account.</p>
         )}
 
         <form onSubmit={onSubmit} className="mt-6 space-y-4">
           {mode === "register" ? (
             <label className="block">
-              <span className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Full name</span>
-              <input
-                type="text"
-                autoComplete="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-600 dark:bg-zinc-950"
-              />
+              <span className="text-xs font-medium text-[var(--siya-text-muted)]">Full name</span>
+              <TrainingInput type="text" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} className="mt-1" />
             </label>
           ) : null}
           <label className="block">
-            <span className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Email</span>
-            <input
-              type="email"
-              required
-              autoComplete="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-600 dark:bg-zinc-950"
-            />
+            <span className="text-xs font-medium text-[var(--siya-text-muted)]">Email</span>
+            <TrainingInput type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mt-1" />
           </label>
           <label className="block">
-            <span className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Password</span>
-            <input
+            <span className="text-xs font-medium text-[var(--siya-text-muted)]">Password</span>
+            <TrainingInput
               type="password"
               required
               autoComplete={mode === "register" ? "new-password" : "current-password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-600 dark:bg-zinc-950"
+              className="mt-1"
             />
           </label>
-          {error ? <p className="text-sm text-red-600 dark:text-red-400">{error}</p> : null}
-          <button
-            type="submit"
-            disabled={pending || (mode === "register" && !allowRegister)}
-            className="w-full rounded-lg bg-teal-600 py-2.5 text-sm font-medium text-white disabled:opacity-40"
-          >
+          {error ? <p className="text-sm text-red-600">{error}</p> : null}
+          <button type="submit" disabled={pending || (mode === "register" && !allowRegister)} className={`w-full ${trainingLinkPrimaryClass} justify-center`}>
             {pending ? "Please wait…" : mode === "register" ? "Create account" : "Sign in"}
           </button>
         </form>

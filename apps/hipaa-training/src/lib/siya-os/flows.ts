@@ -13,7 +13,7 @@ const FLOWS: {
     id: "accounts-reimbursement",
     department: "Accounts",
     task: "Employee reimbursement",
-    patterns: [/reimburs/i, /expense report/i, /paid personally/i, /heygen/i, /invoice/i],
+    patterns: [/reimburs/i, /expense report/i, /paid personally/i, /heygen/i, /chatgpt/i, /openai/i, /invoice/i],
     followUpQuestions: [
       "What was the amount?",
       "Purchase date?",

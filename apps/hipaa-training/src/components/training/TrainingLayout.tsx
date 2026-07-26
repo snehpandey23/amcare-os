@@ -15,7 +15,7 @@ export function TrainingLayout({
   children: ReactNode;
 }) {
   return (
-    <div className="flex h-full min-h-0 flex-1 bg-[var(--siya-bg-page)] text-[var(--siya-text)]">
+    <div className="siya-cert siya-page-bg flex h-full min-h-0 flex-1">
       <Sidebar modules={modules} progress={progress} />
       <main className="flex-1 overflow-auto">{children}</main>
     </div>

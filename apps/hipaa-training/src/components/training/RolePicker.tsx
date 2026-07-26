@@ -25,8 +25,8 @@ export function RolePicker({
           onClick={() => onChange(r.value)}
           className={`rounded-full border px-3 py-1.5 text-sm transition-colors ${
             value === r.value
-              ? "border-teal-600 bg-teal-50 text-teal-800 dark:border-teal-500 dark:bg-teal-950/60 dark:text-teal-200"
-              : "border-zinc-300 text-zinc-600 hover:border-zinc-400 dark:border-zinc-600 dark:text-zinc-400"
+              ? "border-[var(--siya-accent)] bg-[var(--siya-bg-subtle)] font-medium text-[var(--siya-primary)]"
+              : "border-[var(--siya-border)] text-[var(--siya-text-secondary)] hover:border-[var(--siya-accent)]/40 hover:bg-[var(--siya-bg-page)]"
           }`}
         >
           {r.label}

@@ -17,6 +17,8 @@ export interface SiyaReply {
   };
   sources?: { title: string; id: string }[];
   escalationPreview?: string;
+  /** No approved KB match — show notify-owner flow */
+  knowledgeGap?: boolean;
 }
 
 const PHI = /\b(mrn|ssn|social security|patient name is|date of birth)\b/i;
@@ -61,13 +63,16 @@ export function runSiyaAssistant(message: string, _history: { role: string; cont
       "\n\n**Policy note:** Reimbursement SOP is not in the approved KB yet. I can still collect details and escalate to **Accounts** with context.\n";
   }
 
+  const hasApprovedAnswer = chunks.length > 0 && chunks[0].score >= 1;
+  const knowledgeGap = !hasApprovedAnswer;
+
   if (chunks.length) {
     const top = chunks[0];
     msg += `\n\n${top.snippet}`;
     if (top.escalate) msg += `\n\n**Escalate:** ${top.escalate}`;
   } else {
     msg +=
-      "\n\nI don't have an **approved** document for this yet. Use **Escalate** to send your manager a filled summary—or ask your owner to add a live topic in `docs/siyaos-knowledge-base`.";
+      "\n\nI don't have an **approved** answer for this yet. Use **Notify owner** below so leadership can add policy—or copy the escalation summary for Slack.";
   }
 
   if (routing.followUpQuestions.length) {
@@ -105,6 +110,7 @@ export function runSiyaAssistant(message: string, _history: { role: string; cont
     },
     sources,
     escalationPreview,
+    knowledgeGap,
   };
 }
 

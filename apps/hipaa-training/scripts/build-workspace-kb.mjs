@@ -52,11 +52,26 @@ function section(body, name) {
 }
 
 function compileBody(body, meta) {
+  if (meta.kind === 'decision') {
+    const decision = section(body, 'Decision');
+    const reason = section(body, 'Reason');
+    const ai = section(body, 'AI Context');
+    return [ai, decision, reason].filter(Boolean).join(' ').replace(/\n+/g, ' ').trim();
+  }
   const ai = section(body, 'AI Context');
   const sop = section(body, 'SOP');
   const overview = section(body, 'Overview');
   const chunk = ai || sop || overview;
   return chunk.replace(/\n+/g, ' ').trim();
+}
+
+function collectMdFiles() {
+  const topics = walkTopics(kbRoot);
+  const decisionsDir = path.join(kbRoot, 'decisions');
+  const decisions = fs.existsSync(decisionsDir)
+    ? fs.readdirSync(decisionsDir).filter((f) => f.endsWith('.md')).map((f) => path.join(decisionsDir, f))
+    : [];
+  return [...topics, ...decisions];
 }
 
 function walkTopics(dir, acc = []) {
@@ -69,7 +84,7 @@ function walkTopics(dir, acc = []) {
   return acc;
 }
 
-const files = walkTopics(kbRoot);
+const files = collectMdFiles();
 const entries = [];
 
 for (const file of files) {
@@ -80,14 +95,19 @@ for (const file of files) {
   }
   const { meta, body, keywords, links } = parsed;
   if (meta.status !== 'live') continue;
-  if (!meta.id || !meta.title || !meta.module) {
-    console.warn('Skip (missing id/title/module):', file);
+  if (!meta.id || !meta.title) {
+    console.warn('Skip (missing id/title):', file);
+    continue;
+  }
+  const module = meta.module || (meta.kind === 'decision' ? 'decisions' : null);
+  if (!module) {
+    console.warn('Skip (missing module):', file);
     continue;
   }
   entries.push({
     id: meta.id,
-    category: meta.module.replace(/^\d+-/, '').replace(/-/g, '_'),
-    module: meta.module,
+    category: module.replace(/^\d+-/, '').replace(/-/g, '_'),
+    module,
     title: meta.title,
     keywords,
     body: compileBody(body, meta),

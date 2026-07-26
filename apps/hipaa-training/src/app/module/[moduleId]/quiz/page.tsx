@@ -10,8 +10,30 @@ import { explainResult } from "@/lib/scoring";
 import type { Question, QuizAttemptRecord } from "@/lib/types";
 import { useClientProgress } from "@/hooks/useClientProgress";
 import { QuizFeedbackPanel } from "@/components/training/QuizFeedbackPanel";
+import {
+  TrainingBtnPrimary,
+  TrainingCard,
+  TrainingProgressBar,
+  quizOptionClass,
+  type QuizOptionState,
+  trainingLinkPrimaryClass,
+  trainingLinkSecondaryClass,
+} from "@/components/training/training-ui";
 
 type Phase = "answer" | "feedback";
+
+function optionState(
+  phase: Phase,
+  isCorrect: boolean,
+  isSelected: boolean
+): QuizOptionState {
+  if (phase === "feedback") {
+    if (isCorrect) return "correct";
+    if (isSelected && !isCorrect) return "incorrect";
+    return "muted";
+  }
+  return isSelected ? "selected" : "default";
+}
 
 export default function ModuleQuizPage() {
   const params = useParams();
@@ -46,15 +68,13 @@ export default function ModuleQuizPage() {
     return (
       <div className="p-8">
         <p>Module not found.</p>
-        <Link href="/">Home</Link>
+        <Link href="/training">Home</Link>
       </div>
     );
   }
 
   const resolvedModuleId = mod.id;
-
   const current: Question | null = baseQueue[mainIdx] ?? null;
-
   const totalMain = baseQueue.length;
   const progressPct =
     totalMain === 0 ? 0 : Math.round(((mainIdx + (phase === "feedback" ? 0.35 : 0)) / totalMain) * 100);
@@ -90,18 +110,18 @@ export default function ModuleQuizPage() {
     const c = graded.filter((x) => x.correct).length;
     const pct = Math.round((100 * c) / Math.max(1, graded.length));
     return (
-      <div className="p-8">
-        <h1 className="text-2xl font-semibold">Module complete</h1>
-        <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-          Score: {c}/{graded.length} ({pct}%)
-        </p>
-        <p className="mt-2 max-w-lg text-sm text-zinc-500">
-          Review the lesson anytime. Incorrect items showed the keyed correct answer so you can reinforce before the final
-          assessment.
-        </p>
-        <Link href="/" className="mt-6 inline-block text-teal-600">
-          Return to dashboard
-        </Link>
+      <div className="siya-cert p-8 md:p-10">
+        <div className="mx-auto max-w-lg">
+          <h1 className="font-[family-name:var(--font-poppins)] text-2xl font-semibold text-[var(--siya-primary)]">
+            Module complete
+          </h1>
+          <p className="mt-2 text-[var(--siya-text-secondary)]">
+            Score: {c}/{graded.length} ({pct}%)
+          </p>
+          <Link href="/training" className={`mt-6 ${trainingLinkPrimaryClass}`}>
+            Return to certification dashboard
+          </Link>
+        </div>
       </div>
     );
   }
@@ -110,55 +130,44 @@ export default function ModuleQuizPage() {
     return (
       <div className="p-8">
         <p>No questions for this module with your role filter.</p>
-        <Link href="/">Dashboard</Link>
+        <Link href="/training">Dashboard</Link>
       </div>
     );
   }
 
-  const feedback =
-    phase === "feedback" && selected !== null ? explainResult(current, selected) : null;
+  const feedback = phase === "feedback" && selected !== null ? explainResult(current, selected) : null;
 
   return (
-    <div className="p-6 md:p-10">
+    <div className="siya-cert p-6 md:p-10">
       <div className="mx-auto max-w-2xl">
         <div className="mb-6 flex items-center justify-between gap-4">
           <div>
-            <p className="text-sm text-zinc-500">
-              {mod.shortTitle} quiz • Question {mainIdx + 1} of {totalMain}
+            <p className="text-sm text-[var(--siya-text-muted)]">
+              {mod.shortTitle} quiz · Question {mainIdx + 1} of {totalMain}
             </p>
-            <p className="text-xs text-teal-600 dark:text-teal-400">{current.sourceRef}</p>
+            <p className="text-xs text-[var(--siya-accent)]">{current.sourceRef}</p>
           </div>
-          <div className="h-2 w-40 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
-            <div className="h-full rounded-full bg-teal-600 transition-all" style={{ width: `${progressPct}%` }} />
+          <div className="w-40">
+            <TrainingProgressBar pct={progressPct} />
           </div>
         </div>
 
-        <div className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
-          <p className="text-lg font-medium leading-snug">{current.prompt}</p>
+        <TrainingCard>
+          <p className="text-lg font-medium leading-snug text-[var(--siya-text)]">{current.prompt}</p>
           <div className="mt-4 space-y-2">
             {current.options.map((opt) => {
               const isCorrect = opt.key === current.correctKey;
               const isSelected = selected === opt.key;
-              let ring = "border-zinc-200 dark:border-zinc-700";
-              if (phase === "feedback") {
-                if (isCorrect) ring = "border-emerald-600 bg-emerald-50 dark:border-emerald-500 dark:bg-emerald-950/40";
-                else if (isSelected && !isCorrect)
-                  ring = "border-red-500 bg-red-50 dark:border-red-500 dark:bg-red-950/30";
-                else ring = "border-zinc-200 opacity-70 dark:border-zinc-700";
-              } else if (isSelected) {
-                ring = "border-teal-600 bg-teal-50 dark:border-teal-500 dark:bg-teal-950/40";
-              }
+              const state = optionState(phase, isCorrect, isSelected);
               return (
                 <button
                   key={opt.key}
                   type="button"
                   disabled={phase !== "answer"}
                   onClick={() => phase === "answer" && setSelected(opt.key)}
-                  className={`flex w-full rounded-xl border px-4 py-3 text-left text-sm transition-colors ${ring} ${
-                    phase === "answer" ? "hover:border-zinc-300 dark:hover:border-zinc-600" : ""
-                  }`}
+                  className={quizOptionClass(state, phase === "answer")}
                 >
-                  <span className="mr-3 font-mono text-xs text-zinc-400">{opt.key}.</span>
+                  <span className="mr-3 font-mono text-xs text-[var(--siya-text-muted)]">{opt.key}.</span>
                   {opt.text}
                 </button>
               );
@@ -166,20 +175,15 @@ export default function ModuleQuizPage() {
           </div>
 
           {phase === "answer" ? (
-            <button
-              type="button"
-              disabled={selected === null}
-              onClick={submitAnswer}
-              className="mt-6 w-full rounded-lg bg-teal-600 py-2.5 text-sm font-medium text-white disabled:opacity-40"
-            >
+            <TrainingBtnPrimary className="mt-6 w-full" disabled={selected === null} onClick={submitAnswer}>
               Check answer
-            </button>
+            </TrainingBtnPrimary>
           ) : feedback ? (
             <QuizFeedbackPanel feedback={feedback} onContinue={continueAfterFeedback} />
           ) : null}
-        </div>
+        </TrainingCard>
 
-        <Link href={`/module/${moduleId}`} className="mt-4 inline-block text-sm text-zinc-500 hover:text-zinc-700">
+        <Link href={`/module/${moduleId}`} className={`mt-4 inline-block text-sm text-[var(--siya-text-muted)] hover:text-[var(--siya-accent)]`}>
           Back to lesson
         </Link>
       </div>

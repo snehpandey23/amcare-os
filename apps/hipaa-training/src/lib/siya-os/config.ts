@@ -1,7 +1,7 @@
 /** Internal help desk — one doorway, not an ops suite. */
 
 export const SIYA_OPENING =
-  "**What do you need help with today?**\n\nDescribe your task in plain language (reimbursement, Instagram carousel, refill workflow, SOP, HR policy, system issue). I'll route you to the right function, ask follow-ups, pull **approved** resources, and escalate with context when needed.\n\nDo not paste patient identifiers here.";
+  "**What do you need help with today?**\n\nOne box — no manuals, no department menus. Describe your task (reimbursement, content, refill workflow, SOP, HR, systems). I route silently, ask follow-ups, use **approved** knowledge only, and log gaps we don't cover yet.\n\nDo not paste patient identifiers here.";
 
 export const SIYA_QUICK_PROMPTS = [
   "Create marketing content for Instagram",

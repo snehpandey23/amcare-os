@@ -1,54 +1,94 @@
-# Siya Assist — product definition (internal)
+# Siya Assistant — product definition
 
-> **Siya Assist is an internal AI help desk** that understands employee requests, routes them to the correct business function, asks task-specific follow-up questions, retrieves **approved** company resources, helps complete the work, and escalates unresolved or high-risk issues **with full context**.
+> **Siya Assistant is an internal AI help desk** that helps employees get work done using **approved** company knowledge, asks the right follow-up questions, and escalates when needed.
 
 Not an ERP. Not an EMR. Not a dashboard. **One intelligent doorway.**
 
-## Core workflow
+If ten employees start here instead of Slack, Drive, WhatsApp, and hallway questions—and get measurably faster—that is the bar before scaling outward.
+
+---
+
+## Three layers (mental model)
+
+| Layer | Who sees it | What it is |
+|-------|-------------|------------|
+| **1 — Knowledge** (invisible) | Authors only | 20+ modules, topics, decision log, metadata — rich graph for retrieval |
+| **2 — Brain** (invisible) | System | Intent router → department/task → follow-ups → approved sources → escalate |
+| **3 — Product** (visible) | Every employee | **What do you need help with today?** One text box. |
+
+**20 modules = author organization, not product navigation.**
+
+---
+
+## V1 pipeline (deterministic — no agent loops)
 
 ```text
-Employee question → intent → department + task → follow-up questions
-  → search approved KB → answer / draft / checklist → escalate if needed
+Employee message
+  → Intent router
+  → Follow-up questions
+  → Retrieve approved resources
+  → Generate response
+  → Escalate if needed
 ```
 
-## v1 routing departments (8 only)
+No autonomous tool chaining in v1.
 
-| Department | Examples |
-|------------|----------|
-| Accounts | Expenses, reimbursements, invoices, payroll questions |
-| HR | Leave, onboarding, policies, performance |
-| Marketing | Content, ads, SEO, brand, carousels, captions |
-| Clinical Operations | Scheduling, refills, portal chat, workflows (no clinical decisions) |
-| Compliance | Privacy, HIPAA, documentation, approved comms |
-| Technology | Login, software, website, integrations |
-| Leadership | Approvals, strategy references |
-| General | Unclear requests, cross-cutting policies |
+---
 
-## Knowledge modules (20) vs routing (8)
+## Unknown questions improve the KB
 
-The **20 folders** in this repo organize **content** for authors. The **8 departments** are what the **router shows employees**. Do not expose 20 modules in the UI.
+When there is no approved answer:
 
-## Answer priority
+1. Assistant shows **Unknown workflow**
+2. Employee can **Notify owner** (logged: department, question, status `awaiting_policy`)
+3. Leadership adds a live topic or decision log entry
+4. **Missing knowledge** metrics become the documentation roadmap
 
-1. Approved policy → 2. Current SOP → 3. Template → 4. Formal decision log → 5. Training → 6. Discussion → 7. General guidance (label as low confidence).
+---
 
-## Resource metadata (target)
+## Four metrics (product, not AI benchmarks)
 
-Department, topic, document type, owner, approval status, effective/review dates, roles allowed, escalation owner.
+| Metric | Meaning |
+|--------|---------|
+| **First-answer rate** | % answered without escalation or gap |
+| **Time to resolution** | Question → answer (client v1 in local metrics) |
+| **Escalation rate** | Intentional escalations OK; unexplained spikes are bad |
+| **Missing knowledge** | Top unanswered questions this week |
 
-## MVP status (honest)
+Client v1: `localStorage` via `src/lib/siya-os/metrics.ts` and `knowledge-gap.ts` — export before we wire Postgres.
 
-| Capability | Status |
-|------------|--------|
-| One chat UI | Live |
-| Department + task router (keyword v1) | In progress |
-| Follow-up question hints | In progress |
-| KB retrieval + sources | Live |
-| Escalation summary + button | In progress |
-| Employee login + progress API | Optional env |
-| Admin upload / flow editor | Not built — use git + `topics/*.md` |
+---
 
-## Gaps to fill with owners
+## Document metadata (required over time)
 
-- **Accounts / reimbursement** — no approved policy in KB yet; need owner + SOP topic before bot can complete that flow.
-- **LLM intent** — v1 router is deterministic; LLM layer comes after KB coverage and guardrails.
+Every topic / decision should carry:
+
+```yaml
+owner: Marketing Lead
+status: approved   # draft | review | live (topics) 
+reviewDate: 2026-09-01
+supersedes: marketing-sop-v1
+confidence: official  # official | draft | historical
+```
+
+Prevents the model from blending five versions of “how we run Google Ads.”
+
+---
+
+## Decision log
+
+Institutional **why**, not just **how**. See `decisions/` and `_template-decision.md`.
+
+Employees ask: *Why did we change the homepage CTA?* → retrieval returns decision + owner + date.
+
+---
+
+## v1 routing departments (8)
+
+Accounts · HR · Marketing · Clinical Operations · Compliance · Technology · Leadership · General
+
+---
+
+## MVP status
+
+See root [`README.md`](./README.md) and [`ARCHITECTURE.md`](./ARCHITECTURE.md).
