@@ -25,6 +25,9 @@ export const GEO_CLONE_REDIRECTS = {
   '/blog/adhd-treatment-sacramento-ca': '/adult-adhd-california',
   '/blog/adhd-treatment-oakland-ca': '/adult-adhd-california',
   '/blog/adhd-treatment-orange-county-ca': '/adult-adhd-california',
+  // CA-specific retired / consolidated → cornerstone (not /adhd-care)
+  '/blog/adult-adhd-treatment-california-2026': '/adult-adhd-california',
+  '/blog/adhd-evaluation-cost-california': '/adult-adhd-california',
 
   // Texas city treatment clones → statewide TX treatment owner
   '/blog/adhd-treatment-houston-tx': '/blog/adhd-treatment-texas',

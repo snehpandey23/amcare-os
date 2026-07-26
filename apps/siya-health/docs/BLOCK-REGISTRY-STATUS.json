@@ -1,8 +1,8 @@
 {
   "framework": "Siya Knowledge Governance Framework",
   "governanceVersion": "1.0",
-  "generated": "2026-07-26T10:21:09.752Z",
-  "filesScanned": 191,
+  "generated": "2026-07-26T11:04:09.864Z",
+  "filesScanned": 193,
   "registeredBlocks": 25,
   "unregisteredMarkers": [],
   "violations": [],
@@ -21,7 +21,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "chrome",
-      "pagesAffected": 191
+      "pagesAffected": 172
     },
     {
       "id": "SIYA:COOKIE-NOTICE",
@@ -37,7 +37,23 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "chrome",
-      "pagesAffected": 184
+      "pagesAffected": 165
+    },
+    {
+      "id": "SIYA:CONCIERGE",
+      "name": "Concierge widget",
+      "kind": "chrome",
+      "entity": null,
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "n/a",
+        "engineering": "site-chrome"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "chrome",
+      "pagesAffected": 162
     },
     {
       "id": "SIYA:PROVIDER-ATTRIBUTION",
@@ -53,7 +69,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "approved",
       "status": "chrome",
-      "pagesAffected": 180
+      "pagesAffected": 161
     },
     {
       "id": "SIYA:CIRCLE-ANALYTICS",
@@ -69,7 +85,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "chrome",
-      "pagesAffected": 179
+      "pagesAffected": 160
     },
     {
       "id": "SIYA:CONTEXT-CLOSING",
@@ -133,7 +149,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "chrome",
-      "pagesAffected": 24
+      "pagesAffected": 25
     },
     {
       "id": "SIYA:BLOG-CTA-METABOLIC",
@@ -389,22 +405,6 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "deprecated",
-      "pagesAffected": 0
-    },
-    {
-      "id": "SIYA:CONCIERGE",
-      "name": "Concierge widget",
-      "kind": "chrome",
-      "entity": null,
-      "owner": {
-        "clinical": "n/a",
-        "editorial": "n/a",
-        "engineering": "site-chrome"
-      },
-      "version": "v1.0",
-      "approved": "2026-07-26",
-      "clinicalReview": "n/a",
-      "status": "chrome",
       "pagesAffected": 0
     }
   ]

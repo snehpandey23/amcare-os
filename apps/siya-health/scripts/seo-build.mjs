@@ -512,6 +512,13 @@ function normalizeRootAssetPaths(html) {
 function processHtml(relPath) {
   const fullPath = path.join(SITE_ROOT, relPath);
   let html = fs.readFileSync(fullPath, 'utf8');
+  // Retirement / geo-clone stubs: leave noindex+refresh HTML alone (vercel.json owns the 308).
+  if (
+    /name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html) &&
+    /http-equiv=["']refresh["']/i.test(html)
+  ) {
+    return;
+  }
   html = normalizeRootAssetPaths(html);
   const title = extractTitle(html);
   let description = extractDescription(html);

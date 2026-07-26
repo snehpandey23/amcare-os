@@ -64,6 +64,7 @@ export const INTENTIONAL_BOILERPLATE = [
   /important: this content is for educational purposes only and does not replace medical/i,
   /availability varies; a clinician individualizes which tests/i,
   /for california adults: read online adhd diagnosis/i,
+  /for the full picture, start with our canonical guide to adult adhd care in california/i,
   /explore adhd care →/i,
   /we see patients where licensed, including california/i,
   /siya health inc\. provides administrative and non-clinical support/i,

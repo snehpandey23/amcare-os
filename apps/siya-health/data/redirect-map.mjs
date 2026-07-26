@@ -20,8 +20,9 @@ const RAW = {
   '/blog/ambien-and-sleep-medications-risks-and-benefits': '/blog/insomnia-treatment-options-beyond-medication',
   '/blog/glutathione-and-peptides-what-do-they-actually-do': '/mens-health-longevity',
   '/blog/modafinil-for-focus-and-fatigue-is-it-safe': '/adhd-care',
-  // EG-P0-01: garbled California 2026 ADHD article retired (noindex stub + 301)
-  '/blog/adult-adhd-treatment-california-2026': '/adhd-care',
+  // EG-P0-01: garbled California 2026 ADHD article → CA cornerstone (canonical entity)
+  '/blog/adult-adhd-treatment-california-2026': '/adult-adhd-california',
+  '/blog/adhd-evaluation-cost-california': '/adult-adhd-california',
   '/adhd-diagnosis-pennsylvania': '/adhd-care',
   '/adhd-diagnosis-philadelphia': '/adhd-care',
   '/adhd-diagnosis-houston': '/adhd-diagnosis-texas',
