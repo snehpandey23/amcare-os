@@ -18,9 +18,10 @@
 - How to read lab results: https://siya.health/labs/how-to-read-results
 
 ## California ADHD (priority state — statewide hubs; city clones retired)
+- Adult ADHD Care in California (canonical cornerstone): https://siya.health/adult-adhd-california
 - Online ADHD diagnosis California: https://siya.health/blog/online-adhd-diagnosis-california
 - ADHD telehealth California: https://siya.health/blog/adhd-telehealth-california
-- Adult ADHD care: https://siya.health/adhd-care
+- General ADHD care (service page): https://siya.health/adhd-care
 - California screening: https://siya.health/adult-adhd-screening-california
 - Texas ADHD treatment (statewide): https://siya.health/blog/adhd-treatment-texas
 - Texas ADHD diagnosis (statewide): https://siya.health/adhd-diagnosis-texas

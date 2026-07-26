@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T10:21:05.402Z",
+  "generated": "2026-07-26T11:09:09.860Z",
   "services": [
     {
       "title": "Siya Health | When Focus, Energy, or Weight Won't Budge",
@@ -30,6 +30,12 @@
       "url": "https://siya.health/adhd-screening",
       "type": "service-adhd",
       "description": "Tell us what you need: free 2-minute ADHD screening (ASRS), medical weight loss, or telehealth. Guided next steps for Texas-area care."
+    },
+    {
+      "title": "Adult ADHD Care in California — Diagnosis, Treatment &amp; Screening",
+      "url": "https://siya.health/adult-adhd-california",
+      "type": "service-adhd",
+      "description": "The complete guide to adult ADHD in California: what it looks like, when evaluation helps, how online diagnosis works, treatment options, women & ADHD, executive dysfunction, pricing, and a free screening. Physician-led telehealth for California adults."
     },
     {
       "title": "Online ADHD Screening in California | Free 2-Minute Test",
