@@ -12,6 +12,22 @@ export const DEPARTMENTS = [
 
 export type Department = (typeof DEPARTMENTS)[number];
 
+/** Employee-facing labels (routing stays stable in logs). */
+const DEPARTMENT_DISPLAY: Record<Department, string> = {
+  Accounts: "Accounts & expenses",
+  HR: "People & HR",
+  Marketing: "Marketing & content",
+  "Clinical Operations": "Care operations",
+  Compliance: "Compliance & privacy",
+  Technology: "Tools & IT",
+  Leadership: "Leadership",
+  General: "General",
+};
+
+export function displayDepartment(department: Department): string {
+  return DEPARTMENT_DISPLAY[department] ?? department;
+}
+
 export type Confidence = "high" | "medium" | "low";
 
 export interface RouteResult {

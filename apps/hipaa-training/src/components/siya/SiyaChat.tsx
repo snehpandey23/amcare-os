@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState } from "react";
 import Link from "next/link";
 import { SIYA_OPENING, SIYA_QUICK_PROMPTS } from "@/lib/siya-os/config";
+import { displayDepartment, type Department } from "@/lib/siya-os/departments";
 import { BRAND } from "@/lib/brand";
 import { notifyOwnerForGap } from "@/lib/siya-os/knowledge-gap";
 import { recordQuestion, recordTimeToAnswer } from "@/lib/siya-os/metrics";
@@ -40,17 +41,11 @@ function mdLite(text: string) {
 
 function RoutingBadge({ routing }: { routing: RoutingMeta }) {
   return (
-    <div className="mb-2 flex flex-wrap gap-1.5 text-[11px] font-medium">
-      <span className="rounded-full bg-[var(--siya-bg-subtle)] px-2 py-0.5 text-[var(--siya-primary)]">
-        {routing.department}
-      </span>
-      <span className="rounded-full border border-[var(--siya-border)] px-2 py-0.5 text-[var(--siya-text-muted)]">
-        {routing.task}
-      </span>
-      <span className="rounded-full border border-[var(--siya-accent)]/30 px-2 py-0.5 text-[var(--siya-accent)]">
-        {routing.confidence} confidence
-      </span>
-    </div>
+    <p className="mb-2 text-[11px] font-medium text-[var(--siya-text-muted)]">
+      <span className="text-[var(--siya-primary)]">{displayDepartment(routing.department as Department)}</span>
+      <span className="mx-1.5 text-[var(--siya-border)]">·</span>
+      {routing.task}
+    </p>
   );
 }
 
@@ -210,7 +205,7 @@ export function SiyaChat() {
               </div>
             </div>
           ))}
-          {loading ? <p className="text-sm text-[var(--siya-text-muted)]">Routing and searching approved resources…</p> : null}
+          {loading ? <p className="text-sm text-[var(--siya-text-muted)]">Finding approved answers…</p> : null}
         </div>
       </div>
       <div className="border-t border-[var(--siya-border)] bg-white p-4 md:px-8">
@@ -252,10 +247,7 @@ export function SiyaChat() {
             </button>
           </form>
           <p className="mt-2 text-center text-xs text-[var(--siya-text-muted)]">
-            {BRAND.internalBadge} ·{" "}
-            <Link href="/training" className="text-[var(--siya-accent)] underline">
-              HIPAA certification
-            </Link>
+            {BRAND.internalBadge} · {BRAND.privacyFootnote}
           </p>
         </div>
       </div>

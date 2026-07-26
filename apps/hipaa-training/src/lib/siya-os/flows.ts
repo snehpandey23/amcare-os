@@ -10,6 +10,14 @@ const FLOWS: {
   retrievalBoost: string[];
 }[] = [
   {
+    id: "leadership-decision",
+    department: "Leadership",
+    task: "Decision log / context",
+    patterns: [/why did we/i, /decision log/i, /who decided/i, /when did we change/i, /why.*change/i],
+    followUpQuestions: ["Which project or area?", "Approximate timeframe?", "Who was in the room?"],
+    retrievalBoost: ["decision", "homepage", "cta", "leadership"],
+  },
+  {
     id: "accounts-reimbursement",
     department: "Accounts",
     task: "Employee reimbursement",
@@ -42,9 +50,9 @@ const FLOWS: {
     task: "Medication refill workflow",
     patterns: [/refill/i, /prescription not sent/i, /medication.*not/i, /pharmacy/i],
     followUpQuestions: [
-      "Which provider is assigned? (no patient name in chat)",
+      "Which provider is assigned? (no names in chat)",
       "Date of last visit?",
-      "Open refill request in the chart already?",
+      "Request already in the chart?",
       "Urgent or routine?",
     ],
     retrievalBoost: ["escalation", "clinical", "chat", "portal"],
@@ -52,9 +60,9 @@ const FLOWS: {
   {
     id: "compliance-privacy",
     department: "Compliance",
-    task: "Privacy / HIPAA question",
+    task: "Privacy or compliance question",
     patterns: [/hipaa/i, /phi/i, /breach/i, /privacy/i, /third party/i, /family.*charg/i],
-    followUpQuestions: ["Is this about a specific incident? (Do not paste patient identifiers here.)"],
+    followUpQuestions: ["Is this about a specific incident? (Keep identifiers out of chat.)"],
     retrievalBoost: ["hipaa", "breach", "privacy", "third party"],
   },
   {
@@ -62,7 +70,7 @@ const FLOWS: {
     department: "Technology",
     task: "System / access issue",
     patterns: [/login/i, /password/i, /zoho/i, /ehr/i, /can't access/i, /software/i, /website/i],
-    followUpQuestions: ["Which system?", "Error message or screenshot available?", "Does this block patient care today?"],
+    followUpQuestions: ["Which system?", "Error message or screenshot available?", "Does this block your work today?"],
     retrievalBoost: ["amcare", "integration", "IT", "zoho"],
   },
   {
@@ -76,9 +84,9 @@ const FLOWS: {
   {
     id: "clinical-ops-chat",
     department: "Clinical Operations",
-    task: "Patient portal / scheduling ops",
+    task: "Scheduling & portal workflow",
     patterns: [/portal chat/i, /schedule/i, /appointment/i, /no-show/i, /late cancel/i, /payment check/i],
-    followUpQuestions: ["Routine or clinical content?", "Same-day urgency?"],
+    followUpQuestions: ["Routine or urgent?", "Same-day deadline?"],
     retrievalBoost: ["chat", "24", "payment", "cancel", "escalation"],
   },
 ];

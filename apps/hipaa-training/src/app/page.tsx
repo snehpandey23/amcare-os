@@ -19,9 +19,7 @@ export default function HomePage() {
           <h1 className="font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
             How can I help you today?
           </h1>
-          <p className="mt-1 text-sm text-[var(--siya-text-secondary)]">
-            HIPAA · billing · telehealth privacy · escalation
-          </p>
+          <p className="mt-1 text-sm text-[var(--siya-text-secondary)]">{BRAND.homeSubtitle}</p>
         </div>
         <div className="min-h-0 flex-1">
           <SiyaChat />

@@ -34,10 +34,10 @@ export default function DashboardPage() {
       <div className="mx-auto max-w-3xl">
         <p className="text-sm font-medium uppercase tracking-wide text-[var(--siya-accent)]">Optional certification</p>
         <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-3xl font-semibold tracking-tight text-[var(--siya-primary)]">
-          HIPAA workforce training
+          Staff compliance training
         </h1>
         <p className="mt-3 text-[var(--siya-text-secondary)]">
-          Modules and quizzes for formal HIPAA certification. For day-to-day help, use{" "}
+          Required HIPAA modules and certificate for workforce compliance. Everyday questions belong in{" "}
           <Link href="/" className="font-medium text-[var(--siya-accent)] underline underline-offset-2">
             {BRAND.appName}
           </Link>

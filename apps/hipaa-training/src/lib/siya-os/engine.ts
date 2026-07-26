@@ -2,7 +2,7 @@ import { getEscalationContacts } from "./config";
 import { defaultEscalationOwner } from "./escalation";
 import { retrievalQueryBoost, routeIntent } from "./flows";
 import { retrieveWorkspaceKnowledge, type RetrievedChunk } from "./retrieval";
-import type { Confidence, Department } from "./departments";
+import { displayDepartment, type Confidence, type Department } from "./departments";
 
 export interface SiyaReply {
   message: string;
@@ -35,7 +35,7 @@ export function runSiyaAssistant(message: string, _history: { role: string; cont
   if (PHI.test(text)) {
     return {
       message:
-        "Don't paste patient identifiers here. Use the EHR. I can still help with **operational** steps if you describe the situation without PHI.",
+        "Please don't paste names, MRNs, or other chart identifiers here — use the EHR or secure channels. I can still walk through **internal steps** if you describe the situation without identifiers.",
       chunks: [],
       refused: true,
     };
@@ -43,7 +43,7 @@ export function runSiyaAssistant(message: string, _history: { role: string; cont
   if (CLINICAL_DECISION.test(text)) {
     return {
       message:
-        "I can't make clinical decisions or give medical advice. I can walk through **approved operational workflows** and escalate to the **provider / clinical lead**.",
+        "I'm not for medical advice or prescribing decisions. I **can** help with internal workflows (who to loop in, SOP steps) and draft an escalation for your supervisor.",
       chunks: [],
       refused: true,
     };
@@ -56,11 +56,11 @@ export function runSiyaAssistant(message: string, _history: { role: string; cont
   const sources = chunks.slice(0, 3).map((c) => ({ title: c.title, id: c.id }));
   const escalateOwner = chunks[0]?.escalate ?? defaultEscalationOwner(routing.department);
 
-  let msg = formatRoutingHeader(routing);
+  let msg = formatRoutingIntro(routing);
 
   if (routing.flowId === "accounts-reimbursement" && !chunks.some((c) => c.id.includes("reimburs"))) {
     msg +=
-      "\n\n**Policy note:** Reimbursement SOP is not in the approved KB yet. I can still collect details and escalate to **Accounts** with context.\n";
+      "\n\n**Heads up:** We don't have a published reimbursement SOP in the KB yet. I'll still gather details and point you to **Accounts**.\n";
   }
 
   const hasApprovedAnswer = chunks.length > 0 && chunks[0].score >= 1;
@@ -69,29 +69,32 @@ export function runSiyaAssistant(message: string, _history: { role: string; cont
   if (chunks.length) {
     const top = chunks[0];
     msg += `\n\n${top.snippet}`;
-    if (top.escalate) msg += `\n\n**Escalate:** ${top.escalate}`;
+    if (top.escalate) msg += `\n\n**Loop in:** ${top.escalate}`;
   } else {
     msg +=
-      "\n\nI don't have an **approved** answer for this yet. Use **Notify owner** below so leadership can add policy—or copy the escalation summary for Slack.";
+      "\n\nI don't have an **approved** answer for this yet. Use **Notify owner** below so we can add policy — or copy the escalation summary for Slack or email.";
   }
 
   if (routing.followUpQuestions.length) {
-    msg += "\n\n**I need a few details:**";
+    msg += "\n\n**A few quick questions:**";
     routing.followUpQuestions.forEach((q, i) => {
       msg += `\n${i + 1}. ${q}`;
     });
   }
 
-  const contacts = getEscalationContacts()
-    .map((c) => `${c.role}: ${c.detail}`)
-    .join(" · ");
-  msg += `\n\n**Contacts:** ${contacts}`;
+  const showContacts = knowledgeGap || Boolean(chunks[0]?.escalate);
+  if (showContacts) {
+    const contacts = getEscalationContacts()
+      .slice(0, 4)
+      .map((c) => `${c.role}: ${c.detail}`)
+      .join(" · ");
+    msg += `\n\n**People to try:** ${contacts}`;
+  }
 
   const escalationPreview = [
-    `Department: ${routing.department}`,
-    `Task: ${routing.task}`,
+    `Team: ${displayDepartment(routing.department)}`,
+    `Topic: ${routing.task}`,
     `Issue: ${text.slice(0, 500)}`,
-    `Confidence: ${routing.confidence}`,
     `Escalate to: ${escalateOwner}`,
     routing.followUpQuestions.length ? `Open questions: ${routing.followUpQuestions.join("; ")}` : "",
   ]
@@ -114,7 +117,7 @@ export function runSiyaAssistant(message: string, _history: { role: string; cont
   };
 }
 
-function formatRoutingHeader(routing: SiyaReply["routing"]) {
-  if (!routing) return "";
-  return `**Department:** ${routing.department}\n**Task:** ${routing.task}\n**Confidence:** ${routing.confidence}`;
+function formatRoutingIntro(routing: NonNullable<SiyaReply["routing"]>) {
+  const team = displayDepartment(routing.department);
+  return `Routing this under **${team}** — *${routing.task}*.`;
 }

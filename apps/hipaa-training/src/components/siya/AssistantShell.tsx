@@ -45,13 +45,10 @@ export function AssistantShell({ children }: { children: ReactNode }) {
           </Link>
           <nav className="flex gap-4 text-sm md:gap-6">
             <NavLink href="/" active={path === "/"}>
-              Chat
+              Help desk
             </NavLink>
             <NavLink href="/training" active={path.startsWith("/training") || path.startsWith("/module")}>
-              Certification
-            </NavLink>
-            <NavLink href="/resources" active={path.startsWith("/resources")}>
-              References
+              Training
             </NavLink>
           </nav>
         </div>

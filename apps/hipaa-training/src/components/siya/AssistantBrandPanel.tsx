@@ -24,43 +24,47 @@ export function AssistantBrandPanel() {
 
         <div className="relative mt-8 overflow-hidden rounded-[var(--siya-radius-lg)] shadow-[var(--siya-shadow-lg)]">
           <Image
-            src="/assets/images/doctor-video-consult.png"
-            alt="Telehealth care team"
+            src="/assets/images/telehealth-workspace.png"
+            alt="Team workspace"
             width={640}
             height={400}
             className="h-auto w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[rgba(30,58,138,0.55)] to-transparent" />
           <p className="absolute bottom-4 left-4 right-4 text-sm font-medium text-white">
-            Route · Follow-up · Approved sources · Escalate
+            One prompt · right team · approved answers
           </p>
         </div>
 
-        <div className="mt-6 flex items-center gap-4">
-          <Image
-            src="/assets/images/hipaa-compliant.png"
-            alt="HIPAA compliant"
-            width={72}
-            height={72}
-            className="h-[72px] w-[72px] shrink-0 object-contain"
-          />
-          <p className="text-xs leading-relaxed text-[var(--siya-text-muted)]">
-            One internal help desk—not an ops suite. Answers use <strong>approved KB</strong> topics only; escalate when policy
-            is missing or risk is high. No PHI in chat.
-          </p>
-        </div>
+        <ul className="mt-6 space-y-2 text-sm text-[var(--siya-text-secondary)]">
+          <li className="flex gap-2">
+            <span className="text-[var(--siya-accent)]" aria-hidden>
+              ✓
+            </span>
+            Company-wide — ops, marketing, HR, finance, tools
+          </li>
+          <li className="flex gap-2">
+            <span className="text-[var(--siya-accent)]" aria-hidden>
+              ✓
+            </span>
+            Pulls from live SOPs and decision log, not random docs
+          </li>
+          <li className="flex gap-2">
+            <span className="text-[var(--siya-accent)]" aria-hidden>
+              ✓
+            </span>
+            Escalates with context when policy is missing
+          </li>
+        </ul>
 
         <div className="mt-auto pt-8">
-          <Image
-            src="/assets/images/care-team.png"
-            alt="Care team"
-            width={400}
-            height={120}
-            className="rounded-xl opacity-90"
-          />
-          <p className="mt-3 text-xs text-[var(--siya-text-muted)]">{BRAND.entityNote}</p>
-          <Link href="/training" className="mt-2 inline-block text-sm font-medium text-[var(--siya-accent)] hover:underline">
-            Optional HIPAA certification course →
+          <p className="text-xs leading-relaxed text-[var(--siya-text-muted)]">{BRAND.privacyFootnote}</p>
+          <p className="mt-2 text-xs text-[var(--siya-text-muted)]">{BRAND.entityNote}</p>
+          <Link
+            href="/training"
+            className="mt-3 inline-block text-xs font-medium text-[var(--siya-text-muted)] hover:text-[var(--siya-accent)] hover:underline"
+          >
+            Staff compliance training (optional) →
           </Link>
         </div>
       </div>
