@@ -5,7 +5,7 @@ Version:           1.0
 Status:            Production (FROZEN reference)
 Date:              2026-07-26
 Reference page:    /adult-adhd-california
-Git commit:        (filled after freeze commit)
+Git commit:        95b2370
 Governance:        Siya Knowledge Governance Framework v1.0
 Freeze note:       Transitions diagnostic (~7.8) is not a redesign trigger.
 ```
