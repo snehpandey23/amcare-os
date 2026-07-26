@@ -1,28 +1,21 @@
 {
   "framework": "Siya Knowledge Governance Framework",
   "governanceVersion": "1.0",
-  "generated": "2026-07-26T06:45:34.256Z",
-  "filesScanned": 193,
+  "generated": "2026-07-26T06:52:09.888Z",
+  "filesScanned": 191,
   "registeredBlocks": 25,
-  "unregisteredMarkers": [],
+  "unregisteredMarkers": [
+    {
+      "id": "SIYA:LABS-HUB-JUMP",
+      "files": 1
+    },
+    {
+      "id": "SIYA:GUIDE-SEARCH-JS",
+      "files": 1
+    }
+  ],
   "violations": [],
   "blocks": [
-    {
-      "id": "SIYA:CONCIERGE",
-      "name": "Concierge widget",
-      "kind": "chrome",
-      "entity": null,
-      "owner": {
-        "clinical": "n/a",
-        "editorial": "n/a",
-        "engineering": "site-chrome"
-      },
-      "version": "v1.0",
-      "approved": "2026-07-26",
-      "clinicalReview": "n/a",
-      "status": "chrome",
-      "pagesAffected": 183
-    },
     {
       "id": "SIYA:TRACKING",
       "name": "Analytics tracking",
@@ -37,7 +30,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "chrome",
-      "pagesAffected": 131
+      "pagesAffected": 190
     },
     {
       "id": "SIYA:PROVIDER-ATTRIBUTION",
@@ -53,7 +46,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "approved",
       "status": "chrome",
-      "pagesAffected": 120
+      "pagesAffected": 179
     },
     {
       "id": "SIYA:CIRCLE-ANALYTICS",
@@ -69,7 +62,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "chrome",
-      "pagesAffected": 119
+      "pagesAffected": 178
     },
     {
       "id": "SIYA:COOKIE-NOTICE",
@@ -85,23 +78,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "chrome",
-      "pagesAffected": 117
-    },
-    {
-      "id": "SIYA:CONTEXT-CLOSING",
-      "name": "Answer context-aware closing (one primary CTA)",
-      "kind": "cta",
-      "entity": "per-topic",
-      "owner": {
-        "clinical": "n/a",
-        "editorial": "Content OS",
-        "engineering": "answer generator"
-      },
-      "version": "v1.0",
-      "approved": "2026-07-26",
-      "clinicalReview": "n/a",
-      "status": "production",
-      "pagesAffected": 59
+      "pagesAffected": 176
     },
     {
       "id": "SIYA:BLOG-CTA-ADHD",
@@ -117,7 +94,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "production",
-      "pagesAffected": 46
+      "pagesAffected": 45
     },
     {
       "id": "SIYA:HEADER-SCROLL",
@@ -149,7 +126,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "chrome",
-      "pagesAffected": 29
+      "pagesAffected": 28
     },
     {
       "id": "SIYA:BLOG-CTA-METABOLIC",
@@ -197,7 +174,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "production",
-      "pagesAffected": 10
+      "pagesAffected": 9
     },
     {
       "id": "SIYA:CA-CITY-CLUSTER",
@@ -213,7 +190,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "production",
-      "pagesAffected": 10
+      "pagesAffected": 9
     },
     {
       "id": "SIYA:PRICING-STRIP",
@@ -246,22 +223,6 @@
       "clinicalReview": "n/a",
       "status": "production",
       "pagesAffected": 3
-    },
-    {
-      "id": "SIYA:PRIMARY-CARE-FAQ",
-      "name": "Primary & urgent care FAQ + FAQPage schema",
-      "kind": "clinical",
-      "entity": "primary-care",
-      "owner": {
-        "clinical": "Dr. Swati Pandey",
-        "editorial": "Content OS",
-        "engineering": "primary-urgent-care page"
-      },
-      "version": "v1.0",
-      "approved": "2026-07-26",
-      "clinicalReview": "approved",
-      "status": "production",
-      "pagesAffected": 1
     },
     {
       "id": "SIYA:ANSWERS-ADHD-CARE-PATHWAYS",
@@ -392,6 +353,38 @@
       "pagesAffected": 0
     },
     {
+      "id": "SIYA:PRIMARY-CARE-FAQ",
+      "name": "Primary & urgent care FAQ + FAQPage schema",
+      "kind": "clinical",
+      "entity": "primary-care",
+      "owner": {
+        "clinical": "Dr. Swati Pandey",
+        "editorial": "Content OS",
+        "engineering": "primary-urgent-care page"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "approved",
+      "status": "production",
+      "pagesAffected": 0
+    },
+    {
+      "id": "SIYA:CONTEXT-CLOSING",
+      "name": "Answer context-aware closing (one primary CTA)",
+      "kind": "cta",
+      "entity": "per-topic",
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "Content OS",
+        "engineering": "answer generator"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "production",
+      "pagesAffected": 0
+    },
+    {
       "id": "SIYA:CA-CITY-ANSWER",
       "name": "California metro directory on answers",
       "kind": "geo",
@@ -405,6 +398,22 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "deprecated",
+      "pagesAffected": 0
+    },
+    {
+      "id": "SIYA:CONCIERGE",
+      "name": "Concierge widget",
+      "kind": "chrome",
+      "entity": null,
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "n/a",
+        "engineering": "site-chrome"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "chrome",
       "pagesAffected": 0
     }
   ]

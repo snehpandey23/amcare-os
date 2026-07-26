@@ -24,19 +24,18 @@ const CITIES = [
 const STATE_HUBS = [
   { href: '/blog/online-adhd-diagnosis-california', label: 'online ADHD diagnosis in California' },
   { href: '/blog/adhd-telehealth-california', label: 'ADHD telehealth in California' },
-  { href: '/blog/adult-adhd-treatment-california-2026', label: 'adult ADHD treatment in California' },
-  { href: '/blog/how-to-choose-adhd-provider-california', label: 'choosing an ADHD provider in California' },
   { href: '/blog/adhd-medication-options-california', label: 'ADHD medication options in California' },
+  { href: '/blog/how-to-choose-adhd-provider-california', label: 'choosing an ADHD provider in California' },
   { href: '/blog/adhd-medication-online-california', label: 'ADHD medication online in California' },
   { href: '/adult-adhd-screening-california', label: 'California ADHD screening' },
   { href: '/adhd-care', label: 'ADHD evaluation & care' },
 ];
 
-/** Statewide CA blogs that should carry the city cluster + geo paragraph */
+/** Statewide CA blogs that should carry the city cluster + geo paragraph.
+ *  EG-P0-01: adult-adhd-treatment-california-2026 retired (301 → /adhd-care). */
 const CA_STATE_BLOGS = [
   'blog/online-adhd-diagnosis-california.html',
   'blog/adhd-telehealth-california.html',
-  'blog/adult-adhd-treatment-california-2026.html',
   'blog/how-to-choose-adhd-provider-california.html',
   'blog/adhd-medication-options-california.html',
   'blog/adhd-medication-online-california.html',
@@ -58,10 +57,8 @@ function exists(rel) {
 }
 
 function softStrip(html, marker) {
-  const start = `<!-- SIYA:${marker} -->`;
-  const end = `<!-- /SIYA:${marker} -->`;
-  if (!html.includes(start)) return html;
-  return html.replace(new RegExp(`${start}[\\s\\S]*?${end}\\s*`), '');
+  const re = new RegExp(`<!--\s*SIYA:${marker}\s*-->[\s\S]*?<!--\s*/SIYA:${marker}\s*-->\s*`, 'g');
+  return html.replace(re, '');
 }
 
 function upsertMarkerBlock(html, marker, block) {
@@ -91,7 +88,7 @@ function cityClusterBlock({ heading = true } = {}) {
     : '';
   return `            <aside class="blog-internal-links ca-cluster-links" aria-label="California city ADHD treatment">
 ${h}              <p>Physician-led virtual ADHD care for adults across California metros: ${cityLinksHtml()}.</p>
-              <p>Statewide: <a href="/blog/online-adhd-diagnosis-california">online ADHD diagnosis in California</a> · <a href="/blog/adhd-telehealth-california">ADHD telehealth in California</a> · <a href="/blog/adult-adhd-treatment-california-2026">adult ADHD treatment in California</a> · <a href="/adhd-care">start an ADHD evaluation</a>.</p>
+              <p>Statewide: <a href="/blog/online-adhd-diagnosis-california">online ADHD diagnosis in California</a> · <a href="/blog/adhd-telehealth-california">ADHD telehealth in California</a> · <a href="/blog/adhd-medication-options-california">ADHD medication options in California</a> · <a href="/adhd-care">start an ADHD evaluation</a>.</p>
             </aside>`;
 }
 
@@ -108,7 +105,7 @@ function cityPageSiblingBlock(currentSlug) {
     .map((c) => `<a href="/blog/${c.slug}">${c.label}</a>`)
     .join(', ');
   return `            <aside class="blog-internal-links ca-cluster-links" aria-label="Related California ADHD resources">
-              <p>For statewide California context, read <a href="/blog/online-adhd-diagnosis-california">online ADHD diagnosis in California</a>, <a href="/blog/adhd-telehealth-california">ADHD telehealth in California</a>, and <a href="/blog/adult-adhd-treatment-california-2026">adult ADHD treatment options</a>. Nearby metro guides: ${others}.</p>
+              <p>For statewide California context, read <a href="/blog/online-adhd-diagnosis-california">online ADHD diagnosis in California</a>, <a href="/blog/adhd-telehealth-california">ADHD telehealth in California</a>, and <a href="/blog/adhd-medication-options-california">ADHD medication options in California</a>. Nearby metro guides: ${others}.</p>
               <p>Also: <a href="/blog/how-to-choose-adhd-provider-california">how to choose an ADHD provider in California</a> · <a href="/adult-adhd-screening-california">California ADHD screening</a> · <a href="/adhd-care">ADHD evaluation &amp; care</a> · <a href="/pricing">pricing</a>.</p>
             </aside>`;
 }
@@ -308,15 +305,8 @@ for (const city of CITIES) {
   }
 }
 
-// 7) Key answers that mention California
-const ANSWER_TARGETS = [
-  'answers/can-adhd-be-diagnosed-online.html',
-  'answers/is-online-adhd-diagnosis-legitimate.html',
-  'answers/screening-vs-adhd-evaluation.html',
-  'answers/how-long-adhd-evaluation.html',
-  'answers/what-included-199-adhd-evaluation.html',
-  'answers/telehealth-adhd-texas.html', // add CA contrast link only if file exists - skip texas-named
-];
+// 7) Educational Health Guides — strip metro directories (assembly / Clinical Context).
+// EG-P0 / Content Assembly: SIYA:CA-CITY-ANSWER is deprecated. Never re-inject.
 for (const rel of [
   'answers/can-adhd-be-diagnosed-online.html',
   'answers/is-online-adhd-diagnosis-legitimate.html',
@@ -329,17 +319,15 @@ for (const rel of [
 ]) {
   if (!exists(rel)) continue;
   let html = read(rel);
-  const marker = 'CA-CITY-ANSWER';
-  const block = `      <section class="section section-tinted" aria-label="California ADHD care">
-        <div class="container">
-          <p class="lead" style="margin:0;">In California, adults often start with <a href="/blog/online-adhd-diagnosis-california">online ADHD diagnosis in California</a> or metro guides for <a href="/blog/adhd-treatment-los-angeles-ca">Los Angeles</a>, <a href="/blog/adhd-treatment-san-diego-ca">San Diego</a>, <a href="/blog/adhd-treatment-san-francisco-ca">San Francisco</a>, <a href="/blog/adhd-treatment-san-jose-ca">San Jose</a>, <a href="/blog/adhd-treatment-sacramento-ca">Sacramento</a>, <a href="/blog/adhd-treatment-oakland-ca">Oakland</a>, and <a href="/blog/adhd-treatment-orange-county-ca">Orange County</a>—then book care via <a href="/adhd-care">ADHD evaluation</a>.</p>
-        </div>
-      </section>`;
-  html = softStrip(html, marker);
-  html = upsertMarkerBlock(html, marker, block);
-  write(rel, html);
-  console.log('OK answer', rel);
-  n += 1;
+  const before = html;
+  html = softStrip(html, 'CA-CITY-ANSWER');
+  if (html !== before) {
+    write(rel, html);
+    console.log('OK answer (stripped CA-CITY-ANSWER)', rel);
+    n += 1;
+  } else {
+    console.log('SKIP answer (clean)', rel);
+  }
 }
 
 console.log(`California city linking applied: ${n} files`);

@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
-Generated: 2026-07-21
-Total pages: 192
+Generated: 2026-07-26
+Total pages: 177
 
 ---
 
@@ -104,11 +104,6 @@ Total pages: 192
   Summary: Adult ADHD diagnosis in Austin, Texas—online. $149 evaluation, same-week telehealth, ADHD-CCSP providers. Book your virtual visit.
   Topics: adhd, texas
 
-- Online ADHD Diagnosis Florida Evaluation
-  URL: https://siya.health/adhd-diagnosis-florida
-  Summary: Adult ADHD diagnosis online in Florida. $149, 60–90 min evaluation, board-certified providers. Same-week telehealth. individualized clinical assessment. Book today.
-  Topics: adhd, florida
-
 - ADHD Diagnosis Houston TX | Online Evaluation
   URL: https://siya.health/adhd-diagnosis-houston
   Summary: Houston adult ADHD diagnosis online. $149 comprehensive evaluation, board-certified telehealth. Same-week appointments. individualized clinical assessment.
@@ -129,29 +124,9 @@ Total pages: 192
   Summary: Adult ADHD diagnosis online in Texas. $149 evaluation, ADHD-CCSP providers, same-week telehealth. Austin, Houston, Dallas-area & statewide. Book now.
   Topics: adhd, texas
 
-- ADHD Evaluation Cost Online | Flat-Rate Pricing
-  URL: https://siya.health/adhd-evaluation-cost
-  Summary: ADHD evaluation cost: $149 transparent flat fee for 60–90 min online visit. No insurance surprise bills. FSA/HSA. Texas, Pennsylvania, Florida.
-  Topics: adhd
-
 - Start screening
   URL: https://siya.health/adhd-screening
   Summary: Tell us what you need: free 2-minute ADHD screening (ASRS), medical weight loss, or telehealth. Guided next steps for Texas-area care.
-  Topics: adhd
-
-- ADHD Screening Complete
-  URL: https://siya.health/adhd-screening-results
-  Summary: Your ADHD screening is complete. Choose next steps: book a free Meet & Greet, start an ADHD evaluation, or ask a question via secure medical chat.
-  Topics: adhd
-
-- ADHD Treatment Online | Telehealth TX, PA, FL
-  URL: https://siya.health/adhd-treatment-online
-  Summary: Online ADHD treatment after diagnosis: medication management, follow-ups, telehealth in California, Texas, Pennsylvania & Florida. Start with $149 evaluation.
-  Topics: adhd, telehealth, texas, pennsylvania, florida
-
-- Adult ADHD Diagnosis Online
-  URL: https://siya.health/adult-adhd-diagnosis
-  Summary: Get an adult ADHD diagnosis online from board-certified providers. $149, 60–90 min, individualized clinical assessment. TX, PA, FL. Same-week telehealth appointments.
   Topics: adhd
 
 - Online ADHD Screening in California | Free 2-Minute Test
@@ -629,11 +604,6 @@ Total pages: 192
   Summary: Adult ADHD symptoms California: chronic patterns versus burnout mimics—attention drift, procrastination pits, rejection sensitivity arcs—and clinician evaluation norms.
   Topics: adhd, california
 
-- Adult ADHD Treatment in California: Options in 2026
-  URL: https://siya.health/blog/adult-adhd-treatment-california-2026
-  Summary: Adult ADHD treatment California (2026): therapy, meds, routines, coaching, telehealth—not quick fixes. Medically grounded overview for skeptical adults researching care.
-  Topics: adhd, california
-
 - Compounded vs Branded GLP-1 Medications (2026): Safety &amp; Standards
   URL: https://siya.health/blog/compounded-vs-branded-glp1-medications
   Summary: Compounded vs branded GLP-1 in 2026: manufacturing standards, regulatory context, risks of unapproved copies, and why clinician oversight matters.
@@ -777,10 +747,10 @@ Total pages: 192
   Summary: Snoring plus fatigue, weight gain, or resistant hypertension? Evidence-based guide to obstructive sleep apnea, insulin resistance, testosterone, ADHD overlap, and next steps.
   Topics: weight-loss, sleep
 
-- Telehealth Articles (2026) — Online ADHD Diagnosis &amp; Safe Prescribing
+- Telehealth Articles (2026) — Safe Online Prescribing &amp; Remote Care
   URL: https://siya.health/blog/telehealth
-  Summary: Telehealth education: legitimate online ADHD diagnosis, evaluation costs, remote prescribing standards, and what US adults should verify with licensed providers.
-  Topics: adhd, telehealth
+  Summary: Telehealth education: safe online prescribing, visit standards, sleep and men’s health guides, and what US adults should verify with licensed providers.
+  Topics: telehealth
 
 - Telehealth Prescriptions: How Online Treatment Works (2026)
   URL: https://siya.health/blog/telehealth-prescriptions-how-online-treatment-works
@@ -828,10 +798,6 @@ Total pages: 192
 - Siya Health — Tint Options A / B / C
   URL: https://siya.health/docs/tint-options-preview
   Summary: Learn more about Siya Health — Tint Options A / B / C with Siya Health telehealth.
-
-- Secure Intake
-  URL: https://siya.health/intake
-  Summary: Complete required policy acknowledgments before booking with Siya Health.
 
 - Labs &amp; Blood Tests | Transparent Direct-Pay Testing
   URL: https://siya.health/labs
@@ -917,11 +883,6 @@ Total pages: 192
   Summary: Physician-led men's health telehealth—testosterone evaluation, erectile dysfunction support, metabolic health, and longevity planning across CA, TX, PA, and FL.
   Topics: mens-health
 
-- Online ADHD Test &amp; Screening (Free)
-  URL: https://siya.health/online-adhd-test
-  Summary: Take a free online ADHD screening in 2 minutes. Not a diagnosis—see if a $149 clinical evaluation with a board-certified provider is right for you.
-  Topics: adhd
-
 - Online Prescription Services
   URL: https://siya.health/prescriptions
   Summary: Provider-reviewed prescriptions through Siya Health telehealth when clinically appropriate. Availability varies by state—contact us to learn more.
@@ -934,10 +895,6 @@ Total pages: 192
   URL: https://siya.health/primary-urgent-care
   Summary: Virtual primary and urgent care across California, Texas, Pennsylvania, and Florida. Annual wellness, chronic care, preventive labs review, and clear follow-up plans.
   Topics: telehealth
-
-- Privacy Policy Redirect
-  URL: https://siya.health/privacy-policy
-  Summary: This URL has moved. Read the current Siya Health Privacy Policy at /legal/privacy-policy.
 
 - Our Care Team
   URL: https://siya.health/providers
@@ -978,36 +935,10 @@ Total pages: 192
   Summary: Meet Wendy Delgado, PA-C at Siya Health. GLP-1 and medical weight loss telehealth support in California.
   Topics: weight-loss, telehealth, pennsylvania
 
-- Starting Your ADHD Evaluation
-  URL: https://siya.health/redirect/adhd-evaluation
-  Summary: Learn more about Starting Your ADHD Evaluation with Siya Health telehealth.
-  Topics: adhd
-
-- Booking Your Free Meet &amp; Greet (Legacy Path)
-  URL: https://siya.health/redirect/adhd-walkthrough
-  Summary: Learn more about Booking Your Free Meet & Greet (Legacy Path) with Siya Health telehealth.
-  Topics: adhd
-
-- Connecting to Secure Medical Chat
-  URL: https://siya.health/redirect/chat
-  Summary: Learn more about Connecting to Secure Medical Chat with Siya Health telehealth.
-
-- Booking Your Free Meet &amp; Greet
-  URL: https://siya.health/redirect/meet-greet
-  Summary: Learn more about Booking Your Free Meet & Greet with Siya Health telehealth.
-
-- Siya Circle | Free Health Education Newsletter
-  URL: https://siya.health/siya-circle
-  Summary: Join Siya Circle, a free health education newsletter from Siya Health with clinician-informed guides on focus, energy, weight, mood, hormones, and everyday health.
-
 - Virtual Medical Care | Siya Health Telehealth
   URL: https://siya.health/telehealth
   Summary: Fast, convenient telehealth from board-certified providers. Primary care, urgent care, prescriptions, labs. CA, TX, PA, FL. No waiting rooms.
   Topics: telehealth
-
-- Terms Redirect
-  URL: https://siya.health/terms
-  Summary: This URL has moved. Read the current Siya Health Terms of Use at /legal/terms-of-use.
 
 - Provider-Guided Medical Weight Loss
   URL: https://siya.health/weight-loss-metabolic-health

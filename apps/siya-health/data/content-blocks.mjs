@@ -312,13 +312,14 @@ export const CONTENT_BLOCKS = [
 
 /** Marker prefixes considered chrome even if not individually registered (labs/learn-more families). */
 export const CHROME_MARKER_PATTERNS = [
-  /^SIYA:LABS-(LINK|CHIPS)-/,
+  /^SIYA:LABS-(LINK|CHIPS|HUB-JUMP)-?/,
   /^SIYA:LEARN-MORE-/,
   /^SIYA:MEET-PHYSICIANS$/,
   /^SIYA:CARE-TEAM$/,
   /^SIYA:ABOUT-CARE-TEAM$/,
   /^SIYA:LEGAL-CONTENT$/,
   /^SIYA:BLOG-SEARCH/,
+  /^SIYA:GUIDE-SEARCH-JS$/,
   /^SIYA:LABS-TOPIC-HUB$/,
   /^SIYA:CA-CITY-(SIBLINGS|HUB-CARDS)$/,
   /^SIYA:ADHD-(FUNNEL-BANNER|ONLINE-TEST-CROSS-LINKS)$/,

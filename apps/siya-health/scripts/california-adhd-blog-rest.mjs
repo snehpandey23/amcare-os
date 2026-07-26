@@ -52,13 +52,16 @@ export const CALIFORNIA_POSTS_REST = [
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
               <li><a href="/blog/adhd-telehealth-california">ADHD telehealth in California</a></li>
               <li><a href="/blog/adhd-evaluation-cost-texas">ADHD evaluation cost in California</a></li>
-              <li><a href="/blog/adult-adhd-treatment-california-2026">Adult ADHD treatment paths</a></li>
+              <li><a href="/adhd-care">ADHD evaluation &amp; care</a></li>
               <li><a href="/providers/dr-sneh-pandey">Meet Medical Director Dr. Pandey</a></li>
             </ul></section>
 
             <h2>FAQ</h2>`,
   },
   {
+    // EG-P0-01 RETIRED — do not publish. Kept for history; publish-california-adhd-blog skips this slug.
+    // Destination: 301 /blog/adult-adhd-treatment-california-2026 → /adhd-care
+    retired: true,
     slug: 'adult-adhd-treatment-california-2026',
     title: 'Adult ADHD Treatment in California: Options in 2026 | Siya Health',
     metaDescription: 'Adult ADHD treatment California (2026): therapy, meds, routines, coaching, telehealth—not quick fixes. Medically grounded overview for skeptical adults researching care.',
@@ -391,7 +394,7 @@ export const CALIFORNIA_POSTS_REST = [
 
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
               <li><a href="/blog/online-adhd-diagnosis-california">Online ADHD diagnosis in California</a></li>
-              <li><a href="/blog/adult-adhd-treatment-california-2026">Adult ADHD treatment in California (2026)</a></li>
+              <li><a href="/adhd-care">ADHD evaluation &amp; care</a></li>
               <li><a href="/blog/how-to-choose-adhd-provider-california">Choosing an ADHD provider in California</a></li>
             </ul></section>
 

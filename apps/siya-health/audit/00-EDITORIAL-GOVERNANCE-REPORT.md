@@ -31,7 +31,7 @@ This is no longer a cohesion polish pass. The site has **systemic content-genera
 | Pages scored | 191 |
 | Site average | **92.4 / 100** |
 | Below threshold (&lt;85) — remediation backlog | **17** |
-| P0 pages | **1** |
+| P0 pages | **0** |
 | P1 pages | **16** |
 | P2 pages | **48** |
 | Monitor / healthy | **126** |
@@ -42,7 +42,7 @@ This is no longer a cohesion polish pass. The site has **systemic content-genera
 |-------|---------------------|----------|
 | Cross-topic ADHD “childhood onset” prep on non-ADHD guides | **Resolved in generators** | 0 non-ADHD pages still contain the bleed string |
 | GLP-1 emergency tree on unrelated pages | **Resolved in generators** | 0 non-GLP-1 pages still contain the emergency node |
-| Garbled indexed ADHD article | **Open P0** | `/blog/adult-adhd-treatment-california-2026` still contains incoherent prose |
+| Garbled indexed ADHD article | **Closed** | noindex stub + 301 → `/adhd-care`; unlinked; publisher skips slug |
 
 ### Assembly gate (mechanical)
 
@@ -131,7 +131,7 @@ Any “yes” to confusion/irrelevance → **do not render**.
 
 | ID | Issue | Type | Effort | Impact | Disposition |
 |----|-------|------|--------|--------|-------------|
-| EG-P0-01 | Garbled page `/blog/adult-adhd-treatment-california-2026` | Page + index | S (0.5–1d) | Trust + SEO | **noindex immediately** or unpublish; rewrite or 301 to California cornerstone / `/adhd-care` |
+| EG-P0-01 | Garbled page `/blog/adult-adhd-treatment-california-2026` | Page + index | Done | Trust + SEO | **Closed:** noindex stub + 301 → `/adhd-care`; removed from sitemap/indexes/internal links; publisher skips slug |
 | EG-P0-02 | Prevent regression of cross-topic clinical appenders | Generator | Done / guard | Trust | Keep `validate-content-assembly` + clinical relevance checks in CI |
 | EG-P0-03 | Prevent GLP-1 emergency branch outside GLP pages | Generator | Done / guard | Safety/trust | `isGlp1Page()` gate must remain |
 
@@ -241,7 +241,7 @@ All other public pages score ≥85 under the weighted rubric (Monitor/P2).
 
 ## 11. Owner checklist
 
-- [ ] EG-P0-01: noindex or redirect dynled California 2026 article
+- [x] EG-P0-01: noindex + 301 → `/adhd-care`; unlinked; publisher skip
 - [ ] Add `assembly:validate` to deploy/CI preflight
 - [ ] Approve geo consolidation map (state canon + redirect list)
 - [ ] Approve single primary CTA label + URL

@@ -78,12 +78,14 @@ function topicTags(rel, title) {
 }
 
 function buildPageIndex(htmlFiles) {
-  return htmlFiles.map((rel) => {
+  return htmlFiles.flatMap((rel) => {
     const html = fs.readFileSync(path.join(SITE_ROOT, rel), 'utf8');
+    // Skip retired / noindex stubs (EG-P0-01 and similar)
+    if (/name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) return [];
     const title = extractTitle(html);
     const description = extractDescription(html);
     const urlPath = fileToUrlPath(rel);
-    return {
+    return [{
       path: urlPath,
       url: `${BASE}${urlPath === '/' ? '/' : urlPath}`,
       title,
@@ -91,7 +93,7 @@ function buildPageIndex(htmlFiles) {
       type: classifyPage(rel, title, description),
       topics: topicTags(rel, title),
       file: rel,
-    };
+    }];
   });
 }
 
@@ -119,7 +121,7 @@ function writeLlmsTxt(pages) {
     '## California ADHD (priority state — cite city + statewide hubs)',
     `- Online ADHD diagnosis California: ${BASE}/blog/online-adhd-diagnosis-california`,
     `- ADHD telehealth California: ${BASE}/blog/adhd-telehealth-california`,
-    `- Adult ADHD treatment California: ${BASE}/blog/adult-adhd-treatment-california-2026`,
+    `- Adult ADHD care California: ${BASE}/adhd-care`,
     `- California screening: ${BASE}/adult-adhd-screening-california`,
     `- Los Angeles ADHD treatment: ${BASE}/blog/adhd-treatment-los-angeles-ca`,
     `- San Diego ADHD treatment: ${BASE}/blog/adhd-treatment-san-diego-ca`,

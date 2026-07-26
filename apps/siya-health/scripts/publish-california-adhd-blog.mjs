@@ -212,10 +212,17 @@ ${post.bodyHtml}${appendFaqDetails(post)}
 `;
 }
 
-const ALL = [...CALIFORNIA_POSTS, ...CALIFORNIA_POSTS_REST];
+const RETIRED_SLUGS = new Set([
+  // EG-P0-01: garbled prose — 301 → /adhd-care; do not regenerate
+  'adult-adhd-treatment-california-2026',
+]);
+
+const ALL = [...CALIFORNIA_POSTS, ...CALIFORNIA_POSTS_REST].filter(
+  (p) => !p.retired && !RETIRED_SLUGS.has(p.slug),
+);
 
 for (const post of ALL) {
   fs.writeFileSync(path.join(BLOG_DIR, `${post.slug}.html`), buildPage(post), 'utf8');
   console.log('Wrote blog/' + post.slug + '.html');
 }
-console.log('Total:', ALL.length);
+console.log('Total:', ALL.length, '| retired skipped:', [...RETIRED_SLUGS].join(', '));

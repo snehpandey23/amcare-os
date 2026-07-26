@@ -1,0 +1,160 @@
+{
+  "date": "2026-07-26",
+  "pages": 191,
+  "metrics": {
+    "duplicateParagraphGroups": 131,
+    "duplicateLimit": 5,
+    "irrelevantGeographyPages": 13,
+    "sectionsOver8Links": 49,
+    "pagesWithMultiplePrimaryCtas": 92,
+    "educationalPagesMissingClosing": 59,
+    "editorialFingerprintAvg": 7.41,
+    "editorialFingerprintMin": 2,
+    "fingerprintFloor": 9
+  },
+  "topDuplicates": [
+    {
+      "pages": 28,
+      "sample": "reality validated screeners help, but diagnosis requires clinician history and rule-outs.",
+      "examples": [
+        "answers/adderall-vs-vyvanse-adults.html",
+        "answers/adhd-and-weight-loss-connection.html",
+        "answers/adhd-in-women.html",
+        "answers/adhd-medication-every-day.html"
+      ]
+    },
+    {
+      "pages": 28,
+      "sample": "reality skills, sleep, and therapy matter; meds are one tool when appropriate.",
+      "examples": [
+        "answers/adderall-vs-vyvanse-adults.html",
+        "answers/adhd-and-weight-loss-connection.html",
+        "answers/adhd-in-women.html",
+        "answers/adhd-medication-every-day.html"
+      ]
+    },
+    {
+      "pages": 22,
+      "sample": "do symptoms impair work, relationships, or daily tasks most weeks?",
+      "examples": [
+        "answers/adderall-vs-vyvanse-adults.html",
+        "answers/adhd-in-women.html",
+        "answers/adhd-medication-every-day.html",
+        "answers/adhd-medication-side-effects.html"
+      ]
+    },
+    {
+      "pages": 22,
+      "sample": "yes → consider structured adhd evaluation—not online quizzes alone.",
+      "examples": [
+        "answers/adderall-vs-vyvanse-adults.html",
+        "answers/adhd-in-women.html",
+        "answers/adhd-medication-every-day.html",
+        "answers/adhd-medication-side-effects.html"
+      ]
+    },
+    {
+      "pages": 22,
+      "sample": "urgent safety concerns (suicidal thoughts, chest pain, severe confusion)?",
+      "examples": [
+        "answers/adderall-vs-vyvanse-adults.html",
+        "answers/adhd-in-women.html",
+        "answers/adhd-medication-every-day.html",
+        "answers/adhd-medication-side-effects.html"
+      ]
+    },
+    {
+      "pages": 19,
+      "sample": "document your symptom timeline (childhood vs adult onset, settings affected, best and worst weeks), ",
+      "examples": [
+        "answers/adhd-vs-anxiety.html",
+        "answers/adhd-vs-burnout.html",
+        "answers/can-adhd-be-diagnosed-online.html",
+        "answers/can-adhd-cause-anxiety.html"
+      ]
+    },
+    {
+      "pages": 19,
+      "sample": "when results are “normal” but you remain impaired, ask what was not measured (sleep testing, ferriti",
+      "examples": [
+        "answers/adhd-vs-anxiety.html",
+        "answers/adhd-vs-burnout.html",
+        "answers/can-adhd-be-diagnosed-online.html",
+        "answers/can-adhd-cause-anxiety.html"
+      ]
+    },
+    {
+      "pages": 17,
+      "sample": "persistent fatigue, cravings, or weight change despite “normal” screening labs?",
+      "examples": [
+        "answers/adhd-and-weight-loss-connection.html",
+        "answers/afternoon-energy-crash-after-lunch.html",
+        "answers/brain-fog-after-eating.html",
+        "answers/compounded-vs-branded-glp-1.html"
+      ]
+    },
+    {
+      "pages": 17,
+      "sample": "yes → discuss metabolic labs, sleep history, and glp-1 eligibility with a clinician.",
+      "examples": [
+        "answers/adhd-and-weight-loss-connection.html",
+        "answers/afternoon-energy-crash-after-lunch.html",
+        "answers/brain-fog-after-eating.html",
+        "answers/compounded-vs-branded-glp-1.html"
+      ]
+    },
+    {
+      "pages": 17,
+      "sample": "no → continue lifestyle structure; recheck if symptoms escalate.",
+      "examples": [
+        "answers/adhd-and-weight-loss-connection.html",
+        "answers/afternoon-energy-crash-after-lunch.html",
+        "answers/brain-fog-after-eating.html",
+        "answers/compounded-vs-branded-glp-1.html"
+      ]
+    }
+  ],
+  "failures": [
+    "OVERLINK(17) about.html",
+    "PRIMARY(3) about.html",
+    "PRIMARY(3) adhd-care.html",
+    "FINGERPRINT(8) adhd-care.html",
+    "PRIMARY(3) adhd-diagnosis-austin.html",
+    "PRIMARY(3) adhd-diagnosis-houston.html",
+    "PRIMARY(3) adhd-diagnosis-pennsylvania.html",
+    "PRIMARY(3) adhd-diagnosis-philadelphia.html",
+    "PRIMARY(3) adhd-diagnosis-texas.html",
+    "OVERLINK(11) adult-adhd-screening-california.html",
+    "PRIMARY(11) adult-adhd-screening-california.html",
+    "NO-CLOSING answers/adderall-vs-vyvanse-adults.html",
+    "NO-CLOSING answers/adhd-and-weight-loss-connection.html",
+    "FINGERPRINT(6) answers/adhd-and-weight-loss-connection.html",
+    "GEO answers/adhd-in-women.html",
+    "OVERLINK(9) answers/adhd-in-women.html",
+    "NO-CLOSING answers/adhd-in-women.html",
+    "FINGERPRINT(6) answers/adhd-in-women.html",
+    "NO-CLOSING answers/adhd-medication-every-day.html",
+    "NO-CLOSING answers/adhd-medication-side-effects.html",
+    "NO-CLOSING answers/adhd-vs-anxiety.html",
+    "NO-CLOSING answers/adhd-vs-burnout.html",
+    "NO-CLOSING answers/afternoon-energy-crash-after-lunch.html",
+    "FINGERPRINT(6) answers/afternoon-energy-crash-after-lunch.html",
+    "NO-CLOSING answers/asrs-adhd-screening-explained.html",
+    "NO-CLOSING answers/brain-fog-after-eating.html",
+    "FINGERPRINT(6) answers/brain-fog-after-eating.html",
+    "GEO answers/can-adhd-be-diagnosed-online.html",
+    "OVERLINK(9) answers/can-adhd-be-diagnosed-online.html",
+    "NO-CLOSING answers/can-adhd-be-diagnosed-online.html",
+    "FINGERPRINT(6) answers/can-adhd-be-diagnosed-online.html",
+    "NO-CLOSING answers/can-adhd-cause-anxiety.html",
+    "NO-CLOSING answers/can-sleep-apnea-cause-fatigue.html",
+    "NO-CLOSING answers/can-you-get-adhd-medication-online.html",
+    "NO-CLOSING answers/compounded-vs-branded-glp-1.html",
+    "NO-CLOSING answers/ed-telehealth-legitimate.html",
+    "NO-CLOSING answers/executive-dysfunction-adhd.html",
+    "NO-CLOSING answers/food-noise-returned-on-glp-1.html",
+    "NO-CLOSING answers/fsa-hsa-adhd-evaluation.html",
+    "NO-CLOSING answers/glp-1-nausea-management.html"
+  ],
+  "pass": false
+}
