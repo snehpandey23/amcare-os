@@ -287,6 +287,20 @@ function main() {
       })),
   };
 
+  const guideIndex = {
+    generated: new Date().toISOString(),
+    hubUrl: `${BASE}/answers`,
+    count: pages.filter((p) => p.type === 'answer').length,
+    guides: pages
+      .filter((p) => p.type === 'answer')
+      .map((p) => ({
+        title: p.title,
+        url: p.url,
+        description: p.description,
+        topics: p.topics,
+      })),
+  };
+
   const labsKeywordIndex = {
     generated: new Date().toISOString(),
     hubUrl: `${BASE}/labs`,
@@ -308,10 +322,11 @@ function main() {
   fs.writeFileSync(path.join(SITE_ROOT, 'service-index.json'), JSON.stringify(serviceIndex, null, 2) + '\n', 'utf8');
   fs.writeFileSync(path.join(SITE_ROOT, 'condition-index.json'), JSON.stringify(conditionIndex, null, 2) + '\n', 'utf8');
   fs.writeFileSync(path.join(SITE_ROOT, 'article-index.json'), JSON.stringify(articleIndex, null, 2) + '\n', 'utf8');
+  fs.writeFileSync(path.join(SITE_ROOT, 'guide-index.json'), JSON.stringify(guideIndex, null, 2) + '\n', 'utf8');
   fs.writeFileSync(path.join(SITE_ROOT, 'labs-keyword-index.json'), JSON.stringify(labsKeywordIndex, null, 2) + '\n', 'utf8');
 
-  console.log('Wrote llms.txt, llms-full.txt, provider/service/condition/article/labs-keyword indexes');
-  console.log('Pages indexed:', pages.length, '| Articles:', articleIndex.count);
+  console.log('Wrote llms.txt, llms-full.txt, provider/service/condition/article/guide/labs-keyword indexes');
+  console.log('Pages indexed:', pages.length, '| Articles:', articleIndex.count, '| Guides:', guideIndex.count);
 }
 
 main();
