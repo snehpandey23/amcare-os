@@ -58,6 +58,18 @@ function compileBody(body, meta) {
     const ai = section(body, 'AI Context');
     return [ai, decision, reason].filter(Boolean).join(' ').replace(/\n+/g, ' ').trim();
   }
+  if (meta.kind === 'principle') {
+    const principle = section(body, 'Principle');
+    const practice = section(body, 'In practice');
+    const ai = section(body, 'AI Context');
+    return [ai, principle, practice].filter(Boolean).join(' ').replace(/\n+/g, ' ').trim();
+  }
+  if (meta.kind === 'graveyard') {
+    const stopped = section(body, 'Why we stopped');
+    const ai = section(body, 'AI Context');
+    const was = section(body, 'What it was');
+    return [ai, was, stopped].filter(Boolean).join(' ').replace(/\n+/g, ' ').trim();
+  }
   const ai = section(body, 'AI Context');
   const sop = section(body, 'SOP');
   const overview = section(body, 'Overview');
@@ -95,11 +107,12 @@ for (const file of files) {
   }
   const { meta, body, keywords, links } = parsed;
   if (meta.status !== 'live') continue;
+  if (meta.bot_retrieve === 'false' || meta.kind === 'idea') continue;
   if (!meta.id || !meta.title) {
     console.warn('Skip (missing id/title):', file);
     continue;
   }
-  const module = meta.module || (meta.kind === 'decision' ? 'decisions' : null);
+  const module = meta.module || (meta.kind === 'decision' || meta.kind === 'principle' || meta.kind === 'graveyard' ? 'decisions' : null);
   if (!module) {
     console.warn('Skip (missing module):', file);
     continue;

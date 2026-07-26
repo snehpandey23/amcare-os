@@ -27,6 +27,28 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
     ]
   },
   {
+    "id": "patient-pricing-public-canonical",
+    "category": "finance",
+    "title": "Patient pricing — public website (canonical for staff chat)",
+    "keywords": [
+      "pricing",
+      "$149",
+      "$79",
+      "evaluation",
+      "follow-up",
+      "membership",
+      "discovery",
+      "adhd"
+    ],
+    "body": "For pricing questions: cite **$149 initial**, **$79 / $149 monthly** follow-up tiers from the public site; mention Meet & Greet for entry; flag that internal legacy funnels differ and require founder confirmation; never promise refunds or discounts not in written policy.",
+    "links": [
+      {
+        "label": "- label: Public pricing page",
+        "href": "https://siya.health/pricing"
+      }
+    ]
+  },
+  {
     "id": "hipaa-breach",
     "category": "legal_compliance",
     "title": "Suspected breach or privacy incident",
@@ -49,6 +71,22 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
     "escalate": "Privacy Officer immediately"
   },
   {
+    "id": "company-memory-workdrive-index",
+    "category": "ai_strategy",
+    "title": "Company Memory — WorkDrive SiyaOS vs git KB",
+    "keywords": [
+      "workdrive",
+      "company memory",
+      "siyaos",
+      "knowledge base",
+      "draft",
+      "ingest",
+      "legacy"
+    ],
+    "body": "When asked about ingested legacy docs, MA workflows, Spruce scripts, or CMO strategy: state that only **live** git KB is in retrieval; WorkDrive holds drafts; never quote conflicting prices or 24/7 claims; use the public pricing topic for patient-facing fees; escalate operational contradictions to leadership.",
+    "escalate": "CEO or document owner"
+  },
+  {
     "id": "internal-assistant-guardrails",
     "category": "ai_strategy",
     "title": "Internal assistant (Siya) — guardrails",
@@ -62,6 +100,25 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "retrieval"
     ],
     "body": "You are a workforce helper for all functions (ops, marketing, HR, eng, clinical coordination) — not a clinician. Prefer SOP and AI Context sections. Always show escalation contacts when relevant."
+  },
+  {
+    "id": "medical-compliance-marketing",
+    "category": "marketing_os",
+    "title": "Medical compliance in marketing (SOP)",
+    "keywords": [
+      "marketing",
+      "compliance",
+      "FDA",
+      "FTC",
+      "DEA",
+      "testimonials",
+      "claims",
+      "ads",
+      "medical director",
+      "LegitScript"
+    ],
+    "body": "For staff questions about marketing medical claims, ads, testimonials, before/after, FDA/FTC risk, or who must approve healthcare copy: follow this SOP. Route clinical accuracy to Medical Director. Do not invent clinical claims. Do not authorize advertising language in chat — describe the review path and escalate. Point to the WorkDrive SOP file for the full document.",
+    "escalate": "Medical Director · Legal Counsel for high-risk"
   },
   {
     "id": "billing-late-cancel",
@@ -91,6 +148,22 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "daily task"
     ],
     "body": "Describe the Zoho → appointment → EHR verification loop. Do not access live patient accounts in chat. Escalate payment disputes to billing lead."
+  },
+  {
+    "id": "legacy-pricing-funnel-unresolved",
+    "category": "operations",
+    "title": "Unresolved legacy pricing & funnel conflicts",
+    "keywords": [
+      "founder resolve",
+      "pricing conflict",
+      "discovery",
+      "bronze",
+      "no-show",
+      "klarity",
+      "spruce"
+    ],
+    "body": "When users cite pasted SOWs, ads plans, or WorkDrive drafts that conflict with live KB: acknowledge the conflict, point to this topic, give only **live** + **public pricing** facts, and offer escalation — never merge draft numbers into a single answer.",
+    "escalate": "CEO"
   },
   {
     "id": "third-party-caller",
@@ -165,6 +238,23 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
     "body": "Summarize entity split and voice rules. For exact pricing/states, defer to site standards — do not guess. Internal staff asking for ad copy should also read Marketing OS content QA topic."
   },
   {
+    "id": "adhd-wellness-platform-vision",
+    "category": "executive_vision",
+    "title": "Siya Health vision — integrated ADHD wellness ecosystem (summary)",
+    "keywords": [
+      "adhd",
+      "ecosystem",
+      "wellness",
+      "community",
+      "vision",
+      "creyos",
+      "siya circle",
+      "telehealth"
+    ],
+    "body": "Explain vision at a high level; route product launch dates, cohort pricing ($80/mo group), neuro-spiritual branding, and ad funnel details to **CMO**; route clinical eligibility and meds to **providers**; use public pricing topic for fees.",
+    "escalate": "CMO or Medical Director"
+  },
+  {
     "id": "content-qa-checklist",
     "category": "marketing_os",
     "title": "Pre-publish content QA (10 checks)",
@@ -215,5 +305,26 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "hipaa"
     ],
     "body": "Describe AmCare OS at architecture level only — no credentials, no internal URLs with secrets. Point developers to README and audit package. Future CAPR.AI inherits patterns, not Siya-only hacks."
+  },
+  {
+    "id": "legacy-website-social-archive",
+    "category": "marketing_os",
+    "title": "Legacy Website / Social Media archive (background)",
+    "keywords": [
+      "marketing",
+      "website",
+      "social media",
+      "archive",
+      "background",
+      "blogs",
+      "google ads",
+      "banners",
+      "brand kit",
+      "2026 plan",
+      "wix",
+      "workdrive"
+    ],
+    "body": "When Marketing staff ask about past website, social, ads, blogs, banners, Google Ads, or “what we used to say,” point them to the WorkDrive folder **Siya Knowledge Editorial → Website / Social Media** as background. Prefer live Brand System and content tracker for publishable work. Do not reuse historical insurance-bashing or hyper-urgency taglines as current website copy. For medical advertising rules, use the medical compliance marketing topic. Escalate ambiguous brand or clinical claims to Marketing Lead / Medical Director.",
+    "escalate": "Marketing Lead"
   }
 ];

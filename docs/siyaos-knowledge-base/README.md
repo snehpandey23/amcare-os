@@ -1,42 +1,47 @@
-# SiyaOS Knowledge Base v1.0
+# SiyaOS Knowledge Base v1.0 — Company Memory
 
-**Company memory** behind **[Siya Assist](../../apps/hipaa-training/)** — the internal **AI help desk** (one chat, routing, escalation). Not an ERP and not the employee handbook UI.
+**Company memory** behind **[Siya Assistant](../../apps/hipaa-training/)** — internal AI help desk (one chat, routing, escalation).
 
 - **Product definition:** [`PRODUCT.md`](./PRODUCT.md)
 - **Architecture (patient vs internal):** [`ARCHITECTURE.md`](./ARCHITECTURE.md)
+- **Team authoring (WorkDrive):** `Common Folder/SiyaOS/` — Company Memory v1 layout (`_shared/`, `operations/`, `finance/`, `leadership/principles|decisions|ideas|graveyard/`)
 
 | Layer | Location | Audience |
 |-------|----------|----------|
-| **Patient / public knowledge** | `apps/siya-health/` (blocks, entity graph, SIYA-KNOWLEDGE-GOVERNANCE) | Website, Health Guides, Siya Guide |
+| **Patient / public knowledge** | `apps/siya-health/` | Website, Siya Guide |
 | **Company memory (this KB)** | `docs/siyaos-knowledge-base/` | Staff, leaders, internal AI |
-| **Live assistant retrieval** | Built from `**/topics/*.md` → `apps/hipaa-training` workspace KB | [Siya Assistant](https://siya-workforce-assistant.vercel.app) |
+| **WorkDrive drafts** | `Common Folder/SiyaOS/` | Authors before git `live` |
+| **Live assistant retrieval** | `**/topics/*.md` + `decisions/` → `kb:build` | [Siya Assistant](https://hipaa-training-eight.vercel.app) |
 
-## Twenty modules
+## Memory types (leadership)
 
-See [`manifest.json`](./manifest.json) for IDs, owners, and status. Each module folder has a `README.md` (charter) and `topics/` (retrieval-ready articles).
+| kind | Folder (WorkDrive) | Bot |
+|------|-------------------|-----|
+| principle | `leadership/principles/` | Stable guardrails |
+| decision | `leadership/decisions/` | “Why did we…?” |
+| graveyard | `leadership/graveyard/` | Why we stopped |
+| idea | `leadership/ideas/` | **Never** compile (`bot_retrieve: false`) |
+| topic | department folders | SOPs / policies |
 
 ## Topic template
 
-Every article uses the sections in [`_template-topic.md`](./_template-topic.md):
+[`_template-topic.md`](./_template-topic.md) — when promoting from WorkDrive, map `review_date` → `reviewDate`, `tags` → `keywords`, add `id` and `module`.
 
-Overview · Why · SOP · FAQ · Troubleshooting · **AI Context** · Related documents · Owner · Revision history
-
-Only **`status: live`** topics are compiled into the assistant. Use `draft` while writing; `review` before marking live.
+Only **`status: live`** topics compile. **`kind: idea`** and **`bot_retrieve: false`** are excluded from the bot index.
 
 ## Build the assistant index
-
-From repo root:
 
 ```bash
 npm run kb:build -w @amcare/hipaa-training
 npm run build -w @amcare/hipaa-training
 ```
 
-## Product roadmap (v1 → v1.x)
+See [`manifest.json`](./manifest.json) for module owners.
 
-1. **v1.0 (now)** — Module scaffold, manifest, seed SOPs from existing repo docs, deterministic retrieval.
-2. **v1.1** — Owners + revision history in CI; stale-topic report.
-3. **v1.2** — LLM layer with retrieval-only answers (no general ChatGPT).
-4. **v2.0** — Search UI inside assistant; role-based profiles (MA, marketing, eng).
+## Audit-driven roadmap
 
-**Target scale:** 400–800 pages when mature — grow one module at a time like a product, not a single dump.
+Company Memory grows in **audit → fill gaps → re-audit** loops. Do not score the bot on fluency — score the organization.
+
+- Program: [`AUDIT-PROGRAM.md`](./AUDIT-PROGRAM.md)  
+- Personas: [`audits/`](./audits/) (V1–V5: new hire, ops, CEO, red team, success simulation)  
+- Scores: [`audits/score-log.md`](./audits/score-log.md)

@@ -1,4 +1,7 @@
 ---
+# WorkDrive Company Memory v1 — map fields when copying here:
+# title, department, owner, status, review_date → reviewDate, last_updated, tags → keywords,
+# bot_route, supersedes, kind (topic|decision|principle|graveyard), bot_retrieve
 id: example-topic-id
 module: 11-operations
 title: Human-readable title
@@ -7,6 +10,8 @@ owner: Name · Role
 confidence: official
 reviewDate: 2026-09-01
 supersedes: none
+kind: topic
+bot_retrieve: true
 keywords:
   - keyword one
   - keyword two
@@ -20,7 +25,7 @@ revision:
     author: Name
     note: Initial draft
 sources:
-  - path/to/repo/doc.md
+  - Common Folder/SiyaOS/... or git path
 ---
 
 ## Overview
@@ -53,7 +58,7 @@ Short paragraph the internal assistant should prefer when answering. No PHI. No 
 ## Related documents
 
 - `docs/...`
-- WorkDrive / Notion links (internal)
+- WorkDrive `_shared/` links (do not duplicate assets)
 
 ## Owner
 

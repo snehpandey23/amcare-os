@@ -92,3 +92,13 @@ Accounts · HR · Marketing · Clinical Operations · Compliance · Technology �
 ## MVP status
 
 See root [`README.md`](./README.md) and [`ARCHITECTURE.md`](./ARCHITECTURE.md).
+
+---
+
+## Audit loop (product manager = audit)
+
+```text
+Run audit persona → triage into People / SOP / Canonical / Decision → author live topics → re-audit
+```
+
+Track **knowledge architecture** vs **knowledge content** separately. CI goals: >90% fully answered, **0** unsafe (V4). Product KPI: **context switches per task** (V5). Five buckets include **mental models** (`leadership/principles/`). Full program: [`AUDIT-PROGRAM.md`](./AUDIT-PROGRAM.md).
