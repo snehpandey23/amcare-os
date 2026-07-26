@@ -67,7 +67,7 @@
     },
     {
       "source": "/blog/modafinil-for-focus-and-fatigue-is-it-safe",
-      "destination": "/adhd-care",
+      "destination": "/fatigue",
       "permanent": true
     },
     {
@@ -333,6 +333,11 @@
     {
       "source": "/adhd-diagnosis-pennsylvania",
       "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/blog/why-am-i-always-tired-causes-when-to-see-doctor",
+      "destination": "/fatigue",
       "permanent": true
     },
     {

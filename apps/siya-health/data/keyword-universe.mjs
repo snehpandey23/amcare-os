@@ -41,7 +41,7 @@ export const CORNERSTONE_ARTICLES = [
   {
     slug: 'why-am-i-always-tired-causes-when-to-see-doctor',
     title: 'Why Am I Always Tired?',
-    path: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+    path: '/fatigue',
     primary: 'why am I always tired',
     secondary: [
       'tired after sleeping 8 hours',
@@ -75,9 +75,9 @@ export const CORNERSTONE_ARTICLES = [
 
 /** Keywords mapped to destinations */
 export const KEYWORD_DESTINATIONS = [
-  { keyword: 'why am I tired all the time', destination: 'blog', path: '/blog/why-am-i-always-tired-causes-when-to-see-doctor', status: 'covered' },
+  { keyword: 'why am I tired all the time', destination: 'blog', path: '/fatigue', status: 'covered' },
   { keyword: 'why am I tired even after sleeping', destination: 'answer', path: '/answers/why-am-i-tired-even-after-sleeping', status: 'covered' },
-  { keyword: 'insulin resistance and fatigue', destination: 'blog', path: '/blog/insulin-resistance-and-weight-loss-clinician-overview', status: 'partial', also: '/blog/why-am-i-always-tired-causes-when-to-see-doctor' },
+  { keyword: 'insulin resistance and fatigue', destination: 'blog', path: '/blog/insulin-resistance-and-weight-loss-clinician-overview', status: 'partial', also: '/fatigue' },
   { keyword: 'what is insulin resistance', destination: 'answer', path: '/answers/what-is-insulin-resistance', status: 'covered' },
   { keyword: 'normal A1C insulin resistance', destination: 'answer', path: '/answers/normal-a1c-insulin-resistance', status: 'covered' },
   { keyword: 'food noise GLP-1', destination: 'blog', path: '/blog/food-noise-and-glp-1-what-it-means-and-what-helps', status: 'covered' },
@@ -99,12 +99,12 @@ export const KEYWORD_DESTINATIONS = [
   { keyword: 'mens health testosterone telehealth', destination: 'service', path: '/mens-health-longevity', status: 'covered' },
   { keyword: 'brain fog after eating', destination: 'blog', path: '/blog/insulin-resistance-and-weight-loss-clinician-overview', status: 'partial' },
   { keyword: 'tirzepatide vs semaglutide', destination: 'blog', path: '/blog/tirzepatide-vs-semaglutide-which-is-better', status: 'covered' },
-  { keyword: 'adrenal fatigue myth', destination: 'blog', path: '/blog/why-am-i-always-tired-causes-when-to-see-doctor', status: 'partial' },
+  { keyword: 'adrenal fatigue myth', destination: 'blog', path: '/fatigue', status: 'partial' },
   { keyword: 'testosterone and ADHD overlap', destination: 'answer', path: '/answers/testosterone-and-adhd-overlap', status: 'covered' },
   { keyword: 'insulin resistance without diabetes', destination: 'answer', path: '/answers/insulin-resistance-without-diabetes', status: 'covered' },
   { keyword: 'compounded semaglutide safety', destination: 'blog', path: '/blog/food-noise-and-glp-1-what-it-means-and-what-helps', status: 'partial' },
   { keyword: 'Mounjaro food noise', destination: 'blog', path: '/blog/food-noise-and-glp-1-what-it-means-and-what-helps', status: 'partial' },
-  { keyword: 'when to see doctor fatigue', destination: 'blog', path: '/blog/why-am-i-always-tired-causes-when-to-see-doctor', status: 'covered' },
+  { keyword: 'when to see doctor fatigue', destination: 'blog', path: '/fatigue', status: 'covered' },
 ];
 
 export const ROADMAP_90_DAY = [

@@ -17,7 +17,7 @@ const MEET_GREET = BOOKING_LINK;
 const DEPLOY_BLOGS = [
   '/blog/food-noise-and-glp-1-what-it-means-and-what-helps',
   '/blog/insulin-resistance-and-weight-loss-clinician-overview',
-  '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+  '/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign',
 ];
 
 const DEPLOY_ANSWERS = [
@@ -30,11 +30,7 @@ const DEPLOY_ANSWERS = [
 
 const CROSS_LINKS = [
   ['food-noise-and-glp-1-what-it-means-and-what-helps.html', 'insulin-resistance-and-weight-loss-clinician-overview'],
-  ['food-noise-and-glp-1-what-it-means-and-what-helps.html', 'why-am-i-always-tired-causes-when-to-see-doctor'],
   ['insulin-resistance-and-weight-loss-clinician-overview.html', 'food-noise-and-glp-1-what-it-means-and-what-helps'],
-  ['insulin-resistance-and-weight-loss-clinician-overview.html', 'why-am-i-always-tired-causes-when-to-see-doctor'],
-  ['why-am-i-always-tired-causes-when-to-see-doctor.html', 'food-noise-and-glp-1-what-it-means-and-what-helps'],
-  ['why-am-i-always-tired-causes-when-to-see-doctor.html', 'insulin-resistance-and-weight-loss-clinician-overview'],
 ];
 
 function walkHtml(dir, baseRel = '') {

@@ -1,12 +1,21 @@
 # Fatigue Pillar F1 — First article under Governance v1.0
 
 ```text
-Status:            Brief (ready to generate)
+Status:            SHIPPED — /fatigue (Canonical Entity Page, symptom type)
 Date:              2026-07-26
 Governance:        Siya Knowledge Governance Framework v1.0
-Blueprint:         docs/CORNERSTONE-REFERENCE-BLUEPRINT.md
+Blueprint:         docs/CANONICAL-ENTITY-PAGE-BLUEPRINT.md
+Generator:         scripts/generate-fatigue-entity-page.mjs (npm run entity:fatigue)
+Predecessor:       /blog/why-am-i-always-tired-causes-when-to-see-doctor → 308 → /fatigue
 Mark internally:   First article produced under Knowledge Governance Framework v1.0
 ```
+
+Decisions taken at generate time (superseding the options explored below):
+
+- Canonical path is `/fatigue` — an entity, not a keyword.
+- The tiredness blog was **retired**, not upgraded. Two architectures were not merged.
+- Primary CTA is **Book a primary care visit**. ADHD appears once, as a differential row.
+- Introduced the reusable **Differential Recognition** block (`SIYA:DIFFERENTIAL-RECOGNITION`).
 
 ## Mission
 

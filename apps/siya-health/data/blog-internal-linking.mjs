@@ -35,7 +35,7 @@ const CROSS_TOPIC_BRIDGE = {
     'how-mental-health-affects-weight-loss-outcomes',
   ],
   hormone: [
-    'why-am-i-always-tired-causes-when-to-see-doctor',
+    'perimenopause-brain-fog',
     'sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign',
     'insulin-resistance-and-weight-loss-clinician-overview',
   ],
@@ -68,7 +68,7 @@ const TOPIC_FALLBACKS = {
     'sildenafil-for-erectile-dysfunction-what-to-expect',
   ],
   energy: [
-    'why-am-i-always-tired-causes-when-to-see-doctor',
+    'iron-deficiency-brain-fog-adhd',
     'sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign',
     'insomnia-treatment-options-beyond-medication',
   ],

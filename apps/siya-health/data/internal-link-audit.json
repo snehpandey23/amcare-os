@@ -1,6 +1,6 @@
 {
   "generated": "2026-07-26",
-  "totalPages": 192,
+  "totalPages": 195,
   "zeroInbound": [
     "/adhd-diagnosis-austin",
     "/adhd-diagnosis-florida",
@@ -10,6 +10,7 @@
     "/adhd-evaluation-cost",
     "/adhd-treatment-online",
     "/adult-adhd-diagnosis",
+    "/blog/adhd-evaluation-cost-california",
     "/blog/adhd-treatment-austin-tx",
     "/blog/adhd-treatment-dallas-tx",
     "/blog/adhd-treatment-fort-worth-tx",
@@ -28,6 +29,7 @@
     "/blog/adult-adhd-treatment-california-2026",
     "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
     "/blog/pots-and-adhd",
+    "/blog/why-am-i-always-tired-causes-when-to-see-doctor",
     "/docs/tint-options-preview",
     "/intake",
     "/online-adhd-test",
@@ -66,6 +68,10 @@
     },
     {
       "path": "/adult-adhd-diagnosis",
+      "count": 0
+    },
+    {
+      "path": "/blog/adhd-evaluation-cost-california",
       "count": 0
     },
     {
@@ -141,6 +147,10 @@
       "count": 0
     },
     {
+      "path": "/blog/why-am-i-always-tired-causes-when-to-see-doctor",
+      "count": 0
+    },
+    {
       "path": "/docs/tint-options-preview",
       "count": 0
     },
@@ -169,7 +179,7 @@
       "count": 1
     },
     {
-      "path": "/answers/afternoon-energy-crash-after-lunch",
+      "path": "/adult-adhd-screening-california",
       "count": 1
     },
     {
@@ -187,6 +197,10 @@
     {
       "path": "/redirect/adhd-walkthrough",
       "count": 1
+    },
+    {
+      "path": "/answers/afternoon-energy-crash-after-lunch",
+      "count": 2
     },
     {
       "path": "/answers/ed-telehealth-legitimate",
@@ -215,58 +229,76 @@
     {
       "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "count": 2
-    },
-    {
-      "path": "/labs/vitamin-b12",
-      "count": 2
     }
   ],
   "blogNoServiceLink": [
+    "/blog/adhd-evaluation-cost-california",
     "/blog/adhd-treatment-austin-tx",
     "/blog/adhd-treatment-dallas-tx",
     "/blog/adhd-treatment-fort-worth-tx",
     "/blog/adhd-treatment-houston-tx",
-    "/blog/adhd-treatment-san-antonio-tx"
+    "/blog/adhd-treatment-los-angeles-ca",
+    "/blog/adhd-treatment-oakland-ca",
+    "/blog/adhd-treatment-orange-county-ca",
+    "/blog/adhd-treatment-sacramento-ca",
+    "/blog/adhd-treatment-san-antonio-tx",
+    "/blog/adhd-treatment-san-diego-ca",
+    "/blog/adhd-treatment-san-francisco-ca",
+    "/blog/adhd-treatment-san-jose-ca",
+    "/blog/adult-adhd-treatment-california-2026",
+    "/blog/why-am-i-always-tired-causes-when-to-see-doctor"
   ],
   "serviceNoBlogLink": [],
   "highAuthorityOutbound": [
     {
       "path": "/",
       "outboundCount": 34,
-      "uniqueInbound": 171
+      "uniqueInbound": 172
     },
     {
       "path": "/adhd-care",
       "outboundCount": 45,
-      "uniqueInbound": 173
+      "uniqueInbound": 166
     },
     {
       "path": "/blog",
       "outboundCount": 43,
-      "uniqueInbound": 160
+      "uniqueInbound": 161
     },
     {
       "path": "/blog/adhd",
       "outboundCount": 47,
-      "uniqueInbound": 114
+      "uniqueInbound": 115
     },
     {
       "path": "/answers",
       "outboundCount": 82,
-      "uniqueInbound": 159
+      "uniqueInbound": 160
     },
     {
       "path": "/about",
       "outboundCount": 35,
-      "uniqueInbound": 166
+      "uniqueInbound": 167
     },
     {
       "path": "/weight-loss-metabolic-health",
       "outboundCount": 43,
-      "uniqueInbound": 160
+      "uniqueInbound": 161
     }
   ],
   "topSuggestions": [
+    {
+      "src": "/blog/adhd-evaluation-cost-california",
+      "dest": "/adhd-care",
+      "anchor": "ADHD evaluation and care",
+      "why": "Convert educational readers to primary service"
+    },
+    {
+      "src": "/blog/adhd-evaluation-cost-california",
+      "dest": "/answers",
+      "anchor": "Browse Health Guides",
+      "why": "Deepen engagement + AI retrieval hub"
+    },
     {
       "src": "/blog/adhd-treatment-austin-tx",
       "dest": "/adhd-care",
@@ -317,6 +349,12 @@
     },
     {
       "src": "/blog/adhd-treatment-los-angeles-ca",
+      "dest": "/adhd-care",
+      "anchor": "ADHD evaluation and care",
+      "why": "Convert educational readers to primary service"
+    },
+    {
+      "src": "/blog/adhd-treatment-los-angeles-ca",
       "dest": "/answers",
       "anchor": "Browse Health Guides",
       "why": "Deepen engagement + AI retrieval hub"
@@ -329,9 +367,21 @@
     },
     {
       "src": "/blog/adhd-treatment-oakland-ca",
+      "dest": "/adhd-care",
+      "anchor": "ADHD evaluation and care",
+      "why": "Convert educational readers to primary service"
+    },
+    {
+      "src": "/blog/adhd-treatment-oakland-ca",
       "dest": "/answers",
       "anchor": "Browse Health Guides",
       "why": "Deepen engagement + AI retrieval hub"
+    },
+    {
+      "src": "/blog/adhd-treatment-orange-county-ca",
+      "dest": "/adhd-care",
+      "anchor": "ADHD evaluation and care",
+      "why": "Convert educational readers to primary service"
     },
     {
       "src": "/blog/adhd-treatment-orange-county-ca",
@@ -353,6 +403,12 @@
     },
     {
       "src": "/blog/adhd-treatment-sacramento-ca",
+      "dest": "/adhd-care",
+      "anchor": "ADHD evaluation and care",
+      "why": "Convert educational readers to primary service"
+    },
+    {
+      "src": "/blog/adhd-treatment-sacramento-ca",
       "dest": "/answers",
       "anchor": "Browse Health Guides",
       "why": "Deepen engagement + AI retrieval hub"
@@ -371,9 +427,21 @@
     },
     {
       "src": "/blog/adhd-treatment-san-diego-ca",
+      "dest": "/adhd-care",
+      "anchor": "ADHD evaluation and care",
+      "why": "Convert educational readers to primary service"
+    },
+    {
+      "src": "/blog/adhd-treatment-san-diego-ca",
       "dest": "/answers",
       "anchor": "Browse Health Guides",
       "why": "Deepen engagement + AI retrieval hub"
+    },
+    {
+      "src": "/blog/adhd-treatment-san-francisco-ca",
+      "dest": "/adhd-care",
+      "anchor": "ADHD evaluation and care",
+      "why": "Convert educational readers to primary service"
     },
     {
       "src": "/blog/adhd-treatment-san-francisco-ca",
@@ -383,9 +451,21 @@
     },
     {
       "src": "/blog/adhd-treatment-san-jose-ca",
+      "dest": "/adhd-care",
+      "anchor": "ADHD evaluation and care",
+      "why": "Convert educational readers to primary service"
+    },
+    {
+      "src": "/blog/adhd-treatment-san-jose-ca",
       "dest": "/answers",
       "anchor": "Browse Health Guides",
       "why": "Deepen engagement + AI retrieval hub"
+    },
+    {
+      "src": "/blog/adult-adhd-treatment-california-2026",
+      "dest": "/adhd-care",
+      "anchor": "ADHD evaluation and care",
+      "why": "Convert educational readers to primary service"
     },
     {
       "src": "/blog/adult-adhd-treatment-california-2026",
@@ -466,6 +546,23 @@
         "p": "/answers/how-online-prescriptions-work",
         "score": 4,
         "title": "How do online prescriptions work legally?"
+      },
+      {
+        "p": "/answers/when-is-testosterone-therapy-appropriate",
+        "score": 3,
+        "title": "What symptoms warrant testosterone therapy evaluation?"
+      }
+    ],
+    "/blog/adhd-evaluation-cost-california": [
+      {
+        "p": "/answers/what-included-199-adhd-evaluation",
+        "score": 10,
+        "title": "What is included in a Siya Health ADHD evaluation?"
+      },
+      {
+        "p": "/answers/fsa-hsa-adhd-evaluation",
+        "score": 9,
+        "title": "Can you use FSA or HSA for ADHD evaluation?"
       },
       {
         "p": "/answers/when-is-testosterone-therapy-appropriate",
@@ -969,14 +1066,14 @@
     ],
     "/blog/adult-adhd-symptoms-california": [
       {
+        "p": "/adult-adhd-california",
+        "score": 9,
+        "title": "Adult ADHD Care in California — Diagnosis, Treatment &amp; Screening"
+      },
+      {
         "p": "/answers/signs-of-adult-adhd",
         "score": 9,
         "title": "What are the signs of adult ADHD?"
-      },
-      {
-        "p": "/answers/telehealth-adhd-california",
-        "score": 9,
-        "title": "How does ADHD telehealth work in California?"
       },
       {
         "p": "/answers/when-is-testosterone-therapy-appropriate",
@@ -986,19 +1083,19 @@
     ],
     "/blog/adult-adhd-treatment-california-2026": [
       {
+        "p": "/adult-adhd-california",
+        "score": 10,
+        "title": "Adult ADHD Care in California — Diagnosis, Treatment &amp; Screening"
+      },
+      {
         "p": "/answers/signs-of-adult-adhd",
         "score": 9,
         "title": "What are the signs of adult ADHD?"
       },
       {
-        "p": "/answers/telehealth-adhd-california",
-        "score": 9,
-        "title": "How does ADHD telehealth work in California?"
-      },
-      {
-        "p": "/blog/adult-adhd-symptoms-california",
-        "score": 9,
-        "title": "Adult ADHD Symptoms in California: Patterns Worth Taking Seriously"
+        "p": "/mens-health-longevity",
+        "score": 3,
+        "title": "Men's Health &amp; Longevity"
       }
     ],
     "/blog/compounded-vs-branded-glp1-medications": [
@@ -1152,9 +1249,9 @@
         "title": "What is included in a Siya Health ADHD evaluation?"
       },
       {
-        "p": "/adult-adhd-screening-california",
+        "p": "/adult-adhd-california",
         "score": 7,
-        "title": "Online ADHD Screening in California | Free 2-Minute Test"
+        "title": "Adult ADHD Care in California — Diagnosis, Treatment &amp; Screening"
       }
     ],
     "/blog/how-to-know-if-you-have-adhd-adult": [
@@ -1627,6 +1724,16 @@
         "p": "/answers/why-am-i-tired-even-after-sleeping",
         "score": 4,
         "title": "Why am I tired even after sleeping?"
+      },
+      {
+        "p": "/answers/what-included-199-adhd-evaluation",
+        "score": 3,
+        "title": "What is included in a Siya Health ADHD evaluation?"
+      },
+      {
+        "p": "/mens-health-longevity",
+        "score": 3,
+        "title": "Men's Health &amp; Longevity"
       }
     ],
     "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd": [
@@ -1648,73 +1755,73 @@
     ]
   },
   "inboundCounts": {
-    "/adhd-care": 173,
-    "/": 171,
-    "/about": 166,
-    "/blog": 160,
-    "/telehealth": 160,
-    "/weight-loss-metabolic-health": 160,
-    "/answers": 159,
-    "/labs": 159,
-    "/prescriptions": 158,
-    "/primary-urgent-care": 158,
-    "/redirect/chat": 158,
-    "/blog/adhd": 114,
-    "/blog/weight-loss": 108,
-    "/legal/notice-of-privacy-practices": 106,
-    "/legal/privacy-policy": 106,
-    "/legal/terms-of-use": 106,
-    "/legal/cookie-policy": 105,
-    "/legal": 105,
-    "/answers/signs-of-adult-adhd": 103,
-    "/blog/telehealth": 103,
-    "/mens-health-longevity": 103,
-    "/redirect/meet-greet": 102,
-    "/answers/what-is-insulin-resistance": 100,
-    "/providers": 100,
-    "/answers/why-am-i-tired-even-after-sleeping": 96,
-    "/blog/how-to-know-if-you-have-adhd-adult": 96,
-    "/pricing": 96,
-    "/adhd-screening": 94,
-    "/answers/is-online-adhd-diagnosis-legitimate": 93,
-    "/book-appointment": 91,
-    "/womens-health": 91,
-    "/legal/controlled-substance-treatment-agreement": 47,
+    "/": 172,
+    "/about": 167,
+    "/adhd-care": 166,
+    "/blog": 161,
+    "/telehealth": 161,
+    "/weight-loss-metabolic-health": 161,
+    "/answers": 160,
+    "/labs": 160,
+    "/prescriptions": 159,
+    "/primary-urgent-care": 159,
+    "/redirect/chat": 159,
+    "/blog/adhd": 115,
+    "/blog/weight-loss": 109,
+    "/legal/notice-of-privacy-practices": 107,
+    "/legal/privacy-policy": 107,
+    "/legal/terms-of-use": 107,
+    "/legal/cookie-policy": 106,
+    "/legal": 106,
+    "/answers/signs-of-adult-adhd": 104,
+    "/blog/telehealth": 104,
+    "/mens-health-longevity": 104,
+    "/redirect/meet-greet": 103,
+    "/answers/what-is-insulin-resistance": 101,
+    "/providers": 101,
+    "/answers/why-am-i-tired-even-after-sleeping": 97,
+    "/blog/how-to-know-if-you-have-adhd-adult": 97,
+    "/pricing": 97,
+    "/adhd-screening": 95,
+    "/answers/is-online-adhd-diagnosis-legitimate": 94,
+    "/book-appointment": 92,
+    "/womens-health": 92,
+    "/legal/controlled-substance-treatment-agreement": 48,
     "/answers/can-adhd-be-diagnosed-online": 34,
     "/answers/starting-adhd-medication-adults": 25,
     "/blog/adhd-medication-options-for-adults": 24,
     "/providers/dr-sneh-pandey": 23,
     "/answers/what-is-food-noise": 22,
-    "/blog/why-am-i-always-tired-causes-when-to-see-doctor": 20,
-    "/blog/insulin-resistance-and-weight-loss-clinician-overview": 19,
-    "/labs/how-to-read-results": 19,
-    "/blog/adhd-in-women": 17,
+    "/fatigue": 20,
+    "/blog/adhd-in-women": 18,
+    "/blog/insulin-resistance-and-weight-loss-clinician-overview": 18,
+    "/labs/how-to-read-results": 18,
+    "/adult-adhd-california": 17,
     "/blog/adhd-treatment-texas": 17,
-    "/blog/food-noise-and-glp-1-what-it-means-and-what-helps": 17,
+    "/blog/executive-dysfunction-adhd": 16,
+    "/blog/food-noise-and-glp-1-what-it-means-and-what-helps": 16,
+    "/blog/online-adhd-diagnosis-california": 16,
     "/answers/adhd-vs-anxiety": 15,
-    "/blog/executive-dysfunction-adhd": 15,
     "/blog/is-online-adhd-diagnosis-legit": 15,
-    "/blog/online-adhd-diagnosis-california": 15,
     "/providers/dr-natasha-desai": 15,
+    "/answers/late-adhd-diagnosis-adults": 14,
+    "/labs/a1c-blood-sugar": 14,
     "/providers/dr-vanessa-urbina": 14,
-    "/answers/late-adhd-diagnosis-adults": 13,
+    "/answers/brain-fog-after-eating": 13,
     "/answers/what-does-low-testosterone-feel-like": 13,
     "/answers/what-is-free-testosterone": 13,
-    "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know": 13,
-    "/labs/a1c-blood-sugar": 13,
-    "/answers/brain-fog-after-eating": 12,
-    "/blog/adhd-medication-options-california": 12,
-    "/blog/adhd-telehealth-california": 12,
+    "/blog/adhd-medication-options-california": 13,
+    "/blog/adhd-telehealth-california": 13,
+    "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know": 12,
     "/labs/fatigue-brain-fog": 12,
     "/answers/executive-dysfunction-adhd": 11,
     "/answers/glp-1-side-effects": 11,
+    "/answers/screening-vs-adhd-evaluation": 11,
     "/answers/when-is-testosterone-therapy-appropriate": 11,
     "/blog/how-to-safely-get-prescriptions-online": 11,
-    "/answers/screening-vs-adhd-evaluation": 10,
     "/answers/why-normal-labs-dont-mean-healthy": 10,
     "/blog/adhd-symptoms-overlooked": 10,
     "/blog/medical-weight-loss-glp1-semaglutide-texas": 10,
-    "/adult-adhd-screening-california": 9,
     "/answers/what-included-199-adhd-evaluation": 9,
     "/blog/adhd-evaluation-california-online-vs-in-person": 9,
     "/providers/dr-swati-pandey": 9,
@@ -1724,7 +1831,6 @@
     "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign": 8,
     "/womens-midlife-health": 8,
     "/answers/adhd-in-women": 7,
-    "/answers/adhd-vs-burnout": 7,
     "/answers/is-adhd-medication-safe-long-term": 7,
     "/answers/medical-weight-loss-vs-dieting": 7,
     "/answers/meet-and-greet-telehealth-expectations": 7,
@@ -1735,10 +1841,13 @@
     "/blog/adhd-medication-online-california": 7,
     "/blog/how-mental-health-affects-weight-loss-outcomes": 7,
     "/blog/online-adhd-diagnosis-texas": 7,
+    "/blog/perimenopause-brain-fog": 7,
     "/blog/semaglutide-for-weight-loss-how-it-works": 7,
+    "/labs/iron-ferritin": 7,
     "/labs/preventive": 7,
-    "/answers/adhd-and-weight-loss-connection": 6,
+    "/labs/thyroid": 7,
     "/answers/adhd-medication-side-effects": 6,
+    "/answers/adhd-vs-burnout": 6,
     "/answers/can-sleep-apnea-cause-fatigue": 6,
     "/answers/how-online-prescriptions-work": 6,
     "/answers/signs-of-sleep-apnea-in-adults": 6,
@@ -1746,20 +1855,18 @@
     "/answers/trt-monitoring-requirements": 6,
     "/blog/adhd-hormones-women": 6,
     "/blog/adult-adhd-symptoms-california": 6,
+    "/blog/iron-deficiency-brain-fog-adhd": 6,
     "/blog/medical-weight-loss-vs-dieting-what-actually-works": 6,
-    "/blog/perimenopause-brain-fog": 6,
     "/blog/vyvanse-vs-adderall-differences": 6,
     "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd": 6,
-    "/labs/iron-ferritin": 6,
-    "/labs/thyroid": 6,
     "/providers/derek-timbs": 6,
     "/providers/megan-wunderlich": 6,
     "/adhd-diagnosis-texas": 5,
+    "/answers/adhd-and-weight-loss-connection": 5,
     "/answers/which-preventive-blood-tests-adults": 5,
     "/answers/who-qualifies-glp-1-weight-loss": 5,
     "/blog/adhd-medication-side-effects-what-to-expect": 5,
     "/blog/adhd-testing-online-california-screening-vs-evaluation": 5,
-    "/blog/iron-deficiency-brain-fog-adhd": 5,
     "/blog/minoxidil-for-hair-loss-does-it-work": 5,
     "/blog/oral-vs-topical-minoxidil-which-is-right": 5,
     "/blog/telehealth-prescriptions-how-online-treatment-works": 5,
@@ -1793,7 +1900,9 @@
     "/blog/is-adhd-medication-safe-long-term": 3,
     "/blog/tirzepatide-vs-semaglutide-which-is-better": 3,
     "/creyos-adhd-testing": 3,
+    "/labs/vitamin-b12": 3,
     "/redirect/adhd-evaluation": 3,
+    "/answers/afternoon-energy-crash-after-lunch": 2,
     "/answers/ed-telehealth-legitimate": 2,
     "/answers/fsa-hsa-adhd-evaluation": 2,
     "/answers/high-shbg-low-free-testosterone": 2,
@@ -1801,9 +1910,8 @@
     "/blog/adhd-brain-imaging-subtypes": 2,
     "/blog/insomnia-treatment-options-beyond-medication": 2,
     "/blog/sildenafil-for-erectile-dysfunction-what-to-expect": 2,
-    "/labs/vitamin-b12": 2,
     "/adhd-screening-results": 1,
-    "/answers/afternoon-energy-crash-after-lunch": 1,
+    "/adult-adhd-screening-california": 1,
     "/answers/weight-gain-after-stopping-ozempic": 1,
     "/blog/how-to-choose-adhd-provider-california": 1,
     "/blog/oral-vs-injectable-weight-loss-medications": 1,
@@ -1816,6 +1924,7 @@
     "/adhd-evaluation-cost": 0,
     "/adhd-treatment-online": 0,
     "/adult-adhd-diagnosis": 0,
+    "/blog/adhd-evaluation-cost-california": 0,
     "/blog/adhd-treatment-austin-tx": 0,
     "/blog/adhd-treatment-dallas-tx": 0,
     "/blog/adhd-treatment-fort-worth-tx": 0,
@@ -1834,6 +1943,7 @@
     "/blog/adult-adhd-treatment-california-2026": 0,
     "/blog/phentermine-for-weight-loss-safety-and-effectiveness": 0,
     "/blog/pots-and-adhd": 0,
+    "/blog/why-am-i-always-tired-causes-when-to-see-doctor": 0,
     "/docs/tint-options-preview": 0,
     "/intake": 0,
     "/online-adhd-test": 0,

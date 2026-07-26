@@ -1,12 +1,12 @@
 # Content architecture report
 
-Generated: 2026-07-26T10:21:00.153Z
+Generated: 2026-07-26T11:41:04.725Z
 
 ## Summary
 
 - **Topic clusters defined:** 10 (ADHD, metabolic, energy, hormone)
 - **Priority informational URLs:** 32
-- **Priority blogs patched with cluster bridges:** 15
+- **Priority blogs patched with cluster bridges:** 14
 - **Consolidation recommendations:** 12 (recommend only — no pages removed)
 
 ## Answers hub structure
@@ -29,7 +29,7 @@ Generated: 2026-07-26T10:21:00.153Z
 | Telehealth & access | /answers/what-included-199-adhd-evaluation | /blog/online-adhd-diagnosis-california | 4 | /adhd-care |
 | Food noise & GLP-1 | /answers/what-is-food-noise | /blog/food-noise-and-glp-1-what-it-means-and-what-helps | 4 | /weight-loss-metabolic-health |
 | Insulin resistance & metabolic health | /answers/what-is-insulin-resistance | /blog/insulin-resistance-and-weight-loss-clinician-overview | 8 | /weight-loss-metabolic-health |
-| Fatigue & sleep | /answers/why-am-i-tired-even-after-sleeping | /blog/why-am-i-always-tired-causes-when-to-see-doctor | 3 | /telehealth |
+| Fatigue & sleep | /answers/why-am-i-tired-even-after-sleeping | /fatigue | 3 | /telehealth |
 | Men's health & testosterone | /answers/what-is-free-testosterone | /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | 6 | /mens-health-longevity |
 
 ## Consolidation recommendations (answer ↔ blog overlap)
@@ -73,7 +73,7 @@ These pairs target **essentially the same search intent**. Keep the canonical UR
 - /blog/adhd-medication-options-for-adults
 - /blog/food-noise-and-glp-1-what-it-means-and-what-helps
 - /blog/insulin-resistance-and-weight-loss-clinician-overview
-- /blog/why-am-i-always-tired-causes-when-to-see-doctor
+- /fatigue
 - /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign
 - /blog/free-testosterone-vs-total-testosterone-what-patients-should-know
 - /blog/online-adhd-diagnosis-california
@@ -102,7 +102,6 @@ These pairs target **essentially the same search intent**. Keep the canonical UR
 - /blog/online-adhd-diagnosis-texas → cluster `adhd-telehealth-access`
 - /blog/pots-and-adhd → cluster `adhd-executive-dysfunction`
 - /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign → cluster `fatigue-sleep`
-- /blog/why-am-i-always-tired-causes-when-to-see-doctor → cluster `fatigue-sleep`
 
 ## Next steps (editorial, not automated)
 

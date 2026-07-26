@@ -1,6 +1,6 @@
 # Cannibalization Phase 1 — Final Report
 
-Generated: 2026-07-26T10:21:07.562Z
+Generated: 2026-07-26T11:41:12.151Z
 
 ## Build validation
 
@@ -10,7 +10,7 @@ Generated: 2026-07-26T10:21:07.562Z
 | Duplicate title tags | ✗ 1 groups |
 | Duplicate H1s | ✗ 1 groups |
 | JSON-LD parse errors | ✓ 0 |
-| Sitemap URLs | 158 |
+| Sitemap URLs | 159 |
 | **Overall** | **REVIEW** |
 
 ## Pages modified

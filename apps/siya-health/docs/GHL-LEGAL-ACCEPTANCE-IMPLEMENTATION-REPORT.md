@@ -1,6 +1,6 @@
 # GHL Legal Acceptance — Implementation Report
 
-Generated: 2026-07-26T10:21:06.335Z
+Generated: 2026-07-26T11:41:11.547Z
 
 ## Objective
 
@@ -44,8 +44,8 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 
 ## Audit totals
 
-- HTML pages scanned: **192**
-- Pages with legacy GHL booking links: **166**
+- HTML pages scanned: **195**
+- Pages with legacy GHL booking links: **167**
 - Total legacy GHL booking anchor targets: **178**
 - Pages with CarePatron booking links: **3**
 - Total CarePatron booking anchor targets: **3**
@@ -62,6 +62,7 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/adhd-screening-results** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/adhd-screening** (adhd-screening) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/adhd-treatment-online** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/adult-adhd-california** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/adult-adhd-diagnosis** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/adderall-vs-vyvanse-adults** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/answers/adhd-and-weight-loss-connection** (adhd-content) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
@@ -177,10 +178,10 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/blog/vyvanse-vs-adderall-differences** (general-cta) — 0 CarePatron link(s), 2 legacy GHL link(s), acceptance script: no
 - **/blog/weight-loss** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/blog/when-is-testosterone-therapy-appropriate** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
-- **/blog/why-am-i-always-tired-causes-when-to-see-doctor** (general-cta) — 0 CarePatron link(s), 2 legacy GHL link(s), acceptance script: no
 - **/blog/youre-not-lazy-signs-undiagnosed-adult-adhd** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/book-appointment** (booking-hub) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/creyos-adhd-testing** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
+- **/fatigue** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/intake** (intake-hub) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: yes
 - **/labs** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
@@ -242,6 +243,7 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - `adhd-screening-results.html`
 - `adhd-screening.html`
 - `adhd-treatment-online.html`
+- `adult-adhd-california.html`
 - `adult-adhd-diagnosis.html`
 - `answers/adderall-vs-vyvanse-adults.html`
 - `answers/adhd-and-weight-loss-connection.html`
@@ -357,10 +359,10 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - `blog/vyvanse-vs-adderall-differences.html`
 - `blog/weight-loss.html`
 - `blog/when-is-testosterone-therapy-appropriate.html`
-- `blog/why-am-i-always-tired-causes-when-to-see-doctor.html`
 - `blog/youre-not-lazy-signs-undiagnosed-adult-adhd.html`
 - `book-appointment.html`
 - `creyos-adhd-testing.html`
+- `fatigue.html`
 - `index.html`
 - `labs.html`
 - `labs/a1c-blood-sugar.html`

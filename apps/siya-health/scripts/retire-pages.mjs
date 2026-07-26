@@ -1,24 +1,48 @@
 #!/usr/bin/env node
 /**
- * Retire geo clone LPs: write noindex stubs, register redirects.
- * Does NOT invent unique local copy — clones without unique value redirect.
+ * Retire pages: write noindex stubs, register permanent redirects.
  *
- * Usage: node scripts/retire-geo-clones.mjs
+ * Two kinds of retirement, one mechanism:
+ *   1. Geo clones      (data/geo-consolidation.mjs)  — no unique value, consolidate into state canonical.
+ *   2. Superseded content (data/retired-content.mjs) — had value, handed over to a Canonical Entity Page.
+ *
+ * Never invents unique copy to justify keeping a page, and never merges an old
+ * blog architecture into a new entity architecture. Runs FIRST in the build so
+ * every later generator sees a stub instead of a live page.
+ *
+ * Usage: node scripts/retire-pages.mjs
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { GEO_CLONE_REDIRECTS, GEO_CLONE_STATS } from '../data/geo-consolidation.mjs';
+import { RETIRED_CONTENT_REDIRECTS, RETIRED_CONTENT_STATS } from '../data/retired-content.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
+
+/** source path → { destination, note } for every retirement kind. */
+const ALL_RETIREMENTS = {
+  ...Object.fromEntries(
+    Object.entries(GEO_CLONE_REDIRECTS).map(([from, destination]) => [
+      from,
+      { destination, note: 'geo clone retirement' },
+    ]),
+  ),
+  ...Object.fromEntries(
+    Object.entries(RETIRED_CONTENT_REDIRECTS).map(([from, spec]) => [
+      from,
+      { destination: spec.destination, note: `superseded by the ${spec.entity} canonical entity page` },
+    ]),
+  ),
+};
 
 function pathToFile(urlPath) {
   const clean = urlPath.replace(/^\//, '');
   return path.join(ROOT, `${clean}.html`);
 }
 
-function stubHtml(dest) {
+function stubHtml(dest, note) {
   return `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -31,7 +55,7 @@ function stubHtml(dest) {
     <script>location.replace('${dest}');</script>
   </head>
   <body>
-    <p>This page was consolidated (geo clone retirement). Continues at <a href="${dest}">${dest}</a>.</p>
+    <p>This page was retired (${note}). Continues at <a href="${dest}">${dest}</a>.</p>
   </body>
 </html>
 `;
@@ -42,7 +66,7 @@ function upsertVercelRedirects() {
   const vercel = JSON.parse(fs.readFileSync(vercelPath, 'utf8'));
   const existing = new Set(vercel.redirects.map((r) => r.source));
   let added = 0;
-  for (const [source, destination] of Object.entries(GEO_CLONE_REDIRECTS)) {
+  for (const [source, { destination }] of Object.entries(ALL_RETIREMENTS)) {
     if (existing.has(source)) {
       const row = vercel.redirects.find((r) => r.source === source);
       if (row) {
@@ -65,20 +89,19 @@ function upsertVercelRedirects() {
 function upsertRedirectMap() {
   const mapPath = path.join(ROOT, 'data', 'redirect-map.mjs');
   let src = fs.readFileSync(mapPath, 'utf8');
-  // Ensure each GEO_CLONE_REDIRECTS entry is in RAW
-  for (const [from, to] of Object.entries(GEO_CLONE_REDIRECTS)) {
+  for (const [from, { destination: to }] of Object.entries(ALL_RETIREMENTS)) {
     const key = `'${from}'`;
     if (src.includes(key)) {
       src = src.replace(new RegExp(`${key}\\s*:\\s*'[^']*'`), `${key}: '${to}'`);
     } else {
       src = src.replace(
-        /\/\/ EG-P0-01:[^\n]*\n\s*'\/blog\/adult-adhd-treatment-california-2026': '\/adhd-care',/,
+        /\/\/ EG-P0-01:[^\n]*\n\s*'\/blog\/adult-adhd-treatment-california-2026': '\/adult-adhd-california',/,
         (m) => `${m}\n  '${from}': '${to}',`,
       );
       if (!src.includes(key)) {
-        // Fallback: insert after modafinil line
+        // Fallback: insert after the modafinil line
         src = src.replace(
-          /('\/blog\/modafinil-for-focus-and-fatigue-is-it-safe': '\/adhd-care',)/,
+          /('\/blog\/modafinil-for-focus-and-fatigue-is-it-safe': '[^']*',)/,
           `$1\n  '${from}': '${to}',`,
         );
       }
@@ -88,9 +111,15 @@ function upsertRedirectMap() {
 }
 
 let stubs = 0;
-for (const [from, to] of Object.entries(GEO_CLONE_REDIRECTS)) {
+let skipped = 0;
+for (const [from, { destination, note }] of Object.entries(ALL_RETIREMENTS)) {
   const file = pathToFile(from);
-  fs.writeFileSync(file, stubHtml(to));
+  // Some retirements predate the file being deleted; redirect registration is enough.
+  if (!fs.existsSync(file) && !fs.existsSync(path.dirname(file))) {
+    skipped += 1;
+    continue;
+  }
+  fs.writeFileSync(file, stubHtml(destination, note));
   stubs += 1;
 }
 
@@ -101,8 +130,10 @@ console.log(
   JSON.stringify(
     {
       stubsWritten: stubs,
+      stubsSkippedMissingDir: skipped,
       vercelRedirectsAdded: added,
       ...GEO_CLONE_STATS,
+      ...RETIRED_CONTENT_STATS,
     },
     null,
     2,

@@ -1,9 +1,9 @@
 {
   "framework": "Siya Knowledge Governance Framework",
   "governanceVersion": "1.0",
-  "generated": "2026-07-26T11:04:09.864Z",
-  "filesScanned": 193,
-  "registeredBlocks": 25,
+  "generated": "2026-07-26T11:41:13.293Z",
+  "filesScanned": 194,
+  "registeredBlocks": 26,
   "unregisteredMarkers": [],
   "violations": [],
   "blocks": [
@@ -149,7 +149,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "chrome",
-      "pagesAffected": 25
+      "pagesAffected": 26
     },
     {
       "id": "SIYA:BLOG-CTA-METABOLIC",
@@ -165,7 +165,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "production",
-      "pagesAffected": 19
+      "pagesAffected": 18
     },
     {
       "id": "SIYA:ADHD-NEXT-STEPS",
@@ -276,6 +276,22 @@
       "version": "v1.0",
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
+      "status": "production",
+      "pagesAffected": 1
+    },
+    {
+      "id": "SIYA:DIFFERENTIAL-RECOGNITION",
+      "name": "Differential Recognition (\"what it could be\")",
+      "kind": "clinical",
+      "entity": "per-symptom",
+      "owner": {
+        "clinical": "Dr. Swati Pandey",
+        "editorial": "Content OS",
+        "engineering": "differential-diagnosis module"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "approved",
       "status": "production",
       "pagesAffected": 1
     },

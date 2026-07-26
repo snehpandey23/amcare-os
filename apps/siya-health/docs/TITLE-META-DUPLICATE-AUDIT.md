@@ -1,10 +1,10 @@
 # Title & Meta Duplicate Audit
 
-Generated: 2026-07-26T10:20:58.511Z
+Generated: 2026-07-26T11:41:03.463Z
 
 ## Duplicate title tags (1)
 
-- **"Moved — Siya Health"** — /adhd-diagnosis-austin, /adhd-diagnosis-houston, /adhd-diagnosis-pennsylvania, /adhd-diagnosis-philadelphia, /blog/adhd-treatment-austin-tx, /blog/adhd-treatment-dallas-tx, /blog/adhd-treatment-fort-worth-tx, /blog/adhd-treatment-houston-tx, /blog/adhd-treatment-los-angeles-ca, /blog/adhd-treatment-miami-fl, /blog/adhd-treatment-oakland-ca, /blog/adhd-treatment-orange-county-ca, /blog/adhd-treatment-orlando-fl, /blog/adhd-treatment-philadelphia-pa, /blog/adhd-treatment-sacramento-ca, /blog/adhd-treatment-san-antonio-tx, /blog/adhd-treatment-san-diego-ca, /blog/adhd-treatment-san-francisco-ca, /blog/adhd-treatment-san-jose-ca
+- **"Moved — Siya Health"** — /adhd-diagnosis-austin, /adhd-diagnosis-houston, /adhd-diagnosis-pennsylvania, /adhd-diagnosis-philadelphia, /blog/adhd-evaluation-cost-california, /blog/adhd-treatment-austin-tx, /blog/adhd-treatment-dallas-tx, /blog/adhd-treatment-fort-worth-tx, /blog/adhd-treatment-houston-tx, /blog/adhd-treatment-los-angeles-ca, /blog/adhd-treatment-miami-fl, /blog/adhd-treatment-oakland-ca, /blog/adhd-treatment-orange-county-ca, /blog/adhd-treatment-orlando-fl, /blog/adhd-treatment-philadelphia-pa, /blog/adhd-treatment-sacramento-ca, /blog/adhd-treatment-san-antonio-tx, /blog/adhd-treatment-san-diego-ca, /blog/adhd-treatment-san-francisco-ca, /blog/adhd-treatment-san-jose-ca, /blog/adult-adhd-treatment-california-2026, /blog/why-am-i-always-tired-causes-when-to-see-doctor
 
 ## Duplicate H1s (1)
 

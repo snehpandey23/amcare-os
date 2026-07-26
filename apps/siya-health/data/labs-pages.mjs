@@ -89,7 +89,7 @@ export const LABS_TOPIC_PAGES = [
     ],
     relatedGuides: [
       { href: '/labs/how-to-read-results', label: 'How to read your lab results' },
-      { href: '/blog/why-am-i-always-tired-causes-when-to-see-doctor', label: 'Why am I always tired?' },
+      { href: '/fatigue', label: 'Fatigue: when tired stops being normal' },
       { href: '/answers/why-am-i-tired-even-after-sleeping', label: 'Tired even after sleeping' },
       { href: '/answers/why-normal-labs-dont-mean-healthy', label: "Why normal labs don't mean healthy" },
       { href: '/blog/iron-deficiency-brain-fog-adhd', label: 'Iron deficiency, brain fog & ADHD' },
@@ -155,7 +155,7 @@ export const LABS_TOPIC_PAGES = [
     relatedGuides: [
       { href: '/labs/how-to-read-results', label: 'How to read your lab results' },
       { href: '/blog/iron-deficiency-brain-fog-adhd', label: 'Iron deficiency, brain fog & ADHD' },
-      { href: '/blog/why-am-i-always-tired-causes-when-to-see-doctor', label: 'Why am I always tired?' },
+      { href: '/fatigue', label: 'Fatigue: when tired stops being normal' },
       { href: '/labs/fatigue-brain-fog', label: 'Fatigue & brain fog labs' },
     ],
     faqs: [
@@ -483,7 +483,7 @@ export const LABS_TOPIC_PAGES = [
     ],
     relatedGuides: [
       { href: '/labs/how-to-read-results', label: 'How to read your lab results' },
-      { href: '/blog/why-am-i-always-tired-causes-when-to-see-doctor', label: 'Why am I always tired?' },
+      { href: '/fatigue', label: 'Fatigue: when tired stops being normal' },
       { href: '/labs/iron-ferritin', label: 'Iron & ferritin testing' },
       { href: '/answers/why-normal-labs-dont-mean-healthy', label: "Why normal labs don't mean healthy" },
     ],

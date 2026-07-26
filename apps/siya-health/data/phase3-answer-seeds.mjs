@@ -135,7 +135,7 @@ export const PHASE3_ANSWER_SEEDS = [
         label: 'Insulin resistance cornerstone (blog)',
       },
       {
-        href: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+        href: '/fatigue',
         label: 'Fatigue cornerstone (blog)',
       },
       { href: '/weight-loss-metabolic-health', label: 'Medical weight loss & metabolic health' },
@@ -600,7 +600,7 @@ export const PHASE3_ANSWER_SEEDS = [
       { href: '/answers/poor-sleep-feels-like-adhd', label: 'Poor sleep feels like ADHD' },
       { href: '/answers/why-am-i-tired-even-after-sleeping', label: 'Tired after sleeping' },
       {
-        href: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+        href: '/fatigue',
         label: 'Fatigue cornerstone',
       },
       { href: '/weight-loss-metabolic-health', label: 'Metabolic health care' },
@@ -617,7 +617,7 @@ export const PHASE3_ANSWER_SEEDS = [
     hubCategories: ['metabolic', 'energy'],
     aboutCondition: 'Postprandial fatigue and circadian energy patterns',
     reviewerSlug: 'dr-sneh-pandey',
-    cornerstoneBlog: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+    cornerstoneBlog: '/fatigue',
   },
   {
     slug: 'high-shbg-low-free-testosterone',
@@ -1043,6 +1043,6 @@ export const PHASE3_ANSWER_SEEDS = [
     hubCategories: ['metabolic', 'telehealth'],
     aboutCondition: 'Laboratory result interpretation and preventive follow-up',
     reviewerSlug: 'dr-sneh-pandey',
-    cornerstoneBlog: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+    cornerstoneBlog: '/fatigue',
   },
 ];

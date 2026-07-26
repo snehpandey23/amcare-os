@@ -129,7 +129,7 @@ export const PHASE5_ANSWER_SEEDS = [
     learnMore: [
       { href: '/adhd-care', label: 'ADHD evaluation & telehealth care' },
       { href: '/adhd-care', label: 'Adult ADHD evaluation' },
-      { href: '/blog/why-am-i-always-tired-causes-when-to-see-doctor', label: 'Fatigue & burnout cornerstone (blog)' },
+      { href: '/fatigue', label: 'Fatigue: when tired stops being normal' },
       { href: '/answers/poor-sleep-feels-like-adhd', label: 'Can poor sleep feel like ADHD?' },
       { href: '/telehealth', label: 'Telehealth & virtual care' },
     ],

@@ -54,15 +54,6 @@ function chipsBlock({ title, items, href, cta, ctaExtra = '' }) {
 /** Content pages → topic labs (never Rupa). */
 const CONTENT_LINKS = [
   {
-    file: 'blog/why-am-i-always-tired-causes-when-to-see-doctor.html',
-    marker: 'LABS-LINK-FATIGUE',
-    html: `      <section class="section section-tinted" aria-label="Fatigue labs">
-        <div class="container">
-          <p class="lead" style="margin:0;">Fatigue often has overlapping causes. When appropriate, explore <a href="/labs/fatigue-brain-fog">fatigue &amp; brain fog labs</a>—or <a href="/labs/how-to-read-results">how to read your lab results</a> with Siya.</p>
-        </div>
-      </section>`,
-  },
-  {
     file: 'answers/why-normal-labs-dont-mean-healthy.html',
     marker: 'LABS-LINK-NORMAL',
     html: `      <section class="section section-tinted" aria-label="Labs next step">
@@ -504,16 +495,6 @@ const PATHWAY_CHIPS = [
       items: ['CBC', 'Comprehensive metabolic panel', 'Lipid panel', 'Hemoglobin A1c'],
       href: '/labs/preventive',
       cta: 'Browse preventive lab options',
-    }),
-  },
-  {
-    file: 'blog/why-am-i-always-tired-causes-when-to-see-doctor.html',
-    marker: 'LABS-CHIPS-FATIGUE',
-    block: chipsBlock({
-      title: 'Common labs your clinician may consider',
-      items: ['CBC', 'Ferritin / iron studies', 'TSH', 'Vitamin B12', 'Vitamin D', 'A1c when metabolic risk is present'],
-      href: '/labs/fatigue-brain-fog',
-      cta: 'Browse fatigue &amp; brain fog labs',
     }),
   },
   {

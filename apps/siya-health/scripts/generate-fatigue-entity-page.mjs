@@ -1,0 +1,375 @@
+/**
+ * Generates /fatigue — the CANONICAL FATIGUE ENTITY PAGE.
+ *
+ * Second Canonical Entity Page (see docs/CANONICAL-ENTITY-PAGE-BLUEPRINT.md).
+ * Where /adult-adhd-california proved Siya can own a condition, /fatigue is where
+ * Siya behaves like a virtual primary care knowledge platform: symptom-first.
+ *
+ * This page is NOT:
+ *   - "10 causes of fatigue" / "Why am I tired?" listicle
+ *   - a blog post
+ *   - an ADHD funnel page
+ *
+ * Journey (symptom-first, primary-care destination):
+ *   Recognition → what fatigue means → what it could be (differential) →
+ *   when evaluation helps → how Siya approaches it → potential labs →
+ *   related conditions → FAQs → Book a primary care visit
+ *
+ * CTA policy: ONE primary = primary care booking. ADHD is one differential row,
+ * never the destination. No weight-loss / TRT / GLP-1 funnels.
+ *
+ * Run: node scripts/generate-fatigue-entity-page.mjs  (BEFORE seo-build.mjs)
+ */
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { renderDifferentialSection } from '../data/differential-diagnosis.mjs';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(__dirname, '..');
+const OUT = path.join(ROOT, 'fatigue.html');
+
+const CANONICAL = 'https://siya.health/fatigue';
+const TITLE = 'Fatigue — Why You Are Always Tired, and When to Get Evaluated | Siya Health';
+const DESCRIPTION =
+  'Persistent fatigue is a symptom with many possible causes — iron, thyroid, B12, sleep apnea, mood, hormones. Learn what fatigue actually means, when medical evaluation helps, which labs clinicians consider, and how physician-led primary care sorts it out.';
+
+function esc(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/* ── FAQ (drives accordion + FAQPage schema) ────────────────────────────── */
+const FAQS = [
+  {
+    q: 'Why am I always tired even when I sleep enough?',
+    a: 'Sleep quantity and sleep quality are different things. Fragmented sleep from breathing interruptions, pain, or a disrupted schedule can leave you unrestored after a full night. Fatigue can also come from causes unrelated to sleep at all, such as low iron stores, thyroid changes, or mood conditions. That is why hours in bed alone rarely explains it.',
+  },
+  {
+    q: 'When does fatigue justify seeing a clinician?',
+    a: 'Consider an evaluation when fatigue lasts more than a few weeks, does not improve with rest, or interferes with work, driving, relationships, or self-care. Seek care sooner if it comes with unexplained weight change, fever, shortness of breath, chest discomfort, new severe headaches, or thoughts of self-harm.',
+  },
+  {
+    q: 'Is fatigue a diagnosis?',
+    a: 'No. Fatigue is a symptom. It is the reason for a visit, not the conclusion of one. The clinical work is figuring out what is producing it — and often more than one thing is contributing at the same time.',
+  },
+  {
+    q: 'What labs are typically considered for fatigue?',
+    a: 'Depending on your history and exam, a clinician may consider a complete blood count, ferritin and iron studies, thyroid function, vitamin B12 and vitamin D, and a metabolic panel. Which tests make sense is individualized — testing everything is not the same as testing well.',
+  },
+  {
+    q: 'Can my labs be normal and I still feel exhausted?',
+    a: 'Yes, and this is common. Reference ranges describe a population, not your personal baseline, and some contributors to fatigue — sleep apnea, depression, medication effects, chronic stress, deconditioning — do not show up on a standard panel at all. Normal labs narrow the question rather than closing it.',
+  },
+  {
+    q: 'Could this be ADHD rather than a medical cause?',
+    a: 'Sometimes attention and executive-function difficulty is genuinely exhausting, because compensating all day takes real effort. But ADHD is one possibility among many, and fatigue is not enough on its own to point there. A primary care evaluation is the appropriate place to sort medical, sleep, mood, and attention contributors apart.',
+  },
+  {
+    q: 'How does Siya Health evaluate fatigue?',
+    a: 'A clinician reviews your history, timeline, sleep, medications, mood, and daily function, then decides with you which testing is actually informative. You get findings explained in plain language and a plan — including follow-up, because fatigue often needs more than one visit to resolve properly.',
+  },
+  {
+    q: 'Do I need insurance to be seen for fatigue?',
+    a: 'No. Siya Health offers direct-pay telehealth with published pricing, so you know the cost before you book. Availability depends on the state you are located in, which is confirmed when you schedule.',
+  },
+];
+
+function faqAccordion(faqs, prefix) {
+  return faqs
+    .map((f, i) => {
+      const id = `${prefix}-${i}`;
+      return `              <div class="faq-accordion-card" data-faq-item>
+                <h3 style="margin:0;">
+                  <button type="button" class="faq-accordion-trigger" aria-expanded="false" aria-controls="${id}" id="${id}-q" data-faq-trigger>
+                    <span>${esc(f.q)}</span>
+                    <span class="faq-accordion-icon" aria-hidden="true">+</span>
+                  </button>
+                </h3>
+                <div id="${id}" class="faq-accordion-content" role="region" aria-labelledby="${id}-q" data-faq-content>
+                  <div class="faq-accordion-inner">
+                    <p>${esc(f.a)}</p>
+                  </div>
+                </div>
+              </div>`;
+    })
+    .join('\n');
+}
+
+/* ── Structured data ────────────────────────────────────────────────────── */
+const medicalWebPageLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  name: TITLE,
+  description: DESCRIPTION,
+  url: CANONICAL,
+  inLanguage: 'en-US',
+  isPartOf: { '@type': 'WebSite', name: 'Siya Health', url: 'https://siya.health' },
+  about: {
+    '@type': 'MedicalSymptom',
+    name: 'Fatigue',
+    alternateName: ['Tiredness', 'Low energy', 'Exhaustion'],
+    possibleCause: [
+      { '@type': 'MedicalCondition', name: 'Iron deficiency' },
+      { '@type': 'MedicalCondition', name: 'Hypothyroidism' },
+      { '@type': 'MedicalCondition', name: 'Vitamin B12 deficiency' },
+      { '@type': 'MedicalCondition', name: 'Obstructive sleep apnea' },
+      { '@type': 'MedicalCondition', name: 'Depression' },
+      { '@type': 'MedicalCondition', name: 'Perimenopause' },
+    ],
+  },
+  lastReviewed: new Date().toISOString().slice(0, 10),
+  reviewedBy: {
+    '@type': 'Person',
+    name: 'Dr. Vanessa Urbina',
+    url: 'https://siya.health/providers/dr-vanessa-urbina',
+  },
+  provider: { '@type': 'MedicalOrganization', name: 'Siya Health', url: 'https://siya.health/' },
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://siya.health/' },
+    { '@type': 'ListItem', position: 2, name: 'Primary & Urgent Care', item: 'https://siya.health/primary-urgent-care' },
+    { '@type': 'ListItem', position: 3, name: 'Fatigue', item: CANONICAL },
+  ],
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+/* ── Page ───────────────────────────────────────────────────────────────── */
+function render() {
+  return `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="/scripts/cookie-consent-bootstrap.js"></script>
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <title>${esc(TITLE)}</title>
+    <meta name="description" content="${esc(DESCRIPTION)}" />
+    <link rel="canonical" href="${CANONICAL}" />
+    <meta property="og:title" content="${esc(TITLE)}" />
+    <meta property="og:description" content="${esc(DESCRIPTION)}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="${CANONICAL}" />
+    <meta property="og:site_name" content="Siya Health" />
+    <meta property="og:image" content="https://siya.health/assets/images/siya-health-logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${esc(TITLE)}" />
+    <meta name="twitter:description" content="${esc(DESCRIPTION)}" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <link rel="preload" href="/styles.css" as="style" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="application/ld+json">${JSON.stringify(medicalWebPageLd)}</script>
+    <script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>
+    <script type="application/ld+json">${JSON.stringify(faqLd)}</script>
+  </head>
+  <body class="page-service page-fatigue">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container">
+        <a class="header-logo brand-lockup" href="/" aria-label="Siya Health home">
+          <img class="brand-lockup__mark" src="/assets/images/siya-health-mark.png" alt="" width="44" height="44" decoding="async" aria-hidden="true" />
+          <span class="brand-lockup__wordmark">Siya Health<sup class="brand-lockup__reg" aria-hidden="true">&reg;</sup></span>
+        </a>
+        <nav class="nav-center" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="/primary-urgent-care">Primary Care</a>
+          <a href="/labs">Labs</a>
+          <a href="/telehealth">Telehealth</a>
+          <a href="/answers">Health Guides</a>
+          <a href="/blog">Blog</a>
+        </nav>
+        <div class="nav-cta"></div>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
+        <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
+        <div class="nav-mobile">
+          <a href="/">Home</a>
+          <a href="/primary-urgent-care">Primary Care</a>
+          <a href="/labs">Labs</a>
+          <a href="/telehealth">Telehealth</a>
+          <a href="/answers">Health Guides</a>
+          <a href="/blog">Blog</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- HERO — recognition first; the page's single primary CTA lives here -->
+      <section class="hero-merged" style="background-image: url('/assets/images/healthy-lifestyle.png');">
+        <div class="container hero-inner">
+          <div class="hero-merged-content">
+            <p class="hero-state-line"><a href="/primary-urgent-care">Primary &amp; Urgent Care</a> &middot; Symptom guide</p>
+            <h1>Fatigue: when tired stops being normal</h1>
+            <p class="hero-merged-lead">You sleep, and it does not help. Coffee stopped working. People suggest you try harder, or worry less, or go to bed earlier. Persistent fatigue is one of the most common reasons adults see a primary care clinician&mdash;and it is a symptom worth taking seriously rather than absorbing.</p>
+            <div class="hero-ctas hero-ctas-row">
+              <a class="button ds-button ds-button--primary" href="/book-appointment" data-siya-track="primary-cta-click" data-siya-location="hero" data-page-type="default" data-intent="primary-care" data-component="button">Book a primary care visit</a>
+              <a class="button ds-button ds-button--secondary secondary" href="#what-it-could-be" data-siya-track="scroll_differential" data-siya-location="hero" data-component="button">See what it could be</a>
+            </div>
+            <p class="cta-microcopy">Educational information, not a diagnosis. If you have chest pain, trouble breathing, or thoughts of self-harm, seek emergency care now.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ON THIS PAGE -->
+      <nav class="section on-this-page" aria-labelledby="on-this-page-heading">
+        <div class="container">
+          <h2 id="on-this-page-heading" class="section-header">What this page answers</h2>
+          <ul class="scan-list scan-list--compact">
+            <li><a href="#what-fatigue-means">What fatigue actually means</a></li>
+            <li><a href="#what-it-could-be">What it could be</a></li>
+            <li><a href="#when-to-be-evaluated">When medical evaluation helps</a></li>
+            <li><a href="#our-approach">How Siya approaches fatigue</a></li>
+            <li><a href="#labs">Labs a clinician may consider</a></li>
+            <li><a href="#faq">Frequently asked questions</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- WHAT FATIGUE ACTUALLY MEANS -->
+      <section class="section" id="what-fatigue-means" aria-labelledby="what-fatigue-means-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="what-fatigue-means-heading">What fatigue actually means</h2>
+            <p class="lead">Being sleepy and being fatigued are not the same experience, and the difference matters clinically.</p>
+          </div>
+          <p>Sleepiness is the pull toward sleep, and it usually eases once you get some. Fatigue is different: it is a depletion that rest does not reliably repair, so you can wake after eight hours and still feel like the day is uphill. Many people describe it less as tiredness than as having no reserve&mdash;the capacity for ordinary effort is simply missing.</p>
+          <p>It also shows up in the body and the mind at once. Muscles feel heavy, but concentration slips too, which is why fatigue and brain fog so often arrive together. That combination is not you imagining things; it is a recognized pattern clinicians look for.</p>
+          <p>The most useful reframe is this: fatigue is a signal, not a character trait. Because it is a symptom rather than a diagnosis, the goal of a visit is not to name the tiredness&mdash;it is to find what is generating it.</p>
+        </div>
+      </section>
+
+${renderDifferentialSection('fatigue')}
+
+      <!-- WHEN MEDICAL EVALUATION HELPS -->
+      <section class="section" id="when-to-be-evaluated" aria-labelledby="when-to-be-evaluated-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="when-to-be-evaluated-heading">When medical evaluation helps</h2>
+            <p class="lead">Not every tired week needs a workup. These are the situations where a clinical conversation genuinely changes things.</p>
+          </div>
+          <ul class="scan-list">
+            <li>Fatigue has lasted more than a few weeks and is not improving with rest</li>
+            <li>It interferes with work, study, driving, parenting, or self-care</li>
+            <li>You sleep a normal number of hours but never wake refreshed</li>
+            <li>You snore, gasp, or have been told you stop breathing during sleep</li>
+            <li>It arrived alongside a new medication, illness, or major life change</li>
+            <li>You are managing heavy periods, restricted eating, or a plant-based diet without monitoring</li>
+            <li>Previous testing was called &ldquo;normal&rdquo; but nothing actually improved</li>
+          </ul>
+          <p>Some symptoms should not wait for a scheduled visit. Unexplained weight loss, fever that persists, shortness of breath, chest discomfort, fainting, new severe headaches, or thoughts of self-harm need urgent or emergency assessment rather than an educational page.</p>
+        </div>
+      </section>
+
+      <!-- HOW SIYA APPROACHES FATIGUE -->
+      <section class="section section-tinted" id="our-approach" aria-labelledby="our-approach-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="our-approach-heading">How Siya Health approaches fatigue</h2>
+            <p class="lead">Fatigue rewards patience and structure. It rarely resolves from a single panel ordered on a hunch.</p>
+          </div>
+          <ol class="evaluation-journey-list">
+            <li><strong>History before tests</strong><span>Timeline, sleep pattern, mood, medications, cycle and diet history, and what specifically has changed&mdash;because the story usually narrows the possibilities faster than a broad panel does.</span></li>
+            <li><strong>Targeted testing, not a shotgun</strong><span>Your clinician selects labs that would actually change the plan. Testing everything produces incidental findings and anxiety without producing clarity.</span></li>
+            <li><strong>Sleep taken seriously</strong><span>Screening for apnea and circadian disruption, since unrefreshing sleep is one of the most commonly missed contributors in adults.</span></li>
+            <li><strong>Mood and medication reviewed honestly</strong><span>Depression, anxiety, and everyday prescriptions can all blunt energy, and naming that is part of good medicine rather than a consolation prize.</span></li>
+            <li><strong>Plain-language findings and follow-up</strong><span>You get what was found, what it means, and what happens next&mdash;then a follow-up, because one visit is often not enough to finish the job.</span></li>
+          </ol>
+          <p>If ADHD, hormones, or metabolic health turn out to be part of your picture, that becomes a branch of the plan rather than the starting assumption. Symptom first, then cause, then treatment.</p>
+        </div>
+      </section>
+
+      <!-- POTENTIAL LABS (not recommendations) -->
+      <section class="section" id="labs" aria-labelledby="labs-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="labs-heading">Labs a clinician may consider</h2>
+            <p class="lead">Examples for orientation only&mdash;not a recommended panel, and not a list to order for yourself. Your clinician individualizes what is worth measuring.</p>
+          </div>
+          <ul class="scan-list">
+            <li><strong>Complete blood count</strong> &mdash; screens for anemia and other blood-count changes</li>
+            <li><strong>Ferritin and iron studies</strong> &mdash; iron stores can be low before a blood count looks abnormal (<a href="/labs/iron-ferritin">iron &amp; ferritin</a>)</li>
+            <li><strong>Thyroid function</strong> &mdash; checks how thyroid signalling is affecting energy regulation (<a href="/labs/thyroid">thyroid testing</a>)</li>
+            <li><strong>Vitamin B12 and vitamin D</strong> &mdash; nutrient shortfalls that can present as fatigue and fog (<a href="/labs/vitamin-b12">vitamin B12</a>)</li>
+            <li><strong>Metabolic panel and A1c</strong> &mdash; kidney, liver, electrolyte, and blood-sugar context (<a href="/labs/a1c-blood-sugar">A1c &amp; blood sugar</a>)</li>
+          </ul>
+          <p>Results need interpretation more than they need collection. A value inside the reference range can still be wrong for you, and a mild flag can be meaningless&mdash;which is why <a href="/answers/why-normal-labs-dont-mean-healthy">normal labs do not automatically mean healthy</a>. If you want the fuller picture of fatigue-related testing, the <a href="/labs/fatigue-brain-fog">fatigue and brain fog labs</a> guide goes deeper.</p>
+        </div>
+      </section>
+
+      <!-- RELATED CONDITIONS & GUIDES -->
+      <section class="section section-tinted" id="related" aria-labelledby="related-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="related-heading">Related guides</h2>
+            <p class="lead">Follow the thread that sounds most like your experience.</p>
+          </div>
+          <ul class="footer-links">
+            <li><a href="/answers/why-am-i-tired-even-after-sleeping">Why am I tired even after sleeping?</a></li>
+            <li><a href="/answers/afternoon-energy-crash-after-lunch">Afternoon energy crashes after lunch</a></li>
+            <li><a href="/answers/can-sleep-apnea-cause-fatigue">Can sleep apnea cause fatigue?</a></li>
+            <li><a href="/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign">Sleep apnea, fatigue &amp; metabolic risk</a></li>
+            <li><a href="/blog/insomnia-treatment-options-beyond-medication">Insomnia options beyond medication</a></li>
+            <li><a href="/answers/brain-fog-after-eating">Brain fog after eating</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section faq-accordion-section" id="faq" aria-labelledby="faq-heading">
+        <div class="container">
+          <div class="faq-accordion">
+            <div class="faq-accordion-header">
+              <h2 id="faq-heading">Frequently asked questions</h2>
+            </div>
+            <div class="faq-accordion-list">
+${faqAccordion(FAQS, 'faq-fatigue')}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NEXT STEP — primary care destination (secondary button; primary is in hero) -->
+      <section class="section section-tinted" id="next-step" aria-labelledby="next-step-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="next-step-heading">Bring your fatigue to a clinician</h2>
+            <p class="lead">You do not need a theory before you book. Bringing the timeline, your medications, and what has changed is enough to start.</p>
+          </div>
+          <div style="max-width:640px;margin:0 auto;text-align:center;">
+            <p><a class="button ds-button ds-button--secondary secondary" href="/book-appointment" data-siya-track="booking_click" data-siya-location="next-step" data-component="button">Book a primary care visit</a></p>
+            <p class="cta-microcopy">Prefer to ask questions first? <a href="/redirect/meet-greet">Book a free Meet &amp; Greet</a>, or review <a href="/pricing">pricing</a> before you decide.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p><a href="/primary-urgent-care">Primary &amp; Urgent Care</a> &middot; &copy; 2026 Siya Health Inc.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+`;
+}
+
+fs.writeFileSync(OUT, render());
+console.log('Wrote fatigue.html (canonical fatigue entity page)');

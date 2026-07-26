@@ -176,7 +176,7 @@ const DEFAULT_ANSWER_BY_TOPIC = {
 export const CORNERSTONE_BLOG_PATHS = {
   FOOD_NOISE: '/blog/food-noise-and-glp-1-what-it-means-and-what-helps',
   INSULIN: '/blog/insulin-resistance-and-weight-loss-clinician-overview',
-  FATIGUE: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+  FATIGUE: '/fatigue',
   SLEEP_APNEA: '/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign',
   FREE_T: '/blog/free-testosterone-vs-total-testosterone-what-patients-should-know',
 };
@@ -244,7 +244,7 @@ export const ANCHOR_LABELS = {
   '/prescriptions': 'Online prescription services',
   '/blog/food-noise-and-glp-1-what-it-means-and-what-helps': 'Food noise and GLP-1 guide',
   '/blog/insulin-resistance-and-weight-loss-clinician-overview': 'Insulin resistance and weight loss',
-  '/blog/why-am-i-always-tired-causes-when-to-see-doctor': 'Why am I always tired?',
+  '/fatigue': 'Fatigue: when tired stops being normal',
   '/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign': 'Sleep apnea, fatigue, and metabolic risk',
   '/blog/free-testosterone-vs-total-testosterone-what-patients-should-know': 'Free vs total testosterone',
   '/answers/can-sleep-apnea-cause-fatigue': 'Can sleep apnea cause fatigue?',
@@ -435,11 +435,11 @@ const LEARN_MORE_WEIGHT = `<!-- SIYA:LEARN-MORE-WEIGHT -->
               <strong>Mental Health &amp; Weight</strong>
               <span>Stress, mood, and habits that affect outcomes.</span>
             </a>
-            <a class="adhd-reading-card" href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">
+            <a class="adhd-reading-card" href="/fatigue">
               <figure class="adhd-reading-card-media">
                 <img src="/assets/images/editorial-exhausted-morning.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
               </figure>
-              <strong>Why Am I Always Tired?</strong>
+              <strong>Fatigue</strong>
               <span>Energy, sleep, and metabolic overlap.</span>
             </a>
           </div>
@@ -484,11 +484,11 @@ const LEARN_MORE_MENS = `<!-- SIYA:LEARN-MORE-MENS -->
               <strong>Sleep Apnea &amp; Fatigue</strong>
               <span>When snoring signals more than noise.</span>
             </a>
-            <a class="adhd-reading-card" href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">
+            <a class="adhd-reading-card" href="/fatigue">
               <figure class="adhd-reading-card-media">
                 <img src="/assets/images/editorial-mens-low-energy.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
               </figure>
-              <strong>Why Am I Always Tired?</strong>
+              <strong>Fatigue</strong>
               <span>Energy workups that go beyond caffeine.</span>
             </a>
             <a class="adhd-reading-card" href="/answers/testosterone-and-adhd-overlap">
@@ -516,7 +516,7 @@ const LEARN_MORE_WOMENS = `<!-- SIYA:LEARN-MORE-WOMENS -->
             <li><a href="/answers/what-is-insulin-resistance">What is insulin resistance?</a></li>
             <li><a href="/answers/why-am-i-tired-even-after-sleeping">Why am I tired even after sleeping?</a></li>
             <li><a href="/answers/poor-sleep-feels-like-adhd">When poor sleep feels like ADHD</a></li>
-            <li><a href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">Why am I always tired?</a></li>
+            <li><a href="/fatigue">Fatigue: when tired stops being normal</a></li>
             <li><a href="/blog/insulin-resistance-and-weight-loss-clinician-overview">Insulin resistance and weight loss</a></li>
             <li><a href="/blog/food-noise-and-glp-1-what-it-means-and-what-helps">Food noise and GLP-1</a></li>
             <li><a href="/answers/what-is-food-noise">What is food noise?</a></li>
@@ -563,11 +563,11 @@ const LEARN_MORE_TELE = `<!-- SIYA:LEARN-MORE-TELE -->
               <strong>Online Treatment Overview</strong>
               <span>How virtual treatment pathways work.</span>
             </a>
-            <a class="adhd-reading-card" href="/blog/why-am-i-always-tired-causes-when-to-see-doctor">
+            <a class="adhd-reading-card" href="/fatigue">
               <figure class="adhd-reading-card-media">
                 <img src="/assets/images/editorial-exhausted-morning.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
               </figure>
-              <strong>Why Am I Always Tired?</strong>
+              <strong>Fatigue</strong>
               <span>Common reasons adults book a visit.</span>
             </a>
             <a class="adhd-reading-card" href="/blog/telehealth">
@@ -2254,6 +2254,18 @@ export function injectHeaderScroll(html) {
   return html.replace(/<\/body>/i, `${block}\n</body>`);
 }
 
+
+/** Sitewide Siya AI Concierge widget (not Messenger / LeadConnector). */
+export function injectSiyaConcierge(html, relPath) {
+  if (isLegalContentPage(relPath)) return html;
+  if (isRedirectTransitionPage(relPath)) return html;
+  if (!html || html.includes('siya-concierge.js')) return html;
+  const block = `<!-- SIYA:CONCIERGE -->
+    <script src="/scripts/siya-concierge.js" defer></script>
+    <!-- /SIYA:CONCIERGE -->`;
+  return html.replace(/<\/body>/i, `${block}\n</body>`);
+}
+
 /** Floating chat widgets paused — Messenger FAB + GHL LeadConnector only. Spruce Secure Chat CTAs stay. */
 export function injectContactFab(html) {
   return stripChatWidgets(html);
@@ -2303,6 +2315,7 @@ export function applySiteChrome(html, relPath, title = '') {
     html = normalizeConversionRedirectUrls(html);
     html = ensureMeetGreetHrefs(html);
     html = stripChatChannels(html);
+    html = injectSiyaConcierge(html, relPath);
     return injectGtmAndTracking(html, relPath);
   }
 
@@ -2346,5 +2359,7 @@ export function applySiteChrome(html, relPath, title = '') {
   html = normalizeFavicons(html);
   html = applyPricingTokens(html);
   html = stripChatChannels(html);
+  html = injectSiyaConcierge(html, relPath);
   return injectGtmAndTracking(html, relPath);
 }
+

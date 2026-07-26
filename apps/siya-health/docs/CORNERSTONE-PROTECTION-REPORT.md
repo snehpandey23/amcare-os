@@ -1,6 +1,6 @@
 # Cornerstone Protection Report
 
-Generated: 2026-07-26T10:20:58.509Z
+Generated: 2026-07-26T11:41:03.459Z
 
 ### Food Noise
 - **Cornerstone blog:** /blog/food-noise-and-glp-1-what-it-means-and-what-helps
@@ -48,9 +48,9 @@ Generated: 2026-07-26T10:20:58.509Z
 | Canonical pointer to blog? | ✓ Yes |
 
 ### Fatigue
-- **Cornerstone blog:** /blog/why-am-i-always-tired-causes-when-to-see-doctor
-- **Blog title:** Why Am I Always Tired? Causes and When to See a Doctor
-- **Blog H1:** Why Am I Always Tired? Causes and When to See a Doctor
+- **Cornerstone blog:** /fatigue
+- **Blog title:** Fatigue — Why You Are Always Tired, and When to Get Evaluated
+- **Blog H1:** Fatigue: when tired stops being normal
 
 | Guide | /answers/why-am-i-tired-even-after-sleeping |
 | Guide H1 | Why am I tired even after sleeping? |

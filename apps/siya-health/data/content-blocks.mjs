@@ -300,6 +300,23 @@ export const CONTENT_BLOCKS = [
     generator: 'scripts/generate-answer-pages.mjs',
   },
 
+  {
+    id: 'SIYA:DIFFERENTIAL-RECOGNITION',
+    name: 'Differential Recognition ("what it could be")',
+    kind: 'clinical',
+    entity: 'per-symptom',
+    allowedTopics: ['primary-care', 'labs'],
+    allowedPaths: /^(fatigue|brain-fog|low-energy|low-motivation|poor-concentration)\.html$/,
+    owner: { clinical: 'Dr. Swati Pandey', editorial: 'Content OS', engineering: 'differential-diagnosis module' },
+    version: 'v1.0',
+    approved: '2026-07-26',
+    clinicalReview: 'approved',
+    status: 'production',
+    generator: 'data/differential-diagnosis.mjs → renderDifferentialSection',
+    notes:
+      'Symptom-hub only. No likelihood language, no ranking, no percentages, no instruction to test or treat. Max 8 rows so the section never breaches the link cap. Reusable across symptom Canonical Entity Pages.',
+  },
+
   // ── Chrome (engineering-owned; not clinically/editorially gated) ───────
   { id: 'SIYA:TRACKING', name: 'Analytics tracking', kind: 'chrome', allowedTopics: 'any', owner: { clinical: 'n/a', editorial: 'n/a', engineering: 'site-chrome' }, version: 'v1.0', approved: '2026-07-26', clinicalReview: 'n/a', status: 'chrome', generator: 'site-chrome.mjs' },
   { id: 'SIYA:COOKIE-NOTICE', name: 'Cookie notice', kind: 'chrome', allowedTopics: 'any', owner: { clinical: 'n/a', editorial: 'Legal', engineering: 'site-chrome' }, version: 'v1.0', approved: '2026-07-26', clinicalReview: 'n/a', status: 'chrome', generator: 'site-chrome.mjs' },

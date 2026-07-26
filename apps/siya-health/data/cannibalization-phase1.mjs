@@ -312,7 +312,7 @@ export const CANONICAL_WINNING_BLOGS = [
   '/blog/sildenafil-for-erectile-dysfunction-what-to-expect',
   '/blog/food-noise-and-glp-1-what-it-means-and-what-helps',
   '/blog/insulin-resistance-and-weight-loss-clinician-overview',
-  '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+  '/fatigue',
   '/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign',
   '/blog/free-testosterone-vs-total-testosterone-what-patients-should-know',
   '/blog/medical-weight-loss-glp1-semaglutide-texas',
@@ -335,7 +335,7 @@ export const CORNERSTONE_SYSTEMS = [
   },
   {
     name: 'Fatigue',
-    blog: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+    blog: '/fatigue',
     guides: ['/answers/why-am-i-tired-even-after-sleeping', '/answers/why-normal-labs-dont-mean-healthy'],
     headTermOwner: 'blog',
   },

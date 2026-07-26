@@ -1,6 +1,6 @@
 # Controlled Substance Treatment Agreement — Publish Report
 
-Generated: 2026-07-26T10:21:06.700Z
+Generated: 2026-07-26T11:41:11.830Z
 
 ## Published document
 
@@ -27,15 +27,16 @@ Operational wording preserved from approved DPC / controlled-substance protocol 
 
 | Metric | Count |
 |--------|------:|
-| Pages requiring CS agreement link | 94 |
-| Pages with link after build | 74 |
-| Missing | 20 |
+| Pages requiring CS agreement link | 96 |
+| Pages with link after build | 75 |
+| Missing | 21 |
 
 ### Missing links
 - `adhd-diagnosis-austin.html`
 - `adhd-diagnosis-houston.html`
 - `adhd-diagnosis-pennsylvania.html`
 - `adhd-diagnosis-philadelphia.html`
+- `blog/adhd-evaluation-cost-california.html`
 - `blog/adhd-treatment-austin-tx.html`
 - `blog/adhd-treatment-dallas-tx.html`
 - `blog/adhd-treatment-fort-worth-tx.html`

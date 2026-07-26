@@ -56,7 +56,6 @@ const BLOG_EXTRA_GUIDES = {
     'high-shbg-low-free-testosterone',
   ],
   'glp1-side-effects-and-how-to-manage-them': ['glp-1-side-effects', 'glp-1-nausea-management'],
-  'why-am-i-always-tired-causes-when-to-see-doctor': ['why-am-i-tired-even-after-sleeping', 'why-normal-labs-dont-mean-healthy'],
   'when-is-testosterone-therapy-appropriate': ['when-is-testosterone-therapy-appropriate', 'trt-monitoring-requirements'],
   'medical-weight-loss-glp1-semaglutide-texas': ['who-qualifies-glp-1-weight-loss'],
   'adhd-telehealth-california': ['telehealth-adhd-california'],

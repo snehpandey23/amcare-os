@@ -1,13 +1,13 @@
 # SEO Deployment QA Report
 
-Generated: 2026-07-26T10:21:06.650Z
+Generated: 2026-07-26T11:41:11.785Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| HTML pages scanned | 192 |
-| Sitemap URLs | 158 |
+| HTML pages scanned | 195 |
+| Sitemap URLs | 159 |
 | Pages with Meet & Greet in nav | 0 |
 | Non-ADHD pages still referencing adhd-screening | 66 |
 | Broken internal links (sample) | 0 |
@@ -21,7 +21,7 @@ Generated: 2026-07-26T10:21:06.650Z
 |-----|:-----------:|:----------:|
 | /blog/food-noise-and-glp-1-what-it-means-and-what-helps | ✓ | ✓ |
 | /blog/insulin-resistance-and-weight-loss-clinician-overview | ✓ | ✓ |
-| /blog/why-am-i-always-tired-causes-when-to-see-doctor | ✓ | ✓ |
+| /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | ✓ | ✓ |
 
 ### Answer pages
 
@@ -67,8 +67,8 @@ Generated: 2026-07-26T10:21:06.650Z
 - `blog/vyvanse-vs-adderall-differences.html`
 - `blog/weight-loss.html`
 - `blog/when-is-testosterone-therapy-appropriate.html`
-- `blog/why-am-i-always-tired-causes-when-to-see-doctor.html`
 - `book-appointment.html`
+- `fatigue.html`
 - `index.html`
 - `intake/index.html`
 - `labs/a1c-blood-sugar.html`
@@ -108,7 +108,7 @@ Generated: 2026-07-26T10:21:06.650Z
 - `womens-health.html`
 - `womens-midlife-health.html`
 
-### All pages with any `adhd-screening` reference (167)
+### All pages with any `adhd-screening` reference (168)
 
 - `about.html`
 - `adhd-care.html`
@@ -118,6 +118,7 @@ Generated: 2026-07-26T10:21:06.650Z
 - `adhd-screening-results.html`
 - `adhd-screening.html`
 - `adhd-treatment-online.html`
+- `adult-adhd-california.html`
 - `adult-adhd-diagnosis.html`
 - `adult-adhd-screening-california.html`
 - `answers/adderall-vs-vyvanse-adults.html`
@@ -149,20 +150,15 @@ Generated: 2026-07-26T10:21:06.650Z
 - `answers/index.html`
 - `answers/insulin-resistance-without-diabetes.html`
 - `answers/is-adhd-medication-safe-long-term.html`
-- `answers/is-online-adhd-diagnosis-legitimate.html`
 
-_…and 127 more (expected on ADHD funnels)._
+_…and 128 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 
 | From | To | Linked |
 |------|-----|:------:|
 | blog/food-noise-and-glp-1-what-it-means-and-what-helps.html | insulin-resistance-and-weight-loss-clinician-overview | ✓ |
-| blog/food-noise-and-glp-1-what-it-means-and-what-helps.html | why-am-i-always-tired-causes-when-to-see-doctor | ✓ |
 | blog/insulin-resistance-and-weight-loss-clinician-overview.html | food-noise-and-glp-1-what-it-means-and-what-helps | ✓ |
-| blog/insulin-resistance-and-weight-loss-clinician-overview.html | why-am-i-always-tired-causes-when-to-see-doctor | ✓ |
-| blog/why-am-i-always-tired-causes-when-to-see-doctor.html | food-noise-and-glp-1-what-it-means-and-what-helps | ✓ |
-| blog/why-am-i-always-tired-causes-when-to-see-doctor.html | insulin-resistance-and-weight-loss-clinician-overview | ✓ |
 
 ## Service page Learn More blocks
 
@@ -191,6 +187,7 @@ _None detected in static HTML scan._
 - `adhd-treatment-online.html`
 - `adult-adhd-diagnosis.html`
 - `answers/weight-gain-after-stopping-ozempic.html`
+- `blog/adhd-evaluation-cost-california.html`
 - `blog/adhd-treatment-austin-tx.html`
 - `blog/adhd-treatment-dallas-tx.html`
 - `blog/adhd-treatment-fort-worth-tx.html`
@@ -209,9 +206,8 @@ _None detected in static HTML scan._
 - `blog/adult-adhd-treatment-california-2026.html`
 - `blog/phentermine-for-weight-loss-safety-and-effectiveness.html`
 - `blog/pots-and-adhd.html`
+- `blog/why-am-i-always-tired-causes-when-to-see-doctor.html`
 - `docs/tint-options-preview.html`
-- `intake/index.html`
-- `online-adhd-test.html`
 
 ## Recommendations
 

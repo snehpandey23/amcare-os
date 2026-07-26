@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-26T10:21:06.335Z",
+  "generatedAt": "2026-07-26T11:41:11.547Z",
   "formId": "mnWpgh0IEgFvJymdZqHY",
   "bookingUrl": "https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=kkarJfxH",
   "legalDocumentVersion": "terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31",
@@ -12,13 +12,13 @@
     "npp": "legal_acceptance_npp"
   },
   "summary": {
-    "htmlPagesScanned": 192,
-    "pagesWithGhlLinks": 166,
+    "htmlPagesScanned": 195,
+    "pagesWithGhlLinks": 167,
     "totalGhlBookingLinks": 178,
     "pagesWithCarepatronLinks": 3,
     "totalCarepatronBookingLinks": 3,
     "pagesWithAcceptanceScript": 1,
-    "pagesWithGhlMissingAcceptance": 159,
+    "pagesWithGhlMissingAcceptance": 160,
     "intakeHub": true
   },
   "externalFunnels": [
@@ -127,6 +127,16 @@
     {
       "path": "/adhd-treatment-online",
       "file": "adhd-treatment-online.html",
+      "category": "adhd-funnel",
+      "ghlBookingLinks": 1,
+      "carepatronBookingLinks": 0,
+      "hasLegalAcceptanceScript": false,
+      "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/adult-adhd-california",
+      "file": "adult-adhd-california.html",
       "category": "adhd-funnel",
       "ghlBookingLinks": 1,
       "carepatronBookingLinks": 0,
@@ -1285,16 +1295,6 @@
       "hasChatWidget": false
     },
     {
-      "path": "/blog/why-am-i-always-tired-causes-when-to-see-doctor",
-      "file": "blog/why-am-i-always-tired-causes-when-to-see-doctor.html",
-      "category": "general-cta",
-      "ghlBookingLinks": 2,
-      "carepatronBookingLinks": 0,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
-      "hasChatWidget": false
-    },
-    {
       "path": "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd",
       "file": "blog/youre-not-lazy-signs-undiagnosed-adult-adhd.html",
       "category": "adhd-funnel",
@@ -1322,6 +1322,16 @@
       "carepatronBookingLinks": 0,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": true,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/fatigue",
+      "file": "fatigue.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 1,
+      "carepatronBookingLinks": 0,
+      "hasLegalAcceptanceScript": false,
+      "adhdDisclaimerRequired": false,
       "hasChatWidget": false
     },
     {
@@ -1754,6 +1764,7 @@
     "adhd-screening-results.html",
     "adhd-screening.html",
     "adhd-treatment-online.html",
+    "adult-adhd-california.html",
     "adult-adhd-diagnosis.html",
     "answers/adderall-vs-vyvanse-adults.html",
     "answers/adhd-and-weight-loss-connection.html",
@@ -1869,10 +1880,10 @@
     "blog/vyvanse-vs-adderall-differences.html",
     "blog/weight-loss.html",
     "blog/when-is-testosterone-therapy-appropriate.html",
-    "blog/why-am-i-always-tired-causes-when-to-see-doctor.html",
     "blog/youre-not-lazy-signs-undiagnosed-adult-adhd.html",
     "book-appointment.html",
     "creyos-adhd-testing.html",
+    "fatigue.html",
     "index.html",
     "labs.html",
     "labs/a1c-blood-sugar.html",

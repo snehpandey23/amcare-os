@@ -583,7 +583,7 @@ const CORE_ANSWER_SEEDS = [
     ],
     topic: 'telehealth',
     reviewerSlug: 'dr-natasha-desai',
-    cornerstoneBlog: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+    cornerstoneBlog: '/fatigue',
   },
   {
     slug: 'can-sleep-apnea-cause-fatigue',
@@ -727,8 +727,8 @@ const CORE_ANSWER_SEEDS = [
         label: 'Sleep apnea, fatigue & metabolic risk (clinical guide)',
       },
       {
-        href: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
-        label: 'Why am I always tired? (fatigue cornerstone)',
+        href: '/fatigue',
+        label: 'Fatigue: when tired stops being normal',
       },
       { href: '/telehealth', label: 'Telehealth & virtual care' },
     ],
@@ -742,7 +742,7 @@ const CORE_ANSWER_SEEDS = [
     topic: 'telehealth',
     aboutCondition: 'Sleep Disorders and Attention Deficit Hyperactivity Disorder',
     reviewerSlug: 'dr-natasha-desai',
-    cornerstoneBlog: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+    cornerstoneBlog: '/fatigue',
   },
   {
     slug: 'brain-fog-after-eating',
@@ -889,8 +889,8 @@ const CORE_ANSWER_SEEDS = [
         label: 'Insulin resistance & weight loss (cornerstone guide)',
       },
       {
-        href: '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
-        label: 'Why am I always tired? (fatigue cornerstone)',
+        href: '/fatigue',
+        label: 'Fatigue: when tired stops being normal',
       },
       { href: '/weight-loss-metabolic-health', label: 'Medical weight loss & metabolic health' },
       { href: '/telehealth', label: 'Telehealth & virtual care' },

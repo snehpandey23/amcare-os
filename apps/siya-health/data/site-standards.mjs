@@ -151,7 +151,8 @@ export const REMOVED_BOOKING_CTA_LABELS = [
 /** Deleted blog URLs → canonical replacement (internal links only; vercel.json handles external redirects). */
 export const REMOVED_BLOG_PATHS = {
   '/blog/all': '/blog',
-  '/blog/modafinil-for-focus-and-fatigue-is-it-safe': '/blog/why-am-i-always-tired-causes-when-to-see-doctor',
+  // Retargeted to /fatigue when the tiredness blog was retired — keeps this single-hop.
+  '/blog/modafinil-for-focus-and-fatigue-is-it-safe': '/fatigue',
   '/blog/glutathione-and-peptides-what-do-they-actually-do': '/mens-health-longevity',
   '/blog/ambien-and-sleep-medications-risks-and-benefits': '/blog/insomnia-treatment-options-beyond-medication',
   '/adhd-evaluation-cost': '/pricing',

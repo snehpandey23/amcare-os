@@ -822,6 +822,73 @@
       ]
     }
   ],
+  "symptoms": [
+    {
+      "@id": "https://siya.health/symptoms/fatigue",
+      "@type": "MedicalSymptom",
+      "entity": "fatigue",
+      "name": "Fatigue",
+      "slug": "fatigue",
+      "canonicalUrl": "/fatigue",
+      "pageType": "canonical-entity-page",
+      "aliases": [
+        "Always tired",
+        "Tiredness",
+        "Exhaustion",
+        "Low energy",
+        "No energy",
+        "Chronic tiredness"
+      ],
+      "parents": [
+        "primary-care",
+        "symptoms"
+      ],
+      "children": [
+        "brain-fog",
+        "sleep-problems",
+        "low-energy"
+      ],
+      "relatedConditions": [
+        "iron-deficiency",
+        "thyroid-disorders",
+        "vitamin-b12-deficiency",
+        "vitamin-d-deficiency",
+        "depression",
+        "anxiety",
+        "sleep-apnea",
+        "adult-adhd",
+        "perimenopause",
+        "low-testosterone"
+      ],
+      "labs": [
+        "CBC",
+        "Ferritin",
+        "TSH",
+        "Vitamin B12",
+        "Vitamin D",
+        "CMP"
+      ],
+      "labsUrls": [
+        "/labs/fatigue-brain-fog",
+        "/labs/iron-ferritin",
+        "/labs/thyroid",
+        "/labs/vitamin-b12",
+        "/labs/a1c-blood-sugar"
+      ],
+      "service": "/primary-urgent-care",
+      "primaryCta": {
+        "label": "Book a primary care visit",
+        "url": "/book-appointment"
+      },
+      "retiredUrls": [
+        "/blog/why-am-i-always-tired-causes-when-to-see-doctor"
+      ],
+      "providers": [
+        "https://siya.health/providers/dr-vanessa-urbina#physician"
+      ],
+      "notes": "Symptom-first hub. ADHD, hormones, and metabolic health are related entities reached from here — never the destination of a fatigue query."
+    }
+  ],
   "knowledgeHubs": {
     "planned": [
       {
