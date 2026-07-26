@@ -1,0 +1,16 @@
+---
+description: Siya Guide public KB is rebuilt automatically — never ask the user to run build:kb manually
+globs: apps/siya-assistant/**/*,apps/siya-health/**/*
+alwaysApply: false
+---
+
+# Siya Guide knowledge base
+
+`apps/siya-assistant/data/public-kb.json` is regenerated automatically:
+
+1. On `siya-health` `npm run build` (after `seo-build.mjs`)
+2. On `siya-assistant` `predev` / `prebuild`
+
+Do **not** ask the user to remember or manually run `npm run build:kb`.
+
+If topic routing is wrong, fix `lib/public-routes.ts` / retrieval / intents and add a case to `scripts/test-topic-routing.ts`.

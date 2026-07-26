@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Siya local preview hub</title>
+  <style>
+    body { font-family: "Avenir Next", system-ui, sans-serif; background:#f7f5f2; color:#1f2a37; margin:0; padding:40px 20px; }
+    .wrap { max-width:720px; margin:0 auto; }
+    h1 { margin:0 0 8px; }
+    p { color:#5c6570; line-height:1.5; }
+    a.card { display:block; background:#fff; border:1px solid rgba(31,42,55,.12); border-radius:14px; padding:16px 18px; margin:12px 0; text-decoration:none; color:inherit; }
+    a.card:hover { border-color:#6b8f71; }
+    a.card strong { display:block; margin-bottom:4px; }
+    .note { background:#fff8e6; border:1px solid #e6d5a8; border-radius:12px; padding:12px 14px; margin:20px 0; font-size:.92rem; }
+    code { background:rgba(0,0,0,.05); padding:1px 5px; border-radius:4px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Local preview hub</h1>
+    <p>Inspect site changes before deploy. Server must be running from <code>apps/siya-health</code>.</p>
+    <div class="note">If these links fail, the static server isn’t up. Run <code>npm run preview:local</code> from <code>apps/siya-health</code>.</div>
+    <a class="card" href="/book-appointment.html"><strong>1. Book appointment (Meet &amp; Greet iframe)</strong>Carepatron calendar embed + direct booking CTAs</a>
+    <a class="card" href="/siya-circle.html"><strong>2. Siya Circle (newsletter iframe)</strong>Carepatron form embed replacing old GHL</a>
+    <a class="card" href="/_preview-carepatron-circle-embed.html"><strong>3. Circle embed only</strong>Minimal iframe test page</a>
+    <a class="card" href="/redirect/meet-greet/"><strong>4. Meet &amp; Greet redirect page</strong>Now iframe-first Carepatron booking</a>
+    <a class="card" href="/index.html"><strong>5. Homepage</strong>Nav / hero Meet &amp; Greet should open Carepatron</a>
+    <a class="card" href="http://127.0.0.1:3456/" target="_blank" rel="noopener"><strong>6. Siya Assistant chatbot</strong>Separate Next app on port 3456</a>
+  </div>
+<!-- SIYA:CONCIERGE -->
+    <script src="/scripts/siya-concierge.js" defer></script>
+    <!-- /SIYA:CONCIERGE -->
+</body>
+</html>

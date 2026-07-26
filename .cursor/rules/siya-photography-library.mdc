@@ -1,0 +1,17 @@
+---
+description: Siya Health photography library — use recognition categories instead of new stock searches
+globs: apps/siya-health/**/*
+alwaysApply: false
+---
+
+# Siya Health Photography Library
+
+When choosing or replacing images for Siya Health pages, blogs, landing pages, or social creative:
+
+1. Open `apps/siya-health/brand/photography/README.md` and `INVENTORY.md`.
+2. Pick the category that matches the section’s emotional job (recognition, not decoration).
+3. Prefer an existing library asset over searching for new stock.
+4. Never introduce competitor-branded or generic “healthcare” stock listed under **Do not use** in the inventory.
+5. If the category is `needs-shoot`, leave a gap note rather than filling with generic stock — unless the user explicitly asks for an interim seeded asset.
+
+North star: make patients feel seen before asking them to trust you.

@@ -1,0 +1,30 @@
+Tracker CSV synced → 04-Content-Tracker/
+Fuse carousel pack: AD-I-01
+  OK 05-Carousels/AD-I-01
+Fuse carousel pack: AD-S-01
+  OK 05-Carousels/AD-S-01
+Fuse carousel pack: AD-W-01
+  OK 05-Carousels/AD-W-01
+Fuse carousel pack: MH-L-01
+  OK 05-Carousels/MH-L-01
+Fuse carousel pack: MH-T-01
+  OK 05-Carousels/MH-T-01
+Fuse carousel pack: PC-T-01
+  OK 05-Carousels/PC-T-01
+Fuse carousel pack: SL-I-01
+  OK 05-Carousels/SL-I-01
+Fuse carousel pack: WH-R-02
+  OK 05-Carousels/WH-R-02
+Fuse carousel pack: WL-G-01
+  OK 05-Carousels/WL-G-01
+Fuse carousel pack: WL-S-01
+  OK 05-Carousels/WL-S-01
+
+=== Fuse report 2026-07-22_1335 ===
+Branch: main
+WorkDrive: /Users/sp/Library/CloudStorage/ZohoWorkDriveTrueSync-AmcareMedicalConsultancyIndiaPvtLtd/Common Folder/Siya Knowledge Editorial
+Synced (10): 05-Carousels/AD-I-01 05-Carousels/AD-S-01 05-Carousels/AD-W-01 05-Carousels/MH-L-01 05-Carousels/MH-T-01 05-Carousels/PC-T-01 05-Carousels/SL-I-01 05-Carousels/WH-R-02 05-Carousels/WL-G-01 05-Carousels/WL-S-01
+Skipped (0): none
+Conflicts (0): none
+Report: /Users/sp/amcare-os/apps/siya-health/brand/04-Content-Tracker/fuse-logs/fuse-2026-07-22_1335.txt
+Note: merge CSV rows into Siya-Content-Tracker.xlsx manually if needed.

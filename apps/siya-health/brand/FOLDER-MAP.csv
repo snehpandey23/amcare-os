@@ -1,0 +1,30 @@
+old_id,new_id,condition,created,notes
+WH-R-02,FEMALE-2026-07-20-midlife-coping,FEMALE,2026-07-20,Women midlife recognition carousel
+AD-I-01,ADHD-2026-07-21-iron-fog,ADHD,2026-07-21,ADHD vs iron fog
+AD-S-01,ADHD-2026-07-21-not-lazy,ADHD,2026-07-21,Overlooked adult signs
+AD-W-01,ADHD-2026-07-21-women-missed,ADHD,2026-07-21,Women ADHD often missed
+AD-M-01,ADHD-2026-07-21-nonstimulant,ADHD,2026-07-21,Non-stimulant meds
+AD-L-01,ADHD-2026-07-21-longterm-meds,ADHD,2026-07-21,Long-term med safety
+AD-O-01,ADHD-2026-07-21-online-legit,ADHD,2026-07-21,Online diagnosis legitimacy
+AD-W-02,ADHD-2026-07-22-women-quiet,ADHD,2026-07-22,Static — ADHD in women looks quiet (was 06-Statics only)
+MH-L-01,MALE-2026-07-21-trt-habits,MALE,2026-07-21,TRT lifestyle habits
+MH-T-01,MALE-2026-07-21-trt-when,MALE,2026-07-21,When TRT is appropriate
+ED-S-01,MALE-2026-07-21-ed-sildenafil,MALE,2026-07-21,Sildenafil / ED
+WL-G-01,OBESITY-2026-07-21-semaglutide,OBESITY,2026-07-21,How semaglutide works
+WL-T-01,OBESITY-2026-07-21-tirzepatide,OBESITY,2026-07-21,Tirzepatide vs sema
+WL-S-01,OBESITY-2026-07-21-glp1-sides,OBESITY,2026-07-21,GLP-1 side effects
+WL-C-01,OBESITY-2026-07-21-compounded-glp1,OBESITY,2026-07-21,Compounded vs branded
+WL-F-01,OBESITY-2026-07-21-food-noise,OBESITY,2026-07-21,Food noise + mental health
+WL-D-01,OBESITY-2026-07-21-vs-dieting,OBESITY,2026-07-21,Medical WL vs dieting
+WL-P-01,OBESITY-2026-07-21-phentermine,OBESITY,2026-07-21,Phentermine safety
+PC-T-01,PCP-2026-07-21-telehealth-rx,PCP,2026-07-21,How telehealth Rx works
+PC-S-01,PCP-2026-07-21-safe-online-rx,PCP,2026-07-21,Safe online prescriptions
+SL-I-01,SLEEP-2026-07-21-insomnia,SLEEP,2026-07-21,Insomnia beyond meds
+SL-A-01,SLEEP-2026-07-21-ambien,SLEEP,2026-07-21,Ambien risks
+HL-M-01,DERM-2026-07-21-minoxidil,DERM,2026-07-21,Minoxidil for hair loss
+PE-G-01,LONGEVITY-2026-07-21-peptides,LONGEVITY,2026-07-21,Glutathione & peptides
+FN-PC-01,_DELETE,BRAND,,Thin founder draft — merge into 06-Statics/LinkedIn-Dr-Sneh then delete
+LONGEVITY-2026-07-24-bpc157-hope-vs-proof,LONGEVITY-2026-07-24-bpc157-hope-vs-proof,LONGEVITY,2026-07-24,BPC-157 Part 1 hope vs proof
+LONGEVITY-2026-07-24-bpc157-before-you-buy,LONGEVITY-2026-07-24-bpc157-before-you-buy,LONGEVITY,2026-07-24,BPC-157 Part 2 before you buy
+ADHD-2026-07-25-covid-scaffolding,ADHD × COVID scaffolding Part 1,Carousel,editorial-packs/ADHD-2026-07-25-covid-scaffolding
+ADHD-2026-07-25-covid-rebuild,ADHD × COVID rebuild Part 2,Carousel,editorial-packs/ADHD-2026-07-25-covid-rebuild

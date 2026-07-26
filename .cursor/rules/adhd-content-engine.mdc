@@ -1,0 +1,43 @@
+---
+description: ADHD Knowledge Architecture Content Engine — gate rule, pipeline, linking SOP, EEAT, quality bar for Siya ADHD blogs/pillars
+globs: apps/siya-health/blog/**/*,apps/siya-health/answers/**/*,apps/siya-health/docs/ADHD*.md,apps/siya-health/docs/BLOG*.md,apps/siya-health/docs/LOCAL*.md
+alwaysApply: false
+---
+
+# ADHD Content Engine
+
+When creating or revising ADHD blogs, FAQs, or pillars in `apps/siya-health`, follow **`apps/siya-health/docs/ADHD-CONTENT-ENGINE.md`** in full, plus architecture in `ADHD-KNOWLEDGE-ARCHITECTURE.md`.
+
+## Gate
+
+Publish only if the URL (1) becomes definitive for a topic Siya must own, OR (2) materially strengthens a pillar/cluster. Else stop and re-scope.
+
+## Pipeline
+
+Knowledge Gap → Brief → SEO Review → Outline → Link Map → Medical Checklist → Draft → Publish.
+
+**Default:** deliver Brief + Outline first; wait for approval before full HTML unless the user says draft now.
+
+## Quality bar
+
+Do not ship encyclopedia-only pages. Prefer entity ownership (e.g. ADHD + binge eating, not “what is BED”). Include when relevant: prevalence early, comparison tables, myth boxes, practical day scenes, medication deep-dives for real search (Vyvanse/BED etc.), Siya evaluation what-to-expect, EEAT, conversion close that reframes toward ADHD eval.
+
+## Linking SOP
+
+Every net-new ADHD piece: 1 pillar · 2 blogs · 1 FAQ · 1 service (screening / Meet & Greet / adhd-care by funnel) · 1 local if live.
+
+## CTA by funnel
+
+Awareness → screening · Trust → Meet & Greet · Evaluation → /adhd-care · never Zocdoc/Spruce as cold primary.
+
+## KW strategy
+
+Win intersections and process/commercial investigation Siya can own. Do not fight Mayo on bare disease definitions unless Siya already owns the category.
+
+## EEAT
+
+Dr. Sneh Pandey MD, Internal Medicine, ABOM; last reviewed; real references; honest review status.
+
+## Local city treatment pages
+
+Follow `apps/siya-health/docs/LOCAL-ADHD-TREATMENT-PAGE-ENGINE.md`. Phase 5 only: state hub → city; anti-doorway; commercial investigation; Meet & Greet or `/adhd-care` CTA.

@@ -1,0 +1,46 @@
+Tracker CSV synced → 04-Content-Tracker/
+Fuse carousel pack: ADHD-2026-07-21-iron-fog
+  OK 05-Carousels/ADHD-2026-07-21-iron-fog
+Fuse carousel pack: ADHD-2026-07-21-not-lazy
+  OK 05-Carousels/ADHD-2026-07-21-not-lazy
+Fuse carousel pack: ADHD-2026-07-21-women-missed
+  OK 05-Carousels/ADHD-2026-07-21-women-missed
+  skip ADHD-2026-07-22-women-quiet — no editorial-packs/ADHD-2026-07-22-women-quiet
+Fuse static: ADHD-2026-07-22-women-quiet
+  OK 06-Statics/ADHD-2026-07-22-women-quiet
+Fuse carousel pack: ADHD-2026-07-25-covid-rebuild
+  OK 05-Carousels/ADHD-2026-07-25-covid-rebuild
+Fuse carousel pack: ADHD-2026-07-25-covid-scaffolding
+  OK 05-Carousels/ADHD-2026-07-25-covid-scaffolding
+Fuse carousel pack: FEMALE-2026-07-20-midlife-coping
+  OK 05-Carousels/FEMALE-2026-07-20-midlife-coping
+Fuse carousel pack: LONGEVITY-2026-07-24-bpc157-before-you-buy
+  OK 05-Carousels/LONGEVITY-2026-07-24-bpc157-before-you-buy
+Fuse carousel pack: LONGEVITY-2026-07-24-bpc157-hope-vs-proof
+  OK 05-Carousels/LONGEVITY-2026-07-24-bpc157-hope-vs-proof
+Fuse carousel pack: MALE-2026-07-21-trt-habits
+  OK 05-Carousels/MALE-2026-07-21-trt-habits
+Fuse carousel pack: MALE-2026-07-21-trt-when
+  OK 05-Carousels/MALE-2026-07-21-trt-when
+Fuse carousel pack: OBESITY-2026-07-21-glp1-sides
+  OK 05-Carousels/OBESITY-2026-07-21-glp1-sides
+Fuse carousel pack: OBESITY-2026-07-21-phentermine
+  OK 05-Carousels/OBESITY-2026-07-21-phentermine
+Fuse carousel pack: OBESITY-2026-07-21-semaglutide
+  OK 05-Carousels/OBESITY-2026-07-21-semaglutide
+Fuse carousel pack: PCP-2026-07-21-telehealth-rx
+  OK 05-Carousels/PCP-2026-07-21-telehealth-rx
+Fuse carousel pack: SLEEP-2026-07-21-insomnia
+  OK 05-Carousels/SLEEP-2026-07-21-insomnia
+  OK 06-Statics/ADHD-2026-07-22-women-quiet
+  OK 06-Statics/LinkedIn-Dr-Sneh
+  OK 06-Statics/_design-lab
+
+=== Fuse report 2026-07-25_0617 ===
+Branch: main
+WorkDrive: /Users/sp/Library/CloudStorage/ZohoWorkDriveTrueSync-AmcareMedicalConsultancyIndiaPvtLtd/Common Folder/Siya Knowledge Editorial
+Synced (19): 05-Carousels/ADHD-2026-07-21-iron-fog 05-Carousels/ADHD-2026-07-21-not-lazy 05-Carousels/ADHD-2026-07-21-women-missed 06-Statics/ADHD-2026-07-22-women-quiet 05-Carousels/ADHD-2026-07-25-covid-rebuild 05-Carousels/ADHD-2026-07-25-covid-scaffolding 05-Carousels/FEMALE-2026-07-20-midlife-coping 05-Carousels/LONGEVITY-2026-07-24-bpc157-before-you-buy 05-Carousels/LONGEVITY-2026-07-24-bpc157-hope-vs-proof 05-Carousels/MALE-2026-07-21-trt-habits 05-Carousels/MALE-2026-07-21-trt-when 05-Carousels/OBESITY-2026-07-21-glp1-sides 05-Carousels/OBESITY-2026-07-21-phentermine 05-Carousels/OBESITY-2026-07-21-semaglutide 05-Carousels/PCP-2026-07-21-telehealth-rx 05-Carousels/SLEEP-2026-07-21-insomnia 06-Statics/ADHD-2026-07-22-women-quiet 06-Statics/LinkedIn-Dr-Sneh 06-Statics/_design-lab
+Skipped (1): ADHD-2026-07-22-women-quiet (no editorial-packs/ADHD-2026-07-22-women-quiet)
+Conflicts (0): none
+Report: /Users/sp/amcare-os/apps/siya-health/brand/04-Content-Tracker/fuse-logs/fuse-2026-07-25_0617.txt
+Note: merge CSV rows into Siya-Content-Tracker.xlsx manually if needed.

@@ -1,0 +1,30 @@
+{
+  "date": "2026-07-26",
+  "pages": 191,
+  "metrics": {
+    "duplicateParagraphGroups": 1,
+    "duplicateLimit": 5,
+    "geoOnlyDuplicateGroupsExcluded": 0,
+    "irrelevantGeographyPages": 0,
+    "sectionsOver8Links": 0,
+    "pagesWithMultiplePrimaryCtas": 0,
+    "educationalPagesMissingClosing": 0,
+    "editorialFingerprintAvg": 10,
+    "editorialFingerprintMin": 10,
+    "fingerprintFloor": 9
+  },
+  "topDuplicates": [
+    {
+      "pages": 4,
+      "sample": "a practical next path is assessment → labs when indicated → a monitored plan. for related reading, s",
+      "examples": [
+        "answers/food-noise-returned-on-glp-1.html",
+        "answers/glp-1-nausea-management.html",
+        "answers/semaglutide-weight-loss-how-it-works.html",
+        "answers/who-qualifies-glp-1-weight-loss.html"
+      ]
+    }
+  ],
+  "failures": [],
+  "pass": true
+}

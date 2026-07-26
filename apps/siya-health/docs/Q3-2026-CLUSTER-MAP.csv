@@ -1,0 +1,40 @@
+cluster,intent,priority,target_url,current_url_or_gap,page_type,status,notes
+ADHD-CA,adult adhd diagnosis california,P0,/adhd-diagnosis-california,/blog/online-adhd-diagnosis-california,hub,promote-or-new,Cornerstone exists; needs hub role + city/spoke links
+ADHD-CA,adhd treatment california,P0,/adhd-treatment-california,/blog/adult-adhd-treatment-california-2026,hub,promote-or-new,City blogs must parent here
+ADHD-CA,adhd telehealth california,P1,/blog/adhd-telehealth-california,/blog/adhd-telehealth-california,spoke,live,Link to diagnosis hub
+ADHD-CA,adhd medication california,P1,/blog/adhd-medication-options-california,/blog/adhd-medication-options-california,spoke,live,
+ADHD-CA,adhd screening california,P1,/adult-adhd-screening-california,/adult-adhd-screening-california,tool-landing,live,ASRS funnel
+ADHD-CA,adhd treatment los angeles,P2,/blog/adhd-treatment-los-angeles-ca,/blog/adhd-treatment-los-angeles-ca,city,live,No new cities until cleanup
+ADHD-CA,adhd treatment san diego,P2,/blog/adhd-treatment-san-diego-ca,/blog/adhd-treatment-san-diego-ca,city,live,
+ADHD-CA,adhd treatment san francisco,P2,/blog/adhd-treatment-san-francisco-ca,/blog/adhd-treatment-san-francisco-ca,city,live,
+ADHD-CA,adhd treatment san jose,P2,/blog/adhd-treatment-san-jose-ca,/blog/adhd-treatment-san-jose-ca,city,live,
+ADHD-CA,adhd treatment oakland,P2,/blog/adhd-treatment-oakland-ca,/blog/adhd-treatment-oakland-ca,city,live,
+ADHD-CA,adhd treatment sacramento,P2,/blog/adhd-treatment-sacramento-ca,/blog/adhd-treatment-sacramento-ca,city,live,
+ADHD-CA,adhd treatment orange county,P2,/blog/adhd-treatment-orange-county-ca,/blog/adhd-treatment-orange-county-ca,city,live,
+ADHD-CA,adhd vs anxiety,P2,/answers/adhd-vs-anxiety,/answers/adhd-vs-anxiety,faq,live,National; link from CA hubs
+ADHD-CA,adhd vs burnout,P2,/answers/adhd-vs-burnout,/answers/adhd-vs-burnout,faq,live,
+ADHD-CA,adhd cost / insurance,P2,/answers/how-much-does-adhd-testing-cost,/answers/how-much-does-adhd-testing-cost,faq,live,Add CA insurance nuance in hub FAQs
+Fatigue,why am i always tired,P0,/fatigue OR elevate answer,/blog/why-am-i-always-tired-even-with-enough-sleep + /answers/why-am-i-tired-all-the-time,pillar,gap-or-elevate,W3-4 full volume
+Fatigue,iron deficiency fatigue brain fog,P0,/answers/or-blog iron ferritin fog,partial (ADHD iron editorial + labs),spoke,partial,Tie to labs/fatigue-brain-fog
+Fatigue,should i get thyroid checked,P0,/answers/should-i-get-thyroid-checked,GAP,decision-guide,todo,W3-4
+Fatigue,sleep apnea vs fatigue,P1,/answers/can-sleep-apnea-cause-fatigue,/answers/can-sleep-apnea-cause-fatigue,spoke,live,Expand links to fatigue pillar
+Fatigue,burnout vs depression vs adhd,P1,/answers/or tool explorer,/answers/adhd-vs-burnout,spoke-or-tool,partial,Tool Month 2
+Fatigue,fatigue assessment tool,P1,/fatigue-assessment,GAP,tool,todo,Month 2
+Fatigue,fatigue california telehealth,P2,/blog/fatigue-telehealth-california,GAP,spoke,todo,Month 2-3
+Primary-Care-CA,primary care california,P0,/primary-care-california,GAP,hub,todo,W3-4 stub then fill
+Primary-Care-CA,online primary care / telehealth what it treats,P0,/primary-urgent-care FAQs,/primary-urgent-care.html,service,live-weak-faq,Add 15-25 FAQs + schema
+Primary-Care-CA,can telehealth order blood work,P0,/answers/or FAQ on service,partial via labs,faq,todo,W3-4
+Primary-Care-CA,can you refill medications online,P1,/answers or service FAQ,GAP on PC page,faq,todo,
+Primary-Care-CA,primary care los angeles,P3,city page later,GAP,city,blocked,Only after hub proves useful
+Primary-Care-CA,primary care san diego,P3,city page later,GAP,city,blocked,
+Womens-Midlife,womens midlife / perimenopause hub,P0,/womens-midlife-health,/womens-midlife-health.html,hub,live,Deepen FAQs W3-4
+Womens-Midlife,perimenopause brain fog,P1,/blog/perimenopause-brain-fog,/blog/perimenopause-brain-fog,spoke,live,
+Womens-Midlife,perimenopause + ADHD,P0,/answers/or-blog peri-adhd,GAP (roadmap score 8),spoke,todo,Must ship W3-4
+Womens-Midlife,is this menopause,P1,/answers/is-this-menopause,GAP,faq,todo,
+Womens-Midlife,why am i suddenly anxious midlife,P1,/answers/sudden-anxiety-perimenopause,GAP,faq,todo,
+Womens-Midlife,adhd worse before period,P1,/answers/adhd-luteal-worsening,GAP,faq,todo,
+Womens-Midlife,peri symptom tracker,P1,/peri-symptom-tracker,GAP,tool,todo,Month 2
+Womens-Midlife,womens midlife california,P2,/blog/womens-midlife-telehealth-california,GAP,spoke,todo,Month 2-3
+Preventive,preventive care hub,P2,/preventive-care,/labs/preventive,hub,elevate-month-3,By age / women / men
+Preventive,annual blood tests adults,P2,/answers/which-preventive-blood-tests-adults,/answers/which-preventive-blood-tests-adults,spoke,live,
+Preventive,screening checklist by age,P2,/preventive/by-age,GAP,checklist,todo,Month 3

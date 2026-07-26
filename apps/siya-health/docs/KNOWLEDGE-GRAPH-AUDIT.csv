@@ -1,0 +1,19 @@
+Entity,Has Pillar,Has FAQ,Has Tool,Has Labs,Has Service,Internal Links,Status,Canonical Owner (target),Notes
+Adult ADHD,Yes,Yes,Yes (ASRS),Partial (adhd-support labs),Yes (/adhd-care),Strong,Complete,/blog/how-to-know-if-you-have-adhd-adult + /adhd-care,National strong
+ADHD California,Partial (spokes only),Partial,Yes (CA screening),Partial,Yes,Medium,Build,/adult-adhd-california,ONE cornerstone — not diagnosis+treatment split
+Executive dysfunction,Yes,Yes,No,No,Yes,Strong,Improve,/blog/executive-dysfunction-adhd,Checklist tool Month 2
+Fatigue,Partial,No,No,Yes (/labs/fatigue-brain-fog),Partial (PC),Weak,Build,/fatigue or elevate answer,F1 this sprint
+Brain fog,Partial,No,No,Partial,Partial,Weak,Build,under Fatigue pillar,Iron/thyroid/ADHD overlap
+Iron deficiency,Partial,No,No,Yes (/labs/iron-ferritin),Partial,Medium,Improve,labs + Fatigue spoke,Editorial exists; FAQ/tool gap
+Thyroid,Partial,No,No,Yes (/labs/thyroid),Partial,Medium,Improve,decision guide W3-4,Should I get thyroid checked?
+Perimenopause,Yes (/womens-midlife-health),Partial,No,Partial,Yes,Medium,Improve,/womens-midlife-health,Peri+ADHD spoke must ship
+ADHD + Perimenopause,No,No,No,Partial,Yes,None,Build,/answers or blog peri-adhd,Entity gap score 8
+Primary care (national),Partial (/primary-urgent-care),Building,No,Partial,Yes,Medium,Build,/primary-urgent-care,FAQs shipping now
+Virtual Primary Care California,No,No,No,Partial,Partial,None,Greenfield,/primary-care-california,Highest-level CA asset
+Preventive care,No,Partial,No,Partial (/labs/preventive),No hub,Weak,Greenfield,/preventive-care,Month 3 hub
+Men's health / testosterone,Partial,No,No,Yes,Yes,Medium,Improve,/mens-health-longevity,Add FAQs+schema
+Metabolic / GLP-1,Yes,Yes,No,Partial,Yes,Strong,Complete,/weight-loss-metabolic-health,National strong; CA angle later
+Health Tools hub,No,N/A,Partial (ASRS only),N/A,N/A,Weak,Greenfield,/health-tools,Month 2 hub page
+Labs education,Yes (/labs),Partial,N/A,Yes,Yes,Medium,Improve,/labs,Wire into every fatigue/PC journey
+Health Guides hub,Yes (/answers),Yes,Search live,Partial,Yes,Strong,Improve,/answers,Search added 2026-07-26
+Virtual care / telehealth,Yes (/telehealth),Yes,No,Partial,Yes,Strong,Complete,/telehealth,FAQ schema fixed
