@@ -27,6 +27,10 @@ export const INTENTIONAL_BOILERPLATE = [
   /this page is a concise faq/i,
   /for emergencies, call 911/i,
   /call 911 for emergencies/i,
+  /telehealth improves access but does not replace in-person examination/i,
+  /educational content cannot promise a specific weight outcome/i,
+  /hormone therapy claims on social media often omit fertility/i,
+  /emergency symptoms require local urgent or emergency care/i,
   /clinician-informed/i,
   /physician review pending/i,
   /board-certified providers providing telehealth care across/i,
@@ -56,6 +60,16 @@ export const INTENTIONAL_BOILERPLATE = [
   /learn more:\s*adhd evaluation/i,
   /same-week appointments/i,
   /seek emergency care now/i,
+  /this content is for educational purposes only and does not replace medical advice/i,
+  /important: this content is for educational purposes only and does not replace medical/i,
+  /availability varies; a clinician individualizes which tests/i,
+  /for california adults: read online adhd diagnosis/i,
+  /explore adhd care →/i,
+  /we see patients where licensed, including california/i,
+  /siya health inc\. provides administrative and non-clinical support/i,
+  /organizational service availability:/i,
+  /paraphrased themes from forums and patient communities/i,
+  /three calm steps from first conversation to a plan/i,
   /call 911 or go to emergency care/i,
   /contact prescriber promptly/i,
   /emergency evaluation\.?/i,
@@ -262,7 +276,7 @@ export function renderContextAwareClosing(seed, opts) {
             <section class="answer-closing" id="next-step" aria-labelledby="answer-closing-heading" data-assembly="context-closing" data-slug="${escapeHtml(slug)}">
               <h2 id="answer-closing-heading">What to do with this answer</h2>
               <p>${topicLead} (“${escapeHtml(question)}”), use it as orientation—not a diagnosis.${nuanceBit}</p>
-              <p>A practical next path is ${journey}.${relatedSentence}</p>
+              <p>For “${escapeHtml(question)},” a practical next path is ${journey}.${relatedSentence}</p>
               <div class="cta-block blog-cta answer-final-cta" data-assembly="primary-cta">
                 <a class="button ds-button ds-button--primary" href="${escapeHtml(primaryHref)}" data-siya-track="primary-cta-click" data-siya-location="answer-context-closing">${escapeHtml(primaryLabel)}</a>
               </div>

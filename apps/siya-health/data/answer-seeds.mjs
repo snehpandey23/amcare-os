@@ -5,7 +5,13 @@
 import { PHASE3_ANSWER_SEEDS } from './phase3-answer-seeds.mjs';
 import { PHASE5_ANSWER_SEEDS } from './phase5-thin-expansions.mjs';
 import { PHASE5_EXTRA_SECTIONS } from './phase5-section-boost.mjs';
+import { visitPrepParagraph, normalResultsParagraph } from '../scripts/content-assembly.mjs';
 
+/**
+ * Coordination section — every paragraph earns its place.
+ * No shared ADHD childhood-onset / normal-results paste across topics.
+ * Prep + normal-results are slug-unique via visitPrepParagraph / normalResultsParagraph.
+ */
 function phase5CoordinationSection(slug, topic) {
   const lead = {
     'adhd-vs-burnout': 'Burnout recovery and ADHD evaluation can run in parallel when timeline supports both.',
@@ -28,53 +34,22 @@ function phase5CoordinationSection(slug, topic) {
     'meet-and-greet-telehealth-expectations': 'First telehealth visits clarify logistics before clinical commitments.',
     'how-online-prescriptions-work': 'Prescribing laws apply equally to telehealth and in-person encounters.',
   };
-  const intro = lead[slug] || 'This Health Guide supports—not replaces—clinician-led care.';
-  const byTopic = {
-    adhd: [
-      `${intro} At Siya Health, adult ADHD pathways include screening, structured telehealth evaluation in eligible states, and follow-up when clinically appropriate. Related guides cover visit length, online legitimacy, stimulant and non-stimulant options, and starting medication safely.`,
-      'Coordinate ADHD care with sleep evaluation when snoring or unrefreshing sleep is present; treating obstructive sleep apnea can change perceived stimulant benefit. Iron deficiency, thyroid disease, and depression also belong on the differential before attributing symptoms to ADHD alone.',
-      'Workplace accommodations and academic support may require documentation of functional impairment. Keep visit summaries, rating scales, and pharmacy records organized if you change clinicians or move to another state.',
-      'Call 911 for emergencies. Telehealth improves access but does not replace in-person examination, sleep testing, or labs when clinically indicated.',
-      'Use related Health Guides (screening vs evaluation, medication side effects, sleep mimics) as structured reading before your visit—not as a substitute for personalized medical advice.',
-      'Confirm state licensure and program availability during intake; educational pages describe general standards that your clinician adapts to your history.',
-      'Document your symptom timeline (childhood vs adult onset, settings affected, best and worst weeks), sleep partners’ observations about snoring, medications and supplements, and three-month goals—those details speed responsible evaluation more than another online quiz.',
-      'When results are “normal” but you remain impaired, ask what was not measured (sleep testing, ferritin, insulin patterns, free testosterone calculation, mood screening) rather than closing the chart.',
-    ],
-    'weight-loss': [
-      `${intro} Medical weight-loss care combines nutrition, activity, sleep, behavioral support, and—when appropriate—FDA-approved pharmacotherapy with monitoring. Cornerstone blogs on insulin resistance and food noise provide deeper context than this summary page.`,
-      'GLP-1 medicines require titration, GI counseling, and discussion of rare serious risks. Avoid unregulated compounded products or cosmetic use without clinician oversight. ADHD-related impulsive eating and sleep apnea can undermine weight outcomes if left untreated.',
-      'Metabolic labs (glucose, A1C, lipids, blood pressure, waist trend) should be interpreted over time, not from one snapshot. Post-meal fatigue and brain fog may link to insulin resistance even when A1C is normal.',
-      'Start Secure Medical Chat when you want help choosing between evaluation pathways before enrolling in a full metabolic or weight-loss program.',
-      'Pair this guide with cornerstone blogs on insulin resistance and food noise when symptoms cluster (cravings, post-meal fog, waist gain)—your clinician integrates labs, sleep, and medications.',
-      'Educational content cannot promise a specific weight outcome; treatment plans follow FDA indications, monitoring, and individual tolerability.',
-      'Document your symptom timeline (childhood vs adult onset, settings affected, best and worst weeks), sleep partners’ observations about snoring, medications and supplements, and three-month goals—those details speed responsible evaluation more than another online quiz.',
-      'When results are “normal” but you remain impaired, ask what was not measured (sleep testing, ferritin, insulin patterns, free testosterone calculation, mood screening) rather than closing the chart.',
-    ],
-    'mens-health': [
-      `${intro} Men's health evaluation should screen sleep apnea, depression, and cardiometabolic risk before reflex testosterone prescribing. Total and free testosterone interpretation depends on SHBG, timing, and assay quality.`,
-      'TRT requires ongoing hematocrit, symptom, and prostate-age-appropriate monitoring. Fertility goals must be discussed before starting exogenous testosterone, which suppresses sperm production.',
-      'Erectile dysfunction may signal vascular disease—comprehensive care matters beyond pills alone. Coordinate with primary care for blood pressure, lipids, and glucose when indicated.',
-      'Telehealth can initiate appropriate labs and follow-up; local phlebotomy or sleep testing may still be required.',
-      'Review related guides on free vs total testosterone, TRT monitoring, and sleep apnea symptoms before assuming hormones explain fatigue or focus problems.',
-      'Hormone therapy claims on social media often omit fertility, hematocrit, and cardiovascular trade-offs that guideline-based care addresses.',
-      'Document your symptom timeline (childhood vs adult onset, settings affected, best and worst weeks), sleep partners’ observations about snoring, medications and supplements, and three-month goals—those details speed responsible evaluation more than another online quiz.',
-      'When results are “normal” but you remain impaired, ask what was not measured (sleep testing, ferritin, insulin patterns, free testosterone calculation, mood screening) rather than closing the chart.',
-    ],
-    telehealth: [
-      `${intro} Legitimate telehealth documents encounters, uses HIPAA-compliant tools, and maintains follow-up for prescriptions—especially controlled substances with PDMP review where required.`,
-      'Compare services on clinician licensure in your state, visit length for diagnosis-level care, and transparency about pricing and limitations. Start Secure Medical Chat to clarify fit; comprehensive ADHD or metabolic evaluation is a separate longer visit.',
-      'Keep medication lists, allergy history, and prior records available for upload. Emergency symptoms require local urgent or emergency care—not messaging queues.',
-      'Educational blogs on safe online prescriptions complement this guide; they do not establish a clinician–patient relationship on their own.',
-      'Read related Health Guides on first telehealth visit logistics, online prescription law, and condition-specific evaluation (ADHD, metabolic, men’s health) to prepare questions for your first visit.',
-      'Pages remain in “pending physician review” status until clinically signed; content is educational and may be updated as guidelines evolve.',
-      'Document your symptom timeline (childhood vs adult onset, settings affected, best and worst weeks), sleep partners’ observations about snoring, medications and supplements, and three-month goals—those details speed responsible evaluation more than another online quiz.',
-      'When results are “normal” but you remain impaired, ask what was not measured (sleep testing, ferritin, insulin patterns, free testosterone calculation, mood screening) rather than closing the chart.',
-    ],
+  const intro = lead[slug] || `This guide on ${slug.replace(/-/g, ' ')} supports—not replaces—clinician-led care.`;
+  const topicCloser = {
+    adhd: 'Call 911 for emergencies. Telehealth improves access but does not replace in-person examination, sleep testing, or labs when clinically indicated.',
+    'weight-loss': 'Educational content cannot promise a specific weight outcome; plans follow FDA indications, monitoring, and individual tolerability.',
+    'mens-health': 'Hormone therapy claims on social media often omit fertility, hematocrit, and cardiovascular trade-offs that guideline-based care addresses.',
+    telehealth: 'Emergency symptoms require local urgent or emergency care—not messaging queues.',
   };
   return {
     id: 'coordination-of-care',
     heading: 'Coordinating medical care (educational)',
-    paragraphs: byTopic[topic] || byTopic.telehealth,
+    paragraphs: [
+      intro,
+      visitPrepParagraph(topic, slug, intro),
+      normalResultsParagraph(topic, slug, intro),
+      topicCloser[topic] || topicCloser.telehealth,
+    ],
   };
 }
 

@@ -286,7 +286,7 @@ PAGES: list[dict] = [
         "geo": "Texas",
         "intro": """<p>Texas has long waitlists for psychiatry and ADHD specialists. If you are an adult in Texas seeking clarity—whether in a major metro or a smaller community—telehealth can remove distance and delay as barriers.</p>
           <p>Our providers are licensed in Texas and trained in adult ADHD (ADHD-CCSP). Your evaluation includes structured interviews, validated assessment tools as clinically appropriate, and discussion of medication and non-medication options when appropriate.</p>""",
-        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Serving Texans statewide, including <a href="/adhd-diagnosis-austin">Austin</a>, <a href="/adhd-diagnosis-houston">Houston</a>, and Dallas–Fort Worth.</p>""",
+        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Serving Texans statewide, including <a href="/adhd-diagnosis-texas">Austin</a>, <a href="/adhd-diagnosis-texas">Houston</a>, and Dallas–Fort Worth.</p>""",
         "faqs": [
             ("Do you diagnose ADHD for adults in Texas?", "Yes. We provide adult ADHD evaluations via telehealth for Texas residents with licensed, board-certified clinicians."),
             ("How fast can I get an appointment?", "Many patients are seen the same week after completing intake and screening."),
@@ -301,7 +301,7 @@ PAGES: list[dict] = [
         "geo": "Pennsylvania",
         "intro": """<p>Pennsylvania adults juggling careers, education, or family responsibilities often suspect ADHD—but finding a specialist who understands adult presentation can take months.</p>
           <p>Siya Health offers HIPAA-compliant video evaluations for Pennsylvania residents, with the same clinical rigor you would expect in person: full history, validated assessment tools as clinically appropriate, and personalized recommendations. Diagnosis does not guarantee medication.</p>""",
-        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Including <a href="/adhd-diagnosis-philadelphia">Philadelphia</a>, Pittsburgh, Harrisburg, and rural areas—wherever you have reliable internet.</p>""",
+        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Including <a href="/adhd-care">Philadelphia</a>, Pittsburgh, Harrisburg, and rural areas—wherever you have reliable internet.</p>""",
         "faqs": [
             ("Is telehealth ADHD diagnosis legal in Pennsylvania?", "Yes, when provided by a clinician licensed in Pennsylvania using HIPAA-compliant technology."),
             ("What is included in the $149 visit?", "A 60–90 minute evaluation, validated tools as clinically appropriate, comorbidity screening, and a written treatment plan."),
@@ -346,7 +346,7 @@ PAGES: list[dict] = [
         "geo": "Philadelphia and southeastern PA",
         "intro": """<p>Philadelphia&rsquo;s density of students, healthcare workers, and shift-based jobs means many adults run on adrenaline for years before asking whether ADHD is part of the picture.</p>
           <p>We offer Pennsylvania-licensed telehealth evaluations with structured diagnostic criteria, individualized validated tools, and compassionate providers who understand inattentive and combined-type presentations.</p>""",
-        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Statewide coverage: <a href="/adhd-diagnosis-pennsylvania">Pennsylvania ADHD diagnosis</a>.</p>""",
+        "extra": """<p class="lead" style="max-width:720px;margin:0 auto;">Statewide coverage: <a href="/adhd-care">Pennsylvania ADHD diagnosis</a>.</p>""",
         "faqs": [
             ("Do you serve patients outside Philadelphia city limits?", "Yes—anywhere in Pennsylvania where telehealth is appropriate and you have a stable connection."),
             ("Is the diagnosis valid for work or school accommodations?", "If criteria are met, you receive documentation consistent with clinical standards; specific accommodation processes vary by employer or institution."),

@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
 Generated: 2026-07-26
-Total pages: 177
+Total pages: 158
 
 ---
 
@@ -98,26 +98,6 @@ Total pages: 177
   URL: https://siya.health/adhd-care
   Summary: Primary care–led adult ADHD evaluation online — DSM-based assessment. Licensed medical providers. Individualized validated tools as clinically appropriate. CA, TX, PA, FL.
   Topics: adhd
-
-- ADHD Diagnosis Austin TX | Online Evaluation
-  URL: https://siya.health/adhd-diagnosis-austin
-  Summary: Adult ADHD diagnosis in Austin, Texas—online. $149 evaluation, same-week telehealth, ADHD-CCSP providers. Book your virtual visit.
-  Topics: adhd, texas
-
-- ADHD Diagnosis Houston TX | Online Evaluation
-  URL: https://siya.health/adhd-diagnosis-houston
-  Summary: Houston adult ADHD diagnosis online. $149 comprehensive evaluation, board-certified telehealth. Same-week appointments. individualized clinical assessment.
-  Topics: adhd, texas
-
-- Online ADHD Diagnosis Pennsylvania
-  URL: https://siya.health/adhd-diagnosis-pennsylvania
-  Summary: Pennsylvania adult ADHD diagnosis online. $149 virtual evaluation. Licensed, ADHD-CCSP–trained clinicians. Philadelphia, Pittsburgh & statewide telehealth.
-  Topics: adhd, pennsylvania
-
-- ADHD Diagnosis Philadelphia PA | Online
-  URL: https://siya.health/adhd-diagnosis-philadelphia
-  Summary: Philadelphia adult ADHD diagnosis online. $149 evaluation, ADHD-CCSP providers, telehealth statewide in PA. Book today.
-  Topics: adhd, pennsylvania
 
 - Online ADHD Diagnosis Texas
   URL: https://siya.health/adhd-diagnosis-texas
@@ -517,81 +497,6 @@ Total pages: 177
 - ADHD Testing Online in California: Screening vs Full Evaluation
   URL: https://siya.health/blog/adhd-testing-online-california-screening-vs-evaluation
   Summary: ADHD test online California: know the difference between quick screens and clinician-led evaluation—tools, timing, limits, and choosing California providers wisely.
-  Topics: adhd, california
-
-- ADHD Treatment Austin TX | Virtual Adult Care
-  URL: https://siya.health/blog/adhd-treatment-austin-tx
-  Summary: Adult ADHD treatment in Austin via physician-led telehealth. Evaluation steps, medication management, virtual care for busy professionals—Meet & Greet or $149 evaluation.
-  Topics: adhd, texas
-
-- ADHD Treatment Dallas | Virtual Adult Care
-  URL: https://siya.health/blog/adhd-treatment-dallas-tx
-  Summary: Adult ADHD treatment in Dallas via physician-led telehealth. Learn evaluation steps, medication management, virtual care, and how to start—Meet & Greet or $149 evaluation.
-  Topics: adhd, texas
-
-- ADHD Treatment Fort Worth | Virtual Adult Care
-  URL: https://siya.health/blog/adhd-treatment-fort-worth-tx
-  Summary: Adult ADHD treatment in Fort Worth via physician-led telehealth. Evaluation steps, medication management, and virtual care—$149 evaluation, Meet & Greet available.
-  Topics: adhd, texas
-
-- ADHD Treatment Houston TX | Virtual Adult Care
-  URL: https://siya.health/blog/adhd-treatment-houston-tx
-  Summary: Adult ADHD treatment in Houston via physician-led telehealth. Evaluation steps, medication management, and virtual care built for shift and TMC schedules—Meet & Greet or $149 evaluation.
-  Topics: adhd, texas
-
-- ADHD Treatment Los Angeles CA | Virtual Care | Siya
-  URL: https://siya.health/blog/adhd-treatment-los-angeles-ca
-  Summary: Adult ADHD treatment in Los Angeles via physician-led telehealth for creative schedules and long drives—Meet & Greet or $149 evaluation.
-  Topics: adhd, california
-
-- ADHD Treatment Miami FL | Virtual Adult Care
-  URL: https://siya.health/blog/adhd-treatment-miami-fl
-  Summary: Adult ADHD treatment in Miami via physician-led telehealth. Evaluation steps, medication management, and bilingual-friendly virtual care—Meet & Greet or $149 evaluation.
-  Topics: adhd, florida
-
-- ADHD Treatment Oakland CA | Virtual Care | Siya
-  URL: https://siya.health/blog/adhd-treatment-oakland-ca
-  Summary: Adult ADHD treatment in Oakland via physician-led telehealth for East Bay, BART & creative–tech schedules—Meet & Greet or $149 evaluation.
-  Topics: adhd, california
-
-- ADHD Treatment Orange County CA | Virtual Care | Siya
-  URL: https://siya.health/blog/adhd-treatment-orange-county-ca
-  Summary: Adult ADHD treatment in Orange County via physician-led telehealth for Irvine, family suburbs & 405/55 life—Meet & Greet or $149 evaluation.
-  Topics: adhd, california
-
-- ADHD Treatment Orlando FL | Virtual Adult Care
-  URL: https://siya.health/blog/adhd-treatment-orlando-fl
-  Summary: Adult ADHD treatment in Orlando via physician-led telehealth. Evaluation steps, medication management, and virtual care built for theme park and shift schedules—Meet & Greet or $149 evaluation.
-  Topics: adhd, florida
-
-- ADHD Treatment Philadelphia PA | Virtual Adult Care
-  URL: https://siya.health/blog/adhd-treatment-philadelphia-pa
-  Summary: Adult ADHD treatment in Philadelphia via physician-led telehealth. Evaluation steps, medication management, and virtual care built for academic and healthcare schedules—Meet & Greet or $149 evaluation…
-  Topics: adhd, pennsylvania
-
-- ADHD Treatment Sacramento CA | Virtual Care | Siya
-  URL: https://siya.health/blog/adhd-treatment-sacramento-ca
-  Summary: Adult ADHD treatment in Sacramento via physician-led telehealth for capital, Central Valley & UC Davis schedules—Meet & Greet or $149 evaluation.
-  Topics: adhd, california
-
-- ADHD Treatment San Antonio TX | Virtual Adult Care
-  URL: https://siya.health/blog/adhd-treatment-san-antonio-tx
-  Summary: Physician-led ADHD treatment for San Antonio adults. Evaluation steps, medication management, and flexible virtual care built for military, healthcare, and bilingual households—$149 evaluation.
-  Topics: adhd, texas
-
-- ADHD Treatment San Diego CA | Virtual Care
-  URL: https://siya.health/blog/adhd-treatment-san-diego-ca
-  Summary: Adult ADHD treatment in San Diego via physician-led telehealth for military-adjacent, biotech, and coastal life—Meet & Greet or $149 evaluation.
-  Topics: adhd, california
-
-- ADHD Treatment San Francisco CA | Virtual Care | Siya
-  URL: https://siya.health/blog/adhd-treatment-san-francisco-ca
-  Summary: Adult ADHD treatment in San Francisco via physician-led telehealth for tech, transit, and hybrid remote life—Meet & Greet or $149 evaluation.
-  Topics: adhd, california
-
-- ADHD Treatment San Jose CA | Virtual Adult Care | Siya
-  URL: https://siya.health/blog/adhd-treatment-san-jose-ca
-  Summary: Adult ADHD treatment in San Jose via physician-led telehealth for Silicon Valley engineers and dual careers—Meet & Greet or $149 evaluation.
   Topics: adhd, california
 
 - ADHD Treatment Texas | Physician-Led Virtual Care

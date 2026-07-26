@@ -1,14 +1,14 @@
 # Blog internal linking report
 
-Generated: 2026-07-26T07:01:27.892Z
+Generated: 2026-07-26T10:21:00.036Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| Articles processed | 67 |
-| Related Articles sections | 67 updated |
-| Passing (≥3 related + landing) | 67 |
+| Articles processed | 52 |
+| Related Articles sections | 52 updated |
+| Passing (≥3 related + landing) | 52 |
 | Failures | 0 |
 
 ## Master index

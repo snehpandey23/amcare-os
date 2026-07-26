@@ -22,6 +22,7 @@ import {
   editorialFingerprint,
   isGeoLandingPath,
   countPrimaryCtas,
+  countIrrelevantGeography,
 } from './content-assembly.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -70,12 +71,10 @@ let multiPrimary = 0;
 let missingClosing = 0;
 const fingerprints = [];
 
-const GEO_TERMS = /\b(Texas|Florida|Pennsylvania|Houston|Austin|Philadelphia|Los Angeles|San Diego|San Francisco|San Jose|Sacramento|Oakland|Orange County)\b/g;
-
 for (const file of files) {
   const relPath = rel(file);
   const html = fs.readFileSync(file, 'utf8');
-  // Retired / noindex stubs (EG-P0-01) are out of assembly scope
+  // Retired / noindex stubs (EG-P0-01 / geo clones) are out of assembly scope
   if (/name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) continue;
   const body = mainHtml(html);
 
@@ -88,9 +87,9 @@ for (const file of files) {
     paragraphMap.get(key).push(relPath);
   }
 
-  // Irrelevant geography
+  // Irrelevant geography — use Governance v1.0 assembly definition (not raw state-name counts)
   if (isEducational(relPath) && !relPath.endsWith('index.html') && !relPath.endsWith('adhd.html')) {
-    if (/<strong>\s*(Texas|Florida|Pennsylvania)\s*:/i.test(body) || (body.match(GEO_TERMS) || []).length >= 3) {
+    if (countIrrelevantGeography(body) > 0) {
       geoBleed += 1;
       failures.push(`GEO ${relPath}`);
     }

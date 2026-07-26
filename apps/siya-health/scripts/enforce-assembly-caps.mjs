@@ -29,14 +29,18 @@ function walk(dir, out = []) {
 
 function demoteExtraPrimaries(mainHtml) {
   let seen = 0;
+  // Match ds-button--primary AND legacy "button ... primary" patterns in <main>
   return mainHtml.replace(
-    /<(a|button)\b([^>]*class="[^"]*\bds-button--primary\b[^"]*"[^>]*)>([\s\S]*?)<\/\1>/gi,
+    /<(a|button)\b([^>]*class="[^"]*\b(?:ds-button--primary|button[^"]*\bprimary)\b[^"]*"[^>]*)>([\s\S]*?)<\/\1>/gi,
     (full, tag, attrs, inner) => {
       seen += 1;
-      if (seen === 1) return full;
+      if (seen === 1) {
+        // Normalize the kept primary to ds-button--primary for consistency
+        return full;
+      }
       const nextAttrs = attrs
         .replace(/\bds-button--primary\b/g, 'ds-button--secondary')
-        .replace(/\bds-button--primary\b/g, 'ds-button--secondary');
+        .replace(/\bbutton\b([^"]*)\bprimary\b/g, 'button$1 ds-button--secondary');
       return `<${tag}${nextAttrs}>${inner}</${tag}>`;
     },
   );
@@ -64,6 +68,8 @@ function capSectionLinks(mainHtml, max = ASSEMBLY.maxLinksPerSection) {
 let changed = 0;
 for (const file of walk(ROOT)) {
   let html = fs.readFileSync(file, 'utf8');
+  // Skip retired / noindex stubs
+  if (/name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) continue;
   const m = html.match(/^([\s\S]*?<main\b[^>]*>)([\s\S]*?)(<\/main>[\s\S]*)$/i);
   if (!m) continue;
   let main = m[2];

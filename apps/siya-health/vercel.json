@@ -5,53 +5,346 @@
   "outputDirectory": ".",
   "installCommand": "echo 'No install needed'",
   "redirects": [
-    { "source": "/terms", "destination": "/legal/terms-of-use", "permanent": true },
-    { "source": "/privacy-policy", "destination": "/legal/privacy-policy", "permanent": true },
-    { "source": "/membership-pricing", "destination": "/pricing", "permanent": true },
-    { "source": "/mental-health-adhd", "destination": "/adhd-care", "permanent": true },
-    { "source": "/online-adhd-test", "destination": "/adhd-screening", "permanent": true },
-    { "source": "/adult-adhd-diagnosis", "destination": "/adhd-care", "permanent": true },
-    { "source": "/adhd-treatment-online", "destination": "/adhd-care", "permanent": true },
-    { "source": "/adhd-evaluation-cost", "destination": "/pricing", "permanent": true },
-    { "source": "/adhd-diagnosis-florida", "destination": "/adhd-care", "permanent": true },
-    { "source": "/blog/all", "destination": "/blog", "permanent": true },
-    { "source": "/blog/ambien-and-sleep-medications-risks-and-benefits", "destination": "/blog/insomnia-treatment-options-beyond-medication", "permanent": true },
-    { "source": "/blog/glutathione-and-peptides-what-do-they-actually-do", "destination": "/mens-health-longevity", "permanent": true },
-    { "source": "/blog/modafinil-for-focus-and-fatigue-is-it-safe", "destination": "/adhd-care", "permanent": true },
-    { "source": "/blog/adult-adhd-treatment-california-2026", "destination": "/adhd-care", "permanent": true },
-    { "source": "/answers/adhd-in-men", "destination": "/answers/signs-of-adult-adhd", "permanent": true },
-    { "source": "/answers/creyos-adhd-testing-explained", "destination": "/creyos-adhd-testing", "permanent": true },
-    { "source": "/blog/adhd-evaluation-cost-california", "destination": "/blog/adhd-evaluation-cost-texas", "permanent": true },
-    { "source": "/blog/after-adhd-diagnosis-next-steps-adults", "destination": "/answers/starting-adhd-medication-adults", "permanent": true },
-    { "source": "/answers/phentermine-weight-loss-safety", "destination": "/blog/phentermine-for-weight-loss-safety-and-effectiveness", "permanent": true },
-    { "source": "/answers/oral-vs-injectable-weight-loss-meds", "destination": "/blog/oral-vs-injectable-weight-loss-medications", "permanent": true },
-    { "source": "/answers/non-stimulant-adhd-medications", "destination": "/blog/non-stimulant-adhd-medications-explained", "permanent": true },
-    { "source": "/answers/tirzepatide-vs-semaglutide", "destination": "/blog/tirzepatide-vs-semaglutide-which-is-better", "permanent": true },
-    { "source": "/answers/minoxidil-hair-loss-does-it-work", "destination": "/blog/minoxidil-for-hair-loss-does-it-work", "permanent": true },
-    { "source": "/answers/sildenafil-erectile-dysfunction-expectations", "destination": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect", "permanent": true },
-    { "source": "/blog/combining-adhd-treatment-and-weight-loss-strategies", "destination": "/answers/adhd-and-weight-loss-connection", "permanent": true },
-    { "source": "/blog/focalin-vs-adderall-comparison", "destination": "/blog/vyvanse-vs-adderall-differences", "permanent": true },
-    { "source": "/blog/long-term-weight-loss-medications-what-to-expect", "destination": "/blog/semaglutide-for-weight-loss-how-it-works", "permanent": true },
-    { "source": "/blog/adderall-ir-vs-xr-adults", "destination": "/blog/vyvanse-vs-adderall-differences", "permanent": true },
-    { "source": "/blog/adhd-treatment-houston-online", "destination": "/blog/online-adhd-diagnosis-texas", "permanent": true },
-    { "source": "/blog/adhd-medication-online-texas-telehealth", "destination": "/blog/online-adhd-diagnosis-texas", "permanent": true },
-    { "source": "/terms-of-service", "destination": "/legal/terms-of-use", "permanent": true },
-    { "source": "/notice-of-privacy-practices", "destination": "/legal/notice-of-privacy-practices", "permanent": true },
-    { "source": "/blank", "destination": "/", "permanent": true },
-    { "source": "/book", "destination": "/book-appointment", "permanent": true },
-    { "source": "/discovery-call", "destination": "/redirect/adhd-walkthrough", "permanent": false },
-    { "source": "/meet-and-greet", "destination": "/redirect/adhd-walkthrough", "permanent": false },
-    { "source": "/visual-components", "destination": "/", "permanent": true },
-    { "source": "/public", "destination": "/", "permanent": true },
-    { "source": "/public/:path*", "destination": "/", "permanent": true },
-    { "source": "/docs", "destination": "/", "permanent": true },
-    { "source": "/docs/:path*", "destination": "/", "permanent": true },
-    { "source": "/data", "destination": "/", "permanent": true },
-    { "source": "/data/:path*", "destination": "/", "permanent": true },
-    { "source": "/design-system", "destination": "/", "permanent": true },
-    { "source": "/design-system/:path*", "destination": "/", "permanent": true },
-    { "source": "/(.*).mjs", "destination": "/", "permanent": true },
-    { "source": "/siya-circle", "destination": "https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl", "permanent": false },
-    { "source": "/(.*)", "has": [{ "type": "host", "value": "siya.health" }], "destination": "https://www.siya.health/$1", "permanent": true }
+    {
+      "source": "/terms",
+      "destination": "/legal/terms-of-use",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/legal/privacy-policy",
+      "permanent": true
+    },
+    {
+      "source": "/membership-pricing",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/mental-health-adhd",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/online-adhd-test",
+      "destination": "/adhd-screening",
+      "permanent": true
+    },
+    {
+      "source": "/adult-adhd-diagnosis",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/adhd-treatment-online",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/adhd-evaluation-cost",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/adhd-diagnosis-florida",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/blog/all",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ambien-and-sleep-medications-risks-and-benefits",
+      "destination": "/blog/insomnia-treatment-options-beyond-medication",
+      "permanent": true
+    },
+    {
+      "source": "/blog/glutathione-and-peptides-what-do-they-actually-do",
+      "destination": "/mens-health-longevity",
+      "permanent": true
+    },
+    {
+      "source": "/blog/modafinil-for-focus-and-fatigue-is-it-safe",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adult-adhd-treatment-california-2026",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/answers/adhd-in-men",
+      "destination": "/answers/signs-of-adult-adhd",
+      "permanent": true
+    },
+    {
+      "source": "/answers/creyos-adhd-testing-explained",
+      "destination": "/creyos-adhd-testing",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-evaluation-cost-california",
+      "destination": "/blog/adhd-evaluation-cost-texas",
+      "permanent": true
+    },
+    {
+      "source": "/blog/after-adhd-diagnosis-next-steps-adults",
+      "destination": "/answers/starting-adhd-medication-adults",
+      "permanent": true
+    },
+    {
+      "source": "/answers/phentermine-weight-loss-safety",
+      "destination": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
+      "permanent": true
+    },
+    {
+      "source": "/answers/oral-vs-injectable-weight-loss-meds",
+      "destination": "/blog/oral-vs-injectable-weight-loss-medications",
+      "permanent": true
+    },
+    {
+      "source": "/answers/non-stimulant-adhd-medications",
+      "destination": "/blog/non-stimulant-adhd-medications-explained",
+      "permanent": true
+    },
+    {
+      "source": "/answers/tirzepatide-vs-semaglutide",
+      "destination": "/blog/tirzepatide-vs-semaglutide-which-is-better",
+      "permanent": true
+    },
+    {
+      "source": "/answers/minoxidil-hair-loss-does-it-work",
+      "destination": "/blog/minoxidil-for-hair-loss-does-it-work",
+      "permanent": true
+    },
+    {
+      "source": "/answers/sildenafil-erectile-dysfunction-expectations",
+      "destination": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
+      "permanent": true
+    },
+    {
+      "source": "/blog/combining-adhd-treatment-and-weight-loss-strategies",
+      "destination": "/answers/adhd-and-weight-loss-connection",
+      "permanent": true
+    },
+    {
+      "source": "/blog/focalin-vs-adderall-comparison",
+      "destination": "/blog/vyvanse-vs-adderall-differences",
+      "permanent": true
+    },
+    {
+      "source": "/blog/long-term-weight-loss-medications-what-to-expect",
+      "destination": "/blog/semaglutide-for-weight-loss-how-it-works",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adderall-ir-vs-xr-adults",
+      "destination": "/blog/vyvanse-vs-adderall-differences",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-treatment-houston-online",
+      "destination": "/blog/online-adhd-diagnosis-texas",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-medication-online-texas-telehealth",
+      "destination": "/blog/online-adhd-diagnosis-texas",
+      "permanent": true
+    },
+    {
+      "source": "/terms-of-service",
+      "destination": "/legal/terms-of-use",
+      "permanent": true
+    },
+    {
+      "source": "/notice-of-privacy-practices",
+      "destination": "/legal/notice-of-privacy-practices",
+      "permanent": true
+    },
+    {
+      "source": "/blank",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/book",
+      "destination": "/book-appointment",
+      "permanent": true
+    },
+    {
+      "source": "/discovery-call",
+      "destination": "/redirect/adhd-walkthrough",
+      "permanent": false
+    },
+    {
+      "source": "/meet-and-greet",
+      "destination": "/redirect/adhd-walkthrough",
+      "permanent": false
+    },
+    {
+      "source": "/visual-components",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/public",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/public/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/docs",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/data",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/data/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/design-system",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/design-system/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/(.*).mjs",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/siya-circle",
+      "destination": "https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl",
+      "permanent": false
+    },
+    {
+      "source": "/blog/adhd-treatment-los-angeles-ca",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-treatment-san-diego-ca",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-treatment-san-francisco-ca",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-treatment-san-jose-ca",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-treatment-sacramento-ca",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-treatment-oakland-ca",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-treatment-orange-county-ca",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-treatment-houston-tx",
+      "destination": "/blog/adhd-treatment-texas",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-treatment-austin-tx",
+      "destination": "/blog/adhd-treatment-texas",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-treatment-dallas-tx",
+      "destination": "/blog/adhd-treatment-texas",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-treatment-fort-worth-tx",
+      "destination": "/blog/adhd-treatment-texas",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-treatment-san-antonio-tx",
+      "destination": "/blog/adhd-treatment-texas",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-treatment-miami-fl",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-treatment-orlando-fl",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-treatment-philadelphia-pa",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/adhd-diagnosis-austin",
+      "destination": "/adhd-diagnosis-texas",
+      "permanent": true
+    },
+    {
+      "source": "/adhd-diagnosis-houston",
+      "destination": "/adhd-diagnosis-texas",
+      "permanent": true
+    },
+    {
+      "source": "/adhd-diagnosis-philadelphia",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/adhd-diagnosis-pennsylvania",
+      "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "siya.health"
+        }
+      ],
+      "destination": "https://www.siya.health/$1",
+      "permanent": true
+    }
   ]
 }

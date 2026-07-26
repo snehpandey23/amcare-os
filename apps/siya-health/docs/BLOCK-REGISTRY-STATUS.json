@@ -1,19 +1,10 @@
 {
   "framework": "Siya Knowledge Governance Framework",
   "governanceVersion": "1.0",
-  "generated": "2026-07-26T06:52:09.888Z",
+  "generated": "2026-07-26T10:21:09.752Z",
   "filesScanned": 191,
   "registeredBlocks": 25,
-  "unregisteredMarkers": [
-    {
-      "id": "SIYA:LABS-HUB-JUMP",
-      "files": 1
-    },
-    {
-      "id": "SIYA:GUIDE-SEARCH-JS",
-      "files": 1
-    }
-  ],
+  "unregisteredMarkers": [],
   "violations": [],
   "blocks": [
     {
@@ -30,39 +21,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "chrome",
-      "pagesAffected": 190
-    },
-    {
-      "id": "SIYA:PROVIDER-ATTRIBUTION",
-      "name": "Provider attribution",
-      "kind": "chrome",
-      "entity": null,
-      "owner": {
-        "clinical": "Clinical",
-        "editorial": "Content OS",
-        "engineering": "clinical-entity"
-      },
-      "version": "v1.0",
-      "approved": "2026-07-26",
-      "clinicalReview": "approved",
-      "status": "chrome",
-      "pagesAffected": 179
-    },
-    {
-      "id": "SIYA:CIRCLE-ANALYTICS",
-      "name": "Circle analytics",
-      "kind": "chrome",
-      "entity": null,
-      "owner": {
-        "clinical": "n/a",
-        "editorial": "n/a",
-        "engineering": "site-chrome"
-      },
-      "version": "v1.0",
-      "approved": "2026-07-26",
-      "clinicalReview": "n/a",
-      "status": "chrome",
-      "pagesAffected": 178
+      "pagesAffected": 191
     },
     {
       "id": "SIYA:COOKIE-NOTICE",
@@ -78,7 +37,55 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "chrome",
-      "pagesAffected": 176
+      "pagesAffected": 184
+    },
+    {
+      "id": "SIYA:PROVIDER-ATTRIBUTION",
+      "name": "Provider attribution",
+      "kind": "chrome",
+      "entity": null,
+      "owner": {
+        "clinical": "Clinical",
+        "editorial": "Content OS",
+        "engineering": "clinical-entity"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "approved",
+      "status": "chrome",
+      "pagesAffected": 180
+    },
+    {
+      "id": "SIYA:CIRCLE-ANALYTICS",
+      "name": "Circle analytics",
+      "kind": "chrome",
+      "entity": null,
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "n/a",
+        "engineering": "site-chrome"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "chrome",
+      "pagesAffected": 179
+    },
+    {
+      "id": "SIYA:CONTEXT-CLOSING",
+      "name": "Answer context-aware closing (one primary CTA)",
+      "kind": "cta",
+      "entity": "per-topic",
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "Content OS",
+        "engineering": "answer generator"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "production",
+      "pagesAffected": 59
     },
     {
       "id": "SIYA:BLOG-CTA-ADHD",
@@ -94,7 +101,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "production",
-      "pagesAffected": 45
+      "pagesAffected": 30
     },
     {
       "id": "SIYA:HEADER-SCROLL",
@@ -110,7 +117,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "chrome",
-      "pagesAffected": 33
+      "pagesAffected": 29
     },
     {
       "id": "SIYA:FAQ-ACCORDION",
@@ -126,7 +133,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "chrome",
-      "pagesAffected": 28
+      "pagesAffected": 24
     },
     {
       "id": "SIYA:BLOG-CTA-METABOLIC",
@@ -158,39 +165,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "production",
-      "pagesAffected": 11
-    },
-    {
-      "id": "SIYA:CA-GEO-PARAGRAPH",
-      "name": "California metro context paragraph",
-      "kind": "geo",
-      "entity": "adhd-california",
-      "owner": {
-        "clinical": "n/a",
-        "editorial": "ADHD Cluster",
-        "engineering": "ca-city-linking"
-      },
-      "version": "v1.1",
-      "approved": "2026-07-26",
-      "clinicalReview": "n/a",
-      "status": "production",
-      "pagesAffected": 9
-    },
-    {
-      "id": "SIYA:CA-CITY-CLUSTER",
-      "name": "California city cluster links",
-      "kind": "geo",
-      "entity": "adhd-california",
-      "owner": {
-        "clinical": "n/a",
-        "editorial": "ADHD Cluster",
-        "engineering": "ca-city-linking"
-      },
-      "version": "v1.1",
-      "approved": "2026-07-26",
-      "clinicalReview": "n/a",
-      "status": "production",
-      "pagesAffected": 9
+      "pagesAffected": 7
     },
     {
       "id": "SIYA:PRICING-STRIP",
@@ -369,16 +344,32 @@
       "pagesAffected": 0
     },
     {
-      "id": "SIYA:CONTEXT-CLOSING",
-      "name": "Answer context-aware closing (one primary CTA)",
-      "kind": "cta",
-      "entity": "per-topic",
+      "id": "SIYA:CA-GEO-PARAGRAPH",
+      "name": "California metro context paragraph",
+      "kind": "geo",
+      "entity": "adhd-california",
       "owner": {
         "clinical": "n/a",
-        "editorial": "Content OS",
-        "engineering": "answer generator"
+        "editorial": "ADHD Cluster",
+        "engineering": "ca-city-linking"
       },
-      "version": "v1.0",
+      "version": "v1.1",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "production",
+      "pagesAffected": 0
+    },
+    {
+      "id": "SIYA:CA-CITY-CLUSTER",
+      "name": "California city cluster links",
+      "kind": "geo",
+      "entity": "adhd-california",
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "ADHD Cluster",
+        "engineering": "ca-city-linking"
+      },
+      "version": "v1.1",
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "production",

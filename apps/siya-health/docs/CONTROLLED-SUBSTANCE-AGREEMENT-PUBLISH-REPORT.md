@@ -1,6 +1,6 @@
 # Controlled Substance Treatment Agreement — Publish Report
 
-Generated: 2026-07-26T07:01:33.057Z
+Generated: 2026-07-26T10:21:06.700Z
 
 ## Published document
 
@@ -28,10 +28,29 @@ Operational wording preserved from approved DPC / controlled-substance protocol 
 | Metric | Count |
 |--------|------:|
 | Pages requiring CS agreement link | 94 |
-| Pages with link after build | 93 |
-| Missing | 1 |
+| Pages with link after build | 74 |
+| Missing | 20 |
 
 ### Missing links
+- `adhd-diagnosis-austin.html`
+- `adhd-diagnosis-houston.html`
+- `adhd-diagnosis-pennsylvania.html`
+- `adhd-diagnosis-philadelphia.html`
+- `blog/adhd-treatment-austin-tx.html`
+- `blog/adhd-treatment-dallas-tx.html`
+- `blog/adhd-treatment-fort-worth-tx.html`
+- `blog/adhd-treatment-houston-tx.html`
+- `blog/adhd-treatment-los-angeles-ca.html`
+- `blog/adhd-treatment-miami-fl.html`
+- `blog/adhd-treatment-oakland-ca.html`
+- `blog/adhd-treatment-orange-county-ca.html`
+- `blog/adhd-treatment-orlando-fl.html`
+- `blog/adhd-treatment-philadelphia-pa.html`
+- `blog/adhd-treatment-sacramento-ca.html`
+- `blog/adhd-treatment-san-antonio-tx.html`
+- `blog/adhd-treatment-san-diego-ca.html`
+- `blog/adhd-treatment-san-francisco-ca.html`
+- `blog/adhd-treatment-san-jose-ca.html`
 - `blog/adult-adhd-treatment-california-2026.html`
 
 ## Out of scope

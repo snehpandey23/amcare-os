@@ -12,6 +12,7 @@ import {
   mythVsReality,
   symptomFlowchart,
 } from './blog-engagement-components.mjs';
+import { isGlp1Page } from './content-assembly.mjs';
 
 /** Component registry for audits */
 export const ENGAGE_COMPONENTS = {
@@ -118,40 +119,50 @@ function defaultDecisionNodes(seed, topic) {
   if (topic === 'adhd') {
     return [
       {
-        question: 'Do symptoms impair work, relationships, or daily tasks most weeks?',
-        yes: 'Consider structured ADHD evaluation—not online quizzes alone.',
-        no: 'Screen sleep, mood, and thyroid; revisit if worsening.',
+        question: `For “${q},” do symptoms impair work, relationships, or daily tasks most weeks?`,
+        yes: `For “${q},” consider structured ADHD evaluation—not online quizzes alone.`,
+        no: `For “${q},” screen sleep, mood, and thyroid; revisit if worsening.`,
       },
       {
-        question: 'Urgent safety concerns (suicidal thoughts, chest pain, severe confusion)?',
+        question: `While exploring “${q},” are there urgent safety concerns (suicidal thoughts, chest pain, severe confusion)?`,
         yes: 'Seek emergency care now—not telehealth intake.',
         branch: true,
       },
     ];
   }
   if (topic === 'weight-loss') {
-    return [
+    const nodes = [
       {
-        question: 'Persistent fatigue, cravings, or weight change despite “normal” screening labs?',
-        yes: 'Discuss metabolic labs, sleep history, and GLP-1 eligibility with a clinician.',
-        no: 'Continue lifestyle structure; recheck if symptoms escalate.',
-      },
-      {
-        question: 'Severe abdominal pain, vomiting, or dehydration on GLP-1?',
-        yes: 'Contact prescriber promptly; emergency care if unable to hydrate.',
-        branch: true,
+        question: `For “${q},” do fatigue, cravings, or weight change persist despite “normal” screening labs?`,
+        yes: `For “${q},” discuss metabolic labs, sleep history, and nutrition patterns with a clinician.`,
+        no: `For “${q},” continue lifestyle structure; recheck if symptoms escalate.`,
       },
     ];
+    // Clinical Safety: emergency GLP-1 node only on GLP-1 / incretin pages
+    if (isGlp1Page(seed)) {
+      nodes.push({
+        question: `On this GLP-1 topic (“${q}”), severe abdominal pain, vomiting, or dehydration?`,
+        yes: 'Contact prescriber promptly; emergency care if unable to hydrate.',
+        branch: true,
+      });
+    } else {
+      nodes.push({
+        question: `While exploring “${q},” chest pain, stroke signs, or severe confusion?`,
+        yes: 'Call 911 or go to emergency care.',
+        branch: true,
+      });
+    }
+    return nodes;
   }
   if (topic === 'mens-health') {
     return [
       {
-        question: 'Symptoms plus repeatedly low morning testosterone on proper testing?',
-        yes: 'Discuss TRT risks/benefits, fertility, and monitoring—not supplement stacks.',
-        no: 'Evaluate sleep apnea, depression, and medications before hormone labels.',
+        question: `For “${q},” symptoms plus repeatedly low morning testosterone on proper testing?`,
+        yes: `For “${q},” discuss TRT risks/benefits, fertility, and monitoring—not supplement stacks.`,
+        no: `For “${q},” evaluate sleep apnea, depression, and medications before hormone labels.`,
       },
       {
-        question: 'Chest pain, stroke symptoms, or acute testicular pain?',
+        question: `While exploring “${q},” chest pain, stroke symptoms, or acute testicular pain?`,
         yes: 'Emergency evaluation.',
         branch: true,
       },
@@ -159,12 +170,12 @@ function defaultDecisionNodes(seed, topic) {
   }
   return [
     {
-      question: `Does "${q}" affect your safety or daily function for weeks?`,
-      yes: 'Start Secure Medical Chat for structured next steps when clinically appropriate.',
-      no: 'Monitor symptoms; use related Health Guides for background education.',
+      question: `Does “${q}” affect your safety or daily function for weeks?`,
+      yes: `For “${q},” start Secure Medical Chat for structured next steps when clinically appropriate.`,
+      no: `For “${q},” monitor symptoms; use related Health Guides for background education.`,
     },
     {
-      question: 'Emergency symptoms (chest pain, stroke signs, severe confusion)?',
+      question: `While exploring “${q},” emergency symptoms (chest pain, stroke signs, severe confusion)?`,
       yes: 'Call 911 or go to emergency care.',
       branch: true,
     },
@@ -269,7 +280,8 @@ function aboveFoldForSeed(seed) {
 }
 
 function midBreakForSeed(seed) {
-  const { topic, slug } = seed;
+  const { topic, slug, question } = seed;
+  const focus = question.replace(/\?+$/, '');
   if (topic === 'adhd' || slug.includes('adhd')) {
     return {
       type: 'myth',
@@ -279,35 +291,40 @@ function midBreakForSeed(seed) {
         mythVsReality({
           pairs: [
             {
-              myth: 'An online quiz alone can diagnose ADHD.',
-              reality: 'Validated screeners help, but diagnosis requires clinician history and rule-outs.',
+              myth: `An online quiz alone can settle “${focus}.”`,
+              reality: `For “${focus},” validated screeners help, but diagnosis requires clinician history and rule-outs.`,
             },
             {
-              myth: 'Medication is the only treatment.',
-              reality: 'Skills, sleep, and therapy matter; meds are one tool when appropriate.',
+              myth: `Medication is the only answer to “${focus}.”`,
+              reality: `For “${focus},” skills, sleep, and therapy matter; meds are one tool when appropriate.`,
             },
           ],
         }),
     };
   }
   if (topic === 'weight-loss') {
+    const pairs = [
+      {
+        myth: `Normal labs mean “${focus}” is not worth discussing.`,
+        reality: `For “${focus},” insulin resistance and sleep apnea often hide behind “normal” panels.`,
+      },
+    ];
+    if (isGlp1Page(seed)) {
+      pairs.push({
+        myth: `GLP-1 alone settles “${focus}” without lifestyle change.`,
+        reality: `For “${focus},” protein, strength training, and sleep still anchor long-term outcomes.`,
+      });
+    } else {
+      pairs.push({
+        myth: `Willpower alone settles “${focus}.”`,
+        reality: `For “${focus},” sleep, medication effects, and metabolic labs often explain why effort is not enough.`,
+      });
+    }
     return {
       type: 'myth',
       placement: 'Mid-article (after section 2)',
       component: 'mythVsReality',
-      build: () =>
-        mythVsReality({
-          pairs: [
-            {
-              myth: 'Normal labs mean metabolic health is fine.',
-              reality: 'Insulin resistance and sleep apnea often hide behind “normal” panels.',
-            },
-            {
-              myth: 'GLP-1 replaces lifestyle change.',
-              reality: 'Protein, strength training, and sleep still anchor long-term outcomes.',
-            },
-          ],
-        }),
+      build: () => mythVsReality({ pairs }),
     };
   }
   return {
@@ -316,7 +333,7 @@ function midBreakForSeed(seed) {
     component: 'clinicalPearl',
     build: () =>
       clinicalPearl({
-        body: `Bring a one-week timeline to visits: sleep hours, worst symptoms, and what you already tried. It speeds decisions about "${seed.question.replace(/\?+$/, '')}" faster than a single lab PDF.`,
+        body: `Bring a one-week timeline to visits: sleep hours, worst symptoms, and what you already tried. It speeds decisions about “${focus}” faster than a single lab PDF.`,
       }),
   };
 }

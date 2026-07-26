@@ -1,6 +1,6 @@
 # GHL Legal Acceptance — Implementation Report
 
-Generated: 2026-07-26T07:01:32.711Z
+Generated: 2026-07-26T10:21:06.335Z
 
 ## Objective
 
@@ -45,8 +45,8 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 ## Audit totals
 
 - HTML pages scanned: **192**
-- Pages with legacy GHL booking links: **185**
-- Total legacy GHL booking anchor targets: **198**
+- Pages with legacy GHL booking links: **166**
+- Total legacy GHL booking anchor targets: **178**
 - Pages with CarePatron booking links: **3**
 - Total CarePatron booking anchor targets: **3**
 - Pages with acceptance script after build: **1**
@@ -56,11 +56,7 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 
 - **/about** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/adhd-care** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/adhd-diagnosis-austin** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/adhd-diagnosis-florida** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/adhd-diagnosis-houston** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/adhd-diagnosis-pennsylvania** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/adhd-diagnosis-philadelphia** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/adhd-diagnosis-texas** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/adhd-evaluation-cost** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/adhd-screening-results** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
@@ -93,7 +89,7 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/answers/how-long-adhd-evaluation** (adhd-content) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/how-much-does-adhd-testing-cost** (adhd-content) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/how-online-prescriptions-work** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
-- **/answers** (general-cta) — 0 CarePatron link(s), 2 legacy GHL link(s), acceptance script: no
+- **/answers** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/answers/insulin-resistance-without-diabetes** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/answers/is-adhd-medication-safe-long-term** (adhd-content) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/answers/is-online-adhd-diagnosis-legitimate** (adhd-content) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
@@ -142,21 +138,6 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/blog/adhd-symptoms-overlooked** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/blog/adhd-telehealth-california** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/blog/adhd-testing-online-california-screening-vs-evaluation** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/blog/adhd-treatment-austin-tx** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/blog/adhd-treatment-dallas-tx** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/blog/adhd-treatment-fort-worth-tx** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/blog/adhd-treatment-houston-tx** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/blog/adhd-treatment-los-angeles-ca** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/blog/adhd-treatment-miami-fl** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/blog/adhd-treatment-oakland-ca** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/blog/adhd-treatment-orange-county-ca** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/blog/adhd-treatment-orlando-fl** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/blog/adhd-treatment-philadelphia-pa** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/blog/adhd-treatment-sacramento-ca** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/blog/adhd-treatment-san-antonio-tx** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/blog/adhd-treatment-san-diego-ca** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/blog/adhd-treatment-san-francisco-ca** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
-- **/blog/adhd-treatment-san-jose-ca** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/blog/adhd-treatment-texas** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/blog/adhd** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/blog/adult-adhd-symptoms-california** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
@@ -255,11 +236,7 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 
 - `about.html`
 - `adhd-care.html`
-- `adhd-diagnosis-austin.html`
 - `adhd-diagnosis-florida.html`
-- `adhd-diagnosis-houston.html`
-- `adhd-diagnosis-pennsylvania.html`
-- `adhd-diagnosis-philadelphia.html`
 - `adhd-diagnosis-texas.html`
 - `adhd-evaluation-cost.html`
 - `adhd-screening-results.html`
@@ -341,21 +318,6 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - `blog/adhd-symptoms-overlooked.html`
 - `blog/adhd-telehealth-california.html`
 - `blog/adhd-testing-online-california-screening-vs-evaluation.html`
-- `blog/adhd-treatment-austin-tx.html`
-- `blog/adhd-treatment-dallas-tx.html`
-- `blog/adhd-treatment-fort-worth-tx.html`
-- `blog/adhd-treatment-houston-tx.html`
-- `blog/adhd-treatment-los-angeles-ca.html`
-- `blog/adhd-treatment-miami-fl.html`
-- `blog/adhd-treatment-oakland-ca.html`
-- `blog/adhd-treatment-orange-county-ca.html`
-- `blog/adhd-treatment-orlando-fl.html`
-- `blog/adhd-treatment-philadelphia-pa.html`
-- `blog/adhd-treatment-sacramento-ca.html`
-- `blog/adhd-treatment-san-antonio-tx.html`
-- `blog/adhd-treatment-san-diego-ca.html`
-- `blog/adhd-treatment-san-francisco-ca.html`
-- `blog/adhd-treatment-san-jose-ca.html`
 - `blog/adhd-treatment-texas.html`
 - `blog/adhd.html`
 - `blog/adult-adhd-symptoms-california.html`

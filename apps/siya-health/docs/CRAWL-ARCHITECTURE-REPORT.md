@@ -1,6 +1,6 @@
 # Crawl architecture report
 
-Generated: 2026-07-26T07:01:28.645Z
+Generated: 2026-07-26T10:21:01.250Z
 
 Internal link graph analysis only — not a general SEO audit.
 
@@ -9,51 +9,79 @@ Internal link graph analysis only — not a general SEO audit.
 | Metric | Value |
 |--------|------:|
 | Total indexable HTML pages | 191 |
-| Pages reachable from `/` | 182 |
-| Unreachable from `/` (by internal links) | 9 |
-| **Average crawl depth** (reachable pages) | **1.80** |
-| Orphan pages (0 inbound internal links) | 9 |
-| Pages with &lt; 2 inbound links | 15 |
+| Pages reachable from `/` | 156 |
+| Unreachable from `/` (by internal links) | 35 |
+| **Average crawl depth** (reachable pages) | **1.89** |
+| Orphan pages (0 inbound internal links) | 35 |
+| Pages with &lt; 2 inbound links | 40 |
 | Pages with &gt; 100 outbound internal links | 0 |
-| Pages with &gt; 100 inbound internal links | 29 |
+| Pages with &gt; 100 inbound internal links | 20 |
 
 ## Crawl depth distribution
 
 | Depth from homepage | Pages |
 |--------------------:|------:|
 | 0 | 1 |
-| 1 | 34 |
-| 2 | 147 |
+| 1 | 31 |
+| 2 | 110 |
+| 3 | 12 |
+| 4 | 2 |
 
 ## Top 20 most internally linked pages (inbound)
 
 | Rank | Inbound links | Path | Title |
 |------|-------------:|------|-------|
-| 1 | 190 | `/` | Siya Health \| When Focus, Energy, or Weight Won't Budge |
-| 2 | 185 | `/about` | About Siya Health \| Mission, Team &amp; How Care Works |
-| 3 | 181 | `/adhd-care` | Adult ADHD Diagnosis Online — Same-Week Evaluation |
-| 4 | 179 | `/blog` | Health Insights &amp; Blog Hub (2026) \| ADHD, Weight Loss &amp; Telehe |
-| 5 | 179 | `/telehealth` | Virtual Medical Care \| Siya Health Telehealth |
-| 6 | 179 | `/weight-loss-metabolic-health` | Provider-Guided Medical Weight Loss |
-| 7 | 178 | `/answers` | Health Guides \| Metabolic, ADHD, Hormones &amp; Telehealth |
-| 8 | 178 | `/labs` | Labs &amp; Blood Tests \| Transparent Direct-Pay Testing |
-| 9 | 177 | `/prescriptions` | Online Prescription Services |
-| 10 | 177 | `/primary-urgent-care` | Primary &amp; Urgent Care Telehealth |
-| 11 | 133 | `/blog/adhd` | ADHD Articles Hub (2026) — Diagnosis, Medication Education &amp; Care |
-| 12 | 127 | `/blog/weight-loss` | Weight Loss Articles (2026) — GLP-1 &amp; Medical Metabolic Care \| Siy |
-| 13 | 125 | `/legal/notice-of-privacy-practices` | Notice of Privacy Practices |
-| 14 | 125 | `/legal/privacy-policy` | Privacy Policy |
-| 15 | 125 | `/legal/terms-of-use` | Terms of Use |
-| 16 | 124 | `/legal/cookie-policy` | Cookie Policy |
-| 17 | 124 | `/legal` | Legal &amp; Compliance |
-| 18 | 122 | `/answers/signs-of-adult-adhd` | What are the signs of adult ADHD? |
-| 19 | 122 | `/blog/telehealth` | Telehealth Articles (2026) — Safe Online Prescribing &amp; Remote Care |
-| 20 | 122 | `/mens-health-longevity` | Men's Health &amp; Longevity |
+| 1 | 173 | `/adhd-care` | Adult ADHD Diagnosis Online — Same-Week Evaluation |
+| 2 | 171 | `/` | Siya Health \| When Focus, Energy, or Weight Won't Budge |
+| 3 | 166 | `/about` | About Siya Health \| Mission, Team &amp; How Care Works |
+| 4 | 160 | `/blog` | Health Insights &amp; Blog Hub (2026) \| ADHD, Weight Loss &amp; Telehe |
+| 5 | 160 | `/telehealth` | Virtual Medical Care \| Siya Health Telehealth |
+| 6 | 160 | `/weight-loss-metabolic-health` | Provider-Guided Medical Weight Loss |
+| 7 | 159 | `/answers` | Health Guides \| Metabolic, ADHD, Hormones &amp; Telehealth |
+| 8 | 159 | `/labs` | Labs &amp; Blood Tests \| Transparent Direct-Pay Testing |
+| 9 | 158 | `/prescriptions` | Online Prescription Services |
+| 10 | 158 | `/primary-urgent-care` | Primary &amp; Urgent Care Telehealth |
+| 11 | 114 | `/blog/adhd` | ADHD Articles Hub (2026) — Diagnosis, Medication Education &amp; Care |
+| 12 | 108 | `/blog/weight-loss` | Weight Loss Articles (2026) — GLP-1 &amp; Medical Metabolic Care \| Siy |
+| 13 | 106 | `/legal/notice-of-privacy-practices` | Notice of Privacy Practices |
+| 14 | 106 | `/legal/privacy-policy` | Privacy Policy |
+| 15 | 106 | `/legal/terms-of-use` | Terms of Use |
+| 16 | 105 | `/legal/cookie-policy` | Cookie Policy |
+| 17 | 105 | `/legal` | Legal &amp; Compliance |
+| 18 | 103 | `/answers/signs-of-adult-adhd` | What are the signs of adult ADHD? |
+| 19 | 103 | `/blog/telehealth` | Telehealth Articles (2026) — Safe Online Prescribing &amp; Remote Care |
+| 20 | 103 | `/mens-health-longevity` | Men's Health &amp; Longevity |
 
 ## Orphan pages (0 inbound internal links)
 
+- `/adhd-diagnosis-austin` — Moved — Siya Health
+- `/adhd-diagnosis-florida` — Online ADHD Diagnosis Florida Evaluation
+- `/adhd-diagnosis-houston` — Moved — Siya Health
+- `/adhd-diagnosis-pennsylvania` — Moved — Siya Health
+- `/adhd-diagnosis-philadelphia` — Moved — Siya Health
+- `/adhd-evaluation-cost` — ADHD Evaluation Cost Online | Flat-Rate Pricing
+- `/adhd-treatment-online` — ADHD Treatment Online | Telehealth TX, PA, FL
+- `/adult-adhd-diagnosis` — Adult ADHD Diagnosis Online
+- `/blog/adhd-treatment-austin-tx` — Moved — Siya Health
+- `/blog/adhd-treatment-dallas-tx` — Moved — Siya Health
+- `/blog/adhd-treatment-fort-worth-tx` — Moved — Siya Health
+- `/blog/adhd-treatment-houston-tx` — Moved — Siya Health
+- `/blog/adhd-treatment-los-angeles-ca` — Moved — Siya Health
+- `/blog/adhd-treatment-miami-fl` — Moved — Siya Health
+- `/blog/adhd-treatment-oakland-ca` — Moved — Siya Health
+- `/blog/adhd-treatment-orange-county-ca` — Moved — Siya Health
+- `/blog/adhd-treatment-orlando-fl` — Moved — Siya Health
+- `/blog/adhd-treatment-philadelphia-pa` — Moved — Siya Health
+- `/blog/adhd-treatment-sacramento-ca` — Moved — Siya Health
+- `/blog/adhd-treatment-san-antonio-tx` — Moved — Siya Health
+- `/blog/adhd-treatment-san-diego-ca` — Moved — Siya Health
+- `/blog/adhd-treatment-san-francisco-ca` — Moved — Siya Health
+- `/blog/adhd-treatment-san-jose-ca` — Moved — Siya Health
 - `/blog/adult-adhd-treatment-california-2026` — Moved — Adult ADHD Care
+- `/blog/phentermine-for-weight-loss-safety-and-effectiveness` — Phentermine for Weight Loss: Safety &amp; Effectiveness in 2026
+- `/blog/pots-and-adhd` — POTS and ADHD: Shared Symptoms, Overlap &amp; What Research Shows
 - `/intake` — Secure Intake
+- `/online-adhd-test` — Online ADHD Test &amp; Screening (Free)
 - `/privacy-policy` — Privacy Policy Redirect
 - `/redirect/adhd-evaluation` — Starting Your ADHD Evaluation
 - `/redirect/adhd-walkthrough` — Booking Your Free Meet &amp; Greet (Legacy Path)
@@ -64,14 +92,39 @@ Internal link graph analysis only — not a general SEO audit.
 
 ## Pages with fewer than 2 inbound links
 
+- `/adhd-diagnosis-austin` (0 inbound) — Moved — Siya Health
+- `/adhd-diagnosis-florida` (0 inbound) — Online ADHD Diagnosis Florida Evaluation
+- `/adhd-diagnosis-houston` (0 inbound) — Moved — Siya Health
+- `/adhd-diagnosis-pennsylvania` (0 inbound) — Moved — Siya Health
+- `/adhd-diagnosis-philadelphia` (0 inbound) — Moved — Siya Health
+- `/adhd-evaluation-cost` (0 inbound) — ADHD Evaluation Cost Online | Flat-Rate Pricing
 - `/adhd-screening-results` (1 inbound) — ADHD Screening Complete
-- `/adhd-treatment-online` (1 inbound) — ADHD Treatment Online | Telehealth TX, PA, FL
+- `/adhd-treatment-online` (0 inbound) — ADHD Treatment Online | Telehealth TX, PA, FL
+- `/adult-adhd-diagnosis` (0 inbound) — Adult ADHD Diagnosis Online
 - `/answers/afternoon-energy-crash-after-lunch` (1 inbound) — Why do I crash every afternoon after lunch?
 - `/answers/weight-gain-after-stopping-ozempic` (1 inbound) — Why am I gaining weight after stopping Ozempic?
+- `/blog/adhd-treatment-austin-tx` (0 inbound) — Moved — Siya Health
+- `/blog/adhd-treatment-dallas-tx` (0 inbound) — Moved — Siya Health
+- `/blog/adhd-treatment-fort-worth-tx` (0 inbound) — Moved — Siya Health
+- `/blog/adhd-treatment-houston-tx` (0 inbound) — Moved — Siya Health
+- `/blog/adhd-treatment-los-angeles-ca` (0 inbound) — Moved — Siya Health
+- `/blog/adhd-treatment-miami-fl` (0 inbound) — Moved — Siya Health
+- `/blog/adhd-treatment-oakland-ca` (0 inbound) — Moved — Siya Health
+- `/blog/adhd-treatment-orange-county-ca` (0 inbound) — Moved — Siya Health
+- `/blog/adhd-treatment-orlando-fl` (0 inbound) — Moved — Siya Health
+- `/blog/adhd-treatment-philadelphia-pa` (0 inbound) — Moved — Siya Health
+- `/blog/adhd-treatment-sacramento-ca` (0 inbound) — Moved — Siya Health
+- `/blog/adhd-treatment-san-antonio-tx` (0 inbound) — Moved — Siya Health
+- `/blog/adhd-treatment-san-diego-ca` (0 inbound) — Moved — Siya Health
+- `/blog/adhd-treatment-san-francisco-ca` (0 inbound) — Moved — Siya Health
+- `/blog/adhd-treatment-san-jose-ca` (0 inbound) — Moved — Siya Health
 - `/blog/adult-adhd-treatment-california-2026` (0 inbound) — Moved — Adult ADHD Care
-- `/blog/phentermine-for-weight-loss-safety-and-effectiveness` (1 inbound) — Phentermine for Weight Loss: Safety &amp; Effectiveness in 2026
-- `/blog/pots-and-adhd` (1 inbound) — POTS and ADHD: Shared Symptoms, Overlap &amp; What Research Shows
+- `/blog/how-to-choose-adhd-provider-california` (1 inbound) — How to Choose an ADHD Provider in California (Red Flags Included)
+- `/blog/oral-vs-injectable-weight-loss-medications` (1 inbound) — Oral vs Injectable Weight Loss Medications (2026): GLP-1 &amp; Beyond
+- `/blog/phentermine-for-weight-loss-safety-and-effectiveness` (0 inbound) — Phentermine for Weight Loss: Safety &amp; Effectiveness in 2026
+- `/blog/pots-and-adhd` (0 inbound) — POTS and ADHD: Shared Symptoms, Overlap &amp; What Research Shows
 - `/intake` (0 inbound) — Secure Intake
+- `/online-adhd-test` (0 inbound) — Online ADHD Test &amp; Screening (Free)
 - `/privacy-policy` (0 inbound) — Privacy Policy Redirect
 - `/redirect/adhd-evaluation` (0 inbound) — Starting Your ADHD Evaluation
 - `/redirect/adhd-walkthrough` (0 inbound) — Booking Your Free Meet &amp; Greet (Legacy Path)
@@ -87,48 +140,61 @@ _None_
 
 ## Pages with more than 100 inbound internal links
 
-- `/about` (185 inbound) — About Siya Health | Mission, Team &amp; How Care Works
-- `/adhd-care` (181 inbound) — Adult ADHD Diagnosis Online — Same-Week Evaluation
-- `/adhd-screening` (113 inbound) — Start screening
-- `/answers` (178 inbound) — Health Guides | Metabolic, ADHD, Hormones &amp; Telehealth
-- `/answers/is-online-adhd-diagnosis-legitimate` (112 inbound) — What should you look for in a legitimate online ADHD diagnosis?
-- `/answers/signs-of-adult-adhd` (122 inbound) — What are the signs of adult ADHD?
-- `/answers/what-is-insulin-resistance` (119 inbound) — What is insulin resistance?
-- `/answers/why-am-i-tired-even-after-sleeping` (115 inbound) — Why am I tired even after sleeping?
-- `/blog/adhd` (133 inbound) — ADHD Articles Hub (2026) — Diagnosis, Medication Education &amp; Care
-- `/blog/how-to-know-if-you-have-adhd-adult` (115 inbound) — How to Know If You Have ADHD as an Adult (Real Signs Explained)
-- `/blog` (179 inbound) — Health Insights &amp; Blog Hub (2026) | ADHD, Weight Loss &amp; Telehe
-- `/blog/telehealth` (122 inbound) — Telehealth Articles (2026) — Safe Online Prescribing &amp; Remote Care
-- `/blog/weight-loss` (127 inbound) — Weight Loss Articles (2026) — GLP-1 &amp; Medical Metabolic Care | Siy
-- `/book-appointment` (110 inbound) — Book an Appointment
-- `/` (190 inbound) — Siya Health | When Focus, Energy, or Weight Won't Budge
-- `/labs` (178 inbound) — Labs &amp; Blood Tests | Transparent Direct-Pay Testing
-- `/legal/cookie-policy` (124 inbound) — Cookie Policy
-- `/legal` (124 inbound) — Legal &amp; Compliance
-- `/legal/notice-of-privacy-practices` (125 inbound) — Notice of Privacy Practices
-- `/legal/privacy-policy` (125 inbound) — Privacy Policy
-- `/legal/terms-of-use` (125 inbound) — Terms of Use
-- `/mens-health-longevity` (122 inbound) — Men's Health &amp; Longevity
-- `/prescriptions` (177 inbound) — Online Prescription Services
-- `/pricing` (114 inbound) — Pricing
-- `/primary-urgent-care` (177 inbound) — Primary &amp; Urgent Care Telehealth
-- `/providers` (119 inbound) — Our Care Team
-- `/telehealth` (179 inbound) — Virtual Medical Care | Siya Health Telehealth
-- `/weight-loss-metabolic-health` (179 inbound) — Provider-Guided Medical Weight Loss
-- `/womens-health` (110 inbound) — Women's Health &amp; Hormone Care
+- `/about` (166 inbound) — About Siya Health | Mission, Team &amp; How Care Works
+- `/adhd-care` (173 inbound) — Adult ADHD Diagnosis Online — Same-Week Evaluation
+- `/answers` (159 inbound) — Health Guides | Metabolic, ADHD, Hormones &amp; Telehealth
+- `/answers/signs-of-adult-adhd` (103 inbound) — What are the signs of adult ADHD?
+- `/blog/adhd` (114 inbound) — ADHD Articles Hub (2026) — Diagnosis, Medication Education &amp; Care
+- `/blog` (160 inbound) — Health Insights &amp; Blog Hub (2026) | ADHD, Weight Loss &amp; Telehe
+- `/blog/telehealth` (103 inbound) — Telehealth Articles (2026) — Safe Online Prescribing &amp; Remote Care
+- `/blog/weight-loss` (108 inbound) — Weight Loss Articles (2026) — GLP-1 &amp; Medical Metabolic Care | Siy
+- `/` (171 inbound) — Siya Health | When Focus, Energy, or Weight Won't Budge
+- `/labs` (159 inbound) — Labs &amp; Blood Tests | Transparent Direct-Pay Testing
+- `/legal/cookie-policy` (105 inbound) — Cookie Policy
+- `/legal` (105 inbound) — Legal &amp; Compliance
+- `/legal/notice-of-privacy-practices` (106 inbound) — Notice of Privacy Practices
+- `/legal/privacy-policy` (106 inbound) — Privacy Policy
+- `/legal/terms-of-use` (106 inbound) — Terms of Use
+- `/mens-health-longevity` (103 inbound) — Men's Health &amp; Longevity
+- `/prescriptions` (158 inbound) — Online Prescription Services
+- `/primary-urgent-care` (158 inbound) — Primary &amp; Urgent Care Telehealth
+- `/telehealth` (160 inbound) — Virtual Medical Care | Siya Health Telehealth
+- `/weight-loss-metabolic-health` (160 inbound) — Provider-Guided Medical Weight Loss
 
 ## Unreachable from homepage (internal link graph)
 
+- `/adhd-diagnosis-austin`
+- `/adhd-diagnosis-florida`
+- `/adhd-diagnosis-houston`
+- `/adhd-diagnosis-pennsylvania`
+- `/adhd-diagnosis-philadelphia`
+- `/adhd-evaluation-cost`
+- `/adhd-treatment-online`
+- `/adult-adhd-diagnosis`
+- `/blog/adhd-treatment-austin-tx`
+- `/blog/adhd-treatment-dallas-tx`
+- `/blog/adhd-treatment-fort-worth-tx`
+- `/blog/adhd-treatment-houston-tx`
+- `/blog/adhd-treatment-los-angeles-ca`
+- `/blog/adhd-treatment-miami-fl`
+- `/blog/adhd-treatment-oakland-ca`
+- `/blog/adhd-treatment-orange-county-ca`
+- `/blog/adhd-treatment-orlando-fl`
+- `/blog/adhd-treatment-philadelphia-pa`
+- `/blog/adhd-treatment-sacramento-ca`
+- `/blog/adhd-treatment-san-antonio-tx`
+- `/blog/adhd-treatment-san-diego-ca`
+- `/blog/adhd-treatment-san-francisco-ca`
+- `/blog/adhd-treatment-san-jose-ca`
 - `/blog/adult-adhd-treatment-california-2026`
+- `/blog/phentermine-for-weight-loss-safety-and-effectiveness`
+- `/blog/pots-and-adhd`
 - `/intake`
+- `/online-adhd-test`
 - `/privacy-policy`
 - `/redirect/adhd-evaluation`
-- `/redirect/adhd-walkthrough`
-- `/redirect/chat`
-- `/redirect/meet-greet`
-- `/siya-circle`
-- `/terms`
 
+_…and 5 more._
 
 ## Remaining weak points
 

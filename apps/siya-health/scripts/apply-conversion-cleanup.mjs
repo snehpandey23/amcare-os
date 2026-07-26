@@ -28,18 +28,12 @@ const PRICING_STRIP_PAGES = [
 ];
 
 const ADHD_FUNNEL_PAGES = [
-  // adhd-care.html intentionally omitted — journey covered by 3-step + final CTA
+  // adhd-care.html intentionally omitted — journey covered by care pathways + final CTA
+  // Metro diagnosis clones retired (geo-consolidation) — do not inject into stubs
   'online-adhd-test.html',
-  'adult-adhd-diagnosis.html',
-  'adhd-treatment-online.html',
-  'adhd-evaluation-cost.html',
-  'creyos-adhd-testing.html',
+  'adhd-screening.html',
   'adhd-diagnosis-texas.html',
-  'adhd-diagnosis-florida.html',
-  'adhd-diagnosis-pennsylvania.html',
-  'adhd-diagnosis-austin.html',
-  'adhd-diagnosis-houston.html',
-  'adhd-diagnosis-philadelphia.html',
+  'creyos-adhd-testing.html',
 ];
 
 const BLOG_HUBS = new Set(['index.html', 'adhd.html', 'weight-loss.html', 'telehealth.html', 'mens-health.html']);

@@ -1,13 +1,13 @@
 # SEO Deployment QA Report
 
-Generated: 2026-07-26T07:01:33.009Z
+Generated: 2026-07-26T10:21:06.650Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
 | HTML pages scanned | 192 |
-| Sitemap URLs | 177 |
+| Sitemap URLs | 158 |
 | Pages with Meet & Greet in nav | 0 |
 | Non-ADHD pages still referencing adhd-screening | 66 |
 | Broken internal links (sample) | 0 |
@@ -108,15 +108,11 @@ Generated: 2026-07-26T07:01:33.009Z
 - `womens-health.html`
 - `womens-midlife-health.html`
 
-### All pages with any `adhd-screening` reference (186)
+### All pages with any `adhd-screening` reference (167)
 
 - `about.html`
 - `adhd-care.html`
-- `adhd-diagnosis-austin.html`
 - `adhd-diagnosis-florida.html`
-- `adhd-diagnosis-houston.html`
-- `adhd-diagnosis-pennsylvania.html`
-- `adhd-diagnosis-philadelphia.html`
 - `adhd-diagnosis-texas.html`
 - `adhd-evaluation-cost.html`
 - `adhd-screening-results.html`
@@ -150,8 +146,12 @@ Generated: 2026-07-26T07:01:33.009Z
 - `answers/how-long-adhd-evaluation.html`
 - `answers/how-much-does-adhd-testing-cost.html`
 - `answers/how-online-prescriptions-work.html`
+- `answers/index.html`
+- `answers/insulin-resistance-without-diabetes.html`
+- `answers/is-adhd-medication-safe-long-term.html`
+- `answers/is-online-adhd-diagnosis-legitimate.html`
 
-_…and 146 more (expected on ADHD funnels)._
+_…and 127 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 
@@ -182,11 +182,36 @@ _None detected in static HTML scan._
 
 ## Orphan pages (low inbound links, sample)
 
+- `adhd-diagnosis-austin.html`
+- `adhd-diagnosis-florida.html`
+- `adhd-diagnosis-houston.html`
+- `adhd-diagnosis-pennsylvania.html`
+- `adhd-diagnosis-philadelphia.html`
 - `adhd-evaluation-cost.html`
+- `adhd-treatment-online.html`
+- `adult-adhd-diagnosis.html`
+- `answers/weight-gain-after-stopping-ozempic.html`
+- `blog/adhd-treatment-austin-tx.html`
+- `blog/adhd-treatment-dallas-tx.html`
+- `blog/adhd-treatment-fort-worth-tx.html`
+- `blog/adhd-treatment-houston-tx.html`
+- `blog/adhd-treatment-los-angeles-ca.html`
+- `blog/adhd-treatment-miami-fl.html`
+- `blog/adhd-treatment-oakland-ca.html`
+- `blog/adhd-treatment-orange-county-ca.html`
+- `blog/adhd-treatment-orlando-fl.html`
+- `blog/adhd-treatment-philadelphia-pa.html`
+- `blog/adhd-treatment-sacramento-ca.html`
+- `blog/adhd-treatment-san-antonio-tx.html`
+- `blog/adhd-treatment-san-diego-ca.html`
+- `blog/adhd-treatment-san-francisco-ca.html`
+- `blog/adhd-treatment-san-jose-ca.html`
 - `blog/adult-adhd-treatment-california-2026.html`
+- `blog/phentermine-for-weight-loss-safety-and-effectiveness.html`
+- `blog/pots-and-adhd.html`
 - `docs/tint-options-preview.html`
 - `intake/index.html`
-- `siya-circle.html`
+- `online-adhd-test.html`
 
 ## Recommendations
 

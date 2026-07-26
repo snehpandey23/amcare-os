@@ -1,0 +1,10 @@
+Git fetch + checkout main
+From https://github.com/snehpandey23/amcare-os
+ * branch            main       -> FETCH_HEAD
+Already on 'main'
+M	apps/siya-health/docs/CONTENT-ASSEMBLY-VALIDATION.json
+M	package-lock.json
+Your branch is up to date with 'origin/main'.
+From https://github.com/snehpandey23/amcare-os
+ * branch            main       -> FETCH_HEAD
+Already up to date.

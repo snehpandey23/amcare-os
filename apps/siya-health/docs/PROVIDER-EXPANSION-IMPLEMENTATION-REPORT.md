@@ -1,16 +1,16 @@
 # Provider Expansion — Implementation Report
 
-Generated: 2026-07-26T07:01:33.350Z
+Generated: 2026-07-26T10:21:07.420Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| Sitemap URLs | 177 |
+| Sitemap URLs | 158 |
 | Contracted providers in data | 7 |
 | Live profile pages | 7 |
 | Hub URL | https://siya.health/providers |
-| Pages linking to /providers hub | 185 |
+| Pages linking to /providers hub | 166 |
 | Broken internal links (sample) | 20 |
 | JSON-LD issues on profiles | 0 |
 
@@ -41,14 +41,14 @@ Generated: 2026-07-26T07:01:33.350Z
 
 | Target | Inbound pages |
 |--------|-------------:|
-| /providers hub | 185 |
-| /providers/dr-sneh-pandey | 43 |
+| /providers hub | 166 |
+| /providers/dr-sneh-pandey | 24 |
 | /providers/dr-vanessa-urbina | 15 |
-| /providers/dr-natasha-desai | 18 |
-| /providers/dr-swati-pandey | 12 |
-| /providers/megan-wunderlich | 11 |
-| /providers/derek-timbs | 9 |
-| /providers/wendy-delgado | 6 |
+| /providers/dr-natasha-desai | 16 |
+| /providers/dr-swati-pandey | 10 |
+| /providers/megan-wunderlich | 7 |
+| /providers/derek-timbs | 7 |
+| /providers/wendy-delgado | 5 |
 
 ## Hub features
 
@@ -76,8 +76,8 @@ Generated: 2026-07-26T07:01:33.350Z
 - `adhd-diagnosis-austin.html` → `/assets/favicon-16x16.png`
 - `adhd-diagnosis-austin.html` → `/assets/apple-touch-icon.png`
 - `adhd-diagnosis-austin.html` → `/assets/favicon.ico`
-- `adhd-diagnosis-austin.html` → `/assets/favicon.ico`
-- `adhd-diagnosis-austin.html` → `/styles.css`
+- `adhd-diagnosis-florida.html` → `/assets/favicon-32x32.png`
+- `adhd-diagnosis-florida.html` → `/assets/favicon-16x16.png`
 
 ## Operational note
 

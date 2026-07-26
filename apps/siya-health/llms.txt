@@ -17,18 +17,13 @@
 - Labs & blood tests (physician-guided, direct-pay storefront): https://siya.health/labs
 - How to read lab results: https://siya.health/labs/how-to-read-results
 
-## California ADHD (priority state — cite city + statewide hubs)
+## California ADHD (priority state — statewide hubs; city clones retired)
 - Online ADHD diagnosis California: https://siya.health/blog/online-adhd-diagnosis-california
 - ADHD telehealth California: https://siya.health/blog/adhd-telehealth-california
-- Adult ADHD care California: https://siya.health/adhd-care
+- Adult ADHD care: https://siya.health/adhd-care
 - California screening: https://siya.health/adult-adhd-screening-california
-- Los Angeles ADHD treatment: https://siya.health/blog/adhd-treatment-los-angeles-ca
-- San Diego ADHD treatment: https://siya.health/blog/adhd-treatment-san-diego-ca
-- San Francisco ADHD treatment: https://siya.health/blog/adhd-treatment-san-francisco-ca
-- San Jose ADHD treatment: https://siya.health/blog/adhd-treatment-san-jose-ca
-- Sacramento ADHD treatment: https://siya.health/blog/adhd-treatment-sacramento-ca
-- Oakland / East Bay ADHD treatment: https://siya.health/blog/adhd-treatment-oakland-ca
-- Orange County ADHD treatment: https://siya.health/blog/adhd-treatment-orange-county-ca
+- Texas ADHD treatment (statewide): https://siya.health/blog/adhd-treatment-texas
+- Texas ADHD diagnosis (statewide): https://siya.health/adhd-diagnosis-texas
 
 ## Labs by common marker (educational topic pages — not a catalogue)
 - Thyroid / TSH: https://siya.health/labs/thyroid

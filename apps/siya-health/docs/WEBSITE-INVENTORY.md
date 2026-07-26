@@ -5,29 +5,48 @@ Generated: 2026-07-26
 | Metric | Count |
 |--------|------:|
 | HTML files | 191 |
-| Indexable pages | 176 |
-| Non-indexable | 15 |
+| Indexable pages | 157 |
+| Non-indexable | 34 |
 
 ## Group summary
 
 | Group | Pages |
 |-------|------:|
-| Core Revenue Pages | 16 |
+| Core Revenue Pages | 12 |
 | Trust Pages | 15 |
-| Educational Pages | 131 |
-| SEO Pages | 21 |
+| Educational Pages | 116 |
+| SEO Pages | 14 |
 | Utility Pages | 24 |
-| Orphan Pages | 0 |
+| Orphan Pages | 3 |
 | Duplicate Pages | 11 |
 | Legacy Pages | 0 |
 
 ## Non-indexable pages
 
+- `/adhd-diagnosis-austin`
 - `/adhd-diagnosis-florida`
+- `/adhd-diagnosis-houston`
+- `/adhd-diagnosis-pennsylvania`
+- `/adhd-diagnosis-philadelphia`
 - `/adhd-evaluation-cost`
 - `/adhd-screening-results`
 - `/adhd-treatment-online`
 - `/adult-adhd-diagnosis`
+- `/blog/adhd-treatment-austin-tx`
+- `/blog/adhd-treatment-dallas-tx`
+- `/blog/adhd-treatment-fort-worth-tx`
+- `/blog/adhd-treatment-houston-tx`
+- `/blog/adhd-treatment-los-angeles-ca`
+- `/blog/adhd-treatment-miami-fl`
+- `/blog/adhd-treatment-oakland-ca`
+- `/blog/adhd-treatment-orange-county-ca`
+- `/blog/adhd-treatment-orlando-fl`
+- `/blog/adhd-treatment-philadelphia-pa`
+- `/blog/adhd-treatment-sacramento-ca`
+- `/blog/adhd-treatment-san-antonio-tx`
+- `/blog/adhd-treatment-san-diego-ca`
+- `/blog/adhd-treatment-san-francisco-ca`
+- `/blog/adhd-treatment-san-jose-ca`
 - `/blog/adult-adhd-treatment-california-2026`
 - `/intake`
 - `/online-adhd-test`
@@ -41,26 +60,22 @@ Generated: 2026-07-26
 
 ---
 
-## Core Revenue Pages (16)
+## Core Revenue Pages (12)
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/](https://siya.health/) | Homepage | Brand entry; route patients to core services and booking | Book Free Meet & Greet → /redirect/me… | Explore Our Blog → /blog | Navigational / Commercial | Something feels off—and you want clearer answers. | 1030 | 190 | 37 |
-| [/adhd-care](https://siya.health/adhd-care) | Service Page | Convert ADHD evaluation and treatment interest to booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Struggling to focus—even when you care? | 1447 | 187 | 45 |
-| [/adhd-diagnosis-austin](https://siya.health/adhd-diagnosis-austin) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Local SEO / Commercial | ADHD Diagnosis in Austin, Texas (Online) | 423 | 10 | 36 |
-| [/adhd-diagnosis-houston](https://siya.health/adhd-diagnosis-houston) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Local SEO / Commercial | ADHD Diagnosis in Houston, Texas (Online) | 414 | 9 | 36 |
-| [/adhd-diagnosis-pennsylvania](https://siya.health/adhd-diagnosis-pennsylvania) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Local SEO / Commercial | Online ADHD Diagnosis in Pennsylvania | 434 | 7 | 37 |
-| [/adhd-diagnosis-philadelphia](https://siya.health/adhd-diagnosis-philadelphia) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Local SEO / Commercial | ADHD Diagnosis in Philadelphia, Pennsylvania (O… | 422 | 7 | 37 |
-| [/adhd-diagnosis-texas](https://siya.health/adhd-diagnosis-texas) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Local SEO / Commercial | Online ADHD Diagnosis in Texas | 441 | 13 | 39 |
-| [/adhd-screening](https://siya.health/adhd-screening) | Service Page | Top-of-funnel ADHD screening; lead to evaluation | Continue to next steps → /adhd-screen… | — | Commercial / Transactional | What are you looking for help with? | 446 | 186 | 36 |
-| [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Book Free Meet & Greet → /redirect/me… | Book Online via Zocdoc → https://www.… | Commercial / Transactional | Choose How You Want to Get Started | 203 | 185 | 32 |
-| [/creyos-adhd-testing](https://siya.health/creyos-adhd-testing) | Service Page | Creyos cognitive testing for ADHD as part of your $149 on… | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Creyos ADHD Testing (Included in Your Evaluation) | 405 | 3 | 35 |
-| [/labs](https://siya.health/labs) | Service Page | Explore transparent direct-pay laboratory testing for thy… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Labs & Blood Tests with Transparent Direct-Pay … | 1755 | 185 | 49 |
-| [/mens-health-longevity](https://siya.health/mens-health-longevity) | Service Page | Men's health / TRT / longevity service conversion | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Commercial / Transactional | When energy, drive, and focus don't feel like t… | 662 | 185 | 41 |
-| [/prescriptions](https://siya.health/prescriptions) | Service Page | Provider-reviewed prescriptions through Siya Health teleh… | Book Free Meet & Greet → /redirect/me… | — | Commercial / Transactional | Online Prescription Services | 137 | 185 | 31 |
-| [/primary-urgent-care](https://siya.health/primary-urgent-care) | Service Page | Virtual primary and urgent care across California, Texas,… | Book Free Meet & Greet → /redirect/me… | Browse preventive labs → /labs/preven… | Commercial / Transactional | Primary & Urgent Care — Virtual, Same-Week | 433 | 185 | 38 |
-| [/telehealth](https://siya.health/telehealth) | Service Page | Explain virtual care model; route to services | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Commercial / Transactional | Need a doctor without rearranging your entire day? | 977 | 185 | 43 |
-| [/weight-loss-metabolic-health](https://siya.health/weight-loss-metabolic-health) | Service Page | Convert GLP-1 / medical weight loss interest to consult | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Commercial / Transactional | When your appetite, energy, and weight stop mak… | 1152 | 185 | 43 |
+| [/](https://siya.health/) | Homepage | Brand entry; route patients to core services and booking | Book Free Meet & Greet → /redirect/me… | Explore Our Blog → /blog | Navigational / Commercial | Something feels off—and you want clearer answers. | 1029 | 171 | 34 |
+| [/adhd-care](https://siya.health/adhd-care) | Service Page | Convert ADHD evaluation and treatment interest to booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Struggling to focus—even when you care? | 1445 | 179 | 45 |
+| [/adhd-diagnosis-texas](https://siya.health/adhd-diagnosis-texas) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Local SEO / Commercial | Online ADHD Diagnosis in Texas | 440 | 5 | 36 |
+| [/adhd-screening](https://siya.health/adhd-screening) | Service Page | Top-of-funnel ADHD screening; lead to evaluation | Continue to next steps → /adhd-screen… | — | Commercial / Transactional | What are you looking for help with? | 445 | 167 | 36 |
+| [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Book Free Meet & Greet → /redirect/me… | Book Online via Zocdoc → https://www.… | Commercial / Transactional | Choose How You Want to Get Started | 203 | 166 | 32 |
+| [/creyos-adhd-testing](https://siya.health/creyos-adhd-testing) | Service Page | Creyos cognitive testing for ADHD as part of your $149 on… | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Creyos ADHD Testing (Included in Your Evaluation) | 404 | 3 | 35 |
+| [/labs](https://siya.health/labs) | Service Page | Explore transparent direct-pay laboratory testing for thy… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Labs & Blood Tests with Transparent Direct-Pay … | 1676 | 166 | 40 |
+| [/mens-health-longevity](https://siya.health/mens-health-longevity) | Service Page | Men's health / TRT / longevity service conversion | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Commercial / Transactional | When energy, drive, and focus don't feel like t… | 659 | 166 | 41 |
+| [/prescriptions](https://siya.health/prescriptions) | Service Page | Provider-reviewed prescriptions through Siya Health teleh… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Online Prescription Services | 137 | 166 | 31 |
+| [/primary-urgent-care](https://siya.health/primary-urgent-care) | Service Page | Virtual primary and urgent care across California, Texas,… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Primary & Urgent Care — Virtual, Same-Week | 432 | 166 | 38 |
+| [/telehealth](https://siya.health/telehealth) | Service Page | Explain virtual care model; route to services | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Commercial / Transactional | Need a doctor without rearranging your entire day? | 957 | 166 | 41 |
+| [/weight-loss-metabolic-health](https://siya.health/weight-loss-metabolic-health) | Service Page | Convert GLP-1 / medical weight loss interest to consult | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Commercial / Transactional | When your appetite, energy, and weight stop mak… | 1144 | 166 | 43 |
 
 ---
 
@@ -68,187 +83,165 @@ Generated: 2026-07-26
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/about](https://siya.health/about) | About | Build trust; explain mission and care team | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Trust / Navigational | Care for adults who are done guessing about the… | 722 | 185 | 38 |
-| [/legal](https://siya.health/legal) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Legal & Compliance | 148 | 185 | 32 |
-| [/legal/controlled-substance-treatment-agreement](https://siya.health/legal/controlled-substance-treatment-agreement) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Controlled Substance Treatment Agreement | 829 | 95 | 31 |
-| [/legal/cookie-policy](https://siya.health/legal/cookie-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Cookie Policy | 475 | 185 | 31 |
-| [/legal/notice-of-privacy-practices](https://siya.health/legal/notice-of-privacy-practices) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Notice of Privacy Practices | 1547 | 186 | 31 |
-| [/legal/privacy-policy](https://siya.health/legal/privacy-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Privacy Policy | 2874 | 186 | 31 |
-| [/legal/terms-of-use](https://siya.health/legal/terms-of-use) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Terms of Use | 4490 | 186 | 31 |
-| [/providers](https://siya.health/providers) | Provider Hub | Show clinician roster; drive profile views and booking | Book Free Meet & Greet → /redirect/me… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Our Care Team | 445 | 185 | 38 |
-| [/providers/derek-timbs](https://siya.health/providers/derek-timbs) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Derek Timbs, FNP-BC | 614 | 8 | 36 |
-| [/providers/dr-natasha-desai](https://siya.health/providers/dr-natasha-desai) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Natasha Desai, MD | 715 | 17 | 38 |
-| [/providers/dr-sneh-pandey](https://siya.health/providers/dr-sneh-pandey) | Provider Profile | Clinician credibility; convert to booking with this provider | Book Free Meet & Greet → /redirect/me… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Sneh Pandey, MD | 871 | 42 | 36 |
-| [/providers/dr-swati-pandey](https://siya.health/providers/dr-swati-pandey) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Swati Pandey, MD | 722 | 11 | 38 |
-| [/providers/dr-vanessa-urbina](https://siya.health/providers/dr-vanessa-urbina) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Vanessa Urbina, MD | 662 | 14 | 35 |
-| [/providers/megan-wunderlich](https://siya.health/providers/megan-wunderlich) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Megan Wunderlich, FNP-C | 612 | 10 | 36 |
-| [/providers/wendy-delgado](https://siya.health/providers/wendy-delgado) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Wendy Delgado, PA-C | 593 | 5 | 36 |
+| [/about](https://siya.health/about) | About | Build trust; explain mission and care team | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Trust / Navigational | Care for adults who are done guessing about the… | 697 | 166 | 35 |
+| [/legal](https://siya.health/legal) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Legal & Compliance | 148 | 166 | 32 |
+| [/legal/controlled-substance-treatment-agreement](https://siya.health/legal/controlled-substance-treatment-agreement) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Controlled Substance Treatment Agreement | 829 | 76 | 31 |
+| [/legal/cookie-policy](https://siya.health/legal/cookie-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Cookie Policy | 475 | 166 | 31 |
+| [/legal/notice-of-privacy-practices](https://siya.health/legal/notice-of-privacy-practices) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Notice of Privacy Practices | 1547 | 167 | 31 |
+| [/legal/privacy-policy](https://siya.health/legal/privacy-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Privacy Policy | 2874 | 167 | 31 |
+| [/legal/terms-of-use](https://siya.health/legal/terms-of-use) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Terms of Use | 4490 | 167 | 31 |
+| [/providers](https://siya.health/providers) | Provider Hub | Show clinician roster; drive profile views and booking | Book Free Meet & Greet → /redirect/me… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Our Care Team | 430 | 166 | 35 |
+| [/providers/derek-timbs](https://siya.health/providers/derek-timbs) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Derek Timbs, FNP-BC | 607 | 5 | 36 |
+| [/providers/dr-natasha-desai](https://siya.health/providers/dr-natasha-desai) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Natasha Desai, MD | 708 | 15 | 38 |
+| [/providers/dr-sneh-pandey](https://siya.health/providers/dr-sneh-pandey) | Provider Profile | Clinician credibility; convert to booking with this provider | Book Free Meet & Greet → /redirect/me… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Sneh Pandey, MD | 863 | 23 | 36 |
+| [/providers/dr-swati-pandey](https://siya.health/providers/dr-swati-pandey) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Swati Pandey, MD | 715 | 9 | 38 |
+| [/providers/dr-vanessa-urbina](https://siya.health/providers/dr-vanessa-urbina) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Vanessa Urbina, MD | 655 | 14 | 35 |
+| [/providers/megan-wunderlich](https://siya.health/providers/megan-wunderlich) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Megan Wunderlich, FNP-C | 605 | 5 | 36 |
+| [/providers/wendy-delgado](https://siya.health/providers/wendy-delgado) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Wendy Delgado, PA-C | 586 | 3 | 36 |
 
 ---
 
-## Educational Pages (131)
+## Educational Pages (116)
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/answers](https://siya.health/answers) | Health Guide Hub | FAQ/PAA discovery hub for AI and organic search | Join Our Health Guide → https://link.… | View all Metabolic Health guides → #g… | Informational / Navigational | Health Guides | 1358 | 185 | 104 |
-| [/answers/adderall-vs-vyvanse-adults](https://siya.health/answers/adderall-vs-vyvanse-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | When might Vyvanse be preferred over Adderall f… | 401 | 3 | 35 |
-| [/answers/adhd-and-weight-loss-connection](https://siya.health/answers/adhd-and-weight-loss-connection) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Is there a connection between ADHD and weight l… | 350 | 7 | 35 |
-| [/answers/adhd-in-women](https://siya.health/answers/adhd-in-women) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | How does ADHD present differently in women? | 440 | 22 | 36 |
-| [/answers/adhd-medication-every-day](https://siya.health/answers/adhd-medication-every-day) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Do you have to take ADHD medication every day? | 370 | 4 | 36 |
-| [/answers/adhd-medication-side-effects](https://siya.health/answers/adhd-medication-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What ADHD medication side effects are most comm… | 417 | 6 | 36 |
-| [/answers/adhd-vs-anxiety](https://siya.health/answers/adhd-vs-anxiety) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | How do you tell ADHD apart from anxiety? | 942 | 20 | 36 |
-| [/answers/adhd-vs-burnout](https://siya.health/answers/adhd-vs-burnout) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Is it ADHD or burnout? | 1073 | 7 | 37 |
-| [/answers/afternoon-energy-crash-after-lunch](https://siya.health/answers/afternoon-energy-crash-after-lunch) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Why do I crash every afternoon after lunch? | 1145 | 1 | 36 |
-| [/answers/asrs-adhd-screening-explained](https://siya.health/answers/asrs-adhd-screening-explained) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What is the ASRS ADHD screening test? | 375 | 4 | 35 |
-| [/answers/brain-fog-after-eating](https://siya.health/answers/brain-fog-after-eating) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Why do I get brain fog after eating? | 1143 | 12 | 35 |
-| [/answers/can-adhd-be-diagnosed-online](https://siya.health/answers/can-adhd-be-diagnosed-online) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Can ADHD be diagnosed online? | 815 | 49 | 35 |
-| [/answers/can-adhd-cause-anxiety](https://siya.health/answers/can-adhd-cause-anxiety) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Can ADHD cause anxiety? | 846 | 3 | 34 |
-| [/answers/can-sleep-apnea-cause-fatigue](https://siya.health/answers/can-sleep-apnea-cause-fatigue) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Can sleep apnea cause fatigue? | 545 | 6 | 34 |
-| [/answers/can-you-get-adhd-medication-online](https://siya.health/answers/can-you-get-adhd-medication-online) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Can you get ADHD medication online? | 349 | 4 | 36 |
-| [/answers/compounded-vs-branded-glp-1](https://siya.health/answers/compounded-vs-branded-glp-1) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What should you ask about compounded vs branded… | 382 | 4 | 34 |
-| [/answers/ed-telehealth-legitimate](https://siya.health/answers/ed-telehealth-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Is telehealth for erectile dysfunction legitimate? | 333 | 2 | 34 |
-| [/answers/executive-dysfunction-adhd](https://siya.health/answers/executive-dysfunction-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What is executive dysfunction in adult ADHD? | 413 | 26 | 36 |
-| [/answers/food-noise-returned-on-glp-1](https://siya.health/answers/food-noise-returned-on-glp-1) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Why did food noise come back on GLP-1? | 1157 | 3 | 35 |
-| [/answers/fsa-hsa-adhd-evaluation](https://siya.health/answers/fsa-hsa-adhd-evaluation) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Can you use FSA or HSA for ADHD evaluation? | 375 | 17 | 36 |
-| [/answers/glp-1-nausea-management](https://siya.health/answers/glp-1-nausea-management) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | How do you manage GLP-1 nausea? | 368 | 4 | 35 |
-| [/answers/glp-1-side-effects](https://siya.health/answers/glp-1-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Which GLP-1 side effects usually improve with t… | 964 | 11 | 36 |
-| [/answers/high-functioning-adhd](https://siya.health/answers/high-functioning-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Can you have ADHD and still be high-functioning? | 365 | 5 | 35 |
-| [/answers/high-shbg-low-free-testosterone](https://siya.health/answers/high-shbg-low-free-testosterone) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What does high SHBG with low free testosterone … | 1111 | 2 | 37 |
-| [/answers/how-long-adhd-evaluation](https://siya.health/answers/how-long-adhd-evaluation) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | How long does an ADHD evaluation take? | 335 | 13 | 36 |
-| [/answers/how-much-does-adhd-testing-cost](https://siya.health/answers/how-much-does-adhd-testing-cost) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | How much does ADHD testing cost? | 356 | 4 | 36 |
-| [/answers/how-online-prescriptions-work](https://siya.health/answers/how-online-prescriptions-work) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | How do online prescriptions work legally? | 811 | 6 | 35 |
-| [/answers/insulin-resistance-without-diabetes](https://siya.health/answers/insulin-resistance-without-diabetes) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Can you have insulin resistance without diabetes? | 830 | 4 | 35 |
-| [/answers/is-adhd-medication-safe-long-term](https://siya.health/answers/is-adhd-medication-safe-long-term) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What does long-term ADHD medication safety moni… | 408 | 7 | 36 |
-| [/answers/is-online-adhd-diagnosis-legitimate](https://siya.health/answers/is-online-adhd-diagnosis-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What should you look for in a legitimate online… | 826 | 185 | 36 |
-| [/answers/is-telehealth-legitimate](https://siya.health/answers/is-telehealth-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Is telehealth legitimate for medical care? | 818 | 8 | 35 |
-| [/answers/late-adhd-diagnosis-adults](https://siya.health/answers/late-adhd-diagnosis-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Why are so many adults diagnosed with ADHD late… | 381 | 28 | 36 |
-| [/answers/medical-weight-loss-vs-dieting](https://siya.health/answers/medical-weight-loss-vs-dieting) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | When does medical weight loss outperform dietin… | 395 | 7 | 35 |
-| [/answers/meet-and-greet-telehealth-expectations](https://siya.health/answers/meet-and-greet-telehealth-expectations) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What should I expect from a first telehealth vi… | 825 | 7 | 35 |
-| [/answers/normal-a1c-insulin-resistance](https://siya.health/answers/normal-a1c-insulin-resistance) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Can you have insulin resistance with a normal A1C? | 876 | 8 | 35 |
-| [/answers/oral-vs-topical-minoxidil](https://siya.health/answers/oral-vs-topical-minoxidil) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | When is topical minoxidil enough vs oral minoxi… | 363 | 2 | 34 |
-| [/answers/poor-sleep-feels-like-adhd](https://siya.health/answers/poor-sleep-feels-like-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Can poor sleep feel like ADHD? | 1082 | 3 | 36 |
-| [/answers/rejection-sensitivity-adhd](https://siya.health/answers/rejection-sensitivity-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What is rejection sensitive dysphoria (RSD) and… | 391 | 4 | 36 |
-| [/answers/screening-vs-adhd-evaluation](https://siya.health/answers/screening-vs-adhd-evaluation) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What is the difference between ADHD screening a… | 361 | 25 | 36 |
-| [/answers/semaglutide-weight-loss-how-it-works](https://siya.health/answers/semaglutide-weight-loss-how-it-works) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | How quickly does semaglutide start working for … | 961 | 7 | 36 |
-| [/answers/signs-of-adult-adhd](https://siya.health/answers/signs-of-adult-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What are the signs of adult ADHD? | 894 | 185 | 36 |
-| [/answers/signs-of-sleep-apnea-in-adults](https://siya.health/answers/signs-of-sleep-apnea-in-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What are the signs of sleep apnea in adults? | 530 | 6 | 36 |
-| [/answers/starting-adhd-medication-adults](https://siya.health/answers/starting-adhd-medication-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What should adults expect when starting ADHD me… | 888 | 26 | 36 |
-| [/answers/telehealth-adhd-california](https://siya.health/answers/telehealth-adhd-california) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | How does ADHD telehealth work in California? | 394 | 13 | 36 |
-| [/answers/telehealth-adhd-texas](https://siya.health/answers/telehealth-adhd-texas) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | How does ADHD telehealth work in Texas? | 357 | 9 | 36 |
-| [/answers/testosterone-and-adhd-overlap](https://siya.health/answers/testosterone-and-adhd-overlap) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Can low testosterone mimic ADHD? | 386 | 4 | 38 |
-| [/answers/time-blindness-adhd](https://siya.health/answers/time-blindness-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What is time blindness in ADHD? | 405 | 19 | 35 |
-| [/answers/trt-monitoring-requirements](https://siya.health/answers/trt-monitoring-requirements) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | How often is TRT monitoring required? | 869 | 6 | 36 |
-| [/answers/weight-gain-after-stopping-ozempic](https://siya.health/answers/weight-gain-after-stopping-ozempic) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Why am I gaining weight after stopping Ozempic? | 1128 | 1 | 37 |
-| [/answers/what-does-low-testosterone-feel-like](https://siya.health/answers/what-does-low-testosterone-feel-like) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What does low testosterone feel like? | 398 | 13 | 36 |
-| [/answers/what-included-199-adhd-evaluation](https://siya.health/answers/what-included-199-adhd-evaluation) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What is included in a Siya Health ADHD evaluation? | 393 | 24 | 36 |
-| [/answers/what-is-food-noise](https://siya.health/answers/what-is-food-noise) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What is food noise? | 917 | 22 | 34 |
-| [/answers/what-is-free-testosterone](https://siya.health/answers/what-is-free-testosterone) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What is free testosterone? | 842 | 13 | 36 |
-| [/answers/what-is-insulin-resistance](https://siya.health/answers/what-is-insulin-resistance) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What is insulin resistance? | 1029 | 185 | 36 |
-| [/answers/what-to-do-after-lab-results](https://siya.health/answers/what-to-do-after-lab-results) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What to do after you get lab results | 1040 | 5 | 37 |
-| [/answers/when-is-testosterone-therapy-appropriate](https://siya.health/answers/when-is-testosterone-therapy-appropriate) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What symptoms warrant testosterone therapy eval… | 866 | 11 | 36 |
-| [/answers/which-preventive-blood-tests-adults](https://siya.health/answers/which-preventive-blood-tests-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Which preventive blood tests do adults usually … | 1107 | 6 | 36 |
-| [/answers/who-qualifies-glp-1-weight-loss](https://siya.health/answers/who-qualifies-glp-1-weight-loss) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Who qualifies for GLP-1 weight loss medications? | 400 | 5 | 36 |
-| [/answers/why-am-i-tired-even-after-sleeping](https://siya.health/answers/why-am-i-tired-even-after-sleeping) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Why am I tired even after sleeping? | 611 | 185 | 40 |
-| [/answers/why-normal-labs-dont-mean-healthy](https://siya.health/answers/why-normal-labs-dont-mean-healthy) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Why don't normal labs mean you're healthy? | 1213 | 11 | 35 |
-| [/blog](https://siya.health/blog) | Blog Hub | Content discovery; distribute authority to articles | Join our newsletter → https://link.yo… | Read health guides → /answers | Informational / Navigational | Health Insights — Evidence-Based, Clinical | 885 | 185 | 54 |
-| [/blog/adderall-for-adhd-how-it-works](https://siya.health/blog/adderall-for-adhd-how-it-works) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | Adderall for ADHD: How It Works (2026 Clinical … | 1676 | 7 | 37 |
-| [/blog/adhd](https://siya.health/blog/adhd) | Blog Hub | Content discovery; distribute authority to articles | — | — | Informational / Navigational | ADHD articles | 1177 | 185 | 86 |
-| [/blog/adhd-and-binge-eating](https://siya.health/blog/adhd-and-binge-eating) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | ADHD and Binge Eating: Why the Link Matters (an… | 2112 | 12 | 50 |
-| [/blog/adhd-brain-imaging-subtypes](https://siya.health/blog/adhd-brain-imaging-subtypes) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | Not All ADHD Is the Same: What New Brain Imagin… | 3482 | 2 | 41 |
-| [/blog/adhd-evaluation-california-online-vs-in-person](https://siya.health/blog/adhd-evaluation-california-online-vs-in-person) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | ADHD Evaluation in California: Online vs In-Per… | 934 | 10 | 46 |
-| [/blog/adhd-evaluation-cost-texas](https://siya.health/blog/adhd-evaluation-cost-texas) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | ADHD Evaluation Cost in Texas: Full Breakdown (… | 678 | 10 | 38 |
-| [/blog/adhd-hormones-women](https://siya.health/blog/adhd-hormones-women) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD and Hormones in Women: Cycle, Perimenopaus… | 2038 | 6 | 39 |
-| [/blog/adhd-in-women](https://siya.health/blog/adhd-in-women) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start an ADHD Evaluation → /adhd-care | Informational | ADHD in Women: Symptoms, Masking, Hormones, and… | 4465 | 20 | 54 |
-| [/blog/adhd-medication-daily-or-as-needed-adults](https://siya.health/blog/adhd-medication-daily-or-as-needed-adults) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | Do Adults Need ADHD Medication Every Day? | 594 | 8 | 39 |
-| [/blog/adhd-medication-online-california](https://siya.health/blog/adhd-medication-online-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | Can You Get ADHD Medication Online in Californi… | 932 | 7 | 47 |
-| [/blog/adhd-medication-options-california](https://siya.health/blog/adhd-medication-options-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | ADHD Medication Options in California: What Exi… | 1196 | 23 | 49 |
-| [/blog/adhd-medication-options-for-adults](https://siya.health/blog/adhd-medication-options-for-adults) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | ADHD Medication Options for Adults: Where to Start | 1353 | 39 | 39 |
-| [/blog/adhd-medication-side-effects-what-to-expect](https://siya.health/blog/adhd-medication-side-effects-what-to-expect) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | ADHD Medication Side Effects: What to Expect (2… | 1281 | 6 | 38 |
-| [/blog/adhd-symptoms-overlooked](https://siya.health/blog/adhd-symptoms-overlooked) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | 7 Adult ADHD Signs Doctors Often Miss | 836 | 11 | 39 |
-| [/blog/adhd-telehealth-california](https://siya.health/blog/adhd-telehealth-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | ADHD Telehealth in California: How Virtual Care… | 833 | 20 | 47 |
-| [/blog/adhd-testing-online-california-screening-vs-evaluation](https://siya.health/blog/adhd-testing-online-california-screening-vs-evaluation) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | ADHD Testing Online in California: Screening vs… | 843 | 6 | 47 |
-| [/blog/adhd-treatment-austin-tx](https://siya.health/blog/adhd-treatment-austin-tx) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Austin, Texas: Physician-Led … | 2109 | 12 | 60 |
-| [/blog/adhd-treatment-dallas-tx](https://siya.health/blog/adhd-treatment-dallas-tx) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Dallas, Texas: Physician-Led … | 2351 | 12 | 58 |
-| [/blog/adhd-treatment-fort-worth-tx](https://siya.health/blog/adhd-treatment-fort-worth-tx) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Fort Worth, Texas: Physician-… | 3043 | 8 | 59 |
-| [/blog/adhd-treatment-houston-tx](https://siya.health/blog/adhd-treatment-houston-tx) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Houston, Texas: Physician-Led… | 2571 | 9 | 59 |
-| [/blog/adhd-treatment-los-angeles-ca](https://siya.health/blog/adhd-treatment-los-angeles-ca) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Los Angeles, California: Phys… | 2868 | 17 | 57 |
-| [/blog/adhd-treatment-miami-fl](https://siya.health/blog/adhd-treatment-miami-fl) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Miami, Florida: Physician-Led… | 2556 | 4 | 50 |
-| [/blog/adhd-treatment-oakland-ca](https://siya.health/blog/adhd-treatment-oakland-ca) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Oakland, California: Physicia… | 2811 | 16 | 57 |
-| [/blog/adhd-treatment-orange-county-ca](https://siya.health/blog/adhd-treatment-orange-county-ca) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Orange County, California: Ph… | 2815 | 17 | 57 |
-| [/blog/adhd-treatment-orlando-fl](https://siya.health/blog/adhd-treatment-orlando-fl) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Orlando, Florida: Physician-L… | 2541 | 3 | 49 |
-| [/blog/adhd-treatment-philadelphia-pa](https://siya.health/blog/adhd-treatment-philadelphia-pa) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Philadelphia, Pennsylvania: P… | 2566 | 4 | 50 |
-| [/blog/adhd-treatment-sacramento-ca](https://siya.health/blog/adhd-treatment-sacramento-ca) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Sacramento, California: Physi… | 2833 | 16 | 57 |
-| [/blog/adhd-treatment-san-antonio-tx](https://siya.health/blog/adhd-treatment-san-antonio-tx) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in San Antonio, Texas: Physician… | 2881 | 7 | 59 |
-| [/blog/adhd-treatment-san-diego-ca](https://siya.health/blog/adhd-treatment-san-diego-ca) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in San Diego, California: Physic… | 2777 | 16 | 57 |
-| [/blog/adhd-treatment-san-francisco-ca](https://siya.health/blog/adhd-treatment-san-francisco-ca) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in San Francisco, California: Ph… | 2758 | 17 | 57 |
-| [/blog/adhd-treatment-san-jose-ca](https://siya.health/blog/adhd-treatment-san-jose-ca) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in San Jose, California: Physici… | 2763 | 16 | 57 |
-| [/blog/adhd-treatment-texas](https://siya.health/blog/adhd-treatment-texas) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Texas: Physician-Led Virtual … | 2890 | 15 | 49 |
-| [/blog/adult-adhd-symptoms-california](https://siya.health/blog/adult-adhd-symptoms-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | Adult ADHD Symptoms in California: Patterns Wor… | 1291 | 7 | 46 |
-| [/blog/compounded-vs-branded-glp1-medications](https://siya.health/blog/compounded-vs-branded-glp1-medications) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Informational | Compounded vs Branded GLP-1 Medications: What P… | 1930 | 5 | 38 |
-| [/blog/executive-dysfunction-adhd](https://siya.health/blog/executive-dysfunction-adhd) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start an ADHD Evaluation → /adhd-care | Informational | Executive Dysfunction in ADHD: What It Is and H… | 4607 | 18 | 46 |
-| [/blog/food-noise-and-glp-1-what-it-means-and-what-helps](https://siya.health/blog/food-noise-and-glp-1-what-it-means-and-what-helps) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Explore Care Options → /weight-loss-m… | Informational | Food Noise and GLP-1: What It Means and What Ac… | 3342 | 18 | 42 |
-| [/blog/free-testosterone-vs-total-testosterone-what-patients-should-know](https://siya.health/blog/free-testosterone-vs-total-testosterone-what-patients-should-know) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Explore Care Options → /mens-health-l… | Informational | Free Testosterone vs Total Testosterone: What P… | 2550 | 14 | 44 |
-| [/blog/glp1-side-effects-and-how-to-manage-them](https://siya.health/blog/glp1-side-effects-and-how-to-manage-them) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Informational | GLP-1 Side Effects and How to Manage Them (2026) | 1771 | 5 | 40 |
-| [/blog/how-adhd-medication-is-prescribed-online](https://siya.health/blog/how-adhd-medication-is-prescribed-online) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | How ADHD Medication Is Prescribed Online (2026) | 1258 | 23 | 37 |
-| [/blog/how-mental-health-affects-weight-loss-outcomes](https://siya.health/blog/how-mental-health-affects-weight-loss-outcomes) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Informational | How Mental Health Affects Weight Loss Outcomes … | 1691 | 8 | 38 |
-| [/blog/how-to-choose-adhd-provider-california](https://siya.health/blog/how-to-choose-adhd-provider-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | How to Choose an ADHD Provider in California | 991 | 8 | 47 |
-| [/blog/how-to-know-if-you-have-adhd-adult](https://siya.health/blog/how-to-know-if-you-have-adhd-adult) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | How to Know If You Have ADHD as an Adult (Real … | 802 | 185 | 42 |
-| [/blog/how-to-safely-get-prescriptions-online](https://siya.health/blog/how-to-safely-get-prescriptions-online) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Join Our Health Guide → https://link.… | Informational | How to Safely Get Prescriptions Online (2026) | 1656 | 13 | 40 |
-| [/blog/insomnia-treatment-options-beyond-medication](https://siya.health/blog/insomnia-treatment-options-beyond-medication) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Join Our Health Guide → https://link.… | Informational | Insomnia Treatment Beyond Medication (2026) | 1729 | 4 | 40 |
-| [/blog/insulin-resistance-and-weight-loss-clinician-overview](https://siya.health/blog/insulin-resistance-and-weight-loss-clinician-overview) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Explore Care Options → /weight-loss-m… | Informational | Insulin Resistance and Weight Loss: A Clinician… | 2878 | 20 | 43 |
-| [/blog/iron-deficiency-brain-fog-adhd](https://siya.health/blog/iron-deficiency-brain-fog-adhd) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | Iron Deficiency, Brain Fog, and ADHD: Could Low… | 4291 | 7 | 43 |
-| [/blog/is-adhd-medication-safe-long-term](https://siya.health/blog/is-adhd-medication-safe-long-term) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | Is ADHD Medication Safe Long Term? Benefits & M… | 1319 | 4 | 37 |
-| [/blog/is-online-adhd-diagnosis-legit](https://siya.health/blog/is-online-adhd-diagnosis-legit) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | Is Online ADHD Diagnosis Legit? What Patients S… | 935 | 31 | 39 |
-| [/blog/medical-weight-loss-glp1-semaglutide-texas](https://siya.health/blog/medical-weight-loss-glp1-semaglutide-texas) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Informational | Medical Weight Loss in Texas: GLP-1, Semaglutid… | 1136 | 11 | 39 |
-| [/blog/medical-weight-loss-vs-dieting-what-actually-works](https://siya.health/blog/medical-weight-loss-vs-dieting-what-actually-works) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Informational | Medical Weight Loss vs Dieting: What Actually W… | 1722 | 7 | 38 |
-| [/blog/minoxidil-for-hair-loss-does-it-work](https://siya.health/blog/minoxidil-for-hair-loss-does-it-work) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Join Our Health Guide → https://link.… | Informational | Minoxidil for Hair Loss: Does It Work? (2026) | 1847 | 7 | 39 |
-| [/blog/non-stimulant-adhd-medications-explained](https://siya.health/blog/non-stimulant-adhd-medications-explained) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | When Do Adults Use Non-Stimulant ADHD Medications? | 1256 | 4 | 37 |
-| [/blog/online-adhd-diagnosis-california](https://siya.health/blog/online-adhd-diagnosis-california) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Informational | Online ADHD Diagnosis in California: Cost, Proc… | 1251 | 24 | 51 |
-| [/blog/online-adhd-diagnosis-texas](https://siya.health/blog/online-adhd-diagnosis-texas) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | Online ADHD Diagnosis in Texas: Cost, Process &… | 851 | 13 | 43 |
-| [/blog/oral-vs-injectable-weight-loss-medications](https://siya.health/blog/oral-vs-injectable-weight-loss-medications) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Informational | Oral vs Injectable Weight Loss Medications: Wha… | 1859 | 2 | 37 |
-| [/blog/oral-vs-topical-minoxidil-which-is-right](https://siya.health/blog/oral-vs-topical-minoxidil-which-is-right) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Join Our Health Guide → https://link.… | Informational | Oral vs Topical Minoxidil: Which Is Right? (2026) | 1731 | 6 | 39 |
-| [/blog/perimenopause-brain-fog](https://siya.health/blog/perimenopause-brain-fog) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Take Free ADHD Screening → /adhd-scre… | Informational | Perimenopause Brain Fog: Why Focus and Memory F… | 1973 | 7 | 38 |
-| [/blog/phentermine-for-weight-loss-safety-and-effectiveness](https://siya.health/blog/phentermine-for-weight-loss-safety-and-effectiveness) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Informational | Phentermine for Weight Loss: Safety and Effecti… | 1855 | 1 | 37 |
-| [/blog/pots-and-adhd](https://siya.health/blog/pots-and-adhd) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | POTS and ADHD: Why Researchers Are Exploring th… | 3798 | 1 | 39 |
-| [/blog/semaglutide-for-weight-loss-how-it-works](https://siya.health/blog/semaglutide-for-weight-loss-how-it-works) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Informational | Semaglutide for Weight Loss: How It Works (2026… | 2276 | 8 | 39 |
-| [/blog/sildenafil-for-erectile-dysfunction-what-to-expect](https://siya.health/blog/sildenafil-for-erectile-dysfunction-what-to-expect) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Join Our Health Guide → https://link.… | Informational | Sildenafil for Erectile Dysfunction: What to Ex… | 1767 | 4 | 38 |
-| [/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign](https://siya.health/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Explore metabolic health → /weight-lo… | Informational | Sleep Apnea, Fatigue, and Metabolic Risk: When … | 2377 | 9 | 39 |
-| [/blog/telehealth](https://siya.health/blog/telehealth) | Blog Hub | Content discovery; distribute authority to articles | — | — | Informational / Navigational | Telehealth articles | 229 | 185 | 41 |
-| [/blog/telehealth-prescriptions-how-online-treatment-works](https://siya.health/blog/telehealth-prescriptions-how-online-treatment-works) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Explore Care Options → /telehealth | Informational | Telehealth Prescriptions: How Online Treatment … | 1706 | 6 | 38 |
-| [/blog/tirzepatide-vs-semaglutide-which-is-better](https://siya.health/blog/tirzepatide-vs-semaglutide-which-is-better) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Informational | Tirzepatide vs Semaglutide: Which Is Better for… | 2089 | 4 | 39 |
-| [/blog/vyvanse-vs-adderall-differences](https://siya.health/blog/vyvanse-vs-adderall-differences) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Join Our Health Guide → https://link.… | Informational | Vyvanse vs Adderall: Which Lasts Longer for Adu… | 1377 | 6 | 38 |
-| [/blog/weight-loss](https://siya.health/blog/weight-loss) | Blog Hub | Content discovery; distribute authority to articles | — | — | Informational / Navigational | Weight loss articles | 298 | 185 | 44 |
-| [/blog/when-is-testosterone-therapy-appropriate](https://siya.health/blog/when-is-testosterone-therapy-appropriate) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Informational | When Is Testosterone Therapy Appropriate? (2026) | 1720 | 6 | 40 |
-| [/blog/why-am-i-always-tired-causes-when-to-see-doctor](https://siya.health/blog/why-am-i-always-tired-causes-when-to-see-doctor) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Explore Care Options → /telehealth | Informational | Why Am I Always Tired? Causes and When to See a… | 2770 | 22 | 44 |
-| [/blog/youre-not-lazy-signs-undiagnosed-adult-adhd](https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | You’re Not Lazy: Signs You May Have Undiagnosed… | 1193 | 22 | 43 |
+| [/answers](https://siya.health/answers) | Health Guide Hub | FAQ/PAA discovery hub for AI and organic search | Book Free Meet & Greet → → /adhd-care | View all Metabolic Health guides → #g… | Informational / Navigational | Health Guides | 891 | 166 | 49 |
+| [/answers/adderall-vs-vyvanse-adults](https://siya.health/answers/adderall-vs-vyvanse-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | When might Vyvanse be preferred over Adderall f… | 569 | 2 | 35 |
+| [/answers/adhd-and-weight-loss-connection](https://siya.health/answers/adhd-and-weight-loss-connection) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Is there a connection between ADHD and weight l… | 529 | 5 | 35 |
+| [/answers/adhd-in-women](https://siya.health/answers/adhd-in-women) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | How does ADHD present differently in women? | 582 | 6 | 36 |
+| [/answers/adhd-medication-every-day](https://siya.health/answers/adhd-medication-every-day) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Do you have to take ADHD medication every day? | 538 | 3 | 36 |
+| [/answers/adhd-medication-side-effects](https://siya.health/answers/adhd-medication-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What ADHD medication side effects are most comm… | 618 | 5 | 36 |
+| [/answers/adhd-vs-anxiety](https://siya.health/answers/adhd-vs-anxiety) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | How do you tell ADHD apart from anxiety? | 985 | 14 | 36 |
+| [/answers/adhd-vs-burnout](https://siya.health/answers/adhd-vs-burnout) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Is it ADHD or burnout? | 1081 | 6 | 37 |
+| [/answers/afternoon-energy-crash-after-lunch](https://siya.health/answers/afternoon-energy-crash-after-lunch) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Why do I crash every afternoon after lunch? | 1307 | 1 | 36 |
+| [/answers/asrs-adhd-screening-explained](https://siya.health/answers/asrs-adhd-screening-explained) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What is the ASRS ADHD screening test? | 524 | 3 | 35 |
+| [/answers/brain-fog-after-eating](https://siya.health/answers/brain-fog-after-eating) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Why do I get brain fog after eating? | 1301 | 11 | 35 |
+| [/answers/can-adhd-be-diagnosed-online](https://siya.health/answers/can-adhd-be-diagnosed-online) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Can ADHD be diagnosed online? | 821 | 34 | 35 |
+| [/answers/can-adhd-cause-anxiety](https://siya.health/answers/can-adhd-cause-anxiety) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Can ADHD cause anxiety? | 842 | 2 | 34 |
+| [/answers/can-sleep-apnea-cause-fatigue](https://siya.health/answers/can-sleep-apnea-cause-fatigue) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | — | Informational | Can sleep apnea cause fatigue? | 647 | 5 | 34 |
+| [/answers/can-you-get-adhd-medication-online](https://siya.health/answers/can-you-get-adhd-medication-online) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Can you get ADHD medication online? | 487 | 3 | 36 |
+| [/answers/compounded-vs-branded-glp-1](https://siya.health/answers/compounded-vs-branded-glp-1) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | What should you ask about compounded vs branded… | 551 | 3 | 34 |
+| [/answers/ed-telehealth-legitimate](https://siya.health/answers/ed-telehealth-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | Is telehealth for erectile dysfunction legitimate? | 437 | 1 | 34 |
+| [/answers/executive-dysfunction-adhd](https://siya.health/answers/executive-dysfunction-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What is executive dysfunction in adult ADHD? | 559 | 10 | 36 |
+| [/answers/food-noise-returned-on-glp-1](https://siya.health/answers/food-noise-returned-on-glp-1) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Why did food noise come back on GLP-1? | 1319 | 2 | 35 |
+| [/answers/fsa-hsa-adhd-evaluation](https://siya.health/answers/fsa-hsa-adhd-evaluation) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Can you use FSA or HSA for ADHD evaluation? | 535 | 1 | 36 |
+| [/answers/glp-1-nausea-management](https://siya.health/answers/glp-1-nausea-management) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | How do you manage GLP-1 nausea? | 510 | 3 | 35 |
+| [/answers/glp-1-side-effects](https://siya.health/answers/glp-1-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Which GLP-1 side effects usually improve with t… | 1011 | 10 | 36 |
+| [/answers/high-functioning-adhd](https://siya.health/answers/high-functioning-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Can you have ADHD and still be high-functioning? | 521 | 3 | 35 |
+| [/answers/high-shbg-low-free-testosterone](https://siya.health/answers/high-shbg-low-free-testosterone) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | What does high SHBG with low free testosterone … | 1243 | 2 | 37 |
+| [/answers/how-long-adhd-evaluation](https://siya.health/answers/how-long-adhd-evaluation) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | How long does an ADHD evaluation take? | 485 | 8 | 36 |
+| [/answers/how-much-does-adhd-testing-cost](https://siya.health/answers/how-much-does-adhd-testing-cost) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | How much does ADHD testing cost? | 495 | 3 | 36 |
+| [/answers/how-online-prescriptions-work](https://siya.health/answers/how-online-prescriptions-work) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | — | Informational | How do online prescriptions work legally? | 786 | 6 | 35 |
+| [/answers/insulin-resistance-without-diabetes](https://siya.health/answers/insulin-resistance-without-diabetes) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Can you have insulin resistance without diabetes? | 868 | 3 | 35 |
+| [/answers/is-adhd-medication-safe-long-term](https://siya.health/answers/is-adhd-medication-safe-long-term) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What does long-term ADHD medication safety moni… | 564 | 6 | 36 |
+| [/answers/is-online-adhd-diagnosis-legitimate](https://siya.health/answers/is-online-adhd-diagnosis-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What should you look for in a legitimate online… | 889 | 166 | 36 |
+| [/answers/is-telehealth-legitimate](https://siya.health/answers/is-telehealth-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | — | Informational | Is telehealth legitimate for medical care? | 787 | 8 | 35 |
+| [/answers/late-adhd-diagnosis-adults](https://siya.health/answers/late-adhd-diagnosis-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Why are so many adults diagnosed with ADHD late… | 567 | 12 | 36 |
+| [/answers/medical-weight-loss-vs-dieting](https://siya.health/answers/medical-weight-loss-vs-dieting) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | When does medical weight loss outperform dietin… | 553 | 6 | 35 |
+| [/answers/meet-and-greet-telehealth-expectations](https://siya.health/answers/meet-and-greet-telehealth-expectations) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | — | Informational | What should I expect from a first telehealth vi… | 812 | 7 | 35 |
+| [/answers/normal-a1c-insulin-resistance](https://siya.health/answers/normal-a1c-insulin-resistance) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Can you have insulin resistance with a normal A1C? | 942 | 6 | 35 |
+| [/answers/oral-vs-topical-minoxidil](https://siya.health/answers/oral-vs-topical-minoxidil) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | When is topical minoxidil enough vs oral minoxi… | 481 | 1 | 34 |
+| [/answers/poor-sleep-feels-like-adhd](https://siya.health/answers/poor-sleep-feels-like-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Can poor sleep feel like ADHD? | 1184 | 3 | 36 |
+| [/answers/rejection-sensitivity-adhd](https://siya.health/answers/rejection-sensitivity-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What is rejection sensitive dysphoria (RSD) and… | 550 | 3 | 36 |
+| [/answers/screening-vs-adhd-evaluation](https://siya.health/answers/screening-vs-adhd-evaluation) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What is the difference between ADHD screening a… | 551 | 9 | 36 |
+| [/answers/semaglutide-weight-loss-how-it-works](https://siya.health/answers/semaglutide-weight-loss-how-it-works) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | How quickly does semaglutide start working for … | 1016 | 6 | 36 |
+| [/answers/signs-of-adult-adhd](https://siya.health/answers/signs-of-adult-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What are the signs of adult ADHD? | 916 | 166 | 36 |
+| [/answers/signs-of-sleep-apnea-in-adults](https://siya.health/answers/signs-of-sleep-apnea-in-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | — | Informational | What are the signs of sleep apnea in adults? | 650 | 5 | 36 |
+| [/answers/starting-adhd-medication-adults](https://siya.health/answers/starting-adhd-medication-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What should adults expect when starting ADHD me… | 924 | 24 | 36 |
+| [/answers/telehealth-adhd-california](https://siya.health/answers/telehealth-adhd-california) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | How does ADHD telehealth work in California? | 534 | 5 | 36 |
+| [/answers/telehealth-adhd-texas](https://siya.health/answers/telehealth-adhd-texas) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | How does ADHD telehealth work in Texas? | 495 | 3 | 36 |
+| [/answers/testosterone-and-adhd-overlap](https://siya.health/answers/testosterone-and-adhd-overlap) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Can low testosterone mimic ADHD? | 520 | 3 | 38 |
+| [/answers/time-blindness-adhd](https://siya.health/answers/time-blindness-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What is time blindness in ADHD? | 543 | 3 | 35 |
+| [/answers/trt-monitoring-requirements](https://siya.health/answers/trt-monitoring-requirements) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | How often is TRT monitoring required? | 882 | 5 | 36 |
+| [/answers/weight-gain-after-stopping-ozempic](https://siya.health/answers/weight-gain-after-stopping-ozempic) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Why am I gaining weight after stopping Ozempic? | 1292 | 0 | 37 |
+| [/answers/what-does-low-testosterone-feel-like](https://siya.health/answers/what-does-low-testosterone-feel-like) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | What does low testosterone feel like? | 511 | 13 | 36 |
+| [/answers/what-included-199-adhd-evaluation](https://siya.health/answers/what-included-199-adhd-evaluation) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What is included in a Siya Health ADHD evaluation? | 552 | 8 | 36 |
+| [/answers/what-is-food-noise](https://siya.health/answers/what-is-food-noise) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | What is food noise? | 926 | 22 | 34 |
+| [/answers/what-is-free-testosterone](https://siya.health/answers/what-is-free-testosterone) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | What is free testosterone? | 854 | 13 | 36 |
+| [/answers/what-is-insulin-resistance](https://siya.health/answers/what-is-insulin-resistance) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | What is insulin resistance? | 1039 | 166 | 36 |
+| [/answers/what-to-do-after-lab-results](https://siya.health/answers/what-to-do-after-lab-results) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Labs → → /labs | — | Informational | What to do after you get lab results | 1158 | 3 | 37 |
+| [/answers/when-is-testosterone-therapy-appropriate](https://siya.health/answers/when-is-testosterone-therapy-appropriate) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | What symptoms warrant testosterone therapy eval… | 880 | 10 | 36 |
+| [/answers/which-preventive-blood-tests-adults](https://siya.health/answers/which-preventive-blood-tests-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Which preventive blood tests do adults usually … | 1271 | 5 | 36 |
+| [/answers/who-qualifies-glp-1-weight-loss](https://siya.health/answers/who-qualifies-glp-1-weight-loss) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Who qualifies for GLP-1 weight loss medications? | 549 | 4 | 36 |
+| [/answers/why-am-i-tired-even-after-sleeping](https://siya.health/answers/why-am-i-tired-even-after-sleeping) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | — | Informational | Why am I tired even after sleeping? | 722 | 166 | 40 |
+| [/answers/why-normal-labs-dont-mean-healthy](https://siya.health/answers/why-normal-labs-dont-mean-healthy) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Why don't normal labs mean you're healthy? | 1362 | 10 | 35 |
+| [/blog](https://siya.health/blog) | Blog Hub | Content discovery; distribute authority to articles | Join our newsletter → https://link.yo… | Read health guides → /answers | Informational / Navigational | Health Insights — Evidence-Based, Clinical | 709 | 166 | 43 |
+| [/blog/adderall-for-adhd-how-it-works](https://siya.health/blog/adderall-for-adhd-how-it-works) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | Adderall for ADHD: How It Works (2026 Clinical … | 1676 | 7 | 37 |
+| [/blog/adhd](https://siya.health/blog/adhd) | Blog Hub | Content discovery; distribute authority to articles | Book Free Meet & Greet → → /adhd-care | — | Informational / Navigational | ADHD articles | 588 | 166 | 47 |
+| [/blog/adhd-and-binge-eating](https://siya.health/blog/adhd-and-binge-eating) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD and Binge Eating: Why the Link Matters (an… | 2112 | 4 | 50 |
+| [/blog/adhd-brain-imaging-subtypes](https://siya.health/blog/adhd-brain-imaging-subtypes) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | Not All ADHD Is the Same: What New Brain Imagin… | 3482 | 2 | 41 |
+| [/blog/adhd-evaluation-california-online-vs-in-person](https://siya.health/blog/adhd-evaluation-california-online-vs-in-person) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → → /adhd-care | Informational | ADHD Evaluation in California: Online vs In-Per… | 556 | 9 | 40 |
+| [/blog/adhd-evaluation-cost-texas](https://siya.health/blog/adhd-evaluation-cost-texas) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Evaluation Cost in Texas: Full Breakdown (… | 678 | 4 | 37 |
+| [/blog/adhd-hormones-women](https://siya.health/blog/adhd-hormones-women) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD and Hormones in Women: Cycle, Perimenopaus… | 2036 | 6 | 39 |
+| [/blog/adhd-in-women](https://siya.health/blog/adhd-in-women) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start an ADHD Evaluation → /adhd-care | Informational | ADHD in Women: Symptoms, Masking, Hormones, and… | 4465 | 18 | 54 |
+| [/blog/adhd-medication-daily-or-as-needed-adults](https://siya.health/blog/adhd-medication-daily-or-as-needed-adults) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | Do Adults Need ADHD Medication Every Day? | 594 | 7 | 39 |
+| [/blog/adhd-medication-online-california](https://siya.health/blog/adhd-medication-online-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → → /adhd-care | Informational | Can You Get ADHD Medication Online in Californi… | 554 | 7 | 41 |
+| [/blog/adhd-medication-options-california](https://siya.health/blog/adhd-medication-options-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → → /adhd-care | Informational | ADHD Medication Options in California: What Exi… | 818 | 12 | 42 |
+| [/blog/adhd-medication-options-for-adults](https://siya.health/blog/adhd-medication-options-for-adults) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Medication Options for Adults: Where to Start | 743 | 23 | 39 |
+| [/blog/adhd-medication-side-effects-what-to-expect](https://siya.health/blog/adhd-medication-side-effects-what-to-expect) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Medication Side Effects: What to Expect (2… | 703 | 5 | 38 |
+| [/blog/adhd-symptoms-overlooked](https://siya.health/blog/adhd-symptoms-overlooked) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | 7 Adult ADHD Signs Doctors Often Miss | 834 | 10 | 39 |
+| [/blog/adhd-telehealth-california](https://siya.health/blog/adhd-telehealth-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → → /adhd-care | Informational | ADHD Telehealth in California: How Virtual Care… | 455 | 12 | 41 |
+| [/blog/adhd-testing-online-california-screening-vs-evaluation](https://siya.health/blog/adhd-testing-online-california-screening-vs-evaluation) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → → /adhd-care | Informational | ADHD Testing Online in California: Screening vs… | 465 | 5 | 40 |
+| [/blog/adhd-treatment-texas](https://siya.health/blog/adhd-treatment-texas) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Texas: Physician-Led Virtual … | 2887 | 17 | 45 |
+| [/blog/adult-adhd-symptoms-california](https://siya.health/blog/adult-adhd-symptoms-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → → /adhd-care | Informational | Adult ADHD Symptoms in California: Patterns Wor… | 913 | 6 | 40 |
+| [/blog/compounded-vs-branded-glp1-medications](https://siya.health/blog/compounded-vs-branded-glp1-medications) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Book Free Meet & Greet → /redirect/me… | Informational | Compounded vs Branded GLP-1 Medications: What P… | 1031 | 4 | 38 |
+| [/blog/executive-dysfunction-adhd](https://siya.health/blog/executive-dysfunction-adhd) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start an ADHD Evaluation → /adhd-care | Informational | Executive Dysfunction in ADHD: What It Is and H… | 4606 | 16 | 46 |
+| [/blog/food-noise-and-glp-1-what-it-means-and-what-helps](https://siya.health/blog/food-noise-and-glp-1-what-it-means-and-what-helps) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Explore Care Options → /weight-loss-m… | Informational | Food Noise and GLP-1: What It Means and What Ac… | 3342 | 17 | 42 |
+| [/blog/free-testosterone-vs-total-testosterone-what-patients-should-know](https://siya.health/blog/free-testosterone-vs-total-testosterone-what-patients-should-know) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Explore Care Options → /mens-health-l… | Informational | Free Testosterone vs Total Testosterone: What P… | 2550 | 13 | 44 |
+| [/blog/glp1-side-effects-and-how-to-manage-them](https://siya.health/blog/glp1-side-effects-and-how-to-manage-them) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Book Free Meet & Greet → /redirect/me… | Informational | GLP-1 Side Effects and How to Manage Them (2026) | 872 | 4 | 40 |
+| [/blog/how-adhd-medication-is-prescribed-online](https://siya.health/blog/how-adhd-medication-is-prescribed-online) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | How ADHD Medication Is Prescribed Online (2026) | 648 | 8 | 37 |
+| [/blog/how-mental-health-affects-weight-loss-outcomes](https://siya.health/blog/how-mental-health-affects-weight-loss-outcomes) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Book Free Meet & Greet → /redirect/me… | Informational | How Mental Health Affects Weight Loss Outcomes … | 784 | 7 | 38 |
+| [/blog/how-to-choose-adhd-provider-california](https://siya.health/blog/how-to-choose-adhd-provider-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → → /adhd-care | Informational | How to Choose an ADHD Provider in California | 613 | 1 | 41 |
+| [/blog/how-to-know-if-you-have-adhd-adult](https://siya.health/blog/how-to-know-if-you-have-adhd-adult) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | How to Know If You Have ADHD as an Adult (Real … | 802 | 166 | 40 |
+| [/blog/how-to-safely-get-prescriptions-online](https://siya.health/blog/how-to-safely-get-prescriptions-online) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Join Our Health Guide → https://link.… | Informational | How to Safely Get Prescriptions Online (2026) | 1656 | 11 | 40 |
+| [/blog/insomnia-treatment-options-beyond-medication](https://siya.health/blog/insomnia-treatment-options-beyond-medication) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Book Free Meet & Greet → /redirect/me… | Informational | Insomnia Treatment Beyond Medication (2026) | 573 | 2 | 39 |
+| [/blog/insulin-resistance-and-weight-loss-clinician-overview](https://siya.health/blog/insulin-resistance-and-weight-loss-clinician-overview) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Explore Care Options → /weight-loss-m… | Informational | Insulin Resistance and Weight Loss: A Clinician… | 2878 | 19 | 43 |
+| [/blog/iron-deficiency-brain-fog-adhd](https://siya.health/blog/iron-deficiency-brain-fog-adhd) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | Iron Deficiency, Brain Fog, and ADHD: Could Low… | 4290 | 5 | 43 |
+| [/blog/is-adhd-medication-safe-long-term](https://siya.health/blog/is-adhd-medication-safe-long-term) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | Is ADHD Medication Safe Long Term? Benefits & M… | 741 | 3 | 37 |
+| [/blog/is-online-adhd-diagnosis-legit](https://siya.health/blog/is-online-adhd-diagnosis-legit) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | Is Online ADHD Diagnosis Legit? What Patients S… | 935 | 14 | 39 |
+| [/blog/medical-weight-loss-glp1-semaglutide-texas](https://siya.health/blog/medical-weight-loss-glp1-semaglutide-texas) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Book Free Meet & Greet → /redirect/me… | Informational | Medical Weight Loss in Texas: GLP-1, Semaglutid… | 1136 | 10 | 39 |
+| [/blog/medical-weight-loss-vs-dieting-what-actually-works](https://siya.health/blog/medical-weight-loss-vs-dieting-what-actually-works) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Book Free Meet & Greet → /redirect/me… | Informational | Medical Weight Loss vs Dieting: What Actually W… | 815 | 6 | 38 |
+| [/blog/minoxidil-for-hair-loss-does-it-work](https://siya.health/blog/minoxidil-for-hair-loss-does-it-work) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Book Free Meet & Greet → /redirect/me… | Informational | Minoxidil for Hair Loss: Does It Work? (2026) | 726 | 5 | 39 |
+| [/blog/non-stimulant-adhd-medications-explained](https://siya.health/blog/non-stimulant-adhd-medications-explained) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | When Do Adults Use Non-Stimulant ADHD Medications? | 646 | 4 | 37 |
+| [/blog/online-adhd-diagnosis-california](https://siya.health/blog/online-adhd-diagnosis-california) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Take Free ADHD Screening → /adhd-scre… | Informational | Online ADHD Diagnosis in California: Cost, Proc… | 873 | 14 | 44 |
+| [/blog/online-adhd-diagnosis-texas](https://siya.health/blog/online-adhd-diagnosis-texas) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | Online ADHD Diagnosis in Texas: Cost, Process &… | 849 | 7 | 41 |
+| [/blog/oral-vs-injectable-weight-loss-medications](https://siya.health/blog/oral-vs-injectable-weight-loss-medications) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Book Free Meet & Greet → /redirect/me… | Informational | Oral vs Injectable Weight Loss Medications: Wha… | 960 | 1 | 37 |
+| [/blog/oral-vs-topical-minoxidil-which-is-right](https://siya.health/blog/oral-vs-topical-minoxidil-which-is-right) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Book Free Meet & Greet → /redirect/me… | Informational | Oral vs Topical Minoxidil: Which Is Right? (2026) | 610 | 5 | 39 |
+| [/blog/perimenopause-brain-fog](https://siya.health/blog/perimenopause-brain-fog) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Take Free ADHD Screening → /adhd-scre… | Informational | Perimenopause Brain Fog: Why Focus and Memory F… | 1971 | 6 | 38 |
+| [/blog/phentermine-for-weight-loss-safety-and-effectiveness](https://siya.health/blog/phentermine-for-weight-loss-safety-and-effectiveness) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Book Free Meet & Greet → /redirect/me… | Informational | Phentermine for Weight Loss: Safety and Effecti… | 956 | 0 | 37 |
+| [/blog/pots-and-adhd](https://siya.health/blog/pots-and-adhd) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | POTS and ADHD: Why Researchers Are Exploring th… | 3798 | 0 | 39 |
+| [/blog/semaglutide-for-weight-loss-how-it-works](https://siya.health/blog/semaglutide-for-weight-loss-how-it-works) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Book Free Meet & Greet → /redirect/me… | Informational | Semaglutide for Weight Loss: How It Works (2026… | 2276 | 7 | 39 |
+| [/blog/sildenafil-for-erectile-dysfunction-what-to-expect](https://siya.health/blog/sildenafil-for-erectile-dysfunction-what-to-expect) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Book Free Meet & Greet → /redirect/me… | Informational | Sildenafil for Erectile Dysfunction: What to Ex… | 611 | 2 | 37 |
+| [/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign](https://siya.health/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Explore metabolic health → /weight-lo… | Informational | Sleep Apnea, Fatigue, and Metabolic Risk: When … | 2377 | 8 | 39 |
+| [/blog/telehealth](https://siya.health/blog/telehealth) | Blog Hub | Content discovery; distribute authority to articles | — | — | Informational / Navigational | Telehealth articles | 126 | 166 | 32 |
+| [/blog/telehealth-prescriptions-how-online-treatment-works](https://siya.health/blog/telehealth-prescriptions-how-online-treatment-works) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Explore Care Options → /telehealth | Informational | Telehealth Prescriptions: How Online Treatment … | 550 | 5 | 38 |
+| [/blog/tirzepatide-vs-semaglutide-which-is-better](https://siya.health/blog/tirzepatide-vs-semaglutide-which-is-better) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Book Free Meet & Greet → /redirect/me… | Informational | Tirzepatide vs Semaglutide: Which Is Better for… | 1190 | 3 | 39 |
+| [/blog/vyvanse-vs-adderall-differences](https://siya.health/blog/vyvanse-vs-adderall-differences) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | Vyvanse vs Adderall: Which Lasts Longer for Adu… | 799 | 6 | 38 |
+| [/blog/weight-loss](https://siya.health/blog/weight-loss) | Blog Hub | Content discovery; distribute authority to articles | — | — | Informational / Navigational | Weight loss articles | 164 | 166 | 32 |
+| [/blog/when-is-testosterone-therapy-appropriate](https://siya.health/blog/when-is-testosterone-therapy-appropriate) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Book Free Meet & Greet → /redirect/me… | Informational | When Is Testosterone Therapy Appropriate? (2026) | 599 | 4 | 40 |
+| [/blog/why-am-i-always-tired-causes-when-to-see-doctor](https://siya.health/blog/why-am-i-always-tired-causes-when-to-see-doctor) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Explore Care Options → /telehealth | Informational | Why Am I Always Tired? Causes and When to See a… | 2770 | 20 | 44 |
+| [/blog/youre-not-lazy-signs-undiagnosed-adult-adhd](https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | You’re Not Lazy: Signs You May Have Undiagnosed… | 1193 | 6 | 42 |
 
 ---
 
-## SEO Pages (21)
+## SEO Pages (14)
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/adhd-diagnosis-austin](https://siya.health/adhd-diagnosis-austin) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Local SEO / Commercial | ADHD Diagnosis in Austin, Texas (Online) | 423 | 10 | 36 |
-| [/adhd-diagnosis-houston](https://siya.health/adhd-diagnosis-houston) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Local SEO / Commercial | ADHD Diagnosis in Houston, Texas (Online) | 414 | 9 | 36 |
-| [/adhd-diagnosis-pennsylvania](https://siya.health/adhd-diagnosis-pennsylvania) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Local SEO / Commercial | Online ADHD Diagnosis in Pennsylvania | 434 | 7 | 37 |
-| [/adhd-diagnosis-philadelphia](https://siya.health/adhd-diagnosis-philadelphia) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Local SEO / Commercial | ADHD Diagnosis in Philadelphia, Pennsylvania (O… | 422 | 7 | 37 |
-| [/adhd-diagnosis-texas](https://siya.health/adhd-diagnosis-texas) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Local SEO / Commercial | Online ADHD Diagnosis in Texas | 441 | 13 | 39 |
-| [/blog/adhd-evaluation-california-online-vs-in-person](https://siya.health/blog/adhd-evaluation-california-online-vs-in-person) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | ADHD Evaluation in California: Online vs In-Per… | 934 | 10 | 46 |
-| [/blog/adhd-evaluation-cost-texas](https://siya.health/blog/adhd-evaluation-cost-texas) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | ADHD Evaluation Cost in Texas: Full Breakdown (… | 678 | 10 | 38 |
-| [/blog/adhd-medication-online-california](https://siya.health/blog/adhd-medication-online-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | Can You Get ADHD Medication Online in Californi… | 932 | 7 | 47 |
-| [/blog/adhd-medication-options-california](https://siya.health/blog/adhd-medication-options-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | ADHD Medication Options in California: What Exi… | 1196 | 23 | 49 |
-| [/blog/adhd-telehealth-california](https://siya.health/blog/adhd-telehealth-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | ADHD Telehealth in California: How Virtual Care… | 833 | 20 | 47 |
-| [/blog/adhd-testing-online-california-screening-vs-evaluation](https://siya.health/blog/adhd-testing-online-california-screening-vs-evaluation) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | ADHD Testing Online in California: Screening vs… | 843 | 6 | 47 |
-| [/blog/adhd-treatment-austin-tx](https://siya.health/blog/adhd-treatment-austin-tx) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Austin, Texas: Physician-Led … | 2109 | 12 | 60 |
-| [/blog/adhd-treatment-houston-tx](https://siya.health/blog/adhd-treatment-houston-tx) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Houston, Texas: Physician-Led… | 2571 | 9 | 59 |
-| [/blog/adhd-treatment-philadelphia-pa](https://siya.health/blog/adhd-treatment-philadelphia-pa) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Philadelphia, Pennsylvania: P… | 2566 | 4 | 50 |
-| [/blog/adhd-treatment-texas](https://siya.health/blog/adhd-treatment-texas) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Texas: Physician-Led Virtual … | 2890 | 15 | 49 |
-| [/blog/adult-adhd-symptoms-california](https://siya.health/blog/adult-adhd-symptoms-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | Adult ADHD Symptoms in California: Patterns Wor… | 1291 | 7 | 46 |
-| [/blog/how-to-choose-adhd-provider-california](https://siya.health/blog/how-to-choose-adhd-provider-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | How to Choose an ADHD Provider in California | 991 | 8 | 47 |
-| [/blog/medical-weight-loss-glp1-semaglutide-texas](https://siya.health/blog/medical-weight-loss-glp1-semaglutide-texas) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | View Pricing → /pricing | Informational | Medical Weight Loss in Texas: GLP-1, Semaglutid… | 1136 | 11 | 39 |
-| [/blog/online-adhd-diagnosis-california](https://siya.health/blog/online-adhd-diagnosis-california) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Informational | Online ADHD Diagnosis in California: Cost, Proc… | 1251 | 24 | 51 |
-| [/blog/online-adhd-diagnosis-texas](https://siya.health/blog/online-adhd-diagnosis-texas) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Informational | Online ADHD Diagnosis in Texas: Cost, Process &… | 851 | 13 | 43 |
-| [/creyos-adhd-testing](https://siya.health/creyos-adhd-testing) | Service Page | Creyos cognitive testing for ADHD as part of your $149 on… | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Creyos ADHD Testing (Included in Your Evaluation) | 405 | 3 | 35 |
+| [/adhd-diagnosis-texas](https://siya.health/adhd-diagnosis-texas) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Local SEO / Commercial | Online ADHD Diagnosis in Texas | 440 | 5 | 36 |
+| [/blog/adhd-evaluation-california-online-vs-in-person](https://siya.health/blog/adhd-evaluation-california-online-vs-in-person) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → → /adhd-care | Informational | ADHD Evaluation in California: Online vs In-Per… | 556 | 9 | 40 |
+| [/blog/adhd-evaluation-cost-texas](https://siya.health/blog/adhd-evaluation-cost-texas) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Evaluation Cost in Texas: Full Breakdown (… | 678 | 4 | 37 |
+| [/blog/adhd-medication-online-california](https://siya.health/blog/adhd-medication-online-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → → /adhd-care | Informational | Can You Get ADHD Medication Online in Californi… | 554 | 7 | 41 |
+| [/blog/adhd-medication-options-california](https://siya.health/blog/adhd-medication-options-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → → /adhd-care | Informational | ADHD Medication Options in California: What Exi… | 818 | 12 | 42 |
+| [/blog/adhd-telehealth-california](https://siya.health/blog/adhd-telehealth-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → → /adhd-care | Informational | ADHD Telehealth in California: How Virtual Care… | 455 | 12 | 41 |
+| [/blog/adhd-testing-online-california-screening-vs-evaluation](https://siya.health/blog/adhd-testing-online-california-screening-vs-evaluation) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → → /adhd-care | Informational | ADHD Testing Online in California: Screening vs… | 465 | 5 | 40 |
+| [/blog/adhd-treatment-texas](https://siya.health/blog/adhd-treatment-texas) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start ADHD Evaluation → /adhd-care | Informational | ADHD Treatment in Texas: Physician-Led Virtual … | 2887 | 17 | 45 |
+| [/blog/adult-adhd-symptoms-california](https://siya.health/blog/adult-adhd-symptoms-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → → /adhd-care | Informational | Adult ADHD Symptoms in California: Patterns Wor… | 913 | 6 | 40 |
+| [/blog/how-to-choose-adhd-provider-california](https://siya.health/blog/how-to-choose-adhd-provider-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → → /adhd-care | Informational | How to Choose an ADHD Provider in California | 613 | 1 | 41 |
+| [/blog/medical-weight-loss-glp1-semaglutide-texas](https://siya.health/blog/medical-weight-loss-glp1-semaglutide-texas) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Book Free Meet & Greet → /redirect/me… | Informational | Medical Weight Loss in Texas: GLP-1, Semaglutid… | 1136 | 10 | 39 |
+| [/blog/online-adhd-diagnosis-california](https://siya.health/blog/online-adhd-diagnosis-california) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Take Free ADHD Screening → /adhd-scre… | Informational | Online ADHD Diagnosis in California: Cost, Proc… | 873 | 14 | 44 |
+| [/blog/online-adhd-diagnosis-texas](https://siya.health/blog/online-adhd-diagnosis-texas) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | Online ADHD Diagnosis in Texas: Cost, Process &… | 849 | 7 | 41 |
+| [/creyos-adhd-testing](https://siya.health/creyos-adhd-testing) | Service Page | Creyos cognitive testing for ADHD as part of your $149 on… | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Creyos ADHD Testing (Included in Your Evaluation) | 404 | 3 | 35 |
 
 ---
 
@@ -256,30 +249,40 @@ Generated: 2026-07-26
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/adult-adhd-screening-california](https://siya.health/adult-adhd-screening-california) | Page | Free online ADHD screening for adults in California. Take… | Start Free 2-Minute Screening → /adhd… | Book Free Meet & Greet → /redirect/ad… | Mixed | Online ADHD Screening in California | 1525 | 9 | 20 |
-| [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Book Free Meet & Greet → /redirect/me… | Book Online via Zocdoc → https://www.… | Commercial / Transactional | Choose How You Want to Get Started | 203 | 185 | 32 |
-| [/labs](https://siya.health/labs) | Service Page | Explore transparent direct-pay laboratory testing for thy… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Labs & Blood Tests with Transparent Direct-Pay … | 1755 | 185 | 49 |
-| [/labs/a1c-blood-sugar](https://siya.health/labs/a1c-blood-sugar) | Page | Learn what hemoglobin A1c measures, how it relates to pre… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | A1c & Blood Sugar Testing | 533 | 31 | 42 |
-| [/labs/adhd-support](https://siya.health/labs/adhd-support) | Page | Blood tests do not diagnose ADHD. Learn when selected lab… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | Labs When Focus, Fatigue & Brain Fog Overlap | 444 | 18 | 42 |
-| [/labs/fatigue-brain-fog](https://siya.health/labs/fatigue-brain-fog) | Page | Learn which laboratory tests clinicians may consider for … | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | Fatigue & Brain Fog Labs | 629 | 21 | 44 |
-| [/labs/how-to-read-results](https://siya.health/labs/how-to-read-results) | Page | Got your results? Reference ranges don’t diagnose disease… | Book Free Meet & Greet → /redirect/me… | Back to Labs hub → /labs | Mixed | How to Read Your Lab Results | 425 | 25 | 38 |
-| [/labs/iron-ferritin](https://siya.health/labs/iron-ferritin) | Page | Learn what ferritin and iron studies measure, when testin… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | Iron & Ferritin Testing | 529 | 14 | 43 |
-| [/labs/mens-health](https://siya.health/labs/mens-health) | Page | Learn when testosterone and related laboratory testing ma… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | Men's Health Lab Evaluation | 551 | 19 | 43 |
-| [/labs/preventive](https://siya.health/labs/preventive) | Page | Explore commonly ordered preventive laboratory tests—CBC,… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | Preventive Primary Care Labs | 641 | 16 | 43 |
-| [/labs/thyroid](https://siya.health/labs/thyroid) | Page | Learn when thyroid testing such as TSH and free T4 may be… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | Thyroid Testing | 519 | 14 | 43 |
-| [/labs/vitamin-b12](https://siya.health/labs/vitamin-b12) | Page | Learn when vitamin B12 testing may be appropriate for fat… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | Vitamin B12 Testing | 508 | 12 | 42 |
-| [/labs/womens-midlife](https://siya.health/labs/womens-midlife) | Page | Learn how laboratory testing may support women’s midlife … | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | Women's Midlife Lab Evaluation | 529 | 14 | 43 |
-| [/legal](https://siya.health/legal) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Legal & Compliance | 148 | 185 | 32 |
-| [/legal/controlled-substance-treatment-agreement](https://siya.health/legal/controlled-substance-treatment-agreement) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Controlled Substance Treatment Agreement | 829 | 95 | 31 |
-| [/legal/cookie-policy](https://siya.health/legal/cookie-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Cookie Policy | 475 | 185 | 31 |
-| [/legal/notice-of-privacy-practices](https://siya.health/legal/notice-of-privacy-practices) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Notice of Privacy Practices | 1547 | 186 | 31 |
-| [/legal/privacy-policy](https://siya.health/legal/privacy-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Privacy Policy | 2874 | 186 | 31 |
-| [/legal/terms-of-use](https://siya.health/legal/terms-of-use) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Terms of Use | 4490 | 186 | 31 |
-| [/prescriptions](https://siya.health/prescriptions) | Service Page | Provider-reviewed prescriptions through Siya Health teleh… | Book Free Meet & Greet → /redirect/me… | — | Commercial / Transactional | Online Prescription Services | 137 | 185 | 31 |
-| [/pricing](https://siya.health/pricing) | Page | Transparent physician-led telehealth pricing: $149 initia… | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Mixed | Transparent pricing for physician-led care | 501 | 185 | 35 |
-| [/primary-urgent-care](https://siya.health/primary-urgent-care) | Service Page | Virtual primary and urgent care across California, Texas,… | Book Free Meet & Greet → /redirect/me… | Browse preventive labs → /labs/preven… | Commercial / Transactional | Primary & Urgent Care — Virtual, Same-Week | 433 | 185 | 38 |
-| [/womens-health](https://siya.health/womens-health) | Page | Women | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Mixed | When energy, cycles, and mood stop making sense… | 751 | 185 | 41 |
-| [/womens-midlife-health](https://siya.health/womens-midlife-health) | Page | Women's midlife health is not one disease—it is brain, ho… | Book Free Meet & Greet → /redirect/me… | Women's health services → /womens-health | Mixed | Women's Midlife Health: Brain, Hormones & Metab… | 1813 | 8 | 36 |
+| [/adult-adhd-screening-california](https://siya.health/adult-adhd-screening-california) | Page | Free online ADHD screening for adults in California. Take… | Start Free 2-Minute Screening → /adhd… | Start Free 2-Minute Screening → /adhd… | Mixed | Online ADHD Screening in California | 1120 | 9 | 9 |
+| [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Book Free Meet & Greet → /redirect/me… | Book Online via Zocdoc → https://www.… | Commercial / Transactional | Choose How You Want to Get Started | 203 | 166 | 32 |
+| [/labs](https://siya.health/labs) | Service Page | Explore transparent direct-pay laboratory testing for thy… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Labs & Blood Tests with Transparent Direct-Pay … | 1676 | 166 | 40 |
+| [/labs/a1c-blood-sugar](https://siya.health/labs/a1c-blood-sugar) | Page | Learn what hemoglobin A1c measures, how it relates to pre… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | A1c & Blood Sugar Testing | 498 | 24 | 35 |
+| [/labs/adhd-support](https://siya.health/labs/adhd-support) | Page | Blood tests do not diagnose ADHD. Learn when selected lab… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | Labs When Focus, Fatigue & Brain Fog Overlap | 410 | 9 | 35 |
+| [/labs/fatigue-brain-fog](https://siya.health/labs/fatigue-brain-fog) | Page | Learn which laboratory tests clinicians may consider for … | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | Fatigue & Brain Fog Labs | 584 | 18 | 35 |
+| [/labs/how-to-read-results](https://siya.health/labs/how-to-read-results) | Page | Got your results? Reference ranges don’t diagnose disease… | Book Free Meet & Greet → /redirect/me… | Back to Labs hub → /labs | Mixed | How to Read Your Lab Results | 425 | 24 | 38 |
+| [/labs/iron-ferritin](https://siya.health/labs/iron-ferritin) | Page | Learn what ferritin and iron studies measure, when testin… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | Iron & Ferritin Testing | 494 | 8 | 36 |
+| [/labs/mens-health](https://siya.health/labs/mens-health) | Page | Learn when testosterone and related laboratory testing ma… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | Men's Health Lab Evaluation | 510 | 10 | 36 |
+| [/labs/preventive](https://siya.health/labs/preventive) | Page | Explore commonly ordered preventive laboratory tests—CBC,… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | Preventive Primary Care Labs | 595 | 7 | 36 |
+| [/labs/thyroid](https://siya.health/labs/thyroid) | Page | Learn when thyroid testing such as TSH and free T4 may be… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | Thyroid Testing | 477 | 7 | 36 |
+| [/labs/vitamin-b12](https://siya.health/labs/vitamin-b12) | Page | Learn when vitamin B12 testing may be appropriate for fat… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | Vitamin B12 Testing | 476 | 3 | 36 |
+| [/labs/womens-midlife](https://siya.health/labs/womens-midlife) | Page | Learn how laboratory testing may support women’s midlife … | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Mixed | Women's Midlife Lab Evaluation | 488 | 4 | 38 |
+| [/legal](https://siya.health/legal) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Legal & Compliance | 148 | 166 | 32 |
+| [/legal/controlled-substance-treatment-agreement](https://siya.health/legal/controlled-substance-treatment-agreement) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Controlled Substance Treatment Agreement | 829 | 76 | 31 |
+| [/legal/cookie-policy](https://siya.health/legal/cookie-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Cookie Policy | 475 | 166 | 31 |
+| [/legal/notice-of-privacy-practices](https://siya.health/legal/notice-of-privacy-practices) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Notice of Privacy Practices | 1547 | 167 | 31 |
+| [/legal/privacy-policy](https://siya.health/legal/privacy-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Privacy Policy | 2874 | 167 | 31 |
+| [/legal/terms-of-use](https://siya.health/legal/terms-of-use) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Terms of Use | 4490 | 167 | 31 |
+| [/prescriptions](https://siya.health/prescriptions) | Service Page | Provider-reviewed prescriptions through Siya Health teleh… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Online Prescription Services | 137 | 166 | 31 |
+| [/pricing](https://siya.health/pricing) | Page | Transparent physician-led telehealth pricing: $149 initia… | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Mixed | Transparent pricing for physician-led care | 500 | 166 | 35 |
+| [/primary-urgent-care](https://siya.health/primary-urgent-care) | Service Page | Virtual primary and urgent care across California, Texas,… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Primary & Urgent Care — Virtual, Same-Week | 432 | 166 | 38 |
+| [/womens-health](https://siya.health/womens-health) | Page | Women | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Mixed | When energy, cycles, and mood stop making sense… | 743 | 166 | 41 |
+| [/womens-midlife-health](https://siya.health/womens-midlife-health) | Page | Women's midlife health is not one disease—it is brain, ho… | Book Free Meet & Greet → /redirect/me… | Women's health services → /womens-health | Mixed | Women's Midlife Health: Brain, Hormones & Metab… | 1812 | 8 | 36 |
+
+---
+
+## Orphan Pages (3)
+
+| URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
+|-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
+| [/answers/weight-gain-after-stopping-ozempic](https://siya.health/answers/weight-gain-after-stopping-ozempic) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Why am I gaining weight after stopping Ozempic? | 1292 | 0 | 37 |
+| [/blog/phentermine-for-weight-loss-safety-and-effectiveness](https://siya.health/blog/phentermine-for-weight-loss-safety-and-effectiveness) | Blog Article | Educational SEO; nurture toward clinical services | Start Secure Medical Chat → /redirect… | Book Free Meet & Greet → /redirect/me… | Informational | Phentermine for Weight Loss: Safety and Effecti… | 956 | 0 | 37 |
+| [/blog/pots-and-adhd](https://siya.health/blog/pots-and-adhd) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | POTS and ADHD: Why Researchers Are Exploring th… | 3798 | 0 | 39 |
 
 ---
 
@@ -287,17 +290,17 @@ Generated: 2026-07-26
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/answers/adderall-vs-vyvanse-adults](https://siya.health/answers/adderall-vs-vyvanse-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | When might Vyvanse be preferred over Adderall f… | 401 | 3 | 35 |
-| [/answers/adhd-medication-side-effects](https://siya.health/answers/adhd-medication-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What ADHD medication side effects are most comm… | 417 | 6 | 36 |
-| [/answers/compounded-vs-branded-glp-1](https://siya.health/answers/compounded-vs-branded-glp-1) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What should you ask about compounded vs branded… | 382 | 4 | 34 |
-| [/answers/glp-1-side-effects](https://siya.health/answers/glp-1-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | Which GLP-1 side effects usually improve with t… | 964 | 11 | 36 |
-| [/answers/is-adhd-medication-safe-long-term](https://siya.health/answers/is-adhd-medication-safe-long-term) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What does long-term ADHD medication safety moni… | 408 | 7 | 36 |
-| [/answers/is-online-adhd-diagnosis-legitimate](https://siya.health/answers/is-online-adhd-diagnosis-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What should you look for in a legitimate online… | 826 | 185 | 36 |
-| [/answers/medical-weight-loss-vs-dieting](https://siya.health/answers/medical-weight-loss-vs-dieting) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | When does medical weight loss outperform dietin… | 395 | 7 | 35 |
-| [/answers/oral-vs-topical-minoxidil](https://siya.health/answers/oral-vs-topical-minoxidil) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | When is topical minoxidil enough vs oral minoxi… | 363 | 2 | 34 |
-| [/answers/semaglutide-weight-loss-how-it-works](https://siya.health/answers/semaglutide-weight-loss-how-it-works) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | How quickly does semaglutide start working for … | 961 | 7 | 36 |
-| [/answers/trt-monitoring-requirements](https://siya.health/answers/trt-monitoring-requirements) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | How often is TRT monitoring required? | 869 | 6 | 36 |
-| [/answers/when-is-testosterone-therapy-appropriate](https://siya.health/answers/when-is-testosterone-therapy-appropriate) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → /redirect/me… | — | Informational | What symptoms warrant testosterone therapy eval… | 866 | 11 | 36 |
+| [/answers/adderall-vs-vyvanse-adults](https://siya.health/answers/adderall-vs-vyvanse-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | When might Vyvanse be preferred over Adderall f… | 569 | 2 | 35 |
+| [/answers/adhd-medication-side-effects](https://siya.health/answers/adhd-medication-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What ADHD medication side effects are most comm… | 618 | 5 | 36 |
+| [/answers/compounded-vs-branded-glp-1](https://siya.health/answers/compounded-vs-branded-glp-1) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | What should you ask about compounded vs branded… | 551 | 3 | 34 |
+| [/answers/glp-1-side-effects](https://siya.health/answers/glp-1-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Which GLP-1 side effects usually improve with t… | 1011 | 10 | 36 |
+| [/answers/is-adhd-medication-safe-long-term](https://siya.health/answers/is-adhd-medication-safe-long-term) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What does long-term ADHD medication safety moni… | 564 | 6 | 36 |
+| [/answers/is-online-adhd-diagnosis-legitimate](https://siya.health/answers/is-online-adhd-diagnosis-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What should you look for in a legitimate online… | 889 | 166 | 36 |
+| [/answers/medical-weight-loss-vs-dieting](https://siya.health/answers/medical-weight-loss-vs-dieting) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | When does medical weight loss outperform dietin… | 553 | 6 | 35 |
+| [/answers/oral-vs-topical-minoxidil](https://siya.health/answers/oral-vs-topical-minoxidil) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | When is topical minoxidil enough vs oral minoxi… | 481 | 1 | 34 |
+| [/answers/semaglutide-weight-loss-how-it-works](https://siya.health/answers/semaglutide-weight-loss-how-it-works) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | How quickly does semaglutide start working for … | 1016 | 6 | 36 |
+| [/answers/trt-monitoring-requirements](https://siya.health/answers/trt-monitoring-requirements) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | How often is TRT monitoring required? | 882 | 5 | 36 |
+| [/answers/when-is-testosterone-therapy-appropriate](https://siya.health/answers/when-is-testosterone-therapy-appropriate) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | What symptoms warrant testosterone therapy eval… | 880 | 10 | 36 |
 
 ---
 
@@ -312,9 +315,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** Explore Our Blog → /blog
 - **Traffic Intent:** Navigational / Commercial
 - **Target Keyword:** Something feels off—and you want clearer answers.
-- **Word Count:** 1030
-- **Internal Links In:** 190
-- **Internal Links Out:** 37
+- **Word Count:** 1029
+- **Internal Links In:** 171
+- **Internal Links Out:** 34
 - **Groups:** Core Revenue Pages
 
 ### /about
@@ -326,9 +329,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Care for adults who are done guessing about their health
-- **Word Count:** 722
-- **Internal Links In:** 185
-- **Internal Links Out:** 38
+- **Word Count:** 697
+- **Internal Links In:** 166
+- **Internal Links Out:** 35
 - **Groups:** Trust Pages
 
 ### /adhd-care
@@ -340,66 +343,10 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Struggling to focus—even when you care?
-- **Word Count:** 1447
-- **Internal Links In:** 187
+- **Word Count:** 1445
+- **Internal Links In:** 179
 - **Internal Links Out:** 45
 - **Groups:** Core Revenue Pages
-
-### /adhd-diagnosis-austin
-
-- **URL:** https://siya.health/adhd-diagnosis-austin
-- **Page Type:** Geo SEO Landing
-- **Primary Purpose:** Local/state ADHD intent capture; drive evaluation booking
-- **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Traffic Intent:** Local SEO / Commercial
-- **Target Keyword:** ADHD Diagnosis in Austin, Texas (Online)
-- **Word Count:** 423
-- **Internal Links In:** 10
-- **Internal Links Out:** 36
-- **Groups:** Core Revenue Pages, SEO Pages
-
-### /adhd-diagnosis-houston
-
-- **URL:** https://siya.health/adhd-diagnosis-houston
-- **Page Type:** Geo SEO Landing
-- **Primary Purpose:** Local/state ADHD intent capture; drive evaluation booking
-- **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Traffic Intent:** Local SEO / Commercial
-- **Target Keyword:** ADHD Diagnosis in Houston, Texas (Online)
-- **Word Count:** 414
-- **Internal Links In:** 9
-- **Internal Links Out:** 36
-- **Groups:** Core Revenue Pages, SEO Pages
-
-### /adhd-diagnosis-pennsylvania
-
-- **URL:** https://siya.health/adhd-diagnosis-pennsylvania
-- **Page Type:** Geo SEO Landing
-- **Primary Purpose:** Local/state ADHD intent capture; drive evaluation booking
-- **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Traffic Intent:** Local SEO / Commercial
-- **Target Keyword:** Online ADHD Diagnosis in Pennsylvania
-- **Word Count:** 434
-- **Internal Links In:** 7
-- **Internal Links Out:** 37
-- **Groups:** Core Revenue Pages, SEO Pages
-
-### /adhd-diagnosis-philadelphia
-
-- **URL:** https://siya.health/adhd-diagnosis-philadelphia
-- **Page Type:** Geo SEO Landing
-- **Primary Purpose:** Local/state ADHD intent capture; drive evaluation booking
-- **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Traffic Intent:** Local SEO / Commercial
-- **Target Keyword:** ADHD Diagnosis in Philadelphia, Pennsylvania (Online)
-- **Word Count:** 422
-- **Internal Links In:** 7
-- **Internal Links Out:** 37
-- **Groups:** Core Revenue Pages, SEO Pages
 
 ### /adhd-diagnosis-texas
 
@@ -410,9 +357,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Local SEO / Commercial
 - **Target Keyword:** Online ADHD Diagnosis in Texas
-- **Word Count:** 441
-- **Internal Links In:** 13
-- **Internal Links Out:** 39
+- **Word Count:** 440
+- **Internal Links In:** 5
+- **Internal Links Out:** 36
 - **Groups:** Core Revenue Pages, SEO Pages
 
 ### /adhd-screening
@@ -424,8 +371,8 @@ Generated: 2026-07-26
 - **Secondary CTA:** —
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** What are you looking for help with?
-- **Word Count:** 446
-- **Internal Links In:** 186
+- **Word Count:** 445
+- **Internal Links In:** 167
 - **Internal Links Out:** 36
 - **Groups:** Core Revenue Pages
 
@@ -435,12 +382,12 @@ Generated: 2026-07-26
 - **Page Type:** Page
 - **Primary Purpose:** Free online ADHD screening for adults in California. Take a 2-minute test with no sign-up, then explore virtual ADHD care with licensed physicians serving California.
 - **Primary CTA:** Start Free 2-Minute Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/adhd-walkthrough
+- **Secondary CTA:** Start Free 2-Minute Screening → /adhd-screening
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Online ADHD Screening in California
-- **Word Count:** 1525
+- **Word Count:** 1120
 - **Internal Links In:** 9
-- **Internal Links Out:** 20
+- **Internal Links Out:** 9
 - **Groups:** Utility Pages
 
 ### /answers
@@ -448,13 +395,13 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers
 - **Page Type:** Health Guide Hub
 - **Primary Purpose:** FAQ/PAA discovery hub for AI and organic search
-- **Primary CTA:** Join Our Health Guide → https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** View all Metabolic Health guides → #guides-metabolic-all
 - **Traffic Intent:** Informational / Navigational
 - **Target Keyword:** Health Guides
-- **Word Count:** 1358
-- **Internal Links In:** 185
-- **Internal Links Out:** 104
+- **Word Count:** 891
+- **Internal Links In:** 166
+- **Internal Links Out:** 49
 - **Groups:** Educational Pages
 
 ### /answers/adderall-vs-vyvanse-adults
@@ -462,12 +409,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/adderall-vs-vyvanse-adults
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** When might Vyvanse be preferred over Adderall for adults?
-- **Word Count:** 401
-- **Internal Links In:** 3
+- **Word Count:** 569
+- **Internal Links In:** 2
 - **Internal Links Out:** 35
 - **Groups:** Duplicate Pages, Educational Pages
 - **Duplicate of:** https://siya.health/blog/vyvanse-vs-adderall-differences
@@ -477,12 +424,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/adhd-and-weight-loss-connection
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Is there a connection between ADHD and weight loss struggles?
-- **Word Count:** 350
-- **Internal Links In:** 7
+- **Word Count:** 529
+- **Internal Links In:** 5
 - **Internal Links Out:** 35
 - **Groups:** Educational Pages
 
@@ -491,12 +438,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/adhd-in-women
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** How does ADHD present differently in women?
-- **Word Count:** 440
-- **Internal Links In:** 22
+- **Word Count:** 582
+- **Internal Links In:** 6
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -505,12 +452,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/adhd-medication-every-day
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Do you have to take ADHD medication every day?
-- **Word Count:** 370
-- **Internal Links In:** 4
+- **Word Count:** 538
+- **Internal Links In:** 3
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -519,12 +466,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/adhd-medication-side-effects
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What ADHD medication side effects are most common in the first weeks?
-- **Word Count:** 417
-- **Internal Links In:** 6
+- **Word Count:** 618
+- **Internal Links In:** 5
 - **Internal Links Out:** 36
 - **Groups:** Duplicate Pages, Educational Pages
 - **Duplicate of:** https://siya.health/blog/adhd-medication-side-effects-what-to-expect
@@ -534,12 +481,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/adhd-vs-anxiety
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** How do you tell ADHD apart from anxiety?
-- **Word Count:** 942
-- **Internal Links In:** 20
+- **Word Count:** 985
+- **Internal Links In:** 14
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -548,12 +495,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/adhd-vs-burnout
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Is it ADHD or burnout?
-- **Word Count:** 1073
-- **Internal Links In:** 7
+- **Word Count:** 1081
+- **Internal Links In:** 6
 - **Internal Links Out:** 37
 - **Groups:** Educational Pages
 
@@ -562,11 +509,11 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/afternoon-energy-crash-after-lunch
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Why do I crash every afternoon after lunch?
-- **Word Count:** 1145
+- **Word Count:** 1307
 - **Internal Links In:** 1
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
@@ -576,12 +523,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/asrs-adhd-screening-explained
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What is the ASRS ADHD screening test?
-- **Word Count:** 375
-- **Internal Links In:** 4
+- **Word Count:** 524
+- **Internal Links In:** 3
 - **Internal Links Out:** 35
 - **Groups:** Educational Pages
 
@@ -590,12 +537,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/brain-fog-after-eating
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Why do I get brain fog after eating?
-- **Word Count:** 1143
-- **Internal Links In:** 12
+- **Word Count:** 1301
+- **Internal Links In:** 11
 - **Internal Links Out:** 35
 - **Groups:** Educational Pages
 
@@ -604,12 +551,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/can-adhd-be-diagnosed-online
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can ADHD be diagnosed online?
-- **Word Count:** 815
-- **Internal Links In:** 49
+- **Word Count:** 821
+- **Internal Links In:** 34
 - **Internal Links Out:** 35
 - **Groups:** Educational Pages
 
@@ -618,12 +565,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/can-adhd-cause-anxiety
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can ADHD cause anxiety?
-- **Word Count:** 846
-- **Internal Links In:** 3
+- **Word Count:** 842
+- **Internal Links In:** 2
 - **Internal Links Out:** 34
 - **Groups:** Educational Pages
 
@@ -632,12 +579,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/can-sleep-apnea-cause-fatigue
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Telehealth Care → → /telehealth
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can sleep apnea cause fatigue?
-- **Word Count:** 545
-- **Internal Links In:** 6
+- **Word Count:** 647
+- **Internal Links In:** 5
 - **Internal Links Out:** 34
 - **Groups:** Educational Pages
 
@@ -646,12 +593,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/can-you-get-adhd-medication-online
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can you get ADHD medication online?
-- **Word Count:** 349
-- **Internal Links In:** 4
+- **Word Count:** 487
+- **Internal Links In:** 3
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -660,12 +607,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/compounded-vs-branded-glp-1
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What should you ask about compounded vs branded GLP-1?
-- **Word Count:** 382
-- **Internal Links In:** 4
+- **Word Count:** 551
+- **Internal Links In:** 3
 - **Internal Links Out:** 34
 - **Groups:** Duplicate Pages, Educational Pages
 - **Duplicate of:** https://siya.health/blog/compounded-vs-branded-glp1-medications
@@ -675,12 +622,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/ed-telehealth-legitimate
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Men’s Health → → /mens-health-longevity
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Is telehealth for erectile dysfunction legitimate?
-- **Word Count:** 333
-- **Internal Links In:** 2
+- **Word Count:** 437
+- **Internal Links In:** 1
 - **Internal Links Out:** 34
 - **Groups:** Educational Pages
 
@@ -689,12 +636,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/executive-dysfunction-adhd
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What is executive dysfunction in adult ADHD?
-- **Word Count:** 413
-- **Internal Links In:** 26
+- **Word Count:** 559
+- **Internal Links In:** 10
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -703,12 +650,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/food-noise-returned-on-glp-1
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Why did food noise come back on GLP-1?
-- **Word Count:** 1157
-- **Internal Links In:** 3
+- **Word Count:** 1319
+- **Internal Links In:** 2
 - **Internal Links Out:** 35
 - **Groups:** Educational Pages
 
@@ -717,12 +664,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/fsa-hsa-adhd-evaluation
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can you use FSA or HSA for ADHD evaluation?
-- **Word Count:** 375
-- **Internal Links In:** 17
+- **Word Count:** 535
+- **Internal Links In:** 1
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -731,12 +678,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/glp-1-nausea-management
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** How do you manage GLP-1 nausea?
-- **Word Count:** 368
-- **Internal Links In:** 4
+- **Word Count:** 510
+- **Internal Links In:** 3
 - **Internal Links Out:** 35
 - **Groups:** Educational Pages
 
@@ -745,12 +692,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/glp-1-side-effects
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Which GLP-1 side effects usually improve with titration?
-- **Word Count:** 964
-- **Internal Links In:** 11
+- **Word Count:** 1011
+- **Internal Links In:** 10
 - **Internal Links Out:** 36
 - **Groups:** Duplicate Pages, Educational Pages
 - **Duplicate of:** https://siya.health/blog/glp1-side-effects-and-how-to-manage-them
@@ -760,12 +707,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/high-functioning-adhd
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can you have ADHD and still be high-functioning?
-- **Word Count:** 365
-- **Internal Links In:** 5
+- **Word Count:** 521
+- **Internal Links In:** 3
 - **Internal Links Out:** 35
 - **Groups:** Educational Pages
 
@@ -774,11 +721,11 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/high-shbg-low-free-testosterone
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Men’s Health → → /mens-health-longevity
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What does high SHBG with low free testosterone mean?
-- **Word Count:** 1111
+- **Word Count:** 1243
 - **Internal Links In:** 2
 - **Internal Links Out:** 37
 - **Groups:** Educational Pages
@@ -788,12 +735,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/how-long-adhd-evaluation
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** How long does an ADHD evaluation take?
-- **Word Count:** 335
-- **Internal Links In:** 13
+- **Word Count:** 485
+- **Internal Links In:** 8
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -802,12 +749,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/how-much-does-adhd-testing-cost
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** How much does ADHD testing cost?
-- **Word Count:** 356
-- **Internal Links In:** 4
+- **Word Count:** 495
+- **Internal Links In:** 3
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -816,11 +763,11 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/how-online-prescriptions-work
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Telehealth Care → → /telehealth
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** How do online prescriptions work legally?
-- **Word Count:** 811
+- **Word Count:** 786
 - **Internal Links In:** 6
 - **Internal Links Out:** 35
 - **Groups:** Educational Pages
@@ -830,12 +777,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/insulin-resistance-without-diabetes
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can you have insulin resistance without diabetes?
-- **Word Count:** 830
-- **Internal Links In:** 4
+- **Word Count:** 868
+- **Internal Links In:** 3
 - **Internal Links Out:** 35
 - **Groups:** Educational Pages
 
@@ -844,12 +791,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/is-adhd-medication-safe-long-term
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What does long-term ADHD medication safety monitoring include?
-- **Word Count:** 408
-- **Internal Links In:** 7
+- **Word Count:** 564
+- **Internal Links In:** 6
 - **Internal Links Out:** 36
 - **Groups:** Duplicate Pages, Educational Pages
 - **Duplicate of:** https://siya.health/blog/is-adhd-medication-safe-long-term
@@ -859,12 +806,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/is-online-adhd-diagnosis-legitimate
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What should you look for in a legitimate online ADHD diagnosis?
-- **Word Count:** 826
-- **Internal Links In:** 185
+- **Word Count:** 889
+- **Internal Links In:** 166
 - **Internal Links Out:** 36
 - **Groups:** Duplicate Pages, Educational Pages
 - **Duplicate of:** https://siya.health/blog/is-online-adhd-diagnosis-legit
@@ -874,11 +821,11 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/is-telehealth-legitimate
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Telehealth Care → → /telehealth
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Is telehealth legitimate for medical care?
-- **Word Count:** 818
+- **Word Count:** 787
 - **Internal Links In:** 8
 - **Internal Links Out:** 35
 - **Groups:** Educational Pages
@@ -888,12 +835,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/late-adhd-diagnosis-adults
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Why are so many adults diagnosed with ADHD late in life?
-- **Word Count:** 381
-- **Internal Links In:** 28
+- **Word Count:** 567
+- **Internal Links In:** 12
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -902,12 +849,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/medical-weight-loss-vs-dieting
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** When does medical weight loss outperform dieting alone?
-- **Word Count:** 395
-- **Internal Links In:** 7
+- **Word Count:** 553
+- **Internal Links In:** 6
 - **Internal Links Out:** 35
 - **Groups:** Duplicate Pages, Educational Pages
 - **Duplicate of:** https://siya.health/blog/medical-weight-loss-vs-dieting-what-actually-works
@@ -917,11 +864,11 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/meet-and-greet-telehealth-expectations
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Telehealth Care → → /telehealth
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What should I expect from a first telehealth visit?
-- **Word Count:** 825
+- **Word Count:** 812
 - **Internal Links In:** 7
 - **Internal Links Out:** 35
 - **Groups:** Educational Pages
@@ -931,12 +878,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/normal-a1c-insulin-resistance
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can you have insulin resistance with a normal A1C?
-- **Word Count:** 876
-- **Internal Links In:** 8
+- **Word Count:** 942
+- **Internal Links In:** 6
 - **Internal Links Out:** 35
 - **Groups:** Educational Pages
 
@@ -945,12 +892,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/oral-vs-topical-minoxidil
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Men’s Health → → /mens-health-longevity
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** When is topical minoxidil enough vs oral minoxidil?
-- **Word Count:** 363
-- **Internal Links In:** 2
+- **Word Count:** 481
+- **Internal Links In:** 1
 - **Internal Links Out:** 34
 - **Groups:** Duplicate Pages, Educational Pages
 - **Duplicate of:** https://siya.health/blog/oral-vs-topical-minoxidil-which-is-right
@@ -960,11 +907,11 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/poor-sleep-feels-like-adhd
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can poor sleep feel like ADHD?
-- **Word Count:** 1082
+- **Word Count:** 1184
 - **Internal Links In:** 3
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
@@ -974,12 +921,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/rejection-sensitivity-adhd
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What is rejection sensitive dysphoria (RSD) and ADHD?
-- **Word Count:** 391
-- **Internal Links In:** 4
+- **Word Count:** 550
+- **Internal Links In:** 3
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -988,12 +935,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/screening-vs-adhd-evaluation
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What is the difference between ADHD screening and a full evaluation?
-- **Word Count:** 361
-- **Internal Links In:** 25
+- **Word Count:** 551
+- **Internal Links In:** 9
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -1002,12 +949,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/semaglutide-weight-loss-how-it-works
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** How quickly does semaglutide start working for weight loss?
-- **Word Count:** 961
-- **Internal Links In:** 7
+- **Word Count:** 1016
+- **Internal Links In:** 6
 - **Internal Links Out:** 36
 - **Groups:** Duplicate Pages, Educational Pages
 - **Duplicate of:** https://siya.health/blog/semaglutide-for-weight-loss-how-it-works
@@ -1017,12 +964,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/signs-of-adult-adhd
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What are the signs of adult ADHD?
-- **Word Count:** 894
-- **Internal Links In:** 185
+- **Word Count:** 916
+- **Internal Links In:** 166
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -1031,12 +978,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/signs-of-sleep-apnea-in-adults
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Telehealth Care → → /telehealth
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What are the signs of sleep apnea in adults?
-- **Word Count:** 530
-- **Internal Links In:** 6
+- **Word Count:** 650
+- **Internal Links In:** 5
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -1045,12 +992,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/starting-adhd-medication-adults
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What should adults expect when starting ADHD medication?
-- **Word Count:** 888
-- **Internal Links In:** 26
+- **Word Count:** 924
+- **Internal Links In:** 24
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -1059,12 +1006,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/telehealth-adhd-california
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** How does ADHD telehealth work in California?
-- **Word Count:** 394
-- **Internal Links In:** 13
+- **Word Count:** 534
+- **Internal Links In:** 5
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -1073,12 +1020,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/telehealth-adhd-texas
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** How does ADHD telehealth work in Texas?
-- **Word Count:** 357
-- **Internal Links In:** 9
+- **Word Count:** 495
+- **Internal Links In:** 3
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -1087,12 +1034,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/testosterone-and-adhd-overlap
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can low testosterone mimic ADHD?
-- **Word Count:** 386
-- **Internal Links In:** 4
+- **Word Count:** 520
+- **Internal Links In:** 3
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
 
@@ -1101,12 +1048,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/time-blindness-adhd
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What is time blindness in ADHD?
-- **Word Count:** 405
-- **Internal Links In:** 19
+- **Word Count:** 543
+- **Internal Links In:** 3
 - **Internal Links Out:** 35
 - **Groups:** Educational Pages
 
@@ -1115,12 +1062,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/trt-monitoring-requirements
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Men’s Health → → /mens-health-longevity
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** How often is TRT monitoring required?
-- **Word Count:** 869
-- **Internal Links In:** 6
+- **Word Count:** 882
+- **Internal Links In:** 5
 - **Internal Links Out:** 36
 - **Groups:** Duplicate Pages, Educational Pages
 - **Duplicate of:** https://siya.health/blog/when-is-testosterone-therapy-appropriate
@@ -1130,25 +1077,25 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/weight-gain-after-stopping-ozempic
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Why am I gaining weight after stopping Ozempic?
-- **Word Count:** 1128
-- **Internal Links In:** 1
+- **Word Count:** 1292
+- **Internal Links In:** 0
 - **Internal Links Out:** 37
-- **Groups:** Educational Pages
+- **Groups:** Orphan Pages, Educational Pages
 
 ### /answers/what-does-low-testosterone-feel-like
 
 - **URL:** https://siya.health/answers/what-does-low-testosterone-feel-like
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Men’s Health → → /mens-health-longevity
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What does low testosterone feel like?
-- **Word Count:** 398
+- **Word Count:** 511
 - **Internal Links In:** 13
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
@@ -1158,12 +1105,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/what-included-199-adhd-evaluation
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What is included in a Siya Health ADHD evaluation?
-- **Word Count:** 393
-- **Internal Links In:** 24
+- **Word Count:** 552
+- **Internal Links In:** 8
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -1172,11 +1119,11 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/what-is-food-noise
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What is food noise?
-- **Word Count:** 917
+- **Word Count:** 926
 - **Internal Links In:** 22
 - **Internal Links Out:** 34
 - **Groups:** Educational Pages
@@ -1186,11 +1133,11 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/what-is-free-testosterone
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Men’s Health → → /mens-health-longevity
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What is free testosterone?
-- **Word Count:** 842
+- **Word Count:** 854
 - **Internal Links In:** 13
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
@@ -1200,12 +1147,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/what-is-insulin-resistance
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What is insulin resistance?
-- **Word Count:** 1029
-- **Internal Links In:** 185
+- **Word Count:** 1039
+- **Internal Links In:** 166
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -1214,12 +1161,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/what-to-do-after-lab-results
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Labs → → /labs
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What to do after you get lab results
-- **Word Count:** 1040
-- **Internal Links In:** 5
+- **Word Count:** 1158
+- **Internal Links In:** 3
 - **Internal Links Out:** 37
 - **Groups:** Educational Pages
 
@@ -1228,12 +1175,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/when-is-testosterone-therapy-appropriate
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Men’s Health → → /mens-health-longevity
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What symptoms warrant testosterone therapy evaluation?
-- **Word Count:** 866
-- **Internal Links In:** 11
+- **Word Count:** 880
+- **Internal Links In:** 10
 - **Internal Links Out:** 36
 - **Groups:** Duplicate Pages, Educational Pages
 - **Duplicate of:** https://siya.health/blog/when-is-testosterone-therapy-appropriate
@@ -1243,12 +1190,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/which-preventive-blood-tests-adults
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Which preventive blood tests do adults usually need?
-- **Word Count:** 1107
-- **Internal Links In:** 6
+- **Word Count:** 1271
+- **Internal Links In:** 5
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -1257,12 +1204,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/who-qualifies-glp-1-weight-loss
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Who qualifies for GLP-1 weight loss medications?
-- **Word Count:** 400
-- **Internal Links In:** 5
+- **Word Count:** 549
+- **Internal Links In:** 4
 - **Internal Links Out:** 36
 - **Groups:** Educational Pages
 
@@ -1271,12 +1218,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/why-am-i-tired-even-after-sleeping
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Telehealth Care → → /telehealth
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Why am I tired even after sleeping?
-- **Word Count:** 611
-- **Internal Links In:** 185
+- **Word Count:** 722
+- **Internal Links In:** 166
 - **Internal Links Out:** 40
 - **Groups:** Educational Pages
 
@@ -1285,12 +1232,12 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/answers/why-normal-labs-dont-mean-healthy
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Why don't normal labs mean you're healthy?
-- **Word Count:** 1213
-- **Internal Links In:** 11
+- **Word Count:** 1362
+- **Internal Links In:** 10
 - **Internal Links Out:** 35
 - **Groups:** Educational Pages
 
@@ -1303,9 +1250,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** Read health guides → /answers
 - **Traffic Intent:** Informational / Navigational
 - **Target Keyword:** Health Insights — Evidence-Based, Clinical
-- **Word Count:** 885
-- **Internal Links In:** 185
-- **Internal Links Out:** 54
+- **Word Count:** 709
+- **Internal Links In:** 166
+- **Internal Links Out:** 43
 - **Groups:** Educational Pages
 
 ### /blog/adderall-for-adhd-how-it-works
@@ -1314,7 +1261,7 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** Adderall for ADHD: How It Works (2026 Clinical Overview)
 - **Word Count:** 1676
@@ -1327,13 +1274,13 @@ Generated: 2026-07-26
 - **URL:** https://siya.health/blog/adhd
 - **Page Type:** Blog Hub
 - **Primary Purpose:** Content discovery; distribute authority to articles
-- **Primary CTA:** —
+- **Primary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational / Navigational
 - **Target Keyword:** ADHD articles
-- **Word Count:** 1177
-- **Internal Links In:** 185
-- **Internal Links Out:** 86
+- **Word Count:** 588
+- **Internal Links In:** 166
+- **Internal Links Out:** 47
 - **Groups:** Educational Pages
 
 ### /blog/adhd-and-binge-eating
@@ -1342,11 +1289,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD and Binge Eating: Why the Link Matters (and What Actually Helps)
 - **Word Count:** 2112
-- **Internal Links In:** 12
+- **Internal Links In:** 4
 - **Internal Links Out:** 50
 - **Groups:** Educational Pages
 
@@ -1356,7 +1303,7 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** Not All ADHD Is the Same: What New Brain Imaging Research May Mean for the Future of ADHD Care
 - **Word Count:** 3482
@@ -1370,12 +1317,12 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD Evaluation in California: Online vs In-Person Options
-- **Word Count:** 934
-- **Internal Links In:** 10
-- **Internal Links Out:** 46
+- **Word Count:** 556
+- **Internal Links In:** 9
+- **Internal Links Out:** 40
 - **Groups:** Educational Pages, SEO Pages
 
 ### /blog/adhd-evaluation-cost-texas
@@ -1384,12 +1331,12 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD Evaluation Cost in Texas: Full Breakdown (2026 Guide)
 - **Word Count:** 678
-- **Internal Links In:** 10
-- **Internal Links Out:** 38
+- **Internal Links In:** 4
+- **Internal Links Out:** 37
 - **Groups:** Educational Pages, SEO Pages
 
 ### /blog/adhd-hormones-women
@@ -1401,7 +1348,7 @@ Generated: 2026-07-26
 - **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD and Hormones in Women: Cycle, Perimenopause, and Why Symptoms Shift
-- **Word Count:** 2038
+- **Word Count:** 2036
 - **Internal Links In:** 6
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
@@ -1416,7 +1363,7 @@ Generated: 2026-07-26
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD in Women: Symptoms, Masking, Hormones, and Late Diagnosis
 - **Word Count:** 4465
-- **Internal Links In:** 20
+- **Internal Links In:** 18
 - **Internal Links Out:** 54
 - **Groups:** Educational Pages
 
@@ -1426,11 +1373,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** Do Adults Need ADHD Medication Every Day?
 - **Word Count:** 594
-- **Internal Links In:** 8
+- **Internal Links In:** 7
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
 
@@ -1440,12 +1387,12 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can You Get ADHD Medication Online in California? What Patients Should Know
-- **Word Count:** 932
+- **Word Count:** 554
 - **Internal Links In:** 7
-- **Internal Links Out:** 47
+- **Internal Links Out:** 41
 - **Groups:** Educational Pages, SEO Pages
 
 ### /blog/adhd-medication-options-california
@@ -1454,12 +1401,12 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD Medication Options in California: What Exists (and What Is Decided Clinically)
-- **Word Count:** 1196
-- **Internal Links In:** 23
-- **Internal Links Out:** 49
+- **Word Count:** 818
+- **Internal Links In:** 12
+- **Internal Links Out:** 42
 - **Groups:** Educational Pages, SEO Pages
 
 ### /blog/adhd-medication-options-for-adults
@@ -1468,11 +1415,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD Medication Options for Adults: Where to Start
-- **Word Count:** 1353
-- **Internal Links In:** 39
+- **Word Count:** 743
+- **Internal Links In:** 23
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
 
@@ -1482,11 +1429,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD Medication Side Effects: What to Expect (2026)
-- **Word Count:** 1281
-- **Internal Links In:** 6
+- **Word Count:** 703
+- **Internal Links In:** 5
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
 
@@ -1496,11 +1443,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** 7 Adult ADHD Signs Doctors Often Miss
-- **Word Count:** 836
-- **Internal Links In:** 11
+- **Word Count:** 834
+- **Internal Links In:** 10
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
 
@@ -1510,12 +1457,12 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD Telehealth in California: How Virtual Care Works
-- **Word Count:** 833
-- **Internal Links In:** 20
-- **Internal Links Out:** 47
+- **Word Count:** 455
+- **Internal Links In:** 12
+- **Internal Links Out:** 41
 - **Groups:** Educational Pages, SEO Pages
 
 ### /blog/adhd-testing-online-california-screening-vs-evaluation
@@ -1524,223 +1471,13 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD Testing Online in California: Screening vs Full Evaluation
-- **Word Count:** 843
-- **Internal Links In:** 6
-- **Internal Links Out:** 47
+- **Word Count:** 465
+- **Internal Links In:** 5
+- **Internal Links Out:** 40
 - **Groups:** Educational Pages, SEO Pages
-
-### /blog/adhd-treatment-austin-tx
-
-- **URL:** https://siya.health/blog/adhd-treatment-austin-tx
-- **Page Type:** Blog Article
-- **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Start ADHD Evaluation → /adhd-care
-- **Traffic Intent:** Informational
-- **Target Keyword:** ADHD Treatment in Austin, Texas: Physician-Led Virtual Care for Adults
-- **Word Count:** 2109
-- **Internal Links In:** 12
-- **Internal Links Out:** 60
-- **Groups:** Educational Pages, SEO Pages
-
-### /blog/adhd-treatment-dallas-tx
-
-- **URL:** https://siya.health/blog/adhd-treatment-dallas-tx
-- **Page Type:** Blog Article
-- **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Start ADHD Evaluation → /adhd-care
-- **Traffic Intent:** Informational
-- **Target Keyword:** ADHD Treatment in Dallas, Texas: Physician-Led Virtual Care for Adults
-- **Word Count:** 2351
-- **Internal Links In:** 12
-- **Internal Links Out:** 58
-- **Groups:** Educational Pages
-
-### /blog/adhd-treatment-fort-worth-tx
-
-- **URL:** https://siya.health/blog/adhd-treatment-fort-worth-tx
-- **Page Type:** Blog Article
-- **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Start ADHD Evaluation → /adhd-care
-- **Traffic Intent:** Informational
-- **Target Keyword:** ADHD Treatment in Fort Worth, Texas: Physician-Led Virtual Care for Adults
-- **Word Count:** 3043
-- **Internal Links In:** 8
-- **Internal Links Out:** 59
-- **Groups:** Educational Pages
-
-### /blog/adhd-treatment-houston-tx
-
-- **URL:** https://siya.health/blog/adhd-treatment-houston-tx
-- **Page Type:** Blog Article
-- **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Start ADHD Evaluation → /adhd-care
-- **Traffic Intent:** Informational
-- **Target Keyword:** ADHD Treatment in Houston, Texas: Physician-Led Virtual Care for Adults
-- **Word Count:** 2571
-- **Internal Links In:** 9
-- **Internal Links Out:** 59
-- **Groups:** Educational Pages, SEO Pages
-
-### /blog/adhd-treatment-los-angeles-ca
-
-- **URL:** https://siya.health/blog/adhd-treatment-los-angeles-ca
-- **Page Type:** Blog Article
-- **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Start ADHD Evaluation → /adhd-care
-- **Traffic Intent:** Informational
-- **Target Keyword:** ADHD Treatment in Los Angeles, California: Physician-Led Virtual Care for Adults
-- **Word Count:** 2868
-- **Internal Links In:** 17
-- **Internal Links Out:** 57
-- **Groups:** Educational Pages
-
-### /blog/adhd-treatment-miami-fl
-
-- **URL:** https://siya.health/blog/adhd-treatment-miami-fl
-- **Page Type:** Blog Article
-- **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Start ADHD Evaluation → /adhd-care
-- **Traffic Intent:** Informational
-- **Target Keyword:** ADHD Treatment in Miami, Florida: Physician-Led Virtual Care for Adults
-- **Word Count:** 2556
-- **Internal Links In:** 4
-- **Internal Links Out:** 50
-- **Groups:** Educational Pages
-
-### /blog/adhd-treatment-oakland-ca
-
-- **URL:** https://siya.health/blog/adhd-treatment-oakland-ca
-- **Page Type:** Blog Article
-- **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Start ADHD Evaluation → /adhd-care
-- **Traffic Intent:** Informational
-- **Target Keyword:** ADHD Treatment in Oakland, California: Physician-Led Virtual Care for Adults
-- **Word Count:** 2811
-- **Internal Links In:** 16
-- **Internal Links Out:** 57
-- **Groups:** Educational Pages
-
-### /blog/adhd-treatment-orange-county-ca
-
-- **URL:** https://siya.health/blog/adhd-treatment-orange-county-ca
-- **Page Type:** Blog Article
-- **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Start ADHD Evaluation → /adhd-care
-- **Traffic Intent:** Informational
-- **Target Keyword:** ADHD Treatment in Orange County, California: Physician-Led Virtual Care for Adults
-- **Word Count:** 2815
-- **Internal Links In:** 17
-- **Internal Links Out:** 57
-- **Groups:** Educational Pages
-
-### /blog/adhd-treatment-orlando-fl
-
-- **URL:** https://siya.health/blog/adhd-treatment-orlando-fl
-- **Page Type:** Blog Article
-- **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Start ADHD Evaluation → /adhd-care
-- **Traffic Intent:** Informational
-- **Target Keyword:** ADHD Treatment in Orlando, Florida: Physician-Led Virtual Care for Adults
-- **Word Count:** 2541
-- **Internal Links In:** 3
-- **Internal Links Out:** 49
-- **Groups:** Educational Pages
-
-### /blog/adhd-treatment-philadelphia-pa
-
-- **URL:** https://siya.health/blog/adhd-treatment-philadelphia-pa
-- **Page Type:** Blog Article
-- **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Start ADHD Evaluation → /adhd-care
-- **Traffic Intent:** Informational
-- **Target Keyword:** ADHD Treatment in Philadelphia, Pennsylvania: Physician-Led Virtual Care for Adults
-- **Word Count:** 2566
-- **Internal Links In:** 4
-- **Internal Links Out:** 50
-- **Groups:** Educational Pages, SEO Pages
-
-### /blog/adhd-treatment-sacramento-ca
-
-- **URL:** https://siya.health/blog/adhd-treatment-sacramento-ca
-- **Page Type:** Blog Article
-- **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Start ADHD Evaluation → /adhd-care
-- **Traffic Intent:** Informational
-- **Target Keyword:** ADHD Treatment in Sacramento, California: Physician-Led Virtual Care for Adults
-- **Word Count:** 2833
-- **Internal Links In:** 16
-- **Internal Links Out:** 57
-- **Groups:** Educational Pages
-
-### /blog/adhd-treatment-san-antonio-tx
-
-- **URL:** https://siya.health/blog/adhd-treatment-san-antonio-tx
-- **Page Type:** Blog Article
-- **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Start ADHD Evaluation → /adhd-care
-- **Traffic Intent:** Informational
-- **Target Keyword:** ADHD Treatment in San Antonio, Texas: Physician-Led Virtual Care for Adults
-- **Word Count:** 2881
-- **Internal Links In:** 7
-- **Internal Links Out:** 59
-- **Groups:** Educational Pages
-
-### /blog/adhd-treatment-san-diego-ca
-
-- **URL:** https://siya.health/blog/adhd-treatment-san-diego-ca
-- **Page Type:** Blog Article
-- **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Start ADHD Evaluation → /adhd-care
-- **Traffic Intent:** Informational
-- **Target Keyword:** ADHD Treatment in San Diego, California: Physician-Led Virtual Care for Adults
-- **Word Count:** 2777
-- **Internal Links In:** 16
-- **Internal Links Out:** 57
-- **Groups:** Educational Pages
-
-### /blog/adhd-treatment-san-francisco-ca
-
-- **URL:** https://siya.health/blog/adhd-treatment-san-francisco-ca
-- **Page Type:** Blog Article
-- **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Start ADHD Evaluation → /adhd-care
-- **Traffic Intent:** Informational
-- **Target Keyword:** ADHD Treatment in San Francisco, California: Physician-Led Virtual Care for Adults
-- **Word Count:** 2758
-- **Internal Links In:** 17
-- **Internal Links Out:** 57
-- **Groups:** Educational Pages
-
-### /blog/adhd-treatment-san-jose-ca
-
-- **URL:** https://siya.health/blog/adhd-treatment-san-jose-ca
-- **Page Type:** Blog Article
-- **Primary Purpose:** Educational SEO; nurture toward clinical services
-- **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Start ADHD Evaluation → /adhd-care
-- **Traffic Intent:** Informational
-- **Target Keyword:** ADHD Treatment in San Jose, California: Physician-Led Virtual Care for Adults
-- **Word Count:** 2763
-- **Internal Links In:** 16
-- **Internal Links Out:** 57
-- **Groups:** Educational Pages
 
 ### /blog/adhd-treatment-texas
 
@@ -1751,9 +1488,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** Start ADHD Evaluation → /adhd-care
 - **Traffic Intent:** Informational
 - **Target Keyword:** ADHD Treatment in Texas: Physician-Led Virtual Care for Adults
-- **Word Count:** 2890
-- **Internal Links In:** 15
-- **Internal Links Out:** 49
+- **Word Count:** 2887
+- **Internal Links In:** 17
+- **Internal Links Out:** 45
 - **Groups:** Educational Pages, SEO Pages
 
 ### /blog/adult-adhd-symptoms-california
@@ -1762,12 +1499,12 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Traffic Intent:** Informational
 - **Target Keyword:** Adult ADHD Symptoms in California: Patterns Worth Taking Seriously
-- **Word Count:** 1291
-- **Internal Links In:** 7
-- **Internal Links Out:** 46
+- **Word Count:** 913
+- **Internal Links In:** 6
+- **Internal Links Out:** 40
 - **Groups:** Educational Pages, SEO Pages
 
 ### /blog/compounded-vs-branded-glp1-medications
@@ -1776,11 +1513,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** View Pricing → /pricing
+- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Informational
 - **Target Keyword:** Compounded vs Branded GLP-1 Medications: What Patients Should Know (2026)
-- **Word Count:** 1930
-- **Internal Links In:** 5
+- **Word Count:** 1031
+- **Internal Links In:** 4
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
 
@@ -1793,8 +1530,8 @@ Generated: 2026-07-26
 - **Secondary CTA:** Start an ADHD Evaluation → /adhd-care
 - **Traffic Intent:** Informational
 - **Target Keyword:** Executive Dysfunction in ADHD: What It Is and How It Shows Up in Adults
-- **Word Count:** 4607
-- **Internal Links In:** 18
+- **Word Count:** 4606
+- **Internal Links In:** 16
 - **Internal Links Out:** 46
 - **Groups:** Educational Pages
 
@@ -1808,7 +1545,7 @@ Generated: 2026-07-26
 - **Traffic Intent:** Informational
 - **Target Keyword:** Food Noise and GLP-1: What It Means and What Actually Helps (2026)
 - **Word Count:** 3342
-- **Internal Links In:** 18
+- **Internal Links In:** 17
 - **Internal Links Out:** 42
 - **Groups:** Educational Pages
 
@@ -1822,7 +1559,7 @@ Generated: 2026-07-26
 - **Traffic Intent:** Informational
 - **Target Keyword:** Free Testosterone vs Total Testosterone: What Patients Should Know
 - **Word Count:** 2550
-- **Internal Links In:** 14
+- **Internal Links In:** 13
 - **Internal Links Out:** 44
 - **Groups:** Educational Pages
 
@@ -1832,11 +1569,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** View Pricing → /pricing
+- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Informational
 - **Target Keyword:** GLP-1 Side Effects and How to Manage Them (2026)
-- **Word Count:** 1771
-- **Internal Links In:** 5
+- **Word Count:** 872
+- **Internal Links In:** 4
 - **Internal Links Out:** 40
 - **Groups:** Educational Pages
 
@@ -1846,11 +1583,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** How ADHD Medication Is Prescribed Online (2026)
-- **Word Count:** 1258
-- **Internal Links In:** 23
+- **Word Count:** 648
+- **Internal Links In:** 8
 - **Internal Links Out:** 37
 - **Groups:** Educational Pages
 
@@ -1860,11 +1597,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** View Pricing → /pricing
+- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Informational
 - **Target Keyword:** How Mental Health Affects Weight Loss Outcomes (2026)
-- **Word Count:** 1691
-- **Internal Links In:** 8
+- **Word Count:** 784
+- **Internal Links In:** 7
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
 
@@ -1874,12 +1611,12 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Book Free Meet & Greet → → /adhd-care
 - **Traffic Intent:** Informational
 - **Target Keyword:** How to Choose an ADHD Provider in California
-- **Word Count:** 991
-- **Internal Links In:** 8
-- **Internal Links Out:** 47
+- **Word Count:** 613
+- **Internal Links In:** 1
+- **Internal Links Out:** 41
 - **Groups:** Educational Pages, SEO Pages
 
 ### /blog/how-to-know-if-you-have-adhd-adult
@@ -1888,12 +1625,12 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** How to Know If You Have ADHD as an Adult (Real Signs Explained)
 - **Word Count:** 802
-- **Internal Links In:** 185
-- **Internal Links Out:** 42
+- **Internal Links In:** 166
+- **Internal Links Out:** 40
 - **Groups:** Educational Pages
 
 ### /blog/how-to-safely-get-prescriptions-online
@@ -1906,7 +1643,7 @@ Generated: 2026-07-26
 - **Traffic Intent:** Informational
 - **Target Keyword:** How to Safely Get Prescriptions Online (2026)
 - **Word Count:** 1656
-- **Internal Links In:** 13
+- **Internal Links In:** 11
 - **Internal Links Out:** 40
 - **Groups:** Educational Pages
 
@@ -1916,12 +1653,12 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** Join Our Health Guide → https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl
+- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Informational
 - **Target Keyword:** Insomnia Treatment Beyond Medication (2026)
-- **Word Count:** 1729
-- **Internal Links In:** 4
-- **Internal Links Out:** 40
+- **Word Count:** 573
+- **Internal Links In:** 2
+- **Internal Links Out:** 39
 - **Groups:** Educational Pages
 
 ### /blog/insulin-resistance-and-weight-loss-clinician-overview
@@ -1934,7 +1671,7 @@ Generated: 2026-07-26
 - **Traffic Intent:** Informational
 - **Target Keyword:** Insulin Resistance and Weight Loss: A Clinician-Guided Overview
 - **Word Count:** 2878
-- **Internal Links In:** 20
+- **Internal Links In:** 19
 - **Internal Links Out:** 43
 - **Groups:** Educational Pages
 
@@ -1944,11 +1681,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** Iron Deficiency, Brain Fog, and ADHD: Could Low Iron Make ADHD Symptoms Worse?
-- **Word Count:** 4291
-- **Internal Links In:** 7
+- **Word Count:** 4290
+- **Internal Links In:** 5
 - **Internal Links Out:** 43
 - **Groups:** Educational Pages
 
@@ -1958,11 +1695,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** Is ADHD Medication Safe Long Term? Benefits & Monitoring (2026)
-- **Word Count:** 1319
-- **Internal Links In:** 4
+- **Word Count:** 741
+- **Internal Links In:** 3
 - **Internal Links Out:** 37
 - **Groups:** Educational Pages
 
@@ -1972,11 +1709,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** Is Online ADHD Diagnosis Legit? What Patients Should Know
 - **Word Count:** 935
-- **Internal Links In:** 31
+- **Internal Links In:** 14
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
 
@@ -1986,11 +1723,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** View Pricing → /pricing
+- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Informational
 - **Target Keyword:** Medical Weight Loss in Texas: GLP-1, Semaglutide, Tirzepatide & What Actually Works
 - **Word Count:** 1136
-- **Internal Links In:** 11
+- **Internal Links In:** 10
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages, SEO Pages
 
@@ -2000,11 +1737,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** View Pricing → /pricing
+- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Informational
 - **Target Keyword:** Medical Weight Loss vs Dieting: What Actually Works (2026)
-- **Word Count:** 1722
-- **Internal Links In:** 7
+- **Word Count:** 815
+- **Internal Links In:** 6
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
 
@@ -2014,11 +1751,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** Join Our Health Guide → https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl
+- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Informational
 - **Target Keyword:** Minoxidil for Hair Loss: Does It Work? (2026)
-- **Word Count:** 1847
-- **Internal Links In:** 7
+- **Word Count:** 726
+- **Internal Links In:** 5
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
 
@@ -2028,10 +1765,10 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** When Do Adults Use Non-Stimulant ADHD Medications?
-- **Word Count:** 1256
+- **Word Count:** 646
 - **Internal Links In:** 4
 - **Internal Links Out:** 37
 - **Groups:** Educational Pages
@@ -2042,12 +1779,12 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** Online ADHD Diagnosis in California: Cost, Process & What to Expect
-- **Word Count:** 1251
-- **Internal Links In:** 24
-- **Internal Links Out:** 51
+- **Word Count:** 873
+- **Internal Links In:** 14
+- **Internal Links Out:** 44
 - **Groups:** Educational Pages, SEO Pages
 
 ### /blog/online-adhd-diagnosis-texas
@@ -2056,12 +1793,12 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** Online ADHD Diagnosis in Texas: Cost, Process & What to Expect
-- **Word Count:** 851
-- **Internal Links In:** 13
-- **Internal Links Out:** 43
+- **Word Count:** 849
+- **Internal Links In:** 7
+- **Internal Links Out:** 41
 - **Groups:** Educational Pages, SEO Pages
 
 ### /blog/oral-vs-injectable-weight-loss-medications
@@ -2070,11 +1807,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** View Pricing → /pricing
+- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Informational
 - **Target Keyword:** Oral vs Injectable Weight Loss Medications: What to Know (2026)
-- **Word Count:** 1859
-- **Internal Links In:** 2
+- **Word Count:** 960
+- **Internal Links In:** 1
 - **Internal Links Out:** 37
 - **Groups:** Educational Pages
 
@@ -2084,11 +1821,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** Join Our Health Guide → https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl
+- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Informational
 - **Target Keyword:** Oral vs Topical Minoxidil: Which Is Right? (2026)
-- **Word Count:** 1731
-- **Internal Links In:** 6
+- **Word Count:** 610
+- **Internal Links In:** 5
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
 
@@ -2101,8 +1838,8 @@ Generated: 2026-07-26
 - **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** Perimenopause Brain Fog: Why Focus and Memory Feel Different in Your 40s
-- **Word Count:** 1973
-- **Internal Links In:** 7
+- **Word Count:** 1971
+- **Internal Links In:** 6
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
 
@@ -2112,13 +1849,13 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** View Pricing → /pricing
+- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Informational
 - **Target Keyword:** Phentermine for Weight Loss: Safety and Effectiveness (2026)
-- **Word Count:** 1855
-- **Internal Links In:** 1
+- **Word Count:** 956
+- **Internal Links In:** 0
 - **Internal Links Out:** 37
-- **Groups:** Educational Pages
+- **Groups:** Orphan Pages, Educational Pages
 
 ### /blog/pots-and-adhd
 
@@ -2126,13 +1863,13 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Take Free ADHD Screening → /adhd-screening
 - **Traffic Intent:** Informational
 - **Target Keyword:** POTS and ADHD: Why Researchers Are Exploring the Connection
 - **Word Count:** 3798
-- **Internal Links In:** 1
+- **Internal Links In:** 0
 - **Internal Links Out:** 39
-- **Groups:** Educational Pages
+- **Groups:** Orphan Pages, Educational Pages
 
 ### /blog/semaglutide-for-weight-loss-how-it-works
 
@@ -2140,11 +1877,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** View Pricing → /pricing
+- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Informational
 - **Target Keyword:** Semaglutide for Weight Loss: How It Works (2026 Clinical Overview)
 - **Word Count:** 2276
-- **Internal Links In:** 8
+- **Internal Links In:** 7
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
 
@@ -2154,12 +1891,12 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** Join Our Health Guide → https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl
+- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Informational
 - **Target Keyword:** Sildenafil for Erectile Dysfunction: What to Expect (2026)
-- **Word Count:** 1767
-- **Internal Links In:** 4
-- **Internal Links Out:** 38
+- **Word Count:** 611
+- **Internal Links In:** 2
+- **Internal Links Out:** 37
 - **Groups:** Educational Pages
 
 ### /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign
@@ -2172,7 +1909,7 @@ Generated: 2026-07-26
 - **Traffic Intent:** Informational
 - **Target Keyword:** Sleep Apnea, Fatigue, and Metabolic Risk: When Snoring Is Not Benign
 - **Word Count:** 2377
-- **Internal Links In:** 9
+- **Internal Links In:** 8
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
 
@@ -2185,9 +1922,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational / Navigational
 - **Target Keyword:** Telehealth articles
-- **Word Count:** 229
-- **Internal Links In:** 185
-- **Internal Links Out:** 41
+- **Word Count:** 126
+- **Internal Links In:** 166
+- **Internal Links Out:** 32
 - **Groups:** Educational Pages
 
 ### /blog/telehealth-prescriptions-how-online-treatment-works
@@ -2199,8 +1936,8 @@ Generated: 2026-07-26
 - **Secondary CTA:** Explore Care Options → /telehealth
 - **Traffic Intent:** Informational
 - **Target Keyword:** Telehealth Prescriptions: How Online Treatment Works (2026)
-- **Word Count:** 1706
-- **Internal Links In:** 6
+- **Word Count:** 550
+- **Internal Links In:** 5
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
 
@@ -2210,11 +1947,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** View Pricing → /pricing
+- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Informational
 - **Target Keyword:** Tirzepatide vs Semaglutide: Which Is Better for Weight Loss? (2026)
-- **Word Count:** 2089
-- **Internal Links In:** 4
+- **Word Count:** 1190
+- **Internal Links In:** 3
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
 
@@ -2224,10 +1961,10 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Join Our Health Guide → https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl
+- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Informational
 - **Target Keyword:** Vyvanse vs Adderall: Which Lasts Longer for Adults?
-- **Word Count:** 1377
+- **Word Count:** 799
 - **Internal Links In:** 6
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
@@ -2241,9 +1978,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational / Navigational
 - **Target Keyword:** Weight loss articles
-- **Word Count:** 298
-- **Internal Links In:** 185
-- **Internal Links Out:** 44
+- **Word Count:** 164
+- **Internal Links In:** 166
+- **Internal Links Out:** 32
 - **Groups:** Educational Pages
 
 ### /blog/when-is-testosterone-therapy-appropriate
@@ -2252,11 +1989,11 @@ Generated: 2026-07-26
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** View Pricing → /pricing
+- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Informational
 - **Target Keyword:** When Is Testosterone Therapy Appropriate? (2026)
-- **Word Count:** 1720
-- **Internal Links In:** 6
+- **Word Count:** 599
+- **Internal Links In:** 4
 - **Internal Links Out:** 40
 - **Groups:** Educational Pages
 
@@ -2270,7 +2007,7 @@ Generated: 2026-07-26
 - **Traffic Intent:** Informational
 - **Target Keyword:** Why Am I Always Tired? Causes and When to See a Doctor
 - **Word Count:** 2770
-- **Internal Links In:** 22
+- **Internal Links In:** 20
 - **Internal Links Out:** 44
 - **Groups:** Educational Pages
 
@@ -2284,8 +2021,8 @@ Generated: 2026-07-26
 - **Traffic Intent:** Informational
 - **Target Keyword:** You’re Not Lazy: Signs You May Have Undiagnosed Adult ADHD
 - **Word Count:** 1193
-- **Internal Links In:** 22
-- **Internal Links Out:** 43
+- **Internal Links In:** 6
+- **Internal Links Out:** 42
 - **Groups:** Educational Pages
 
 ### /book-appointment
@@ -2298,7 +2035,7 @@ Generated: 2026-07-26
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Choose How You Want to Get Started
 - **Word Count:** 203
-- **Internal Links In:** 185
+- **Internal Links In:** 166
 - **Internal Links Out:** 32
 - **Groups:** Core Revenue Pages, Utility Pages
 
@@ -2311,7 +2048,7 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Creyos ADHD Testing (Included in Your Evaluation)
-- **Word Count:** 405
+- **Word Count:** 404
 - **Internal Links In:** 3
 - **Internal Links Out:** 35
 - **Groups:** Core Revenue Pages, SEO Pages
@@ -2325,9 +2062,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Labs & Blood Tests with Transparent Direct-Pay Options
-- **Word Count:** 1755
-- **Internal Links In:** 185
-- **Internal Links Out:** 49
+- **Word Count:** 1676
+- **Internal Links In:** 166
+- **Internal Links Out:** 40
 - **Groups:** Core Revenue Pages, Utility Pages
 
 ### /labs/a1c-blood-sugar
@@ -2339,9 +2076,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Mixed
 - **Target Keyword:** A1c & Blood Sugar Testing
-- **Word Count:** 533
-- **Internal Links In:** 31
-- **Internal Links Out:** 42
+- **Word Count:** 498
+- **Internal Links In:** 24
+- **Internal Links Out:** 35
 - **Groups:** Utility Pages
 
 ### /labs/adhd-support
@@ -2353,9 +2090,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Labs When Focus, Fatigue & Brain Fog Overlap
-- **Word Count:** 444
-- **Internal Links In:** 18
-- **Internal Links Out:** 42
+- **Word Count:** 410
+- **Internal Links In:** 9
+- **Internal Links Out:** 35
 - **Groups:** Utility Pages
 
 ### /labs/fatigue-brain-fog
@@ -2367,9 +2104,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Fatigue & Brain Fog Labs
-- **Word Count:** 629
-- **Internal Links In:** 21
-- **Internal Links Out:** 44
+- **Word Count:** 584
+- **Internal Links In:** 18
+- **Internal Links Out:** 35
 - **Groups:** Utility Pages
 
 ### /labs/how-to-read-results
@@ -2382,7 +2119,7 @@ Generated: 2026-07-26
 - **Traffic Intent:** Mixed
 - **Target Keyword:** How to Read Your Lab Results
 - **Word Count:** 425
-- **Internal Links In:** 25
+- **Internal Links In:** 24
 - **Internal Links Out:** 38
 - **Groups:** Utility Pages
 
@@ -2395,9 +2132,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Iron & Ferritin Testing
-- **Word Count:** 529
-- **Internal Links In:** 14
-- **Internal Links Out:** 43
+- **Word Count:** 494
+- **Internal Links In:** 8
+- **Internal Links Out:** 36
 - **Groups:** Utility Pages
 
 ### /labs/mens-health
@@ -2409,9 +2146,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Men's Health Lab Evaluation
-- **Word Count:** 551
-- **Internal Links In:** 19
-- **Internal Links Out:** 43
+- **Word Count:** 510
+- **Internal Links In:** 10
+- **Internal Links Out:** 36
 - **Groups:** Utility Pages
 
 ### /labs/preventive
@@ -2423,9 +2160,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Preventive Primary Care Labs
-- **Word Count:** 641
-- **Internal Links In:** 16
-- **Internal Links Out:** 43
+- **Word Count:** 595
+- **Internal Links In:** 7
+- **Internal Links Out:** 36
 - **Groups:** Utility Pages
 
 ### /labs/thyroid
@@ -2437,9 +2174,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Thyroid Testing
-- **Word Count:** 519
-- **Internal Links In:** 14
-- **Internal Links Out:** 43
+- **Word Count:** 477
+- **Internal Links In:** 7
+- **Internal Links Out:** 36
 - **Groups:** Utility Pages
 
 ### /labs/vitamin-b12
@@ -2451,9 +2188,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Vitamin B12 Testing
-- **Word Count:** 508
-- **Internal Links In:** 12
-- **Internal Links Out:** 42
+- **Word Count:** 476
+- **Internal Links In:** 3
+- **Internal Links Out:** 36
 - **Groups:** Utility Pages
 
 ### /labs/womens-midlife
@@ -2465,9 +2202,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Women's Midlife Lab Evaluation
-- **Word Count:** 529
-- **Internal Links In:** 14
-- **Internal Links Out:** 43
+- **Word Count:** 488
+- **Internal Links In:** 4
+- **Internal Links Out:** 38
 - **Groups:** Utility Pages
 
 ### /legal
@@ -2480,7 +2217,7 @@ Generated: 2026-07-26
 - **Traffic Intent:** Compliance / Navigational
 - **Target Keyword:** Legal & Compliance
 - **Word Count:** 148
-- **Internal Links In:** 185
+- **Internal Links In:** 166
 - **Internal Links Out:** 32
 - **Groups:** Utility Pages, Trust Pages
 
@@ -2494,7 +2231,7 @@ Generated: 2026-07-26
 - **Traffic Intent:** Compliance / Navigational
 - **Target Keyword:** Controlled Substance Treatment Agreement
 - **Word Count:** 829
-- **Internal Links In:** 95
+- **Internal Links In:** 76
 - **Internal Links Out:** 31
 - **Groups:** Utility Pages, Trust Pages
 
@@ -2508,7 +2245,7 @@ Generated: 2026-07-26
 - **Traffic Intent:** Compliance / Navigational
 - **Target Keyword:** Cookie Policy
 - **Word Count:** 475
-- **Internal Links In:** 185
+- **Internal Links In:** 166
 - **Internal Links Out:** 31
 - **Groups:** Utility Pages, Trust Pages
 
@@ -2522,7 +2259,7 @@ Generated: 2026-07-26
 - **Traffic Intent:** Compliance / Navigational
 - **Target Keyword:** Notice of Privacy Practices
 - **Word Count:** 1547
-- **Internal Links In:** 186
+- **Internal Links In:** 167
 - **Internal Links Out:** 31
 - **Groups:** Utility Pages, Trust Pages
 
@@ -2536,7 +2273,7 @@ Generated: 2026-07-26
 - **Traffic Intent:** Compliance / Navigational
 - **Target Keyword:** Privacy Policy
 - **Word Count:** 2874
-- **Internal Links In:** 186
+- **Internal Links In:** 167
 - **Internal Links Out:** 31
 - **Groups:** Utility Pages, Trust Pages
 
@@ -2550,7 +2287,7 @@ Generated: 2026-07-26
 - **Traffic Intent:** Compliance / Navigational
 - **Target Keyword:** Terms of Use
 - **Word Count:** 4490
-- **Internal Links In:** 186
+- **Internal Links In:** 167
 - **Internal Links Out:** 31
 - **Groups:** Utility Pages, Trust Pages
 
@@ -2563,8 +2300,8 @@ Generated: 2026-07-26
 - **Secondary CTA:** Start Secure Medical Chat → /redirect/chat
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** When energy, drive, and focus don't feel like they used to
-- **Word Count:** 662
-- **Internal Links In:** 185
+- **Word Count:** 659
+- **Internal Links In:** 166
 - **Internal Links Out:** 41
 - **Groups:** Core Revenue Pages
 
@@ -2574,11 +2311,11 @@ Generated: 2026-07-26
 - **Page Type:** Service Page
 - **Primary Purpose:** Provider-reviewed prescriptions through Siya Health telehealth when clinically appropriate. Availability varies by state—contact us to learn more.
 - **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** —
+- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Online Prescription Services
 - **Word Count:** 137
-- **Internal Links In:** 185
+- **Internal Links In:** 166
 - **Internal Links Out:** 31
 - **Groups:** Core Revenue Pages, Utility Pages
 
@@ -2591,8 +2328,8 @@ Generated: 2026-07-26
 - **Secondary CTA:** Start Secure Medical Chat → /redirect/chat
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Transparent pricing for physician-led care
-- **Word Count:** 501
-- **Internal Links In:** 185
+- **Word Count:** 500
+- **Internal Links In:** 166
 - **Internal Links Out:** 35
 - **Groups:** Utility Pages
 
@@ -2602,11 +2339,11 @@ Generated: 2026-07-26
 - **Page Type:** Service Page
 - **Primary Purpose:** Virtual primary and urgent care across California, Texas, Pennsylvania, and Florida. Annual wellness, chronic care, preventive labs review, and clear follow-up plans.
 - **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Browse preventive labs → /labs/preventive
+- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Primary & Urgent Care — Virtual, Same-Week
-- **Word Count:** 433
-- **Internal Links In:** 185
+- **Word Count:** 432
+- **Internal Links In:** 166
 - **Internal Links Out:** 38
 - **Groups:** Core Revenue Pages, Utility Pages
 
@@ -2619,9 +2356,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Online via Zocdoc → https://www.zocdoc.com/booking-link/practice/siya-healthcare-182234
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Our Care Team
-- **Word Count:** 445
-- **Internal Links In:** 185
-- **Internal Links Out:** 38
+- **Word Count:** 430
+- **Internal Links In:** 166
+- **Internal Links Out:** 35
 - **Groups:** Trust Pages
 
 ### /providers/derek-timbs
@@ -2633,8 +2370,8 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Online via Zocdoc → https://www.zocdoc.com/booking-link/practice/siya-healthcare-182234
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Derek Timbs, FNP-BC
-- **Word Count:** 614
-- **Internal Links In:** 8
+- **Word Count:** 607
+- **Internal Links In:** 5
 - **Internal Links Out:** 36
 - **Groups:** Trust Pages
 
@@ -2647,8 +2384,8 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Online via Zocdoc → https://www.zocdoc.com/booking-link/practice/siya-healthcare-182234
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Dr. Natasha Desai, MD
-- **Word Count:** 715
-- **Internal Links In:** 17
+- **Word Count:** 708
+- **Internal Links In:** 15
 - **Internal Links Out:** 38
 - **Groups:** Trust Pages
 
@@ -2661,8 +2398,8 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Online via Zocdoc → https://www.zocdoc.com/booking-link/practice/siya-healthcare-182234
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Dr. Sneh Pandey, MD
-- **Word Count:** 871
-- **Internal Links In:** 42
+- **Word Count:** 863
+- **Internal Links In:** 23
 - **Internal Links Out:** 36
 - **Groups:** Trust Pages
 
@@ -2675,8 +2412,8 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Online via Zocdoc → https://www.zocdoc.com/booking-link/practice/siya-healthcare-182234
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Dr. Swati Pandey, MD
-- **Word Count:** 722
-- **Internal Links In:** 11
+- **Word Count:** 715
+- **Internal Links In:** 9
 - **Internal Links Out:** 38
 - **Groups:** Trust Pages
 
@@ -2689,7 +2426,7 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Online via Zocdoc → https://www.zocdoc.com/booking-link/practice/siya-healthcare-182234
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Dr. Vanessa Urbina, MD
-- **Word Count:** 662
+- **Word Count:** 655
 - **Internal Links In:** 14
 - **Internal Links Out:** 35
 - **Groups:** Trust Pages
@@ -2703,8 +2440,8 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Online via Zocdoc → https://www.zocdoc.com/booking-link/practice/siya-healthcare-182234
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Megan Wunderlich, FNP-C
-- **Word Count:** 612
-- **Internal Links In:** 10
+- **Word Count:** 605
+- **Internal Links In:** 5
 - **Internal Links Out:** 36
 - **Groups:** Trust Pages
 
@@ -2717,8 +2454,8 @@ Generated: 2026-07-26
 - **Secondary CTA:** Book Online via Zocdoc → https://www.zocdoc.com/booking-link/practice/siya-healthcare-182234
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Wendy Delgado, PA-C
-- **Word Count:** 593
-- **Internal Links In:** 5
+- **Word Count:** 586
+- **Internal Links In:** 3
 - **Internal Links Out:** 36
 - **Groups:** Trust Pages
 
@@ -2731,9 +2468,9 @@ Generated: 2026-07-26
 - **Secondary CTA:** Start Secure Medical Chat → /redirect/chat
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Need a doctor without rearranging your entire day?
-- **Word Count:** 977
-- **Internal Links In:** 185
-- **Internal Links Out:** 43
+- **Word Count:** 957
+- **Internal Links In:** 166
+- **Internal Links Out:** 41
 - **Groups:** Core Revenue Pages
 
 ### /weight-loss-metabolic-health
@@ -2745,8 +2482,8 @@ Generated: 2026-07-26
 - **Secondary CTA:** Start Secure Medical Chat → /redirect/chat
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** When your appetite, energy, and weight stop making sense
-- **Word Count:** 1152
-- **Internal Links In:** 185
+- **Word Count:** 1144
+- **Internal Links In:** 166
 - **Internal Links Out:** 43
 - **Groups:** Core Revenue Pages
 
@@ -2759,8 +2496,8 @@ Generated: 2026-07-26
 - **Secondary CTA:** Start Secure Medical Chat → /redirect/chat
 - **Traffic Intent:** Mixed
 - **Target Keyword:** When energy, cycles, and mood stop making sense together
-- **Word Count:** 751
-- **Internal Links In:** 185
+- **Word Count:** 743
+- **Internal Links In:** 166
 - **Internal Links Out:** 41
 - **Groups:** Utility Pages
 
@@ -2773,7 +2510,7 @@ Generated: 2026-07-26
 - **Secondary CTA:** Women's health services → /womens-health
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Women's Midlife Health: Brain, Hormones & Metabolism
-- **Word Count:** 1813
+- **Word Count:** 1812
 - **Internal Links In:** 8
 - **Internal Links Out:** 36
 - **Groups:** Utility Pages

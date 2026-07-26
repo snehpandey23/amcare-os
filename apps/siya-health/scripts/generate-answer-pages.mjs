@@ -29,6 +29,7 @@ import {
 } from './clinical-entity.mjs';
 import { COPY_STANDARDS, FOOTER_STATES_LINE } from '../data/site-standards.mjs';
 import { buildHealthGuideEngagement } from './answer-engagement-system.mjs';
+import { renderContextAwareClosing, primaryJourneyForTopic } from './content-assembly.mjs';
 import { BOOKING_LINK } from '../data/providers-core.mjs';
 import { MEET_GREET_URL, NAV_HEALTH_GUIDES } from './site-chrome.mjs';
 import { renderNavCtaMarkup, renderButton, slotToButton, resolveConversion } from '../design-system/components.mjs';
@@ -455,9 +456,14 @@ function buildAnswerPage(seed) {
     : '';
   const faqJson = buildFaqJson(seed);
   const answerRelPath = `answers/${seed.slug}.html`;
-  const answerCtaBtn = renderButton({
-    ...slotToButton(resolveConversion(answerRelPath).primary, { location: 'answer-final-cta', relPath: answerRelPath }),
-    variant: 'primary',
+  const journey = primaryJourneyForTopic(seed.topic, seed.slug);
+  const relatedLabels = (seed.related || [])
+    .slice(0, 2)
+    .map((s) => ({ slug: s, label: s.replace(/-/g, ' ') }));
+  const contextClosing = renderContextAwareClosing(seed, {
+    primaryHref: journey.href,
+    primaryLabel: `${journey.label} →`,
+    relatedLabels,
   });
 
   const medicalWebPage = {
@@ -523,9 +529,7 @@ ${engagement.evidenceCard}
             </section>
 ${learnMoreHtml}
 ${buildAnswerInternalLinksHtml(seed)}
-            <div class="cta-block blog-cta answer-final-cta">
-              ${answerCtaBtn}
-            </div>
+${contextClosing}
             <p class="cta-microcopy">Browse <a href="/answers">all Health Guides</a> · <a href="${hub.url}">${hub.label} articles</a>${reviewRecord.reviewer ? ` · <a href="/providers/${reviewRecord.reviewer.slug}">${reviewRecord.reviewer.name}</a>` : ''}</p>
           </div>
         </div>
