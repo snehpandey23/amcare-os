@@ -5,13 +5,13 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { SIYA_CIRCLE_GHL_FORM_URL as GHL_CANONICAL } from '../data/siya-circle-config.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
 
 const BOOKING_CANONICAL =
   'https://spruce.care/siyahealth';
-const GHL_CANONICAL = 'https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl';
 
 const RECOMMENDED = {
   primary: { label: 'Talk to a Clinician', url: BOOKING_CANONICAL },
@@ -67,7 +67,7 @@ function isBookingUrl(href) {
 }
 
 function isGhlUrl(href) {
-  return /link\.yourmarketingai\.com\/widget\/form\/HmvqrDVq3tq3qv6rkCjl/i.test(href || '');
+  return /form\.carepatron\.com\/Forms\/XRMFIPAWuXhTlncGx/i.test(href || '');
 }
 
 function isScreeningUrl(href) {

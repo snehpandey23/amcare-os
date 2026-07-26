@@ -1,14 +1,20 @@
 /**
- * Siya Circle — newsletter signup routes to GHL (no on-site email capture).
+ * Siya Circle — newsletter signup (no on-site email capture).
+ * Canonical form URL MUST match live https://www.siya.health (footer + /siya-circle).
+ * If live and git diverge, prefer live and update this file before any deploy.
  */
 
 export const SIYA_CIRCLE_LIST_TAG = 'Siya Circle';
 
-/** Direct GHL widget form URL (all join CTAs) */
+/** Direct newsletter signup form URL (all join CTAs) — synced from production 2026-07-26 */
 export const SIYA_CIRCLE_GHL_FORM_URL =
-  'https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl';
+  'https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx';
 
-export const SIYA_CIRCLE_GHL_FORM_ID = 'HmvqrDVq3tq3qv6rkCjl';
+export const SIYA_CIRCLE_GHL_FORM_ID = 'XRMFIPAWuXhTlncGx';
+
+/** Legacy GHL widget URL — do not reintroduce; kept for migration audits only */
+export const SIYA_CIRCLE_LEGACY_GHL_FORM_URL =
+  'https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl';
 
 export const SIYA_CIRCLE_JOIN_TRACK = 'siya-circle-join-click';
 

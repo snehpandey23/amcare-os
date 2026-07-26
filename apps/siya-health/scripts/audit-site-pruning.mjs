@@ -41,7 +41,7 @@ const EXPLICIT = {
   },
   '/siya-circle': {
     classification: 'DELETE',
-    target: 'https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl',
+    target: 'https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx',
     rationale: 'Orphan utility page (0 inbound). Newsletter signup belongs in footer only per CTA audit.',
     phase: 1,
   },

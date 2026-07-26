@@ -35,7 +35,10 @@ Logs: `brand/04-Content-Tracker/fuse-logs/`
 - Status **Ready** or **Scheduled** before expecting WorkDrive sync
 - **Do not** run `vercel --prod` without explicit owner OK
 - Marketing CTAs: Talk to a Clinician / Book ADHD Evaluation / Health Guides — not Meet & Greet
+- Website work: always `git pull --ff-only origin main` first; run `npm run sync:live` in `apps/siya-health` before merge. See `docs/LIVE-SYNC-AND-DEPLOY.md`.
 
 ## Website deploy (separate)
 
 Production = **`main`** → Vercel. Fuse does **not** deploy the website.
+
+**Owner Mac:** never merge stale local website branches “preferring ours” over `origin/main`. Rebase onto latest `main` and resolve file-by-file. Messy rollbacks happen when old branches overwrite cloud-agent commits and Vercel auto-deploys.
