@@ -20,6 +20,12 @@ Scope:             Website · Health Guides · Labs · FAQs · Siya Guide · Pro
 >
 > **One knowledge graph. Many products.** Never let each surface invent its own copy.
 
+**Platform layers** (Presentation → Public Knowledge API → Entity Registry → Content
+Assembly → Knowledge Graph → Content Blocks), consumption contract, and the
+engineering principle *fix generators before fixing pages* live in
+[`SIYA-KNOWLEDGE-PLATFORM.md`](./SIYA-KNOWLEDGE-PLATFORM.md). Governance freezes
+quality rules; the platform doc freezes how products plug in.
+
 ---
 
 ## 1. The unit of governance is the BLOCK, not the page

@@ -1,12 +1,14 @@
 {
-  "version": 1,
+  "version": 3,
   "source": "Siya Knowledge Governance Framework v1.0 — canonical entity registry",
-  "note": "Deterministic entity lookup for Siya Guide and future products. Given a query, resolve to a canonical entity BEFORE any LLM reasoning. Never invent URLs or CTAs; only use what is declared here.",
+  "note": "Deterministic entity lookup for Siya Guide and future products. Given a query, resolve to a canonical entity BEFORE any LLM reasoning. Never invent URLs or CTAs; only use what is declared here. Every answer includes intent + care_pathway so surfaces share routing without inventing it.",
   "entities": {
     "adult_adhd_california": {
       "entity": "adult_adhd_california",
       "name": "Adult ADHD in California",
       "canonical_page": "/adult-adhd-california",
+      "intent": "condition",
+      "care_pathway": "adhd_care",
       "aliases": [
         "california adhd",
         "adult adhd california",
@@ -30,10 +32,59 @@
       ],
       "related_entities": ["executive_dysfunction", "women_and_adhd", "adhd_screening", "adhd_care"]
     },
+    "fatigue": {
+      "entity": "fatigue",
+      "name": "Fatigue",
+      "canonical_page": "/fatigue",
+      "intent": "symptom",
+      "care_pathway": "primary_care",
+      "aliases": [
+        "fatigue",
+        "always tired",
+        "exhausted all the time",
+        "tired all the time",
+        "no energy",
+        "so tired",
+        "constant tiredness",
+        "chronic fatigue",
+        "low energy",
+        "why am i always tired",
+        "tired even after sleeping",
+        "no energy to do anything",
+        "wake up exhausted",
+        "drained all day",
+        "burnt out and exhausted"
+      ],
+      "topic": "primary care",
+      "parents": ["primary_care", "symptoms"],
+      "children": ["brain_fog", "sleep_problems", "low_energy"],
+      "labs": ["CBC", "Ferritin", "TSH", "Vitamin B12", "Vitamin D", "CMP"],
+      "primary_cta": { "id": "book_appointment", "label": "Book a primary care visit", "url": "/book-appointment" },
+      "secondary_ctas": [
+        { "id": "primary_care", "label": "Primary & Urgent Care", "url": "/primary-urgent-care" },
+        { "id": "labs", "label": "Lab Testing", "url": "/labs" }
+      ],
+      "related_guides": [
+        { "id": "guide_tired_after_sleeping", "label": "Why am I tired even after sleeping?", "url": "/answers/why-am-i-tired-even-after-sleeping" },
+        { "id": "guide_brain_fog", "label": "Brain fog after eating", "url": "/answers/brain-fog-after-eating" },
+        { "id": "guide_sleep_apnea", "label": "Signs of sleep apnea in adults", "url": "/answers/signs-of-sleep-apnea-in-adults" },
+        { "id": "guide_perimenopause", "label": "Perimenopause & brain fog", "url": "/blog/perimenopause-brain-fog" },
+        { "id": "labs_iron", "label": "Iron & ferritin testing", "url": "/labs/iron-ferritin" },
+        { "id": "labs_thyroid", "label": "Thyroid testing", "url": "/labs/thyroid" }
+      ],
+      "related_services": [
+        { "id": "primary_care", "label": "Primary & Urgent Care", "url": "/primary-urgent-care" },
+        { "id": "labs", "label": "Lab Testing", "url": "/labs" }
+      ],
+      "related_entities": ["brain_fog", "sleep_problems", "perimenopause"],
+      "note": "Symptom-first entity. ADHD is ONE possible contributor, never the destination. Do not answer fatigue queries with an ADHD screening CTA."
+    },
     "executive_dysfunction": {
       "entity": "executive_dysfunction",
       "name": "Executive Dysfunction in ADHD",
       "canonical_page": "/blog/executive-dysfunction-adhd",
+      "intent": "condition",
+      "care_pathway": "adhd_care",
       "aliases": ["executive dysfunction", "executive function adhd", "cant start tasks adhd", "task paralysis"],
       "topic": "adhd",
       "primary_cta": { "id": "adhd_screening", "label": "Free ADHD Screening", "url": "/adhd-screening" },
@@ -44,6 +95,8 @@
       "entity": "women_and_adhd",
       "name": "ADHD in Women",
       "canonical_page": "/blog/adhd-in-women",
+      "intent": "condition",
+      "care_pathway": "adhd_care",
       "aliases": ["adhd in women", "women adhd", "adhd women hormones", "late diagnosis adhd women"],
       "topic": "adhd",
       "primary_cta": { "id": "adhd_screening", "label": "Free ADHD Screening", "url": "/adhd-screening" },

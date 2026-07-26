@@ -35,6 +35,12 @@ export const LINK_REGISTRY: Record<string, LinkRecord> = {
         url: 'https://www.siya.health/adult-adhd-california',
         kind: 'service'
     },
+    fatigue: {
+        id: 'fatigue',
+        label: 'Fatigue: when tired stops being normal',
+        url: 'https://www.siya.health/fatigue',
+        kind: 'education'
+    },
     adhd_evaluation_cost: {
         id: 'adhd_evaluation_cost',
         label: 'ADHD Evaluation Cost',

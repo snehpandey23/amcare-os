@@ -9,7 +9,23 @@ import type { GuideLink } from './types'
  * LLM reasoning. Every surface (Siya Guide, provider tools, future apps) asks
  * "Fetch the canonical entity" instead of "What should I link?". This keeps the
  * website, chatbot, and knowledge graph pointing at one source of truth.
+ *
+ * Answers include intent + care_pathway so routing is shared — no surface invents
+ * "symptom → primary care" vs "condition → specialty" on its own.
  */
+
+/** Why the reader arrived — drives CTA and care pathway, not page layout. */
+export type EntityIntent = 'symptom' | 'condition' | 'service' | 'lab' | 'screening'
+
+/** Shared care destination every surface should route toward for this entity. */
+export type CarePathway =
+  | 'primary_care'
+  | 'adhd_care'
+  | 'labs'
+  | 'weight_loss'
+  | 'womens_health'
+  | 'mens_health'
+  | 'telehealth'
 
 export interface EntityCta {
   id: string
@@ -21,11 +37,37 @@ export interface KnowledgeEntity {
   entity: string
   name: string
   canonical_page: string
+  /** Required from registry v3 — symptom vs condition vs service, etc. */
+  intent: EntityIntent
+  /** Required from registry v3 — shared routing target across all surfaces. */
+  care_pathway: CarePathway
   aliases: string[]
   geo?: string
   topic?: string
+  /** Symptom hubs declare graph relationships (see /fatigue). */
+  parents?: string[]
+  children?: string[]
+  labs?: string[]
   primary_cta: EntityCta
   secondary_ctas: EntityCta[]
+  related_guides?: EntityCta[]
+  related_services?: EntityCta[]
+  related_entities: string[]
+  note?: string
+}
+
+/** Deterministic answer contract consumed by chatbot, search, apps, email. */
+export interface EntityAnswer {
+  entity: string
+  name: string
+  intent: EntityIntent
+  care_pathway: CarePathway
+  canonical_page: string
+  canonical_url: string
+  primary_cta: GuideLink
+  secondary_ctas: GuideLink[]
+  related_guides: GuideLink[]
+  related_services: GuideLink[]
   related_entities: string[]
 }
 
@@ -82,32 +124,28 @@ export function resolveEntity(query: string): KnowledgeEntity | null {
 
 /**
  * The deterministic answer surface for the chatbot / apps.
- * Returns canonical page + CTAs + related entities with resolved URLs — no LLM required.
+ * Returns intent, care pathway, canonical page, CTAs, and related entities — no LLM required.
  */
-export function answerForEntity(id: string): {
-  entity: string
-  name: string
-  canonical_page: string
-  canonical_url: string
-  primary_cta: GuideLink
-  secondary_ctas: GuideLink[]
-  related_entities: string[]
-} | null {
+export function answerForEntity(id: string): EntityAnswer | null {
   const e = getEntity(id)
   if (!e) return null
   return {
     entity: e.entity,
     name: e.name,
+    intent: e.intent,
+    care_pathway: e.care_pathway,
     canonical_page: e.canonical_page,
     canonical_url: absolute(e.canonical_page),
     primary_cta: toGuideLink(e.primary_cta),
     secondary_ctas: e.secondary_ctas.map(toGuideLink),
+    related_guides: (e.related_guides ?? []).map(toGuideLink),
+    related_services: (e.related_services ?? []).map(toGuideLink),
     related_entities: e.related_entities,
   }
 }
 
 /** One-shot: query → deterministic canonical answer (or null). */
-export function resolveAnswer(query: string) {
+export function resolveAnswer(query: string): EntityAnswer | null {
   const e = resolveEntity(query)
   return e ? answerForEntity(e.entity) : null
 }
