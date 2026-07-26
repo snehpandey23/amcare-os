@@ -4,8 +4,8 @@ import { AuthProvider } from "@/context/AuthContext";
 import ClientShell from "@/components/training/ClientShell";
 
 export const metadata: Metadata = {
-  title: "HIPAA Workforce Training",
-  description: "Interactive HIPAA training aligned to your Gamma Compliance welcome kit and HIPAA Manual.",
+  title: "SiyaOS — Internal workforce assistant",
+  description: "Siya assistant for HIPAA, billing workflow, and escalation. Optional HIPAA certification training.",
 };
 
 export default function RootLayout({
