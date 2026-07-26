@@ -1,0 +1,411 @@
+{
+  "framework": "Siya Knowledge Governance Framework",
+  "governanceVersion": "1.0",
+  "generated": "2026-07-26T06:45:34.256Z",
+  "filesScanned": 193,
+  "registeredBlocks": 25,
+  "unregisteredMarkers": [],
+  "violations": [],
+  "blocks": [
+    {
+      "id": "SIYA:CONCIERGE",
+      "name": "Concierge widget",
+      "kind": "chrome",
+      "entity": null,
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "n/a",
+        "engineering": "site-chrome"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "chrome",
+      "pagesAffected": 183
+    },
+    {
+      "id": "SIYA:TRACKING",
+      "name": "Analytics tracking",
+      "kind": "chrome",
+      "entity": null,
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "n/a",
+        "engineering": "site-chrome"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "chrome",
+      "pagesAffected": 131
+    },
+    {
+      "id": "SIYA:PROVIDER-ATTRIBUTION",
+      "name": "Provider attribution",
+      "kind": "chrome",
+      "entity": null,
+      "owner": {
+        "clinical": "Clinical",
+        "editorial": "Content OS",
+        "engineering": "clinical-entity"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "approved",
+      "status": "chrome",
+      "pagesAffected": 120
+    },
+    {
+      "id": "SIYA:CIRCLE-ANALYTICS",
+      "name": "Circle analytics",
+      "kind": "chrome",
+      "entity": null,
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "n/a",
+        "engineering": "site-chrome"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "chrome",
+      "pagesAffected": 119
+    },
+    {
+      "id": "SIYA:COOKIE-NOTICE",
+      "name": "Cookie notice",
+      "kind": "chrome",
+      "entity": null,
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "Legal",
+        "engineering": "site-chrome"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "chrome",
+      "pagesAffected": 117
+    },
+    {
+      "id": "SIYA:CONTEXT-CLOSING",
+      "name": "Answer context-aware closing (one primary CTA)",
+      "kind": "cta",
+      "entity": "per-topic",
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "Content OS",
+        "engineering": "answer generator"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "production",
+      "pagesAffected": 59
+    },
+    {
+      "id": "SIYA:BLOG-CTA-ADHD",
+      "name": "ADHD screening blog CTA band",
+      "kind": "cta",
+      "entity": "adult-adhd",
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "ADHD Cluster",
+        "engineering": "conversion-cleanup generator"
+      },
+      "version": "v1.1",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "production",
+      "pagesAffected": 46
+    },
+    {
+      "id": "SIYA:HEADER-SCROLL",
+      "name": "Header scroll script",
+      "kind": "chrome",
+      "entity": null,
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "n/a",
+        "engineering": "site-chrome"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "chrome",
+      "pagesAffected": 33
+    },
+    {
+      "id": "SIYA:FAQ-ACCORDION",
+      "name": "FAQ accordion script",
+      "kind": "chrome",
+      "entity": null,
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "n/a",
+        "engineering": "site-chrome"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "chrome",
+      "pagesAffected": 29
+    },
+    {
+      "id": "SIYA:BLOG-CTA-METABOLIC",
+      "name": "Metabolic / men’s / energy blog CTA band",
+      "kind": "cta",
+      "entity": "metabolic-health",
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "Metabolic Cluster",
+        "engineering": "conversion-cleanup generator"
+      },
+      "version": "v1.1",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "production",
+      "pagesAffected": 19
+    },
+    {
+      "id": "SIYA:ADHD-NEXT-STEPS",
+      "name": "ADHD \"what happens next\" journey",
+      "kind": "cta",
+      "entity": "adult-adhd",
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "ADHD Cluster",
+        "engineering": "conversion-cleanup generator"
+      },
+      "version": "v1.1",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "production",
+      "pagesAffected": 11
+    },
+    {
+      "id": "SIYA:CA-GEO-PARAGRAPH",
+      "name": "California metro context paragraph",
+      "kind": "geo",
+      "entity": "adhd-california",
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "ADHD Cluster",
+        "engineering": "ca-city-linking"
+      },
+      "version": "v1.1",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "production",
+      "pagesAffected": 10
+    },
+    {
+      "id": "SIYA:CA-CITY-CLUSTER",
+      "name": "California city cluster links",
+      "kind": "geo",
+      "entity": "adhd-california",
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "ADHD Cluster",
+        "engineering": "ca-city-linking"
+      },
+      "version": "v1.1",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "production",
+      "pagesAffected": 10
+    },
+    {
+      "id": "SIYA:PRICING-STRIP",
+      "name": "Transparent pricing strip",
+      "kind": "cta",
+      "entity": "pricing",
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "Content OS",
+        "engineering": "conversion-cleanup generator"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "production",
+      "pagesAffected": 6
+    },
+    {
+      "id": "SIYA:ADHD-SHADOW-GEO-CONTEXT",
+      "name": "Shadow LP geo context",
+      "kind": "geo",
+      "entity": "adhd-geo",
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "ADHD Cluster",
+        "engineering": "adhd-commercial-links"
+      },
+      "version": "v2.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "production",
+      "pagesAffected": 3
+    },
+    {
+      "id": "SIYA:PRIMARY-CARE-FAQ",
+      "name": "Primary & urgent care FAQ + FAQPage schema",
+      "kind": "clinical",
+      "entity": "primary-care",
+      "owner": {
+        "clinical": "Dr. Swati Pandey",
+        "editorial": "Content OS",
+        "engineering": "primary-urgent-care page"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "approved",
+      "status": "production",
+      "pagesAffected": 1
+    },
+    {
+      "id": "SIYA:ANSWERS-ADHD-CARE-PATHWAYS",
+      "name": "Answers hub next-step",
+      "kind": "cta",
+      "entity": "adult-adhd",
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "Content OS",
+        "engineering": "adhd-commercial-links"
+      },
+      "version": "v2.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "production",
+      "pagesAffected": 1
+    },
+    {
+      "id": "SIYA:ADHD-BLOG-CARE-PATHWAYS",
+      "name": "ADHD blog hub care pathways",
+      "kind": "cta",
+      "entity": "adult-adhd",
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "ADHD Cluster",
+        "engineering": "adhd-commercial-links"
+      },
+      "version": "v2.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "production",
+      "pagesAffected": 1
+    },
+    {
+      "id": "SIYA:ANSWERS-TOPIC-CLUSTERS",
+      "name": "Health Guides topic cluster explorer",
+      "kind": "navigation",
+      "entity": "knowledge-graph",
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "Content OS",
+        "engineering": "answer generator"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "production",
+      "pagesAffected": 1
+    },
+    {
+      "id": "SIYA:GUIDE-SEARCH",
+      "name": "Health Guides search",
+      "kind": "navigation",
+      "entity": "knowledge-graph",
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "Content OS",
+        "engineering": "answer generator + guide-search.js"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "production",
+      "pagesAffected": 1
+    },
+    {
+      "id": "coordination-of-care",
+      "name": "Coordinating medical care (topic-gated prep)",
+      "kind": "clinical",
+      "entity": "per-topic",
+      "owner": {
+        "clinical": "Dr. Swati Pandey",
+        "editorial": "Content OS",
+        "engineering": "answer-seeds generator"
+      },
+      "version": "v2.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "approved",
+      "status": "production",
+      "pagesAffected": 0
+    },
+    {
+      "id": "adhd-visit-prep",
+      "name": "ADHD childhood-vs-adult onset prep",
+      "kind": "clinical",
+      "entity": "adult-adhd",
+      "owner": {
+        "clinical": "Dr. Natasha Desai",
+        "editorial": "ADHD Cluster",
+        "engineering": "content-assembly"
+      },
+      "version": "v2.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "approved",
+      "status": "production",
+      "pagesAffected": 0
+    },
+    {
+      "id": "glp1-emergency-node",
+      "name": "GLP-1 emergency decision node",
+      "kind": "clinical",
+      "entity": "glp1-therapy",
+      "owner": {
+        "clinical": "Dr. Swati Pandey",
+        "editorial": "Metabolic Cluster",
+        "engineering": "answer-engagement generator"
+      },
+      "version": "v2.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "approved",
+      "status": "production",
+      "pagesAffected": 0
+    },
+    {
+      "id": "trt-monitoring-disclaimer",
+      "name": "TRT monitoring / fertility disclaimer",
+      "kind": "clinical",
+      "entity": "testosterone-therapy",
+      "owner": {
+        "clinical": "Dr. Sneh Pandey",
+        "editorial": "Men's Cluster",
+        "engineering": "answer-seeds generator"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "approved",
+      "status": "production",
+      "pagesAffected": 0
+    },
+    {
+      "id": "SIYA:CA-CITY-ANSWER",
+      "name": "California metro directory on answers",
+      "kind": "geo",
+      "entity": "adhd-california",
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "ADHD Cluster",
+        "engineering": "ca-city-linking"
+      },
+      "version": "v0-retired",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "deprecated",
+      "pagesAffected": 0
+    }
+  ]
+}
