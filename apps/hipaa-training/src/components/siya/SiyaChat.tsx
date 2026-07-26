@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState } from "react";
 import Link from "next/link";
 import { SIYA_OPENING, SIYA_QUICK_PROMPTS } from "@/lib/siya-os/config";
+import { BRAND } from "@/lib/brand";
 
 type ChatLink = { label: string; href: string };
 type ChatMessage = { id: string; role: "assistant" | "user"; content: string; links?: ChatLink[] };
@@ -63,24 +64,24 @@ export function SiyaChat() {
   );
 
   return (
-    <div className="flex h-full min-h-0 flex-col">
-      <div ref={listRef} className="flex-1 overflow-y-auto px-4 py-6">
+    <div className="flex h-full min-h-0 flex-col bg-white/50">
+      <div ref={listRef} className="flex-1 overflow-y-auto px-4 py-6 md:px-8">
         <div className="mx-auto max-w-2xl space-y-4">
           {messages.map((msg) => (
             <div key={msg.id} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
               <div
-                className={`max-w-[92%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${
+                className={`max-w-[92%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap shadow-[var(--siya-shadow)] ${
                   msg.role === "user"
-                    ? "bg-teal-600 text-white"
-                    : "border border-zinc-200 bg-white text-zinc-700 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300"
+                    ? "bg-[var(--siya-primary)] text-white"
+                    : "border border-[var(--siya-border)] bg-white text-[var(--siya-text-secondary)]"
                 }`}
               >
                 {msg.role === "assistant" ? mdLite(msg.content) : msg.content}
                 {msg.links?.length ? (
-                  <ul className="mt-2 space-y-1 border-t border-zinc-100 pt-2 dark:border-zinc-800">
+                  <ul className="mt-2 space-y-1 border-t border-[var(--siya-border)] pt-2">
                     {msg.links.map((l) => (
                       <li key={l.href}>
-                        <Link href={l.href} className="text-teal-600 underline dark:text-teal-400">
+                        <Link href={l.href} className="font-medium text-[var(--siya-accent)] underline underline-offset-2">
                           {l.label}
                         </Link>
                       </li>
@@ -90,10 +91,10 @@ export function SiyaChat() {
               </div>
             </div>
           ))}
-          {loading ? <p className="text-sm text-zinc-400">Siya is thinking…</p> : null}
+          {loading ? <p className="text-sm text-[var(--siya-text-muted)]">Siya is thinking…</p> : null}
         </div>
       </div>
-      <div className="border-t border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
+      <div className="border-t border-[var(--siya-border)] bg-white p-4 md:px-8">
         <div className="mx-auto max-w-2xl">
           <div className="mb-3 flex flex-wrap gap-2">
             {SIYA_QUICK_PROMPTS.map((p) => (
@@ -101,7 +102,7 @@ export function SiyaChat() {
                 key={p}
                 type="button"
                 onClick={() => void send(p)}
-                className="rounded-full border border-zinc-200 px-3 py-1 text-xs text-zinc-600 hover:bg-teal-50 dark:border-zinc-700 dark:text-zinc-400"
+                className="rounded-full border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-3 py-1.5 text-xs text-[var(--siya-text-secondary)] transition hover:border-[var(--siya-accent)] hover:bg-[var(--siya-bg-subtle)]"
               >
                 {p}
               </button>
@@ -118,16 +119,22 @@ export function SiyaChat() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask about HIPAA, billing, escalation…"
-              className="min-w-0 flex-1 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm dark:border-zinc-600 dark:bg-zinc-900"
+              className="min-w-0 flex-1 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-4 py-2.5 text-sm outline-none focus:border-[var(--siya-accent)] focus:ring-2 focus:ring-[var(--siya-accent)]/20"
             />
             <button
               type="submit"
               disabled={loading || !input.trim()}
-              className="rounded-xl bg-teal-600 px-4 py-2.5 text-sm font-medium text-white disabled:opacity-50"
+              className="rounded-xl bg-[var(--siya-accent)] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--siya-accent-hover)] disabled:opacity-50"
             >
               Send
             </button>
           </form>
+          <p className="mt-2 text-center text-xs text-[var(--siya-text-muted)]">
+            {BRAND.internalBadge} ·{" "}
+            <Link href="/training" className="text-[var(--siya-accent)] underline">
+              Certification course
+            </Link>
+          </p>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 /** Internal-only SiyaOS branding and escalation contacts (override via public env). */
 
 export const SIYA_OPENING =
-  "Hi — I'm **Siya**, your personal work assistant for SiyaOS. I can help with HIPAA basics, billing workflow questions, telehealth privacy, and **who to escalate to**. I don't replace official policy or handle patient-specific PHI in chat. How can I help?";
+  "Hi — I'm **Siya**, your **Siya Assistant** for internal workflow. I can help with HIPAA basics, billing questions, telehealth privacy, and **who to escalate to**. I don't replace official policy or handle patient-specific PHI in chat. How can I help?";
 
 export const SIYA_QUICK_PROMPTS = [
   "Who do I escalate a billing refund to?",

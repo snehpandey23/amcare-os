@@ -6,6 +6,7 @@ import { getModulesForRole } from "@/content/modules";
 import { useClientProgress } from "@/hooks/useClientProgress";
 import { RolePicker } from "@/components/training/RolePicker";
 import type { WorkforceRole } from "@/lib/types";
+import { BRAND } from "@/lib/brand";
 
 export default function DashboardPage() {
   const { progress, updateRole, updateLearnerName, reset } = useClientProgress();
@@ -23,15 +24,18 @@ export default function DashboardPage() {
   return (
     <div className="p-6 md:p-10">
       <div className="mx-auto max-w-3xl">
-        <p className="text-sm font-medium uppercase tracking-wide text-teal-600 dark:text-teal-400">
-          Workforce training
+        <p className="text-sm font-medium uppercase tracking-wide text-[var(--siya-accent)]">
+          Optional certification
         </p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight">HIPAA Training Dashboard</h1>
-        <p className="mt-3 text-zinc-600 dark:text-zinc-400">
-          Structured modules follow <strong>HIPAA Training Outline for Healthcare Providers</strong> in your welcome
-          kit. Quizzes use items from <strong>HIPAA Test for Healthcare Providers</strong> with explanations keyed to
-          your <strong>HIPAA Manual (v2025.A)</strong> themes. Verify penalty dollar amounts and any updates with your
-          compliance officer—some figures change when regulations are updated.
+        <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-3xl font-semibold tracking-tight text-[var(--siya-primary)]">
+          HIPAA workforce training
+        </h1>
+        <p className="mt-3 text-[var(--siya-text-secondary)]">
+          Modules and quizzes for formal HIPAA certification. For day-to-day help, use{" "}
+          <Link href="/" className="font-medium text-[var(--siya-accent)] underline">
+            {BRAND.appName}
+          </Link>
+          .
         </p>
 
         <section className="mt-8 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">

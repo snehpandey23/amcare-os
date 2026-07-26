@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { isTrainingAuthRequired } from "@/lib/trainingConfig";
+import { BRAND } from "@/lib/brand";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -59,11 +61,14 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-100 p-6 dark:bg-zinc-950">
-      <div className="w-full max-w-md rounded-2xl border border-zinc-200 bg-white p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-        <h1 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">HIPAA training sign in</h1>
-        <p className="mt-1 text-sm text-zinc-500">
-          Use the account your organization provided. Progress syncs to the training server.
+    <div className="siya-page-bg flex min-h-screen items-center justify-center p-6">
+      <div className="w-full max-w-md rounded-[var(--siya-radius-lg)] border border-[var(--siya-border)] bg-white p-8 shadow-[var(--siya-shadow-lg)]">
+        <Image src="/assets/images/siya-health-logo.png" alt="Siya Health" width={140} height={42} className="h-9 w-auto" />
+        <h1 className="mt-6 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
+          Sign in to {BRAND.appName}
+        </h1>
+        <p className="mt-1 text-sm text-[var(--siya-text-muted)]">
+          Workforce accounts sync certification progress to your organization.
         </p>
 
         {allowRegister ? (

@@ -1,11 +1,28 @@
 import type { Metadata } from "next";
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import ClientShell from "@/components/training/ClientShell";
+import { BRAND } from "@/lib/brand";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-poppins",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "SiyaOS — Internal workforce assistant",
-  description: "Siya assistant for HIPAA, billing workflow, and escalation. Optional HIPAA certification training.",
+  title: `${BRAND.appName} · Siya Health`,
+  description:
+    "Internal Siya Assistant for HIPAA, billing workflow, escalation pathways, and optional workforce certification.",
+  applicationName: BRAND.appName,
 };
 
 export default function RootLayout({
@@ -14,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body className="min-h-screen antialiased">
         <AuthProvider>
           <ClientShell>{children}</ClientShell>

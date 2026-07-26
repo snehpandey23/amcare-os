@@ -6,6 +6,7 @@ import type { CourseModule } from "@/lib/types";
 import type { ProgressState } from "@/lib/types";
 import { useAuth } from "@/context/AuthContext";
 import { isTrainingAuthRequired } from "@/lib/trainingConfig";
+import { BRAND } from "@/lib/brand";
 
 export function Sidebar({
   modules,
@@ -22,15 +23,15 @@ export function Sidebar({
   const pct = total ? Math.round((done.size / total) * 100) : 0;
 
   return (
-    <aside className="flex w-64 shrink-0 flex-col border-r border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
-      <div className="border-b border-zinc-200 p-4 dark:border-zinc-800">
-        <Link href="/" className="text-lg font-semibold tracking-tight text-teal-700 dark:text-teal-400">
-          HIPAA Training
+    <aside className="flex w-64 shrink-0 flex-col border-r border-[var(--siya-border)] bg-white">
+      <div className="border-b border-[var(--siya-border)] p-4">
+        <Link href="/" className="text-sm font-semibold text-[var(--siya-primary)]">
+          ← {BRAND.appName}
         </Link>
-        <p className="mt-1 text-xs text-zinc-500">Workforce • {progress?.courseVersion ?? "…"}</p>
-        <div className="mt-3 h-2 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
+        <p className="mt-1 text-xs text-[var(--siya-text-muted)]">Certification · {progress?.courseVersion ?? "…"}</p>
+        <div className="mt-3 h-2 overflow-hidden rounded-full bg-[var(--siya-bg-subtle)]">
           <div
-            className="h-full rounded-full bg-teal-600 transition-all dark:bg-teal-500"
+            className="h-full rounded-full bg-[var(--siya-accent)] transition-all"
             style={{ width: `${pct}%` }}
           />
         </div>
@@ -60,13 +61,13 @@ export function Sidebar({
                   href={`/module/${m.id}`}
                   className={`flex items-center gap-2 rounded-lg px-3 py-2 transition-colors ${
                     active
-                      ? "bg-teal-50 font-medium text-teal-800 dark:bg-teal-950/50 dark:text-teal-200"
-                      : "text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900"
+                      ? "bg-[var(--siya-bg-subtle)] font-medium text-[var(--siya-primary)]"
+                      : "text-[var(--siya-text-secondary)] hover:bg-[var(--siya-bg-page)]"
                   }`}
                 >
                   <span
                     className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs ${
-                      complete ? "bg-teal-600 text-white" : "bg-zinc-200 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400"
+                      complete ? "bg-[var(--siya-accent)] text-white" : "bg-[var(--siya-bg-subtle)] text-[var(--siya-text-muted)]"
                     }`}
                   >
                     {complete ? "✓" : m.order}
@@ -77,18 +78,16 @@ export function Sidebar({
             );
           })}
         </ul>
-        <div className="mt-4 border-t border-zinc-200 pt-3 dark:border-zinc-800">
-          <Link href="/" className="block rounded-lg px-3 py-2 text-sm font-medium text-teal-700 dark:text-teal-400">
-            ← Siya assistant
+        <div className="mt-4 border-t border-[var(--siya-border)] pt-3">
+          <Link href="/training" className="block rounded-lg px-3 py-2 text-sm text-[var(--siya-text-secondary)] hover:bg-[var(--siya-bg-page)]">
+            Certification dashboard
           </Link>
-          <Link href="/training" className="block rounded-lg px-3 py-2 text-sm text-zinc-600 dark:text-zinc-400">
-            Training dashboard
-          </Link>
-          <Link href="/resources" className="block rounded-lg px-3 py-2 text-sm text-zinc-600 dark:text-zinc-400">
+          <Link href="/resources" className="block rounded-lg px-3 py-2 text-sm text-[var(--siya-text-secondary)] hover:bg-[var(--siya-bg-page)]">
             Reference library
           </Link>
-          <Link href="/final"
-            className="block rounded-lg px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900"
+          <Link
+            href="/final"
+            className="block rounded-lg px-3 py-2 text-sm font-medium text-[var(--siya-text-secondary)] hover:bg-[var(--siya-bg-page)]"
           >
             Final assessment
           </Link>

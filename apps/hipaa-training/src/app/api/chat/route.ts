@@ -1,8 +1,9 @@
 import { runSiyaAssistant } from "@/lib/siya-os/engine";
 import { SIYA_OPENING } from "@/lib/siya-os/config";
+import { BRAND } from "@/lib/brand";
 
 export async function GET() {
-  return Response.json({ name: "SiyaOS", openingMessage: SIYA_OPENING });
+  return Response.json({ name: BRAND.appName, openingMessage: SIYA_OPENING });
 }
 
 export async function POST(req: Request) {
