@@ -240,7 +240,10 @@ function App() {
     }
 
     const userMessage = buildUserMessage(action, customMessage)
-    const nextMessages = [...messages, { role: 'user', content: userMessage }]
+    const nextMessages: ChatMessage[] = [
+      ...messages,
+      { role: 'user', content: userMessage },
+    ]
 
     setMessages(nextMessages)
     setInputMessage('')

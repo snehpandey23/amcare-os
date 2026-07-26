@@ -449,7 +449,7 @@ Generated: 2026-07-21
 - **URL:** https://siya.health/answers
 - **Page Type:** Health Guide Hub
 - **Primary Purpose:** FAQ/PAA discovery hub for AI and organic search
-- **Primary CTA:** Join Our Health Guide → https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl
+- **Primary CTA:** Join Our Health Guide → https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx
 - **Secondary CTA:** View all Metabolic Health guides → #guides-metabolic-all
 - **Traffic Intent:** Informational / Navigational
 - **Target Keyword:** Health Guides
@@ -1300,7 +1300,7 @@ Generated: 2026-07-21
 - **URL:** https://siya.health/blog
 - **Page Type:** Blog Hub
 - **Primary Purpose:** Content discovery; distribute authority to articles
-- **Primary CTA:** Join our newsletter → https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl
+- **Primary CTA:** Join our newsletter → https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx
 - **Secondary CTA:** Read health guides → /answers
 - **Traffic Intent:** Informational / Navigational
 - **Target Keyword:** Health Insights — Evidence-Based, Clinical
@@ -1917,7 +1917,7 @@ Generated: 2026-07-21
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Join Our Health Guide → https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl
+- **Secondary CTA:** Join Our Health Guide → https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx
 - **Traffic Intent:** Informational
 - **Target Keyword:** How to Safely Get Prescriptions Online (2026)
 - **Word Count:** 1656
@@ -1931,7 +1931,7 @@ Generated: 2026-07-21
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** Join Our Health Guide → https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl
+- **Secondary CTA:** Join Our Health Guide → https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx
 - **Traffic Intent:** Informational
 - **Target Keyword:** Insomnia Treatment Beyond Medication (2026)
 - **Word Count:** 1729
@@ -2029,7 +2029,7 @@ Generated: 2026-07-21
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** Join Our Health Guide → https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl
+- **Secondary CTA:** Join Our Health Guide → https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx
 - **Traffic Intent:** Informational
 - **Target Keyword:** Minoxidil for Hair Loss: Does It Work? (2026)
 - **Word Count:** 1847
@@ -2099,7 +2099,7 @@ Generated: 2026-07-21
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** Join Our Health Guide → https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl
+- **Secondary CTA:** Join Our Health Guide → https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx
 - **Traffic Intent:** Informational
 - **Target Keyword:** Oral vs Topical Minoxidil: Which Is Right? (2026)
 - **Word Count:** 1731
@@ -2169,7 +2169,7 @@ Generated: 2026-07-21
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** Join Our Health Guide → https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl
+- **Secondary CTA:** Join Our Health Guide → https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx
 - **Traffic Intent:** Informational
 - **Target Keyword:** Sildenafil for Erectile Dysfunction: What to Expect (2026)
 - **Word Count:** 1767
@@ -2239,7 +2239,7 @@ Generated: 2026-07-21
 - **Page Type:** Blog Article
 - **Primary Purpose:** Educational SEO; nurture toward clinical services
 - **Primary CTA:** Take Free ADHD Screening → /adhd-screening
-- **Secondary CTA:** Join Our Health Guide → https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl
+- **Secondary CTA:** Join Our Health Guide → https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx
 - **Traffic Intent:** Informational
 - **Target Keyword:** Vyvanse vs Adderall: Which Lasts Longer for Adults?
 - **Word Count:** 1377

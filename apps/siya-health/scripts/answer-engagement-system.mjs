@@ -1,6 +1,9 @@
 /**
  * Health Guide visual engagement — reuses blog-engagement-components.
  * Consumed by generate-answer-pages.mjs (not hand-edited HTML).
+ *
+ * Content Assembly: decision trees are topic+slug gated.
+ * GLP-1 emergency nodes only render on GLP-1 pages.
  */
 import {
   clinicalPearl,
@@ -12,6 +15,7 @@ import {
   mythVsReality,
   symptomFlowchart,
 } from './blog-engagement-components.mjs';
+import { isGlp1Page } from './content-assembly.mjs';
 
 /** Component registry for audits */
 export const ENGAGE_COMPONENTS = {
@@ -118,40 +122,51 @@ function defaultDecisionNodes(seed, topic) {
   if (topic === 'adhd') {
     return [
       {
-        question: 'Do symptoms impair work, relationships, or daily tasks most weeks?',
-        yes: 'Consider structured ADHD evaluation—not online quizzes alone.',
-        no: 'Screen sleep, mood, and thyroid; revisit if worsening.',
+        question: `Does “${q}” impair work, relationships, or daily tasks most weeks?`,
+        yes: `Consider structured ADHD evaluation for “${q}”—not online quizzes alone.`,
+        no: `If “${q}” is mild or situational, screen sleep, mood, and thyroid; revisit if worsening.`,
       },
       {
-        question: 'Urgent safety concerns (suicidal thoughts, chest pain, severe confusion)?',
+        question: `While exploring “${q},” are there urgent safety concerns (suicidal thoughts, chest pain, severe confusion)?`,
         yes: 'Seek emergency care now—not telehealth intake.',
         branch: true,
       },
     ];
   }
   if (topic === 'weight-loss') {
-    return [
+    const nodes = [
       {
-        question: 'Persistent fatigue, cravings, or weight change despite “normal” screening labs?',
-        yes: 'Discuss metabolic labs, sleep history, and GLP-1 eligibility with a clinician.',
-        no: 'Continue lifestyle structure; recheck if symptoms escalate.',
-      },
-      {
-        question: 'Severe abdominal pain, vomiting, or dehydration on GLP-1?',
-        yes: 'Contact prescriber promptly; emergency care if unable to hydrate.',
-        branch: true,
+        question: `Does “${q}” include persistent fatigue, cravings, or weight change despite “normal” screening labs?`,
+        yes: isGlp1Page(seed)
+          ? `For “${q},” discuss metabolic labs, sleep history, and GLP-1 eligibility with a clinician.`
+          : `For “${q},” discuss metabolic labs, sleep history, and nutrition patterns with a clinician.`,
+        no: `If “${q}” is stable, continue lifestyle structure; recheck if symptoms escalate.`,
       },
     ];
+    if (isGlp1Page(seed)) {
+      nodes.push({
+        question: `While on treatment related to “${q},” do you have severe abdominal pain, vomiting, or dehydration on GLP-1?`,
+        yes: 'Contact prescriber promptly; emergency care if unable to hydrate.',
+        branch: true,
+      });
+    } else {
+      nodes.push({
+        question: `While exploring “${q},” do you have chest pain, fainting, or inability to keep fluids down?`,
+        yes: 'Seek emergency care now—not messaging queues.',
+        branch: true,
+      });
+    }
+    return nodes;
   }
   if (topic === 'mens-health') {
     return [
       {
-        question: 'Symptoms plus repeatedly low morning testosterone on proper testing?',
-        yes: 'Discuss TRT risks/benefits, fertility, and monitoring—not supplement stacks.',
-        no: 'Evaluate sleep apnea, depression, and medications before hormone labels.',
+        question: `For “${q},” do you have symptoms plus repeatedly low morning testosterone on proper testing?`,
+        yes: `When evaluating “${q},” discuss TRT risks/benefits, fertility, and monitoring—not supplement stacks.`,
+        no: `Before labeling “${q}” as low testosterone, evaluate sleep apnea, depression, and medications.`,
       },
       {
-        question: 'Chest pain, stroke symptoms, or acute testicular pain?',
+        question: `While exploring “${q},” do you have chest pain, stroke symptoms, or acute testicular pain?`,
         yes: 'Emergency evaluation.',
         branch: true,
       },
@@ -159,12 +174,12 @@ function defaultDecisionNodes(seed, topic) {
   }
   return [
     {
-      question: `Does "${q}" affect your safety or daily function for weeks?`,
-      yes: 'Start Secure Medical Chat for structured next steps when clinically appropriate.',
-      no: 'Monitor symptoms; use related Health Guides for background education.',
+      question: `Does “${q}” affect your safety or daily function for weeks?`,
+      yes: `Start Secure Medical Chat for structured next steps on “${q}” when clinically appropriate.`,
+      no: `If “${q}” is mild, monitor symptoms and use related Health Guides for background education.`,
     },
     {
-      question: 'Emergency symptoms (chest pain, stroke signs, severe confusion)?',
+      question: `While exploring “${q},” do you have emergency symptoms (chest pain, stroke signs, severe confusion)?`,
       yes: 'Call 911 or go to emergency care.',
       branch: true,
     },
@@ -269,7 +284,8 @@ function aboveFoldForSeed(seed) {
 }
 
 function midBreakForSeed(seed) {
-  const { topic, slug } = seed;
+  const { topic, slug, question } = seed;
+  const focus = question.replace(/\?+$/, '');
   if (topic === 'adhd' || slug.includes('adhd')) {
     return {
       type: 'myth',
@@ -279,35 +295,40 @@ function midBreakForSeed(seed) {
         mythVsReality({
           pairs: [
             {
-              myth: 'An online quiz alone can diagnose ADHD.',
-              reality: 'Validated screeners help, but diagnosis requires clinician history and rule-outs.',
+              myth: `An online quiz alone can settle “${focus}.”`,
+              reality: `Screeners help frame “${focus},” but diagnosis still requires clinician history and rule-outs.`,
             },
             {
-              myth: 'Medication is the only treatment.',
-              reality: 'Skills, sleep, and therapy matter; meds are one tool when appropriate.',
+              myth: `Medication is the only way to address “${focus}.”`,
+              reality: `For “${focus},” skills, sleep, and therapy matter; medication is one tool when clinically appropriate.`,
             },
           ],
         }),
     };
   }
   if (topic === 'weight-loss') {
+    const pairs = [
+      {
+        myth: `Normal labs mean “${focus}” is not a clinical issue.`,
+        reality: `When exploring “${focus},” insulin resistance and sleep apnea often hide behind “normal” panels.`,
+      },
+    ];
+    if (isGlp1Page(seed)) {
+      pairs.push({
+        myth: `GLP-1 therapy alone settles “${focus}.”`,
+        reality: `Even when addressing “${focus}” with GLP-1 therapy, protein, strength training, and sleep still anchor long-term outcomes.`,
+      });
+    } else {
+      pairs.push({
+        myth: `Willpower alone settles “${focus}.”`,
+        reality: `For “${focus},” sleep, medication effects, and metabolic labs often explain why effort is not enough.`,
+      });
+    }
     return {
       type: 'myth',
       placement: 'Mid-article (after section 2)',
       component: 'mythVsReality',
-      build: () =>
-        mythVsReality({
-          pairs: [
-            {
-              myth: 'Normal labs mean metabolic health is fine.',
-              reality: 'Insulin resistance and sleep apnea often hide behind “normal” panels.',
-            },
-            {
-              myth: 'GLP-1 replaces lifestyle change.',
-              reality: 'Protein, strength training, and sleep still anchor long-term outcomes.',
-            },
-          ],
-        }),
+      build: () => mythVsReality({ pairs }),
     };
   }
   return {
@@ -316,7 +337,7 @@ function midBreakForSeed(seed) {
     component: 'clinicalPearl',
     build: () =>
       clinicalPearl({
-        body: `Bring a one-week timeline to visits: sleep hours, worst symptoms, and what you already tried. It speeds decisions about "${seed.question.replace(/\?+$/, '')}" faster than a single lab PDF.`,
+        body: `Bring a one-week timeline to visits: sleep hours, worst symptoms, and what you already tried. It speeds decisions about "${focus}" faster than a single lab PDF.`,
       }),
   };
 }

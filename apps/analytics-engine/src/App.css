@@ -2,15 +2,268 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: #f8fafc;
+  color: #0f172a;
 }
 
-header {
-  background: #7c3aed;
+.app-header {
+  background: #1e1b4b;
   color: white;
-  padding: 1rem 2rem;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
 }
 
-main {
+.app-header h1 {
+  font-size: 1.6rem;
+  margin-bottom: 0.35rem;
+}
+
+.app-header p {
+  opacity: 0.85;
+  font-size: 0.95rem;
+}
+
+.badge {
+  border-radius: 999px;
+  background: #6d28d9;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.app-main {
   flex: 1;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.score-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+.score-value {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+.score-status {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.score-status--on-track {
+  color: #16a34a;
+}
+
+.score-status--at-risk {
+  color: #d97706;
+}
+
+.score-status--off-track {
+  color: #dc2626;
+}
+
+.score-status--no-data {
+  color: #64748b;
+}
+
+.score-progress {
+  background: #e2e8f0;
+  border-radius: 999px;
+  height: 10px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.score-bar {
+  background: linear-gradient(90deg, #7c3aed, #3b82f6);
+  height: 100%;
+}
+
+.score-note {
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+.score-details ul {
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.panel {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+
+.panel h3 {
+  margin-bottom: 0.5rem;
+}
+
+.panel-note {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: 1.2rem;
+}
+
+.panel-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.panel-grid label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.panel-grid input {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.95rem;
+}
+
+.panel-grid input:focus {
+  outline: 2px solid #6366f1;
+  border-color: transparent;
+}
+
+.primary {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary:hover {
+  background: #4338ca;
+}
+
+.secondary {
+  background: #e2e8f0;
+  color: #1e293b;
+  border: none;
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.secondary:hover {
+  background: #cbd5f5;
+}
+
+.import-block {
+  border-top: 1px solid #e2e8f0;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.import-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.import-status {
+  font-size: 0.9rem;
+}
+
+.import-status--success {
+  color: #16a34a;
+}
+
+.import-status--error {
+  color: #dc2626;
+}
+
+.history {
+  padding-top: 1rem;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.table {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background: #f8fafc;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.table-head {
+  background: #eef2ff;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.score-pill {
+  background: #e0e7ff;
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.empty-state {
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 900px) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .table-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }

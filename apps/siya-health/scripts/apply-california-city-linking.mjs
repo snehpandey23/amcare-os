@@ -308,15 +308,8 @@ for (const city of CITIES) {
   }
 }
 
-// 7) Key answers that mention California
-const ANSWER_TARGETS = [
-  'answers/can-adhd-be-diagnosed-online.html',
-  'answers/is-online-adhd-diagnosis-legitimate.html',
-  'answers/screening-vs-adhd-evaluation.html',
-  'answers/how-long-adhd-evaluation.html',
-  'answers/what-included-199-adhd-evaluation.html',
-  'answers/telehealth-adhd-texas.html', // add CA contrast link only if file exists - skip texas-named
-];
+// 7) Educational Health Guides — STRIP metro directories (Content Assembly System).
+// Geography belongs on geo landers and the California cornerstone, not on FAQ guides.
 for (const rel of [
   'answers/can-adhd-be-diagnosed-online.html',
   'answers/is-online-adhd-diagnosis-legitimate.html',
@@ -326,20 +319,25 @@ for (const rel of [
   'answers/late-adhd-diagnosis-adults.html',
   'answers/signs-of-adult-adhd.html',
   'answers/adhd-in-women.html',
+  'answers/telehealth-adhd-california.html',
+  'answers/telehealth-adhd-texas.html',
 ]) {
   if (!exists(rel)) continue;
   let html = read(rel);
-  const marker = 'CA-CITY-ANSWER';
-  const block = `      <section class="section section-tinted" aria-label="California ADHD care">
-        <div class="container">
-          <p class="lead" style="margin:0;">In California, adults often start with <a href="/blog/online-adhd-diagnosis-california">online ADHD diagnosis in California</a> or metro guides for <a href="/blog/adhd-treatment-los-angeles-ca">Los Angeles</a>, <a href="/blog/adhd-treatment-san-diego-ca">San Diego</a>, <a href="/blog/adhd-treatment-san-francisco-ca">San Francisco</a>, <a href="/blog/adhd-treatment-san-jose-ca">San Jose</a>, <a href="/blog/adhd-treatment-sacramento-ca">Sacramento</a>, <a href="/blog/adhd-treatment-oakland-ca">Oakland</a>, and <a href="/blog/adhd-treatment-orange-county-ca">Orange County</a>—then book care via <a href="/adhd-care">ADHD evaluation</a>.</p>
-        </div>
-      </section>`;
-  html = softStrip(html, marker);
-  html = upsertMarkerBlock(html, marker, block);
-  write(rel, html);
-  console.log('OK answer', rel);
-  n += 1;
+  const before = html;
+  html = softStrip(html, 'CA-CITY-ANSWER');
+  // Also remove legacy unmarked California metro dumps if present.
+  html = html.replace(
+    /\s*<section class="section section-tinted" aria-label="California ADHD care">[\s\S]*?<\/section>/g,
+    '',
+  );
+  if (html !== before) {
+    write(rel, html);
+    console.log('OK answer (stripped CA metro directory)', rel);
+    n += 1;
+  } else {
+    console.log('OK answer (already clean)', rel);
+  }
 }
 
 console.log(`California city linking applied: ${n} files`);

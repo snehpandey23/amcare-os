@@ -18,7 +18,8 @@
       "@amcare/database": ["./packages/database/src"],
       "@amcare/auth": ["./packages/auth/src"],
       "@amcare/audit": ["./packages/audit/src"],
-      "@amcare/api-client": ["./packages/api-client/src"]
+      "@amcare/api-client": ["./packages/api-client/src"],
+      "@amcare/emr-core": ["./packages/emr-core/src"]
     }
   },
   "include": [],

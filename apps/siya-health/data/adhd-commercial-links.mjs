@@ -62,54 +62,32 @@ function link(href, label) {
   return `<a href="${href}">${label}</a>`;
 }
 
-/** Contextual care-pathways block for /adhd-care */
+/** ADHD care pathways on /adhd-care — assembly-capped. */
 export function renderAdhdCarePathwaysSection() {
-  const stateLinks = ADHD_GEO_LINKS.map((g) => link(g.href, g.label)).join(', ');
-  const screening = ADHD_SCREENING_LINKS.map((s) => link(s.href, s.label)).join(' or ');
-  const services = ADHD_SERVICE_LINKS.map((s) => link(s.href, s.label)).join(', ');
-
   return `<!-- SIYA:ADHD-CARE-PATHWAYS -->
-      <section class="section section-tinted adhd-care-pathways" id="adhd-care-pathways" aria-labelledby="adhd-care-pathways-heading">
+      <section class="section section-tinted adhd-care-pathways" id="adhd-care-pathways" aria-labelledby="adhd-care-pathways-heading" data-assembly="care-pathways">
         <div class="container">
           <div class="section-header">
-            <h2 id="adhd-care-pathways-heading">ADHD care pathways by location</h2>
-            <p class="lead">Siya Health serves adults in California, Texas, Pennsylvania, and Florida. Start with ${screening}, then explore ${services} when you are ready for clinical care.</p>
+            <h2 id="adhd-care-pathways-heading">Ready to take the next step?</h2>
+            <p class="lead">Start with ${link('/adhd-screening', 'free ADHD screening')}, then review ${link('/pricing', 'evaluation pricing')} when you are ready for clinical care.</p>
           </div>
-          <div class="adhd-care-pathways-grid" style="display:grid;gap:1.5rem;max-width:720px;margin:0 auto;">
-            <div>
-              <h3 style="font-size:1.1rem;margin:0 0 0.5rem;">State &amp; metro pages</h3>
-              <p style="margin:0;">${stateLinks}.</p>
-            </div>
-            <div>
-              <h3 style="font-size:1.1rem;margin:0 0 0.5rem;">Screening &amp; evaluation</h3>
-              <p style="margin:0;">${link('/online-adhd-test', 'Free online ADHD test')} and ${link('/adult-adhd-screening-california', 'California ADHD screening')} help you decide if evaluation makes sense. For clinical next steps see ${link('/adult-adhd-diagnosis', 'adult ADHD diagnosis online')} and ${link('/adhd-evaluation-cost', 'evaluation cost')}.</p>
-            </div>
-            <div>
-              <h3 style="font-size:1.1rem;margin:0 0 0.5rem;">After diagnosis</h3>
-              <p style="margin:0;">Patients who complete evaluation may continue with ${link('/adhd-treatment-online', 'online ADHD treatment')} and medication follow-up. Educational guides live on <a href="/answers#guides-adhd">Health Guides</a> and the <a href="/blog/adhd">ADHD articles hub</a>.</p>
-            </div>
+          <div style="max-width:640px;margin:0 auto;text-align:center;">
+            <p><a class="button ds-button ds-button--primary" href="/adhd-care#how-it-works" data-siya-track="primary-cta-click" data-siya-location="adhd-care-pathways">See how ADHD care works →</a></p>
+            <p class="answers-next-step-availability">Available in California, Texas, Pennsylvania, and Florida.</p>
           </div>
         </div>
       </section>
       <!-- /SIYA:ADHD-CARE-PATHWAYS -->`;
 }
 
-/** Contextual block for /blog/adhd hub */
+/** Contextual block for /blog/adhd hub — assembly-capped (≤3 contextual + 1 button). */
 export function renderBlogAdhdCarePathwaysSection() {
-  const caScreen = link('/adult-adhd-screening-california', 'California screening page');
-  const onlineTest = link('/online-adhd-test', 'free online ADHD test');
-  const geoList = ADHD_GEO_LINKS.filter((g) => !g.metro)
-    .map((g) => link(g.href, g.label))
-    .join(', ');
-  const metroList = ADHD_GEO_LINKS.filter((g) => g.metro)
-    .map((g) => link(g.href, g.label))
-    .join(', ');
-
   return `<!-- SIYA:ADHD-BLOG-CARE-PATHWAYS -->
-          <section class="blog-hub-section adhd-blog-care-pathways" id="care-pathways" aria-labelledby="adhd-blog-care-pathways-heading">
+          <section class="blog-hub-section adhd-blog-care-pathways" id="care-pathways" aria-labelledby="adhd-blog-care-pathways-heading" data-assembly="care-pathways">
             <h2 id="adhd-blog-care-pathways-heading">From articles to clinical care</h2>
-            <p class="lead" style="max-width:720px;">Articles explain symptoms and legitimacy—clinical pages help you act. Try ${onlineTest} or ${caScreen} before booking. See ${link('/adhd-evaluation-cost', 'what the $149 evaluation includes')}, ${link('/adult-adhd-diagnosis', 'adult diagnosis pathways')}, and ${link('/adhd-treatment-online', 'ongoing treatment')} when you are ready.</p>
-            <p style="max-width:720px;">State-specific evaluation: ${geoList}. Metro guides: ${metroList}.</p>
+            <p class="lead" style="max-width:720px;">Articles explain symptoms and legitimacy—clinical pages help you act. Start with ${link('/adhd-screening', 'free ADHD screening')}, then review ${link('/adhd-care', 'ADHD evaluation &amp; care')} when you are ready.</p>
+            <p style="max-width:720px;"><a class="button ds-button ds-button--primary" href="/adhd-care" data-siya-track="primary-cta-click" data-siya-location="blog-adhd-care-pathways">Explore ADHD Care →</a></p>
+            <p class="answers-next-step-availability" style="max-width:720px;">Available in California, Texas, Pennsylvania, and Florida. State and metro guides live under ADHD Care—not as a directory on this hub.</p>
           </section>
           <!-- /SIYA:ADHD-BLOG-CARE-PATHWAYS -->`;
 }
@@ -139,23 +117,16 @@ export function renderAnswersHubCarePathwaysSection() {
           <!-- /SIYA:ANSWERS-ADHD-CARE-PATHWAYS -->`;
 }
 
-/** Geo context paragraph for shadow landing pages */
+/** Geo context for shadow LPs only — capped, no metro directory dump. */
 export function renderShadowLpGeoContext() {
-  const states = ADHD_GEO_LINKS.filter((g) => !g.metro)
-    .map((g) => link(g.href, g.label))
-    .join(', ');
-  const metros = ADHD_GEO_LINKS.filter((g) => g.metro)
-    .map((g) => link(g.href, g.label))
-    .join(', ');
-
   return `<!-- SIYA:ADHD-SHADOW-GEO-CONTEXT -->
-            <p class="adhd-shadow-geo-context" style="max-width:720px;margin:1.5rem auto 0;">Explore state pages: ${states}. Metro guides: ${metros}. Review ${link('/adhd-evaluation-cost', 'evaluation pricing')} or take ${link('/online-adhd-test', 'the free online ADHD test')} first.</p>
+            <p class="adhd-shadow-geo-context" style="max-width:720px;margin:1.5rem auto 0;" data-assembly="geo-context">Review ${link('/adhd-care', 'ADHD care')} and ${link('/pricing', 'evaluation pricing')}, or take ${link('/adhd-screening', 'the free ADHD screening')} first. Available in California, Texas, Pennsylvania, and Florida.</p>
             <!-- /SIYA:ADHD-SHADOW-GEO-CONTEXT -->`;
 }
 
-/** Screening cross-links for /online-adhd-test */
+/** Screening cross-links for /online-adhd-test — assembly-capped. */
 export function renderOnlineTestCrossLinks() {
   return `<!-- SIYA:ADHD-ONLINE-TEST-CROSS-LINKS -->
-            <p class="adhd-online-test-cross-links" style="max-width:720px;margin:1.5rem auto 0;">California residents: see ${link('/adult-adhd-screening-california', 'California ADHD screening')}. Ready for evaluation? ${link('/adult-adhd-diagnosis', 'Adult ADHD diagnosis online')} · ${link('/adhd-diagnosis-texas', 'Texas')} · ${link('/adhd-diagnosis-pennsylvania', 'Pennsylvania')} · ${link('/adhd-diagnosis-florida', 'Florida')}.</p>
+            <p class="adhd-online-test-cross-links" style="max-width:720px;margin:1.5rem auto 0;" data-assembly="test-cross-links">Ready for evaluation? See ${link('/adhd-care', 'ADHD care')} · ${link('/adult-adhd-screening-california', 'California screening')} · ${link('/pricing', 'pricing')}.</p>
             <!-- /SIYA:ADHD-ONLINE-TEST-CROSS-LINKS -->`;
 }

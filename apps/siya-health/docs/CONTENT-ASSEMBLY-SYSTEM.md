@@ -1,7 +1,7 @@
 # Content Assembly System
 
 ```text
-Status: Locked 2026-07-26
+Status: Locked 2026-07-26 (v2 — generator-enforced)
 Scope: Every page on siya.health (guides, blogs, services, hubs)
 Owner: Content OS / Editorial
 ```
@@ -17,20 +17,30 @@ Before any block renders, it must answer **yes** to:
 
 If no — the block is **not rendered**.
 
-## Page = optional blocks
+## Success metrics (must pass before new content waves)
 
-```
-Hero
- ↓ Main article / content
- ↓ Related Guides (optional)
- ↓ Clinical Care CTA (optional)
- ↓ Labs (optional)
- ↓ FAQs (optional)
- ↓ Sources
- ↓ Related Articles
-```
+| Metric | Target |
+|--------|--------|
+| Duplicate paragraph groups (excl. intentional boilerplate) | **&lt; 5** |
+| Irrelevant geography on educational pages | **0** |
+| Contextual links in any single section | **≤ 8** |
+| Primary CTAs per page | **1** |
+| Educational pages with unique context-aware closing | **100%** |
+| Editorial fingerprint on core content | **≥ 9/10** |
 
-Not every page gets every block. One separator between sections max; whitespace carries the rest.
+Validate: `node scripts/validate-content-assembly.mjs`
+
+## Implementation modules
+
+| Module | Role |
+|--------|------|
+| `scripts/content-assembly.mjs` | Gating helpers, unique closings, fingerprint scorer |
+| `data/answer-seeds.mjs` → `phase5CoordinationSection` | Topic + slug unique prep (no ADHD onset on metabolic pages) |
+| `scripts/answer-engagement-system.mjs` → `defaultDecisionNodes` | GLP-1 emergency branch only on GLP-1 pages |
+| `data/adhd-commercial-links.mjs` | Care-pathway blocks capped to ≤3 links + 1 button |
+| `scripts/apply-california-city-linking.mjs` | Strips metro directories from educational guides |
+| `scripts/generate-answer-pages.mjs` | Assembles unique closings; one primary CTA |
+| `scripts/validate-content-assembly.mjs` | CI-style metric gate |
 
 ## Clinical Care / next-step block — render conditions
 
@@ -44,33 +54,21 @@ Append a clinical-care CTA **only if all are true**:
 
 Otherwise omit entirely.
 
-State availability, when useful, is **one sentence** ("Available in California, Texas, Pennsylvania, and Florida.") — never a link directory.
+State availability, when useful, is **one sentence** — never a link directory.
 
-## Contextual CTAs by topic
+## Intentional boilerplate (excluded from duplicate counting)
 
-| If topic is… | Related resources |
-|--------------|-------------------|
-| Executive dysfunction | ADHD Screening · Executive Dysfunction Guide · ADHD Care |
-| Perimenopause | Women's Midlife Care · Perimenopause Guide · Labs |
-| Fatigue | Fatigue Assessment · Labs · Primary Care |
-| ADHD (general) | Free ADHD Screening · How evaluation works · ADHD Care |
+- Educational-only disclaimers
+- Concise-FAQ framing on Answers
+- Emergency / 911 lines
+- Clinical-review status badges
+- Footer state availability line
+- Cookie / tracking chrome
 
-## Separators
-
-- One `<hr>` (or none) between major sections.
-- Never two consecutive separators.
-- Prefer whitespace/section spacing over rules.
-
-## Generator instruction (for every appender)
-
-Replace "append block X to every page" with:
-
-```
-Render block X only if it passes the 5 render conditions above.
-Else omit. Max 3 contextual links. No unrelated geography.
-```
+Everything else must be unique enough that it does not appear on ≥4 pages.
 
 ## Companion audits
 
 - `docs/CONTENT-QA-CHECKLIST.md` — pre-publish, per article
-- `docs/CONTENT-COHESION-AUDIT.md` + `scripts/content-cohesion-audit.mjs` — monthly, automated bleed detection
+- `docs/CONTENT-COHESION-AUDIT.md` + `scripts/content-cohesion-audit.mjs` — monthly
+- `docs/CONTENT-ASSEMBLY-VALIDATION.json` — last metric run

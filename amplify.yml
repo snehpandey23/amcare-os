@@ -1,5 +1,9 @@
 # AWS Amplify build spec for OET LMS (monorepo)
+# Replace the URL below with your Railway app URL + /api (e.g. https://myapp.up.railway.app/api)
 version: 1
+env:
+  variables:
+    VITE_API_ORIGIN: "https://YOUR-RAILWAY-APP.up.railway.app/api"
 frontend:
   phases:
     preBuild:

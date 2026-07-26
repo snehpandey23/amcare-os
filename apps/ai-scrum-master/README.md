@@ -16,3 +16,14 @@ Beginner-friendly AI Scrum Master with guided backlog, priorities, and sprint pl
    - `ZOHO_CLIENT_SECRET`
    - `ZOHO_REDIRECT_URI` (e.g. `http://localhost:3010/api/zoho/callback`)
 3. Click **Connect Zoho** in the app and complete the consent flow.
+
+## AWS App Runner (single container)
+
+1. Build a container from the repo `Dockerfile`.
+2. Deploy to App Runner with:
+   - `PORT=3000`
+   - `PPLX_API_KEY=...`
+   - `ZOHO_CLIENT_ID=...`
+   - `ZOHO_CLIENT_SECRET=...`
+   - `ZOHO_REDIRECT_URI=https://<your-app-runner-url>/api/zoho/callback`
+   - `AI_SCRUM_MASTER_WEB_ORIGIN=https://<your-app-runner-url>`

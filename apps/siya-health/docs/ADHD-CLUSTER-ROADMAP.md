@@ -20,7 +20,7 @@
 | Perimenopause + ADHD | 🔴 Missing | 8 |
 | Florida | 🔴 Missing hub | 35 |
 | Pennsylvania | 🔴 Missing hub | 32 |
-| California | ⏸ Cleanup first | 28 |
+| California | 🚧 Q3: single cornerstone `/adult-adhd-california` (not diagnosis+treatment split) | 28 |
 
 ---
 

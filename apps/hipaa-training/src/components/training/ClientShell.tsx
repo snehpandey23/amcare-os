@@ -4,9 +4,24 @@ import type { ReactNode } from "react";
 import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { TrainingLayout } from "./TrainingLayout";
+import { AssistantShell } from "@/components/siya/AssistantShell";
 import { useClientProgress } from "@/hooks/useClientProgress";
 import { useAuth } from "@/context/AuthContext";
 import { getModulesForRole } from "@/content/modules";
+
+function isAssistantPrimaryRoute(pathname: string): boolean {
+  return pathname === "/" || pathname.startsWith("/resources");
+}
+
+function isTrainingRoute(pathname: string): boolean {
+  return (
+    pathname.startsWith("/training") ||
+    pathname.startsWith("/module") ||
+    pathname.startsWith("/final") ||
+    pathname.startsWith("/results") ||
+    pathname.startsWith("/certificate")
+  );
+}
 
 export default function ClientShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -28,18 +43,10 @@ export default function ClientShell({ children }: { children: ReactNode }) {
     }
   }, [authReady, authRequired, user, pathname, router]);
 
-  if (!authReady || !hydrated) {
+  if (!authReady) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-zinc-900">
-        <p className="text-zinc-500">Loading training…</p>
-      </div>
-    );
-  }
-
-  if (authRequired && user && !progress) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-zinc-900">
-        <p className="text-zinc-500">Loading your progress…</p>
+        <p className="text-zinc-500">Loading…</p>
       </div>
     );
   }
@@ -56,6 +63,34 @@ export default function ClientShell({ children }: { children: ReactNode }) {
     );
   }
 
-  const modules = getModulesForRole(progress?.role ?? "other");
-  return <TrainingLayout modules={modules} progress={progress}>{children}</TrainingLayout>;
+  if (isAssistantPrimaryRoute(pathname)) {
+    return <AssistantShell>{children}</AssistantShell>;
+  }
+
+  if (isTrainingRoute(pathname)) {
+    if (!hydrated) {
+      return (
+        <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-zinc-900">
+          <p className="text-zinc-500">Loading training…</p>
+        </div>
+      );
+    }
+    if (authRequired && user && !progress) {
+      return (
+        <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-zinc-900">
+          <p className="text-zinc-500">Loading your progress…</p>
+        </div>
+      );
+    }
+    const modules = getModulesForRole(progress?.role ?? "other");
+    return (
+      <AssistantShell>
+        <TrainingLayout modules={modules} progress={progress}>
+          {children}
+        </TrainingLayout>
+      </AssistantShell>
+    );
+  }
+
+  return <AssistantShell>{children}</AssistantShell>;
 }

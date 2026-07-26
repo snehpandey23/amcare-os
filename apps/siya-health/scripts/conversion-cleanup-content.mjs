@@ -106,7 +106,7 @@ export function renderAdhdScreeningDisclaimer() {
               <!-- /SIYA:ADHD-SCREENING-DISCLAIMER -->`;
 }
 
-/** "What happens next?" ADHD journey — Task 5 (+ disclaimer). Marker: SIYA:ADHD-NEXT-STEPS */
+/** "What happens next?" ADHD journey — one primary CTA (assembly rule). Marker: SIYA:ADHD-NEXT-STEPS */
 export function renderAdhdNextSteps(relPath = '') {
   const screeningBtn = renderButton({
     label: 'Take Free ADHD Screening',
@@ -116,28 +116,20 @@ export function renderAdhdNextSteps(relPath = '') {
     location: 'adhd-what-next',
     relPath,
   });
-  const consultBtn = renderButton({
-    label: 'Book Free Meet & Greet',
-    href: CONSULT_URL,
-    variant: 'secondary',
-    track: 'meet_greet_click',
-    location: 'adhd-what-next',
-    relPath,
-  });
   return `<!-- SIYA:ADHD-NEXT-STEPS -->
-      <section class="section adhd-next-steps" aria-labelledby="adhd-next-steps-heading">
+      <section class="section adhd-next-steps" aria-labelledby="adhd-next-steps-heading" data-assembly="next-steps">
         <div class="container">
           <h2 id="adhd-next-steps-heading">What happens next</h2>
           <ol class="adhd-next-steps-list adhd-next-steps-list--compact">
             <li>Take the free 2-minute ADHD screening.</li>
-            <li>Book a free Meet &amp; Greet if you have questions.</li>
+            <li>Review ADHD care pathways if screening suggests evaluation.</li>
             <li>Start a structured ADHD evaluation when ready (${renderInitialEvaluationPrice()}).</li>
           </ol>
           <p class="adhd-next-steps-note">Screening is not a diagnosis. A licensed clinician determines next steps after evaluation.</p>
           <div class="adhd-next-steps-cta cta-band-buttons">
             ${screeningBtn}
-            ${consultBtn}
           </div>
+          <p class="adhd-next-steps-secondary"><a href="/adhd-care">Explore ADHD Care</a> · <a href="${CONSULT_URL}">Book a free Meet &amp; Greet</a></p>
         </div>
       </section>
       <!-- /SIYA:ADHD-NEXT-STEPS -->`;

@@ -1,17 +1,8 @@
-# HIPAA Workforce Training (interactive)
+# SiyaOS — internal workforce assistant (+ HIPAA certification)
 
-Next.js + Tailwind app that turns your **Gamma Compliance welcome kit** training assets into structured modules, **instant-feedback quizzes**, adaptive reinforcement, a **15–25 question final exam**, and **local progress** (no backend required).
+**Default experience:** chat-first **Siya** assistant at `/` for HIPAA, billing workflow, telehealth privacy, and **escalation pathways** (internal KB + retrieval over modules/references).
 
-## Source mapping
-
-| In-app | Your kit |
-|--------|----------|
-| Module outline | HIPAA Training Outline for Healthcare Providers |
-| Lessons / summaries | HIPAA Manual for Healthcare Providers (v2025.A) themes |
-| All quiz items | HIPAA Test for Healthcare Providers (73 questions) |
-| Role filter | Optional tracks (provider / nurse / admin) — same content, subset of modules for admin-simp / security |
-
-**Compliance fidelity:** Explanations follow your packet. Items that reference **penalty dollar amounts** include a note to confirm against your **printed answer key / current Manual** when regulations change.
+**Optional:** structured **HIPAA certification** at `/training` — modules, quizzes, final exam, certificate (unchanged).
 
 ## Run
 
@@ -32,7 +23,10 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Layout
 
-- `src/content/modules.ts` — course modules (instructional designer copy).
+- `src/content/workspace-kb.ts` — internal playbook (billing, HIPAA, escalation).
+- `src/lib/siya-os/` — retrieval + `/api/chat` assistant engine.
+- `src/components/siya/` — chat UI and shell.
+- `src/content/modules.ts` — certification course modules.
 - `src/content/questionsPart1.ts` + `questionsPart2.ts` — digitized official test.
 - `src/lib/quizEngine.ts` — queues, adaptation, reinforcement selection.
 - `src/lib/scoring.ts` — topic summaries, readiness (**Ready / Needs review**).

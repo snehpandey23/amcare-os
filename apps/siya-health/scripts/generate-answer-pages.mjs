@@ -35,6 +35,11 @@ import { renderNavCtaMarkup, renderButton, slotToButton, resolveConversion } fro
 import { ANSWER_DIAGRAM_EMBEDS, renderDiagramFigure } from '../data/visual-diagrams.mjs';
 import { SIYA_CIRCLE_PROMO_HTML } from '../data/siya-circle-config.mjs';
 import { renderAnswersHubCarePathwaysSection } from '../data/adhd-commercial-links.mjs';
+import {
+  ASSEMBLY,
+  primaryJourneyForTopic,
+  renderContextAwareClosing,
+} from './content-assembly.mjs';
 
 /** UX hub groupings (display order) */
 const HEALTH_GUIDE_CATEGORIES = [
@@ -320,13 +325,14 @@ function blogLabel(path) {
 function buildAnswerInternalLinksHtml(seed) {
   const canonical = resolveCanonicalBlog(seed);
   const links = resolveAnswerInternalLinks(seed, canonical);
+  // Assembly: ≤3 related question links (plus clinical article + care = well under 8/section).
   const relatedLis = links.relatedSlugs
+    .slice(0, 3)
     .map((slug) => `<li><a href="/answers/${slug}">${esc(guideLabel(slug))}</a></li>`)
     .join('\n                ');
 
-  return `            <section class="answer-internal-links" id="related-resources" aria-labelledby="answer-links-heading">
+  return `            <section class="answer-internal-links" id="related-resources" aria-labelledby="answer-links-heading" data-assembly="related-resources">
               <h2 id="answer-links-heading">Related resources</h2>
-              <p class="answer-internal-links-intro">This page is a concise FAQ. For clinical depth, start with the full article below.</p>
               <div class="answer-internal-links-grid">
                 <div class="answer-internal-links-col">
                   <h3 class="answer-internal-links-col-title">Related questions</h3>
@@ -343,10 +349,7 @@ function buildAnswerInternalLinksHtml(seed) {
                   <p><a class="answer-internal-links-primary" href="${links.landingPath}">${esc(links.landingLabel)}</a></p>
                 </div>
               </div>
-            </section>
-            <aside class="answer-ask-siya" aria-label="Ask Siya">
-              <p>Still have a question? <a href="${ASK_SIYA_CHAT_PATH}" data-siya-track="primary-cta-click" data-siya-location="answer-ask-siya" data-conversion-goal="secureChat">Ask Siya</a>.</p>
-            </aside>`;
+            </section>`;
 }
 
 function buildIndexClusterExplorerHtml() {
@@ -455,10 +458,18 @@ function buildAnswerPage(seed) {
     : '';
   const faqJson = buildFaqJson(seed);
   const answerRelPath = `answers/${seed.slug}.html`;
-  const answerCtaBtn = renderButton({
-    ...slotToButton(resolveConversion(answerRelPath).primary, { location: 'answer-final-cta', relPath: answerRelPath }),
-    variant: 'primary',
+  const journey = primaryJourneyForTopic(seed.topic, seed.slug);
+  const relatedLabels = (seed.related || [])
+    .slice(0, 2)
+    .map((slug) => ({ slug, label: guideLabel(slug) }));
+  const contextClosing = renderContextAwareClosing(seed, {
+    primaryHref: journey.href,
+    primaryLabel: journey.label,
+    relatedLabels,
   });
+  // Keep conversion registry in sync for audits, but do not render a second primary button.
+  void ASSEMBLY;
+  void resolveConversion(answerRelPath);
 
   const medicalWebPage = {
     '@context': 'https://schema.org',
@@ -523,9 +534,7 @@ ${engagement.evidenceCard}
             </section>
 ${learnMoreHtml}
 ${buildAnswerInternalLinksHtml(seed)}
-            <div class="cta-block blog-cta answer-final-cta">
-              ${answerCtaBtn}
-            </div>
+${contextClosing}
             <p class="cta-microcopy">Browse <a href="/answers">all Health Guides</a> · <a href="${hub.url}">${hub.label} articles</a>${reviewRecord.reviewer ? ` · <a href="/providers/${reviewRecord.reviewer.slug}">${reviewRecord.reviewer.name}</a>` : ''}</p>
           </div>
         </div>

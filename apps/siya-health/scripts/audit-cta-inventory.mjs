@@ -11,7 +11,7 @@ const SITE_ROOT = path.join(__dirname, '..');
 
 const BOOKING_CANONICAL =
   'https://spruce.care/siyahealth';
-const GHL_CANONICAL = 'https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl';
+const GHL_CANONICAL = 'https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx';
 
 const RECOMMENDED = {
   primary: { label: 'Talk to a Clinician', url: BOOKING_CANONICAL },
@@ -67,7 +67,7 @@ function isBookingUrl(href) {
 }
 
 function isGhlUrl(href) {
-  return /link\.yourmarketingai\.com\/widget\/form\/HmvqrDVq3tq3qv6rkCjl/i.test(href || '');
+  return /form\.carepatron\.com\/Forms\/XRMFIPAWuXhTlncGx/i.test(href || '');
 }
 
 function isScreeningUrl(href) {

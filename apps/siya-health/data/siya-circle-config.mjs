@@ -1,12 +1,12 @@
 /**
- * Siya Circle — newsletter signup routes to GHL (no on-site email capture).
+ * Siya Circle — newsletter signup routes to Carepatron form (no on-site email capture).
  */
 
 export const SIYA_CIRCLE_LIST_TAG = 'Siya Circle';
 
-/** Direct GHL widget form URL (all join CTAs) */
+/** Carepatron form URL (all join CTAs) */
 export const SIYA_CIRCLE_GHL_FORM_URL =
-  'https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl';
+  'https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx';
 
 export const SIYA_CIRCLE_GHL_FORM_ID = 'HmvqrDVq3tq3qv6rkCjl';
 

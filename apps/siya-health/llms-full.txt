@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
-Generated: 2026-07-21
-Total pages: 192
+Generated: 2026-07-26
+Total pages: 194
 
 ---
 
@@ -89,6 +89,9 @@ Total pages: 192
   URL: https://siya.health/
   Summary: Physician-led telehealth for adults who feel tired, unfocused, or stuck—structured evaluation for fatigue, ADHD symptoms, weight, and hormones in CA, TX, PA, and FL.
   Topics: weight-loss
+
+- Local preview — Siya Circle Carepatron embed
+  URL: https://siya.health/_preview-carepatron-circle-embed
 
 - About Siya Health | Mission, Team &amp; How Care Works
   URL: https://siya.health/about
@@ -777,10 +780,10 @@ Total pages: 192
   Summary: Snoring plus fatigue, weight gain, or resistant hypertension? Evidence-based guide to obstructive sleep apnea, insulin resistance, testosterone, ADHD overlap, and next steps.
   Topics: weight-loss, sleep
 
-- Telehealth Articles (2026) — Online ADHD Diagnosis &amp; Safe Prescribing
+- Telehealth Articles (2026) — Safe Online Prescribing &amp; Remote Care
   URL: https://siya.health/blog/telehealth
-  Summary: Telehealth education: legitimate online ADHD diagnosis, evaluation costs, remote prescribing standards, and what US adults should verify with licensed providers.
-  Topics: adhd, telehealth
+  Summary: Telehealth education: safe online prescribing, visit standards, sleep and men’s health guides, and what US adults should verify with licensed providers.
+  Topics: telehealth
 
 - Telehealth Prescriptions: How Online Treatment Works (2026)
   URL: https://siya.health/blog/telehealth-prescriptions-how-online-treatment-works
@@ -911,6 +914,9 @@ Total pages: 192
 - Terms of Use
   URL: https://siya.health/legal/terms-of-use
   Summary: Terms of Use for Siya Health.
+
+- Siya local preview hub
+  URL: https://siya.health/LOCAL-PREVIEW
 
 - Men's Health &amp; Longevity
   URL: https://siya.health/mens-health-longevity

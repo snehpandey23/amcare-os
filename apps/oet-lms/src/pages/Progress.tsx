@@ -58,8 +58,12 @@ export default function Progress() {
   return (
     <>
       <div className="siya-dash-header">
-        <div className="siya-user-greeting">Your Progress Report</div>
-        <div className="siya-user-subtext">Detailed breakdown of your performance across all scenarios</div>
+        <div className="siya-user-greeting">
+          Your Progress Report{user ? ` · ${user.name || user.email}` : ''}
+        </div>
+        <div className="siya-user-subtext">
+          Detailed breakdown of your performance across all scenarios. Sessions are saved to your account when you’re signed in.
+        </div>
       </div>
 
       {(loading || sessionHistory.length > 0) && (

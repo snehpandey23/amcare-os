@@ -2275,6 +2275,18 @@ export function stripChatWidgets(html) {
   return html;
 }
 
+
+/** Sitewide Siya AI Concierge widget */
+export function injectSiyaConcierge(html, relPath) {
+  if (isLegalContentPage(relPath)) return html;
+  if (isRedirectTransitionPage(relPath)) return html;
+  if (html.includes('siya-concierge.js')) return html;
+  const block = `<!-- SIYA:CONCIERGE -->
+    <script src="/scripts/siya-concierge.js" defer></script>
+    <!-- /SIYA:CONCIERGE -->`;
+  return html.replace(/<\/body>/i, `${block}\n</body>`);
+}
+
 export function applySiteChrome(html, relPath, title = '') {
   html = injectCookieConsentBootstrap(html);
   if (isRedirectTransitionPage(relPath)) {
@@ -2292,6 +2304,7 @@ export function applySiteChrome(html, relPath, title = '') {
 
   if (isAdsLandingPage(relPath, html)) {
     html = injectCookieNotice(html, relPath);
+    html = injectSiyaConcierge(html, relPath);
     html = injectLandingTrust(html, relPath);
     html = injectFaqAccordion(html);
     html = injectHeaderScroll(html);
@@ -2325,6 +2338,7 @@ export function applySiteChrome(html, relPath, title = '') {
   html = stripGhlLegalAcceptance(html, relPath);
   html = injectGhlLegalAcceptance(html, relPath);
   html = injectCookieNotice(html, relPath);
+  html = injectSiyaConcierge(html, relPath);
   html = injectHeaderScroll(html);
   html = injectFaqAccordion(html);
   html = injectHeroTrustBar(html, relPath);
