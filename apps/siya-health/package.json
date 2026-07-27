@@ -28,7 +28,7 @@
     "assembly:check": "npm run assembly:apply && npm run assembly:validate",
     "blocks:validate": "node scripts/validate-block-registry.mjs",
     "docs:hygiene": "node scripts/validate-doc-hygiene.mjs",
-    "governance": "npm run assembly:validate && npm run blocks:validate && npm run docs:hygiene",
+    "governance": "npm run assembly:validate && npm run blocks:validate && npm run docs:hygiene && npm run graph:observe",
     "graph:observe": "node scripts/generate-knowledge-graph-observability.mjs",
     "deploy": "vercel --prod",
     "cornerstone:ca-adhd": "node scripts/generate-california-adhd-cornerstone.mjs",

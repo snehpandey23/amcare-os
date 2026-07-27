@@ -246,7 +246,7 @@ function render() {
           <ul class="scan-list">
             <li><strong><a href="/preventive-care">Preventive Care</a></strong> &mdash; stay healthy before something goes wrong</li>
             <li><strong><a href="/primary-urgent-care">Primary &amp; Urgent Care</a></strong> &mdash; sick visits, common conditions, operational booking</li>
-            <li><strong><a href="/adhd-care">ADHD Care</a></strong> &mdash; specialty evaluation lane when clinically appropriate</li>
+            <li><strong><a href="/adhd-care">ADHD Care</a></strong> &mdash; specialty evaluation lane when clinically appropriate (<a href="/adult-adhd-california">California ADHD hub</a>)</li>
             <li><strong><a href="/weight-loss-metabolic-health">Weight &amp; metabolic health</a></strong> &mdash; cardiometabolic care when that is the question</li>
             <li><strong><a href="/womens-midlife-health">Women&rsquo;s midlife health</a></strong> &mdash; midlife and hormone-related concerns in context</li>
             <li><strong><a href="/mens-health-longevity">Men&rsquo;s health</a></strong> &mdash; vitality and longevity questions under clinical judgment</li>
@@ -276,7 +276,7 @@ function render() {
             <h2 id="prevention-and-labs-heading">Prevention and labs</h2>
             <p class="lead">Screenings and markers make sense inside a relationship&mdash;not as a shopping cart.</p>
           </div>
-          <p><a href="/preventive-care">Preventive care</a> owns the forward-looking frame. <a href="/labs/preventive">Preventive labs</a> and marker guides (CBC, CMP, lipids, A1c, TSH, ferritin, B12, vitamin D) explain what tests broadly measure without interpreting your portal PDF.</p>
+          <p><a href="/preventive-care">Preventive care</a> owns the forward-looking frame. <a href="/labs/preventive">Preventive labs</a> and marker guides such as <a href="/labs/cbc">CBC</a>, <a href="/labs/thyroid">TSH</a>, and <a href="/labs/vitamin-b12">B12</a> explain what tests broadly measure without interpreting your portal PDF.</p>
           <p>Bring results back to primary care when you need meaning, not just numbers. See <a href="/labs/how-to-read-results">how to read lab results</a> and <a href="/answers/why-normal-labs-dont-mean-healthy">why normal labs don&rsquo;t mean healthy</a>.</p>
         </div>
       </section>
@@ -287,7 +287,7 @@ function render() {
             <h2 id="specialty-lanes-heading">Specialty lanes without premature funnels</h2>
             <p class="lead">Expertise is available. It is not the opening assumption for every symptom.</p>
           </div>
-          <p>ADHD care, metabolic weight management, and midlife or men&rsquo;s health lanes exist because adults ask those questions. They sit under the primary care root so credibility compounds: the site is a primary care knowledge system with deep expertise&mdash;not an ADHD-only destination with bolted-on pages.</p>
+          <p>ADHD care, metabolic weight management, and midlife or men&rsquo;s health lanes exist because adults ask those questions. They sit under the primary care root so credibility compounds: the site is a primary care knowledge system with deep expertise&mdash;not an ADHD-only destination with bolted-on pages. California adults can start at the <a href="/adult-adhd-california">Adult ADHD California</a> hub when that is the question.</p>
         </div>
       </section>
 
@@ -301,9 +301,9 @@ function render() {
             <li><a href="/preventive-care">Preventive care</a></li>
             <li><a href="/fatigue">Fatigue</a></li>
             <li><a href="/brain-fog">Brain fog</a></li>
+            <li><a href="/adult-adhd-california">Adult ADHD California</a></li>
             <li><a href="/primary-urgent-care">Primary &amp; Urgent Care</a></li>
             <li><a href="/labs">Labs &amp; blood tests</a></li>
-            <li><a href="/pricing">Pricing</a></li>
           </ul>
         </div>
       </section>

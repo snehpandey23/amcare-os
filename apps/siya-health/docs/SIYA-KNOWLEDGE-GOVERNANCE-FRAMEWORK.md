@@ -155,6 +155,16 @@ Leadership gets **one number**, not a stack of audit reports. Weights sum to 100
 
 This is a **dashboard aggregation of existing components**, not a ninth audit type.
 
+## 7a. Platform KPIs (see PLATFORM-v1.md)
+
+| KPI | Rule |
+| --- | --- |
+| Knowledge Coverage Score | Rubric **frozen** at Platform v1 — improve the graph, do not redefine the score |
+| Root Service reachability | 100% of Canonical Entities reachable from `/primary-care` (`npm run graph:observe` fails otherwise) |
+| Phase C entity admission | New Canonical Entity needs **≥2 of:** search demand · Guide resolution gap · clinical graph gap · strategic business priority |
+
+Prefer densification (relationships) before Coverage expansion (new entities).
+
 ## 7. Deferred to v1.1 — Knowledge Lifecycle
 
 Not in v1.0. Do not implement until a real staleness incident or Q4 planning.

@@ -1,52 +1,63 @@
 # Knowledge Graph Observability
 
-Generated: 2026-07-27T01:29:51.527Z  
-Platform: **v1** (frozen)
+Generated: 2026-07-27T01:35:57.452Z  
+Platform: **v1** (frozen) · Sprint: **graph-densification-1**
 
-## Inventory
+## Inventory (two numbers — do not conflate)
 
-| Class | Count |
+| Scope | Count |
 | --- | ---: |
-| Root Services | 1 |
-| Services | 4 |
-| Conditions | 3 |
-| Symptoms | 2 |
-| Laboratories | 8 |
-| **Taxonomy pages** | **13** |
-| Registry entities (all) | 19 |
+| **Canonical entities** (Taxonomy v1) | **13** |
+| **Registry entities** (PK API) | **19** |
+
+Canonical breakdown: Root 1 · Service 1 · Condition 1 · Symptom 2 · Laboratory 8
+
+Canonical = Taxonomy v1 pages. Registry = all Public Knowledge API entities (includes care-process / implementation surfaces). Do not expect these totals to match.
+
+## Reachability (from Root Service)
+
+| Metric | Value |
+| --- | --- |
+| Reachable from `/primary-care` | **13 / 13** (100%) |
+| Pass (100% required) | **PASS** |
+| Unreachable | none |
+
+## Navigation depth
+
+Avg clicks from root: **1.31** · Max: **2**  
+Smell threshold: ≥ 4 clicks
+
+| Entity | Clicks from Root |
+| --- | ---: |
+| `/primary-care` | 0 |
+| `/adult-adhd-california` | 1 |
+| `/brain-fog` | 1 |
+| `/fatigue` | 1 |
+| `/labs/cbc` | 1 |
+| `/labs/thyroid` | 1 |
+| `/labs/vitamin-b12` | 1 |
+| `/preventive-care` | 1 |
+| `/labs/a1c-blood-sugar` | 2 |
+| `/labs/cmp` | 2 |
+| `/labs/iron-ferritin` | 2 |
+| `/labs/lipid-panel` | 2 |
+| `/labs/vitamin-d` | 2 |
 
 ## Relationship health
 
 | Metric | Value |
 | --- | --- |
-| Avg inbound (entity→entity) | 4.92 |
-| Avg outbound | 4.92 |
-| Graph density (undirected) | 0.513 |
-| Connectivity score | 92 |
-| Avg depth from Root Service | 1.58 |
-| Orphans | /adult-adhd-california |
-| Dead-ends | /adult-adhd-california |
+| Avg inbound | 5.77 |
+| Avg outbound | 5.77 |
+| Graph density | 0.603 |
+| Connectivity score | 100 |
+| Orphans | none |
+| Dead-ends | none |
+
+## Knowledge Coverage Score (rubric frozen)
+
+**100 / 100** — see `KNOWLEDGE-COVERAGE-SCORE.md` (do not redefine monthly).
 
 ## Governance health
 
-| Gate | Status |
-| --- | --- |
-| Assembly PASS | true |
-| Fingerprint avg / min | 9.99 / 9 (floor 9) |
-
-## Knowledge Coverage Score
-
-**100 / 100**
-
-| Component | Points (max 20) |
-| --- | ---: |
-| Entity completeness | 20 |
-| Relationship completeness | 20 |
-| Graph density | 20 |
-| Service coverage | 20 |
-| Symptom ↔ Lab coverage | 20 |
-
-FAQs on taxonomy pages: 64  
-Related-guide links: 25
-
-See `KNOWLEDGE-COVERAGE-SCORE.md` · `PLATFORM-v1.md`.
+Assembly PASS: true · Fingerprint avg/min: 9.99 / 9

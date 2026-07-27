@@ -58,16 +58,53 @@ Blog consolidation · Search Console cleanup · Internal linking optimization
 
 ---
 
-## Operating KPIs (internal)
+## Knowledge Coverage Score
 
-| KPI | Purpose |
-| --- | --- |
-| Knowledge Integrity Score | Already frozen with Governance — assembly, fingerprint, clinical/safety gates |
-| **Knowledge Coverage Score** | Entity + relationship completeness + graph density — decides what to build next |
+Measured by entity completeness, relationship completeness, graph density,
+service coverage, and symptom↔lab coverage. Rubric is **frozen** in
+`KNOWLEDGE-COVERAGE-SCORE.md` — do not redefine monthly or comparability dies.
 
 Observability: `npm run graph:observe` → `docs/KNOWLEDGE-GRAPH-OBSERVABILITY.json`
 
-Dashboard: Cursor canvas `knowledge-graph-dashboard.canvas.tsx` (open beside chat).
+**Hard rule:** Root Service reachability must be **100%**. The observe script
+exits non-zero if any Canonical Entity is unreachable from `/primary-care`.
+
+Dashboard: Cursor canvas `knowledge-graph-dashboard.canvas.tsx`.
+
+---
+
+## Phase C — new Canonical Entity admission
+
+A new Canonical Entity requires **at least two** of:
+
+- [ ] Demonstrated search demand
+- [ ] Repeated Guide resolution gap
+- [ ] Clinical graph coverage gap
+- [ ] Strategic business priority
+
+“This would be interesting” is not enough.
+
+Prefer Graph Densification (relationships only) before Coverage expansion
+(new entities).
+
+After densification, **do not rush Phase C**. Run production for a few weeks,
+collect Search Console / Guide resolution / CTA / navigation evidence, then
+apply the admission checklist.
+
+---
+
+## Entity Utilization (track next)
+
+Bridges architecture and business. For each Canonical Entity, score Search,
+Guide usage, and Conversion (High / Medium / Low) and assign a status
+(Healthy · Growing · Needs discovery · Underserved).
+
+Ask: *Which high-demand entity is underserved?* — not *Which page should we
+build next?*
+
+Instrumentation sources: Search Console, Guide entity-resolution logs, CTA
+performance by entity, navigation paths between entities. Formal sheet TBD;
+do not invent scores without data.
 
 ---
 

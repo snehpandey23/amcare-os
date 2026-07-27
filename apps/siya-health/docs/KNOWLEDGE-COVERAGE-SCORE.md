@@ -1,13 +1,23 @@
 # Knowledge Coverage Score
 
 ```text
-Status:            Internal KPI (not public)
+Status:            Internal KPI (FROZEN rubric)
 Owner:             Platform / Clinical editorial
 Companion:         Knowledge Integrity Score (Governance)
+Freeze:            Platform v1 — do not change component weights or thresholds
+                   without an Architecture Review. Moving the graph is fine;
+                   redefining success is not.
 ```
 
 Integrity asks: *is the graph safe and well-assembled?*  
 Coverage asks: *is the graph complete enough to deserve the next build?*
+
+Also track (separate from this score, same observe run):
+
+| Metric | Rule |
+| --- | --- |
+| **Root reachability** | 100% of Canonical Entities reachable from `/primary-care` |
+| **Navigation depth** | Flag entities at ≥4 clicks from root as architectural smell |
 
 ---
 

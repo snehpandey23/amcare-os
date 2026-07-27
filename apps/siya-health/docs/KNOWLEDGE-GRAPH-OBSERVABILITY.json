@@ -1,33 +1,106 @@
 {
-  "generatedAt": "2026-07-27T01:29:51.527Z",
+  "generatedAt": "2026-07-27T01:35:57.452Z",
   "platform": "v1",
+  "sprint": "graph-densification-1",
   "inventory": {
-    "rootServices": 1,
-    "services": 4,
-    "conditions": 3,
-    "symptoms": 2,
-    "laboratories": 8,
-    "otherRegistryEntities": 1,
-    "totalTaxonomyPages": 13,
-    "totalRegistryEntities": 19
+    "canonicalEntities": 13,
+    "registryEntities": 19,
+    "canonical": {
+      "rootServices": 1,
+      "services": 1,
+      "conditions": 1,
+      "symptoms": 2,
+      "laboratories": 8,
+      "total": 13
+    },
+    "registryByFamily": {
+      "root_service": 1,
+      "service": 4,
+      "condition": 3,
+      "symptom": 2,
+      "lab": 8,
+      "other": 1
+    },
+    "note": "Canonical = Taxonomy v1 pages. Registry = all Public Knowledge API entities (includes care-process / implementation surfaces). Do not expect these totals to match."
   },
   "relationshipHealth": {
-    "averageInbound": 4.92,
-    "averageOutbound": 4.92,
-    "directedEdges": 64,
-    "undirectedEdges": 40,
-    "graphDensity": 0.513,
-    "orphanEntities": [
-      "/adult-adhd-california"
+    "averageInbound": 5.77,
+    "averageOutbound": 5.77,
+    "directedEdges": 75,
+    "undirectedEdges": 47,
+    "graphDensity": 0.603,
+    "orphanEntities": [],
+    "deadEndEntities": [],
+    "entityConnectivityScore": 100
+  },
+  "reachability": {
+    "from": "/primary-care",
+    "reachable": 13,
+    "total": 13,
+    "percent": 100,
+    "pass": true,
+    "unreachable": [],
+    "rule": "Every Canonical Entity must be reachable from /primary-care (bridges allowed)."
+  },
+  "navigationDepth": {
+    "averageClicksFromRoot": 1.31,
+    "maxClicksFromRoot": 2,
+    "table": [
+      {
+        "entity": "/primary-care",
+        "clicksFromRoot": 0
+      },
+      {
+        "entity": "/adult-adhd-california",
+        "clicksFromRoot": 1
+      },
+      {
+        "entity": "/brain-fog",
+        "clicksFromRoot": 1
+      },
+      {
+        "entity": "/fatigue",
+        "clicksFromRoot": 1
+      },
+      {
+        "entity": "/labs/cbc",
+        "clicksFromRoot": 1
+      },
+      {
+        "entity": "/labs/thyroid",
+        "clicksFromRoot": 1
+      },
+      {
+        "entity": "/labs/vitamin-b12",
+        "clicksFromRoot": 1
+      },
+      {
+        "entity": "/preventive-care",
+        "clicksFromRoot": 1
+      },
+      {
+        "entity": "/labs/a1c-blood-sugar",
+        "clicksFromRoot": 2
+      },
+      {
+        "entity": "/labs/cmp",
+        "clicksFromRoot": 2
+      },
+      {
+        "entity": "/labs/iron-ferritin",
+        "clicksFromRoot": 2
+      },
+      {
+        "entity": "/labs/lipid-panel",
+        "clicksFromRoot": 2
+      },
+      {
+        "entity": "/labs/vitamin-d",
+        "clicksFromRoot": 2
+      }
     ],
-    "deadEndEntities": [
-      "/adult-adhd-california"
-    ],
-    "averageGraphDepthFromRoot": 1.58,
-    "unreachableFromRoot": [
-      "/adult-adhd-california"
-    ],
-    "entityConnectivityScore": 92
+    "smellThreshold": 4,
+    "deepEntities": []
   },
   "governanceHealth": {
     "assemblyPass": true,
@@ -40,6 +113,8 @@
   },
   "coverage": {
     "knowledgeCoverageScore": 100,
+    "rubricFrozen": true,
+    "rubricDoc": "KNOWLEDGE-COVERAGE-SCORE.md",
     "components": {
       "entityCompleteness": 20,
       "relationshipCompleteness": 20,
@@ -48,7 +123,7 @@
       "symptomLabCoverage": 20
     },
     "faqsTotal": 64,
-    "relatedGuidesTotal": 25,
+    "relatedGuidesTotal": 98,
     "rootServiceLanesLinked": [
       "/preventive-care",
       "/adhd-care",
@@ -62,56 +137,56 @@
   "entities": [
     {
       "path": "/primary-care",
-      "inbound": 3,
-      "outbound": 3,
+      "inbound": 4,
+      "outbound": 7,
       "faqs": 8,
       "relatedGuides": 6,
-      "depthFromRoot": 0,
+      "clicksFromRoot": 0,
       "missing": false
     },
     {
       "path": "/preventive-care",
-      "inbound": 11,
-      "outbound": 9,
+      "inbound": 12,
+      "outbound": 10,
       "faqs": 8,
       "relatedGuides": 6,
-      "depthFromRoot": 1,
+      "clicksFromRoot": 1,
       "missing": false
     },
     {
       "path": "/adult-adhd-california",
-      "inbound": 0,
-      "outbound": 0,
+      "inbound": 3,
+      "outbound": 4,
       "faqs": 8,
-      "relatedGuides": 0,
-      "depthFromRoot": null,
+      "relatedGuides": 8,
+      "clicksFromRoot": 1,
       "missing": false
     },
     {
       "path": "/fatigue",
-      "inbound": 11,
-      "outbound": 7,
+      "inbound": 12,
+      "outbound": 8,
       "faqs": 8,
-      "relatedGuides": 7,
-      "depthFromRoot": 1,
+      "relatedGuides": 8,
+      "clicksFromRoot": 1,
       "missing": false
     },
     {
       "path": "/brain-fog",
-      "inbound": 2,
-      "outbound": 8,
+      "inbound": 4,
+      "outbound": 9,
       "faqs": 8,
       "relatedGuides": 6,
-      "depthFromRoot": 1,
+      "clicksFromRoot": 1,
       "missing": false
     },
     {
       "path": "/labs/cbc",
-      "inbound": 7,
+      "inbound": 8,
       "outbound": 5,
       "faqs": 3,
-      "relatedGuides": 0,
-      "depthFromRoot": 2,
+      "relatedGuides": 8,
+      "clicksFromRoot": 1,
       "missing": false
     },
     {
@@ -119,8 +194,8 @@
       "inbound": 4,
       "outbound": 5,
       "faqs": 3,
-      "relatedGuides": 0,
-      "depthFromRoot": 2,
+      "relatedGuides": 8,
+      "clicksFromRoot": 2,
       "missing": false
     },
     {
@@ -128,8 +203,8 @@
       "inbound": 3,
       "outbound": 4,
       "faqs": 3,
-      "relatedGuides": 0,
-      "depthFromRoot": 2,
+      "relatedGuides": 8,
+      "clicksFromRoot": 2,
       "missing": false
     },
     {
@@ -137,17 +212,17 @@
       "inbound": 4,
       "outbound": 4,
       "faqs": 3,
-      "relatedGuides": 0,
-      "depthFromRoot": 2,
+      "relatedGuides": 8,
+      "clicksFromRoot": 2,
       "missing": false
     },
     {
       "path": "/labs/thyroid",
-      "inbound": 3,
+      "inbound": 4,
       "outbound": 5,
       "faqs": 3,
-      "relatedGuides": 0,
-      "depthFromRoot": 2,
+      "relatedGuides": 8,
+      "clicksFromRoot": 1,
       "missing": false
     },
     {
@@ -155,17 +230,17 @@
       "inbound": 7,
       "outbound": 4,
       "faqs": 3,
-      "relatedGuides": 0,
-      "depthFromRoot": 2,
+      "relatedGuides": 8,
+      "clicksFromRoot": 2,
       "missing": false
     },
     {
       "path": "/labs/vitamin-b12",
-      "inbound": 7,
+      "inbound": 8,
       "outbound": 5,
       "faqs": 3,
-      "relatedGuides": 0,
-      "depthFromRoot": 2,
+      "relatedGuides": 8,
+      "clicksFromRoot": 1,
       "missing": false
     },
     {
@@ -173,8 +248,8 @@
       "inbound": 2,
       "outbound": 5,
       "faqs": 3,
-      "relatedGuides": 0,
-      "depthFromRoot": 2,
+      "relatedGuides": 8,
+      "clicksFromRoot": 2,
       "missing": false
     }
   ]

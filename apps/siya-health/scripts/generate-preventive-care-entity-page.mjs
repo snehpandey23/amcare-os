@@ -320,12 +320,12 @@ function render() {
             <p class="lead">Follow the thread that matches where you are.</p>
           </div>
           <ul class="footer-links">
-            <li><a href="/primary-urgent-care">Primary &amp; Urgent Care</a></li>
+            <li><a href="/primary-care">Primary care</a></li>
             <li><a href="/fatigue">Fatigue: when tired stops being normal</a></li>
+            <li><a href="/brain-fog">Brain fog</a></li>
+            <li><a href="/labs/cbc">CBC</a></li>
             <li><a href="/answers/which-preventive-blood-tests-adults">Which preventive blood tests adults usually need</a></li>
             <li><a href="/answers/why-normal-labs-dont-mean-healthy">Why normal labs don&rsquo;t mean healthy</a></li>
-            <li><a href="/answers/what-to-do-after-lab-results">What to do after lab results</a></li>
-            <li><a href="/telehealth">Telehealth</a></li>
           </ul>
         </div>
       </section>

@@ -329,6 +329,7 @@ ${renderDifferentialSection('fatigue')}
             <li><a href="/brain-fog">Brain fog</a></li>
             <li><a href="/preventive-care">Preventive care</a></li>
             <li><a href="/labs/fatigue-brain-fog">Fatigue &amp; brain fog labs</a></li>
+            <li><a href="/adult-adhd-california">Adult ADHD California</a></li>
           </ul>
         </div>
       </section>

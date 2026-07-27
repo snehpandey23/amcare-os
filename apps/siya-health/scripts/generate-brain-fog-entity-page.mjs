@@ -346,7 +346,7 @@ ${renderDifferentialSection('brain_fog')}
             <li><a href="/preventive-care">Preventive care</a></li>
             <li><a href="/answers/brain-fog-after-eating">Brain fog after eating</a></li>
             <li><a href="/blog/perimenopause-brain-fog">Perimenopause brain fog</a></li>
-            <li><a href="/answers/poor-sleep-feels-like-adhd">Can poor sleep feel like ADHD?</a></li>
+            <li><a href="/adult-adhd-california">Adult ADHD California</a></li>
             <li><a href="/labs/fatigue-brain-fog">Fatigue &amp; brain fog labs</a></li>
           </ul>
         </div>

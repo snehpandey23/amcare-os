@@ -412,12 +412,14 @@ ${faqAccordion(FAQS, 'faq-ca-adhd')}
             <p class="lead">Go deeper on the parts that matter most to you.</p>
           </div>
           <ul class="footer-links">
-            <li><a href="/answers/signs-of-adult-adhd">Signs of adult ADHD</a></li>
-            <li><a href="/answers/late-adhd-diagnosis-adults">Late ADHD diagnosis in adults</a></li>
-            <li><a href="/blog/adhd-in-women">ADHD in women</a></li>
+            <li><a href="/primary-care">Primary care</a></li>
+            <li><a href="/adhd-care">ADHD Care</a></li>
+            <li><a href="/adhd-screening">Free ADHD screening</a></li>
+            <li><a href="/pricing">Pricing</a></li>
             <li><a href="/blog/executive-dysfunction-adhd">Executive dysfunction in ADHD</a></li>
-            <li><a href="/blog/online-adhd-diagnosis-california">Online ADHD diagnosis in California</a></li>
-            <li><a href="/answers">Browse all Health Guides</a></li>
+            <li><a href="/fatigue">Fatigue (when energy is part of the picture)</a></li>
+            <li><a href="/brain-fog">Brain fog (when focus is the complaint)</a></li>
+            <li><a href="/preventive-care">Preventive care</a></li>
           </ul>
         </div>
       </section>
@@ -425,7 +427,7 @@ ${faqAccordion(FAQS, 'faq-ca-adhd')}
 
     <footer class="footer">
       <div class="container">
-        <p><a href="/adhd-care">ADHD Care</a> &middot; &copy; 2026 Siya Health Inc.</p>
+        <p><a href="/primary-care">Primary Care</a> &middot; <a href="/adhd-care">ADHD Care</a> &middot; &copy; 2026 Siya Health Inc.</p>
       </div>
     </footer>
   </body>
