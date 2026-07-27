@@ -31,6 +31,18 @@ const FLOWS: {
     retrievalBoost: ["billing", "reimburse", "expense", "accounts"],
   },
   {
+    id: "marketing-daily",
+    department: "Marketing",
+    task: "Today's marketing / content plan",
+    patterns: [/marketing plan/i, /plan for today/i, /marketing today/i, /content today/i, /what.*post/i, /social today/i, /campaign today/i],
+    followUpQuestions: [
+      "Are you drafting patient-facing content, or asking about strategy/calendar?",
+      "Which channel (social, site, email)?",
+      "Does this mention clinical care, pricing, or outcomes?",
+    ],
+    retrievalBoost: ["marketing", "content", "QA", "compliance", "editorial", "brand"],
+  },
+  {
     id: "marketing-carousel",
     department: "Marketing",
     task: "Social content (carousel / post)",

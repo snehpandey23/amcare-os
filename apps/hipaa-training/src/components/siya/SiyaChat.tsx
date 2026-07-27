@@ -133,11 +133,38 @@ export function SiyaChat() {
     setMessages((m) => m.map((x) => (x.id === msg.id ? { ...x, gapNotified: true } : x)));
   }, []);
 
-  const copyEscalation = useCallback(async (preview: string) => {
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  async function copyText(text: string): Promise<boolean> {
     try {
-      await navigator.clipboard.writeText(preview);
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
     } catch {
-      /* ignore */
+      /* fallback below */
+    }
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      return ok;
+    } catch {
+      return false;
+    }
+  }
+
+  const copyEscalation = useCallback(async (msgId: string, preview: string) => {
+    const ok = await copyText(preview);
+    if (ok) {
+      setCopiedId(msgId);
+      window.setTimeout(() => setCopiedId((id) => (id === msgId ? null : id)), 2500);
     }
   }, []);
 
@@ -196,10 +223,10 @@ export function SiyaChat() {
                 {msg.escalationPreview ? (
                   <button
                     type="button"
-                    onClick={() => void copyEscalation(msg.escalationPreview!)}
+                    onClick={() => void copyEscalation(msg.id, msg.escalationPreview!)}
                     className="mt-3 w-full rounded-lg border border-[var(--siya-primary)]/20 bg-[var(--siya-bg-subtle)] px-3 py-2 text-left text-xs font-semibold text-[var(--siya-primary)] hover:bg-[var(--siya-bg-page)]"
                   >
-                    Copy escalation summary for Slack / email
+                    {copiedId === msg.id ? "Copied — paste into Slack or email" : "Copy escalation summary for Slack / email"}
                   </button>
                 ) : null}
               </div>

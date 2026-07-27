@@ -18,7 +18,28 @@ Deploy **only** from this directory:
 cd apps/hipaa-training && npx vercel deploy --prod
 ```
 
-In Vercel → Project → Settings → Domains, set **siya-assistant.vercel.app** as the production alias if the CLI does not attach it automatically.
+**If CLI deploy fails:** use the Vercel dashboard → project **`hipaa-training`** (not `hipaa-training-eight`) → **Redeploy** latest **Production** from Git **`main`** (Git-connected builds include the full monorepo).
+
+### URLs
+
+| URL | Status |
+|-----|--------|
+| **https://hipaa-training-eight.vercel.app** | **Working** internal Siya Assistant (use this until alias is fixed) |
+| **https://siya-assistant.vercel.app** | Often **broken** — domain is on project `hipaa-training-eight` whose last CLI deploy failed; move domain to `hipaa-training` in Vercel → Settings → Domains |
+| https://www.siya.health | Public website only — **not** the helpdesk |
+
+**Fix `siya-assistant.vercel.app` (one-time in Vercel UI):**
+
+1. Project **hipaa-training-eight** → Settings → Domains → remove `siya-assistant.vercel.app`
+2. Project **hipaa-training** → Settings → Domains → add `siya-assistant.vercel.app` → assign to **Production**
+3. Redeploy **hipaa-training** from Git **main**
+
+Monorepo CLI deploy from repo root (when needed):
+
+```bash
+cd /path/to/amcare-os
+npx vercel deploy --prod --project hipaa-training --local-config vercel-assistant.json
+```
 
 **LLM:** Enabled automatically when `AI_GATEWAY_API_KEY` or `OPENAI_API_KEY` is set on this project. Set `SIYA_WORKFORCE_USE_LLM=0` to force retrieval-only. Do **not** add these keys to the **siya.health** project.
 

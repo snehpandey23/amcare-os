@@ -1,7 +1,8 @@
 import { getEscalationContacts } from "./config";
 import { defaultEscalationOwner } from "./escalation";
 import { retrievalQueryBoost, routeIntent } from "./flows";
-import { composeAnswerFromChunks } from "./compose-answer";
+import { composeAnswerFromChunks, clarifyVagueMessage, formatEscalationForSlack, isVagueUserMessage, polishStaffMessage } from "./compose-answer";
+import { staffTopicLabel } from "./staff-voice";
 import { synthesizeWorkforceAnswer } from "./llm-answer";
 import { retrieveWorkspaceKnowledge, retrieveWorkspaceNearMisses, type RetrievedChunk } from "./retrieval";
 import { displayDepartment, type Confidence, type Department } from "./departments";
@@ -26,8 +27,8 @@ export interface SiyaReply {
 const PHI = /\b(mrn|ssn|social security|patient name is|date of birth)\b/i;
 const CLINICAL_DECISION = /\b(prescrib|dosage|diagnos|should i take|suicid|911)\b/i;
 
-export function runSiyaAssistant(message: string, _history: { role: string; content: string }[] = []): SiyaReply {
-  return buildSiyaReply(message, _history);
+export function runSiyaAssistant(message: string, history: { role: string; content: string }[] = []): SiyaReply {
+  return buildSiyaReply(message, history);
 }
 
 export async function runSiyaAssistantAsync(
@@ -49,9 +50,9 @@ export async function runSiyaAssistantAsync(
     history,
   });
 
-  if (!llmText) return base;
+  if (!llmText) return { ...base, message: polishStaffMessage(base.message) };
 
-  let msg = llmText;
+  let msg = polishStaffMessage(llmText);
   if (base.chunks[0]?.escalate && !msg.includes(base.chunks[0].escalate!)) {
     msg += `\n\n**Loop in:** ${base.chunks[0].escalate}`;
   }
@@ -78,7 +79,18 @@ export async function runSiyaAssistantAsync(
   return { ...base, message: msg };
 }
 
-function buildSiyaReply(message: string, _history: { role: string; content: string }[] = []): SiyaReply {
+function resolveQuery(message: string, history: { role: string; content: string }[]): string {
+  if (!isVagueUserMessage(message)) return message;
+  for (let i = history.length - 1; i >= 0; i--) {
+    const h = history[i];
+    if (h.role === "user" && h.content.trim().length > 12 && !isVagueUserMessage(h.content)) {
+      return `${h.content.trim()} (follow-up: ${message})`;
+    }
+  }
+  return message;
+}
+
+function buildSiyaReply(message: string, history: { role: string; content: string }[] = []): SiyaReply {
   const text = message.trim();
   if (!text) {
     return {
@@ -103,15 +115,34 @@ function buildSiyaReply(message: string, _history: { role: string; content: stri
     };
   }
 
-  const routing = routeIntent(text);
-  const query = retrievalQueryBoost(text, routing);
-  let chunks = retrieveWorkspaceKnowledge(query);
+  if (isVagueUserMessage(text) && !history.some((h) => h.role === "user" && h.content.trim().length > 12)) {
+    return {
+      message: clarifyVagueMessage(),
+      chunks: [],
+      knowledgeGap: true,
+      routing: {
+        department: "General",
+        task: "Need more detail",
+        confidence: "low",
+        followUpQuestions: [],
+      },
+      sources: [],
+      escalationPreview: undefined,
+    };
+  }
 
-  const sources = chunks.slice(0, 3).map((c) => ({ title: c.title, id: c.id }));
-  const escalateOwner = chunks[0]?.escalate ?? defaultEscalationOwner(routing.department);
+  const routing = routeIntent(text);
+  const query = retrievalQueryBoost(resolveQuery(text, history), routing);
+  let chunks = retrieveWorkspaceKnowledge(query);
 
   const hasStrongMatch = chunks.length > 0 && chunks[0].score >= 2;
   const knowledgeGap = !hasStrongMatch;
+
+  const sources = chunks.slice(0, hasStrongMatch ? 2 : 3).map((c) => ({
+    title: staffTopicLabel(c.title),
+    id: c.id,
+  }));
+  const escalateOwner = chunks[0]?.escalate ?? defaultEscalationOwner(routing.department);
 
   if (!chunks.length) {
     chunks = retrieveWorkspaceNearMisses(query, 3);
@@ -125,11 +156,11 @@ function buildSiyaReply(message: string, _history: { role: string; content: stri
       msg;
   }
 
-  if (!hasStrongMatch && chunks.length && !msg.includes("Related policies")) {
-    msg += `\n\n**Closest topics I found:** ${chunks.map((c) => c.title).join(" · ")}`;
+  if (!hasStrongMatch && chunks.length && !msg.includes("Closest")) {
+    msg += `\n\n**Closest topics:** ${chunks.slice(0, 3).map((c) => c.title).join(" · ")}`;
   }
 
-  if (chunks[0]?.escalate) {
+  if (chunks[0]?.escalate && knowledgeGap) {
     msg += `\n\n**Loop in:** ${chunks[0].escalate}`;
   }
 
@@ -141,7 +172,7 @@ function buildSiyaReply(message: string, _history: { role: string; content: stri
     });
   }
 
-  const showContacts = knowledgeGap || Boolean(chunks[0]?.escalate);
+  const showContacts = knowledgeGap;
   if (showContacts) {
     const contacts = getEscalationContacts()
       .slice(0, 4)
@@ -150,26 +181,33 @@ function buildSiyaReply(message: string, _history: { role: string; content: stri
     msg += `\n\n**People to try:** ${contacts}`;
   }
 
-  const escalationPreview = [
-    `Team: ${displayDepartment(routing.department)}`,
-    `Topic: ${routing.task}`,
-    `Issue: ${text.slice(0, 500)}`,
-    `Escalate to: ${escalateOwner}`,
-    routing.followUpQuestions.length ? `Open questions: ${routing.followUpQuestions.join("; ")}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
+  const escalationPreview =
+    knowledgeGap || chunks[0]?.escalate
+      ? formatEscalationForSlack({
+          question: text,
+          department: displayDepartment(routing.department),
+          task: routing.task,
+          escalateTo: escalateOwner,
+          sourceTitles: sources.map((s) => s.title),
+          followUps: showFollowUps ? routing.followUpQuestions : undefined,
+        })
+      : undefined;
+
+  const showRouting =
+    routing.confidence === "high" || routing.task !== "Company memory lookup" || routing.department !== "General";
 
   return {
-    message: msg,
+    message: polishStaffMessage(msg),
     chunks,
     escalate: escalateOwner,
-    routing: {
-      department: routing.department,
-      task: routing.task,
-      confidence: routing.confidence,
-      followUpQuestions: showFollowUps ? routing.followUpQuestions : [],
-    },
+    routing: showRouting
+      ? {
+          department: routing.department,
+          task: routing.task,
+          confidence: routing.confidence,
+          followUpQuestions: showFollowUps ? routing.followUpQuestions : [],
+        }
+      : undefined,
     sources,
     escalationPreview,
     knowledgeGap,

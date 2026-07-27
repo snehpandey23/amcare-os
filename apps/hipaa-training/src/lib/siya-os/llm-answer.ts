@@ -1,6 +1,7 @@
 import { generateText } from "ai";
 import { getWorkforceModel, workforceLlmEnabled } from "./model";
 import type { RetrievedChunk } from "./retrieval";
+import { polishStaffMessage } from "./compose-answer";
 import { WORKFORCE_SYSTEM_PROMPT } from "./system-prompt";
 
 function formatSources(chunks: RetrievedChunk[]): string {
@@ -54,7 +55,7 @@ export async function synthesizeWorkforceAnswer(opts: {
       maxOutputTokens: 650,
     });
     const trimmed = text.trim();
-    return trimmed.length >= 20 ? trimmed : null;
+    return trimmed.length >= 20 ? polishStaffMessage(trimmed) : null;
   } catch (err) {
     console.error("[siya-workforce] llm failed, using retrieval fallback", err);
     return null;

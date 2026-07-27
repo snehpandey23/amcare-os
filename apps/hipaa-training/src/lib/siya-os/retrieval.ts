@@ -23,6 +23,16 @@ export function tokenizeForSearch(q: string): string[] {
     .filter((t) => t.length > 1 && !STOP.has(t));
 }
 
+import { wantsInternalMetaQuery } from "./staff-voice";
+
+const META_TOPIC_IDS = new Set([
+  "company-memory-workdrive-index",
+  "internal-assistant-guardrails",
+  "siya-helpdesk-assistant-persona",
+  "amcare-os-overview",
+  "legacy-pricing-funnel-unresolved",
+]);
+
 const QUERY_EXPANSIONS: Record<string, string[]> = {
   price: ["pricing", "$149", "$79", "evaluation", "follow-up", "membership", "adhd"],
   pricing: ["$149", "$79", "evaluation", "patient-pricing-public-canonical"],
@@ -34,7 +44,9 @@ const QUERY_EXPANSIONS: Record<string, string[]> = {
   spruce: ["chat", "portal", "patient communication"],
   chat: ["portal", "sla", "response", "clinical"],
   hipaa: ["privacy", "phi", "breach", "training"],
-  marketing: ["content", "compliance", "ads", "claims", "social"],
+  marketing: ["content", "compliance", "ads", "claims", "social", "marketing plan", "editorial"],
+  plan: ["marketing", "content", "editorial", "campaign"],
+  today: ["marketing", "content", "daily"],
   social: ["marketing", "content", "instagram", "compliance"],
   brand: ["voice", "entities", "editorial"],
   escalate: ["escalation", "pathways", "supervisor"],
@@ -86,6 +98,10 @@ export function retrieveWorkspaceKnowledge(query: string, limit = 6): RetrievedC
   const qLower = query.toLowerCase();
 
   const TOPIC_INTENT_BOOST: { pattern: RegExp; id: string; boost: number }[] = [
+    { pattern: /marketing plan|plan for today|what.*post|content today|marketing today|campaign today|social today/, id: "marketing-staff-daily-help", boost: 28 },
+    { pattern: /marketing|content plan|social|editorial|caption|instagram|ads\b/, id: "content-qa-checklist", boost: 18 },
+    { pattern: /marketing|social|ad copy|claim|testimonial|compliance/, id: "medical-compliance-marketing", boost: 16 },
+    { pattern: /brand|voice|positioning|how we describe/, id: "brand-entities-voice", boost: 14 },
     { pattern: /pricing|price|\$149|\$79|evaluation cost|membership|how much/, id: "patient-pricing-public-canonical", boost: 20 },
     { pattern: /meet.*greet|homepage cta|book free/, id: "homepage-cta-meet-and-greet", boost: 18 },
     { pattern: /late cancel|refund|cancellation|no-show/, id: "billing-late-cancel", boost: 16 },
@@ -108,20 +124,24 @@ export function retrieveWorkspaceKnowledge(query: string, limit = 6): RetrievedC
     for (const intent of TOPIC_INTENT_BOOST) {
       if (e.id === intent.id && intent.pattern.test(qLower)) s += intent.boost;
     }
+    if (META_TOPIC_IDS.has(e.id) && !wantsInternalMetaQuery(qLower)) s *= 0.12;
     if (s > 0) out.push(fromKb(e, s));
   }
 
-  for (const m of MODULES) {
-    const corpus = `${m.title} ${m.summary} ${m.keyConcepts.join(" ")}`;
-    const s = scoreTokens(qt, corpus, m.title, m.id) * 0.9;
-    if (s >= 2) {
-      out.push({
-        id: `mod-${m.id}`,
-        title: m.title,
-        snippet: m.summary,
-        score: s,
-        links: [{ label: `Module: ${m.shortTitle}`, href: `/module/${m.id}` }],
-      });
+  const trainingQuery = /training|hipaa|certification|module|ce\b|ba\b/i.test(qLower);
+  if (trainingQuery) {
+    for (const m of MODULES) {
+      const corpus = `${m.title} ${m.summary} ${m.keyConcepts.join(" ")}`;
+      const s = scoreTokens(qt, corpus, m.title, m.id) * 0.9;
+      if (s >= 2) {
+        out.push({
+          id: `mod-${m.id}`,
+          title: m.title,
+          snippet: m.summary,
+          score: s,
+          links: [{ label: `Module: ${m.shortTitle}`, href: `/module/${m.id}` }],
+        });
+      }
     }
   }
 
