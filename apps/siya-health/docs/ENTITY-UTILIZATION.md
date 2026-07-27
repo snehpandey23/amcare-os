@@ -41,14 +41,22 @@ Healthcare journeys are multi-page. On conversion we also send:
 {
   "event": "entity_conversion",
   "entity": "primary_care",
-  "assisted_entities": ["brain_fog", "preventive_care"],
-  "assist_path": "/brain-fog,/preventive-care,/primary-care"
+  "assisted_entities": "brain_fog,preventive_care",
+  "assist_path": "brain_fog,preventive_care,primary_care"
 }
 ```
 
 Session storage key: `siya_entity_assist_path` (capped list of recent entity views).
+`assisted_entities` and `assist_path` are **comma-separated strings** (GA4-safe).
 
 Credit last-touch **and** assists — do not attribute the booking only to `/primary-care`.
+
+## GTM → GA4 (do this next)
+
+Full recipe: **`GTM-GA4-ENTITY-UTILIZATION.md`**  
+Machine map: **`data/entity-utilization-ga4-map.json`**
+
+Until Custom Event triggers + GA4 Event tags exist in `GTM-PLBD4TTQ`, events stay in `dataLayer` only.
 
 ## Implementation
 
@@ -57,7 +65,9 @@ Credit last-touch **and** assists — do not attribute the booking only to `/pri
 | Registry | `data/canonical-entities.mjs` |
 | Body attrs | `scripts/apply-entity-utilization.mjs` |
 | Client events | `scripts/siya-tracking.js` |
-| GTM | Map these event names → GA4 (container `GTM-PLBD4TTQ`) |
+| GTM → GA4 map | `docs/GTM-GA4-ENTITY-UTILIZATION.md` |
+| Machine map | `data/entity-utilization-ga4-map.json` |
+| Monthly snapshot | `docs/OPERATING-SNAPSHOT-MONTHLY.md` |
 
 ```bash
 node scripts/apply-entity-utilization.mjs

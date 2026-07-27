@@ -71,6 +71,9 @@ exits non-zero if any Canonical Entity is unreachable from `/primary-care`.
 
 Dashboard: Cursor canvas `knowledge-graph-dashboard.canvas.tsx`.
 
+Entity Utilization (ops): `ENTITY-UTILIZATION.md` + `GTM-GA4-ENTITY-UTILIZATION.md`  
+Monthly snapshot: `OPERATING-SNAPSHOT-MONTHLY.md`
+
 ---
 
 ## Phase C — new Canonical Entity admission

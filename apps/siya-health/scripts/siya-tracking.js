@@ -145,8 +145,9 @@
 
   function assistPayload() {
     var list = readAssistPath();
+    // GA4 event params must be strings/numbers — not arrays.
     return {
-      assisted_entities: list.slice(0, -1),
+      assisted_entities: list.slice(0, -1).join(','),
       assist_path: list.join(','),
     };
   }

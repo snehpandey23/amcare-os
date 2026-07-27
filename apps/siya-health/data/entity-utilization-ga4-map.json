@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "updated": "2026-07-27",
+  "gtm_container_id": "GTM-PLBD4TTQ",
+  "ga4_measurement_id": "G-9WTQWHCTFT",
+  "client_source": "scripts/siya-tracking.js",
+  "note": "Configure in GTM UI. This file is the source of truth for event names and params — do not invent alternate names.",
+  "custom_dimensions": [
+    { "name": "Entity", "scope": "event", "parameter": "entity" },
+    { "name": "Entity family", "scope": "event", "parameter": "entity_family" },
+    { "name": "Care pathway", "scope": "event", "parameter": "care_pathway" },
+    { "name": "Traffic source (Siya)", "scope": "event", "parameter": "traffic_source" },
+    { "name": "Entity state", "scope": "event", "parameter": "state" },
+    { "name": "Related entity", "scope": "event", "parameter": "related_entity" },
+    { "name": "Assist path", "scope": "event", "parameter": "assist_path" },
+    { "name": "Assisted entities", "scope": "event", "parameter": "assisted_entities" },
+    { "name": "Conversion type", "scope": "event", "parameter": "conversion_type" },
+    { "name": "Time on page (ms)", "scope": "event", "parameter": "time_on_page_ms" }
+  ],
+  "events": [
+    {
+      "name": "entity_view",
+      "when": "Canonical Entity page load",
+      "params": ["entity", "entity_family", "care_pathway", "traffic_source", "state", "page_path", "page_location"]
+    },
+    {
+      "name": "entity_related_click",
+      "when": "Click to another Canonical Entity",
+      "params": ["entity", "entity_family", "care_pathway", "traffic_source", "state", "related_entity", "related_entity_family", "link_url", "link_text", "page_path", "page_location"]
+    },
+    {
+      "name": "entity_primary_cta_click",
+      "when": "Primary conversion CTA on entity page",
+      "params": ["entity", "entity_family", "care_pathway", "traffic_source", "state", "link_url", "link_text", "cta_track", "page_path", "page_location"]
+    },
+    {
+      "name": "entity_secondary_cta_click",
+      "when": "Secondary CTA on entity page",
+      "params": ["entity", "entity_family", "care_pathway", "traffic_source", "state", "link_url", "link_text", "cta_track", "page_path", "page_location"]
+    },
+    {
+      "name": "entity_exit",
+      "when": "pagehide / visibility hidden",
+      "params": ["entity", "entity_family", "care_pathway", "traffic_source", "state", "time_on_page_ms", "page_path", "page_location"]
+    },
+    {
+      "name": "entity_conversion",
+      "when": "Primary CTA while entity context known (assisted path attached)",
+      "key_event": true,
+      "params": ["entity", "entity_family", "care_pathway", "traffic_source", "state", "conversion_type", "assist_path", "assisted_entities", "link_url", "link_text", "page_path", "page_location"]
+    },
+    {
+      "name": "entity_guide_entry",
+      "when": "Siya Guide resolves to entity (not yet wired on website)",
+      "status": "reserved",
+      "params": ["entity", "entity_family", "care_pathway"]
+    }
+  ],
+  "preview_urls": [
+    "https://www.siya.health/brain-fog?debug_tracking=1",
+    "https://www.siya.health/fatigue?debug_tracking=1",
+    "https://www.siya.health/primary-care?debug_tracking=1",
+    "https://www.siya.health/adult-adhd-california?debug_tracking=1"
+  ]
+}
