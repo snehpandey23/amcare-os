@@ -66,6 +66,7 @@ Until Custom Event triggers + GA4 Event tags exist in `GTM-PLBD4TTQ`, events sta
 | Body attrs | `scripts/apply-entity-utilization.mjs` |
 | Client events | `scripts/siya-tracking.js` |
 | GTM → GA4 map | `docs/GTM-GA4-ENTITY-UTILIZATION.md` |
+| GA4 Explorations | `docs/GA4-ENTITY-EXPLORATIONS.md` |
 | Machine map | `data/entity-utilization-ga4-map.json` |
 | Monthly snapshot | `docs/OPERATING-SNAPSHOT-MONTHLY.md` |
 

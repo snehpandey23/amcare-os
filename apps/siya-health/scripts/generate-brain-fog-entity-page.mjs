@@ -329,7 +329,7 @@ function render() {
             <li><strong><a href="/labs/iron-ferritin">Ferritin</a></strong> &mdash; iron stores, especially with heavy periods or fatigue overlap</li>
             <li><strong><a href="/labs/vitamin-d">Vitamin D</a></strong> &mdash; when deficiency risk or clinical questions justify it</li>
           </ul>
-          <p>For the cluster view, see <a href="/labs/fatigue-brain-fog">fatigue &amp; brain fog labs</a>. For the parent frame, see <a href="/preventive-care">preventive care</a> and the <a href="/labs/preventive">preventive labs overview</a>. Results still need a clinician&mdash;see <a href="/answers/why-normal-labs-dont-mean-healthy">why normal labs don&rsquo;t mean healthy</a>.</p>
+          <p>For the cluster view, see <a href="/labs/fatigue-brain-fog">fatigue &amp; brain fog labs</a>. For the parent frame, see <a href="/preventive-care">preventive care</a>.</p>
         </div>
       </section>
 
@@ -350,7 +350,6 @@ ${renderDifferentialSection('brain_fog')}
             <li><a href="/blog/brain-fog-after-covid">Brain fog after COVID</a></li>
             <li><a href="/blog/perimenopause-brain-fog">Perimenopause brain fog</a></li>
             <li><a href="/adult-adhd-california">Adult ADHD California</a></li>
-            <li><a href="/labs/fatigue-brain-fog">Fatigue &amp; brain fog labs</a></li>
           </ul>
         </div>
       </section>

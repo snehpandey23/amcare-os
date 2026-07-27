@@ -1,8 +1,8 @@
 {
   "framework": "Siya Knowledge Governance Framework",
   "governanceVersion": "1.0",
-  "generated": "2026-07-26T11:41:13.293Z",
-  "filesScanned": 194,
+  "generated": "2026-07-27T07:45:52.146Z",
+  "filesScanned": 212,
   "registeredBlocks": 26,
   "unregisteredMarkers": [],
   "violations": [],
@@ -21,7 +21,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "chrome",
-      "pagesAffected": 172
+      "pagesAffected": 188
     },
     {
       "id": "SIYA:COOKIE-NOTICE",
@@ -37,7 +37,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "chrome",
-      "pagesAffected": 165
+      "pagesAffected": 181
     },
     {
       "id": "SIYA:CONCIERGE",
@@ -53,7 +53,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "chrome",
-      "pagesAffected": 162
+      "pagesAffected": 178
     },
     {
       "id": "SIYA:PROVIDER-ATTRIBUTION",
@@ -69,7 +69,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "approved",
       "status": "chrome",
-      "pagesAffected": 161
+      "pagesAffected": 177
     },
     {
       "id": "SIYA:CIRCLE-ANALYTICS",
@@ -85,7 +85,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "chrome",
-      "pagesAffected": 160
+      "pagesAffected": 176
     },
     {
       "id": "SIYA:CONTEXT-CLOSING",
@@ -117,7 +117,23 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "production",
-      "pagesAffected": 30
+      "pagesAffected": 31
+    },
+    {
+      "id": "SIYA:FAQ-ACCORDION",
+      "name": "FAQ accordion script",
+      "kind": "chrome",
+      "entity": null,
+      "owner": {
+        "clinical": "n/a",
+        "editorial": "n/a",
+        "engineering": "site-chrome"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "n/a",
+      "status": "chrome",
+      "pagesAffected": 31
     },
     {
       "id": "SIYA:HEADER-SCROLL",
@@ -136,22 +152,6 @@
       "pagesAffected": 29
     },
     {
-      "id": "SIYA:FAQ-ACCORDION",
-      "name": "FAQ accordion script",
-      "kind": "chrome",
-      "entity": null,
-      "owner": {
-        "clinical": "n/a",
-        "editorial": "n/a",
-        "engineering": "site-chrome"
-      },
-      "version": "v1.0",
-      "approved": "2026-07-26",
-      "clinicalReview": "n/a",
-      "status": "chrome",
-      "pagesAffected": 26
-    },
-    {
       "id": "SIYA:BLOG-CTA-METABOLIC",
       "name": "Metabolic / men’s / energy blog CTA band",
       "kind": "cta",
@@ -165,7 +165,7 @@
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
       "status": "production",
-      "pagesAffected": 18
+      "pagesAffected": 25
     },
     {
       "id": "SIYA:ADHD-NEXT-STEPS",
@@ -214,6 +214,22 @@
       "clinicalReview": "n/a",
       "status": "production",
       "pagesAffected": 3
+    },
+    {
+      "id": "SIYA:DIFFERENTIAL-RECOGNITION",
+      "name": "Differential Recognition (\"what it could be\")",
+      "kind": "clinical",
+      "entity": "per-symptom",
+      "owner": {
+        "clinical": "Dr. Swati Pandey",
+        "editorial": "Content OS",
+        "engineering": "differential-diagnosis module"
+      },
+      "version": "v1.0",
+      "approved": "2026-07-26",
+      "clinicalReview": "approved",
+      "status": "production",
+      "pagesAffected": 2
     },
     {
       "id": "SIYA:ANSWERS-ADHD-CARE-PATHWAYS",
@@ -276,22 +292,6 @@
       "version": "v1.0",
       "approved": "2026-07-26",
       "clinicalReview": "n/a",
-      "status": "production",
-      "pagesAffected": 1
-    },
-    {
-      "id": "SIYA:DIFFERENTIAL-RECOGNITION",
-      "name": "Differential Recognition (\"what it could be\")",
-      "kind": "clinical",
-      "entity": "per-symptom",
-      "owner": {
-        "clinical": "Dr. Swati Pandey",
-        "editorial": "Content OS",
-        "engineering": "differential-diagnosis module"
-      },
-      "version": "v1.0",
-      "approved": "2026-07-26",
-      "clinicalReview": "approved",
       "status": "production",
       "pagesAffected": 1
     },

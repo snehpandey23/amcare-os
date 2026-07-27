@@ -1,6 +1,6 @@
 # Knowledge Graph Observability
 
-Generated: 2026-07-27T02:54:33.448Z  
+Generated: 2026-07-27T07:45:53.137Z  
 Platform: **v1** (frozen) · Sprint: **graph-densification-1**
 
 ## Inventory (two numbers — do not conflate)
@@ -47,8 +47,8 @@ Smell threshold: ≥ 4 clicks
 
 | Metric | Value |
 | --- | --- |
-| Avg inbound | 5.77 |
-| Avg outbound | 5.77 |
+| Avg inbound | 5.62 |
+| Avg outbound | 5.62 |
 | Graph density | 0.603 |
 | Connectivity score | 100 |
 | Orphans | none |

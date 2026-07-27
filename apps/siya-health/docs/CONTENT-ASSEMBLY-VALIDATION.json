@@ -1,6 +1,6 @@
 {
-  "date": "2026-07-26",
-  "pages": 194,
+  "date": "2026-07-27",
+  "pages": 212,
   "metrics": {
     "duplicateParagraphGroups": 0,
     "duplicateLimit": 5,
@@ -8,7 +8,7 @@
     "sectionsOver8Links": 0,
     "pagesWithMultiplePrimaryCtas": 0,
     "educationalPagesMissingClosing": 0,
-    "editorialFingerprintAvg": 9.98,
+    "editorialFingerprintAvg": 9.99,
     "editorialFingerprintMin": 9,
     "fingerprintFloor": 9
   },

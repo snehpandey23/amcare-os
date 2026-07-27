@@ -1708,10 +1708,11 @@ export function normalizeCtaHierarchy(html, relPath) {
   }
 
   if (isAdhdFunnelPage(relPath) && !relPath.startsWith('blog/') && html.includes('<!-- FINAL CTA -->')) {
+    // Hero / screening lead owns primary; final band is secondary.
     const screeningBtn = renderButton({
       label: COPY_STANDARDS.adhdSecondaryCta,
       href: '/adhd-screening?adhd=1',
-      variant: 'primary',
+      variant: 'secondary',
       track: 'adhd_screening_click',
       location: 'final-cta',
       pageType: 'adhd',
@@ -1731,9 +1732,10 @@ export function normalizeCtaHierarchy(html, relPath) {
   }
 
   if (relPath === 'index.html' && html.includes('<!-- FINAL CTA -->')) {
+    // Hero owns the single primary; final band reinforces as secondary.
     const chatBtn = renderButton({
       ...slotToButton(CTA_SLOTS.secureChat, { location: 'final-cta', relPath }),
-      variant: 'primary',
+      variant: 'secondary',
     });
     const meetBtn = renderButton({
       ...slotToButton(CTA_SLOTS.meetGreet, { location: 'final-cta', relPath }),
@@ -1751,9 +1753,10 @@ export function normalizeCtaHierarchy(html, relPath) {
       relPath === 'mens-health-longevity.html') &&
     html.includes('<!-- FINAL CTA -->')
   ) {
+    // Hero owns primary; final band is secondary reinforcement.
     const meetBtn = renderButton({
       ...slotToButton(CTA_SLOTS.meetGreet, { location: 'final-cta', relPath }),
-      variant: 'primary',
+      variant: 'secondary',
     });
     const chatBtn = renderButton({
       ...slotToButton(CTA_SLOTS.secureChat, { location: 'final-cta', relPath }),

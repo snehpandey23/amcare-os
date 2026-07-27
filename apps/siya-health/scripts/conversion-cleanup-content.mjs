@@ -108,10 +108,11 @@ export function renderAdhdScreeningDisclaimer() {
 
 /** "What happens next?" ADHD journey — Task 5 (+ disclaimer). Marker: SIYA:ADHD-NEXT-STEPS */
 export function renderAdhdNextSteps(relPath = '') {
+  // Mid-page journey CTA stays secondary — page hero / final CTA owns primary.
   const screeningBtn = renderButton({
     label: 'Take Free ADHD Screening',
     href: SCREENING_URL,
-    variant: 'primary',
+    variant: 'secondary',
     track: 'screening-cta-click',
     location: 'adhd-what-next',
     relPath,
@@ -145,10 +146,11 @@ export function renderAdhdNextSteps(relPath = '') {
 
 /** ADHD blog CTA block — Task 6. Marker: SIYA:BLOG-CTA-ADHD */
 export function renderBlogCtaAdhd(relPath = '') {
+  // Inline mid-article CTA is secondary; blog-final-cta owns the single primary.
   const screeningBtn = renderButton({
     label: 'Take Free ADHD Screening',
     href: SCREENING_URL,
-    variant: 'primary',
+    variant: 'secondary',
     track: 'screening-cta-click',
     location: 'blog-cta-adhd',
     relPath,
@@ -167,10 +169,11 @@ export function renderBlogCtaAdhd(relPath = '') {
 
 /** Metabolic / weight / hormone / fatigue blog CTA block — Task 6. Marker: SIYA:BLOG-CTA-METABOLIC */
 export function renderBlogCtaMetabolic(relPath = '', { serviceHref = '/weight-loss-metabolic-health', serviceLabel = 'Medical weight loss & metabolic health' } = {}) {
+  // Inline mid-article CTA is secondary; blog-final-cta owns the single primary.
   const chatBtn = renderButton({
     label: 'Start Secure Medical Chat',
     href: CHAT_URL,
-    variant: 'primary',
+    variant: 'secondary',
     track: 'primary-cta-click',
     location: 'blog-cta-metabolic',
     relPath,

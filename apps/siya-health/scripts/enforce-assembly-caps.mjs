@@ -4,6 +4,12 @@
  * - Max 1 primary CTA button in <main>
  * - Max 8 <a> links per <section>/<aside>
  *
+ * Primary preference (keep one):
+ *   blog-final-cta / blog-supporting-cta / answer-context-closing
+ *   → hero / book-visit-primary
+ *   → final-cta
+ *   → first remaining
+ *
  * Idempotent. Run after generators / injectors.
  * Usage: node scripts/enforce-assembly-caps.mjs
  */
@@ -16,6 +22,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const SKIP = new Set(['node_modules', '.git', 'brand', 'docs', 'scripts', 'data', 'design-system', '.vercel', 'assets', 'audit']);
 
+const PRIMARY_RE =
+  /<(a|button)\b([^>]*class="[^"]*\b(?:ds-button--primary|button[^"]*\bprimary)\b[^"]*"[^>]*)>([\s\S]*?)<\/\1>/gi;
+
 function walk(dir, out = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     if (e.isDirectory()) {
@@ -27,48 +36,106 @@ function walk(dir, out = []) {
   return out;
 }
 
-function demoteExtraPrimaries(mainHtml) {
-  let seen = 0;
-  // Match ds-button--primary AND legacy "button ... primary" patterns in <main>
-  return mainHtml.replace(
-    /<(a|button)\b([^>]*class="[^"]*\b(?:ds-button--primary|button[^"]*\bprimary)\b[^"]*"[^>]*)>([\s\S]*?)<\/\1>/gi,
-    (full, tag, attrs, inner) => {
-      seen += 1;
-      if (seen === 1) {
-        // Normalize the kept primary to ds-button--primary for consistency
-        return full;
-      }
-      const nextAttrs = attrs
-        .replace(/\bds-button--primary\b/g, 'ds-button--secondary')
-        .replace(/\bbutton\b([^"]*)\bprimary\b/g, 'button$1 ds-button--secondary');
-      return `<${tag}${nextAttrs}>${inner}</${tag}>`;
-    },
-  );
+function primaryScore(attrs = '') {
+  const loc = /data-siya-location="([^"]*)"/i.exec(attrs)?.[1] || '';
+  if (/blog-final-cta|blog-supporting-cta|answer-context-closing/i.test(loc)) return 100;
+  if (/^hero$|book-visit-primary/i.test(loc)) return 80;
+  if (/^final-cta$/i.test(loc)) return 40;
+  if (/blog-cta-|adhd-what-next|nav-mobile|faq-cta/i.test(loc)) return 10;
+  return 20;
 }
 
+function demoteExtraPrimaries(mainHtml) {
+  const matches = [...mainHtml.matchAll(PRIMARY_RE)];
+  if (matches.length <= ASSEMBLY.maxPrimaryCtas) return mainHtml;
+
+  let keepIdx = 0;
+  let best = -1;
+  matches.forEach((m, i) => {
+    const score = primaryScore(m[2]);
+    // Prefer higher score; on ties prefer later (final CTA after mid CTA).
+    if (score > best || (score === best && i > keepIdx)) {
+      best = score;
+      keepIdx = i;
+    }
+  });
+
+  let i = -1;
+  return mainHtml.replace(PRIMARY_RE, (full, tag, attrs, inner) => {
+    i += 1;
+    if (i === keepIdx) return full;
+    const nextAttrs = attrs
+      .replace(/\bds-button--primary\b/g, 'ds-button--secondary')
+      .replace(/\bbutton\b([^"]*)\bprimary\b/g, 'button$1 ds-button--secondary');
+    return `<${tag}${nextAttrs}>${inner}</${tag}>`;
+  });
+}
+
+/**
+ * Cap links per section without destroying provider cards or related hubs.
+ * - Drop duplicate consecutive same-href anchors ("Name" + "View profile")
+ * - Then drop lowest-priority trailing links (pricing/telehealth CTAs, lab panel dumps)
+ */
 function capSectionLinks(mainHtml, max = ASSEMBLY.maxLinksPerSection) {
   return mainHtml.replace(/<(section|aside)\b([^>]*)>([\s\S]*?)<\/\1>/gi, (full, tag, attrs, inner) => {
-    let count = 0;
-    const nextInner = inner.replace(/<a\b[^>]*>[\s\S]*?<\/a>/gi, (a) => {
-      count += 1;
-      if (count <= max) return a;
-      // Drop excess links but keep surrounding text clean.
-      return '';
-    });
-    // Clean empty list items / orphaned separators left by link removal
-    const cleaned = nextInner
-      .replace(/<li>\s*<\/li>/gi, '')
-      .replace(/\s*[·•|,]\s*(?=[·•|,]|<)/g, ' ')
-      .replace(/\(\s*\)/g, '')
-      .replace(/\s{2,}/g, ' ');
-    return `<${tag}${attrs}>${cleaned}</${tag}>`;
+    const linkCount = (inner.match(/<a\b/gi) || []).length;
+    if (linkCount <= max) return full;
+
+    let nextInner = inner;
+    // Collapse duplicate same-href pairs (provider name + View profile).
+    nextInner = nextInner.replace(
+      /(<a\b([^>]*href="([^"]+)"[^>]*)>[\s\S]*?<\/a>)(\s*<a\b[^>]*href="\3"[^>]*>[\s\S]*?<\/a>)/gi,
+      '$1',
+    );
+
+    const remaining = () => (nextInner.match(/<a\b/gi) || []).length;
+    if (remaining() <= max) {
+      return `<${tag}${attrs}>${nextInner}</${tag}>`;
+    }
+
+    // Drop low-priority trailing links until under cap.
+    const dropHref = [
+      /\/pricing\/?$/i,
+      /\/telehealth\/?$/i,
+      /\/labs\/preventive\/?$/i,
+      /\/labs\/fatigue-brain-fog\/?$/i,
+      /\/answers\/why-normal-labs/i,
+      /\/preventive-care\/?$/i,
+    ];
+    for (const re of dropHref) {
+      if (remaining() <= max) break;
+      nextInner = nextInner.replace(/<li>\s*<a\b[^>]*href="([^"]+)"[^>]*>[\s\S]*?<\/a>\s*<\/li>/gi, (li, href) =>
+        re.test(href) ? '' : li,
+      );
+      nextInner = nextInner.replace(/\s*[·•|&]\s*<a\b[^>]*href="([^"]+)"[^>]*>[\s\S]*?<\/a>/gi, (chunk, href) =>
+        re.test(href) && remaining() > max ? '' : chunk,
+      );
+      nextInner = nextInner.replace(/<a\b[^>]*href="([^"]+)"[^>]*class="[^"]*button[^"]*"[^>]*>[\s\S]*?<\/a>/gi, (a, href) =>
+        re.test(href) && remaining() > max ? '' : a,
+      );
+    }
+
+    // Last resort: remove excess trailing <a> tags (keep first max).
+    if (remaining() > max) {
+      let kept = 0;
+      nextInner = nextInner.replace(/<a\b[^>]*>[\s\S]*?<\/a>/gi, (a) => {
+        kept += 1;
+        return kept <= max ? a : '';
+      });
+      nextInner = nextInner
+        .replace(/<li>\s*<\/li>/gi, '')
+        .replace(/\s*[·•|,]\s*(?=[·•|,]|<)/g, ' ')
+        .replace(/\(\s*\)/g, '')
+        .replace(/\s{2,}/g, ' ');
+    }
+
+    return `<${tag}${attrs}>${nextInner}</${tag}>`;
   });
 }
 
 let changed = 0;
 for (const file of walk(ROOT)) {
   let html = fs.readFileSync(file, 'utf8');
-  // Skip retired / noindex stubs
   if (/name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) continue;
   const m = html.match(/^([\s\S]*?<main\b[^>]*>)([\s\S]*?)(<\/main>[\s\S]*)$/i);
   if (!m) continue;

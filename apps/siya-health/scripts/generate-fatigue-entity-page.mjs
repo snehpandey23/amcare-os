@@ -330,8 +330,6 @@ ${renderDifferentialSection('fatigue')}
             <li><a href="/blog/morning-fatigue">Morning fatigue</a></li>
             <li><a href="/blog/fatigue-after-illness">Fatigue after illness</a></li>
             <li><a href="/blog/chronic-fatigue-vs-everyday-tiredness">Chronic vs everyday tiredness</a></li>
-            <li><a href="/preventive-care">Preventive care</a></li>
-            <li><a href="/labs/fatigue-brain-fog">Fatigue &amp; brain fog labs</a></li>
           </ul>
         </div>
       </section>
