@@ -284,7 +284,7 @@ function render() {
             <li><strong>Validated tools as support</strong><span>Rating scales are used when clinically appropriate to inform&mdash;never to replace&mdash;a clinician's judgment.</span></li>
             <li><strong>A plan in plain language</strong><span>Findings explained clearly, with next steps whether or not the answer is ADHD.</span></li>
           </ol>
-          <p>Being recognized later in life is common and valid. Many California adults are identified in their 30s, 40s, or beyond&mdash;often after a child's diagnosis, for example, or after a job change removes the structure that used to hold things together. So, for the specifics of remote evaluation, see <a href="/blog/online-adhd-diagnosis-california">online ADHD diagnosis in California</a> and how <a href="/blog/adhd-telehealth-california">ADHD telehealth works in California</a>.</p>
+          <p>Being recognized later in life is common and valid. Many California adults are identified in their 30s, 40s, or beyond&mdash;often after a child's diagnosis, for example, or after a job change removes the structure that used to hold things together. So, for the specifics of remote evaluation, see <a href="/blog/online-adhd-diagnosis-california">online ADHD diagnosis in California</a>, how <a href="/blog/adhd-telehealth-california">ADHD telehealth works in California</a>, the short FAQ on <a href="/answers/telehealth-adhd-california">ADHD telehealth in California</a>, and <a href="/blog/how-to-choose-adhd-provider-california">how to choose an ADHD provider in California</a>. Prefer to start with a screen? Use the <a href="/adult-adhd-screening-california">California ADHD screening</a>.</p>
         </div>
       </section>
 
@@ -305,7 +305,7 @@ function render() {
               <p>Routines and external structure, ADHD coaching, sleep and exercise, and reasonable workplace or academic accommodations can meaningfully change day-to-day function&mdash;sometimes alone, often alongside medication.</p>
             </article>
           </div>
-          <p>Because ADHD rarely travels alone, a plan may also address sleep, anxiety, or mood, which can make focus problems worse when left untreated. That said, the point of treatment is not a perfect brain; instead, it is getting your effort and your results to finally line up.</p>
+          <p>Because ADHD rarely travels alone, a plan may also address sleep, anxiety, or mood, which can make focus problems worse when left untreated. That said, the point of treatment is not a perfect brain; instead, it is getting your effort and your results to finally line up. For California-specific medication questions, see <a href="/blog/adhd-medication-options-california">ADHD medication options in California</a> and <a href="/blog/adhd-medication-online-california">getting ADHD medication online in California</a>.</p>
         </div>
       </section>
 
@@ -414,12 +414,12 @@ ${faqAccordion(FAQS, 'faq-ca-adhd')}
           <ul class="footer-links">
             <li><a href="/primary-care">Primary care</a></li>
             <li><a href="/adhd-care">ADHD Care</a></li>
-            <li><a href="/adhd-screening">Free ADHD screening</a></li>
+            <li><a href="/adult-adhd-screening-california">California ADHD screening</a></li>
+            <li><a href="/blog/how-to-choose-adhd-provider-california">How to choose an ADHD provider in California</a></li>
+            <li><a href="/preventive-care">Preventive care</a></li>
             <li><a href="/pricing">Pricing</a></li>
-            <li><a href="/blog/executive-dysfunction-adhd">Executive dysfunction in ADHD</a></li>
             <li><a href="/fatigue">Fatigue (when energy is part of the picture)</a></li>
             <li><a href="/brain-fog">Brain fog (when focus is the complaint)</a></li>
-            <li><a href="/preventive-care">Preventive care</a></li>
           </ul>
         </div>
       </section>

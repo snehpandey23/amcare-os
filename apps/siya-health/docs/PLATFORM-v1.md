@@ -121,6 +121,7 @@ do not invent scores without data.
 ## Related frozen docs
 
 - `SIYA-KNOWLEDGE-GOVERNANCE-FRAMEWORK.md`
+- `CALIFORNIA-ADHD-STANDARDS.md` — geographic priority + CA page checklist
 - `CANONICAL-ENTITY-TAXONOMY-v1.md`
 - `CANONICAL-ENTITY-PAGE-BLUEPRINT.md`
 - `SIYA-KNOWLEDGE-PLATFORM.md`

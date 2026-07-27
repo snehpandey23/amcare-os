@@ -165,6 +165,20 @@ This is a **dashboard aggregation of existing components**, not a ninth audit ty
 
 Prefer densification (relationships) before Coverage expansion (new entities).
 
+## Parallel workstreams (post densification)
+
+| Workstream | Goal | Cadence |
+| --- | --- | --- |
+| Knowledge Platform | Graph quality; evidence-backed entities | Slow |
+| SEO & Content | Authority around existing entities | Continuous |
+| Performance Marketing | CAC / CVR / cost per booking | Daily–weekly |
+
+**California first** for geographic depth — see `CALIFORNIA-ADHD-STANDARDS.md`.
+TX / FL / PA later when CA utilization evidence supports expansion.
+
+Every new piece of content must strengthen an existing entity **or** meet
+Phase C admission. Marketing speed must not erode platform integrity.
+
 ## 7. Deferred to v1.1 — Knowledge Lifecycle
 
 Not in v1.0. Do not implement until a real staleness incident or Q4 planning.

@@ -1,6 +1,6 @@
 # Knowledge Graph Observability
 
-Generated: 2026-07-27T01:35:57.452Z  
+Generated: 2026-07-27T02:54:33.448Z  
 Platform: **v1** (frozen) · Sprint: **graph-densification-1**
 
 ## Inventory (two numbers — do not conflate)
