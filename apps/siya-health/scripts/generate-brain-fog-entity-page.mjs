@@ -343,8 +343,10 @@ ${renderDifferentialSection('brain_fog')}
           </div>
           <ul class="footer-links">
             <li><a href="/fatigue">Fatigue: when tired stops being normal</a></li>
-            <li><a href="/preventive-care">Preventive care</a></li>
-            <li><a href="/answers/brain-fog-after-eating">Brain fog after eating</a></li>
+            <li><a href="/primary-care">Primary care</a></li>
+            <li><a href="/blog/brain-fog-vs-adhd">Brain fog vs ADHD</a></li>
+            <li><a href="/blog/brain-fog-and-sleep">Brain fog and sleep</a></li>
+            <li><a href="/blog/brain-fog-after-covid">Brain fog after COVID</a></li>
             <li><a href="/blog/perimenopause-brain-fog">Perimenopause brain fog</a></li>
             <li><a href="/adult-adhd-california">Adult ADHD California</a></li>
             <li><a href="/labs/fatigue-brain-fog">Fatigue &amp; brain fog labs</a></li>

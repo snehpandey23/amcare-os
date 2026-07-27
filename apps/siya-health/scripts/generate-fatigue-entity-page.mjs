@@ -322,14 +322,14 @@ ${renderDifferentialSection('fatigue')}
             <p class="lead">Follow the thread that sounds most like your experience.</p>
           </div>
           <ul class="footer-links">
-            <li><a href="/answers/why-am-i-tired-even-after-sleeping">Why am I tired even after sleeping?</a></li>
-            <li><a href="/answers/afternoon-energy-crash-after-lunch">Afternoon energy crashes after lunch</a></li>
-            <li><a href="/answers/can-sleep-apnea-cause-fatigue">Can sleep apnea cause fatigue?</a></li>
-            <li><a href="/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign">Sleep apnea, fatigue &amp; metabolic risk</a></li>
             <li><a href="/brain-fog">Brain fog</a></li>
+            <li><a href="/primary-care">Primary care</a></li>
+            <li><a href="/blog/fatigue-despite-normal-labs">Fatigue despite normal labs</a></li>
+            <li><a href="/blog/iron-deficiency-and-fatigue">Iron deficiency and fatigue</a></li>
+            <li><a href="/blog/thyroid-and-fatigue">Thyroid and fatigue</a></li>
+            <li><a href="/blog/chronic-fatigue-vs-everyday-tiredness">Chronic vs everyday tiredness</a></li>
             <li><a href="/preventive-care">Preventive care</a></li>
             <li><a href="/labs/fatigue-brain-fog">Fatigue &amp; brain fog labs</a></li>
-            <li><a href="/adult-adhd-california">Adult ADHD California</a></li>
           </ul>
         </div>
       </section>
