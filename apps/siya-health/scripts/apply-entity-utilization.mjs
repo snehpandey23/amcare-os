@@ -17,7 +17,8 @@ function fileForPath(urlPath) {
 
 function stripEntityAttrs(tag) {
   return String(tag || '')
-    .replace(/\s*data-siya-entity(?:-family|-care-pathway)?="[^"]*"/gi, '')
+    .replace(/\s*data-siya-entity(?:-family)?="[^"]*"/gi, '')
+    .replace(/\s*data-siya-care-pathway="[^"]*"/gi, '')
     .replace(/\s*data-siya-state="[^"]*"/gi, '')
     .replace(/\s+/g, ' ')
     .trim();
