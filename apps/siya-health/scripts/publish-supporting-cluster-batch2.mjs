@@ -1,14 +1,11 @@
 /**
- * Publish supporting cluster Batch 1 (Brain Fog + Fatigue).
- * Run: node scripts/publish-supporting-cluster-batch1.mjs
- *
- * Graph pattern: Supporting → Canonical Entity → Related Entity → Primary Care
- * CTA: primary care / Meet & Greet — never ADHD screening as default.
+ * Publish supporting cluster Batch 2.
+ * Run: node scripts/publish-supporting-cluster-batch2.mjs
  */
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { SUPPORTING_CLUSTER_BATCH1 } from './supporting-cluster-batch1-data.mjs';
+import { SUPPORTING_CLUSTER_BATCH2 } from './supporting-cluster-batch2-data.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BLOG_DIR = path.join(__dirname, '..', 'blog');
@@ -51,12 +48,7 @@ function buildBreadcrumb(post) {
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://siya.health/' },
       { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://siya.health/blog' },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: post.breadcrumbShort,
-        item: `https://siya.health/blog/${post.slug}`,
-      },
+      { '@type': 'ListItem', position: 3, name: post.breadcrumbShort, item: `https://siya.health/blog/${post.slug}` },
     ],
   });
 }
@@ -89,7 +81,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-PLBD4TTQ');</script>
 <!-- End Google Tag Manager -->
-<meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="index, follow" />
     <title>${escAttr(post.title)}</title>
@@ -143,7 +135,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
           </header>
           <div class="blog-content">
 ${post.bodyHtml}
-            <aside class="blog-internal-links" aria-label="Strengthen the knowledge graph" data-assembly="supporting-cluster">
+            <aside class="blog-internal-links" aria-label="Knowledge graph" data-assembly="supporting-cluster">
               <p><strong>In this graph:</strong>
                 <a href="${post.canonicalEntity}">${hubLabel(post.cluster)}</a>
                 → <a href="${post.relatedEntity}">${escAttr(post.relatedLabel)}</a>
@@ -153,7 +145,7 @@ ${post.bodyHtml}
             <h2>Frequently asked questions</h2>${faqHtml(post)}
             <section class="blog-provider-cta" aria-labelledby="supporting-cta-heading">
               <h2 id="supporting-cta-heading">Talk with primary care</h2>
-              <p>${post.ctaBlurb || 'This article orients you—it does not diagnose. A licensed clinician can sort look-alikes and decide whether further evaluation fits your situation.'}</p>
+              <p>${post.ctaBlurb}</p>
               <div class="blog-provider-cta-actions">
                 <a class="button ds-button ds-button--primary" href="/book-appointment" data-siya-track="book_appointment_click" data-siya-location="blog-supporting-cta">Book a primary care visit</a>
                 <a class="button ds-button ds-button--secondary secondary" href="/redirect/meet-greet" data-siya-track="meet_greet_click" data-siya-location="blog-supporting-cta">Book Free Meet &amp; Greet</a>
@@ -176,9 +168,9 @@ ${post.bodyHtml}
 `;
 }
 
-for (const post of SUPPORTING_CLUSTER_BATCH1) {
+for (const post of SUPPORTING_CLUSTER_BATCH2) {
   const out = path.join(BLOG_DIR, `${post.slug}.html`);
   fs.writeFileSync(out, buildPage(post));
   console.log('Wrote', path.relative(path.join(__dirname, '..'), out));
 }
-console.log(`Supporting cluster Batch 1: ${SUPPORTING_CLUSTER_BATCH1.length} articles`);
+console.log(`Supporting cluster Batch 2: ${SUPPORTING_CLUSTER_BATCH2.length} articles`);

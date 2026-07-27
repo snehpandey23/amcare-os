@@ -17,6 +17,7 @@ export const SUPPORTING_CLUSTER_BATCH1 = [
     relatedEntity: '/adult-adhd-california',
     relatedLabel: 'Adult ADHD care in California',
     datePublished: '2026-07-27',
+    ctaBlurb: 'Brain fog and ADHD patterns can look similar in a busy adult day. A clinician can take the history that distinguishes a new cognitive symptom from a lifelong attention pattern.',
     lead: 'Feeling foggy is not the same as living with ADHD—but the two often get mixed up. Here is how to think about the difference without self-diagnosing.',
     bodyHtml: `            <p>People use <strong>brain fog</strong> for cloudy thinking, slow recall, and hard-to-finish sentences. <strong>ADHD</strong> is a lifelong pattern of attention, regulation, and executive function. Overlap is real; they are not interchangeable.</p>
             <h2>Where the experiences overlap</h2>
@@ -64,6 +65,7 @@ export const SUPPORTING_CLUSTER_BATCH1 = [
     relatedEntity: '/fatigue',
     relatedLabel: 'Fatigue',
     datePublished: '2026-07-27',
+    ctaBlurb: 'When sleep debt does not explain all of the fog, evaluation can surface other contributors—apnea, iron, mood, or medications—that a good night alone will not fix.',
     lead: 'If your mind feels sticky after nights of short or broken sleep, that is often physiology—not a character flaw.',
     bodyHtml: `            <p>Sleep is when the brain clears metabolic byproducts and consolidates memory. Cut that short and the next day often feels like <a href="/brain-fog">brain fog</a>: slower word-finding, weaker focus, and a sense that thinking takes extra effort.</p>
             <h2>Patterns worth noticing</h2>
@@ -103,6 +105,7 @@ export const SUPPORTING_CLUSTER_BATCH1 = [
     relatedEntity: '/fatigue',
     relatedLabel: 'Fatigue',
     datePublished: '2026-07-27',
+    ctaBlurb: 'Anxiety, ADHD patterns, and medical causes can overlap. Primary care provides a whole-history review that sorting by symptoms alone cannot give you.',
     lead: 'Anxiety does not only feel emotional. It can occupy working memory so thoroughly that thinking itself feels foggy.',
     bodyHtml: `            <p>When the nervous system stays on alert, attention narrows to threat scanning. The result can look like <a href="/brain-fog">brain fog</a>: blanking mid-sentence, rereading the same paragraph, or finishing the day mentally drained (<a href="/fatigue">fatigue</a>).</p>
             <h2>How anxiety shows up as fog</h2>
@@ -141,6 +144,7 @@ export const SUPPORTING_CLUSTER_BATCH1 = [
     relatedEntity: '/fatigue',
     relatedLabel: 'Fatigue',
     datePublished: '2026-07-27',
+    ctaBlurb: 'Post-COVID timing does not rule out treatable contributors like iron, thyroid, sleep apnea, or mood. Primary care keeps the differential open.',
     lead: 'Cognitive fog after COVID is real for many people—and it still deserves a careful differential, not a shrug or a single label.',
     bodyHtml: `            <p>After COVID-19, some adults notice weeks or months of cloudy thinking, slower processing, and word-finding trouble. That experience fits under <a href="/brain-fog">brain fog</a> as a symptom—not a standalone diagnosis.</p>
             <h2>What patients often describe</h2>
@@ -178,6 +182,7 @@ export const SUPPORTING_CLUSTER_BATCH1 = [
     relatedEntity: '/preventive-care',
     relatedLabel: 'Preventive care',
     datePublished: '2026-07-27',
+    ctaBlurb: 'Normal results narrow—but do not close—the differential. A clinician can decide whether sleep, mood, medications, or a different marker deserves attention next.',
     lead: 'A normal CBC or thyroid panel is useful information—not proof that nothing is wrong.',
     bodyHtml: `            <p>Many adults hear “your labs are fine” while still living with crushing <a href="/fatigue">fatigue</a>. Labs are snapshots. They do not measure sleep quality, mood load, recovery after illness, or whether “normal” is the right range for your history.</p>
             <h2>What normal labs can still miss</h2>
@@ -216,6 +221,7 @@ export const SUPPORTING_CLUSTER_BATCH1 = [
     relatedEntity: '/labs/iron-ferritin',
     relatedLabel: 'Ferritin / iron labs',
     datePublished: '2026-07-27',
+    ctaBlurb: 'Iron supplementation can be harmful when unnecessary. Confirm both the need and the cause with primary care before starting a supplement.',
     lead: 'Iron is not a wellness trend—it is a core input for oxygen delivery and cellular energy. When stores run low, tiredness is a common early signal.',
     bodyHtml: `            <p><a href="/fatigue">Fatigue</a> from low iron can show up as heavy limbs, brain fog, shortness of breath on stairs, or restless legs—sometimes before a CBC shows frank anemia.</p>
             <h2>Why ferritin matters</h2>
@@ -254,6 +260,7 @@ export const SUPPORTING_CLUSTER_BATCH1 = [
     relatedEntity: '/labs/thyroid',
     relatedLabel: 'Thyroid (TSH) labs',
     datePublished: '2026-07-27',
+    ctaBlurb: 'Thyroid is one piece of the fatigue differential—not always the answer. Primary care keeps sleep, iron, mood, and medication effects on the table.',
     lead: 'When metabolism slows or swings, energy often goes first. Thyroid disease is one of several medical explanations for persistent tiredness.',
     bodyHtml: `            <p>Underactive or overactive thyroid states can travel with <a href="/fatigue">fatigue</a>, temperature intolerance, weight change, heart-rate shifts, hair changes, and mood symptoms. None of those alone proves thyroid disease.</p>
             <h2>Where TSH fits</h2>
@@ -285,6 +292,7 @@ export const SUPPORTING_CLUSTER_BATCH1 = [
     relatedEntity: '/primary-care',
     relatedLabel: 'Primary care',
     datePublished: '2026-07-27',
+    ctaBlurb: 'Persistent fatigue is a clinical problem, not a lifestyle adjustment. Primary care can sort the history and decide which evaluation path fits.',
     lead: 'Everyone gets tired. Chronic, unexplained fatigue that steals function deserves a clinical frame—not another pep talk.',
     bodyHtml: `            <p>Everyday tiredness usually has an obvious story: late nights, a hard deadline, jet lag. <strong>Persistent fatigue</strong> sticks around, limits what you can do, and often refuses to resolve with a single good weekend.</p>
             <h2>Signals to take seriously</h2>

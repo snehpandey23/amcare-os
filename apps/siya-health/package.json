@@ -33,6 +33,7 @@
     "entity:utilization": "node scripts/apply-entity-utilization.mjs",
     "entity:utilization:checklist": "node scripts/print-entity-utilization-gtm-checklist.mjs",
     "cluster:batch1": "node scripts/publish-supporting-cluster-batch1.mjs",
+    "cluster:batch2": "node scripts/publish-supporting-cluster-batch2.mjs",
     "deploy": "vercel --prod",
     "cornerstone:ca-adhd": "node scripts/generate-california-adhd-cornerstone.mjs",
     "entity:fatigue": "node scripts/generate-fatigue-entity-page.mjs",
