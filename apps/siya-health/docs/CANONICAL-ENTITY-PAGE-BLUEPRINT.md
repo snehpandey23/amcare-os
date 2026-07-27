@@ -1,17 +1,23 @@
 # Canonical Entity Page Blueprint
 
 ```text
-Version:           1.1
+Version:           1.2
 Status:            Production (FROZEN reference)
-Date:              2026-07-26
-Reference pages:   /adult-adhd-california   (condition entity)
-                   /fatigue                 (symptom entity)
+Date:              2026-07-27
+Reference pages:   /adult-adhd-california   (condition)
+                   /fatigue                 (symptom)
+                   /brain-fog               (symptom)
+                   /preventive-care         (service)
+                   /primary-care            (root service)
 Governance:        Siya Knowledge Governance Framework v1.0
+Taxonomy:          CANONICAL-ENTITY-TAXONOMY-v1.md (FROZEN)
 Freeze note:       Transitions diagnostic (~7.8) is not a redesign trigger.
 Naming:            Formerly "Cornerstone Reference Blueprint". Renamed because
                    these pages are canonical ENTITIES, not SEO cornerstones —
                    the same unit the knowledge graph, Public Knowledge API, and
                    Siya Guide resolve against.
+Version note:      v1.2 adds Root Service entity (/primary-care) and points
+                   classification to Taxonomy v1.
 ```
 
 `/adult-adhd-california` was the **first page built because of the governance framework**, not
@@ -25,20 +31,24 @@ Every future flagship page — Brain Fog, Primary Care, Preventive Care, Perimen
 
 ## Entity types
 
-Two shapes so far. The architecture is identical; the destination is not.
+Four presentation families (plus Laboratory markers). Classification is frozen in
+`CANONICAL-ENTITY-TAXONOMY-v1.md`.
 
-| | Condition entity | Symptom entity |
-| --- | --- | --- |
-| Example | `/adult-adhd-california` | `/fatigue` |
-| Reader arrives | naming a condition | describing an experience |
-| Journey | recognition → evaluation → treatment | recognition → meaning → differential → evaluation |
-| Primary CTA | condition action (`Free ADHD Screening`) | `Book a primary care visit` |
-| Schema `about` | `MedicalCondition` | `MedicalSymptom` + `possibleCause[]` |
-| Relationship to siblings | owns its condition; links to symptoms | hub; conditions are *related*, never the destination |
+| | Condition | Symptom | Service | Root Service |
+| --- | --- | --- | --- | --- |
+| Example | `/adult-adhd-california` | `/fatigue` | `/preventive-care` | `/primary-care` |
+| Reader arrives | naming a condition | describing an experience | asking how to stay well | asking where care starts |
+| Primary CTA | condition action | `Book a primary care visit` | `Book a primary care visit` | `Book a primary care visit` |
+| `entity_family` | `condition` | `symptom` | `service` | `root_service` |
+| Graph role | owns condition | hub; conditions related | child frame | **taxonomy root** |
 
-**The rule that matters:** a symptom entity must not funnel into whichever condition the business
-would most like to sell. Fatigue resolves to primary care. ADHD is one differential row on
-`/fatigue`, and that is the whole point of symptom-first reasoning.
+**Symptom rule:** a symptom entity must not funnel into whichever condition the business would most like to sell.
+
+**Service rule:** a service entity is a care frame under the root — not a glossary.
+
+**Root Service rule:** Primary Care is not a sibling of Preventive Care. It is the root of the service hierarchy. `/primary-urgent-care` remains the operational process surface.
+
+Built so far: Condition `/adult-adhd-california` · Symptom `/fatigue` · Symptom `/brain-fog` · Service `/preventive-care` · Root Service `/primary-care` (+ Labs depth).
 
 ---
 
@@ -50,7 +60,11 @@ would most like to sell. Fatigue resolves to primary care. ADHD is one different
 | `/adhd-care` | General ADHD service and care-process page |
 | `/adhd-screening` | Screening action |
 | `/fatigue` | Fatigue symptom canonical entity (primary care destination) |
-| `/primary-urgent-care` | Primary care service and care-process page |
+| `/brain-fog` | Brain fog symptom canonical entity (intersection of fatigue + preventive + labs) |
+| `/primary-care` | **Root Service Entity** — taxonomy root for ongoing care |
+| `/primary-urgent-care` | Operational process surface (acute + booking) under the root |
+| `/preventive-care` | Preventive care **service** canonical entity (parent frame for labs + wellness) |
+| `/labs/preventive` | Preventive labs topic child — not a competing hub |
 | Narrow guides | Specific informational intent |
 
 Do **not** create a competing canonical entity for a topic that already has one.
@@ -107,6 +121,30 @@ Section order:
 
 **Explicitly excluded:** weight-loss, TRT, GLP-1, and hormone funnels. Those are related entities
 reached through the differential when clinically appropriate, not sections of a symptom hub.
+
+### Service-entity variant (`/preventive-care`)
+
+| Item | Path / rule |
+| --- | --- |
+| Generator | `scripts/generate-preventive-care-entity-page.mjs` |
+| Output | `preventive-care.html` (root) |
+| npm script | `npm run entity:preventive-care` |
+
+Section order:
+
+1. Hero (mission + one primary CTA: book primary care)
+2. On this page
+3. Why it matters while you feel fine
+4. What preventive care covers (wellness, screenings, vaccines, cardiometabolic, lifestyle, labs)
+5. Annual wellness visits
+6. Health screenings (individualized, not infinite)
+7. Labs in context — parent frame for `/labs/preventive` (not a competing hub)
+8. Long-term primary care relationship
+9. Related guides (≤6 links)
+10. FAQ accordion
+11. Next step (secondary button; primary already spent in hero)
+
+**Explicitly excluded:** ADHD / GLP-1 / TRT funnels; “what is preventive care?” glossary padding; city directories. Keep `/primary-urgent-care` as the acute + process service page — do not merge architectures.
 
 ---
 
@@ -302,3 +340,6 @@ Built under this blueprint so far:
 | --- | --- | --- | --- |
 | Adult ADHD California | `/adult-adhd-california` | condition | Reference implementation |
 | Fatigue | `/fatigue` | symptom | First clone; introduced Differential Recognition; retired the tiredness blog |
+| Preventive Care | `/preventive-care` | service | Parent frame for Labs depth |
+| Primary Care | `/primary-care` | root_service | Taxonomy root; Phase B |
+| Brain Fog | `/brain-fog` | symptom | Intersection of fatigue + preventive + labs; reuses Differential Recognition |

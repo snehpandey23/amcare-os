@@ -1,0 +1,181 @@
+{
+  "generatedAt": "2026-07-27T01:29:51.527Z",
+  "platform": "v1",
+  "inventory": {
+    "rootServices": 1,
+    "services": 4,
+    "conditions": 3,
+    "symptoms": 2,
+    "laboratories": 8,
+    "otherRegistryEntities": 1,
+    "totalTaxonomyPages": 13,
+    "totalRegistryEntities": 19
+  },
+  "relationshipHealth": {
+    "averageInbound": 4.92,
+    "averageOutbound": 4.92,
+    "directedEdges": 64,
+    "undirectedEdges": 40,
+    "graphDensity": 0.513,
+    "orphanEntities": [
+      "/adult-adhd-california"
+    ],
+    "deadEndEntities": [
+      "/adult-adhd-california"
+    ],
+    "averageGraphDepthFromRoot": 1.58,
+    "unreachableFromRoot": [
+      "/adult-adhd-california"
+    ],
+    "entityConnectivityScore": 92
+  },
+  "governanceHealth": {
+    "assemblyPass": true,
+    "fingerprintAvg": 9.99,
+    "fingerprintMin": 9,
+    "fingerprintFloor": 9,
+    "duplicateParagraphGroups": 0,
+    "pagesWithMultiplePrimaryCtas": 0,
+    "note": "Run npm run governance for full Assembly / Blocks / Hygiene PASS."
+  },
+  "coverage": {
+    "knowledgeCoverageScore": 100,
+    "components": {
+      "entityCompleteness": 20,
+      "relationshipCompleteness": 20,
+      "graphDensity": 20,
+      "serviceCoverage": 20,
+      "symptomLabCoverage": 20
+    },
+    "faqsTotal": 64,
+    "relatedGuidesTotal": 25,
+    "rootServiceLanesLinked": [
+      "/preventive-care",
+      "/adhd-care",
+      "/weight-loss-metabolic-health",
+      "/womens-midlife-health",
+      "/mens-health-longevity",
+      "/telehealth",
+      "/primary-urgent-care"
+    ]
+  },
+  "entities": [
+    {
+      "path": "/primary-care",
+      "inbound": 3,
+      "outbound": 3,
+      "faqs": 8,
+      "relatedGuides": 6,
+      "depthFromRoot": 0,
+      "missing": false
+    },
+    {
+      "path": "/preventive-care",
+      "inbound": 11,
+      "outbound": 9,
+      "faqs": 8,
+      "relatedGuides": 6,
+      "depthFromRoot": 1,
+      "missing": false
+    },
+    {
+      "path": "/adult-adhd-california",
+      "inbound": 0,
+      "outbound": 0,
+      "faqs": 8,
+      "relatedGuides": 0,
+      "depthFromRoot": null,
+      "missing": false
+    },
+    {
+      "path": "/fatigue",
+      "inbound": 11,
+      "outbound": 7,
+      "faqs": 8,
+      "relatedGuides": 7,
+      "depthFromRoot": 1,
+      "missing": false
+    },
+    {
+      "path": "/brain-fog",
+      "inbound": 2,
+      "outbound": 8,
+      "faqs": 8,
+      "relatedGuides": 6,
+      "depthFromRoot": 1,
+      "missing": false
+    },
+    {
+      "path": "/labs/cbc",
+      "inbound": 7,
+      "outbound": 5,
+      "faqs": 3,
+      "relatedGuides": 0,
+      "depthFromRoot": 2,
+      "missing": false
+    },
+    {
+      "path": "/labs/cmp",
+      "inbound": 4,
+      "outbound": 5,
+      "faqs": 3,
+      "relatedGuides": 0,
+      "depthFromRoot": 2,
+      "missing": false
+    },
+    {
+      "path": "/labs/lipid-panel",
+      "inbound": 3,
+      "outbound": 4,
+      "faqs": 3,
+      "relatedGuides": 0,
+      "depthFromRoot": 2,
+      "missing": false
+    },
+    {
+      "path": "/labs/a1c-blood-sugar",
+      "inbound": 4,
+      "outbound": 4,
+      "faqs": 3,
+      "relatedGuides": 0,
+      "depthFromRoot": 2,
+      "missing": false
+    },
+    {
+      "path": "/labs/thyroid",
+      "inbound": 3,
+      "outbound": 5,
+      "faqs": 3,
+      "relatedGuides": 0,
+      "depthFromRoot": 2,
+      "missing": false
+    },
+    {
+      "path": "/labs/iron-ferritin",
+      "inbound": 7,
+      "outbound": 4,
+      "faqs": 3,
+      "relatedGuides": 0,
+      "depthFromRoot": 2,
+      "missing": false
+    },
+    {
+      "path": "/labs/vitamin-b12",
+      "inbound": 7,
+      "outbound": 5,
+      "faqs": 3,
+      "relatedGuides": 0,
+      "depthFromRoot": 2,
+      "missing": false
+    },
+    {
+      "path": "/labs/vitamin-d",
+      "inbound": 2,
+      "outbound": 5,
+      "faqs": 3,
+      "relatedGuides": 0,
+      "depthFromRoot": 2,
+      "missing": false
+    }
+  ]
+}

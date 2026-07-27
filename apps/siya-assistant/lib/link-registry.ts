@@ -41,6 +41,18 @@ export const LINK_REGISTRY: Record<string, LinkRecord> = {
         url: 'https://www.siya.health/fatigue',
         kind: 'education'
     },
+    brain_fog: {
+        id: 'brain_fog',
+        label: 'Brain Fog: when thinking feels slower',
+        url: 'https://www.siya.health/brain-fog',
+        kind: 'education'
+    },
+    executive_dysfunction: {
+        id: 'executive_dysfunction',
+        label: 'Executive Dysfunction & ADHD',
+        url: 'https://www.siya.health/blog/executive-dysfunction-adhd',
+        kind: 'education'
+    },
     adhd_evaluation_cost: {
         id: 'adhd_evaluation_cost',
         label: 'ADHD Evaluation Cost',
@@ -49,8 +61,20 @@ export const LINK_REGISTRY: Record<string, LinkRecord> = {
     },
     primary_care: {
         id: 'primary_care',
+        label: 'Primary Care',
+        url: 'https://www.siya.health/primary-care',
+        kind: 'service'
+    },
+    primary_urgent_care: {
+        id: 'primary_urgent_care',
         label: 'Primary & Urgent Care',
         url: 'https://www.siya.health/primary-urgent-care',
+        kind: 'service'
+    },
+    preventive_care: {
+        id: 'preventive_care',
+        label: 'Preventive Care',
+        url: 'https://www.siya.health/preventive-care',
         kind: 'service'
     },
     telehealth: {
@@ -59,10 +83,22 @@ export const LINK_REGISTRY: Record<string, LinkRecord> = {
         url: 'https://www.siya.health/telehealth',
         kind: 'service'
     },
+    service_availability: {
+        id: 'service_availability',
+        label: 'Telehealth availability by state',
+        url: 'https://www.siya.health/telehealth',
+        kind: 'service'
+    },
     labs: {
         id: 'labs',
         label: 'Labs & Blood Tests',
         url: 'https://www.siya.health/labs',
+        kind: 'service'
+    },
+    labs_preventive: {
+        id: 'labs_preventive',
+        label: 'Preventive & wellness labs',
+        url: 'https://www.siya.health/labs/preventive',
         kind: 'service'
     },
     labs_thyroid: {
@@ -81,6 +117,36 @@ export const LINK_REGISTRY: Record<string, LinkRecord> = {
         id: 'labs_iron',
         label: 'Iron & Ferritin Labs',
         url: 'https://www.siya.health/labs/iron-ferritin',
+        kind: 'service'
+    },
+    labs_cbc: {
+        id: 'labs_cbc',
+        label: 'CBC',
+        url: 'https://www.siya.health/labs/cbc',
+        kind: 'service'
+    },
+    labs_cmp: {
+        id: 'labs_cmp',
+        label: 'CMP',
+        url: 'https://www.siya.health/labs/cmp',
+        kind: 'service'
+    },
+    labs_lipid: {
+        id: 'labs_lipid',
+        label: 'Lipid Panel',
+        url: 'https://www.siya.health/labs/lipid-panel',
+        kind: 'service'
+    },
+    labs_vitamin_b12: {
+        id: 'labs_vitamin_b12',
+        label: 'Vitamin B12',
+        url: 'https://www.siya.health/labs/vitamin-b12',
+        kind: 'service'
+    },
+    labs_vitamin_d: {
+        id: 'labs_vitamin_d',
+        label: 'Vitamin D',
+        url: 'https://www.siya.health/labs/vitamin-d',
         kind: 'service'
     },
     womens_midlife: {

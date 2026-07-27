@@ -92,6 +92,62 @@ export const DIFFERENTIALS = {
       },
     ],
   },
+  brain_fog: {
+    entity: 'brain fog',
+    heading: 'What it could be',
+    lead: 'Brain fog is a symptom description, not a diagnosis. These are contributors clinicians commonly consider — listed to show the range, not to rank likelihood or point you at an answer.',
+    note: 'This is a recognition aid, not a self-assessment. Only a clinician who knows your history can sort these apart, and more than one can be true at the same time.',
+    rows: [
+      {
+        cause: 'Fatigue',
+        recognition: 'When energy reserves are depleted, thinking often feels slower — fog and tiredness commonly arrive together.',
+        href: '/fatigue',
+        linkLabel: 'Fatigue hub',
+      },
+      {
+        cause: 'Sleep disorders',
+        recognition: 'Fragmented or unrefreshing sleep can leave attention and memory blunt the next day, even after hours in bed.',
+        href: '/answers/signs-of-sleep-apnea-in-adults',
+        linkLabel: 'Signs of sleep apnea',
+      },
+      {
+        cause: 'Thyroid disorders',
+        recognition: 'Thyroid shifts can change energy, mood, and mental clarity as part of a broader regulatory picture.',
+        href: '/labs/thyroid',
+        linkLabel: 'TSH / thyroid',
+      },
+      {
+        cause: 'Vitamin B12 deficiency',
+        recognition: 'B12 supports neurologic function; shortfalls can present as fogginess alongside fatigue or nerve symptoms.',
+        href: '/labs/vitamin-b12',
+        linkLabel: 'Vitamin B12',
+      },
+      {
+        cause: 'Iron deficiency',
+        recognition: 'Low iron stores can drain mental stamina and concentration well before frank anemia is obvious.',
+        href: '/labs/iron-ferritin',
+        linkLabel: 'Ferritin &amp; iron',
+      },
+      {
+        cause: 'Depression',
+        recognition: 'Mood conditions often show up as slowed thinking, reduced focus, and a sense that the mind will not engage.',
+        href: '/primary-urgent-care',
+        linkLabel: 'Primary care',
+      },
+      {
+        cause: 'Anxiety',
+        recognition: 'Persistent worry and hypervigilance consume working memory, so ordinary tasks feel cognitively harder.',
+        href: '/primary-urgent-care',
+        linkLabel: 'Primary care',
+      },
+      {
+        cause: 'ADHD',
+        recognition: 'Lifelong attention and executive-function patterns can feel like fog — especially under load — but ADHD is one possibility among many.',
+        href: '/adhd-care',
+        linkLabel: 'ADHD care',
+      },
+    ],
+  },
 };
 
 /**

@@ -216,7 +216,7 @@ function render() {
       <section class="hero-merged" style="background-image: url('/assets/images/healthy-lifestyle.png');">
         <div class="container hero-inner">
           <div class="hero-merged-content">
-            <p class="hero-state-line"><a href="/primary-urgent-care">Primary &amp; Urgent Care</a> &middot; Symptom guide</p>
+            <p class="hero-state-line"><a href="/primary-care">Primary Care</a> &middot; Symptom guide</p>
             <h1>Fatigue: when tired stops being normal</h1>
             <p class="hero-merged-lead">You sleep, and it does not help. Coffee stopped working. People suggest you try harder, or worry less, or go to bed earlier. Persistent fatigue is one of the most common reasons adults see a primary care clinician&mdash;and it is a symptom worth taking seriously rather than absorbing.</p>
             <div class="hero-ctas hero-ctas-row">
@@ -326,8 +326,9 @@ ${renderDifferentialSection('fatigue')}
             <li><a href="/answers/afternoon-energy-crash-after-lunch">Afternoon energy crashes after lunch</a></li>
             <li><a href="/answers/can-sleep-apnea-cause-fatigue">Can sleep apnea cause fatigue?</a></li>
             <li><a href="/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign">Sleep apnea, fatigue &amp; metabolic risk</a></li>
-            <li><a href="/blog/insomnia-treatment-options-beyond-medication">Insomnia options beyond medication</a></li>
-            <li><a href="/answers/brain-fog-after-eating">Brain fog after eating</a></li>
+            <li><a href="/brain-fog">Brain fog</a></li>
+            <li><a href="/preventive-care">Preventive care</a></li>
+            <li><a href="/labs/fatigue-brain-fog">Fatigue &amp; brain fog labs</a></li>
           </ul>
         </div>
       </section>

@@ -90,9 +90,9 @@ export const LABS_TOPIC_PAGES = [
     relatedGuides: [
       { href: '/labs/how-to-read-results', label: 'How to read your lab results' },
       { href: '/fatigue', label: 'Fatigue: when tired stops being normal' },
+      { href: '/brain-fog', label: 'Brain fog: when thinking feels slower' },
       { href: '/answers/why-am-i-tired-even-after-sleeping', label: 'Tired even after sleeping' },
       { href: '/answers/why-normal-labs-dont-mean-healthy', label: "Why normal labs don't mean healthy" },
-      { href: '/blog/iron-deficiency-brain-fog-adhd', label: 'Iron deficiency, brain fog & ADHD' },
     ],
     faqs: [
       {
@@ -109,199 +109,6 @@ export const LABS_TOPIC_PAGES = [
       },
     ],
     medicalFlags: ['Fatigue differential; normal labs do not exclude disease'],
-  },
-  {
-    slug: 'iron-ferritin',
-    navLabel: 'Iron & ferritin testing',
-    h1: 'Iron & Ferritin Testing',
-    title: 'Iron & Ferritin Blood Tests | Direct-Pay Labs | Siya Health',
-    description:
-      'Learn what ferritin and iron studies measure, when testing may be appropriate for fatigue or heavy periods, and why interpretation matters. Transparent direct-pay options available.',
-    lead:
-      'Ferritin reflects stored iron. Iron studies help clinicians evaluate deficiency and related contributors to fatigue, brain fog, hair shedding, or restless legs—when history suggests testing may help.',
-    whenAppropriate: [
-      'Fatigue, brain fog, or restless legs with other iron-deficiency clues',
-      'Heavy or prolonged menstrual bleeding',
-      'Restrictive diets, low iron intake, or GI conditions that affect absorption',
-      'Follow-up after a previously low ferritin or documented deficiency',
-    ],
-    commonTests: [
-      { name: 'Ferritin', note: 'Storage iron; can also rise with inflammation.' },
-      { name: 'Serum iron / TIBC / transferrin saturation', note: 'Often ordered together as iron studies.' },
-      { name: 'Complete blood count (CBC)', note: 'Helps assess anemia and related patterns.' },
-    ],
-    starterSet: {
-      heading: 'A thoughtful starter set (education, not a product list)',
-      lead: 'When iron deficiency is a real question, clinicians often start with a small, interpretable set—not every iron-related assay at once.',
-      items: [
-        'Ferritin',
-        'Iron studies (serum iron, TIBC, transferrin saturation)',
-        'Complete blood count (CBC)',
-      ],
-      note: 'Availability varies; a clinician individualizes which tests—if any—fit your history. This is education, not a catalogue of SKUs.',
-    },
-    cannotTell: [
-      'Ferritin alone does not diagnose ADHD.',
-      'A “normal” ferritin within a wide lab range may still be low for your clinical goals—context matters.',
-      'High ferritin is not always “good iron”—inflammation and other conditions can elevate it.',
-    ],
-    whyInterpretation:
-      'Iron status should be interpreted with symptoms, menstrual history, diet, inflammation markers when relevant, and trends over time—not a single number in isolation.',
-    relatedServices: [
-      { href: '/womens-health', label: "Women's health" },
-      { href: '/womens-midlife-health', label: "Women's midlife health" },
-      { href: '/primary-urgent-care', label: 'Primary care' },
-    ],
-    relatedGuides: [
-      { href: '/labs/how-to-read-results', label: 'How to read your lab results' },
-      { href: '/blog/iron-deficiency-brain-fog-adhd', label: 'Iron deficiency, brain fog & ADHD' },
-      { href: '/fatigue', label: 'Fatigue: when tired stops being normal' },
-      { href: '/labs/fatigue-brain-fog', label: 'Fatigue & brain fog labs' },
-    ],
-    faqs: [
-      {
-        q: 'What does ferritin measure?',
-        a: 'Ferritin reflects stored iron. Low ferritin can support evaluation of iron deficiency. Ferritin can also rise with inflammation, so clinicians interpret it in context.',
-      },
-      {
-        q: 'Should I take iron supplements without testing?',
-        a: 'Generally no. Unnecessary iron can cause side effects and, over time, iron overload risk in some people. Testing first is the safer path when deficiency is suspected.',
-      },
-      {
-        q: 'Does low iron cause ADHD?',
-        a: 'No good evidence supports that iron deficiency causes ADHD. Low iron can contribute to overlapping symptoms like fatigue and poor concentration, which is why ferritin is sometimes checked as part of a broader evaluation.',
-      },
-    ],
-    medicalFlags: ['Iron supplementation caution; ADHD association vs causation'],
-  },
-  {
-    slug: 'thyroid',
-    navLabel: 'Thyroid testing',
-    h1: 'Thyroid Testing',
-    title: 'Thyroid Blood Tests (TSH & More) | Siya Health',
-    description:
-      'Learn when thyroid testing such as TSH and free T4 may be appropriate for fatigue, brain fog, or unexplained changes—and why thyroid disease should not be assumed. Direct-pay options available.',
-    lead:
-      'Thyroid testing can be reasonable when symptoms, history, or exam findings raise concern. It should not be treated as the default explanation for every case of fatigue or brain fog.',
-    whenAppropriate: [
-      'Fatigue, cold intolerance, weight change, hair changes, or mood shifts that raise thyroid questions',
-      'Known thyroid disease needing monitoring',
-      'Family history or other clinical risk factors your clinician considers relevant',
-    ],
-    commonTests: [
-      { name: 'TSH', note: 'Common first-line screening test.' },
-      { name: 'Free T4', note: 'Often added when TSH is abnormal or clinical suspicion is higher.' },
-      { name: 'Additional thyroid tests', note: 'May be considered when clinically appropriate—not routinely for everyone.' },
-    ],
-    starterSet: {
-      heading: 'A thoughtful starter set (education, not a product list)',
-      lead: 'Most thyroid questions begin with a focused screen. Extra thyroid assays are added when results or history justify them—not by default.',
-      items: [
-        'TSH',
-        'Free T4 when TSH is abnormal or suspicion is higher',
-      ],
-      note: 'Availability varies; a clinician individualizes which tests—if any—fit your history. This is education, not a catalogue of SKUs.',
-    },
-    cannotTell: [
-      'A thyroid panel does not diagnose depression, ADHD, or perimenopause.',
-      'Brain fog has many contributors; abnormal TSH needs clinical correlation.',
-      'Normal thyroid labs do not exclude every cause of fatigue.',
-    ],
-    whyInterpretation:
-      'TSH and related values are interpreted against symptoms, medications (including biotin interference in some assays), pregnancy status when relevant, and trends—not a single cutoff in isolation.',
-    relatedServices: [
-      { href: '/primary-urgent-care', label: 'Primary care' },
-      { href: '/womens-health', label: "Women's health" },
-      { href: '/womens-midlife-health', label: "Women's midlife health" },
-      { href: '/mens-health-longevity', label: "Men's health" },
-    ],
-    relatedGuides: [
-      { href: '/labs/how-to-read-results', label: 'How to read your lab results' },
-      { href: '/labs/fatigue-brain-fog', label: 'Fatigue & brain fog labs' },
-      { href: '/blog/perimenopause-brain-fog', label: 'Perimenopause & brain fog' },
-      { href: '/answers/why-normal-labs-dont-mean-healthy', label: "Why normal labs don't mean healthy" },
-    ],
-    faqs: [
-      {
-        q: 'Should I check my thyroid if I have brain fog?',
-        a: 'Thyroid testing can be reasonable when symptoms or history raise concern, but brain fog has many possible contributors. A clinician can help decide whether TSH and related tests are useful for you.',
-      },
-      {
-        q: 'Is TSH enough?',
-        a: 'TSH is a common starting point. Free T4 or other tests may be added based on results and clinical context. More testing is not always better.',
-      },
-      {
-        q: 'Can thyroid labs explain all my symptoms?',
-        a: 'Sometimes thyroid dysfunction contributes; often other factors are involved too. Interpretation and follow-up planning belong with a clinician.',
-      },
-    ],
-    medicalFlags: ['Do not assume thyroid disease from symptoms alone'],
-  },
-  {
-    slug: 'a1c-blood-sugar',
-    navLabel: 'A1c & blood sugar',
-    h1: 'A1c & Blood Sugar Testing',
-    title: 'A1c & Blood Sugar Labs | Metabolic Testing | Siya Health',
-    description:
-      'Learn what hemoglobin A1c measures, how it relates to prediabetes and metabolic health, and when blood sugar testing may be appropriate. Transparent direct-pay options available.',
-    lead:
-      'Hemoglobin A1c reflects average blood sugar over roughly two to three months. It is one tool clinicians use to screen for or monitor diabetes and prediabetes risk—alongside history, exam, and other metabolic markers.',
-    whenAppropriate: [
-      'Weight gain, strong family history of diabetes, or metabolic syndrome features',
-      'Monitoring during medical weight-loss care when clinically indicated',
-      'Prior elevated glucose, A1c, or insulin-resistance concerns',
-      'Preventive screening based on age and risk factors',
-    ],
-    commonTests: [
-      { name: 'Hemoglobin A1c', note: 'Average glycemia over ~2–3 months.' },
-      { name: 'Fasting glucose', note: 'When ordered as part of metabolic evaluation.' },
-      { name: 'Lipid panel', note: 'Cardiovascular and metabolic risk context.' },
-      { name: 'CMP', note: 'Kidney, liver, and electrolyte context alongside metabolic care.' },
-    ],
-    starterSet: {
-      heading: 'A thoughtful starter set (education, not a product list)',
-      lead: 'Metabolic screening is usually a pattern, not a single number. Clinicians often discuss a small cardiometabolic cluster when risk or symptoms support it.',
-      items: [
-        'Hemoglobin A1c',
-        'Fasting glucose when indicated',
-        'Lipid panel',
-        'Comprehensive metabolic panel (CMP)',
-      ],
-      note: 'Availability varies; a clinician individualizes which tests—if any—fit your history. This is education, not a catalogue of SKUs.',
-    },
-    cannotTell: [
-      'A1c alone does not diagnose insulin resistance in every sense of the term patients use online.',
-      'A “normal” A1c does not mean metabolic health is perfect.',
-      'A1c can be misleading in some anemia or hemoglobin variants—clinical context matters.',
-    ],
-    whyInterpretation:
-      'Metabolic risk is a pattern: waist trend, blood pressure, lipids, glucose markers, medications, and symptoms. Siya Health can help decide which tests fit and what to do with the results.',
-    relatedServices: [
-      { href: '/weight-loss-metabolic-health', label: 'Weight & metabolic health' },
-      { href: '/primary-urgent-care', label: 'Primary care' },
-      { href: '/telehealth', label: 'Telehealth' },
-    ],
-    relatedGuides: [
-      { href: '/labs/how-to-read-results', label: 'How to read your lab results' },
-      { href: '/answers/normal-a1c-insulin-resistance', label: 'Normal A1c & insulin resistance' },
-      { href: '/answers/what-is-insulin-resistance', label: 'What is insulin resistance?' },
-      { href: '/answers/why-normal-labs-dont-mean-healthy', label: "Why normal labs don't mean healthy" },
-    ],
-    faqs: [
-      {
-        q: 'What is hemoglobin A1c?',
-        a: 'A1c reflects average blood sugar over roughly the prior two to three months. Clinicians use it to screen for or monitor diabetes and prediabetes risk.',
-      },
-      {
-        q: 'Can I have insulin resistance with a normal A1c?',
-        a: 'Yes, in some cases. A1c is one marker. Symptoms, waist trend, lipids, and other findings still matter. Discuss interpretation with a clinician.',
-      },
-      {
-        q: 'Do I need labs before weight-loss medication?',
-        a: 'Baseline metabolic labs are often appropriate before or during medical weight management. Your clinician decides what is indicated for you.',
-      },
-    ],
-    medicalFlags: ['A1c limitations; insulin resistance nuance'],
   },
   {
     slug: 'womens-midlife',
@@ -442,68 +249,6 @@ export const LABS_TOPIC_PAGES = [
     heroNote: 'Evaluation first—not testosterone-first marketing.',
   },
   {
-    slug: 'vitamin-b12',
-    navLabel: 'Vitamin B12 testing',
-    h1: 'Vitamin B12 Testing',
-    title: 'Vitamin B12 Blood Test | Nutritional Labs | Siya Health',
-    description:
-      'Learn when vitamin B12 testing may be appropriate for fatigue, neurologic symptoms, or dietary risk—and why results need clinical interpretation. Direct-pay options available.',
-    lead:
-      'Vitamin B12 deficiency can contribute to fatigue, neurologic symptoms, and blood-count changes in some people. Testing is most useful when history suggests risk—not as a universal explanation for every symptom.',
-    whenAppropriate: [
-      'Fatigue or neurologic symptoms with dietary or absorption risk factors',
-      'Restrictive diets, certain medications, or GI conditions that affect B12',
-      'Abnormal blood counts that raise deficiency questions',
-      'Monitoring after a previously documented deficiency',
-    ],
-    commonTests: [
-      { name: 'Vitamin B12 level', note: 'Common first test when deficiency is suspected.' },
-      { name: 'CBC', note: 'Blood-count context.' },
-      { name: 'Related markers', note: 'Sometimes considered when results are borderline or clinical suspicion remains—clinician directed.' },
-    ],
-    starterSet: {
-      heading: 'A thoughtful starter set (education, not a product list)',
-      lead: 'When dietary risk, medications, or neurologic symptoms raise B12 questions, clinicians often start with a level plus blood-count context.',
-      items: [
-        'Vitamin B12 level',
-        'Complete blood count (CBC)',
-      ],
-      note: 'Availability varies; a clinician individualizes which tests—if any—fit your history. This is education, not a catalogue of SKUs.',
-    },
-    cannotTell: [
-      'B12 testing does not diagnose ADHD or depression.',
-      'A result in the “normal” range does not always end the conversation if symptoms and risk are high—context matters.',
-      'Self-supplementing high-dose B12 without evaluation is not always the right first step.',
-    ],
-    whyInterpretation:
-      'B12 deficiency has multiple causes. Clinicians interpret levels with symptoms, diet, medications, and related labs—and decide whether replacement and follow-up are needed.',
-    relatedServices: [
-      { href: '/primary-urgent-care', label: 'Primary care' },
-      { href: '/labs/fatigue-brain-fog', label: 'Fatigue & brain fog labs' },
-    ],
-    relatedGuides: [
-      { href: '/labs/how-to-read-results', label: 'How to read your lab results' },
-      { href: '/fatigue', label: 'Fatigue: when tired stops being normal' },
-      { href: '/labs/iron-ferritin', label: 'Iron & ferritin testing' },
-      { href: '/answers/why-normal-labs-dont-mean-healthy', label: "Why normal labs don't mean healthy" },
-    ],
-    faqs: [
-      {
-        q: 'What can vitamin B12 deficiency affect?',
-        a: 'Low B12 can contribute to fatigue, neurologic symptoms, mood or cognitive changes, and blood-count abnormalities in some people. It is not used for self-diagnosis of complex conditions.',
-      },
-      {
-        q: 'Who is at higher risk?',
-        a: 'Risk can rise with restrictive diets, certain medications, malabsorption, and some GI conditions. Your clinician can help assess whether testing fits your history.',
-      },
-      {
-        q: 'If B12 is low, is that the whole answer?',
-        a: 'Often it is one piece. Clinicians still consider other contributors to fatigue and neurologic symptoms and plan follow-up appropriately.',
-      },
-    ],
-    medicalFlags: ['B12 not a universal fatigue explanation'],
-  },
-  {
     slug: 'preventive',
     navLabel: 'Preventive & wellness labs',
     h1: 'Preventive Primary Care Labs',
@@ -519,10 +264,14 @@ export const LABS_TOPIC_PAGES = [
       'Adult primary care monitoring across California, Texas, Pennsylvania, and Florida telehealth visits',
     ],
     commonTests: [
-      { name: 'Complete blood count (CBC)', note: 'Blood-count baseline.' },
-      { name: 'Comprehensive metabolic panel (CMP)', note: 'Kidney, liver, electrolytes, glucose context.' },
-      { name: 'Lipid panel', note: 'Cholesterol and related cardiovascular risk markers.' },
-      { name: 'Hemoglobin A1c', note: 'Average blood sugar when screening or monitoring is appropriate.' },
+      { name: 'Complete blood count (CBC)', note: 'Blood-count baseline.', href: '/labs/cbc' },
+      { name: 'Comprehensive metabolic panel (CMP)', note: 'Kidney, liver, electrolytes, glucose context.', href: '/labs/cmp' },
+      { name: 'Lipid panel', note: 'Cholesterol and related cardiovascular risk markers.', href: '/labs/lipid-panel' },
+      { name: 'Hemoglobin A1c', note: 'Average blood sugar when screening or monitoring is appropriate.', href: '/labs/a1c-blood-sugar' },
+      { name: 'TSH', note: 'Thyroid screening when clinically indicated.', href: '/labs/thyroid' },
+      { name: 'Ferritin / iron studies', note: 'Iron stores when history supports it.', href: '/labs/iron-ferritin' },
+      { name: 'Vitamin B12', note: 'When dietary or neurologic risk fits.', href: '/labs/vitamin-b12' },
+      { name: 'Vitamin D', note: 'When deficiency risk or clinical questions justify it.', href: '/labs/vitamin-d' },
     ],
     starterSet: {
       heading: 'A thoughtful starter set (education, not a product list)',
@@ -543,17 +292,18 @@ export const LABS_TOPIC_PAGES = [
     whyInterpretation:
       'Preventive testing works best inside a primary care relationship: decide what is indicated, review results, and plan follow-up. Siya Health pairs transparent direct-pay access with clinician guidance when you need it.',
     relatedServices: [
+      { href: '/preventive-care', label: 'Preventive care hub' },
       { href: '/primary-urgent-care', label: 'Primary & urgent care' },
       { href: '/telehealth', label: 'Telehealth' },
       { href: '/pricing', label: 'Follow-up plans & pricing' },
     ],
     relatedGuides: [
+      { href: '/preventive-care', label: 'Preventive care hub' },
+      { href: '/labs/cbc', label: 'CBC' },
+      { href: '/labs/cmp', label: 'CMP' },
+      { href: '/labs/lipid-panel', label: 'Lipid panel' },
+      { href: '/labs/a1c-blood-sugar', label: 'HbA1c' },
       { href: '/labs/how-to-read-results', label: 'How to read your lab results' },
-      { href: '/labs/a1c-blood-sugar', label: 'A1c & blood sugar testing' },
-      { href: '/labs/thyroid', label: 'Thyroid testing' },
-      { href: '/answers/why-normal-labs-dont-mean-healthy', label: "Why normal labs don't mean healthy" },
-      { href: '/answers/which-preventive-blood-tests-adults', label: 'Which preventive blood tests adults need' },
-      { href: '/answers/what-to-do-after-lab-results', label: 'What to do after lab results' },
     ],
     faqs: [
       {
@@ -654,6 +404,8 @@ export const LABS_TOPIC_PAGES = [
     heroNote: 'Blood tests do not diagnose ADHD.',
   },
 ];
+
+export { LAB_MARKER_PAGES, labMarkerPath, labMarkerFile } from './lab-markers.mjs';
 
 export function labsTopicPath(slug) {
   return `/labs/${slug}`;

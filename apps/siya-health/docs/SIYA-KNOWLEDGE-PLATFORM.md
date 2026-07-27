@@ -20,7 +20,8 @@ should **plug into these layers** instead of bypassing them.
 ```text
 Presentation
   Website
-  Chatbot (Siya Guide)
+  External bot (Siya Guide) — patients / public
+  Internal bot (Siya Assist) — staff help desk
   Future App
         ↓
 Public Knowledge API
@@ -38,6 +39,8 @@ Knowledge Graph
 Content Blocks
   owned · versioned · clinically scoped (SIYA:* registry)
 ```
+
+Naming freeze: `docs/BOT-NAMING-FREEZE.md` — **External bot** = Guide; **Internal bot** = Assist. Do not use “assistant” alone.
 
 | Layer | Owns | Must not |
 | --- | --- | --- |
@@ -102,29 +105,26 @@ Implementation: `apps/siya-assistant/lib/entities.ts` · registry:
 
 ## Roadmap (platform-first)
 
-Do **not** immediately build Brain Fog or Perimenopause as the next engineering push.
-Strengthen the platform, then let pages compound on it.
+See **`PLATFORM-v1.md`** — the platform is **frozen**. Phase map:
 
-| Order | Workstream | Status |
+| Phase | Name | Status |
 | --- | --- | --- |
-| 1 | Canonical Entity Page Blueprint | Done (`/adult-adhd-california`, `/fatigue`) |
-| 2 | Public Knowledge API v1 (+ intent / care_pathway) | In progress → v3 contract |
-| 3 | Siya Guide (consume the API; do not scrape HTML) | Next |
-| 4 | Third Canonical Entity Page | After Guide consumes the graph |
-| 5 | Labs hub depth | After entity consumption is live |
-| 6 | Preventive Care hub | Bridge across labs + primary care |
+| A | Foundation | Done |
+| B | Core Graph | Done |
+| C | Coverage (density over size) | Operating — evidence decides next entity |
+| D | Consolidation (blog / GSC / linking) | Later |
 
-The chatbot is now more valuable than another 4,000-word article because deterministic
-knowledge exists for it to consume. Return on architecture compounds when other
-systems use what we built — not when we keep producing pages in isolation.
+Internal KPIs: Knowledge Integrity (governance) · Knowledge Coverage (`npm run graph:observe`).
 
----
+Prefer coherence over page count. Every new entity must strengthen the graph.
+
 
 ## Related docs
 
 | Doc | Role |
 | --- | --- |
 | `SIYA-KNOWLEDGE-GOVERNANCE-FRAMEWORK.md` | Constitution / quality gates |
+| `CANONICAL-ENTITY-TAXONOMY-v1.md` | **FROZEN** entity classes (Root Service · Service · Condition · Symptom · Laboratory) |
 | `CANONICAL-ENTITY-PAGE-BLUEPRINT.md` | How to build the next entity page |
 | `CONTENT-ASSEMBLY-SYSTEM.md` | Block composition rules |
 | This file | Platform layers + consumption contract |

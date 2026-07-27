@@ -8,8 +8,11 @@ import { fileURLToPath } from 'url';
 import {
   LABS_TOPIC_PAGES,
   LABS_STOREFRONT_URL,
+  LAB_MARKER_PAGES,
   labsTopicPath,
   labsTopicFile,
+  labMarkerPath,
+  labMarkerFile,
 } from '../data/labs-pages.mjs';
 import { REDIRECT_MEET_GREET_URL } from '../data/providers-core.mjs';
 import { COPY_STANDARDS } from '../data/site-standards.mjs';
@@ -45,6 +48,14 @@ function meetBtn(location, variant = 'secondary') {
   return `<a href="${MEET}" class="${cls}" data-siya-track="meet_greet_click" data-siya-location="${esc(location)}" data-page-type="labs" data-intent="labs" data-conversion-goal="meetGreet" data-cta-slot="meetGreet" data-component="button">${esc(COPY_STANDARDS.meetGreetCta)}</a>`;
 }
 
+function bookPrimaryBtn(location, variant = 'primary') {
+  const cls =
+    variant === 'primary'
+      ? 'button ds-button ds-button--primary'
+      : 'button ds-button ds-button--secondary secondary';
+  return `<a href="/book-appointment" class="${cls}" data-siya-track="book_appointment_click" data-siya-location="${esc(location)}" data-page-type="labs" data-intent="labs" data-conversion-goal="bookAppointment" data-cta-slot="bookAppointment" data-component="button">Book a primary care visit</a>`;
+}
+
 function faqSchema(faqs) {
   return {
     '@context': 'https://schema.org',
@@ -76,10 +87,19 @@ function breadcrumbSchema(page) {
 
 function siblingLinks(currentSlug) {
   const topics = LABS_TOPIC_PAGES.filter((p) => p.slug !== currentSlug)
+    .slice(0, 5)
     .map((p) => `<li><a href="${labsTopicPath(p.slug)}">${esc(p.navLabel)}</a></li>`)
     .join('\n              ');
   return `${topics}
-                <li><a href="/labs/how-to-read-results">How to read your lab results</a></li>`;
+                <li><a href="/labs/how-to-read-results">How to read your lab results</a></li>
+                <li><a href="/preventive-care">Preventive care</a></li>`;
+}
+
+function markerSiblingLinks(currentSlug) {
+  return LAB_MARKER_PAGES.filter((p) => p.slug !== currentSlug)
+    .slice(0, 6)
+    .map((p) => `<li><a href="${labMarkerPath(p.slug)}">${esc(p.navLabel)}</a></li>`)
+    .join('\n              ');
 }
 
 function renderFaqAccordion(faqs, idPrefix) {
@@ -107,12 +127,15 @@ function renderPage(page) {
   const pathUrl = labsTopicPath(page.slug);
   const canonical = `https://siya.health${pathUrl}`;
   const tests = page.commonTests
-    .map(
-      (t) => `            <article class="why-choose-card">
-              <h3>${esc(t.name)}</h3>
+    .map((t) => {
+      const heading = t.href
+        ? `<h3><a href="${esc(t.href)}">${esc(t.name)}</a></h3>`
+        : `<h3>${esc(t.name)}</h3>`;
+      return `            <article class="why-choose-card">
+              ${heading}
               <p>${esc(t.note)}</p>
-            </article>`,
-    )
+            </article>`;
+    })
     .join('\n');
   const when = page.whenAppropriate.map((x) => `<li>${esc(x)}</li>`).join('\n                ');
   const cannot = page.cannotTell.map((x) => `<li>${esc(x)}</li>`).join('\n                ');
@@ -374,7 +397,259 @@ ${renderFaqAccordion(page.faqs, `faq-${page.slug}`)}
 `;
 }
 
+function renderMarkerPage(page) {
+  const pathUrl = labMarkerPath(page.slug);
+  const canonical = `https://siya.health${pathUrl}`;
+  const list = (items) => items.map((x) => `<li>${esc(x)}</li>`).join('\n                ');
+  const linkList = (items) =>
+    items.map((l) => `<li><a href="${esc(l.href)}">${esc(l.label)}</a></li>`).join('\n                ');
+
+  const webPageLd = {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalWebPage',
+    name: page.title,
+    description: page.description,
+    url: canonical,
+    isPartOf: { '@type': 'WebSite', name: 'Siya Health', url: 'https://siya.health' },
+    about: { '@type': 'MedicalTest', name: page.h1 },
+  };
+
+  const crumbs = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://siya.health/' },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Preventive Care',
+        item: 'https://siya.health/preventive-care',
+      },
+      { '@type': 'ListItem', position: 3, name: 'Labs & Blood Tests', item: 'https://siya.health/labs' },
+      { '@type': 'ListItem', position: 4, name: page.navLabel, item: canonical },
+    ],
+  };
+
+  return `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="/scripts/cookie-consent-bootstrap.js"></script>
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <title>${esc(page.title)}</title>
+    <meta name="description" content="${esc(page.description)}" />
+    <link rel="canonical" href="${canonical}" />
+    <meta property="og:title" content="${esc(page.title)}" />
+    <meta property="og:description" content="${esc(page.description)}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="${canonical}" />
+    <meta property="og:site_name" content="Siya Health" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${esc(page.title)}" />
+    <meta name="twitter:description" content="${esc(page.description)}" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;600;700&display=swap" rel="stylesheet" />
+    <script type="application/ld+json">${JSON.stringify(webPageLd)}</script>
+    <script type="application/ld+json">${JSON.stringify(crumbs)}</script>
+    <script type="application/ld+json">${JSON.stringify(faqSchema(page.faqs))}</script>
+  </head>
+  <body class="page-labs page-labs-marker page-service">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container">
+        <a class="header-logo brand-lockup" href="/" aria-label="Siya Health home">
+          <img class="brand-lockup__mark" src="/assets/images/siya-health-mark.png" alt="" width="44" height="44" decoding="async" aria-hidden="true" />
+          <span class="brand-lockup__wordmark">Siya Health<sup class="brand-lockup__reg" aria-hidden="true">®</sup></span>
+        </a>
+        <nav class="nav-center" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="/adhd-care">ADHD Care</a>
+          <a href="/weight-loss-metabolic-health">Weight Loss</a>
+          <a href="/telehealth">Telehealth</a>
+          <a href="/mens-health-longevity">Men's Health</a>
+          <a href="/labs">Labs</a>
+          <a href="/blog">Blog</a>
+        </nav>
+        <div class="nav-cta">
+          ${meetBtn('nav', 'primary')}
+        </div>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
+        <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
+        <div class="nav-mobile">
+          <a href="/">Home</a>
+          <a href="/adhd-care">ADHD Care</a>
+          <a href="/weight-loss-metabolic-health">Weight Loss</a>
+          <a href="/telehealth">Telehealth</a>
+          <a href="/mens-health-longevity">Men's Health</a>
+          <a href="/labs">Labs</a>
+          <a href="/blog">Blog</a>
+          ${meetBtn('nav-mobile', 'primary')}
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero-merged" style="background-image: url('/assets/images/healthy-lifestyle.png');">
+        <div class="container hero-inner">
+          <div class="hero-merged-content">
+            <p class="hero-state-line"><a href="/preventive-care">Preventive Care</a> · <a href="/labs">Labs</a> · Marker guide</p>
+            <h1>${esc(page.h1)}</h1>
+            <p class="hero-merged-lead">${esc(page.lead)}</p>
+            <p class="hero-state-line">${esc(page.navLabel)} education under primary care — not a catalogue SKU page.</p>
+            <div class="hero-ctas hero-ctas-row">
+              ${bookPrimaryBtn(`labs-marker-${page.slug}-hero`, 'primary')}
+              <a href="/labs/preventive" class="button ds-button ds-button--secondary secondary">Preventive labs overview</a>
+            </div>
+            <p class="cta-microcopy">This ${esc(page.navLabel)} page does not interpret your portal numbers. Bring results to a clinician.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-tinted" aria-labelledby="measures-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="measures-heading">What ${esc(page.navLabel)} broadly measures</h2>
+            <p class="lead">High-level ${esc(page.navLabel)} education — not a method manual or a result decoder.</p>
+          </div>
+          <ul class="scan-list">
+                ${list(page.measures)}
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="why-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="why-heading">Why a clinician may consider ${esc(page.navLabel)}</h2>
+            <p class="lead">${esc(page.navLabel)} indication is individualized. More tests are not automatically better care.</p>
+          </div>
+          <ul class="scan-list">
+                ${list(page.whyConsider)}
+          </ul>
+        </div>
+      </section>
+
+      <section class="section section-tinted" aria-labelledby="questions-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="questions-heading">Questions ${esc(page.navLabel)} can help investigate</h2>
+            <p class="lead">Useful ${esc(page.navLabel)} questions — not certainty that this marker explains your symptoms.</p>
+          </div>
+          <ul class="scan-list">
+                ${list(page.questionsHelps)}
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="limits-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="limits-heading">What ${esc(page.navLabel)} cannot diagnose alone</h2>
+            <p class="lead">Clear ${esc(page.navLabel)} limits protect you from false certainty.</p>
+          </div>
+          <ul class="scan-list">
+                ${list(page.cannotAlone)}
+          </ul>
+        </div>
+      </section>
+
+      <section class="section section-tinted" aria-labelledby="followup-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="followup-heading">When ${esc(page.navLabel)} follow-up with a clinician matters</h2>
+            <p class="lead">${esc(page.navLabel)} belongs inside a care relationship — not a one-off PDF.</p>
+          </div>
+          <ul class="scan-list">
+                ${list(page.whenFollowUp)}
+          </ul>
+            <p class="cta-microcopy" style="margin-top:1.5rem;">${bookPrimaryBtn(`labs-marker-${page.slug}-followup`, 'secondary')}</p>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="related-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="related-heading">Related symptoms, services &amp; labs</h2>
+          </div>
+          <div class="why-choose-grid">
+            <article class="why-choose-card">
+              <h3>Symptoms &amp; reading</h3>
+              <ul class="footer-links">
+                ${linkList(page.relatedSymptoms.slice(0, 3))}
+              </ul>
+            </article>
+            <article class="why-choose-card">
+              <h3>Services</h3>
+              <ul class="footer-links">
+                ${linkList(page.relatedServices.slice(0, 3))}
+              </ul>
+            </article>
+            <article class="why-choose-card">
+              <h3>Related labs</h3>
+              <ul class="footer-links">
+                ${linkList(page.relatedLabs.slice(0, 3))}
+              </ul>
+            </article>
+          </div>
+          <p class="cta-microcopy" style="margin-top:1.25rem;">More markers:
+                ${LAB_MARKER_PAGES.filter((p) => p.slug !== page.slug)
+                  .slice(0, 3)
+                  .map((p) => `<a href="${labMarkerPath(p.slug)}">${esc(p.navLabel)}</a>`)
+                  .join(' · ')}
+                · <a href="/labs/preventive">overview</a>
+              </p>
+        </div>
+      </section>
+
+      <section class="section faq-accordion-section section-tinted" aria-labelledby="faq-heading">
+        <div class="container">
+          <div class="faq-accordion">
+            <div class="faq-accordion-header">
+              <h2 id="faq-heading">Frequently asked questions</h2>
+            </div>
+            <div class="faq-accordion-list">
+${renderFaqAccordion(page.faqs, `faq-marker-${page.slug}`)}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FINAL CTA -->
+      <section class="section cta-band" aria-labelledby="final-cta-heading">
+        <div class="container">
+          <h2 id="final-cta-heading">Connect ${esc(page.navLabel)} to preventive primary care</h2>
+          <p class="lead">This page explains ${esc(page.h1)}. Your clinician helps decide whether it belongs in your plan — and what to do after results.</p>
+          <div class="cta-band-buttons">
+            ${bookPrimaryBtn(`labs-marker-${page.slug}-final`, 'secondary')}
+            <a href="/labs/how-to-read-results" class="button ds-button ds-button--secondary secondary">How to read results</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p><a href="/preventive-care">Preventive Care</a> · <a href="/labs">Labs</a> · © 2026 Siya Health Inc.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+`;
+}
+
 function topicHubMarkup() {
+  const markerCards = LAB_MARKER_PAGES.map((p) => {
+    return `            <article class="why-choose-card">
+              <h3><a href="${labMarkerPath(p.slug)}">${esc(p.h1)}</a></h3>
+              <p>${esc(p.lead.slice(0, 140))}${p.lead.length > 140 ? '…' : ''}</p>
+              <p class="cta-microcopy"><a href="${labMarkerPath(p.slug)}">Learn more</a></p>
+            </article>`;
+  }).join('\n');
+
   const cards = LABS_TOPIC_PAGES.map((p) => {
     return `            <article class="why-choose-card">
               <h3><a href="${labsTopicPath(p.slug)}">${esc(p.h1)}</a></h3>
@@ -384,11 +659,22 @@ function topicHubMarkup() {
   }).join('\n');
 
   return `<!-- SIYA:LABS-TOPIC-HUB -->
-      <section class="section section-tinted" id="lab-topics" aria-labelledby="lab-topics-heading">
+      <section class="section section-tinted" id="lab-markers" aria-labelledby="lab-markers-heading">
         <div class="container">
           <div class="section-header">
-            <h2 id="lab-topics-heading">Explore labs by topic</h2>
-            <p class="lead">Deeper guides that connect symptoms, Knowledge Products, and thoughtful testing—without turning labs into a catalogue.</p>
+            <h2 id="lab-markers-heading">Core labs under preventive care</h2>
+            <p class="lead">Marker guides that explain what a test broadly measures — not a catalogue with delusions of grandeur. Parent frame: <a href="/preventive-care">preventive care</a>.</p>
+          </div>
+          <div class="why-choose-grid">
+${markerCards}
+          </div>
+        </div>
+      </section>
+      <section class="section" id="lab-topics" aria-labelledby="lab-topics-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="lab-topics-heading">Explore labs by clinical topic</h2>
+            <p class="lead">Deeper guides that connect symptoms and thoughtful testing clusters.</p>
           </div>
           <div class="why-choose-grid">
 ${cards}
@@ -641,9 +927,17 @@ function main() {
     fs.writeFileSync(full, renderPage(page));
     console.log('Wrote', rel);
   }
+  for (const page of LAB_MARKER_PAGES) {
+    const rel = labMarkerFile(page.slug);
+    const full = path.join(ROOT, rel);
+    fs.writeFileSync(full, renderMarkerPage(page));
+    console.log('Wrote', rel);
+  }
   writeHowToReadResultsPage();
   injectHubIndex();
-  console.log(`Generated ${LABS_TOPIC_PAGES.length} labs topic pages + how-to-read guide`);
+  console.log(
+    `Generated ${LABS_TOPIC_PAGES.length} topic + ${LAB_MARKER_PAGES.length} marker lab pages + how-to-read guide`,
+  );
 }
 
 main();

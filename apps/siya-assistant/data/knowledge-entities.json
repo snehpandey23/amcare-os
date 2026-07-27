@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "source": "Siya Knowledge Governance Framework v1.0 — canonical entity registry",
-  "note": "Deterministic entity lookup for Siya Guide and future products. Given a query, resolve to a canonical entity BEFORE any LLM reasoning. Never invent URLs or CTAs; only use what is declared here. Every answer includes intent + care_pathway so surfaces share routing without inventing it.",
+  "source": "Siya Knowledge Governance Framework v1.0 \u2014 canonical entity registry",
+  "note": "Deterministic entity lookup for Siya Guide. Resolve to a canonical entity BEFORE any LLM. URLs and CTAs come only from the Public Links Registry via id. Never invent paths.",
   "entities": {
     "adult_adhd_california": {
       "entity": "adult_adhd_california",
@@ -9,6 +9,7 @@
       "canonical_page": "/adult-adhd-california",
       "intent": "condition",
       "care_pathway": "adhd_care",
+      "safety_class": "general_information",
       "aliases": [
         "california adhd",
         "adult adhd california",
@@ -21,16 +22,46 @@
         "online adhd diagnosis california",
         "adhd telehealth california",
         "adhd doctor california",
-        "get diagnosed with adhd in california"
+        "get diagnosed with adhd in california",
+        "have adhd and live in california",
+        "adhd and live in california"
       ],
       "geo": "California",
       "topic": "adhd",
-      "primary_cta": { "id": "adhd_screening", "label": "Free ADHD Screening", "url": "/adhd-screening" },
+      "primary_cta": {
+        "id": "adhd_screening",
+        "label": "Free ADHD Screening",
+        "url": "/adhd-screening"
+      },
       "secondary_ctas": [
-        { "id": "adhd_care", "label": "Explore ADHD Care", "url": "/adhd-care" },
-        { "id": "pricing", "label": "Pricing", "url": "/pricing" }
+        {
+          "id": "adhd_care",
+          "label": "Explore ADHD Care",
+          "url": "/adhd-care"
+        },
+        {
+          "id": "pricing",
+          "label": "Pricing",
+          "url": "/pricing"
+        }
       ],
-      "related_entities": ["executive_dysfunction", "women_and_adhd", "adhd_screening", "adhd_care"]
+      "related_entities": [
+        "executive_dysfunction",
+        "women_and_adhd",
+        "adhd_screening",
+        "pricing"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "ca_adhd_hub",
+          "text": "Siya publishes a canonical guide to adult ADHD care in California \u2014 what it can look like in adults, how evaluation works, treatment options, myths, availability, and FAQs \u2014 in one place."
+        },
+        {
+          "id": "ca_adhd_cta",
+          "text": "A free ADHD screening is an educational first step, not a diagnosis. Care is physician-led telehealth for adults in supported states; medication is never guaranteed."
+        }
+      ],
+      "entity_family": "condition"
     },
     "fatigue": {
       "entity": "fatigue",
@@ -38,6 +69,7 @@
       "canonical_page": "/fatigue",
       "intent": "symptom",
       "care_pathway": "primary_care",
+      "safety_class": "general_information",
       "aliases": [
         "fatigue",
         "always tired",
@@ -56,28 +88,96 @@
         "burnt out and exhausted"
       ],
       "topic": "primary care",
-      "parents": ["primary_care", "symptoms"],
-      "children": ["brain_fog", "sleep_problems", "low_energy"],
-      "labs": ["CBC", "Ferritin", "TSH", "Vitamin B12", "Vitamin D", "CMP"],
-      "primary_cta": { "id": "book_appointment", "label": "Book a primary care visit", "url": "/book-appointment" },
+      "parents": [
+        "primary_care",
+        "symptoms"
+      ],
+      "children": [
+        "brain_fog",
+        "sleep_problems",
+        "low_energy"
+      ],
+      "labs": [
+        "CBC",
+        "Ferritin",
+        "TSH",
+        "Vitamin B12",
+        "Vitamin D",
+        "CMP"
+      ],
+      "primary_cta": {
+        "id": "book_appointment",
+        "label": "Book a primary care visit",
+        "url": "/book-appointment"
+      },
       "secondary_ctas": [
-        { "id": "primary_care", "label": "Primary & Urgent Care", "url": "/primary-urgent-care" },
-        { "id": "labs", "label": "Lab Testing", "url": "/labs" }
+        {
+          "id": "primary_care",
+          "label": "Primary & Urgent Care",
+          "url": "/primary-urgent-care"
+        },
+        {
+          "id": "labs",
+          "label": "Lab Testing",
+          "url": "/labs"
+        }
       ],
       "related_guides": [
-        { "id": "guide_tired_after_sleeping", "label": "Why am I tired even after sleeping?", "url": "/answers/why-am-i-tired-even-after-sleeping" },
-        { "id": "guide_brain_fog", "label": "Brain fog after eating", "url": "/answers/brain-fog-after-eating" },
-        { "id": "guide_sleep_apnea", "label": "Signs of sleep apnea in adults", "url": "/answers/signs-of-sleep-apnea-in-adults" },
-        { "id": "guide_perimenopause", "label": "Perimenopause & brain fog", "url": "/blog/perimenopause-brain-fog" },
-        { "id": "labs_iron", "label": "Iron & ferritin testing", "url": "/labs/iron-ferritin" },
-        { "id": "labs_thyroid", "label": "Thyroid testing", "url": "/labs/thyroid" }
+        {
+          "id": "guide_tired_after_sleeping",
+          "label": "Why am I tired even after sleeping?",
+          "url": "/answers/why-am-i-tired-even-after-sleeping"
+        },
+        {
+          "id": "guide_brain_fog",
+          "label": "Brain fog",
+          "url": "/brain-fog"
+        },
+        {
+          "id": "guide_sleep_apnea",
+          "label": "Signs of sleep apnea in adults",
+          "url": "/answers/signs-of-sleep-apnea-in-adults"
+        },
+        {
+          "id": "labs_iron",
+          "label": "Iron & ferritin testing",
+          "url": "/labs/iron-ferritin"
+        },
+        {
+          "id": "labs_thyroid",
+          "label": "Thyroid testing",
+          "url": "/labs/thyroid"
+        }
       ],
       "related_services": [
-        { "id": "primary_care", "label": "Primary & Urgent Care", "url": "/primary-urgent-care" },
-        { "id": "labs", "label": "Lab Testing", "url": "/labs" }
+        {
+          "id": "primary_care",
+          "label": "Primary & Urgent Care",
+          "url": "/primary-urgent-care"
+        },
+        {
+          "id": "labs",
+          "label": "Lab Testing",
+          "url": "/labs"
+        }
       ],
-      "related_entities": ["brain_fog", "sleep_problems", "perimenopause"],
-      "note": "Symptom-first entity. ADHD is ONE possible contributor, never the destination. Do not answer fatigue queries with an ADHD screening CTA."
+      "related_entities": [
+        "brain_fog",
+        "sleep_problems",
+        "perimenopause"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "fatigue_recognition",
+          "text": "Persistent fatigue is a symptom with many possible causes \u2014 iron, thyroid, sleep, mood, hormones, and others \u2014 not a diagnosis by itself."
+        },
+        {
+          "id": "fatigue_pathway",
+          "text": "Siya\u2019s published fatigue guide explains what fatigue means, when evaluation helps, which labs clinicians may consider, and how primary care sorts overlapping causes. ADHD is one possible contributor, not the destination."
+        }
+      ],
+      "note": "Symptom-first. Never answer fatigue with an ADHD screening CTA.",
+      "entity_family": "symptom"
     },
     "executive_dysfunction": {
       "entity": "executive_dysfunction",
@@ -85,11 +185,47 @@
       "canonical_page": "/blog/executive-dysfunction-adhd",
       "intent": "condition",
       "care_pathway": "adhd_care",
-      "aliases": ["executive dysfunction", "executive function adhd", "cant start tasks adhd", "task paralysis"],
+      "safety_class": "general_information",
+      "aliases": [
+        "executive dysfunction",
+        "what is executive dysfunction",
+        "executive function adhd",
+        "cant start tasks adhd",
+        "task paralysis",
+        "executive dysfunction adhd"
+      ],
       "topic": "adhd",
-      "primary_cta": { "id": "adhd_screening", "label": "Free ADHD Screening", "url": "/adhd-screening" },
-      "secondary_ctas": [{ "id": "adhd_care", "label": "Explore ADHD Care", "url": "/adhd-care" }],
-      "related_entities": ["adult_adhd_california", "adhd_care"]
+      "primary_cta": {
+        "id": "adhd_screening",
+        "label": "Free ADHD Screening",
+        "url": "/adhd-screening"
+      },
+      "secondary_ctas": [
+        {
+          "id": "adhd_care",
+          "label": "Explore ADHD Care",
+          "url": "/adhd-care"
+        },
+        {
+          "id": "executive_dysfunction",
+          "label": "Executive dysfunction guide",
+          "url": "/blog/executive-dysfunction-adhd"
+        }
+      ],
+      "related_entities": [
+        "adult_adhd_california",
+        "adhd_care"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "ed_definition",
+          "text": "Executive dysfunction describes difficulty starting, organizing, prioritizing, and finishing tasks \u2014 common in ADHD and covered in Siya\u2019s published executive dysfunction guide."
+        },
+        {
+          "id": "ed_not_diagnosis",
+          "text": "Reading about it is educational. It is not a diagnosis or a treatment plan."
+        }
+      ]
     },
     "women_and_adhd": {
       "entity": "women_and_adhd",
@@ -97,11 +233,1223 @@
       "canonical_page": "/blog/adhd-in-women",
       "intent": "condition",
       "care_pathway": "adhd_care",
-      "aliases": ["adhd in women", "women adhd", "adhd women hormones", "late diagnosis adhd women"],
+      "safety_class": "general_information",
+      "aliases": [
+        "adhd in women",
+        "women adhd",
+        "adhd women hormones",
+        "late diagnosis adhd women"
+      ],
       "topic": "adhd",
-      "primary_cta": { "id": "adhd_screening", "label": "Free ADHD Screening", "url": "/adhd-screening" },
-      "secondary_ctas": [{ "id": "adhd_care", "label": "Explore ADHD Care", "url": "/adhd-care" }],
-      "related_entities": ["adult_adhd_california", "executive_dysfunction"]
+      "primary_cta": {
+        "id": "adhd_screening",
+        "label": "Free ADHD Screening",
+        "url": "/adhd-screening"
+      },
+      "secondary_ctas": [
+        {
+          "id": "adhd_care",
+          "label": "Explore ADHD Care",
+          "url": "/adhd-care"
+        }
+      ],
+      "related_entities": [
+        "adult_adhd_california",
+        "executive_dysfunction"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "women_adhd_hub",
+          "text": "Siya publishes a guide on how ADHD can present in women, why it is often missed, and how evaluation fits into care \u2014 educational, not diagnostic."
+        }
+      ]
+    },
+    "adhd_screening": {
+      "entity": "adhd_screening",
+      "name": "Free ADHD Screening",
+      "canonical_page": "/adhd-screening",
+      "intent": "screening",
+      "care_pathway": "adhd_care",
+      "safety_class": "general_information",
+      "aliases": [
+        "adhd screening",
+        "free adhd screening",
+        "free screening",
+        "take the screening",
+        "where can i take the screening",
+        "where to take the screening",
+        "adult adhd screening",
+        "asrs",
+        "free adhd test"
+      ],
+      "topic": "adhd",
+      "primary_cta": {
+        "id": "adhd_screening",
+        "label": "Free ADHD Screening",
+        "url": "/adhd-screening"
+      },
+      "secondary_ctas": [
+        {
+          "id": "adhd_care",
+          "label": "Explore ADHD Care",
+          "url": "/adhd-care"
+        },
+        {
+          "id": "meet_and_greet",
+          "label": "Book Free Meet & Greet",
+          "url": "/redirect/meet-greet"
+        }
+      ],
+      "related_entities": [
+        "adhd_care",
+        "pricing",
+        "adult_adhd_california"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "screening_where",
+          "text": "You can take Siya\u2019s free adult ADHD screening on the website. It takes a couple of minutes."
+        },
+        {
+          "id": "screening_limits",
+          "text": "Screening is educational and not a diagnosis. A clinician evaluation is a separate next step when appropriate."
+        }
+      ]
+    },
+    "pricing": {
+      "entity": "pricing",
+      "name": "Published Pricing",
+      "canonical_page": "/pricing",
+      "intent": "service",
+      "care_pathway": "telehealth",
+      "safety_class": "general_information",
+      "aliases": [
+        "pricing",
+        "how much does adhd care cost",
+        "adhd care cost",
+        "adhd evaluation cost",
+        "cost of adhd",
+        "what does it cost",
+        "how much does it cost",
+        "published pricing",
+        "siya pricing",
+        "fees",
+        "price list"
+      ],
+      "primary_cta": {
+        "id": "pricing",
+        "label": "Pricing",
+        "url": "/pricing"
+      },
+      "secondary_ctas": [
+        {
+          "id": "adhd_evaluation_cost",
+          "label": "ADHD Evaluation Cost",
+          "url": "/adhd-evaluation-cost"
+        },
+        {
+          "id": "meet_and_greet",
+          "label": "Book Free Meet & Greet",
+          "url": "/redirect/meet-greet"
+        }
+      ],
+      "related_entities": [
+        "adhd_screening",
+        "adhd_care"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "pricing_overview",
+          "text": "Published pricing includes a $149 initial evaluation, plus follow-up plans of $79/month or $149/month when a clinician recommends one. Details can change, so the pricing page is the source of truth."
+        },
+        {
+          "id": "pricing_limits",
+          "text": "Medication and treatment are never guaranteed. Confirm current amounts on the published pricing page."
+        }
+      ]
+    },
+    "service_availability": {
+      "entity": "service_availability",
+      "name": "Telehealth State Availability",
+      "canonical_page": "/telehealth",
+      "intent": "service",
+      "care_pathway": "telehealth",
+      "safety_class": "general_information",
+      "aliases": [
+        "do you serve texas",
+        "serve texas",
+        "available in texas",
+        "do you serve california",
+        "what states",
+        "which states",
+        "do you see patients in",
+        "states you serve",
+        "telehealth availability",
+        "available in florida",
+        "available in pennsylvania"
+      ],
+      "primary_cta": {
+        "id": "telehealth",
+        "label": "Telehealth",
+        "url": "/telehealth"
+      },
+      "secondary_ctas": [
+        {
+          "id": "meet_and_greet",
+          "label": "Book Free Meet & Greet",
+          "url": "/redirect/meet-greet"
+        },
+        {
+          "id": "pricing",
+          "label": "Pricing",
+          "url": "/pricing"
+        }
+      ],
+      "related_entities": [
+        "pricing",
+        "adhd_care",
+        "primary_care"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "states_list",
+          "text": "Siya currently provides telehealth for adults in California, Texas, Pennsylvania, and Florida."
+        },
+        {
+          "id": "states_eligibility",
+          "text": "Eligibility is confirmed when you schedule. State licensing rules apply to the clinician and the visit type."
+        }
+      ]
+    },
+    "adhd_care": {
+      "entity": "adhd_care",
+      "name": "ADHD Care",
+      "canonical_page": "/adhd-care",
+      "intent": "service",
+      "care_pathway": "adhd_care",
+      "safety_class": "general_information",
+      "aliases": [
+        "adhd care",
+        "adult adhd evaluation",
+        "adhd evaluation",
+        "adhd treatment",
+        "about adhd care"
+      ],
+      "topic": "adhd",
+      "primary_cta": {
+        "id": "adhd_screening",
+        "label": "Free ADHD Screening",
+        "url": "/adhd-screening"
+      },
+      "secondary_ctas": [
+        {
+          "id": "adhd_care",
+          "label": "ADHD Care",
+          "url": "/adhd-care"
+        },
+        {
+          "id": "meet_and_greet",
+          "label": "Book Free Meet & Greet",
+          "url": "/redirect/meet-greet"
+        }
+      ],
+      "related_entities": [
+        "adhd_screening",
+        "pricing",
+        "adult_adhd_california"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "adhd_care_overview",
+          "text": "Siya offers adult ADHD evaluation through telehealth when clinically appropriate \u2014 usually a structured visit in supported states."
+        },
+        {
+          "id": "adhd_care_limits",
+          "text": "Screening can help you get oriented, but it isn\u2019t a diagnosis, and medication is never guaranteed."
+        }
+      ]
+    },
+    "preventive_care": {
+      "entity": "preventive_care",
+      "name": "Preventive Care",
+      "canonical_page": "/preventive-care",
+      "intent": "service",
+      "care_pathway": "primary_care",
+      "safety_class": "general_information",
+      "entity_family": "service",
+      "aliases": [
+        "preventive care",
+        "preventative care",
+        "prevention",
+        "annual wellness",
+        "annual checkup",
+        "annual physical",
+        "wellness visit",
+        "health screenings",
+        "health screening",
+        "stay healthy",
+        "preventive medicine",
+        "wellness care",
+        "how do i stay healthy",
+        "vaccinations",
+        "preventive labs"
+      ],
+      "topic": "primary care",
+      "parents": [
+        "primary_care"
+      ],
+      "children": [
+        "annual_wellness",
+        "health_screenings",
+        "vaccinations",
+        "lifestyle",
+        "preventive_labs",
+        "lab_cbc",
+        "lab_cmp",
+        "lab_lipid",
+        "lab_a1c",
+        "lab_tsh",
+        "lab_ferritin",
+        "lab_b12",
+        "lab_vitamin_d"
+      ],
+      "primary_cta": {
+        "id": "book_appointment",
+        "label": "Book a primary care visit",
+        "url": "/book-appointment"
+      },
+      "secondary_ctas": [
+        {
+          "id": "primary_care",
+          "label": "Primary & Urgent Care",
+          "url": "/primary-urgent-care"
+        },
+        {
+          "id": "labs",
+          "label": "Lab Testing",
+          "url": "/labs"
+        }
+      ],
+      "related_guides": [
+        {
+          "id": "guide_preventive_labs",
+          "label": "Which preventive blood tests adults usually need",
+          "url": "/answers/which-preventive-blood-tests-adults"
+        },
+        {
+          "id": "guide_normal_labs",
+          "label": "Why normal labs don't mean healthy",
+          "url": "/answers/why-normal-labs-dont-mean-healthy"
+        },
+        {
+          "id": "labs_preventive",
+          "label": "Preventive & wellness labs",
+          "url": "/labs/preventive"
+        },
+        {
+          "id": "fatigue",
+          "label": "Fatigue",
+          "url": "/fatigue"
+        }
+      ],
+      "related_services": [
+        {
+          "id": "primary_care",
+          "label": "Primary & Urgent Care",
+          "url": "/primary-urgent-care"
+        },
+        {
+          "id": "labs",
+          "label": "Lab Testing",
+          "url": "/labs"
+        },
+        {
+          "id": "telehealth",
+          "label": "Telehealth",
+          "url": "/telehealth"
+        }
+      ],
+      "related_entities": [
+        "primary_care",
+        "labs",
+        "fatigue",
+        "lab_cbc",
+        "lab_cmp",
+        "lab_lipid",
+        "lab_a1c",
+        "lab_tsh",
+        "lab_ferritin",
+        "lab_b12",
+        "lab_vitamin_d",
+        "brain_fog"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "preventive_mission",
+          "text": "Preventive care is how adults stay healthy before something goes wrong \u2014 wellness planning, screenings, vaccines, lifestyle, and labs chosen because they would change a plan."
+        },
+        {
+          "id": "preventive_pathway",
+          "text": "At Siya it lives under physician-led primary care telehealth: a long-term relationship, not a one-off checklist or a random lab catalog. Labs and symptom guides connect here as children of that frame."
+        }
+      ],
+      "note": "Service Canonical Entity. Parent frame for Labs depth and future symptom hubs. Distinct from /primary-urgent-care (acute + primary process page)."
+    },
+    "lab_cbc": {
+      "entity": "lab_cbc",
+      "name": "CBC",
+      "canonical_page": "/labs/cbc",
+      "intent": "lab",
+      "care_pathway": "primary_care",
+      "safety_class": "general_information",
+      "entity_family": "lab",
+      "aliases": [
+        "cbc",
+        "complete blood count",
+        "full blood count"
+      ],
+      "topic": "preventive labs",
+      "parents": [
+        "preventive_care",
+        "labs"
+      ],
+      "children": [],
+      "primary_cta": {
+        "id": "book_appointment",
+        "label": "Book a primary care visit",
+        "url": "/book-appointment"
+      },
+      "secondary_ctas": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "labs_preventive",
+          "label": "Preventive labs overview",
+          "url": "/labs/preventive"
+        }
+      ],
+      "related_guides": [
+        {
+          "id": "labs_preventive",
+          "label": "Preventive & wellness labs",
+          "url": "/labs/preventive"
+        },
+        {
+          "id": "how_to_read",
+          "label": "How to read lab results",
+          "url": "/labs/how-to-read-results"
+        }
+      ],
+      "related_services": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "primary_care",
+          "label": "Primary & Urgent Care",
+          "url": "/primary-urgent-care"
+        }
+      ],
+      "related_entities": [
+        "preventive_care",
+        "fatigue"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "cbc_what",
+          "text": "A CBC looks at circulating blood cells\u2014a common preventive baseline and a starting clue, not a finished diagnosis."
+        },
+        {
+          "id": "cbc_limit",
+          "text": "It cannot diagnose fatigue causes alone, and one abnormal line is not a treatment plan."
+        }
+      ],
+      "note": "Lab marker education under Preventive Care. No individual result interpretation."
+    },
+    "lab_cmp": {
+      "entity": "lab_cmp",
+      "name": "CMP",
+      "canonical_page": "/labs/cmp",
+      "intent": "lab",
+      "care_pathway": "primary_care",
+      "safety_class": "general_information",
+      "entity_family": "lab",
+      "aliases": [
+        "cmp",
+        "comprehensive metabolic panel",
+        "metabolic panel",
+        "chem panel"
+      ],
+      "topic": "preventive labs",
+      "parents": [
+        "preventive_care",
+        "labs"
+      ],
+      "children": [],
+      "primary_cta": {
+        "id": "book_appointment",
+        "label": "Book a primary care visit",
+        "url": "/book-appointment"
+      },
+      "secondary_ctas": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "labs_preventive",
+          "label": "Preventive labs overview",
+          "url": "/labs/preventive"
+        }
+      ],
+      "related_guides": [
+        {
+          "id": "labs_preventive",
+          "label": "Preventive & wellness labs",
+          "url": "/labs/preventive"
+        },
+        {
+          "id": "how_to_read",
+          "label": "How to read lab results",
+          "url": "/labs/how-to-read-results"
+        }
+      ],
+      "related_services": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "primary_care",
+          "label": "Primary & Urgent Care",
+          "url": "/primary-urgent-care"
+        }
+      ],
+      "related_entities": [
+        "preventive_care",
+        "fatigue"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "cmp_what",
+          "text": "A CMP groups chemistry markers for kidney, liver, electrolytes, and a glucose snapshot\u2014useful inside preventive care."
+        },
+        {
+          "id": "cmp_limit",
+          "text": "It does not diagnose diabetes or kidney disease by itself; a single glucose is not the same as A1c."
+        }
+      ],
+      "note": "Lab marker education under Preventive Care. No individual result interpretation."
+    },
+    "lab_lipid": {
+      "entity": "lab_lipid",
+      "name": "Lipid Panel",
+      "canonical_page": "/labs/lipid-panel",
+      "intent": "lab",
+      "care_pathway": "primary_care",
+      "safety_class": "general_information",
+      "entity_family": "lab",
+      "aliases": [
+        "lipid panel",
+        "cholesterol panel",
+        "cholesterol test",
+        "lipids"
+      ],
+      "topic": "preventive labs",
+      "parents": [
+        "preventive_care",
+        "labs"
+      ],
+      "children": [],
+      "primary_cta": {
+        "id": "book_appointment",
+        "label": "Book a primary care visit",
+        "url": "/book-appointment"
+      },
+      "secondary_ctas": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "labs_preventive",
+          "label": "Preventive labs overview",
+          "url": "/labs/preventive"
+        }
+      ],
+      "related_guides": [
+        {
+          "id": "labs_preventive",
+          "label": "Preventive & wellness labs",
+          "url": "/labs/preventive"
+        },
+        {
+          "id": "how_to_read",
+          "label": "How to read lab results",
+          "url": "/labs/how-to-read-results"
+        }
+      ],
+      "related_services": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "primary_care",
+          "label": "Primary & Urgent Care",
+          "url": "/primary-urgent-care"
+        }
+      ],
+      "related_entities": [
+        "preventive_care",
+        "fatigue"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "lipid_what",
+          "text": "A lipid panel informs cardiovascular risk conversations in preventive care\u2014it does not replace blood pressure or history."
+        },
+        {
+          "id": "lipid_limit",
+          "text": "Lipids alone do not diagnose heart disease or dictate one path for everyone."
+        }
+      ],
+      "note": "Lab marker education under Preventive Care. No individual result interpretation."
+    },
+    "lab_a1c": {
+      "entity": "lab_a1c",
+      "name": "HbA1c",
+      "canonical_page": "/labs/a1c-blood-sugar",
+      "intent": "lab",
+      "care_pathway": "primary_care",
+      "safety_class": "general_information",
+      "entity_family": "lab",
+      "aliases": [
+        "hba1c",
+        "a1c",
+        "hemoglobin a1c",
+        "glycated hemoglobin",
+        "blood sugar test"
+      ],
+      "topic": "preventive labs",
+      "parents": [
+        "preventive_care",
+        "labs"
+      ],
+      "children": [],
+      "primary_cta": {
+        "id": "book_appointment",
+        "label": "Book a primary care visit",
+        "url": "/book-appointment"
+      },
+      "secondary_ctas": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "labs_preventive",
+          "label": "Preventive labs overview",
+          "url": "/labs/preventive"
+        }
+      ],
+      "related_guides": [
+        {
+          "id": "labs_preventive",
+          "label": "Preventive & wellness labs",
+          "url": "/labs/preventive"
+        },
+        {
+          "id": "how_to_read",
+          "label": "How to read lab results",
+          "url": "/labs/how-to-read-results"
+        }
+      ],
+      "related_services": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "primary_care",
+          "label": "Primary & Urgent Care",
+          "url": "/primary-urgent-care"
+        }
+      ],
+      "related_entities": [
+        "preventive_care",
+        "fatigue"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "a1c_what",
+          "text": "HbA1c reflects average blood sugar over roughly two to three months\u2014a preventive and metabolic tool."
+        },
+        {
+          "id": "a1c_limit",
+          "text": "It does not explain every fatigue story, and one value is not a full diabetes evaluation."
+        }
+      ],
+      "note": "Lab marker education under Preventive Care. No individual result interpretation."
+    },
+    "lab_tsh": {
+      "entity": "lab_tsh",
+      "name": "TSH",
+      "canonical_page": "/labs/thyroid",
+      "intent": "lab",
+      "care_pathway": "primary_care",
+      "safety_class": "general_information",
+      "entity_family": "lab",
+      "aliases": [
+        "tsh",
+        "thyroid test",
+        "thyroid stimulating hormone",
+        "thyroid labs"
+      ],
+      "topic": "preventive labs",
+      "parents": [
+        "preventive_care",
+        "labs"
+      ],
+      "children": [],
+      "primary_cta": {
+        "id": "book_appointment",
+        "label": "Book a primary care visit",
+        "url": "/book-appointment"
+      },
+      "secondary_ctas": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "labs_preventive",
+          "label": "Preventive labs overview",
+          "url": "/labs/preventive"
+        }
+      ],
+      "related_guides": [
+        {
+          "id": "labs_preventive",
+          "label": "Preventive & wellness labs",
+          "url": "/labs/preventive"
+        },
+        {
+          "id": "how_to_read",
+          "label": "How to read lab results",
+          "url": "/labs/how-to-read-results"
+        }
+      ],
+      "related_services": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "primary_care",
+          "label": "Primary & Urgent Care",
+          "url": "/primary-urgent-care"
+        }
+      ],
+      "related_entities": [
+        "preventive_care",
+        "fatigue"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "tsh_what",
+          "text": "TSH is a common first thyroid marker when history raises endocrine questions."
+        },
+        {
+          "id": "tsh_limit",
+          "text": "TSH does not diagnose ADHD or depression, and normal TSH does not prove symptoms are imaginary."
+        }
+      ],
+      "note": "Lab marker education under Preventive Care. No individual result interpretation."
+    },
+    "lab_ferritin": {
+      "entity": "lab_ferritin",
+      "name": "Ferritin",
+      "canonical_page": "/labs/iron-ferritin",
+      "intent": "lab",
+      "care_pathway": "primary_care",
+      "safety_class": "general_information",
+      "entity_family": "lab",
+      "aliases": [
+        "ferritin",
+        "iron studies",
+        "iron test",
+        "iron deficiency labs"
+      ],
+      "topic": "preventive labs",
+      "parents": [
+        "preventive_care",
+        "labs"
+      ],
+      "children": [],
+      "primary_cta": {
+        "id": "book_appointment",
+        "label": "Book a primary care visit",
+        "url": "/book-appointment"
+      },
+      "secondary_ctas": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "labs_preventive",
+          "label": "Preventive labs overview",
+          "url": "/labs/preventive"
+        }
+      ],
+      "related_guides": [
+        {
+          "id": "labs_preventive",
+          "label": "Preventive & wellness labs",
+          "url": "/labs/preventive"
+        },
+        {
+          "id": "how_to_read",
+          "label": "How to read lab results",
+          "url": "/labs/how-to-read-results"
+        }
+      ],
+      "related_services": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "primary_care",
+          "label": "Primary & Urgent Care",
+          "url": "/primary-urgent-care"
+        }
+      ],
+      "related_entities": [
+        "preventive_care",
+        "fatigue"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "ferritin_what",
+          "text": "Ferritin reflects iron stores and is often read with a CBC when fatigue has iron-related clues."
+        },
+        {
+          "id": "ferritin_limit",
+          "text": "Ferritin does not diagnose ADHD, and a single value is not a supplement prescription."
+        }
+      ],
+      "note": "Lab marker education under Preventive Care. No individual result interpretation."
+    },
+    "lab_b12": {
+      "entity": "lab_b12",
+      "name": "Vitamin B12",
+      "canonical_page": "/labs/vitamin-b12",
+      "intent": "lab",
+      "care_pathway": "primary_care",
+      "safety_class": "general_information",
+      "entity_family": "lab",
+      "aliases": [
+        "vitamin b12",
+        "b12 test",
+        "b12 level",
+        "cobalamin"
+      ],
+      "topic": "preventive labs",
+      "parents": [
+        "preventive_care",
+        "labs"
+      ],
+      "children": [],
+      "primary_cta": {
+        "id": "book_appointment",
+        "label": "Book a primary care visit",
+        "url": "/book-appointment"
+      },
+      "secondary_ctas": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "labs_preventive",
+          "label": "Preventive labs overview",
+          "url": "/labs/preventive"
+        }
+      ],
+      "related_guides": [
+        {
+          "id": "labs_preventive",
+          "label": "Preventive & wellness labs",
+          "url": "/labs/preventive"
+        },
+        {
+          "id": "how_to_read",
+          "label": "How to read lab results",
+          "url": "/labs/how-to-read-results"
+        }
+      ],
+      "related_services": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "primary_care",
+          "label": "Primary & Urgent Care",
+          "url": "/primary-urgent-care"
+        }
+      ],
+      "related_entities": [
+        "preventive_care",
+        "fatigue"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "b12_what",
+          "text": "B12 testing is most useful when diet, medications, or neurologic clues suggest risk\u2014not as a universal fatigue answer."
+        },
+        {
+          "id": "b12_limit",
+          "text": "B12 testing does not diagnose ADHD or depression."
+        }
+      ],
+      "note": "Lab marker education under Preventive Care. No individual result interpretation."
+    },
+    "lab_vitamin_d": {
+      "entity": "lab_vitamin_d",
+      "name": "Vitamin D",
+      "canonical_page": "/labs/vitamin-d",
+      "intent": "lab",
+      "care_pathway": "primary_care",
+      "safety_class": "general_information",
+      "entity_family": "lab",
+      "aliases": [
+        "vitamin d",
+        "vitamin d test",
+        "25-oh vitamin d",
+        "25 hydroxy vitamin d"
+      ],
+      "topic": "preventive labs",
+      "parents": [
+        "preventive_care",
+        "labs"
+      ],
+      "children": [],
+      "primary_cta": {
+        "id": "book_appointment",
+        "label": "Book a primary care visit",
+        "url": "/book-appointment"
+      },
+      "secondary_ctas": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "labs_preventive",
+          "label": "Preventive labs overview",
+          "url": "/labs/preventive"
+        }
+      ],
+      "related_guides": [
+        {
+          "id": "labs_preventive",
+          "label": "Preventive & wellness labs",
+          "url": "/labs/preventive"
+        },
+        {
+          "id": "how_to_read",
+          "label": "How to read lab results",
+          "url": "/labs/how-to-read-results"
+        }
+      ],
+      "related_services": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "primary_care",
+          "label": "Primary & Urgent Care",
+          "url": "/primary-urgent-care"
+        }
+      ],
+      "related_entities": [
+        "preventive_care",
+        "fatigue"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "vd_what",
+          "text": "25-OH vitamin D is the usual status marker\u2014useful when deficiency risk justifies it, not a cure-all for fatigue."
+        },
+        {
+          "id": "vd_limit",
+          "text": "Vitamin D does not diagnose depression or ADHD, and more is not always better."
+        }
+      ],
+      "note": "Lab marker education under Preventive Care. No individual result interpretation."
+    },
+    "brain_fog": {
+      "entity": "brain_fog",
+      "name": "Brain Fog",
+      "canonical_page": "/brain-fog",
+      "intent": "symptom",
+      "care_pathway": "primary_care",
+      "safety_class": "general_information",
+      "entity_family": "symptom",
+      "aliases": [
+        "brain fog",
+        "brainfog",
+        "mental fog",
+        "cloudy thinking",
+        "foggy headed",
+        "foggy head",
+        "slowed thinking",
+        "thinking feels slow",
+        "can't think clearly",
+        "cant think clearly",
+        "hard to concentrate",
+        "difficulty concentrating",
+        "word finding difficulty",
+        "mental cloudiness",
+        "why is my thinking slow"
+      ],
+      "topic": "primary care",
+      "parents": [
+        "primary_care",
+        "symptoms"
+      ],
+      "children": [],
+      "labs": [
+        "CBC",
+        "TSH",
+        "Vitamin B12",
+        "Ferritin",
+        "Vitamin D"
+      ],
+      "primary_cta": {
+        "id": "book_appointment",
+        "label": "Book a primary care visit",
+        "url": "/book-appointment"
+      },
+      "secondary_ctas": [
+        {
+          "id": "primary_care",
+          "label": "Primary & Urgent Care",
+          "url": "/primary-urgent-care"
+        },
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "fatigue",
+          "label": "Fatigue",
+          "url": "/fatigue"
+        }
+      ],
+      "related_guides": [
+        {
+          "id": "fatigue",
+          "label": "Fatigue",
+          "url": "/fatigue"
+        },
+        {
+          "id": "guide_brain_fog_eating",
+          "label": "Brain fog after eating",
+          "url": "/answers/brain-fog-after-eating"
+        },
+        {
+          "id": "labs_cbc",
+          "label": "CBC",
+          "url": "/labs/cbc"
+        },
+        {
+          "id": "labs_thyroid",
+          "label": "TSH",
+          "url": "/labs/thyroid"
+        },
+        {
+          "id": "labs_vitamin_b12",
+          "label": "Vitamin B12",
+          "url": "/labs/vitamin-b12"
+        },
+        {
+          "id": "labs_iron",
+          "label": "Ferritin",
+          "url": "/labs/iron-ferritin"
+        },
+        {
+          "id": "labs_vitamin_d",
+          "label": "Vitamin D",
+          "url": "/labs/vitamin-d"
+        }
+      ],
+      "related_services": [
+        {
+          "id": "primary_care",
+          "label": "Primary & Urgent Care",
+          "url": "/primary-urgent-care"
+        },
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "labs",
+          "label": "Lab Testing",
+          "url": "/labs"
+        }
+      ],
+      "related_entities": [
+        "fatigue",
+        "preventive_care",
+        "lab_b12",
+        "lab_tsh",
+        "lab_cbc",
+        "lab_ferritin",
+        "lab_vitamin_d",
+        "adult_adhd_california"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "brain_fog_recognition",
+          "text": "Brain fog is everyday language for slowed thinking, weaker focus, or mental effort that costs more than it used to \u2014 a symptom description, not a diagnosis by itself."
+        },
+        {
+          "id": "brain_fog_pathway",
+          "text": "Siya\u2019s brain fog guide connects fatigue, preventive care, and related labs (CBC, TSH, B12, ferritin, vitamin D). ADHD is one possible related entity, not the destination. Primary care is the starting frame."
+        }
+      ],
+      "note": "Symptom-first. Never answer brain fog with an ADHD screening CTA."
+    },
+    "primary_care": {
+      "entity": "primary_care",
+      "name": "Primary Care",
+      "canonical_page": "/primary-care",
+      "intent": "service",
+      "care_pathway": "primary_care",
+      "safety_class": "general_information",
+      "entity_family": "root_service",
+      "aliases": [
+        "primary care",
+        "primary care doctor",
+        "find a primary care doctor",
+        "need a doctor",
+        "family doctor",
+        "internal medicine",
+        "ongoing care",
+        "who should I see",
+        "where do I start",
+        "general practitioner",
+        "gp telehealth",
+        "primary care telehealth"
+      ],
+      "topic": "primary care",
+      "parents": [],
+      "children": [
+        "preventive_care",
+        "fatigue",
+        "brain_fog",
+        "primary_urgent_care"
+      ],
+      "primary_cta": {
+        "id": "book_appointment",
+        "label": "Book a primary care visit",
+        "url": "/book-appointment"
+      },
+      "secondary_ctas": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "primary_urgent_care",
+          "label": "Primary & Urgent Care",
+          "url": "/primary-urgent-care"
+        },
+        {
+          "id": "labs",
+          "label": "Labs & Blood Tests",
+          "url": "/labs"
+        }
+      ],
+      "related_guides": [
+        {
+          "id": "fatigue",
+          "label": "Fatigue",
+          "url": "/fatigue"
+        },
+        {
+          "id": "brain_fog",
+          "label": "Brain fog",
+          "url": "/brain-fog"
+        },
+        {
+          "id": "preventive_care",
+          "label": "Preventive care",
+          "url": "/preventive-care"
+        }
+      ],
+      "related_services": [
+        {
+          "id": "preventive_care",
+          "label": "Preventive Care",
+          "url": "/preventive-care"
+        },
+        {
+          "id": "telehealth",
+          "label": "Telehealth",
+          "url": "/telehealth"
+        },
+        {
+          "id": "adhd_care",
+          "label": "ADHD Care",
+          "url": "/adhd-care"
+        }
+      ],
+      "related_entities": [
+        "preventive_care",
+        "fatigue",
+        "brain_fog",
+        "adult_adhd_california"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "primary_care_root",
+          "text": "Primary care is the root of ongoing health at Siya: symptoms, prevention, labs in context, and specialty lanes under one physician-led telehealth relationship."
+        },
+        {
+          "id": "primary_care_start",
+          "text": "You do not need a finished diagnosis to start. Book a primary care visit with your timeline and what changed \u2014 specialty lanes become branches when history supports them."
+        }
+      ],
+      "note": "Root Service Entity. Taxonomy class root_service. Distinct from /primary-urgent-care (process surface)."
     }
   }
 }

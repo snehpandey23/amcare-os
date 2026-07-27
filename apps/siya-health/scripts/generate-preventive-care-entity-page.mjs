@@ -1,0 +1,371 @@
+/**
+ * Generates /preventive-care — SERVICE CANONICAL ENTITY PAGE.
+ *
+ * Third Canonical Entity Page (docs/CANONICAL-ENTITY-PAGE-BLUEPRINT.md).
+ * Entity family: Service (not Symptom, not Condition).
+ *
+ * Mission: answer "How do I stay healthy before something goes wrong?"
+ * — not "What is preventive care?" as a definition page.
+ *
+ * Ownership vs siblings:
+ *   /primary-care         → Root Service Entity (taxonomy root)
+ *   /primary-urgent-care  → acute + process / booking surface under the root
+ *   /preventive-care      → staying well: wellness, screenings, vaccines, lifestyle, labs-in-context
+ *   /labs/preventive      → labs topic child (not a competing hub)
+ *   /fatigue              → symptom child of the primary-care graph
+ *
+ * CTA policy: ONE primary = Book a primary care visit. No ADHD / GLP-1 / TRT funnels.
+ *
+ * Run: node scripts/generate-preventive-care-entity-page.mjs  (BEFORE seo-build.mjs)
+ */
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(__dirname, '..');
+const OUT = path.join(ROOT, 'preventive-care.html');
+
+const CANONICAL = 'https://siya.health/preventive-care';
+const TITLE = 'Preventive Care — Stay Healthy Before Something Goes Wrong | Siya Health';
+const DESCRIPTION =
+  'Preventive care is how adults stay ahead of problems: annual wellness visits, health screenings, vaccinations, cardiometabolic risk, lifestyle, and labs in context — with a physician-led primary care relationship, not a one-off checklist.';
+
+function esc(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+const FAQS = [
+  {
+    q: 'What is preventive care, practically?',
+    a: 'It is the work of staying healthy before a crisis forces the visit — periodic check-ins, age- and risk-appropriate screenings, vaccines, lifestyle review, and labs that are chosen because they would change a plan. It is a relationship with a clinician, not a shopping list of tests.',
+  },
+  {
+    q: 'How is this different from primary or urgent care?',
+    a: 'Primary and urgent care also handle sick visits and ongoing problems. Preventive care is the forward-looking lane inside that relationship: wellness planning, screening cadence, and risk reduction. At Siya, both live under physician-led telehealth primary care.',
+  },
+  {
+    q: 'Do I need an annual physical if I feel fine?',
+    a: 'Feeling fine is good news — and it is also when many risks are quiet. An annual wellness conversation reviews blood pressure, medications, family history, sleep, mood, and which screenings are due. Frequency is individualized; “annual” is a common rhythm, not a law.',
+  },
+  {
+    q: 'Which preventive blood tests do adults usually need?',
+    a: 'There is no single panel for everyone. Clinicians commonly consider a complete blood count, metabolic panel, lipids, and A1c when metabolic risk supports them — plus other markers based on your history. Testing everything is not the same as testing well. See our preventive blood tests guide and labs hub for orientation.',
+  },
+  {
+    q: 'Can normal labs mean I am healthy?',
+    a: 'Normal results mean values fell inside a lab’s reference range. They do not automatically mean you sleep well, feel well, or that early metabolic or mood issues are absent. Labs narrow questions; they do not replace a clinical conversation.',
+  },
+  {
+    q: 'Does Siya offer vaccinations?',
+    a: 'Siya Health focuses on physician-led telehealth evaluation, preventive planning, and lab pathway coordination. Vaccine administration depends on local logistics and state rules — your clinician can advise what is due and how to complete it safely in your area.',
+  },
+  {
+    q: 'How does preventive care relate to symptoms like fatigue?',
+    a: 'Symptoms are one reason to seek care. Preventive care is the ongoing frame that catches risk earlier and follows up over time. If you already feel exhausted, start with the fatigue guide and a primary care visit — then fold findings into a longer preventive plan.',
+  },
+  {
+    q: 'Do I need insurance for preventive care at Siya?',
+    a: 'No. Siya offers direct-pay telehealth with published pricing. Availability depends on the state you are located in when you schedule.',
+  },
+];
+
+function faqAccordion(faqs, prefix) {
+  return faqs
+    .map((f, i) => {
+      const id = `${prefix}-${i}`;
+      return `              <div class="faq-accordion-card" data-faq-item>
+                <h3 style="margin:0;">
+                  <button type="button" class="faq-accordion-trigger" aria-expanded="false" aria-controls="${id}" id="${id}-q" data-faq-trigger>
+                    <span>${esc(f.q)}</span>
+                    <span class="faq-accordion-icon" aria-hidden="true">+</span>
+                  </button>
+                </h3>
+                <div id="${id}" class="faq-accordion-content" role="region" aria-labelledby="${id}-q" data-faq-content>
+                  <div class="faq-accordion-inner">
+                    <p>${esc(f.a)}</p>
+                  </div>
+                </div>
+              </div>`;
+    })
+    .join('\n');
+}
+
+const medicalWebPageLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  name: TITLE,
+  description: DESCRIPTION,
+  url: CANONICAL,
+  inLanguage: 'en-US',
+  isPartOf: { '@type': 'WebSite', name: 'Siya Health', url: 'https://siya.health' },
+  about: {
+    '@type': 'MedicalTherapy',
+    name: 'Preventive Care',
+    alternateName: ['Preventive medicine', 'Wellness care', 'Health maintenance'],
+    relevantSpecialty: { '@type': 'MedicalSpecialty', name: 'Primary Care' },
+  },
+  lastReviewed: new Date().toISOString().slice(0, 10),
+  reviewedBy: {
+    '@type': 'Person',
+    name: 'Dr. Vanessa Urbina',
+    url: 'https://siya.health/providers/dr-vanessa-urbina',
+  },
+  provider: { '@type': 'MedicalOrganization', name: 'Siya Health', url: 'https://siya.health/' },
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://siya.health/' },
+    { '@type': 'ListItem', position: 2, name: 'Primary Care', item: 'https://siya.health/primary-care' },
+    { '@type': 'ListItem', position: 3, name: 'Preventive Care', item: CANONICAL },
+  ],
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+function render() {
+  return `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="/scripts/cookie-consent-bootstrap.js"></script>
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <title>${esc(TITLE)}</title>
+    <meta name="description" content="${esc(DESCRIPTION)}" />
+    <link rel="canonical" href="${CANONICAL}" />
+    <meta property="og:title" content="${esc(TITLE)}" />
+    <meta property="og:description" content="${esc(DESCRIPTION)}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="${CANONICAL}" />
+    <meta property="og:site_name" content="Siya Health" />
+    <meta property="og:image" content="https://siya.health/assets/images/siya-health-logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${esc(TITLE)}" />
+    <meta name="twitter:description" content="${esc(DESCRIPTION)}" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <link rel="preload" href="/styles.css" as="style" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="application/ld+json">${JSON.stringify(medicalWebPageLd)}</script>
+    <script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>
+    <script type="application/ld+json">${JSON.stringify(faqLd)}</script>
+  </head>
+  <body class="page-service page-preventive-care">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container">
+        <a class="header-logo brand-lockup" href="/" aria-label="Siya Health home">
+          <img class="brand-lockup__mark" src="/assets/images/siya-health-mark.png" alt="" width="44" height="44" decoding="async" aria-hidden="true" />
+          <span class="brand-lockup__wordmark">Siya Health<sup class="brand-lockup__reg" aria-hidden="true">&reg;</sup></span>
+        </a>
+        <nav class="nav-center" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="/primary-urgent-care">Primary Care</a>
+          <a href="/labs">Labs</a>
+          <a href="/telehealth">Telehealth</a>
+          <a href="/answers">Health Guides</a>
+          <a href="/blog">Blog</a>
+        </nav>
+        <div class="nav-cta"></div>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
+        <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
+        <div class="nav-mobile">
+          <a href="/">Home</a>
+          <a href="/primary-urgent-care">Primary Care</a>
+          <a href="/labs">Labs</a>
+          <a href="/telehealth">Telehealth</a>
+          <a href="/answers">Health Guides</a>
+          <a href="/blog">Blog</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero-merged" style="background-image: url('/assets/images/healthy-lifestyle.png');">
+        <div class="container hero-inner">
+          <div class="hero-merged-content">
+            <p class="hero-state-line"><a href="/primary-care">Primary Care</a> &middot; Service guide</p>
+            <h1>Preventive care: stay healthy before something goes wrong</h1>
+            <p class="hero-merged-lead">Most people wait for a problem. Preventive care is the opposite rhythm &mdash; a planned relationship with a clinician that reviews risk, screenings, vaccines, lifestyle, and labs while you still feel well enough to act on the answers.</p>
+            <div class="hero-ctas hero-ctas-row">
+              <a class="button ds-button ds-button--primary" href="/book-appointment" data-siya-track="primary-cta-click" data-siya-location="hero" data-page-type="default" data-intent="primary-care" data-component="button">Book a primary care visit</a>
+              <a class="button ds-button ds-button--secondary secondary" href="#what-it-covers" data-siya-track="scroll_coverage" data-siya-location="hero" data-component="button">See what it covers</a>
+            </div>
+            <p class="cta-microcopy">Educational information, not a personal care plan. Emergency symptoms still need emergency care.</p>
+          </div>
+        </div>
+      </section>
+
+      <nav class="section on-this-page" aria-labelledby="on-this-page-heading">
+        <div class="container">
+          <h2 id="on-this-page-heading" class="section-header">What this page answers</h2>
+          <ul class="scan-list scan-list--compact">
+            <li><a href="#why-it-matters">Why preventive care matters while you feel fine</a></li>
+            <li><a href="#what-it-covers">What preventive care covers</a></li>
+            <li><a href="#annual-wellness">Annual wellness visits</a></li>
+            <li><a href="#screenings">Health screenings</a></li>
+            <li><a href="#labs-in-context">Labs in context</a></li>
+            <li><a href="#relationship">A long-term primary care relationship</a></li>
+            <li><a href="#faq">Frequently asked questions</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <section class="section" id="why-it-matters" aria-labelledby="why-it-matters-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="why-it-matters-heading">Why this matters while you feel fine</h2>
+            <p class="lead">Blood pressure, early metabolic strain, sleep apnea, and missed vaccines often do not announce themselves with drama.</p>
+          </div>
+          <p>Waiting until something breaks is expensive in energy, money, and options. Preventive care exists so that risk factors get named early, screenings happen on a cadence that matches your age and history, and small course-corrections are still available.</p>
+          <p>That is also why Siya treats preventive care as a <strong>service entity</strong> under primary care &mdash; not a blog topic, and not a directory of random tests. The destination is a clinician who knows your baseline over time.</p>
+        </div>
+      </section>
+
+      <section class="section section-tinted" id="what-it-covers" aria-labelledby="what-it-covers-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="what-it-covers-heading">What preventive care covers</h2>
+            <p class="lead">One hub. Several lanes. All of them belong under primary care.</p>
+          </div>
+          <ul class="scan-list">
+            <li><strong>Annual wellness</strong> &mdash; history, vitals context, medication review, and a plan for the year ahead</li>
+            <li><strong>Health screenings</strong> &mdash; age- and risk-appropriate checks, not a one-size checklist</li>
+            <li><strong>Vaccinations</strong> &mdash; what is due and how to complete it safely where you live</li>
+            <li><strong>Cardiometabolic risk</strong> &mdash; blood pressure, lipids, glucose risk, weight, and family history in one conversation</li>
+            <li><strong>Lifestyle</strong> &mdash; sleep, movement, alcohol, nicotine, and stress as clinical inputs, not moral lectures</li>
+            <li><strong>Labs in context</strong> &mdash; markers chosen because they would change the plan (<a href="/labs/preventive">preventive labs</a>)</li>
+          </ul>
+          <p>Symptoms like <a href="/fatigue">fatigue</a> still matter &mdash; they are how many people enter care. Preventive care is the frame that continues after the acute question is sorted.</p>
+        </div>
+      </section>
+
+      <section class="section" id="annual-wellness" aria-labelledby="annual-wellness-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="annual-wellness-heading">Annual wellness visits</h2>
+            <p class="lead">A wellness visit is less about a ritual exam and more about updating the map of your health.</p>
+          </div>
+          <p>Bring what has changed: new medications, sleep, mood, work stress, family diagnoses, and any numbers you already have from prior labs or blood pressure checks. The clinician helps decide what is worth measuring next &mdash; and what can wait.</p>
+          <p>Telehealth can carry much of that conversation. When an in-person measurement or vaccine is required, you get a clear next step rather than a vague &ldquo;see someone locally sometime.&rdquo;</p>
+        </div>
+      </section>
+
+      <section class="section section-tinted" id="screenings" aria-labelledby="screenings-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="screenings-heading">Health screenings &mdash; individualized, not infinite</h2>
+            <p class="lead">Guidelines exist for a reason. Your history decides which ones apply this year.</p>
+          </div>
+          <p>Screening is not the same as diagnosis, and it is not the same as ordering every available blood test. Cancer screening intervals, cardiovascular risk assessment, and metabolic markers depend on age, sex, family history, and prior results.</p>
+          <p>Siya&rsquo;s job is to help you understand <em>what is due and why</em>, then connect the follow-through &mdash; including when a specialist or local facility is the right place to finish a screening that telehealth cannot complete alone.</p>
+        </div>
+      </section>
+
+      <section class="section" id="labs-in-context" aria-labelledby="labs-in-context-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="labs-in-context-heading">Labs sit under preventive care &mdash; not the other way around</h2>
+            <p class="lead">A lab directory without a clinical question becomes a catalog. Preventive care supplies the question.</p>
+          </div>
+          <p>Common markers adults discuss in a preventive frame include a complete blood count, comprehensive metabolic panel, lipid panel, hemoglobin A1c when metabolic risk is present, thyroid testing when indicated, and nutrient studies such as vitamin D, B12, or ferritin when history supports them.</p>
+          <ul class="footer-links">
+            <li><a href="/labs/preventive">Preventive &amp; wellness labs overview</a></li>
+            <li><a href="/labs/cbc">CBC</a> · <a href="/labs/cmp">CMP</a> · <a href="/labs/lipid-panel">Lipid panel</a></li>
+            <li><a href="/labs/a1c-blood-sugar">HbA1c</a> · <a href="/labs/thyroid">TSH</a> · <a href="/labs/iron-ferritin">Ferritin</a></li>
+            <li><a href="/labs/vitamin-b12">Vitamin B12</a> · <a href="/labs/vitamin-d">Vitamin D</a></li>
+            <li><a href="/labs/how-to-read-results">How to read lab results</a></li>
+          </ul>
+          <p>Results still need interpretation. Ordering logistics deliver numbers; a clinician decides what they mean for you.</p>
+        </div>
+      </section>
+
+      <section class="section section-tinted" id="relationship" aria-labelledby="relationship-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="relationship-heading">A long-term primary care relationship</h2>
+            <p class="lead">Preventive care compounds when the same team sees the trend line, not just today&rsquo;s portal PDF.</p>
+          </div>
+          <ol class="evaluation-journey-list">
+            <li><strong>Baseline</strong><span>History, medications, goals, and what &ldquo;healthy&rdquo; means for you this year.</span></li>
+            <li><strong>Plan</strong><span>Screenings due, labs worth considering, lifestyle priorities, and vaccine status.</span></li>
+            <li><strong>Follow-up</strong><span>Results reviewed in plain language, with a next appointment when monitoring matters.</span></li>
+            <li><strong>Continuity</strong><span>Sick visits and new symptoms land in a relationship that already knows your baseline &mdash; see <a href="/primary-urgent-care">Primary &amp; Urgent Care</a>.</span></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="related" aria-labelledby="related-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="related-heading">Related guides</h2>
+            <p class="lead">Follow the thread that matches where you are.</p>
+          </div>
+          <ul class="footer-links">
+            <li><a href="/primary-urgent-care">Primary &amp; Urgent Care</a></li>
+            <li><a href="/fatigue">Fatigue: when tired stops being normal</a></li>
+            <li><a href="/answers/which-preventive-blood-tests-adults">Which preventive blood tests adults usually need</a></li>
+            <li><a href="/answers/why-normal-labs-dont-mean-healthy">Why normal labs don&rsquo;t mean healthy</a></li>
+            <li><a href="/answers/what-to-do-after-lab-results">What to do after lab results</a></li>
+            <li><a href="/telehealth">Telehealth</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section faq-accordion-section" id="faq" aria-labelledby="faq-heading">
+        <div class="container">
+          <div class="faq-accordion">
+            <div class="faq-accordion-header">
+              <h2 id="faq-heading">Frequently asked questions</h2>
+            </div>
+            <div class="faq-accordion-list">
+${faqAccordion(FAQS, 'faq-preventive')}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-tinted" id="next-step" aria-labelledby="next-step-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="next-step-heading">Start the preventive conversation</h2>
+            <p class="lead">You do not need a crisis first. Bring your age, medications, family history, and one goal for the year.</p>
+          </div>
+          <div style="max-width:640px;margin:0 auto;text-align:center;">
+            <p><a class="button ds-button ds-button--secondary secondary" href="/book-appointment" data-siya-track="booking_click" data-siya-location="next-step" data-component="button">Book a primary care visit</a></p>
+            <p class="cta-microcopy">Prefer to ask questions first? <a href="/redirect/meet-greet">Book a free Meet &amp; Greet</a>, or review <a href="/pricing">pricing</a> before you decide.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p><a href="/primary-urgent-care">Primary &amp; Urgent Care</a> &middot; &copy; 2026 Siya Health Inc.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+`;
+}
+
+fs.writeFileSync(OUT, render());
+console.log('Wrote preventive-care.html (service canonical entity page)');

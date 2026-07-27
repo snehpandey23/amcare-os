@@ -1,7 +1,7 @@
 {
   "@context": "https://schema.org",
   "@type": "KnowledgeGraph",
-  "version": "2026-07-26",
+  "version": "2026-07-27",
   "organization": {
     "@id": "https://siya.health/#organization",
     "@type": "MedicalOrganization",
@@ -873,9 +873,11 @@
         "/labs/iron-ferritin",
         "/labs/thyroid",
         "/labs/vitamin-b12",
-        "/labs/a1c-blood-sugar"
+        "/labs/a1c-blood-sugar",
+        "/labs/cbc",
+        "/labs/vitamin-d"
       ],
-      "service": "/primary-urgent-care",
+      "service": "/primary-care",
       "primaryCta": {
         "label": "Book a primary care visit",
         "url": "/book-appointment"
@@ -886,7 +888,74 @@
       "providers": [
         "https://siya.health/providers/dr-vanessa-urbina#physician"
       ],
-      "notes": "Symptom-first hub. ADHD, hormones, and metabolic health are related entities reached from here — never the destination of a fatigue query."
+      "notes": "Symptom-first hub. ADHD, hormones, and metabolic health are related entities reached from here — never the destination of a fatigue query.",
+      "relatedSymptoms": [
+        "brain-fog"
+      ]
+    },
+    {
+      "@id": "https://siya.health/symptoms/brain-fog",
+      "@type": "MedicalSymptom",
+      "entity": "brain_fog",
+      "name": "Brain Fog",
+      "slug": "brain-fog",
+      "canonicalUrl": "/brain-fog",
+      "pageType": "canonical-entity-page",
+      "entityFamily": "symptom",
+      "aliases": [
+        "Mental fog",
+        "Cloudy thinking",
+        "Slowed thinking",
+        "Cognitive fog",
+        "Can't concentrate",
+        "Foggy headed"
+      ],
+      "parents": [
+        "primary-care",
+        "symptoms"
+      ],
+      "children": [],
+      "relatedSymptoms": [
+        "fatigue"
+      ],
+      "relatedServices": [
+        "preventive-care",
+        "primary-care"
+      ],
+      "relatedConditions": [
+        "adult-adhd",
+        "perimenopause",
+        "sleep-apnea",
+        "depression",
+        "anxiety",
+        "thyroid-disorders",
+        "iron-deficiency",
+        "vitamin-b12-deficiency"
+      ],
+      "labs": [
+        "CBC",
+        "TSH",
+        "Vitamin B12",
+        "Ferritin",
+        "Vitamin D"
+      ],
+      "labsUrls": [
+        "/labs/cbc",
+        "/labs/thyroid",
+        "/labs/vitamin-b12",
+        "/labs/iron-ferritin",
+        "/labs/vitamin-d",
+        "/labs/fatigue-brain-fog"
+      ],
+      "service": "/primary-care",
+      "primaryCta": {
+        "label": "Book a primary care visit",
+        "url": "/book-appointment"
+      },
+      "providers": [
+        "https://siya.health/providers/dr-vanessa-urbina#physician"
+      ],
+      "notes": "Symptom Canonical Entity. Intersection of fatigue, preventive care, and labs. ADHD is related — never the destination."
     }
   ],
   "knowledgeHubs": {
@@ -927,5 +996,104 @@
       "reviewedBy",
       "lastReviewed"
     ]
-  }
+  },
+  "services": [
+    {
+      "@id": "https://siya.health/services/primary-care",
+      "@type": "MedicalTherapy",
+      "entity": "primary_care",
+      "name": "Primary Care",
+      "slug": "primary-care",
+      "canonicalUrl": "/primary-care",
+      "pageType": "canonical-entity-page",
+      "entityFamily": "root_service",
+      "aliases": [
+        "Family medicine",
+        "Internal medicine telehealth",
+        "Ongoing care"
+      ],
+      "parents": [],
+      "children": [
+        "preventive-care",
+        "primary-urgent-care",
+        "adhd-care",
+        "weight-loss-metabolic-health",
+        "womens-midlife-health",
+        "mens-health-longevity",
+        "telehealth"
+      ],
+      "relatedEntities": [
+        "fatigue",
+        "brain_fog",
+        "preventive_care"
+      ],
+      "labsUrls": [
+        "/labs",
+        "/labs/preventive"
+      ],
+      "primaryCta": {
+        "label": "Book a primary care visit",
+        "url": "/book-appointment"
+      },
+      "providers": [
+        "https://siya.health/providers/dr-vanessa-urbina#physician"
+      ],
+      "notes": "Root Service Entity. Taxonomy root. /primary-urgent-care is the operational process surface."
+    },
+    {
+      "@id": "https://siya.health/services/preventive-care",
+      "@type": "MedicalTherapy",
+      "entity": "preventive_care",
+      "name": "Preventive Care",
+      "slug": "preventive-care",
+      "canonicalUrl": "/preventive-care",
+      "pageType": "canonical-entity-page",
+      "entityFamily": "service",
+      "aliases": [
+        "Preventive medicine",
+        "Wellness care",
+        "Annual wellness",
+        "Health maintenance",
+        "Health screenings"
+      ],
+      "parents": [
+        "primary-care"
+      ],
+      "children": [
+        "annual-wellness",
+        "health-screenings",
+        "vaccinations",
+        "lifestyle",
+        "preventive-labs"
+      ],
+      "relatedEntities": [
+        "fatigue",
+        "labs",
+        "primary-care",
+        "telehealth"
+      ],
+      "labsUrls": [
+        "/labs/preventive",
+        "/labs/cbc",
+        "/labs/cmp",
+        "/labs/lipid-panel",
+        "/labs/a1c-blood-sugar",
+        "/labs/thyroid",
+        "/labs/iron-ferritin",
+        "/labs/vitamin-b12",
+        "/labs/vitamin-d",
+        "/labs",
+        "/labs/how-to-read-results"
+      ],
+      "service": "/primary-urgent-care",
+      "primaryCta": {
+        "label": "Book a primary care visit",
+        "url": "/book-appointment"
+      },
+      "providers": [
+        "https://siya.health/providers/dr-vanessa-urbina#physician"
+      ],
+      "notes": "Service Canonical Entity. Parent frame for labs and future symptom hubs. Not a competing primary-urgent-care page."
+    }
+  ]
 }

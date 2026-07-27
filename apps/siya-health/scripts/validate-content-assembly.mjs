@@ -123,7 +123,7 @@ for (const file of files) {
   // Fingerprint core content
   if (
     relPath.startsWith('answers/') ||
-    ['adhd-care.html', 'adult-adhd-california.html', 'fatigue.html', 'telehealth.html', 'weight-loss-metabolic-health.html', 'primary-urgent-care.html'].includes(relPath)
+    ['adhd-care.html', 'adult-adhd-california.html', 'fatigue.html', 'preventive-care.html', 'brain-fog.html', 'primary-care.html', 'telehealth.html', 'weight-loss-metabolic-health.html', 'primary-urgent-care.html'].includes(relPath)
   ) {
     const topic =
       /adhd/.test(relPath) ? 'adhd' : /weight|glp|insulin|food-noise/.test(relPath) ? 'weight-loss' : /testosterone|trt|mens/.test(relPath) ? 'mens-health' : 'telehealth';

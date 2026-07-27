@@ -67,7 +67,7 @@ const CONTENT_LINKS = [
     marker: 'LABS-LINK-PREVENTIVE-TESTS',
     html: `      <section class="section section-tinted" aria-label="Preventive labs next steps">
         <div class="container">
-          <p class="lead" style="margin:0;">Explore <a href="/labs/preventive">preventive &amp; wellness labs</a>, pair with <a href="/primary-urgent-care">primary &amp; urgent care</a>, review <a href="/pricing">follow-up pricing</a>, and read <a href="/labs/how-to-read-results">how to read your results</a>—Siya interprets; ordering logistics alone are not a diagnosis.</p>
+          <p class="lead" style="margin:0;">Start from the <a href="/preventive-care">preventive care hub</a>, explore <a href="/labs/preventive">preventive &amp; wellness labs</a>, pair with <a href="/primary-urgent-care">primary &amp; urgent care</a>, and read <a href="/labs/how-to-read-results">how to read your results</a>—Siya interprets in context; ordering logistics alone are not a diagnosis.</p>
         </div>
       </section>`,
   },
