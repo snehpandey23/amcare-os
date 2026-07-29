@@ -8,13 +8,5 @@ Evidence-literacy carousel on Semax, Selank, and DSIP (Emideltide). Adapted from
 
 **Post from:** `ready-to-post/` (5 slides · 1080×1080) + `captions/`
 
-**WorkDrive Common Folder (team source of truth):**  
+**WorkDrive mirror (when TrueSync available):**  
 `Siya Knowledge Editorial/05-Carousels/PE-B-01/`
-
-**Git staging mirror (cloud → Mac fuse):**  
-`apps/siya-health/brand/workdrive-staging/Siya Knowledge Editorial/`
-
-On Mac with TrueSync:
-```bash
-bash apps/siya-health/brand/scripts/eod-fuse-to-truesync.sh --ids PE-B-01
-```
