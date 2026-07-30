@@ -1,0 +1,50 @@
+---
+description: Executive Workspace v2 — Founder Decision Coach (staff portal). Orientation → decision → delegation, not dashboards.
+globs:
+  - apps/hipaa-training/**/*
+  - integrations/hipaa-training-api/**/*
+  - docs/siyaos-knowledge-base/**/*
+alwaysApply: false
+---
+
+# Executive Workspace — Founder Decision Coach
+
+When building or changing **My day executive lane**, **executive briefing**, **admin-ops / Ask ops**, or **founder/CEO attention** features in the staff portal:
+
+## Specs (read before coding)
+
+| Doc | Role |
+|-----|------|
+| `apps/hipaa-training/docs/EXECUTIVE-WORKSPACE-v2-FOUNDER-DECISION-COACH.md` | **Architecture (authoritative for v2)** — implement against this |
+| `apps/hipaa-training/docs/EXECUTIVE-WORKSPACE-v1.md` | Frozen v1 baseline (4 cards + Ask Approve tasks) — evolve, don’t trash |
+
+## North star
+
+Founder opens Siya OS and immediately knows: what matters today · what only they can decide · what to delegate · emerging risks · what can wait.
+
+**Orientation → Prioritization → Decision → Delegation** — not Information → Dashboard → Analytics.
+
+## Build rules
+
+1. **Do not** add another dashboard, metric wall, or ERP module.
+2. **Founder Focus** = exactly **one** “Today’s Most Important Decision” (chosen from signals, not random LLM).
+3. Hard attention budget: Critical ≤1 · Important ≤2 · Watch ≤3. Never exceed.
+4. Include **Can Wait** (2–3) to reduce anxiety; **Delegate** = recommendations only (Approve → task); **Emerging Risks** ≤2.
+5. Every recommendation: Why / Why now / If ignored / What to do · Confidence · Evidence · Updated. Low confidence → say so.
+6. LLM may rewrite copy; **must not invent signals** — cite evidence IDs (same pattern as admin-ops-llm).
+7. Keep intelligence in `integrations/hipaa-training-api` (extend briefing/coach engine). Portal stays thin.
+8. Execute scope stays v1 until spec says otherwise: **Approve → tasks only** (no auto email/Slack).
+9. Still **exclude** from coach until trusted: revenue, ads, marketing streak, clinical metrics, AI usage vanity.
+10. Naming: **Executive Workspace** / Founder Coach — never “Admin Ops Co-pilot” in UI.
+
+## Phase order (do not skip)
+
+1. Engine + API + **Focus + Can Wait** only  
+2. Full strip + ack/snooze + Trust as *signal* (not Trust dashboard on My day)  
+3. Weekly learning + stronger filtering  
+
+Before Phase 1 code: confirm open decisions in the v2 doc (hero swap · allowlist · Trust-as-critical).
+
+## Anti-goals
+
+Raw analytics · dozens of cards · micromanagement · merging employee Morning Brief into founder coach · patient Guide KB.

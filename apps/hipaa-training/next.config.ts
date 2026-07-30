@@ -4,6 +4,13 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+function trainingApiDirectUrl(): string | null {
+  const u =
+    process.env.HIPAA_TRAINING_API_URL?.trim() ||
+    process.env.NEXT_PUBLIC_HIPAA_TRAINING_API_URL?.trim();
+  return u || null;
+}
+
 const nextConfig: NextConfig = {
   /** Monorepo: trace deps from repo root (lockfile + hoisted node_modules). */
   outputFileTracingRoot: path.join(__dirname, "../.."),
@@ -13,6 +20,16 @@ const nextConfig: NextConfig = {
    */
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  async rewrites() {
+    const api = trainingApiDirectUrl()?.replace(/\/$/, "");
+    if (!api) return [];
+    return [
+      {
+        source: "/api/staff-auth/:path*",
+        destination: `${api}/:path*`,
+      },
+    ];
   },
 };
 

@@ -5,7 +5,12 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && mkdir -p dist/database && cp src/database/schema.sql dist/database/schema.sql && cp src/database/tasks-schema.sql dist/database/tasks-schema.sql && cp src/database/shift-attendance-schema.sql dist/database/shift-attendance-schema.sql && cp src/database/assist-telemetry-schema.sql dist/database/assist-telemetry-schema.sql",
+    "test:tasks": "tsx src/task-recurrence.test.ts",
+    "migrate:status": "node scripts/migrate-status.mjs",
+    "qa:portal": "node scripts/qa-staff-portal.mjs",
+    "smoke:tasks": "node scripts/smoke-tasks-production.mjs",
+    "verify:audit-chain": "node scripts/verify-audit-chain.mjs",
     "dev": "tsx src/index.ts",
     "start": "node dist/index.js"
   },

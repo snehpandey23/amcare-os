@@ -1,0 +1,92 @@
+[
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "documentation" },
+    "id": "doc-1",
+    "messy": "pt wants refill sent today pharm cvs main st",
+    "clean": "Patient requested refill today. Pharmacy: CVS, Main Street location."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "documentation" },
+    "id": "doc-2",
+    "messy": "called pt no answer left vm",
+    "clean": "Called patient — no answer. Left voicemail requesting return call."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "documentation" },
+    "id": "doc-3",
+    "messy": "insurance denied auth will appeal",
+    "clean": "Insurance denied prior authorization. Team will submit appeal per workflow."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "documentation" },
+    "id": "doc-4",
+    "messy": "pt upset about wait time apologized offered callback",
+    "clean": "Patient expressed concern about wait time. Apologized and offered callback from supervisor."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "documentation" },
+    "id": "doc-5",
+    "messy": "needs lab slip emailed wrong address fixed",
+    "clean": "Patient needed lab order. Email address corrected and re-sent per policy."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "documentation" },
+    "id": "doc-6",
+    "messy": "portal msg read routed to provider",
+    "clean": "Portal message reviewed and routed to provider for clinical response."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "documentation" },
+    "id": "doc-7",
+    "messy": "sched change from tues to thurs pt confirmed",
+    "clean": "Appointment rescheduled from Tuesday to Thursday. Patient confirmed new time."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "documentation" },
+    "id": "doc-8",
+    "messy": "pharm says dose wrong on rx sent to md",
+    "clean": "Pharmacy reported dosing discrepancy on prescription. Escalated to provider for clarification."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "documentation" },
+    "id": "doc-9",
+    "messy": "new pt intake forms incomplete reminded",
+    "clean": "New patient intake incomplete. Reminded patient to submit required forms before visit."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "documentation" },
+    "id": "doc-10",
+    "messy": "billing question not clinical sent to accounts",
+    "clean": "Billing question — not clinical. Routed to Accounts with summary (no PHI in this chat)."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "documentation" },
+    "id": "doc-11",
+    "messy": "pt asked for records release explained process",
+    "clean": "Patient requested medical records. Explained release process and timeline per policy."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "documentation" },
+    "id": "doc-12",
+    "messy": "follow up in 2 wks per md",
+    "clean": "Follow-up visit recommended in two weeks per provider."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "documentation" },
+    "id": "doc-13",
+    "messy": "side fx nausea pt advised call if worse escalate",
+    "clean": "Patient reported nausea. Provided standard guidance; advised to call if symptoms worsen; escalated per protocol."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "documentation" },
+    "id": "doc-14",
+    "messy": "identity verified per sop discussed refill",
+    "clean": "Identity verified per SOP. Discussed refill request and next steps."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "documentation" },
+    "id": "doc-15",
+    "messy": "pt will send photo id via portal not email",
+    "clean": "Patient will upload photo ID via secure portal — not personal email."
+  }
+]

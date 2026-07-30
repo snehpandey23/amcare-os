@@ -1,0 +1,73 @@
+{
+  "title": "Clinical & ops shortcuts",
+  "subtitle": "External tools only — patient data stays in Spruce, Carepatron, Kiwi, and Zoho. Not part of your learning progress.",
+  "workplacePrimary": [
+    { "label": "Zoho Workplace", "href": "https://workplace.zoho.com/", "note": "Mail, chat, docs" },
+    { "label": "Spruce", "href": "https://app.sprucehealth.com/", "note": "Patient messaging" },
+    { "label": "Kiwi EHR", "href": "https://ehr.kiwihealth.com/", "note": "Clinical chart" },
+    { "label": "Carepatron", "href": "https://app.carepatron.com/", "note": "Scheduling & chart" },
+    { "label": "Creyos", "href": "https://health.creyos.com/", "note": "Cognitive assessments" },
+    { "label": "Rupa Labs", "href": "https://labs.rupahealth.com/", "note": "Lab orders & results" }
+  ],
+  "sections": [
+    {
+      "id": "daily",
+      "label": "Team rhythm",
+      "items": [
+        {
+          "label": "Daily Google Meet",
+          "href": "https://meet.google.com/qqb-hpxd-ncy",
+          "note": "Team standup"
+        },
+        {
+          "label": "Time zone practice (in-app)",
+          "href": "/level-up#timezone",
+          "note": "Preferred over external converters"
+        }
+      ]
+    },
+    {
+      "id": "telemed",
+      "label": "Telemedicine operations",
+      "items": [
+        { "label": "Spruce", "href": "https://app.sprucehealth.com/", "note": "Patient messaging — PHI in Spruce only" },
+        { "label": "Carepatron", "href": "https://app.carepatron.com/", "note": "Scheduling & chart" },
+        { "label": "Kiwi EHR", "href": "https://ehr.kiwihealth.com/", "note": "Clinical chart" },
+        { "label": "Creyos", "href": "https://health.creyos.com/", "note": "Assessments" },
+        { "label": "Rupa Health (labs)", "href": "https://labs.rupahealth.com/", "note": "Labs portal" }
+      ]
+    },
+    {
+      "id": "sheets",
+      "label": "Live ops sheets (PHI — never paste into chat)",
+      "items": [
+        {
+          "label": "Patient update sheet (Zoho)",
+          "href": "https://sheet.zoho.in/sheet/open/vl71kee9eb5d04a66431fabe7dcc4dcbc64ad",
+          "note": "Zoho only"
+        },
+        {
+          "label": "Pre-appointment sheet (Zoho)",
+          "href": "https://sheet.zoho.in/sheet/open/fejvl8337c2d5fa1448c39bf252cbd3816030",
+          "note": "Zoho only"
+        }
+      ]
+    },
+    {
+      "id": "people",
+      "label": "People & HR",
+      "items": [
+        {
+          "label": "HR concerns (email)",
+          "href": "mailto:itika@siya.health?cc=chiefservant@siya.health,founder@siya.health,support@siya.health",
+          "note": "Leave and attendance are tracked in this portal (sign-in + shift log) until a dedicated HR module ships"
+        },
+        {
+          "label": "Onboarding folder (WorkDrive)",
+          "href": "https://workdrive.zoho.in/folder/ws61r86bcf248445c489a8d93a1a638eed542",
+          "note": "Reference material — live training is in Learn & Practice"
+        }
+      ]
+    }
+  ]
+}

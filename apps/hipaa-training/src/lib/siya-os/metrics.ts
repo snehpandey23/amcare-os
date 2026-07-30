@@ -6,7 +6,15 @@ const METRICS_KEY = "siya-assist-metrics-v1";
 
 export type AssistMetricEvent =
   | { type: "question"; at: number; answered: boolean; escalated: boolean; knowledgeGap: boolean }
-  | { type: "time_to_answer"; at: number; ms: number };
+  | { type: "time_to_answer"; at: number; ms: number }
+  | {
+      type: "feedback";
+      at: number;
+      helpful: boolean;
+      failureType?: string;
+      department?: string;
+      knowledgeGap?: boolean;
+    };
 
 type Store = { events: AssistMetricEvent[] };
 
@@ -48,6 +56,32 @@ export function recordTimeToAnswer(ms: number) {
   const store = load();
   store.events.push({ type: "time_to_answer", at: Date.now(), ms });
   save(store);
+}
+
+export function recordAnswerFeedback(opts: {
+  helpful: boolean;
+  failureType?: string;
+  department?: string;
+  knowledgeGap?: boolean;
+}) {
+  const store = load();
+  store.events.push({
+    type: "feedback",
+    at: Date.now(),
+    helpful: opts.helpful,
+    failureType: opts.failureType,
+    department: opts.department,
+    knowledgeGap: opts.knowledgeGap,
+  });
+  save(store);
+}
+
+export function countQuestionsSince(sinceMs: number): number {
+  const store = load();
+  return store.events.filter(
+    (e): e is Extract<AssistMetricEvent, { type: "question" }> =>
+      e.type === "question" && e.at >= sinceMs,
+  ).length;
 }
 
 export function summarizeMetrics(days = 7) {

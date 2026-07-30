@@ -28,6 +28,13 @@ function parseHistory(raw: unknown) {
     .slice(-12);
 }
 
+function parseBearerToken(req: Request): string | null {
+  const h = req.headers.get("authorization");
+  if (!h?.startsWith("Bearer ")) return null;
+  const t = h.slice(7).trim();
+  return t.length > 10 ? t : null;
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -36,15 +43,25 @@ export async function POST(req: Request) {
       return Response.json({ error: "message required (max 2000 chars)" }, { status: 400 });
     }
     const history = parseHistory(body?.history);
-    const result = await runSiyaAssistantAsync(message, history);
+    const focusMode = body?.focusMode === true;
+    const authToken = parseBearerToken(req);
+    const result = await runSiyaAssistantAsync(message, history, { focusMode, authToken });
+    const kbLinks = result.chunks.flatMap((c) => c.links ?? []).slice(0, 4);
+    const links =
+      result.portalLinks?.length ? result.portalLinks : kbLinks.map((l) => ({ label: l.label, href: l.href }));
     return Response.json({
       message: result.message,
-      links: result.chunks.flatMap((c) => c.links ?? []).slice(0, 4),
+      links,
       escalate: result.escalate ?? null,
       routing: result.routing ?? null,
       sources: result.sources ?? [],
       escalationPreview: result.escalationPreview ?? null,
       knowledgeGap: result.knowledgeGap ?? false,
+      refused: result.refused ?? false,
+      refusalCategory: result.refusalCategory ?? null,
+      opsCoPilot: result.opsCoPilot ?? false,
+      executiveMeta: result.executiveMeta ?? null,
+      pendingTask: result.pendingTask ?? null,
     });
   } catch {
     return Response.json({ error: "Something went wrong." }, { status: 500 });

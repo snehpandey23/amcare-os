@@ -86,9 +86,35 @@ function relatedChunks(userMessage: string, primary: RetrievedChunk, rest: Retri
   });
 }
 
-function formatPrimaryAnswer(userMessage: string, primary: RetrievedChunk): string[] {
+function formatSocialPostAnswer(): string[] {
+  return [
+    "**Social post (Instagram / LinkedIn / etc.) — do this:**",
+    "",
+    "1. **Tracker first** — confirm insight ID and row on the marketing **content tracker** (no orphan posts).",
+    "2. **Pre-publish QA (10 checks)** — states we serve (CA, TX, PA, FL), disclaimers, CTA links, no outcome guarantees.",
+    "3. **Clinical or pricing claims** → **Medical Director** sign-off before anything goes live.",
+    "4. Use captions from the editorial pack (**ALL-PLATFORMS**); company voice unless it's an approved physician profile post.",
+    "",
+    "Tell me the **topic** (e.g. ADHD, GLP-1) if you want a tighter checklist.",
+  ];
+}
+
+function formatPrimaryAnswer(
+  userMessage: string,
+  primary: RetrievedChunk,
+  flowId?: string,
+): string[] {
   const qt = tokenizeForSearch(userMessage);
   const sentences = pickSentences(primary.snippet, qt, 5);
+
+  const socialQuery =
+    flowId === "marketing-carousel" ||
+    flowId === "marketing-daily" ||
+    /instagram|linkedin|social|carousel|caption|\bpost\b/i.test(userMessage);
+
+  if (socialQuery && (primary.id === "content-qa-checklist" || primary.id === "marketing-staff-daily-help")) {
+    return formatSocialPostAnswer();
+  }
 
   if (primary.id === "marketing-staff-daily-help") {
     return [
@@ -129,10 +155,15 @@ function formatPrimaryAnswer(userMessage: string, primary: RetrievedChunk): stri
   return parts;
 }
 
-export function composeAnswerFromChunks(userMessage: string, chunks: RetrievedChunk[], knowledgeGap: boolean): string {
+export function composeAnswerFromChunks(
+  userMessage: string,
+  chunks: RetrievedChunk[],
+  knowledgeGap: boolean,
+  flowId?: string,
+): string {
   if (!chunks.length) {
     return [
-      "I searched **approved Company Memory** and didn't find a matching topic yet.",
+      "I searched our **approved internal guides** and didn't find a matching topic yet.",
       "",
       "Try a fuller phrase (e.g. \"portal chat SLA\", \"late cancel refund\", \"Meet and Greet homepage\").",
       "",
@@ -141,7 +172,7 @@ export function composeAnswerFromChunks(userMessage: string, chunks: RetrievedCh
   }
 
   const primary = chunks[0];
-  const parts: string[] = [...formatPrimaryAnswer(userMessage, primary)];
+  const parts: string[] = [...formatPrimaryAnswer(userMessage, primary, flowId)];
 
   const steps = numberedSteps(primary.snippet);
   if (steps.length >= 2 && primary.id !== "homepage-cta-meet-and-greet") {
@@ -161,7 +192,7 @@ export function composeAnswerFromChunks(userMessage: string, chunks: RetrievedCh
   if (knowledgeGap) {
     parts.push("");
     parts.push(
-      "_Closest match only — rephrase with more keywords, or use **Notify owner** if we need a new policy._",
+      "We don't have a full approved guide for this yet. Use **Notify owner** to email **bot@siya.health**, or **Copy escalation summary** for Slack.",
     );
   }
 

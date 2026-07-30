@@ -1,0 +1,106 @@
+[
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "communication" },
+    "id": "hold",
+    "prompt": "A patient asks to be placed on hold. Best response?",
+    "choices": [
+      "\"May I place you on a brief hold while I check that?\"",
+      "\"Hold on.\"",
+      "Silence for 30 seconds",
+      "\"Wait.\""
+    ],
+    "correctIndex": 0,
+    "explain": "Ask permission and set expectation — brief and polite."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "communication" },
+    "id": "callback",
+    "prompt": "You cannot resolve an issue in one call. Best next step?",
+    "choices": [
+      "Set a clear callback time and document the ticket",
+      "\"We'll call you sometime.\"",
+      "Transfer without context",
+      "End the call without summary"
+    ],
+    "correctIndex": 0,
+    "explain": "Ownership + specific follow-up builds trust."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "communication" },
+    "id": "thanks",
+    "prompt": "Patient says \"Thanks for your help.\" You reply…",
+    "choices": [
+      "\"You're welcome — glad we could help.\"",
+      "\"No problem bye.\"",
+      "Hang up immediately",
+      "\"Do needful.\""
+    ],
+    "correctIndex": 0,
+    "explain": "Warm close — standard in US service culture."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "communication" },
+    "id": "escalate-internal",
+    "prompt": "You need a supervisor. Professional internal message?",
+    "choices": [
+      "Summary: issue, steps taken, patient expectation, urgency",
+      "\"Patient angry fix now\"",
+      "Forward thread with no context",
+      "Only emoji in Slack"
+    ],
+    "correctIndex": 0,
+    "explain": "Escalations should be scannable — facts, not venting."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "communication" },
+    "id": "bad-news",
+    "prompt": "Appointment slot is full. Best phrasing?",
+    "choices": [
+      "\"The next opening is Thursday at 2 PM Central — would that work?\"",
+      "\"Nothing available.\"",
+      "\"Not my department.\"",
+      "\"Try again never.\""
+    ],
+    "correctIndex": 0,
+    "explain": "Offer the next concrete option when possible."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "communication" },
+    "id": "empathy",
+    "prompt": "Patient says \"This is confusing.\" First reply?",
+    "choices": [
+      "\"I can help walk through it step by step.\"",
+      "\"Read the email again.\"",
+      "\"Everyone understands this.\"",
+      "Ignore and change topic"
+    ],
+    "correctIndex": 0,
+    "explain": "Normalize confusion — guide calmly."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "communication" },
+    "id": "provider-msg",
+    "prompt": "Draft tone for provider message (internal)?",
+    "choices": [
+      "Bullet facts, patient concern, what you need from them",
+      "Long emotional story",
+      "All caps URGENT with no details",
+      "Patient full SSN in chat"
+    ],
+    "correctIndex": 0,
+    "explain": "Respect clinician time — structured and PHI-safe."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "communication" },
+    "id": "active-listen",
+    "prompt": "Best sign of active listening on a call?",
+    "choices": [
+      "Brief recap: \"So the pharmacy hasn't received the Rx — let me check.\"",
+      "Talk over the patient",
+      "Long silence without acknowledgment",
+      "Change subject to marketing"
+    ],
+    "correctIndex": 0,
+    "explain": "Mirroring the issue confirms you understood."
+  }
+]

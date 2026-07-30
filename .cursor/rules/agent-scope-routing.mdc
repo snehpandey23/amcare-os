@@ -1,0 +1,33 @@
+---
+description: Route work to the right product area — staff portal vs patient site/brand vs marketing deliverables
+alwaysApply: true
+---
+
+# Agent scope routing
+
+Do not mix these in one task unless the user explicitly connects them.
+
+| User intent | Primary code / docs | Deploy / deliverables |
+|-------------|---------------------|------------------------|
+| **Staff portal**, Siya Assist, My day, tasks, admin, auth API | `apps/hipaa-training/`, `integrations/hipaa-training-api/`, `docs/siyaos-knowledge-base/` | Vercel: `siya-staff-assist` + `siya-staff-auth-api` (see `staff-portal-vercel-deploy.mdc`) |
+| **Internal bot (Assist)** product shape | `siya-assist-product-alignment.mdc` | Chat + KB + escalation — not ERP/marketing OS |
+| **Patient site**, SEO, answers | `apps/siya-health/` (HTML/KB) | Site deploy when requested |
+| **Social / carousel / Visual OS / statics / BG tokens** | `apps/siya-health/brand/` (`VISUAL-OS.md`, `scripts/compose_*.py`, `editorial-packs/`, `statics/`) | Team mirror: Zoho WorkDrive `Siya Knowledge Editorial/` (`zoho-workdrive-team.mdc`) — **not** staff portal |
+
+## Staff portal — Executive Workspace (handoff)
+
+| Spec | Path |
+|------|------|
+| **v2 architecture (build toward this)** | `apps/hipaa-training/docs/EXECUTIVE-WORKSPACE-v2-FOUNDER-DECISION-COACH.md` |
+| v1 frozen baseline | `apps/hipaa-training/docs/EXECUTIVE-WORKSPACE-v1.md` |
+| Agent rule | `.cursor/rules/siya-executive-founder-coach.mdc` |
+
+**v2 intent:** Founder Decision Coach — Orientation → Prioritization → Decision → Delegation. One Founder Focus decision · Can Wait · Delegate · Emerging Risks · hard attention budget. **Not** another dashboard / ERP.
+
+**v1 today:** briefing on My day (4 cards) + Ask Inform → Recommend → Approve (**tasks only**). Do **not** call it Admin Ops Co-pilot in UI copy.
+
+When implementing executive / founder / My day admin lane features, **read v2 architecture first** and follow its phase order (Phase 1 = Focus + Can Wait only).
+
+## Misrouted work
+
+If a thread accidentally included **marketing visual tests** (e.g. `BG-MACRO-BLUR`, carousel A/B) while working on staff portal, treat brand assets as already filed under `apps/siya-health/brand/statics/` and WorkDrive `06-Statics/` — do not redeploy staff app for that.

@@ -162,7 +162,7 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "same day",
       "billing"
     ],
-    "body": "How staff talk about cancellations without promising refunds. Refund authority sits with billing; inconsistent promises create liability and patient conflict. 1. Follow **written billing policy** for the cancellation window. 2. Document cancel date/time in the record. 3. Do **not** promise refunds in chat or phone — use approved language. 4. Escalate exceptions to **billing lead**. **Patient says provider canceled — late fee?** Usually not patient late-cancel; offer reschedule; refunds are billing decision. | Symptom | Action | |---------|--------| | Patient demands refund in portal chat | Empathy + billing follow-up; no commitment | Never authorize refunds. Point to written policy and billing lead. Suggest documenting cancel time.",
+    "body": "How staff talk about cancellations without promising refunds. Refund authority sits with billing; inconsistent promises create liability and patient conflict. 1. Follow **written billing policy** for the cancellation window. 2. Document cancel date/time in the record. 3. Do **not** promise refunds in chat or phone — use approved language. 4. Escalate exceptions to **billing lead**. **Patient cancels same-day / inside late-cancel window?** Use approved late-cancel language; do **not** promise refund in chat. Route to **billing lead** or Clarity support per policy. **Provider no-show / emergency?** Offer **reschedule** first. Refund only when billing policy and billing lead (or documented provider direction) support it. **Patient no-show?** Explain no-show policy; do **not** proactively offer refund. Disputes → billing / Clarity. **Payment not captured before visit (card failed)?** Follow ops workflow to **release slot** after the defined window so others can book — document in chart/billing tools. **FSA / HSA cards?** May work in Clarity/Carepatron when plan allows; declines often mean visit type not covered. Never collect card data in Siya Assistant. Escalate **billing**. **Duplicate charge already refunded in portal?** Confirm ledger, explain refund timeline; do not double-refund without billing review. | Symptom | Action | |---------|--------| | Patient demands refund in portal chat | Empathy + billing follow-up; no commitment | Never authorize refunds. Point to written policy and billing lead. Suggest documenting cancel time.",
     "escalate": "Billing lead"
   },
   {
@@ -267,6 +267,20 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "health guides"
     ],
     "body": "How we describe the company on any surface — internal or external. Entity confusion (admin vs clinical) and marketplace language create legal and trust risk. - **Siya Health Inc.** — administrative / non-clinical support. - **Siya Healthcare, PLLC** — medical services via licensed clinicians. - Position as **physician-led telehealth for adults** — not a membership marketplace or med vending. - Education hub: **Health Guides** at `/answers`. - Use SIYA-STANDARDS + `data/site-standards.mjs` for pricing, states, CTAs. **Can we guarantee medication?** No — evaluation and shared decision-making; see standards. | Symptom | Action | |---------|--------| | Copy says “psychiatry practice” | Fix to physician-led telehealth per standards | | Wrong state list | Run state availability audit doc | Summarize entity split and voice rules. For exact pricing/states, defer to site standards — do not guess. Internal staff asking for ad copy should also read Marketing OS content QA topic."
+  },
+  {
+    "id": "marketing-os-v1-frozen",
+    "category": "decisions",
+    "title": "Freeze Marketing OS as Siya OS department module v1.0",
+    "keywords": [
+      "marketing OS",
+      "Siya OS",
+      "CMO",
+      "freeze",
+      "versioning",
+      "department"
+    ],
+    "body": "When staff ask what Marketing OS is: it is the Marketing department manual under Siya OS Architecture. Do not invent a separate marketing company operating model. Point to `MARKETING-OS-v1.0.md` (frozen) and `SIYA-OS-ARCHITECTURE.md`. Suggest v1.1+ for changes instead of rewriting v1.0. Do not confuse **company Siya OS** (how departments run) with **product SiyaOS** (clinical OS for ADHD care). CMO / planning agents should use the CMO prompt in `MARKETING-OS-v1.0.md` (five lenses: patient trust, clinical integrity, commercial impact, operational scalability, measurable outcomes). Marketing is a **department module of Siya OS**, not an independent Marketing OS. Foundation is frozen as **Siya Marketing Operating System v1.0**; further changes ship as versioned updates or new decision entries. Independent departmental “OS” philosophies create incompatible systems. One shared Siya OS architecture (mission, pipelines, SOPs, KPIs, decision rights, AI assist, improvement log) keeps Clinical, Compliance, Technology, Ops, and Marketing reconcilable."
   },
   {
     "id": "adhd-wellness-platform-vision",

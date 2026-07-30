@@ -1,0 +1,71 @@
+---
+description: Correct Vercel deploy commands for Siya staff portal (auth API + staff app)
+alwaysApply: true
+---
+
+# Staff portal — Vercel deploy (always use this)
+
+When the user asks to **deploy** the employee/staff portal, HIPAA training app, Siya Assist staff shell, or auth API, deploy **both** production projects below (API first, then staff app). Do not use ad-hoc project names.
+
+## Production deploy — local CLI only
+
+**Git/cloud auto-deploy is disabled** for both staff Vercel projects via `ignoreCommand`. Pushes to `main` will **not** promote staff production.
+
+Use only:
+
+```bash
+bash scripts/deploy-staff-portal.sh
+```
+
+Do **not** use Vercel MCP `deploy_to_vercel`, Cursor cloud agent deploy, or bare `vercel deploy --prod` from repo root.
+
+GitHub Actions (`.github/workflows/siya-staff-*.yml`) run **CI/QA only** — they never deploy.
+
+## Projects
+
+| Production URL | Vercel project | Source |
+|----------------|----------------|--------|
+| https://siya-staff-auth-api.vercel.app | `siya-staff-auth-api` | `integrations/hipaa-training-api/` |
+| https://siya-staff-assist.vercel.app | `siya-staff-assist` | monorepo root + `vercel.siya-staff-assist.json` |
+
+## Auth API — required path
+
+Deploy **only** from the API package directory (linked project in `integrations/hipaa-training-api/.vercel/`):
+
+```bash
+cd integrations/hipaa-training-api && npx vercel deploy --prod --yes
+```
+
+**Do not** deploy the auth API with `vercel.hipaa-training-api.json` from the monorepo root — dashboard/build settings there can run the **Next.js staff app** against `siya-staff-auth-api`, breaking `/api/health` and all auth routes.
+
+## Staff app (Next.js)
+
+From repo root:
+
+```bash
+cd /Users/sp/amcare-os && npx vercel deploy --prod --yes --project siya-staff-assist --local-config vercel.siya-staff-assist.json
+```
+
+## After deploy — smoke check
+
+```bash
+curl -sS https://siya-staff-auth-api.vercel.app/api/health
+```
+
+Expect JSON with `"ok":true` and `"service":"hipaa-training-api"`. If 404 or HTML, redeploy API from `integrations/hipaa-training-api`.
+
+## Guardrails (permanent)
+
+| File | Role |
+|------|------|
+| `scripts/vercel/should-build-staff-assist.sh` | Skip **all** git builds for `siya-staff-assist` |
+| `scripts/vercel/should-build-staff-auth-api.sh` | Skip **all** git builds for `siya-staff-auth-api` |
+| `vercel.json` + `vercel.siya-staff-assist.json` | Staff app build + ignoreCommand |
+| `integrations/hipaa-training-api/vercel.json` | Auth API ignoreCommand |
+| `scripts/deploy-staff-portal.sh` | Canonical prod deploy script |
+| `vercel.README.md` | Monorepo deploy map — do not bare-deploy from root |
+
+## Scope
+
+- Do not deploy `siya-assistant` (patient Guide) or `siya-health` unless explicitly requested.
+- Do not push git unless the user asked for commit/push.

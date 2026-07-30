@@ -4,68 +4,43 @@ import { BRAND } from "@/lib/brand";
 
 export function AssistantBrandPanel() {
   return (
-    <aside className="relative hidden w-[min(380px,38vw)] shrink-0 flex-col border-r border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] lg:flex">
+    <aside className="relative hidden w-[min(320px,34vw)] shrink-0 flex-col border-r border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] lg:flex">
       <div className="flex flex-1 flex-col p-8">
         <Image
           src="/assets/images/siya-health-logo.png"
           alt="Siya Health"
-          width={160}
-          height={48}
-          className="h-10 w-auto object-contain object-left"
+          width={140}
+          height={42}
+          className="h-9 w-auto object-contain object-left"
           priority
         />
-        <p className="mt-6 font-[family-name:var(--font-poppins)] text-2xl font-semibold leading-snug text-[var(--siya-primary)]">
+        <p className="mt-5 font-[family-name:var(--font-poppins)] text-xl font-semibold leading-snug text-[var(--siya-primary)]">
           {BRAND.appName}
         </p>
-        <p className="mt-2 text-sm leading-relaxed text-[var(--siya-text-secondary)]">{BRAND.appTagline}</p>
-        <span className="mt-4 inline-flex w-fit rounded-full border border-[var(--siya-border)] bg-white px-3 py-1 text-xs font-medium text-[var(--siya-accent)]">
-          {BRAND.internalBadge}
-        </span>
+        <p className="mt-1 text-sm text-[var(--siya-text-secondary)]">{BRAND.appTagline}</p>
 
-        <div className="relative mt-8 overflow-hidden rounded-[var(--siya-radius-lg)] shadow-[var(--siya-shadow-lg)]">
+        <div className="relative mt-6 overflow-hidden rounded-[var(--siya-radius-lg)] shadow-[var(--siya-shadow-lg)]">
           <Image
-            src="/assets/images/telehealth-workspace.png"
-            alt="Team workspace"
-            width={640}
-            height={400}
-            className="h-auto w-full object-cover"
+            src="/assets/images/care-team.png"
+            alt="Remote team collaboration"
+            width={480}
+            height={640}
+            className="aspect-[3/4] w-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[rgba(30,58,138,0.55)] to-transparent" />
-          <p className="absolute bottom-4 left-4 right-4 text-sm font-medium text-white">
-            One prompt · right team · approved answers
-          </p>
         </div>
 
-        <ul className="mt-6 space-y-2 text-sm text-[var(--siya-text-secondary)]">
-          <li className="flex gap-2">
-            <span className="text-[var(--siya-accent)]" aria-hidden>
-              ✓
-            </span>
-            Company-wide — ops, marketing, HR, finance, tools
-          </li>
-          <li className="flex gap-2">
-            <span className="text-[var(--siya-accent)]" aria-hidden>
-              ✓
-            </span>
-            Pulls from live SOPs and decision log, not random docs
-          </li>
-          <li className="flex gap-2">
-            <span className="text-[var(--siya-accent)]" aria-hidden>
-              ✓
-            </span>
-            Escalates with context when policy is missing
-          </li>
-        </ul>
+        <p className="mt-6 text-sm leading-relaxed text-[var(--siya-text-secondary)]">
+          For every team — ops, marketing, HR, accounts, tech, and leadership.
+        </p>
 
-        <div className="mt-auto pt-8">
-          <p className="text-xs leading-relaxed text-[var(--siya-text-muted)]">{BRAND.privacyFootnote}</p>
-          <p className="mt-2 text-xs text-[var(--siya-text-muted)]">{BRAND.entityNote}</p>
+        <div className="mt-auto pt-6">
           <Link
-            href="/training"
-            className="mt-3 inline-block text-xs font-medium text-[var(--siya-text-muted)] hover:text-[var(--siya-accent)] hover:underline"
+            href="/level-up"
+            className="text-xs font-medium text-[var(--siya-accent)] hover:underline"
           >
-            Staff compliance training (optional) →
+            Daily learning → Level Up
           </Link>
+          <p className="mt-3 text-[11px] leading-relaxed text-[var(--siya-text-muted)]">{BRAND.chatSafetyLine}</p>
         </div>
       </div>
     </aside>

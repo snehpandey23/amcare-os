@@ -1,0 +1,12 @@
+{
+  "module": "forms",
+  "note": "Not connected to submission workflows yet — owner review required per form.",
+  "items": [
+    { "id": "leave", "title": "Leave request", "status": "coming_soon", "owner": "HR" },
+    { "id": "roster", "title": "Roster / schedule change", "status": "coming_soon", "owner": "Operations" },
+    { "id": "expense", "title": "Expense reimbursement", "status": "coming_soon", "owner": "Accounts", "helpQuery": "How do I submit a reimbursement?" },
+    { "id": "it-access", "title": "IT access request", "status": "coming_soon", "owner": "Technology" },
+    { "id": "incident", "title": "Incident report", "status": "coming_soon", "owner": "Compliance" },
+    { "id": "content-approval", "title": "Content approval request", "status": "coming_soon", "owner": "Marketing" }
+  ]
+}

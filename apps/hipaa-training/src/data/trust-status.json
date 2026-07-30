@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-07-29T14:51:43.482Z",
+  "release": {
+    "level": 1,
+    "label": "Internal Preview",
+    "version": "0.1-alpha",
+    "deploymentDecision": "blocked"
+  },
+  "scores": {
+    "knowledgeArchitecture": 92,
+    "knowledgeContent": 22,
+    "criticalFailures": 0,
+    "phiTestsPercent": 100,
+    "unsafeClinical": 0,
+    "missingOwners": 0,
+    "expiredDocuments": 13,
+    "knowledgeGaps": 18,
+    "redTeam": "PASS",
+    "redTeamPass": true,
+    "phiPass": true,
+    "liveTopics": 22
+  },
+  "deployment": {
+    "blocked": true,
+    "reasons": [
+      "Knowledge content 22/100 below pilot bar (80)"
+    ]
+  },
+  "checklist": {
+    "phiReviewComplete": false,
+    "kbReviewComplete": false,
+    "pricingConflictsChecked": false,
+    "redTeamPassed": true,
+    "zeroCriticalFailures": true,
+    "departmentOwnersApproved": false,
+    "pilotUsersTrained": false,
+    "rollbackTested": false,
+    "releaseLogged": false,
+    "ceoApproval": false
+  }
+}

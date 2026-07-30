@@ -1,0 +1,74 @@
+[
+  {
+    "meta": { "status": "live", "owner": "Compliance", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "compliance" },
+    "id": "phi-chat",
+    "prompt": "May you paste a patient's full name and DOB into this staff assistant chat?",
+    "choices": ["Yes, it's internal", "No — keep identifiers out of this chat", "Yes, if you delete the message"],
+    "correctIndex": 1,
+    "explain": "Use EHR/approved tools for PHI. This chat is for de-identified work questions."
+  },
+  {
+    "meta": { "status": "live", "owner": "Compliance", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "compliance" },
+    "id": "password",
+    "prompt": "A coworker asks for your login password to \"help quickly.\"",
+    "choices": ["Share it once", "Never share — use proper access request", "Write it on sticky note"],
+    "correctIndex": 1,
+    "explain": "Individual accounts only — IT access request if needed."
+  },
+  {
+    "meta": { "status": "live", "owner": "Compliance", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "compliance" },
+    "id": "unknown-policy",
+    "prompt": "You're unsure if a refund is allowed. Best action?",
+    "choices": ["Promise yes to calm patient", "Follow billing SOP or escalate — don't guess", "Make up policy"],
+    "correctIndex": 1,
+    "explain": "Assistant and staff should use approved guides or escalate."
+  },
+  {
+    "meta": { "status": "live", "owner": "Compliance", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "compliance" },
+    "id": "screenshot",
+    "prompt": "Patient chart visible on screen — can you share a screenshot in public Slack?",
+    "choices": ["Yes, blur a little", "No — never share PHI in unapproved channels", "Yes, if channel is private"],
+    "correctIndex": 1,
+    "explain": "Use approved secure channels only."
+  },
+  {
+    "meta": { "status": "live", "owner": "Compliance", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "compliance" },
+    "id": "clinical-advice",
+    "prompt": "Patient asks \"Should I double my dose?\" in chat. You…",
+    "choices": ["Give medical advice", "Route to provider — no dosing advice from non-clinical roles", "Search Google"],
+    "correctIndex": 1,
+    "explain": "Clinical decisions stay with licensed clinicians."
+  },
+  {
+    "meta": { "status": "live", "owner": "Compliance", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "compliance" },
+    "id": "marketing-claim",
+    "prompt": "Social post needs a cure claim for ADHD. You…",
+    "choices": ["Post for engagement", "Run marketing compliance review — no unapproved claims", "Copy competitor ad"],
+    "correctIndex": 1,
+    "explain": "Medical Director / compliance path for clinical or outcome language."
+  },
+  {
+    "meta": { "status": "live", "owner": "Compliance", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "compliance" },
+    "id": "lost-device",
+    "prompt": "Company laptop lost. First step?",
+    "choices": ["Wait and see", "Report to IT/security immediately per policy", "Buy a new one silently"],
+    "correctIndex": 1,
+    "explain": "Incident reporting protects patients and the org."
+  },
+  {
+    "meta": { "status": "live", "owner": "Compliance", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "compliance" },
+    "id": "vendor-email",
+    "prompt": "Email asks you to click a link to \"reset payroll password.\"",
+    "choices": ["Click immediately", "Verify sender via known channel — likely phishing", "Forward to all staff"],
+    "correctIndex": 1,
+    "explain": "Phishing awareness — use official IT paths."
+  },
+  {
+    "meta": { "status": "live", "owner": "Compliance", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "compliance" },
+    "id": "min-necessary",
+    "prompt": "\"Minimum necessary\" in HIPAA means…",
+    "choices": ["Share whole chart always", "Share only what's needed for the task", "Share on personal WhatsApp"],
+    "correctIndex": 1,
+    "explain": "Limit PHI to what's required for the job."
+  }
+]

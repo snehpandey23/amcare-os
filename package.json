@@ -16,6 +16,8 @@
     "dev:prescription-generator": "npm run dev --workspace=apps/prescription-generator",
     "dev:hipaa-training": "npm run dev --workspace=@amcare/hipaa-training",
     "dev:hipaa-training:stack": "concurrently \"npm run dev --workspace=@amcare/hipaa-training-api\" \"npm run dev --workspace=@amcare/hipaa-training\"",
+    "staff:red-team": "npm run red-team:staff -w @amcare/hipaa-training",
+    "staff:gate": "npm run gate:deploy -w @amcare/hipaa-training",
     "build:ai-scrum-master": "npm run build --workspace=apps/ai-scrum-master",
     "start:ai-scrum-master": "SERVE_AI_SCRUM_UI=true node --loader ts-node/esm integrations/ai-scrum-master-api/src/index.ts",
     "build": "npm run build --workspaces",

@@ -1,0 +1,74 @@
+[
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "healthcare" },
+    "id": "deductible",
+    "term": "Deductible",
+    "plain": "Amount the patient pays out-of-pocket before insurance starts paying (plan-specific)."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "healthcare" },
+    "id": "coinsurance",
+    "term": "Coinsurance",
+    "plain": "Patient pays a percentage of allowed cost after deductible (e.g. 20%)."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "healthcare" },
+    "id": "controlled",
+    "term": "Controlled medication",
+    "plain": "Medication with stricter prescribing and refill rules (e.g. many ADHD stimulants)."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "healthcare" },
+    "id": "ehr",
+    "term": "EHR",
+    "plain": "Electronic health record — the digital chart system."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "healthcare" },
+    "id": "telehealth",
+    "term": "Telehealth",
+    "plain": "Care delivered by video/phone when appropriate — Siya's core visit format."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "healthcare" },
+    "id": "formulary",
+    "term": "Formulary",
+    "plain": "Insurance plan's list of covered drugs — may affect which med is preferred."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "healthcare" },
+    "id": "intake",
+    "term": "Intake",
+    "plain": "Initial information collection before or at start of care."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "healthcare" },
+    "id": "no-show",
+    "term": "No-show",
+    "plain": "Patient missed appointment without canceling — document per policy."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "healthcare" },
+    "id": "pa-denial",
+    "term": "Prior auth denial",
+    "plain": "Insurance declined coverage — needs appeal or alternate plan; don't promise outcomes."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "healthcare" },
+    "id": "specialist",
+    "term": "Specialist",
+    "plain": "Clinician focused on one area (e.g. psychiatry) vs. primary care."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "healthcare" },
+    "id": "portal",
+    "term": "Patient portal",
+    "plain": "Secure site/app for messages, forms, and sometimes results — not personal email."
+  },
+  {
+    "meta": { "status": "live", "owner": "Clinical Ops / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "healthcare" },
+    "id": "self-pay",
+    "term": "Self-pay",
+    "plain": "Patient pays without insurance — confirm pricing via approved sources only."
+  }
+]

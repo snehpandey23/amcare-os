@@ -3,6 +3,8 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import ClientShell from "@/components/training/ClientShell";
+import { ShiftProvider } from "@/context/ShiftContext";
+import { PortalSessionSync } from "@/components/companion/PortalSessionSync";
 import { BRAND } from "@/lib/brand";
 
 const inter = Inter({
@@ -19,9 +21,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: `${BRAND.appName} · Siya Health`,
-  description:
-    "Siya Assistant — internal help desk for expenses, content, HR, tools, SOPs, and escalation.",
+  title: `${BRAND.appName} · Team portal`,
+  description: "My day, team presence, tasks, learning, and internal help for Siya Health staff.",
   applicationName: BRAND.appName,
 };
 
@@ -34,7 +35,10 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body className="min-h-screen antialiased">
         <AuthProvider>
-          <ClientShell>{children}</ClientShell>
+          <ShiftProvider>
+            <PortalSessionSync />
+            <ClientShell>{children}</ClientShell>
+          </ShiftProvider>
         </AuthProvider>
       </body>
     </html>

@@ -1,0 +1,122 @@
+[
+  {
+    "id": "refund-promise",
+    "prompt": "A patient is upset and asks for a 100% refund. What should frontline staff do FIRST?",
+    "choices": [
+      "Promise the refund to calm them down",
+      "Use empathy, follow written policy, and loop in billing — no refund promise",
+      "Waive the fee because the provider seems okay with it",
+      "Cancel and refund in Clarity without telling billing"
+    ],
+    "correctIndex": 1,
+    "explain": "False refund/discount promises are a compliance and revenue-integrity risk. Provider sympathy does not replace billing approval."
+  },
+  {
+    "id": "late-cancel-24h",
+    "prompt": "Patient cancels an appointment scheduled for TODAY at 6 PM (within the late-cancel window). Refund?",
+    "choices": [
+      "Yes — always refund if they ask nicely",
+      "No automatic refund — explain late-cancel policy and route billing questions to billing lead / Clarity support",
+      "Refund half on the spot",
+      "Ignore — don't reply"
+    ],
+    "correctIndex": 1,
+    "explain": "Training emphasis: same-day/inside-window cancels are typically non-refundable per Clarity policy — confirm exact window with billing lead; never promise in chat."
+  },
+  {
+    "id": "provider-emergency",
+    "prompt": "Provider cannot join due to emergency. Best first step?",
+    "choices": [
+      "Refund immediately",
+      "Offer reschedule without charging again; refund only if billing/provider approves",
+      "Tell patient it's their problem",
+      "Charge a no-show fee"
+    ],
+    "correctIndex": 1,
+    "explain": "Reschedule first. Refunds are not automatic unless policy + billing say so."
+  },
+  {
+    "id": "no-show",
+    "prompt": "Patient no-show for a 10:35 PM visit. Do you lead with offering a refund?",
+    "choices": [
+      "Yes — offer refund proactively",
+      "No — explain no-show policy; if they dispute, billing/Clarity path; document",
+      "Refund if they message once",
+      "Block patient"
+    ],
+    "correctIndex": 1,
+    "explain": "No-show fees/refunds follow policy; don't volunteer refunds. Escalate disputes to billing."
+  },
+  {
+    "id": "payment-not-captured",
+    "prompt": "24+ hours before visit, card was charged twice and failed. Slot still booked. Action?",
+    "choices": [
+      "Keep slot forever",
+      "Follow ops rules: after failed capture window, cancel slot so others can book; document",
+      "Message patient demanding cash app",
+      "Refund patient you never charged"
+    ],
+    "correctIndex": 1,
+    "explain": "Free the slot per workflow when payment cannot be captured in time — exact steps in ops SOP + Clarity."
+  },
+  {
+    "id": "wrong-amount",
+    "prompt": "Which is a billing compliance risk?",
+    "choices": [
+      "Charging wrong visit type (e.g. PCP price vs controlled follow-up price)",
+      "Sending patient the public pricing page",
+      "Tagging billing on a refund request",
+      "Documenting cancel time"
+    ],
+    "correctIndex": 0,
+    "explain": "Wrong charge amounts and unauthorized refunds both harm revenue integrity — escalate to billing."
+  },
+  {
+    "id": "fsa-card",
+    "prompt": "Patient asks if you accept FSA cards.",
+    "choices": [
+      "Yes we always accept — I'll add your card anywhere",
+      "We often can run FSA/HSA cards in Clarity/Carepatron when eligible, but success depends on the card/plan — billing can confirm",
+      "Never accept FSA",
+      "Take card number in Siya Assistant chat"
+    ],
+    "correctIndex": 1,
+    "explain": "FSA/HSA depend on plan and appointment type. Cards are added only in approved payment systems — never in staff assistant chat."
+  },
+  {
+    "id": "hsa-declined",
+    "prompt": "HSA card declined for this visit type. Best reply?",
+    "choices": [
+      "Guarantee it will work next time",
+      "Explain it may not cover this visit type; ask billing team; offer alternate payment per policy",
+      "Blame the patient",
+      "Promise free visit"
+    ],
+    "correctIndex": 1,
+    "explain": "Some HSAs restrict visit types. Staff defer to billing — don't guess."
+  },
+  {
+    "id": "duplicate-refund",
+    "prompt": "Patient paid twice; portal already shows one refund processed. You should:",
+    "choices": [
+      "Refund again immediately",
+      "Confirm duplicate refund in billing portal, explain timeline politely, billing if still wrong",
+      "Ignore duplicate",
+      "Ask for SSN in chat"
+    ],
+    "correctIndex": 1,
+    "explain": "Verify ledger before second refund. Use secure channels for account details."
+  },
+  {
+    "id": "waive-without-billing",
+    "prompt": "Refunding in Clarity without billing lead awareness is:",
+    "choices": [
+      "Fine if patient is angry",
+      "An workflow incident and compliance issue",
+      "Required for every cancel",
+      "Only wrong on weekends"
+    ],
+    "correctIndex": 1,
+    "explain": "Billing tagged on refunds per team process — skipping billing breaks workflow and policy."
+  }
+]

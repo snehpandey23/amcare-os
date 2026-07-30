@@ -1,0 +1,138 @@
+[
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "culture" },
+    "id": "ny-capital",
+    "prompt": "What is the capital of New York state?",
+    "choices": ["New York City", "Albany", "Buffalo", "Rochester"],
+    "correctIndex": 1,
+    "fact": "NYC is the largest city; Albany is the capital."
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "culture" },
+    "id": "fl-capital",
+    "prompt": "What is the capital of Florida?",
+    "choices": ["Miami", "Orlando", "Tallahassee", "Tampa"],
+    "correctIndex": 2,
+    "fact": "Siya serves Florida patients remotely — use full state name in copy when helpful."
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "culture" },
+    "id": "tx-capital",
+    "prompt": "What is the capital of Texas?",
+    "choices": ["Houston", "Dallas", "Austin", "San Antonio"],
+    "correctIndex": 2,
+    "fact": "Many Siya patients are in Houston, Dallas, and Austin — all Central Time."
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "culture" },
+    "id": "golden-state",
+    "prompt": "California is often called…",
+    "choices": ["The Golden State", "The Lone Star State", "The Empire State", "The Sunshine State"],
+    "correctIndex": 0,
+    "fact": "Florida is the Sunshine State; Texas is the Lone Star State."
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "culture" },
+    "id": "independence-day",
+    "prompt": "US Independence Day is celebrated on…",
+    "choices": ["July 4", "November 11", "January 1", "Last Monday in May"],
+    "correctIndex": 0,
+    "fact": "Expect altered clinic hours around July 4."
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "culture" },
+    "id": "labor-day",
+    "prompt": "Labor Day in the US is typically…",
+    "choices": ["First Monday in September", "Fourth Thursday in November", "Second Sunday in May", "February 14"],
+    "correctIndex": 0,
+    "fact": "Federal holiday — many offices closed."
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "culture" },
+    "id": "phoenix-tz",
+    "prompt": "Phoenix, Arizona (most of the metro) uses…",
+    "choices": ["Pacific Time with DST", "Mountain Time without DST", "Central Time", "Eastern Time"],
+    "correctIndex": 1,
+    "fact": "Arizona mostly skips daylight saving — confirm patient city when scheduling."
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "culture" },
+    "id": "ca-abbr",
+    "prompt": "Postal abbreviation for California?",
+    "choices": ["CL", "CA", "CF", "CAL"],
+    "correctIndex": 1,
+    "fact": "Use CA in addresses; spell out California in patient-facing marketing when possible."
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "culture" },
+    "id": "tx-abbr",
+    "prompt": "Postal abbreviation for Texas?",
+    "choices": ["TE", "TX", "TA", "TS"],
+    "correctIndex": 1,
+    "fact": "TX — major Siya market."
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "culture" },
+    "id": "et-states",
+    "prompt": "Which city is in Eastern Time?",
+    "choices": ["Philadelphia, PA", "Chicago, IL", "Denver, CO", "Los Angeles, CA"],
+    "correctIndex": 0,
+    "fact": "Pennsylvania is Eastern; Chicago is Central; Denver Mountain; LA Pacific."
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "culture" },
+    "id": "new-years",
+    "prompt": "New Year's Day in the US is…",
+    "choices": ["January 1", "December 25", "Fourth Thursday in November", "Third Monday in January"],
+    "correctIndex": 0,
+    "fact": "Clinics often have limited hours the first week of January."
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "culture" },
+    "id": "mlk",
+    "prompt": "Martin Luther King Jr. Day is observed on…",
+    "choices": ["Third Monday in January", "First Monday in September", "June 19", "November 11"],
+    "correctIndex": 0,
+    "fact": "Federal holiday — plan slower response times."
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "culture" },
+    "id": "states-count",
+    "prompt": "How many US states are there?",
+    "choices": ["48", "50", "52", "51"],
+    "correctIndex": 1,
+    "fact": "50 states plus Washington, D.C. (not a state)."
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "culture" },
+    "id": "oh-capital",
+    "prompt": "Capital of Ohio?",
+    "choices": ["Cleveland", "Cincinnati", "Columbus", "Toledo"],
+    "correctIndex": 2,
+    "fact": "Ohio is Eastern Time."
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "culture" },
+    "id": "az-capital",
+    "prompt": "Capital of Arizona?",
+    "choices": ["Phoenix", "Tucson", "Scottsdale", "Flagstaff"],
+    "correctIndex": 0,
+    "fact": "Phoenix is both capital and largest city."
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "culture" },
+    "id": "presidents-day",
+    "prompt": "Presidents' Day is generally…",
+    "choices": ["Third Monday in February", "July 4", "First Tuesday in November", "December 26"],
+    "correctIndex": 0,
+    "fact": "Many banks and offices closed — patient calls may spike before/after."
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "culture" },
+    "id": "fl-abbr",
+    "prompt": "Postal abbreviation for Florida?",
+    "choices": ["FL", "FA", "FO", "FD"],
+    "correctIndex": 0,
+    "fact": "FL — Eastern Time for most of the state (panhandle is Central)."
+  }
+]

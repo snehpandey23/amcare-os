@@ -12,9 +12,11 @@ import {
 import {
   getTrainingApiUrl,
   isPublicRegistrationEnabled,
+  isPortalAuthEnabled,
   isTrainingAuthRequired,
 } from "@/lib/trainingConfig";
 import { getStoredToken, setStoredToken } from "@/lib/authStorage";
+import { bindPortalProfileToUser, clearPortalProfileBinding } from "@/lib/portal-profile";
 
 export type TrainingUser = {
   id: string;
@@ -32,7 +34,7 @@ type AuthContextValue = {
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, name?: string) => Promise<void>;
   logout: () => void;
-  refreshUser: () => Promise<void>;
+  refreshUser: () => Promise<TrainingUser | null>;
   apiUrl: string | null;
 };
 
@@ -45,15 +47,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const apiUrl = useMemo(() => getTrainingApiUrl(), []);
   const authRequired = useMemo(() => isTrainingAuthRequired(), []);
+  const sessionEnabled = useMemo(
+    () => isTrainingAuthRequired() || isPortalAuthEnabled(),
+    [],
+  );
   const allowRegister = useMemo(() => isPublicRegistrationEnabled(), []);
 
-  const refreshUser = useCallback(async () => {
+  const refreshUser = useCallback(async (): Promise<TrainingUser | null> => {
     const t = getStoredToken();
     const base = getTrainingApiUrl();
     if (!t || !base) {
       setUser(null);
       setToken(null);
-      return;
+      return null;
     }
     setToken(t);
     try {
@@ -64,43 +70,76 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setStoredToken(null);
         setUser(null);
         setToken(null);
-        return;
+        return null;
       }
       const data = (await res.json()) as TrainingUser;
       setUser(data);
+      bindPortalProfileToUser(data.id);
+      return data;
     } catch {
       setUser(null);
+      return null;
     }
   }, []);
 
   useEffect(() => {
+    let cancelled = false;
     void (async () => {
-      if (!authRequired) {
-        setAuthReady(true);
-        return;
+      try {
+        if (sessionEnabled) {
+          await Promise.race([
+            refreshUser(),
+            new Promise<void>((resolve) => window.setTimeout(resolve, 12_000)),
+          ]);
+        }
+      } finally {
+        if (!cancelled) setAuthReady(true);
       }
-      await refreshUser();
-      setAuthReady(true);
     })();
-  }, [authRequired, refreshUser]);
+    return () => {
+      cancelled = true;
+    };
+  }, [sessionEnabled, refreshUser]);
 
   const login = useCallback(
     async (email: string, password: string) => {
       const base = getTrainingApiUrl();
       if (!base) throw new Error("Training API URL is not configured.");
-      const res = await fetch(`${base}/api/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const em = email.trim().toLowerCase();
+      const pw = password.trim();
+      if (!em || !pw) throw new Error("Enter your work email and password.");
+      let res: Response;
+      try {
+        res = await fetch(`${base}/api/auth/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: em, password: pw }),
+        });
+      } catch {
+        throw new Error(
+          "Could not reach the sign-in service. Refresh the page, try Chrome/Safari (not an in-app browser), turn off VPN/ad blockers, or switch Wi‑Fi/mobile data. If it persists, tell IT the staff portal loads but sign-in does not.",
+        );
+      }
       const data = (await res.json().catch(() => ({}))) as { token?: string; error?: string };
-      if (!res.ok) throw new Error(data.error || "Login failed");
+      if (!res.ok) {
+        throw new Error(
+          data.error ||
+            (res.status === 404
+              ? "Sign-in service misconfigured (404). Hard refresh and try again."
+              : `Login failed (${res.status})`),
+        );
+      }
       if (!data.token) throw new Error("No token returned");
       setStoredToken(data.token);
       setToken(data.token);
-      await refreshUser();
+      const me = await refreshUser();
+      if (!me) {
+        throw new Error(
+          "Sign-in worked but we could not load your account. Check your connection, refresh once, or try typing the password (avoid copy-paste hidden spaces).",
+        );
+      }
     },
-    [refreshUser]
+    [refreshUser],
   );
 
   const register = useCallback(
@@ -126,6 +165,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setStoredToken(null);
     setToken(null);
     setUser(null);
+    clearPortalProfileBinding();
   }, []);
 
   const value = useMemo(

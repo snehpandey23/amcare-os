@@ -34,19 +34,42 @@ const FLOWS: {
     id: "marketing-daily",
     department: "Marketing",
     task: "Today's marketing / content plan",
-    patterns: [/marketing plan/i, /plan for today/i, /marketing today/i, /content today/i, /what.*post/i, /social today/i, /campaign today/i],
+    patterns: [
+      /marketing plan/i,
+      /plan for today/i,
+      /marketing today/i,
+      /content today/i,
+      /what.*post/i,
+      /social today/i,
+      /campaign today/i,
+      /\bposting\b/i,
+      /\btoday\b.*\b(post|content|social)/i,
+    ],
     followUpQuestions: [
       "Are you drafting patient-facing content, or asking about strategy/calendar?",
-      "Which channel (social, site, email)?",
+      "Which channel (Instagram, LinkedIn, site, email)?",
       "Does this mention clinical care, pricing, or outcomes?",
     ],
-    retrievalBoost: ["marketing", "content", "QA", "compliance", "editorial", "brand"],
+    retrievalBoost: ["marketing", "content", "QA", "compliance", "editorial", "brand", "tracker"],
   },
   {
     id: "marketing-carousel",
     department: "Marketing",
     task: "Social content (carousel / post)",
-    patterns: [/carousel/i, /instagram/i, /social post/i, /make.*content/i, /adhd.*post/i],
+    patterns: [
+      /carousel/i,
+      /instagram/i,
+      /\binsta\b/i,
+      /linkedin/i,
+      /facebook/i,
+      /tiktok/i,
+      /social post/i,
+      /\breels?\b/i,
+      /make.*content/i,
+      /adhd.*post/i,
+      /\bpost\b/i,
+      /caption/i,
+    ],
     followUpQuestions: [
       "What is the topic or insight ID?",
       "Siya Health company voice or physician profile?",
@@ -115,8 +138,39 @@ function scoreFlow(text: string, flow: (typeof FLOWS)[0]) {
   return s;
 }
 
+/** One-word channel names etc. → richer retrieval query */
+const SHORT_QUERY_EXPAND: Record<string, string> = {
+  instagram: "instagram social post patient-facing marketing",
+  insta: "instagram social post marketing",
+  linkedin: "linkedin company post marketing",
+  facebook: "facebook social post marketing",
+  tiktok: "tiktok social video marketing",
+  carousel: "carousel social content marketing editorial",
+  post: "patient-facing social post marketing checklist",
+  posting: "social posting marketing today",
+  caption: "social caption marketing compliance",
+  marketing: "marketing content plan today editorial",
+  reimbursement: "employee reimbursement expense report",
+  pricing: "public patient pricing ADHD",
+};
+
+export function expandShortQuery(message: string): string {
+  const t = message.trim().toLowerCase();
+  if (SHORT_QUERY_EXPAND[t]) return SHORT_QUERY_EXPAND[t];
+  return message.trim();
+}
+
+export function hasRoutableIntent(message: string): boolean {
+  const text = expandShortQuery(message);
+  let best = 0;
+  for (const flow of FLOWS) {
+    best = Math.max(best, scoreFlow(text, flow));
+  }
+  return best >= 3;
+}
+
 export function routeIntent(message: string): RouteResult {
-  const text = message.trim();
+  const text = expandShortQuery(message);
   let best: (typeof FLOWS)[0] | null = null;
   let bestScore = 0;
   for (const flow of FLOWS) {

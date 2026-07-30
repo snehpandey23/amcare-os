@@ -1,12 +1,17 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { SIYA_OPENING, SIYA_QUICK_PROMPTS } from "@/lib/siya-os/config";
+import { SIYA_OPENING, SIYA_QUICK_PROMPTS, SIYA_ADMIN_OPENING, ADMIN_CHAT_QUICK_PROMPTS, CHAT_SECTION_LABEL } from "@/lib/siya-os/config";
 import { displayDepartment, type Department } from "@/lib/siya-os/departments";
 import { BRAND } from "@/lib/brand";
 import { notifyOwnerForGap } from "@/lib/siya-os/knowledge-gap";
-import { recordQuestion, recordTimeToAnswer } from "@/lib/siya-os/metrics";
+import { recordQuestion, recordTimeToAnswer, recordAnswerFeedback } from "@/lib/siya-os/metrics";
+import { SaveToMemoryPrompt } from "@/components/memory/SaveToMemoryPrompt";
+import { isPortalMemoryEnabled } from "@/lib/trainingConfig";
+import { useAuth } from "@/context/AuthContext";
+import { isPortalAdmin } from "@/lib/portal-role";
+import { createAdhocTask } from "@/lib/tasks-api";
 
 type ChatLink = { label: string; href: string };
 type RoutingMeta = {
@@ -16,6 +21,13 @@ type RoutingMeta = {
   followUpQuestions?: string[];
 };
 type SourceMeta = { title: string; id: string };
+type PendingTask = {
+  title: string;
+  assigneeId: string;
+  assigneeLabel: string;
+  priority: string;
+  dueDate: string;
+};
 type ChatMessage = {
   id: string;
   role: "assistant" | "user";
@@ -27,6 +39,19 @@ type ChatMessage = {
   knowledgeGap?: boolean;
   userQuestion?: string;
   gapNotified?: boolean;
+  gapEmailSent?: boolean;
+  gapEmailNote?: string;
+  feedbackSent?: boolean;
+  memoryOffer?: boolean;
+  memorySaved?: boolean;
+  pendingTask?: PendingTask | null;
+  taskApproved?: boolean;
+  executiveMeta?: {
+    confidence: string;
+    freshnessSeconds: number;
+    recommendedAction: string;
+    evidenceCount: number;
+  } | null;
 };
 
 function mdLite(text: string) {
@@ -49,13 +74,23 @@ function RoutingBadge({ routing }: { routing: RoutingMeta }) {
   );
 }
 
-export function SiyaChat() {
+export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: string; focusMode?: boolean }) {
+  const { user, token } = useAuth();
+  const adminCoPilot = isPortalAdmin(user?.role);
+  const opening = focusMode
+    ? "You're in Focus mode. I'll keep answers concise — steps and links first."
+    : adminCoPilot
+      ? SIYA_ADMIN_OPENING
+      : SIYA_OPENING;
+  const quickPrompts = adminCoPilot ? [...ADMIN_CHAT_QUICK_PROMPTS, ...SIYA_QUICK_PROMPTS.slice(0, 2)] : SIYA_QUICK_PROMPTS;
+  const sectionLabel = adminCoPilot ? "Executive Ask:" : CHAT_SECTION_LABEL;
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { id: "open", role: "assistant", content: SIYA_OPENING },
+    { id: "open", role: "assistant", content: opening },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
+  const sentInitial = useRef(false);
 
   const historyPayload = useCallback(
     () =>
@@ -74,10 +109,12 @@ export function SiyaChat() {
       setLoading(true);
       const t0 = Date.now();
       try {
+        const headers: Record<string, string> = { "Content-Type": "application/json" };
+        if (token) headers.Authorization = `Bearer ${token}`;
         const res = await fetch("/api/chat", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: trimmed, history: historyPayload() }),
+          headers,
+          body: JSON.stringify({ message: trimmed, history: historyPayload(), focusMode }),
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error);
@@ -99,6 +136,8 @@ export function SiyaChat() {
             escalationPreview: data.escalationPreview,
             knowledgeGap: data.knowledgeGap,
             userQuestion: trimmed,
+            pendingTask: data.pendingTask ?? null,
+            executiveMeta: data.executiveMeta ?? null,
           },
         ]);
       } catch {
@@ -111,26 +150,50 @@ export function SiyaChat() {
         listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
       }
     },
-    [loading, historyPayload]
+    [loading, historyPayload, focusMode, token]
   );
 
+  useEffect(() => {
+    if (!initialQuery || sentInitial.current) return;
+    sentInitial.current = true;
+    void send(initialQuery);
+  }, [initialQuery, send]);
+
   const notifyOwner = useCallback(async (msg: ChatMessage) => {
-    if (!msg.userQuestion || !msg.routing) return;
-    await fetch("/api/knowledge-gap", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        question: msg.userQuestion,
-        department: msg.routing.department,
-        task: msg.routing.task,
-      }),
-    });
+    if (!msg.userQuestion) return;
+    const department = msg.routing?.department ?? "General";
+    const task = msg.routing?.task ?? "Missing approved policy";
+    let emailSent = false;
+    let emailNote = "";
+    try {
+      const res = await fetch("/api/knowledge-gap", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({
+          question: msg.userQuestion,
+          department,
+          task,
+        }),
+      });
+      const data = (await res.json()) as { emailSent?: boolean; message?: string };
+      emailSent = Boolean(data.emailSent);
+      emailNote = typeof data.message === "string" ? data.message : "";
+    } catch {
+      emailNote = "Could not reach server — try Copy escalation summary instead.";
+    }
     notifyOwnerForGap({
       question: msg.userQuestion,
-      department: msg.routing.department,
-      task: msg.routing.task,
+      department,
+      task,
     });
-    setMessages((m) => m.map((x) => (x.id === msg.id ? { ...x, gapNotified: true } : x)));
+    setMessages((m) =>
+      m.map((x) =>
+        x.id === msg.id ? { ...x, gapNotified: true, gapEmailSent: emailSent, gapEmailNote: emailNote } : x,
+      ),
+    );
   }, []);
 
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -168,6 +231,84 @@ export function SiyaChat() {
     }
   }, []);
 
+  const sendFeedback = useCallback(
+    async (msgId: string, helpful: boolean, msg: ChatMessage, failureType?: string) => {
+      recordAnswerFeedback({
+        helpful,
+        failureType,
+        department: msg.routing?.department,
+        knowledgeGap: msg.knowledgeGap,
+      });
+      try {
+        await fetch("/api/assist-feedback", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          body: JSON.stringify({
+            helpful,
+            failureType,
+            department: msg.routing?.department,
+            knowledgeGap: msg.knowledgeGap,
+          }),
+        });
+      } catch {
+        /* local metrics still recorded */
+      }
+      setMessages((m) =>
+        m.map((x) =>
+          x.id === msgId
+            ? {
+                ...x,
+                feedbackSent: true,
+                memoryOffer:
+                  helpful && !msg.knowledgeGap && msg.content.trim().length > 60 && msg.role === "assistant",
+              }
+            : x,
+        ),
+      );
+    },
+    [],
+  );
+
+  function userQuestionBefore(assistantMsgId: string): string {
+    const idx = messages.findIndex((m) => m.id === assistantMsgId);
+    for (let i = idx - 1; i >= 0; i--) {
+      if (messages[i].role === "user") return messages[i].content.trim().slice(0, 200);
+    }
+    return "Resolved Ask thread";
+  }
+
+  const approvePendingTask = useCallback(async (msgId: string, pending: PendingTask) => {
+    try {
+      await createAdhocTask({
+        title: pending.title,
+        assigneeId: pending.assigneeId,
+        priority: pending.priority,
+        dueDate: pending.dueDate,
+      });
+      setMessages((m) =>
+        m.map((x) =>
+          x.id === msgId
+            ? {
+                ...x,
+                taskApproved: true,
+                content: `${x.content}\n\n**Approved** — task created for ${pending.assigneeLabel}.`,
+                pendingTask: null,
+              }
+            : x,
+        ),
+      );
+    } catch {
+      setMessages((m) =>
+        m.map((x) =>
+          x.id === msgId ? { ...x, content: `${x.content}\n\n(Could not create task — use Admin → Task board.)` } : x,
+        ),
+      );
+    }
+  }, []);
+
   return (
     <div className="flex h-full min-h-0 flex-col bg-white/50">
       <div ref={listRef} className="flex-1 overflow-y-auto px-4 py-6 md:px-8">
@@ -185,7 +326,7 @@ export function SiyaChat() {
                 {msg.role === "assistant" ? mdLite(msg.content) : msg.content}
                 {msg.sources?.length ? (
                   <p className="mt-2 border-t border-[var(--siya-border)] pt-2 text-[11px] text-[var(--siya-text-muted)]">
-                    Sources: {msg.sources.map((s) => s.title).join(" · ")}
+                    Based on: {msg.sources.map((s) => s.title).join(" · ")}
                   </p>
                 ) : null}
                 {msg.links?.length ? (
@@ -199,15 +340,34 @@ export function SiyaChat() {
                     ))}
                   </ul>
                 ) : null}
+                {msg.pendingTask && !msg.taskApproved ? (
+                  <div className="mt-3 rounded-xl border border-violet-200 bg-violet-50/80 p-3">
+                    <p className="text-xs font-semibold text-violet-950">Approve creates a task only — no email.</p>
+                    <button
+                      type="button"
+                      onClick={() => void approvePendingTask(msg.id, msg.pendingTask!)}
+                      className="mt-2 rounded-lg bg-[var(--siya-primary)] px-4 py-2 text-xs font-semibold text-white hover:bg-[var(--siya-primary-hover)]"
+                    >
+                      Approve
+                    </button>
+                  </div>
+                ) : null}
+                {msg.executiveMeta ? (
+                  <p className="mt-2 text-[10px] text-[var(--siya-text-muted)]">
+                    Confidence: {msg.executiveMeta.confidence} · {msg.executiveMeta.recommendedAction}
+                  </p>
+                ) : null}
                 {msg.knowledgeGap ? (
                   <div className="mt-3 rounded-xl border border-amber-200/80 bg-amber-50/60 p-3 text-xs">
-                    <p className="font-semibold text-amber-950">Unknown workflow</p>
+                    <p className="font-semibold text-amber-950">No approved guide yet</p>
                     <p className="mt-1 text-[var(--siya-text-secondary)]">
                       Suggested department: <strong>{msg.routing?.department ?? "General"}</strong>
                     </p>
                     {msg.gapNotified ? (
                       <p className="mt-2 font-medium text-[var(--siya-primary)]">
-                        Question saved · Status: awaiting policy
+                        {msg.gapEmailSent
+                          ? "Sent to bot@siya.health — awaiting policy"
+                          : msg.gapEmailNote || "Logged on this device — email may need RESEND_API_KEY on Vercel"}
                       </p>
                     ) : (
                       <button
@@ -215,7 +375,7 @@ export function SiyaChat() {
                         onClick={() => void notifyOwner(msg)}
                         className="mt-2 rounded-lg bg-[var(--siya-primary)] px-3 py-1.5 font-semibold text-white hover:bg-[var(--siya-primary-hover)]"
                       >
-                        Notify owner
+                        Notify owner (email bot@siya.health)
                       </button>
                     )}
                   </div>
@@ -229,19 +389,61 @@ export function SiyaChat() {
                     {copiedId === msg.id ? "Copied — paste into Slack or email" : "Copy escalation summary for Slack / email"}
                   </button>
                 ) : null}
+                {msg.role === "assistant" && msg.id !== "open" && !msg.feedbackSent ? (
+                  <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-[var(--siya-border)] pt-2">
+                    <span className="text-[10px] text-[var(--siya-text-muted)]">Helpful?</span>
+                    <button
+                      type="button"
+                      className="rounded-md border border-[var(--siya-border)] px-2 py-0.5 text-xs hover:bg-[var(--siya-bg-subtle)]"
+                      onClick={() => void sendFeedback(msg.id, true, msg)}
+                    >
+                      👍
+                    </button>
+                    <button
+                      type="button"
+                      className="rounded-md border border-[var(--siya-border)] px-2 py-0.5 text-xs hover:bg-[var(--siya-bg-subtle)]"
+                      onClick={() => void sendFeedback(msg.id, false, msg, "poor_explanation")}
+                    >
+                      👎
+                    </button>
+                  </div>
+                ) : null}
+                {msg.feedbackSent ? (
+                  <p className="mt-2 text-[10px] text-[var(--siya-text-muted)]">Thanks — logged for review (no PHI).</p>
+                ) : null}
+                {isPortalMemoryEnabled() && msg.memoryOffer && !msg.memorySaved ? (
+                  <SaveToMemoryPrompt
+                    defaultTitle={userQuestionBefore(msg.id)}
+                    defaultBody={msg.content.slice(0, 3500)}
+                    source="ask_resolved"
+                    onDone={() =>
+                      setMessages((m) => m.map((x) => (x.id === msg.id ? { ...x, memorySaved: true } : x)))
+                    }
+                    onSkip={() =>
+                      setMessages((m) => m.map((x) => (x.id === msg.id ? { ...x, memoryOffer: false } : x)))
+                    }
+                  />
+                ) : null}
+                {isPortalMemoryEnabled() && msg.memorySaved ? (
+                  <p className="mt-2 text-[10px] font-semibold text-[var(--siya-accent)]">Saved to company memory.</p>
+                ) : null}
               </div>
             </div>
           ))}
-          {loading ? <p className="text-sm text-[var(--siya-text-muted)]">Finding approved answers…</p> : null}
+          {loading ? (
+            <p className="text-sm text-[var(--siya-text-muted)]">
+              {adminCoPilot ? "Checking live tasks & guides…" : "Finding approved answers…"}
+            </p>
+          ) : null}
         </div>
       </div>
       <div className="border-t border-[var(--siya-border)] bg-white p-4 md:px-8">
         <div className="mx-auto max-w-2xl">
-          <p className="mb-2 text-center font-[family-name:var(--font-poppins)] text-sm font-semibold text-[var(--siya-primary)]">
-            What do you need help with today?
+          <p className="mb-2 text-center text-xs font-medium text-[var(--siya-text-muted)]">
+            {sectionLabel}
           </p>
           <div className="mb-3 flex flex-wrap gap-2 justify-center">
-            {SIYA_QUICK_PROMPTS.map((p) => (
+            {quickPrompts.map((p) => (
               <button
                 key={p}
                 type="button"
@@ -262,7 +464,7 @@ export function SiyaChat() {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Describe your task…"
+              placeholder={adminCoPilot ? "Plan my day, assign a task, or ask policy…" : "Describe your task…"}
               className="min-w-0 flex-1 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-4 py-2.5 text-sm outline-none focus:border-[var(--siya-accent)] focus:ring-2 focus:ring-[var(--siya-accent)]/20"
             />
             <button
@@ -273,8 +475,8 @@ export function SiyaChat() {
               Send
             </button>
           </form>
-          <p className="mt-2 text-center text-xs text-[var(--siya-text-muted)]">
-            {BRAND.internalBadge} · {BRAND.privacyFootnote}
+          <p className="mt-2 text-center text-[11px] leading-relaxed text-[var(--siya-text-muted)]">
+            {BRAND.chatSafetyLine}
           </p>
         </div>
       </div>

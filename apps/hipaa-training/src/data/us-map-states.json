@@ -1,0 +1,23 @@
+{
+  "viewBox": { "w": 960, "h": 520 },
+  "states": [
+    { "abbr": "WA", "name": "Washington", "capital": "Olympia", "cx": 120, "cy": 52, "highlight": false },
+    { "abbr": "CA", "name": "California", "capital": "Sacramento", "cx": 95, "cy": 220, "highlight": true, "note": "Siya service state" },
+    { "abbr": "TX", "name": "Texas", "capital": "Austin", "cx": 420, "cy": 380, "highlight": true, "note": "Central Time (most)" },
+    { "abbr": "FL", "name": "Florida", "capital": "Tallahassee", "cx": 780, "cy": 420, "highlight": true, "note": "Eastern Time" },
+    { "abbr": "PA", "name": "Pennsylvania", "capital": "Harrisburg", "cx": 820, "cy": 175, "highlight": true },
+    { "abbr": "AZ", "name": "Arizona", "capital": "Phoenix", "cx": 200, "cy": 320, "highlight": false, "note": "Mountain — no DST (most)" },
+    { "abbr": "OH", "name": "Ohio", "capital": "Columbus", "cx": 720, "cy": 195, "highlight": false },
+    { "abbr": "NY", "name": "New York", "capital": "Albany", "cx": 850, "cy": 130, "highlight": false, "note": "Eastern Time" },
+    { "abbr": "IL", "name": "Illinois", "capital": "Springfield", "cx": 580, "cy": 210, "highlight": false, "note": "Central Time" },
+    { "abbr": "CO", "name": "Colorado", "capital": "Denver", "cx": 320, "cy": 240, "highlight": false, "note": "Mountain Time" },
+    { "abbr": "GA", "name": "Georgia", "capital": "Atlanta", "cx": 740, "cy": 340, "highlight": false },
+    { "abbr": "NC", "name": "North Carolina", "capital": "Raleigh", "cx": 800, "cy": 280, "highlight": false }
+  ],
+  "quizCapitals": [
+    { "abbr": "TX", "wrong": ["Dallas", "Houston", "San Antonio"] },
+    { "abbr": "CA", "wrong": ["Los Angeles", "San Francisco", "San Diego"] },
+    { "abbr": "FL", "wrong": ["Miami", "Orlando", "Jacksonville"] },
+    { "abbr": "PA", "wrong": ["Philadelphia", "Pittsburgh", "Allentown"] }
+  ]
+}

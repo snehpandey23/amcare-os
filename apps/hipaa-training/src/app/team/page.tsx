@@ -1,0 +1,20 @@
+import { TeamPulsePanel } from "@/components/team/TeamPulsePanel";
+
+export default function TeamPage() {
+  return (
+    <div className="h-full overflow-y-auto">
+      <div className="mx-auto max-w-4xl px-4 py-8 md:px-6">
+        <header className="mb-6">
+          <h1 className="font-[family-name:var(--font-poppins)] text-2xl font-semibold text-[var(--siya-primary)]">
+            Team
+          </h1>
+          <p className="mt-1 max-w-xl text-sm text-[var(--siya-text-muted)]">
+            One place to see who is working, on break, or in focus — and what each person has on the board for today.
+            Self-declared presence only; no surveillance.
+          </p>
+        </header>
+        <TeamPulsePanel />
+      </div>
+    </div>
+  );
+}

@@ -1,18 +1,11 @@
-/** Internal help desk — one doorway, not an ops suite. */
+/** Internal employee companion — one chat doorway + approved company memory. */
 
 export const SIYA_OPENING =
-  "**What do you need help with today?**\n\nSame place for everyone: expenses, marketing drafts, HR questions, tool access, SOPs, and who owns what. I pick the right team quietly, ask follow-ups, and only use **approved** company knowledge.\n\nIf we don't have a policy yet, you can **notify the owner** so we add it.";
+  "**Hi — how can I help?**\n\nAsk about policies, SOPs, tools, or who to contact. I use **approved internal guides** only.\n\nIf we don't have an answer yet, you can **notify the owner** so we add it.";
 
-export const SIYA_QUICK_PROMPTS = [
-  "How do I submit an employee reimbursement?",
-  "Find an SOP or internal policy",
-  "What is the workflow for medication refill requests?",
-  "How do I escalate a privacy concern?",
-  "Where can I find our brand guidelines?",
-  "What is our public ADHD pricing?",
-  "Why Book Free Meet & Greet on the homepage?",
-  "I can't find a policy — how do I notify the owner?",
-] as const;
+export const CHAT_SECTION_LABEL = "Some things I can help you with:";
+
+export { CHAT_QUICK_PROMPTS as SIYA_QUICK_PROMPTS, ADMIN_CHAT_QUICK_PROMPTS, SIYA_ADMIN_OPENING } from "@/lib/companion/quick-actions";
 
 export function getEscalationContacts() {
   return [

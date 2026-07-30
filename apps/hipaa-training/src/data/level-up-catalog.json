@@ -1,0 +1,270 @@
+{
+  "phrases": [
+    {
+      "id": "10-4",
+      "phrase": "10-4",
+      "meaning": "I understand / message received.",
+      "example": "Provider: \"Can you send that refill request before noon?\"\nYou: \"10-4 — I'll take care of it.\""
+    },
+    {
+      "id": "touch-base",
+      "phrase": "Let's touch base.",
+      "meaning": "Let's briefly connect or discuss something.",
+      "example": "Supervisor: \"Let's touch base after your shift about the backlog.\""
+    },
+    {
+      "id": "circle-back",
+      "phrase": "Circle back",
+      "meaning": "Return to this topic later.",
+      "example": "\"I'll circle back with billing once I have the invoice number.\""
+    },
+    {
+      "id": "slammed",
+      "phrase": "I'm slammed.",
+      "meaning": "I'm very busy right now.",
+      "example": "\"I'm slammed this hour — can we circle back at 3 PM Central?\""
+    },
+    {
+      "id": "asap",
+      "phrase": "ASAP",
+      "meaning": "As soon as possible (polite urgency, not panic).",
+      "example": "\"Can you confirm the pharmacy received it ASAP?\""
+    },
+    {
+      "id": "no-worries",
+      "phrase": "No worries.",
+      "meaning": "It's okay / don't stress.",
+      "example": "Patient: \"Sorry I'm late.\" You: \"No worries — thanks for calling.\""
+    },
+    {
+      "id": "shoot-email",
+      "phrase": "Shoot me an email.",
+      "meaning": "Send me an email (casual but normal at work).",
+      "example": "\"Shoot me an email with the receipt and I'll loop in Accounts.\""
+    },
+    {
+      "id": "take-ownership",
+      "phrase": "Take ownership.",
+      "meaning": "Own the task end-to-end; follow through.",
+      "example": "\"Can you take ownership of this portal message until it's resolved?\""
+    },
+    {
+      "id": "heads-up",
+      "phrase": "Heads up",
+      "meaning": "Advance warning / FYI.",
+      "example": "\"Heads up — the provider is running 15 minutes behind today.\""
+    },
+    {
+      "id": "good-catch",
+      "phrase": "Good catch.",
+      "meaning": "You noticed something important — well done.",
+      "example": "\"Good catch on the wrong state on that intake form.\""
+    },
+    {
+      "id": "jump-on",
+      "phrase": "Can you jump on this?",
+      "meaning": "Can you handle this now? (Not literal jumping.)",
+      "example": "\"Can you jump on this refill before the pharmacy closes?\""
+    },
+    {
+      "id": "think-about-it",
+      "phrase": "I'll think about it.",
+      "meaning": "Often a soft no — don't push hard; offer info and follow up.",
+      "example": "Patient: \"I'll think about it.\" You: \"Of course — I'll send a summary email if helpful.\""
+    }
+  ],
+  "trivia": [
+    {
+      "id": "lonestar",
+      "prompt": "Which state is known as the Lone Star State?",
+      "choices": ["Texas", "Florida", "Colorado", "Arizona"],
+      "correctIndex": 0,
+      "fact": "Texas uses Central Time for most of the state (El Paso area is Mountain)."
+    },
+    {
+      "id": "ca-capital",
+      "prompt": "What is the capital of California?",
+      "choices": ["Los Angeles", "Sacramento", "San Francisco", "San Diego"],
+      "correctIndex": 1,
+      "fact": "Sacramento — not LA. Siya serves patients statewide in CA remotely."
+    },
+    {
+      "id": "dallas-tz",
+      "prompt": "Dallas, Texas is mainly in which US time zone?",
+      "choices": ["Pacific", "Mountain", "Central", "Eastern"],
+      "correctIndex": 2,
+      "fact": "Central Time (CT). India is typically 10.5–11.5 hours ahead of CT depending on DST."
+    },
+    {
+      "id": "thanksgiving",
+      "prompt": "When is Thanksgiving in the US?",
+      "choices": [
+        "Fourth Thursday in November",
+        "First Monday in September",
+        "July 4",
+        "Second Sunday in May"
+      ],
+      "correctIndex": 0,
+      "fact": "Many patients and clinics have altered schedules that week."
+    },
+    {
+      "id": "memorial-day",
+      "prompt": "Memorial Day primarily honors…",
+      "choices": [
+        "Military members who died in service",
+        "All veterans",
+        "Labor unions",
+        "The signing of the Constitution"
+      ],
+      "correctIndex": 0,
+      "fact": "Last Monday in May — federal holiday; expect slower responses."
+    },
+    {
+      "id": "dst",
+      "prompt": "Daylight saving time in most US states means…",
+      "choices": [
+        "Clocks spring forward 1 hour in spring, fall back in fall",
+        "The whole country stops using time zones",
+        "India and the US always share the same clock",
+        "Only California observes it"
+      ],
+      "correctIndex": 0,
+      "fact": "Arizona (most) and Hawaii don't observe DST — always confirm patient timezone."
+    },
+    {
+      "id": "patient-holidays",
+      "prompt": "Which US holidays often affect patient availability?",
+      "choices": [
+        "Thanksgiving week, Christmas, New Year's, July 4",
+        "Only Diwali",
+        "Only weekends",
+        "None — healthcare never stops"
+      ],
+      "correctIndex": 0,
+      "fact": "Clinics may be closed or short-staffed; set expectations kindly."
+    },
+    {
+      "id": "pa-abbr",
+      "prompt": "What is the postal abbreviation for Pennsylvania?",
+      "choices": ["PN", "PA", "PE", "PS"],
+      "correctIndex": 1,
+      "fact": "PA is a Siya service state — use full state name in patient-facing copy when possible."
+    }
+  ],
+  "healthTerms": [
+    {
+      "id": "chart",
+      "term": "Chart",
+      "plain": "The patient's medical record in the EHR (not a paper chart on the wall)."
+    },
+    {
+      "id": "refill",
+      "term": "Refill",
+      "plain": "Renewing a medication the patient already takes — often needs provider approval."
+    },
+    {
+      "id": "copay",
+      "term": "Copay",
+      "plain": "Fixed amount the patient pays at visit/pharmacy per their insurance plan."
+    },
+    {
+      "id": "prior-auth",
+      "term": "Prior authorization (prior auth)",
+      "plain": "Insurance approval before certain meds or tests — can delay timelines."
+    },
+    {
+      "id": "provider",
+      "term": "Provider",
+      "plain": "Licensed clinician (MD, NP, PA, etc.) — not the same as \"insurance provider.\""
+    },
+    {
+      "id": "follow-up",
+      "term": "Follow-up",
+      "plain": "Return visit or check-in after initial care — often on a subscription cadence at Siya."
+    },
+    {
+      "id": "pcp",
+      "term": "Primary care (PCP)",
+      "plain": "Ongoing general medical home — different from specialty ADHD or weight programs."
+    },
+    {
+      "id": "urgent-care",
+      "term": "Urgent care",
+      "plain": "Walk-in style acute care — not ER; not always a substitute for telehealth follow-up."
+    }
+  ],
+  "healthcareLines": [
+    {
+      "id": "greeting",
+      "role": "Reception / MA",
+      "line": "Thank you for calling Siya Health. How may I help you today?",
+      "tip": "Warm, brief — Americans expect a thank-you and a clear offer to help."
+    },
+    {
+      "id": "refill-intent",
+      "role": "Patient",
+      "line": "I'm calling about my refill.",
+      "tip": "Confirm identity per policy, then: \"Let me pull up your chart.\""
+    },
+    {
+      "id": "pull-chart",
+      "role": "MA",
+      "line": "Let me pull up your chart.",
+      "tip": "Never discuss PHI until you've verified the right patient."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "frustrated",
+      "prompt": "A patient says: \"I'm frustrated.\" What is the best first reply?",
+      "choices": [
+        "\"I hear you — I'm here to help. Can you tell me what happened?\"",
+        "\"Calm down, sir.\"",
+        "\"That's not our fault.\"",
+        "Ignore and transfer immediately"
+      ],
+      "correctIndex": 0,
+      "explain": "Acknowledge emotion, stay professional, gather facts — escalate clinical issues to the provider."
+    },
+    {
+      "id": "etiquette",
+      "prompt": "Which closing is normal and professional in US healthcare email?",
+      "choices": [
+        "\"Thank you for your patience.\"",
+        "\"Do needful.\"",
+        "\"Kindly revert back.\"",
+        "No closing — just stop writing"
+      ],
+      "correctIndex": 0,
+      "explain": "Please, thank you, and appreciate your help are standard — not fake politeness."
+    }
+  ],
+  "docRewrite": {
+    "messy": "pt called med no pharmacy says nothing recd",
+    "clean": "Patient called stating the pharmacy has not received the prescription."
+  },
+  "emailRewrite": {
+    "messy": "Doctor not available today.",
+    "clean": "Good morning,\n\nDr. Smith is unavailable today. We'll contact you shortly to arrange the next available appointment.\n\nThank you for your patience."
+  },
+  "complianceQuick": {
+    "prompt": "Can you text PHI (patient name + diagnosis) to a provider on your personal phone?",
+    "choices": ["Yes, if they're busy", "No — use approved secure channels only", "Yes, if you delete it after"],
+    "correctIndex": 1,
+    "explain": "Use Spruce/EHR/approved tools. No PHI in this assistant chat either."
+  },
+  "aiTips": [
+    "Ask AI for a **checklist**, not a novel — e.g. \"10 pre-publish QA bullets for a patient Instagram caption.\"",
+    "Paste **de-identified** scenarios only — no patient names or MRNs.",
+    "For Excel/Sheets: \"Explain this formula in plain English\" beats \"fix my sheet\" with no context.",
+    "End prompts with **format** — \"Reply as 5 bullets for my supervisor.\""
+  ],
+  "stateAbbreviations": [
+    { "abbr": "TX", "name": "Texas" },
+    { "abbr": "CA", "name": "California" },
+    { "abbr": "PA", "name": "Pennsylvania" },
+    { "abbr": "FL", "name": "Florida" },
+    { "abbr": "AZ", "name": "Arizona" },
+    { "abbr": "OH", "name": "Ohio" }
+  ]
+}

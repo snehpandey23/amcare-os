@@ -33,7 +33,8 @@ General-purpose ChatGPT does not know our escalation paths, entity structure, or
 3. **No clinical advice** — route to provider/clinical lead.  
 4. **No refund promises** — billing lead.  
 5. Optional **HIPAA certification** at `/training` for structured learning.  
-6. Public **Siya Guide** (`apps/siya-assistant`) is separate — patient/public KB only.
+6. Public **Siya Guide** (`apps/siya-assistant`) is separate — patient/public KB only; **retrieval-only by default** (no LLM unless `SIYA_GUIDE_DETERMINISTIC=0`).  
+7. Persona + guardrails: [siya-helpdesk-assistant-persona.md](./siya-helpdesk-assistant-persona.md); LLM system prompt: `apps/hipaa-training/src/lib/siya-os/system-prompt.ts` when `SIYA_WORKFORCE_USE_LLM=1`.
 
 ## FAQ
 

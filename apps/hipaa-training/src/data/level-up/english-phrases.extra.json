@@ -1,0 +1,93 @@
+[
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "english" },
+    "id": "loop-in",
+    "phrase": "Loop me in.",
+    "meaning": "Include me on updates or the email thread.",
+    "example": "Manager: \"Loop me in when Accounts replies.\""
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "english" },
+    "id": "ping",
+    "phrase": "Ping me.",
+    "meaning": "Send a quick message when something happens.",
+    "example": "\"Ping me on Slack when the patient confirms.\""
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "english" },
+    "id": "on-my-radar",
+    "phrase": "On my radar.",
+    "meaning": "I'm aware and will follow up.",
+    "example": "\"That ticket is on my radar — I'll update you by EOD Central.\""
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "english" },
+    "id": "eod",
+    "phrase": "EOD",
+    "meaning": "End of day (confirm timezone — usually US team local time).",
+    "example": "\"I'll send the summary by EOD.\""
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "english" },
+    "id": "fyi",
+    "phrase": "FYI",
+    "meaning": "For your information — no action required unless noted.",
+    "example": "Subject: FYI — clinic closed Monday for holiday."
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "english" },
+    "id": "flag",
+    "phrase": "Flag this.",
+    "meaning": "Mark as important or escalate for attention.",
+    "example": "\"Please flag this if the pharmacy still hasn't received it in 24 hours.\""
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "english" },
+    "id": "bandwidth",
+    "phrase": "I don't have bandwidth.",
+    "meaning": "I don't have capacity right now (polite no or defer).",
+    "example": "\"I don't have bandwidth this hour — can we touch base at 2 PM CT?\""
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "english" },
+    "id": "quick-sync",
+    "phrase": "Quick sync",
+    "meaning": "A short meeting or call to align.",
+    "example": "\"Can we do a 5-minute quick sync on the refill queue?\""
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "english" },
+    "id": "reach-out",
+    "phrase": "Reach out",
+    "meaning": "Contact someone (call, email, message).",
+    "example": "\"I'll reach out to the patient to confirm the pharmacy.\""
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "english" },
+    "id": "follow-up-verb",
+    "phrase": "Follow up",
+    "meaning": "Check back later on an open item.",
+    "example": "\"I'll follow up tomorrow if we don't hear from billing.\""
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "medium", "category": "english" },
+    "id": "push-back",
+    "phrase": "Push back",
+    "meaning": "Politely disagree or ask for more time / clarity.",
+    "example": "\"I may need to push back on that deadline — here's what's open on my list.\""
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "english" },
+    "id": "game-plan",
+    "phrase": "Game plan",
+    "meaning": "The plan for how we'll handle something.",
+    "example": "\"What's our game plan if prior auth is denied?\""
+  },
+  {
+    "meta": { "status": "live", "owner": "People / L&D", "reviewDate": "2026-08-01", "difficulty": "easy", "category": "english" },
+    "id": "all-set",
+    "phrase": "You're all set.",
+    "meaning": "Everything is complete — nothing else needed from them.",
+    "example": "After scheduling: \"You're all set for Tuesday at 10 AM Central.\""
+  }
+]

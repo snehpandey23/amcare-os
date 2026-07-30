@@ -8,7 +8,10 @@ function formatSources(chunks: RetrievedChunk[]): string {
   if (!chunks.length) return "(none)";
   return chunks
     .slice(0, 5)
-    .map((c) => `### ${c.id} — ${c.title}\n${c.snippet}`)
+    .map((c) => {
+      const layer = c.layerLabel ? `[${c.layerLabel}] ` : "";
+      return `### ${c.id} — ${layer}${c.title}\n${c.snippet}`;
+    })
     .join("\n\n");
 }
 
@@ -18,6 +21,7 @@ export async function synthesizeWorkforceAnswer(opts: {
   chunks: RetrievedChunk[];
   followUpQuestions: string[];
   history: { role: string; content: string }[];
+  focusMode?: boolean;
 }): Promise<string | null> {
   if (!workforceLlmEnabled()) return null;
   if (!opts.chunks.length || opts.chunks[0].score < 2) return null;
@@ -34,7 +38,9 @@ export async function synthesizeWorkforceAnswer(opts: {
     "",
     `Staff question: ${opts.userMessage}`,
     "",
-    "Write a helpful reply using ONLY APPROVED SOURCES. Include concrete steps. If escalation owner appears in sources, name them.",
+    opts.focusMode
+      ? "Focus mode: reply in under 120 words. Bullet steps. No preamble. No follow-up questions unless safety-critical."
+      : "Write a helpful reply using ONLY APPROVED SOURCES. Include concrete steps. If escalation owner appears in sources, name them.",
   ]
     .filter(Boolean)
     .join("\n");
@@ -52,7 +58,7 @@ export async function synthesizeWorkforceAnswer(opts: {
       system: WORKFORCE_SYSTEM_PROMPT,
       messages,
       temperature: 0.2,
-      maxOutputTokens: 650,
+      maxOutputTokens: opts.focusMode ? 320 : 650,
     });
     const trimmed = text.trim();
     return trimmed.length >= 20 ? polishStaffMessage(trimmed) : null;

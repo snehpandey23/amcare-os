@@ -30,6 +30,21 @@ export async function initDb(): Promise<void> {
     const schemaPath = join(__dirname, "database", "schema.sql");
     const sql = readFileSync(schemaPath, "utf8");
     await p.query(sql);
+    await p.query(
+      `ALTER TABLE hipaa_training_progress ADD COLUMN IF NOT EXISTS level_up_json JSONB NOT NULL DEFAULT '{}'::jsonb`,
+    );
+    await p.query(
+      `ALTER TABLE hipaa_training_users ADD COLUMN IF NOT EXISTS last_login_at TIMESTAMP`,
+    );
+    await p.query(
+      `ALTER TABLE hipaa_training_progress ADD COLUMN IF NOT EXISTS profile_json JSONB NOT NULL DEFAULT '{}'::jsonb`,
+    );
+    await p.query(
+      `ALTER TABLE hipaa_training_progress ADD COLUMN IF NOT EXISTS shift_json JSONB NOT NULL DEFAULT '{}'::jsonb`,
+    );
+    await p.query(`ALTER TABLE hipaa_training_users ADD COLUMN IF NOT EXISTS deactivated_at TIMESTAMPTZ`);
+    const { ensureKnowledgeTables } = await import("./knowledge-service.js");
+    await ensureKnowledgeTables(p);
   } catch (err) {
     console.warn("[hipaa-training-api] schema file read failed, using inline DDL:", err);
     const sql = `

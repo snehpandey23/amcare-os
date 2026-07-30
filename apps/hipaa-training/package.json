@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "kb:build": "node scripts/build-workspace-kb.mjs",
-    "prebuild": "npm run kb:build",
+    "trust:compute": "node scripts/compute-trust-status.mjs",
+    "gate:deploy": "node scripts/deployment-gate.mjs",
+    "red-team:staff": "node scripts/run-staff-red-team.mjs",
+    "prebuild": "npm run kb:build && npm run trust:compute",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -13,20 +16,25 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "^3.0.0",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
     "ai": "^6.0.0",
+    "next": "15.5.14",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "next": "15.5.14"
+    "swr": "^2.4.2"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.5.14",
-    "@eslint/eslintrc": "^3"
+    "tailwindcss": "^4",
+    "tsx": "^4.7.0",
+    "typescript": "^5"
   }
 }
