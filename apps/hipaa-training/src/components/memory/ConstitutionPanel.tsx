@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { fetchConstitution } from "@/lib/knowledge-api";
 import type { ConstitutionEntry } from "@/lib/knowledge-types";
 import { KNOWLEDGE_LAYERS, KNOWLEDGE_STEWARD, PROMOTION_RULE } from "@/lib/knowledge-types";
+import { portalCard, portalH2, portalH3, portalNoticeLead } from "@/lib/portal-ui";
 
 export function ConstitutionPanel() {
   const [entries, setEntries] = useState<ConstitutionEntry[]>([]);
@@ -18,14 +19,12 @@ export function ConstitutionPanel() {
   return (
     <section className="space-y-4">
       <div>
-        <h2 className="text-sm font-semibold text-[var(--siya-primary)]">The Siya Way</h2>
+        <h2 className={portalH2}>The Siya Way</h2>
         <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
           Layer 0 — how we do things here. Timeless principles. Half-life: <strong>forever</strong>. Steward:{" "}
           <strong>{KNOWLEDGE_STEWARD}</strong>.
         </p>
-        <p className="mt-2 rounded-lg border border-[var(--siya-primary)]/20 bg-[var(--siya-bg-subtle)] px-3 py-2 text-xs italic text-[var(--siya-text-secondary)]">
-          {PROMOTION_RULE}
-        </p>
+        <p className={`mt-2 italic ${portalNoticeLead}`}>{PROMOTION_RULE}</p>
       </div>
 
       <ul className="space-y-1 text-[10px] text-[var(--siya-text-muted)]">
@@ -43,19 +42,14 @@ export function ConstitutionPanel() {
 
       <div className="space-y-3">
         {entries.map((e) => (
-          <article
-            key={e.id}
-            className="rounded-xl border-2 border-[var(--siya-primary)]/25 bg-gradient-to-br from-white to-[var(--siya-bg-subtle)]/40 p-4"
-          >
+          <article key={e.id} className={portalCard}>
             <div className="flex flex-wrap gap-2 text-[10px] uppercase tracking-wide text-[var(--siya-text-muted)]">
               <span className="font-bold text-[var(--siya-primary)]">Principle</span>
               <span>{e.category}</span>
               <span>Confidence {e.confidence}%</span>
               <span>Half-life forever</span>
             </div>
-            <h3 className="mt-2 font-[family-name:var(--font-poppins)] text-base font-semibold text-[var(--siya-primary)]">
-              {e.title}
-            </h3>
+            <h3 className={`mt-2 ${portalH3}`}>{e.title}</h3>
             <p className="mt-2 text-sm leading-relaxed text-[var(--siya-text-secondary)]">{e.body}</p>
           </article>
         ))}

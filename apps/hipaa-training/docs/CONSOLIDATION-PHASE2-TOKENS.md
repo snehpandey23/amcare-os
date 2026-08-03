@@ -1,6 +1,6 @@
 # SiyaOS Staff Portal — Design Token Consolidation (Phase 2)
 
-**Status:** In progress · My Day + Ask + **Learn** done · other sections pending  
+**Status:** In progress · My Day + Ask + Learn + **Memory** done · other sections pending  
 **Phase 1:** Complete — see `CONSOLIDATION-AUDIT-PHASE0-AUG2026.md`
 
 ---
@@ -67,9 +67,21 @@ Use these instead of one-off Tailwind for layout, cards, buttons, tabs, and stat
 
 LMS shell (`training-ui.tsx`) already on radius tokens from earlier work.
 
+### ✅ Memory (complete)
+
+| Component | Changes |
+|-----------|---------|
+| `MemoryHub.tsx` | `portalPage` / section / card / tabs / inputs |
+| `KnowledgePipelineStrip.tsx` | Compact section + caps label |
+| `ConstitutionPanel.tsx` / `PoliciesPanel.tsx` / `KnowledgePanel.tsx` | Cards, headings, status tokens |
+| `SopWorkspace.tsx` | Page layout, status pills, warn/error boxes |
+| `SopDraftGuide.tsx` / `SopBuilderWizard.tsx` / `SopBuilderReview.tsx` / `SopStepFlagModal.tsx` | Portal surfaces + status tokens |
+| `sop-builder/page.client.tsx` | Page shell helpers |
+
+Presentation only — no SOP/LLM/data logic changes.
+
 ### ⏳ Pending
 
-- **Memory** — `MemoryHub`, knowledge panels, SOP workspace/builder
 - **Team** — pulse, handoffs
 - **Admin** — task board, templates, SOP review
 - **Shift** — `ShiftPresenceBar`, `MorningBrief` gradient

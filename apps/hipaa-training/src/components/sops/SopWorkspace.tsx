@@ -18,6 +18,21 @@ import type { SopDraftAnswers } from "@/lib/sop-draft-assist";
 import { SopDraftGuide } from "@/components/sops/SopDraftGuide";
 import { SOP_STATUS_LABEL, type SopRecord, type SopTaskRecord } from "@/lib/sop-types";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
+import {
+  portalBadgeAiDrafted,
+  portalCard,
+  portalH1,
+  portalH2,
+  portalLinkBack,
+  portalPage,
+  portalSection,
+  portalStatusErrorBox,
+  portalStatusErrorText,
+  portalStatusSuccessBox,
+  portalStatusSuccessText,
+  portalStatusWarnBox,
+  portalStatusWarnText,
+} from "@/lib/portal-ui";
 
 type Assignee = { id: string; name: string | null; email: string };
 
@@ -27,10 +42,10 @@ function deptSlug(dept: string): string {
 
 function statusPill(status: SopRecord["status"]) {
   const styles: Record<SopRecord["status"], string> = {
-    draft: "bg-slate-100 text-slate-800",
-    pending_review: "bg-amber-50 text-amber-900",
-    live: "bg-emerald-50 text-emerald-900",
-    needs_review: "bg-orange-50 text-orange-900",
+    draft: "bg-[var(--siya-bg-subtle)] text-[var(--siya-text-secondary)]",
+    pending_review: `${portalStatusWarnBox} ${portalStatusWarnText}`,
+    live: `${portalStatusSuccessBox} ${portalStatusSuccessText}`,
+    needs_review: `${portalStatusWarnBox} ${portalStatusWarnText}`,
   };
   return (
     <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase ${styles[status]}`}>
@@ -205,12 +220,10 @@ export function SopWorkspace() {
   if (!authReady) return null;
 
   return (
-    <div className="mx-auto max-w-3xl space-y-8 px-4 py-8 md:px-6">
+    <div className={portalPage}>
       <header>
         <p className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-accent)]">Knowledge · Layer 2</p>
-        <h1 className="font-[family-name:var(--font-poppins)] text-2xl font-semibold text-[var(--siya-primary)]">
-          Department SOPs
-        </h1>
+        <h1 className={portalH1}>Department SOPs</h1>
         <p className="mt-2 text-sm text-[var(--siya-text-secondary)]">
           Leads draft and submit <strong>department policy SOPs</strong> (prose docs for Ask). Daily operational checklists
           for My day live in the{" "}
@@ -220,14 +233,14 @@ export function SopWorkspace() {
           .
         </p>
         {ctx?.isAdmin ? (
-          <Link href="/admin/sop-review" className="mt-2 inline-block text-sm font-semibold text-[var(--siya-accent)] hover:underline">
+          <Link href="/admin/sop-review" className={`mt-2 inline-block text-sm font-semibold ${portalLinkBack}`}>
             Admin review queue →
           </Link>
         ) : null}
       </header>
 
       {error ? (
-        <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-900">{error}</p>
+        <p className={`${portalStatusErrorBox} px-3 py-2 text-sm ${portalStatusErrorText}`}>{error}</p>
       ) : null}
 
       <div className="flex flex-wrap items-end gap-3">
@@ -261,8 +274,8 @@ export function SopWorkspace() {
         ) : null}
       </div>
 
-      <section className="rounded-2xl border border-[var(--siya-border)] bg-white/90 p-5">
-        <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Open SOP tasks</h2>
+      <section className={portalSection}>
+        <h2 className={portalH2}>Open SOP tasks</h2>
         <p className="mt-1 text-xs text-[var(--siya-text-muted)]">Create or update assignments for your team.</p>
         {loading ? (
           <p className="mt-4 text-sm text-[var(--siya-text-muted)]">Loading…</p>
@@ -271,7 +284,7 @@ export function SopWorkspace() {
         ) : (
           <ul className="mt-4 space-y-3">
             {tasks.map((t) => (
-              <li key={t.id} className="rounded-xl border border-[var(--siya-border)] p-3 text-sm">
+              <li key={t.id} className={`${portalCard} text-sm`}>
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-[10px] font-semibold uppercase text-[var(--siya-text-muted)]">{t.department}</span>
                   <span className="text-[10px] uppercase text-[var(--siya-accent)]">
@@ -323,8 +336,8 @@ export function SopWorkspace() {
         )}
       </section>
 
-      <section className="rounded-2xl border border-[var(--siya-border)] bg-white/90 p-5">
-        <h2 className="text-sm font-semibold text-[var(--siya-primary)]">SOP library</h2>
+      <section className={portalSection}>
+        <h2 className={portalH2}>SOP library</h2>
         {loading ? (
           <p className="mt-4 text-sm text-[var(--siya-text-muted)]">Loading…</p>
         ) : sops.length === 0 ? (
@@ -332,7 +345,7 @@ export function SopWorkspace() {
         ) : (
           <ul className="mt-4 space-y-3">
             {sops.map((s) => (
-              <li key={s.id} className="rounded-xl border border-[var(--siya-border)] p-4">
+              <li key={s.id} className={portalCard}>
                 <div className="flex flex-wrap items-center gap-2">
                   {statusPill(s.status)}
                   <span className="text-[10px] uppercase text-[var(--siya-text-muted)]">{s.department}</span>
@@ -340,7 +353,7 @@ export function SopWorkspace() {
                 <h3 className="mt-2 font-semibold text-[var(--siya-primary)]">{s.title}</h3>
                 <p className="mt-1 line-clamp-3 text-xs text-[var(--siya-text-secondary)]">{s.body || "—"}</p>
                 {s.reviewerComment ? (
-                  <p className="mt-2 rounded bg-amber-50 px-2 py-1 text-xs text-amber-950">
+                  <p className={`mt-2 px-2 py-1 text-xs ${portalStatusWarnBox} ${portalStatusWarnText}`}>
                     <strong>Reviewer:</strong> {s.reviewerComment}
                   </p>
                 ) : null}
@@ -386,11 +399,13 @@ export function SopWorkspace() {
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center">
           <form
             onSubmit={(e) => void saveDraft(e)}
-            className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-[var(--siya-border)] bg-white p-5 shadow-xl"
+            className={`max-h-[90vh] w-full max-w-lg overflow-y-auto p-5 shadow-[var(--siya-shadow-lg)] ${portalSection}`}
           >
-            <h2 className="text-lg font-semibold text-[var(--siya-primary)]">{editing ? "Edit SOP" : "New SOP draft"}</h2>
+            <h2 className={portalH2}>{editing ? "Edit SOP" : "New SOP draft"}</h2>
             {!editing && pendingAiDrafted ? (
-              <p className="mt-1 text-xs text-[var(--siya-text-muted)]">AI suggested this draft — edit anything before you save or submit.</p>
+              <p className={`mt-1 text-xs ${portalBadgeAiDrafted} inline-block`}>
+                AI suggested this draft — edit anything before you save or submit.
+              </p>
             ) : null}
             <label className="mt-4 block text-xs font-medium text-[var(--siya-text-muted)]">
               Department

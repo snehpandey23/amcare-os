@@ -5,7 +5,19 @@ import { useCallback, useEffect, useState } from "react";
 import { createDecision, fetchConstitution, fetchDecisionLineage, fetchDecisions } from "@/lib/knowledge-api";
 import { loadLocalPortalProfile } from "@/lib/portal-profile";
 import type { ConstitutionEntry, DecisionRecord } from "@/lib/knowledge-types";
-import { IMPORTANCE_LABEL } from "@/lib/memory-api";
+import {
+  portalBtnGhostSm,
+  portalBtnNavySm,
+  portalCard,
+  portalH2,
+  portalH3,
+  portalInput,
+  portalSectionSubtle,
+  portalStatusErrorText,
+  portalStatusSuccessBox,
+  portalStatusSuccessText,
+  portalStatusWarnText,
+} from "@/lib/portal-ui";
 
 function DecisionCard({ d }: { d: DecisionRecord }) {
   const [lineageOpen, setLineageOpen] = useState(false);
@@ -21,19 +33,17 @@ function DecisionCard({ d }: { d: DecisionRecord }) {
   }
 
   return (
-    <article className="rounded-xl border border-[var(--siya-primary)]/15 bg-white p-4 shadow-[var(--siya-shadow)]">
+    <article className={portalCard}>
       <div className="flex flex-wrap items-center gap-2 text-[10px]">
-        <span className="rounded-full bg-emerald-50 px-2 py-0.5 font-semibold uppercase text-emerald-900">
+        <span className={`rounded-full px-2 py-0.5 font-semibold uppercase ${portalStatusSuccessBox} ${portalStatusSuccessText}`}>
           Layer 1 · Decision
         </span>
         <span className="uppercase text-[var(--siya-text-muted)]">{d.status}</span>
         <span className="text-[var(--siya-text-muted)]">Confidence {d.confidence}%</span>
         {d.halfLifeDays ? <span className="text-[var(--siya-text-muted)]">Half-life {d.halfLifeDays}d</span> : null}
-        {d.reviewDue ? <span className="font-semibold text-amber-800">Review due</span> : null}
+        {d.reviewDue ? <span className={`font-semibold ${portalStatusWarnText}`}>Review due</span> : null}
       </div>
-      <h3 className="mt-2 font-[family-name:var(--font-poppins)] text-base font-semibold text-[var(--siya-primary)]">
-        {d.title}
-      </h3>
+      <h3 className={`mt-2 ${portalH3}`}>{d.title}</h3>
       <p className="mt-1 text-sm font-medium text-[var(--siya-text-secondary)]">{d.decisionText}</p>
       {d.reason ? (
         <p className="mt-2 text-xs text-[var(--siya-text-muted)]">
@@ -137,14 +147,14 @@ export function KnowledgePanel() {
   return (
     <section className="space-y-4">
       <div>
-        <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Knowledge</h2>
+        <h2 className={portalH2}>Knowledge</h2>
         <p className="text-xs text-[var(--siya-text-muted)]">
           Layer 1 decisions and Layer 2 canonical docs (SOPs live in Ask KB today). Decisions are a <em>type</em> of
           knowledge — not the top-level concept.
         </p>
       </div>
 
-      <p className="rounded-lg border border-[var(--siya-border)] bg-white px-3 py-2 text-xs text-[var(--siya-text-secondary)]">
+      <p className={`text-xs text-[var(--siya-text-secondary)] ${portalSectionSubtle}`}>
         Layer 2 tools:{" "}
         <Link href="/memory/knowledge/sops" className="font-semibold text-[var(--siya-accent)] hover:underline">
           Department SOP workspace
@@ -158,26 +168,22 @@ export function KnowledgePanel() {
 
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-xs font-medium text-[var(--siya-text-secondary)]">Decisions (Layer 1)</p>
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="rounded-lg bg-[var(--siya-primary)] px-3 py-1.5 text-xs font-semibold text-white"
-        >
+        <button type="button" onClick={() => setOpen(true)} className={portalBtnNavySm}>
           Record decision
         </button>
       </div>
 
-      {error ? <p className="text-xs text-red-600">{error}</p> : null}
+      {error ? <p className={`text-xs ${portalStatusErrorText}`}>{error}</p> : null}
 
       {open ? (
-        <form onSubmit={submit} className="space-y-3 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)]/50 p-4 text-sm">
+        <form onSubmit={submit} className={`space-y-3 text-sm ${portalSectionSubtle}`}>
           <label className="block text-xs font-semibold text-[var(--siya-primary)]">
             Ground in principle (required — no orphan knowledge)
             <select
               required
               value={form.parentConstitutionId}
               onChange={(e) => setForm({ ...form, parentConstitutionId: e.target.value })}
-              className="mt-1 w-full rounded border px-2 py-1.5 text-sm"
+              className={`mt-1 ${portalInput}`}
             >
               <option value="">Select constitution…</option>
               {principles.map((p) => (
@@ -189,39 +195,75 @@ export function KnowledgePanel() {
           </label>
           <label className="block text-xs">
             Title (what happened)
-            <input required value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className="mt-1 w-full rounded border px-2 py-1.5" />
+            <input
+              required
+              value={form.title}
+              onChange={(e) => setForm({ ...form, title: e.target.value })}
+              className={`mt-1 ${portalInput}`}
+            />
           </label>
           <label className="block text-xs">
             Decision
-            <input required value={form.decisionText} onChange={(e) => setForm({ ...form, decisionText: e.target.value })} className="mt-1 w-full rounded border px-2 py-1.5" />
+            <input
+              required
+              value={form.decisionText}
+              onChange={(e) => setForm({ ...form, decisionText: e.target.value })}
+              className={`mt-1 ${portalInput}`}
+            />
           </label>
           <label className="block text-xs">
             Why it matters
-            <textarea value={form.reason} onChange={(e) => setForm({ ...form, reason: e.target.value })} rows={2} className="mt-1 w-full rounded border px-2 py-1.5" />
+            <textarea
+              value={form.reason}
+              onChange={(e) => setForm({ ...form, reason: e.target.value })}
+              rows={2}
+              className={`mt-1 ${portalInput}`}
+            />
           </label>
           <label className="block text-xs">
             What changed
-            <textarea value={form.whatChanged} onChange={(e) => setForm({ ...form, whatChanged: e.target.value })} rows={2} className="mt-1 w-full rounded border px-2 py-1.5" />
+            <textarea
+              value={form.whatChanged}
+              onChange={(e) => setForm({ ...form, whatChanged: e.target.value })}
+              rows={2}
+              className={`mt-1 ${portalInput}`}
+            />
           </label>
           <label className="block text-xs">
             Apply later (hook)
-            <input value={form.actionHook} onChange={(e) => setForm({ ...form, actionHook: e.target.value })} className="mt-1 w-full rounded border px-2 py-1.5" />
+            <input
+              value={form.actionHook}
+              onChange={(e) => setForm({ ...form, actionHook: e.target.value })}
+              className={`mt-1 ${portalInput}`}
+            />
           </label>
           <div className="grid gap-2 sm:grid-cols-2">
             <label className="block text-xs">
               Half-life (days)
-              <input type="number" value={form.halfLifeDays} onChange={(e) => setForm({ ...form, halfLifeDays: e.target.value })} className="mt-1 w-full rounded border px-2 py-1.5" />
+              <input
+                type="number"
+                value={form.halfLifeDays}
+                onChange={(e) => setForm({ ...form, halfLifeDays: e.target.value })}
+                className={`mt-1 ${portalInput}`}
+              />
             </label>
             <label className="block text-xs">
               Confidence %
-              <input type="number" min={0} max={100} value={form.confidence} onChange={(e) => setForm({ ...form, confidence: e.target.value })} className="mt-1 w-full rounded border px-2 py-1.5" />
+              <input
+                type="number"
+                min={0}
+                max={100}
+                value={form.confidence}
+                onChange={(e) => setForm({ ...form, confidence: e.target.value })}
+                className={`mt-1 ${portalInput}`}
+              />
             </label>
           </div>
           <div className="flex gap-2">
-            <button type="submit" disabled={pending} className="rounded-lg bg-[var(--siya-primary)] px-4 py-2 text-xs font-semibold text-white">
+            <button type="submit" disabled={pending} className={portalBtnNavySm}>
               {pending ? "Saving…" : "Save"}
             </button>
-            <button type="button" onClick={() => setOpen(false)} className="rounded-lg border px-4 py-2 text-xs">
+            <button type="button" onClick={() => setOpen(false)} className={portalBtnGhostSm}>
               Cancel
             </button>
           </div>

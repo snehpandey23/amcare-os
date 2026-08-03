@@ -13,6 +13,16 @@ import {
 } from "@/lib/sop-builder-api";
 import { MAX_QUESTIONS, MIN_QUESTIONS } from "@/lib/sop-builder-assist";
 import Link from "next/link";
+import {
+  portalCard,
+  portalH2,
+  portalSection,
+  portalStatusErrorText,
+  portalStatusSuccessBox,
+  portalStatusSuccessText,
+  portalStatusWarnBox,
+  portalStatusWarnText,
+} from "@/lib/portal-ui";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
 import { SopBuilderReview } from "@/components/sop-builder/SopBuilderReview";
 
@@ -24,6 +34,7 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
   const [access, setAccess] = useState<{ canBuild: boolean; isAdmin: boolean } | null>(null);
   const [topic, setTopic] = useState(initialTopic);
   const [llmUnavailable, setLlmUnavailable] = useState(false);
+  const [llmIssue, setLlmIssue] = useState<{ code: string; kind: string; message: string } | null>(null);
   const [session, setSession] = useState<SopBuilderSessionRecord | null>(null);
   const [currentQuestion, setCurrentQuestion] = useState<string | null>(null);
   const [answer, setAnswer] = useState("");
@@ -73,6 +84,7 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
     setPending(true);
     setError(null);
     setLlmUnavailable(false);
+    setLlmIssue(null);
     try {
       const result = await startSopBuilderInterview(topic.trim());
       setSession(result.session);
@@ -84,6 +96,7 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
     } catch (err) {
       if (err instanceof SopBuilderUnavailableError) {
         setLlmUnavailable(true);
+        setLlmIssue({ code: err.code, kind: err.kind, message: err.message });
         setError(null);
       } else {
         setError(err instanceof Error ? err.message : "Could not start");
@@ -175,7 +188,7 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
   if (phase === "interview" && session) {
     return (
       <div className="space-y-4">
-        <div className="rounded-xl border border-[var(--siya-border)] bg-white p-4">
+        <div className={portalCard}>
           <p className="text-xs font-medium uppercase text-[var(--siya-text-muted)]">{session.topic}</p>
           <p className="mt-1 text-xs text-[var(--siya-text-secondary)]">{progressLabel}</p>
           <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[var(--siya-bg-subtle)]">
@@ -187,7 +200,7 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
         </div>
 
         {currentQuestion ? (
-          <div className="rounded-xl border border-[var(--siya-border)] bg-white p-4">
+          <div className={portalCard}>
             <p className="text-sm font-medium text-[var(--siya-primary)]">{currentQuestion}</p>
             <textarea
               rows={3}
@@ -218,8 +231,8 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
         ) : null}
 
         {readyToDraft ? (
-          <div className="rounded-xl border border-emerald-200 bg-emerald-50/80 p-4">
-            <p className="text-sm text-emerald-950">You&apos;ve answered enough — ready to generate a checklist draft.</p>
+          <div className={`${portalStatusSuccessBox} p-4`}>
+            <p className={`text-sm ${portalStatusSuccessText}`}>You&apos;ve answered enough — ready to generate a checklist draft.</p>
             <button
               type="button"
               disabled={pending}
@@ -231,7 +244,7 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
           </div>
         ) : null}
 
-        {error ? <p className="text-sm text-red-600">{error}</p> : null}
+        {error ? <p className={`text-sm ${portalStatusErrorText}`}>{error}</p> : null}
 
         <button
           type="button"
@@ -249,8 +262,8 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
 
   return (
     <div className="space-y-6">
-      <form onSubmit={onStart} className="rounded-xl border border-[var(--siya-border)] bg-white p-5">
-        <h2 className="text-lg font-semibold text-[var(--siya-primary)]">Build a daily checklist SOP</h2>
+      <form onSubmit={onStart} className={`${portalSection}`}>
+        <h2 className={portalH2}>Build a daily checklist SOP</h2>
         <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
           AI will interview you about the process, then draft checklist steps for My day. Nothing goes live until an admin
           approves.
@@ -266,12 +279,25 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
           />
         </label>
         {llmUnavailable ? (
-          <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50/90 p-4 text-sm text-amber-950">
-            <p className="font-medium">AI interview is temporarily unavailable</p>
-            <p className="mt-1 text-xs">
-              Workforce AI may be off or busy. You can still write a department policy SOP manually, or ask an admin to add
-              checklist steps under Task templates.
+          <div className={`mt-4 p-4 text-sm ${portalStatusWarnBox} ${portalStatusWarnText}`}>
+            <p className="font-medium">
+              {llmIssue?.code === "llm_disabled"
+                ? "Workforce AI is turned off"
+                : llmIssue?.code === "llm_billing"
+                  ? "AI Gateway billing blocked"
+                  : llmIssue?.code === "llm_auth"
+                    ? "AI Gateway authentication failed"
+                    : llmIssue?.code === "llm_quota"
+                      ? "AI Gateway quota / rate limit"
+                      : "AI interview failed"}
             </p>
+            <p className="mt-1 text-xs">
+              {llmIssue?.message ||
+                "AI generation failed. You can still write a department policy SOP manually, or ask an admin to add checklist steps under Task templates."}
+            </p>
+            {llmIssue?.code ? (
+              <p className="mt-2 font-mono text-[10px] opacity-80">code: {llmIssue.code}</p>
+            ) : null}
             <div className="mt-3 flex flex-wrap gap-3 text-xs font-semibold">
               <Link href="/memory/knowledge/sops" className="text-[var(--siya-accent)] underline">
                 Department SOP workspace
@@ -284,14 +310,14 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
             </div>
           </div>
         ) : null}
-        {error && !llmUnavailable ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
+        {error && !llmUnavailable ? <p className={`mt-3 text-sm ${portalStatusErrorText}`}>{error}</p> : null}
         <button type="submit" disabled={pending || !topic.trim()} className={`mt-4 ${trainingLinkPrimaryClass}`}>
           {pending ? "Starting…" : "Start interview"}
         </button>
       </form>
 
       {resumable.length > 0 ? (
-        <section className="rounded-xl border border-[var(--siya-border)] bg-white p-4">
+        <section className={portalCard}>
           <h3 className="text-sm font-semibold text-[var(--siya-primary)]">Resume a session</h3>
           <ul className="mt-2 space-y-2">
             {resumable.map((s) => (

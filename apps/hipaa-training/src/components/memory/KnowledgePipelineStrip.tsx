@@ -2,10 +2,12 @@
 
 import { PIPELINE_STAGES } from "@/lib/knowledge-types";
 
+import { portalCapsLabel, portalSectionCompact } from "@/lib/portal-ui";
+
 export function KnowledgePipelineStrip() {
   return (
-    <section className="rounded-xl border border-[var(--siya-border)] bg-white p-4">
-      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-accent)]">Knowledge loop</p>
+    <section className={portalSectionCompact}>
+      <p className={portalCapsLabel}>Knowledge loop</p>
       <p className="mt-1 text-[11px] text-[var(--siya-text-muted)]">
         Retrieval isn&apos;t the goal — <strong>Apply</strong> is. Application produces <strong>Learn</strong> → new
         capture.

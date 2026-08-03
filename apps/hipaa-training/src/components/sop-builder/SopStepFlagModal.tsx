@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { submitSopFeedback } from "@/lib/sop-builder-api";
 import { trainingLinkPrimaryClass } from "@/components/training/training-ui";
+import { portalH3, portalInput, portalSection, portalStatusErrorText } from "@/lib/portal-ui";
 
 type Props = {
   sopTemplateId: string;
@@ -36,18 +37,18 @@ export function SopStepFlagModal({ sopTemplateId, checklistItemId, itemLabel, on
     <div className="fixed inset-0 z-[100] flex items-end justify-center bg-black/40 p-4 sm:items-center">
       <form
         onSubmit={onSubmit}
-        className="w-full max-w-md rounded-2xl border border-[var(--siya-border)] bg-white p-5 shadow-xl"
+        className={`w-full max-w-md p-5 shadow-[var(--siya-shadow-lg)] ${portalSection}`}
       >
-        <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Flag this step</h2>
+        <h2 className={portalH3}>Flag this step</h2>
         <p className="mt-1 text-xs text-[var(--siya-text-muted)] line-clamp-2">{itemLabel}</p>
         <textarea
           rows={3}
           placeholder="Unclear, outdated, or wrong? (optional note)"
-          className="mt-3 w-full rounded-lg border border-[var(--siya-border)] px-3 py-2 text-sm"
+          className={`mt-3 ${portalInput}`}
           value={note}
           onChange={(e) => setNote(e.target.value)}
         />
-        {error ? <p className="mt-2 text-xs text-red-600">{error}</p> : null}
+        {error ? <p className={`mt-2 text-xs ${portalStatusErrorText}`}>{error}</p> : null}
         <div className="mt-4 flex flex-wrap gap-2">
           <button type="submit" disabled={pending} className={trainingLinkPrimaryClass}>
             {pending ? "Sending…" : "Submit flag"}

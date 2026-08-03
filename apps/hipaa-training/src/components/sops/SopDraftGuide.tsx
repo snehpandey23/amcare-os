@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { SopDraftAnswers } from "@/lib/sop-draft-assist";
 import Link from "next/link";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
+import { portalH2, portalSection, portalStatusErrorText } from "@/lib/portal-ui";
 
 const FIELDS: { key: keyof SopDraftAnswers; label: string; hint: string; required?: boolean; rows?: number }[] = [
   {
@@ -84,9 +85,9 @@ export function SopDraftGuide({
     <div className="fixed inset-0 z-[100] flex items-end justify-center bg-black/40 p-4 sm:items-center">
       <form
         onSubmit={submit}
-        className="max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-[var(--siya-border)] bg-white p-5 shadow-xl"
+        className={`max-h-[92vh] w-full max-w-lg overflow-y-auto p-5 shadow-[var(--siya-shadow-lg)] ${portalSection}`}
       >
-        <h2 className="text-lg font-semibold text-[var(--siya-primary)]">New department SOP — guided draft</h2>
+        <h2 className={portalH2}>New department SOP — guided draft</h2>
         <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
           Prose policy docs for your department — not daily My day checklists. For operational checklists, use the{" "}
           <Link href="/memory/knowledge/sop-builder" className="font-semibold text-[var(--siya-accent)] hover:underline">
@@ -136,7 +137,7 @@ export function SopDraftGuide({
           </label>
         ))}
 
-        {error ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
+        {error ? <p className={`mt-3 text-sm ${portalStatusErrorText}`}>{error}</p> : null}
 
         <div className="mt-5 flex flex-wrap gap-2">
           <button type="submit" disabled={pending || !department} className={trainingLinkPrimaryClass}>

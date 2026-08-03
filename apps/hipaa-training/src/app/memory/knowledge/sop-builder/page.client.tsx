@@ -7,6 +7,7 @@ import { useAuth } from "@/context/AuthContext";
 import { SopBuilderWizard } from "@/components/sop-builder/SopBuilderWizard";
 import { fetchSopBuilderAccess, resumeSopBuilderSession } from "@/lib/sop-builder-api";
 import { PortalNavLink } from "@/components/training/PortalNavLink";
+import { portalH1, portalLinkBack, portalPage } from "@/lib/portal-ui";
 
 export default function SopBuilderPage() {
   const router = useRouter();
@@ -33,14 +34,12 @@ export default function SopBuilderPage() {
   if (!authReady || !user) return null;
 
   return (
-    <div className="mx-auto max-w-lg space-y-4 px-4 py-8 md:px-6">
+    <div className={`${portalPage} max-w-lg`}>
       <header>
-        <PortalNavLink href="/memory/knowledge/sops" className="text-sm text-[var(--siya-accent)] hover:underline">
+        <PortalNavLink href="/memory/knowledge/sops" className={portalLinkBack}>
           ← Department SOPs
         </PortalNavLink>
-        <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-2xl font-semibold text-[var(--siya-primary)]">
-          AI checklist builder
-        </h1>
+        <h1 className={`mt-2 ${portalH1}`}>AI checklist builder</h1>
         <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
           Operational daily checklists for My day — not department policy docs (
           <Link href="/memory/knowledge/sops" className="text-[var(--siya-accent)] hover:underline">
