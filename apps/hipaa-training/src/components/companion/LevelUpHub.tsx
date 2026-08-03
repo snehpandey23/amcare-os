@@ -30,6 +30,19 @@ import {
   resolveDailyPhraseCard,
   sopDepartmentsForUser,
 } from "@/lib/level-up/sop-daily-cards";
+import {
+  portalCard,
+  portalH1,
+  portalH2,
+  portalLinkBack,
+  portalPage,
+  portalStatusSuccessBox,
+  portalStatusSuccessText,
+} from "@/lib/portal-ui";
+
+const doneBtnClass = `cursor-default ${portalStatusSuccessBox} px-3 py-2 text-xs font-semibold ${portalStatusSuccessText}`;
+const pendingBtnClass =
+  "rounded-[var(--siya-radius-md)] bg-[var(--siya-bg-subtle)] px-3 py-2 text-xs font-semibold text-[var(--siya-accent)] hover:bg-[var(--siya-accent)]/10";
 
 export function LevelUpHub() {
   const [progress, setProgress] = useState<LevelUpProgress | null>(null);
@@ -84,14 +97,12 @@ export function LevelUpHub() {
   }, [phrase.source, deptLabel]);
 
   return (
-    <div className="mx-auto max-w-2xl space-y-10 px-4 py-8 md:px-6">
+    <div className={`${portalPage} max-w-2xl`}>
       <header>
-        <Link href="/learn" className="text-sm text-[var(--siya-accent)] hover:underline">
+        <Link href="/learn" className={portalLinkBack}>
           ← Learn
         </Link>
-        <h1 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-semibold text-[var(--siya-primary)]">
-          Practice
-        </h1>
+        <h1 className={`mt-3 ${portalH1}`}>Practice</h1>
         <p className="mt-1 text-sm text-[var(--siya-text-muted)]">
           ~8–10 minutes a day — American English, culture, and healthcare communication. XP saves to your account
           when signed in (syncs within a few seconds).
@@ -105,7 +116,7 @@ export function LevelUpHub() {
       </header>
 
       <section id="english">
-        <h2 className="mb-1 font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--siya-primary)]">
+        <h2 className={`mb-1 ${portalH2}`}>
           🇺🇸 {phraseSubtitle}
         </h2>
         <p className="mb-3 text-xs text-[var(--siya-text-muted)]">
@@ -114,24 +125,20 @@ export function LevelUpHub() {
             SOP workspace
           </Link>
         </p>
-        <div className="rounded-2xl border border-[var(--siya-border)] bg-white p-5 shadow-[var(--siya-shadow)]">
+        <div className={portalCard}>
           <p className="text-xl font-semibold text-[var(--siya-primary)]">&ldquo;{phrase.phrase}&rdquo;</p>
           <p className="mt-2 text-sm">
             <strong>Meaning:</strong> {phrase.meaning}
           </p>
           {phrase.example ? (
-            <p className="mt-3 rounded-xl bg-[var(--siya-bg-subtle)] p-3 text-xs text-[var(--siya-text-secondary)]">
+            <p className="mt-3 rounded-[var(--siya-radius-md)] bg-[var(--siya-bg-subtle)] p-3 text-xs text-[var(--siya-text-secondary)]">
               {phrase.example}
             </p>
           ) : null}
           <button
             type="button"
             disabled={phraseDone}
-            className={`mt-3 rounded-lg px-3 py-2 text-xs font-semibold ${
-              phraseDone
-                ? "cursor-default bg-emerald-50 text-emerald-800"
-                : "bg-[var(--siya-bg-subtle)] text-[var(--siya-accent)] hover:bg-[var(--siya-accent)]/10"
-            }`}
+            className={`mt-3 ${phraseDone ? doneBtnClass : pendingBtnClass}`}
             onClick={() => setProgress(markDailyComplete("english"))}
           >
             {phraseDone ? "Done today — +10 XP counted ✓" : "Mark phrase done (+10 XP)"}
@@ -140,7 +147,7 @@ export function LevelUpHub() {
       </section>
 
       <section id="culture">
-        <h2 className="mb-3 font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--siya-primary)]">
+        <h2 className={`mb-3 ${portalH2}`}>
           🗺️ Culture & trivia
         </h2>
         <McqCard
@@ -153,23 +160,19 @@ export function LevelUpHub() {
       </section>
 
       <section id="healthcare">
-        <h2 className="mb-1 font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--siya-primary)]">
+        <h2 className={`mb-1 ${portalH2}`}>
           🏥 Healthcare term for today
         </h2>
         <p className="mb-3 text-xs text-[var(--siya-text-muted)]">
           {term.source ?? "Rotates with your department’s live SOPs"}
         </p>
-        <div className="rounded-2xl border border-[var(--siya-border)] bg-white p-5 shadow-[var(--siya-shadow)]">
+        <div className={portalCard}>
           <p className="text-lg font-semibold">{term.term}</p>
           <p className="mt-2 text-sm text-[var(--siya-text-secondary)]">{term.plain}</p>
           <button
             type="button"
             disabled={termDone}
-            className={`mt-3 rounded-lg px-3 py-2 text-xs font-semibold ${
-              termDone
-                ? "cursor-default bg-emerald-50 text-emerald-800"
-                : "bg-[var(--siya-bg-subtle)] text-[var(--siya-accent)] hover:bg-[var(--siya-accent)]/10"
-            }`}
+            className={`mt-3 ${termDone ? doneBtnClass : pendingBtnClass}`}
             onClick={() => setProgress(markDailyComplete("healthterm"))}
           >
             {termDone ? "Done today — +10 XP counted ✓" : "Mark term done (+10 XP)"}
@@ -180,10 +183,10 @@ export function LevelUpHub() {
       <ScenarioEtiquetteSection />
 
       <section id="writing">
-        <h2 className="mb-3 font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--siya-primary)]">
+        <h2 className={`mb-3 ${portalH2}`}>
           ✍️ Documentation & email
         </h2>
-        <div className="space-y-4 rounded-2xl border border-[var(--siya-border)] bg-white p-5 text-sm">
+        <div className={`space-y-4 ${portalCard} text-sm`}>
           <div>
             <p className="text-xs font-medium text-[var(--siya-text-muted)]">Today&apos;s messy note</p>
             <p className="mt-1 font-mono text-xs">{docDay.messy}</p>
@@ -193,18 +196,14 @@ export function LevelUpHub() {
           <div className="border-t border-[var(--siya-border)] pt-4">
             <p className="text-xs font-medium text-[var(--siya-text-muted)]">Email sample (static)</p>
             <p className="mt-1">{LEVEL_UP_CATALOG.emailRewrite.messy}</p>
-            <pre className="mt-2 whitespace-pre-wrap rounded-xl bg-[var(--siya-bg-subtle)] p-3 text-xs">
+            <pre className="mt-2 whitespace-pre-wrap rounded-[var(--siya-radius-md)] bg-[var(--siya-bg-subtle)] p-3 text-xs">
               {LEVEL_UP_CATALOG.emailRewrite.clean}
             </pre>
           </div>
           <button
             type="button"
             disabled={writingDone}
-            className={`rounded-lg px-3 py-2 text-xs font-semibold ${
-              writingDone
-                ? "cursor-default bg-emerald-50 text-emerald-800"
-                : "bg-[var(--siya-bg-subtle)] text-[var(--siya-accent)] hover:bg-[var(--siya-accent)]/10"
-            }`}
+            className={writingDone ? doneBtnClass : pendingBtnClass}
             onClick={() => setProgress(markDailyComplete("documentation"))}
           >
             {writingDone ? "Done today — +10 XP counted ✓" : "Mark writing practice done (+10 XP)"}
@@ -213,7 +212,7 @@ export function LevelUpHub() {
       </section>
 
       <section id="billing-practice">
-        <h2 className="mb-3 font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--siya-primary)]">
+        <h2 className={`mb-3 ${portalH2}`}>
           💳 Billing & refunds (practice)
         </h2>
         <p className="mb-4 text-xs text-[var(--siya-text-muted)]">
@@ -236,7 +235,7 @@ export function LevelUpHub() {
       </section>
 
       <section id="compliance">
-        <h2 className="mb-3 font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--siya-primary)]">
+        <h2 className={`mb-3 ${portalH2}`}>
           🔒 Quick compliance
         </h2>
         <McqCard
@@ -249,30 +248,30 @@ export function LevelUpHub() {
       </section>
 
       <section id="ai">
-        <h2 className="mb-3 font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--siya-primary)]">
+        <h2 className={`mb-3 ${portalH2}`}>
           🤖 AI tip of the day
         </h2>
-        <p className="rounded-2xl border border-[var(--siya-border)] bg-white p-5 text-sm text-[var(--siya-text-secondary)]">
+        <p className={`${portalCard} text-sm text-[var(--siya-text-secondary)]`}>
           {aiTip}
         </p>
       </section>
 
       <section id="map">
-        <h2 className="mb-3 font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--siya-primary)]">
+        <h2 className={`mb-3 ${portalH2}`}>
           🗺️ Interactive US map
         </h2>
         <UsMapInteractive onComplete={() => setProgress(markDailyComplete("map"))} />
       </section>
 
       <section id="typing">
-        <h2 className="mb-3 font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--siya-primary)]">
+        <h2 className={`mb-3 ${portalH2}`}>
           ⌨️ Chat speed & accuracy
         </h2>
         <ChatTypingDrill onComplete={() => setProgress(markDailyComplete("typing"))} />
       </section>
 
       <section id="timezone">
-        <h2 className="mb-3 font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--siya-primary)]">
+        <h2 className={`mb-3 ${portalH2}`}>
           🕐 Timezone practice (US ↔ India)
         </h2>
         <TimezoneDrill onComplete={() => setProgress(markDailyComplete("timezone"))} />

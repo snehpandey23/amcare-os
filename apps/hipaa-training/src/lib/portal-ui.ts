@@ -64,6 +64,16 @@ export const portalStatusInfoBox =
 
 export const portalStatusInfoText = "text-[var(--siya-status-info-text)]";
 
+export const portalStatusSuccessBox =
+  "rounded-[var(--siya-radius-md)] border border-[var(--siya-status-success-border)] bg-[var(--siya-status-success-bg)]";
+
+export const portalStatusSuccessText = "text-[var(--siya-status-success-text)]";
+
+export const portalStatusErrorBox =
+  "rounded-[var(--siya-radius-md)] border border-[var(--siya-status-error-border)] bg-[var(--siya-status-error-bg)]";
+
+export const portalStatusErrorText = "text-[var(--siya-status-error-text)]";
+
 /** Presence / focus pill (replaces violet focus styling). */
 export const portalStatusInfoPill =
   "rounded-lg border border-[var(--siya-status-info-border)] bg-[var(--siya-status-info-bg)] px-2.5 py-1.5 text-[var(--siya-status-info-text)]";

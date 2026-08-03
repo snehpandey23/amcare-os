@@ -1,6 +1,6 @@
 # SiyaOS Staff Portal — Design Token Consolidation (Phase 2)
 
-**Status:** In progress · My Day + Ask **done** · other sections pending  
+**Status:** In progress · My Day + Ask + **Learn** done · other sections pending  
 **Phase 1:** Complete — see `CONSOLIDATION-AUDIT-PHASE0-AUG2026.md`
 
 ---
@@ -50,11 +50,27 @@ Use these instead of one-off Tailwind for layout, cards, buttons, tabs, and stat
 | `SiyaChat.tsx` | Task-approve info box, knowledge-gap warn box, input/send use portal classes |
 | `AssistantBrandPanel.tsx` | Link label → "Practice" |
 
-### ⏳ Pending (not started)
+### ✅ Learn (complete)
 
-- **Learn** — `LearnHub`, `LevelUpHub`, LMS shell (partial overlap with `training-ui.tsx`)
-- **Memory** — `MemoryHub`, knowledge panels
-- **Team** — pulse, handoffs, presence bar (violet focus pill)
+| Component | Changes |
+|-----------|---------|
+| `LearnHub.tsx` | `portalPage` / `portalSection` / `portalCard` / heading helpers |
+| `LevelUpHub.tsx` | Portal layout + success status tokens on “done” buttons |
+| `GrowthPillars.tsx` | `portalCard` / `portalH3` |
+| `McqCard.tsx` | Success/error status tokens (no emerald/red hardcodes) |
+| `ChatTypingDrill.tsx` | Typing ok/bad use status tokens |
+| `UsMapInteractive.tsx` | Slate → subtle surface / muted text |
+| `QuizFeedbackPanel.tsx` | Warn status tokens for incorrect feedback |
+| `results/page.tsx` | Full migration off zinc/teal/`dark:` |
+| `certificate/page.tsx` | Warn status for missing-name notice |
+| `final/page.tsx` | Weak areas use warn text token |
+
+LMS shell (`training-ui.tsx`) already on radius tokens from earlier work.
+
+### ⏳ Pending
+
+- **Memory** — `MemoryHub`, knowledge panels, SOP workspace/builder
+- **Team** — pulse, handoffs
 - **Admin** — task board, templates, SOP review
 - **Shift** — `ShiftPresenceBar`, `MorningBrief` gradient
 - **Chat review / ops** — mixed form inputs
@@ -70,4 +86,4 @@ Use these instead of one-off Tailwind for layout, cards, buttons, tabs, and stat
 
 ---
 
-**Next:** Founder review of My Day + Ask in prod/staging, then continue with **Learn** section.
+**Next:** Founder review of **Learn**, then continue with **Memory**.

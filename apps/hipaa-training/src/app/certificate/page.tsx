@@ -28,7 +28,7 @@ export default function CertificatePage() {
         </button>
         <p className="text-xs text-[var(--siya-text-muted)]">Use your browser print dialog to save as PDF.</p>
         {!displayName ? (
-          <p className="rounded-xl border border-amber-200 bg-amber-50/70 px-3 py-2 text-sm text-amber-950">
+          <p className="rounded-[var(--siya-radius-md)] border border-[var(--siya-status-warn-border)] bg-[var(--siya-status-warn-bg)]/70 px-3 py-2 text-sm text-[var(--siya-status-warn-text)]">
             Add your name on the{" "}
             <Link href="/training" className="font-medium underline">
               certification dashboard

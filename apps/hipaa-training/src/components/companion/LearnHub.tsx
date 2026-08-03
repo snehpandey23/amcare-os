@@ -8,6 +8,14 @@ import { loadLocalProgress } from "@/lib/progressStorage";
 import { GrowthPillars } from "@/components/companion/GrowthPillars";
 import { MySopOwnershipNotice } from "@/components/sops/MySopOwnershipNotice";
 import { PortalNavLink } from "@/components/training/PortalNavLink";
+import {
+  portalCard,
+  portalH1,
+  portalH3,
+  portalPage,
+  portalSection,
+  portalSectionSubtle,
+} from "@/lib/portal-ui";
 
 const DRILL_LINKS = [
   { label: "Chat speed & accuracy", href: "/learn/practice#typing" },
@@ -37,15 +45,13 @@ export function LearnHub() {
   const xp = level?.totalXp ?? 0;
 
   return (
-    <div className="mx-auto max-w-3xl space-y-8 px-4 py-8 md:px-6">
+    <div className={portalPage}>
       <header>
-        <h1 className="font-[family-name:var(--font-poppins)] text-2xl font-semibold text-[var(--siya-primary)]">
-          Learn
-        </h1>
+        <h1 className={portalH1}>Learn</h1>
         <p className="mt-2 text-sm text-[var(--siya-text-secondary)]">
           HIPAA certification, daily practice drills, and your progress — one place for learning.
         </p>
-        <p className="mt-2 rounded-lg border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] px-3 py-2 text-sm text-[var(--siya-text-secondary)]">
+        <p className={`mt-2 ${portalSectionSubtle}`}>
           <strong className="text-[var(--siya-primary)]">Today&apos;s assigned tasks?</strong> Open{" "}
           <PortalNavLink href="/" className="font-semibold text-[var(--siya-accent)] hover:underline">
             My day
@@ -57,7 +63,7 @@ export function LearnHub() {
       <MySopOwnershipNotice />
 
       <div className="grid gap-3 sm:grid-cols-3">
-        <div className="rounded-xl border border-[var(--siya-border)] bg-white p-4">
+        <div className={portalCard}>
           <p className="text-xs font-medium uppercase text-[var(--siya-text-muted)]">HIPAA training</p>
           <p className="mt-1 text-2xl font-semibold text-[var(--siya-primary)]">
             {modulesDone}/{moduleTotal}
@@ -67,7 +73,7 @@ export function LearnHub() {
             Continue training →
           </Link>
         </div>
-        <div className="rounded-xl border border-[var(--siya-border)] bg-white p-4">
+        <div className={portalCard}>
           <p className="text-xs font-medium uppercase text-[var(--siya-text-muted)]">Daily practice</p>
           <p className="mt-1 text-2xl font-semibold text-[var(--siya-primary)]">{xp}</p>
           <p className="text-xs text-[var(--siya-text-muted)]">{streak > 0 ? `🔥 ${streak} day streak` : "Start a streak today"}</p>
@@ -75,7 +81,7 @@ export function LearnHub() {
             Today&apos;s drills →
           </Link>
         </div>
-        <div className="rounded-xl border border-[var(--siya-border)] bg-white p-4">
+        <div className={portalCard}>
           <p className="text-xs font-medium uppercase text-[var(--siya-text-muted)]">Certification</p>
           <p className="mt-1 text-2xl font-semibold text-[var(--siya-primary)]">{finalReady ? "Ready" : "In progress"}</p>
           <p className="text-xs text-[var(--siya-text-muted)]">Final exam & certificate</p>
@@ -87,8 +93,8 @@ export function LearnHub() {
 
       <GrowthPillars />
 
-      <section className="rounded-2xl border border-[var(--siya-border)] bg-white/90 p-5">
-        <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Department SOPs</h2>
+      <section className={portalSection}>
+        <h2 className={portalH3}>Department SOPs</h2>
         <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
           Draft and update team procedures in Memory → Knowledge. Submit for review when ready.
         </p>
@@ -100,15 +106,15 @@ export function LearnHub() {
         </PortalNavLink>
       </section>
 
-      <section className="rounded-2xl border border-[var(--siya-border)] bg-white/90 p-5">
-        <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Practice library</h2>
+      <section className={portalSection}>
+        <h2 className={portalH3}>Practice library</h2>
         <p className="mt-1 text-xs text-[var(--siya-text-muted)]">Short sessions — do one or two per day.</p>
         <ul className="mt-3 flex flex-wrap gap-2">
           {DRILL_LINKS.map((d) => (
             <li key={d.href}>
               <Link
                 href={d.href}
-                className="rounded-full border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-3 py-1.5 text-xs font-medium hover:border-[var(--siya-accent)]"
+                className="rounded-full border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-3 py-1.5 text-xs font-medium text-[var(--siya-text-secondary)] hover:border-[var(--siya-accent)]"
               >
                 {d.label}
               </Link>

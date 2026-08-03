@@ -36,9 +36,9 @@ function PassageView({ target, typed }: { target: string; typed: string }) {
           key={i}
           className={
             c.state === "ok"
-              ? "text-[var(--siya-primary)] bg-emerald-50"
+              ? "bg-[var(--siya-status-success-bg)] text-[var(--siya-status-success-text)]"
               : c.state === "bad"
-                ? "text-red-800 bg-red-50 underline decoration-red-400"
+                ? "bg-[var(--siya-status-error-bg)] text-[var(--siya-status-error-text)] underline decoration-[var(--siya-status-error-border)]"
                 : "text-[var(--siya-text-muted)]"
           }
         >

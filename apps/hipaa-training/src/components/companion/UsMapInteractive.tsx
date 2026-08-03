@@ -77,10 +77,10 @@ export function UsMapInteractive({ onComplete }: { onComplete?: () => void }) {
         </p>
       ) : null}
 
-      <div className="overflow-x-auto rounded-2xl border border-[var(--siya-border)] bg-slate-50 p-2">
+      <div className="overflow-x-auto rounded-[var(--siya-radius-lg)] border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] p-2">
         <svg viewBox={`0 0 ${w} ${h}`} className="mx-auto h-auto w-full max-w-2xl" role="img" aria-label="US states map">
           <rect x={0} y={0} width={w} height={h} fill="#e8eef4" rx={8} />
-          <text x={w / 2} y={28} textAnchor="middle" className="fill-slate-500 text-[14px] font-medium">
+          <text x={w / 2} y={28} textAnchor="middle" className="fill-[var(--siya-text-muted)] text-[14px] font-medium">
             Tap a state — Siya service states highlighted in teal
           </text>
           {US_MAP.states.map((s) => {

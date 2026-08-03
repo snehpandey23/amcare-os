@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { isPortalAdmin } from "@/lib/portal-role";
+import { portalCard, portalH3 } from "@/lib/portal-ui";
 
 const PILLARS = [
   {
@@ -40,12 +41,12 @@ export function GrowthPillars() {
         <Link
           key={p.id}
           href={p.href}
-          className="group rounded-2xl border border-[var(--siya-border)] bg-white/90 p-4 shadow-[var(--siya-shadow)] transition hover:border-[var(--siya-accent)] hover:shadow-md"
+          className={`group ${portalCard} transition hover:border-[var(--siya-accent)] hover:shadow-md`}
         >
           <span className="text-2xl" aria-hidden>
             {p.emoji}
           </span>
-          <h3 className="mt-2 font-[family-name:var(--font-poppins)] text-base font-semibold text-[var(--siya-primary)]">
+          <h3 className={`mt-2 ${portalH3}`}>
             {p.title}
           </h3>
           <p className="mt-1 text-xs leading-relaxed text-[var(--siya-text-muted)]">{p.blurb}</p>
@@ -57,7 +58,7 @@ export function GrowthPillars() {
       {user && isPortalAdmin(user.role) ? (
         <Link
           href="/admin/team"
-          className="group rounded-2xl border border-dashed border-[var(--siya-primary)]/40 bg-[var(--siya-bg-subtle)] p-4 sm:col-span-3"
+          className="group rounded-[var(--siya-radius-md)] border border-dashed border-[var(--siya-primary)]/40 bg-[var(--siya-bg-subtle)] p-4 sm:col-span-3"
         >
           <span className="text-2xl" aria-hidden>
             👥

@@ -101,7 +101,7 @@ export default function FinalExamPage() {
               </ul>
             </TrainingCard>
             <TrainingCard className="p-4">
-              <h2 className="font-semibold text-amber-800">Weak areas</h2>
+              <h2 className="font-semibold text-[var(--siya-status-warn-text)]">Weak areas</h2>
               <ul className="mt-2 list-inside list-disc text-sm text-[var(--siya-text-secondary)]">
                 {summary.weaknesses.length ? summary.weaknesses.map((s) => <li key={s.tag}>{topicLabel(s.tag)}</li>) : <li>—</li>}
               </ul>
