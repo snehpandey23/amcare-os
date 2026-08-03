@@ -27,6 +27,44 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
     ]
   },
   {
+    "id": "klarity-billing-cancellation",
+    "category": "operations",
+    "title": "Klarity billing, cancellation, no-show, and chargebacks",
+    "keywords": [
+      "Klarity",
+      "Hello Klarity",
+      "refund",
+      "cancellation",
+      "late cancel",
+      "no-show",
+      "chargeback",
+      "deposit",
+      "self-pay",
+      "billing"
+    ],
+    "body": "Staff-facing summary of **Klarity Health** published billing / cancel / no-show / chargeback rules for patients booked on Klarity. **Do not invent Siya-only exceptions** in chat. Klarity Billing Policy last revised on Klarity site: **Jul 30, 2025** (verified 2026-08-03). Refund and cancel language is a liability magnet. Klarity already publishes rules; MAs need one place to retrieve them and escalate correctly. **Can MA approve a refund?** No. Billing lead / provider / Klarity support only. **Is the $10 deposit ever refundable?** Klarity publishes it as **non-refundable** for initial visits. **Klarity vs Siya.health cancel rules?** Different channels. Use this topic for Klarity bookings; use Siya finance/clinical policies for direct Siya.health bookings. | Symptom | Action | |---------|--------| | Patient demands same-day refund | Empathy + Klarity 24h rule; escalate Billing; no promise | | Chargeback threat | Direct to Klarity support first; Billing lead | | “Klarity charged me after insurance denial” | Expected per Payment Agreement; escalate Billing / provider | Klarity self-pay: $10 non-refundable initial deposit; remainder and many follow-ups charge ~24h prior. Refunds only if cancel ≥24h (deposit kept). No refunds for late cancel, no-show, completed care, Rx issues, or dissatisfaction. Chargebacks discouraged — contact Klarity support. MAs and Assist never authorize refunds. Escalate Billing lead.",
+    "escalate": "Billing lead"
+  },
+  {
+    "id": "klarity-previsit-checklist",
+    "category": "operations",
+    "title": "Klarity pre-visit checklist — payment and intake",
+    "keywords": [
+      "Klarity",
+      "Hello Klarity",
+      "intake",
+      "forms",
+      "invoice",
+      "payment",
+      "deposit",
+      "ID upload",
+      "pre-visit",
+      "MA checklist"
+    ],
+    "body": "Before a Klarity-booked visit goes live, MAs confirm: **(1) invoices / balances are cleared or ready**, and **(2) intake + consent forms are complete**. Incomplete forms can delay the visit and may trigger **extra fees** for extended time. Klarity policy puts documentation and payment readiness on the patient — but ops quality depends on MAs catching gaps early so providers are not surprised and patients are not charged unexpectedly for admin delay. **Must intake be done before the patient can see the schedule?** Klarity states incomplete intake prompts on login and that forms should be done before accessing the appointment schedule — but bypass paths exist for joining video. Treat incomplete forms as a **pre-visit defect**, not “optional.” **Who completes forms?** Patient in Klarity (or IntakeQ) client portal. MA coaches steps; does not fill clinical history for the patient. **Payment not cleared 24h before?** Escalate Billing; follow release/hold practice set by Clinical Program — do not promise the visit will proceed unpaid. | Symptom | Action | |---------|--------| | Forms incomplete night before | Message patient via portal; escalate if no response | | Deposit paid, remainder failed | Billing lead + Klarity support if platform error | | Patient joined without forms | Notify provider; document; complete forms ASAP | | Patient asks “will I be charged extra?” | Quote Klarity incomplete-intake fee language; no custom promises | For Klarity visits, MAs verify payment timing ($10 initial deposit; remainder / follow-ups ~24h prior) and completed intake + ID. Incomplete forms can cause extra fees. Patients may still join video without finishing forms — still chase forms. No refund or fee waivers in Assist. Escalate payment blocks to Billing lead.",
+    "escalate": "Billing lead"
+  },
+  {
     "id": "patient-pricing-public-canonical",
     "category": "finance",
     "title": "Patient pricing — public website (canonical for staff chat)",
@@ -119,6 +157,24 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
     "body": "How **Siya Assistant** answers staff questions using **company memory**, not the open internet. General-purpose ChatGPT does not know our escalation paths, entity structure, or compliance boundaries. 1. Answers come from **SiyaOS Knowledge Base** topics with `status: live`. 2. **No PHI** in chat (names, DOB, MRN, etc.) — refused automatically. 3. **No clinical advice** — route to provider/clinical lead. 4. **No refund promises** — billing lead. 5. Optional **HIPAA certification** at `/training` for structured learning. 6. Public **Siya Guide** (`apps/siya-assistant`) is separate — patient/public KB only; **retrieval-only by default** (no LLM unless `SIYA_GUIDE_DETERMINISTIC=0`). 7. Persona + guardrails: [siya-helpdesk-assistant-persona.md](./siya-helpdesk-assistant-persona.md); LLM system prompt: `apps/hipaa-training/src/lib/siya-os/system-prompt.ts` when `SIYA_WORKFORCE_USE_LLM=1`. **How do we add what the bot knows?** Add a topic under `docs/siyaos-knowledge-base/**/topics/*.md`, set `status: live`, run `npm run kb:build -w @amcare/hipaa-training`. | Symptom | Action | |---------|--------| | Bot has no match | Add keywords + AI Context section; rebuild KB | | Wrong answer | Fix topic; revision history; never tune by hidden prompt alone | You are a workforce helper for all functions (ops, marketing, HR, eng, clinical coordination) — not a clinician. Prefer SOP and AI Context sections. Always show escalation contacts when relevant."
   },
   {
+    "id": "klarity-channel-overview",
+    "category": "operations",
+    "title": "Klarity (Hello Klarity) — channel overview for MAs",
+    "keywords": [
+      "Klarity",
+      "Hello Klarity",
+      "helloklarity",
+      "marketplace",
+      "EHR",
+      "patient portal",
+      "new appointment",
+      "MA",
+      "medical assistant"
+    ],
+    "body": "**Klarity** (public site: [helloklarity.com](https://www.helloklarity.com), also branded Hello Klarity) is a telehealth **marketplace + EHR** used by Siya providers. Klarity Health, Inc. does **not** provide medical services; care is delivered by **independent practices** on the platform. Siya gets patients via Klarity acquisition (ads → site → condition → provider list → book). MAs then manage those visits inside the **Klarity EHR / portal**. MAs must know the patient path and platform boundaries so they do not invent Siya-only policies for Klarity bookings, or confuse Klarity with the public Siya.health cash-pay funnel. **Is Klarity the same as Siya.health booking?** No. Klarity is a separate marketplace/EHR channel. Siya public site pricing and Meet & Greet rules live in Finance / Clinical KB — do not mix. **Who answers patient billing emails?** Klarity patient support: **patientsupport@helloklarity.com**. Medical questions → provider via portal messaging (Klarity guidance). **Hours for Klarity phone support?** (866) 391-3314 · Monday–Friday · 7:00 AM–4:00 PM PST (published on Klarity site). | Symptom | Action | |---------|--------| | New booking but MA not notified | Check Klarity EHR alerts / filters; escalate Technology if persistent | | Patient confused Siya.health vs Klarity | Explain channel; use the booking source of truth in EHR | | Provider mismatch / wrong specialty | Do not diagnose; Klarity support or clinical lead | Klarity = Hello Klarity marketplace/EHR. Siya MAs prepare Klarity-booked visits (payment + intake). Platform is not Siya’s clinic entity. No refund promises. Point staff to klarity-previsit-checklist and klarity-billing-cancellation. Escalate clinical to Clinical lead; billing disputes to Billing lead / Klarity patient support.",
+    "escalate": "Clinical lead"
+  },
+  {
     "id": "medical-compliance-marketing",
     "category": "marketing_os",
     "title": "Medical compliance in marketing (SOP)",
@@ -162,7 +218,7 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "same day",
       "billing"
     ],
-    "body": "How staff talk about cancellations without promising refunds. Refund authority sits with billing; inconsistent promises create liability and patient conflict. 1. Follow **written billing policy** for the cancellation window. 2. Document cancel date/time in the record. 3. Do **not** promise refunds in chat or phone — use approved language. 4. Escalate exceptions to **billing lead**. **Patient cancels same-day / inside late-cancel window?** Use approved late-cancel language; do **not** promise refund in chat. Route to **billing lead** or Clarity support per policy. **Provider no-show / emergency?** Offer **reschedule** first. Refund only when billing policy and billing lead (or documented provider direction) support it. **Patient no-show?** Explain no-show policy; do **not** proactively offer refund. Disputes → billing / Clarity. **Payment not captured before visit (card failed)?** Follow ops workflow to **release slot** after the defined window so others can book — document in chart/billing tools. **FSA / HSA cards?** May work in Clarity/Carepatron when plan allows; declines often mean visit type not covered. Never collect card data in Siya Assistant. Escalate **billing**. **Duplicate charge already refunded in portal?** Confirm ledger, explain refund timeline; do not double-refund without billing review. | Symptom | Action | |---------|--------| | Patient demands refund in portal chat | Empathy + billing follow-up; no commitment | Never authorize refunds. Point to written policy and billing lead. Suggest documenting cancel time.",
+    "body": "How staff talk about cancellations without promising refunds. Refund authority sits with billing; inconsistent promises create liability and patient conflict. 1. Follow **written billing policy** for the cancellation window. 2. Document cancel date/time in the record. 3. Do **not** promise refunds in chat or phone — use approved language. 4. Escalate exceptions to **billing lead**. **Patient cancels same-day / inside late-cancel window?** Use approved late-cancel language; do **not** promise refund in chat. Route to **billing lead** or Klarity support per policy. For **Klarity-booked** visits, use `klarity-billing-cancellation` (24h rule; $10 initial deposit non-refundable). **Provider no-show / emergency?** Offer **reschedule** first. Refund only when billing policy and billing lead (or documented provider direction) support it. **Patient no-show?** Explain no-show policy; do **not** proactively offer refund. Disputes → billing / Klarity. Klarity channel details: `klarity-billing-cancellation`. **Payment not captured before visit (card failed)?** Follow ops workflow to **release slot** after the defined window so others can book — document in chart/billing tools. Klarity timing: `klarity-previsit-checklist`. **FSA / HSA cards?** May work in Klarity/Carepatron when plan allows; declines often mean visit type not covered. Never collect card data in Siya Assistant. Escalate **billing**. **Duplicate charge already refunded in portal?** Confirm ledger, explain refund timeline; do not double-refund without billing review. | Symptom | Action | |---------|--------| | Patient demands refund in portal chat | Empathy + billing follow-up; no commitment | Never authorize refunds. Point to written policy and billing lead. For Klarity bookings prefer `klarity-billing-cancellation`. Suggest documenting cancel time.",
     "escalate": "Billing lead"
   },
   {
@@ -179,6 +235,24 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "daily task"
     ],
     "body": "Verify payment and pre-auth status before scheduled visits. Unpaid or unverified visits create front-desk conflict and compliance risk. 1. Review daily payment reports from Zoho Books. 2. Match payments to scheduled appointments. 3. Verify insurance pre-authorizations where required. 4. Flag issues for billing follow-up. 5. Update billing status in EHR before the visit. Deliverable: payments verified before patient visits. **Where do reports live?** Zoho Books sync — see Operations hub / integration runbooks in Technology module. | Symptom | Action | |---------|--------| | Payment shows paid but EHR not updated | Sync + document; billing if stuck | | Pre-auth missing | Hold scheduling per policy; billing lead | Describe the Zoho → appointment → EHR verification loop. Do not access live patient accounts in chat. Escalate payment disputes to billing lead."
+  },
+  {
+    "id": "klarity-patient-consents",
+    "category": "operations",
+    "title": "Klarity patient consents and agreements (MA brief)",
+    "keywords": [
+      "Klarity",
+      "Hello Klarity",
+      "telehealth consent",
+      "self-pay agreement",
+      "HIPAA authorization",
+      "terms",
+      "privacy",
+      "intake forms",
+      "consent"
+    ],
+    "body": "Patients booking on Klarity acknowledge multiple **platform agreements**. MAs need to know **what exists** and **where to send patients**, not to reinterpret legal text. This topic is **training / retrieval aid**. For disputes, use Klarity published pages + Privacy Officer / Compliance. Incomplete or misunderstood consents delay visits and create PHI / billing risk. MAs should verify forms are **signed in portal**, not paraphrase law. **Can MA explain every legal clause?** No. Point to the portal form + Klarity URL. Escalate Privacy Officer / Compliance for disputes. **Patient refuses telehealth consent?** Cannot proceed with telehealth under Klarity rules; escalate Clinical / Klarity support for alternatives. **Siya Assist legal advice?** Never. Retrieve this brief + escalate. | Symptom | Action | |---------|--------| | Consent unsigned in EHR | Coach portal Forms path (`klarity-previsit-checklist`) | | Third-party caller wants info | Follow `third-party-caller` + check Klarity auth | | Privacy complaint | Privacy Officer; Klarity compliance@helloklarity.com if platform-side | Klarity patients sign telehealth consent, payment agreement, HIPAA transfer authorization, and terms. Klarity does not record visits and does not submit insurance claims. MAs verify forms are complete; they do not give legal advice. PHI third-party disclosure needs authorization on file. Escalate Privacy Officer for privacy issues; Billing lead for payment disputes.",
+    "escalate": "Privacy Officer"
   },
   {
     "id": "legacy-pricing-funnel-unresolved",

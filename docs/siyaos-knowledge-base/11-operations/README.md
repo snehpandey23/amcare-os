@@ -11,6 +11,14 @@ Daily workflows, escalations, billing coordination, and cross-department handoff
 | Escalation pathways | `escalation-pathways` |
 | Daily payment check | `daily-payment-check` |
 | Late cancel / refunds | `billing-late-cancel` |
+| Klarity channel overview | `klarity-channel-overview` |
+| Klarity pre-visit (payment + intake) | `klarity-previsit-checklist` |
+| Klarity billing / cancel / chargebacks | `klarity-billing-cancellation` |
+| Klarity patient consents | `klarity-patient-consents` |
+
+## Klarity (Hello Klarity) pack
+
+Index + source map: [`klarity/README.md`](./klarity/README.md)
 
 ## Source docs in repo
 
