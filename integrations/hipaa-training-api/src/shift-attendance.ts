@@ -29,11 +29,13 @@ export async function logShiftAttendance(
   eventType: ShiftAttendanceEventType,
   source: ShiftAttendanceSource,
   metadata: Record<string, unknown> = {},
-): Promise<void> {
+): Promise<string> {
+  const id = `att-${randomUUID()}`;
   await pool.query(
     `INSERT INTO siya_shift_attendance_events (id, user_id, event_type, source, metadata) VALUES ($1, $2, $3, $4, $5)`,
-    [`att-${randomUUID()}`, userId, eventType, source, JSON.stringify(metadata)],
+    [id, userId, eventType, source, JSON.stringify(metadata)],
   );
+  return id;
 }
 
 export function presenceTransitionEvents(

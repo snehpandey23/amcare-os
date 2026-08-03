@@ -4,6 +4,11 @@ import Link from "next/link";
 import useSWR from "swr";
 import { helpHref } from "@/lib/companion/quick-actions";
 import {
+  portalCapsLabel,
+  portalH2,
+  portalSection,
+} from "@/lib/portal-ui";
+import {
   executiveBriefingKey,
   fetchExecutiveBriefing,
   type ExecutiveCardMeta,
@@ -60,7 +65,7 @@ function BriefingCard({
   askQuery?: string;
 }) {
   return (
-    <article className="rounded-2xl border border-[var(--siya-border)] bg-white/90 p-4 shadow-sm">
+    <article className={`${portalSection} !p-4 shadow-sm`}>
       <h3 className="font-[family-name:var(--font-poppins)] text-sm font-semibold text-[var(--siya-primary)]">
         {emoji} {title}
       </h3>
@@ -87,7 +92,7 @@ export function ExecutiveBriefingPanel({ greetingPrefix }: { greetingPrefix: str
 
   if (isLoading) {
     return (
-      <section className="rounded-2xl border border-violet-200/80 bg-violet-50/40 p-6">
+      <section className={portalSection}>
         <p className="text-sm text-[var(--siya-text-muted)]">Loading your briefing…</p>
       </section>
     );
@@ -101,10 +106,10 @@ export function ExecutiveBriefingPanel({ greetingPrefix }: { greetingPrefix: str
   const c = data.cards;
 
   return (
-    <section className="space-y-4 rounded-2xl border border-violet-200/80 bg-gradient-to-b from-violet-50/50 to-white p-5">
+    <section className={`space-y-4 ${portalSection}`}>
       <header>
-        <p className="text-xs font-medium uppercase tracking-wide text-violet-800/80">Executive Workspace</p>
-        <h2 className="mt-1 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
+        <p className={portalCapsLabel}>Executive Workspace</p>
+        <h2 className={`mt-1 ${portalH2}`}>
           {greetingPrefix}
           {name ? `, ${name}` : ""}.
         </h2>

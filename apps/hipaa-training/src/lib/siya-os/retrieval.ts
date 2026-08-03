@@ -306,7 +306,7 @@ export function retrieveDynamicSops(query: string, entries: DynamicSopEntry[], l
             title: e.title,
             snippet: e.body.slice(0, 2400),
             score: s,
-            links: [{ label: `SOP · ${e.department}`, href: "/grow/sops" }],
+            links: [{ label: `SOP · ${e.department}`, href: "/memory/knowledge/sops" }],
           },
           2,
         ),

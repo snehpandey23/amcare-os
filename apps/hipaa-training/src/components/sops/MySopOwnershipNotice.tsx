@@ -5,6 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import { isPortalAuthEnabled } from "@/lib/trainingConfig";
 import { fetchMySopOwnership } from "@/lib/sop-api";
 import { PortalNavLink } from "@/components/training/PortalNavLink";
+import { portalBtnAccentSm, portalBtnGhostSm, portalNoticeLead } from "@/lib/portal-ui";
 
 /** Shown only to the signed-in user when admin assigned them as a department SOP lead. */
 export function MySopOwnershipNotice({ className = "" }: { className?: string }) {
@@ -34,22 +35,23 @@ export function MySopOwnershipNotice({ className = "" }: { className?: string })
       : `You're currently responsible for: ${departments.join(", ")} SOPs`;
 
   return (
-    <div
-      className={`rounded-lg border border-violet-200/80 bg-violet-50/90 px-3 py-2.5 text-xs text-violet-950 ${className}`}
-    >
-      <p className="font-semibold">{label}</p>
-      <p className="mt-1 text-[11px] text-violet-900/90">
+    <div className={`${portalNoticeLead} ${className}`}>
+      <p className="font-semibold text-[var(--siya-primary)]">{label}</p>
+      <p className="mt-1 text-[11px] text-[var(--siya-text-secondary)]">
         Draft and update procedures in the SOP workspace. Today&apos;s assigned checklists are on{" "}
         <PortalNavLink href="/" className="font-semibold underline">
           My day
         </PortalNavLink>
         .
       </p>
-      <PortalNavLink
-        href="/grow/sops"
-        className="mt-2 inline-block rounded-lg bg-violet-900 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-violet-800"
-      >
+      <PortalNavLink href="/memory/knowledge/sops" className={`mt-2 inline-block ${portalBtnAccentSm}`}>
         Open SOP workspace
+      </PortalNavLink>
+      <PortalNavLink
+        href="/memory/knowledge/sop-builder"
+        className={`mt-2 ml-2 inline-block ${portalBtnGhostSm}`}
+      >
+        Build daily checklist (AI)
       </PortalNavLink>
     </div>
   );

@@ -35,10 +35,10 @@ export function AssistantBrandPanel() {
 
         <div className="mt-auto pt-6">
           <Link
-            href="/level-up"
+            href="/learn/practice"
             className="text-xs font-medium text-[var(--siya-accent)] hover:underline"
           >
-            Daily learning → Level Up
+            Daily learning → Practice
           </Link>
           <p className="mt-3 text-[11px] leading-relaxed text-[var(--siya-text-muted)]">{BRAND.chatSafetyLine}</p>
         </div>

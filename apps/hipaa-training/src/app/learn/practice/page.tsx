@@ -2,7 +2,7 @@
 
 import { LevelUpHub } from "@/components/companion/LevelUpHub";
 
-export default function LevelUpPage() {
+export default function LearnPracticePage() {
   return (
     <div className="h-full overflow-y-auto">
       <LevelUpHub />

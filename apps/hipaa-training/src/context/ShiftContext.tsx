@@ -40,7 +40,7 @@ type ShiftContextValue = {
     todayLearned?: string;
     accomplishments?: string;
     memoryImportance?: import("@/lib/memory-api").MemoryImportance;
-  }) => Promise<void>;
+  }) => Promise<{ shiftEndEventId?: string }>;
   setPresence: (status: PresenceStatus) => Promise<void>;
   ritual: ShiftRitualKind;
   clearRitual: () => void;
@@ -106,6 +106,7 @@ export function ShiftProvider({ children }: { children: ReactNode }) {
       const next = await apiEnd(payload);
       setState(next);
       setRitual(null);
+      return { shiftEndEventId: next.shiftEndEventId };
     },
     [],
   );

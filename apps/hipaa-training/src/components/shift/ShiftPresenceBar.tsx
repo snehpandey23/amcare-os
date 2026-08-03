@@ -7,14 +7,17 @@ import type { PresenceStatus } from "@/lib/shift-api";
 import { PRESENCE_EMOJI, PRESENCE_LABEL } from "@/lib/shift-presence";
 import { buildShiftDaySummary } from "@/lib/shift-day-summary";
 import { EndShiftModal } from "@/components/shift/EndShiftModal";
+import { ShiftHandoffModal } from "@/components/ops/ShiftHandoffModal";
 
 function btnClass(extra?: string) {
-  return `rounded-lg border border-[var(--siya-border)] px-2.5 py-1 text-[11px] font-medium text-[var(--siya-text-secondary)] hover:bg-[var(--siya-bg-subtle)] ${extra ?? ""}`;
+  return `shrink-0 rounded-lg border border-[var(--siya-border)] px-2.5 py-1.5 text-[11px] font-medium text-[var(--siya-text-secondary)] hover:bg-[var(--siya-bg-subtle)] ${extra ?? ""}`;
 }
 
 export function ShiftPresenceBar({ onEndShift }: { onEndShift?: () => void }) {
   const shift = useShiftOptional();
   const [endOpen, setEndOpen] = useState(false);
+  const [handoffOpen, setHandoffOpen] = useState(false);
+  const [shiftEndEventId, setShiftEndEventId] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
   const summary = useMemo(() => {
@@ -33,7 +36,7 @@ export function ShiftPresenceBar({ onEndShift }: { onEndShift?: () => void }) {
     return (
       <button
         type="button"
-        className="rounded-lg bg-[var(--siya-primary)] px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-[var(--siya-primary-hover)]"
+        className="shrink-0 rounded-lg bg-[var(--siya-primary)] px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-[var(--siya-primary-hover)]"
         onClick={() => void startShift("morning")}
       >
         Start shift
@@ -56,13 +59,13 @@ export function ShiftPresenceBar({ onEndShift }: { onEndShift?: () => void }) {
       ? "bg-emerald-50 text-emerald-800 ring-emerald-200"
       : presence === "break"
         ? "bg-amber-50 text-amber-900 ring-amber-200"
-        : "bg-violet-50 text-violet-900 ring-violet-200";
+        : "bg-[var(--siya-status-info-bg)] text-[var(--siya-status-info-text)] ring-[var(--siya-status-info-border)]";
 
   return (
     <>
-      <div className="flex max-w-[16rem] flex-wrap items-center justify-end gap-1.5">
+      <div className="flex max-w-none flex-nowrap items-center justify-end gap-1.5">
         <span
-          className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ring-1 ring-inset ${pill}`}
+          className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ring-1 ring-inset ${pill}`}
           title="Self-declared — not detected from keyboard or mouse"
         >
           {PRESENCE_EMOJI[presence]} {PRESENCE_LABEL[presence]}
@@ -81,11 +84,7 @@ export function ShiftPresenceBar({ onEndShift }: { onEndShift?: () => void }) {
             Back to working
           </button>
         )}
-        <button
-          type="button"
-          className="rounded-lg border border-[var(--siya-border)] px-2.5 py-1 text-[11px] font-medium text-[var(--siya-accent)] hover:bg-[var(--siya-bg-subtle)]"
-          onClick={() => setEndOpen(true)}
-        >
+        <button type="button" className={btnClass("text-[var(--siya-accent)]")} onClick={() => setEndOpen(true)}>
           End shift
         </button>
       </div>
@@ -94,8 +93,19 @@ export function ShiftPresenceBar({ onEndShift }: { onEndShift?: () => void }) {
         summary={summary}
         onClose={() => setEndOpen(false)}
         onConfirm={async (payload) => {
-          await endShift(payload);
+          const result = await endShift(payload);
+          setEndOpen(false);
+          setShiftEndEventId(result.shiftEndEventId ?? null);
+          setHandoffOpen(true);
           onEndShift?.();
+        }}
+      />
+      <ShiftHandoffModal
+        open={handoffOpen}
+        shiftEndEventId={shiftEndEventId}
+        onClose={() => {
+          setHandoffOpen(false);
+          setShiftEndEventId(null);
         }}
       />
     </>

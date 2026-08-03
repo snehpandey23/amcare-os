@@ -57,6 +57,7 @@ export function SopWorkspace() {
   const [pending, setPending] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
   const [guideDept, setGuideDept] = useState("");
+  const [guideInitialPurpose, setGuideInitialPurpose] = useState("");
   const [guideError, setGuideError] = useState<string | null>(null);
   const [guidePending, setGuidePending] = useState(false);
   const [pendingAiDrafted, setPendingAiDrafted] = useState(false);
@@ -103,17 +104,14 @@ export function SopWorkspace() {
   function openCreate(dept: string, title?: string) {
     setEditing(null);
     setGuideDept(dept);
+    setGuideInitialPurpose(title ? title.replace(/ — unassigned$/, "") : "");
     setGuideError(null);
     setPendingAiDrafted(false);
-    if (title) {
-      setFormDept(dept);
-      setFormTitle(title.replace(/ — unassigned$/, ""));
-      setFormBody("");
-      setFormReviewDate("");
-      setEditorOpen(true);
-      return;
-    }
     setGuideOpen(true);
+  }
+
+  function taskTitleClean(title: string) {
+    return title.replace(/ — unassigned$/, "");
   }
 
   function openBlankEditor(dept: string, title = "") {
@@ -214,8 +212,12 @@ export function SopWorkspace() {
           Department SOPs
         </h1>
         <p className="mt-2 text-sm text-[var(--siya-text-secondary)]">
-          Leads draft and submit SOPs for their department. Submitted SOPs appear in Ask as{" "}
-          <strong>Pending review</strong> until an admin approves them to Live.
+          Leads draft and submit <strong>department policy SOPs</strong> (prose docs for Ask). Daily operational checklists
+          for My day live in the{" "}
+          <Link href="/memory/knowledge/sop-builder" className="font-semibold text-[var(--siya-accent)] hover:underline">
+            AI checklist builder
+          </Link>
+          .
         </p>
         {ctx?.isAdmin ? (
           <Link href="/admin/sop-review" className="mt-2 inline-block text-sm font-semibold text-[var(--siya-accent)] hover:underline">
@@ -296,13 +298,23 @@ export function SopWorkspace() {
                     <span>Assignee: {t.assigneeName ?? "Unassigned"}</span>
                   )}
                   {canEditDept(t.department) ? (
-                    <button
-                      type="button"
-                      className="font-semibold text-[var(--siya-accent)] underline"
-                      onClick={() => openCreate(t.department, t.title.replace(/ — unassigned$/, ""))}
-                    >
-                      Start draft
-                    </button>
+                    <span className="inline-flex flex-wrap items-center gap-2">
+                      <button
+                        type="button"
+                        className="font-semibold text-[var(--siya-accent)] underline"
+                        onClick={() => openCreate(t.department, t.title)}
+                      >
+                        Write department SOP
+                      </button>
+                      {t.taskType === "create_sop" ? (
+                        <Link
+                          href={`/memory/knowledge/sop-builder?topic=${encodeURIComponent(taskTitleClean(t.title))}`}
+                          className="font-semibold text-[var(--siya-accent)] underline"
+                        >
+                          Build My day checklist (AI)
+                        </Link>
+                      ) : null}
+                    </span>
                   ) : null}
                 </div>
               </li>
@@ -360,6 +372,7 @@ export function SopWorkspace() {
         <SopDraftGuide
           department={guideDept}
           departments={leadDepartments}
+          initialPurpose={guideInitialPurpose}
           onDepartmentChange={setGuideDept}
           onCancel={() => setGuideOpen(false)}
           onGenerate={(a) => void onGenerateDraft(a)}

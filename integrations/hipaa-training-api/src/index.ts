@@ -12,7 +12,7 @@ import express from "express";
 import type pg from "pg";
 import { getPool, initDb } from "./db.js";
 import { hashPassword, comparePassword, signToken } from "./auth.js";
-import { requireAuth, requireAdmin, type AuthRequest } from "./middleware.js";
+import { requireAuth, requireAdmin, requireSopBuilderAccess, requireChatReviewAccess, type AuthRequest } from "./middleware.js";
 import { summarizeTrainingProgress, summarizeLevelUpProgress, drillCount } from "./summarize-progress.js";
 import {
   parseShiftStore,
@@ -380,7 +380,7 @@ app.post("/api/shift/end", requireAuth, async (req: AuthRequest, res: express.Re
   const recent = [ended, ...store.recent].slice(0, 60);
   store = { active: null, recent };
   await saveShiftStore(pool, userId, store);
-  await logShiftEnd(pool, userId, {
+  const shiftEndEventId = await logShiftEnd(pool, userId, {
     workShift: ended.workShift,
     breakCount,
     focusSessionCount,
@@ -389,7 +389,7 @@ app.post("/api/shift/end", requireAuth, async (req: AuthRequest, res: express.Re
     const { ingestShiftAccomplishment } = await import("./memory-service.js");
     await ingestShiftAccomplishment(pool, userId, accomplishments, memoryImportance);
   }
-  return res.json(store);
+  return res.json({ ...store, shiftEndEventId });
 });
 
 app.post("/api/shift/presence", requireAuth, async (req: AuthRequest, res: express.Response) => {
@@ -461,6 +461,128 @@ app.get("/api/executive/briefing", requireAuth, async (req: AuthRequest, res: ex
     console.error("[hipaa-training-api] executive briefing:", err);
     return res.status(500).json({ error: "Could not load executive briefing." });
   }
+});
+
+/** Founder Decision Coach Phase 1 — team-visible weekly brief + founder-only plan edit */
+app.get("/api/founder-coach/brief", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const userId = req.user!.userId;
+    const r = await pool.query(`SELECT email, role FROM hipaa_training_users WHERE id = $1`, [userId]);
+    if (!r.rows[0]) return res.status(401).json({ error: "User not found" });
+    const { buildFounderCoachBrief } = await import("./founder-coach-service.js");
+    const brief = await buildFounderCoachBrief(pool, {
+      email: r.rows[0].email as string,
+      role: r.rows[0].role as string,
+    });
+    return res.json(brief);
+  } catch (err) {
+    console.error("[founder-coach/brief]", err);
+    return res.status(500).json({ error: "Could not load founder coach brief." });
+  }
+});
+
+app.put("/api/founder-coach/monthly", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const userId = req.user!.userId;
+  const u = await pool.query(`SELECT email, role FROM hipaa_training_users WHERE id = $1`, [userId]);
+  if (!u.rows[0]) return res.status(401).json({ error: "User not found" });
+  const { isExecutiveUser } = await import("./executive-briefing.js");
+  if (!isExecutiveUser(u.rows[0].email as string, u.rows[0].role as string)) {
+    return res.status(403).json({ error: "Founder only" });
+  }
+  const { upsertMonthlyPlan, istDateLabel } = await import("./founder-coach-service.js");
+  try {
+    const monthKey = typeof req.body?.monthKey === "string" ? req.body.monthKey : istDateLabel(new Date()).slice(0, 7);
+    const plan = await upsertMonthlyPlan(pool, userId, {
+      monthKey,
+      northStar: typeof req.body?.northStar === "string" ? req.body.northStar : "",
+      timeBudget: req.body?.timeBudget ?? {},
+      outcomes: Array.isArray(req.body?.outcomes) ? req.body.outcomes : [],
+      notDoing: Array.isArray(req.body?.notDoing) ? req.body.notDoing : [],
+      reviewTriggers: Array.isArray(req.body?.reviewTriggers) ? req.body.reviewTriggers : [],
+    });
+    return res.json({ plan });
+  } catch (e) {
+    return res.status(400).json({ error: e instanceof Error ? e.message : "Save failed" });
+  }
+});
+
+app.put("/api/founder-coach/weekly", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const userId = req.user!.userId;
+  const u = await pool.query(`SELECT email, role FROM hipaa_training_users WHERE id = $1`, [userId]);
+  if (!u.rows[0]) return res.status(401).json({ error: "User not found" });
+  const { isExecutiveUser } = await import("./executive-briefing.js");
+  if (!isExecutiveUser(u.rows[0].email as string, u.rows[0].role as string)) {
+    return res.status(403).json({ error: "Founder only" });
+  }
+  const { upsertWeeklyPlan, istWeekStart } = await import("./founder-coach-service.js");
+  try {
+    const weekStart = typeof req.body?.weekStart === "string" ? req.body.weekStart : istWeekStart();
+    const plan = await upsertWeeklyPlan(pool, userId, {
+      weekStart,
+      monthKey: typeof req.body?.monthKey === "string" ? req.body.monthKey : undefined,
+      founderFocus: typeof req.body?.founderFocus === "string" ? req.body.founderFocus : "",
+      canWait: Array.isArray(req.body?.canWait) ? req.body.canWait : [],
+      delegate: Array.isArray(req.body?.delegate) ? req.body.delegate : [],
+      observeOnly: Array.isArray(req.body?.observeOnly) ? req.body.observeOnly : [],
+    });
+    return res.json({ plan });
+  } catch (e) {
+    return res.status(400).json({ error: e instanceof Error ? e.message : "Save failed" });
+  }
+});
+
+app.put("/api/founder-coach/actuals", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const userId = req.user!.userId;
+  const u = await pool.query(`SELECT email, role FROM hipaa_training_users WHERE id = $1`, [userId]);
+  if (!u.rows[0]) return res.status(401).json({ error: "User not found" });
+  const { isExecutiveUser } = await import("./executive-briefing.js");
+  if (!isExecutiveUser(u.rows[0].email as string, u.rows[0].role as string)) {
+    return res.status(403).json({ error: "Founder only" });
+  }
+  const { upsertWeeklyActuals, istWeekStart } = await import("./founder-coach-service.js");
+  const weekStart = typeof req.body?.weekStart === "string" ? req.body.weekStart : istWeekStart();
+  const num = (v: unknown) => (v === null || v === undefined || v === "" ? null : Number(v));
+  try {
+    const actuals = await upsertWeeklyActuals(pool, userId, weekStart, {
+      adsTxCpa: num(req.body?.adsTxCpa),
+      adsTxConversions: num(req.body?.adsTxConversions),
+      adsCampaignEdits: num(req.body?.adsCampaignEdits) ?? undefined,
+      indiaGrantsIdentified: num(req.body?.indiaGrantsIdentified),
+      indiaApplicationsSubmitted: num(req.body?.indiaApplicationsSubmitted),
+      usIntroContacted: num(req.body?.usIntroContacted),
+      usIntroReplied: num(req.body?.usIntroReplied),
+      usIntroMeetings: num(req.body?.usIntroMeetings),
+      notes: typeof req.body?.notes === "string" ? req.body.notes : undefined,
+    });
+    return res.json({ actuals });
+  } catch (e) {
+    return res.status(400).json({ error: e instanceof Error ? e.message : "Save failed" });
+  }
+});
+
+app.post("/api/founder-coach/observe-events", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const observeId = typeof req.body?.observeId === "string" ? req.body.observeId : "";
+  if (!observeId) return res.status(400).json({ error: "observeId required" });
+  const { logObserveEvent, istWeekStart } = await import("./founder-coach-service.js");
+  const weekStart = typeof req.body?.weekStart === "string" ? req.body.weekStart : istWeekStart();
+  await logObserveEvent(
+    pool,
+    req.user!.userId,
+    weekStart,
+    observeId,
+    typeof req.body?.note === "string" ? req.body.note : "",
+  );
+  return res.status(201).json({ ok: true });
 });
 
 app.post("/api/assist/gaps", requireAuth, async (req: AuthRequest, res: express.Response) => {
@@ -619,6 +741,109 @@ app.get("/api/shift/trends", requireAuth, async (req: AuthRequest, res: express.
   if (!pool) return res.status(503).json({ error: "Database not configured." });
   const store = await loadShiftStore(pool, req.user!.userId);
   return res.json(aggregateShiftTrends(store.recent, 30));
+});
+
+/** Chat review log — Clinical Operations lead + admin only */
+app.get("/api/chat-reviews/access", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { canUseChatReview } = await import("./ops-coordination-service.js");
+  const role = req.user!.role ?? "trainee";
+  const canReview = await canUseChatReview(pool, req.user!.userId, role);
+  return res.json({ canReview, isAdmin: role === "admin" });
+});
+
+app.get("/api/chat-reviews", requireAuth, requireChatReviewAccess, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { listChatReviewsForUser } = await import("./ops-coordination-service.js");
+  const date = typeof req.query.date === "string" ? req.query.date : "today";
+  const statusRaw = typeof req.query.status === "string" ? req.query.status : undefined;
+  const status = statusRaw === "open" || statusRaw === "closed" ? statusRaw : undefined;
+  const reviews = await listChatReviewsForUser(pool, req.user!.userId, date, status);
+  return res.json({ reviews, date: reviews[0]?.reviewDate ?? date });
+});
+
+app.post("/api/chat-reviews", requireAuth, requireChatReviewAccess, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const patientIdentifier =
+    typeof req.body?.patientIdentifier === "string" ? req.body.patientIdentifier.trim() : "";
+  if (!patientIdentifier) return res.status(400).json({ error: "patientIdentifier required" });
+  const { createChatReview, parseReviewDate } = await import("./ops-coordination-service.js");
+  const reviewDate =
+    typeof req.body?.reviewDate === "string" ? parseReviewDate(req.body.reviewDate) : undefined;
+  const status = req.body?.status === "closed" ? "closed" : "open";
+  const review = await createChatReview(pool, req.user!.userId, {
+    reviewDate,
+    patientIdentifier,
+    notes: typeof req.body?.notes === "string" ? req.body.notes : "",
+    errorNotes: typeof req.body?.errorNotes === "string" ? req.body.errorNotes : "",
+    status,
+  });
+  return res.status(201).json({ review });
+});
+
+app.patch("/api/chat-reviews/:id", requireAuth, requireChatReviewAccess, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { updateChatReview } = await import("./ops-coordination-service.js");
+  const status = req.body?.status === "closed" ? "closed" : req.body?.status === "open" ? "open" : undefined;
+  const review = await updateChatReview(pool, req.user!.userId, req.params.id, {
+    patientIdentifier: typeof req.body?.patientIdentifier === "string" ? req.body.patientIdentifier : undefined,
+    notes: typeof req.body?.notes === "string" ? req.body.notes : undefined,
+    errorNotes: typeof req.body?.errorNotes === "string" ? req.body.errorNotes : undefined,
+    status,
+  });
+  if (!review) return res.status(404).json({ error: "Review not found" });
+  return res.json({ review });
+});
+
+app.get("/api/admin/chat-reviews", requireAuth, requireChatReviewAccess, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { listChatReviewsAdmin } = await import("./ops-coordination-service.js");
+  const date = typeof req.query.date === "string" ? req.query.date : "today";
+  const statusRaw = typeof req.query.status === "string" ? req.query.status : undefined;
+  const status = statusRaw === "open" || statusRaw === "closed" ? statusRaw : undefined;
+  const reviews = await listChatReviewsAdmin(pool, {
+    dateParam: date,
+    status,
+    viewerUserId: req.user!.userId,
+    viewerRole: req.user!.role ?? "trainee",
+  });
+  return res.json({ reviews, date });
+});
+
+/** Shift handoff notes — team-visible coordination */
+app.get("/api/shift-handoffs", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { listShiftHandoffs } = await import("./ops-coordination-service.js");
+  const date = typeof req.query.date === "string" ? req.query.date : "today";
+  const handoffs = await listShiftHandoffs(pool, date);
+  return res.json({ handoffs, date });
+});
+
+app.post("/api/shift-handoffs", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { createShiftHandoff, parseReviewDate } = await import("./ops-coordination-service.js");
+  const followups = Array.isArray(req.body?.pendingFollowups) ? req.body.pendingFollowups : [];
+  const handoff = await createShiftHandoff(pool, req.user!.userId, {
+    shiftEndEventId: typeof req.body?.shiftEndEventId === "string" ? req.body.shiftEndEventId : null,
+    handoffDate: typeof req.body?.handoffDate === "string" ? parseReviewDate(req.body.handoffDate) : undefined,
+    chatsHandledCount:
+      typeof req.body?.chatsHandledCount === "number" ? Math.max(0, Math.floor(req.body.chatsHandledCount)) : null,
+    callsMadeCount:
+      typeof req.body?.callsMadeCount === "number" ? Math.max(0, Math.floor(req.body.callsMadeCount)) : null,
+    callsReceivedCount:
+      typeof req.body?.callsReceivedCount === "number" ? Math.max(0, Math.floor(req.body.callsReceivedCount)) : null,
+    pendingFollowups: followups,
+    scheduledItemsToday: typeof req.body?.scheduledItemsToday === "string" ? req.body.scheduledItemsToday : undefined,
+    generalNotes: typeof req.body?.generalNotes === "string" ? req.body.generalNotes : undefined,
+  });
+  return res.status(201).json({ handoff });
 });
 
 app.get("/api/admin/shift/trends", requireAuth, requireAdmin, async (_req: AuthRequest, res: express.Response) => {
@@ -1575,6 +1800,124 @@ app.patch("/api/admin/sop-templates/:id", requireAuth, requireAdmin, async (req:
   } catch (e) {
     return res.status(400).json({ error: e instanceof Error ? e.message : "Update failed" });
   }
+});
+
+/** AI-assisted operational SOP builder — sessions + checklist feedback */
+app.get("/api/sop-builder/access", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { canUseSopBuilder } = await import("./sop-builder-service.js");
+  const role = req.user!.role ?? "trainee";
+  const canBuild = await canUseSopBuilder(pool, req.user!.userId, role);
+  return res.json({ canBuild, isAdmin: role === "admin" });
+});
+
+app.get("/api/sop-builder/sessions", requireAuth, requireSopBuilderAccess, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { listSopBuilderSessionsForUser } = await import("./sop-builder-service.js");
+  const sessions = await listSopBuilderSessionsForUser(pool, req.user!.userId);
+  return res.json({ sessions });
+});
+
+app.get("/api/sop-builder/sessions/:id", requireAuth, requireSopBuilderAccess, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { getSopBuilderSession } = await import("./sop-builder-service.js");
+  const session = await getSopBuilderSession(pool, req.params.id);
+  if (!session) return res.status(404).json({ error: "Session not found" });
+  const role = req.user!.role ?? "trainee";
+  if (role !== "admin" && session.userId !== req.user!.userId) {
+    return res.status(404).json({ error: "Session not found" });
+  }
+  return res.json({ session });
+});
+
+app.post("/api/sop-builder/sessions", requireAuth, requireSopBuilderAccess, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const topic = typeof req.body?.topic === "string" ? req.body.topic.trim() : "";
+  if (!topic) return res.status(400).json({ error: "topic required" });
+  const { createSopBuilderSession } = await import("./sop-builder-service.js");
+  const sourceMaterialRefs =
+    req.body?.sourceMaterialRefs && typeof req.body.sourceMaterialRefs === "object"
+      ? req.body.sourceMaterialRefs
+      : {};
+  const initialTranscript = Array.isArray(req.body?.transcript) ? req.body.transcript : [];
+  const session = await createSopBuilderSession(pool, req.user!.userId, topic, sourceMaterialRefs, initialTranscript);
+  return res.status(201).json({ session });
+});
+
+app.patch("/api/sop-builder/sessions/:id", requireAuth, requireSopBuilderAccess, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { getSopBuilderSession, updateSopBuilderSession } = await import("./sop-builder-service.js");
+  const existing = await getSopBuilderSession(pool, req.params.id);
+  if (!existing) return res.status(404).json({ error: "Session not found" });
+  const role = req.user!.role ?? "trainee";
+  if (role !== "admin" && existing.userId !== req.user!.userId) {
+    return res.status(403).json({ error: "Not your session" });
+  }
+  const rawStatus = req.body?.status;
+  const status =
+    rawStatus === "in_progress" || rawStatus === "draft_ready" || rawStatus === "submitted"
+      ? rawStatus
+      : undefined;
+  try {
+    const session = await updateSopBuilderSession(pool, req.params.id, {
+      transcript: Array.isArray(req.body?.transcript) ? req.body.transcript : undefined,
+      draftJson: req.body?.draftJson !== undefined ? req.body.draftJson : undefined,
+      status,
+      sourceMaterialRefs:
+        req.body?.sourceMaterialRefs && typeof req.body.sourceMaterialRefs === "object"
+          ? req.body.sourceMaterialRefs
+          : undefined,
+    });
+    return res.json({ session });
+  } catch (e) {
+    return res.status(400).json({ error: e instanceof Error ? e.message : "Update failed" });
+  }
+});
+
+app.get("/api/admin/sop-builder/submitted", requireAuth, requireAdmin, async (_req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { listSubmittedSopBuilderSessions } = await import("./sop-builder-service.js");
+  return res.json({ sessions: await listSubmittedSopBuilderSessions(pool) });
+});
+
+app.post("/api/sop-feedback", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const sopTemplateId = typeof req.body?.sopTemplateId === "string" ? req.body.sopTemplateId : "";
+  const checklistItemId = typeof req.body?.checklistItemId === "string" ? req.body.checklistItemId : "";
+  const note = typeof req.body?.note === "string" ? req.body.note.trim() : "";
+  if (!sopTemplateId || !checklistItemId) {
+    return res.status(400).json({ error: "sopTemplateId and checklistItemId required" });
+  }
+  const { createSopFeedback } = await import("./sop-builder-service.js");
+  try {
+    const feedback = await createSopFeedback(pool, req.user!.userId, { sopTemplateId, checklistItemId, note });
+    return res.status(201).json({ feedback });
+  } catch (e) {
+    return res.status(400).json({ error: e instanceof Error ? e.message : "Feedback failed" });
+  }
+});
+
+app.get("/api/admin/sop-feedback", requireAuth, requireAdmin, async (_req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { listUnresolvedSopFeedback } = await import("./sop-builder-service.js");
+  return res.json({ feedback: await listUnresolvedSopFeedback(pool) });
+});
+
+app.patch("/api/admin/sop-feedback/:id/resolve", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { resolveSopFeedback } = await import("./sop-builder-service.js");
+  const feedback = await resolveSopFeedback(pool, req.params.id, req.user!.userId);
+  if (!feedback) return res.status(404).json({ error: "Feedback not found" });
+  return res.json({ feedback });
 });
 
 app.get(

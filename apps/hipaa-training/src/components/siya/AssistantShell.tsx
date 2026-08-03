@@ -40,9 +40,9 @@ export function AssistantShell({ children }: { children: ReactNode }) {
             <Image
               src="/assets/images/siya-health-logo.png"
               alt="Siya Health"
-              width={120}
-              height={36}
-              className="hidden h-8 w-auto sm:block"
+              width={180}
+              height={54}
+              className="hidden h-12 w-auto sm:block"
             />
             <span className="font-[family-name:var(--font-poppins)] text-base font-semibold text-[var(--siya-primary)] sm:hidden">
               {BRAND.appName}
@@ -52,14 +52,19 @@ export function AssistantShell({ children }: { children: ReactNode }) {
             <NavLink href="/" active={path === "/"}>
               My day
             </NavLink>
-            <NavLink href="/grow" active={path.startsWith("/grow")}>
-              Workspace
-            </NavLink>
             <NavLink href="/help" active={path === "/help"}>
               Ask
             </NavLink>
-            <NavLink href="/level-up" active={path.startsWith("/level-up")}>
-              Practice
+            <NavLink
+              href="/learn"
+              active={
+                path.startsWith("/learn") ||
+                path.startsWith("/training") ||
+                path.startsWith("/module") ||
+                path.startsWith("/level-up")
+              }
+            >
+              Learn
             </NavLink>
             {isPortalMemoryEnabled() ? (
               <NavLink href="/memory" active={path.startsWith("/memory")}>
@@ -71,9 +76,6 @@ export function AssistantShell({ children }: { children: ReactNode }) {
                 Team
               </NavLink>
             ) : null}
-            <NavLink href="/training" active={path.startsWith("/training") || path.startsWith("/module")}>
-              Learn
-            </NavLink>
             {user && isPortalAdmin(user.role) ? (
               <NavLink href="/admin/team" active={path.startsWith("/admin")}>
                 Admin
@@ -82,7 +84,9 @@ export function AssistantShell({ children }: { children: ReactNode }) {
           </nav>
         </div>
         <div className="flex items-center gap-2 text-xs text-[var(--siya-text-muted)] md:gap-3">
-          <ShiftPresenceBar onEndShift={() => router.replace("/start-shift")} />
+          {!isPortalAdmin(user?.role) ? (
+            <ShiftPresenceBar onEndShift={() => router.replace("/start-shift")} />
+          ) : null}
           {user ? (
             <>
               <span className="hidden max-w-[180px] truncate sm:inline text-[var(--siya-text-muted)]">
@@ -122,7 +126,7 @@ export function AssistantShell({ children }: { children: ReactNode }) {
         </div>
       </header>
       <ShiftRitualStrip ritual={shift?.ritual ?? null} onDismiss={() => shift?.clearRitual()} />
-      <main className="min-h-0 flex-1">{children}</main>
+      <main className="flex min-h-0 flex-1 flex-col">{children}</main>
     </div>
   );
 }

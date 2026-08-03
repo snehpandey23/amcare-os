@@ -31,6 +31,15 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      { source: "/grow", destination: "/learn", permanent: true },
+      { source: "/grow/sops", destination: "/memory/knowledge/sops", permanent: true },
+      { source: "/grow/sop-builder", destination: "/memory/knowledge/sop-builder", permanent: true },
+      { source: "/level-up", destination: "/learn/practice", permanent: true },
+      { source: "/learn/training", destination: "/training", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

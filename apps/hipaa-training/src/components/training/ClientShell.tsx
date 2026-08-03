@@ -19,12 +19,14 @@ function isAssistantRoute(path: string) {
     path === "/" ||
     path === "/help" ||
     path.startsWith("/resources") ||
+    path.startsWith("/learn") ||
     path.startsWith("/level-up") ||
     path.startsWith("/grow") ||
     path.startsWith("/memory") ||
     path.startsWith("/account") ||
     path.startsWith("/admin") ||
     path.startsWith("/team") ||
+    path.startsWith("/chat-review") ||
     path.startsWith("/onboarding") ||
     path === "/start-shift"
   );

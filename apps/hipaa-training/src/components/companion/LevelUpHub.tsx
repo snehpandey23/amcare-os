@@ -86,11 +86,11 @@ export function LevelUpHub() {
   return (
     <div className="mx-auto max-w-2xl space-y-10 px-4 py-8 md:px-6">
       <header>
-        <Link href="/" className="text-sm text-[var(--siya-accent)] hover:underline">
-          ← Home
+        <Link href="/learn" className="text-sm text-[var(--siya-accent)] hover:underline">
+          ← Learn
         </Link>
         <h1 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-semibold text-[var(--siya-primary)]">
-          ✨ Level Up
+          Practice
         </h1>
         <p className="mt-1 text-sm text-[var(--siya-text-muted)]">
           ~8–10 minutes a day — American English, culture, and healthcare communication. XP saves to your account
@@ -110,7 +110,7 @@ export function LevelUpHub() {
         </h2>
         <p className="mb-3 text-xs text-[var(--siya-text-muted)]">
           One phrase per day — rotates from live department SOPs when available.{" "}
-          <Link href="/grow/sops" className="font-semibold text-[var(--siya-accent)] hover:underline">
+          <Link href="/memory/knowledge/sops" className="font-semibold text-[var(--siya-accent)] hover:underline">
             SOP workspace
           </Link>
         </p>

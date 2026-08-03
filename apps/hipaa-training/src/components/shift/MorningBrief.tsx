@@ -73,7 +73,7 @@ export function MorningBrief({
       </div>
 
       <p className="mt-4 text-xs text-[var(--siya-text-muted)]">
-        Company updates — check Workspace when you have a minute. Optional: {reflectionPromptForToday()}
+        Company updates — check Learn when you have a minute. Optional: {reflectionPromptForToday()}
       </p>
     </section>
   );

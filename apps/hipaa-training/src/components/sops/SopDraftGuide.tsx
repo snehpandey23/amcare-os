@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { SopDraftAnswers } from "@/lib/sop-draft-assist";
+import Link from "next/link";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
 
 const FIELDS: { key: keyof SopDraftAnswers; label: string; hint: string; required?: boolean; rows?: number }[] = [
@@ -41,6 +42,7 @@ const FIELDS: { key: keyof SopDraftAnswers; label: string; hint: string; require
 type Props = {
   department: string;
   departments: string[];
+  initialPurpose?: string;
   onDepartmentChange: (dept: string) => void;
   onCancel: () => void;
   onGenerate: (answers: SopDraftAnswers) => void;
@@ -52,6 +54,7 @@ type Props = {
 export function SopDraftGuide({
   department,
   departments,
+  initialPurpose = "",
   onDepartmentChange,
   onCancel,
   onGenerate,
@@ -60,7 +63,7 @@ export function SopDraftGuide({
   error,
 }: Props) {
   const [answers, setAnswers] = useState<SopDraftAnswers>({
-    purpose: "",
+    purpose: initialPurpose,
     appliesTo: "",
     steps: "",
     exceptions: "",
@@ -83,9 +86,13 @@ export function SopDraftGuide({
         onSubmit={submit}
         className="max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-[var(--siya-border)] bg-white p-5 shadow-xl"
       >
-        <h2 className="text-lg font-semibold text-[var(--siya-primary)]">New SOP — guided draft</h2>
+        <h2 className="text-lg font-semibold text-[var(--siya-primary)]">New department SOP — guided draft</h2>
         <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
-          Answer a few questions; AI will suggest a first draft you can edit before submit. Nothing is published automatically.
+          Prose policy docs for your department — not daily My day checklists. For operational checklists, use the{" "}
+          <Link href="/memory/knowledge/sop-builder" className="font-semibold text-[var(--siya-accent)] hover:underline">
+            AI checklist builder
+          </Link>
+          .
         </p>
 
         <label className="mt-4 block text-xs font-medium text-[var(--siya-text-muted)]">

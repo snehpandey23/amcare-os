@@ -1,20 +1,41 @@
 @import "tailwindcss";
 
 :root {
+  /* Brand */
   --siya-primary: #1e3a8a;
   --siya-primary-hover: #1e40af;
   --siya-accent: #0f766e;
   --siya-accent-hover: #115e59;
+  /* Text */
   --siya-text: #1c1917;
   --siya-text-secondary: #57534e;
   --siya-text-muted: #78716c;
+  /* Surfaces */
   --siya-border: #ebe5d6;
   --siya-bg-page: #fffdf6;
   --siya-bg-subtle: #faf4e4;
   --siya-white: #ffffff;
+  /* Radius scale */
+  --siya-radius-sm: 8px;
+  --siya-radius-md: 12px;
   --siya-radius-lg: 16px;
+  --siya-radius-xl: 20px;
+  /* Elevation */
   --siya-shadow: 0 4px 16px rgba(28, 25, 23, 0.06);
   --siya-shadow-lg: 0 18px 40px rgba(28, 25, 23, 0.1);
+  /* Semantic status (warn / info / success / error) */
+  --siya-status-warn-bg: #fffbeb;
+  --siya-status-warn-border: #fde68a;
+  --siya-status-warn-text: #78350f;
+  --siya-status-info-bg: #f0fdfa;
+  --siya-status-info-border: #99f6e4;
+  --siya-status-info-text: #115e59;
+  --siya-status-success-bg: #ecfdf5;
+  --siya-status-success-border: #a7f3d0;
+  --siya-status-success-text: #065f46;
+  --siya-status-error-bg: #fef2f2;
+  --siya-status-error-border: #fecaca;
+  --siya-status-error-text: #991b1b;
 }
 
 @theme inline {

@@ -1,10 +1,11 @@
 import { TeamPulsePanel } from "@/components/team/TeamPulsePanel";
+import { ShiftHandoffFeed } from "@/components/ops/ShiftHandoffFeed";
 
 export default function TeamPage() {
   return (
     <div className="h-full overflow-y-auto">
-      <div className="mx-auto max-w-4xl px-4 py-8 md:px-6">
-        <header className="mb-6">
+      <div className="mx-auto max-w-4xl space-y-6 px-4 py-8 md:px-6">
+        <header>
           <h1 className="font-[family-name:var(--font-poppins)] text-2xl font-semibold text-[var(--siya-primary)]">
             Team
           </h1>
@@ -13,6 +14,7 @@ export default function TeamPage() {
             Self-declared presence only; no surveillance.
           </p>
         </header>
+        <ShiftHandoffFeed />
         <TeamPulsePanel />
       </div>
     </div>

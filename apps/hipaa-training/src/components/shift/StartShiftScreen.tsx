@@ -39,19 +39,21 @@ export function StartShiftScreen() {
 
   return (
     <div className="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-4 py-12">
-      <p className="text-sm text-[var(--siya-text-muted)]">
+      <p className="text-base font-medium text-[var(--siya-text-secondary)]">
         {greeting()}
         {firstName ? `, ${firstName}` : ""}.
       </p>
-      <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-2xl font-semibold text-[var(--siya-primary)]">
+      <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-2xl font-bold text-[var(--siya-primary)] md:text-3xl">
         Ready to begin your shift?
       </h1>
-      <p className="mt-2 text-sm text-[var(--siya-text-secondary)]">
-        {BRAND.appName} records when you start — then opens <strong>My day</strong>. Tap <strong>Break</strong> or{" "}
-        <strong>Focus</strong> when you step away or need DND — you control it; nothing is inferred from your keyboard
-        or mouse.
+      <p className="mt-3 text-base leading-relaxed text-[var(--siya-text)]">
+        {BRAND.appName} records when you start, then opens <strong className="font-semibold">My day</strong>. Tap{" "}
+        <strong className="font-semibold">Break</strong> or <strong className="font-semibold">Focus</strong> when you
+        step away or need DND. You control it; nothing is inferred from your keyboard or mouse.
       </p>
-      <p className="mt-3 text-xs text-[var(--siya-text-muted)]">Shift rhythm (you can change in onboarding later):</p>
+      <p className="mt-4 text-sm font-medium text-[var(--siya-text-secondary)]">
+        Shift rhythm (you can change in onboarding later):
+      </p>
       <div className="mt-2 flex flex-wrap gap-2">
         {(
           [

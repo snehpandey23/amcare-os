@@ -69,18 +69,18 @@ export function suggestFocusItems(
     add("Continue HIPAA certification (compliance)", "/training");
   }
   if (!opts.practiceDone) {
-    add("Daily practice (~5 min)", "/level-up");
+    add("Daily practice (~5 min)", "/learn/practice");
   }
 
   for (const goal of profile.improveGoals.slice(0, 2)) {
     if (goal === "English" || goal === "Communication" || goal === "Confidence") {
-      add("American English practice", "/level-up#english");
+      add("American English practice", "/learn/practice#english");
     } else if (goal === "Documentation" || goal === "Writing") {
-      add("Documentation challenge (~2 min)", "/level-up#writing");
+      add("Documentation challenge (~2 min)", "/learn/practice#writing");
     } else if (goal === "Marketing") {
       add("Review company voice in Ask", "/help?q=marketing content guidelines");
     } else if (goal === "Patient interaction") {
-      add("Healthcare term + patient comms drill", "/level-up#healthcare");
+      add("Healthcare term + patient comms drill", "/learn/practice#healthcare");
     }
   }
 
@@ -89,7 +89,7 @@ export function suggestFocusItems(
       profile.biggestChallenge.length > 48
         ? `${profile.biggestChallenge.slice(0, 48)}…`
         : profile.biggestChallenge;
-    add(`Your focus: ${short}`, "/grow");
+    add(`Your focus: ${short}`, "/learn");
   }
 
   if (items.length < 3) {
@@ -114,7 +114,7 @@ export function suggestLearningPicks(profile: PortalProfile): LearningPick[] {
     picks.push({
       label: "American English",
       detail: "Phrase + conversation drill",
-      href: "/level-up#english",
+      href: "/learn/practice#english",
       minutes: 5,
     });
   }
@@ -122,7 +122,7 @@ export function suggestLearningPicks(profile: PortalProfile): LearningPick[] {
     picks.push({
       label: "Documentation",
       detail: "Typing & clarity challenge",
-      href: "/level-up#typing",
+      href: "/learn/practice#typing",
       minutes: 2,
     });
   }
@@ -130,7 +130,7 @@ export function suggestLearningPicks(profile: PortalProfile): LearningPick[] {
     picks.push({
       label: "US culture",
       detail: "Map or timezone practice",
-      href: "/level-up#culture",
+      href: "/learn/practice#culture",
       minutes: 5,
     });
   }
@@ -138,7 +138,7 @@ export function suggestLearningPicks(profile: PortalProfile): LearningPick[] {
     picks.push({
       label: "Healthcare language",
       detail: "Term of the day + context",
-      href: "/level-up#healthcare",
+      href: "/learn/practice#healthcare",
       minutes: 3,
     });
   }
@@ -146,7 +146,7 @@ export function suggestLearningPicks(profile: PortalProfile): LearningPick[] {
     picks.push({
       label: "Billing practice",
       detail: "Scenario quiz",
-      href: "/level-up#billing-practice",
+      href: "/learn/practice#billing-practice",
       minutes: 5,
     });
   }
@@ -154,7 +154,7 @@ export function suggestLearningPicks(profile: PortalProfile): LearningPick[] {
   if (picks.length < 3) {
     const dept = profile.department;
     if (dept === "accounts") {
-      picks.push({ label: "Billing drill", detail: "Quick scenario", href: "/level-up#billing-practice", minutes: 5 });
+      picks.push({ label: "Billing drill", detail: "Quick scenario", href: "/learn/practice#billing-practice", minutes: 5 });
     } else if (dept === "marketing") {
       picks.push({ label: "Brand voice", detail: "Ask a content question", href: "/help?q=brand voice", minutes: 3 });
     } else if (dept === "clinical") {
@@ -163,10 +163,10 @@ export function suggestLearningPicks(profile: PortalProfile): LearningPick[] {
       picks.push({ label: "SOP in Ask", detail: "Find a workflow answer", href: "/help", minutes: 3 });
     }
     if (picks.length < 3 && profile.improveGoals.includes("Productivity")) {
-      picks.push({ label: "My day tasks", detail: "Checklist for today", href: "/#tasks", minutes: 2 });
+      picks.push({ label: "My day tasks", detail: "Checklist for today", href: "/#my-day-tasks", minutes: 2 });
     }
     if (picks.length < 3) {
-      picks.push({ label: "Explore Level Up", detail: "Pick any drill", href: "/level-up", minutes: 5 });
+      picks.push({ label: "Daily practice", detail: "Pick any drill", href: "/learn/practice", minutes: 5 });
     }
   }
 

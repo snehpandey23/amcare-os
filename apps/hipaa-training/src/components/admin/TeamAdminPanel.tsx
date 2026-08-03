@@ -431,7 +431,7 @@ export function TeamAdminPanel() {
             <span className="rounded-lg bg-emerald-50 px-3 py-2 text-emerald-900">
               🟢 Working: <strong>{shiftDashboard.live.working}</strong>
             </span>
-            <span className="rounded-lg bg-violet-50 px-3 py-2 text-violet-900">
+            <span className="rounded-lg border border-[var(--siya-status-info-border)] bg-[var(--siya-status-info-bg)] px-3 py-2 text-[var(--siya-status-info-text)]">
               🎯 Focus: <strong>{shiftDashboard.live.inFocus}</strong>
             </span>
             <span className="rounded-lg bg-amber-50 px-3 py-2 text-amber-950">

@@ -7,7 +7,7 @@ export function TrainingShell({ children }: { children: ReactNode }) {
 export function TrainingCard({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
     <div
-      className={`rounded-2xl border border-[var(--siya-border)] bg-white p-6 shadow-[var(--siya-shadow)] ${className}`}
+      className={`rounded-[var(--siya-radius-lg)] border border-[var(--siya-border)] bg-white p-6 shadow-[var(--siya-shadow)] ${className}`}
     >
       {children}
     </div>
@@ -33,7 +33,7 @@ export function TrainingBtnPrimary({
   return (
     <button
       type="button"
-      className={`rounded-xl bg-[var(--siya-accent)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--siya-accent-hover)] disabled:opacity-40 ${className}`}
+      className={`rounded-[var(--siya-radius-md)] bg-[var(--siya-accent)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--siya-accent-hover)] disabled:opacity-40 ${className}`}
       {...props}
     >
       {children}
@@ -49,7 +49,7 @@ export function TrainingBtnNavy({
   return (
     <button
       type="button"
-      className={`rounded-xl bg-[var(--siya-primary)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--siya-primary-hover)] disabled:opacity-40 ${className}`}
+      className={`rounded-[var(--siya-radius-md)] bg-[var(--siya-primary)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--siya-primary-hover)] disabled:opacity-40 ${className}`}
       {...props}
     >
       {children}
@@ -70,17 +70,17 @@ export function TrainingLinkPrimary({ href, children }: { href: string; children
 
 /** Use with next/link by passing className on Link */
 export const trainingLinkPrimaryClass =
-  "inline-flex rounded-xl bg-[var(--siya-accent)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--siya-accent-hover)]";
+  "inline-flex rounded-[var(--siya-radius-md)] bg-[var(--siya-accent)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--siya-accent-hover)]";
 export const trainingLinkSecondaryClass =
-  "inline-flex rounded-xl border border-[var(--siya-border)] bg-white px-4 py-2.5 text-sm font-medium text-[var(--siya-text-secondary)] transition hover:bg-[var(--siya-bg-page)]";
+  "inline-flex rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-white px-4 py-2.5 text-sm font-medium text-[var(--siya-text-secondary)] transition hover:bg-[var(--siya-bg-page)]";
 export const trainingLinkNavyClass =
-  "inline-flex rounded-xl bg-[var(--siya-primary)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--siya-primary-hover)]";
+  "inline-flex rounded-[var(--siya-radius-md)] bg-[var(--siya-primary)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--siya-primary-hover)]";
 
 export function TrainingInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       {...props}
-      className={`w-full rounded-xl border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-3 py-2 text-sm text-[var(--siya-text)] outline-none focus:border-[var(--siya-accent)] focus:ring-2 focus:ring-[var(--siya-accent)]/20 ${props.className ?? ""}`}
+      className={`w-full rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-3 py-2 text-sm text-[var(--siya-text)] outline-none focus:border-[var(--siya-accent)] focus:ring-2 focus:ring-[var(--siya-accent)]/20 ${props.className ?? ""}`}
     />
   );
 }
@@ -105,7 +105,7 @@ export function quizOptionClass(state: QuizOptionState, interactive: boolean) {
     default: "border-[var(--siya-border)] bg-white",
     selected: "border-[var(--siya-accent)] bg-[var(--siya-bg-subtle)]",
     correct: "border-[var(--siya-primary)] bg-[var(--siya-bg-subtle)]",
-    incorrect: "border-red-300 bg-red-50/80",
+    incorrect: "border-[var(--siya-status-error-border)] bg-[var(--siya-status-error-bg)]",
     muted: "border-[var(--siya-border)] bg-white opacity-60",
   };
   const hover = interactive ? " hover:border-[var(--siya-accent)]/50 hover:bg-[var(--siya-bg-page)]" : "";

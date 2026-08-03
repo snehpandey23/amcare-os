@@ -7,12 +7,12 @@ export type QuickAction =
 export const HOME_QUICK_ACTIONS: QuickAction[] = [
   { label: "Ask a company question", href: "/help" },
   { label: "Find an SOP", href: "/help", query: "Find an SOP or internal policy" },
-  { label: "Improve my English", href: "/level-up#english" },
-  { label: "Practice documentation", href: "/level-up#writing" },
-  { label: "⌨️ Chat speed & accuracy", href: "/level-up#typing" },
-  { label: "Learn US culture", href: "/level-up#culture" },
-  { label: "Healthcare term of the day", href: "/level-up#healthcare" },
-  { label: "My progress dashboard", href: "/grow" },
+  { label: "Improve my English", href: "/learn/practice#english" },
+  { label: "Practice documentation", href: "/learn/practice#writing" },
+  { label: "⌨️ Chat speed & accuracy", href: "/learn/practice#typing" },
+  { label: "Learn US culture", href: "/learn/practice#culture" },
+  { label: "Healthcare term of the day", href: "/learn/practice#healthcare" },
+  { label: "My progress dashboard", href: "/learn" },
   { label: "Complete a form", comingSoon: true, note: "Workflow module in this portal" },
   { label: "Request leave", comingSoon: true, note: "HR module — tracked via portal activity for now" },
 ];
@@ -38,7 +38,17 @@ export const ADMIN_CHAT_QUICK_PROMPTS = [
 export const SIYA_ADMIN_OPENING =
   "**Executive Workspace · Ask**\n\nYour briefing on **My day** shows coverage, overdue work, knowledge health, and what **needs attention**. Here I can go deeper — plans, team, and policies.\n\nI **recommend** first; **Approve** creates tasks only (no email or Slack in v1).";
 
-export function helpHref(query?: string): string {
-  if (!query?.trim()) return "/help";
-  return `/help?q=${encodeURIComponent(query.trim())}`;
+export function helpHref(query?: string, focusMode?: boolean): string {
+  const params = new URLSearchParams();
+  const q = query?.trim();
+  if (q) params.set("q", q);
+  if (focusMode) params.set("focus", "1");
+  const qs = params.toString();
+  return qs ? `/help?${qs}` : "/help";
+}
+
+/** Full page load — matches header nav; avoids client-router edge cases on My day → Ask. */
+export function navigateToAsk(query?: string, focusMode?: boolean): void {
+  if (typeof window === "undefined") return;
+  window.location.assign(helpHref(query, focusMode));
 }

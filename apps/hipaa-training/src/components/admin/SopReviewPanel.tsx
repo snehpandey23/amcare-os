@@ -234,7 +234,7 @@ export function SopReviewPanel() {
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-[10px] font-semibold uppercase text-amber-900">{s.department}</span>
                   {s.aiDrafted ? (
-                    <span className="rounded-full bg-violet-50 px-2 py-0.5 text-[10px] font-semibold uppercase text-violet-900">
+                    <span className="rounded-full border border-[var(--siya-status-info-border)] bg-[var(--siya-status-info-bg)] px-2 py-0.5 text-[10px] font-semibold uppercase text-[var(--siya-status-info-text)]">
                       AI-drafted
                     </span>
                   ) : null}

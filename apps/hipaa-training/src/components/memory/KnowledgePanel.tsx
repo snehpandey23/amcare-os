@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { createDecision, fetchConstitution, fetchDecisionLineage, fetchDecisions } from "@/lib/knowledge-api";
 import { loadLocalPortalProfile } from "@/lib/portal-profile";
@@ -144,7 +145,15 @@ export function KnowledgePanel() {
       </div>
 
       <p className="rounded-lg border border-[var(--siya-border)] bg-white px-3 py-2 text-xs text-[var(--siya-text-secondary)]">
-        Layer 2 canonical: approved SOPs and playbooks in Workspace / Ask retrieval — promotion workflow coming.
+        Layer 2 tools:{" "}
+        <Link href="/memory/knowledge/sops" className="font-semibold text-[var(--siya-accent)] hover:underline">
+          Department SOP workspace
+        </Link>
+        {" · "}
+        <Link href="/memory/knowledge/sop-builder" className="font-semibold text-[var(--siya-accent)] hover:underline">
+          AI checklist builder
+        </Link>
+        {" — approved SOPs also surface in Ask retrieval."}
       </p>
 
       <div className="flex flex-wrap items-center justify-between gap-2">

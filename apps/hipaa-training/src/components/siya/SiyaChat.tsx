@@ -8,10 +8,20 @@ import { BRAND } from "@/lib/brand";
 import { notifyOwnerForGap } from "@/lib/siya-os/knowledge-gap";
 import { recordQuestion, recordTimeToAnswer, recordAnswerFeedback } from "@/lib/siya-os/metrics";
 import { SaveToMemoryPrompt } from "@/components/memory/SaveToMemoryPrompt";
+import { PortalNavLink } from "@/components/training/PortalNavLink";
 import { isPortalMemoryEnabled } from "@/lib/trainingConfig";
 import { useAuth } from "@/context/AuthContext";
 import { isPortalAdmin } from "@/lib/portal-role";
 import { createAdhocTask } from "@/lib/tasks-api";
+import {
+  portalAskInput,
+  portalAskSendBtn,
+  portalBtnNavySm,
+  portalStatusInfoBox,
+  portalStatusInfoText,
+  portalStatusWarnBox,
+  portalStatusWarnText,
+} from "@/lib/portal-ui";
 
 type ChatLink = { label: string; href: string };
 type RoutingMeta = {
@@ -333,20 +343,20 @@ export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: s
                   <ul className="mt-2 space-y-1 border-t border-[var(--siya-border)] pt-2">
                     {msg.links.map((l) => (
                       <li key={l.href}>
-                        <Link href={l.href} className="font-medium text-[var(--siya-accent)] underline underline-offset-2">
+                        <PortalNavLink href={l.href} className="font-medium text-[var(--siya-accent)] underline underline-offset-2">
                           {l.label}
-                        </Link>
+                        </PortalNavLink>
                       </li>
                     ))}
                   </ul>
                 ) : null}
                 {msg.pendingTask && !msg.taskApproved ? (
-                  <div className="mt-3 rounded-xl border border-violet-200 bg-violet-50/80 p-3">
-                    <p className="text-xs font-semibold text-violet-950">Approve creates a task only — no email.</p>
+                  <div className={`mt-3 ${portalStatusInfoBox} p-3`}>
+                    <p className={`text-xs font-semibold ${portalStatusInfoText}`}>Approve creates a task only — no email.</p>
                     <button
                       type="button"
                       onClick={() => void approvePendingTask(msg.id, msg.pendingTask!)}
-                      className="mt-2 rounded-lg bg-[var(--siya-primary)] px-4 py-2 text-xs font-semibold text-white hover:bg-[var(--siya-primary-hover)]"
+                      className={`mt-2 ${portalBtnNavySm}`}
                     >
                       Approve
                     </button>
@@ -358,8 +368,8 @@ export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: s
                   </p>
                 ) : null}
                 {msg.knowledgeGap ? (
-                  <div className="mt-3 rounded-xl border border-amber-200/80 bg-amber-50/60 p-3 text-xs">
-                    <p className="font-semibold text-amber-950">No approved guide yet</p>
+                  <div className={`mt-3 ${portalStatusWarnBox} p-3 text-xs`}>
+                    <p className={`font-semibold ${portalStatusWarnText}`}>No approved guide yet</p>
                     <p className="mt-1 text-[var(--siya-text-secondary)]">
                       Suggested department: <strong>{msg.routing?.department ?? "General"}</strong>
                     </p>
@@ -373,7 +383,7 @@ export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: s
                       <button
                         type="button"
                         onClick={() => void notifyOwner(msg)}
-                        className="mt-2 rounded-lg bg-[var(--siya-primary)] px-3 py-1.5 font-semibold text-white hover:bg-[var(--siya-primary-hover)]"
+                        className={`mt-2 ${portalBtnNavySm}`}
                       >
                         Notify owner (email bot@siya.health)
                       </button>
@@ -465,12 +475,12 @@ export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: s
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={adminCoPilot ? "Plan my day, assign a task, or ask policy…" : "Describe your task…"}
-              className="min-w-0 flex-1 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-4 py-2.5 text-sm outline-none focus:border-[var(--siya-accent)] focus:ring-2 focus:ring-[var(--siya-accent)]/20"
+              className={portalAskInput}
             />
             <button
               type="submit"
               disabled={loading || !input.trim()}
-              className="rounded-xl bg-[var(--siya-accent)] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--siya-accent-hover)] disabled:opacity-50"
+              className={portalAskSendBtn}
             >
               Send
             </button>

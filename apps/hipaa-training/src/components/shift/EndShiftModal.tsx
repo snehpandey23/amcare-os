@@ -78,8 +78,9 @@ export function EndShiftModal({
   }
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 p-4">
-      <div className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-2xl bg-white p-6 shadow-xl">
+    <div className="fixed inset-0 z-[100] overflow-y-auto bg-black/40 p-4">
+      <div className="flex min-h-full items-end justify-center sm:items-center">
+        <div className="my-auto w-full max-w-md max-h-[min(90dvh,calc(100%-2rem))] overflow-y-auto overscroll-contain rounded-2xl bg-white p-6 shadow-xl">
         {step === "summary" ? (
           <>
             <h2 className="font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--siya-primary)]">
@@ -198,6 +199,7 @@ export function EndShiftModal({
             </div>
           </>
         )}
+        </div>
       </div>
     </div>
   );

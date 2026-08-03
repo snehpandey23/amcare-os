@@ -100,7 +100,7 @@ export function TeamPulsePanel({ compact = false, className = "" }: TeamPulsePan
             <span className="rounded-lg bg-emerald-50 px-2.5 py-1.5 text-emerald-900">
               🟢 Working: <strong>{pulse.live.working}</strong>
             </span>
-            <span className="rounded-lg bg-violet-50 px-2.5 py-1.5 text-violet-900">
+            <span className="rounded-lg border border-[var(--siya-status-info-border)] bg-[var(--siya-status-info-bg)] px-2.5 py-1.5 text-[var(--siya-status-info-text)]">
               🎯 Focus: <strong>{pulse.live.inFocus}</strong>
             </span>
             <span className="rounded-lg bg-amber-50 px-2.5 py-1.5 text-amber-950">

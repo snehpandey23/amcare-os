@@ -336,6 +336,21 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
     ]
   },
   {
+    "id": "agent-org-chart-deferred",
+    "category": "decisions",
+    "title": "Defer the multi-agent C-suite / Executive Office layer",
+    "keywords": [
+      "agent org chart",
+      "executive office",
+      "COO agent",
+      "CTO agent",
+      "executive advisor",
+      "department manager agents",
+      "orchestration layer"
+    ],
+    "body": "When asked \"should we build the agent org chart / Executive Office / COO agent?\": point here. The answer is *deferred, not rejected forever* — cite the revisit criteria. Direct founder-attention features to the Executive Workspace v2 spec; direct marketing agent behavior to `MARKETING-OS-v1.1.md`. Do not silently build the enterprise version. Do **not** build the proposed seven-agent C-suite (COO, CMO, CTO, Intelligence, Content, Memory, Executive Advisor) with an \"Executive Office\" orchestration layer above them. Adopt the salvageable pieces as **Marketing OS v1.1** (CMO prompt, Intelligence prompt, weekly report SOP, insight cards, Friday knowledge ritual) and defer the rest. 1. **Attention math.** Seven agents each producing Friday reports means seven reports on the founder's desk — increasing founder dependency, the exact thing the proposal aimed to reduce. Executive Workspace v2 already enforces a hard attention budget (Critical ≤1 · Important ≤2 · Watch ≤3). 2. **Duplication.** The \"Executive Office\" is the Founder Decision Coach already specified in `apps/hipaa-training/docs/EXECUTIVE-WORKSPACE-v2-FOUNDER-DECISION-COACH.md`, with a deliberate phase order. The COO prompt is that coach minus its guardrails (evidence citation, no invented signals). The Executive Advisor's useful questions already exist in the coach's recommendation format (Why / Why now / If ignored / Confidence / Evidence). 3. **Sequencing.** A management layer that \"reviews KPIs every Friday\" requires KPIs that exist. Marketing OS v1.0 is at \"definitions first\" — conversion events and dashboards are not yet wired. Measurement is the real bottleneck, not agent org design. 4. **Content quota contradiction.** The proposed Content Agent mandated ~10 assets per research topic while claiming not to optimize for volume. The frozen six-month plan says the opposite: less net-new publishing; finish clusters, optimize, internally link. 5. **Scale.** At current team size, an orchestration layer is coordination overhead with nothing to coordinate — work that should not exist yet."
+  },
+  {
     "id": "amcare-os-overview",
     "category": "technology",
     "title": "AmCare OS — modular ops stack",

@@ -63,7 +63,7 @@ export async function logPresenceTransition(
   }
 }
 
-export async function logShiftEnd(pool: pg.Pool, userId: string, metadata: Record<string, unknown>): Promise<void> {
+export async function logShiftEnd(pool: pg.Pool, userId: string, metadata: Record<string, unknown>): Promise<string> {
   await ensureShiftAttendanceTables(pool);
-  await logShiftAttendance(pool, userId, "shift_end", "staff_ui", metadata);
+  return logShiftAttendance(pool, userId, "shift_end", "staff_ui", metadata);
 }

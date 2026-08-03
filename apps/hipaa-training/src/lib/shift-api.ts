@@ -26,6 +26,7 @@ export type ShiftRecord = {
 export type ShiftState = {
   active: ActiveShift | null;
   recent: ShiftRecord[];
+  shiftEndEventId?: string;
 };
 
 async function shiftFetch(path: string, init?: RequestInit) {
@@ -71,10 +72,11 @@ export async function endShift(payload: {
   accomplishments?: string;
   memoryImportance?: import("@/lib/memory-api").MemoryImportance;
 }): Promise<ShiftState> {
-  return (await shiftFetch("/api/shift/end", {
+  const data = (await shiftFetch("/api/shift/end", {
     method: "POST",
     body: JSON.stringify(payload),
   })) as ShiftState;
+  return { active: data.active ?? null, recent: data.recent ?? [], shiftEndEventId: data.shiftEndEventId };
 }
 
 export async function setShiftPresence(status: PresenceStatus): Promise<ShiftState> {

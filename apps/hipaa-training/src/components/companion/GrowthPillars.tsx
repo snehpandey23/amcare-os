@@ -18,8 +18,8 @@ const PILLARS = [
     emoji: "⚡",
     title: "Practice",
     blurb: "Daily drills: English, US culture, chat speed, billing scenarios, map & timezone.",
-    href: "/level-up",
-    cta: "Level Up",
+    href: "/learn/practice",
+    cta: "Open practice",
   },
   {
     id: "ask",

@@ -59,6 +59,21 @@ export interface SiyaReply {
 
 const REFUND_PROMISE = /\b(i (can|will) (approve|refund|waive|credit)|guaranteed refund|refund is approved)\b/i;
 
+function answerStaffMetaQuestion(text: string): string | null {
+  const t = text.trim().toLowerCase();
+  if (/what('s| is) your name|who are you|what are you\b/.test(t)) {
+    return [
+      "I'm **Siya Assist** — the internal help desk for Siya Health staff.",
+      "",
+      "I answer from **approved internal guides** and can route you to the right owner when we don't have a published policy yet.",
+    ].join("\n");
+  }
+  if (/^(hi|hello|hey)\b/.test(t) && t.length < 24) {
+    return "Hi — ask me about policies, SOPs, tools, or who to contact. I'll use approved internal guides first.";
+  }
+  return null;
+}
+
 export function runSiyaAssistant(message: string, history: { role: string; content: string }[] = []): SiyaReply {
   return buildSiyaReply(message, history);
 }
@@ -142,33 +157,28 @@ export async function runSiyaAssistantAsync(
     focusMode,
   });
 
-  if (!llmText) return { ...base, message: polishStaffMessage(base.message) };
+  if (llmText) {
+    let msg = polishStaffMessage(llmText);
+    if (base.chunks[0]?.escalate && !msg.includes(base.chunks[0].escalate!)) {
+      msg += `\n\n**Loop in:** ${base.chunks[0].escalate}`;
+    }
 
-  let msg = polishStaffMessage(llmText);
-  if (base.chunks[0]?.escalate && !msg.includes(base.chunks[0].escalate!)) {
-    msg += `\n\n**Loop in:** ${base.chunks[0].escalate}`;
+    if (base.routing?.confidence === "high" && base.routing.followUpQuestions.length && !focusMode) {
+      msg += "\n\n**A few quick questions:**";
+      base.routing.followUpQuestions.forEach((q, i) => {
+        msg += `\n${i + 1}. ${q}`;
+      });
+    }
+
+    return {
+      ...base,
+      message: msg,
+      knowledgeGap: false,
+      escalationPreview: undefined,
+    };
   }
 
-  if (base.routing?.confidence === "high" && base.routing.followUpQuestions.length && !focusMode) {
-    msg += "\n\n**A few quick questions:**";
-    base.routing.followUpQuestions.forEach((q, i) => {
-      msg += `\n${i + 1}. ${q}`;
-    });
-  }
-
-  const showContacts = base.knowledgeGap || Boolean(base.chunks[0]?.escalate);
-  if (showContacts && base.message.includes("People to try:")) {
-    const contactsPart = base.message.split("**People to try:**")[1];
-    if (contactsPart) msg += `\n\n**People to try:**${contactsPart}`;
-  } else if (showContacts) {
-    const contacts = getEscalationContacts()
-      .slice(0, 4)
-      .map((c) => `${c.role}: ${c.detail}`)
-      .join(" · ");
-    msg += `\n\n**People to try:** ${contacts}`;
-  }
-
-  return { ...base, message: msg };
+  return { ...base, message: polishStaffMessage(base.message) };
 }
 
 function resolveQuery(message: string, history: { role: string; content: string }[]): string {
@@ -210,6 +220,17 @@ function buildSiyaReply(
     };
   }
 
+  const metaAnswer = answerStaffMetaQuestion(text);
+  if (metaAnswer) {
+    return {
+      message: polishStaffMessage(metaAnswer),
+      chunks: [],
+      knowledgeGap: false,
+      sources: [],
+      escalationPreview: undefined,
+    };
+  }
+
   if (
     isVagueUserMessage(text) &&
     !hasRoutableIntent(text) &&
@@ -232,7 +253,7 @@ function buildSiyaReply(
   chunks = filterStaffFacingChunks(chunks, normalized);
 
   const hasStrongMatch = chunks.length > 0 && chunks[0].score >= 2;
-  const knowledgeGap = !hasStrongMatch;
+  const knowledgeGap = chunks.length === 0;
 
   const sources = chunks.slice(0, hasStrongMatch ? 2 : 3).map((c) => ({
     title: c.layerLabel ? `${c.layerLabel} · ${staffTopicLabel(c.title)}` : staffTopicLabel(c.title),
@@ -290,17 +311,16 @@ function buildSiyaReply(
     msg += `\n\n**People to try:** ${contacts}`;
   }
 
-  const escalationPreview =
-    knowledgeGap || chunks[0]?.escalate
-      ? formatEscalationForSlack({
-          question: text,
-          department: displayDepartment(routing.department),
-          task: routing.task,
-          escalateTo: escalateOwner,
-          sourceTitles: sources.map((s) => s.title),
-          followUps: showFollowUps ? routing.followUpQuestions : undefined,
-        })
-      : undefined;
+  const escalationPreview = knowledgeGap
+    ? formatEscalationForSlack({
+        question: text,
+        department: displayDepartment(routing.department),
+        task: routing.task,
+        escalateTo: escalateOwner,
+        sourceTitles: sources.map((s) => s.title),
+        followUps: showFollowUps ? routing.followUpQuestions : undefined,
+      })
+    : undefined;
 
   const showRouting =
     routing.confidence === "high" ||
