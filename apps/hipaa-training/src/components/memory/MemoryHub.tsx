@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   fetchRecentMemory,
   fetchWeekInReview,
@@ -34,6 +35,13 @@ import {
   portalTabActive,
   portalTabInactive,
 } from "@/lib/portal-ui";
+
+type MemoryTab = "way" | "policies" | "knowledge" | "memory";
+
+function parseMemoryTab(raw: string | null): MemoryTab {
+  if (raw === "policies" || raw === "knowledge" || raw === "memory" || raw === "way") return raw;
+  return "way";
+}
 
 function ImportanceBadge({ level }: { level: MemoryImportance }) {
   const styles =
@@ -69,12 +77,31 @@ function MemoryCard({ entry }: { entry: MemoryEntry }) {
 }
 
 export function MemoryHub() {
-  const [tab, setTab] = useState<"way" | "policies" | "knowledge" | "memory">("way");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const [tab, setTab] = useState<MemoryTab>(() => parseMemoryTab(searchParams.get("tab")));
   const [query, setQuery] = useState("");
   const [entries, setEntries] = useState<MemoryEntry[]>([]);
   const [week, setWeek] = useState<Awaited<ReturnType<typeof fetchWeekInReview>> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setTab(parseMemoryTab(searchParams.get("tab")));
+  }, [searchParams]);
+
+  const selectTab = useCallback(
+    (next: MemoryTab) => {
+      setTab(next);
+      const params = new URLSearchParams(searchParams.toString());
+      if (next === "way") params.delete("tab");
+      else params.set("tab", next);
+      const qs = params.toString();
+      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+    },
+    [pathname, router, searchParams],
+  );
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -134,7 +161,7 @@ export function MemoryHub() {
           <button
             key={id}
             type="button"
-            onClick={() => setTab(id)}
+            onClick={() => selectTab(id)}
             className={tab === id ? portalTabActive : portalTabInactive}
           >
             {label}

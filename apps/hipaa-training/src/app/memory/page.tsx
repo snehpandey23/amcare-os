@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { MemoryHub } from "@/components/memory/MemoryHub";
 import { isPortalMemoryEnabled } from "@/lib/trainingConfig";
@@ -14,5 +14,9 @@ export default function MemoryPage() {
   }, [enabled, router]);
 
   if (!enabled) return null;
-  return <MemoryHub />;
+  return (
+    <Suspense fallback={<p className="p-8 text-sm text-[var(--siya-text-muted)]">Loading Memory…</p>}>
+      <MemoryHub />
+    </Suspense>
+  );
 }
