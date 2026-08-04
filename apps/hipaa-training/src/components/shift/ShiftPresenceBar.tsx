@@ -8,9 +8,18 @@ import { PRESENCE_EMOJI, PRESENCE_LABEL } from "@/lib/shift-presence";
 import { buildShiftDaySummary } from "@/lib/shift-day-summary";
 import { EndShiftModal } from "@/components/shift/EndShiftModal";
 import { ShiftHandoffModal } from "@/components/ops/ShiftHandoffModal";
+import {
+  portalBtnGhostSm,
+  portalBtnNavySm,
+  portalStatusInfoPill,
+  portalStatusSuccessBox,
+  portalStatusSuccessText,
+  portalStatusWarnBox,
+  portalStatusWarnText,
+} from "@/lib/portal-ui";
 
 function btnClass(extra?: string) {
-  return `shrink-0 rounded-lg border border-[var(--siya-border)] px-2.5 py-1.5 text-[11px] font-medium text-[var(--siya-text-secondary)] hover:bg-[var(--siya-bg-subtle)] ${extra ?? ""}`;
+  return `${portalBtnGhostSm} shrink-0 px-2.5 py-1.5 text-[11px] ${extra ?? ""}`;
 }
 
 export function ShiftPresenceBar({ onEndShift }: { onEndShift?: () => void }) {
@@ -36,7 +45,7 @@ export function ShiftPresenceBar({ onEndShift }: { onEndShift?: () => void }) {
     return (
       <button
         type="button"
-        className="shrink-0 rounded-lg bg-[var(--siya-primary)] px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-[var(--siya-primary-hover)]"
+        className={`${portalBtnNavySm} shrink-0`}
         onClick={() => void startShift("morning")}
       >
         Start shift
@@ -56,16 +65,16 @@ export function ShiftPresenceBar({ onEndShift }: { onEndShift?: () => void }) {
 
   const pill =
     presence === "working"
-      ? "bg-emerald-50 text-emerald-800 ring-emerald-200"
+      ? `${portalStatusSuccessBox} ${portalStatusSuccessText}`
       : presence === "break"
-        ? "bg-amber-50 text-amber-900 ring-amber-200"
-        : "bg-[var(--siya-status-info-bg)] text-[var(--siya-status-info-text)] ring-[var(--siya-status-info-border)]";
+        ? `${portalStatusWarnBox} ${portalStatusWarnText}`
+        : portalStatusInfoPill;
 
   return (
     <>
       <div className="flex max-w-none flex-nowrap items-center justify-end gap-1.5">
         <span
-          className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ring-1 ring-inset ${pill}`}
+          className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ${pill}`}
           title="Self-declared — not detected from keyboard or mouse"
         >
           {PRESENCE_EMOJI[presence]} {PRESENCE_LABEL[presence]}

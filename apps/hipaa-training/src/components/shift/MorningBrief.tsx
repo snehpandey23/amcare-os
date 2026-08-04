@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { FocusItem } from "@/lib/my-day";
 import type { LearningPick } from "@/lib/my-day";
 import { reflectionPromptForToday } from "@/lib/my-day";
+import { portalBtnGhostSm, portalCapsLabel, portalH2, portalH3, portalSection } from "@/lib/portal-ui";
 
 export function MorningBrief({
   firstName,
@@ -19,26 +20,22 @@ export function MorningBrief({
   const priorities = focus.filter((f) => !f.done).slice(0, 5);
 
   return (
-    <section className="rounded-2xl border-2 border-[var(--siya-primary)]/20 bg-gradient-to-b from-white to-[var(--siya-bg-subtle)]/60 p-5 shadow-[var(--siya-shadow)]">
+    <section className={`${portalSection} border-2 border-[var(--siya-primary)]/20`}>
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-accent)]">Morning brief</p>
-          <h2 className="font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--siya-primary)]">
+          <p className={`${portalCapsLabel} text-[var(--siya-accent)]`}>Morning brief</p>
+          <h2 className={portalH2}>
             {firstName ? `Good to see you, ${firstName}.` : "Your day at a glance"}
           </h2>
         </div>
-        <button
-          type="button"
-          onClick={onDismiss}
-          className="rounded-lg border border-[var(--siya-border)] px-3 py-1 text-xs font-medium"
-        >
+        <button type="button" onClick={onDismiss} className={portalBtnGhostSm}>
           Into My day
         </button>
       </div>
 
       <div className="mt-4 grid gap-4 md:grid-cols-2">
         <div>
-          <h3 className="text-xs font-semibold text-[var(--siya-primary)]">Today&apos;s priorities</h3>
+          <h3 className={portalH3}>Today&apos;s priorities</h3>
           <ul className="mt-2 space-y-1 text-sm">
             {priorities.length ? (
               priorities.map((f) => (
