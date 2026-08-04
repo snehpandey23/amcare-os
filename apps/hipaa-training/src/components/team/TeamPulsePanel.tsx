@@ -7,6 +7,17 @@ import { isPortalAdmin } from "@/lib/portal-role";
 import { fetchTeamPulse, type TeamPulse, type TeamPulseMember } from "@/lib/team-pulse-api";
 import type { PresenceStatus } from "@/lib/shift-api";
 import { PRESENCE_EMOJI } from "@/lib/shift-presence";
+import {
+  portalBtnGhostSm,
+  portalH3,
+  portalSectionCompact,
+  portalStatusErrorText,
+  portalStatusInfoPill,
+  portalStatusSuccessBox,
+  portalStatusSuccessText,
+  portalStatusWarnBox,
+  portalStatusWarnText,
+} from "@/lib/portal-ui";
 
 function displayName(m: TeamPulseMember): string {
   return m.name?.trim() || m.email.split("@")[0] || m.email;
@@ -51,12 +62,10 @@ export function TeamPulsePanel({ compact = false, className = "" }: TeamPulsePan
   if (!authReady || !user) return null;
 
   return (
-    <section
-      className={`rounded-2xl border border-[var(--siya-border)] bg-white/90 p-4 shadow-[var(--siya-shadow)] sm:p-5 ${className}`}
-    >
+    <section className={`${portalSectionCompact} ${className}`}>
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
-          <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Team today</h2>
+          <h2 className={portalH3}>Team today</h2>
           <p className="mt-0.5 text-[11px] text-[var(--siya-text-muted)]">
             Who is on shift and what is assigned for the ops day{pulse ? ` (${pulse.timezone}, ${pulse.date})` : ""}.
             Refreshes every 45s.
@@ -69,11 +78,7 @@ export function TeamPulsePanel({ compact = false, className = "" }: TeamPulsePan
         </div>
         <div className="flex flex-wrap items-center gap-2">
           {!compact ? (
-            <button
-              type="button"
-              className="rounded-lg border border-[var(--siya-border)] px-3 py-1.5 text-xs font-medium hover:bg-[var(--siya-bg-subtle)]"
-              onClick={() => void load()}
-            >
+            <button type="button" className={portalBtnGhostSm} onClick={() => void load()}>
               Refresh
             </button>
           ) : (
@@ -82,31 +87,28 @@ export function TeamPulsePanel({ compact = false, className = "" }: TeamPulsePan
             </Link>
           )}
           {user && isPortalAdmin(user.role) ? (
-            <Link
-              href="/admin/team"
-              className="rounded-lg border border-[var(--siya-border)] px-3 py-1.5 text-xs font-medium text-[var(--siya-accent)] hover:bg-[var(--siya-bg-subtle)]"
-            >
+            <Link href="/admin/team" className={`${portalBtnGhostSm} text-[var(--siya-accent)]`}>
               Admin
             </Link>
           ) : null}
         </div>
       </div>
 
-      {error ? <p className="mt-3 text-xs text-red-600">{error}</p> : null}
+      {error ? <p className={`mt-3 text-xs ${portalStatusErrorText}`}>{error}</p> : null}
 
       {pulse ? (
         <>
           <div className="mt-3 flex flex-wrap gap-2 text-xs">
-            <span className="rounded-lg bg-emerald-50 px-2.5 py-1.5 text-emerald-900">
+            <span className={`rounded-lg px-2.5 py-1.5 ${portalStatusSuccessBox} ${portalStatusSuccessText}`}>
               🟢 Working: <strong>{pulse.live.working}</strong>
             </span>
-            <span className="rounded-lg border border-[var(--siya-status-info-border)] bg-[var(--siya-status-info-bg)] px-2.5 py-1.5 text-[var(--siya-status-info-text)]">
+            <span className={portalStatusInfoPill}>
               🎯 Focus: <strong>{pulse.live.inFocus}</strong>
             </span>
-            <span className="rounded-lg bg-amber-50 px-2.5 py-1.5 text-amber-950">
+            <span className={`rounded-lg px-2.5 py-1.5 ${portalStatusWarnBox} ${portalStatusWarnText}`}>
               ☕ Break: <strong>{pulse.live.onBreak}</strong>
             </span>
-            <span className="rounded-lg bg-[var(--siya-bg-subtle)] px-2.5 py-1.5">
+            <span className="rounded-lg bg-[var(--siya-bg-subtle)] px-2.5 py-1.5 text-[var(--siya-text-secondary)]">
               ⚫ Off shift: <strong>{pulse.live.offShift}</strong>
             </span>
           </div>

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { fetchShiftHandoffs, type ShiftHandoffRecord } from "@/lib/ops-coordination-api";
+import { portalH3, portalSectionCompact, portalStatusErrorText } from "@/lib/portal-ui";
 
 export function ShiftHandoffFeed({ compact = false }: { compact?: boolean }) {
   const [handoffs, setHandoffs] = useState<ShiftHandoffRecord[]>([]);
@@ -29,13 +30,13 @@ export function ShiftHandoffFeed({ compact = false }: { compact?: boolean }) {
     return <p className="text-xs text-[var(--siya-text-muted)]">Loading handoffs…</p>;
   }
 
-  if (error) return <p className="text-xs text-red-600">{error}</p>;
+  if (error) return <p className={`text-xs ${portalStatusErrorText}`}>{error}</p>;
 
   const shown = compact ? handoffs.slice(0, 5) : handoffs;
 
   return (
-    <section className="rounded-2xl border border-[var(--siya-border)] bg-white/90 p-4 sm:p-5">
-      <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Shift handoffs today</h2>
+    <section className={portalSectionCompact}>
+      <h2 className={portalH3}>Shift handoffs today</h2>
       <p className="mt-0.5 text-[11px] text-[var(--siya-text-muted)]">
         Notes left when teammates ended shift — team-visible (IST ops day).
       </p>
