@@ -20,6 +20,7 @@ import {
 } from "@/lib/sop-builder-api";
 import type { SopTemplateRecord } from "@/lib/tasks-types";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
+import { portalCard, portalH1, portalLinkBack, portalPage } from "@/lib/portal-ui";
 
 type Tab = "templates" | "review";
 
@@ -104,12 +105,12 @@ export function TaskTemplatesAdmin() {
   if (!user || !isPortalAdmin(user.role)) return null;
 
   return (
-    <div className="mx-auto max-w-3xl space-y-8 px-4 py-8 md:px-6">
+    <div className={`${portalPage} space-y-8`}>
       <header>
-        <Link href="/admin/tasks" className="text-sm text-[var(--siya-accent)] hover:underline">
+        <Link href="/admin/tasks" className={portalLinkBack}>
           ← Task board
         </Link>
-        <h1 className="mt-2 text-2xl font-semibold text-[var(--siya-primary)]">SOP template manager</h1>
+        <h1 className={`mt-2 ${portalH1}`}>SOP template manager</h1>
         <p className="mt-1 text-sm text-[var(--siya-text-muted)]">Each template generates checklist tasks for one assigned person.</p>
         <Link
           href="/memory/knowledge/sop-builder"
@@ -142,7 +143,7 @@ export function TaskTemplatesAdmin() {
       {tab === "review" ? (
         <div className="space-y-6">
           {submitted.length > 0 ? (
-            <section className="rounded-xl border bg-white p-4">
+            <section className={portalCard}>
               <h2 className="text-sm font-semibold">Submitted AI drafts</h2>
               <ul className="mt-3 space-y-2">
                 {submitted.map((s) => (
@@ -168,7 +169,7 @@ export function TaskTemplatesAdmin() {
           )}
 
           {feedback.length > 0 ? (
-            <section className="rounded-xl border bg-white p-4">
+            <section className={portalCard}>
               <h2 className="text-sm font-semibold">Checklist step flags</h2>
               <ul className="mt-3 space-y-4">
                 {[...feedbackByTemplate.entries()].map(([templateId, items]) => (
@@ -204,7 +205,7 @@ export function TaskTemplatesAdmin() {
         </div>
       ) : (
         <>
-          <form onSubmit={onCreate} className="space-y-3 rounded-xl border bg-white p-5">
+          <form onSubmit={onCreate} className={`space-y-3 ${portalCard}`}>
             <h2 className="text-sm font-semibold">Create template (manual)</h2>
             <TrainingInput required placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
             <TrainingInput placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
@@ -244,7 +245,7 @@ export function TaskTemplatesAdmin() {
 
           <ul className="space-y-4">
             {templates.map((t) => (
-              <li key={t.id} className="rounded-xl border bg-white p-4">
+              <li key={t.id} className={portalCard}>
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div>
                     <p className="font-semibold">{t.title}</p>

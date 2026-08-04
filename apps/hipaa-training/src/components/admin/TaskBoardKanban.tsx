@@ -27,6 +27,7 @@ import {
 import type { TaskRecord, TaskStatus } from "@/lib/tasks-types";
 import { boardColumn, formatDueTime, priorityBadgeClass } from "@/lib/tasks-types";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
+import { portalBtnGhostSm, portalH1, portalLinkBack } from "@/lib/portal-ui";
 
 const COLS: { id: TaskStatus; label: string }[] = [
   { id: "todo", label: "To do" },
@@ -202,14 +203,14 @@ export function TaskBoardKanban() {
     <div className="mx-auto max-w-6xl space-y-6 px-4 py-8 md:px-6">
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold text-[var(--siya-primary)]">Task board</h1>
+          <h1 className={portalH1}>Task board</h1>
           <p className="mt-1 text-sm text-[var(--siya-text-muted)]">Drag cards to update status.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <button type="button" className={trainingLinkPrimaryClass} onClick={() => setAssignOpen(true)}>
             Assign task
           </button>
-          <Link href="/admin/task-templates" className="rounded-lg border px-4 py-2 text-sm font-semibold">
+          <Link href="/admin/task-templates" className={portalBtnGhostSm}>
             SOP templates
           </Link>
         </div>

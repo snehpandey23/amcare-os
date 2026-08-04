@@ -19,6 +19,7 @@ import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/t
 import { getStoredToken } from "@/lib/authStorage";
 import { buildInviteCopyText } from "@/lib/invite-email";
 import { downloadShiftAttendanceCsv } from "@/lib/portal-analytics";
+import { portalBtnGhostSm, portalH1, portalH2, portalSection } from "@/lib/portal-ui";
 
 const LOGIN_URL =
   typeof window !== "undefined"
@@ -235,7 +236,7 @@ export function TeamAdminPanel() {
     <div className="mx-auto max-w-6xl space-y-6 px-4 py-8 md:px-6">
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="font-[family-name:var(--font-poppins)] text-2xl font-semibold text-[var(--siya-primary)]">
+          <h1 className={portalH1}>
             Team health
           </h1>
           <p className="mt-1 max-w-xl text-sm text-[var(--siya-text-muted)]">
@@ -244,16 +245,10 @@ export function TeamAdminPanel() {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <Link
-            href="/admin/tasks"
-            className="rounded-lg border border-[var(--siya-border)] px-4 py-2 text-sm font-semibold text-[var(--siya-accent)] hover:bg-[var(--siya-bg-subtle)]"
-          >
+          <Link href="/admin/tasks" className={`${portalBtnGhostSm} text-[var(--siya-accent)]`}>
             Task board
           </Link>
-          <Link
-            href="/admin/sop-review"
-            className="rounded-lg border border-[var(--siya-border)] px-4 py-2 text-sm font-semibold text-[var(--siya-accent)] hover:bg-[var(--siya-bg-subtle)]"
-          >
+          <Link href="/admin/sop-review" className={`${portalBtnGhostSm} text-[var(--siya-accent)]`}>
             SOP review
           </Link>
           <button
@@ -404,10 +399,10 @@ export function TeamAdminPanel() {
       ) : null}
 
       {shiftDashboard ? (
-        <section className="rounded-xl border border-[var(--siya-border)] bg-white p-5 shadow-[var(--siya-shadow)]">
+        <section className={portalSection}>
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
-              <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Ops dashboard</h2>
+              <h2 className={portalH2}>Ops dashboard</h2>
               <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
                 Live presence + today&apos;s activity ({shiftDashboard.timezone}, {shiftDashboard.date}). Refreshes every
                 45s.

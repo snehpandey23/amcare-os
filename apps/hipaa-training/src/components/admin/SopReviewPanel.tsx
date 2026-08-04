@@ -15,6 +15,15 @@ import {
 } from "@/lib/sop-api";
 import type { DepartmentLead, SopRecord } from "@/lib/sop-types";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
+import {
+  portalH1,
+  portalH3,
+  portalLinkBack,
+  portalPage,
+  portalSection,
+  portalStatusErrorBox,
+  portalStatusErrorText,
+} from "@/lib/portal-ui";
 
 function formatCurrentLead(lead: DepartmentLead): string {
   if (!lead.userId) return "Unassigned";
@@ -129,12 +138,12 @@ export function SopReviewPanel() {
   const assignedLeadSummary = leads.filter((l) => l.userId);
 
   return (
-    <div className="mx-auto max-w-3xl space-y-8 px-4 py-8 md:px-6">
+    <div className={`${portalPage} space-y-8`}>
       <header>
-        <Link href="/admin/team" className="text-xs font-semibold text-[var(--siya-accent)] hover:underline">
+        <Link href="/admin/team" className={portalLinkBack}>
           ← Team admin
         </Link>
-        <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-2xl font-semibold text-[var(--siya-primary)]">
+        <h1 className={`mt-2 ${portalH1}`}>
           SOP review queue
         </h1>
         <p className="mt-2 text-sm text-[var(--siya-text-secondary)]">
@@ -143,11 +152,11 @@ export function SopReviewPanel() {
       </header>
 
       {error ? (
-        <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-900">{error}</p>
+        <p className={`${portalStatusErrorBox} px-3 py-2 text-sm ${portalStatusErrorText}`}>{error}</p>
       ) : null}
 
-      <section className="rounded-2xl border border-[var(--siya-border)] bg-white p-5">
-        <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Department leads</h2>
+      <section className={portalSection}>
+        <h2 className={portalH3}>Department leads</h2>
         <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
           Choose a lead, then <strong>Save</strong>. Leads can create and edit SOPs for their department only.
         </p>
@@ -221,8 +230,8 @@ export function SopReviewPanel() {
         </ul>
       </section>
 
-      <section className="rounded-2xl border border-[var(--siya-border)] bg-white p-5">
-        <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Pending review ({queue.length})</h2>
+      <section className={portalSection}>
+        <h2 className={portalH3}>Pending review ({queue.length})</h2>
         {loading ? (
           <p className="mt-4 text-sm text-[var(--siya-text-muted)]">Loading…</p>
         ) : queue.length === 0 ? (

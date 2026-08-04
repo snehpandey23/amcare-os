@@ -1,14 +1,15 @@
 import { AdminChatReviewsPanel } from "@/components/ops/AdminChatReviewsPanel";
 import { PortalNavLink } from "@/components/training/PortalNavLink";
+import { portalH1, portalLinkBack, portalPage } from "@/lib/portal-ui";
 
 export default function AdminChatReviewsPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 md:px-6">
-      <header className="mb-6">
-        <PortalNavLink href="/admin/team" className="text-sm text-[var(--siya-accent)] hover:underline">
+    <div className={portalPage}>
+      <header className="mb-2">
+        <PortalNavLink href="/admin/team" className={portalLinkBack}>
           ← Admin
         </PortalNavLink>
-        <h1 className="mt-2 text-2xl font-semibold text-[var(--siya-primary)]">Chat reviews — team view</h1>
+        <h1 className={`mt-2 ${portalH1}`}>Chat reviews — team view</h1>
       </header>
       <AdminChatReviewsPanel />
     </div>
