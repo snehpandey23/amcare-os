@@ -1,6 +1,6 @@
 # SiyaOS Staff Portal — Design Token Consolidation (Phase 2)
 
-**Status:** In progress · My Day + Ask + Learn + **Memory** done · other sections pending  
+**Status:** In progress · My Day + Ask + Learn + Memory + Team + Admin + Shift + Chat Review + Resources done  
 **Phase 1:** Complete — see `CONSOLIDATION-AUDIT-PHASE0-AUG2026.md`
 
 ---
@@ -80,13 +80,48 @@ LMS shell (`training-ui.tsx`) already on radius tokens from earlier work.
 
 Presentation only — no SOP/LLM/data logic changes.
 
+### ✅ Team (complete)
+
+| Component | Changes |
+|-----------|---------|
+| `team/page.tsx` | `portalH1` |
+| `TeamPulsePanel.tsx` | `portalSectionCompact` + status tokens (working/break/focus) |
+| `ShiftHandoffFeed.tsx` | Compact section + error status token |
+
+### ✅ Admin (complete)
+
+| Component | Changes |
+|-----------|---------|
+| `TeamAdminPanel.tsx` | `portalH1` / section / ghost buttons |
+| `TaskBoardKanban.tsx` | `portalH1` + ghost link |
+| `SopReviewPanel.tsx` | `portalPage` / section / error status |
+| `TaskTemplatesAdmin.tsx` | `portalPage` / cards / link back |
+| `admin/chat-reviews/page.tsx` | Page shell helpers |
+
+### ✅ Shift / presence (complete)
+
+| Component | Changes |
+|-----------|---------|
+| `ShiftPresenceBar.tsx` | Presence pills → status tokens; navy/ghost buttons |
+| `MorningBrief.tsx` | `portalSection` (removed gradient) + heading helpers |
+
+### ✅ Chat Review (complete)
+
+| Component | Changes |
+|-----------|---------|
+| `chat-review/page.client.tsx` | `portalPage` / `portalH1` |
+| `ChatReviewPanel.tsx` | Cards + open/closed status tokens |
+
+### ✅ Resources (complete)
+
+| Component | Changes |
+|-----------|---------|
+| `resources/page.tsx` | Full migration off zinc/teal/`dark:` onto portal tokens |
+| `resources/[slug]/page.tsx` | Same |
+
 ### ⏳ Pending
 
-- **Team** — pulse, handoffs
-- **Admin** — task board, templates, SOP review
-- **Shift** — `ShiftPresenceBar`, `MorningBrief` gradient
-- **Chat review / ops** — mixed form inputs
-- **Resources** — legacy zinc/teal palette (`/resources/*`)
+- (none for Phase A section list)
 
 ---
 
@@ -98,4 +133,4 @@ Presentation only — no SOP/LLM/data logic changes.
 
 ---
 
-**Next:** Founder review of **Learn**, then continue with **Memory**.
+**Next:** Founder review of Phase A token rollout.
