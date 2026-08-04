@@ -4,6 +4,81 @@ import type { WorkspaceKbEntry } from "./workspace-kb.types";
 
 export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
   {
+    "id": "refill-pharmacy-staff-guidance",
+    "category": "clinical_operations",
+    "title": "Refill and pharmacy — staff guidance until full playbook",
+    "keywords": [
+      "refill",
+      "pharmacy",
+      "prescription",
+      "early refill",
+      "UDS",
+      "follow-up",
+      "controlled substance",
+      "medication not received"
+    ],
+    "body": "**Short answer from Clinical Program coverage map:** There is **not yet** a complete internal refill / pharmacy playbook for every complicated case. Staff have CSA/public policy anchors, approved message fragments, and escalation rules. **Missing** full internal SOPs for travel/early-refill exceptions, declined-refill reinstatement, and run-out vs scheduling bridge (provider only). **Staff default until full playbook is complete:** empathize → document facts in chart/Spruce → **do not promise** fees, refunds, refills, or waivers → escalate per table below. Concierge chat must not authorize clinical or billing exceptions. Use approved timing language and escalate. ### Escalation cheat sheet | If… | Escalate to | |-----|-------------| | Fees, refunds, no-show, $150/$50 charges | **Billing lead** | | Refill, withdrawal, side effects, med change, travel exception | **Provider / clinical lead** (urgent: same day) | | Severe symptoms, suicidality, patient refuses ER | **Provider immediately** + document 911 advice per CSA | | “Is CREYOS/UDS required for my program?” | **Provider** or Clinical Program (written criteria TBD) | | Angry / threatening | Supervisor + document | Never authorize refunds, fee waivers, early refills, or prescription changes in concierge chat. ### Policy anchors staff may cite (not invent) - CSA / public controlled-substance agreement: **early refills are not permitted**; lost/stolen not replaced; Rx may take **≤5 business days**; travel exception **only provider**. - Follow-up before refill: schedule follow-up **≥5 days before** next 30-day prescription due date; prescriptions may take time after required steps. - Medication not received / wants immediate refund: cite ≤5 business days + pharmacy check; **no refund promise** → Billing. ### Post-visit cadence (founder post-visit protocol) **Clock:** Days are **calendar days after the visit** unless ops defines otherwise (confirm timezone with supervisor). **Global rule — no response:** If the patient does not respond, schedule the **next follow-up reminder 10 days later** (confirm with supervisor; default: 10 days after unanswered touchpoint). | Day | Goal | |-----|------| | **Day 3** | Confirm patient **received medications**; then UDS/labs outreach if required per protocol | | **Day 10** | Med working / wellness; periodic med break **only as per doctor’s note** | | **Day 10–15** | Schedule/complete **video pill count** when CSA v2 applies; refuse → escalate provider | | **Day 15** | CREYOS on day 15 or per provider order | Do not invent med-break schedules — follow chart/note. ### Approved pharmacy / refill message fragments (use in Spruce — no PHI in Ask) **Pharmacy details request:** Could you please share your preferred pharmacy's name and full address? **Meds sent:** Your prescription has been sent to your preferred pharmacy and should be ready soon. Please call the pharmacy before you go to make sure it’s ready for pickup. **Medicine pickup check:** Were you able to swing by the pharmacy to pick up your medication? **Follow-up timing + $50 fee (controlled substance):** Follow-up should be scheduled at least **5 days before** next 30-day prescription due date; try **one week in advance**; missing follow-up may result in a **$50 fee** per controlled substance agreement. **Can staff approve an early refill for travel?** No. Escalate provider; CSA: early refills not permitted. **Patient says med ran out and wants same-day bridge?** Escalate **provider only** — no bridge/emergency refill promise in chat. **Is there a full reinstatement SOP after declined refill?** Not yet — escalate provider / clinical lead immediately (especially withdrawal). Retrieve for refill / pharmacy / early refill / med-not-received staff questions. Prefer escalation rules and approved timing language. Do **not** invent reinstatement, travel exceptions, or fee waivers. Full controlled-substance staff playbook remains a Clinical Program build item.",
+    "escalate": "Provider / clinical lead"
+  },
+  {
+    "id": "discovery-call-staff-billing",
+    "category": "operations",
+    "title": "Discovery Call — staff billing, cancel, and no-show",
+    "keywords": [
+      "Discovery Call",
+      "Meet and Greet",
+      "no-show",
+      "cancellation",
+      "refund",
+      "Carepatron",
+      "Spruce",
+      "patientsupport",
+      "$79",
+      "$10"
+    ],
+    "body": "Staff cheat sheet for **Siya Health Discovery Call** billing and attendance (also related to site “Meet & Greet” naming — align SKUs separately). Support email: **patientsupport@siya.health**. This topic is for **Discovery Call only** — not full ADHD evaluation / CSV / Klarity-booked visits (use Klarity topics for Klarity). Concierge and MAs must apply Discovery Call fee rules without waiving fees in chat or inventing refunds. ### Money | Item | Amount | |------|--------| | Total | $79 | | At booking (non-refundable) | $10 | | Due ≥1 h before visit | $69 | From Terms: remaining **$69** must be paid at least **1 hour before** the appointment. Covers an **initial evaluation and management visit only** — not emergency care. **No controlled medications** prescribed on this visit. ### Refunds / cancel (staff language — no promises) - **$10:** never refunded. - **$69:** refunded if patient cancels **≥24 h** before; kept if **<24 h** (patient charged full $79). - **Exceptions:** Billing lead only — document and escalate. ### No-show / late - No-show → **$79 forfeited**. - **Late >5 min** from start → may be documented as no-show per provider (full $79). - **One** discretionary free reschedule possible (provider) — staff do **not** grant; ask supervisor/provider. - Rebook otherwise: **full upfront** per policy. - Arrive/log in **5–10 minutes early** for check-in (Terms). ### Tech issues | Side | Action | |------|--------| | Patient (wifi, device, app) | Not Siya liability; no automatic refund — empathize, offer rebook per Billing | | Siya (platform/outage) | May free reschedule — escalate IT + Billing; email patientsupport | ### Before call Intake + telehealth consent **required** or visit may cancel with fee forfeiture. ### Clinical scope (set expectations) - Not emergency care. - **No controlled substances** prescribed on Discovery Call. - Further care = separate paid services. ### Disputes - Chargebacks → patientsupport first. - “I was on the call” disputes → document times, Zoom/telehealth logs, chart → **Billing lead**. ### Do not - Waive $10 or $79 in chat. - Promise refund without Billing. - Give medical advice or prescribe. **Is this the same as Klarity cancellation?** No. Klarity-booked visits use Klarity billing topics. Discovery Call uses this topic and patientsupport@siya.health. **Can staff grant one free reschedule after a no-show?** No. Provider discretion only; staff escalate. Cite for Discovery Call / Meet & Greet billing and no-show only. Never promise refunds. Escalate Billing lead. Do not apply these dollar amounts to Klarity or full evaluation products.",
+    "escalate": "Billing lead"
+  },
+  {
+    "id": "ma-platforms-zoho-spruce",
+    "category": "technology",
+    "title": "MA platforms — Zoho suite and Spruce how-to",
+    "keywords": [
+      "Zoho",
+      "Zoho Mail",
+      "Zoho Cliq",
+      "WorkDrive",
+      "TrueSync",
+      "Spruce",
+      "Softphone",
+      "patient messaging",
+      "access",
+      "EHR"
+    ],
+    "body": "**Audience:** Medical Assistant / Clinical Program Manager (Amcare → Siya Health). Platforms overview for telemedicine remote support. Additional chapters (Carepatron, Klarity, Rupa) add when pasted. **This topic does not define an IT access-request workflow** — escalate Technology / supervisor for login provisioning. MAs need correct Zoho vs Spruce boundaries (internal vs patient PHI) and basic Spruce how-to. ### 1. Zoho suite Internal comms, storage, admin — **not** for patient PHI in Mail/Cliq. #### Zoho Mail - Official email only; assigned work ID; no personal email for work. #### Zoho Cliq - Team chat; **Remote Work** status on at shift start, off at end; respond promptly in hours. #### Zoho WorkDrive Under **Shared With Me**, maintain: | Folder | Contents | |--------|----------| | Personal | CV, marksheets, HR docs | | Tasks | Assignments | | Meeting Notes | Meeting notes | Create docs: **Writer** (text), **Sheet** (spreadsheets) via New menu. Label files clearly. #### Zoho TrueSync - Sync with WorkDrive; **EHR/PHI only in TrueSync/WorkDrive** — not desktop/personal drives. - Delete completed PHI files from WorkDrive/TrueSync when done (HIPAA hygiene). - Ref: https://www.zoho.com/workdrive/truesync.html Company Memory path: `Common Folder/SiyaOS/` (team KB — separate from patient PHI). ### 2. Spruce **Purpose:** HIPAA-compliant **patient** messaging. **Primary uses:** - Appointments; CREYOS; UDS comms; patient Q&A; calls to patients/pharmacies - Scheduled sends; internal reminders - Patient invite; **Pages** tab tasks **Rules:** - All patient comms via Spruce — not personal SMS/email/social. - Professional, timely responses. #### Spruce how-to (summary) | Task | Steps | |------|--------| | **Call settings** | Settings → Call Settings → Desktop & Web: **Softphone** (not Proxy) → Save | | **Place call** | New → Call → number → Call | | **Schedule message** | Chat → type → clock icon → date/time → Schedule | | **Internal note / reminder** | Internal Note → assign/mention → optional reminder time | | **Invite patient** | New → Invite Patient → name + phone or email → Send | | **Pages** | Left panel → Pages → complete → mark resolved | **How do I request new system access?** Not documented in this topic. Escalate Technology / supervisor. Do not invent provisioning steps. **Can I put PHI in Zoho Mail or Cliq?** No. Patient PHI stays in approved clinical tools; WorkDrive/TrueSync hygiene rules above for files. Retrieve for Zoho / Spruce how-to and PHI channel rules. For “I can’t log in” or access provisioning, escalate Technology — do not invent access workflows.",
+    "escalate": "Technology / supervisor"
+  },
+  {
+    "id": "ma-onboarding-field-lessons",
+    "category": "hr",
+    "title": "MA onboarding — field lessons (systems and role clarity)",
+    "keywords": [
+      "onboarding",
+      "MA",
+      "Medical Assistant",
+      "Day-1",
+      "Klarity",
+      "Spruce",
+      "Carepatron",
+      "Zoho",
+      "CREYOS",
+      "Rupa",
+      "orientation"
+    ],
+    "body": "Operational field lessons for **Medical Assistant / Concierge** Day-1 orientation. Distilled from staff work-experience reflection (2026-07-26). This is **not** a complete onboarding handbook — improve Day-1 orientation from real hire experience; escalate HR / Clinical Program for full schedule and SOW scope. New hires hit tool surprise and title/expectation mismatch. Orientation must set systems map and role clarity early. ### Problem: tool surprise - Week 1 training may cover only **Klarity + Spruce**. - Full role requires **~5–6 applications** (CREYOS, Rupa, Carepatron, Zoho, plus chart/scheduling rules). - **Fix:** Single **Day-1 systems map** in orientation; link WorkDrive `operations/WORKFLOWS-INDEX.md` and product manual Ch.1 (Zoho / Spruce platforms topic in Ask). ### Problem: title vs expectations - Hires may expect **Clinical Dietitian** (or other clinical title) but role is **Medical Assistant / Concierge Specialist** with scope per Clinical Program Manager / MA SOW. - **Fix:** Offer letter + Day-1 verbal: MA = coordination & protocol, **not** independent clinical nutrition/diet prescribing unless licensed and scoped. ### Role clarity over time - Responsibilities may expand (e.g. Klarity booking, Spruce independently) as trust grows. - Document **escalation boundaries** early (MA key competencies; git KB `escalation-pathways`). ### Culture note (internal) - Organization is **still developing**; workflows will change — use WorkDrive `operations/WORKFLOW-CONFLICTS.md` and suggest updates via supervisor. - **Future programs** (e.g. structured diet/weight therapeutic offering) require **clinical + product approval** before staff assume duties — route ideas to Leadership, not ad hoc patient promises. ### Personal reflections Individual career reflections belong in **1:1 / HR file**, not Company Memory. Operational bullets above are the durable ingest. **Is there a full step-by-step onboarding SOP?** Not in this topic. Use Day-1 systems map + SOW + escalate HR / Clinical Program. Full MA training schedules remain in WorkDrive drafts until promoted. Use for MA / new-hire orientation questions about which tools exist and role vs clinical title. Do not invent PTO, reimbursement, or clinical protocols from this topic.",
+    "escalate": "HR / Clinical Program"
+  },
+  {
     "id": "escalation-pathways",
     "category": "operations",
     "title": "Escalation pathways (all departments)",

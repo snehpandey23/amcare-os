@@ -15,6 +15,7 @@ Daily workflows, escalations, billing coordination, and cross-department handoff
 | Klarity pre-visit (payment + intake) | `klarity-previsit-checklist` |
 | Klarity billing / cancel / chargebacks | `klarity-billing-cancellation` |
 | Klarity patient consents | `klarity-patient-consents` |
+| Discovery Call staff billing / no-show | `discovery-call-staff-billing` |
 
 ## Klarity (Hello Klarity) pack
 
