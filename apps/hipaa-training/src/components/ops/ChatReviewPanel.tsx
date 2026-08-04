@@ -9,6 +9,15 @@ import {
   type ChatReviewStatus,
 } from "@/lib/ops-coordination-api";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
+import {
+  portalCard,
+  portalH3,
+  portalStatusErrorText,
+  portalStatusSuccessBox,
+  portalStatusSuccessText,
+  portalStatusWarnBox,
+  portalStatusWarnText,
+} from "@/lib/portal-ui";
 
 export function ChatReviewPanel() {
   const [reviews, setReviews] = useState<ChatReviewRecord[]>([]);
@@ -76,8 +85,8 @@ export function ChatReviewPanel() {
         Log each patient chat you review today. Use initials or internal IDs — not full names or chart details.
       </p>
 
-      <form onSubmit={onAdd} className="space-y-2 rounded-xl border border-[var(--siya-border)] bg-white p-4">
-        <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Add review</h2>
+      <form onSubmit={onAdd} className={`space-y-2 ${portalCard}`}>
+        <h2 className={portalH3}>Add review</h2>
         <TrainingInput
           required
           placeholder="Patient ID / initials"
@@ -119,7 +128,7 @@ export function ChatReviewPanel() {
         ))}
       </div>
 
-      {error ? <p className="text-sm text-red-600">{error}</p> : null}
+      {error ? <p className={`text-sm ${portalStatusErrorText}`}>{error}</p> : null}
       {loading ? <p className="text-xs text-[var(--siya-text-muted)]">Loading…</p> : null}
 
       <ul className="space-y-2">
@@ -127,7 +136,7 @@ export function ChatReviewPanel() {
           <li
             key={r.id}
             className={`rounded-xl border p-3 text-sm ${
-              r.status === "open" ? "border-amber-200 bg-amber-50/40" : "border-[var(--siya-border)] bg-white"
+              r.status === "open" ? portalStatusWarnBox : "border-[var(--siya-border)] bg-white"
             }`}
           >
             <div className="flex flex-wrap items-start justify-between gap-2">
@@ -135,13 +144,15 @@ export function ChatReviewPanel() {
                 <p className="font-semibold text-[var(--siya-primary)]">{r.patientIdentifier}</p>
                 {r.notes ? <p className="mt-1 text-xs text-[var(--siya-text-secondary)]">{r.notes}</p> : null}
                 {r.errorNotes ? (
-                  <p className="mt-1 text-xs text-red-800">Errors: {r.errorNotes}</p>
+                  <p className={`mt-1 text-xs ${portalStatusErrorText}`}>Errors: {r.errorNotes}</p>
                 ) : null}
               </div>
               <button
                 type="button"
                 className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase ${
-                  r.status === "open" ? "bg-amber-100 text-amber-900" : "bg-emerald-50 text-emerald-900"
+                  r.status === "open"
+                    ? `${portalStatusWarnBox} ${portalStatusWarnText}`
+                    : `${portalStatusSuccessBox} ${portalStatusSuccessText}`
                 }`}
                 onClick={() => void toggleStatus(r)}
               >
