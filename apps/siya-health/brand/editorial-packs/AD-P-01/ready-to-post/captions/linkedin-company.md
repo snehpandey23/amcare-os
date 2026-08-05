@@ -8,7 +8,7 @@ The same movements show up with anxiety, sleep disruption, caffeine, and habit. 
 
 Practical step: if the pattern is lifelong and impairing, take a validated screener — then talk to a clinician. Don't diagnose from a fidget list.
 
-https://siya.health/adhd-screening  
-https://siya.health/adhd-care
+Talk to a Clinician → https://siya.health/adhd-screening  
+(215) 445-1244 · www.siya.health
 
 Educational only.

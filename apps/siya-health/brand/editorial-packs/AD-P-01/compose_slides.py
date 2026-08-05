@@ -1,4 +1,17 @@
 #!/usr/bin/env python3
+"""DEPRECATED — v1 cream photo-band compositor (AD-S-01 era).
+
+AD-P-01 v2 uses the PE-B-01 HTML/CSS theme:
+  bash design/render.sh
+
+Kept only as a historical reference; do not ship outputs from this script.
+"""
+raise SystemExit(
+    "AD-P-01 v2: use bash design/render.sh (PE-B-01 theme). "
+    "This Pillow compositor is deprecated."
+)
+
+# --- legacy below (unreachable) ---
 """Compose AD-P-01 Instagram carousel slides (1080×1350) to match Siya ADHD pack chrome."""
 
 from __future__ import annotations

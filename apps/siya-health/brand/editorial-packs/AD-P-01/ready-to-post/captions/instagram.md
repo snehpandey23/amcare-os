@@ -8,7 +8,8 @@ Leg bounce. Restless sleep. Fidgeting that helps you focus. The body often shows
 
 If the pattern is lifelong and getting in the way, take a validated screener — then talk to a clinician. Don't diagnose from a fidget list.
 
-Start here: https://siya.health/adhd-screening
+Talk to a Clinician: https://siya.health/adhd-screening
+(215) 445-1244 · www.siya.health
 
 Educational only. Not a diagnosis.
 
