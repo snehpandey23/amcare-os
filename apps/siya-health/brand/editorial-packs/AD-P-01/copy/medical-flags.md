@@ -1,0 +1,1 @@
+# See ../medical-flags.md
