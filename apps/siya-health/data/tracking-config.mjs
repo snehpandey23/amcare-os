@@ -9,3 +9,10 @@ export const TRACKING = {
   /** Reference only — managed inside GTM, not installed as raw gtag on pages */
   GOOGLE_ADS_ID: 'AW-17553537456',
 };
+
+/**
+ * Inline JS (minified) — skip GTM load on local/dev hosts so lab traffic
+ * does not pollute production GA4 (G-9WTQWHCTFT).
+ */
+export const GTM_DEV_HOST_GUARD =
+  "var h=(w.location&&w.location.hostname)||'';if(h==='localhost'||h==='127.0.0.1'||h==='[::1]'||/\\.local$/.test(h))return;";

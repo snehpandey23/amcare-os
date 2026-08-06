@@ -5,6 +5,16 @@
 (function () {
   'use strict';
 
+  var host = (window.location && window.location.hostname) || '';
+  if (
+    host === 'localhost' ||
+    host === '127.0.0.1' ||
+    host === '[::1]' ||
+    /\.local$/.test(host)
+  ) {
+    return;
+  }
+
   window.dataLayer = window.dataLayer || [];
 
   var DEBUG = window.location.search.indexOf('debug_tracking=1') !== -1;

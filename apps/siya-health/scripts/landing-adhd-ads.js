@@ -4,11 +4,25 @@
 (function () {
   'use strict';
 
-  var LANDING_PATH = '/adult-adhd-screening-california';
+  var host = (window.location && window.location.hostname) || '';
+  if (
+    host === 'localhost' ||
+    host === '127.0.0.1' ||
+    host === '[::1]' ||
+    /\.local$/.test(host)
+  ) {
+    return;
+  }
+
+  var LANDING_PATHS = {
+    '/adult-adhd-screening-california': true,
+    '/adult-adhd-screening-texas': true,
+  };
   var path = window.location.pathname.replace(/\/$/, '') || '/';
   var isLanding =
-    path === LANDING_PATH ||
+    LANDING_PATHS[path] ||
     path.endsWith('/adult-adhd-screening-california.html') ||
+    path.endsWith('/adult-adhd-screening-texas.html') ||
     document.body.classList.contains('siya-landing-page');
 
   if (!isLanding) return;
