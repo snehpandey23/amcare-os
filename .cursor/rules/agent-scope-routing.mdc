@@ -12,7 +12,7 @@ Do not mix these in one task unless the user explicitly connects them.
 | **Staff portal**, Siya Assist, My day, tasks, admin, auth API | `apps/hipaa-training/`, `integrations/hipaa-training-api/`, `docs/siyaos-knowledge-base/` | Vercel: `siya-staff-assist` + `siya-staff-auth-api` (see `staff-portal-vercel-deploy.mdc`) |
 | **Internal bot (Assist)** product shape | `siya-assist-product-alignment.mdc` | Chat + KB + escalation — not ERP/marketing OS |
 | **Patient site**, SEO, answers | `apps/siya-health/` (HTML/KB) | Site deploy when requested |
-| **Social / carousel / Visual OS / statics / BG tokens** | `apps/siya-health/brand/` (`VISUAL-OS.md`, `scripts/compose_*.py`, `editorial-packs/`, `statics/`) | Team mirror: Zoho WorkDrive `Siya Knowledge Editorial/` (`zoho-workdrive-team.mdc`) — **not** staff portal |
+| **Social / carousel / Visual OS / statics / BG tokens** | `apps/siya-health/brand/` — **`BRAND-STYLE-LOCK.md` first**, then `VISUAL-OS.md` v2.1, `VISUAL-OS-TEMPLATES.md`, `scripts/compose_*.py`, `editorial-packs/`, `statics/` | Team mirror: Zoho WorkDrive `Siya Knowledge Editorial/` (`zoho-workdrive-team.mdc`) — **not** staff portal. Ignore WorkDrive files that still list plum `#8D3A78`. |
 
 ## Staff portal — Executive Workspace (handoff)
 

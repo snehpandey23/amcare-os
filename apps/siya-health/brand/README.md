@@ -6,11 +6,13 @@ Ratified: July 2026
 Status: Active Constitution + Creative Factory (Phase 2)
 ```
 
-**Spine:** [`01-BRAND-OS.md`](./01-BRAND-OS.md) · [`02-VISUAL-LANGUAGE.md`](./02-VISUAL-LANGUAGE.md) · [`04-CREATIVE-SYSTEM.md`](./04-CREATIVE-SYSTEM.md)  
+**Spine:** [`AGENT-BOOTSTRAP.md`](./AGENT-BOOTSTRAP.md) · [`BRAND-STYLE-LOCK.md`](./BRAND-STYLE-LOCK.md) · [`01-BRAND-OS.md`](./01-BRAND-OS.md) · [`02-VISUAL-LANGUAGE.md`](./02-VISUAL-LANGUAGE.md) · [`04-CREATIVE-SYSTEM.md`](./04-CREATIVE-SYSTEM.md) · [`VISUAL-OS.md`](./VISUAL-OS.md)  
 **Factory:** [`creative-registry/`](./creative-registry/) · [`prompts/`](./prompts/) · [`research/`](./research/) (Phase 3 stub)  
 **Anti-patterns:** [`ANTI-PATTERNS.md`](./ANTI-PATTERNS.md)  
 **Changelog:** [`CHANGELOG.md`](./CHANGELOG.md)  
 **Live demonstrations (not owners of philosophy):** Homepage (`/`) · ADHD Care (`/adhd-care`)
+
+**Agents (desktop / mobile / cloud):** start at `AGENT-BOOTSTRAP.md` — do not use `INSTAGRAM-STATIC.md` alone.
 
 This folder is Siya’s **operating system for creative and patient-facing work** — writing, photography, UX, advertising, newsletters, LinkedIn, presentations, video, and future products.
 

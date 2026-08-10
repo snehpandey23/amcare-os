@@ -12,14 +12,17 @@ Fill the schema first. Then run the matching prompt. Do not invent a new mega-pr
 ```text
 You are producing a Siya Health creative.
 
-Load and obey (do not rewrite):
-1. brand/01-BRAND-OS.md
-2. brand/02-VISUAL-LANGUAGE.md
-3. brand/ANTI-PATTERNS.md
-4. brand/04-CREATIVE-SYSTEM.md
-5. docs/EDITORIAL-STYLE-GUIDE.md
-6. docs/SIYA-STANDARDS.md / data/site-standards.mjs for CTAs and pricing
-7. brand/photography/ for image choice
+Load and obey FIRST (do not rewrite; pixels fail-closed on these):
+0. brand/BRAND-STYLE-LOCK.md  ← CANONICAL tokens (navy #001878 · magenta #D81088 · cream #F4EFE7 · Georgia)
+   NEVER plum #8D3A78 · NEVER brown ink · NEVER hard-seam L · NEVER freehand GenerateImage as final frame
+1. brand/VISUAL-OS.md + brand/VISUAL-OS-TEMPLATES.md
+2. brand/01-BRAND-OS.md
+3. brand/02-VISUAL-LANGUAGE.md (site philosophy — social pixels still follow BRAND-STYLE-LOCK)
+4. brand/ANTI-PATTERNS.md
+5. brand/04-CREATIVE-SYSTEM.md
+6. docs/EDITORIAL-STYLE-GUIDE.md
+7. docs/SIYA-STANDARDS.md / data/site-standards.mjs for CTAs and pricing
+8. brand/photography/ for image choice
 
 Rules:
 - One Intent only.
@@ -28,7 +31,35 @@ Rules:
 - Never invent statistics; use homepage-trust-metrics.mjs only.
 - Screening ≠ diagnosis ≠ guaranteed prescribing.
 - Calm confidence; no fake urgency; no fear marketing.
+- **Knowledge carousel A-03 lean lock (2026-08-06):** on-frame = headline + one sub-headline only.
+  Sub-headline IS the whole message (not a teaser). Teaching depth → caption. No body/bullets/
+  takeaway cards unless the brief explicitly requests `--dense`.
+- Final social PNG = brand/scripts/compose_*.py (GenerateImage = source photo only).
 - Output Creative Schema YAML + channel copy + visual direction.
+```
+
+---
+
+## K — Knowledge carousel (A-03)
+
+**File pattern:** Knowledge packs · `VISUAL-OS-TEMPLATES.md` → `A-03`
+
+```text
+{{UNIVERSAL_PREAMBLE}}
+
+Intent: Knowledge (one clinical idea)
+Template: A-03 (lean default)
+Topic: {{topic}}
+Insight ID: {{insight_id}}
+Claim lock / clinical constraints: {{constraints}}
+
+For EACH slide produce ONLY:
+1. headline (≤6 words · magenta accent ≤3 words)
+2. sub-headline / recognition (whole message · ≤2–4 short lines · high contrast)
+3. caption teaching beats (bullets ok HERE — not on-frame)
+Do NOT draft on-frame explanation, takeaway card, or body bullets unless brief says dense.
+
+Hook / middle slides / close: same lean rule. Close may add one CTA only.
 ```
 
 ---
