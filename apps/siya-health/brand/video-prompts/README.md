@@ -14,9 +14,11 @@ Markdown for HeyGen / reel assembly — **not** rendered MP4 in-repo (unless a p
 
 1. `research/ANGLE.md` + `COMPS.md` (+ `SOURCES.md` when research-heavy)
 2. `medical-flags.md`
-3. `heygen/HEYGEN-BUILD.md` + `script-*-paste.txt` (or `HEYGEN-COPY-PASTE-MASTER.md`)
-4. `captions/` with `ALL-PLATFORMS.md`
-5. Tracker row in `../04-Content-Tracker/Siya-Content-Tracker-Posts.csv`
+3. `video-topics.md` — Hook Archetype (Pattern Interrupt / Relatable / Myth-Busting) + Visual Strategy (Talking head + B-roll / Text-on-screen demo) + primary/secondary keywords
+4. `frameworks.md` — research → visual/auditory map (AD-V-02+)
+5. `heygen/HEYGEN-BUILD.md` + `script-*-paste.txt` (or `HEYGEN-COPY-PASTE-MASTER.md`)
+6. `captions/` with `ALL-PLATFORMS.md` + per-topic captions when series >1 cut
+7. Tracker row in `../04-Content-Tracker/Siya-Content-Tracker-Posts.csv`
 
 ## SOP
 

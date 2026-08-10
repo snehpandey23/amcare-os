@@ -2,12 +2,13 @@
 
 | File | Use |
 |------|-----|
-| `instagram.md` | Company IG Reel (V1 hero) |
-| `facebook.md` | Facebook |
-| `linkedin-company.md` | Company LinkedIn |
-| `linkedin-founder.md` | Founder — no CTA |
-| `x-twitter.md` | X thread |
-| `pinterest.md` | Pin |
-| `ALL-PLATFORMS.md` | One-file copy-paste |
+| `by-topic/v1.md` … `v8.md` | **Full platform captions per video** with primary + secondary keywords |
+| `instagram.md` | Company IG Reel (V1 hero shortcut) |
+| `facebook.md` | Facebook (V1) |
+| `linkedin-company.md` | Company LinkedIn (V1) |
+| `linkedin-founder.md` | Founder — no CTA (optional; ship only if requested) |
+| `x-twitter.md` | X thread (V1) |
+| `pinterest.md` | Pin (V1) |
+| `ALL-PLATFORMS.md` | One-file V1 + keyword index + series hook swaps |
 
-Series variants: swap first line from `../video-topics.md` hooks; keep practical log + disclaimer.
+**Keyword rule:** Primary once in body; secondary once in body or hashtag cluster; no stuffing.
