@@ -2,17 +2,17 @@
 
 **Insight:** Physical signs that may appear with ADHD — and why they're not enough to diagnose  
 **Audience:** Adults 25–50  
-**Theme:** Template A awareness/human (`SIYA-SOCIAL-POST-STYLE.md`) — cover aligned; mid slides may still use PE-B graphic DNA until batch-regen  
+**Theme:** Template A awareness/human (`SIYA-SOCIAL-POST-STYLE.md`) — slides 01–02 aligned; remaining mid slides pending Template A regen  
 **Format:** 1:1 · 1080×1080 · 7 slides  
-**Cover palette:** Navy `#1E2A5A` · Magenta `#C2186B` · soft lavender/cream  
+**Palette:** Navy `#1E2A5A` · Magenta `#C2186B` · soft lavender/cream  
 **Type:** Montserrat  
-**Logo:** Top-left only on cover · **no** background watermark  
+**Logo:** Top-left only · **no** background watermark  
 **Cover footer:** Care. Compassion. Connection. · `(215) 445-1244` · `www.siya.health`  
 **Practical change:** If these patterns are lifelong and impairing, take a validated screener / talk to a clinician — don't diagnose from fidgeting alone.  
 **CTA (close):** Talk to a Clinician  
 **Voice:** Company only (no founder LinkedIn)  
 **Clinical review:** Required before publish  
-**Render:** `design/render.sh` (slide 01 = Template A HTML)  
+**Render:** Template A HTML in `design/` (slides 01–02)  
 **Ready:** `images/ready/` · `ready-to-post/`
 
 ---

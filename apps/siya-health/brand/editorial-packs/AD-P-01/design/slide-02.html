@@ -1,36 +1,164 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8" />
-<title>AD-P-01 slide 02</title>
+<title>AD-P-01 slide 02 — Template A</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="theme.css" />
-</head><body style="margin:0;background:#F7F4EF;">
+<style>
+  :root {
+    --navy: #1E2A5A;
+    --magenta: #C2186B;
+    --plum: #7B2CBF;
+    --lavender: #EDE4FF;
+    --cream: #FAFAFC;
+    --cream2: #F5F1EB;
+    --muted: #5C5C66;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { margin: 0; background: #FAFAFC; font-family: "Montserrat", system-ui, sans-serif; }
+  .slide {
+    width: 1080px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 48% 42% at 84% 42%, rgba(205,184,255,0.30), transparent 65%),
+      linear-gradient(165deg, var(--cream) 0%, var(--cream2) 100%);
+    color: var(--navy);
+  }
+  .logo {
+    position: absolute;
+    top: 40px;
+    left: 48px;
+    height: 58px;
+    width: auto;
+    z-index: 6;
+  }
+  .count {
+    position: absolute;
+    top: 52px;
+    right: 48px;
+    z-index: 6;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--lavender);
+    color: var(--plum);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .content {
+    position: absolute;
+    left: 56px;
+    top: 150px;
+    width: 520px;
+    z-index: 5;
+  }
+  .eyebrow {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--plum);
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-size: 50px;
+    font-weight: 800;
+    line-height: 1.14;
+    letter-spacing: -0.02em;
+    color: var(--navy);
+    margin-bottom: 28px;
+  }
+  h1 .hi { color: var(--magenta); }
+  .list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--muted);
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(30,42,90,0.06);
+    border-radius: 14px;
+    padding: 14px 18px;
+  }
+  .list li::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    margin-top: 8px;
+    flex: 0 0 12px;
+    border-radius: 50%;
+    background: var(--magenta);
+  }
+  .photo-wrap {
+    position: absolute;
+    right: 0;
+    top: 130px;
+    width: 480px;
+    height: 780px;
+    z-index: 2;
+    overflow: hidden;
+  }
+  .photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 55% center;
+  }
+  .photo-fade {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, var(--cream) 0%, rgba(250,250,252,0.6) 20%, transparent 46%),
+      linear-gradient(180deg, var(--cream) 0%, transparent 12%),
+      linear-gradient(0deg, var(--cream) 0%, transparent 18%);
+    z-index: 3;
+    pointer-events: none;
+  }
+  .footer {
+    position: absolute;
+    left: 56px;
+    right: 56px;
+    bottom: 36px;
+    z-index: 8;
+    border-top: 1px solid rgba(30,42,90,0.10);
+    padding-top: 14px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(30,42,90,0.50);
+  }
+</style>
+</head><body>
 <section class="slide" id="slide-02">
   <img class="logo" src="siya-health-logo.png" alt="Siya Health" />
-  <img class="watermark" src="siya-health-logo.png" alt="" />
+  <div class="count">2 / 7</div>
+
   <div class="content">
     <div class="eyebrow">What people notice</div>
-    <h1 class="blue">The body often shows up first.</h1>
+    <h1>The <span class="hi">body</span> often shows up first.</h1>
     <ul class="list">
       <li>Leg bounce · nail biting · pacing</li>
       <li>Can’t sit through a movie</li>
       <li>Restless sleep</li>
     </ul>
   </div>
-  <svg class="art" viewBox="0 0 520 520" aria-hidden="true">
-    <defs>
-      <linearGradient id="g2" x1="0" y1="1" x2="1" y2="0">
-        <stop offset="0%" stop-color="#0072CE"/><stop offset="100%" stop-color="#FF66C4"/>
-      </linearGradient>
-    </defs>
-    <path d="M140 120 C220 80, 300 160, 260 240 C220 320, 340 360, 400 300" fill="none" stroke="url(#g2)" stroke-width="10" stroke-linecap="round"/>
-    <circle cx="140" cy="120" r="14" fill="#0072CE"/>
-    <circle cx="260" cy="240" r="14" fill="#7B2CBF"/>
-    <circle cx="400" cy="300" r="14" fill="#FF66C4"/>
-    <path d="M100 400 Q200 340 300 400 T500 380" fill="none" stroke="#A78BFA" stroke-width="4" opacity="0.6"/>
-  </svg>
+
+  <div class="photo-wrap">
+    <img src="../images/bases/ad-p01-base-fidget.png" alt="" />
+    <div class="photo-fade"></div>
+  </div>
+
   <div class="footer">siya.health · All content for educational purposes only</div>
 </section>
 </body></html>
