@@ -1,0 +1,37 @@
+---
+description: Full Siya creative stack for agents — not Instagram-static only; Read AGENT-BOOTSTRAP + BRAND-STYLE-LOCK before any brand/carousel/static/LinkedIn/video work
+alwaysApply: true
+---
+
+# Siya creative stack (desktop · mobile · cloud)
+
+**Do not** treat `INSTAGRAM-STATIC.md` as the whole design system.
+
+## Before any creative work — Read in order
+
+1. `apps/siya-health/brand/AGENT-BOOTSTRAP.md` ← **full stack map**
+2. `apps/siya-health/brand/BRAND-STYLE-LOCK.md` ← pixel tokens
+3. `apps/siya-health/brand/VISUAL-OS.md`
+4. `apps/siya-health/brand/VISUAL-OS-TEMPLATES.md`
+5. `apps/siya-health/brand/EDITORIAL-OS.md` (when starting from research/insight)
+6. `apps/siya-health/brand/prompts/README.md` (when drafting copy/prompts)
+
+Then use what the brief needs: captions · founder voice · video-prompt · tracker · WorkDrive.
+
+## Tokens (fail closed)
+
+Cream `#F4EFE7` · Navy `#001878` · Dark Navy `#0A246B` · Magenta `#D81088` · Georgia + Arial · 4:5 1080×1350
+
+## Reject
+
+Plum `#8D3A78` · brown ink · hard-seam L · text shadows · ambient watermarks · freehand `GenerateImage` as **final** branded frame
+
+## Required path
+
+Classify → template ID → copy plan → source photo only → **`brand/scripts/compose_*.py`** → captions / video-prompt / tracker / WorkDrive
+
+Also: `siya-visual-approval-gate.mdc` · `siya-a03-lean-lock.mdc` · `zoho-workdrive-team.mdc`
+
+## Cloud note
+
+If `BRAND-STYLE-LOCK.md` / `AGENT-BOOTSTRAP.md` are missing from the clone, **stop** and say the branch is stale — do not fall back to Jul-24 plum docs or Instagram-static alone.
