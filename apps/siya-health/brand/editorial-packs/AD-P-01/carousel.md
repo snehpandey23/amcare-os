@@ -2,18 +2,17 @@
 
 **Insight:** Physical signs that may appear with ADHD — and why they're not enough to diagnose  
 **Audience:** Adults 25–50  
-**Theme:** Template A awareness/human (`SIYA-SOCIAL-POST-STYLE.md`) — slides 01–02 aligned; remaining mid slides pending Template A regen  
-**Format:** 1:1 · 1080×1080 · 7 slides  
-**Palette:** Navy `#1E2A5A` · Magenta `#C2186B` · soft lavender/cream  
-**Type:** Montserrat  
-**Logo:** Top-left only · **no** background watermark  
-**Cover footer:** Care. Compassion. Connection. · `(215) 445-1244` · `www.siya.health`  
+**Theme:** Visual OS v2.1 / `BRAND-STYLE-LOCK.md` — Knowledge **A-03** lean  
+**Format:** 4:5 · 1080×1350  
+**Tokens:** Cream `#F4EFE7` · Navy `#001878` · Magenta `#D81088` · Georgia + Arial  
+**Logo:** LOGO-PRIMARY top-left · **no** ambient watermark  
 **Practical change:** If these patterns are lifelong and impairing, take a validated screener / talk to a clinician — don't diagnose from fidgeting alone.  
-**CTA (close):** Talk to a Clinician  
+**CTA (close only):** Talk to a Clinician  
 **Voice:** Company only (no founder LinkedIn)  
 **Clinical review:** Required before publish  
-**Render:** Template A HTML in `design/` (slides 01–02)  
-**Ready:** `images/ready/` · `ready-to-post/`
+**Compositor:** `brand/scripts/compose_format_a_knowledge.py`  
+**Ready:** `ready-to-post/` · `images/ready/`  
+**Reject:** plum · hard-L · HTML/Chrome freehand finals · `GenerateImage` as branded frame
 
 ---
 
@@ -27,10 +26,23 @@
 
 ---
 
-## Slide 2 — What people notice
-**Eyebrow:** What people notice  
-**Headline:** The body often shows up first.  
-**List:** Leg bounce · nail biting · pacing · Can't sit through a movie · Restless sleep
+## Slide 2 — What people notice (A-03 lean · composed)
+**Headline:** The **body** shows first.  
+**Recognition:** Leg bounce. Restless sleep. Lived patterns — not a diagnosis.  
+**Photo:** `images/bases/ad-p01-base-fidget.png` (right-weighted)  
+**Compose:**
+```bash
+python3 apps/siya-health/brand/scripts/compose_format_a_knowledge.py \
+  --photo apps/siya-health/brand/editorial-packs/AD-P-01/images/bases/ad-p01-base-fidget.png \
+  --logo apps/siya-health/assets/images/siya-health-logo-registered.png \
+  --out apps/siya-health/brand/editorial-packs/AD-P-01/ready-to-post/slide-02-ready.png \
+  --headline "The body
+shows first." \
+  --accent "body" \
+  --recognition "Leg bounce. Restless sleep.
+Lived patterns — not a diagnosis."
+```
+**Caption teaching (not on-frame):** nail biting · pacing · can’t sit through a movie · overlap with anxiety/sleep/habit
 
 ---
 
