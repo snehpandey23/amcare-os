@@ -2,25 +2,28 @@
 
 **Insight:** Physical signs that may appear with ADHD — and why they're not enough to diagnose  
 **Audience:** Adults 25–50  
-**Theme:** PE-B-01 / locked social graphic system (`SIYA-SOCIAL-POST-STYLE.md` + peptides carousel DNA)  
+**Theme:** Template A awareness/human (`SIYA-SOCIAL-POST-STYLE.md`) — cover aligned; mid slides may still use PE-B graphic DNA until batch-regen  
 **Format:** 1:1 · 1080×1080 · 7 slides  
-**Palette:** `#7B2CBF` · `#FF66C4` · `#0072CE` · cream ground  
-**Type:** Montserrat (modern clinical sans)  
-**Logo:** Top-left wordmark · low-opacity watermark · no opaque plate  
+**Cover palette:** Navy `#1E2A5A` · Magenta `#C2186B` · soft lavender/cream  
+**Type:** Montserrat  
+**Logo:** Top-left only on cover · **no** background watermark  
+**Cover footer:** Care. Compassion. Connection. · `(215) 445-1244` · `www.siya.health`  
 **Practical change:** If these patterns are lifelong and impairing, take a validated screener / talk to a clinician — don't diagnose from fidgeting alone.  
 **CTA (close):** Talk to a Clinician  
 **Voice:** Company only (no founder LinkedIn)  
 **Clinical review:** Required before publish  
-**Render:** `design/render.sh`  
+**Render:** `design/render.sh` (slide 01 = Template A HTML)  
 **Ready:** `images/ready/` · `ready-to-post/`
 
 ---
 
-## Slide 1 — Cover
-**Eyebrow:** Adult ADHD · Myth check  
-**Headline:** Physical signs that may appear with ADHD  
+## Slide 1 — Cover (Template A)
+**Category pill:** Adult ADHD  
+**Headline:** Physical **signs** that may appear with ADHD *(magenta on “signs”)*  
 **Support:** — and why they're not enough to diagnose.  
-**Tagline:** Common isn't conclusive.
+**Feeling badge:** Common isn’t conclusive  
+**Visual:** Lifestyle portrait (right)  
+**Footer bar:** Care. Compassion. Connection. · (215) 445-1244 · www.siya.health · educational note
 
 ---
 
