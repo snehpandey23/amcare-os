@@ -1,0 +1,52 @@
+# Research extract — ADHD × Migraine
+
+```yaml
+pillar: brain-health-adhd
+topic: adhd-migraine-comorbidity
+date: 2026-08-10
+insight_id: AD-V-02
+clinical_review_required: true
+evidence_level: Observational comorbidity (large adult cohort) + VOC; pathophysiology (dopamine) hypothesized
+```
+
+## Citations
+
+### C1 — Adult comorbidity cohort
+- Hansen TF et al. Comorbidity of migraine with ADHD in adults. BMC Neurology. 2018;18:147.
+- URL: https://link.springer.com/article/10.1186/s12883-018-1149-6
+- N: 26,456 Danish blood donors (18–65)
+- Finding: Migraine associated with ADHD symptoms OR=1.8 (95% CI 1.5–2.1); stronger with migraine + visual disturbance (OR≈2.05)
+- Limitation: Cross-sectional; self-report SQM + ASRS; healthy donor population (may underestimate)
+
+### C2 — Secondary explainer
+- Charlie Health. What’s the Link Between ADHD and Migraines?
+- URL: https://www.charliehealth.com/mental-health/neurodivergence/adhd-and-migraines
+- Themes: bidirectional risk; dopamine; genetics; stress; mixed stimulant effects; aura association
+- Use: framing only — not primary evidence
+
+### C3 — VOC bank (paraphrase)
+- Reddit r/migraine + r/ADHDUK: stimulants dual effect; boredom/understimulation; undiagnosed ADHD → lifestyle cascade; meds “most helpful” for some
+- Instagram comments: sensory brain type; family clustering; whole-body dopamine; unanswered hemiplegic ask
+- Comp reels: DXXiPDFmD4w, Cn1He9DohfT, DHPzYPFSisc, DSgE2W1EknW
+
+## Insights (patient_why)
+
+| id | claim | patient_why | evidence |
+|----|-------|-------------|---------|
+| I1 | ADHD and migraine co-occur more than chance in adults | Validates “why do I have both?” | C1 |
+| I2 | Signal stronger with migraine + visual aura | Explains flashes/zig-zags + ADHD fog in one life | C1 |
+| I3 | ADHD day basics (meals/sleep/sensory/stress) can stack into migraine day | Makes lifestyle feel mechanical, not moral failure | C3 + clinical |
+| I4 | Boredom/understimulation can be a migraine-adjacent state for some | Names a non-obvious trigger | C3 |
+| I5 | Stimulants: help some migraines, trigger others | Ends binary meds debate | C2, C3 |
+| I6 | Sensory thresholds often shared | Light/sound/smell aren’t “drama” | C3 |
+| I7 | Family clustering is plausible; not destiny | Answers genetics ask carefully | C1 discussion, C3 |
+| I8 | Hemiplegic migraine needs specialist/urgent framing | Answers unanswered ask safely | Clinical standard |
+| I9 | ADHD is whole-body regulation, not only focus | Reframes years of painkiller-only strategy | C2, C3 |
+| I10 | Co-occurrence ≠ causation | Protects from myth content | C1 |
+
+## Out of scope
+
+- Stimulant dosing for migraine
+- Claiming ADHD causes chronic migraine
+- DIY hemiplegic vs stroke sorting
+- Genetic testing recommendations from social
