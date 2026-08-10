@@ -3,6 +3,8 @@
 Paste each block into HeyGen **Script**. `---` = new scene.  
 Settings: **9:16** · calm educator avatar · auto captions ON · cream/navy, no purple glow.
 
+**Look / suit prompts:** [`HEYGEN-PROMPT.md`](./HEYGEN-PROMPT.md) — default Suit A (navy blazer + cream).
+
 Build steps: see `HEYGEN-BUILD.md` (V1). Overlays: see end of this file.
 
 ---

@@ -32,6 +32,9 @@ Brand accents: Navy #001878 · Magenta #D81088 sparingly · Cream #F4EFE7
 | Look to camera | Direct on hook + CTA |
 | Avoid | Finger-pointing, fear faces, wellness-influencer cadence |
 
+**Full HeyGen prompt + suit picks:** [`HEYGEN-PROMPT.md`](./HEYGEN-PROMPT.md)  
+**Default wardrobe (V1):** Suit A — deep navy blazer + cream blouse/shirt, soft cream clinic BG.
+
 ## Scene map + text overlays (V1)
 
 | Scene | Time | Avatar says (summary) | On-screen text |

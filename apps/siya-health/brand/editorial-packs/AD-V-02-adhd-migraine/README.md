@@ -8,6 +8,7 @@ HeyGen short-form video pack from Reddit + Instagram VOC + BMC Neurology comorbi
 |-------|------|
 | Topic bank + Hook & Format Selection | `video-topics.md` |
 | HeyGen build (ship first) | `heygen/HEYGEN-BUILD.md` |
+| HeyGen prompt + avatar suits | `heygen/HEYGEN-PROMPT.md` |
 | Paste scripts | `heygen/script-*.txt` + `heygen/HEYGEN-COPY-PASTE-MASTER.md` |
 | Scene map | `heygen/scenes.md` |
 | Research | `research/` |
