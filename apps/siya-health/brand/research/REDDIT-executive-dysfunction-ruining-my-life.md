@@ -1,5 +1,8 @@
 # Research goldmine — Executive dysfunction is ruining my life (Reddit)
 
+**Canonical mining/audit (review only):** [`audits/2026-08-12-ADHD-executive-dysfunction-reddit-10hgxfi.md`](./audits/2026-08-12-ADHD-executive-dysfunction-reddit-10hgxfi.md)  
+Use that doc for claim-risk tables + existing-page gaps. This file keeps the earlier production-leaning sketch — **do not produce from HIGH-risk items**.
+
 **Source:** https://www.reddit.com/r/ADHD/comments/10hgxfi/executive_dysfunction_is_ruining_my_life/  
 **Date mined:** 2026-08-12  
 **Method:** Line-by-line milking (not 50 thin posts from 50 threads)  
