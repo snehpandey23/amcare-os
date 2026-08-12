@@ -81,19 +81,30 @@ def fit_cover_right(photo: Image.Image, box_w: int, box_h: int) -> Image.Image:
 
 
 def soft_dissolve_mask(width: int, height: int, cream_end: int, fade: int) -> Image.Image:
-    """Alpha mask: 0 = cream/text zone, 255 = full photo. Soft dissolve across fade."""
+    """Alpha mask: 0 = cream/text zone, 255 = full photo. Soft ease dissolve (no hard L)."""
     mask = Image.new("L", (width, height), 0)
     px = mask.load()
     start = max(0, cream_end - fade // 2)
     end = min(width, cream_end + fade // 2)
+    span = max(1, end - start)
+    # Soft bottom cream band so footer stays readable over photo
+    footer_band = 90
     for x in range(width):
         if x < start:
-            a = 0
+            a_x = 0
         elif x > end:
-            a = 255
+            a_x = 255
         else:
-            a = int(255 * (x - start) / max(1, end - start))
+            t = (x - start) / span
+            # smoothstep ease — matches SPEC-PROOF soft cream dissolve
+            t = t * t * (3 - 2 * t)
+            a_x = int(255 * t)
         for y in range(height):
+            a = a_x
+            if y > height - footer_band:
+                # fade photo out toward cream at footer
+                fy = (y - (height - footer_band)) / footer_band
+                a = int(a * (1 - fy * 0.85))
             px[x, y] = a
     return mask
 
@@ -206,7 +217,7 @@ def compose(
 ) -> None:
     canvas = Image.new("RGB", (W, H), CREAM)
     cream_end = int(W * cream_ratio)
-    fade = 160
+    fade = 220  # wide soft dissolve — reject hard-seam L
 
     photo = Image.open(photo_path)
     # Photo spans full height; soft-masked over cream
