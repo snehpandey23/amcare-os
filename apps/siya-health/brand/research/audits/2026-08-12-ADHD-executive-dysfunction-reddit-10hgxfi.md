@@ -80,9 +80,12 @@ Reviewed against: apps/siya-health/blog/* + apps/siya-health/answers/*
 
 ## Review checklist (before any produce pass)
 
-- [ ] Itika (or designee) marks which Part 1 IDs to script first  
-- [ ] Part 2 “do now” rows accepted or deferred  
-- [ ] All Part 3 items remain blocked in scripts/captions/blog  
-- [ ] Only then: script → claim-check → produce  
+- [x] Itika (or designee) marks which Part 1 IDs to script first → **ED-R03+R04 combined, ED-R14/15, ED-R09**
+- [x] Part 2 “do now” rows accepted → **applied 2026-08-12**
+- [x] All Part 3 items remain blocked in scripts/captions/blog  
+- [x] Script → claim-check → produce for picked IDs → packs **AD-ED-01**, **AD-ED-04**, **AD-ED-09**
 
-**Next pass (not this doc):** production briefs for approved IDs only.
+**Held for next round:** ED-R08, ED-R10, ED-R05, ED-R12 (social scripts)  
+**Note:** Fence FAQ language was still added on existing pages per approved Part 2 (not as a social pack).
+
+**Next pass:** Itika feedback on three drafts; then schedule / revise.
