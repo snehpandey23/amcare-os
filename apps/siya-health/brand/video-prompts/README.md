@@ -20,3 +20,4 @@ Include:
 | Insight ID | Topic | Path |
 |------------|-------|------|
 | ADHD-R-01 | ADHD & relationships — avatar-free reel | `../editorial-packs/ADHD-R-01/video/video-prompt.md` · `ADHD-R-01-reel.mp4` |
+| ADHD-R-02 | Is it ADHD or addiction? — Q&A closer, Siya Health answers | `../editorial-packs/ADHD-R-02/video/video-prompt.md` · `ADHD-R-02-reel.mp4` |
