@@ -115,7 +115,8 @@ Tokens: Cream #F4EFE7 · Navy #001878 · Magenta #D81088 ≤3 words · Georgia h
 
 ## Script F — Before you talk to HR (~30s)
 **Angle:** Audience question / process · Action  
-**Best for:** High-intent viewers already googling accommodations
+**Best for:** High-intent viewers already googling accommodations  
+**Detailed HeyGen build (no avatar, real/stock footage, Canva-style):** [`heygen/script-F-before-you-talk-to-hr-heygen.md`](./heygen/script-F-before-you-talk-to-hr-heygen.md) — full shot list, VO script, caption spec, music/SFX, build steps
 
 | Time | On-screen text | Optional VO |
 |---|---|---|
