@@ -90,7 +90,7 @@ const FLOWS: {
       "Request already in the chart?",
       "Urgent or routine?",
     ],
-    retrievalBoost: ["escalation", "clinical", "chat", "portal"],
+    retrievalBoost: ["escalation", "clinical", "refill", "pharmacy"],
   },
   {
     id: "compliance-privacy",
@@ -115,6 +115,53 @@ const FLOWS: {
     patterns: [/onboard/i, /leave/i, /pto/i, /holiday/i, /performance review/i, /hr/i],
     followUpQuestions: ["Are you a contractor or employee?", "Which country / timezone?", "Who is your supervisor?"],
     retrievalBoost: ["hr", "onboarding", "contractor", "SOW"],
+  },
+  {
+    id: "clinical-ops-abusive-patient",
+    department: "Clinical Operations",
+    task: "Hostile / abusive patient interaction",
+    patterns: [
+      /abusive\s+patient/i,
+      /hostile\s+patient/i,
+      /angry\s+patient/i,
+      /patient\s+(is\s+)?(abusive|hostile|angry|threatening|yelling|screaming|cursing)/i,
+      /(abusive|hostile|threatening|yelling|screaming).{0,40}\bpatient\b/i,
+      /\bpatient\b.{0,40}(abusive|hostile|threatening|yell|scream|threat|curse|swear)/i,
+      /verbal\s+abuse/i,
+      /patient\s+threat/i,
+      /(caller|patient).{0,30}(hung up|screaming|cursing|swearing|threatening)/i,
+      /threaten(ed|ing)?\s+(me|us|staff)/i,
+    ],
+    followUpQuestions: [
+      "Is this happening right now, or already over?",
+      "Phone, portal chat, or in-visit?",
+      "Any safety threat (harm to self/others/staff)?",
+    ],
+    retrievalBoost: ["escalation", "supervisor", "clinical", "angry", "hostile", "billing"],
+  },
+  {
+    id: "hr-workplace",
+    department: "HR",
+    task: "Workplace concern",
+    patterns: [
+      /\brude\b(?!.{0,20}\bpatient\b)/i,
+      /harass/i,
+      /bully/i,
+      /hostile\s+(work|workplace|environment|coworker|colleague|teammate|manager|staff)/i,
+      /(coworker|colleague|teammate|manager|supervisor|staff).{0,20}(yell|yelled|yelling)/i,
+      /disrespect/i,
+      /mistreat/i,
+      /staff (was|were|is|are) rude/i,
+      /(coworker|colleague|teammate|manager|supervisor).*(rude|mean|unfair)/i,
+      /(rude|mean|unfair).*(coworker|colleague|teammate|manager|staff)/i,
+      /complain(t|ing)? about (staff|a coworker|my manager)/i,
+    ],
+    followUpQuestions: [
+      "Is this about a teammate, a manager, or something else?",
+      "Do you want this escalated to your supervisor / People (HR)?",
+      "Any same-day safety concern?",
+    ],
+    retrievalBoost: ["hr", "people", "supervisor", "escalation", "workplace"],
   },
   {
     id: "clinical-ops-chat",
@@ -205,7 +252,7 @@ export function routeIntent(message: string): RouteResult {
     task: "Company memory lookup",
     confidence: bestScore > 0 ? "low" : "medium",
     followUpQuestions: [],
-    flowId: best?.id,
+    // Do not attach a weak near-miss flowId — that poisons retrieval boosts.
   };
 }
 
