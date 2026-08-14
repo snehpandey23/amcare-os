@@ -100,7 +100,7 @@ export interface FactsSnapshot {
 }
 
 export const FACTS_SNAPSHOT: FactsSnapshot = {
-  "generated": "2026-08-06",
+  "generated": "2026-08-14",
   "source": "apps/siya-health site-standards + providers + provider-canonical + homepage-trust-metrics + providers-core + service-index.json + founder-locked cancel/hours facts",
   "availableServiceStates": [
     "California",

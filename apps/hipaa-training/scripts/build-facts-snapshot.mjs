@@ -89,8 +89,18 @@ const providers = getAllProviders().map((p) => {
   }
 })
 
+const FREE_MEET_GREET = {
+  label: 'Meet & Greet',
+  amount: 0,
+  display: 'Free',
+  period: '',
+  description:
+    'Short, free, non-clinical conversation to understand needs and choose a next step. Not a medical visit, diagnosis, or treatment. No medication prescribed.',
+}
+
 const pricing = {
-  meetGreet: PRICING.meetGreet,
+  // site-standards may omit meetGreet (CTA is free elsewhere) — always snapshot it for staff Ask.
+  meetGreet: PRICING.meetGreet ?? FREE_MEET_GREET,
   initialEvaluation: PRICING.initialEvaluation,
   nonControlledFollowUp: PRICING.nonControlledFollowUp,
   controlledFollowUp: PRICING.controlledFollowUp,
