@@ -327,3 +327,5 @@ Semrush / Ahrefs / Keyword Planner **not available** in this environment. Used *
 ## SOP note
 
 This file is **mining/audit only**. Next stages (after approval): ANGLE lock → `medical-flags.md` → script/caption → claim-check PART 3 clears → produce via Visual OS compositors. Load companion Reddit sheet: `../REDDIT-adult-adhd-signs-symptoms.md`.
+
+**Update 2026-08-14:** Reel/video scripts drafted from these angles — see [`2026-08-14-ADHD-adult-signs-symptoms-REEL-SCRIPTS.md`](./2026-08-14-ADHD-adult-signs-symptoms-REEL-SCRIPTS.md) + packs `AD-SS-02` through `AD-SS-11` under `../../editorial-packs/`. Script stage only — no frames/video rendered, no captions written yet.
