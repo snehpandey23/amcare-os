@@ -1,0 +1,40 @@
+name: Siya Staff — safety & build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/hipaa-training/**"
+      - "docs/siyaos-knowledge-base/**"
+      - "package-lock.json"
+  pull_request:
+    paths:
+      - "apps/hipaa-training/**"
+      - "docs/siyaos-knowledge-base/**"
+      - "package-lock.json"
+
+jobs:
+  safety-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Staff red team (must pass)
+        run: npm run red-team:staff -w @amcare/hipaa-training
+
+      - name: Build staff app (must pass)
+        run: npm run build -w @amcare/hipaa-training
+
+      - name: Deployment gate (report — may fail until KB content ≥ 80)
+        run: npm run gate:deploy -w @amcare/hipaa-training
+        continue-on-error: true

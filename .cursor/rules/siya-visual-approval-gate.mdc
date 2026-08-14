@@ -1,0 +1,47 @@
+---
+description: Slide-by-slide approval gate for Siya carousel/static image production — render one, verify in chat, ship supporting assets only after approval
+alwaysApply: true
+---
+
+# Siya visuals — slide-by-slide approval gate
+
+When a prompt asks for a **carousel or static image** (Siya Health brand creative), do
+**not** produce the full pack in one pass. Follow this order:
+
+## Phase 1 — copy plan only (cheap to change)
+
+1. Research (if evidence-based) + draft the on-frame copy deck in chat or `copy/carousel.md`.
+2. No captions, no video prompts, no tracker rows, no WorkDrive sync yet.
+
+## Phase 2 — one image at a time
+
+1. Generate the **first slide only** (photo + composited render).
+2. Show it in chat and run the self-audit (face-safe, blur-test type, CTA ship gate,
+   correct theme/template, **A-03 lean lock**: headline + sub-headline only unless
+   `--dense` was explicitly requested).
+3. **Wait for user approval in chat** before rendering the next slide.
+4. Repeat slide by slide. Batch later slides only if the user says the style is locked
+   (e.g. "rest look good, continue").
+
+## Phase 3 — ship only after approval
+
+Only after the user approves the final slide set:
+
+- Write captions (5 platforms + ALL-PLATFORMS)
+- Write video prompt docs (pack + `07-Video-Prompts/`)
+- Add tracker row (git CSV + WorkDrive)
+- Sync pack to WorkDrive `05-Carousels/[ID]/`
+
+## Why
+
+Rework is image-heavy and expensive; captions/trackers/sync built against unapproved
+visuals get thrown away. The approval checkpoint lives **in chat with the user** — the
+automated ship gates (CTA overflow, face-safe crop) do not replace it.
+
+## Scope
+
+Applies to `apps/siya-health/brand/` creative work (editorial packs, statics, carousels).
+Does not change the Vercel/staff-portal deploy rules.
+
+**A-03 lean lock:** see `.cursor/rules/siya-a03-lean-lock.mdc` and
+`apps/siya-health/brand/VISUAL-OS-TEMPLATES.md` → A-03.

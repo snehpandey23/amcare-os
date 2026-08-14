@@ -1,0 +1,38 @@
+---
+description: Knowledge carousel A-03 lean lock — headline + sub-headline only for all future designs
+alwaysApply: true
+---
+
+# Knowledge A-03 — lean lock (2026-08-06)
+
+Applies to **all future** Siya Health Knowledge carousels / A-03 compositing under
+`apps/siya-health/brand/`.
+
+## Default on-frame (locked)
+
+- **Headline** (~10–12% canvas H) + **one sub-headline** only
+- Sub-headline (`--recognition`) **is the whole message** — not a teaser for body copy
+- **Spokenness:** Sub-headlines must read as something a person would actually say out loud — complete, natural phrasing, even when short. Not a compressed fragment missing connecting words. **Test:** read aloud — if it needs mental reconstruction to parse (e.g. “morning speech” for “the pep talk you give yourself”), it fails regardless of word count
+- Magenta rule above sub-headline · full Deep Navy · high contrast on cream
+- Teaching depth → **captions**, not the frame
+- Close: lean sub-headline (optional) + **one CTA** — no body bullets by default
+
+## Do not
+
+- Put `explanation` / `takeaway` / multi-bullet `body` on-frame by default
+- Shrink carousel type below static blur-test size
+- Invent a denser layout mid-generate
+
+## Opt-in only
+
+Pass compositor `--dense` **only** when the user/brief explicitly asks for body blocks.
+Otherwise ignore those fields even if present in an old copy deck.
+
+## Sources of truth
+
+- `apps/siya-health/brand/VISUAL-OS.md` (Knowledge System + 2026-08-06 copy lock)
+- `apps/siya-health/brand/VISUAL-OS-TEMPLATES.md` → `A-03`
+- `apps/siya-health/brand/scripts/compose_format_a_knowledge.py`
+- `apps/siya-health/brand/prompts/README.md` → K — Knowledge carousel
+
+Still follow `siya-visual-approval-gate.mdc` (slide-by-slide approval before ship).
