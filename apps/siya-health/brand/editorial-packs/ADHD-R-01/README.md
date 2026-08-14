@@ -3,7 +3,7 @@
 ADHD & relationships — do they ever work?
 
 **Practical change:** Start one honest conversation this week; treat symptoms as a team problem (pause + shared systems), not a character verdict.  
-**Format shipped:** HeyGen-ready reel script + captions (`video/video-prompt.md`)  
+**Format shipped:** Avatar-free reel MP4 + HeyGen voice-only script (`video/ADHD-R-01-reel.mp4`, `video/video-prompt.md`)  
 **Funnel:** Awareness → consideration → action  
 **Audience:** Adults 20–45 (people with ADHD + partners)
 
