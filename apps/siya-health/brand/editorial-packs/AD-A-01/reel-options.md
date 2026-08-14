@@ -151,7 +151,8 @@ Tokens: Cream #F4EFE7 · Navy #001878 · Magenta #D81088 ≤3 words · Georgia h
 
 ## Script H — Quiet workspace story (~25s)
 **Angle:** Single support deep-dive · Consideration  
-**Best for:** Series potential (one support per reel)
+**Best for:** Series potential (one support per reel)  
+**Detailed HeyGen build (no avatar, real/stock footage, Canva-style):** [`heygen/script-H-quiet-workspace-heygen.md`](./heygen/script-H-quiet-workspace-heygen.md) — full shot list, VO script, caption spec, music/SFX, build steps
 
 | Time | On-screen text | Optional VO |
 |---|---|---|

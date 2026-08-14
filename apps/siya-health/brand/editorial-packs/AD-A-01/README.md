@@ -22,6 +22,7 @@ Write your **top 3 workplace friction points** (focus, deadlines, meetings, nois
 | `copy/static.md` | Phase 1 — single-frame list static |
 | `reel.md` | Default reel (Script A) |
 | `reel-options.md` | **Scripts A–H** — choose & edit before compose |
+| `heygen/script-H-quiet-workspace-heygen.md` | Detailed HeyGen build (no avatar, real footage) for Script H |
 | `medical-flags.md` | Safe / avoid (legal + clinical) |
 | `captions/` | Deferred until copy approval |
 | `ready-to-post/` | Not started |
