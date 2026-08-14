@@ -1,83 +1,36 @@
-# ~30s Reel — AD-A-01 (draft for review)
+# ~30s Reel — AD-A-01
 
-```text
-Status: DRAFT — on-screen text + motion guidelines only (no MP4)
-Aspect: 9:16
-Voice: Company · calm · no founder face unless requested
-End card CTA: Read the guide · link in bio (or Talk to a Clinician if eval push)
-```
+**Status:** DRAFT · default = Script A  
+**Full menu (A–H):** see [`reel-options.md`](./reel-options.md) — pick, edit, then lock one before compose.
 
 ---
 
-## On-screen text
+## Default — Script A (carousel-aligned)
 
-| Time | Burned-in text |
+| Time | On-screen text |
 |---|---|
 | 0–3s | Extra hours aren’t a plan. |
 | 3–10s | Focus slips. Deadlines stack. Burnout creeps in. |
 | 10–18s | Supports people discuss: quiet space, written tasks, calendar blocks… |
 | 18–24s | A clinician can document. HR decides. |
-| 24–30s | Write your top 3 frictions. Start with a real evaluation. |
+| 24–30s | Write your top 3 frictions. |
 
-**Optional VO:** Same beats. End: “Educational — not legal advice.”
+**VO optional:** Same beats · close with “Educational — not legal advice.”  
+**End card CTA:** Read the guide · link in bio  
 
----
-
-## Beat script
-
-### Hook (0–3s)
-**Extra hours aren’t a plan.**  
-Visual: After-hours desk; soft lamp; micro-pause.
-
-### Beat 1 (3–10s)
-**Focus slips. Deadlines stack. Burnout creeps in.**  
-Visual: Calendar / context-switch cut; slight push-in.
-
-### Beat 2 (10–18s)
-**Supports people discuss…**  
-Visual: Headphones on · notebook list · quiet corner — quick match cuts (3 items max on screen at once).
-
-### Beat 3 (18–24s)
-**A clinician can document. HR decides.**  
-Visual: Calm face-to-camera or hands holding printed letter metaphor (blank/props — no real PHI).
-
-### Close (24–30s)
-**Write your top 3 frictions.**  
-End card: Siya mark + spoke URL / “ADHD workplace accommodations” + `siya.health`  
-Hold ≥1.5s.
+**Motion:** Slow push-in · match-cut 3 supports · end hold  
+**Avoid:** courthouse stings, “know your rights” stamps, purple glow, rage-quit clips
 
 ---
 
-## Motion guidelines
+## Quick alternate hooks (steal into A)
 
-1. Slow push-in on hook fatigue beat  
-2. Match-cut list of 3 supports (not a 12-item scroll)  
-3. Ease-out hold on end card  
-
-Avoid: courthouse music stings, “know your rights” stamp animations, purple glow, rage-quit clips.
-
----
-
-## Color / type
-
-Cream `#F4EFE7` end card · Navy `#001878` · Magenta `#D81088` ≤3 words · Georgia hook · Arial support · no plum · no text shadow
-
----
-
-## Claim risk
-
-| Line | Risk |
+| From | Hook line |
 |---|---|
-| Extra hours / burnout | LOW–MED |
-| Supports people discuss | LOW (hedged) |
-| Clinician documents / HR decides | LOW (matches spoke) |
-| Any “you’re entitled to…” | **BLOCKED** |
+| B | ADHD at work: supports people discuss |
+| C | My brain isn’t ready at 9 a.m. |
+| D | A letter isn’t a yes from HR. |
+| E | Trying harder isn’t the only tool. |
+| F | Before you talk to HR… |
 
----
-
-## Feedback checklist
-
-- [ ] Hook locked with carousel Slide 1  
-- [ ] List beat: 3 items on screen vs voice-only  
-- [ ] CTA: guide vs clinician  
-- [ ] Approve before 9:16 frames  
+Full beat sheets, VO, visuals, and claim notes → `reel-options.md`.
