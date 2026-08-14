@@ -20,7 +20,8 @@ Write your **top 3 workplace friction points** (focus, deadlines, meetings, nois
 |---|---|
 | `copy/carousel.md` | Phase 1 — on-slide text + visual guidelines |
 | `copy/static.md` | Phase 1 — single-frame list static |
-| `reel.md` | On-screen beats + motion guidelines |
+| `reel.md` | Default reel (Script A) |
+| `reel-options.md` | **Scripts A–H** — choose & edit before compose |
 | `medical-flags.md` | Safe / avoid (legal + clinical) |
 | `captions/` | Deferred until copy approval |
 | `ready-to-post/` | Not started |
