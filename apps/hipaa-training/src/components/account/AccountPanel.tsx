@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { changePassword } from "@/lib/account-api";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export function AccountPanel() {
   const { user } = useAuth();
@@ -51,7 +52,9 @@ export function AccountPanel() {
         </p>
       </header>
 
-      <section className="rounded-2xl border border-[var(--siya-border)] bg-white p-5">
+      <ThemeToggle variant="account" />
+
+      <section className="rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-5">
         <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Change password</h2>
         <form onSubmit={(e) => void onSubmit(e)} className="mt-4 space-y-3">
           <label className="block text-xs font-medium text-[var(--siya-text-muted)]">

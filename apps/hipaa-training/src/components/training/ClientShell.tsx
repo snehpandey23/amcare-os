@@ -96,15 +96,15 @@ export default function ClientShell({ children }: { children: ReactNode }) {
   }, [authReady, portalGate, user, shift?.shiftReady, shift?.onShift, pathname, router]);
 
   if (portalGate && !authReady) {
-    return <SiyaLoadingScreen message="Loading employee portal…" />;
+    return <SiyaLoadingScreen variant="boot" message="Loading employee portal…" />;
   }
 
   if (portalGate && !user && pathname !== "/login") {
-    return <SiyaLoadingScreen message="Redirecting to sign in…" />;
+    return <SiyaLoadingScreen variant="boot" message="Redirecting to sign in…" />;
   }
 
   if (pathname === "/trust" && portalGate && user && !isPortalAdmin(user.role)) {
-    return <SiyaLoadingScreen message="Redirecting…" />;
+    return <SiyaLoadingScreen variant="boot" message="Redirecting…" />;
   }
 
   if (pathname === "/onboarding") {
@@ -124,13 +124,13 @@ export default function ClientShell({ children }: { children: ReactNode }) {
   }
 
   if (!authReady) {
-    return <SiyaLoadingScreen />;
+    return <SiyaLoadingScreen variant="boot" />;
   }
 
   if (pathname === "/login") return <>{children}</>;
 
   if (authRequired && !user && trainingRoute) {
-    return <SiyaLoadingScreen message="Redirecting to sign in…" />;
+    return <SiyaLoadingScreen variant="boot" message="Redirecting to sign in…" />;
   }
 
   if (isTrainingRoute(pathname)) {

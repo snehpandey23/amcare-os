@@ -1,7 +1,10 @@
 /** Client-side training API configuration (public env only). */
 
 function directTrainingApiUrl(): string | null {
-  const u = process.env.NEXT_PUBLIC_HIPAA_TRAINING_API_URL?.trim();
+  // Server routes should prefer the non-public URL (same as next.config rewrites).
+  const u =
+    (typeof window === "undefined" ? process.env.HIPAA_TRAINING_API_URL?.trim() : "") ||
+    process.env.NEXT_PUBLIC_HIPAA_TRAINING_API_URL?.trim();
   return u || null;
 }
 
@@ -15,7 +18,7 @@ export function getTrainingApiUrl(): string | null {
   if (typeof window !== "undefined") {
     return `${window.location.origin}/api/staff-auth`;
   }
-  return direct;
+  return direct.replace(/\/$/, "");
 }
 
 /** When set, users must sign in for /training routes; help desk (/) stays open. */
@@ -38,9 +41,13 @@ export function isPortalOnboardingPaused(): boolean {
   return process.env.NEXT_PUBLIC_SIYA_PORTAL_PAUSE_ONBOARDING === "1";
 }
 
-/** Org memory pillar (/memory, save-from-Ask, end-shift capture) — off until leadership enables. */
+/**
+ * Org memory pillar (/memory — Way, Policies, Knowledge/decision log, captures).
+ * On by default: Ask citation deep links target /memory?tab=…; a hard-off gate sent those clicks to My Day.
+ * Set NEXT_PUBLIC_SIYA_PORTAL_MEMORY_ENABLED=0 only to hide the pillar intentionally.
+ */
 export function isPortalMemoryEnabled(): boolean {
-  return process.env.NEXT_PUBLIC_SIYA_PORTAL_MEMORY_ENABLED === "1";
+  return process.env.NEXT_PUBLIC_SIYA_PORTAL_MEMORY_ENABLED !== "0";
 }
 
 export function isPublicRegistrationEnabled(): boolean {

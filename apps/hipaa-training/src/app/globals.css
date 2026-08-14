@@ -1,11 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand */
+  color-scheme: light;
+  /* Brand (headings / links) */
   --siya-primary: #1e3a8a;
   --siya-primary-hover: #1e40af;
   --siya-accent: #0f766e;
   --siya-accent-hover: #115e59;
+  /* Filled CTAs — stay solid with white labels in both themes */
+  --siya-btn-primary: #1e3a8a;
+  --siya-btn-primary-hover: #1e40af;
+  --siya-btn-accent: #0f766e;
+  --siya-btn-accent-hover: #115e59;
   /* Text */
   --siya-text: #1c1917;
   --siya-text-secondary: #57534e;
@@ -38,6 +44,40 @@
   --siya-status-error-text: #991b1b;
 }
 
+/** Phase 1 dark theme — charcoal + Siya teal/navy (not a cream invert). */
+html.dark {
+  color-scheme: dark;
+  --siya-primary: #8ba3e8;
+  --siya-primary-hover: #a8bbf0;
+  --siya-accent: #2dd4bf;
+  --siya-accent-hover: #5eead4;
+  --siya-btn-primary: #1e3a8a;
+  --siya-btn-primary-hover: #1e40af;
+  --siya-btn-accent: #0f766e;
+  --siya-btn-accent-hover: #115e59;
+  --siya-text: #eceaf2;
+  --siya-text-secondary: #b4b0bf;
+  --siya-text-muted: #8a8696;
+  --siya-border: #2e2c3a;
+  --siya-bg-page: #14131a;
+  --siya-bg-subtle: #1c1b24;
+  --siya-white: #22212b;
+  --siya-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+  --siya-shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.55);
+  --siya-status-warn-bg: #3b2a12;
+  --siya-status-warn-border: #92400e;
+  --siya-status-warn-text: #fbbf24;
+  --siya-status-info-bg: #0f2f2c;
+  --siya-status-info-border: #0f766e;
+  --siya-status-info-text: #5eead4;
+  --siya-status-success-bg: #0f291e;
+  --siya-status-success-border: #065f46;
+  --siya-status-success-text: #6ee7b7;
+  --siya-status-error-bg: #3b1515;
+  --siya-status-error-border: #991b1b;
+  --siya-status-error-text: #fca5a5;
+}
+
 @theme inline {
   --color-siya-primary: var(--siya-primary);
   --color-siya-accent: var(--siya-accent);
@@ -55,15 +95,54 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/** Certification / quiz surfaces — always light Siya palette (no OS dark-mode flip). */
+/**
+ * Certification / quiz surfaces — always light Siya palette.
+ * Re-assert light tokens so html.dark does not leak into training/cert.
+ */
 .siya-cert {
   color-scheme: light;
+  --siya-primary: #1e3a8a;
+  --siya-primary-hover: #1e40af;
+  --siya-accent: #0f766e;
+  --siya-accent-hover: #115e59;
+  --siya-btn-primary: #1e3a8a;
+  --siya-btn-primary-hover: #1e40af;
+  --siya-btn-accent: #0f766e;
+  --siya-btn-accent-hover: #115e59;
+  --siya-text: #1c1917;
+  --siya-text-secondary: #57534e;
+  --siya-text-muted: #78716c;
+  --siya-border: #ebe5d6;
+  --siya-bg-page: #fffdf6;
+  --siya-bg-subtle: #faf4e4;
+  --siya-white: #ffffff;
+  --siya-shadow: 0 4px 16px rgba(28, 25, 23, 0.06);
+  --siya-shadow-lg: 0 18px 40px rgba(28, 25, 23, 0.1);
+  --siya-status-warn-bg: #fffbeb;
+  --siya-status-warn-border: #fde68a;
+  --siya-status-warn-text: #78350f;
+  --siya-status-info-bg: #f0fdfa;
+  --siya-status-info-border: #99f6e4;
+  --siya-status-info-text: #115e59;
+  --siya-status-success-bg: #ecfdf5;
+  --siya-status-success-border: #a7f3d0;
+  --siya-status-success-text: #065f46;
+  --siya-status-error-bg: #fef2f2;
+  --siya-status-error-border: #fecaca;
+  --siya-status-error-text: #991b1b;
 }
 
 .siya-page-bg {
   background:
     radial-gradient(900px 420px at 8% -5%, rgba(30, 58, 138, 0.07), transparent 55%),
     radial-gradient(700px 360px at 95% 0%, rgba(15, 118, 110, 0.06), transparent 50%),
+    var(--siya-bg-page);
+}
+
+html.dark .siya-page-bg {
+  background:
+    radial-gradient(900px 420px at 8% -5%, rgba(139, 163, 232, 0.08), transparent 55%),
+    radial-gradient(700px 360px at 95% 0%, rgba(45, 212, 191, 0.06), transparent 50%),
     var(--siya-bg-page);
 }
 
@@ -74,5 +153,210 @@ body {
   body {
     background: white;
     color: black;
+  }
+}
+
+/* —— Brand intro splash (every load — Netflix-style zoom) —— */
+.siya-brand-intro {
+  --siya-intro-cream: #f4efe7;
+  --siya-intro-navy: #001878;
+  --siya-intro-plum: #d81088;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: var(--siya-intro-cream);
+  cursor: pointer;
+  user-select: none;
+  opacity: 1;
+  overflow: hidden;
+}
+
+.siya-brand-intro--exit {
+  opacity: 0;
+  transition: opacity 0.32s ease-in;
+  pointer-events: none;
+}
+
+.siya-brand-intro__stage {
+  position: relative;
+  text-align: center;
+  padding: 2.25rem 2.75rem;
+  max-width: min(92vw, 28rem);
+  border-radius: 1.35rem;
+  border: 1.5px solid color-mix(in srgb, var(--siya-intro-plum) 42%, var(--siya-intro-navy));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--siya-intro-navy) 8%, transparent),
+    0 0 48px color-mix(in srgb, var(--siya-intro-plum) 18%, transparent);
+  animation: siya-brand-intro-frame 1.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.siya-brand-intro__wordmark {
+  margin: 0;
+  font-family: var(--font-poppins), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(3.25rem, 12vw, 5.5rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  animation: siya-brand-intro-wordmark 1.05s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.siya-brand-intro__si {
+  color: var(--siya-intro-navy);
+}
+
+.siya-brand-intro__ya {
+  color: var(--siya-intro-plum);
+}
+
+.siya-brand-intro__tagline {
+  margin: 1.35rem 0 0;
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(0.95rem, 2.8vw, 1.125rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.45;
+  color: var(--siya-intro-navy);
+  opacity: 0.92;
+  animation: siya-brand-intro-tagline 0.55s ease-out 1.15s both;
+}
+
+.siya-brand-intro__hint {
+  margin: 2rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--siya-intro-navy) 45%, transparent);
+  animation: siya-brand-intro-hint 0.4s ease-out 1.65s both;
+}
+
+/* Zoom in close → pull back slightly → settle (Netflix-ish) */
+@keyframes siya-brand-intro-wordmark {
+  0% {
+    opacity: 0;
+    transform: scale(1.42);
+  }
+  42% {
+    opacity: 1;
+    transform: scale(0.92);
+  }
+  68% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes siya-brand-intro-frame {
+  0% {
+    opacity: 0;
+    transform: scale(1.18);
+    border-color: transparent;
+    box-shadow: 0 0 0 0 transparent;
+  }
+  45% {
+    opacity: 1;
+    transform: scale(0.97);
+    border-color: color-mix(in srgb, var(--siya-intro-plum) 55%, var(--siya-intro-navy));
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--siya-intro-navy) 10%, transparent),
+      0 0 56px color-mix(in srgb, var(--siya-intro-plum) 28%, transparent);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    border-color: color-mix(in srgb, var(--siya-intro-plum) 42%, var(--siya-intro-navy));
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--siya-intro-navy) 8%, transparent),
+      0 0 40px color-mix(in srgb, var(--siya-intro-plum) 16%, transparent);
+  }
+}
+
+@keyframes siya-brand-intro-tagline {
+  from {
+    opacity: 0;
+    transform: translateY(0.55rem);
+  }
+  to {
+    opacity: 0.92;
+    transform: translateY(0);
+  }
+}
+
+@keyframes siya-brand-intro-hint {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.siya-brand-intro--reduced .siya-brand-intro__wordmark,
+.siya-brand-intro--reduced .siya-brand-intro__tagline,
+.siya-brand-intro--reduced .siya-brand-intro__hint,
+.siya-brand-intro--reduced .siya-brand-intro__stage {
+  animation: none !important;
+  opacity: 1;
+  transform: none;
+}
+
+.siya-brand-intro--reduced .siya-brand-intro__tagline {
+  opacity: 0.92;
+}
+
+.siya-brand-intro--reduced .siya-brand-intro__hint {
+  opacity: 0.55;
+}
+
+.siya-brand-intro--reduced.siya-brand-intro--exit {
+  transition: none;
+  opacity: 0;
+}
+
+/* —— Persistent Siya wordmark (header / login) — same split as intro —— */
+.siya-wordmark__si {
+  color: #001878;
+}
+
+.siya-wordmark__ya {
+  color: #d81088;
+}
+
+html.dark .siya-wordmark__si {
+  color: #8ba3e8;
+}
+
+html.dark .siya-wordmark__ya {
+  color: #f472b6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .siya-brand-intro__wordmark,
+  .siya-brand-intro__tagline,
+  .siya-brand-intro__hint,
+  .siya-brand-intro__stage {
+    animation: none !important;
+    transform: none;
+  }
+
+  .siya-brand-intro__wordmark {
+    opacity: 1;
+  }
+
+  .siya-brand-intro__tagline {
+    opacity: 0.92;
+  }
+
+  .siya-brand-intro__hint {
+    opacity: 0.55;
+  }
+
+  .siya-brand-intro--exit {
+    transition: none;
   }
 }

@@ -149,8 +149,8 @@ export function KnowledgePanel() {
       <div>
         <h2 className={portalH2}>Knowledge</h2>
         <p className="text-xs text-[var(--siya-text-muted)]">
-          Layer 1 decisions and Layer 2 canonical docs (SOPs live in Ask KB today). Decisions are a <em>type</em> of
-          knowledge — not the top-level concept.
+          Layer 2 decisions (authoritative in Postgres). This form is the sole create path — Ask retrieves them like
+          live SOPs. Markdown under <code className="text-[10px]">docs/.../decisions/</code> is backup/boot-sync only.
         </p>
       </div>
 
@@ -167,7 +167,7 @@ export function KnowledgePanel() {
       </p>
 
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="text-xs font-medium text-[var(--siya-text-secondary)]">Decisions (Layer 1)</p>
+        <p className="text-xs font-medium text-[var(--siya-text-secondary)]">Decisions (Layer 2 · decision log)</p>
         <button type="button" onClick={() => setOpen(true)} className={portalBtnNavySm}>
           Record decision
         </button>

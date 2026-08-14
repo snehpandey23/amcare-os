@@ -1,5 +1,8 @@
 import { TeamPulsePanel } from "@/components/team/TeamPulsePanel";
 import { ShiftHandoffFeed } from "@/components/ops/ShiftHandoffFeed";
+import { WeeklyCheckInFeed } from "@/components/ops/WeeklyCheckInFeed";
+import { WeeklyCheckInCard } from "@/components/ops/WeeklyCheckInCard";
+import { LeadKnowledgeGapsCard } from "@/components/ops/LeadKnowledgeGapsCard";
 import { portalH1 } from "@/lib/portal-ui";
 
 export default function TeamPage() {
@@ -13,6 +16,9 @@ export default function TeamPage() {
             Self-declared presence only; no surveillance.
           </p>
         </header>
+        <LeadKnowledgeGapsCard />
+        <WeeklyCheckInCard />
+        <WeeklyCheckInFeed />
         <ShiftHandoffFeed />
         <TeamPulsePanel />
       </div>

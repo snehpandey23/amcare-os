@@ -1,9 +1,9 @@
 import {
   gatherSopBuilderContext,
   generateInterviewStart,
+  SopBuilderLlmError,
   type SopBuilderTranscriptEntry,
 } from "@/lib/sop-builder-assist";
-import { workforceLlmEnabled } from "@/lib/siya-os/model";
 import { apiFetch, requireSopBuilderAuth } from "@/lib/sop-builder-route-auth";
 
 export const maxDuration = 60;
@@ -23,14 +23,24 @@ export async function POST(req: Request) {
   if (!topic) return Response.json({ error: "topic required" }, { status: 400 });
 
   const sourceRefs = await gatherSopBuilderContext(topic, auth);
-  const interview = await generateInterviewStart({ topic, sourceRefs });
+  let interview: Awaited<ReturnType<typeof generateInterviewStart>>;
+  try {
+    interview = await generateInterviewStart({ topic, sourceRefs });
+  } catch (err) {
+    if (err instanceof SopBuilderLlmError) {
+      return Response.json(
+        { error: err.classified.userMessage, code: err.classified.code, kind: err.classified.kind },
+        { status: 503 },
+      );
+    }
+    throw err;
+  }
   if (!interview) {
     return Response.json(
       {
-        error: workforceLlmEnabled()
-          ? "Interview generation failed. Try again later."
-          : "Workforce AI is off — use the department SOP workspace or task templates instead.",
-        code: "llm_unavailable",
+        error: "Interview generation returned invalid output. Try again.",
+        code: "llm_error",
+        kind: "unknown",
       },
       { status: 503 },
     );

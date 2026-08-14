@@ -29,6 +29,17 @@ The Siya Way (Constitution)  →  Policies & requirements (Laws)  →  Knowledge
 
 **Decisions** (tool choices, CTAs, vendors) remain typed **Knowledge**, not a top-level nav concept.
 
+### Decision log — single store (2026-08)
+
+| Role | Path |
+|------|------|
+| **Authoritative create/edit** | Memory hub → Knowledge → Record decision → `siya_decisions` |
+| **Ask retrieval** | `GET /api/knowledge/decisions/retrieval` → merged into Layer 2 (same pattern as dynamic SOPs) |
+| **Markdown under `docs/.../decisions/`** | Boot-synced once into Postgres; git **export/backup** only — not a second create path |
+| **Bulk seed** | `siya-decisions-seed.json` + `scripts/seed-siya-decisions.mjs` (via POST, lineage rules intact) |
+
+Do not maintain parallel “why” answers in markdown Ask KB and Postgres. Founder Coach decision-log wiring is a fast follow (not in this slice).
+
 ---
 
 ## Retrieve order (Ask — wired)
@@ -105,7 +116,9 @@ Internal docs and code may say **Laws**; responses use **Policies & requirements
 - **Pending review:** Visible in the library and **retrievable by Ask**, titled `[Pending Review] …` — not withheld, not treated as fully approved.
 - **Admin (founder v1):** Single global approver — review queue approves to Live or send back to draft with comment.
 
-**UI:** `/grow/sops`, `/admin/sop-review`, `/memory` (Way · Policies · Knowledge · Memory tabs).
+**UI:** `/memory/knowledge/sops`, `/admin/sop-review`, `/memory` (Way · Policies · Knowledge · Memory tabs).
+
+**Citation deep links:** Ask uses `MEMORY_DEEP_LINKS` (`/memory?tab=way|policies|knowledge|memory`). The Memory pillar must stay enabled (`NEXT_PUBLIC_SIYA_PORTAL_MEMORY_ENABLED` unset or not `0`) — otherwise `/memory` client-redirects to My Day (`/`) while href text still looks correct.
 
 ---
 

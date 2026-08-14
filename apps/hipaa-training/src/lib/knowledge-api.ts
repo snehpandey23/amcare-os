@@ -31,9 +31,26 @@ export async function fetchPoliciesRequirements(): Promise<PolicyRequirement[]> 
   return data.policies ?? [];
 }
 
-export async function fetchDecisions(limit = 30): Promise<DecisionRecord[]> {
+export async function fetchDecisions(limit = 50): Promise<DecisionRecord[]> {
   const data = (await knowledgeFetch(`/api/knowledge/decisions?limit=${limit}`)) as {
     decisions: DecisionRecord[];
+  };
+  return data.decisions ?? [];
+}
+
+/** Lean decision rows for Ask Layer 2 (mirrors fetchSopsForRetrieval). */
+export async function fetchDecisionsForRetrieval(authToken?: string | null): Promise<
+  { id: string; title: string; body: string; keywords: string[]; status: string; department: string }[]
+> {
+  const base = getTrainingApiUrl();
+  const token = authToken?.trim() || getStoredToken();
+  if (!base || !token) return [];
+  const res = await fetch(`${base}/api/knowledge/decisions/retrieval`, {
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+  });
+  if (!res.ok) return [];
+  const data = (await res.json().catch(() => ({}))) as {
+    decisions?: { id: string; title: string; body: string; keywords: string[]; status: string; department: string }[];
   };
   return data.decisions ?? [];
 }

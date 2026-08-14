@@ -66,7 +66,7 @@ function sopPhraseCandidates(sop: SopRetrievalRow): PhraseCard[] {
       id: `${sop.id}-title`,
       phrase: sop.title,
       meaning: `${sop.department} team procedure`,
-      example: firstSentence(sop.body) || "Open the SOP in Grow → SOPs for full steps.",
+      example: firstSentence(sop.body) || "Open the SOP under Memory → Knowledge → Department SOPs for full steps.",
     });
   }
   return out;

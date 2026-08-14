@@ -9,7 +9,7 @@ export type SopBuilderSessionRecord = {
   transcript: SopBuilderTranscriptEntry[];
   sourceMaterialRefs: SopBuilderSourceRefs;
   draftJson: (SopBuilderChecklistDraft & { checklistItems: { id: string; label: string; order: number }[] }) | null;
-  status: "in_progress" | "draft_ready" | "submitted";
+  status: "in_progress" | "draft_ready" | "submitted" | "published";
   createdAt: string;
   updatedAt: string;
 };
@@ -60,6 +60,13 @@ export async function fetchSopBuilderSession(id: string): Promise<SopBuilderSess
   return data.session;
 }
 
+export type SopBuilderEmailStatus = {
+  sent: boolean;
+  error?: string;
+  to?: string[];
+  id?: string;
+};
+
 export async function patchSopBuilderSession(
   id: string,
   patch: {
@@ -67,12 +74,26 @@ export async function patchSopBuilderSession(
     draftJson?: SopBuilderSessionRecord["draftJson"];
     status?: SopBuilderSessionRecord["status"];
   },
-): Promise<SopBuilderSessionRecord> {
-  const data = (await builderFetch(`/api/sop-builder/sessions/${id}`, {
+): Promise<{ session: SopBuilderSessionRecord; email: SopBuilderEmailStatus | null }> {
+  // Same-origin BFF fires Resend on submitted/published transitions.
+  const token = getStoredToken();
+  if (!token) throw new Error("Sign in required.");
+  const res = await fetch(`/api/sop-builder/sessions/${encodeURIComponent(id)}`, {
     method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(patch),
-  })) as { session: SopBuilderSessionRecord };
-  return data.session;
+  });
+  const data = (await res.json().catch(() => ({}))) as {
+    session?: SopBuilderSessionRecord;
+    email?: SopBuilderEmailStatus | null;
+    error?: string;
+  };
+  if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+  if (!data.session) throw new Error("No session returned");
+  return { session: data.session, email: data.email ?? null };
 }
 
 export async function fetchSubmittedSopBuilderSessions(): Promise<
@@ -82,6 +103,68 @@ export async function fetchSubmittedSopBuilderSessions(): Promise<
     sessions: (SopBuilderSessionRecord & { userName: string | null; userEmail: string })[];
   };
   return data.sessions ?? [];
+}
+
+/** Admin audit: recent builder sessions (any status). */
+export async function fetchAdminSopBuilderSessions(q?: string): Promise<
+  (SopBuilderSessionRecord & { userName: string | null; userEmail: string })[]
+> {
+  const qs = q?.trim() ? `?q=${encodeURIComponent(q.trim())}` : "";
+  const data = (await builderFetch(`/api/admin/sop-builder/sessions${qs}`)) as {
+    sessions: (SopBuilderSessionRecord & { userName: string | null; userEmail: string })[];
+  };
+  return data.sessions ?? [];
+}
+
+export async function fetchChecklistSubmitFeedback(opts: {
+  title: string;
+  description: string;
+  steps: string[];
+}): Promise<{
+  feedback: {
+    purposeComplete: boolean;
+    scopeComplete: boolean;
+    stepsComplete: boolean;
+    exceptionsComplete: boolean;
+    escalationComplete: boolean;
+    stepsSpecific: boolean;
+    possibleDuplicate: boolean;
+    duplicateOfTitle: string | null;
+    summary: string;
+    suggestions: string[];
+    readyHint: "looks_ready" | "needs_work";
+  };
+  note?: string;
+}> {
+  const token = getStoredToken();
+  if (!token) throw new Error("Sign in required.");
+  const res = await fetch("/api/sop-builder/submit-feedback", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(opts),
+  });
+  const data = (await res.json().catch(() => ({}))) as {
+    feedback?: {
+      purposeComplete: boolean;
+      scopeComplete: boolean;
+      stepsComplete: boolean;
+      exceptionsComplete: boolean;
+      escalationComplete: boolean;
+      stepsSpecific: boolean;
+      possibleDuplicate: boolean;
+      duplicateOfTitle: string | null;
+      summary: string;
+      suggestions: string[];
+      readyHint: "looks_ready" | "needs_work";
+    };
+    note?: string;
+    error?: string;
+  };
+  if (!res.ok || !data.feedback) throw new Error(data.error || "AI review failed");
+  return { feedback: data.feedback, note: data.note };
 }
 
 export async function submitSopFeedback(payload: {
@@ -109,10 +192,13 @@ export async function resolveSopFeedback(id: string): Promise<SopFeedbackRecord>
 }
 
 export class SopBuilderUnavailableError extends Error {
-  readonly code = "llm_unavailable" as const;
-  constructor(message: string) {
+  readonly code: string;
+  readonly kind: string;
+  constructor(message: string, code = "llm_error", kind = "unknown") {
     super(message);
     this.name = "SopBuilderUnavailableError";
+    this.code = code;
+    this.kind = kind;
   }
 }
 
@@ -127,10 +213,18 @@ async function sopBuilderRoute(path: string, body: unknown, auth?: string) {
     },
     body: JSON.stringify(body),
   });
-  const data = (await res.json().catch(() => ({}))) as { error?: string; code?: string };
+  const data = (await res.json().catch(() => ({}))) as { error?: string; code?: string; kind?: string };
   if (!res.ok) {
-    if (res.status === 503 && data.code === "llm_unavailable") {
-      throw new SopBuilderUnavailableError(data.error || "AI interview unavailable");
+    const code = data.code || "";
+    if (
+      res.status === 503 &&
+      (code.startsWith("llm_") || code === "llm_unavailable")
+    ) {
+      throw new SopBuilderUnavailableError(
+        data.error || "AI interview unavailable",
+        code === "llm_unavailable" ? "llm_error" : code,
+        data.kind || "unknown",
+      );
     }
     throw new Error(data.error || `Request failed (${res.status})`);
   }
@@ -167,13 +261,30 @@ export async function answerSopBuilderQuestion(
   }>;
 }
 
-export async function generateSopBuilderDraft(sessionId: string): Promise<{
+export async function generateSopBuilderDraft(
+  sessionId: string,
+  opts?: {
+    refineInstruction?: string;
+    currentDraft?: {
+      title: string;
+      description: string;
+      checklistItems: { label: string; order: number }[];
+      gaps?: string[];
+    };
+  },
+): Promise<{
   session: SopBuilderSessionRecord;
   draft: SopBuilderChecklistDraft;
+  refined?: boolean;
 }> {
-  return sopBuilderRoute("/api/sop-builder/draft", { sessionId }) as Promise<{
+  return sopBuilderRoute("/api/sop-builder/draft", {
+    sessionId,
+    refineInstruction: opts?.refineInstruction,
+    currentDraft: opts?.currentDraft,
+  }) as Promise<{
     session: SopBuilderSessionRecord;
     draft: SopBuilderChecklistDraft;
+    refined?: boolean;
   }>;
 }
 

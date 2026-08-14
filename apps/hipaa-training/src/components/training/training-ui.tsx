@@ -70,7 +70,7 @@ export function TrainingLinkPrimary({ href, children }: { href: string; children
 
 /** Use with next/link by passing className on Link */
 export const trainingLinkPrimaryClass =
-  "inline-flex rounded-[var(--siya-radius-md)] bg-[var(--siya-accent)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--siya-accent-hover)]";
+  "inline-flex rounded-[var(--siya-radius-md)] bg-[var(--siya-btn-accent)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--siya-btn-accent-hover)]";
 export const trainingLinkSecondaryClass =
   "inline-flex rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-white px-4 py-2.5 text-sm font-medium text-[var(--siya-text-secondary)] transition hover:bg-[var(--siya-bg-page)]";
 export const trainingLinkNavyClass =

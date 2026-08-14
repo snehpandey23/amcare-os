@@ -25,6 +25,7 @@ import {
 } from "@/lib/portal-ui";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
 import { SopBuilderReview } from "@/components/sop-builder/SopBuilderReview";
+import { VoiceInputButton } from "@/components/ui/VoiceInputButton";
 
 type Phase = "topic" | "interview" | "review";
 
@@ -152,10 +153,16 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
     setError(null);
     try {
       const result = await generateSopBuilderDraft(session.id);
+      if (!result.session?.draftJson?.checklistItems?.length) {
+        setError("Draft came back empty. Try Generate again, or Start over.");
+        setPhase("interview");
+        return;
+      }
       setSession(result.session);
       setPhase("review");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Draft failed");
+      setPhase("interview");
     } finally {
       setPending(false);
     }
@@ -164,14 +171,15 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
   if (!access?.canBuild) {
     return (
       <p className="text-sm text-[var(--siya-text-muted)]">
-        Admin or department lead access is required to build operational checklists.
+        Sign in required to build operational checklists.
       </p>
     );
   }
 
-  if (phase === "review" && session?.draftJson) {
+  if (phase === "review" && session?.draftJson?.checklistItems?.length) {
     return (
       <SopBuilderReview
+        key={session.id}
         session={session}
         isAdmin={access.isAdmin}
         onBack={() => setPhase("interview")}
@@ -182,6 +190,19 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
           void load();
         }}
       />
+    );
+  }
+
+  if (phase === "review" && session) {
+    return (
+      <div className="space-y-3">
+        <p className={`text-sm ${portalStatusErrorText}`}>
+          Draft is missing checklist steps. Go back and generate again.
+        </p>
+        <button type="button" className={trainingLinkPrimaryClass} onClick={() => setPhase("interview")}>
+          Back to interview
+        </button>
+      </div>
     );
   }
 
@@ -210,13 +231,14 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
               onChange={(e) => setAnswer(e.target.value)}
             />
             <div className="mt-3 flex flex-wrap gap-2">
+              <VoiceInputButton value={answer} onChange={setAnswer} disabled={pending} size="md" />
               <button
                 type="button"
                 disabled={pending || !answer.trim()}
                 className={trainingLinkPrimaryClass}
                 onClick={() => void submitAnswer(false)}
               >
-                {pending ? "Saving…" : "Next"}
+                {pending ? "Sending…" : "Next"}
               </button>
               <button
                 type="button"
@@ -232,14 +254,16 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
 
         {readyToDraft ? (
           <div className={`${portalStatusSuccessBox} p-4`}>
-            <p className={`text-sm ${portalStatusSuccessText}`}>You&apos;ve answered enough — ready to generate a checklist draft.</p>
+            <p className={`text-sm ${portalStatusSuccessText}`}>
+              You&apos;ve answered enough — generate the checklist, then submit it for admin approval.
+            </p>
             <button
               type="button"
               disabled={pending}
               className={`mt-3 ${trainingLinkPrimaryClass}`}
               onClick={() => void onGenerateDraft()}
             >
-              {pending ? "Generating…" : "Generate draft"}
+              {pending ? "Generating…" : "Generate draft → review & submit"}
             </button>
           </div>
         ) : null}
