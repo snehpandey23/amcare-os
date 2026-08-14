@@ -34,3 +34,25 @@ CREATE INDEX IF NOT EXISTS idx_shift_handoffs_user ON shift_handoffs(user_id, cr
 
 ALTER TABLE shift_handoffs ADD COLUMN IF NOT EXISTS calls_made_count INTEGER;
 ALTER TABLE shift_handoffs ADD COLUMN IF NOT EXISTS calls_received_count INTEGER;
+
+-- Weekly structured check-in for Marketing / Clinical Operations / Compliance leads
+-- Same ops-coordination module as shift_handoffs (Team feed), different cadence.
+CREATE TABLE IF NOT EXISTS weekly_lead_checkins (
+  id TEXT PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES hipaa_training_users(id) ON DELETE CASCADE,
+  department_slug VARCHAR(64) NOT NULL,
+  department_label TEXT NOT NULL,
+  week_start DATE NOT NULL,
+  what_changed TEXT NOT NULL DEFAULT '',
+  key_numbers_status TEXT NOT NULL DEFAULT '',
+  blockers TEXT NOT NULL DEFAULT '',
+  founder_should_know TEXT NOT NULL DEFAULT '',
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_weekly_lead_checkins_week
+  ON weekly_lead_checkins(week_start DESC, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_weekly_lead_checkins_user
+  ON weekly_lead_checkins(user_id, week_start DESC);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_weekly_lead_checkins_user_week_dept
+  ON weekly_lead_checkins(user_id, week_start, department_slug);

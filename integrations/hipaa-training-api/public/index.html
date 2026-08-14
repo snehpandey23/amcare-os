@@ -2,9 +2,70 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Siya staff auth API</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        max-width: 40rem;
+        margin: 3rem auto;
+        padding: 0 1.25rem;
+        line-height: 1.5;
+        color: #0f172a;
+      }
+      code {
+        background: #f1f5f9;
+        padding: 0.1rem 0.35rem;
+        border-radius: 4px;
+      }
+      a {
+        color: #1d4ed8;
+      }
+      .ok {
+        color: #047857;
+        font-weight: 600;
+      }
+    </style>
   </head>
   <body>
-    <p>Siya staff auth API. Use <code>/api/health</code>.</p>
+    <h1>Siya staff auth API</h1>
+    <p>
+      This is the <strong>backend only</strong> (login + clinic profiles). There is no app UI on this
+      domain.
+    </p>
+    <ul>
+      <li>Health: <a href="/api/health"><code>/api/health</code></a></li>
+      <li>
+        Prescription app:
+        <a href="https://amcare-os-prescription-generator.vercel.app"
+          >amcare-os-prescription-generator.vercel.app</a
+        >
+      </li>
+      <li>
+        Staff portal:
+        <a href="https://siya-staff-assist.vercel.app">siya-staff-assist.vercel.app</a>
+      </li>
+    </ul>
+    <p id="status">Checking <code>/api/health</code>…</p>
+    <script>
+      fetch("/api/health")
+        .then((r) => r.json())
+        .then((j) => {
+          const el = document.getElementById("status");
+          if (j && j.ok) {
+            el.innerHTML =
+              '<span class="ok">API healthy.</span> service=' +
+              (j.service || "?") +
+              ", database=" +
+              (j.database || "?");
+          } else {
+            el.textContent = "Health check returned unexpected payload.";
+          }
+        })
+        .catch(() => {
+          document.getElementById("status").textContent =
+            "Health check failed — API may be down.";
+        });
+    </script>
   </body>
 </html>

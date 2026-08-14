@@ -67,7 +67,7 @@ export function requireAdmin(req: AuthRequest, res: Response, next: NextFunction
   next();
 }
 
-/** Admin or any assigned department SOP lead (`siya_department_leads`). */
+/** Any signed-in staff (lead gate temporarily open so drafting is not blocked). */
 export async function requireSopBuilderAccess(
   req: AuthRequest,
   res: Response,
@@ -77,27 +77,7 @@ export async function requireSopBuilderAccess(
     res.status(401).json({ error: "Not authenticated" });
     return;
   }
-  if (req.user.role === "admin") {
-    next();
-    return;
-  }
-  const pool = getPool();
-  if (!pool) {
-    res.status(503).json({ error: "Database not configured." });
-    return;
-  }
-  try {
-    const { canUseSopBuilder } = await import("./sop-builder-service.js");
-    const ok = await canUseSopBuilder(pool, req.user.userId, req.user.role ?? "trainee");
-    if (!ok) {
-      res.status(403).json({ error: "Admin or department lead access required" });
-      return;
-    }
-    next();
-  } catch (err) {
-    console.error("[hipaa-training-api] requireSopBuilderAccess:", err);
-    res.status(500).json({ error: "Access check failed" });
-  }
+  next();
 }
 
 /** Admin or Clinical Operations department lead — chat review QA tool. */

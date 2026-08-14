@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-export type SopBuilderSessionStatus = "in_progress" | "draft_ready" | "submitted";
+export type SopBuilderSessionStatus = "in_progress" | "draft_ready" | "submitted" | "published";
 
 export type SopBuilderTranscriptEntry = {
   role: "assistant" | "user";
@@ -86,11 +86,9 @@ function rowToSession(row: Record<string, unknown>): SopBuilderSessionRecord {
   };
 }
 
-export async function canUseSopBuilder(pool: pg.Pool, userId: string, role: string): Promise<boolean> {
-  if (role === "admin") return true;
-  const { listMyLeadDepartments } = await import("./sop-service.js");
-  const slugs = await listMyLeadDepartments(pool, userId);
-  return slugs.length > 0;
+/** Temporary open access: any signed-in staff can use the checklist SOP builder. */
+export async function canUseSopBuilder(_pool: pg.Pool, _userId: string, _role: string): Promise<boolean> {
+  return true;
 }
 
 export async function createSopBuilderSession(
@@ -174,13 +172,47 @@ export async function listSubmittedSopBuilderSessions(pool: pg.Pool): Promise<
   (SopBuilderSessionRecord & { userName: string | null; userEmail: string })[]
 > {
   await ensureSopBuilderTablesReady(pool);
+  // Admin review queue: submitted drafts + draft_ready (generated/saved but author never hit Submit).
   const r = await pool.query(
     `SELECT s.*, u.name AS user_name, u.email AS user_email
      FROM sop_builder_sessions s
      JOIN hipaa_training_users u ON u.id = s.user_id
-     WHERE s.status = 'submitted'
-     ORDER BY s.updated_at DESC
+     WHERE s.draft_json IS NOT NULL
+       AND s.status IN ('submitted', 'draft_ready')
+     ORDER BY CASE WHEN s.status = 'submitted' THEN 0 ELSE 1 END, s.updated_at DESC
      LIMIT 50`,
+  );
+  return r.rows.map((row) => ({
+    ...rowToSession(row as Record<string, unknown>),
+    userName: (row.user_name as string) ?? null,
+    userEmail: row.user_email as string,
+  }));
+}
+
+/** Admin audit: recent builder sessions (any status), optional topic/title search. */
+export async function listAdminSopBuilderSessions(
+  pool: pg.Pool,
+  opts?: { q?: string; limit?: number },
+): Promise<(SopBuilderSessionRecord & { userName: string | null; userEmail: string })[]> {
+  await ensureSopBuilderTablesReady(pool);
+  const limit = Math.min(Math.max(opts?.limit ?? 50, 1), 100);
+  const q = opts?.q?.trim();
+  const params: unknown[] = [];
+  let where = "";
+  if (q) {
+    params.push(`%${q}%`);
+    where = `WHERE (s.topic ILIKE $1 OR COALESCE(s.draft_json->>'title','') ILIKE $1)`;
+  }
+  params.push(limit);
+  const limIdx = params.length;
+  const r = await pool.query(
+    `SELECT s.*, u.name AS user_name, u.email AS user_email
+     FROM sop_builder_sessions s
+     JOIN hipaa_training_users u ON u.id = s.user_id
+     ${where}
+     ORDER BY s.updated_at DESC
+     LIMIT $${limIdx}`,
+    params,
   );
   return r.rows.map((row) => ({
     ...rowToSession(row as Record<string, unknown>),

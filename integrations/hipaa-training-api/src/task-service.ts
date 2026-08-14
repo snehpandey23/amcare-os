@@ -702,7 +702,7 @@ export async function syncKnowledgeWorkToDailyBoard(pool: pg.Pool, dueDate?: str
     await upsertKnowledgeDailyTask(pool, {
       id: `kn-sop-task-${row.id as string}`,
       title: row.title as string,
-      description: `Grow → SOPs · ${dept} · Knowledge task (${row.task_type}). Complete in Grow or mark done on the task board.`,
+      description: `Department SOPs · ${dept} · Knowledge task (${row.task_type}). Complete under Memory → Knowledge → Department SOPs, or mark done on the task board.`,
       assigneeId,
       dueDate: opsDate,
       knowledgeDone: knDone,
@@ -719,7 +719,7 @@ export async function syncKnowledgeWorkToDailyBoard(pool: pg.Pool, dueDate?: str
     await upsertKnowledgeDailyTask(pool, {
       id: `kn-sop-refresh-${row.id as string}`,
       title: `Refresh SOP: ${row.title as string}`,
-      description: "This live SOP passed its review date. Update in Grow → SOPs and submit for review.",
+      description: "This live SOP passed its review date. Update under Memory → Knowledge → Department SOPs and submit for review.",
       assigneeId: ownerId,
       dueDate: opsDate,
       knowledgeDone: false,
@@ -727,18 +727,17 @@ export async function syncKnowledgeWorkToDailyBoard(pool: pg.Pool, dueDate?: str
     synced += 1;
   }
 
-  const pendingReview = await pool.query(
-    `SELECT s.id, s.title, l.user_id AS lead_id
-     FROM siya_sops s
-     JOIN siya_department_leads l ON l.department_slug = s.department_slug
-     WHERE s.status = 'pending_review' AND l.user_id IS NOT NULL`,
-  );
-  for (const row of pendingReview.rows) {
+  const { listSops, resolveSopApprovalRoute } = await import("./sop-service.js");
+  const { departmentToSlug } = await import("./sop-store.js");
+  const pendingReviewSops = await listSops(pool, { status: "pending_review" });
+  for (const sop of pendingReviewSops) {
+    const route = await resolveSopApprovalRoute(pool, departmentToSlug(sop.department));
+    if (route.mode !== "lead_self" || !route.leadUserId) continue;
     await upsertKnowledgeDailyTask(pool, {
-      id: `kn-sop-lead-review-${row.id as string}`,
-      title: `Lead review: ${row.title as string}`,
-      description: "Department lead pre-check before admin approval. Admin queue: /admin/sop-review",
-      assigneeId: row.lead_id as string,
+      id: `kn-sop-lead-review-${sop.id}`,
+      title: `Lead review: ${sop.title}`,
+      description: "Department lead approval (self-approve). Open Memory → Knowledge → Department SOPs or Admin → SOP review.",
+      assigneeId: route.leadUserId,
       dueDate: opsDate,
       knowledgeDone: false,
     });
@@ -749,13 +748,14 @@ export async function syncKnowledgeWorkToDailyBoard(pool: pg.Pool, dueDate?: str
     `SELECT id FROM hipaa_training_users WHERE role = 'admin' AND deactivated_at IS NULL ORDER BY created_at ASC LIMIT 1`,
   );
   const adminId = (adminRow.rows[0]?.id as string) ?? null;
-  const adminPending = await pool.query(`SELECT id, title FROM siya_sops WHERE status = 'pending_review'`);
-  for (const sop of adminPending.rows) {
+  for (const sop of pendingReviewSops) {
     if (!adminId) break;
+    const route = await resolveSopApprovalRoute(pool, departmentToSlug(sop.department));
+    if (route.mode !== "founder") continue;
     await upsertKnowledgeDailyTask(pool, {
-      id: `kn-sop-admin-review-${sop.id as string}`,
-      title: `SOP review: ${sop.title as string}`,
-      description: "Approve or send back in Admin → SOP review.",
+      id: `kn-sop-admin-review-${sop.id}`,
+      title: `SOP review: ${sop.title}`,
+      description: "Founder/admin queue (no lead or company-wide). Approve or send back in Admin → SOP review.",
       assigneeId: adminId,
       dueDate: opsDate,
       knowledgeDone: false,

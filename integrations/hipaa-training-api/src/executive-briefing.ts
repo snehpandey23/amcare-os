@@ -80,10 +80,8 @@ export async function buildExecutiveBriefing(
   const unansweredQuestions = await countOpenGapsSince(pool, sinceWeek);
   const negativeResponses = await countNegativeFeedbackSince(pool, sinceWeek);
 
-  const sopPending = await pool.query(
-    `SELECT COUNT(*)::int AS c FROM siya_sops WHERE status = 'pending_review'`,
-  );
-  const sopCount = sopPending.rows[0]?.c ?? 0;
+  const { listFounderRoutedPendingSops } = await import("./sop-service.js");
+  const sopCount = (await listFounderRoutedPendingSops(pool)).length;
 
   let memoryPromotions = 0;
   try {
@@ -188,7 +186,9 @@ export async function buildExecutiveBriefing(
         recommendedAction:
           unansweredQuestions > 0
             ? "Open Ask → Knowledge mode and review reimbursement / workflow SOPs for gaps."
-            : "Review pending SOP promotions in Admin → SOP review.",
+            : sopCount > 0
+              ? "Review founder-routed SOPs in Admin → SOP review (lead-owned depts self-approve)."
+              : "No founder-routed SOP reviews — lead-owned pending SOPs stay with department leads.",
       },
       needsAttention: {
         total: attentionTotal,
@@ -203,7 +203,7 @@ export async function buildExecutiveBriefing(
         whyItMatters: "Leadership time belongs on judgment, not object hunting in five admin screens.",
         recommendedAction:
           sopCount > 0
-            ? "Start with SOP reviews — they unlock safer answers for the whole team."
+            ? "Start with founder-routed SOP reviews (no lead / Leadership / General)."
             : oldOverdue.length > 0
               ? "Triage overdue > 7 days before approving new work in Ask."
               : "Ask: “What needs my attention?” for a conversational walkthrough.",

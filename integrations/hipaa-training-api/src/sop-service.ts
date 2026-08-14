@@ -142,6 +142,143 @@ export async function isLeadForDepartment(pool: pg.Pool, userId: string, departm
   return r.rows.length > 0;
 }
 
+/** Leadership + General always stay on founder/admin queue. */
+export const SOP_FOUNDER_QUEUE_DEPARTMENTS = new Set(["Leadership", "General"]);
+
+/**
+ * Who should approve this department's Knowledge SOPs.
+ * lead_self = non-admin assigned lead can approve/publish.
+ * founder = no lead, lead is admin, or cross-cutting dept.
+ */
+export async function resolveSopApprovalRoute(
+  pool: pg.Pool,
+  departmentSlug: string,
+): Promise<{
+  mode: "lead_self" | "founder";
+  departmentSlug: string;
+  departmentLabel: string;
+  leadUserId: string | null;
+  leadEmail: string | null;
+  leadName: string | null;
+  reason: string;
+}> {
+  const label = slugToDepartment(departmentSlug) || departmentSlug;
+  const slug = departmentToSlug(label);
+
+  if (SOP_FOUNDER_QUEUE_DEPARTMENTS.has(label)) {
+    return {
+      mode: "founder",
+      departmentSlug: slug,
+      departmentLabel: label,
+      leadUserId: null,
+      leadEmail: null,
+      leadName: null,
+      reason: "cross_cutting_department",
+    };
+  }
+
+  const r = await pool.query(
+    `SELECT l.user_id, u.email, u.name, u.role
+     FROM siya_department_leads l
+     LEFT JOIN hipaa_training_users u ON u.id = l.user_id AND u.deactivated_at IS NULL
+     WHERE l.department_slug = $1`,
+    [slug],
+  );
+  const row = r.rows[0] as
+    | { user_id: string | null; email: string | null; name: string | null; role: string | null }
+    | undefined;
+
+  if (!row?.user_id) {
+    return {
+      mode: "founder",
+      departmentSlug: slug,
+      departmentLabel: label,
+      leadUserId: null,
+      leadEmail: null,
+      leadName: null,
+      reason: "no_assigned_lead",
+    };
+  }
+
+  if (row.role === "admin") {
+    return {
+      mode: "founder",
+      departmentSlug: slug,
+      departmentLabel: label,
+      leadUserId: row.user_id,
+      leadEmail: String(row.email || "")
+        .trim()
+        .toLowerCase()
+        .includes("@")
+        ? String(row.email).trim().toLowerCase()
+        : null,
+      leadName: row.name,
+      reason: "lead_is_founder_admin",
+    };
+  }
+
+  const email = String(row.email || "")
+    .trim()
+    .toLowerCase();
+  return {
+    mode: "lead_self",
+    departmentSlug: slug,
+    departmentLabel: label,
+    leadUserId: row.user_id,
+    leadEmail: email.includes("@") ? email : null,
+    leadName: row.name,
+    reason: "department_lead",
+  };
+}
+
+export async function canUserApproveSop(
+  pool: pg.Pool,
+  userId: string,
+  role: string,
+  departmentSlug: string,
+): Promise<boolean> {
+  if (role === "admin") return true;
+  const route = await resolveSopApprovalRoute(pool, departmentSlug);
+  if (route.mode !== "lead_self") return false;
+  return route.leadUserId === userId;
+}
+
+/**
+ * Pending SOPs that stay on the founder/admin queue:
+ * no assigned lead, lead is founder admin, or Leadership/General (cross-cutting).
+ * Departments with a non-admin lead self-approve and are excluded.
+ */
+export async function listFounderRoutedPendingSops(pool: pg.Pool): Promise<SopRecord[]> {
+  const all = await listSops(pool, { status: "pending_review" });
+  const out: SopRecord[] = [];
+  for (const sop of all) {
+    const route = await resolveSopApprovalRoute(pool, departmentToSlug(sop.department));
+    if (route.mode === "founder") out.push(sop);
+  }
+  return out;
+}
+
+/** Pending review queue scoped to viewer (admin = founder-routed only; lead = their depts). */
+export async function listSopReviewQueueForViewer(
+  pool: pg.Pool,
+  opts: { userId: string; role: string },
+): Promise<SopRecord[]> {
+  if (opts.role === "admin") {
+    return listFounderRoutedPendingSops(pool);
+  }
+  const all = await listSops(pool, { status: "pending_review" });
+  const mySlugs = await listMyLeadDepartments(pool, opts.userId);
+  if (!mySlugs.length) return [];
+  const out: SopRecord[] = [];
+  for (const sop of all) {
+    const slug = departmentToSlug(sop.department);
+    if (!mySlugs.includes(slug)) continue;
+    const route = await resolveSopApprovalRoute(pool, slug);
+    if (route.mode === "lead_self" && route.leadUserId === opts.userId) out.push(sop);
+  }
+  return out;
+}
+
 export async function listDepartmentLeads(pool: pg.Pool): Promise<DepartmentLead[]> {
   const r = await pool.query(
     `SELECT l.department_slug, l.department_label, l.user_id, u.name, u.email
@@ -229,12 +366,11 @@ function rowToSop(row: Record<string, unknown>): SopRecord {
   };
 }
 
-async function assertCanEditSop(pool: pg.Pool, userId: string, role: string, sop: SopRecord): Promise<void> {
+async function assertCanEditSop(_pool: pg.Pool, _userId: string, role: string, sop: SopRecord): Promise<void> {
   if (role === "admin") return;
-  const slug = departmentToSlug(sop.department);
-  if (!(await isLeadForDepartment(pool, userId, slug))) throw new Error("Department lead access required");
-  if (sop.status !== "draft" && sop.status !== "needs_review") {
-    throw new Error("SOP can only be edited in draft or needs_review");
+  // Temporary: any signed-in staff may edit drafts / in-review SOPs (not live).
+  if (sop.status !== "draft" && sop.status !== "needs_review" && sop.status !== "pending_review") {
+    throw new Error("SOP can only be edited in draft, needs_review, or pending_review");
   }
 }
 
@@ -281,6 +417,68 @@ export async function getSop(pool: pg.Pool, id: string): Promise<SopRecord | nul
   return rowToSop(r.rows[0]);
 }
 
+/** Active portal admins — SOP review queue is admin-only (not department leads). */
+export async function listActiveAdminContacts(
+  pool: pg.Pool,
+): Promise<{ email: string; name: string | null }[]> {
+  const r = await pool.query(
+    `SELECT email, name FROM hipaa_training_users
+     WHERE role = 'admin' AND deactivated_at IS NULL
+     ORDER BY created_at ASC`,
+  );
+  return r.rows
+    .map((row) => ({
+      email: String(row.email || "").trim().toLowerCase(),
+      name: (row.name as string) ?? null,
+    }))
+    .filter((c) => c.email.includes("@"));
+}
+
+export async function getUserContact(
+  pool: pg.Pool,
+  userId: string,
+): Promise<{ email: string; name: string | null } | null> {
+  const r = await pool.query(
+    `SELECT email, name FROM hipaa_training_users
+     WHERE id = $1 AND deactivated_at IS NULL`,
+    [userId],
+  );
+  if (!r.rows[0]) return null;
+  const email = String(r.rows[0].email || "").trim().toLowerCase();
+  if (!email.includes("@")) return null;
+  return { email, name: (r.rows[0].name as string) ?? null };
+}
+
+export type SopReviewNotifyMeta = {
+  ownerEmail: string | null;
+  ownerName: string | null;
+  adminEmails: string[];
+  /** Lead email when this dept self-approves — notify them instead of / in addition to admins */
+  reviewerEmails: string[];
+  approvalMode: "lead_self" | "founder";
+};
+
+export async function buildSopReviewNotifyMeta(
+  pool: pg.Pool,
+  sop: SopRecord,
+): Promise<SopReviewNotifyMeta> {
+  const owner = await getUserContact(pool, sop.ownerUserId);
+  const admins = await listActiveAdminContacts(pool);
+  const route = await resolveSopApprovalRoute(pool, departmentToSlug(sop.department));
+  const adminEmails = admins.map((a) => a.email);
+  const reviewerEmails =
+    route.mode === "lead_self" && route.leadEmail
+      ? [route.leadEmail]
+      : adminEmails;
+  return {
+    ownerEmail: owner?.email ?? null,
+    ownerName: owner?.name ?? sop.ownerName,
+    adminEmails,
+    reviewerEmails,
+    approvalMode: route.mode,
+  };
+}
+
 export async function createSop(
   pool: pg.Pool,
   userId: string,
@@ -297,9 +495,7 @@ export async function createSop(
 ): Promise<SopRecord> {
   const dept = resolveDepartment(body.department);
   const slug = departmentToSlug(dept);
-  if (role !== "admin" && !(await isLeadForDepartment(pool, userId, slug))) {
-    throw new Error("Department lead access required");
-  }
+  void role; // open create: any authenticated staff
   const id = `sop-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
   const r = await pool.query(
     `INSERT INTO siya_sops
@@ -378,25 +574,33 @@ export async function submitSopForReview(pool: pg.Pool, userId: string, role: st
   return rowToSop({ ...r.rows[0], owner_name: sop.ownerName });
 }
 
-export async function approveSop(pool: pg.Pool, adminUserId: string, id: string): Promise<SopRecord> {
+export async function approveSop(pool: pg.Pool, approverUserId: string, id: string): Promise<SopRecord> {
   const sop = await getSop(pool, id);
   if (!sop) throw new Error("SOP not found");
   if (sop.status !== "pending_review") throw new Error("SOP is not pending review");
+  const role = await getUserRole(pool, approverUserId);
+  const allowed = await canUserApproveSop(pool, approverUserId, role, departmentToSlug(sop.department));
+  if (!allowed) throw new Error("Not authorized to approve this SOP");
   const r = await pool.query(
     `UPDATE siya_sops SET status = 'live', approved_at = NOW(), approved_by = $2, reviewer_comment = NULL, updated_at = NOW()
      WHERE id = $1 RETURNING *`,
-    [id, adminUserId],
+    [id, approverUserId],
   );
   return rowToSop({ ...r.rows[0], owner_name: sop.ownerName });
 }
 
-export async function sendBackSop(pool: pg.Pool, id: string, comment: string): Promise<SopRecord> {
-  const sop = await getSop(pool, id);
+export async function sendBackSop(
+  pool: pg.Pool,
+  opts: { id: string; comment: string; userId: string; role: string },
+): Promise<SopRecord> {
+  const sop = await getSop(pool, opts.id);
   if (!sop) throw new Error("SOP not found");
   if (sop.status !== "pending_review") throw new Error("SOP is not pending review");
+  const allowed = await canUserApproveSop(pool, opts.userId, opts.role, departmentToSlug(sop.department));
+  if (!allowed) throw new Error("Not authorized to send back this SOP");
   const r = await pool.query(
     `UPDATE siya_sops SET status = 'draft', reviewer_comment = $2, updated_at = NOW() WHERE id = $1 RETURNING *`,
-    [id, comment.slice(0, 4000)],
+    [opts.id, opts.comment.slice(0, 4000)],
   );
   return rowToSop({ ...r.rows[0], owner_name: sop.ownerName });
 }
@@ -447,9 +651,8 @@ export async function createSopTask(
 ): Promise<SopTaskRecord> {
   const dept = resolveDepartment(body.department);
   const slug = departmentToSlug(dept);
-  if (role !== "admin" && !(await isLeadForDepartment(pool, userId, slug))) {
-    throw new Error("Department lead access required");
-  }
+  void role;
+  void userId;
   const id = `task-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
   await pool.query(
     `INSERT INTO siya_sop_tasks (id, department_slug, department_label, task_type, title, sop_id, assignee_user_id, due_date)
@@ -480,10 +683,8 @@ export async function patchSopTask(
 ): Promise<SopTaskRecord> {
   const r0 = await pool.query(`SELECT department_slug FROM siya_sop_tasks WHERE id = $1`, [taskId]);
   if (!r0.rows[0]) throw new Error("Task not found");
-  const slug = r0.rows[0].department_slug as string;
-  if (role !== "admin" && !(await isLeadForDepartment(pool, userId, slug))) {
-    throw new Error("Department lead access required");
-  }
+  void role;
+  void userId;
   await pool.query(
     `UPDATE siya_sop_tasks SET
       assignee_user_id = COALESCE($2, assignee_user_id),

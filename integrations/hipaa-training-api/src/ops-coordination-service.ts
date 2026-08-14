@@ -334,4 +334,164 @@ export async function listShiftHandoffs(pool: pg.Pool, dateParam: unknown): Prom
   return r.rows.map((row) => rowToHandoff(row as Record<string, unknown>));
 }
 
+/** Departments that file a weekly structured check-in (leads + admins). */
+export const WEEKLY_CHECKIN_DEPARTMENTS = [
+  "Marketing",
+  "Clinical Operations",
+  "Compliance",
+] as const;
+
+export type WeeklyCheckInDepartment = (typeof WEEKLY_CHECKIN_DEPARTMENTS)[number];
+
+export type WeeklyLeadCheckInRecord = {
+  id: string;
+  userId: string;
+  departmentSlug: string;
+  departmentLabel: string;
+  weekStart: string;
+  whatChanged: string;
+  keyNumbersStatus: string;
+  blockers: string;
+  founderShouldKnow: string;
+  createdAt: string;
+  userName?: string | null;
+  userEmail?: string;
+};
+
+/** Monday of the current IST ops week as YYYY-MM-DD (calendar arithmetic on IST date). */
+export function istWeekStart(at = new Date()): string {
+  const label = istDateLabel(at);
+  const [y, m, d] = label.split("-").map(Number);
+  const cal = new Date(Date.UTC(y!, m! - 1, d!));
+  const dow = cal.getUTCDay(); // 0 Sun … 6 Sat
+  const daysFromMonday = dow === 0 ? 6 : dow - 1;
+  cal.setUTCDate(cal.getUTCDate() - daysFromMonday);
+  return cal.toISOString().slice(0, 10);
+}
+
+function rowToWeeklyCheckIn(row: Record<string, unknown>): WeeklyLeadCheckInRecord {
+  return {
+    id: row.id as string,
+    userId: row.user_id as string,
+    departmentSlug: String(row.department_slug ?? ""),
+    departmentLabel: String(row.department_label ?? ""),
+    weekStart: new Date(row.week_start as string).toISOString().slice(0, 10),
+    whatChanged: String(row.what_changed ?? ""),
+    keyNumbersStatus: String(row.key_numbers_status ?? ""),
+    blockers: String(row.blockers ?? ""),
+    founderShouldKnow: String(row.founder_should_know ?? ""),
+    createdAt: new Date(row.created_at as string).toISOString(),
+    userName: (row.user_name as string) ?? null,
+    userEmail: row.user_email as string | undefined,
+  };
+}
+
+export async function weeklyCheckInAccess(
+  pool: pg.Pool,
+  userId: string,
+  role: string,
+): Promise<{ canSubmit: boolean; departments: WeeklyCheckInDepartment[]; weekStart: string }> {
+  const weekStart = istWeekStart();
+  if (role === "admin") {
+    return { canSubmit: true, departments: [...WEEKLY_CHECKIN_DEPARTMENTS], weekStart };
+  }
+  const { listMyLeadDepartments } = await import("./sop-service.js");
+  const { slugToDepartment } = await import("./sop-store.js");
+  const slugs = await listMyLeadDepartments(pool, userId);
+  const departments = slugs
+    .map((s) => slugToDepartment(s))
+    .filter((d): d is WeeklyCheckInDepartment =>
+      Boolean(d && (WEEKLY_CHECKIN_DEPARTMENTS as readonly string[]).includes(d)),
+    );
+  return { canSubmit: departments.length > 0, departments, weekStart };
+}
+
+export async function createWeeklyLeadCheckIn(
+  pool: pg.Pool,
+  userId: string,
+  role: string,
+  opts: {
+    department: string;
+    weekStart?: string;
+    whatChanged: string;
+    keyNumbersStatus: string;
+    blockers: string;
+    founderShouldKnow: string;
+  },
+): Promise<WeeklyLeadCheckInRecord> {
+  await ensureOpsCoordinationTablesReady(pool);
+  const access = await weeklyCheckInAccess(pool, userId, role);
+  if (!access.canSubmit) throw new Error("Weekly check-in is for Marketing, Clinical Operations, or Compliance leads.");
+  const { departmentToSlug, slugToDepartment } = await import("./sop-store.js");
+  const label =
+    slugToDepartment(departmentToSlug(opts.department)) ||
+    (WEEKLY_CHECKIN_DEPARTMENTS as readonly string[]).find(
+      (d) => d.toLowerCase() === opts.department.trim().toLowerCase(),
+    );
+  if (!label || !(WEEKLY_CHECKIN_DEPARTMENTS as readonly string[]).includes(label)) {
+    throw new Error("Invalid department for weekly check-in");
+  }
+  if (role !== "admin" && !access.departments.includes(label as WeeklyCheckInDepartment)) {
+    throw new Error("You are not the lead for that department");
+  }
+  const weekStart =
+    typeof opts.weekStart === "string" && /^\d{4}-\d{2}-\d{2}$/.test(opts.weekStart)
+      ? opts.weekStart
+      : access.weekStart;
+  const slug = departmentToSlug(label);
+  const id = `wlc-${randomUUID()}`;
+  await pool.query(
+    `INSERT INTO weekly_lead_checkins (
+       id, user_id, department_slug, department_label, week_start,
+       what_changed, key_numbers_status, blockers, founder_should_know
+     ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+     ON CONFLICT (user_id, week_start, department_slug) DO UPDATE SET
+       what_changed = EXCLUDED.what_changed,
+       key_numbers_status = EXCLUDED.key_numbers_status,
+       blockers = EXCLUDED.blockers,
+       founder_should_know = EXCLUDED.founder_should_know,
+       created_at = NOW()`,
+    [
+      id,
+      userId,
+      slug,
+      label,
+      weekStart,
+      opts.whatChanged.trim().slice(0, 4000),
+      opts.keyNumbersStatus.trim().slice(0, 4000),
+      opts.blockers.trim().slice(0, 4000),
+      opts.founderShouldKnow.trim().slice(0, 4000),
+    ],
+  );
+  const listed = await listWeeklyLeadCheckIns(pool, weekStart);
+  const found = listed.find(
+    (c) => c.userId === userId && c.departmentSlug === slug && c.weekStart === weekStart,
+  );
+  if (!found) throw new Error("Check-in saved but could not reload");
+  return found;
+}
+
+export async function listWeeklyLeadCheckIns(
+  pool: pg.Pool,
+  weekParam: unknown,
+): Promise<WeeklyLeadCheckInRecord[]> {
+  await ensureOpsCoordinationTablesReady(pool);
+  const weekStart =
+    typeof weekParam === "string" && weekParam === "current"
+      ? istWeekStart()
+      : typeof weekParam === "string" && /^\d{4}-\d{2}-\d{2}$/.test(weekParam)
+        ? weekParam
+        : istWeekStart();
+  const r = await pool.query(
+    `SELECT c.*, u.name AS user_name, u.email AS user_email
+     FROM weekly_lead_checkins c
+     JOIN hipaa_training_users u ON u.id = c.user_id
+     WHERE c.week_start = $1
+     ORDER BY c.created_at DESC
+     LIMIT 100`,
+    [weekStart],
+  );
+  return r.rows.map((row) => rowToWeeklyCheckIn(row as Record<string, unknown>));
+}
+
 export { parseReviewDate, opsDayBounds };

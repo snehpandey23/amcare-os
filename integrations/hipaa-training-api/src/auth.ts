@@ -9,7 +9,8 @@ import type { SignOptions } from "jsonwebtoken";
 const SALT_ROUNDS = 12;
 const JWT_SECRET =
   process.env.HIPAA_TRAINING_JWT_SECRET || process.env.JWT_SECRET || "hipaa-training-dev-secret-change-me";
-const JWT_EXPIRES = process.env.JWT_EXPIRES_IN || "7d";
+/** Staff portal baseline: ~24h session, then re-login. Override with JWT_EXPIRES_IN. */
+const JWT_EXPIRES = process.env.JWT_EXPIRES_IN || "24h";
 
 export async function hashPassword(password: string): Promise<string> {
   return bcrypt.hash(password, SALT_ROUNDS);
