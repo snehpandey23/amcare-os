@@ -136,6 +136,60 @@ export async function fetchChatReviewAccess(): Promise<{ canReview: boolean; isA
   return { canReview: Boolean(data.canReview), isAdmin: Boolean(data.isAdmin) };
 }
 
+export type WeeklyLeadCheckInRecord = {
+  id: string;
+  userId: string;
+  departmentSlug: string;
+  departmentLabel: string;
+  weekStart: string;
+  whatChanged: string;
+  keyNumbersStatus: string;
+  blockers: string;
+  founderShouldKnow: string;
+  createdAt: string;
+  userName?: string | null;
+  userEmail?: string;
+};
+
+export async function fetchWeeklyCheckInAccess(): Promise<{
+  canSubmit: boolean;
+  departments: string[];
+  weekStart: string;
+}> {
+  const data = (await opsFetch("/api/weekly-checkins/access")) as {
+    canSubmit?: boolean;
+    departments?: string[];
+    weekStart?: string;
+  };
+  return {
+    canSubmit: Boolean(data.canSubmit),
+    departments: data.departments ?? [],
+    weekStart: data.weekStart ?? "",
+  };
+}
+
+export async function fetchWeeklyCheckIns(week = "current"): Promise<WeeklyLeadCheckInRecord[]> {
+  const data = (await opsFetch(`/api/weekly-checkins?week=${encodeURIComponent(week)}`)) as {
+    checkins: WeeklyLeadCheckInRecord[];
+  };
+  return data.checkins ?? [];
+}
+
+export async function submitWeeklyCheckIn(payload: {
+  department: string;
+  weekStart?: string;
+  whatChanged: string;
+  keyNumbersStatus: string;
+  blockers: string;
+  founderShouldKnow: string;
+}): Promise<WeeklyLeadCheckInRecord> {
+  const data = (await opsFetch("/api/weekly-checkins", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  })) as { checkin: WeeklyLeadCheckInRecord };
+  return data.checkin;
+}
+
 /** @deprecated Use fetchChatReviewAccess for chat review gates */
 export async function fetchOpsLeadAccess(): Promise<{ canViewTeamReviews: boolean; isAdmin: boolean }> {
   const access = await fetchChatReviewAccess();
