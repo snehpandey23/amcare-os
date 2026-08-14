@@ -1,55 +1,41 @@
-# ADHD-R-01 — Avatar-free reel (HeyGen-ready + local MP4)
+# ADHD-R-01 — Avatar-free reel with script-matched scenes
 
-**Insight ID:** ADHD-R-01  
-**Topic:** ADHD & relationships — do they work?  
-**Format:** Short-form reel · **9:16 · 1080×1920** · **~45–55 seconds**  
-**Mode:** **NO AVATAR** — voiceover + branded text scenes only  
-**Deliverable:** `ADHD-R-01-reel.mp4` (rendered locally; upload to HeyGen/IG as finished asset or rebuild with HeyGen voice-only)
+**Mode:** **NO AVATAR** — voiceover + real background scenes tied to each beat  
+**Deliverable:** `ADHD-R-01-reel.mp4` · 9:16 · ~52s  
+**Sources:** `scenes/source/` (B-roll) + brand photography library
 
-## HeyGen settings (avatar-free)
+## HeyGen / production
 
 | Setting | Value |
 |---------|--------|
-| Avatar | **Off** — no digital human |
-| Audio | Voice-only (paste narration below) **or** use uploaded `ADHD-R-01-reel.mp4` as-is |
-| Visuals | Text scene cards / B-roll — never a talking avatar |
-| Captions | Burned-in (table below) |
-| Aspect | 9:16 |
-
-**Clinical anchor (brief):** Adult ADHD & relationships guides describe the resentment–shame cycle; teamwork helps.  
-**End card:** Educational only. Not a diagnosis or couples therapy substitute.
+| Avatar | **Off** |
+| Visuals | Upload scene frames or finished MP4 — lifestyle B-roll, not a digital human |
+| Audio | Voice-only narration below (or keep baked VO in MP4) |
+| Captions | Burned-in on cream plates |
 
 ---
 
-## VIDEO SCRIPT (avatar-free)
+## Scene board (background matches script)
 
-### Opening hook
-| Spoken VO | On-screen caption |
-|-----------|-------------------|
-| Do relationships with an ADHD partner ever actually work? | Do ADHD relationships ever work? |
-
-### Key points
-| Spoken VO | On-screen caption |
-|-----------|-------------------|
-| Yes — they can. But not by pretending the hard parts aren't real. | Yes — when you face the hard parts |
-| ADHD can make love feel intense and genuine — and still make follow-through inconsistent. | Love can feel intense & genuine / Follow-through can still be inconsistent |
-| A missed text. A forgotten chore. Zoning out mid-conversation. | *(covered in VO; cutaways OK)* |
-| Partners often hear: you don't care. | Partners hear: "You don't care" |
-| The ADHD partner often hears: you're failing. | ADHD partner hears: "You're failing" |
-| That's how resentment and shame trade places. | Resentment ↔ shame |
-| Clinical guides on adult ADHD and relationships describe this cycle. | Clinicians describe this cycle |
-| Symptoms aren't character flaws. | Symptoms ≠ character |
-| Couples who last pause before reacting, build simple systems together, and both own their part. | Pause. Systems. Shared ownership. |
-
-### Closing CTA
-| Spoken VO | On-screen caption |
-|-----------|-------------------|
-| ADHD doesn't doom love. Unmanaged patterns do. | ADHD doesn't doom love |
-| If this is your relationship, start with one honest conversation this week. | One honest conversation this week |
+| Beat | Spoken idea | Background scene |
+|------|-------------|------------------|
+| Hook | Do ADHD relationships ever work? | Couple connection (couch, backs/side) |
+| Hard parts | Face the hard parts | Overwhelm / paperwork load |
+| Love | Intense & genuine | Couple connection |
+| Follow-through | Inconsistent | Unfinished late-night desk |
+| Examples | Missed texts / chores / zoning | Phone notifications close-up |
+| Partner side | “You don’t care” | Unwashed dishes / household load |
+| ADHD side | “You’re failing” | Mid-conversation zoning out |
+| Cycle | Resentment ↔ shame | End-of-day burnout |
+| Clinical | Clinicians describe this cycle | ADHD consult / clinical calm |
+| Reframe | Symptoms ≠ character | Quiet pause by window |
+| Skills | Pause · systems · ownership | Shared checklist / notebook |
+| Hope | ADHD doesn’t doom love | Couple walking, hopeful |
+| CTA | One honest conversation | Two mugs / conversation table |
 
 ---
 
-## Full narration (HeyGen voice-only — paste)
+## Full narration (voice-only)
 
 ```text
 Do relationships with an ADHD partner ever actually work?
@@ -74,64 +60,28 @@ If this is your relationship, start with one honest conversation this week.
 
 ---
 
-## Captions — line-by-line
+## Captions (line-by-line)
 
 ```text
-1
-00:00:00,000 --> 00:00:04,000
-Do ADHD relationships ever work?
-
-2
-00:00:04,000 --> 00:00:08,000
-Yes — when you face the hard parts
-
-3
-00:00:08,000 --> 00:00:12,000
-Love can feel intense & genuine
-
-4
-00:00:12,000 --> 00:00:16,000
-Follow-through can still be inconsistent
-
-5
-00:00:16,000 --> 00:00:20,000
-Partners hear: "You don't care"
-
-6
-00:00:20,000 --> 00:00:24,000
-ADHD partner hears: "You're failing"
-
-7
-00:00:24,000 --> 00:00:27,500
-Resentment ↔ shame
-
-8
-00:00:27,500 --> 00:00:31,500
-Clinicians describe this cycle
-
-9
-00:00:31,500 --> 00:00:35,000
-Symptoms ≠ character
-
-10
-00:00:35,000 --> 00:00:41,000
-Pause. Systems. Shared ownership.
-
-11
-00:00:41,000 --> 00:00:45,500
-ADHD doesn't doom love
-
-12
-00:00:45,500 --> 00:00:52,000
-One honest conversation this week
+1 Do ADHD relationships ever work?
+2 Yes — when you face the hard parts
+3 Love can feel intense & genuine
+4 Follow-through can still be inconsistent
+5 Missed texts. Forgotten chores. Zoning out.
+6 Partners hear: "You don't care"
+7 ADHD partner hears: "You're failing"
+8 Resentment ↔ shame
+9 Clinicians describe this cycle
+10 Symptoms ≠ character
+11 Pause. Systems. Shared ownership.
+12 ADHD doesn't doom love
+13 One honest conversation this week
 ```
 
 ---
 
-## Local render (no avatar)
+## Re-render
 
 ```bash
 cd apps/siya-health && python3 brand/scripts/render_adhd_r01_reel.py
 ```
-
-Writes `ADHD-R-01-reel.mp4` + `preview-frame.png` in this folder.

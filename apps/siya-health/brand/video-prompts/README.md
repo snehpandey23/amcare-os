@@ -19,4 +19,4 @@ Include:
 
 | Insight ID | Topic | Path |
 |------------|-------|------|
-| ADHD-R-01 | ADHD & relationships — do they work? | `../editorial-packs/ADHD-R-01/video/video-prompt.md` |
+| ADHD-R-01 | ADHD & relationships — avatar-free reel | `../editorial-packs/ADHD-R-01/video/video-prompt.md` · `ADHD-R-01-reel.mp4` |
