@@ -21,10 +21,21 @@ CREATE TABLE IF NOT EXISTS founder_weekly_plans (
   can_wait JSONB NOT NULL DEFAULT '[]'::jsonb,
   delegate JSONB NOT NULL DEFAULT '[]'::jsonb,
   observe_only JSONB NOT NULL DEFAULT '[]'::jsonb,
+  -- Phase 2: free-text priorities + lock snapshot
+  priorities_raw TEXT NOT NULL DEFAULT '',
+  locked_at TIMESTAMPTZ,
+  locked_by UUID REFERENCES hipaa_training_users(id) ON DELETE SET NULL,
+  locked_snapshot JSONB,
   updated_by UUID REFERENCES hipaa_training_users(id) ON DELETE SET NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
+-- Idempotent upgrades for existing Phase 1 tables
+ALTER TABLE founder_weekly_plans ADD COLUMN IF NOT EXISTS priorities_raw TEXT NOT NULL DEFAULT '';
+ALTER TABLE founder_weekly_plans ADD COLUMN IF NOT EXISTS locked_at TIMESTAMPTZ;
+ALTER TABLE founder_weekly_plans ADD COLUMN IF NOT EXISTS locked_by UUID REFERENCES hipaa_training_users(id) ON DELETE SET NULL;
+ALTER TABLE founder_weekly_plans ADD COLUMN IF NOT EXISTS locked_snapshot JSONB;
 
 CREATE TABLE IF NOT EXISTS founder_weekly_actuals (
   id TEXT PRIMARY KEY,

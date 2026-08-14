@@ -1,17 +1,17 @@
 "use client";
 
 import type { ReactNode } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { isTrainingAuthRequired, isPortalAuthEnabled, isPortalMemoryEnabled } from "@/lib/trainingConfig";
 import { isPortalAdmin } from "@/lib/portal-role";
-import { BRAND } from "@/lib/brand";
 import { ShiftPresenceBar } from "@/components/shift/ShiftPresenceBar";
 import { ShiftRitualStrip } from "@/components/shift/ShiftRitualStrip";
 import { useShiftOptional } from "@/context/ShiftContext";
 import { PortalNavLink } from "@/components/training/PortalNavLink";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { SiyaWordmark } from "@/components/siya/SiyaWordmark";
 
 function NavLink({ href, active, children }: { href: string; active: boolean; children: ReactNode }) {
   const className = active
@@ -30,30 +30,17 @@ export function AssistantShell({ children }: { children: ReactNode }) {
   const router = useRouter();
   const { user, logout } = useAuth();
   const shift = useShiftOptional();
-  const inFocus = shift?.presence === "focus";
 
   return (
     <div className="siya-page-bg flex h-screen flex-col">
-      <header className="no-print relative z-50 flex h-[4.25rem] shrink-0 items-center justify-between border-b border-[var(--siya-border)] bg-white/90 px-4 backdrop-blur-sm md:px-6">
+      <header className="no-print relative z-50 flex h-[4.25rem] shrink-0 items-center justify-between border-b border-[var(--siya-border)] bg-[var(--siya-white)]/90 px-4 backdrop-blur-sm md:px-6">
         <div className="flex items-center gap-4 md:gap-8">
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/assets/images/siya-health-logo.png"
-              alt="Siya Health"
-              width={180}
-              height={54}
-              className="hidden h-12 w-auto sm:block"
-            />
-            <span className="font-[family-name:var(--font-poppins)] text-base font-semibold text-[var(--siya-primary)] sm:hidden">
-              {BRAND.appName}
-            </span>
+          <Link href="/" className="flex items-center" aria-label="Siya — My day">
+            <SiyaWordmark size="header" />
           </Link>
           <nav className="flex flex-wrap gap-3 text-sm md:gap-5">
-            <NavLink href="/" active={path === "/"}>
+            <NavLink href="/" active={path === "/" || path.startsWith("/help")}>
               My day
-            </NavLink>
-            <NavLink href="/help" active={path === "/help"}>
-              Ask
             </NavLink>
             <NavLink
               href="/learn"
@@ -87,6 +74,7 @@ export function AssistantShell({ children }: { children: ReactNode }) {
           {!isPortalAdmin(user?.role) ? (
             <ShiftPresenceBar onEndShift={() => router.replace("/start-shift")} />
           ) : null}
+          <ThemeToggle variant="header" />
           {user ? (
             <>
               <span className="hidden max-w-[180px] truncate sm:inline text-[var(--siya-text-muted)]">
@@ -109,19 +97,17 @@ export function AssistantShell({ children }: { children: ReactNode }) {
           ) : isPortalAuthEnabled() ? (
             <Link
               href="/login"
-              className="rounded-lg bg-[var(--siya-primary)] px-3 py-1.5 font-medium text-white hover:bg-[var(--siya-primary-hover)]"
+              className="rounded-lg bg-[var(--siya-btn-primary)] px-3 py-1.5 font-medium text-white hover:bg-[var(--siya-btn-primary-hover)]"
             >
               Sign in
             </Link>
           ) : isTrainingAuthRequired() ? (
-            <>
-              <Link
-                href="/login"
-                className="rounded-lg bg-[var(--siya-primary)] px-3 py-1.5 font-medium text-white hover:bg-[var(--siya-primary-hover)]"
-              >
-                Sign in
-              </Link>
-            </>
+            <Link
+              href="/login"
+              className="rounded-lg bg-[var(--siya-btn-primary)] px-3 py-1.5 font-medium text-white hover:bg-[var(--siya-btn-primary-hover)]"
+            >
+              Sign in
+            </Link>
           ) : null}
         </div>
       </header>

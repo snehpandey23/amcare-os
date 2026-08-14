@@ -1,19 +1,13 @@
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { BRAND } from "@/lib/brand";
+import { SiyaWordmark } from "@/components/siya/SiyaWordmark";
 
 export function AssistantBrandPanel() {
   return (
     <aside className="relative hidden w-[min(320px,34vw)] shrink-0 flex-col border-r border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] lg:flex">
       <div className="flex flex-1 flex-col p-8">
-        <Image
-          src="/assets/images/siya-health-logo.png"
-          alt="Siya Health"
-          width={140}
-          height={42}
-          className="h-9 w-auto object-contain object-left"
-          priority
-        />
+        <SiyaWordmark size="header" />
         <p className="mt-5 font-[family-name:var(--font-poppins)] text-xl font-semibold leading-snug text-[var(--siya-primary)]">
           {BRAND.appName}
         </p>

@@ -1,14 +1,36 @@
-import Image from "next/image";
 import { BRAND } from "@/lib/brand";
+import { SiyaWordmark } from "@/components/siya/SiyaWordmark";
 
-export function SiyaLoadingScreen({ message = "Loading Siya Assistant…" }: { message?: string }) {
+type Props = {
+  message?: string;
+  /**
+   * Auth boot / redirect gates — cream cover only (no wordmark).
+   * Avoids a static splash before BrandIntroSplash on login / My day.
+   */
+  variant?: "branded" | "boot";
+};
+
+export function SiyaLoadingScreen({
+  message = "Loading Siya Assistant…",
+  variant = "branded",
+}: Props) {
+  if (variant === "boot") {
+    return (
+      <div
+        className="siya-brand-intro siya-brand-intro--reduced"
+        aria-busy="true"
+        aria-live="polite"
+      >
+        <span className="sr-only">{message}</span>
+      </div>
+    );
+  }
+
   return (
     <div className="siya-page-bg flex min-h-screen flex-col items-center justify-center gap-4 p-6">
-      <Image src="/assets/images/siya-health-logo.png" alt="Siya Health" width={160} height={48} className="h-10 w-auto" />
-      <p className="font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--siya-primary)]">
-        {BRAND.appName}
-      </p>
+      <SiyaWordmark size="login" />
       <p className="text-sm text-[var(--siya-text-muted)]">{message}</p>
+      <span className="sr-only">{BRAND.appName}</span>
     </div>
   );
 }

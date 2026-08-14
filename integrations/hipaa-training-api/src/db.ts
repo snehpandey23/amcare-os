@@ -45,6 +45,8 @@ export async function initDb(): Promise<void> {
     await p.query(`ALTER TABLE hipaa_training_users ADD COLUMN IF NOT EXISTS deactivated_at TIMESTAMPTZ`);
     const { ensureKnowledgeTables } = await import("./knowledge-service.js");
     await ensureKnowledgeTables(p);
+    const { ensureClinicProfileTables } = await import("./clinic-profile-service.js");
+    await ensureClinicProfileTables(p);
   } catch (err) {
     console.warn("[hipaa-training-api] schema file read failed, using inline DDL:", err);
     const sql = `

@@ -5,11 +5,13 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc && mkdir -p dist/database && cp src/database/schema.sql dist/database/schema.sql && cp src/database/tasks-schema.sql dist/database/tasks-schema.sql && cp src/database/shift-attendance-schema.sql dist/database/shift-attendance-schema.sql && cp src/database/assist-telemetry-schema.sql dist/database/assist-telemetry-schema.sql && cp src/database/sop-builder-schema.sql dist/database/sop-builder-schema.sql && cp src/database/ops-coordination-schema.sql dist/database/ops-coordination-schema.sql && cp src/database/founder-coach-schema.sql dist/database/founder-coach-schema.sql",
+    "build": "tsc && mkdir -p dist/database && cp src/database/schema.sql dist/database/schema.sql && cp src/database/tasks-schema.sql dist/database/tasks-schema.sql && cp src/database/shift-attendance-schema.sql dist/database/shift-attendance-schema.sql && cp src/database/assist-telemetry-schema.sql dist/database/assist-telemetry-schema.sql && cp src/database/assist-chat-schema.sql dist/database/assist-chat-schema.sql && cp src/database/sop-builder-schema.sql dist/database/sop-builder-schema.sql && cp src/database/ops-coordination-schema.sql dist/database/ops-coordination-schema.sql && cp src/database/founder-coach-schema.sql dist/database/founder-coach-schema.sql && cp src/database/clinic-profile-schema.sql dist/database/clinic-profile-schema.sql",
     "test:tasks": "tsx src/task-recurrence.test.ts",
     "migrate:status": "node scripts/migrate-status.mjs",
     "qa:portal": "node scripts/qa-staff-portal.mjs",
     "smoke:tasks": "node scripts/smoke-tasks-production.mjs",
+    "seed:decisions": "node scripts/seed-siya-decisions.mjs",
+    "seed:decisions:db": "npm run build && node --env-file=.env.db scripts/seed-siya-decisions-db.mjs",
     "verify:audit-chain": "node scripts/verify-audit-chain.mjs",
     "dev": "tsx src/index.ts",
     "start": "node dist/index.js"

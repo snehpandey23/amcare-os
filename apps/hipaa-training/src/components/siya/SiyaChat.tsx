@@ -22,6 +22,7 @@ import {
   portalStatusWarnBox,
   portalStatusWarnText,
 } from "@/lib/portal-ui";
+import { VoiceInputButton } from "@/components/ui/VoiceInputButton";
 
 type ChatLink = { label: string; href: string };
 type RoutingMeta = {
@@ -84,23 +85,113 @@ function RoutingBadge({ routing }: { routing: RoutingMeta }) {
   );
 }
 
-export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: string; focusMode?: boolean }) {
+export function SiyaChat({
+  initialQuery,
+  focusMode = false,
+  variant = "default",
+  firstName,
+  persistKey,
+  threadId,
+  onThreadMetaChange,
+  onRequestNewThread,
+}: {
+  initialQuery?: string;
+  focusMode?: boolean;
+  /** home = continuous My day Assist (greeting when empty, same engine as former Ask) */
+  variant?: "default" | "home";
+  firstName?: string;
+  /** @deprecated sessionStorage key — Assist v2 uses threadId (server) instead. */
+  persistKey?: string;
+  /** Assist v2 server thread id (ath-…). */
+  threadId?: string | null;
+  /** Called after a turn is saved so the sidebar can refresh titles. */
+  onThreadMetaChange?: () => void;
+  /** Assist v2: Clear chat → start a new server thread. */
+  onRequestNewThread?: () => void;
+}) {
   const { user, token } = useAuth();
   const adminCoPilot = isPortalAdmin(user?.role);
+  const homeVariant = variant === "home";
+  const storageKey =
+    threadId
+      ? null
+      : (persistKey ?? (homeVariant ? `siya-assist-thread-v3:${user?.id ?? "anon"}` : null));
   const opening = focusMode
     ? "You're in Focus mode. I'll keep answers concise — steps and links first."
     : adminCoPilot
       ? SIYA_ADMIN_OPENING
       : SIYA_OPENING;
   const quickPrompts = adminCoPilot ? [...ADMIN_CHAT_QUICK_PROMPTS, ...SIYA_QUICK_PROMPTS.slice(0, 2)] : SIYA_QUICK_PROMPTS;
-  const sectionLabel = adminCoPilot ? "Executive Ask:" : CHAT_SECTION_LABEL;
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    { id: "open", role: "assistant", content: opening },
-  ]);
+  const sectionLabel = adminCoPilot ? "What I can help with:" : CHAT_SECTION_LABEL;
+
+  const [messages, setMessages] = useState<ChatMessage[]>(() => {
+    if (threadId) return [];
+    if (typeof window !== "undefined" && storageKey) {
+      try {
+        sessionStorage.removeItem(`siya-assist-thread:${user?.id ?? "anon"}`);
+        sessionStorage.removeItem(`siya-assist-thread-v2:${user?.id ?? "anon"}`);
+        sessionStorage.removeItem(`siya-assist-thread:admin:${user?.id ?? "anon"}`);
+        const raw = sessionStorage.getItem(storageKey);
+        if (raw) {
+          const parsed = JSON.parse(raw) as ChatMessage[];
+          if (Array.isArray(parsed) && parsed.length) return parsed;
+        }
+      } catch {
+        /* ignore */
+      }
+    }
+    return homeVariant ? [] : [{ id: "open", role: "assistant", content: opening }];
+  });
+  const [threadLoading, setThreadLoading] = useState(Boolean(threadId));
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
   const sentInitial = useRef(false);
+
+  const hour = new Date().getHours();
+  const timeHello = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
+  const homeGreeting = `${timeHello}${firstName ? `, ${firstName}` : ""} — what's on your mind?`;
+
+  useEffect(() => {
+    if (!threadId || !token) {
+      setThreadLoading(false);
+      return;
+    }
+    let cancelled = false;
+    setThreadLoading(true);
+    sentInitial.current = false;
+    (async () => {
+      try {
+        const { loadAssistThread } = await import("@/lib/assist-chat-api");
+        const { messages: rows } = await loadAssistThread(threadId);
+        if (cancelled) return;
+        setMessages(
+          rows.map((r) => ({
+            id: r.id,
+            role: r.role,
+            content: r.content,
+          })),
+        );
+      } catch {
+        if (!cancelled) setMessages([]);
+      } finally {
+        if (!cancelled) setThreadLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [threadId, token]);
+
+  useEffect(() => {
+    if (!storageKey) return;
+    try {
+      if (messages.length === 0) sessionStorage.removeItem(storageKey);
+      else sessionStorage.setItem(storageKey, JSON.stringify(messages));
+    } catch {
+      /* private mode */
+    }
+  }, [messages, storageKey]);
 
   const historyPayload = useCallback(
     () =>
@@ -113,7 +204,7 @@ export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: s
   const send = useCallback(
     async (text: string) => {
       const trimmed = text.trim();
-      if (!trimmed || loading) return;
+      if (!trimmed || loading || threadLoading) return;
       setMessages((m) => [...m, { id: `u-${Date.now()}`, role: "user", content: trimmed }]);
       setInput("");
       setLoading(true);
@@ -124,7 +215,12 @@ export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: s
         const res = await fetch("/api/chat", {
           method: "POST",
           headers,
-          body: JSON.stringify({ message: trimmed, history: historyPayload(), focusMode }),
+          body: JSON.stringify({
+            message: trimmed,
+            history: historyPayload(),
+            focusMode,
+            threadId: threadId || undefined,
+          }),
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error);
@@ -150,6 +246,7 @@ export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: s
             executiveMeta: data.executiveMeta ?? null,
           },
         ]);
+        onThreadMetaChange?.();
       } catch {
         setMessages((m) => [
           ...m,
@@ -160,14 +257,14 @@ export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: s
         listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
       }
     },
-    [loading, historyPayload, focusMode, token]
+    [loading, threadLoading, historyPayload, focusMode, token, threadId, onThreadMetaChange]
   );
 
   useEffect(() => {
-    if (!initialQuery || sentInitial.current) return;
+    if (!initialQuery || sentInitial.current || threadLoading) return;
     sentInitial.current = true;
     void send(initialQuery);
-  }, [initialQuery, send]);
+  }, [initialQuery, send, threadLoading]);
 
   const notifyOwner = useCallback(async (msg: ChatMessage) => {
     if (!msg.userQuestion) return;
@@ -175,6 +272,9 @@ export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: s
     const task = msg.routing?.task ?? "Missing approved policy";
     let emailSent = false;
     let emailNote = "";
+    let phiRedacted = false;
+    let routeMode: "lead_digest" | "founder_instant" | undefined;
+    let recordId: string | undefined;
     try {
       const res = await fetch("/api/knowledge-gap", {
         method: "POST",
@@ -188,9 +288,18 @@ export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: s
           task,
         }),
       });
-      const data = (await res.json()) as { emailSent?: boolean; message?: string };
+      const data = (await res.json()) as {
+        emailSent?: boolean;
+        message?: string;
+        phiRedacted?: boolean;
+        routeMode?: "lead_digest" | "founder_instant";
+        record?: { id?: string };
+      };
       emailSent = Boolean(data.emailSent);
       emailNote = typeof data.message === "string" ? data.message : "";
+      phiRedacted = Boolean(data.phiRedacted);
+      routeMode = data.routeMode;
+      recordId = data.record?.id;
     } catch {
       emailNote = "Could not reach server — try Copy escalation summary instead.";
     }
@@ -198,13 +307,16 @@ export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: s
       question: msg.userQuestion,
       department,
       task,
+      phiRedacted,
+      routeMode,
+      id: recordId,
     });
     setMessages((m) =>
       m.map((x) =>
         x.id === msg.id ? { ...x, gapNotified: true, gapEmailSent: emailSent, gapEmailNote: emailNote } : x,
       ),
     );
-  }, []);
+  }, [token]);
 
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
@@ -319,26 +431,68 @@ export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: s
     }
   }, []);
 
+  function clearConversation() {
+    if (threadId && onRequestNewThread) {
+      onRequestNewThread();
+      return;
+    }
+    setMessages([]);
+    setInput("");
+    sentInitial.current = true; // don't re-fire URL q after clear
+    if (storageKey) {
+      try {
+        sessionStorage.removeItem(storageKey);
+        sessionStorage.removeItem(`siya-assist-thread:${user?.id ?? "anon"}`);
+        sessionStorage.removeItem(`siya-assist-thread-v2:${user?.id ?? "anon"}`);
+      } catch {
+        /* ignore */
+      }
+    }
+  }
+
   return (
-    <div className="flex h-full min-h-0 flex-col bg-white/50">
-      <div ref={listRef} className="flex-1 overflow-y-auto px-4 py-6 md:px-8">
-        <div className="mx-auto max-w-2xl space-y-4">
-          {messages.map((msg) => (
+    <div className={`flex h-full min-h-0 flex-col ${homeVariant ? "" : "bg-[var(--siya-white)]/50"}`}>
+      {threadLoading ? (
+        <p className="px-1 py-3 text-sm text-[var(--siya-text-muted)]">Loading conversation…</p>
+      ) : null}
+      {!threadLoading && messages.length > 0 ? (
+        <div className="mx-auto flex w-full max-w-2xl shrink-0 items-center justify-between gap-2 px-1 pb-2">
+          <p className="text-[11px] text-[var(--siya-text-muted)]">Assist</p>
+          <button
+            type="button"
+            onClick={clearConversation}
+            className="rounded-lg border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] px-3 py-1.5 text-xs font-semibold text-[var(--siya-text-secondary)] hover:border-[var(--siya-accent)] hover:text-[var(--siya-accent)]"
+          >
+            Clear chat
+          </button>
+        </div>
+      ) : null}
+      <div ref={listRef} className={`flex-1 overflow-y-auto ${homeVariant ? "px-1 py-2" : "px-4 py-6 md:px-8"}`}>
+        <div className={`mx-auto max-w-2xl ${homeVariant ? "flex min-h-[min(48vh,420px)] flex-col" : "space-y-4"}`}>
+          {homeVariant && !threadLoading && messages.length === 0 && !loading ? (
+            <div className="flex flex-1 flex-col items-center justify-center px-4 text-center">
+              <p className="font-[family-name:var(--font-poppins)] text-xl font-medium text-[var(--siya-primary)] md:text-2xl">
+                {homeGreeting}
+              </p>
+              <p className="mt-2 max-w-md text-sm text-[var(--siya-text-muted)]">
+                Ask about policies, SOPs, tools, or who to contact.
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {messages.map((msg) => (
             <div key={msg.id} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
               <div
                 className={`max-w-[92%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap shadow-[var(--siya-shadow)] ${
                   msg.role === "user"
-                    ? "bg-[var(--siya-primary)] text-white"
-                    : "border border-[var(--siya-border)] bg-white text-[var(--siya-text-secondary)]"
+                    ? "bg-[var(--siya-btn-primary)] text-white"
+                    : "border border-[var(--siya-border)] bg-[var(--siya-white)] text-[var(--siya-text-secondary)]"
                 }`}
               >
-                {msg.routing ? <RoutingBadge routing={msg.routing} /> : null}
-                {msg.role === "assistant" ? mdLite(msg.content) : msg.content}
-                {msg.sources?.length ? (
-                  <p className="mt-2 border-t border-[var(--siya-border)] pt-2 text-[11px] text-[var(--siya-text-muted)]">
-                    Based on: {msg.sources.map((s) => s.title).join(" · ")}
-                  </p>
+                {msg.routing && msg.routing.department !== "General" ? (
+                  <RoutingBadge routing={msg.routing} />
                 ) : null}
+                {msg.role === "assistant" ? mdLite(msg.content) : msg.content}
                 {msg.links?.length ? (
                   <ul className="mt-2 space-y-1 border-t border-[var(--siya-border)] pt-2">
                     {msg.links.map((l) => (
@@ -375,9 +529,10 @@ export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: s
                     </p>
                     {msg.gapNotified ? (
                       <p className="mt-2 font-medium text-[var(--siya-primary)]">
-                        {msg.gapEmailSent
-                          ? "Sent to bot@siya.health — awaiting policy"
-                          : msg.gapEmailNote || "Logged on this device — email may need RESEND_API_KEY on Vercel"}
+                        {msg.gapEmailNote ||
+                          (msg.gapEmailSent
+                            ? "Logged — reviewers notified"
+                            : "Logged for the department lead’s weekly digest (or founder inbox if no lead).")}
                       </p>
                     ) : (
                       <button
@@ -385,7 +540,7 @@ export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: s
                         onClick={() => void notifyOwner(msg)}
                         className={`mt-2 ${portalBtnNavySm}`}
                       >
-                        Notify owner (email bot@siya.health)
+                        Notify owner
                       </button>
                     )}
                   </div>
@@ -439,20 +594,28 @@ export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: s
                 ) : null}
               </div>
             </div>
-          ))}
-          {loading ? (
-            <p className="text-sm text-[var(--siya-text-muted)]">
-              {adminCoPilot ? "Checking live tasks & guides…" : "Finding approved answers…"}
-            </p>
-          ) : null}
+              ))}
+              {loading ? (
+                <p className="text-sm text-[var(--siya-text-muted)]">
+                  {adminCoPilot ? "Checking live tasks & guides…" : "Finding approved answers…"}
+                </p>
+              ) : null}
+            </div>
+          )}
         </div>
       </div>
-      <div className="border-t border-[var(--siya-border)] bg-white p-4 md:px-8">
-        <div className="mx-auto max-w-2xl">
-          <p className="mb-2 text-center text-xs font-medium text-[var(--siya-text-muted)]">
-            {sectionLabel}
-          </p>
-          <div className="mb-3 flex flex-wrap gap-2 justify-center">
+      <div
+        className={
+          homeVariant
+            ? "sticky bottom-0 border-t border-[var(--siya-border)]/60 bg-[var(--siya-bg-page)]/95 pt-3 backdrop-blur"
+            : "border-t border-[var(--siya-border)] bg-[var(--siya-white)] p-4 md:px-8"
+        }
+      >
+        <div className={`mx-auto max-w-2xl ${homeVariant ? "px-0 pb-1" : ""}`}>
+          <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+            <p className="text-xs font-medium text-[var(--siya-text-muted)]">{sectionLabel}</p>
+          </div>
+          <div className={`mb-3 flex flex-wrap gap-2 ${homeVariant ? "justify-start px-0.5" : "justify-center"}`}>
             {quickPrompts.map((p) => (
               <button
                 key={p}
@@ -474,9 +637,19 @@ export function SiyaChat({ initialQuery, focusMode = false }: { initialQuery?: s
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder={adminCoPilot ? "Plan my day, assign a task, or ask policy…" : "Describe your task…"}
-              className={portalAskInput}
+              placeholder={
+                adminCoPilot
+                  ? "Plan my day, assign a task, or ask policy…"
+                  : "Ask about policies, SOPs, tools, or who to contact…"
+              }
+              className={
+                homeVariant
+                  ? "min-w-0 flex-1 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] px-4 py-3 text-sm outline-none focus:border-[var(--siya-accent)] focus:ring-2 focus:ring-[var(--siya-accent)]/20"
+                  : portalAskInput
+              }
+              autoFocus={homeVariant}
             />
+            <VoiceInputButton value={input} onChange={setInput} disabled={loading} size="md" />
             <button
               type="submit"
               disabled={loading || !input.trim()}

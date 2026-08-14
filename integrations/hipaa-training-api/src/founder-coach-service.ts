@@ -57,6 +57,10 @@ export type WeeklyPlanRecord = {
   canWait: string[];
   delegate: DelegateLane[];
   observeOnly: ObserveOnlyFlag[];
+  /** Founder free-text priorities / thoughts (Phase 2) */
+  prioritiesRaw: string;
+  lockedAt: string | null;
+  lockedBy: string | null;
   updatedAt: string;
 };
 
@@ -93,8 +97,46 @@ export type DriftFlag = {
   triggeredBy: string;
 };
 
+/** Domain tabs — Phase 1b: real portal data only (no LLM financial/legal content). */
+export type DomainTabId = "accounts" | "hr" | "clinical" | "marketing" | "compliance";
+
+export type DomainItem = {
+  id: string;
+  label: string;
+  detail?: string;
+  /** ISO date YYYY-MM-DD for nearest-deadline sort; null = no deadline */
+  urgencyDate: string | null;
+  /** Explicit founder_should_know from weekly_lead_checkins */
+  founderFlag: boolean;
+  source: string;
+  href?: string;
+};
+
+export type DomainCheckInSummary = {
+  id: string;
+  departmentLabel: string;
+  weekStart: string;
+  submitterName: string | null;
+  whatChanged: string;
+  keyNumbersStatus: string;
+  blockers: string;
+  founderShouldKnow: string;
+  createdAt: string;
+};
+
+export type DomainSnapshot = {
+  id: DomainTabId;
+  title: string;
+  /** live = has countable portal rows; partial = some real + gaps; not_tracked = no system of record */
+  status: "live" | "partial" | "not_tracked";
+  summary: string;
+  items: DomainItem[];
+  checkins: DomainCheckInSummary[];
+  placeholders: string[];
+};
+
 export type FounderCoachBriefPayload = {
-  phase: 1;
+  phase: 2;
   statusLabel: "in_progress";
   generatedAt: string;
   weekStart: string;
@@ -105,8 +147,15 @@ export type FounderCoachBriefPayload = {
   priorWeekActuals: WeeklyActualsRecord | null;
   portalSignals: PortalSignals;
   driftFlags: DriftFlag[];
+  domains: DomainSnapshot[];
+  /**
+   * Same weekly_lead_checkins rows already in domain tabs (founder_should_know / blockers /
+   * weekly actuals) — flattened for "Signals this week". Not a second source.
+   */
+  leadCheckInSignals: DomainItem[];
   canEditMonthly: boolean;
   canEditWeekly: boolean;
+  isWeekLocked: boolean;
 };
 
 export const DEFAULT_NOT_DOING = [
@@ -184,6 +233,9 @@ function rowToWeekly(row: Record<string, unknown>): WeeklyPlanRecord {
     canWait: (row.can_wait as string[]) ?? [],
     delegate: (row.delegate as DelegateLane[]) ?? [],
     observeOnly: (row.observe_only as ObserveOnlyFlag[]) ?? [],
+    prioritiesRaw: (row.priorities_raw as string) ?? "",
+    lockedAt: row.locked_at ? new Date(row.locked_at as string).toISOString() : null,
+    lockedBy: (row.locked_by as string) ?? null,
     updatedAt: new Date(row.updated_at as string).toISOString(),
   };
 }
@@ -277,20 +329,31 @@ export async function upsertWeeklyPlan(
     canWait: string[];
     delegate: DelegateLane[];
     observeOnly: ObserveOnlyFlag[];
+    prioritiesRaw?: string;
   },
 ): Promise<WeeklyPlanRecord> {
   await ensureFounderCoachTablesReady(pool);
+  const existing = await getWeeklyPlan(pool, input.weekStart);
+  if (existing?.lockedAt) {
+    throw new Error("This week is locked. Unlock to modify before editing.");
+  }
   if (input.canWait.length > 3) throw new Error("Can Wait is capped at 3 items");
   const id = `fwp-${input.weekStart}`;
+  const prioritiesRaw =
+    input.prioritiesRaw !== undefined
+      ? input.prioritiesRaw.slice(0, 8000)
+      : (existing?.prioritiesRaw ?? "");
   await pool.query(
-    `INSERT INTO founder_weekly_plans (id, week_start, month_key, founder_focus, can_wait, delegate, observe_only, updated_by)
-     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    `INSERT INTO founder_weekly_plans
+       (id, week_start, month_key, founder_focus, can_wait, delegate, observe_only, priorities_raw, updated_by)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
      ON CONFLICT (week_start) DO UPDATE SET
        month_key = EXCLUDED.month_key,
        founder_focus = EXCLUDED.founder_focus,
        can_wait = EXCLUDED.can_wait,
        delegate = EXCLUDED.delegate,
        observe_only = EXCLUDED.observe_only,
+       priorities_raw = EXCLUDED.priorities_raw,
        updated_by = EXCLUDED.updated_by,
        updated_at = NOW()`,
     [
@@ -301,10 +364,67 @@ export async function upsertWeeklyPlan(
       JSON.stringify(input.canWait.slice(0, 3)),
       JSON.stringify(input.delegate.slice(0, 8)),
       JSON.stringify(input.observeOnly.slice(0, 8)),
+      prioritiesRaw,
       userId,
     ],
   );
   return (await getWeeklyPlan(pool, input.weekStart))!;
+}
+
+export async function lockWeeklyPlan(
+  pool: pg.Pool,
+  userId: string,
+  weekStart: string,
+): Promise<WeeklyPlanRecord> {
+  await ensureFounderCoachTablesReady(pool);
+  const plan = await getWeeklyPlan(pool, weekStart);
+  if (!plan) throw new Error("Save this week's plan before locking.");
+  if (plan.lockedAt) throw new Error("Already locked.");
+  if (!plan.founderFocus.trim() && !plan.prioritiesRaw.trim()) {
+    throw new Error("Add Founder Focus or priorities before locking.");
+  }
+  const snapshot = {
+    weekStart: plan.weekStart,
+    monthKey: plan.monthKey,
+    prioritiesRaw: plan.prioritiesRaw,
+    founderFocus: plan.founderFocus,
+    canWait: plan.canWait,
+    delegate: plan.delegate,
+    observeOnly: plan.observeOnly,
+    lockedAt: new Date().toISOString(),
+  };
+  await pool.query(
+    `UPDATE founder_weekly_plans
+     SET locked_at = NOW(), locked_by = $2, locked_snapshot = $3::jsonb, updated_by = $2, updated_at = NOW()
+     WHERE week_start = $1`,
+    [weekStart, userId, JSON.stringify(snapshot)],
+  );
+  return (await getWeeklyPlan(pool, weekStart))!;
+}
+
+export async function unlockWeeklyPlan(
+  pool: pg.Pool,
+  userId: string,
+  weekStart: string,
+): Promise<WeeklyPlanRecord> {
+  await ensureFounderCoachTablesReady(pool);
+  const plan = await getWeeklyPlan(pool, weekStart);
+  if (!plan) throw new Error("No plan for this week.");
+  if (!plan.lockedAt) throw new Error("Week is not locked.");
+  await pool.query(
+    `UPDATE founder_weekly_plans
+     SET locked_at = NULL, locked_by = NULL, updated_by = $2, updated_at = NOW()
+     WHERE week_start = $1`,
+    [weekStart, userId],
+  );
+  return (await getWeeklyPlan(pool, weekStart))!;
+}
+
+/** Flatten Phase 1 domain items that came from weekly_lead_checkins (single source). */
+export function leadCheckInSignalsFromDomains(domains: DomainSnapshot[]): DomainItem[] {
+  return sortDomainItems(
+    domains.flatMap((d) => d.items.filter((i) => i.source.startsWith("weekly_lead_checkins"))),
+  );
 }
 
 export async function getWeeklyActuals(pool: pg.Pool, weekStart: string): Promise<WeeklyActualsRecord | null> {
@@ -395,6 +515,342 @@ export async function logObserveEvent(
   const actuals = await getWeeklyActuals(pool, weekStart);
   const edits = (actuals?.adsCampaignEdits ?? 0) + 1;
   await upsertWeeklyActuals(pool, userId, weekStart, { adsCampaignEdits: edits });
+}
+
+function sortDomainItems(items: DomainItem[]): DomainItem[] {
+  return [...items].sort((a, b) => {
+    if (a.founderFlag !== b.founderFlag) return a.founderFlag ? -1 : 1;
+    if (a.urgencyDate && b.urgencyDate) return a.urgencyDate.localeCompare(b.urgencyDate);
+    if (a.urgencyDate) return -1;
+    if (b.urgencyDate) return 1;
+    return a.label.localeCompare(b.label);
+  });
+}
+
+function checkinsToItems(checkins: DomainCheckInSummary[]): DomainItem[] {
+  const items: DomainItem[] = [];
+  for (const c of checkins) {
+    const weekEnd = addDaysIso(c.weekStart, 6);
+    if (c.founderShouldKnow.trim()) {
+      items.push({
+        id: `${c.id}-founder`,
+        label: `Founder should know — ${c.departmentLabel}`,
+        detail: c.founderShouldKnow.trim().slice(0, 500),
+        urgencyDate: weekEnd,
+        founderFlag: true,
+        source: "weekly_lead_checkins.founder_should_know",
+        href: "/team",
+      });
+    }
+    if (c.blockers.trim()) {
+      items.push({
+        id: `${c.id}-block`,
+        label: `Blocking — ${c.departmentLabel}`,
+        detail: c.blockers.trim().slice(0, 500),
+        urgencyDate: weekEnd,
+        founderFlag: false,
+        source: "weekly_lead_checkins.blockers",
+        href: "/team",
+      });
+    }
+    if (c.whatChanged.trim() || c.keyNumbersStatus.trim()) {
+      items.push({
+        id: `${c.id}-week`,
+        label: `Weekly actuals — ${c.departmentLabel}`,
+        detail: [c.whatChanged.trim(), c.keyNumbersStatus.trim()].filter(Boolean).join(" · ").slice(0, 500),
+        urgencyDate: weekEnd,
+        founderFlag: false,
+        source: "weekly_lead_checkins",
+        href: "/team",
+      });
+    }
+  }
+  return items;
+}
+
+async function loadWeekCheckins(
+  pool: pg.Pool,
+  weekStart: string,
+  departmentLabel: string,
+): Promise<DomainCheckInSummary[]> {
+  const { ensureOpsCoordinationTablesReady } = await import("./ops-coordination-service.js");
+  await ensureOpsCoordinationTablesReady(pool);
+  const { departmentToSlug } = await import("./sop-store.js");
+  const slug = departmentToSlug(departmentLabel);
+  const r = await pool.query(
+    `SELECT c.*, u.name AS user_name
+     FROM weekly_lead_checkins c
+     JOIN hipaa_training_users u ON u.id = c.user_id
+     WHERE c.week_start = $1 AND c.department_slug = $2
+     ORDER BY c.created_at DESC
+     LIMIT 20`,
+    [weekStart, slug],
+  );
+  return r.rows.map((row) => ({
+    id: row.id as string,
+    departmentLabel: String(row.department_label ?? departmentLabel),
+    weekStart: new Date(row.week_start as string).toISOString().slice(0, 10),
+    submitterName: (row.user_name as string) ?? null,
+    whatChanged: String(row.what_changed ?? ""),
+    keyNumbersStatus: String(row.key_numbers_status ?? ""),
+    blockers: String(row.blockers ?? ""),
+    founderShouldKnow: String(row.founder_should_know ?? ""),
+    createdAt: new Date(row.created_at as string).toISOString(),
+  }));
+}
+
+/** Audit-backed domain tabs — only structured portal rows; never invented finance/legal. */
+export async function collectDomainSnapshots(
+  pool: pg.Pool,
+  weekStart: string,
+  actuals: WeeklyActualsRecord | null,
+): Promise<DomainSnapshot[]> {
+  const { ensureSopTables } = await import("./sop-service.js");
+  await ensureSopTables(pool);
+  const { ensureOpsCoordinationTablesReady } = await import("./ops-coordination-service.js");
+  await ensureOpsCoordinationTablesReady(pool);
+  const today = istDateLabel(new Date());
+
+  // —— Accounts: no ledger / CPA deadline tables ——
+  const accounts: DomainSnapshot = {
+    id: "accounts",
+    title: "Accounts",
+    status: "not_tracked",
+    summary: "No financial ledger or founder/CPA deadline store in the portal yet.",
+    items: [],
+    checkins: [],
+    placeholders: [
+      "Cash, AR/AP, refunds, and chargeback metrics are not tracked in Siya OS",
+      "CPOM / tax / legal compliance guidance is out of scope here — never AI-generated",
+      "Founder/CPA-confirmed deadlines: none configured (section stays empty until added)",
+    ],
+  };
+
+  // —— HR: users + department leads ——
+  const userStats = await pool.query(
+    `SELECT
+       COUNT(*) FILTER (WHERE deactivated_at IS NULL)::int AS active,
+       COUNT(*) FILTER (WHERE deactivated_at IS NULL AND role = 'admin')::int AS admins,
+       COUNT(*) FILTER (WHERE deactivated_at IS NULL AND last_login_at IS NOT NULL
+         AND last_login_at > NOW() - INTERVAL '7 days')::int AS active_7d
+     FROM hipaa_training_users`,
+  );
+  const leads = await pool.query(
+    `SELECT l.department_label, l.department_slug, u.name, u.email
+     FROM siya_department_leads l
+     LEFT JOIN hipaa_training_users u ON u.id = l.user_id AND u.deactivated_at IS NULL
+     ORDER BY l.department_label ASC`,
+  );
+  const hrItems: DomainItem[] = [
+    {
+      id: "hr-active",
+      label: `${userStats.rows[0]?.active ?? 0} active portal users`,
+      detail: `${userStats.rows[0]?.admins ?? 0} admins · ${userStats.rows[0]?.active_7d ?? 0} logged in last 7 days`,
+      urgencyDate: null,
+      founderFlag: false,
+      source: "hipaa_training_users",
+      href: "/admin/team",
+    },
+  ];
+  const unassignedLeads = leads.rows.filter((r) => !r.email);
+  const assignedLeads = leads.rows.filter((r) => r.email);
+  for (const row of assignedLeads) {
+    hrItems.push({
+      id: `hr-lead-${row.department_slug}`,
+      label: `${row.department_label} lead: ${row.name || row.email}`,
+      urgencyDate: null,
+      founderFlag: false,
+      source: "siya_department_leads",
+      href: "/admin/team",
+    });
+  }
+  if (unassignedLeads.length) {
+    hrItems.push({
+      id: "hr-leads-open",
+      label: `${unassignedLeads.length} department lead seat${unassignedLeads.length === 1 ? "" : "s"} unassigned`,
+      detail: unassignedLeads.map((r) => r.department_label).join(", "),
+      urgencyDate: today,
+      founderFlag: false,
+      source: "siya_department_leads",
+      href: "/admin/team",
+    });
+  }
+  const hr: DomainSnapshot = {
+    id: "hr",
+    title: "HR",
+    status: "live",
+    summary: "Workforce roster and department SOP leads from the staff portal.",
+    items: sortDomainItems(hrItems),
+    checkins: [],
+    placeholders: [
+      "PTO / leave balances not tracked",
+      "Hiring pipeline / ATS not connected",
+      "Performance reviews not tracked",
+    ],
+  };
+
+  // —— Clinical: chat reviews, handoffs, training start, check-ins ——
+  const clinicalCheckins = await loadWeekCheckins(pool, weekStart, "Clinical Operations");
+  const openReviews = await pool.query(
+    `SELECT COUNT(*)::int AS c FROM chat_reviews WHERE status = 'open' AND review_date = $1`,
+    [today],
+  );
+  const handoffs = await pool.query(
+    `SELECT COUNT(*)::int AS c FROM shift_handoffs WHERE handoff_date = $1`,
+    [today],
+  );
+  const trainingRows = await pool.query(
+    `SELECT p.progress_json
+     FROM hipaa_training_users u
+     LEFT JOIN hipaa_training_progress p ON p.user_id = u.id
+     WHERE u.deactivated_at IS NULL`,
+  );
+  let trainingNotStarted = 0;
+  for (const row of trainingRows.rows) {
+    const pj = (row.progress_json ?? {}) as { modulesCompleted?: string[] };
+    const done = Array.isArray(pj.modulesCompleted) ? pj.modulesCompleted.length : 0;
+    if (done < 1) trainingNotStarted += 1;
+  }
+  const clinicalItems: DomainItem[] = [
+    {
+      id: "clin-reviews",
+      label: `${openReviews.rows[0]?.c ?? 0} open chat reviews (IST today)`,
+      urgencyDate: (openReviews.rows[0]?.c ?? 0) > 0 ? today : null,
+      founderFlag: false,
+      source: "chat_reviews",
+      href: "/chat-review",
+    },
+    {
+      id: "clin-handoffs",
+      label: `${handoffs.rows[0]?.c ?? 0} shift handoffs today`,
+      urgencyDate: null,
+      founderFlag: false,
+      source: "shift_handoffs",
+      href: "/team",
+    },
+    {
+      id: "clin-hipaa",
+      label: `${trainingNotStarted} active users with HIPAA training not started`,
+      detail: "Counted from portal progress (modulesCompleted empty)",
+      urgencyDate: trainingNotStarted > 0 ? today : null,
+      founderFlag: false,
+      source: "hipaa_training_progress",
+      href: "/admin/team",
+    },
+    ...checkinsToItems(clinicalCheckins),
+  ];
+  const clinical: DomainSnapshot = {
+    id: "clinical",
+    title: "Clinical",
+    status: clinicalCheckins.length ? "live" : "partial",
+    summary: "Ops QC, handoffs, training starts, and Clinical Operations weekly check-ins.",
+    items: sortDomainItems(clinicalItems),
+    checkins: clinicalCheckins,
+    placeholders: [
+      "Clinical incident / adverse-event tracking is not a portal table (policy text only)",
+      "Patient volume / booking counts not connected",
+    ],
+  };
+
+  // —— Marketing: weekly check-ins + optional founder-entered ads actuals ——
+  const marketingCheckins = await loadWeekCheckins(pool, weekStart, "Marketing");
+  const marketingItems: DomainItem[] = [...checkinsToItems(marketingCheckins)];
+  if (actuals && (actuals.adsTxCpa != null || actuals.adsTxConversions != null)) {
+    marketingItems.push({
+      id: "mkt-ads-manual",
+      label: "Founder-entered TX/ADHD ads metrics (this week)",
+      detail: [
+        actuals.adsTxCpa != null ? `CPA ${actuals.adsTxCpa}` : null,
+        actuals.adsTxConversions != null ? `${actuals.adsTxConversions} conversions` : null,
+        actuals.adsCampaignEdits ? `${actuals.adsCampaignEdits} campaign edits logged` : null,
+      ]
+        .filter(Boolean)
+        .join(" · "),
+      urgencyDate: addDaysIso(weekStart, 6),
+      founderFlag: false,
+      source: "founder_weekly_actuals",
+    });
+  }
+  const marketing: DomainSnapshot = {
+    id: "marketing",
+    title: "Marketing",
+    status: marketingCheckins.length || marketingItems.length ? "live" : "partial",
+    summary: marketingCheckins.length
+      ? "Weekly lead check-in is the source of truth for this week’s marketing actuals."
+      : "No Marketing weekly check-in filed yet this week.",
+    items: sortDomainItems(marketingItems),
+    checkins: marketingCheckins,
+    placeholders: [
+      "Google Ads / GA4 live pull not connected — only check-ins and founder-entered actuals",
+      "Review/rating feeds not connected",
+    ],
+  };
+
+  // —— Compliance: check-ins + SOP queue + training ——
+  // SOP pending signal = founder-routed only (no lead / Leadership / General).
+  // Lead self-approve departments are intentionally absent from Founder Coach.
+  const complianceCheckins = await loadWeekCheckins(pool, weekStart, "Compliance");
+  const { listFounderRoutedPendingSops } = await import("./sop-service.js");
+  const founderPendingSops = await listFounderRoutedPendingSops(pool);
+  const founderPendingCount = founderPendingSops.length;
+  const dueReview = await pool.query(
+    `SELECT COUNT(*)::int AS c FROM siya_sops
+     WHERE status = 'live' AND review_date IS NOT NULL AND review_date <= $1::date`,
+    [today],
+  );
+  const complianceItems: DomainItem[] = [];
+  if (founderPendingCount > 0) {
+    complianceItems.push({
+      id: "comp-pending",
+      label:
+        founderPendingCount === 1
+          ? "1 SOP on founder queue (no lead or company-wide)"
+          : `${founderPendingCount} SOPs on founder queue (no lead or company-wide)`,
+      detail: founderPendingSops
+        .slice(0, 3)
+        .map((s) => s.title)
+        .join(" · "),
+      urgencyDate: today,
+      founderFlag: true,
+      source: "siya_sops.founder_routed",
+      href: "/admin/sop-review",
+    });
+  }
+  complianceItems.push(
+    {
+      id: "comp-review-due",
+      label: `${dueReview.rows[0]?.c ?? 0} live SOPs past review date`,
+      urgencyDate: (dueReview.rows[0]?.c ?? 0) > 0 ? today : null,
+      founderFlag: false,
+      source: "siya_sops.review_date",
+      href: "/memory/knowledge/sops",
+    },
+    {
+      id: "comp-hipaa",
+      label: `${trainingNotStarted} active users with HIPAA training not started`,
+      urgencyDate: trainingNotStarted > 0 ? today : null,
+      founderFlag: false,
+      source: "hipaa_training_progress",
+      href: "/admin/team",
+    },
+    ...checkinsToItems(complianceCheckins),
+  );
+  const compliance: DomainSnapshot = {
+    id: "compliance",
+    title: "Compliance",
+    status: "partial",
+    summary:
+      "Founder SOP queue (unassigned / Leadership / General only), review dates, training starts, and Compliance weekly check-ins. Lead-owned pending SOPs stay with department leads.",
+    items: sortDomainItems(complianceItems),
+    checkins: complianceCheckins,
+    placeholders: [
+      "No founder/CPA-confirmed legal or tax deadline calendar in the portal",
+      "CPOM / corporate-practice guidance is never generated by this coach",
+      "Department SOPs with an assigned lead self-approve — not listed here",
+    ],
+  };
+
+  return [accounts, hr, clinical, marketing, compliance];
 }
 
 async function collectPortalSignals(pool: pg.Pool): Promise<PortalSignals> {
@@ -573,6 +1029,9 @@ export async function buildFounderCoachBrief(
           instruction: "Watch performance; do not change campaigns unless review trigger fires",
         },
       ],
+      prioritiesRaw: "",
+      lockedAt: null,
+      lockedBy: null,
       updatedAt: new Date().toISOString(),
     };
   }
@@ -604,8 +1063,12 @@ export async function buildFounderCoachBrief(
     });
   }
 
+  const domains = await collectDomainSnapshots(pool, weekStart, actuals);
+  const leadCheckInSignals = leadCheckInSignalsFromDomains(domains);
+  const isWeekLocked = Boolean(weeklyPlan?.lockedAt);
+
   return {
-    phase: 1,
+    phase: 2,
     statusLabel: "in_progress",
     generatedAt: new Date().toISOString(),
     weekStart,
@@ -616,7 +1079,10 @@ export async function buildFounderCoachBrief(
     priorWeekActuals,
     portalSignals,
     driftFlags,
+    domains,
+    leadCheckInSignals,
     canEditMonthly: canEdit,
-    canEditWeekly: canEdit,
+    canEditWeekly: canEdit && !isWeekLocked,
+    isWeekLocked,
   };
 }

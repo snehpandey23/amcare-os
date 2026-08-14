@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { navigateToAsk } from "@/lib/companion/quick-actions";
 import { phraseOfTheDay, healthTermOfTheDay } from "@/lib/level-up/catalog";
 import { loadLevelUpProgress, getDisplayStreak, type LevelUpProgress } from "@/lib/level-up/progress";
@@ -28,12 +28,15 @@ import { BRAND } from "@/lib/brand";
 import { useAuth } from "@/context/AuthContext";
 import { useShiftOptional } from "@/context/ShiftContext";
 import { consumeMorningBriefToday } from "@/lib/shift-presence";
+import { shouldShowBrandIntro } from "@/lib/brand-intro";
+import { BrandIntroSplash } from "@/components/siya/BrandIntroSplash";
 import { MorningBrief } from "@/components/shift/MorningBrief";
-import { MySopOwnershipNotice } from "@/components/sops/MySopOwnershipNotice";
 import { SopLeadMyDayCard } from "@/components/sops/SopLeadMyDayCard";
+import { LeadKnowledgeGapsCard } from "@/components/ops/LeadKnowledgeGapsCard";
 import { MyDayTasksPanel } from "@/components/tasks/MyDayTasksPanel";
-import { TeamPulsePanel } from "@/components/team/TeamPulsePanel";
 import { FounderCoachPanel } from "@/components/executive/FounderCoachPanel";
+import { StaffHomeChat } from "@/components/companion/StaffHomeChat";
+import { WeeklyCheckInCard } from "@/components/ops/WeeklyCheckInCard";
 import { isPortalAdmin } from "@/lib/portal-role";
 import { WorkplaceLinksPanel } from "@/components/companion/WorkplaceLinksPanel";
 import { PortalNavLink } from "@/components/training/PortalNavLink";
@@ -100,8 +103,9 @@ function MyDayHeader({
         )
       ) : null}
       <p className="mt-2 text-sm text-[var(--siya-text-secondary)]">{BRAND.homeSubtitle}</p>
-      {!isAdmin ? <MySopOwnershipNotice className="mt-3" /> : null}
+      {/* Single SOP lead surface — ownership + queue (avoid stacking with MySopOwnershipNotice). */}
       {!isAdmin ? <SopLeadMyDayCard className="mt-3" /> : null}
+      {!isAdmin ? <LeadKnowledgeGapsCard className="mt-3" /> : null}
       {!isAdmin ? (
         !inFocus ? (
           <p className="mt-1 text-xs italic text-[var(--siya-text-muted)]">{BRAND.growthLine}</p>
@@ -209,6 +213,11 @@ export function HomeHub() {
   const inFocus = shift?.presence === "focus";
   const onBreak = shift?.presence === "break";
   const isAdmin = isPortalAdmin(user?.role);
+  /** intro → splash; ready → hub. No "checking" cream flash (that was the old splash layer). */
+  const [introGate, setIntroGate] = useState<"intro" | "ready">(() =>
+    typeof window !== "undefined" && shouldShowBrandIntro() ? "intro" : "ready",
+  );
+  const introCheckedRef = useRef(false);
   const [showBrief, setShowBrief] = useState(false);
   const [progress, setProgress] = useState<LevelUpProgress | null>(null);
   const [modulesDone, setModulesDone] = useState(0);
@@ -240,6 +249,12 @@ export function HomeHub() {
 
   useEffect(() => {
     refresh();
+    // Once per mount path — do not re-open splash when auth/profile refresh re-runs.
+    if (!introCheckedRef.current) {
+      introCheckedRef.current = true;
+      // Reconcile after mount (SSR/hydration); skip once already set from useState init on client.
+      setIntroGate(shouldShowBrandIntro() ? "intro" : "ready");
+    }
     if (!isAdmin && consumeMorningBriefToday()) setShowBrief(true);
     const onProfile = () => refresh();
     window.addEventListener("siya-portal-profile-updated", onProfile);
@@ -285,8 +300,16 @@ export function HomeHub() {
   const showBreakScreen = !isAdmin && onBreak;
 
   return (
-    <div className={`${portalPage} ${inFocus ? portalFocusRail : ""}`}>
-      {!isAdmin && showBrief ? (
+    <div className={isAdmin ? "min-h-[calc(100dvh-3.5rem)]" : undefined}>
+      {introGate === "intro" ? (
+        <BrandIntroSplash
+          onComplete={() => {
+            setIntroGate("ready");
+          }}
+        />
+      ) : null}
+
+      {introGate === "ready" && !isAdmin && showBrief ? (
         <MorningBrief
           firstName={firstName}
           focus={focus}
@@ -307,143 +330,30 @@ export function HomeHub() {
       {!showBreakScreen ? (
         <>
           {isAdmin ? (
-            <>
-              <MyDayHeader firstName={firstName} deptLabel={deptLabel} profile={profile} inFocus={inFocus} isAdmin />
-              {!inFocus ? <MyDayTasksPanel /> : null}
-              {!inFocus ? <TeamPulsePanel compact className="mt-2" /> : null}
-              <FounderCoachPanel />
-              {!inFocus ? (
-                <ReflectSection
-                  reflectOpen={reflectOpen}
-                  setReflectOpen={setReflectOpen}
-                  reflection={reflection}
-                  setReflection={setReflection}
-                  saveReflection={saveReflection}
-                />
-              ) : null}
-              <AskSection inFocus={inFocus} ask={ask} setAsk={setAsk} submitAsk={submitAsk} />
-            </>
-          ) : (
-            <>
-              <FounderCoachPanel />
-
-              <MyDayHeader firstName={firstName} deptLabel={deptLabel} profile={profile} inFocus={inFocus} isAdmin={false} />
-
+            introGate === "ready" ? <FounderCoachPanel firstName={firstName} /> : null
+          ) : introGate === "ready" ? (
+            <div className={`${portalPage} ${inFocus ? portalFocusRail : ""}`}>
               {complianceDue ? (
-                <p className={`${portalStatusWarnBox} px-3 py-2 text-xs ${portalStatusWarnText}`}>
+                <p className={`mb-3 ${portalStatusWarnBox} px-3 py-2 text-xs ${portalStatusWarnText}`}>
                   Compliance: HIPAA certification in progress ({modulesDone}/{moduleTotal} modules).{" "}
                   <Link href="/training" className="font-semibold underline">
                     Continue when you can
                   </Link>
-                  — separate from your daily focus below.
+                  .
                 </p>
               ) : null}
-
-              {!inFocus && !onBreak ? <TeamPulsePanel compact className="mt-2" /> : null}
-
-              {!inFocus ? <MyDayTasksPanel /> : null}
-
-              {!onBreak && !inFocus ? <WorkplaceLinksPanel /> : null}
-
-              <div className="grid gap-4 md:grid-cols-2 md:items-stretch">
-                <section className={`flex flex-col ${portalSection}`}>
-                  <h2 className={portalH3}>Today&apos;s focus</h2>
-                  <p className="mt-1 text-[11px] text-[var(--siya-text-muted)]">Your list + suggestions from your goals</p>
-                  <ul className="mt-3 flex-1 space-y-2 text-sm">
-                    {focus.map((f) => (
-                      <li key={f.id} className="flex items-start gap-2">
-                        <button
-                          type="button"
-                          onClick={() => toggleFocus(f.id)}
-                          className="mt-0.5 shrink-0 text-base leading-none"
-                          aria-label={f.done ? "Mark incomplete" : "Mark done"}
-                        >
-                          {f.done ? "✅" : "○"}
-                        </button>
-                        {f.href && !f.done ? (
-                          <PortalNavLink href={f.href} className="text-[var(--siya-accent)] hover:underline">
-                            {f.text}
-                          </PortalNavLink>
-                        ) : (
-                          <span className={f.done ? "text-[var(--siya-text-muted)] line-through" : ""}>{f.text}</span>
-                        )}
-                        {f.source === "ai" && !f.done ? (
-                          <span className="ml-1 text-[10px] uppercase text-[var(--siya-text-muted)]">suggested</span>
-                        ) : null}
-                      </li>
-                    ))}
-                  </ul>
-                  <form onSubmit={addUserFocus} className="mt-3 flex gap-2">
-                    <input
-                      value={newFocus}
-                      onChange={(e) => setNewFocus(e.target.value)}
-                      placeholder="Add your own focus…"
-                      className={portalInputCompact}
-                    />
-                    <button type="submit" className={portalBtnGhostSm}>
-                      Add
-                    </button>
-                  </form>
-                </section>
-
-                {!inFocus ? (
-                  <section className={`flex flex-col ${portalSection}`}>
-                    <h2 className={portalH3}>Today&apos;s learning</h2>
-                    <p className="mt-1 text-[11px] text-[var(--siya-text-muted)]">Picked for your goals — not random</p>
-                    <ul className="mt-3 flex-1 space-y-3 text-sm">
-                      {learningPicks.map((pick) => (
-                        <li key={pick.href + pick.label}>
-                          <PortalNavLink href={pick.href} className="font-medium text-[var(--siya-accent)] hover:underline">
-                            {pick.label}
-                            {pick.minutes ? ` · ~${pick.minutes} min` : ""}
-                          </PortalNavLink>
-                          <p className="text-xs text-[var(--siya-text-muted)]">{pick.detail}</p>
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="mt-3 border-t border-[var(--siya-border)] pt-3 text-xs text-[var(--siya-text-secondary)]">
-                      <p className="font-medium text-[var(--siya-primary)]">&ldquo;{phrase.phrase}&rdquo;</p>
-                      <p className="text-[var(--siya-text-muted)]">
-                        {term.term} — {term.plain.length > 80 ? `${term.plain.slice(0, 80)}…` : term.plain}
-                      </p>
-                    </div>
-                    <PortalNavLink href="/learn/practice" className="mt-3 text-xs font-semibold text-[var(--siya-accent)] hover:underline">
-                      Open all practice →
-                    </PortalNavLink>
-                  </section>
-                ) : null}
-              </div>
-
-              {!inFocus ? (
-                <section className={portalSectionSubtle}>
-                  <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
-                    <span className="font-semibold text-[var(--siya-primary)]">Progress</span>
-                    <span className="text-xs text-[var(--siya-text-secondary)]">
-                      {streak > 0 ? `🔥 ${streak} day streak` : "Start a streak today"} · {xp} XP
-                    </span>
-                  </div>
-                </section>
+              {!isPortalOnboardingPaused() && !profile.onboardingComplete ? (
+                <p className="mb-3 text-xs text-amber-800">
+                  Finish{" "}
+                  <Link href="/onboarding" className="font-semibold underline">
+                    onboarding
+                  </Link>{" "}
+                  so personalization matches your role.
+                </p>
               ) : null}
-
-              {!inFocus ? (
-                <ReflectSection
-                  reflectOpen={reflectOpen}
-                  setReflectOpen={setReflectOpen}
-                  reflection={reflection}
-                  setReflection={setReflection}
-                  saveReflection={saveReflection}
-                />
-              ) : null}
-
-              <AskSection inFocus={inFocus} ask={ask} setAsk={setAsk} submitAsk={submitAsk} />
-
-              <p className="text-center text-xs text-[var(--siya-text-muted)]">
-                <Link href="/learn" className="text-[var(--siya-accent)] hover:underline">
-                  Learn
-                </Link>
-              </p>
-            </>
-          )}
+              <StaffHomeChat firstName={firstName} inFocus={inFocus} onBreak={onBreak} />
+            </div>
+          ) : null}
         </>
       ) : null}
     </div>

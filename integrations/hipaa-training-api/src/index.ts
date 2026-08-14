@@ -61,7 +61,7 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-app.use(express.json({ limit: "2mb" }));
+app.use(express.json({ limit: "5mb" }));
 
 let dbInit: Promise<void> | undefined;
 app.use(async (_req, _res, next) => {
@@ -206,6 +206,50 @@ app.post("/api/auth/change-password", requireAuth, async (req: AuthRequest, res:
     userId,
   ]);
   return res.json({ ok: true });
+});
+
+/** Per-user clinic letterhead for prescription-generator (one profile per staff user). */
+app.get("/api/clinic-profile", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { getClinicProfile } = await import("./clinic-profile-service.js");
+  const profile = await getClinicProfile(pool, req.user!.userId);
+  return res.json({ profile });
+});
+
+app.put("/api/clinic-profile", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const body = req.body as Record<string, unknown>;
+  try {
+    const { upsertClinicProfile } = await import("./clinic-profile-service.js");
+    const profile = await upsertClinicProfile(pool, req.user!.userId, {
+      clinicName: typeof body.clinicName === "string" ? body.clinicName : undefined,
+      doctorName: typeof body.doctorName === "string" ? body.doctorName : undefined,
+      degree: typeof body.degree === "string" ? body.degree : undefined,
+      regNo: typeof body.regNo === "string" ? body.regNo : undefined,
+      clinicContact: typeof body.clinicContact === "string" ? body.clinicContact : undefined,
+      clinicAddress: typeof body.clinicAddress === "string" ? body.clinicAddress : undefined,
+      logoDataUrl:
+        body.logoDataUrl === null
+          ? null
+          : typeof body.logoDataUrl === "string"
+            ? body.logoDataUrl
+            : undefined,
+      signatureDataUrl:
+        body.signatureDataUrl === null
+          ? null
+          : typeof body.signatureDataUrl === "string"
+            ? body.signatureDataUrl
+            : undefined,
+      clearLogo: body.clearLogo === true,
+      clearSignature: body.clearSignature === true,
+    });
+    return res.json({ profile });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Could not save clinic profile";
+    return res.status(400).json({ error: message });
+  }
 });
 
 app.get("/api/training/progress", requireAuth, async (req: AuthRequest, res: express.Response) => {
@@ -464,7 +508,7 @@ app.get("/api/executive/briefing", requireAuth, async (req: AuthRequest, res: ex
 });
 
 /** Founder Decision Coach Phase 1 — team-visible weekly brief + founder-only plan edit */
-app.get("/api/founder-coach/brief", requireAuth, async (req: AuthRequest, res: express.Response) => {
+app.get("/api/founder-coach/brief", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
   try {
@@ -483,7 +527,7 @@ app.get("/api/founder-coach/brief", requireAuth, async (req: AuthRequest, res: e
   }
 });
 
-app.put("/api/founder-coach/monthly", requireAuth, async (req: AuthRequest, res: express.Response) => {
+app.put("/api/founder-coach/monthly", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
   const userId = req.user!.userId;
@@ -510,7 +554,7 @@ app.put("/api/founder-coach/monthly", requireAuth, async (req: AuthRequest, res:
   }
 });
 
-app.put("/api/founder-coach/weekly", requireAuth, async (req: AuthRequest, res: express.Response) => {
+app.put("/api/founder-coach/weekly", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
   const userId = req.user!.userId;
@@ -530,6 +574,7 @@ app.put("/api/founder-coach/weekly", requireAuth, async (req: AuthRequest, res: 
       canWait: Array.isArray(req.body?.canWait) ? req.body.canWait : [],
       delegate: Array.isArray(req.body?.delegate) ? req.body.delegate : [],
       observeOnly: Array.isArray(req.body?.observeOnly) ? req.body.observeOnly : [],
+      prioritiesRaw: typeof req.body?.prioritiesRaw === "string" ? req.body.prioritiesRaw : undefined,
     });
     return res.json({ plan });
   } catch (e) {
@@ -537,7 +582,47 @@ app.put("/api/founder-coach/weekly", requireAuth, async (req: AuthRequest, res: 
   }
 });
 
-app.put("/api/founder-coach/actuals", requireAuth, async (req: AuthRequest, res: express.Response) => {
+app.post("/api/founder-coach/weekly/lock", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const userId = req.user!.userId;
+  const u = await pool.query(`SELECT email, role FROM hipaa_training_users WHERE id = $1`, [userId]);
+  if (!u.rows[0]) return res.status(401).json({ error: "User not found" });
+  const { isExecutiveUser } = await import("./executive-briefing.js");
+  if (!isExecutiveUser(u.rows[0].email as string, u.rows[0].role as string)) {
+    return res.status(403).json({ error: "Founder only" });
+  }
+  const { lockWeeklyPlan, istWeekStart } = await import("./founder-coach-service.js");
+  try {
+    const weekStart = typeof req.body?.weekStart === "string" ? req.body.weekStart : istWeekStart();
+    const plan = await lockWeeklyPlan(pool, userId, weekStart);
+    return res.json({ plan });
+  } catch (e) {
+    return res.status(400).json({ error: e instanceof Error ? e.message : "Lock failed" });
+  }
+});
+
+app.post("/api/founder-coach/weekly/unlock", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const userId = req.user!.userId;
+  const u = await pool.query(`SELECT email, role FROM hipaa_training_users WHERE id = $1`, [userId]);
+  if (!u.rows[0]) return res.status(401).json({ error: "User not found" });
+  const { isExecutiveUser } = await import("./executive-briefing.js");
+  if (!isExecutiveUser(u.rows[0].email as string, u.rows[0].role as string)) {
+    return res.status(403).json({ error: "Founder only" });
+  }
+  const { unlockWeeklyPlan, istWeekStart } = await import("./founder-coach-service.js");
+  try {
+    const weekStart = typeof req.body?.weekStart === "string" ? req.body.weekStart : istWeekStart();
+    const plan = await unlockWeeklyPlan(pool, userId, weekStart);
+    return res.json({ plan });
+  } catch (e) {
+    return res.status(400).json({ error: e instanceof Error ? e.message : "Unlock failed" });
+  }
+});
+
+app.put("/api/founder-coach/actuals", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
   const userId = req.user!.userId;
@@ -568,7 +653,7 @@ app.put("/api/founder-coach/actuals", requireAuth, async (req: AuthRequest, res:
   }
 });
 
-app.post("/api/founder-coach/observe-events", requireAuth, async (req: AuthRequest, res: express.Response) => {
+app.post("/api/founder-coach/observe-events", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
   const observeId = typeof req.body?.observeId === "string" ? req.body.observeId : "";
@@ -588,17 +673,104 @@ app.post("/api/founder-coach/observe-events", requireAuth, async (req: AuthReque
 app.post("/api/assist/gaps", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
-  const id = typeof req.body?.id === "string" ? req.body.id.slice(0, 64) : `gap-${Date.now()}`;
+  const id = typeof req.body?.id === "string" ? req.body.id.slice(0, 80) : undefined;
   const department = typeof req.body?.department === "string" ? req.body.department : "General";
   const task = typeof req.body?.task === "string" ? req.body.task : "Missing approved policy";
+  const phiRedacted = req.body?.phiRedacted === true;
   try {
-    const { insertAssistGap } = await import("./assist-telemetry.js");
-    await insertAssistGap(pool, { id, department, task });
-    return res.status(201).json({ ok: true, id });
+    const { insertAssistGap, newGapId } = await import("./assist-telemetry.js");
+    const { gap, route } = await insertAssistGap(pool, {
+      id: id || newGapId(),
+      department,
+      task,
+      phiRedacted,
+    });
+    return res.status(201).json({
+      ok: true,
+      id: gap.id,
+      gap,
+      route: {
+        mode: route.mode,
+        departmentSlug: route.departmentSlug,
+        departmentLabel: route.departmentLabel,
+        reason: route.reason,
+        leadName: route.leadName,
+      },
+    });
   } catch (err) {
     console.error("[assist/gaps]", err);
     return res.status(500).json({ error: "Could not record gap." });
   }
+});
+
+app.get("/api/assist/gaps", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { listOpenGapsForViewer } = await import("./assist-telemetry.js");
+    const gaps = await listOpenGapsForViewer(pool, {
+      userId: req.user!.userId,
+      role: req.user!.role || "trainee",
+    });
+    return res.json({
+      gaps,
+      honestyNote:
+        "Counts reflect Notify owner clicks in Ask — not every unanswered query. Category and task label only; question text is never stored.",
+    });
+  } catch (err) {
+    console.error("[assist/gaps list]", err);
+    return res.status(500).json({ error: "Could not list gaps." });
+  }
+});
+
+app.post("/api/assist/gaps/:id/resolve", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { resolveAssistGap } = await import("./assist-telemetry.js");
+    const gap = await resolveAssistGap(pool, {
+      id: req.params.id,
+      userId: req.user!.userId,
+      role: req.user!.role || "trainee",
+    });
+    return res.json({ gap });
+  } catch (e) {
+    return res.status(400).json({ error: e instanceof Error ? e.message : "Resolve failed" });
+  }
+});
+
+app.get("/api/internal/lead-gap-digests", async (req, res) => {
+  if (!cronAuthorized(req)) return res.status(401).json({ error: "Unauthorized" });
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { istWeekStart } = await import("./ops-coordination-service.js");
+  const weekStart =
+    typeof req.query.weekStart === "string" && /^\d{4}-\d{2}-\d{2}$/.test(req.query.weekStart)
+      ? req.query.weekStart
+      : istWeekStart();
+  const { buildLeadGapDigestPayloads } = await import("./assist-telemetry.js");
+  const digests = await buildLeadGapDigestPayloads(pool, weekStart);
+  return res.json({
+    weekStart,
+    digests,
+    honestyNote:
+      "Open Notify owner gaps only (category + task label). Not a full count of unanswered Ask turns.",
+  });
+});
+
+app.post("/api/internal/lead-gap-digests/mark-sent", async (req, res) => {
+  if (!cronAuthorized(req)) return res.status(401).json({ error: "Unauthorized" });
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const userId = typeof req.body?.userId === "string" ? req.body.userId : "";
+  const weekStart = typeof req.body?.weekStart === "string" ? req.body.weekStart : "";
+  const gapCount = typeof req.body?.gapCount === "number" ? req.body.gapCount : 0;
+  if (!userId || !/^\d{4}-\d{2}-\d{2}$/.test(weekStart)) {
+    return res.status(400).json({ error: "userId and weekStart required" });
+  }
+  const { markLeadGapDigestSent } = await import("./assist-telemetry.js");
+  await markLeadGapDigestSent(pool, { userId, weekStart, gapCount });
+  return res.json({ ok: true });
 });
 
 app.post("/api/assist/feedback", requireAuth, async (req: AuthRequest, res: express.Response) => {
@@ -616,6 +788,97 @@ app.post("/api/assist/feedback", requireAuth, async (req: AuthRequest, res: expr
     console.error("[assist/feedback]", err);
     return res.status(500).json({ error: "Could not record feedback." });
   }
+});
+
+/** Assist v2 — per-user chat threads */
+app.get("/api/assist/threads", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const q = typeof req.query.q === "string" ? req.query.q : undefined;
+  const { listAssistThreads } = await import("./assist-chat-service.js");
+  return res.json({ threads: await listAssistThreads(pool, req.user!.userId, { q }) });
+});
+
+app.post("/api/assist/threads", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const title = typeof req.body?.title === "string" ? req.body.title : undefined;
+  const { createAssistThread } = await import("./assist-chat-service.js");
+  const thread = await createAssistThread(pool, req.user!.userId, title);
+  return res.status(201).json({ thread });
+});
+
+app.get("/api/assist/threads/:id", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { getAssistThread, listAssistMessages } = await import("./assist-chat-service.js");
+  const thread = await getAssistThread(pool, req.user!.userId, req.params.id);
+  if (!thread) return res.status(404).json({ error: "Thread not found" });
+  const messages = await listAssistMessages(pool, req.user!.userId, req.params.id);
+  return res.json({ thread, messages });
+});
+
+app.patch("/api/assist/threads/:id", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const title = typeof req.body?.title === "string" ? req.body.title : "";
+  const { renameAssistThread } = await import("./assist-chat-service.js");
+  const thread = await renameAssistThread(pool, req.user!.userId, req.params.id, title);
+  if (!thread) return res.status(404).json({ error: "Thread not found" });
+  return res.json({ thread });
+});
+
+app.post("/api/assist/threads/:id/archive", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { archiveAssistThread } = await import("./assist-chat-service.js");
+  const ok = await archiveAssistThread(pool, req.user!.userId, req.params.id);
+  if (!ok) return res.status(404).json({ error: "Thread not found" });
+  return res.json({ ok: true });
+});
+
+app.get("/api/assist/threads/:id/history", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const limit = req.query.limit != null ? Number(req.query.limit) : 24;
+  const { listAssistHistoryForLlm, getAssistThread } = await import("./assist-chat-service.js");
+  const thread = await getAssistThread(pool, req.user!.userId, req.params.id);
+  if (!thread) return res.status(404).json({ error: "Thread not found" });
+  const history = await listAssistHistoryForLlm(pool, req.user!.userId, req.params.id, limit);
+  return res.json({ history });
+});
+
+app.post("/api/assist/threads/:id/messages", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const role = req.body?.role === "assistant" ? "assistant" : req.body?.role === "user" ? "user" : null;
+  const content = typeof req.body?.content === "string" ? req.body.content : "";
+  if (!role || !content.trim()) return res.status(400).json({ error: "role and content required" });
+  const { appendAssistMessage } = await import("./assist-chat-service.js");
+  const message = await appendAssistMessage(pool, req.user!.userId, req.params.id, role, content, req.body?.meta);
+  if (!message) return res.status(404).json({ error: "Thread not found" });
+  return res.status(201).json({ message });
+});
+
+app.post("/api/assist/threads/:id/turns", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const userContent = typeof req.body?.userContent === "string" ? req.body.userContent : "";
+  const assistantContent = typeof req.body?.assistantContent === "string" ? req.body.assistantContent : "";
+  if (!userContent.trim() || !assistantContent.trim()) {
+    return res.status(400).json({ error: "userContent and assistantContent required" });
+  }
+  const { appendAssistTurn } = await import("./assist-chat-service.js");
+  const turn = await appendAssistTurn(
+    pool,
+    req.user!.userId,
+    req.params.id,
+    userContent,
+    assistantContent,
+    typeof req.body?.meta === "object" && req.body.meta ? req.body.meta : undefined,
+  );
+  if (!turn) return res.status(404).json({ error: "Thread not found" });
+  return res.status(201).json(turn);
 });
 
 app.get("/api/admin/shift/today", requireAuth, requireAdmin, async (_req: AuthRequest, res: express.Response) => {
@@ -846,6 +1109,43 @@ app.post("/api/shift-handoffs", requireAuth, async (req: AuthRequest, res: expre
   return res.status(201).json({ handoff });
 });
 
+/** Weekly lead check-ins — Marketing / Clinical Operations / Compliance (Team feed). */
+app.get("/api/weekly-checkins/access", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { weeklyCheckInAccess } = await import("./ops-coordination-service.js");
+  const access = await weeklyCheckInAccess(pool, req.user!.userId, req.user!.role ?? "trainee");
+  return res.json(access);
+});
+
+app.get("/api/weekly-checkins", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { listWeeklyLeadCheckIns } = await import("./ops-coordination-service.js");
+  const week = typeof req.query.week === "string" ? req.query.week : "current";
+  const checkins = await listWeeklyLeadCheckIns(pool, week);
+  return res.json({ checkins, week });
+});
+
+app.post("/api/weekly-checkins", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { createWeeklyLeadCheckIn } = await import("./ops-coordination-service.js");
+    const checkin = await createWeeklyLeadCheckIn(pool, req.user!.userId, req.user!.role ?? "trainee", {
+      department: typeof req.body?.department === "string" ? req.body.department : "",
+      weekStart: typeof req.body?.weekStart === "string" ? req.body.weekStart : undefined,
+      whatChanged: typeof req.body?.whatChanged === "string" ? req.body.whatChanged : "",
+      keyNumbersStatus: typeof req.body?.keyNumbersStatus === "string" ? req.body.keyNumbersStatus : "",
+      blockers: typeof req.body?.blockers === "string" ? req.body.blockers : "",
+      founderShouldKnow: typeof req.body?.founderShouldKnow === "string" ? req.body.founderShouldKnow : "",
+    });
+    return res.status(201).json({ checkin });
+  } catch (e) {
+    return res.status(400).json({ error: e instanceof Error ? e.message : "Could not save check-in" });
+  }
+});
+
 app.get("/api/admin/shift/trends", requireAuth, requireAdmin, async (_req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
@@ -964,9 +1264,22 @@ app.get("/api/policies/requirements/:id", requireAuth, async (req: AuthRequest, 
 app.get("/api/knowledge/decisions", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
-  const limit = Math.min(parseInt(String(req.query.limit ?? "30"), 10) || 30, 50);
+  const limit = Math.min(parseInt(String(req.query.limit ?? "50"), 10) || 50, 80);
   const { listDecisions } = await import("./knowledge-service.js");
   const decisions = await listDecisions(pool, limit);
+  return res.json({ decisions });
+});
+
+/** Lean decision log for Ask Layer 2 (same pattern as /api/knowledge/sops/retrieval). */
+app.get("/api/knowledge/decisions/retrieval", requireAuth, async (_req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { ensureKnowledgeTables, listDecisionsForRetrieval, syncMarkdownDecisionsSeed } = await import(
+    "./knowledge-service.js"
+  );
+  await ensureKnowledgeTables(pool);
+  await syncMarkdownDecisionsSeed(pool);
+  const decisions = await listDecisionsForRetrieval(pool);
   return res.json({ decisions });
 });
 
@@ -997,9 +1310,11 @@ app.post("/api/knowledge/decisions", requireAuth, async (req: AuthRequest, res: 
   if (!title || !decisionText) {
     return res.status(400).json({ error: "title and decisionText required" });
   }
-  const { createDecision } = await import("./knowledge-service.js");
+  const { createDecision, ensureKnowledgeTables } = await import("./knowledge-service.js");
   try {
+    await ensureKnowledgeTables(pool);
     const decision = await createDecision(pool, req.user!.userId, {
+      id: typeof req.body?.id === "string" ? req.body.id.trim() : undefined,
       title,
       decisionText,
       reason: typeof req.body?.reason === "string" ? req.body.reason : undefined,
@@ -1255,19 +1570,45 @@ app.get("/api/knowledge/team-assignees", requireAuth, async (_req: AuthRequest, 
 app.get("/api/knowledge/sops/context", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
-  const { getUserRole, listMyLeadDepartments, listDepartmentLeads } = await import("./sop-service.js");
-  const { SOP_DEPARTMENTS } = await import("./sop-store.js");
+  const { getUserRole, listMyLeadDepartments, listDepartmentLeads, resolveSopApprovalRoute } = await import(
+    "./sop-service.js"
+  );
+  const { SOP_DEPARTMENTS, departmentToSlug } = await import("./sop-store.js");
   const userId = req.user!.userId;
   const role = await getUserRole(pool, userId);
   const myLeadSlugs = await listMyLeadDepartments(pool, userId);
   const isAdmin = role === "admin";
+  const departmentLeads = await listDepartmentLeads(pool);
+  const approvalRoutes = [];
+  for (const dept of SOP_DEPARTMENTS) {
+    const route = await resolveSopApprovalRoute(pool, departmentToSlug(dept));
+    approvalRoutes.push({
+      department: dept,
+      departmentSlug: route.departmentSlug,
+      approvalMode: route.mode,
+      reason: route.reason,
+      reviewerLabel:
+        route.mode === "lead_self"
+          ? route.leadName
+            ? `Department lead: ${route.leadName}${route.leadEmail ? ` (${route.leadEmail})` : ""}`
+            : "Department lead (assigned)"
+          : route.reason === "cross_cutting_department"
+            ? "Founder / admin review queue (Leadership & General)"
+            : route.reason === "lead_is_founder_admin"
+              ? "Founder / admin review queue (lead is an admin)"
+              : "Founder / admin review queue (no department lead assigned)",
+      leadName: route.leadName,
+      leadEmail: route.leadEmail,
+    });
+  }
   return res.json({
     layer: 2,
     label: "Department SOPs",
     departments: SOP_DEPARTMENTS,
     isAdmin,
     myLeadSlugs,
-    departmentLeads: isAdmin ? await listDepartmentLeads(pool) : [],
+    departmentLeads,
+    approvalRoutes,
   });
 });
 
@@ -1305,39 +1646,17 @@ app.get("/api/knowledge/sops/retrieval", requireAuth, async (_req: AuthRequest, 
 app.get("/api/knowledge/sops", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
-  const { getUserRole, listMyLeadDepartments, listSops } = await import("./sop-service.js");
-  const userId = req.user!.userId;
-  const role = await getUserRole(pool, userId);
+  const { listSops } = await import("./sop-service.js");
   const departmentSlug = typeof req.query.department === "string" ? req.query.department : undefined;
   const status = typeof req.query.status === "string" ? req.query.status : undefined;
-  const leadSlugs = await listMyLeadDepartments(pool, userId);
-  const { sopsForStaffApi, sopForStaffApi, departmentToSlug, slugToDepartment, SOP_DEPARTMENTS } = await import(
-    "./sop-store.js"
-  );
+  const { sopsForStaffApi, departmentToSlug, slugToDepartment, SOP_DEPARTMENTS } = await import("./sop-store.js");
   let departmentSlugFilter = departmentSlug;
   if (departmentSlug && !slugToDepartment(departmentSlug)) {
     if ((SOP_DEPARTMENTS as readonly string[]).includes(departmentSlug)) {
       departmentSlugFilter = departmentToSlug(departmentSlug);
     }
   }
-  if (role !== "admin") {
-    if (departmentSlugFilter && !leadSlugs.includes(departmentSlugFilter)) {
-      const publicOnly = await listSops(pool, { departmentSlug: departmentSlugFilter, status: status ?? undefined });
-      const filtered = publicOnly.filter((s) => s.status !== "draft");
-      return res.json({ sops: sopsForStaffApi(filtered) });
-    }
-    if (!departmentSlugFilter && !leadSlugs.length) {
-      const all = await listSops(pool, {});
-      return res.json({ sops: sopsForStaffApi(all.filter((s) => s.status !== "draft")) });
-    }
-    if (departmentSlugFilter && leadSlugs.includes(departmentSlugFilter)) {
-      return res.json({
-        sops: sopsForStaffApi(await listSops(pool, { departmentSlug: departmentSlugFilter, status })),
-      });
-    }
-    const mine = await Promise.all(leadSlugs.map((slug) => listSops(pool, { departmentSlug: slug, status })));
-    return res.json({ sops: sopsForStaffApi(mine.flat()) });
-  }
+  // Temporary: all signed-in staff see the full department SOP library (including drafts).
   const sops = await listSops(pool, { departmentSlug: departmentSlugFilter, status });
   return res.json({ sops: sopsForStaffApi(sops) });
 });
@@ -1347,7 +1666,7 @@ app.get("/api/knowledge/sops/live-samples", requireAuth, async (req: AuthRequest
   if (!pool) return res.status(503).json({ error: "Database not configured." });
   const department = typeof req.query.department === "string" ? req.query.department : "";
   if (!department) return res.status(400).json({ error: "department required" });
-  const { getUserRole, listMyLeadDepartments, listLiveSopStyleSamples } = await import("./sop-service.js");
+  const { listLiveSopStyleSamples } = await import("./sop-service.js");
   const { departmentToSlug, slugToDepartment, SOP_DEPARTMENTS } = await import("./sop-store.js");
   let dept = slugToDepartment(department);
   if (!dept && (SOP_DEPARTMENTS as readonly string[]).includes(department)) {
@@ -1355,11 +1674,6 @@ app.get("/api/knowledge/sops/live-samples", requireAuth, async (req: AuthRequest
   }
   if (!dept) return res.status(400).json({ error: "Invalid department" });
   const slug = departmentToSlug(dept);
-  const role = await getUserRole(pool, req.user!.userId);
-  const leadSlugs = await listMyLeadDepartments(pool, req.user!.userId);
-  if (role !== "admin" && !leadSlugs.includes(slug)) {
-    return res.status(403).json({ error: "Department lead access required" });
-  }
   const samples = await listLiveSopStyleSamples(pool, slug);
   return res.json({ samples });
 });
@@ -1367,18 +1681,10 @@ app.get("/api/knowledge/sops/live-samples", requireAuth, async (req: AuthRequest
 app.get("/api/knowledge/sops/:id", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
-  const { getSop, getUserRole, listMyLeadDepartments } = await import("./sop-service.js");
-  const { sopForStaffApi, departmentToSlug } = await import("./sop-store.js");
+  const { getSop } = await import("./sop-service.js");
+  const { sopForStaffApi } = await import("./sop-store.js");
   const sop = await getSop(pool, req.params.id);
   if (!sop) return res.status(404).json({ error: "SOP not found" });
-  const role = await getUserRole(pool, req.user!.userId);
-  if (sop.status === "draft") {
-    const slug = departmentToSlug(sop.department);
-    const leads = await listMyLeadDepartments(pool, req.user!.userId);
-    if (role !== "admin" && !leads.includes(slug)) {
-      return res.status(404).json({ error: "SOP not found" });
-    }
-  }
   return res.json({ sop: sopForStaffApi(sop) });
 });
 
@@ -1436,12 +1742,13 @@ app.patch("/api/knowledge/sops/:id", requireAuth, async (req: AuthRequest, res: 
 app.post("/api/knowledge/sops/:id/submit", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
-  const { submitSopForReview, getUserRole } = await import("./sop-service.js");
+  const { submitSopForReview, getUserRole, buildSopReviewNotifyMeta } = await import("./sop-service.js");
   const { sopForStaffApi } = await import("./sop-store.js");
   try {
     const role = await getUserRole(pool, req.user!.userId);
     const sop = await submitSopForReview(pool, req.user!.userId, role, req.params.id);
-    return res.json({ sop: sopForStaffApi(sop) });
+    const notify = await buildSopReviewNotifyMeta(pool, sop);
+    return res.json({ sop: sopForStaffApi(sop), notify });
   } catch (e) {
     return res.status(403).json({ error: e instanceof Error ? e.message : "Submit failed" });
   }
@@ -1450,17 +1757,8 @@ app.post("/api/knowledge/sops/:id/submit", requireAuth, async (req: AuthRequest,
 app.get("/api/knowledge/sop-tasks", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
-  const { listSopTasks, getUserRole, listMyLeadDepartments } = await import("./sop-service.js");
+  const { listSopTasks } = await import("./sop-service.js");
   const departmentSlug = typeof req.query.department === "string" ? req.query.department : undefined;
-  const role = await getUserRole(pool, req.user!.userId);
-  const leadSlugs = await listMyLeadDepartments(pool, req.user!.userId);
-  if (departmentSlug && role !== "admin" && !leadSlugs.includes(departmentSlug)) {
-    return res.status(403).json({ error: "Department lead access required" });
-  }
-  if (!departmentSlug && role !== "admin" && leadSlugs.length) {
-    const batches = await Promise.all(leadSlugs.map((slug) => listSopTasks(pool, slug)));
-    return res.json({ tasks: batches.flat() });
-  }
   return res.json({ tasks: await listSopTasks(pool, departmentSlug) });
 });
 
@@ -1511,38 +1809,76 @@ app.patch("/api/knowledge/sop-tasks/:id", requireAuth, async (req: AuthRequest, 
   }
 });
 
-app.get("/api/admin/sops/review-queue", requireAuth, requireAdmin, async (_req: AuthRequest, res: express.Response) => {
+app.get("/api/admin/sops/review-queue", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
-  const { listSops } = await import("./sop-service.js");
-  const sops = await listSops(pool, { status: "pending_review" });
+  const { listSopReviewQueueForViewer } = await import("./sop-service.js");
+  const sops = await listSopReviewQueueForViewer(pool, {
+    userId: req.user!.userId,
+    role: req.user!.role || "trainee",
+  });
   return res.json({ sops });
 });
 
-app.post("/api/admin/sops/:id/approve", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
+app.post("/api/admin/sops/:id/approve", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
-  const { approveSop } = await import("./sop-service.js");
+  const { approveSop, buildSopReviewNotifyMeta } = await import("./sop-service.js");
   try {
     const sop = await approveSop(pool, req.user!.userId, req.params.id);
-    return res.json({ sop });
+    const notify = await buildSopReviewNotifyMeta(pool, sop);
+    return res.json({ sop, notify });
   } catch (e) {
-    return res.status(400).json({ error: e instanceof Error ? e.message : "Approve failed" });
+    const msg = e instanceof Error ? e.message : "Approve failed";
+    const status = msg.includes("Not authorized") ? 403 : 400;
+    return res.status(status).json({ error: msg });
   }
 });
 
-app.post("/api/admin/sops/:id/send-back", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
+app.post("/api/admin/sops/:id/send-back", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
   const comment = typeof req.body?.comment === "string" ? req.body.comment.trim() : "";
   if (!comment) return res.status(400).json({ error: "comment required" });
-  const { sendBackSop } = await import("./sop-service.js");
+  const { sendBackSop, buildSopReviewNotifyMeta } = await import("./sop-service.js");
   try {
-    const sop = await sendBackSop(pool, req.params.id, comment);
-    return res.json({ sop });
+    const sop = await sendBackSop(pool, {
+      id: req.params.id,
+      comment,
+      userId: req.user!.userId,
+      role: req.user!.role || "trainee",
+    });
+    const notify = await buildSopReviewNotifyMeta(pool, sop);
+    return res.json({ sop, notify });
   } catch (e) {
-    return res.status(400).json({ error: e instanceof Error ? e.message : "Send back failed" });
+    const msg = e instanceof Error ? e.message : "Send back failed";
+    const status = msg.includes("Not authorized") ? 403 : 400;
+    return res.status(status).json({ error: msg });
   }
+});
+
+app.get("/api/admin/department-leads/approval-map", requireAuth, requireAdmin, async (_req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { listDepartmentLeads, resolveSopApprovalRoute } = await import("./sop-service.js");
+  const { SOP_DEPARTMENTS, departmentToSlug } = await import("./sop-store.js");
+  const leads = await listDepartmentLeads(pool);
+  const map = [];
+  for (const dept of SOP_DEPARTMENTS) {
+    const route = await resolveSopApprovalRoute(pool, departmentToSlug(dept));
+    const lead = leads.find((l) => l.departmentSlug === route.departmentSlug);
+    map.push({
+      department: dept,
+      departmentSlug: route.departmentSlug,
+      approvalMode: route.mode,
+      reason: route.reason,
+      leadUserId: route.leadUserId,
+      leadName: route.leadName,
+      leadEmail: route.leadEmail,
+      assignedLeadName: lead?.userName ?? null,
+    });
+  }
+  return res.json({ map });
 });
 
 app.get("/api/admin/department-leads", requireAuth, requireAdmin, async (_req: AuthRequest, res: express.Response) => {
@@ -1610,6 +1946,37 @@ app.post("/api/cron/generate-daily-tasks", async (req, res) => {
   const { created, skipped } = await generateTasksFromTemplates(pool, opsDate);
   const overdue = await markOverdueTasks(pool);
   return res.json({ ok: true, date: opsDate, created, skipped, overdueMarked: overdue });
+});
+
+/** Re-run decision seeds + report store counts (CRON_SECRET). */
+app.post("/api/cron/seed-decisions", async (req, res) => {
+  if (!cronAuthorized(req)) return res.status(401).json({ error: "Unauthorized" });
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const {
+    ensureKnowledgeTables,
+    syncMarkdownDecisionsSeed,
+    syncJsonDecisionsSeed,
+    listDecisions,
+  } = await import("./knowledge-service.js");
+  await ensureKnowledgeTables(pool);
+  const markdown = await syncMarkdownDecisionsSeed(pool);
+  const json = await syncJsonDecisionsSeed(pool);
+  const decisions = await listDecisions(pool, 80);
+  const ids = new Set(decisions.map((d) => d.id));
+  return res.json({
+    ok: true,
+    total: decisions.length,
+    markdown,
+    json,
+    requiredPresent: {
+      homepageCta: ids.has("homepage-cta-meet-and-greet"),
+      marketingOsFrozen: ids.has("marketing-os-v1-frozen"),
+      agentOrgDeferred: ids.has("agent-org-chart-deferred"),
+      chatReviewAdminOnly: ids.has("chat-review-admin-clinical-lead-only"),
+      marketingBiggerSystems: ids.has("marketing-bigger-systems-paused"),
+    },
+  });
 });
 
 app.get("/api/tasks/me", requireAuth, async (req: AuthRequest, res: express.Response) => {
@@ -1852,6 +2219,7 @@ app.patch("/api/sop-builder/sessions/:id", requireAuth, requireSopBuilderAccess,
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
   const { getSopBuilderSession, updateSopBuilderSession } = await import("./sop-builder-service.js");
+  const { getUserContact, listActiveAdminContacts } = await import("./sop-service.js");
   const existing = await getSopBuilderSession(pool, req.params.id);
   if (!existing) return res.status(404).json({ error: "Session not found" });
   const role = req.user!.role ?? "trainee";
@@ -1860,7 +2228,10 @@ app.patch("/api/sop-builder/sessions/:id", requireAuth, requireSopBuilderAccess,
   }
   const rawStatus = req.body?.status;
   const status =
-    rawStatus === "in_progress" || rawStatus === "draft_ready" || rawStatus === "submitted"
+    rawStatus === "in_progress" ||
+    rawStatus === "draft_ready" ||
+    rawStatus === "submitted" ||
+    rawStatus === "published"
       ? rawStatus
       : undefined;
   try {
@@ -1873,7 +2244,38 @@ app.patch("/api/sop-builder/sessions/:id", requireAuth, requireSopBuilderAccess,
           ? req.body.sourceMaterialRefs
           : undefined,
     });
-    return res.json({ session });
+    if (!session) return res.status(404).json({ error: "Session not found" });
+    let notify:
+      | {
+          kind: "builder_submitted" | "builder_published";
+          ownerEmail: string | null;
+          ownerName: string | null;
+          adminEmails: string[];
+          title: string;
+        }
+      | undefined;
+    if (status === "submitted" && existing.status !== "submitted") {
+      const owner = await getUserContact(pool, session.userId);
+      const admins = await listActiveAdminContacts(pool);
+      notify = {
+        kind: "builder_submitted",
+        ownerEmail: owner?.email ?? null,
+        ownerName: owner?.name ?? null,
+        adminEmails: admins.map((a) => a.email),
+        title: session.draftJson?.title || session.topic,
+      };
+    } else if (status === "published" && existing.status !== "published") {
+      const owner = await getUserContact(pool, session.userId);
+      const admins = await listActiveAdminContacts(pool);
+      notify = {
+        kind: "builder_published",
+        ownerEmail: owner?.email ?? null,
+        ownerName: owner?.name ?? null,
+        adminEmails: admins.map((a) => a.email),
+        title: session.draftJson?.title || session.topic,
+      };
+    }
+    return res.json({ session, notify });
   } catch (e) {
     return res.status(400).json({ error: e instanceof Error ? e.message : "Update failed" });
   }
@@ -1884,6 +2286,14 @@ app.get("/api/admin/sop-builder/submitted", requireAuth, requireAdmin, async (_r
   if (!pool) return res.status(503).json({ error: "Database not configured." });
   const { listSubmittedSopBuilderSessions } = await import("./sop-builder-service.js");
   return res.json({ sessions: await listSubmittedSopBuilderSessions(pool) });
+});
+
+app.get("/api/admin/sop-builder/sessions", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { listAdminSopBuilderSessions } = await import("./sop-builder-service.js");
+  const q = typeof req.query.q === "string" ? req.query.q : undefined;
+  return res.json({ sessions: await listAdminSopBuilderSessions(pool, { q }) });
 });
 
 app.post("/api/sop-feedback", requireAuth, async (req: AuthRequest, res: express.Response) => {
