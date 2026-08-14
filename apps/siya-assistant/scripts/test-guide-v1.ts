@@ -89,6 +89,43 @@ const CASES: Expect[] = [
     mustInclude: ['Texas'],
   },
   {
+    name: 'insurance — do not accept',
+    input: 'Do you take insurance?',
+    entity: 'insurance',
+    mustInclude: ['does not accept insurance', 'FSA'],
+    mustNotInclude: ['$149 initial evaluation and follow-up'],
+  },
+  {
+    name: 'insurance — coverage phrasing',
+    input: 'Are you in-network with Blue Cross?',
+    mustInclude: ['does not accept insurance'],
+  },
+  {
+    name: 'unsupported state — New York',
+    input: 'Do you serve New York?',
+    state: 'verified',
+    mustInclude: ["doesn't currently serve New York", 'California'],
+    mustNotInclude: ['prescriptions online'],
+  },
+  {
+    name: 'unsupported state — Illinois',
+    input: "I'm in Illinois — can I book ADHD care?",
+    mustInclude: ["doesn't currently serve Illinois"],
+  },
+  {
+    name: 'Should I take Adderall — clinical not PHI',
+    input: 'Should I take Adderall?',
+    refusal: 'clinical',
+    state: 'restricted',
+    mustNotInclude: ['personal medical information in this website chat'],
+  },
+  {
+    name: 'unknown topic — not-found handoff',
+    input: 'What is your veterinary partnership program for dogs?',
+    state: 'not_found',
+    mustInclude: ['215', 'Meet & Greet'],
+  },
+  {
     name: 'executive dysfunction',
     input: 'What is executive dysfunction?',
     entity: 'executive_dysfunction',

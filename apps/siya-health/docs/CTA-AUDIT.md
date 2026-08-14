@@ -31,7 +31,7 @@ Scanned **166** indexable pages (per `data/website-inventory.json`).
 |------|-------|-----|-------------|
 | **Primary** | Talk to a Clinician | `https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=sysv73e4` | One per page max in hero **or** final `cta-band`; nav may repeat same label. Consolidate all booking variants (Book ADHD Evaluation, Book a Meet & Greet, Book with {name}, etc.). |
 | **Secondary** | Explore Services | `/telehealth` (contextual: `/adhd-care`, `/weight-loss-metabolic-health`, etc.) | Optional, one max in hero or final band. ADHD funnel may use Free ADHD Screening instead on service/screening pages only. |
-| **Newsletter** | Siya Circle | `https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl` | Footer Company column only (+ dedicated promo on `/answers` hub). Do not add to hero or article bodies. |
+| **Newsletter** | Siya Circle | `https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx` | Footer Company column only (+ dedicated promo on `/answers` hub). Do not add to hero or article bodies. |
 
 ## Sitewide inventory table
 
@@ -40,7 +40,7 @@ Scanned **166** indexable pages (per `data/website-inventory.json`).
 | Talk to a Clinician | `https://book.carepatron.com/Siya-Health` | booking | nav | 256 | `/`, `/about`, `/adhd-evaluation-cost`… | **CONSOLIDATE** (primary) |
 | Talk to a Clinician | `https://book.carepatron.com/Siya-Health` | booking | footer | 162 | `/`, `/about`, `/adhd-care`… | **CONSOLIDATE** (primary) |
 | Free ADHD screening | `/adhd-screening` | screening | footer-links | 161 | `/`, `/about`, `/adhd-care`… | **KEEP** |
-| Siya Circle | `https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl` | newsletter | footer-links | 161 | `/`, `/about`, `/adhd-care`… | **KEEP** (newsletter) |
+| Siya Circle | `https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx` | newsletter | footer-links | 161 | `/`, `/about`, `/adhd-care`… | **KEEP** (newsletter) |
 | Talk to a Clinician | `https://book.carepatron.com/Siya-Health` | booking | main | 113 | `/`, `/adhd-screening`, `/answers/adderall-vs-vyvanse-adults`… | **REMOVE** |
 | Book ADHD Evaluation | `https://book.carepatron.com/Siya-Health` | booking | nav | 54 | `/adhd-care`, `/adhd-diagnosis-austin`, `/adhd-diagnosis-florida`… | **CONSOLIDATE** (primary) |
 | Talk to a Clinician | `https://book.carepatron.com/Siya-Health` | booking | main | 27 | `/about`, `/adhd-diagnosis-austin`, `/adhd-diagnosis-florida`… | **CONSOLIDATE** (primary) |
@@ -57,7 +57,7 @@ Scanned **166** indexable pages (per `data/website-inventory.json`).
 | Read the full clinical guide | `/blog/why-am-i-always-tired-causes-when-to-see-doctor` | content-crosslink | main | 3 | `/answers/afternoon-energy-crash-after-lunch`, `/answers/poor-sleep-feels-like-adhd`, `/answers/why-am-i-tired-even-after-sleeping` | **REMOVE** |
 | Free vs total testosterone: what patients should know (full guide) | `/blog/free-testosterone-vs-total-testosterone-what-patients-should-know` | content-crosslink | main | 3 | `/answers/high-shbg-low-free-testosterone`, `/answers/what-does-low-testosterone-feel-like`, `/answers/what-is-free-testosterone` | **REMOVE** |
 | Insulin resistance and weight loss (clinician overview) | `/blog/insulin-resistance-and-weight-loss-clinician-overview` | content-crosslink | main | 3 | `/answers/insulin-resistance-without-diabetes`, `/answers/normal-a1c-insulin-resistance`, `/answers/what-is-insulin-resistance` | **REMOVE** |
-| Join Siya Circle | `https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl` | newsletter | main | 3 | `/blog`, `/siya-circle` | **REMOVE** |
+| Join Siya Circle | `https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx` | newsletter | main | 3 | `/blog`, `/siya-circle` | **REMOVE** |
 | Free ADHD Screening | `/adhd-screening` | screening | main | 2 | `/` | **REMOVE** |
 | free ADHD screening | `/adhd-screening` | screening | main | 2 | `/`, `/blog/online-adhd-diagnosis-texas` | **REMOVE** |
 | Explore Telehealth Care | `/telehealth` | secondary-service | main | 2 | `/about`, `/providers` | **CONSOLIDATE** (secondary) |
@@ -91,7 +91,7 @@ Scanned **166** indexable pages (per `data/website-inventory.json`).
 | View profile | `/providers/derek-timbs` | secondary-service | main | 1 | `/about` | **CONSOLIDATE** (secondary) |
 | View profile | `/providers/wendy-delgado` | secondary-service | main | 1 | `/about` | **CONSOLIDATE** (secondary) |
 | free screening | `/online-adhd-test` | screening | main | 1 | `/adhd-diagnosis-austin` | **CONSOLIDATE** (secondary) |
-| Join Siya Circle | `https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl` | newsletter | main | 1 | `/answers` | **KEEP** (newsletter) |
+| Join Siya Circle | `https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx` | newsletter | main | 1 | `/answers` | **KEEP** (newsletter) |
 | View all Metabolic Health guides | `#guides-metabolic-all` | secondary-other | main | 1 | `/answers` | **REMOVE** |
 | View all Energy & Fatigue guides | `#guides-energy-all` | secondary-other | main | 1 | `/answers` | **REMOVE** |
 | View all Hormone Health guides | `#guides-hormone-all` | secondary-other | main | 1 | `/answers` | **REMOVE** |
@@ -198,7 +198,7 @@ CTA label + URL patterns flagged **REMOVE** sitewide (sorted by instance count):
 | Read the full clinical guide | `/blog/why-am-i-always-tired-causes-when-to-see-doctor` | 3 | Styled content cross-link — use text links in body, not button CTAs |
 | Free vs total testosterone: what patients should know (full guide) | `/blog/free-testosterone-vs-total-testosterone-what-patients-should-know` | 3 | Styled content cross-link — use text links in body, not button CTAs |
 | Insulin resistance and weight loss (clinician overview) | `/blog/insulin-resistance-and-weight-loss-clinician-overview` | 3 | Styled content cross-link — use text links in body, not button CTAs |
-| Join Siya Circle | `https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl` | 3 | Newsletter CTA belongs in footer or dedicated hub section only |
+| Join Siya Circle | `https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx` | 3 | Newsletter CTA belongs in footer or dedicated hub section only |
 | Free ADHD Screening | `/adhd-screening` | 2 | Screening CTA outside ADHD hero/symptoms |
 | free ADHD screening | `/adhd-screening` | 2 | Screening CTA outside ADHD hero/symptoms |
 | Explore follow-up pricing | `/pricing` | 2 | Secondary explore link outside hero/final band |

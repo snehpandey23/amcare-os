@@ -5,8 +5,8 @@ export type QuickAction =
   | { label: string; comingSoon: true; note?: string };
 
 export const HOME_QUICK_ACTIONS: QuickAction[] = [
-  { label: "Ask a company question", href: "/help" },
-  { label: "Find an SOP", href: "/help", query: "Find an SOP or internal policy" },
+  { label: "Ask a company question", href: "/" },
+  { label: "Find an SOP", href: "/", query: "Find an SOP or internal policy" },
   { label: "Improve my English", href: "/learn/practice#english" },
   { label: "Practice documentation", href: "/learn/practice#writing" },
   { label: "⌨️ Chat speed & accuracy", href: "/learn/practice#typing" },
@@ -36,7 +36,7 @@ export const ADMIN_CHAT_QUICK_PROMPTS = [
 ] as const;
 
 export const SIYA_ADMIN_OPENING =
-  "**Executive Workspace · Ask**\n\nYour briefing on **My day** shows coverage, overdue work, knowledge health, and what **needs attention**. Here I can go deeper — plans, team, and policies.\n\nI **recommend** first; **Approve** creates tasks only (no email or Slack in v1).";
+  "**My day · Assist**\n\nYour weekly plan thread is for founder focus. Here I can go deeper — policies, team, and tasks.\n\nI **recommend** first; **Approve** creates tasks only (no email or Slack in v1).";
 
 export function helpHref(query?: string, focusMode?: boolean): string {
   const params = new URLSearchParams();
@@ -44,10 +44,10 @@ export function helpHref(query?: string, focusMode?: boolean): string {
   if (q) params.set("q", q);
   if (focusMode) params.set("focus", "1");
   const qs = params.toString();
-  return qs ? `/help?${qs}` : "/help";
+  return qs ? `/?${qs}` : "/";
 }
 
-/** Full page load — matches header nav; avoids client-router edge cases on My day → Ask. */
+/** Full page load into My day Assist (merged former Ask). */
 export function navigateToAsk(query?: string, focusMode?: boolean): void {
   if (typeof window === "undefined") return;
   window.location.assign(helpHref(query, focusMode));

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "kb:build": "node scripts/build-workspace-kb.mjs",
+    "kb:build": "node scripts/build-workspace-kb.mjs && node scripts/build-facts-snapshot.mjs",
     "trust:compute": "node scripts/compute-trust-status.mjs",
     "gate:deploy": "node scripts/deployment-gate.mjs",
     "red-team:staff": "node scripts/run-staff-red-team.mjs",
@@ -23,7 +23,8 @@
     "next": "15.5.14",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "swr": "^2.4.2"
+    "swr": "^2.4.2",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

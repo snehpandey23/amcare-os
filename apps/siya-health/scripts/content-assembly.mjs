@@ -234,6 +234,16 @@ export function normalResultsParagraph(topic, slug = '', lead = '') {
 }
 
 /**
+ * ADHD medication FAQs that should expose screening + Meet & Greet
+ * (blog-parity conversion path). Keep scoped — expand only after QA.
+ */
+export const ADHD_MED_FAQ_DUAL_CTA_SLUGS = new Set([
+  'adderall-vs-vyvanse-adults',
+  'can-you-get-adhd-medication-online',
+  'how-online-prescriptions-work',
+]);
+
+/**
  * Unique, context-aware closing for educational pages.
  * Must vary by slug so fingerprinting does not treat closings as clones.
  *
@@ -273,14 +283,23 @@ export function renderContextAwareClosing(seed, opts) {
     telehealth: 'clarify fit → complete intake → clinician visit',
   }[topic] || 'education → clinician visit when needed';
 
+  const dualCta = ADHD_MED_FAQ_DUAL_CTA_SLUGS.has(slug);
+  const ctaBlock = dualCta
+    ? `<div class="cta-block blog-cta answer-final-cta" data-assembly="primary-cta">
+                <a class="button ds-button ds-button--primary" href="/adhd-screening?adhd=1" data-siya-track="adhd_screening_click" data-siya-location="answer-context-closing" data-page-type="adhd" data-intent="adhd" data-conversion-goal="screening" data-cta-slot="lead-magnet" data-component="button">Take Free ADHD Screening</a>
+                <a class="button ds-button ds-button--secondary secondary" href="/redirect/meet-greet" data-siya-track="meet_greet_click" data-siya-location="answer-context-closing" data-page-type="adhd" data-intent="adhd" data-conversion-goal="meetGreet" data-cta-slot="meetGreet" data-component="button">Book Free Meet &amp; Greet</a>
+              </div>
+              <p class="cta-microcopy">Or explore <a href="/adhd-care">ADHD evaluation &amp; care</a>.</p>`
+    : `<div class="cta-block blog-cta answer-final-cta" data-assembly="primary-cta">
+                <a class="button ds-button ds-button--primary" href="${escapeHtml(primaryHref)}" data-siya-track="primary-cta-click" data-siya-location="answer-context-closing">${escapeHtml(primaryLabel)}</a>
+              </div>`;
+
   return `<!-- SIYA:CONTEXT-CLOSING -->
             <section class="answer-closing" id="next-step" aria-labelledby="answer-closing-heading" data-assembly="context-closing" data-slug="${escapeHtml(slug)}">
               <h2 id="answer-closing-heading">What to do with this answer</h2>
               <p>${topicLead} (“${escapeHtml(question)}”), use it as orientation—not a diagnosis.${nuanceBit}</p>
               <p>For “${escapeHtml(question)},” a practical next path is ${journey}.${relatedSentence}</p>
-              <div class="cta-block blog-cta answer-final-cta" data-assembly="primary-cta">
-                <a class="button ds-button ds-button--primary" href="${escapeHtml(primaryHref)}" data-siya-track="primary-cta-click" data-siya-location="answer-context-closing">${escapeHtml(primaryLabel)}</a>
-              </div>
+              ${ctaBlock}
             </section>
             <!-- /SIYA:CONTEXT-CLOSING -->`;
 }

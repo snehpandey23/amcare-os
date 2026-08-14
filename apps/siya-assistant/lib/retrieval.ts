@@ -65,5 +65,6 @@ export function retrievePublicKnowledge(query: string, limit = 5): RetrievedChun
 }
 
 export function hasConfidentRetrieval(chunks: RetrievedChunk[]): boolean {
-  return chunks.length > 0 && chunks[0].score >= 4
+  // Raised from 4 → 8 so weak lexical hits no longer ship as verified answers.
+  return chunks.length > 0 && chunks[0].score >= 8
 }

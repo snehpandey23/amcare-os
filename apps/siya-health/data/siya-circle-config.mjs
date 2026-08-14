@@ -1,18 +1,40 @@
 /**
- * Siya Circle — newsletter signup routes to GHL (no on-site email capture).
+ * Siya Circle — newsletter signup via CarePatron form (button + optional inline embed).
  */
 
 export const SIYA_CIRCLE_LIST_TAG = 'Siya Circle';
 
-/** Direct GHL widget form URL (all join CTAs) */
-export const SIYA_CIRCLE_GHL_FORM_URL =
-  'https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl';
+/** CarePatron form — all join CTAs and /siya-circle embed */
+export const SIYA_CIRCLE_FORM_URL =
+  'https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx';
 
-export const SIYA_CIRCLE_GHL_FORM_ID = 'HmvqrDVq3tq3qv6rkCjl';
+/** @deprecated use SIYA_CIRCLE_FORM_URL — kept for older imports */
+export const SIYA_CIRCLE_GHL_FORM_URL = SIYA_CIRCLE_FORM_URL;
+
+export const SIYA_CIRCLE_FORM_ID = 'XRMFIPAWuXhTlncGx';
+
+/** @deprecated use SIYA_CIRCLE_FORM_ID */
+export const SIYA_CIRCLE_GHL_FORM_ID = SIYA_CIRCLE_FORM_ID;
 
 export const SIYA_CIRCLE_JOIN_TRACK = 'siya-circle-join-click';
 
-export const SIYA_CIRCLE_JOIN_LINK_ATTRS = `href="${SIYA_CIRCLE_GHL_FORM_URL}" target="_blank" rel="noopener noreferrer" data-siya-track="${SIYA_CIRCLE_JOIN_TRACK}"`;
+/**
+ * Soft capture on /adhd-screening-results (v1).
+ * Destination is this CarePatron form (current Siya Circle), not a parallel list.
+ * Segmentation: CarePatron form has no in-repo custom fields for source/outcome/score.
+ * v1 attaches UTMs + siya_* query params on handoff; full consent record (email,
+ * consented_at, exact opt_in_copy) is stored client-side in localStorage key
+ * `siya_email_consent_log`. Add CarePatron/CRM custom fields before nurture by outcome.
+ */
+export const SIYA_CIRCLE_SOFT_CAPTURE = {
+  source: 'adhd-screening-results-soft-capture',
+  optInCopy:
+    'Yes, send me occasional ADHD care info and updates from Siya Health. I can unsubscribe anytime.',
+  dwellMs: 45000,
+  aaHoldoutPct: 0.5,
+};
+
+export const SIYA_CIRCLE_JOIN_LINK_ATTRS = `href="${SIYA_CIRCLE_FORM_URL}" target="_blank" rel="noopener noreferrer" data-siya-track="${SIYA_CIRCLE_JOIN_TRACK}"`;
 
 export const SIYA_CIRCLE_TOPICS = [
   {
@@ -61,14 +83,22 @@ export const SIYA_CIRCLE_RECOMMENDED_GUIDES = [
   { href: '/answers/what-does-low-testosterone-feel-like', label: 'What does low testosterone feel like?' },
 ];
 
-/** Signup CTA block for /siya-circle (no on-site form fields) */
+/** Signup block for /siya-circle — button + inline CarePatron form */
 export function buildSiyaCircleSignupCtaHtml() {
   return `            <div class="siya-circle-signup-cta">
               <h2 id="signup-heading">Join Siya Circle</h2>
               <p class="lead">Get practical health insights from Siya Health on focus, energy, weight, metabolic health, hormones, and everyday care.</p>
               <p class="siya-circle-compliance">Siya Circle is for general education only. It does not provide diagnosis, treatment, medication advice, emergency care, or a provider-patient relationship. For personal medical concerns, <a href="/redirect/chat" rel="noopener">schedule a visit</a> with a licensed clinician. For emergencies, call 911.</p>
               <a class="button" ${SIYA_CIRCLE_JOIN_LINK_ATTRS}>Join Our Health Guide</a>
-              <p class="siya-circle-ghl-note">You&rsquo;ll be taken to our secure signup form.</p>
+              <p class="siya-circle-ghl-note">Prefer the form here? Join below—or open it in a new tab with the button above.</p>
+              <div class="siya-circle-ghl-embed">
+                <iframe
+                  title="Join Siya Circle"
+                  src="${SIYA_CIRCLE_FORM_URL}"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
             </div>`;
 }
 

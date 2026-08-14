@@ -30,6 +30,7 @@ import {
 import {
   BOOKING_LINK,
   getAllProviders,
+  getProviderBySlug,
   getProvidersForServicePage,
   bookingLinkWithAttribution,
   resolveProviderPhoto,
@@ -37,7 +38,7 @@ import {
 } from '../data/providers.mjs';
 import { SPRUCE_CHAT_URL, MEET_GREET_BOOKING_URL, ADHD_EVALUATION_199_LINK, REDIRECT_CHAT_URL, REDIRECT_MEET_GREET_URL, REDIRECT_ADHD_WALKTHROUGH_URL, REDIRECT_ADHD_EVALUATION_URL, ZOCDOC_BOOKING_URL } from '../data/providers-core.mjs';
 import { applyPricingTokens, initialEvaluationPriceDisplay } from '../data/pricing-display.mjs';
-import { TRACKING } from '../data/tracking-config.mjs';
+import { TRACKING, GTM_DEV_HOST_GUARD } from '../data/tracking-config.mjs';
 import { getServiceTagline } from '../data/provider-canonical.mjs';
 import {
   SIYA_CIRCLE_GHL_FORM_URL,
@@ -55,6 +56,12 @@ import {
 } from '../design-system/components.mjs';
 import { resolveTrust, trustToRenderProps } from '../design-system/trust-system.mjs';
 import { CTA_SLOTS } from '../design-system/cta-system.mjs';
+import {
+  GOOGLE_BUSINESS_PROFILE,
+  HOMEPAGE_TRUST_METRICS,
+  HOMEPAGE_TRUST_SUMMARY,
+  googleBusinessAggregateRating,
+} from '../data/homepage-trust-metrics.mjs';
 
 function escAttr(s) {
   return String(s)
@@ -82,8 +89,9 @@ const SITE_ROOT = path.join(__dirname, '..');
 export const NAV_HEALTH_GUIDES = { path: '/answers', label: 'Health Guides', shortLabel: 'Health guides' };
 export const NAV_PROVIDERS = { path: '/providers', label: 'Care Team', shortLabel: 'Care Team' };
 export const NAV_MENS_HEALTH = { path: '/mens-health-longevity', label: "Men's Health", shortLabel: "Men's Health" };
-/** Circular brand mark (icon only). Wordmark is rendered in HTML via renderBrandLockup(). */
-export const BRAND_MARK_ICON = '/assets/images/siya-health-mark.png';
+/** Circular brand mark (icon only). Wordmark is rendered in HTML via renderBrandLockup().
+ * 88px WebP (~2KB) — displayed at 36–44 CSS px; do not use the 1024px source PNG in chrome. */
+export const BRAND_MARK_ICON = '/assets/images/siya-health-mark-88.webp';
 /** @deprecated Use BRAND_MARK_ICON + renderBrandLockup(); kept for legacy src swaps. */
 export const BRAND_LOGO_MARK = BRAND_MARK_ICON;
 
@@ -119,6 +127,9 @@ const ADHD_FUNNEL_PATH = [
   /^adhd-screening-results\.html$/,
   /^adult-adhd-diagnosis\.html$/,
   /^adult-adhd-screening-california\.html$/,
+  /^adult-adhd-screening-texas\.html$/,
+  /^adhd-evaluation-texas\.html$/,
+  /^adult-adhd-california\.html$/,
   /^adhd-treatment-online\.html$/,
   /^creyos-adhd-testing\.html$/,
   /^online-adhd-test\.html$/,
@@ -292,8 +303,15 @@ const LEARN_MORE_ADHD = `<!-- SIYA:LEARN-MORE-ADHD -->
       </section>
       <!-- /SIYA:LEARN-MORE-ADHD -->`;
 
-function buildMeetPhysiciansBlock(serviceKey, lead, stateAbbr = null, { gridClass = 'about-team-grid', heading = 'Meet our care team', limit = null, sectionClass = 'section', seeAllClass = 'blog-hub-see-all' } = {}) {
-  let providers = getProvidersForServicePage(serviceKey, { stateAbbr });
+function buildMeetPhysiciansBlock(serviceKey, lead, stateAbbr = null, { gridClass = 'about-team-grid', heading = 'Meet our care team', limit = null, sectionClass = 'section', seeAllClass = 'blog-hub-see-all', providerSlugs = null } = {}) {
+  // Optional explicit roster (e.g. TX ads LP) — survives rebuild when someone is licensed
+  // in-state but not on the service clinical scope list (SERVICE_PROVIDER_SLUGS).
+  let providers = Array.isArray(providerSlugs) && providerSlugs.length
+    ? providerSlugs.map((s) => getProviderBySlug(s)).filter(Boolean)
+    : getProvidersForServicePage(serviceKey, { stateAbbr });
+  if (stateAbbr && Array.isArray(providerSlugs) && providerSlugs.length) {
+    providers = providers.filter((p) => p.stateAbbreviations?.includes(stateAbbr));
+  }
   if (typeof limit === 'number' && limit > 0) providers = providers.slice(0, limit);
   const stateNote = stateAbbr
     ? `<p class="provider-state-filter-note">Showing clinicians licensed in <strong>${stateAbbr}</strong>.</p>`
@@ -332,6 +350,8 @@ const GEO_PAGE_STATE = {
   'adhd-diagnosis-florida.html': 'FL',
   'adhd-diagnosis-pennsylvania.html': 'PA',
   'adhd-diagnosis-philadelphia.html': 'PA',
+  'adhd-evaluation-texas.html': 'TX',
+  'adult-adhd-california.html': 'CA',
   'blog/online-adhd-diagnosis-texas.html': 'TX',
   'blog/online-adhd-diagnosis-california.html': 'CA',
 };
@@ -367,13 +387,38 @@ const MEET_PHYSICIANS_BY_PAGE = {
   'adhd-care.html': () =>
     buildMeetPhysiciansBlock(
       'adhd-care',
-      'Licensed clinicians who evaluate and treat adult ADHD—physician-led, not a psychiatry mill.',
+      'Licensed clinicians — physician-led adult ADHD evaluation.',
       null,
       {
         gridClass: 'about-team-grid about-team-grid--adhd about-team-grid--adhd-compact',
         sectionClass: 'section adhd-care-team-compact',
         seeAllClass: 'blog-hub-see-all care-team-hub-link',
         limit: 3,
+      },
+    ),
+  'adhd-evaluation-texas.html': () =>
+    buildMeetPhysiciansBlock(
+      'adhd-care',
+      'Licensed clinicians — physician-led adult ADHD evaluation.',
+      'TX',
+      {
+        gridClass: 'about-team-grid about-team-grid--adhd about-team-grid--adhd-compact',
+        sectionClass: 'section adhd-care-team-compact',
+        heading: 'Your care team',
+        seeAllClass: 'blog-hub-see-all',
+      },
+    ),
+  // California evaluation LP — same compact care-team chrome as TX evaluation
+  'adult-adhd-california.html': () =>
+    buildMeetPhysiciansBlock(
+      'adhd-care',
+      'Licensed clinicians — physician-led adult ADHD evaluation.',
+      'CA',
+      {
+        gridClass: 'about-team-grid about-team-grid--adhd about-team-grid--adhd-compact',
+        sectionClass: 'section adhd-care-team-compact',
+        heading: 'Your care team',
+        seeAllClass: 'blog-hub-see-all',
       },
     ),
   'telehealth.html': () => buildMeetPhysiciansBlock('telehealth', 'Licensed telehealth clinicians—availability varies by state.'),
@@ -683,6 +728,41 @@ function escHtml(s) {
     .replace(/>/g, '&gt;');
 }
 
+/**
+ * Sitewide: rewrite stale Google / verified-review copy to homepage-trust-metrics.
+ * Keeps data-target attributes in sync with visible text for count-up sections.
+ * Does not invent service-specific volume claims.
+ */
+function syncCanonicalTrustMetricsCopy(html) {
+  const rating = GOOGLE_BUSINESS_PROFILE.ratingValue; // e.g. 4.9
+  const ratingStar = `${rating}★`;
+  const verified = HOMEPAGE_TRUST_METRICS.verifiedReviews.value; // e.g. 900+
+  const verifiedNum = verified.replace(/\D/g, ''); // 900
+
+  // Animated trust-metric spans (ADHD care, weight loss, etc.)
+  html = html.replace(
+    /data-target="4\.[78]"(\s+data-suffix="★">)4\.[78]★/g,
+    `data-target="${rating}"$1${ratingStar}`,
+  );
+  html = html.replace(
+    /(data-target=")600("\s+data-suffix="\+">)600\+/g,
+    `$1${verifiedNum}$2${verified}`,
+  );
+  html = html.replace(
+    /(data-target=")450("\s+data-suffix="\+">)450\+/g,
+    `$1${verifiedNum}$2${verified}`,
+  );
+
+  // Plain text / LP cards / why-choose headings
+  html = html.replace(/4\.[78]★(\s*Google)/g, `${ratingStar}$1`);
+  html = html.replace(/4\.[78]★(\s*·\s*)(?:600|450)\+\s*Verified Reviews/gi, `${ratingStar}$1${verified} Verified Reviews`);
+  html = html.replace(/(?:600|450)\+\s+verified patient reviews/gi, `${verified} verified patient reviews`);
+  html = html.replace(/(?:600|450)\+\s+Verified Reviews/g, `${verified} Verified Reviews`);
+  html = html.replace(/(?:600|450)\+\s+verified reviews/gi, `${verified} verified reviews`);
+
+  return html;
+}
+
 /** Replace landing-page trust strip from trust-system profile */
 function injectLandingTrust(html, relPath) {
   if (html.includes('lp-trust-grid-section')) return html;
@@ -721,9 +801,63 @@ function injectHeroTrustBar(html, relPath) {
     .map((i) => `<span><strong>${escHtml(i.strong)}</strong> ${escHtml(i.text)}</span>`)
     .join('\n            ');
   return html.replace(
-    /<div class="hero-trust-bar[^"]*">[\s\S]*?<\/div>/,
+    /<div class="hero-trust-bar[^>]*>[\s\S]*?<\/div>/,
     `<div class="hero-trust-bar ds-trust-row" data-trust-profile="${escAttr(profile)}">\n            ${spans}\n          </div>`,
   );
+}
+
+/** Sync homepage reviews trust summary from homepage-trust-metrics.mjs */
+function injectHomepageTrustSummary(html, relPath) {
+  if (relPath !== 'index.html' || !html.includes('homepage-trust-summary')) return html;
+  const stats = HOMEPAGE_TRUST_SUMMARY.map((m) => {
+    const value = m.suffix ? `${m.value}${m.suffix}` : m.value;
+    return ` <div class="homepage-trust-stat"> <span class="homepage-trust-stat-value">${escHtml(value)}</span> <span class="homepage-trust-stat-label">${escHtml(m.label)}</span> </div>`;
+  }).join('');
+  return html.replace(
+    /<div class="homepage-trust-summary"[^>]*>[\s\S]*?<\/div>\s*(?=<div class="testimonial)/,
+    `<div class="homepage-trust-summary" aria-label="Trust statistics">${stats} </div> `,
+  );
+}
+
+/**
+ * Homepage MedicalOrganization JSON-LD: sameAs includes GBP + AggregateRating from GBP only.
+ * Stales with hardcoded metrics unless manually re-verified (see GOOGLE_BUSINESS_PROFILE.lastVerified).
+ */
+function injectHomepageOrganizationSchema(html, relPath) {
+  if (relPath !== 'index.html') return html;
+  const org = {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalOrganization',
+    '@id': 'https://siya.health/#organization',
+    name: 'Siya Health',
+    url: 'https://siya.health',
+    description:
+      'Primary care–led telehealth for ADHD evaluation, metabolic health, and licensed medical provider care across California, Texas, Pennsylvania, and Florida.',
+    medicalSpecialty: [
+      'Internal Medicine',
+      'Family Medicine',
+      'Obesity Medicine',
+      'Adult ADHD',
+      'Behavioral Medicine',
+    ],
+    areaServed: ['California', 'Texas', 'Pennsylvania', 'Florida'],
+    sameAs: [
+      'https://www.facebook.com/siyahealthofficial',
+      'https://www.instagram.com/siyahealth_official/',
+      'https://www.linkedin.com/company/siyahealthofficial/',
+      'https://www.pinterest.com/siyahealthus/',
+      GOOGLE_BUSINESS_PROFILE.url,
+    ],
+    aggregateRating: googleBusinessAggregateRating(),
+  };
+  const script = `<script type="application/ld+json">\n    ${JSON.stringify(org)}\n    </script>`;
+  if (/<script type="application\/ld\+json">\s*\{"@context":"https:\/\/schema\.org","@type":"MedicalOrganization"[\s\S]*?<\/script>/.test(html)) {
+    return html.replace(
+      /<script type="application\/ld\+json">\s*\{"@context":"https:\/\/schema\.org","@type":"MedicalOrganization"[\s\S]*?<\/script>/,
+      script,
+    );
+  }
+  return html.replace(/<\/head>/i, `    ${script}\n  </head>`);
 }
 
 /** Wire hero primary CTA through conversion-system with full analytics attrs */
@@ -999,19 +1133,21 @@ export function normalizeSitewideCopy(html, relPath = '') {
   );
   html = html.replaceAll('Get Health Guides', COPY_STANDARDS.newsletterCta);
   // Screening labels — avoid nesting (e.g. "Free ADHD Screening" inside "Take Free ADHD Screening")
-  const isCaAdsLp = relPath === 'adult-adhd-screening-california.html';
-  const lpScreeningPlaceholder = '%%SIYA_LP_CA_SCREENING_CTA%%';
-  if (isCaAdsLp) {
+  const isStateAdsLp =
+    relPath === 'adult-adhd-screening-california.html' ||
+    relPath === 'adult-adhd-screening-texas.html';
+  const lpScreeningPlaceholder = '%%SIYA_LP_STATE_SCREENING_CTA%%';
+  if (isStateAdsLp) {
     html = html.replaceAll('Start Free 2-Minute Screening', lpScreeningPlaceholder);
     html = html.replaceAll('Start Free 2-Minute ADHD Screening', lpScreeningPlaceholder);
   }
-  if (!isCaAdsLp) {
+  if (!isStateAdsLp) {
     html = html.replace(/(Take )+Free ADHD Screening/g, COPY_STANDARDS.adhdSecondaryCta);
     html = html.replace(/(?<!Take )Free ADHD Screening/g, COPY_STANDARDS.adhdSecondaryCta);
     html = html.replaceAll('Take Free Screening', COPY_STANDARDS.adhdSecondaryCta);
     html = html.replaceAll('Start Free Screening', COPY_STANDARDS.adhdSecondaryCta);
   }
-  if (isCaAdsLp) {
+  if (isStateAdsLp) {
     html = html.replaceAll(lpScreeningPlaceholder, 'Start Free 2-Minute Screening');
   }
   html = html.replaceAll('Schedule ADHD Evaluation', COPY_STANDARDS.adhdPrimaryCta);
@@ -1121,9 +1257,9 @@ const FOOTER_COMPANY_LINKS = [
 ];
 
 const FOOTER_TRUST_BLOCK = `          <div class="footer-trust-logos">
-            <img src="/assets/images/hipaa-compliant.png" alt="HIPAA compliant privacy practices" class="footer-trust-logo" width="72" height="72" />
-            <a href="https://www.legitscript.com/websites/?checker_keywords=siya.health" target="_blank" rel="noopener" title="Verify LegitScript Approval for www.siya.health"><img src="https://static.legitscript.com/seals/46197681.png" alt="Verify Approval for www.siya.health" class="footer-trust-logo" width="73" height="79" /></a>
-            <img src="/assets/images/creyos-logo.png" alt="Creyos Cognitive Testing" class="footer-trust-logo" width="90" height="50" />
+            <img src="/assets/images/hipaa-compliant-144.png" alt="HIPAA compliant privacy practices" class="footer-trust-logo" width="72" height="72" loading="lazy" decoding="async" />
+            <a href="https://www.legitscript.com/websites/?checker_keywords=siya.health" target="_blank" rel="noopener" title="Verify LegitScript Approval for www.siya.health"><img src="https://static.legitscript.com/seals/46197681.png" alt="Verify Approval for www.siya.health" class="footer-trust-logo" width="73" height="79" loading="lazy" decoding="async" /></a>
+            <img src="/assets/images/creyos-logo.png" alt="Creyos Cognitive Testing" class="footer-trust-logo" width="90" height="50" loading="lazy" decoding="async" />
           </div>`;
 
 const FOOTER_SOCIAL_BLOCK = `          <div class="footer-social">
@@ -1226,13 +1362,71 @@ export function injectCookieConsentBootstrap(html) {
   return html;
 }
 
+/**
+ * Early connection setup for third parties that almost every page will hit.
+ * Complements GTM/Clarity deferral — does not load those scripts itself.
+ * Clarity is typically injected via GTM; preconnect still helps first request.
+ */
+export const RESOURCE_HINTS_BLOCK = `<!-- SIYA:RESOURCE-HINTS -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.clarity.ms" crossorigin />
+    <link rel="dns-prefetch" href="https://www.clarity.ms" />
+    <link rel="preconnect" href="https://siya-guide.vercel.app" crossorigin />
+    <link rel="dns-prefetch" href="https://siya-guide.vercel.app" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- /SIYA:RESOURCE-HINTS -->`;
+
+/**
+ * Ads evaluation LPs — no early Clarity/Guide preconnect so hero LCP does not
+ * compete for bandwidth. GTM + Clarity load after idle via deferred GTM.
+ */
+export const RESOURCE_HINTS_ADS_BLOCK = `<!-- SIYA:RESOURCE-HINTS -->
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- /SIYA:RESOURCE-HINTS -->`;
+
+export function injectResourceHints(html, relPath = '') {
+  html = html.replace(/<!--\s*SIYA:RESOURCE-HINTS\s*-->[\s\S]*?<!--\s*\/SIYA:RESOURCE-HINTS\s*-->\s*/gi, '');
+  if (html.includes('SIYA:RESOURCE-HINTS')) return html;
+  const block = isAdsLandingPage(relPath, html) ? RESOURCE_HINTS_ADS_BLOCK : RESOURCE_HINTS_BLOCK;
+  if (html.includes('cookie-consent-bootstrap.js')) {
+    return html.replace(
+      /(<script src="\/scripts\/cookie-consent-bootstrap\.js"><\/script>)/i,
+      `$1\n${block}`,
+    );
+  }
+  if (/<head[^>]*>/i.test(html)) {
+    return html.replace(/(<head[^>]*>)/i, `$1\n${block}`);
+  }
+  return html;
+}
+
 const GTM_ID = TRACKING.GTM_CONTAINER_ID;
 
+/** Immediate async GTM (sitewide default). j.async=true — not sync, not defer-only. */
 const GTM_HEAD_SNIPPET = `<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+<script>(function(w,d,s,l,i){${GTM_DEV_HOST_GUARD}w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_ID}');</script>
+<!-- End Google Tag Manager -->`;
+
+/**
+ * Ads LPs: queue dataLayer immediately (consent + gclid/UTM stubs still work),
+ * but fetch gtm.js after window load + idle so Clarity/Ads tags ride the same
+ * deferred path and do not contend with LCP. Still uses j.async=true on inject.
+ */
+const GTM_HEAD_SNIPPET_DEFERRED = `<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){${GTM_DEV_HOST_GUARD}w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});
+function __siyaLoadGtm(){var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}
+function __siyaSchedGtm(){if(typeof w.requestIdleCallback==='function')w.requestIdleCallback(__siyaLoadGtm,{timeout:2500});else w.setTimeout(__siyaLoadGtm,1800);}
+if(d.readyState==='complete')__siyaSchedGtm();else w.addEventListener('load',__siyaSchedGtm);
 })(window,document,'script','dataLayer','${GTM_ID}');</script>
 <!-- End Google Tag Manager -->`;
 
@@ -1291,14 +1485,16 @@ export function injectGtmAndTracking(html, relPath = '') {
   html = stripExistingGtm(html);
   html = stripExistingGtag(html);
 
+  const gtmHead = isAdsLandingPage(relPath, html) ? GTM_HEAD_SNIPPET_DEFERRED : GTM_HEAD_SNIPPET;
+
   if (!html.includes(`gtm.js?id=${GTM_ID}`)) {
     if (html.includes('cookie-consent-bootstrap.js')) {
       html = html.replace(
         /(<script src="\/scripts\/cookie-consent-bootstrap\.js"><\/script>)/i,
-        `$1\n${GTM_HEAD_SNIPPET}`,
+        `$1\n${gtmHead}`,
       );
     } else if (/<head[^>]*>/i.test(html)) {
-      html = html.replace(/(<head[^>]*>)/i, `$1\n    ${GTM_HEAD_SNIPPET}`);
+      html = html.replace(/(<head[^>]*>)/i, `$1\n    ${gtmHead}`);
     }
   }
 
@@ -1566,6 +1762,9 @@ export function injectAboutCareTeam(html, relPath) {
   if (html.includes('SIYA:ABOUT-CARE-TEAM')) {
     return html.replace(/<!-- SIYA:ABOUT-CARE-TEAM -->[\s\S]*?<!-- \/SIYA:ABOUT-CARE-TEAM -->/, block);
   }
+  if (/id="care-team"/.test(html)) {
+    return html.replace(/<section\b[^>]*\bid="care-team"[^>]*>[\s\S]*?<\/section>/i, block);
+  }
   return html;
 }
 
@@ -1597,12 +1796,20 @@ export function injectMeetPhysiciansSection(html, relPath) {
     if (!cfg) return html;
     block = buildMeetPhysiciansBlock(
       cfg.serviceKey,
-      'Licensed clinicians for this service—confirm state eligibility when you book.',
+      cfg.serviceKey === 'adhd-care'
+        ? 'Licensed clinicians — physician-led adult ADHD evaluation.'
+        : 'Licensed clinicians for this service—confirm state eligibility when you book.',
       cfg.stateAbbr,
+      cfg.serviceKey === 'adhd-care'
+        ? { gridClass: 'about-team-grid about-team-grid--geo-diagnosis' }
+        : {},
     );
   }
   if (html.includes('SIYA:MEET-PHYSICIANS')) {
     return html.replace(/<!-- SIYA:MEET-PHYSICIANS -->[\s\S]*?<!-- \/SIYA:MEET-PHYSICIANS -->/, block);
+  }
+  if (/id="meet-physicians"/.test(html)) {
+    return html.replace(/<section\b[^>]*\bid="meet-physicians"[^>]*>[\s\S]*?<\/section>/i, block);
   }
   if (html.includes('<!-- FINAL CTA -->')) {
     return html.replace('<!-- FINAL CTA -->', `${block}\n\n      <!-- FINAL CTA -->`);
@@ -1886,11 +2093,18 @@ export function isRedirectTransitionPage(relPath) {
 
 /** Google Ads / minimal landing pages — skip full nav/footer injection */
 export function isAdsLandingPage(relPath, html = '') {
-  if (relPath === 'adult-adhd-screening-california.html') return true;
+  if (
+    relPath === 'adult-adhd-screening-california.html' ||
+    relPath === 'adult-adhd-screening-texas.html' ||
+    relPath === 'adhd-evaluation-texas.html' ||
+    relPath === 'adult-adhd-california.html'
+  ) {
+    return true;
+  }
   return /\bclass="[^"]*siya-landing-page/.test(html) || /data-siya-landing=/.test(html);
 }
 
-/** Route legacy /siya-circle join CTAs to direct GHL form URL */
+/** Route legacy /siya-circle join CTAs to CarePatron form URL */
 export function normalizeSiyaCircleJoinLinks(html) {
   html = html.replace(
     /<a(\s[^>]*?)href="\/siya-circle"([^>]*)>([^<]*(?:Join|Siya Circle|newsletter|Subscribe|Get updates)[^<]*)<\/a>/gi,
@@ -1910,7 +2124,7 @@ export function normalizeSiyaCircleJoinLinks(html) {
   return html;
 }
 
-/** Siya Circle — join-click analytics (signup on GHL, all pages) */
+/** Siya Circle — join-click analytics (CarePatron form, all pages) */
 export function injectSiyaCircleAnalytics(html) {
   if (html.includes('siya-circle-signup.js')) return html;
   html = html.replace(/<!-- SIYA:CIRCLE-SIGNUP -->[\s\S]*?<!-- \/SIYA:CIRCLE-SIGNUP -->\n?/g, '');
@@ -1996,7 +2210,10 @@ const CONSULTATION_CTA_LABEL_RE =
 
 /** Route consultation CTAs — ADHD funnel → meet & greet redirect; general pages → meet & greet (not Spruce). */
 export function normalizeConsultationCtaRouting(html, relPath = '') {
-  const isAdhd = isAdhdFunnelPath(relPath) || relPath === 'adult-adhd-screening-california.html';
+  const isAdhd =
+    isAdhdFunnelPath(relPath) ||
+    relPath === 'adult-adhd-screening-california.html' ||
+    relPath === 'adult-adhd-screening-texas.html';
   const meetHref = REDIRECT_MEET_GREET_URL;
   html = html.replace(
     /href="([^"]*book\.carepatron\.com[^"]*i(?:=|%3D)sysv73e4[^"]*)"/gi,
@@ -2048,6 +2265,46 @@ export function normalizeConsultationCtaRouting(html, relPath = '') {
     );
   }
   return html;
+}
+
+/**
+ * Collapse duplicate Meet & Greet buttons in the same CTA group.
+ * Keeps the first; replaces later duplicates with Secure Chat (or removes if chat already present).
+ * Catches rewrite fallout from normalizeConsultationCtaRouting.
+ */
+export function dedupeDuplicateMeetGreetCtas(html, relPath = '') {
+  const isMeetGreetAnchor = (anchor) =>
+    /\/redirect\/meet-greet/i.test(anchor) &&
+    /meet\s*&(?:amp;)?\s*greet|meet.?greet/i.test(anchor.replace(/<[^>]+>/g, ' '));
+
+  return html.replace(
+    /<div class="((?:hero-ctas|cta-band-buttons)[^"]*)"[^>]*>[\s\S]*?<\/div>/gi,
+    (block) => {
+      const anchors = block.match(/<a\s[^>]*>[\s\S]*?<\/a>/gi) || [];
+      const mgIndexes = anchors
+        .map((a, i) => (isMeetGreetAnchor(a) ? i : -1))
+        .filter((i) => i >= 0);
+      if (mgIndexes.length < 2) return block;
+
+      const hasChat = /\/redirect\/chat|secure_chat_click|data-cta-slot="secureChat"/i.test(block);
+      let out = block;
+      let replacedWithChat = false;
+      for (const idx of mgIndexes.slice(1)) {
+        const anchor = anchors[idx];
+        if (!hasChat && !replacedWithChat) {
+          const chatBtn = renderButton({
+            ...slotToButton(CTA_SLOTS.secureChat, { location: 'deduped-cta', relPath }),
+            variant: 'secondary',
+          });
+          out = out.replace(anchor, chatBtn);
+          replacedWithChat = true;
+        } else {
+          out = out.replace(anchor, '');
+        }
+      }
+      return out.replace(/\s{2,}/g, ' ');
+    },
+  );
 }
 
 /** Icon + wordmark lockup in header/footer/LP chrome (OG/schema keep mark asset). */
@@ -2122,7 +2379,10 @@ export function normalizeWalkthroughCtaLabels(html, relPath = '') {
     },
   );
   /* Prefer canonical meet-greet redirect sitewide; keep legacy /redirect/adhd-walkthrough on CA ads LP for event continuity. */
-  if (relPath !== 'adult-adhd-screening-california.html') {
+  if (
+    relPath !== 'adult-adhd-screening-california.html' &&
+    relPath !== 'adult-adhd-screening-texas.html'
+  ) {
     html = html.replace(
       /(<a[^>]*data-siya-track="(?:meet_greet_click|click_book_walkthrough|adhd_intro_call_click|schedule-consultation-click)"[^>]*href=")\/redirect\/adhd-walkthrough(")/gi,
       `$1${REDIRECT_MEET_GREET_URL}$2`,
@@ -2262,10 +2522,18 @@ export function injectHeaderScroll(html) {
 export function injectSiyaConcierge(html, relPath) {
   if (isLegalContentPage(relPath)) return html;
   if (isRedirectTransitionPage(relPath)) return html;
-  if (!html || html.includes('siya-concierge.js')) return html;
+  if (!html) return html;
+  // Cache-bust when launcher sizing / placement / idle delay changes
+  const src = '/scripts/siya-concierge.js?v=20260814.1';
   const block = `<!-- SIYA:CONCIERGE -->
-    <script src="/scripts/siya-concierge.js" defer></script>
+    <script src="${src}" defer></script>
     <!-- /SIYA:CONCIERGE -->`;
+  if (html.includes('siya-concierge.js')) {
+    return html
+      .replace(/<!-- SIYA:CONCIERGE -->[\s\S]*?<!-- \/SIYA:CONCIERGE -->\s*/gi, '')
+      .replace(/<script[^>]*src=["'][^"']*siya-concierge\.js[^"']*["'][^>]*>\s*<\/script>\s*/gi, '')
+      .replace(/<\/body>/i, `${block}\n</body>`);
+  }
   return html.replace(/<\/body>/i, `${block}\n</body>`);
 }
 
@@ -2292,6 +2560,7 @@ export function stripChatWidgets(html) {
 
 export function applySiteChrome(html, relPath, title = '') {
   html = injectCookieConsentBootstrap(html);
+  html = injectResourceHints(html, relPath);
   if (isRedirectTransitionPage(relPath)) {
     html = injectCookieNotice(html, relPath);
     return injectGtmAndTracking(html, relPath);
@@ -2306,8 +2575,10 @@ export function applySiteChrome(html, relPath, title = '') {
   }
 
   if (isAdsLandingPage(relPath, html)) {
+    html = injectMeetPhysiciansSection(html, relPath);
     html = injectCookieNotice(html, relPath);
     html = injectLandingTrust(html, relPath);
+    html = syncCanonicalTrustMetricsCopy(html);
     html = injectFaqAccordion(html);
     html = injectHeaderScroll(html);
     html = stripInlineChromeScripts(html);
@@ -2344,6 +2615,9 @@ export function applySiteChrome(html, relPath, title = '') {
   html = injectHeaderScroll(html);
   html = injectFaqAccordion(html);
   html = injectHeroTrustBar(html, relPath);
+  html = injectHomepageTrustSummary(html, relPath);
+  html = injectHomepageOrganizationSchema(html, relPath);
+  html = syncCanonicalTrustMetricsCopy(html);
   html = injectHeroPrimaryCta(html, relPath);
   html = restoreSecureChatSecondaryCtas(html, relPath);
   html = injectServiceTrust(html, relPath);
@@ -2358,6 +2632,7 @@ export function applySiteChrome(html, relPath, title = '') {
   html = normalizeConversionRedirectUrls(html);
   html = normalizeCtaHierarchy(html, relPath);
   html = ensureMeetGreetHrefs(html);
+  html = dedupeDuplicateMeetGreetCtas(html, relPath);
   html = normalizeBrandLogos(html);
   html = normalizeFavicons(html);
   html = applyPricingTokens(html);

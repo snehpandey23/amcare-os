@@ -210,7 +210,7 @@ export const ENERGY_TOPIC_CLUSTERS = [
       '/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign',
       '/blog/insomnia-treatment-options-beyond-medication',
     ],
-    service: '/telehealth',
+    service: '/fatigue',
   },
 ];
 

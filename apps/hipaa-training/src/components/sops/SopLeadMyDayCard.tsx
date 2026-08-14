@@ -6,6 +6,7 @@ import { isPortalAuthEnabled } from "@/lib/trainingConfig";
 import { fetchMySopOwnership, fetchSopTasks, fetchSops } from "@/lib/sop-api";
 import { PortalNavLink } from "@/components/training/PortalNavLink";
 import { portalH3, portalSectionCompact } from "@/lib/portal-ui";
+import { FOUNDER_QUEUE_PREVIEW } from "@/components/executive/CollapsibleDomainItemList";
 
 type QueueLine = { id: string; text: string; href?: string };
 
@@ -15,8 +16,10 @@ function taskTitleClean(title: string) {
 
 export function SopLeadMyDayCard({ className = "" }: { className?: string }) {
   const { user, authReady } = useAuth();
+  const [departments, setDepartments] = useState<string[]>([]);
   const [lines, setLines] = useState<QueueLine[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     if (!authReady || !user || !isPortalAuthEnabled()) {
@@ -28,9 +31,13 @@ export function SopLeadMyDayCard({ className = "" }: { className?: string }) {
       try {
         const depts = await fetchMySopOwnership();
         if (!depts.length) {
-          if (!cancelled) setLines([]);
+          if (!cancelled) {
+            setDepartments([]);
+            setLines([]);
+          }
           return;
         }
+        if (!cancelled) setDepartments(depts);
         const deptSet = new Set(depts);
         const [tasks, sops] = await Promise.all([fetchSopTasks(), fetchSops()]);
         const out: QueueLine[] = [];
@@ -88,7 +95,15 @@ export function SopLeadMyDayCard({ className = "" }: { className?: string }) {
     };
   }, [authReady, user]);
 
-  if (loading || !lines.length) return null;
+  if (loading || !departments.length) return null;
+
+  const ownership =
+    departments.length === 1
+      ? `You're the SOP lead for ${departments[0]}`
+      : `You're the SOP lead for ${departments.join(", ")}`;
+
+  const hidden = Math.max(0, lines.length - FOUNDER_QUEUE_PREVIEW);
+  const visible = showAll || hidden === 0 ? lines : lines.slice(0, FOUNDER_QUEUE_PREVIEW);
 
   return (
     <section
@@ -106,11 +121,12 @@ export function SopLeadMyDayCard({ className = "" }: { className?: string }) {
           </PortalNavLink>
         </div>
       </div>
-      <p className="mt-1 text-[11px] text-[var(--siya-text-muted)]">
-        Policy docs (prose) vs daily checklists (My day) — two separate tools.
+      <p className="mt-1 text-[11px] font-medium text-[var(--siya-primary)]">{ownership}</p>
+      <p className="mt-0.5 text-[11px] text-[var(--siya-text-muted)]">
+        Policy docs live in the SOP workspace; daily checklist assignments are in Your tasks today below.
       </p>
       <ul className="mt-2 space-y-1.5 text-xs text-[var(--siya-text-secondary)]">
-        {lines.map((line) => (
+        {visible.map((line) => (
           <li key={line.id} className="flex gap-2">
             <span className="text-[var(--siya-accent)]">•</span>
             {line.href ? (
@@ -123,6 +139,15 @@ export function SopLeadMyDayCard({ className = "" }: { className?: string }) {
           </li>
         ))}
       </ul>
+      {hidden > 0 ? (
+        <button
+          type="button"
+          onClick={() => setShowAll((v) => !v)}
+          className="mt-2 text-xs font-semibold text-[var(--siya-accent)] hover:underline"
+        >
+          {showAll ? "Show less" : `Show all (${lines.length})`}
+        </button>
+      ) : null}
     </section>
   );
 }

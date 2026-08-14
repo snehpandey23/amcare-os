@@ -8,6 +8,8 @@ export type EscalationEmailPayload = {
   department: string;
   task: string;
   recordId: string;
+  /** When true, question field is already a redaction placeholder. */
+  phiRedacted?: boolean;
 };
 
 export function escalationInbox(): string {
@@ -36,14 +38,19 @@ export async function sendEscalationEmail(
     process.env.NEXT_PUBLIC_SIYA_ASSISTANT_URL?.trim() ||
     "https://siya-staff-assist.vercel.app";
 
+  const questionLine = payload.phiRedacted
+    ? "Question: [redacted by PHI/clinical guard — department & task only]"
+    : `Question: ${payload.question.slice(0, 2000)}`;
+
   const text = [
-    "Siya Assist — staff reported a missing or unclear policy",
+    "Siya Assist — staff reported a missing or unclear policy (Notify owner click)",
     "",
-    `Question: ${payload.question.slice(0, 2000)}`,
+    questionLine,
     `Route: ${payload.department} · ${payload.task}`,
     `Record ID: ${payload.recordId}`,
     `App: ${appUrl}`,
     "",
+    "Note: This is a Notify owner click, not a full count of unanswered Ask turns.",
     "Do not reply with PHI. Add or update a live topic in the internal knowledge base when resolved.",
     "",
     "— automated from Notify owner —",

@@ -8,7 +8,9 @@
  * Retained state owners:
  *   TX treatment  → /blog/adhd-treatment-texas
  *   TX diagnosis  → /adhd-diagnosis-texas
+ *   PA diagnosis  → /adhd-diagnosis-pennsylvania
  *   CA screening  → /adult-adhd-screening-california (product page, not a city clone)
+ *   TX screening  → /adult-adhd-screening-texas (ads destination, mirrors CA LP)
  *   National care → /adhd-care
  *
  * CA cornerstone LIVE: /adult-adhd-california is the canonical California ADHD
@@ -36,24 +38,25 @@ export const GEO_CLONE_REDIRECTS = {
   '/blog/adhd-treatment-fort-worth-tx': '/blog/adhd-treatment-texas',
   '/blog/adhd-treatment-san-antonio-tx': '/blog/adhd-treatment-texas',
 
-  // Florida / Pennsylvania city treatment clones → national care
+  // Florida city treatment clones → national care; PA city treatment → PA diagnosis owner
   '/blog/adhd-treatment-miami-fl': '/adhd-care',
   '/blog/adhd-treatment-orlando-fl': '/adhd-care',
-  '/blog/adhd-treatment-philadelphia-pa': '/adhd-care',
+  '/blog/adhd-treatment-philadelphia-pa': '/adhd-diagnosis-pennsylvania',
 
   // Root diagnosis metros / thin state pages (SITE-PRUNING-AUDIT)
   '/adhd-diagnosis-austin': '/adhd-diagnosis-texas',
   '/adhd-diagnosis-houston': '/adhd-diagnosis-texas',
-  '/adhd-diagnosis-philadelphia': '/adhd-care',
-  '/adhd-diagnosis-pennsylvania': '/adhd-care',
-  // florida already in redirect-map → /adhd-care
+  '/adhd-diagnosis-philadelphia': '/adhd-diagnosis-pennsylvania',
+  // florida already in redirect-map → /adhd-care (FL retained as soft lander; see GEO_RETAINED note)
 };
 
 /** State / product pages we keep (not stubs). */
 export const GEO_RETAINED = [
   '/blog/adhd-treatment-texas',
   '/adhd-diagnosis-texas',
+  '/adhd-diagnosis-pennsylvania',
   '/adult-adhd-screening-california',
+  '/adult-adhd-screening-texas',
   '/adhd-care',
   '/blog/online-adhd-diagnosis-california',
   '/blog/adhd-telehealth-california',

@@ -1,4 +1,3 @@
-import { getPublicChunks } from './knowledge'
 import { LINK_REGISTRY, resolveLinks } from './link-registry'
 import type { GuideLink, RetrievedChunk } from './types'
 
@@ -27,14 +26,9 @@ export function publicPageLink(pathOrUrl: string, label?: string): GuideLink | n
     }
   }
 
-  const chunk = getPublicChunks().find((c) => (c.path.replace(/\/$/, '') || '/') === path)
-  const title = label || chunk?.title.split('|')[0].trim() || path
-  const id = `page_${path.replace(/^\//, '').replace(/\//g, '_') || 'home'}`
-  return {
-    id,
-    label: title.length > 48 ? `${title.slice(0, 45)}…` : title,
-    url: path === '/' ? `${SITE}/` : `${SITE}${path}`,
-  }
+  // Guide v1: every displayed URL must exist in the Public Links Registry.
+  // Do not invent page_* link ids from retrieval hits.
+  return null
 }
 
 /**

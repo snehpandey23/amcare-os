@@ -1,6 +1,8 @@
 /**
  * Sitewide analytics IDs — GTM is the only tag installed in HTML.
- * Configure GA4 (G-*) and Google Ads (AW-*) tags inside the GTM container.
+ * Configure GA4 (G-*) and Google Ads (AW-*) tags inside the GTM container
+ * (do not add parallel gtag/js script tags on pages — stripExistingGtag removes them).
+ * Ads evaluation LPs defer gtm.js until after load+idle; dataLayer still queues early.
  */
 export const TRACKING = {
   GTM_CONTAINER_ID: 'GTM-PLBD4TTQ',

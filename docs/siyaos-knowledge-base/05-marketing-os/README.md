@@ -1,8 +1,9 @@
-# 05 — Marketing OS
+# 05 — Marketing (Siya OS department)
 
-**Owner:** Marketing / Editorial · **Status:** seeded
+**Owner:** CMO / Editorial · **Status:** Marketing OS **v1.0 frozen** + **v1.1 amendment live**  
+**Manual:** [`MARKETING-OS-v1.0.md`](./MARKETING-OS-v1.0.md) · **Amendment:** [`MARKETING-OS-v1.1.md`](./MARKETING-OS-v1.1.md) · **Parent:** [`../SIYA-OS-ARCHITECTURE.md`](../SIYA-OS-ARCHITECTURE.md)
 
-Research → insight → pack → publish. Pipelines, QA, and brand alignment — not ad-hoc posts.
+Department of Siya OS — not a standalone company OS. Research → insight → pack → publish. Pipelines, QA, and brand alignment — not ad-hoc posts.
 
 ## Topics (live)
 

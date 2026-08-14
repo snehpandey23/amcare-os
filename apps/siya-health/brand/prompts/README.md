@@ -34,6 +34,10 @@ Rules:
 - **Knowledge carousel A-03 lean lock (2026-08-06):** on-frame = headline + one sub-headline only.
   Sub-headline IS the whole message (not a teaser). Teaching depth → caption. No body/bullets/
   takeaway cards unless the brief explicitly requests `--dense`.
+- **Blog-as-anchor (EDITORIAL-OS):** research against an existing published blog; social links back;
+  flag unanswered audience questions separately; ~1–2 packs per blog then next anchor.
+- **CTA by funnel stage (EDITORIAL-OS):** awareness / first touch → soft (read blog, newsletter);
+  save screening / Meet & Greet for later-funnel. Do not default every close to hard conversion.
 - Final social PNG = brand/scripts/compose_*.py (GenerateImage = source photo only).
 - Output Creative Schema YAML + channel copy + visual direction.
 ```
@@ -55,11 +59,13 @@ Claim lock / clinical constraints: {{constraints}}
 
 For EACH slide produce ONLY:
 1. headline (≤6 words · magenta accent ≤3 words)
-2. sub-headline / recognition (whole message · ≤2–4 short lines · high contrast)
+2. sub-headline / recognition (whole message · ≤2–4 short lines · high contrast · **spokenness:** must read as something a person would say out loud — not a compressed fragment; fail if aloud needs mental reconstruction)
 3. caption teaching beats (bullets ok HERE — not on-frame)
 Do NOT draft on-frame explanation, takeaway card, or body bullets unless brief says dense.
 
-Hook / middle slides / close: same lean rule. Close may add one CTA only.
+Hook / middle slides / close: same lean rule. Close may add one CTA only —
+matched to funnel stage (TOF → blog/newsletter; later → screening/Meet & Greet).
+Anchor blog URL for caption link: {{anchor_blog_url}}
 ```
 
 ---
@@ -204,6 +210,30 @@ cta_label must be an allowed Standards label: {{cta_label}}
 
 ---
 
+## V — Video / reel brief
+
+Parents: [`video-prompts/README.md`](../video-prompts/README.md) · [`_TEMPLATE-video-prompt.md`](../video-prompts/_TEMPLATE-video-prompt.md)
+
+```text
+{{UNIVERSAL_PREAMBLE}}
+
+Allowed format ONLY on **Track A (company, default):** (1) real human on camera OR (2) narration-free reaction/meme-cut.
+**Track A default:** Format 2 first. Format 1 = optional upgrade.
+**Banned on Track A:** AI avatar / synthetic presenter.
+**Track B (founder AI avatar):** only if brief explicitly requests disclosed founder avatar — use `_TEMPLATE-video-prompt-TRACK-B-founder.md` + `GUARDRAILS-TRACK-B-FOUNDER.md`. Draft prompt/script only; no HeyGen/render until approved.
+**Pronunciation (both tracks):** Spoken/TTS write phonetic **See-ya Health**; on-screen stays Siya. Prefer “siya.health” close.
+Insight ID: {{insight_id}}
+Track: {{A_or_B}}
+Format choice (Track A): {{1_or_2}}
+Hook: insight or emotional recognition — not “5 types of…”
+If public disclosure: {{public_figure}} · only publicly known facts · never fabricate quotes
+Script / on-screen beats: Siya paraphrased angle — NEVER near-verbatim from research source
+Practical change: {{practical_change}}
+Output: Track A → `_TEMPLATE-video-prompt.md` · Track B → `_TEMPLATE-video-prompt-TRACK-B-founder.md`
+```
+
+---
+
 ## Multi-channel expand
 
 After any family prompt succeeds:
@@ -214,5 +244,6 @@ Using the approved schema + copy above, adapt WITHOUT changing Intent/Message/Fa
 - Instagram 4:5 (and carousel if layout is *-03 / E-02 / M-02 / RS-02 / PR-01)
 - Newsletter blurb (120–180 words)
 - Blog hero direction (E-03 or R-02)
+- Video prompt (V — allowed formats only; no AI avatar)
 Keep Creative Schema platforms[] updated.
 ```

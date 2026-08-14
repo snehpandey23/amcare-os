@@ -25,9 +25,23 @@ import {
 import { formatCredentialMeta } from '../data/internal-provider-records.mjs';
 import { getReviewedContentForProvider } from '../data/provider-reviewed-content.mjs';
 import { getProviderHubPresentation } from '../data/provider-hub-presentation.mjs';
-import { renderLegalFooter } from './site-chrome.mjs';
+import {
+  injectCookieConsentBootstrap,
+  injectCookieNotice,
+  injectGtmAndTracking,
+  renderLegalFooter,
+} from './site-chrome.mjs';
 import { renderNavCtaMarkup, renderButton, slotToButton, resolveConversion } from '../design-system/components.mjs';
 
+/** Ensure Consent Mode + GTM ship on every generated provider page */
+function withTracking(html, relPath) {
+  html = injectCookieConsentBootstrap(html);
+  html = injectCookieNotice(html, relPath);
+  return injectGtmAndTracking(html, relPath);
+}
+
+/** Asset host for OG/Twitter/schema images — apex /assets 404s; www returns 200 */
+const ASSET_BASE_URL = 'https://www.siya.health';
 const STATE_ABBREV = {
   California: 'CA',
   Texas: 'TX',
@@ -71,13 +85,102 @@ function esc(s) {
     .replace(/"/g, '&quot;');
 }
 
+/**
+ * APP @type review (2026-08-08): NPs/PAs currently emit schema.org Physician
+ * (same as MDs) even though visible copy uses FNP/PA. Schema.org has no NP/PA
+ * type; alternatives are Person + jobTitle, or keep Physician for medicalSpecialty /
+ * usNPI / ProfilePage continuity. Do not change blindly — see report notes.
+ * Entity @id already uses #practitioner for APPs vs #physician for MDs.
+ */
 function schemaEntityType(provider) {
-  return provider.providerType === 'physician' ? 'Physician' : 'Physician';
+  return 'Physician';
 }
 
 function schemaEntityId(provider) {
   const canonical = `${BASE_URL}/providers/${provider.slug}`;
   return provider.providerType === 'physician' ? `${canonical}#physician` : `${canonical}#practitioner`;
+}
+
+function formatProseSectionHtml(blocks) {
+  if (!Array.isArray(blocks)) return '';
+  return blocks
+    .map((p) => String(p).trim())
+    .filter(Boolean)
+    .map((p) => `<p>${p}</p>`)
+    .join('\n          ');
+}
+
+function formatAlumniOf(provider) {
+  const edu = provider.education;
+  const orgs = [];
+  const pushOrg = (name, type = 'CollegeOrUniversity') => {
+    const cleaned = String(name || '').trim();
+    if (!cleaned) return;
+    orgs.push({ '@type': type, name: cleaned });
+  };
+  if (edu && typeof edu === 'object') {
+    if (edu.medicalSchool) {
+      const years =
+        edu.medicalSchoolYears != null && String(edu.medicalSchoolYears).trim()
+          ? ` (${edu.medicalSchoolYears})`
+          : edu.graduationYear
+            ? ` (${edu.graduationYear})`
+            : '';
+      pushOrg(`${edu.medicalSchool}${years}`);
+    }
+    pushOrg(edu.undergraduate);
+    pushOrg(edu.graduate);
+    pushOrg(edu.postGraduate);
+    if (edu.residency) pushOrg(edu.residency, 'MedicalOrganization');
+    if (edu.fellowship) pushOrg(edu.fellowship, 'MedicalOrganization');
+  }
+  if (provider.residency) pushOrg(provider.residency, 'MedicalOrganization');
+  if (provider.fellowship) pushOrg(provider.fellowship, 'MedicalOrganization');
+  // Dedupe by name
+  const seen = new Set();
+  const unique = [];
+  for (const org of orgs) {
+    const key = org.name.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    unique.push(org);
+  }
+  if (!unique.length) return undefined;
+  return unique.length === 1 ? unique[0] : unique;
+}
+
+function formatHasCredential(provider) {
+  const details = Array.isArray(provider.boardCertificationDetails)
+    ? provider.boardCertificationDetails
+    : [];
+  const fromDetails = details
+    .map((b) => {
+      const name = typeof b === 'string' ? b : b?.name;
+      if (!name) return null;
+      const cred = {
+        '@type': 'EducationalOccupationalCredential',
+        name: String(name).trim(),
+        credentialCategory: 'Board certification',
+      };
+      if (b && typeof b === 'object' && b.verificationUrl) {
+        cred.url = b.verificationUrl;
+      }
+      return cred;
+    })
+    .filter(Boolean);
+  if (fromDetails.length) return fromDetails;
+  const names = Array.isArray(provider.boardCertifications) ? provider.boardCertifications : [];
+  const fromNames = names
+    .map((name) => {
+      if (!name) return null;
+      return {
+        '@type': 'EducationalOccupationalCredential',
+        name: String(name).trim(),
+        credentialCategory: 'Board certification',
+      };
+    })
+    .filter(Boolean);
+  return fromNames.length ? fromNames : undefined;
 }
 
 function formatCredentialStatus(provider) {
@@ -102,23 +205,38 @@ function formatEducationHtml(provider) {
   if (!edu || typeof edu !== 'object') return '';
   const items = [];
   if (edu.medicalSchool) {
-    items.push(
-      `<li><strong>Medical school:</strong> ${esc(edu.medicalSchool)}${edu.graduationYear ? ` (${edu.graduationYear})` : ''}</li>`,
-    );
+    const years =
+      edu.medicalSchoolYears != null && edu.medicalSchoolYears !== ''
+        ? ` (${esc(String(edu.medicalSchoolYears))})`
+        : edu.graduationYear
+          ? ` (${edu.graduationYear})`
+          : '';
+    items.push(`<li><strong>Medical school:</strong> ${esc(edu.medicalSchool)}${years}</li>`);
   }
-  if (edu.undergraduate) items.push(`<li><strong>Education:</strong> ${esc(edu.undergraduate)}</li>`);
+  if (edu.undergraduate) items.push(`<li><strong>Undergraduate:</strong> ${esc(edu.undergraduate)}</li>`);
   if (edu.graduate) items.push(`<li><strong>Graduate training:</strong> ${esc(edu.graduate)}</li>`);
   if (edu.postGraduate) items.push(`<li><strong>Post-graduate:</strong> ${esc(edu.postGraduate)}</li>`);
   if (provider.residency) items.push(`<li><strong>Residency:</strong> ${esc(provider.residency)}</li>`);
+  else if (edu.residency) items.push(`<li><strong>Residency:</strong> ${esc(edu.residency)}</li>`);
   if (provider.fellowship) items.push(`<li><strong>Fellowship:</strong> ${esc(provider.fellowship)}</li>`);
-  if (edu.residency && !provider.residency) items.push(`<li><strong>Residency:</strong> ${esc(edu.residency)}</li>`);
+  else if (edu.fellowship) items.push(`<li><strong>Fellowship:</strong> ${esc(edu.fellowship)}</li>`);
+  if (Array.isArray(edu.continuingEducation)) {
+    for (const ce of edu.continuingEducation) {
+      if (ce) items.push(`<li><strong>Continuing education:</strong> ${esc(ce)}</li>`);
+    }
+  }
+  if (edu.clinicalExperience) {
+    items.push(`<li><strong>Clinical experience:</strong> ${esc(edu.clinicalExperience)}</li>`);
+  }
   return items.length ? `<ul class="provider-credential-list">${items.join('')}</ul>` : '';
 }
 
 function buildPhysicianSchema(provider) {
   const canonical = `${BASE_URL}/providers/${provider.slug}`;
-  const image = `${BASE_URL}/${resolveProviderPhoto(provider).src}`;
+  const image = `${ASSET_BASE_URL}/${resolveProviderPhoto(provider).src}`;
   const entityId = schemaEntityId(provider);
+  const alumniOf = formatAlumniOf(provider);
+  const hasCredential = formatHasCredential(provider);
   const person = {
     '@type': schemaEntityType(provider),
     '@id': entityId,
@@ -132,7 +250,14 @@ function buildPhysicianSchema(provider) {
     areaServed: providerServiceStates(provider).map((name) => ({ '@type': 'State', name })),
     ...(provider.honorificPrefix ? { honorificPrefix: provider.honorificPrefix } : {}),
     ...(provider.honorificSuffix ? { honorificSuffix: provider.honorificSuffix } : {}),
-    ...(provider.npi ? { identifier: { '@type': 'PropertyValue', name: 'NPI', value: provider.npi } } : {}),
+    ...(provider.npi
+      ? {
+          usNPI: provider.npi,
+          identifier: { '@type': 'PropertyValue', name: 'NPI', value: provider.npi },
+        }
+      : {}),
+    ...(alumniOf ? { alumniOf } : {}),
+    ...(hasCredential ? { hasCredential } : {}),
     ...(provider.sameAs.length ? { sameAs: provider.sameAs } : {}),
   };
   return {
@@ -211,7 +336,7 @@ function renderProviderPage(provider) {
   const longBio = provider.longBio.map((p) => `              <p>${p}</p>`).join('\n');
   const bullets = provider.patientFit.bullets.map((b) => `<li>${b}</li>`).join('\n                ');
   const focusFixed = provider.clinicalFocus.map((item) => `<li>${item}</li>`).join('\n            ');
-  const carePhil = provider.carePhilosophy.map((p) => `<p>${p}</p>`).join('\n          ');
+  const carePhil = formatProseSectionHtml(provider.carePhilosophy);
   const steps = provider.whatToExpect
     .map((s) => `<li><strong>${esc(s.title)}</strong>—${s.text}</li>`)
     .join('\n            ');
@@ -259,6 +384,7 @@ ${verifiedTestimonials
         </div>
       </section>`
       : '';
+  // Profile content gaps are tracked in docs/PROVIDER-PROFILE-CONTENT-GAPS.md (not rendered publicly).
   const screeningBtn = '';
   const schemaJson = JSON.stringify(buildPhysicianSchema(provider));
   const breadcrumbJson = JSON.stringify(buildProviderBreadcrumb(provider));
@@ -276,8 +402,12 @@ ${verifiedTestimonials
     <meta property="og:description" content="${esc(provider.seo.description)}" />
     <meta property="og:type" content="profile" />
     <meta property="og:url" content="${canonical}" />
-    <meta property="og:image" content="${BASE_URL}/assets/images/siya-health-logo.png" />
+    <meta property="og:image" content="${ASSET_BASE_URL}/${resolveProviderPhoto(provider).src}" />
     <meta property="og:site_name" content="Siya Health" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${esc(provider.seo.title)}" />
+    <meta name="twitter:description" content="${esc(provider.seo.description)}" />
+    <meta name="twitter:image" content="${ASSET_BASE_URL}/${resolveProviderPhoto(provider).src}" />
     <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
     <link rel="stylesheet" href="../styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -351,6 +481,11 @@ ${verifiedTestimonials
             <h2 class="sr-only">Credential summary</h2>
             <p><strong>${esc(provider.role)}</strong></p>
             <p>${provider.boardCertifications.map(esc).join(' · ')}</p>
+            ${
+              provider.yearsExperienceLabel
+                ? `<p class="provider-experience-line">${esc(provider.yearsExperienceLabel)}</p>`
+                : ''
+            }
             <p class="provider-profile-meta"><span>Profile updated: ${provider.profileLastUpdated}</span> · <span>${esc(formatCredentialStatus(provider))}</span>${provider.npi ? ` · <span>NPI ${esc(provider.npi)}</span>` : ''}</p>
           </div>
         </div>
@@ -435,15 +570,6 @@ ${longBio}
       </section>
 
       <section class="provider-lp-section">
-        <div class="container">
-          <div class="section-header">
-            <h2>Treatment approach</h2>
-          </div>
-          ${carePhil}
-        </div>
-      </section>
-
-      <section class="provider-lp-section section-tinted">
         <div class="container">
           <div class="section-header">
             <h2>What to expect</h2>
@@ -748,15 +874,73 @@ function enrichProvider(provider) {
   };
 }
 
+/** Internal to-do list only — never rendered on public provider HTML. */
+const NAME_SEARCH_PRIORITY_SLUGS = new Set(['dr-natasha-desai', 'dr-vanessa-urbina']);
+
+function collectProfileContentGaps(provider) {
+  const gaps = [];
+  if (!provider.education) {
+    gaps.push('Publish verified education / residency lines (currently marked not published).');
+  }
+  if (!provider.reviewedContent.length) {
+    gaps.push(
+      'Add physician-reviewed article links (e.g. ADHD medication education) after clinical ownership is confirmed.',
+    );
+  }
+  if (NAME_SEARCH_PRIORITY_SLUGS.has(provider.slug)) {
+    gaps.push(
+      'Name-search SEO: expand unique bio modules and internal links from related ADHD posts—do not invent credentials.',
+    );
+  }
+  return gaps;
+}
+
+function writeProfileContentGapsDoc(providers) {
+  const docsDir = path.join(__dirname, '..', 'docs');
+  fs.mkdirSync(docsDir, { recursive: true });
+  const lines = [
+    '# Provider profile content gaps (internal)',
+    '',
+    'Generated by `scripts/generate-provider-pages.mjs`. **Not** shown on public provider pages.',
+    '',
+    'Use this as the editor to-do list for reviewed-content links, education gaps, and name-search SEO notes.',
+    '',
+  ];
+  let any = false;
+  for (const p of providers) {
+    const gaps = collectProfileContentGaps(p);
+    if (!gaps.length) continue;
+    any = true;
+    lines.push(`## ${p.name} (\`/providers/${p.slug}\`)`);
+    lines.push('');
+    for (const g of gaps) lines.push(`- ${g}`);
+    lines.push('');
+  }
+  if (!any) {
+    lines.push('_No open profile content gaps._');
+    lines.push('');
+  }
+  const out = path.join(docsDir, 'PROVIDER-PROFILE-CONTENT-GAPS.md');
+  fs.writeFileSync(out, lines.join('\n'), 'utf8');
+  console.log('Wrote', out);
+}
+
 function main() {
   fs.mkdirSync(PROVIDERS_DIR, { recursive: true });
-  for (const p of PROVIDERS.map(enrichProvider)) {
+  const enriched = PROVIDERS.map(enrichProvider);
+  for (const p of enriched) {
     const out = path.join(PROVIDERS_DIR, `${p.slug}.html`);
-    fs.writeFileSync(out, renderProviderPage(p), 'utf8');
+    const rel = `providers/${p.slug}.html`;
+    fs.writeFileSync(out, withTracking(renderProviderPage(p), rel), 'utf8');
     console.log('Wrote', out);
   }
-  fs.writeFileSync(path.join(PROVIDERS_DIR, 'index.html'), renderProvidersIndex(), 'utf8');
+  fs.writeFileSync(
+    path.join(PROVIDERS_DIR, 'index.html'),
+    withTracking(renderProvidersIndex(), 'providers/index.html'),
+    'utf8',
+  );
   console.log('Wrote providers/index.html');
+  writeProfileContentGapsDoc(enriched);
   console.log(`Generated ${PROVIDERS.length} provider pages + index`);
 }
 

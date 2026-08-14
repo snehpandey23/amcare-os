@@ -1,90 +1,62 @@
-# ALL PLATFORMS — AD-I-01 v2 (company only)
+# Captions — AD-I-01 · Iron Fog + ADHD
 
-
----
-
-# Instagram — AD-I-01 v2
-
-## Caption
-
-Still foggy on ADHD treatment?
-
-Women: low iron may be what you’re missing.
-
-Iron isn’t “just anemia.” It matters for brain function too — including pathways tied to dopamine and focus.
-
-Your hemoglobin can look normal while ferritin (iron stores) is low.
-
-**Practical step:** Ask your clinician for ferritin / iron studies — especially with heavy periods, fatigue, or restless legs. Don’t megadose iron on your own.
-
-siya.health/blog/perimenopause-brain-fog · siya.health/adhd-care
-
-Educational only. Associations ≠ “iron causes ADHD.”
-
-## Hashtags
-#ADHD #ADHDWomen #IronDeficiency #Ferritin #BrainFog #WomensHealth #SiyaHealth
-
+Company voice only. Educational only. Not personal medical advice.
 
 ---
 
-# Facebook — AD-I-01 v2
+## Instagram
 
-Still foggy despite ADHD care?
+Still foggy after ADHD treatment?
 
-For many women, low iron is an overlooked piece — and it isn’t only about anemia. Iron status can matter for brain function and focus chemistry too.
+For many women, low iron can look a lot like ADHD fog — and the two can stack. Iron isn’t “just anemia.” Status matters for brain function too, including pathways tied to dopamine and attention chemistry.
 
-Important: hemoglobin can look “fine” while ferritin is low.
+Brain fatigue often travels together: studies link low iron with fog and worse attention symptoms in some people, including ADHD populations (associations — not proof that iron causes or cures ADHD).
 
-If you have brain fog, fatigue, restless legs, or heavy periods, ask your clinician about iron studies. Don’t self-megadose.
+Practical step: hemoglobin can look “normal” while ferritin (iron stores) is still low. Before labs, ask: “Can we check ferritin / iron studies?” Don’t mega-dose iron on your own.
 
-https://siya.health/blog/perimenopause-brain-fog
-https://siya.health/adhd-care
+Read more: siya.health/blog/perimenopause-brain-fog
+ADHD care: siya.health/adhd-care
 
-Educational only · Not a diagnosis or supplement protocol
-
-
----
-
-# LinkedIn Company — AD-I-01 v2
-
-ADHD treatment isn’t complete if we never ask about iron — especially for women.
-
-Symptom overlap is real: persistent fog, fatigue, restless legs, heavy menstrual bleeding, “meds feel weaker.”
-
-A normal hemoglobin does not rule out low ferritin.
-
-Claim discipline:
-→ Iron deficiency does not cause ADHD
-→ It can still worsen how focus and energy feel
-→ The useful move is measurement, not DIY megadoses
-
-https://siya.health/blog/perimenopause-brain-fog
-https://siya.health/adhd-care
-
-Educational only.
-
+#AdultADHD #WomensHealth #BrainFog #IronDeficiency #Ferritin #SiyaHealth #EducationalOnly
 
 ---
 
-# X / Twitter — AD-I-01 v2
+## Facebook
 
-1/ Still foggy on ADHD treatment? Women: low iron may be what you’re missing.
-2/ Iron isn’t just anemia — it matters for brain function too.
-3/ Hemoglobin can look normal while ferritin is low.
-4/ Ask for iron studies. Don’t megadose.
-5/ siya.health/blog/perimenopause-brain-fog
+Still foggy after ADHD treatment? For some women, low iron is part of the picture.
 
+Iron status can affect brain function — not only blood counts. Hemoglobin can look normal while iron stores are low. Ask your clinician about ferritin / iron studies. Don’t mega-dose iron on your own.
+
+Educational only. siya.health/blog/perimenopause-brain-fog
 
 ---
 
-# Pinterest — AD-I-01 v2
+## LinkedIn (Company only)
 
-## Pin title
-Still Foggy on ADHD Treatment? Check Iron
+ADHD fog and low iron can look alike — and stack.
 
-## Pin description
-For women with ADHD symptoms, low iron may be overlooked. Ferritin can be low even when hemoglobin looks normal. Ask your clinician for iron studies — don’t megadose. Educational from Siya Health.
+Iron is involved in pathways that lead to dopamine; low stores are associated with fatigue, fog, and worse attention symptoms in some people, including ADHD populations. Hemoglobin alone can miss the story.
 
-## URL
-https://siya.health/blog/perimenopause-brain-fog
+Educational content. Patients should ask clinicians about ferritin / iron studies rather than self-supplementing high-dose iron.
 
+siya.health
+
+---
+
+## X / Twitter
+
+Still foggy after ADHD treatment? Ask: “Can we check ferritin?”
+
+Hb can look normal while iron stores are low. Don’t mega-dose iron on your own. Educational only.
+
+siya.health
+
+---
+
+## Pinterest
+
+ADHD fog… or low iron?
+
+They can look alike — and stack. Ask about ferritin / iron studies. Educational only.
+
+siya.health/blog/perimenopause-brain-fog

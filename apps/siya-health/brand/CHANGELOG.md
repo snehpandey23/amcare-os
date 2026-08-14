@@ -6,6 +6,33 @@ Version history for the Siya Brand OS folder.
 
 ---
 
+## Visual OS v2.1 — 2026-07-31
+
+- **No text drop shadows** (hard reject)
+- Type: Deep Siya Navy `#001878` · Magenta `#D81088` · Dark Navy `#0A246B` — never brown/black/gray
+- Light & Contrast section: 8–10 AM soft window light · no dark vignettes
+- Recognition compositor updated; ADHD-COVID post regenerated
+
+---
+
+## Visual OS v2.0 — 2026-07-30
+
+### Philosophy shift (jobs over styles)
+
+- Four production systems: **Recognition · Knowledge · Authority · Conversion**
+- Locked templates `B-01`…`D-01` in `VISUAL-OS-TEMPLATES.md` — choose, don’t invent
+- Decision tree: feel / understand / trust / act — kill awareness/education/promotion classifiers
+- Recognition = lean only (no checklist/CTA on photo); compositor enforces
+- Tokens retained from v1.4.9 (soft scrim, 20% fade, SCENE-INK, audits)
+- Conversion + Authority compositors still manual until coded
+
+### Files
+
+- `VISUAL-OS.md` (rewrite) · `VISUAL-OS-TEMPLATES.md` (new) · `INSTAGRAM-STATIC.md` · `EDITORIAL-OS.md` (classify stage)
+- WorkDrive: `00-Brand-System/VISUAL-OS-FROZEN-v2.0.md`
+
+---
+
 ## v1.3 — July 2026
 
 ### Phase 2 factory started (stop polishing philosophy — build instances)

@@ -1,71 +1,86 @@
-# Instagram Carousel — WL-G-01
+# Carousel — WL-G-01 · Semaglutide isn’t a willpower hack (regen from feedback)
 
-**Insight:** How semaglutide actually works
-**Spoke:** https://siya.health/blog/semaglutide-for-weight-loss-how-it-works
-**Practical change:** Before starting, ask about contraindications — and plan protein + resistance training if prescribed a GLP-1.
-**Format:** 4:5 · 6 slides · INSTAGRAM-STATIC + design-lab hierarchy
+**Insight ID:** WL-G-01  
+**System:** Knowledge · Visual OS v2.1 · A-03 **lean lock** (S2–S3 denser per feedback)  
+**Title:** Semaglutide isn’t a willpower hack.  
+**Spoke:** https://siya.health/blog/semaglutide-for-weight-loss-how-it-works  
+**Voice:** Company only — no founder LinkedIn  
+**Format:** 4:5 · 1080×1350 · **5 slides** (old S6 removed)  
+**Template:** A-03 cream blend · subject RIGHT · weight/fitness-related photos · LOGO-PRIMARY opaque (no watermark)
 
----
-
-## Slide 1
-**Copy:**
-Semaglutide isn't
-a willpower hack.
-
-**Support:**
-It changes hunger and fullness signals.
+**On-frame lock:** Headline + one sub-headline · S2–S3 use short bullets (`--dense`) per feedback  
+**Claim lock:** No guaranteed weight numbers · no DIY compounding · no miracle framing · education only  
+**Feedback lock (2026-08):** Stronger logo · brand type · no text-on-image · related imagery · S4 “who should be cautious” · close on S5 with clinician CTA + blog subtext
 
 ---
 
-## Slide 2
-**Copy:**
-What it targets
+## Slide 1 — Hook
 
-**Support:**
-GLP-1 pathways that affect appetite,
-stomach emptying, and reward cues.
+**Mode:** hook  
+**Headline:** Semaglutide isn’t  
+**Accent:** isn’t  
+**Line break:** a willpower hack.  
+**Sub-headline:** It changes hunger and fullness signals.
 
----
-
-## Slide 3
-**Copy:**
-What it doesn't do
-
-**Support:**
-It won't replace protein,
-strength training, or follow-up.
+**Photo:** Clear weight-loss / activity scene — walking, light run, or intentional movement · subject RIGHT · morning light · face clear of cream fade  
+**Logo:** LOGO-PRIMARY · full opacity · top-left only · **no ambient watermark**
 
 ---
 
-## Slide 4
-**Copy:**
-Who needs caution
+## Slide 2 — What it targets
 
-**Support:**
-Personal history matters —
-contraindications are not optional fine print.
+**Mode:** symptom  
+**Headline:** What it targets  
+**Accent:** targets  
+**Sub-headline / body (question-style bullets — `--dense`):**
+- Appetite signals?
+- Stomach emptying?
+- Reward / food cues?
 
----
-
-## Slide 5
-**Copy:**
-Practical step
-
-**Support:**
-Ask your clinician about risks for you.
-If starting: protect protein + muscle.
+**Photo:** Distinct weight/fitness-related scene · not a repeat of S1 · right-weighted
 
 ---
 
-## Slide 6
-**Copy:**
-Learn more
+## Slide 3 — What it won’t replace
 
-**Support:**
-siya.health/blog/semaglutide-for-weight-loss-how-it-works
-siya.health/weight-loss-metabolic-health
+**Mode:** symptom  
+**Headline:** What it won’t replace  
+**Accent:** won’t  
+**Sub-headline / body (bullets — `--dense`):**
+- Protein intake
+- Strength training
+- Follow-ups + consistency
+
+**Photo:** Strength / protein / training energy · right-weighted · distinct  
+**Caption note:** Treatment won’t replace consistency — follow-ups matter.
+
+---
+
+## Slide 4 — Who should be cautious
+
+**Mode:** symptom  
+**Headline:** Who should be cautious  
+**Accent:** cautious  
+**Sub-headline:** Some conditions or medications change whether treatment is right — check with your clinician.
+
+**Photo:** Calm consult / health-decision energy (not fear) · right-weighted · distinct
+
+---
+
+## Slide 5 — Close
+
+**Mode:** close  
+**Headline:** Talk with your clinician  
+**Accent:** clinician  
+**Sub-headline:** Ask whether treatment fits your risk — if starting, protect protein + strength.  
+**CTA:** Talk to a Clinician  
+**Extra sub (lean):** Read more about this on our blog.
+
+**Photo:** Path-forward / clinician-conversation feel · right-weighted · distinct  
+**Removed:** Slide 6 entirely.
 
 ---
 
 ## Claim ladder
-Practical next step required. Avoid: Guaranteed weight numbers; DIY compounding advice; miracle framing
+Safe: mechanism (appetite / emptying / cues) · won’t replace protein/training/follow-up · caution + clinician · protect protein + muscle if starting.  
+Avoid: guaranteed lbs · compounding DIY · willpower-shaming · miracle framing · founder LinkedIn.

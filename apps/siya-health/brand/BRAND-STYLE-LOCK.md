@@ -28,6 +28,11 @@ Agents (desktop **and** mobile) must **Read this file** before generating or com
 | Aspect (secondary) | 1:1 · 1080×1080 | Export only when asked |
 | Logo | `LOGO-PRIMARY` registered lockup · **top-left** · opaque | Height ~**92px** Knowledge A-03 · ~**106px** stacked · **no** ambient watermark |
 
+### Spoken brand name (audio / TTS)
+
+**“Siya” = “C-ya” / “see ya” (SEE-yah)** — not SAI-ya / SIGH-ya.  
+On-screen: `Siya` / `siya.health`. Spoken/VO/TTS: write phonetic **`See-ya Health`**. Prefer URL close. Full lock: `video-prompts/README.md`.
+
 ### Never use (legacy / reject)
 
 - Plum / terracotta type (`#8D3A78` era) as primary accent  

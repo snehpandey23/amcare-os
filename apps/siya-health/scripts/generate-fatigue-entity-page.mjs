@@ -24,6 +24,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { renderDifferentialSection } from '../data/differential-diagnosis.mjs';
+import {
+  injectCookieConsentBootstrap,
+  injectCookieNotice,
+  injectGtmAndTracking,
+} from './site-chrome.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -223,6 +228,7 @@ function render() {
               <a class="button ds-button ds-button--primary" href="/book-appointment" data-siya-track="primary-cta-click" data-siya-location="hero" data-page-type="default" data-intent="primary-care" data-component="button">Book a primary care visit</a>
               <a class="button ds-button ds-button--secondary secondary" href="#what-it-could-be" data-siya-track="scroll_differential" data-siya-location="hero" data-component="button">See what it could be</a>
             </div>
+            <p class="hero-availability-note">Meet &amp; Greet and initial visits are often available within 48 hours across California, Texas, Pennsylvania, and Florida.</p>
             <p class="cta-microcopy">Educational information, not a diagnosis. If you have chest pain, trouble breathing, or thoughts of self-harm, seek emergency care now.</p>
           </div>
         </div>
@@ -373,5 +379,8 @@ ${faqAccordion(FAQS, 'faq-fatigue')}
 `;
 }
 
-fs.writeFileSync(OUT, render());
+let html = injectCookieConsentBootstrap(render());
+html = injectCookieNotice(html, 'fatigue.html');
+html = injectGtmAndTracking(html, 'fatigue.html');
+fs.writeFileSync(OUT, html);
 console.log('Wrote fatigue.html (canonical fatigue entity page)');

@@ -1,7 +1,27 @@
-import { generateText } from "ai";
+import { generateObject } from "ai";
+import { z } from "zod";
 import { retrieveLayeredKnowledge, type RetrievedChunk } from "@/lib/siya-os/retrieval";
-import { getWorkforceModel, workforceLlmEnabled } from "@/lib/siya-os/model";
+import {
+  assessAnswerSubstantiveness,
+  isHeuristicallyWeakAnswer,
+} from "@/lib/answer-quality";
+import {
+  markWorkforceLlmFailure,
+  workforceLlmConfigured,
+  workforceLlmDisabledMessage,
+  withWorkforceModelFallback,
+  type ClassifiedWorkforceLlmError,
+} from "@/lib/siya-os/model";
 import { fetchSopsForRetrieval } from "@/lib/sop-api";
+
+export class SopBuilderLlmError extends Error {
+  readonly classified: ClassifiedWorkforceLlmError;
+  constructor(classified: ClassifiedWorkforceLlmError) {
+    super(classified.userMessage);
+    this.name = "SopBuilderLlmError";
+    this.classified = classified;
+  }
+}
 
 export type SopBuilderTranscriptEntry = {
   role: "assistant" | "user";
@@ -23,6 +43,55 @@ export type SopBuilderChecklistDraft = {
 
 const MIN_QUESTIONS = 4;
 const MAX_QUESTIONS = 8;
+
+/** Fast heuristic — prefer assessAnswerSubstantiveness for gate decisions. */
+export function isWeakInterviewAnswer(answer: string, skipped = false): boolean {
+  return isHeuristicallyWeakAnswer(answer, skipped);
+}
+
+function countMeaningfulAnswers(transcript: SopBuilderTranscriptEntry[]): number {
+  return transcript.filter((e) => {
+    if (e.role !== "user" || e.skipped) return false;
+    const t = e.content.trim();
+    // Long pasted answers count as substantive even if heuristic is overly picky on endings.
+    if (t.length >= 80) return true;
+    return !isWeakInterviewAnswer(t, false);
+  }).length;
+}
+
+function pushbackQuestion(lastAssistantQ: string | null, custom?: string): string {
+  if (custom?.trim()) return custom.trim();
+  const topicHint = lastAssistantQ?.trim()
+    ? `You answered about: "${lastAssistantQ.slice(0, 120)}". That reply was too thin.`
+    : "That reply was too thin.";
+  return `${topicHint} I need real operational detail — what are the actual steps, who does them, and when (timeline / priority)?`;
+}
+
+const interviewStartSchema = z.object({
+  questions: z.array(z.string()).min(1).max(2),
+  readyToDraft: z.boolean(),
+});
+
+const interviewNextSchema = z.object({
+  question: z.string().nullable(),
+  readyToDraft: z.boolean(),
+  questionNumber: z.number().int().positive(),
+});
+
+const checklistDraftSchema = z.object({
+  title: z.string().min(1).max(200),
+  description: z.string().max(2000),
+  checklistItems: z
+    .array(
+      z.object({
+        label: z.string().min(1).max(500),
+        order: z.number().int().nonnegative(),
+      }),
+    )
+    .min(4)
+    .max(15),
+  gaps: z.array(z.string().max(400)).max(10),
+});
 
 function chunksToRefs(chunks: RetrievedChunk[], max = 5): { id: string; title: string; snippet: string }[] {
   return chunks.slice(0, max).map((c) => ({
@@ -79,9 +148,8 @@ function formatTranscript(transcript: SopBuilderTranscriptEntry[]): string {
     .join("\n");
 }
 
-function parseJsonFromLlm(text: string): unknown {
-  const trimmed = text.trim().replace(/^```json\s*/i, "").replace(/```\s*$/, "");
-  return JSON.parse(trimmed);
+export function countSubstantiveAnswers(transcript: SopBuilderTranscriptEntry[]): number {
+  return countMeaningfulAnswers(transcript);
 }
 
 export type InterviewStartResult = {
@@ -93,7 +161,9 @@ export async function generateInterviewStart(opts: {
   topic: string;
   sourceRefs: SopBuilderSourceRefs;
 }): Promise<InterviewStartResult | null> {
-  if (!workforceLlmEnabled()) return null;
+  if (!workforceLlmConfigured()) {
+    throw new SopBuilderLlmError(workforceLlmDisabledMessage());
+  }
   const prompt = [
     `Topic for a new operational daily checklist SOP: "${opts.topic}"`,
     "",
@@ -101,25 +171,26 @@ export async function generateInterviewStart(opts: {
     "",
     `Generate 1-2 short, plain-language interview questions to understand how staff actually do this process.`,
     `Questions should be specific, easy to answer on a phone, and informed by any source material above.`,
-    `Return ONLY JSON: {"questions":["...","..."],"readyToDraft":false}`,
     `readyToDraft should always be false at start.`,
   ].join("\n");
   try {
-    const { text } = await generateText({
-      model: getWorkforceModel(),
-      system:
-        "You interview Siya Health staff to capture operational checklists. No patient identifiers. Output JSON only.",
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0.35,
-      maxOutputTokens: 400,
+    const object = await withWorkforceModelFallback(async (model) => {
+      const { object: o } = await generateObject({
+        model,
+        schema: interviewStartSchema,
+        system:
+          "You interview Siya Health staff to capture operational checklists. No patient identifiers.",
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.35,
+      });
+      return o;
     });
-    const parsed = parseJsonFromLlm(text) as { questions?: string[]; readyToDraft?: boolean };
-    const questions = (parsed.questions ?? []).map((q) => q.trim()).filter(Boolean).slice(0, 2);
+    const questions = object.questions.map((q) => q.trim()).filter(Boolean).slice(0, 2);
     if (!questions.length) return null;
     return { questions, readyToDraft: false };
   } catch (err) {
-    console.error("[sop-builder-assist] interview start failed", err);
-    return null;
+    if (err instanceof SopBuilderLlmError) throw err;
+    throw new SopBuilderLlmError(markWorkforceLlmFailure(err));
   }
 }
 
@@ -134,9 +205,43 @@ export async function generateInterviewNext(opts: {
   sourceRefs: SopBuilderSourceRefs;
   transcript: SopBuilderTranscriptEntry[];
 }): Promise<InterviewNextResult | null> {
-  if (!workforceLlmEnabled()) return null;
+  if (!workforceLlmConfigured()) {
+    throw new SopBuilderLlmError(workforceLlmDisabledMessage());
+  }
   const answerCount = opts.transcript.filter((e) => e.role === "user").length;
-  const forceReady = answerCount >= MAX_QUESTIONS;
+  const substantive = countSubstantiveAnswers(opts.transcript);
+  const lastUser = [...opts.transcript].reverse().find((e) => e.role === "user");
+  const lastQ =
+    [...opts.transcript].reverse().find((e) => e.role === "assistant")?.content ??
+    `Interview question about: ${opts.topic}`;
+
+  // Heuristic first-pass, then LLM substantiveness — thin/filler never unlocks draft.
+  if (lastUser && !lastUser.skipped) {
+    const quality = await assessAnswerSubstantiveness({
+      question: lastQ,
+      answer: lastUser.content,
+      skipped: false,
+    });
+    if (!quality.ok) {
+      return {
+        question: pushbackQuestion(lastQ, quality.followUp),
+        readyToDraft: false,
+        questionNumber: answerCount + 1,
+      };
+    }
+  }
+
+  // Unlock draft once we have enough usable answers — don't keep grilling after solid pastes.
+  const forceReady = substantive >= MIN_QUESTIONS;
+
+  if (forceReady) {
+    return {
+      question: null,
+      readyToDraft: true,
+      questionNumber: answerCount + 1,
+    };
+  }
+
   const prompt = [
     `Topic: "${opts.topic}"`,
     "",
@@ -145,41 +250,43 @@ export async function generateInterviewNext(opts: {
     "INTERVIEW SO FAR:",
     formatTranscript(opts.transcript),
     "",
-    `Answer count so far: ${answerCount}. Target ${MIN_QUESTIONS}-${MAX_QUESTIONS} questions total.`,
-    forceReady
-      ? "You have enough answers. Set readyToDraft true and question null."
-      : `If you have enough detail for a solid checklist (usually after ${MIN_QUESTIONS}+ answers), set readyToDraft true.`,
-    `Otherwise ask ONE follow-up question that adapts to prior answers and fills gaps.`,
-    `Return ONLY JSON: {"question":"... or null","readyToDraft":true|false,"questionNumber":${answerCount + 1}}`,
+    `Answer count so far: ${answerCount} (${substantive} substantive). Target ${MIN_QUESTIONS}-${MAX_QUESTIONS} solid answers.`,
+    "QUALITY RULE: Push back only on gibberish, placeholders, or empty deferrals. Accept rough but concrete operational pastes.",
+    `Only set readyToDraft true when you have enough concrete detail for a solid checklist (usually after ${MIN_QUESTIONS}+ substantive answers). Otherwise ask ONE follow-up.`,
+    `questionNumber should be ${answerCount + 1}.`,
   ].join("\n");
   try {
-    const { text } = await generateText({
-      model: getWorkforceModel(),
-      system:
-        "You conduct adaptive SOP interviews. Skip re-asking answered topics. No PHI. JSON only.",
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0.35,
-      maxOutputTokens: 350,
+    const object = await withWorkforceModelFallback(async (model) => {
+      const { object: o } = await generateObject({
+        model,
+        schema: interviewNextSchema,
+        system:
+          "You conduct adaptive SOP interviews like a careful human interviewer. Push back on vague answers. Skip re-asking answered topics. No PHI.",
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.35,
+      });
+      return o;
     });
-    const parsed = parseJsonFromLlm(text) as {
-      question?: string | null;
-      readyToDraft?: boolean;
-      questionNumber?: number;
-    };
-    const readyToDraft = forceReady || Boolean(parsed.readyToDraft) || answerCount >= MIN_QUESTIONS && !parsed.question?.trim();
+    const readyToDraft = Boolean(object.readyToDraft) && substantive >= MIN_QUESTIONS;
     if (readyToDraft) {
       return { question: null, readyToDraft: true, questionNumber: answerCount + 1 };
     }
-    const question = parsed.question?.trim() || null;
-    if (!question) return { question: null, readyToDraft: answerCount >= MIN_QUESTIONS, questionNumber: answerCount + 1 };
+    const question = object.question?.trim() || null;
+    if (!question) {
+      return {
+        question: null,
+        readyToDraft: false,
+        questionNumber: answerCount + 1,
+      };
+    }
     return {
       question,
       readyToDraft: false,
-      questionNumber: parsed.questionNumber ?? answerCount + 1,
+      questionNumber: object.questionNumber ?? answerCount + 1,
     };
   } catch (err) {
-    console.error("[sop-builder-assist] interview next failed", err);
-    return null;
+    if (err instanceof SopBuilderLlmError) throw err;
+    throw new SopBuilderLlmError(markWorkforceLlmFailure(err));
   }
 }
 
@@ -187,57 +294,110 @@ export async function generateChecklistDraft(opts: {
   topic: string;
   sourceRefs: SopBuilderSourceRefs;
   transcript: SopBuilderTranscriptEntry[];
+  /** When set with refineInstruction — iterate on this draft (Founder Coach refine pattern). */
+  currentDraft?: SopBuilderChecklistDraft | null;
+  refineInstruction?: string | null;
 }): Promise<SopBuilderChecklistDraft | null> {
-  if (!workforceLlmEnabled()) return null;
-  const prompt = [
-    `Create an operational daily checklist SOP template from this interview.`,
-    `Original topic: "${opts.topic}"`,
-    "",
-    formatSourceContext(opts.sourceRefs),
-    "",
-    "FULL INTERVIEW:",
-    formatTranscript(opts.transcript),
-    "",
-    `Return ONLY valid JSON:`,
-    `{"title":"...","description":"one short paragraph","checklistItems":[{"label":"actionable step","order":0},...],"gaps":["open question or uncertainty",...]}`,
-    "checklistItems: 4-15 ordered steps, each label starts with a verb, no patient identifiers.",
-    "gaps: list items the AI is unsure about or that need human verification (empty array if confident).",
-  ].join("\n");
-  try {
-    const { text } = await generateText({
-      model: getWorkforceModel(),
-      system:
-        "You draft operational checklist SOPs for Siya Health staff My day tasks. Be concrete. JSON only.",
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0.25,
-      maxOutputTokens: 1400,
-    });
-    const parsed = parseJsonFromLlm(text) as {
-      title?: string;
-      description?: string;
-      checklistItems?: { label?: string; order?: number }[];
-      gaps?: string[];
+  const fallback = (): SopBuilderChecklistDraft => {
+    const userBits = opts.transcript
+      .filter((e) => e.role === "user" && !e.skipped && e.content.trim().length >= 8)
+      .map((e) => e.content.trim());
+    const items = userBits.slice(0, 12).map((label, i) => ({
+      label: (label.length > 120 ? `${label.slice(0, 117)}…` : label).replace(/^[•\-*]\s*/, ""),
+      order: i,
+    }));
+    while (items.length < 4) {
+      items.push({
+        label: `Confirm step ${items.length + 1} for: ${opts.topic}`.slice(0, 500),
+        order: items.length,
+      });
+    }
+    return {
+      title: opts.topic.slice(0, 200),
+      description: `Drafted from interview answers (AI polish unavailable). Edit before submit.`,
+      checklistItems: items,
+      gaps: ["AI draft unavailable — verify every step with the process owner."],
     };
-    const title = parsed.title?.trim();
-    if (!title) return null;
-    const items = (parsed.checklistItems ?? [])
+  };
+
+  if (!workforceLlmConfigured()) {
+    return fallback();
+  }
+  const { refinePromptPreamble } = await import("@/lib/sop-refine");
+  const refine = opts.refineInstruction?.trim() || "";
+  const cur = opts.currentDraft;
+  const isRefine = Boolean(refine && cur?.title && cur.checklistItems?.length);
+
+  const prompt = isRefine
+    ? [
+        refinePromptPreamble(refine),
+        "",
+        `Original topic: "${opts.topic}"`,
+        "",
+        "CURRENT DRAFT (JSON):",
+        JSON.stringify(
+          {
+            title: cur!.title,
+            description: cur!.description,
+            checklistItems: cur!.checklistItems.map((it) => ({ label: it.label, order: it.order })),
+            gaps: cur!.gaps ?? [],
+          },
+          null,
+          2,
+        ),
+        "",
+        "Interview context (for grounding only — prefer CURRENT DRAFT content):",
+        formatTranscript(opts.transcript).slice(0, 4000),
+        "",
+        "Return the full updated checklist (title, description, checklistItems 4-15, gaps).",
+        "checklistItems: each label starts with a verb, no patient identifiers.",
+      ].join("\n")
+    : [
+        `Create an operational daily checklist SOP from this interview.`,
+        `Original topic: "${opts.topic}"`,
+        "",
+        formatSourceContext(opts.sourceRefs),
+        "",
+        "FULL INTERVIEW:",
+        formatTranscript(opts.transcript),
+        "",
+        "checklistItems: 4-15 ordered steps, each label starts with a verb, no patient identifiers.",
+        "gaps: list items the AI is unsure about or that need human verification (empty array if confident).",
+      ].join("\n");
+  try {
+    const object = await withWorkforceModelFallback(async (model) => {
+      const { object: o } = await generateObject({
+        model,
+        schema: checklistDraftSchema,
+        system: isRefine
+          ? "You refine operational checklist SOPs for Siya Health staff. Apply only the requested adjustment; keep the rest. Be concrete."
+          : "You draft operational checklist SOPs for Siya Health staff My day tasks. Be concrete.",
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.25,
+      });
+      return o;
+    });
+    const title = object.title.trim();
+    if (!title) return fallback();
+    const items = object.checklistItems
       .map((it, i) => ({
-        label: (it.label ?? "").trim(),
+        label: it.label.trim(),
         order: typeof it.order === "number" ? it.order : i,
       }))
       .filter((it) => it.label)
       .sort((a, b) => a.order - b.order)
       .map((it, i) => ({ label: it.label.slice(0, 500), order: i }));
-    if (!items.length) return null;
+    if (!items.length) return fallback();
     return {
       title: title.slice(0, 500),
-      description: (parsed.description ?? "").trim().slice(0, 2000),
+      description: object.description.trim().slice(0, 2000),
       checklistItems: items,
-      gaps: (parsed.gaps ?? []).map((g) => g.trim()).filter(Boolean).slice(0, 10),
+      gaps: object.gaps.map((g) => g.trim()).filter(Boolean).slice(0, 10),
     };
   } catch (err) {
-    console.error("[sop-builder-assist] draft failed", err);
-    return null;
+    const classified = markWorkforceLlmFailure(err);
+    if (isRefine) throw new SopBuilderLlmError(classified);
+    return fallback();
   }
 }
 

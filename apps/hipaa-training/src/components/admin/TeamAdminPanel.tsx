@@ -20,6 +20,7 @@ import { getStoredToken } from "@/lib/authStorage";
 import { buildInviteCopyText } from "@/lib/invite-email";
 import { downloadShiftAttendanceCsv } from "@/lib/portal-analytics";
 import { portalBtnGhostSm, portalH1, portalH2, portalSection } from "@/lib/portal-ui";
+import { DepartmentLeadsSection } from "@/components/admin/DepartmentLeadsSection";
 
 const LOGIN_URL =
   typeof window !== "undefined"
@@ -71,7 +72,6 @@ export function TeamAdminPanel() {
   const [invitePending, setInvitePending] = useState(false);
   const [inviteResult, setInviteResult] = useState<string | null>(null);
   const [inviteCopyBlock, setInviteCopyBlock] = useState<string | null>(null);
-  const [sendInviteEmail, setSendInviteEmail] = useState(true);
   const [csvPending, setCsvPending] = useState(false);
   const invitePanelRef = useRef<HTMLDivElement>(null);
 
@@ -149,31 +149,29 @@ export function TeamAdminPanel() {
       };
       setInviteCopyBlock(buildInviteCopyText(copyPayload));
 
-      let emailNote = " No automatic email was sent — copy the details below and share securely (Slack DM, Zoho, etc.).";
-      if (sendInviteEmail) {
-        const token = getStoredToken();
-        const res = await fetch("/api/admin/invite-email", {
-          method: "POST",
-          headers: {
-            Authorization: token ? `Bearer ${token}` : "",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            toEmail: email,
-            name,
-            temporaryPassword: pass,
-            loginUrl: LOGIN_URL,
-          }),
-        });
-        const data = (await res.json().catch(() => ({}))) as {
-          emailSent?: boolean;
-          emailError?: string;
-        };
-        if (data.emailSent) {
-          emailNote = ` Invite email sent to ${email}.`;
-        } else {
-          emailNote = ` Email not sent${data.emailError ? `: ${data.emailError}` : "."} Copy the details below for your teammate.`;
-        }
+      let emailNote = "";
+      const token = getStoredToken();
+      const res = await fetch("/api/admin/invite-email", {
+        method: "POST",
+        headers: {
+          Authorization: token ? `Bearer ${token}` : "",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          toEmail: email,
+          name,
+          temporaryPassword: pass,
+          loginUrl: LOGIN_URL,
+        }),
+      });
+      const data = (await res.json().catch(() => ({}))) as {
+        emailSent?: boolean;
+        emailError?: string;
+      };
+      if (data.emailSent) {
+        emailNote = ` Invite email sent to ${email}.`;
+      } else {
+        emailNote = ` Email not sent${data.emailError ? `: ${data.emailError}` : "."} Copy the details below and share securely.`;
       }
 
       setInviteResult(`Account created for ${email}.${emailNote}`);
@@ -305,14 +303,9 @@ export function TeamAdminPanel() {
                   ) : null}
                 </div>
               ) : null}
-              <label className="mt-3 flex items-center gap-2 text-xs text-[var(--siya-text-secondary)]">
-                <input
-                  type="checkbox"
-                  checked={sendInviteEmail}
-                  onChange={(e) => setSendInviteEmail(e.target.checked)}
-                />
-                Try to email login details (requires <code className="text-[10px]">RESEND_API_KEY</code>)
-              </label>
+              <p className="mt-3 text-xs text-[var(--siya-text-secondary)]">
+                Login credentials are emailed to the teammate automatically. A copy block stays available if email fails.
+              </p>
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 <label className="block text-xs font-medium text-[var(--siya-text-muted)]">
                   Work email
@@ -630,6 +623,8 @@ export function TeamAdminPanel() {
       {!loading && members.length === 0 && !error ? (
         <p className="text-sm text-[var(--siya-text-muted)]">No team members yet. Invite someone to get started.</p>
       ) : null}
+
+      <DepartmentLeadsSection />
     </div>
   );
 }

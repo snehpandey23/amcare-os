@@ -6,8 +6,18 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import {
+  GOOGLE_BUSINESS_PROFILE,
+  HOMEPAGE_TRUST_METRICS,
+} from '../data/homepage-trust-metrics.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
+const GOOGLE_RATING = GOOGLE_BUSINESS_PROFILE.ratingValue;
+const GOOGLE_RATING_STAR = `${GOOGLE_RATING}★`;
+const VERIFIED = HOMEPAGE_TRUST_METRICS.verifiedReviews.value;
+const VERIFIED_NUM = VERIFIED.replace(/\D/g, '');
+const PATIENTS = HOMEPAGE_TRUST_METRICS.patientsTreated.value;
+const PATIENTS_NUM = PATIENTS.replace(/\D/g, '');
 
 function readingCard(href, img, title, blurb) {
   return `            <a class="adhd-reading-card" href="${href}">
@@ -36,13 +46,13 @@ function trustBlock({ photo, photoAlt, serviceLine, quote, cite, bullets }) {
             <img src="${photo}" width="1100" height="733" alt="${photoAlt}" loading="lazy" decoding="async" />
           </figure>
           <div class="trust-metrics-rewrite-inner">
-          <h2 class="trust-metrics-rewrite-headline">Trusted by <span class="trust-metric-value" data-target="2200" data-suffix="+">2,200+</span> adults for physician-led care</h2>
+          <h2 class="trust-metrics-rewrite-headline">Trusted by <span class="trust-metric-value" data-target="${PATIENTS_NUM}" data-suffix="+">${PATIENTS}</span> adults for physician-led care</h2>
           <p class="trust-metrics-rewrite-line">
             <span aria-hidden="true">⭐</span>
-            <span class="trust-metric-value" data-target="4.8" data-suffix="★">4.8★</span> average Google rating · <span class="trust-metric-value" data-target="600" data-suffix="+">600+</span> verified patient reviews
+            <span class="trust-metric-value" data-target="${GOOGLE_RATING}" data-suffix="★">${GOOGLE_RATING_STAR}</span> average Google rating · <span class="trust-metric-value" data-target="${VERIFIED_NUM}" data-suffix="+">${VERIFIED}</span> verified patient reviews
           </p>
           <p class="trust-metrics-rewrite-line trust-metrics-rewrite-line-strong">
-            <span class="trust-metric-value" data-target="2200" data-suffix="+">2,200+</span> patients treated
+            <span class="trust-metric-value" data-target="${PATIENTS_NUM}" data-suffix="+">${PATIENTS}</span> patients treated
           </p>
           <p class="trust-metrics-rewrite-meta">${serviceLine}</p>
           <blockquote class="hero-inline-testimonial trust-metrics-quote">

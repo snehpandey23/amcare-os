@@ -1,9 +1,13 @@
 # LinkedIn Company — AD-W-01
 
-Women: ADHD often missed as anxiety or BPD-like labels
+ADHD in women gets missed.
 
-If mood labels never quite fit, ask your clinician about lifelong ADHD history — don't self-diagnose BPD vs ADHD from social media.
+Sometimes the working label becomes anxiety, personality, or “too emotional.” Overlap symptoms are real — and BPD and ADHD can co-occur or be mistaken for each other.
+
+Clinicians separate stories with timeline questions: When did this start? Has this always been present — or is it mainly a relationship-crisis pattern?
+
+Practical next step: bring a lifelong timeline to share your full history. If the labels never fit, ask whether ADHD screening is available.
 
 https://siya.health/blog/adhd-hormones-women
 
-Educational only.
+Educational only. Not a diagnosis.

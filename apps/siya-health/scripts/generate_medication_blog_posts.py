@@ -355,55 +355,27 @@ POSTS.append(
 
 POSTS.append(
     {
+        # RESTORED URL (Aug 2026 SEO): do not auto-regenerate clinical body from this entry
+        # until clinician review. Live page is a structural scaffold with NEEDS CONTENT markers.
         "slug": "focalin-vs-adderall-comparison",
-        "title": "Focalin vs Adderall for ADHD (2026): Methylphenidate vs Amphetamine | Siya Health",
-        "description": "Focalin vs Adderall in 2026: methylphenidate vs amphetamine class, dosing ideas, duration, side effects, and how clinicians pick stimulants for adults.",
-        "og_title": "Focalin vs Adderall: What Adults Should Know",
-        "h1": "Focalin vs Adderall: What Adults Should Know (2026)",
-        "lead": "Focalin (dexmethylphenidate) and Adderall (mixed amphetamine salts) belong to different stimulant families used for ADHD. Adults researching focalin vs adderall comparisons should understand class differences, not just brand names—and should defer final decisions to a licensed prescriber after a diagnostic evaluation.",
+        "title": "Focalin vs Adderall: Key Differences for Adults | Siya Health",
+        "description": "Focalin vs Adderall for adults with ADHD: methylphenidate vs amphetamine class, duration, side effects, and questions to discuss with your clinician—education only.",
+        "og_title": "Focalin vs Adderall: Key Differences for Adults",
+        "h1": "Focalin vs Adderall: Key Differences for Adults",
+        "lead": "Adults comparing Focalin and Adderall are usually choosing between stimulant families—not brand popularity. Educational overview only; defer decisions to a licensed prescriber after evaluation.",
         "body": """
-            <h2>Two stimulant families: methylphenidate and amphetamine</h2>
-            <p>Methylphenidate-based medications (including Focalin’s active moiety) and amphetamine-based medications (including Adderall) both increase catecholamine signaling, but their chemical structures differ. Some patients respond clearly to one class and not the other; some tolerate side effects better on one side of the family. This variability is normal and expected.</p>
-
-            <h2>What Focalin is</h2>
-            <p>Focalin contains dexmethylphenidate, the more pharmacologically active enantiomer related to methylphenidate. It is prescribed for ADHD in immediate-release and extended-release forms under various brand and generic names. It remains a controlled substance with similar prescribing safeguards as amphetamine stimulants.</p>
-
-            <h2>What Adderall is</h2>
-            <p>Adderall is an amphetamine salt combination used for ADHD and sometimes narcolepsy under specialist care. Like Focalin, it requires monitoring for cardiovascular effects, psychiatric symptoms, appetite, and misuse risk.</p>
-
-            <h2>Why one person responds to Focalin and another to Adderall</h2>
-            <p>Genetics, metabolism, comorbid anxiety, sleep quality, substance use, and even gastrointestinal absorption influence response. Clinicians often select a starting medication based on history and adjust based on benefits, side effects, and practical factors like duration of action needed for work schedules.</p>
-
-            <h2>Side effects: patterns to watch</h2>
-            <p>Both families can cause insomnia, appetite suppression, elevated blood pressure or heart rate, irritability, and rebound symptoms. Anxiety-sensitive individuals sometimes struggle with certain amphetamine preparations; others do well. There is no universal rule—only individualized titration and follow-up.</p>
-
-            <h2>Cardiovascular considerations for both</h2>
-            <p>Adults over thirty—especially with hypertension, arrhythmias, or family history of sudden cardiac death—should receive appropriate screening as guided by their clinician. Stimulants are not automatically contraindicated, but risk stratification matters.</p>
-
-            <h2>Switching between classes</h2>
-            <p>Switching from an amphetamine to methylphenidate (or reverse) may require washout periods or cross-titration to avoid overlapping side effects or withdrawal-like fatigue. These plans should never be improvised from articles or forums.</p>
-
-            <h2>Takeaways</h2>
-            <p>Focalin vs Adderall is not a popularity contest; it is a medical optimization problem. The goal is safer, more functional days with transparent discussion of trade-offs.</p>
+            <aside class="clinical-review clinical-review--pending" data-needs-clinical-review="true">
+              <p class="clinical-review-label">NEEDS CLINICAL REVIEW</p>
+              <p>Full comparison sections are placeholders. Do not invent dosing or efficacy claims in automation.</p>
+            </aside>
+            <h2>Focalin vs Adderall — comparison outline</h2>
+            <p>NEEDS CONTENT: clinician-approved comparison sections.</p>
+            <h2>Questions to bring to your clinician</h2>
+            <p>NEEDS CONTENT: clinician-approved visit checklist.</p>
+            <h2>FAQ</h2>
+            <p>NEEDS CONTENT: FAQ answers + FAQPage schema after clinical review.</p>
         """,
-        "faqs": [
-            (
-                "Is Focalin the same as Ritalin?",
-                "They share a methylphenidate lineage but differ in exact compound and release profile. Your pharmacist and prescriber clarify what your specific prescription contains.",
-            ),
-            (
-                "Can I try Adderall if Focalin failed?",
-                "Sometimes yes—after evaluation for adherence, dose adequacy, and comorbid conditions. Changes require medical supervision.",
-            ),
-            (
-                "Do methylphenidate stimulants have less misuse risk?",
-                "Both families are controlled substances. Misuse risk depends on the individual, dose, and context—not solely on drug class.",
-            ),
-            (
-                "How long should a stimulant trial last?",
-                "Many clinicians reassess within a few weeks of a stable dose, but timelines vary. Track benefits and side effects to share at follow-up.",
-            ),
-        ],
+        "faqs": [],
         "related": [
             ("vyvanse-vs-adderall-differences", "Vyvanse vs Adderall: differences"),
             ("adhd-medication-options-for-adults", "ADHD medication options for adults"),
@@ -412,6 +384,9 @@ POSTS.append(
         ],
     }
 )
+
+# Original clinical body archived — see git history / docs/ADHD-CITY-LANDING-CONTENT-NEEDED.md
+_FOCALIN_ARCHIVED = True  # noqa: F841
 
 POSTS.append(
     {

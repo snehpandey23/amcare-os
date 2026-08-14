@@ -1,5 +1,10 @@
 import { generateText } from "ai";
-import { getWorkforceModel, workforceLlmEnabled } from "./model";
+import {
+  getWorkforceModel,
+  markWorkforceLlmFailure,
+  markWorkforceLlmSuccess,
+  workforceLlmConfigured,
+} from "./model";
 
 /** Optional polish for admin ops replies — must preserve facts from snapshotSummary. */
 export async function synthesizeAdminOpsAnswer(opts: {
@@ -8,7 +13,7 @@ export async function synthesizeAdminOpsAnswer(opts: {
   snapshotSummary: string;
   history: { role: string; content: string }[];
 }): Promise<string | null> {
-  if (!workforceLlmEnabled()) return null;
+  if (!workforceLlmConfigured()) return null;
   if (process.env.SIYA_ADMIN_OPS_USE_LLM === "0") return null;
 
   const system = `You are Siya Assist in **admin operations co-pilot** mode for a telehealth company.
@@ -45,8 +50,13 @@ Rules:
       maxOutputTokens: 520,
     });
     const trimmed = text.trim();
-    return trimmed.length > 40 ? trimmed : null;
-  } catch {
+    if (trimmed.length > 40) {
+      markWorkforceLlmSuccess();
+      return trimmed;
+    }
+    return null;
+  } catch (err) {
+    markWorkforceLlmFailure(err);
     return null;
   }
 }

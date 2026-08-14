@@ -1,9 +1,9 @@
-# LinkedIn Company — AD-S-01
+# LinkedIn (Company only) — AD-S-01
 
-You're not lazy — overlooked adult ADHD
+“Trying hard and still falling behind” is a recognition phrase many adults with overlooked ADHD describe — not laziness.
 
-Take a validated ADHD screener — then talk to a clinician if the pattern is lifelong.
+Missed deadlines, mental clutter, time blindness, and emotional overwhelm can sit behind years of coping. Adult diagnosis is common when childhood clues were subtle.
 
-https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd
+Educational content. Screening is not diagnosis. Talk to a clinician if the pattern is lifelong.
 
-Educational only.
+siya.health

@@ -1,10 +1,7 @@
 # Pinterest — AD-S-01
 
-## Pin title
-You're not lazy — overlooked adult ADHD
+You’re not lazy.
 
-## Pin description
-Take a validated ADHD screener — then talk to a clinician if the pattern is lifelong. Educational from Siya Health. https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd
+Overlooked adult ADHD · recognition · talk to a clinician.
 
-## URL
-https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd
+siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd

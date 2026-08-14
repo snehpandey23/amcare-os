@@ -37,14 +37,35 @@ export async function fetchSopContext(): Promise<{
   isAdmin: boolean;
   myLeadSlugs: string[];
   departmentLeads: DepartmentLead[];
+  approvalRoutes: {
+    department: string;
+    departmentSlug: string;
+    approvalMode: "lead_self" | "founder";
+    reason: string;
+    reviewerLabel: string;
+    leadName: string | null;
+    leadEmail: string | null;
+  }[];
 }> {
   const data = (await sopFetch("/api/knowledge/sops/context")) as {
     departments: string[];
     isAdmin: boolean;
     myLeadSlugs: string[];
     departmentLeads: DepartmentLead[];
+    approvalRoutes?: {
+      department: string;
+      departmentSlug: string;
+      approvalMode: "lead_self" | "founder";
+      reason: string;
+      reviewerLabel: string;
+      leadName: string | null;
+      leadEmail: string | null;
+    }[];
   };
-  return data;
+  return {
+    ...data,
+    approvalRoutes: data.approvalRoutes ?? [],
+  };
 }
 
 export async function fetchSopsForRetrieval(authToken?: string | null): Promise<
@@ -108,11 +129,39 @@ export async function updateSop(
   return data.sop;
 }
 
-export async function submitSopForReview(id: string): Promise<SopRecord> {
-  const data = (await sopFetch(`/api/knowledge/sops/${id}/submit`, { method: "POST", body: "{}" })) as {
-    sop: SopRecord;
-  };
-  return data.sop;
+/** Same-origin BFF — proxies auth API and sends Resend review emails. */
+async function staffPortalFetch(path: string, init?: RequestInit) {
+  const token = getStoredToken();
+  if (!token) throw new Error("Sign in required.");
+  const res = await fetch(path, {
+    ...init,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+      ...init?.headers,
+    },
+  });
+  const data = (await res.json().catch(() => ({}))) as { error?: string };
+  if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+  return data;
+}
+
+export type SopSubmitEmailStatus = {
+  sent: boolean;
+  error?: string;
+  to?: string[];
+  id?: string;
+};
+
+export async function submitSopForReview(
+  id: string,
+): Promise<{ sop: SopRecord; email: SopSubmitEmailStatus | null }> {
+  const data = (await staffPortalFetch(`/api/knowledge/sops/${encodeURIComponent(id)}/submit`, {
+    method: "POST",
+    body: "{}",
+  })) as { sop: SopRecord; email?: SopSubmitEmailStatus | null };
+  if (!data.sop) throw new Error("Submit failed");
+  return { sop: data.sop, email: data.email ?? null };
 }
 
 export async function fetchSopReviewQueue(): Promise<SopRecord[]> {
@@ -121,14 +170,15 @@ export async function fetchSopReviewQueue(): Promise<SopRecord[]> {
 }
 
 export async function approveSop(id: string): Promise<SopRecord> {
-  const data = (await sopFetch(`/api/admin/sops/${id}/approve`, { method: "POST", body: "{}" })) as {
-    sop: SopRecord;
-  };
+  const data = (await staffPortalFetch(`/api/admin/sops/${encodeURIComponent(id)}/approve`, {
+    method: "POST",
+    body: "{}",
+  })) as { sop: SopRecord };
   return data.sop;
 }
 
 export async function sendBackSop(id: string, comment: string): Promise<SopRecord> {
-  const data = (await sopFetch(`/api/admin/sops/${id}/send-back`, {
+  const data = (await staffPortalFetch(`/api/admin/sops/${encodeURIComponent(id)}/send-back`, {
     method: "POST",
     body: JSON.stringify({ comment }),
   })) as { sop: SopRecord };
@@ -174,22 +224,123 @@ export async function createSopTask(payload: {
   return data.task;
 }
 
+export type SopDraftAssistOk = {
+  ok: true;
+  draft: { title: string; body: string; method?: string; note?: string };
+  note?: string;
+  method?: string;
+};
+export type SopDraftAssistThin = {
+  ok: false;
+  code: "answers_not_substantive";
+  followUp: string;
+  weakFields?: string[];
+  reason?: string;
+};
+export type SopDraftAssistFail = {
+  ok: false;
+  code: string;
+  error: string;
+  retryable?: boolean;
+};
+
 export async function fetchSopDraftAssist(
   department: string,
-  answers: SopDraftAnswers,
-): Promise<{ title: string; body: string }> {
+  answers: SopDraftAnswers | null,
+  opts?: {
+    acceptThinAnswers?: boolean;
+    refineInstruction?: string;
+    currentDraft?: { title: string; body: string };
+  },
+): Promise<SopDraftAssistOk | SopDraftAssistThin | SopDraftAssistFail> {
   const token = getStoredToken();
-  if (!token) throw new Error("Sign in required.");
+  if (!token) return { ok: false, code: "auth", error: "Sign in required." };
   const res = await fetch("/api/knowledge/sops/draft-assist", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ department, answers }),
+    body: JSON.stringify({
+      department,
+      answers: answers ?? undefined,
+      acceptThinAnswers: Boolean(opts?.acceptThinAnswers),
+      refineInstruction: opts?.refineInstruction,
+      currentDraft: opts?.currentDraft,
+    }),
   });
-  const data = (await res.json().catch(() => ({}))) as { draft?: { title: string; body: string }; error?: string };
-  if (!res.ok) throw new Error(data.error || "Draft assist failed");
-  if (!data.draft) throw new Error("No draft returned");
-  return data.draft;
+  const data = (await res.json().catch(() => ({}))) as {
+    draft?: { title: string; body: string; method?: string; note?: string };
+    error?: string;
+    code?: string;
+    followUp?: string;
+    weakFields?: string[];
+    reason?: string;
+    retryable?: boolean;
+    note?: string;
+    method?: string;
+  };
+  if (res.status === 422 && data.code === "answers_not_substantive") {
+    return {
+      ok: false,
+      code: "answers_not_substantive",
+      followUp: data.followUp || data.error || "Some answers need more detail.",
+      weakFields: data.weakFields,
+      reason: data.reason,
+    };
+  }
+  if (!res.ok) {
+    return {
+      ok: false,
+      code: data.code || "draft_assist_failed",
+      error: data.error || "Draft assist failed",
+      retryable: data.retryable,
+    };
+  }
+  if (!data.draft) return { ok: false, code: "draft_assist_failed", error: "No draft returned" };
+  return {
+    ok: true,
+    draft: data.draft,
+    note: data.note || data.draft.note,
+    method: data.method || data.draft.method,
+  };
+}
+
+export type SopSubmitFeedbackPayload = {
+  purposeComplete: boolean;
+  scopeComplete: boolean;
+  stepsComplete: boolean;
+  exceptionsComplete: boolean;
+  escalationComplete: boolean;
+  stepsSpecific: boolean;
+  possibleDuplicate: boolean;
+  duplicateOfTitle: string | null;
+  summary: string;
+  suggestions: string[];
+  readyHint: "looks_ready" | "needs_work";
+  heuristicOnly?: boolean;
+};
+
+export async function fetchSopSubmitFeedback(opts: {
+  title: string;
+  body: string;
+  department: string;
+}): Promise<{ feedback: SopSubmitFeedbackPayload; note?: string }> {
+  const token = getStoredToken();
+  if (!token) throw new Error("Sign in required.");
+  const res = await fetch("/api/knowledge/sops/submit-feedback", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(opts),
+  });
+  const data = (await res.json().catch(() => ({}))) as {
+    feedback?: SopSubmitFeedbackPayload;
+    note?: string;
+    error?: string;
+  };
+  if (!res.ok || !data.feedback) throw new Error(data.error || "AI review failed");
+  return { feedback: data.feedback, note: data.note };
 }

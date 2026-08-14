@@ -48,14 +48,6 @@ const wrapText = (
   return lines;
 };
 
-const PRACTICE_INFO = {
-  name: "Amcare India",
-  address: "39 Mukta Vihar, Naini, Prayagraj 211009",
-  contact: "9621550481",
-  doctorLine: "Dr. SP Pandey MBBS MD Dipl. ABOM",
-  regNo: "UPMC RegNo 91493",
-};
-
 const sanitizeText = (value: string) =>
   value.replace(/[^\x20-\x7E]/g, "").trim();
 
@@ -89,12 +81,18 @@ export const generatePDF = async (input: GeneratePDFInput) => {
   const doctorFontSize = Math.round(nameFontSize * 0.75);
   const headerLineHeight = 19;
 
+  const doctorLine = [input.doctorName, input.degree]
+    .map((s) => sanitizeText(s || ""))
+    .filter(Boolean)
+    .join(" ");
+
   const safePractice = {
-    name: sanitizeText(PRACTICE_INFO.name),
-    address: sanitizeText(PRACTICE_INFO.address),
-    contact: sanitizeText(PRACTICE_INFO.contact),
-    doctorLine: sanitizeText(PRACTICE_INFO.doctorLine),
-    regNo: sanitizeText(PRACTICE_INFO.regNo),
+    name: sanitizeText(input.clinicName || "Clinic"),
+    address: sanitizeText(input.clinicAddress || ""),
+    contact: sanitizeText(input.clinicContact || ""),
+    doctorLine: doctorLine || "Prescriber",
+    regNo: sanitizeText(input.regNo || ""),
+    signatureName: sanitizeText(input.doctorName || "Prescriber"),
   };
 
   if (input.letterheadImage) {
@@ -145,19 +143,21 @@ export const generatePDF = async (input: GeneratePDFInput) => {
         });
         textY -= headerLineHeight;
       });
-      page.drawText(`Contact: ${safePractice.contact}`, {
-        x: centeredX(
-          `Contact: ${safePractice.contact}`,
-          serif,
-          10.5,
-          width
-        ),
-        y: textY,
-        size: 10.5,
-        font: serif,
-        color: rgb(0.2, 0.2, 0.2),
-      });
-      textY -= headerLineHeight + 4;
+      if (safePractice.contact) {
+        page.drawText(`Contact: ${safePractice.contact}`, {
+          x: centeredX(
+            `Contact: ${safePractice.contact}`,
+            serif,
+            10.5,
+            width
+          ),
+          y: textY,
+          size: 10.5,
+          font: serif,
+          color: rgb(0.2, 0.2, 0.2),
+        });
+        textY -= headerLineHeight + 4;
+      }
       page.drawText(safePractice.doctorLine, {
         x: centeredX(safePractice.doctorLine, serifBold, doctorFontSize, width),
         y: textY,
@@ -166,13 +166,15 @@ export const generatePDF = async (input: GeneratePDFInput) => {
         color: rgb(0, 0, 0),
       });
       textY -= headerLineHeight;
-      page.drawText(safePractice.regNo, {
-        x: centeredX(safePractice.regNo, serif, 10.5, width),
-        y: textY,
-        size: 10.5,
-        font: serif,
-        color: rgb(0.2, 0.2, 0.2),
-      });
+      if (safePractice.regNo) {
+        page.drawText(safePractice.regNo, {
+          x: centeredX(safePractice.regNo, serif, 10.5, width),
+          y: textY,
+          size: 10.5,
+          font: serif,
+          color: rgb(0.2, 0.2, 0.2),
+        });
+      }
 
       const headerHeight = imgHeight + (headerTopY - textY) + 18;
       cursorY -= headerHeight + 2;
@@ -206,19 +208,21 @@ export const generatePDF = async (input: GeneratePDFInput) => {
       });
       cursorY -= headerLineHeight;
     });
-    page.drawText(`Contact: ${safePractice.contact}`, {
-      x: centeredX(
-        `Contact: ${safePractice.contact}`,
-        serif,
-        10.5,
-        width
-      ),
-      y: cursorY,
-      size: 10.5,
-      font: serif,
-      color: rgb(0.2, 0.2, 0.2),
-    });
-    cursorY -= headerLineHeight + 4;
+    if (safePractice.contact) {
+      page.drawText(`Contact: ${safePractice.contact}`, {
+        x: centeredX(
+          `Contact: ${safePractice.contact}`,
+          serif,
+          10.5,
+          width
+        ),
+        y: cursorY,
+        size: 10.5,
+        font: serif,
+        color: rgb(0.2, 0.2, 0.2),
+      });
+      cursorY -= headerLineHeight + 4;
+    }
     page.drawText(safePractice.doctorLine, {
       x: centeredX(safePractice.doctorLine, serifBold, doctorFontSize, width),
       y: cursorY,
@@ -227,14 +231,16 @@ export const generatePDF = async (input: GeneratePDFInput) => {
       color: rgb(0, 0, 0),
     });
     cursorY -= headerLineHeight;
-    page.drawText(safePractice.regNo, {
-      x: centeredX(safePractice.regNo, serif, 10.5, width),
-      y: cursorY,
-      size: 10.5,
-      font: serif,
-      color: rgb(0.2, 0.2, 0.2),
-    });
-    cursorY -= 6;
+    if (safePractice.regNo) {
+      page.drawText(safePractice.regNo, {
+        x: centeredX(safePractice.regNo, serif, 10.5, width),
+        y: cursorY,
+        size: 10.5,
+        font: serif,
+        color: rgb(0.2, 0.2, 0.2),
+      });
+      cursorY -= 6;
+    }
   }
   page.drawLine({
     start: { x: marginX, y: cursorY },
@@ -414,7 +420,7 @@ export const generatePDF = async (input: GeneratePDFInput) => {
   }
 
   if (!signatureDrawn) {
-    page.drawText("Sneh Pandey", {
+    page.drawText(safePractice.signatureName, {
       x: signatureX,
       y: signatureY,
       size: 16,

@@ -1,281 +1,209 @@
-# Daily Tasks Workflow - Clinical Program Manager
+# Daily Tasks & SOP Checklists — SiyaOS operational workflow
 
-Based on the SOW requirements, this document outlines the daily task workflow for Clinical Program Managers in the AmCare OS system.
+This document is the **operating model** for the staff portal Daily Tasks module. It is separate from Knowledge-layer department SOPs at `/grow/sops` (editorial / AI-assisted SOP workspace).
 
-## Task Categories
-
-### 1. Payment Check 💳
-**Purpose:** Verify payment status and process billing-related tasks
-
-**Workflow:**
-1. Review daily payment reports from Zoho
-2. Check payment status for scheduled appointments
-3. Verify insurance pre-authorizations
-4. Process payment confirmations
-5. Flag any payment issues for follow-up
-6. Update billing records in EHR
-
-**Zoho Integration:**
-- Sync payment records from Zoho Books
-- Match payments to patient appointments
-- Update payment status in real-time
-
-**Deliverable:** All payments verified and processed before patient visits
+**Code:** `integrations/hipaa-training-api` (API + cron) · `apps/hipaa-training` (My Day, admin board, template manager)
 
 ---
 
-### 2. Form Completion 📝
-**Purpose:** Process patient intake forms and pre-visit documentation
+## Purpose
 
-**Workflow:**
-1. Review pending intake forms
-2. Verify form completeness
-3. Flag missing or incomplete information
-4. Process completed forms
-5. Upload forms to EHR
-6. Notify providers of completed forms
+Turn recurring operational work into **assignable, completable tasks** with an **immutable activity ledger**. v1 optimizes for one loop:
 
-**Zoho Integration:**
-- Sync form submissions from Zoho CRM
-- Track form completion status
-- Link forms to patient records
-
-**Deliverable:** 100% of forms processed before scheduled appointments
+1. Admin defines an SOP **template** (checklist + recurrence + one assignee).
+2. **Cron** (and first My Day load) **generates** today’s task instance.
+3. Staff completes checklist on **My Day**.
+4. Admin verifies on **Task board**.
+5. **Activity logs** record who did what, from which **source**.
 
 ---
 
-### 3. Pre-Charting 📋
-**Purpose:** Prepare patient charts before provider visits
+## Architecture
 
-**Workflow:**
-1. Review patient charts 15 minutes before scheduled appointments
-2. Verify all required documents are present
-3. Compile medical history and previous encounter notes
-4. Flag missing information or outstanding items
-5. Prepare provider briefing documents
-6. Ensure charts are ready for provider review
+```text
+SOP Template (siya_sop_templates)
+        │
+        │ cron / GET /api/tasks/me (lazy gen)
+        ▼
+Task instance (siya_tasks)  ──►  Task activity ledger (siya_task_activity_logs)
+        │
+        └── source_sop_template_id
 
-**Zoho Integration:**
-- Sync patient data from Zoho CRM
-- Pull appointment details
-- Verify chart completeness
+Template changes  ──►  Template activity ledger (siya_sop_template_activity_logs)
+```
 
-**Deliverable:** 100% of files ready 15 minutes before scheduled appointments
+| Layer | Table | Question it answers |
+|-------|--------|-------------------|
+| Task ledger | `siya_task_activity_logs` | What happened on this task today? |
+| Template ledger | `siya_sop_template_activity_logs` | Why does this workflow exist / who changed it? |
 
----
+**Event vocabulary (v1, frozen):** see `integrations/hipaa-training-api/src/task-activity-events.ts`
 
-### 4. Chat Review 💬
-**Purpose:** Review and respond to patient communications
+- Tasks: `created` · `status_changed` · `checklist_updated` · `assigned` · `deleted`
+- Templates: `created` · `updated` · `activated` · `deactivated`
+- **Source** on every row: `cron` · `admin_ui` · `staff_ui` · `api` · `system`
 
-**Workflow:**
-1. Review new patient messages in secure portal
-2. Categorize messages (routine vs. clinical)
-3. Respond to routine inquiries within 24 hours
-4. Escalate clinical questions to providers immediately
-5. Send appointment reminders and pre-visit instructions
-6. Document all communications in patient records
-
-**Zoho Integration:**
-- Sync patient communications from Zoho CRM
-- Track response times
-- Link messages to patient records
-
-**Deliverable:** 100% of non-clinical inquiries answered within 24 hours
+Comments live on `siya_tasks.notes` (not task ledger events in v1).
 
 ---
 
-### 5. Fax Handling 📠
-**Purpose:** Process incoming faxes and medical documents
+## Deploy & release order (P0)
 
-**Workflow:**
-1. Monitor incoming faxes
-2. Categorize faxes by type (lab results, referrals, etc.)
-3. Route faxes to appropriate providers
-4. Upload faxes to patient records in EHR
-5. Notify providers of urgent faxes
-6. Archive processed faxes
+Do **not** deploy staff before API + env + schema are verified.
 
-**Zoho Integration:**
-- Sync fax metadata to Zoho CRM
-- Link faxes to patient records
-- Track fax processing times
+```text
+1. npm run build && npm run test:tasks     (API package)
+2. DATABASE_URL=... npm run migrate:status
+3. Deploy API (integrations/hipaa-training-api)
+4. curl /api/health
+5. Set CRON_SECRET on Vercel (auth API project)
+6. Manual cron once → confirm created count + no duplicate ids
+7. npm run smoke:tasks (SMOKE_EMAIL, SMOKE_PASSWORD, optional CRON_SECRET + DATABASE_URL)
+8. Deploy staff app (vercel.siya-staff-assist.json from repo root)
+9. Human acceptance (one real template, one completion, admin verifies, SQL ledger check)
+10. Seed **staging only** until loop passes — not production
+```
 
-**Deliverable:** All faxes processed and routed within 2 hours of receipt
-
----
-
-### 6. Note Locking 🔒
-**Purpose:** Complete clinical documentation and lock visit notes
-
-**Workflow:**
-1. Review provider notes post-visit
-2. Transcribe notes into patient records
-3. Verify accuracy of clinical codes and documentation
-4. Flag missing or incomplete documentation
-5. Complete visit summaries
-6. Lock notes within 4 hours of appointment conclusion
-
-**Zoho Integration:**
-- Sync visit summaries to Zoho CRM
-- Update patient encounter records
-- Track documentation completion
-
-**Deliverable:** All documentation completed within 4 hours of appointment conclusion
+Deploy commands: `.cursor/rules/staff-portal-vercel-deploy.mdc`
 
 ---
 
-## Daily Workflow Schedule
+## Cron behavior
 
-### Morning Routine (8:00 AM EST / 6:30 PM IST)
-1. **System Check** - Verify all systems operational
-2. **Daily Briefing** - Review daily schedule and priorities
-3. **Payment Check** - Process overnight payments
-4. **Form Completion** - Review and process pending forms
+- **Schedule:** `0 11 * * *` UTC (~6 AM US Eastern) → `POST /api/cron/generate-daily-tasks`
+- **Auth:** `Authorization: Bearer $CRON_SECRET` (or `x-cron-secret`)
+- **Logic:** For each **active** template, if recurrence matches **today’s date**, insert task id `sop-{templateId}-{YYYY-MM-DD}` with `ON CONFLICT DO NOTHING` (no duplicate daily instances).
+- **Also:** `markOverdueTasks` runs on the same endpoint.
+- **Lazy generation:** `GET /api/tasks/me` calls the same generator for the requested date (backstop if cron missed).
 
-### Pre-Visit Preparation (Throughout Day)
-1. **Pre-Charting** - Prepare charts 15 minutes before each appointment
-2. **System Testing** - Test equipment before each patient session
+Manual run:
 
-### During Business Hours
-1. **Chat Review** - Monitor and respond to patient messages
-2. **Fax Handling** - Process incoming faxes
-3. **Real-time Updates** - Update Zoho sync continuously
+```bash
+curl -X POST -H "Authorization: Bearer $CRON_SECRET" \
+  "https://siya-staff-auth-api.vercel.app/api/cron/generate-daily-tasks"
+```
 
-### Post-Visit Tasks
-1. **Note Locking** - Complete documentation within 4 hours
-2. **Follow-up** - Flag any missing information
+Optional date override: `?date=2026-07-28`
 
-### End of Day (5:00 PM EST / 3:30 AM IST)
-1. **Daily Reports** - Generate utilization reports
-2. **Compliance Check** - Verify all tasks completed
-3. **Next Day Prep** - Prepare next day's schedule
+Response includes **`created`** and **`skipped`** (existing instances for that date). Second cron run should show `created: 0` and `skipped ≥ 1` when templates already ran.
 
----
+Idempotency check:
 
-## Zoho Real-Time Sync
-
-### Sync Frequency
-- **Real-time:** Payment updates, form submissions, chat messages
-- **Every 15 minutes:** Appointment changes, patient updates
-- **Every 30 seconds:** Task status updates (for dashboard display)
-
-### Data Synchronized
-- Patient records
-- Appointment schedules
-- Payment status
-- Form submissions
-- Chat messages
-- Visit summaries
-- Task assignments
-
-### Sync Status Indicators
-- 🟢 **Success:** All data synced successfully
-- 🟡 **Syncing:** Sync in progress
-- 🔴 **Error:** Sync failed, retrying
+```bash
+curl -X POST -H "Authorization: Bearer $CRON_SECRET" ".../api/cron/generate-daily-tasks"
+# repeat — expect created: 0, skipped unchanged task rows preserved
+```
 
 ---
 
-## Task Priority Levels
+## Template creation rules
 
-### High Priority
-- Pre-charting tasks (must be done 15 min before appointment)
-- Urgent patient communications
-- Payment issues affecting appointments
-- Missing documentation flags
-
-### Medium Priority
-- Routine form processing
-- Standard chat responses
-- Fax routing
-- Note transcription
-
-### Low Priority
-- Report generation
-- Administrative tasks
-- Non-urgent follow-ups
+- **Admin only:** `/admin/task-templates`
+- One **assigned person** per template (`assigned_to_user_id`)
+- Recurrence: `daily` | `weekly` (configurable days) | `monthly` | `custom_cron` (API only in v1)
+- Checklist steps: `{ id, label, order }` — copied into each generated task
+- **Active** toggle: inactive templates do not generate tasks
+- Template create/update/deactivate → **template activity ledger**
 
 ---
 
-## Quality Assurance
+## Task lifecycle
 
-### Daily Checks
-- All tasks assigned and tracked
-- No overdue tasks
-- All appointments have pre-charted files
-- All communications responded to
+| Type | Origin | Id pattern |
+|------|--------|------------|
+| `sop` | Template + date | `sop-{templateId}-{date}` |
+| `adhoc` | Admin/staff POST | `adhoc-{uuid}` |
 
-### Weekly Reviews
-- Task completion rates
-- Response time metrics
-- Documentation accuracy
-- Compliance adherence
+**Statuses:** `todo` · `in_progress` · `done` · `overdue` (computed when due date/time passed and not done)
 
-### Monthly Audits
-- HIPAA compliance review
-- Data accuracy audit
-- Performance metrics review
-- Training completion verification
+**Permissions:**
+
+- Admin: board, templates, assign adhoc to others, reassign
+- Staff: own tasks — status, checklist, comments
+
+**Checklist:** `PATCH /api/tasks/:id/checklist-item/:itemId` — toggles item; may auto-set `done` when all checked.
 
 ---
 
-## Escalation Procedures
+## Troubleshooting
 
-### Technical Issues
-1. Attempt basic troubleshooting
-2. Restart systems if needed
-3. Escalate to IT if unresolved
-4. Document issue in system
+| Symptom | Check |
+|---------|--------|
+| No tasks on My Day | Template active? Assignee = logged-in user? Recurrence matches today? Cron or `/api/tasks/me` run? |
+| Duplicate tasks | Should not happen — id is deterministic; query `siya_tasks` for same id |
+| Cron 401 | `CRON_SECRET` on Vercel matches header |
+| 503 on task routes | `DATABASE_URL` on auth API |
+| migrate:status fails | Hit any authenticated route once (runs `ensureTaskTables`) or apply `tasks-schema.sql` |
+| Admin board empty | Date filters default ~14d window; widen `from`/`to` query params |
+| Activity missing | Query `siya_task_activity_logs` for `task_id`; expect `source` = `staff_ui` / `cron` |
 
-### Clinical Questions
-1. Immediately escalate to provider
-2. Do not provide clinical advice
-3. Document escalation in patient record
+**Ledger spot-check:**
 
-### Compliance Concerns
-1. Report immediately to supervisor
-2. Document incident
-3. Follow incident response protocol
-4. Update compliance logs
-
----
-
-## Integration Points
-
-### Zoho CRM
-- Patient records
-- Appointment scheduling
-- Communication history
-- Task assignments
-
-### Zoho Books
-- Payment records
-- Invoice status
-- Billing information
-
-### EHR System
-- Patient charts
-- Clinical documentation
-- Visit summaries
-- Medical history
-
-### Telehealth Platform
-- Appointment links
-- Video session management
-- Equipment status
+```sql
+SELECT action, source, metadata, created_at
+FROM siya_task_activity_logs
+WHERE task_id = 'sop-...'
+ORDER BY created_at;
+```
 
 ---
 
-## Performance Tracking
+## Rollback
 
-### Key Metrics
-- Task completion rate
-- Response time
-- Documentation accuracy
-- System uptime
-- Compliance score
+1. **Staff app only:** Redeploy previous Vercel deployment for `siya-staff-assist` (UI rollback; data unchanged).
+2. **API:** Redeploy previous `siya-staff-auth-api` build from `integrations/hipaa-training-api`.
+3. **Disable generation:** Deactivate all templates (`active = false`) or remove cron in Vercel dashboard temporarily.
+4. **Data:** Tables are additive; rollback does not drop `siya_*` tables. To stop using module, deactivate templates — do not delete user rows.
 
-### Reporting
-- Daily task summary
-- Weekly utilization report
-- Monthly performance review
-- Quarterly compliance assessment
+---
+
+## P0 definition of done (exit criteria)
+
+P0 is complete when **reliable execution + reliable recording + human adoption signal** = operational memory foundation.
+
+### System reliability
+
+- [ ] Task generation works (cron + lazy `/api/tasks/me`)
+- [ ] Duplicate protection works (`created` / `skipped` on repeat cron)
+- [ ] Completion writes ledger events (`checklist_updated`, `status_changed`, `source` set)
+- [ ] Admin visibility works (board reflects assignee status without DMs)
+- [ ] SOP / workflow documentation exists (`daily-tasks-workflow.md`, team feedback doc)
+
+### Human reliability
+
+- [ ] Staff completes a task **without assistance**
+- [ ] Admin identifies status **without messaging people**
+- [ ] Mobile My Day is usable (screen-share or self-reported)
+- [ ] Feedback captured **after real usage** (not demo day)
+
+### Learning loop
+
+- [ ] Feedback location defined (sheet tab `OPS-TASKS-FEEDBACK`)
+- [ ] **Owner assigned** for weekly triage (name + calendar reminder)
+- [ ] Blocker vs improvement distinction enforced in sheet
+- [ ] Weekly review cadence established (see `daily-tasks-team-feedback.md`)
+
+**Automation (supporting, not substituting for human checks):** `npm run migrate:status` (twice, read-only) · `npm run smoke:tasks` · `npm run verify:audit-chain`
+
+### After P0 exit — freeze one week
+
+1. Deploy P0.
+2. Run one real workflow.
+3. Collect first feedback after usage.
+4. **Freeze observations for one week** (no Phase 2 code from anecdotes).
+5. Then decide Phase 2 from categorized root causes.
+
+---
+
+## Related docs
+
+- Staff app summary: `apps/hipaa-training/docs/DAILY-TASKS-SOP.md`
+- **Team UX feedback (questions + cadence):** `daily-tasks-team-feedback.md`
+- Recurrence tests: `npm run test:tasks` in API package
+- Seed (staging): `node scripts/seed-daily-tasks.mjs`
+
+---
+
+## Out of scope (v1)
+
+Proof on checklist items · team assignment · COO dashboard · template full editor · analytics · AI recommendations — see product backlog after P0 is boringly reliable.

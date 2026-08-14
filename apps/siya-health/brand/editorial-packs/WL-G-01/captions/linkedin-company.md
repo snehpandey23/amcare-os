@@ -1,9 +1,9 @@
-# LinkedIn Company — WL-G-01
+# LinkedIn (Company only) — WL-G-01
 
-How semaglutide actually works
+Public conversation often frames GLP-1 medicines as willpower shortcuts. Semaglutide acts on hunger and fullness pathways — appetite, gastric emptying, and food-reward cues — and still does not replace protein intake, strength training, or clinical follow-up.
 
-Before starting, ask about contraindications — and plan protein + resistance training if prescribed a GLP-1.
+Suitability depends on individual history, conditions, and medications. Patients should discuss personal risk with a clinician; if prescribed, plan protein and resistance training deliberately.
 
-https://siya.health/blog/semaglutide-for-weight-loss-how-it-works
+Educational content. Not a substitute for individualized medical advice.
 
-Educational only.
+siya.health

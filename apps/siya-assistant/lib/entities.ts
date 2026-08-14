@@ -1,23 +1,16 @@
 import entitiesData from '../data/knowledge-entities.json'
-import { LINK_REGISTRY } from './link-registry'
+import { LINK_REGISTRY, resolveLinks } from './link-registry'
 import type { GuideLink } from './types'
 
 /**
  * Public Knowledge API (internal abstraction) — Siya Knowledge Governance v1.0.
  *
  * Given a user query, resolve to a CANONICAL entity deterministically BEFORE any
- * LLM reasoning. Every surface (Siya Guide, provider tools, future apps) asks
- * "Fetch the canonical entity" instead of "What should I link?". This keeps the
- * website, chatbot, and knowledge graph pointing at one source of truth.
- *
- * Answers include intent + care_pathway so routing is shared — no surface invents
- * "symptom → primary care" vs "condition → specialty" on its own.
+ * LLM reasoning. Every surface asks "Fetch the canonical entity" instead of
+ * inventing URLs or CTAs. Registry IDs are the only source of link URLs.
  */
 
-/** Why the reader arrived — drives CTA and care pathway, not page layout. */
 export type EntityIntent = 'symptom' | 'condition' | 'service' | 'lab' | 'screening'
-
-/** Shared care destination every surface should route toward for this entity. */
 export type CarePathway =
   | 'primary_care'
   | 'adhd_care'
@@ -26,6 +19,7 @@ export type CarePathway =
   | 'womens_health'
   | 'mens_health'
   | 'telehealth'
+export type SafetyClass = 'general_information' | 'navigation' | 'restricted'
 
 export interface EntityCta {
   id: string
@@ -33,18 +27,21 @@ export interface EntityCta {
   url: string
 }
 
+export interface ApprovedAnswerBlock {
+  id: string
+  text: string
+}
+
 export interface KnowledgeEntity {
   entity: string
   name: string
   canonical_page: string
-  /** Required from registry v3 — symptom vs condition vs service, etc. */
   intent: EntityIntent
-  /** Required from registry v3 — shared routing target across all surfaces. */
   care_pathway: CarePathway
+  safety_class: SafetyClass
   aliases: string[]
   geo?: string
   topic?: string
-  /** Symptom hubs declare graph relationships (see /fatigue). */
   parents?: string[]
   children?: string[]
   labs?: string[]
@@ -53,15 +50,17 @@ export interface KnowledgeEntity {
   related_guides?: EntityCta[]
   related_services?: EntityCta[]
   related_entities: string[]
+  approved_answer_blocks: ApprovedAnswerBlock[]
   note?: string
 }
 
-/** Deterministic answer contract consumed by chatbot, search, apps, email. */
+/** Minimum Public Knowledge API response — consumed by Siya Guide and future surfaces. */
 export interface EntityAnswer {
   entity: string
   name: string
   intent: EntityIntent
   care_pathway: CarePathway
+  safety_class: SafetyClass
   canonical_page: string
   canonical_url: string
   primary_cta: GuideLink
@@ -69,6 +68,7 @@ export interface EntityAnswer {
   related_guides: GuideLink[]
   related_services: GuideLink[]
   related_entities: string[]
+  approved_answer_blocks: ApprovedAnswerBlock[]
 }
 
 const data = entitiesData as {
@@ -78,16 +78,22 @@ const data = entitiesData as {
 
 const SITE = 'https://www.siya.health'
 
-/** Absolute-URL a site-relative path. External/absolute URLs pass through. */
 function absolute(url: string): string {
-  if (/^https?:\/\//.test(url) || url.startsWith('mailto:') || url.startsWith('tel:')) return url
+  if (/^https?:\/\//.test(url) || url.startsWith('mailto:') || url.startsWith('tel:') || url.startsWith('sms:')) {
+    return url
+  }
   return `${SITE}${url.startsWith('/') ? '' : '/'}${url}`
 }
 
+/**
+ * Resolve a CTA/link id through the Public Links Registry.
+ * Never trust a separately typed path — humans duplicating URLs is how redirects gain employment.
+ */
 function toGuideLink(cta: EntityCta): GuideLink {
-  // Prefer the shared link registry URL when the id is registered (single source of truth).
   const rec = LINK_REGISTRY[cta.id]
-  return { id: cta.id, label: cta.label, url: rec ? rec.url : absolute(cta.url) }
+  if (rec) return { id: rec.id, label: cta.label || rec.label, url: rec.url }
+  // Soft fallback only if id missing from registry (should not happen in production).
+  return { id: cta.id, label: cta.label, url: absolute(cta.url) }
 }
 
 export function getEntity(id: string): KnowledgeEntity | null {
@@ -100,8 +106,22 @@ export function listEntities(): KnowledgeEntity[] {
 
 /**
  * Resolve a free-text query to the best-matching canonical entity.
- * Alias phrase match wins over token overlap. Returns null when nothing is confident.
+ * Longer alias phrase matches win. Geo + topic co-occurrence is a fallback.
+ * Weak substring hits are ignored so incidental phrasing cannot "verify" a page.
  */
+const MIN_ENTITY_ALIAS_SCORE = 15 // phrase aliases (len ≥ 5) or boosted whole-token shorts
+
+function aliasMatchesQuery(q: string, alias: string): { matched: boolean; wholeToken: boolean } {
+  const a = alias.toLowerCase().trim()
+  if (!a) return { matched: false, wholeToken: false }
+  const whole = new RegExp(
+    `(?:^|\\s)${a.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&')}(?:\\s|$)`,
+  ).test(q)
+  if (whole) return { matched: true, wholeToken: true }
+  if (a.length >= 5 && q.includes(a)) return { matched: true, wholeToken: false }
+  return { matched: false, wholeToken: false }
+}
+
 export function resolveEntity(query: string): KnowledgeEntity | null {
   const q = query.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim()
   if (!q) return null
@@ -110,22 +130,25 @@ export function resolveEntity(query: string): KnowledgeEntity | null {
   for (const entity of listEntities()) {
     let score = 0
     for (const alias of entity.aliases) {
-      const a = alias.toLowerCase()
-      if (q.includes(a)) score = Math.max(score, 10 + a.length)
+      const hit = aliasMatchesQuery(q, alias)
+      if (!hit.matched) continue
+      const a = alias.toLowerCase().trim()
+      // Whole-token short lab/service codes (tsh, cbc) get a floor so they still resolve.
+      const base = hit.wholeToken && a.length >= 3 && a.length < 5 ? 16 : 10 + a.length
+      score = Math.max(score, base)
     }
-    // Geo + topic co-occurrence (e.g. "adhd" + "california") as a fallback signal.
     if (score === 0 && entity.geo && entity.topic) {
-      if (q.includes(entity.geo.toLowerCase()) && q.includes(entity.topic.toLowerCase())) score = 8
+      if (q.includes(entity.geo.toLowerCase()) && q.includes(entity.topic.toLowerCase())) {
+        score = 16
+      }
     }
-    if (score > 0 && (!best || score > best.score)) best = { entity, score }
+    if (score >= MIN_ENTITY_ALIAS_SCORE && (!best || score > best.score)) {
+      best = { entity, score }
+    }
   }
   return best?.entity ?? null
 }
 
-/**
- * The deterministic answer surface for the chatbot / apps.
- * Returns intent, care pathway, canonical page, CTAs, and related entities — no LLM required.
- */
 export function answerForEntity(id: string): EntityAnswer | null {
   const e = getEntity(id)
   if (!e) return null
@@ -134,6 +157,7 @@ export function answerForEntity(id: string): EntityAnswer | null {
     name: e.name,
     intent: e.intent,
     care_pathway: e.care_pathway,
+    safety_class: e.safety_class,
     canonical_page: e.canonical_page,
     canonical_url: absolute(e.canonical_page),
     primary_cta: toGuideLink(e.primary_cta),
@@ -141,6 +165,7 @@ export function answerForEntity(id: string): EntityAnswer | null {
     related_guides: (e.related_guides ?? []).map(toGuideLink),
     related_services: (e.related_services ?? []).map(toGuideLink),
     related_entities: e.related_entities,
+    approved_answer_blocks: e.approved_answer_blocks ?? [],
   }
 }
 
@@ -148,4 +173,62 @@ export function answerForEntity(id: string): EntityAnswer | null {
 export function resolveAnswer(query: string): EntityAnswer | null {
   const e = resolveEntity(query)
   return e ? answerForEntity(e.entity) : null
+}
+
+/** Collect registry-backed links for an entity answer (CTA + secondaries + canonical). */
+export function linksForAnswer(answer: EntityAnswer, limit = 3): GuideLink[] {
+  const canonicalId = registryIdForPath(answer.canonical_page, answer.entity)
+  const ids = [
+    ...(canonicalId ? [canonicalId] : []),
+    answer.primary_cta.id,
+    ...answer.secondary_ctas.map((c) => c.id),
+    answer.entity,
+  ]
+  // Prefer canonical page first; resolveLinks dedupes and caps.
+  const ordered = resolveLinks(ids, limit)
+  if (ordered.length) return ordered
+  return [answer.primary_cta].filter(Boolean).slice(0, limit)
+}
+
+function registryIdForPath(canonicalPage: string, preferId?: string): string | null {
+  let path = canonicalPage
+  try {
+    if (/^https?:\/\//i.test(canonicalPage)) path = new URL(canonicalPage).pathname
+  } catch {
+    return null
+  }
+  const norm = path.replace(/\/$/, '') || '/'
+  const matches: string[] = []
+  for (const rec of Object.values(LINK_REGISTRY)) {
+    try {
+      if (!/^https?:\/\//i.test(rec.url)) continue
+      const p = new URL(rec.url).pathname.replace(/\/$/, '') || '/'
+      if (p === norm) matches.push(rec.id)
+    } catch {
+      /* tel/mailto */
+    }
+  }
+  if (!matches.length) return null
+  if (preferId && matches.includes(preferId)) return preferId
+  // Prefer the canonical service id when aliases share a URL (pricing vs insurance).
+  if (matches.includes('pricing') && preferId !== 'insurance') return 'pricing'
+  return matches[0]
+}
+
+/** Every displayed URL must exist in the Public Links Registry. */
+export function isRegistryUrl(url: string): boolean {
+  return Object.values(LINK_REGISTRY).some(
+    (rec) => rec.url === url || url.startsWith(rec.url) || rec.url.startsWith(url),
+  )
+}
+
+export function assertAnswerLinksRegistered(answer: EntityAnswer): string[] {
+  const bad: string[] = []
+  for (const link of [answer.primary_cta, ...answer.secondary_ctas]) {
+    if (!LINK_REGISTRY[link.id]) bad.push(`missing registry id: ${link.id}`)
+    else if (LINK_REGISTRY[link.id].url !== link.url) {
+      bad.push(`url mismatch for ${link.id}: answer=${link.url} registry=${LINK_REGISTRY[link.id].url}`)
+    }
+  }
+  return bad
 }

@@ -15,7 +15,9 @@ Zoho WorkDrive → Common Folder → Siya Knowledge Editorial
 | `04-Content-Tracker` | **`Siya-Content-Tracker.xlsx`** — log every post/asset |
 | `05-Carousels/[Insight-ID]/` | **One pack folder** — images + captions together |
 | `…/ready-to-post/` | PNGs + `captions/` (post from here) |
+| `…/video-prompt.md` | Reel brief mirrored inside the pack |
 | `06-Statics` | Single images (LinkedIn banners, one-off IG, ads) |
+| `07-Video-Prompts/` | **One video prompt doc per Insight ID** (source of truth for reels) |
 
 Do **not** create a separate top-level “READY” mirror folder. Keep assets inside each Insight ID pack.
 
@@ -28,6 +30,21 @@ Statuses: Idea → Draft → In design → Ready → Scheduled → Published
 ## Rule
 
 Company/social rows need a **practical change**. Founder LinkedIn may be N/A (no CTA).
+
+## Video prompts (locked)
+
+If we create **N** carousel / post ideas, we also create **N** video prompt docs:
+
+```text
+07-Video-Prompts/[Insight-ID]-video-prompt.md
+05-Carousels/[Insight-ID]/video-prompt.md   (mirror)
+```
+
+Create the video prompt in the **same session** as the carousel plan — even if the reel ships later.
+
+**Format lock (2026-08-12):** real human on camera **or** narration-free reaction/meme-cut only. **No AI avatar.**  
+**Pronunciation (2026-08-13):** “Siya” = “C-ya” / “see ya” (SEE-yah) — not SAI-ya / SIGH-ya. Spoken/TTS write phonetic **See-ya Health**; on-screen stays Siya.  
+Full rules: git `brand/video-prompts/README.md` (also mirrored under `00-Brand-System/` when updated).
 
 ## Standing ops (locked 2026-07-21)
 

@@ -19,7 +19,7 @@
   bar.setAttribute('aria-live', 'polite');
   bar.innerHTML =
     '<div class="cookie-notice__inner">' +
-    '<p class="cookie-notice__text">We use cookies and similar technologies for site functionality, analytics, and advertising. Choose whether to accept all cookies or only those required for the site to work.</p>' +
+    '<p class="cookie-notice__text">We use cookies for site functionality, analytics, and advertising. Accept all, or reject non-essential cookies.</p>' +
     '<div class="cookie-notice__controls">' +
     '<div class="cookie-notice__actions">' +
     '<button type="button" class="cookie-notice__btn cookie-notice__btn--accept">Accept All</button>' +

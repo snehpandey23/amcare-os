@@ -1,6 +1,7 @@
 /**
  * Siya Health internal credentialing export — source of truth for contracted clinicians.
  * Merged into providers.mjs at build. Public badges derive from computed credentialStatus.
+ * Education / experience lines sourced from provider Klarity profiles (Siya-managed).
  */
 import { resolveProviderPhoto } from './providers-core.mjs';
 
@@ -67,6 +68,20 @@ export function formatCredentialMeta(provider) {
   return formatCredentialBadge(provider.credentialStatus);
 }
 
+function educationHasPublishableFields(edu) {
+  if (!edu || typeof edu !== 'object') return false;
+  return Boolean(
+    edu.medicalSchool ||
+      edu.undergraduate ||
+      edu.graduate ||
+      edu.postGraduate ||
+      edu.residency ||
+      edu.fellowship ||
+      (Array.isArray(edu.continuingEducation) && edu.continuingEducation.length) ||
+      edu.clinicalExperience,
+  );
+}
+
 /** @type {Record<string, object>} */
 export const INTERNAL_PROVIDER_RECORDS = {
   'dr-sneh-pandey': {
@@ -76,17 +91,23 @@ export const INTERNAL_PROVIDER_RECORDS = {
     sortOrder: 1,
     featured: true,
     photoStatus: 'approved',
-    npi: null,
+    // Klarity / NPPES
+    npi: '1154703528',
+    yearsExperienceLabel: '12 years of experience',
     licenses: licenseEntries(['California', 'Texas', 'Pennsylvania', 'Florida'], 'MD'),
     education: {
-      medicalSchool: null,
-      graduationYear: null,
-      residency: null,
+      medicalSchool: 'Maulana Azad Medical College, New Delhi',
+      medicalSchoolYears: '2007–2013',
+      graduationYear: 2013,
+      residency: 'Internal Medicine Residency, UPMC McKeesport, PA (2015–2018)',
       fellowship: null,
     },
     boardCertifications: [
       { name: 'Board Certified Internal Medicine', verificationUrl: 'https://www.abim.org/verify-a-physician/' },
-      { name: 'Obesity Medicine', verificationUrl: 'https://www.abom.org/verify/' },
+      {
+        name: 'American Board of Obesity Medicine (2018–2019)',
+        verificationUrl: 'https://www.abom.org/verify/',
+      },
       { name: 'ADHD-CCSP (ADHD Clinical Services Provider Program)', verificationUrl: null },
     ],
     credentialVerifiedBy: CREDENTIAL_VERIFIED_BY,
@@ -102,11 +123,19 @@ export const INTERNAL_PROVIDER_RECORDS = {
     sortOrder: 3,
     featured: true,
     photoStatus: 'approved',
-    npi: null,
-    licenses: licenseEntries(['Texas', 'Florida'], 'MD'),
-    education: { medicalSchool: null, graduationYear: null, residency: null, fellowship: null },
+    npi: '1861074247',
+    // Years of experience not provided on Klarity export — leave unset (do not invent)
+    yearsExperienceLabel: null,
+    licenses: licenseEntries(['Texas', 'Florida', 'Pennsylvania'], 'MD'),
+    education: {
+      medicalSchool: 'Texas Tech University Health Sciences Center',
+      medicalSchoolYears: '2017–2021',
+      undergraduate: 'Texas Tech University (2013–2017)',
+      residency: null,
+      fellowship: null,
+    },
     boardCertifications: [
-      { name: 'Family & Behavioral Medicine', verificationUrl: 'https://www.abfm.org/verify/' },
+      { name: 'American Board of Family Medicine', verificationUrl: 'https://www.abfm.org/verify/' },
       { name: 'ADHD-CCSP', verificationUrl: null },
     ],
     credentialVerifiedBy: CREDENTIAL_VERIFIED_BY,
@@ -122,9 +151,16 @@ export const INTERNAL_PROVIDER_RECORDS = {
     sortOrder: 4,
     featured: true,
     photoStatus: 'approved',
-    npi: null,
+    npi: '1821471954',
+    yearsExperienceLabel: '12 years of experience',
     licenses: licenseEntries(['Pennsylvania'], 'MD'),
-    education: { medicalSchool: null, graduationYear: null, residency: null, fellowship: null },
+    education: {
+      medicalSchool: null,
+      graduationYear: null,
+      residency: 'Internal Medicine Residency, UPMC Mercy/Southside, Pittsburgh (2015–2018/2021)',
+      fellowship: null,
+      continuingEducation: ['PESI ADHD digital seminar (2025)'],
+    },
     boardCertifications: [
       { name: 'ADHD-CCSP (ADHD Clinical Services Provider Program)', verificationUrl: null },
     ],
@@ -141,14 +177,17 @@ export const INTERNAL_PROVIDER_RECORDS = {
     sortOrder: 2,
     featured: true,
     photoStatus: 'approved',
-    npi: null,
+    npi: '1396999447',
+    yearsExperienceLabel: '15+ years of experience',
     licenses: licenseEntries(['Florida'], 'MD'),
     education: {
       medicalSchool: 'University of Miami Miller School of Medicine',
       graduationYear: 2007,
       undergraduate: 'Florida Atlantic University (2003)',
-      residency: 'Brookwood Baptist Health',
+      residency: 'General Surgery residency, Baptist Princeton Medical Center, Birmingham, AL (4 years)',
       fellowship: null,
+      clinicalExperience:
+        '15+ years across general surgery, urgent care, family medicine, and rehabilitation medicine',
     },
     boardCertifications: [{ name: 'Family Medicine', verificationUrl: 'https://www.abfm.org/verify/' }],
     credentialVerifiedBy: CREDENTIAL_VERIFIED_BY,
@@ -165,15 +204,21 @@ export const INTERNAL_PROVIDER_RECORDS = {
     featured: false,
     photoStatus: 'approved',
     npi: '1629930532',
+    yearsExperienceLabel: '15 years of experience',
     licenses: licenseEntries(['Pennsylvania'], 'APRN-FNP'),
     education: {
       undergraduate: 'Duquesne University BSN (2006–2010)',
-      graduate: 'Chatham University MSN Leadership (2011–2012)',
+      graduate: 'Chatham University MSN Leadership & Administration (2011–2012)',
       postGraduate: 'Carlow University PMC-FNP (2020–2022)',
       residency: null,
       fellowship: null,
+      clinicalExperience: 'RN, VA Pittsburgh Healthcare System, since 2010',
     },
     boardCertifications: [{ name: 'FNP-C', verificationUrl: 'https://www.nursingworld.org/our-certifications/' }],
+    professionalMemberships: [
+      'American Academy of Nurse Practitioners (AANP)',
+      'Sigma Theta Tau International Honor Society of Nursing',
+    ],
     credentialVerifiedBy: CREDENTIAL_VERIFIED_BY,
     credentialVerifiedDate: CREDENTIAL_VERIFIED_DATE,
     acceptingNewPatients: true,
@@ -189,9 +234,11 @@ export const INTERNAL_PROVIDER_RECORDS = {
     featured: false,
     photoStatus: 'approved',
     npi: '1609886910',
+    yearsExperienceLabel: 'FNP since 2005 · 16 years in occupational medicine',
     licenses: licenseEntries(['Texas', 'Ohio'], 'APRN-FNP'),
     education: {
-      graduate: 'MSN, Family Nurse Practitioner',
+      undergraduate: 'BSN (2000)',
+      graduate: 'Family Nurse Practitioner master’s degree (2005)',
       residency: null,
       fellowship: null,
     },
@@ -214,6 +261,7 @@ export const INTERNAL_PROVIDER_RECORDS = {
     featured: false,
     photoStatus: 'approved',
     npi: '1063725059',
+    yearsExperienceLabel: '17+ years of clinical experience',
     licenses: [
       {
         state: 'California',
@@ -223,11 +271,34 @@ export const INTERNAL_PROVIDER_RECORDS = {
         verificationUrl: BOARD_LOOKUP.CA,
         acceptingNewPatients: true,
       },
+      {
+        state: 'Texas',
+        licenseType: 'PA',
+        status: 'Active',
+        verificationUrl: BOARD_LOOKUP.TX,
+        acceptingNewPatients: true,
+      },
+      {
+        state: 'Pennsylvania',
+        licenseType: 'PA',
+        status: 'Active',
+        verificationUrl: BOARD_LOOKUP.PA,
+        acceptingNewPatients: true,
+      },
+      {
+        state: 'Florida',
+        licenseType: 'PA',
+        status: 'Active',
+        verificationUrl: BOARD_LOOKUP.FL,
+        acceptingNewPatients: true,
+      },
     ],
     education: {
       graduate: 'Western University of Health Sciences PA Program (2007–2009)',
       residency: null,
       fellowship: null,
+      clinicalExperience:
+        'Telemedicine, allergy/asthma care, urgent care, aesthetics, weight management, and orthopedic/occupational medicine',
     },
     boardCertifications: [{ name: 'NCCPA Certified PA', verificationUrl: 'https://www.nccpa.net/verify' }],
     credentialVerifiedBy: CREDENTIAL_VERIFIED_BY,
@@ -263,11 +334,15 @@ export function applyInternalRecords(provider) {
     altText: photo.alt,
     licenses: internal.licenses,
     npi: internal.npi,
-    education: edu?.medicalSchool || edu?.graduate || edu?.undergraduate ? edu : provider.education,
+    yearsExperienceLabel: internal.yearsExperienceLabel ?? provider.yearsExperienceLabel ?? null,
+    education: educationHasPublishableFields(edu) ? edu : provider.education,
     residency: edu?.residency ?? provider.residency,
     fellowship: edu?.fellowship ?? provider.fellowship,
     boardCertifications: boardNames.length ? boardNames : provider.boardCertifications,
     boardCertificationDetails: internal.boardCertifications,
+    professionalMemberships: internal.professionalMemberships?.length
+      ? internal.professionalMemberships
+      : provider.professionalMemberships,
     credentialStatus,
     credentialVerifiedBy: credentialStatus === 'verified' ? internal.credentialVerifiedBy : null,
     credentialVerifiedDate: credentialStatus === 'verified' ? internal.credentialVerifiedDate : null,

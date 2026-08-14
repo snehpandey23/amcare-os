@@ -40,7 +40,10 @@ function normalizeHref(href) {
 
 function classifyIntent(text, href = '', relPath = '') {
   const t = text.replace(/\s+/g, ' ').trim();
-  const isAdhd = isAdhdFunnelPath(relPath) || relPath === 'adult-adhd-screening-california.html';
+  const isAdhd =
+    isAdhdFunnelPath(relPath) ||
+    relPath === 'adult-adhd-screening-california.html' ||
+    relPath === 'adult-adhd-screening-texas.html';
   if (/schedule consultation\s*→/i.test(t) && href.startsWith('/') && !href.includes('book')) {
     return { intent: 'service_explore', expected: null };
   }

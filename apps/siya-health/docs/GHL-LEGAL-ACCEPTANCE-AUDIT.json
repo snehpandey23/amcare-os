@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-26T11:41:11.547Z",
+  "generatedAt": "2026-07-27T01:23:29.181Z",
   "formId": "mnWpgh0IEgFvJymdZqHY",
   "bookingUrl": "https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=kkarJfxH",
   "legalDocumentVersion": "terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31",
@@ -12,13 +12,13 @@
     "npp": "legal_acceptance_npp"
   },
   "summary": {
-    "htmlPagesScanned": 195,
-    "pagesWithGhlLinks": 167,
-    "totalGhlBookingLinks": 178,
+    "htmlPagesScanned": 202,
+    "pagesWithGhlLinks": 174,
+    "totalGhlBookingLinks": 185,
     "pagesWithCarepatronLinks": 3,
     "totalCarepatronBookingLinks": 3,
     "pagesWithAcceptanceScript": 1,
-    "pagesWithGhlMissingAcceptance": 160,
+    "pagesWithGhlMissingAcceptance": 167,
     "intakeHub": true
   },
   "externalFunnels": [
@@ -1315,6 +1315,16 @@
       "hasChatWidget": false
     },
     {
+      "path": "/brain-fog",
+      "file": "brain-fog.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 1,
+      "carepatronBookingLinks": 0,
+      "hasLegalAcceptanceScript": false,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
       "path": "/creyos-adhd-testing",
       "file": "creyos-adhd-testing.html",
       "category": "adhd-funnel",
@@ -1385,6 +1395,26 @@
       "hasChatWidget": false
     },
     {
+      "path": "/labs/cbc",
+      "file": "labs/cbc.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 1,
+      "carepatronBookingLinks": 0,
+      "hasLegalAcceptanceScript": false,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/labs/cmp",
+      "file": "labs/cmp.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 1,
+      "carepatronBookingLinks": 0,
+      "hasLegalAcceptanceScript": false,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
       "path": "/labs/fatigue-brain-fog",
       "file": "labs/fatigue-brain-fog.html",
       "category": "general-cta",
@@ -1407,6 +1437,16 @@
     {
       "path": "/labs/iron-ferritin",
       "file": "labs/iron-ferritin.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 1,
+      "carepatronBookingLinks": 0,
+      "hasLegalAcceptanceScript": false,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/labs/lipid-panel",
+      "file": "labs/lipid-panel.html",
       "category": "general-cta",
       "ghlBookingLinks": 1,
       "carepatronBookingLinks": 0,
@@ -1447,6 +1487,16 @@
     {
       "path": "/labs/vitamin-b12",
       "file": "labs/vitamin-b12.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 1,
+      "carepatronBookingLinks": 0,
+      "hasLegalAcceptanceScript": false,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/labs/vitamin-d",
+      "file": "labs/vitamin-d.html",
       "category": "general-cta",
       "ghlBookingLinks": 1,
       "carepatronBookingLinks": 0,
@@ -1555,8 +1605,28 @@
       "hasChatWidget": false
     },
     {
+      "path": "/preventive-care",
+      "file": "preventive-care.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 1,
+      "carepatronBookingLinks": 0,
+      "hasLegalAcceptanceScript": false,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
       "path": "/pricing",
       "file": "pricing.html",
+      "category": "general-cta",
+      "ghlBookingLinks": 1,
+      "carepatronBookingLinks": 0,
+      "hasLegalAcceptanceScript": false,
+      "adhdDisclaimerRequired": false,
+      "hasChatWidget": false
+    },
+    {
+      "path": "/primary-care",
+      "file": "primary-care.html",
       "category": "general-cta",
       "ghlBookingLinks": 1,
       "carepatronBookingLinks": 0,
@@ -1882,24 +1952,31 @@
     "blog/when-is-testosterone-therapy-appropriate.html",
     "blog/youre-not-lazy-signs-undiagnosed-adult-adhd.html",
     "book-appointment.html",
+    "brain-fog.html",
     "creyos-adhd-testing.html",
     "fatigue.html",
     "index.html",
     "labs.html",
     "labs/a1c-blood-sugar.html",
     "labs/adhd-support.html",
+    "labs/cbc.html",
+    "labs/cmp.html",
     "labs/fatigue-brain-fog.html",
     "labs/how-to-read-results.html",
     "labs/iron-ferritin.html",
+    "labs/lipid-panel.html",
     "labs/mens-health.html",
     "labs/preventive.html",
     "labs/thyroid.html",
     "labs/vitamin-b12.html",
+    "labs/vitamin-d.html",
     "labs/womens-midlife.html",
     "mens-health-longevity.html",
     "online-adhd-test.html",
     "prescriptions.html",
+    "preventive-care.html",
     "pricing.html",
+    "primary-care.html",
     "primary-urgent-care.html",
     "privacy-policy.html",
     "providers/derek-timbs.html",

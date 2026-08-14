@@ -1,113 +1,133 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
+import DoctorDetails from "./components/DoctorDetails";
+import LetterheadUpload from "./components/LetterheadUpload";
 import LifestyleSection from "./components/LifestyleSection";
 import MedicationForm from "./components/MedicationForm";
 import PatientForm from "./components/PatientForm";
 import PrescriptionPreview from "./components/PrescriptionPreview";
+import SignatureUpload from "./components/SignatureUpload";
 import type { PrescriptionFormData } from "./types";
 import { generatePDF } from "./utils/generatePDF";
+import { useAuth } from "../lib/AuthContext";
+import { fetchClinicProfile, saveClinicProfile } from "../lib/clinic-profile-api";
+
+function dataUrlToImageBytes(dataUrl: string): { bytes: Uint8Array; mime: string } | null {
+  const match = /^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/.exec(dataUrl);
+  if (!match) return null;
+  const mime = match[1];
+  const binary = atob(match[2]);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return { bytes, mime };
+}
+
+const emptyForm: PrescriptionFormData = {
+  clinicName: "",
+  doctorName: "",
+  degree: "",
+  regNo: "",
+  clinicContact: "",
+  clinicAddress: "",
+  patientName: "",
+  dob: "",
+  gender: "",
+  briefHistory: "",
+  medications: [{ name: "", dosage: "", frequency: "", instructions: "" }],
+  lifestyleAdvice: "",
+};
 
 export default function Home() {
-  const [letterheadImage, setLetterheadImage] = useState<{
-    bytes: Uint8Array;
-    mime: string;
-  } | null>(null);
-  const [signatureImage, setSignatureImage] = useState<{
-    bytes: Uint8Array;
-    mime: string;
-  } | null>(null);
-  const [letterheadPreview, setLetterheadPreview] = useState<string | null>(
-    "/letterhead-logo.png"
-  );
+  const { user, authReady, authConfigured, logout } = useAuth();
+  const router = useRouter();
+  const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null);
+  const [signatureDataUrl, setSignatureDataUrl] = useState<string | null>(null);
   const [pdfError, setPdfError] = useState<string | null>(null);
+  const [profileMessage, setProfileMessage] = useState<string | null>(null);
+  const [profileError, setProfileError] = useState<string | null>(null);
+  const [profileLoading, setProfileLoading] = useState(true);
+  const [savingProfile, setSavingProfile] = useState(false);
+
   const {
     register,
     control,
     handleSubmit,
     setError,
+    reset,
+    getValues,
     formState: { errors },
     watch,
   } = useForm<PrescriptionFormData>({
-    defaultValues: {
-      doctorName: "Dr. SP Pandey MBBS MD Dipl. ABOM",
-      degree: "",
-      regNo: "UPMC RegNo 91493",
-      clinicContact: "9621550481",
-      clinicAddress: "39 Mukta Vihar, Naini, Prayagraj 211009",
-      patientName: "",
-      dob: "",
-      gender: "",
-      briefHistory: "",
-      medications: [
-        {
-          name: "",
-          dosage: "",
-          frequency: "",
-          instructions: "",
-        },
-      ],
-      lifestyleAdvice: "",
-    },
+    defaultValues: emptyForm,
   });
 
   const previewData = watch();
 
-  const fetchImageBytes = async (path: string) => {
-    const response = await fetch(path, { cache: "no-store" });
-    if (!response.ok) {
-      throw new Error(`Image fetch failed: ${response.status}`);
+  useEffect(() => {
+    if (!authReady) return;
+    if (!authConfigured || !user) {
+      router.replace("/login");
     }
-    const blob = await response.blob();
-    let mime = blob.type || "image/png";
-    let bytes: Uint8Array | null = null;
+  }, [authReady, authConfigured, user, router]);
+
+  const loadProfile = useCallback(async () => {
+    setProfileLoading(true);
+    setProfileError(null);
     try {
-      const bitmap = await createImageBitmap(blob);
-      const canvas = document.createElement("canvas");
-      canvas.width = bitmap.width;
-      canvas.height = bitmap.height;
-      const ctx = canvas.getContext("2d");
-      if (ctx) {
-        ctx.drawImage(bitmap, 0, 0);
-        const pngBlob = await new Promise<Blob | null>((resolve) => {
-          canvas.toBlob((output) => resolve(output), "image/png");
-        });
-        if (pngBlob) {
-          const buffer = await pngBlob.arrayBuffer();
-          bytes = new Uint8Array(buffer);
-          mime = "image/png";
-        }
-      }
-    } catch {
-      bytes = null;
+      const profile = await fetchClinicProfile();
+      reset({
+        ...emptyForm,
+        clinicName: profile.clinicName,
+        doctorName: profile.doctorName,
+        degree: profile.degree,
+        regNo: profile.regNo,
+        clinicContact: profile.clinicContact,
+        clinicAddress: profile.clinicAddress,
+      });
+      setLogoDataUrl(profile.logoDataUrl);
+      setSignatureDataUrl(profile.signatureDataUrl);
+    } catch (err) {
+      setProfileError(err instanceof Error ? err.message : "Could not load clinic profile");
+    } finally {
+      setProfileLoading(false);
     }
-    if (!bytes) {
-      const buffer = await blob.arrayBuffer();
-      bytes = new Uint8Array(buffer);
-    }
-    return { bytes, mime };
-  };
+  }, [reset]);
 
   useEffect(() => {
-    const loadAssets = async () => {
-      try {
-        const letterhead = await fetchImageBytes("/letterhead-logo.png");
-        setLetterheadImage(letterhead);
-      } catch {
-        setLetterheadImage(null);
-        setLetterheadPreview(null);
-      }
-      try {
-        const signature = await fetchImageBytes("/signature-sneh-pandey.png");
-        setSignatureImage(signature);
-      } catch {
-        setSignatureImage(null);
-      }
-    };
-    loadAssets();
-  }, []);
+    if (authReady && user) void loadProfile();
+  }, [authReady, user, loadProfile]);
+
+  const onSaveProfile = async () => {
+    setSavingProfile(true);
+    setProfileMessage(null);
+    setProfileError(null);
+    try {
+      const values = getValues();
+      const profile = await saveClinicProfile({
+        clinicName: values.clinicName,
+        doctorName: values.doctorName,
+        degree: values.degree,
+        regNo: values.regNo,
+        clinicContact: values.clinicContact,
+        clinicAddress: values.clinicAddress,
+        logoDataUrl,
+        signatureDataUrl,
+        clearLogo: !logoDataUrl,
+        clearSignature: !signatureDataUrl,
+      });
+      setLogoDataUrl(profile.logoDataUrl);
+      setSignatureDataUrl(profile.signatureDataUrl);
+      setProfileMessage("Clinic profile saved. It will load automatically next time you sign in.");
+    } catch (err) {
+      setProfileError(err instanceof Error ? err.message : "Could not save clinic profile");
+    } finally {
+      setSavingProfile(false);
+    }
+  };
 
   const onSubmit = async (data: PrescriptionFormData) => {
     setPdfError(null);
@@ -120,18 +140,16 @@ export default function Home() {
     }
 
     try {
-    const resolvedLetterhead =
-      letterheadImage ?? (await fetchImageBytes("/letterhead-logo.png").catch(() => null));
-    const resolvedSignature =
-      signatureImage ?? (await fetchImageBytes("/signature-sneh-pandey.png").catch(() => null));
+      const letterheadImage = logoDataUrl ? dataUrlToImageBytes(logoDataUrl) : null;
+      const signatureImage = signatureDataUrl ? dataUrlToImageBytes(signatureDataUrl) : null;
 
-    const pdfBytes = await generatePDF({
+      const pdfBytes = await generatePDF({
         ...data,
-      letterheadImage: resolvedLetterhead,
-      signatureImage: resolvedSignature,
+        letterheadImage,
+        signatureImage,
       });
-    const safeBytes = Uint8Array.from(pdfBytes);
-    const blob = new Blob([safeBytes], { type: "application/pdf" });
+      const safeBytes = Uint8Array.from(pdfBytes);
+      const blob = new Blob([safeBytes], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
@@ -140,60 +158,82 @@ export default function Home() {
       URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Failed to generate PDF", error);
-      setPdfError(
-        "PDF generation failed. Please retry or remove special characters."
-      );
+      setPdfError("PDF generation failed. Please retry or remove special characters.");
     }
   };
+
+  if (!authReady || !user) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-slate-50 text-sm text-slate-500">
+        {authReady ? "Redirecting to sign in…" : "Loading…"}
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 px-4 py-10 text-slate-900">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8">
-        <header className="space-y-2 text-center">
-          <h1 className="text-2xl font-semibold text-slate-900">
-            Prescription Generator
-          </h1>
-          <p className="text-sm text-slate-500">
-            Create professional, printable prescriptions for Indian patients.
-          </p>
+        <header className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <div className="space-y-1 text-center sm:text-left">
+            <h1 className="text-2xl font-semibold text-slate-900">Prescription Generator</h1>
+            <p className="text-sm text-slate-500">
+              Signed in as {user.name || user.email}. Clinic letterhead is saved to your staff account.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              logout();
+              router.replace("/login");
+            }}
+            className="rounded-md border border-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-white"
+          >
+            Sign out
+          </button>
         </header>
+
+        {profileLoading ? (
+          <p className="text-center text-sm text-slate-500">Loading your clinic profile…</p>
+        ) : null}
 
         <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="space-y-8 rounded-xl bg-white p-6 shadow-md"
           >
-            <section className="space-y-4">
-              <div className="flex flex-col gap-4 sm:grid sm:grid-cols-[1fr_3fr] sm:items-center">
-                <div className="flex justify-center sm:justify-start">
-                  <img
-                    src="/letterhead-logo.png"
-                    alt="Amcare India logo"
-                    className="h-auto w-full max-w-[140px] object-contain"
-                  />
-                </div>
-                <div className="space-y-1 text-center">
-                  <p className="text-2xl font-semibold text-slate-900 sm:text-3xl">
-                    Amcare India
-                  </p>
-                  <p className="text-sm text-slate-600">
-                    39 Mukta Vihar, Naini, Prayagraj 211009
-                  </p>
-                  <p className="text-sm text-slate-600">📞 9621550481</p>
-                  <p className="text-lg font-semibold text-slate-800">
-                    Dr. SP Pandey MBBS MD Dipl. ABOM
-                  </p>
-                  <p className="text-xs text-slate-500">UPMC RegNo 91493</p>
-                </div>
-              </div>
-              <div className="h-0.5 w-full rounded-full bg-slate-900/80" />
-            </section>
+            <LetterheadUpload
+              letterheadPreview={logoDataUrl}
+              onUpload={(dataUrl) => setLogoDataUrl(dataUrl)}
+            />
+
+            <DoctorDetails register={register} errors={errors} />
+
+            <SignatureUpload
+              signaturePreview={signatureDataUrl}
+              onUpload={(dataUrl) => setSignatureDataUrl(dataUrl)}
+            />
+
+            <div className="flex flex-wrap items-center gap-3 border-t border-slate-100 pt-4">
+              <button
+                type="button"
+                onClick={() => void onSaveProfile()}
+                disabled={savingProfile}
+                className="rounded-md bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-60"
+              >
+                {savingProfile ? "Saving…" : "Save clinic profile"}
+              </button>
+              {profileMessage ? (
+                <p className="text-xs text-emerald-700">{profileMessage}</p>
+              ) : null}
+              {profileError ? <p className="text-xs text-red-700">{profileError}</p> : null}
+            </div>
+
+            <div className="h-0.5 w-full rounded-full bg-slate-900/80" />
+
             <PatientForm register={register} errors={errors} />
 
             <section className="space-y-3">
-              <h2 className="text-lg font-semibold text-slate-800">
-                4. Brief History
-              </h2>
+              <h2 className="text-lg font-semibold text-slate-800">Brief History</h2>
               <textarea
                 rows={4}
                 {...register("briefHistory")}
@@ -202,11 +242,7 @@ export default function Home() {
               />
             </section>
 
-            <MedicationForm
-              control={control}
-              register={register}
-              errors={errors}
-            />
+            <MedicationForm control={control} register={register} errors={errors} />
 
             <LifestyleSection register={register} />
 
@@ -226,13 +262,10 @@ export default function Home() {
           </form>
 
           <div className="space-y-4">
-            <PrescriptionPreview
-              data={previewData}
-              letterheadPreview={letterheadPreview}
-            />
+            <PrescriptionPreview data={previewData} letterheadPreview={logoDataUrl} />
             <div className="rounded-md border border-blue-100 bg-blue-50 p-4 text-xs text-blue-700">
-              PDF output uses clean serif typography with Rx symbol, date, and
-              signature line.
+              PDF uses your saved clinic name, address, contact, doctor details, logo, and signature —
+              not shared Amcare defaults. Prescription medications stay on this page only (not saved).
             </div>
           </div>
         </div>

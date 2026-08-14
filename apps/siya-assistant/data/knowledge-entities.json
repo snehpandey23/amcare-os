@@ -365,6 +365,10 @@
         {
           "id": "pricing_limits",
           "text": "Medication and treatment are never guaranteed. Confirm current amounts on the published pricing page."
+        },
+        {
+          "id": "pricing_no_insurance",
+          "text": "Siya Health does not accept insurance; published amounts are cash-pay. Many patients use FSA or HSA for eligible services."
         }
       ]
     },
@@ -1450,6 +1454,64 @@
         }
       ],
       "note": "Root Service Entity. Taxonomy class root_service. Distinct from /primary-urgent-care (process surface)."
+    },
+    "insurance": {
+      "entity": "insurance",
+      "name": "Insurance and payment",
+      "canonical_page": "/pricing",
+      "intent": "service",
+      "care_pathway": "telehealth",
+      "safety_class": "general_information",
+      "aliases": [
+        "do you take insurance",
+        "do you accept insurance",
+        "accept insurance",
+        "take insurance",
+        "insurance coverage",
+        "bill insurance",
+        "in network",
+        "in-network",
+        "out of network",
+        "out-of-network",
+        "fsa hsa",
+        "fsa or hsa",
+        "flexible spending",
+        "health savings account",
+        "use my hsa",
+        "use my fsa",
+        "covered by insurance"
+      ],
+      "primary_cta": {
+        "id": "pricing",
+        "label": "Pricing",
+        "url": "/pricing"
+      },
+      "secondary_ctas": [
+        {
+          "id": "fsa_hsa_adhd_evaluation",
+          "label": "FSA / HSA for evaluation",
+          "url": "/answers/fsa-hsa-adhd-evaluation"
+        },
+        {
+          "id": "meet_and_greet",
+          "label": "Book Free Meet & Greet",
+          "url": "/redirect/meet-greet"
+        }
+      ],
+      "related_entities": [
+        "pricing",
+        "service_availability"
+      ],
+      "approved_answer_blocks": [
+        {
+          "id": "insurance_no_accept",
+          "text": "Siya Health does not accept insurance. We offer transparent cash pricing today."
+        },
+        {
+          "id": "insurance_fsa_hsa",
+          "text": "Many patients use FSA or HSA funds for eligible services\u2014confirm with your plan administrator and keep your receipts. Insurance-based options may be added later."
+        }
+      ]
     }
   }
 }

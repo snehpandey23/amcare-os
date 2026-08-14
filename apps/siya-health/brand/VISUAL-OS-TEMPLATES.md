@@ -94,7 +94,7 @@ On-frame = **headline + one sub-headline only**. Sub-headline (`recognition`) **
 |-------|----------|--------|
 | `photo` | yes | Warm morning lifestyle · subject cropped to **RIGHT** · no head-in-hands |
 | `headline` | yes | ≤6 words · Georgia · **~10–12% canvas H** (blur-test = statics) · Magenta accent ≤3 words |
-| `recognition` (sub-headline) | yes (hook / symptom / lean close) | **Whole message** · ≤ ~2–4 short lines · full Deep Navy · magenta rule above · **not** a teaser for off-frame body |
+| `recognition` (sub-headline) | yes (hook / symptom / lean close) | **Whole message** · ≤ ~2–4 short lines · full Deep Navy · magenta rule above · **not** a teaser for off-frame body · **spokenness:** must read as something a person would say out loud (complete natural phrasing — not a compressed fragment). Fail if aloud needs mental reconstruction (e.g. “morning speech” → “the pep talk you give yourself”), regardless of word count |
 | `explanation` / `takeaway` / `body` | **off by default** | Only with compositor `--dense` (legacy) · bullets ≤15 words each |
 | `cta` | close only | One — Meet & Greet / Talk to a Clinician |
 | `logo` / `footer` | yes | |

@@ -1,7 +1,16 @@
-# Architecture — two knowledge layers
+# Architecture — company OS + two knowledge layers
+
+**Company operating blueprint:** [`SIYA-OS-ARCHITECTURE.md`](./SIYA-OS-ARCHITECTURE.md)  
+(Executive · Marketing · Clinical · Patient Ops · Compliance · Technology · Finance · HR — same module shape.)
 
 ```text
 ┌─────────────────────────────────────────────────────────────┐
+│  SIYA OS (department operating systems)                      │
+│  Shared: mission · strategy · pipelines · SOPs · KPIs · …   │
+│  Marketing OS v1.0 = first frozen department manual          │
+└───────────────────────────┬─────────────────────────────────┘
+                            │
+┌───────────────────────────▼─────────────────────────────────┐
 │  SIYAOS KNOWLEDGE BASE (this tree)                           │
 │  Company memory · SOPs · philosophy · internal AI retrieval  │
 │  docs/siyaos-knowledge-base/                                 │
@@ -25,7 +34,8 @@
 └─────────────────────────────────────────────────────────────┘
 ```
 
-**Do not merge** patient blocks into internal topics without a clinical/editorial owner review.
+**Do not merge** patient blocks into internal topics without a clinical/editorial owner review.  
+**Do not** invent a separate Marketing philosophy outside Siya OS Architecture.
 
 **Do write** internal topics in an **organization-agnostic** voice when possible (“how we run telehealth ops”) so CAPR.AI portfolio companies can reuse modules.
 

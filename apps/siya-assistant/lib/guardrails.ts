@@ -28,19 +28,28 @@ export function sanitizeInput(raw: string): string {
 }
 
 const EMERGENCY_RE =
-  /\b(suicid(?:e|al)|kill myself|end my life|self[-\s]?harm|overdose|chest pain|can'?t breathe|cannot breathe|difficulty breathing|shortness of breath|stroke|face droop|severe allerg(?:y|ic)|anaphyla|immediate danger|going to hurt (myself|someone)|domestic violence|being abused|medical emergency|heart attack)\b/i
+  /\b(suicid(?:e|al)|kill myself|end my life|self[-\s]?harm|hurt myself|harm myself|may hurt myself|overdose|chest pain|can'?t breathe|cannot breathe|difficulty breathing|shortness of breath|stroke|face droop|severe allerg(?:y|ic)|anaphyla|immediate danger|going to hurt (myself|someone)|domestic violence|being abused|medical emergency|heart attack)\b/i
 
+// Note: do NOT match bare "I take Adderall" / "should I take …" — those are clinical.
+// Med dumps still match via medication list / "my meds are|include|list".
+// Hard PHI dumps (identifiers / lists / results) — checked before clinical so
+// "DOB + med list" stays a privacy handoff.
+const HARD_PHI_RE =
+  /\b(dob|date of birth|\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}|ssn|social security|mrn|medical record|chart notes|insurance (id|number|member)|member id|group number|policy number|prescription number|medication list|med(?:ication)? list|my (meds|medications?) (are|include|list)|i take .{0,120}\d+\s*mg|(lab|blood) results?|address is|\d+ main street|my email is|email me at|phone number is|call me at|remember that i have|store my|pull my last appointment|another patient|patient'?s information|\+?1?[\s.-]?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}|my name is.{0,80}(dob|date of birth|\d{1,2}[\/\-]\d{1,2})|(dob|date of birth).{0,40}(my name is|i am \w+))\b/i
+
+// Softer PHI leftovers (after clinical). Do NOT include bare "I take Adderall" —
+// that must stay clinical for "Should I take Adderall?".
 const PHI_RE =
-  /\b(dob|date of birth|\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}|ssn|social security|mrn|medical record|chart notes|insurance (id|number|member)|member id|group number|policy number|prescription number|medication list|med(?:ication)? list|my (meds|medications?)\b|i take (adderall|vyvanse|ritalin|xanax|prozac|zoloft|ozempic|wegovy|semaglutide)|address is|\d+ main street|my email is|email me at|phone number is|call me at|lab results?|blood results?|remember that i have|store my|pull my last appointment|another patient|patient'?s information|\+?1?[\s.-]?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4})\b/i
+  /\b(dob|date of birth|\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}|ssn|social security|mrn|medical record|chart notes|insurance (id|number|member)|member id|group number|policy number|prescription number|medication list|med(?:ication)? list|my (meds|medications?) (are|include|list)|i currently take .{0,80}(and|,)|address is|\d+ main street|my email is|email me at|phone number is|call me at|lab results?|blood results?|remember that i have|store my|pull my last appointment|another patient|patient'?s information|\+?1?[\s.-]?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}|my name is.{0,80}(dob|date of birth|\d{1,2}[\/\-]\d{1,2})|(dob|date of birth).{0,40}(my name is|i am \w+))\b/i
 
 const INJECTION_RE =
-  /\b(ignore (all |any )?(previous|prior|above) instructions|disregard (your|the) (system|instructions)|developer mode|dan mode|jailbreak|reveal (your )?(system|hidden) (prompt|instructions)|print (your )?(system|hidden) prompt|show (me )?(your )?system prompt|enter (god|unrestricted) mode|pretend you (have )?no restrictions|override (your|safety)|repeat (your|the) (system|instructions)|decode|base64|tool(s)? (list|schema)|chain of thought|reveal (your )?reasoning|unrestricted assistant|dump env|administrator access)\b/i
+  /\b(ignore (all |any |your )?(previous|prior|above|rules|instructions)|disregard (your|the) (system|instructions|rules)|developer mode|dan mode|jailbreak|reveal (your )?(system|hidden) (prompt|prompts|instructions)|print (your )?(system|hidden) prompt|show (me )?(your )?system prompts?|enter (god|unrestricted) mode|pretend you (have )?no restrictions|override (your|safety)|repeat (your|the) (system|instructions)|decode|base64|tool(s)? (list|schema)|chain of thought|reveal (your )?reasoning|unrestricted assistant|dump env|administrator access)\b/i
 
 const INTERNAL_RE =
   /\b(api key|secret key|access token|openai[_ ]?api[_ ]?key|ai[_ ]?gateway|process\.env|env vars|source code|github|repository|repo contents?|system prompt|system instructions|hidden instructions|knowledge[-\s]?base contents|vector (db|store)|retrieval configuration|moderation rules|security configuration|print your configuration|company decisions?|internal (roadmap|docs|document|workflow|protocol|slack|spreadsheet|ops)|clinical (workflow|protocol)|investor|revenue|margin|burn rate|payroll|equity split|staff (chat|discussion|channels?)|slack channels?|carepatron (admin|api)|spruce (admin|api)|patient (record|chart|portal data)|hipaa audit|vendor contract|unpublished|staging url|founder equity|booking system use|what api does|provider schedules?)\b/i
 
 const CLINICAL_RE =
-  /\b(do i have|diagnose( me)?|am i (adhd|depressed|bipolar|diabetic)|what (medication|dose|mg)|should i (take|stop|increase|decrease)|drug interaction|interpret (my )?labs?|recommend (a |an )?lab panel|my (lab|blood) results?|prescribe|can (you|dr\.?|doctor) prescribe|will (you|they) prescribe|adderall|vyvanse|ritalin|ozempic|controlled substance|treatment plan|am i eligible|qualify for|best for me|personalized|promise .{0,40}success|urgent meds|med(?:ication)? is safe|i am pregnant|pregnancy-specific|stimulant guidance|taper my|benzodiazepine|replace my psychiatrist|is this rash|tell me if i am|confirm i have|insulin resistance from this chat|antidepressant|from this chat)\b/i
+  /\b(do i have|diagnose( me)?|am i (adhd|depressed|bipolar|diabetic)|what (medication|dose|mg)|should i (take|stop|increase|decrease)|increase my (meds|medication)|decrease my (meds|medication)|drug interaction|interpret (my )?labs?|recommend (a |an )?lab panel|my (lab|blood) results?|prescribe|can (you|dr\.?|doctor) prescribe|will (you|they) prescribe|adderall|vyvanse|ritalin|ozempic|controlled substance|treatment plan|am i eligible|qualify for|best for me|personalized|promise .{0,40}success|urgent meds|med(?:ication)? is safe|i am pregnant|pregnancy-specific|stimulant guidance|taper my|benzodiazepine|replace my psychiatrist|is this rash|tell me if i am|confirm i have|insulin resistance from this chat|antidepressant|from this chat)\b/i
 
 export type GuardHit =
   | { kind: 'ok' }
@@ -56,15 +65,19 @@ export function classifyInputGuards(text: string): GuardHit {
   if (INJECTION_RE.test(text)) {
     return { kind: 'blocked', category: 'injection', reason: 'injection' }
   }
-  // PHI before internal so patient-info requests get privacy handoff
+  // Identifier / list dumps before clinical — preserves privacy handoff for PHI paste.
+  if (HARD_PHI_RE.test(text)) {
+    return { kind: 'blocked', category: 'phi', reason: 'phi' }
+  }
+  // Treatment questions (e.g. "Should I take Adderall?") → clinical, not PHI.
+  if (CLINICAL_RE.test(text)) {
+    return { kind: 'blocked', category: 'clinical', reason: 'clinical' }
+  }
   if (PHI_RE.test(text)) {
     return { kind: 'blocked', category: 'phi', reason: 'phi' }
   }
   if (INTERNAL_RE.test(text)) {
     return { kind: 'blocked', category: 'internal', reason: 'internal' }
-  }
-  if (CLINICAL_RE.test(text)) {
-    return { kind: 'blocked', category: 'clinical', reason: 'clinical' }
   }
   return { kind: 'ok' }
 }

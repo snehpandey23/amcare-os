@@ -20,6 +20,11 @@ export const ADHD_SCREENING_LINKS = [
     label: 'California ADHD screening',
     blurb: 'State-specific screening for California adults.',
   },
+  {
+    href: '/adult-adhd-screening-texas',
+    label: 'Texas ADHD screening',
+    blurb: 'State-specific screening for Texas adults.',
+  },
 ];
 
 /** Core commercial service pages — use live service URLs, not redirect sources */
@@ -42,9 +47,11 @@ export const ADHD_SERVICE_LINKS = [
  */
 export const ADHD_GEO_LINKS = [
   { href: '/adhd-diagnosis-texas', label: 'Texas ADHD diagnosis', region: 'TX' },
+  { href: '/adhd-diagnosis-pennsylvania', label: 'Pennsylvania ADHD diagnosis', region: 'PA' },
   { href: '/blog/adhd-treatment-texas', label: 'Texas ADHD treatment', region: 'TX' },
   { href: '/blog/online-adhd-diagnosis-california', label: 'California ADHD diagnosis', region: 'CA' },
   { href: '/adult-adhd-screening-california', label: 'California ADHD screening', region: 'CA' },
+  { href: '/adult-adhd-screening-texas', label: 'Texas ADHD screening', region: 'TX' },
 ];
 
 /** All commercial LP paths — used by phase7 skip list */
@@ -89,20 +96,21 @@ export function renderBlogAdhdCarePathwaysSection() {
 }
 
 /**
- * Educational next-step block for /answers hub.
- * Max 3 contextual links + one button. State availability = one sentence.
+ * Educational next-step block for /answers hub — multi-pathway, not ADHD-only.
+ * Max contextual links + one button. State availability = one sentence.
  */
 export function renderAnswersHubCarePathwaysSection() {
   return `<!-- SIYA:ANSWERS-ADHD-CARE-PATHWAYS -->
           <section class="answers-next-step" aria-labelledby="answers-adhd-care-pathways-heading">
             <div class="section-header">
               <h2 id="answers-adhd-care-pathways-heading">Ready to take the next step?</h2>
-              <p class="lead">These guides are educational. If you're exploring whether ADHD could explain your symptoms, a few resources can help you decide what's next.</p>
+              <p class="lead">These guides are educational. When you are ready for care, start with recognition or a free Meet &amp; Greet—not a rushed label.</p>
             </div>
-            <div class="answers-next-step-actions" style="max-width:640px;margin:0 auto;">
-              <p class="answers-next-step-links">${link('/adhd-screening', 'Take our free ADHD screening')} · ${link('/adhd-care', 'How the evaluation works')} · ${link('/pricing', 'Pricing')}</p>
-              <p><a class="button ds-button ds-button--primary" href="/adhd-care" data-siya-track="answers_next_step_click">Explore ADHD Care →</a></p>
-              <p class="answers-next-step-availability">Available in California, Texas, Pennsylvania, and Florida.</p>
+            <div class="answers-next-step-actions" style="max-width:720px;margin:0 auto;">
+              <p class="answers-next-step-links">${link('/adhd-screening', 'Free ADHD screening')} · ${link('/primary-care', 'Primary care')} · ${link('/fatigue', 'Fatigue')} · ${link('/pricing', 'Pricing')}</p>
+              <p class="answers-next-step-links">${link('/answers/what-happens-after-adhd-evaluation', 'After an evaluation')} · ${link('/answers/fsa-hsa-adhd-evaluation', 'FSA / HSA')} · ${link('/answers/adhd-workplace-accommodations', 'Workplace accommodations')}</p>
+              <p><a class="button ds-button ds-button--primary" href="/redirect/meet-greet" data-siya-track="answers_next_step_click" data-siya-track-alt="meet_greet_click">Book Free Meet &amp; Greet →</a></p>
+              <p class="answers-next-step-availability">Meet &amp; Greet and initial visits are often available within 48 hours in California, Texas, Pennsylvania, and Florida.</p>
             </div>
           </section>
           <!-- /SIYA:ANSWERS-ADHD-CARE-PATHWAYS -->`;
@@ -118,6 +126,6 @@ export function renderShadowLpGeoContext() {
 /** Screening cross-links for /online-adhd-test / /adhd-screening */
 export function renderOnlineTestCrossLinks() {
   return `<!-- SIYA:ADHD-ONLINE-TEST-CROSS-LINKS -->
-            <p class="adhd-online-test-cross-links" style="max-width:720px;margin:1.5rem auto 0;">California residents: see ${link('/adult-adhd-screening-california', 'California ADHD screening')}. Ready for evaluation? ${link('/adhd-care', 'ADHD evaluation &amp; care')} · ${link('/adhd-diagnosis-texas', 'Texas ADHD diagnosis')}.</p>
+            <p class="adhd-online-test-cross-links" style="max-width:720px;margin:1.5rem auto 0;">California residents: see ${link('/adult-adhd-screening-california', 'California ADHD screening')}. Texas residents: see ${link('/adult-adhd-screening-texas', 'Texas ADHD screening')}. Ready for evaluation? ${link('/adhd-care', 'ADHD evaluation &amp; care')} · ${link('/adhd-diagnosis-texas', 'Texas ADHD diagnosis')} · ${link('/adhd-diagnosis-pennsylvania', 'Pennsylvania ADHD diagnosis')}.</p>
             <!-- /SIYA:ADHD-ONLINE-TEST-CROSS-LINKS -->`;
 }

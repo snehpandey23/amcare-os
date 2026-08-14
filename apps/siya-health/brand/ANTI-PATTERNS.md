@@ -17,6 +17,7 @@ These are mistakes Siya has already learned from (or that healthcare marketing d
 | Stock doctor shaking hands | Says “generic healthcare,” not recognition |
 | Arms-crossed white-coat stare | Corporate headshot energy; fights Care before company |
 | AI-generated people pretending to be clinicians | Breaks trust permanently; never “real clinicians, real conversations” |
+| AI avatar / synthetic presenter as the primary reel format (HeyGen-style talking head) | Reads as fake; does not clear review; **removed** from allowed video formats (`video-prompts/README.md`) |
 | Clipboard / stethoscope prop portraits | Hospital brochure cliché |
 | Collages and floating avatar stacks | Dilutes one dominant human per beat |
 | Competitor telehealth stock (Wellspring / MedConnect / Power Telehealth style) | Off-brand; often recognizable as rented imagery |
@@ -55,6 +56,9 @@ These are mistakes Siya has already learned from (or that healthcare marketing d
 | Screening language that implies diagnosis or a guaranteed prescription | Clinical + legal failure |
 | Miracle timelines / “results like these” | Exaggeration; trust does not compound |
 | Starting with “We treat X” before “Does this sound familiar?” | Skips recognition |
+| Textbook / listicle spines (“5 types of ADHD”) as the hook | Reads as lecture, not recognition — underperforms vs insight/emotional hooks |
+| Near-verbatim transcription of a researched Reel into captions/prompts | Research supplies the *angle*, not the words — “same to same” is a process failure |
+| Fabricated celebrity quotes or invented “public” diagnosis stories | Trust + legal failure; only use what is actually publicly disclosed |
 
 ---
 

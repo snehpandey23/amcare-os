@@ -30,7 +30,7 @@ Do not invent layouts. Do not freehand a final branded PNG with `GenerateImage`.
 |------|------|
 | Captions / company vs founder | `knowledge-pillars/FOUNDER-LINKEDIN-VOICE.md` · pack `captions/` |
 | Audience × platform caption matrix (pilot) | `editorial-packs/AD-W-01/captions/AUDIENCE-PLATFORM-PILOT.md` |
-| Video / reel | `video-prompts/README.md` + pack `video-prompt.md` (prompts only — not MP4) |
+| Video / reel | `video-prompts/README.md` + pack `video-prompt.md` (real human or reaction/meme-cut — **no AI avatar**) |
 | Tracker | `04-Content-Tracker/Siya-Content-Tracker-Posts.csv` |
 | Team ship | `TEAM-WORKDRIVE.md` · fuse to `Siya Knowledge Editorial/` |
 | Site UX (not social pixels) | `02-VISUAL-LANGUAGE.md` · patient site CSS tokens |
@@ -46,7 +46,7 @@ Do not invent layouts. Do not freehand a final branded PNG with `GenerateImage`.
 | **LinkedIn Company** | Same PNGs (4:5 reuse) + `linkedin-*.md` captions | Captions; no separate LI crop unless brief says so |
 | **LinkedIn Founder** | `FOUNDER-LINKEDIN-VOICE.md` — no CTA | Text; banners = `linkedin/` specs only |
 | **Captions** | Platform + optional audience matrix | `captions/*.md` |
-| **Reel** | `video-prompts/` | Markdown for HeyGen/etc. — not rendered video in-repo |
+| **Reel** | `video-prompts/README.md` (**dual-track lock**) | **Track A:** Format 2 · Format 1 upgrade · no AI avatar · **one text layer** (Format 2: no auto-captions). Platform: IG/general or TikTok-first. **Track B:** founder avatar drafts only when requested. Spoken = **See-ya Health**. |
 | **Research → pack** | Editorial OS | Insight → angles → hooks → visual → copy |
 
 `INSTAGRAM-STATIC.md` is a **checklist**. It is not Creative System, Editorial OS, caption matrix, founder voice, or compositor CLI.

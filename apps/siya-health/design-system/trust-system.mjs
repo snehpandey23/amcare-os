@@ -112,17 +112,23 @@ export const TRUST_ITEMS = {
     headline: 'Secure chat',
     subline: 'HIPAA-compliant messaging',
   },
+  availability48h: {
+    id: 'availability48h',
+    type: 'badge',
+    headline: 'Often within 48 hrs',
+    subline: 'Meet & Greet / initial visits',
+  },
 };
 
 /** Trust profile → ordered item ids */
 export const TRUST_PROFILES = {
-  homepage: ['patientCount', 'adhdEvaluations', 'reviews', 'googleReviews', 'telehealth'],
+  homepage: ['patientCount', 'availability48h', 'reviews', 'telehealth'],
   landing: ['boardCertified', 'patientCount', 'reviews', 'transparentPricing', 'telehealth'],
   'landing-adhd': ['reviews', 'patientCount', 'transparentPricing', 'telehealth'],
   adhd: ['reviews', 'patientCount', 'transparentPricing', 'creyos', 'hipaa'],
   blog: ['doctorReviewed', 'medicalSources', 'hipaa'],
   provider: ['boardCertified', 'legitscript', 'hipaa'],
-  pricing: ['transparentPricing', 'patientCount', 'hipaa'],
+  pricing: ['transparentPricing', 'availability48h', 'patientCount'],
   default: ['hipaa', 'legitscript', 'telehealth'],
 };
 

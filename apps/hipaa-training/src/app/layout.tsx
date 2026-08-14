@@ -6,6 +6,7 @@ import ClientShell from "@/components/training/ClientShell";
 import { ShiftProvider } from "@/context/ShiftContext";
 import { PortalSessionSync } from "@/components/companion/PortalSessionSync";
 import { BRAND } from "@/lib/brand";
+import { THEME_BOOT_SCRIPT } from "@/lib/theme";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,7 +33,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
+    <html lang="en" className={`${inter.variable} ${poppins.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
+      </head>
       <body className="min-h-screen antialiased">
         <AuthProvider>
           <ShiftProvider>

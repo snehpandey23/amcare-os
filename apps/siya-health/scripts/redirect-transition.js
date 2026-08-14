@@ -1,5 +1,6 @@
 /**
- * Conversion redirect transition — preserves UTMs, fires analytics synchronously, then redirects.
+ * Conversion redirect transition — preserves UTMs/gclid, fires analytics synchronously, then redirects.
+ * Merges (1) query params on this page and (2) session-stored marketing params from earlier landings.
  * Redirect view events MUST fire here (not deferred) so GTM has time before navigation.
  */
 (function () {
@@ -53,7 +54,54 @@
     pushDataLayerEvent(config.analyticsEvent, baseParams);
   }
 
-  var params = new URLSearchParams(window.location.search);
+  var ATTR_KEY = 'siya_marketing_params';
+  var ATTR_KEYS = [
+    'gclid',
+    'gbraid',
+    'wbraid',
+    'utm_source',
+    'utm_medium',
+    'utm_campaign',
+    'utm_term',
+    'utm_content',
+    'utm_id',
+    '_gl',
+    'fbclid',
+    'msclkid',
+    'ttclid',
+  ];
+
+  function readStoredAttribution() {
+    try {
+      var raw = sessionStorage.getItem(ATTR_KEY);
+      if (!raw) return {};
+      var parsed = JSON.parse(raw);
+      return parsed && typeof parsed === 'object' ? parsed : {};
+    } catch (err) {
+      return {};
+    }
+  }
+
+  function writeStoredAttribution(map) {
+    try {
+      sessionStorage.setItem(ATTR_KEY, JSON.stringify(map));
+    } catch (err) {
+      /* private mode */
+    }
+  }
+
+  /* Capture any attribution params on this redirect URL for the session. */
+  var incoming = new URLSearchParams(window.location.search);
+  var stored = readStoredAttribution();
+  var captured = false;
+  ATTR_KEYS.forEach(function (key) {
+    if (incoming.has(key)) {
+      stored[key] = incoming.get(key);
+      captured = true;
+    }
+  });
+  if (captured) writeStoredAttribution(stored);
+
   var dest;
   try {
     dest = new URL(config.destination);
@@ -61,8 +109,19 @@
     return;
   }
 
-  params.forEach(function (value, key) {
+  function mergeParam(key, value) {
+    if (!key || value == null || value === '') return;
     if (!dest.searchParams.has(key)) dest.searchParams.set(key, value);
+  }
+
+  /* 1) All query params on this page (gclid, UTMs, and any others). */
+  incoming.forEach(function (value, key) {
+    mergeParam(key, value);
+  });
+
+  /* 2) Session fallback — covers landing → bare /redirect/meet-greet CTAs. */
+  Object.keys(stored).forEach(function (key) {
+    mergeParam(key, stored[key]);
   });
 
   var link = document.getElementById('siya-redirect-fallback');

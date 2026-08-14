@@ -17,7 +17,7 @@ export async function requireSopBuilderAuth(req: Request): Promise<{ auth: strin
   }
   const access = (await accessRes.json()) as { canBuild?: boolean; isAdmin?: boolean };
   if (!access.canBuild) {
-    return Response.json({ error: "Admin or department lead access required" }, { status: 403 });
+    return Response.json({ error: "Sign in required for SOP builder" }, { status: 403 });
   }
   return { auth, token: auth.slice(7), isAdmin: Boolean(access.isAdmin) };
 }

@@ -1,10 +1,7 @@
-# Pinterest — AD-I-01 v2
+# Pinterest — AD-I-01
 
-## Pin title
-Still Foggy on ADHD Treatment? Check Iron
+ADHD fog… or low iron?
 
-## Pin description
-For women with ADHD symptoms, low iron may be overlooked. Ferritin can be low even when hemoglobin looks normal. Ask your clinician for iron studies — don’t megadose. Educational from Siya Health.
+They can look alike — and stack. Ask about ferritin / iron studies. Educational only.
 
-## URL
-https://siya.health/blog/perimenopause-brain-fog
+siya.health/blog/perimenopause-brain-fog

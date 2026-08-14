@@ -4,7 +4,7 @@ The staff app uses **Vercel AI Gateway + Claude** when deployed on Vercel. Auth 
 
 ## Already done for you (project `siya-staff-assist`)
 
-- `SIYA_WORKFORCE_MODEL` = `anthropic/claude-sonnet-4.6` (Production + Preview)
+- `SIYA_WORKFORCE_MODEL` = `anthropic/claude-sonnet-5` (Production + Preview)
 - Code enables LLM on Vercel (`VERCEL=1`) via Gateway OIDC
 
 ## One click you may still need (first time only)

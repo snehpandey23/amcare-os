@@ -1,10 +1,7 @@
 # Pinterest — WL-G-01
 
-## Pin title
-How semaglutide actually works
+Semaglutide isn’t a willpower hack.
 
-## Pin description
-Before starting, ask about contraindications — and plan protein + resistance training if prescribed a GLP-1. Educational from Siya Health. https://siya.health/blog/semaglutide-for-weight-loss-how-it-works
+Hunger signals · protein · strength · clinician check. Educational only.
 
-## URL
-https://siya.health/blog/semaglutide-for-weight-loss-how-it-works
+siya.health/blog/semaglutide-for-weight-loss-how-it-works

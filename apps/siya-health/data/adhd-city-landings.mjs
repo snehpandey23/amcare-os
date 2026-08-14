@@ -200,7 +200,7 @@ export const ADHD_CITY_LANDINGS = [
       'San Diego labor/commute framing is marketing context only—not local prevalence data.',
       'Confirm which California-licensed clinicians currently schedule adult ADHD evaluations (vs weight-loss pathways) before index flip.',
       'Any medication, stimulant class, or efficacy language beyond sitewide “never guaranteed” wording.',
-      'Wendy Delgado, PA-C focus on live provider page is weight loss—do not imply ADHD evaluation leadership without clinical confirmation.',
+      'Wendy Delgado, PA-C is a generalist PA (ADHD, women’s health, weight loss, telehealth)—confirm scheduling fit; do not over-claim specialty leadership.',
     ],
     faqs: [
       {

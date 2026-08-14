@@ -1,6 +1,6 @@
 # GHL Legal Acceptance — Implementation Report
 
-Generated: 2026-07-26T11:41:11.547Z
+Generated: 2026-07-27T01:23:29.181Z
 
 ## Objective
 
@@ -44,9 +44,9 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 
 ## Audit totals
 
-- HTML pages scanned: **195**
-- Pages with legacy GHL booking links: **167**
-- Total legacy GHL booking anchor targets: **178**
+- HTML pages scanned: **202**
+- Pages with legacy GHL booking links: **174**
+- Total legacy GHL booking anchor targets: **185**
 - Pages with CarePatron booking links: **3**
 - Total CarePatron booking anchor targets: **3**
 - Pages with acceptance script after build: **1**
@@ -180,6 +180,7 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/blog/when-is-testosterone-therapy-appropriate** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/blog/youre-not-lazy-signs-undiagnosed-adult-adhd** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/book-appointment** (booking-hub) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
+- **/brain-fog** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/creyos-adhd-testing** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/fatigue** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
@@ -187,13 +188,17 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/labs** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/labs/a1c-blood-sugar** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/labs/adhd-support** (adhd-related) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
+- **/labs/cbc** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
+- **/labs/cmp** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/labs/fatigue-brain-fog** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/labs/how-to-read-results** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/labs/iron-ferritin** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
+- **/labs/lipid-panel** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/labs/mens-health** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/labs/preventive** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/labs/thyroid** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/labs/vitamin-b12** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
+- **/labs/vitamin-d** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/labs/womens-midlife** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/legal/controlled-substance-treatment-agreement** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/legal/cookie-policy** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
@@ -204,7 +209,9 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/mens-health-longevity** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/online-adhd-test** (adhd-funnel) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no, ADHD disclaimer: yes
 - **/prescriptions** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
+- **/preventive-care** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/pricing** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
+- **/primary-care** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/primary-urgent-care** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/privacy-policy** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/providers/derek-timbs** (provider-page) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
@@ -361,24 +368,31 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - `blog/when-is-testosterone-therapy-appropriate.html`
 - `blog/youre-not-lazy-signs-undiagnosed-adult-adhd.html`
 - `book-appointment.html`
+- `brain-fog.html`
 - `creyos-adhd-testing.html`
 - `fatigue.html`
 - `index.html`
 - `labs.html`
 - `labs/a1c-blood-sugar.html`
 - `labs/adhd-support.html`
+- `labs/cbc.html`
+- `labs/cmp.html`
 - `labs/fatigue-brain-fog.html`
 - `labs/how-to-read-results.html`
 - `labs/iron-ferritin.html`
+- `labs/lipid-panel.html`
 - `labs/mens-health.html`
 - `labs/preventive.html`
 - `labs/thyroid.html`
 - `labs/vitamin-b12.html`
+- `labs/vitamin-d.html`
 - `labs/womens-midlife.html`
 - `mens-health-longevity.html`
 - `online-adhd-test.html`
 - `prescriptions.html`
+- `preventive-care.html`
 - `pricing.html`
+- `primary-care.html`
 - `primary-urgent-care.html`
 - `privacy-policy.html`
 - `providers/derek-timbs.html`

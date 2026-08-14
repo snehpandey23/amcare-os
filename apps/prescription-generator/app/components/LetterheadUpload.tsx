@@ -15,6 +15,11 @@ export default function LetterheadUpload({
       onUpload(null);
       return;
     }
+    if (file.size > 1_500_000) {
+      alert("Logo must be under ~1.5MB. Compress the image and try again.");
+      event.target.value = "";
+      return;
+    }
 
     const reader = new FileReader();
     reader.onload = () => {
@@ -26,13 +31,11 @@ export default function LetterheadUpload({
 
   return (
     <section className="space-y-3">
-      <h2 className="text-lg font-semibold text-slate-800">
-        1. Upload Letterhead
-      </h2>
+      <h2 className="text-lg font-semibold text-slate-800">1. Clinic Logo</h2>
       <div className="space-y-3">
         <input
           type="file"
-          accept="image/*"
+          accept="image/png,image/jpeg,image/webp"
           onChange={handleChange}
           className="block w-full text-sm text-slate-600 file:mr-4 file:rounded-md file:border-0 file:bg-blue-600 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-blue-700"
         />
@@ -40,13 +43,20 @@ export default function LetterheadUpload({
           <div className="rounded-md border border-slate-200 bg-white p-3">
             <img
               src={letterheadPreview}
-              alt="Letterhead preview"
+              alt="Clinic logo preview"
               className="max-h-32 w-auto object-contain"
             />
+            <button
+              type="button"
+              onClick={() => onUpload(null)}
+              className="mt-2 text-xs font-medium text-slate-600 underline hover:text-slate-900"
+            >
+              Remove logo
+            </button>
           </div>
         ) : (
           <p className="text-sm text-slate-500">
-            Upload a clinic letterhead image (logo, name, address).
+            Upload your clinic logo (PNG/JPEG, under ~1.5MB). Saved with your profile.
           </p>
         )}
       </div>

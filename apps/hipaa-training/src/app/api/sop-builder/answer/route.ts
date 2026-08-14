@@ -1,9 +1,13 @@
 import {
   generateInterviewNext,
   countUserAnswers,
+  countSubstantiveAnswers,
   MAX_QUESTIONS,
+  MIN_QUESTIONS,
+  SopBuilderLlmError,
   type SopBuilderTranscriptEntry,
 } from "@/lib/sop-builder-assist";
+import { assessAnswerSubstantiveness } from "@/lib/answer-quality";
 import { assessStaffMessageSafety, staffRefusalMessage } from "@/lib/siya-os/phi-guard";
 import { apiFetch, requireSopBuilderAuth } from "@/lib/sop-builder-route-auth";
 
@@ -59,7 +63,26 @@ export async function POST(req: Request) {
   }
 
   const answerCount = countUserAnswers(transcript);
-  if (answerCount >= MAX_QUESTIONS) {
+  const substantive = countSubstantiveAnswers(transcript);
+  const lastUser = transcript[transcript.length - 1];
+  const lastQuestion =
+    [...transcript].reverse().find((e) => e.role === "assistant")?.content ??
+    `Interview question about: ${session.topic}`;
+
+  // Cap turns only after a substantive last answer (heuristic + LLM gate).
+  if (
+    answerCount >= MAX_QUESTIONS &&
+    substantive >= MIN_QUESTIONS &&
+    lastUser?.role === "user" &&
+    (lastUser.skipped ||
+      (
+        await assessAnswerSubstantiveness({
+          question: lastQuestion,
+          answer: lastUser.content,
+          skipped: false,
+        })
+      ).ok)
+  ) {
     const updated = (await apiFetch(auth, `/api/sop-builder/sessions/${sessionId}`, {
       method: "PATCH",
       body: JSON.stringify({ transcript }),
@@ -72,17 +95,28 @@ export async function POST(req: Request) {
     });
   }
 
-  const next = await generateInterviewNext({
-    topic: session.topic,
-    sourceRefs: {
-      sops: (session.sourceMaterialRefs.sops ?? []) as { id: string; title: string; snippet: string }[],
-      kb: (session.sourceMaterialRefs.kb ?? []) as { id: string; title: string; snippet: string }[],
-    },
-    transcript,
-  });
+  let next: Awaited<ReturnType<typeof generateInterviewNext>>;
+  try {
+    next = await generateInterviewNext({
+      topic: session.topic,
+      sourceRefs: {
+        sops: (session.sourceMaterialRefs.sops ?? []) as { id: string; title: string; snippet: string }[],
+        kb: (session.sourceMaterialRefs.kb ?? []) as { id: string; title: string; snippet: string }[],
+      },
+      transcript,
+    });
+  } catch (err) {
+    if (err instanceof SopBuilderLlmError) {
+      return Response.json(
+        { error: err.classified.userMessage, code: err.classified.code, kind: err.classified.kind },
+        { status: 503 },
+      );
+    }
+    throw err;
+  }
   if (!next) {
     return Response.json(
-      { error: "Could not generate next question", code: "llm_unavailable" },
+      { error: "Could not generate next question (invalid AI output).", code: "llm_error", kind: "unknown" },
       { status: 503 },
     );
   }

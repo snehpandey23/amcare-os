@@ -19,15 +19,29 @@ const VAGUE_ONLY = new Set([
   "no",
 ]);
 
+const CONFUSED_FOLLOW_UP =
+  /^(what(\s+the\s+heck|\s+the\s+fuck|\s+are\s+you|\s+r\s+u|\s+do\s+you\s+mean)?|huh+\??|wtf\??|idk|this (doesn'?t|dont) make sense|that (doesn'?t|dont) (help|make sense)|speak english|huh\??)\b/i;
+
 export function isVagueUserMessage(text: string): boolean {
   const t = text.trim().toLowerCase();
   if (!t) return true;
   if (t.length <= 2) return true;
+  if (CONFUSED_FOLLOW_UP.test(t) && t.length < 80) return true;
   const tokens = tokenizeForSearch(t);
   if (tokens.length === 0 && t.length < 20) return true;
   if (tokens.length === 1 && VAGUE_ONLY.has(tokens[0])) return true;
   if (tokens.length <= 2 && t.length < 12) return true;
   return false;
+}
+
+/** Frustrated / confused reply about the previous Assist answer — do not re-run retrieval. */
+export function isConfusedAboutPriorAnswer(text: string): boolean {
+  const t = text.trim();
+  if (!t) return false;
+  if (CONFUSED_FOLLOW_UP.test(t) && t.length < 100) return true;
+  return /^(what (the heck|are you saying|r u saying|does that mean)|i don'?t understand|that'?s not (what i|helpful)|stop)\b/i.test(
+    t,
+  );
 }
 
 export function clarifyVagueMessage(): string {
@@ -36,6 +50,116 @@ export function clarifyVagueMessage(): string {
     "",
     "For example: reimbursement, a marketing post, patient pricing, or who to escalate to.",
     "You can also tap a suggestion below the chat box.",
+  ].join("\n");
+}
+
+export function clarifyConfusedFollowUp(): string {
+  return [
+    "Sorry — that last answer wasn’t useful.",
+    "",
+    "Tell me what you need in plain terms (e.g. “a teammate was rude — who do I talk to?” or “how do I submit a reimbursement?”).",
+    "I’ll route you to the right owner instead of dumping unrelated policies.",
+  ].join("\n");
+}
+
+/** When retrieval/routing is weak — ask back instead of guessing from keyword noise. */
+export function askClarifyingQuestion(userMessage: string): string {
+  const t = userMessage.trim();
+  const hint = t.length <= 60 ? `You wrote “${t}”. ` : "";
+  return [
+    `${hint}I’m not sure which path you need yet — reply with one line:`,
+    "",
+    "1. **Patient / caller situation** (no names) — e.g. angry caller, refill stuck, scheduling",
+    "2. **Teammate / HR concern**",
+    "3. **Billing, refund, or reimbursement**",
+    "4. **Policy / SOP lookup**",
+    "5. **Tech / login / access**",
+    "",
+    "Or just say what you’re trying to get done in a short sentence.",
+  ].join("\n");
+}
+
+const CLARIFY_GENERIC = new Set([
+  "patient",
+  "patients",
+  "care",
+  "visit",
+  "chat",
+  "ask",
+  "policy",
+  "sop",
+  "help",
+  "staff",
+  "siya",
+  "health",
+  "need",
+  "want",
+  "please",
+]);
+
+/**
+ * Only answer from KB when we're actually confident.
+ * Weak / ambiguous hits should clarify — not dump the nearest "patient" FAQ.
+ */
+export function isConfidentAssistAnswer(opts: {
+  userMessage: string;
+  flowId?: string;
+  routingConfidence?: string;
+  topScore: number;
+  topChunk?: RetrievedChunk | null;
+}): boolean {
+  const { flowId, routingConfidence, topScore, topChunk, userMessage } = opts;
+  if (!topChunk || topScore <= 0) return false;
+
+  // Vague / underspecified asks should clarify unless we have a real task flow
+  if (
+    !flowId &&
+    /\b(weird|something|thing|broken|issue|problem|idk|not sure|confused|help me)\b/i.test(userMessage) &&
+    topScore < 40
+  ) {
+    return false;
+  }
+
+  // Dedicated task flows with a strong KB hit
+  if (flowId && routingConfidence === "high" && topScore >= 8) return true;
+
+  // Very strong retrieval (intent boosts + real overlap land well above this)
+  if (topScore >= 40) return true;
+
+  // Medium retrieval only if the original wording actually appears in the hit
+  if (topScore >= 15) {
+    const base = tokenizeForSearch(userMessage).filter((t) => t.length > 3 && !CLARIFY_GENERIC.has(t));
+    if (!base.length) return topScore >= 25;
+    const hay = `${topChunk.title} ${topChunk.snippet} ${topChunk.id}`.toLowerCase();
+    return base.some((t) => hay.includes(t));
+  }
+
+  return false;
+}
+
+export function workplaceConcernAnswer(): string {
+  return [
+    "I’m sorry that happened. For **workplace / people concerns** (including a teammate or manager being rude), use this path:",
+    "",
+    "1. If there’s an **immediate safety** issue, contact your **supervisor** (or on-call lead) now.",
+    "2. Otherwise, escalate to your **supervisor** and **People / HR** — don’t put patient identifiers in this chat.",
+    "3. Share **what happened**, **when**, and **who was involved** (names of staff only — no patient PHI).",
+    "",
+    "I don’t have a published SOP for interpersonal complaints yet — use **Notify owner** if you want this tracked as a knowledge gap, or **Copy escalation summary** for Slack/email.",
+  ].join("\n");
+}
+
+export function abusivePatientAnswer(): string {
+  return [
+    "For a **hostile, abusive, or threatening patient/caller** (keep names and chart details out of this chat):",
+    "",
+    "1. **You can end the interaction** — stay calm; you don’t have to continue abuse. Say you’re ending the call/chat and a supervisor will follow up.",
+    "2. **Don’t argue, diagnose, or promise** refunds, meds, or exceptions.",
+    "3. **Document in the approved clinical system** (what happened, time, channel) — not in Ask/Slack with PHI.",
+    "4. **Escalate same day** to your **supervisor / clinical lead**. If there’s a **safety threat**, escalate immediately and loop leadership.",
+    "5. **Billing / refund anger** → supervisor + **Billing lead** decide; don’t waive fees yourself.",
+    "",
+    "Use **Copy escalation summary** for a de-identified handoff, or **Notify owner** if you want a fuller published SOP.",
   ].join("\n");
 }
 
@@ -142,11 +266,12 @@ function formatPrimaryAnswer(
   if (primary.id === "patient-pricing-public-canonical") {
     return [
       "**Public pricing (siya.health):**",
+      "• **Free** — Meet & Greet (non-clinical intro; Discovery Call $79 discontinued)",
       "• **$149** — initial physician evaluation",
       "• **$79/mo** — non-controlled follow-up",
       "• **$149/mo** — controlled-substance follow-up",
       "",
-      "Internal drafts may still disagree on $79 discovery vs $149 — escalate to **Billing lead** or **CEO** before patient-facing changes.",
+      "Other legacy draft numbers → escalate **Billing lead** or **CEO** before patient-facing changes.",
     ];
   }
 
@@ -162,13 +287,7 @@ export function composeAnswerFromChunks(
   flowId?: string,
 ): string {
   if (!chunks.length) {
-    return [
-      "I searched our **approved internal guides** and didn't find a matching topic yet.",
-      "",
-      "Try a fuller phrase (e.g. \"portal chat SLA\", \"late cancel refund\", \"Meet and Greet homepage\").",
-      "",
-      "Use **Notify owner** if this should become a published policy.",
-    ].join("\n");
+    return askClarifyingQuestion(userMessage);
   }
 
   const primary = chunks[0];
@@ -192,7 +311,7 @@ export function composeAnswerFromChunks(
   if (knowledgeGap) {
     parts.push("");
     parts.push(
-      "We don't have a full approved guide for this yet. Use **Notify owner** to email **bot@siya.health**, or **Copy escalation summary** for Slack.",
+      "We don't have a full approved guide for this yet. Use **Notify owner** to queue a knowledge gap for the department lead (or founder if no lead), or **Copy escalation summary** for Slack.",
     );
   }
 

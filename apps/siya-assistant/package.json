@@ -9,6 +9,8 @@
     "build:kb": "node scripts/build-public-kb.mjs",
     "start": "next start --port 3456",
     "test:redteam": "npx --yes tsx scripts/run-red-team.ts && npm run test:topics && npm run test:clarify",
+    "test:guide-v1": "npx --yes tsx scripts/test-guide-v1.ts",
+    "test:acceptance": "npm run test:guide-v1 && npm run test:guardrails && npm run test:topics && npm run test:clarify && npm run test:handoff",
     "test:guardrails": "npx --yes tsx scripts/run-red-team.ts --deterministic-only",
     "test:topics": "npx --yes tsx scripts/test-topic-routing.ts",
     "predev": "npm run build:kb",

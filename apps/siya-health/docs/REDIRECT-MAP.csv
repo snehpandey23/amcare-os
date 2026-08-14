@@ -44,5 +44,5 @@ Old URL,New URL,Redirect Type,Reason,Internal Links Updated,Sitemap Updated
 /design-system,/,301,harden non-public paths,yes (phase7 link remediation validates),yes (sources excluded)
 /design-system/:path*,/,301,harden non-public paths,yes (phase7 link remediation validates),yes (sources excluded)
 /(.*).mjs,/,301,harden non-public paths,yes (phase7 link remediation validates),yes (sources excluded)
-/siya-circle,https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl,302/307,external newsletter form,yes (phase7 link remediation validates),yes (sources excluded)
+/siya-circle,https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx,302/307,external newsletter form,yes (phase7 link remediation validates),yes (sources excluded)
 /(.*),https://www.siya.health/$1,301,harden non-public paths,yes (phase7 link remediation validates),yes (sources excluded)

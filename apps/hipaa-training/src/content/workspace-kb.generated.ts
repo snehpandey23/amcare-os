@@ -21,25 +21,6 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
     "escalate": "Provider / clinical lead"
   },
   {
-    "id": "discovery-call-staff-billing",
-    "category": "operations",
-    "title": "Discovery Call — staff billing, cancel, and no-show",
-    "keywords": [
-      "Discovery Call",
-      "Meet and Greet",
-      "no-show",
-      "cancellation",
-      "refund",
-      "Carepatron",
-      "Spruce",
-      "patientsupport",
-      "$79",
-      "$10"
-    ],
-    "body": "Staff cheat sheet for **Siya Health Discovery Call** billing and attendance (also related to site “Meet & Greet” naming — align SKUs separately). Support email: **patientsupport@siya.health**. This topic is for **Discovery Call only** — not full ADHD evaluation / CSV / Klarity-booked visits (use Klarity topics for Klarity). Concierge and MAs must apply Discovery Call fee rules without waiving fees in chat or inventing refunds. ### Money | Item | Amount | |------|--------| | Total | $79 | | At booking (non-refundable) | $10 | | Due ≥1 h before visit | $69 | From Terms: remaining **$69** must be paid at least **1 hour before** the appointment. Covers an **initial evaluation and management visit only** — not emergency care. **No controlled medications** prescribed on this visit. ### Refunds / cancel (staff language — no promises) - **$10:** never refunded. - **$69:** refunded if patient cancels **≥24 h** before; kept if **<24 h** (patient charged full $79). - **Exceptions:** Billing lead only — document and escalate. ### No-show / late - No-show → **$79 forfeited**. - **Late >5 min** from start → may be documented as no-show per provider (full $79). - **One** discretionary free reschedule possible (provider) — staff do **not** grant; ask supervisor/provider. - Rebook otherwise: **full upfront** per policy. - Arrive/log in **5–10 minutes early** for check-in (Terms). ### Tech issues | Side | Action | |------|--------| | Patient (wifi, device, app) | Not Siya liability; no automatic refund — empathize, offer rebook per Billing | | Siya (platform/outage) | May free reschedule — escalate IT + Billing; email patientsupport | ### Before call Intake + telehealth consent **required** or visit may cancel with fee forfeiture. ### Clinical scope (set expectations) - Not emergency care. - **No controlled substances** prescribed on Discovery Call. - Further care = separate paid services. ### Disputes - Chargebacks → patientsupport first. - “I was on the call” disputes → document times, Zoom/telehealth logs, chart → **Billing lead**. ### Do not - Waive $10 or $79 in chat. - Promise refund without Billing. - Give medical advice or prescribe. **Is this the same as Klarity cancellation?** No. Klarity-booked visits use Klarity billing topics. Discovery Call uses this topic and patientsupport@siya.health. **Can staff grant one free reschedule after a no-show?** No. Provider discretion only; staff escalate. Cite for Discovery Call / Meet & Greet billing and no-show only. Never promise refunds. Escalate Billing lead. Do not apply these dollar amounts to Klarity or full evaluation products.",
-    "escalate": "Billing lead"
-  },
-  {
     "id": "ma-platforms-zoho-spruce",
     "category": "technology",
     "title": "MA platforms — Zoho suite and Spruce how-to",
@@ -150,10 +131,10 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "evaluation",
       "follow-up",
       "membership",
-      "discovery",
+      "meet and greet",
       "adhd"
     ],
-    "body": "Staff must align patient-facing answers with **published** siya.health pricing unless billing leadership publishes an update. **Published (siya.health/pricing):** - **$149** — initial physician evaluation (one-time). - **$79/month** — follow-up plan (non-controlled medication management where applicable). - **$149/month** — follow-up plan when controlled-substance monitoring applies. **Homepage CTA:** Primary hero action is **Book Free Meet & Greet** (owned flow), not third-party marketplace checkout — see decision `homepage-cta-meet-and-greet`. **Internal drafts may conflict:** Legacy docs mention Discovery **$79**, intake **$199**, Bronze **$49**, neuro-spiritual bundle **$149**, **$69/mo** maintenance, ads at **$79 consult**. **Do not** state those as current policy in chat until `FOUNDER-RESOLVE` items are closed and this topic is updated. **Which price do I quote on Spruce?** Use the invoice type billing lead configured in Klarity/Carepatron. If unsure, escalate **Billing** — do not guess between $79 discovery and $149 eval. For pricing questions: cite **$149 initial**, **$79 / $149 monthly** follow-up tiers from the public site; mention Meet & Greet for entry; flag that internal legacy funnels differ and require founder confirmation; never promise refunds or discounts not in written policy.",
+    "body": "Staff must align patient-facing answers with **published** siya.health pricing (`site-standards.mjs` → `PRICING`) unless billing leadership publishes an update. Prefer the Ask **facts-lookup** layer for SKU amounts. **Published (siya.health/pricing + `PRICING`):** - **Free** — Meet & Greet (non-clinical intro). The paid **$79 Discovery Call is discontinued** (archived 2026-08-06). - **$149** — initial physician evaluation (one-time). - **$79/month** — follow-up plan (non-controlled medication management where applicable). - **$149/month** — follow-up plan when controlled-substance monitoring applies. **Homepage CTA:** Primary hero action is **Book Free Meet & Greet** (owned flow), not third-party marketplace checkout — see decision `homepage-cta-meet-and-greet`. **Other legacy drafts** (intake **$199**, Bronze tiers, neuro-spiritual bundles, etc.) may still appear in WorkDrive — do **not** quote them as current. Escalate CEO/Billing if someone insists on a draft number. **Which price do I quote on Spruce?** Use the invoice type billing lead configured in Klarity/Carepatron. Meet & Greet is **free**. Full evaluation is **$149**. Do not quote Discovery Call **$79**. Cite **Free Meet & Greet**, **$149 initial**, **$79 / $149 monthly** follow-up from the public site / facts-lookup. Never quote Discovery Call $79. Never promise refunds or discounts not in written policy.",
     "links": [
       {
         "label": "Public pricing page",
@@ -250,6 +231,59 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
     "escalate": "Clinical lead"
   },
   {
+    "id": "patient-faq-adhd-evaluation-included",
+    "category": "operations",
+    "title": "Patient FAQ — what’s included in the ADHD evaluation",
+    "keywords": [
+      "what's included",
+      "what is included",
+      "evaluation includes",
+      "ADHD evaluation",
+      "$149 evaluation",
+      "initial evaluation",
+      "ASRS",
+      "DIVA",
+      "diagnosis guarantee"
+    ],
+    "body": "Staff summary of the **$149** adult ADHD initial evaluation (direct siya.health). Use facts-lookup for the dollar amount; this topic covers **what’s included** and what is **not** promised. Patients often assume evaluation = automatic stimulant Rx. Staff need one clear inclusion list and the diagnosis ≠ medication line. 1. Quote price from facts-lookup / public pricing: **$149** one-time initial evaluation (not legacy $199 draft unless CEO/Billing re-locks). 2. Describe visit: **60–90 minute** telehealth with a **licensed medical provider**. 3. Includes (as clinically appropriate): clinical interview / structured history, validated tools when indicated (e.g. ASRS, DIVA, Wender Utah, SWAN, Creyos), comorbidity screening, documented plan. 4. **Not every patient gets every instrument** — clinician judgment. 5. **Diagnosis does not guarantee medication.** Stimulants/controlled meds only when clinically appropriate and legally permitted. 6. Optional follow-up plans (if appropriate): **$79/mo** non-controlled or **$149/mo** controlled follow-up — quote public pricing; do not invent tiers. 7. Screening quizzes are **not** the evaluation. **Is this a real ADHD diagnosis?** Yes when DSM criteria are met after clinician evaluation — formal diagnosis and documented plan. Still **not** a medication guarantee. **Do I need insurance?** No — cash-pay. See `patient-faq-insurance-cash-pay` / FSA topic. **What’s the difference between Meet & Greet and evaluation?** Meet & Greet is **free**, non-clinical intro. Evaluation is the paid clinical visit. | Symptom | Action | |---------|--------| | Patient expects same-day stimulant | Reset expectations; escalate Clinical if pressured | | Staff quotes $199 intake | Correct to public **$149**; escalate Billing if conflict persists | $149 · 60–90 min · licensed provider · tools as appropriate · comorbidity screen · plan. Diagnosis ≠ medication. Follow-up $79/$149 mo when applicable. No insurance required. Escalate Clinical for clinical promises.",
+    "escalate": "Clinical Program"
+  },
+  {
+    "id": "patient-faq-fsa-hsa",
+    "category": "operations",
+    "title": "Patient FAQ — FSA / HSA for visits and evaluations",
+    "keywords": [
+      "FSA",
+      "HSA",
+      "flexible spending",
+      "health savings",
+      "receipt",
+      "eligible expense",
+      "debit card"
+    ],
+    "body": "Staff talk-track when patients ask whether FSA/HSA cards can pay for Siya visits (especially ADHD evaluation). **Plan administrator decides** eligibility — Siya provides documentation, not eligibility rulings. Patients often treat “FSA-eligible” as a clinic promise. Staff need a clear split: what we can document vs what the plan covers. 1. Say: many patients use FSA/HSA for **qualified medical expenses**, including physician telehealth visits when documented as medical care. 2. Siya provides **itemized receipts** for eligible visit/evaluation charges. 3. Confirm with **their plan administrator** — Siya does not decide what qualifies. 4. Clinical evaluation and many visit fees **may** qualify; not all membership/coaching-style fees do. 5. **Medication** is usually paid at the pharmacy under separate pharmacy/plan rules — not the same as the visit fee. 6. Card declines → try alternate payment; escalate Billing lead. Never collect full card data in Ask. **Will my FSA/HSA cover the ADHD evaluation?** Often clinical evaluations qualify as medical expenses when documented — **your administrator decides**. We provide receipts. **Can I use my FSA debit card at checkout?** Many patients do when the plan allows. Declines often mean the plan does not treat that charge as eligible — escalate Billing if needed. **Does medication count the same way?** Usually separate: pharmacy + plan Rx rules. Do not promise FSA coverage for meds at the clinic checkout. | Symptom | Action | |---------|--------| | Patient wants a “letter of medical necessity” for FSA | Escalate Billing / Clinical — do not invent letters in Ask | | Staff guarantees FSA coverage | Correct: administrator decides; we provide receipts | FSA/HSA: receipts yes; eligibility = plan administrator. Meds usually pharmacy-side. Cash-pay clinic. Escalate Billing lead. No card numbers in Ask.",
+    "escalate": "Billing lead"
+  },
+  {
+    "id": "patient-faq-insurance-cash-pay",
+    "category": "operations",
+    "title": "Patient FAQ — insurance, cash-pay, and Superbills (direct)",
+    "keywords": [
+      "insurance",
+      "cash-pay",
+      "cash pay",
+      "do you take insurance",
+      "accept insurance",
+      "superbill",
+      "EOB",
+      "out of network",
+      "reimbursement",
+      "in-network"
+    ],
+    "body": "Staff talk-track for **siya.health direct** patients asking about insurance. Siya Health is **cash-pay today** and does **not** accept insurance. Do not mix with Klarity insured-patient rules. Insurance questions are high-volume and easy to over-promise. One consistent answer protects trust and billing. 1. Confirm channel: **siya.health direct** vs **Klarity**. 2. **Direct:** “We do not accept insurance. Care is cash-pay with transparent pricing on siya.health/pricing.” 3. Offer **itemized receipt / Superbill** so the patient can submit to their plan for possible out-of-network reimbursement — **we do not guarantee reimbursement**. 4. FSA/HSA: point to `patient-faq-fsa-hsa` (plan administrator decides eligibility). 5. “Will you be in-network later?” → “Insurance options may be added later; today we are cash-pay.” Do not invent a go-live date. 6. Never collect card/insurance member IDs in Ask. Escalate Billing lead for Superbill disputes or special billing requests. **Do you take my insurance / Aetna / Blue Cross / Medicare?** No. Siya Health does not accept insurance on the direct site. Cash-pay only. Klarity marketplace insurance rules are a **different channel** — use Klarity topics if the visit was booked on Klarity. **Can I get reimbursed by my plan?** Maybe — out-of-network / FSA rules vary. We provide itemized receipts; the **plan** decides. Do not promise coverage. **Can you bill insurance after the visit?** No for direct cash-pay visits. Escalate Billing lead if a patient insists on an exception — do not commit in chat. **What about Klarity patients who have insurance?** Different channel. Use `klarity-billing-cancellation` / Klarity payment agreement language. Do not apply this cash-pay FAQ to Klarity insured flows. | Symptom | Action | |---------|--------| | Patient sends EOB / claim denial | Empathy + clarify we are cash-pay; escalate Billing if Superbill wording disputed | | Staff quotes “we take insurance” | Correct immediately; cite this topic + pricing page | Direct siya.health: **does not accept insurance**; cash-pay; receipts for patient-driven reimbursement/FSA. No coverage guarantees. Klarity ≠ this answer. Escalate Billing lead for exceptions. No PHI in chat.",
+    "escalate": "Billing lead"
+  },
+  {
     "id": "medical-compliance-marketing",
     "category": "marketing_os",
     "title": "Medical compliance in marketing (SOP)",
@@ -280,20 +314,22 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "guardrails",
       "workforce"
     ],
-    "body": "Canonical behavior for **Siya Helpdesk (Internal)** — workforce chat at the workforce Vercel app (not siya.health, not public Siya Guide). **Audience:** Siya Health US staff + Amcare India offshore concierge/MA support. **Source of truth:** `docs/siyaos-knowledge-base` topics with `status: live`. WorkDrive `SiyaOS/` drafts are not policy until promoted. **Departments (routing):** Accounts · HR · Marketing · Clinical Operations · Compliance · Technology · Leadership · General. **Answer shape:** intent → retrieve live KB → plain-language steps → cite topic title(s) → escalate if gap or conflict. **What pricing do staff quote?** Public site: **$149** initial eval; **$79/mo** or **$149/mo** follow-up. Legacy $79 discovery / conflicting drafts → escalate Billing lead or CEO; do not guess. **Reimbursement SOP?** If no live Accounts topic, say missing and notify Accounts owner. You are Siya Helpdesk (Internal). Retrieve-first from live Company Memory only. No PHI, no clinical dosing/prescribing advice, no refund promises, no 24/7 claims unless in sources. If sources conflict, explain conflict and escalate. Not patient-facing; not legal/HR authority when no approved guidance. Reference topic titles used (e.g. Escalation pathways, Third-party caller, Patient pricing public canonical). Use placeholders Billing lead, Privacy Officer, Clinical lead — do not invent emails or Slack channels."
+    "body": "Canonical behavior for **Siya Helpdesk (Internal)** — workforce chat at the workforce Vercel app (not siya.health, not public Siya Guide). **Audience:** Siya Health US staff + Amcare India offshore concierge/MA support. **Source of truth:** `docs/siyaos-knowledge-base` topics with `status: live`. WorkDrive `SiyaOS/` drafts are not policy until promoted. **Departments (routing):** Accounts · HR · Marketing · Clinical Operations · Compliance · Technology · Leadership · General. **Answer shape:** intent → retrieve live KB → plain-language steps → cite topic title(s) → escalate if gap or conflict. **What pricing do staff quote?** Public site / facts-lookup: **Free Meet & Greet**; **$149** initial eval; **$79/mo** or **$149/mo** follow-up. Discovery Call **$79** is discontinued (2026-08-06). Other conflicting drafts → escalate Billing lead or CEO. **Reimbursement SOP?** If no live Accounts topic, say missing and notify Accounts owner. You are Siya Helpdesk (Internal). Retrieve-first from live Company Memory only. No PHI, no clinical dosing/prescribing advice, no refund promises, no 24/7 claims unless in sources. If sources conflict, explain conflict and escalate. Not patient-facing; not legal/HR authority when no approved guidance. Reference topic titles used (e.g. Escalation pathways, Third-party caller, Patient pricing public canonical). Use placeholders Billing lead, Privacy Officer, Clinical lead — do not invent emails or Slack channels."
   },
   {
     "id": "billing-late-cancel",
     "category": "operations",
-    "title": "Late cancellation and refunds",
+    "title": "Late cancellation, no-show, and refunds (direct + Klarity)",
     "keywords": [
       "late cancel",
       "cancellation",
       "refund",
       "same day",
-      "billing"
+      "billing",
+      "no-show",
+      "$50"
     ],
-    "body": "How staff talk about cancellations without promising refunds. Refund authority sits with billing; inconsistent promises create liability and patient conflict. 1. Follow **written billing policy** for the cancellation window. 2. Document cancel date/time in the record. 3. Do **not** promise refunds in chat or phone — use approved language. 4. Escalate exceptions to **billing lead**. **Patient cancels same-day / inside late-cancel window?** Use approved late-cancel language; do **not** promise refund in chat. Route to **billing lead** or Klarity support per policy. For **Klarity-booked** visits, use `klarity-billing-cancellation` (24h rule; $10 initial deposit non-refundable). **Provider no-show / emergency?** Offer **reschedule** first. Refund only when billing policy and billing lead (or documented provider direction) support it. **Patient no-show?** Explain no-show policy; do **not** proactively offer refund. Disputes → billing / Klarity. Klarity channel details: `klarity-billing-cancellation`. **Payment not captured before visit (card failed)?** Follow ops workflow to **release slot** after the defined window so others can book — document in chart/billing tools. Klarity timing: `klarity-previsit-checklist`. **FSA / HSA cards?** May work in Klarity/Carepatron when plan allows; declines often mean visit type not covered. Never collect card data in Siya Assistant. Escalate **billing**. **Duplicate charge already refunded in portal?** Confirm ledger, explain refund timeline; do not double-refund without billing review. | Symptom | Action | |---------|--------| | Patient demands refund in portal chat | Empathy + billing follow-up; no commitment | Never authorize refunds. Point to written policy and billing lead. For Klarity bookings prefer `klarity-billing-cancellation`. Suggest documenting cancel time.",
+    "body": "How staff talk about cancellations and no-shows without promising refunds. Prefer Ask **facts-lookup** for the locked **$50** direct no-show fee. Refund authority sits with billing; inconsistent promises create liability and patient conflict. Legacy **$40 / $79** no-show drafts are **retired** — do not quote them. 1. Confirm booking **channel** first: **siya.health direct** vs **Klarity**. 2. **Direct no-show / missed appointment:** fee is **$50** (facts-lookup). Do **not** waive in chat. 3. **Direct late-cancel** (patient cancelled before start): fee wording **not locked** — escalate **Billing lead**; do not invent an amount. 4. **Klarity-booked:** use `klarity-billing-cancellation` only (24h rule; $10 deposit) — never apply the $50 Siya direct fee to Klarity. 5. Document cancel/no-show date/time in the record. 6. Do **not** promise refunds in chat or phone — escalate exceptions to **billing lead**. **What is the no-show fee for a CarePatron / siya.health booking?** **$50** for missed / no-show appointments on direct bookings. Disputes → Billing lead. Do not quote legacy $40 or $79. **Patient cancels same-day / late-cancel (direct)?** Late-cancel amount is **pending founder confirmation**. Empathy + document time + escalate **Billing lead**. Do **not** invent a fee. If it was actually a no-show, use **$50**. **Klarity-booked cancel / no-show?** Use `klarity-billing-cancellation` (24h rule; $10 initial deposit non-refundable). Different channel — do not mix. **Provider no-show / emergency?** Offer **reschedule** first. Refund only when billing policy and billing lead (or documented provider direction) support it. **Payment not captured before visit (card failed)?** Follow ops workflow to **release slot** after the defined window so others can book — document in chart/billing tools. Klarity timing: `klarity-previsit-checklist`. **FSA / HSA cards?** May work when plan allows; declines often mean visit type not covered. Never collect card data in Ask. Escalate **billing**. Use Siya cash-pay / FSA facts-lookup for siya.health payment questions (not Klarity insured language). **Duplicate charge already refunded in portal?** Confirm ledger, explain refund timeline; do not double-refund without billing review. | Symptom | Action | |---------|--------| | Patient demands refund in portal chat | Empathy + billing follow-up; no commitment | | Staff cites old $40 or $79 no-show | Correct to **$50** direct no-show (or Klarity topic if Klarity) | Never authorize refunds. Direct no-show = **$50** via facts-lookup. Late-cancel amount not locked — escalate. Klarity → `klarity-billing-cancellation`. Never surface retired $40/$79 no-show drafts.",
     "escalate": "Billing lead"
   },
   {
@@ -342,8 +378,45 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "klarity",
       "spruce"
     ],
-    "body": "Multiple legacy ingests disagree. Staff and the assistant must **not** pick a side without CEO/billing confirmation. | Topic | Conflict | |-------|----------| | Front-end offer | Discovery **$79** vs site **$149** eval vs neuro-assessment **$149** bundle in draft GTM | | Intake | **$199** with $79 credit vs **$149** initial evaluation on site | | Membership | **$69/mo** draft vs **$79 / $149** public follow-up | | No-show | **$40** vs **$79** vs full appointment fee | | Chat SLA | 5 min vs 24h vs 48h backlog in old decks | | Systems | Carepatron vs **Klarity** primary scheduling; Spruce for messaging | | Marketing | **24/7** in old job/5W1H vs founder direction **not 24/7** | **Action:** Escalate to **CEO** (or billing/clinical program lead) with the specific conflict. Quote **public pricing topic** for patient-facing fees until resolved. When users cite pasted SOWs, ads plans, or WorkDrive drafts that conflict with live KB: acknowledge the conflict, point to this topic, give only **live** + **public pricing** facts, and offer escalation — never merge draft numbers into a single answer.",
+    "body": "Some legacy ingests still disagree. Staff and the assistant must **not** pick a side without CEO/billing confirmation — except where a row below is marked **Resolved**. | Topic | Status | |-------|--------| | Front-end offer | **Resolved 2026-08-06:** Discovery Call **$79** discontinued → **free Meet & Greet**. Remaining draft noise: neuro-assessment **$149** bundles in old GTM — do not quote without CEO confirmation | | **No-show (direct siya.health)** | **Resolved 2026-08-06:** **$50** no-show / missed appointment. Legacy **$40** / **$79** / “full fee” drafts are **retired** — do not quote. Late-cancel amount still **pending** — escalate Billing. Klarity stays on `klarity-billing-cancellation`. Prefer Ask facts-lookup. | | Intake | **$199** with $79 credit vs **$149** initial evaluation on site — still unresolved for old drafts; quote public **$149** | | Membership | **$69/mo** draft vs **$79 / $149** public follow-up — still unresolved; quote public follow-up SKUs | | Chat SLA | 5 min vs 24h vs 48h backlog in old decks — use live `chat-review-sla` | | Systems | Carepatron vs **Klarity** primary scheduling; Spruce for messaging | | Marketing / hours | Old **24/7** job copy is wrong. **No fixed practice-wide hours** — provider schedules set weekly in EHR; direct patients to booking availability (facts-lookup hours) | **Action:** Escalate to **CEO** (or billing/clinical program lead) only for rows still unresolved. For patient-facing fees use **public pricing** + facts-lookup (including **$50** direct no-show). When users cite pasted SOWs, ads plans, or WorkDrive drafts that conflict with live KB: acknowledge the conflict, point to this topic, give only **live** + **public pricing** / facts-lookup facts, and offer escalation — never merge draft numbers into a single answer. Never quote retired no-show **$40** or **$79**.",
     "escalate": "CEO"
+  },
+  {
+    "id": "patient-faq-telehealth-legitimate",
+    "category": "operations",
+    "title": "Patient FAQ — is Siya / telehealth legitimate care?",
+    "keywords": [
+      "telehealth legitimate",
+      "is telehealth real",
+      "legitimate",
+      "scam",
+      "real doctor",
+      "licensed",
+      "HIPAA",
+      "online doctor legit"
+    ],
+    "body": "How staff answer “Is telehealth / Siya legitimate?” without overselling. Legitimate telehealth = licensed clinicians, HIPAA-aware tools, informed consent, documented visits, and continuity — not anonymous chatbots or uncontrolled “med mills.” Trust objections block booking. Staff need a calm, factual script tied to how Siya actually operates. 1. Affirm: Siya Health is **physician-led telehealth** with **licensed medical providers** in states we serve (CA, TX, PA, FL on the public site). 2. Explain legitimacy markers: verified clinician identity, state license where the patient is located, secure visit/messaging, documentation in the medical record, clear Rx/refill/crisis expectations. 3. Clarify limits: emergencies and some exams need **in-person / 911**; labs/imaging may complement telehealth. 4. Push back gently on myths: format ≠ quality; apps cannot skip assessment for controlled substances; intro visits ≠ full diagnosis. 5. Point patients to Meet & Greet (free) or public provider pages for credentials — do not invent credentials. 6. Escalate Clinical Program or Privacy Officer for serious “scam” accusations, credential disputes, or privacy incidents. **Is an online ADHD diagnosis legitimate?** When done by a licensed clinician with structured history, appropriate tools, documentation, and follow-up — yes, under state rules. Screening quizzes alone are **not** a diagnosis. See also `patient-faq-adhd-evaluation-included`. **Do you prescribe without seeing me?** Care requires an appropriate clinician–patient relationship and assessment. Never promise controlled substances without evaluation. **What if I’m in a state you don’t serve?** We only care for patients where we have licensed/serviceable coverage. Use facts-lookup for states/providers — do not invent expansion. | Symptom | Action | |---------|--------| | Patient compares us to a banned telehealth brand | Stay factual: licensure + documentation + follow-up; escalate Clinical if needed | | Credential challenge | Send public provider profile URL; escalate Clinical Program | Legitimacy = licensure + documentation + follow-up + HIPAA-aware tools. Siya = physician-led cash-pay telehealth in published states. No instant controlled-Rx promises. Escalate Clinical/Privacy for disputes. No PHI.",
+    "escalate": "Clinical Program / Privacy Officer"
+  },
+  {
+    "id": "service-line-blurbs",
+    "category": "operations",
+    "title": "Service-line blurbs — staff one-paragraph explainers",
+    "keywords": [
+      "do we offer",
+      "service line",
+      "ADHD care",
+      "weight loss",
+      "GLP-1",
+      "primary care",
+      "men's health",
+      "women's health",
+      "labs",
+      "prescriptions",
+      "what services"
+    ],
+    "body": "Short staff-facing blurbs for each public service line. Prefer Ask **facts-lookup** for “Do we offer X?” (yes/no + one paragraph). Use this topic when staff need the same language with links or slightly more context. **States:** Care is offered in **California, Texas, Pennsylvania, and Florida** unless a specific product page says otherwise. Confirm provider×state with facts-lookup when asked. Marketing pages are long. Staff need one calm paragraph per line — enough to explain, not sell. 1. If Ask already answered via facts-lookup, do not contradict it. 2. Keep clinical promises conservative: medication only when appropriate; no outcome guarantees. 3. Point to the matching public page for patient self-serve detail. 4. Unsupported services (e.g. pediatrics, in-person ER) → say we don’t offer that; escalate Clinical if unsure. **Adult ADHD** Physician-led adult ADHD evaluation and follow-up via telehealth. Structured clinical history, validated tools as appropriate, comorbidity screening, and a documented plan. Diagnosis does not guarantee medication. Public page: `/adhd-care`. See also `patient-faq-adhd-evaluation-included`. **Weight loss / GLP-1 / metabolic** Provider-guided medical weight-loss and metabolic care (including GLP-1 or other options when clinically appropriate). Board-certified obesity-medicine framing on the public site — not a meds-only storefront. Page: `/weight-loss-metabolic-health`. **Primary & urgent care** Virtual primary and urgent-style visits for adults — wellness, chronic care support, preventive lab review, and clear follow-up plans in licensed states. Not an emergency room. Page: `/primary-urgent-care`. **Men’s health** Physician-led men’s health telehealth — testosterone evaluation, erectile dysfunction support, metabolic/longevity planning — not testosterone-first marketing. Page: `/mens-health-longevity`. **Women’s health** Women’s health telehealth covering PCOS, perimenopause, thyroid/metabolic concerns, ADHD in women, and preventive care. Page: `/womens-health`. **Labs & blood tests** Transparent direct-pay lab testing (thyroid, blood sugar, vitamins, iron, metabolic/preventive panels) with physician guidance available through Siya. Labs do not diagnose ADHD by themselves. Page: `/labs`. **Prescriptions / Rx pathway** Provider-reviewed prescriptions through Siya telehealth when clinically appropriate. Availability varies by state and clinical indication — never promise a specific controlled substance. Page: `/prescriptions`. Refill edge cases → Clinical / refill guidance topics (CSA playbook is a separate workstream). | Symptom | Action | |---------|--------| | “Do you do pediatrics / therapy-only / surgery?” | We don’t offer that on the public service menu — escalate Clinical if borderline | | Staff pastes full marketing hero copy | Trim to the blurb above | Yes we offer: ADHD, weight/GLP-1, primary/urgent telehealth, men’s, women’s, labs, Rx pathway — in CA/TX/PA/FL as published. One-paragraph blurbs only. Meds never guaranteed. Pair with facts-lookup service offer. Escalate Clinical when unsure.",
+    "escalate": "Clinical Program"
   },
   {
     "id": "third-party-caller",

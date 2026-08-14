@@ -30,7 +30,7 @@ export const ADHD_EVALUATION_199_LINK = `${CAREPATRON_BASE}&i=bxrKBOuk`;
 export const BOOKING_LINK = MEET_GREET_BOOKING_URL;
 /** @deprecated Legacy CarePatron consultation slot — migrates to walkthrough */
 export const LEGACY_CAREPATRON_CONSULTATION_LINK = `${CAREPATRON_BASE}&i=sysv73e4`;
-export const PROFILE_LAST_UPDATED = '2026-06-05';
+export const PROFILE_LAST_UPDATED = '2026-08-08';
 
 export const PROVIDER_PHOTO_PLACEHOLDER = 'assets/provider-placeholder.svg';
 

@@ -114,7 +114,7 @@ Full-file scan also counted **11,209** live hrefs before generator regenerations
 
 | Destination | Use | Notes |
 |-------------|-----|-------|
-| `https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl` | Siya Circle / Health Guide join | Intact; `target="_blank"` + `rel="noopener noreferrer"` |
+| `https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx` | Siya Circle / Health Guide join | Intact; `target="_blank"` + `rel="noopener noreferrer"` |
 | `https://www.zocdoc.com/booking-link/practice/siya-healthcare-182234` | Secondary booking | Intact + `zocdoc_booking_click` |
 | `https://spruce.care/siyahealth` | Legacy raw chat | Prefer `/redirect/chat`; rewritten by chrome when present |
 | CarePatron ADHD walkthrough / evaluation booking URLs | Via `/redirect/adhd-*` | Redirect pages retained |

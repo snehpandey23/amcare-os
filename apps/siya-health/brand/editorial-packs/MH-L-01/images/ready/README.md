@@ -1,5 +1,3 @@
-# MH-L-01 — On TRT? 5 fundamentals
+# MH-L-01 ready (v3 — 2nd feedback)
 
-Ready-to-post Instagram carousel (v1).
-Practical: lift · protein · sleep · vitamin D check · keep labs.
-Caption: copy/instagram.md
+Six files only. Logo +~10% · arrow bottom-right on 1–5 · clearer labs line · CTA “Read more”.

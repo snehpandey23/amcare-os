@@ -71,12 +71,13 @@ const html = `<!DOCTYPE html>
         <div class="container hero-inner">
           <div class="hero-merged-content">
             <h1>Transparent pricing for physician-led care</h1>
-            <p class="hero-merged-lead">One evaluation. Clear follow-up plans. No Bronze/Silver/Gold tiers—just care-delivery pricing that applies across ADHD, weight loss, metabolic health, primary care, and telehealth.</p>
+            <p class="hero-merged-lead">Pricing follows the care journey—Meet &amp; Greet, evaluation, plan, then ongoing follow-up. Same transparent fees across ADHD, weight, primary care, and telehealth. No Bronze/Silver/Gold tiers.</p>
             <div class="hero-ctas hero-ctas-row">
               <a class="button ds-button ds-button--primary" href="${BOOK}" data-siya-track="meet_greet_click" data-siya-location="hero" data-page-type="pricing" data-cta-slot="meetGreet" data-component="button">${COPY_STANDARDS.meetGreetCta || 'Book Free Meet &amp; Greet'}</a>
               <a class="button ds-button ds-button--secondary secondary" href="${REDIRECT_CHAT_URL}" data-siya-track="secure_chat_click" data-siya-location="hero" data-page-type="pricing" data-cta-slot="secureChat" data-component="button">Start Secure Medical Chat</a>
             </div>
             <div class="hero-trust-bar">
+              <span><strong>Often within 48 hrs</strong> Meet &amp; Greet / initial visits</span>
               <span>Board-certified physicians</span>
               <span>Transparent pricing</span>
               <span>HIPAA-Compliant</span>
@@ -86,11 +87,47 @@ const html = `<!DOCTYPE html>
         </div>
       </section>
 
-      <section class="section" id="pricing-plans">
+      <section class="section" id="care-journey-pricing">
         <div class="container">
           <div class="section-header">
-            <h2>Care pricing</h2>
-            <p class="lead">These plans describe how care is delivered—not a single condition. Your clinician recommends the right pathway after evaluation.</p>
+            <h2>How pricing maps to care</h2>
+            <p class="lead">You pay for steps in the journey—not a packaged diagnosis product. Labs and medication remain separate when ordered.</p>
+          </div>
+          <div class="flow-cards flow-cards--journey">
+            <div class="flow-card">
+              <span class="flow-step-num">1</span>
+              <h3>Meet &amp; Greet</h3>
+              <p class="pricing-price pricing-price--inline"><span>Free</span></p>
+              <p>Conversation to understand what’s going on—often available within 48 hours. No commitment to evaluation.</p>
+            </div>
+            <div class="flow-card">
+              <span class="flow-step-num">2</span>
+              <h3>Clinical evaluation</h3>
+              <p class="pricing-price pricing-price--inline"><!-- SIYA:PRICE:INITIAL_EVAL --> <span>one-time</span></p>
+              <p>Structured history, goals, and a clear plan across care pathways.</p>
+            </div>
+            <div class="flow-card">
+              <span class="flow-step-num">3</span>
+              <h3>Care plan</h3>
+              <p class="pricing-price pricing-price--inline"><span>Included</span></p>
+              <p>Findings in plain language. Labs or medication only when clinically appropriate.</p>
+            </div>
+            <div class="flow-card">
+              <span class="flow-step-num">4</span>
+              <h3>Ongoing follow-up</h3>
+              <p class="pricing-price pricing-price--inline"><span>${PRICING.nonControlledFollowUp.display}</span> or <span>${PRICING.controlledFollowUp.display}</span><span>/month</span></p>
+              <p>Continuity matched to your plan—non-controlled or controlled medication pathways.</p>
+            </div>
+          </div>
+          <p class="symptoms-transition">Not every patient needs a monthly plan. Your clinician recommends what fits after evaluation.</p>
+        </div>
+      </section>
+
+      <section class="section section-tinted" id="pricing-plans">
+        <div class="container">
+          <div class="section-header">
+            <h2>Visit &amp; follow-up fees</h2>
+            <p class="lead">These fees describe how care is delivered—not a single condition. Your clinician recommends the right pathway after evaluation.</p>
           </div>
           <div class="pricing-cards-grid">
             <article class="pricing-card">
@@ -154,7 +191,7 @@ const html = `<!DOCTYPE html>
             </details>
             <details class="faq-item">
               <summary>Do you take insurance?</summary>
-              <p>We offer transparent cash pricing today. Many patients use FSA or HSA funds. Insurance-based options may be added later.</p>
+              <p>We offer transparent cash pricing today. Many patients use FSA or HSA funds—see <a href="/answers/fsa-hsa-adhd-evaluation">FSA / HSA for evaluation</a>. Insurance-based options may be added later.</p>
             </details>
             <details class="faq-item">
               <summary>Is medication included in the monthly price?</summary>
@@ -180,7 +217,7 @@ const html = `<!DOCTYPE html>
         <div class="container">
           <div class="cta-band">
             <h3>Ready to start with a clinician?</h3>
-            <p>Book when you are ready. We will confirm eligibility for ${STATES_INLINE} at scheduling.</p>
+            <p>Book when you are ready. Meet &amp; Greet and initial visits are often available within 48 hours. We confirm eligibility for ${STATES_INLINE} at scheduling.</p>
             <div class="cta-band-buttons">
               <a class="button" href="${BOOK}" target="_blank" rel="noopener">${COPY_STANDARDS.primaryCta}</a>
             </div>

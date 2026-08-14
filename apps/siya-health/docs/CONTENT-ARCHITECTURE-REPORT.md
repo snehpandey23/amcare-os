@@ -1,6 +1,6 @@
 # Content architecture report
 
-Generated: 2026-07-26T11:41:04.725Z
+Generated: 2026-08-06T03:03:50.752Z
 
 ## Summary
 
@@ -29,7 +29,7 @@ Generated: 2026-07-26T11:41:04.725Z
 | Telehealth & access | /answers/what-included-199-adhd-evaluation | /blog/online-adhd-diagnosis-california | 4 | /adhd-care |
 | Food noise & GLP-1 | /answers/what-is-food-noise | /blog/food-noise-and-glp-1-what-it-means-and-what-helps | 4 | /weight-loss-metabolic-health |
 | Insulin resistance & metabolic health | /answers/what-is-insulin-resistance | /blog/insulin-resistance-and-weight-loss-clinician-overview | 8 | /weight-loss-metabolic-health |
-| Fatigue & sleep | /answers/why-am-i-tired-even-after-sleeping | /fatigue | 3 | /telehealth |
+| Fatigue & sleep | /answers/why-am-i-tired-even-after-sleeping | /fatigue | 3 | /fatigue |
 | Men's health & testosterone | /answers/what-is-free-testosterone | /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | 6 | /mens-health-longevity |
 
 ## Consolidation recommendations (answer ↔ blog overlap)

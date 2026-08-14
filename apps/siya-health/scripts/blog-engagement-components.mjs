@@ -134,8 +134,8 @@ export function comparisonTable({ title, headers, rows }) {
   return `
             <figure class="blog-engage blog-engage--comparison" aria-label="${title}">
               <figcaption class="blog-engage-label">${title}</figcaption>
-              <div class="blog-engage-table-wrap">
-                <table class="blog-engage-table">
+              <div class="blog-engage-table-wrap blog-table-wrap">
+                <table class="blog-engage-table blog-table">
                   <thead><tr>${head}</tr></thead>
                   <tbody>
                 ${body}
@@ -503,9 +503,9 @@ export function snippetDefinition({ term, text }) {
 
 export function snippetTable({ caption, headers, rows }) {
   return `
-            <figure class="blog-snippet-table-wrap">
+            <figure class="blog-snippet-table-wrap blog-table-wrap">
               <figcaption class="blog-snippet-table-caption">${caption}</figcaption>
-              <table class="blog-snippet-table">
+              <table class="blog-snippet-table blog-table">
                 <thead><tr>${headers.map((h) => `<th scope="col">${h}</th>`).join('')}</tr></thead>
                 <tbody>
                   ${rows.map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join('')}</tr>`).join('\n                  ')}

@@ -1,6 +1,6 @@
 # Link Equity Report — Canonical Winning Blogs
 
-Generated: 2026-07-26T11:41:03.463Z
+Generated: 2026-07-27T01:23:21.553Z
 
 ## Top 20 blogs needing more internal links
 
@@ -11,7 +11,7 @@ Generated: 2026-07-26T11:41:03.463Z
 | 3 | /blog/sildenafil-for-erectile-dysfunction-what-to-expect | 2 | ✗ | ✗ | ✗ | ✓ | ✗ | 1/5 |
 | 4 | /blog/tirzepatide-vs-semaglutide-which-is-better | 3 | ✗ | ✗ | ✗ | ✓ | ✗ | 1/5 |
 | 5 | /blog/minoxidil-for-hair-loss-does-it-work | 5 | ✗ | ✗ | ✗ | ✓ | ✗ | 1/5 |
-| 6 | /fatigue | 20 | ✗ | ✗ | ✗ | ✗ | ✓ | 1/5 |
+| 6 | /fatigue | 28 | ✗ | ✗ | ✗ | ✗ | ✓ | 1/5 |
 | 7 | /blog/is-adhd-medication-safe-long-term | 3 | ✓ | ✓ | ✗ | ✓ | ✗ | 3/5 |
 | 8 | /blog/non-stimulant-adhd-medications-explained | 4 | ✗ | ✗ | ✓ | ✓ | ✓ | 3/5 |
 | 9 | /blog/glp1-side-effects-and-how-to-manage-them | 4 | ✓ | ✓ | ✗ | ✓ | ✗ | 3/5 |
@@ -31,7 +31,7 @@ Generated: 2026-07-26T11:41:03.463Z
 
 | Blog | Inbound |
 |------|--------:|
-| /fatigue | 20 |
+| /fatigue | 28 |
 | /blog/insulin-resistance-and-weight-loss-clinician-overview | 18 |
 | /blog/food-noise-and-glp-1-what-it-means-and-what-helps | 16 |
 | /blog/is-online-adhd-diagnosis-legit | 15 |

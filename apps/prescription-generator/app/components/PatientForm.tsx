@@ -10,7 +10,7 @@ type PatientFormProps = {
 export default function PatientForm({ register, errors }: PatientFormProps) {
   return (
     <section className="space-y-4">
-      <h2 className="text-lg font-semibold text-slate-800">3. Patient Details</h2>
+      <h2 className="text-lg font-semibold text-slate-800">Patient Details</h2>
       <div className="grid gap-4 md:grid-cols-3">
         <div className="space-y-1 md:col-span-1">
           <label className="text-sm font-medium text-slate-700">

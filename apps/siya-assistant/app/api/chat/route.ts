@@ -63,13 +63,27 @@ export async function POST(req: Request) {
 
     const result = await runSiyaGuide(message, { priorUserMessages })
 
-    if (result.analyticsEvent) {
+    // Log intent/entity/CTA only — never message content (may contain PHI).
+    if (result.entity) {
+      emitGuideEvent('entity_resolved', {
+        entity: result.entity,
+        intent: result.intent,
+        care_pathway: result.care_pathway,
+        safety_class: result.safety_class,
+        primary_cta_id: result.primary_cta_id,
+        state: result.state,
+      })
+    } else if (result.analyticsEvent) {
       emitGuideEvent(result.analyticsEvent, {
         state: result.state,
         refusalCategory: result.refusalCategory,
+        safety_class: result.safety_class,
       })
     } else if (result.refusalCategory !== 'none') {
-      emitGuideEvent('bot_refusal_category', { refusalCategory: result.refusalCategory })
+      emitGuideEvent('bot_refusal_category', {
+        refusalCategory: result.refusalCategory,
+        safety_class: result.safety_class,
+      })
     }
 
     return Response.json({
@@ -79,6 +93,11 @@ export async function POST(req: Request) {
       links: result.links,
       citations: result.citations,
       refusalCategory: result.refusalCategory,
+      entity: result.entity || null,
+      intent: result.intent || null,
+      care_pathway: result.care_pathway || null,
+      safety_class: result.safety_class || null,
+      primary_cta_id: result.primary_cta_id || null,
     })
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Chat failed'

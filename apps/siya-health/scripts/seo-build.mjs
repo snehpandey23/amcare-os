@@ -17,6 +17,7 @@ import {
   injectProviderPhysicianSchema,
 } from './clinical-entity.mjs';
 import { applySiteChrome } from './site-chrome.mjs';
+import { contentLastModifiedIso } from './content-lastmod.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -50,6 +51,7 @@ const SITEMAP_EXCLUDE = new Set([
   'siya-circle.html',
   'adhd-screening-results.html',
   'blog/adult-adhd-treatment-california-2026.html', // EG-P0-01 retired stub
+  'docs/tint-options-preview.html', // /docs/* redirects to homepage
   ...Object.keys(REDIRECT_SHELLS),
 ]);
 
@@ -107,7 +109,7 @@ function priorityFor(rel) {
 function generateSitemap(htmlFiles) {
   const lines = [`<?xml version="1.0" encoding="UTF-8"?>`, `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`];
   const sorted = [...htmlFiles]
-    .filter((r) => !SITEMAP_EXCLUDE.has(r) && !r.startsWith('redirect/') && !isNoindexFile(r))
+    .filter((r) => !SITEMAP_EXCLUDE.has(r) && !r.startsWith('redirect/') && !r.startsWith('docs/') && !isNoindexFile(r))
     .sort((a, b) => fileToUrlPath(a).localeCompare(fileToUrlPath(b)));
   for (const rel of sorted) {
     const loc = `${BASE}${fileToUrlPath(rel)}`;
@@ -400,6 +402,102 @@ function ensureAnswerBreadcrumb(html, relPath, title, canonical) {
   return html.replace(/<\/head>/i, `${tag}\n  </head>`);
 }
 
+function inferAboutCondition(relPath, title, desc) {
+  const t = `${relPath} ${title} ${desc || ''}`.toLowerCase();
+  if (/pots/.test(t)) return 'Postural Orthostatic Tachycardia Syndrome';
+  if (/testosterone|trt|erectile|sildenafil|minoxidil|men.?s health/.test(t)) return "Men's Health";
+  if (/semaglutide|tirzepatide|glp-?1|weight|obesity|phentermine|food.noise|binge.eating|insulin/.test(t)) {
+    return 'Obesity';
+  }
+  if (/thyroid|fatigue|brain.fog|iron|sleep|insomnia|covid/.test(t) && !/adhd/.test(t)) return 'Fatigue';
+  if (/adhd|stimulant|vyvanse|adderall|focalin|executive|inattent|telehealth/.test(t)) {
+    return 'Attention-Deficit/Hyperactivity Disorder';
+  }
+  if (relPath === 'adhd-care.html') return 'Attention-Deficit/Hyperactivity Disorder';
+  return 'Medical Condition';
+}
+
+function extractJsonLdBlocks(html) {
+  const blocks = [];
+  const re = /<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi;
+  let m;
+  while ((m = re.exec(html))) {
+    try {
+      blocks.push({ full: m[0], data: JSON.parse(m[1].trim()) });
+    } catch {
+      /* skip invalid */
+    }
+  }
+  return blocks;
+}
+
+function dateModifiedFromExistingSchema(html, relPath) {
+  for (const { data } of extractJsonLdBlocks(html)) {
+    if (data && typeof data.dateModified === 'string' && /^\d{4}-\d{2}-\d{2}/.test(data.dateModified)) {
+      return data.dateModified.slice(0, 10);
+    }
+    if (data && Array.isArray(data['@graph'])) {
+      for (const node of data['@graph']) {
+        if (node?.dateModified && /^\d{4}-\d{2}-\d{2}/.test(String(node.dateModified))) {
+          return String(node.dateModified).slice(0, 10);
+        }
+      }
+    }
+  }
+  return contentLastModifiedIso(relPath);
+}
+
+/**
+ * Ensure MedicalWebPage on clinical hubs + blog articles (schema only).
+ * Skips noindex redirect stubs. Upgrades standalone WebPage on hubs; adds MWP beside BlogPosting on posts.
+ */
+function ensureMedicalWebPage(html, relPath, title, desc, canonical) {
+  if (html.includes('MedicalWebPage')) return html;
+  if (/name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) return html;
+
+  const isAdhdCare = relPath === 'adhd-care.html';
+  const isBlog =
+    relPath.startsWith('blog/') &&
+    relPath.endsWith('.html') &&
+    relPath !== 'blog/index.html';
+  if (!isAdhdCare && !isBlog) return html;
+
+  const name = title.replace(/\s*\|\s*Siya Health\s*$/i, '').trim();
+  const dateModified = dateModifiedFromExistingSchema(html, relPath);
+  const mwp = {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalWebPage',
+    name,
+    description: desc || undefined,
+    url: canonical,
+    dateModified,
+    publisher: { '@type': 'MedicalOrganization', name: 'Siya Health', url: BASE },
+    about: {
+      '@type': 'MedicalCondition',
+      name: inferAboutCondition(relPath, title, desc),
+    },
+  };
+
+  // Hubs / pages with a lone WebPage: upgrade in place (avoids duplicate page types).
+  let upgraded = false;
+  const next = html.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi, (full, inner) => {
+    if (upgraded) return full;
+    let o;
+    try {
+      o = JSON.parse(inner.trim());
+    } catch {
+      return full;
+    }
+    if (!o || o['@type'] !== 'WebPage') return full;
+    upgraded = true;
+    return `<script type="application/ld+json">${JSON.stringify(mwp)}</script>`;
+  });
+  if (upgraded) return next;
+
+  const tag = `    <script type="application/ld+json">${JSON.stringify(mwp)}</script>\n`;
+  return html.replace(/<\/head>/i, `${tag}  </head>`);
+}
+
 function ensureOrganizationWebPage(html, relPath, title, desc, canonical) {
   if (html.includes('BlogPosting')) return html;
   if (html.includes('MedicalOrganization')) return html;
@@ -559,6 +657,8 @@ function processHtml(relPath) {
   } else {
     html = categoryBreadcrumb(relPath, html);
   }
+
+  html = ensureMedicalWebPage(html, relPath, title, description || title, canonical);
 
   if (relPath.startsWith('providers/') && relPath !== 'providers/index.html') {
     const slug = relPath.replace(/^providers\//, '').replace(/\.html$/, '');

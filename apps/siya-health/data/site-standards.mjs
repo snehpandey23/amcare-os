@@ -38,6 +38,15 @@ export const PRICING = {
   legacyPath: '/membership-pricing',
   navLabel: 'Pricing',
   pageTitle: 'Pricing | Siya Health',
+  /** Free non-clinical intro — supersedes discontinued $79 Discovery Call (archived 2026-08-06). */
+  meetGreet: {
+    label: 'Meet & Greet',
+    amount: 0,
+    display: 'Free',
+    period: '',
+    description:
+      'Short, free, non-clinical conversation to understand needs and choose a next step. Not a medical visit, diagnosis, or treatment. No medication prescribed.',
+  },
   initialEvaluation: {
     label: 'Initial Evaluation',
     amount: 149,
@@ -211,6 +220,10 @@ export const COPY_STANDARDS = {
   educationHub: 'Health Guides',
   reviewBadgePending: 'Clinician-informed',
   reviewBadgeReviewed: 'Physician reviewed',
+  /** Soft ops promise — Meet & Greet + initial visits; do not harden without capacity check */
+  availabilityShort: 'Often within 48 hrs',
+  availabilityNote:
+    'Meet &amp; Greet and initial visits are often available within 48 hours across California, Texas, Pennsylvania, and Florida.',
 };
 
 /** Legacy footer strings to replace during seo-build */

@@ -1,15 +1,15 @@
 # SEO Deployment QA Report
 
-Generated: 2026-07-26T11:41:11.785Z
+Generated: 2026-07-27T01:23:29.440Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| HTML pages scanned | 195 |
-| Sitemap URLs | 159 |
+| HTML pages scanned | 202 |
+| Sitemap URLs | 166 |
 | Pages with Meet & Greet in nav | 0 |
-| Non-ADHD pages still referencing adhd-screening | 66 |
+| Non-ADHD pages still referencing adhd-screening | 73 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
 
@@ -39,7 +39,7 @@ Generated: 2026-07-26T11:41:11.785Z
 - **Default secondary CTA:** Explore Care Options → `#services` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, `adhd-screening.html`
 
-### Non-ADHD pages still containing `adhd-screening` (66)
+### Non-ADHD pages still containing `adhd-screening` (73)
 
 - `about.html`
 - `blog/compounded-vs-branded-glp1-medications.html`
@@ -68,18 +68,23 @@ Generated: 2026-07-26T11:41:11.785Z
 - `blog/weight-loss.html`
 - `blog/when-is-testosterone-therapy-appropriate.html`
 - `book-appointment.html`
+- `brain-fog.html`
 - `fatigue.html`
 - `index.html`
 - `intake/index.html`
 - `labs/a1c-blood-sugar.html`
 - `labs/adhd-support.html`
+- `labs/cbc.html`
+- `labs/cmp.html`
 - `labs/fatigue-brain-fog.html`
 - `labs/how-to-read-results.html`
 - `labs/iron-ferritin.html`
+- `labs/lipid-panel.html`
 - `labs/mens-health.html`
 - `labs/preventive.html`
 - `labs/thyroid.html`
 - `labs/vitamin-b12.html`
+- `labs/vitamin-d.html`
 - `labs/womens-midlife.html`
 - `labs.html`
 - `legal/controlled-substance-treatment-agreement/index.html`
@@ -90,7 +95,9 @@ Generated: 2026-07-26T11:41:11.785Z
 - `legal/terms-of-use/index.html`
 - `mens-health-longevity.html`
 - `prescriptions.html`
+- `preventive-care.html`
 - `pricing.html`
+- `primary-care.html`
 - `primary-urgent-care.html`
 - `privacy-policy.html`
 - `providers/derek-timbs.html`
@@ -108,7 +115,7 @@ Generated: 2026-07-26T11:41:11.785Z
 - `womens-health.html`
 - `womens-midlife-health.html`
 
-### All pages with any `adhd-screening` reference (168)
+### All pages with any `adhd-screening` reference (175)
 
 - `about.html`
 - `adhd-care.html`
@@ -151,7 +158,7 @@ Generated: 2026-07-26T11:41:11.785Z
 - `answers/insulin-resistance-without-diabetes.html`
 - `answers/is-adhd-medication-safe-long-term.html`
 
-_…and 128 more (expected on ADHD funnels)._
+_…and 135 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 

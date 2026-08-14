@@ -10,6 +10,20 @@ import { useMyTasks } from "@/hooks/useMyTasks";
 import { fetchChatReviewAccess } from "@/lib/ops-coordination-api";
 import { PortalNavLink } from "@/components/training/PortalNavLink";
 import { SopStepFlagModal } from "@/components/sop-builder/SopStepFlagModal";
+import { FOUNDER_QUEUE_PREVIEW } from "@/components/executive/CollapsibleDomainItemList";
+
+const PRIORITY_RANK: Record<string, number> = { urgent: 0, high: 1, medium: 2, low: 3 };
+
+function sortTasksForPreview(tasks: TaskRecord[]): TaskRecord[] {
+  return [...tasks].sort((a, b) => {
+    const ac = taskIsComplete(a) ? 1 : 0;
+    const bc = taskIsComplete(b) ? 1 : 0;
+    if (ac !== bc) return ac - bc;
+    const pr = (PRIORITY_RANK[a.priority] ?? 9) - (PRIORITY_RANK[b.priority] ?? 9);
+    if (pr !== 0) return pr;
+    return String(a.dueTime || "").localeCompare(String(b.dueTime || ""));
+  });
+}
 
 function applyTaskUpdate(data: { sop: TaskRecord[]; adhoc: TaskRecord[]; tasks: TaskRecord[] }, updated: TaskRecord) {
   const patchList = (list: TaskRecord[]) => list.map((t) => (t.id === updated.id ? updated : t));
@@ -17,6 +31,19 @@ function applyTaskUpdate(data: { sop: TaskRecord[]; adhoc: TaskRecord[]; tasks: 
   const adhoc = patchList(data.adhoc);
   const tasks = patchList(data.tasks);
   return { ...data, sop, adhoc, tasks };
+}
+
+/** Knowledge-layer daily tasks → open the real SOP (or workspace). */
+function knowledgeSopHref(task: TaskRecord): string | null {
+  const id = task.id;
+  const review = id.match(/^kn-sop-(?:admin-review|lead-review|refresh)-(.+)$/);
+  if (review?.[1]) {
+    return `/memory/knowledge/sops?edit=${encodeURIComponent(review[1])}`;
+  }
+  if (id.startsWith("kn-sop-task-")) return "/memory/knowledge/sops";
+  if (/^SOP review:/i.test(task.title)) return "/admin/sop-review";
+  if (/^(Lead review|Refresh SOP):/i.test(task.title)) return "/memory/knowledge/sops";
+  return null;
 }
 
 export function MyDayTasksPanel() {
@@ -29,17 +56,22 @@ export function MyDayTasksPanel() {
     itemLabel: string;
   } | null>(null);
 
-  const { sop, adhoc, doneCount, total } = useMemo(() => {
+  const [showAllTasks, setShowAllTasks] = useState(false);
+
+  const { sop, doneCount, total, previewTasks, hiddenTaskCount } = useMemo(() => {
     const sopList = data?.sop ?? [];
     const adhocList = data?.adhoc ?? [];
     const all = [...sopList, ...adhocList];
+    const sorted = sortTasksForPreview(all);
+    const hidden = Math.max(0, sorted.length - FOUNDER_QUEUE_PREVIEW);
     return {
       sop: sopList,
-      adhoc: adhocList,
       doneCount: all.filter(taskIsComplete).length,
       total: all.length,
+      previewTasks: showAllTasks || hidden === 0 ? sorted : sorted.slice(0, FOUNDER_QUEUE_PREVIEW),
+      hiddenTaskCount: hidden,
     };
-  }, [data]);
+  }, [data, showAllTasks]);
 
   useEffect(() => {
     if (!authReady || !user) return;
@@ -72,13 +104,13 @@ export function MyDayTasksPanel() {
     }
   }
 
-  async function onMarkDone(task: TaskRecord) {
+  async function onSetStatus(task: TaskRecord, status: "done" | "todo") {
     if (!data) return;
     const key = myTasksKey("today");
-    const optimistic = applyTaskUpdate(data, { ...task, status: "done" });
+    const optimistic = applyTaskUpdate(data, { ...task, status });
     await mutate(key, optimistic, false);
     try {
-      const updated = await patchTask(task.id, { status: "done" });
+      const updated = await patchTask(task.id, { status });
       await mutate(key, applyTaskUpdate(data, updated), false);
     } catch (e) {
       await mutate(key, data, false);
@@ -89,14 +121,14 @@ export function MyDayTasksPanel() {
   if (!authReady || !user) return null;
   if (isLoading && !data) {
     return (
-      <section className="rounded-2xl border border-[var(--siya-border)] bg-white/90 p-5">
+      <section className="rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)]/90 p-5">
         <p className="text-xs text-[var(--siya-text-muted)]">Loading today&apos;s tasks…</p>
       </section>
     );
   }
   if (!total && !error) {
     return (
-      <section id="my-day-tasks" className="rounded-2xl border border-[var(--siya-border)] bg-white/90 p-4 shadow-[var(--siya-shadow)] sm:p-5">
+      <section id="my-day-tasks" className="rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)]/90 p-4 shadow-[var(--siya-shadow)] sm:p-5">
         <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Your tasks today</h2>
         <p className="mt-2 text-xs text-[var(--siya-text-muted)]">
           Assigned checklists and to-dos for the ops day (IST). Department SOP drafts live under{" "}
@@ -105,12 +137,21 @@ export function MyDayTasksPanel() {
           </PortalNavLink>
           .
         </p>
+        {canChatReview ? (
+          <p className="mt-3 text-[11px] text-[var(--siya-text-muted)]">
+            Need to log a clinical chat QA note?{" "}
+            <PortalNavLink href="/chat-review" className="font-semibold text-[var(--siya-accent)] hover:underline">
+              Open manual chat QA log →
+            </PortalNavLink>{" "}
+            (no automated review pipeline yet).
+          </p>
+        ) : null}
       </section>
     );
   }
 
   return (
-    <section id="my-day-tasks" className="rounded-2xl border border-[var(--siya-border)] bg-white/90 p-4 shadow-[var(--siya-shadow)] sm:p-5">
+    <section id="my-day-tasks" className="rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)]/90 p-4 shadow-[var(--siya-shadow)] sm:p-5">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex flex-wrap items-center gap-3">
           <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Your tasks today</h2>
@@ -120,101 +161,143 @@ export function MyDayTasksPanel() {
             </span>
           ) : null}
         </div>
-        {canChatReview ? (
-          <PortalNavLink
-            href="/chat-review"
-            className="text-[11px] font-semibold text-[var(--siya-accent)] hover:underline"
-          >
-            Chat review →
-          </PortalNavLink>
-        ) : null}
       </div>
       {error ? <p className="mt-2 text-xs text-red-600">{error.message}</p> : null}
       {!total && error ? null : !total ? (
         <p className="mt-2 text-xs text-[var(--siya-text-muted)]">No tasks for today.</p>
       ) : null}
 
-      {sop.length > 0 ? (
+      {total > 0 ? (
         <div className="mt-4">
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-text-muted)]">SOPs</h3>
+          <p className="text-[11px] font-medium text-[var(--siya-text-secondary)]">
+            Open / higher priority first · showing {previewTasks.length} of {total}
+            {hiddenTaskCount > 0 && !showAllTasks ? ` · ${hiddenTaskCount} collapsed` : ""}
+          </p>
           <ul className="mt-2 space-y-3">
-            {sop.map((task) => (
-              <li key={task.id} className="rounded-xl border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)]/40 p-3">
-                <p className="font-medium text-sm text-[var(--siya-primary)]">{task.title}</p>
-                <ul className="mt-2 space-y-2">
-                  {task.checklistItems.map((item) => (
-                    <li key={item.id}>
-                      <div className="flex items-start gap-2">
-                        <label className="flex min-w-0 flex-1 cursor-pointer items-start gap-2 text-sm">
-                          <input
-                            type="checkbox"
-                            className="mt-1 h-4 w-4 shrink-0"
-                            checked={item.isChecked}
-                            onChange={() => void onToggleCheck(task, item.id)}
-                          />
-                          <span className={item.isChecked ? "text-[var(--siya-text-muted)] line-through" : ""}>
-                            {item.label}
-                          </span>
-                        </label>
-                        {task.sourceSopTemplateId ? (
-                          <button
-                            type="button"
-                            title="Flag step (unclear / outdated)"
-                            className="mt-0.5 shrink-0 rounded p-1 text-[var(--siya-text-muted)] hover:bg-amber-50 hover:text-amber-800"
-                            onClick={() =>
-                              setFlagTarget({
-                                sopTemplateId: task.sourceSopTemplateId!,
-                                checklistItemId: item.id,
-                                itemLabel: item.label,
-                              })
-                            }
-                          >
-                            ⚑
-                          </button>
-                        ) : null}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
+            {previewTasks.map((task) => {
+              const isSopChecklist = sop.some((s) => s.id === task.id) && task.checklistItems.length > 0;
+              if (isSopChecklist) {
+                const stepPreview = 4;
+                const steps = task.checklistItems;
+                const stepHidden = Math.max(0, steps.length - stepPreview);
+                const showSteps = showAllTasks || stepHidden === 0 ? steps : steps.slice(0, stepPreview);
+                return (
+                  <li key={task.id} className="rounded-xl border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)]/40 p-3">
+                    <p className="font-medium text-sm text-[var(--siya-primary)]">{task.title}</p>
+                    <ul className="mt-2 space-y-2">
+                      {showSteps.map((item) => (
+                        <li key={item.id}>
+                          <div className="flex items-start gap-2">
+                            <label className="flex min-w-0 flex-1 cursor-pointer items-start gap-2 text-sm">
+                              <input
+                                type="checkbox"
+                                className="mt-1 h-4 w-4 shrink-0"
+                                checked={item.isChecked}
+                                onChange={() => void onToggleCheck(task, item.id)}
+                              />
+                              <span className={item.isChecked ? "text-[var(--siya-text-muted)] line-through" : ""}>
+                                {item.label}
+                              </span>
+                            </label>
+                            {task.sourceSopTemplateId ? (
+                              <button
+                                type="button"
+                                title="Flag step (unclear / outdated)"
+                                className="mt-0.5 shrink-0 rounded p-1 text-[var(--siya-text-muted)] hover:bg-amber-50 hover:text-amber-800"
+                                onClick={() =>
+                                  setFlagTarget({
+                                    sopTemplateId: task.sourceSopTemplateId!,
+                                    checklistItemId: item.id,
+                                    itemLabel: item.label,
+                                  })
+                                }
+                              >
+                                ⚑
+                              </button>
+                            ) : null}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                    {stepHidden > 0 && !showAllTasks ? (
+                      <p className="mt-2 text-[11px] text-[var(--siya-text-muted)]">
+                        +{stepHidden} more steps — use Show all below
+                      </p>
+                    ) : null}
+                  </li>
+                );
+              }
+              const sopHref = knowledgeSopHref(task);
+              return (
+                <li key={task.id} className="rounded-xl border border-[var(--siya-border)] p-3 text-sm">
+                  <div className="flex flex-wrap items-center gap-2">
+                    {sopHref ? (
+                      <PortalNavLink href={sopHref} className="font-medium text-[var(--siya-accent)] hover:underline">
+                        {task.title}
+                      </PortalNavLink>
+                    ) : (
+                      <span className="font-medium text-[var(--siya-primary)]">{task.title}</span>
+                    )}
+                    <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase ${priorityBadgeClass(task.priority)}`}>
+                      {task.priority}
+                    </span>
+                    {task.dueTime ? (
+                      <span className="text-[10px] text-[var(--siya-text-muted)]">Due {formatDueTime(task.dueTime)}</span>
+                    ) : null}
+                  </div>
+                  {task.description ? (
+                    <p className="mt-1 text-[10px] text-[var(--siya-text-muted)]">{task.description}</p>
+                  ) : null}
+                  {task.assignedByName ? (
+                    <p className="mt-1 text-[10px] text-[var(--siya-text-muted)]">Assigned by {task.assignedByName}</p>
+                  ) : null}
+                  <div className="mt-2 flex flex-wrap gap-3">
+                    {sopHref ? (
+                      <PortalNavLink href={sopHref} className="text-xs font-semibold text-[var(--siya-accent)] hover:underline">
+                        Open SOP →
+                      </PortalNavLink>
+                    ) : null}
+                    {task.status !== "done" ? (
+                      <button
+                        type="button"
+                        className="text-xs font-semibold text-[var(--siya-text-secondary)]"
+                        onClick={() => void onSetStatus(task, "done")}
+                      >
+                        Mark done
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        className="text-xs font-semibold text-[var(--siya-accent)]"
+                        onClick={() => void onSetStatus(task, "todo")}
+                      >
+                        Undo — mark not done
+                      </button>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
           </ul>
+          {hiddenTaskCount > 0 ? (
+            <button
+              type="button"
+              onClick={() => setShowAllTasks((v) => !v)}
+              className="mt-3 w-full rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-3 py-2 text-xs font-semibold text-[var(--siya-accent)] hover:bg-[var(--siya-bg-subtle)]"
+            >
+              {showAllTasks ? "Show less" : `Show all (${total}) — ${hiddenTaskCount} more tasks`}
+            </button>
+          ) : null}
         </div>
       ) : null}
 
-      {adhoc.length > 0 ? (
-        <div className="mt-4">
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-text-muted)]">Other tasks</h3>
-          <ul className="mt-2 space-y-2">
-            {adhoc.map((task) => (
-              <li key={task.id} className="rounded-xl border border-[var(--siya-border)] p-3 text-sm">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-medium text-[var(--siya-primary)]">{task.title}</span>
-                  <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase ${priorityBadgeClass(task.priority)}`}>
-                    {task.priority}
-                  </span>
-                  {task.dueTime ? (
-                    <span className="text-[10px] text-[var(--siya-text-muted)]">Due {formatDueTime(task.dueTime)}</span>
-                  ) : null}
-                </div>
-                {task.assignedByName ? (
-                  <p className="mt-1 text-[10px] text-[var(--siya-text-muted)]">Assigned by {task.assignedByName}</p>
-                ) : null}
-                {task.status !== "done" ? (
-                  <button
-                    type="button"
-                    className="mt-2 text-xs font-semibold text-[var(--siya-accent)]"
-                    onClick={() => void onMarkDone(task)}
-                  >
-                    Mark done
-                  </button>
-                ) : (
-                  <p className="mt-2 text-xs text-emerald-800">Done</p>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
+      {canChatReview ? (
+        <p className="mt-4 border-t border-[var(--siya-border)] pt-3 text-[11px] text-[var(--siya-text-muted)]">
+          Clinical chat QA is logged manually (no auto-pipeline yet).{" "}
+          <PortalNavLink href="/chat-review" className="font-semibold text-[var(--siya-accent)] hover:underline">
+            Open manual chat QA log →
+          </PortalNavLink>
+        </p>
       ) : null}
 
       {flagTarget ? (

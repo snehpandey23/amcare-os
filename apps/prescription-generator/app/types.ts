@@ -6,6 +6,7 @@ export type Medication = {
 };
 
 export type PrescriptionFormData = {
+  clinicName: string;
   doctorName: string;
   degree: string;
   regNo: string;

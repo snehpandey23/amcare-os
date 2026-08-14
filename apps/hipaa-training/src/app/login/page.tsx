@@ -7,7 +7,9 @@ import { useAuth } from "@/context/AuthContext";
 import { isPortalAuthEnabled } from "@/lib/trainingConfig";
 import { canUsePortalWithoutOnboarding, loadLocalPortalProfile } from "@/lib/portal-profile";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
-import Image from "next/image";
+import { BrandIntroSplash } from "@/components/siya/BrandIntroSplash";
+import { SiyaWordmark } from "@/components/siya/SiyaWordmark";
+import { skipBrandIntroOnce } from "@/lib/brand-intro";
 
 function portalLandingPath(): string {
   return canUsePortalWithoutOnboarding(loadLocalPortalProfile()) ? "/" : "/onboarding";
@@ -22,10 +24,14 @@ export default function LoginPage() {
   const [mode, setMode] = useState<"login" | "register">("login");
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+  /** false until splash completes — avoid null cream placeholder flash before BrandIntroSplash */
+  const [showIntro, setShowIntro] = useState(true);
 
   useEffect(() => {
     if (!allowRegister) setMode("login");
   }, [allowRegister]);
+
+  // Intro starts true — Netflix-style every login visit.
 
   if (!isPortalAuthEnabled()) {
     return (
@@ -45,6 +51,10 @@ export default function LoginPage() {
     return null;
   }
 
+  if (showIntro) {
+    return <BrandIntroSplash onComplete={() => setShowIntro(false)} />;
+  }
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
@@ -55,6 +65,7 @@ export default function LoginPage() {
       } else {
         await login(email, password);
       }
+      skipBrandIntroOnce();
       router.replace(portalLandingPath());
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
@@ -67,25 +78,18 @@ export default function LoginPage() {
     <div className="siya-page-bg flex min-h-screen flex-col items-center justify-center px-6 py-12">
       <div className="w-full max-w-sm text-center">
         <div className="flex justify-center">
-          <Image
-            src="/assets/images/siya-health-logo.png"
-            alt="Siya Health"
-            width={210}
-            height={63}
-            priority
-            className="h-auto w-[min(210px,70vw)]"
-          />
+          <SiyaWordmark size="login" />
         </div>
         <h1 className="mt-8 font-[family-name:var(--font-poppins)] text-2xl font-semibold tracking-tight text-[var(--siya-primary)]">
-          Welcome to SiyaOS
+          Siya Health staff portal
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-[var(--siya-text-secondary)]">
-          An app for your team to stay connected while working remotely.
+          Sign in for My day, training, and team coordination — Siya Health &amp; Amcare India.
         </p>
 
         <form
           onSubmit={onSubmit}
-          className="mt-8 rounded-[var(--siya-radius-lg)] border border-[var(--siya-border)] bg-white p-6 text-left shadow-[var(--siya-shadow-lg)]"
+          className="mt-8 rounded-[var(--siya-radius-lg)] border border-[var(--siya-border)] bg-[var(--siya-white)] p-6 text-left shadow-[var(--siya-shadow-lg)]"
         >
           {mode === "register" ? (
             <label className="block">

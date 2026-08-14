@@ -1,6 +1,6 @@
 {
-  "generated": "2026-07-26T11:41:11.006Z",
-  "count": 55,
+  "generated": "2026-08-08T12:28:16.626Z",
+  "count": 70,
   "articles": [
     {
       "title": "Health Insights &amp; Blog Hub (2026) | ADHD, Weight Loss &amp; Telehealth",
@@ -35,6 +35,15 @@
       "description": "Adults with ADHD face higher rates of binge eating. Learn how common it is, ADHD vs emotional eating, food noise, Vyvanse for BED, and when an ADHD evaluation helps.",
       "topics": [
         "adhd"
+      ]
+    },
+    {
+      "title": "ADHD and Insulin Resistance: Roommates, Not Rivals",
+      "url": "https://siya.health/blog/adhd-and-insulin-resistance",
+      "description": "ADHD and insulin resistance often co-occur. Learn what association means (and does not), where PCOS fits, and questions to ask before self-diagnosing.",
+      "topics": [
+        "adhd",
+        "labs"
       ]
     },
     {
@@ -172,6 +181,46 @@
       ]
     },
     {
+      "title": "Brain Fog After COVID: What We Know and When to Get Help",
+      "url": "https://siya.health/blog/brain-fog-after-covid",
+      "description": "Post-COVID brain fog is reported by many adults. Learn common patterns, other causes to consider, and when primary care evaluation is appropriate.",
+      "topics": []
+    },
+    {
+      "title": "Brain Fog and Anxiety: When Worry Crowds Out Clarity",
+      "url": "https://siya.health/blog/brain-fog-and-anxiety",
+      "description": "Anxiety can feel like brain fog—racing thoughts, blanking under stress, and mental exhaustion. Learn how primary care sorts fog, mood, and attention.",
+      "topics": []
+    },
+    {
+      "title": "Brain Fog and Sleep: Why Poor Rest Clouds Thinking",
+      "url": "https://siya.health/blog/brain-fog-and-sleep",
+      "description": "Short or fragmented sleep is a common driver of brain fog. Learn what to notice, when to evaluate sleep apnea or insomnia, and how primary care helps.",
+      "topics": [
+        "sleep"
+      ]
+    },
+    {
+      "title": "Brain Fog at Work: When Poor Concentration Affects Your Job",
+      "url": "https://siya.health/blog/brain-fog-at-work",
+      "description": "Brain fog at work—missed deadlines, slow thinking, word-finding trouble—can have medical causes. Learn how to frame it and when primary care helps.",
+      "topics": []
+    },
+    {
+      "title": "Brain Fog vs ADHD: How to Tell the Difference",
+      "url": "https://siya.health/blog/brain-fog-vs-adhd",
+      "description": "Brain fog and ADHD can feel similar. Learn how clinicians sort short-term fog from lifelong attention patterns—and when primary care evaluation helps.",
+      "topics": [
+        "adhd"
+      ]
+    },
+    {
+      "title": "Chronic Fatigue vs Everyday Tiredness: Knowing When to Dig Deeper",
+      "url": "https://siya.health/blog/chronic-fatigue-vs-everyday-tiredness",
+      "description": "Busy-life tiredness and persistent medical fatigue are not the same. Learn red flags, how Siya frames fatigue, and when to book primary care.",
+      "topics": []
+    },
+    {
       "title": "Compounded vs Branded GLP-1 Medications (2026): Safety &amp; Standards",
       "url": "https://siya.health/blog/compounded-vs-branded-glp1-medications",
       "description": "Compounded vs branded GLP-1 in 2026: manufacturing standards, regulatory context, risks of unapproved copies, and why clinician oversight matters.",
@@ -181,9 +230,39 @@
       ]
     },
     {
+      "title": "Conditions That Commonly Occur With ADHD",
+      "url": "https://siya.health/blog/conditions-that-occur-with-adhd",
+      "description": "ADHD often coexists with depression, anxiety, bipolar disorder, PTSD, and binge eating. Learn why overlap matters—and why treating one condition alone may not be enough.",
+      "topics": [
+        "adhd"
+      ]
+    },
+    {
       "title": "Executive Dysfunction in ADHD: Signs, Domains &amp; What Helps",
       "url": "https://siya.health/blog/executive-dysfunction-adhd",
       "description": "Learn how executive dysfunction shows up in adult ADHD—task initiation, working memory, planning, organization, decision fatigue, and when evaluation helps.",
+      "topics": [
+        "adhd"
+      ]
+    },
+    {
+      "title": "Fatigue After Illness: How Long Should Recovery Take?",
+      "url": "https://siya.health/blog/fatigue-after-illness",
+      "description": "Post-illness fatigue can outlast the original infection by weeks. Learn when prolonged tiredness is normal recovery and when to seek primary care evaluation.",
+      "topics": []
+    },
+    {
+      "title": "Fatigue Despite Normal Labs: What It Can Still Mean",
+      "url": "https://siya.health/blog/fatigue-despite-normal-labs",
+      "description": "Normal labs do not always mean your fatigue is “all in your head.” Learn what normal results can miss and how primary care continues the workup.",
+      "topics": [
+        "labs"
+      ]
+    },
+    {
+      "title": "Focalin vs Adderall: Key Differences for Adults",
+      "url": "https://siya.health/blog/focalin-vs-adderall-comparison",
+      "description": "Focalin vs Adderall for adults with ADHD: methylphenidate vs amphetamine class, duration, side effects, and questions to discuss with your clinician—education only.",
       "topics": [
         "adhd"
       ]
@@ -272,6 +351,14 @@
       ]
     },
     {
+      "title": "Iron Deficiency and Fatigue: What Ferritin Has to Do With Energy",
+      "url": "https://siya.health/blog/iron-deficiency-and-fatigue",
+      "description": "Low iron stores can drive fatigue even before anemia appears. Learn how ferritin fits the fatigue workup and when to see primary care.",
+      "topics": [
+        "labs"
+      ]
+    },
+    {
       "title": "Iron Deficiency, Brain Fog &amp; ADHD: What Research Shows",
       "url": "https://siya.health/blog/iron-deficiency-brain-fog-adhd",
       "description": "Low iron and low ferritin can worsen brain fog and ADHD-like symptoms. Learn association vs causation, dopamine biology, and what to discuss with a clinician.",
@@ -321,6 +408,12 @@
       "topics": [
         "hair-loss"
       ]
+    },
+    {
+      "title": "Morning Fatigue: Why You Wake Up Exhausted",
+      "url": "https://siya.health/blog/morning-fatigue",
+      "description": "Waking exhausted despite enough hours in bed can signal sleep apnea, iron deficiency, thyroid issues, or mood disorders. Learn what to investigate.",
+      "topics": []
     },
     {
       "title": "Non-Stimulant ADHD Meds: When Are They Used Instead of Stimulants?",
@@ -381,6 +474,14 @@
       ]
     },
     {
+      "title": "Physical Signs of ADHD: Common to Notice, Not Enough to Diagnose",
+      "url": "https://siya.health/blog/physical-signs-of-adhd",
+      "description": "Fidgeting and restlessness can show up with ADHD—and with anxiety or sleep issues. Learn why physical signs inform evaluation but do not diagnose ADHD alone.",
+      "topics": [
+        "adhd"
+      ]
+    },
+    {
       "title": "POTS and ADHD: Shared Symptoms, Overlap &amp; What Research Shows",
       "url": "https://siya.health/blog/pots-and-adhd",
       "description": "POTS and ADHD can share brain fog, fatigue, and attention problems. Learn orthostatic intolerance, current evidence, and why overlap creates diagnostic confusion.",
@@ -430,6 +531,14 @@
       ]
     },
     {
+      "title": "Thyroid Problems and Fatigue: What to Know Before You Self-Diagnose",
+      "url": "https://siya.health/blog/thyroid-and-fatigue",
+      "description": "Thyroid disease is a classic fatigue look-alike. Learn common patterns, what TSH measures, and why primary care—not internet protocols—should guide testing.",
+      "topics": [
+        "labs"
+      ]
+    },
+    {
       "title": "Tirzepatide vs Semaglutide for Weight Loss (2026): Compare GLP-1 Options",
       "url": "https://siya.health/blog/tirzepatide-vs-semaglutide-which-is-better",
       "description": "Tirzepatide vs semaglutide in 2026: dual GIP/GLP-1 vs GLP-1 agonist, trial context, side effects, and how clinicians choose—no outcome promises.",
@@ -438,9 +547,9 @@
       ]
     },
     {
-      "title": "Vyvanse vs Adderall: Which Lasts Longer for Adult ADHD?",
+      "title": "Vyvanse vs Adderall: Differences for Adult ADHD",
       "url": "https://siya.health/blog/vyvanse-vs-adderall-differences",
-      "description": "Vyvanse vs Adderall for adults: compare duration, onset, crash patterns, and side effects—what to ask your prescriber before switching stimulants.",
+      "description": "Vyvanse vs Adderall compared for adults with ADHD: duration, onset, wear-off, side effects, and questions to ask your prescriber before switching stimulants.",
       "topics": [
         "adhd"
       ]

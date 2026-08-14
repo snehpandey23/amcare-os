@@ -1,60 +1,68 @@
-# Instagram static design system — Siya Health
+# Instagram static — production checklist
 
 ```text
-Status: Locked from founder feedback 2026-07-21
-Applies to: All Instagram carousels + static posts going forward
-Prototype: Perfect ONE slide before regenerating full carousels
+Status: FROZEN with Visual OS v2.1 — 2026-07-31
+Applies to: All Instagram carousels + static posts
+Full standard: VISUAL-OS.md · VISUAL-OS-TEMPLATES.md
 ```
 
-## What went wrong (WH-R-02 v1)
+**`VISUAL-OS.md` is the source of truth.** This is the frame checklist only.  
+**Freeze:** Classify → template ID → replace fields. Do not invent layouts.
 
-- White logo plate sitting on top of headline
-- “siya.health / Educational only” as a prominent badge
-- Brand elements fighting the illustration instead of living inside it
+---
 
-## Rules (non-negotiable)
+## Quick lock (every frame)
 
-### Logo
-- **Submerged**, not stamped — present but not loud.
-- No white box, no rounded plate, no opaque badge.
-- Brand must be **recognizable**, not invisible. Target: noticeable at a glance, never competing with headline.
-- **Sizing (locked from prototype feedback 2026-07-21):**
-  - Corner wordmark ≈ **80–90px** tall on 1080×1350 (~2× early prototype)
-  - Ambient mark watermark ≈ **400–450px** tall at low opacity in a quiet field
-  - Opacity: wordmark ~30–35%; ambient mark ~10–14%
-- Headline and body text must remain fully readable **on top of** any logo presence.
+| Item | Rule |
+|------|------|
+| Classify first | Recognition · Knowledge · Authority · Conversion — **not** awareness/education/promotion |
+| Template | Pick locked ID (`B-01`…`D-01`) from `VISUAL-OS-TEMPLATES.md` |
+| One system | Never mix systems in one frame / carousel |
+| Recognition (`B-*`) | Full-bleed light cream scrim · ~22% cream fade · lean only — **no** bullets/CTA · **no text shadows** |
+| Knowledge (`A-*`) | Cream · diagram/text · bullets + source — **no** lifestyle people |
+| Authority (`D-01`) | Portrait · quote · name · title — no infographic |
+| Conversion (`C-01`) | 3 benefits · one CTA · trust marker — no fear marketing |
+| Headline | ≤6 words · Georgia · Deep Navy · Magenta accent ≤3 words |
+| Aspect | **4:5 · 1080×1350** default (1:1 secondary OK) |
+| Type color | Navy `#001878` · Magenta `#D81088` · Dark Navy `#0A246B` — never brown/black/gray |
+| Canvas | Cream `#F4EFE7` |
+| Logo | `LOGO-PRIMARY` top-left |
+| Footer | Quiet educational line + siya.health (or `--no-footer` logo-only) |
+| Light | 8–10 AM soft window light · optimistic · no dark vignette |
+| Gate | Blur Test · aesthetic ≥40/50 (Recognition) · Editorial ≥85 |
 
-### Footer (every slide)
-One quiet footnote line only — same treatment on every slide:
+---
 
-```text
-siya.health  ·  All content for educational purposes only
+## Kill patterns (never)
+
+- **Text drop shadows** / glyph glow / Canva depth effects  
+- Dark vignettes / gloomy overlays  
+- Brown / pure black / gray type (use navy + magenta)  
+- Inventing a layout not in `VISUAL-OS-TEMPLATES.md`  
+- Checklist or clinical CTA on **Recognition** photo  
+- Hard L-cut / opaque cream card / half-canvas Canva panel  
+- Soft ambient ghosting / second translucent photo  
+- Checklist **and** CTA on the same static  
+- Press-screenshot-as-hook · head-in-hands · symptom encyclopedias  
+- Awareness / Education / Promotion as the primary classifier  
+
+---
+
+## Production workflow
+
+1. Decision tree: feel / understand / trust / act  
+2. Pick system + **template ID**  
+3. Lock fields only (budgets in VISUAL-OS)  
+4. Compose with system compositor (or manual C/D)  
+5. Blur Test · aesthetic audit · Editorial ≥85  
+6. Caption teaches / soft path · WorkDrive + tracker  
+
+Recognition compose:
+```bash
+python3 apps/siya-health/brand/scripts/compose_format_b_fullbleed.py \
+  --photo … --logo … --out … \
+  --headline "…" --accent "…" --subhead "…"
+# no --checklist / --cta · no text shadows (compositor default)
+
+python3 apps/siya-health/brand/scripts/aesthetic_audit_format_b.py --image …
 ```
-
-- Small footnote size (editorial fine print), not a pill/button/badge
-- Low contrast charcoal on cream — visible, never loud
-- No second disclaimer box elsewhere
-
-### Header / layout
-- One composition: brand presence is ambient; copy + image do the work
-- Left/top: quiet zone for headline; illustration holds the emotional center
-- No floating chips, promo stickers, or URL callout boxes on mid-slides
-- End slide may use a slightly stronger path line, still no badge chrome
-
-### Copy clarity (carousel content)
-- Every headline must be understandable in one glance without prior context
-- Avoid insider metaphors unless the support line explains them immediately
-- **Company carousels must include ≥1 practical, evidence-aligned change** (see `EDITORIAL-TEST.md`)
-  - Fail: open-ended vibe with no next step
-  - Pass: track → ask clinician for X / do Y for N days
-
-### Production workflow
-1. Agree design theme on **one** perfected static (header + footer + submerged logo) ✅
-2. Lock useful copy (recognition → explanation → practical change)
-3. Batch regenerate carousel with locked theme + copy
-4. Caption must restate the practical change
-
-## Prototype file
-
-`editorial-packs/WH-R-02/images/prototype/slide-01-prototype.png`
-Desktop: `~/Desktop/Siya-IG-Prototype/`

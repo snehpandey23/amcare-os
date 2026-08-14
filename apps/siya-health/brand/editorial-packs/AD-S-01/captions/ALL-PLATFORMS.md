@@ -1,77 +1,62 @@
-# ALL PLATFORMS — AD-S-01
+# Captions — AD-S-01 · You’re not lazy.
+
+Company voice only. Educational only. Screening ≠ diagnosis.
+
+---
 
 ## Instagram
-# Instagram — AD-S-01
 
-## Caption
+You’re not lazy.
 
-You're not lazy.
+Overlooked adult ADHD often looks like trying hard and still falling behind — missed deadlines, mental clutter, time blindness, emotional overwhelm.
 
-Take a validated ADHD screener — then talk to a clinician if the pattern is lifelong.
+It’s not a character flaw. Lifelong attention patterns can hide behind coping until life load rises. Recognition matters: adult diagnosis is common, especially when childhood clues were subtle.
 
-Read: https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd
+Practical step: take a validated ADHD screener. If the pattern is lifelong, talk to a clinician.
 
-Educational only. Not a diagnosis.
+Read more: siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd
+ADHD care: siya.health/adhd-care
 
-## Hashtags
-#SiyaHealth #SystemsMedicine #HealthEducation
+#AdultADHD #YoureNotLazy #ADHDAwareness #MentalHealth #SiyaHealth #EducationalOnly
 
+---
 
 ## Facebook
-# Facebook — AD-S-01
 
-You're not lazy — overlooked adult ADHD
+You’re not lazy. Overlooked adult ADHD can look like constant effort with uneven results.
 
-Take a validated ADHD screener — then talk to a clinician if the pattern is lifelong.
+Recognition matters. A validated screener is a starting point — talk to a clinician if the pattern is lifelong.
 
-https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd
+Educational only. siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd
 
-Educational only · Not medical advice
+---
 
+## LinkedIn (Company only)
 
-## LinkedIn Company
-# LinkedIn Company — AD-S-01
+“Trying hard and still falling behind” is a recognition phrase many adults with overlooked ADHD describe — not laziness.
 
-You're not lazy — overlooked adult ADHD
+Missed deadlines, mental clutter, time blindness, and emotional overwhelm can sit behind years of coping. Adult diagnosis is common when childhood clues were subtle.
 
-Take a validated ADHD screener — then talk to a clinician if the pattern is lifelong.
+Educational content. Screening is not diagnosis. Talk to a clinician if the pattern is lifelong.
 
-https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd
+siya.health
 
-Educational only.
+---
 
+## X / Twitter
 
-## LinkedIn Founder
-# LinkedIn Founder — AD-S-01
+You’re not lazy. Overlooked adult ADHD often looks like trying hard and still falling behind.
 
-**No CTA**
+Screener → clinician if lifelong. Educational only.
 
-I've been thinking about this clinically:
+siya.health
 
-You're not lazy — overlooked adult ADHD
-
-Take a validated ADHD screener — then talk to a clinician if the pattern is lifelong.
-
-Educational reflection only. Not advice for any individual.
-
-
-## X
-# X / Twitter — AD-S-01
-
-1/ You're not lazy.
-2/ Take a validated ADHD screener — then talk to a clinician if the pattern is lifelong.
-3/ https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd
-
+---
 
 ## Pinterest
-# Pinterest — AD-S-01
 
-## Pin title
-You're not lazy — overlooked adult ADHD
+You’re not lazy.
 
-## Pin description
-Take a validated ADHD screener — then talk to a clinician if the pattern is lifelong. Educational from Siya Health. https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd
+Overlooked adult ADHD · recognition · talk to a clinician.
 
-## URL
-https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd
-
+siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd

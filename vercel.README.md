@@ -8,6 +8,7 @@ This monorepo hosts **multiple Vercel projects**. A bare `vercel deploy --prod` 
 | **Auth API** | `cd integrations/hipaa-training-api && npx vercel deploy --prod --yes` |
 | **Patient site** | `cd apps/siya-health && npx vercel deploy --prod --yes` |
 | **Patient Guide bot** | `cd apps/siya-assistant && npx vercel deploy --prod --yes` |
+| **Prescription generator** | `cd apps/prescription-generator && npx vercel deploy --prod --yes` (see `apps/prescription-generator/DEPLOY-VERCEL.md`) |
 
 See `.cursor/rules/staff-portal-vercel-deploy.mdc` and `apps/hipaa-training/docs/DEPLOYMENT-GATE.md`.
 

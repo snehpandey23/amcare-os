@@ -36,10 +36,36 @@ const INTENT_PATTERNS: Array<{
     event: 'booking_handoff',
   },
   {
+    id: 'meet_greet_price',
+    re: /\b(meet\s*(?:&|and)?\s*greet|intro(duction)?\s*(call|consult)|walkthrough).{0,40}(price|cost|fee|how much|\$|free|charge)|how much.{0,60}(meet\s*(?:&|and)?\s*greet|intro(duction)?\s*(call|consult))|is (the )?meet\s*(?:&|and)?\s*greet\s*(free|paid)/i,
+    message:
+      'The Meet & Greet is free — a short, non-clinical conversation to understand your needs and choose a next step. It isn’t a medical visit and doesn’t prescribe medication.',
+    followUp: 'Want the Meet & Greet booking link, published care pricing, or to call/text the team?',
+    links: ['meet_and_greet', 'pricing', 'call_siya'],
+    event: 'booking_handoff',
+  },
+  {
+    id: 'discovery_call_retired',
+    re: /\bdiscovery\s*call\b/i,
+    message:
+      'The paid Discovery Call is discontinued. Today’s intro is the free Meet & Greet — a short, non-clinical conversation to understand your needs. It isn’t a medical visit and doesn’t prescribe medication.',
+    followUp: 'Want the free Meet & Greet link, or published evaluation pricing?',
+    links: ['meet_and_greet', 'pricing', 'call_siya'],
+    event: 'booking_handoff',
+  },
+  {
+    id: 'insurance',
+    re: /\b(insurance|insurer|in[-\s]?network|out[-\s]?of[-\s]?network|accept(s|ed)? insurance|take(s|n)? insurance|bill(s|ed|ing)? insurance|covered by insurance|does .{0,20}take insurance|fsa|hsa|flexible spending|health savings)\b/i,
+    message:
+      'Siya Health does not accept insurance. We offer transparent cash pricing today. Many patients use FSA or HSA funds for eligible services — confirm with your plan administrator, and keep your Siya receipts. Insurance-based options may be added later.',
+    followUp: 'Want published pricing, the FSA/HSA guide, or a free Meet & Greet?',
+    links: ['pricing', 'fsa_hsa_adhd_evaluation', 'meet_and_greet'],
+  },
+  {
     id: 'pricing',
     re: /\b(pric(e|ing)|cost|fee|how much|\$149|\$79)\b/i,
     message:
-      'Happy to help with that. Published pricing includes a $149 initial evaluation, plus follow-up plans of $79/month or $149/month when a clinician recommends one. Details can change, so the pricing page is the best place to confirm.',
+      'Happy to help with that. Published pricing includes a $149 initial evaluation, plus follow-up plans of $79/month or $149/month when a clinician recommends one. Details can change, so the pricing page is the best place to confirm. We do not accept insurance; many patients use FSA/HSA.',
     followUp: 'Want the full pricing page, ADHD evaluation cost details, or a free Meet & Greet to talk it through?',
     links: ['pricing', 'adhd_evaluation_cost', 'meet_and_greet'],
   },
@@ -62,8 +88,19 @@ const INTENT_PATTERNS: Array<{
     event: 'service_link_clicked',
   },
   {
+    id: 'out_of_footprint_state',
+    re: /\b(new york|ny\b|ohio|arizona|georgia|illinois|michigan|new jersey|nj\b|massachusetts|colorado|nevada|oregon|minnesota|tennessee)\b/i,
+    message:
+      'Siya Health currently offers telehealth for adults in California, Texas, Pennsylvania, and Florida only. We can’t book care in other states right now — even if a clinician holds a personal license elsewhere.',
+    followUp:
+      'If you’re in CA, TX, PA, or FL, I can help with Meet & Greet, ADHD care, or pricing. Otherwise, call/text (215) 445-1244 or email care@siya.health.',
+    links: ['call_siya', 'text_siya', 'email_siya', 'meet_and_greet', 'telehealth'],
+    linkLimit: 5,
+    event: 'booking_handoff',
+  },
+  {
     id: 'states',
-    re: /\b(what states|which states|do you (serve|see patients in)|california|texas|florida|pennsylvania|availability|telehealth)\b/i,
+    re: /\b(what states|which states|do you (serve|see patients in)|states? (do you|you) serve|where (are you|do you) (licensed|available))\b/i,
     message:
       'Siya currently provides telehealth for adults in California, Texas, Pennsylvania, and Florida. Eligibility is confirmed when you schedule.',
     followUp: 'Looking for ADHD, primary care, weight, or something else in your state?',
@@ -71,7 +108,7 @@ const INTENT_PATTERNS: Array<{
   },
   {
     id: 'meet_greet',
-    re: /\b(meet\s*&?\s*greet|book|appointment|schedule|intro call)\b/i,
+    re: /\b(meet\s*(?:&|and)?\s*greet|book|appointment|schedule|intro call)\b/i,
     message:
       'You can book a free Meet & Greet — a short, non-clinical conversation to understand your needs and choose a next step. It isn’t emergency care and doesn’t prescribe medication.',
     followUp: 'Want the Meet & Greet link, or would you rather call or text us?',
@@ -80,7 +117,7 @@ const INTENT_PATTERNS: Array<{
   },
   {
     id: 'private_discussion',
-    re: /\b(private (chat|message|discussion|conversation)|secure (medical )?chat|contact .{0,40}securely|securely|spruce|message (the )?(doctor|clinician|provider)|share (my )?(medical|health|clinical) (info|information|details|history)|before (i |we )?(pay|paying|booking a visit)|talk privately|clinical (message|messaging))\b/i,
+    re: /\b(private (chat|message|discussion|conversation)|secure (medical )?chat|secure messaging|spruce|message (the )?(doctor|clinician|provider)|share (my )?(medical|health|clinical) (info|information|details|history)|before (i |we )?(pay|paying|booking a visit)|talk privately|clinical (message|messaging))\b/i,
     message:
       'If you’d like a more private conversation about your health before paying for a full visit, that isn’t something this website chat can do. You can book a free Meet & Greet, or download our partner app Spruce and join the Siya Health practice there for secure messaging.',
     followUp: 'Would you like the Meet & Greet booking link, or the Spruce join link?',
@@ -89,9 +126,9 @@ const INTENT_PATTERNS: Array<{
   },
   {
     id: 'contact_phone',
-    re: /\b(contact (the )?(team|clinic|doctor|siya)|talk to (a )?(clinician|provider)|call (siya|you|us)|text (siya|you|us)|phone number|phone|email (siya|you|us|the team)|how do i (reach|contact)|care@siya)\b/i,
+    re: /\b(contact (the )?(clinical )?(team|clinic|doctor|siya)|talk to (a )?(clinician|provider)|call (siya|you|us)|text (siya|you|us)|phone number|phone|email (siya|you|us|the team)|how do i (reach|contact)|care@siya)\b/i,
     message:
-      'You can reach a human on the Siya team by calling or texting (215) 445-1244, emailing care@siya.health, or booking a free Meet & Greet. For a more private clinical conversation, you can also join Siya on Spruce.',
+      'You can reach a human on the Siya team by calling or texting (215) 445-1244, emailing care@siya.health, or booking a free Meet & Greet. For a more private clinical conversation, you can also join Siya on Spruce for secure messaging.',
     followUp: 'Prefer call, text, email, Meet & Greet, or Spruce?',
     links: ['call_siya', 'text_siya', 'email_siya', 'meet_and_greet', 'spruce_practice'],
     linkLimit: 5,
@@ -101,7 +138,7 @@ const INTENT_PATTERNS: Array<{
     id: 'providers',
     re: /\b(who will i see|who do i see|who (would|will) i (meet|see)|which (doctor|provider|clinician)|provider|care team|who (are|is) (the )?(doctors|providers)|dr\.?\s*pandey|dr\.?\s*desai)\b/i,
     message:
-      'You’ll see a licensed Siya clinician appropriate for your visit and state — the public care team pages list who’s on the team and what they focus on. Exact clinician assignment is confirmed at scheduling.',
+      'You’ll see a licensed Siya provider (clinician) appropriate for your visit and state — the public care team pages list who’s on the team and what they focus on. Exact clinician assignment is confirmed at scheduling.',
     followUp: 'Want the care team page, or a Meet & Greet to talk through fit?',
     links: ['providers', 'meet_and_greet', 'about'],
   },
@@ -111,7 +148,7 @@ const INTENT_PATTERNS: Array<{
     message:
       'For everyday concerns like fever or similar sick-visit needs, Siya publishes primary and urgent care telehealth information for adults in supported states. This chat can’t triage how urgent your symptoms are — if you feel seriously ill, call 911 or use emergency care.',
     followUp: 'Want the primary care page, a Meet & Greet, or our call/text number?',
-    links: ['primary_care', 'meet_and_greet', 'call_siya'],
+    links: ['primary_urgent_care', 'primary_care', 'meet_and_greet'],
   },
   {
     id: 'labs_a1c',

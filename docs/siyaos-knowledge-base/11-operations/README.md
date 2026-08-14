@@ -15,11 +15,30 @@ Daily workflows, escalations, billing coordination, and cross-department handoff
 | Klarity pre-visit (payment + intake) | `klarity-previsit-checklist` |
 | Klarity billing / cancel / chargebacks | `klarity-billing-cancellation` |
 | Klarity patient consents | `klarity-patient-consents` |
-| Discovery Call staff billing / no-show | `discovery-call-staff-billing` |
+| Patient FAQ — insurance / cash-pay | `patient-faq-insurance-cash-pay` |
+| Patient FAQ — FSA / HSA | `patient-faq-fsa-hsa` |
+| Patient FAQ — telehealth legitimate | `patient-faq-telehealth-legitimate` |
+| Patient FAQ — ADHD eval included | `patient-faq-adhd-evaluation-included` |
+| Service-line blurbs | `service-line-blurbs` |
 
-## Klarity (Hello Klarity) pack
+## Packs
 
-Index + source map: [`klarity/README.md`](./klarity/README.md)
+| Pack | Path |
+|------|------|
+| Klarity (Hello Klarity) | [`klarity/README.md`](./klarity/README.md) |
+| Patient-site FAQs + service blurbs | [`patient-site-faqs/README.md`](./patient-site-faqs/README.md) |
+
+## Held for founder/legal sign-off (not in Ask)
+
+| Topic | ID | Notes |
+|-------|-----|-------|
+| Legal policy talk-tracks | `legal-escalation-summaries` | `status: draft`, `bot_retrieve: false` — do not live until sign-off |
+
+## Archived (not retrieved by Ask)
+
+| Topic | ID | Notes |
+|-------|-----|-------|
+| Discovery Call staff billing / no-show | `discovery-call-staff-billing` | **Discontinued 2026-08-06** — $79 Discovery Call superseded by **free Meet & Greet**. `status: archived`, `bot_retrieve: false`. |
 
 ## Source docs in repo
 

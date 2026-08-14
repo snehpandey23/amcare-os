@@ -23,6 +23,8 @@ export type AnalyticsEventName =
   | 'booking_handoff'
   | 'bot_refusal_category'
   | 'quick_action_clicked'
+  | 'entity_resolved'
+  | 'entity_fallback'
 
 export interface LinkRecord {
   id: string
@@ -51,6 +53,8 @@ export interface GuideLink {
   url: string
 }
 
+export type SafetyClass = 'general_information' | 'navigation' | 'restricted'
+
 export interface GuideResponse {
   state: GuideState
   message: string
@@ -59,4 +63,10 @@ export interface GuideResponse {
   citations: GuideLink[]
   refusalCategory: RefusalCategory
   analyticsEvent?: AnalyticsEventName
+  /** Public Knowledge API fields when an entity resolved (never include PHI). */
+  entity?: string
+  intent?: string
+  care_pathway?: string
+  safety_class?: SafetyClass
+  primary_cta_id?: string
 }

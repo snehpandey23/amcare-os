@@ -1,14 +1,7 @@
-# Facebook — AD-I-01 v2
+# Facebook — AD-I-01
 
-Still foggy despite ADHD care?
+Still foggy after ADHD treatment? For some women, low iron is part of the picture.
 
-For many women, low iron is an overlooked piece — and it isn’t only about anemia. Iron status can matter for brain function and focus chemistry too.
+Iron status can affect brain function — not only blood counts. Hemoglobin can look normal while iron stores are low. Ask your clinician about ferritin / iron studies. Don’t mega-dose iron on your own.
 
-Important: hemoglobin can look “fine” while ferritin is low.
-
-If you have brain fog, fatigue, restless legs, or heavy periods, ask your clinician about iron studies. Don’t self-megadose.
-
-https://siya.health/blog/perimenopause-brain-fog
-https://siya.health/adhd-care
-
-Educational only · Not a diagnosis or supplement protocol
+Educational only. siya.health/blog/perimenopause-brain-fog

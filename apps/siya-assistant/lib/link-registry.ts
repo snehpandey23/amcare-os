@@ -59,6 +59,18 @@ export const LINK_REGISTRY: Record<string, LinkRecord> = {
         url: 'https://www.siya.health/adhd-evaluation-cost',
         kind: 'service'
     },
+    fsa_hsa_adhd_evaluation: {
+        id: 'fsa_hsa_adhd_evaluation',
+        label: 'FSA / HSA for evaluation',
+        url: 'https://www.siya.health/answers/fsa-hsa-adhd-evaluation',
+        kind: 'education'
+    },
+    insurance: {
+        id: 'insurance',
+        label: 'Insurance and payment',
+        url: 'https://www.siya.health/pricing',
+        kind: 'service'
+    },
     primary_care: {
         id: 'primary_care',
         label: 'Primary Care',

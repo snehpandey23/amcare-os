@@ -148,13 +148,13 @@
         "audit": ["Family Medicine", "ADHD", "Mental Health"]
       },
       "states": {
-        "licensed": ["Texas", "Florida"],
-        "service": ["Texas", "Florida"],
+        "licensed": ["Texas", "Florida", "Pennsylvania"],
+        "service": ["Texas", "Florida", "Pennsylvania"],
         "licenseOnly": [],
         "display": {
-          "hub": "Licensed in: Texas · Florida",
-          "homepageCards": "TX, FL",
-          "profileTrust": "Telehealth where eligible: Texas and Florida—confirm when you book."
+          "hub": "Licensed in: Texas · Florida · Pennsylvania",
+          "homepageCards": "TX, PA, FL",
+          "profileTrust": "Telehealth where eligible: Texas, Florida, and Pennsylvania—confirm when you book."
         }
       },
       "positioning": {
@@ -169,7 +169,7 @@
       },
       "seo": {
         "title": "Dr. Natasha Desai, MD | Adult ADHD & Family Medicine | Siya Health",
-        "description": "Meet Dr. Natasha Desai—Family Medicine Physician at Siya Health. ADHD-CCSP. Adult ADHD with anxiety and emotional overlap via telehealth in TX & FL.",
+        "description": "Meet Dr. Natasha Desai—Family Medicine Physician at Siya Health. ADHD-CCSP. Adult ADHD with anxiety and emotional overlap via telehealth in TX, PA & FL.",
         "focusLead": "ADHD at the center—with behavioral and emotional overlap addressed honestly."
       },
       "schema": {
@@ -324,9 +324,9 @@
         "service": ["Texas"],
         "licenseOnly": ["Ohio"],
         "display": {
-          "hub": "Licensed in: Texas (Ohio license only)",
-          "homepageCards": "TX (OH license only)",
-          "profileTrust": "Licensed in Texas and Ohio. Siya Healthcare, PLLC provides telehealth in Texas only; Ohio license displayed for transparency."
+          "hub": "Licensed in: Texas · Ohio",
+          "homepageCards": "TX, OH",
+          "profileTrust": "Licensed in Texas and Ohio. Siya Healthcare, PLLC currently offers telehealth with Derek in Texas—confirm at scheduling."
         }
       },
       "positioning": {
@@ -363,46 +363,58 @@
       },
       "role": {
         "profileHero": "Physician Associate",
-        "homepage": "Physician Associate",
-        "hub": "Physician Associate",
+        "homepage": "Physician Associate · Adult telehealth generalist",
+        "hub": "Physician Associate · Adult telehealth generalist",
         "schemaJobTitle": "Physician Associate"
       },
       "credentials": {
         "suffixes": ["PA-C"],
-        "chips": ["PA-C", "Weight Loss", "Telehealth"],
-        "hubLine": "PA-C",
-        "auditFocus": ["Weight Loss", "Metabolic Care"]
+        "chips": ["PA-C", "ADHD", "Women's Health", "Weight Loss", "Telehealth"],
+        "hubLine": "PA-C · Adult ADHD, women's health, weight loss & telehealth",
+        "auditFocus": ["Adult ADHD", "Women's Health", "Weight Loss", "Metabolic Care", "Primary Care", "Telehealth"]
       },
       "focus": {
-        "hubTags": ["Weight loss", "Metabolic care"],
-        "audit": ["Weight Loss", "Metabolic Care"]
+        "hubTags": ["Adult ADHD", "Women's health", "Medical weight loss", "Telehealth primary care"],
+        "audit": ["Adult ADHD", "Women's Health", "Weight Loss", "Metabolic Care", "Primary Care", "Telehealth"]
       },
       "states": {
-        "licensed": ["California"],
-        "service": ["California"],
+        "licensed": ["California", "Texas", "Pennsylvania", "Florida"],
+        "service": ["California", "Texas", "Pennsylvania", "Florida"],
         "licenseOnly": [],
         "display": {
-          "hub": "Licensed in: California",
-          "homepageCards": "CA",
-          "profileTrust": "Telehealth where eligible: California—confirm at scheduling."
+          "hub": "Licensed in: California · Texas · Pennsylvania · Florida",
+          "homepageCards": "CA, TX, PA, FL",
+          "profileTrust": "Telehealth where eligible: California, Texas, Pennsylvania, and Florida—confirm at scheduling."
         }
       },
       "positioning": {
-        "homepageBio": "Telehealth medical weight loss and metabolic care for adults in California—GLP-1 education, monitoring support, and collaborative follow-up.",
-        "hubBio": "Wendy supports patients through telehealth visits for medical weight loss and metabolic care within Siya Health's physician-led model.",
-        "defaultTagline": "Weight loss telehealth (CA)",
+        "homepageBio": "Adult telehealth generalist for ADHD, women's health, weight loss, and primary care questions across California, Texas, Pennsylvania, and Florida.",
+        "hubBio": "Wendy is a physician associate supporting adult ADHD, women's health, medical weight loss, and telehealth primary care within Siya Health's physician-led model.",
+        "defaultTagline": "Adult ADHD, women's health & metabolic care",
         "serviceTaglines": {
-          "weight-loss-metabolic-health": "Weight loss telehealth (CA)"
+          "adhd-care": "Adult ADHD evaluation & ongoing telehealth care",
+          "telehealth": "Adult ADHD, women's health & metabolic telehealth",
+          "weight-loss-metabolic-health": "Medical weight loss & metabolic telehealth",
+          "primary-urgent-care": "Telehealth primary care support",
+          "womens-health": "Women's health telehealth support"
         }
       },
       "seo": {
-        "title": "Wendy Delgado, PA-C | Medical Weight Loss Telehealth | Siya Health",
-        "description": "Meet Wendy Delgado, PA-C at Siya Health. GLP-1 and medical weight loss telehealth support in California.",
-        "focusLead": "Physician Associate–led weight loss telehealth (CA)."
+        "title": "Wendy Delgado, PA-C | Adult ADHD, Women's Health & Weight Loss | Siya Health",
+        "description": "Meet Wendy Delgado, PA-C at Siya Health. Adult ADHD, women's health, medical weight loss, and telehealth primary care in California, Texas, Pennsylvania, and Florida.",
+        "focusLead": "Generalist PA telehealth—ADHD, women's health, weight loss, and primary care (CA, TX, PA, FL)."
       },
       "schema": {
-        "medicalSpecialty": ["Obesity Medicine", "Family Medicine"],
-        "knowsAbout": ["Medical weight loss", "Obesity", "Metabolic health", "GLP-1 therapy"]
+        "medicalSpecialty": ["Family Medicine", "Obesity Medicine", "Adult ADHD", "Women's Health"],
+        "knowsAbout": [
+          "Adult ADHD",
+          "Women's health",
+          "Medical weight loss",
+          "Obesity",
+          "Metabolic health",
+          "GLP-1 therapy",
+          "Telehealth primary care"
+        ]
       }
     }
   }

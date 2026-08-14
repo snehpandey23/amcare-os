@@ -46,7 +46,7 @@ for (const field of [
 
 const ghlBookingHrefPattern = /href="[^"]*link\.yourmarketingai\.com\/widget\/form\//i;
 const siyaCircleFormHrefPattern = new RegExp(
-  `href="[^"]*link\\.yourmarketingai\\.com/widget/form/${SIYA_CIRCLE_GHL_FORM_ID}[^"]*"`,
+  `href="[^"]*(?:form\\.carepatron\\.com/Forms/${SIYA_CIRCLE_GHL_FORM_ID}|link\\.yourmarketingai\\.com/widget/form/HmvqrDVq3tq3qv6rkCjl)[^"]*"`,
   'gi',
 );
 

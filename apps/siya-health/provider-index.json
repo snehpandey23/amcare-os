@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T11:41:11.006Z",
+  "generated": "2026-08-08T12:28:16.626Z",
   "hubUrl": "https://siya.health/providers",
   "count": 7,
   "providers": [
@@ -33,7 +33,7 @@
         "Medical weight loss",
         "ADHD and weight overlap"
       ],
-      "npi": null,
+      "npi": "1154703528",
       "relatedContent": []
     },
     {
@@ -60,7 +60,7 @@
         "Chronic disease",
         "Lifestyle medicine"
       ],
-      "npi": null,
+      "npi": "1396999447",
       "relatedContent": []
     },
     {
@@ -89,7 +89,7 @@
         "ADHD with anxiety overlap",
         "Behavioral health"
       ],
-      "npi": null,
+      "npi": "1861074247",
       "relatedContent": []
     },
     {
@@ -116,7 +116,7 @@
         "Complex medication histories",
         "ADHD with anxiety and mood overlap"
       ],
-      "npi": null,
+      "npi": "1821471954",
       "relatedContent": []
     },
     {

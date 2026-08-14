@@ -140,6 +140,7 @@ function writeLlmsTxt(pages) {
     `- ADHD telehealth California: ${BASE}/blog/adhd-telehealth-california`,
     `- General ADHD care (service page): ${BASE}/adhd-care`,
     `- California screening: ${BASE}/adult-adhd-screening-california`,
+    `- Texas screening: ${BASE}/adult-adhd-screening-texas`,
     `- Texas ADHD treatment (statewide): ${BASE}/blog/adhd-treatment-texas`,
     `- Texas ADHD diagnosis (statewide): ${BASE}/adhd-diagnosis-texas`,
     '',

@@ -6,8 +6,10 @@ One provider, one Vercel project, two features:
 |--------|------------|----------|
 | **Team invite** | `/admin/team` + `POST /api/admin/invite-email` | New hire’s work email |
 | **Notify owner** | Ask chat + `POST /api/knowledge-gap` | `bot@siya.health` (default) |
+| **SOP submitted** | Knowledge SOP submit / AI Builder submit | Portal **admins** (review is admin-only) |
+| **SOP approved / sent back** | Admin approve → live, or send-back with comment | Original **submitter** |
 
-Both use **`RESEND_API_KEY`** on **`siya-staff-assist`** only (never on the auth API, never `NEXT_PUBLIC_*`).
+All use **`RESEND_API_KEY`** on **`siya-staff-assist`** only (never on the auth API, never `NEXT_PUBLIC_*`). Optional: `SIYA_SOP_REVIEW_TO` (comma-separated) to override/extend admin recipients.
 
 ---
 

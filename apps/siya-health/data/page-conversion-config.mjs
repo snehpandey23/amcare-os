@@ -51,8 +51,8 @@ export const PAGE_CONVERSION_CONFIG = {
     intent: 'adhd',
     funnel: 'adhd-screening-results',
     primarySlot: 'meetGreet',
-    secondarySlot: 'evaluation',
-    additionalCtas: ['secureChat'],
+    secondarySlot: 'secureChat',
+    additionalCtas: [],
   },
   'adult-adhd-screening-california.html': {
     conversionGoal: 'screening',

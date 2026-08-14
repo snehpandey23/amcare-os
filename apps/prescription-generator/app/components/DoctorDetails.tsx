@@ -10,12 +10,22 @@ type DoctorDetailsProps = {
 export default function DoctorDetails({ register, errors }: DoctorDetailsProps) {
   return (
     <section className="space-y-4">
-      <h2 className="text-lg font-semibold text-slate-800">2. Doctor Details</h2>
+      <h2 className="text-lg font-semibold text-slate-800">2. Clinic &amp; Doctor</h2>
       <div className="grid gap-4 md:grid-cols-2">
+        <div className="space-y-1 md:col-span-2">
+          <label className="text-sm font-medium text-slate-700">Clinic Name *</label>
+          <input
+            type="text"
+            {...register("clinicName", { required: "Clinic name is required." })}
+            className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            placeholder="Your Clinic Name"
+          />
+          {errors.clinicName?.message && (
+            <p className="text-xs text-red-600">{errors.clinicName.message}</p>
+          )}
+        </div>
         <div className="space-y-1">
-          <label className="text-sm font-medium text-slate-700">
-            Doctor Name *
-          </label>
+          <label className="text-sm font-medium text-slate-700">Doctor Name *</label>
           <input
             type="text"
             {...register("doctorName", { required: "Doctor name is required." })}
@@ -36,9 +46,7 @@ export default function DoctorDetails({ register, errors }: DoctorDetailsProps) 
           />
         </div>
         <div className="space-y-1">
-          <label className="text-sm font-medium text-slate-700">
-            Registration Number *
-          </label>
+          <label className="text-sm font-medium text-slate-700">Registration Number *</label>
           <input
             type="text"
             {...register("regNo", {
@@ -52,9 +60,7 @@ export default function DoctorDetails({ register, errors }: DoctorDetailsProps) 
           )}
         </div>
         <div className="space-y-1">
-          <label className="text-sm font-medium text-slate-700">
-            Clinic Contact
-          </label>
+          <label className="text-sm font-medium text-slate-700">Clinic Contact</label>
           <input
             type="text"
             {...register("clinicContact")}
@@ -64,9 +70,7 @@ export default function DoctorDetails({ register, errors }: DoctorDetailsProps) 
         </div>
       </div>
       <div className="space-y-1">
-        <label className="text-sm font-medium text-slate-700">
-          Clinic Address
-        </label>
+        <label className="text-sm font-medium text-slate-700">Clinic Address</label>
         <textarea
           rows={2}
           {...register("clinicAddress")}

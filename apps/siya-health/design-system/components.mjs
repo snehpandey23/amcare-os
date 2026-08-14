@@ -11,6 +11,7 @@ import {
 } from './conversion-system.mjs';
 import { resolveTrust, trustToRenderProps } from './trust-system.mjs';
 import { dualClass } from './class-names.mjs';
+import { sortedStateAbbreviations, stateChipLabel } from '../data/providers.mjs';
 
 export { dualClass };
 
@@ -713,18 +714,21 @@ export function renderAboutTeamCard(provider, { variant = 'homepage', photoHtml 
   const displayName = p.name?.replace(/, (MD|PA-C|FNP-C|FNP-BC)$/, '') ?? p.name;
   const photo = photoHtml;
   if (variant === 'homepage') {
-    return `            <article class="${dualClass('about-team-card homepage-care-card', 'ds-provider-card')}" data-states="${(p.stateAbbreviations ?? []).join(',')}">
+    const statesAttr = sortedStateAbbreviations(p).join(',');
+    const statesLabel = stateChipLabel(p);
+    return `            <article class="${dualClass('about-team-card homepage-care-card', 'ds-provider-card')}" data-states="${statesAttr}">
               ${photo}
               <h3><a href="/providers/${p.slug}">${escHtml(p.name)}</a></h3>
               <p class="about-team-role">${escHtml(p.homepageRole ?? p.role ?? '')}</p>
-              <p class="about-team-states">Licensed in ${escHtml(p.stateAbbreviations?.join(', ') ?? '')}</p>
+              <p class="about-team-states">Licensed in ${escHtml(statesLabel)}</p>
               <p class="about-team-bio">${escHtml(p.homepageBio ?? p.servicePageTagline ?? '')}</p>
               <a class="button secondary care-team-profile-btn" href="/providers/${p.slug}">View profile</a>
             </article>`;
   }
   if (variant === 'meet') {
     const tagline = serviceTagline || p.servicePageTagline || '';
-    return `            <article class="${dualClass('about-team-card', 'ds-provider-card')}" data-states="${(p.stateAbbreviations ?? []).join(',')}">
+    const statesAttr = sortedStateAbbreviations(p).join(',');
+    return `            <article class="${dualClass('about-team-card', 'ds-provider-card')}" data-states="${statesAttr}">
               ${photo}
               <h3><a href="/providers/${p.slug}">${escHtml(p.name)}</a></h3>
               <p class="about-team-tagline">${escHtml(tagline)}</p>

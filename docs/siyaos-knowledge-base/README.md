@@ -3,7 +3,9 @@
 **Company memory** behind **[Siya Assistant](../../apps/hipaa-training/)** — internal AI help desk (one chat, routing, escalation).
 
 - **Product definition:** [`PRODUCT.md`](./PRODUCT.md)
-- **Architecture (patient vs internal):** [`ARCHITECTURE.md`](./ARCHITECTURE.md)
+- **Siya OS (company departments):** [`SIYA-OS-ARCHITECTURE.md`](./SIYA-OS-ARCHITECTURE.md)
+- **Marketing department manual (frozen v1.0):** [`05-marketing-os/MARKETING-OS-v1.0.md`](./05-marketing-os/MARKETING-OS-v1.0.md)
+- **Architecture (patient vs internal KB):** [`ARCHITECTURE.md`](./ARCHITECTURE.md)
 - **Team authoring (WorkDrive):** `Common Folder/SiyaOS/` — Company Memory v1 layout (`_shared/`, `operations/`, `finance/`, `leadership/principles|decisions|ideas|graveyard/`)
 
 | Layer | Location | Audience |

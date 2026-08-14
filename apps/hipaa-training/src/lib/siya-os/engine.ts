@@ -1,7 +1,7 @@
 import { getEscalationContacts } from "./config";
 import { defaultEscalationOwner } from "./escalation";
 import { retrievalQueryBoost, routeIntent, expandShortQuery, hasRoutableIntent } from "./flows";
-import { composeAnswerFromChunks, clarifyVagueMessage, formatEscalationForSlack, isVagueUserMessage, polishStaffMessage } from "./compose-answer";
+import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, abusivePatientAnswer, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, polishStaffMessage } from "./compose-answer";
 import { staffTopicLabel } from "./staff-voice";
 import { synthesizeWorkforceAnswer } from "./llm-answer";
 import {
@@ -12,6 +12,7 @@ import {
   type RetrievedChunk,
 } from "./retrieval";
 import { fetchSopsForRetrieval } from "@/lib/sop-api";
+import { fetchDecisionsForRetrieval } from "@/lib/knowledge-api";
 import { searchMemory } from "@/lib/memory-api";
 import { displayDepartment, type Confidence, type Department } from "./departments";
 import {
@@ -21,6 +22,15 @@ import {
 } from "./phi-guard";
 import { fetchAdminOpsSnapshot } from "./admin-ops-snapshot";
 import { detectAdminOpsIntent, runAdminOpsCoach } from "./admin-ops-coach";
+import { tryFactsLookup } from "./facts-lookup";
+import {
+  acknowledgePersonalPreference,
+  answerPersonalFactRecall,
+  extractPersonalFactsFromHistory,
+  isAskingAboutPriorPersonalFact,
+  isCompanyPolicyAssertion,
+  isPersonalPreferenceStatement,
+} from "./conversation-memory";
 
 export interface SiyaReply {
   message: string;
@@ -42,12 +52,24 @@ export interface SiyaReply {
   portalLinks?: { label: string; href: string }[];
   /** True when reply used live task/team data */
   opsCoPilot?: boolean;
+  /** True when deterministic site facts-lookup answered (skip LLM rewrite) */
+  factsLookup?: boolean;
   executiveMeta?: {
     confidence: string;
     freshnessSeconds: number;
     recommendedAction: string;
     evidenceCount: number;
   };
+  /** True when the reply body came from Workforce LLM synthesis */
+  llmUsed?: boolean;
+  /** True when retrieval compose was used because LLM was off, skipped, or failed */
+  llmFallback?: boolean;
+  /** Distinguishes billing/auth/quota from “LLM off” when synthesis fails */
+  llmError?: {
+    code: string;
+    kind: string;
+    message: string;
+  } | null;
   pendingTask?: {
     title: string;
     assigneeId: string;
@@ -117,16 +139,22 @@ export async function runSiyaAssistantAsync(
     }
   }
 
-  const normalized = expandShortQuery(message.trim());
+  const normalized = expandShortQuery(resolveQuery(message.trim(), history));
   const routing = routeIntent(normalized);
-  const query = retrievalQueryBoost(resolveQuery(normalized, history), routing);
+  const query = retrievalQueryBoost(normalized, routing);
 
   let sops: Awaited<ReturnType<typeof fetchSopsForRetrieval>> = [];
+  let decisions: Awaited<ReturnType<typeof fetchDecisionsForRetrieval>> = [];
   let memories: { id: string; title: string; body: string; department?: string | null }[] = [];
   try {
     sops = await fetchSopsForRetrieval(token);
   } catch {
     sops = [];
+  }
+  try {
+    decisions = await fetchDecisionsForRetrieval(token);
+  } catch {
+    decisions = [];
   }
   if (token && isHistoricalMemoryQuery(query)) {
     try {
@@ -136,29 +164,32 @@ export async function runSiyaAssistantAsync(
     }
   }
 
-  const layered = retrieveLayeredKnowledge(query, { sops, memories, limit: 6 });
+  const layered = retrieveLayeredKnowledge(query, { sops, decisions, memories, limit: 6 });
   const base = buildSiyaReply(message, history, {
     focusMode,
     layeredChunks: layered,
     queryOverride: query,
   });
-  if (base.refused || !base.chunks.length) return base;
+  // Skip LLM when refused, facts-only, empty, knowledge-gap, or workplace escalate path
+  if (base.refused || base.factsLookup || base.knowledgeGap || !base.chunks.length) return base;
 
   const routingLine = base.routing
     ? `Department: ${displayDepartment(base.routing.department)}. Task: ${base.routing.task}.`
     : "";
 
-  const llmText = await synthesizeWorkforceAnswer({
+  const personalFacts = extractPersonalFactsFromHistory(history);
+  const synthesis = await synthesizeWorkforceAnswer({
     userMessage: message,
     routingLine,
     chunks: base.chunks,
     followUpQuestions: base.routing?.followUpQuestions ?? [],
     history,
     focusMode,
+    personalFacts: personalFacts.map((f) => f.summary),
   });
 
-  if (llmText) {
-    let msg = polishStaffMessage(llmText);
+  if (synthesis.text) {
+    let msg = polishStaffMessage(synthesis.text);
     if (base.chunks[0]?.escalate && !msg.includes(base.chunks[0].escalate!)) {
       msg += `\n\n**Loop in:** ${base.chunks[0].escalate}`;
     }
@@ -175,21 +206,71 @@ export async function runSiyaAssistantAsync(
       message: msg,
       knowledgeGap: false,
       escalationPreview: undefined,
+      llmUsed: true,
+      llmFallback: false,
+      llmError: null,
     };
   }
 
-  return { ...base, message: polishStaffMessage(base.message) };
+  return {
+    ...base,
+    message: polishStaffMessage(base.message),
+    llmUsed: false,
+    llmFallback: synthesis.llmFallback,
+    llmError: synthesis.llmError
+      ? {
+          code: synthesis.llmError.code,
+          kind: synthesis.llmError.kind,
+          message: synthesis.llmError.userMessage,
+        }
+      : null,
+  };
+}
+
+function mapClarifyOptionReply(message: string): string {
+  const t = message.trim().toLowerCase();
+  const map: Record<string, string> = {
+    "1": "patient or caller situation",
+    "2": "teammate or HR workplace concern",
+    "3": "billing refund or reimbursement",
+    "4": "policy or SOP lookup",
+    "5": "tech login or system access issue",
+  };
+  if (map[t]) return map[t];
+  if (/^1\b/.test(t) && t.length < 40) return `patient or caller situation — ${message}`;
+  if (/^2\b/.test(t) && t.length < 40) return `teammate or HR workplace concern — ${message}`;
+  if (/^3\b/.test(t) && t.length < 40) return `billing refund or reimbursement — ${message}`;
+  if (/^4\b/.test(t) && t.length < 40) return `policy or SOP lookup — ${message}`;
+  if (/^5\b/.test(t) && t.length < 40) return `tech login or system access issue — ${message}`;
+  return message;
 }
 
 function resolveQuery(message: string, history: { role: string; content: string }[]): string {
-  if (!isVagueUserMessage(message)) return message;
+  const mapped = mapClarifyOptionReply(message);
+  const lastAssistant = [...history].reverse().find((h) => h.role === "assistant");
+  const priorUser = [...history].reverse().find((h) => h.role === "user");
+  if (
+    lastAssistant &&
+    priorUser &&
+    /not sure which path|one line is enough|are you asking about|which path you need/i.test(lastAssistant.content)
+  ) {
+    const reply = mapped.trim();
+    if (
+      reply.length < 120 ||
+      isVagueUserMessage(reply) ||
+      /^(patient|caller|teammate|hr|billing|refund|reimburs|policy|sop|tech|login|access)\b/i.test(reply)
+    ) {
+      return `${priorUser.content.trim()} — ${reply}`;
+    }
+  }
+  if (!isVagueUserMessage(mapped)) return mapped;
   for (let i = history.length - 1; i >= 0; i--) {
     const h = history[i];
     if (h.role === "user" && h.content.trim().length > 12 && !isVagueUserMessage(h.content)) {
-      return `${h.content.trim()} (follow-up: ${message})`;
+      return `${h.content.trim()} (follow-up: ${mapped})`;
     }
   }
-  return message;
+  return mapped;
 }
 
 function buildSiyaReply(
@@ -231,6 +312,77 @@ function buildSiyaReply(
     };
   }
 
+  // Personal preference / fact for THIS chat — do not let refund SOP keywords hijack.
+  // Company-policy assertions in first person still fall through to retrieval (locked).
+  if (isPersonalPreferenceStatement(text) && !isCompanyPolicyAssertion(text)) {
+    return {
+      message: polishStaffMessage(acknowledgePersonalPreference(text)),
+      chunks: [],
+      knowledgeGap: false,
+      sources: [],
+      escalationPreview: undefined,
+      routing: {
+        department: "General",
+        task: "Personal preference (this chat)",
+        confidence: "high",
+        followUpQuestions: [],
+      },
+    };
+  }
+
+  const personalFacts = extractPersonalFactsFromHistory(history);
+  if (
+    personalFacts.length &&
+    (isAskingAboutPriorPersonalFact(text) ||
+      (/\b(who|what)\b/i.test(text) && /\b(say|said|told|preferred|handles|contact)\b/i.test(text)))
+  ) {
+    const recall = answerPersonalFactRecall(text, personalFacts);
+    if (recall) {
+      return {
+        message: polishStaffMessage(recall),
+        chunks: [],
+        knowledgeGap: false,
+        sources: [],
+        escalationPreview: undefined,
+        routing: {
+          department: "General",
+          task: "Personal preference recall (this chat)",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+  }
+
+  const factsHit = tryFactsLookup(expandShortQuery(text));
+  if (factsHit) {
+    return {
+      message: polishStaffMessage(factsHit.message),
+      chunks: factsHit.chunks,
+      knowledgeGap: false,
+      sources: factsHit.sources,
+      escalate: defaultEscalationOwner(factsHit.department),
+      routing: {
+        department: factsHit.department,
+        task: factsHit.task,
+        confidence: "high",
+        followUpQuestions: [],
+      },
+      escalationPreview: undefined,
+      factsLookup: true,
+    };
+  }
+
+  if (isConfusedAboutPriorAnswer(text) && history.some((h) => h.role === "assistant")) {
+    return {
+      message: clarifyConfusedFollowUp(),
+      chunks: [],
+      knowledgeGap: false,
+      sources: [],
+      escalationPreview: undefined,
+    };
+  }
+
   if (
     isVagueUserMessage(text) &&
     !hasRoutableIntent(text) &&
@@ -245,25 +397,105 @@ function buildSiyaReply(
     };
   }
 
-  const normalized = expandShortQuery(text);
+  const normalized = expandShortQuery(resolveQuery(text, history));
   const routing = routeIntent(normalized);
+
+  if (routing.flowId === "clinical-ops-abusive-patient") {
+    const escalateOwner = defaultEscalationOwner("Clinical Operations");
+    return {
+      message: polishStaffMessage(abusivePatientAnswer()),
+      chunks: [],
+      escalate: escalateOwner,
+      knowledgeGap: true,
+      sources: [],
+      routing: {
+        department: "Clinical Operations",
+        task: routing.task,
+        confidence: routing.confidence,
+        followUpQuestions: routing.followUpQuestions,
+      },
+      escalationPreview: formatEscalationForSlack({
+        question: text,
+        department: displayDepartment("Clinical Operations"),
+        task: routing.task,
+        escalateTo: escalateOwner,
+        sourceTitles: [],
+        followUps: routing.followUpQuestions,
+      }),
+    };
+  }
+
+  if (routing.flowId === "hr-workplace") {
+    const escalateOwner = defaultEscalationOwner("HR");
+    return {
+      message: polishStaffMessage(workplaceConcernAnswer()),
+      chunks: [],
+      escalate: escalateOwner,
+      knowledgeGap: true,
+      sources: [],
+      routing: {
+        department: "HR",
+        task: routing.task,
+        confidence: routing.confidence,
+        followUpQuestions: routing.followUpQuestions,
+      },
+      escalationPreview: formatEscalationForSlack({
+        question: text,
+        department: displayDepartment("HR"),
+        task: routing.task,
+        escalateTo: escalateOwner,
+        sourceTitles: [],
+        followUps: routing.followUpQuestions,
+      }),
+    };
+  }
+
   const query = opts?.queryOverride ?? retrievalQueryBoost(resolveQuery(normalized, history), routing);
   let chunks =
     opts?.layeredChunks?.length ? opts.layeredChunks : retrieveLayeredKnowledge(query, { limit: 6 });
   chunks = filterStaffFacingChunks(chunks, normalized);
 
-  const hasStrongMatch = chunks.length > 0 && chunks[0].score >= 2;
-  const knowledgeGap = chunks.length === 0;
+  const STRONG_SCORE = 3;
+  let hasStrongMatch = chunks.length > 0 && chunks[0].score >= STRONG_SCORE;
 
-  const sources = chunks.slice(0, hasStrongMatch ? 2 : 3).map((c) => ({
-    title: c.layerLabel ? `${c.layerLabel} · ${staffTopicLabel(c.title)}` : staffTopicLabel(c.title),
+  if (!hasStrongMatch) {
+    const near = filterStaffFacingChunks(retrieveWorkspaceNearMisses(query, 3), normalized).filter(
+      (c) => c.score >= STRONG_SCORE,
+    );
+    if (near.length) {
+      chunks = near;
+      hasStrongMatch = true;
+    } else {
+      chunks = [];
+    }
+  }
+
+  const confident = isConfidentAssistAnswer({
+    userMessage: normalized,
+    flowId: routing.flowId,
+    routingConfidence: routing.confidence,
+    topScore: chunks[0]?.score ?? 0,
+    topChunk: chunks[0] ?? null,
+  });
+
+  // Unsure → ask back. Do not dump the nearest weak keyword hit.
+  if (!confident) {
+    return {
+      message: polishStaffMessage(askClarifyingQuestion(normalized)),
+      chunks: [],
+      knowledgeGap: false,
+      sources: [],
+      escalationPreview: undefined,
+    };
+  }
+
+  const knowledgeGap = false;
+
+  const sources = chunks.slice(0, 2).map((c) => ({
+    title: staffTopicLabel(c.title),
     id: c.id,
   }));
   const escalateOwner = chunks[0]?.escalate ?? defaultEscalationOwner(routing.department);
-
-  if (!chunks.length) {
-    chunks = filterStaffFacingChunks(retrieveWorkspaceNearMisses(query, 3), normalized);
-  }
 
   let msg = composeAnswerFromChunks(normalized, chunks, knowledgeGap, routing.flowId);
 
@@ -279,10 +511,6 @@ function buildSiyaReply(
     msg =
       "**Note:** There isn't a live **employee reimbursement** SOP yet — use **Policies & requirements** (expense) and check with **Accounts**.\n\n" +
       msg;
-  }
-
-  if (!hasStrongMatch && chunks.length && !msg.includes("Closest")) {
-    msg += `\n\n**Closest topics:** ${chunks.slice(0, 3).map((c) => staffTopicLabel(c.title)).join(" · ")}`;
   }
 
   if (chunks[0]?.escalate && knowledgeGap) {

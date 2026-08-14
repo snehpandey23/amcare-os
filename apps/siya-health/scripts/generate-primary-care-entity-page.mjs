@@ -21,6 +21,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  injectCookieConsentBootstrap,
+  injectCookieNotice,
+  injectGtmAndTracking,
+} from './site-chrome.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -207,6 +212,7 @@ function render() {
               <a class="button ds-button ds-button--primary" href="/book-appointment" data-siya-track="primary-cta-click" data-siya-location="hero" data-page-type="default" data-intent="primary-care" data-component="button">Book a primary care visit</a>
               <a class="button ds-button ds-button--secondary secondary" href="#how-it-fits" data-siya-track="scroll_hierarchy" data-siya-location="hero" data-component="button">See how care fits together</a>
             </div>
+            <p class="hero-availability-note">Meet &amp; Greet and initial visits are often available within 48 hours across California, Texas, Pennsylvania, and Florida.</p>
             <p class="cta-microcopy">Educational orientation, not a diagnosis. Emergencies need ER or urgent local care&mdash;not a scheduled telehealth slot.</p>
           </div>
         </div>
@@ -345,5 +351,8 @@ ${faqAccordion(FAQS, 'faq-primary-care')}
 `;
 }
 
-fs.writeFileSync(OUT, render());
+let html = injectCookieConsentBootstrap(render());
+html = injectCookieNotice(html, 'primary-care.html');
+html = injectGtmAndTracking(html, 'primary-care.html');
+fs.writeFileSync(OUT, html);
 console.log('Wrote primary-care.html (root service entity page)');

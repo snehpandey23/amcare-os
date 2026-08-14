@@ -1,9 +1,5 @@
-# WH-R-02 Reel — READY TO POST
+# WH-R-02 Reel v4
 
-**File:** `WH-R-02-reel.mp4`  
-**Format:** 1080×1920 (9:16) · ~27s · H.264 · no audio  
-**Built from:** ready carousel slides + slow Ken Burns + crossfades
-
-Also on Desktop: `~/Desktop/Siya-WH-R-02-READY/WH-R-02-reel.mp4`
-
-Post with caption from `../instagram.md` (or shorten for Reel). Add soft music in IG if desired.
+1080×1920 full-bleed · ~25s · no audio  
+A-03 lean type · single `siya.health · Educational only` lockup  
+Frames: `frames-v4/`

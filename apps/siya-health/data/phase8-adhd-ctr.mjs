@@ -33,11 +33,11 @@ export const PHASE8_BLOG_CTR = {
     ],
   },
   'vyvanse-vs-adderall-differences': {
-    oldTitle: 'Vyvanse vs Adderall for ADHD in 2026: Differences Adults Should Know | Siya Health',
-    title: 'Vyvanse vs Adderall: Which Lasts Longer for Adult ADHD? | Siya Health',
+    oldTitle: 'Vyvanse vs Adderall: Which Lasts Longer for Adult ADHD? | Siya Health',
+    title: 'Vyvanse vs Adderall: Differences for Adult ADHD | Siya Health',
     description:
-      'Vyvanse vs Adderall for adults: compare duration, onset, crash patterns, and side effects—what to ask your prescriber before switching stimulants.',
-    h1: 'Vyvanse vs Adderall: Which Lasts Longer for Adults?',
+      'Vyvanse vs Adderall compared for adults with ADHD: duration, onset, wear-off, side effects, and questions to ask your prescriber before switching stimulants.',
+    h1: 'Vyvanse vs Adderall: Differences for Adult ADHD',
     lead: 'The real question isn\'t "which is stronger"—it\'s how long coverage lasts, how smooth wear-off feels, and which formulation fits your day. Compare both before your next visit.',
     faqAdd: [
       {

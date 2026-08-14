@@ -16,4 +16,9 @@
 
 ## Notes
 - Build output is `apps/prescription-generator/.next`.
-- This setup hosts the Next.js app without additional API services.
+- Auth and clinic profiles use the **staff auth API** (`siya-staff-auth-api`). Set Amplify env:
+  - `NEXT_PUBLIC_HIPAA_TRAINING_API_URL=https://siya-staff-auth-api.vercel.app`
+- Next.js rewrites `/api/staff-auth/*` → that API (same pattern as the staff portal).
+- Redeploy the auth API after this feature ships so `GET/PUT /api/clinic-profile` exists:
+  `bash scripts/deploy-staff-portal.sh` (or API-only from `integrations/hipaa-training-api`).
+- If you call the API cross-origin without the rewrite, add the Amplify host to `CORS_ORIGIN` on the auth API.

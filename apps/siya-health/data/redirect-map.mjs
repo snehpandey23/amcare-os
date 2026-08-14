@@ -23,11 +23,10 @@ const RAW = {
   '/blog/adult-adhd-treatment-california-2026': '/adult-adhd-california',
   '/blog/why-am-i-always-tired-causes-when-to-see-doctor': '/fatigue',
   '/blog/adhd-evaluation-cost-california': '/adult-adhd-california',
-  '/adhd-diagnosis-pennsylvania': '/adhd-care',
-  '/adhd-diagnosis-philadelphia': '/adhd-care',
+  '/adhd-diagnosis-philadelphia': '/adhd-diagnosis-pennsylvania',
   '/adhd-diagnosis-houston': '/adhd-diagnosis-texas',
   '/adhd-diagnosis-austin': '/adhd-diagnosis-texas',
-  '/blog/adhd-treatment-philadelphia-pa': '/adhd-care',
+  '/blog/adhd-treatment-philadelphia-pa': '/adhd-diagnosis-pennsylvania',
   '/blog/adhd-treatment-orlando-fl': '/adhd-care',
   '/blog/adhd-treatment-miami-fl': '/adhd-care',
   '/blog/adhd-treatment-san-antonio-tx': '/blog/adhd-treatment-texas',
@@ -55,7 +54,7 @@ const RAW = {
 };
 
 /** Paths that 301 to external URLs — exclude from sitemap; never use as internal link targets */
-export const EXTERNAL_REDIRECT_SOURCES = new Set(['/siya-circle']);
+export const EXTERNAL_REDIRECT_SOURCES = new Set([]);
 
 /** HTML shells on disk whose URLs redirect elsewhere */
 export const REDIRECT_SHELL_FILES = {
@@ -66,7 +65,6 @@ export const REDIRECT_SHELL_FILES = {
   'adhd-diagnosis-florida.html': '/adhd-care',
   'adhd-evaluation-cost.html': '/pricing',
   'online-adhd-test.html': '/adhd-screening',
-  'siya-circle.html': null,
 };
 
 /**

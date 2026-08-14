@@ -1,6 +1,6 @@
 # Crawl architecture report
 
-Generated: 2026-07-26T11:41:05.643Z
+Generated: 2026-07-27T01:23:23.670Z
 
 Internal link graph analysis only — not a general SEO audit.
 
@@ -8,14 +8,14 @@ Internal link graph analysis only — not a general SEO audit.
 
 | Metric | Value |
 |--------|------:|
-| Total indexable HTML pages | 194 |
-| Pages reachable from `/` | 156 |
+| Total indexable HTML pages | 201 |
+| Pages reachable from `/` | 163 |
 | Unreachable from `/` (by internal links) | 38 |
-| **Average crawl depth** (reachable pages) | **1.89** |
+| **Average crawl depth** (reachable pages) | **1.91** |
 | Orphan pages (0 inbound internal links) | 37 |
-| Pages with &lt; 2 inbound links | 42 |
+| Pages with &lt; 2 inbound links | 43 |
 | Pages with &gt; 100 outbound internal links | 0 |
-| Pages with &gt; 100 inbound internal links | 22 |
+| Pages with &gt; 100 inbound internal links | 24 |
 
 ## Crawl depth distribution
 
@@ -23,34 +23,34 @@ Internal link graph analysis only — not a general SEO audit.
 |--------------------:|------:|
 | 0 | 1 |
 | 1 | 31 |
-| 2 | 110 |
-| 3 | 12 |
+| 2 | 115 |
+| 3 | 14 |
 | 4 | 2 |
 
 ## Top 20 most internally linked pages (inbound)
 
 | Rank | Inbound links | Path | Title |
 |------|-------------:|------|-------|
-| 1 | 172 | `/` | Siya Health \| When Focus, Energy, or Weight Won't Budge |
-| 2 | 167 | `/about` | About Siya Health \| Mission, Team &amp; How Care Works |
-| 3 | 166 | `/adhd-care` | Adult ADHD Diagnosis Online — Same-Week Evaluation |
-| 4 | 161 | `/blog` | Health Insights &amp; Blog Hub (2026) \| ADHD, Weight Loss &amp; Telehe |
-| 5 | 161 | `/telehealth` | Virtual Medical Care \| Siya Health Telehealth |
-| 6 | 161 | `/weight-loss-metabolic-health` | Provider-Guided Medical Weight Loss |
-| 7 | 160 | `/answers` | Health Guides \| Metabolic, ADHD, Hormones &amp; Telehealth |
-| 8 | 160 | `/labs` | Labs &amp; Blood Tests \| Transparent Direct-Pay Testing |
-| 9 | 159 | `/prescriptions` | Online Prescription Services |
-| 10 | 159 | `/primary-urgent-care` | Primary &amp; Urgent Care Telehealth |
-| 11 | 115 | `/blog/adhd` | ADHD Articles Hub (2026) — Diagnosis, Medication Education &amp; Care |
-| 12 | 109 | `/blog/weight-loss` | Weight Loss Articles (2026) — GLP-1 &amp; Medical Metabolic Care \| Siy |
-| 13 | 107 | `/legal/notice-of-privacy-practices` | Notice of Privacy Practices |
-| 14 | 107 | `/legal/privacy-policy` | Privacy Policy |
-| 15 | 107 | `/legal/terms-of-use` | Terms of Use |
-| 16 | 106 | `/legal/cookie-policy` | Cookie Policy |
-| 17 | 106 | `/legal` | Legal &amp; Compliance |
-| 18 | 104 | `/answers/signs-of-adult-adhd` | What are the signs of adult ADHD? |
-| 19 | 104 | `/blog/telehealth` | Telehealth Articles (2026) — Safe Online Prescribing &amp; Remote Care |
-| 20 | 104 | `/mens-health-longevity` | Men's Health &amp; Longevity |
+| 1 | 179 | `/` | Siya Health \| When Focus, Energy, or Weight Won't Budge |
+| 2 | 172 | `/adhd-care` | Adult ADHD Diagnosis Online — Same-Week Evaluation |
+| 3 | 170 | `/about` | About Siya Health \| Mission, Team &amp; How Care Works |
+| 4 | 168 | `/blog` | Health Insights &amp; Blog Hub (2026) \| ADHD, Weight Loss &amp; Telehe |
+| 5 | 167 | `/answers` | Health Guides \| Metabolic, ADHD, Hormones &amp; Telehealth |
+| 6 | 167 | `/labs` | Labs &amp; Blood Tests \| Transparent Direct-Pay Testing |
+| 7 | 167 | `/telehealth` | Virtual Medical Care \| Siya Health Telehealth |
+| 8 | 166 | `/primary-urgent-care` | Primary &amp; Urgent Care Telehealth |
+| 9 | 165 | `/weight-loss-metabolic-health` | Provider-Guided Medical Weight Loss |
+| 10 | 162 | `/prescriptions` | Online Prescription Services |
+| 11 | 118 | `/blog/adhd` | ADHD Articles Hub (2026) — Diagnosis, Medication Education &amp; Care |
+| 12 | 112 | `/blog/weight-loss` | Weight Loss Articles (2026) — GLP-1 &amp; Medical Metabolic Care \| Siy |
+| 13 | 110 | `/legal/notice-of-privacy-practices` | Notice of Privacy Practices |
+| 14 | 110 | `/legal/privacy-policy` | Privacy Policy |
+| 15 | 110 | `/legal/terms-of-use` | Terms of Use |
+| 16 | 109 | `/legal/cookie-policy` | Cookie Policy |
+| 17 | 109 | `/legal` | Legal &amp; Compliance |
+| 18 | 108 | `/mens-health-longevity` | Men's Health &amp; Longevity |
+| 19 | 107 | `/answers/signs-of-adult-adhd` | What are the signs of adult ADHD? |
+| 20 | 107 | `/blog/telehealth` | Telehealth Articles (2026) — Safe Online Prescribing &amp; Remote Care |
 
 ## Orphan pages (0 inbound internal links)
 
@@ -123,6 +123,7 @@ Internal link graph analysis only — not a general SEO audit.
 - `/blog/adhd-treatment-san-jose-ca` (0 inbound) — Moved — Siya Health
 - `/blog/adult-adhd-treatment-california-2026` (0 inbound) — Moved — Siya Health
 - `/blog/how-to-choose-adhd-provider-california` (1 inbound) — How to Choose an ADHD Provider in California (Red Flags Included)
+- `/blog/insomnia-treatment-options-beyond-medication` (1 inbound) — Insomnia Treatment Options Beyond Medication (2026)
 - `/blog/oral-vs-injectable-weight-loss-medications` (1 inbound) — Oral vs Injectable Weight Loss Medications (2026): GLP-1 &amp; Beyond
 - `/blog/phentermine-for-weight-loss-safety-and-effectiveness` (0 inbound) — Phentermine for Weight Loss: Safety &amp; Effectiveness in 2026
 - `/blog/pots-and-adhd` (0 inbound) — POTS and ADHD: Shared Symptoms, Overlap &amp; What Research Shows
@@ -133,9 +134,8 @@ Internal link graph analysis only — not a general SEO audit.
 - `/redirect/adhd-evaluation` (0 inbound) — Starting Your ADHD Evaluation
 - `/redirect/adhd-walkthrough` (0 inbound) — Booking Your Free Meet &amp; Greet (Legacy Path)
 - `/redirect/chat` (0 inbound) — Connecting to Secure Medical Chat
-- `/redirect/meet-greet` (0 inbound) — Booking Your Free Meet &amp; Greet
 
-_…and 2 more._
+_…and 3 more._
 
 ## Pages with more than 100 outbound internal links
 
@@ -143,28 +143,30 @@ _None_
 
 ## Pages with more than 100 inbound internal links
 
-- `/about` (167 inbound) — About Siya Health | Mission, Team &amp; How Care Works
-- `/adhd-care` (166 inbound) — Adult ADHD Diagnosis Online — Same-Week Evaluation
-- `/answers` (160 inbound) — Health Guides | Metabolic, ADHD, Hormones &amp; Telehealth
-- `/answers/signs-of-adult-adhd` (104 inbound) — What are the signs of adult ADHD?
-- `/answers/what-is-insulin-resistance` (101 inbound) — What is insulin resistance?
-- `/blog/adhd` (115 inbound) — ADHD Articles Hub (2026) — Diagnosis, Medication Education &amp; Care
-- `/blog` (161 inbound) — Health Insights &amp; Blog Hub (2026) | ADHD, Weight Loss &amp; Telehe
-- `/blog/telehealth` (104 inbound) — Telehealth Articles (2026) — Safe Online Prescribing &amp; Remote Care
-- `/blog/weight-loss` (109 inbound) — Weight Loss Articles (2026) — GLP-1 &amp; Medical Metabolic Care | Siy
-- `/` (172 inbound) — Siya Health | When Focus, Energy, or Weight Won't Budge
-- `/labs` (160 inbound) — Labs &amp; Blood Tests | Transparent Direct-Pay Testing
-- `/legal/cookie-policy` (106 inbound) — Cookie Policy
-- `/legal` (106 inbound) — Legal &amp; Compliance
-- `/legal/notice-of-privacy-practices` (107 inbound) — Notice of Privacy Practices
-- `/legal/privacy-policy` (107 inbound) — Privacy Policy
-- `/legal/terms-of-use` (107 inbound) — Terms of Use
-- `/mens-health-longevity` (104 inbound) — Men's Health &amp; Longevity
-- `/prescriptions` (159 inbound) — Online Prescription Services
-- `/primary-urgent-care` (159 inbound) — Primary &amp; Urgent Care Telehealth
-- `/providers` (101 inbound) — Our Care Team
-- `/telehealth` (161 inbound) — Virtual Medical Care | Siya Health Telehealth
-- `/weight-loss-metabolic-health` (161 inbound) — Provider-Guided Medical Weight Loss
+- `/about` (170 inbound) — About Siya Health | Mission, Team &amp; How Care Works
+- `/adhd-care` (172 inbound) — Adult ADHD Diagnosis Online — Same-Week Evaluation
+- `/answers` (167 inbound) — Health Guides | Metabolic, ADHD, Hormones &amp; Telehealth
+- `/answers/signs-of-adult-adhd` (107 inbound) — What are the signs of adult ADHD?
+- `/answers/what-is-insulin-resistance` (104 inbound) — What is insulin resistance?
+- `/answers/why-am-i-tired-even-after-sleeping` (101 inbound) — Why am I tired even after sleeping?
+- `/blog/adhd` (118 inbound) — ADHD Articles Hub (2026) — Diagnosis, Medication Education &amp; Care
+- `/blog` (168 inbound) — Health Insights &amp; Blog Hub (2026) | ADHD, Weight Loss &amp; Telehe
+- `/blog/telehealth` (107 inbound) — Telehealth Articles (2026) — Safe Online Prescribing &amp; Remote Care
+- `/blog/weight-loss` (112 inbound) — Weight Loss Articles (2026) — GLP-1 &amp; Medical Metabolic Care | Siy
+- `/` (179 inbound) — Siya Health | When Focus, Energy, or Weight Won't Budge
+- `/labs` (167 inbound) — Labs &amp; Blood Tests | Transparent Direct-Pay Testing
+- `/legal/cookie-policy` (109 inbound) — Cookie Policy
+- `/legal` (109 inbound) — Legal &amp; Compliance
+- `/legal/notice-of-privacy-practices` (110 inbound) — Notice of Privacy Practices
+- `/legal/privacy-policy` (110 inbound) — Privacy Policy
+- `/legal/terms-of-use` (110 inbound) — Terms of Use
+- `/mens-health-longevity` (108 inbound) — Men's Health &amp; Longevity
+- `/prescriptions` (162 inbound) — Online Prescription Services
+- `/pricing` (104 inbound) — Pricing
+- `/primary-urgent-care` (166 inbound) — Primary &amp; Urgent Care Telehealth
+- `/providers` (104 inbound) — Our Care Team
+- `/telehealth` (167 inbound) — Virtual Medical Care | Siya Health Telehealth
+- `/weight-loss-metabolic-health` (165 inbound) — Provider-Guided Medical Weight Loss
 
 ## Unreachable from homepage (internal link graph)
 

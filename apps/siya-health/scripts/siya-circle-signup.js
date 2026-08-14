@@ -1,5 +1,5 @@
 /**
- * Siya Circle — page-view and join-click analytics (signup on GHL).
+ * Siya Circle — page-view and join-click analytics (signup on CarePatron).
  */
 (function () {
   if (typeof gtag === 'function' && /\/siya-circle\/?$/.test(location.pathname)) {

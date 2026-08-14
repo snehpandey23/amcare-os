@@ -1,8 +1,8 @@
 {
   "version": 1,
   "source": "siya-health public indexes (llms-full + curated public facts)",
-  "generated": "2026-07-26",
-  "chunkCount": 166,
+  "generated": "2026-08-06",
+  "chunkCount": 174,
   "chunks": [
     {
       "id": "fact_states",
@@ -53,11 +53,41 @@
       ]
     },
     {
+      "id": "fact_insurance",
+      "title": "Insurance and payment",
+      "url": "https://www.siya.health/pricing",
+      "path": "/pricing",
+      "summary": "Siya Health does not accept insurance. Care uses transparent cash pricing. Many patients use FSA or HSA funds for eligible services\u2014confirm with your plan administrator. Insurance-based options may be added later. See the pricing page and FSA/HSA guide.",
+      "topics": [
+        "pricing",
+        "insurance",
+        "payment"
+      ],
+      "keywords": [
+        "insurance",
+        "insurer",
+        "cash",
+        "pay",
+        "payment",
+        "fsa",
+        "hsa",
+        "flexible",
+        "spending",
+        "health savings",
+        "coverage",
+        "in-network",
+        "out-of-network",
+        "bill",
+        "accept insurance",
+        "take insurance"
+      ]
+    },
+    {
       "id": "fact_adhd_eval",
       "title": "Adult ADHD evaluation",
       "url": "https://www.siya.health/adhd-care",
       "path": "/adhd-care",
-      "summary": "Siya Health offers primary care–led adult ADHD evaluation via telehealth where clinically appropriate, typically 60–90 minutes. Screening tools support evaluation but do not diagnose ADHD alone. Diagnosis and evaluation do not guarantee medication.",
+      "summary": "Siya Health offers primary care\u2013led adult ADHD evaluation via telehealth where clinically appropriate, typically 60\u201390 minutes. Screening tools support evaluation but do not diagnose ADHD alone. Diagnosis and evaluation do not guarantee medication.",
       "topics": [
         "adhd"
       ],
@@ -97,7 +127,7 @@
       "title": "Free Meet & Greet",
       "url": "https://www.siya.health/redirect/meet-greet",
       "path": "/redirect/meet-greet",
-      "summary": "Visitors can book a free Meet & Greet — a short, non-clinical conversation to understand needs and choose a next step. It is not an emergency service and does not prescribe medication.",
+      "summary": "Visitors can book a free Meet & Greet \u2014 a short, non-clinical conversation to understand needs and choose a next step. It is not an emergency service and does not prescribe medication.",
       "topics": [
         "booking"
       ],
@@ -281,7 +311,7 @@
       "title": "Siya Health | When Focus, Energy, or Weight Won't Budge",
       "url": "https://www.siya.health/",
       "path": "/",
-      "summary": "Physician-led telehealth for adults who feel tired, unfocused, or stuck—structured evaluation for fatigue, ADHD symptoms, weight, and hormones in CA, TX, PA, and FL.",
+      "summary": "Physician-led telehealth for adults who feel tired, unfocused, or stuck\u2014structured evaluation for fatigue, ADHD symptoms, weight, and hormones in CA, TX, PA, and FL.",
       "topics": [
         "weight-loss"
       ],
@@ -362,10 +392,10 @@
     },
     {
       "id": "adhd-care",
-      "title": "Adult ADHD Diagnosis Online — Same-Week Evaluation",
+      "title": "Adult ADHD Diagnosis Online \u2014 Same-Week Evaluation",
       "url": "https://www.siya.health/adhd-care",
       "path": "/adhd-care",
-      "summary": "Primary care–led adult ADHD evaluation online — DSM-based assessment. Licensed medical providers. Individualized validated tools as clinically appropriate. CA, TX, PA, FL.",
+      "summary": "Primary care\u2013led adult ADHD evaluation online \u2014 DSM-based assessment. Licensed medical providers. Individualized validated tools as clinically appropriate. CA, TX, PA, FL.",
       "topics": [
         "adhd"
       ],
@@ -469,10 +499,10 @@
     },
     {
       "id": "adult-adhd-california",
-      "title": "Adult ADHD Care in California — Diagnosis, Treatment & Screening",
+      "title": "Adult ADHD Care in California \u2014 Diagnosis, Treatment & Screening",
       "url": "https://www.siya.health/adult-adhd-california",
       "path": "/adult-adhd-california",
-      "summary": "The complete guide to adult ADHD in California: what it looks like, when evaluation helps, how online diagnosis works, treatment options, women & ADHD, executive dysfunction, pricing, and a free scree…",
+      "summary": "The complete guide to adult ADHD in California: what it looks like, when evaluation helps, how online diagnosis works, treatment options, women & ADHD, executive dysfunction, pricing, and a free scree\u2026",
       "topics": [
         "adhd",
         "california"
@@ -587,7 +617,7 @@
       "title": "When might Vyvanse be preferred over Adderall for adults?",
       "url": "https://www.siya.health/answers/adderall-vs-vyvanse-adults",
       "path": "/answers/adderall-vs-vyvanse-adults",
-      "summary": "Quick FAQ on Vyvanse vs Adderall timing, smoothness, and prescriber trade-offs—not a full comparison. Read the complete guide.",
+      "summary": "Quick FAQ on Vyvanse vs Adderall timing, smoothness, and prescriber trade-offs\u2014not a full comparison. Read the complete guide.",
       "topics": [
         "adhd",
         "health-guide"
@@ -629,7 +659,7 @@
       "title": "Is there a connection between ADHD and weight loss struggles?",
       "url": "https://www.siya.health/answers/adhd-and-weight-loss-connection",
       "path": "/answers/adhd-and-weight-loss-connection",
-      "summary": "Yes. Impulsivity, emotional eating, irregular meals, sleep debt, and stimulant effects on appetite all link ADHD and weight. Treating ADHD can help routine…",
+      "summary": "Yes. Impulsivity, emotional eating, irregular meals, sleep debt, and stimulant effects on appetite all link ADHD and weight. Treating ADHD can help routine\u2026",
       "topics": [
         "adhd",
         "weight-loss",
@@ -673,7 +703,7 @@
       "title": "How does ADHD present differently in women?",
       "url": "https://www.siya.health/answers/adhd-in-women",
       "path": "/answers/adhd-in-women",
-      "summary": "Quick FAQ: how ADHD often presents in women—inattentive symptoms, masking, and delayed diagnosis. Read the full clinical hub for depth.",
+      "summary": "Quick FAQ: how ADHD often presents in women\u2014inattentive symptoms, masking, and delayed diagnosis. Read the full clinical hub for depth.",
       "topics": [
         "adhd",
         "health-guide"
@@ -869,7 +899,7 @@
       "title": "Why do I crash every afternoon after lunch?",
       "url": "https://www.siya.health/answers/afternoon-energy-crash-after-lunch",
       "path": "/answers/afternoon-energy-crash-after-lunch",
-      "summary": "Afternoon energy crashes after lunch often tie to meal size, blood sugar swings, insulin resistance, poor sleep, and stress—not just “food coma.” Learn cau…",
+      "summary": "Afternoon energy crashes after lunch often tie to meal size, blood sugar swings, insulin resistance, poor sleep, and stress\u2014not just \u201cfood coma.\u201d Learn cau\u2026",
       "topics": [
         "health-guide"
       ],
@@ -913,7 +943,7 @@
       "title": "What is the ASRS ADHD screening test?",
       "url": "https://www.siya.health/answers/asrs-adhd-screening-explained",
       "path": "/answers/asrs-adhd-screening-explained",
-      "summary": "The Adult ADHD Self-Report Scale (ASRS) is a validated screening questionnaire—not a diagnosis. It helps clinicians decide whether a full evaluation is war…",
+      "summary": "The Adult ADHD Self-Report Scale (ASRS) is a validated screening questionnaire\u2014not a diagnosis. It helps clinicians decide whether a full evaluation is war\u2026",
       "topics": [
         "adhd",
         "health-guide"
@@ -952,7 +982,7 @@
       "title": "Why do I get brain fog after eating?",
       "url": "https://www.siya.health/answers/brain-fog-after-eating",
       "path": "/answers/brain-fog-after-eating",
-      "summary": "Brain fog after eating often links to blood sugar swings, insulin resistance, large or high-carb meals, poor sleep, and stress—not “just lunch.” Learn caus…",
+      "summary": "Brain fog after eating often links to blood sugar swings, insulin resistance, large or high-carb meals, poor sleep, and stress\u2014not \u201cjust lunch.\u201d Learn caus\u2026",
       "topics": [
         "health-guide"
       ],
@@ -1083,7 +1113,7 @@
       "title": "Can you get ADHD medication online?",
       "url": "https://www.siya.health/answers/can-you-get-adhd-medication-online",
       "path": "/answers/can-you-get-adhd-medication-online",
-      "summary": "In eligible states, yes—after a legitimate telehealth evaluation and ongoing relationship with a licensed prescriber. Online does not mean automatic; contr…",
+      "summary": "In eligible states, yes\u2014after a legitimate telehealth evaluation and ongoing relationship with a licensed prescriber. Online does not mean automatic; contr\u2026",
       "topics": [
         "adhd",
         "health-guide",
@@ -1161,7 +1191,7 @@
       "title": "Is telehealth for erectile dysfunction legitimate?",
       "url": "https://www.siya.health/answers/ed-telehealth-legitimate",
       "path": "/answers/ed-telehealth-legitimate",
-      "summary": "Yes when a licensed clinician takes history, reviews medications (especially nitrates), discusses cardiovascular risk, and prescribes appropriately via HIP…",
+      "summary": "Yes when a licensed clinician takes history, reviews medications (especially nitrates), discusses cardiovascular risk, and prescribes appropriately via HIP\u2026",
       "topics": [
         "telehealth",
         "health-guide",
@@ -1273,7 +1303,7 @@
       "title": "Can you use FSA or HSA for ADHD evaluation?",
       "url": "https://www.siya.health/answers/fsa-hsa-adhd-evaluation",
       "path": "/answers/fsa-hsa-adhd-evaluation",
-      "summary": "Many patients use FSA/HSA debit cards for qualified medical expenses including physician telehealth visits when documented as medical care. Confirm with yo…",
+      "summary": "Many patients use FSA/HSA debit cards for qualified medical expenses including physician telehealth visits when documented as medical care. Confirm with yo\u2026",
       "topics": [
         "adhd",
         "health-guide"
@@ -1385,7 +1415,7 @@
       "title": "Can you have ADHD and still be high-functioning?",
       "url": "https://www.siya.health/answers/high-functioning-adhd",
       "path": "/answers/high-functioning-adhd",
-      "summary": "Yes. Many adults with ADHD perform well outwardly while struggling privately with exhaustion, procrastination, and emotional overload. “High functioning” i…",
+      "summary": "Yes. Many adults with ADHD perform well outwardly while struggling privately with exhaustion, procrastination, and emotional overload. \u201cHigh functioning\u201d i\u2026",
       "topics": [
         "adhd",
         "health-guide"
@@ -1424,7 +1454,7 @@
       "title": "What does high SHBG with low free testosterone mean?",
       "url": "https://www.siya.health/answers/high-shbg-low-free-testosterone",
       "path": "/answers/high-shbg-low-free-testosterone",
-      "summary": "Quick FAQ on high SHBG and low free testosterone—not a full hormone lab guide. Cornerstone article linked.",
+      "summary": "Quick FAQ on high SHBG and low free testosterone\u2014not a full hormone lab guide. Cornerstone article linked.",
       "topics": [
         "health-guide",
         "labs",
@@ -1463,7 +1493,7 @@
       "title": "How long does an ADHD evaluation take?",
       "url": "https://www.siya.health/answers/how-long-adhd-evaluation",
       "path": "/answers/how-long-adhd-evaluation",
-      "summary": "A thorough adult ADHD evaluation typically takes 60–90 minutes of face-to-face clinician time, plus intake forms and any cognitive screening completed befo…",
+      "summary": "A thorough adult ADHD evaluation typically takes 60\u201390 minutes of face-to-face clinician time, plus intake forms and any cognitive screening completed befo\u2026",
       "topics": [
         "adhd",
         "health-guide"
@@ -1507,7 +1537,7 @@
       "title": "How much does ADHD testing cost?",
       "url": "https://www.siya.health/answers/how-much-does-adhd-testing-cost",
       "path": "/answers/how-much-does-adhd-testing-cost",
-      "summary": "Costs vary widely: some clinics charge $500–$2,000+; Siya Health offers a transparent $149 comprehensive adult ADHD evaluation (60–90 minutes) including cl…",
+      "summary": "Costs vary widely: some clinics charge $500\u2013$2,000+; Siya Health offers a transparent $149 comprehensive adult ADHD evaluation (60\u201390 minutes) including cl\u2026",
       "topics": [
         "adhd",
         "health-guide"
@@ -1609,7 +1639,7 @@
       "title": "What does long-term ADHD medication safety monitoring include?",
       "url": "https://www.siya.health/answers/is-adhd-medication-safe-long-term",
       "path": "/answers/is-adhd-medication-safe-long-term",
-      "summary": "Quick FAQ on long-term ADHD medication monitoring—not a substitute for the full safety guide. Link to clinical article.",
+      "summary": "Quick FAQ on long-term ADHD medication monitoring\u2014not a substitute for the full safety guide. Link to clinical article.",
       "topics": [
         "adhd",
         "health-guide",
@@ -1719,7 +1749,7 @@
       "title": "Why are so many adults diagnosed with ADHD late in life?",
       "url": "https://www.siya.health/answers/late-adhd-diagnosis-adults",
       "path": "/answers/late-adhd-diagnosis-adults",
-      "summary": "Childhood ADHD was often missed—especially in girls, high achievers, and inattentive types without hyperactivity. Adults seek answers after burnout, job ch…",
+      "summary": "Childhood ADHD was often missed\u2014especially in girls, high achievers, and inattentive types without hyperactivity. Adults seek answers after burnout, job ch\u2026",
       "topics": [
         "adhd",
         "health-guide"
@@ -1867,7 +1897,7 @@
       "title": "When is topical minoxidil enough vs oral minoxidil?",
       "url": "https://www.siya.health/answers/oral-vs-topical-minoxidil",
       "path": "/answers/oral-vs-topical-minoxidil",
-      "summary": "Quick FAQ on topical vs oral minoxidil selection—not a full route comparison. Clinical guide linked.",
+      "summary": "Quick FAQ on topical vs oral minoxidil selection\u2014not a full route comparison. Clinical guide linked.",
       "topics": [
         "health-guide",
         "hair-loss"
@@ -1902,7 +1932,7 @@
       "title": "Can poor sleep feel like ADHD?",
       "url": "https://www.siya.health/answers/poor-sleep-feels-like-adhd",
       "path": "/answers/poor-sleep-feels-like-adhd",
-      "summary": "Poor sleep, sleep apnea, and sleep deprivation can mimic ADHD—brain fog, poor focus, and impulsivity. Learn how to tell sleep problems from ADHD and when t…",
+      "summary": "Poor sleep, sleep apnea, and sleep deprivation can mimic ADHD\u2014brain fog, poor focus, and impulsivity. Learn how to tell sleep problems from ADHD and when t\u2026",
       "topics": [
         "adhd",
         "health-guide",
@@ -1940,7 +1970,7 @@
       "title": "What is rejection sensitive dysphoria (RSD) and ADHD?",
       "url": "https://www.siya.health/answers/rejection-sensitivity-adhd",
       "path": "/answers/rejection-sensitivity-adhd",
-      "summary": "RSD describes intense emotional pain after perceived criticism or rejection. It is not an official DSM diagnosis but is frequently reported in ADHD. Clinic…",
+      "summary": "RSD describes intense emotional pain after perceived criticism or rejection. It is not an official DSM diagnosis but is frequently reported in ADHD. Clinic\u2026",
       "topics": [
         "adhd",
         "health-guide"
@@ -1982,7 +2012,7 @@
       "title": "What is the difference between ADHD screening and a full evaluation?",
       "url": "https://www.siya.health/answers/screening-vs-adhd-evaluation",
       "path": "/answers/screening-vs-adhd-evaluation",
-      "summary": "Screening (e.g., ASRS, short online quizzes) estimates likelihood and takes minutes. A full evaluation is a 60–90 minute clinician visit with history, stan…",
+      "summary": "Screening (e.g., ASRS, short online quizzes) estimates likelihood and takes minutes. A full evaluation is a 60\u201390 minute clinician visit with history, stan\u2026",
       "topics": [
         "adhd",
         "health-guide"
@@ -2026,7 +2056,7 @@
       "title": "How quickly does semaglutide start working for weight loss?",
       "url": "https://www.siya.health/answers/semaglutide-weight-loss-how-it-works",
       "path": "/answers/semaglutide-weight-loss-how-it-works",
-      "summary": "Quick FAQ on semaglutide onset and early appetite changes—not a full mechanism guide. Read the clinical article.",
+      "summary": "Quick FAQ on semaglutide onset and early appetite changes\u2014not a full mechanism guide. Read the clinical article.",
       "topics": [
         "weight-loss",
         "health-guide"
@@ -2066,7 +2096,7 @@
       "title": "What are the signs of adult ADHD?",
       "url": "https://www.siya.health/answers/signs-of-adult-adhd",
       "path": "/answers/signs-of-adult-adhd",
-      "summary": "Signs of adult ADHD: inattention, time blindness, emotional sensitivity, and when to seek a structured evaluation—not just an online quiz.",
+      "summary": "Signs of adult ADHD: inattention, time blindness, emotional sensitivity, and when to seek a structured evaluation\u2014not just an online quiz.",
       "topics": [
         "adhd",
         "health-guide"
@@ -2105,7 +2135,7 @@
       "title": "What are the signs of sleep apnea in adults?",
       "url": "https://www.siya.health/answers/signs-of-sleep-apnea-in-adults",
       "path": "/answers/signs-of-sleep-apnea-in-adults",
-      "summary": "Quick adult sleep apnea symptom checklist—not a full risk overview. Clinical guide linked.",
+      "summary": "Quick adult sleep apnea symptom checklist\u2014not a full risk overview. Clinical guide linked.",
       "topics": [
         "health-guide",
         "sleep"
@@ -2140,7 +2170,7 @@
       "title": "What should adults expect when starting ADHD medication?",
       "url": "https://www.siya.health/answers/starting-adhd-medication-adults",
       "path": "/answers/starting-adhd-medication-adults",
-      "summary": "Starting ADHD medication as an adult: titration, follow-up, vitals, and realistic expectations. Educational guide—not personal prescribing advice.",
+      "summary": "Starting ADHD medication as an adult: titration, follow-up, vitals, and realistic expectations. Educational guide\u2014not personal prescribing advice.",
       "topics": [
         "adhd",
         "health-guide",
@@ -2212,7 +2242,7 @@
       "title": "How does ADHD telehealth work in Texas?",
       "url": "https://www.siya.health/answers/telehealth-adhd-texas",
       "path": "/answers/telehealth-adhd-texas",
-      "summary": "Texas adults can complete structured ADHD telehealth evaluations with Texas-licensed clinicians, including history, standardized assessments, and follow-up…",
+      "summary": "Texas adults can complete structured ADHD telehealth evaluations with Texas-licensed clinicians, including history, standardized assessments, and follow-up\u2026",
       "topics": [
         "adhd",
         "telehealth",
@@ -2251,7 +2281,7 @@
       "title": "Can low testosterone mimic ADHD?",
       "url": "https://www.siya.health/answers/testosterone-and-adhd-overlap",
       "path": "/answers/testosterone-and-adhd-overlap",
-      "summary": "Low testosterone and ADHD can both cause fatigue, low motivation, and concentration problems. Labs and developmental history help separate them; some men h…",
+      "summary": "Low testosterone and ADHD can both cause fatigue, low motivation, and concentration problems. Labs and developmental history help separate them; some men h\u2026",
       "topics": [
         "adhd",
         "health-guide",
@@ -2290,7 +2320,7 @@
       "title": "What is time blindness in ADHD?",
       "url": "https://www.siya.health/answers/time-blindness-adhd",
       "path": "/answers/time-blindness-adhd",
-      "summary": "Time blindness describes difficulty sensing how long tasks take, losing track of time, or chronically underestimating deadlines. It is a common executive-f…",
+      "summary": "Time blindness describes difficulty sensing how long tasks take, losing track of time, or chronically underestimating deadlines. It is a common executive-f\u2026",
       "topics": [
         "adhd",
         "health-guide"
@@ -2362,7 +2392,7 @@
       "title": "Why am I gaining weight after stopping Ozempic?",
       "url": "https://www.siya.health/answers/weight-gain-after-stopping-ozempic",
       "path": "/answers/weight-gain-after-stopping-ozempic",
-      "summary": "Weight regain after stopping Ozempic (semaglutide) is common when appetite signaling returns. Learn rebound drivers, metabolic factors, and clinician-guide…",
+      "summary": "Weight regain after stopping Ozempic (semaglutide) is common when appetite signaling returns. Learn rebound drivers, metabolic factors, and clinician-guide\u2026",
       "topics": [
         "weight-loss",
         "health-guide"
@@ -2401,7 +2431,7 @@
       "title": "What does low testosterone feel like?",
       "url": "https://www.siya.health/answers/what-does-low-testosterone-feel-like",
       "path": "/answers/what-does-low-testosterone-feel-like",
-      "summary": "Quick FAQ on low testosterone symptoms—not a lab guide. Full free vs total testosterone article linked.",
+      "summary": "Quick FAQ on low testosterone symptoms\u2014not a lab guide. Full free vs total testosterone article linked.",
       "topics": [
         "health-guide",
         "labs",
@@ -2438,7 +2468,7 @@
       "title": "What is included in a Siya Health ADHD evaluation?",
       "url": "https://www.siya.health/answers/what-included-199-adhd-evaluation",
       "path": "/answers/what-included-199-adhd-evaluation",
-      "summary": "Siya Health’s $149 adult ADHD evaluation is a 60–90 minute telehealth visit with a licensed medical provider—including clinical in…",
+      "summary": "Siya Health\u2019s $149 adult ADHD evaluation is a 60\u201390 minute telehealth visit with a licensed medical provider\u2014including clinical in\u2026",
       "topics": [
         "adhd",
         "health-guide"
@@ -2475,7 +2505,7 @@
       "title": "What is food noise?",
       "url": "https://www.siya.health/answers/what-is-food-noise",
       "path": "/answers/what-is-food-noise",
-      "summary": "Quick definition of food noise—not a GLP-1 treatment guide. Full food noise & GLP-1 article linked.",
+      "summary": "Quick definition of food noise\u2014not a GLP-1 treatment guide. Full food noise & GLP-1 article linked.",
       "topics": [
         "health-guide"
       ],
@@ -2504,7 +2534,7 @@
       "title": "What is free testosterone?",
       "url": "https://www.siya.health/answers/what-is-free-testosterone",
       "path": "/answers/what-is-free-testosterone",
-      "summary": "Quick definition of free testosterone—not lab interpretation depth. Full free vs total guide linked.",
+      "summary": "Quick definition of free testosterone\u2014not lab interpretation depth. Full free vs total guide linked.",
       "topics": [
         "health-guide",
         "labs",
@@ -2537,7 +2567,7 @@
       "title": "What is insulin resistance?",
       "url": "https://www.siya.health/answers/what-is-insulin-resistance",
       "path": "/answers/what-is-insulin-resistance",
-      "summary": "Quick definition of insulin resistance for patients—not a clinician weight-loss overview. Full guide linked.",
+      "summary": "Quick definition of insulin resistance for patients\u2014not a clinician weight-loss overview. Full guide linked.",
       "topics": [
         "health-guide",
         "labs"
@@ -2570,7 +2600,7 @@
       "title": "What to do after you get lab results",
       "url": "https://www.siya.health/answers/what-to-do-after-lab-results",
       "path": "/answers/what-to-do-after-lab-results",
-      "summary": "Got lab results? Save the full report, don’t panic over one number, and bring findings to a clinician for interpretation. Learn calm next steps—not DIY dia…",
+      "summary": "Got lab results? Save the full report, don\u2019t panic over one number, and bring findings to a clinician for interpretation. Learn calm next steps\u2014not DIY dia\u2026",
       "topics": [
         "health-guide"
       ],
@@ -2617,7 +2647,7 @@
       "title": "What symptoms warrant testosterone therapy evaluation?",
       "url": "https://www.siya.health/answers/when-is-testosterone-therapy-appropriate",
       "path": "/answers/when-is-testosterone-therapy-appropriate",
-      "summary": "Quick FAQ on symptoms that prompt TRT evaluation—not a full candidacy guide. Clinical article linked.",
+      "summary": "Quick FAQ on symptoms that prompt TRT evaluation\u2014not a full candidacy guide. Clinical article linked.",
       "topics": [
         "health-guide",
         "labs",
@@ -2654,7 +2684,7 @@
       "title": "Which preventive blood tests do adults usually need?",
       "url": "https://www.siya.health/answers/which-preventive-blood-tests-adults",
       "path": "/answers/which-preventive-blood-tests-adults",
-      "summary": "Adults often need individualized preventive labs—CBC, metabolic panel, lipids, and A1c when risk supports them—not a shopping list of every test. Learn wha…",
+      "summary": "Adults often need individualized preventive labs\u2014CBC, metabolic panel, lipids, and A1c when risk supports them\u2014not a shopping list of every test. Learn wha\u2026",
       "topics": [
         "health-guide",
         "labs"
@@ -2733,7 +2763,7 @@
       "title": "Why am I tired even after sleeping?",
       "url": "https://www.siya.health/answers/why-am-i-tired-even-after-sleeping",
       "path": "/answers/why-am-i-tired-even-after-sleeping",
-      "summary": "Time in bed is not the same as restorative sleep. Common causes include obstructive sleep apnea, insomnia, poor sleep quality (fragmentation), ADHD-related…",
+      "summary": "Time in bed is not the same as restorative sleep. Common causes include obstructive sleep apnea, insomnia, poor sleep quality (fragmentation), ADHD-related\u2026",
       "topics": [
         "health-guide",
         "sleep"
@@ -2776,7 +2806,7 @@
       "title": "Why don't normal labs mean you're healthy?",
       "url": "https://www.siya.health/answers/why-normal-labs-dont-mean-healthy",
       "path": "/answers/why-normal-labs-dont-mean-healthy",
-      "summary": "Normal A1C, cholesterol, and “fine” bloodwork can still hide insulin resistance, sleep apnea, fatty liver risk, and burnout. Learn what labs miss and when …",
+      "summary": "Normal A1C, cholesterol, and \u201cfine\u201d bloodwork can still hide insulin resistance, sleep apnea, fatty liver risk, and burnout. Learn what labs miss and when \u2026",
       "topics": [
         "health-guide",
         "labs"
@@ -2896,10 +2926,10 @@
     },
     {
       "id": "blog_adhd",
-      "title": "ADHD Articles Hub (2026) — Diagnosis, Medication Education & Care",
+      "title": "ADHD Articles Hub (2026) \u2014 Diagnosis, Medication Education & Care",
       "url": "https://www.siya.health/blog/adhd",
       "path": "/blog/adhd",
-      "summary": "Explore Siya Health ADHD articles: evaluation, medication education for adults, symptoms, and online care—indexed for search with clear internal links.",
+      "summary": "Explore Siya Health ADHD articles: evaluation, medication education for adults, symptoms, and online care\u2014indexed for search with clear internal links.",
       "topics": [
         "adhd",
         "medication"
@@ -2976,7 +3006,7 @@
       "title": "ADHD Brain Imaging Subtypes: What New Research May Mean",
       "url": "https://www.siya.health/blog/adhd-brain-imaging-subtypes",
       "path": "/blog/adhd-brain-imaging-subtypes",
-      "summary": "Emerging JAMA Psychiatry research describes three ADHD-related brain patterns. Learn what biotypes may mean—and what they do not change about diagnosis today.",
+      "summary": "Emerging JAMA Psychiatry research describes three ADHD-related brain patterns. Learn what biotypes may mean\u2014and what they do not change about diagnosis today.",
       "topics": [
         "adhd"
       ],
@@ -3014,7 +3044,7 @@
       "title": "ADHD Evaluation in California: Online vs In-Person Options (2026)",
       "url": "https://www.siya.health/blog/adhd-evaluation-california-online-vs-in-person",
       "path": "/blog/adhd-evaluation-california-online-vs-in-person",
-      "summary": "ADHD evaluation California: compare secure telehealth and in-office visits—timelines, costs, legitimacy, medication discussions, safety.",
+      "summary": "ADHD evaluation California: compare secure telehealth and in-office visits\u2014timelines, costs, legitimacy, medication discussions, safety.",
       "topics": [
         "adhd",
         "california"
@@ -3048,7 +3078,7 @@
       "title": "ADHD Evaluation Cost in Texas: Full Breakdown (2026 Guide)",
       "url": "https://www.siya.health/blog/adhd-evaluation-cost-texas",
       "path": "/blog/adhd-evaluation-cost-texas",
-      "summary": "What does an ADHD evaluation cost in Texas in 2026? Compare options—insurance, cash pay, online—and see the real breakdown.",
+      "summary": "What does an ADHD evaluation cost in Texas in 2026? Compare options\u2014insurance, cash pay, online\u2014and see the real breakdown.",
       "topics": [
         "adhd",
         "texas"
@@ -3083,7 +3113,7 @@
       "title": "ADHD and Hormones in Women: Cycle, Perimenopause & Shifts",
       "url": "https://www.siya.health/blog/adhd-hormones-women",
       "path": "/blog/adhd-hormones-women",
-      "summary": "Why ADHD symptoms can shift with the menstrual cycle and perimenopause. Estrogen–attention biology in plain language, evidence limits, myths, and women-informed evaluation.",
+      "summary": "Why ADHD symptoms can shift with the menstrual cycle and perimenopause. Estrogen\u2013attention biology in plain language, evidence limits, myths, and women-informed evaluation.",
       "topics": [
         "adhd"
       ],
@@ -3152,7 +3182,7 @@
       "title": "Do You Need ADHD Medication Every Day? (Daily vs PRN for Adults)",
       "url": "https://www.siya.health/blog/adhd-medication-daily-or-as-needed-adults",
       "path": "/blog/adhd-medication-daily-or-as-needed-adults",
-      "summary": "Daily ADHD dosing vs weekends off—what's safe for adults? Learn PRN vs daily trade-offs before changing your medication schedule.",
+      "summary": "Daily ADHD dosing vs weekends off\u2014what's safe for adults? Learn PRN vs daily trade-offs before changing your medication schedule.",
       "topics": [
         "adhd",
         "medication"
@@ -3190,7 +3220,7 @@
       "title": "Can You Get ADHD Medication Online in California? (2026 Guide)",
       "url": "https://www.siya.health/blog/adhd-medication-online-california",
       "path": "/blog/adhd-medication-online-california",
-      "summary": "ADHD medication online California: telehealth rules, evaluation standards, red flags, and why no practice should promise instant stimulants—patient guide.",
+      "summary": "ADHD medication online California: telehealth rules, evaluation standards, red flags, and why no practice should promise instant stimulants\u2014patient guide.",
       "topics": [
         "adhd",
         "california",
@@ -3226,10 +3256,10 @@
     },
     {
       "id": "blog_adhd-medication-options-california",
-      "title": "ADHD Medication Options in California: Stimulants, Non‑Stimulants & FAQs",
+      "title": "ADHD Medication Options in California: Stimulants, Non\u2011Stimulants & FAQs",
       "url": "https://www.siya.health/blog/adhd-medication-options-california",
       "path": "/blog/adhd-medication-options-california",
-      "summary": "Compare ADHD meds in CA: ADHD medication options California—Vyvanse, Adderall, non‑stimulants, generics. Education only; no prescribing promises.",
+      "summary": "Compare ADHD meds in CA: ADHD medication options California\u2014Vyvanse, Adderall, non\u2011stimulants, generics. Education only; no prescribing promises.",
       "topics": [
         "adhd",
         "california",
@@ -3337,7 +3367,7 @@
       "title": "7 Adult ADHD Signs Doctors Miss (Not Just \"Can't Focus\")",
       "url": "https://www.siya.health/blog/adhd-symptoms-overlooked",
       "path": "/blog/adhd-symptoms-overlooked",
-      "summary": "Forgetfulness isn't the only sign. Hyperfocus, emotional swings, and procrastination despite caring—overlooked adult ADHD symptoms clinicians evaluate.",
+      "summary": "Forgetfulness isn't the only sign. Hyperfocus, emotional swings, and procrastination despite caring\u2014overlooked adult ADHD symptoms clinicians evaluate.",
       "topics": [
         "adhd"
       ],
@@ -3376,7 +3406,7 @@
       "title": "ADHD Telehealth in California: How Virtual Care Works (2026)",
       "url": "https://www.siya.health/blog/adhd-telehealth-california",
       "path": "/blog/adhd-telehealth-california",
-      "summary": "ADHD telehealth California explained: HIPAA visits, clinician roles, prescribing limits context, ADHD medication management Calif. cadence—all without gimmicks.",
+      "summary": "ADHD telehealth California explained: HIPAA visits, clinician roles, prescribing limits context, ADHD medication management Calif. cadence\u2014all without gimmicks.",
       "topics": [
         "adhd",
         "telehealth",
@@ -3414,7 +3444,7 @@
       "title": "ADHD Testing Online in California: Screening vs Full Evaluation",
       "url": "https://www.siya.health/blog/adhd-testing-online-california-screening-vs-evaluation",
       "path": "/blog/adhd-testing-online-california-screening-vs-evaluation",
-      "summary": "ADHD test online California: know the difference between quick screens and clinician-led evaluation—tools, timing, limits, and choosing California providers wisely.",
+      "summary": "ADHD test online California: know the difference between quick screens and clinician-led evaluation\u2014tools, timing, limits, and choosing California providers wisely.",
       "topics": [
         "adhd",
         "california"
@@ -3452,7 +3482,7 @@
       "title": "ADHD Treatment Texas | Physician-Led Virtual Care",
       "url": "https://www.siya.health/blog/adhd-treatment-texas",
       "path": "/blog/adhd-treatment-texas",
-      "summary": "Physician-led ADHD treatment for adults across Texas—Dallas, Houston, Austin, San Antonio, Fort Worth. Evaluation, medication management, and virtual care from $149.",
+      "summary": "Physician-led ADHD treatment for adults across Texas\u2014Dallas, Houston, Austin, San Antonio, Fort Worth. Evaluation, medication management, and virtual care from $149.",
       "topics": [
         "adhd",
         "texas"
@@ -3488,7 +3518,7 @@
       "title": "Adult ADHD Symptoms in California: Patterns Worth Taking Seriously",
       "url": "https://www.siya.health/blog/adult-adhd-symptoms-california",
       "path": "/blog/adult-adhd-symptoms-california",
-      "summary": "Adult ADHD symptoms California: chronic patterns versus burnout mimics—attention drift, procrastination pits, rejection sensitivity arcs—and clinician evaluation norms.",
+      "summary": "Adult ADHD symptoms California: chronic patterns versus burnout mimics\u2014attention drift, procrastination pits, rejection sensitivity arcs\u2014and clinician evaluation norms.",
       "topics": [
         "adhd",
         "california"
@@ -3563,7 +3593,7 @@
       "title": "Executive Dysfunction in ADHD: Signs, Domains & What Helps",
       "url": "https://www.siya.health/blog/executive-dysfunction-adhd",
       "path": "/blog/executive-dysfunction-adhd",
-      "summary": "Learn how executive dysfunction shows up in adult ADHD—task initiation, working memory, planning, organization, decision fatigue, and when evaluation helps.",
+      "summary": "Learn how executive dysfunction shows up in adult ADHD\u2014task initiation, working memory, planning, organization, decision fatigue, and when evaluation helps.",
       "topics": [
         "adhd"
       ],
@@ -3599,7 +3629,7 @@
       "title": "Food Noise and GLP-1: What It Means and What Actually Helps (2026)",
       "url": "https://www.siya.health/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
       "path": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
-      "summary": "Food noise—intrusive thoughts about eating—is not hunger or weak willpower. Learn how GLP-1 medications may quiet it, what evidence shows, myths, and when to seek medical care.",
+      "summary": "Food noise\u2014intrusive thoughts about eating\u2014is not hunger or weak willpower. Learn how GLP-1 medications may quiet it, what evidence shows, myths, and when to seek medical care.",
       "topics": [
         "weight-loss"
       ],
@@ -3647,7 +3677,7 @@
       "title": "Free Testosterone vs Total Testosterone: What Patients Should Know",
       "url": "https://www.siya.health/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
       "path": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
-      "summary": "Normal total testosterone but still feel terrible? Learn how free testosterone, SHBG, and lab methods explain the mismatch—and when evaluation is appropriate.",
+      "summary": "Normal total testosterone but still feel terrible? Learn how free testosterone, SHBG, and lab methods explain the mismatch\u2014and when evaluation is appropriate.",
       "topics": [
         "labs",
         "mens-health"
@@ -3689,7 +3719,7 @@
       "title": "GLP-1 Side Effects & How to Manage Them (2026)",
       "url": "https://www.siya.health/blog/glp1-side-effects-and-how-to-manage-them",
       "path": "/blog/glp1-side-effects-and-how-to-manage-them",
-      "summary": "GLP-1 side effects in 2026: nausea, GI symptoms, dehydration risks, rare warnings, and clinician-guided strategies—educational, not a substitute for care.",
+      "summary": "GLP-1 side effects in 2026: nausea, GI symptoms, dehydration risks, rare warnings, and clinician-guided strategies\u2014educational, not a substitute for care.",
       "topics": [
         "weight-loss"
       ],
@@ -3769,7 +3799,7 @@
       "title": "How Mental Health Affects Weight Loss Outcomes (2026)",
       "url": "https://www.siya.health/blog/how-mental-health-affects-weight-loss-outcomes",
       "path": "/blog/how-mental-health-affects-weight-loss-outcomes",
-      "summary": "Mental health and weight loss outcomes in 2026: depression, anxiety, ADHD, trauma, medications, and integrated care—evidence-anchored, non-stigmatizing.",
+      "summary": "Mental health and weight loss outcomes in 2026: depression, anxiety, ADHD, trauma, medications, and integrated care\u2014evidence-anchored, non-stigmatizing.",
       "topics": [
         "weight-loss"
       ],
@@ -3802,7 +3832,7 @@
       "title": "How to Choose an ADHD Provider in California (Red Flags Included)",
       "url": "https://www.siya.health/blog/how-to-choose-adhd-provider-california",
       "path": "/blog/how-to-choose-adhd-provider-california",
-      "summary": "Choose an ADHD provider in California: telehealth legitimacy, clinician transparency, visit length norms, prescribing ethics—and instant prescription funnel red flags.",
+      "summary": "Choose an ADHD provider in California: telehealth legitimacy, clinician transparency, visit length norms, prescribing ethics\u2014and instant prescription funnel red flags.",
       "topics": [
         "adhd",
         "california"
@@ -3839,7 +3869,7 @@
       "title": "How to Know If You Have ADHD as an Adult (Real Signs Explained)",
       "url": "https://www.siya.health/blog/how-to-know-if-you-have-adhd-adult",
       "path": "/blog/how-to-know-if-you-have-adhd-adult",
-      "summary": "Not sure if you have ADHD? Learn the real signs adults experience—beyond the stereotypes—and when it's worth getting evaluated.",
+      "summary": "Not sure if you have ADHD? Learn the real signs adults experience\u2014beyond the stereotypes\u2014and when it's worth getting evaluated.",
       "topics": [
         "adhd"
       ],
@@ -3879,7 +3909,7 @@
       "title": "How to Safely Get Prescriptions Online (2026 Checklist)",
       "url": "https://www.siya.health/blog/how-to-safely-get-prescriptions-online",
       "path": "/blog/how-to-safely-get-prescriptions-online",
-      "summary": "How to safely get prescriptions online in 2026: verify licensure, pharmacies, controlled substance rules, privacy—patient education, not legal advice.",
+      "summary": "How to safely get prescriptions online in 2026: verify licensure, pharmacies, controlled substance rules, privacy\u2014patient education, not legal advice.",
       "topics": [],
       "keywords": [
         "how",
@@ -3910,7 +3940,7 @@
       "title": "Insomnia Treatment Options Beyond Medication (2026)",
       "url": "https://www.siya.health/blog/insomnia-treatment-options-beyond-medication",
       "path": "/blog/insomnia-treatment-options-beyond-medication",
-      "summary": "Insomnia treatment beyond medication in 2026: CBT-I, sleep hygiene limits, circadian care, apnea evaluation—first-line education for adults.",
+      "summary": "Insomnia treatment beyond medication in 2026: CBT-I, sleep hygiene limits, circadian care, apnea evaluation\u2014first-line education for adults.",
       "topics": [
         "sleep",
         "medication"
@@ -3944,7 +3974,7 @@
       "title": "Insulin Resistance and Weight Loss: A Clinician-Guided Overview",
       "url": "https://www.siya.health/blog/insulin-resistance-and-weight-loss-clinician-overview",
       "path": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
-      "summary": "Insulin resistance can exist with a normal A1C and make weight loss harder. Learn early signs, visceral fat, cravings, sleep, ADHD overlap, evidence-based steps, and myths—without wellness clichés.",
+      "summary": "Insulin resistance can exist with a normal A1C and make weight loss harder. Learn early signs, visceral fat, cravings, sleep, ADHD overlap, evidence-based steps, and myths\u2014without wellness clich\u00e9s.",
       "topics": [
         "weight-loss",
         "labs"
@@ -4072,7 +4102,7 @@
       "title": "Is Online ADHD Diagnosis Legit? What Patients Should Know",
       "url": "https://www.siya.health/blog/is-online-adhd-diagnosis-legit",
       "path": "/blog/is-online-adhd-diagnosis-legit",
-      "summary": "Skeptical about online ADHD diagnosis? Here's what makes it legitimate—and what to look for when choosing a provider.",
+      "summary": "Skeptical about online ADHD diagnosis? Here's what makes it legitimate\u2014and what to look for when choosing a provider.",
       "topics": [
         "adhd"
       ],
@@ -4108,7 +4138,7 @@
       "title": "Medical Weight Loss in Texas: GLP-1, Semaglutide, Tirzepatide & What Actually Works",
       "url": "https://www.siya.health/blog/medical-weight-loss-glp1-semaglutide-texas",
       "path": "/blog/medical-weight-loss-glp1-semaglutide-texas",
-      "summary": "Evidence-based medical weight loss in Texas. GLP-1 medications, semaglutide, tirzepatide, phentermine—when they're appropriate and what to expect from provider-guided care.",
+      "summary": "Evidence-based medical weight loss in Texas. GLP-1 medications, semaglutide, tirzepatide, phentermine\u2014when they're appropriate and what to expect from provider-guided care.",
       "topics": [
         "weight-loss",
         "texas"
@@ -4148,7 +4178,7 @@
       "title": "Medical Weight Loss vs Dieting: What Actually Works in 2026",
       "url": "https://www.siya.health/blog/medical-weight-loss-vs-dieting-what-actually-works",
       "path": "/blog/medical-weight-loss-vs-dieting-what-actually-works",
-      "summary": "Medical weight loss vs dieting in 2026: evidence on structured programs, biology, behavior, and when medications help—no blame, no miracle claims.",
+      "summary": "Medical weight loss vs dieting in 2026: evidence on structured programs, biology, behavior, and when medications help\u2014no blame, no miracle claims.",
       "topics": [
         "weight-loss"
       ],
@@ -4184,7 +4214,7 @@
       "title": "Minoxidil for Hair Loss: Does It Work? (2026 Evidence)",
       "url": "https://www.siya.health/blog/minoxidil-for-hair-loss-does-it-work",
       "path": "/blog/minoxidil-for-hair-loss-does-it-work",
-      "summary": "Minoxidil for hair loss in 2026: mechanism, expected timelines, limits, side effects—informational only; consult a licensed clinician for diagnosis.",
+      "summary": "Minoxidil for hair loss in 2026: mechanism, expected timelines, limits, side effects\u2014informational only; consult a licensed clinician for diagnosis.",
       "topics": [
         "hair-loss"
       ],
@@ -4219,7 +4249,7 @@
       "title": "Non-Stimulant ADHD Meds: When Are They Used Instead of Stimulants?",
       "url": "https://www.siya.health/blog/non-stimulant-adhd-medications-explained",
       "path": "/blog/non-stimulant-adhd-medications-explained",
-      "summary": "Can't tolerate stimulants? Compare atomoxetine, guanfacine, and viloxazine—onset timelines, side effects, and when prescribers choose non-stimulant ADHD meds.",
+      "summary": "Can't tolerate stimulants? Compare atomoxetine, guanfacine, and viloxazine\u2014onset timelines, side effects, and when prescribers choose non-stimulant ADHD meds.",
       "topics": [
         "adhd",
         "medication"
@@ -4258,7 +4288,7 @@
       "title": "Online ADHD Diagnosis in California (2026): Cost, Process & What to Expect",
       "url": "https://www.siya.health/blog/online-adhd-diagnosis-california",
       "path": "/blog/online-adhd-diagnosis-california",
-      "summary": "Online ADHD diagnosis California: costs, secure telehealth steps, and what a legitimate evaluation looks like—with licensed clinician oversight.",
+      "summary": "Online ADHD diagnosis California: costs, secure telehealth steps, and what a legitimate evaluation looks like\u2014with licensed clinician oversight.",
       "topics": [
         "adhd",
         "california"
@@ -4296,7 +4326,7 @@
       "title": "Online ADHD Diagnosis in Texas (2026): Cost, Process & What to Expect",
       "url": "https://www.siya.health/blog/online-adhd-diagnosis-texas",
       "path": "/blog/online-adhd-diagnosis-texas",
-      "summary": "Online ADHD diagnosis in Texas (2026): real costs, telehealth steps, and what a legitimate evaluation includes—with board-certified providers.",
+      "summary": "Online ADHD diagnosis in Texas (2026): real costs, telehealth steps, and what a legitimate evaluation includes\u2014with board-certified providers.",
       "topics": [
         "adhd",
         "texas"
@@ -4333,7 +4363,7 @@
       "title": "Oral vs Injectable Weight Loss Medications (2026): GLP-1 & Beyond",
       "url": "https://www.siya.health/blog/oral-vs-injectable-weight-loss-medications",
       "path": "/blog/oral-vs-injectable-weight-loss-medications",
-      "summary": "Oral vs injectable weight loss meds in 2026: adherence, absorption, side effects, and how clinicians choose formats—education only, no dosing advice.",
+      "summary": "Oral vs injectable weight loss meds in 2026: adherence, absorption, side effects, and how clinicians choose formats\u2014education only, no dosing advice.",
       "topics": [
         "weight-loss",
         "medication"
@@ -4373,7 +4403,7 @@
       "title": "Oral vs Topical Minoxidil for Hair Loss (2026)",
       "url": "https://www.siya.health/blog/oral-vs-topical-minoxidil-which-is-right",
       "path": "/blog/oral-vs-topical-minoxidil-which-is-right",
-      "summary": "Oral vs topical minoxidil in 2026: absorption, side effect profiles, monitoring, and why prescribing stays with licensed clinicians—education only.",
+      "summary": "Oral vs topical minoxidil in 2026: absorption, side effect profiles, monitoring, and why prescribing stays with licensed clinicians\u2014education only.",
       "topics": [
         "hair-loss"
       ],
@@ -4408,7 +4438,7 @@
       "title": "Perimenopause Brain Fog: Focus & Memory in Your 40s",
       "url": "https://www.siya.health/blog/perimenopause-brain-fog",
       "path": "/blog/perimenopause-brain-fog",
-      "summary": "Perimenopause brain fog is common—but sleep, mood, thyroid, iron, and ADHD unmasking can look similar. Learn what to notice and when to seek evaluation.",
+      "summary": "Perimenopause brain fog is common\u2014but sleep, mood, thyroid, iron, and ADHD unmasking can look similar. Learn what to notice and when to seek evaluation.",
       "topics": [],
       "keywords": [
         "perimenopause",
@@ -4446,7 +4476,7 @@
       "title": "Phentermine for Weight Loss: Safety & Effectiveness in 2026",
       "url": "https://www.siya.health/blog/phentermine-for-weight-loss-safety-and-effectiveness",
       "path": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
-      "summary": "Phentermine for weight loss in 2026: FDA history, cardiovascular cautions, short-term use norms, monitoring, and alternatives—educational only.",
+      "summary": "Phentermine for weight loss in 2026: FDA history, cardiovascular cautions, short-term use norms, monitoring, and alternatives\u2014educational only.",
       "topics": [
         "weight-loss"
       ],
@@ -4516,7 +4546,7 @@
       "title": "Semaglutide for Weight Loss: How It Works in 2026 (GLP-1 Science)",
       "url": "https://www.siya.health/blog/semaglutide-for-weight-loss-how-it-works",
       "path": "/blog/semaglutide-for-weight-loss-how-it-works",
-      "summary": "Semaglutide for weight loss (2026): GLP-1 mechanism, appetite regulation, who may qualify, risks, and why provider supervision matters—education only.",
+      "summary": "Semaglutide for weight loss (2026): GLP-1 mechanism, appetite regulation, who may qualify, risks, and why provider supervision matters\u2014education only.",
       "topics": [
         "weight-loss"
       ],
@@ -4554,7 +4584,7 @@
       "title": "Sildenafil for Erectile Dysfunction: What to Expect (2026)",
       "url": "https://www.siya.health/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
       "path": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
-      "summary": "Sildenafil for erectile dysfunction in 2026: mechanism, cardiovascular precautions, interactions, and telehealth norms—informational, not prescribing advice.",
+      "summary": "Sildenafil for erectile dysfunction in 2026: mechanism, cardiovascular precautions, interactions, and telehealth norms\u2014informational, not prescribing advice.",
       "topics": [
         "mens-health"
       ],
@@ -4628,10 +4658,10 @@
     },
     {
       "id": "blog_telehealth",
-      "title": "Telehealth Articles (2026) — Safe Online Prescribing & Remote Care",
+      "title": "Telehealth Articles (2026) \u2014 Safe Online Prescribing & Remote Care",
       "url": "https://www.siya.health/blog/telehealth",
       "path": "/blog/telehealth",
-      "summary": "Telehealth education: safe online prescribing, visit standards, sleep and men’s health guides, and what US adults should verify with licensed providers.",
+      "summary": "Telehealth education: safe online prescribing, visit standards, sleep and men\u2019s health guides, and what US adults should verify with licensed providers.",
       "topics": [
         "telehealth"
       ],
@@ -4668,7 +4698,7 @@
       "title": "Telehealth Prescriptions: How Online Treatment Works (2026)",
       "url": "https://www.siya.health/blog/telehealth-prescriptions-how-online-treatment-works",
       "path": "/blog/telehealth-prescriptions-how-online-treatment-works",
-      "summary": "Telehealth prescriptions in 2026: visits, e-prescribing, controlled substances, state licensure, and safety—neutral overview for US adults.",
+      "summary": "Telehealth prescriptions in 2026: visits, e-prescribing, controlled substances, state licensure, and safety\u2014neutral overview for US adults.",
       "topics": [
         "telehealth"
       ],
@@ -4702,7 +4732,7 @@
       "title": "Tirzepatide vs Semaglutide for Weight Loss (2026): Compare GLP-1 Options",
       "url": "https://www.siya.health/blog/tirzepatide-vs-semaglutide-which-is-better",
       "path": "/blog/tirzepatide-vs-semaglutide-which-is-better",
-      "summary": "Tirzepatide vs semaglutide in 2026: dual GIP/GLP-1 vs GLP-1 agonist, trial context, side effects, and how clinicians choose—no outcome promises.",
+      "summary": "Tirzepatide vs semaglutide in 2026: dual GIP/GLP-1 vs GLP-1 agonist, trial context, side effects, and how clinicians choose\u2014no outcome promises.",
       "topics": [
         "weight-loss"
       ],
@@ -4740,7 +4770,7 @@
       "title": "Vyvanse vs Adderall: Which Lasts Longer for Adult ADHD?",
       "url": "https://www.siya.health/blog/vyvanse-vs-adderall-differences",
       "path": "/blog/vyvanse-vs-adderall-differences",
-      "summary": "Vyvanse vs Adderall for adults: compare duration, onset, crash patterns, and side effects—what to ask your prescriber before switching stimulants.",
+      "summary": "Vyvanse vs Adderall for adults: compare duration, onset, crash patterns, and side effects\u2014what to ask your prescriber before switching stimulants.",
       "topics": [
         "adhd"
       ],
@@ -4775,10 +4805,10 @@
     },
     {
       "id": "blog_weight-loss",
-      "title": "Weight Loss Articles (2026) — GLP-1 & Medical Metabolic Care | Siya Health Blog",
+      "title": "Weight Loss Articles (2026) \u2014 GLP-1 & Medical Metabolic Care | Siya Health Blog",
       "url": "https://www.siya.health/blog/weight-loss",
       "path": "/blog/weight-loss",
-      "summary": "Siya Health weight loss articles: GLP-1 medications, semaglutide, tirzepatide, and evidence-based medical weight loss in Texas—with telehealth context.",
+      "summary": "Siya Health weight loss articles: GLP-1 medications, semaglutide, tirzepatide, and evidence-based medical weight loss in Texas\u2014with telehealth context.",
       "topics": [
         "weight-loss"
       ],
@@ -4813,7 +4843,7 @@
       "title": "When Is Testosterone Therapy Appropriate? (2026 Guide)",
       "url": "https://www.siya.health/blog/when-is-testosterone-therapy-appropriate",
       "path": "/blog/when-is-testosterone-therapy-appropriate",
-      "summary": "When testosterone therapy is appropriate in 2026: hypogonadism diagnosis, monitoring, fertility, cardiovascular themes—no anti-aging hype, education only.",
+      "summary": "When testosterone therapy is appropriate in 2026: hypogonadism diagnosis, monitoring, fertility, cardiovascular themes\u2014no anti-aging hype, education only.",
       "topics": [
         "labs",
         "mens-health"
@@ -4846,10 +4876,10 @@
     },
     {
       "id": "blog_youre-not-lazy-signs-undiagnosed-adult-adhd",
-      "title": "You’re Not Lazy: Undiagnosed Adult ADHD Signs | TX, PA, FL",
+      "title": "You\u2019re Not Lazy: Undiagnosed Adult ADHD Signs | TX, PA, FL",
       "url": "https://www.siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd",
       "path": "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd",
-      "summary": "Adult ADHD symptoms are often mistaken for laziness. Learn signs of undiagnosed ADHD in adults, why late diagnosis is common, and how care works in Texas—with supportive, non-judgmental next steps.",
+      "summary": "Adult ADHD symptoms are often mistaken for laziness. Learn signs of undiagnosed ADHD in adults, why late diagnosis is common, and how care works in Texas\u2014with supportive, non-judgmental next steps.",
       "topics": [
         "adhd",
         "texas",
@@ -4929,6 +4959,53 @@
       ]
     },
     {
+      "id": "brain-fog",
+      "title": "Brain Fog \u2014 Why Thinking Feels Slower, and When to Get Evaluated",
+      "url": "https://www.siya.health/brain-fog",
+      "path": "/brain-fog",
+      "summary": "Brain fog is a symptom with many possible contributors \u2014 fatigue, sleep, thyroid, B12, iron, mood, ADHD. Learn what people mean by brain fog, when evaluation helps, which labs clinicians may consider,\u2026",
+      "topics": [],
+      "keywords": [
+        "brain",
+        "fog",
+        "why",
+        "thinking",
+        "feels",
+        "slower",
+        "and",
+        "when",
+        "to",
+        "get",
+        "evaluated",
+        "is",
+        "a",
+        "symptom",
+        "with",
+        "many",
+        "possible",
+        "contributors",
+        "fatigue",
+        "sleep",
+        "thyroid",
+        "b12",
+        "iron",
+        "mood",
+        "adhd",
+        "learn",
+        "what",
+        "people",
+        "mean",
+        "by",
+        "evaluation",
+        "helps",
+        "which",
+        "labs",
+        "clinicians",
+        "may",
+        "consider"
+      ]
+    },
+    {
       "id": "creyos-adhd-testing",
       "title": "Creyos ADHD Testing Online | Part of Your Evaluation",
       "url": "https://www.siya.health/creyos-adhd-testing",
@@ -4967,10 +5044,10 @@
     },
     {
       "id": "fatigue",
-      "title": "Fatigue — Why You Are Always Tired, and When to Get Evaluated",
+      "title": "Fatigue \u2014 Why You Are Always Tired, and When to Get Evaluated",
       "url": "https://www.siya.health/fatigue",
       "path": "/fatigue",
-      "summary": "Persistent fatigue is a symptom with many possible causes — iron, thyroid, B12, sleep apnea, mood, hormones. Learn what fatigue actually means, when medical evaluation helps, which labs clinicians con…",
+      "summary": "Persistent fatigue is a symptom with many possible causes \u2014 iron, thyroid, B12, sleep apnea, mood, hormones. Learn what fatigue actually means, when medical evaluation helps, which labs clinicians con\u2026",
       "topics": [],
       "keywords": [
         "fatigue",
@@ -5050,43 +5127,37 @@
     },
     {
       "id": "labs_a1c-blood-sugar",
-      "title": "A1c & Blood Sugar Labs | Metabolic Testing",
+      "title": "HbA1c Blood Test Explained | Blood Sugar Labs",
       "url": "https://www.siya.health/labs/a1c-blood-sugar",
       "path": "/labs/a1c-blood-sugar",
-      "summary": "Learn what hemoglobin A1c measures, how it relates to prediabetes and metabolic health, and when blood sugar testing may be appropriate. Transparent direct-pay options available.",
+      "summary": "What HbA1c broadly measures about average blood sugar, why clinicians may order it, and what it cannot diagnose alone. Preventive and metabolic education.",
       "topics": [
-        "weight-loss",
         "labs"
       ],
       "keywords": [
-        "a1c",
+        "hba1c",
         "blood",
+        "test",
+        "explained",
         "sugar",
         "labs",
-        "metabolic",
-        "testing",
-        "learn",
         "what",
-        "hemoglobin",
+        "broadly",
         "measures",
-        "how",
-        "it",
-        "relates",
-        "to",
-        "prediabetes",
-        "and",
-        "health",
-        "when",
+        "about",
+        "average",
+        "why",
+        "clinicians",
         "may",
-        "be",
-        "appropriate",
-        "transparent",
-        "direct",
-        "pay",
-        "options",
-        "available",
-        "weight",
-        "loss"
+        "order",
+        "it",
+        "and",
+        "cannot",
+        "diagnose",
+        "alone",
+        "preventive",
+        "metabolic",
+        "education"
       ]
     },
     {
@@ -5094,7 +5165,7 @@
       "title": "Labs & ADHD Evaluation Support | Not a Blood Test Diagnosis",
       "url": "https://www.siya.health/labs/adhd-support",
       "path": "/labs/adhd-support",
-      "summary": "Blood tests do not diagnose ADHD. Learn when selected labs may help evaluate other contributors to fatigue, concentration problems, or brain fog—and how Siya Health approaches testing.",
+      "summary": "Blood tests do not diagnose ADHD. Learn when selected labs may help evaluate other contributors to fatigue, concentration problems, or brain fog\u2014and how Siya Health approaches testing.",
       "topics": [
         "adhd",
         "labs"
@@ -5136,11 +5207,85 @@
       ]
     },
     {
+      "id": "labs_cbc",
+      "title": "CBC Blood Test Explained | Preventive Labs",
+      "url": "https://www.siya.health/labs/cbc",
+      "path": "/labs/cbc",
+      "summary": "What a CBC broadly measures, why clinicians may order it, and what it cannot diagnose alone. Educational lab guidance under preventive primary care.",
+      "topics": [
+        "labs"
+      ],
+      "keywords": [
+        "cbc",
+        "blood",
+        "test",
+        "explained",
+        "preventive",
+        "labs",
+        "what",
+        "a",
+        "broadly",
+        "measures",
+        "why",
+        "clinicians",
+        "may",
+        "order",
+        "it",
+        "and",
+        "cannot",
+        "diagnose",
+        "alone",
+        "educational",
+        "lab",
+        "guidance",
+        "under",
+        "primary",
+        "care"
+      ]
+    },
+    {
+      "id": "labs_cmp",
+      "title": "CMP Blood Test Explained | Preventive Labs",
+      "url": "https://www.siya.health/labs/cmp",
+      "path": "/labs/cmp",
+      "summary": "What a CMP broadly measures\u2014kidney, liver, electrolytes, and glucose context\u2014and why clinicians use it in preventive care. Not a standalone diagnosis.",
+      "topics": [
+        "labs"
+      ],
+      "keywords": [
+        "cmp",
+        "blood",
+        "test",
+        "explained",
+        "preventive",
+        "labs",
+        "what",
+        "a",
+        "broadly",
+        "measures",
+        "kidney",
+        "liver",
+        "electrolytes",
+        "and",
+        "glucose",
+        "context",
+        "why",
+        "clinicians",
+        "use",
+        "it",
+        "in",
+        "care",
+        "not",
+        "standalone",
+        "diagnosis"
+      ]
+    },
+    {
       "id": "labs_fatigue-brain-fog",
       "title": "Fatigue & Brain Fog Labs | Blood Tests",
       "url": "https://www.siya.health/labs/fatigue-brain-fog",
       "path": "/labs/fatigue-brain-fog",
-      "summary": "Learn which laboratory tests clinicians may consider for fatigue and brain fog—and why results need clinical context. Transparent direct-pay options available.",
+      "summary": "Learn which laboratory tests clinicians may consider for fatigue and brain fog\u2014and why results need clinical context. Transparent direct-pay options available.",
       "topics": [
         "labs"
       ],
@@ -5176,7 +5321,7 @@
       "title": "How to Read Your Lab Results",
       "url": "https://www.siya.health/labs/how-to-read-results",
       "path": "/labs/how-to-read-results",
-      "summary": "Got your results? Reference ranges don’t diagnose disease. Learn how to read labs calmly—and when to book interpretation with a Siya Health clinician.",
+      "summary": "Got your results? Reference ranges don\u2019t diagnose disease. Learn how to read labs calmly\u2014and when to book interpretation with a Siya Health clinician.",
       "topics": [
         "labs"
       ],
@@ -5210,42 +5355,73 @@
     },
     {
       "id": "labs_iron-ferritin",
-      "title": "Iron & Ferritin Blood Tests | Direct-Pay Labs",
+      "title": "Ferritin Blood Test Explained | Iron Labs",
       "url": "https://www.siya.health/labs/iron-ferritin",
       "path": "/labs/iron-ferritin",
-      "summary": "Learn what ferritin and iron studies measure, when testing may be appropriate for fatigue or heavy periods, and why interpretation matters. Transparent direct-pay options available.",
+      "summary": "What ferritin and iron studies broadly measure, why clinicians consider them for fatigue, and what they cannot diagnose alone.",
       "topics": [
         "labs"
       ],
       "keywords": [
-        "iron",
         "ferritin",
         "blood",
-        "tests",
-        "direct",
-        "pay",
+        "test",
+        "explained",
+        "iron",
         "labs",
-        "learn",
         "what",
         "and",
         "studies",
+        "broadly",
         "measure",
-        "when",
-        "testing",
-        "may",
-        "be",
-        "appropriate",
+        "why",
+        "clinicians",
+        "consider",
+        "them",
         "for",
         "fatigue",
-        "or",
-        "heavy",
-        "periods",
+        "they",
+        "cannot",
+        "diagnose",
+        "alone"
+      ]
+    },
+    {
+      "id": "labs_lipid-panel",
+      "title": "Lipid Panel Explained | Cholesterol Labs",
+      "url": "https://www.siya.health/labs/lipid-panel",
+      "path": "/labs/lipid-panel",
+      "summary": "What a lipid panel broadly measures for cardiometabolic risk, why clinicians order it, and what it cannot decide alone. Preventive care education\u2014not result interpretation.",
+      "topics": [
+        "labs"
+      ],
+      "keywords": [
+        "lipid",
+        "panel",
+        "explained",
+        "cholesterol",
+        "labs",
+        "what",
+        "a",
+        "broadly",
+        "measures",
+        "for",
+        "cardiometabolic",
+        "risk",
         "why",
-        "interpretation",
-        "matters",
-        "transparent",
-        "options",
-        "available"
+        "clinicians",
+        "order",
+        "it",
+        "and",
+        "cannot",
+        "decide",
+        "alone",
+        "preventive",
+        "care",
+        "education",
+        "not",
+        "result",
+        "interpretation"
       ]
     },
     {
@@ -5253,7 +5429,7 @@
       "title": "Men's Health Labs | Testosterone Context",
       "url": "https://www.siya.health/labs/mens-health",
       "path": "/labs/mens-health",
-      "summary": "Learn when testosterone and related laboratory testing may be appropriate for energy, drive, or metabolic concerns—and why results need clinical context. Direct-pay options available.",
+      "summary": "Learn when testosterone and related laboratory testing may be appropriate for energy, drive, or metabolic concerns\u2014and why results need clinical context. Direct-pay options available.",
       "topics": [
         "labs",
         "mens-health"
@@ -5296,7 +5472,7 @@
       "title": "Preventive Blood Tests & Wellness Labs",
       "url": "https://www.siya.health/labs/preventive",
       "path": "/labs/preventive",
-      "summary": "Explore commonly ordered preventive laboratory tests—CBC, metabolic panel, lipids, A1c—and how physician-guided testing supports primary care. Transparent direct-pay options available.",
+      "summary": "Explore commonly ordered preventive laboratory tests\u2014CBC, metabolic panel, lipids, A1c\u2014and how physician-guided testing supports primary care. Transparent direct-pay options available.",
       "topics": [
         "labs"
       ],
@@ -5332,55 +5508,45 @@
     },
     {
       "id": "labs_thyroid",
-      "title": "Thyroid Blood Tests (TSH & More)",
+      "title": "TSH Thyroid Test Explained | Preventive Labs",
       "url": "https://www.siya.health/labs/thyroid",
       "path": "/labs/thyroid",
-      "summary": "Learn when thyroid testing such as TSH and free T4 may be appropriate for fatigue, brain fog, or unexplained changes—and why thyroid disease should not be assumed. Direct-pay options available.",
+      "summary": "What TSH broadly measures, why clinicians may check thyroid function, and what TSH cannot diagnose alone. Educational guidance\u2014not result interpretation.",
       "topics": [
         "labs"
       ],
       "keywords": [
-        "thyroid",
-        "blood",
-        "tests",
         "tsh",
-        "more",
-        "learn",
-        "when",
-        "testing",
-        "such",
-        "as",
-        "and",
-        "free",
-        "t4",
-        "may",
-        "be",
-        "appropriate",
-        "for",
-        "fatigue",
-        "brain",
-        "fog",
-        "or",
-        "unexplained",
-        "changes",
+        "thyroid",
+        "test",
+        "explained",
+        "preventive",
+        "labs",
+        "what",
+        "broadly",
+        "measures",
         "why",
-        "disease",
-        "should",
+        "clinicians",
+        "may",
+        "check",
+        "function",
+        "and",
+        "cannot",
+        "diagnose",
+        "alone",
+        "educational",
+        "guidance",
         "not",
-        "assumed",
-        "direct",
-        "pay",
-        "options",
-        "available",
-        "labs"
+        "result",
+        "interpretation"
       ]
     },
     {
       "id": "labs_vitamin-b12",
-      "title": "Vitamin B12 Blood Test | Nutritional Labs",
+      "title": "Vitamin B12 Blood Test Explained | Nutritional Labs",
       "url": "https://www.siya.health/labs/vitamin-b12",
       "path": "/labs/vitamin-b12",
-      "summary": "Learn when vitamin B12 testing may be appropriate for fatigue, neurologic symptoms, or dietary risk—and why results need clinical interpretation. Direct-pay options available.",
+      "summary": "What vitamin B12 testing broadly measures, why clinicians may order it, and what it cannot diagnose alone. Preventive and fatigue-related education.",
       "topics": [
         "labs"
       ],
@@ -5389,31 +5555,63 @@
         "b12",
         "blood",
         "test",
+        "explained",
         "nutritional",
         "labs",
-        "learn",
-        "when",
+        "what",
         "testing",
-        "may",
-        "be",
-        "appropriate",
-        "for",
-        "fatigue",
-        "neurologic",
-        "symptoms",
-        "or",
-        "dietary",
-        "risk",
-        "and",
+        "broadly",
+        "measures",
         "why",
-        "results",
-        "need",
-        "clinical",
-        "interpretation",
-        "direct",
-        "pay",
-        "options",
-        "available"
+        "clinicians",
+        "may",
+        "order",
+        "it",
+        "and",
+        "cannot",
+        "diagnose",
+        "alone",
+        "preventive",
+        "fatigue",
+        "related",
+        "education"
+      ]
+    },
+    {
+      "id": "labs_vitamin-d",
+      "title": "Vitamin D Blood Test Explained | Preventive Labs",
+      "url": "https://www.siya.health/labs/vitamin-d",
+      "path": "/labs/vitamin-d",
+      "summary": "What 25-OH vitamin D testing broadly measures, why clinicians may consider it, and what it cannot diagnose alone. Education under preventive care.",
+      "topics": [
+        "labs"
+      ],
+      "keywords": [
+        "vitamin",
+        "d",
+        "blood",
+        "test",
+        "explained",
+        "preventive",
+        "labs",
+        "what",
+        "25",
+        "oh",
+        "testing",
+        "broadly",
+        "measures",
+        "why",
+        "clinicians",
+        "may",
+        "consider",
+        "it",
+        "and",
+        "cannot",
+        "diagnose",
+        "alone",
+        "education",
+        "under",
+        "care"
       ]
     },
     {
@@ -5421,7 +5619,7 @@
       "title": "Women's Midlife Labs | Perimenopause Context",
       "url": "https://www.siya.health/labs/womens-midlife",
       "path": "/labs/womens-midlife",
-      "summary": "Learn how laboratory testing may support women’s midlife concerns—fatigue, brain fog, iron, thyroid, and metabolic markers—without claiming a hormone panel diagnoses perimenopause.",
+      "summary": "Learn how laboratory testing may support women\u2019s midlife concerns\u2014fatigue, brain fog, iron, thyroid, and metabolic markers\u2014without claiming a hormone panel diagnoses perimenopause.",
       "topics": [
         "labs"
       ],
@@ -5460,7 +5658,7 @@
       "title": "Men's Health & Longevity",
       "url": "https://www.siya.health/mens-health-longevity",
       "path": "/mens-health-longevity",
-      "summary": "Physician-led men's health telehealth—testosterone evaluation, erectile dysfunction support, metabolic health, and longevity planning across CA, TX, PA, and FL.",
+      "summary": "Physician-led men's health telehealth\u2014testosterone evaluation, erectile dysfunction support, metabolic health, and longevity planning across CA, TX, PA, and FL.",
       "topics": [
         "mens-health"
       ],
@@ -5493,7 +5691,7 @@
       "title": "Online Prescription Services",
       "url": "https://www.siya.health/prescriptions",
       "path": "/prescriptions",
-      "summary": "Provider-reviewed prescriptions through Siya Health telehealth when clinically appropriate. Availability varies by state—contact us to learn more.",
+      "summary": "Provider-reviewed prescriptions through Siya Health telehealth when clinically appropriate. Availability varies by state\u2014contact us to learn more.",
       "topics": [],
       "keywords": [
         "online",
@@ -5521,11 +5719,53 @@
       ]
     },
     {
+      "id": "preventive-care",
+      "title": "Preventive Care \u2014 Stay Healthy Before Something Goes Wrong",
+      "url": "https://www.siya.health/preventive-care",
+      "path": "/preventive-care",
+      "summary": "Preventive care is how adults stay ahead of problems: annual wellness visits, health screenings, vaccinations, cardiometabolic risk, lifestyle, and labs in context \u2014 with a physician-led primary care \u2026",
+      "topics": [],
+      "keywords": [
+        "preventive",
+        "care",
+        "stay",
+        "healthy",
+        "before",
+        "something",
+        "goes",
+        "wrong",
+        "is",
+        "how",
+        "adults",
+        "ahead",
+        "of",
+        "problems",
+        "annual",
+        "wellness",
+        "visits",
+        "health",
+        "screenings",
+        "vaccinations",
+        "cardiometabolic",
+        "risk",
+        "lifestyle",
+        "and",
+        "labs",
+        "in",
+        "context",
+        "with",
+        "a",
+        "physician",
+        "led",
+        "primary"
+      ]
+    },
+    {
       "id": "pricing",
       "title": "Pricing",
       "url": "https://www.siya.health/pricing",
       "path": "/pricing",
-      "summary": "Transparent physician-led telehealth pricing: $149 initial evaluation, $79 or $149/month follow-up plans. ADHD, weight loss, primary care, and telehealth in California, Texas, Pennsylvania, and Florid…",
+      "summary": "Transparent physician-led telehealth pricing: $149 initial evaluation, $79 or $149/month follow-up plans. ADHD, weight loss, primary care, and telehealth in California, Texas, Pennsylvania, and Florid\u2026",
       "topics": [],
       "keywords": [
         "pricing",
@@ -5553,6 +5793,48 @@
         "texas",
         "pennsylvania",
         "florid"
+      ]
+    },
+    {
+      "id": "primary-care",
+      "title": "Primary Care \u2014 Where Ongoing Health Starts",
+      "url": "https://www.siya.health/primary-care",
+      "path": "/primary-care",
+      "summary": "Primary care is the root of ongoing health at Siya: symptoms, preventive care, labs in context, and specialty lanes under one physician-led telehealth relationship \u2014 not a funnel to a single condition\u2026",
+      "topics": [],
+      "keywords": [
+        "primary",
+        "care",
+        "where",
+        "ongoing",
+        "health",
+        "starts",
+        "is",
+        "the",
+        "root",
+        "of",
+        "at",
+        "siya",
+        "symptoms",
+        "preventive",
+        "labs",
+        "in",
+        "context",
+        "and",
+        "specialty",
+        "lanes",
+        "under",
+        "one",
+        "physician",
+        "led",
+        "telehealth",
+        "relationship",
+        "not",
+        "a",
+        "funnel",
+        "to",
+        "single",
+        "condition"
       ]
     },
     {
@@ -5593,7 +5875,7 @@
       "title": "Our Care Team",
       "url": "https://www.siya.health/providers",
       "path": "/providers",
-      "summary": "Meet Siya Health physicians and advanced practice providers—primary care–led ADHD, metabolic, and telehealth care across California, Texas, Pennsylvania, and Florida.",
+      "summary": "Meet Siya Health physicians and advanced practice providers\u2014primary care\u2013led ADHD, metabolic, and telehealth care across California, Texas, Pennsylvania, and Florida.",
       "topics": [],
       "keywords": [
         "our",
@@ -5656,7 +5938,7 @@
       "title": "Dr. Natasha Desai, MD | Adult ADHD & Family Medicine",
       "url": "https://www.siya.health/providers/dr-natasha-desai",
       "path": "/providers/dr-natasha-desai",
-      "summary": "Meet Dr. Natasha Desai—Family Medicine Physician at Siya Health. ADHD-CCSP. Adult ADHD with anxiety and emotional overlap via telehealth in TX & FL.",
+      "summary": "Meet Dr. Natasha Desai\u2014Family Medicine Physician at Siya Health. ADHD-CCSP. Adult ADHD with anxiety and emotional overlap via telehealth in TX & FL.",
       "topics": [
         "adhd"
       ],
@@ -5692,7 +5974,7 @@
       "title": "Dr. Sneh Pandey, MD | Adult ADHD & Metabolic Care",
       "url": "https://www.siya.health/providers/dr-sneh-pandey",
       "path": "/providers/dr-sneh-pandey",
-      "summary": "Meet Dr. Sneh Pandey—Medical Director at Siya Health. Board-certified Internal Medicine, Obesity Medicine, ADHD-CCSP. Structured adult ADHD evaluations and weight-inclusive telehealth in CA, TX, PA & …",
+      "summary": "Meet Dr. Sneh Pandey\u2014Medical Director at Siya Health. Board-certified Internal Medicine, Obesity Medicine, ADHD-CCSP. Structured adult ADHD evaluations and weight-inclusive telehealth in CA, TX, PA & \u2026",
       "topics": [
         "adhd",
         "weight-loss"
@@ -5736,7 +6018,7 @@
       "title": "Dr. Swati Pandey, MD | Internal Medicine & Adult ADHD",
       "url": "https://www.siya.health/providers/dr-swati-pandey",
       "path": "/providers/dr-swati-pandey",
-      "summary": "Meet Dr. Swati Pandey—Internal Medicine Physician at Siya Health. ADHD-CCSP. Adult ADHD with depression, anxiety, and complex medication histories via telehealth in PA.",
+      "summary": "Meet Dr. Swati Pandey\u2014Internal Medicine Physician at Siya Health. ADHD-CCSP. Adult ADHD with depression, anxiety, and complex medication histories via telehealth in PA.",
       "topics": [
         "adhd"
       ],
@@ -5773,7 +6055,7 @@
       "title": "Dr. Vanessa Urbina, MD | Family Medicine & ADHD",
       "url": "https://www.siya.health/providers/dr-vanessa-urbina",
       "path": "/providers/dr-vanessa-urbina",
-      "summary": "Meet Dr. Vanessa Urbina—family medicine physician at Siya Health. Adult ADHD, primary telehealth, and medical weight loss in Florida.",
+      "summary": "Meet Dr. Vanessa Urbina\u2014family medicine physician at Siya Health. Adult ADHD, primary telehealth, and medical weight loss in Florida.",
       "topics": [
         "adhd"
       ],
@@ -5973,7 +6255,7 @@
       "title": "Women&rsquo;s Midlife Health: Brain, Hormones & Metabolism",
       "url": "https://www.siya.health/womens-midlife-health",
       "path": "/womens-midlife-health",
-      "summary": "Women&rsquo;s midlife health is not one disease—it is brain, hormones, sleep, iron, weight, mood, and ADHD interacting. Explore Siya Health&rsquo;s knowledge hub and guides.",
+      "summary": "Women&rsquo;s midlife health is not one disease\u2014it is brain, hormones, sleep, iron, weight, mood, and ADHD interacting. Explore Siya Health&rsquo;s knowledge hub and guides.",
       "topics": [],
       "keywords": [
         "women",

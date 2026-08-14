@@ -1,6 +1,7 @@
 import { MODULES } from "@/content/modules";
 import { WORKSPACE_KB, type WorkspaceKbEntry } from "@/content/workspace-kb";
 import { SIYA_LAWS_SEEDS, SIYA_WAY_SEEDS } from "@/content/siya-layer-seeds";
+import { MEMORY_DEEP_LINKS } from "@/lib/memory-deep-links";
 import { wantsInternalMetaQuery } from "./staff-voice";
 
 export type KnowledgeLayerId = 0 | 1 | 2 | 3;
@@ -43,13 +44,34 @@ const META_TOPIC_IDS = new Set([
   "siya-helpdesk-assistant-persona",
   "amcare-os-overview",
   "legacy-pricing-funnel-unresolved",
+  // Decision-log / architecture meta — not staff help-desk answers
+  "founder-approval-for-shared-knowledge",
+  "pricing-facts-deterministic-lookup",
+  "llm-gateway-billing-gate",
+  "siya-guide-separate-from-staff-ask",
+  "knowledge-sop-paste-and-review",
+  "sop-builder-and-knowledge-sop-separate",
+  "agent-org-chart-deferred",
+  "chat-first-home-deferred",
+  "mvp-v1-scope-locked",
+  "personal-ai-coach-deferred",
 ]);
 
+const META_TITLE_RE =
+  /founder approval|shared company knowledge|deterministic lookup|semantic retrieval|exact-match facts|company memory without|llm gateway|gateway billing|org chart deferred|chat-first home/i;
+
 /** Topics never shown to staff unless they ask where policies live / WorkDrive */
-export function filterStaffFacingChunks<T extends { id: string }>(chunks: T[], query: string): T[] {
+export function filterStaffFacingChunks<T extends { id: string; title?: string }>(
+  chunks: T[],
+  query: string,
+): T[] {
   if (wantsInternalMetaQuery(query)) return chunks;
-  const filtered = chunks.filter((c) => !META_TOPIC_IDS.has(c.id));
-  return filtered.length ? filtered : chunks.slice(0, 1);
+  return chunks.filter((c) => {
+    if (META_TOPIC_IDS.has(c.id)) return false;
+    if (c.id.startsWith("dec-db-") && META_TOPIC_IDS.has(c.id.replace(/^dec-db-/, ""))) return false;
+    if (c.title && META_TITLE_RE.test(c.title)) return false;
+    return true;
+  });
 }
 
 const QUERY_EXPANSIONS: Record<string, string[]> = {
@@ -74,6 +96,8 @@ const QUERY_EXPANSIONS: Record<string, string[]> = {
   social: ["marketing", "content", "instagram", "compliance"],
   brand: ["voice", "entities", "editorial"],
   escalate: ["escalation", "pathways", "supervisor"],
+  abusive: ["hostile", "angry", "escalate", "escalation", "supervisor", "threat"],
+  hostile: ["abusive", "angry", "escalate", "escalation", "supervisor"],
   memory: ["workdrive", "knowledge base", "siyaos", "company"],
   sop: ["policy", "workflow", "operations"],
   meet: ["greet", "homepage", "cta", "booking"],
@@ -81,6 +105,21 @@ const QUERY_EXPANSIONS: Record<string, string[]> = {
   password: ["security", "mfa", "account"],
   phishing: ["security", "account"],
 };
+
+const GENERIC_QUERY_TOKENS = new Set([
+  "patient",
+  "patients",
+  "care",
+  "visit",
+  "chat",
+  "ask",
+  "policy",
+  "sop",
+  "help",
+  "staff",
+  "siya",
+  "health",
+]);
 
 function expandQuery(raw: string): string[] {
   const base = tokenizeForSearch(raw);
@@ -95,10 +134,19 @@ function expandQuery(raw: string): string[] {
   if (/patient\s+(screenshot|photo|image|chart)|upload.*(screenshot|phi|patient)/i.test(lower)) {
     extra.push("phi", "screenshot", "upload", "patient");
   }
+  if (/\b(abusive|hostile|threatening|verbal\s+abuse)\b/i.test(lower)) {
+    extra.push("escalate", "escalation", "supervisor", "angry", "hostile");
+  }
   return [...new Set([...base, ...extra])];
 }
 
-function scoreTokens(queryTokens: string[], text: string, title: string, id: string) {
+function scoreTokens(
+  queryTokens: string[],
+  text: string,
+  title: string,
+  id: string,
+  gateTokens?: string[],
+) {
   const lower = text.toLowerCase();
   const titleLower = title.toLowerCase();
   let s = 0;
@@ -108,18 +156,35 @@ function scoreTokens(queryTokens: string[], text: string, title: string, id: str
     if (lower.includes(t)) s += 1;
     if (t.length >= 4 && lower.includes(t.slice(0, Math.max(3, t.length - 1)))) s += 0.5;
   }
+  // Gate on original query tokens only — expansions like abusive→escalate would
+  // otherwise unlock every SOP that says "Escalate to Billing".
+  const gate = gateTokens ?? queryTokens;
+  const specific = gate.filter((t) => t.length > 3 && !GENERIC_QUERY_TOKENS.has(t));
+  if (specific.length > 0) {
+    const anySpecific = specific.some(
+      (t) => titleLower.includes(t) || lower.includes(t) || id.includes(t.replace(/\s/g, "-")),
+    );
+    if (!anySpecific) return 0;
+  }
   return s;
 }
 
-function keywordBoost(qLower: string, keywords: string[]): number {
-  let s = 0;
+function keywordBoost(qLower: string, keywords: string[], queryTokens: string[]): number {
+  const qTokens = new Set(queryTokens.map((t) => t.toLowerCase()));
+  let specificHits = 0;
+  let genericHits = 0;
   for (const k of keywords) {
     const kl = k.toLowerCase();
-    if (qLower.includes(kl) || kl.split(/\s+/).some((w) => qLower.includes(w) && w.length > 3)) {
-      s += 5;
-    }
+    const words = kl.split(/\s+/).filter(Boolean);
+    const hit =
+      words.length > 1
+        ? qLower.includes(kl)
+        : qTokens.has(kl) || (kl.length > 4 && [...qTokens].some((t) => t === kl));
+    if (!hit) continue;
+    if (words.length === 1 && GENERIC_QUERY_TOKENS.has(kl)) genericHits += 1;
+    else specificHits += 1;
   }
-  return s;
+  return specificHits * 5 + genericHits * 0.5;
 }
 
 function withLayer(chunk: RetrievedChunk, layer: KnowledgeLayerId): RetrievedChunk {
@@ -141,13 +206,16 @@ export function isHistoricalMemoryQuery(query: string): boolean {
 }
 
 export function retrieveSiyaWay(query: string, limit = 4): RetrievedChunk[] {
+  const base = tokenizeForSearch(query);
   const qt = expandQuery(query);
   if (!qt.length) return [];
   const qLower = query.toLowerCase();
   const out: RetrievedChunk[] = [];
   for (const e of SIYA_WAY_SEEDS) {
     const corpus = `${e.title} ${e.keywords.join(" ")} ${e.body}`;
-    let s = scoreTokens(qt, corpus, e.title, e.slug) + keywordBoost(qLower, e.keywords);
+    const tokenScore = scoreTokens(qt, corpus, e.title, e.slug, base);
+    if (tokenScore <= 0) continue;
+    let s = tokenScore + keywordBoost(qLower, e.keywords, qt);
     if (s > 0) {
       out.push(
         withLayer(
@@ -156,7 +224,7 @@ export function retrieveSiyaWay(query: string, limit = 4): RetrievedChunk[] {
             title: e.title,
             snippet: e.body,
             score: s * 1.35,
-            links: [{ label: "The Siya Way", href: "/memory?tab=way" }],
+            links: [{ label: MEMORY_DEEP_LINKS.way.label, href: MEMORY_DEEP_LINKS.way.href }],
           },
           0,
         ),
@@ -168,13 +236,16 @@ export function retrieveSiyaWay(query: string, limit = 4): RetrievedChunk[] {
 }
 
 export function retrieveLaws(query: string, limit = 4): RetrievedChunk[] {
+  const base = tokenizeForSearch(query);
   const qt = expandQuery(query);
   if (!qt.length) return [];
   const qLower = query.toLowerCase();
   const out: RetrievedChunk[] = [];
   for (const e of SIYA_LAWS_SEEDS) {
     const corpus = `${e.title} ${e.summary} ${e.keywords.join(" ")} ${e.body}`;
-    let s = scoreTokens(qt, corpus, e.title, e.slug) + keywordBoost(qLower, e.keywords);
+    const tokenScore = scoreTokens(qt, corpus, e.title, e.slug, base);
+    if (tokenScore <= 0) continue;
+    let s = tokenScore + keywordBoost(qLower, e.keywords, qt);
     if (s > 0) {
       out.push(
         withLayer(
@@ -184,7 +255,7 @@ export function retrieveLaws(query: string, limit = 4): RetrievedChunk[] {
             snippet: `${e.summary}\n\n${e.body}`.slice(0, 2800),
             score: s * 1.55,
             escalate: e.escalate,
-            links: [{ label: "Policies & requirements", href: "/memory?tab=policies" }],
+            links: [{ label: MEMORY_DEEP_LINKS.policies.label, href: MEMORY_DEEP_LINKS.policies.href }],
           },
           1,
         ),
@@ -196,6 +267,7 @@ export function retrieveLaws(query: string, limit = 4): RetrievedChunk[] {
 }
 
 export function retrieveWorkspaceKnowledge(query: string, limit = 6): RetrievedChunk[] {
+  const base = tokenizeForSearch(query);
   const qt = expandQuery(query);
   if (!qt.length) {
     const fallback = query.toLowerCase().trim();
@@ -211,10 +283,9 @@ export function retrieveWorkspaceKnowledge(query: string, limit = 6): RetrievedC
     { pattern: /marketing|content plan|social|editorial|caption|instagram|ads\b/, id: "content-qa-checklist", boost: 18 },
     { pattern: /marketing|social|ad copy|claim|testimonial|compliance/, id: "medical-compliance-marketing", boost: 16 },
     { pattern: /brand|voice|positioning|how we describe/, id: "brand-entities-voice", boost: 14 },
-    { pattern: /pricing|price|\$149|\$79|evaluation cost|membership|how much/, id: "patient-pricing-public-canonical", boost: 20 },
-    { pattern: /meet.*greet|homepage cta|book free/, id: "homepage-cta-meet-and-greet", boost: 18 },
+    { pattern: /pricing|price|\$149|\$79|evaluation cost|membership|how much|meet.?and.?greet/, id: "patient-pricing-public-canonical", boost: 20 },
+    { pattern: /meet.*greet|homepage cta|book free|discovery call/, id: "homepage-cta-meet-and-greet", boost: 18 },
     { pattern: /late cancel|refund|cancellation|no-show/, id: "billing-late-cancel", boost: 16 },
-    { pattern: /discovery call|meet.?and.?greet|\$79|patientsupport@siya/, id: "discovery-call-staff-billing", boost: 22 },
     { pattern: /refill|pharmacy|early refill|prescription (sent|ready)|med(ication)? not received/, id: "refill-pharmacy-staff-guidance", boost: 22 },
     { pattern: /onboard|day.?1|new hire|ma orientation|tool surprise/, id: "ma-onboarding-field-lessons", boost: 20 },
     { pattern: /zoho (mail|cliq|workdrive)|spruce (call|softphone|invite)|true.?sync/, id: "ma-platforms-zoho-spruce", boost: 20 },
@@ -223,22 +294,25 @@ export function retrieveWorkspaceKnowledge(query: string, limit = 6): RetrievedC
     { pattern: /workdrive|company memory|where.*sop|knowledge base/, id: "company-memory-workdrive-index", boost: 14 },
     { pattern: /marketing.*claim|fda|ftc|testimonial|ads compliance/, id: "medical-compliance-marketing", boost: 14 },
     { pattern: /escalat|who do i call|supervisor/, id: "escalation-pathways", boost: 12 },
+    { pattern: /abusive|hostile patient|angry patient|verbal abuse|patient threat/, id: "escalation-pathways", boost: 22 },
     { pattern: /hipaa|breach|phi|privacy/, id: "hipaa-breach", boost: 12 },
   ];
 
   for (const e of WORKSPACE_KB) {
     const corpus = `${e.title} ${e.keywords.join(" ")} ${e.body}`;
-    let s = scoreTokens(qt, corpus, e.title, e.id);
-    for (const k of e.keywords) {
-      const kl = k.toLowerCase();
-      if (qLower.includes(kl) || kl.split(/\s+/).some((w) => qLower.includes(w) && w.length > 3)) {
-        s += 5;
+    const tokenScore = scoreTokens(qt, corpus, e.title, e.id, base);
+    let s = tokenScore;
+    s += keywordBoost(qLower, e.keywords, qt);
+    let intentHit = false;
+    for (const intent of TOPIC_INTENT_BOOST) {
+      if (e.id === intent.id && intent.pattern.test(qLower)) {
+        s += intent.boost;
+        intentHit = true;
       }
     }
-    for (const intent of TOPIC_INTENT_BOOST) {
-      if (e.id === intent.id && intent.pattern.test(qLower)) s += intent.boost;
-    }
     if (META_TOPIC_IDS.has(e.id) && !wantsInternalMetaQuery(qLower)) s *= 0.12;
+    // Don't surface docs that only matched generic tokens (e.g. "patient") unless intent boost says so.
+    if (tokenScore <= 0 && !intentHit) continue;
     if (s > 0) out.push(fromKb(e, s));
   }
 
@@ -246,7 +320,7 @@ export function retrieveWorkspaceKnowledge(query: string, limit = 6): RetrievedC
   if (trainingQuery) {
     for (const m of MODULES) {
       const corpus = `${m.title} ${m.summary} ${m.keyConcepts.join(" ")}`;
-      const s = scoreTokens(qt, corpus, m.title, m.id) * 0.9;
+      const s = scoreTokens(qt, corpus, m.title, m.id, base) * 0.9;
       if (s >= 2) {
         out.push(
           withLayer(
@@ -281,6 +355,14 @@ export type DynamicSopEntry = {
   department: string;
 };
 
+export type DynamicDecisionEntry = {
+  id: string;
+  title: string;
+  body: string;
+  keywords: string[];
+  department: string;
+};
+
 export type MemorySearchHit = {
   id: string;
   title: string;
@@ -290,13 +372,16 @@ export type MemorySearchHit = {
 
 /** Layer 2 SOPs from Postgres — merged into Ask retrieval (includes pending / needs-review tags in title). */
 export function retrieveDynamicSops(query: string, entries: DynamicSopEntry[], limit = 6): RetrievedChunk[] {
+  const base = tokenizeForSearch(query);
   const qt = expandQuery(query);
   if (!qt.length || !entries.length) return [];
   const qLower = query.toLowerCase();
   const out: RetrievedChunk[] = [];
   for (const e of entries) {
     const corpus = `${e.title} ${e.keywords.join(" ")} ${e.body} ${e.department} sop`;
-    let s = scoreTokens(qt, corpus, e.title, e.id);
+    const tokenScore = scoreTokens(qt, corpus, e.title, e.id, base);
+    if (tokenScore <= 0) continue;
+    let s = tokenScore;
     for (const k of e.keywords) {
       const kl = k.toLowerCase();
       if (qLower.includes(kl)) s += 4;
@@ -310,7 +395,65 @@ export function retrieveDynamicSops(query: string, entries: DynamicSopEntry[], l
             title: e.title,
             snippet: e.body.slice(0, 2400),
             score: s,
-            links: [{ label: `SOP · ${e.department}`, href: "/memory/knowledge/sops" }],
+            links: [{ label: `SOP · ${e.department}`, href: MEMORY_DEEP_LINKS.sops.href }],
+          },
+          2,
+        ),
+      );
+    }
+  }
+  out.sort((a, b) => b.score - a.score);
+  return out.slice(0, limit);
+}
+
+const DECISION_INTENT_BOOST: { pattern: RegExp; id: string; boost: number }[] = [
+  { pattern: /chat review|admin only|clinical lead.*review/, id: "chat-review-admin-clinical-lead-only", boost: 22 },
+  { pattern: /marketing (systems|os)|bigger systems|research os|content os|distribution os/, id: "marketing-bigger-systems-paused", boost: 22 },
+  { pattern: /discovery call|meet.?and.?greet|\$79/, id: "meet-greet-replaced-discovery-call", boost: 20 },
+  { pattern: /homepage cta|book free|zocdoc/, id: "homepage-cta-meet-and-greet", boost: 18 },
+  { pattern: /agent org|executive office|coo agent/, id: "agent-org-chart-deferred", boost: 18 },
+  { pattern: /flat team|no manager|hierarchy/, id: "flat-team-structure", boost: 18 },
+  { pattern: /founder approval|shared company knowledge|pending.?review/, id: "founder-approval-for-shared-knowledge", boost: 18 },
+  { pattern: /llm (off|gateway)|billing gate|vercel.*gateway/, id: "llm-gateway-billing-gate", boost: 18 },
+];
+
+/** Layer 2 decisions from Postgres — authoritative decision log for Ask. */
+export function retrieveDynamicDecisions(
+  query: string,
+  entries: DynamicDecisionEntry[],
+  limit = 6,
+): RetrievedChunk[] {
+  const base = tokenizeForSearch(query);
+  const qt = expandQuery(query);
+  if (!qt.length || !entries.length) return [];
+  const qLower = query.toLowerCase();
+  const out: RetrievedChunk[] = [];
+  for (const e of entries) {
+    const corpus = `${e.title} ${e.keywords.join(" ")} ${e.body} ${e.department} decision why decided`;
+    const tokenScore = scoreTokens(qt, corpus, e.title, e.id, base);
+    let s = tokenScore;
+    for (const k of e.keywords) {
+      const kl = k.toLowerCase();
+      if (qLower.includes(kl)) s += 4;
+    }
+    let intentHit = false;
+    for (const intent of DECISION_INTENT_BOOST) {
+      if (e.id === intent.id && intent.pattern.test(qLower)) {
+        s += intent.boost;
+        intentHit = true;
+      }
+    }
+    if (/why did we|decision log|who decided|why (is|are|do|did)/i.test(qLower)) s += 3;
+    if (tokenScore <= 0 && !intentHit) continue;
+    if (s > 0) {
+      out.push(
+        withLayer(
+          {
+            id: `dec-db-${e.id}`,
+            title: e.title,
+            snippet: e.body.slice(0, 2400),
+            score: s * 1.1,
+            links: [{ label: MEMORY_DEEP_LINKS.knowledge.label, href: MEMORY_DEEP_LINKS.knowledge.href }],
           },
           2,
         ),
@@ -323,12 +466,13 @@ export function retrieveDynamicSops(query: string, entries: DynamicSopEntry[], l
 
 export function retrieveMemoryHits(query: string, entries: MemorySearchHit[], limit = 3): RetrievedChunk[] {
   if (!isHistoricalMemoryQuery(query) || !entries.length) return [];
+  const base = tokenizeForSearch(query);
   const qt = expandQuery(query);
   if (!qt.length) return [];
   const out: RetrievedChunk[] = [];
   for (const e of entries) {
     const corpus = `${e.title} ${e.body} ${e.department ?? ""}`;
-    const s = scoreTokens(qt, corpus, e.title, e.id) * 0.65;
+    const s = scoreTokens(qt, corpus, e.title, e.id, base) * 0.65;
     if (s > 0) {
       out.push(
         withLayer(
@@ -337,7 +481,7 @@ export function retrieveMemoryHits(query: string, entries: MemorySearchHit[], li
             title: e.title,
             snippet: e.body.slice(0, 1200),
             score: s,
-            links: [{ label: "Memory", href: "/memory?tab=memory" }],
+            links: [{ label: MEMORY_DEEP_LINKS.memory.label, href: MEMORY_DEEP_LINKS.memory.href }],
           },
           3,
         ),
@@ -356,6 +500,7 @@ export function retrieveLayeredKnowledge(
   query: string,
   opts?: {
     sops?: DynamicSopEntry[];
+    decisions?: DynamicDecisionEntry[];
     memories?: MemorySearchHit[];
     limit?: number;
   },
@@ -364,6 +509,19 @@ export function retrieveLayeredKnowledge(
   const way = retrieveSiyaWay(query, 3);
   const laws = retrieveLaws(query, 3);
   let knowledge = retrieveWorkspaceKnowledge(query, 6);
+  // When Postgres decision log is loaded, drop markdown decision duplicates from static KB.
+  if (opts?.decisions?.length) {
+    const dbIds = new Set(opts.decisions.map((d) => d.id));
+    knowledge = knowledge.filter((c) => !dbIds.has(c.id) && !c.id.startsWith("dec-db-"));
+    // Also drop static KB entries that are category decisions by known markdown ids
+    const markdownDecisionIds = new Set([
+      "homepage-cta-meet-and-greet",
+      "marketing-os-v1-frozen",
+      "agent-org-chart-deferred",
+    ]);
+    knowledge = knowledge.filter((c) => !markdownDecisionIds.has(c.id));
+    knowledge = mergeRetrievalChunks(knowledge, retrieveDynamicDecisions(query, opts.decisions, 5), 8);
+  }
   if (opts?.sops?.length) {
     knowledge = mergeRetrievalChunks(knowledge, retrieveDynamicSops(query, opts.sops, 4), 8);
   }
@@ -398,12 +556,13 @@ export function mergeRetrievalChunks(staticChunks: RetrievedChunk[], dynamic: Re
 
 /** Weak matches for "did you mean" when nothing clears the bar */
 export function retrieveWorkspaceNearMisses(query: string, limit = 3): RetrievedChunk[] {
+  const base = tokenizeForSearch(query);
   const qt = expandQuery(query);
   if (!qt.length) return [];
   const out: RetrievedChunk[] = [];
   for (const e of WORKSPACE_KB) {
     const corpus = `${e.title} ${e.keywords.join(" ")} ${e.body}`;
-    const s = scoreTokens(qt, corpus, e.title, e.id);
+    const s = scoreTokens(qt, corpus, e.title, e.id, base);
     if (s > 0) out.push(fromKb(e, s));
   }
   // Prefer laws/way near-misses too

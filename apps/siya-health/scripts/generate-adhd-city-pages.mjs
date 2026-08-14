@@ -47,10 +47,12 @@ function faqAccordion(city) {
 }
 
 function providerList(city) {
-  return `<ul class="footer-links">
-            ${city.providers
-              .map((p) => `<li><a href="${esc(p.href)}">${esc(p.name)}</a> · licensed in ${esc(city.state)}</li>`)
-              .join('\n            ')}
+  const items = (city.providers || [])
+    .filter((p) => p && p.href && p.name)
+    .map((p) => `<li><a href="${esc(p.href)}">${esc(p.name)}</a> · licensed in ${esc(city.state)}</li>`)
+    .join('\n            ');
+  return `<ul class="footer-links city-clinician-list">
+            ${items}
           </ul>`;
 }
 
@@ -60,19 +62,6 @@ function relatedList(city) {
               .map((l) => `<li><a href="${esc(l.href)}">${esc(l.label)}</a></li>`)
               .join('\n            ')}
           </ul>`;
-}
-
-function clinicalReviewAside(city) {
-  const flags = (city.clinicalReviewFlags || [])
-    .map((f) => `<li>${esc(f)}</li>`)
-    .join('\n              ');
-  return `<aside class="clinical-review clinical-review--pending" data-needs-clinical-review="true" aria-label="NEEDS CLINICAL REVIEW">
-            <p class="clinical-review-label">NEEDS CLINICAL REVIEW: ${esc(city.city)}</p>
-            <p>Operational and telehealth copy below is ready for founder review. Leave <code>noindex</code> until this pass is signed off. Do not invent medication, diagnostic-criteria, or efficacy claims.</p>
-            <ul>
-              ${flags}
-            </ul>
-          </aside>`;
 }
 
 function buildPage(city) {
@@ -192,13 +181,6 @@ function buildPage(city) {
               <a class="button ds-button ds-button--secondary secondary" href="/redirect/meet-greet" data-siya-track="meet_greet_click" data-siya-location="hero" data-page-type="adhd" data-intent="adhd" data-conversion-goal="meetGreet" data-cta-slot="meetGreet" data-component="button">Book Free Meet &amp; Greet</a>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section class="section section-tinted" id="clinical-review-gate" aria-labelledby="clinical-review-heading">
-        <div class="container">
-          <h2 id="clinical-review-heading" class="visually-hidden">Clinical review status</h2>
-          ${clinicalReviewAside(city)}
         </div>
       </section>
 

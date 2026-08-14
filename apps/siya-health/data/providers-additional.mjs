@@ -43,7 +43,7 @@ export const ADDITIONAL_PROVIDERS = [
     shortBio:
       'I’m Dr. Vanessa Urbina. I practice family medicine with a focus on accessible primary care, ADHD support, and lifestyle-forward weight and metabolic health—for adults who want a clinician who knows their story.',
     longBio: [
-      'My path includes medical training at the <strong>University of Miami</strong> and years in community family medicine—urgent needs, chronic conditions, and the everyday health questions that do not fit a 10-minute slot.',
+      'My path includes medical training at the <strong>University of Miami</strong>, general surgery residency in Birmingham, and years across urgent care, family medicine, and rehabilitation—alongside the everyday health questions that do not fit a 10-minute slot.',
       'At Siya, I bring that same continuity mindset to telehealth: ADHD when attention and life demands collide, weight and metabolic care when habits and biology interact, and primary care when you need a medical home that answers the phone.',
     ],
     patientFit: {
@@ -62,13 +62,13 @@ export const ADDITIONAL_PROVIDERS = [
       { title: 'Follow-up', text: 'ongoing primary or specialty-aligned care as your plan evolves.' },
     ],
     trustCards: [
-      { title: 'Training', text: 'Family medicine physician; University of Miami medical school (2007).' },
+      { title: 'Training', text: 'Family medicine physician; University of Miami (MD, 2007); general surgery residency, Baptist Princeton Medical Center (Birmingham, AL).' },
+      { title: 'Experience', text: '15+ years across general surgery, urgent care, family medicine, and rehabilitation medicine.' },
       { title: 'States licensed', text: 'Telehealth where eligible: <strong>Florida</strong>—confirm at scheduling.' },
-      { title: 'Privacy', text: 'HIPAA-compliant visits with documented summaries for continuity of care.' },
     ],
     testimonials: [],
     relatedLinksHtml:
-      'Explore: <a href="/blog/online-adhd-diagnosis-california">state ADHD guides</a>, <a href="/primary-urgent-care">primary telehealth</a>, <a href="/weight-loss-metabolic-health">medical weight loss</a>.',
+      'Explore: <a href="/adhd-care">ADHD care</a> (Florida telehealth), <a href="/primary-urgent-care">primary telehealth</a>, <a href="/weight-loss-metabolic-health">medical weight loss</a>.',
     inlineCtas: [
       { label: 'Primary & urgent care', path: '/primary-urgent-care', primary: true },
       { label: 'Medical weight loss', path: '/weight-loss-metabolic-health', primary: false },
@@ -121,7 +121,10 @@ export const ADDITIONAL_PROVIDERS = [
     education: null,
     residency: null,
     fellowship: null,
-    professionalMemberships: ['AANP'],
+    professionalMemberships: [
+      'American Academy of Nurse Practitioners (AANP)',
+      'Sigma Theta Tau International Honor Society of Nursing',
+    ],
     carePhilosophy: [
       'I believe in <strong>empathetic, evidence-based care</strong>—meeting patients where they are, advocating for clear plans, and collaborating across disciplines when your story needs a team.',
       'Telehealth should still feel human: enough time to explain options, document next steps, and follow up responsibly.',
@@ -129,7 +132,7 @@ export const ADDITIONAL_PROVIDERS = [
     shortBio:
       'I’m Megan Wunderlich, FNP-C. I support adults through telehealth mental health and family medicine visits—with special attention to ADHD, anxiety, and the day-to-day strain of chronic conditions.',
     longBio: [
-      'My training spans bedside nursing through an <strong>MSN and FNP certification</strong>—Duquesne, Chatham, and Carlow—grounded in years of clinical experience including VA Pittsburgh Healthcare System.',
+      'My training spans bedside nursing through an <strong>MSN and FNP certification</strong>—Duquesne, Chatham, and Carlow—grounded in <strong>15 years</strong> of clinical experience, including RN work at VA Pittsburgh Healthcare System since 2010.',
       'At Siya, I help patients who need structured ADHD support, mental health visits, and primary-style telehealth in <strong>Pennsylvania</strong>—always within collaborative practice agreements and state scope rules.',
     ],
     patientFit: {
@@ -148,9 +151,9 @@ export const ADDITIONAL_PROVIDERS = [
       { title: 'Follow-up', text: 'monitoring, referrals, or coordinated care as your plan evolves.' },
     ],
     trustCards: [
-      { title: 'Credentials', text: 'FNP-C; MSN and post-master’s FNP training (Duquesne, Chatham, Carlow).' },
+      { title: 'Credentials', text: 'FNP-C; MSN and post-master’s FNP training (Duquesne, Chatham, Carlow); AANP and Sigma Theta Tau member.' },
+      { title: 'Experience', text: '15 years of experience; RN at VA Pittsburgh Healthcare System since 2010.' },
       { title: 'States licensed', text: 'Telehealth where eligible: <strong>Pennsylvania</strong>—confirm at scheduling.' },
-      { title: 'Supervision', text: 'Practice under collaborative physician agreements per Pennsylvania law.' },
     ],
     testimonials: [],
     relatedLinksHtml:
@@ -216,8 +219,8 @@ export const ADDITIONAL_PROVIDERS = [
     shortBio:
       'I’m Derek Timbs, FNP-BC. I lead telehealth visits for medical weight loss and men’s metabolic health—with experience supporting GLP-1 programs, phentermine where state law allows, and testosterone monitoring.',
     longBio: [
-      'My background blends <strong>family nurse practitioner</strong> training with occupational and metabolic medicine experience—including work with employers and patients navigating complex weight and hormone questions.',
-      'At Siya, I see adults in <strong>Texas</strong> who want clinician-led GLP-1 or metabolic care with clear monitoring and honest scope-of-practice boundaries.',
+      'I began my own health journey at <strong>21</strong> after struggling with weight—that experience still shapes how I talk about medical weight loss and metabolic change with patients.',
+      'I worked in ER and family practice before spending <strong>16 years in occupational medicine</strong>, then shifted fully to preventive and weight-loss care in <strong>2024</strong>. At Siya, I see adults in <strong>Texas</strong> (licensed in Texas and Ohio) who want clinician-led GLP-1 or metabolic care with clear monitoring and honest scope-of-practice boundaries.',
     ],
     patientFit: {
       deck: 'Texas adults pursuing clinician-led weight loss or men’s metabolic telehealth',
@@ -236,7 +239,7 @@ export const ADDITIONAL_PROVIDERS = [
     ],
     trustCards: [
       { title: 'Credentials', text: 'Family Nurse Practitioner (FNP-BC).' },
-      { title: 'States licensed', text: 'Licensed in <strong>Texas</strong> and <strong>Ohio</strong>. Siya Healthcare, PLLC provides telehealth in <strong>Texas</strong> only; Ohio license displayed for transparency.' },
+      { title: 'States licensed', text: 'Licensed in <strong>Texas</strong> and <strong>Ohio</strong>. Siya Healthcare, PLLC currently offers telehealth with Derek in <strong>Texas</strong>—confirm at scheduling.' },
       { title: 'Supervision', text: 'Practice under collaborative physician agreements per state law.' },
     ],
     testimonials: [],
@@ -275,18 +278,30 @@ export const ADDITIONAL_PROVIDERS = [
     credentials: ['PA-C'],
     photo: 'assets/images/wendy-delgado.png',
     altText: 'Wendy Delgado, PA-C',
-    statesLicensed: ['California'],
-    stateAbbreviations: ['CA'],
+    statesLicensed: ['California', 'Texas', 'Pennsylvania', 'Florida'],
+    stateAbbreviations: ['CA', 'TX', 'PA', 'FL'],
     licenses: [],
     boardCertifications: ['NCCPA Certified PA'],
     clinicalFocus: [
-      '<strong>Medical weight loss</strong>—telehealth intake, GLP-1 education, and monitoring support',
-      '<strong>Metabolic &amp; lifestyle counseling</strong>—food noise, appetite, and realistic habit change',
-      '<strong>Telehealth patient education</strong>—side effects, expectations, and when to escalate',
+      '<strong>Adult ADHD evaluation &amp; follow-up</strong>—structured history, validated tools, and clear next steps',
+      '<strong>Women’s health telehealth</strong>—common adult concerns with collaborative, respectful care',
+      '<strong>Medical weight loss &amp; metabolic care</strong>—GLP-1 education, monitoring, and lifestyle support',
+      '<strong>Telehealth primary care support</strong>—intake, education, and escalation when symptoms need deeper review',
     ],
-    conditionsTreated: ['Medical weight loss', 'Obesity', 'Metabolic health', 'GLP-1 therapy'],
+    conditionsTreated: [
+      'Adult ADHD',
+      "Women's health",
+      'Medical weight loss',
+      'Obesity',
+      'Metabolic health',
+      'GLP-1 therapy',
+      'Telehealth primary care',
+    ],
     services: [
+      { label: 'ADHD evaluation & care', path: '/adhd-care' },
+      { label: "Women's health", path: '/womens-health' },
       { label: 'Medical weight loss', path: '/weight-loss-metabolic-health' },
+      { label: 'Primary telehealth', path: '/primary-urgent-care' },
       { label: 'Telehealth', path: '/telehealth' },
     ],
     languages: ['English'],
@@ -295,58 +310,70 @@ export const ADDITIONAL_PROVIDERS = [
     fellowship: null,
     professionalMemberships: [],
     carePhilosophy: [
-      'Weight care works when patients feel <strong>supported, not judged</strong>—clear education, collaborative goal-setting, and follow-up that respects your time.',
-      'I emphasize telehealth-friendly structure: know what to expect from GLP-1 therapy, how to manage side effects, and when to reach out between visits.',
+      'I’m a <strong>generalist by design</strong>—ADHD, women’s health, weight, and everyday telehealth concerns often travel together, and patients shouldn’t have to restart their story with every visit.',
+      'Care works when you feel <strong>supported, not judged</strong>: clear education, collaborative goal-setting, honest scope boundaries, and physician supervision per state law.',
     ],
     shortBio:
-      'I’m Wendy Delgado, PA-C. I support adults in California through telehealth weight-loss visits—with a focus on GLP-1 education, metabolic monitoring, and collaborative patient support.',
+      'I’m Wendy Delgado, PA-C. I support adults in California, Texas, Pennsylvania, and Florida through telehealth—adult ADHD, women’s health, medical weight loss, and primary care questions—with collaborative follow-up inside Siya’s physician-led model.',
     longBio: [
-      'I trained at <strong>Western University of Health Sciences</strong> and maintain NCCPA certification, with experience spanning weight management, aesthetics-adjacent wellness, and allergy/asthma contexts that inform how I think about inflammation and lifestyle.',
-      'At Siya, I help California patients navigate <strong>medical weight loss</strong> programs with honest scope-of-practice boundaries and physician supervision per state law.',
+      'I trained at <strong>Western University of Health Sciences</strong> and maintain NCCPA certification, with experience across telemedicine, urgent care, weight management, allergy/asthma, and wellness contexts that shape how I think about whole-person care.',
+      'At Siya, I help patients in <strong>California, Texas, Pennsylvania, and Florida</strong> with <strong>adult ADHD</strong>, <strong>women’s health</strong>, <strong>medical weight loss</strong>, and telehealth primary care—always with honest scope-of-practice boundaries and physician supervision per state law.',
     ],
     patientFit: {
-      deck: 'California adults starting or continuing medical weight loss via telehealth',
+      deck: 'Adults in CA, TX, PA, and FL who want one telehealth clinician for ADHD, women’s health, weight, or primary care questions',
       bullets: [
-        '<strong>GLP-1 patient education</strong>—food noise, nausea, and titration explained plainly.',
-        '<strong>Collaborative support</strong>—you stay in the driver’s seat; I help with the clinical roadmap.',
-        '<strong>Physician-supervised practice</strong>—PA care under California supervision requirements.',
+        '<strong>Generalist telehealth</strong>—ADHD, women’s health, metabolic care, and everyday questions in one relationship.',
+        '<strong>Clear education</strong>—what to expect from evaluation, medications when appropriate, and when to escalate.',
+        '<strong>Physician-supervised practice</strong>—PA care under state supervision requirements.',
       ],
       sectionTitle: 'Why patients choose Wendy Delgado',
     },
     whatToExpect: [
-      { title: 'First telehealth visit', text: 'California eligibility, goals, and medication questions.' },
-      { title: 'Intake', text: 'history and labs when required for GLP-1 or metabolic therapy.' },
-      { title: 'Education visit', text: 'side effects, lifestyle context, and monitoring schedule.' },
-      { title: 'Follow-up', text: 'titration support and escalation when symptoms need clinician review.' },
+      { title: 'First telehealth visit', text: 'Eligibility, goals, and the right pathway for your licensed state—ADHD, women’s health, weight, or primary care.' },
+      { title: 'Intake', text: 'History and labs when required for evaluation, GLP-1, or metabolic therapy.' },
+      { title: 'Plan visit', text: 'Education, monitoring schedule, and next steps you can actually follow.' },
+      { title: 'Follow-up', text: 'Titration support, symptom review, and escalation when you need clinician review.' },
     ],
     trustCards: [
       { title: 'Credentials', text: 'NCCPA-certified Physician Associate; Western University PA program (2007–2009).' },
-      { title: 'States licensed', text: 'Telehealth where eligible: <strong>California</strong>—confirm at scheduling.' },
-      { title: 'Supervision', text: 'Practice under physician supervision per California law.' },
+      {
+        title: 'States licensed',
+        text: 'Telehealth where eligible: <strong>California</strong>, <strong>Texas</strong>, <strong>Pennsylvania</strong>, and <strong>Florida</strong>—confirm at scheduling.',
+      },
+      { title: 'Supervision', text: 'Practice under physician supervision per state law.' },
     ],
     testimonials: [],
     relatedLinksHtml:
-      'Explore: <a href="/answers/what-is-food-noise">what is food noise</a>, <a href="/answers/glp-1-side-effects">GLP-1 side effects</a>.',
+      'Explore: <a href="/adhd-care">ADHD care</a>, <a href="/womens-health">women’s health</a>, <a href="/weight-loss-metabolic-health">medical weight loss</a>, <a href="/answers/what-is-food-noise">what is food noise</a>.',
     inlineCtas: [
-      { label: 'Medical weight loss', path: '/weight-loss-metabolic-health', primary: true },
-      { label: 'Browse weight guides', path: '/answers', primary: false },
+      { label: 'ADHD evaluation & care', path: '/adhd-care', primary: true },
+      { label: 'Medical weight loss', path: '/weight-loss-metabolic-health', primary: false },
+      { label: "Women's health", path: '/womens-health', primary: false },
     ],
     finalCta: {
-      title: 'Take the next step in medical weight loss',
-      subtitle: 'Start Secure Medical Chat to confirm California eligibility and your care plan.',
+      title: 'Take the next step in telehealth care',
+      subtitle: 'Start Secure Medical Chat to confirm state eligibility and the right care pathway.',
     },
     disclaimer:
-      'This page is educational. Medical weight loss treatment requires individual evaluation. PA scope and prescribing follow California law and supervising physician protocols.',
+      'This page is educational. ADHD evaluation, women’s health, medical weight loss, and primary care treatment require individual clinical assessment. PA scope and prescribing follow state law and supervising physician protocols.',
     telehealthDisclaimer: null,
     bookingLink: BOOKING_LINK,
     profileLastUpdated: PROFILE_LAST_UPDATED,
     reviewedContent: [],
     authoredContent: [],
     schema: {
-      medicalSpecialty: ['Obesity Medicine', 'Family Medicine'],
-      knowsAbout: ['Medical weight loss', 'Obesity', 'Metabolic health', 'GLP-1 therapy'],
+      medicalSpecialty: ['Family Medicine', 'Obesity Medicine', 'Adult ADHD', "Women's Health"],
+      knowsAbout: [
+        'Adult ADHD',
+        "Women's health",
+        'Medical weight loss',
+        'Obesity',
+        'Metabolic health',
+        'GLP-1 therapy',
+        'Telehealth primary care',
+      ],
     },
     claimsNeedingVerification: [],
-    showScreeningCta: false,
+    showScreeningCta: true,
   },
 ];

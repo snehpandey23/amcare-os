@@ -1,5 +1,7 @@
 # X / Twitter — WL-G-01
 
-1/ Semaglutide isn't
-2/ Before starting, ask about contraindications — and plan protein + resistance training if prescribed a GLP-1.
-3/ https://siya.health/blog/semaglutide-for-weight-loss-how-it-works
+Semaglutide ≠ a willpower hack.
+
+It changes hunger signals — and still won’t replace protein, strength training, or follow-ups. Talk with your clinician. Educational only.
+
+siya.health

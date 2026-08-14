@@ -21,7 +21,7 @@ export function WorkplaceLinksPanel({ className = "" }: { className?: string }) 
 
   return (
     <section
-      className={`rounded-2xl border border-[var(--siya-border)] bg-white/90 p-5 shadow-[var(--siya-shadow)] ${className}`}
+      className={`rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)]/90 p-5 shadow-[var(--siya-shadow)] ${className}`}
     >
       <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Workplace links</h2>
       <p className="mt-1 text-[11px] text-[var(--siya-text-muted)]">

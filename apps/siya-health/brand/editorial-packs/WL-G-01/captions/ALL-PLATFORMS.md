@@ -1,77 +1,64 @@
-# ALL PLATFORMS — WL-G-01
+# Captions — WL-G-01 · Semaglutide isn’t a willpower hack.
+
+Company voice only. Educational only. Not personal medical advice.
+
+---
 
 ## Instagram
-# Instagram — WL-G-01
 
-## Caption
+Semaglutide isn’t a willpower hack.
 
-Semaglutide isn't
+It changes hunger and fullness signals — pathways that affect appetite, stomach emptying, and reward / food cues.
 
-Before starting, ask about contraindications — and plan protein + resistance training if prescribed a GLP-1.
+What it won’t replace: protein intake, strength training, and follow-ups + consistency. Treatment doesn’t replace showing up.
 
-Read: https://siya.health/blog/semaglutide-for-weight-loss-how-it-works
+Who should be cautious: some medical conditions or medications change whether treatment is right. Suitability depends on your health history — check with your clinician.
 
-Educational only. Not a diagnosis.
+Practical step: talk with your clinician about whether treatment fits your personal risk. If starting, protect protein and strength training.
 
-## Hashtags
-#SiyaHealth #SystemsMedicine #HealthEducation
+Read more: siya.health/blog/semaglutide-for-weight-loss-how-it-works
+Weight care: siya.health/weight-loss-metabolic-health
 
+#Semaglutide #GLP1 #WeightLoss #MetabolicHealth #SiyaHealth #EducationalOnly
+
+---
 
 ## Facebook
-# Facebook — WL-G-01
 
-How semaglutide actually works
+Semaglutide isn’t a willpower hack — it changes hunger and fullness signals.
 
-Before starting, ask about contraindications — and plan protein + resistance training if prescribed a GLP-1.
+It won’t replace protein, strength training, or follow-up consistency. Some conditions or medications change whether treatment is right — talk with your clinician about your personal risk. If starting, protect protein and muscle.
 
-https://siya.health/blog/semaglutide-for-weight-loss-how-it-works
+Educational only. siya.health/blog/semaglutide-for-weight-loss-how-it-works
 
-Educational only · Not medical advice
+---
 
+## LinkedIn (Company only)
 
-## LinkedIn Company
-# LinkedIn Company — WL-G-01
+Public conversation often frames GLP-1 medicines as willpower shortcuts. Semaglutide acts on hunger and fullness pathways — appetite, gastric emptying, and food-reward cues — and still does not replace protein intake, strength training, or clinical follow-up.
 
-How semaglutide actually works
+Suitability depends on individual history, conditions, and medications. Patients should discuss personal risk with a clinician; if prescribed, plan protein and resistance training deliberately.
 
-Before starting, ask about contraindications — and plan protein + resistance training if prescribed a GLP-1.
+Educational content. Not a substitute for individualized medical advice.
 
-https://siya.health/blog/semaglutide-for-weight-loss-how-it-works
+siya.health
 
-Educational only.
+---
 
+## X / Twitter
 
-## LinkedIn Founder
-# LinkedIn Founder — WL-G-01
+Semaglutide ≠ a willpower hack.
 
-**No CTA**
+It changes hunger signals — and still won’t replace protein, strength training, or follow-ups. Talk with your clinician. Educational only.
 
-I've been thinking about this clinically:
+siya.health
 
-How semaglutide actually works
-
-Before starting, ask about contraindications — and plan protein + resistance training if prescribed a GLP-1.
-
-Educational reflection only. Not advice for any individual.
-
-
-## X
-# X / Twitter — WL-G-01
-
-1/ Semaglutide isn't
-2/ Before starting, ask about contraindications — and plan protein + resistance training if prescribed a GLP-1.
-3/ https://siya.health/blog/semaglutide-for-weight-loss-how-it-works
-
+---
 
 ## Pinterest
-# Pinterest — WL-G-01
 
-## Pin title
-How semaglutide actually works
+Semaglutide isn’t a willpower hack.
 
-## Pin description
-Before starting, ask about contraindications — and plan protein + resistance training if prescribed a GLP-1. Educational from Siya Health. https://siya.health/blog/semaglutide-for-weight-loss-how-it-works
+Hunger signals · protein · strength · clinician check. Educational only.
 
-## URL
-https://siya.health/blog/semaglutide-for-weight-loss-how-it-works
-
+siya.health/blog/semaglutide-for-weight-loss-how-it-works

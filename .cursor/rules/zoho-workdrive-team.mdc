@@ -19,6 +19,7 @@ Whenever creating or updating **team-facing** Siya Health materials (editorial p
 | Tracker row + spreadsheet | `04-Content-Tracker/Siya-Content-Tracker.xlsx` |
 | Carousels (multi-slide) | `05-Carousels/[Insight-ID]/` |
 | Statics / banners / singles | `06-Statics/...` |
+| Video / reel prompts | `07-Video-Prompts/[Insight-ID]-video-prompt.md` (+ mirror in carousel pack) |
 | How-to | `03-START-HERE/` |
 
 ## Required habit
@@ -36,6 +37,17 @@ Ship platform-specific caption docs **alongside images**:
 `05-Carousels/[ID]/captions/` and `ready-to-post/captions/`
 Include: Instagram, Facebook, **LinkedIn Company only**, X/Twitter, Pinterest.
 Also include `ALL-PLATFORMS.md` for one-file copy-paste.
+
+## Video prompts (required with every carousel / post idea)
+
+If we create **N** carousels/ideas, create **N** video prompt docs:
+
+```text
+07-Video-Prompts/[Insight-ID]-video-prompt.md
+05-Carousels/[Insight-ID]/video-prompt.md
+```
+
+Create in the same session as the carousel plan, even if the reel is produced later.
 
 **Do not produce Founder LinkedIn (Dr. Sneh / Dr. Swati) posts** unless explicitly requested.
 Company voice across platforms. Audience-specific angles belong in the creative.

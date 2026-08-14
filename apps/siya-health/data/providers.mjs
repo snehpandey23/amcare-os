@@ -146,8 +146,8 @@ export const PROVIDERS = [
     credentials: ['MD'],
     photo: 'assets/images/dr-natasha-desai.png',
     altText: 'Dr. Natasha Desai, MD',
-    statesLicensed: ['Texas', 'Florida'],
-    stateAbbreviations: ['TX', 'FL'],
+    statesLicensed: ['Texas', 'Pennsylvania', 'Florida'],
+    stateAbbreviations: ['TX', 'PA', 'FL'],
     licenses: [],
     boardCertifications: ['Family & Behavioral Medicine', 'ADHD-CCSP'],
     clinicalFocus: [
@@ -199,7 +199,7 @@ export const PROVIDERS = [
     ],
     trustCards: [
       { title: 'Training', text: 'Family medicine with behavioral medicine focus; ADHD-CCSP for structured ADHD care.' },
-      { title: 'States licensed', text: 'Telehealth where eligible: <strong>Texas</strong> and <strong>Florida</strong>—confirm when you book.' },
+      { title: 'States licensed', text: 'Telehealth where eligible: <strong>Texas</strong>, <strong>Florida</strong>, and <strong>Pennsylvania</strong>—confirm when you book.' },
       { title: 'Privacy', text: 'HIPAA-compliant visits; documentation you can use for pharmacies and continuity of care.' },
     ],
     testimonials: [
@@ -353,7 +353,14 @@ export function getAllProviders() {
 
 /** Service page → contracted provider slugs (clinical scope; state chips on cards). */
 export const SERVICE_PROVIDER_SLUGS = {
-  'adhd-care': ['dr-sneh-pandey', 'dr-vanessa-urbina', 'dr-natasha-desai', 'dr-swati-pandey', 'megan-wunderlich'],
+  'adhd-care': [
+    'dr-sneh-pandey',
+    'dr-vanessa-urbina',
+    'dr-natasha-desai',
+    'dr-swati-pandey',
+    'megan-wunderlich',
+    'wendy-delgado',
+  ],
   telehealth: [
     'dr-sneh-pandey',
     'dr-natasha-desai',
@@ -361,11 +368,12 @@ export const SERVICE_PROVIDER_SLUGS = {
     'dr-vanessa-urbina',
     'megan-wunderlich',
     'derek-timbs',
+    'wendy-delgado',
   ],
   'weight-loss-metabolic-health': ['dr-sneh-pandey', 'dr-vanessa-urbina', 'derek-timbs', 'wendy-delgado'],
-  'primary-urgent-care': ['dr-vanessa-urbina', 'dr-natasha-desai', 'dr-sneh-pandey'],
+  'primary-urgent-care': ['dr-vanessa-urbina', 'dr-natasha-desai', 'dr-sneh-pandey', 'wendy-delgado'],
   'mens-health-longevity': ['dr-sneh-pandey', 'derek-timbs'],
-  'womens-health': ['dr-swati-pandey', 'dr-vanessa-urbina', 'dr-natasha-desai'],
+  'womens-health': ['dr-swati-pandey', 'dr-vanessa-urbina', 'dr-natasha-desai', 'wendy-delgado'],
 };
 
 /** Hub filter keys → service page keys */
@@ -389,9 +397,11 @@ export function getProviderHubFilterTags(provider) {
     .map((s) => Object.entries(HUB_FILTER_SERVICE_MAP).find(([, v]) => v === s)?.[0])
     .filter(Boolean);
   const serviceStates = providerServiceStates(provider);
-  const states = serviceStates.map((name) => {
-    const i = provider.statesLicensed.indexOf(name);
-    return provider.stateAbbreviations[i] ?? name;
+  const states = sortedStateAbbreviations({
+    stateAbbreviations: serviceStates.map((name) => {
+      const i = provider.statesLicensed.indexOf(name);
+      return provider.stateAbbreviations[i] ?? name;
+    }),
   });
   return {
     states,
@@ -413,21 +423,31 @@ export function bookingLinkWithAttribution(providerSlug, surface = 'profile') {
   return `${BOOKING_LINK}${sep}utm_source=siya&utm_medium=provider&utm_campaign=${encodeURIComponent(providerSlug)}&utm_content=${encodeURIComponent(surface)}`;
 }
 
+/** Canonical public order for service states (matches site trust lines). */
+const STATE_ABBREV_ORDER = ['CA', 'TX', 'PA', 'FL'];
+
+/** Sorted license abbrevs for display + data-states (never truncate to "TX & more"). */
+export function sortedStateAbbreviations(provider) {
+  const abbrevs = [
+    ...(provider?.stateAbbreviations?.length
+      ? provider.stateAbbreviations
+      : provider?.statesLicensed || []),
+  ];
+  abbrevs.sort((a, b) => {
+    const ia = STATE_ABBREV_ORDER.indexOf(a);
+    const ib = STATE_ABBREV_ORDER.indexOf(b);
+    if (ia === -1 && ib === -1) return String(a).localeCompare(String(b));
+    if (ia === -1) return 1;
+    if (ib === -1) return -1;
+    return ia - ib;
+  });
+  return abbrevs;
+}
+
 export function stateChipLabel(provider) {
-  const pairs = (provider.statesLicensed || []).map((state, i) => ({
-    state,
-    abbrev: provider.stateAbbreviations?.[i] ?? state,
-  }));
-  const serviceAbbrevs = pairs
-    .filter(({ state }) => AVAILABLE_SERVICE_STATES.includes(state))
-    .map(({ abbrev }) => abbrev);
-  const licenseOnlyAbbrevs = pairs
-    .filter(({ state }) => !AVAILABLE_SERVICE_STATES.includes(state))
-    .map(({ abbrev }) => abbrev);
-  if (licenseOnlyAbbrevs.length && serviceAbbrevs.length) {
-    return `${serviceAbbrevs.join(', ')} (${licenseOnlyAbbrevs.join(', ')} license only)`;
-  }
-  return provider.stateAbbreviations.join(', ');
+  // Public abbrev list = all licensed states (e.g. TX, OH).
+  // Service footprint (where Siya books telehealth) stays in providerServiceStates().
+  return sortedStateAbbreviations(provider).join(', ');
 }
 
 /** Siya Healthcare, PLLC service footprint — excludes license-only states (e.g. OH on Derek). */

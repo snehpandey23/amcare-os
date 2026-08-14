@@ -1,6 +1,6 @@
 import { generateObject } from 'ai'
 import { z } from 'zod'
-import { ALLOWED_LINK_IDS, resolveLinks } from './link-registry'
+import { ALLOWED_LINK_IDS, resolveLinks, LINK_REGISTRY } from './link-registry'
 import { isStrongPageHit, linksFromRetrieval, publicPageLink } from './public-routes'
 import {
   classifyInputGuards,
@@ -18,13 +18,40 @@ import {
   resolveConversationalQuery,
 } from './clarify'
 import {
+  clinicalEscalationResponse,
   clinicalResponse,
   emergencyResponse,
   internalResponse,
   notFoundResponse,
+  outOfServiceStateResponse,
   privacyResponse,
 } from './templates'
+import {
+  linksForAnswer,
+  resolveAnswer,
+  type EntityAnswer,
+} from './entities'
+import {
+  isStateAvailabilityQuestion,
+  isSupportedServiceStateMention,
+  matchUnsupportedState,
+} from './service-states'
 import type { GuideResponse, RetrievedChunk } from './types'
+
+/**
+ * Siya Guide v1 runtime:
+ *
+ *   User message
+ *     → Safety and privacy filter
+ *     → Clarify (bounded)
+ *     → Public Knowledge API (entity resolve)
+ *     → Approved answer blocks + registry CTAs
+ *     → Navigation intents / public-kb fallback (bounded)
+ *     → Response
+ *
+ * The model may phrase when explicitly opted in. It does not choose clinical
+ * routing, canonical ownership, or CTAs.
+ */
 
 const ResponseSchema = z.object({
   state: z.enum(['verified', 'ambiguous', 'not_found', 'restricted']),
@@ -45,27 +72,65 @@ function citationsFromChunks(chunks: RetrievedChunk[]) {
   return out
 }
 
+/** Render a Public Knowledge API answer into a Guide response. */
+export function responseFromEntityAnswer(answer: EntityAnswer): GuideResponse {
+  const blocks = answer.approved_answer_blocks.map((b) => b.text).filter(Boolean)
+  const message =
+    blocks.join(' ') ||
+    `${answer.name} is covered on Siya Health’s published resources. Open the canonical page for the full guide.`
+
+  const canonical = LINK_REGISTRY[answer.entity]
+    ? { id: answer.entity, label: LINK_REGISTRY[answer.entity].label, url: LINK_REGISTRY[answer.entity].url }
+    : { id: answer.entity, label: answer.name, url: answer.canonical_url }
+
+  const links = linksForAnswer(answer, 3)
+  const followUp =
+    answer.intent === 'symptom'
+      ? 'Want the fatigue guide, primary care, or a Meet & Greet?'
+      : answer.intent === 'screening'
+        ? 'Ready to take the screening, or prefer ADHD care / pricing first?'
+        : 'Want the canonical page, a related guide, or a Meet & Greet?'
+
+  return {
+    state: 'verified',
+    message: scrubOutputText(message),
+    followUp,
+    links,
+    citations: [canonical].filter((l) => Boolean(l.url)),
+    refusalCategory: 'none',
+    entity: answer.entity,
+    intent: answer.intent,
+    care_pathway: answer.care_pathway,
+    safety_class: answer.safety_class,
+    primary_cta_id: answer.primary_cta.id,
+    analyticsEvent: 'entity_resolved',
+  }
+}
+
 function fromRetrievalFallback(chunks: RetrievedChunk[], query: string): GuideResponse {
   if (!hasConfidentRetrieval(chunks)) return notFoundResponse()
 
   const top = chunks[0]
   const pageLinks = linksFromRetrieval(chunks, { extras: ['meet_and_greet'], limit: 3 })
 
-  // Weak / contested matches → ask, don’t guess
   const contested =
     chunks.length >= 2 &&
     Math.abs(chunks[0].score - chunks[1].score) < 2.5 &&
     !isStrongPageHit(chunks)
 
-  if (contested || (chunks[0].score < 8 && (isIncompleteStub(query) || query.trim().split(/\s+/).length <= 1))) {
-    const optionLinks = linksFromRetrieval(chunks.slice(0, 3), { extras: [], limit: 3 })
-    return clarifyResponse({
-      message:
-        'I don’t want to guess — a few public pages might be related. Which is closest to what you meant?',
-      followUp: 'Or type a fuller phrase (for example “check testosterone” or “TSH labs”).',
-      chunks: chunks.slice(0, 3),
-      linkIds: optionLinks.length ? undefined : ['labs', 'mens_health', 'meet_and_greet'],
-    })
+  // Mid-confidence or contested → clarify or not-found — never bluff a verified answer.
+  if (contested || chunks[0].score < 10) {
+    if (chunks[0].score >= 8 && (contested || isIncompleteStub(query) || query.trim().split(/\s+/).length <= 2)) {
+      const optionLinks = linksFromRetrieval(chunks.slice(0, 3), { extras: [], limit: 3 })
+      return clarifyResponse({
+        message:
+          "I don't want to guess — a few public pages might be related. Which is closest to what you meant?",
+        followUp: 'Or type a fuller phrase (for example “ADHD pricing” or “labs in Texas”).',
+        chunks: chunks.slice(0, 3),
+        linkIds: optionLinks.length ? undefined : ['meet_and_greet', 'call_siya', 'pricing'],
+      })
+    }
+    return notFoundResponse()
   }
 
   if (
@@ -91,11 +156,13 @@ function fromRetrievalFallback(chunks: RetrievedChunk[], query: string): GuideRe
     links: pageLinks,
     citations: citationsFromChunks([top]),
     refusalCategory: 'none',
+    safety_class: 'navigation',
+    analyticsEvent: 'entity_fallback',
   }
 }
 
 async function llmGroundedAnswer(userText: string, chunks: RetrievedChunk[]): Promise<GuideResponse | null> {
-  // Default: retrieval-only. Enable LLM only with SIYA_GUIDE_DETERMINISTIC=0 (explicit opt-in).
+  // Default: deterministic. Enable LLM only with SIYA_GUIDE_DETERMINISTIC=0.
   if (!hasLiveModel() || process.env.SIYA_GUIDE_DETERMINISTIC !== '0') return null
   if (!hasConfidentRetrieval(chunks)) return null
 
@@ -115,6 +182,7 @@ async function llmGroundedAnswer(userText: string, chunks: RetrievedChunk[]): Pr
         '',
         'If the visitor message is incomplete or ambiguous, set state=ambiguous and ask a short clarifying question.',
         'Answer using only APPROVED SOURCES. If insufficient, use state=not_found.',
+        'Do not invent clinical advice, doses, diagnoses, or URLs.',
       ].join('\n'),
       temperature: 0.2,
       maxOutputTokens: 350,
@@ -147,6 +215,8 @@ async function llmGroundedAnswer(userText: string, chunks: RetrievedChunk[]): Pr
       links: links.length ? links : fromRetrievalFallback(chunks, userText).links,
       citations,
       refusalCategory: object.state === 'restricted' ? 'unsupported' : 'none',
+      safety_class: object.state === 'restricted' ? 'restricted' : 'navigation',
+      analyticsEvent: 'entity_fallback',
     }
   } catch (err) {
     console.error('[siya-guide] llm failed, using retrieval fallback', err)
@@ -158,19 +228,23 @@ export async function runSiyaGuide(
   userText: string,
   context: ConversationContext = {},
 ): Promise<GuideResponse> {
+  // 1. Safety and privacy filter (code-controlled)
   const guard = classifyInputGuards(userText)
   if (guard.kind === 'blocked') {
     if (guard.category === 'emergency') return emergencyResponse()
     if (guard.category === 'phi') return privacyResponse()
     if (guard.category === 'injection' || guard.category === 'internal') return internalResponse()
     if (guard.category === 'clinical') {
+      if (/\b(increase|decrease|change|stop|taper|dose|mg|medication)\b/i.test(userText)) {
+        return clinicalEscalationResponse()
+      }
       if (/adderall|vyvanse|ritalin|stimulant|prescribe/i.test(userText)) {
         return {
-          ...clinicalResponse(['adhd_care', 'adhd_screening', 'meet_and_greet']),
+          ...clinicalResponse(['adhd_care', 'meet_and_greet', 'call_siya']),
           message:
             'Treatment decisions are made individually after an appropriate medical evaluation. I can’t confirm whether a particular medication would be prescribed.',
           followUp:
-            'I can show ADHD care info, the free screening, or a Meet & Greet. If you need a private clinical conversation before paying, ask me about Spruce messaging.',
+            'I can show ADHD care info or a Meet & Greet. For a private clinical conversation before paying, ask about Spruce messaging.',
         }
       }
       return clinicalResponse()
@@ -178,6 +252,7 @@ export async function runSiyaGuide(
     return notFoundResponse()
   }
 
+  // 2. Bounded clarify for stubs / follow-ups
   const conversational = resolveConversationalQuery(userText, context)
   if (conversational.kind === 'clarify') {
     return conversational.response
@@ -185,9 +260,32 @@ export async function runSiyaGuide(
 
   const query = conversational.query
 
-  const intent = matchDeterministicIntent(query)
-  if (intent) return intent.response
+  // 3. Out-of-service states — before entity/intent so NY etc. never get the CA/TX/PA/FL blurb.
+  const unsupported = matchUnsupportedState(query)
+  if (
+    unsupported &&
+    (!isSupportedServiceStateMention(query) || isStateAvailabilityQuestion(query))
+  ) {
+    return outOfServiceStateResponse(unsupported.name)
+  }
 
+  // 4. Public Knowledge API — entity resolve (source of truth for routing + CTA)
+  const entityAnswer = resolveAnswer(query)
+  if (entityAnswer) {
+    return responseFromEntityAnswer(entityAnswer)
+  }
+
+  // 5. Navigation intents (still registry-backed; do not invent URLs)
+  const intent = matchDeterministicIntent(query)
+  if (intent) {
+    return {
+      ...intent.response,
+      safety_class: intent.response.safety_class ?? 'navigation',
+      analyticsEvent: intent.response.analyticsEvent ?? 'entity_fallback',
+    }
+  }
+
+  // 6. Bounded public-kb retrieval (approved summaries only — never scrape HTML)
   const chunks = retrievePublicKnowledge(query, 5)
   const llm = await llmGroundedAnswer(query, chunks)
   if (llm) return llm

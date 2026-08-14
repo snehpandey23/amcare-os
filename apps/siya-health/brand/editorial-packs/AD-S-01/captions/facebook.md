@@ -1,9 +1,7 @@
 # Facebook — AD-S-01
 
-You're not lazy — overlooked adult ADHD
+You’re not lazy. Overlooked adult ADHD can look like constant effort with uneven results.
 
-Take a validated ADHD screener — then talk to a clinician if the pattern is lifelong.
+Recognition matters. A validated screener is a starting point — talk to a clinician if the pattern is lifelong.
 
-https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd
-
-Educational only · Not medical advice
+Educational only. siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd

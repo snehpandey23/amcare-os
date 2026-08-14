@@ -1,77 +1,70 @@
 # ALL PLATFORMS — AD-W-01
 
 ## Instagram
-# Instagram — AD-W-01
+ADHD in women gets missed.
 
-## Caption
+Sometimes the label becomes anxiety, personality, or “too emotional.” Overlap is real — impulsivity, rejection sensitivity, mood swings, relationship friction — and BPD and ADHD can co-occur or be mistaken for each other.
 
-ADHD in women
+Clinicians ask different questions: When did this start? Has this always been present — or is it mainly a relationship-crisis pattern?
 
-If mood labels never quite fit, ask your clinician about lifelong ADHD history — don't self-diagnose BPD vs ADHD from social media.
+Practical steps: bring a lifelong timeline to share your full history with your provider. If the labels never fit, ask whether ADHD screening is available.
 
-Read: https://siya.health/blog/adhd-hormones-women
+Read more: siya.health/blog/adhd-hormones-women
+ADHD care: siya.health/adhd-care
 
-Educational only. Not a diagnosis.
+Educational only. Not a diagnosis. Don’t self-diagnose BPD vs ADHD from social media.
 
-## Hashtags
-#SiyaHealth #SystemsMedicine #HealthEducation
+#AdultADHD #ADHDInWomen #WomensHealth #SiyaHealth #EducationalOnly
 
+---
 
 ## Facebook
-# Facebook — AD-W-01
+ADHD in women gets missed.
 
-Women: ADHD often missed as anxiety or BPD-like labels
+Mood or personality labels can sit on top of lifelong attention patterns. Overlap is real — and BPD and ADHD can co-occur or be mistaken for each other.
 
-If mood labels never quite fit, ask your clinician about lifelong ADHD history — don't self-diagnose BPD vs ADHD from social media.
+Questions clinicians ask: When did this start? Has this always been present — or is it mainly a relationship-crisis pattern?
+
+Bring a lifelong timeline to your visit. If the labels never fit, ask whether ADHD screening is available.
 
 https://siya.health/blog/adhd-hormones-women
 
 Educational only · Not medical advice
 
+---
 
 ## LinkedIn Company
-# LinkedIn Company — AD-W-01
+ADHD in women gets missed.
 
-Women: ADHD often missed as anxiety or BPD-like labels
+Sometimes the working label becomes anxiety, personality, or “too emotional.” Overlap symptoms are real — and BPD and ADHD can co-occur or be mistaken for each other.
 
-If mood labels never quite fit, ask your clinician about lifelong ADHD history — don't self-diagnose BPD vs ADHD from social media.
+Clinicians separate stories with timeline questions: When did this start? Has this always been present — or is it mainly a relationship-crisis pattern?
+
+Practical next step: bring a lifelong timeline to share your full history. If the labels never fit, ask whether ADHD screening is available.
 
 https://siya.health/blog/adhd-hormones-women
 
-Educational only.
+Educational only. Not a diagnosis.
 
+---
 
 ## LinkedIn Founder
-# LinkedIn Founder — AD-W-01
+Deferred — company voice only for this pack.
 
-**No CTA**
+---
 
-I've been thinking about this clinically:
+## X / Twitter
+1/ ADHD in women gets missed — sometimes the label becomes anxiety, personality, or “too emotional.”
 
-Women: ADHD often missed as anxiety or BPD-like labels
+2/ Overlap is real. BPD and ADHD can co-occur — or one can be mistaken for the other. Clinicians ask: lifelong pattern, or mainly relationship-crisis?
 
-If mood labels never quite fit, ask your clinician about lifelong ADHD history — don't self-diagnose BPD vs ADHD from social media.
+3/ Bring a lifelong timeline. If labels never fit, ask about ADHD screening. https://siya.health/blog/adhd-hormones-women
 
-Educational reflection only. Not advice for any individual.
-
-
-## X
-# X / Twitter — AD-W-01
-
-1/ ADHD in women
-2/ If mood labels never quite fit, ask your clinician about lifelong ADHD history — don't self-diagnose BPD vs ADHD from social media.
-3/ https://siya.health/blog/adhd-hormones-women
-
+---
 
 ## Pinterest
-# Pinterest — AD-W-01
+**Title:** ADHD in women gets missed
 
-## Pin title
-Women: ADHD often missed as anxiety or BPD-like labels
+**Description:** Sometimes the label becomes anxiety, personality, or “too emotional.” Bring a lifelong timeline to your visit — and ask about ADHD screening if labels never fit. Educational from Siya Health. https://siya.health/blog/adhd-hormones-women
 
-## Pin description
-If mood labels never quite fit, ask your clinician about lifelong ADHD history — don't self-diagnose BPD vs ADHD from social media. Educational from Siya Health. https://siya.health/blog/adhd-hormones-women
-
-## URL
-https://siya.health/blog/adhd-hormones-women
-
+**URL:** https://siya.health/blog/adhd-hormones-women

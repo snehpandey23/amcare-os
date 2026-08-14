@@ -4,6 +4,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": ".",
   "installCommand": "echo 'No install needed'",
+  "ignoreCommand": "bash ../../scripts/vercel/should-build-siya-health.sh",
   "redirects": [
     {
       "source": "/terms",
@@ -131,11 +132,6 @@
       "permanent": true
     },
     {
-      "source": "/blog/focalin-vs-adderall-comparison",
-      "destination": "/blog/vyvanse-vs-adderall-differences",
-      "permanent": true
-    },
-    {
       "source": "/blog/long-term-weight-loss-medications-what-to-expect",
       "destination": "/blog/semaglutide-for-weight-loss-how-it-works",
       "permanent": true
@@ -236,18 +232,13 @@
       "permanent": true
     },
     {
-      "source": "/siya-circle",
-      "destination": "https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl",
-      "permanent": false
-    },
-    {
       "source": "/blog/adhd-treatment-los-angeles-ca",
       "destination": "/adult-adhd-california",
       "permanent": true
     },
     {
       "source": "/blog/adhd-treatment-san-diego-ca",
-      "destination": "/adult-adhd-california",
+      "destination": "/adhd-care/san-diego",
       "permanent": true
     },
     {
@@ -302,12 +293,12 @@
     },
     {
       "source": "/blog/adhd-treatment-miami-fl",
-      "destination": "/adhd-care",
+      "destination": "/adhd-care/miami",
       "permanent": true
     },
     {
       "source": "/blog/adhd-treatment-orlando-fl",
-      "destination": "/adhd-care",
+      "destination": "/adhd-care/orlando",
       "permanent": true
     },
     {
@@ -327,18 +318,57 @@
     },
     {
       "source": "/adhd-diagnosis-philadelphia",
-      "destination": "/adhd-care",
-      "permanent": true
-    },
-    {
-      "source": "/adhd-diagnosis-pennsylvania",
-      "destination": "/adhd-care",
+      "destination": "/adhd-diagnosis-pennsylvania",
       "permanent": true
     },
     {
       "source": "/blog/why-am-i-always-tired-causes-when-to-see-doctor",
       "destination": "/fatigue",
       "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "adhd.siya.health"
+        }
+      ],
+      "destination": "https://www.siya.health/adhd-care",
+      "statusCode": 301
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "adhd.siya.health"
+        }
+      ],
+      "destination": "https://www.siya.health/adhd-care",
+      "statusCode": 301
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "getfit.siya.health"
+        }
+      ],
+      "destination": "https://www.siya.health/weight-loss-metabolic-health",
+      "statusCode": 301
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "getfit.siya.health"
+        }
+      ],
+      "destination": "https://www.siya.health/weight-loss-metabolic-health",
+      "statusCode": 301
     },
     {
       "source": "/(.*)",
@@ -349,7 +379,7 @@
         }
       ],
       "destination": "https://www.siya.health/$1",
-      "permanent": true
+      "statusCode": 301
     }
   ]
 }

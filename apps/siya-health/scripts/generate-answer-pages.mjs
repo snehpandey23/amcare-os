@@ -27,11 +27,19 @@ import {
   resolveAnswerReviewRecord,
   REVIEW_STATUS,
 } from './clinical-entity.mjs';
+import { contentLastModifiedIso } from './content-lastmod.mjs';
 import { COPY_STANDARDS, FOOTER_STATES_LINE } from '../data/site-standards.mjs';
 import { buildHealthGuideEngagement } from './answer-engagement-system.mjs';
-import { renderContextAwareClosing, primaryJourneyForTopic } from './content-assembly.mjs';
+import { renderContextAwareClosing, primaryJourneyForTopic, ADHD_MED_FAQ_DUAL_CTA_SLUGS } from './content-assembly.mjs';
 import { BOOKING_LINK } from '../data/providers-core.mjs';
-import { MEET_GREET_URL, NAV_HEALTH_GUIDES } from './site-chrome.mjs';
+import {
+  MEET_GREET_URL,
+  NAV_HEALTH_GUIDES,
+  injectCookieConsentBootstrap,
+  injectCookieNotice,
+  injectGtmAndTracking,
+} from './site-chrome.mjs';
+import { TRACKING, GTM_DEV_HOST_GUARD } from '../data/tracking-config.mjs';
 import { renderNavCtaMarkup, renderButton, slotToButton, resolveConversion } from '../design-system/components.mjs';
 import { ANSWER_DIAGRAM_EMBEDS, renderDiagramFigure } from '../data/visual-diagrams.mjs';
 import { SIYA_CIRCLE_PROMO_HTML } from '../data/siya-circle-config.mjs';
@@ -44,32 +52,97 @@ const HEALTH_GUIDE_CATEGORIES = [
     label: 'Metabolic Health',
     blurb: 'GLP-1, insulin resistance, food noise, and medical weight loss.',
     carePath: '/weight-loss-metabolic-health',
+    carePathLabel: 'Explore Metabolic Health',
   },
   {
     id: 'energy',
     label: 'Energy & Fatigue',
     blurb: 'Sleep, burnout, and why rest does not always restore energy.',
-    carePath: '/telehealth',
+    carePath: '/fatigue',
+    carePathLabel: 'Explore Fatigue Care',
   },
   {
     id: 'hormone',
     label: 'Hormone Health',
     blurb: 'Testosterone, men\'s health, hair loss, and related telehealth care.',
     carePath: '/mens-health-longevity',
+    carePathLabel: "Explore Men's Health",
   },
   {
     id: 'adhd',
     label: 'ADHD & Focus',
     blurb: 'Evaluation, medication, screening, and adult ADHD education.',
     carePath: '/adhd-care',
+    carePathLabel: 'Explore ADHD Care',
   },
   {
     id: 'telehealth',
     label: 'Telehealth & Care',
     blurb: 'How online care works, telehealth visits, prescriptions, and logistics.',
     carePath: '/telehealth',
+    carePathLabel: 'Explore Telehealth',
   },
 ];
+
+/** Homepage-aligned Care Journeys — recognition → entity hubs */
+const CARE_JOURNEY_PATHWAYS = [
+  {
+    href: '/fatigue',
+    title: 'I’m exhausted all the time',
+    blurb: 'Fatigue evaluation when rest doesn’t restore you.',
+    guide: '/answers/why-am-i-tired-even-after-sleeping',
+  },
+  {
+    href: '/brain-fog',
+    title: 'I’m dealing with brain fog',
+    blurb: 'Cloudy thinking, slow recall, hard-to-finish days.',
+    guide: '/answers/brain-fog-after-eating',
+  },
+  {
+    href: '/adhd-care',
+    title: 'I think I have ADHD',
+    blurb: 'Lifelong focus, organization, and follow-through patterns.',
+    guide: '/answers/signs-of-adult-adhd',
+  },
+  {
+    href: '/primary-care',
+    title: 'I want a primary care doctor',
+    blurb: 'Ongoing visits, refills, and a clinician who knows your story.',
+    guide: '/answers/meet-and-greet-telehealth-expectations',
+  },
+  {
+    href: '/preventive-care',
+    title: 'I want to improve my health',
+    blurb: 'Prevention, labs when appropriate, and staying ahead of problems.',
+    guide: '/answers/which-preventive-blood-tests-adults',
+  },
+  {
+    href: '/weight-loss-metabolic-health',
+    title: 'Weight or metabolism feels stuck',
+    blurb: 'Food noise, insulin resistance, appetite changes.',
+    guide: '/answers/what-is-insulin-resistance',
+  },
+];
+
+function careJourneysPathwayNavHtml() {
+  const cards = CARE_JOURNEY_PATHWAYS.map(
+    (p) => `            <article class="health-guides-pathway-card">
+              <h3><a href="${esc(p.href)}">${esc(p.title)}</a></h3>
+              <p>${esc(p.blurb)}</p>
+              <p class="health-guides-pathway-links"><a href="${esc(p.href)}">Care path →</a> · <a href="${esc(p.guide)}">Related guide →</a></p>
+            </article>`,
+  ).join('\n');
+  return `          <section class="health-guides-pathways" id="care-journeys" aria-labelledby="care-journeys-heading">
+            <div class="section-header">
+              <h2 id="care-journeys-heading">Care journeys</h2>
+              <p class="lead">Start with recognition—not a diagnosis. Each path leads into our care graph, then to guides that help you think the problem through.</p>
+            </div>
+            <div class="health-guides-pathway-grid">
+${cards}
+            </div>
+            <p class="symptoms-transition">Practical next steps: <a href="/answers/what-happens-after-adhd-evaluation">After an ADHD evaluation</a> · <a href="/answers/fsa-hsa-adhd-evaluation">FSA / HSA for evaluation</a> · <a href="/answers/adhd-workplace-accommodations">Workplace accommodations</a> · <a href="/pricing">Pricing journey</a></p>
+          </section>`;
+}
 
 /** Featured on hub (exactly 3 per category; remainder behind “View all”) */
 const FEATURED_BY_CATEGORY = {
@@ -179,24 +252,20 @@ function canonicalBlogFullHtml(seed) {
 }
 
 function headBlock(title, description, url, jsonLdScripts) {
+  // Tracking: Consent Mode bootstrap → GTM only (GA4/Ads live inside GTM).
+  // Do not install raw gtag('config') here — see TRACKING in data/tracking-config.mjs.
+  const gtmId = TRACKING.GTM_CONTAINER_ID;
   return `<!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <script src="/scripts/cookie-consent-bootstrap.js"></script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){${GTM_DEV_HOST_GUARD}w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PLBD4TTQ');</script>
-    <!-- End Google Tag Manager -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9WTQWHCTFT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-9WTQWHCTFT');
-  gtag('config', 'AW-17553537456');
-</script>
+})(window,document,'script','dataLayer','${gtmId}');</script>
+<!-- End Google Tag Manager -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="index, follow" />
@@ -208,6 +277,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;600;700&display=swap" rel="stylesheet" />
 ${jsonLdScripts}
   </head>`;
+}
+
+/** Match main-site chrome: consent bootstrap → GTM → cookie notice → siya-tracking */
+function finalizeAnswerHtml(html, relPath) {
+  html = injectCookieConsentBootstrap(html);
+  html = injectCookieNotice(html, relPath);
+  return injectGtmAndTracking(html, relPath);
 }
 
 function headerNav(topic = 'general', slug = 'index') {
@@ -324,6 +400,12 @@ function buildAnswerInternalLinksHtml(seed) {
   const relatedLis = links.relatedSlugs
     .map((slug) => `<li><a href="/answers/${slug}">${esc(guideLabel(slug))}</a></li>`)
     .join('\n                ');
+  const dualCare = ADHD_MED_FAQ_DUAL_CTA_SLUGS.has(seed.slug);
+  const careCol = dualCare
+    ? `<p><a class="answer-internal-links-primary" href="${links.landingPath}">${esc(links.landingLabel)}</a></p>
+                  <p><a href="/adhd-screening">Free ADHD screening</a></p>
+                  <p><a href="/redirect/meet-greet">Book free Meet &amp; Greet</a></p>`
+    : `<p><a class="answer-internal-links-primary" href="${links.landingPath}">${esc(links.landingLabel)}</a></p>`;
 
   return `            <section class="answer-internal-links" id="related-resources" aria-labelledby="answer-links-heading">
               <h2 id="answer-links-heading">Related resources</h2>
@@ -341,7 +423,7 @@ function buildAnswerInternalLinksHtml(seed) {
                 </div>
                 <div class="answer-internal-links-col">
                   <h3 class="answer-internal-links-col-title">Care</h3>
-                  <p><a class="answer-internal-links-primary" href="${links.landingPath}">${esc(links.landingLabel)}</a></p>
+                  ${careCol}
                 </div>
               </div>
             </section>
@@ -406,16 +488,16 @@ function buildLearnMoreHtml(seed) {
 }
 
 function buildFaqJson(seed) {
-  const bodyText = [
-    seed.shortAnswer,
-    ...(seed.paragraphs || []),
-    ...(seed.sections || []).flatMap((s) => [...(s.paragraphs || []), ...(s.listItems || [])]),
-  ].join(' ');
+  // First Answer = short extract only (matches on-page .answer-lead). Full-page blobs hurt AIO extraction.
+  const shortAnswer = String(seed.shortAnswer || '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 1000);
   const entities = [
     {
       '@type': 'Question',
       name: seed.question,
-      acceptedAnswer: { '@type': 'Answer', text: bodyText.slice(0, 5000) },
+      acceptedAnswer: { '@type': 'Answer', text: shortAnswer },
     },
   ];
   for (const faq of seed.faqs || []) {
@@ -466,13 +548,14 @@ function buildAnswerPage(seed) {
     relatedLabels,
   });
 
+  const answerRelForDate = `answers/${seed.slug}.html`;
   const medicalWebPage = {
     '@context': 'https://schema.org',
     '@type': 'MedicalWebPage',
     name: seed.question,
     description: seed.shortAnswer,
     url,
-    dateModified: reviewRecord.reviewDate || LAST_REVIEWED,
+    dateModified: reviewRecord.reviewDate || contentLastModifiedIso(answerRelForDate, LAST_REVIEWED),
     publisher: { '@type': 'MedicalOrganization', name: 'Siya Health', url: BASE },
     about: {
       '@type': 'MedicalCondition',
@@ -500,9 +583,6 @@ function buildAnswerPage(seed) {
 
   return `${headBlock(title, metaDesc, url, jsonLd)}
   <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PLBD4TTQ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 ${headerNav(seed.topic, seed.slug)}
     <main id="main">
       <article class="blog-article answer-page">
@@ -624,7 +704,7 @@ ${featureSlots}
             </div>
             <div class="health-guides-category-actions">
               ${rest.length > 0 ? `<a class="button secondary health-guides-view-all" href="#guides-${cat.id}-all" data-category="${cat.id}">View all ${esc(cat.label)} guides</a>` : ''}
-              <a class="health-guides-care-link" href="${cat.carePath}">${COPY_STANDARDS.secondaryCta} →</a>
+              <a class="health-guides-care-link" href="${cat.carePath}">${esc(cat.carePathLabel || 'Explore care')} →</a>
             </div>
             ${rest.length > 0 ? `<div class="health-guides-category-all" id="guides-${cat.id}-all" hidden>
               <h3 class="health-guides-category-all-heading">All ${esc(cat.label)} guides</h3>
@@ -687,7 +767,7 @@ ${headerNav()}
           <div class="section-header">
             <h1>Health Guides</h1>
             <p class="lead">Each guide answers one question with a short takeaway, a deeper explanation, cited evidence, and related topics—written for adults researching ADHD, metabolic health, hormones, fatigue, and telehealth. Educational only; not a substitute for care with your clinician.</p>
-            <p class="health-guides-hub-jump-links"><a href="#topic-cluster-explorer-heading">Topic clusters</a> · <a href="#guides-adhd">ADHD guides</a> · <a href="#guides-metabolic">Metabolic guides</a> · <a href="/blog/adhd">ADHD articles</a> · <a href="/adhd-care">ADHD care</a> · <a href="/adhd-screening">Free screening</a></p>
+            <p class="health-guides-hub-jump-links"><a href="#care-journeys">Care journeys</a> · <a href="#topic-cluster-explorer-heading">Topic clusters</a> · <a href="#guides-adhd">ADHD guides</a> · <a href="#guides-metabolic">Metabolic guides</a> · <a href="#guides-energy">Energy guides</a> · <a href="/pricing">Pricing</a></p>
           </div>
           <!-- SIYA:GUIDE-SEARCH -->
           <div class="blog-search" role="search" aria-labelledby="guide-search-label">
@@ -698,6 +778,7 @@ ${headerNav()}
           </div>
           <!-- /SIYA:GUIDE-SEARCH -->
 ${SIYA_CIRCLE_PROMO_HTML}
+${careJourneysPathwayNavHtml()}
 ${buildIndexClusterExplorerHtml()}
 ${renderAnswersHubCarePathwaysSection()}
           <div class="health-guides-hub-categories">
@@ -719,10 +800,16 @@ function main() {
   fs.mkdirSync(ANSWERS_DIR, { recursive: true });
   for (const seed of activeSeeds.map(applyCannibalizationOverrides)) {
     const out = path.join(ANSWERS_DIR, `${seed.slug}.html`);
-    fs.writeFileSync(out, applyPricingTokens(buildAnswerPage(seed)), 'utf8');
+    const relPath = `answers/${seed.slug}.html`;
+    const html = finalizeAnswerHtml(applyPricingTokens(buildAnswerPage(seed)), relPath);
+    fs.writeFileSync(out, html, 'utf8');
   }
-  fs.writeFileSync(path.join(ANSWERS_DIR, 'index.html'), applyPricingTokens(buildIndexPage()), 'utf8');
-  console.log('Wrote', activeSeeds.length, 'answer pages + answers/index.html');
+  const indexHtml = finalizeAnswerHtml(
+    applyPricingTokens(buildIndexPage()),
+    'answers/index.html',
+  );
+  fs.writeFileSync(path.join(ANSWERS_DIR, 'index.html'), indexHtml, 'utf8');
+  console.log('Wrote', activeSeeds.length, 'answer pages + answers/index.html (GTM + Consent Mode only)');
 }
 
 main();

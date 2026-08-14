@@ -16,6 +16,18 @@ Over time, also measure **product feel**: context switches per task (see below).
 
 ---
 
+## Five layers (release discipline)
+
+1. **Product configuration** — prompts, capabilities, access (see staff app + Custom GPT)  
+2. **Knowledge governance** — live-only compile, metadata, owners ([README](./README.md))  
+3. **Adversarial testing** — V4 red team ([`04-red-team-security.md`](./audits/04-red-team-security.md))  
+4. **Operational controls** — [DEPLOYMENT-GATE.md](../../apps/hipaa-training/docs/DEPLOYMENT-GATE.md), release levels, kill switch  
+5. **Continuous monitoring** — 👎 taxonomy, gaps, weekly review ([CONTINUOUS-MONITORING.md](../../apps/hipaa-training/docs/CONTINUOUS-MONITORING.md), `/trust` dashboard)
+
+Automated gate: `npm run gate:deploy -w @amcare/hipaa-training`
+
+---
+
 ## Dual score (report every audit)
 
 | Dimension | What it measures | Example (Jul 2026 baseline) |

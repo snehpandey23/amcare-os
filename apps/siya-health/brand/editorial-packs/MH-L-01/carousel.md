@@ -1,73 +1,25 @@
-# Instagram Carousel — MH-L-01
+# Instagram Carousel — MH-L-01 (v3 — 2nd feedback)
 
-**Insight:** Five fundamentals if you’re on TRT  
-**Product:** Men’s Performance & Hormonal Health (roadmap) · Service: `/mens-health-longevity`  
-**Spoke:** https://siya.health/blog/when-is-testosterone-therapy-appropriate  
-**Format:** 4:5 · 6 slides · design = `INSTAGRAM-STATIC.md`  
-**Practical changes (all five are actionable):** resistance training · protein · sleep · vitamin D status · keep monitoring labs
+**System:** Knowledge · Visual OS A-03 type · stacked art  
+**Locks:** Logo +~10% · next arrow bottom-right on slides 1–5
 
----
+## Slide 1
+On TRT? · These 5 habits decide how much you get out of it. · Arrow BR
 
-## Slide 1 — Hook
-**Copy:**
-On TRT?
+## Slide 2
+Lift. Don’t just be on T. · Train with purpose.  
+Bullets: Resistance training 2–4× / week · TRT won’t build muscle alone · Arrow BR
 
-**Support:**
-These 5 habits decide how much you get out of it.
+## Slide 3
+Eat enough protein · Palm-sized at each meal.  
+Highlight: Especially on training days. · Arrow BR
 
----
+## Slide 4
+Protect 7+ hours sleep · Poor sleep blunts recovery, mood, and how optimized you feel on therapy. · Arrow BR
 
-## Slide 2 — Train
-**Copy:**
-1. Lift. Don’t just “be on T.”
+## Slide 5
+Fix vitamin D if low · Daylight and food help. / Ask your clinician before megadosing. · Arrow BR
 
-**Support:**
-Resistance training 2–4× / week.  
-TRT doesn’t build muscle by itself.
-
----
-
-## Slide 3 — Protein
-**Copy:**
-2. Eat enough protein.
-
-**Support:**
-Aim for a palm-sized protein source  
-at each meal — training days especially.
-
----
-
-## Slide 4 — Sleep
-**Copy:**
-3. Protect 7+ hours of sleep.
-
-**Support:**
-Poor sleep blunts recovery, mood, and  
-how “optimized” you feel on therapy.
-
----
-
-## Slide 5 — Vitamin D / sun
-**Copy:**
-4. Fix vitamin D if it’s low.
-
-**Support:**
-Morning daylight + food help.  
-Ask your clinician to check a level before megadosing.
-
----
-
-## Slide 6 — Monitoring + path
-**Copy:**
-5. Keep your follow-up labs.
-
-**Support:**
-Hematocrit, levels, and safety checks  
-aren’t optional — they’re the point of medical TRT.  
-siya.health/mens-health-longevity
-
----
-
-## Claim ladder
-Safe: lifestyle foundations; training + protein; sleep; vitamin D testing; monitoring.  
-Avoid: DIY dose changes; “TRT replaces exercise”; unsupervised high-dose vitamin D; anti-aging hype; guaranteed muscle/fat results.
+## Slide 6
+Keep follow-up labs · Stay on track with your follow-up labs and consistent monitoring for better results and stronger outcomes.  
+**CTA:** Read more · (blog URL in caption / link in bio)
