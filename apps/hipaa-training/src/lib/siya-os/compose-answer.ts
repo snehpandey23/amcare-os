@@ -88,10 +88,18 @@ export function isCasualOffTopic(text: string): boolean {
   if (/\bsongs?\s+by\b/i.test(t)) return true;
   if (/^(best song ever|ac\s*dc\??|favorite music|favourite music|song)\s*$/i.test(t)) return true;
   if (/^(music|songs?)\s*\??\s*$/i.test(t)) return true;
-  // Civics / general culture — not Siya staff SOPs
+  // Civics / general culture Q&A in Ask — refuse inventing answers.
+  // (Wanting to *practice* culture routes via tryPracticeLookup before this runs.)
   if (/\bpresident of (the )?(usa|u\.?s\.?a\.?|united states|india)\b/i.test(t)) return true;
-  if (/\b(american|us|u\.?s\.?)\s+culture\b/.test(t)) return true;
-  if (/\bcurrent events\b/.test(t) || /\bwho (is|was) the president\b/.test(t)) return true;
+  if (/\bwho (is|was) the president\b/.test(t)) return true;
+  if (/\bcurrent events\b/.test(t)) return true;
+  // Bare culture curriculum claims without a practice intent word still refuse inventing in Ask
+  if (
+    /\b(american|us|u\.?s\.?)\s+culture\b/.test(t) &&
+    !/\b(practice|drill|quiz|trivia|learn|open|improve)\b/.test(t)
+  ) {
+    return true;
+  }
   if (/\btrain(?:ing)?\s+staff\b/.test(t) && /\b(culture|civics|current events)\b/.test(t)) return true;
   return false;
 }

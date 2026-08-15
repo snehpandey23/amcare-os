@@ -23,6 +23,7 @@ import {
 import { fetchAdminOpsSnapshot } from "./admin-ops-snapshot";
 import { detectAdminOpsIntent, runAdminOpsCoach } from "./admin-ops-coach";
 import { tryFactsLookup } from "./facts-lookup";
+import { tryPracticeLookup } from "./practice-lookup";
 import {
   acknowledgePersonalPreference,
   answerPersonalFactRecall,
@@ -359,6 +360,26 @@ function buildSiyaReply(
       sources: [],
       escalationPreview: undefined,
       ruleFinal: true,
+    };
+  }
+
+  // Learn / Practice deep-links — before off-topic refuse (culture/typing exist as drills).
+  const practiceHit = tryPracticeLookup(text);
+  if (practiceHit) {
+    return {
+      message: polishStaffMessage(practiceHit.message),
+      chunks: [],
+      knowledgeGap: false,
+      sources: [],
+      portalLinks: practiceHit.links,
+      escalationPreview: undefined,
+      ruleFinal: true,
+      routing: {
+        department: "General",
+        task: "Learn / Practice link",
+        confidence: "high",
+        followUpQuestions: [],
+      },
     };
   }
 
