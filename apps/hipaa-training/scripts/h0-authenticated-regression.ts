@@ -6,6 +6,8 @@
  *
  * Usage:
  *   ASSIST_TOKEN='…' npx tsx apps/hipaa-training/scripts/h0-authenticated-regression.ts
+ *   # or login:
+ *   ASSIST_EMAIL='…' ASSIST_PASSWORD='…' npx tsx apps/hipaa-training/scripts/h0-authenticated-regression.ts
  *
  * Token: sign in → DevTools → Application → localStorage `hipaa-training-jwt`
  *     or Network → /api/chat → Authorization: Bearer …
@@ -25,10 +27,38 @@ const AUTH = (process.env.HIPAA_TRAINING_API_URL || "https://siya-staff-auth-api
   /\/$/,
   "",
 );
-const TOKEN = (process.env.ASSIST_TOKEN || "").trim();
+let TOKEN = (process.env.ASSIST_TOKEN || "").trim();
 const OUT =
   process.env.H0_OUT ||
   resolve(process.cwd().includes("hipaa-training") ? "." : "apps/hipaa-training", ".cursor-verify/h0-results.json");
+
+async function resolveToken(): Promise<string> {
+  if (TOKEN.length >= 20) return TOKEN;
+  const email = (process.env.ASSIST_EMAIL || "").trim();
+  const password = (process.env.ASSIST_PASSWORD || "").trim();
+  if (!email || !password) {
+    console.error(
+      "FAIL\tSETUP\tASSIST_TOKEN (or ASSIST_EMAIL+ASSIST_PASSWORD) required. Anonymous runs are invalid evidence.",
+    );
+    process.exit(1);
+  }
+  const res = await fetch(`${AUTH}/api/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+  const data = (await res.json().catch(() => ({}))) as {
+    token?: string;
+    accessToken?: string;
+    error?: string;
+  };
+  const t = (data.token || data.accessToken || "").trim();
+  if (!res.ok || t.length < 20) {
+    console.error("FAIL\tSETUP\tlogin failed", res.status, data.error || data);
+    process.exit(1);
+  }
+  return t;
+}
 
 type ChatData = {
   message: string;
@@ -124,10 +154,7 @@ function isTeamPulse(data: ChatData): boolean {
 }
 
 async function main() {
-  if (!TOKEN || TOKEN.length < 20) {
-    console.error("FAIL\tSETUP\tASSIST_TOKEN required (authenticated JWT). Anonymous runs are invalid evidence.");
-    process.exit(1);
-  }
+  TOKEN = await resolveToken();
 
   const me = await fetch(`${AUTH}/api/auth/me`, {
     headers: { Authorization: `Bearer ${TOKEN}` },
