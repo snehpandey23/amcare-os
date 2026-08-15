@@ -26,10 +26,14 @@ import { tryFactsLookup } from "./facts-lookup";
 import { tryPracticeLookup } from "./practice-lookup";
 import {
   acknowledgePersonalPreference,
+  acknowledgeRoleAuthorityClaim,
+  answerMetaCertaintyAboutPriorClaim,
   answerPersonalFactRecall,
   extractPersonalFactsFromHistory,
   isCompanyPolicyAssertion,
   isPersonalPreferenceStatement,
+  isRoleAuthorityAssertion,
+  preferenceSummariesForLlm,
 } from "./conversation-memory";
 import {
   fetchFounderPortalSignalsBlock,
@@ -220,7 +224,8 @@ export async function runSiyaAssistantAsync(
     followUpQuestions: founderCoach ? [] : (base.routing?.followUpQuestions ?? []),
     history,
     focusMode,
-    personalFacts: personalFacts.map((f) => f.summary),
+    // Tier-1 preferences only — never pass unconfirmed role claims as LLM "facts"
+    personalFacts: preferenceSummariesForLlm(personalFacts),
     portalSignals,
   });
 
@@ -400,8 +405,27 @@ function buildSiyaReply(
     };
   }
 
-  // Personal preference / fact for THIS chat — do not let refund SOP keywords hijack.
-  // Company-policy assertions in first person still fall through to retrieval (locked).
+  // Tier 3 — role/authority claims: acknowledge unconfirmed; never retrieval/LLM as fact.
+  // Fixes "clinical lead is priya remember it" → Chat Review / PHI SOP dump.
+  if (isRoleAuthorityAssertion(text) && !isCompanyPolicyAssertion(text)) {
+    return {
+      message: polishStaffMessage(acknowledgeRoleAuthorityClaim(text)),
+      chunks: [],
+      knowledgeGap: false,
+      sources: [],
+      escalationPreview: undefined,
+      ruleFinal: true,
+      routing: {
+        department: "General",
+        task: "Role/authority claim (unconfirmed)",
+        confidence: "high",
+        followUpQuestions: [],
+      },
+    };
+  }
+
+  // Tier 1 — personal preference / fact for THIS chat — do not let refund SOP keywords hijack.
+  // Tier 2 — company-policy assertions in first person still fall through to retrieval (locked).
   if (isPersonalPreferenceStatement(text) && !isCompanyPolicyAssertion(text)) {
     return {
       message: polishStaffMessage(acknowledgePersonalPreference(text)),
@@ -432,7 +456,27 @@ function buildSiyaReply(
         ruleFinal: true,
         routing: {
           department: "General",
-          task: "Personal preference recall (this chat)",
+          task:
+            personalFacts.some((f) => f.kind === "role_unconfirmed")
+              ? "Role claim recall (unconfirmed)"
+              : "Personal preference recall (this chat)",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    const meta = answerMetaCertaintyAboutPriorClaim(text, personalFacts);
+    if (meta) {
+      return {
+        message: polishStaffMessage(meta),
+        chunks: [],
+        knowledgeGap: false,
+        sources: [],
+        escalationPreview: undefined,
+        ruleFinal: true,
+        routing: {
+          department: "General",
+          task: "Prior claim certainty (this chat)",
           confidence: "high",
           followUpQuestions: [],
         },
