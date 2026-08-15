@@ -84,8 +84,10 @@ export function isCasualOffTopic(text: string): boolean {
     return true;
   }
   if (/\b(best|favorite|favourite)\s+songs?\b/i.test(t)) return true;
+  if (/\b(best|favorite|favourite)\s+music\b/i.test(t)) return true;
   if (/\bsongs?\s+by\b/i.test(t)) return true;
-  if (/^(best song ever|ac\s*dc\??)\s*$/i.test(t)) return true;
+  if (/^(best song ever|ac\s*dc\??|favorite music|favourite music|song)\s*$/i.test(t)) return true;
+  if (/^(music|songs?)\s*\??\s*$/i.test(t)) return true;
   // Civics / general culture — not Siya staff SOPs
   if (/\bpresident of (the )?(usa|u\.?s\.?a\.?|united states|india)\b/i.test(t)) return true;
   if (/\b(american|us|u\.?s\.?)\s+culture\b/.test(t)) return true;

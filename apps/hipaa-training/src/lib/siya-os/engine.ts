@@ -27,7 +27,6 @@ import {
   acknowledgePersonalPreference,
   answerPersonalFactRecall,
   extractPersonalFactsFromHistory,
-  isAskingAboutPriorPersonalFact,
   isCompanyPolicyAssertion,
   isPersonalPreferenceStatement,
 } from "./conversation-memory";
@@ -400,11 +399,7 @@ function buildSiyaReply(
   }
 
   const personalFacts = extractPersonalFactsFromHistory(history);
-  if (
-    personalFacts.length &&
-    (isAskingAboutPriorPersonalFact(text) ||
-      (/\b(who|what)\b/i.test(text) && /\b(say|said|told|preferred|handles|contact)\b/i.test(text)))
-  ) {
+  if (personalFacts.length) {
     const recall = answerPersonalFactRecall(text, personalFacts);
     if (recall) {
       return {

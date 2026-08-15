@@ -9,9 +9,18 @@ export type PersonalFact = {
   summary: string;
 };
 
+/** Strip wrapping/trailing quotes staff sometimes paste in. */
+function normalizeChatText(text: string): string {
+  return text
+    .trim()
+    .replace(/^["'`]+|["'`]+$/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 /** Assertions about company policy, pricing, or procedure — never treat as stored fact. */
 export function isCompanyPolicyAssertion(text: string): boolean {
-  const t = text.trim().toLowerCase();
+  const t = normalizeChatText(text).toLowerCase();
   if (!t) return false;
 
   // Explicit policy / pricing / procedure language (even in first person)
@@ -51,7 +60,7 @@ function isPersonalContactPreferenceShape(t: string): boolean {
   return (
     /\b(my\s+preferred|prefer(?:red)?|escalation\s+contact|contact\s+for|go\s+to|loop\s+in|hand\s+off\s+to)\b/.test(
       t,
-    ) && /\b(contact|person|lead|owner|manager|name)\b/.test(t)
+    ) && /\b(contact|person|lead|owner|manager|name|escalat)\b/.test(t)
   );
 }
 
@@ -60,7 +69,7 @@ function isPersonalContactPreferenceShape(t: string): boolean {
  * (not a claim that company policy changed).
  */
 export function isPersonalPreferenceStatement(text: string): boolean {
-  const t = text.trim();
+  const t = normalizeChatText(text);
   if (!t || t.length < 8) return false;
   if (isCompanyPolicyAssertion(t)) return false;
 
@@ -74,8 +83,8 @@ export function isPersonalPreferenceStatement(text: string): boolean {
     /\bfor\s+me[,\s]+(use|escalate|contact|go\s+to)\b/.test(lower) ||
     /\b(please\s+)?(use|escalate\s+to|contact)\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?\s+(for|when|on)\b/.test(t) ||
     /\bmy\s+.+\s+is\s+[A-Z][a-z]{2,}\b/.test(t) ||
-    /\bis\s+[A-Z][a-z]{2,}(?:\s+[A-Z][a-z]+)?\.?\s*$/.test(t) &&
-      /\b(preferred|contact|escalate|owner|lead)\b/.test(lower)
+    (/\bis\s+[A-Z][a-z]{2,}(?:\s+[A-Z][a-z]+)?\.?\s*$/.test(t) &&
+      /\b(preferred|contact|escalate|owner|lead)\b/.test(lower))
   ) {
     return true;
   }
@@ -94,7 +103,7 @@ export function isPersonalPreferenceStatement(text: string): boolean {
 
 /** Follow-up asking what the user previously stated in this thread. */
 export function isAskingAboutPriorPersonalFact(text: string): boolean {
-  const t = text.trim().toLowerCase();
+  const t = normalizeChatText(text).toLowerCase();
   if (!t) return false;
   if (isCompanyPolicyAssertion(t)) return false;
   return (
@@ -102,7 +111,8 @@ export function isAskingAboutPriorPersonalFact(text: string): boolean {
     /\b(what|who)\s+(was|is)\s+my\s+preferred\b/.test(t) ||
     /\b(remind|recall)\s+me\b/.test(t) ||
     /\bwho\s+(handles|should\s+i\s+(use|contact)|did\s+i\s+(pick|choose))\b/.test(t) ||
-    /\bdid\s+i\s+(say|tell\s+you)\b/.test(t)
+    /\bdid\s+i\s+(say|tell\s+you)\b/.test(t) ||
+    /\bwho\s+is\s+[a-z]{2,}\b/.test(t)
   );
 }
 
@@ -112,14 +122,13 @@ export function extractPersonalFactsFromHistory(
   const out: PersonalFact[] = [];
   for (const h of history) {
     if (h.role !== "user") continue;
-    const content = h.content.trim();
+    const content = normalizeChatText(h.content);
     if (!isPersonalPreferenceStatement(content)) continue;
     out.push({
       raw: content.slice(0, 500),
       summary: summarizePersonalFact(content),
     });
   }
-  // Dedupe by summary
   const seen = new Set<string>();
   return out.filter((f) => {
     const k = f.summary.toLowerCase();
@@ -130,14 +139,19 @@ export function extractPersonalFactsFromHistory(
 }
 
 function summarizePersonalFact(text: string): string {
-  const t = text.replace(/\s+/g, " ").trim();
-  // "my preferred escalation contact for refunds is Priya"
-  const m = t.match(
-    /\b(?:my\s+preferred\s+(?:escalation\s+)?contact(?:\s+for\s+([^.is]+))?\s+is|i\s+prefer(?:\s+to\s+(?:use|escalate\s+to))?|preferred\s+contact\s+(?:for\s+([^.is]+)\s+)?is)\s+(.+)$/i,
-  );
+  const t = normalizeChatText(text);
+  const m = t.match(/\bmy\s+preferred\s+(?:escalation\s+)?contact\s+for\s+(.+?)\s+is\s+(.+)$/i);
   if (m) {
-    const topic = (m[1] || m[2] || "this").trim();
-    const who = (m[3] || "").replace(/[."']+$/g, "").trim();
+    const topic = m[1].trim();
+    const who = m[2].replace(/[."'`]+$/g, "").trim();
+    if (who) return `Preferred contact for ${topic}: ${who}`;
+  }
+  const m2 = t.match(
+    /\b(?:preferred\s+contact|i\s+prefer(?:\s+to\s+(?:use|escalate\s+to))?)\s+(?:for\s+(.+?)\s+)?is\s+(.+)$/i,
+  );
+  if (m2) {
+    const topic = (m2[1] || "this").trim();
+    const who = m2[2].replace(/[."'`]+$/g, "").trim();
     if (who) return `Preferred contact for ${topic}: ${who}`;
   }
   return t.length > 160 ? `${t.slice(0, 157)}…` : t;
@@ -159,10 +173,23 @@ export function answerPersonalFactRecall(
   facts: PersonalFact[],
 ): string | null {
   if (!facts.length) return null;
+  const q = normalizeChatText(question).toLowerCase();
+  const whoIs = q.match(/^who\s+is\s+([a-z][a-z'-]{1,40})\??$/i);
+  if (whoIs) {
+    const name = whoIs[1].toLowerCase();
+    const hit = facts.find(
+      (f) => f.summary.toLowerCase().includes(name) || f.raw.toLowerCase().includes(name),
+    );
+    if (!hit) return null;
+    return [
+      `In this chat you named **${whoIs[1]}** as your stated preference: **${hit.summary}**.`,
+      "",
+      "That’s what **you** said here — not an HR directory entry or company policy.",
+    ].join("\n");
+  }
   if (!isAskingAboutPriorPersonalFact(question) && !/\b(preferred|contact|handles|escalat)/i.test(question)) {
     return null;
   }
-  const q = question.toLowerCase();
   const ranked = [...facts].sort((a, b) => {
     const score = (f: PersonalFact) => {
       let n = 0;
