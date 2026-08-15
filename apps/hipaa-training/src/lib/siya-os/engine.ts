@@ -179,7 +179,9 @@ export async function runSiyaAssistantAsync(
   }
 
   let portalSignals: string | null = null;
-  if (token && (founderCoach || wantsFounderPortalSignals(message))) {
+  // Only load portal snapshot when the question is actually about portal/domain signals —
+  // never for every Founder Talk turn (that unlocked inventing CAC/trivia from the brief).
+  if (token && wantsFounderPortalSignals(message)) {
     portalSignals = await fetchFounderPortalSignalsBlock(token);
   }
 
@@ -544,10 +546,10 @@ function buildSiyaReply(
     topChunk: chunks[0] ?? null,
   });
 
-  // Unsure → ask back. Do not dump the nearest weak keyword hit.
-  // Founder Talk: empty message + portalSignals intentionally allows LLM (not ruleFinal).
+  // Unsure → stop. Do not dump weak keyword hits or invent from portal.
+  // Portal LLM only when the user explicitly asked about portal/domain signals.
   if (!confident) {
-    if (founderCoach && opts?.hasPortalSignals) {
+    if (founderCoach && opts?.hasPortalSignals && wantsFounderPortalSignals(normalized)) {
       return {
         message: "",
         chunks: [],
@@ -567,10 +569,18 @@ function buildSiyaReply(
         founderCoach ? founderCoachPlainOffTopic() : askClarifyingQuestion(normalized),
       ),
       chunks: [],
-      knowledgeGap: false,
+      knowledgeGap: Boolean(founderCoach),
       sources: [],
       escalationPreview: undefined,
       ruleFinal: true,
+      routing: founderCoach
+        ? {
+            department: "Leadership",
+            task: "Founder Talk",
+            confidence: "low",
+            followUpQuestions: [],
+          }
+        : undefined,
     };
   }
 

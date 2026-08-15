@@ -8,12 +8,15 @@ import { getTrainingApiUrl } from "@/lib/trainingConfig";
 export function wantsFounderPortalSignals(message: string): boolean {
   const t = message.trim().toLowerCase();
   if (!t) return false;
+  // Only live portal / Plan snapshot questions — not general strategy, trivia, or culture.
   return (
     /\b(accounts|hr|clinical|marketing|compliance)\b/.test(t) ||
-    /\b(check-?in|domain|sop queue|pending sop|lead (said|reported|flagged))\b/.test(t) ||
-    /\b(founder should know|what('s| is) (on|in) (my )?(week|list|radar)|this week('s)? (signals?|plan|status))\b/.test(
+    /\b(check-?in|domain|sop(?: review)? queue|pending sop|lead (said|reported|flagged))\b/.test(t) ||
+    /\b(founder should know|founder focus|can wait|observe-?only)\b/.test(t) ||
+    /\b(what('s| is) (on|in) (my )?(week|list|radar)|this week('s)? (signals?|plan|status|focus))\b/.test(
       t,
     ) ||
+    /\b(what('s| is) flagged|domain (tab|signal)|lead check-?ins?)\b/.test(t) ||
     /\b(decision log|why did we|who decided)\b/.test(t)
   );
 }
@@ -83,9 +86,11 @@ export async function fetchFounderPortalSignalsBlock(token: string): Promise<str
 
 export function founderCoachPlainOffTopic(): string {
   return [
-    `I don't have a strong approved match for that yet.`,
+    "I don't have an approved staff guide for that.",
     "",
-    "Say what you're trying to understand in one sentence (a decision, a domain this week, an SOP, or who owns something), or open the matching domain tab for the structured snapshot.",
+    "I won't invent a general answer (formulas, trivia, culture lectures, or strategy essays).",
+    "Ask about a domain this week, an SOP, who owns something, or open the matching domain tab.",
+    "If this should become an approved guide, use **Notify owner** / escalate with a one-line gap.",
     "I won't write anything into your Plan Record — that's manual on This week's plan.",
   ].join("\n");
 }

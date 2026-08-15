@@ -81,7 +81,13 @@ export async function synthesizeWorkforceAnswer(opts: {
     "",
     opts.focusMode
       ? "Focus mode: reply in under 120 words. Bullet steps. No preamble. No follow-up questions unless safety-critical."
-      : "Write a helpful reply using APPROVED SOURCES for policy/procedure. Use PERSONAL CONTEXT only for the user's own stated preferences when they ask what they said or who they prefer. Use PORTAL SNAPSHOT only as read-only facts — never claim you updated Plan Record fields.",
+      : !hasKb && hasPortal
+        ? [
+            "PORTAL-ONLY mode: answer ONLY with facts present in PORTAL SNAPSHOT that directly answer the staff question.",
+            "If the snapshot does not contain the answer, say you don't have an approved match — do NOT invent formulas, trivia, culture advice, strategy essays, or a team roster.",
+            "Never claim you updated Plan Record fields.",
+          ].join(" ")
+        : "Write a helpful reply using APPROVED SOURCES for policy/procedure. Use PERSONAL CONTEXT only for the user's own stated preferences when they ask what they said or who they prefer. Use PORTAL SNAPSHOT only as read-only facts — never claim you updated Plan Record fields.",
   ]
     .filter(Boolean)
     .join("\n");
