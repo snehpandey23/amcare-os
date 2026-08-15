@@ -14,8 +14,9 @@ This is not an open product question — it is process law after repeated false 
 ```bash
 # Token: staff portal → DevTools → localStorage `hipaa-training-jwt`
 ASSIST_TOKEN='…' npm run smoke:h0 -w @amcare/hipaa-training
-# or:
-ASSIST_TOKEN='…' npx tsx apps/hipaa-training/scripts/h0-authenticated-regression.ts
+
+# Or login (still authenticated — never anonymous):
+ASSIST_EMAIL='…' ASSIST_PASSWORD='…' npm run smoke:h0 -w @amcare/hipaa-training
 ```
 
 Exit code `0` only if all cases PASS. JSON dump: `apps/hipaa-training/.cursor-verify/h0-results.json`.
