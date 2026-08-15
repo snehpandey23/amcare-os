@@ -108,6 +108,9 @@ export function tryFactsLookup(query: string): FactsLookupHit | null {
   const hours = matchHours(q);
   if (hours) return hours;
 
+  const brandTokens = matchBrandTokens(q);
+  if (brandTokens) return brandTokens;
+
   const serviceOffer = matchServiceOffer(q);
   if (serviceOffer) return serviceOffer;
 
@@ -466,6 +469,37 @@ function matchServiceOffer(q: string): FactsLookupHit | null {
 
 function escapeRegExp(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/** Staff portal brand tokens (globals.css) — marketing design system surfaces. */
+function matchBrandTokens(q: string): FactsLookupHit | null {
+  const lower = q.toLowerCase();
+  const asksBg =
+    /\b(background|bg)\s*(colou?r|token|hex)?\b/.test(lower) ||
+    /\bdefault\s+background\b/.test(lower) ||
+    (/\b(page|portal|app)\s+background\b/.test(lower) && /\b(colo?u?r|token|hex|brand)\b/.test(lower));
+  // Tolerate common typo "desgin" from live staff chat.
+  const asksBrandSystem =
+    /\bbrand\s+system\b/.test(lower) ||
+    /\bmarketing\s+des[ig]{1,2}n\b/.test(lower) ||
+    /\bdes[ig]{1,2}n\s+brand\s+system\b/.test(lower) ||
+    /\bbrand\s+tokens?\b/.test(lower);
+
+  if (!asksBg && !(asksBrandSystem && /\b(background|bg|colo?u?r|cream|page)\b/.test(lower))) {
+    return null;
+  }
+  if (!asksBg && !asksBrandSystem) return null;
+
+  const message = [
+    "**Staff portal brand surfaces (marketing design / Brand System tokens):**",
+    "• **Default page background** (CSS token siya-bg-page): #fffdf6 — warm cream",
+    "• **Subtle / secondary surface** (siya-bg-subtle): #faf4e4",
+    "• **White cards / panels** (siya-white): #ffffff",
+    "",
+    "These are the live staff-portal surface tokens. Pack-specific editorial colors may differ — escalate Marketing if you need a carousel/static token from Brand System docs.",
+  ].join("\n");
+
+  return hit(message, "facts-brand-bg-page", "Facts · Brand · Background", "Marketing", "Brand tokens");
 }
 
 /** No fixed practice-wide hours — provider schedules live in the EHR. */

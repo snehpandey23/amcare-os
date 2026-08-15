@@ -16,13 +16,22 @@ type Props = {
   firstName?: string;
   focusMode?: boolean;
   initialQuery?: string;
+  /** founder-coach Talk: same Ask engine; never writes Plan Record. */
+  surface?: "default" | "founder-coach";
+  openingOverride?: string;
 };
 
 /**
  * Assist v2 shell — sidebar (new + searchable threads) + main SiyaChat thread.
  * Server-backed history; Coach Draft/Refine/Lock stays outside this shell.
  */
-export function AssistChatShell({ firstName, focusMode = false, initialQuery }: Props) {
+export function AssistChatShell({
+  firstName,
+  focusMode = false,
+  initialQuery,
+  surface = "default",
+  openingOverride,
+}: Props) {
   const { token } = useAuth();
   const [threads, setThreads] = useState<AssistThread[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -201,6 +210,8 @@ export function AssistChatShell({ firstName, focusMode = false, initialQuery }: 
           focusMode={focusMode}
           initialQuery={initialQuery}
           threadId={activeId}
+          surface={surface}
+          openingOverride={openingOverride}
           onThreadMetaChange={() => void refreshList(search.trim() || undefined)}
           onRequestNewThread={() => void onNewChat()}
         />

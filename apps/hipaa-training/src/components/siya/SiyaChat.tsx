@@ -94,6 +94,8 @@ export function SiyaChat({
   threadId,
   onThreadMetaChange,
   onRequestNewThread,
+  surface = "default",
+  openingOverride,
 }: {
   initialQuery?: string;
   focusMode?: boolean;
@@ -108,21 +110,40 @@ export function SiyaChat({
   onThreadMetaChange?: () => void;
   /** Assist v2: Clear chat → start a new server thread. */
   onRequestNewThread?: () => void;
+  /** founder-coach = Talk thread: same engine, no Plan Record writes, no 1–5 triage. */
+  surface?: "default" | "founder-coach";
+  openingOverride?: string;
 }) {
   const { user, token } = useAuth();
   const adminCoPilot = isPortalAdmin(user?.role);
+  const founderCoach = surface === "founder-coach";
   const homeVariant = variant === "home";
   const storageKey =
     threadId
       ? null
       : (persistKey ?? (homeVariant ? `siya-assist-thread-v3:${user?.id ?? "anon"}` : null));
-  const opening = focusMode
-    ? "You're in Focus mode. I'll keep answers concise — steps and links first."
+  const opening = openingOverride
+    ? openingOverride
+    : focusMode
+      ? "You're in Focus mode. I'll keep answers concise — steps and links first."
+      : adminCoPilot
+        ? SIYA_ADMIN_OPENING
+        : SIYA_OPENING;
+  const quickPrompts = founderCoach
+    ? [
+        "What's flagged in Clinical this week?",
+        "Any decisions I should remember?",
+        "What's in the SOP review queue?",
+        "What should I know from lead check-ins?",
+      ]
     : adminCoPilot
-      ? SIYA_ADMIN_OPENING
-      : SIYA_OPENING;
-  const quickPrompts = adminCoPilot ? [...ADMIN_CHAT_QUICK_PROMPTS, ...SIYA_QUICK_PROMPTS.slice(0, 2)] : SIYA_QUICK_PROMPTS;
-  const sectionLabel = adminCoPilot ? "What I can help with:" : CHAT_SECTION_LABEL;
+      ? [...ADMIN_CHAT_QUICK_PROMPTS, ...SIYA_QUICK_PROMPTS.slice(0, 2)]
+      : SIYA_QUICK_PROMPTS;
+  const sectionLabel = founderCoach
+    ? "Try asking:"
+    : adminCoPilot
+      ? "What I can help with:"
+      : CHAT_SECTION_LABEL;
 
   const [messages, setMessages] = useState<ChatMessage[]>(() => {
     if (threadId) return [];
@@ -220,6 +241,7 @@ export function SiyaChat({
             history: historyPayload(),
             focusMode,
             threadId: threadId || undefined,
+            surface: founderCoach ? "founder-coach" : "default",
           }),
         });
         const data = await res.json();
@@ -257,7 +279,7 @@ export function SiyaChat({
         listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
       }
     },
-    [loading, threadLoading, historyPayload, focusMode, token, threadId, onThreadMetaChange]
+    [loading, threadLoading, historyPayload, focusMode, token, threadId, onThreadMetaChange, founderCoach]
   );
 
   useEffect(() => {
@@ -378,17 +400,9 @@ export function SiyaChat({
       } catch {
         /* local metrics still recorded */
       }
+      // Thumbs only logs helpful / not-helpful. Memory save is a separate deliberate action.
       setMessages((m) =>
-        m.map((x) =>
-          x.id === msgId
-            ? {
-                ...x,
-                feedbackSent: true,
-                memoryOffer:
-                  helpful && !msg.knowledgeGap && msg.content.trim().length > 60 && msg.role === "assistant",
-              }
-            : x,
-        ),
+        m.map((x) => (x.id === msgId ? { ...x, feedbackSent: true, memoryOffer: false } : x)),
       );
     },
     [],

@@ -20,7 +20,7 @@ const VAGUE_ONLY = new Set([
 ]);
 
 const CONFUSED_FOLLOW_UP =
-  /^(what(\s+the\s+heck|\s+the\s+fuck|\s+are\s+you|\s+r\s+u|\s+do\s+you\s+mean)?|huh+\??|wtf\??|idk|this (doesn'?t|dont) make sense|that (doesn'?t|dont) (help|make sense)|speak english|huh\??)\b/i;
+  /^(what(\s+the\s+heck|\s+the\s+fuck|\s+are\s+you|\s+r\s+u|\s+do\s+you\s+mean)\b|huh+\??|wtf\??|idk|this (doesn'?t|dont) make sense|that (doesn'?t|dont) (help|make sense)|speak english)\b/i;
 
 export function isVagueUserMessage(text: string): boolean {
   const t = text.trim().toLowerCase();
@@ -62,20 +62,38 @@ export function clarifyConfusedFollowUp(): string {
   ].join("\n");
 }
 
-/** When retrieval/routing is weak — ask back instead of guessing from keyword noise. */
+/** When retrieval/routing is weak — plain ask-back, never a 1–5 triage menu. */
 export function askClarifyingQuestion(userMessage: string): string {
-  const t = userMessage.trim();
-  const hint = t.length <= 60 ? `You wrote “${t}”. ` : "";
+  void userMessage;
   return [
-    `${hint}I’m not sure which path you need yet — reply with one line:`,
+    "I’m not sure I have the right staff guide for that yet.",
     "",
-    "1. **Patient / caller situation** (no names) — e.g. angry caller, refill stuck, scheduling",
-    "2. **Teammate / HR concern**",
-    "3. **Billing, refund, or reimbursement**",
-    "4. **Policy / SOP lookup**",
-    "5. **Tech / login / access**",
+    "Say what you’re trying to get done in one short sentence — e.g. a reimbursement, an SOP, patient pricing, brand tokens, or who to escalate to.",
+  ].join("\n");
+}
+
+/** Music / celebrity / entertainment — not staff help-desk work. */
+export function isCasualOffTopic(text: string): boolean {
+  const t = text.trim().toLowerCase();
+  if (!t) return false;
+  if (
+    /\b(led zeppelin|ac\/?\s*dc|post malone|taylor swift|beyonc[eé]|drake|spotify|apple music|lyrics|album|discography)\b/i.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  if (/\b(best|favorite|favourite)\s+songs?\b/i.test(t)) return true;
+  if (/\bsongs?\s+by\b/i.test(t)) return true;
+  if (/^(best song ever|ac\s*dc\??)\s*$/i.test(t)) return true;
+  return false;
+}
+
+export function casualOffTopicReply(): string {
+  return [
+    "That’s outside what I can help with here — I don’t pick songs or entertainment.",
     "",
-    "Or just say what you’re trying to get done in a short sentence.",
+    "Ask me about policies, SOPs, pricing, brand tokens, domain signals, or who owns an ops question.",
   ].join("\n");
 }
 
@@ -234,7 +252,11 @@ function formatPrimaryAnswer(
   const socialQuery =
     flowId === "marketing-carousel" ||
     flowId === "marketing-daily" ||
-    /instagram|linkedin|social|carousel|caption|\bpost\b/i.test(userMessage);
+    /\b(instagram|linkedin|facebook|tiktok|social\s+media|social\s+post|carousel|caption|patient-facing\s+post)\b/i.test(
+      userMessage,
+    ) ||
+    (/\bposts?\b/i.test(userMessage) &&
+      /\b(social|instagram|linkedin|facebook|tiktok|draft|caption|publish|editorial)\b/i.test(userMessage));
 
   if (socialQuery && (primary.id === "content-qa-checklist" || primary.id === "marketing-staff-daily-help")) {
     return formatSocialPostAnswer();

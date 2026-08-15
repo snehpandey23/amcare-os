@@ -132,9 +132,10 @@ export async function POST(req: Request) {
     const authToken = parseBearerToken(req);
     const threadId =
       typeof body?.threadId === "string" && body.threadId.startsWith("ath-") ? body.threadId : null;
+    const surface = body?.surface === "founder-coach" ? ("founder-coach" as const) : ("default" as const);
 
     const history = await resolveHistory(authToken, threadId, clientHistory);
-    const result = await runSiyaAssistantAsync(message, history, { focusMode, authToken });
+    const result = await runSiyaAssistantAsync(message, history, { focusMode, authToken, surface });
     const kbLinks = result.chunks.flatMap((c) => c.links ?? []).slice(0, 8);
     const links = staffSafeLinks(
       result.portalLinks?.length

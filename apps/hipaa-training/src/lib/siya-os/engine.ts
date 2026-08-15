@@ -1,7 +1,7 @@
 import { getEscalationContacts } from "./config";
 import { defaultEscalationOwner } from "./escalation";
 import { retrievalQueryBoost, routeIntent, expandShortQuery, hasRoutableIntent } from "./flows";
-import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, abusivePatientAnswer, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, polishStaffMessage } from "./compose-answer";
+import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, abusivePatientAnswer, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, polishStaffMessage, isCasualOffTopic, casualOffTopicReply } from "./compose-answer";
 import { staffTopicLabel } from "./staff-voice";
 import { synthesizeWorkforceAnswer } from "./llm-answer";
 import {
@@ -31,6 +31,12 @@ import {
   isCompanyPolicyAssertion,
   isPersonalPreferenceStatement,
 } from "./conversation-memory";
+import {
+  fetchFounderPortalSignalsBlock,
+  founderCoachPlainOffTopic,
+  founderCoachVaguePrompt,
+  wantsFounderPortalSignals,
+} from "./founder-chat-context";
 
 export interface SiyaReply {
   message: string;
@@ -54,6 +60,11 @@ export interface SiyaReply {
   opsCoPilot?: boolean;
   /** True when deterministic site facts-lookup answered (skip LLM rewrite) */
   factsLookup?: boolean;
+  /**
+   * Rule engine already produced a final answer (off-topic, clarify, meta, etc.).
+   * Never pass to LLM for "enhancement" — even when portalSignals are present.
+   */
+  ruleFinal?: boolean;
   executiveMeta?: {
     confidence: string;
     freshnessSeconds: number;
@@ -103,10 +114,11 @@ export function runSiyaAssistant(message: string, history: { role: string; conte
 export async function runSiyaAssistantAsync(
   message: string,
   history: { role: string; content: string }[] = [],
-  opts?: { focusMode?: boolean; authToken?: string | null }
+  opts?: { focusMode?: boolean; authToken?: string | null; surface?: "default" | "founder-coach" }
 ): Promise<SiyaReply> {
   const focusMode = opts?.focusMode ?? false;
   const token = opts?.authToken?.trim() || null;
+  const founderCoach = opts?.surface === "founder-coach";
 
   if (token && detectAdminOpsIntent(message)) {
     const snapshot = await fetchAdminOpsSnapshot(token);
@@ -119,7 +131,7 @@ export async function runSiyaAssistantAsync(
           sources: [],
           portalLinks: ops.links,
           opsCoPilot: true,
-          pendingTask: ops.pendingTask,
+          pendingTask: founderCoach ? undefined : ops.pendingTask,
           executiveMeta: {
             confidence: ops.mode === "recommend" ? "high" : "medium",
             freshnessSeconds: 0,
@@ -164,14 +176,28 @@ export async function runSiyaAssistantAsync(
     }
   }
 
+  let portalSignals: string | null = null;
+  if (token && (founderCoach || wantsFounderPortalSignals(message))) {
+    portalSignals = await fetchFounderPortalSignalsBlock(token);
+  }
+
   const layered = retrieveLayeredKnowledge(query, { sops, decisions, memories, limit: 6 });
   const base = buildSiyaReply(message, history, {
     focusMode,
     layeredChunks: layered,
     queryOverride: query,
+    founderCoach,
+    hasPortalSignals: Boolean(portalSignals),
   });
-  // Skip LLM when refused, facts-only, empty, knowledge-gap, or workplace escalate path
-  if (base.refused || base.factsLookup || base.knowledgeGap || !base.chunks.length) return base;
+  // Definitive rule answers always stick — portalSignals must NEVER unlock LLM overwrite.
+  // Only intentional empty-message + portal (Founder Talk soft ground) may continue to LLM.
+  if (base.refused || base.factsLookup || base.knowledgeGap || base.ruleFinal) {
+    return base;
+  }
+  if (!base.chunks.length) {
+    const allowPortalLlm = Boolean(portalSignals && !base.message?.trim());
+    if (!allowPortalLlm) return base;
+  }
 
   const routingLine = base.routing
     ? `Department: ${displayDepartment(base.routing.department)}. Task: ${base.routing.task}.`
@@ -182,10 +208,11 @@ export async function runSiyaAssistantAsync(
     userMessage: message,
     routingLine,
     chunks: base.chunks,
-    followUpQuestions: base.routing?.followUpQuestions ?? [],
+    followUpQuestions: founderCoach ? [] : (base.routing?.followUpQuestions ?? []),
     history,
     focusMode,
     personalFacts: personalFacts.map((f) => f.summary),
+    portalSignals,
   });
 
   if (synthesis.text) {
@@ -194,7 +221,12 @@ export async function runSiyaAssistantAsync(
       msg += `\n\n**Loop in:** ${base.chunks[0].escalate}`;
     }
 
-    if (base.routing?.confidence === "high" && base.routing.followUpQuestions.length && !focusMode) {
+    if (
+      !founderCoach &&
+      base.routing?.confidence === "high" &&
+      base.routing.followUpQuestions.length &&
+      !focusMode
+    ) {
       msg += "\n\n**A few quick questions:**";
       base.routing.followUpQuestions.forEach((q, i) => {
         msg += `\n${i + 1}. ${q}`;
@@ -212,9 +244,13 @@ export async function runSiyaAssistantAsync(
     };
   }
 
+  const fallbackMsg =
+    base.message?.trim() ||
+    (founderCoach ? founderCoachPlainOffTopic() : "");
+
   return {
     ...base,
-    message: polishStaffMessage(base.message),
+    message: polishStaffMessage(fallbackMsg),
     llmUsed: false,
     llmFallback: synthesis.llmFallback,
     llmError: synthesis.llmError
@@ -249,27 +285,25 @@ function resolveQuery(message: string, history: { role: string; content: string 
   const mapped = mapClarifyOptionReply(message);
   const lastAssistant = [...history].reverse().find((h) => h.role === "assistant");
   const priorUser = [...history].reverse().find((h) => h.role === "user");
+  // Only merge when the user is clearly answering an old 1–5 / path prompt — never glue a new topic onto the prior turn.
   if (
     lastAssistant &&
     priorUser &&
-    /not sure which path|one line is enough|are you asking about|which path you need/i.test(lastAssistant.content)
+    /not sure which path|one line is enough|are you asking about|which path you need|reply with one line/i.test(
+      lastAssistant.content,
+    )
   ) {
     const reply = mapped.trim();
-    if (
-      reply.length < 120 ||
-      isVagueUserMessage(reply) ||
-      /^(patient|caller|teammate|hr|billing|refund|reimburs|policy|sop|tech|login|access)\b/i.test(reply)
-    ) {
+    const answeredMenu =
+      /^[1-5]\b/.test(reply) ||
+      /^(patient|caller|teammate|hr|billing|refund|reimburs|policy|sop|tech|login|access)\b/i.test(reply);
+    if (answeredMenu) {
       return `${priorUser.content.trim()} — ${reply}`;
     }
+    return mapped;
   }
   if (!isVagueUserMessage(mapped)) return mapped;
-  for (let i = history.length - 1; i >= 0; i--) {
-    const h = history[i];
-    if (h.role === "user" && h.content.trim().length > 12 && !isVagueUserMessage(h.content)) {
-      return `${h.content.trim()} (follow-up: ${mapped})`;
-    }
-  }
+  // Don't stitch a new short topic onto an older user turn — that caused “X — Y” echo bugs.
   return mapped;
 }
 
@@ -280,14 +314,20 @@ function buildSiyaReply(
     focusMode?: boolean;
     layeredChunks?: RetrievedChunk[];
     queryOverride?: string;
+    founderCoach?: boolean;
+    hasPortalSignals?: boolean;
   }
 ): SiyaReply {
   const focusMode = opts?.focusMode ?? false;
+  const founderCoach = opts?.founderCoach ?? false;
   const text = message.trim();
   if (!text) {
     return {
-      message: "What do you need help with today? Type a question or pick a suggestion below.",
+      message: founderCoach
+        ? founderCoachVaguePrompt()
+        : "What do you need help with today? Type a question or pick a suggestion below.",
       chunks: [],
+      ruleFinal: true,
     };
   }
 
@@ -298,6 +338,7 @@ function buildSiyaReply(
       chunks: [],
       refused: true,
       refusalCategory: safety.category,
+      ruleFinal: true,
     };
   }
 
@@ -309,6 +350,24 @@ function buildSiyaReply(
       knowledgeGap: false,
       sources: [],
       escalationPreview: undefined,
+      ruleFinal: true,
+    };
+  }
+
+  if (isCasualOffTopic(text)) {
+    return {
+      message: polishStaffMessage(casualOffTopicReply()),
+      chunks: [],
+      knowledgeGap: false,
+      sources: [],
+      escalationPreview: undefined,
+      ruleFinal: true,
+      routing: {
+        department: "General",
+        task: "Out of scope (entertainment)",
+        confidence: "high",
+        followUpQuestions: [],
+      },
     };
   }
 
@@ -321,6 +380,7 @@ function buildSiyaReply(
       knowledgeGap: false,
       sources: [],
       escalationPreview: undefined,
+      ruleFinal: true,
       routing: {
         department: "General",
         task: "Personal preference (this chat)",
@@ -344,6 +404,7 @@ function buildSiyaReply(
         knowledgeGap: false,
         sources: [],
         escalationPreview: undefined,
+        ruleFinal: true,
         routing: {
           department: "General",
           task: "Personal preference recall (this chat)",
@@ -370,6 +431,7 @@ function buildSiyaReply(
       },
       escalationPreview: undefined,
       factsLookup: true,
+      ruleFinal: true,
     };
   }
 
@@ -380,6 +442,7 @@ function buildSiyaReply(
       knowledgeGap: false,
       sources: [],
       escalationPreview: undefined,
+      ruleFinal: true,
     };
   }
 
@@ -389,11 +452,12 @@ function buildSiyaReply(
     !history.some((h) => h.role === "user" && h.content.trim().length > 12)
   ) {
     return {
-      message: clarifyVagueMessage(),
+      message: founderCoach ? founderCoachVaguePrompt() : clarifyVagueMessage(),
       chunks: [],
       knowledgeGap: false,
       sources: [],
       escalationPreview: undefined,
+      ruleFinal: true,
     };
   }
 
@@ -479,13 +543,32 @@ function buildSiyaReply(
   });
 
   // Unsure → ask back. Do not dump the nearest weak keyword hit.
+  // Founder Talk: empty message + portalSignals intentionally allows LLM (not ruleFinal).
   if (!confident) {
+    if (founderCoach && opts?.hasPortalSignals) {
+      return {
+        message: "",
+        chunks: [],
+        knowledgeGap: false,
+        sources: [],
+        escalationPreview: undefined,
+        routing: {
+          department: "Leadership",
+          task: "Founder Talk",
+          confidence: "medium",
+          followUpQuestions: [],
+        },
+      };
+    }
     return {
-      message: polishStaffMessage(askClarifyingQuestion(normalized)),
+      message: polishStaffMessage(
+        founderCoach ? founderCoachPlainOffTopic() : askClarifyingQuestion(normalized),
+      ),
       chunks: [],
       knowledgeGap: false,
       sources: [],
       escalationPreview: undefined,
+      ruleFinal: true,
     };
   }
 

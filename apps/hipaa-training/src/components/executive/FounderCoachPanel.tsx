@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import useSWR from "swr";
 import { useAuth } from "@/context/AuthContext";
 import { isPortalAdmin } from "@/lib/portal-role";
@@ -9,7 +9,6 @@ import {
   CollapsibleDomainItemList,
   FOUNDER_QUEUE_PREVIEW,
 } from "@/components/executive/CollapsibleDomainItemList";
-import { VoiceInputButton } from "@/components/ui/VoiceInputButton";
 import {
   founderCoachBriefKey,
   fetchFounderCoachBrief,
@@ -17,7 +16,6 @@ import {
   saveWeeklyPlan,
   saveWeeklyActuals,
   logObserveEvent,
-  draftWeeklyPlan,
   lockWeeklyPlan,
   unlockWeeklyPlan,
   type BriefingConfidence,
@@ -27,16 +25,12 @@ import {
   type FounderCoachBrief,
   type MonthlyPlanRecord,
   type TimeBudget,
-  type WeeklyPlanDraft,
   type WeeklyPlanRecord,
 } from "@/lib/founder-coach-api";
-import { getStoredToken } from "@/lib/authStorage";
-import { notifyOwnerForGap } from "@/lib/siya-os/knowledge-gap";
 import { AssistChatShell } from "@/components/siya/AssistChatShell";
 import {
   portalBadgeWip,
   portalBtnAccentSm,
-  portalBtnGhostSm,
   portalBtnNavySm,
   portalH3,
   portalSectionCompact,
@@ -46,7 +40,11 @@ import {
   portalStatusWarnText,
 } from "@/lib/portal-ui";
 
-type CoachThreadId = "plan" | "assist" | DomainTabId;
+/** Talk = Ask engine (read-only). Plan Record stays manual — chat never writes Focus/Can Wait/Delegate/Observe. */
+type CoachThreadId = "talk" | "plan" | DomainTabId;
+
+const FOUNDER_TALK_OPENING =
+  "Just talk to me — decisions, domain signals, check-ins, SOPs, who owns what. I answer from approved guides and live portal data. I never write Founder Focus, Can Wait, Delegate, or Observe-only; edit those yourself on This week's plan if you want.";
 
 const DOMAIN_TAB_IDS: DomainTabId[] = ["accounts", "hr", "clinical", "marketing", "compliance"];
 
@@ -393,106 +391,8 @@ function ObserveLogButton({
   );
 }
 
-function formatWeeklyDraftReply(ai: WeeklyPlanDraft, userText: string): string {
-  const cites = ai.citations ?? [];
-  const onlyFounder = cites.length === 0 || cites.every((c) => c.startsWith("founder."));
-  const aiDown = ai.method === "deterministic" || Boolean(ai.aiUnavailable);
-  const lines: string[] = [
-    aiDown
-      ? `**AI unavailable** — showing a basic non-AI scaffold from your text + portal counts (not a grounded AI plan)${
-          ai.aiUnavailable ? `: ${ai.aiUnavailable.userMessage}` : ""
-        }.`
-      : `Here's an AI draft from your priorities${
-          cites.length && !onlyFounder ? ` and ${cites.length} portal signal(s)` : ""
-        } (${ai.method}):`,
-    "",
-    `**Founder Focus:** ${ai.founderFocus.trim() || "—"}`,
-  ];
-  if (ai.canWait.filter(Boolean).length) {
-    lines.push("", "**Can Wait:**");
-    ai.canWait.filter(Boolean).forEach((c, i) => lines.push(`${i + 1}. ${c}`));
-  }
-  if (ai.delegate.length) {
-    lines.push("", "**Delegate:**");
-    for (const d of ai.delegate) {
-      lines.push(`• ${d.lane} → ${d.ownerName}${d.note ? ` — ${d.note}` : ""}`);
-    }
-  }
-  if (ai.observeOnly.length) {
-    lines.push("", "**Observe:**");
-    for (const o of ai.observeOnly) {
-      lines.push(`• ${o.lane}: ${o.instruction}`);
-    }
-  }
-
-  const lower = userText.toLowerCase();
-  if (/fund|rais(e|ing)|capital|investor|pay myself|salary|compensation|draw|profit/.test(lower)) {
-    lines.push(
-      "",
-      "**Pushback:** If the goal is cash to pay yourself, this week's Focus should be the highest-leverage *cash decision* (collections, pricing, ads pause/scale, grant deadline) — not a vague multi-month raise unless something is due now.",
-    );
-  }
-
-  if (onlyFounder) {
-    lines.push(
-      "",
-      "I don't have approved company knowledge on this beyond what you just typed — treating it as decision framing, not a researched plan. Flag missing pieces below so we can add them to company memory (doesn't have to be an SOP).",
-    );
-  } else if (cites.length) {
-    lines.push("", `Signals used: ${cites.slice(0, 8).join(", ")}${cites.length > 8 ? "…" : ""}`);
-  }
-
-  lines.push("", "Edit the plan record below, refine if needed, then Save or Lock.");
-  return lines.join("\n");
-}
-
-function coachFollowUpsForAsk(userText: string): string[] {
-  const lower = userText.toLowerCase();
-  if (/fund|rais(e|ing)|capital|investor|pay myself|salary|compensation|draw/.test(lower)) {
-    return [
-      "What's the minimum monthly draw you need in the next 90 days?",
-      "US cash path vs India (Amcare) grants — which pool first?",
-      "What single decision this week unlocks cash (vs “raise capital” as a narrative)?",
-    ];
-  }
-  return [
-    "What is the one decision only you can make this week?",
-    "What should wait so Focus stays a single item?",
-    "Who owns the next step if this isn't founder-only?",
-  ];
-}
-
-function coachKnowledgeGapsForAsk(userText: string, draft: WeeklyPlanDraft): string[] {
-  const gaps: string[] = [];
-  const lower = userText.toLowerCase();
-  const cites = draft.citations ?? [];
-  const onlyFounder = cites.length === 0 || cites.every((c) => c.startsWith("founder."));
-  if (/fund|rais(e|ing)|capital|investor/.test(lower)) {
-    gaps.push("Fundraising approach & constraints for Siya Health (what’s on / off the table)");
-  }
-  if (/pay myself|salary|compensation|draw|profit/.test(lower)) {
-    gaps.push("Founder compensation / personal draw policy (when and how)");
-  }
-  if (onlyFounder) {
-    gaps.push("Company memory covering this topic — so Coach and Assist stay consistent");
-  }
-  return gaps.slice(0, 4);
-}
-
-function planFromSeedDraft(plan: WeeklyPlanRecord, weekStart: string, seed?: WeeklyPlanDraft | null): WeeklyPlanRecord {
-  if (!seed) return plan;
-  return {
-    ...plan,
-    weekStart,
-    founderFocus: seed.founderFocus || plan.founderFocus,
-    canWait: seed.canWait.length ? seed.canWait : plan.canWait,
-    delegate: seed.delegate.length ? seed.delegate : plan.delegate,
-    observeOnly: seed.observeOnly.length ? seed.observeOnly : plan.observeOnly,
-  };
-}
-
-/** Editor for Draft/Refine/Lock — chat bubbles live in the parent thread only. */
-function PlanChatComposer({
+/** Manual weekly plan editor — AI Draft/Refine/chat disconnected from UI (libs retained). */
+function WeeklyPlanManualForm({
   plan,
   monthKey,
   weekStart,
@@ -500,8 +400,6 @@ function PlanChatComposer({
   canEdit,
   canUnlock,
   onSaved,
-  seedPriorities,
-  seedDraft,
 }: {
   plan: WeeklyPlanRecord;
   monthKey: string;
@@ -510,114 +408,12 @@ function PlanChatComposer({
   canEdit: boolean;
   canUnlock: boolean;
   onSaved: () => void;
-  /** Prefill from the landing chat turn. */
-  seedPriorities?: string;
-  /** AI draft already produced by the parent send handler. */
-  seedDraft?: WeeklyPlanDraft | null;
 }) {
-  const [prioritiesRaw, setPrioritiesRaw] = useState(
-    (seedPriorities?.trim() || plan.prioritiesRaw) ?? "",
-  );
-  const [draft, setDraft] = useState(() => planFromSeedDraft(plan, weekStart, seedDraft));
-  const [lastCitations, setLastCitations] = useState<string[]>(() => seedDraft?.citations ?? []);
-  const [refineText, setRefineText] = useState("");
+  const [draft, setDraft] = useState(plan);
   const [saving, setSaving] = useState(false);
-  const [drafting, setDrafting] = useState(false);
-  const [refining, setRefining] = useState(false);
   const [locking, setLocking] = useState(false);
   const [err, setErr] = useState<string | null>(null);
-  const [note, setNote] = useState<string | null>(() =>
-    seedDraft
-      ? `Draft applied (${seedDraft.method}, ${seedDraft.citations.length} citations). Refine or Save / Lock.`
-      : null,
-  );
-  const draftInFlight = useRef(false);
-
-  function applyDraftResult(
-    ai: {
-      founderFocus: string;
-      canWait: string[];
-      delegate: WeeklyPlanRecord["delegate"];
-      observeOnly: WeeklyPlanRecord["observeOnly"];
-      citations: string[];
-      method: string;
-    },
-    mode: "draft" | "refine",
-  ) {
-    setDraft((prev) => ({
-      ...prev,
-      weekStart,
-      prioritiesRaw,
-      founderFocus: ai.founderFocus,
-      canWait: ai.canWait,
-      delegate: ai.delegate.length ? ai.delegate : prev.delegate,
-      observeOnly: ai.observeOnly.length ? ai.observeOnly : prev.observeOnly,
-    }));
-    setLastCitations(ai.citations ?? []);
-    setNote(
-      mode === "refine"
-        ? `Refined (${ai.method}, ${ai.citations.length} citations). Edit fields below or refine again — then Save / Lock.`
-        : `Draft ready (${ai.method}, ${ai.citations.length} citations). Edit Focus / Can Wait / Delegate, or refine.`,
-    );
-  }
-
-  async function handleDraft() {
-    if (draftInFlight.current) return;
-    setErr(null);
-    setNote(null);
-    const tip = prioritiesRaw.trim();
-    if (!tip) {
-      setErr("Share priorities for this week before Draft.");
-      return;
-    }
-    draftInFlight.current = true;
-    setDrafting(true);
-    try {
-      const { draft: ai } = await draftWeeklyPlan(prioritiesRaw);
-      applyDraftResult(ai, "draft");
-    } catch (ex) {
-      setErr(ex instanceof Error ? ex.message : "Draft failed");
-    } finally {
-      draftInFlight.current = false;
-      setDrafting(false);
-    }
-  }
-
-  async function handleRefine() {
-    if (draftInFlight.current) return;
-    setErr(null);
-    setNote(null);
-    const instruction = refineText.trim();
-    if (!instruction) {
-      setErr("Type an adjustment before Refine.");
-      return;
-    }
-    if (!draft.founderFocus.trim() && !draft.canWait.some(Boolean)) {
-      setErr("Run Draft breakdown first, then Refine.");
-      return;
-    }
-    draftInFlight.current = true;
-    setRefining(true);
-    try {
-      const { draft: ai } = await draftWeeklyPlan(prioritiesRaw, {
-        refineInstruction: instruction,
-        currentDraft: {
-          founderFocus: draft.founderFocus,
-          canWait: draft.canWait.filter(Boolean),
-          delegate: draft.delegate,
-          observeOnly: draft.observeOnly,
-          citations: lastCitations,
-        },
-      });
-      applyDraftResult(ai, "refine");
-      setRefineText("");
-    } catch (ex) {
-      setErr(ex instanceof Error ? ex.message : "Refine failed");
-    } finally {
-      draftInFlight.current = false;
-      setRefining(false);
-    }
-  }
+  const [note, setNote] = useState<string | null>(null);
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault();
@@ -632,7 +428,7 @@ function PlanChatComposer({
       await saveWeeklyPlan({
         weekStart,
         monthKey,
-        prioritiesRaw,
+        prioritiesRaw: plan.prioritiesRaw ?? "",
         founderFocus: draft.founderFocus,
         canWait: draft.canWait.filter(Boolean).slice(0, 3),
         delegate: draft.delegate,
@@ -655,7 +451,7 @@ function PlanChatComposer({
       await saveWeeklyPlan({
         weekStart,
         monthKey,
-        prioritiesRaw,
+        prioritiesRaw: plan.prioritiesRaw ?? "",
         founderFocus: draft.founderFocus,
         canWait: draft.canWait.filter(Boolean).slice(0, 3),
         delegate: draft.delegate,
@@ -688,23 +484,55 @@ function PlanChatComposer({
 
   if (isLocked) {
     return (
-      <div className="space-y-3">
-        <div className="rounded-2xl bg-[var(--siya-bg-subtle)] px-3 py-2 text-xs text-[var(--siya-text-secondary)]">
+      <div className="space-y-4">
+        <div className="rounded-xl bg-[var(--siya-bg-subtle)] px-3 py-2 text-xs text-[var(--siya-text-secondary)]">
           Week locked
-          {plan.lockedAt ? ` · ${new Date(plan.lockedAt).toLocaleString()}` : ""}. Draft / Refine hidden until unlock.
+          {plan.lockedAt ? ` · ${new Date(plan.lockedAt).toLocaleString()}` : ""}. Unlock to edit fields.
         </div>
-        {plan.prioritiesRaw?.trim() ? (
-          <div className="ml-auto max-w-[90%] rounded-2xl rounded-br-md bg-[var(--siya-btn-primary)] px-3 py-2 text-sm text-white">
-            <p className="whitespace-pre-wrap">{plan.prioritiesRaw}</p>
+        <div className="space-y-3 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4">
+          <div>
+            <p className="text-[10px] font-semibold uppercase text-[var(--siya-text-muted)]">Founder Focus</p>
+            <p className="mt-1 text-sm font-medium">{plan.founderFocus || "—"}</p>
           </div>
-        ) : null}
-        <div className="max-w-[90%] rounded-2xl rounded-bl-md border border-[var(--siya-border)] bg-[var(--siya-white)] px-3 py-2 text-sm">
-          <p className="text-[10px] font-semibold uppercase text-[var(--siya-text-muted)]">Founder Focus</p>
-          <p className="mt-1 font-medium">{plan.founderFocus || "—"}</p>
+          {plan.canWait.filter(Boolean).length ? (
+            <div>
+              <p className="text-[10px] font-semibold uppercase text-[var(--siya-text-muted)]">Can Wait</p>
+              <ul className="mt-1 list-inside list-disc text-sm">
+                {plan.canWait.filter(Boolean).map((c) => (
+                  <li key={c}>{c}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+          {plan.delegate.length ? (
+            <div>
+              <p className="text-[10px] font-semibold uppercase text-[var(--siya-text-muted)]">Delegate</p>
+              <ul className="mt-1 space-y-1 text-sm">
+                {plan.delegate.map((d) => (
+                  <li key={`${d.lane}-${d.ownerName}`}>
+                    {d.lane} → {d.ownerName}
+                    {d.note ? ` — ${d.note}` : ""}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+          {plan.observeOnly.length ? (
+            <div>
+              <p className="text-[10px] font-semibold uppercase text-[var(--siya-text-muted)]">Observe only</p>
+              <ul className="mt-1 space-y-1 text-sm">
+                {plan.observeOnly.map((o) => (
+                  <li key={o.id}>
+                    <strong>{o.lane}:</strong> {o.instruction}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </div>
         {canUnlock ? (
           <button type="button" disabled={locking} onClick={() => void handleUnlock()} className={portalBtnNavySm}>
-            {locking ? "Unlocking…" : "Unlock to draft / refine"}
+            {locking ? "Unlocking…" : "Unlock this week"}
           </button>
         ) : null}
         {err ? <p className="text-xs text-red-700">{err}</p> : null}
@@ -716,56 +544,18 @@ function PlanChatComposer({
   if (!canEdit) {
     return (
       <p className="text-sm text-[var(--siya-text-muted)]">
-        Read-only for your role — founder/exec can draft and lock this week&apos;s plan.
+        Read-only for your role — founder/exec can edit and lock this week&apos;s plan.
       </p>
     );
   }
 
   return (
-    <form onSubmit={(e) => void handleSave(e)} className="flex min-h-[320px] flex-col gap-3">
-      <p className="rounded-2xl bg-[var(--siya-bg-subtle)] px-3 py-2 text-[11px] text-[var(--siya-text-muted)]">
-        Re-draft or refine below if needed — structured fields are the record of truth. Then Save / Lock.
+    <form onSubmit={(e) => void handleSave(e)} className="flex max-w-2xl flex-col gap-4">
+      <p className="text-sm text-[var(--siya-text-secondary)]">
+        Edit this week&apos;s plan directly, then Save or Lock. Domain tabs stay for live portal signals.
       </p>
 
-      <label className="block text-xs font-semibold">
-        This week&apos;s priorities
-        <textarea
-          value={prioritiesRaw}
-          onChange={(e) => setPrioritiesRaw(e.target.value)}
-          rows={3}
-          placeholder="What matters this week? Decisions, risks, people to unblock…"
-          className="mt-1 w-full rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] px-3 py-2 text-sm"
-          disabled={drafting || refining}
-        />
-      </label>
-      <div className="flex flex-wrap gap-2">
-        <button type="button" disabled={drafting || refining} onClick={() => void handleDraft()} className={portalBtnNavySm}>
-          {drafting ? "Drafting…" : seedDraft ? "Re-draft breakdown" : "Draft breakdown"}
-        </button>
-      </div>
-
-      <div className="space-y-2 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)]/40 p-3">
-        <label className="block text-xs font-semibold">
-          Refine (adjustment to current draft — not a chat thread)
-          <input
-            value={refineText}
-            onChange={(e) => setRefineText(e.target.value)}
-            placeholder='e.g. "Move India grant to Can Wait" or "Focus on TX ads pause decision"'
-            className="mt-1 w-full rounded-lg border px-3 py-2 text-sm"
-            disabled={drafting || refining}
-          />
-        </label>
-        <button
-          type="button"
-          disabled={drafting || refining || !refineText.trim()}
-          onClick={() => void handleRefine()}
-          className={portalBtnGhostSm}
-        >
-          {refining ? "Refining…" : "Refine"}
-        </button>
-      </div>
-
-      <div className="space-y-2 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-3">
+      <div className="space-y-3 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4">
         <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--siya-text-muted)]">Plan record</p>
         <label className="block text-xs font-semibold">
           Founder Focus (one decision)
@@ -837,7 +627,7 @@ function PlanChatComposer({
 
       {err ? <p className="text-xs text-red-700">{err}</p> : null}
       {note ? <p className="text-xs text-[var(--siya-text-muted)]">{note}</p> : null}
-      <div className="sticky bottom-0 flex flex-wrap gap-2 border-t border-[var(--siya-border)] bg-[var(--siya-white)]/95 pt-3">
+      <div className="flex flex-wrap gap-2">
         <button type="submit" disabled={saving} className={portalBtnAccentSm}>
           {saving ? "Saving…" : "Save draft"}
         </button>
@@ -849,496 +639,36 @@ function PlanChatComposer({
   );
 }
 
-type CoachIntent = "attention" | "drift" | "signals" | "week" | "actuals" | "monthly" | "observe" | "plan";
-
-type CoachTurn = {
-  id: string;
-  role: "user" | "coach";
-  text: string;
-  panel?: CoachIntent;
-  seedPriorities?: string;
-  seedDraft?: WeeklyPlanDraft | null;
-  followUps?: string[];
-  knowledgeGaps?: string[];
-  drafting?: boolean;
-};
-
-function timeOfDayGreeting(): string {
-  const h = new Date().getHours();
-  if (h < 12) return "Good morning";
-  if (h < 17) return "Good afternoon";
-  return "Good evening";
-}
-
-function matchCoachIntent(raw: string): CoachIntent | "free" {
-  const t = raw.toLowerCase().trim();
-  if (!t) return "free";
-  // Short / explicit asks first — free-form priorities fall through to "free" → plan draft.
-  if (
-    /^(what needs my attention|needs? my attention|attention queue|what should i (look at|focus on|do)\??)$/.test(t) ||
-    /\bwhat needs my attention\b/.test(t)
-  ) {
-    return "attention";
-  }
-  if (/^(drift( check)?|show drift|any drift)\??$/.test(t) || /\b(show|any) drift\b/.test(t)) return "drift";
-  if (
-    /\b(how's this week|how is this week|how is the week|how'?s the week|week going|status this week)\b/.test(t)
-  ) {
-    return "week";
-  }
-  if (/^(signals?|show signals?|portal signals?)\??$/.test(t)) return "signals";
-  if (/^(actuals|show actuals|drift metrics|manual actuals)\??$/.test(t)) return "actuals";
-  if (/^(monthly( plan)?|show monthly|north star|time budget)\??$/.test(t) || /\bmonthly plan\b/.test(t)) {
-    return "monthly";
-  }
-  if (/^(observe( only)?|show observe)\??$/.test(t)) return "observe";
-  if (
-    /^(draft( this week'?s)?( plan)?|weekly plan|plan this week|lock (this |the )?week)\??$/.test(t) ||
-    /\bdraft this week'?s plan\b/.test(t)
-  ) {
-    return "plan";
-  }
-  return "free";
-}
-
 function PlanThreadView({
   data,
   onRefresh,
-  firstName,
 }: {
   data: FounderCoachBrief;
   onRefresh: () => void;
-  firstName?: string;
 }) {
   const wp = data.weeklyPlan;
-  const mp = data.monthlyPlan;
-  const ps = data.portalSignals;
-  const leadSignals = data.leadCheckInSignals ?? [];
   const isLocked = Boolean(data.isWeekLocked || wp?.lockedAt);
-  const [input, setInput] = useState("");
-  const [turns, setTurns] = useState<CoachTurn[]>([]);
-  const [sending, setSending] = useState(false);
-  const [gapNote, setGapNote] = useState<string | null>(null);
 
-  const attentionQueue = useMemo(() => {
-    const byId = new Map<string, (typeof leadSignals)[number]>();
-    for (const d of data.domains ?? []) {
-      for (const item of d.items) byId.set(item.id, item);
-    }
-    for (const item of leadSignals) byId.set(item.id, item);
-    return [...byId.values()];
-  }, [data.domains, leadSignals]);
-
-  const greeting = `${timeOfDayGreeting()}${firstName ? `, ${firstName}` : ""} — what's on your mind today?`;
-
-  async function flagKnowledgeGaps(gaps: string[], sourceQuestion: string) {
-    setGapNote(null);
-    const token = getStoredToken();
-    if (!token) {
-      setGapNote("Sign in required to flag knowledge.");
-      return;
-    }
-    const task = gaps.join(" · ").slice(0, 500) || "Missing company memory";
-    const question = `Founder Coach gap: ${sourceQuestion.slice(0, 400)}\n\nMissing:\n- ${gaps.join("\n- ")}`.slice(
-      0,
-      2000,
-    );
-    try {
-      const res = await fetch("/api/knowledge-gap", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          question,
-          department: "Leadership",
-          task,
-        }),
-      });
-      const body = (await res.json().catch(() => ({}))) as { error?: string; route?: { mode?: string } };
-      if (!res.ok) throw new Error(body.error || `Flag failed (${res.status})`);
-      notifyOwnerForGap({
-        question,
-        department: "Leadership",
-        task,
-        routeMode: body.route?.mode === "lead_digest" ? "lead_digest" : "founder_instant",
-      });
-      setGapNote("Flagged for company memory / Leadership — not an SOP requirement.");
-    } catch (ex) {
-      setGapNote(ex instanceof Error ? ex.message : "Could not flag knowledge gap");
-    }
+  if (!wp || !(data.canEditWeekly || data.canEditMonthly || isLocked)) {
+    return <p className="text-sm text-[var(--siya-text-muted)]">Weekly plan not available yet.</p>;
   }
-
-  async function pushIntent(intent: CoachIntent | "free", userText: string) {
-    const id = `t-${Date.now()}`;
-    const text = userText.trim() || (intent === "plan" ? "Draft this week's plan" : "");
-    if (!text && intent !== "plan") return;
-
-    if (intent === "free" || intent === "plan") {
-      const isPlanAffordance =
-        intent === "plan" &&
-        /^(draft( this week'?s)?( plan)?|weekly plan|plan this week)$/i.test(userText.trim());
-      const seed = isPlanAffordance ? wp?.prioritiesRaw?.trim() || "" : text;
-      const userId = `${id}-u`;
-      const coachId = `${id}-c`;
-
-      // Open workspace without auto-draft when affordance is empty "Draft this week's plan"
-      if (isPlanAffordance && !seed) {
-        setTurns((prev) => [
-          ...prev,
-          { id: userId, role: "user", text: "Draft this week's plan" },
-          {
-            id: coachId,
-            role: "coach",
-            text: "Here's the weekly plan workspace — add priorities, then Draft, Refine, Save / Lock.",
-            panel: "plan",
-            seedPriorities: "",
-          },
-        ]);
-        return;
-      }
-
-      if (isLocked) {
-        setTurns((prev) => [
-          ...prev,
-          { id: userId, role: "user", text },
-          {
-            id: coachId,
-            role: "coach",
-            text: "This week is locked. Unlock to draft or change Focus / Can Wait / Delegate.",
-            panel: "plan",
-            seedPriorities: seed,
-          },
-        ]);
-        return;
-      }
-
-      setTurns((prev) => [
-        ...prev,
-        { id: userId, role: "user", text },
-        {
-          id: coachId,
-          role: "coach",
-          text: "Working on an AI draft from your priorities and this week's signals…",
-          drafting: true,
-        },
-      ]);
-
-      try {
-        const { draft: ai } = await draftWeeklyPlan(seed);
-        const followUps = coachFollowUpsForAsk(seed);
-        const knowledgeGaps = coachKnowledgeGapsForAsk(seed, ai);
-        setTurns((prev) =>
-          prev.map((t) =>
-            t.id === coachId
-              ? {
-                  ...t,
-                  drafting: false,
-                  text: formatWeeklyDraftReply(ai, seed),
-                  panel: "plan" as const,
-                  seedPriorities: seed,
-                  seedDraft: ai,
-                  followUps,
-                  knowledgeGaps,
-                }
-              : t,
-          ),
-        );
-      } catch (ex) {
-        setTurns((prev) =>
-          prev.map((t) =>
-            t.id === coachId
-              ? {
-                  ...t,
-                  drafting: false,
-                  text: `Draft failed: ${ex instanceof Error ? ex.message : "unknown error"}. You can still open the plan workspace and try Draft breakdown.`,
-                  panel: "plan",
-                  seedPriorities: seed,
-                }
-              : t,
-          ),
-        );
-      }
-      return;
-    }
-
-    const replies: Record<Exclude<CoachIntent, "plan">, string> = {
-      attention: attentionQueue.length
-        ? `Here's what needs attention (top ${FOUNDER_QUEUE_PREVIEW} by urgency).`
-        : "Nothing in the attention queue from connected sources this week.",
-      drift: data.driftFlags.length
-        ? `${data.driftFlags.length} drift flag${data.driftFlags.length === 1 ? "" : "s"} from current rules.`
-        : "No drift flags from current rules.",
-      signals: "Signals from portal counts and lead check-ins this week.",
-      week: "Here's how this week looks — drift and signals.",
-      actuals: "Manual drift metrics (ads / India / US intro). Marketing/Clinical/Compliance actuals come from lead check-ins.",
-      monthly: `Monthly plan · ${mp?.monthKey ?? data.monthKey}.`,
-      observe: "Observe-only flags for this week — log changes without rewriting the locked plan.",
-    };
-
-    const panel: CoachIntent = intent === "week" ? "week" : intent;
-    setTurns((prev) => [
-      ...prev,
-      { id: `${id}-u`, role: "user", text },
-      { id: `${id}-c`, role: "coach", text: replies[intent === "week" ? "week" : intent], panel },
-    ]);
-  }
-
-  async function onSend(e?: React.FormEvent) {
-    e?.preventDefault();
-    const text = input.trim();
-    if (!text || sending) return;
-    setSending(true);
-    setInput("");
-    try {
-      await pushIntent(matchCoachIntent(text), text);
-    } finally {
-      setSending(false);
-    }
-  }
-
-  function affordance(intent: CoachIntent, label: string) {
-    return (
-      <button
-        key={intent}
-        type="button"
-        disabled={sending}
-        className="text-[11px] text-[var(--siya-text-muted)] underline-offset-2 hover:text-[var(--siya-accent)] hover:underline disabled:opacity-50"
-        onClick={() => void pushIntent(intent, label)}
-      >
-        {label}
-      </button>
-    );
-  }
-
-  function renderPanel(turn: CoachTurn) {
-    if (!turn.panel) return null;
-    if (turn.panel === "attention") {
-      return attentionQueue.length ? <CollapsibleDomainItemList items={attentionQueue} /> : null;
-    }
-    if (turn.panel === "drift") {
-      return data.driftFlags.length ? (
-        <div className="space-y-2">
-          {data.driftFlags.map((f) => (
-            <DriftFlagCard key={f.id} flag={f} />
-          ))}
-        </div>
-      ) : null;
-    }
-    if (turn.panel === "signals") {
-      return (
-        <div className="space-y-3">
-          {leadSignals.length ? <CollapsibleDomainItemList items={leadSignals} /> : (
-            <p className="text-xs text-[var(--siya-text-muted)]">No lead check-ins filed for this week yet.</p>
-          )}
-          <ul className="grid gap-2 text-sm sm:grid-cols-2">
-            <li>
-              Tasks today:{" "}
-              <strong>
-                {ps.tasksDoneToday}/{ps.tasksDueToday}
-              </strong>
-            </li>
-            {ps.overdueTasks > 0 ? (
-              <li>
-                Overdue: <strong>{ps.overdueTasks}</strong>
-              </li>
-            ) : null}
-            <li>
-              Chat reviews: <strong>{ps.openChatReviews}</strong>{" "}
-              <PortalNavLink href="/chat-review" className="text-xs text-[var(--siya-accent)] underline">
-                Review
-              </PortalNavLink>
-            </li>
-            <li>
-              Handoffs: <strong>{ps.shiftHandoffsToday}</strong>
-            </li>
-            <li>
-              TX CPA: <strong>{data.actuals?.adsTxCpa ?? "—"}</strong>
-            </li>
-            <li>
-              TX conversions: <strong>{data.actuals?.adsTxConversions ?? "—"}</strong>
-            </li>
-          </ul>
-        </div>
-      );
-    }
-    if (turn.panel === "week") {
-      return (
-        <div className="space-y-4">
-          {data.driftFlags.length ? (
-            <div className="space-y-2">
-              {data.driftFlags.map((f) => (
-                <DriftFlagCard key={f.id} flag={f} />
-              ))}
-            </div>
-          ) : (
-            <p className="text-xs text-[var(--siya-text-muted)]">No drift flags.</p>
-          )}
-          {renderPanel({ ...turn, panel: "signals" })}
-        </div>
-      );
-    }
-    if (turn.panel === "actuals") {
-      return data.canEditWeekly ? (
-        <ActualsEditor weekStart={data.weekStart} actuals={data.actuals} onSaved={onRefresh} />
-      ) : (
-        <p className="text-sm text-[var(--siya-text-muted)]">Actuals edit is founder/exec only.</p>
-      );
-    }
-    if (turn.panel === "monthly") {
-      if (data.canEditMonthly && mp) {
-        return <MonthlyPlanEditor plan={mp} weekStart={data.weekStart} onSaved={onRefresh} />;
-      }
-      if (mp) return <MonthlyPlanReadOnly plan={mp} />;
-      return <p className="text-sm text-[var(--siya-text-muted)]">Monthly plan not published yet.</p>;
-    }
-    if (turn.panel === "observe") {
-      return (
-        <ul className={`space-y-3 text-sm ${portalStatusInfoText}`}>
-          {(wp?.observeOnly ?? []).map((o) => (
-            <li key={o.id}>
-              <p>
-                <strong>{o.lane}:</strong> {o.instruction}
-              </p>
-              {!isLocked ? (
-                <ObserveLogButton
-                  observeId={o.id}
-                  weekStart={data.weekStart}
-                  label={`Change logged: ${o.lane}`}
-                  onLogged={onRefresh}
-                />
-              ) : null}
-            </li>
-          ))}
-          {!wp?.observeOnly?.length ? <li className="text-[var(--siya-text-muted)]">None set for this week.</li> : null}
-        </ul>
-      );
-    }
-    if (turn.panel === "plan") {
-      if (!wp || !(data.canEditWeekly || data.canEditMonthly || isLocked)) {
-        return <p className="text-sm text-[var(--siya-text-muted)]">Weekly plan not available yet.</p>;
-      }
-      return (
-        <PlanChatComposer
-          key={`plan-${turn.id}`}
-          plan={wp}
-          monthKey={data.monthKey}
-          weekStart={data.weekStart}
-          isLocked={isLocked}
-          canEdit={Boolean(data.canEditWeekly)}
-          canUnlock={Boolean(data.canEditMonthly)}
-          onSaved={onRefresh}
-          seedPriorities={turn.seedPriorities}
-          seedDraft={turn.seedDraft}
-        />
-      );
-    }
-    return null;
-  }
-
-  const empty = turns.length === 0;
 
   return (
-    <div className="flex min-h-[min(70dvh,640px)] flex-col">
-      <div className="flex-1 space-y-4 overflow-y-auto px-1 py-2">
-        {empty ? (
-          <div className="flex min-h-[40vh] flex-col items-center justify-center px-4 text-center">
-            <p className="font-[family-name:var(--font-poppins)] text-xl font-medium text-[var(--siya-primary)] md:text-2xl">
-              {greeting}
-            </p>
-          </div>
-        ) : (
-          turns.map((turn) =>
-            turn.role === "user" ? (
-              <div
-                key={turn.id}
-                className="ml-auto max-w-[92%] whitespace-pre-wrap rounded-2xl rounded-br-md bg-[var(--siya-btn-primary)] px-3.5 py-2.5 text-sm text-white"
-              >
-                {turn.text}
-              </div>
-            ) : (
-              <div key={turn.id} className="max-w-[96%] space-y-3">
-                <div className="rounded-2xl rounded-bl-md border border-[var(--siya-border)] bg-[var(--siya-white)] px-3.5 py-2.5 text-sm text-[var(--siya-text-secondary)] whitespace-pre-wrap">
-                  {turn.text}
-                </div>
-                {turn.followUps?.length ? (
-                  <div className="rounded-lg border border-[var(--siya-border)]/70 bg-[var(--siya-bg-subtle)] px-3 py-2 text-xs text-[var(--siya-text-secondary)]">
-                    <p className="font-semibold text-[var(--siya-primary)]">Follow-ups</p>
-                    <ul className="mt-1 list-disc space-y-1 pl-4">
-                      {turn.followUps.map((q) => (
-                        <li key={q}>
-                          <button
-                            type="button"
-                            className="text-left text-[var(--siya-accent)] hover:underline"
-                            disabled={sending}
-                            onClick={() => {
-                              setInput(q);
-                            }}
-                          >
-                            {q}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : null}
-                {turn.knowledgeGaps?.length ? (
-                  <div className={`${portalStatusWarnBox} px-3 py-2 text-xs ${portalStatusWarnText}`}>
-                    <p className="font-semibold">Missing company knowledge (not necessarily an SOP)</p>
-                    <ul className="mt-1 list-disc space-y-0.5 pl-4">
-                      {turn.knowledgeGaps.map((g) => (
-                        <li key={g}>{g}</li>
-                      ))}
-                    </ul>
-                    <button
-                      type="button"
-                      className={`mt-2 ${portalBtnGhostSm}`}
-                      onClick={() =>
-                        void flagKnowledgeGaps(
-                          turn.knowledgeGaps ?? [],
-                          turn.seedPriorities || "Founder Coach ask",
-                        )
-                      }
-                    >
-                      Flag missing knowledge
-                    </button>
-                    {gapNote ? <p className="mt-1 text-[11px] opacity-90">{gapNote}</p> : null}
-                  </div>
-                ) : null}
-                {turn.panel ? (
-                  <div className="rounded-xl border border-[var(--siya-border)]/80 bg-[var(--siya-white)]/90 p-3 shadow-[var(--siya-shadow)]">
-                    {renderPanel(turn)}
-                  </div>
-                ) : null}
-              </div>
-            ),
-          )
-        )}
-      </div>
-
-      <form onSubmit={onSend} className="sticky bottom-0 border-t border-[var(--siya-border)]/60 bg-[var(--siya-bg-page)]/95 pt-3 backdrop-blur">
-        <div className="flex gap-2">
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="What's on your mind…"
-            className="min-w-0 flex-1 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] px-4 py-3 text-sm outline-none focus:border-[var(--siya-accent)] focus:ring-2 focus:ring-[var(--siya-accent)]/20"
-            autoFocus
-          />
-          <VoiceInputButton value={input} onChange={setInput} size="md" />
-          <button type="submit" disabled={!input.trim() || sending} className={portalBtnAccentSm}>
-            {sending ? "…" : "Send"}
-          </button>
-        </div>
-        <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 px-0.5">
-          {affordance("attention", "What needs my attention")}
-          {affordance("week", "How's this week going")}
-          {affordance("monthly", "Monthly plan")}
-          {affordance("plan", "Draft this week's plan")}
-          {affordance("actuals", "Actuals")}
-        </div>
-      </form>
+    <div className="space-y-4">
+      <header>
+        <h2 className={portalH3}>This week&apos;s plan</h2>
+        <p className="mt-1 text-xs text-[var(--siya-text-muted)]">Week of {data.weekStart}</p>
+      </header>
+      <WeeklyPlanManualForm
+        key={`${wp.updatedAt}-${wp.lockedAt ?? "open"}`}
+        plan={wp}
+        monthKey={data.monthKey}
+        weekStart={data.weekStart}
+        isLocked={isLocked}
+        canEdit={Boolean(data.canEditWeekly)}
+        canUnlock={Boolean(data.canEditMonthly)}
+        onSaved={onRefresh}
+      />
     </div>
   );
 }
@@ -1359,7 +689,7 @@ function DomainThreadView({ domain }: { domain: DomainSnapshot }) {
         </div>
         <p className="mt-2 text-sm text-[var(--siya-text-secondary)]">{domain.summary}</p>
         <p className="mt-2 text-[11px] text-[var(--siya-text-muted)]">
-          Phase 1 snapshot · grounded Q&amp;A chat comes in Phase 2 · no invented numbers
+          Phase 1 snapshot · talk through signals in Just talk to me · no invented numbers
         </p>
       </article>
 
@@ -1444,11 +774,11 @@ export function FounderCoachPanel({ firstName }: { firstName?: string }) {
       refreshInterval: 120_000,
     },
   );
-  const [thread, setThread] = useState<CoachThreadId>("plan");
+  const [thread, setThread] = useState<CoachThreadId>("talk");
   const refresh = useCallback(() => void mutate(), [mutate]);
   const domains = data?.domains ?? [];
   const activeDomain =
-    thread === "plan" || thread === "assist" ? null : domains.find((d) => d.id === thread) ?? null;
+    thread === "talk" || thread === "plan" ? null : domains.find((d) => d.id === thread) ?? null;
 
   if (!isPortalAdmin(user?.role)) return null;
 
@@ -1476,11 +806,11 @@ export function FounderCoachPanel({ firstName }: { firstName?: string }) {
         aria-label="Founder Coach threads"
         className="hidden w-36 shrink-0 flex-col px-3 py-8 md:flex"
       >
+        <button type="button" className={threadButtonClass(thread === "talk")} onClick={() => setThread("talk")}>
+          Just talk to me
+        </button>
         <button type="button" className={threadButtonClass(thread === "plan")} onClick={() => setThread("plan")}>
           This week&apos;s plan
-        </button>
-        <button type="button" className={threadButtonClass(thread === "assist")} onClick={() => setThread("assist")}>
-          Assist
         </button>
         {DOMAIN_TAB_IDS.map((id) => {
           const domain = domains.find((d) => d.id === id);
@@ -1494,11 +824,11 @@ export function FounderCoachPanel({ firstName }: { firstName?: string }) {
       </nav>
 
       <div className="flex gap-1 overflow-x-auto px-3 py-2 md:hidden">
+        <button type="button" className={threadButtonClass(thread === "talk")} onClick={() => setThread("talk")}>
+          Talk
+        </button>
         <button type="button" className={threadButtonClass(thread === "plan")} onClick={() => setThread("plan")}>
           Plan
-        </button>
-        <button type="button" className={threadButtonClass(thread === "assist")} onClick={() => setThread("assist")}>
-          Assist
         </button>
         {DOMAIN_TAB_IDS.map((id) => {
           const domain = domains.find((d) => d.id === id);
@@ -1512,12 +842,22 @@ export function FounderCoachPanel({ firstName }: { firstName?: string }) {
       </div>
 
       <main className="min-w-0 flex-1 px-4 pb-8 pt-4 md:px-8 md:py-10">
-        {thread === "plan" ? (
-          <PlanThreadView data={data} onRefresh={refresh} firstName={resolvedName} />
-        ) : thread === "assist" ? (
-          <div className="flex min-h-[min(70dvh,640px)] flex-col">
-            <AssistChatShell firstName={resolvedName} />
+        {thread === "talk" ? (
+          <div className="flex min-h-[min(70dvh,640px)] flex-col gap-3">
+            <header>
+              <h2 className={portalH3}>Just talk to me</h2>
+              <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+                Same Ask engine as /help · answers only · Plan Record stays manual
+              </p>
+            </header>
+            <AssistChatShell
+              firstName={resolvedName}
+              surface="founder-coach"
+              openingOverride={FOUNDER_TALK_OPENING}
+            />
           </div>
+        ) : thread === "plan" ? (
+          <PlanThreadView data={data} onRefresh={refresh} />
         ) : activeDomain ? (
           <DomainThreadView domain={activeDomain} />
         ) : (

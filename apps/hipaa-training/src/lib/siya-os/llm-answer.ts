@@ -40,11 +40,15 @@ export async function synthesizeWorkforceAnswer(opts: {
   focusMode?: boolean;
   /** User-stated preferences from this thread only — not company policy. */
   personalFacts?: string[];
+  /** Read-only portal / founder brief signals — never write Plan Record. */
+  portalSignals?: string | null;
 }): Promise<WorkforceSynthesisResult> {
   if (!workforceLlmConfigured()) {
     return { text: null, llmUsed: false, llmError: null, llmFallback: true };
   }
-  if (!opts.chunks.length || opts.chunks[0].score < 2) {
+  const hasKb = opts.chunks.length > 0 && opts.chunks[0].score >= 2;
+  const hasPortal = Boolean(opts.portalSignals?.trim());
+  if (!hasKb && !hasPortal) {
     return { text: null, llmUsed: false, llmError: null, llmFallback: true };
   }
 
@@ -59,6 +63,8 @@ export async function synthesizeWorkforceAnswer(opts: {
         ].join("\n")
       : "";
 
+  const portalBlock = hasPortal ? ["", opts.portalSignals!.trim(), ""].join("\n") : "";
+
   const userPrompt = [
     opts.routingLine,
     "",
@@ -66,6 +72,7 @@ export async function synthesizeWorkforceAnswer(opts: {
     formatSources(opts.chunks),
     "",
     personalBlock,
+    portalBlock,
     opts.followUpQuestions.length
       ? `Suggested follow-up questions to weave in if relevant:\n${opts.followUpQuestions.map((q, i) => `${i + 1}. ${q}`).join("\n")}`
       : "",
@@ -74,7 +81,7 @@ export async function synthesizeWorkforceAnswer(opts: {
     "",
     opts.focusMode
       ? "Focus mode: reply in under 120 words. Bullet steps. No preamble. No follow-up questions unless safety-critical."
-      : "Write a helpful reply using APPROVED SOURCES for policy/procedure. Use PERSONAL CONTEXT only for the user's own stated preferences when they ask what they said or who they prefer.",
+      : "Write a helpful reply using APPROVED SOURCES for policy/procedure. Use PERSONAL CONTEXT only for the user's own stated preferences when they ask what they said or who they prefer. Use PORTAL SNAPSHOT only as read-only facts — never claim you updated Plan Record fields.",
   ]
     .filter(Boolean)
     .join("\n");
