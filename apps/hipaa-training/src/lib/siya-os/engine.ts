@@ -131,6 +131,8 @@ export async function runSiyaAssistantAsync(
           sources: [],
           portalLinks: ops.links,
           opsCoPilot: true,
+          // Presence / ops snapshot answers are definitive — never Founder Talk LLM enhancement.
+          ruleFinal: ops.intent === "team_pulse" || ops.intent === "overdue" || ops.intent === "task_status",
           pendingTask: founderCoach ? undefined : ops.pendingTask,
           executiveMeta: {
             confidence: ops.mode === "recommend" ? "high" : "medium",

@@ -63,7 +63,16 @@ export function detectAdminOpsIntent(message: string): AdminOpsIntent | null {
   ) {
     return { kind: "plan_day" };
   }
-  if (/\b(who('s| is) (on|working|online)|team pulse|who's on shift|coverage)\b/.test(t)) {
+  // Live presence / shift — hard Team pulse path (never Founder Talk portal LLM).
+  // Match natural asks: "who all are working", "who's present today", "on the clock", "who's here".
+  if (
+    /\b(team pulse|coverage)\b/.test(t) ||
+    /\bwho(?:'s|’s| is| are| all are)\b[\s\S]{0,40}\b(working|online|present|here|on(?: the)? clock|on shift)\b/.test(
+      t,
+    ) ||
+    /\b(working right now|present today|on the clock|who(?:'s|’s| is) here)\b/.test(t) ||
+    /\bwho(?:'s|’s| is) on(?: the)? (shift|floor|clock)\b/.test(t)
+  ) {
     return { kind: "team_pulse" };
   }
   if (/\b(overdue|past due|late tasks|slipping)\b/.test(t)) {
@@ -298,13 +307,16 @@ export async function runAdminOpsCoach(
       return null;
   }
 
-  const llm = await synthesizeAdminOpsAnswer({
-    userMessage: message,
-    intent: intent.kind,
-    snapshotSummary: messageOut,
-    history,
-  });
-  if (llm) messageOut = llm;
+  // Team pulse is deterministic live presence — never LLM-rewrite (avoids lead-roster / 7d-login invent).
+  if (intent.kind !== "team_pulse") {
+    const llm = await synthesizeAdminOpsAnswer({
+      userMessage: message,
+      intent: intent.kind,
+      snapshotSummary: messageOut,
+      history,
+    });
+    if (llm) messageOut = llm;
+  }
 
   return {
     intent: intent.kind,
