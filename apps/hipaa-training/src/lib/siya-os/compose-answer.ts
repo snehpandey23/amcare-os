@@ -72,7 +72,7 @@ export function askClarifyingQuestion(userMessage: string): string {
   ].join("\n");
 }
 
-/** Music / celebrity / entertainment — not staff help-desk work. */
+/** Music / celebrity / entertainment / civics trivia — not staff help-desk work. */
 export function isCasualOffTopic(text: string): boolean {
   const t = text.trim().toLowerCase();
   if (!t) return false;
@@ -86,12 +86,17 @@ export function isCasualOffTopic(text: string): boolean {
   if (/\b(best|favorite|favourite)\s+songs?\b/i.test(t)) return true;
   if (/\bsongs?\s+by\b/i.test(t)) return true;
   if (/^(best song ever|ac\s*dc\??)\s*$/i.test(t)) return true;
+  // Civics / general culture — not Siya staff SOPs
+  if (/\bpresident of (the )?(usa|u\.?s\.?a\.?|united states|india)\b/i.test(t)) return true;
+  if (/\b(american|us|u\.?s\.?)\s+culture\b/.test(t)) return true;
+  if (/\bcurrent events\b/.test(t) || /\bwho (is|was) the president\b/.test(t)) return true;
+  if (/\btrain(?:ing)?\s+staff\b/.test(t) && /\b(culture|civics|current events)\b/.test(t)) return true;
   return false;
 }
 
 export function casualOffTopicReply(): string {
   return [
-    "That’s outside what I can help with here — I don’t pick songs or entertainment.",
+    "That’s outside what I can help with here — I don’t cover entertainment, civics trivia, or general culture curriculum.",
     "",
     "Ask me about policies, SOPs, pricing, brand tokens, domain signals, or who owns an ops question.",
   ].join("\n");

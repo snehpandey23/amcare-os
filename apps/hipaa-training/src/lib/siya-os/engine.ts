@@ -36,6 +36,8 @@ import {
   founderCoachPlainOffTopic,
   founderCoachVaguePrompt,
   wantsFounderPortalSignals,
+  portalDomainFilter,
+  asksDomainFlags,
 } from "./founder-chat-context";
 
 export interface SiyaReply {
@@ -182,7 +184,10 @@ export async function runSiyaAssistantAsync(
   // Only load portal snapshot when the question is actually about portal/domain signals —
   // never for every Founder Talk turn (that unlocked inventing CAC/trivia from the brief).
   if (token && wantsFounderPortalSignals(message)) {
-    portalSignals = await fetchFounderPortalSignalsBlock(token);
+    portalSignals = await fetchFounderPortalSignalsBlock(token, {
+      domainFilter: portalDomainFilter(message),
+      flagsOnly: asksDomainFlags(message),
+    });
   }
 
   const layered = retrieveLayeredKnowledge(query, { sops, decisions, memories, limit: 6 });
@@ -538,13 +543,19 @@ function buildSiyaReply(
     }
   }
 
-  const confident = isConfidentAssistAnswer({
+  const confidentRaw = isConfidentAssistAnswer({
     userMessage: normalized,
     flowId: routing.flowId,
     routingConfidence: routing.confidence,
     topScore: chunks[0]?.score ?? 0,
     topChunk: chunks[0] ?? null,
   });
+  // Founder Talk: medium keyword hits (e.g. "culture" → Fun Friday) must not dump unrelated guides.
+  // Keep only very strong retrieval unless this is an explicit portal/domain ask.
+  const confident =
+    founderCoach && !wantsFounderPortalSignals(normalized)
+      ? confidentRaw && (chunks[0]?.score ?? 0) >= 40
+      : confidentRaw;
 
   // Unsure → stop. Do not dump weak keyword hits or invent from portal.
   // Portal LLM only when the user explicitly asked about portal/domain signals.

@@ -153,6 +153,8 @@ export type FounderCoachBriefPayload = {
    * weekly actuals) — flattened for "Signals this week". Not a second source.
    */
   leadCheckInSignals: DomainItem[];
+  /** Recent Memory decisions (siya_decisions) for Draft / attention — not a domain tab. */
+  decisionSignals: DomainItem[];
   canEditMonthly: boolean;
   canEditWeekly: boolean;
   isWeekLocked: boolean;
@@ -675,30 +677,6 @@ export async function collectDomainSnapshots(
       href: "/admin/team",
     });
   }
-  const hr: DomainSnapshot = {
-    id: "hr",
-    title: "HR",
-    status: "live",
-    summary: "Workforce roster and department SOP leads from the staff portal.",
-    items: sortDomainItems(hrItems),
-    checkins: [],
-    placeholders: [
-      "PTO / leave balances not tracked",
-      "Hiring pipeline / ATS not connected",
-      "Performance reviews not tracked",
-    ],
-  };
-
-  // —— Clinical: chat reviews, handoffs, training start, check-ins ——
-  const clinicalCheckins = await loadWeekCheckins(pool, weekStart, "Clinical Operations");
-  const openReviews = await pool.query(
-    `SELECT COUNT(*)::int AS c FROM chat_reviews WHERE status = 'open' AND review_date = $1`,
-    [today],
-  );
-  const handoffs = await pool.query(
-    `SELECT COUNT(*)::int AS c FROM shift_handoffs WHERE handoff_date = $1`,
-    [today],
-  );
   const trainingRows = await pool.query(
     `SELECT p.progress_json
      FROM hipaa_training_users u
@@ -711,12 +689,46 @@ export async function collectDomainSnapshots(
     const done = Array.isArray(pj.modulesCompleted) ? pj.modulesCompleted.length : 0;
     if (done < 1) trainingNotStarted += 1;
   }
+  // HIPAA training start counts live under HR — not a Clinical "flag".
+  hrItems.push({
+    id: "hr-hipaa-training",
+    label: `${trainingNotStarted} active users with HIPAA training not started`,
+    detail: "Counted from portal progress (modulesCompleted empty)",
+    urgencyDate: trainingNotStarted > 0 ? today : null,
+    founderFlag: false,
+    source: "hipaa_training_progress",
+    href: "/admin/team",
+  });
+  const hr: DomainSnapshot = {
+    id: "hr",
+    title: "HR",
+    status: "live",
+    summary: "Workforce roster, department SOP leads, and training starts from the staff portal.",
+    items: sortDomainItems(hrItems),
+    checkins: [],
+    placeholders: [
+      "PTO / leave balances not tracked",
+      "Hiring pipeline / ATS not connected",
+      "Performance reviews not tracked",
+    ],
+  };
+
+  // —— Clinical: chat reviews, handoffs, check-ins (training lives under HR) ——
+  const clinicalCheckins = await loadWeekCheckins(pool, weekStart, "Clinical Operations");
+  const openReviews = await pool.query(
+    `SELECT COUNT(*)::int AS c FROM chat_reviews WHERE status = 'open' AND review_date = $1`,
+    [today],
+  );
+  const handoffs = await pool.query(
+    `SELECT COUNT(*)::int AS c FROM shift_handoffs WHERE handoff_date = $1`,
+    [today],
+  );
   const clinicalItems: DomainItem[] = [
     {
       id: "clin-reviews",
       label: `${openReviews.rows[0]?.c ?? 0} open chat reviews (IST today)`,
       urgencyDate: (openReviews.rows[0]?.c ?? 0) > 0 ? today : null,
-      founderFlag: false,
+      founderFlag: (openReviews.rows[0]?.c ?? 0) > 0,
       source: "chat_reviews",
       href: "/chat-review",
     },
@@ -728,27 +740,19 @@ export async function collectDomainSnapshots(
       source: "shift_handoffs",
       href: "/team",
     },
-    {
-      id: "clin-hipaa",
-      label: `${trainingNotStarted} active users with HIPAA training not started`,
-      detail: "Counted from portal progress (modulesCompleted empty)",
-      urgencyDate: trainingNotStarted > 0 ? today : null,
-      founderFlag: false,
-      source: "hipaa_training_progress",
-      href: "/admin/team",
-    },
     ...checkinsToItems(clinicalCheckins),
   ];
   const clinical: DomainSnapshot = {
     id: "clinical",
     title: "Clinical",
     status: clinicalCheckins.length ? "live" : "partial",
-    summary: "Ops QC, handoffs, training starts, and Clinical Operations weekly check-ins.",
+    summary: "Ops QC, handoffs, and Clinical Operations weekly check-ins.",
     items: sortDomainItems(clinicalItems),
     checkins: clinicalCheckins,
     placeholders: [
       "Clinical incident / adverse-event tracking is not a portal table (policy text only)",
       "Patient volume / booking counts not connected",
+      "HIPAA training starts are listed under HR",
     ],
   };
 
@@ -825,14 +829,7 @@ export async function collectDomainSnapshots(
       source: "siya_sops.review_date",
       href: "/memory/knowledge/sops",
     },
-    {
-      id: "comp-hipaa",
-      label: `${trainingNotStarted} active users with HIPAA training not started`,
-      urgencyDate: trainingNotStarted > 0 ? today : null,
-      founderFlag: false,
-      source: "hipaa_training_progress",
-      href: "/admin/team",
-    },
+    // HIPAA training not-started lives only on Clinical (clin-hipaa) — do not duplicate here.
     ...checkinsToItems(complianceCheckins),
   );
   const compliance: DomainSnapshot = {
@@ -840,7 +837,7 @@ export async function collectDomainSnapshots(
     title: "Compliance",
     status: "partial",
     summary:
-      "Founder SOP queue (unassigned / Leadership / General only), review dates, training starts, and Compliance weekly check-ins. Lead-owned pending SOPs stay with department leads.",
+      "Founder SOP queue (unassigned / Leadership / General only), review dates, and Compliance weekly check-ins. HIPAA training starts are listed once under Clinical. Lead-owned pending SOPs stay with department leads.",
     items: sortDomainItems(complianceItems),
     checkins: complianceCheckins,
     placeholders: [
@@ -1067,6 +1064,27 @@ export async function buildFounderCoachBrief(
   const leadCheckInSignals = leadCheckInSignalsFromDomains(domains);
   const isWeekLocked = Boolean(weeklyPlan?.lockedAt);
 
+  let decisionSignals: DomainItem[] = [];
+  try {
+    const { ensureKnowledgeTables, listDecisions } = await import("./knowledge-service.js");
+    await ensureKnowledgeTables(pool);
+    const decisions = await listDecisions(pool, 16);
+    decisionSignals = decisions
+      .filter((d) => d.status === "active" || d.status === "draft")
+      .slice(0, 12)
+      .map((d) => ({
+        id: `dec-${d.id}`.slice(0, 80),
+        label: `Decision · ${d.title}`.slice(0, 200),
+        detail: [d.decisionText, d.actionHook].filter(Boolean).join(" · ").slice(0, 500) || undefined,
+        urgencyDate: d.decisionDate ? String(d.decisionDate).slice(0, 10) : null,
+        founderFlag: false,
+        source: "siya_decisions",
+        href: "/memory",
+      }));
+  } catch (err) {
+    console.warn("[founder-coach] decisionSignals skipped:", err);
+  }
+
   return {
     phase: 2,
     statusLabel: "in_progress",
@@ -1081,6 +1099,7 @@ export async function buildFounderCoachBrief(
     driftFlags,
     domains,
     leadCheckInSignals,
+    decisionSignals,
     canEditMonthly: canEdit,
     canEditWeekly: canEdit && !isWeekLocked,
     isWeekLocked,

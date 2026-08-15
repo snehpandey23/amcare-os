@@ -21,12 +21,27 @@ export function wantsFounderPortalSignals(message: string): boolean {
   );
 }
 
+/** Which domain section to keep when the ask names one (e.g. Clinical flagged). */
+export function portalDomainFilter(message: string): string | null {
+  const t = message.trim().toLowerCase();
+  if (/\bclinical\b/.test(t)) return "clinical";
+  if (/\bmarketing\b/.test(t)) return "marketing";
+  if (/\bcompliance\b/.test(t)) return "compliance";
+  if (/\baccounts\b/.test(t)) return "accounts";
+  if (/\bhr\b|\bhuman resources\b/.test(t)) return "hr";
+  return null;
+}
+
+export function asksDomainFlags(message: string): boolean {
+  return /\bflagged\b|\bflags?\b|\bfounder should know\b|\bblockers?\b/i.test(message);
+}
+
 type BriefDomain = {
   id?: string;
   title?: string;
   summary?: string;
   status?: string;
-  items?: { label?: string; detail?: string; founderShouldKnow?: string }[];
+  items?: { label?: string; detail?: string; founderShouldKnow?: string; founderFlag?: boolean }[];
   checkins?: {
     whatChanged?: string;
     keyNumbersStatus?: string;
@@ -37,8 +52,15 @@ type BriefDomain = {
   placeholders?: string[];
 };
 
+function isNoiseTrainingItem(label: string): boolean {
+  return /hipaa training not started|modulesCompleted|training starts/i.test(label);
+}
+
 /** Compact read-only snapshot for LLM grounding — no Plan Record mutation instructions. */
-export async function fetchFounderPortalSignalsBlock(token: string): Promise<string | null> {
+export async function fetchFounderPortalSignalsBlock(
+  token: string,
+  opts?: { domainFilter?: string | null; flagsOnly?: boolean },
+): Promise<string | null> {
   const base = getTrainingApiUrl();
   if (!base) return null;
   try {
@@ -52,31 +74,62 @@ export async function fetchFounderPortalSignalsBlock(token: string): Promise<str
       domains?: BriefDomain[];
       weeklyPlan?: { founderFocus?: string; canWait?: string[] } | null;
     };
+    const domainFilter = opts?.domainFilter?.toLowerCase() || null;
+    const flagsOnly = Boolean(opts?.flagsOnly);
     const lines: string[] = [
       "PORTAL SNAPSHOT (read-only — for answering only).",
       "Do NOT update, suggest writing into, or claim you changed Founder Focus, Can Wait, Delegate, or Observe-only.",
       "Those Plan Record fields are manual; founder edits them on This week's plan if they choose.",
       `Week of ${brief.weekStart ?? "unknown"}.`,
     ];
-    if (brief.weeklyPlan?.founderFocus?.trim()) {
+    if (!domainFilter && brief.weeklyPlan?.founderFocus?.trim()) {
       lines.push(`Current manual Founder Focus (read-only): ${brief.weeklyPlan.founderFocus.trim().slice(0, 400)}`);
     }
-    for (const d of brief.domains ?? []) {
+    let domains = brief.domains ?? [];
+    if (domainFilter) {
+      domains = domains.filter(
+        (d) =>
+          (d.id || "").toLowerCase() === domainFilter ||
+          (d.title || "").toLowerCase().includes(domainFilter),
+      );
+    }
+    for (const d of domains) {
       const title = d.title || d.id || "Domain";
       lines.push(`## ${title} (${d.status ?? "unknown"})`);
-      if (d.summary) lines.push(d.summary.slice(0, 400));
-      for (const c of (d.checkins ?? []).slice(0, 3)) {
+      if (d.summary && !flagsOnly) lines.push(d.summary.slice(0, 400));
+      const checkins = d.checkins ?? [];
+      let wroteSignal = false;
+      for (const c of checkins.slice(0, 5)) {
         const who = c.submitterName || "Lead";
-        if (c.founderShouldKnow) lines.push(`- ${who} · founder should know: ${c.founderShouldKnow.slice(0, 240)}`);
-        else if (c.whatChanged) lines.push(`- ${who} · changed: ${c.whatChanged.slice(0, 200)}`);
-        if (c.blockers) lines.push(`  blockers: ${c.blockers.slice(0, 160)}`);
+        if (c.founderShouldKnow) {
+          lines.push(`- ${who} · founder should know: ${c.founderShouldKnow.slice(0, 240)}`);
+          wroteSignal = true;
+        } else if (c.blockers) {
+          lines.push(`- ${who} · blockers: ${c.blockers.slice(0, 160)}`);
+          wroteSignal = true;
+        } else if (!flagsOnly && c.whatChanged) {
+          lines.push(`- ${who} · changed: ${c.whatChanged.slice(0, 200)}`);
+          wroteSignal = true;
+        }
       }
-      for (const it of (d.items ?? []).slice(0, 5)) {
-        if (it.label) lines.push(`- ${it.label}${it.detail ? `: ${it.detail.slice(0, 120)}` : ""}`);
+      for (const it of (d.items ?? []).slice(0, 8)) {
+        if (!it.label) continue;
+        if (isNoiseTrainingItem(it.label)) continue; // never treat HIPAA training headcount as a clinical "flag"
+        if (flagsOnly && !it.founderFlag && !/open chat review|founder queue|block/i.test(it.label)) {
+          continue;
+        }
+        lines.push(`- ${it.label}${it.detail ? `: ${it.detail.slice(0, 120)}` : ""}`);
+        wroteSignal = true;
       }
-      if (d.placeholders?.length) {
+      if (!wroteSignal) {
+        lines.push("No founder-facing flags or check-in signals in this domain for the current week.");
+      }
+      if (!flagsOnly && d.placeholders?.length) {
         lines.push(`Not yet tracked: ${d.placeholders.slice(0, 4).join("; ")}`);
       }
+    }
+    if (domainFilter && !domains.length) {
+      lines.push(`No ${domainFilter} domain snapshot available.`);
     }
     return lines.join("\n").slice(0, 6000);
   } catch {

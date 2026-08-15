@@ -47,7 +47,11 @@ async function main() {
     console.log(r.message);
     assert.equal(r.ruleFinal, true);
     assert.notEqual(r.llmUsed, true);
-    assert.ok(/don't have an approved|don.?t invent/i.test(r.message));
+    assert.ok(
+      /don't have an approved|don.?t invent|outside what I can help|civics trivia|don.?t pick songs/i.test(
+        r.message,
+      ),
+    );
     assert.ok(!/Customer Acquisition Cost|Total Cost of Sales|\\text\{CAC\}/i.test(r.message));
     assert.ok(!/On shift now|Rock Star|Alpana/i.test(r.message));
   }
