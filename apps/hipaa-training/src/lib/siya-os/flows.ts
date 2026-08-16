@@ -18,6 +18,25 @@ const FLOWS: {
     retrievalBoost: ["decision", "homepage", "cta", "leadership"],
   },
   {
+    id: "accounts-billing-patient",
+    department: "Accounts",
+    task: "Patient billing / Klarity",
+    patterns: [
+      /\bbilling\s+(question|issue|problem|help|inquiry)\b/i,
+      /\bi\s+have\s+a\s+billing\b/i,
+      /\bpatient\s+billing\b/i,
+      /\bklarity\b.*\b(billing|refund|cancel)/i,
+      /\b(billing|refund).*\bklarity\b/i,
+      /\bchargeback/i,
+      /\bno-?show\s+fee\b/i,
+    ],
+    followUpQuestions: [
+      "Refund, cancellation, chargeback, or insurance charge?",
+      "Klarity booking or direct Siya?",
+    ],
+    retrievalBoost: ["billing", "klarity", "refund", "cancellation", "chargeback", "no-show"],
+  },
+  {
     id: "accounts-reimbursement",
     department: "Accounts",
     task: "Employee reimbursement",
@@ -258,6 +277,8 @@ export function routeIntent(message: string): RouteResult {
 
 export function retrievalQueryBoost(message: string, route: RouteResult): string {
   const flow = FLOWS.find((f) => f.id === route.flowId);
-  const boost = flow?.retrievalBoost.join(" ") ?? "";
-  return `${message} ${route.department} ${route.task} ${boost}`.trim();
+  // Never append department/task prose — "General Company memory lookup" poisoned retrieval
+  // toward PHI / archive topics. Only append intentional keyword boosts from a matched flow.
+  if (!flow?.retrievalBoost?.length) return message.trim();
+  return `${message.trim()} ${flow.retrievalBoost.join(" ")}`.trim();
 }

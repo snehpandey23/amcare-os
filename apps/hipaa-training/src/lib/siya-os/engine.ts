@@ -27,8 +27,11 @@ import { tryPracticeLookup } from "./practice-lookup";
 import {
   acknowledgePersonalPreference,
   acknowledgeRoleAuthorityClaim,
+  answerEscalateChallenge,
   answerMetaCertaintyAboutPriorClaim,
   answerPersonalFactRecall,
+  answerUnknownPersonAsk,
+  expandRoleClaimWithHistory,
   extractPersonalFactsFromHistory,
   isCompanyPolicyAssertion,
   isPersonalPreferenceStatement,
@@ -100,17 +103,47 @@ const REFUND_PROMISE = /\b(i (can|will) (approve|refund|waive|credit)|guaranteed
 
 function answerStaffMetaQuestion(text: string): string | null {
   const t = text.trim().toLowerCase();
-  if (/what('s| is) your name|who are you|what are you\b/.test(t)) {
+  // Require identity ask — do NOT match "what are you sayin"
+  if (
+    /what('s| is) your name\b/.test(t) ||
+    /\bwho are you\b/.test(t) ||
+    /\bwhat are you\??\s*$/.test(t)
+  ) {
     return [
       "I'm **Siya Assist** — the internal help desk for Siya Health staff.",
       "",
       "I answer from **approved internal guides** and can route you to the right owner when we don't have a published policy yet.",
     ].join("\n");
   }
-  if (/^(hi|hello|hey)\b/.test(t) && t.length < 24) {
+  // Founder Talk / Ask UI — never dump "no approved guide" for questions about the chrome itself.
+  if (
+    /\bnotify\s+owner\b/.test(t) &&
+    /\b(what|do|does|button|mean|for|how|when|why|click)\b/.test(t)
+  ) {
+    return [
+      "**Notify owner** logs a **knowledge-gap click** for the suggested department lead’s weekly digest (or founder if there’s no lead).",
+      "",
+      "It does **not** email a full chat transcript, store your verbatim question in Postgres, or change company policy.",
+      "Use it when a **staff SOP / internal guide** is missing or unclear — not for music, civics, or patient marketing FAQs.",
+      "For a handoff you can paste yourself, use **Copy escalation summary** when that button appears.",
+    ].join("\n");
+  }
+  if (/^(hi|hello|hey|how\s+(are|r)\s+(you|u)|how'?s\s+it\s+going)\b/.test(t) && t.length < 28) {
     return "Hi — ask me about policies, SOPs, tools, or who to contact. I'll use approved internal guides first.";
   }
   return null;
+}
+
+/** Patient-site / public marketing asks — not Founder Plan gaps. */
+function isPatientFacingMarketingAsk(text: string): boolean {
+  const t = text.trim().toLowerCase();
+  if (!t) return false;
+  return (
+    /\b(adhd|glp-?1|semaglutide|tirzepatide|testosterone|trt|weight\s+loss|telehealth)\b/.test(t) &&
+    /\b(test(ing)?|diagnos|evaluat|screening|cost|price|california|texas|florida|pennsylvania|online|patient)\b/.test(
+      t,
+    )
+  );
 }
 
 export function runSiyaAssistant(message: string, history: { role: string; content: string }[] = []): SiyaReply {
@@ -388,6 +421,31 @@ function buildSiyaReply(
     };
   }
 
+  // Patient/public marketing in Founder Talk — redirect; do not invent or flag as SOP gap.
+  if (founderCoach && isPatientFacingMarketingAsk(text)) {
+    return {
+      message: polishStaffMessage(
+        [
+          "That’s a **patient / public-site** topic — Founder Talk won’t invent marketing or clinical FAQ copy here.",
+          "",
+          "For staff answers from approved guides, use **Ask** in the top nav. For patient-facing pages, use **siya.health** or Siya Guide.",
+          "I won’t mark this as an internal SOP knowledge gap.",
+        ].join("\n"),
+      ),
+      chunks: [],
+      knowledgeGap: false,
+      sources: [],
+      escalationPreview: undefined,
+      ruleFinal: true,
+      routing: {
+        department: "Marketing",
+        task: "Patient/public topic (redirect)",
+        confidence: "high",
+        followUpQuestions: [],
+      },
+    };
+  }
+
   if (isCasualOffTopic(text)) {
     return {
       message: polishStaffMessage(casualOffTopicReply()),
@@ -407,21 +465,24 @@ function buildSiyaReply(
 
   // Tier 3 — role/authority claims: acknowledge unconfirmed; never retrieval/LLM as fact.
   // Fixes "clinical lead is priya remember it" → Chat Review / PHI SOP dump.
-  if (isRoleAuthorityAssertion(text) && !isCompanyPolicyAssertion(text)) {
-    return {
-      message: polishStaffMessage(acknowledgeRoleAuthorityClaim(text)),
-      chunks: [],
-      knowledgeGap: false,
-      sources: [],
-      escalationPreview: undefined,
-      ruleFinal: true,
-      routing: {
-        department: "General",
-        task: "Role/authority claim (unconfirmed)",
-        confidence: "high",
-        followUpQuestions: [],
-      },
-    };
+  {
+    const roleText = expandRoleClaimWithHistory(text, history);
+    if (isRoleAuthorityAssertion(roleText) && !isCompanyPolicyAssertion(roleText)) {
+      return {
+        message: polishStaffMessage(acknowledgeRoleAuthorityClaim(roleText)),
+        chunks: [],
+        knowledgeGap: false,
+        sources: [],
+        escalationPreview: undefined,
+        ruleFinal: true,
+        routing: {
+          department: "General",
+          task: "Role/authority claim (unconfirmed)",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
   }
 
   // Tier 1 — personal preference / fact for THIS chat — do not let refund SOP keywords hijack.
@@ -482,6 +543,59 @@ function buildSiyaReply(
         },
       };
     }
+    const escalatePush = answerEscalateChallenge(text, history, personalFacts);
+    if (escalatePush) {
+      return {
+        message: polishStaffMessage(escalatePush),
+        chunks: [],
+        knowledgeGap: false,
+        sources: [],
+        escalationPreview: undefined,
+        ruleFinal: true,
+        routing: {
+          department: "Accounts",
+          task: "Escalate target clarification",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+  } else {
+    const escalatePush = answerEscalateChallenge(text, history, []);
+    if (escalatePush) {
+      return {
+        message: polishStaffMessage(escalatePush),
+        chunks: [],
+        knowledgeGap: false,
+        sources: [],
+        escalationPreview: undefined,
+        ruleFinal: true,
+        routing: {
+          department: "Accounts",
+          task: "Escalate target clarification",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+  }
+
+  const unknownPerson = answerUnknownPersonAsk(text);
+  if (unknownPerson) {
+    return {
+      message: polishStaffMessage(unknownPerson),
+      chunks: [],
+      knowledgeGap: false,
+      sources: [],
+      escalationPreview: undefined,
+      ruleFinal: true,
+      routing: {
+        department: "General",
+        task: "Unknown person (no directory)",
+        confidence: "high",
+        followUpQuestions: [],
+      },
+    };
   }
 
   const factsHit = tryFactsLookup(expandShortQuery(text));
@@ -640,7 +754,9 @@ function buildSiyaReply(
         founderCoach ? founderCoachPlainOffTopic() : askClarifyingQuestion(normalized),
       ),
       chunks: [],
-      knowledgeGap: Boolean(founderCoach),
+      // Soft-stop text may mention Notify owner; do NOT auto-flag every miss as a gap
+      // (that spammed the button on meta/UI and patient-marketing asks).
+      knowledgeGap: false,
       sources: [],
       escalationPreview: undefined,
       ruleFinal: true,

@@ -74,17 +74,27 @@ function isPersonalContactPreferenceShape(t: string): boolean {
 const ROLE_NOUN =
   "(?:clinical|billing|compliance|hr|marketing|operations|ops|tech(?:nology)?|product|finance)\\s+" +
   "(?:lead|manager|director|head|supervisor|owner)|" +
+  "(?:admin(?:istrative)?(?:\\s+lead)?|administrator)|" +
   "(?:lead|manager|director|supervisor|head|owner|vp|chief|" +
   "program\\s+manager|team\\s+lead|dept(?:artment)?\\s+lead)";
 
-/** Questions about roles — recall path, not a new assertion. */
+/** Shorthand: "priya is clinical", "preeti is admin" */
+const ROLE_SHORTHAND = "(?:clinical|billing|admin(?:istrative)?|compliance|hr|marketing)";
+
+function normalizeRoleTypos(t: string): string {
+  return t.replace(/\bclincal\b/g, "clinical");
+}
+
+/** Questions about roles — recall path only. Never match statements like "Priya is clinical lead". */
 function isRoleAuthorityQuestion(t: string): boolean {
-  return (
-    /^(who|what|which)\b/.test(t) ||
-    /\bwho\s+(is|are|was|were|'s)\b/.test(t) ||
-    /\b(is|are)\s+(?:the\s+)?(?:new\s+)?(?:clinical|billing)?\s*(?:lead|manager)\b/.test(t) ||
-    /\?/.test(t)
-  );
+  const s = t.trim();
+  if (/^(who|what|which)\b/.test(s)) return true;
+  if (/\bwho\s+(is|are|was|were|'s)\b/.test(s)) return true;
+  if (/\?/.test(s) && /\b(lead|manager|director|admin|in\s+charge)\b/.test(s)) return true;
+  if (/^(is|are)\s+(?:the\s+)?(?:new\s+)?/.test(s) && /\b(lead|manager|director|admin)\b/.test(s)) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -92,10 +102,9 @@ function isRoleAuthorityQuestion(t: string): boolean {
  * Must not be silently accepted or restated as confirmed directory fact.
  */
 export function isRoleAuthorityAssertion(text: string): boolean {
-  const t = normalizeChatText(text).toLowerCase();
+  const t = normalizeRoleTypos(normalizeChatText(text).toLowerCase());
   if (!t) return false;
   if (isCompanyPolicyAssertion(t)) return false;
-  // "who is clinical lead now" is a question — never treat as a new claim
   if (isRoleAuthorityQuestion(t)) return false;
 
   // Tier 1 wins: own preference / escalation contact phrasing
@@ -110,33 +119,74 @@ export function isRoleAuthorityAssertion(text: string): boolean {
     return false;
   }
 
-  // "clinical lead is priya" / "the new manager is X" (+ optional "remember it")
+  // "clinical lead is priya"
   if (new RegExp(`\\b(?:the\\s+)?(?:new\\s+)?(?:${ROLE_NOUN})\\s+is\\s+[a-z][a-z'-]{1,40}\\b`).test(t)) {
     return true;
   }
 
-  // "priya is (the) (new) clinical lead" — require a real name, not who/what
+  // "priya is (the) clinical lead"
   if (
     new RegExp(
-      `\\b(?!who|what|which|where|when|how)[a-z][a-z'-]{1,40}\\s+is\\s+(?:(?:the|our|now)\\s+)*(?:new\\s+)?(?:${ROLE_NOUN})\\b`,
+      `\\b(?!who|what|which|where|when|how|she|he|they)[a-z][a-z'-]{1,40}\\s+is\\s+(?:(?:the|our|now)\\s+)*(?:new\\s+)?(?:${ROLE_NOUN})\\b`,
     ).test(t)
   ) {
     return true;
   }
 
-  // "Y is now in charge of Z" / "X is in charge"
+  // Shorthand / multi: "priya is clinical and preeti is admin"
+  if (
+    new RegExp(
+      `\\b(?!who|what|which|she|he|they)[a-z][a-z'-]{1,40}\\s+is\\s+(?:the\\s+)?(?:${ROLE_SHORTHAND})\\b`,
+    ).test(t)
+  ) {
+    return true;
+  }
+
+  // Pronoun form (engine expands she/he via history before ack)
+  if (
+    new RegExp(
+      `\\b(she|he)\\s+is\\s+(?:(?:the|our|now)\\s+)*(?:new\\s+)?(?:${ROLE_NOUN}|${ROLE_SHORTHAND})\\b`,
+    ).test(t)
+  ) {
+    return true;
+  }
+
   if (
     /\b(?!who|what|which)[a-z][a-z'-]{1,40}\s+is\s+(?:now\s+)?in\s+charge(?:\s+of\b)?/.test(t)
   ) {
     return true;
   }
 
-  // "X is the (new) manager of Y"
   if (/\bis\s+(?:the\s+)?(?:new\s+)?(?:manager|director|head|lead)\s+of\b/.test(t)) {
     return true;
   }
 
   return false;
+}
+
+/**
+ * Expand "she/he is clinical lead" using the last named person in recent user turns
+ * (e.g. after "who is priya").
+ */
+export function expandRoleClaimWithHistory(
+  text: string,
+  history: { role: string; content: string }[],
+): string {
+  const t = normalizeRoleTypos(normalizeChatText(text));
+  if (!/\b(she|he)\s+is\b/i.test(t)) return t;
+
+  let lastName: string | null = null;
+  for (const h of [...history].reverse()) {
+    if (h.role !== "user") continue;
+    const c = normalizeChatText(h.content);
+    const whoIs = c.match(/\bwho\s+is\s+([A-Za-z][A-Za-z'-]{1,40})\b/i);
+    if (whoIs) {
+      lastName = whoIs[1];
+      break;
+    }
+  }
+  if (!lastName) return t;
+  return t.replace(/\b(she|he)\b/i, lastName);
 }
 
 /**
@@ -217,9 +267,10 @@ export function extractPersonalFactsFromHistory(
   history: { role: string; content: string }[],
 ): PersonalFact[] {
   const out: PersonalFact[] = [];
-  for (const h of history) {
-    if (h.role !== "user") continue;
-    const content = normalizeChatText(h.content);
+  const users = history.filter((h) => h.role === "user");
+  for (let i = 0; i < users.length; i++) {
+    const prior = users.slice(0, i).map((u) => ({ role: "user" as const, content: u.content }));
+    const content = expandRoleClaimWithHistory(normalizeChatText(users[i].content), prior);
     if (isRoleAuthorityAssertion(content)) {
       out.push({
         raw: content.slice(0, 500),
@@ -269,32 +320,41 @@ function summarizePersonalFact(text: string): string {
 }
 
 function summarizeRoleClaim(text: string): string {
-  const t = normalizeChatText(text);
+  const t = normalizeRoleTypos(normalizeChatText(text));
   const lower = t.toLowerCase();
+  const parts: string[] = [];
 
-  const roleIsWho = lower.match(
-    new RegExp(
-      `\\b((?:the\\s+)?(?:new\\s+)?(?:${ROLE_NOUN}))\\s+is\\s+([a-z][a-z'-]{1,40})\\b`,
-      "i",
-    ),
+  const pairRe = new RegExp(
+    `\\b([a-z][a-z'-]{1,40})\\s+is\\s+(?:(?:the|our|now)\\s+)*(?:new\\s+)?((?:${ROLE_NOUN})|(?:${ROLE_SHORTHAND}))\\b`,
+    "gi",
   );
-  if (roleIsWho) {
-    const role = roleIsWho[1].replace(/\bthe\s+/i, "").replace(/\s+/g, " ").trim();
-    const who = roleIsWho[2];
-    return `${role.replace(/\b\w/g, (c) => c.toUpperCase())}: ${who.replace(/\b\w/g, (c) => c.toUpperCase())}`;
+  let m: RegExpExecArray | null;
+  while ((m = pairRe.exec(lower)) !== null) {
+    if (/^(who|what|which|she|he|they)$/i.test(m[1])) continue;
+    let role = m[2].replace(/\s+/g, " ").trim();
+    if (/^(clinical|billing|admin|administrative|compliance|hr|marketing)$/i.test(role)) {
+      role = /admin/i.test(role) ? "Admin" : `${role} lead`;
+    }
+    const who = m[1].replace(/\b\w/g, (c) => c.toUpperCase());
+    const roleLabel = role.replace(/\b\w/g, (c) => c.toUpperCase());
+    parts.push(`${roleLabel}: ${who}`);
   }
 
-  const whoIsRole = lower.match(
-    new RegExp(
-      `\\b([a-z][a-z'-]{1,40})\\s+is\\s+(?:(?:the|our|now)\\s+)*(?:new\\s+)?((?:${ROLE_NOUN}))\\b`,
-      "i",
-    ),
-  );
-  if (whoIsRole) {
-    const who = whoIsRole[1];
-    const role = whoIsRole[2].replace(/\s+/g, " ").trim();
-    return `${role.replace(/\b\w/g, (c) => c.toUpperCase())}: ${who.replace(/\b\w/g, (c) => c.toUpperCase())}`;
+  if (!parts.length) {
+    const roleIsWho = lower.match(
+      new RegExp(
+        `\\b((?:the\\s+)?(?:new\\s+)?(?:${ROLE_NOUN}))\\s+is\\s+([a-z][a-z'-]{1,40})\\b`,
+        "i",
+      ),
+    );
+    if (roleIsWho) {
+      const role = roleIsWho[1].replace(/\bthe\s+/i, "").replace(/\s+/g, " ").trim();
+      const who = roleIsWho[2];
+      return `${role.replace(/\b\w/g, (c) => c.toUpperCase())}: ${who.replace(/\b\w/g, (c) => c.toUpperCase())}`;
+    }
   }
+
+  if (parts.length) return parts.join("; ");
 
   const inCharge = lower.match(
     /\b([a-z][a-z'-]{1,40})\s+is\s+(?:now\s+)?in\s+charge(?:\s+of\s+(.+?))?(?:\s+remember|\s*$)/i,
@@ -371,6 +431,16 @@ export function answerPersonalFactRecall(
   const whoIs = q.match(/^who\s+is\s+([a-z][a-z'-]{1,40})\??$/i);
   if (whoIs) {
     const name = whoIs[1].toLowerCase();
+    const roleHit = roleFacts.find(
+      (f) => f.summary.toLowerCase().includes(name) || f.raw.toLowerCase().includes(name),
+    );
+    if (roleHit) {
+      return [
+        `You told me in this chat: **${roleHit.summary}**.`,
+        "",
+        "That’s **unconfirmed** — not an approved directory entry. **Check with admin** before acting.",
+      ].join("\n");
+    }
     const hit = prefFacts.find(
       (f) => f.summary.toLowerCase().includes(name) || f.raw.toLowerCase().includes(name),
     );
@@ -437,4 +507,86 @@ export function answerMetaCertaintyAboutPriorClaim(
     "I shouldn’t treat staff chat claims as confirmed org facts without an approved source.",
     "If this is about who holds a role, **confirm with admin** before acting — I won’t invent a directory answer.",
   ].join("\n");
+}
+
+/** Bare "who is Name" with no prior chat fact — don't dump SOPs. */
+export function answerUnknownPersonAsk(text: string): string | null {
+  const t = normalizeChatText(text);
+  if (!/^who\s+is\s+[A-Za-z][A-Za-z'-]{1,40}\??$/i.test(t)) return null;
+  const name = t.match(/^who\s+is\s+([A-Za-z][A-Za-z'-]{1,40})/i)?.[1];
+  if (!name) return null;
+  return [
+    `I don’t have an **approved staff directory** entry for **${name}** in this chat.`,
+    "",
+    "If you’re teaching a role for this thread only, say e.g. “clinical lead is Priya — remember it” — I’ll treat that as **unconfirmed** until admin verifies.",
+    "I won’t invent org-chart answers.",
+  ].join("\n");
+}
+
+/**
+ * Staff challenging a wrong "Loop in" / escalate suggestion (e.g. Privacy Officer on billing),
+ * or asking why not use a name they stated earlier (Preeti).
+ */
+export function answerEscalateChallenge(
+  text: string,
+  history: { role: string; content: string }[],
+  facts: PersonalFact[],
+): string | null {
+  const t = normalizeChatText(text).toLowerCase();
+  if (!t) return null;
+
+  const challengesEscalate =
+    /\bwhy\b/.test(t) &&
+    /\b(loop|privacy\s+officer|escalat|billing\s+lead|preeti|priya)\b/.test(t);
+  const noBreachPushback =
+    /\b(no\s+breach|not\s+a\s+breach|what\s+are\s+you\s+sayin|that'?s\s+wrong|wrong\s+escalat)\b/.test(
+      t,
+    );
+
+  if (!challengesEscalate && !noBreachPushback) return null;
+
+  const lastAssistant = [...history].reverse().find((h) => h.role === "assistant");
+  const priorHadPrivacy =
+    lastAssistant && /privacy\s+officer|breach|phi\b/i.test(lastAssistant.content);
+  const priorHadBilling =
+    lastAssistant && /billing|klarity|refund|chargeback|no-?show/i.test(lastAssistant.content);
+
+  const roleFacts = facts.filter((f) => f.kind === "role_unconfirmed");
+  const preetiClaim = roleFacts.find((f) => /preeti/i.test(f.summary) || /preeti/i.test(f.raw));
+
+  if (noBreachPushback || (challengesEscalate && priorHadPrivacy)) {
+    const lines = [
+      "You’re right to push back — a **billing** question is not a privacy breach.",
+      "",
+      "Approved billing guides escalate to the **Billing lead**, not the Privacy Officer.",
+      "I should not have pulled a PHI/breach topic just because “loop in” or “privacy” appeared in the thread.",
+    ];
+    if (preetiClaim) {
+      lines.push(
+        "",
+        `You also said in this chat (**${preetiClaim.summary}**) — that’s **unconfirmed** chat context, not a substitute for the Billing lead in the approved SOP.`,
+      );
+    }
+    lines.push("", "For patient billing / Klarity refunds / chargebacks: escalate **Billing lead**.");
+    return lines.join("\n");
+  }
+
+  if (challengesEscalate) {
+    const lines = [
+      "Fair question on the escalate target.",
+      "",
+      priorHadBilling
+        ? "For **patient billing** (refunds, Klarity cancel, chargebacks), approved guides say **Billing lead** — not Privacy Officer."
+        : "I only escalate from **approved guides** (or your unconfirmed chat notes, labeled as such).",
+    ];
+    if (preetiClaim) {
+      lines.push(
+        "",
+        `**${preetiClaim.summary}** is what **you** said here — **unconfirmed**. Don’t treat it as the official directory; still use **Billing lead** for billing SOPs until admin confirms roles.`,
+      );
+    }
+    return lines.join("\n");
+  }
+
+  return null;
 }
