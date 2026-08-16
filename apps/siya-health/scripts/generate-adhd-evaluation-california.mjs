@@ -1,7 +1,11 @@
 /**
  * Generates /adhd-evaluation-california — lean Google Ads evaluation LP.
  *
- * Twin of /adhd-evaluation-texas (same chrome, CA state/physicians/links only).
+ * Twin of /adhd-evaluation-texas (same chrome, CA copy). Care-team cards are
+ * NOT hardcoded here — site-chrome injectMeetPhysiciansSection fills
+ * SIYA:MEET-PHYSICIANS from provider-canonical + SERVICE_PROVIDER_SLUGS
+ * (adhd-care, state=CA) during seo-build.
+ *
  * Does NOT write /adult-adhd-california — that URL is the SEO entity hub owned by
  * generate-california-adhd-cornerstone.mjs. Keeping these paths separate stops
  * Ads ↔ SEO overwrites on every Vercel build.
@@ -23,21 +27,10 @@ if (path.resolve(OUT) === path.resolve(FORBIDDEN)) {
   throw new Error('Refuse to write ads LP onto /adult-adhd-california (SEO hub).');
 }
 
-const CA_CARE_TEAM = `
-          <div class="about-team-grid about-team-grid--adhd about-team-grid--adhd-compact">
-            <article class="about-team-card ds-provider-card" data-states="CA,TX,PA,FL">
-              <img src="/assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey, MD" width="88" height="88" loading="lazy" />
-              <h3><a href="/providers/dr-sneh-pandey">Dr. Sneh Pandey, MD</a></h3>
-              <p class="about-team-tagline">Medical Director · Adult ADHD evaluation &amp; care · CA, TX, PA, FL</p>
-              <a class="text-link" href="/providers/dr-sneh-pandey">View profile →</a>
-            </article>
-            <article class="about-team-card ds-provider-card" data-states="CA,TX,PA,FL">
-              <img src="/assets/images/wendy-delgado.png" alt="Wendy Delgado, PA-C" width="88" height="88" loading="lazy" />
-              <h3><a href="/providers/wendy-delgado">Wendy Delgado, PA-C</a></h3>
-              <p class="about-team-tagline">Adult ADHD evaluation &amp; ongoing telehealth care · CA, TX, PA, FL</p>
-              <a class="text-link" href="/providers/wendy-delgado">View profile →</a>
-            </article>
-          </div>`;
+/** Placeholder only — real cards injected by site-chrome from canonical SoT. */
+const MEET_PHYSICIANS_STUB = `<!-- SIYA:MEET-PHYSICIANS -->
+      <!-- Filled at build by site-chrome from provider-canonical + SERVICE_PROVIDER_SLUGS (adhd-care, CA). Do not hardcode cards here. -->
+      <!-- /SIYA:MEET-PHYSICIANS -->`;
 
 function build() {
   if (!fs.existsSync(TX)) {
@@ -77,7 +70,6 @@ function build() {
     ['Virtual ADHD care in <strong>Texas</strong>', 'Virtual ADHD care in <strong>California</strong>'],
     ['within 48 hours across Texas.', 'within 48 hours across California.'],
     ['faq-tx-eval-', 'faq-ca-eval-'],
-    ['Showing clinicians licensed in <strong>TX</strong>.', 'Showing clinicians licensed in <strong>CA</strong>.'],
     [
       'eligible adults in Texas and other licensed states',
       'eligible adults in California and other licensed states',
@@ -92,16 +84,17 @@ function build() {
     html = html.split(from).join(to);
   }
 
+  // Always replace care-team region with stub (never hardcode CA_CARE_TEAM)
+  if (!html.includes('SIYA:MEET-PHYSICIANS')) {
+    throw new Error('TX template missing SIYA:MEET-PHYSICIANS markers');
+  }
   html = html.replace(
-    /<div class="about-team-grid about-team-grid--adhd about-team-grid--adhd-compact">[\s\S]*?<\/div>\s*(?=<p class="blog-hub-see-all">)/,
-    `${CA_CARE_TEAM.trim()}\n          `,
+    /<!-- SIYA:MEET-PHYSICIANS -->[\s\S]*?<!-- \/SIYA:MEET-PHYSICIANS -->/,
+    MEET_PHYSICIANS_STUB,
   );
 
   if (!html.includes('google-ads-ca-evaluation')) {
     throw new Error('CA evaluation landing attribute missing after replacements');
-  }
-  if (!html.includes('Showing clinicians licensed in <strong>CA</strong>.')) {
-    throw new Error('CA care-team state filter missing');
   }
   if (html.includes('nav-center') || /<header class="site-header/.test(html)) {
     throw new Error('Ads LP must not include full site header/nav');
@@ -109,12 +102,15 @@ function build() {
   if (/rel="canonical"[^>]+adhd-evaluation-texas/.test(html)) {
     throw new Error('Canonical still points at Texas');
   }
-  if (html.includes('dr-natasha-desai')) {
-    throw new Error('CA ads LP must not list Desai (TX/PA/FL only)');
+  // Hardcoded provider cards must not sneak back in before chrome inject
+  if (/about-team-card/.test(html)) {
+    throw new Error('CA ads LP must not hardcode about-team-card (use site-chrome injection)');
   }
 
   fs.writeFileSync(OUT, html);
-  console.log(`Wrote ${path.relative(ROOT, OUT)} (lean CA ads LP; SEO hub untouched)`);
+  console.log(
+    `Wrote ${path.relative(ROOT, OUT)} (lean CA ads LP; care team via site-chrome @ seo-build; SEO hub untouched)`,
+  );
 }
 
 build();

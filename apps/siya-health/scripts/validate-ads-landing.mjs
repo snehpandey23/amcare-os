@@ -14,6 +14,7 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { getProvidersForServicePage } from '../data/providers.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.resolve(__dirname, '..');
@@ -25,12 +26,14 @@ const ADS_PAGES = [
     landing: 'google-ads-tx-evaluation',
     bodyClass: 'siya-landing-page--tx-evaluation',
     requireLcp: true,
+    careTeamState: 'TX',
   },
   {
     file: 'adhd-evaluation-california.html',
     landing: 'google-ads-ca-evaluation',
     bodyClass: 'siya-landing-page--ca-evaluation',
     requireLcp: true,
+    careTeamState: 'CA',
   },
 ];
 
@@ -115,6 +118,62 @@ function readHtml(rel) {
   return fs.readFileSync(abs, 'utf8');
 }
 
+/**
+ * After seo-build, care-team cards must match adhd-care ∩ state from provider SoT.
+ * Stub-only (pre-chrome) is allowed with a warning.
+ */
+function assertAdsCareTeamMatchesCanonical(page, html) {
+  const expected = getProvidersForServicePage('adhd-care', { stateAbbr: page.careTeamState });
+  const expectedSlugs = new Set(expected.map((p) => p.slug));
+
+  const meet = html.match(
+    /id="meet-physicians"[\s\S]*?<\/section>|<!-- SIYA:MEET-PHYSICIANS -->[\s\S]*?<!-- \/SIYA:MEET-PHYSICIANS -->/,
+  );
+  if (!meet) {
+    fail(`${page.file}: missing meet-physicians / SIYA:MEET-PHYSICIANS care-team region`);
+    return;
+  }
+  const block = meet[0];
+  if (block.includes('Do not hardcode cards here') && !block.includes('about-team-card')) {
+    console.warn(
+      `validate-ads-landing: ${page.file} still has care-team stub (full card check runs after seo-build)`,
+    );
+    return;
+  }
+
+  const unique = [
+    ...new Set([...block.matchAll(/href="\/providers\/([^"]+)"/g)].map((m) => m[1])),
+  ];
+  for (const slug of unique) {
+    if (!expectedSlugs.has(slug)) {
+      fail(
+        `${page.file}: care-team lists /providers/${slug} but they are not in adhd-care ∩ ${page.careTeamState} per provider SoT`,
+      );
+    }
+  }
+  for (const p of expected) {
+    if (!unique.includes(p.slug)) continue;
+    const article = block.match(
+      new RegExp(
+        `<article[^>]*data-states="([^"]+)"[^>]*>[\\s\\S]*?/providers/${p.slug}[\\s\\S]*?</article>`,
+      ),
+    );
+    if (!article) continue;
+    const states = article[1].split(',').map((s) => s.trim());
+    for (const st of states) {
+      if (!p.stateAbbreviations.includes(st)) {
+        fail(
+          `${page.file}: ${p.slug} card data-states includes ${st} but SoT licenses are ${p.stateAbbreviations.join(',')}`,
+        );
+      }
+    }
+  }
+
+  if (page.careTeamState === 'CA' && unique.includes('dr-natasha-desai')) {
+    fail(`${page.file}: Natasha Desai must not appear on CA ads LP (not licensed in CA per SoT)`);
+  }
+}
+
 // --- CSS: LCP picture hero rules must exist ---
 const stylesRel = 'styles.css';
 const stylesAbs = path.join(SITE_ROOT, stylesRel);
@@ -172,6 +231,8 @@ for (const page of ADS_PAGES) {
       );
     }
   }
+
+  assertAdsCareTeamMatchesCanonical(page, html);
 }
 
 // --- SEO hub must stay SEO ---

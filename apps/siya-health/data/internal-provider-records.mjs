@@ -102,11 +102,19 @@ export const INTERNAL_PROVIDER_RECORDS = {
     sortOrder: 3,
     featured: true,
     photoStatus: 'approved',
-    npi: null,
-    licenses: licenseEntries(['Texas', 'Florida'], 'MD'),
-    education: { medicalSchool: null, graduationYear: null, residency: null, fellowship: null },
+    npi: '1861074247',
+    // Years of experience not provided on Klarity export — leave unset (do not invent)
+    yearsExperienceLabel: null,
+    licenses: licenseEntries(['Texas', 'Florida', 'Pennsylvania'], 'MD'),
+    education: {
+      medicalSchool: 'Texas Tech University Health Sciences Center',
+      medicalSchoolYears: '2017–2021',
+      undergraduate: 'Texas Tech University (2013–2017)',
+      residency: null,
+      fellowship: null,
+    },
     boardCertifications: [
-      { name: 'Family & Behavioral Medicine', verificationUrl: 'https://www.abfm.org/verify/' },
+      { name: 'American Board of Family Medicine', verificationUrl: 'https://www.abfm.org/verify/' },
       { name: 'ADHD-CCSP', verificationUrl: null },
     ],
     credentialVerifiedBy: CREDENTIAL_VERIFIED_BY,
@@ -214,6 +222,7 @@ export const INTERNAL_PROVIDER_RECORDS = {
     featured: false,
     photoStatus: 'approved',
     npi: '1063725059',
+    yearsExperienceLabel: '17+ years of clinical experience',
     licenses: [
       {
         state: 'California',
@@ -223,11 +232,34 @@ export const INTERNAL_PROVIDER_RECORDS = {
         verificationUrl: BOARD_LOOKUP.CA,
         acceptingNewPatients: true,
       },
+      {
+        state: 'Texas',
+        licenseType: 'PA',
+        status: 'Active',
+        verificationUrl: BOARD_LOOKUP.TX,
+        acceptingNewPatients: true,
+      },
+      {
+        state: 'Pennsylvania',
+        licenseType: 'PA',
+        status: 'Active',
+        verificationUrl: BOARD_LOOKUP.PA,
+        acceptingNewPatients: true,
+      },
+      {
+        state: 'Florida',
+        licenseType: 'PA',
+        status: 'Active',
+        verificationUrl: BOARD_LOOKUP.FL,
+        acceptingNewPatients: true,
+      },
     ],
     education: {
       graduate: 'Western University of Health Sciences PA Program (2007–2009)',
       residency: null,
       fellowship: null,
+      clinicalExperience:
+        'Telemedicine, allergy/asthma care, urgent care, aesthetics, weight management, and orthopedic/occupational medicine',
     },
     boardCertifications: [{ name: 'NCCPA Certified PA', verificationUrl: 'https://www.nccpa.net/verify' }],
     credentialVerifiedBy: CREDENTIAL_VERIFIED_BY,

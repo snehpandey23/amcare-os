@@ -389,6 +389,33 @@ const MEET_PHYSICIANS_BY_PAGE = {
     buildMeetPhysiciansBlock('womens-health', "Evidence-based women's health and hormone care."),
   'primary-urgent-care.html': () =>
     buildMeetPhysiciansBlock('primary-urgent-care', 'Family medicine clinicians for primary and urgent telehealth.'),
+  /** Ads evaluation LPs — same canonical/roster source as /adhd-care; state-filtered. */
+  'adhd-evaluation-texas.html': () =>
+    buildMeetPhysiciansBlock(
+      'adhd-care',
+      'Licensed clinicians — physician-led adult ADHD evaluation.',
+      'TX',
+      {
+        heading: 'Your care team',
+        gridClass: 'about-team-grid about-team-grid--adhd about-team-grid--adhd-compact',
+        sectionClass: 'section adhd-care-team-compact',
+        seeAllClass: 'blog-hub-see-all',
+        limit: 4,
+      },
+    ),
+  'adhd-evaluation-california.html': () =>
+    buildMeetPhysiciansBlock(
+      'adhd-care',
+      'Licensed clinicians — physician-led adult ADHD evaluation.',
+      'CA',
+      {
+        heading: 'Your care team',
+        gridClass: 'about-team-grid about-team-grid--adhd about-team-grid--adhd-compact',
+        sectionClass: 'section adhd-care-team-compact',
+        seeAllClass: 'blog-hub-see-all',
+        limit: 4,
+      },
+    ),
 };
 
 const LEARN_MORE_WEIGHT = `<!-- SIYA:LEARN-MORE-WEIGHT -->
@@ -2306,6 +2333,8 @@ export function applySiteChrome(html, relPath, title = '') {
     html = normalizeConversionRedirectUrls(html);
     html = ensureMeetGreetHrefs(html);
     html = stripChatChannels(html);
+    // Care team from provider-canonical + SERVICE_PROVIDER_SLUGS (not hardcoded HTML)
+    html = injectMeetPhysiciansSection(html, relPath);
     html = injectSiyaConcierge(html, relPath);
     return injectGtmAndTracking(html, relPath);
   }

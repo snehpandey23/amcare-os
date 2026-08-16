@@ -353,7 +353,14 @@ export function getAllProviders() {
 
 /** Service page → contracted provider slugs (clinical scope; state chips on cards). */
 export const SERVICE_PROVIDER_SLUGS = {
-  'adhd-care': ['dr-sneh-pandey', 'dr-vanessa-urbina', 'dr-natasha-desai', 'dr-swati-pandey', 'megan-wunderlich'],
+  'adhd-care': [
+    'dr-sneh-pandey',
+    'dr-vanessa-urbina',
+    'dr-natasha-desai',
+    'dr-swati-pandey',
+    'megan-wunderlich',
+    'wendy-delgado',
+  ],
   telehealth: [
     'dr-sneh-pandey',
     'dr-natasha-desai',
@@ -361,11 +368,12 @@ export const SERVICE_PROVIDER_SLUGS = {
     'dr-vanessa-urbina',
     'megan-wunderlich',
     'derek-timbs',
+    'wendy-delgado',
   ],
   'weight-loss-metabolic-health': ['dr-sneh-pandey', 'dr-vanessa-urbina', 'derek-timbs', 'wendy-delgado'],
-  'primary-urgent-care': ['dr-vanessa-urbina', 'dr-natasha-desai', 'dr-sneh-pandey'],
+  'primary-urgent-care': ['dr-vanessa-urbina', 'dr-natasha-desai', 'dr-sneh-pandey', 'wendy-delgado'],
   'mens-health-longevity': ['dr-sneh-pandey', 'derek-timbs'],
-  'womens-health': ['dr-swati-pandey', 'dr-vanessa-urbina', 'dr-natasha-desai'],
+  'womens-health': ['dr-swati-pandey', 'dr-vanessa-urbina', 'dr-natasha-desai', 'wendy-delgado'],
 };
 
 /** Hub filter keys → service page keys */
