@@ -15,6 +15,22 @@
   };
 
   var DEBUG = window.location.search.indexOf('debug_tracking=1') !== -1;
+  var ATTR_KEY = 'siya_marketing_params';
+  var ATTR_KEYS = [
+    'gclid',
+    'gbraid',
+    'wbraid',
+    'utm_source',
+    'utm_medium',
+    'utm_campaign',
+    'utm_term',
+    'utm_content',
+    'utm_id',
+    '_gl',
+    'fbclid',
+    'msclkid',
+    'ttclid',
+  ];
 
   function pushDataLayerEvent(eventName, params) {
     if (!eventName) return;
@@ -53,7 +69,36 @@
     pushDataLayerEvent(config.analyticsEvent, baseParams);
   }
 
-  var params = new URLSearchParams(window.location.search);
+  function readStoredAttribution() {
+    try {
+      var raw = sessionStorage.getItem(ATTR_KEY);
+      if (!raw) return {};
+      var parsed = JSON.parse(raw);
+      return parsed && typeof parsed === 'object' ? parsed : {};
+    } catch (err) {
+      return {};
+    }
+  }
+
+  function writeStoredAttribution(map) {
+    try {
+      sessionStorage.setItem(ATTR_KEY, JSON.stringify(map));
+    } catch (err) {
+      /* private mode */
+    }
+  }
+
+  var incoming = new URLSearchParams(window.location.search);
+  var stored = readStoredAttribution();
+  var captured = false;
+  ATTR_KEYS.forEach(function (key) {
+    if (incoming.has(key)) {
+      stored[key] = incoming.get(key);
+      captured = true;
+    }
+  });
+  if (captured) writeStoredAttribution(stored);
+
   var dest;
   try {
     dest = new URL(config.destination);
@@ -61,8 +106,19 @@
     return;
   }
 
-  params.forEach(function (value, key) {
+  function mergeParam(key, value) {
+    if (!key || value == null || value === '') return;
     if (!dest.searchParams.has(key)) dest.searchParams.set(key, value);
+  }
+
+  /* 1) All query params on this page (gclid, UTMs, and any others). */
+  incoming.forEach(function (value, key) {
+    mergeParam(key, value);
+  });
+
+  /* 2) Session fallback — covers landing → bare /redirect/meet-greet CTAs. */
+  Object.keys(stored).forEach(function (key) {
+    mergeParam(key, stored[key]);
   });
 
   var link = document.getElementById('siya-redirect-fallback');

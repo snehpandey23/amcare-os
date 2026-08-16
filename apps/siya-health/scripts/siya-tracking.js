@@ -20,6 +20,111 @@
   var DEBUG = window.location.search.indexOf('debug_tracking=1') !== -1;
   var ASSIST_KEY = 'siya_entity_assist_path';
   var ASSIST_MAX = 8;
+  var ATTR_KEY = 'siya_marketing_params';
+  var ATTR_KEYS = [
+    'gclid',
+    'gbraid',
+    'wbraid',
+    'utm_source',
+    'utm_medium',
+    'utm_campaign',
+    'utm_term',
+    'utm_content',
+    'utm_id',
+    '_gl',
+    'fbclid',
+    'msclkid',
+    'ttclid',
+  ];
+
+  function readStoredAttribution() {
+    try {
+      var raw = sessionStorage.getItem(ATTR_KEY);
+      if (!raw) return {};
+      var parsed = JSON.parse(raw);
+      return parsed && typeof parsed === 'object' ? parsed : {};
+    } catch (err) {
+      return {};
+    }
+  }
+
+  function writeStoredAttribution(map) {
+    try {
+      sessionStorage.setItem(ATTR_KEY, JSON.stringify(map));
+    } catch (err) {
+      /* private mode */
+    }
+  }
+
+  /** Persist gclid / UTMs from the current URL for the rest of the session. */
+  function captureMarketingParams() {
+    var params = new URLSearchParams(window.location.search || '');
+    var stored = readStoredAttribution();
+    var changed = false;
+    ATTR_KEYS.forEach(function (key) {
+      if (params.has(key)) {
+        stored[key] = params.get(key);
+        changed = true;
+      }
+    });
+    if (changed) writeStoredAttribution(stored);
+    return stored;
+  }
+
+  /**
+   * Append stored + current-page attribution params onto same-origin /redirect/ links
+   * so the redirect hop does not drop Ads click IDs when CTAs are bare paths.
+   */
+  function withAttribution(href) {
+    if (!href || href.charAt(0) === '#' || /^(mailto:|tel:|javascript:)/i.test(href)) {
+      return href;
+    }
+    var isRedirect =
+      href.indexOf('/redirect/') === 0 ||
+      /^(?:https?:)?\/\/(?:www\.)?siya\.health\/redirect\//i.test(href);
+    if (!isRedirect) return href;
+
+    try {
+      var url = new URL(href, window.location.origin);
+      if (url.origin !== window.location.origin) return href;
+      if (url.pathname.indexOf('/redirect/') !== 0) return href;
+
+      var stored = readStoredAttribution();
+      var pageParams = new URLSearchParams(window.location.search || '');
+      ATTR_KEYS.forEach(function (key) {
+        if (url.searchParams.has(key)) return;
+        if (pageParams.has(key)) {
+          url.searchParams.set(key, pageParams.get(key));
+          return;
+        }
+        if (stored[key]) url.searchParams.set(key, stored[key]);
+      });
+      return url.pathname + url.search + url.hash;
+    } catch (err) {
+      return href;
+    }
+  }
+
+  function decorateRedirectLinks(root) {
+    var scope = root && root.querySelectorAll ? root : document;
+    var links = scope.querySelectorAll('a[href*="/redirect/"]');
+    for (var i = 0; i < links.length; i++) {
+      var el = links[i];
+      var raw = el.getAttribute('href');
+      if (!raw) continue;
+      var next = withAttribution(raw);
+      if (next && next !== raw) el.setAttribute('href', next);
+    }
+  }
+
+  captureMarketingParams();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      decorateRedirectLinks(document);
+    });
+  } else {
+    decorateRedirectLinks(document);
+  }
 
   var CANONICAL = {
     '/primary-care': { entity: 'primary_care', entity_family: 'root_service', care_pathway: 'primary_care' },
@@ -219,9 +324,17 @@
       var link = e.target.closest && e.target.closest('a');
       if (!link) return;
 
-      var linkHref = link.getAttribute('href') || '';
+      var rawHref = link.getAttribute('href') || '';
+      if (!rawHref) return;
+
+      /* Re-apply attribution at click time (covers late-injected CTAs). */
+      var decorated = withAttribution(rawHref);
+      if (decorated && decorated !== rawHref) {
+        link.setAttribute('href', decorated);
+      }
+
+      var linkHref = link.getAttribute('href') || decorated || rawHref;
       var text = (link.innerText || link.textContent || '').trim();
-      if (!linkHref) return;
       var track = link.getAttribute('data-siya-track') || '';
 
       var baseParams = {
