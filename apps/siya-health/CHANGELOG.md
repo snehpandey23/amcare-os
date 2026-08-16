@@ -24,7 +24,7 @@ Every **real** fix that ships (or was believed to ship) for `apps/siya-health` g
 
 | Date | Commit | What | Why | Verify | Status |
 |------|--------|------|-----|--------|--------|
-| 2026-08-16 | _(pending hash)_ | Promote Natasha (TX/FL/PA + NPI + education) and Wendy (CA/TX/PA/FL + generalist ADHD/women’s/weight/primary/telehealth + adhd-care roster) from `stash@{0}` → SoT; ads LPs inject care team from canonical; `validate-deploy-clean-tree` gate | End stash-only / dirty-tree reversion cycle; ads cards must match SoT | Clean-tree gate + live Playwright/Lighthouse ads smoke after deploy | `committed` → upgrade to `committed+live` after smoke |
+| 2026-08-16 | `b1984aa` | Promote Natasha (TX/FL/PA + NPI + education) and Wendy (CA/TX/PA/FL + generalist ADHD/women’s/weight/primary/telehealth + adhd-care roster) from `stash@{0}` → SoT; ads LPs inject care team from canonical; `validate-deploy-clean-tree` gate | End stash-only / dirty-tree reversion cycle; ads cards must match SoT | Clean-tree gate + live Playwright/Lighthouse ads smoke after deploy | `committed` → upgrade to `committed+live` after smoke |
 
 ### Earlier commits on main (git log)
 
