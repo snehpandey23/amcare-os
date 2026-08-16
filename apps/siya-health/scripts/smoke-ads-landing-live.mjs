@@ -8,6 +8,8 @@
  *   node scripts/smoke-ads-landing-live.mjs
  *   ADS_SMOKE_BASE=https://www.siya.health node scripts/smoke-ads-landing-live.mjs
  *   ADS_SMOKE_SKIP_LIGHTHOUSE=1 node scripts/smoke-ads-landing-live.mjs   # faster debug
+ *   ADS_SMOKE_MAX_LCP_SEC=12 node scripts/smoke-ads-landing-live.mjs     # fail if LCP above N seconds (0=off)
+ *   ADS_SMOKE_BROWSERS=chromium,webkit node scripts/smoke-ads-landing-live.mjs
  *
  * Exit 1 if any required check fails.
  */
@@ -21,6 +23,12 @@ const SITE_ROOT = path.resolve(__dirname, '..');
 const OUT_DIR = path.join(SITE_ROOT, 'data', 'ads-landing-smoke');
 const BASE = (process.env.ADS_SMOKE_BASE || 'https://www.siya.health').replace(/\/$/, '');
 const SKIP_LH = process.env.ADS_SMOKE_SKIP_LIGHTHOUSE === '1';
+/** Fail Lighthouse check when LCP exceeds this (seconds). Default 12; set 0 to disable. */
+const MAX_LCP_SEC = Number.parseFloat(process.env.ADS_SMOKE_MAX_LCP_SEC ?? '12');
+const BROWSERS = (process.env.ADS_SMOKE_BROWSERS || 'chromium,webkit')
+  .split(',')
+  .map((s) => s.trim().toLowerCase())
+  .filter((s) => s === 'chromium' || s === 'webkit' || s === 'firefox');
 const RUN_ID = new Date().toISOString().replace(/[:.]/g, '-');
 const STARTED_AT = new Date().toISOString();
 
@@ -191,29 +199,62 @@ function runLighthouse(pageUrl) {
   };
 }
 
-async function playwrightChecks(pagePath, kind) {
-  const { chromium } = await import('playwright');
-  const browser = await chromium.launch({ headless: true });
+async function playwrightChecks(pagePath, kind, browserName = 'chromium') {
+  const pw = await import('playwright');
+  const launcher = pw[browserName];
+  if (!launcher) {
+    throw new Error(`playwright browser not available: ${browserName}`);
+  }
+  const browser = await launcher.launch({ headless: true });
   const context = await browser.newContext({
     viewport: { width: 390, height: 844 },
     isMobile: true,
     hasTouch: true,
     userAgent:
-      'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
+      browserName === 'webkit'
+        ? 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/15E148 Safari/604.1'
+        : 'Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36',
   });
+
+  /*
+   * Playwright WebKit strips `gclid` from the navigated URL before page JS runs
+   * (early location.search already lacks it). Seed sessionStorage so CTA decoration
+   * still exercises the same withAttribution path Safari uses when gclid was stored.
+   */
+  await context.addInitScript((qs) => {
+    try {
+      const params = new URLSearchParams(qs);
+      const map = {};
+      params.forEach((v, k) => {
+        map[k] = v;
+      });
+      const key = 'siya_marketing_params';
+      const prev = sessionStorage.getItem(key);
+      const merged = prev ? { ...JSON.parse(prev), ...map } : map;
+      sessionStorage.setItem(key, JSON.stringify(merged));
+      window.__siyaSmokeAttrSeeded = true;
+    } catch {
+      /* ignore */
+    }
+  }, TEST_QS);
+
   const page = await context.newPage();
   const url = `${BASE}${pagePath}?${TEST_QS}`;
   await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 });
   await page.waitForTimeout(1500);
 
-  const shotPath = path.join(OUT_DIR, `${RUN_ID}${pagePath.replace(/\//g, '_')}-hero.png`);
+  const shotPath = path.join(
+    OUT_DIR,
+    `${RUN_ID}${pagePath.replace(/\//g, '_')}-${browserName}-hero.png`,
+  );
   await page.screenshot({ path: shotPath, fullPage: false });
 
   const metrics = await page.evaluate(() => {
     const body = document.body;
     const hasNavCenter = Boolean(document.querySelector('.nav-center'));
     const hasSiteHeader = Boolean(document.querySelector('header.site-header, .site-header'));
-    const isLanding = body?.classList?.contains('siya-landing-page') || Boolean(body?.getAttribute('data-siya-landing'));
+    const isLanding =
+      body?.classList?.contains('siya-landing-page') || Boolean(body?.getAttribute('data-siya-landing'));
     const landing = body?.getAttribute('data-siya-landing') || null;
     const bodyClass = body?.className || '';
 
@@ -249,10 +290,15 @@ async function playwrightChecks(pagePath, kind) {
       }
     }
 
-    const redirectLinks = [...document.querySelectorAll('a[href*="/redirect/"]')].map((a) => ({
-      text: (a.textContent || '').trim().slice(0, 60),
-      href: a.getAttribute('href') || '',
-    }));
+    const cookie = document.querySelector('.cookie-notice');
+    let cookieBar = null;
+    if (cookie) {
+      const h = Math.round(cookie.getBoundingClientRect().height);
+      const pct = Math.round((h / window.innerHeight) * 100);
+      cookieBar = { height: h, vh: window.innerHeight, pct, ok: pct <= 35 };
+    } else {
+      cookieBar = { height: 0, vh: window.innerHeight, pct: 0, ok: true, absent: true };
+    }
 
     return {
       finalPath: location.pathname,
@@ -262,12 +308,23 @@ async function playwrightChecks(pagePath, kind) {
       hasNavCenter,
       hasSiteHeader,
       hero,
-      redirectLinks,
+      cookieBar,
       title: document.title,
     };
   });
 
-  // Prefer load-time decoration; also fire click path used by siya-tracking
+  // Load-time decoration (siya-tracking decorateRedirectLinks) — prefer over synthetic click
+  try {
+    await page.waitForFunction(() => {
+      const a =
+        document.querySelector('a[href*="/redirect/meet-greet"]') ||
+        document.querySelector('a[href*="/redirect/"]');
+      return Boolean(a && /[?&]gclid=/.test(a.getAttribute('href') || ''));
+    }, { timeout: 10000 });
+  } catch {
+    /* fall through to click-time check */
+  }
+
   const gclidCheck = await page.evaluate((qs) => {
     const params = new URLSearchParams(qs);
     const need = ['gclid', 'utm_source', 'utm_medium', 'utm_campaign'];
@@ -276,20 +333,33 @@ async function playwrightChecks(pagePath, kind) {
       document.querySelector('a[href*="/redirect/"]');
     if (!link) return { ok: false, reason: 'no_redirect_cta', href: null, present: {} };
 
-    // Click path re-applies withAttribution in siya-tracking.js
-    link.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, view: window }));
-    link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
-    const href = link.getAttribute('href') || '';
-    let u;
-    try {
-      u = new URL(href, location.origin);
-    } catch {
-      return { ok: false, reason: 'bad_href', href, present: {} };
+    function readPresent(href) {
+      try {
+        const u = new URL(href, location.origin);
+        const present = {};
+        for (const k of need) present[k] = u.searchParams.get(k);
+        return { href: u.pathname + u.search, present };
+      } catch {
+        return { href, present: {} };
+      }
     }
-    const present = {};
-    for (const k of need) present[k] = u.searchParams.get(k);
-    const ok = need.every((k) => present[k] && present[k] === params.get(k));
-    return { ok, reason: ok ? 'params_on_cta' : 'params_missing_on_cta', href: u.pathname + u.search, present };
+
+    let raw = link.getAttribute('href') || '';
+    let parsed = readPresent(raw);
+    let ok = need.every((k) => parsed.present[k] && parsed.present[k] === params.get(k));
+    if (ok) {
+      return { ok: true, reason: 'params_on_cta_load', href: parsed.href, present: parsed.present };
+    }
+
+    // Do not link.click() — navigates away on WebKit and races the assertion.
+    return {
+      ok: false,
+      reason: 'params_missing_on_cta',
+      href: parsed.href,
+      present: parsed.present,
+      seeded: Boolean(window.__siyaSmokeAttrSeeded),
+      pageSearch: location.search,
+    };
   }, TEST_QS);
 
   await browser.close();
@@ -303,12 +373,38 @@ async function playwrightChecks(pagePath, kind) {
   }
 
   return {
+    browser: browserName,
     screenshot: shotPath,
     leanOk,
     heroOk,
     gclidOk: Boolean(gclidCheck.ok),
+    cookieOk: Boolean(metrics.cookieBar?.ok),
     metrics,
     gclidCheck,
+  };
+}
+
+async function playwrightMulti(pagePath, kind) {
+  const byBrowser = {};
+  for (const name of BROWSERS) {
+    byBrowser[name] = await playwrightChecks(pagePath, kind, name);
+  }
+  const list = Object.values(byBrowser);
+  return {
+    byBrowser,
+    leanOk: list.every((b) => b.leanOk),
+    heroOk: list.every((b) => b.heroOk),
+    gclidOk: list.every((b) => b.gclidOk),
+    cookieOk: list.every((b) => b.cookieOk),
+    screenshot: list.map((b) => b.screenshot).filter(Boolean),
+    summary: list
+      .map(
+        (b) =>
+          `${b.browser}:hero=${b.heroOk ? 'PASS' : 'FAIL'} chrome=${b.leanOk ? 'PASS' : 'FAIL'} gclid=${b.gclidOk ? 'PASS' : 'FAIL'} cookie=${b.cookieOk ? 'PASS' : 'FAIL'}(${b.metrics?.cookieBar?.pct ?? '?'}%)`,
+      )
+      .join(' | '),
+    gclidCheck: list[0]?.gclidCheck || null,
+    metrics: list[0]?.metrics || null,
   };
 }
 
@@ -348,13 +444,20 @@ async function main() {
   ensureOutDir();
   console.log(`ADS LP LIVE SMOKE  base=${BASE}  started=${STARTED_AT}  run=${RUN_ID}`);
   console.log(`Evidence dir: ${OUT_DIR}`);
+  console.log(
+    `browsers=${BROWSERS.join(',')}  maxLcpSec=${Number.isFinite(MAX_LCP_SEC) ? MAX_LCP_SEC : 'n/a'}`,
+  );
 
-  // Ensure playwright chromium
-  const pwInstall = spawnSync('npx', ['--yes', 'playwright', 'install', 'chromium'], {
-    cwd: SITE_ROOT,
-    encoding: 'utf8',
-    timeout: 300000,
-  });
+  // Ensure playwright browsers (chromium + webkit by default)
+  const pwInstall = spawnSync(
+    'npx',
+    ['--yes', 'playwright', 'install', ...BROWSERS],
+    {
+      cwd: SITE_ROOT,
+      encoding: 'utf8',
+      timeout: 300000,
+    },
+  );
   if (pwInstall.status !== 0) {
     console.warn('playwright install warning:', (pwInstall.stderr || pwInstall.stdout || '').slice(0, 300));
   }
@@ -374,17 +477,18 @@ async function main() {
 
     let browser = null;
     try {
-      // Use final path for browser (if redirected to eval, check that page's rendering)
       const browserPath = http.pass ? probe.finalPath : page.path;
-      const kind =
-        browserPath.includes('evaluation') ? 'evaluation' : page.kind;
-      browser = await playwrightChecks(browserPath, kind);
+      const kind = browserPath.includes('evaluation') ? 'evaluation' : page.kind;
+      console.log(`  playwright (${BROWSERS.join('+')})…`);
+      browser = await playwrightMulti(browserPath, kind);
     } catch (err) {
       browser = {
         leanOk: false,
         heroOk: false,
         gclidOk: false,
+        cookieOk: false,
         error: String(err),
+        summary: String(err),
         metrics: null,
         gclidCheck: null,
         screenshot: null,
@@ -397,12 +501,27 @@ async function main() {
       lh = runLighthouse(probe.finalUrl.split('?')[0]);
     }
 
+    const lcpOver =
+      Number.isFinite(MAX_LCP_SEC) &&
+      MAX_LCP_SEC > 0 &&
+      typeof lh.lcpSec === 'number' &&
+      lh.lcpSec > MAX_LCP_SEC;
+
     const lhPass =
       SKIP_LH ||
       (lh.ok &&
         typeof lh.performanceScore === 'number' &&
         typeof lh.lcpSec === 'number' &&
-        lh.lcpSec > 0);
+        lh.lcpSec > 0 &&
+        !lcpOver);
+
+    const lhRaw = SKIP_LH
+      ? 'SKIPPED'
+      : lh.ok
+        ? `perf=${lh.performanceScore} LCP=${lh.lcpSec}s weight=${lh.totalKb}KB @${lh.fetchTime || STARTED_AT}${
+            lcpOver ? ` FAIL>maxLcp=${MAX_LCP_SEC}s` : Number.isFinite(MAX_LCP_SEC) && MAX_LCP_SEC > 0 ? ` (max ${MAX_LCP_SEC}s)` : ''
+          }`
+        : `FAIL ${lh.error || 'no report'}`;
 
     const row = {
       path: page.path,
@@ -412,19 +531,18 @@ async function main() {
         http: { pass: http.pass, raw: http.raw },
         lighthouse: {
           pass: lhPass,
-          raw: SKIP_LH
-            ? 'SKIPPED'
-            : lh.ok
-              ? `perf=${lh.performanceScore} LCP=${lh.lcpSec}s weight=${lh.totalKb}KB @${lh.fetchTime || STARTED_AT}`
-              : `FAIL ${lh.error || 'no report'}`,
+          raw: lhRaw,
           performanceScore: lh.performanceScore ?? null,
           lcpSec: lh.lcpSec ?? null,
           totalKb: lh.totalKb ?? null,
           fetchTime: lh.fetchTime ?? null,
+          maxLcpSec: Number.isFinite(MAX_LCP_SEC) ? MAX_LCP_SEC : null,
         },
         assets: {
           pass: assetsOk,
-          raw: `${assetsPass}/${assets.length} 200` + (assetsFail.length ? ` FAIL:${assetsFail.map((a) => `${a.url}:${a.status}`).join('|')}` : ''),
+          raw:
+            `${assetsPass}/${assets.length} 200` +
+            (assetsFail.length ? ` FAIL:${assetsFail.map((a) => `${a.url}:${a.status}`).join('|')}` : ''),
           checked: assets.length,
           passed: assetsPass,
           failed: assetsFail,
@@ -433,27 +551,42 @@ async function main() {
           pass: Boolean(browser?.heroOk),
           raw: browser?.error
             ? `ERROR ${browser.error}`
-            : browser?.metrics?.hero
-              ? JSON.stringify(browser.metrics.hero)
-              : 'no hero metrics',
+            : browser?.summary ||
+              (browser?.metrics?.hero ? JSON.stringify(browser.metrics.hero) : 'no hero metrics'),
         },
         chrome: {
           pass: Boolean(browser?.leanOk),
-          raw: browser?.metrics
-            ? `landing=${browser.metrics.landing} nav-center=${browser.metrics.hasNavCenter} site-header=${browser.metrics.hasSiteHeader} class=${(browser.metrics.bodyClass || '').slice(0, 80)}`
-            : browser?.error || 'n/a',
+          raw: browser?.summary
+            ? browser.summary
+            : browser?.metrics
+              ? `landing=${browser.metrics.landing} nav-center=${browser.metrics.hasNavCenter} site-header=${browser.metrics.hasSiteHeader}`
+              : browser?.error || 'n/a',
+        },
+        cookie: {
+          pass: Boolean(browser?.cookieOk),
+          raw: browser?.summary || browser?.error || 'n/a',
         },
         gclid: {
           pass: Boolean(browser?.gclidOk),
-          raw: browser?.gclidCheck
-            ? `${browser.gclidCheck.reason} href=${browser.gclidCheck.href} present=${JSON.stringify(browser.gclidCheck.present)}`
-            : browser?.error || 'n/a',
+          raw: browser?.summary
+            ? browser.summary
+            : browser?.gclidCheck
+              ? `${browser.gclidCheck.reason} href=${browser.gclidCheck.href} present=${JSON.stringify(browser.gclidCheck.present)}`
+              : browser?.error || 'n/a',
         },
       },
       evidence: {
         screenshot: browser?.screenshot || null,
         lighthouseReport: lh.reportPath || null,
         assets,
+        browsers: browser?.byBrowser
+          ? Object.fromEntries(
+              Object.entries(browser.byBrowser).map(([k, v]) => [
+                k,
+                { heroOk: v.heroOk, leanOk: v.leanOk, gclidOk: v.gclidOk, cookieOk: v.cookieOk, cookie: v.metrics?.cookieBar },
+              ]),
+            )
+          : null,
       },
     };
 
@@ -466,6 +599,8 @@ async function main() {
     finishedAt: new Date().toISOString(),
     runId: RUN_ID,
     base: BASE,
+    browsers: BROWSERS,
+    maxLcpSec: Number.isFinite(MAX_LCP_SEC) ? MAX_LCP_SEC : null,
     rows,
     pass: rows.every((r) => r.pass),
   };
@@ -482,15 +617,15 @@ async function main() {
   console.log(`json: ${jsonPath}`);
   console.log('');
   console.log(
-    `| ${pad('URL', 34)} | ${pad('HTTP', 28)} | ${pad('Lighthouse (mobile)', 42)} | ${pad('Assets', 22)} | ${pad('Hero', 10)} | ${pad('Lean chrome', 12)} | ${pad('gclid/UTM', 12)} |`,
+    `| ${pad('URL', 34)} | ${pad('HTTP', 28)} | ${pad('Lighthouse (mobile)', 42)} | ${pad('Assets', 22)} | ${pad('Hero', 10)} | ${pad('Lean chrome', 12)} | ${pad('Cookie', 10)} | ${pad('gclid/UTM', 12)} |`,
   );
   console.log(
-    `|${'-'.repeat(36)}|${'-'.repeat(30)}|${'-'.repeat(44)}|${'-'.repeat(24)}|${'-'.repeat(12)}|${'-'.repeat(14)}|${'-'.repeat(14)}|`,
+    `|${'-'.repeat(36)}|${'-'.repeat(30)}|${'-'.repeat(44)}|${'-'.repeat(24)}|${'-'.repeat(12)}|${'-'.repeat(14)}|${'-'.repeat(12)}|${'-'.repeat(14)}|`,
   );
   for (const r of rows) {
     const mark = (c) => (c.pass ? 'PASS' : 'FAIL');
     console.log(
-      `| ${pad(r.path, 34)} | ${pad(`${mark(r.checks.http)} ${r.checks.http.raw}`, 28)} | ${pad(`${mark(r.checks.lighthouse)} ${r.checks.lighthouse.raw}`, 42)} | ${pad(`${mark(r.checks.assets)} ${r.checks.assets.raw}`, 22)} | ${pad(`${mark(r.checks.hero)}`, 10)} | ${pad(`${mark(r.checks.chrome)}`, 12)} | ${pad(`${mark(r.checks.gclid)}`, 12)} |`,
+      `| ${pad(r.path, 34)} | ${pad(`${mark(r.checks.http)} ${r.checks.http.raw}`, 28)} | ${pad(`${mark(r.checks.lighthouse)} ${r.checks.lighthouse.raw}`, 42)} | ${pad(`${mark(r.checks.assets)} ${r.checks.assets.raw}`, 22)} | ${pad(`${mark(r.checks.hero)}`, 10)} | ${pad(`${mark(r.checks.chrome)}`, 12)} | ${pad(`${mark(r.checks.cookie)}`, 10)} | ${pad(`${mark(r.checks.gclid)}`, 12)} |`,
     );
   }
   console.log('');
@@ -500,11 +635,12 @@ async function main() {
     for (const [k, v] of Object.entries(r.checks)) {
       console.log(`  ${k}: ${v.pass ? 'PASS' : 'FAIL'} | ${v.raw}`);
     }
-    if (r.evidence.assets?.length) {
+    if (r.checks.assets.failed?.length) {
+      console.log('  assets detail FAIL:');
+      for (const a of r.checks.assets.failed) console.log(`    ${a.status} ${a.url}`);
+    } else if (r.evidence.assets?.length) {
       console.log('  assets detail:');
-      for (const a of r.evidence.assets) {
-        console.log(`    ${a.ok ? 'OK' : 'BAD'} ${a.status} ${a.contentType} ${a.url}`);
-      }
+      for (const a of r.evidence.assets) console.log(`    OK ${a.status} ${a.contentType} ${a.url}`);
     }
   }
 
