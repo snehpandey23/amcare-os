@@ -1,0 +1,65 @@
+# Siya Health — live Ads LP smoke (production www.siya.health)
+# Runs after main pushes that touch Ads LP surfaces, and on demand.
+# Waits briefly for Vercel production to catch the push, then fails if
+# HTTP/assets/hero/chrome/gclid checks fail (Lighthouse numbers always reported).
+
+name: Siya Health — Ads LP live smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "apps/siya-health/adhd-evaluation-*.html"
+      - "apps/siya-health/adult-adhd-screening-*.html"
+      - "apps/siya-health/styles.css"
+      - "apps/siya-health/scripts/landing-adhd-ads.js"
+      - "apps/siya-health/scripts/validate-ads-landing.mjs"
+      - "apps/siya-health/scripts/smoke-ads-landing-live.mjs"
+      - "apps/siya-health/scripts/site-chrome.mjs"
+      - "apps/siya-health/vercel.json"
+      - "apps/siya-health/package.json"
+      - ".github/workflows/siya-health-ads-lp-smoke.yml"
+
+concurrency:
+  group: siya-health-ads-lp-smoke
+  cancel-in-progress: true
+
+jobs:
+  smoke-ads-lps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Playwright Chromium + WebKit
+        working-directory: apps/siya-health
+        run: npx --yes playwright install --with-deps chromium webkit
+
+      - name: Wait for Vercel production (post-push)
+        if: github.event_name == 'push'
+        run: sleep 90
+
+      - name: Live Ads LP smoke (www.siya.health)
+        working-directory: apps/siya-health
+        run: node scripts/smoke-ads-landing-live.mjs
+        env:
+          ADS_SMOKE_BASE: https://www.siya.health
+          ADS_SMOKE_BROWSERS: chromium,webkit
+          ADS_SMOKE_MAX_LCP_SEC: "12"
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ads-lp-smoke-${{ github.run_id }}
+          path: |
+            apps/siya-health/data/ads-landing-smoke/
+            apps/siya-health/data/ads-landing-smoke-latest.json
+          if-no-files-found: warn
