@@ -138,6 +138,8 @@ export type FounderCoachBrief = {
   domains?: DomainSnapshot[];
   /** Same weekly_lead_checkins-derived items as domain tabs (not a parallel source) */
   leadCheckInSignals?: DomainItem[];
+  /** Recent Memory decisions for Draft — may be absent on older API */
+  decisionSignals?: DomainItem[];
   canEditMonthly: boolean;
   canEditWeekly: boolean;
   isWeekLocked?: boolean;
@@ -214,7 +216,10 @@ export async function draftWeeklyPlan(
     refineInstruction?: string;
     currentDraft?: Pick<WeeklyPlanDraft, "founderFocus" | "canWait" | "delegate" | "observeOnly" | "citations">;
   },
-): Promise<{ draft: WeeklyPlanDraft }> {
+): Promise<
+  | { draft: WeeklyPlanDraft; rejected?: false }
+  | { draft?: undefined; rejected: true; message: string; reason?: string }
+> {
   const token = getStoredToken();
   if (!token) throw new Error("Sign in required.");
   const res = await fetch("/api/founder-coach/draft-weekly", {
@@ -234,10 +239,22 @@ export async function draftWeeklyPlan(
     draft?: WeeklyPlanDraft;
     basicDraft?: WeeklyPlanDraft;
     code?: string;
+    rejected?: boolean;
+    message?: string;
+    reason?: string;
   };
+  if (data.rejected || data.code === "draft_off_topic") {
+    return {
+      rejected: true,
+      message:
+        data.message ||
+        "That doesn't look like a work priority — try asking about a decision, task, or what needs attention this week.",
+      reason: data.reason,
+    };
+  }
   // Prefer structured draft (incl. deterministic + aiUnavailable). Legacy 503 + basicDraft still accepted.
   const draft = data.draft ?? data.basicDraft;
-  if (draft) return { draft };
+  if (draft) return { draft, rejected: false };
   if (!res.ok) {
     throw new Error(
       data.error ||

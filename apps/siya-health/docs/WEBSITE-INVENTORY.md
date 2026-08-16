@@ -251,7 +251,7 @@ Generated: 2026-07-26
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
 | [/adult-adhd-california](https://siya.health/adult-adhd-california) | Page | The complete guide to adult ADHD in California: what it l… | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Mixed | Adult ADHD care in California | 1565 | 17 | 38 |
-| [/adult-adhd-screening-california](https://siya.health/adult-adhd-screening-california) | Page | Free online ADHD screening for adults in California. Take… | Start Free 2-Minute Screening → /adhd… | Start Free 2-Minute Screening → /adhd… | Mixed | Online ADHD Screening in California | 1120 | 1 | 9 |
+| [/adhd-evaluation-california](https://siya.health/adhd-evaluation-california) | Page | Free online ADHD screening for adults in California. Take… | Start Free 2-Minute Screening → /adhd… | Start Free 2-Minute Screening → /adhd… | Mixed | Online ADHD Screening in California | 1120 | 1 | 9 |
 | [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Book Free Meet & Greet → /redirect/me… | Book Online via Zocdoc → https://www.… | Commercial / Transactional | Choose How You Want to Get Started | 203 | 167 | 32 |
 | [/fatigue](https://siya.health/fatigue) | Page | Persistent fatigue is a symptom with many possible causes… | Book Free Meet & Greet → /redirect/me… | See what it could be → #what-it-could-be | Mixed | Fatigue: when tired stops being normal | 1545 | 20 | 45 |
 | [/labs](https://siya.health/labs) | Service Page | Explore transparent direct-pay laboratory testing for thy… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Labs & Blood Tests with Transparent Direct-Pay … | 1676 | 167 | 40 |
@@ -393,9 +393,9 @@ Generated: 2026-07-26
 - **Internal Links Out:** 38
 - **Groups:** Utility Pages
 
-### /adult-adhd-screening-california
+### /adhd-evaluation-california
 
-- **URL:** https://siya.health/adult-adhd-screening-california
+- **URL:** https://siya.health/adhd-evaluation-california
 - **Page Type:** Page
 - **Primary Purpose:** Free online ADHD screening for adults in California. Take a 2-minute test with no sign-up, then explore virtual ADHD care with licensed physicians serving California.
 - **Primary CTA:** Start Free 2-Minute Screening → /adhd-screening

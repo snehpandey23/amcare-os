@@ -38,9 +38,12 @@ export function AssistantShell({ children }: { children: ReactNode }) {
           <Link href="/" className="flex items-center" aria-label="Siya — My day">
             <SiyaWordmark size="header" />
           </Link>
-          <nav className="flex flex-wrap gap-3 text-sm md:gap-5">
-            <NavLink href="/" active={path === "/" || path.startsWith("/help")}>
+          <nav className="flex flex-wrap gap-3 text-sm md:gap-5" aria-label="Primary">
+            <NavLink href="/" active={path === "/"}>
               My day
+            </NavLink>
+            <NavLink href="/help" active={path === "/help" || path.startsWith("/help/")}>
+              Ask
             </NavLink>
             <NavLink
               href="/learn"

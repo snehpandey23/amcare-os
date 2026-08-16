@@ -75,7 +75,7 @@ A page **stays** if it is at least one of:
 | `/adhd-diagnosis-houston` | City commercial SEO |
 | `/adhd-diagnosis-pennsylvania` | State commercial SEO |
 | `/adhd-diagnosis-philadelphia` | City commercial SEO |
-| `/adult-adhd-screening-california` | CA campaign / screening landing — **do not delete** without Ads + GSC review |
+| `/adhd-evaluation-california` | CA campaign / screening landing — **do not delete** without Ads + GSC review |
 
 California **blog** cluster (9 articles) + `/answers/telehealth-adhd-california` — keep as informational/local SEO; periodic overlap review only.
 
@@ -193,7 +193,7 @@ Shared pattern: recognition-led hero CTAs, human trust block, “Does This Sound
 | `/pricing` | Generated page; hero Explore Care; stock hero |
 | `/book-appointment` | Functional chooser — exempt from full blueprint |
 | `/adhd-screening` | Tool page — exempt |
-| `/adult-adhd-screening-california` | Landing-page pattern; still has pathways |
+| `/adhd-evaluation-california` | Landing-page pattern; still has pathways |
 | Homepage | Frozen; different pattern by design (pathways remain) |
 
 ### Templates standardized (already)

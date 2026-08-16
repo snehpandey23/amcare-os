@@ -15,7 +15,7 @@ URL,Section,Current Issue,Issue Type,Recommended Rewrite,Compliance Risk,SEO Ris
 /pricing,CTA,Explore Care / Explore Care Options,Deprecated CTA,Replace with Meet & Greet + Secure Chat hierarchy,None,Low,P1,Open
 /book-appointment,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
 /adhd-screening,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
-/adult-adhd-screening-california,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
+/adhd-evaluation-california,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
 /creyos-adhd-testing,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
 /blog,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
 /answers,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
@@ -26,8 +26,8 @@ URL,Section,Current Issue,Issue Type,Recommended Rewrite,Compliance Risk,SEO Ris
 /adhd-diagnosis-texas,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
 /adhd-diagnosis-pennsylvania,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
 /adhd-diagnosis-philadelphia,Pricing,Contains $199 initial-evaluation pricing,Outdated pricing,Update to $149 initial physician evaluation (source: site-standards),High,High,P1,Open
-/adult-adhd-screening-california,Disclaimer,"""Medication is not guaranteed"" appears 6 times",Redundant legal language,Keep hero note + FAQ + footer; trim mid-page repeats (attorney review first),Med,None,P2,Open
-/adult-adhd-screening-california,Pricing/Campaign,Limited-time / introductory California pricing language,Campaign pricing conflict,Align to sitewide $149 or explicitly expire; attorney + Ads review,High,Med,P1,Open
+/adhd-evaluation-california,Disclaimer,"""Medication is not guaranteed"" appears 6 times",Redundant legal language,Keep hero note + FAQ + footer; trim mid-page repeats (attorney review first),Med,None,P2,Open
+/adhd-evaluation-california,Pricing/Campaign,Limited-time / introductory California pricing language,Campaign pricing conflict,Align to sitewide $149 or explicitly expire; attorney + Ads review,High,Med,P1,Open
 /blog/adderall-for-adhd-how-it-works,Governance,No author/reviewer byline,Missing medical governance,Queue for physician review (see MEDICAL-CONTENT-REVIEW-QUEUE),Med,Med,P2,Open
 /blog/semaglutide-for-weight-loss-how-it-works,Governance,No author/reviewer byline,Missing medical governance,Queue for physician review (see MEDICAL-CONTENT-REVIEW-QUEUE),Med,Med,P2,Open
 /blog/when-is-testosterone-therapy-appropriate,Governance,No author/reviewer byline,Missing medical governance,Queue for physician review (see MEDICAL-CONTENT-REVIEW-QUEUE),Med,Med,P2,Open

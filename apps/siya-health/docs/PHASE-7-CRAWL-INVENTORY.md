@@ -30,7 +30,7 @@
 | /adhd-treatment-online | 301 | no | no | 0 | /adhd-care | /adhd-care |
 | /adult-adhd-california | 200 | yes | yes | 25 | /adult-adhd-california | — |
 | /adult-adhd-diagnosis | 301 | no | no | 0 | /adhd-care | /adhd-care |
-| /adult-adhd-screening-california | 200 | yes | yes | 1 | /adult-adhd-screening-california | — |
+| /adhd-evaluation-california | 200 | yes | yes | 1 | /adhd-evaluation-california | — |
 | /answers/adderall-vs-vyvanse-adults | 200 | yes | yes | 2 | /answers/adderall-vs-vyvanse-adults | — |
 | /answers/adhd-and-weight-loss-connection | 200 | yes | yes | 5 | /answers/adhd-and-weight-loss-connection | — |
 | /answers/adhd-in-women | 200 | yes | yes | 12 | /answers/adhd-in-women | — |

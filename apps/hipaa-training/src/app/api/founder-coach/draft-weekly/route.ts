@@ -1,5 +1,9 @@
 import { getTrainingApiUrl } from "@/lib/trainingConfig";
-import { draftWeeklyPlanFromSignals } from "@/lib/founder-weekly-draft";
+import {
+  dedupeDomainItemsByFact,
+  draftWeeklyPlanFromSignals,
+} from "@/lib/founder-weekly-draft";
+import { assessFounderDraftRelevance } from "@/lib/founder-draft-relevance";
 import type { DelegateLane, DomainItem, ObserveOnlyFlag } from "@/lib/founder-coach-api";
 
 export const maxDuration = 60;
@@ -15,6 +19,89 @@ type DraftBody = {
     citations?: string[];
   };
 };
+
+type DecisionRow = {
+  id?: string;
+  title?: string;
+  decisionText?: string;
+  status?: string;
+  department?: string | null;
+  decisionDate?: string | null;
+};
+
+function decisionToDomainItem(d: DecisionRow): DomainItem | null {
+  if (!d.id || !d.title) return null;
+  const status = (d.status || "").toLowerCase();
+  if (status && !["active", "draft"].includes(status)) return null;
+  return {
+    id: `dec-${d.id}`.slice(0, 80),
+    label: `Decision · ${d.title}`.slice(0, 200),
+    detail: (d.decisionText || "").slice(0, 500) || undefined,
+    urgencyDate: d.decisionDate ? String(d.decisionDate).slice(0, 10) : null,
+    founderFlag: false,
+    source: "siya_decisions",
+    href: "/memory",
+  };
+}
+
+function rankForDraft(items: DomainItem[]): DomainItem[] {
+  return [...items].sort((a, b) => {
+    if (a.founderFlag !== b.founderFlag) return a.founderFlag ? -1 : 1;
+    const aU = a.urgencyDate ? 1 : 0;
+    const bU = b.urgencyDate ? 1 : 0;
+    if (aU !== bU) return bU - aU;
+    if (a.urgencyDate && b.urgencyDate) return a.urgencyDate.localeCompare(b.urgencyDate);
+    return a.label.localeCompare(b.label);
+  });
+}
+
+/**
+ * Draft signal pack:
+ * - weekly lead check-ins (flattened)
+ * - ALL domain tab items (not only urgencyDate) — chat reviews, handoffs, SOP queue, HR, ads…
+ * - recent Memory decisions (siya_decisions)
+ * Deduped by underlying fact before LLM / deterministic draft.
+ */
+async function collectDraftSignalPack(
+  auth: string,
+  base: string,
+  brief: {
+    leadCheckInSignals?: DomainItem[];
+    domains?: { items: DomainItem[] }[];
+    decisionSignals?: DomainItem[];
+  },
+): Promise<{ leadSignals: DomainItem[]; portalSignals: DomainItem[] }> {
+  const leadSignals = brief.leadCheckInSignals ?? [];
+  const domainItems = (brief.domains ?? []).flatMap((d) => d.items ?? []);
+  let decisionItems = brief.decisionSignals ?? [];
+
+  if (!decisionItems.length) {
+    try {
+      const decRes = await fetch(`${base}/api/knowledge/decisions?limit=16`, {
+        headers: { Authorization: auth, "Content-Type": "application/json" },
+      });
+      if (decRes.ok) {
+        const body = (await decRes.json().catch(() => ({}))) as {
+          decisions?: DecisionRow[];
+        };
+        decisionItems = (body.decisions ?? [])
+          .map(decisionToDomainItem)
+          .filter((x): x is DomainItem => Boolean(x));
+      }
+    } catch {
+      /* decisions optional for draft */
+    }
+  }
+
+  const portalSignals = dedupeDomainItemsByFact(
+    rankForDraft([...domainItems, ...decisionItems]),
+  ).slice(0, 36);
+
+  return {
+    leadSignals: dedupeDomainItemsByFact(leadSignals),
+    portalSignals,
+  };
+}
 
 export async function POST(req: Request) {
   const auth = req.headers.get("authorization");
@@ -53,6 +140,20 @@ export async function POST(req: Request) {
     );
   }
 
+  // Relevance gate BEFORE brief fetch / signal pack / synthesis (skip for refine of an existing draft).
+  if (!refineInstruction) {
+    const relevance = await assessFounderDraftRelevance(prioritiesRaw);
+    if (!relevance.relevant) {
+      return Response.json({
+        rejected: true,
+        code: "draft_off_topic",
+        message: relevance.userMessage,
+        reason: relevance.reason,
+        layer: relevance.layer,
+      });
+    }
+  }
+
   const briefRes = await fetch(`${base}/api/founder-coach/brief`, {
     headers: { Authorization: auth, "Content-Type": "application/json" },
   });
@@ -60,6 +161,7 @@ export async function POST(req: Request) {
     error?: string;
     leadCheckInSignals?: DomainItem[];
     domains?: { items: DomainItem[] }[];
+    decisionSignals?: DomainItem[];
     isWeekLocked?: boolean;
   };
   if (!briefRes.ok) {
@@ -69,23 +171,22 @@ export async function POST(req: Request) {
     return Response.json({ error: "This week is locked. Unlock to modify before drafting." }, { status: 400 });
   }
 
-  const leadSignals = brief.leadCheckInSignals ?? [];
-  const nearestDeadlines = (brief.domains ?? [])
-    .flatMap((d) => d.items)
-    .filter((i) => Boolean(i.urgencyDate) && !i.source.startsWith("weekly_lead_checkins"))
-    .sort((a, b) => String(a.urgencyDate).localeCompare(String(b.urgencyDate)))
-    .slice(0, 12);
+  const { leadSignals, portalSignals } = await collectDraftSignalPack(auth, base, brief);
 
   const draft = await draftWeeklyPlanFromSignals({
     prioritiesRaw,
     leadSignals,
-    nearestDeadlines,
+    // nearestDeadlines param is now the full portal+decision signal pack (name kept for API compat)
+    nearestDeadlines: portalSignals,
     currentDraft,
     refineInstruction: refineInstruction || undefined,
   });
 
-  // Always return a draft payload. When AI fails, method=deterministic + aiUnavailable
-  // so the UI can show a scaffold without pretending it was an AI plan (do not 503 —
-  // that discarded the scaffold and surfaced only the last Gateway error).
-  return Response.json({ draft });
+  return Response.json({
+    draft,
+    signalMeta: {
+      leadCheckIns: leadSignals.length,
+      portalAndDecisions: portalSignals.length,
+    },
+  });
 }

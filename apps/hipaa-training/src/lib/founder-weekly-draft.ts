@@ -59,37 +59,174 @@ function splitPriorities(raw: string): string[] {
     .slice(0, 12);
 }
 
+/** Question / probe — must not be copied into Founder Focus as if it were a priority. */
+export function isFounderQuestion(text: string): boolean {
+  const t = text.trim();
+  if (!t || t.length < 3) return false;
+  if (/\?\s*$/.test(t)) return true;
+  if (
+    /^(what|whats|what's|how|who|why|which|when|where|should\s+i|do\s+i|is\s+there|are\s+there|can\s+i|could\s+i)\b/i.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  if (
+    /\b(on top of (the )?list|needs? (my )?attention|should i (focus|prioritize|do)|what('?s| is) (first|urgent|important))\b/i.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Fingerprint for deduping the same underlying portal fact (e.g. clin-hipaa vs comp-hipaa).
+ * Prefer meaning over source id / domain bucket.
+ */
+export function factFingerprint(item: {
+  id?: string;
+  label: string;
+  detail?: string;
+  source?: string;
+}): string {
+  const blob = `${item.label} ${item.detail || ""}`.toLowerCase().replace(/\s+/g, " ").trim();
+
+  if (/\bhipaa\b/.test(blob) && /\b(not started|training)\b/.test(blob)) {
+    const n = blob.match(/(\d+)\s+active users/);
+    return `fact:hipaa-training-not-started:${n?.[1] ?? "n"}`;
+  }
+  if (/\bopen chat review/.test(blob)) {
+    const n = blob.match(/(\d+)\s+open/);
+    return `fact:open-chat-reviews:${n?.[1] ?? "n"}`;
+  }
+  if (/\bshift handoff/.test(blob)) {
+    const n = blob.match(/(\d+)\s+shift/);
+    return `fact:shift-handoffs:${n?.[1] ?? "n"}`;
+  }
+  if (/\bsop(s)? on founder queue|\bfounder.?routed\b/.test(blob) || /siya_sops\.founder/.test(item.source || "")) {
+    return `fact:founder-sop-queue:${blob.match(/(\d+)/)?.[1] ?? "n"}`;
+  }
+  if (/\blive sops past review/.test(blob)) {
+    return `fact:sops-past-review:${blob.match(/(\d+)/)?.[1] ?? "n"}`;
+  }
+  if (/^decision\s*[·:]/i.test(item.label) || (item.source || "").startsWith("siya_decisions")) {
+    return `fact:decision:${(item.id || item.label).toLowerCase().slice(0, 80)}`;
+  }
+
+  return blob
+    .replace(/[^\w\s]/g, " ")
+    .replace(/\b(clin|comp)-?\w*\b/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 140);
+}
+
+export function dedupeDomainItemsByFact(items: DomainItem[]): DomainItem[] {
+  const seen = new Set<string>();
+  const out: DomainItem[] = [];
+  for (const item of items) {
+    const key = factFingerprint(item);
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    out.push(item);
+  }
+  return out;
+}
+
+function dedupeCanWaitLines(lines: string[]): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const line of lines) {
+    const key = factFingerprint({ label: line });
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    out.push(line);
+  }
+  return out;
+}
+
+function rankSignals(items: DomainItem[]): DomainItem[] {
+  return [...items].sort((a, b) => {
+    if (a.founderFlag !== b.founderFlag) return a.founderFlag ? -1 : 1;
+    const aLead = a.source.startsWith("weekly_lead_checkins") ? 1 : 0;
+    const bLead = b.source.startsWith("weekly_lead_checkins") ? 1 : 0;
+    if (aLead !== bLead) return bLead - aLead;
+    const aU = a.urgencyDate ? 1 : 0;
+    const bU = b.urgencyDate ? 1 : 0;
+    if (aU !== bU) return bU - aU;
+    if (a.urgencyDate && b.urgencyDate) return a.urgencyDate.localeCompare(b.urgencyDate);
+    const aDec = a.source.startsWith("siya_decisions") ? 1 : 0;
+    const bDec = b.source.startsWith("siya_decisions") ? 1 : 0;
+    if (aDec !== bDec) return bDec - aDec;
+    return a.label.localeCompare(b.label);
+  });
+}
+
+function focusFromSignal(top: DomainItem): string {
+  const body = top.detail ? `${top.label} — ${top.detail}` : top.label;
+  return `Priority: ${body}`.replace(/\s+/g, " ").trim().slice(0, 800);
+}
+
 /** Deterministic grounding — used when LLM is off or as validation baseline. */
 export function buildDeterministicWeeklyDraft(opts: {
   prioritiesRaw: string;
   leadSignals: DomainItem[];
   nearestDeadlines: DomainItem[];
 }): WeeklyDraftResult {
-  const lines = splitPriorities(opts.prioritiesRaw);
-  const founderFlags = opts.leadSignals.filter((s) => s.founderFlag);
-  const blockers = opts.leadSignals.filter((s) => s.source.includes("blockers"));
+  const question = isFounderQuestion(opts.prioritiesRaw);
+  const priorityLines = question ? [] : splitPriorities(opts.prioritiesRaw);
+  const pool = dedupeDomainItemsByFact(
+    rankSignals([...opts.leadSignals, ...opts.nearestDeadlines]),
+  );
+  const founderFlags = pool.filter((s) => s.founderFlag);
+  const blockers = pool.filter((s) => s.source.includes("blockers"));
   const citations: string[] = [];
 
-  let founderFocus = lines[0] || "";
-  if (!founderFocus && founderFlags[0]) {
-    founderFocus = `${founderFlags[0].label}: ${founderFlags[0].detail || ""}`.trim().slice(0, 800);
-    citations.push(founderFlags[0].id);
-  } else if (lines[0]) {
+  let founderFocus = "";
+  if (question) {
+    const top = pool[0];
+    if (top) {
+      founderFocus = focusFromSignal(top);
+      citations.push(top.id);
+    } else {
+      founderFocus =
+        "No strong portal signal this week — file a lead check-in or name one Founder Focus decision manually.";
+      citations.push("signals.empty");
+    }
+  } else if (priorityLines[0]) {
+    founderFocus = priorityLines[0].slice(0, 800);
     citations.push("founder.priorities_raw");
+  } else if (founderFlags[0]) {
+    founderFocus = focusFromSignal(founderFlags[0]);
+    citations.push(founderFlags[0].id);
+  } else if (pool[0]) {
+    founderFocus = focusFromSignal(pool[0]);
+    citations.push(pool[0].id);
   }
 
-  const canWait: string[] = [];
-  for (const line of lines.slice(1, 4)) {
-    canWait.push(line.slice(0, 400));
-    citations.push("founder.priorities_raw");
+  const canWaitRaw: string[] = [];
+  if (!question) {
+    for (const line of priorityLines.slice(1, 4)) {
+      canWaitRaw.push(line.slice(0, 400));
+      citations.push("founder.priorities_raw");
+    }
   }
-  for (const d of opts.nearestDeadlines) {
-    if (canWait.length >= 3) break;
-    if (founderFocus.includes(d.label)) continue;
+  for (const d of pool) {
+    if (canWaitRaw.length >= 6) break;
+    if (d.id && citations.includes(d.id) && founderFocus.includes(d.label)) continue;
     const text = d.detail ? `${d.label} — ${d.detail}` : d.label;
-    canWait.push(text.slice(0, 400));
+    canWaitRaw.push(text.slice(0, 400));
     citations.push(d.id);
   }
+  const canWait = dedupeCanWaitLines(canWaitRaw)
+    .filter((line) => {
+      const fp = factFingerprint({ label: line });
+      const focusFp = factFingerprint({ label: founderFocus });
+      return fp !== focusFp;
+    })
+    .slice(0, 3);
 
   const delegate: DelegateLane[] = [];
   for (const b of blockers.slice(0, 4)) {
@@ -114,7 +251,7 @@ export function buildDeterministicWeeklyDraft(opts: {
 
   return {
     founderFocus: founderFocus.slice(0, 800),
-    canWait: canWait.slice(0, 3),
+    canWait,
     delegate: delegate.slice(0, 8),
     observeOnly: observeOnly.slice(0, 8),
     groundedOnly: true,
@@ -133,7 +270,7 @@ export function refineDeterministicWeeklyDraft(
   const lower = tip.toLowerCase();
   const next: WeeklyDraftResult = {
     ...current,
-    canWait: [...current.canWait],
+    canWait: dedupeCanWaitLines([...current.canWait]),
     delegate: current.delegate.map((d) => ({ ...d })),
     observeOnly: current.observeOnly.map((o) => ({ ...o })),
     citations: [...new Set([...current.citations, "founder.refine"])],
@@ -141,11 +278,10 @@ export function refineDeterministicWeeklyDraft(
     groundedOnly: true,
   };
 
-  // Lightweight heuristics for common adjustments; otherwise annotate focus.
   if (/\b(can wait|defer|later|park)\b/i.test(tip) && next.founderFocus.trim()) {
     const moved = next.founderFocus.trim().slice(0, 400);
     if (!next.canWait.includes(moved) && next.canWait.length < 3) {
-      next.canWait = [moved, ...next.canWait].slice(0, 3);
+      next.canWait = dedupeCanWaitLines([moved, ...next.canWait]).slice(0, 3);
     }
     next.founderFocus = tip.replace(/^[^:]*:\s*/, "").slice(0, 800) || next.founderFocus;
   } else if (/\b(delegate|hand off|assign)\b/i.test(tip)) {
@@ -171,6 +307,7 @@ export function refineDeterministicWeeklyDraft(
   } else {
     next.founderFocus = `${next.founderFocus}\n(Refine: ${tip})`.trim().slice(0, 800);
   }
+  next.canWait = dedupeCanWaitLines(next.canWait).slice(0, 3);
   return next;
 }
 
@@ -184,6 +321,7 @@ export async function draftWeeklyPlanFromSignals(opts: {
 }): Promise<WeeklyDraftResult> {
   const refine = opts.refineInstruction?.trim() || "";
   const isRefine = Boolean(refine && opts.currentDraft);
+  const askedQuestion = !isRefine && isFounderQuestion(opts.prioritiesRaw);
 
   const base = isRefine
     ? refineDeterministicWeeklyDraft(
@@ -216,9 +354,15 @@ export async function draftWeeklyPlanFromSignals(opts: {
     return unavailable(workforceLlmDisabledMessage());
   }
 
-  const signalBlock = [...opts.leadSignals, ...opts.nearestDeadlines]
+  const signalPool = dedupeDomainItemsByFact(
+    rankSignals([...opts.leadSignals, ...opts.nearestDeadlines]),
+  );
+  const signalBlock = signalPool
     .slice(0, 40)
-    .map((s) => `- id=${s.id} | ${s.label} | ${s.detail || ""} | source=${s.source} | urgency=${s.urgencyDate || "none"} | founderFlag=${s.founderFlag}`)
+    .map(
+      (s) =>
+        `- id=${s.id} | ${s.label} | ${s.detail || ""} | source=${s.source} | urgency=${s.urgencyDate || "none"} | founderFlag=${s.founderFlag}`,
+    )
     .join("\n");
 
   const modePrompt = isRefine
@@ -239,7 +383,7 @@ ${JSON.stringify({
 `
     : `You draft a Founder Decision Coach weekly plan for Siya Health (physician-led telehealth).
 
-Founder priorities / thoughts:
+Founder input (${askedQuestion ? "QUESTION — do not echo into Founder Focus" : "stated priorities"}):
 """
 ${opts.prioritiesRaw.slice(0, 6000)}
 """
@@ -263,22 +407,28 @@ ${JSON.stringify({
 RULES (non-negotiable):
 - Use ONLY the founder's text, the CURRENT DRAFT (when refining), and the listed Phase 1 signals.
 - Do NOT invent deadlines, metrics, legal/tax/CPOM advice, or department facts not listed.
-- Founder Focus = exactly ONE most important decision for this week.
-- Can Wait = max 3 items.
+- Founder Focus = exactly ONE most important decision for this week — a concrete priority from signals (or stated priorities), never a restatement of a question.
+${askedQuestion ? "- The founder asked a QUESTION. Answer it by choosing Founder Focus from signals. Never set Founder Focus to the question text." : ""}
+- Can Wait = max 3 items. Never list the same underlying fact twice (e.g. same HIPAA count from two domain tabs).
 - Delegate = items a lead can own (prefer blockers from check-ins). Each delegate object must include note (use "" if none).
 - Observe only = watch items.
 - citations must be signal ids from the list and/or "founder.priorities_raw" / "founder.refine".
 
-Phase 1 signals (weekly_lead_checkins + nearest deadlines from portal domain items):
+Phase 1 signals (lead check-ins + portal domain items + decisions — already deduped by fact):
 ${signalBlock || "(none this week)"}
 `,
       });
       return o;
     });
     markWorkforceLlmSuccess();
+    const canWait = dedupeCanWaitLines(object.canWait.filter(Boolean)).slice(0, 3);
+    let founderFocus = object.founderFocus.slice(0, 800);
+    if (askedQuestion && isFounderQuestion(founderFocus)) {
+      founderFocus = base.founderFocus;
+    }
     return {
-      founderFocus: object.founderFocus.slice(0, 800),
-      canWait: object.canWait.filter(Boolean).slice(0, 3),
+      founderFocus,
+      canWait,
       delegate: object.delegate.slice(0, 8).map((d) => ({
         lane: d.lane,
         ownerName: d.ownerName,

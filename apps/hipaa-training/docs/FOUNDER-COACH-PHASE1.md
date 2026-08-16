@@ -59,3 +59,13 @@ Every flag includes **Confidence / Updated / Based on** evidence lines and `trig
 - US intro contacted / replied / meetings
 
 Portal signals pulled from existing tables: `siya_tasks`, `chat_reviews`, `shift_handoffs`, `weekly_lead_checkins`, `siya_sops`, `hipaa_training_*`, `siya_department_leads`.
+
+## UI notes (2026-08-15)
+
+- **Just talk to me (default):** Same Ask engine (`AssistChatShell` → `/api/chat` with `surface: founder-coach`). Read-only portal brief grounding for domain/check-in questions. **Never** writes Founder Focus / Can Wait / Delegate / Observe-only.
+- **Plan thread:** Manual Plan Record + Save/Lock only. AI Draft/Refine UI disconnected; `draft-weekly` libs retained unused by UI.
+- **Domain tabs:** Structured snapshots unchanged. Top-nav **Ask** → `/help` remains the staff help-desk entry (outside this shell).
+
+## Known issue — log only (do not fix in this pass)
+
+**Assist chat turn concatenation:** consecutive user turns can surface as a merged “You wrote X — Y” style prompt in the engine that powers `AssistChatShell` / compose path (see `compose-answer.ts` hint + thread history assembly). Real bug when that engine is revisited; unrelated to hiding Assist from this shell.

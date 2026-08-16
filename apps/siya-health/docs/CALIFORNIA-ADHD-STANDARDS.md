@@ -15,7 +15,7 @@ flagship entity.
 | Role | Path |
 | --- | --- |
 | Cornerstone | `/adult-adhd-california` |
-| Screening LP | `/adult-adhd-screening-california` |
+| Screening LP | `/adhd-evaluation-california` |
 | Answers | `/answers/telehealth-adhd-california` |
 | Statewide blogs (8) | diagnosis · telehealth · how-to-choose · med options · med online · eval online vs in-person · testing vs evaluation · symptoms |
 

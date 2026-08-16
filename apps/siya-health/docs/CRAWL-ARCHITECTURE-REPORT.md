@@ -103,7 +103,7 @@ Internal link graph analysis only — not a general SEO audit.
 - `/adhd-screening-results` (1 inbound) — ADHD Screening Complete
 - `/adhd-treatment-online` (0 inbound) — ADHD Treatment Online | Telehealth TX, PA, FL
 - `/adult-adhd-diagnosis` (0 inbound) — Adult ADHD Diagnosis Online
-- `/adult-adhd-screening-california` (1 inbound) — Online ADHD Screening in California | Free 2-Minute Test
+- `/adhd-evaluation-california` (1 inbound) — Online ADHD Screening in California | Free 2-Minute Test
 - `/answers/weight-gain-after-stopping-ozempic` (1 inbound) — Why am I gaining weight after stopping Ozempic?
 - `/blog/adhd-evaluation-cost-california` (0 inbound) — Moved — Siya Health
 - `/blog/adhd-treatment-austin-tx` (0 inbound) — Moved — Siya Health
@@ -176,7 +176,7 @@ _None_
 - `/adhd-evaluation-cost`
 - `/adhd-treatment-online`
 - `/adult-adhd-diagnosis`
-- `/adult-adhd-screening-california`
+- `/adhd-evaluation-california`
 - `/blog/adhd-evaluation-cost-california`
 - `/blog/adhd-treatment-austin-tx`
 - `/blog/adhd-treatment-dallas-tx`

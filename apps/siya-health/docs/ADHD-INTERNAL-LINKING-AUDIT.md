@@ -76,7 +76,7 @@
 | `/blog/insomnia-treatment-options-beyond-medication` | blog | Sleep | 4 | 14 |
 | `/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign` | blog | Sleep | 10 | 17 |
 | `/blog/why-am-i-always-tired-causes-when-to-see-doctor` | blog | Sleep | 17 | 23 |
-| `/adult-adhd-screening-california` | geo | Local CA | 4 | 4 |
+| `/adhd-evaluation-california` | geo | Local CA | 4 | 4 |
 | `/answers/telehealth-adhd-california` | geo | Local CA | 6 | 9 |
 | `/blog/adhd-evaluation-california-online-vs-in-person` | geo | Local CA | 12 | 11 |
 | `/blog/adhd-medication-online-california` | geo | Local CA | 8 | 11 |
@@ -131,7 +131,7 @@
 | Path | Type | Cluster | In | Inbound from |
 |------|------|---------|---:|---|
 | `/adhd-screening-results` | service | Screening | 1 | `/adhd-screening` |
-| `/redirect/adhd-walkthrough` | service | Commercial/Cost | 1 | `/adult-adhd-screening-california` |
+| `/redirect/adhd-walkthrough` | service | Commercial/Cost | 1 | `/adhd-evaluation-california` |
 | `/answers/adderall-vs-vyvanse-adults` | answer | Medication | 2 | `/answers`, `/blog/vyvanse-vs-adderall-differences` |
 | `/answers/rejection-sensitivity-adhd` | answer | Burnout/Anxiety | 2 | `/answers`, `/answers/adhd-in-women` |
 | `/blog/adhd-treatment-miami-fl` | geo | Local FL | 2 | `/blog`, `/blog/adhd` |
@@ -239,7 +239,7 @@ Per-page check of whether `<main>` content links to the five key hub/service des
 | `/blog/insomnia-treatment-options-beyond-medication` | ✅ | — | — | — | — | Answer, BlogPosting, BreadcrumbList, FAQPage, ListItem, Organization, Question, WebPage |
 | `/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign` | — | — | — | — | — | Answer, BlogPosting, BreadcrumbList, FAQPage, ListItem, Organization, Question, WebPage |
 | `/blog/why-am-i-always-tired-causes-when-to-see-doctor` | ✅ | — | — | — | — | Answer, BlogPosting, BreadcrumbList, FAQPage, ListItem, Organization, Question, WebPage |
-| `/adult-adhd-screening-california` | ✅ | — | ✅ | — | — | Answer, FAQPage, Organization, Question, WebPage |
+| `/adhd-evaluation-california` | ✅ | — | ✅ | — | — | Answer, FAQPage, Organization, Question, WebPage |
 | `/answers/telehealth-adhd-california` | ✅ | — | — | — | — | Answer, BreadcrumbList, FAQPage, ListItem, MedicalCondition, MedicalOrganization, MedicalWebPage, Question |
 | `/blog/adhd-evaluation-california-online-vs-in-person` | ✅ | ✅ | ✅ | — | — | Answer, BlogPosting, BreadcrumbList, FAQPage, ListItem, Organization, Question, WebPage |
 | `/blog/adhd-medication-online-california` | ✅ | ✅ | ✅ | — | — | Answer, BlogPosting, BreadcrumbList, FAQPage, ListItem, Organization, Question, WebPage |
@@ -279,7 +279,7 @@ Per-page check of whether `<main>` content links to the five key hub/service des
 | `/online-adhd-test` | ✅ | ✅ | ✅ | — | ✅ | Answer, FAQPage, MedicalOrganization, Question |
 | `/adhd-treatment-online` | ✅ | ✅ | ✅ | — | ✅ | Answer, FAQPage, MedicalOrganization, Question |
 
-**Schema pattern:** coverage is consistent, not missing — every one of the 87 pages ships at least one `application/ld+json` block. The pattern differs by content type: `/blog/*` articles (including all `California`/`TX`/`FL`/`PA` geo blog posts) and `/answers/*` FAQs carry the fullest stack (`BlogPosting` or `FAQPage`+`Question`+`Answer` + `BreadcrumbList` + `Organization`/`MedicalOrganization`, several answers add `MedicalWebPage`/`MedicalCondition`). Root-level **service/geo pages** (`/adhd-diagnosis-*`, `/adhd-evaluation-cost`, `/adhd-treatment-online`, `/adult-adhd-diagnosis`, `/creyos-adhd-testing`, `/online-adhd-test`, `/adult-adhd-screening-california`) use a lighter `FAQPage`+`Question`+`Answer`+`MedicalOrganization` stack **with no `BreadcrumbList`**. Two pages are thinner still — **`/adhd-screening`** and **`/adhd-screening-results`** carry only `Organization`/`WebPage`, no `FAQPage` at all despite being FAQ-rich pages. The `/redirect/*` stubs carry only `Organization`/`WebPage`, which is correct — they're `noindex, nofollow` JS-redirect transitions, not indexable content. **Quick win:** add `BreadcrumbList` to every root-level service/geo page (cheap, template already exists on blog/answers), and add `FAQPage` schema to `/adhd-screening` + `/adhd-screening-results`.
+**Schema pattern:** coverage is consistent, not missing — every one of the 87 pages ships at least one `application/ld+json` block. The pattern differs by content type: `/blog/*` articles (including all `California`/`TX`/`FL`/`PA` geo blog posts) and `/answers/*` FAQs carry the fullest stack (`BlogPosting` or `FAQPage`+`Question`+`Answer` + `BreadcrumbList` + `Organization`/`MedicalOrganization`, several answers add `MedicalWebPage`/`MedicalCondition`). Root-level **service/geo pages** (`/adhd-diagnosis-*`, `/adhd-evaluation-cost`, `/adhd-treatment-online`, `/adult-adhd-diagnosis`, `/creyos-adhd-testing`, `/online-adhd-test`, `/adhd-evaluation-california`) use a lighter `FAQPage`+`Question`+`Answer`+`MedicalOrganization` stack **with no `BreadcrumbList`**. Two pages are thinner still — **`/adhd-screening`** and **`/adhd-screening-results`** carry only `Organization`/`WebPage`, no `FAQPage` at all despite being FAQ-rich pages. The `/redirect/*` stubs carry only `Organization`/`WebPage`, which is correct — they're `noindex, nofollow` JS-redirect transitions, not indexable content. **Quick win:** add `BreadcrumbList` to every root-level service/geo page (cheap, template already exists on blog/answers), and add `FAQPage` schema to `/adhd-screening` + `/adhd-screening-results`.
 
 ---
 
@@ -348,7 +348,7 @@ Only `/blog/adhd` exceeds the 40-unique-link threshold (51), and it's the ADHD a
 | 47 | `/answers/screening-vs-adhd-evaluation` | `/adhd-screening-results` | "what your screening results mean" | Thin inbound (1 in) — needs at least 2 more same-cluster contextual link(s). |
 | 48 | `/answers/adhd-medication-every-day` | `/answers/adderall-vs-vyvanse-adults` | "Adderall vs. Vyvanse for adults" | Thin inbound (2 in) — needs at least 1 more same-cluster contextual link(s). |
 | 49 | `/answers/adhd-vs-anxiety` | `/answers/rejection-sensitivity-adhd` | "rejection sensitivity in ADHD" | Thin inbound (2 in) — needs at least 1 more same-cluster contextual link(s). |
-| 50 | `/adult-adhd-screening-california` | `/blog/how-to-choose-adhd-provider-california` | "how to choose an ADHD provider in California" | Thin inbound (2 in) — needs at least 1 more same-cluster contextual link(s). |
+| 50 | `/adhd-evaluation-california` | `/blog/how-to-choose-adhd-provider-california` | "how to choose an ADHD provider in California" | Thin inbound (2 in) — needs at least 1 more same-cluster contextual link(s). |
 | 51 | `/answers/fsa-hsa-adhd-evaluation` | `/redirect/adhd-walkthrough` | "a walkthrough of the ADHD evaluation" | Thin inbound (1 in) — needs at least 2 more CTA link(s). |
 | 52 | `/answers/how-long-adhd-evaluation` | `/redirect/adhd-walkthrough` | "a walkthrough of the ADHD evaluation" | Thin inbound (1 in) — needs at least 2 more CTA link(s). |
 

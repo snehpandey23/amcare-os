@@ -5,8 +5,8 @@ export type QuickAction =
   | { label: string; comingSoon: true; note?: string };
 
 export const HOME_QUICK_ACTIONS: QuickAction[] = [
-  { label: "Ask a company question", href: "/" },
-  { label: "Find an SOP", href: "/", query: "Find an SOP or internal policy" },
+  { label: "Ask a company question", href: "/help" },
+  { label: "Find an SOP", href: "/help", query: "Find an SOP or internal policy" },
   { label: "Improve my English", href: "/learn/practice#english" },
   { label: "Practice documentation", href: "/learn/practice#writing" },
   { label: "⌨️ Chat speed & accuracy", href: "/learn/practice#typing" },
@@ -44,10 +44,10 @@ export function helpHref(query?: string, focusMode?: boolean): string {
   if (q) params.set("q", q);
   if (focusMode) params.set("focus", "1");
   const qs = params.toString();
-  return qs ? `/?${qs}` : "/";
+  return qs ? `/help?${qs}` : "/help";
 }
 
-/** Full page load into My day Assist (merged former Ask). */
+/** Full page load to Ask (/help) — matches header nav. */
 export function navigateToAsk(query?: string, focusMode?: boolean): void {
   if (typeof window === "undefined") return;
   window.location.assign(helpHref(query, focusMode));
