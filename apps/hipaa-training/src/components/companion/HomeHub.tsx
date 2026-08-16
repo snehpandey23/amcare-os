@@ -14,10 +14,10 @@ import {
   portalBtnAccent,
   portalBtnGhostSm,
   portalBtnNavySm,
+  portalChatPage,
   portalFocusRail,
   portalInput,
   portalInputCompact,
-  portalPage,
   portalSection,
   portalSectionSubtle,
   portalStatusWarnBox,
@@ -332,7 +332,7 @@ export function HomeHub() {
           {isAdmin ? (
             introGate === "ready" ? <FounderCoachPanel firstName={firstName} /> : null
           ) : introGate === "ready" ? (
-            <div className={`${portalPage} ${inFocus ? portalFocusRail : ""}`}>
+            <div className={`${portalChatPage} ${inFocus ? portalFocusRail : ""}`}>
               {complianceDue ? (
                 <p className={`mb-3 ${portalStatusWarnBox} px-3 py-2 text-xs ${portalStatusWarnText}`}>
                   Compliance: HIPAA certification in progress ({modulesDone}/{moduleTotal} modules).{" "}

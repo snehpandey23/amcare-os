@@ -5,6 +5,13 @@
 
 export const portalPage = "mx-auto max-w-3xl space-y-6 px-4 py-8 md:px-6";
 
+/** My day / Assist chat — same width for staff Ask and admin Founder Talk. */
+export const portalChatPage = "mx-auto max-w-6xl space-y-6 px-4 py-8 md:px-6";
+
+/** Admin Founder Coach outer shell (side thread nav + main). Matches portalChatPage width. */
+export const portalChatShell =
+  "mx-auto flex min-h-[calc(100dvh-3.5rem)] w-full max-w-6xl flex-col md:flex-row md:gap-2";
+
 export const portalSection =
   "rounded-[var(--siya-radius-lg)] border border-[var(--siya-border)] bg-[var(--siya-white)]/90 p-5 shadow-[var(--siya-shadow)]";
 

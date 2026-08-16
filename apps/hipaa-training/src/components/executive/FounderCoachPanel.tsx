@@ -32,6 +32,7 @@ import {
   portalBadgeWip,
   portalBtnAccentSm,
   portalBtnNavySm,
+  portalChatShell,
   portalH3,
   portalSectionCompact,
   portalStatusInfoBox,
@@ -801,7 +802,7 @@ export function FounderCoachPanel({ firstName }: { firstName?: string }) {
   }
 
   return (
-    <div className="mx-auto flex min-h-[calc(100dvh-3.5rem)] w-full max-w-6xl flex-col md:flex-row md:gap-2">
+    <div className={portalChatShell}>
       <nav
         aria-label="Founder Coach threads"
         className="hidden w-36 shrink-0 flex-col px-3 py-8 md:flex"
