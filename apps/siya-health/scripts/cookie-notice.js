@@ -9,8 +9,7 @@
   var COOKIE_POLICY_PATH = '/legal/cookie-policy';
   var TEXT_FULL =
     'We use cookies and similar technologies for site functionality, analytics, and advertising. Choose whether to accept all cookies or only those required for the site to work.';
-  var TEXT_COMPACT =
-    'We use cookies for site function, analytics, and ads. Accept all or keep only essentials.';
+  var TEXT_COMPACT = 'We use cookies for site function, analytics, and ads.';
   var consent = window.SiyaCookieConsent;
 
   if (!consent || consent.get()) {
