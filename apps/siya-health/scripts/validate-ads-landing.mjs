@@ -160,13 +160,12 @@ function assertAdsCareTeamMatchesCanonical(page, html) {
       );
     }
   }
+  const articles = [
+    ...block.matchAll(/<article[^>]*data-states="([^"]+)"[^>]*>([\s\S]*?)<\/article>/g),
+  ];
   for (const p of expected) {
     if (!unique.includes(p.slug)) continue;
-    const article = block.match(
-      new RegExp(
-        `<article[^>]*data-states="([^"]+)"[^>]*>[\\s\\S]*?/providers/${p.slug}[\\s\\S]*?</article>`,
-      ),
-    );
+    const article = articles.find((a) => a[2].includes(`/providers/${p.slug}`));
     if (!article) continue;
     const states = article[1].split(',').map((s) => s.trim());
     for (const st of states) {
