@@ -8815,6 +8815,13 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
 }
 
 /* California Google Ads — conversion-first hero */
+
+/* Evaluation ads LPs (TX + CA) — no full chrome; body is the LP */
+.siya-landing-page--tx-evaluation .lp-header,
+.siya-landing-page--ca-evaluation .lp-header {
+  display: none;
+}
+
 .siya-landing-page--ca-screening {
   --lp-header-h: 52px;
   --lp-hero-space: 0.85rem;

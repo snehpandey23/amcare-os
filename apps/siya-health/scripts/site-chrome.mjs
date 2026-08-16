@@ -1886,7 +1886,14 @@ export function isRedirectTransitionPage(relPath) {
 
 /** Google Ads / minimal landing pages — skip full nav/footer injection */
 export function isAdsLandingPage(relPath, html = '') {
-  if (relPath === 'adult-adhd-screening-california.html') return true;
+  if (
+    relPath === 'adult-adhd-screening-california.html' ||
+    relPath === 'adult-adhd-screening-texas.html' ||
+    relPath === 'adhd-evaluation-texas.html' ||
+    relPath === 'adhd-evaluation-california.html'
+  ) {
+    return true;
+  }
   return /\bclass="[^"]*siya-landing-page/.test(html) || /data-siya-landing=/.test(html);
 }
 
