@@ -69,7 +69,16 @@ function fail(msg) {
 }
 
 function gitTracked(relFromSite) {
+  const abs = path.join(SITE_ROOT, relFromSite);
   const fromRepo = path.posix.join('apps/siya-health', relFromSite.split(path.sep).join('/'));
+
+  // Vercel CLI/git builds sometimes lack a usable monorepo git index for ls-files.
+  // On VERCEL, uploaded files on disk are the deployable truth; local runs still
+  // use git to catch untracked assets before clean deploys omit them.
+  if (process.env.VERCEL === '1') {
+    return fs.existsSync(abs);
+  }
+
   try {
     const out = execFileSync('git', ['ls-files', '--error-unmatch', '--', fromRepo], {
       cwd: REPO_ROOT,
