@@ -295,9 +295,75 @@ async function playwrightChecks(pagePath, kind, browserName = 'chromium') {
     if (cookie) {
       const h = Math.round(cookie.getBoundingClientRect().height);
       const pct = Math.round((h / window.innerHeight) * 100);
-      cookieBar = { height: h, vh: window.innerHeight, pct, ok: pct <= 35 };
+      const accept = cookie.querySelector('.cookie-notice__btn--accept');
+      const reject = cookie.querySelector('.cookie-notice__btn--reject');
+
+      function buttonState(btn) {
+        if (!btn) return { present: false, visible: false, clickable: false };
+        const cs = getComputedStyle(btn);
+        const r = btn.getBoundingClientRect();
+        const present = true;
+        const visible =
+          cs.display !== 'none' &&
+          cs.visibility !== 'hidden' &&
+          Number(cs.opacity) > 0.05 &&
+          r.width >= 40 &&
+          r.height >= 32;
+        /* Must be in the viewport (not clipped below fold by max-height overflow) */
+        const inViewport = r.top >= 0 && r.bottom <= window.innerHeight + 1;
+        const barBox = cookie.getBoundingClientRect();
+        const inBarClip =
+          r.top >= barBox.top - 1 && r.bottom <= barBox.bottom + 1 && r.left >= barBox.left - 1;
+        const clickable =
+          visible &&
+          inViewport &&
+          inBarClip &&
+          cs.pointerEvents !== 'none' &&
+          !btn.disabled;
+        return {
+          present,
+          visible,
+          clickable,
+          inViewport,
+          inBarClip,
+          w: Math.round(r.width),
+          h: Math.round(r.height),
+          top: Math.round(r.top),
+          bottom: Math.round(r.bottom),
+          label: (btn.textContent || '').trim().slice(0, 40),
+        };
+      }
+
+      const acceptState = buttonState(accept);
+      const rejectState = buttonState(reject);
+      const buttonsOk =
+        acceptState.present &&
+        rejectState.present &&
+        acceptState.visible &&
+        rejectState.visible &&
+        acceptState.clickable &&
+        rejectState.clickable;
+      cookieBar = {
+        height: h,
+        vh: window.innerHeight,
+        pct,
+        sizeOk: pct <= 35,
+        accept: acceptState,
+        reject: rejectState,
+        buttonsOk,
+        /* Pass only if size budget AND both CTAs are actually usable */
+        ok: pct <= 35 && buttonsOk,
+      };
     } else {
-      cookieBar = { height: 0, vh: window.innerHeight, pct: 0, ok: true, absent: true };
+      cookieBar = {
+        height: 0,
+        vh: window.innerHeight,
+        pct: 0,
+        sizeOk: true,
+        buttonsOk: true,
+        ok: true,
+        absent: true,
+      };
     }
 
     return {
@@ -400,7 +466,7 @@ async function playwrightMulti(pagePath, kind) {
     summary: list
       .map(
         (b) =>
-          `${b.browser}:hero=${b.heroOk ? 'PASS' : 'FAIL'} chrome=${b.leanOk ? 'PASS' : 'FAIL'} gclid=${b.gclidOk ? 'PASS' : 'FAIL'} cookie=${b.cookieOk ? 'PASS' : 'FAIL'}(${b.metrics?.cookieBar?.pct ?? '?'}%)`,
+          `${b.browser}:hero=${b.heroOk ? 'PASS' : 'FAIL'} chrome=${b.leanOk ? 'PASS' : 'FAIL'} gclid=${b.gclidOk ? 'PASS' : 'FAIL'} cookie=${b.cookieOk ? 'PASS' : 'FAIL'}(${b.metrics?.cookieBar?.pct ?? '?'}% btns=${b.metrics?.cookieBar?.buttonsOk ? 'ok' : 'FAIL'})`,
       )
       .join(' | '),
     gclidCheck: list[0]?.gclidCheck || null,
