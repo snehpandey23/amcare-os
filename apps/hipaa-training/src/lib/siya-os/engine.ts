@@ -24,6 +24,7 @@ import { fetchAdminOpsSnapshot } from "./admin-ops-snapshot";
 import { detectAdminOpsIntent, runAdminOpsCoach } from "./admin-ops-coach";
 import { tryFactsLookup } from "./facts-lookup";
 import { tryPracticeLookup } from "./practice-lookup";
+import { answerMetaConversation } from "./meta-conversation";
 import {
   acknowledgePersonalPreference,
   acknowledgeRoleAuthorityClaim,
@@ -101,70 +102,9 @@ export interface SiyaReply {
 
 const REFUND_PROMISE = /\b(i (can|will) (approve|refund|waive|credit)|guaranteed refund|refund is approved)\b/i;
 
+/** Bot-about-bot / chrome / courtesy — catalog in meta-conversation.ts */
 function answerStaffMetaQuestion(text: string): string | null {
-  const t = text.trim().toLowerCase().replace(/\s+/g, " ");
-
-  // Identity / nature — Founder Talk must not soft-stop these as "no staff guide"
-  if (
-    /\b(are|aren'?t|arent|r)\s+(you|u)\s+(an?\s+)?(ai|a\.i\.|bot|human|robot|person|llm)\b/.test(t) ||
-    /\bwhy\s+(not|aren'?t|arent)\b.*\b(you|u)\b.*\b(ai|a\.i\.|bot)\b/.test(t) ||
-    /\bwhy\s+not\b.*\b(ai|a\.i\.)\b/.test(t) ||
-    /\bare\s+(you|u)\s+human\b/.test(t) ||
-    /\b(are|r)\s+(you|u)\s+real\b/.test(t)
-  ) {
-    return [
-      "I’m **Siya Assist** — an **AI** help desk for Siya Health staff (not a human).",
-      "",
-      "I answer from **approved internal guides** and live portal signals when available. I don’t invent policy, culture lectures, or org-chart facts.",
-      "For drills (culture trivia, typing, etc.), use **Learn → Practice** — Ask/Talk stays for work questions.",
-    ].join("\n");
-  }
-
-  // Require identity ask — do NOT match "what are you sayin"
-  if (
-    /what('s| is) your name\b/.test(t) ||
-    /\bwho are you\b/.test(t) ||
-    /\bwhat are you\??\s*$/.test(t)
-  ) {
-    return [
-      "I'm **Siya Assist** — the internal help desk for Siya Health staff.",
-      "",
-      "I answer from **approved internal guides** and can route you to the right owner when we don't have a published policy yet.",
-    ].join("\n");
-  }
-
-  // "Who is your boss" / "can you escalate to your boss" — about the bot, not staff escalation SOP dump
-  if (
-    /\bwho\s+is\s+your\s+(boss|manager|supervisor|owner)\b/.test(t) ||
-    /\b(can|could)\s+(you|u)\s+escalate\s+to\s+your\s+(boss|manager|supervisor)\b/.test(t) ||
-    /\bescalate\s+to\s+your\s+(boss|manager|supervisor)\b/.test(t)
-  ) {
-    return [
-      "I don’t have a personal boss — I’m **Siya Assist**, the staff help desk.",
-      "",
-      "If a **staff SOP / guide is missing**, use **Notify owner** (logs a knowledge-gap for the department lead or founder).",
-      "If **you** need a human owner for work (billing, clinical, privacy, IT), ask who to escalate to for that task — I’ll use approved pathways (e.g. Billing lead), not invent one.",
-      "I never write your Founder Plan Record for you.",
-    ].join("\n");
-  }
-
-  // Founder Talk / Ask UI — never dump "no approved guide" for questions about the chrome itself.
-  if (
-    /\bnotify\s+owner\b/.test(t) &&
-    /\b(what|do|does|button|mean|for|how|when|why|click)\b/.test(t)
-  ) {
-    return [
-      "**Notify owner** logs a **knowledge-gap click** for the suggested department lead’s weekly digest (or founder if there’s no lead).",
-      "",
-      "It does **not** email a full chat transcript, store your verbatim question in Postgres, or change company policy.",
-      "Use it when a **staff SOP / internal guide** is missing or unclear — not for music, civics, or patient marketing FAQs.",
-      "For a handoff you can paste yourself, use **Copy escalation summary** when that button appears.",
-    ].join("\n");
-  }
-  if (/^(hi|hello|hey|how\s+(are|r)\s+(you|u)|how'?s\s+it\s+going)\b/.test(t) && t.length < 28) {
-    return "Hi — ask me about policies, SOPs, tools, or who to contact. I'll use approved internal guides first.";
-  }
-  return null;
+  return answerMetaConversation(text);
 }
 
 /** Patient-site / public marketing asks — not Founder Plan gaps. */
@@ -422,19 +362,7 @@ function buildSiyaReply(
     };
   }
 
-  const metaAnswer = answerStaffMetaQuestion(text);
-  if (metaAnswer) {
-    return {
-      message: polishStaffMessage(metaAnswer),
-      chunks: [],
-      knowledgeGap: false,
-      sources: [],
-      escalationPreview: undefined,
-      ruleFinal: true,
-    };
-  }
-
-  // Learn / Practice deep-links — before off-topic refuse (culture/typing exist as drills).
+  // Learn / Practice deep-links before meta — culture “train you” must deep-link, not only catalog text.
   const practiceHit = tryPracticeLookup(text);
   if (practiceHit) {
     return {
@@ -451,6 +379,18 @@ function buildSiyaReply(
         confidence: "high",
         followUpQuestions: [],
       },
+    };
+  }
+
+  const metaAnswer = answerStaffMetaQuestion(text);
+  if (metaAnswer) {
+    return {
+      message: polishStaffMessage(metaAnswer),
+      chunks: [],
+      knowledgeGap: false,
+      sources: [],
+      escalationPreview: undefined,
+      ruleFinal: true,
     };
   }
 

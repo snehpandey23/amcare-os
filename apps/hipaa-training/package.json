@@ -13,7 +13,8 @@
     "start": "next start",
     "lint": "eslint",
     "assets:icons": "node scripts/export-app-icons.mjs",
-    "smoke:h0": "tsx scripts/h0-authenticated-regression.ts"
+    "smoke:h0": "tsx scripts/h0-authenticated-regression.ts",
+    "smoke:meta": "tsx scripts/smoke-meta-conversation.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^3.0.0",
