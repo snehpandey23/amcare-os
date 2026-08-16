@@ -118,7 +118,6 @@ const ADHD_FUNNEL_PATH = [
   /^adhd-screening\.html$/,
   /^adhd-screening-results\.html$/,
   /^adult-adhd-diagnosis\.html$/,
-  /^adult-adhd-screening-california\.html$/,
   /^adhd-treatment-online\.html$/,
   /^creyos-adhd-testing\.html$/,
   /^online-adhd-test\.html$/,
@@ -998,22 +997,11 @@ export function normalizeSitewideCopy(html, relPath = '') {
     `$1${COPY_STANDARDS.newsletterCta}$2`,
   );
   html = html.replaceAll('Get Health Guides', COPY_STANDARDS.newsletterCta);
-  // Screening labels — avoid nesting (e.g. "Free ADHD Screening" inside "Take Free ADHD Screening")
-  const isCaAdsLp = relPath === 'adult-adhd-screening-california.html';
-  const lpScreeningPlaceholder = '%%SIYA_LP_CA_SCREENING_CTA%%';
-  if (isCaAdsLp) {
-    html = html.replaceAll('Start Free 2-Minute Screening', lpScreeningPlaceholder);
-    html = html.replaceAll('Start Free 2-Minute ADHD Screening', lpScreeningPlaceholder);
-  }
-  if (!isCaAdsLp) {
-    html = html.replace(/(Take )+Free ADHD Screening/g, COPY_STANDARDS.adhdSecondaryCta);
-    html = html.replace(/(?<!Take )Free ADHD Screening/g, COPY_STANDARDS.adhdSecondaryCta);
-    html = html.replaceAll('Take Free Screening', COPY_STANDARDS.adhdSecondaryCta);
-    html = html.replaceAll('Start Free Screening', COPY_STANDARDS.adhdSecondaryCta);
-  }
-  if (isCaAdsLp) {
-    html = html.replaceAll(lpScreeningPlaceholder, 'Start Free 2-Minute Screening');
-  }
+  // Screening CTA label normalization (CA screening Ads LP retired 2026-08-16)
+  html = html.replace(/(Take )+Free ADHD Screening/g, COPY_STANDARDS.adhdSecondaryCta);
+  html = html.replace(/(?<!Take )Free ADHD Screening/g, COPY_STANDARDS.adhdSecondaryCta);
+  html = html.replaceAll('Take Free Screening', COPY_STANDARDS.adhdSecondaryCta);
+  html = html.replaceAll('Start Free Screening', COPY_STANDARDS.adhdSecondaryCta);
   html = html.replaceAll('Schedule ADHD Evaluation', COPY_STANDARDS.adhdPrimaryCta);
   html = html.replaceAll('Book ADHD Evaluation', COPY_STANDARDS.adhdPrimaryCta);
   html = html.replaceAll('Clinical Review Status', COPY_STANDARDS.reviewBadgePending);
@@ -1886,12 +1874,7 @@ export function isRedirectTransitionPage(relPath) {
 
 /** Google Ads / minimal landing pages — skip full nav/footer injection */
 export function isAdsLandingPage(relPath, html = '') {
-  if (
-    relPath === 'adult-adhd-screening-california.html' ||
-    relPath === 'adult-adhd-screening-texas.html' ||
-    relPath === 'adhd-evaluation-texas.html' ||
-    relPath === 'adhd-evaluation-california.html'
-  ) {
+  if (relPath === 'adhd-evaluation-texas.html' || relPath === 'adhd-evaluation-california.html') {
     return true;
   }
   return /\bclass="[^"]*siya-landing-page/.test(html) || /data-siya-landing=/.test(html);
@@ -2003,7 +1986,7 @@ const CONSULTATION_CTA_LABEL_RE =
 
 /** Route consultation CTAs — ADHD funnel → meet & greet redirect; general pages → meet & greet (not Spruce). */
 export function normalizeConsultationCtaRouting(html, relPath = '') {
-  const isAdhd = isAdhdFunnelPath(relPath) || relPath === 'adult-adhd-screening-california.html';
+  const isAdhd = isAdhdFunnelPath(relPath);
   const meetHref = REDIRECT_MEET_GREET_URL;
   html = html.replace(
     /href="([^"]*book\.carepatron\.com[^"]*i(?:=|%3D)sysv73e4[^"]*)"/gi,
@@ -2128,17 +2111,15 @@ export function normalizeWalkthroughCtaLabels(html, relPath = '') {
       return `${open}${label}${close}`;
     },
   );
-  /* Prefer canonical meet-greet redirect sitewide; keep legacy /redirect/adhd-walkthrough on CA ads LP for event continuity. */
-  if (relPath !== 'adult-adhd-screening-california.html') {
-    html = html.replace(
-      /(<a[^>]*data-siya-track="(?:meet_greet_click|click_book_walkthrough|adhd_intro_call_click|schedule-consultation-click)"[^>]*href=")\/redirect\/adhd-walkthrough(")/gi,
-      `$1${REDIRECT_MEET_GREET_URL}$2`,
-    );
-    html = html.replace(
-      /(<a[^>]*href=")\/redirect\/adhd-walkthrough("[^>]*data-siya-track="(?:meet_greet_click|click_book_walkthrough|adhd_intro_call_click|schedule-consultation-click)")/gi,
-      `$1${REDIRECT_MEET_GREET_URL}$2`,
-    );
-  }
+  /* Prefer canonical meet-greet redirect sitewide. */
+  html = html.replace(
+    /(<a[^>]*data-siya-track="(?:meet_greet_click|click_book_walkthrough|adhd_intro_call_click|schedule-consultation-click)"[^>]*href=")\/redirect\/adhd-walkthrough(")/gi,
+    `$1${REDIRECT_MEET_GREET_URL}$2`,
+  );
+  html = html.replace(
+    /(<a[^>]*href=")\/redirect\/adhd-walkthrough("[^>]*data-siya-track="(?:meet_greet_click|click_book_walkthrough|adhd_intro_call_click|schedule-consultation-click)")/gi,
+    `$1${REDIRECT_MEET_GREET_URL}$2`,
+  );
   return html;
 }
 

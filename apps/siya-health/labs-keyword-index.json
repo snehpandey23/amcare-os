@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T11:41:11.006Z",
+  "generated": "2026-08-16T02:32:57.438Z",
   "hubUrl": "https://siya.health/labs",
   "note": "Keyword → educational labs topic pages (Siya owns education; storefront is logistics only).",
   "keywords": [
@@ -87,9 +87,23 @@
       "terms": [
         "vitamin d"
       ],
-      "path": "/labs/fatigue-brain-fog",
+      "path": "/labs/vitamin-d",
       "also": [
-        "/labs/womens-midlife"
+        "/labs",
+        "/labs/fatigue-brain-fog",
+        "/brain-fog"
+      ]
+    },
+    {
+      "terms": [
+        "brain fog",
+        "mental fog",
+        "cloudy thinking"
+      ],
+      "path": "/brain-fog",
+      "also": [
+        "/fatigue",
+        "/labs/fatigue-brain-fog"
       ]
     },
     {

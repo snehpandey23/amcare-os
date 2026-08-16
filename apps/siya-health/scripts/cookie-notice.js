@@ -1,11 +1,16 @@
 /**
  * Cookie consent banner — Accept All / Reject Non-Essential.
  * Relies on cookie-consent-bootstrap.js (Consent Mode + localStorage).
+ * Mobile: keep bar short (side-by-side CTAs + clamped copy); cap body offset.
  */
 (function () {
   'use strict';
 
   var COOKIE_POLICY_PATH = '/legal/cookie-policy';
+  var TEXT_FULL =
+    'We use cookies and similar technologies for site functionality, analytics, and advertising. Choose whether to accept all cookies or only those required for the site to work.';
+  var TEXT_COMPACT =
+    'We use cookies for site function, analytics, and ads. Accept all or keep only essentials.';
   var consent = window.SiyaCookieConsent;
 
   if (!consent || consent.get()) {
@@ -19,7 +24,7 @@
   bar.setAttribute('aria-live', 'polite');
   bar.innerHTML =
     '<div class="cookie-notice__inner">' +
-    '<p class="cookie-notice__text">We use cookies and similar technologies for site functionality, analytics, and advertising. Choose whether to accept all cookies or only those required for the site to work.</p>' +
+    '<p class="cookie-notice__text"></p>' +
     '<div class="cookie-notice__controls">' +
     '<div class="cookie-notice__actions">' +
     '<button type="button" class="cookie-notice__btn cookie-notice__btn--accept">Accept All</button>' +
@@ -30,6 +35,16 @@
     '">Cookie Policy</a>' +
     '</div></div>';
 
+  var textEl = bar.querySelector('.cookie-notice__text');
+
+  function isCompactViewport() {
+    return window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
+  }
+
+  function syncCopy() {
+    textEl.textContent = isCompactViewport() ? TEXT_COMPACT : TEXT_FULL;
+  }
+
   function dismiss() {
     bar.remove();
     document.body.classList.remove('cookie-notice-visible');
@@ -38,7 +53,11 @@
 
   function setBodyOffset() {
     document.body.classList.add('cookie-notice-visible');
-    var height = bar.offsetHeight;
+    syncCopy();
+    var height = bar.offsetHeight || 0;
+    /* Never reserve more than ~28% of the viewport for the bar offset */
+    var maxOffset = Math.round(window.innerHeight * 0.28);
+    if (height > maxOffset) height = maxOffset;
     document.documentElement.style.setProperty('--cookie-notice-height', height + 'px');
   }
 
@@ -53,6 +72,7 @@
   });
 
   function mount() {
+    syncCopy();
     document.body.appendChild(bar);
     setBodyOffset();
     window.addEventListener('resize', setBodyOffset, { passive: true });

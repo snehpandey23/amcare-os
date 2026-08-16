@@ -22,6 +22,8 @@ const RAW = {
   // EG-P0-01: garbled California 2026 ADHD article → CA cornerstone (canonical entity)
   '/blog/adult-adhd-treatment-california-2026': '/adult-adhd-california',
   '/blog/why-am-i-always-tired-causes-when-to-see-doctor': '/fatigue',
+  '/adult-adhd-screening-california': '/adhd-evaluation-california',
+  '/adult-adhd-screening-texas': '/adhd-evaluation-texas',
   '/blog/adhd-evaluation-cost-california': '/adult-adhd-california',
   '/adhd-diagnosis-pennsylvania': '/adhd-care',
   '/adhd-diagnosis-philadelphia': '/adhd-care',

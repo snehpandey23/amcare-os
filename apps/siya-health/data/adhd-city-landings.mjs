@@ -184,7 +184,7 @@ export const ADHD_CITY_LANDINGS = [
 <p>San Diego adults often look for ADHD evaluation when focus and organization start failing under biotech or military schedules, long I-5 / I-15 commutes, or the stretch between “functioning at work” and “falling behind at home.” Specialty calendars in San Diego County can be slow to open—especially if you need an adult-focused evaluation rather than a pediatric referral chain.</p>
 <p>Siya Health serves California patients by telehealth. You do not need a San Diego brick-and-mortar visit with us; care happens over secure video while you are physically in California. We do not claim a local ADHD clinic address in San Diego, and we do not ask you to invent travel time you do not need.</p>
 <p>If you landed here from a “ADHD testing San Diego” search, start with screening or a Meet &amp; Greet, then schedule the structured evaluation when ready. Pair this city page with our statewide guide, <a href="/adult-adhd-california">Adult ADHD care in California</a>, and the national pathway on <a href="/adhd-care">ADHD Care</a>.</p>
-<p>California-framed screening flow (Ads landing): <a href="/adult-adhd-screening-california">Adult ADHD screening — California</a>. Medication is never guaranteed after evaluation.</p>
+<p>California Ads evaluation landing: <a href="/adhd-evaluation-california">Adult ADHD evaluation — California</a>. Medication is never guaranteed after evaluation.</p>
 `.trim(),
     telehealthHeading: 'California telehealth—San Diego patients stay put',
     telehealthHtml: `
@@ -226,13 +226,13 @@ export const ADHD_CITY_LANDINGS = [
       {
         question: 'How do I start from San Diego?',
         answer:
-          'Take the free ADHD screening (or the California-framed screening landing), book a Meet & Greet if you want a low-pressure first conversation, then schedule the structured evaluation when ready. Screening is not a diagnosis.',
+          'Take the free ADHD screening, book a Meet & Greet if you want a low-pressure first conversation, then schedule the structured evaluation when ready. Screening is not a diagnosis.',
       },
     ],
     relatedLinks: [
       { href: '/adhd-care', label: 'ADHD Care (national hub)' },
       { href: '/adult-adhd-california', label: 'Adult ADHD care in California' },
-      { href: '/adult-adhd-screening-california', label: 'California ADHD screening (Ads landing)' },
+      { href: '/adhd-evaluation-california', label: 'California ADHD evaluation (Ads landing)' },
       { href: '/adhd-screening?adhd=1', label: 'Free ADHD screening' },
       { href: '/pricing', label: 'Pricing' },
       { href: '/telehealth', label: 'How telehealth works' },

@@ -32,17 +32,19 @@ const ADS_PAGES = [
     bodyClass: 'siya-landing-page--ca-evaluation',
     requireLcp: true,
   },
+];
+
+/** Retired screening Ads LPs — must 301 to evaluation LPs (no live lean pages). */
+const RETIRED_SCREENING = [
   {
     file: 'adult-adhd-screening-texas.html',
-    landing: 'google-ads',
-    bodyClass: 'siya-landing-page--tx-screening',
-    requireLcp: false,
+    source: '/adult-adhd-screening-texas',
+    destination: '/adhd-evaluation-texas',
   },
   {
     file: 'adult-adhd-screening-california.html',
-    landing: 'google-ads',
-    bodyClass: 'siya-landing-page--ca-screening',
-    requireLcp: false,
+    source: '/adult-adhd-screening-california',
+    destination: '/adhd-evaluation-california',
   },
 ];
 
@@ -197,13 +199,51 @@ if (path.resolve(SITE_ROOT, 'adhd-evaluation-california.html') === path.resolve(
   fail('Ads LP path collides with SEO hub path');
 }
 
+// --- Retired screening LPs: vercel 301 + no live Ads chrome ---
+{
+  const vercelPath = path.join(SITE_ROOT, 'vercel.json');
+  if (!fs.existsSync(vercelPath)) {
+    fail('missing vercel.json');
+  } else {
+    const vercel = JSON.parse(fs.readFileSync(vercelPath, 'utf8'));
+    const redirects = Array.isArray(vercel.redirects) ? vercel.redirects : [];
+    for (const retired of RETIRED_SCREENING) {
+      const row = redirects.find((r) => r.source === retired.source);
+      if (!row) {
+        fail(`vercel.json missing permanent redirect for ${retired.source}`);
+      } else if (row.destination !== retired.destination) {
+        fail(
+          `vercel.json ${retired.source} must redirect to ${retired.destination} (got ${row.destination})`,
+        );
+      } else if (row.permanent !== true) {
+        fail(`vercel.json ${retired.source} redirect must be permanent: true`);
+      }
+
+      const abs = path.join(SITE_ROOT, retired.file);
+      if (fs.existsSync(abs)) {
+        const html = fs.readFileSync(abs, 'utf8');
+        if (/\bsiya-landing-page\b/.test(html) || /data-siya-landing=/.test(html)) {
+          fail(
+            `${retired.file}: still looks like a live Ads LP — replace with retire stub or delete (redirect handles URL)`,
+          );
+        }
+        if (!/noindex/i.test(html)) {
+          fail(`${retired.file}: retired shell must be noindex (or delete the file)`);
+        }
+      }
+    }
+  }
+}
+
 if (errors.length) {
   console.error('validate-ads-landing: FAIL');
   for (const e of errors) console.error(`  - ${e}`);
   console.error(
-    '\nFix: commit missing Ads HTML + assets, restore LCP CSS, keep /adult-adhd-california as SEO-only.',
+    '\nFix: commit missing Ads HTML + assets, restore LCP CSS, keep /adult-adhd-california as SEO-only; screening LPs must 301 to evaluation.',
   );
   process.exit(1);
 }
 
-console.log(`validate-ads-landing: PASS (${ADS_PAGES.length} Ads LPs + SEO hub + LCP CSS + git-tracked assets)`);
+console.log(
+  `validate-ads-landing: PASS (${ADS_PAGES.length} Ads LPs + ${RETIRED_SCREENING.length} retired screening redirects + SEO hub + LCP CSS + git-tracked assets)`,
+);

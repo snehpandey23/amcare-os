@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T11:41:11.006Z",
+  "generated": "2026-08-16T02:32:57.438Z",
   "services": [
     {
       "title": "Siya Health | When Focus, Energy, or Weight Won't Budge",
@@ -20,6 +20,24 @@
       "description": "Primary care–led adult ADHD evaluation online — DSM-based assessment. Licensed medical providers. Individualized validated tools as clinically appropriate. CA, TX, PA, FL."
     },
     {
+      "title": "ADHD Care in Miami, FL — Online Adult Evaluation",
+      "url": "https://siya.health/adhd-care/miami",
+      "type": "service-adhd",
+      "description": "Adult ADHD evaluation for Miami and South Florida via Florida-licensed telehealth. Free screening, structured virtual visits, and transparent cash-pay pricing—no travel to a clinic required."
+    },
+    {
+      "title": "ADHD Care in Orlando, FL — Online Adult Evaluation",
+      "url": "https://siya.health/adhd-care/orlando",
+      "type": "service-adhd",
+      "description": "Adult ADHD evaluation for Orlando and Central Florida via Florida-licensed telehealth. Free screening, structured virtual visits, clear pricing—complete care without commuting to a clinic."
+    },
+    {
+      "title": "ADHD Care in San Diego, CA — Online Adult Evaluation",
+      "url": "https://siya.health/adhd-care/san-diego",
+      "type": "service-adhd",
+      "description": "Adult ADHD evaluation for San Diego via California-licensed telehealth. Free screening, structured virtual visits, and cash-pay pricing—no San Diego clinic visit required."
+    },
+    {
       "title": "Online ADHD Diagnosis Texas",
       "url": "https://siya.health/adhd-diagnosis-texas",
       "type": "service-adhd",
@@ -38,12 +56,6 @@
       "description": "The complete guide to adult ADHD in California: what it looks like, when evaluation helps, how online diagnosis works, treatment options, women & ADHD, executive dysfunction, pricing, and a free screening. Physician-led telehealth for California adults."
     },
     {
-      "title": "Online ADHD Screening in California | Free 2-Minute Test",
-      "url": "https://siya.health/adult-adhd-screening-california",
-      "type": "service-adhd",
-      "description": "Free online ADHD screening for adults in California. Take a 2-minute test with no sign-up, then explore virtual ADHD care with licensed physicians serving California."
-    },
-    {
       "title": "Creyos ADHD Testing Online | Part of Your Evaluation",
       "url": "https://siya.health/creyos-adhd-testing",
       "type": "service-adhd",
@@ -56,16 +68,28 @@
       "description": "Explore transparent direct-pay laboratory testing for thyroid, blood sugar, vitamins, iron, metabolic health and preventive care. Physician guidance available through Siya Health."
     },
     {
-      "title": "A1c &amp; Blood Sugar Labs | Metabolic Testing",
+      "title": "HbA1c Blood Test Explained | Blood Sugar Labs",
       "url": "https://siya.health/labs/a1c-blood-sugar",
       "type": "service-labs",
-      "description": "Learn what hemoglobin A1c measures, how it relates to prediabetes and metabolic health, and when blood sugar testing may be appropriate. Transparent direct-pay options available."
+      "description": "What HbA1c broadly measures about average blood sugar, why clinicians may order it, and what it cannot diagnose alone. Preventive and metabolic education."
     },
     {
       "title": "Labs &amp; ADHD Evaluation Support | Not a Blood Test Diagnosis",
       "url": "https://siya.health/labs/adhd-support",
       "type": "service-labs",
       "description": "Blood tests do not diagnose ADHD. Learn when selected labs may help evaluate other contributors to fatigue, concentration problems, or brain fog—and how Siya Health approaches testing."
+    },
+    {
+      "title": "CBC Blood Test Explained | Preventive Labs",
+      "url": "https://siya.health/labs/cbc",
+      "type": "service-labs",
+      "description": "What a CBC broadly measures, why clinicians may order it, and what it cannot diagnose alone. Educational lab guidance under preventive primary care."
+    },
+    {
+      "title": "CMP Blood Test Explained | Preventive Labs",
+      "url": "https://siya.health/labs/cmp",
+      "type": "service-labs",
+      "description": "What a CMP broadly measures—kidney, liver, electrolytes, and glucose context—and why clinicians use it in preventive care. Not a standalone diagnosis."
     },
     {
       "title": "Fatigue &amp; Brain Fog Labs | Blood Tests",
@@ -80,10 +104,16 @@
       "description": "Got your results? Reference ranges don’t diagnose disease. Learn how to read labs calmly—and when to book interpretation with a Siya Health clinician."
     },
     {
-      "title": "Iron &amp; Ferritin Blood Tests | Direct-Pay Labs",
+      "title": "Ferritin Blood Test Explained | Iron Labs",
       "url": "https://siya.health/labs/iron-ferritin",
       "type": "service-labs",
-      "description": "Learn what ferritin and iron studies measure, when testing may be appropriate for fatigue or heavy periods, and why interpretation matters. Transparent direct-pay options available."
+      "description": "What ferritin and iron studies broadly measure, why clinicians consider them for fatigue, and what they cannot diagnose alone."
+    },
+    {
+      "title": "Lipid Panel Explained | Cholesterol Labs",
+      "url": "https://siya.health/labs/lipid-panel",
+      "type": "service-labs",
+      "description": "What a lipid panel broadly measures for cardiometabolic risk, why clinicians order it, and what it cannot decide alone. Preventive care education—not result interpretation."
     },
     {
       "title": "Men's Health Labs | Testosterone Context",
@@ -98,16 +128,22 @@
       "description": "Explore commonly ordered preventive laboratory tests—CBC, metabolic panel, lipids, A1c—and how physician-guided testing supports primary care. Transparent direct-pay options available."
     },
     {
-      "title": "Thyroid Blood Tests (TSH &amp; More)",
+      "title": "TSH Thyroid Test Explained | Preventive Labs",
       "url": "https://siya.health/labs/thyroid",
       "type": "service-labs",
-      "description": "Learn when thyroid testing such as TSH and free T4 may be appropriate for fatigue, brain fog, or unexplained changes—and why thyroid disease should not be assumed. Direct-pay options available."
+      "description": "What TSH broadly measures, why clinicians may check thyroid function, and what TSH cannot diagnose alone. Educational guidance—not result interpretation."
     },
     {
-      "title": "Vitamin B12 Blood Test | Nutritional Labs",
+      "title": "Vitamin B12 Blood Test Explained | Nutritional Labs",
       "url": "https://siya.health/labs/vitamin-b12",
       "type": "service-labs",
-      "description": "Learn when vitamin B12 testing may be appropriate for fatigue, neurologic symptoms, or dietary risk—and why results need clinical interpretation. Direct-pay options available."
+      "description": "What vitamin B12 testing broadly measures, why clinicians may order it, and what it cannot diagnose alone. Preventive and fatigue-related education."
+    },
+    {
+      "title": "Vitamin D Blood Test Explained | Preventive Labs",
+      "url": "https://siya.health/labs/vitamin-d",
+      "type": "service-labs",
+      "description": "What 25-OH vitamin D testing broadly measures, why clinicians may consider it, and what it cannot diagnose alone. Education under preventive care."
     },
     {
       "title": "Women's Midlife Labs | Perimenopause Context",

@@ -7008,7 +7008,7 @@ body.ghl-legal-gate-open {
   display: none !important;
 }
 
-/* Cookie notice — non-blocking, healthcare-appropriate */
+/* Cookie notice — compact, never dominate the viewport (esp. mobile) */
 .cookie-notice {
   position: fixed;
   bottom: 0;
@@ -7019,35 +7019,39 @@ body.ghl-legal-gate-open {
   border-top: 1px solid var(--border);
   box-shadow: 0 -8px 32px rgba(15, 23, 42, 0.1);
   padding: 16px 20px calc(16px + env(safe-area-inset-bottom, 0px));
+  /* Hard ceiling so body offset + bar cannot eat the screen */
+  max-height: min(28vh, 220px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .cookie-notice__inner {
   max-width: 960px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  gap: 14px 24px;
-  align-items: flex-start;
+  gap: 12px 20px;
+  align-items: center;
   justify-content: space-between;
 }
 .cookie-notice__text {
   margin: 0;
   font-size: 0.9rem;
-  line-height: 1.5;
+  line-height: 1.45;
   color: var(--text-secondary);
   flex: 1 1 280px;
 }
 .cookie-notice__controls {
-  flex: 1 1 260px;
+  flex: 0 1 280px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 10px;
-  min-width: min(100%, 320px);
+  gap: 8px;
+  min-width: min(100%, 260px);
 }
 .cookie-notice__actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
 }
 .cookie-notice__btn {
@@ -7096,20 +7100,40 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
 }
 @media (max-width: 640px) {
   .cookie-notice {
-    padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px));
+    /* Keep bar to ~1/4 of phone screen max — was stacking CTAs and covering most of the viewport */
+    max-height: min(26vh, 168px);
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
   }
   .cookie-notice__inner {
     flex-direction: column;
-    gap: 12px;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .cookie-notice__text {
+    font-size: 0.78rem;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
   }
   .cookie-notice__controls {
-    min-width: 100%;
+    min-width: 0;
+    width: 100%;
+    gap: 6px;
   }
+  /* Side-by-side buttons — single-column stacking was the height blow-up */
   .cookie-notice__actions {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
   .cookie-notice__btn {
     width: 100%;
+    padding: 9px 8px;
+    font-size: 0.8rem;
+  }
+  .cookie-notice__policy {
+    font-size: 0.72rem;
   }
 }
 @media (min-width: 641px) and (max-width: 900px) {

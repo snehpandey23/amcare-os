@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
-Generated: 2026-07-26
-Total pages: 159
+Generated: 2026-08-16
+Total pages: 187
 
 ---
 
@@ -99,6 +99,21 @@ Total pages: 159
   Summary: Primary care–led adult ADHD evaluation online — DSM-based assessment. Licensed medical providers. Individualized validated tools as clinically appropriate. CA, TX, PA, FL.
   Topics: adhd
 
+- ADHD Care in Miami, FL — Online Adult Evaluation
+  URL: https://siya.health/adhd-care/miami
+  Summary: Adult ADHD evaluation for Miami and South Florida via Florida-licensed telehealth. Free screening, structured virtual visits, and transparent cash-pay pricing—no travel to a clinic required.
+  Topics: adhd, florida
+
+- ADHD Care in Orlando, FL — Online Adult Evaluation
+  URL: https://siya.health/adhd-care/orlando
+  Summary: Adult ADHD evaluation for Orlando and Central Florida via Florida-licensed telehealth. Free screening, structured virtual visits, clear pricing—complete care without commuting to a clinic.
+  Topics: adhd, florida
+
+- ADHD Care in San Diego, CA — Online Adult Evaluation
+  URL: https://siya.health/adhd-care/san-diego
+  Summary: Adult ADHD evaluation for San Diego via California-licensed telehealth. Free screening, structured virtual visits, and cash-pay pricing—no San Diego clinic visit required.
+  Topics: adhd, california
+
 - Online ADHD Diagnosis Texas
   URL: https://siya.health/adhd-diagnosis-texas
   Summary: Adult ADHD diagnosis online in Texas. $149 evaluation, ADHD-CCSP providers, same-week telehealth. Austin, Houston, Dallas-area & statewide. Book now.
@@ -112,11 +127,6 @@ Total pages: 159
 - Adult ADHD Care in California — Diagnosis, Treatment &amp; Screening
   URL: https://siya.health/adult-adhd-california
   Summary: The complete guide to adult ADHD in California: what it looks like, when evaluation helps, how online diagnosis works, treatment options, women & ADHD, executive dysfunction, pricing, and a free scree…
-  Topics: adhd, california
-
-- Online ADHD Screening in California | Free 2-Minute Test
-  URL: https://siya.health/adult-adhd-screening-california
-  Summary: Free online ADHD screening for adults in California. Take a 2-minute test with no sign-up, then explore virtual ADHD care with licensed physicians serving California.
   Topics: adhd, california
 
 - Health Guides | Metabolic, ADHD, Hormones &amp; Telehealth
@@ -157,6 +167,11 @@ Total pages: 159
 - Is it ADHD or burnout?
   URL: https://siya.health/answers/adhd-vs-burnout
   Summary: ADHD vs burnout: timeline, rest response, and when focus problems need evaluation. Learn how clinicians tell lifelong ADHD from job-linked exhaustion.
+  Topics: adhd, health-guide
+
+- Can ADHD support workplace accommodations?
+  URL: https://siya.health/answers/adhd-workplace-accommodations
+  Summary: A licensed clinician can document ADHD-related findings and functional limitations when clinically supported. Whether an employer grants accommodations dep…
   Topics: adhd, health-guide
 
 - Why do I crash every afternoon after lunch?
@@ -369,6 +384,11 @@ Total pages: 159
   Summary: Quick FAQ on low testosterone symptoms—not a lab guide. Full free vs total testosterone article linked.
   Topics: health-guide, labs, mens-health
 
+- What happens after an ADHD evaluation?
+  URL: https://siya.health/answers/what-happens-after-adhd-evaluation
+  Summary: After a structured ADHD evaluation, your clinician explains findings in plain language and outlines a care plan. That may include education only, lifestyle…
+  Topics: adhd, health-guide
+
 - What is included in a Siya Health ADHD evaluation?
   URL: https://siya.health/answers/what-included-199-adhd-evaluation
   Summary: Siya Health’s $149 adult ADHD evaluation is a 60–90 minute telehealth visit with a licensed medical provider—including clinical in…
@@ -439,6 +459,11 @@ Total pages: 159
   Summary: Adults with ADHD face higher rates of binge eating. Learn how common it is, ADHD vs emotional eating, food noise, Vyvanse for BED, and when an ADHD evaluation helps.
   Topics: adhd
 
+- ADHD and Insulin Resistance: Roommates, Not Rivals
+  URL: https://siya.health/blog/adhd-and-insulin-resistance
+  Summary: ADHD and insulin resistance often co-occur. Learn what association means (and does not), where PCOS fits, and questions to ask before self-diagnosing.
+  Topics: adhd, labs
+
 - ADHD Brain Imaging Subtypes: What New Research May Mean
   URL: https://siya.health/blog/adhd-brain-imaging-subtypes
   Summary: Emerging JAMA Psychiatry research describes three ADHD-related brain patterns. Learn what biotypes may mean—and what they do not change about diagnosis today.
@@ -467,6 +492,11 @@ Total pages: 159
 - Do You Need ADHD Medication Every Day? (Daily vs PRN for Adults)
   URL: https://siya.health/blog/adhd-medication-daily-or-as-needed-adults
   Summary: Daily ADHD dosing vs weekends off—what's safe for adults? Learn PRN vs daily trade-offs before changing your medication schedule.
+  Topics: adhd, medication
+
+- Looking for an Adderall or Vyvanse Doctor Near You? How ADHD Treatment Actually Works
+  URL: https://siya.health/blog/adhd-medication-doctor-near-you
+  Summary: Searching for an Adderall doctor or Vyvanse prescription near you? Here’s the real process: evaluation first, no same-day guarantees, and how physician-led ADHD care works at Siya Health.
   Topics: adhd, medication
 
 - Can You Get ADHD Medication Online in California? (2026 Guide)
@@ -514,14 +544,59 @@ Total pages: 159
   Summary: Adult ADHD symptoms California: chronic patterns versus burnout mimics—attention drift, procrastination pits, rejection sensitivity arcs—and clinician evaluation norms.
   Topics: adhd, california
 
+- Brain Fog After COVID: What We Know and When to Get Help
+  URL: https://siya.health/blog/brain-fog-after-covid
+  Summary: Post-COVID brain fog is reported by many adults. Learn common patterns, other causes to consider, and when primary care evaluation is appropriate.
+
+- Brain Fog and Anxiety: When Worry Crowds Out Clarity
+  URL: https://siya.health/blog/brain-fog-and-anxiety
+  Summary: Anxiety can feel like brain fog—racing thoughts, blanking under stress, and mental exhaustion. Learn how primary care sorts fog, mood, and attention.
+
+- Brain Fog and Sleep: Why Poor Rest Clouds Thinking
+  URL: https://siya.health/blog/brain-fog-and-sleep
+  Summary: Short or fragmented sleep is a common driver of brain fog. Learn what to notice, when to evaluate sleep apnea or insomnia, and how primary care helps.
+  Topics: sleep
+
+- Brain Fog at Work: When Poor Concentration Affects Your Job
+  URL: https://siya.health/blog/brain-fog-at-work
+  Summary: Brain fog at work—missed deadlines, slow thinking, word-finding trouble—can have medical causes. Learn how to frame it and when primary care helps.
+
+- Brain Fog vs ADHD: How to Tell the Difference
+  URL: https://siya.health/blog/brain-fog-vs-adhd
+  Summary: Brain fog and ADHD can feel similar. Learn how clinicians sort short-term fog from lifelong attention patterns—and when primary care evaluation helps.
+  Topics: adhd
+
+- Chronic Fatigue vs Everyday Tiredness: Knowing When to Dig Deeper
+  URL: https://siya.health/blog/chronic-fatigue-vs-everyday-tiredness
+  Summary: Busy-life tiredness and persistent medical fatigue are not the same. Learn red flags, how Siya frames fatigue, and when to book primary care.
+
 - Compounded vs Branded GLP-1 Medications (2026): Safety &amp; Standards
   URL: https://siya.health/blog/compounded-vs-branded-glp1-medications
   Summary: Compounded vs branded GLP-1 in 2026: manufacturing standards, regulatory context, risks of unapproved copies, and why clinician oversight matters.
   Topics: weight-loss, medication
 
+- Conditions That Commonly Occur With ADHD
+  URL: https://siya.health/blog/conditions-that-occur-with-adhd
+  Summary: ADHD often coexists with depression, anxiety, bipolar disorder, PTSD, and binge eating. Learn why overlap matters—and why treating one condition alone may not be enough.
+  Topics: adhd
+
 - Executive Dysfunction in ADHD: Signs, Domains &amp; What Helps
   URL: https://siya.health/blog/executive-dysfunction-adhd
   Summary: Learn how executive dysfunction shows up in adult ADHD—task initiation, working memory, planning, organization, decision fatigue, and when evaluation helps.
+  Topics: adhd
+
+- Fatigue After Illness: How Long Should Recovery Take?
+  URL: https://siya.health/blog/fatigue-after-illness
+  Summary: Post-illness fatigue can outlast the original infection by weeks. Learn when prolonged tiredness is normal recovery and when to seek primary care evaluation.
+
+- Fatigue Despite Normal Labs: What It Can Still Mean
+  URL: https://siya.health/blog/fatigue-despite-normal-labs
+  Summary: Normal labs do not always mean your fatigue is “all in your head.” Learn what normal results can miss and how primary care continues the workup.
+  Topics: labs
+
+- Focalin vs Adderall: Key Differences for Adults
+  URL: https://siya.health/blog/focalin-vs-adderall-comparison
+  Summary: Focalin vs Adderall for adults with ADHD: methylphenidate vs amphetamine class, duration, side effects, and questions to discuss with your clinician—education only.
   Topics: adhd
 
 - Food Noise and GLP-1: What It Means and What Actually Helps (2026)
@@ -573,6 +648,11 @@ Total pages: 159
   Summary: Insulin resistance can exist with a normal A1C and make weight loss harder. Learn early signs, visceral fat, cravings, sleep, ADHD overlap, evidence-based steps, and myths—without wellness clichés.
   Topics: weight-loss, labs
 
+- Iron Deficiency and Fatigue: What Ferritin Has to Do With Energy
+  URL: https://siya.health/blog/iron-deficiency-and-fatigue
+  Summary: Low iron stores can drive fatigue even before anemia appears. Learn how ferritin fits the fatigue workup and when to see primary care.
+  Topics: labs
+
 - Iron Deficiency, Brain Fog &amp; ADHD: What Research Shows
   URL: https://siya.health/blog/iron-deficiency-brain-fog-adhd
   Summary: Low iron and low ferritin can worsen brain fog and ADHD-like symptoms. Learn association vs causation, dopamine biology, and what to discuss with a clinician.
@@ -602,6 +682,10 @@ Total pages: 159
   URL: https://siya.health/blog/minoxidil-for-hair-loss-does-it-work
   Summary: Minoxidil for hair loss in 2026: mechanism, expected timelines, limits, side effects—informational only; consult a licensed clinician for diagnosis.
   Topics: hair-loss
+
+- Morning Fatigue: Why You Wake Up Exhausted
+  URL: https://siya.health/blog/morning-fatigue
+  Summary: Waking exhausted despite enough hours in bed can signal sleep apnea, iron deficiency, thyroid issues, or mood disorders. Learn what to investigate.
 
 - Non-Stimulant ADHD Meds: When Are They Used Instead of Stimulants?
   URL: https://siya.health/blog/non-stimulant-adhd-medications-explained
@@ -637,9 +721,19 @@ Total pages: 159
   Summary: Phentermine for weight loss in 2026: FDA history, cardiovascular cautions, short-term use norms, monitoring, and alternatives—educational only.
   Topics: weight-loss
 
+- Physical Signs of ADHD: Common to Notice, Not Enough to Diagnose
+  URL: https://siya.health/blog/physical-signs-of-adhd
+  Summary: Fidgeting and restlessness can show up with ADHD—and with anxiety or sleep issues. Learn why physical signs inform evaluation but do not diagnose ADHD alone.
+  Topics: adhd
+
 - POTS and ADHD: Shared Symptoms, Overlap &amp; What Research Shows
   URL: https://siya.health/blog/pots-and-adhd
   Summary: POTS and ADHD can share brain fog, fatigue, and attention problems. Learn orthostatic intolerance, current evidence, and why overlap creates diagnostic confusion.
+  Topics: adhd
+
+- Ritalin, Concerta &amp; Methylphenidate for ADHD: How Treatment Actually Works
+  URL: https://siya.health/blog/ritalin-concerta-methylphenidate-for-adhd
+  Summary: What Ritalin, Concerta, and other methylphenidate meds are, how they differ from Adderall/Vyvanse, and why a formal ADHD evaluation comes before any prescription decision.
   Topics: adhd
 
 - Semaglutide for Weight Loss: How It Works in 2026 (GLP-1 Science)
@@ -666,6 +760,11 @@ Total pages: 159
   URL: https://siya.health/blog/telehealth-prescriptions-how-online-treatment-works
   Summary: Telehealth prescriptions in 2026: visits, e-prescribing, controlled substances, state licensure, and safety—neutral overview for US adults.
   Topics: telehealth
+
+- Thyroid Problems and Fatigue: What to Know Before You Self-Diagnose
+  URL: https://siya.health/blog/thyroid-and-fatigue
+  Summary: Thyroid disease is a classic fatigue look-alike. Learn common patterns, what TSH measures, and why primary care—not internet protocols—should guide testing.
+  Topics: labs
 
 - Tirzepatide vs Semaglutide for Weight Loss (2026): Compare GLP-1 Options
   URL: https://siya.health/blog/tirzepatide-vs-semaglutide-which-is-better
@@ -696,6 +795,10 @@ Total pages: 159
   URL: https://siya.health/book-appointment
   Summary: Book a telehealth appointment with Siya Health using our secure external EHR system. No PHI collected on this site.
 
+- Brain Fog — Why Thinking Feels Slower, and When to Get Evaluated
+  URL: https://siya.health/brain-fog
+  Summary: Brain fog is a symptom with many possible contributors — fatigue, sleep, thyroid, B12, iron, mood, ADHD. Learn what people mean by brain fog, when evaluation helps, which labs clinicians may consider,…
+
 - Creyos ADHD Testing Online | Part of Your Evaluation
   URL: https://siya.health/creyos-adhd-testing
   Summary: Creyos cognitive testing for ADHD as part of your $149 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL.
@@ -714,15 +817,25 @@ Total pages: 159
   Summary: Explore transparent direct-pay laboratory testing for thyroid, blood sugar, vitamins, iron, metabolic health and preventive care. Physician guidance available through Siya Health.
   Topics: labs
 
-- A1c &amp; Blood Sugar Labs | Metabolic Testing
+- HbA1c Blood Test Explained | Blood Sugar Labs
   URL: https://siya.health/labs/a1c-blood-sugar
-  Summary: Learn what hemoglobin A1c measures, how it relates to prediabetes and metabolic health, and when blood sugar testing may be appropriate. Transparent direct-pay options available.
-  Topics: weight-loss, labs
+  Summary: What HbA1c broadly measures about average blood sugar, why clinicians may order it, and what it cannot diagnose alone. Preventive and metabolic education.
+  Topics: labs
 
 - Labs &amp; ADHD Evaluation Support | Not a Blood Test Diagnosis
   URL: https://siya.health/labs/adhd-support
   Summary: Blood tests do not diagnose ADHD. Learn when selected labs may help evaluate other contributors to fatigue, concentration problems, or brain fog—and how Siya Health approaches testing.
   Topics: adhd, labs
+
+- CBC Blood Test Explained | Preventive Labs
+  URL: https://siya.health/labs/cbc
+  Summary: What a CBC broadly measures, why clinicians may order it, and what it cannot diagnose alone. Educational lab guidance under preventive primary care.
+  Topics: labs
+
+- CMP Blood Test Explained | Preventive Labs
+  URL: https://siya.health/labs/cmp
+  Summary: What a CMP broadly measures—kidney, liver, electrolytes, and glucose context—and why clinicians use it in preventive care. Not a standalone diagnosis.
+  Topics: labs
 
 - Fatigue &amp; Brain Fog Labs | Blood Tests
   URL: https://siya.health/labs/fatigue-brain-fog
@@ -734,9 +847,14 @@ Total pages: 159
   Summary: Got your results? Reference ranges don’t diagnose disease. Learn how to read labs calmly—and when to book interpretation with a Siya Health clinician.
   Topics: labs
 
-- Iron &amp; Ferritin Blood Tests | Direct-Pay Labs
+- Ferritin Blood Test Explained | Iron Labs
   URL: https://siya.health/labs/iron-ferritin
-  Summary: Learn what ferritin and iron studies measure, when testing may be appropriate for fatigue or heavy periods, and why interpretation matters. Transparent direct-pay options available.
+  Summary: What ferritin and iron studies broadly measure, why clinicians consider them for fatigue, and what they cannot diagnose alone.
+  Topics: labs
+
+- Lipid Panel Explained | Cholesterol Labs
+  URL: https://siya.health/labs/lipid-panel
+  Summary: What a lipid panel broadly measures for cardiometabolic risk, why clinicians order it, and what it cannot decide alone. Preventive care education—not result interpretation.
   Topics: labs
 
 - Men's Health Labs | Testosterone Context
@@ -749,14 +867,19 @@ Total pages: 159
   Summary: Explore commonly ordered preventive laboratory tests—CBC, metabolic panel, lipids, A1c—and how physician-guided testing supports primary care. Transparent direct-pay options available.
   Topics: labs
 
-- Thyroid Blood Tests (TSH &amp; More)
+- TSH Thyroid Test Explained | Preventive Labs
   URL: https://siya.health/labs/thyroid
-  Summary: Learn when thyroid testing such as TSH and free T4 may be appropriate for fatigue, brain fog, or unexplained changes—and why thyroid disease should not be assumed. Direct-pay options available.
+  Summary: What TSH broadly measures, why clinicians may check thyroid function, and what TSH cannot diagnose alone. Educational guidance—not result interpretation.
   Topics: labs
 
-- Vitamin B12 Blood Test | Nutritional Labs
+- Vitamin B12 Blood Test Explained | Nutritional Labs
   URL: https://siya.health/labs/vitamin-b12
-  Summary: Learn when vitamin B12 testing may be appropriate for fatigue, neurologic symptoms, or dietary risk—and why results need clinical interpretation. Direct-pay options available.
+  Summary: What vitamin B12 testing broadly measures, why clinicians may order it, and what it cannot diagnose alone. Preventive and fatigue-related education.
+  Topics: labs
+
+- Vitamin D Blood Test Explained | Preventive Labs
+  URL: https://siya.health/labs/vitamin-d
+  Summary: What 25-OH vitamin D testing broadly measures, why clinicians may consider it, and what it cannot diagnose alone. Education under preventive care.
   Topics: labs
 
 - Women's Midlife Labs | Perimenopause Context
@@ -797,9 +920,17 @@ Total pages: 159
   URL: https://siya.health/prescriptions
   Summary: Provider-reviewed prescriptions through Siya Health telehealth when clinically appropriate. Availability varies by state—contact us to learn more.
 
+- Preventive Care — Stay Healthy Before Something Goes Wrong
+  URL: https://siya.health/preventive-care
+  Summary: Preventive care is how adults stay ahead of problems: annual wellness visits, health screenings, vaccinations, cardiometabolic risk, lifestyle, and labs in context — with a physician-led primary care …
+
 - Pricing
   URL: https://siya.health/pricing
   Summary: Transparent physician-led telehealth pricing: $149 initial evaluation, $79 or $149/month follow-up plans. ADHD, weight loss, primary care, and telehealth in California, Texas, Pennsylvania, and Florid…
+
+- Primary Care — Where Ongoing Health Starts
+  URL: https://siya.health/primary-care
+  Summary: Primary care is the root of ongoing health at Siya: symptoms, preventive care, labs in context, and specialty lanes under one physician-led telehealth relationship — not a funnel to a single condition…
 
 - Primary &amp; Urgent Care Telehealth
   URL: https://siya.health/primary-urgent-care

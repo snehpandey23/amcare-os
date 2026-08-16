@@ -81,7 +81,8 @@ const INTENT_DETECTORS = [
     test: (p) =>
       p.includes('landing') ||
       p.startsWith('lp/') ||
-      p === 'adult-adhd-screening-california.html',
+      p === 'adhd-evaluation-california.html' ||
+      p === 'adhd-evaluation-texas.html',
   },
 ];
 
@@ -160,7 +161,6 @@ export function resolveConversion(relPath, overrides = {}) {
 }
 
 export function isAdhdFunnelPath(relPath) {
-  if (relPath === 'adult-adhd-screening-california.html') return true;
   if (relPath === 'adhd-screening-results.html') return true;
   return detectUserIntent(relPath) === 'adhd';
 }
@@ -168,7 +168,6 @@ export function isAdhdFunnelPath(relPath) {
 const ADHD_SCREENING_NAV_PAGES = new Set([
   'adhd-care.html',
   'adhd-screening.html',
-  'adult-adhd-screening-california.html',
   'adult-adhd-california.html',
 ]);
 
@@ -191,7 +190,7 @@ const PAGE_TYPE_PATH = {
   adhd: 'adhd-care.html',
   blog: 'blog/index.html',
   provider: 'providers/index.html',
-  landing: 'adult-adhd-screening-california.html',
+  landing: 'adhd-evaluation-california.html',
   pricing: 'pricing.html',
   hormones: 'mens-health-longevity.html',
   weight: 'weight-loss-metabolic-health.html',

@@ -292,7 +292,7 @@ function render() {
             <li><strong>Validated tools as support</strong><span>Rating scales are used when clinically appropriate to inform&mdash;never to replace&mdash;a clinician's judgment.</span></li>
             <li><strong>A plan in plain language</strong><span>Findings explained clearly, with next steps whether or not the answer is ADHD.</span></li>
           </ol>
-          <p>Being recognized later in life is common and valid. Many California adults are identified in their 30s, 40s, or beyond&mdash;often after a child's diagnosis, for example, or after a job change removes the structure that used to hold things together. So, for the specifics of remote evaluation, see <a href="/blog/online-adhd-diagnosis-california">online ADHD diagnosis in California</a>, how <a href="/blog/adhd-telehealth-california">ADHD telehealth works in California</a>, the short FAQ on <a href="/answers/telehealth-adhd-california">ADHD telehealth in California</a>, and <a href="/blog/how-to-choose-adhd-provider-california">how to choose an ADHD provider in California</a>. Prefer to start with a screen? Use the <a href="/adult-adhd-screening-california">California ADHD screening</a>.</p>
+          <p>Being recognized later in life is common and valid. Many California adults are identified in their 30s, 40s, or beyond&mdash;often after a child's diagnosis, for example, or after a job change removes the structure that used to hold things together. So, for the specifics of remote evaluation, see <a href="/blog/online-adhd-diagnosis-california">online ADHD diagnosis in California</a>, how <a href="/blog/adhd-telehealth-california">ADHD telehealth works in California</a>, the short FAQ on <a href="/answers/telehealth-adhd-california">ADHD telehealth in California</a>, and <a href="/blog/how-to-choose-adhd-provider-california">how to choose an ADHD provider in California</a>. Prefer the lean Ads evaluation entry? Use <a href="/adhd-evaluation-california">ADHD evaluation in California</a>.</p>
         </div>
       </section>
 
@@ -422,7 +422,7 @@ ${faqAccordion(FAQS, 'faq-ca-adhd')}
           <ul class="footer-links">
             <li><a href="/primary-care">Primary care</a></li>
             <li><a href="/adhd-care">ADHD Care</a></li>
-            <li><a href="/adult-adhd-screening-california">California ADHD screening</a></li>
+            <li><a href="/adhd-evaluation-california">California ADHD evaluation</a></li>
             <li><a href="/blog/how-to-choose-adhd-provider-california">How to choose an ADHD provider in California</a></li>
             <li><a href="/preventive-care">Preventive care</a></li>
             <li><a href="/pricing">Pricing</a></li>

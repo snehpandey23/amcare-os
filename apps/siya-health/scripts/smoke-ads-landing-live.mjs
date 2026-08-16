@@ -27,29 +27,28 @@ const STARTED_AT = new Date().toISOString();
 /** @typedef {'evaluation' | 'screening'} PageKind */
 
 /**
- * Screening LPs may still be live OR permanently redirected to evaluation LPs.
- * Either is acceptable for HTTP; remaining checks run against the final document URL.
+ * Evaluation LPs must be 200. Retired screening LPs must 301 → evaluation.
  */
 const PAGES = [
   {
     path: '/adhd-evaluation-texas',
     kind: /** @type {PageKind} */ ('evaluation'),
-    allowRedirectTo: null,
+    requireRedirectTo: null,
   },
   {
     path: '/adult-adhd-screening-texas',
     kind: /** @type {PageKind} */ ('screening'),
-    allowRedirectTo: '/adhd-evaluation-texas',
+    requireRedirectTo: '/adhd-evaluation-texas',
   },
   {
     path: '/adhd-evaluation-california',
     kind: /** @type {PageKind} */ ('evaluation'),
-    allowRedirectTo: null,
+    requireRedirectTo: null,
   },
   {
     path: '/adult-adhd-screening-california',
     kind: /** @type {PageKind} */ ('screening'),
-    allowRedirectTo: '/adhd-evaluation-california',
+    requireRedirectTo: '/adhd-evaluation-california',
   },
 ];
 
@@ -315,16 +314,21 @@ async function playwrightChecks(pagePath, kind) {
 
 function judgeHttp(page, probe) {
   const finalPath = probe.finalPath;
+  if (page.requireRedirectTo) {
+    if (
+      [301, 302, 307, 308].includes(probe.status) &&
+      finalPath === page.requireRedirectTo &&
+      probe.finalStatus === 200
+    ) {
+      return { pass: true, raw: `${probe.status}→${page.requireRedirectTo} (final 200)` };
+    }
+    return {
+      pass: false,
+      raw: `expected redirect→${page.requireRedirectTo}; got status=${probe.status} finalStatus=${probe.finalStatus} finalPath=${finalPath} loc=${probe.location || '-'}`,
+    };
+  }
   if (probe.status === 200 && finalPath === page.path) {
     return { pass: true, raw: `200 (no redirect)` };
-  }
-  if (
-    page.allowRedirectTo &&
-    [301, 302, 307, 308].includes(probe.status) &&
-    finalPath === page.allowRedirectTo &&
-    probe.finalStatus === 200
-  ) {
-    return { pass: true, raw: `${probe.status}→${page.allowRedirectTo} (final 200)` };
   }
   if (probe.finalStatus === 200 && finalPath === page.path) {
     return { pass: true, raw: `final ${probe.finalStatus}` };

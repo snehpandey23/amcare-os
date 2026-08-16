@@ -8,7 +8,7 @@
  * Retained state owners:
  *   TX treatment  → /blog/adhd-treatment-texas
  *   TX diagnosis  → /adhd-diagnosis-texas
- *   CA screening  → /adult-adhd-screening-california (product page, not a city clone)
+ *   CA Ads eval   → /adhd-evaluation-california (lean Ads LP; screening LPs retired)
  *   National care → /adhd-care
  *
  * CA cornerstone LIVE: /adult-adhd-california is the canonical California ADHD
@@ -53,7 +53,8 @@ export const GEO_CLONE_REDIRECTS = {
 export const GEO_RETAINED = [
   '/blog/adhd-treatment-texas',
   '/adhd-diagnosis-texas',
-  '/adult-adhd-screening-california',
+  '/adhd-evaluation-california',
+  '/adhd-evaluation-texas',
   '/adhd-care',
   '/blog/online-adhd-diagnosis-california',
   '/blog/adhd-telehealth-california',

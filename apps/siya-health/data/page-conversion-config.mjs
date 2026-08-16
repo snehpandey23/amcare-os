@@ -54,14 +54,21 @@ export const PAGE_CONVERSION_CONFIG = {
     secondarySlot: 'evaluation',
     additionalCtas: ['secureChat'],
   },
-  'adult-adhd-screening-california.html': {
-    conversionGoal: 'screening',
+  'adhd-evaluation-california.html': {
+    conversionGoal: 'evaluation',
     intent: 'adhd-ads',
     funnel: 'google-ads-adhd-ca',
-    primarySlot: 'leadMagnet',
-    secondarySlot: 'meetGreet',
-    additionalCtas: ['meetGreet', 'evaluation'],
-    notes: 'Google Ads LP — screening → meet & greet → evaluation; no Zocdoc primary',
+    primarySlot: 'meetGreet',
+    secondarySlot: 'evaluation',
+    notes: 'Google Ads CA evaluation LP — lean chrome; screening LPs retired 2026-08-16',
+  },
+  'adhd-evaluation-texas.html': {
+    conversionGoal: 'evaluation',
+    intent: 'adhd-ads',
+    funnel: 'google-ads-adhd-tx',
+    primarySlot: 'meetGreet',
+    secondarySlot: 'evaluation',
+    notes: 'Google Ads TX evaluation LP — lean chrome; screening LPs retired 2026-08-16',
   },
   'mens-health-longevity.html': {
     conversionGoal: 'meetGreet',

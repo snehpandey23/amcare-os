@@ -127,8 +127,8 @@ export const TRUST_PROFILES = {
 };
 
 const PROFILE_DETECTORS = [
-  { profile: 'landing-adhd', test: (p) => p === 'adult-adhd-screening-california.html' },
-  { profile: 'landing', test: (p) => /landing|\/lp\//.test(p) || p.includes('screening-california') },
+  { profile: 'landing-adhd', test: (p) => p === 'adhd-evaluation-california.html' || p === 'adhd-evaluation-texas.html' },
+  { profile: 'landing', test: (p) => /landing|\/lp\//.test(p) || /adhd-evaluation-(california|texas)/.test(p) },
   { profile: 'homepage', test: (p) => p === 'index.html' },
   {
     profile: 'adhd',

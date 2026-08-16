@@ -341,6 +341,16 @@
       "permanent": true
     },
     {
+      "source": "/adult-adhd-screening-california",
+      "destination": "/adhd-evaluation-california",
+      "permanent": true
+    },
+    {
+      "source": "/adult-adhd-screening-texas",
+      "destination": "/adhd-evaluation-texas",
+      "permanent": true
+    },
+    {
       "source": "/(.*)",
       "has": [
         {

@@ -16,9 +16,9 @@ export const ADHD_SCREENING_LINKS = [
     blurb: 'Structured starting point—not a diagnosis.',
   },
   {
-    href: '/adult-adhd-screening-california',
-    label: 'California ADHD screening',
-    blurb: 'State-specific screening for California adults.',
+    href: '/adhd-evaluation-california',
+    label: 'California ADHD evaluation',
+    blurb: 'Lean Ads evaluation landing for California adults.',
   },
 ];
 
@@ -44,7 +44,7 @@ export const ADHD_GEO_LINKS = [
   { href: '/adhd-diagnosis-texas', label: 'Texas ADHD diagnosis', region: 'TX' },
   { href: '/blog/adhd-treatment-texas', label: 'Texas ADHD treatment', region: 'TX' },
   { href: '/blog/online-adhd-diagnosis-california', label: 'California ADHD diagnosis', region: 'CA' },
-  { href: '/adult-adhd-screening-california', label: 'California ADHD screening', region: 'CA' },
+  { href: '/adhd-evaluation-california', label: 'California ADHD evaluation', region: 'CA' },
 ];
 
 /** All commercial LP paths — used by phase7 skip list */
@@ -118,6 +118,6 @@ export function renderShadowLpGeoContext() {
 /** Screening cross-links for /online-adhd-test / /adhd-screening */
 export function renderOnlineTestCrossLinks() {
   return `<!-- SIYA:ADHD-ONLINE-TEST-CROSS-LINKS -->
-            <p class="adhd-online-test-cross-links" style="max-width:720px;margin:1.5rem auto 0;">California residents: see ${link('/adult-adhd-screening-california', 'California ADHD screening')}. Ready for evaluation? ${link('/adhd-care', 'ADHD evaluation &amp; care')} · ${link('/adhd-diagnosis-texas', 'Texas ADHD diagnosis')}.</p>
+            <p class="adhd-online-test-cross-links" style="max-width:720px;margin:1.5rem auto 0;">California residents: see ${link('/adhd-evaluation-california', 'California ADHD evaluation')}. Ready for care details? ${link('/adhd-care', 'ADHD evaluation &amp; care')} · ${link('/adhd-diagnosis-texas', 'Texas ADHD diagnosis')}.</p>
             <!-- /SIYA:ADHD-ONLINE-TEST-CROSS-LINKS -->`;
 }

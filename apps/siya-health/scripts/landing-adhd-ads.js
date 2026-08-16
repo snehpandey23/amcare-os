@@ -15,16 +15,12 @@
   }
 
   var LANDING_PATHS = {
-    '/adult-adhd-screening-california': true,
-    '/adult-adhd-screening-texas': true,
     '/adhd-evaluation-texas': true,
     '/adhd-evaluation-california': true,
   };
   var path = window.location.pathname.replace(/\/$/, '') || '/';
   var isLanding =
     LANDING_PATHS[path] ||
-    path.endsWith('/adult-adhd-screening-california.html') ||
-    path.endsWith('/adult-adhd-screening-texas.html') ||
     path.endsWith('/adhd-evaluation-texas.html') ||
     path.endsWith('/adhd-evaluation-california.html') ||
     document.body.classList.contains('siya-landing-page');

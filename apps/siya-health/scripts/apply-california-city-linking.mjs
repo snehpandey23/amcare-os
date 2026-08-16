@@ -78,7 +78,7 @@ function upsertMarkerBlock(html, marker, block) {
 /** Capped statewide next-step — no metro directory (assembly ≤3 links + context). */
 function statewideNextStepBlock() {
   return `            <aside class="blog-internal-links ca-statewide-next" aria-label="California ADHD next steps" data-assembly="ca-statewide">
-              <p>For the full picture, start with our canonical guide to <a href="/adult-adhd-california">adult ADHD care in California</a>. Next, see <a href="/blog/how-to-choose-adhd-provider-california">how to choose an ADHD provider in California</a> or take the <a href="/adult-adhd-screening-california">California ADHD screening</a>.</p>
+              <p>For the full picture, start with our canonical guide to <a href="/adult-adhd-california">adult ADHD care in California</a>. Next, see <a href="/blog/how-to-choose-adhd-provider-california">how to choose an ADHD provider in California</a> or the <a href="/adhd-evaluation-california">California ADHD evaluation</a>.</p>
               <p><a class="button ds-button ds-button--primary" href="/adult-adhd-california" data-siya-track="primary-cta-click" data-siya-location="ca-statewide-next">Adult ADHD in California →</a></p>
             </aside>`;
 }
@@ -107,27 +107,8 @@ for (const rel of CA_STATE_BLOGS) {
   n += 1;
 }
 
-// 2) Screening page — statewide only, no metro strip; inject CA standards nav
-if (exists('adult-adhd-screening-california.html')) {
-  let html = read('adult-adhd-screening-california.html');
-  for (const m of STRIP_MARKERS) html = softStrip(html, m);
-  html = softStrip(html, 'CA-STANDARDS-NAV');
-  html = html.replace(/href="\/blog\/adhd-treatment-(los-angeles|san-diego|san-francisco|san-jose|sacramento|oakland|orange-county)-ca"/g, 'href="/adult-adhd-california"');
-  const standardsWrapped = `<!-- SIYA:CA-STANDARDS-NAV -->\n${screeningStandardsBlock()}\n<!-- /SIYA:CA-STANDARDS-NAV -->\n`;
-  if (html.includes('id="final-cta"')) {
-    html = html.replace(
-      /(<section[^>]*id="final-cta"[^>]*>)/,
-      `${standardsWrapped}$1`,
-    );
-  } else if (html.includes('</main>')) {
-    html = html.replace('</main>', `      ${standardsWrapped}\n    </main>`);
-  } else {
-    html += `\n${standardsWrapped}`;
-  }
-  write('adult-adhd-screening-california.html', html);
-  console.log('OK screening adult-adhd-screening-california.html');
-  n += 1;
-}
+// 2) CA screening Ads LP retired → /adhd-evaluation-california (retire-pages.mjs)
+//    Do not regenerate adult-adhd-screening-california.html.
 
 // 3) ADHD care — ensure no CA metro strip
 if (exists('adhd-care.html')) {

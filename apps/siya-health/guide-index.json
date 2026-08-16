@@ -1,7 +1,7 @@
 {
-  "generated": "2026-07-26T11:41:11.006Z",
+  "generated": "2026-08-16T02:32:57.438Z",
   "hubUrl": "https://siya.health/answers",
-  "count": 59,
+  "count": 61,
   "guides": [
     {
       "title": "When might Vyvanse be preferred over Adderall for adults?",
@@ -64,6 +64,15 @@
       "title": "Is it ADHD or burnout?",
       "url": "https://siya.health/answers/adhd-vs-burnout",
       "description": "ADHD vs burnout: timeline, rest response, and when focus problems need evaluation. Learn how clinicians tell lifelong ADHD from job-linked exhaustion.",
+      "topics": [
+        "adhd",
+        "health-guide"
+      ]
+    },
+    {
+      "title": "Can ADHD support workplace accommodations?",
+      "url": "https://siya.health/answers/adhd-workplace-accommodations",
+      "description": "A licensed clinician can document ADHD-related findings and functional limitations when clinically supported. Whether an employer grants accommodations dep…",
       "topics": [
         "adhd",
         "health-guide"
@@ -455,6 +464,15 @@
         "health-guide",
         "labs",
         "mens-health"
+      ]
+    },
+    {
+      "title": "What happens after an ADHD evaluation?",
+      "url": "https://siya.health/answers/what-happens-after-adhd-evaluation",
+      "description": "After a structured ADHD evaluation, your clinician explains findings in plain language and outlines a care plan. That may include education only, lifestyle…",
+      "topics": [
+        "adhd",
+        "health-guide"
       ]
     },
     {
