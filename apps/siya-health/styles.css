@@ -2662,6 +2662,13 @@ img[loading="lazy"] { loading: lazy; }
 
 .asrs-screener-section { padding-top: 48px; }
 
+/* Clear sticky header (~93px). Use .section.asrs… so we beat later .section mobile padding. */
+@media (max-width: 899px) {
+  .section.asrs-screener-section {
+    padding-top: 120px;
+  }
+}
+
 .asrs-screener {
   max-width: 600px;
   margin: 0 auto;
@@ -2750,6 +2757,28 @@ img[loading="lazy"] { loading: lazy; }
 .asrs-options label:has(input:checked) {
   border-color: var(--primary);
   background: rgba(28, 25, 23, 0.05);
+}
+
+.asrs-answer-nudge {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(185, 28, 28, 0.35);
+  background: rgba(185, 28, 28, 0.08);
+  color: #991b1b;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.asrs-step--needs-answer .asrs-options {
+  outline: 2px solid rgba(185, 28, 28, 0.25);
+  outline-offset: 4px;
+  border-radius: var(--radius);
+}
+
+.asrs-next--ready {
+  box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.35);
 }
 
 .asrs-nav {
