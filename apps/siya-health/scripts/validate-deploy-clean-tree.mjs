@@ -31,7 +31,7 @@ const KEY_PATHS = [
   'apps/siya-health/adhd-evaluation-california.html',
   'apps/siya-health/scripts/generate-adhd-evaluation-california.mjs',
   'apps/siya-health/adhd-screening-results.html',
-  // adhd-screening-results.js intentionally omitted until outcome HTML+JS ship together (open WIP)
+  'apps/siya-health/adhd-screening-results.js',
   'apps/siya-health/scripts/site-chrome.mjs',
   'apps/siya-health/scripts/validate-deploy-clean-tree.mjs',
   'apps/siya-health/CHANGELOG.md',

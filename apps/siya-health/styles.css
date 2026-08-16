@@ -2845,6 +2845,149 @@ img[loading="lazy"] { loading: lazy; }
   margin-right: auto;
 }
 
+/* Post-ASRS results page — outcome + primary Meet & Greet above the fold */
+.screening-results-hero .screening-results-header {
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.screening-results-hero-cta {
+  margin: 20px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 28rem;
+}
+
+.screening-results-hero-cta .button {
+  width: 100%;
+  justify-content: center;
+  min-height: 48px;
+}
+
+.screening-results-hero-cta .cta-microcopy {
+  margin: 0;
+  max-width: 26rem;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.screening-outcome-badge {
+  display: inline-block;
+  margin: 0 0 12px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.screening-outcome-badge--positive {
+  background: rgba(15, 118, 110, 0.1);
+  color: var(--accent);
+  border-color: rgba(15, 118, 110, 0.25);
+}
+
+.screening-outcome-badge--negative {
+  background: rgba(30, 58, 138, 0.08);
+  color: var(--primary);
+  border-color: rgba(30, 58, 138, 0.2);
+}
+
+.screening-results-score {
+  margin: 12px auto 0;
+  max-width: 36rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--primary);
+  line-height: 1.5;
+}
+
+.screening-results-detail {
+  margin: 4px 0 0;
+  max-width: 36rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  text-align: left;
+}
+
+.screening-results-detail strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.screening-results-disclaimer {
+  margin-top: 12px;
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.screening-results-cards {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: 1fr;
+  max-width: 860px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+@media (min-width: 700px) {
+  .screening-results-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.screening-results-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.screening-results-card h3 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
+.screening-results-card p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.screening-results-card .button {
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+.screening-results-card .cta-microcopy {
+  margin-top: auto;
+}
+
+.screening-results-footnote {
+  margin-top: 28px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
 /* Topic chooser (step -1) */
 .asrs-choose h1 { margin-bottom: 12px; }
 
