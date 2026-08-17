@@ -32,7 +32,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="twitter:title" content="ADHD Screening Results | Siya Health" />
     <meta name="twitter:description" content="See your ADHD screening result (positive or negative). Book a free Meet &amp; Greet or start an ADHD evaluation." />
     <meta name="twitter:image" content="https://siya.health/assets/images/siya-health-logo.png" />
-    <link rel="stylesheet" href="/styles.css?v=1786901000000.3" />
+    <link rel="stylesheet" href="/styles.css?v=1786901000000.4" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;600;700&display=swap" rel="stylesheet" />
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"ADHD Screening Complete | Siya Health","description":"Your ADHD screening is complete. Choose next steps: book a free Meet & Greet, start an ADHD evaluation, or ask a question via secure medical chat.","url":"https://siya.health/adhd-screening-results"}</script>
@@ -90,50 +90,61 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
     </header>
 
     <main id="main">
-      <section class="section screening-results-hero" style="padding-top: 120px;">
+      <section class="section screening-results-hero" aria-labelledby="screening-outcome-title">
         <div class="container">
-          <div class="screening-results-layout">
-            <div class="section-header screening-results-header">
-              <p class="screening-outcome-badge" id="screening-outcome-badge" hidden>Screening result</p>
-              <h1 id="screening-outcome-title">Your ADHD screening is complete</h1>
-              <p class="lead" id="screening-outcome-lead">This screening is not a diagnosis. Book a free Meet &amp; Greet to talk through what your screen means and what to do next.</p>
-              <p class="screening-results-score" id="screening-outcome-score" hidden></p>
-            </div>
-            <div class="screening-results-path">
-              <img
-                src="/assets/diagrams/screening-next-step.svg"
-                alt="Screening done, then talk it through on a free Meet &amp; Greet — a clear next step, not a diagnosis."
-                width="520"
-                height="88"
-                loading="eager"
-                decoding="async"
-              />
-              <p class="screening-results-path-caption">Your screen is a starting point. A free Meet &amp; Greet is a calm next conversation — not a hard sell, and not a diagnosis.</p>
-            </div>
-            <div class="screening-results-hero-cta">
-              <a class="button ds-button ds-button--primary" href="/redirect/meet-greet" data-cta="book-walkthrough" data-siya-track="meet_greet_click" data-siya-location="screening-results-hero" data-page-type="adhd" data-intent="adhd" data-conversion-goal="meetGreet" data-cta-slot="meetGreet" data-component="button">Book Free Meet &amp; Greet</a>
-              <p class="cta-microcopy">Free process call — not a medical visit or diagnosis. No medication is prescribed on this call.</p>
-              <p class="screening-results-detail" id="screening-outcome-detail" hidden></p>
-              <div class="screening-results-secondary-actions" role="group" aria-label="Other next steps">
-                <a class="button secondary ds-button ds-button--secondary" href="/adhd-care" data-siya-track="adhd_care_click" data-siya-location="screening-results-secondary" data-page-type="adhd" data-intent="adhd" data-component="button">Learn about ADHD evaluation &amp; care</a>
-                <a class="button secondary ds-button ds-button--secondary" href="/redirect/adhd-evaluation" data-siya-track="adhd_evaluation_click" data-siya-location="screening-results-evaluation" data-page-type="adhd" data-intent="adhd" data-component="button">Start ADHD Evaluation</a>
+          <div class="screening-results-layout why-patients-grid">
+            <div class="screening-results-copy why-patients-copy">
+              <div class="section-header screening-results-header why-patients-header">
+                <p class="screening-outcome-badge" id="screening-outcome-badge" hidden>Screening result</p>
+                <h1 id="screening-outcome-title">Your ADHD screening is complete</h1>
+                <p class="lead" id="screening-outcome-lead">This screening is not a diagnosis. Learn what an ADHD evaluation involves, or book a free Meet &amp; Greet if you want to talk through next steps.</p>
+                <p class="screening-results-score" id="screening-outcome-score" hidden></p>
+                <p class="screening-results-detail" id="screening-outcome-detail" hidden></p>
               </div>
+
+              <div class="hero-ctas hero-ctas-adhd-primary hero-ctas-row screening-results-hero-cta" role="group" aria-label="Next steps">
+                <a class="button ds-button ds-button--primary" href="/adhd-care" data-siya-track="adhd_care_click" data-siya-location="screening-results-hero" data-page-type="adhd" data-intent="adhd" data-conversion-goal="adhdCare" data-cta-slot="adhdCare" data-component="button">Learn about ADHD evaluation &amp; care</a>
+                <a class="button secondary ds-button ds-button--secondary" href="/redirect/meet-greet" data-cta="book-walkthrough" data-siya-track="meet_greet_click" data-siya-location="screening-results-hero" data-page-type="adhd" data-intent="adhd" data-conversion-goal="meetGreet" data-cta-slot="meetGreet" data-component="button">Book Free Meet &amp; Greet</a>
+              </div>
+              <p class="cta-microcopy">Meet &amp; Greet is a free process call — not a medical visit or diagnosis. No medication is prescribed on that call.</p>
+              <p class="screening-results-tertiary">
+                Ready for a clinical visit?
+                <a href="/redirect/adhd-evaluation" data-siya-track="adhd_evaluation_click" data-siya-location="screening-results-tertiary" data-page-type="adhd" data-intent="adhd" data-component="text-link">Start ADHD Evaluation</a>
+              </p>
+              <p class="cta-microcopy screening-results-disclaimer">This screening is not a diagnosis. Only a licensed provider can diagnose ADHD after a clinical evaluation.</p>
             </div>
-            <figure class="screening-results-visual">
+
+            <figure class="screening-results-visual why-patients-media">
               <picture>
                 <source type="image/webp" srcset="/assets/images/editorial-finally-heard-900.webp" />
                 <img
                   src="/assets/images/editorial-finally-heard.jpg"
-                  alt="Adult at home on a calm telehealth video call — the kind of easy conversation a Meet &amp; Greet is meant to be."
+                  alt="Adult at home on a calm telehealth video call with a Siya Health clinician."
                   width="720"
                   height="480"
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
                 />
               </picture>
-              <figcaption>A low-pressure conversation from home — the natural next step after screening.</figcaption>
+              <figcaption>Screening is a starting point. Evaluation and care are physician-led — at your pace.</figcaption>
             </figure>
-            <p class="cta-microcopy screening-results-disclaimer">This screening is not a diagnosis. Only a licensed provider can diagnose ADHD after a clinical evaluation.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-tinted screening-results-path-band" aria-labelledby="screening-path-heading">
+        <div class="container">
+          <div class="screening-results-path">
+            <h2 id="screening-path-heading" class="sr-only">What happens next</h2>
+            <img
+              src="/assets/diagrams/screening-next-step.svg"
+              alt="Screening done, then talk it through, then a clear next step — not a diagnosis."
+              width="520"
+              height="88"
+              loading="lazy"
+              decoding="async"
+            />
+            <p class="screening-results-path-caption">Your screen is information, not a label. Review care options, or book a free Meet &amp; Greet when you want a calm next conversation.</p>
           </div>
         </div>
       </section>
@@ -142,7 +153,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
         <div class="container">
           <h2 id="more-options-heading" class="sr-only">More options</h2>
           <p class="screening-results-footnote">
-            Prefer to learn first? Review <a href="/adhd-care">ADHD care</a>, <a href="/pricing">pricing</a>, or retake the <a href="/adhd-screening?start=asrs">free ADHD screening</a>.
+            Also useful: <a href="/pricing">pricing</a>, or retake the <a href="/adhd-screening?start=asrs">free ADHD screening</a>.
           </p>
         </div>
       </section>
@@ -244,7 +255,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
       </div>
     </footer>
 
-    <script src="/adhd-screening-results.js?v=1786901000000.2" defer></script>
+    <script src="/adhd-screening-results.js?v=1786901000000.3" defer></script>
     <script src="/scripts/siya-circle-signup.js" defer></script>
     <script src="/scripts/cookie-notice.js" defer></script>
     <!-- SIYA:PROVIDER-ATTRIBUTION -->

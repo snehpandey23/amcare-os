@@ -68,7 +68,7 @@
     }
     titleEl.textContent = 'Your ADHD screening result is positive';
     leadEl.textContent =
-      'Your responses suggest ADHD symptoms may be worth exploring with a licensed provider. A positive screen is not a diagnosis — book a free Meet & Greet to talk through next steps.';
+      'Your responses suggest ADHD symptoms may be worth exploring with a licensed provider. A positive screen is not a diagnosis — learn what evaluation involves, or book a free Meet & Greet if you want to talk it through first.';
   } else if (outcome === 'borderline') {
     /* DRAFT COPY — NOT FINAL. Pending clinical lead review before BORDERLINE_TIER_PUBLISHED=true. */
     if (badgeEl) {
@@ -104,7 +104,7 @@
   } else {
     titleEl.textContent = 'Your ADHD screening is complete';
     leadEl.textContent =
-      'This screening is not a diagnosis. Book a free Meet & Greet to talk through what your screen means and what to do next.';
+      'This screening is not a diagnosis. Learn what an ADHD evaluation involves, or book a free Meet & Greet if you want to talk through next steps.';
   }
 
   if (scoreEl && hasScore) {

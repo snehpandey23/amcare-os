@@ -2850,26 +2850,94 @@ img[loading="lazy"] { loading: lazy; }
   margin-right: auto;
 }
 
-/* Post-ASRS results page — outcome + path diagram + photo + Meet & Greet */
-.screening-results-layout {
-  display: grid;
-  gap: 18px;
-  align-items: start;
-  max-width: 40rem;
+/* Post-ASRS results page — composed why-patients split + site CTA hierarchy */
+.screening-results-hero {
+  padding-top: 120px;
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.screening-results-layout.why-patients-grid {
+  max-width: 68rem;
   margin: 0 auto;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: center;
+}
+
+.screening-results-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 0;
 }
 
 .screening-results-hero .screening-results-header {
-  text-align: center;
+  text-align: left;
   margin: 0;
+  width: 100%;
+}
+
+.screening-results-hero .screening-results-header .lead {
+  margin-bottom: 0;
+}
+
+.screening-results-hero-cta {
+  margin: 4px 0 0;
+  width: 100%;
+}
+
+.screening-results-hero .cta-microcopy {
+  margin: 0;
+  max-width: 36rem;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.screening-results-tertiary {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.screening-results-tertiary a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.screening-results-visual.why-patients-media {
+  margin: 0;
+  width: 100%;
+}
+
+.screening-results-visual.why-patients-media img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center 28%;
+  border-radius: 16px;
+}
+
+.screening-results-visual.why-patients-media figcaption {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.screening-results-path-band {
+  padding-top: clamp(1.5rem, 3vw, 2.25rem);
+  padding-bottom: clamp(1.5rem, 3vw, 2.25rem);
 }
 
 .screening-results-path {
-  margin: 0;
-  max-width: 34rem;
+  margin: 0 auto;
+  max-width: 40rem;
   text-align: center;
-  justify-self: center;
-  width: 100%;
 }
 
 .screening-results-path img {
@@ -2881,82 +2949,11 @@ img[loading="lazy"] { loading: lazy; }
 }
 
 .screening-results-path-caption {
-  margin: 8px 0 0;
-  font-size: 0.9rem;
-  line-height: 1.45;
+  margin: 12px auto 0;
+  max-width: 36rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
   color: var(--text-secondary);
-}
-
-.screening-results-visual {
-  margin: 0;
-  border-radius: var(--radius-lg, 16px);
-  overflow: hidden;
-  border: 1px solid var(--border);
-  background: var(--bg-subtle);
-  width: 100%;
-}
-
-.screening-results-visual picture,
-.screening-results-visual img {
-  display: block;
-  width: 100%;
-}
-
-.screening-results-visual img {
-  height: auto;
-  max-height: 200px;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  object-position: center 30%;
-}
-
-.screening-results-visual figcaption {
-  margin: 0;
-  padding: 10px 14px 12px;
-  font-size: 0.85rem;
-  line-height: 1.45;
-  color: var(--text-muted);
-  text-align: center;
-}
-
-.screening-results-hero-cta {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  max-width: 28rem;
-  width: 100%;
-  justify-self: center;
-}
-
-.screening-results-hero-cta .button {
-  width: 100%;
-  justify-content: center;
-  min-height: 48px;
-}
-
-.screening-results-hero-cta .cta-microcopy {
-  margin: 0;
-  max-width: 26rem;
-  font-size: 0.85rem;
-  line-height: 1.45;
-  color: var(--text-muted);
-}
-
-.screening-results-secondary-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-  margin-top: 4px;
-}
-
-.screening-results-secondary-actions .button {
-  width: 100%;
-  justify-content: center;
-  min-height: 44px;
-  font-weight: 600;
 }
 
 .screening-outcome-badge {
@@ -2992,7 +2989,7 @@ img[loading="lazy"] { loading: lazy; }
 }
 
 .screening-results-score {
-  margin: 12px auto 0;
+  margin: 12px 0 0;
   max-width: 36rem;
   font-size: 0.95rem;
   font-weight: 600;
@@ -3001,10 +2998,10 @@ img[loading="lazy"] { loading: lazy; }
 }
 
 .screening-results-detail {
-  margin: 4px 0 0;
+  margin: 10px 0 0;
   max-width: 36rem;
   font-size: 0.9rem;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--text-secondary);
   text-align: left;
 }
@@ -3017,10 +3014,6 @@ img[loading="lazy"] { loading: lazy; }
 .screening-results-disclaimer {
   margin: 0;
   max-width: 36rem;
-  justify-self: center;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  text-align: center;
 }
 
 .screening-results-more {
@@ -3037,72 +3030,27 @@ img[loading="lazy"] { loading: lazy; }
   line-height: 1.6;
 }
 
-@media (min-width: 900px) {
-  .screening-results-layout {
-    max-width: 68rem;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    grid-template-areas:
-      "header visual"
-      "path visual"
-      "cta visual"
-      "disclaimer visual";
-    gap: 24px 40px;
-    align-items: start;
-  }
-
-  .screening-results-header { grid-area: header; text-align: left; }
-  .screening-results-path { grid-area: path; text-align: left; justify-self: stretch; }
-  .screening-results-path img { margin-left: 0; }
-  .screening-results-hero-cta { grid-area: cta; align-items: flex-start; justify-self: stretch; }
-  .screening-results-disclaimer { grid-area: disclaimer; text-align: left; justify-self: stretch; }
-  .screening-results-visual {
-    grid-area: visual;
-    /* Pin to top of column — do not stretch with tall left copy/CTA stack */
-    align-self: start;
-  }
-  .screening-results-visual picture {
-    display: block;
-    width: 100%;
-  }
-  .screening-results-visual img {
-    max-height: none;
-    height: auto;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    object-position: center 28%;
-  }
-  .screening-results-visual figcaption { text-align: left; }
-}
-
 @media (max-width: 899px) {
   .section.screening-results-hero {
-    padding-top: 108px !important;
-    padding-bottom: 24px;
+    padding-top: 108px;
+    padding-bottom: 28px;
   }
 
-  .screening-results-layout {
-    grid-template-areas:
-      "header"
-      "path"
-      "cta"
-      "visual"
-      "disclaimer";
-    gap: 14px;
+  .screening-results-layout.why-patients-grid {
+    gap: 20px;
   }
 
-  .screening-results-header { grid-area: header; }
-  .screening-results-path { grid-area: path; }
-  .screening-results-hero-cta { grid-area: cta; }
-  .screening-results-visual { grid-area: visual; }
-  .screening-results-disclaimer { grid-area: disclaimer; }
-
-  .screening-results-path-caption {
-    display: none;
+  .screening-results-hero .screening-results-header {
+    text-align: left;
   }
 
   .screening-results-detail {
     font-size: 0.86rem;
     line-height: 1.48;
+  }
+
+  .screening-results-path-caption {
+    font-size: 0.9rem;
   }
 }
 
