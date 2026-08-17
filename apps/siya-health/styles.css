@@ -3057,14 +3057,19 @@ img[loading="lazy"] { loading: lazy; }
   .screening-results-disclaimer { grid-area: disclaimer; text-align: left; justify-self: stretch; }
   .screening-results-visual {
     grid-area: visual;
-    align-self: stretch;
+    /* Pin to top of column — do not stretch with tall left copy/CTA stack */
+    align-self: start;
+  }
+  .screening-results-visual picture {
+    display: block;
+    width: 100%;
   }
   .screening-results-visual img {
     max-height: none;
-    height: 100%;
-    min-height: 320px;
-    aspect-ratio: auto;
+    height: auto;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
+    object-position: center 28%;
   }
   .screening-results-visual figcaption { text-align: left; }
 }
