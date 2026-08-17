@@ -2867,8 +2867,13 @@ img[loading="lazy"] { loading: lazy; }
 
 @media (min-width: 900px) {
   .screening-results-layout {
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
     gap: 2.5rem 3rem;
+  }
+
+  /* Match adhd-care trust band: photo left, outcome + CTAs right */
+  .screening-results-visual {
+    order: -1;
   }
 }
 
@@ -2935,9 +2940,10 @@ img[loading="lazy"] { loading: lazy; }
 
 .screening-results-visual img {
   height: auto;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 4 / 5;
+  max-height: 520px;
   object-fit: cover;
-  object-position: center 28%;
+  object-position: center 22%;
   border-radius: 16px;
 }
 
