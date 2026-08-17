@@ -3,3 +3,6 @@
 # Live Ads LP smoke evidence (regenerated)
 data/ads-landing-smoke/
 data/ads-landing-smoke-latest.json
+
+# Ephemeral visual QA screenshots (never ship)
+.tmp-visual-qa/

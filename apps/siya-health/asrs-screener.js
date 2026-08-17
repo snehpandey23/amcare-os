@@ -85,6 +85,26 @@
     if (stepEl) stepEl.classList.remove('asrs-step--needs-answer');
   }
 
+  /**
+   * Scroll only when the question text is under the sticky header or above
+   * the viewport. Never force a full-step jump on option select / advance.
+   */
+  function ensureActiveQuestionVisible() {
+    var active = container.querySelector('.asrs-step-active');
+    if (!active) return;
+    var anchor =
+      active.querySelector('.asrs-question') ||
+      active.querySelector('.asrs-progress') ||
+      active;
+    var header = document.querySelector('.site-header');
+    var headerBottom = header ? header.getBoundingClientRect().bottom : 0;
+    var top = anchor.getBoundingClientRect().top;
+    var pad = 12;
+    if (top >= headerBottom + pad) return;
+    var y = window.scrollY + top - headerBottom - pad;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  }
+
   function showNudge(stepIndex) {
     var stepEl = container.querySelector('.asrs-step[data-step="' + stepIndex + '"]');
     if (!stepEl) return;
@@ -117,9 +137,11 @@
 
     if (stepIndex >= 1 && stepIndex <= 6) {
       clearNudge(stepIndex);
+      /* Keep the question readable under the sticky header.
+         Never use scrollIntoView({block:'start'}) — that yanked the viewport
+         up and hid the question after option clicks / auto-advance. */
       try {
-        var active = container.querySelector('.asrs-step-active');
-        if (active) active.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        ensureActiveQuestionVisible();
       } catch (e) {}
     }
 
@@ -324,6 +346,7 @@
         if (currentStep < 1 || currentStep > 6) return;
         clearNudge(currentStep);
         var nextBtn = document.getElementById('asrs-next-' + currentStep);
+        /* Do not focus Next — that scrolls the question out of view on mobile/desktop. */
         if (nextBtn) nextBtn.classList.add('asrs-next--ready');
         scheduleAutoAdvance();
       });

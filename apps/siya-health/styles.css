@@ -2685,6 +2685,11 @@ img[loading="lazy"] { loading: lazy; }
 
 .asrs-step.asrs-step-active {
   display: block;
+  scroll-margin-top: 110px;
+}
+
+.asrs-step.asrs-step-active .asrs-question {
+  scroll-margin-top: 110px;
 }
 
 .asrs-step[hidden] { display: none !important; }

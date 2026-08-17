@@ -10,6 +10,7 @@
     "validate:deploy-clean": "node scripts/validate-deploy-clean-tree.mjs",
     "predeploy": "node scripts/validate-deploy-clean-tree.mjs",
     "smoke:ads-landing-live": "node scripts/smoke-ads-landing-live.mjs",
+    "smoke:asrs-screener-live": "node scripts/smoke-asrs-screener-live.mjs",
     "content:hierarchy:apply": "node scripts/generate-answer-pages.mjs && node scripts/apply-blog-internal-linking.mjs && node scripts/apply-content-hierarchy.mjs",
     "crawl:report": "node scripts/internal-link-audit.mjs && node scripts/generate-crawl-architecture-report.mjs",
     "blog:linking:apply": "node scripts/apply-blog-internal-linking.mjs",
