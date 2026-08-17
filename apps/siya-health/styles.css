@@ -2902,6 +2902,12 @@ img[loading="lazy"] { loading: lazy; }
   border-color: rgba(30, 58, 138, 0.2);
 }
 
+.screening-outcome-badge--borderline {
+  background: rgba(180, 83, 9, 0.1);
+  color: #92400e;
+  border-color: rgba(180, 83, 9, 0.28);
+}
+
 .screening-results-score {
   margin: 12px auto 0;
   max-width: 36rem;
