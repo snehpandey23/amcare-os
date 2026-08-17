@@ -4,19 +4,19 @@
  *
  * Tiers:
  *   score === 0     → negative
- *   1 <= score < 4  → borderline (DRAFT copy — clinical lead sign-off required)
+ *   1 <= score < 4  → borderline (published 2026-08-17 after clinical lead sign-off)
  *   score >= 4      → positive
  *
- * Borderline publish gate (do not flip without clinical sign-off):
- *   BORDERLINE_TIER_PUBLISHED = false → scores 1–3 keep legacy negative UX publicly
- *   ?borderline_draft=1 → preview draft borderline copy for review / verification
+ * Borderline publish gate:
+ *   BORDERLINE_TIER_PUBLISHED = true → scores 1–3 show borderline copy publicly
+ *   ?borderline_draft=1 remains a preview flag for QA
  */
 (function () {
   'use strict';
 
   var THRESHOLD = 4;
-  /** @type {boolean} Set true only after clinical lead sign-off on borderline copy. */
-  var BORDERLINE_TIER_PUBLISHED = false;
+  /** @type {boolean} Clinical lead signed off 2026-08-17. */
+  var BORDERLINE_TIER_PUBLISHED = true;
 
   var ASRS_DETAIL_HTML =
     'ASRS accuracy varies by study and population. In the WHO validation work that helped establish this 6-question screener, sensitivity was about 69% — meaning roughly <strong>1 in 3</strong> people with clinician-rated adult ADHD still screened negative (Kessler et al., 2005). Symptoms can also show up atypically or get masked by long-used coping strategies, and screens are less reliable when depression, anxiety, or other conditions are also in the mix. If this result does not match how daily life actually feels for you, a free Meet &amp; Greet is a low-pressure way to talk it through — not a diagnosis visit, and not a hard sell.';
@@ -70,7 +70,7 @@
     leadEl.textContent =
       'Your responses suggest ADHD symptoms may be worth exploring with a licensed provider. A positive screen is not a diagnosis — learn what evaluation involves, or book a free Meet & Greet if you want to talk it through first.';
   } else if (outcome === 'borderline') {
-    /* DRAFT COPY — NOT FINAL. Pending clinical lead review before BORDERLINE_TIER_PUBLISHED=true. */
+    /* Published borderline copy — clinical lead sign-off 2026-08-17. */
     if (badgeEl) {
       badgeEl.hidden = false;
       badgeEl.textContent = 'Some symptoms noted';

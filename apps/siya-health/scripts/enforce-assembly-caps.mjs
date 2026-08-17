@@ -76,8 +76,21 @@ function demoteExtraPrimaries(mainHtml) {
  * - Drop duplicate consecutive same-href anchors ("Name" + "View profile")
  * - Then drop lowest-priority trailing links (pricing/telehealth CTAs, lab panel dumps)
  */
+function isListingGridSection(attrs = '', inner = '') {
+  return (
+    /\b(blog-featured|blog-index|blog-hub-section)\b/i.test(attrs) ||
+    /\b(blog-grid|blog-featured-grid|cornerstone-articles-grid|provider-index-grid)\b/i.test(
+      inner,
+    )
+  );
+}
+
 function capSectionLinks(mainHtml, max = ASSEMBLY.maxLinksPerSection) {
   return mainHtml.replace(/<(section|aside)\b([^>]*)>([\s\S]*?)<\/\1>/gi, (full, tag, attrs, inner) => {
+    /* Card grids are meant to have many title+read-more links. The 8-link cap
+       was stripping <a> out of later cards and leaving empty <h2>/<h3>. */
+    if (isListingGridSection(attrs, inner)) return full;
+
     const linkCount = (inner.match(/<a\b/gi) || []).length;
     if (linkCount <= max) return full;
 
