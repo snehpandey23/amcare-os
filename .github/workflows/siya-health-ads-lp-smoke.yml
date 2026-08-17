@@ -38,9 +38,12 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install Playwright Chromium + WebKit
+      - name: Install Playwright package + browsers
         working-directory: apps/siya-health
-        run: npx --yes playwright install --with-deps chromium webkit
+        run: |
+          # Browsers alone are not enough — smoke-ads-landing-live.mjs imports the 'playwright' package.
+          npm install --no-save playwright@1.49.1
+          npx playwright install --with-deps chromium webkit
 
       - name: Wait for Vercel production (post-push)
         if: github.event_name == 'push'
