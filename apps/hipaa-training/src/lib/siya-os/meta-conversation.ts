@@ -4,6 +4,9 @@
  * Goal: human-to-bot small talk and product questions get short, honest answers
  * instead of Founder soft-stop ("no approved staff guide") or SOP dumps.
  *
+ * Assist is also **in-app support** for the staff portal chrome (Clear chat, Focus, Mic, nav).
+ * Product-map answers live here so “what features do you have” does not soft-stop.
+ *
  * When a new live failure is a *meta* miss (identity, capability, chrome, memory),
  * add a case here + a sample line in META_SMOKE_SAMPLES — do not wait for another
  * founder report cycle.
@@ -47,11 +50,43 @@ const BOSS = [
   "I never write your Founder Plan Record for you.",
 ].join("\n");
 
-const CAN_DO = [
-  "I can help with **approved** staff topics: policies, SOPs, pricing/brand tokens we publish, who owns an ops question, and (for admins) portal signals like Team pulse.",
+const PRODUCT_MAP = [
+  "I’m **in-app support** for this staff portal as well as the SOP help desk.",
   "",
-  "I **cannot**: invent policy, teach US civics/culture in chat, pick songs, write your Plan Record, or remember facts across chats unless you stated them **in this thread** (and role claims stay unconfirmed).",
-  "Culture / typing / map drills → **Learn → Practice**.",
+  "**Chat (this screen)**",
+  "• **New chat** (left) — start another thread.",
+  "• **Clear chat** (top of the thread, after you’ve sent something) — empty *this* conversation and start fresh. It does **not** remove other chats from the sidebar.",
+  "• **Archive** (on a sidebar chat) — remove that chat from your list (day-to-day “delete”).",
+  "• **Search chats…** — find an older thread by title/text.",
+  "• **Mic** then **Send** — dictate into the box; each Mic session is a fresh take.",
+  "• 👍 / 👎 — “was this reply helpful?” for review. Does not teach me policy.",
+  "• **Notify owner** — only when a **staff guide is missing**. Not email, not a transcript dump.",
+  "• **Copy escalation summary** — when it appears: copy a handoff you paste yourself.",
+  "",
+  "**Top nav**",
+  "• **My day** — this home: Assist chat + today’s checklist (staff).",
+  "• **Learn** — HIPAA training + **Practice** drills (typing, English, culture, map, timezones).",
+  "• **Memory** — published internal knowledge (as your role allows).",
+  "• **Team** — teammates / presence.",
+  "• **Account** / **Sign out** — your profile and logout.",
+  "",
+  "**Shift (staff, not admin)**",
+  "• **Focus** — quieter My day (priorities + Ask; learning nudges pause). **Back to working** leaves Focus.",
+  "• **Break** / **End shift** — presence and end-of-day wrap (you confirm; I don’t clock you out from chat).",
+  "",
+  "**Admin / founder**",
+  "• **Talk** (Founder Talk) answers from guides + portal signals. I **never** write **This week’s plan** (Focus / Can Wait / Delegate / Observe) — you edit that yourself.",
+  "",
+  "Ask “how do I use Clear chat / Focus / Learn / Mic” anytime — I’ll point to the control, not invent a missing SOP.",
+].join("\n");
+
+const CAN_DO = [
+  "Two jobs: **(1)** staff help desk from **approved guides**, and **(2)** support for **this app’s buttons and screens**.",
+  "",
+  "**Work questions:** policies, SOPs, who to contact (reimbursement, leave, billing path, refills). Admins can also ask portal signals (e.g. Team pulse).",
+  "**App how-to:** Clear chat, New chat, Archive, Mic, Focus, Learn/Practice, Notify owner, thumbs — I should explain those without pretending they’re missing SOPs.",
+  "",
+  "I **cannot**: invent policy, immigration/visa advice, US career paths, civics, or write your Founder Plan Record. Role claims in chat stay **unconfirmed**.",
 ].join("\n");
 
 const LEARN_TRAIN = [
@@ -129,6 +164,7 @@ const ORIENTATION = [
   "",
   "Dictation and imperfect English are fine — if something is **unclear**, ask me to clarify and I’ll ask back.",
   "I answer from **approved guides**. I don’t invent immigration advice or email your supervisor for you.",
+  "Ask about **any button on screen** (Clear chat, Focus, Mic, Archive) — I support this app, not only SOPs.",
 ].join("\n");
 
 const LEARN_EXPLAIN = [
@@ -149,10 +185,32 @@ const LOOP_IN = [
 ].join("\n");
 
 const DELETE_CHATS = [
-  "In the left sidebar, tap **Archive** on a chat — that removes it from your list (same idea as delete for day-to-day use).",
+  "**Clear chat** is at the **top of this thread** (next to “Assist”) once you’ve sent at least one message. It empties *this* conversation and starts fresh. It does **not** delete other chats in the sidebar.",
   "",
-  "**Clear chat** (top of the thread) starts a fresh conversation without removing older chats from the sidebar.",
-  "**New chat** creates another thread. I can’t wipe chats for you from inside the message box.",
+  "**New chat** (left sidebar) opens another thread and keeps this one in the list.",
+  "**Archive** (on a sidebar row) removes that chat from your list — that’s the day-to-day “delete.”",
+  "I can’t press those buttons for you from inside the message box.",
+].join("\n");
+
+const CLEAR_CHAT = [
+  "**Clear chat** sits at the **top of this conversation** (right side, next to “Assist”) after you’ve sent a message.",
+  "",
+  "It starts this thread over. Other chats stay in the left list until you **Archive** them.",
+  "**New chat** is a *new* thread; **Clear chat** wipes the *current* one.",
+].join("\n");
+
+const FOCUS_HELP = [
+  "**Focus** is a **shift presence** button in the top bar (staff) — 🎯 Focus.",
+  "",
+  "It means “I’m concentrating”: My day stays on priorities + this chat; learning nudges pause. It does **not** change company policy or lock the app.",
+  "Tap **Back to working** when you’re done. I can’t turn Focus on/off from chat.",
+].join("\n");
+
+const NAV_HELP = [
+  "Top nav: **My day** (this home + Assist), **Learn** (HIPAA + Practice drills), **Memory** (published knowledge), **Team** (people / presence).",
+  "",
+  "Staff also have **Account**, **Sign out**, **Light/Dark**, and shift controls (**Focus**, **Break**, **End shift**).",
+  "Admins see **Admin** instead of shift Focus, and **Talk** for founder questions — Talk never writes This week’s plan.",
 ].join("\n");
 
 const MIC_HELP = [
@@ -227,6 +285,20 @@ const CASES: MetaCase[] = [
       /\bwhat\s+are\s+(you|u)\s+(good|able)\s+at\b/.test(t) ||
       /\bcapabilities\b/.test(t),
     answer: CAN_DO,
+  },
+  {
+    id: "product-features",
+    category: "chrome",
+    test: (t) =>
+      (/\b(all\s+the\s+)?features?\b/.test(t) &&
+        /\b(what|which|list|know|have|app|tool|portal|you)\b/.test(t)) ||
+      /\bwhat\s+(buttons?|controls?|screens?)\b/.test(t) ||
+      /\bhow\s+(do\s+i\s+)?use\s+(this\s+)?(app|tool|portal|assist)\b/.test(t) ||
+      /\b(app|portal)\s+support\b/.test(t) ||
+      /\btest\s+(your|the)\s+(knowledge|features)\b/.test(t) ||
+      /\bwhat\s+can\s+(i|we)\s+do\s+(in|with)\s+(this\s+)?(app|tool|portal)\b/.test(t) ||
+      /\btell\s+me\s+(about\s+)?(the\s+)?(buttons?|features?|screens?)\b/.test(t),
+    answer: PRODUCT_MAP,
   },
   {
     id: "where-guides",
@@ -341,20 +413,59 @@ const CASES: MetaCase[] = [
     id: "delete-chats",
     category: "chrome",
     test: (t) =>
-      /\b(delete|remove|archive|clear)\s+(old\s+)?(chats?|conversations?|threads?)\b/.test(t) ||
-      /\bhow\s+(do\s+i\s+)?(delete|remove|archive|clear)\s+(a\s+|my\s+|old\s+)?(chats?|conversations?)\b/.test(
-        t,
-      ) ||
+      /\b(delete|remove|archive)\s+(old\s+)?(chats?|conversations?|threads?)\b/.test(t) ||
+      /\bhow\s+(do\s+i\s+)?(delete|remove|archive)\s+(a\s+|my\s+|old\s+)?(chats?|conversations?)\b/.test(t) ||
       /\bwhere\s+(do\s+i\s+)?(delete|archive)\s+(chats?|conversations?)\b/.test(t),
     answer: DELETE_CHATS,
   },
   {
-    id: "new-clear-chat",
+    id: "clear-chat",
     category: "chrome",
     test: (t) =>
-      /\b(what\s+does|how\s+do\s+i\s+use)\s+(new\s+chat|clear\s+chat)\b/.test(t) ||
-      /\b(new\s+chat|clear\s+chat)\s+(button|do|mean)\b/.test(t),
+      /\bclear\s+chat\b/.test(t) ||
+      /\bhow\s+(do\s+i\s+)?(clear|reset|wipe)\s+(this\s+)?(chat|conversation|thread)\b/.test(t) ||
+      /\b(what\s+does|where\s+is)\s+(the\s+)?clear\s+chat\b/.test(t),
+    answer: CLEAR_CHAT,
+  },
+  {
+    id: "new-chat",
+    category: "chrome",
+    test: (t) =>
+      /\bnew\s+chat\b/.test(t) &&
+      /\b(what|where|how|button|do|mean|use|start)\b/.test(t),
     answer: DELETE_CHATS,
+  },
+  {
+    id: "focus-help",
+    category: "chrome",
+    test: (t) =>
+      (/\bfocus\s+(mode|button)\b/.test(t) ||
+        /\bwhat\s+(is|does)\s+focus\b/.test(t) ||
+        /\bhow\s+(do\s+i\s+)?(use|turn\s+on|start)\s+focus\b/.test(t) ||
+        /\b🎯\s*focus\b/.test(t) ||
+        /\bback\s+to\s+working\b/.test(t)) &&
+      !/\bfounder\s+focus\b/.test(t) &&
+      !/\bplan\s+record\b/.test(t),
+    answer: FOCUS_HELP,
+  },
+  {
+    id: "nav-help",
+    category: "chrome",
+    test: (t) =>
+      (/\b(top\s+nav|navigation|menu)\b/.test(t) && /\b(what|where|how|mean)\b/.test(t)) ||
+      (/\bwhat\s+(is|are)\s+(my\s+day|memory|team)\b/.test(t) && !/\bpractice\s+drills?\b/.test(t)) ||
+      /\bhow\s+do\s+i\s+(open|get\s+to|find)\s+(learn|memory|team|my\s+day|account)\b/.test(t),
+    answer: NAV_HELP,
+  },
+  {
+    id: "end-shift",
+    category: "chrome",
+    test: (t) =>
+      /\b(how\s+(do\s+i\s+)?(end|finish)\s+(my\s+)?shift|what\s+does\s+end\s+shift\b|end\s+shift\s+button)\b/.test(
+        t,
+      ),
+    answer:
+      "**End shift** is in the top bar (staff). You confirm a wrap-up; I don’t clock you out from chat. After that you may see a short handoff prompt. **Break** is presence only — not ending the day.",
   },
   {
     id: "mic-help",
@@ -435,7 +546,25 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
     mustMatch: /Archive|Clear chat|New chat/i,
     mustNot: /right staff guide for that yet/i,
   },
-  { id: "what-can-you-do", text: "what can you do", mustMatch: /approved|Learn → Practice|cannot/i, mustNot: /approved staff guide for that/i },
+  {
+    id: "clear-chat",
+    text: "what does the clear chat button do",
+    mustMatch: /top of this (thread|conversation)|Clear chat/i,
+    mustNot: /right staff guide for that yet/i,
+  },
+  {
+    id: "product-features",
+    text: "what features does this app have",
+    mustMatch: /Clear chat|Archive|Focus|Learn/i,
+    mustNot: /right staff guide for that yet/i,
+  },
+  {
+    id: "focus-help",
+    text: "what is focus button",
+    mustMatch: /shift presence|Back to working/i,
+    mustNot: /right staff guide for that yet/i,
+  },
+  { id: "what-can-you-do", text: "what can you do", mustMatch: /help desk|this app|approved/i, mustNot: /approved staff guide for that/i },
   { id: "train-learn-permanent", text: "i want to train you regarding american culture", mustMatch: /Practice|culture|can.?t permanently/i, mustNot: /approved staff guide for that/i },
   { id: "remember-other-chats", text: "do you remember previous chats", mustMatch: /this chat thread|don.?t reliably recall other/i, mustNot: /approved staff guide/i },
   { id: "are-you-chatgpt", text: "are you chatgpt", mustMatch: /Siya Assist|not ChatGPT/i, mustNot: /approved staff guide/i },
