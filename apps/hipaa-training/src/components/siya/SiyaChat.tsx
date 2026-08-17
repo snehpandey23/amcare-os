@@ -570,7 +570,7 @@ export function SiyaChat({
                 ) : null}
                 {msg.role === "assistant" && msg.id !== "open" && !msg.feedbackSent ? (
                   <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-[var(--siya-border)] pt-2">
-                    <span className="text-[10px] text-[var(--siya-text-muted)]">Helpful?</span>
+                    <span className="text-[10px] text-[var(--siya-text-muted)]">Helpful? (yes/no log only)</span>
                     <button
                       type="button"
                       className="rounded-md border border-[var(--siya-border)] px-2 py-0.5 text-xs hover:bg-[var(--siya-bg-subtle)]"
@@ -588,7 +588,9 @@ export function SiyaChat({
                   </div>
                 ) : null}
                 {msg.feedbackSent ? (
-                  <p className="mt-2 text-[10px] text-[var(--siya-text-muted)]">Thanks — logged for review (no PHI).</p>
+                  <p className="mt-2 text-[10px] text-[var(--siya-text-muted)]">
+                    Thanks — logged (yes/no only, no transcript). Does not email anyone or change policy.
+                  </p>
                 ) : null}
                 {isPortalMemoryEnabled() && msg.memoryOffer && !msg.memorySaved ? (
                   <SaveToMemoryPrompt

@@ -123,17 +123,18 @@ const NOTIFY = [
 ].join("\n");
 
 const THUMBS = [
-  "👍 / 👎 only records whether **that Assist reply** was helpful.",
+  "👍 / 👎 records a **private yes/no** on **that Assist reply** — not the whole chat, not the patient.",
   "",
-  "👎 does **not** change policy, teach me new facts, email anyone, or open a memory form.",
-  "It logs a private quality flag (helpful vs not) for periodic review. It is **not** the same as **Chat Review** (that’s a separate admin/clinical-lead log of *patient* chats).",
+  "**What gets saved:** helpful true/false, optional department, and (for 👎) a generic reason like “poor explanation.” **No** question text, **no** names, **no** email to anyone.",
+  "**What you will see:** the buttons disappear and the line **“Thanks — logged (yes/no only, no transcript).”** That’s the only confirmation. There is no inbox, no ticket, and no Chat Review row.",
+  "**What it does *not* do:** change policy, teach me, page a lead, or open Memory.",
 ].join("\n");
 
 const THUMBS_WHO = [
-  "👍 / 👎 on Assist is a **product quality flag** on that bot reply — not a patient-chat audit.",
+  "Nobody gets an email when you tap 👍 or 👎.",
   "",
-  "It is logged for internal review (engineering / ops looking at whether Assist was useful). It does **not** page a clinical lead, change an SOP, or replace **Chat Review**.",
-  "**Chat Review** (`/chat-review`) is a separate QC log of *patient* conversations — **admin and Clinical Operations lead only**. Regular staff self-report volume at **End shift** handoff, not via thumbs.",
+  "The click is stored as an anonymous **helpful / not helpful** count for Assist quality (engineering/ops can tally 👎 over a week). You only see **“Thanks — logged…”** under that reply.",
+  "That is **not** **Chat Review** (`/chat-review`) — Chat Review is a separate admin/clinical-lead log of *patient* chats. Staff volume still goes on **End shift** handoff.",
 ].join("\n");
 
 const PLAN_RECORD = [
@@ -611,11 +612,11 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
   { id: "remember-other-chats", text: "do you remember previous chats", mustMatch: /this chat thread|don.?t reliably recall other/i, mustNot: /approved staff guide/i },
   { id: "are-you-chatgpt", text: "are you chatgpt", mustMatch: /Siya Assist|not ChatGPT/i, mustNot: /approved staff guide/i },
   { id: "notify-owner", text: "what does notify owner button do", mustMatch: /knowledge-gap/i, mustNot: /approved staff guide for that/i },
-  { id: "thumbs", text: "what does the thumbs up button do", mustMatch: /helpful|quality flag|does \*\*not\*\* change policy/i, mustNot: /approved staff guide/i },
+  { id: "thumbs", text: "what does the thumbs up button do", mustMatch: /yes\/no|no transcript|Does not email/i, mustNot: /approved staff guide/i },
   {
     id: "thumbs-who",
     text: "who does quality review n how is it done",
-    mustMatch: /product quality flag|Chat Review|End shift/i,
+    mustMatch: /Nobody gets an email|Chat Review|yes\/no|End shift/i,
     mustNot: /right staff guide for that yet|Quality Review Access/i,
   },
   {

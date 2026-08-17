@@ -72,7 +72,7 @@ function main() {
   assert.ok(/Archive|Clear chat/i.test(split.message), split.message.slice(0, 200));
 
   const qa = runSiyaAssistant("who does quality review n how is it done");
-  assert.ok(/Chat Review|product quality flag/i.test(qa.message));
+  assert.ok(/Nobody gets an email|Chat Review/i.test(qa.message));
   assert.ok(!/Quality Review Access/i.test(qa.message));
 
   console.log("smoke-meta-conversation: OK");
