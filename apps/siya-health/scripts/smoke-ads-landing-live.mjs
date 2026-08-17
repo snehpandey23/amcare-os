@@ -247,7 +247,6 @@ async function playwrightChecks(pagePath, kind, browserName = 'chromium') {
     OUT_DIR,
     `${RUN_ID}${pagePath.replace(/\//g, '_')}-${browserName}-hero.png`,
   );
-  await page.screenshot({ path: shotPath, fullPage: false });
 
   const metrics = await page.evaluate(() => {
     const body = document.body;
@@ -428,6 +427,22 @@ async function playwrightChecks(pagePath, kind, browserName = 'chromium') {
     };
   }, TEST_QS);
 
+  /* Evidence only — never fail the gate on font/screenshot hangs (CI flake). */
+  let screenshotSaved = null;
+  try {
+    await page.screenshot({
+      path: shotPath,
+      fullPage: false,
+      timeout: 8000,
+      animations: 'disabled',
+    });
+    screenshotSaved = shotPath;
+  } catch (err) {
+    console.warn(
+      `screenshot skipped ${browserName} ${pagePath}: ${err?.message || err}`,
+    );
+  }
+
   await browser.close();
 
   const leanOk = metrics.isLanding && !metrics.hasNavCenter && !metrics.hasSiteHeader;
@@ -440,7 +455,7 @@ async function playwrightChecks(pagePath, kind, browserName = 'chromium') {
 
   return {
     browser: browserName,
-    screenshot: shotPath,
+    screenshot: screenshotSaved,
     leanOk,
     heroOk,
     gclidOk: Boolean(gclidCheck.ok),
