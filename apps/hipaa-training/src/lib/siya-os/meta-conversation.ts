@@ -148,6 +148,20 @@ const LOOP_IN = [
   "For day-to-day help, message your **manager / supervisor** on your normal work channel.",
 ].join("\n");
 
+const DELETE_CHATS = [
+  "In the left sidebar, tap **Archive** on a chat — that removes it from your list (same idea as delete for day-to-day use).",
+  "",
+  "**Clear chat** (top of the thread) starts a fresh conversation without removing older chats from the sidebar.",
+  "**New chat** creates another thread. I can’t wipe chats for you from inside the message box.",
+].join("\n");
+
+const MIC_HELP = [
+  "**Mic** turns speech into text in the box. Tap Mic again to stop, then tap **Send**.",
+  "",
+  "Each Mic session starts a **fresh** take (it won’t glue onto old leftover text).",
+  "Dictation typos are OK — if something is unclear, ask me to clarify.",
+].join("\n");
+
 const CASES: MetaCase[] = [
   // --- identity ---
   {
@@ -323,6 +337,33 @@ const CASES: MetaCase[] = [
       /\b(what|do|does|button|mean|for|why|up|down|helpful)\b/.test(t),
     answer: THUMBS,
   },
+  {
+    id: "delete-chats",
+    category: "chrome",
+    test: (t) =>
+      /\b(delete|remove|archive|clear)\s+(old\s+)?(chats?|conversations?|threads?)\b/.test(t) ||
+      /\bhow\s+(do\s+i\s+)?(delete|remove|archive|clear)\s+(a\s+|my\s+|old\s+)?(chats?|conversations?)\b/.test(
+        t,
+      ) ||
+      /\bwhere\s+(do\s+i\s+)?(delete|archive)\s+(chats?|conversations?)\b/.test(t),
+    answer: DELETE_CHATS,
+  },
+  {
+    id: "new-clear-chat",
+    category: "chrome",
+    test: (t) =>
+      /\b(what\s+does|how\s+do\s+i\s+use)\s+(new\s+chat|clear\s+chat)\b/.test(t) ||
+      /\b(new\s+chat|clear\s+chat)\s+(button|do|mean)\b/.test(t),
+    answer: DELETE_CHATS,
+  },
+  {
+    id: "mic-help",
+    category: "chrome",
+    test: (t) =>
+      /\b(how\s+(do\s+i\s+)?(use\s+)?(the\s+)?mic|microphone|dictat|voice\s+input)\b/.test(t) &&
+      /\b(how|what|use|work|button|option)\b/.test(t),
+    answer: MIC_HELP,
+  },
 
   // Courtesy — frustration about Assist (needs no prior assistant turn)
   {
@@ -387,6 +428,12 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
     text: "how to loop them in",
     mustMatch: /don.?t email|Copy escalation|Notify owner|manager/i,
     mustNot: /right staff guide for that yet|HIPAA certification course/i,
+  },
+  {
+    id: "delete-chats",
+    text: "how to delete old chats",
+    mustMatch: /Archive|Clear chat|New chat/i,
+    mustNot: /right staff guide for that yet/i,
   },
   { id: "what-can-you-do", text: "what can you do", mustMatch: /approved|Learn → Practice|cannot/i, mustNot: /approved staff guide for that/i },
   { id: "train-learn-permanent", text: "i want to train you regarding american culture", mustMatch: /Practice|culture|can.?t permanently/i, mustNot: /approved staff guide for that/i },

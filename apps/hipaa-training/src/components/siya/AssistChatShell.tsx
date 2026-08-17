@@ -180,12 +180,13 @@ export function AssistChatShell({
                     </button>
                     <button
                       type="button"
-                      className={`${portalBtnGhostSm} absolute right-1 top-1 hidden !px-1.5 !py-0.5 text-[10px] group-hover:inline-flex`}
+                      className={`${portalBtnGhostSm} absolute right-1 top-1 !px-1.5 !py-0.5 text-[10px] opacity-70 hover:opacity-100 group-hover:opacity-100`}
                       onClick={(e) => {
                         e.stopPropagation();
                         void onArchive(t.id);
                       }}
-                      aria-label="Archive chat"
+                      aria-label="Archive chat (remove from list)"
+                      title="Archive — remove from your chat list"
                     >
                       Archive
                     </button>
