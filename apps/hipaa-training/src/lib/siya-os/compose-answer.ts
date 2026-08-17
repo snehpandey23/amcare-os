@@ -39,9 +39,21 @@ export function isConfusedAboutPriorAnswer(text: string): boolean {
   const t = text.trim();
   if (!t) return false;
   if (CONFUSED_FOLLOW_UP.test(t) && t.length < 100) return true;
-  return /^(what (the heck|are you saying|r u saying|does that mean)|i don'?t understand|that'?s not (what i|helpful)|stop)\b/i.test(
-    t,
-  );
+  if (
+    /^(what (the heck|are you saying|r u saying|does that mean)|i don'?t understand|that'?s not (what i|helpful)|stop)\b/i.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  // Frustration about Assist itself (not a SOP lookup)
+  if (t.length < 120) {
+    if (/\bthis\s+(isn'?t|is\s+not|aint)\s+working\b/i.test(t)) return true;
+    if (/\b(you|u)\s+(are|r|ain'?t)\s+not\s+(helping|assisting)\b/i.test(t)) return true;
+    if (/\b(you|u)\s+(are|r)\s+not\s+(helping|assisting)\b/i.test(t)) return true;
+    if (/\bnot\s+assisting\s+me\b/i.test(t) && !/\bmy\s+name\s+is\b/i.test(t)) return true;
+  }
+  return false;
 }
 
 export function clarifyVagueMessage(): string {
@@ -93,6 +105,22 @@ export function isCasualOffTopic(text: string): boolean {
   if (/\bpresident of (the )?(usa|u\.?s\.?a\.?|united states|india)\b/i.test(t)) return true;
   if (/\bwho (is|was) the president\b/.test(t)) return true;
   if (/\bcurrent events\b/.test(t)) return true;
+  // Immigration / visas / personal US employment paths — not staff SOP help desk
+  if (/\b(h-?1b|h1[- ]?b)\b/.test(t)) return true;
+  if (/\b(visa|visas|immigration|green\s+card)\b/.test(t)) return true;
+  if (/\btrump\b/.test(t) && /\b(ban|visa|h-?1b|immigrat)\b/.test(t)) return true;
+  if (/\bemployed\s+by\s+(the\s+)?(us|u\.?s\.?a\.?|united\s+states|american)\s+compan/.test(t)) {
+    return true;
+  }
+  if (
+    /\bmedical\s+assistant\b/.test(t) ||
+    (/\bma\b/.test(t) &&
+      /\b(usa|u\.?s\.?a\.?|united\s+states|in[- ]person|not\s+just\s+virtual|actual)\b/.test(t))
+  ) {
+    if (/\b(usa|u\.?s\.?a\.?|united\s+states|in[- ]person|not\s+just\s+virtual|actual|virtual)\b/.test(t)) {
+      return true;
+    }
+  }
   // Bare culture curriculum claims without a practice intent word still refuse inventing in Ask
   if (
     /\b(american|us|u\.?s\.?)\s+culture\b/.test(t) &&
@@ -106,9 +134,9 @@ export function isCasualOffTopic(text: string): boolean {
 
 export function casualOffTopicReply(): string {
   return [
-    "That’s outside what I can help with here — I don’t cover entertainment, civics trivia, or general culture curriculum.",
+    "That’s outside what I can help with here — I don’t cover news, immigration/visas, entertainment, civics trivia, or personal US career paths.",
     "",
-    "Ask me about policies, SOPs, pricing, brand tokens, domain signals, or who owns an ops question.",
+    "Ask me about **Siya Health** policies, SOPs, pricing, brand tokens, or who owns an ops question.",
   ].join("\n");
 }
 

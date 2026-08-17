@@ -382,6 +382,43 @@ function buildSiyaReply(
     };
   }
 
+  // Tier 3 / Tier 1 before meta — so "my name is X" / "i am clinical lead" aren't swallowed by chrome replies.
+  {
+    const roleText = expandRoleClaimWithHistory(text, history);
+    if (isRoleAuthorityAssertion(roleText) && !isCompanyPolicyAssertion(roleText)) {
+      return {
+        message: polishStaffMessage(acknowledgeRoleAuthorityClaim(roleText)),
+        chunks: [],
+        knowledgeGap: false,
+        sources: [],
+        escalationPreview: undefined,
+        ruleFinal: true,
+        routing: {
+          department: "General",
+          task: "Role/authority claim (unconfirmed)",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+  }
+  if (isPersonalPreferenceStatement(text) && !isCompanyPolicyAssertion(text)) {
+    return {
+      message: polishStaffMessage(acknowledgePersonalPreference(text)),
+      chunks: [],
+      knowledgeGap: false,
+      sources: [],
+      escalationPreview: undefined,
+      ruleFinal: true,
+      routing: {
+        department: "General",
+        task: "Personal preference (this chat)",
+        confidence: "high",
+        followUpQuestions: [],
+      },
+    };
+  }
+
   const metaAnswer = answerStaffMetaQuestion(text);
   if (metaAnswer) {
     return {
@@ -436,46 +473,7 @@ function buildSiyaReply(
     };
   }
 
-  // Tier 3 — role/authority claims: acknowledge unconfirmed; never retrieval/LLM as fact.
-  // Fixes "clinical lead is priya remember it" → Chat Review / PHI SOP dump.
-  {
-    const roleText = expandRoleClaimWithHistory(text, history);
-    if (isRoleAuthorityAssertion(roleText) && !isCompanyPolicyAssertion(roleText)) {
-      return {
-        message: polishStaffMessage(acknowledgeRoleAuthorityClaim(roleText)),
-        chunks: [],
-        knowledgeGap: false,
-        sources: [],
-        escalationPreview: undefined,
-        ruleFinal: true,
-        routing: {
-          department: "General",
-          task: "Role/authority claim (unconfirmed)",
-          confidence: "high",
-          followUpQuestions: [],
-        },
-      };
-    }
-  }
-
-  // Tier 1 — personal preference / fact for THIS chat — do not let refund SOP keywords hijack.
-  // Tier 2 — company-policy assertions in first person still fall through to retrieval (locked).
-  if (isPersonalPreferenceStatement(text) && !isCompanyPolicyAssertion(text)) {
-    return {
-      message: polishStaffMessage(acknowledgePersonalPreference(text)),
-      chunks: [],
-      knowledgeGap: false,
-      sources: [],
-      escalationPreview: undefined,
-      ruleFinal: true,
-      routing: {
-        department: "General",
-        task: "Personal preference (this chat)",
-        confidence: "high",
-        followUpQuestions: [],
-      },
-    };
-  }
+  // (role / preference already handled above)
 
   const personalFacts = extractPersonalFactsFromHistory(history);
   if (personalFacts.length) {

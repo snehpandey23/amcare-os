@@ -97,6 +97,26 @@ const PLAN_RECORD = [
   "Edit those yourself on **This week’s plan**. Talk is answers-only.",
 ].join("\n");
 
+const COMPANY_BOSS = [
+  "I don’t publish a live **org chart** in chat, and I won’t invent who “the boss” is.",
+  "",
+  "Siya Health is **physician-led**. For day-to-day work, ask **who owns this task** (billing, clinical, HR, IT) and I’ll use approved escalation paths.",
+  "If you meant **my** (Siya Assist) boss → I don’t have one; use **Notify owner** when a staff guide is missing.",
+].join("\n");
+
+const WHERE_GUIDES = [
+  "Approved staff guides are what I pull in **Ask** from published internal topics.",
+  "",
+  "Browse / manage knowledge in **Memory** (top nav). Drills (culture, typing) are under **Learn → Practice**.",
+  "If something’s missing, say the task in one sentence — or use **Notify owner** when that button appears.",
+].join("\n");
+
+const MY_JOB = [
+  "I don’t have your personal HR job description in this chat.",
+  "",
+  "Ask about a **specific Siya workflow** (refill, reimbursement, leave, billing contact) — or check role duties with your **manager / HR**.",
+].join("\n");
+
 const CASES: MetaCase[] = [
   // --- identity ---
   {
@@ -142,6 +162,15 @@ const CASES: MetaCase[] = [
       /\bwho\s+owns\s+you\b/.test(t),
     answer: BOSS,
   },
+  {
+    id: "company-boss",
+    category: "authority",
+    test: (t) =>
+      /^(who'?s|who\s+is)\s+the\s+boss\??\s*$/.test(t) ||
+      /^(who'?s|who\s+is)\s+boss\??\s*$/.test(t) ||
+      /\bwho\s+is\s+in\s+charge\s+(here|at\s+siya)\b/.test(t),
+    answer: COMPANY_BOSS,
+  },
 
   // --- capability ---
   {
@@ -153,6 +182,23 @@ const CASES: MetaCase[] = [
       /\bwhat\s+are\s+(you|u)\s+(good|able)\s+at\b/.test(t) ||
       /\bcapabilities\b/.test(t),
     answer: CAN_DO,
+  },
+  {
+    id: "where-guides",
+    category: "chrome",
+    test: (t) =>
+      /\bwhere\s+(are|is)\s+(the\s+)?(right\s+)?(guides?|sops?|policies|policy)\b/.test(t) ||
+      /\bwhere\s+(do\s+i|can\s+i)\s+find\s+(the\s+)?(guides?|sops?|policies)\b/.test(t) ||
+      /\bwhere\s+are\s+the\s+right\s+guide\b/.test(t),
+    answer: WHERE_GUIDES,
+  },
+  {
+    id: "my-job",
+    category: "capability",
+    test: (t) =>
+      /\bwhat('?s| is)\s+my\s+(typical\s+)?(job|role|title)\b/.test(t) ||
+      /\bwhat\s+do\s+i\s+(usually\s+)?do\s+here\b/.test(t),
+    answer: MY_JOB,
   },
   {
     id: "train-learn-permanent",
@@ -217,7 +263,22 @@ const CASES: MetaCase[] = [
     answer: THUMBS,
   },
 
-  // --- courtesy ---
+  // Courtesy — frustration about Assist (needs no prior assistant turn)
+  {
+    id: "frustration",
+    category: "courtesy",
+    test: (t) =>
+      t.length < 100 &&
+      !/\bmy\s+name\s+is\b/.test(t) &&
+      (/\bthis\s+(isn'?t|is\s+not|aint)\s+working\b/.test(t) ||
+        /\b(you|u)\s+(are|r)\s+not\s+(helping|assisting)\b/.test(t)),
+    answer: [
+      "Sorry — that last stretch wasn’t useful.",
+      "",
+      "Tell me what you need in plain terms (e.g. “how do I submit a reimbursement?” or “who do I contact for billing?”).",
+      "I’ll use approved guides or say clearly when something is outside staff help-desk scope.",
+    ].join("\n"),
+  },
   {
     id: "greeting",
     category: "courtesy",
@@ -245,6 +306,9 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
   { id: "who-what-name", text: "who are you", mustMatch: /Siya Assist/i, mustNot: /approved staff guide for that/i },
   { id: "boss-escalate", text: "who is your boss", mustMatch: /don.?t have a personal boss|Notify owner/i, mustNot: /approved staff guide/i },
   { id: "boss-escalate", text: "can you escalate to your boss", mustMatch: /Notify owner|Siya Assist/i, mustNot: /HIPAA certification course/i },
+  { id: "company-boss", text: "whos the boss", mustMatch: /org chart|physician-led|who owns/i, mustNot: /right staff guide for that yet/i },
+  { id: "where-guides", text: "where are the right guide", mustMatch: /Memory|Ask|Practice/i, mustNot: /right staff guide for that yet/i },
+  { id: "my-job", text: "whats my typical job", mustMatch: /job description|manager|workflow/i, mustNot: /right staff guide for that yet/i },
   { id: "what-can-you-do", text: "what can you do", mustMatch: /approved|Learn → Practice|cannot/i, mustNot: /approved staff guide for that/i },
   { id: "train-learn-permanent", text: "i want to train you regarding american culture", mustMatch: /Practice|culture|can.?t permanently/i, mustNot: /approved staff guide for that/i },
   { id: "remember-other-chats", text: "do you remember previous chats", mustMatch: /this chat thread|don.?t reliably recall other/i, mustNot: /approved staff guide/i },
@@ -254,6 +318,7 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
   { id: "write-plan-record", text: "can you write my plan record", mustMatch: /never.*Plan|This week/i, mustNot: /approved staff guide for that/i },
   { id: "feelings", text: "do you feel sad", mustMatch: /don.?t have feelings/i, mustNot: /approved staff guide/i },
   { id: "greeting", text: "how r u", mustMatch: /Hi —/i, mustNot: /approved staff guide/i },
+  { id: "frustration", text: "this isnt working good", mustMatch: /Sorry|plain terms|reimbursement/i, mustNot: /right staff guide for that yet/i },
   { id: "thanks", text: "thanks", mustMatch: /welcome/i, mustNot: /approved staff guide/i },
 ];
 

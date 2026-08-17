@@ -151,6 +151,15 @@ export function isRoleAuthorityAssertion(text: string): boolean {
     return true;
   }
 
+  // Self-claim: "i am clinical lead" / "i'm the billing manager"
+  if (
+    new RegExp(
+      `\\bi(?:'m|\\s+am)\\s+(?:(?:the|our|now)\\s+)*(?:new\\s+)?(?:${ROLE_NOUN}|${ROLE_SHORTHAND})\\b`,
+    ).test(t)
+  ) {
+    return true;
+  }
+
   if (
     /\b(?!who|what|which)[a-z][a-z'-]{1,40}\s+is\s+(?:now\s+)?in\s+charge(?:\s+of\b)?/.test(t)
   ) {
@@ -204,6 +213,7 @@ export function isPersonalPreferenceStatement(text: string): boolean {
   if (
     /\bmy\s+preferred\b/.test(lower) ||
     /\bi\s+prefer\b/.test(lower) ||
+    /\bmy\s+name\s+is\b/.test(lower) ||
     /\bpreferred\s+(escalation\s+)?contact\b/.test(lower) ||
     /\b(remember|note)\s+(that\s+)?(i|my)\b/.test(lower) ||
     /\bfor\s+me[,\s]+(use|escalate|contact|go\s+to)\b/.test(lower) ||
@@ -302,6 +312,11 @@ export function preferenceSummariesForLlm(facts: PersonalFact[]): string[] {
 
 function summarizePersonalFact(text: string): string {
   const t = normalizeChatText(text);
+  const name = t.match(/\bmy\s+name\s+is\s+([A-Za-z][A-Za-z'-]{1,40})\b/i);
+  if (name) {
+    const who = name[1].replace(/\b\w/g, (c) => c.toUpperCase());
+    return `Your name: ${who}`;
+  }
   const m = t.match(/\bmy\s+preferred\s+(?:escalation\s+)?contact\s+for\s+(.+?)\s+is\s+(.+)$/i);
   if (m) {
     const topic = m[1].trim();
@@ -323,6 +338,20 @@ function summarizeRoleClaim(text: string): string {
   const t = normalizeRoleTypos(normalizeChatText(text));
   const lower = t.toLowerCase();
   const parts: string[] = [];
+
+  const selfRole = lower.match(
+    new RegExp(
+      `\\bi(?:'m|\\s+am)\\s+(?:(?:the|our|now)\\s+)*(?:new\\s+)?((?:${ROLE_NOUN})|(?:${ROLE_SHORTHAND}))\\b`,
+      "i",
+    ),
+  );
+  if (selfRole) {
+    let role = selfRole[1].replace(/\s+/g, " ").trim();
+    if (/^(clinical|billing|admin|administrative|compliance|hr|marketing)$/i.test(role)) {
+      role = /admin/i.test(role) ? "Admin" : `${role} lead`;
+    }
+    return `You claim: ${role.replace(/\b\w/g, (c) => c.toUpperCase())}`;
+  }
 
   const pairRe = new RegExp(
     `\\b([a-z][a-z'-]{1,40})\\s+is\\s+(?:(?:the|our|now)\\s+)*(?:new\\s+)?((?:${ROLE_NOUN})|(?:${ROLE_SHORTHAND}))\\b`,
@@ -381,6 +410,15 @@ export function acknowledgePersonalPreference(text: string): string {
 /** Sync ack for tier-3 role/authority claims — heard, not confirmed. */
 export function acknowledgeRoleAuthorityClaim(text: string): string {
   const summary = summarizeRoleClaim(text);
+  const self = /\bi(?:'m|\s+am)\b/i.test(normalizeChatText(text));
+  if (self) {
+    return [
+      `Got it — **${summary}**.`,
+      "",
+      "I still can’t treat titles from chat as the official org directory.",
+      "I can help with **approved guides** for your work — what do you need (SOP, refill path, escalation owner, leave, etc.)?",
+    ].join("\n");
+  }
   return [
     `Got it — I heard you say **${summary}**.`,
     "",
