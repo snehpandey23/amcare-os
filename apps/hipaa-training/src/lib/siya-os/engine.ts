@@ -103,8 +103,12 @@ export interface SiyaReply {
 const REFUND_PROMISE = /\b(i (can|will) (approve|refund|waive|credit)|guaranteed refund|refund is approved)\b/i;
 
 /** Bot-about-bot / chrome / courtesy — catalog in meta-conversation.ts */
-function answerStaffMetaQuestion(text: string): string | null {
-  return answerMetaConversation(text);
+function answerStaffMetaQuestion(
+  text: string,
+  history: { role: string; content: string }[] = [],
+): string | null {
+  const priorUser = [...history].reverse().find((h) => h.role === "user")?.content;
+  return answerMetaConversation(text, priorUser);
 }
 
 /** Patient-site / public marketing asks — not Founder Plan gaps. */
@@ -419,7 +423,7 @@ function buildSiyaReply(
     };
   }
 
-  const metaAnswer = answerStaffMetaQuestion(text);
+  const metaAnswer = answerStaffMetaQuestion(text, history);
   if (metaAnswer) {
     return {
       message: polishStaffMessage(metaAnswer),

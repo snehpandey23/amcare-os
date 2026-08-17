@@ -64,6 +64,17 @@ function main() {
     );
   }
 
+  const existig = runSiyaAssistant("delete existig chat");
+  assert.ok(/Archive|Clear chat/i.test(existig.message));
+  assert.ok(!/right staff guide for that yet/i.test(existig.message));
+
+  const split = runSiyaAssistant("delete", [{ role: "user", content: "how to" }]);
+  assert.ok(/Archive|Clear chat/i.test(split.message), split.message.slice(0, 200));
+
+  const qa = runSiyaAssistant("who does quality review n how is it done");
+  assert.ok(/Chat Review|product quality flag/i.test(qa.message));
+  assert.ok(!/Quality Review Access/i.test(qa.message));
+
   console.log("smoke-meta-conversation: OK");
 }
 

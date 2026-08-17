@@ -25,7 +25,7 @@ type MetaCase = {
   id: string;
   category: MetaCategory;
   /** Match against normalized lowercase text */
-  test: (t: string) => boolean;
+  test: (t: string, priorUser?: string) => boolean;
   answer: string;
 };
 
@@ -123,8 +123,17 @@ const NOTIFY = [
 ].join("\n");
 
 const THUMBS = [
-  "👍 / 👎 only records whether that reply was helpful for quality review.",
-  "It does **not** change policy, teach me new facts, or open a memory form.",
+  "👍 / 👎 only records whether **that Assist reply** was helpful.",
+  "",
+  "👎 does **not** change policy, teach me new facts, email anyone, or open a memory form.",
+  "It logs a private quality flag (helpful vs not) for periodic review. It is **not** the same as **Chat Review** (that’s a separate admin/clinical-lead log of *patient* chats).",
+].join("\n");
+
+const THUMBS_WHO = [
+  "👍 / 👎 on Assist is a **product quality flag** on that bot reply — not a patient-chat audit.",
+  "",
+  "It is logged for internal review (engineering / ops looking at whether Assist was useful). It does **not** page a clinical lead, change an SOP, or replace **Chat Review**.",
+  "**Chat Review** (`/chat-review`) is a separate QC log of *patient* conversations — **admin and Clinical Operations lead only**. Regular staff self-report volume at **End shift** handoff, not via thumbs.",
 ].join("\n");
 
 const PLAN_RECORD = [
@@ -410,12 +419,45 @@ const CASES: MetaCase[] = [
     answer: THUMBS,
   },
   {
-    id: "delete-chats",
+    id: "thumbs-who",
     category: "chrome",
     test: (t) =>
-      /\b(delete|remove|archive)\s+(old\s+)?(chats?|conversations?|threads?)\b/.test(t) ||
-      /\bhow\s+(do\s+i\s+)?(delete|remove|archive)\s+(a\s+|my\s+|old\s+)?(chats?|conversations?)\b/.test(t) ||
-      /\bwhere\s+(do\s+i\s+)?(delete|archive)\s+(chats?|conversations?)\b/.test(t),
+      /\b(quality\s+review|who\s+(does|reviews?)\s+(the\s+)?(thumbs?|feedback|quality))\b/.test(t) ||
+      (/\bthumbs?\s+down\b/.test(t) && /\b(who|how|what\s+happens|review)\b/.test(t)) ||
+      (/\bquality\s+review\b/.test(t) && /\b(who|how|done|process)\b/.test(t)),
+    answer: THUMBS_WHO,
+  },
+  {
+    id: "delete-chats",
+    category: "chrome",
+    test: (t, prior) => {
+      const blob = [prior, t].filter(Boolean).join(" ");
+      if (
+        /\b(delete|remove|archive)\s+(old\s+|exist(?:ing|ig)\s+|this\s+|my\s+)?(chats?|conversations?|threads?)\b/.test(
+          t,
+        ) ||
+        /\bhow\s+(do\s+i\s+)?(delete|remove|archive)\s+(a\s+|my\s+|old\s+|exist(?:ing|ig)\s+)?(chats?|conversations?)\b/.test(
+          t,
+        ) ||
+        /\bwhere\s+(do\s+i\s+)?(delete|archive)\s+(chats?|conversations?)\b/.test(t) ||
+        /\bdelete\s+exist/.test(t)
+      ) {
+        return true;
+      }
+      // Split dictation: "how to" then "delete existig chat"
+      if (
+        t.length < 48 &&
+        /\b(delete|remove|archive)\b/.test(t) &&
+        (/\b(chat|conversation|thread|exist)/.test(t) ||
+          (/\bhow\s+to\b/.test(prior || "") && /\b(chat|thread|conversation|delete|archive)\b/.test(blob)))
+      ) {
+        return true;
+      }
+      if (/^(how(\s+to)?|how\s+do\s+i)\??$/.test(t) && /\b(delete|archive|clear)\s+.{0,40}(chat|thread)/.test(blob)) {
+        return true;
+      }
+      return false;
+    },
     answer: DELETE_CHATS,
   },
   {
@@ -569,7 +611,19 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
   { id: "remember-other-chats", text: "do you remember previous chats", mustMatch: /this chat thread|don.?t reliably recall other/i, mustNot: /approved staff guide/i },
   { id: "are-you-chatgpt", text: "are you chatgpt", mustMatch: /Siya Assist|not ChatGPT/i, mustNot: /approved staff guide/i },
   { id: "notify-owner", text: "what does notify owner button do", mustMatch: /knowledge-gap/i, mustNot: /approved staff guide for that/i },
-  { id: "thumbs", text: "what does the thumbs up button do", mustMatch: /helpful|quality review/i, mustNot: /approved staff guide/i },
+  { id: "thumbs", text: "what does the thumbs up button do", mustMatch: /helpful|quality flag|does \*\*not\*\* change policy/i, mustNot: /approved staff guide/i },
+  {
+    id: "thumbs-who",
+    text: "who does quality review n how is it done",
+    mustMatch: /product quality flag|Chat Review|End shift/i,
+    mustNot: /right staff guide for that yet|Quality Review Access/i,
+  },
+  {
+    id: "delete-chats",
+    text: "delete existig chat",
+    mustMatch: /Archive|Clear chat/i,
+    mustNot: /right staff guide for that yet/i,
+  },
   { id: "write-plan-record", text: "can you write my plan record", mustMatch: /never.*Plan|This week/i, mustNot: /approved staff guide for that/i },
   { id: "feelings", text: "do you feel sad", mustMatch: /don.?t have feelings/i, mustNot: /approved staff guide/i },
   { id: "greeting", text: "how r u", mustMatch: /Hi —/i, mustNot: /approved staff guide/i },
@@ -580,8 +634,13 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
 /**
  * First matching meta case wins. Returns null if not a meta conversation turn.
  */
-export function answerMetaConversation(text: string): string | null {
+export function answerMetaConversation(text: string, priorUser?: string): string | null {
   const t = text
+    .trim()
+    .toLowerCase()
+    .replace(/^["'`]+|["'`]+$/g, "")
+    .replace(/\s+/g, " ");
+  const prior = (priorUser ?? "")
     .trim()
     .toLowerCase()
     .replace(/^["'`]+|["'`]+$/g, "")
@@ -589,7 +648,7 @@ export function answerMetaConversation(text: string): string | null {
   // Dictated orientation asks can be long; still allow meta (cases are selective).
   if (!t || t.length > 1200) return null;
   for (const c of CASES) {
-    if (c.test(t)) return c.answer;
+    if (c.test(t, prior)) return c.answer;
   }
   return null;
 }
