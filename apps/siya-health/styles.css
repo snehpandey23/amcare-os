@@ -3075,18 +3075,18 @@ img[loading="lazy"] { loading: lazy; }
 
 @media (max-width: 899px) {
   .section.screening-results-hero {
-    padding-top: 108px;
-    padding-bottom: 24px;
+    padding-top: 96px;
+    padding-bottom: 20px;
   }
 
   .screening-results-layout {
-    gap: 14px;
+    gap: 12px;
   }
 
   /* Phone flow: outcome → compact photo → CTAs */
   .screening-results-visual img {
     aspect-ratio: 16 / 10;
-    max-height: 200px;
+    max-height: 160px;
     object-position: center 30%;
   }
 
@@ -3095,17 +3095,23 @@ img[loading="lazy"] { loading: lazy; }
   }
 
   .screening-results-hero .screening-results-header h1 {
-    font-size: clamp(1.55rem, 6.5vw, 1.85rem);
+    font-size: clamp(1.45rem, 6vw, 1.75rem);
     line-height: 1.2;
+    margin-bottom: 8px;
   }
 
   .screening-results-hero .screening-results-header .lead {
-    font-size: 0.98rem;
-    line-height: 1.5;
+    font-size: 0.94rem;
+    line-height: 1.45;
   }
 
   .screening-results-score {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
+    margin-top: 8px;
+  }
+
+  .screening-results-actions {
+    gap: 10px;
   }
 
   .screening-results-detail {
