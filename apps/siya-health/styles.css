@@ -2859,7 +2859,7 @@ img[loading="lazy"] { loading: lazy; }
 .screening-results-layout {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(1.5rem, 3vw, 2.75rem);
+  gap: 16px;
   align-items: start;
   max-width: 68rem;
   margin: 0 auto;
@@ -2868,24 +2868,19 @@ img[loading="lazy"] { loading: lazy; }
 @media (min-width: 900px) {
   .screening-results-layout {
     grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-    gap: 2.5rem 3rem;
+    grid-template-areas:
+      "visual header"
+      "visual actions";
+    gap: 1.25rem 3rem;
+    align-items: start;
   }
 
-  /* Match adhd-care trust band: photo left, outcome + CTAs right */
-  .screening-results-visual {
-    order: -1;
-  }
+  .screening-results-header { grid-area: header; }
+  .screening-results-visual { grid-area: visual; }
+  .screening-results-actions { grid-area: actions; }
 }
 
-.screening-results-copy {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 14px;
-  min-width: 0;
-}
-
-.screening-results-hero .screening-results-header {
+.screening-results-header {
   text-align: left;
   margin: 0;
   width: 100%;
@@ -2900,8 +2895,16 @@ img[loading="lazy"] { loading: lazy; }
   max-width: 36rem;
 }
 
+.screening-results-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+}
+
 .screening-results-hero-cta {
-  margin: 6px 0 0;
+  margin: 0;
   width: 100%;
 }
 
@@ -3073,16 +3076,50 @@ img[loading="lazy"] { loading: lazy; }
 @media (max-width: 899px) {
   .section.screening-results-hero {
     padding-top: 108px;
-    padding-bottom: 28px;
+    padding-bottom: 24px;
   }
 
   .screening-results-layout {
-    gap: 18px;
+    gap: 14px;
+  }
+
+  /* Phone flow: outcome → compact photo → CTAs */
+  .screening-results-visual img {
+    aspect-ratio: 16 / 10;
+    max-height: 200px;
+    object-position: center 30%;
+  }
+
+  .screening-results-visual figcaption {
+    margin-top: 8px;
+    font-size: 0.85rem;
+  }
+
+  .screening-results-hero .screening-results-header h1 {
+    font-size: clamp(1.55rem, 6.5vw, 1.85rem);
+    line-height: 1.2;
+  }
+
+  .screening-results-hero .screening-results-header .lead {
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  .screening-results-score {
+    font-size: 0.9rem;
   }
 
   .screening-results-detail {
     font-size: 0.86rem;
     line-height: 1.48;
+  }
+
+  .screening-results-path-band {
+    padding-bottom: calc(clamp(1.75rem, 3.5vw, 2.5rem) + 4.5rem);
+  }
+
+  .screening-results-path img {
+    max-width: 100%;
   }
 }
 
