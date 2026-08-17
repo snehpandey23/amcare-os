@@ -2850,17 +2850,26 @@ img[loading="lazy"] { loading: lazy; }
   margin-right: auto;
 }
 
-/* Post-ASRS results page — composed why-patients split + site CTA hierarchy */
+/* Post-ASRS results page — composed copy/photo split + site CTA hierarchy */
 .screening-results-hero {
   padding-top: 120px;
   padding-bottom: clamp(2rem, 4vw, 3rem);
 }
 
-.screening-results-layout.why-patients-grid {
+.screening-results-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  align-items: start;
   max-width: 68rem;
   margin: 0 auto;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .screening-results-layout {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2.5rem 3rem;
+  }
 }
 
 .screening-results-copy {
@@ -2877,18 +2886,23 @@ img[loading="lazy"] { loading: lazy; }
   width: 100%;
 }
 
+.screening-results-hero .screening-results-header h1 {
+  margin-bottom: 12px;
+}
+
 .screening-results-hero .screening-results-header .lead {
   margin-bottom: 0;
+  max-width: 36rem;
 }
 
 .screening-results-hero-cta {
-  margin: 4px 0 0;
+  margin: 6px 0 0;
   width: 100%;
 }
 
 .screening-results-hero .cta-microcopy {
   margin: 0;
-  max-width: 36rem;
+  max-width: 34rem;
   font-size: 0.85rem;
   line-height: 1.45;
   color: var(--text-muted);
@@ -2908,13 +2922,18 @@ img[loading="lazy"] { loading: lazy; }
   text-underline-offset: 2px;
 }
 
-.screening-results-visual.why-patients-media {
+.screening-results-visual {
   margin: 0;
   width: 100%;
 }
 
-.screening-results-visual.why-patients-media img {
+.screening-results-visual picture,
+.screening-results-visual img {
+  display: block;
   width: 100%;
+}
+
+.screening-results-visual img {
   height: auto;
   aspect-ratio: 4 / 3;
   object-fit: cover;
@@ -2922,7 +2941,7 @@ img[loading="lazy"] { loading: lazy; }
   border-radius: 16px;
 }
 
-.screening-results-visual.why-patients-media figcaption {
+.screening-results-visual figcaption {
   margin-top: 12px;
   font-size: 0.9rem;
   line-height: 1.5;
@@ -2930,14 +2949,28 @@ img[loading="lazy"] { loading: lazy; }
 }
 
 .screening-results-path-band {
-  padding-top: clamp(1.5rem, 3vw, 2.25rem);
-  padding-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  padding-top: clamp(1.75rem, 3.5vw, 2.5rem);
+  padding-bottom: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+.screening-results-path-inner {
+  max-width: 44rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
 }
 
 .screening-results-path {
-  margin: 0 auto;
-  max-width: 40rem;
+  margin: 0;
   text-align: center;
+}
+
+.screening-results-path h2 {
+  margin: 0 0 14px;
+  font-size: 1.35rem;
+  color: var(--primary);
 }
 
 .screening-results-path img {
@@ -2998,9 +3031,9 @@ img[loading="lazy"] { loading: lazy; }
 }
 
 .screening-results-detail {
-  margin: 10px 0 0;
-  max-width: 36rem;
-  font-size: 0.9rem;
+  margin: 0;
+  max-width: 40rem;
+  font-size: 0.92rem;
   line-height: 1.55;
   color: var(--text-secondary);
   text-align: left;
@@ -3013,7 +3046,8 @@ img[loading="lazy"] { loading: lazy; }
 
 .screening-results-disclaimer {
   margin: 0;
-  max-width: 36rem;
+  max-width: 40rem;
+  text-align: left;
 }
 
 .screening-results-more {
@@ -3036,21 +3070,13 @@ img[loading="lazy"] { loading: lazy; }
     padding-bottom: 28px;
   }
 
-  .screening-results-layout.why-patients-grid {
-    gap: 20px;
-  }
-
-  .screening-results-hero .screening-results-header {
-    text-align: left;
+  .screening-results-layout {
+    gap: 18px;
   }
 
   .screening-results-detail {
     font-size: 0.86rem;
     line-height: 1.48;
-  }
-
-  .screening-results-path-caption {
-    font-size: 0.9rem;
   }
 }
 
