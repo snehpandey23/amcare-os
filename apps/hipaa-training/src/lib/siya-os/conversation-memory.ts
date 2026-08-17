@@ -218,7 +218,8 @@ export function isPersonalPreferenceStatement(text: string): boolean {
     /\b(remember|note)\s+(that\s+)?(i|my)\b/.test(lower) ||
     /\bfor\s+me[,\s]+(use|escalate|contact|go\s+to)\b/.test(lower) ||
     /\b(please\s+)?(use|escalate\s+to|contact)\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?\s+(for|when|on)\b/.test(t) ||
-    /\bmy\s+.+\s+is\s+[A-Z][a-z]{2,}\b/.test(t) ||
+    // Short "my X is Name" only — avoid matching long orientation dictation ("my English … is Enclave")
+    /\bmy\s+\w{2,30}\s+is\s+[A-Z][a-z]{2,40}\b/.test(t) ||
     (/\bis\s+[A-Z][a-z]{2,}(?:\s+[A-Z][a-z]+)?\.?\s*$/.test(t) &&
       /\b(preferred|contact|escalate|owner)\b/.test(lower) &&
       !/\b(clinical|billing|compliance)\s+lead\b/.test(lower))

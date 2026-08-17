@@ -117,6 +117,37 @@ const MY_JOB = [
   "Ask about a **specific Siya workflow** (refill, reimbursement, leave, billing contact) — or check role duties with your **manager / HR**.",
 ].join("\n");
 
+const ORIENTATION = [
+  "I’m **Siya Assist** in the **Siya staff portal** — help for **Siya Health staff work**, not a general “become an MA in the US” career app and not a promise to “change your life.”",
+  "",
+  "**Useful ways to use this app as staff:**",
+  "1. **Ask** (this chat) — policies, SOPs, who to contact (reimbursement, leave, billing path, refills).",
+  "2. **Learn → Training** — HIPAA certification modules.",
+  "3. **Learn → Practice** — short drills (chat speed/typing, English phrases, culture trivia, timezones) to get sharper at US clinic chat.",
+  "4. **My day** — shift checklist and tasks.",
+  "5. **Memory / Team** — published knowledge and team info (as your role allows).",
+  "",
+  "Dictation and imperfect English are fine — if something is **unclear**, ask me to clarify and I’ll ask back.",
+  "I answer from **approved guides**. I don’t invent immigration advice or email your supervisor for you.",
+].join("\n");
+
+const LEARN_EXPLAIN = [
+  "**Learn** is the training area of this staff app (top nav).",
+  "",
+  "**Practice drills** are short exercises — typing/chat speed, English phrases, culture trivia, US map, timezones. They help day-to-day clinic chat skills; they are **not** an MA license or a US visa path.",
+  "**Chat speed & accuracy** is the typing drill under Practice.",
+  "",
+  "Open **Learn** or **Learn → Practice** in the top nav when you want a drill. Use **Ask** here for policies, SOPs, and who owns a work question.",
+].join("\n");
+
+const LOOP_IN = [
+  "I don’t email people or “loop them in” for you.",
+  "",
+  "If a reply showed **Copy escalation summary**, tap that and paste into Slack/email yourself.",
+  "**Notify owner** is only when a **staff guide is missing** — not for general orientation or “what is this app.”",
+  "For day-to-day help, message your **manager / supervisor** on your normal work channel.",
+].join("\n");
+
 const CASES: MetaCase[] = [
   // --- identity ---
   {
@@ -199,6 +230,36 @@ const CASES: MetaCase[] = [
       /\bwhat('?s| is)\s+my\s+(typical\s+)?(job|role|title)\b/.test(t) ||
       /\bwhat\s+do\s+i\s+(usually\s+)?do\s+here\b/.test(t),
     answer: MY_JOB,
+  },
+  {
+    id: "orientation",
+    category: "capability",
+    test: (t) =>
+      /\b(what\s+is\s+this\s+(tool|app)|get\s+some\s+orientation|orientation\b)/.test(t) ||
+      /\btop\s+\d+\s+uses\b/.test(t) ||
+      (/\bbecome\s+a\s+(better\s+)?medical\s+assistant\b/.test(t) &&
+        /\b(app|tool|ai|assist|learn|practice|drill)\b/.test(t)) ||
+      (/\bchange\s+my\s+life\b/.test(t) && /\b(app|tool|ai)\b/.test(t)) ||
+      (/\bdictat/.test(t) && /\b(orientation|this\s+tool|english|mic)\b/.test(t)),
+    answer: ORIENTATION,
+  },
+  {
+    id: "learn-explain",
+    category: "capability",
+    test: (t) =>
+      /\b(what\s+(is|are)|what'?s|how\s+(do|will|does|can))\b/.test(t) &&
+      /\b(learn(\s+h[eu]rb)?|practice(d)?\s+drills?|chat\s+speed)\b/.test(t),
+    answer: LEARN_EXPLAIN,
+  },
+  {
+    id: "loop-in",
+    category: "chrome",
+    test: (t) =>
+      /\bhow\s+(do\s+i\s+)?loop\s+(them|him|her|someone|supervisor)\s+in\b/.test(t) ||
+      /\bloop\s+them\s+in\b/.test(t) ||
+      /\bemail\s+(my\s+)?supervisor\b/.test(t) ||
+      /\bemail\s+supervisor\b/.test(t),
+    answer: LOOP_IN,
   },
   {
     id: "train-learn-permanent",
@@ -309,6 +370,24 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
   { id: "company-boss", text: "whos the boss", mustMatch: /org chart|physician-led|who owns/i, mustNot: /right staff guide for that yet/i },
   { id: "where-guides", text: "where are the right guide", mustMatch: /Memory|Ask|Practice/i, mustNot: /right staff guide for that yet/i },
   { id: "my-job", text: "whats my typical job", mustMatch: /job description|manager|workflow/i, mustNot: /right staff guide for that yet/i },
+  {
+    id: "orientation",
+    text: "I am asking how do they help me become a medical assistant because I was told that this is an app which will change my life and help me use AI to become a better medical assistant can you tell me like top 5 uses for this app for me",
+    mustMatch: /Siya Assist|Ask|Learn → Practice|My day/i,
+    mustNot: /right staff guide for that yet|Privacy Officer|Efficiency: Automate/i,
+  },
+  {
+    id: "learn-explain",
+    text: "what is learn herb and practiced drills and chat speed and how will they help me",
+    mustMatch: /Learn|Practice drills|Chat speed/i,
+    mustNot: /Open the \*\*Chat speed|right staff guide for that yet/i,
+  },
+  {
+    id: "loop-in",
+    text: "how to loop them in",
+    mustMatch: /don.?t email|Copy escalation|Notify owner|manager/i,
+    mustNot: /right staff guide for that yet|HIPAA certification course/i,
+  },
   { id: "what-can-you-do", text: "what can you do", mustMatch: /approved|Learn → Practice|cannot/i, mustNot: /approved staff guide for that/i },
   { id: "train-learn-permanent", text: "i want to train you regarding american culture", mustMatch: /Practice|culture|can.?t permanently/i, mustNot: /approved staff guide for that/i },
   { id: "remember-other-chats", text: "do you remember previous chats", mustMatch: /this chat thread|don.?t reliably recall other/i, mustNot: /approved staff guide/i },
@@ -331,7 +410,8 @@ export function answerMetaConversation(text: string): string | null {
     .toLowerCase()
     .replace(/^["'`]+|["'`]+$/g, "")
     .replace(/\s+/g, " ");
-  if (!t || t.length > 280) return null;
+  // Dictated orientation asks can be long; still allow meta (cases are selective).
+  if (!t || t.length > 1200) return null;
   for (const c of CASES) {
     if (c.test(t)) return c.answer;
   }

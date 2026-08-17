@@ -70,8 +70,12 @@ export function VoiceInputButton({ value, onChange, disabled, className = "", si
     recognition.interimResults = true;
     recognition.lang = typeof navigator !== "undefined" && navigator.language ? navigator.language : "en-US";
 
-    baseRef.current = valueRef.current.trimEnd();
+    baseRef.current = "";
     let finals = "";
+
+    // Fresh dictation each mic session — don't glue onto leftover unsent text
+    // (common confusion when staff expect a new take, not an append).
+    if (valueRef.current.trim()) onChange("");
 
     recognition.onresult = (event) => {
       let interim = "";
