@@ -17,6 +17,7 @@ import {
 } from "@/lib/trainingConfig";
 import { getStoredToken, setStoredToken } from "@/lib/authStorage";
 import { bindPortalProfileToUser, clearPortalProfileBinding } from "@/lib/portal-profile";
+import { clearAssistSession } from "@/lib/assist-session";
 
 export type TrainingUser = {
   id: string;
@@ -130,6 +131,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         );
       }
       if (!data.token) throw new Error("No token returned");
+      clearAssistSession();
       setStoredToken(data.token);
       setToken(data.token);
       const me = await refreshUser();
@@ -154,6 +156,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const data = (await res.json().catch(() => ({}))) as { token?: string; error?: string };
       if (!res.ok) throw new Error(data.error || "Registration failed");
       if (!data.token) throw new Error("No token returned");
+      clearAssistSession();
       setStoredToken(data.token);
       setToken(data.token);
       await refreshUser();
@@ -162,6 +165,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 
   const logout = useCallback(() => {
+    clearAssistSession();
     setStoredToken(null);
     setToken(null);
     setUser(null);

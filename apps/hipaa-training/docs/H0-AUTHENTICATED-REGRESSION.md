@@ -25,12 +25,19 @@ Exit code `0` only if all cases PASS. JSON dump: `apps/hipaa-training/.cursor-ve
 
 1. Off-topic multi-turn (music / CAC) — no 1–5 triage, no “You wrote” concat, no topic bleed  
 2. Brand token `#fffdf6` (typo `desgin`)  
-3. Presence → Team pulse (not Founder Talk LLM)  
+3. Presence routing — **admin:** Team pulse (not Founder Talk LLM); **staff:** Team pointer, no invented roster / fake pulse / soft-stop  
 4. Practice → `/learn/practice#typing`  
 5. Tier-3 role/authority (unconfirmed clinical lead)  
 6. Slice B preference recall + false policy reject  
 7. Portal-signals must not overwrite `ruleFinal` declines  
+8. Meta identity (“why aren’t you AI”)  
+9. Meta capability (“what can you do”)  
+10. Meta chrome (thumbs + Clear chat)  
+11. Meta orientation (no Practice `#typing` hijack)  
+12. Meta chrome typo (“delete existig chat”)  
+
+Permanent command: `npm run smoke:h0 -w @amcare/hipaa-training` (authenticated). Local catalog smoke `npm run smoke:meta` is **not** a substitute.
 
 ## Related local smokes (not a substitute for H0)
 
-`smoke-priya-pref.ts`, `smoke-role-authority-tier3.ts`, `smoke-presence-intent.ts`, `smoke-portal-llm-guard.ts`, `smoke-auth-talk-replay.ts`
+`smoke-priya-pref.ts`, `smoke-role-authority-tier3.ts`, `smoke-presence-intent.ts`, `smoke-portal-llm-guard.ts`, `smoke-auth-talk-replay.ts`, `smoke-meta-conversation.ts`

@@ -54,7 +54,7 @@ const PRODUCT_MAP = [
   "I’m **in-app support** for this staff portal as well as the SOP help desk.",
   "",
   "**Chat (this screen)**",
-  "• **New chat** (left) — start another thread.",
+  "• **New chat** (left sidebar) — start another thread. Login and a new window also open a fresh thread; older chats stay in the list.",
   "• **Clear chat** (top of the thread, after you’ve sent something) — empty *this* conversation and start fresh. It does **not** remove other chats from the sidebar.",
   "• **Archive** (on a sidebar chat) — remove that chat from your list (day-to-day “delete”).",
   "• **Search chats…** — find an older thread by title/text.",
@@ -63,12 +63,13 @@ const PRODUCT_MAP = [
   "• **Notify owner** — only when a **staff guide is missing**. Not email, not a transcript dump.",
   "• **Copy escalation summary** — when it appears: copy a handoff you paste yourself.",
   "",
-  "**Top nav**",
+  "**Left sidebar**",
   "• **My day** — this home: Assist chat + today’s checklist (staff).",
   "• **Learn** — HIPAA training + **Practice** drills (typing, English, culture, map, timezones).",
   "• **Memory** — published internal knowledge (as your role allows).",
   "• **Team** — teammates / presence.",
-  "• **Account** / **Sign out** — your profile and logout.",
+  "• **Admin** — admin tools (admins only).",
+  "• **Account** / **Sign out** — header: your profile and logout.",
   "",
   "**Shift (staff, not admin)**",
   "• **Focus** — quieter My day (priorities + Ask; learning nudges pause). **Back to working** leaves Focus.",
@@ -152,7 +153,7 @@ const COMPANY_BOSS = [
 const WHERE_GUIDES = [
   "Approved staff guides are what I pull in **Ask** from published internal topics.",
   "",
-  "Browse / manage knowledge in **Memory** (top nav). Drills (culture, typing) are under **Learn → Practice**.",
+  "Browse / manage knowledge in **Memory** (left sidebar). Drills (culture, typing) are under **Learn → Practice**.",
   "If something’s missing, say the task in one sentence — or use **Notify owner** when that button appears.",
 ].join("\n");
 
@@ -178,12 +179,12 @@ const ORIENTATION = [
 ].join("\n");
 
 const LEARN_EXPLAIN = [
-  "**Learn** is the training area of this staff app (top nav).",
+  "**Learn** is the training area of this staff app (left sidebar).",
   "",
   "**Practice drills** are short exercises — typing/chat speed, English phrases, culture trivia, US map, timezones. They help day-to-day clinic chat skills; they are **not** an MA license or a US visa path.",
   "**Chat speed & accuracy** is the typing drill under Practice.",
   "",
-  "Open **Learn** or **Learn → Practice** in the top nav when you want a drill. Use **Ask** here for policies, SOPs, and who owns a work question.",
+  "Open **Learn** or **Learn → Practice** in the left sidebar when you want a drill. Use **Ask** here for policies, SOPs, and who owns a work question.",
 ].join("\n");
 
 const LOOP_IN = [
@@ -217,7 +218,7 @@ const FOCUS_HELP = [
 ].join("\n");
 
 const NAV_HELP = [
-  "Top nav: **My day** (this home + Assist), **Learn** (HIPAA + Practice drills), **Memory** (published knowledge), **Team** (people / presence).",
+  "Left sidebar: **My day** (this home + Assist), **Learn** (HIPAA + Practice drills), **Memory** (published knowledge), **Team** (people / presence).",
   "",
   "Staff also have **Account**, **Sign out**, **Light/Dark**, and shift controls (**Focus**, **Break**, **End shift**).",
   "Admins see **Admin** instead of shift Focus, and **Talk** for founder questions — Talk never writes This week’s plan.",
@@ -495,7 +496,7 @@ const CASES: MetaCase[] = [
     id: "nav-help",
     category: "chrome",
     test: (t) =>
-      (/\b(top\s+nav|navigation|menu)\b/.test(t) && /\b(what|where|how|mean)\b/.test(t)) ||
+      (/\b(top\s+nav|left\s+sidebar|navigation|menu)\b/.test(t) && /\b(what|where|how|mean)\b/.test(t)) ||
       (/\bwhat\s+(is|are)\s+(my\s+day|memory|team)\b/.test(t) && !/\bpractice\s+drills?\b/.test(t)) ||
       /\bhow\s+do\s+i\s+(open|get\s+to|find)\s+(learn|memory|team|my\s+day|account)\b/.test(t),
     answer: NAV_HELP,

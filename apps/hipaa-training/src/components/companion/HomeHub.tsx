@@ -14,7 +14,6 @@ import {
   portalBtnAccent,
   portalBtnGhostSm,
   portalBtnNavySm,
-  portalChatPage,
   portalFocusRail,
   portalInput,
   portalInputCompact,
@@ -300,7 +299,7 @@ export function HomeHub() {
   const showBreakScreen = !isAdmin && onBreak;
 
   return (
-    <div className={isAdmin ? "min-h-[calc(100dvh-3.5rem)]" : undefined}>
+    <div className={isAdmin ? "h-full min-h-0" : "flex h-full min-h-0 flex-col"}>
       {introGate === "intro" ? (
         <BrandIntroSplash
           onComplete={() => {
@@ -332,7 +331,7 @@ export function HomeHub() {
           {isAdmin ? (
             introGate === "ready" ? <FounderCoachPanel firstName={firstName} /> : null
           ) : introGate === "ready" ? (
-            <div className={`${portalChatPage} ${inFocus ? portalFocusRail : ""} !space-y-3 !py-3 md:!py-4`}>
+            <div className={`flex h-full min-h-0 flex-col ${inFocus ? portalFocusRail : ""} px-3 py-3 md:px-4`}>
               {complianceDue ? (
                 <p className={`mb-3 ${portalStatusWarnBox} px-3 py-2 text-xs ${portalStatusWarnText}`}>
                   Compliance: HIPAA certification in progress ({modulesDone}/{moduleTotal} modules).{" "}

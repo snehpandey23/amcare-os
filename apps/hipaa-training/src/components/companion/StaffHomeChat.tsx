@@ -29,7 +29,7 @@ function StaffHomeChatInner({
   const [showToday, setShowToday] = useState(false);
 
   return (
-    <div className="flex min-h-[calc(100dvh-5.5rem)] flex-col">
+    <div className="flex h-full min-h-0 flex-col">
       <div className="min-h-0 flex-1">
         <AssistChatShell
           firstName={firstName}

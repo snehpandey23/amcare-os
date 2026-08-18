@@ -244,7 +244,7 @@ async function main() {
     );
   }
 
-  // ─── 3. Presence → Team pulse ───
+  // ─── 3. Presence routing (role-aware) ───
   {
     const phrases = [
       "who all are working right now",
@@ -252,15 +252,22 @@ async function main() {
       "on the clock",
       "who's here",
     ];
+    const admin = /^admin$/i.test(role);
     const fails: string[] = [];
     for (const msg of phrases) {
       const data = await chat(msg, [], "founder-coach");
       const reply = String(data.message || "");
-      const ok =
-        isTeamPulse(data) &&
+      const noInvent =
+        !hasTriageOrConcat(reply) &&
         data.llmUsed !== true &&
         !/Founder Talk/i.test(data.routing?.task || "") &&
-        !hasTriageOrConcat(reply);
+        !/I don't have an approved staff guide for that/i.test(reply);
+      const fakePulse =
+        data.opsCoPilot !== true &&
+        (/\*\*Team pulse\*\* \(/i.test(reply) || /\*\*On shift now:\*\*/i.test(reply) || /On shift now:/i.test(reply));
+      const ok = admin
+        ? isTeamPulse(data) && noInvent
+        : noInvent && !fakePulse && (/\/team|Open \*\*Team\*\*|Team pulse/i.test(reply) || (data.links || []).some((l) => l.href === "/team"));
       if (!ok) {
         fails.push(
           `${msg} ops=${data.opsCoPilot} llm=${data.llmUsed} task=${data.routing?.task} → ${clip(reply, 160)}`,
@@ -269,9 +276,13 @@ async function main() {
     }
     record(
       "3",
-      "Presence → Team pulse (ruleFinal path)",
+      admin ? "Presence → Team pulse (admin ruleFinal)" : "Presence → no invented roster (staff)",
       fails.length === 0,
-      fails.length === 0 ? "all phrases → Team pulse, no Founder LLM" : fails.join(" | "),
+      fails.length === 0
+        ? admin
+          ? "all phrases → Team pulse, no Founder LLM"
+          : "all phrases → Team pointer, no fake pulse / soft-stop"
+        : fails.join(" | "),
       fails.join("\n"),
     );
   }
@@ -390,6 +401,78 @@ async function main() {
       pass ? "off-topic sticks; llmUsed≠true" : `llmUsed=${data.llmUsed} ops=${data.opsCoPilot}`,
       reply,
     );
+  }
+
+  // ─── 8. Meta catalog — identity ───
+  {
+    const data = await chat("why not arent u AI", [], "founder-coach");
+    const reply = String(data.message || "");
+    const pass =
+      /AI help desk|not a human/i.test(reply) &&
+      !/I don't have an approved staff guide/i.test(reply) &&
+      data.llmUsed !== true &&
+      !hasTriageOrConcat(reply);
+    record("8", "Meta identity (are you AI)", pass, pass ? "identity, no soft-stop" : "missed identity or soft-stop", reply);
+  }
+
+  // ─── 9. Meta catalog — capability ───
+  {
+    const data = await chat("what can you do", [], "default");
+    const reply = String(data.message || "");
+    const pass =
+      /help desk|this app|approved/i.test(reply) &&
+      !/I don't have an approved staff guide for that/i.test(reply) &&
+      !hasTriageOrConcat(reply);
+    record("9", "Meta capability", pass, pass ? "capability map" : "missed capability or soft-stop", reply);
+  }
+
+  // ─── 10. Meta catalog — chrome (thumbs + clear chat) ───
+  {
+    const thumbs = await chat("what does the thumbs up button do", [], "default");
+    const clear = await chat("what does the clear chat button do", [], "default");
+    const t = String(thumbs.message || "");
+    const c = String(clear.message || "");
+    const pass =
+      /yes\/no|no transcript|Does not email/i.test(t) &&
+      /Clear chat|top of this (thread|conversation)/i.test(c) &&
+      !/I don't have an approved staff guide/i.test(t) &&
+      !/I don't have an approved staff guide/i.test(c);
+    record(
+      "10",
+      "Meta chrome (thumbs + clear chat)",
+      pass,
+      pass ? "thumbs + clear chat explained" : "chrome miss",
+      pass ? undefined : `THUMBS: ${t}\nCLEAR: ${c}`,
+    );
+  }
+
+  // ─── 11. Meta catalog — orientation (must not Practice#typing hijack) ───
+  {
+    const q =
+      "I am asking how do they help me become a medical assistant because I was told that this is an app which will change my life and help me use AI to become a better medical assistant can you tell me like top 5 uses for this app for me";
+    const data = await chat(q, [], "default");
+    const reply = String(data.message || "");
+    const hrefTyping = (data.links || []).some((l) => /practice#typing/i.test(l.href));
+    const pass =
+      /Siya Assist|Ask|Learn → Practice|My day/i.test(reply) &&
+      !/right staff guide for that yet/i.test(reply) &&
+      !hrefTyping &&
+      !/Open the \*\*Chat speed/i.test(reply);
+    record(
+      "11",
+      "Meta orientation (no typing hijack)",
+      pass,
+      pass ? "orientation map, no #typing" : "soft-stop or practice hijack",
+      reply,
+    );
+  }
+
+  // ─── 12. Meta catalog — delete/archive typo ───
+  {
+    const data = await chat("delete existig chat", [], "default");
+    const reply = String(data.message || "");
+    const pass = /Archive|Clear chat/i.test(reply) && !/right staff guide for that yet/i.test(reply);
+    record("12", "Meta chrome (delete existig chat)", pass, pass ? "archive/clear pointer" : "missed delete chrome", reply);
   }
 
   // ─── Table ───

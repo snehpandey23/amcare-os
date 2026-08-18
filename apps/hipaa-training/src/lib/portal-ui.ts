@@ -99,6 +99,13 @@ export const portalAskInput =
 export const portalAskSendBtn =
   "rounded-[var(--siya-radius-md)] bg-[var(--siya-btn-accent)] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--siya-btn-accent-hover)] disabled:opacity-50";
 
+/** Site-wide Assist rail (Phase A) — reuse instead of ad-hoc sidebar colors. */
+export const portalWorkspaceNavActive =
+  "font-semibold text-[var(--siya-primary)] bg-[var(--siya-white)]";
+
+export const portalWorkspaceNavIdle =
+  "text-[var(--siya-text-muted)] hover:bg-[var(--siya-white)] hover:text-[var(--siya-text-secondary)]";
+
 /** Lead / dept notice strip (was violet — now info tint on core palette). */
 export const portalNoticeLead =
   "rounded-[var(--siya-radius-md)] border border-[var(--siya-primary)]/15 bg-[var(--siya-bg-subtle)] px-3 py-2.5 text-xs text-[var(--siya-text-secondary)]";

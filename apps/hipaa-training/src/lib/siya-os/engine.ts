@@ -136,7 +136,8 @@ export async function runSiyaAssistantAsync(
   const token = opts?.authToken?.trim() || null;
   const founderCoach = opts?.surface === "founder-coach";
 
-  if (token && detectAdminOpsIntent(message)) {
+  const opsIntent = token ? detectAdminOpsIntent(message) : null;
+  if (token && opsIntent) {
     const snapshot = await fetchAdminOpsSnapshot(token);
     if (snapshot) {
       const ops = await runAdminOpsCoach(message, snapshot, token, history);
@@ -166,6 +167,25 @@ export async function runSiyaAssistantAsync(
           },
         };
       }
+    }
+    // Staff (or snapshot miss): still answer presence honestly — never invent a roster or soft-stop.
+    if (opsIntent.kind === "team_pulse") {
+      return {
+        message: polishStaffMessage(
+          "I don’t have the live **Team pulse** roster on this login (that’s an admin signal). Open **Team** to see who’s on shift — I won’t invent a list.",
+        ),
+        chunks: [],
+        sources: [],
+        portalLinks: [{ label: "Team", href: "/team" }],
+        opsCoPilot: false,
+        ruleFinal: true,
+        routing: {
+          department: "General",
+          task: "Team presence",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
     }
   }
 
@@ -442,7 +462,7 @@ function buildSiyaReply(
         [
           "That’s a **patient / public-site** topic — Founder Talk won’t invent marketing or clinical FAQ copy here.",
           "",
-          "For staff answers from approved guides, use **Ask** in the top nav. For patient-facing pages, use **siya.health** or Siya Guide.",
+          "For staff answers from approved guides, use **Ask** on **My day** (left sidebar). For patient-facing pages, use **siya.health** or Siya Guide.",
           "I won’t mark this as an internal SOP knowledge gap.",
         ].join("\n"),
       ),
