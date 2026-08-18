@@ -2,6 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
+  BRAND_INTRO_EXIT_MS,
+  BRAND_INTRO_HOLD_MS,
+  BRAND_INTRO_PREVIEW_MS,
+  BRAND_INTRO_REDUCED_MS,
   BRAND_INTRO_SOUND_ENABLED,
   BRAND_INTRO_TAGLINE,
   isBrandIntroPreviewQuery,
@@ -12,14 +16,9 @@ type Props = {
   onComplete: () => void;
 };
 
-const TOTAL_MS = 2600;
-const PREVIEW_MS = 8000;
-const REDUCED_MS = 450;
-const EXIT_MS = 320;
-
 /**
- * Sega-style first-load brand splash — once per day, skippable, silent by default.
- * Pure CSS animation; tap/click/Escape skips straight to My day.
+ * First-load brand splash — once per day (localStorage), skippable, silent by default.
+ * Hold + fade ≈ 2.2s. Tap/click/Escape skips straight to the next screen.
  */
 export function BrandIntroSplash({ onComplete }: Props) {
   const [exiting, setExiting] = useState(false);
@@ -57,15 +56,15 @@ export function BrandIntroSplash({ onComplete }: Props) {
         return;
       }
       setExiting(true);
-      exitTimer = window.setTimeout(release, EXIT_MS);
+      exitTimer = window.setTimeout(release, BRAND_INTRO_EXIT_MS);
     };
     finishRef.current = finish;
 
     const ms = reduce
-      ? REDUCED_MS
+      ? BRAND_INTRO_REDUCED_MS
       : isBrandIntroPreviewQuery()
-        ? PREVIEW_MS
-        : TOTAL_MS;
+        ? BRAND_INTRO_PREVIEW_MS
+        : BRAND_INTRO_HOLD_MS;
     const auto = window.setTimeout(finish, ms);
 
     const onKey = (e: KeyboardEvent) => {

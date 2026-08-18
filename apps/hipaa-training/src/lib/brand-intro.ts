@@ -1,9 +1,25 @@
 /**
- * Netflix-style brand intro — plays on every login / My day load.
- * Skip-once only avoids a double splash when login → My day in the same hop.
+ * Brand intro — once per local calendar day (localStorage).
+ * Skip-once avoids a double splash on the login → My day hop.
+ * Sign-out must not clear the date key — the daily gate survives logout.
  */
 
 const SKIP_ONCE_KEY = "siya-brand-intro-skip-once";
+const SHOWN_DATE_KEY = "siya-brand-intro-shown-on";
+
+/** Hold time before fade-out. Plus BRAND_INTRO_EXIT_MS ≈ 2.2s spec. */
+export const BRAND_INTRO_HOLD_MS = 1900;
+export const BRAND_INTRO_EXIT_MS = 300;
+export const BRAND_INTRO_TOTAL_MS = BRAND_INTRO_HOLD_MS + BRAND_INTRO_EXIT_MS;
+export const BRAND_INTRO_PREVIEW_MS = 8000;
+export const BRAND_INTRO_REDUCED_MS = 450;
+
+export function localDateKey(d = new Date()): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
 
 /** QA: `?previewIntro=1` always forces splash. */
 export function isBrandIntroPreviewQuery(): boolean {
@@ -11,7 +27,15 @@ export function isBrandIntroPreviewQuery(): boolean {
   return new URLSearchParams(window.location.search).get("previewIntro") === "1";
 }
 
-/** True every load, except the one navigation right after login splash → home. */
+function readShownDate(): string | null {
+  try {
+    return localStorage.getItem(SHOWN_DATE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+/** True once per local day, unless skip-once (post-login hop) or already marked today. */
 export function shouldShowBrandIntro(): boolean {
   if (typeof window === "undefined") return false;
   if (isBrandIntroPreviewQuery()) return true;
@@ -23,7 +47,7 @@ export function shouldShowBrandIntro(): boolean {
   } catch {
     /* private mode */
   }
-  return true;
+  return readShownDate() !== localDateKey();
 }
 
 /** @deprecated Use shouldShowBrandIntro — kept for existing call sites. */
@@ -41,9 +65,13 @@ export function skipBrandIntroOnce(): void {
   }
 }
 
-/** No longer daily-gated — kept as a no-op so splash remounts stay simple. */
 export function markBrandIntroShownToday(): void {
-  /* every-load intro — nothing to persist */
+  if (typeof localStorage === "undefined") return;
+  try {
+    localStorage.setItem(SHOWN_DATE_KEY, localDateKey());
+  } catch {
+    /* private mode */
+  }
 }
 
 /** Splash tagline — company startup moment (not the My day product line). */

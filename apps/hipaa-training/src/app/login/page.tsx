@@ -9,7 +9,7 @@ import { canUsePortalWithoutOnboarding, loadLocalPortalProfile } from "@/lib/por
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
 import { BrandIntroSplash } from "@/components/siya/BrandIntroSplash";
 import { SiyaWordmark } from "@/components/siya/SiyaWordmark";
-import { skipBrandIntroOnce } from "@/lib/brand-intro";
+import { shouldShowBrandIntro, skipBrandIntroOnce } from "@/lib/brand-intro";
 
 function portalLandingPath(): string {
   return canUsePortalWithoutOnboarding(loadLocalPortalProfile()) ? "/" : "/onboarding";
@@ -24,14 +24,15 @@ export default function LoginPage() {
   const [mode, setMode] = useState<"login" | "register">("login");
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
-  /** false until splash completes — avoid null cream placeholder flash before BrandIntroSplash */
-  const [showIntro, setShowIntro] = useState(true);
+  const [introGate, setIntroGate] = useState<"pending" | "intro" | "form">("pending");
 
   useEffect(() => {
     if (!allowRegister) setMode("login");
   }, [allowRegister]);
 
-  // Intro starts true — Netflix-style every login visit.
+  useEffect(() => {
+    setIntroGate(shouldShowBrandIntro() ? "intro" : "form");
+  }, []);
 
   if (!isPortalAuthEnabled()) {
     return (
@@ -51,8 +52,12 @@ export default function LoginPage() {
     return null;
   }
 
-  if (showIntro) {
-    return <BrandIntroSplash onComplete={() => setShowIntro(false)} />;
+  if (introGate === "pending") {
+    return <div className="siya-page-bg min-h-screen" aria-hidden />;
+  }
+
+  if (introGate === "intro") {
+    return <BrandIntroSplash onComplete={() => setIntroGate("form")} />;
   }
 
   async function onSubmit(e: React.FormEvent) {

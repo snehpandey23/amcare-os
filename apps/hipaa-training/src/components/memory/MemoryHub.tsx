@@ -137,14 +137,18 @@ export function MemoryHub() {
   return (
     <div className={portalPage}>
       <header>
-        <p className={portalCapsLabel}>Pillar · Memory</p>
+        <p className={portalCapsLabel}>Memory</p>
         <h1 className={portalH1}>Memory</h1>
-        <p className="mt-2 max-w-xl text-sm text-[var(--siya-text-secondary)]">
-          Nav says <strong>Memory</strong>. Stack:{" "}
-          <strong>The Siya Way → Policies & requirements → Knowledge → Memory</strong>. Ask retrieves in that order.
-          Steward: <strong>{KNOWLEDGE_STEWARD}</strong>.
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--siya-text-secondary)]">
+          This is the company&apos;s record of how we work and why — past decisions, published policies, and
+          approved knowledge. Open it when you&apos;re wondering why something works the way it does, or to
+          look up a guide before you ask Assist.
         </p>
-        <p className="mt-2 text-xs italic text-[var(--siya-text-muted)]">{PROMOTION_RULE}</p>
+        <p className="mt-2 max-w-2xl text-xs text-[var(--siya-text-muted)]">
+          Tabs: <strong>The Siya Way</strong> (how we operate) → <strong>Policies</strong> →{" "}
+          <strong>Knowledge</strong> (approved guides Ask uses) → <strong>Memory</strong> (captures).
+          Steward: {KNOWLEDGE_STEWARD}. {PROMOTION_RULE}
+        </p>
       </header>
 
       <KnowledgePipelineStrip />

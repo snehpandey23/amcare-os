@@ -58,7 +58,7 @@ export function AssistantShell({ children }: { children: ReactNode }) {
                 Memory
               </NavLink>
             ) : null}
-            {user ? (
+            {user && !isPortalAdmin(user.role) ? (
               <NavLink href="/team" active={path === "/team" || path.startsWith("/team/")}>
                 Team
               </NavLink>

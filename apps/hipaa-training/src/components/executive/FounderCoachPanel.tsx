@@ -783,6 +783,77 @@ export function FounderCoachPanel({ firstName }: { firstName?: string }) {
 
   if (!isPortalAdmin(user?.role)) return null;
 
+  const talkChat = (
+    <div className="flex min-h-[calc(100dvh-5.5rem)] flex-col gap-2">
+      <header className="shrink-0">
+        <h2 className={portalH3}>Ask</h2>
+        <p className="mt-0.5 text-xs text-[var(--siya-text-muted)]">
+          Policies, coverage, difficult-patient paths — same engine as staff Ask. Plan Record stays on{" "}
+          <strong>This week&apos;s plan</strong>.
+        </p>
+      </header>
+      <div className="min-h-0 flex-1">
+        <AssistChatShell
+          firstName={resolvedName}
+          surface="founder-coach"
+          openingOverride={FOUNDER_TALK_OPENING}
+        />
+      </div>
+    </div>
+  );
+
+  const sideNav = (
+    <>
+      <nav
+        aria-label="Founder Coach threads"
+        className="hidden w-36 shrink-0 flex-col px-3 py-8 md:flex"
+      >
+        <button type="button" className={threadButtonClass(thread === "talk")} onClick={() => setThread("talk")}>
+          Ask
+        </button>
+        <button type="button" className={threadButtonClass(thread === "plan")} onClick={() => setThread("plan")}>
+          This week&apos;s plan
+        </button>
+        {DOMAIN_TAB_IDS.map((id) => {
+          const domain = domains.find((d) => d.id === id);
+          const label = domain?.title ?? id.charAt(0).toUpperCase() + id.slice(1);
+          return (
+            <button key={id} type="button" className={threadButtonClass(thread === id)} onClick={() => setThread(id)}>
+              {label}
+            </button>
+          );
+        })}
+      </nav>
+
+      <div className="flex gap-1 overflow-x-auto px-3 py-2 md:hidden">
+        <button type="button" className={threadButtonClass(thread === "talk")} onClick={() => setThread("talk")}>
+          Ask
+        </button>
+        <button type="button" className={threadButtonClass(thread === "plan")} onClick={() => setThread("plan")}>
+          Plan
+        </button>
+        {DOMAIN_TAB_IDS.map((id) => {
+          const domain = domains.find((d) => d.id === id);
+          const label = domain?.title ?? id;
+          return (
+            <button key={id} type="button" className={threadButtonClass(thread === id)} onClick={() => setThread(id)}>
+              {label}
+            </button>
+          );
+        })}
+      </div>
+    </>
+  );
+
+  if (thread === "talk") {
+    return (
+      <div className={portalChatShell}>
+        {sideNav}
+        <main className="min-w-0 flex-1 px-4 pb-4 pt-3 md:px-8 md:py-4">{talkChat}</main>
+      </div>
+    );
+  }
+
   if (isLoading) {
     return (
       <div className="flex min-h-[calc(100dvh-3.5rem)] items-center justify-center px-4">
@@ -803,61 +874,10 @@ export function FounderCoachPanel({ firstName }: { firstName?: string }) {
 
   return (
     <div className={portalChatShell}>
-      <nav
-        aria-label="Founder Coach threads"
-        className="hidden w-36 shrink-0 flex-col px-3 py-8 md:flex"
-      >
-        <button type="button" className={threadButtonClass(thread === "talk")} onClick={() => setThread("talk")}>
-          Just talk to me
-        </button>
-        <button type="button" className={threadButtonClass(thread === "plan")} onClick={() => setThread("plan")}>
-          This week&apos;s plan
-        </button>
-        {DOMAIN_TAB_IDS.map((id) => {
-          const domain = domains.find((d) => d.id === id);
-          const label = domain?.title ?? id.charAt(0).toUpperCase() + id.slice(1);
-          return (
-            <button key={id} type="button" className={threadButtonClass(thread === id)} onClick={() => setThread(id)}>
-              {label}
-            </button>
-          );
-        })}
-      </nav>
-
-      <div className="flex gap-1 overflow-x-auto px-3 py-2 md:hidden">
-        <button type="button" className={threadButtonClass(thread === "talk")} onClick={() => setThread("talk")}>
-          Talk
-        </button>
-        <button type="button" className={threadButtonClass(thread === "plan")} onClick={() => setThread("plan")}>
-          Plan
-        </button>
-        {DOMAIN_TAB_IDS.map((id) => {
-          const domain = domains.find((d) => d.id === id);
-          const label = domain?.title ?? id;
-          return (
-            <button key={id} type="button" className={threadButtonClass(thread === id)} onClick={() => setThread(id)}>
-              {label}
-            </button>
-          );
-        })}
-      </div>
+      {sideNav}
 
       <main className="min-w-0 flex-1 px-4 pb-8 pt-4 md:px-8 md:py-10">
-        {thread === "talk" ? (
-          <div className="flex min-h-[min(70dvh,640px)] flex-col gap-3">
-            <header>
-              <h2 className={portalH3}>Just talk to me</h2>
-              <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
-                Same Ask engine as /help · answers only · Plan Record stays manual
-              </p>
-            </header>
-            <AssistChatShell
-              firstName={resolvedName}
-              surface="founder-coach"
-              openingOverride={FOUNDER_TALK_OPENING}
-            />
-          </div>
-        ) : thread === "plan" ? (
+        {thread === "plan" ? (
           <PlanThreadView data={data} onRefresh={refresh} />
         ) : activeDomain ? (
           <DomainThreadView domain={activeDomain} />

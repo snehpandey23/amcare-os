@@ -332,7 +332,7 @@ export function HomeHub() {
           {isAdmin ? (
             introGate === "ready" ? <FounderCoachPanel firstName={firstName} /> : null
           ) : introGate === "ready" ? (
-            <div className={`${portalChatPage} ${inFocus ? portalFocusRail : ""}`}>
+            <div className={`${portalChatPage} ${inFocus ? portalFocusRail : ""} !space-y-3 !py-3 md:!py-4`}>
               {complianceDue ? (
                 <p className={`mb-3 ${portalStatusWarnBox} px-3 py-2 text-xs ${portalStatusWarnText}`}>
                   Compliance: HIPAA certification in progress ({modulesDone}/{moduleTotal} modules).{" "}
