@@ -85,16 +85,16 @@ export default function LoginPage() {
         <div className="flex justify-center">
           <SiyaWordmark size="login" />
         </div>
-        <h1 className="mt-8 font-[family-name:var(--font-poppins)] text-2xl font-semibold tracking-tight text-[var(--siya-primary)]">
-          Siya Health staff portal
+        <h1 className="mt-8 text-lg font-medium tracking-tight text-[var(--siya-text)]">
+          Staff portal
         </h1>
-        <p className="mt-3 text-sm leading-relaxed text-[var(--siya-text-secondary)]">
-          Sign in for My day, training, and team coordination — Siya Health &amp; Amcare India.
+        <p className="mt-2 text-sm text-[var(--siya-text-muted)]">
+          Sign in for My day, training, and team coordination.
         </p>
 
         <form
           onSubmit={onSubmit}
-          className="mt-8 rounded-[var(--siya-radius-lg)] border border-[var(--siya-border)] bg-[var(--siya-white)] p-6 text-left shadow-[var(--siya-shadow-lg)]"
+          className="mt-8 text-left"
         >
           {mode === "register" ? (
             <label className="block">

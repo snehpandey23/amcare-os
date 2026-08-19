@@ -97,14 +97,14 @@ export const portalAskInput =
   "min-w-0 flex-1 rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-4 py-2.5 text-sm outline-none focus:border-[var(--siya-accent)] focus:ring-2 focus:ring-[var(--siya-accent)]/20";
 
 export const portalAskSendBtn =
-  "rounded-[var(--siya-radius-md)] bg-[var(--siya-btn-accent)] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--siya-btn-accent-hover)] disabled:opacity-50";
+  "rounded-lg bg-[var(--siya-btn-primary)] px-3.5 py-2 text-sm font-medium text-white transition hover:bg-[var(--siya-btn-primary-hover)] disabled:opacity-40";
 
 /** Site-wide Assist rail (Phase A) — reuse instead of ad-hoc sidebar colors. */
 export const portalWorkspaceNavActive =
-  "font-semibold text-[var(--siya-primary)] bg-[var(--siya-white)]";
+  "font-medium text-[var(--siya-text)] bg-[var(--siya-white)]";
 
 export const portalWorkspaceNavIdle =
-  "text-[var(--siya-text-muted)] hover:bg-[var(--siya-white)] hover:text-[var(--siya-text-secondary)]";
+  "text-[var(--siya-text-muted)] hover:bg-[var(--siya-white)] hover:text-[var(--siya-text)]";
 
 /** Lead / dept notice strip (was violet — now info tint on core palette). */
 export const portalNoticeLead =

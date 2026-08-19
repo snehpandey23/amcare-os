@@ -4,22 +4,13 @@ import { useMemo, useState } from "react";
 import { useShiftOptional } from "@/context/ShiftContext";
 import { isPortalLoginRequired } from "@/lib/trainingConfig";
 import type { PresenceStatus } from "@/lib/shift-api";
-import { PRESENCE_EMOJI, PRESENCE_LABEL } from "@/lib/shift-presence";
+import { PRESENCE_LABEL } from "@/lib/shift-presence";
 import { buildShiftDaySummary } from "@/lib/shift-day-summary";
 import { EndShiftModal } from "@/components/shift/EndShiftModal";
 import { ShiftHandoffModal } from "@/components/ops/ShiftHandoffModal";
-import {
-  portalBtnGhostSm,
-  portalBtnNavySm,
-  portalStatusInfoPill,
-  portalStatusSuccessBox,
-  portalStatusSuccessText,
-  portalStatusWarnBox,
-  portalStatusWarnText,
-} from "@/lib/portal-ui";
 
 function btnClass(extra?: string) {
-  return `${portalBtnGhostSm} shrink-0 px-2.5 py-1.5 text-[11px] ${extra ?? ""}`;
+  return `shrink-0 rounded-md px-1.5 py-1 text-[11px] text-[var(--siya-text-muted)] hover:text-[var(--siya-text)] disabled:opacity-40 ${extra ?? ""}`;
 }
 
 export function ShiftPresenceBar({ onEndShift }: { onEndShift?: () => void }) {
@@ -45,7 +36,7 @@ export function ShiftPresenceBar({ onEndShift }: { onEndShift?: () => void }) {
     return (
       <button
         type="button"
-        className={`${portalBtnNavySm} shrink-0`}
+        className="shrink-0 rounded-md px-2 py-1 text-[11px] text-[var(--siya-text-muted)] hover:bg-[var(--siya-white)] hover:text-[var(--siya-text)]"
         onClick={() => void startShift("morning")}
       >
         Start shift
@@ -63,21 +54,14 @@ export function ShiftPresenceBar({ onEndShift }: { onEndShift?: () => void }) {
     }
   }
 
-  const pill =
-    presence === "working"
-      ? `${portalStatusSuccessBox} ${portalStatusSuccessText}`
-      : presence === "break"
-        ? `${portalStatusWarnBox} ${portalStatusWarnText}`
-        : portalStatusInfoPill;
-
   return (
     <>
-      <div className="flex max-w-none flex-nowrap items-center justify-end gap-1.5">
+      <div className="flex max-w-none flex-nowrap items-center justify-end gap-0.5">
         <span
-          className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ${pill}`}
+          className="shrink-0 px-1.5 text-[11px] text-[var(--siya-text-muted)]"
           title="Self-declared — not detected from keyboard or mouse"
         >
-          {PRESENCE_EMOJI[presence]} {PRESENCE_LABEL[presence]}
+          {PRESENCE_LABEL[presence]}
         </span>
         {presence === "working" ? (
           <>
@@ -93,7 +77,7 @@ export function ShiftPresenceBar({ onEndShift }: { onEndShift?: () => void }) {
             Back to working
           </button>
         )}
-        <button type="button" className={btnClass("text-[var(--siya-accent)]")} onClick={() => setEndOpen(true)}>
+        <button type="button" className={btnClass()} onClick={() => setEndOpen(true)}>
           End shift
         </button>
       </div>

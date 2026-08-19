@@ -14,7 +14,6 @@ import { useShiftOptional } from "@/context/ShiftContext";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { SiyaWordmark } from "@/components/siya/SiyaWordmark";
 import { AssistWorkspaceSidebar } from "@/components/siya/AssistWorkspaceSidebar";
-import { portalBtnGhostSm } from "@/lib/portal-ui";
 
 export function AssistantShell({ children }: { children: ReactNode }) {
   const path = usePathname() ?? "/";
@@ -27,40 +26,40 @@ export function AssistantShell({ children }: { children: ReactNode }) {
   return (
     <AssistThreadProvider>
       <div className="siya-page-bg flex h-screen flex-col">
-        <header className="no-print relative z-50 flex h-[4.25rem] shrink-0 items-center justify-between border-b border-[var(--siya-border)] bg-[var(--siya-white)]/90 px-4 backdrop-blur-sm md:px-6">
-          <div className="flex items-center gap-3">
+        <header className="no-print relative z-50 flex h-11 shrink-0 items-center justify-between border-b border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-3 md:px-4">
+          <div className="flex items-center gap-2">
             <button
               type="button"
-              className={`${portalBtnGhostSm} md:hidden`}
+              className="rounded-md px-2 py-1 text-xs text-[var(--siya-text-muted)] hover:bg-[var(--siya-white)] hover:text-[var(--siya-text)] md:hidden"
               aria-label="Open chats and navigation"
               onClick={() => setMobileNav(true)}
             >
               Chats
             </button>
             <Link href="/" className="flex items-center" aria-label="Siya — My day">
-              <SiyaWordmark size="header" />
+              <SiyaWordmark size="compact" />
             </Link>
           </div>
-          <div className="flex items-center gap-2 text-xs text-[var(--siya-text-muted)] md:gap-3">
+          <div className="flex items-center gap-1 text-xs text-[var(--siya-text-muted)] md:gap-2">
             {!isPortalAdmin(user?.role) ? (
               <ShiftPresenceBar onEndShift={() => router.replace("/start-shift")} />
             ) : null}
             <ThemeToggle variant="header" />
             {user ? (
               <>
-                <span className="hidden max-w-[180px] truncate sm:inline text-[var(--siya-text-muted)]">
+                <span className="hidden max-w-[160px] truncate sm:inline">
                   {user.name?.trim() || user.email}
                 </span>
                 <a
                   href="/account"
-                  className="hidden rounded-lg border border-[var(--siya-border)] px-2.5 py-1.5 text-[11px] font-medium text-[var(--siya-text-secondary)] hover:bg-[var(--siya-bg-subtle)] sm:inline"
+                  className="hidden rounded-md px-2 py-1 text-[11px] hover:bg-[var(--siya-white)] hover:text-[var(--siya-text)] sm:inline"
                 >
                   Account
                 </a>
                 <button
                   type="button"
                   onClick={() => logout()}
-                  className="rounded-lg border border-[var(--siya-border)] px-3 py-1.5 font-medium text-[var(--siya-accent)] hover:bg-[var(--siya-bg-subtle)]"
+                  className="rounded-md px-2 py-1 text-[11px] hover:bg-[var(--siya-white)] hover:text-[var(--siya-text)]"
                 >
                   Sign out
                 </button>
@@ -68,7 +67,7 @@ export function AssistantShell({ children }: { children: ReactNode }) {
             ) : isPortalAuthEnabled() || isTrainingAuthRequired() ? (
               <Link
                 href="/login"
-                className="rounded-lg bg-[var(--siya-btn-primary)] px-3 py-1.5 font-medium text-white hover:bg-[var(--siya-btn-primary-hover)]"
+                className="rounded-md bg-[var(--siya-btn-primary)] px-3 py-1.5 font-medium text-white hover:bg-[var(--siya-btn-primary-hover)]"
               >
                 Sign in
               </Link>

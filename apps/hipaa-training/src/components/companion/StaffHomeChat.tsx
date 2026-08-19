@@ -8,7 +8,6 @@ import { MyDayTasksPanel } from "@/components/tasks/MyDayTasksPanel";
 import { SopLeadMyDayCard } from "@/components/sops/SopLeadMyDayCard";
 import { LeadKnowledgeGapsCard } from "@/components/ops/LeadKnowledgeGapsCard";
 import { WeeklyCheckInCard } from "@/components/ops/WeeklyCheckInCard";
-import { portalBtnGhostSm, portalSectionCompact } from "@/lib/portal-ui";
 
 /**
  * My day = continuous Assist chat (merged former Ask).
@@ -39,24 +38,25 @@ function StaffHomeChatInner({
       </div>
 
       {!onBreak ? (
-        <div className={`mt-3 ${portalSectionCompact}`}>
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-xs text-[var(--siya-text-muted)]">
-              Today&apos;s checklist &amp; lead queues — optional, under Assist.
-            </p>
-            <button type="button" className={portalBtnGhostSm} onClick={() => setShowToday((v) => !v)}>
-              {showToday ? "Hide today" : "Today’s checklist"}
+        <div className="shrink-0 px-3 py-1.5">
+          <div className="flex items-center justify-end">
+            <button
+              type="button"
+              className="text-[11px] text-[var(--siya-text-muted)] hover:text-[var(--siya-text)]"
+              onClick={() => setShowToday((v) => !v)}
+            >
+              {showToday ? "Hide today" : "Today"}
             </button>
           </div>
           {showToday ? (
-            <div className="mt-3 space-y-3">
+            <div className="mt-2 space-y-3">
               {!inFocus ? <MyDayTasksPanel /> : null}
               <SopLeadMyDayCard />
               <LeadKnowledgeGapsCard />
               {!inFocus ? <WeeklyCheckInCard /> : null}
               <p className="text-[11px] text-[var(--siya-text-muted)]">
                 HIPAA certification lives under{" "}
-                <Link href="/training" className="font-semibold text-[var(--siya-accent)] hover:underline">
+                <Link href="/training" className="underline underline-offset-2 hover:text-[var(--siya-text)]">
                   Learn
                 </Link>
                 .

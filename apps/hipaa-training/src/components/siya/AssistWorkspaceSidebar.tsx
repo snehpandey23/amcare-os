@@ -6,7 +6,7 @@ import { useAssistThreads } from "@/context/AssistThreadContext";
 import { isPortalAdmin } from "@/lib/portal-role";
 import { isPortalMemoryEnabled } from "@/lib/trainingConfig";
 import { PortalNavLink } from "@/components/training/PortalNavLink";
-import { portalBtnGhostSm, portalBtnNavySm, portalWorkspaceNavActive, portalWorkspaceNavIdle } from "@/lib/portal-ui";
+import { portalWorkspaceNavActive, portalWorkspaceNavIdle } from "@/lib/portal-ui";
 
 export function AssistWorkspaceSidebar({ onNavigate }: { onNavigate?: () => void }) {
   const path = usePathname() ?? "/";
@@ -27,11 +27,11 @@ export function AssistWorkspaceSidebar({ onNavigate }: { onNavigate?: () => void
   const onMyDay = path === "/" || path.startsWith("/help");
 
   return (
-    <aside className="flex h-full w-[260px] shrink-0 flex-col border-r border-[var(--siya-border)] bg-[var(--siya-bg-subtle)]">
-      <div className="space-y-2 border-b border-[var(--siya-border)] px-3 py-3">
+    <aside className="flex h-full w-[240px] shrink-0 flex-col border-r border-[var(--siya-border)] bg-[var(--siya-bg-subtle)]">
+      <div className="space-y-2 px-2 pt-3 pb-2">
         <button
           type="button"
-          className={`${portalBtnNavySm} w-full`}
+          className="w-full rounded-md px-2.5 py-1.5 text-left text-[13px] text-[var(--siya-text)] hover:bg-[var(--siya-white)]"
           onClick={() => {
             void newChat();
             onNavigate?.();
@@ -49,19 +49,19 @@ export function AssistWorkspaceSidebar({ onNavigate }: { onNavigate?: () => void
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search chats…"
-            className="w-full rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-2.5 py-1.5 text-xs text-[var(--siya-text)] outline-none focus:border-[var(--siya-accent)]"
+            placeholder="Search"
+            className="w-full rounded-md border-0 bg-[var(--siya-white)] px-2.5 py-1.5 text-xs text-[var(--siya-text)] outline-none placeholder:text-[var(--siya-text-muted)]"
           />
         </form>
       </div>
 
-      <div className="min-h-0 flex-1 overflow-y-auto px-2 py-2">
+      <div className="min-h-0 flex-1 overflow-y-auto px-1.5 py-1">
         {loadingList ? (
           <p className="px-2 text-[11px] text-[var(--siya-text-muted)]">Loading…</p>
         ) : threads.length === 0 ? (
           <p className="px-2 text-[11px] text-[var(--siya-text-muted)]">No saved chats yet.</p>
         ) : (
-          <ul className="space-y-0.5">
+          <ul className="space-y-px">
             {threads.map((t) => {
               const active = onMyDay && t.id === activeId;
               return (
@@ -72,17 +72,17 @@ export function AssistWorkspaceSidebar({ onNavigate }: { onNavigate?: () => void
                       selectThread(t.id);
                       onNavigate?.();
                     }}
-                    className={`w-full rounded-lg px-2.5 py-2 pr-14 text-left text-xs leading-snug ${
+                    className={`w-full rounded-md px-2.5 py-1.5 pr-8 text-left text-[13px] leading-snug ${
                       active
-                        ? "bg-[var(--siya-primary)]/10 font-semibold text-[var(--siya-primary)]"
-                        : "text-[var(--siya-text-secondary)] hover:bg-[var(--siya-white)]"
+                        ? "bg-[var(--siya-white)] text-[var(--siya-text)]"
+                        : "text-[var(--siya-text-muted)] hover:bg-[var(--siya-white)] hover:text-[var(--siya-text)]"
                     }`}
                   >
-                    <span className="line-clamp-2">{t.title || "New chat"}</span>
+                    <span className="line-clamp-1">{t.title || "New chat"}</span>
                   </button>
                   <button
                     type="button"
-                    className={`${portalBtnGhostSm} absolute right-1 top-1 !px-1.5 !py-0.5 text-[10px] opacity-0 group-hover:opacity-100`}
+                    className="absolute right-1 top-1/2 -translate-y-1/2 rounded px-1.5 text-[11px] text-[var(--siya-text-muted)] opacity-0 hover:text-[var(--siya-text)] group-hover:opacity-100"
                     onClick={(e) => {
                       e.stopPropagation();
                       void archiveThread(t.id);
@@ -90,7 +90,7 @@ export function AssistWorkspaceSidebar({ onNavigate }: { onNavigate?: () => void
                     aria-label="Archive chat (remove from list)"
                     title="Archive — remove from your chat list"
                   >
-                    Archive
+                    ×
                   </button>
                 </li>
               );
@@ -156,7 +156,7 @@ function SideLink({
     <span onClick={() => onNavigate?.()}>
       <PortalNavLink
         href={href}
-        className={`block rounded-lg px-2.5 py-1.5 text-sm ${active ? portalWorkspaceNavActive : portalWorkspaceNavIdle}`}
+        className={`block rounded-md px-2.5 py-1.5 text-[13px] ${active ? portalWorkspaceNavActive : portalWorkspaceNavIdle}`}
       >
         {children}
       </PortalNavLink>

@@ -44,32 +44,32 @@
   --siya-status-error-text: #991b1b;
 }
 
-/** Phase 1 dark theme — charcoal + Siya teal/navy (not a cream invert). */
+/** Dark workspace — near-black surfaces, navy selection (not a cream invert). */
 html.dark {
   color-scheme: dark;
-  --siya-primary: #8ba3e8;
-  --siya-primary-hover: #a8bbf0;
-  --siya-accent: #2dd4bf;
-  --siya-accent-hover: #5eead4;
+  --siya-primary: #9eb0e8;
+  --siya-primary-hover: #b8c6f0;
+  --siya-accent: #8ba3e8;
+  --siya-accent-hover: #a8bbf0;
   --siya-btn-primary: #1e3a8a;
   --siya-btn-primary-hover: #1e40af;
-  --siya-btn-accent: #0f766e;
-  --siya-btn-accent-hover: #115e59;
-  --siya-text: #eceaf2;
-  --siya-text-secondary: #b4b0bf;
-  --siya-text-muted: #8a8696;
-  --siya-border: #2e2c3a;
-  --siya-bg-page: #14131a;
-  --siya-bg-subtle: #1c1b24;
-  --siya-white: #22212b;
-  --siya-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
-  --siya-shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.55);
+  --siya-btn-accent: #1e3a8a;
+  --siya-btn-accent-hover: #1e40af;
+  --siya-text: #ececec;
+  --siya-text-secondary: #b3b3b3;
+  --siya-text-muted: #737373;
+  --siya-border: #2a2a2c;
+  --siya-bg-page: #0f0f11;
+  --siya-bg-subtle: #141416;
+  --siya-white: #1a1a1c;
+  --siya-shadow: none;
+  --siya-shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
   --siya-status-warn-bg: #3b2a12;
   --siya-status-warn-border: #92400e;
   --siya-status-warn-text: #fbbf24;
-  --siya-status-info-bg: #0f2f2c;
-  --siya-status-info-border: #0f766e;
-  --siya-status-info-text: #5eead4;
+  --siya-status-info-bg: #1a1c24;
+  --siya-status-info-border: #2a2a2c;
+  --siya-status-info-text: #9eb0e8;
   --siya-status-success-bg: #0f291e;
   --siya-status-success-border: #065f46;
   --siya-status-success-text: #6ee7b7;
@@ -140,10 +140,7 @@ body {
 }
 
 html.dark .siya-page-bg {
-  background:
-    radial-gradient(900px 420px at 8% -5%, rgba(139, 163, 232, 0.08), transparent 55%),
-    radial-gradient(700px 360px at 95% 0%, rgba(45, 212, 191, 0.06), transparent 50%),
-    var(--siya-bg-page);
+  background: var(--siya-bg-page);
 }
 
 @media print {

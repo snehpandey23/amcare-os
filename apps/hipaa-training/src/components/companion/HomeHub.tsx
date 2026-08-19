@@ -16,11 +16,7 @@ import {
   portalBtnNavySm,
   portalFocusRail,
   portalInput,
-  portalInputCompact,
   portalSection,
-  portalSectionSubtle,
-  portalStatusWarnBox,
-  portalStatusWarnText,
   portalH3,
 } from "@/lib/portal-ui";
 import { BRAND } from "@/lib/brand";
@@ -318,10 +314,10 @@ export function HomeHub() {
       ) : null}
 
       {showBreakScreen ? (
-        <section className={`${portalStatusWarnBox} p-8 text-center`}>
-          <p className={`font-[family-name:var(--font-poppins)] text-xl font-semibold ${portalStatusWarnText}`}>Enjoy your break.</p>
-          <p className={`mt-2 text-sm ${portalStatusWarnText} opacity-90`}>
-            See you in a bit. Tap <strong>Back to working</strong> in the header when you return.
+        <section className="flex flex-1 flex-col items-center justify-center px-6 text-center">
+          <p className="text-lg font-medium text-[var(--siya-text)]">Enjoy your break.</p>
+          <p className="mt-2 text-sm text-[var(--siya-text-muted)]">
+            Tap <strong className="font-medium text-[var(--siya-text)]">Back to working</strong> in the header when you return.
           </p>
         </section>
       ) : null}
@@ -331,14 +327,13 @@ export function HomeHub() {
           {isAdmin ? (
             introGate === "ready" ? <FounderCoachPanel firstName={firstName} /> : null
           ) : introGate === "ready" ? (
-            <div className={`flex h-full min-h-0 flex-col ${inFocus ? portalFocusRail : ""} px-3 py-3 md:px-4`}>
+            <div className={`flex h-full min-h-0 flex-col ${inFocus ? portalFocusRail : ""}`}>
               {complianceDue ? (
-                <p className={`mb-3 ${portalStatusWarnBox} px-3 py-2 text-xs ${portalStatusWarnText}`}>
-                  Compliance: HIPAA certification in progress ({modulesDone}/{moduleTotal} modules).{" "}
-                  <Link href="/training" className="font-semibold underline">
-                    Continue when you can
+                <p className="shrink-0 px-4 py-2 text-[11px] text-[var(--siya-text-muted)]">
+                  HIPAA certification in progress ({modulesDone}/{moduleTotal}).{" "}
+                  <Link href="/training" className="underline underline-offset-2 hover:text-[var(--siya-text)]">
+                    Continue
                   </Link>
-                  .
                 </p>
               ) : null}
               {!isPortalOnboardingPaused() && !profile.onboardingComplete ? (

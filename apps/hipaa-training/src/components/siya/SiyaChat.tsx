@@ -470,14 +470,13 @@ export function SiyaChat({
         <p className="px-1 py-3 text-sm text-[var(--siya-text-muted)]">Loading conversation…</p>
       ) : null}
       {!threadLoading && messages.length > 0 ? (
-        <div className="mx-auto flex w-full max-w-2xl shrink-0 items-center justify-between gap-2 px-1 pb-2">
-          <p className="text-[11px] text-[var(--siya-text-muted)]">Assist</p>
+        <div className="mx-auto flex w-full max-w-2xl shrink-0 justify-end px-1 pb-1">
           <button
             type="button"
             onClick={clearConversation}
-            className="rounded-lg border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] px-3 py-1.5 text-xs font-semibold text-[var(--siya-text-secondary)] hover:border-[var(--siya-accent)] hover:text-[var(--siya-accent)]"
+            className="rounded-md px-2 py-1 text-[11px] text-[var(--siya-text-muted)] hover:text-[var(--siya-text)]"
           >
-            Clear chat
+            Clear
           </button>
         </div>
       ) : null}
@@ -485,11 +484,11 @@ export function SiyaChat({
         <div className={`mx-auto max-w-2xl ${homeVariant ? "flex min-h-[min(48vh,420px)] flex-col" : "space-y-4"}`}>
           {homeVariant && !threadLoading && messages.length === 0 && !loading ? (
             <div className="flex flex-1 flex-col items-center justify-center px-4 text-center">
-              <p className="font-[family-name:var(--font-poppins)] text-xl font-medium text-[var(--siya-primary)] md:text-2xl">
+              <p className="text-lg font-medium text-[var(--siya-text)] md:text-xl">
                 {homeGreeting}
               </p>
               <p className="mt-2 max-w-md text-sm text-[var(--siya-text-muted)]">
-                Ask about policies, SOPs, tools, or who to contact.
+                Policies, SOPs, tools, or who to contact.
               </p>
             </div>
           ) : (
@@ -497,10 +496,10 @@ export function SiyaChat({
               {messages.map((msg) => (
             <div key={msg.id} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
               <div
-                className={`max-w-[92%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap shadow-[var(--siya-shadow)] ${
+                className={`max-w-[92%] px-3 py-2 text-sm leading-relaxed whitespace-pre-wrap ${
                   msg.role === "user"
-                    ? "bg-[var(--siya-btn-primary)] text-white"
-                    : "border border-[var(--siya-border)] bg-[var(--siya-white)] text-[var(--siya-text-secondary)]"
+                    ? "rounded-lg bg-[var(--siya-white)] text-[var(--siya-text)]"
+                    : "text-[var(--siya-text-secondary)]"
                 }`}
               >
                 {msg.routing && msg.routing.department !== "General" ? (
@@ -627,22 +626,39 @@ export function SiyaChat({
             : "border-t border-[var(--siya-border)] bg-[var(--siya-white)] p-4 md:px-8"
         }
       >
-        <div className={`mx-auto max-w-2xl ${homeVariant ? "px-0 pb-1" : ""}`}>
-          <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-            <p className="text-xs font-medium text-[var(--siya-text-muted)]">{sectionLabel}</p>
-          </div>
-          <div className={`mb-3 flex flex-wrap gap-2 ${homeVariant ? "justify-start px-0.5" : "justify-center"}`}>
-            {quickPrompts.map((p) => (
-              <button
-                key={p}
-                type="button"
-                onClick={() => void send(p)}
-                className="rounded-full border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-3 py-1.5 text-xs text-[var(--siya-text-secondary)] transition hover:border-[var(--siya-accent)] hover:bg-[var(--siya-bg-subtle)]"
-              >
-                {p}
-              </button>
-            ))}
-          </div>
+        <div className={`mx-auto max-w-2xl ${homeVariant ? "px-0 pb-3" : ""}`}>
+          {homeVariant && messages.length === 0 && !threadLoading ? (
+            <div className="mb-3 flex flex-wrap justify-start gap-1.5 px-0.5">
+              {quickPrompts.slice(0, 3).map((p) => (
+                <button
+                  key={p}
+                  type="button"
+                  onClick={() => void send(p)}
+                  className="rounded-md px-2 py-1 text-xs text-[var(--siya-text-muted)] hover:bg-[var(--siya-white)] hover:text-[var(--siya-text)]"
+                >
+                  {p}
+                </button>
+              ))}
+            </div>
+          ) : !homeVariant ? (
+            <>
+              <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+                <p className="text-xs font-medium text-[var(--siya-text-muted)]">{sectionLabel}</p>
+              </div>
+              <div className="mb-3 flex flex-wrap justify-center gap-2">
+                {quickPrompts.map((p) => (
+                  <button
+                    key={p}
+                    type="button"
+                    onClick={() => void send(p)}
+                    className="rounded-full border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-3 py-1.5 text-xs text-[var(--siya-text-secondary)] transition hover:border-[var(--siya-accent)] hover:bg-[var(--siya-bg-subtle)]"
+                  >
+                    {p}
+                  </button>
+                ))}
+              </div>
+            </>
+          ) : null}
           <form
             className="flex gap-2"
             onSubmit={(e) => {
@@ -660,7 +676,7 @@ export function SiyaChat({
               }
               className={
                 homeVariant
-                  ? "min-w-0 flex-1 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] px-4 py-3 text-sm outline-none focus:border-[var(--siya-accent)] focus:ring-2 focus:ring-[var(--siya-accent)]/20"
+                  ? "min-w-0 flex-1 rounded-lg bg-[var(--siya-white)] px-3 py-2.5 text-sm outline-none placeholder:text-[var(--siya-text-muted)]"
                   : portalAskInput
               }
               autoFocus={homeVariant}
@@ -674,9 +690,11 @@ export function SiyaChat({
               Send
             </button>
           </form>
-          <p className="mt-2 text-center text-[11px] leading-relaxed text-[var(--siya-text-muted)]">
-            {BRAND.chatSafetyLine}
-          </p>
+          {!homeVariant ? (
+            <p className="mt-2 text-center text-[11px] leading-relaxed text-[var(--siya-text-muted)]">
+              {BRAND.chatSafetyLine}
+            </p>
+          ) : null}
         </div>
       </div>
     </div>
