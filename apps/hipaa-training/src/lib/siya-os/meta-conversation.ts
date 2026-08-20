@@ -111,8 +111,9 @@ const COMPARE = [
 ].join("\n");
 
 const FEELINGS = [
-  "I don’t have feelings or opinions — I’m a help desk for staff workflows and approved guides.",
-  "Ask a work question (SOP, billing path, who owns something) and I’ll stay on that.",
+  "I’m sorry this is a hard moment — I don’t have feelings, and I’m not a companion.",
+  "I’m **Siya Assist**, a help desk for staff workflows and approved guides.",
+  "If you need a person, talk to a teammate or your lead. For work, ask an SOP, billing path, or who owns something.",
 ].join("\n");
 
 const NOTIFY = [
@@ -184,6 +185,8 @@ const LEARN_EXPLAIN = [
   "**Practice drills** are short exercises — typing/chat speed, English phrases, culture trivia, US map, timezones. They help day-to-day clinic chat skills; they are **not** an MA license or a US visa path.",
   "**Chat speed & accuracy** is the typing drill under Practice.",
   "",
+  "**Admin vs staff:** same **Learn** page (HIPAA + Practice). Staff see **Team** in the sidebar; admins see **Admin** and a **Team (admin)** card on Learn to track colleagues’ progress. **Founder Coach** is admin-only; **Learn** is not.",
+  "",
   "Open **Learn** or **Learn → Practice** in the left sidebar when you want a drill. Use **Ask** here for policies, SOPs, and who owns a work question.",
 ].join("\n");
 
@@ -252,7 +255,9 @@ const CASES: MetaCase[] = [
       /what('s| is) your name\b/.test(t) ||
       /\bwho are you\b/.test(t) ||
       /\bwhat are you\??\s*$/.test(t) ||
-      /\bintroduce yourself\b/.test(t),
+      /\bintroduce yourself\b/.test(t) ||
+      /\b(tell me|know)\s+about you\b/.test(t) ||
+      /\babout you first\b/.test(t),
     answer: WHO,
   },
   {
@@ -260,7 +265,9 @@ const CASES: MetaCase[] = [
     category: "identity",
     test: (t) =>
       /\b(do you|can you)\s+(feel|love|hate|get angry)\b/.test(t) ||
-      /\bhow\s+do\s+you\s+feel\b/.test(t),
+      /\bhow\s+do\s+you\s+feel\b/.test(t) ||
+      /\bi('m| am)\s+(feeling\s+)?(lonely|sad|depressed|anxious|alone)\b/.test(t) ||
+      /\bi feel (lonely|sad|alone|anxious|depressed)\b/.test(t),
     answer: FEELINGS,
   },
 
@@ -343,9 +350,16 @@ const CASES: MetaCase[] = [
   {
     id: "learn-explain",
     category: "capability",
-    test: (t) =>
-      /\b(what\s+(is|are)|what'?s|how\s+(do|will|does|can))\b/.test(t) &&
-      /\b(learn(\s+h[eu]rb)?|practice(d)?\s+drills?|chat\s+speed)\b/.test(t),
+    test: (t) => {
+      const learnTopic = /\b(learn(\s+h[eu]rb)?|practice(d)?\s+drills?|chat\s+speed)\b/.test(t);
+      const learnAsk =
+        /\b(what\s+(is|are)|what'?s|how\s+(do|will|does|can)|purpose\s+of)\b/.test(t) ||
+        /\bdoes\s+learn\b/.test(t) ||
+        /\bwhat\s+learn\s+does\b/.test(t) ||
+        /\b(what|how)\b.*\blearn\b.*\b(do|does|for me|change|apply|different)\b/.test(t) ||
+        /\blearn\b.*\b(for me|vs staff|versus staff|change|different|apply)\b/.test(t);
+      return learnTopic && learnAsk;
+    },
     answer: LEARN_EXPLAIN,
   },
   {
@@ -497,7 +511,8 @@ const CASES: MetaCase[] = [
     category: "chrome",
     test: (t) =>
       (/\b(top\s+nav|left\s+sidebar|navigation|menu)\b/.test(t) && /\b(what|where|how|mean)\b/.test(t)) ||
-      (/\bwhat\s+(is|are)\s+(my\s+day|memory|team)\b/.test(t) && !/\bpractice\s+drills?\b/.test(t)) ||
+      (/\bwhat\s+(is|are|does|do)\s+(my\s+day|memory|team|learn|admin)\b/.test(t) &&
+        !/\bpractice\s+drills?\b/.test(t)) ||
       /\bhow\s+do\s+i\s+(open|get\s+to|find)\s+(learn|memory|team|my\s+day|account)\b/.test(t),
     answer: NAV_HELP,
   },
@@ -561,6 +576,9 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
   { id: "ai-human", text: "why not arent u AI", mustMatch: /AI help desk|not a human/i, mustNot: /approved staff guide/i },
   { id: "ai-human", text: "are you human", mustMatch: /not a human|AI help desk/i, mustNot: /approved staff guide/i },
   { id: "who-what-name", text: "who are you", mustMatch: /Siya Assist/i, mustNot: /approved staff guide for that/i },
+  { id: "who-what-name", text: "who r u", mustMatch: /Siya Assist/i, mustNot: /approved staff guide for that/i },
+  { id: "who-what-name", text: "whats ur name", mustMatch: /Siya Assist/i, mustNot: /approved staff guide for that/i },
+  { id: "who-what-name", text: "i wanna know abut u frst", mustMatch: /Siya Assist/i, mustNot: /approved staff guide for that/i },
   { id: "boss-escalate", text: "who is your boss", mustMatch: /don.?t have a personal boss|Notify owner/i, mustNot: /approved staff guide/i },
   { id: "boss-escalate", text: "can you escalate to your boss", mustMatch: /Notify owner|Siya Assist/i, mustNot: /HIPAA certification course/i },
   { id: "company-boss", text: "whos the boss", mustMatch: /org chart|physician-led|who owns/i, mustNot: /right staff guide for that yet/i },
@@ -577,6 +595,18 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
     text: "what is learn herb and practiced drills and chat speed and how will they help me",
     mustMatch: /Learn|Practice drills|Chat speed/i,
     mustNot: /Open the \*\*Chat speed|right staff guide for that yet/i,
+  },
+  {
+    id: "learn-explain",
+    text: "does learn change for me vs staff",
+    mustMatch: /Learn|Admin vs staff|Practice/i,
+    mustNot: /approved staff guide/i,
+  },
+  {
+    id: "learn-explain",
+    text: "i wanna know what learn does for me",
+    mustMatch: /Learn|Practice drills/i,
+    mustNot: /approved staff guide/i,
   },
   {
     id: "loop-in",
@@ -628,25 +658,41 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
   },
   { id: "write-plan-record", text: "can you write my plan record", mustMatch: /never.*Plan|This week/i, mustNot: /approved staff guide for that/i },
   { id: "feelings", text: "do you feel sad", mustMatch: /don.?t have feelings/i, mustNot: /approved staff guide/i },
+  { id: "feelings", text: "i am feeling lonely", mustMatch: /don.?t have feelings|not a companion/i, mustNot: /approved staff guide/i },
   { id: "greeting", text: "how r u", mustMatch: /Hi —/i, mustNot: /approved staff guide/i },
   { id: "frustration", text: "this isnt working good", mustMatch: /Sorry|plain terms|reimbursement/i, mustNot: /right staff guide for that yet/i },
   { id: "thanks", text: "thanks", mustMatch: /welcome/i, mustNot: /approved staff guide/i },
 ];
 
+/** Informal chat / dictation → catalog English (who r u → who are you). */
+export function expandStaffSlang(text: string): string {
+  return text
+    .replace(/\bwhats\b/g, "what's")
+    .replace(/\bwanna\b/g, "want to")
+    .replace(/\bgonna\b/g, "going to")
+    .replace(/\babut\b/g, "about")
+    .replace(/\bfrst\b/g, "first")
+    .replace(/\bur\b/g, "your")
+    .replace(/\bu\b/g, "you")
+    .replace(/\br\b/g, "are");
+}
+
+function normalizeMetaText(text: string): string {
+  return expandStaffSlang(
+    text
+      .trim()
+      .toLowerCase()
+      .replace(/^["'`]+|["'`]+$/g, "")
+      .replace(/\s+/g, " "),
+  );
+}
+
 /**
  * First matching meta case wins. Returns null if not a meta conversation turn.
  */
 export function answerMetaConversation(text: string, priorUser?: string): string | null {
-  const t = text
-    .trim()
-    .toLowerCase()
-    .replace(/^["'`]+|["'`]+$/g, "")
-    .replace(/\s+/g, " ");
-  const prior = (priorUser ?? "")
-    .trim()
-    .toLowerCase()
-    .replace(/^["'`]+|["'`]+$/g, "")
-    .replace(/\s+/g, " ");
+  const t = normalizeMetaText(text);
+  const prior = priorUser ? normalizeMetaText(priorUser) : "";
   // Dictated orientation asks can be long; still allow meta (cases are selective).
   if (!t || t.length > 1200) return null;
   for (const c of CASES) {

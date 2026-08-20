@@ -157,6 +157,13 @@ export function isRoleAuthorityAssertion(text: string): boolean {
       `\\bi(?:'m|\\s+am)\\s+(?:(?:the|our|now)\\s+)*(?:new\\s+)?(?:${ROLE_NOUN}|${ROLE_SHORTHAND})\\b`,
     ).test(t)
   ) {
+    // Compound app how-to: "i'm admin — does learn apply to staff?" → meta catalog, not role ack.
+    if (
+      /\b(learn|memory|my day|practice|sidebar|nav(igation)?)\b/.test(t) &&
+      /\b(what|how|does|do|apply|change|purpose|for me|vs staff|versus staff)\b/.test(t)
+    ) {
+      return false;
+    }
     return true;
   }
 
