@@ -147,7 +147,18 @@ export async function sendEscalationEmail(
   payload: EscalationEmailPayload,
 ): Promise<{ sent: boolean; error?: string }> {
   const subject = `[Siya Assist] ${payload.department} — policy gap (Notify owner)`;
-  return sendResendText({ subject, text: buildNotifyOwnerEmailText(payload) });
+  const text = buildNotifyOwnerEmailText(payload);
+  console.info(
+    "[escalation-email] notify_owner",
+    JSON.stringify({
+      recordId: payload.recordId,
+      hasAssistReply: /Assist reply: (?!\(not provided\))/.test(text),
+      hasThreadDeepLink: text.includes("?thread="),
+      hasReporterNote: /Reporter note \(what they expected\):/.test(text),
+      hasContextTurns: !text.includes("(no surrounding turns)"),
+    }),
+  );
+  return sendResendText({ subject, text });
 }
 
 export function buildAutoGapFounderEmailText(payload: AutoGapFounderEmailPayload): string {
@@ -192,5 +203,16 @@ export async function sendAutoGapFounderEmail(
   payload: AutoGapFounderEmailPayload,
 ): Promise<{ sent: boolean; error?: string }> {
   const subject = `[Siya Assist] Auto gap — ${payload.chatCategory}`;
-  return sendResendText({ subject, text: buildAutoGapFounderEmailText(payload) });
+  const text = buildAutoGapFounderEmailText(payload);
+  console.info(
+    "[escalation-email] auto_gap",
+    JSON.stringify({
+      recordId: payload.recordId,
+      hasAssistReply: /Assist reply: (?!\(not provided\))/.test(text),
+      hasThreadDeepLink: text.includes("?thread="),
+      hasContextTurns: !text.includes("(no surrounding turns)"),
+      hasUserQuestion: /Staff question \(email only/.test(text),
+    }),
+  );
+  return sendResendText({ subject, text });
 }

@@ -11,6 +11,7 @@ import { SaveToMemoryPrompt } from "@/components/memory/SaveToMemoryPrompt";
 import { PortalNavLink } from "@/components/training/PortalNavLink";
 import { isPortalMemoryEnabled } from "@/lib/trainingConfig";
 import { useAuth } from "@/context/AuthContext";
+import { getAssistSessionActiveId } from "@/lib/assist-session";
 import { isPortalAdmin } from "@/lib/portal-role";
 import { createAdhocTask } from "@/lib/tasks-api";
 import {
@@ -233,6 +234,10 @@ export function SiyaChat({
       try {
         const headers: Record<string, string> = { "Content-Type": "application/json" };
         if (token) headers.Authorization = `Bearer ${token}`;
+        const resolvedThreadId =
+          (threadId && threadId.startsWith("ath-") ? threadId : null) ||
+          (typeof window !== "undefined" ? getAssistSessionActiveId() : null) ||
+          undefined;
         const res = await fetch("/api/chat", {
           method: "POST",
           headers,
@@ -240,7 +245,7 @@ export function SiyaChat({
             message: trimmed,
             history: historyPayload(),
             focusMode,
-            threadId: threadId || undefined,
+            threadId: resolvedThreadId,
             surface: founderCoach ? "founder-coach" : "default",
           }),
         });
@@ -311,6 +316,11 @@ export function SiyaChat({
     let phiRedacted = false;
     let routeMode: "lead_digest" | "founder_instant" | undefined;
     let recordId: string | undefined;
+    // Prefer prop; fall back to session active thread (deep-link / remount races).
+    const resolvedThreadId =
+      (threadId && threadId.startsWith("ath-") ? threadId : null) ||
+      (typeof window !== "undefined" ? getAssistSessionActiveId() : null) ||
+      undefined;
     try {
       const res = await fetch("/api/knowledge-gap", {
         method: "POST",
@@ -324,7 +334,7 @@ export function SiyaChat({
           task,
           botReply: msg.content,
           contextTurns,
-          threadId: threadId || undefined,
+          threadId: resolvedThreadId,
           reporterNote: reporterNote || undefined,
         }),
       });
