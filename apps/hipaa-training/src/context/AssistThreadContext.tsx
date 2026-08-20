@@ -9,53 +9,6 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import {
-  archiveAssistThread,
-  createAssistThread,
-  listAssistThreads,
-  type AssistThread,
-} from "@/lib/assist-chat-api";
-import {
-  createFreshAssistThreadOnce,
-  getAssistSessionActiveId,
-  getAssistSessionBooted,
-  markAssistSessionBooted,
-  setAssistSessionActiveId,
-} from "@/lib/assist-session";
-import { useAuth } from "@/context/AuthContext";
-
-type AssistThreadContextValue = {
-  threads: AssistThread[];
-  activeId: string | null;
-  search: string;
-  setSearch: (q: string) => void;
-  loadingList: boolean;
-  ready: boolean;
-  bootError: string | null;
-  newChat: () => Promise<void>;
-  selectThread: (id: string) => void;
-  archiveThread: (id: string) => Promise<void>;
-  refreshList: (q?: string) => Promise<void>;
-  searchSubmit: () => Promise<void>;
-};
-
-const AssistThreadContext = createContext<AssistThreadContextValue | null>(null);
-
-function goToMyDay(path: string, router: { push: (href: string) => void }) {
-  if (path === "/" || path.startsWith("/help")) return;
-  router.push("/");
-}
-
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
 import { usePathname, useRouter } from "next/navigation";
 import {
   archiveAssistThread,
