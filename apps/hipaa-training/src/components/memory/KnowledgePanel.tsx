@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 import { createDecision, fetchConstitution, fetchDecisionLineage, fetchDecisions } from "@/lib/knowledge-api";
 import { loadLocalPortalProfile } from "@/lib/portal-profile";
+import { isPortalAdmin } from "@/lib/portal-role";
+import { fetchSopContext } from "@/lib/sop-api";
 import type { ConstitutionEntry, DecisionRecord } from "@/lib/knowledge-types";
 import {
   portalBtnGhostSm,
@@ -85,11 +88,13 @@ function DecisionCard({ d }: { d: DecisionRecord }) {
 }
 
 export function KnowledgePanel() {
+  const { user, authReady } = useAuth();
   const [decisions, setDecisions] = useState<DecisionRecord[]>([]);
   const [principles, setPrinciples] = useState<ConstitutionEntry[]>([]);
   const [open, setOpen] = useState(false);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [canRecordDecision, setCanRecordDecision] = useState(false);
   const profile = loadLocalPortalProfile();
   const [form, setForm] = useState({
     title: "",
@@ -114,6 +119,20 @@ export function KnowledgePanel() {
   useEffect(() => {
     void load();
   }, [load]);
+
+  useEffect(() => {
+    if (!authReady || !user) {
+      setCanRecordDecision(false);
+      return;
+    }
+    if (isPortalAdmin(user.role)) {
+      setCanRecordDecision(true);
+      return;
+    }
+    void fetchSopContext()
+      .then((ctx) => setCanRecordDecision((ctx.myLeadSlugs?.length ?? 0) > 0))
+      .catch(() => setCanRecordDecision(false));
+  }, [authReady, user]);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -168,9 +187,11 @@ export function KnowledgePanel() {
 
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-xs font-medium text-[var(--siya-text-secondary)]">Decisions (Layer 2 · decision log)</p>
-        <button type="button" onClick={() => setOpen(true)} className={portalBtnNavySm}>
-          Record decision
-        </button>
+        {canRecordDecision ? (
+          <button type="button" onClick={() => setOpen(true)} className={portalBtnNavySm}>
+            Record decision
+          </button>
+        ) : null}
       </div>
 
       {error ? <p className={`text-xs ${portalStatusErrorText}`}>{error}</p> : null}

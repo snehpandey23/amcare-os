@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 import {
   fetchRecentMemory,
   fetchWeekInReview,
@@ -17,6 +18,7 @@ import { ConstitutionPanel } from "@/components/memory/ConstitutionPanel";
 import { PoliciesPanel } from "@/components/memory/PoliciesPanel";
 import { KnowledgePanel } from "@/components/memory/KnowledgePanel";
 import { KNOWLEDGE_STEWARD, PROMOTION_RULE } from "@/lib/knowledge-types";
+import { isPortalAdmin } from "@/lib/portal-role";
 import {
   portalBtnNavySm,
   portalCapsLabel,
@@ -38,10 +40,25 @@ import {
 
 type MemoryTab = "way" | "policies" | "knowledge" | "memory";
 
-function parseMemoryTab(raw: string | null): MemoryTab {
-  if (raw === "policies" || raw === "knowledge" || raw === "memory" || raw === "way") return raw;
-  return "way";
+function defaultMemoryTab(isAdmin: boolean): MemoryTab {
+  return isAdmin ? "way" : "knowledge";
 }
+
+function parseMemoryTab(raw: string | null, isAdmin: boolean): MemoryTab {
+  if (raw === "policies" || raw === "knowledge" || raw === "memory" || raw === "way") return raw;
+  return defaultMemoryTab(isAdmin);
+}
+
+const STAFF_TABS: readonly [MemoryTab, string][] = [
+  ["policies", "Policies"],
+  ["knowledge", "Knowledge"],
+  ["memory", "Memory"],
+];
+
+const ADMIN_TABS: readonly [MemoryTab, string][] = [
+  ["way", "The Siya Way"],
+  ...STAFF_TABS,
+];
 
 function ImportanceBadge({ level }: { level: MemoryImportance }) {
   const styles =
@@ -77,10 +94,12 @@ function MemoryCard({ entry }: { entry: MemoryEntry }) {
 }
 
 export function MemoryHub() {
+  const { user, authReady } = useAuth();
+  const isAdmin = isPortalAdmin(user?.role);
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  const [tab, setTab] = useState<MemoryTab>(() => parseMemoryTab(searchParams.get("tab")));
+  const [tab, setTab] = useState<MemoryTab>(() => parseMemoryTab(searchParams.get("tab"), isAdmin));
   const [query, setQuery] = useState("");
   const [entries, setEntries] = useState<MemoryEntry[]>([]);
   const [week, setWeek] = useState<Awaited<ReturnType<typeof fetchWeekInReview>> | null>(null);
@@ -88,19 +107,29 @@ export function MemoryHub() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setTab(parseMemoryTab(searchParams.get("tab")));
-  }, [searchParams]);
+    if (!authReady) return;
+    const parsed = parseMemoryTab(searchParams.get("tab"), isAdmin);
+    if (!isAdmin && parsed === "way") {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("tab", "knowledge");
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+      setTab("knowledge");
+      return;
+    }
+    setTab(parsed);
+  }, [authReady, isAdmin, pathname, router, searchParams]);
 
   const selectTab = useCallback(
     (next: MemoryTab) => {
       setTab(next);
       const params = new URLSearchParams(searchParams.toString());
-      if (next === "way") params.delete("tab");
+      const homeTab = defaultMemoryTab(isAdmin);
+      if (next === homeTab) params.delete("tab");
       else params.set("tab", next);
       const qs = params.toString();
       router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
     },
-    [pathname, router, searchParams],
+    [isAdmin, pathname, router, searchParams],
   );
 
   const load = useCallback(async () => {
@@ -134,34 +163,57 @@ export function MemoryHub() {
     }
   }
 
+  const tabItems = isAdmin ? ADMIN_TABS : STAFF_TABS;
+
+  if (!authReady) {
+    return (
+      <div className={portalPage}>
+        <p className="text-sm text-[var(--siya-text-muted)]">Loading Memory…</p>
+      </div>
+    );
+  }
+
   return (
     <div className={portalPage}>
       <header>
         <p className={portalCapsLabel}>Memory</p>
         <h1 className={portalH1}>Memory</h1>
-        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--siya-text-secondary)]">
-          This is the company&apos;s record of how we work and why — past decisions, published policies, and
-          approved knowledge. Open it when you&apos;re wondering why something works the way it does, or to
-          look up a guide before you ask Assist.
-        </p>
-        <p className="mt-2 max-w-2xl text-xs text-[var(--siya-text-muted)]">
-          Tabs: <strong>The Siya Way</strong> (how we operate) → <strong>Policies</strong> →{" "}
-          <strong>Knowledge</strong> (approved guides Ask uses) → <strong>Memory</strong> (captures).
-          Steward: {KNOWLEDGE_STEWARD}. {PROMOTION_RULE}
-        </p>
+        {isAdmin ? (
+          <>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--siya-text-secondary)]">
+              This is the company&apos;s record of how we work and why — past decisions, published policies, and
+              approved knowledge. Open it when you&apos;re wondering why something works the way it does, or to
+              look up a guide before you ask Assist.
+            </p>
+            <p className="mt-2 max-w-2xl text-xs text-[var(--siya-text-muted)]">
+              Tabs: <strong>The Siya Way</strong> (how we operate) → <strong>Policies</strong> →{" "}
+              <strong>Knowledge</strong> (approved guides Ask uses) → <strong>Memory</strong> (captures).
+              Steward: {KNOWLEDGE_STEWARD}. {PROMOTION_RULE}
+            </p>
+          </>
+        ) : (
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--siya-text-secondary)]">
+            Look up published policies and approved guides before you ask Assist — same sources the help desk uses.
+          </p>
+        )}
       </header>
 
-      <KnowledgePipelineStrip />
+      {isAdmin ? (
+        <KnowledgePipelineStrip />
+      ) : (
+        <details className={`${portalSectionSubtle} text-sm`}>
+          <summary className="cursor-pointer text-xs font-semibold text-[var(--siya-primary)]">
+            How this works
+          </summary>
+          <div className="mt-3 space-y-4 border-t border-[var(--siya-border)] pt-3">
+            <KnowledgePipelineStrip />
+            <ConstitutionPanel />
+          </div>
+        </details>
+      )}
 
       <div className="flex flex-wrap gap-2 border-b border-[var(--siya-border)] pb-2">
-        {(
-          [
-            ["way", "The Siya Way"],
-            ["policies", "Policies"],
-            ["knowledge", "Knowledge"],
-            ["memory", "Memory"],
-          ] as const
-        ).map(([id, label]) => (
+        {tabItems.map(([id, label]) => (
           <button
             key={id}
             type="button"
@@ -173,7 +225,7 @@ export function MemoryHub() {
         ))}
       </div>
 
-      {tab === "way" ? <ConstitutionPanel /> : null}
+      {isAdmin && tab === "way" ? <ConstitutionPanel /> : null}
       {tab === "policies" ? <PoliciesPanel /> : null}
       {tab === "knowledge" ? <KnowledgePanel /> : null}
 
