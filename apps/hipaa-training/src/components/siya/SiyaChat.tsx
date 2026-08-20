@@ -292,6 +292,20 @@ export function SiyaChat({
     if (!msg.userQuestion) return;
     const department = msg.routing?.department ?? "General";
     const task = msg.routing?.task ?? "Missing approved policy";
+
+    const reporterNoteRaw = window.prompt(
+      "Optional — one line on what you expected (or Cancel to abort). Example: “I need the reimbursement SOP steps” — not “just testing UI”.",
+      "",
+    );
+    if (reporterNoteRaw === null) return;
+    const reporterNote = reporterNoteRaw.trim().slice(0, 500);
+
+    const msgIndex = messages.findIndex((m) => m.id === msg.id);
+    const prior = msgIndex > 0 ? messages.slice(Math.max(0, msgIndex - 2), msgIndex) : [];
+    const contextTurns = prior
+      .filter((m) => m.role === "user" || m.role === "assistant")
+      .map((m) => ({ role: m.role as "user" | "assistant", content: m.content }));
+
     let emailSent = false;
     let emailNote = "";
     let phiRedacted = false;
@@ -308,6 +322,10 @@ export function SiyaChat({
           question: msg.userQuestion,
           department,
           task,
+          botReply: msg.content,
+          contextTurns,
+          threadId: threadId || undefined,
+          reporterNote: reporterNote || undefined,
         }),
       });
       const data = (await res.json()) as {
@@ -338,7 +356,7 @@ export function SiyaChat({
         x.id === msg.id ? { ...x, gapNotified: true, gapEmailSent: emailSent, gapEmailNote: emailNote } : x,
       ),
     );
-  }, [token]);
+  }, [token, messages, threadId]);
 
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
@@ -510,9 +528,23 @@ export function SiyaChat({
                   <ul className="mt-2 space-y-1 border-t border-[var(--siya-border)] pt-2">
                     {msg.links.map((l) => (
                       <li key={l.href}>
-                        <PortalNavLink href={l.href} className="font-medium text-[var(--siya-accent)] underline underline-offset-2">
-                          {l.label}
-                        </PortalNavLink>
+                        {/^https?:\/\//i.test(l.href) ? (
+                          <a
+                            href={l.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-medium text-[var(--siya-accent)] underline underline-offset-2"
+                          >
+                            {l.label}
+                          </a>
+                        ) : (
+                          <PortalNavLink
+                            href={l.href}
+                            className="font-medium text-[var(--siya-accent)] underline underline-offset-2"
+                          >
+                            {l.label}
+                          </PortalNavLink>
+                        )}
                       </li>
                     ))}
                   </ul>

@@ -1,7 +1,13 @@
 /**
- * Escalation email when staff use "Notify owner" (knowledge gap).
- * Uses Resend HTTP API — set RESEND_API_KEY on Vercel project siya-staff-assist.
+ * Escalation / auto-gap emails (Resend).
+ * Set RESEND_API_KEY on Vercel project siya-staff-assist.
  */
+import {
+  assistThreadDeepLink,
+  formatGapContextBlock,
+  redactGapEmailText,
+  type GapContextTurn,
+} from "@/lib/siya-os/gap-email-context";
 
 export type EscalationEmailPayload = {
   question: string;
@@ -10,15 +16,24 @@ export type EscalationEmailPayload = {
   recordId: string;
   /** When true, question field is already a redaction placeholder. */
   phiRedacted?: boolean;
+  botReply?: string;
+  contextTurns?: GapContextTurn[];
+  threadId?: string | null;
+  reporterNote?: string;
 };
 
-/** PHI-safe auto-capture email — date/time/category only, never question text. */
+/** Auto-capture founder instant — includes bot reply + context; question text still omitted from Postgres. */
 export type AutoGapFounderEmailPayload = {
   recordId: string;
   department: string;
   task: string;
   chatCategory: string;
   signalType: string;
+  botReply?: string;
+  contextTurns?: GapContextTurn[];
+  threadId?: string | null;
+  /** Optional: redacted user question for email only (never stored in Postgres). */
+  userQuestion?: string;
 };
 
 export function escalationInbox(): string {
@@ -89,45 +104,65 @@ async function sendResendText(opts: {
   }
 }
 
-export async function sendEscalationEmail(
-  payload: EscalationEmailPayload,
-): Promise<{ sent: boolean; error?: string }> {
-  const subject = `[Siya Assist] ${payload.department} — policy gap`;
-  const appUrl =
-    process.env.NEXT_PUBLIC_SIYA_ASSISTANT_URL?.trim() ||
-    "https://siya-staff-assist.vercel.app";
+export function buildNotifyOwnerEmailText(payload: EscalationEmailPayload): string {
+  const threadUrl = assistThreadDeepLink(payload.threadId);
+  const { date, time } = formatIstStamp();
 
   const questionLine = payload.phiRedacted
-    ? "Question: [redacted by PHI/clinical guard — department & task only]"
-    : `Question: ${payload.question.slice(0, 2000)}`;
+    ? "Staff question: [redacted by PHI/clinical guard — department & task only]"
+    : `Staff question: ${redactGapEmailText(payload.question).text}`;
 
-  const text = [
-    "Siya Assist — staff reported a missing or unclear policy (Notify owner click)",
+  const botLine = payload.botReply?.trim()
+    ? `Assist reply: ${redactGapEmailText(payload.botReply).text}`
+    : "Assist reply: (not provided)";
+
+  const noteLine = payload.reporterNote?.trim()
+    ? `Reporter note (what they expected): ${redactGapEmailText(payload.reporterNote, 500).text}`
+    : "Reporter note: (none)";
+
+  return [
+    "Siya Assist — Notify owner click (staff escalated a gap)",
     "",
-    questionLine,
+    `Date (IST): ${date}`,
+    `Time (IST): ${time}`,
     `Route: ${payload.department} · ${payload.task}`,
     `Record ID: ${payload.recordId}`,
-    `App: ${appUrl}`,
+    `Thread: ${threadUrl}`,
     "",
-    "Note: This is a Notify owner click. Auto-captured gaps use a separate PHI-safe email (no question text).",
-    "Do not reply with PHI. Add or update a live topic in the internal knowledge base when resolved.",
+    questionLine,
+    botLine,
+    noteLine,
+    "",
+    "Surrounding context (up to 2 prior turns):",
+    formatGapContextBlock(payload.contextTurns ?? []),
+    "",
+    "What to do: Review the Assist reply vs what the reporter expected. Publish or update an approved guide, or resolve the gap in Admin if it was a false alarm.",
+    "Do not reply with PHI.",
     "",
     "— automated from Notify owner —",
   ].join("\n");
-
-  return sendResendText({ subject, text });
 }
 
-/** Auto knowledge-gap — Leadership/Founder Talk founder instant. No question text. */
-export async function sendAutoGapFounderEmail(
-  payload: AutoGapFounderEmailPayload,
+export async function sendEscalationEmail(
+  payload: EscalationEmailPayload,
 ): Promise<{ sent: boolean; error?: string }> {
+  const subject = `[Siya Assist] ${payload.department} — policy gap (Notify owner)`;
+  return sendResendText({ subject, text: buildNotifyOwnerEmailText(payload) });
+}
+
+export function buildAutoGapFounderEmailText(payload: AutoGapFounderEmailPayload): string {
   const { date, time } = formatIstStamp();
-  const appUrl =
-    process.env.NEXT_PUBLIC_SIYA_ASSISTANT_URL?.trim() ||
-    "https://siya-staff-assist.vercel.app";
-  const subject = `[Siya Assist] Auto gap — ${payload.chatCategory}`;
-  const text = [
+  const threadUrl = assistThreadDeepLink(payload.threadId);
+
+  const questionLine = payload.userQuestion?.trim()
+    ? `Staff question (email only, not stored): ${redactGapEmailText(payload.userQuestion).text}`
+    : "Staff question: (omitted — auto-capture; see Assist reply + context)";
+
+  const botLine = payload.botReply?.trim()
+    ? `Assist reply: ${redactGapEmailText(payload.botReply).text}`
+    : "Assist reply: (not provided)";
+
+  return [
     "Siya Assist — automatic knowledge-gap capture (no Notify owner click)",
     "",
     `Date (IST): ${date}`,
@@ -137,12 +172,25 @@ export async function sendAutoGapFounderEmail(
     `Task: ${payload.task}`,
     `Signal: ${payload.signalType}`,
     `Record ID: ${payload.recordId}`,
-    `App: ${appUrl}`,
+    `Thread: ${threadUrl}`,
     "",
-    "Question text is never stored in Postgres and is not included in this email.",
+    questionLine,
+    botLine,
+    "",
+    "Surrounding context (up to 2 prior turns):",
+    formatGapContextBlock(payload.contextTurns ?? []),
+    "",
+    "What to do: Open the thread link, see why Assist soft-stopped, then publish a guide or resolve the gap if it was noise.",
+    "Verbatim questions are not stored in Postgres; email body may include PHI-redacted snippets for triage only.",
     "",
     "— automated from Assist auto-capture —",
   ].join("\n");
+}
 
-  return sendResendText({ subject, text });
+/** Auto knowledge-gap — Leadership/Founder Talk founder instant. */
+export async function sendAutoGapFounderEmail(
+  payload: AutoGapFounderEmailPayload,
+): Promise<{ sent: boolean; error?: string }> {
+  const subject = `[Siya Assist] Auto gap — ${payload.chatCategory}`;
+  return sendResendText({ subject, text: buildAutoGapFounderEmailText(payload) });
 }

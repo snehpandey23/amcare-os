@@ -5,6 +5,7 @@ import { SIYA_OPENING } from "@/lib/siya-os/config";
 import { SIYA_ASSISTANT_CANONICAL_URL } from "@/lib/siya-os/public-url";
 import { BRAND } from "@/lib/brand";
 import { persistAssistGap } from "@/lib/siya-os/assist-gap-persist";
+import { priorContextTurns } from "@/lib/siya-os/gap-email-context";
 
 export const maxDuration = 60;
 
@@ -170,6 +171,10 @@ export async function POST(req: Request) {
         phiRedacted: true,
         sendFounderInstantEmail: true,
         chatCategory,
+        botReply: result.message,
+        contextTurns: priorContextTurns(history, message),
+        threadId,
+        userQuestion: message,
       });
       if (persisted.ok) {
         gapAuto = {

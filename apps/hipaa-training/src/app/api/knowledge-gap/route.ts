@@ -2,6 +2,7 @@ import type { Department } from "@/lib/siya-os/departments";
 import { sendEscalationEmail, escalationInbox } from "@/lib/siya-os/escalation-email";
 import { assessStaffMessageSafety } from "@/lib/siya-os/phi-guard";
 import { persistAssistGap } from "@/lib/siya-os/assist-gap-persist";
+import type { GapContextTurn } from "@/lib/siya-os/gap-email-context";
 
 /**
  * Notify owner / knowledge-gap capture (explicit click).
@@ -20,6 +21,25 @@ export async function POST(req: Request) {
     const question = typeof body?.question === "string" ? body.question.trim() : "";
     const department = (typeof body?.department === "string" ? body.department : "General") as Department;
     const task = typeof body?.task === "string" ? body.task : "Missing approved policy";
+    const botReply = typeof body?.botReply === "string" ? body.botReply.trim() : "";
+    const reporterNote = typeof body?.reporterNote === "string" ? body.reporterNote.trim().slice(0, 500) : "";
+    const threadId =
+      typeof body?.threadId === "string" && body.threadId.startsWith("ath-") ? body.threadId : null;
+    const contextTurns: GapContextTurn[] = Array.isArray(body?.contextTurns)
+      ? body.contextTurns
+          .filter(
+            (t: unknown) =>
+              t &&
+              typeof t === "object" &&
+              ((t as GapContextTurn).role === "user" || (t as GapContextTurn).role === "assistant") &&
+              typeof (t as GapContextTurn).content === "string",
+          )
+          .map((t: GapContextTurn) => ({
+            role: t.role,
+            content: String(t.content).slice(0, 2000),
+          }))
+          .slice(-2)
+      : [];
 
     if (!question || question.length > 2000) {
       return Response.json({ error: "question required" }, { status: 400 });
@@ -38,6 +58,8 @@ export async function POST(req: Request) {
         status: "awaiting_policy",
         phiRedacted,
         refusalCategory: safety.category ?? null,
+        hasReporterNote: Boolean(reporterNote),
+        threadId: threadId || null,
         question: phiRedacted ? "[redacted — PHI/clinical/emergency guard]" : question.slice(0, 200),
       }),
     );
@@ -49,7 +71,6 @@ export async function POST(req: Request) {
       task,
       phiRedacted,
       signalType: "notify_owner",
-      // Click path keeps legacy email with question (or redaction placeholder).
       sendFounderInstantEmail: false,
     });
     if (!persisted.ok || !persisted.route) {
@@ -78,6 +99,10 @@ export async function POST(req: Request) {
         task,
         recordId: persisted.id || id,
         phiRedacted,
+        botReply,
+        contextTurns,
+        threadId,
+        reporterNote,
       });
       if (!email.sent) {
         console.warn("[knowledge-gap] email not sent:", email.error);
@@ -86,9 +111,9 @@ export async function POST(req: Request) {
 
     const message =
       routeMode === "lead_digest"
-        ? `Logged for the ${persisted.route.departmentLabel || department} lead’s weekly knowledge-gap digest (Notify owner clicks — category/task only).`
+        ? `Logged for the ${persisted.route.departmentLabel || department} lead’s weekly knowledge-gap digest (Notify owner — category/task; email deferred to Monday digest).`
         : email.sent
-          ? `Question emailed to ${escalationInbox()}${phiRedacted ? " (question text redacted by PHI guard)." : "."}`
+          ? `Gap emailed to ${escalationInbox()}${phiRedacted ? " (question text redacted by PHI guard)." : "."}`
           : "Gap logged. Founder email not sent — add RESEND_API_KEY on Vercel (see docs/ESCALATION-EMAIL.md).";
 
     return Response.json({
@@ -113,7 +138,7 @@ export async function POST(req: Request) {
       emailError: routeMode === "founder_instant" && !email.sent ? email.error : undefined,
       message,
       honestyNote:
-        "Notify owner click logged. Soft-stop Ask/Founder Talk turns with knowledgeGap=true are also auto-logged separately (category/task only).",
+        "Notify owner click logged with Assist reply + optional reporter note in founder email when routed founder_instant. Postgres still stores category/task only.",
     });
   } catch {
     return Response.json({ error: "Something went wrong." }, { status: 500 });

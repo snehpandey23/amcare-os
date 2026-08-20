@@ -1,9 +1,10 @@
 /**
  * Persist Assist knowledge gaps to auth API + optional founder instant email.
- * Never stores or emails verbatim question text on auto-capture.
+ * Postgres stores category/task only — never verbatim question text.
  */
 import { getTrainingApiUrl } from "@/lib/trainingConfig";
 import { sendAutoGapFounderEmail, escalationInbox } from "@/lib/siya-os/escalation-email";
+import type { GapContextTurn } from "@/lib/siya-os/gap-email-context";
 
 export type AssistGapSignalType = "no_match" | "notify_owner" | "thumbs_down" | "unresolved_repeat";
 
@@ -30,12 +31,16 @@ export async function persistAssistGap(opts: {
   department: string;
   task: string;
   signalType: AssistGapSignalType;
-  /** Auto-capture: never pass question text. Notify-owner path may set this for click emails only. */
+  /** Auto-capture: never pass question text to Postgres. */
   phiRedacted?: boolean;
   id?: string;
-  /** When true and route is founder_instant, send PHI-safe email (date/time/category only). */
+  /** When true and route is founder_instant, send enriched PHI-safe email. */
   sendFounderInstantEmail?: boolean;
   chatCategory?: string;
+  botReply?: string;
+  contextTurns?: GapContextTurn[];
+  threadId?: string | null;
+  userQuestion?: string;
 }): Promise<PersistAssistGapResult> {
   const base = getTrainingApiUrl();
   if (!base) return { ok: false, persistError: "API URL not configured" };
@@ -72,6 +77,10 @@ export async function persistAssistGap(opts: {
         task: opts.task,
         chatCategory: opts.chatCategory || `${opts.department} · ${opts.task}`,
         signalType: opts.signalType,
+        botReply: opts.botReply,
+        contextTurns: opts.contextTurns,
+        threadId: opts.threadId,
+        userQuestion: opts.userQuestion,
       });
       emailSent = email.sent;
       emailError = email.error;
