@@ -4,7 +4,6 @@ import { useCallback, useState } from "react";
 import useSWR from "swr";
 import { useAuth } from "@/context/AuthContext";
 import { isPortalAdmin } from "@/lib/portal-role";
-import { PortalNavLink } from "@/components/training/PortalNavLink";
 import {
   CollapsibleDomainItemList,
   FOUNDER_QUEUE_PREVIEW,
@@ -32,7 +31,6 @@ import {
   portalBadgeWip,
   portalBtnAccentSm,
   portalBtnNavySm,
-  portalChatShell,
   portalH3,
   portalSectionCompact,
   portalStatusInfoBox,
@@ -758,10 +756,10 @@ function DomainThreadView({ domain }: { domain: DomainSnapshot }) {
   );
 }
 
-function threadButtonClass(active: boolean) {
+function tabClass(active: boolean) {
   return active
-    ? "w-full rounded-md px-2 py-1.5 text-left text-[12px] font-medium text-[var(--siya-primary)]"
-    : "w-full rounded-md px-2 py-1.5 text-left text-[12px] font-normal text-[var(--siya-text-muted)] hover:text-[var(--siya-text-secondary)]";
+    ? "shrink-0 rounded-md px-2.5 py-1.5 text-[12px] font-medium text-[var(--siya-primary)]"
+    : "shrink-0 rounded-md px-2.5 py-1.5 text-[12px] font-normal text-[var(--siya-text-muted)] hover:text-[var(--siya-text-secondary)]";
 }
 
 export function FounderCoachPanel({ firstName }: { firstName?: string }) {
@@ -784,14 +782,11 @@ export function FounderCoachPanel({ firstName }: { firstName?: string }) {
   if (!isPortalAdmin(user?.role)) return null;
 
   const talkChat = (
-    <div className="flex min-h-[calc(100dvh-5.5rem)] flex-col gap-2">
-      <header className="shrink-0">
-        <h2 className={portalH3}>Ask</h2>
-        <p className="mt-0.5 text-xs text-[var(--siya-text-muted)]">
-          Policies, coverage, difficult-patient paths — same engine as staff Ask. Plan Record stays on{" "}
-          <strong>This week&apos;s plan</strong>.
-        </p>
-      </header>
+    <div className="flex min-h-[calc(100dvh-7.5rem)] flex-col gap-2">
+      <p className="shrink-0 text-xs text-[var(--siya-text-muted)]">
+        Policies, coverage, difficult-patient paths — same engine as staff Ask. Plan Record stays on{" "}
+        <strong>This week&apos;s plan</strong>.
+      </p>
       <div className="min-h-0 flex-1">
         <AssistChatShell
           firstName={resolvedName}
@@ -802,89 +797,50 @@ export function FounderCoachPanel({ firstName }: { firstName?: string }) {
     </div>
   );
 
-  const sideNav = (
-    <>
-      <nav
-        aria-label="Founder Coach threads"
-        className="hidden w-36 shrink-0 flex-col px-3 py-8 md:flex"
-      >
-        <button type="button" className={threadButtonClass(thread === "talk")} onClick={() => setThread("talk")}>
-          Ask
-        </button>
-        <button type="button" className={threadButtonClass(thread === "plan")} onClick={() => setThread("plan")}>
-          This week&apos;s plan
-        </button>
-        {DOMAIN_TAB_IDS.map((id) => {
-          const domain = domains.find((d) => d.id === id);
-          const label = domain?.title ?? id.charAt(0).toUpperCase() + id.slice(1);
-          return (
-            <button key={id} type="button" className={threadButtonClass(thread === id)} onClick={() => setThread(id)}>
-              {label}
-            </button>
-          );
-        })}
-      </nav>
-
-      <div className="flex gap-1 overflow-x-auto px-3 py-2 md:hidden">
-        <button type="button" className={threadButtonClass(thread === "talk")} onClick={() => setThread("talk")}>
-          Ask
-        </button>
-        <button type="button" className={threadButtonClass(thread === "plan")} onClick={() => setThread("plan")}>
-          Plan
-        </button>
-        {DOMAIN_TAB_IDS.map((id) => {
-          const domain = domains.find((d) => d.id === id);
-          const label = domain?.title ?? id;
-          return (
-            <button key={id} type="button" className={threadButtonClass(thread === id)} onClick={() => setThread(id)}>
-              {label}
-            </button>
-          );
-        })}
-      </div>
-    </>
+  const coachTabs = (
+    <nav
+      aria-label="Founder Coach"
+      className="flex flex-wrap gap-1 border-b border-[var(--siya-border)] px-4 py-2 md:px-8"
+    >
+      <button type="button" className={tabClass(thread === "talk")} onClick={() => setThread("talk")}>
+        Ask
+      </button>
+      <button type="button" className={tabClass(thread === "plan")} onClick={() => setThread("plan")}>
+        This week&apos;s plan
+      </button>
+      {DOMAIN_TAB_IDS.map((id) => {
+        const domain = domains.find((d) => d.id === id);
+        const label = domain?.title ?? id.charAt(0).toUpperCase() + id.slice(1);
+        return (
+          <button key={id} type="button" className={tabClass(thread === id)} onClick={() => setThread(id)}>
+            {label}
+          </button>
+        );
+      })}
+    </nav>
   );
 
-  if (thread === "talk") {
-    return (
-      <div className={portalChatShell}>
-        {sideNav}
-        <main className="min-w-0 flex-1 px-4 pb-4 pt-3 md:px-8 md:py-4">{talkChat}</main>
-      </div>
-    );
-  }
-
-  if (isLoading) {
-    return (
-      <div className="flex min-h-[calc(100dvh-3.5rem)] items-center justify-center px-4">
-        <p className="text-sm text-[var(--siya-text-muted)]">Loading…</p>
-      </div>
-    );
-  }
-
-  if (error || !data) {
-    return (
-      <div className="flex min-h-[calc(100dvh-3.5rem)] items-center justify-center px-4">
+  const mainBody = (() => {
+    if (thread === "talk") return talkChat;
+    if (isLoading) {
+      return <p className="text-sm text-[var(--siya-text-muted)]">Loading…</p>;
+    }
+    if (error || !data) {
+      return (
         <p className="text-sm text-[var(--siya-text-muted)]">
           {error instanceof Error ? error.message : "Could not load coach brief."}
         </p>
-      </div>
-    );
-  }
+      );
+    }
+    if (thread === "plan") return <PlanThreadView data={data} onRefresh={refresh} />;
+    if (activeDomain) return <DomainThreadView domain={activeDomain} />;
+    return <p className="text-sm text-[var(--siya-text-muted)]">Domain snapshot not available yet.</p>;
+  })();
 
   return (
-    <div className={portalChatShell}>
-      {sideNav}
-
-      <main className="min-w-0 flex-1 px-4 pb-8 pt-4 md:px-8 md:py-10">
-        {thread === "plan" ? (
-          <PlanThreadView data={data} onRefresh={refresh} />
-        ) : activeDomain ? (
-          <DomainThreadView domain={activeDomain} />
-        ) : (
-          <p className="text-sm text-[var(--siya-text-muted)]">Domain snapshot not available yet.</p>
-        )}
-      </main>
+    <div className="mx-auto flex min-h-[calc(100dvh-3.5rem)] w-full max-w-6xl flex-col">
+      {coachTabs}
+      <main className="min-w-0 flex-1 px-4 pb-4 pt-3 md:px-8 md:py-4">{mainBody}</main>
     </div>
   );
 }
