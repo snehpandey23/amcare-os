@@ -110,6 +110,26 @@ const COMPARE = [
   "I’m scoped to **Siya staff work** — approved guides and portal signals. General trivia and open-web inventing are out of scope on purpose.",
 ].join("\n");
 
+/** Honest answer when founder asks if Talk is “wired to an LLM.” */
+const LLM_WIRING = [
+  "Yes — when retrieval is confident, Founder Talk can use an **LLM** to phrase answers from **portal signals and approved guides**.",
+  "",
+  "It is **not** free-form ChatGPT for strategy essays, fundraising pitches, formulas, or trivia. Soft-stops are intentional when there’s no grounded source — so I don’t invent.",
+  "Ask about a **domain this week**, an **SOP**, **who owns** something, or open the matching domain tab. I never write **This week’s plan** for you.",
+].join("\n");
+
+/** Fundraising / capital raise — useful redirect, no invented pitch. */
+const FUNDRAISING = [
+  "I won’t invent a **fundraising strategy**, pitch deck, or investor essay here.",
+  "",
+  "For fundraising work in this app:",
+  "1. Open the **Marketing** or **Leadership** domain tab for what’s flagged this week.",
+  "2. Put the raise on **This week’s plan** yourself (Talk never writes Plan Record).",
+  "3. If we need a published fundraising SOP/playbook, use **Notify owner** with a one-line gap.",
+  "",
+  "Ask a concrete ops question (who owns investor outreach, what’s on Marketing this week) and I’ll use portal signals + approved guides.",
+].join("\n");
+
 const FEELINGS = [
   "I’m sorry this is a hard moment — I don’t have feelings, and I’m not a companion.",
   "I’m **Siya Assist**, a help desk for staff workflows and approved guides.",
@@ -237,6 +257,18 @@ const MIC_HELP = [
 const CASES: MetaCase[] = [
   // --- identity ---
   {
+    id: "llm-wiring",
+    category: "compare",
+    test: (t) =>
+      /\b(wired|connected|hooked)\s+(up\s+)?(to\s+)?(an?\s+)?(llm|model|gpt|chatgpt)\b/.test(t) ||
+      /\b(do|does|are|aren'?t|arent|r)\s+(you|u)\s+(use|have|run|call)\s+(an?\s+)?(llm|language\s+model|gpt)\b/.test(
+        t,
+      ) ||
+      /\baren'?t\s+(you|u)\s+wired\b/.test(t) ||
+      /\b(use|using)\s+(an?\s+)?llm\b/.test(t),
+    answer: LLM_WIRING,
+  },
+  {
     id: "ai-human",
     category: "identity",
     test: (t) =>
@@ -294,6 +326,16 @@ const CASES: MetaCase[] = [
   },
 
   // --- capability ---
+  {
+    id: "fundraising",
+    category: "capability",
+    test: (t) =>
+      /\b(raise|raising)\s+(funds?|capital|money|investment)\b/.test(t) ||
+      /\bfundrais(e|ing)\b/.test(t) ||
+      /\b(seed|series\s+[a-c]|investor)\s+(round|deck|pitch)\b/.test(t) ||
+      /\bwe\s+need\s+to\s+raise\b/.test(t),
+    answer: FUNDRAISING,
+  },
   {
     id: "what-can-you-do",
     category: "capability",
@@ -540,15 +582,18 @@ const CASES: MetaCase[] = [
     id: "frustration",
     category: "courtesy",
     test: (t) =>
-      t.length < 100 &&
+      t.length < 120 &&
       !/\bmy\s+name\s+is\b/.test(t) &&
       (/\bthis\s+(isn'?t|is\s+not|aint)\s+working\b/.test(t) ||
-        /\b(you|u)\s+(are|r)\s+not\s+(helping|assisting)\b/.test(t)),
+        /\b(you|u)\s+(are|r)\s+not\s+(helping|assisting)\b/.test(t) ||
+        /\bwhy\s+(can'?t|cant|won'?t|wont)\s+(you|u)\s+(give|help|answer|tell)\b/.test(t) ||
+        (/\b(give|tell)\s+me\s+(some\s+)?info\b/.test(t) && /\bimportant\b/.test(t))),
     answer: [
-      "Sorry — that last stretch wasn’t useful.",
+      "Sorry — that last answer wasn’t useful.",
       "",
-      "Tell me what you need in plain terms (e.g. “how do I submit a reimbursement?” or “who do I contact for billing?”).",
-      "I’ll use approved guides or say clearly when something is outside staff help-desk scope.",
+      "Founder Talk answers from **portal signals + approved guides**. It won’t invent strategy essays (fundraising pitches, formulas, trivia) on purpose.",
+      "Try: what’s flagged in a domain tab, who owns a blocker, an SOP question — or put the priority on **This week’s plan** yourself.",
+      "If a guide is missing, use **Notify owner** with a one-line gap.",
     ].join("\n"),
   },
   {
@@ -642,6 +687,18 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
   { id: "train-learn-permanent", text: "i want to train you regarding american culture", mustMatch: /Practice|culture|can.?t permanently/i, mustNot: /approved staff guide for that/i },
   { id: "remember-other-chats", text: "do you remember previous chats", mustMatch: /this chat thread|don.?t reliably recall other/i, mustNot: /approved staff guide/i },
   { id: "are-you-chatgpt", text: "are you chatgpt", mustMatch: /Siya Assist|not ChatGPT/i, mustNot: /approved staff guide/i },
+  {
+    id: "llm-wiring",
+    text: "okay but arent u wired to llm",
+    mustMatch: /LLM|approved guides|portal signals/i,
+    mustNot: /approved staff guide for that/i,
+  },
+  {
+    id: "fundraising",
+    text: "we need to raise funds",
+    mustMatch: /won.?t invent|fundraising|This week.?s plan|Notify owner|Marketing|Leadership/i,
+    mustNot: /approved staff guide for that/i,
+  },
   { id: "notify-owner", text: "what does notify owner button do", mustMatch: /knowledge-gap/i, mustNot: /approved staff guide for that/i },
   { id: "thumbs", text: "what does the thumbs up button do", mustMatch: /yes\/no|no transcript|Does not email/i, mustNot: /approved staff guide/i },
   {
@@ -660,7 +717,13 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
   { id: "feelings", text: "do you feel sad", mustMatch: /don.?t have feelings/i, mustNot: /approved staff guide/i },
   { id: "feelings", text: "i am feeling lonely", mustMatch: /don.?t have feelings|not a companion/i, mustNot: /approved staff guide/i },
   { id: "greeting", text: "how r u", mustMatch: /Hi —/i, mustNot: /approved staff guide/i },
-  { id: "frustration", text: "this isnt working good", mustMatch: /Sorry|plain terms|reimbursement/i, mustNot: /right staff guide for that yet/i },
+  { id: "frustration", text: "this isnt working good", mustMatch: /Sorry|This week.?s plan|Notify owner|domain/i, mustNot: /right staff guide for that yet|approved staff guide for that/i },
+  {
+    id: "frustration",
+    text: "why cant u give me some info, this is important",
+    mustMatch: /Sorry|portal signals|approved guides|This week.?s plan/i,
+    mustNot: /approved staff guide for that/i,
+  },
   { id: "thanks", text: "thanks", mustMatch: /welcome/i, mustNot: /approved staff guide/i },
 ];
 
