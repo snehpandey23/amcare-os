@@ -4,6 +4,7 @@ import { getWorkforceLlmHealth } from "@/lib/siya-os/model";
 import { SIYA_OPENING } from "@/lib/siya-os/config";
 import { SIYA_ASSISTANT_CANONICAL_URL } from "@/lib/siya-os/public-url";
 import { BRAND } from "@/lib/brand";
+import { persistAssistGap } from "@/lib/siya-os/assist-gap-persist";
 
 export const maxDuration = 60;
 
@@ -150,6 +151,49 @@ export async function POST(req: Request) {
       });
     }
 
+    let gapAuto: {
+      id?: string;
+      emailSent?: boolean;
+      routeMode?: string;
+    } | null = null;
+    if (authToken && result.knowledgeGap === true && !result.refused) {
+      const department = result.routing?.department || (surface === "founder-coach" ? "Leadership" : "General");
+      const task =
+        result.routing?.task || (surface === "founder-coach" ? "Founder Talk" : "Unmatched Ask");
+      const chatCategory =
+        surface === "founder-coach" ? "Leadership · Founder Talk" : `${department} · ${task}`;
+      const persisted = await persistAssistGap({
+        token: authToken,
+        department,
+        task,
+        signalType: "no_match",
+        phiRedacted: true,
+        sendFounderInstantEmail: true,
+        chatCategory,
+      });
+      if (persisted.ok) {
+        gapAuto = {
+          id: persisted.id,
+          emailSent: persisted.emailSent,
+          routeMode: persisted.route?.mode,
+        };
+        console.info(
+          "[chat] auto-gap",
+          JSON.stringify({
+            id: persisted.id,
+            department,
+            task,
+            chatCategory,
+            routeMode: persisted.route?.mode,
+            emailSent: persisted.emailSent ?? false,
+            emailError: persisted.emailError ?? null,
+          }),
+        );
+      } else {
+        console.warn("[chat] auto-gap persist failed", persisted.persistStatus, persisted.persistError);
+      }
+    }
+
     return Response.json({
       message: result.message,
       links,
@@ -158,6 +202,7 @@ export async function POST(req: Request) {
       sources: staffSafeSources(result.sources ?? []),
       escalationPreview: result.escalationPreview ?? null,
       knowledgeGap: result.knowledgeGap ?? false,
+      gapAuto,
       refused: result.refused ?? false,
       refusalCategory: result.refusalCategory ?? null,
       opsCoPilot: result.opsCoPilot ?? false,

@@ -12,6 +12,15 @@ export type EscalationEmailPayload = {
   phiRedacted?: boolean;
 };
 
+/** PHI-safe auto-capture email — date/time/category only, never question text. */
+export type AutoGapFounderEmailPayload = {
+  recordId: string;
+  department: string;
+  task: string;
+  chatCategory: string;
+  signalType: string;
+};
+
 export function escalationInbox(): string {
   return (process.env.SIYA_ESCALATION_TO || "bot@siya.health").trim();
 }
@@ -23,9 +32,27 @@ export function escalationFromAddress(): string {
   );
 }
 
-export async function sendEscalationEmail(
-  payload: EscalationEmailPayload,
-): Promise<{ sent: boolean; error?: string }> {
+function formatIstStamp(d = new Date()): { date: string; time: string } {
+  const date = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Kolkata",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(d);
+  const time = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Kolkata",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).format(d);
+  return { date, time };
+}
+
+async function sendResendText(opts: {
+  subject: string;
+  text: string;
+}): Promise<{ sent: boolean; error?: string }> {
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) {
     return { sent: false, error: "RESEND_API_KEY not configured" };
@@ -33,6 +60,38 @@ export async function sendEscalationEmail(
 
   const to = escalationInbox();
   const from = escalationFromAddress();
+
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to: [to],
+        subject: opts.subject,
+        text: opts.text,
+        reply_to: process.env.SIYA_ESCALATION_REPLY_TO?.trim() || undefined,
+      }),
+    });
+
+    if (!res.ok) {
+      const body = await res.text();
+      return { sent: false, error: body.slice(0, 500) || res.statusText };
+    }
+
+    return { sent: true };
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "send failed";
+    return { sent: false, error: message };
+  }
+}
+
+export async function sendEscalationEmail(
+  payload: EscalationEmailPayload,
+): Promise<{ sent: boolean; error?: string }> {
   const subject = `[Siya Assist] ${payload.department} — policy gap`;
   const appUrl =
     process.env.NEXT_PUBLIC_SIYA_ASSISTANT_URL?.trim() ||
@@ -50,36 +109,40 @@ export async function sendEscalationEmail(
     `Record ID: ${payload.recordId}`,
     `App: ${appUrl}`,
     "",
-    "Note: This is a Notify owner click, not a full count of unanswered Ask turns.",
+    "Note: This is a Notify owner click. Auto-captured gaps use a separate PHI-safe email (no question text).",
     "Do not reply with PHI. Add or update a live topic in the internal knowledge base when resolved.",
     "",
     "— automated from Notify owner —",
   ].join("\n");
 
-  try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from,
-        to: [to],
-        subject,
-        text,
-        reply_to: process.env.SIYA_ESCALATION_REPLY_TO?.trim() || undefined,
-      }),
-    });
+  return sendResendText({ subject, text });
+}
 
-    if (!res.ok) {
-      const body = await res.text();
-      return { sent: false, error: body.slice(0, 500) || res.statusText };
-    }
+/** Auto knowledge-gap — Leadership/Founder Talk founder instant. No question text. */
+export async function sendAutoGapFounderEmail(
+  payload: AutoGapFounderEmailPayload,
+): Promise<{ sent: boolean; error?: string }> {
+  const { date, time } = formatIstStamp();
+  const appUrl =
+    process.env.NEXT_PUBLIC_SIYA_ASSISTANT_URL?.trim() ||
+    "https://siya-staff-assist.vercel.app";
+  const subject = `[Siya Assist] Auto gap — ${payload.chatCategory}`;
+  const text = [
+    "Siya Assist — automatic knowledge-gap capture (no Notify owner click)",
+    "",
+    `Date (IST): ${date}`,
+    `Time (IST): ${time}`,
+    `Chat category: ${payload.chatCategory}`,
+    `Department: ${payload.department}`,
+    `Task: ${payload.task}`,
+    `Signal: ${payload.signalType}`,
+    `Record ID: ${payload.recordId}`,
+    `App: ${appUrl}`,
+    "",
+    "Question text is never stored in Postgres and is not included in this email.",
+    "",
+    "— automated from Assist auto-capture —",
+  ].join("\n");
 
-    return { sent: true };
-  } catch (err) {
-    const message = err instanceof Error ? err.message : "send failed";
-    return { sent: false, error: message };
-  }
+  return sendResendText({ subject, text });
 }

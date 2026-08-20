@@ -137,17 +137,6 @@ export async function fetchFounderPortalSignalsBlock(
   }
 }
 
-export function founderCoachPlainOffTopic(): string {
-  return [
-    "I don't have an approved staff guide for that.",
-    "",
-    "I won't invent a general answer (formulas, trivia, culture lectures, or strategy essays).",
-    "Ask about a domain this week, an SOP, who owns something, or open the matching domain tab.",
-    "If this should become an approved guide, use **Notify owner** / escalate with a one-line gap.",
-    "I won't write anything into your Plan Record — that's manual on This week's plan.",
-  ].join("\n");
-}
-
 export function founderCoachVaguePrompt(): string {
   return [
     "What do you want to talk through?",

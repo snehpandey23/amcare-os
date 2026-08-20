@@ -677,18 +677,21 @@ app.post("/api/assist/gaps", requireAuth, async (req: AuthRequest, res: express.
   const department = typeof req.body?.department === "string" ? req.body.department : "General";
   const task = typeof req.body?.task === "string" ? req.body.task : "Missing approved policy";
   const phiRedacted = req.body?.phiRedacted === true;
+  const signalRaw = typeof req.body?.signalType === "string" ? req.body.signalType : "no_match";
   try {
-    const { insertAssistGap, newGapId } = await import("./assist-telemetry.js");
-    const { gap, route } = await insertAssistGap(pool, {
+    const { insertAssistGap, newGapId, parseAssistGapSignalType } = await import("./assist-telemetry.js");
+    const { gap, route, digestEligible } = await insertAssistGap(pool, {
       id: id || newGapId(),
       department,
       task,
       phiRedacted,
+      signalType: parseAssistGapSignalType(signalRaw),
     });
     return res.status(201).json({
       ok: true,
       id: gap.id,
       gap,
+      digestEligible,
       route: {
         mode: route.mode,
         departmentSlug: route.departmentSlug,
@@ -739,6 +742,37 @@ app.post("/api/assist/gaps/:id/resolve", requireAuth, async (req: AuthRequest, r
   }
 });
 
+app.get("/api/assist/gap-digests/preview", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { istWeekStart } = await import("./ops-coordination-service.js");
+    const weekStart =
+      typeof req.query.weekStart === "string" && /^\d{4}-\d{2}-\d{2}$/.test(req.query.weekStart)
+        ? req.query.weekStart
+        : istWeekStart();
+    const { buildLeadGapDigestPayloads } = await import("./assist-telemetry.js");
+    const digests = await buildLeadGapDigestPayloads(pool, weekStart);
+    const gaps = digests.flatMap((d) => d.gaps);
+    return res.json({
+      weekStart,
+      digestCount: digests.length,
+      totalGaps: gaps.length,
+      gaps,
+      wouldSend: digests.length > 0,
+      emptyReason:
+        digests.length === 0
+          ? "Empty if there are no open Notify-owner gaps assigned to a non-admin department lead. Leadership/General and admin-as-lead go founder_instant, not the weekly digest."
+          : null,
+      honestyNote:
+        "Category + task label only. Lead emails omitted. Same join the Monday cron uses (excluding already-sent weeks).",
+    });
+  } catch (err) {
+    console.error("[assist/gap-digests preview]", err);
+    return res.status(500).json({ error: "Could not preview digests." });
+  }
+});
+
 app.get("/api/internal/lead-gap-digests", async (req, res) => {
   if (!cronAuthorized(req)) return res.status(401).json({ error: "Unauthorized" });
   const pool = getPool();
@@ -780,9 +814,31 @@ app.post("/api/assist/feedback", requireAuth, async (req: AuthRequest, res: expr
   const failureType = typeof req.body?.failureType === "string" ? req.body.failureType : undefined;
   const department = typeof req.body?.department === "string" ? req.body.department : undefined;
   const knowledgeGap = req.body?.knowledgeGap === true;
+  const threadId = typeof req.body?.threadId === "string" ? req.body.threadId : undefined;
+  const taskLabel = typeof req.body?.taskLabel === "string" ? req.body.taskLabel : undefined;
   try {
-    const { insertAssistFeedback } = await import("./assist-telemetry.js");
-    await insertAssistFeedback(pool, { helpful, failureType, department, knowledgeGap });
+    const { insertAssistFeedback, insertAssistGap, newGapId } = await import("./assist-telemetry.js");
+    await insertAssistFeedback(pool, {
+      helpful,
+      failureType,
+      department,
+      knowledgeGap,
+      threadId,
+      taskLabel,
+    });
+    // Thumbs-down also lands in aggregate gap table (distinct from no_match).
+    if (!helpful) {
+      const task =
+        (taskLabel && taskLabel.trim()) ||
+        (failureType ? `Thumbs-down: ${failureType}` : "Thumbs-down: unhelpful answer");
+      await insertAssistGap(pool, {
+        id: newGapId(),
+        department: department || "General",
+        task,
+        phiRedacted: true,
+        signalType: "thumbs_down",
+      });
+    }
     return res.json({ ok: true });
   } catch (err) {
     console.error("[assist/feedback]", err);
@@ -1637,6 +1693,7 @@ app.get("/api/knowledge/sops/retrieval", requireAuth, async (_req: AuthRequest, 
       body: s.body,
       keywords: s.keywords,
       status: s.status,
+      riskTier: s.riskTier,
       ownerName: s.ownerName,
       reviewDate: s.reviewDate,
     })),

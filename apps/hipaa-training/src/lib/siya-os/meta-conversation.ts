@@ -104,6 +104,12 @@ const MEMORY = [
   "Personal preferences you state here can be recalled **in this chat only**. Role claims (“X is clinical lead”) stay **unconfirmed** until admin verifies.",
 ].join("\n");
 
+const CHAT_SAVE = [
+  "Yes — **this session’s chat** is saved to **your thread history** in the left sidebar (while you’re signed in).",
+  "",
+  "Nothing else is retained beyond what’s shown in that list — I don’t keep a private copy outside your Assist history, and chatting here does not permanently retrain company policy.",
+].join("\n");
+
 const COMPARE = [
   "I’m **Siya Assist**, not ChatGPT/Gemini for general knowledge.",
   "",
@@ -435,6 +441,16 @@ const CASES: MetaCase[] = [
 
   // --- memory ---
   {
+    id: "chat-save",
+    category: "memory",
+    test: (t) =>
+      /\b(are|r)\s+(you|u)\s+saving\s+(my\s+)?(chat|chats|conversation|messages?)\b/.test(t) ||
+      /\b(do|does)\s+(you|u)\s+save\s+(my\s+)?(chat|chats|conversation|messages?)\b/.test(t) ||
+      /\bis\s+(my\s+)?(chat|conversation)\s+(being\s+)?saved\b/.test(t) ||
+      /\b(save|saving|store|storing)\s+(my\s+)?(chat|chats|conversation)\b/.test(t),
+    answer: CHAT_SAVE,
+  },
+  {
     id: "remember-other-chats",
     category: "memory",
     test: (t) =>
@@ -686,6 +702,12 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
   { id: "what-can-you-do", text: "what can you do", mustMatch: /help desk|this app|approved/i, mustNot: /approved staff guide for that/i },
   { id: "train-learn-permanent", text: "i want to train you regarding american culture", mustMatch: /Practice|culture|can.?t permanently/i, mustNot: /approved staff guide for that/i },
   { id: "remember-other-chats", text: "do you remember previous chats", mustMatch: /this chat thread|don.?t reliably recall other/i, mustNot: /approved staff guide/i },
+  {
+    id: "chat-save",
+    text: "are u saving my chat",
+    mustMatch: /thread history|saved|left sidebar/i,
+    mustNot: /approved staff guide/i,
+  },
   { id: "are-you-chatgpt", text: "are you chatgpt", mustMatch: /Siya Assist|not ChatGPT/i, mustNot: /approved staff guide/i },
   {
     id: "llm-wiring",

@@ -1,50 +1,10 @@
 import type { Department } from "@/lib/siya-os/departments";
 import { sendEscalationEmail, escalationInbox } from "@/lib/siya-os/escalation-email";
 import { assessStaffMessageSafety } from "@/lib/siya-os/phi-guard";
-import { getTrainingApiUrl } from "@/lib/trainingConfig";
-
-type PersistGapResult = {
-  ok: boolean;
-  id?: string;
-  route?: {
-    mode: "lead_digest" | "founder_instant";
-    departmentLabel?: string;
-    reason?: string;
-    leadName?: string | null;
-  };
-};
-
-async function persistGapToApi(
-  record: { id: string; department: string; task: string; phiRedacted: boolean },
-  token: string,
-): Promise<PersistGapResult> {
-  const base = getTrainingApiUrl();
-  if (!base) return { ok: false };
-  try {
-    const res = await fetch(`${base}/api/assist/gaps`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: record.id,
-        department: record.department,
-        task: record.task,
-        phiRedacted: record.phiRedacted,
-      }),
-    });
-    const data = (await res.json().catch(() => ({}))) as PersistGapResult & { error?: string };
-    if (!res.ok) return { ok: false };
-    return {
-      ok: true,
-      id: data.id,
-      route: data.route,
-    };
-  } catch {
-    return { ok: false };
-  }
-}
+import { persistAssistGap } from "@/lib/siya-os/assist-gap-persist";
 
 /**
- * Notify owner / knowledge-gap capture.
+ * Notify owner / knowledge-gap capture (explicit click).
  * Auth required so department→lead routing can run.
  * PHI guard runs before Resend, logs, or any client-safe echo of question text.
  */
@@ -82,11 +42,28 @@ export async function POST(req: Request) {
       }),
     );
 
-    const persisted = await persistGapToApi({ id, department, task, phiRedacted }, bearer);
+    const persisted = await persistAssistGap({
+      token: bearer,
+      id,
+      department,
+      task,
+      phiRedacted,
+      signalType: "notify_owner",
+      // Click path keeps legacy email with question (or redaction placeholder).
+      sendFounderInstantEmail: false,
+    });
     if (!persisted.ok || !persisted.route) {
+      const signInHint = persisted.persistStatus === 401 || persisted.persistStatus === 403;
       return Response.json(
-        { error: "Could not record gap — try again after sign-in.", phiRedacted },
-        { status: 503 },
+        {
+          error: signInHint
+            ? "Could not record gap — try again after sign-in."
+            : "Could not record gap.",
+          persistStatus: persisted.persistStatus ?? 503,
+          persistError: persisted.persistError ?? null,
+          phiRedacted,
+        },
+        { status: signInHint ? 401 : 503 },
       );
     }
     const routeMode = persisted.route.mode;
@@ -125,6 +102,8 @@ export async function POST(req: Request) {
         phiRedacted,
         questionStored: false,
       },
+      gap: persisted.gap ?? null,
+      digestEligible: persisted.digestEligible ?? false,
       routeMode,
       routeReason: persisted.route.reason ?? null,
       leadName: persisted.route.leadName ?? null,
@@ -134,7 +113,7 @@ export async function POST(req: Request) {
       emailError: routeMode === "founder_instant" && !email.sent ? email.error : undefined,
       message,
       honestyNote:
-        "This records a Notify owner click — not every unanswered Ask turn. Verbatim questions are never stored in Postgres.",
+        "Notify owner click logged. Soft-stop Ask/Founder Talk turns with knowledgeGap=true are also auto-logged separately (category/task only).",
     });
   } catch {
     return Response.json({ error: "Something went wrong." }, { status: 500 });

@@ -47,6 +47,12 @@ async function main() {
   assert.ok(/Learn/i.test(learnWant.message));
   assert.ok(!/I don't have an approved staff guide/i.test(learnWant.message));
 
+  const saving = await t("are u saving my chat");
+  assert.ok(saving.ruleFinal);
+  assert.equal(saving.knowledgeGap, false);
+  assert.ok(/thread history|saved/i.test(saving.message));
+  assert.ok(!/I don't have an approved staff guide|right staff guide for that yet/i.test(saving.message));
+
   const funds = await t("we need to raise funds");
   assert.ok(funds.ruleFinal);
   assert.equal(funds.knowledgeGap, false);
@@ -62,6 +68,14 @@ async function main() {
   assert.ok(why.ruleFinal);
   assert.ok(/Sorry|portal signals|approved guides/i.test(why.message));
   assert.ok(!/I don't have an approved staff guide/i.test(why.message));
+
+  // Genuine no-match: shared soft-stop copy + knowledgeGap so auto-capture can fire.
+  const nonsense = await t("xyzzy plugh fnord quantum banana policy 99441");
+  assert.ok(nonsense.ruleFinal);
+  assert.equal(nonsense.knowledgeGap, true, "genuine miss must set knowledgeGap");
+  assert.ok(/right staff guide for that yet/i.test(nonsense.message));
+  assert.equal(nonsense.routing?.department, "Leadership");
+  assert.equal(nonsense.routing?.task, "Founder Talk");
 
   const song = await t("best song by led zeppelin");
   assert.ok(/don.?t pick songs|outside what I can help/i.test(song.message));

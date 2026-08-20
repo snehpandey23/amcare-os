@@ -1,11 +1,6 @@
 import type pg from "pg";
 import { randomUUID } from "node:crypto";
-import { readFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
 import { departmentToSlug, slugToDepartment } from "./sop-store.js";
-
-const __dir = dirname(fileURLToPath(import.meta.url));
 
 let ensured = false;
 
@@ -14,16 +9,31 @@ export const FOUNDER_INSTANT_DEPARTMENTS = new Set(["Leadership", "General"]);
 
 export type AssistGapStatus = "open" | "resolved";
 
+/** How the gap entered the table — never stores question text. */
+export type AssistGapSignalType =
+  | "no_match"
+  | "notify_owner"
+  | "thumbs_down"
+  | "unresolved_repeat";
+
 export type AssistGapRecord = {
   id: string;
   department: string;
   departmentSlug: string;
   taskLabel: string;
   status: AssistGapStatus;
+  signalType: AssistGapSignalType;
   phiRedacted: boolean;
   createdAt: string;
   resolvedAt: string | null;
 };
+
+export function parseAssistGapSignalType(raw: unknown): AssistGapSignalType {
+  if (raw === "notify_owner" || raw === "thumbs_down" || raw === "unresolved_repeat" || raw === "no_match") {
+    return raw;
+  }
+  return "no_match";
+}
 
 export type GapNotifyRoute = {
   mode: "lead_digest" | "founder_instant";
@@ -44,10 +54,22 @@ export type LeadGapDigestPayload = {
   gaps: { id: string; department: string; taskLabel: string; createdAt: string }[];
 };
 
+/**
+ * Prod table may predate department_slug. CREATE TABLE IF NOT EXISTS is a no-op on that
+ * old table; indexes in the .sql file then fail (42703) before ALTER ADD COLUMN runs.
+ * Column add → backfill → indexes, in that order.
+ */
 export async function ensureAssistTelemetryTables(pool: pg.Pool): Promise<void> {
   if (ensured) return;
-  const sql = readFileSync(join(__dir, "database", "assist-telemetry-schema.sql"), "utf8");
-  await pool.query(sql);
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS siya_assist_gaps (
+      id TEXT PRIMARY KEY,
+      department TEXT NOT NULL DEFAULT 'General',
+      task_label TEXT NOT NULL DEFAULT '',
+      status VARCHAR(24) NOT NULL DEFAULT 'open',
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `);
   await pool.query(`ALTER TABLE siya_assist_gaps ADD COLUMN IF NOT EXISTS department_slug VARCHAR(64)`);
   await pool.query(`ALTER TABLE siya_assist_gaps ADD COLUMN IF NOT EXISTS phi_redacted BOOLEAN NOT NULL DEFAULT FALSE`);
   await pool.query(`ALTER TABLE siya_assist_gaps ADD COLUMN IF NOT EXISTS resolved_at TIMESTAMPTZ`);
@@ -59,8 +81,50 @@ export async function ensureAssistTelemetryTables(pool: pg.Pool): Promise<void> 
      WHERE department_slug IS NULL OR department_slug = ''`,
   );
   await pool.query(`ALTER TABLE siya_assist_gaps ALTER COLUMN department_slug SET DEFAULT 'general'`);
-  await pool.query(`UPDATE siya_assist_gaps SET department_slug = 'general' WHERE department_slug IS NULL`);
+  await pool.query(`UPDATE siya_assist_gaps SET department_slug = 'general' WHERE department_slug IS NULL OR department_slug = ''`);
   await pool.query(`ALTER TABLE siya_assist_gaps ALTER COLUMN department_slug SET NOT NULL`);
+  await pool.query(
+    `CREATE INDEX IF NOT EXISTS idx_siya_assist_gaps_status ON siya_assist_gaps(status, created_at DESC)`,
+  );
+  await pool.query(
+    `CREATE INDEX IF NOT EXISTS idx_siya_assist_gaps_dept_status ON siya_assist_gaps(department_slug, status, created_at DESC)`,
+  );
+  await pool.query(
+    `ALTER TABLE siya_assist_gaps ADD COLUMN IF NOT EXISTS signal_type VARCHAR(32) NOT NULL DEFAULT 'no_match'`,
+  );
+  await pool.query(
+    `CREATE INDEX IF NOT EXISTS idx_siya_assist_gaps_signal ON siya_assist_gaps(signal_type, created_at DESC)`,
+  );
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS siya_assist_feedback (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      helpful BOOLEAN NOT NULL,
+      failure_type TEXT,
+      department TEXT,
+      knowledge_gap BOOLEAN NOT NULL DEFAULT FALSE,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `);
+  await pool.query(`ALTER TABLE siya_assist_feedback ADD COLUMN IF NOT EXISTS thread_id TEXT`);
+  await pool.query(`ALTER TABLE siya_assist_feedback ADD COLUMN IF NOT EXISTS task_label TEXT`);
+  await pool.query(
+    `CREATE INDEX IF NOT EXISTS idx_siya_assist_feedback_created ON siya_assist_feedback(created_at DESC)`,
+  );
+  await pool.query(
+    `CREATE INDEX IF NOT EXISTS idx_siya_assist_feedback_thread ON siya_assist_feedback(thread_id, created_at DESC)`,
+  );
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS siya_assist_gap_digest_sends (
+      id TEXT PRIMARY KEY,
+      user_id UUID NOT NULL REFERENCES hipaa_training_users(id) ON DELETE CASCADE,
+      week_start DATE NOT NULL,
+      gap_count INT NOT NULL DEFAULT 0,
+      sent_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      UNIQUE (user_id, week_start)
+    )
+  `);
   ensured = true;
 }
 
@@ -72,6 +136,7 @@ function rowToGap(row: Record<string, unknown>): AssistGapRecord {
     departmentSlug: String(row.department_slug || "general"),
     taskLabel: String(row.task_label || ""),
     status,
+    signalType: parseAssistGapSignalType(row.signal_type),
     phiRedacted: Boolean(row.phi_redacted),
     createdAt: new Date(row.created_at as string).toISOString(),
     resolvedAt: row.resolved_at ? new Date(row.resolved_at as string).toISOString() : null,
@@ -80,6 +145,8 @@ function rowToGap(row: Record<string, unknown>): AssistGapRecord {
 
 export async function resolveGapNotifyRoute(pool: pg.Pool, departmentLabel: string): Promise<GapNotifyRoute> {
   await ensureAssistTelemetryTables(pool);
+  const { ensureSopTables } = await import("./sop-service.js");
+  await ensureSopTables(pool);
   const label = slugToDepartment(departmentToSlug(departmentLabel)) || departmentLabel || "General";
   const slug = departmentToSlug(label);
 
@@ -151,13 +218,15 @@ export async function insertAssistGap(
     department: string;
     task: string;
     phiRedacted?: boolean;
+    signalType?: AssistGapSignalType;
   },
-): Promise<{ gap: AssistGapRecord; route: GapNotifyRoute }> {
+): Promise<{ gap: AssistGapRecord; route: GapNotifyRoute; digestEligible: boolean }> {
   await ensureAssistTelemetryTables(pool);
   const route = await resolveGapNotifyRoute(pool, input.department);
+  const signalType = parseAssistGapSignalType(input.signalType ?? "no_match");
   await pool.query(
-    `INSERT INTO siya_assist_gaps (id, department, department_slug, task_label, status, phi_redacted)
-     VALUES ($1, $2, $3, $4, 'open', $5)
+    `INSERT INTO siya_assist_gaps (id, department, department_slug, task_label, status, phi_redacted, signal_type)
+     VALUES ($1, $2, $3, $4, 'open', $5, $6)
      ON CONFLICT (id) DO NOTHING`,
     [
       input.id,
@@ -165,6 +234,7 @@ export async function insertAssistGap(
       route.departmentSlug,
       input.task.slice(0, 200),
       Boolean(input.phiRedacted),
+      signalType,
     ],
   );
   const gap =
@@ -175,11 +245,13 @@ export async function insertAssistGap(
       departmentSlug: route.departmentSlug,
       taskLabel: input.task.slice(0, 200),
       status: "open" as const,
+      signalType,
       phiRedacted: Boolean(input.phiRedacted),
       createdAt: new Date().toISOString(),
       resolvedAt: null,
     } satisfies AssistGapRecord);
-  return { gap, route };
+  const digestEligible = await gapWouldAppearInWeeklyDigest(pool, gap.id);
+  return { gap, route, digestEligible };
 }
 
 export async function getAssistGap(pool: pg.Pool, id: string): Promise<AssistGapRecord | null> {
@@ -194,6 +266,8 @@ export async function listOpenGapsForViewer(
   opts: { userId: string; role: string },
 ): Promise<AssistGapRecord[]> {
   await ensureAssistTelemetryTables(pool);
+  const { ensureSopTables } = await import("./sop-service.js");
+  await ensureSopTables(pool);
   if (opts.role === "admin") {
     const r = await pool.query(
       `SELECT * FROM siya_assist_gaps WHERE status = 'open' ORDER BY created_at DESC LIMIT 200`,
@@ -243,19 +317,40 @@ export async function insertAssistFeedback(
     failureType?: string;
     department?: string;
     knowledgeGap?: boolean;
+    threadId?: string;
+    taskLabel?: string;
   },
 ): Promise<void> {
   await ensureAssistTelemetryTables(pool);
   await pool.query(
-    `INSERT INTO siya_assist_feedback (helpful, failure_type, department, knowledge_gap)
-     VALUES ($1, $2, $3, $4)`,
+    `INSERT INTO siya_assist_feedback (helpful, failure_type, department, knowledge_gap, thread_id, task_label)
+     VALUES ($1, $2, $3, $4, $5, $6)`,
     [
       input.helpful,
       input.failureType?.slice(0, 64) ?? null,
       input.department?.slice(0, 64) ?? null,
       Boolean(input.knowledgeGap),
+      input.threadId?.slice(0, 80) ?? null,
+      input.taskLabel?.slice(0, 200) ?? null,
     ],
   );
+}
+
+/** True if this thread logged a thumbs-up after `sinceIso` (exclusive of gap capture). */
+export async function threadHadThumbsUpSince(
+  pool: pg.Pool,
+  threadId: string,
+  sinceIso: string,
+): Promise<boolean> {
+  await ensureAssistTelemetryTables(pool);
+  if (!threadId) return false;
+  const r = await pool.query(
+    `SELECT 1 FROM siya_assist_feedback
+     WHERE thread_id = $1 AND helpful = TRUE AND created_at > $2::timestamptz
+     LIMIT 1`,
+    [threadId.slice(0, 80), sinceIso],
+  );
+  return r.rows.length > 0;
 }
 
 export async function countOpenGapsSince(pool: pg.Pool, since: Date): Promise<number> {
@@ -276,7 +371,29 @@ export async function countNegativeFeedbackSince(pool: pg.Pool, since: Date): Pr
   return r.rows[0]?.c ?? 0;
 }
 
-/** Build weekly lead digests for open gaps (category/task only — no question text). */
+/** True if Monday cron would include this open gap (non-admin lead; not Leadership/General). */
+export async function gapWouldAppearInWeeklyDigest(pool: pg.Pool, gapId: string): Promise<boolean> {
+  await ensureAssistTelemetryTables(pool);
+  const { ensureSopTables } = await import("./sop-service.js");
+  await ensureSopTables(pool);
+  const r = await pool.query(
+    `SELECT EXISTS (
+       SELECT 1
+       FROM siya_assist_gaps g
+       JOIN siya_department_leads l ON l.department_slug = g.department_slug AND l.user_id IS NOT NULL
+       JOIN hipaa_training_users u ON u.id = l.user_id AND u.deactivated_at IS NULL
+       WHERE g.id = $1
+         AND g.status = 'open'
+         AND u.role <> 'admin'
+         AND g.department NOT IN ('Leadership', 'General')
+         AND g.signal_type IN ('no_match', 'notify_owner')
+     ) AS ok`,
+    [gapId],
+  );
+  return Boolean(r.rows[0]?.ok);
+}
+
+/** Build weekly lead digests for open knowledge gaps (no_match / notify_owner only). */
 export async function buildLeadGapDigestPayloads(
   pool: pg.Pool,
   weekStart: string,
@@ -289,6 +406,7 @@ export async function buildLeadGapDigestPayloads(
      JOIN siya_department_leads l ON l.department_slug = g.department_slug AND l.user_id IS NOT NULL
      JOIN hipaa_training_users u ON u.id = l.user_id AND u.deactivated_at IS NULL
      WHERE g.status = 'open'
+       AND g.signal_type IN ('no_match', 'notify_owner')
        AND u.role <> 'admin'
        AND g.department NOT IN ('Leadership', 'General')
        AND NOT EXISTS (
@@ -328,6 +446,60 @@ export async function buildLeadGapDigestPayloads(
     });
   }
   return [...byUser.values()].filter((p) => p.gaps.length > 0);
+}
+
+export type FounderGapRollup = {
+  weekStart: string;
+  since: string;
+  autoGaps: number;
+  notifyOwnerGaps: number;
+  thumbsDown: number;
+  unresolvedRepeats: number;
+  topTopics: { taskLabel: string; department: string; count: number; signalType: string }[];
+};
+
+/** Week rollup for founder digest — category/task aggregates only. */
+export async function buildFounderGapRollup(pool: pg.Pool, weekStart: string): Promise<FounderGapRollup> {
+  await ensureAssistTelemetryTables(pool);
+  const since = `${weekStart}T00:00:00.000Z`;
+  const counts = await pool.query(
+    `SELECT
+       COUNT(*) FILTER (WHERE signal_type = 'no_match')::int AS auto_gaps,
+       COUNT(*) FILTER (WHERE signal_type = 'notify_owner')::int AS notify_owner,
+       COUNT(*) FILTER (WHERE signal_type = 'thumbs_down')::int AS thumbs_down,
+       COUNT(*) FILTER (WHERE signal_type = 'unresolved_repeat')::int AS unresolved
+     FROM siya_assist_gaps
+     WHERE created_at >= $1::timestamptz`,
+    [since],
+  );
+  const top = await pool.query(
+    `SELECT task_label, department, signal_type, COUNT(*)::int AS c
+     FROM siya_assist_gaps
+     WHERE created_at >= $1::timestamptz
+       AND task_label IS NOT NULL
+       AND task_label <> ''
+     GROUP BY task_label, department, signal_type
+     ORDER BY c DESC, task_label ASC
+     LIMIT 5`,
+    [since],
+  );
+  const row = counts.rows[0] as
+    | { auto_gaps: number; notify_owner: number; thumbs_down: number; unresolved: number }
+    | undefined;
+  return {
+    weekStart,
+    since,
+    autoGaps: row?.auto_gaps ?? 0,
+    notifyOwnerGaps: row?.notify_owner ?? 0,
+    thumbsDown: row?.thumbs_down ?? 0,
+    unresolvedRepeats: row?.unresolved ?? 0,
+    topTopics: top.rows.map((r) => ({
+      taskLabel: String(r.task_label || "Missing approved policy"),
+      department: String(r.department || "General"),
+      count: Number(r.c) || 0,
+      signalType: String(r.signal_type || "no_match"),
+    })),
+  };
 }
 
 export async function markLeadGapDigestSent(

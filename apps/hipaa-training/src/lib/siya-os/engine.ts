@@ -1,7 +1,7 @@
 import { getEscalationContacts } from "./config";
 import { defaultEscalationOwner } from "./escalation";
 import { retrievalQueryBoost, routeIntent, expandShortQuery, hasRoutableIntent } from "./flows";
-import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, abusivePatientAnswer, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, polishStaffMessage, isCasualOffTopic, casualOffTopicReply } from "./compose-answer";
+import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, abusivePatientAnswer, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, polishStaffMessage, isCasualOffTopic, casualOffTopicReply, appendDraftLiveHedge } from "./compose-answer";
 import { staffTopicLabel } from "./staff-voice";
 import { synthesizeWorkforceAnswer } from "./llm-answer";
 import {
@@ -24,6 +24,8 @@ import { fetchAdminOpsSnapshot } from "./admin-ops-snapshot";
 import { detectAdminOpsIntent, runAdminOpsCoach } from "./admin-ops-coach";
 import { tryFactsLookup } from "./facts-lookup";
 import { tryPracticeLookup } from "./practice-lookup";
+import { trySopChromeLookup } from "./sop-chrome-lookup";
+import { tryWorkplaceLinkLookup } from "./workplace-link-lookup";
 import { answerMetaConversation } from "./meta-conversation";
 import {
   acknowledgePersonalPreference,
@@ -41,7 +43,6 @@ import {
 } from "./conversation-memory";
 import {
   fetchFounderPortalSignalsBlock,
-  founderCoachPlainOffTopic,
   founderCoachVaguePrompt,
   wantsFounderPortalSignals,
   portalDomainFilter,
@@ -101,15 +102,6 @@ export interface SiyaReply {
 }
 
 const REFUND_PROMISE = /\b(i (can|will) (approve|refund|waive|credit)|guaranteed refund|refund is approved)\b/i;
-
-/** Bot-about-bot / chrome / courtesy — catalog in meta-conversation.ts */
-function answerStaffMetaQuestion(
-  text: string,
-  history: { role: string; content: string }[] = [],
-): string | null {
-  const priorUser = [...history].reverse().find((h) => h.role === "user")?.content;
-  return answerMetaConversation(text, priorUser);
-}
 
 /** Patient-site / public marketing asks — not Founder Plan gaps. */
 function isPatientFacingMarketingAsk(text: string): boolean {
@@ -260,7 +252,7 @@ export async function runSiyaAssistantAsync(
   });
 
   if (synthesis.text) {
-    let msg = polishStaffMessage(synthesis.text);
+    let msg = appendDraftLiveHedge(polishStaffMessage(synthesis.text), base.chunks);
     if (base.chunks[0]?.escalate && !msg.includes(base.chunks[0].escalate!)) {
       msg += `\n\n**Loop in:** ${base.chunks[0].escalate}`;
     }
@@ -288,13 +280,12 @@ export async function runSiyaAssistantAsync(
     };
   }
 
-  const fallbackMsg =
-    base.message?.trim() ||
-    (founderCoach ? founderCoachPlainOffTopic() : "");
+  const fallbackMsg = base.message?.trim() || askClarifyingQuestion(message);
 
   return {
     ...base,
     message: polishStaffMessage(fallbackMsg),
+    knowledgeGap: !base.message?.trim() ? true : (base.knowledgeGap ?? false),
     llmUsed: false,
     llmFallback: synthesis.llmFallback,
     llmError: synthesis.llmError
@@ -367,9 +358,7 @@ function buildSiyaReply(
   const text = message.trim();
   if (!text) {
     return {
-      message: founderCoach
-        ? founderCoachVaguePrompt()
-        : "What do you need help with today? Type a question or pick a suggestion below.",
+      message: "What do you need help with today? Type a question or pick a suggestion below.",
       chunks: [],
       ruleFinal: true,
     };
@@ -400,6 +389,44 @@ function buildSiyaReply(
       routing: {
         department: "General",
         task: "Learn / Practice link",
+        confidence: "high",
+        followUpQuestions: [],
+      },
+    };
+  }
+
+  const workplaceLink = tryWorkplaceLinkLookup(text);
+  if (workplaceLink) {
+    return {
+      message: polishStaffMessage(workplaceLink.message),
+      chunks: [],
+      knowledgeGap: false,
+      sources: [{ title: `Workplace links · ${workplaceLink.label}`, id: "workplace-links" }],
+      portalLinks: workplaceLink.links,
+      escalationPreview: undefined,
+      ruleFinal: true,
+      routing: {
+        department: "Clinical Operations",
+        task: `${workplaceLink.label} portal`,
+        confidence: "high",
+        followUpQuestions: [],
+      },
+    };
+  }
+
+  const sopChrome = trySopChromeLookup(text);
+  if (sopChrome) {
+    return {
+      message: polishStaffMessage(sopChrome.message),
+      chunks: [],
+      knowledgeGap: false,
+      sources: [],
+      portalLinks: sopChrome.links,
+      escalationPreview: undefined,
+      ruleFinal: true,
+      routing: {
+        department: "General",
+        task: sopChrome.id === "write" ? "SOP builder" : "Department SOPs",
         confidence: "high",
         followUpQuestions: [],
       },
@@ -443,7 +470,8 @@ function buildSiyaReply(
     };
   }
 
-  const metaAnswer = answerStaffMetaQuestion(text, history);
+  const priorUser = [...history].reverse().find((h) => h.role === "user")?.content;
+  const metaAnswer = answerMetaConversation(text, priorUser);
   if (metaAnswer) {
     return {
       message: polishStaffMessage(metaAnswer),
@@ -630,7 +658,7 @@ function buildSiyaReply(
     !history.some((h) => h.role === "user" && h.content.trim().length > 12)
   ) {
     return {
-      message: founderCoach ? founderCoachVaguePrompt() : clarifyVagueMessage(),
+      message: clarifyVagueMessage(),
       chunks: [],
       knowledgeGap: false,
       sources: [],
@@ -745,24 +773,19 @@ function buildSiyaReply(
       };
     }
     return {
-      message: polishStaffMessage(
-        founderCoach ? founderCoachPlainOffTopic() : askClarifyingQuestion(normalized),
-      ),
+      message: polishStaffMessage(askClarifyingQuestion(normalized)),
       chunks: [],
-      // Soft-stop text may mention Notify owner; do NOT auto-flag every miss as a gap
-      // (that spammed the button on meta/UI and patient-marketing asks).
-      knowledgeGap: false,
+      // Genuine retrieval miss — same soft-stop on every surface; auto gap-capture keys off this flag.
+      knowledgeGap: true,
       sources: [],
       escalationPreview: undefined,
       ruleFinal: true,
-      routing: founderCoach
-        ? {
-            department: "Leadership",
-            task: "Founder Talk",
-            confidence: "low",
-            followUpQuestions: [],
-          }
-        : undefined,
+      routing: {
+        department: founderCoach ? "Leadership" : routing.department,
+        task: founderCoach ? "Founder Talk" : routing.task,
+        confidence: "low",
+        followUpQuestions: [],
+      },
     };
   }
 
@@ -774,7 +797,10 @@ function buildSiyaReply(
   }));
   const escalateOwner = chunks[0]?.escalate ?? defaultEscalationOwner(routing.department);
 
-  let msg = composeAnswerFromChunks(normalized, chunks, knowledgeGap, routing.flowId);
+  let msg = appendDraftLiveHedge(
+    composeAnswerFromChunks(normalized, chunks, knowledgeGap, routing.flowId),
+    chunks,
+  );
 
   if (REFUND_PROMISE.test(msg)) {
     msg =
