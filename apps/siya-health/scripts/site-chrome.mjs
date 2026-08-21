@@ -1256,11 +1256,17 @@ const GTM_NOSCRIPT_SNIPPET = `<!-- Google Tag Manager (noscript) -->
 height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->`;
 
-/** Meta Pixel loader — after cookie consent bootstrap; fires only on Accept All */
+/** Meta Pixel — Facebook standard snippet (head script + body noscript) */
 const META_PIXEL_SNIPPET = `<!-- Meta Pixel Code -->
 <script>window.__SIYA_META_PIXEL_ID='${TRACKING.META_PIXEL_ID}';</script>
 <script src="/scripts/meta-pixel.js"></script>
 <!-- End Meta Pixel Code -->`;
+
+const META_PIXEL_NOSCRIPT = `<!-- Meta Pixel noscript -->
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=${TRACKING.META_PIXEL_ID}&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel noscript -->`;
 
 const SIYA_TRACKING_BLOCK = `<!-- SIYA:TRACKING -->
     <script src="/scripts/siya-tracking.js" defer></script>
@@ -1364,6 +1370,12 @@ export function injectGtmAndTracking(html, relPath = '') {
   if (!html.includes(`googletagmanager.com/ns.html?id=${GTM_ID}`)) {
     if (/<body[^>]*>/i.test(html)) {
       html = html.replace(/(<body[^>]*>)/i, `$1\n    ${GTM_NOSCRIPT_SNIPPET}\n`);
+    }
+  }
+
+  if (!html.includes(`facebook.com/tr?id=${TRACKING.META_PIXEL_ID}`)) {
+    if (/<body[^>]*>/i.test(html)) {
+      html = html.replace(/(<body[^>]*>)/i, `$1\n    ${META_PIXEL_NOSCRIPT}\n`);
     }
   }
 

@@ -1,7 +1,6 @@
 /**
- * Meta Pixel — loads only after marketing consent ("Accept All").
- * Must run after cookie-consent-bootstrap.js (SiyaCookieConsent).
- * Pixel ID: see data/tracking-config.mjs (META_PIXEL_ID).
+ * Meta Pixel — standard Facebook install (init + PageView on every page load).
+ * Pixel ID from window.__SIYA_META_PIXEL_ID (set by site-chrome) or fallback.
  */
 (function () {
   'use strict';
@@ -17,59 +16,26 @@
     return;
   }
 
-  function loadAndTrack() {
-    if (window.__siyaMetaPixelReady) return;
-    window.__siyaMetaPixelReady = true;
+  if (window.__siyaMetaPixelReady) return;
+  window.__siyaMetaPixelReady = true;
 
-    !(function (f, b, e, v, n, t, s) {
-      if (f.fbq) return;
-      n = f.fbq = function () {
-        n.callMethod
-          ? n.callMethod.apply(n, arguments)
-          : n.queue.push(arguments);
-      };
-      if (!f._fbq) f._fbq = n;
-      n.push = n;
-      n.loaded = !0;
-      n.version = '2.0';
-      n.queue = [];
-      t = b.createElement(e);
-      t.async = !0;
-      t.src = v;
-      s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s);
-    })(
-      window,
-      document,
-      'script',
-      'https://connect.facebook.net/en_US/fbevents.js'
-    );
-
-    window.fbq('init', PIXEL_ID);
-    window.fbq('track', 'PageView');
-  }
-
-  function tryInit() {
-    var consent = window.SiyaCookieConsent;
-    if (consent && consent.get() === 'all') {
-      loadAndTrack();
-      return true;
-    }
-    return false;
-  }
-
-  if (tryInit()) return;
-
-  var consent = window.SiyaCookieConsent;
-  if (consent && typeof consent.acceptAll === 'function') {
-    var orig = consent.acceptAll;
-    consent.acceptAll = function () {
-      orig.apply(this, arguments);
-      loadAndTrack();
+  !(function (f, b, e, v, n, t, s) {
+    if (f.fbq) return;
+    n = f.fbq = function () {
+      n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
     };
-  }
+    if (!f._fbq) f._fbq = n;
+    n.push = n;
+    n.loaded = !0;
+    n.version = '2.0';
+    n.queue = [];
+    t = b.createElement(e);
+    t.async = !0;
+    t.src = v;
+    s = b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t, s);
+  })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
 
-  window.addEventListener('siya:cookie-consent', function (ev) {
-    if (ev && ev.detail && ev.detail.level === 'all') loadAndTrack();
-  });
+  window.fbq('init', PIXEL_ID);
+  window.fbq('track', 'PageView');
 })();
