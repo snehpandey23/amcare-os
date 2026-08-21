@@ -56,6 +56,90 @@ export function isConfusedAboutPriorAnswer(text: string): boolean {
   return false;
 }
 
+/** Clarifying / exception follow-up on the same topic (e.g. “what if the number is unreachable?”). */
+export function isClarifyingFollowUp(text: string): boolean {
+  const t = text.trim();
+  if (!t || t.length > 220) return false;
+  if (
+    /^(what if|what about|and if|but what if|how about if|if (the|they|it|that)|suppose|in case)\b/i.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  if (/\b(not reachable|unreachable|doesn'?t (work|go through)|no answer|busy signal)\b/i.test(t)) {
+    return true;
+  }
+  return false;
+}
+
+const SOFT_STOP_MARK =
+  /i'?m not sure i have the right staff guide|say what you'?re trying to get done in one short sentence/i;
+
+/**
+ * If the last Assist turn already covered this clarifying follow-up, return a focused restatement
+ * instead of soft-stopping / auto-gap. Returns null when prior content does not cover the ask.
+ */
+export function answerFromPriorAssistIfCovered(
+  userMessage: string,
+  lastAssistant: string | null | undefined,
+): string | null {
+  const user = userMessage.trim();
+  const prior = (lastAssistant || "").trim();
+  if (!user || !prior || prior.length < 120) return null;
+  if (SOFT_STOP_MARK.test(prior)) return null;
+  if (!isClarifyingFollowUp(user)) return null;
+
+  const userTokens = new Set(
+    tokenizeForSearch(user).filter((t) => t.length > 2 && !VAGUE_ONLY.has(t)),
+  );
+  if (userTokens.size === 0) return null;
+
+  const priorLower = prior.toLowerCase();
+  // Domain synonyms so “not reachable” matches prior “unreachable”.
+  const expanded = new Set(userTokens);
+  if ([...userTokens].some((t) => /reach|contact|phone|number|call/.test(t))) {
+    for (const syn of ["unreachable", "reachable", "contact", "phone", "number", "twice", "patient"]) {
+      expanded.add(syn);
+    }
+  }
+
+  let hit = 0;
+  for (const t of expanded) {
+    if (priorLower.includes(t)) hit += 1;
+  }
+  // Need real overlap with the prior answer, not just a generic “what if”.
+  if (hit < 2) return null;
+
+  const blocks = prior
+    .split(/\n{2,}/)
+    .map((b) => b.trim())
+    .filter(Boolean);
+  const scored = blocks
+    .map((b) => {
+      const bl = b.toLowerCase();
+      let s = 0;
+      for (const t of expanded) {
+        if (bl.includes(t)) s += 1;
+      }
+      if (/exception|escalat|if .+unreachable|if .+not reach|attempt to contact/i.test(b)) s += 3;
+      return { b, s };
+    })
+    .filter((x) => x.s > 0)
+    .sort((a, b) => b.s - a.s);
+
+  if (!scored.length || scored[0].s < 2) return null;
+
+  const picked = scored.slice(0, 2).map((x) => x.b);
+  return [
+    "That case is already covered in the steps above:",
+    "",
+    ...picked,
+    "",
+    "If you’ve already tried twice and confirmed the number with the patient, escalate to the **Clinical Program Manager** with the ROI date and provider name (no patient identifiers in this chat).",
+  ].join("\n");
+}
+
 export function clarifyVagueMessage(): string {
   return [
     "Happy to help — what are you trying to get done?",
@@ -331,7 +415,7 @@ function formatPrimaryAnswer(
   if (primary.id === "patient-pricing-public-canonical") {
     return [
       "**Public pricing (siya.health):**",
-      "• **Free** — Meet & Greet (non-clinical intro; Discovery Call $79 discontinued)",
+      "• **Free** — Meet & Greet (sole intro; no invoice; Discovery Call $79 retired)",
       "• **$149** — initial physician evaluation",
       "• **$79/mo** — non-controlled follow-up",
       "• **$149/mo** — controlled-substance follow-up",
@@ -380,7 +464,17 @@ export function composeAnswerFromChunks(
     );
   }
 
-  return parts.join("\n");
+  return appendDraftLiveHedge(parts.join("\n"), chunks);
+}
+
+export const DRAFT_LIVE_HEDGE =
+  "**Note:** This guidance is from an **active draft SOP**, not finalized policy. Confirm with the department lead before treating it as required procedure.";
+
+/** Append once when any retrieved SOP is draft-live. */
+export function appendDraftLiveHedge(message: string, chunks: RetrievedChunk[]): string {
+  if (!message.trim() || !chunks.some((c) => c.draftLive)) return message;
+  if (/active draft/i.test(message)) return message;
+  return `${message}\n\n${DRAFT_LIVE_HEDGE}`;
 }
 
 /** Final pass before anything reaches the UI */

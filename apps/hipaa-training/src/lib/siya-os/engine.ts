@@ -1,7 +1,7 @@
 import { getEscalationContacts } from "./config";
 import { defaultEscalationOwner } from "./escalation";
 import { retrievalQueryBoost, routeIntent, expandShortQuery, hasRoutableIntent } from "./flows";
-import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, abusivePatientAnswer, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, polishStaffMessage, isCasualOffTopic, casualOffTopicReply, appendDraftLiveHedge } from "./compose-answer";
+import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, abusivePatientAnswer, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, isClarifyingFollowUp, answerFromPriorAssistIfCovered, polishStaffMessage, isCasualOffTopic, casualOffTopicReply, appendDraftLiveHedge } from "./compose-answer";
 import { staffTopicLabel } from "./staff-voice";
 import { synthesizeWorkforceAnswer } from "./llm-answer";
 import {
@@ -43,7 +43,6 @@ import {
 } from "./conversation-memory";
 import {
   fetchFounderPortalSignalsBlock,
-  founderCoachVaguePrompt,
   wantsFounderPortalSignals,
   portalDomainFilter,
   asksDomainFlags,
@@ -336,6 +335,10 @@ function resolveQuery(message: string, history: { role: string; content: string 
       return `${priorUser.content.trim()} — ${reply}`;
     }
     return mapped;
+  }
+  // Clarifying follow-ups (“what if the number is unreachable?”) keep prior topic for retrieval.
+  if (isClarifyingFollowUp(mapped) && priorUser && priorUser.content.trim().length > 12) {
+    return `${priorUser.content.trim()} — ${mapped.trim()}`;
   }
   if (!isVagueUserMessage(mapped)) return mapped;
   // Don't stitch a new short topic onto an older user turn — that caused “X — Y” echo bugs.
@@ -767,6 +770,24 @@ function buildSiyaReply(
         routing: {
           department: "Leadership",
           task: "Founder Talk",
+          confidence: "medium",
+          followUpQuestions: [],
+        },
+      };
+    }
+    const lastAssist = [...history].reverse().find((h) => h.role === "assistant")?.content;
+    const fromPrior = answerFromPriorAssistIfCovered(text, lastAssist);
+    if (fromPrior) {
+      return {
+        message: polishStaffMessage(fromPrior),
+        chunks: [],
+        knowledgeGap: false,
+        sources: [],
+        escalationPreview: undefined,
+        ruleFinal: true,
+        routing: {
+          department: founderCoach ? "Leadership" : routing.department,
+          task: founderCoach ? "Founder Talk" : routing.task,
           confidence: "medium",
           followUpQuestions: [],
         },
