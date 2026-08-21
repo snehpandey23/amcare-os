@@ -14,8 +14,10 @@
   var STORAGE_BUCKET = 'siya_soft_capture_bucket';
   var STORAGE_SUPPRESS = 'siya_soft_capture_suppress';
   var STORAGE_CONSENT_LOG = 'siya_email_consent_log';
+  /* Canonical Siya Circle join (GHL) — matches live /siya-circle + homepage footer.
+     CarePatron form XRMFIPAWuXhTlncGx now 403s / auth-errors (verified 2026-08-21). */
   var SIYA_CIRCLE_FORM =
-    'https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx';
+    'https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl';
 
   var mount = document.getElementById('screening-soft-capture');
   if (!mount) return;
@@ -213,7 +215,7 @@
         consented_at: consentedAt,
         page_url: location.href.split('#')[0],
         consent_method: 'explicit_checkbox',
-        destination: 'siya_circle_carepatron',
+        destination: 'siya_circle_ghl',
       };
       saveConsentRecord(record);
       suppress(true);
