@@ -751,9 +751,11 @@ function buildSiyaReply(
     topChunk: chunks[0] ?? null,
   });
   // Founder Talk: medium keyword hits (e.g. "culture" → Fun Friday) must not dump unrelated guides.
-  // Keep only very strong retrieval unless this is an explicit portal/domain ask.
+  // Keep only very strong retrieval unless this is an explicit portal/domain ask —
+  // except live Postgres SOPs (sop-db-*), which are approved guides staff published on purpose.
+  const topIsLiveSop = Boolean(chunks[0]?.id?.startsWith("sop-db-"));
   const confident =
-    founderCoach && !wantsFounderPortalSignals(normalized)
+    founderCoach && !wantsFounderPortalSignals(normalized) && !topIsLiveSop
       ? confidentRaw && (chunks[0]?.score ?? 0) >= 40
       : confidentRaw;
 

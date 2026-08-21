@@ -16,6 +16,8 @@ export interface RetrievedChunk {
   /** 0 Way · 1 Laws · 2 Knowledge · 3 Memory */
   layer?: KnowledgeLayerId;
   layerLabel?: string;
+  /** Tier-1 SOP published as draft-live — hedge in the answer. */
+  draftLive?: boolean;
 }
 
 export const LAYER_LABEL: Record<KnowledgeLayerId, string> = {
@@ -104,6 +106,12 @@ const QUERY_EXPANSIONS: Record<string, string[]> = {
   greet: ["meet", "homepage", "cta"],
   password: ["security", "mfa", "account"],
   phishing: ["security", "account"],
+  roi: ["release", "information", "medical", "records", "provider", "fax", "chart"],
+  medical: ["records", "roi", "release", "information", "provider", "chart"],
+  records: ["medical", "roi", "release", "provider", "chart"],
+  unreachable: ["contact", "phone", "number", "provider", "twice", "patient", "roi", "chart"],
+  reachable: ["unreachable", "contact", "phone", "number", "provider", "roi"],
+  chart: ["medical", "records", "roi", "provider", "number", "phone", "contact"],
 };
 
 const GENERIC_QUERY_TOKENS = new Set([
@@ -246,6 +254,17 @@ export function retrieveLaws(query: string, limit = 4): RetrievedChunk[] {
     const tokenScore = scoreTokens(qt, corpus, e.title, e.slug, base);
     if (tokenScore <= 0) continue;
     let s = tokenScore + keywordBoost(qLower, e.keywords, qt);
+    // PHI-in-Ask is a channel rule — do not let incidental "Spruce"/"chat" tokens beat
+    // operational Spruce how-to (e.g. notification workaround).
+    if (e.id === "law-phi-in-internal-chat") {
+      const wantsPhiChannel =
+        /\b(phi|paste|screenshot|identifier|mrn|dob|hipaa)\b/.test(qLower) ||
+        /(don't|do not|can i|cannot|can't).{0,48}(paste|put|send|share|upload).{0,48}(ask|slack|cliq|chat)/i.test(
+          query,
+        ) ||
+        /internal chat|siyaos ask|\bin ask\b/.test(qLower);
+      if (!wantsPhiChannel) s *= 0.08;
+    }
     if (s > 0) {
       out.push(
         withLayer(
@@ -282,13 +301,16 @@ export function retrieveWorkspaceKnowledge(query: string, limit = 6): RetrievedC
     { pattern: /marketing plan|plan for today|what.*post|content today|marketing today|campaign today|social today/, id: "marketing-staff-daily-help", boost: 28 },
     { pattern: /marketing|content plan|social|editorial|caption|instagram|ads\b/, id: "content-qa-checklist", boost: 18 },
     { pattern: /marketing|social|ad copy|claim|testimonial|compliance/, id: "medical-compliance-marketing", boost: 16 },
-    { pattern: /brand|voice|positioning|how we describe/, id: "brand-entities-voice", boost: 14 },
+    { pattern: /\bbrand\b(?!\s+new)|voice|positioning|how we describe/, id: "brand-entities-voice", boost: 14 },
     { pattern: /pricing|price|\$149|\$79|evaluation cost|membership|how much|meet.?and.?greet/, id: "patient-pricing-public-canonical", boost: 20 },
     { pattern: /meet.*greet|homepage cta|book free|discovery call/, id: "homepage-cta-meet-and-greet", boost: 18 },
     { pattern: /late cancel|refund|cancellation|no-show/, id: "billing-late-cancel", boost: 16 },
-    { pattern: /refill|pharmacy|early refill|prescription (sent|ready)|med(ication)? not received/, id: "refill-pharmacy-staff-guidance", boost: 22 },
+    { pattern: /refill|pharmacy|early refill|prescription (sent|ready)|med(ication)? not received|pill count|video pill|csa v2|controlled.?substance/, id: "refill-pharmacy-staff-guidance", boost: 22 },
     { pattern: /onboard|day.?1|new hire|ma orientation|tool surprise/, id: "ma-onboarding-field-lessons", boost: 20 },
-    { pattern: /zoho (mail|cliq|workdrive)|spruce (call|softphone|invite)|true.?sync/, id: "ma-platforms-zoho-spruce", boost: 20 },
+    { pattern: /\bzoho\b|workdrive|true.?sync|\bspruce\b/, id: "ma-platforms-zoho-spruce", boost: 22 },
+    { pattern: /zoho.{0,40}(access|login|provision)|request.{0,30}zoho|new hire.{0,30}(zoho|access)|access.{0,20}(zoho|workdrive)/, id: "ma-platforms-zoho-spruce", boost: 28 },
+    { pattern: /spruce.{0,40}(notif|workaround|another app|background|push)|notif.{0,20}spruce/, id: "ma-platforms-zoho-spruce", boost: 28 },
+    { pattern: /daily payment|payment check|payment report|zoho books/, id: "daily-payment-check", boost: 30 },
     { pattern: /portal chat|response time|sla|24 hour/, id: "chat-review-sla", boost: 16 },
     { pattern: /third party|family member|authorization/, id: "third-party-caller", boost: 16 },
     { pattern: /workdrive|company memory|where.*sop|knowledge base/, id: "company-memory-workdrive-index", boost: 14 },
@@ -353,6 +375,7 @@ export type DynamicSopEntry = {
   body: string;
   keywords: string[];
   department: string;
+  status?: string;
 };
 
 export type DynamicDecisionEntry = {
@@ -370,7 +393,7 @@ export type MemorySearchHit = {
   department?: string | null;
 };
 
-/** Layer 2 SOPs from Postgres — merged into Ask retrieval (includes pending / needs-review tags in title). */
+/** Layer 2 SOPs from Postgres — live + draft-live only (never pending_review). */
 export function retrieveDynamicSops(query: string, entries: DynamicSopEntry[], limit = 6): RetrievedChunk[] {
   const base = tokenizeForSearch(query);
   const qt = expandQuery(query);
@@ -378,15 +401,29 @@ export function retrieveDynamicSops(query: string, entries: DynamicSopEntry[], l
   const qLower = query.toLowerCase();
   const out: RetrievedChunk[] = [];
   for (const e of entries) {
+    if (e.status === "pending_review" || e.status === "needs_review" || e.status === "draft") continue;
     const corpus = `${e.title} ${e.keywords.join(" ")} ${e.body} ${e.department} sop`;
     const tokenScore = scoreTokens(qt, corpus, e.title, e.id, base);
     if (tokenScore <= 0) continue;
     let s = tokenScore;
     for (const k of e.keywords) {
       const kl = k.toLowerCase();
-      if (qLower.includes(kl)) s += 4;
+      if (qLower.includes(kl) || kl.split(/\s+/).some((w) => w.length > 2 && qLower.includes(w))) s += 4;
     }
-    if (e.title.includes("[Pending Review]")) s += 0.5;
+    // Clinical ROI / prior-records SOP — common follow-ups must still hit the published guide.
+    if (
+      /medical\s+record|release\s+of\s+information|\broi\b|previous\s+provider/i.test(
+        `${e.title} ${e.keywords.join(" ")} ${e.body.slice(0, 800)}`,
+      )
+    ) {
+      if (/\b(roi|medical\s+records?|release\s+of\s+information|previous\s+(medical\s+)?records?)\b/i.test(qLower)) {
+        s += 18;
+      }
+      if (/\b(unreachable|not\s+reachable|no\s+number|missing\s+number|wrong\s+number|chart)\b/i.test(qLower)) {
+        s += 12;
+      }
+    }
+    const draftLive = e.status === "draft_live" || e.title.includes("[Active draft]");
     if (s > 0) {
       out.push(
         withLayer(
@@ -396,6 +433,7 @@ export function retrieveDynamicSops(query: string, entries: DynamicSopEntry[], l
             snippet: e.body.slice(0, 2400),
             score: s,
             links: [{ label: `SOP · ${e.department}`, href: MEMORY_DEEP_LINKS.sops.href }],
+            draftLive,
           },
           2,
         ),

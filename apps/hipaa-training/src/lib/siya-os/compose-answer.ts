@@ -70,6 +70,9 @@ export function isClarifyingFollowUp(text: string): boolean {
   if (/\b(not reachable|unreachable|doesn'?t (work|go through)|no answer|busy signal)\b/i.test(t)) {
     return true;
   }
+  if (/\b(no|missing|wrong)\s+(phone\s+)?number\b/i.test(t) && /\b(chart|roi|provider|form)\b/i.test(t)) {
+    return true;
+  }
   return false;
 }
 
@@ -267,6 +270,14 @@ export function isConfidentAssistAnswer(opts: {
 
   // Dedicated task flows with a strong KB hit
   if (flowId && routingConfidence === "high" && topScore >= 8) return true;
+
+  // Published Postgres SOPs — approved guides; don't require the 40+ intent-boost bar.
+  if (topChunk.id.startsWith("sop-db-") && topScore >= 8) {
+    const base = tokenizeForSearch(userMessage).filter((t) => t.length > 3 && !CLARIFY_GENERIC.has(t));
+    if (!base.length) return topScore >= 12;
+    const hay = `${topChunk.title} ${topChunk.snippet} ${topChunk.id}`.toLowerCase();
+    return base.some((t) => hay.includes(t)) || topScore >= 15;
+  }
 
   // Very strong retrieval (intent boosts + real overlap land well above this)
   if (topScore >= 40) return true;
