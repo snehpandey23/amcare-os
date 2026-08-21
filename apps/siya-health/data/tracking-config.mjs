@@ -1,5 +1,5 @@
 /**
- * Sitewide analytics IDs — GTM is the only tag installed in HTML.
+ * Sitewide analytics IDs — GTM + Meta Pixel (consent-gated) in HTML.
  * Configure GA4 (G-*) and Google Ads (AW-*) tags inside the GTM container.
  */
 export const TRACKING = {
@@ -8,6 +8,8 @@ export const TRACKING = {
   GA4_MEASUREMENT_ID: 'G-9WTQWHCTFT',
   /** Reference only — managed inside GTM, not installed as raw gtag on pages */
   GOOGLE_ADS_ID: 'AW-17553537456',
+  /** Meta / Facebook Pixel — installed via scripts/meta-pixel.js after Accept All */
+  META_PIXEL_ID: '2150753979117600',
 };
 
 /**

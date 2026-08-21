@@ -65,6 +65,13 @@
         /* ignore */
       }
       applyConsent('all');
+      try {
+        window.dispatchEvent(
+          new CustomEvent('siya:cookie-consent', { detail: { level: 'all' } })
+        );
+      } catch (e) {
+        /* ignore */
+      }
     },
     rejectNonEssential: function () {
       try {
@@ -74,6 +81,15 @@
         /* ignore */
       }
       applyConsent('essential');
+      try {
+        window.dispatchEvent(
+          new CustomEvent('siya:cookie-consent', {
+            detail: { level: 'essential' },
+          })
+        );
+      } catch (e) {
+        /* ignore */
+      }
     },
   };
 })();

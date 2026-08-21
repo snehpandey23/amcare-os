@@ -1256,6 +1256,12 @@ const GTM_NOSCRIPT_SNIPPET = `<!-- Google Tag Manager (noscript) -->
 height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->`;
 
+/** Meta Pixel loader — after cookie consent bootstrap; fires only on Accept All */
+const META_PIXEL_SNIPPET = `<!-- Meta Pixel Code -->
+<script>window.__SIYA_META_PIXEL_ID='${TRACKING.META_PIXEL_ID}';</script>
+<script src="/scripts/meta-pixel.js"></script>
+<!-- End Meta Pixel Code -->`;
+
 const SIYA_TRACKING_BLOCK = `<!-- SIYA:TRACKING -->
     <script src="/scripts/siya-tracking.js" defer></script>
     <script src="/scripts/lab-storefront-modal.js" defer></script>
@@ -1301,10 +1307,32 @@ export function stripExistingGtag(html) {
   return html;
 }
 
-/** Install GTM + sitewide dataLayer tracking on every public HTML page */
+/** Remove prior Meta Pixel installs before canonical re-injection */
+export function stripExistingMetaPixel(html) {
+  html = html.replace(
+    /<!--\s*Meta Pixel Code\s*-->[\s\S]*?<!--\s*End Meta Pixel Code\s*-->\s*/gi,
+    '',
+  );
+  html = html.replace(
+    /<script src="\/scripts\/meta-pixel\.js"><\/script>\s*/gi,
+    '',
+  );
+  html = html.replace(
+    /<script>\s*!function\(f,b,e,v,n,t,s\)[\s\S]*?fbevents\.js[\s\S]*?<\/script>\s*/gi,
+    '',
+  );
+  html = html.replace(
+    /<noscript>\s*<img[^>]*facebook\.com\/tr\?[^>]*>\s*<\/noscript>\s*/gi,
+    '',
+  );
+  return html;
+}
+
+/** Install GTM + Meta Pixel + sitewide dataLayer tracking on every public HTML page */
 export function injectGtmAndTracking(html, relPath = '') {
   html = stripExistingGtm(html);
   html = stripExistingGtag(html);
+  html = stripExistingMetaPixel(html);
 
   if (!html.includes(`gtm.js?id=${GTM_ID}`)) {
     if (html.includes('cookie-consent-bootstrap.js')) {
@@ -1314,6 +1342,22 @@ export function injectGtmAndTracking(html, relPath = '') {
       );
     } else if (/<head[^>]*>/i.test(html)) {
       html = html.replace(/(<head[^>]*>)/i, `$1\n    ${GTM_HEAD_SNIPPET}`);
+    }
+  }
+
+  if (!html.includes('/scripts/meta-pixel.js')) {
+    if (html.includes('cookie-consent-bootstrap.js')) {
+      html = html.replace(
+        /(<script src="\/scripts\/cookie-consent-bootstrap\.js"><\/script>)/i,
+        `$1\n${META_PIXEL_SNIPPET}`,
+      );
+    } else if (html.includes('<!-- End Google Tag Manager -->')) {
+      html = html.replace(
+        '<!-- End Google Tag Manager -->',
+        `<!-- End Google Tag Manager -->\n${META_PIXEL_SNIPPET}`,
+      );
+    } else if (/<head[^>]*>/i.test(html)) {
+      html = html.replace(/(<head[^>]*>)/i, `$1\n    ${META_PIXEL_SNIPPET}`);
     }
   }
 
