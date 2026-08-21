@@ -5,6 +5,7 @@
 import { getTrainingApiUrl } from "@/lib/trainingConfig";
 import { sendAutoGapFounderEmail, escalationInbox } from "@/lib/siya-os/escalation-email";
 import type { GapContextTurn } from "@/lib/siya-os/gap-email-context";
+import type { GapEmailDeliveryMode } from "@/lib/siya-os/gap-email-mode";
 
 export type AssistGapSignalType = "no_match" | "notify_owner" | "thumbs_down" | "unresolved_repeat";
 
@@ -15,7 +16,11 @@ export type PersistAssistGapResult = {
   persistError?: string;
   digestEligible?: boolean;
   emailSent?: boolean;
+  /** live | dry_run | test_recipient | skipped — never omit when an email was attempted. */
+  emailDelivery?: GapEmailDeliveryMode | "skipped";
   emailTo?: string;
+  emailWouldSendTo?: string;
+  emailPreview?: { subject: string; text: string };
   emailError?: string;
   route?: {
     mode: "lead_digest" | "founder_instant";
@@ -41,6 +46,8 @@ export async function persistAssistGap(opts: {
   contextTurns?: GapContextTurn[];
   threadId?: string | null;
   userQuestion?: string;
+  /** dry_run | test_recipient | live — synthetic probes force dry_run inside sendAutoGapFounderEmail. */
+  emailMode?: string | null;
 }): Promise<PersistAssistGapResult> {
   const base = getTrainingApiUrl();
   if (!base) return { ok: false, persistError: "API URL not configured" };
@@ -69,6 +76,10 @@ export async function persistAssistGap(opts: {
 
     const route = data.route;
     let emailSent = false;
+    let emailDelivery: PersistAssistGapResult["emailDelivery"];
+    let emailTo: string | undefined;
+    let emailWouldSendTo: string | undefined;
+    let emailPreview: PersistAssistGapResult["emailPreview"];
     let emailError: string | undefined;
     if (opts.sendFounderInstantEmail && route?.mode === "founder_instant") {
       const email = await sendAutoGapFounderEmail({
@@ -81,9 +92,14 @@ export async function persistAssistGap(opts: {
         contextTurns: opts.contextTurns,
         threadId: opts.threadId,
         userQuestion: opts.userQuestion,
+        emailMode: opts.emailMode,
       });
       emailSent = email.sent;
-      emailError = email.error;
+      emailDelivery = email.delivery;
+      emailTo = email.to;
+      emailWouldSendTo = email.wouldSendTo || escalationInbox();
+      emailPreview = email.preview;
+      emailError = email.delivery === "dry_run" ? undefined : email.error;
     }
 
     return {
@@ -93,7 +109,10 @@ export async function persistAssistGap(opts: {
       digestEligible: data.digestEligible,
       route,
       emailSent,
-      emailTo: emailSent ? escalationInbox() : undefined,
+      emailDelivery,
+      emailTo,
+      emailWouldSendTo,
+      emailPreview,
       emailError,
     };
   } catch (err) {

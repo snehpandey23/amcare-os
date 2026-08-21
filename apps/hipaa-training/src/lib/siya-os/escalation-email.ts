@@ -1,6 +1,11 @@
 /**
  * Escalation / auto-gap emails (Resend).
  * Set RESEND_API_KEY on Vercel project siya-staff-assist.
+ *
+ * Delivery modes (see gap-email-mode.ts):
+ * - live: Resend → SIYA_ESCALATION_TO (default bot@siya.health)
+ * - dry_run: no Resend; returns preview only
+ * - test_recipient: Resend → SIYA_ESCALATION_TEST_TO only (never production inbox)
  */
 import {
   assistThreadDeepLink,
@@ -8,6 +13,13 @@ import {
   redactGapEmailText,
   type GapContextTurn,
 } from "@/lib/siya-os/gap-email-context";
+import {
+  gapEmailTestRecipient,
+  productionEscalationInbox,
+  resolveGapEmailDeliveryMode,
+  type GapEmailDeliveryMode,
+  type GapEmailSendResult,
+} from "@/lib/siya-os/gap-email-mode";
 
 export type EscalationEmailPayload = {
   question: string;
@@ -20,6 +32,8 @@ export type EscalationEmailPayload = {
   contextTurns?: GapContextTurn[];
   threadId?: string | null;
   reporterNote?: string;
+  /** Override: dry_run | test_recipient | live (synthetic probes force dry_run). */
+  emailMode?: string | null;
 };
 
 /** Auto-capture founder instant — includes bot reply + context; question text still omitted from Postgres. */
@@ -34,10 +48,12 @@ export type AutoGapFounderEmailPayload = {
   threadId?: string | null;
   /** Optional: redacted user question for email only (never stored in Postgres). */
   userQuestion?: string;
+  emailMode?: string | null;
 };
 
+/** @deprecated Prefer productionEscalationInbox / GapEmailSendResult.to */
 export function escalationInbox(): string {
-  return (process.env.SIYA_ESCALATION_TO || "bot@siya.health").trim();
+  return productionEscalationInbox();
 }
 
 export function escalationFromAddress(): string {
@@ -64,16 +80,70 @@ function formatIstStamp(d = new Date()): { date: string; time: string } {
   return { date, time };
 }
 
-async function sendResendText(opts: {
+async function deliverResendText(opts: {
   subject: string;
   text: string;
-}): Promise<{ sent: boolean; error?: string }> {
-  const apiKey = process.env.RESEND_API_KEY?.trim();
-  if (!apiKey) {
-    return { sent: false, error: "RESEND_API_KEY not configured" };
+  mode: GapEmailDeliveryMode;
+  probeText?: string | null;
+}): Promise<GapEmailSendResult> {
+  const wouldSendTo = productionEscalationInbox();
+  const preview = { subject: opts.subject, text: opts.text };
+
+  if (opts.mode === "dry_run") {
+    console.info(
+      "[escalation-email] dry_run",
+      JSON.stringify({
+        wouldSendTo,
+        subject: opts.subject,
+        textChars: opts.text.length,
+        delivery: "dry_run",
+      }),
+    );
+    return {
+      sent: false,
+      delivery: "dry_run",
+      wouldSendTo,
+      preview,
+    };
   }
 
-  const to = escalationInbox();
+  let to = wouldSendTo;
+  if (opts.mode === "test_recipient") {
+    const testTo = gapEmailTestRecipient();
+    if (!testTo) {
+      return {
+        sent: false,
+        delivery: "skipped",
+        wouldSendTo,
+        error: "SIYA_ESCALATION_TEST_TO not configured — refusing live send",
+        preview,
+      };
+    }
+    // Never allow test mode to target the production escalation inbox.
+    if (testTo.toLowerCase() === wouldSendTo.toLowerCase()) {
+      return {
+        sent: false,
+        delivery: "skipped",
+        wouldSendTo,
+        error: "SIYA_ESCALATION_TEST_TO must differ from production SIYA_ESCALATION_TO",
+        preview,
+      };
+    }
+    to = testTo;
+  }
+
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  if (!apiKey) {
+    return {
+      sent: false,
+      delivery: "skipped",
+      wouldSendTo,
+      to,
+      error: "RESEND_API_KEY not configured",
+      preview,
+    };
+  }
+
   const from = escalationFromAddress();
 
   try {
@@ -86,21 +156,47 @@ async function sendResendText(opts: {
       body: JSON.stringify({
         from,
         to: [to],
-        subject: opts.subject,
-        text: opts.text,
+        subject:
+          opts.mode === "test_recipient"
+            ? `[TEST] ${opts.subject}`
+            : opts.subject,
+        text:
+          opts.mode === "test_recipient"
+            ? `[Siya Assist TEST MODE — not the founder production inbox]\nIntended live recipient would be: ${wouldSendTo}\n\n${opts.text}`
+            : opts.text,
         reply_to: process.env.SIYA_ESCALATION_REPLY_TO?.trim() || undefined,
       }),
     });
 
     if (!res.ok) {
       const body = await res.text();
-      return { sent: false, error: body.slice(0, 500) || res.statusText };
+      return {
+        sent: false,
+        delivery: "skipped",
+        wouldSendTo,
+        to,
+        error: body.slice(0, 500) || res.statusText,
+        preview,
+      };
     }
 
-    return { sent: true };
+    return {
+      sent: true,
+      delivery: opts.mode,
+      to,
+      wouldSendTo,
+      preview: opts.mode === "test_recipient" ? preview : undefined,
+    };
   } catch (err) {
     const message = err instanceof Error ? err.message : "send failed";
-    return { sent: false, error: message };
+    return {
+      sent: false,
+      delivery: "skipped",
+      wouldSendTo,
+      to,
+      error: message,
+      preview,
+    };
   }
 }
 
@@ -145,20 +241,25 @@ export function buildNotifyOwnerEmailText(payload: EscalationEmailPayload): stri
 
 export async function sendEscalationEmail(
   payload: EscalationEmailPayload,
-): Promise<{ sent: boolean; error?: string }> {
+): Promise<GapEmailSendResult> {
+  const mode = resolveGapEmailDeliveryMode({
+    requested: payload.emailMode,
+    probeText: `${payload.question}\n${payload.reporterNote || ""}`,
+  });
   const subject = `[Siya Assist] ${payload.department} — policy gap (Notify owner)`;
   const text = buildNotifyOwnerEmailText(payload);
   console.info(
     "[escalation-email] notify_owner",
     JSON.stringify({
       recordId: payload.recordId,
+      delivery: mode,
       hasAssistReply: /Assist reply: (?!\(not provided\))/.test(text),
       hasThreadDeepLink: text.includes("?thread="),
       hasReporterNote: /Reporter note \(what they expected\):/.test(text),
       hasContextTurns: !text.includes("(no surrounding turns)"),
     }),
   );
-  return sendResendText({ subject, text });
+  return deliverResendText({ subject, text, mode, probeText: payload.question });
 }
 
 export function buildAutoGapFounderEmailText(payload: AutoGapFounderEmailPayload): string {
@@ -201,18 +302,28 @@ export function buildAutoGapFounderEmailText(payload: AutoGapFounderEmailPayload
 /** Auto knowledge-gap — Leadership/Founder Talk founder instant. */
 export async function sendAutoGapFounderEmail(
   payload: AutoGapFounderEmailPayload,
-): Promise<{ sent: boolean; error?: string }> {
+): Promise<GapEmailSendResult> {
+  const mode = resolveGapEmailDeliveryMode({
+    requested: payload.emailMode,
+    probeText: payload.userQuestion || payload.chatCategory,
+  });
   const subject = `[Siya Assist] Auto gap — ${payload.chatCategory}`;
   const text = buildAutoGapFounderEmailText(payload);
   console.info(
     "[escalation-email] auto_gap",
     JSON.stringify({
       recordId: payload.recordId,
+      delivery: mode,
       hasAssistReply: /Assist reply: (?!\(not provided\))/.test(text),
       hasThreadDeepLink: text.includes("?thread="),
       hasContextTurns: !text.includes("(no surrounding turns)"),
       hasUserQuestion: /Staff question \(email only/.test(text),
     }),
   );
-  return sendResendText({ subject, text });
+  return deliverResendText({
+    subject,
+    text,
+    mode,
+    probeText: payload.userQuestion,
+  });
 }

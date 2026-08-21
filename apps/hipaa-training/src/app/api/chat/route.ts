@@ -6,8 +6,24 @@ import { SIYA_ASSISTANT_CANONICAL_URL } from "@/lib/siya-os/public-url";
 import { BRAND } from "@/lib/brand";
 import { persistAssistGap } from "@/lib/siya-os/assist-gap-persist";
 import { priorContextTurns } from "@/lib/siya-os/gap-email-context";
+import { isSyntheticGapEmailProbe } from "@/lib/siya-os/gap-email-mode";
 
 export const maxDuration = 60;
+
+async function resolveGapQuietly(token: string, id: string): Promise<boolean> {
+  const base = getTrainingApiUrl();
+  if (!base) return false;
+  try {
+    const res = await fetch(`${base}/api/assist/gaps/${encodeURIComponent(id)}/resolve`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: "{}",
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
 
 export async function GET() {
   const health = getWorkforceLlmHealth();
@@ -155,7 +171,13 @@ export async function POST(req: Request) {
     let gapAuto: {
       id?: string;
       emailSent?: boolean;
+      emailDelivery?: string;
+      emailTo?: string;
+      emailWouldSendTo?: string;
+      emailPreview?: { subject: string; text: string };
       routeMode?: string;
+      autoResolved?: boolean;
+      syntheticProbe?: boolean;
     } | null = null;
     if (authToken && result.knowledgeGap === true && !result.refused) {
       const department = result.routing?.department || (surface === "founder-coach" ? "Leadership" : "General");
@@ -163,6 +185,7 @@ export async function POST(req: Request) {
         result.routing?.task || (surface === "founder-coach" ? "Founder Talk" : "Unmatched Ask");
       const chatCategory =
         surface === "founder-coach" ? "Leadership · Founder Talk" : `${department} · ${task}`;
+      const syntheticProbe = isSyntheticGapEmailProbe(message);
       const persisted = await persistAssistGap({
         token: authToken,
         department,
@@ -175,12 +198,26 @@ export async function POST(req: Request) {
         contextTurns: priorContextTurns(history, message),
         threadId,
         userQuestion: message,
+        emailMode: syntheticProbe ? "dry_run" : undefined,
       });
       if (persisted.ok) {
+        let autoResolved = false;
+        if (
+          persisted.id &&
+          (syntheticProbe || persisted.emailDelivery === "dry_run")
+        ) {
+          autoResolved = await resolveGapQuietly(authToken, persisted.id);
+        }
         gapAuto = {
           id: persisted.id,
           emailSent: persisted.emailSent,
+          emailDelivery: persisted.emailDelivery,
+          emailTo: persisted.emailTo,
+          emailWouldSendTo: persisted.emailWouldSendTo,
+          emailPreview: persisted.emailPreview,
           routeMode: persisted.route?.mode,
+          autoResolved,
+          syntheticProbe,
         };
         console.info(
           "[chat] auto-gap",
@@ -191,6 +228,10 @@ export async function POST(req: Request) {
             chatCategory,
             routeMode: persisted.route?.mode,
             emailSent: persisted.emailSent ?? false,
+            emailDelivery: persisted.emailDelivery ?? null,
+            emailWouldSendTo: persisted.emailWouldSendTo ?? null,
+            syntheticProbe,
+            autoResolved,
             emailError: persisted.emailError ?? null,
           }),
         );

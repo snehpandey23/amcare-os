@@ -3,6 +3,13 @@ import { sendEscalationEmail, escalationInbox } from "@/lib/siya-os/escalation-e
 import { assessStaffMessageSafety } from "@/lib/siya-os/phi-guard";
 import { persistAssistGap } from "@/lib/siya-os/assist-gap-persist";
 import type { GapContextTurn } from "@/lib/siya-os/gap-email-context";
+import {
+  isSyntheticGapEmailProbe,
+  parseRequestedEmailMode,
+  resolveGapEmailDeliveryMode,
+  type GapEmailSendResult,
+} from "@/lib/siya-os/gap-email-mode";
+import { getTrainingApiUrl } from "@/lib/trainingConfig";
 
 /**
  * Notify owner / knowledge-gap capture (explicit click).
@@ -25,6 +32,7 @@ export async function POST(req: Request) {
     const reporterNote = typeof body?.reporterNote === "string" ? body.reporterNote.trim().slice(0, 500) : "";
     const threadId =
       typeof body?.threadId === "string" && body.threadId.startsWith("ath-") ? body.threadId : null;
+    const emailModeRequested = parseRequestedEmailMode(body);
     const contextTurns: GapContextTurn[] = Array.isArray(body?.contextTurns)
       ? body.contextTurns
           .filter(
@@ -48,6 +56,11 @@ export async function POST(req: Request) {
     const safety = assessStaffMessageSafety(question);
     const phiRedacted = Boolean(safety.blocked);
     const id = `gap-${Date.now()}`;
+    const syntheticProbe = isSyntheticGapEmailProbe(`${question}\n${reporterNote}`);
+    const deliveryMode = resolveGapEmailDeliveryMode({
+      requested: emailModeRequested,
+      probeText: `${question}\n${reporterNote}`,
+    });
 
     console.info(
       "[knowledge-gap]",
@@ -60,6 +73,8 @@ export async function POST(req: Request) {
         refusalCategory: safety.category ?? null,
         hasReporterNote: Boolean(reporterNote),
         threadId: threadId || null,
+        syntheticProbe,
+        emailDeliveryMode: deliveryMode,
         question: phiRedacted ? "[redacted — PHI/clinical/emergency guard]" : question.slice(0, 200),
       }),
     );
@@ -88,8 +103,19 @@ export async function POST(req: Request) {
       );
     }
     const routeMode = persisted.route.mode;
+    const recordId = persisted.id || id;
 
-    let email: { sent: boolean; error?: string } = { sent: false };
+    // Synthetic / dry-run probes: resolve immediately so they never sit in open queues.
+    let autoResolved = false;
+    if (syntheticProbe || deliveryMode === "dry_run") {
+      autoResolved = await resolveGapQuietly(bearer, recordId);
+    }
+
+    let email: GapEmailSendResult = {
+      sent: false,
+      delivery: "skipped",
+      wouldSendTo: escalationInbox(),
+    };
     if (routeMode === "founder_instant") {
       email = await sendEscalationEmail({
         question: phiRedacted
@@ -97,50 +123,92 @@ export async function POST(req: Request) {
           : question,
         department,
         task,
-        recordId: persisted.id || id,
+        recordId,
         phiRedacted,
         botReply,
         contextTurns,
         threadId,
         reporterNote,
+        emailMode: emailModeRequested || (syntheticProbe ? "dry_run" : undefined),
       });
-      if (!email.sent) {
-        console.warn("[knowledge-gap] email not sent:", email.error);
+      if (!email.sent && email.delivery !== "dry_run") {
+        console.warn("[knowledge-gap] email not sent:", email.delivery, email.error);
       }
     }
 
-    const message =
-      routeMode === "lead_digest"
-        ? `Logged for the ${persisted.route.departmentLabel || department} lead’s weekly knowledge-gap digest (Notify owner — category/task; email deferred to Monday digest).`
-        : email.sent
-          ? `Gap emailed to ${escalationInbox()}${phiRedacted ? " (question text redacted by PHI guard)." : "."}`
-          : "Gap logged. Founder email not sent — add RESEND_API_KEY on Vercel (see docs/ESCALATION-EMAIL.md).";
+    const message = messageForNotifyResult({
+      routeMode,
+      departmentLabel: persisted.route.departmentLabel || department,
+      email,
+      phiRedacted,
+    });
 
     return Response.json({
       ok: true,
       record: {
-        id: persisted.id || id,
+        id: recordId,
         department,
         task,
-        status: "awaiting_policy",
+        status: autoResolved ? "resolved" : "awaiting_policy",
         createdAt: Date.now(),
         phiRedacted,
         questionStored: false,
       },
       gap: persisted.gap ?? null,
-      digestEligible: persisted.digestEligible ?? false,
+      digestEligible: autoResolved ? false : (persisted.digestEligible ?? false),
       routeMode,
       routeReason: persisted.route.reason ?? null,
       leadName: persisted.route.leadName ?? null,
       phiRedacted,
+      syntheticProbe,
+      autoResolved,
       emailSent: routeMode === "founder_instant" ? email.sent : false,
-      emailTo: routeMode === "founder_instant" && email.sent ? escalationInbox() : undefined,
-      emailError: routeMode === "founder_instant" && !email.sent ? email.error : undefined,
+      emailDelivery: routeMode === "founder_instant" ? email.delivery : "skipped",
+      emailTo: routeMode === "founder_instant" ? email.to : undefined,
+      emailWouldSendTo: routeMode === "founder_instant" ? email.wouldSendTo : undefined,
+      emailPreview: routeMode === "founder_instant" ? email.preview : undefined,
+      emailError: routeMode === "founder_instant" && !email.sent && email.delivery !== "dry_run" ? email.error : undefined,
       message,
       honestyNote:
-        "Notify owner click logged with Assist reply + optional reporter note in founder email when routed founder_instant. Postgres still stores category/task only.",
+        "Notify owner: founder_instant emails report emailDelivery (live | dry_run | test_recipient). Synthetic probes force dry_run and auto-resolve. Postgres stores category/task only.",
     });
   } catch {
     return Response.json({ error: "Something went wrong." }, { status: 500 });
   }
+}
+
+async function resolveGapQuietly(token: string, id: string): Promise<boolean> {
+  const base = getTrainingApiUrl();
+  if (!base) return false;
+  try {
+    const res = await fetch(`${base}/api/assist/gaps/${encodeURIComponent(id)}/resolve`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: "{}",
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+function messageForNotifyResult(opts: {
+  routeMode: string;
+  departmentLabel: string;
+  email: GapEmailSendResult;
+  phiRedacted: boolean;
+}): string {
+  if (opts.routeMode === "lead_digest") {
+    return `Logged for the ${opts.departmentLabel} lead’s weekly knowledge-gap digest (Notify owner — category/task; email deferred to Monday digest).`;
+  }
+  if (opts.email.delivery === "dry_run") {
+    return `Dry-run only — no email sent to ${opts.email.wouldSendTo || escalationInbox()}. Preview returned in emailPreview.`;
+  }
+  if (opts.email.delivery === "test_recipient" && opts.email.sent) {
+    return `Test-mode gap emailed to ${opts.email.to} (not ${opts.email.wouldSendTo}).`;
+  }
+  if (opts.email.sent) {
+    return `Gap emailed to ${opts.email.to || escalationInbox()}${opts.phiRedacted ? " (question text redacted by PHI guard)." : "."}`;
+  }
+  return "Gap logged. Founder email not sent — add RESEND_API_KEY on Vercel (see docs/ESCALATION-EMAIL.md).";
 }
