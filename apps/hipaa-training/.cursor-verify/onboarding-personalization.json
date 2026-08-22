@@ -1,0 +1,45 @@
+{
+  "at": "2026-08-22T11:35:11.704Z",
+  "auth": "[SENSITIVE]",
+  "passed": 5,
+  "total": 6,
+  "rows": [
+    {
+      "id": "unit-preferred-name",
+      "pass": true,
+      "detail": "Priya"
+    },
+    {
+      "id": "unit-assistant-label",
+      "pass": true,
+      "detail": "Nova"
+    },
+    {
+      "id": "unit-reminder-end-hide-start",
+      "pass": true,
+      "detail": "start hidden"
+    },
+    {
+      "id": "unit-reminder-end-show",
+      "pass": true,
+      "detail": "end shown"
+    },
+    {
+      "id": "unit-reminder-none",
+      "pass": true,
+      "detail": "all hidden"
+    },
+    {
+      "id": "auth-setup",
+      "pass": false,
+      "detail": "Failed to parse URL from [SENSITIVE]/api/auth/login"
+    }
+  ],
+  "failed": [
+    {
+      "id": "auth-setup",
+      "pass": false,
+      "detail": "Failed to parse URL from [SENSITIVE]/api/auth/login"
+    }
+  ]
+}
