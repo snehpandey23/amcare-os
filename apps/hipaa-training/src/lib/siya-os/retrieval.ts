@@ -285,6 +285,19 @@ export function retrieveLaws(query: string, limit = 4): RetrievedChunk[] {
   return out.slice(0, limit);
 }
 
+/** Staff portal personalization wizard — not MA Day-1 hire KB. */
+export function isStaffPortalOnboardingQuery(q: string): boolean {
+  const t = q.toLowerCase();
+  return (
+    /\bwhy\b.*\b(do|did|run|make)\b.*\bmy\b.*\bonboard/.test(t) ||
+    /\bwhy\b.*\b(you|u|assist|siya)\b.*\b(do|did|run|make)\b.*\bonboard/.test(t) ||
+    /\bportal\b.*\bonboard/.test(t) ||
+    /\bpersonaliz(e|ation)\b/.test(t) ||
+    /\b(preferred name|assistant name|training reminder|what should i call you)\b/.test(t) ||
+    (/\bonboard/.test(t) && /\b(wizard|portal|app|siyaos|my day|personalize|assist)\b/.test(t))
+  );
+}
+
 export function retrieveWorkspaceKnowledge(query: string, limit = 6): RetrievedChunk[] {
   const base = tokenizeForSearch(query);
   const qt = expandQuery(query);
@@ -306,7 +319,7 @@ export function retrieveWorkspaceKnowledge(query: string, limit = 6): RetrievedC
     { pattern: /meet.*greet|homepage cta|book free|discovery call/, id: "homepage-cta-meet-and-greet", boost: 18 },
     { pattern: /late cancel|refund|cancellation|no-show/, id: "billing-late-cancel", boost: 16 },
     { pattern: /refill|pharmacy|early refill|prescription (sent|ready)|med(ication)? not received|pill count|video pill|csa v2|controlled.?substance/, id: "refill-pharmacy-staff-guidance", boost: 22 },
-    { pattern: /onboard|day.?1|new hire|ma orientation|tool surprise/, id: "ma-onboarding-field-lessons", boost: 20 },
+    { pattern: /\b(new hire|day.?1|ma orientation|tool surprise|concierge\b.*\bonboard|onboard\b.*\b(new hire|ma\b|concierge))\b/, id: "ma-onboarding-field-lessons", boost: 20 },
     { pattern: /\bzoho\b|workdrive|true.?sync|\bspruce\b/, id: "ma-platforms-zoho-spruce", boost: 22 },
     { pattern: /zoho.{0,40}(access|login|provision)|request.{0,30}zoho|new hire.{0,30}(zoho|access)|access.{0,20}(zoho|workdrive)/, id: "ma-platforms-zoho-spruce", boost: 28 },
     { pattern: /spruce.{0,40}(notif|workaround|another app|background|push)|notif.{0,20}spruce/, id: "ma-platforms-zoho-spruce", boost: 28 },
@@ -328,6 +341,9 @@ export function retrieveWorkspaceKnowledge(query: string, limit = 6): RetrievedC
     let intentHit = false;
     for (const intent of TOPIC_INTENT_BOOST) {
       if (e.id === intent.id && intent.pattern.test(qLower)) {
+        if (intent.id === "ma-onboarding-field-lessons" && isStaffPortalOnboardingQuery(qLower)) {
+          continue;
+        }
         s += intent.boost;
         intentHit = true;
       }

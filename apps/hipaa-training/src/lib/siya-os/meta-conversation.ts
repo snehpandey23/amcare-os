@@ -205,6 +205,18 @@ const ORIENTATION = [
   "Ask about **any button on screen** (Clear chat, Focus, Mic, Archive) — I support this app, not only SOPs.",
 ].join("\n");
 
+const PORTAL_ONBOARDING = [
+  "That’s the **Siya staff portal personalization wizard** — not Medical Assistant Day-1 hire orientation or Klarity/Spruce training.",
+  "",
+  "When you sign in (or tap **Personalize** on My day), onboarding asks:",
+  "1. **What should I call you?** — used in My Day greetings.",
+  "2. **What should you call the assistant?** — optional label in chat opening (default **Siya Assist**).",
+  "3. **Training reminders** — start of day, end of shift, or skip Learn nudges.",
+  "4. Department, goals, and shift rhythm — so My day matches your role.",
+  "",
+  "Change answers anytime: **Personalize** → `/onboarding`. HR hire paperwork and MA tool training are separate — ask HR / Clinical Program for those.",
+].join("\n");
+
 const LEARN_EXPLAIN = [
   "**Learn** is the training area of this staff app (left sidebar).",
   "",
@@ -291,6 +303,7 @@ const CASES: MetaCase[] = [
     category: "identity",
     test: (t) =>
       /what('s| is) your name\b/.test(t) ||
+      /\bwhtas\b.*\bname\b/.test(t) ||
       /\bwho are you\b/.test(t) ||
       /\bwhat are you\??\s*$/.test(t) ||
       /\bintroduce yourself\b/.test(t) ||
@@ -305,8 +318,25 @@ const CASES: MetaCase[] = [
       /\b(do you|can you)\s+(feel|love|hate|get angry)\b/.test(t) ||
       /\bhow\s+do\s+you\s+feel\b/.test(t) ||
       /\bi('m| am)\s+(feeling\s+)?(lonely|sad|depressed|anxious|alone)\b/.test(t) ||
-      /\bi feel (lonely|sad|alone|anxious|depressed)\b/.test(t),
+      /\bi feel (lonely|sad|alone|anxious|depressed)\b/.test(t) ||
+      /\bwhy\s+not\b.*\b(lonely|alone|sad|depressed|anxious)\b/.test(t) ||
+      /\b(can|could|will|would)\s+(you|u)\s+be\s+(my\s+)?(friend|buddy|pal|companion)\b/.test(t) ||
+      /\bbe\s+my\s+(friend|buddy|pal|companion)\b/.test(t),
     answer: FEELINGS,
+  },
+  {
+    id: "portal-onboarding",
+    category: "chrome",
+    test: (t) =>
+      /\bwhy\b.*\b(you|u|assist|siya)\b.*\b(do|did|run|make)\b.*\bonboard/.test(t) ||
+      /\bwhy\b.*\b(do|did)\b.*\bmy\b.*\bonboard/.test(t) ||
+      /\bportal\b.*\bonboard/.test(t) ||
+      /\bpersonaliz(e|ation)\b/.test(t) ||
+      /\b(preferred name|assistant name|training reminder|what should i call you|what should you call)\b/.test(t) ||
+      (/\bonboard/.test(t) &&
+        /\b(wizard|portal|app|siyaos|my day|personalize|assist|you|u)\b/.test(t)) ||
+      /\bwhat\b.*\bonboarding\b.*\b(for|about|do)\b/.test(t),
+    answer: PORTAL_ONBOARDING,
   },
 
   // --- authority ---
@@ -639,6 +669,7 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
   { id: "who-what-name", text: "who are you", mustMatch: /Siya Assist/i, mustNot: /approved staff guide for that/i },
   { id: "who-what-name", text: "who r u", mustMatch: /Siya Assist/i, mustNot: /approved staff guide for that/i },
   { id: "who-what-name", text: "whats ur name", mustMatch: /Siya Assist/i, mustNot: /approved staff guide for that/i },
+  { id: "who-what-name", text: "whtas ur name", mustMatch: /Siya Assist/i, mustNot: /approved staff guide for that/i },
   { id: "who-what-name", text: "i wanna know abut u frst", mustMatch: /Siya Assist/i, mustNot: /approved staff guide for that/i },
   { id: "boss-escalate", text: "who is your boss", mustMatch: /don.?t have a personal boss|Notify owner/i, mustNot: /approved staff guide/i },
   { id: "boss-escalate", text: "can you escalate to your boss", mustMatch: /Notify owner|Siya Assist/i, mustNot: /HIPAA certification course/i },
@@ -738,6 +769,13 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
   { id: "write-plan-record", text: "can you write my plan record", mustMatch: /never.*Plan|This week/i, mustNot: /approved staff guide for that/i },
   { id: "feelings", text: "do you feel sad", mustMatch: /don.?t have feelings/i, mustNot: /approved staff guide/i },
   { id: "feelings", text: "i am feeling lonely", mustMatch: /don.?t have feelings|not a companion/i, mustNot: /approved staff guide/i },
+  { id: "feelings", text: "can you be my friend", mustMatch: /don.?t have feelings|not a companion/i, mustNot: /approved staff guide/i },
+  {
+    id: "portal-onboarding",
+    text: "why did you do my onboarding",
+    mustMatch: /personalization wizard|Personalize|not Medical Assistant Day-1/i,
+    mustNot: /Klarity.*Spruce.*Week 1|offer letter|Concierge Specialist/i,
+  },
   { id: "greeting", text: "how r u", mustMatch: /Hi —/i, mustNot: /approved staff guide/i },
   { id: "frustration", text: "this isnt working good", mustMatch: /Sorry|This week.?s plan|Notify owner|domain/i, mustNot: /right staff guide for that yet|approved staff guide for that/i },
   {
@@ -752,6 +790,8 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
 /** Informal chat / dictation → catalog English (who r u → who are you). */
 export function expandStaffSlang(text: string): string {
   return text
+    .replace(/\bwhtas\b/g, "what's")
+    .replace(/\bwht\b/g, "what")
     .replace(/\bwhats\b/g, "what's")
     .replace(/\bwanna\b/g, "want to")
     .replace(/\bgonna\b/g, "going to")
