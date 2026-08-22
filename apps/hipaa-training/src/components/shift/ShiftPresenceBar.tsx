@@ -6,6 +6,8 @@ import { isPortalLoginRequired } from "@/lib/trainingConfig";
 import type { PresenceStatus } from "@/lib/shift-api";
 import { PRESENCE_LABEL } from "@/lib/shift-presence";
 import { buildShiftDaySummary } from "@/lib/shift-day-summary";
+import { loadLocalPortalProfile, shouldShowTrainingNudge } from "@/lib/portal-profile";
+import { suggestLearningPicks } from "@/lib/my-day";
 import { EndShiftModal } from "@/components/shift/EndShiftModal";
 import { ShiftHandoffModal } from "@/components/ops/ShiftHandoffModal";
 
@@ -27,6 +29,10 @@ export function ShiftPresenceBar({ onEndShift }: { onEndShift?: () => void }) {
       presenceLog: shift.state.active.presenceLog,
     });
   }, [shift?.state?.active]);
+
+  const profile = loadLocalPortalProfile();
+  const endLearningPicks = useMemo(() => suggestLearningPicks(profile), [profile]);
+  const showEndTrainingNudge = shouldShowTrainingNudge(profile, "end");
 
   if (!isPortalLoginRequired() || !shift?.shiftReady) return null;
 
@@ -84,6 +90,8 @@ export function ShiftPresenceBar({ onEndShift }: { onEndShift?: () => void }) {
       <EndShiftModal
         open={endOpen}
         summary={summary}
+        learningPicks={endLearningPicks}
+        showLearningNudge={showEndTrainingNudge}
         onClose={() => setEndOpen(false)}
         onConfirm={async (payload) => {
           const result = await endShift(payload);

@@ -35,6 +35,12 @@ export const IMPROVE_OPTIONS = [
   "Writing",
 ] as const;
 
+export const TRAINING_REMINDER_OPTIONS = [
+  { id: "start" as const, label: "Start my day with training", detail: "Learn nudges when you begin your shift" },
+  { id: "end" as const, label: "End my day with training", detail: "Learn nudges when you end shift" },
+  { id: "none" as const, label: "Skip training reminders", detail: "No Learn nudges on My Day" },
+];
+
 export type GrowthEvent = {
   id: string;
   at: number;
@@ -44,6 +50,8 @@ export type GrowthEvent = {
 
 import { isPortalLoginRequired, isPortalOnboardingPaused } from "@/lib/trainingConfig";
 
+export type TrainingReminderPref = "start" | "end" | "none";
+
 export type PortalProfile = {
   onboardingComplete: boolean;
   department: DepartmentId | "";
@@ -51,6 +59,12 @@ export type PortalProfile = {
   improveGoals: string[];
   biggestChallenge: string;
   completedAt?: number;
+  /** Greeting name — falls back to account first name when unset. */
+  preferredName?: string;
+  /** Custom Assist label in My Day chat opening when set. */
+  assistantName?: string;
+  /** When to surface Learn/training nudges on My Day. */
+  trainingReminder?: TrainingReminderPref;
   /** Principle 4: personal AI coach with memory vs stateless Ask */
   aiCoachOptIn?: boolean;
   /** Principle 6: morning | evening | night (My Day rhythm) */
@@ -58,6 +72,27 @@ export type PortalProfile = {
   /** Principle 8: living growth history */
   growthEvents?: GrowthEvent[];
 };
+
+/** First name for greetings — preferred name wins over account name. */
+export function displayPreferredName(profile: PortalProfile, accountName?: string | null): string | undefined {
+  const pref = profile.preferredName?.trim();
+  if (pref) return pref.split(/\s+/)[0];
+  const fromAccount = accountName?.trim().split(/\s+/)[0];
+  return fromAccount || undefined;
+}
+
+/** Assist self-label in My Day chat opening — custom name or default product label. */
+export function displayAssistantLabel(profile: PortalProfile): string {
+  const custom = profile.assistantName?.trim();
+  return custom || "Siya Assist";
+}
+
+/** Gate Learn/training nudges by onboarding preference (default: start of day). */
+export function shouldShowTrainingNudge(profile: PortalProfile, when: "start" | "end"): boolean {
+  const pref = profile.trainingReminder ?? "start";
+  if (pref === "none") return false;
+  return pref === when;
+}
 
 const KEY = "siya-portal-profile-v1";
 const BOUND_USER_KEY = "siya-portal-profile-bound-user";
@@ -104,6 +139,7 @@ export function saveLocalPortalProfile(p: PortalProfile) {
   if (typeof window === "undefined") return;
   if (!localStorage.getItem(BOUND_USER_KEY)) return;
   localStorage.setItem(KEY, JSON.stringify(p));
+  window.dispatchEvent(new CustomEvent("siya-portal-profile-updated"));
 }
 
 export function isOnboardingComplete(p: PortalProfile | null | undefined): boolean {

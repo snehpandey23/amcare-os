@@ -1,17 +1,21 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { ShiftMood } from "@/lib/shift-api";
 import type { ShiftDaySummary } from "@/lib/shift-day-summary";
 import type { MemoryImportance } from "@/lib/memory-api";
 import { IMPORTANCE_HINT, IMPORTANCE_LABEL } from "@/lib/memory-api";
 import { isPortalMemoryEnabled } from "@/lib/trainingConfig";
+import type { LearningPick } from "@/lib/my-day";
 
 export function EndShiftModal({
   open,
   onClose,
   onConfirm,
   summary,
+  learningPicks = [],
+  showLearningNudge = false,
 }: {
   open: boolean;
   onClose: () => void;
@@ -23,6 +27,8 @@ export function EndShiftModal({
     memoryImportance?: MemoryImportance;
   }) => Promise<void>;
   summary: ShiftDaySummary | null;
+  learningPicks?: LearningPick[];
+  showLearningNudge?: boolean;
 }) {
   const [step, setStep] = useState<"summary" | "close">("summary");
   const [mood, setMood] = useState<ShiftMood | undefined>();
@@ -97,6 +103,21 @@ export function EndShiftModal({
                 </li>
               ))}
             </ul>
+            {showLearningNudge && learningPicks.length ? (
+              <div className="mt-4 rounded-lg border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] p-3">
+                <p className="text-xs font-semibold text-[var(--siya-primary)]">Before you go — Learn</p>
+                <ul className="mt-2 space-y-1 text-sm">
+                  {learningPicks.slice(0, 3).map((pick) => (
+                    <li key={pick.href}>
+                      <Link href={pick.href} className="font-medium text-[var(--siya-accent)] hover:underline">
+                        {pick.label}
+                      </Link>
+                      <span className="text-xs text-[var(--siya-text-muted)]"> · {pick.detail}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
             <div className="mt-5 flex gap-2">
               <button
                 type="button"

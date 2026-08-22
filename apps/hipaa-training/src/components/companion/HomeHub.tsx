@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { navigateToAsk } from "@/lib/companion/quick-actions";
 import { phraseOfTheDay, healthTermOfTheDay } from "@/lib/level-up/catalog";
 import { loadLevelUpProgress, getDisplayStreak, type LevelUpProgress } from "@/lib/level-up/progress";
-import { loadLocalPortalProfile, DEPARTMENTS } from "@/lib/portal-profile";
+import { loadLocalPortalProfile, DEPARTMENTS, displayPreferredName, shouldShowTrainingNudge } from "@/lib/portal-profile";
 import { loadLocalProgress } from "@/lib/progressStorage";
 import { MODULES, getModulesForRole } from "@/content/modules";
 import {
@@ -265,8 +265,9 @@ export function HomeHub() {
   const xp = progress?.totalXp ?? 0;
   const learningPicks = useMemo(() => suggestLearningPicks(profile), [profile]);
 
-  const firstName = user?.name?.trim().split(/\s+/)[0];
-  const complianceDue = !isAdmin && modulesDone < moduleTotal;
+  const firstName = displayPreferredName(profile, user?.name);
+  const showStartTrainingNudge = shouldShowTrainingNudge(profile, "start");
+  const complianceDue = !isAdmin && modulesDone < moduleTotal && showStartTrainingNudge;
 
   function persistFocus(next: FocusItem[]) {
     setFocus(next);
@@ -307,7 +308,7 @@ export function HomeHub() {
         />
       ) : null}
 
-      {introGate === "ready" && !isAdmin && showBrief ? (
+      {introGate === "ready" && !isAdmin && showBrief && showStartTrainingNudge ? (
         <MorningBrief
           firstName={firstName}
           focus={focus}

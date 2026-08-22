@@ -23,6 +23,7 @@ import {
   portalStatusWarnBox,
   portalStatusWarnText,
 } from "@/lib/portal-ui";
+import { loadLocalPortalProfile, displayPreferredName, displayAssistantLabel } from "@/lib/portal-profile";
 import { VoiceInputButton } from "@/components/ui/VoiceInputButton";
 
 type ChatLink = { label: string; href: string };
@@ -170,9 +171,15 @@ export function SiyaChat({
   const listRef = useRef<HTMLDivElement>(null);
   const sentInitial = useRef(false);
 
+  const profile = loadLocalPortalProfile();
+  const greetingName = displayPreferredName(profile, user?.name);
+  const assistantLabel = displayAssistantLabel(profile);
   const hour = new Date().getHours();
   const timeHello = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
-  const homeGreeting = `${timeHello}${firstName ? `, ${firstName}` : ""} — what's on your mind?`;
+  const homeGreeting = `${timeHello}${greetingName ? `, ${greetingName}` : ""} — what's on your mind?`;
+  const homeAssistLine = profile.assistantName?.trim()
+    ? `I'm ${assistantLabel}. Policies, SOPs, tools, or who to contact.`
+    : "Policies, SOPs, tools, or who to contact.";
 
   useEffect(() => {
     if (!threadId || !token) {
@@ -516,7 +523,7 @@ export function SiyaChat({
                 {homeGreeting}
               </p>
               <p className="mt-2 max-w-md text-sm text-[var(--siya-text-muted)]">
-                Policies, SOPs, tools, or who to contact.
+                {homeAssistLine}
               </p>
             </div>
           ) : (

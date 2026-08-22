@@ -7,28 +7,41 @@ import {
   DEPARTMENTS,
   EXPERIENCE_OPTIONS,
   IMPROVE_OPTIONS,
+  TRAINING_REMINDER_OPTIONS,
   type PortalProfile,
   type DepartmentId,
+  type TrainingReminderPref,
   appendGrowthEvent,
   bindPortalProfileToUser,
+  loadLocalPortalProfile,
 } from "@/lib/portal-profile";
 import { persistPortalProfile } from "@/lib/portal-profile-api";
 import { trainingLinkPrimaryClass } from "@/components/training/training-ui";
 import { BRAND } from "@/lib/brand";
 
-const STEPS = 6;
+const STEPS = 9;
 
 export function OnboardingWizard() {
   const router = useRouter();
   const { user } = useAuth();
+  const existing = loadLocalPortalProfile();
   const [step, setStep] = useState(1);
-  const [department, setDepartment] = useState<DepartmentId | "">("");
-  const [experience, setExperience] = useState<string[]>([]);
-  const [improveGoals, setImproveGoals] = useState<string[]>([]);
-  const [biggestChallenge, setBiggestChallenge] = useState("");
-  const [aiCoachOptIn, setAiCoachOptIn] = useState<boolean | null>(null);
-  const [workShift, setWorkShift] = useState<"morning" | "evening" | "night">("morning");
+  const [preferredName, setPreferredName] = useState(existing.preferredName ?? "");
+  const [assistantName, setAssistantName] = useState(existing.assistantName ?? "");
+  const [trainingReminder, setTrainingReminder] = useState<TrainingReminderPref>(
+    existing.trainingReminder ?? "start",
+  );
+  const [department, setDepartment] = useState<DepartmentId | "">(existing.department ?? "");
+  const [experience, setExperience] = useState<string[]>(existing.experience ?? []);
+  const [improveGoals, setImproveGoals] = useState<string[]>(existing.improveGoals ?? []);
+  const [biggestChallenge, setBiggestChallenge] = useState(existing.biggestChallenge ?? "");
+  const [aiCoachOptIn, setAiCoachOptIn] = useState<boolean | null>(
+    existing.aiCoachOptIn === undefined ? null : existing.aiCoachOptIn,
+  );
+  const [workShift, setWorkShift] = useState<"morning" | "evening" | "night">(existing.workShift ?? "morning");
   const [pending, setPending] = useState(false);
+
+  const accountFirst = user?.name?.trim().split(/\s+/)[0];
 
   function toggleExperience(id: string) {
     setExperience((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
@@ -52,6 +65,9 @@ export function OnboardingWizard() {
       improveGoals,
       biggestChallenge: biggestChallenge.trim(),
       completedAt: Date.now(),
+      preferredName: preferredName.trim() || undefined,
+      assistantName: assistantName.trim() || undefined,
+      trainingReminder,
       aiCoachOptIn: aiCoachOptIn === true,
       workShift,
     };
@@ -85,6 +101,96 @@ export function OnboardingWizard() {
       {step === 2 ? (
         <div>
           <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
+            What should I call you?
+          </h1>
+          <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+            Used in My Day greetings{accountFirst ? ` — your account name is ${accountFirst}` : ""}.
+          </p>
+          <input
+            type="text"
+            value={preferredName}
+            onChange={(e) => setPreferredName(e.target.value)}
+            placeholder={accountFirst ? accountFirst : "Your preferred name"}
+            className="mt-4 w-full rounded-lg border border-[var(--siya-border)] px-3 py-2 text-sm outline-none focus:border-[var(--siya-accent)]"
+            autoComplete="nickname"
+          />
+          <div className="mt-6 flex gap-2">
+            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(1)}>
+              Back
+            </button>
+            <button type="button" className={trainingLinkPrimaryClass} onClick={() => setStep(3)}>
+              Continue
+            </button>
+          </div>
+        </div>
+      ) : null}
+
+      {step === 3 ? (
+        <div>
+          <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
+            What should you call the assistant?
+          </h1>
+          <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+            Optional — shows in My Day chat opening. Leave blank for &ldquo;Siya Assist&rdquo;.
+          </p>
+          <input
+            type="text"
+            value={assistantName}
+            onChange={(e) => setAssistantName(e.target.value)}
+            placeholder="Siya Assist"
+            className="mt-4 w-full rounded-lg border border-[var(--siya-border)] px-3 py-2 text-sm outline-none focus:border-[var(--siya-accent)]"
+          />
+          <div className="mt-6 flex gap-2">
+            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(2)}>
+              Back
+            </button>
+            <button type="button" className={trainingLinkPrimaryClass} onClick={() => setStep(4)}>
+              Continue
+            </button>
+          </div>
+        </div>
+      ) : null}
+
+      {step === 4 ? (
+        <div>
+          <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
+            When should we nudge you about training?
+          </h1>
+          <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+            Start your day with training, end with it, or skip Learn reminders entirely.
+          </p>
+          <ul className="mt-4 space-y-2">
+            {TRAINING_REMINDER_OPTIONS.map((opt) => (
+              <li key={opt.id}>
+                <button
+                  type="button"
+                  onClick={() => setTrainingReminder(opt.id)}
+                  className={`w-full rounded-xl border px-4 py-3 text-left text-sm ${
+                    trainingReminder === opt.id
+                      ? "border-[var(--siya-primary)] bg-[var(--siya-primary)]/5 font-semibold"
+                      : "border-[var(--siya-border)]"
+                  }`}
+                >
+                  <span className="block font-medium">{opt.label}</span>
+                  <span className="mt-0.5 block text-xs font-normal text-[var(--siya-text-muted)]">{opt.detail}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-6 flex gap-2">
+            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(3)}>
+              Back
+            </button>
+            <button type="button" className={trainingLinkPrimaryClass} onClick={() => setStep(5)}>
+              Continue
+            </button>
+          </div>
+        </div>
+      ) : null}
+
+      {step === 5 ? (
+        <div>
+          <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
             What team are you joining?
           </h1>
           <ul className="mt-4 space-y-2">
@@ -105,14 +211,14 @@ export function OnboardingWizard() {
             ))}
           </ul>
           <div className="mt-6 flex gap-2">
-            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(1)}>
+            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(4)}>
               Back
             </button>
             <button
               type="button"
               disabled={!department}
               className={trainingLinkPrimaryClass}
-              onClick={() => setStep(3)}
+              onClick={() => setStep(6)}
             >
               Continue
             </button>
@@ -120,7 +226,7 @@ export function OnboardingWizard() {
         </div>
       ) : null}
 
-      {step === 3 ? (
+      {step === 6 ? (
         <div>
           <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
             What best describes you?
@@ -142,17 +248,17 @@ export function OnboardingWizard() {
             ))}
           </ul>
           <div className="mt-6 flex gap-2">
-            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(2)}>
+            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(5)}>
               Back
             </button>
-            <button type="button" className={trainingLinkPrimaryClass} onClick={() => setStep(4)}>
+            <button type="button" className={trainingLinkPrimaryClass} onClick={() => setStep(7)}>
               Continue
             </button>
           </div>
         </div>
       ) : null}
 
-      {step === 4 ? (
+      {step === 7 ? (
         <div>
           <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
             What would you like to improve most?
@@ -175,14 +281,14 @@ export function OnboardingWizard() {
             ))}
           </div>
           <div className="mt-6 flex gap-2">
-            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(3)}>
+            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(6)}>
               Back
             </button>
             <button
               type="button"
               disabled={improveGoals.length === 0}
               className={trainingLinkPrimaryClass}
-              onClick={() => setStep(5)}
+              onClick={() => setStep(8)}
             >
               Continue
             </button>
@@ -190,7 +296,7 @@ export function OnboardingWizard() {
         </div>
       ) : null}
 
-      {step === 5 ? (
+      {step === 8 ? (
         <div>
           <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
             What&apos;s your biggest challenge right now?
@@ -206,14 +312,14 @@ export function OnboardingWizard() {
             className="mt-4 w-full rounded-lg border border-[var(--siya-border)] px-3 py-2 text-sm outline-none focus:border-[var(--siya-accent)]"
           />
           <div className="mt-6 flex gap-2">
-            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(4)}>
+            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(7)}>
               Back
             </button>
             <button
               type="button"
               disabled={pending || biggestChallenge.trim().length < 4}
               className={trainingLinkPrimaryClass}
-              onClick={() => setStep(6)}
+              onClick={() => setStep(9)}
             >
               Continue
             </button>
@@ -221,7 +327,7 @@ export function OnboardingWizard() {
         </div>
       ) : null}
 
-      {step === 6 ? (
+      {step === 9 ? (
         <div>
           <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
             Personal AI coach
@@ -272,7 +378,7 @@ export function OnboardingWizard() {
             ))}
           </div>
           <div className="mt-6 flex gap-2">
-            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(5)}>
+            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(8)}>
               Back
             </button>
             <button
