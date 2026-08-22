@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { isPortalOnboardingPaused } from "@/lib/trainingConfig";
 import {
   DEPARTMENTS,
   EXPERIENCE_OPTIONS,
@@ -12,8 +11,6 @@ import {
   type DepartmentId,
   appendGrowthEvent,
   bindPortalProfileToUser,
-  isOnboardingComplete,
-  loadLocalPortalProfile,
 } from "@/lib/portal-profile";
 import { persistPortalProfile } from "@/lib/portal-profile-api";
 import { trainingLinkPrimaryClass } from "@/components/training/training-ui";
@@ -32,16 +29,6 @@ export function OnboardingWizard() {
   const [aiCoachOptIn, setAiCoachOptIn] = useState<boolean | null>(null);
   const [workShift, setWorkShift] = useState<"morning" | "evening" | "night">("morning");
   const [pending, setPending] = useState(false);
-
-  useEffect(() => {
-    if (isPortalOnboardingPaused()) {
-      router.replace("/");
-      return;
-    }
-    if (isOnboardingComplete(loadLocalPortalProfile())) {
-      router.replace("/");
-    }
-  }, [router]);
 
   function toggleExperience(id: string) {
     setExperience((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));

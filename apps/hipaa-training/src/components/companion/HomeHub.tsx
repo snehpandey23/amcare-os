@@ -5,7 +5,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { navigateToAsk } from "@/lib/companion/quick-actions";
 import { phraseOfTheDay, healthTermOfTheDay } from "@/lib/level-up/catalog";
 import { loadLevelUpProgress, getDisplayStreak, type LevelUpProgress } from "@/lib/level-up/progress";
-import { isPortalOnboardingPaused } from "@/lib/trainingConfig";
 import { loadLocalPortalProfile, DEPARTMENTS } from "@/lib/portal-profile";
 import { loadLocalProgress } from "@/lib/progressStorage";
 import { MODULES, getModulesForRole } from "@/content/modules";
@@ -81,11 +80,15 @@ function MyDayHeader({
       <h1 className="mt-3 font-[family-name:var(--font-poppins)] text-2xl font-semibold text-[var(--siya-primary)] md:text-3xl">
         My day
       </h1>
-      {!isAdmin && !isPortalOnboardingPaused() ? (
+      {!isAdmin ? (
         profile.onboardingComplete && deptLabel ? (
           <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
             Personalized for <strong>{deptLabel}</strong>
             {profile.improveGoals.length ? ` · goals: ${profile.improveGoals.slice(0, 3).join(", ")}` : null}
+            {" · "}
+            <Link href="/onboarding" className="font-semibold underline">
+              Personalize
+            </Link>
           </p>
         ) : (
           <p className="mt-1 text-xs text-amber-800">
@@ -336,7 +339,7 @@ export function HomeHub() {
                   </Link>
                 </p>
               ) : null}
-              {!isPortalOnboardingPaused() && !profile.onboardingComplete ? (
+              {!profile.onboardingComplete ? (
                 <p className="mb-3 text-xs text-amber-800">
                   Finish{" "}
                   <Link href="/onboarding" className="font-semibold underline">

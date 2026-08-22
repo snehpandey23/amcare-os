@@ -36,7 +36,7 @@ export function isPortalLoginRequired(): boolean {
   return isPortalAuthEnabled() && process.env.NEXT_PUBLIC_SIYA_PORTAL_REQUIRE_LOGIN === "1";
 }
 
-/** Pilot mode: skip forced onboarding wizard so staff can test shift / My day / tasks first. */
+/** Pilot mode: skip forced onboarding after sign-in only (/onboarding stays voluntary). */
 export function isPortalOnboardingPaused(): boolean {
   return process.env.NEXT_PUBLIC_SIYA_PORTAL_PAUSE_ONBOARDING === "1";
 }
