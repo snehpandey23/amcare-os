@@ -8,25 +8,27 @@ import {
   answerMetaConversation,
   metaCaseCount,
 } from "../src/lib/siya-os/meta-conversation";
-import { runSiyaAssistant } from "../src/lib/siya-os/engine";
+import { runSiyaAssistant, runSiyaAssistantAsync } from "../src/lib/siya-os/engine";
+import { detectAdminOpsIntent } from "../src/lib/siya-os/admin-ops-coach";
 
 function main() {
+  return (async () => {
   console.log(`meta cases: ${metaCaseCount()}, samples: ${META_SMOKE_SAMPLES.length}`);
 
   let catalogFails = 0;
   for (const s of META_SMOKE_SAMPLES) {
-    const ans = answerMetaConversation(s.text);
-    if (!ans) {
+    const hit = answerMetaConversation(s.text);
+    if (!hit) {
       console.error(`CATALOG MISS [${s.id}]: ${s.text}`);
       catalogFails++;
       continue;
     }
-    if (!s.mustMatch.test(ans)) {
-      console.error(`CATALOG mustMatch fail [${s.id}]: ${s.text}\n---\n${ans.slice(0, 240)}`);
+    if (!s.mustMatch.test(hit.answer)) {
+      console.error(`CATALOG mustMatch fail [${s.id}]: ${s.text}\n---\n${hit.answer.slice(0, 240)}`);
       catalogFails++;
     }
-    if (s.mustNot.test(ans)) {
-      console.error(`CATALOG mustNot fail [${s.id}]: ${s.text}\n---\n${ans.slice(0, 240)}`);
+    if (s.mustNot.test(hit.answer)) {
+      console.error(`CATALOG mustNot fail [${s.id}]: ${s.text}\n---\n${hit.answer.slice(0, 240)}`);
       catalogFails++;
     }
   }
@@ -120,7 +122,36 @@ function main() {
   const creyosEval = runSiyaAssistant("is creyos included in the evaluation");
   assert.ok(!creyosEval.portalLinks?.some((l) => /creyos/i.test(l.href)));
 
+  assert.equal(detectAdminOpsIntent("i dont see personalize on my day"), null);
+
+  const t1 = await runSiyaAssistantAsync("why did u skip my onboarding", []);
+  assert.ok(/personalization wizard/i.test(t1.message));
+  assert.equal(t1.knowledgeGap, false);
+
+  const history = [
+    { role: "user" as const, content: "why did u skip my onboarding" },
+    { role: "assistant" as const, content: t1.message },
+  ];
+  const t2 = await runSiyaAssistantAsync("i dont see personalize on my day", history);
+  assert.ok(/not on admin|Open onboarding|\/onboarding/i.test(t2.message), t2.message.slice(0, 200));
+  assert.ok(!/Overdue Tasks|team status/i.test(t2.message), "ops coach leak");
+  assert.equal(t2.opsCoPilot, undefined);
+
+  const history2 = [
+    ...history,
+    { role: "user" as const, content: "i dont see personalize on my day" },
+    { role: "assistant" as const, content: t2.message },
+  ];
+  const t3 = await runSiyaAssistantAsync("cant u do the personalization now", history2);
+  assert.ok(/can't run the personalization|Open onboarding/i.test(t3.message), t3.message.slice(0, 200));
+  assert.notEqual(t3.message.trim(), t1.message.trim(), "verbatim repeat");
+  assert.ok(t3.portalLinks?.some((l) => l.href === "/onboarding"), "onboarding link");
+
   console.log("smoke-meta-conversation: OK");
+  })();
 }
 
-main();
+void main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

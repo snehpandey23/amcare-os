@@ -26,7 +26,7 @@ import { tryFactsLookup } from "./facts-lookup";
 import { tryPracticeLookup } from "./practice-lookup";
 import { trySopChromeLookup } from "./sop-chrome-lookup";
 import { tryWorkplaceLinkLookup } from "./workplace-link-lookup";
-import { answerMetaConversation } from "./meta-conversation";
+import { answerMetaConversation, type MetaConversationReply } from "./meta-conversation";
 import {
   acknowledgePersonalPreference,
   acknowledgeRoleAuthorityClaim,
@@ -118,6 +118,32 @@ export function runSiyaAssistant(message: string, history: { role: string; conte
   return buildSiyaReply(message, history);
 }
 
+function metaConversationReply(
+  text: string,
+  history: { role: string; content: string }[],
+  task = "Portal help",
+): SiyaReply | null {
+  const priorUser = [...history].reverse().find((h) => h.role === "user")?.content;
+  const priorAssistant = [...history].reverse().find((h) => h.role === "assistant")?.content;
+  const meta: MetaConversationReply | null = answerMetaConversation(text, priorUser, priorAssistant);
+  if (!meta) return null;
+  return {
+    message: polishStaffMessage(meta.answer),
+    chunks: [],
+    knowledgeGap: false,
+    sources: [],
+    portalLinks: meta.links,
+    escalationPreview: undefined,
+    ruleFinal: true,
+    routing: {
+      department: "General",
+      task,
+      confidence: "high",
+      followUpQuestions: [],
+    },
+  };
+}
+
 export async function runSiyaAssistantAsync(
   message: string,
   history: { role: string; content: string }[] = [],
@@ -126,6 +152,13 @@ export async function runSiyaAssistantAsync(
   const focusMode = opts?.focusMode ?? false;
   const token = opts?.authToken?.trim() || null;
   const founderCoach = opts?.surface === "founder-coach";
+
+  const metaEarly = metaConversationReply(
+    message,
+    history,
+    founderCoach ? "Founder Talk — portal help" : "Portal help",
+  );
+  if (metaEarly) return metaEarly;
 
   const opsIntent = token ? detectAdminOpsIntent(message) : null;
   if (token && opsIntent) {
@@ -474,13 +507,15 @@ function buildSiyaReply(
   }
 
   const priorUser = [...history].reverse().find((h) => h.role === "user")?.content;
-  const metaAnswer = answerMetaConversation(text, priorUser);
+  const priorAssistant = [...history].reverse().find((h) => h.role === "assistant")?.content;
+  const metaAnswer = answerMetaConversation(text, priorUser, priorAssistant);
   if (metaAnswer) {
     return {
-      message: polishStaffMessage(metaAnswer),
+      message: polishStaffMessage(metaAnswer.answer),
       chunks: [],
       knowledgeGap: false,
       sources: [],
+      portalLinks: metaAnswer.links,
       escalationPreview: undefined,
       ruleFinal: true,
     };

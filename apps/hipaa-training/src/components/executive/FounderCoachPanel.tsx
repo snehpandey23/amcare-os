@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useState } from "react";
 import useSWR from "swr";
 import { useAuth } from "@/context/AuthContext";
@@ -785,7 +786,11 @@ export function FounderCoachPanel({ firstName }: { firstName?: string }) {
     <div className="flex min-h-[calc(100dvh-7.5rem)] flex-col gap-2">
       <p className="shrink-0 text-xs text-[var(--siya-text-muted)]">
         Policies, coverage, difficult-patient paths — same engine as staff Ask. Plan Record stays on{" "}
-        <strong>This week&apos;s plan</strong>.
+        <strong>This week&apos;s plan</strong>.{" "}
+        <Link href="/onboarding" className="font-semibold underline underline-offset-2">
+          Personalize
+        </Link>{" "}
+        (name, assistant label, training reminders).
       </p>
       <div className="min-h-0 flex-1">
         <AssistChatShell

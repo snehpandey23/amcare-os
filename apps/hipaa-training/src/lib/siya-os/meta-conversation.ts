@@ -25,9 +25,18 @@ type MetaCase = {
   id: string;
   category: MetaCategory;
   /** Match against normalized lowercase text */
-  test: (t: string, priorUser?: string) => boolean;
+  test: (t: string, priorUser?: string, priorAssistant?: string) => boolean;
   answer: string;
+  links?: { label: string; href: string }[];
 };
+
+export type MetaConversationReply = {
+  id: string;
+  answer: string;
+  links?: { label: string; href: string }[];
+};
+
+const ONBOARDING_LINK = [{ label: "Open onboarding", href: "/onboarding" }];
 
 const IDENTITY = [
   "I’m **Siya Assist** — an **AI** help desk for Siya Health staff (not a human).",
@@ -208,14 +217,37 @@ const ORIENTATION = [
 const PORTAL_ONBOARDING = [
   "That’s the **Siya staff portal personalization wizard** — not Medical Assistant Day-1 hire orientation or Klarity/Spruce training.",
   "",
-  "When you sign in (or tap **Personalize** on My day), onboarding asks:",
+  "**Staff** see a **Personalize** link under the My day subtitle after onboarding. **Admins** on Founder Talk do not get that label today — use **Open onboarding** below (or `/onboarding` in the URL bar).",
+  "",
+  "The wizard asks:",
   "1. **What should I call you?** — used in My Day greetings.",
   "2. **What should you call the assistant?** — optional label in chat opening (default **Siya Assist**).",
   "3. **Training reminders** — start of day, end of shift, or skip Learn nudges.",
   "4. Department, goals, and shift rhythm — so My day matches your role.",
   "",
-  "Change answers anytime: **Personalize** → `/onboarding`. HR hire paperwork and MA tool training are separate — ask HR / Clinical Program for those.",
+  "HR hire paperwork and MA tool training are separate — ask HR / Clinical Program for those.",
 ].join("\n");
+
+const PORTAL_ONBOARDING_TROUBLESHOOT = [
+  "You’re right — **Personalize is not on admin My day / Founder Talk** today. That link only appears on the **staff** My day header (under the subtitle).",
+  "",
+  "Open the same wizard directly: tap **Open onboarding** below (or go to `/onboarding`). Name, assistant label, and training reminders work the same.",
+].join("\n");
+
+const PORTAL_ONBOARDING_ACTION = [
+  "I can’t run the personalization wizard inside chat — it’s a short in-app form.",
+  "",
+  "Tap **Open onboarding** below to start now (about two minutes): preferred name, assistant label, training reminders, then department and goals.",
+].join("\n");
+
+function isPortalOnboardingThread(priorUser?: string, priorAssistant?: string): boolean {
+  const blob = `${priorUser ?? ""}\n${priorAssistant ?? ""}`.toLowerCase();
+  return (
+    /personalization wizard|siya staff portal personalization|preferred name|assistant label|training reminders/.test(
+      blob,
+    ) || /\bpersonalize\b/.test(blob) && /\bonboard/.test(blob)
+  );
+}
 
 const LEARN_EXPLAIN = [
   "**Learn** is the training area of this staff app (left sidebar).",
@@ -325,18 +357,44 @@ const CASES: MetaCase[] = [
     answer: FEELINGS,
   },
   {
+    id: "portal-onboarding-troubleshoot",
+    category: "chrome",
+    test: (t, _prior, priorAssist) =>
+      /\b(don'?t|do not|cant|can't|cannot)\s+(see|find|show)\b.*\bpersonaliz/.test(t) ||
+      (/\bpersonaliz/.test(t) && /\b(on my day|my day)\b/.test(t) && /\b(don'?t|not|missing|where|no|see)\b/.test(t)) ||
+      (isPortalOnboardingThread(_prior, priorAssist) &&
+        /\b(don'?t see|can't find|cannot find|where is|not there|missing|no personalize)\b/.test(t)),
+    answer: PORTAL_ONBOARDING_TROUBLESHOOT,
+    links: ONBOARDING_LINK,
+  },
+  {
+    id: "portal-onboarding-action",
+    category: "chrome",
+    test: (t, prior, priorAssist) =>
+      /\b(can|could|cant|can't)\s+(you|u)\s+(do|run|start|open)\b[\s\S]{0,24}\bpersonaliz/.test(t) ||
+      (/\b(do|start|open|run)\b[\s\S]{0,20}\bpersonaliz/.test(t) && /\b(now|here|please)\b/.test(t)) ||
+      (isPortalOnboardingThread(prior, priorAssist) &&
+        /\b(now|please|just do|start it|open it|do it)\b/.test(t) &&
+        !/\b(don'?t see|can't find|where)\b/.test(t)),
+    answer: PORTAL_ONBOARDING_ACTION,
+    links: ONBOARDING_LINK,
+  },
+  {
     id: "portal-onboarding",
     category: "chrome",
     test: (t) =>
-      /\bwhy\b.*\b(you|u|assist|siya)\b.*\b(do|did|run|make)\b.*\bonboard/.test(t) ||
-      /\bwhy\b.*\b(do|did)\b.*\bmy\b.*\bonboard/.test(t) ||
+      /\bwhy\b.*\b(you|u|assist|siya)\b.*\b(do|did|run|make|skip|skipped)\b.*\bonboard/.test(t) ||
+      /\bwhy\b.*\b(do|did|skip|skipped)\b.*\bmy\b.*\bonboard/.test(t) ||
       /\bportal\b.*\bonboard/.test(t) ||
-      /\bpersonaliz(e|ation)\b/.test(t) ||
+      (/\bpersonaliz(e|ation)\b/.test(t) &&
+        !/\b(don'?t see|can't find|cannot find|do the personalization now|personalization now)\b/.test(t) &&
+        !/\b(can|could|cant|can't)\s+(you|u)\s+(do|run|start|open)\b/.test(t)) ||
       /\b(preferred name|assistant name|training reminder|what should i call you|what should you call)\b/.test(t) ||
       (/\bonboard/.test(t) &&
-        /\b(wizard|portal|app|siyaos|my day|personalize|assist|you|u)\b/.test(t)) ||
+        /\b(wizard|portal|app|siyaos|my day|personalize|assist|you|u|skip|skipped)\b/.test(t)) ||
       /\bwhat\b.*\bonboarding\b.*\b(for|about|do)\b/.test(t),
     answer: PORTAL_ONBOARDING,
+    links: ONBOARDING_LINK,
   },
 
   // --- authority ---
@@ -815,13 +873,19 @@ function normalizeMetaText(text: string): string {
 /**
  * First matching meta case wins. Returns null if not a meta conversation turn.
  */
-export function answerMetaConversation(text: string, priorUser?: string): string | null {
+export function answerMetaConversation(
+  text: string,
+  priorUser?: string,
+  priorAssistant?: string,
+): MetaConversationReply | null {
   const t = normalizeMetaText(text);
   const prior = priorUser ? normalizeMetaText(priorUser) : "";
-  // Dictated orientation asks can be long; still allow meta (cases are selective).
+  const priorAssist = priorAssistant ? normalizeMetaText(priorAssistant) : "";
   if (!t || t.length > 1200) return null;
   for (const c of CASES) {
-    if (c.test(t, prior)) return c.answer;
+    if (c.test(t, prior, priorAssist)) {
+      return { id: c.id, answer: c.answer, links: c.links };
+    }
   }
   return null;
 }

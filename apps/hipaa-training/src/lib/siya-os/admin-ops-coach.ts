@@ -57,9 +57,10 @@ export function detectAdminOpsIntent(message: string): AdminOpsIntent | null {
   }
 
   if (
-    /\b(plan|prioriti[sz]e|focus|my day|run my day|what should i do|morning brief|daily plan)\b/.test(
+    /\b(plan|prioriti[sz]e|focus|run my day|what should i do|morning brief|daily plan)\b/.test(
       t,
-    )
+    ) ||
+    (/\bmy day\b/.test(t) && !/\b(personalize|personalisation|onboarding|onboard)\b/.test(t))
   ) {
     return { kind: "plan_day" };
   }
