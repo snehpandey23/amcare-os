@@ -13,7 +13,10 @@ export const SOP_DEPARTMENTS = [
 
 export type SopDepartment = (typeof SOP_DEPARTMENTS)[number];
 
-export type SopStatus = "draft" | "pending_review" | "live" | "needs_review";
+export type SopStatus = "draft" | "pending_review" | "draft_live" | "live" | "needs_review";
+
+/** 1 = marketing/internal process · 2 = billing/accounts · 3 = clinical/compliance/patient-facing */
+export type SopRiskTier = 1 | 2 | 3;
 
 export type SopTaskType = "create_sop" | "update_sop";
 
@@ -35,8 +38,53 @@ export function slugToDepartment(slug: string): SopDepartment | null {
 
 export function parseSopStatus(raw: unknown): SopStatus {
   const s = typeof raw === "string" ? raw : "";
-  if (s === "draft" || s === "pending_review" || s === "live" || s === "needs_review") return s;
+  if (s === "draft" || s === "pending_review" || s === "draft_live" || s === "live" || s === "needs_review") return s;
   return "draft";
+}
+
+export function parseSopRiskTier(raw: unknown): SopRiskTier {
+  const n = Number(raw);
+  if (n === 1 || n === 2 || n === 3) return n;
+  return 2;
+}
+
+/**
+ * Risk tier: department default, content may only raise (never lower).
+ * T1 marketing/HR/tech process · T2 accounts/billing · T3 clinical/compliance/patient-care.
+ */
+export function inferSopRiskTier(department: string, title: string, body: string): SopRiskTier {
+  let tier: SopRiskTier = 1;
+  if (department === "Accounts") tier = 2;
+  if (
+    department === "Clinical Operations" ||
+    department === "Compliance" ||
+    department === "Leadership" ||
+    department === "General"
+  ) {
+    tier = 3;
+  }
+
+  const blob = `${title}\n${body}`.toLowerCase();
+  // Patient-facing operational workflows (booking, eligibility, MA chat) — never T1.
+  if (
+    /\b(patient workflow|payment collection|eligibility review|chat quality|patient communication chats|carepatron)\b/.test(
+      blob,
+    ) ||
+    /\b(discovery call|meet & greet|meet and greet)\b/.test(blob)
+  ) {
+    tier = 3;
+  }
+  const clinicalSafety =
+    /\b(suicid|patient safety|de-escalat|verbally abusive|prescri|controlled.?substance|\bcsa\b|\buds\b)\b/.test(blob);
+  // Accounts may mention HIPAA in an escalation line without becoming a compliance SOP.
+  const hipaaCore = /\b(phi|hipaa)\b/.test(blob) && department !== "Accounts";
+  if (clinicalSafety || hipaaCore) {
+    tier = 3;
+  }
+  if (/\b(refund|chargeback|reimburs|invoice|klarity billing)\b/.test(blob) && tier < 2) {
+    tier = 2;
+  }
+  return tier;
 }
 
 export type DepartmentLead = {
@@ -54,6 +102,7 @@ export type SopRecord = {
   body: string;
   keywords: string[];
   status: SopStatus;
+  riskTier: SopRiskTier;
   ownerUserId: string;
   ownerName: string | null;
   reviewDate: string | null;
@@ -61,6 +110,9 @@ export type SopRecord = {
   reviewerComment: string | null;
   submittedAt: string | null;
   approvedAt: string | null;
+  approvedByUserId: string | null;
+  approvedByName: string | null;
+  approvedByRole: string | null;
   createdAt: string;
   updatedAt: string;
   /** Internal — admin review queue only; not used in Ask retrieval. */
@@ -98,7 +150,7 @@ export function sopsForStaffApi(list: SopRecord[]): Omit<SopRecord, "aiDrafted">
 }
 
 export function sopRetrievalTitle(s: SopRecord): string {
-  if (s.status === "pending_review") return `[Pending Review] ${s.title}`;
+  if (s.status === "draft_live") return `[Active draft] ${s.title}`;
   if (s.status === "needs_review") return `[Needs Review] ${s.title}`;
   return s.title;
 }

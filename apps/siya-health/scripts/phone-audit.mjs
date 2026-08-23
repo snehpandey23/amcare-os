@@ -1,5 +1,6 @@
 /**
  * Machine-first phone audit — screenshots + layout probes + Lighthouse mobile.
+ * Core URL set + bar: docs/PHONE-FIRST.md · data/phone-first-core.mjs
  * Run: node scripts/phone-audit.mjs
  * Optional: PHONE_AUDIT_BASE=https://www.siya.health node scripts/phone-audit.mjs
  */
@@ -8,6 +9,7 @@ import { spawnSync } from 'child_process';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
+import { CORE_PAGES, CORE_LH_PERF_FLOOR } from '../data/phone-first-core.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -15,15 +17,7 @@ const STAMP = new Date().toISOString().slice(0, 10);
 const OUT = path.join(SITE_ROOT, 'docs', 'phone-audit', STAMP);
 const BASE = (process.env.PHONE_AUDIT_BASE || 'https://www.siya.health').replace(/\/$/, '');
 
-const PAGES = [
-  { id: 'home', path: '/', symptoms: null },
-  { id: 'adhd-care', path: '/adhd-care', symptoms: '#symptoms' },
-  { id: 'weight-loss', path: '/weight-loss-metabolic-health', symptoms: '#weight-recognition' },
-  { id: 'telehealth', path: '/telehealth', symptoms: '#tele-recognition' },
-  { id: 'mens-health', path: '/mens-health-longevity', symptoms: '#mens-recognition' },
-  { id: 'labs', path: '/labs', symptoms: '#why-labs' },
-  { id: 'blog', path: '/blog', symptoms: '.blog-featured' },
-];
+const PAGES = CORE_PAGES;
 
 async function probePage(page, pageId) {
   return page.evaluate((id) => {
@@ -239,15 +233,25 @@ async function main() {
   lines.push(`Device: iPhone 13 emulation (390×844)`);
   lines.push(`Shots: \`${path.relative(SITE_ROOT, path.join(OUT, 'shots'))}\``);
   lines.push('');
+  lines.push('Policy: `docs/PHONE-FIRST.md` · soft Perf floor: ' + CORE_LH_PERF_FLOOR);
+  lines.push('');
   lines.push('## Lighthouse mobile scores');
   lines.push('');
-  lines.push('| Page | Perf | A11y | BP | SEO |');
-  lines.push('|---|---:|---:|---:|---:|');
+  lines.push('| Page | Perf | A11y | BP | SEO | vs floor |');
+  lines.push('|---|---:|---:|---:|---:|---|');
   for (const s of lhScores) {
     if (s.error) {
-      lines.push(`| ${s.id} | — | — | — | error |`);
+      lines.push(`| ${s.id} | — | — | — | error | — |`);
     } else {
-      lines.push(`| ${s.id} | ${s.performance} | ${s.accessibility} | ${s.bestPractices} | ${s.seo} |`);
+      const vs =
+        typeof s.performance === 'number'
+          ? s.performance >= CORE_LH_PERF_FLOOR
+            ? 'ok'
+            : `BELOW ${CORE_LH_PERF_FLOOR}`
+          : '—';
+      lines.push(
+        `| ${s.id} | ${s.performance} | ${s.accessibility} | ${s.bestPractices} | ${s.seo} | ${vs} |`,
+      );
     }
   }
   lines.push('');

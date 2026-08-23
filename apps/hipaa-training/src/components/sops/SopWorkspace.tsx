@@ -21,7 +21,7 @@ import type { SopDraftAnswers } from "@/lib/sop-draft-assist";
 import { shouldApplySopEditDeepLink } from "@/lib/sop-editor-session";
 import { SopDraftGuide } from "@/components/sops/SopDraftGuide";
 import { SopSubmitFeedbackCard } from "@/components/sops/SopSubmitFeedbackCard";
-import { SOP_STATUS_LABEL, type SopRecord, type SopTaskRecord } from "@/lib/sop-types";
+import { SOP_STATUS_LABEL, SOP_RISK_TIER_LABEL, inferSopRiskTier, type SopRecord, type SopTaskRecord } from "@/lib/sop-types";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
 import {
   portalBadgeAiDrafted,
@@ -42,13 +42,14 @@ import {
 
 type Assignee = { id: string; name: string | null; email: string };
 
-type BucketKey = "draft" | "submitted" | "sent_back" | "live";
+type BucketKey = "draft" | "submitted" | "draft_live" | "sent_back" | "live";
 
 const BUCKETS: { key: BucketKey; title: string; hint: string }[] = [
   { key: "draft", title: "Draft", hint: "Not submitted yet" },
-  { key: "submitted", title: "Submitted / in review", hint: "Waiting on admin — collaborative edit still open" },
+  { key: "submitted", title: "Submitted / in review", hint: "Tier 2/3 — waiting on lead or founder" },
+  { key: "draft_live", title: "Active draft", hint: "Ask can retrieve this; not finalized policy" },
   { key: "sent_back", title: "Sent back", hint: "Needs changes after review" },
-  { key: "live", title: "Live", hint: "Published for Ask" },
+  { key: "live", title: "Live", hint: "Approved policy for Ask" },
 ];
 
 function deptSlug(dept: string): string {
@@ -66,6 +67,7 @@ function formatSopWhen(iso: string | null | undefined): string {
 
 function bucketFor(s: SopRecord): BucketKey {
   if (s.status === "live") return "live";
+  if (s.status === "draft_live") return "draft_live";
   if (s.status === "pending_review") return "submitted";
   if (s.status === "needs_review" || (s.status === "draft" && s.reviewerComment)) return "sent_back";
   return "draft";
@@ -79,6 +81,7 @@ function statusPill(status: SopRecord["status"]) {
   const styles: Record<SopRecord["status"], string> = {
     draft: "bg-[var(--siya-bg-subtle)] text-[var(--siya-text-secondary)]",
     pending_review: `${portalStatusWarnBox} ${portalStatusWarnText}`,
+    draft_live: `${portalStatusWarnBox} ${portalStatusWarnText}`,
     live: `${portalStatusSuccessBox} ${portalStatusSuccessText}`,
     needs_review: `${portalStatusWarnBox} ${portalStatusWarnText}`,
   };
@@ -146,7 +149,13 @@ export function SopWorkspace() {
   }, [ctx]);
 
   const sopsByBucket = useMemo(() => {
-    const map: Record<BucketKey, SopRecord[]> = { draft: [], submitted: [], sent_back: [], live: [] };
+    const map: Record<BucketKey, SopRecord[]> = {
+      draft: [],
+      submitted: [],
+      draft_live: [],
+      sent_back: [],
+      live: [],
+    };
     for (const s of sops) map[bucketFor(s)].push(s);
     return map;
   }, [sops]);
@@ -414,12 +423,16 @@ export function SopWorkspace() {
     setError(null);
     setNotice(null);
     try {
-      const { email } = await submitSopForReview(id);
+      const { sop, email } = await submitSopForReview(id);
       setEditorOpen(false);
       setSubmitFeedback(null);
       setSubmitFeedbackReady(false);
       submitSnapRef.current = null;
-      if (email?.sent) {
+      if (sop.status === "draft_live") {
+        setNotice(
+          "Published as an active draft. Ask can retrieve it now, with a note that it is not finalized policy. No separate approver was required (Tier 1).",
+        );
+      } else if (email?.sent) {
         setNotice(
           `Submitted for review. Reviewers notified${email.to?.length ? ` (${email.to.join(", ")})` : ""}.`,
         );
@@ -539,6 +552,12 @@ export function SopWorkspace() {
   function reviewerLabelForDept(dept: string): string {
     const route = ctx?.approvalRoutes?.find((r) => r.department === dept);
     return route?.reviewerLabel || "Founder / admin review queue (route loading…)";
+  }
+
+  function canSelfPublishTier1(dept: string, title: string, body: string): boolean {
+    if (inferSopRiskTier(dept, title, body) !== 1) return false;
+    if (ctx?.isAdmin) return true;
+    return Boolean(ctx?.myLeadSlugs?.includes(deptSlug(dept)));
   }
 
   if (!authReady) return null;
@@ -697,6 +716,9 @@ export function SopWorkspace() {
                         <div className="flex flex-wrap items-center gap-2">
                           {statusPill(s.status)}
                           <span className="text-[10px] uppercase text-[var(--siya-text-muted)]">{s.department}</span>
+                          <span className="text-[10px] text-[var(--siya-text-muted)]">
+                            {SOP_RISK_TIER_LABEL[s.riskTier ?? inferSopRiskTier(s.department, s.title, s.body)]}
+                          </span>
                         </div>
                         <h3 className="mt-2 font-semibold text-[var(--siya-primary)]">{s.title}</h3>
                         <p className="mt-1 line-clamp-3 text-xs text-[var(--siya-text-secondary)]">{s.body || "—"}</p>
@@ -786,7 +808,9 @@ export function SopWorkspace() {
             ) : null}
             {formDept ? (
               <p className="mt-2 text-xs text-[var(--siya-text-secondary)]">
-                On submit, review goes to: <strong>{reviewerLabelForDept(formDept)}</strong>
+                {canSelfPublishTier1(formDept, formTitle, formBody)
+                  ? "Tier 1 process doc — as this department’s lead you can publish an active draft for Ask immediately (not finalized policy)."
+                  : `On submit, review goes to: ${reviewerLabelForDept(formDept)}`}
               </p>
             ) : null}
             <label className="mt-4 block text-xs font-medium text-[var(--siya-text-muted)]">
@@ -902,7 +926,11 @@ export function SopWorkspace() {
                     className={trainingLinkPrimaryClass}
                     onClick={() => void onSaveAndSubmit()}
                   >
-                    {pending ? "Submitting…" : `Submit for review → ${reviewerLabelForDept(formDept || "…")}`}
+                    {pending
+                      ? "Submitting…"
+                      : canSelfPublishTier1(formDept, formTitle, formBody)
+                        ? "Publish as active draft"
+                        : `Submit for review → ${reviewerLabelForDept(formDept || "…")}`}
                   </button>
                   <button
                     type="button"

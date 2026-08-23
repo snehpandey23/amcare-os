@@ -12,6 +12,10 @@ keywords:
   - pre-auth
   - appointment
   - daily task
+  - daily payment check
+  - payment check
+  - payment report
+  - Zoho Books
 priority: 8
 sources:
   - docs/workflows/daily-tasks-workflow.md

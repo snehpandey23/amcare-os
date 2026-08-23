@@ -16,7 +16,8 @@ function formatSources(chunks: RetrievedChunk[]): string {
     .slice(0, 5)
     .map((c) => {
       const layer = c.layerLabel ? `[${c.layerLabel}] ` : "";
-      return `### ${c.id} — ${layer}${c.title}\n${c.snippet}`;
+      const draft = c.draftLive ? "[ACTIVE DRAFT — not finalized policy] " : "";
+      return `### ${c.id} — ${layer}${draft}${c.title}\n${c.snippet}`;
     })
     .join("\n\n");
 }

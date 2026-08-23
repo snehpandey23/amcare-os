@@ -2,6 +2,8 @@ import type pg from "pg";
 import { halfLifeReviewDue } from "./constitution-store.js";
 import {
   departmentToSlug,
+  inferSopRiskTier,
+  parseSopRiskTier,
   parseSopStatus,
   SOP_DEPARTMENTS,
   SOP_TASK_SEED,
@@ -61,6 +63,19 @@ export async function ensureSopTables(pool: pg.Pool): Promise<void> {
   `);
 
   await pool.query(`ALTER TABLE siya_sops ADD COLUMN IF NOT EXISTS ai_drafted BOOLEAN NOT NULL DEFAULT FALSE`);
+  await pool.query(`ALTER TABLE siya_sops ADD COLUMN IF NOT EXISTS risk_tier SMALLINT`);
+  await pool.query(`
+    UPDATE siya_sops SET risk_tier = CASE
+      WHEN department_slug IN ('clinical_operations', 'compliance', 'leadership', 'general') THEN 3
+      WHEN department_slug = 'accounts' THEN 2
+      ELSE 1
+    END
+    WHERE risk_tier IS NULL
+  `);
+  await pool.query(`ALTER TABLE siya_sops ALTER COLUMN risk_tier SET DEFAULT 2`);
+  await pool.query(`UPDATE siya_sops SET risk_tier = 2 WHERE risk_tier IS NULL`);
+  await pool.query(`ALTER TABLE siya_sops ALTER COLUMN risk_tier SET NOT NULL`);
+  await recomputeAllSopRiskTiers(pool);
 
   for (const dept of SOP_DEPARTMENTS) {
     const slug = departmentToSlug(dept);
@@ -82,6 +97,20 @@ export async function seedSopTasksIfEmpty(pool: pg.Pool): Promise<void> {
        VALUES ($1, $2, $3, $4, $5, 'open')`,
       [`task-seed-${slug}-${t.taskType}`, slug, t.department, t.taskType, t.title],
     );
+  }
+}
+
+/** Content may raise department default (never lower). Recompute on boot so existing rows match the classifier. */
+export async function recomputeAllSopRiskTiers(pool: pg.Pool): Promise<void> {
+  const r = await pool.query(`SELECT id, department_label, title, body, risk_tier FROM siya_sops`);
+  for (const row of r.rows) {
+    const tier = inferSopRiskTier(
+      String(row.department_label ?? ""),
+      String(row.title ?? ""),
+      String(row.body ?? ""),
+    );
+    if (Number(row.risk_tier) === tier) continue;
+    await pool.query(`UPDATE siya_sops SET risk_tier = $2 WHERE id = $1`, [row.id, tier]);
   }
 }
 
@@ -353,6 +382,7 @@ function rowToSop(row: Record<string, unknown>): SopRecord {
     body: row.body as string,
     keywords,
     status: parseSopStatus(row.status),
+    riskTier: parseSopRiskTier(row.risk_tier),
     ownerUserId: row.owner_user_id as string,
     ownerName: (row.owner_name as string) ?? null,
     reviewDate: row.review_date ? new Date(row.review_date as string).toISOString().slice(0, 10) : null,
@@ -360,6 +390,9 @@ function rowToSop(row: Record<string, unknown>): SopRecord {
     reviewerComment: (row.reviewer_comment as string) ?? null,
     submittedAt: row.submitted_at ? new Date(row.submitted_at as string).toISOString() : null,
     approvedAt: row.approved_at ? new Date(row.approved_at as string).toISOString() : null,
+    approvedByUserId: (row.approved_by as string) ?? null,
+    approvedByName: (row.approved_by_name as string) ?? null,
+    approvedByRole: (row.approved_by_role as string) ?? null,
     createdAt: new Date(row.created_at as string).toISOString(),
     updatedAt: new Date(row.updated_at as string).toISOString(),
     aiDrafted: Boolean(row.ai_drafted),
@@ -388,8 +421,11 @@ export async function listSops(pool: pg.Pool, opts: { departmentSlug?: string; s
   }
   const where = clauses.length ? `WHERE ${clauses.join(" AND ")}` : "";
   const r = await pool.query(
-    `SELECT s.*, u.name AS owner_name FROM siya_sops s
-     JOIN hipaa_training_users u ON u.id = s.owner_user_id ${where}
+    `SELECT s.*, u.name AS owner_name, approver.name AS approved_by_name, approver.role AS approved_by_role
+     FROM siya_sops s
+     JOIN hipaa_training_users u ON u.id = s.owner_user_id
+     LEFT JOIN hipaa_training_users approver ON approver.id = s.approved_by
+     ${where}
      ORDER BY s.updated_at DESC`,
     params,
   );
@@ -399,9 +435,11 @@ export async function listSops(pool: pg.Pool, opts: { departmentSlug?: string; s
 export async function listSopsForRetrieval(pool: pg.Pool): Promise<SopRecord[]> {
   await refreshExpiredLiveSops(pool);
   const r = await pool.query(
-    `SELECT s.*, u.name AS owner_name FROM siya_sops s
+    `SELECT s.*, u.name AS owner_name, approver.name AS approved_by_name, approver.role AS approved_by_role
+     FROM siya_sops s
      JOIN hipaa_training_users u ON u.id = s.owner_user_id
-     WHERE s.status IN ('live', 'pending_review', 'needs_review')
+     LEFT JOIN hipaa_training_users approver ON approver.id = s.approved_by
+     WHERE s.status IN ('live', 'draft_live')
      ORDER BY s.updated_at DESC`,
   );
   return r.rows.map(rowToSop);
@@ -409,8 +447,11 @@ export async function listSopsForRetrieval(pool: pg.Pool): Promise<SopRecord[]> 
 
 export async function getSop(pool: pg.Pool, id: string): Promise<SopRecord | null> {
   const r = await pool.query(
-    `SELECT s.*, u.name AS owner_name FROM siya_sops s
-     JOIN hipaa_training_users u ON u.id = s.owner_user_id WHERE s.id = $1`,
+    `SELECT s.*, u.name AS owner_name, approver.name AS approved_by_name, approver.role AS approved_by_role
+     FROM siya_sops s
+     JOIN hipaa_training_users u ON u.id = s.owner_user_id
+     LEFT JOIN hipaa_training_users approver ON approver.id = s.approved_by
+     WHERE s.id = $1`,
     [id],
   );
   if (!r.rows[0]) return null;
@@ -497,21 +538,25 @@ export async function createSop(
   const slug = departmentToSlug(dept);
   void role; // open create: any authenticated staff
   const id = `sop-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+  const title = body.title.slice(0, 500);
+  const text = (body.body ?? "").slice(0, 50000);
+  const tier = inferSopRiskTier(dept, title, text);
   const r = await pool.query(
     `INSERT INTO siya_sops
-      (id, department_slug, department_label, title, body, keywords, status, owner_user_id, review_date, half_life_days, ai_drafted)
-     VALUES ($1,$2,$3,$4,$5,$6::jsonb,'draft',$7,$8,$9,$10) RETURNING *`,
+      (id, department_slug, department_label, title, body, keywords, status, owner_user_id, review_date, half_life_days, ai_drafted, risk_tier)
+     VALUES ($1,$2,$3,$4,$5,$6::jsonb,'draft',$7,$8,$9,$10,$11) RETURNING *`,
     [
       id,
       slug,
       dept,
-      body.title.slice(0, 500),
-      (body.body ?? "").slice(0, 50000),
+      title,
+      text,
       JSON.stringify(body.keywords ?? []),
       userId,
       body.reviewDate?.slice(0, 10) ?? null,
       body.halfLifeDays ?? 365,
       Boolean(body.aiDrafted),
+      tier,
     ],
   );
   const owner = await pool.query(`SELECT name FROM hipaa_training_users WHERE id = $1`, [userId]);
@@ -541,6 +586,9 @@ export async function updateSop(
   const sop = await getSop(pool, id);
   if (!sop) throw new Error("SOP not found");
   await assertCanEditSop(pool, userId, role, sop);
+  const nextTitle = patch.title?.slice(0, 500) ?? sop.title;
+  const nextBody = patch.body !== undefined ? patch.body.slice(0, 50000) : sop.body;
+  const tier = inferSopRiskTier(sop.department, nextTitle, nextBody);
   const r = await pool.query(
     `UPDATE siya_sops SET
       title = COALESCE($2, title),
@@ -548,6 +596,7 @@ export async function updateSop(
       keywords = COALESCE($4::jsonb, keywords),
       review_date = COALESCE($5, review_date),
       half_life_days = COALESCE($6, half_life_days),
+      risk_tier = $7,
       updated_at = NOW()
      WHERE id = $1 RETURNING *`,
     [
@@ -557,6 +606,7 @@ export async function updateSop(
       patch.keywords ? JSON.stringify(patch.keywords) : null,
       patch.reviewDate?.slice(0, 10) ?? null,
       patch.halfLifeDays ?? null,
+      tier,
     ],
   );
   return rowToSop({ ...r.rows[0], owner_name: sop.ownerName });
@@ -566,10 +616,32 @@ export async function submitSopForReview(pool: pg.Pool, userId: string, role: st
   const sop = await getSop(pool, id);
   if (!sop) throw new Error("SOP not found");
   await assertCanEditSop(pool, userId, role, sop);
+  const tier = inferSopRiskTier(sop.department, sop.title, sop.body);
+  const slug = departmentToSlug(sop.department);
+  const isLead = await isLeadForDepartment(pool, userId, slug);
+  const selfPublishDraftLive = tier === 1 && (isLead || role === "admin");
+
+  if (selfPublishDraftLive) {
+    const r = await pool.query(
+      `UPDATE siya_sops SET
+         status = 'draft_live', risk_tier = $2, submitted_at = NOW(),
+         approved_at = NOW(), approved_by = $3, reviewer_comment = NULL, updated_at = NOW()
+       WHERE id = $1 RETURNING *`,
+      [id, tier, userId],
+    );
+    const approver = await pool.query(`SELECT name, role FROM hipaa_training_users WHERE id = $1`, [userId]);
+    return rowToSop({
+      ...r.rows[0],
+      owner_name: sop.ownerName,
+      approved_by_name: approver.rows[0]?.name ?? null,
+      approved_by_role: approver.rows[0]?.role ?? null,
+    });
+  }
+
   const r = await pool.query(
-    `UPDATE siya_sops SET status = 'pending_review', submitted_at = NOW(), reviewer_comment = NULL, updated_at = NOW()
+    `UPDATE siya_sops SET status = 'pending_review', risk_tier = $2, submitted_at = NOW(), reviewer_comment = NULL, updated_at = NOW()
      WHERE id = $1 RETURNING *`,
-    [id],
+    [id, tier],
   );
   return rowToSop({ ...r.rows[0], owner_name: sop.ownerName });
 }
@@ -581,12 +653,20 @@ export async function approveSop(pool: pg.Pool, approverUserId: string, id: stri
   const role = await getUserRole(pool, approverUserId);
   const allowed = await canUserApproveSop(pool, approverUserId, role, departmentToSlug(sop.department));
   if (!allowed) throw new Error("Not authorized to approve this SOP");
+  const tier = inferSopRiskTier(sop.department, sop.title, sop.body);
+  const nextStatus = tier === 1 ? "draft_live" : "live";
   const r = await pool.query(
-    `UPDATE siya_sops SET status = 'live', approved_at = NOW(), approved_by = $2, reviewer_comment = NULL, updated_at = NOW()
+    `UPDATE siya_sops SET status = $3, risk_tier = $4, approved_at = NOW(), approved_by = $2, reviewer_comment = NULL, updated_at = NOW()
      WHERE id = $1 RETURNING *`,
-    [id, approverUserId],
+    [id, approverUserId, nextStatus, tier],
   );
-  return rowToSop({ ...r.rows[0], owner_name: sop.ownerName });
+  const approver = await pool.query(`SELECT name, role FROM hipaa_training_users WHERE id = $1`, [approverUserId]);
+  return rowToSop({
+    ...r.rows[0],
+    owner_name: sop.ownerName,
+    approved_by_name: approver.rows[0]?.name ?? null,
+    approved_by_role: approver.rows[0]?.role ?? null,
+  });
 }
 
 export async function sendBackSop(
@@ -724,7 +804,7 @@ export async function listMyLeadDepartments(pool: pg.Pool, userId: string): Prom
 /** Move live SOPs past half-life into needs_review (Knowledge layer refresh). */
 export async function refreshExpiredLiveSops(pool: pg.Pool): Promise<void> {
   const r = await pool.query(
-    `SELECT id, approved_at, created_at, half_life_days FROM siya_sops WHERE status = 'live'`,
+    `SELECT id, approved_at, created_at, half_life_days FROM siya_sops WHERE status IN ('live', 'draft_live')`,
   );
   for (const row of r.rows) {
     const anchor = row.approved_at ?? row.created_at;

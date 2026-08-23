@@ -29,7 +29,7 @@ Multiple legacy ingests disagree. Staff and the assistant must **not** pick a si
 
 | Topic | Conflict |
 |-------|----------|
-| Front-end offer | Discovery **$79** vs site **$149** eval vs neuro-assessment **$149** bundle in draft GTM |
+| Front-end offer | **Resolved 2026-08-19:** intro is **free Meet & Greet**; paid visit is **$149 Initial Evaluation** (separate). Discovery **$79** is retired. Remaining conflict: draft GTM neuro-assessment **$149** bundle vs public eval — escalate, do not quote the bundle. |
 | Intake | **$199** with $79 credit vs **$149** initial evaluation on site |
 | Membership | **$69/mo** draft vs **$79 / $149** public follow-up |
 | No-show | **$40** vs **$79** vs full appointment fee |

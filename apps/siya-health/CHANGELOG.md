@@ -15,6 +15,15 @@ Every **real** fix that ships (or was believed to ship) for `apps/siya-health` g
 |--------|------|-------|--------|
 | 2026-08-16 | Wendy Delgado license numbers for **TX, PA, FL** | Founder confirmed all four states are real. Stash/SoT only has CA license number `20963`. Source numbers from credentialing records and add to `internal-provider-records.mjs` — **not** a deploy blocker tonight | `open` |
 | 2026-08-16 | `/adhd-screening-results` outcome UI | Untracked `adhd-screening-results.js` + live HTML still old multi-card layout; needs matching HTML+JS commit | `WIP needs redo` |
+| 2026-08-17 | Promote phone-first **core** audit into hard smoke (non-Ads) | Bar + `CORE_PAGES` shipped; run `phone:audit` then decide which failures become merge/deploy blockers | `open` |
+
+---
+
+## 2026-08-17
+
+| Date | Commit | What | Why | Verify | Status |
+|------|--------|------|-----|--------|--------|
+| 2026-08-17 | _(local)_ | Phone-first bar + `CORE_PAGES` (`docs/PHONE-FIRST.md`, `data/phone-first-core.mjs`); `phone:audit` uses core set | Ship mobile as default; don’t Lighthouse the whole sitemap | Run `npm run phone:audit` on prod | `committed` when hashed |
 
 ---
 
@@ -24,7 +33,7 @@ Every **real** fix that ships (or was believed to ship) for `apps/siya-health` g
 
 | Date | Commit | What | Why | Verify | Status |
 |------|--------|------|-----|--------|--------|
-| 2026-08-16 | `b1984aa` | Promote Natasha (TX/FL/PA + NPI + education) and Wendy (CA/TX/PA/FL + generalist ADHD/women’s/weight/primary/telehealth + adhd-care roster) from `stash@{0}` → SoT; ads LPs inject care team from canonical; `validate-deploy-clean-tree` gate | End stash-only / dirty-tree reversion cycle; ads cards must match SoT | Clean-tree gate + live Playwright/Lighthouse ads smoke after deploy | `committed` → upgrade to `committed+live` after smoke |
+| 2026-08-16 | `b1984aa` (+ `cd5ac3a` / `f69fa05` / `1f5fbf7`) | Promote Natasha (TX/FL/PA + NPI + education) and Wendy (CA/TX/PA/FL + generalist ADHD/women’s/weight/primary/telehealth + adhd-care roster) from `stash@{0}` → SoT; ads LPs inject care team from canonical; `validate-deploy-clean-tree` gate | End stash-only / dirty-tree reversion cycle; ads cards must match SoT | Prod deploy `dpl_9kkrprQo8Xva1ZuKewkqJjTLSubW` → `www.siya.health`; `smoke-ads-landing-live` PASS (chromium+webkit + Lighthouse); live DOM: TX = Sneh/Natasha(`TX,FL,PA`)/Wendy(`CA,TX,PA,FL`); CA = Sneh/Wendy (no Natasha); `$149`/`$79` present | `committed+live` |
 
 ### Earlier commits on main (git log)
 

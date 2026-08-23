@@ -35,7 +35,7 @@ Canonical behavior for **Siya Helpdesk (Internal)** — workforce chat at the wo
 
 ## FAQ
 
-**What pricing do staff quote?** Public site: **$149** initial eval; **$79/mo** or **$149/mo** follow-up. Legacy $79 discovery / conflicting drafts → escalate Billing lead or CEO; do not guess.
+**What pricing do staff quote?** **Meet & Greet is free** (sole intro). Then public site: **$149** initial evaluation; **$79/mo** or **$149/mo** follow-up. Discovery Call $79 is retired — never quote it. Other legacy drafts ($199 intake, Bronze, etc.) → escalate Billing lead or CEO.
 
 **Reimbursement SOP?** If no live Accounts topic, say missing and notify Accounts owner.
 

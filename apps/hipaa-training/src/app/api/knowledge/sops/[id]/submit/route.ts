@@ -22,6 +22,7 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
       id: string;
       title: string;
       department: string;
+      status?: string;
       ownerName: string | null;
     };
     notify?: {
@@ -42,6 +43,8 @@ export async function POST(req: Request, ctx: { params: Promise<{ id: string }> 
   try {
     if (!data.sop) {
       email = { sent: false, error: "no_sop_in_response" };
+    } else if (data.sop.status === "draft_live") {
+      email = { sent: true, to: [] };
     } else {
       console.info("[sop-submit] firing review notify", {
         sopId: data.sop.id,

@@ -18,6 +18,10 @@ keywords:
   - follow-up
   - controlled substance
   - medication not received
+  - video pill count
+  - pill count
+  - CSA v2
+  - Day 10-15
 escalate: Provider / clinical lead
 priority: 14
 revision:
@@ -98,4 +102,4 @@ Do not invent med-break schedules — follow chart/note.
 
 ## AI Context
 
-Retrieve for refill / pharmacy / early refill / med-not-received staff questions. Prefer escalation rules and approved timing language. Do **not** invent reinstatement, travel exceptions, or fee waivers. Full controlled-substance staff playbook remains a Clinical Program build item.
+Retrieve for refill / pharmacy / early refill / med-not-received / **video pill count** staff questions. Prefer Day 10–15 CSA cadence and escalation rules. Do **not** invent reinstatement, travel exceptions, fee waivers, or a generic appointment-scheduler workflow for pill counts.

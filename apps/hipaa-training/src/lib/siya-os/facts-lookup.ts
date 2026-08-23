@@ -202,14 +202,15 @@ function matchMeetGreetPrice(q: string): FactsLookupHit | null {
   const row = lookupPricing("meetGreet")!;
   const asksLegacyDiscovery = /discovery\s*call/.test(lower);
   const discontinued = asksLegacyDiscovery
-    ? " The old paid Discovery Call product was **discontinued on 2026-08-06** and replaced by free Meet & Greet — do not quote legacy Discovery Call fees for intros."
+    ? " Staff may still say **Discovery Call** — that paid $79 / $10+$69 product is **retired**. The current intro is **Meet & Greet**, which is free. Do not quote $79, $10, $69, or $150 for this step."
     : "";
 
   const message = [
-    `**${row.label}** is **${row.display}**${row.period ? ` ${row.period}` : ""} (amount **$${row.amount}**).`,
+    `**${row.label}** is **${row.display}** — no deposit, no invoice, no visit fee.`,
     row.description,
+    "It is not the **$149 Initial Evaluation** (that is a separate paid clinician visit if they continue).",
     discontinued,
-    "Canonical amount comes from the public site pricing standards (Meet & Greet SKU).",
+    "Canonical source: live siya.health homepage + /pricing (Meet & Greet SKU).",
   ]
     .filter(Boolean)
     .join(" ");

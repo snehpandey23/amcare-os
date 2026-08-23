@@ -11,6 +11,7 @@ import {
   type SopBuilderSessionRecord,
 } from "@/lib/sop-builder-api";
 import type { SopRecord } from "@/lib/sop-types";
+import { SOP_RISK_TIER_LABEL, inferSopRiskTier } from "@/lib/sop-types";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
 import {
   portalH1,
@@ -167,14 +168,18 @@ export function SopReviewPanel() {
                 </li>
               );
             })}
-            {queue.map((sop) => (
+            {queue.map((sop) => {
+              const tier = sop.riskTier ?? inferSopRiskTier(sop.department, sop.title, sop.body);
+              const approveLabel = tier === 1 ? "Publish as active draft" : "Approve → Live";
+              return (
               <li key={sop.id} className="rounded-xl border border-[var(--siya-border)] bg-white p-4">
                 <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--siya-accent)]">
-                  Policy SOP · {sop.department}
+                  Policy SOP · {sop.department} · {SOP_RISK_TIER_LABEL[tier]}
                 </p>
                 <h3 className="mt-1 font-semibold text-[var(--siya-primary)]">{sop.title}</h3>
                 <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
                   {sop.ownerName || "Author"} · submitted {sop.submittedAt?.slice(0, 10) || "—"}
+                  {sop.approvedByName ? ` · last approved by ${sop.approvedByName}` : ""}
                 </p>
                 <pre className="mt-3 max-h-48 overflow-y-auto whitespace-pre-wrap rounded-lg bg-[var(--siya-bg-subtle)] p-3 text-xs text-[var(--siya-text-secondary)]">
                   {sop.body.slice(0, 4000)}
@@ -192,7 +197,7 @@ export function SopReviewPanel() {
                     className={trainingLinkPrimaryClass}
                     onClick={() => void onApprove(sop.id)}
                   >
-                    Approve → Live
+                    {approveLabel}
                   </button>
                   {sendBackId === sop.id ? (
                     <div className="flex w-full flex-wrap items-end gap-2">
@@ -228,7 +233,8 @@ export function SopReviewPanel() {
                   )}
                 </div>
               </li>
-            ))}
+              );
+            })}
           </ul>
         )}
       </section>

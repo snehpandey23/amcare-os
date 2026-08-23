@@ -158,24 +158,39 @@ async function checkAssets(urls) {
   return results;
 }
 
-function runLighthouse(pageUrl) {
-  const outPath = path.join(OUT_DIR, `${RUN_ID}-lh-${Buffer.from(pageUrl).toString('base64url').slice(0, 24)}.json`);
-  const args = [
-    'lighthouse',
-    pageUrl,
-    '--only-categories=performance',
-    '--form-factor=mobile',
-    '--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage',
-    '--output=json',
-    `--output-path=${outPath}`,
-    '--quiet',
-  ];
-  const res = spawnSync('npx', ['--yes', 'lighthouse@12.2.1', ...args.slice(1)], {
-    cwd: SITE_ROOT,
-    encoding: 'utf8',
-    timeout: 180000,
-    env: { ...process.env, CI: '1' },
-  });
+function isTransientLighthouseError(message) {
+  const m = String(message || '').toLowerCase();
+  return (
+    m.includes('unable to connect to chrome') ||
+    m.includes('econnrefused') ||
+    m.includes('chrome failed to start') ||
+    m.includes('timed out') ||
+    m.includes('protocol error') ||
+    m.includes('browser has disconnected')
+  );
+}
+
+function runLighthouseOnce(pageUrl, outPath) {
+  const res = spawnSync(
+    'npx',
+    [
+      '--yes',
+      'lighthouse@12.2.1',
+      pageUrl,
+      '--only-categories=performance',
+      '--form-factor=mobile',
+      '--chrome-flags=--headless --no-sandbox --disable-dev-shm-usage',
+      '--output=json',
+      `--output-path=${outPath}`,
+      '--quiet',
+    ],
+    {
+      cwd: SITE_ROOT,
+      encoding: 'utf8',
+      timeout: 180000,
+      env: { ...process.env, CI: '1' },
+    },
+  );
   if (res.status !== 0 || !fs.existsSync(outPath)) {
     return {
       ok: false,
@@ -197,6 +212,37 @@ function runLighthouse(pageUrl) {
     reportPath: outPath,
     fetchTime: report.fetchTime || null,
   };
+}
+
+/** Retry Chrome connect flakes common on GHA (first LP often fails while later LPs pass). */
+function runLighthouse(pageUrl) {
+  const outPath = path.join(OUT_DIR, `${RUN_ID}-lh-${Buffer.from(pageUrl).toString('base64url').slice(0, 24)}.json`);
+  const maxAttempts = Number.parseInt(process.env.ADS_SMOKE_LH_RETRIES || '3', 10) || 3;
+  let last = null;
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    if (fs.existsSync(outPath)) {
+      try {
+        fs.unlinkSync(outPath);
+      } catch {
+        /* ignore */
+      }
+    }
+    last = runLighthouseOnce(pageUrl, outPath);
+    if (last.ok) {
+      if (attempt > 1) {
+        console.log(`  lighthouse retry ok on attempt ${attempt}/${maxAttempts}`);
+      }
+      return last;
+    }
+    if (!isTransientLighthouseError(last.error) || attempt === maxAttempts) {
+      return last;
+    }
+    console.log(
+      `  lighthouse transient failure (attempt ${attempt}/${maxAttempts}): ${String(last.error).slice(0, 120)} — retrying…`,
+    );
+    spawnSync('sleep', [String(2 * attempt)], { stdio: 'ignore' });
+  }
+  return last;
 }
 
 async function playwrightChecks(pagePath, kind, browserName = 'chromium') {

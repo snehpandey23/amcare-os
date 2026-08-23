@@ -1,5 +1,10 @@
 -- Ask telemetry for Executive Workspace (Knowledge Health) + lead gap digests.
 -- Never store verbatim question text here — department + task_label only.
+--
+-- Production bootstrap lives in assist-telemetry.ts (ensureAssistTelemetryTables).
+-- Do not run the department_slug index from this file against an older table:
+-- CREATE TABLE IF NOT EXISTS is a no-op, then CREATE INDEX ON department_slug fails (42703)
+-- before ALTER ADD COLUMN can run.
 
 CREATE TABLE IF NOT EXISTS siya_assist_gaps (
   id TEXT PRIMARY KEY,

@@ -40,6 +40,7 @@ export async function POST(req: Request) {
 
   const url = new URL(req.url);
   const weekQ = url.searchParams.get("weekStart");
+  const dryRun = url.searchParams.get("dryRun") === "1";
   const qs = weekQ && /^\d{4}-\d{2}-\d{2}$/.test(weekQ) ? `?weekStart=${weekQ}` : "";
 
   const listRes = await fetch(`${base}/api/internal/lead-gap-digests${qs}`, {
@@ -56,6 +57,21 @@ export async function POST(req: Request) {
   }
 
   const digests = listData.digests ?? [];
+  if (dryRun) {
+    return Response.json({
+      ok: true,
+      dryRun: true,
+      weekStart: listData.weekStart,
+      digestCount: digests.length,
+      totalGaps: digests.reduce((n, d) => n + d.gaps.length, 0),
+      departments: [...new Set(digests.flatMap((d) => d.departments))],
+      gaps: digests.flatMap((d) => d.gaps),
+      honestyNote:
+        listData.honestyNote ||
+        "Open Notify owner gaps only (category + task label). Emails omitted. No Resend send; digest_sends not marked.",
+    });
+  }
+
   const results: { email: string; sent: boolean; error?: string; gapCount: number }[] = [];
 
   for (const d of digests) {

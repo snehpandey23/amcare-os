@@ -1331,6 +1331,10 @@ export function stripExistingMetaPixel(html) {
     /<noscript>\s*<img[^>]*facebook\.com\/tr\?[^>]*>\s*<\/noscript>\s*/gi,
     '',
   );
+  html = html.replace(
+    /<!--\s*Meta Pixel noscript\s*-->[\s\S]*?<!--\s*End Meta Pixel noscript\s*-->\s*/gi,
+    '',
+  );
   return html;
 }
 

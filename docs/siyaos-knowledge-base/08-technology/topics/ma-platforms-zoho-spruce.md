@@ -20,6 +20,9 @@ keywords:
   - patient messaging
   - access
   - EHR
+  - Zoho access
+  - new hire access
+  - Spruce notifications
 escalate: Technology / supervisor
 priority: 11
 revision:
@@ -105,8 +108,10 @@ Company Memory path: `Common Folder/SiyaOS/` (team KB — separate from patient 
 
 **How do I request new system access?** Not documented in this topic. Escalate Technology / supervisor. Do not invent provisioning steps.
 
+**Spruce notifications don't show when I'm in another app. What's the workaround?** Field notes do **not** document an OS-level background-notification workaround. Keep the Spruce window/tab in the **foreground during shift** so patient messages are not missed. If that still fails, escalate Technology — do **not** invent iOS/Android/browser notification settings.
+
 **Can I put PHI in Zoho Mail or Cliq?** No. Patient PHI stays in approved clinical tools; WorkDrive/TrueSync hygiene rules above for files.
 
 ## AI Context
 
-Retrieve for Zoho / Spruce how-to and PHI channel rules. For “I can’t log in” or access provisioning, escalate Technology — do not invent access workflows.
+Retrieve for Zoho / Spruce how-to and PHI channel rules. For “I can’t log in” or access provisioning, say access is **not documented** and escalate Technology — do not invent access workflows. For Spruce notification / another-app questions, use the honest workaround FAQ — do **not** dump the PHI-in-Ask law.

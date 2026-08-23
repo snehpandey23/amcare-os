@@ -1,107 +1,115 @@
 ---
 id: discovery-call-staff-billing
 module: 11-operations
-title: Discovery Call — staff billing, cancel, and no-show
+title: Meet & Greet — free intro (Discovery Call retired)
 status: live
-owner: Billing lead
+owner: Billing lead · Clinical Program
 confidence: official
 reviewDate: 2026-11-01
-supersedes: none
+supersedes: Discovery Call $79 / $10+$69 billing model
 kind: topic
 bot_retrieve: true
 keywords:
-  - Discovery Call
   - Meet and Greet
-  - no-show
-  - cancellation
-  - refund
+  - Meet & Greet
+  - Discovery Call
+  - intro consult
+  - free intro
   - Carepatron
   - Spruce
   - patientsupport
-  - $79
-  - $10
 escalate: Billing lead
 priority: 12
 revision:
+  - date: 2026-08-19
+    author: Founder confirmation
+    note: Retired Discovery Call $79 / $10+$69. Meet & Greet is the sole intro offering — free, no invoice. Paid evaluation is a separate product ($149).
   - date: 2026-08-04
     author: Siya Assist ingest
-    note: Structured from WorkDrive accounts/discovery-call-staff-quick-reference.md + discovery-call-terms-and-conditions.md (no rewrite)
+    note: Structured from WorkDrive accounts/discovery-call-staff-quick-reference.md + discovery-call-terms-and-conditions.md (superseded)
 sources:
-  - WorkDrive SiyaOS/accounts/discovery-call-staff-quick-reference.md
-  - WorkDrive SiyaOS/accounts/discovery-call-terms-and-conditions.md
+  - https://siya.health/ (How care usually unfolds · Meet & Greet)
+  - https://siya.health/pricing
+  - https://siya.health/redirect/meet-greet
+  - docs/siyaos-knowledge-base/decisions/siya-decisions-seed.json (meet-greet-replaced-discovery-call)
 links:
-  - label: Memory · SOPs
-    href: /memory/knowledge/sops
+  - label: Public pricing
+    href: https://siya.health/pricing
+  - label: Book Meet & Greet
+    href: https://siya.health/redirect/meet-greet
 ---
 
 ## Overview
 
-Staff cheat sheet for **Siya Health Discovery Call** billing and attendance (also related to site “Meet & Greet” naming — align SKUs separately). Support email: **patientsupport@siya.health**. This topic is for **Discovery Call only** — not full ADHD evaluation / CSV / Klarity-booked visits (use Klarity topics for Klarity).
+The patient’s first step is a **free Meet & Greet**. There is **no deposit, invoice, or visit fee** for this call. Book it from the public CTA (**Book Free Meet & Greet**), which goes to Carepatron.
+
+The paid **Discovery Call ($79 = $10 + $69)** product is **retired**. Do not quote those amounts. Do not send an invoice for a Meet & Greet.
+
+This topic is **only** the free intro. The paid **Initial Evaluation ($149 one-time)** is a different visit — see `patient-pricing-public-canonical` and `patient-faq-adhd-evaluation-included`. Do not blend Meet & Greet and evaluation into one fee or one workflow.
+
+Support email: **patientsupport@siya.health**. Klarity-booked paid visits use Klarity billing topics.
 
 ## Why
 
-Concierge and MAs must apply Discovery Call fee rules without waiving fees in chat or inventing refunds.
+Staff were still retrieving the old Discovery Call fee table. Founder confirmation (2026-08-19): Meet & Greet is the sole current intro offering.
 
 ## SOP
+
+### What it is (public site)
+
+From siya.health (verified 2026-08-19):
+
+- **Meet & Greet** — free conversation to understand what’s going on — often available within 48 hours. No label required.
+- **Not** a medical visit, diagnosis, or treatment recommendation. **No medication** on this call.
+- Booking copy: short, free call to understand needs, explain care options (including labs interpretation when relevant), and help choose the next step.
 
 ### Money
 
 | Item | Amount |
 |------|--------|
-| Total | $79 |
-| At booking (non-refundable) | $10 |
-| Due ≥1 h before visit | $69 |
+| Meet & Greet | **Free** — $0. No deposit. No invoice. |
 
-From Terms: remaining **$69** must be paid at least **1 hour before** the appointment. Covers an **initial evaluation and management visit only** — not emergency care. **No controlled medications** prescribed on this visit.
+If a patient asks about cost for the *first* conversation: **it is free**. If they ask about seeing a clinician for evaluation/treatment: that is the **$149 Initial Evaluation**, a separate paid visit (not this SOP).
 
-### Refunds / cancel (staff language — no promises)
+### Booking
 
-- **$10:** never refunded.
-- **$69:** refunded if patient cancels **≥24 h** before; kept if **<24 h** (patient charged full $79).
-- **Exceptions:** Billing lead only — document and escalate.
+1. Direct patients to **Book Free Meet & Greet** on siya.health (`/redirect/meet-greet` → Carepatron).
+2. Confirm the booking in Carepatron. Send a Spruce confirmation (date, time, Carepatron link). Intake for a Meet & Greet is **not** a paid-visit intake — do not treat missing paid-eval forms as a reason to charge or cancel with a fee.
+3. Do **not** block the Klarity paid-visit calendar with this intro slot. Correct conflicts immediately.
 
-### No-show / late
+### Cancel / no-show / late
 
-- No-show → **$79 forfeited**.
-- **Late >5 min** from start → may be documented as no-show per provider (full $79).
-- **One** discretionary free reschedule possible (provider) — staff do **not** grant; ask supervisor/provider.
-- Rebook otherwise: **full upfront** per policy.
-- Arrive/log in **5–10 minutes early** for check-in (Terms).
+Because there is **no fee**, staff must **not** quote $10, $69, $79, or $150 for a missed Meet & Greet.
 
-### Tech issues
+- Patient cancels or no-shows: reschedule the free Meet & Greet. Do not invent a forfeit.
+- Repeat no-shows: escalate **Clinical Program Manager** — do not invent a penalty.
+- Late join: still a free non-clinical call; do not convert it into a billed evaluation.
+- Tech issues (patient or Siya): reschedule the free call. No refund conversation — nothing was charged.
 
-| Side | Action |
-|------|--------|
-| Patient (wifi, device, app) | Not Siya liability; no automatic refund — empathize, offer rebook per Billing |
-| Siya (platform/outage) | May free reschedule — escalate IT + Billing; email patientsupport |
+### After the call
 
-### Before call
-
-Intake + telehealth consent **required** or visit may cancel with fee forfeiture.
-
-### Clinical scope (set expectations)
-
-- Not emergency care.
-- **No controlled substances** prescribed on Discovery Call.
-- Further care = separate paid services.
-
-### Disputes
-
-- Chargebacks → patientsupport first.
-- “I was on the call” disputes → document times, Zoom/telehealth logs, chart → **Billing lead**.
+- If the patient wants clinical care: the next product is **Initial Evaluation ($149 one-time)** — a **separate** booking. Do **not** send a Meet & Greet invoice. Do **not** attach Creyos, CSA, or evaluation forms as a “step 2 of Discovery Call.” Those belong to the paid evaluation pathway when clinically appropriate.
+- If they are not ready: leave the door open; no charge.
 
 ### Do not
 
-- Waive $10 or $79 in chat.
-- Promise refund without Billing.
-- Give medical advice or prescribe.
+- Quote Discovery Call **$79 / $10 / $69**.
+- Send a **$150** (or any) invoice for Meet & Greet.
+- Promise medication, diagnosis, or that Creyos is included in the free call.
+- Apply Klarity $10 deposit rules to Meet & Greet.
+- Waive or invent fees in chat.
 
 ## FAQ
 
-**Is this the same as Klarity cancellation?** No. Klarity-booked visits use Klarity billing topics. Discovery Call uses this topic and patientsupport@siya.health.
+**Is Meet & Greet the same as the $149 evaluation?**  
+No. Meet & Greet is free and non-clinical. Evaluation is a paid clinician visit.
 
-**Can staff grant one free reschedule after a no-show?** No. Provider discretion only; staff escalate.
+**What if they say “Discovery Call”?**  
+Same product, old name. It is free now. Do not collect Discovery Call fees.
+
+**Is this the same as Klarity cancellation?**  
+No. Klarity-booked **paid** visits use Klarity billing topics. Meet & Greet has no invoice.
 
 ## AI Context
 
-Cite for Discovery Call / Meet & Greet billing and no-show only. Never promise refunds. Escalate Billing lead. Do not apply these dollar amounts to Klarity or full evaluation products.
+Meet & Greet = **free**, no invoice. Discovery Call $79 billing is retired. Paid care starts at **$149 Initial Evaluation** (separate topic). Never promise refunds or mix Klarity deposits into this intro.
