@@ -2,12 +2,18 @@
   "title": "Clinical & ops shortcuts",
   "subtitle": "External tools only — patient data stays in Spruce, Carepatron, Kiwi, and Zoho. Not part of your learning progress.",
   "workplacePrimary": [
-    { "label": "Zoho Workplace", "href": "https://workplace.zoho.com/", "note": "Mail, chat, docs" },
-    { "label": "Spruce", "href": "https://app.sprucehealth.com/", "note": "Patient messaging" },
-    { "label": "Kiwi EHR", "href": "https://ehr.kiwihealth.com/", "note": "Clinical chart" },
+    { "label": "Spruce", "href": "https://app.sprucehealth.com/", "note": "Patient messaging — PHI in Spruce only" },
+    { "label": "Klarity", "href": "https://provider.helloklarity.com/signin", "note": "Provider EHR / marketplace channel" },
     { "label": "Carepatron", "href": "https://app.carepatron.com/", "note": "Scheduling & chart" },
+    { "label": "Kiwi EHR", "href": "https://ehr.kiwihealth.com/", "note": "Legacy chart — prefer Klarity when assigned" },
     { "label": "Creyos", "href": "https://health.creyos.com/", "note": "Cognitive assessments" },
-    { "label": "Rupa Labs", "href": "https://labs.rupahealth.com/", "note": "Lab orders & results" }
+    { "label": "Rupa Labs", "href": "https://labs.rupahealth.com/", "note": "Lab orders & results" },
+    { "label": "Zoho Mail", "href": "https://mail.zoho.in/", "note": "Work email — no patient PHI" },
+    { "label": "Zoho Cliq", "href": "https://cliq.zoho.in/", "note": "Team chat — no patient PHI" },
+    { "label": "Zoho WorkDrive", "href": "https://workdrive.zoho.in/", "note": "Shared files & TrueSync" },
+    { "label": "Zoho Workplace", "href": "https://workplace.zoho.com/", "note": "Zoho hub (mail, chat, docs)" },
+    { "label": "HIPAA training", "href": "/training", "note": "Required HIPAA modules in this portal" },
+    { "label": "Learn & Practice", "href": "/learn", "note": "Drills, culture, typing — in-app" }
   ],
   "sections": [
     {

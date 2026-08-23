@@ -115,8 +115,8 @@ function main() {
   const creyos = runSiyaAssistant("where is creyos link");
   assert.ok(creyos.ruleFinal);
   assert.equal(creyos.knowledgeGap, false);
-  assert.ok(/health\.creyos\.com/i.test(creyos.message));
-  assert.ok(creyos.portalLinks?.some((l) => /creyos/i.test(l.href)));
+  assert.ok(creyos.portalLinks?.some((l) => /health\.creyos\.com/i.test(l.href)));
+  assert.ok(/Creyos|Open Creyos/i.test(creyos.message));
   assert.ok(!/right staff guide for that yet/i.test(creyos.message));
 
   const creyosEval = runSiyaAssistant("is creyos included in the evaluation");

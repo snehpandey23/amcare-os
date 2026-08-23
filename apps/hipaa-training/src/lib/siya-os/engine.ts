@@ -144,6 +144,26 @@ function metaConversationReply(
   };
 }
 
+function toolShortcutReply(text: string, task = "Tool bookmark"): SiyaReply | null {
+  const hit = tryWorkplaceLinkLookup(text);
+  if (!hit) return null;
+  return {
+    message: polishStaffMessage(hit.message),
+    chunks: [],
+    knowledgeGap: false,
+    sources: [{ title: `Workplace links · ${hit.label}`, id: "workplace-links" }],
+    portalLinks: hit.links,
+    escalationPreview: undefined,
+    ruleFinal: true,
+    routing: {
+      department: "Clinical Operations",
+      task: `${task} · ${hit.label}`,
+      confidence: "high",
+      followUpQuestions: [],
+    },
+  };
+}
+
 export async function runSiyaAssistantAsync(
   message: string,
   history: { role: string; content: string }[] = [],
@@ -159,6 +179,12 @@ export async function runSiyaAssistantAsync(
     founderCoach ? "Founder Talk — portal help" : "Portal help",
   );
   if (metaEarly) return metaEarly;
+
+  const toolEarly = toolShortcutReply(
+    message,
+    founderCoach ? "Founder Talk — tool bookmark" : "Tool bookmark",
+  );
+  if (toolEarly) return toolEarly;
 
   const opsIntent = token ? detectAdminOpsIntent(message) : null;
   if (token && opsIntent) {
@@ -431,24 +457,8 @@ function buildSiyaReply(
     };
   }
 
-  const workplaceLink = tryWorkplaceLinkLookup(text);
-  if (workplaceLink) {
-    return {
-      message: polishStaffMessage(workplaceLink.message),
-      chunks: [],
-      knowledgeGap: false,
-      sources: [{ title: `Workplace links · ${workplaceLink.label}`, id: "workplace-links" }],
-      portalLinks: workplaceLink.links,
-      escalationPreview: undefined,
-      ruleFinal: true,
-      routing: {
-        department: "Clinical Operations",
-        task: `${workplaceLink.label} portal`,
-        confidence: "high",
-        followUpQuestions: [],
-      },
-    };
-  }
+  const toolShortcut = toolShortcutReply(text);
+  if (toolShortcut) return toolShortcut;
 
   const sopChrome = trySopChromeLookup(text);
   if (sopChrome) {
