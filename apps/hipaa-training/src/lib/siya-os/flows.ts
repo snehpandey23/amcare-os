@@ -131,7 +131,16 @@ const FLOWS: {
     id: "hr-general",
     department: "HR",
     task: "People policy or onboarding",
-    patterns: [/onboard/i, /leave/i, /pto/i, /holiday/i, /performance review/i, /hr/i],
+    patterns: [
+      /onboard/i,
+      /leave/i,
+      /pto/i,
+      /holiday/i,
+      /performance review/i,
+      // Bare "HR" alone is too greedy for org-chart asks ("clinical HR and IT leads").
+      /\bhr\b(?![\s\S]{0,40}\bleads?\b)/i,
+      /\bpeople\s+(policy|ops|team)\b/i,
+    ],
     followUpQuestions: ["Are you a contractor or employee?", "Which country / timezone?", "Who is your supervisor?"],
     retrievalBoost: ["hr", "onboarding", "contractor", "SOW"],
   },

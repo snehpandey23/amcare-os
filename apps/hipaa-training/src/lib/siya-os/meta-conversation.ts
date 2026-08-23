@@ -180,9 +180,9 @@ const PLAN_RECORD = [
 ].join("\n");
 
 const COMPANY_BOSS = [
-  "I don’t publish a live **org chart** in chat, and I won’t invent who “the boss” is.",
+  "I don’t publish a live **org chart** in chat, and I won’t invent who the **clinical / HR / IT / billing leads** are.",
   "",
-  "Siya Health is **physician-led**. For day-to-day work, ask **who owns this task** (billing, clinical, HR, IT) and I’ll use approved escalation paths.",
+  "Siya Health is **physician-led**. For day-to-day work, ask **who owns this task** (billing, clinical, HR, IT) and I’ll use approved escalation paths — or check **Team** / your supervisor.",
   "If you meant **my** (Siya Assist) boss → I don’t have one; use **Notify owner** when a staff guide is missing.",
 ].join("\n");
 
@@ -415,7 +415,14 @@ const CASES: MetaCase[] = [
     test: (t) =>
       /^(who'?s|who\s+is)\s+the\s+boss\??\s*$/.test(t) ||
       /^(who'?s|who\s+is)\s+boss\??\s*$/.test(t) ||
-      /\bwho\s+is\s+in\s+charge\s+(here|at\s+siya)\b/.test(t),
+      /\bwho\s+is\s+in\s+charge\s+(here|at\s+siya)\b/.test(t) ||
+      /\borg\s*chart\b/.test(t) ||
+      /\bdepartment\s+leads?\b/.test(t) ||
+      /\b(tell me|who are|what are|list|about)\b[\s\S]{0,40}\b(clinical|hr|it|billing|tech(nology)?)\b[\s\S]{0,24}\bleads?\b/.test(
+        t,
+      ) ||
+      /\b(clinical|hr|it|billing)\b.{0,20}\band\b.{0,20}\b(hr|it|clinical|billing)\b.{0,20}\bleads?\b/.test(t) ||
+      /\bwho\s+(is|are)\s+(the\s+)?(clinical|hr|it|billing|technology)\s+leads?\b/.test(t),
     answer: COMPANY_BOSS,
   },
 
@@ -732,6 +739,12 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
   { id: "boss-escalate", text: "who is your boss", mustMatch: /don.?t have a personal boss|Notify owner/i, mustNot: /approved staff guide/i },
   { id: "boss-escalate", text: "can you escalate to your boss", mustMatch: /Notify owner|Siya Assist/i, mustNot: /HIPAA certification course/i },
   { id: "company-boss", text: "whos the boss", mustMatch: /org chart|physician-led|who owns/i, mustNot: /right staff guide for that yet/i },
+  {
+    id: "company-boss",
+    text: "okay tell me about clinical HR and IT leads",
+    mustMatch: /org chart|physician-led|who owns|clinical \/ HR \/ IT/i,
+    mustNot: /tool surprise|Concierge Specialist|Day-1 Orientation|Klarity.*Spruce/i,
+  },
   { id: "where-guides", text: "where are the right guide", mustMatch: /Memory|Ask|Practice/i, mustNot: /right staff guide for that yet/i },
   { id: "my-job", text: "whats my typical job", mustMatch: /job description|manager|workflow/i, mustNot: /right staff guide for that yet/i },
   {
