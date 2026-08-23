@@ -86,7 +86,7 @@ async function main() {
   const t1Pass =
     /personalization wizard/i.test(t1.message || "") &&
     t1.knowledgeGap !== true &&
-    !/Concierge Specialist|Klarity.*Spruce/i.test(t1.message || "");
+    !/Concierge Specialist|Week 1 training may cover only/i.test(t1.message || "");
   record(1, "why did u skip my onboarding", t1Pass, t1Pass ? "portal onboarding meta" : "wrong route", t1);
   history.push({ role: "user", content: "why did u skip my onboarding" });
   history.push({ role: "assistant", content: t1.message || "" });

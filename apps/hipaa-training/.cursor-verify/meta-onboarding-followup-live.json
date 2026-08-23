@@ -1,7 +1,8 @@
 {
-  "at": "2026-08-23T02:15:00Z",
+  "at": "2026-08-23T03:04:41.609Z",
   "staff": "https://siya-staff-assist.vercel.app",
-  "deploymentNote": "post dpl_FVed9T3azNDiy1dPExSiVDfSfaVP",
+  "gitCommit": "23efa26caadaf135a5e14f21f787f10322c8eaf2",
+  "deploymentNote": "post dpl_GKHNwLr5efKzTEg3Fn8ayyXSCYbu clean deploy from committed state",
   "surface": "founder-coach",
   "auth": "anonymous",
   "rows": [
@@ -10,24 +11,35 @@
       "message": "why did u skip my onboarding",
       "pass": true,
       "detail": "portal onboarding meta",
-      "messagePreview": "That's the **Siya staff portal personalization wizard** — not Medical Assistant Day-1 hire orientation or Klarity/Spruce training."
+      "messagePreview": "That’s the **Siya staff portal personalization wizard** — not Medical Assistant Day-1 hire orientation or Klarity/Spruce training.\n**Staff** see a **Personalize** link under the My day subtitle after onboarding. **Admins** on Founder Talk do not get that label today — use **Open onboarding** below (or in the URL bar).\n",
+      "knowledgeGap": false
     },
     {
       "turn": 2,
       "message": "i dont see personalize on my day",
       "pass": true,
-      "detail": "troubleshoot meta — not ops coach",
+      "detail": "troubleshoot meta",
+      "messagePreview": "You’re right — **Personalize is not on admin My day / Founder Talk** today. That link only appears on the **staff** My day header (under the subtitle).\nOpen the same wizard directly: tap **Open onboarding** below (or go to ). Name, assistant label, and training reminders work the same.",
       "opsCoPilot": false,
-      "links": [{ "label": "Open onboarding", "href": "/onboarding" }],
-      "messagePreview": "You're right — **Personalize is not on admin My day / Founder Talk** today. That link only appears on the **staff** My day header."
+      "links": [
+        {
+          "label": "Open onboarding",
+          "href": "/onboarding"
+        }
+      ]
     },
     {
       "turn": 3,
       "message": "cant u do the personalization now",
       "pass": true,
-      "detail": "action meta with clickable link — not verbatim repeat",
-      "links": [{ "label": "Open onboarding", "href": "/onboarding" }],
-      "messagePreview": "I can't run the personalization wizard inside chat — it's a short in-app form. Tap **Open onboarding** below to start now."
+      "detail": "action meta + link",
+      "messagePreview": "I can’t run the personalization wizard inside chat — it’s a short in-app form.\nTap **Open onboarding** below to start now (about two minutes): preferred name, assistant label, training reminders, then department and goals.",
+      "links": [
+        {
+          "label": "Open onboarding",
+          "href": "/onboarding"
+        }
+      ]
     }
   ],
   "passed": 3,
