@@ -58,7 +58,7 @@ export function isConfusedAboutPriorAnswer(text: string): boolean {
 
 /** Prior Assist turn flagged a missing guide / gap — staff asking how to contribute input. */
 const GAP_PRIOR_MARK =
-  /no approved guidance|don'?t have a (full )?approved guide|Notify owner|knowledge gap|not documented in|requires input from|recommended actions/i;
+  /no approved guidance|don'?t have a (full )?approved guide|Notify owner|knowledge gap|not documented in|requires input from|recommended actions|AI-assisted in the portal|SOP builder|AI interview/i;
 
 export function isGapContributionFollowUp(text: string, lastAssistant?: string | null): boolean {
   const t = text.trim();
