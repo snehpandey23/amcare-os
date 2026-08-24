@@ -112,6 +112,13 @@ function main() {
   const policySop = runSiyaAssistant("what is the refill SOP");
   assert.ok(!policySop.portalLinks?.some((l) => l.href.includes("sop-builder")));
 
+  const genAiSop = runSiyaAssistant("Tell me about how to use GEn AI for making SOP's");
+  assert.ok(genAiSop.ruleFinal);
+  assert.equal(genAiSop.knowledgeGap, false);
+  assert.ok(/AI-assisted|SOP builder|AI interview/i.test(genAiSop.message), genAiSop.message.slice(0, 200));
+  assert.ok(genAiSop.portalLinks?.some((l) => l.href.includes("sop-builder")));
+  assert.ok(!/no approved guidance|Compliance or Leadership/i.test(genAiSop.message));
+
   const creyos = runSiyaAssistant("where is creyos link");
   assert.ok(creyos.ruleFinal);
   assert.equal(creyos.knowledgeGap, false);
