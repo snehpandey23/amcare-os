@@ -10,6 +10,7 @@ Research → insight → pack → publish. Pipelines, QA, and brand alignment �
 |-------|-----|
 | Pre-publish content QA | `content-qa-checklist` |
 | Medical compliance in marketing | `medical-compliance-marketing` |
+| Video content research SOP (Reels) | `video-content-research-sop` |
 | Legacy Website / Social archive (background) | `legacy-website-social-archive` |
 
 ## Canonical repo sources
