@@ -83,8 +83,14 @@ Plum · brown ink · hard L · dense takeaway card · Canva template stacking ·
 
 `apps/siya-health/brand/statics/SPEC-PROOF-2026-08-10-v21/`
 
+## Full pack from blog (cloud)
+
+For “pick an uncovered ADHD spoke → carousel + captions + tracker”: use  
+[`CLOUD-AGENT-PACK-FROM-BLOG.md`](./CLOUD-AGENT-PACK-FROM-BLOG.md)  
+and git tracker `04-Content-Tracker/CLOUD-PACK-TRACKER.csv` — **not** Zoho WorkDrive (unavailable on cloud VMs).
+
 ## WorkDrive
 
 **Do not mirror this file as an editable second copy.**  
 Team pointer only (if needed): WorkDrive `00-Brand-System/CLOUD-AGENT-IMAGE-BRIEF.md` → “DO NOT EDIT · source = this git path.”  
-Git remains source of truth for the paste block.
+Git remains source of truth for the paste block. Optional desktop mirror after Phase 3 approval.
