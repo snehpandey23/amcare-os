@@ -1,19 +1,27 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { changePassword } from "@/lib/account-api";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { isPortalAdmin } from "@/lib/portal-role";
+import { requestPortalTourRerun } from "@/lib/portal-tour";
+import { portalBtnGhostSm, portalSection } from "@/lib/portal-ui";
 
 export function AccountPanel() {
   const { user } = useAuth();
+  const router = useRouter();
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+  const [tourNotice, setTourNotice] = useState<string | null>(null);
+
+  const isAdmin = isPortalAdmin(user?.role);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -53,6 +61,27 @@ export function AccountPanel() {
       </header>
 
       <ThemeToggle variant="account" />
+
+      {!isAdmin ? (
+        <section className={portalSection}>
+          <h2 className="text-sm font-semibold text-[var(--siya-primary)]">My day tour</h2>
+          <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+            Spotlight the real buttons, or let Assist walk you through — your choice each time.
+          </p>
+          <button
+            type="button"
+            className={`${portalBtnGhostSm} mt-3`}
+            onClick={() => {
+              requestPortalTourRerun();
+              setTourNotice("Opening My day…");
+              router.push("/");
+            }}
+          >
+            Show My day tour again
+          </button>
+          {tourNotice ? <p className="mt-2 text-xs text-[var(--siya-text-secondary)]">{tourNotice}</p> : null}
+        </section>
+      ) : null}
 
       <section className="rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-5">
         <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Change password</h2>

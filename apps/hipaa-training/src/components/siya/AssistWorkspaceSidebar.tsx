@@ -127,7 +127,12 @@ export function AssistWorkspaceSidebar({ onNavigate }: { onNavigate?: () => void
           </SideLink>
         ) : null}
         {user && !isPortalAdmin(user.role) ? (
-          <SideLink href="/team" active={path === "/team" || path.startsWith("/team/")} onNavigate={onNavigate}>
+          <SideLink
+            href="/team"
+            active={path === "/team" || path.startsWith("/team/")}
+            onNavigate={onNavigate}
+            tourId="team"
+          >
             Team
           </SideLink>
         ) : null}
@@ -146,14 +151,16 @@ function SideLink({
   active,
   children,
   onNavigate,
+  tourId,
 }: {
   href: string;
   active: boolean;
   children: string;
   onNavigate?: () => void;
+  tourId?: string;
 }) {
   return (
-    <span onClick={() => onNavigate?.()}>
+    <span onClick={() => onNavigate?.()} data-tour={tourId}>
       <PortalNavLink
         href={href}
         className={`block rounded-md px-2.5 py-1.5 text-[13px] ${active ? portalWorkspaceNavActive : portalWorkspaceNavIdle}`}

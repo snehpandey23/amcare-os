@@ -74,11 +74,11 @@ function ImportanceBadge({ level }: { level: MemoryImportance }) {
   );
 }
 
-function MemoryCard({ entry }: { entry: MemoryEntry }) {
+function MemoryCard({ entry, showMeta }: { entry: MemoryEntry; showMeta: boolean }) {
   return (
     <article className={portalCard}>
       <div className="flex flex-wrap items-center gap-2">
-        <ImportanceBadge level={entry.importance} />
+        {showMeta ? <ImportanceBadge level={entry.importance} /> : null}
         <span className="text-[10px] uppercase text-[var(--siya-text-muted)]">{entry.source.replace(/_/g, " ")}</span>
         {entry.department ? (
           <span className="text-[10px] text-[var(--siya-text-muted)]">· {entry.department}</span>
@@ -165,7 +165,7 @@ export function MemoryHub() {
 
   const tabItems = isAdmin ? ADMIN_TABS : STAFF_TABS;
 
-  if (!authReady) {
+  if (!authReady || !user) {
     return (
       <div className={portalPage}>
         <p className="text-sm text-[var(--siya-text-muted)]">Loading Memory…</p>
@@ -198,19 +198,7 @@ export function MemoryHub() {
         )}
       </header>
 
-      {isAdmin ? (
-        <KnowledgePipelineStrip />
-      ) : (
-        <details className={`${portalSectionSubtle} text-sm`}>
-          <summary className="cursor-pointer text-xs font-semibold text-[var(--siya-primary)]">
-            How this works
-          </summary>
-          <div className="mt-3 space-y-4 border-t border-[var(--siya-border)] pt-3">
-            <KnowledgePipelineStrip />
-            <ConstitutionPanel />
-          </div>
-        </details>
-      )}
+      {isAdmin ? <KnowledgePipelineStrip /> : null}
 
       <div className="flex flex-wrap gap-2 border-b border-[var(--siya-border)] pb-2">
         {tabItems.map(([id, label]) => (
@@ -226,24 +214,26 @@ export function MemoryHub() {
       </div>
 
       {isAdmin && tab === "way" ? <ConstitutionPanel /> : null}
-      {tab === "policies" ? <PoliciesPanel /> : null}
+      {tab === "policies" ? <PoliciesPanel showEditorialChrome={isAdmin} /> : null}
       {tab === "knowledge" ? <KnowledgePanel /> : null}
 
       {tab === "memory" ? (
         <>
-          <section className={portalSectionSubtle}>
-            <p className={`font-semibold ${portalH3}`}>Capture layer (L1–L3)</p>
-            <ul className="mt-2 space-y-1 text-xs text-[var(--siya-text-secondary)]">
-              {([1, 2, 3] as MemoryImportance[]).map((level) => (
-                <li key={level}>
-                  <strong>
-                    L{level} {IMPORTANCE_LABEL[level]}:
-                  </strong>{" "}
-                  {IMPORTANCE_HINT[level]}
-                </li>
-              ))}
-            </ul>
-          </section>
+          {isAdmin ? (
+            <section className={portalSectionSubtle}>
+              <p className={`font-semibold ${portalH3}`}>Capture layer (L1–L3)</p>
+              <ul className="mt-2 space-y-1 text-xs text-[var(--siya-text-secondary)]">
+                {([1, 2, 3] as MemoryImportance[]).map((level) => (
+                  <li key={level}>
+                    <strong>
+                      L{level} {IMPORTANCE_LABEL[level]}:
+                    </strong>{" "}
+                    {IMPORTANCE_HINT[level]}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
 
           {week && week.total > 0 ? (
             <section className={portalSection}>
@@ -286,14 +276,15 @@ export function MemoryHub() {
 
           <div className="space-y-4">
             {entries.map((e) => (
-              <MemoryCard key={e.id} entry={e} />
+              <MemoryCard key={e.id} entry={e} showMeta={isAdmin} />
             ))}
           </div>
 
           {!loading && entries.length === 0 ? (
             <p className="text-sm text-[var(--siya-text-muted)]">
-              No captures yet. End a shift with accomplishments, or save a helpful Ask answer — then promote to a decision when
-              it matters.
+              {isAdmin
+                ? "No captures yet. End a shift with accomplishments, or save a helpful Ask answer — then promote to a decision when it matters."
+                : "No captures yet. Useful Ask answers and end-of-shift notes show up here when saved."}
             </p>
           ) : null}
         </>

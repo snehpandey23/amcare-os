@@ -42,6 +42,7 @@ export function ShiftPresenceBar({ onEndShift }: { onEndShift?: () => void }) {
     return (
       <button
         type="button"
+        data-tour="shift"
         className="shrink-0 rounded-md px-2 py-1 text-[11px] text-[var(--siya-text-muted)] hover:bg-[var(--siya-white)] hover:text-[var(--siya-text)]"
         onClick={() => void startShift("morning")}
       >
@@ -62,7 +63,10 @@ export function ShiftPresenceBar({ onEndShift }: { onEndShift?: () => void }) {
 
   return (
     <>
-      <div className="flex max-w-none flex-nowrap items-center justify-end gap-0.5">
+      <div
+        data-tour="shift"
+        className="flex max-w-none flex-nowrap items-center justify-end gap-0.5"
+      >
         <span
           className="shrink-0 px-1.5 text-[11px] text-[var(--siya-text-muted)]"
           title="Self-declared — not detected from keyboard or mouse"
@@ -83,7 +87,7 @@ export function ShiftPresenceBar({ onEndShift }: { onEndShift?: () => void }) {
             Back to working
           </button>
         )}
-        <button type="button" className={btnClass()} onClick={() => setEndOpen(true)}>
+        <button type="button" data-tour="end-shift" className={btnClass()} onClick={() => setEndOpen(true)}>
           End shift
         </button>
       </div>

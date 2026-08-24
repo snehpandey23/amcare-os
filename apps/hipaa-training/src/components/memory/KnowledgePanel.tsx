@@ -6,7 +6,6 @@ import { useAuth } from "@/context/AuthContext";
 import { createDecision, fetchConstitution, fetchDecisionLineage, fetchDecisions } from "@/lib/knowledge-api";
 import { loadLocalPortalProfile } from "@/lib/portal-profile";
 import { isPortalAdmin } from "@/lib/portal-role";
-import { fetchSopContext } from "@/lib/sop-api";
 import type { ConstitutionEntry, DecisionRecord } from "@/lib/knowledge-types";
 import {
   portalBtnGhostSm,
@@ -22,7 +21,7 @@ import {
   portalStatusWarnText,
 } from "@/lib/portal-ui";
 
-function DecisionCard({ d }: { d: DecisionRecord }) {
+function DecisionCard({ d, showMeta }: { d: DecisionRecord; showMeta: boolean }) {
   const [lineageOpen, setLineageOpen] = useState(false);
   const [lineage, setLineage] = useState<Awaited<ReturnType<typeof fetchDecisionLineage>> | null>(null);
 
@@ -39,12 +38,16 @@ function DecisionCard({ d }: { d: DecisionRecord }) {
     <article className={portalCard}>
       <div className="flex flex-wrap items-center gap-2 text-[10px]">
         <span className={`rounded-full px-2 py-0.5 font-semibold uppercase ${portalStatusSuccessBox} ${portalStatusSuccessText}`}>
-          Layer 1 · Decision
+          Decision
         </span>
         <span className="uppercase text-[var(--siya-text-muted)]">{d.status}</span>
-        <span className="text-[var(--siya-text-muted)]">Confidence {d.confidence}%</span>
-        {d.halfLifeDays ? <span className="text-[var(--siya-text-muted)]">Half-life {d.halfLifeDays}d</span> : null}
-        {d.reviewDue ? <span className={`font-semibold ${portalStatusWarnText}`}>Review due</span> : null}
+        {showMeta ? (
+          <>
+            <span className="text-[var(--siya-text-muted)]">Confidence {d.confidence}%</span>
+            {d.halfLifeDays ? <span className="text-[var(--siya-text-muted)]">Half-life {d.halfLifeDays}d</span> : null}
+            {d.reviewDue ? <span className={`font-semibold ${portalStatusWarnText}`}>Review due</span> : null}
+          </>
+        ) : null}
       </div>
       <h3 className={`mt-2 ${portalH3}`}>{d.title}</h3>
       <p className="mt-1 text-sm font-medium text-[var(--siya-text-secondary)]">{d.decisionText}</p>
@@ -63,10 +66,12 @@ function DecisionCard({ d }: { d: DecisionRecord }) {
           <span className="font-semibold">Apply:</span> {d.actionHook}
         </p>
       ) : null}
-      <button type="button" onClick={() => void showLineage()} className="mt-2 text-[10px] font-semibold text-[var(--siya-accent)] underline">
-        {lineageOpen ? "Hide lineage" : "View lineage"}
-      </button>
-      {lineageOpen && lineage ? (
+      {showMeta ? (
+        <button type="button" onClick={() => void showLineage()} className="mt-2 text-[10px] font-semibold text-[var(--siya-accent)] underline">
+          {lineageOpen ? "Hide lineage" : "View lineage"}
+        </button>
+      ) : null}
+      {showMeta && lineageOpen && lineage ? (
         <div className="mt-2 border-l-2 border-[var(--siya-border)] pl-3 text-[10px] text-[var(--siya-text-muted)]">
           {lineage.relatedPrinciples.length ? (
             <p>
@@ -89,12 +94,12 @@ function DecisionCard({ d }: { d: DecisionRecord }) {
 
 export function KnowledgePanel() {
   const { user, authReady } = useAuth();
+  const isAdmin = isPortalAdmin(user?.role);
   const [decisions, setDecisions] = useState<DecisionRecord[]>([]);
   const [principles, setPrinciples] = useState<ConstitutionEntry[]>([]);
   const [open, setOpen] = useState(false);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [canRecordDecision, setCanRecordDecision] = useState(false);
   const profile = loadLocalPortalProfile();
   const [form, setForm] = useState({
     title: "",
@@ -119,20 +124,6 @@ export function KnowledgePanel() {
   useEffect(() => {
     void load();
   }, [load]);
-
-  useEffect(() => {
-    if (!authReady || !user) {
-      setCanRecordDecision(false);
-      return;
-    }
-    if (isPortalAdmin(user.role)) {
-      setCanRecordDecision(true);
-      return;
-    }
-    void fetchSopContext()
-      .then((ctx) => setCanRecordDecision((ctx.myLeadSlugs?.length ?? 0) > 0))
-      .catch(() => setCanRecordDecision(false));
-  }, [authReady, user]);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -167,14 +158,20 @@ export function KnowledgePanel() {
     <section className="space-y-4">
       <div>
         <h2 className={portalH2}>Knowledge</h2>
-        <p className="text-xs text-[var(--siya-text-muted)]">
-          Layer 2 decisions (authoritative in Postgres). This form is the sole create path — Ask retrieves them like
-          live SOPs. Markdown under <code className="text-[10px]">docs/.../decisions/</code> is backup/boot-sync only.
-        </p>
+        {isAdmin ? (
+          <p className="text-xs text-[var(--siya-text-muted)]">
+            Layer 2 decisions (authoritative in Postgres). This form is the sole create path — Ask retrieves them like
+            live SOPs. Markdown under <code className="text-[10px]">docs/.../decisions/</code> is backup/boot-sync only.
+          </p>
+        ) : (
+          <p className="text-xs text-[var(--siya-text-muted)]">
+            Approved guides and decisions Ask uses. Open Department SOPs when you need step-by-step procedures.
+          </p>
+        )}
       </div>
 
       <p className={`text-xs text-[var(--siya-text-secondary)] ${portalSectionSubtle}`}>
-        Layer 2 tools:{" "}
+        {isAdmin ? "Layer 2 tools: " : null}
         <Link href="/memory/knowledge/sops" className="font-semibold text-[var(--siya-accent)] hover:underline">
           Department SOP workspace
         </Link>
@@ -182,12 +179,14 @@ export function KnowledgePanel() {
         <Link href="/memory/knowledge/sop-builder" className="font-semibold text-[var(--siya-accent)] hover:underline">
           AI checklist builder
         </Link>
-        {" — approved SOPs also surface in Ask retrieval."}
+        {isAdmin ? " — approved SOPs also surface in Ask retrieval." : null}
       </p>
 
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="text-xs font-medium text-[var(--siya-text-secondary)]">Decisions (Layer 2 · decision log)</p>
-        {canRecordDecision ? (
+        <p className="text-xs font-medium text-[var(--siya-text-secondary)]">
+          {isAdmin ? "Decisions (Layer 2 · decision log)" : "Decisions"}
+        </p>
+        {authReady && isAdmin ? (
           <button type="button" onClick={() => setOpen(true)} className={portalBtnNavySm}>
             Record decision
           </button>
@@ -293,7 +292,7 @@ export function KnowledgePanel() {
 
       <div className="space-y-3">
         {decisions.map((d) => (
-          <DecisionCard key={d.id} d={d} />
+          <DecisionCard key={d.id} d={d} showMeta={isAdmin} />
         ))}
       </div>
     </section>

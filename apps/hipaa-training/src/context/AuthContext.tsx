@@ -17,6 +17,7 @@ import {
 } from "@/lib/trainingConfig";
 import { getStoredToken, setStoredToken } from "@/lib/authStorage";
 import { bindPortalProfileToUser, clearPortalProfileBinding } from "@/lib/portal-profile";
+import { bindPortalTourToUser } from "@/lib/portal-tour";
 import { clearAssistSession } from "@/lib/assist-session";
 
 export type TrainingUser = {
@@ -76,6 +77,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const data = (await res.json()) as TrainingUser;
       setUser(data);
       bindPortalProfileToUser(data.id);
+      bindPortalTourToUser(data.id);
       return data;
     } catch {
       setUser(null);

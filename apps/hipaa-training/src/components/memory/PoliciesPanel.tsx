@@ -7,7 +7,7 @@ import { KNOWLEDGE_STEWARD, PROMOTE_QUESTIONS } from "@/lib/knowledge-types";
 
 import { portalCard, portalH2, portalH3, portalStatusErrorText } from "@/lib/portal-ui";
 
-export function PoliciesPanel() {
+export function PoliciesPanel({ showEditorialChrome = false }: { showEditorialChrome?: boolean }) {
   const [policies, setPolicies] = useState<PolicyRequirement[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -23,15 +23,23 @@ export function PoliciesPanel() {
     <section className="space-y-4">
       <div>
         <h2 className={portalH2}>Policies & requirements</h2>
-        <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
-          Layer 1 — company policy (not principles, not SOPs). Evolves on review dates. Steward:{" "}
-          <strong>{KNOWLEDGE_STEWARD}</strong>.
-        </p>
-        <ul className="mt-2 list-inside list-disc text-[10px] text-[var(--siya-text-muted)]">
-          {PROMOTE_QUESTIONS.map((q) => (
-            <li key={q}>{q}</li>
-          ))}
-        </ul>
+        {showEditorialChrome ? (
+          <>
+            <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+              Layer 1 — company policy (not principles, not SOPs). Evolves on review dates. Steward:{" "}
+              <strong>{KNOWLEDGE_STEWARD}</strong>.
+            </p>
+            <ul className="mt-2 list-inside list-disc text-[10px] text-[var(--siya-text-muted)]">
+              {PROMOTE_QUESTIONS.map((q) => (
+                <li key={q}>{q}</li>
+              ))}
+            </ul>
+          </>
+        ) : (
+          <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+            Published company policies staff must follow (HIPAA, leave, expenses, marketing approval, and more).
+          </p>
+        )}
       </div>
 
       {loading ? <p className="text-xs text-[var(--siya-text-muted)]">Loading policies…</p> : null}
@@ -43,7 +51,7 @@ export function PoliciesPanel() {
             <div className="flex flex-wrap gap-2 text-[10px] uppercase tracking-wide text-[var(--siya-text-muted)]">
               <span className="font-bold text-[var(--siya-accent)]">Policy</span>
               <span>{p.status}</span>
-              <span>Review {p.reviewDate}</span>
+              {showEditorialChrome ? <span>Review {p.reviewDate}</span> : null}
               <span>{p.ownerName}</span>
             </div>
             <h3 className={`mt-2 ${portalH3}`}>{p.title}</h3>

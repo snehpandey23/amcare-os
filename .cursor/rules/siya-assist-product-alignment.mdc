@@ -37,6 +37,8 @@ Accounts · HR · Marketing · Clinical Operations · Compliance · Technology �
 
 Login (optional) → one prompt → router → follow-ups → retrieval + sources → escalate with collected context → admin upload (later).
 
+**Ask/chat verification:** Every Assist engine change must be checked on **staff Ask** and **admin Founder Talk** before calling it done (see `.cursor/rules/siya-ask-dual-surface.mdc`), unless explicitly single-surface.
+
 ## Example pushback (copy tone)
 
 > “That sounds like an operations module inside an ERP. For Siya Assist v1 we’d route this to **Accounts → Reimbursement**, ask amount/date/receipt/approval, then pull an approved policy—or escalate with a filled summary. Want that flow added to the KB instead of a new app screen?”

@@ -14,6 +14,7 @@ import { useShiftOptional } from "@/context/ShiftContext";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { SiyaWordmark } from "@/components/siya/SiyaWordmark";
 import { AssistWorkspaceSidebar } from "@/components/siya/AssistWorkspaceSidebar";
+import { PortalTourHost, useTourOpenMobileNav } from "@/components/tour/PortalTourHost";
 
 export function AssistantShell({ children }: { children: ReactNode }) {
   const path = usePathname() ?? "/";
@@ -22,6 +23,8 @@ export function AssistantShell({ children }: { children: ReactNode }) {
   const shift = useShiftOptional();
   const [mobileNav, setMobileNav] = useState(false);
   const chatHome = path === "/" || path.startsWith("/help");
+
+  useTourOpenMobileNav(() => setMobileNav(true));
 
   return (
     <AssistThreadProvider>
@@ -32,6 +35,7 @@ export function AssistantShell({ children }: { children: ReactNode }) {
               type="button"
               className="rounded-md px-2 py-1 text-xs text-[var(--siya-text-muted)] hover:bg-[var(--siya-white)] hover:text-[var(--siya-text)] md:hidden"
               aria-label="Open chats and navigation"
+              data-tour="mobile-nav"
               onClick={() => setMobileNav(true)}
             >
               Chats
@@ -96,6 +100,7 @@ export function AssistantShell({ children }: { children: ReactNode }) {
             {children}
           </main>
         </div>
+        <PortalTourHost />
       </div>
     </AssistThreadProvider>
   );
