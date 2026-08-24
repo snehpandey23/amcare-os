@@ -1,6 +1,7 @@
 /**
  * Deterministic Learn / Practice deep-links for Ask — same pattern as facts-lookup.
  * Do not generate curriculum; point staff to existing drills.
+ * Ops holiday calendar (leave/provider/PTO + Thanksgiving) is separate — see tryOpsHolidayLookup.
  */
 
 export type PracticeLookupHit = {
@@ -9,6 +10,74 @@ export type PracticeLookupHit = {
   label: string;
   links: { label: string; href: string }[];
 };
+
+/** Leave / coverage / scheduling context — not a culture trivia ask. */
+export function hasOpsHolidayContext(text: string): boolean {
+  const t = text.trim().toLowerCase();
+  if (!t) return false;
+  return /\b(leave|pto|time\s*off|day\s*off|off\s+on|coverage|schedule|scheduling|provider|clinician|doctor|np\b|pa\b|shift|roster|calendar|when\s+is\s+that)\b/i.test(
+    t,
+  );
+}
+
+/** US Thanksgiving = fourth Thursday of November (local calendar year). */
+export function usThanksgivingDate(year: number): Date {
+  const nov1 = new Date(year, 10, 1);
+  const dow = nov1.getDay(); // 0=Sun … 4=Thu
+  const firstThu = 1 + ((4 - dow + 7) % 7);
+  return new Date(year, 10, firstThu + 21);
+}
+
+export function formatUsHolidayDate(d: Date): string {
+  return d.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+/**
+ * Ops calendar ask: holiday name + leave/provider/schedule context.
+ * Returns null for bare holiday trivia (those stay on Culture & trivia).
+ */
+export function tryOpsHolidayLookup(userMessage: string): PracticeLookupHit | null {
+  const t = userMessage.trim();
+  if (!t || t.length > 400) return null;
+  const lower = t.toLowerCase();
+  if (!/\bthanksgiving\b/.test(lower)) return null;
+  if (!hasOpsHolidayContext(lower)) return null;
+
+  const now = new Date();
+  const y = now.getFullYear();
+  const thanksgiving = usThanksgivingDate(y);
+  // If this year's Thanksgiving already passed and they're planning ahead, show next year too.
+  const startOfToday = new Date(y, now.getMonth(), now.getDate());
+  let dateLine = `**US Thanksgiving ${y}:** ${formatUsHolidayDate(thanksgiving)} (fourth Thursday of November).`;
+  if (thanksgiving < startOfToday) {
+    const next = usThanksgivingDate(y + 1);
+    dateLine = `**US Thanksgiving ${y}** was ${formatUsHolidayDate(thanksgiving)}. **Next (${y + 1}):** ${formatUsHolidayDate(next)}.`;
+  }
+
+  const message = [
+    dateLine,
+    "",
+    "That’s the **calendar date** for scheduling / leave coverage — not a culture quiz.",
+    "For the **leave / PTO process** itself (how to file, who approves), ask People/HR or your supervisor — Ask doesn’t invent leave policy.",
+    "",
+    "Want US culture drills separately? **Learn → Practice → Culture & trivia.**",
+  ].join("\n");
+
+  return {
+    message,
+    href: "/learn/practice#culture",
+    label: "Culture & trivia (optional)",
+    links: [
+      { label: "Culture & trivia (optional drills)", href: "/learn/practice#culture" },
+      { label: "Learn hub", href: "/learn" },
+    ],
+  };
+}
 
 type Drill = {
   id: string;
@@ -151,6 +220,9 @@ export function tryPracticeLookup(userMessage: string): PracticeLookupHit | null
   const lower = t.toLowerCase();
 
   if (isPracticeExplanationAsk(lower)) return null;
+
+  // Ops leave/schedule + Thanksgiving → calendar answer path, not Culture MCQ hijack.
+  if (/\bthanksgiving\b/.test(lower) && hasOpsHolidayContext(lower)) return null;
 
   // Prefer specific drills over hub
   for (const d of DRILLS) {

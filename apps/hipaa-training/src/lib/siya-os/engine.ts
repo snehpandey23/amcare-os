@@ -1,7 +1,7 @@
 import { getEscalationContacts } from "./config";
 import { defaultEscalationOwner } from "./escalation";
 import { retrievalQueryBoost, routeIntent, expandShortQuery, hasRoutableIntent } from "./flows";
-import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, abusivePatientAnswer, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, isClarifyingFollowUp, answerFromPriorAssistIfCovered, isGapContributionFollowUp, answerGapContributionFollowUp, polishStaffMessage, isCasualOffTopic, casualOffTopicReply, appendDraftLiveHedge } from "./compose-answer";
+import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, abusivePatientAnswer, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, isClarifyingFollowUp, answerFromPriorAssistIfCovered, isGapContributionFollowUp, answerGapContributionFollowUp, isEscalateTargetChallengeFollowUp, isOffTopicRefusalChallengeFollowUp, answerOffTopicRefusalChallenge, polishStaffMessage, isCasualOffTopic, casualOffTopicReply, appendDraftLiveHedge } from "./compose-answer";
 import { staffTopicLabel } from "./staff-voice";
 import { synthesizeWorkforceAnswer } from "./llm-answer";
 import {
@@ -23,7 +23,7 @@ import {
 import { fetchAdminOpsSnapshot } from "./admin-ops-snapshot";
 import { detectAdminOpsIntent, runAdminOpsCoach } from "./admin-ops-coach";
 import { tryFactsLookup } from "./facts-lookup";
-import { tryPracticeLookup } from "./practice-lookup";
+import { tryOpsHolidayLookup, tryPracticeLookup } from "./practice-lookup";
 import { trySopChromeLookup } from "./sop-chrome-lookup";
 import { tryWorkplaceLinkLookup } from "./workplace-link-lookup";
 import { answerMetaConversation, type MetaConversationReply } from "./meta-conversation";
@@ -437,6 +437,26 @@ function buildSiyaReply(
     };
   }
 
+  // Ops holiday calendar (leave + Thanksgiving) before Culture MCQ deep-link.
+  const opsHoliday = tryOpsHolidayLookup(text);
+  if (opsHoliday) {
+    return {
+      message: polishStaffMessage(opsHoliday.message),
+      chunks: [],
+      knowledgeGap: false,
+      sources: [],
+      portalLinks: opsHoliday.links,
+      escalationPreview: undefined,
+      ruleFinal: true,
+      routing: {
+        department: "HR",
+        task: "Holiday calendar (ops)",
+        confidence: "high",
+        followUpQuestions: [],
+      },
+    };
+  }
+
   // Learn / Practice deep-links before meta — culture “train you” must deep-link, not only catalog text.
   const practiceHit = tryPracticeLookup(text);
   if (practiceHit) {
@@ -716,6 +736,49 @@ function buildSiyaReply(
       routing: {
         department: "General",
         task: "Contribute to missing guide",
+        confidence: "high",
+        followUpQuestions: [],
+      },
+    };
+  }
+
+  if (isEscalateTargetChallengeFollowUp(text, history)) {
+    const factsForEscalate = extractPersonalFactsFromHistory(history);
+    const escalatePush = answerEscalateChallenge(text, history, factsForEscalate);
+    if (escalatePush) {
+      return {
+        message: polishStaffMessage(escalatePush),
+        chunks: [],
+        knowledgeGap: false,
+        sources: [],
+        escalationPreview: undefined,
+        ruleFinal: true,
+        routing: {
+          department: "General",
+          task: "Escalate target clarification (gap thread)",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+  }
+
+  if (isOffTopicRefusalChallengeFollowUp(text, history)) {
+    return {
+      message: polishStaffMessage(answerOffTopicRefusalChallenge()),
+      chunks: [],
+      knowledgeGap: false,
+      sources: [],
+      portalLinks: [
+        { label: "Culture & trivia", href: "/learn/practice#culture" },
+        { label: "Practice drills", href: "/learn/practice" },
+        { label: "Learn hub", href: "/learn" },
+      ],
+      escalationPreview: undefined,
+      ruleFinal: true,
+      routing: {
+        department: "General",
+        task: "Ask vs Learn (off-topic pushback)",
         confidence: "high",
         followUpQuestions: [],
       },

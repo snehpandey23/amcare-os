@@ -57,8 +57,120 @@ export function isConfusedAboutPriorAnswer(text: string): boolean {
 }
 
 /** Prior Assist turn flagged a missing guide / gap — staff asking how to contribute input. */
-const GAP_PRIOR_MARK =
+export const GAP_PRIOR_MARK =
   /no approved guidance|don'?t have a (full )?approved guide|Notify owner|knowledge gap|not documented in|requires input from|recommended actions|AI-assisted in the portal|SOP builder|AI interview/i;
+
+/** Assistant turn that established a missing approved guide (gap / soft-stop). */
+export function isGapContextAssistantMessage(content: string): boolean {
+  const prior = (content || "").trim();
+  if (!prior) return false;
+  if (GAP_PRIOR_MARK.test(prior)) return true;
+  if (
+    /don'?t have (?:specific |a (?:full )?)?approved (?:guidance|guide)|no approved guide|not documented in (?:our )?approved|unfortunately.*don'?t have/i.test(
+      prior,
+    )
+  ) {
+    return true;
+  }
+  if (/full approved guide for this yet|queue a knowledge gap|Notify owner to queue/i.test(prior)) {
+    return true;
+  }
+  return false;
+}
+
+/** Short follow-up challenging who to loop in / escalate to — not a new topic ask. */
+export function isEscalateChallengeShape(text: string): boolean {
+  const t = text.trim().toLowerCase().replace(/\s+/g, " ");
+  if (!t || t.length > 160) return false;
+  if (/^why\b/.test(t)) return true;
+  if (/\bwhy not\b/.test(t)) return true;
+  if (
+    /\b(no\s+breach|not\s+a\s+breach|what\s+are\s+you\s+sayin|that'?s\s+wrong|wrong\s+escalat)\b/.test(t)
+  ) {
+    return true;
+  }
+  if (
+    /\bwhy\b/.test(t) &&
+    /\b(loop|lead|officer|compliance|marketing|hr|people|escalat|billing|privacy|director|legal)\b/.test(t)
+  ) {
+    return true;
+  }
+  return false;
+}
+
+export type GapThreadContext = {
+  assistantContent: string;
+  userQuestion: string;
+};
+
+/** Most recent gap-establishing assistant turn + the user question that triggered it. */
+export function findRecentGapContextInHistory(
+  history: { role: string; content: string }[],
+): GapThreadContext | null {
+  for (let i = history.length - 1; i >= 0; i--) {
+    if (history[i].role !== "assistant") continue;
+    const content = history[i].content;
+    if (!isGapContextAssistantMessage(content)) continue;
+    for (let j = i - 1; j >= 0; j--) {
+      if (history[j].role === "user" && history[j].content.trim().length > 6) {
+        return { assistantContent: content, userQuestion: history[j].content.trim() };
+      }
+    }
+  }
+  return null;
+}
+
+export function extractLoopInTargets(content: string): string | null {
+  const m =
+    content.match(/\*\*Loop in:\*\*\s*(.+?)(?:\n|$)/i) ||
+    content.match(/Loop in:\s*(.+?)(?:\n|$)/i);
+  return m?.[1]?.trim() || null;
+}
+
+/** Retrieval wrongly served a content SOP after a discipline/gap thread. */
+export function isWrongSopPivotAfterGap(assistantContent: string, gapUserQuestion: string): boolean {
+  const q = gapUserQuestion.toLowerCase();
+  const a = assistantContent;
+  if (/\bdisciplin|conduct|progressive|write-?up|warning letter\b/.test(q)) {
+    if (
+      /Medical Compliance in Marketing|marketing approval process|Key Policies:|Content Creation and Review|Medical Director must approve clinical|FDA|FTC|testimonials must disclose|Medical claims standards/i.test(
+        a,
+      )
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * After a gap answer, "why X / why not Y" challenges escalation routing — not new retrieval.
+ * Also recovers when a prior turn wrongly pivoted to an unrelated SOP.
+ */
+export function isEscalateTargetChallengeFollowUp(
+  text: string,
+  history: { role: string; content: string }[],
+): boolean {
+  if (!isEscalateChallengeShape(text)) return false;
+
+  if (findRecentGapContextInHistory(history)) return true;
+
+  const lastAssistant = [...history].reverse().find((h) => h.role === "assistant")?.content;
+  if (!lastAssistant) return false;
+
+  for (let i = history.length - 2; i >= 0; i--) {
+    if (history[i].role !== "assistant") continue;
+    if (!isGapContextAssistantMessage(history[i].content)) continue;
+    for (let j = i - 1; j >= 0; j--) {
+      if (history[j].role === "user") {
+        return isWrongSopPivotAfterGap(lastAssistant, history[j].content);
+      }
+    }
+    break;
+  }
+
+  return false;
+}
 
 export function isGapContributionFollowUp(text: string, lastAssistant?: string | null): boolean {
   const t = text.trim();
@@ -255,6 +367,64 @@ export function casualOffTopicReply(): string {
     "That’s outside what I can help with here — I don’t cover news, immigration/visas, entertainment, civics trivia, or personal US career paths.",
     "",
     "Ask me about **Siya Health** policies, SOPs, pricing, brand tokens, or who owns an ops question.",
+  ].join("\n");
+}
+
+/** Prior Assist turn refused civics/news or pointed to Learn/Practice drills. */
+export function isOffTopicOrPracticeRedirectAssistant(content: string): boolean {
+  const prior = (content || "").trim();
+  if (!prior) return false;
+  if (/outside what I can help|don'?t cover news|civics trivia|immigration\/visas/i.test(prior)) {
+    return true;
+  }
+  if (
+    /Culture & trivia|drills live under \*\*Learn → Practice\*\*|not answered in Ask|daily US culture MCQ/i.test(
+      prior,
+    )
+  ) {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Pushback on a civics/off-topic refuse or Practice redirect —
+ * "why not", "I wanna know", "these are important", "learn about USA".
+ */
+export function isOffTopicMetaPushbackShape(text: string): boolean {
+  const t = text.trim().toLowerCase().replace(/\s+/g, " ");
+  if (!t || t.length > 220) return false;
+  if (/\bwhy not\b/.test(t)) return true;
+  if (/\b(i\s+)?(wanna|want to)\s+know\b/.test(t)) return true;
+  if (/\b(these|those|they)\s+(are\s+)?important\b/.test(t)) return true;
+  if (/\bsupposed to help\b/.test(t) && /\blearn\b/.test(t)) return true;
+  if (/\bhelp me learn\b/.test(t) || /\blearn about (the )?(usa|u\.?s\.?a\.?|united states|america)\b/.test(t)) {
+    return true;
+  }
+  if (/^why\b/.test(t) && /\b(learn|usa|culture|civics|trivia|practice)\b/.test(t)) return true;
+  return false;
+}
+
+export function isOffTopicRefusalChallengeFollowUp(
+  text: string,
+  history: { role: string; content: string }[],
+): boolean {
+  if (!isOffTopicMetaPushbackShape(text)) return false;
+  const lastAssistant = [...history].reverse().find((h) => h.role === "assistant")?.content;
+  if (!lastAssistant) return false;
+  return isOffTopicOrPracticeRedirectAssistant(lastAssistant);
+}
+
+/** Honest Ask-vs-Learn explanation — never a knowledge-gap / Notify owner ticket. */
+export function answerOffTopicRefusalChallenge(): string {
+  return [
+    "Fair pushback — here’s the split:",
+    "",
+    "**Ask / Founder Talk** answers **Siya work**: policies, SOPs, pricing, who owns ops (leave coverage, billing, etc.). It does **not** invent civics quizzes or culture lectures in chat.",
+    "",
+    "To **learn US culture** for clinic chat, use **Learn → Practice → Culture & trivia** (`/learn/practice#culture`) — that’s the drill path.",
+    "",
+    "If you have a **work** question (e.g. provider leave on a holiday, coverage, PTO), ask that job in one sentence and I’ll help with the ops/calendar answer.",
   ].join("\n");
 }
 

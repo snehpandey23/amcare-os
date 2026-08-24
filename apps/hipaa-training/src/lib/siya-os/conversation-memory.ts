@@ -6,6 +6,14 @@
  * Tier 3 — Role/authority claim: heard but unconfirmed; never restate as directory fact.
  */
 
+import {
+  extractLoopInTargets,
+  findRecentGapContextInHistory,
+  isEscalateTargetChallengeFollowUp,
+  isGapContextAssistantMessage,
+  isWrongSopPivotAfterGap,
+} from "./compose-answer";
+
 export type PersonalFactKind = "preference" | "role_unconfirmed";
 
 export type PersonalFact = {
@@ -569,9 +577,86 @@ export function answerUnknownPersonAsk(text: string): string | null {
   ].join("\n");
 }
 
+function answerGapEscalateChallenge(
+  text: string,
+  history: { role: string; content: string }[],
+): string {
+  const t = normalizeChatText(text).toLowerCase();
+  const gapCtx = findRecentGapContextInHistory(history);
+  const lastAssistant = [...history].reverse().find((h) => h.role === "assistant")?.content || "";
+  const originalQ = gapCtx?.userQuestion || "";
+  const gapAssistant = gapCtx?.assistantContent || "";
+  const loopIn =
+    extractLoopInTargets(lastAssistant) ||
+    extractLoopInTargets(gapAssistant) ||
+    null;
+
+  const lines = [
+    "Fair pushback on **who to loop in** — I should explain routing, not pull a different SOP.",
+    "",
+  ];
+
+  if (
+    isGapContextAssistantMessage(gapAssistant) ||
+    /don'?t have|no approved|not documented|Unfortunately/i.test(gapAssistant)
+  ) {
+    lines.push("**Still true:** there is **no approved staff guide** in Ask for your original question.");
+    lines.push("");
+  }
+
+  if (isWrongSopPivotAfterGap(lastAssistant, originalQ)) {
+    lines.push(
+      "My last reply wrongly pasted a **content/compliance SOP** — that does **not** answer a **disciplinary policy** ask. I won't repeat it here.",
+      "",
+    );
+  }
+
+  if (loopIn) {
+    lines.push(
+      `I suggested **${loopIn}** as a starting contact because your question named that area — **not** because an approved disciplinary policy says they own everything.`,
+    );
+  } else {
+    lines.push(
+      "I suggested escalation targets as a **best guess** when the guide is missing — not from an approved policy I can cite.",
+    );
+  }
+
+  if (/\bdisciplin|conduct|progressive|write-?up|warning letter\b/i.test(originalQ)) {
+    lines.push("");
+    lines.push(
+      "**Discipline / conduct** usually involves **People/HR** and may also need **Compliance** for policy enforcement — I don't have an approved progressive-discipline guide here to name a single owner.",
+    );
+    lines.push(
+      "**Marketing lead** is for **marketing content/compliance workflows**, not staff discipline — don't treat them as interchangeable.",
+    );
+  }
+
+  if (/\bmarketing\b/.test(t) && /\bwhy\b/.test(t)) {
+    lines.push("");
+    lines.push(
+      "If you're asking **why Marketing lead**: because your question mentioned the **marketing team** — not because Marketing owns HR discipline.",
+    );
+  }
+
+  if (/\bcompliance\b/.test(t) && /\bwhy not\b/.test(t)) {
+    lines.push("");
+    lines.push(
+      "I **won't invent** org-chart scope (e.g. that Compliance only handles HIPAA). Advertising/claims compliance and people discipline are **different** topics — without an approved guide I can't assert who owns discipline.",
+    );
+    lines.push("Ask **People/HR + Compliance** directly, or use **Notify owner** to queue the missing guide.");
+  }
+
+  lines.push("");
+  lines.push(
+    "**Next:** **Notify owner** to queue the missing guide, or **Copy escalation summary** and ask **People/HR + Compliance** who owns marketing-team discipline.",
+  );
+
+  return lines.join("\n");
+}
+
 /**
  * Staff challenging a wrong "Loop in" / escalate suggestion (e.g. Privacy Officer on billing),
- * or asking why not use a name they stated earlier (Preeti).
+ * gap-thread "why X / why not Y", or asking why not use a name they stated earlier (Preeti).
  */
 export function answerEscalateChallenge(
   text: string,
@@ -580,6 +665,10 @@ export function answerEscalateChallenge(
 ): string | null {
   const t = normalizeChatText(text).toLowerCase();
   if (!t) return null;
+
+  if (isEscalateTargetChallengeFollowUp(text, history)) {
+    return answerGapEscalateChallenge(text, history);
+  }
 
   const challengesEscalate =
     /\bwhy\b/.test(t) &&
