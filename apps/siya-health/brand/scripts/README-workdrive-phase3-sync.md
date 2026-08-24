@@ -1,6 +1,8 @@
-# Phase-3 → WorkDrive sync (TEST MODE)
+# Phase-3 → WorkDrive sync (DORMANT — manual upload preferred)
 
-GitHub Action + script that mirrors approved packs into WorkDrive **`_API-DRY-RUN/` only**.
+**Current ops (2026-08-24):** Agents leave packs in git after Phase 3. Team downloads and uploads to WorkDrive manually. Do **not** run this Action for normal packs.
+
+GitHub Action + script that can mirror approved packs into WorkDrive **`_API-DRY-RUN/` only** — kept for a future API dry-run; workflow is dormant (`workflow_dispatch` + type `RUN-DRY-RUN`).
 
 ## Hard rules
 

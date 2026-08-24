@@ -1,16 +1,9 @@
-# Phase-3 → WorkDrive API sync — TEST MODE ONLY
-# Destination must be _API-DRY-RUN folder IDs (secrets). Never live 04/05/06/07.
-name: Siya WorkDrive Phase-3 sync (test)
+# DORMANT — manual WorkDrive upload for now (2026-08-24).
+# Do not enable push triggers until founder explicitly re-opens API sync.
+# Kept for future dry-run only via workflow_dispatch.
+name: Siya WorkDrive Phase-3 sync (dormant)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "apps/siya-health/brand/editorial-packs/**/SHIP.md"
-      - "apps/siya-health/brand/statics/**/SHIP.md"
-      - "apps/siya-health/brand/04-Content-Tracker/CLOUD-PACK-TRACKER.csv"
-      - "apps/siya-health/brand/scripts/workdrive_phase3_sync.py"
-      - ".github/workflows/siya-workdrive-phase3-sync.yml"
   workflow_dispatch:
     inputs:
       insight_id:
@@ -21,6 +14,10 @@ on:
         description: "fs (noop on GHA without path) or api"
         required: false
         default: "api"
+      confirm_dormant_override:
+        description: "Type RUN-DRY-RUN to allow this dormant workflow to execute"
+        required: true
+        default: ""
 
 concurrency:
   group: siya-workdrive-phase3-test
@@ -28,6 +25,7 @@ concurrency:
 
 jobs:
   sync-dry-run:
+    if: ${{ github.event.inputs.confirm_dormant_override == 'RUN-DRY-RUN' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:

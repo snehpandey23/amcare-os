@@ -79,7 +79,8 @@ Classify job (Recognition / Knowledge / Authority / Conversion)
   → compose_*.py → ready-to-post PNG
   → captions (+ audience variants if using matrix)
   → video-prompt.md
-  → tracker row + WorkDrive 05-Carousels or 06-Statics
+  → tracker row in git (CLOUD-PACK-TRACKER.csv)
+  → announce pack path — humans upload to WorkDrive manually (no agent auto-sync)
 ```
 
 ### Compositors (git)

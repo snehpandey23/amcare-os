@@ -1,5 +1,5 @@
 ---
-description: Slide-by-slide approval gate for Siya carousel/static — copy plan → one image → approve → then ship
+description: Slide-by-slide approval gate for Siya carousel/static — copy → one image → approve → Phase 3 in git only
 alwaysApply: true
 ---
 
@@ -10,7 +10,8 @@ When the user asks for a **carousel or static image** (Siya Health brand creativ
 ## Phase 1 — copy plan only
 
 1. Draft on-frame copy deck in chat or `copy/carousel.md`
-2. No captions, video prompts, tracker rows, or WorkDrive sync yet
+2. No captions, video prompts, tracker rows, or WorkDrive yet
+3. Stop and wait for approval before any render
 
 ## Phase 2 — one image at a time
 
@@ -19,16 +20,25 @@ When the user asks for a **carousel or static image** (Siya Health brand creativ
 3. Wait for approval before slide 2+
 4. If the user locks style (“rest look good, continue”), later slides may batch
 
-## Phase 3 — ship after approval only
+## Phase 3 — only after the user says “approved”
 
-Captions · video-prompt · tracker · WorkDrive sync — **only** after the slide set is approved.
+When (and only when) the user explicitly approves:
+
+1. Remaining slides if needed
+2. Captions · video-prompt · tracker row — **in git only** under `editorial-packs/[ID]/` or `statics/[ID]/`
+3. **Do not** sync to Zoho WorkDrive (TrueSync, API, fuse, or GitHub Action) — humans download from git and upload manually
+4. End by stating clearly: **Pack ready in git** + full folder path (e.g. `apps/siya-health/brand/editorial-packs/ADHD-…/`)
 
 ## Precedence (WorkDrive)
 
-This gate takes precedence over `zoho-workdrive-team.mdc` for any Siya brand creative asset — no WorkDrive sync before Phase 3 approval, regardless of what that rule says.
+This gate takes precedence over `zoho-workdrive-team.mdc` for any Siya brand creative asset:
+
+- No WorkDrive before Phase 3 approval
+- After Phase 3, agents still **do not** auto-sync WorkDrive unless the user explicitly asks for a one-off manual mirror
 
 ## Never skip
 
 - Do not invent layouts — classify → template ID → compose
 - Do not treat `GenerateImage` output as the final branded frame
 - Automated ship gates do **not** replace founder/lead visual OK
+- Lean A-03 default: headline + one `--recognition` line only (no on-frame explanation/takeaway unless `--dense`)

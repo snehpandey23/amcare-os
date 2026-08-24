@@ -50,14 +50,15 @@ Photo brief: {{PHOTO_BRIEF}} — right-weighted subject, warm morning light
 
 WORKFLOW
 1. Confirm Style Lock files exist; quote the four hex tokens back to me.
-2. Phase 1: show copy plan only (headline + recognition + caption teaching).
-3. Generate source photo ONLY (no type baked in).
-4. Run compose_format_a_knowledge.py → ready-to-post PNG for SLIDE 1 only.
-5. Show the PNG and stop for my approval.
-6. Do not batch remaining slides, captions pack, tracker, or WorkDrive until I approve.
+2. Phase 1: show copy plan only (headline + recognition + caption teaching). STOP for approval.
+3. After I approve Phase 1: generate source photo ONLY (no type baked in).
+4. Run compose_format_a_knowledge.py → ready-to-post PNG for ONE slide only.
+5. Show the PNG and STOP for my approval before the next slide / Phase 3.
+6. Phase 3 (captions · tracker · video-prompt) ONLY after I say “approved” — git pack only.
+7. Do NOT sync WorkDrive. When Phase 3 is done, say: Pack ready in git: <folder path>.
 
 REJECT
-Plum · brown ink · hard L · dense takeaway card · Canva template stacking · deploying anything
+Plum · brown ink · hard L · dense takeaway card · Canva template stacking · deploying anything · WorkDrive sync
 ```
 
 ---
@@ -67,8 +68,8 @@ Plum · brown ink · hard L · dense takeaway card · Canva template stacking ·
 1. **Push** current `main` (or a brand-only branch) so cloud clone has `BRAND-STYLE-LOCK.md`.
 2. Open **Cloud Agent** on that branch — not an old Jul branch.
 3. Paste the brief above with fields filled.
-4. Review slide 1 in chat → “approved” / “too dense” / “wrong theme.”
-5. Only then ask for remaining slides or WorkDrive sync.
+4. Phase 1 → approve → Phase 2 one slide → approve (repeat as needed).
+5. Only then say “approved” for Phase 3 (git only). Team uploads to WorkDrive manually.
 
 ## If you still get plum / hard-L / dense cards
 
@@ -85,12 +86,9 @@ Plum · brown ink · hard L · dense takeaway card · Canva template stacking ·
 
 ## Full pack from blog (cloud)
 
-For “pick an uncovered ADHD spoke → carousel + captions + tracker”: use  
-[`CLOUD-AGENT-PACK-FROM-BLOG.md`](./CLOUD-AGENT-PACK-FROM-BLOG.md)  
-and git tracker `04-Content-Tracker/CLOUD-PACK-TRACKER.csv` — **not** Zoho WorkDrive (unavailable on cloud VMs).
+Use [`CLOUD-AGENT-PACK-FROM-BLOG.md`](./CLOUD-AGENT-PACK-FROM-BLOG.md) + `CLOUD-PACK-TRACKER.csv`.  
+Phase 3 stays in git; humans upload to WorkDrive manually. No agent auto-sync.
 
 ## WorkDrive
 
-**Do not mirror this file as an editable second copy.**  
-Team pointer only (if needed): WorkDrive `00-Brand-System/CLOUD-AGENT-IMAGE-BRIEF.md` → “DO NOT EDIT · source = this git path.”  
-Git remains source of truth for the paste block. Optional desktop mirror after Phase 3 approval.
+Agents: **do not sync.** Humans: download the git pack path announced at Phase 3 end.
