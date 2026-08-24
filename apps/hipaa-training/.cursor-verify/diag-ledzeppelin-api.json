@@ -1,0 +1,54 @@
+{
+  "default": [
+    [
+      "best song by led zeppelin",
+      "You wrote \u201cbest song by led zeppelin\u201d. I\u2019m not sure which path you need yet \u2014 reply with one line:\n1. **Patient / caller situation** (no names) \u2014 e.g. angry caller, refill stuck, scheduling\n2. **Teammate / HR concern**\n3. **Billing, refund, or reimbursement**\n4. **Policy / SOP lookup**\n5. **Tech / login / access**\nOr just say what you\u2019re trying to get done in a short sentence."
+    ],
+    [
+      "ac dc?",
+      "You wrote \u201cbest song by led zeppelin \u2014 ac dc?\u201d. I\u2019m not sure which path you need yet \u2014 reply with one line:\n1. **Patient / caller situation** (no names) \u2014 e.g. angry caller, refill stuck, scheduling\n2. **Teammate / HR concern**\n3. **Billing, refund, or reimbursement**\n4. **Policy / SOP lookup**\n5. **Tech / login / access**\nOr just say what you\u2019re trying to get done in a short sentence."
+    ],
+    [
+      "how to get CAC sorted",
+      "You wrote \u201cac dc? \u2014 how to get CAC sorted\u201d. I\u2019m not sure which path you need yet \u2014 reply with one line:\n1. **Patient / caller situation** (no names) \u2014 e.g. angry caller, refill stuck, scheduling\n2. **Teammate / HR concern**\n3. **Billing, refund, or reimbursement**\n4. **Policy / SOP lookup**\n5. **Tech / login / access**\nOr just say what you\u2019re trying to get done in a short sentence."
+    ],
+    [
+      "best song ever",
+      "Every gap becomes KB, training, routing, or documentation work."
+    ],
+    [
+      "no i want a song by post malone",
+      "Policy: Do not publish patient-facing marketing (ads, captions, landing claims, testimonials) without Marketing lead review. Medical or outcome claims \u2192 Marketing + clinical/compliance awareness (see medical compliance marketing Knowledge). No fear marketing, exaggerated cures, or insurance-bashing.\n**To help you faster:**\n1. What is the topic or insight ID?\n2. Siya Health company voice or physician profile?\n3. Static or carousel \u2014 which platforms?\n4. State or audience (CA, TX, PA, FL)?\n5. Clinical / medical review required?"
+    ],
+    [
+      "whats my default background color as per marketing design brand system",
+      "Ask can point to Brand System and compliance Knowledge. No fear marketing, exaggerated cures, or insurance-bashing. Patient-facing claims and ads require Marketing lead review; medical claims need clinical/compliance awareness before publish."
+    ]
+  ],
+  "founder-coach": [
+    [
+      "best song by led zeppelin",
+      "I don't have a strong approved match for that yet.\nSay what you're trying to understand in one sentence (a decision, a domain this week, an SOP, or who owns something), or open the matching domain tab for the structured snapshot.\nI won't write anything into your Plan Record \u2014 that's manual on This week's plan."
+    ],
+    [
+      "ac dc?",
+      "I don't have a strong approved match for that yet.\nSay what you're trying to understand in one sentence (a decision, a domain this week, an SOP, or who owns something), or open the matching domain tab for the structured snapshot.\nI won't write anything into your Plan Record \u2014 that's manual on This week's plan."
+    ],
+    [
+      "how to get CAC sorted",
+      "I don't have a strong approved match for that yet.\nSay what you're trying to understand in one sentence (a decision, a domain this week, an SOP, or who owns something), or open the matching domain tab for the structured snapshot.\nI won't write anything into your Plan Record \u2014 that's manual on This week's plan."
+    ],
+    [
+      "best song ever",
+      "Every gap becomes KB, training, routing, or documentation work."
+    ],
+    [
+      "no i want a song by post malone",
+      "Policy: Do not publish patient-facing marketing (ads, captions, landing claims, testimonials) without Marketing lead review. Medical or outcome claims \u2192 Marketing + clinical/compliance awareness (see medical compliance marketing Knowledge). No fear marketing, exaggerated cures, or insurance-bashing.\n**To help you faster:**\n1. What is the topic or insight ID?\n2. Siya Health company voice or physician profile?\n3. Static or carousel \u2014 which platforms?\n4. State or audience (CA, TX, PA, FL)?\n5. Clinical / medical review required?"
+    ],
+    [
+      "whats my default background color as per marketing design brand system",
+      "Ask can point to Brand System and compliance Knowledge. No fear marketing, exaggerated cures, or insurance-bashing. Patient-facing claims and ads require Marketing lead review; medical claims need clinical/compliance awareness before publish."
+    ]
+  ]
+}

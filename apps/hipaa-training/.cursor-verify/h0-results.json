@@ -1,0 +1,25 @@
+{
+  "at": "2026-08-19T01:07:37.184Z",
+  "staff": "https://siya-staff-assist.vercel.app",
+  "auth": "https://siya-staff-auth-api.vercel.app",
+  "email": "sneh@siya.health",
+  "role": "trainee",
+  "source": "authenticated browser session (localStorage JWT) on production after dark-UI deploy dpl_2YEqEPZcoEGUDUKhdRG4DB4GYNSM",
+  "passed": 12,
+  "total": 12,
+  "rows": [
+    {"id": "1", "case": "Off-topic hardening (multi-turn music/CAC)", "pass": true, "detail": "no triage/concat; music off-topic"},
+    {"id": "2", "case": "Brand fact #fffdf6 (typo desgin)", "pass": true, "detail": "returned #fffdf6"},
+    {"id": "3", "case": "Presence → no invented roster (staff)", "pass": true, "detail": "Team pointer"},
+    {"id": "4", "case": "Practice routing → /learn/practice#typing", "pass": true, "detail": "deep-link present"},
+    {"id": "5", "case": "Tier-3 role/authority (3-turn)", "pass": true, "detail": "t1=true t2=true t3=true"},
+    {"id": "6", "case": "Slice B preference recall + policy reject", "pass": true, "detail": "pref=true policy=true"},
+    {"id": "7", "case": "Portal-signals must not overwrite ruleFinal decline", "pass": true, "detail": "off-topic sticks"},
+    {"id": "8", "case": "Meta identity (are you AI)", "pass": true, "detail": "identity"},
+    {"id": "9", "case": "Meta capability", "pass": true, "detail": "capability"},
+    {"id": "10", "case": "Meta chrome (thumbs + clear chat)", "pass": true, "detail": "thumbs+clear"},
+    {"id": "11", "case": "Meta orientation (no typing hijack)", "pass": true, "detail": "orientation"},
+    {"id": "12", "case": "Meta chrome (delete existig chat)", "pass": true, "detail": "archive/clear"}
+  ],
+  "failed": []
+}

@@ -1,0 +1,66 @@
+{
+  "default": [
+    {
+      "request_surface": "default",
+      "message": "best song by led zeppelin",
+      "reply": "That\u2019s outside what I can help with here \u2014 I don\u2019t pick songs or entertainment.\nAsk me about policies, SOPs, pricing, brand tokens, domain signals, or who owns an ops question."
+    },
+    {
+      "request_surface": "default",
+      "message": "ac dc?",
+      "reply": "That\u2019s outside what I can help with here \u2014 I don\u2019t pick songs or entertainment.\nAsk me about policies, SOPs, pricing, brand tokens, domain signals, or who owns an ops question."
+    },
+    {
+      "request_surface": "default",
+      "message": "how to get CAC sorted",
+      "reply": "I\u2019m not sure I have the right staff guide for that yet.\nSay what you\u2019re trying to get done in one short sentence \u2014 e.g. a reimbursement, an SOP, patient pricing, brand tokens, or who to escalate to."
+    },
+    {
+      "request_surface": "default",
+      "message": "best song ever",
+      "reply": "That\u2019s outside what I can help with here \u2014 I don\u2019t pick songs or entertainment.\nAsk me about policies, SOPs, pricing, brand tokens, domain signals, or who owns an ops question."
+    },
+    {
+      "request_surface": "default",
+      "message": "no i want a song by post malone",
+      "reply": "That\u2019s outside what I can help with here \u2014 I don\u2019t pick songs or entertainment.\nAsk me about policies, SOPs, pricing, brand tokens, domain signals, or who owns an ops question."
+    },
+    {
+      "request_surface": "default",
+      "message": "whats my default background color as per marketing design brand system",
+      "reply": "**Staff portal brand surfaces (marketing design / Brand System tokens):**\n\u2022 **Default page background** (CSS token siya-bg-page): #fffdf6 \u2014 warm cream\n\u2022 **Subtle / secondary surface** (siya-bg-subtle): #faf4e4\n\u2022 **White cards / panels** (siya-white): #ffffff\nThese are the live staff-portal surface tokens. Pack-specific editorial colors may differ \u2014 escalate Marketing if you need a carousel/static token from Brand System docs."
+    }
+  ],
+  "founder-coach": [
+    {
+      "request_surface": "founder-coach",
+      "message": "best song by led zeppelin",
+      "reply": "That\u2019s outside what I can help with here \u2014 I don\u2019t pick songs or entertainment.\nAsk me about policies, SOPs, pricing, brand tokens, domain signals, or who owns an ops question."
+    },
+    {
+      "request_surface": "founder-coach",
+      "message": "ac dc?",
+      "reply": "That\u2019s outside what I can help with here \u2014 I don\u2019t pick songs or entertainment.\nAsk me about policies, SOPs, pricing, brand tokens, domain signals, or who owns an ops question."
+    },
+    {
+      "request_surface": "founder-coach",
+      "message": "how to get CAC sorted",
+      "reply": "I don't have a strong approved match for that yet.\nSay what you're trying to understand in one sentence (a decision, a domain this week, an SOP, or who owns something), or open the matching domain tab for the structured snapshot.\nI won't write anything into your Plan Record \u2014 that's manual on This week's plan."
+    },
+    {
+      "request_surface": "founder-coach",
+      "message": "best song ever",
+      "reply": "That\u2019s outside what I can help with here \u2014 I don\u2019t pick songs or entertainment.\nAsk me about policies, SOPs, pricing, brand tokens, domain signals, or who owns an ops question."
+    },
+    {
+      "request_surface": "founder-coach",
+      "message": "no i want a song by post malone",
+      "reply": "That\u2019s outside what I can help with here \u2014 I don\u2019t pick songs or entertainment.\nAsk me about policies, SOPs, pricing, brand tokens, domain signals, or who owns an ops question."
+    },
+    {
+      "request_surface": "founder-coach",
+      "message": "whats my default background color as per marketing design brand system",
+      "reply": "**Staff portal brand surfaces (marketing design / Brand System tokens):**\n\u2022 **Default page background** (CSS token siya-bg-page): #fffdf6 \u2014 warm cream\n\u2022 **Subtle / secondary surface** (siya-bg-subtle): #faf4e4\n\u2022 **White cards / panels** (siya-white): #ffffff\nThese are the live staff-portal surface tokens. Pack-specific editorial colors may differ \u2014 escalate Marketing if you need a carousel/static token from Brand System docs."
+    }
+  ]
+}

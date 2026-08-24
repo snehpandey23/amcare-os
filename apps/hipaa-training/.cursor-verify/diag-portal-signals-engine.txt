@@ -1,0 +1,63 @@
+
+=== USER ===
+best song by led zeppelin
+=== ASSIST (llmUsed=undefined ruleFinal=true) ===
+That’s outside what I can help with here — I don’t pick songs or entertainment.
+Ask me about policies, SOPs, pricing, brand tokens, domain signals, or who owns an ops question.
+
+=== USER ===
+ac dc?
+=== ASSIST (llmUsed=undefined ruleFinal=true) ===
+That’s outside what I can help with here — I don’t pick songs or entertainment.
+Ask me about policies, SOPs, pricing, brand tokens, domain signals, or who owns an ops question.
+[siya-workforce] llm failure code=llm_error kind=unknown retryable=true Model 'anthropic/[SENSITIVE]' not found AI_APICallError: [object Object] "" ""
+
+=== USER ===
+how to get CAC sorted
+=== ASSIST (llmUsed=false ruleFinal=undefined) ===
+I don't have a strong approved match for that yet.
+Say what you're trying to understand in one sentence (a decision, a domain this week, an SOP, or who owns something), or open the matching domain tab for the structured snapshot.
+I won't write anything into your Plan Record — that's manual on This week's plan.
+
+=== USER ===
+best song ever
+=== ASSIST (llmUsed=undefined ruleFinal=true) ===
+That’s outside what I can help with here — I don’t pick songs or entertainment.
+Ask me about policies, SOPs, pricing, brand tokens, domain signals, or who owns an ops question.
+
+=== USER ===
+no i want a song by post malone
+=== ASSIST (llmUsed=undefined ruleFinal=true) ===
+That’s outside what I can help with here — I don’t pick songs or entertainment.
+Ask me about policies, SOPs, pricing, brand tokens, domain signals, or who owns an ops question.
+
+=== USER ===
+whats my default background color as per marketing desgin brand system
+=== ASSIST (llmUsed=undefined ruleFinal=true) ===
+**Staff portal brand surfaces (marketing design / Brand System tokens):**
+• **Default page background** (CSS token siya-bg-page): #fffdf6 — warm cream
+• **Subtle / secondary surface** (siya-bg-subtle): #faf4e4
+• **White cards / panels** (siya-white): #ffffff
+These are the live staff-portal surface tokens. Pack-specific editorial colors may differ — escalate Marketing if you need a carousel/static token from Brand System docs.
+[siya-workforce] llm failure code=llm_error kind=unknown retryable=true Model 'anthropic/[SENSITIVE]' not found AI_APICallError: [object Object] "" ""
+
+=== USER ===
+who is the president of india
+=== ASSIST (llmUsed=false ruleFinal=undefined) ===
+I don't have a strong approved match for that yet.
+Say what you're trying to understand in one sentence (a decision, a domain this week, an SOP, or who owns something), or open the matching domain tab for the structured snapshot.
+I won't write anything into your Plan Record — that's manual on This week's plan.
+[siya-workforce] llm failure code=llm_error kind=unknown retryable=true Model 'anthropic/[SENSITIVE]' not found AI_APICallError: [object Object] "" ""
+
+=== USER ===
+how
+=== ASSIST (llmUsed=false ruleFinal=undefined) ===
+I don't have a strong approved match for that yet.
+Say what you're trying to understand in one sentence (a decision, a domain this week, an SOP, or who owns something), or open the matching domain tab for the structured snapshot.
+I won't write anything into your Plan Record — that's manual on This week's plan.
+
+USER: ac dc? (after old 1-5 history)
+REPLY: That’s outside what I can help with here — I don’t pick songs or entertainment.
+Ask me about policies, SOPs, pricing, brand tokens, domain signals, or who owns an ops question.
+
+engine-portal-signals-smoke OK

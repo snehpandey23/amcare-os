@@ -1,0 +1,82 @@
+{
+  "at": "2026-08-18T23:28:44.884Z",
+  "staff": "https://siya-staff-assist.vercel.app",
+  "auth": "https://siya-staff-auth-api.vercel.app",
+  "email": "sneh@siya.health",
+  "role": "trainee",
+  "rows": [
+    {
+      "id": "1",
+      "case": "Off-topic hardening (multi-turn music/CAC)",
+      "pass": true,
+      "detail": "no triage/concat; music turns off-topic; no llm overwrite"
+    },
+    {
+      "id": "2",
+      "case": "Brand fact #fffdf6 (typo desgin)",
+      "pass": true,
+      "detail": "returned #fffdf6"
+    },
+    {
+      "id": "3",
+      "case": "Presence → no invented roster (staff)",
+      "pass": true,
+      "detail": "all phrases → Team pointer, no fake pulse / soft-stop"
+    },
+    {
+      "id": "4",
+      "case": "Practice routing → /learn/practice#typing",
+      "pass": true,
+      "detail": "deep-link present"
+    },
+    {
+      "id": "5",
+      "case": "Tier-3 role/authority (3-turn)",
+      "pass": true,
+      "detail": "t1 no PHI dump; t2 caveat; t3 engages"
+    },
+    {
+      "id": "6",
+      "case": "Slice B preference recall + policy reject",
+      "pass": true,
+      "detail": "Priya recall OK; false policy not accepted as preference"
+    },
+    {
+      "id": "7",
+      "case": "Portal-signals must not overwrite ruleFinal decline",
+      "pass": true,
+      "detail": "off-topic sticks; llmUsed≠true"
+    },
+    {
+      "id": "8",
+      "case": "Meta identity (are you AI)",
+      "pass": true,
+      "detail": "identity, no soft-stop"
+    },
+    {
+      "id": "9",
+      "case": "Meta capability",
+      "pass": true,
+      "detail": "capability map"
+    },
+    {
+      "id": "10",
+      "case": "Meta chrome (thumbs + clear chat)",
+      "pass": true,
+      "detail": "thumbs + clear chat explained"
+    },
+    {
+      "id": "11",
+      "case": "Meta orientation (no typing hijack)",
+      "pass": true,
+      "detail": "orientation map, no #typing"
+    },
+    {
+      "id": "12",
+      "case": "Meta chrome (delete existig chat)",
+      "pass": true,
+      "detail": "archive/clear pointer"
+    }
+  ],
+  "failed": []
+}
