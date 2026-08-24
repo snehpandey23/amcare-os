@@ -41,6 +41,16 @@ function main() {
   assert.ok(/unreachable|twice|Clinical Program Manager/i.test(reply.message));
   assert.ok(!/not sure i have the right staff guide/i.test(reply.message));
 
+  const genAiPrior =
+    "It seems there is no approved guidance in our internal resources regarding the use of Generative AI for creating SOPs. Notify Owner: Reach out to Compliance or Leadership.";
+  const gapInput = runSiyaAssistant("Okay can i give input about this", [
+    { role: "user", content: "Tell me about how to use GEn AI for making SOP's" },
+    { role: "assistant", content: genAiPrior },
+  ]);
+  assert.equal(gapInput.knowledgeGap, false, "gap contribution follow-up must not auto-gap");
+  assert.ok(/Notify owner|SOP builder/i.test(gapInput.message), gapInput.message.slice(0, 200));
+  assert.ok(!/not sure i have the right staff guide/i.test(gapInput.message));
+
   console.log("smoke-prior-followup-cover: OK");
 }
 

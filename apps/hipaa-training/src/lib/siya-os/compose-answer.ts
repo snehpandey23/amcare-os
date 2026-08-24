@@ -56,6 +56,37 @@ export function isConfusedAboutPriorAnswer(text: string): boolean {
   return false;
 }
 
+/** Prior Assist turn flagged a missing guide / gap — staff asking how to contribute input. */
+const GAP_PRIOR_MARK =
+  /no approved guidance|don'?t have a (full )?approved guide|Notify owner|knowledge gap|not documented in|requires input from|recommended actions/i;
+
+export function isGapContributionFollowUp(text: string, lastAssistant?: string | null): boolean {
+  const t = text.trim();
+  const prior = (lastAssistant || "").trim();
+  if (!t || !prior || t.length > 220) return false;
+  if (!GAP_PRIOR_MARK.test(prior)) return false;
+  return (
+    /\b(can|could|may)\s+i\s+(give|provide|share|submit|add)\s+(some\s+)?(input|feedback|ideas?|thoughts?)\b/i.test(
+      t,
+    ) ||
+    /\b(how|where)\s+(can|do)\s+i\s+(give|provide|share|submit)\s+(input|feedback|ideas?)\b/i.test(t) ||
+    (/\b(about|on|for)\s+this\b/i.test(t) &&
+      /\b(input|feedback|contribute|suggest|idea|thought|help)\b/i.test(t))
+  );
+}
+
+export function answerGapContributionFollowUp(): string {
+  return [
+    "Yes — you can contribute input on a **missing guide**, but I can’t publish policy from chat.",
+    "",
+    "1. **Notify owner** (when it appears after a gap) — logs the topic for the department lead’s digest.",
+    "2. **Copy escalation summary** — paste a de-identified note to Compliance / Leadership or your supervisor.",
+    "3. **Drafting a new SOP?** Use **Memory → SOP builder**; submitted drafts go through review before Ask can cite them.",
+    "",
+    "Include what you want the guide to say, who should own it, and any compliance concerns (e.g. Gen AI use).",
+  ].join("\n");
+}
+
 /** Clarifying / exception follow-up on the same topic (e.g. “what if the number is unreachable?”). */
 export function isClarifyingFollowUp(text: string): boolean {
   const t = text.trim();

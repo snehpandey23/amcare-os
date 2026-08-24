@@ -1,7 +1,7 @@
 import { getEscalationContacts } from "./config";
 import { defaultEscalationOwner } from "./escalation";
 import { retrievalQueryBoost, routeIntent, expandShortQuery, hasRoutableIntent } from "./flows";
-import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, abusivePatientAnswer, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, isClarifyingFollowUp, answerFromPriorAssistIfCovered, polishStaffMessage, isCasualOffTopic, casualOffTopicReply, appendDraftLiveHedge } from "./compose-answer";
+import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, abusivePatientAnswer, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, isClarifyingFollowUp, answerFromPriorAssistIfCovered, isGapContributionFollowUp, answerGapContributionFollowUp, polishStaffMessage, isCasualOffTopic, casualOffTopicReply, appendDraftLiveHedge } from "./compose-answer";
 import { staffTopicLabel } from "./staff-voice";
 import { synthesizeWorkforceAnswer } from "./llm-answer";
 import {
@@ -697,6 +697,28 @@ function buildSiyaReply(
       sources: [],
       escalationPreview: undefined,
       ruleFinal: true,
+    };
+  }
+
+  const lastAssistTurn = [...history].reverse().find((h) => h.role === "assistant")?.content;
+  if (isGapContributionFollowUp(text, lastAssistTurn)) {
+    return {
+      message: polishStaffMessage(answerGapContributionFollowUp()),
+      chunks: [],
+      knowledgeGap: false,
+      sources: [],
+      portalLinks: [
+        { label: "SOP builder", href: "/memory/knowledge/sop-builder" },
+        { label: "Department SOPs", href: "/memory/knowledge/sops" },
+      ],
+      escalationPreview: undefined,
+      ruleFinal: true,
+      routing: {
+        department: "General",
+        task: "Contribute to missing guide",
+        confidence: "high",
+        followUpQuestions: [],
+      },
     };
   }
 
