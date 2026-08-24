@@ -1,0 +1,77 @@
+# creative-opportunities.yaml
+# Physical signs of ADHD — ranked angles from SYNTHESIS.md
+# Status: Idea — awaiting insight approval + clinical stamp on differential language
+
+source: extract.yaml
+topic: physical-signs-adhd-adults
+pillar: Brain Health & ADHD
+pillar_url: /adhd-care
+priority: High
+clinical_review: Required
+audience: Adults 25–50
+goal: Informational awareness
+
+items:
+  # Rank 1 — Primary myth-safe recognition pack
+  - id: AD-P-01
+    rank: 1
+    family: M
+    layout: M-02
+    journey_stage: Recognizing
+    emotion: Relieved
+    insight: I5
+    supporting_insights: [I1, I2, I4]
+    hook: "Physical signs that may appear with ADHD — and why they’re not enough to diagnose"
+    formats: [Carousel, Blog]
+    cta: Screening
+    cta_label: Take Free ADHD Screening
+    practical_change: "If these patterns are lifelong and impairing, take a validated screener / talk to a clinician — don’t diagnose from fidgeting alone"
+    platforms: [Instagram, Facebook, LinkedIn-Company, Pinterest]
+    blog_title: "Does ADHD have physical signs? What adults should know before self-diagnosing"
+    spoke_candidates:
+      - /answers/adhd-vs-anxiety
+      - /blog/youre-not-lazy-signs-undiagnosed-adult-adhd
+      - /adhd-screening
+    notes: "Lead pack. Sign → may mean → does not prove. Aligns with observer myth-breaking recommendation."
+
+  # Rank 2 — Reel entry to Rank 1
+  - id: AD-P-01R
+    rank: 2
+    family: R
+    layout: R-01
+    journey_stage: Recognizing
+    emotion: Curious
+    insight: I1
+    supporting_insights: [I5]
+    hook: "We’ve heard ADHD symptoms… but does ADHD show physical signs on the body?"
+    formats: [Reel]
+    cta: Article
+    cta_label: Read the full breakdown
+    practical_change: "Same as AD-P-01 — pattern + impairment → screener/clinician"
+    platforms: [Instagram, Facebook]
+    parent_insight: AD-P-01
+    notes: "15–30s cut-down. End on common ≠ conclusive. Funnel to carousel/blog."
+
+  # Rank 3 — Comparison extension
+  - id: AD-P-02
+    rank: 3
+    family: E
+    layout: E-02
+    journey_stage: Considering
+    emotion: Validated
+    insight: I6
+    supporting_insights: [I7]
+    hook: "ADHD restlessness vs anxiety restlessness — same body, different driver"
+    formats: [Blog-section, Carousel]
+    cta: Article
+    cta_label: ADHD vs anxiety — how clinicians sort it
+    practical_change: "Notice when restlessness shows (boredom/understimulation vs worry/threat) — bring both patterns to a clinician if needed"
+    platforms: [Instagram, LinkedIn-Company, Facebook]
+    cross_link: /answers/adhd-vs-anxiety
+    notes: "Do not duplicate full ADHD-vs-anxiety spoke. Body-first comparison only. Can ship as H2 inside Rank 1 blog first."
+
+guardrails:
+  - No physical-sign-as-diagnosis claims
+  - No Founder LinkedIn unless explicitly requested
+  - Company voice across platforms
+  - Clinical stamp before paid; organic OK with cautious differential language

@@ -1,0 +1,60 @@
+# Research extract — Physical signs of ADHD (adults)
+
+pillar: brain-health-adhd
+date: 2026-08-05
+proposed_insight_id: AD-P-01
+clinical_review_required: true
+evidence_level: ClinicalPractice + Experiential (community) — body signs are recognized hyperactivity expressions, not standalone diagnostic criteria
+synthesis: SYNTHESIS.md
+
+## Citations (selected)
+
+### C1 — Adult ADHD clinical overviews
+- Mayo Clinic; Cleveland Clinic; ADDA adult symptom guides
+- Finding: Adult hyperactivity often subtler — fidgeting, restlessness, inner motor; inattentive presentation may lack overt physical hyperactivity
+- Limitation: Consumer education pages — use for framing, not novel claims
+
+### C2 — European adult ADHD consensus
+- Updated European Consensus Statement on diagnosis and treatment of adult ADHD
+- Finding: Inner restlessness, fidgeting, restless sleep; sitting calmly in assessment does not exclude ADHD
+- Limitation: Consensus statement — cite as clinical practice, not single RCT
+
+### C3 — Sleep / RLS comorbidity
+- Systematic review ADHD×RLS; Frontiers and journal studies on adult ADHD sleep problems
+- Finding: High rates of sleep disturbance and RLS-like symptoms among adults with ADHD; association ≠ identity
+- Limitation: Self-report inflation; comorbidity ≠ diagnostic criterion for ADHD
+
+### C4 — Community (Reddit r/ADHD + related)
+- Visible symptoms thread; physical ADHD discussion; fidgeting threads; anxiety vs ADHD restlessness; “can clinicians tell”
+- Finding: Lived body signs + skepticism of overhyped physical-sign content
+- Limitation: Experiential; selection bias; not clinical evidence
+
+### C5 — Lifestyle / press “surprising signs”
+- Telegraph / Good Housekeeping / HuffPost-style lists
+- Finding: Physical and surprising signs circulate widely; thin differential diagnosis
+- Limitation: Listicle risk of overclaim — use as competitive content map
+
+## Insights (patient_why)
+
+| id | claim | patient_why | evidence |
+|----|-------|-------------|---------|
+| I1 | ADHD can show physical expressions (fidgeting, restlessness, restless sleep) | Answers “is it only in my head?” | C1, C2, C4 |
+| I2 | Adult physical signs are often subtle or internalized | Explains why coworkers don’t “see” ADHD | C1, C2 |
+| I3 | Fidgeting can be a focus/regulation strategy | Reframes shame as function | C1, C4 |
+| I4 | You can have ADHD with little/no overt hyperactivity | Validates inattentive adults | C1 |
+| I5 | Physical signs alone cannot diagnose ADHD | Blocks self-diagnosis from TikTok lists | C1, C2, clinical standard |
+| I6 | Anxiety restlessness and ADHD restlessness can look alike but differ in driver | Reduces wrong self-label | C4 + clinical differential |
+| I7 | Sleep / RLS-like symptoms often co-travel with ADHD but are not “proof” | Names body experience without collapsing diagnoses | C3 |
+| I8 | Masking can hide visible signs in short encounters | Explains “psychiatrist couldn’t tell by looking” | C2, C4 |
+
+## Limitations
+- Physical manifestations are not DSM diagnostic criteria as a standalone set
+- High symptom overlap with anxiety, sleep disorders, iron deficiency, thyroid, caffeine/stimulants
+- Community sources over-index on visible hyperactivity relative to inattentive presentations
+
+## Out of scope
+- Diagnosing ADHD from photos/video of fidgeting
+- Claiming hypermobility, clumsiness, or joint issues as definitive ADHD signs
+- Child classroom hyperactivity framing as primary angle
+- Founder LinkedIn posts unless requested
+- Treatment/medication dosing advice in this pack
