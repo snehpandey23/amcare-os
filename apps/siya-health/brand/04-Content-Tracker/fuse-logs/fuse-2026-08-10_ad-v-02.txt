@@ -1,0 +1,8 @@
+AD-V-02 ADHD × Migraine — 2026-08-10 (updated)
+Git path: apps/siya-health/brand/editorial-packs/AD-V-02-adhd-migraine/
+WorkDrive target (when TrueSync available):
+  Siya Knowledge Editorial/05-Carousels/AD-V-02-adhd-migraine/
+  Copy: heygen/ + captions/ (incl. by-topic/) + video-topics.md + frameworks.md + medical-flags.md + README.md
+  Captions: ready-to-post/captions/ mirror of captions/ when posting
+Tracker: Siya-Content-Tracker-Posts.csv rows updated (Copy ready; KW + hook archetypes noted)
+WorkDrive TrueSync: NOT mounted in this cloud environment — fuse this folder on a machine with Zoho WorkDrive

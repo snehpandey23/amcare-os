@@ -1,0 +1,94 @@
+# creative-opportunities — ADHD × Migraine → AD-V-02
+
+```yaml
+source: extract.yaml
+topic: adhd-migraine
+items:
+  - intent: Education
+    family: V
+    layout: HeyGen-avatar-9x16
+    journey_stage: Recognizing
+    emotion: Validated + Curious
+    insight_id: I1
+    video_id: V1
+    cta: DualLog
+    cta_label: 7-day dual log → clinician
+    platforms: [Instagram, YouTubeShorts, Facebook]
+    clinical_review: soft
+  - intent: Education
+    family: V
+    layout: HeyGen-avatar-9x16
+    journey_stage: Considering
+    emotion: Curious
+    insight_id: I2
+    video_id: V2
+    cta: AuraLog
+    platforms: [LinkedIn, Instagram]
+    clinical_review: true
+  - intent: Recognition
+    family: V
+    layout: HeyGen-avatar-9x16
+    journey_stage: Recognizing
+    emotion: Surprised-recognition
+    insight_id: I4
+    video_id: V3
+    cta: BoredomLog
+    platforms: [Instagram]
+  - intent: Recognition
+    family: V
+    layout: HeyGen-avatar-list
+    journey_stage: Recognizing
+    emotion: Relieved
+    insight_id: I3
+    video_id: V4
+    cta: StackTop3
+    platforms: [Instagram, TikTok]
+  - intent: Education
+    family: V
+    layout: HeyGen-avatar-balanced
+    journey_stage: Considering
+    emotion: Ambivalent-validated
+    insight_id: I5
+    video_id: V5
+    clinical_review: true
+    cta: PrescriberTalk
+    platforms: [Instagram, LinkedIn]
+  - intent: Recognition
+    family: V
+    layout: HeyGen-avatar-sensory
+    journey_stage: Recognizing
+    emotion: Seen
+    insight_id: I6
+    video_id: V6
+    cta: SensoryLog
+    platforms: [Instagram]
+  - intent: Education
+    family: V
+    layout: HeyGen-short-reply
+    journey_stage: Recognizing
+    emotion: Curious
+    insight_id: I7
+    video_id: V6b
+    cta: FamilyHistory
+    platforms: [Instagram]
+  - intent: Education
+    family: V
+    layout: HeyGen-avatar-reframe
+    journey_stage: Considering
+    emotion: Hopeful-careful
+    insight_id: I9
+    video_id: V7
+    clinical_review: true
+    cta: BroaderWorkup
+    platforms: [Instagram]
+  - intent: Education
+    family: V
+    layout: HeyGen-avatar-urgent-calm
+    journey_stage: Considering
+    emotion: Cautious
+    insight_id: I8
+    video_id: V8
+    clinical_review: true
+    cta: UrgentEval
+    platforms: [Instagram]
+```
