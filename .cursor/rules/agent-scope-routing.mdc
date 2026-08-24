@@ -31,3 +31,12 @@ When implementing executive / founder / My day admin lane features, **read v2 ar
 ## Misrouted work
 
 If a thread accidentally included **marketing visual tests** (e.g. `BG-MACRO-BLUR`, carousel A/B) while working on staff portal, treat brand assets as already filed under `apps/siya-health/brand/statics/` and WorkDrive `06-Statics/` — do not redeploy staff app for that.
+
+## Cloud agent — images
+
+For **carousel / static / photo+compose** in cloud: use `apps/siya-health/brand/CLOUD-AGENT-IMAGE-BRIEF.md` and rule `siya-cloud-image-only.mdc`.
+
+- **Allowed:** `apps/siya-health/brand/` only  
+- **Forbidden:** site HTML, vercel deploy, staff portal, “while we’re here” SEO  
+
+If `BRAND-STYLE-LOCK.md` is missing in the cloud clone → **stop** (stale branch). Do not invent from Jul plum docs.

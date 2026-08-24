@@ -35,3 +35,5 @@ Also: `siya-visual-approval-gate.mdc` · `siya-a03-lean-lock.mdc` · `zoho-workd
 ## Cloud note
 
 If `BRAND-STYLE-LOCK.md` / `AGENT-BOOTSTRAP.md` are missing from the clone, **stop** and say the branch is stale — do not fall back to Jul-24 plum docs or Instagram-static alone.
+
+**Image-only cloud runs:** paste `apps/siya-health/brand/CLOUD-AGENT-IMAGE-BRIEF.md`. Rule: `siya-cloud-image-only.mdc` (no site/deploy).

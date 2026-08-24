@@ -102,6 +102,10 @@ Classify job (Recognition / Knowledge / Authority / Conversion)
 | Freehand final image | Reject; run compositor |
 | Batch 6 slides without approval | Follow `siya-visual-approval-gate.mdc` |
 | Plum / hard-L from Jul packs | Legacy — do not copy |
+| Cloud agent edits site / deploys while doing images | Use `CLOUD-AGENT-IMAGE-BRIEF.md` + `siya-cloud-image-only.mdc` — brand/ only |
+
+**Starter prompt for cloud image runs:** [`CLOUD-AGENT-IMAGE-BRIEF.md`](./CLOUD-AGENT-IMAGE-BRIEF.md)  
+**On-spec proof:** `brand/statics/SPEC-PROOF-2026-08-10-v21/`
 
 ---
 

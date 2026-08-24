@@ -1,0 +1,38 @@
+---
+description: Knowledge A-03 lean lock — on-frame = headline + one recognition sub-headline; teach in caption unless --dense
+alwaysApply: true
+---
+
+# A-03 lean lock (Knowledge carousels)
+
+Applies to **all** Knowledge / A-03 carousel and static work (desktop · mobile · cloud).
+
+## On-frame default (fail closed)
+
+- **Headline** + **one recognition sub-headline** only
+- Sub-headline **is the whole message** (≤ ~2–4 short lines) — not a teaser
+- Teaching depth → **caption**
+- `explanation` / `takeaway` / body / bullet ladders → **off** unless the brief explicitly says `--dense`
+
+## Content selection (before compose)
+
+Supplied copy is a **pool**, not a requirement to show every sentence.
+
+1. Pick the strongest headline (≤6 words · magenta accent ≤3 words)
+2. Pick **one** recognition/support line
+3. Move explanation + takeaway to caption
+4. When in doubt, **REMOVE** on-frame copy — never add lines to fill whitespace
+
+## Spokenness
+
+Sub-headlines must read aloud as complete natural phrasing (2026-08-13). If mental reconstruction is needed, rewrite.
+
+## Compositor
+
+`apps/siya-health/brand/scripts/compose_format_a_knowledge.py` — lean default. Pass `--dense` only when explicitly requested.
+
+**Sub-headline flag:** Pass the recognition/support line as `--recognition` (that is the sub-headline). Do not put it in `--explanation` / `--takeaway` / `--body` on lean frames.
+
+## Reject
+
+Dense teaching cards by default · equal visual weight for every copy block · Canva-template stacking · freehand `GenerateImage` as the final branded frame

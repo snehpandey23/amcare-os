@@ -1,0 +1,51 @@
+---
+description: Cloud agents doing Siya brand images — current Visual OS only; never site/deploy; stop if brand lock missing
+alwaysApply: true
+---
+
+# Cloud agent — brand images only (fail closed)
+
+Use this whenever the task is **carousel / static / social image / photo + compose** for Siya Health.
+
+## Allowed write surface
+
+**Only** under `apps/siya-health/brand/` (and WorkDrive `Siya Knowledge Editorial/` when shipping approved packs).
+
+Examples: `editorial-packs/`, `statics/`, `scripts/compose_*.py` outputs, captions, video-prompt.md, tracker CSV rows.
+
+## Forbidden (do not touch)
+
+- `apps/siya-health/**/*.html` · site CSS/JS · sitemap · redirects · vercel configs
+- `apps/hipaa-training/` · `integrations/hipaa-training-api/` · staff portal
+- Any `vercel deploy` · `deploy-staff-portal` · git push to promote production
+- Editing patient Guide / SEO / ads LP for “while we’re here”
+
+If the brief is **images only**, refuse site/deploy side quests in one short sentence and stay on brand.
+
+## Required first reads (in order)
+
+1. `apps/siya-health/brand/AGENT-BOOTSTRAP.md`
+2. `apps/siya-health/brand/BRAND-STYLE-LOCK.md` ← **must exist**
+3. `apps/siya-health/brand/VISUAL-OS.md`
+4. `apps/siya-health/brand/VISUAL-OS-TEMPLATES.md`
+5. Copy-paste brief: `apps/siya-health/brand/CLOUD-AGENT-IMAGE-BRIEF.md`
+
+## Stale clone stop
+
+If `BRAND-STYLE-LOCK.md` or `AGENT-BOOTSTRAP.md` is missing from the cloud clone:
+
+1. **Stop**
+2. Say: branch/clone is stale — need current `main` with those files committed
+3. **Do not** fall back to Jul plum docs, `SIYA-SOCIAL-POST-STYLE`, hard-L samples, or Instagram-static alone
+
+## Tokens (fail closed)
+
+Cream `#F4EFE7` · Navy `#001878` · Dark Navy `#0A246B` · Magenta `#D81088` · Georgia + Arial · 4:5 1080×1350
+
+**Reject:** plum `#8D3A78` · brown ink · hard-seam L · text shadows · ambient watermarks · freehand `GenerateImage` as final branded PNG
+
+## Production path
+
+Classify → template ID (usually **A-03**) → lean copy (headline + one recognition) → source photo only → **`compose_*.py`** → show slide for approval
+
+Reference good output: `apps/siya-health/brand/statics/SPEC-PROOF-2026-08-10-v21/`

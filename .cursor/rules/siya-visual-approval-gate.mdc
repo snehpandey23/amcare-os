@@ -1,0 +1,34 @@
+---
+description: Slide-by-slide approval gate for Siya carousel/static — copy plan → one image → approve → then ship
+alwaysApply: true
+---
+
+# Siya visuals — slide-by-slide approval gate
+
+When the user asks for a **carousel or static image** (Siya Health brand creative), do **not** produce the full pack in one pass.
+
+## Phase 1 — copy plan only
+
+1. Draft on-frame copy deck in chat or `copy/carousel.md`
+2. No captions, video prompts, tracker rows, or WorkDrive sync yet
+
+## Phase 2 — one image at a time
+
+1. Render **slide 1 only** (source photo + `compose_*.py`)
+2. Show it in chat; self-audit: Style Lock tokens · soft dissolve · lean A-03 · face-safe · right-weighted
+3. Wait for approval before slide 2+
+4. If the user locks style (“rest look good, continue”), later slides may batch
+
+## Phase 3 — ship after approval only
+
+Captions · video-prompt · tracker · WorkDrive sync — **only** after the slide set is approved.
+
+## Precedence (WorkDrive)
+
+This gate takes precedence over `zoho-workdrive-team.mdc` for any Siya brand creative asset — no WorkDrive sync before Phase 3 approval, regardless of what that rule says.
+
+## Never skip
+
+- Do not invent layouts — classify → template ID → compose
+- Do not treat `GenerateImage` output as the final branded frame
+- Automated ship gates do **not** replace founder/lead visual OK
