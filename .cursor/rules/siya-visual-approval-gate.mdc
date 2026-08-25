@@ -26,8 +26,8 @@ When (and only when) the user explicitly approves:
 
 1. Remaining slides if needed
 2. Captions · video-prompt · tracker row · `SHIP.md` (phase 3 + approved) — under `editorial-packs/[ID]/` or `statics/[ID]/`
-3. Agents **do not** call Zoho APIs or hold refresh tokens. After the pack lands on **`main`**, GitHub Action **Siya WorkDrive Phase-3 sync (live)** mirrors changed packs to Knowledge Editorial `04/05/06/07`
-4. End by stating: **Pack ready in git** + folder path, and that live WorkDrive sync will run from Actions if secrets are set
+3. Agents **do not** call Zoho APIs or hold refresh tokens. After the pack lands on **`main`**, GitHub Action **Siya WorkDrive Phase-3 sync (live)** mirrors changed packs into WorkDrive `_API-DRY-RUN/04–07` (fresh delivery folders; existing secrets)
+4. End by stating: **Pack ready in git** + folder path, and that WorkDrive sync will run from Actions into `_API-DRY-RUN/`
 
 ## Precedence (WorkDrive)
 

@@ -9,8 +9,9 @@ Gates (all required; otherwise skip + log, exit 0):
   4. Captions + ready-to-post images present
 
 Modes:
-  test — destinations must be _API-DRY-RUN (WORKDRIVE_DRYRUN_*_ID)
-  live — real Knowledge Editorial 04/05/06/07 (WORKDRIVE_LIVE_*_ID)
+  test — verification / dry-run Action (WORKDRIVE_DRYRUN_*_ID, allows TEST-* with --allow-test-ids)
+  live — human-gated production delivery after Phase 3 on main
+         (currently targets the fresh _API-DRY-RUN/04–07 folders via same WORKDRIVE_DRYRUN_*_ID secrets)
 
 Transports:
   fs  — test only, under WORKDRIVE_DRYRUN_FS_ROOT
@@ -56,14 +57,19 @@ def load_config(path: Path) -> dict[str, Any]:
             raise SystemExit("Refusing to run: test config must require_path_substring=_API-DRY-RUN")
         return cfg
     if mode == "live":
-        if cfg.get("require_path_substring") == "_API-DRY-RUN":
-            raise SystemExit("Refusing to run: live config must not target _API-DRY-RUN")
         if not cfg.get("api", {}).get("parent_folder_ids_from_env"):
             raise SystemExit("Refusing to run: live config missing api.parent_folder_ids_from_env")
-        # Hard reject dry-run env keys in live config
+        # Founder choice: deliver into the fresh _API-DRY-RUN/04–07 folders (same secrets).
+        if cfg.get("require_path_substring") != "_API-DRY-RUN":
+            raise SystemExit(
+                "Refusing to run: live config must require_path_substring=_API-DRY-RUN "
+                "(team delivery target is the fresh dry-run tree)"
+            )
         for env_key in cfg["api"]["parent_folder_ids_from_env"].values():
-            if "DRYRUN" in str(env_key).upper():
-                raise SystemExit(f"Refusing live config that references dry-run env {env_key}")
+            if "DRYRUN" not in str(env_key).upper():
+                raise SystemExit(
+                    f"Refusing live config: expected WORKDRIVE_DRYRUN_* env key, got {env_key}"
+                )
         return cfg
     raise SystemExit(f"Refusing to run: config.mode must be 'test' or 'live' (got {mode!r})")
 
@@ -312,7 +318,7 @@ def count_files(path: Path) -> int:
 
 # --- API transport ---
 
-SCRIPT_VERSION = "2026-08-25-v5-live-gated"
+SCRIPT_VERSION = "2026-08-25-v5-live-dryrun-dest"
 SYNCING_PREFIX = "__SYNCING__"
 
 
@@ -358,23 +364,6 @@ def api_parent_ids(cfg: dict[str, Any]) -> dict[str, str]:
         val = "".join(val.split())
         out[folder] = val
         log(f"  parent {folder}: len={len(val)} head={val[:4]}…tail={val[-4:]}")
-
-    # Live must not accidentally reuse dry-run folder IDs
-    if cfg.get("mode") == "live":
-        for folder, live_id in out.items():
-            dry_key = {
-                "04-Content-Tracker": "WORKDRIVE_DRYRUN_04_ID",
-                "05-Carousels": "WORKDRIVE_DRYRUN_05_ID",
-                "06-Statics": "WORKDRIVE_DRYRUN_06_ID",
-                "07-Video-Prompts": "WORKDRIVE_DRYRUN_07_ID",
-            }.get(folder)
-            if not dry_key:
-                continue
-            dry_val = "".join(os.environ.get(dry_key, "").split())
-            if dry_val and dry_val == live_id:
-                raise SystemExit(
-                    f"Refusing live sync: {folder} LIVE id matches {dry_key} (still _API-DRY-RUN)"
-                )
     return out
 
 

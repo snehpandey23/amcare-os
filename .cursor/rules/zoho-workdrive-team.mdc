@@ -7,7 +7,7 @@ alwaysApply: true
 
 **Agents (desktop · cloud):** After Phase 3 approval in chat, land the pack in **git** (`editorial-packs/[ID]/` or `statics/[ID]/`) with `SHIP.md` + captions + tracker row. **Do not** call Zoho APIs, use TrueSync write paths, or put `ZOHO_REFRESH_TOKEN` in Cloud Agent context.
 
-**Automation:** When those files land on **`main`**, GitHub Action `siya-workdrive-phase3-live.yml` syncs **only changed** packs into live Knowledge Editorial (secrets `WORKDRIVE_LIVE_*_ID`). Dry-run stays on `_API-DRY-RUN` via the separate dry-run workflow.
+**Automation:** When those files land on **`main`**, GitHub Action `siya-workdrive-phase3-live.yml` syncs **only changed** packs into `_API-DRY-RUN/04–07` (fresh team delivery folders; secrets `WORKDRIVE_DRYRUN_*_ID` already set). Manual dry-run/fail tests use the separate dry-run workflow.
 
 **Humans:** Optional TrueSync browse / manual fix-up under:
 

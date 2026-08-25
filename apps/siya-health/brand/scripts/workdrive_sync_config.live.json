@@ -1,7 +1,7 @@
 {
   "mode": "live",
-  "description": "LIVE Knowledge Editorial 04/05/06/07 — human-gated via chat Phase 3 + SHIP.md + tracker on main. Secrets: WORKDRIVE_LIVE_*_ID only.",
-  "require_path_substring": "Siya Knowledge Editorial",
+  "description": "Human-gated delivery into fresh _API-DRY-RUN/04–07 (same WORKDRIVE_DRYRUN_*_ID secrets already set). Chat Phase 3 → SHIP.md + tracker on main → Action.",
+  "require_path_substring": "_API-DRY-RUN",
   "transport": "api",
   "api": {
     "accounts_url_env": "ZOHO_ACCOUNTS_URL",
@@ -10,10 +10,10 @@
     "folders_url": "https://www.zohoapis.com/workdrive/api/v1/files",
     "allow_flat_fallback": false,
     "parent_folder_ids_from_env": {
-      "04-Content-Tracker": "WORKDRIVE_LIVE_04_ID",
-      "05-Carousels": "WORKDRIVE_LIVE_05_ID",
-      "06-Statics": "WORKDRIVE_LIVE_06_ID",
-      "07-Video-Prompts": "WORKDRIVE_LIVE_07_ID"
+      "04-Content-Tracker": "WORKDRIVE_DRYRUN_04_ID",
+      "05-Carousels": "WORKDRIVE_DRYRUN_05_ID",
+      "06-Statics": "WORKDRIVE_DRYRUN_06_ID",
+      "07-Video-Prompts": "WORKDRIVE_DRYRUN_07_ID"
     }
   },
   "tracker_csv_git": "apps/siya-health/brand/04-Content-Tracker/CLOUD-PACK-TRACKER.csv",
