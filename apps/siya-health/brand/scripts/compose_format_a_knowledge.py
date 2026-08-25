@@ -26,17 +26,20 @@ FONT_CANDIDATES = {
         "/usr/share/fonts/truetype/msttcorefonts/Georgia_Bold.ttf",
         "/usr/share/fonts/truetype/msttcorefonts/georgia_bold.ttf",
         "/Library/Fonts/Georgia Bold.ttf",
+        "/System/Library/Fonts/Supplemental/Georgia Bold.ttf",
         "/usr/share/fonts/truetype/liberation/LiberationSerif-Bold.ttf",
     ],
     "body": [
         "/usr/share/fonts/truetype/msttcorefonts/Arial_Bold.ttf",
         "/usr/share/fonts/truetype/msttcorefonts/Arialbd.ttf",
         "/Library/Fonts/Arial Bold.ttf",
+        "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
         "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
     ],
     "body_reg": [
         "/usr/share/fonts/truetype/msttcorefonts/Arial.ttf",
         "/Library/Fonts/Arial.ttf",
+        "/System/Library/Fonts/Supplemental/Arial.ttf",
         "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
     ],
 }
