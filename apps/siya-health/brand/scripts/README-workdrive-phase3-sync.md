@@ -20,9 +20,10 @@
 
 ## Workflows
 
-| Workflow | When |
+| Workflow | Writes to |
 |---|---|
-| `siya-workdrive-phase3-sync.yml` | Manual dry-run / fail tests (`RUN-DRY-RUN`, allows `TEST-*`) |
-| `siya-workdrive-phase3-live.yml` | Push to `main` on pack paths, or manual `SYNC-LIVE` |
+| `siya-workdrive-phase3-live.yml` | Working delivery tree only (`WORKDRIVE_DRYRUN_*` → `_API-DRY-RUN/…`). **No** `simulate_fail_after`. |
+| `siya-workdrive-phase3-fail-test.yml` | **`_FAIL-TEST-ONLY/` only** (`WORKDRIVE_FAILTEST_*`). Mid-upload abort+rollback. Soft-skips until those secrets exist. |
+| `siya-workdrive-phase3-sync.yml` | **Retired** — no longer syncs to the working tree. |
 
-Team path in WorkDrive: `Siya Knowledge Editorial/_API-DRY-RUN/05-Carousels/…` (and 04/06/07).
+Hard rule in script: `--simulate-fail-after` refused unless `mode=fail-test`.
