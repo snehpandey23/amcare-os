@@ -255,7 +255,8 @@ def count_files(path: Path) -> int:
 
 # --- API transport ---
 
-SCRIPT_VERSION = "2026-08-25-v3-flat-fallback"
+SCRIPT_VERSION = "2026-08-25-v4-atomic-staging"
+SYNCING_PREFIX = "__SYNCING__"
 
 
 def zoho_access_token() -> str:
@@ -456,12 +457,94 @@ def api_create_folder(token: str, parent_id: str, name: str) -> str:
     return ""
 
 
+def api_delete_resource(token: str, resource_id: str) -> bool:
+    """Best-effort delete of a WorkDrive file/folder. Returns True on success."""
+    last_err = ""
+    for base in _api_bases():
+        url = f"{base}/files/{resource_id}"
+        req = urllib.request.Request(url, method="DELETE", headers=_wd_headers(token))
+        try:
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                resp.read()
+            log(f"  deleted resource …{resource_id[-6:]} via {base}")
+            return True
+        except urllib.error.HTTPError as e:
+            err = e.read().decode(errors="replace")
+            last_err = f"{base} HTTP {e.code} {err[:200]}"
+            # 204/404 variants
+            if e.code in {204, 404}:
+                return True
+            log(f"WARN: delete …{resource_id[-6:]}: {last_err}")
+            continue
+    log(f"WARN: delete failed …{resource_id[-6:]} last={last_err}")
+    return False
+
+
+def api_rename_resource(token: str, resource_id: str, new_name: str) -> bool:
+    payload = json.dumps(
+        {
+            "data": {
+                "attributes": {"name": new_name},
+                "type": "files",
+                "id": resource_id,
+            }
+        }
+    ).encode()
+    last_err = ""
+    for base in _api_bases():
+        url = f"{base}/files/{resource_id}"
+        req = urllib.request.Request(
+            url,
+            data=payload,
+            method="PATCH",
+            headers=_wd_headers(token, "application/json"),
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                resp.read()
+            log(f"  renamed …{resource_id[-6:]} → {new_name!r} via {base}")
+            return True
+        except urllib.error.HTTPError as e:
+            err = e.read().decode(errors="replace")
+            last_err = f"{base} HTTP {e.code} {err[:200]}"
+            log(f"WARN: rename → {new_name!r}: {last_err}")
+            continue
+    log(f"WARN: rename failed → {new_name!r} last={last_err}")
+    return False
+
+
+def api_find_child_id(token: str, parent_id: str, name: str) -> str:
+    """Return child folder/file id under parent with exact name, or ''."""
+    q = urllib.parse.urlencode({"page[limit]": "50"})
+    for base in _api_bases():
+        url = f"{base}/files/{parent_id}/files?{q}"
+        req = urllib.request.Request(url, method="GET", headers=_wd_headers(token))
+        try:
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                data = json.loads(resp.read().decode())
+        except urllib.error.HTTPError as e:
+            err = e.read().decode(errors="replace")
+            log(f"WARN: list children of …{parent_id[-6:]}: HTTP {e.code} {err[:150]}")
+            continue
+        raw = data.get("data") or []
+        if isinstance(raw, dict):
+            raw = [raw]
+        for item in raw:
+            attrs = item.get("attributes") or {}
+            if attrs.get("name") == name:
+                return str(item.get("id") or "")
+        return ""  # listed OK, not found
+    return ""
+
+
 def api_sync_tree_nested(
     token: str,
     pack_folder_id: str,
     local_dir: Path,
+    *,
+    simulate_fail_after: int = 0,
 ) -> int:
-    """Upload pack preserving subfolders (requires working create-folder)."""
+    """Upload pack preserving subfolders. Returns file count, or -1 if folder create failed."""
     count = 0
     folder_cache: dict[str, str] = {"": pack_folder_id}
     for path in sorted(local_dir.rglob("*")):
@@ -469,7 +552,6 @@ def api_sync_tree_nested(
             continue
         rel = path.relative_to(local_dir)
         parent_key = str(rel.parent) if str(rel.parent) != "." else ""
-        # ensure each path segment folder exists
         cur = pack_folder_id
         built = ""
         if parent_key:
@@ -478,25 +560,84 @@ def api_sync_tree_nested(
                 if built not in folder_cache:
                     fid = api_create_folder(token, cur, part)
                     if not fid:
-                        return -1  # signal caller to flat-fallback
+                        return -1
                     folder_cache[built] = fid
                 cur = folder_cache[built]
         api_upload_file(token, cur, path)
         count += 1
+        if simulate_fail_after > 0 and count >= simulate_fail_after:
+            raise RuntimeError(
+                f"SIMULATED_FAIL after {count} file upload(s) (test: mid-upload abort)"
+            )
     return count
 
 
-def api_sync_tree_flat(token: str, parent_id: str, local_dir: Path, insight_id: str) -> int:
-    """TEST fallback: upload into parent with prefixed filenames (no subfolder create)."""
-    count = 0
-    for path in sorted(local_dir.rglob("*")):
-        if not path.is_file():
-            continue
-        rel = path.relative_to(local_dir)
-        flat_name = f"{insight_id}__{rel.as_posix().replace('/', '__')}"
-        api_upload_file(token, parent_id, path, upload_name=flat_name)
-        count += 1
-    return count
+def api_sync_pack_atomic(
+    cfg: dict[str, Any],
+    token: str,
+    parents: dict[str, str],
+    pack_dir: Path,
+    kind: str,
+    insight_id: str,
+    *,
+    simulate_fail_after: int = 0,
+) -> None:
+    """
+    Upload into a staging folder `__SYNCING__{id}`, then rename to `{id}` on success.
+    On any failure: delete the staging folder so nothing partial remains under the final name.
+    Side files (07 video-prompt, 04 tracker) upload only after pack promote succeeds.
+    """
+    top_key = "05-Carousels" if kind == "carousel" else "06-Statics"
+    top_id = parents[top_key]
+    staging_name = f"{SYNCING_PREFIX}{insight_id}"
+
+    # Clean leftover staging from a prior crash
+    stale = api_find_child_id(token, top_id, staging_name)
+    if stale:
+        log(f"  cleaning stale staging {staging_name!r}")
+        api_delete_resource(token, stale)
+
+    staging_id = api_create_folder(token, top_id, staging_name)
+    if not staging_id:
+        raise SystemExit(f"Failed to create staging folder {staging_name} under {top_key}")
+
+    try:
+        n = api_sync_tree_nested(
+            token, staging_id, pack_dir, simulate_fail_after=simulate_fail_after
+        )
+        if n < 0:
+            raise RuntimeError("nested folder create failed mid-staging")
+        log(f"  staged {n} pack files under {top_key}/{staging_name}")
+
+        # If final name already exists (re-sync), remove it then rename staging → final
+        existing = api_find_child_id(token, top_id, insight_id)
+        if existing:
+            log(f"  replacing existing {insight_id!r}")
+            if not api_delete_resource(token, existing):
+                raise RuntimeError(f"could not delete existing folder {insight_id}")
+
+        if not api_rename_resource(token, staging_id, insight_id):
+            raise RuntimeError(f"could not promote staging → {insight_id}")
+        staging_id = ""  # promoted; do not delete in finally
+        log(f"  promoted staging → {top_key}/{insight_id}")
+
+        vp = pack_dir / "video-prompt.md"
+        if vp.is_file():
+            named = pack_dir / f"{insight_id}-video-prompt.md"
+            shutil.copy2(vp, named)
+            try:
+                api_upload_file(token, parents["07-Video-Prompts"], named)
+            finally:
+                named.unlink(missing_ok=True)
+
+        tracker = REPO_ROOT / cfg["tracker_csv_git"]
+        api_upload_file(token, parents["04-Content-Tracker"], tracker)
+        log("  tracker CSV uploaded to 04-Content-Tracker")
+    except Exception:
+        if staging_id:
+            log(f"ROLLBACK: deleting staging {staging_name!r} after failure")
+            api_delete_resource(token, staging_id)
+        raise
 
 
 def sync_one(
@@ -504,6 +645,8 @@ def sync_one(
     insight_id: str,
     branch: str,
     transport: str,
+    *,
+    simulate_fail_after: int = 0,
 ) -> str:
     """Returns 'synced' | 'skipped'."""
     if not gate_branch(branch):
@@ -536,42 +679,22 @@ def sync_one(
     if transport == "api":
         token = zoho_access_token()
         parents = api_parent_ids(cfg)
-        top_key = "05-Carousels" if kind == "carousel" else "06-Statics"
-        top_id = parents[top_key]
-
-        pack_folder_id = api_create_folder(token, top_id, insight_id)
-        flat_ok = bool(cfg.get("api", {}).get("allow_flat_fallback", True))
-        if pack_folder_id:
-            n = api_sync_tree_nested(token, pack_folder_id, pack_dir)
-            if n < 0:
-                log("WARN: nested upload failed mid-way; trying flat fallback")
-                pack_folder_id = ""
-            else:
-                log(f"  uploaded {n} pack files nested under {top_key}/{insight_id}")
-        if not pack_folder_id:
-            if not flat_ok:
-                raise SystemExit(
-                    f"Failed to create WorkDrive folder {insight_id} under {top_key}"
-                )
-            log(
-                f"WARN: folder create unavailable (often HTTP 415) — "
-                f"flat-uploading into {top_key} with prefix {insight_id}__"
+        try:
+            api_sync_pack_atomic(
+                cfg,
+                token,
+                parents,
+                pack_dir,
+                kind,
+                insight_id,
+                simulate_fail_after=simulate_fail_after,
             )
-            n = api_sync_tree_flat(token, top_id, pack_dir, insight_id)
-            log(f"  uploaded {n} pack files FLAT into {top_key}")
-
-        vp = pack_dir / "video-prompt.md"
-        if vp.is_file():
-            named = pack_dir / f"{insight_id}-video-prompt.md"
-            shutil.copy2(vp, named)
-            try:
-                api_upload_file(token, parents["07-Video-Prompts"], named)
-            finally:
-                named.unlink(missing_ok=True)
-
-        tracker = REPO_ROOT / cfg["tracker_csv_git"]
-        api_upload_file(token, parents["04-Content-Tracker"], tracker)
-        log("  tracker CSV uploaded to 04-Content-Tracker")
+        except RuntimeError as e:
+            if "SIMULATED_FAIL" in str(e):
+                log(f"FAIL_TEST: {e}")
+                log("FAIL_TEST: staging rolled back; no final pack folder should remain")
+                raise SystemExit(2) from e
+            raise
         return "synced"
 
     raise SystemExit(f"Unknown transport {transport}")
@@ -588,15 +711,25 @@ def main() -> int:
     ap.add_argument("--branch", default=None)
     ap.add_argument("--assume-main", action="store_true")
     ap.add_argument("--transport", choices=["fs", "api"], default=None)
+    ap.add_argument(
+        "--simulate-fail-after",
+        type=int,
+        default=0,
+        help="TEST ONLY: abort after N file uploads inside staging, then rollback",
+    )
     args = ap.parse_args()
 
     cfg = load_config(Path(args.config))
     transport = args.transport or os.environ.get("WORKDRIVE_SYNC_TRANSPORT") or cfg.get("transport", "fs")
     branch = current_branch(args.branch, args.assume_main)
+    simulate_fail_after = args.simulate_fail_after
+    if simulate_fail_after <= 0:
+        simulate_fail_after = int(os.environ.get("WORKDRIVE_SIMULATE_FAIL_AFTER", "0") or "0")
 
     log(
         f"workdrive_phase3_sync version={SCRIPT_VERSION} "
-        f"mode=test transport={transport} branch={branch!r}"
+        f"mode={cfg.get('mode')} transport={transport} branch={branch!r}"
+        + (f" simulate_fail_after={simulate_fail_after}" if simulate_fail_after else "")
     )
 
     ids = list(args.insight_id)
@@ -611,7 +744,9 @@ def main() -> int:
     synced = 0
     skipped = 0
     for iid in ids:
-        result = sync_one(cfg, iid, branch, transport)
+        result = sync_one(
+            cfg, iid, branch, transport, simulate_fail_after=simulate_fail_after
+        )
         if result == "synced":
             synced += 1
         else:

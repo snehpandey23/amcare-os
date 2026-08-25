@@ -1,6 +1,6 @@
-# DORMANT — manual WorkDrive upload for normal packs.
-# Dry-run API verify only via workflow_dispatch + confirm RUN-DRY-RUN.
-name: Siya WorkDrive Phase-3 sync (dormant)
+# Dry-run / verification only until Option-2 live flip is approved.
+# Normal human-gated live sync will use a separate push-to-main workflow after gates pass.
+name: Siya WorkDrive Phase-3 sync (dry-run)
 
 on:
   workflow_dispatch:
@@ -13,8 +13,12 @@ on:
         description: "api (required for real WorkDrive dry-run)"
         required: false
         default: "api"
+      simulate_fail_after:
+        description: "TEST: abort after N uploads then rollback (0 = normal sync)"
+        required: false
+        default: "0"
       confirm_dormant_override:
-        description: "Type RUN-DRY-RUN to allow this dormant workflow to execute"
+        description: "Type RUN-DRY-RUN to allow this workflow to execute"
         required: true
         default: ""
 
@@ -52,17 +56,30 @@ jobs:
           WORKDRIVE_DRYRUN_06_ID: ${{ secrets.WORKDRIVE_DRYRUN_06_ID }}
           WORKDRIVE_DRYRUN_07_ID: ${{ secrets.WORKDRIVE_DRYRUN_07_ID }}
           WORKDRIVE_SYNC_TRANSPORT: api
+          WORKDRIVE_SIMULATE_FAIL_AFTER: ${{ github.event.inputs.simulate_fail_after }}
         run: |
           set -euo pipefail
           echo "git SHA: $(git rev-parse HEAD)"
-          echo "script head:"
-          head -n 5 apps/siya-health/brand/scripts/workdrive_phase3_sync.py
           grep -n "SCRIPT_VERSION" apps/siya-health/brand/scripts/workdrive_phase3_sync.py | head -3
           if [[ -z "${ZOHO_REFRESH_TOKEN:-}" || -z "${WORKDRIVE_DRYRUN_05_ID:-}" ]]; then
             echo "SKIP: secrets missing"
             exit 0
           fi
+          # Exit 2 from simulate-fail is expected success for the failure test.
+          set +e
           python3 apps/siya-health/brand/scripts/workdrive_phase3_sync.py \
             --config apps/siya-health/brand/scripts/workdrive_sync_config.test.json \
             --transport api \
             --insight-id "${{ github.event.inputs.insight_id }}"
+          code=$?
+          set -e
+          fail_after="${{ github.event.inputs.simulate_fail_after }}"
+          if [[ "${fail_after}" != "0" && -n "${fail_after}" ]]; then
+            if [[ "$code" -eq 2 ]]; then
+              echo "PASS: deliberate mid-upload failure exited 2 (rollback path)"
+              exit 0
+            fi
+            echo "FAIL: expected exit 2 for simulate_fail_after=${fail_after}, got $code"
+            exit 1
+          fi
+          exit "$code"

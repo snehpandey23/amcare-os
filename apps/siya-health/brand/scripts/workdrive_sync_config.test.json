@@ -10,7 +10,7 @@
     "accounts_url_default": "https://accounts.zoho.com",
     "upload_url": "https://www.zohoapis.com/workdrive/api/v1/upload",
     "folders_url": "https://www.zohoapis.com/workdrive/api/v1/files",
-    "allow_flat_fallback": true,
+    "allow_flat_fallback": false,
     "parent_folder_ids_from_env": {
       "04-Content-Tracker": "WORKDRIVE_DRYRUN_04_ID",
       "05-Carousels": "WORKDRIVE_DRYRUN_05_ID",

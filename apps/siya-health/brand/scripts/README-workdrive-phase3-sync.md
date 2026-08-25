@@ -1,56 +1,45 @@
-# Phase-3 → WorkDrive sync (DORMANT — manual upload preferred)
+# Phase-3 → WorkDrive sync (Option 2: human-gated)
 
-**Current ops (2026-08-24):** Agents leave packs in git after Phase 3. Team downloads and uploads to WorkDrive manually. Do **not** run this Action for normal packs.
+**Human gate (unchanged):** Phase 1–3 approvals happen in chat. Only after you approve Phase 3 do we land `SHIP.md` + tracker `Approved|Ready` + captions on **`main`**.
 
-GitHub Action + script that can mirror approved packs into WorkDrive **`_API-DRY-RUN/` only** — kept for a future API dry-run; workflow is dormant (`workflow_dispatch` + type `RUN-DRY-RUN`).
+**Automation gate (unchanged):** sync runs only when all of these are true:
 
-## Hard rules
+1. Branch is `main`
+2. Pack has `SHIP.md` with `phase: 3` and `status: approved|ready`
+3. Tracker row Status matches Approved/Ready
+4. Captions + `ready-to-post` images present
 
-- Config `mode` must be `test` and destination must contain `_API-DRY-RUN`.
-- Does **not** write live `04/05/06/07` at the Knowledge Editorial root.
-- Zoho credentials live only in **GitHub Actions secrets** (or local env for manual dry-run). Never in git, prompts, or Cloud Agent context.
-- Skips (exit 0) unless **all** are true: `main` branch · `SHIP.md` (phase 3 + approved) · tracker Status matches Approved/Ready · captions + ready-to-post images present.
+**Credentials:** Zoho tokens live only in **GitHub Actions secrets**. Cloud agents never hold the refresh token.
 
-## Secrets (GitHub → Settings → Secrets → Actions)
+## Current status (2026-08-25)
+
+| Step | Status |
+|---|---|
+| Dry-run API sync #5 + #6 (v3, nested upload) | Success on Actions (`e2c0b9f`) |
+| Atomic staging + mid-upload rollback (`v4-atomic-staging`) | Code ready — needs commit/push + re-verify |
+| Deliberate mid-upload fail test | Pending one Action run with `simulate_fail_after=1` |
+| Live `04/05/06/07` folder IDs | **Not flipped yet** |
+
+## Dry-run secrets
 
 | Secret | Purpose |
 |---|---|
-| `ZOHO_CLIENT_ID` | OAuth client |
-| `ZOHO_CLIENT_SECRET` | OAuth secret |
-| `ZOHO_REFRESH_TOKEN` | Refresh token with WorkDrive file scopes |
-| `ZOHO_ACCOUNTS_URL` | Optional; default `https://accounts.zoho.com` |
-| `WORKDRIVE_DRYRUN_04_ID` | Folder ID for `_API-DRY-RUN/04-Content-Tracker` |
-| `WORKDRIVE_DRYRUN_05_ID` | Folder ID for `_API-DRY-RUN/05-Carousels` |
-| `WORKDRIVE_DRYRUN_06_ID` | Folder ID for `_API-DRY-RUN/06-Statics` |
-| `WORKDRIVE_DRYRUN_07_ID` | Folder ID for `_API-DRY-RUN/07-Video-Prompts` |
+| `ZOHO_CLIENT_ID` / `ZOHO_CLIENT_SECRET` / `ZOHO_REFRESH_TOKEN` | OAuth |
+| `ZOHO_ACCOUNTS_URL` | e.g. `https://accounts.zoho.com` |
+| `WORKDRIVE_DRYRUN_04_ID` … `_07_ID` | `_API-DRY-RUN/` subfolders only |
 
-Get folder IDs from the WorkDrive browser URL: `.../folders/<id>`.
+## Run dry-run (Actions)
 
-Until API secrets + dry-run folder IDs are set, use **FS transport** against the TrueSync path (already created):
+Workflow: **Siya WorkDrive Phase-3 sync (dry-run)**
 
-```bash
-export WORKDRIVE_DRYRUN_FS_ROOT="$HOME/Library/CloudStorage/ZohoWorkDriveTrueSync-AmcareMedicalConsultancyIndiaPvtLtd/Common Folder/Siya Knowledge Editorial/_API-DRY-RUN"
-python3 apps/siya-health/brand/scripts/workdrive_phase3_sync.py \
-  --assume-main --transport fs --insight-id YOUR-ID
-```
+1. Branch `main`
+2. `insight_id`: `TEST-2026-08-24-api-dryrun`
+3. `simulate_fail_after`: `0` for clean sync, or `1` for deliberate mid-upload abort + rollback
+4. Confirm: `RUN-DRY-RUN`
 
-## SHIP.md example
+Expect clean: `DONE synced=1` and `version=2026-08-25-v4-atomic-staging`  
+Expect fail test: `FAIL_TEST` + `ROLLBACK` + workflow green (exit 2 treated as pass)
 
-```markdown
----
-phase: 3
-status: approved
-insight_id: ADHD-2026-08-24-example
-kind: carousel
----
+## Live flip (after three dry-run checks pass)
 
-Phase 3 complete. Human approved. Safe to mirror to WorkDrive dry-run.
-```
-
-## Tracker
-
-Row in `apps/siya-health/brand/04-Content-Tracker/CLOUD-PACK-TRACKER.csv` with Status containing `Approved` or `Ready`.
-
-## Live folders
-
-Do **not** change config or secrets to live 04/05/06/07 until an explicit founder OK.
+Requires founder OK + new secrets `WORKDRIVE_LIVE_04_ID` … `_07_ID` pointing at real Knowledge Editorial folders — **not** `_API-DRY-RUN`. Separate live workflow will auto-run on push to `main` when shipped packs change.
