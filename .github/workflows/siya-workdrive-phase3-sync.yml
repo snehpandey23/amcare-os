@@ -54,6 +54,7 @@ jobs:
           WORKDRIVE_SYNC_TRANSPORT: ${{ github.event.inputs.transport || 'api' }}
         run: |
           set -euo pipefail
+          echo "git SHA: $(git rev-parse --short HEAD)"
           # Soft-skip if API secrets missing (do not fail the workflow)
           if [[ -z "${ZOHO_REFRESH_TOKEN:-}" || -z "${WORKDRIVE_DRYRUN_05_ID:-}" ]]; then
             echo "SKIP: Zoho dry-run secrets not configured yet (ZOHO_REFRESH_TOKEN / WORKDRIVE_DRYRUN_*_ID)."

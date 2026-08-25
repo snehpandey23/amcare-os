@@ -341,15 +341,40 @@ def api_upload_file(token: str, parent_id: str, local_path: Path, upload_url: st
         raise SystemExit(f"Upload failed {local_path}: HTTP {e.code} {err[:500]}") from e
 
 
-def _workdrive_headers(token: str, *, json_body: bool = False) -> dict[str, str]:
-    # WorkDrive is JSON:API — missing Accept → HTTP 415
+def _workdrive_api_bases() -> list[str]:
+    """Region-aware API bases derived from ZOHO_ACCOUNTS_URL."""
+    accounts = os.environ.get("ZOHO_ACCOUNTS_URL", "https://accounts.zoho.com").rstrip("/")
+    if "accounts.zoho.in" in accounts:
+        return [
+            "https://www.zohoapis.in/workdrive/api/v1",
+            "https://workdrive.zoho.in/api/v1",
+        ]
+    if "accounts.zoho.eu" in accounts:
+        return [
+            "https://www.zohoapis.eu/workdrive/api/v1",
+            "https://workdrive.zoho.eu/api/v1",
+        ]
+    if "accounts.zoho.com.au" in accounts:
+        return [
+            "https://www.zohoapis.com.au/workdrive/api/v1",
+            "https://workdrive.zoho.com.au/api/v1",
+        ]
+    return [
+        "https://www.zohoapis.com/workdrive/api/v1",
+        "https://workdrive.zoho.com/api/v1",
+    ]
+
+
+def _workdrive_headers(token: str, *, content_type: str | None = None) -> dict[str, str]:
+    # Accept is required (JSON:API). Body Content-Type must be application/json
+    # (application/vnd.api+json as Content-Type → HTTP 415 on Zoho).
     headers = {
         "Authorization": f"Zoho-oauthtoken {token}",
         "Accept": "application/vnd.api+json",
         "User-Agent": "siya-workdrive-phase3-sync/1.0",
     }
-    if json_body:
-        headers["Content-Type"] = "application/vnd.api+json"
+    if content_type:
+        headers["Content-Type"] = content_type
     return headers
 
 
@@ -364,28 +389,34 @@ def _extract_resource_id(data: dict[str, Any]) -> str:
 
 def api_find_child_folder(token: str, parent_id: str, name: str, files_url: str) -> str:
     """Return existing child folder id under parent, or empty string."""
-    q = urllib.parse.urlencode({"filter[parent_id]": parent_id})
-    url = f"{files_url}?{q}"
-    req = urllib.request.Request(url, method="GET", headers=_workdrive_headers(token))
-    try:
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            data = json.loads(resp.read().decode())
-    except urllib.error.HTTPError as e:
-        err = e.read().decode(errors="replace")
-        log(f"WARN: list children of {parent_id}: HTTP {e.code} {err[:200]}")
-        return ""
-    items = data.get("data") or []
-    if isinstance(items, dict):
-        items = [items]
-    for item in items:
-        attrs = item.get("attributes") or {}
-        if attrs.get("name") == name and attrs.get("type") == "folder":
-            return str(item.get("id") or "")
-        # Some responses use is_folder / kind
-        if attrs.get("name") == name and (
-            attrs.get("is_folder") is True or attrs.get("resource_type") == "folder"
-        ):
-            return str(item.get("id") or "")
+    # Preferred: GET /files/{parent_id}/files
+    base = files_url.rsplit("/files", 1)[0]
+    candidates = [
+        f"{base}/files/{parent_id}/files",
+        f"{files_url}/{parent_id}/files",
+        f"{files_url}?{urllib.parse.urlencode({'filter[parent_id]': parent_id})}",
+    ]
+    for url in candidates:
+        req = urllib.request.Request(url, method="GET", headers=_workdrive_headers(token))
+        try:
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                data = json.loads(resp.read().decode())
+        except urllib.error.HTTPError as e:
+            err = e.read().decode(errors="replace")
+            log(f"WARN: list children via {url}: HTTP {e.code} {err[:200]}")
+            continue
+        items = data.get("data") or []
+        if isinstance(items, dict):
+            items = [items]
+        for item in items:
+            attrs = item.get("attributes") or {}
+            if attrs.get("name") != name:
+                continue
+            if attrs.get("type") == "folder" or attrs.get("is_folder") is True:
+                return str(item.get("id") or "")
+            # Folder responses sometimes omit type; prefer id if name matches uniquely
+            if "folder" in str(attrs.get("kind", "")).lower():
+                return str(item.get("id") or "")
     return ""
 
 
@@ -403,25 +434,44 @@ def api_create_folder(token: str, parent_id: str, name: str, files_url: str) -> 
             }
         }
     ).encode()
-    req = urllib.request.Request(
-        files_url,
-        data=payload,
-        method="POST",
-        headers=_workdrive_headers(token, json_body=True),
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            data = json.loads(resp.read().decode())
-        fid = _extract_resource_id(data)
-        if fid:
-            return fid
-        log(f"WARN: create folder {name!r}: no id in response keys={list(data.keys())}")
-        return ""
-    except urllib.error.HTTPError as e:
-        err = e.read().decode(errors="replace")
-        log(f"WARN: create folder {name!r}: HTTP {e.code} {err[:300]}")
-        # Race / already exists
-        return api_find_child_folder(token, parent_id, name, files_url)
+
+    # Try region bases + Content-Type variants. Zoho wants Accept vnd.api+json
+    # but body Content-Type application/json (not vnd.api+json).
+    urls = [files_url]
+    for base in _workdrive_api_bases():
+        u = f"{base}/files"
+        if u not in urls:
+            urls.append(u)
+
+    content_types = ["application/json", "application/vnd.api+json"]
+    last_err = ""
+    for url in urls:
+        for ctype in content_types:
+            req = urllib.request.Request(
+                url,
+                data=payload,
+                method="POST",
+                headers=_workdrive_headers(token, content_type=ctype),
+            )
+            try:
+                with urllib.request.urlopen(req, timeout=60) as resp:
+                    data = json.loads(resp.read().decode())
+                fid = _extract_resource_id(data)
+                if fid:
+                    log(f"  created folder {name!r} via {url} ({ctype})")
+                    return fid
+                last_err = f"no id in response keys={list(data.keys())} body={str(data)[:200]}"
+            except urllib.error.HTTPError as e:
+                err = e.read().decode(errors="replace")
+                last_err = f"{url} ctype={ctype} HTTP {e.code} {err[:400]}"
+                log(f"WARN: create folder {name!r}: {last_err}")
+                continue
+
+    found = api_find_child_folder(token, parent_id, name, files_url)
+    if found:
+        return found
+    log(f"WARN: create folder {name!r} exhausted attempts; last={last_err}")
+    return ""
 
 
 def api_sync_tree(
