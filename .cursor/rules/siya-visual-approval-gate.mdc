@@ -1,5 +1,5 @@
 ---
-description: Slide-by-slide approval gate for Siya carousel/static — copy → one image → approve → Phase 3 in git only
+description: Slide-by-slide approval gate for Siya carousel/static — Phase 3 in git then human-gated live WorkDrive Action
 alwaysApply: true
 ---
 
@@ -25,16 +25,15 @@ When the user asks for a **carousel or static image** (Siya Health brand creativ
 When (and only when) the user explicitly approves:
 
 1. Remaining slides if needed
-2. Captions · video-prompt · tracker row — **in git only** under `editorial-packs/[ID]/` or `statics/[ID]/`
-3. **Do not** sync to Zoho WorkDrive (TrueSync, API, fuse, or GitHub Action) — humans download from git and upload manually
-4. End by stating clearly: **Pack ready in git** + full folder path (e.g. `apps/siya-health/brand/editorial-packs/ADHD-…/`)
+2. Captions · video-prompt · tracker row · `SHIP.md` (phase 3 + approved) — under `editorial-packs/[ID]/` or `statics/[ID]/`
+3. Agents **do not** call Zoho APIs or hold refresh tokens. After the pack lands on **`main`**, GitHub Action **Siya WorkDrive Phase-3 sync (live)** mirrors changed packs to Knowledge Editorial `04/05/06/07`
+4. End by stating: **Pack ready in git** + folder path, and that live WorkDrive sync will run from Actions if secrets are set
 
 ## Precedence (WorkDrive)
 
-This gate takes precedence over `zoho-workdrive-team.mdc` for any Siya brand creative asset:
-
-- No WorkDrive before Phase 3 approval
-- After Phase 3, agents still **do not** auto-sync WorkDrive unless the user explicitly asks for a one-off manual mirror
+- No WorkDrive before Phase 3 approval in chat
+- Agents never auto-sync via TrueSync/API themselves
+- Human gate = chat approval → `SHIP.md` + tracker on `main` → Action syncs
 
 ## Never skip
 

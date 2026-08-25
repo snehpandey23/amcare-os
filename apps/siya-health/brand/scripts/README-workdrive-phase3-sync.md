@@ -1,45 +1,37 @@
-# Phase-3 → WorkDrive sync (Option 2: human-gated)
+# Phase-3 → WorkDrive sync (Option 2: human-gated live)
 
-**Human gate (unchanged):** Phase 1–3 approvals happen in chat. Only after you approve Phase 3 do we land `SHIP.md` + tracker `Approved|Ready` + captions on **`main`**.
+**Human gate (unchanged):** Phase 1–3 approvals in chat. Only after Phase 3 OK do we land `SHIP.md` + tracker `Approved|Ready` + captions on **`main`**.
 
-**Automation gate (unchanged):** sync runs only when all of these are true:
+**Automation:** GitHub Action **Siya WorkDrive Phase-3 sync (live)** syncs **changed** packs to live `04/05/06/07`. Credentials stay in Actions secrets only.
 
-1. Branch is `main`
-2. Pack has `SHIP.md` with `phase: 3` and `status: approved|ready`
-3. Tracker row Status matches Approved/Ready
-4. Captions + `ready-to-post` images present
+## Dry-run verification (complete 2026-08-25)
 
-**Credentials:** Zoho tokens live only in **GitHub Actions secrets**. Cloud agents never hold the refresh token.
+| # | Check | Result |
+|---|---|---|
+| 1 | API dry-run sync | PASS — Actions #5 (`e2c0b9f`) |
+| 2 | API dry-run re-sync | PASS — Actions #6 |
+| 3 | Mid-upload fail + rollback | PASS — Actions #7 (`be74b91`, `simulate_fail_after=1`) |
 
-## Current status (2026-08-25)
+## Secrets
 
-| Step | Status |
+### Shared OAuth
+`ZOHO_CLIENT_ID` · `ZOHO_CLIENT_SECRET` · `ZOHO_REFRESH_TOKEN` · `ZOHO_ACCOUNTS_URL`
+
+### Dry-run only (`_API-DRY-RUN/`)
+`WORKDRIVE_DRYRUN_04_ID` … `WORKDRIVE_DRYRUN_07_ID`
+
+### Live (Knowledge Editorial root folders)
+`WORKDRIVE_LIVE_04_ID` · `WORKDRIVE_LIVE_05_ID` · `WORKDRIVE_LIVE_06_ID` · `WORKDRIVE_LIVE_07_ID`
+
+Get IDs from WorkDrive browser URL: `.../folders/<id>` for each of `04-Content-Tracker`, `05-Carousels`, `06-Statics`, `07-Video-Prompts` at the **live** root (not under `_API-DRY-RUN`).
+
+Live refuses to run if a LIVE id equals the matching DRYRUN id.
+
+## Workflows
+
+| Workflow | When |
 |---|---|
-| Dry-run API sync #5 + #6 (v3, nested upload) | Success on Actions (`e2c0b9f`) |
-| Atomic staging + mid-upload rollback (`v4-atomic-staging`) | Code ready — needs commit/push + re-verify |
-| Deliberate mid-upload fail test | Pending one Action run with `simulate_fail_after=1` |
-| Live `04/05/06/07` folder IDs | **Not flipped yet** |
+| `siya-workdrive-phase3-sync.yml` (dry-run) | Manual `RUN-DRY-RUN` only |
+| `siya-workdrive-phase3-live.yml` | Push to `main` on pack/tracker paths, or manual `SYNC-LIVE` |
 
-## Dry-run secrets
-
-| Secret | Purpose |
-|---|---|
-| `ZOHO_CLIENT_ID` / `ZOHO_CLIENT_SECRET` / `ZOHO_REFRESH_TOKEN` | OAuth |
-| `ZOHO_ACCOUNTS_URL` | e.g. `https://accounts.zoho.com` |
-| `WORKDRIVE_DRYRUN_04_ID` … `_07_ID` | `_API-DRY-RUN/` subfolders only |
-
-## Run dry-run (Actions)
-
-Workflow: **Siya WorkDrive Phase-3 sync (dry-run)**
-
-1. Branch `main`
-2. `insight_id`: `TEST-2026-08-24-api-dryrun`
-3. `simulate_fail_after`: `0` for clean sync, or `1` for deliberate mid-upload abort + rollback
-4. Confirm: `RUN-DRY-RUN`
-
-Expect clean: `DONE synced=1` and `version=2026-08-25-v4-atomic-staging`  
-Expect fail test: `FAIL_TEST` + `ROLLBACK` + workflow green (exit 2 treated as pass)
-
-## Live flip (after three dry-run checks pass)
-
-Requires founder OK + new secrets `WORKDRIVE_LIVE_04_ID` … `_07_ID` pointing at real Knowledge Editorial folders — **not** `_API-DRY-RUN`. Separate live workflow will auto-run on push to `main` when shipped packs change.
+Live skips `TEST-*` insight IDs. Uses atomic `__SYNCING__` staging + rollback.

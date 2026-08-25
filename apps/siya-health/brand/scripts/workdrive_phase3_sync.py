@@ -1,26 +1,28 @@
 #!/usr/bin/env python3
 """
-Phase-3 → WorkDrive sync (TEST MODE by default).
+Phase-3 → WorkDrive sync.
 
 Gates (all required; otherwise skip + log, exit 0):
   1. Git ref is main (GITHUB_REF / --branch / --assume-main)
   2. Pack has SHIP.md with phase: 3 and status approved
   3. CLOUD-PACK-TRACKER.csv row for that Insight ID matches Approved|Ready
+  4. Captions + ready-to-post images present
 
-Destination is hard-locked to paths/IDs under _API-DRY-RUN (test config).
-Never writes live 04/05/06/07 at the Knowledge Editorial root.
+Modes:
+  test — destinations must be _API-DRY-RUN (WORKDRIVE_DRYRUN_*_ID)
+  live — real Knowledge Editorial 04/05/06/07 (WORKDRIVE_LIVE_*_ID)
 
 Transports:
-  fs  — write under WORKDRIVE_DRYRUN_FS_ROOT (TrueSync dry-run tree)
-  api — Zoho WorkDrive API using GitHub Actions secrets / env
-        (ZOHO_CLIENT_ID, ZOHO_CLIENT_SECRET, ZOHO_REFRESH_TOKEN,
-         WORKDRIVE_DRYRUN_04_ID … _07_ID)
+  fs  — test only, under WORKDRIVE_DRYRUN_FS_ROOT
+  api — Zoho WorkDrive API via GitHub Actions secrets
+        (ZOHO_CLIENT_ID, ZOHO_CLIENT_SECRET, ZOHO_REFRESH_TOKEN)
 
 Usage:
   python3 workdrive_phase3_sync.py --config workdrive_sync_config.test.json \\
-    --insight-id TEST-… --assume-main --transport fs
+    --insight-id TEST-… --assume-main --transport api
 
-  python3 workdrive_phase3_sync.py --config … --discover-shipped --assume-main
+  python3 workdrive_phase3_sync.py --config workdrive_sync_config.live.json \\
+    --discover-changed --transport api
 """
 from __future__ import annotations
 
@@ -30,6 +32,7 @@ import json
 import os
 import re
 import shutil
+import subprocess
 import sys
 import urllib.error
 import urllib.parse
@@ -47,14 +50,27 @@ def log(msg: str) -> None:
 
 def load_config(path: Path) -> dict[str, Any]:
     cfg = json.loads(path.read_text())
-    if cfg.get("mode") != "test":
-        raise SystemExit("Refusing to run: config.mode must be 'test' until live is explicitly enabled.")
-    if cfg.get("require_path_substring") != "_API-DRY-RUN":
-        raise SystemExit("Refusing to run: test config must require_path_substring=_API-DRY-RUN")
-    return cfg
+    mode = cfg.get("mode")
+    if mode == "test":
+        if cfg.get("require_path_substring") != "_API-DRY-RUN":
+            raise SystemExit("Refusing to run: test config must require_path_substring=_API-DRY-RUN")
+        return cfg
+    if mode == "live":
+        if cfg.get("require_path_substring") == "_API-DRY-RUN":
+            raise SystemExit("Refusing to run: live config must not target _API-DRY-RUN")
+        if not cfg.get("api", {}).get("parent_folder_ids_from_env"):
+            raise SystemExit("Refusing to run: live config missing api.parent_folder_ids_from_env")
+        # Hard reject dry-run env keys in live config
+        for env_key in cfg["api"]["parent_folder_ids_from_env"].values():
+            if "DRYRUN" in str(env_key).upper():
+                raise SystemExit(f"Refusing live config that references dry-run env {env_key}")
+        return cfg
+    raise SystemExit(f"Refusing to run: config.mode must be 'test' or 'live' (got {mode!r})")
 
 
 def resolve_fs_root(cfg: dict[str, Any]) -> Path:
+    if cfg.get("mode") != "test":
+        raise SystemExit("FS transport is test-only (_API-DRY-RUN)")
     env_key = cfg.get("fs_root_env", "WORKDRIVE_DRYRUN_FS_ROOT")
     raw = os.environ.get(env_key) or cfg.get("fs_root_default_macos", "")
     root = Path(os.path.expanduser(raw)).resolve()
@@ -81,8 +97,6 @@ def current_branch(cli_branch: str | None, assume_main: bool) -> str:
         return ref
     # local fallback
     try:
-        import subprocess
-
         out = subprocess.check_output(
             ["git", "rev-parse", "--abbrev-ref", "HEAD"],
             cwd=REPO_ROOT,
@@ -202,6 +216,49 @@ def discover_shipped() -> list[str]:
     return ids
 
 
+def _insight_id_from_relpath(rel: str) -> str | None:
+    parts = Path(rel).parts
+    # apps/siya-health/brand/editorial-packs/ID/...
+    # apps/siya-health/brand/statics/ID/...
+    for marker in ("editorial-packs", "statics"):
+        if marker in parts:
+            i = parts.index(marker)
+            if i + 1 < len(parts):
+                return parts[i + 1]
+    return None
+
+
+def discover_changed(before: str, after: str) -> list[str]:
+    """Insight IDs whose pack paths changed between two git SHAs."""
+    if not before or not after or re.fullmatch(r"0+", before or ""):
+        log("SKIP discover-changed: missing/zero before SHA — pass explicit --insight-id")
+        return []
+    try:
+        out = subprocess.check_output(
+            ["git", "diff", "--name-only", before, after],
+            cwd=REPO_ROOT,
+            text=True,
+        )
+    except subprocess.CalledProcessError as e:
+        log(f"SKIP discover-changed: git diff failed: {e}")
+        return []
+    ids: set[str] = set()
+    for line in out.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        if "/editorial-packs/" not in line and "/statics/" not in line:
+            continue
+        iid = _insight_id_from_relpath(line)
+        if iid:
+            ids.add(iid)
+    return sorted(ids)
+
+
+def is_test_insight(insight_id: str) -> bool:
+    return insight_id.upper().startswith("TEST-")
+
+
 # --- FS transport ---
 
 
@@ -255,7 +312,7 @@ def count_files(path: Path) -> int:
 
 # --- API transport ---
 
-SCRIPT_VERSION = "2026-08-25-v4-atomic-staging"
+SCRIPT_VERSION = "2026-08-25-v5-live-gated"
 SYNCING_PREFIX = "__SYNCING__"
 
 
@@ -296,11 +353,28 @@ def api_parent_ids(cfg: dict[str, Any]) -> dict[str, str]:
     for folder, env_key in cfg["api"]["parent_folder_ids_from_env"].items():
         val = os.environ.get(env_key, "").strip()
         if not val:
-            raise SystemExit(f"Missing env {env_key} for dry-run folder {folder}")
+            raise SystemExit(f"Missing env {env_key} for folder {folder}")
         # Guard against accidental whitespace/newlines in GitHub secrets
         val = "".join(val.split())
         out[folder] = val
         log(f"  parent {folder}: len={len(val)} head={val[:4]}…tail={val[-4:]}")
+
+    # Live must not accidentally reuse dry-run folder IDs
+    if cfg.get("mode") == "live":
+        for folder, live_id in out.items():
+            dry_key = {
+                "04-Content-Tracker": "WORKDRIVE_DRYRUN_04_ID",
+                "05-Carousels": "WORKDRIVE_DRYRUN_05_ID",
+                "06-Statics": "WORKDRIVE_DRYRUN_06_ID",
+                "07-Video-Prompts": "WORKDRIVE_DRYRUN_07_ID",
+            }.get(folder)
+            if not dry_key:
+                continue
+            dry_val = "".join(os.environ.get(dry_key, "").split())
+            if dry_val and dry_val == live_id:
+                raise SystemExit(
+                    f"Refusing live sync: {folder} LIVE id matches {dry_key} (still _API-DRY-RUN)"
+                )
     return out
 
 
@@ -701,13 +775,20 @@ def sync_one(
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Phase-3 WorkDrive sync (TEST mode)")
+    ap = argparse.ArgumentParser(description="Phase-3 WorkDrive sync")
     ap.add_argument(
         "--config",
         default=str(Path(__file__).with_name("workdrive_sync_config.test.json")),
     )
     ap.add_argument("--insight-id", action="append", default=[])
     ap.add_argument("--discover-shipped", action="store_true")
+    ap.add_argument(
+        "--discover-changed",
+        action="store_true",
+        help="Sync only packs changed between --before/--after (or GITHUB before/sha)",
+    )
+    ap.add_argument("--before", default=os.environ.get("GITHUB_EVENT_BEFORE", ""))
+    ap.add_argument("--after", default=os.environ.get("GITHUB_SHA", ""))
     ap.add_argument("--branch", default=None)
     ap.add_argument("--assume-main", action="store_true")
     ap.add_argument("--transport", choices=["fs", "api"], default=None)
@@ -716,6 +797,11 @@ def main() -> int:
         type=int,
         default=0,
         help="TEST ONLY: abort after N file uploads inside staging, then rollback",
+    )
+    ap.add_argument(
+        "--allow-test-ids",
+        action="store_true",
+        help="Allow TEST-* insight IDs (required for dry-run; forbidden on live unless set)",
     )
     args = ap.parse_args()
 
@@ -726,6 +812,11 @@ def main() -> int:
     if simulate_fail_after <= 0:
         simulate_fail_after = int(os.environ.get("WORKDRIVE_SIMULATE_FAIL_AFTER", "0") or "0")
 
+    if cfg.get("mode") == "live" and simulate_fail_after > 0:
+        raise SystemExit("Refusing: --simulate-fail-after is not allowed in live mode")
+    if cfg.get("mode") == "live" and transport == "fs":
+        raise SystemExit("Refusing: FS transport is not allowed in live mode")
+
     log(
         f"workdrive_phase3_sync version={SCRIPT_VERSION} "
         f"mode={cfg.get('mode')} transport={transport} branch={branch!r}"
@@ -733,12 +824,22 @@ def main() -> int:
     )
 
     ids = list(args.insight_id)
+    if args.discover_changed:
+        ids.extend(discover_changed(args.before, args.after))
     if args.discover_shipped:
         ids.extend(discover_shipped())
     ids = sorted(set(ids))
 
+    allow_test = args.allow_test_ids or cfg.get("mode") == "test"
+    if not allow_test:
+        filtered = [i for i in ids if not is_test_insight(i)]
+        dropped = [i for i in ids if is_test_insight(i)]
+        for d in dropped:
+            log(f"SKIP: live mode ignores test insight {d}")
+        ids = filtered
+
     if not ids:
-        log("SKIP: no insight IDs (pass --insight-id or --discover-shipped)")
+        log("SKIP: no insight IDs (pass --insight-id, --discover-changed, or --discover-shipped)")
         return 0
 
     synced = 0

@@ -1,24 +1,26 @@
 ---
-description: Zoho WorkDrive folder map for humans — agents leave packs in git; no auto-sync unless explicitly asked
+description: Zoho WorkDrive folder map — human-gated live Action after Phase 3 on main; agents never hold Zoho tokens
 alwaysApply: true
 ---
 
-# Zoho WorkDrive — team deliverables (manual upload)
+# Zoho WorkDrive — team deliverables (Option 2 · human-gated)
 
-**Agents (desktop · cloud):** After Phase 3, leave the pack in **git** under `apps/siya-health/brand/editorial-packs/[ID]/` or `statics/[ID]/`. State the folder path. **Do not** auto-sync to WorkDrive (TrueSync path, API, fuse script, or GitHub Action) unless the user explicitly asks for a one-off mirror.
+**Agents (desktop · cloud):** After Phase 3 approval in chat, land the pack in **git** (`editorial-packs/[ID]/` or `statics/[ID]/`) with `SHIP.md` + captions + tracker row. **Do not** call Zoho APIs, use TrueSync write paths, or put `ZOHO_REFRESH_TOKEN` in Cloud Agent context.
 
-**Humans / team:** Download from git and upload into:
+**Automation:** When those files land on **`main`**, GitHub Action `siya-workdrive-phase3-live.yml` syncs **only changed** packs into live Knowledge Editorial (secrets `WORKDRIVE_LIVE_*_ID`). Dry-run stays on `_API-DRY-RUN` via the separate dry-run workflow.
+
+**Humans:** Optional TrueSync browse / manual fix-up under:
 
 ```text
 ~/Library/CloudStorage/ZohoWorkDriveTrueSync-AmcareMedicalConsultancyIndiaPvtLtd/Common Folder/Siya Knowledge Editorial/
 ```
 
-## Folder map (manual destination)
+## Folder map
 
 | Asset type | Put in |
 |---|-----|
 | Brand / editorial rules | `00-Brand-System/` |
-| Tracker row + spreadsheet | `04-Content-Tracker/Siya-Content-Tracker.xlsx` |
+| Tracker CSV mirror | `04-Content-Tracker/` |
 | Carousels (multi-slide) | `05-Carousels/[Insight-ID]/` |
 | Statics / banners / singles | `06-Statics/...` |
 | How-to | `03-START-HERE/` |
@@ -32,10 +34,9 @@ Include: Instagram, Facebook, **LinkedIn Company only**, X/Twitter, Pinterest.
 Also include `ALL-PLATFORMS.md` for one-file copy-paste.
 
 **Do not produce Founder LinkedIn (Dr. Sneh / Dr. Swati) posts** unless explicitly requested.
-Company voice across platforms. Audience-specific angles belong in the creative.
 
 ## Precedence
 
-`siya-visual-approval-gate.mdc` wins for timing and for “agents don’t auto-sync WorkDrive.”
+`siya-visual-approval-gate.mdc` wins for chat timing. Live sync is Action-only after gates on `main`.
 
 Do not sync secrets, `.env`, or the full `amcare-os` monorepo into WorkDrive.

@@ -70,6 +70,7 @@ jobs:
           python3 apps/siya-health/brand/scripts/workdrive_phase3_sync.py \
             --config apps/siya-health/brand/scripts/workdrive_sync_config.test.json \
             --transport api \
+            --allow-test-ids \
             --insight-id "${{ github.event.inputs.insight_id }}"
           code=$?
           set -e

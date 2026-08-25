@@ -1,0 +1,83 @@
+# Option 2 — human-gated live WorkDrive sync.
+# Chat Phase 1–3 approvals stay manual. After SHIP.md + tracker Approved land on main,
+# this Action mirrors only *changed* packs into live 04/05/06/07.
+# Zoho tokens stay in GitHub secrets — never in Cloud Agent context.
+name: Siya WorkDrive Phase-3 sync (live)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/siya-health/brand/editorial-packs/**"
+      - "apps/siya-health/brand/statics/**"
+      - "apps/siya-health/brand/04-Content-Tracker/CLOUD-PACK-TRACKER.csv"
+  workflow_dispatch:
+    inputs:
+      insight_id:
+        description: "Optional single Insight ID (blank = discover changed / none)"
+        required: false
+        default: ""
+      confirm_live:
+        description: "Type SYNC-LIVE to allow manual live dispatch"
+        required: true
+        default: ""
+
+concurrency:
+  group: siya-workdrive-phase3-live
+  cancel-in-progress: false
+
+jobs:
+  sync-live:
+    if: ${{ github.event_name == 'push' || github.event.inputs.confirm_live == 'SYNC-LIVE' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Phase-3 sync (live Knowledge Editorial)
+        env:
+          ZOHO_CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID }}
+          ZOHO_CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}
+          ZOHO_REFRESH_TOKEN: ${{ secrets.ZOHO_REFRESH_TOKEN }}
+          ZOHO_ACCOUNTS_URL: ${{ secrets.ZOHO_ACCOUNTS_URL }}
+          WORKDRIVE_LIVE_04_ID: ${{ secrets.WORKDRIVE_LIVE_04_ID }}
+          WORKDRIVE_LIVE_05_ID: ${{ secrets.WORKDRIVE_LIVE_05_ID }}
+          WORKDRIVE_LIVE_06_ID: ${{ secrets.WORKDRIVE_LIVE_06_ID }}
+          WORKDRIVE_LIVE_07_ID: ${{ secrets.WORKDRIVE_LIVE_07_ID }}
+          # Present so script can refuse if LIVE ids accidentally equal DRYRUN
+          WORKDRIVE_DRYRUN_04_ID: ${{ secrets.WORKDRIVE_DRYRUN_04_ID }}
+          WORKDRIVE_DRYRUN_05_ID: ${{ secrets.WORKDRIVE_DRYRUN_05_ID }}
+          WORKDRIVE_DRYRUN_06_ID: ${{ secrets.WORKDRIVE_DRYRUN_06_ID }}
+          WORKDRIVE_DRYRUN_07_ID: ${{ secrets.WORKDRIVE_DRYRUN_07_ID }}
+          WORKDRIVE_SYNC_TRANSPORT: api
+          GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          echo "git SHA: $(git rev-parse HEAD)"
+          grep -n "SCRIPT_VERSION" apps/siya-health/brand/scripts/workdrive_phase3_sync.py | head -3
+          if [[ -z "${ZOHO_REFRESH_TOKEN:-}" || -z "${WORKDRIVE_LIVE_05_ID:-}" ]]; then
+            echo "SKIP: live Zoho secrets not configured (ZOHO_REFRESH_TOKEN / WORKDRIVE_LIVE_*_ID)."
+            exit 0
+          fi
+          ARGS=(
+            --config apps/siya-health/brand/scripts/workdrive_sync_config.live.json
+            --transport api
+          )
+          INSIGHT="${{ github.event.inputs.insight_id }}"
+          if [[ -n "${INSIGHT}" ]]; then
+            ARGS+=(--insight-id "${INSIGHT}")
+          else
+            ARGS+=(--discover-changed --before "${GITHUB_EVENT_BEFORE:-}" --after "${GITHUB_SHA}")
+          fi
+          python3 apps/siya-health/brand/scripts/workdrive_phase3_sync.py "${ARGS[@]}"

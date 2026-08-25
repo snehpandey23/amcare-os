@@ -1,0 +1,28 @@
+{
+  "mode": "live",
+  "description": "LIVE Knowledge Editorial 04/05/06/07 — human-gated via chat Phase 3 + SHIP.md + tracker on main. Secrets: WORKDRIVE_LIVE_*_ID only.",
+  "require_path_substring": "Siya Knowledge Editorial",
+  "transport": "api",
+  "api": {
+    "accounts_url_env": "ZOHO_ACCOUNTS_URL",
+    "accounts_url_default": "https://accounts.zoho.com",
+    "upload_url": "https://www.zohoapis.com/workdrive/api/v1/upload",
+    "folders_url": "https://www.zohoapis.com/workdrive/api/v1/files",
+    "allow_flat_fallback": false,
+    "parent_folder_ids_from_env": {
+      "04-Content-Tracker": "WORKDRIVE_LIVE_04_ID",
+      "05-Carousels": "WORKDRIVE_LIVE_05_ID",
+      "06-Statics": "WORKDRIVE_LIVE_06_ID",
+      "07-Video-Prompts": "WORKDRIVE_LIVE_07_ID"
+    }
+  },
+  "tracker_csv_git": "apps/siya-health/brand/04-Content-Tracker/CLOUD-PACK-TRACKER.csv",
+  "tracker_csv_dest_name": "CLOUD-PACK-TRACKER.csv",
+  "approved_status_regex": "(?i)(approved|ready)",
+  "required_caption_files_any": [
+    "captions/ALL-PLATFORMS.md",
+    "captions/instagram.md",
+    "ready-to-post/captions/ALL-PLATFORMS.md",
+    "ready-to-post/captions/instagram.md"
+  ]
+}
