@@ -9,9 +9,9 @@ Gates (all required; otherwise skip + log, exit 0):
   4. Captions + ready-to-post images present
 
 Modes:
-  test — verification / dry-run Action (WORKDRIVE_DRYRUN_*_ID, allows TEST-* with --allow-test-ids)
-  live — human-gated production delivery after Phase 3 on main
-         (currently targets the fresh _API-DRY-RUN/04–07 folders via same WORKDRIVE_DRYRUN_*_ID secrets)
+  live — human-gated delivery after Phase 3 on main (working tree; WORKDRIVE_DRYRUN_* today)
+  fail-test — mid-upload / simulate_fail_after ONLY under _FAIL-TEST-ONLY (WORKDRIVE_FAILTEST_*)
+  test — local FS suite under working/_API-DRY-RUN path; API simulate_fail_after forbidden
 
 Transports:
   fs  — test only, under WORKDRIVE_DRYRUN_FS_ROOT
@@ -59,19 +59,40 @@ def load_config(path: Path) -> dict[str, Any]:
     if mode == "live":
         if not cfg.get("api", {}).get("parent_folder_ids_from_env"):
             raise SystemExit("Refusing to run: live config missing api.parent_folder_ids_from_env")
-        # Founder choice: deliver into the fresh _API-DRY-RUN/04–07 folders (same secrets).
+        # Working delivery tree (currently still named _API-DRY-RUN until rename step).
         if cfg.get("require_path_substring") != "_API-DRY-RUN":
             raise SystemExit(
                 "Refusing to run: live config must require_path_substring=_API-DRY-RUN "
-                "(team delivery target is the fresh dry-run tree)"
+                "(working delivery tree until rename)"
             )
         for env_key in cfg["api"]["parent_folder_ids_from_env"].values():
             if "DRYRUN" not in str(env_key).upper():
                 raise SystemExit(
                     f"Refusing live config: expected WORKDRIVE_DRYRUN_* env key, got {env_key}"
                 )
+            if "FAILTEST" in str(env_key).upper():
+                raise SystemExit(f"Refusing live config: must not use fail-test env {env_key}")
         return cfg
-    raise SystemExit(f"Refusing to run: config.mode must be 'test' or 'live' (got {mode!r})")
+    if mode == "fail-test":
+        if cfg.get("require_path_substring") != "_FAIL-TEST-ONLY":
+            raise SystemExit(
+                "Refusing to run: fail-test config must require_path_substring=_FAIL-TEST-ONLY"
+            )
+        if not cfg.get("api", {}).get("parent_folder_ids_from_env"):
+            raise SystemExit("Refusing to run: fail-test config missing parent_folder_ids_from_env")
+        for env_key in cfg["api"]["parent_folder_ids_from_env"].values():
+            if "FAILTEST" not in str(env_key).upper():
+                raise SystemExit(
+                    f"Refusing fail-test config: expected WORKDRIVE_FAILTEST_* env key, got {env_key}"
+                )
+            if "DRYRUN" in str(env_key).upper():
+                raise SystemExit(
+                    f"Refusing fail-test config: must not use working-tree env {env_key}"
+                )
+        return cfg
+    raise SystemExit(
+        f"Refusing to run: config.mode must be 'test', 'live', or 'fail-test' (got {mode!r})"
+    )
 
 
 def resolve_fs_root(cfg: dict[str, Any]) -> Path:
@@ -318,7 +339,7 @@ def count_files(path: Path) -> int:
 
 # --- API transport ---
 
-SCRIPT_VERSION = "2026-08-25-v5-live-dryrun-dest"
+SCRIPT_VERSION = "2026-08-25-v6-failtest-separated"
 SYNCING_PREFIX = "__SYNCING__"
 
 
@@ -364,6 +385,24 @@ def api_parent_ids(cfg: dict[str, Any]) -> dict[str, str]:
         val = "".join(val.split())
         out[folder] = val
         log(f"  parent {folder}: len={len(val)} head={val[:4]}…tail={val[-4:]}")
+
+    # Fail-test must not reuse working-tree (DRYRUN) folder IDs
+    if cfg.get("mode") == "fail-test":
+        for folder, fail_id in out.items():
+            dry_key = {
+                "04-Content-Tracker": "WORKDRIVE_DRYRUN_04_ID",
+                "05-Carousels": "WORKDRIVE_DRYRUN_05_ID",
+                "06-Statics": "WORKDRIVE_DRYRUN_06_ID",
+                "07-Video-Prompts": "WORKDRIVE_DRYRUN_07_ID",
+            }.get(folder)
+            if not dry_key:
+                continue
+            dry_val = "".join(os.environ.get(dry_key, "").split())
+            if dry_val and dry_val == fail_id:
+                raise SystemExit(
+                    f"Refusing fail-test: {folder} FAILTEST id matches {dry_key} "
+                    f"(would write to working delivery tree)"
+                )
     return out
 
 
@@ -801,10 +840,18 @@ def main() -> int:
     if simulate_fail_after <= 0:
         simulate_fail_after = int(os.environ.get("WORKDRIVE_SIMULATE_FAIL_AFTER", "0") or "0")
 
-    if cfg.get("mode") == "live" and simulate_fail_after > 0:
-        raise SystemExit("Refusing: --simulate-fail-after is not allowed in live mode")
+    # Hard rule: mid-upload fail simulation only against _FAIL-TEST-ONLY tree
+    if simulate_fail_after > 0 and cfg.get("mode") != "fail-test":
+        raise SystemExit(
+            "Refusing: --simulate-fail-after is only allowed with fail-test config "
+            "(_FAIL-TEST-ONLY). Live/working delivery must never run mid-upload abort."
+        )
     if cfg.get("mode") == "live" and transport == "fs":
         raise SystemExit("Refusing: FS transport is not allowed in live mode")
+    if cfg.get("mode") == "fail-test" and transport == "fs":
+        raise SystemExit("Refusing: fail-test is API-only (separate WorkDrive tree)")
+    if cfg.get("mode") == "fail-test" and simulate_fail_after <= 0:
+        raise SystemExit("Refusing: fail-test mode requires --simulate-fail-after ≥ 1")
 
     log(
         f"workdrive_phase3_sync version={SCRIPT_VERSION} "
@@ -819,7 +866,7 @@ def main() -> int:
         ids.extend(discover_shipped())
     ids = sorted(set(ids))
 
-    allow_test = args.allow_test_ids or cfg.get("mode") == "test"
+    allow_test = args.allow_test_ids or cfg.get("mode") in {"test", "fail-test"}
     if not allow_test:
         filtered = [i for i in ids if not is_test_insight(i)]
         dropped = [i for i in ids if is_test_insight(i)]

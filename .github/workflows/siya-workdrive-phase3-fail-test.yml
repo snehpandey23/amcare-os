@@ -1,0 +1,90 @@
+# FAIL-TEST ONLY — writes exclusively to WorkDrive _FAIL-TEST-ONLY/ (not the working delivery tree).
+# Requires secrets WORKDRIVE_FAILTEST_04_ID … _07_ID (must differ from WORKDRIVE_DRYRUN_*).
+# Soft-skips if those secrets are missing. Never uses the live/working folder IDs.
+name: Siya WorkDrive Phase-3 fail-test
+
+on:
+  workflow_dispatch:
+    inputs:
+      insight_id:
+        description: "Insight ID (usually a TEST-* pack)"
+        required: true
+        default: "TEST-2026-08-24-api-dryrun"
+      simulate_fail_after:
+        description: "Abort after N uploads then rollback (required ≥1 for mid-upload fail test)"
+        required: true
+        default: "1"
+      confirm_fail_test:
+        description: "Type FAIL-TEST-ONLY to run"
+        required: true
+        default: ""
+
+concurrency:
+  group: siya-workdrive-phase3-fail-test
+  cancel-in-progress: false
+
+jobs:
+  fail-test:
+    if: ${{ github.event.inputs.confirm_fail_test == 'FAIL-TEST-ONLY' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Mid-upload fail test (_FAIL-TEST-ONLY tree)
+        env:
+          ZOHO_CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID }}
+          ZOHO_CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}
+          ZOHO_REFRESH_TOKEN: ${{ secrets.ZOHO_REFRESH_TOKEN }}
+          ZOHO_ACCOUNTS_URL: ${{ secrets.ZOHO_ACCOUNTS_URL }}
+          WORKDRIVE_FAILTEST_04_ID: ${{ secrets.WORKDRIVE_FAILTEST_04_ID }}
+          WORKDRIVE_FAILTEST_05_ID: ${{ secrets.WORKDRIVE_FAILTEST_05_ID }}
+          WORKDRIVE_FAILTEST_06_ID: ${{ secrets.WORKDRIVE_FAILTEST_06_ID }}
+          WORKDRIVE_FAILTEST_07_ID: ${{ secrets.WORKDRIVE_FAILTEST_07_ID }}
+          # Present so script can refuse if FAILTEST ids accidentally equal working DRYRUN ids
+          WORKDRIVE_DRYRUN_04_ID: ${{ secrets.WORKDRIVE_DRYRUN_04_ID }}
+          WORKDRIVE_DRYRUN_05_ID: ${{ secrets.WORKDRIVE_DRYRUN_05_ID }}
+          WORKDRIVE_DRYRUN_06_ID: ${{ secrets.WORKDRIVE_DRYRUN_06_ID }}
+          WORKDRIVE_DRYRUN_07_ID: ${{ secrets.WORKDRIVE_DRYRUN_07_ID }}
+          WORKDRIVE_SYNC_TRANSPORT: api
+          WORKDRIVE_SIMULATE_FAIL_AFTER: ${{ github.event.inputs.simulate_fail_after }}
+        run: |
+          set -euo pipefail
+          echo "git SHA: $(git rev-parse HEAD)"
+          grep -n "SCRIPT_VERSION" apps/siya-health/brand/scripts/workdrive_phase3_sync.py | head -3
+          if [[ -z "${ZOHO_REFRESH_TOKEN:-}" || -z "${WORKDRIVE_FAILTEST_05_ID:-}" ]]; then
+            echo "SKIP: WORKDRIVE_FAILTEST_*_ID secrets not set yet."
+            echo "Create WorkDrive Siya Knowledge Editorial/_FAIL-TEST-ONLY/{04,05,06,07},"
+            echo "add their folder IDs as WORKDRIVE_FAILTEST_04_ID … _07_ID, then re-run."
+            exit 0
+          fi
+          fail_after="${{ github.event.inputs.simulate_fail_after }}"
+          if [[ -z "${fail_after}" || "${fail_after}" == "0" ]]; then
+            echo "FAIL: simulate_fail_after must be ≥1 for this workflow"
+            exit 1
+          fi
+          set +e
+          python3 apps/siya-health/brand/scripts/workdrive_phase3_sync.py \
+            --config apps/siya-health/brand/scripts/workdrive_sync_config.fail-test.json \
+            --transport api \
+            --allow-test-ids \
+            --insight-id "${{ github.event.inputs.insight_id }}"
+          code=$?
+          set -e
+          if [[ "$code" -eq 2 ]]; then
+            echo "PASS: deliberate mid-upload failure exited 2 (rollback on _FAIL-TEST-ONLY)"
+            exit 0
+          fi
+          echo "FAIL: expected exit 2 for simulate_fail_after=${fail_after}, got $code"
+          exit 1
