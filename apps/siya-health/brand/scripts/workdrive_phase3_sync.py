@@ -253,7 +253,9 @@ def count_files(path: Path) -> int:
     return sum(1 for p in path.rglob("*") if p.is_file())
 
 
-# --- API transport (optional; used when secrets present) ---
+# --- API transport ---
+
+SCRIPT_VERSION = "2026-08-25-v3-flat-fallback"
 
 
 def zoho_access_token() -> str:
@@ -284,6 +286,7 @@ def zoho_access_token() -> str:
     token = payload.get("access_token")
     if not token:
         raise SystemExit(f"Zoho token refresh failed: keys={list(payload.keys())}")
+    log(f"  oauth ok accounts={accounts} token_len={len(token)}")
     return token
 
 
@@ -293,92 +296,62 @@ def api_parent_ids(cfg: dict[str, Any]) -> dict[str, str]:
         val = os.environ.get(env_key, "").strip()
         if not val:
             raise SystemExit(f"Missing env {env_key} for dry-run folder {folder}")
-        # Soft check: document that IDs must be under _API-DRY-RUN; cannot verify name via API without GET
+        # Guard against accidental whitespace/newlines in GitHub secrets
+        val = "".join(val.split())
         out[folder] = val
+        log(f"  parent {folder}: len={len(val)} head={val[:4]}…tail={val[-4:]}")
     return out
 
 
-def api_upload_file(token: str, parent_id: str, local_path: Path, upload_url: str) -> None:
-    # multipart upload
-    boundary = "----SiyaWorkDriveBoundary7MA4YWxkTrZu0gW"
-    filename = local_path.name
-    body = bytearray()
-    body.extend(f"--{boundary}\r\n".encode())
-    body.extend(
-        f'Content-Disposition: form-data; name="filename"\r\n\r\n{filename}\r\n'.encode()
-    )
-    body.extend(f"--{boundary}\r\n".encode())
-    body.extend(b'Content-Disposition: form-data; name="parent_id"\r\n\r\n')
-    body.extend(f"{parent_id}\r\n".encode())
-    body.extend(f"--{boundary}\r\n".encode())
-    body.extend(b'Content-Disposition: form-data; name="override-name-exist"\r\n\r\ntrue\r\n')
-    body.extend(f"--{boundary}\r\n".encode())
-    body.extend(
-        (
-            f'Content-Disposition: form-data; name="content"; filename="{filename}"\r\n'
-            f"Content-Type: application/octet-stream\r\n\r\n"
-        ).encode()
-    )
-    body.extend(local_path.read_bytes())
-    body.extend(f"\r\n--{boundary}--\r\n".encode())
-    url = f"{upload_url}?filename={urllib.parse.quote(filename)}&parent_id={parent_id}&override-name-exist=true"
-    req = urllib.request.Request(
-        url,
-        data=bytes(body),
-        method="POST",
-        headers={
-            "Authorization": f"Zoho-oauthtoken {token}",
-            "Accept": "application/vnd.api+json",
-            "User-Agent": "siya-workdrive-phase3-sync/1.0",
-            "Content-Type": f"multipart/form-data; boundary={boundary}",
-        },
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=120) as resp:
-            resp.read()
-    except urllib.error.HTTPError as e:
-        err = e.read().decode(errors="replace")
-        raise SystemExit(f"Upload failed {local_path}: HTTP {e.code} {err[:500]}") from e
-
-
-def _workdrive_api_bases() -> list[str]:
-    """Region-aware API bases derived from ZOHO_ACCOUNTS_URL."""
+def _api_bases() -> list[str]:
+    """Try matching region first, then all common WorkDrive API hosts."""
     accounts = os.environ.get("ZOHO_ACCOUNTS_URL", "https://accounts.zoho.com").rstrip("/")
-    if "accounts.zoho.in" in accounts:
-        return [
+    preferred: list[str] = []
+    if "zoho.in" in accounts:
+        preferred = [
             "https://www.zohoapis.in/workdrive/api/v1",
             "https://workdrive.zoho.in/api/v1",
         ]
-    if "accounts.zoho.eu" in accounts:
-        return [
+    elif "zoho.eu" in accounts:
+        preferred = [
             "https://www.zohoapis.eu/workdrive/api/v1",
             "https://workdrive.zoho.eu/api/v1",
         ]
-    if "accounts.zoho.com.au" in accounts:
-        return [
-            "https://www.zohoapis.com.au/workdrive/api/v1",
-            "https://workdrive.zoho.com.au/api/v1",
+    else:
+        preferred = [
+            "https://www.zohoapis.com/workdrive/api/v1",
+            "https://workdrive.zoho.com/api/v1",
         ]
-    return [
+    extras = [
         "https://www.zohoapis.com/workdrive/api/v1",
+        "https://www.zohoapis.in/workdrive/api/v1",
+        "https://www.zohoapis.eu/workdrive/api/v1",
         "https://workdrive.zoho.com/api/v1",
+        "https://workdrive.zoho.in/api/v1",
+        "https://workdrive.zoho.eu/api/v1",
     ]
+    out: list[str] = []
+    for b in preferred + extras:
+        if b not in out:
+            out.append(b)
+    override = os.environ.get("WORKDRIVE_API_BASE", "").rstrip("/")
+    if override:
+        out.insert(0, override)
+    return out
 
 
-def _workdrive_headers(token: str, *, content_type: str | None = None) -> dict[str, str]:
-    # Accept is required (JSON:API). Body Content-Type must be application/json
-    # (application/vnd.api+json as Content-Type → HTTP 415 on Zoho).
-    headers = {
+def _wd_headers(token: str, content_type: str | None = None) -> dict[str, str]:
+    h = {
         "Authorization": f"Zoho-oauthtoken {token}",
         "Accept": "application/vnd.api+json",
-        "User-Agent": "siya-workdrive-phase3-sync/1.0",
+        "User-Agent": f"siya-workdrive-phase3-sync/{SCRIPT_VERSION}",
     }
     if content_type:
-        headers["Content-Type"] = content_type
-    return headers
+        h["Content-Type"] = content_type
+    return h
 
 
-def _extract_resource_id(data: dict[str, Any]) -> str:
+def _extract_id(data: dict[str, Any]) -> str:
     raw = data.get("data")
     if isinstance(raw, dict):
         return str(raw.get("id") or "")
@@ -387,45 +360,61 @@ def _extract_resource_id(data: dict[str, Any]) -> str:
     return ""
 
 
-def api_find_child_folder(token: str, parent_id: str, name: str, files_url: str) -> str:
-    """Return existing child folder id under parent, or empty string."""
-    # Preferred: GET /files/{parent_id}/files
-    base = files_url.rsplit("/files", 1)[0]
-    candidates = [
-        f"{base}/files/{parent_id}/files",
-        f"{files_url}/{parent_id}/files",
-        f"{files_url}?{urllib.parse.urlencode({'filter[parent_id]': parent_id})}",
-    ]
-    for url in candidates:
-        req = urllib.request.Request(url, method="GET", headers=_workdrive_headers(token))
+def api_upload_file(token: str, parent_id: str, local_path: Path, upload_name: str | None = None) -> None:
+    filename = upload_name or local_path.name
+    last_err = ""
+    for base in _api_bases():
+        upload_url = f"{base}/upload"
+        boundary = "----SiyaWorkDriveBoundary7MA4YWxkTrZu0gW"
+        body = bytearray()
+        parts = [
+            (b"filename", filename.encode()),
+            (b"parent_id", parent_id.encode()),
+            (b"override-name-exist", b"true"),
+        ]
+        for key, val in parts:
+            body.extend(f"--{boundary}\r\n".encode())
+            body.extend(b'Content-Disposition: form-data; name="')
+            body.extend(key)
+            body.extend(b'"\r\n\r\n')
+            body.extend(val)
+            body.extend(b"\r\n")
+        body.extend(f"--{boundary}\r\n".encode())
+        body.extend(
+            f'Content-Disposition: form-data; name="content"; filename="{filename}"\r\n'
+            f"Content-Type: application/octet-stream\r\n\r\n".encode()
+        )
+        body.extend(local_path.read_bytes())
+        body.extend(f"\r\n--{boundary}--\r\n".encode())
+        url = (
+            f"{upload_url}?filename={urllib.parse.quote(filename)}"
+            f"&parent_id={urllib.parse.quote(parent_id)}&override-name-exist=true"
+        )
+        req = urllib.request.Request(
+            url,
+            data=bytes(body),
+            method="POST",
+            headers={
+                "Authorization": f"Zoho-oauthtoken {token}",
+                "Accept": "application/vnd.api+json",
+                "User-Agent": f"siya-workdrive-phase3-sync/{SCRIPT_VERSION}",
+                "Content-Type": f"multipart/form-data; boundary={boundary}",
+            },
+        )
         try:
-            with urllib.request.urlopen(req, timeout=60) as resp:
-                data = json.loads(resp.read().decode())
+            with urllib.request.urlopen(req, timeout=120) as resp:
+                resp.read()
+            log(f"  uploaded {filename} → parent …{parent_id[-6:]} via {base}")
+            return
         except urllib.error.HTTPError as e:
             err = e.read().decode(errors="replace")
-            log(f"WARN: list children via {url}: HTTP {e.code} {err[:200]}")
+            last_err = f"{base} HTTP {e.code} {err[:300]}"
+            log(f"WARN: upload {filename}: {last_err}")
             continue
-        items = data.get("data") or []
-        if isinstance(items, dict):
-            items = [items]
-        for item in items:
-            attrs = item.get("attributes") or {}
-            if attrs.get("name") != name:
-                continue
-            if attrs.get("type") == "folder" or attrs.get("is_folder") is True:
-                return str(item.get("id") or "")
-            # Folder responses sometimes omit type; prefer id if name matches uniquely
-            if "folder" in str(attrs.get("kind", "")).lower():
-                return str(item.get("id") or "")
-    return ""
+    raise SystemExit(f"Upload failed {filename}: {last_err}")
 
 
-def api_create_folder(token: str, parent_id: str, name: str, files_url: str) -> str:
-    existing = api_find_child_folder(token, parent_id, name, files_url)
-    if existing:
-        log(f"  reuse folder {name!r} → {existing}")
-        return existing
-
+def api_create_folder(token: str, parent_id: str, name: str) -> str:
     payload = json.dumps(
         {
             "data": {
@@ -434,75 +423,79 @@ def api_create_folder(token: str, parent_id: str, name: str, files_url: str) -> 
             }
         }
     ).encode()
-
-    # Try region bases + Content-Type variants. Zoho wants Accept vnd.api+json
-    # but body Content-Type application/json (not vnd.api+json).
-    urls = [files_url]
-    for base in _workdrive_api_bases():
-        u = f"{base}/files"
-        if u not in urls:
-            urls.append(u)
-
-    content_types = ["application/json", "application/vnd.api+json"]
+    # Working public samples use Content-Type application/json + Accept vnd.api+json.
+    # Also try json-only (no Accept) and vnd.api+json Content-Type.
+    header_variants: list[dict[str, str]] = [
+        _wd_headers(token, "application/json"),
+        {
+            "Authorization": f"Zoho-oauthtoken {token}",
+            "Content-Type": "application/json",
+            "User-Agent": f"siya-workdrive-phase3-sync/{SCRIPT_VERSION}",
+        },
+        _wd_headers(token, "application/vnd.api+json"),
+    ]
     last_err = ""
-    for url in urls:
-        for ctype in content_types:
-            req = urllib.request.Request(
-                url,
-                data=payload,
-                method="POST",
-                headers=_workdrive_headers(token, content_type=ctype),
-            )
+    for base in _api_bases():
+        url = f"{base}/files"
+        for headers in header_variants:
+            req = urllib.request.Request(url, data=payload, method="POST", headers=headers)
             try:
                 with urllib.request.urlopen(req, timeout=60) as resp:
                     data = json.loads(resp.read().decode())
-                fid = _extract_resource_id(data)
+                fid = _extract_id(data)
                 if fid:
-                    log(f"  created folder {name!r} via {url} ({ctype})")
+                    log(f"  created folder {name!r} id=…{fid[-6:]} via {url}")
                     return fid
-                last_err = f"no id in response keys={list(data.keys())} body={str(data)[:200]}"
+                last_err = f"{url} no id body={str(data)[:200]}"
             except urllib.error.HTTPError as e:
                 err = e.read().decode(errors="replace")
-                last_err = f"{url} ctype={ctype} HTTP {e.code} {err[:400]}"
+                ctype = headers.get("Content-Type", "")
+                last_err = f"{url} ctype={ctype!r} HTTP {e.code} {err[:300]}"
                 log(f"WARN: create folder {name!r}: {last_err}")
-                continue
-
-    found = api_find_child_folder(token, parent_id, name, files_url)
-    if found:
-        return found
-    log(f"WARN: create folder {name!r} exhausted attempts; last={last_err}")
+    log(f"WARN: create folder {name!r} failed all hosts; last={last_err}")
     return ""
 
 
-def api_sync_tree(
+def api_sync_tree_nested(
     token: str,
-    parent_id: str,
+    pack_folder_id: str,
     local_dir: Path,
-    files_url: str,
-    upload_url: str,
-    folder_cache: dict[str, str],
 ) -> int:
-    """Upload all files under local_dir into WorkDrive parent, creating subfolders as needed."""
+    """Upload pack preserving subfolders (requires working create-folder)."""
+    count = 0
+    folder_cache: dict[str, str] = {"": pack_folder_id}
+    for path in sorted(local_dir.rglob("*")):
+        if not path.is_file():
+            continue
+        rel = path.relative_to(local_dir)
+        parent_key = str(rel.parent) if str(rel.parent) != "." else ""
+        # ensure each path segment folder exists
+        cur = pack_folder_id
+        built = ""
+        if parent_key:
+            for part in Path(parent_key).parts:
+                built = f"{built}/{part}" if built else part
+                if built not in folder_cache:
+                    fid = api_create_folder(token, cur, part)
+                    if not fid:
+                        return -1  # signal caller to flat-fallback
+                    folder_cache[built] = fid
+                cur = folder_cache[built]
+        api_upload_file(token, cur, path)
+        count += 1
+    return count
+
+
+def api_sync_tree_flat(token: str, parent_id: str, local_dir: Path, insight_id: str) -> int:
+    """TEST fallback: upload into parent with prefixed filenames (no subfolder create)."""
     count = 0
     for path in sorted(local_dir.rglob("*")):
         if not path.is_file():
             continue
         rel = path.relative_to(local_dir)
-        # ensure nested folders
-        cur_parent = parent_id
-        for part in rel.parts[:-1]:
-            key = f"{cur_parent}/{part}"
-            if key not in folder_cache:
-                fid = api_create_folder(token, cur_parent, part, files_url)
-                if not fid:
-                    raise SystemExit(
-                        f"Cannot create/find WorkDrive subfolder {part} under {cur_parent}"
-                    )
-                folder_cache[key] = fid
-            cur_parent = folder_cache[key]
-        api_upload_file(token, cur_parent, path, upload_url)
+        flat_name = f"{insight_id}__{rel.as_posix().replace('/', '__')}"
+        api_upload_file(token, parent_id, path, upload_name=flat_name)
         count += 1
-        log(f"  uploaded {rel}")
     return count
 
 
@@ -543,32 +536,41 @@ def sync_one(
     if transport == "api":
         token = zoho_access_token()
         parents = api_parent_ids(cfg)
-        upload_url = cfg["api"]["upload_url"]
-        files_url = cfg["api"]["folders_url"]
-        cache: dict[str, str] = {}
-        # create insight folder under 05 or 06
         top_key = "05-Carousels" if kind == "carousel" else "06-Statics"
         top_id = parents[top_key]
-        pack_folder_id = api_create_folder(token, top_id, insight_id, files_url)
+
+        pack_folder_id = api_create_folder(token, top_id, insight_id)
+        flat_ok = bool(cfg.get("api", {}).get("allow_flat_fallback", True))
+        if pack_folder_id:
+            n = api_sync_tree_nested(token, pack_folder_id, pack_dir)
+            if n < 0:
+                log("WARN: nested upload failed mid-way; trying flat fallback")
+                pack_folder_id = ""
+            else:
+                log(f"  uploaded {n} pack files nested under {top_key}/{insight_id}")
         if not pack_folder_id:
-            raise SystemExit(f"Failed to create WorkDrive folder {insight_id} under {top_key}")
-        n = api_sync_tree(token, pack_folder_id, pack_dir, files_url, upload_url, cache)
-        log(f"  uploaded {n} pack files to {top_key}/{insight_id}")
+            if not flat_ok:
+                raise SystemExit(
+                    f"Failed to create WorkDrive folder {insight_id} under {top_key}"
+                )
+            log(
+                f"WARN: folder create unavailable (often HTTP 415) — "
+                f"flat-uploading into {top_key} with prefix {insight_id}__"
+            )
+            n = api_sync_tree_flat(token, top_id, pack_dir, insight_id)
+            log(f"  uploaded {n} pack files FLAT into {top_key}")
+
         vp = pack_dir / "video-prompt.md"
         if vp.is_file():
-            # upload into 07 as a single file (create temp name via upload to 07 parent)
-            api_upload_file(token, parents["07-Video-Prompts"], vp, upload_url)
-            # rename not always available — upload uses video-prompt.md; also copy as insight-named via temp
             named = pack_dir / f"{insight_id}-video-prompt.md"
-            if not named.is_file():
-                shutil.copy2(vp, named)
-                try:
-                    api_upload_file(token, parents["07-Video-Prompts"], named, upload_url)
-                finally:
-                    if named.name != "video-prompt.md":
-                        named.unlink(missing_ok=True)
+            shutil.copy2(vp, named)
+            try:
+                api_upload_file(token, parents["07-Video-Prompts"], named)
+            finally:
+                named.unlink(missing_ok=True)
+
         tracker = REPO_ROOT / cfg["tracker_csv_git"]
-        api_upload_file(token, parents["04-Content-Tracker"], tracker, upload_url)
+        api_upload_file(token, parents["04-Content-Tracker"], tracker)
         log("  tracker CSV uploaded to 04-Content-Tracker")
         return "synced"
 
@@ -592,7 +594,10 @@ def main() -> int:
     transport = args.transport or os.environ.get("WORKDRIVE_SYNC_TRANSPORT") or cfg.get("transport", "fs")
     branch = current_branch(args.branch, args.assume_main)
 
-    log(f"workdrive_phase3_sync mode=test transport={transport} branch={branch!r}")
+    log(
+        f"workdrive_phase3_sync version={SCRIPT_VERSION} "
+        f"mode=test transport={transport} branch={branch!r}"
+    )
 
     ids = list(args.insight_id)
     if args.discover_shipped:

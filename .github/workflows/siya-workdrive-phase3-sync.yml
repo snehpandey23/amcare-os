@@ -1,17 +1,16 @@
-# DORMANT — manual WorkDrive upload for now (2026-08-24).
-# Do not enable push triggers until founder explicitly re-opens API sync.
-# Kept for future dry-run only via workflow_dispatch.
+# DORMANT — manual WorkDrive upload for normal packs.
+# Dry-run API verify only via workflow_dispatch + confirm RUN-DRY-RUN.
 name: Siya WorkDrive Phase-3 sync (dormant)
 
 on:
   workflow_dispatch:
     inputs:
       insight_id:
-        description: "Insight ID to sync (optional; default discover SHIP.md packs)"
-        required: false
-        default: ""
+        description: "Insight ID to sync"
+        required: true
+        default: "TEST-2026-08-24-api-dryrun"
       transport:
-        description: "fs (noop on GHA without path) or api"
+        description: "api (required for real WorkDrive dry-run)"
         required: false
         default: "api"
       confirm_dormant_override:
@@ -27,21 +26,22 @@ jobs:
   sync-dry-run:
     if: ${{ github.event.inputs.confirm_dormant_override == 'RUN-DRY-RUN' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     permissions:
       contents: read
     steps:
-      - name: Checkout
+      - name: Checkout latest main
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          ref: main
+          fetch-depth: 1
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Phase-3 sync (test / dry-run only)
+      - name: Phase-3 sync (dry-run folders only)
         env:
           ZOHO_CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID }}
           ZOHO_CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}
@@ -51,20 +51,18 @@ jobs:
           WORKDRIVE_DRYRUN_05_ID: ${{ secrets.WORKDRIVE_DRYRUN_05_ID }}
           WORKDRIVE_DRYRUN_06_ID: ${{ secrets.WORKDRIVE_DRYRUN_06_ID }}
           WORKDRIVE_DRYRUN_07_ID: ${{ secrets.WORKDRIVE_DRYRUN_07_ID }}
-          WORKDRIVE_SYNC_TRANSPORT: ${{ github.event.inputs.transport || 'api' }}
+          WORKDRIVE_SYNC_TRANSPORT: api
         run: |
           set -euo pipefail
-          echo "git SHA: $(git rev-parse --short HEAD)"
-          # Soft-skip if API secrets missing (do not fail the workflow)
+          echo "git SHA: $(git rev-parse HEAD)"
+          echo "script head:"
+          head -n 5 apps/siya-health/brand/scripts/workdrive_phase3_sync.py
+          grep -n "SCRIPT_VERSION" apps/siya-health/brand/scripts/workdrive_phase3_sync.py | head -3
           if [[ -z "${ZOHO_REFRESH_TOKEN:-}" || -z "${WORKDRIVE_DRYRUN_05_ID:-}" ]]; then
-            echo "SKIP: Zoho dry-run secrets not configured yet (ZOHO_REFRESH_TOKEN / WORKDRIVE_DRYRUN_*_ID)."
-            echo "Local FS tests use TrueSync _API-DRY-RUN until secrets are set."
+            echo "SKIP: secrets missing"
             exit 0
           fi
-          ARGS=(--config apps/siya-health/brand/scripts/workdrive_sync_config.test.json --transport api)
-          if [[ -n "${{ github.event.inputs.insight_id }}" ]]; then
-            ARGS+=(--insight-id "${{ github.event.inputs.insight_id }}")
-          else
-            ARGS+=(--discover-shipped)
-          fi
-          python3 apps/siya-health/brand/scripts/workdrive_phase3_sync.py "${ARGS[@]}"
+          python3 apps/siya-health/brand/scripts/workdrive_phase3_sync.py \
+            --config apps/siya-health/brand/scripts/workdrive_sync_config.test.json \
+            --transport api \
+            --insight-id "${{ github.event.inputs.insight_id }}"
