@@ -1,17 +1,31 @@
-# Phase-3 → WorkDrive sync (Option 2: human-gated)
+# Phase-3 → WorkDrive sync (Option 2: two lanes)
 
-**Human gate:** Phase 1–3 approvals in chat → `SHIP.md` + tracker Approved + captions on **`main`**.
+## Ship lanes (required in `SHIP.md`)
 
-**Delivery target (founder choice):** fresh `_API-DRY-RUN/04–07` using existing `WORKDRIVE_DRYRUN_*_ID` secrets. No new folder IDs.
-
-**Automation:** Action **Siya WorkDrive Phase-3 sync (live)** syncs **changed** packs (skips `TEST-*`). Credentials in Actions secrets only.
-
-## Dry-run verification (complete 2026-08-25)
-
-| # | Check | Result |
+| `ship_lane` | Who | Destination |
 |---|---|---|
-| 1–2 | Clean API sync ×2 | PASS — Actions #5, #6 |
-| 3 | Mid-upload fail + rollback | PASS — Actions #7 |
+| **`mac`** | Mac / local agent | TrueSync → existing `04` · `05-Carousels/` · `06` · `07` (tracking intact). **Action skips.** |
+| **`cloud`** | Cloud agent | GitHub Action → **`_API-DRY-RUN/04–07`** only |
+
+Missing/`unknown` on live Action = **skip** (fail closed).
+
+```yaml
+---
+phase: 3
+status: approved
+insight_id: YOUR-ID
+kind: carousel
+ship_lane: mac    # or cloud
+---
+```
+
+## Human gate
+
+Phase 1–3 approvals in chat → `SHIP.md` + tracker Approved + captions on **`main`**.
+
+## Automation
+
+Action **Siya WorkDrive Phase-3 sync (live)** syncs **changed** packs with `ship_lane: cloud` only (skips `TEST-*` on live unless allow-test). Credentials in Actions secrets only.
 
 ## Secrets (already set)
 
@@ -22,8 +36,8 @@
 
 | Workflow | Writes to |
 |---|---|
-| `siya-workdrive-phase3-live.yml` | Working delivery tree only (`WORKDRIVE_DRYRUN_*` → `_API-DRY-RUN/…`). **No** `simulate_fail_after`. |
-| `siya-workdrive-phase3-fail-test.yml` | **`_FAIL-TEST-ONLY/` only** (`WORKDRIVE_FAILTEST_*`). Mid-upload abort+rollback. Soft-skips until those secrets exist. |
-| `siya-workdrive-phase3-sync.yml` | **Retired** — no longer syncs to the working tree. |
+| `siya-workdrive-phase3-live.yml` | `_API-DRY-RUN/…` for **cloud** packs only |
+| `siya-workdrive-phase3-fail-test.yml` | `_FAIL-TEST-ONLY/` (`WORKDRIVE_FAILTEST_*`) |
+| `siya-workdrive-phase3-sync.yml` | Retired |
 
-Hard rule in script: `--simulate-fail-after` refused unless `mode=fail-test`.
+Hard rule: `--simulate-fail-after` refused unless `mode=fail-test`.

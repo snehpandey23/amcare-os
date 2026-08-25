@@ -1,5 +1,5 @@
 ---
-description: Slide-by-slide approval gate for Siya carousel/static — Phase 3 in git then human-gated live WorkDrive Action
+description: Slide-by-slide approval gate — Phase 3 git + Mac TrueSync to 05 etc.; cloud/Action to _API-DRY-RUN
 alwaysApply: true
 ---
 
@@ -26,14 +26,18 @@ When (and only when) the user explicitly approves:
 
 1. Remaining slides if needed
 2. Captions · video-prompt · tracker row · `SHIP.md` (phase 3 + approved) — under `editorial-packs/[ID]/` or `statics/[ID]/`
-3. Agents **do not** call Zoho APIs or hold refresh tokens. After the pack lands on **`main`**, GitHub Action **Siya WorkDrive Phase-3 sync (live)** mirrors changed packs into WorkDrive `_API-DRY-RUN/04–07` (fresh delivery folders; existing secrets)
-4. End by stating: **Pack ready in git** + folder path, and that WorkDrive sync will run from Actions into `_API-DRY-RUN/`
+3. Agents **do not** call Zoho APIs or hold refresh tokens
+4. **Ship by agent type** (see `zoho-workdrive-team.mdc`):
+   - **Mac / local:** `SHIP.md` → `ship_lane: mac` · TrueSync-write into existing `04` · `05-Carousels/` · `06-Statics/` · `07-Video-Prompts/`. Action **skips**.
+   - **Cloud:** `SHIP.md` → `ship_lane: cloud` · git on `main` → Action mirrors into `_API-DRY-RUN/04–07`
+5. End by stating: **Pack ready in git** + Mac TrueSync path **or** cloud Action → `_API-DRY-RUN/`
 
 ## Precedence (WorkDrive)
 
 - No WorkDrive before Phase 3 approval in chat
-- Agents never auto-sync via TrueSync/API themselves
-- Human gate = chat approval → `SHIP.md` + tracker on `main` → Action syncs
+- Mac/local may TrueSync-write the **original** team folders after Phase 3; cloud agents must not
+- `_API-DRY-RUN` = cloud/Action lane only — do not treat it as Mac primary ship
+- Human gate = chat approval → `SHIP.md` + tracker on `main` (+ Mac TrueSync to `05` etc.)
 
 ## Never skip
 

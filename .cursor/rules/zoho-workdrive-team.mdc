@@ -1,21 +1,28 @@
 ---
-description: Zoho WorkDrive folder map — human-gated live Action after Phase 3 on main; agents never hold Zoho tokens
+description: Zoho WorkDrive — Mac TrueSync to 04–07; cloud/Action to _API-DRY-RUN only; no Zoho tokens in agents
 alwaysApply: true
 ---
 
 # Zoho WorkDrive — team deliverables (Option 2 · human-gated)
 
-**Agents (desktop · cloud):** After Phase 3 approval in chat, land the pack in **git** (`editorial-packs/[ID]/` or `statics/[ID]/`) with `SHIP.md` + captions + tracker row. **Do not** call Zoho APIs, use TrueSync write paths, or put `ZOHO_REFRESH_TOKEN` in Cloud Agent context.
+## Two ship lanes (do not mix)
 
-**Automation:** When those files land on **`main`**, GitHub Action `siya-workdrive-phase3-live.yml` syncs **only changed** packs into `_API-DRY-RUN/04–07` (fresh team delivery folders; secrets `WORKDRIVE_DRYRUN_*_ID` already set). Manual dry-run/fail tests use the separate dry-run workflow.
+| Agent | After Phase 3 approval | Destination |
+|---|---|---|
+| **Mac / local** | Land pack in **git** with `SHIP.md` (`ship_lane: mac`) + captions + tracker · **TrueSync-write** into existing team folders | `04` · `05-Carousels/` · `06-Statics/` · `07-Video-Prompts/` |
+| **Cloud** | Land pack in **git** with `SHIP.md` (`ship_lane: cloud`) · **do not** TrueSync-write main folders | Action → **`_API-DRY-RUN/04–07`** only |
 
-**Humans:** Optional TrueSync browse / manual fix-up under:
+**Never:** Call Zoho APIs from agents · put `ZOHO_REFRESH_TOKEN` in Cloud Agent context · have Mac/local treat `_API-DRY-RUN` as the primary ship folder · have cloud agents overwrite the live `05-Carousels/` TrueSync tree.
+
+**Automation (cloud / Action lane):** When Phase-3 packs with **`ship_lane: cloud`** land on **`main`**, Action `siya-workdrive-phase3-live.yml` syncs them into `_API-DRY-RUN/04–07`. Packs with `ship_lane: mac` are **skipped** by the Action.
+
+**TrueSync root (Mac/local + human browse):**
 
 ```text
 ~/Library/CloudStorage/ZohoWorkDriveTrueSync-AmcareMedicalConsultancyIndiaPvtLtd/Common Folder/Siya Knowledge Editorial/
 ```
 
-## Folder map
+## Folder map (Mac/local TrueSync — original planned tree)
 
 | Asset type | Put in |
 |---|-----|
@@ -25,6 +32,7 @@ alwaysApply: true
 | Statics / banners / singles | `06-Statics/...` |
 | How-to | `03-START-HERE/` |
 | Video prompts (flat mirror) | `07-Video-Prompts/` |
+| Cloud/Action delivery only | `_API-DRY-RUN/04–07` — **not** Mac primary ship |
 
 ## Captions (required in the git pack at Phase 3)
 

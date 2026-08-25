@@ -3,6 +3,7 @@ phase: 3
 status: approved
 insight_id: ADHD-2026-08-25-weight-feel-harder
 kind: carousel
+ship_lane: mac
 ---
 
 # SHIP — ADHD-2026-08-25-weight-feel-harder
@@ -25,5 +26,5 @@ kind: carousel
 
 ## WorkDrive
 
-Action sync (live) → `_API-DRY-RUN/04–07` after this pack lands on `main`.  
-TrueSync human mirror: `05-Carousels/ADHD-2026-08-25-weight-feel-harder/`
+**ship_lane: mac** — TrueSync → `05-Carousels/ADHD-2026-08-25-weight-feel-harder/` · `04-Content-Tracker/` · `07-Video-Prompts/`  
+Live Action **skips** this pack (cloud/`_API-DRY-RUN` only when `ship_lane: cloud`).

@@ -1,7 +1,7 @@
-# Option 2 — human-gated WorkDrive sync into fresh _API-DRY-RUN/04–07.
-# Chat Phase 1–3 approvals stay manual. After SHIP.md + tracker Approved land on main,
-# this Action mirrors only *changed* packs (skips TEST-*).
-# Uses existing WORKDRIVE_DRYRUN_*_ID secrets — no new folder IDs required.
+# Option 2 — WorkDrive sync into _API-DRY-RUN/04–07 for **cloud** packs only.
+# Mac/local packs set SHIP.md ship_lane: mac and TrueSync into existing 04–07 —
+# this Action SKIPS them (see workdrive_phase3_sync ship_lane gate).
+# Cloud packs: ship_lane: cloud + Phase 3 on main → sync here.
 # Zoho tokens stay in GitHub secrets — never in Cloud Agent context.
 name: Siya WorkDrive Phase-3 sync (live)
 
@@ -12,10 +12,12 @@ on:
       - "apps/siya-health/brand/editorial-packs/**"
       - "apps/siya-health/brand/statics/**"
       - "apps/siya-health/brand/04-Content-Tracker/CLOUD-PACK-TRACKER.csv"
+      - "apps/siya-health/brand/scripts/workdrive_phase3_sync.py"
+      - "apps/siya-health/brand/scripts/workdrive_sync_config.live.json"
   workflow_dispatch:
     inputs:
       insight_id:
-        description: "Optional single Insight ID (blank = discover changed / none)"
+        description: "Optional single Insight ID (blank = discover changed / none). Must have ship_lane: cloud."
         required: false
         default: ""
       confirm_live:
@@ -45,7 +47,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Phase-3 sync (_API-DRY-RUN delivery)
+      - name: Phase-3 sync (_API-DRY-RUN · ship_lane cloud only)
         env:
           ZOHO_CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID }}
           ZOHO_CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}

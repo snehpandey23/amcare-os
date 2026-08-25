@@ -1,6 +1,6 @@
 {
   "mode": "live",
-  "description": "Human-gated delivery into fresh _API-DRY-RUN/04–07 (same WORKDRIVE_DRYRUN_*_ID secrets already set). Chat Phase 3 → SHIP.md + tracker on main → Action.",
+  "description": "Cloud lane only: SHIP.md ship_lane: cloud → _API-DRY-RUN/04–07. Mac packs (ship_lane: mac) are skipped — TrueSync to existing 04–07.",
   "require_path_substring": "_API-DRY-RUN",
   "transport": "api",
   "api": {

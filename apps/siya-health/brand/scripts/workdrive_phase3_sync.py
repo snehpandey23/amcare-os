@@ -5,8 +5,10 @@ Phase-3 → WorkDrive sync.
 Gates (all required; otherwise skip + log, exit 0):
   1. Git ref is main (GITHUB_REF / --branch / --assume-main)
   2. Pack has SHIP.md with phase: 3 and status approved
-  3. CLOUD-PACK-TRACKER.csv row for that Insight ID matches Approved|Ready
-  4. Captions + ready-to-post images present
+  3. Live/_API-DRY-RUN only when SHIP.md has ship_lane: cloud
+     (Mac/local packs use ship_lane: mac → TrueSync to 04–07; Action skips)
+  4. CLOUD-PACK-TRACKER.csv row for that Insight ID matches Approved|Ready
+  5. Captions + ready-to-post images present
 
 Modes:
   live — human-gated delivery after Phase 3 on main (working tree; WORKDRIVE_DRYRUN_* today)
@@ -154,7 +156,7 @@ def parse_ship_md(path: Path) -> dict[str, str]:
                 meta[k.strip().lower()] = v.strip().strip('"').strip("'")
     # Also accept loose KEY: value lines
     for line in text.splitlines():
-        if re.match(r"^(phase|status|insight_id|kind)\s*:", line, re.I):
+        if re.match(r"^(phase|status|insight_id|kind|ship_lane|lane)\s*:", line, re.I):
             k, v = line.split(":", 1)
             meta[k.strip().lower()] = v.strip().strip('"').strip("'")
     return meta
@@ -174,6 +176,33 @@ def ship_ok(ship: dict[str, str], insight_id: str) -> bool:
         log(f"SKIP: SHIP.md insight_id={sid!r} != folder {insight_id!r}")
         return False
     return True
+
+
+def ship_lane_allows_api_dryrun(
+    ship: dict[str, str], cfg: dict[str, Any], insight_id: str
+) -> bool:
+    """Live Action → _API-DRY-RUN only for ship_lane: cloud.
+
+    Mac/local agents set ship_lane: mac and TrueSync into existing 04–07.
+    Missing/unknown lane on live = skip (fail closed — no accidental dry-run dumps).
+    test / fail-test modes ignore this gate (their own trees).
+    """
+    if cfg.get("mode") != "live":
+        return True
+    lane = str(ship.get("ship_lane") or ship.get("lane") or "").strip().lower()
+    if lane in {"cloud", "api-dry-run", "api_dry_run", "dry-run", "dryrun"}:
+        return True
+    if lane in {"mac", "local", "trusync", "desktop"}:
+        log(
+            f"SKIP: ship_lane={lane!r} → Mac/TrueSync only "
+            f"(no _API-DRY-RUN sync) for {insight_id}"
+        )
+        return False
+    log(
+        f"SKIP: ship_lane missing/unknown {lane!r} — live Action requires "
+        f"ship_lane: cloud for {insight_id} (Mac packs use ship_lane: mac)"
+    )
+    return False
 
 
 def tracker_status(cfg: dict[str, Any], insight_id: str) -> str | None:
@@ -339,7 +368,7 @@ def count_files(path: Path) -> int:
 
 # --- API transport ---
 
-SCRIPT_VERSION = "2026-08-25-v6-failtest-separated"
+SCRIPT_VERSION = "2026-08-25-v7-ship-lane-cloud-only"
 SYNCING_PREFIX = "__SYNCING__"
 
 
@@ -762,12 +791,17 @@ def sync_one(
     ship = parse_ship_md(pack_dir / "SHIP.md")
     if not ship_ok(ship, insight_id):
         return "skipped"
+    if not ship_lane_allows_api_dryrun(ship, cfg, insight_id):
+        return "skipped"
     if not tracker_approved(cfg, insight_id):
         return "skipped"
     if not validate_pack(cfg, pack_dir, kind):
         return "skipped"
 
-    log(f"SYNC: {insight_id} ({kind}) via {transport}")
+    log(
+        f"SYNC: {insight_id} ({kind}) via {transport} "
+        f"ship_lane={ship.get('ship_lane') or ship.get('lane') or 'cloud'}"
+    )
 
     if transport == "fs":
         root = resolve_fs_root(cfg)
