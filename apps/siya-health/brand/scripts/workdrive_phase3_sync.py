@@ -328,6 +328,8 @@ def api_upload_file(token: str, parent_id: str, local_path: Path, upload_url: st
         method="POST",
         headers={
             "Authorization": f"Zoho-oauthtoken {token}",
+            "Accept": "application/vnd.api+json",
+            "User-Agent": "siya-workdrive-phase3-sync/1.0",
             "Content-Type": f"multipart/form-data; boundary={boundary}",
         },
     )
@@ -339,7 +341,60 @@ def api_upload_file(token: str, parent_id: str, local_path: Path, upload_url: st
         raise SystemExit(f"Upload failed {local_path}: HTTP {e.code} {err[:500]}") from e
 
 
+def _workdrive_headers(token: str, *, json_body: bool = False) -> dict[str, str]:
+    # WorkDrive is JSON:API — missing Accept → HTTP 415
+    headers = {
+        "Authorization": f"Zoho-oauthtoken {token}",
+        "Accept": "application/vnd.api+json",
+        "User-Agent": "siya-workdrive-phase3-sync/1.0",
+    }
+    if json_body:
+        headers["Content-Type"] = "application/vnd.api+json"
+    return headers
+
+
+def _extract_resource_id(data: dict[str, Any]) -> str:
+    raw = data.get("data")
+    if isinstance(raw, dict):
+        return str(raw.get("id") or "")
+    if isinstance(raw, list) and raw:
+        return str(raw[0].get("id") or "")
+    return ""
+
+
+def api_find_child_folder(token: str, parent_id: str, name: str, files_url: str) -> str:
+    """Return existing child folder id under parent, or empty string."""
+    q = urllib.parse.urlencode({"filter[parent_id]": parent_id})
+    url = f"{files_url}?{q}"
+    req = urllib.request.Request(url, method="GET", headers=_workdrive_headers(token))
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            data = json.loads(resp.read().decode())
+    except urllib.error.HTTPError as e:
+        err = e.read().decode(errors="replace")
+        log(f"WARN: list children of {parent_id}: HTTP {e.code} {err[:200]}")
+        return ""
+    items = data.get("data") or []
+    if isinstance(items, dict):
+        items = [items]
+    for item in items:
+        attrs = item.get("attributes") or {}
+        if attrs.get("name") == name and attrs.get("type") == "folder":
+            return str(item.get("id") or "")
+        # Some responses use is_folder / kind
+        if attrs.get("name") == name and (
+            attrs.get("is_folder") is True or attrs.get("resource_type") == "folder"
+        ):
+            return str(item.get("id") or "")
+    return ""
+
+
 def api_create_folder(token: str, parent_id: str, name: str, files_url: str) -> str:
+    existing = api_find_child_folder(token, parent_id, name, files_url)
+    if existing:
+        log(f"  reuse folder {name!r} → {existing}")
+        return existing
+
     payload = json.dumps(
         {
             "data": {
@@ -352,25 +407,21 @@ def api_create_folder(token: str, parent_id: str, name: str, files_url: str) -> 
         files_url,
         data=payload,
         method="POST",
-        headers={
-            "Authorization": f"Zoho-oauthtoken {token}",
-            "Content-Type": "application/json",
-        },
+        headers=_workdrive_headers(token, json_body=True),
     )
     try:
         with urllib.request.urlopen(req, timeout=60) as resp:
             data = json.loads(resp.read().decode())
-        # Best-effort id extract
-        return (
-            data.get("data", {}).get("id")
-            or data.get("data", [{}])[0].get("id")
-            or ""
-        )
-    except urllib.error.HTTPError as e:
-        # Folder may already exist — caller should list; for test mode we log and continue with parent uploads only at top
-        err = e.read().decode(errors="replace")
-        log(f"WARN: create folder {name!r}: HTTP {e.code} {err[:200]}")
+        fid = _extract_resource_id(data)
+        if fid:
+            return fid
+        log(f"WARN: create folder {name!r}: no id in response keys={list(data.keys())}")
         return ""
+    except urllib.error.HTTPError as e:
+        err = e.read().decode(errors="replace")
+        log(f"WARN: create folder {name!r}: HTTP {e.code} {err[:300]}")
+        # Race / already exists
+        return api_find_child_folder(token, parent_id, name, files_url)
 
 
 def api_sync_tree(
