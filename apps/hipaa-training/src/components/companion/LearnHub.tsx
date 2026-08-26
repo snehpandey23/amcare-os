@@ -4,6 +4,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MODULES, getModulesForRole } from "@/content/modules";
 import { loadLevelUpProgress, getDisplayStreak, type LevelUpProgress } from "@/lib/level-up/progress";
+import { buildWeeklyPracticeReport } from "@/lib/level-up/weekly-report";
+import { WeeklyPracticeReportView } from "@/components/level-up/WeeklyPracticeReportView";
+import { PracticeInactivityNudgeBanner } from "@/components/level-up/PracticeInactivityNudgeBanner";
+import { displayPreferredName, loadLocalPortalProfile } from "@/lib/portal-profile";
 import { loadLocalProgress } from "@/lib/progressStorage";
 import { GrowthPillars } from "@/components/companion/GrowthPillars";
 import { MySopOwnershipNotice } from "@/components/sops/MySopOwnershipNotice";
@@ -39,10 +43,18 @@ export function LearnHub() {
     setModuleTotal(total);
     setModulesDone(p.modulesCompleted?.length ?? 0);
     setFinalReady(p.finalExam?.readiness === "ready");
+    const onUpdate = () => setLevel(loadLevelUpProgress());
+    window.addEventListener("siya-level-up-updated", onUpdate);
+    return () => window.removeEventListener("siya-level-up-updated", onUpdate);
   }, []);
 
   const streak = level ? getDisplayStreak(level) : 0;
   const xp = level?.totalXp ?? 0;
+  const profile = loadLocalPortalProfile();
+  const subjectLabel = displayPreferredName(profile) || "You";
+  const weeklyReport = level
+    ? buildWeeklyPracticeReport(level, { subjectLabel })
+    : null;
 
   return (
     <div className={portalPage}>
@@ -61,6 +73,14 @@ export function LearnHub() {
       </header>
 
       <MySopOwnershipNotice />
+
+      <PracticeInactivityNudgeBanner />
+
+      {weeklyReport ? (
+        <div className="mt-4">
+          <WeeklyPracticeReportView report={weeklyReport} />
+        </div>
+      ) : null}
 
       <div className="grid gap-3 sm:grid-cols-3">
         <div className={portalCard}>

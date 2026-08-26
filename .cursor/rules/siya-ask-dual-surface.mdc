@@ -1,0 +1,34 @@
+---
+description: Ask and Founder Talk share one engine — verify every chat fix on BOTH surfaces
+alwaysApply: true
+---
+
+# Siya Assist — dual-surface verification (Ask + Founder Talk)
+
+## Architecture (do not re-split)
+
+Staff **Ask** and admin **Founder Talk** are **one engine** (`runSiyaAssistantAsync` / `buildSiyaReply`) with `surface: "default" | "founder-coach"`.
+
+| Surface | UI mount | API |
+|---------|----------|-----|
+| Staff Ask | My day `AssistChatShell` (default) | `POST /api/chat` without founder surface |
+| Founder Talk | Admin My day Ask tab `surface="founder-coach"` | Same route with `surface: "founder-coach"` |
+
+**Intentional** founder-only differences (keep): portal domain signals / brief context, Approve/`pendingTask` suppressed on Talk, no flow follow-up triage, stricter medium-hit dump gate, patient-public marketing redirect, Plan Record UI (not chat), soft-stop labels as Leadership · Founder Talk.
+
+**Accidental** divergence is a bug — not a second product.
+
+## Standing checklist (before reporting any Ask/chat fix done)
+
+Unless the change is **explicitly scoped to one surface** (state that in the report):
+
+1. [ ] Exercise the failing / new path on **staff Ask** (`surface` default / `runSiyaAssistant`).
+2. [ ] Exercise the **same** path on **Founder Talk** (`surface: "founder-coach"` / `runSiyaAssistantAsync(..., { surface: "founder-coach" })`).
+3. [ ] Prefer a dual smoke (see `apps/hipaa-training/scripts/smoke-dual-surface-parity.ts`) or extend it — do not ship with default-only smokes for shared engine paths.
+4. [ ] Deploy still means **staff portal script** (auth API + staff app) — both surfaces ship in one staff app deploy; dual-verify is about **behavior**, not a second Vercel project.
+
+## When writing engine code
+
+- Put shared behavior in `buildSiyaReply` / shared helpers **without** forgetting that Talk also runs those paths.
+- Gate with `founderCoach` **only** for intentional differences above.
+- Do not assume “staff tested = founder works” without a Talk check — process gap caused past regressions (e.g. onboarding meta, soft-stop labeled Leadership).

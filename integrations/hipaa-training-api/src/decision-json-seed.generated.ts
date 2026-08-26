@@ -375,9 +375,9 @@ export const JSON_DECISIONS_SEED: JsonDecisionSeed[] = [
   },
   {
     "id": "resend-scoped-to-sop-review-only",
-    "title": "Resend email scoped to SOP submit/approve only for now",
-    "decision_text": "Resend notifications cover SOP submit and approve/send-back only. Task assignments, overdue reminders, billing escalation, and a founder digest were each named and explicitly deferred.",
-    "reason": "Prove one reliable email path before expanding notification surface area.",
+    "title": "Resend email for SOP review and task assignment",
+    "decision_text": "Resend notifications cover SOP submit/approve/send-back and task assignment/reassign emails to the assignee. Overdue reminders, billing escalation, and a founder digest remain deferred.",
+    "reason": "Task assign was deferred until one Resend path was proven; SOP review mail is stable, so assignment mail reuses that BFF + RESEND_API_KEY pattern.",
     "importance": "medium",
     "status": "active",
     "department": "Technology",

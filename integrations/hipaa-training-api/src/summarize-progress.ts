@@ -41,14 +41,17 @@ export function summarizeLevelUpProgress(levelUp: Record<string, unknown> | null
       streak: 0,
       lastActiveDate: "",
       lifetimeDrills: {} as Partial<Record<DrillKey, number>>,
+      dayLedger: [] as unknown[],
     };
   }
   const lifetime = (levelUp.lifetimeDrills as Partial<Record<DrillKey, number>>) || {};
+  const dayLedger = Array.isArray(levelUp.dayLedger) ? levelUp.dayLedger : [];
   return {
     totalXp: typeof levelUp.totalXp === "number" ? levelUp.totalXp : 0,
     streak: typeof levelUp.streak === "number" ? levelUp.streak : 0,
     lastActiveDate: typeof levelUp.lastActiveDate === "string" ? levelUp.lastActiveDate : "",
     lifetimeDrills: lifetime,
+    dayLedger,
   };
 }
 

@@ -1,8 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import {
   fetchRecentMemory,
@@ -49,6 +48,12 @@ function parseMemoryTab(raw: string | null, isAdmin: boolean): MemoryTab {
   return defaultMemoryTab(isAdmin);
 }
 
+function readTabFromLocation(isAdmin: boolean): MemoryTab {
+  if (typeof window === "undefined") return defaultMemoryTab(isAdmin);
+  const raw = new URLSearchParams(window.location.search).get("tab");
+  return parseMemoryTab(raw, isAdmin);
+}
+
 const STAFF_TABS: readonly [MemoryTab, string][] = [
   ["policies", "Policies"],
   ["knowledge", "Knowledge"],
@@ -93,73 +98,90 @@ function MemoryCard({ entry }: { entry: MemoryEntry }) {
   );
 }
 
+/**
+ * Tab state is local + history.replaceState (not router.replace), so tab switches
+ * do not remount through Next Suspense / useSearchParams.
+ */
 export function MemoryHub() {
   const { user, authReady } = useAuth();
   const isAdmin = isPortalAdmin(user?.role);
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
-  const [tab, setTab] = useState<MemoryTab>(() => parseMemoryTab(searchParams.get("tab"), isAdmin));
+  const [tab, setTab] = useState<MemoryTab>(() => readTabFromLocation(isAdmin));
   const [query, setQuery] = useState("");
   const [entries, setEntries] = useState<MemoryEntry[]>([]);
   const [week, setWeek] = useState<Awaited<ReturnType<typeof fetchWeekInReview>> | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [capturesLoading, setCapturesLoading] = useState(false);
+  const [capturesLoaded, setCapturesLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const capturesFetchGen = useRef(0);
 
   useEffect(() => {
     if (!authReady) return;
-    const parsed = parseMemoryTab(searchParams.get("tab"), isAdmin);
+    const parsed = readTabFromLocation(isAdmin);
     if (!isAdmin && parsed === "way") {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set("tab", "knowledge");
-      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+      const url = new URL(window.location.href);
+      url.searchParams.set("tab", "knowledge");
+      window.history.replaceState(null, "", `${url.pathname}?${url.searchParams.toString()}`);
       setTab("knowledge");
       return;
     }
     setTab(parsed);
-  }, [authReady, isAdmin, pathname, router, searchParams]);
+  }, [authReady, isAdmin]);
+
+  useEffect(() => {
+    const onPop = () => setTab(readTabFromLocation(isAdmin));
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, [isAdmin]);
 
   const selectTab = useCallback(
     (next: MemoryTab) => {
       setTab(next);
-      const params = new URLSearchParams(searchParams.toString());
+      const url = new URL(window.location.href);
       const homeTab = defaultMemoryTab(isAdmin);
-      if (next === homeTab) params.delete("tab");
-      else params.set("tab", next);
-      const qs = params.toString();
-      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+      if (next === homeTab) url.searchParams.delete("tab");
+      else url.searchParams.set("tab", next);
+      const qs = url.searchParams.toString();
+      window.history.replaceState(null, "", qs ? `${url.pathname}?${qs}` : url.pathname);
     },
-    [isAdmin, pathname, router, searchParams],
+    [isAdmin],
   );
 
-  const load = useCallback(async () => {
-    setLoading(true);
+  const loadCaptures = useCallback(async () => {
+    const gen = ++capturesFetchGen.current;
+    setCapturesLoading(true);
     setError(null);
     try {
       const [recent, review] = await Promise.all([fetchRecentMemory(), fetchWeekInReview()]);
+      if (gen !== capturesFetchGen.current) return;
       setEntries(recent);
       setWeek(review);
+      setCapturesLoaded(true);
     } catch (e) {
+      if (gen !== capturesFetchGen.current) return;
       setError(e instanceof Error ? e.message : "Could not load memory");
     } finally {
-      setLoading(false);
+      if (gen === capturesFetchGen.current) setCapturesLoading(false);
     }
   }, []);
 
+  // Capture-layer APIs only when the Memory (captures) tab is active.
   useEffect(() => {
-    void load();
-  }, [load]);
+    if (!authReady || tab !== "memory") return;
+    if (capturesLoaded || capturesLoading) return;
+    void loadCaptures();
+  }, [authReady, tab, capturesLoaded, capturesLoading, loadCaptures]);
 
   async function onSearch(e: React.FormEvent) {
     e.preventDefault();
-    setLoading(true);
+    setCapturesLoading(true);
     setError(null);
     try {
       setEntries(await searchMemory(query.trim()));
+      setCapturesLoaded(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Search failed");
     } finally {
-      setLoading(false);
+      setCapturesLoading(false);
     }
   }
 
@@ -282,7 +304,7 @@ export function MemoryHub() {
           </form>
 
           {error ? <p className={`text-sm ${portalStatusErrorText}`}>{error}</p> : null}
-          {loading ? <p className="text-sm text-[var(--siya-text-muted)]">Loading…</p> : null}
+          {capturesLoading ? <p className="text-sm text-[var(--siya-text-muted)]">Loading captures…</p> : null}
 
           <div className="space-y-4">
             {entries.map((e) => (
@@ -290,7 +312,7 @@ export function MemoryHub() {
             ))}
           </div>
 
-          {!loading && entries.length === 0 ? (
+          {!capturesLoading && entries.length === 0 ? (
             <p className="text-sm text-[var(--siya-text-muted)]">
               No captures yet. End a shift with accomplishments, or save a helpful Ask answer — then promote to a decision when
               it matters.

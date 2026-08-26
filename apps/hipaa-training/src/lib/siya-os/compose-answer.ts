@@ -324,18 +324,60 @@ export function isConfidentAssistAnswer(opts: {
   return false;
 }
 
-export function workplaceConcernAnswer(): string {
+export function workplaceConcernAnswer(opts?: { askingForPolicy?: boolean }): string {
+  const policyGap = opts?.askingForPolicy
+    ? [
+        "I don’t have a **published live staff guide** yet for **sexual harassment / sexual abuse / POSH-style workplace policy** (nothing approved in the guides I can cite).",
+        "",
+      ]
+    : [];
   return [
-    "I’m sorry that happened. For **workplace / people concerns** (including a teammate or manager being rude), use this path:",
+    ...policyGap,
+    "I’m sorry you’re dealing with this. For **workplace / people concerns** (including harassment, exploitation, or mistreatment by seniors or teammates), use this path:",
     "",
     "1. If there’s an **immediate safety** issue, contact your **supervisor** (or on-call lead) now.",
     "2. Otherwise, escalate to your **supervisor** and **People / HR** — don’t put patient identifiers in this chat.",
     "3. Share **what happened**, **when**, and **who was involved** (names of staff only — no patient PHI).",
     "",
-    "I don’t have a published SOP for interpersonal complaints yet — use **Notify owner** if you want this tracked as a knowledge gap, or **Copy escalation summary** for Slack/email.",
+    "**Confidentiality:** This Ask thread is for **your** staff account. It is **not** a private HR hotline — admins with chat-review access may see Assist threads. For sensitive people issues, prefer **People / HR** (or your supervisor) on the **approved confidential channel**, and keep details out of Ask / Cliq / Mail when possible.",
+    "",
+    "I don’t invent an investigation, invent policy text, or decide outcomes. Use **Copy escalation summary** for a de-identified handoff to People/HR, or **Notify owner** so we add the missing approved policy.",
   ].join("\n");
 }
 
+/** HR phone / contact directory — never invent numbers or Clinical Ops SOPs. */
+export function isHrContactQuery(text: string): boolean {
+  const t = text.trim().toLowerCase();
+  if (!t || t.length > 280) return false;
+  const wantsContact =
+    /\b(phone|number|mobile|whatsapp|dial|call|contact|email|reach)\b/.test(t) ||
+    /\bhow\s+(do\s+i\s+)?(reach|contact|call)\b/.test(t);
+  const hr =
+    /\b(hr|people\s*\/?\s*hr|people\s+ops|people\s+team|human\s+resources)\b/.test(t) ||
+    /\bhr\s+person\b/.test(t);
+  return wantsContact && hr;
+}
+
+export function buildHrContactAnswer(hrDetail: string): string {
+  const detail = hrDetail.trim() || "People ops (internal directory)";
+  const hasSpecific =
+    detail.length > 0 &&
+    !/^people ops \(internal directory\)$/i.test(detail) &&
+    detail.toLowerCase() !== "people ops";
+  return [
+    hasSpecific
+      ? `**People / HR contact** (from portal config): **${detail}**`
+      : "**Ask does not store a dedicated HR phone number** in approved guides.",
+    "",
+    hasSpecific
+      ? "If that channel doesn’t reach someone, ask your **supervisor** or check the **internal directory** for the current People / HR owner."
+      : "Ask your **supervisor** or the **internal staff directory** for the current People / HR phone/email. I won’t invent a number.",
+    "",
+    "For a **workplace concern** (harassment, exploitation, etc.), keep using **Copy escalation summary** / your supervisor — don’t put sensitive details only in Ask.",
+  ].join("\n");
+}
+
+/** Last-resort script when no live reviewed SOP is in retrieval for hostile/abusive patient. */
 export function abusivePatientAnswer(): string {
   return [
     "For a **hostile, abusive, or threatening patient/caller** (keep names and chart details out of this chat):",
@@ -346,8 +388,26 @@ export function abusivePatientAnswer(): string {
     "4. **Escalate same day** to your **supervisor / clinical lead**. If there’s a **safety threat**, escalate immediately and loop leadership.",
     "5. **Billing / refund anger** → supervisor + **Billing lead** decide; don’t waive fees yourself.",
     "",
-    "Use **Copy escalation summary** for a de-identified handoff, or **Notify owner** if you want a fuller published SOP.",
+    "Use **Copy escalation summary** for a de-identified handoff, or **Notify owner** if you want this tracked until a published SOP is available.",
   ].join("\n");
+}
+
+const LIVE_ABUSIVE_PATIENT_SOP_ID = "sop-1786241888864-djh6i5";
+
+/** Prefer the reviewed live Postgres SOP over the hardcoded fallback. */
+export function pickLiveAbusivePatientSop<
+  T extends { id: string; title?: string; snippet?: string; score: number },
+>(chunks: T[]): T | null {
+  const live = chunks.filter((c) => c.id.startsWith("sop-db-") && c.score >= 8);
+  if (!live.length) return null;
+  const byId = live.find((c) => c.id === `sop-db-${LIVE_ABUSIVE_PATIENT_SOP_ID}`);
+  if (byId) return byId;
+  const byTitle = live.find((c) =>
+    /verbally\s+abusive|abusive\s+patient|hostile\s+patient|verbal\s+abuse/i.test(
+      `${c.title ?? ""} ${c.snippet ?? ""}`,
+    ),
+  );
+  return byTitle ?? null;
 }
 
 function pickSentences(body: string, queryTokens: string[], max = 4): string[] {

@@ -26,6 +26,8 @@ export type TeamRosterMember = {
     usCultureSessions: number;
     billingPracticeSessions: number;
     dailyLearningSessions: number;
+    /** Day ledger for shared weekly report (identical staff/admin builder). */
+    dayLedger?: unknown[];
   };
 };
 

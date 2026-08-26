@@ -59,13 +59,22 @@ export type PortalProfile = {
   improveGoals: string[];
   biggestChallenge: string;
   completedAt?: number;
+  /**
+   * Staff/admin skipped the personalization wizard and went to My day.
+   * Gate allows portal access; Personalize remains available at /onboarding.
+   */
+  onboardingSkipped?: boolean;
+  skippedAt?: number;
   /** Greeting name — falls back to account first name when unset. */
   preferredName?: string;
   /** Custom Assist label in My Day chat opening when set. */
   assistantName?: string;
   /** When to surface Learn/training nudges on My Day. */
   trainingReminder?: TrainingReminderPref;
-  /** Principle 4: personal AI coach with memory vs stateless Ask */
+  /**
+   * Legacy profile field — coach is mandatory for everyone (Stage 2).
+   * Always treated as on; do not gate features on this flag.
+   */
   aiCoachOptIn?: boolean;
   /** Principle 6: morning | evening | night (My Day rhythm) */
   workShift?: "morning" | "evening" | "night";
@@ -154,6 +163,7 @@ export function isOnboardingRequiredForPortal(): boolean {
 
 export function canUsePortalWithoutOnboarding(p: PortalProfile | null | undefined): boolean {
   if (!isOnboardingRequiredForPortal()) return true;
+  if (p?.onboardingSkipped) return true;
   return isOnboardingComplete(p);
 }
 
