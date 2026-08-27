@@ -15,6 +15,7 @@ You are producing a Siya Health creative.
 Load and obey FIRST (do not rewrite; pixels fail-closed on these):
 0. brand/BRAND-STYLE-LOCK.md  ← CANONICAL tokens (navy #001878 · magenta #D81088 · cream #F4EFE7 · Georgia)
    NEVER plum #8D3A78 · NEVER brown ink · NEVER hard-seam L · NEVER freehand GenerateImage as final frame
+0b. brand/MEDICAL-COMPLIANCE-MARKETING.md ← SOP v2 claims / §7.2 checklist / Legal triggers
 1. brand/VISUAL-OS.md + brand/VISUAL-OS-TEMPLATES.md
 2. brand/01-BRAND-OS.md
 3. brand/02-VISUAL-LANGUAGE.md (site philosophy — social pixels still follow BRAND-STYLE-LOCK)
@@ -29,6 +30,8 @@ Rules:
 - Select Family + Layout ID; do not invent layouts.
 - Prefer cloning/adapting an entry from brand/creative-registry/ when one exists.
 - Never invent statistics; use homepage-trust-metrics.mjs only.
+- Tag clinical/stat claims LOW|MEDIUM|HIGH; HIGH → Medical Director before use; §7.3 → Legal.
+- Run compliance/CHECKLIST.md before compose/ship. No Rx before/after. Testimonial material-connection disclosure required.
 - Screening ≠ diagnosis ≠ guaranteed prescribing.
 - Calm confidence; no fake urgency; no fear marketing.
 - **Knowledge carousel A-03 lean lock (2026-08-06):** on-frame = headline + one sub-headline only.

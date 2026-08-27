@@ -1,0 +1,33 @@
+---
+description: Medical Compliance in Marketing SOP v2 — checklist + claim-risk hard gates for all Siya creative (esp. cloud)
+alwaysApply: true
+---
+
+# Medical compliance — marketing content (fail closed)
+
+Applies to **all** Siya Health marketing creatives: carousel · static · captions · video-prompt · research→copy (desktop · mobile · **cloud**).
+
+## Mandatory read
+
+`apps/siya-health/brand/MEDICAL-COMPLIANCE-MARKETING.md` ← **must exist**
+
+If missing from the clone: **STOP** (stale branch). Do not invent rules from Jul/v1 docs.
+
+## Hard gates (agents cannot skip)
+
+1. **Phase 1** — With the copy plan, tag clinical/stat claims **LOW / MEDIUM / HIGH**. Draft `compliance/CHECKLIST.md` from `brand/compliance/_TEMPLATE-CHECKLIST.md` (Pass/Flag).
+2. **Any Flag** or **HIGH** claim → **do not compose** until Medical Director clears (say so in chat and stop).
+3. **Any §7.3 Legal trigger** (HIGH · comparative meds · testimonial · before/after · unsure) → **do not ship** until Legal clears.
+4. **Phase 3** — Final `compliance/CHECKLIST.md` must be in the pack next to `SHIP.md`. No Phase 3 without it.
+5. **Testimonials** — Compensation / material connection **must** be disclosed (v2.0 Legal correction). Never use the old “no disclosure required” line.
+6. **Rx before/after imagery** — prohibited.
+7. **On-frame disclaimer** — use compositor footer (`educational purposes only`). Do not invent “i | Learn more” footer treatments.
+8. **No diagnose-from-social** — captions must not imply Siya diagnoses via DMs/comments/posts.
+
+## Not a substitute for humans
+
+Agents run the checklist and **stop** for Flag/HIGH/§7.3. Agents do **not** forge Medical Director or Legal approval.
+
+## Also
+
+`siya-visual-approval-gate.mdc` · `siya-brand-style-lock.mdc` · `siya-cloud-image-only.mdc` · `AGENT-BOOTSTRAP.md`
