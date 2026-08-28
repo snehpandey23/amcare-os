@@ -8,7 +8,7 @@
 - **Accent:** `for testing.` (Siya Magenta `#D00668`)
 - **Divider Rule:** Exact benchmark dimensions (w=116px, h=5px, left=68px)
 - **Twist / Subhead:** `(and recognized yourself / on every single page)` (Deep Navy `#0A1A5E`)
-- **Logo:** Official Siya Health registered caduceus lockup at (52, 60), height 176px
+- **Logo:** Locked `LOGO-PRIMARY` registered lockup (top-left, height ~92px, left=68px)
 - **Footer:** Bottom left benchmark `siya.health | Educational only` at (52, 1270)
 - **Compositor:** `apps/siya-health/brand/scripts/compose_benchmark_static.py`
 - **Output:** `ready-to-post/static-01.png` (4:5, 1080×1350)

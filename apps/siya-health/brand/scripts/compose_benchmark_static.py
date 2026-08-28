@@ -181,13 +181,13 @@ def compose_benchmark(
     canvas = Image.composite(photo, canvas, mask)
     draw = ImageDraw.Draw(canvas)
 
-    # 3. Logo (Official lockup at left=52, top=60)
+    # 3. Logo (Locked LOGO-PRIMARY at top-left ~92px height, left=68)
     logo = Image.open(logo_path).convert("RGBA")
-    target_h = 176
+    target_h = 92
     scale = target_h / logo.height
     logo_w = int(logo.width * scale)
     logo_resized = logo.resize((logo_w, target_h), Image.Resampling.LANCZOS)
-    canvas.paste(logo_resized, (52, 60), logo_resized)
+    canvas.paste(logo_resized, (left_margin, 80), logo_resized)
 
     # 4. Headline Typography (Georgia Bold @ 92px, line_height 126px)
     h_font = resolve_font("display", 92)
