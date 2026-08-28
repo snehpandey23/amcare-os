@@ -44,7 +44,7 @@
 - **File:** `ready-to-post/slide-04.png`
 
 ### Slide 5: The Next Step (Physician-Led Care)
-- **Headline:** Answers / start with a / single / visit.
-- **Accent:** `single` / `visit.`
+- **Headline:** Answers / start with a / single / tele-visit.
+- **Accent:** `single` / `tele-visit.`
 - **Recognition:** A physician-led adult / evaluation with full / timeline review and / differential clarity.
 - **File:** `ready-to-post/slide-05.png`
