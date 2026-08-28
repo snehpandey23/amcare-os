@@ -8,7 +8,7 @@
   - Canvas: 4:5 (`1080×1350px`)
   - Cream Background: `#F6E8DC` solid on left text column ($x=0\dots500\text{px}$)
   - Soft Organic Dissolve: $x=500\dots700\text{px}$ cleanly protecting the right-weighted subjects
-  - Logo: Canonical `LOGO-PRIMARY` lockup (`Siya Health®`) at `(x=68, y=80)`
+  - Logo: Locked `LOGO-PRIMARY` wordmark at `(x=58, y=72)`, maintaining original aspect ratio with approximate rendered size `242×40px`.
   - Headline: Georgia Bold @ `92px`, leading `126px`, starting at `y=300px`, left margin `x=68px`
   - Accent Words: Siya Magenta `#D00668`
   - Divider Rule: Solid magenta horizontal rule (`116px` width $\times$ `5px` height)

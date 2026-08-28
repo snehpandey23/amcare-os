@@ -183,13 +183,14 @@ def compose_benchmark(
     canvas = Image.composite(photo, canvas, mask)
     draw = ImageDraw.Draw(canvas)
 
-    # 3. Logo (Locked LOGO-PRIMARY at top-left ~92px height, left=68)
+    # 3. Logo Placement (x=58, y=72, size ~242x40 maintaining aspect ratio)
     logo = Image.open(logo_path).convert("RGBA")
-    target_h = 92
-    scale = target_h / logo.height
+    # Maintain aspect ratio to match approximate target box 242x40
+    scale = min(242 / logo.width, 40 / logo.height)
     logo_w = int(logo.width * scale)
-    logo_resized = logo.resize((logo_w, target_h), Image.Resampling.LANCZOS)
-    canvas.paste(logo_resized, (left_margin, 80), logo_resized)
+    logo_h = int(logo.height * scale)
+    logo_resized = logo.resize((logo_w, logo_h), Image.Resampling.LANCZOS)
+    canvas.paste(logo_resized, (58, 72), logo_resized)
 
     # 4. Headline Typography (Georgia Bold @ 92px, line_height 126px)
     h_font = resolve_font("display", 92)
