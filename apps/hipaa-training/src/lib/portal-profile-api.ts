@@ -54,5 +54,8 @@ export function hydratePortalProfile(remote: PortalProfile | null): PortalProfil
   if (remote?.onboardingComplete && remote.department) return remote;
   if (remote?.onboardingComplete) return { ...defaultPortalProfile(), ...remote };
   if (local.onboardingComplete) return local;
+  // Skipped personalization — keep gate open across devices when API has the flag.
+  if (local.onboardingSkipped) return local;
+  if (remote?.onboardingSkipped) return { ...defaultPortalProfile(), ...remote };
   return remote ? { ...defaultPortalProfile(), ...remote } : local;
 }

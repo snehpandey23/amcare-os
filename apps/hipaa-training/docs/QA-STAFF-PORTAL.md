@@ -1,5 +1,9 @@
 # Staff portal QA
 
+**Dedicated login:** see **[QA-SERVICE-ACCOUNT.md](./QA-SERVICE-ACCOUNT.md)** (`qa-test@siya.health`, QA/test only — not for real patient or business data).
+
+Agents: `source scripts/agent-qa-env.sh` then `npx tsx apps/hipaa-training/scripts/verify-qa-account.ts`.
+
 ## Automated CI (GitHub Actions)
 
 Workflow: **`.github/workflows/siya-staff-portal-qa.yml`**
@@ -12,22 +16,21 @@ Runs on:
 
 ### One-time setup — GitHub secrets
 
-Create a **dedicated admin test account** in prod (not a personal login): invite via `/admin/team`, store a strong password in secrets only.
+Use the **QA service account** (`qa-test@siya.health`) — not a personal founder login. Password lives in local `.env.agent-qa` (gitignored); sync to Actions:
+
+```bash
+source .env.agent-qa
+gh secret set STAFF_PORTAL_QA_EMAIL --body "$ASSIST_EMAIL"
+gh secret set STAFF_PORTAL_QA_PASSWORD --body "$ASSIST_PASSWORD"
+# optional:
+gh secret set STAFF_PORTAL_DATABASE_URL --body 'postgresql://…'
+```
 
 | Secret | Required | Purpose |
 |--------|----------|---------|
 | `STAFF_PORTAL_QA_EMAIL` | Yes | Login for authenticated checks |
 | `STAFF_PORTAL_QA_PASSWORD` | Yes | Password for that account |
 | `STAFF_PORTAL_DATABASE_URL` | No | Postgres URL for column/schema check (same DB as auth API) |
-
-From your machine (after creating the test admin):
-
-```bash
-gh secret set STAFF_PORTAL_QA_EMAIL --body 'qa-bot@yourdomain.com'
-gh secret set STAFF_PORTAL_QA_PASSWORD --body '…'
-# optional:
-gh secret set STAFF_PORTAL_DATABASE_URL --body 'postgresql://…'
-```
 
 CI runs `npm run qa:portal -w @amcare/hipaa-training-api` with `QA_STRICT=1` (fails if secrets missing).
 
@@ -44,11 +47,12 @@ npm run qa:portal
 
 ## Automated (local)
 
-From `integrations/hipaa-training-api`:
+From repo root:
 
 ```bash
-export QA_EMAIL=your-admin@work.email QA_PASSWORD='...'
-npm run qa:portal
+source scripts/agent-qa-env.sh
+npm run qa:portal -w @amcare/hipaa-training-api
+npx tsx apps/hipaa-training/scripts/verify-qa-account.ts
 ```
 
 Also:
@@ -62,13 +66,15 @@ npm run migrate:status   # requires DATABASE_URL
 | Step | URL / action | Expected |
 |------|----------------|----------|
 | Health | `curl …/api/health` | `"ok":true`, `hipaa-training-api` |
-| Login | Staff app `/login` | Lands on My day |
+| Login | Staff app `/login` as `qa-test@siya.health` | Lands on My day |
 | Team | `/team` | Presence chips + roster, no red error |
 | My day | `/` | Team today card + your tasks |
 | Shift | Header presence | Working / Break / Focus updates |
 | Admin invite | `/admin/team` → Invite | Modal, create account, copy block |
 | Task board | `/admin/tasks` | Loads Kanban (admin) |
 | SOP review | `/admin/sop-review` | Queue loads (admin) |
+| Practice share | `/learn/practice` complete a drill | Share Yes/No prompt |
+| Weekly report | Learn + Admin Team | Same report component / fingerprint |
 
 ## Known limits (documented, not bugs)
 

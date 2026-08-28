@@ -98,8 +98,8 @@ const QUERY_EXPANSIONS: Record<string, string[]> = {
   social: ["marketing", "content", "instagram", "compliance"],
   brand: ["voice", "entities", "editorial"],
   escalate: ["escalation", "pathways", "supervisor"],
-  abusive: ["hostile", "angry", "escalate", "escalation", "supervisor", "threat"],
-  hostile: ["abusive", "angry", "escalate", "escalation", "supervisor"],
+  abusive: ["hostile", "angry", "verbally", "verbal", "threat", "patient", "interaction"],
+  hostile: ["abusive", "angry", "verbally", "verbal", "threat", "patient"],
   memory: ["workdrive", "knowledge base", "siyaos", "company"],
   sop: ["policy", "workflow", "operations"],
   meet: ["greet", "homepage", "cta", "booking"],
@@ -329,7 +329,7 @@ export function retrieveWorkspaceKnowledge(query: string, limit = 6): RetrievedC
     { pattern: /workdrive|company memory|where.*sop|knowledge base/, id: "company-memory-workdrive-index", boost: 14 },
     { pattern: /marketing.*claim|fda|ftc|testimonial|ads compliance/, id: "medical-compliance-marketing", boost: 14 },
     { pattern: /escalat|who do i call|supervisor/, id: "escalation-pathways", boost: 12 },
-    { pattern: /abusive|hostile patient|angry patient|verbal abuse|patient threat/, id: "escalation-pathways", boost: 22 },
+    // Hostile/abusive patient → live Postgres SOP (see retrieveDynamicSops), not escalation-pathways.
     { pattern: /hipaa|breach|phi|privacy/, id: "hipaa-breach", boost: 12 },
   ];
 
@@ -437,6 +437,20 @@ export function retrieveDynamicSops(query: string, entries: DynamicSopEntry[], l
       }
       if (/\b(unreachable|not\s+reachable|no\s+number|missing\s+number|wrong\s+number|chart)\b/i.test(qLower)) {
         s += 12;
+      }
+    }
+    // Verbally abusive / hostile patient — prefer the reviewed live SOP over git escalation stubs.
+    if (
+      /verbally\s+abusive|abusive\s+patient|hostile\s+patient|verbal\s+abuse|patient\s+interaction/i.test(
+        `${e.title} ${e.keywords.join(" ")} ${e.body.slice(0, 800)}`,
+      )
+    ) {
+      if (
+        /\b(abusive|hostile|angry|threatening|yelling|screaming|verbal\s+abuse|patient\s+threat)\b/i.test(
+          qLower,
+        )
+      ) {
+        s += 28;
       }
     }
     const draftLive = e.status === "draft_live" || e.title.includes("[Active draft]");

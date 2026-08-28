@@ -18,12 +18,21 @@ import {
 import {
   loadLevelUpProgress,
   markDailyComplete,
+  recordTypingAttempt,
+  setLedgerShareDecision,
+  pendingShareEntry,
   getDisplayStreak,
+  type DayLedgerEntry,
+  type DailyCompletion,
   type LevelUpProgress,
 } from "@/lib/level-up/progress";
-import { loadLocalPortalProfile } from "@/lib/portal-profile";
+import { buildWeeklyPracticeReport } from "@/lib/level-up/weekly-report";
+import { displayPreferredName, loadLocalPortalProfile } from "@/lib/portal-profile";
+import { PracticeSharePrompt } from "@/components/level-up/PracticeSharePrompt";
+import { WeeklyPracticeReportView } from "@/components/level-up/WeeklyPracticeReportView";
 import { fetchMySopOwnership, fetchSopsForRetrieval } from "@/lib/sop-api";
 import { isPortalAuthEnabled } from "@/lib/trainingConfig";
+import { useAuth } from "@/context/AuthContext";
 import {
   profileDepartmentLabel,
   resolveDailyHealthTerm,
@@ -45,10 +54,24 @@ const pendingBtnClass =
   "rounded-[var(--siya-radius-md)] bg-[var(--siya-bg-subtle)] px-3 py-2 text-xs font-semibold text-[var(--siya-accent)] hover:bg-[var(--siya-accent)]/10";
 
 export function LevelUpHub() {
+  const { user } = useAuth();
   const [progress, setProgress] = useState<LevelUpProgress | null>(null);
+  const [sharePending, setSharePending] = useState<DayLedgerEntry | null>(null);
   const [phrase, setPhrase] = useState(() => resolveDailyPhraseCard([], ["General"]));
   const [term, setTerm] = useState(() => resolveDailyHealthTerm([], ["General"]));
   const refresh = useCallback(() => setProgress(loadLevelUpProgress()), []);
+
+  const afterProgress = useCallback((p: LevelUpProgress) => {
+    setProgress(p);
+    setSharePending(pendingShareEntry(p));
+  }, []);
+
+  const completeDrill = useCallback(
+    (item: DailyCompletion) => {
+      afterProgress(markDailyComplete(item));
+    },
+    [afterProgress],
+  );
 
   useEffect(() => {
     refresh();
@@ -87,7 +110,15 @@ export function LevelUpHub() {
   const docDay = docExerciseOfTheDay();
   const complianceQ = complianceQuestionOfTheDay();
   const streak = progress ? getDisplayStreak(progress) : 0;
-  const deptLabel = profileDepartmentLabel(loadLocalPortalProfile().department);
+  const profile = loadLocalPortalProfile();
+  const deptLabel = profileDepartmentLabel(profile.department);
+  const subjectLabel =
+    displayPreferredName(profile, user?.name) || user?.email || "You";
+
+  const weeklyReport = useMemo(() => {
+    if (!progress) return null;
+    return buildWeeklyPracticeReport(progress, { subjectLabel });
+  }, [progress, subjectLabel]);
 
   const phraseSubtitle = useMemo(() => {
     if (phrase.source?.includes("American workplace")) {
@@ -115,6 +146,12 @@ export function LevelUpHub() {
         ) : null}
       </header>
 
+      {weeklyReport ? (
+        <div className="mt-4">
+          <WeeklyPracticeReportView report={weeklyReport} />
+        </div>
+      ) : null}
+
       <section id="english">
         <h2 className={`mb-1 ${portalH2}`}>
           🇺🇸 {phraseSubtitle}
@@ -139,7 +176,7 @@ export function LevelUpHub() {
             type="button"
             disabled={phraseDone}
             className={`mt-3 ${phraseDone ? doneBtnClass : pendingBtnClass}`}
-            onClick={() => setProgress(markDailyComplete("english"))}
+            onClick={() => completeDrill("english")}
           >
             {phraseDone ? "Done today — +10 XP counted ✓" : "Mark phrase done (+10 XP)"}
           </button>
@@ -155,7 +192,7 @@ export function LevelUpHub() {
           choices={trivia.choices}
           correctIndex={trivia.correctIndex}
           explain={trivia.fact}
-          onCorrect={() => setProgress(markDailyComplete("trivia"))}
+          onCorrect={() => completeDrill("trivia")}
         />
       </section>
 
@@ -173,7 +210,7 @@ export function LevelUpHub() {
             type="button"
             disabled={termDone}
             className={`mt-3 ${termDone ? doneBtnClass : pendingBtnClass}`}
-            onClick={() => setProgress(markDailyComplete("healthterm"))}
+            onClick={() => completeDrill("healthterm")}
           >
             {termDone ? "Done today — +10 XP counted ✓" : "Mark term done (+10 XP)"}
           </button>
@@ -204,7 +241,7 @@ export function LevelUpHub() {
             type="button"
             disabled={writingDone}
             className={writingDone ? doneBtnClass : pendingBtnClass}
-            onClick={() => setProgress(markDailyComplete("documentation"))}
+            onClick={() => completeDrill("documentation")}
           >
             {writingDone ? "Done today — +10 XP counted ✓" : "Mark writing practice done (+10 XP)"}
           </button>
@@ -227,7 +264,7 @@ export function LevelUpHub() {
                 choices={s.choices}
                 correctIndex={s.correctIndex}
                 explain={s.explain}
-                onCorrect={() => setProgress(markDailyComplete("billing"))}
+                onCorrect={() => completeDrill("billing")}
               />
             </div>
           ),
@@ -243,7 +280,7 @@ export function LevelUpHub() {
           choices={complianceQ.choices}
           correctIndex={complianceQ.correctIndex}
           explain={complianceQ.explain}
-          onCorrect={() => setProgress(markDailyComplete("compliance"))}
+          onCorrect={() => completeDrill("compliance")}
         />
       </section>
 
@@ -260,22 +297,43 @@ export function LevelUpHub() {
         <h2 className={`mb-3 ${portalH2}`}>
           🗺️ Interactive US map
         </h2>
-        <UsMapInteractive onComplete={() => setProgress(markDailyComplete("map"))} />
+        <UsMapInteractive onComplete={() => completeDrill("map")} />
       </section>
 
       <section id="typing">
         <h2 className={`mb-3 ${portalH2}`}>
           ⌨️ Chat speed & accuracy
         </h2>
-        <ChatTypingDrill onComplete={() => setProgress(markDailyComplete("typing"))} />
+        <ChatTypingDrill
+          onAttempt={(s, meta) =>
+            afterProgress(
+              recordTypingAttempt(
+                { wpm: s.wpm, accuracy: s.accuracy },
+                {
+                  passageId: meta.passageId,
+                  awardDailyXp: s.finished && s.accuracy >= 92,
+                },
+              ),
+            )
+          }
+        />
       </section>
 
       <section id="timezone">
         <h2 className={`mb-3 ${portalH2}`}>
           🕐 Timezone practice (US ↔ India)
         </h2>
-        <TimezoneDrill onComplete={() => setProgress(markDailyComplete("timezone"))} />
+        <TimezoneDrill onComplete={() => completeDrill("timezone")} />
       </section>
+
+      {sharePending ? (
+        <PracticeSharePrompt
+          entry={sharePending}
+          onDecide={(decision) => {
+            afterProgress(setLedgerShareDecision(sharePending.id, decision));
+          }}
+        />
+      ) : null}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { getEscalationContacts } from "./config";
 import { defaultEscalationOwner } from "./escalation";
 import { retrievalQueryBoost, routeIntent, expandShortQuery, hasRoutableIntent } from "./flows";
-import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, abusivePatientAnswer, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, isClarifyingFollowUp, answerFromPriorAssistIfCovered, isGapContributionFollowUp, answerGapContributionFollowUp, polishStaffMessage, isCasualOffTopic, casualOffTopicReply, appendDraftLiveHedge } from "./compose-answer";
+import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, isHrContactQuery, buildHrContactAnswer, abusivePatientAnswer, pickLiveAbusivePatientSop, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, isClarifyingFollowUp, answerFromPriorAssistIfCovered, isGapContributionFollowUp, answerGapContributionFollowUp, polishStaffMessage, isCasualOffTopic, casualOffTopicReply, appendDraftLiveHedge } from "./compose-answer";
 import { staffTopicLabel } from "./staff-voice";
 import { synthesizeWorkforceAnswer } from "./llm-answer";
 import {
@@ -20,8 +20,8 @@ import {
   staffRefusalMessage,
   type StaffRefusalCategory,
 } from "./phi-guard";
-import { fetchAdminOpsSnapshot } from "./admin-ops-snapshot";
-import { detectAdminOpsIntent, runAdminOpsCoach } from "./admin-ops-coach";
+import { fetchAdminOpsSnapshot, fetchMyTasksToday } from "./admin-ops-snapshot";
+import { detectAdminOpsIntent, runAdminOpsCoach, staffMyTasksReply } from "./admin-ops-coach";
 import { tryFactsLookup } from "./facts-lookup";
 import { tryPracticeLookup } from "./practice-lookup";
 import { trySopChromeLookup } from "./sop-chrome-lookup";
@@ -114,18 +114,29 @@ function isPatientFacingMarketingAsk(text: string): boolean {
   );
 }
 
-export function runSiyaAssistant(message: string, history: { role: string; content: string }[] = []): SiyaReply {
-  return buildSiyaReply(message, history);
+export function runSiyaAssistant(
+  message: string,
+  history: { role: string; content: string }[] = [],
+  opts?: {
+    layeredChunks?: RetrievedChunk[];
+    founderCoach?: boolean;
+    queryOverride?: string;
+  },
+): SiyaReply {
+  return buildSiyaReply(message, history, opts);
 }
 
 function metaConversationReply(
   text: string,
   history: { role: string; content: string }[],
   task = "Portal help",
+  assistantLabel?: string | null,
 ): SiyaReply | null {
   const priorUser = [...history].reverse().find((h) => h.role === "user")?.content;
   const priorAssistant = [...history].reverse().find((h) => h.role === "assistant")?.content;
-  const meta: MetaConversationReply | null = answerMetaConversation(text, priorUser, priorAssistant);
+  const meta: MetaConversationReply | null = answerMetaConversation(text, priorUser, priorAssistant, {
+    assistantLabel,
+  });
   if (!meta) return null;
   return {
     message: polishStaffMessage(meta.answer),
@@ -167,16 +178,24 @@ function toolShortcutReply(text: string, task = "Tool bookmark"): SiyaReply | nu
 export async function runSiyaAssistantAsync(
   message: string,
   history: { role: string; content: string }[] = [],
-  opts?: { focusMode?: boolean; authToken?: string | null; surface?: "default" | "founder-coach" }
+  opts?: {
+    focusMode?: boolean;
+    authToken?: string | null;
+    surface?: "default" | "founder-coach";
+    /** Personalization opening label from client (optional). */
+    assistantLabel?: string | null;
+  }
 ): Promise<SiyaReply> {
   const focusMode = opts?.focusMode ?? false;
   const token = opts?.authToken?.trim() || null;
   const founderCoach = opts?.surface === "founder-coach";
+  const assistantLabel = opts?.assistantLabel?.trim() || null;
 
   const metaEarly = metaConversationReply(
     message,
     history,
     founderCoach ? "Founder Talk — portal help" : "Portal help",
+    assistantLabel,
   );
   if (metaEarly) return metaEarly;
 
@@ -232,6 +251,47 @@ export async function runSiyaAssistantAsync(
         routing: {
           department: "General",
           task: "Team presence",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    // Staff: personal task asks must not soft-stop — list My day from /api/tasks/me.
+    if (
+      opsIntent.kind === "task_status" ||
+      opsIntent.kind === "plan_day" ||
+      opsIntent.kind === "overdue"
+    ) {
+      const mine = await fetchMyTasksToday(token);
+      if (mine) {
+        const ops = staffMyTasksReply(mine.date, mine.tasks);
+        return {
+          message: polishStaffMessage(ops.message),
+          chunks: [],
+          sources: [],
+          portalLinks: ops.links,
+          opsCoPilot: true,
+          ruleFinal: true,
+          routing: {
+            department: "General",
+            task: "My day tasks",
+            confidence: "high",
+            followUpQuestions: [],
+          },
+        };
+      }
+      return {
+        message: polishStaffMessage(
+          "Your tasks live on **My day** — the checklist above Ask (leave **Focus** if it’s hidden). I couldn’t load the live list just now; refresh and try again.",
+        ),
+        chunks: [],
+        sources: [],
+        portalLinks: [{ label: "My day", href: "/" }],
+        opsCoPilot: false,
+        ruleFinal: true,
+        routing: {
+          department: "General",
+          task: "My day tasks",
           confidence: "high",
           followUpQuestions: [],
         },
@@ -740,39 +800,56 @@ function buildSiyaReply(
   const normalized = expandShortQuery(resolveQuery(text, history));
   const routing = routeIntent(normalized);
 
-  if (routing.flowId === "clinical-ops-abusive-patient") {
-    const escalateOwner = defaultEscalationOwner("Clinical Operations");
+  // HR phone/email — deterministic; never invent numbers or Clinical Ops SOPs.
+  if (isHrContactQuery(normalized) || isHrContactQuery(text)) {
+    const hrDetail =
+      getEscalationContacts().find((c) => /people\s*\/?\s*hr/i.test(c.role))?.detail ||
+      "People ops (internal directory)";
+    const escalateOwner = defaultEscalationOwner("HR");
+    const hasConfigured =
+      hrDetail.trim() &&
+      !/^people ops \(internal directory\)$/i.test(hrDetail.trim()) &&
+      hrDetail.trim().toLowerCase() !== "people ops";
     return {
-      message: polishStaffMessage(abusivePatientAnswer()),
+      message: polishStaffMessage(buildHrContactAnswer(hrDetail)),
       chunks: [],
       escalate: escalateOwner,
-      knowledgeGap: true,
+      knowledgeGap: !hasConfigured,
       sources: [],
+      ruleFinal: true,
       routing: {
-        department: "Clinical Operations",
-        task: routing.task,
-        confidence: routing.confidence,
-        followUpQuestions: routing.followUpQuestions,
+        department: "HR",
+        task: "People / HR contact",
+        confidence: "high",
+        followUpQuestions: [
+          "Do you want Copy escalation summary for a workplace concern?",
+          "Is this urgent / same-day safety?",
+        ],
       },
       escalationPreview: formatEscalationForSlack({
         question: text,
-        department: displayDepartment("Clinical Operations"),
-        task: routing.task,
+        department: displayDepartment("HR"),
+        task: "People / HR contact",
         escalateTo: escalateOwner,
         sourceTitles: [],
-        followUps: routing.followUpQuestions,
+        followUps: [],
       }),
     };
   }
 
   if (routing.flowId === "hr-workplace") {
     const escalateOwner = defaultEscalationOwner("HR");
+    const askingForPolicy =
+      /\b(policy|policies|posh|sexual\s+(abuse|harass)|what\s+are\s+the\s+rules)\b/i.test(
+        normalized,
+      );
     return {
-      message: polishStaffMessage(workplaceConcernAnswer()),
+      message: polishStaffMessage(workplaceConcernAnswer({ askingForPolicy })),
       chunks: [],
       escalate: escalateOwner,
       knowledgeGap: true,
       sources: [],
+      ruleFinal: true,
       routing: {
         department: "HR",
         task: routing.task,
@@ -794,6 +871,36 @@ function buildSiyaReply(
   let chunks =
     opts?.layeredChunks?.length ? opts.layeredChunks : retrieveLayeredKnowledge(query, { limit: 6 });
   chunks = filterStaffFacingChunks(chunks, normalized);
+
+  // Hostile/abusive patient: prefer live reviewed SOP; hardcoded script only if none retrieved.
+  if (routing.flowId === "clinical-ops-abusive-patient") {
+    const liveHit = pickLiveAbusivePatientSop(chunks);
+    if (!liveHit) {
+      const escalateOwner = defaultEscalationOwner("Clinical Operations");
+      return {
+        message: polishStaffMessage(abusivePatientAnswer()),
+        chunks: [],
+        escalate: escalateOwner,
+        knowledgeGap: true,
+        sources: [],
+        routing: {
+          department: "Clinical Operations",
+          task: routing.task,
+          confidence: routing.confidence,
+          followUpQuestions: routing.followUpQuestions,
+        },
+        escalationPreview: formatEscalationForSlack({
+          question: text,
+          department: displayDepartment("Clinical Operations"),
+          task: routing.task,
+          escalateTo: escalateOwner,
+          sourceTitles: [],
+          followUps: routing.followUpQuestions,
+        }),
+      };
+    }
+    chunks = [liveHit, ...chunks.filter((c) => c.id !== liveHit.id)];
+  }
 
   const STRONG_SCORE = 3;
   let hasStrongMatch = chunks.length > 0 && chunks[0].score >= STRONG_SCORE;

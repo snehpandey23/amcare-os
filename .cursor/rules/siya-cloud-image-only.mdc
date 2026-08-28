@@ -1,5 +1,5 @@
 ---
-description: Cloud agents doing Siya brand images — current Visual OS only; never site/deploy; stop if brand lock missing
+description: Cloud agents doing Siya brand images — Visual OS + medical compliance; never site/deploy; stop if lock/SOP missing
 alwaysApply: true
 ---
 
@@ -11,7 +11,7 @@ Use this whenever the task is **carousel / static / social image / photo + compo
 
 **Only** under `apps/siya-health/brand/` (and WorkDrive `Siya Knowledge Editorial/` when shipping approved packs).
 
-Examples: `editorial-packs/`, `statics/`, `scripts/compose_*.py` outputs, captions, video-prompt.md, tracker CSV rows.
+Examples: `editorial-packs/`, `statics/`, `scripts/compose_*.py` outputs, captions, video-prompt.md, tracker CSV rows, `compliance/CHECKLIST.md`.
 
 ## Forbidden (do not touch)
 
@@ -26,17 +26,18 @@ If the brief is **images only**, refuse site/deploy side quests in one short sen
 
 1. `apps/siya-health/brand/AGENT-BOOTSTRAP.md`
 2. `apps/siya-health/brand/BRAND-STYLE-LOCK.md` ← **must exist**
-3. `apps/siya-health/brand/VISUAL-OS.md`
-4. `apps/siya-health/brand/VISUAL-OS-TEMPLATES.md`
-5. Copy-paste brief: `apps/siya-health/brand/CLOUD-AGENT-IMAGE-BRIEF.md`
+3. `apps/siya-health/brand/MEDICAL-COMPLIANCE-MARKETING.md` ← **must exist** (SOP v2)
+4. `apps/siya-health/brand/VISUAL-OS.md`
+5. `apps/siya-health/brand/VISUAL-OS-TEMPLATES.md`
+6. Copy-paste brief: `apps/siya-health/brand/CLOUD-AGENT-IMAGE-BRIEF.md`
 
 ## Stale clone stop
 
-If `BRAND-STYLE-LOCK.md` or `AGENT-BOOTSTRAP.md` is missing from the cloud clone:
+If `BRAND-STYLE-LOCK.md`, `AGENT-BOOTSTRAP.md`, or `MEDICAL-COMPLIANCE-MARKETING.md` is missing:
 
 1. **Stop**
 2. Say: branch/clone is stale — need current `main` with those files committed
-3. **Do not** fall back to Jul plum docs, `SIYA-SOCIAL-POST-STYLE`, hard-L samples, or Instagram-static alone
+3. **Do not** fall back to Jul plum docs, v1 compliance wording, hard-L samples, or Instagram-static alone
 
 ## Tokens (fail closed)
 
@@ -44,8 +45,16 @@ Cream `#F4EFE7` · Navy `#001878` · Dark Navy `#0A246B` · Magenta `#D81088` ·
 
 **Reject:** plum `#8D3A78` · brown ink · hard-seam L · text shadows · ambient watermarks · freehand `GenerateImage` as final branded PNG
 
+## Compliance (fail closed — same as local)
+
+- Phase 1 includes claim tags + `compliance/CHECKLIST.md`
+- Flag / HIGH / §7.3 → **STOP** for Medical Director / Legal — no compose
+- Phase 3 requires final checklist in pack
+- No Rx before/after · no undiscussed testimonials · compositor educational footer only
+- Rule: `siya-medical-compliance-marketing.mdc`
+
 ## Production path
 
-Classify → template ID (usually **A-03**) → lean copy (headline + one recognition) → source photo only → **`compose_*.py`** → show slide for approval
+Classify → template ID (usually **A-03**) → lean copy + compliance Pass → source photo only → **`compose_*.py`** → show slide for approval
 
 Reference good output: `apps/siya-health/brand/statics/SPEC-PROOF-2026-08-10-v21/`

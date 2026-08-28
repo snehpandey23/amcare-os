@@ -15,14 +15,15 @@ Do not invent layouts. Do not freehand a final branded PNG with `GenerateImage`.
 | # | File (git path) | WorkDrive mirror | Why |
 |---|-----------------|------------------|-----|
 | 1 | `brand/BRAND-STYLE-LOCK.md` | `00-Brand-System/BRAND-STYLE-LOCK.md` | **Pixels:** hex, fonts, reject plum/hard-L |
-| 2 | `brand/VISUAL-OS.md` | `00-Brand-System/VISUAL-OS.md` | Jobs · systems · light/shadow · production workflow |
-| 3 | `brand/VISUAL-OS-TEMPLATES.md` | `00-Brand-System/VISUAL-OS-TEMPLATES.md` | Template IDs + field budgets (A-03, B-*, C-01, D-01) |
-| 4 | `brand/EDITORIAL-OS.md` | `00-Brand-System/EDITORIAL-OS.md` | Research → insight → hook → pack (thinking before copy) |
-| 5 | `brand/INSTAGRAM-STATIC.md` | `00-Brand-System/INSTAGRAM-STATIC.md` | Frame checklist only — **not** the whole OS |
-| 6 | `brand/prompts/README.md` | `00-Brand-System/prompts-README.md` | Factory prompt patterns (universal preamble) |
-| 7 | `brand/01-BRAND-OS.md` | `00-Brand-System/01-BRAND-OS.md` | Brand constitution |
-| 8 | `brand/ANTI-PATTERNS.md` | `00-Brand-System/ANTI-PATTERNS.md` | What never to ship |
-| 9 | Cursor rules (alwaysApply) | n/a (repo `.cursor/rules/`) | Style lock · A-03 lean · approval gate · WorkDrive |
+| 2 | `brand/MEDICAL-COMPLIANCE-MARKETING.md` | `00-Brand-System/MEDICAL-COMPLIANCE-MARKETING.md` | **Claims / §7.2 checklist / Legal triggers** (SOP v2) |
+| 3 | `brand/VISUAL-OS.md` | `00-Brand-System/VISUAL-OS.md` | Jobs · systems · light/shadow · production workflow |
+| 4 | `brand/VISUAL-OS-TEMPLATES.md` | `00-Brand-System/VISUAL-OS-TEMPLATES.md` | Template IDs + field budgets (A-03, B-*, C-01, D-01) |
+| 5 | `brand/EDITORIAL-OS.md` | `00-Brand-System/EDITORIAL-OS.md` | Research → insight → hook → pack (thinking before copy) |
+| 6 | `brand/INSTAGRAM-STATIC.md` | `00-Brand-System/INSTAGRAM-STATIC.md` | Frame checklist only — **not** the whole OS |
+| 7 | `brand/prompts/README.md` | `00-Brand-System/prompts-README.md` | Factory prompt patterns (universal preamble) |
+| 8 | `brand/01-BRAND-OS.md` | `00-Brand-System/01-BRAND-OS.md` | Brand constitution |
+| 9 | `brand/ANTI-PATTERNS.md` | `00-Brand-System/ANTI-PATTERNS.md` | What never to ship |
+| 10 | Cursor rules (alwaysApply) | n/a (repo `.cursor/rules/`) | Style lock · A-03 lean · approval gate · **medical compliance** · WorkDrive |
 
 **Also when relevant**
 
@@ -74,13 +75,14 @@ Do not invent layouts. Do not freehand a final branded PNG with `GenerateImage`.
 ```text
 Classify job (Recognition / Knowledge / Authority / Conversion)
   → pick template ID (VISUAL-OS-TEMPLATES)
-  → copy plan (approval gate Phase 1)
+  → copy plan + claim tags + compliance/CHECKLIST.md (Phase 1)
+  → Flag / HIGH / §7.3 → STOP for Medical Director / Legal
   → source photo ONLY (GenerateImage/stock — no type baked in)
   → compose_*.py → ready-to-post PNG
   → captions (+ audience variants if using matrix)
   → video-prompt.md
-  → tracker row in git (CLOUD-PACK-TRACKER.csv)
-  → announce pack path — humans upload to WorkDrive manually (no agent auto-sync)
+  → final compliance/CHECKLIST.md + tracker + SHIP.md
+  → announce pack path — Mac TrueSync or cloud Action per ship_lane
 ```
 
 ### Compositors (git)

@@ -92,11 +92,13 @@ function MyDayHeader({
           </p>
         ) : (
           <p className="mt-1 text-xs text-amber-800">
-            Finish{" "}
+            {profile.onboardingSkipped ? "Optional: " : "Finish "}
             <Link href="/onboarding" className="font-semibold underline">
-              onboarding
-            </Link>{" "}
-            so My day matches your role and goals.
+              {profile.onboardingSkipped ? "Personalize" : "onboarding"}
+            </Link>
+            {profile.onboardingSkipped
+              ? " anytime so My day matches your role and goals."
+              : " so My day matches your role and goals."}
           </p>
         )
       ) : null}
@@ -342,11 +344,22 @@ export function HomeHub() {
               ) : null}
               {!profile.onboardingComplete ? (
                 <p className="mb-3 text-xs text-amber-800">
-                  Finish{" "}
-                  <Link href="/onboarding" className="font-semibold underline">
-                    onboarding
-                  </Link>{" "}
-                  so personalization matches your role.
+                  {profile.onboardingSkipped ? (
+                    <>
+                      <Link href="/onboarding" className="font-semibold underline">
+                        Personalize
+                      </Link>{" "}
+                      anytime so Assist matches your role.
+                    </>
+                  ) : (
+                    <>
+                      Finish{" "}
+                      <Link href="/onboarding" className="font-semibold underline">
+                        onboarding
+                      </Link>{" "}
+                      so personalization matches your role.
+                    </>
+                  )}
                 </p>
               ) : null}
               <StaffHomeChat firstName={firstName} inFocus={inFocus} onBreak={onBreak} />

@@ -7,6 +7,7 @@ import type { TaskRecord, TaskPriority } from "@/lib/tasks-types";
 import { taskIsComplete } from "@/lib/tasks-types";
 import type { AdminOpsSnapshot } from "./admin-ops-snapshot";
 import { synthesizeAdminOpsAnswer } from "./admin-ops-llm";
+import { isStaffWorkplaceConcernQuery } from "./flows";
 
 export type AdminOpsIntent =
   | { kind: "plan_day" }
@@ -56,12 +57,19 @@ export function detectAdminOpsIntent(message: string): AdminOpsIntent | null {
     }
   }
 
-  if (
-    /\b(plan|prioriti[sz]e|focus|run my day|what should i do|morning brief|daily plan)\b/.test(
-      t,
-    ) ||
+  // Day-start / “what first” — staff path lists My day (not Marketing SOP dumps).
+  // Never steal workplace / people concerns that end with “what should I do”.
+  if (!isStaffWorkplaceConcernQuery(message) && (
+    /\b(plan|prioriti[sz]e|run my day|morning brief|daily plan)\b/.test(t) ||
+    /\bwhat\s+(should|shall)\s+i\s+(do|work\s+on|focus\s+on)\b/.test(t) ||
+    /\bwhat\s+(do\s+i|should\s+i|shall\s+i)\s+(do\s+)?first\b/.test(t) ||
+    /\bwhat\s+should\s+my\s+job\b/.test(t) ||
+    /\b(what'?s|whats)\s+my\s+job\s+(today|now)\b/.test(t) ||
+    /\bmy\s+job\s+today\b/.test(t) ||
+    /\bwhat\s+should\s+i\s+work\s+on\b/.test(t) ||
+    /\bstart\s+(my\s+)?(work\s+)?day\b/.test(t) ||
     (/\bmy day\b/.test(t) && !/\b(personalize|personalisation|onboarding|onboard)\b/.test(t))
-  ) {
+  )) {
     return { kind: "plan_day" };
   }
   // Live presence / shift — hard Team pulse path (never Founder Talk portal LLM).
@@ -79,7 +87,16 @@ export function detectAdminOpsIntent(message: string): AdminOpsIntent | null {
   if (/\b(overdue|past due|late tasks|slipping)\b/.test(t)) {
     return { kind: "overdue" };
   }
-  if (/\b(task board|open tasks|assignments|track tasks|company tasks|ops status)\b/.test(t)) {
+  // Personal + board visibility (staff get My day list; admins get board via snapshot).
+  if (
+    /\b(task board|open tasks|assignments|track tasks|company tasks|ops status)\b/.test(t) ||
+    /\bwhere\s+(are|is)\s+(my|the)\s+tasks?\b/.test(t) ||
+    /\b(do\s+i\s+have|have\s+i\s+got|any)\s+.{0,24}\btasks?\b/.test(t) ||
+    /\btasks?\s+assigned(\s+to\s+me)?\b/.test(t) ||
+    /\b(my|today'?s)\s+tasks?\b/.test(t) ||
+    /\bwhat\s+tasks?\s+(do\s+i\s+have|are\s+assigned)\b/.test(t) ||
+    /\bare\s+these\s+(my\s+)?tasks?\b/.test(t)
+  ) {
     return { kind: "task_status" };
   }
   if (
@@ -210,7 +227,48 @@ function taskStatusMessage(snapshot: AdminOpsSnapshot): string {
   } else {
     msg += "No open tasks on the board.\n";
   }
+  const mine = openMyTasks(snapshot.myTasks);
+  if (mine.length) {
+    msg += `\n**Your My day (${snapshot.date}):**\n`;
+    sortByPriority(mine)
+      .slice(0, 8)
+      .forEach((t) => {
+        msg += `${formatTaskLine(t)}\n`;
+      });
+  }
   return msg;
+}
+
+/** Staff (non-admin) — list today’s assigned tasks; never invent a company board. */
+export function staffMyTasksReply(
+  date: string,
+  tasks: TaskRecord[],
+): AdminOpsReply {
+  const open = sortByPriority(openMyTasks(tasks));
+  let message: string;
+  if (!open.length) {
+    message = [
+      `**Your My day (${date}):** no open tasks assigned right now.`,
+      "",
+      "Your checklist lives on **My day** (this home), above Ask — leave **Focus** if you don’t see it.",
+      "Admins assign work from the **Task board**; you check items off here when they’re done.",
+    ].join("\n");
+  } else {
+    message =
+      `**Your My day (${date}):** ${open.length} open task(s)\n\n` +
+      open
+        .slice(0, 12)
+        .map((t) => formatTaskLine(t))
+        .join("\n") +
+      (open.length > 12 ? `\n_…${open.length - 12} more on My day._` : "") +
+      "\n\nCheck them off on the **My day** checklist (above Ask). **Focus** hides that panel until you leave Focus.";
+  }
+  return {
+    intent: "task_status",
+    message,
+    links: [{ label: "My day", href: "/" }],
+    mode: "inform",
+  };
 }
 
 function overdueMessage(snapshot: AdminOpsSnapshot): string {

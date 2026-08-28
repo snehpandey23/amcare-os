@@ -8,6 +8,7 @@ import { MyDayTasksPanel } from "@/components/tasks/MyDayTasksPanel";
 import { SopLeadMyDayCard } from "@/components/sops/SopLeadMyDayCard";
 import { LeadKnowledgeGapsCard } from "@/components/ops/LeadKnowledgeGapsCard";
 import { WeeklyCheckInCard } from "@/components/ops/WeeklyCheckInCard";
+import { PracticeInactivityNudgeBanner } from "@/components/level-up/PracticeInactivityNudgeBanner";
 
 /**
  * My day = continuous Assist chat (merged former Ask).
@@ -29,6 +30,11 @@ function StaffHomeChatInner({
 
   return (
     <div className="flex h-full min-h-0 flex-col">
+      {!onBreak && !inFocus ? (
+        <div className="shrink-0 px-3 pt-2">
+          <PracticeInactivityNudgeBanner />
+        </div>
+      ) : null}
       <div className="min-h-0 flex-1">
         <AssistChatShell
           firstName={firstName}

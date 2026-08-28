@@ -15,19 +15,36 @@ type Props = {
   className?: string;
   /** Compact icon-only (Ask row) vs label-friendly (SOP Builder). */
   size?: "sm" | "md";
+  /**
+   * Ask: when Mic stops with text, submit that text and clear the field.
+   * SOP Builder leaves this unset (dictate only).
+   */
+  onAutoSend?: (text: string) => void;
 };
 
 /**
  * Mic control for Ask, SOP Builder answer, and Founder Coach chat input.
  * Renders nothing when Web Speech is unsupported or unreliable (Safari/iOS).
  */
-export function VoiceInputButton({ value, onChange, disabled, className = "", size = "sm" }: Props) {
+export function VoiceInputButton({
+  value,
+  onChange,
+  disabled,
+  className = "",
+  size = "sm",
+  onAutoSend,
+}: Props) {
   const [supported, setSupported] = useState(false);
   const [listening, setListening] = useState(false);
   const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
   const baseRef = useRef("");
   const valueRef = useRef(value);
+  const finalsRef = useRef("");
+  const onAutoSendRef = useRef(onAutoSend);
+  const onChangeRef = useRef(onChange);
   valueRef.current = value;
+  onAutoSendRef.current = onAutoSend;
+  onChangeRef.current = onChange;
 
   const stop = useCallback(() => {
     try {
@@ -35,8 +52,6 @@ export function VoiceInputButton({ value, onChange, disabled, className = "", si
     } catch {
       /* ignore */
     }
-    recognitionRef.current = null;
-    setListening(false);
   }, []);
 
   useEffect(() => {
@@ -71,25 +86,24 @@ export function VoiceInputButton({ value, onChange, disabled, className = "", si
     recognition.lang = typeof navigator !== "undefined" && navigator.language ? navigator.language : "en-US";
 
     baseRef.current = "";
-    let finals = "";
+    finalsRef.current = "";
 
     // Fresh dictation each mic session — don't glue onto leftover unsent text
-    // (common confusion when staff expect a new take, not an append).
-    if (valueRef.current.trim()) onChange("");
+    if (valueRef.current.trim()) onChangeRef.current("");
 
     recognition.onresult = (event) => {
       let interim = "";
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const piece = event.results[i]![0]!.transcript;
         if (event.results[i]!.isFinal) {
-          finals += piece;
+          finalsRef.current += piece;
         } else {
           interim += piece;
         }
       }
       const prefix = baseRef.current;
-      const joined = [prefix, (finals + interim).trim()].filter(Boolean).join(prefix ? " " : "");
-      onChange(joined);
+      const joined = [prefix, (finalsRef.current + interim).trim()].filter(Boolean).join(prefix ? " " : "");
+      onChangeRef.current(joined);
     };
 
     recognition.onerror = () => {
@@ -100,6 +114,12 @@ export function VoiceInputButton({ value, onChange, disabled, className = "", si
     recognition.onend = () => {
       setListening(false);
       recognitionRef.current = null;
+      const text = (finalsRef.current || valueRef.current).trim();
+      const autoSend = onAutoSendRef.current;
+      if (autoSend && text) {
+        onChangeRef.current("");
+        autoSend(text);
+      }
     };
 
     try {
@@ -110,7 +130,7 @@ export function VoiceInputButton({ value, onChange, disabled, className = "", si
       setListening(false);
       recognitionRef.current = null;
     }
-  }, [onChange]);
+  }, []);
 
   const toggle = useCallback(() => {
     if (listening) stop();
@@ -127,8 +147,16 @@ export function VoiceInputButton({ value, onChange, disabled, className = "", si
       disabled={disabled}
       onClick={toggle}
       aria-pressed={listening}
-      aria-label={listening ? "Stop voice input" : "Start voice input"}
-      title={listening ? "Listening… click to stop" : "Dictate with microphone"}
+      aria-label={listening ? "Stop and send" : "Dictate and send with microphone"}
+      title={
+        onAutoSend
+          ? listening
+            ? "Listening… click to stop and send"
+            : "Dictate — click again to send"
+          : listening
+            ? "Listening… click to stop"
+            : "Dictate with microphone"
+      }
       className={`inline-flex shrink-0 items-center gap-1.5 rounded-lg border text-sm font-medium transition disabled:opacity-50 ${pad} ${
         listening
           ? "border-red-400 bg-red-50 text-red-700"
