@@ -1,11 +1,11 @@
 # Phase 1 Copy Plan — AD-K-02 (Build for Real Life)
 
-**Status:** Phase 1 review only  
-**Anchor submitted:** https://siya.health/blog/combining-adhd-treatment-and-weight-loss-strategies  
-**Current canonical:** https://siya.health/answers/adhd-and-weight-loss-connection  
-**Intent:** Knowledge / recognition  
-**Template:** A-03 lean  
-**Slide count:** 5  
+**Status:** Phase 1 review only
+**Anchor submitted:** https://siya.health/blog/combining-adhd-treatment-and-weight-loss-strategies
+**Current canonical:** https://siya.health/answers/adhd-and-weight-loss-connection
+**Intent:** Knowledge / recognition
+**Template:** A-03 lean
+**Slide count:** 5
 **One realization:** A workable plan reduces decisions and fits low-capacity days; ADHD and weight goals can be discussed together without turning either treatment into a shortcut.
 
 **Excluded:** statistics, obesity-causation language, drug names, medication comparisons, efficacy/safety claims, before/after imagery, testimonial outcomes.

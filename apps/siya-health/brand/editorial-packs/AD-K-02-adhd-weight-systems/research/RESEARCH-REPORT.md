@@ -1,9 +1,9 @@
 # Content Topic Research v2 — ADHD Treatment + Weight Strategies
 
-**Research date:** 2026-08-28  
-**Topic:** Combining ADHD Treatment & Weight Loss Strategies (2026)  
-**Submitted anchor:** https://siya.health/blog/combining-adhd-treatment-and-weight-loss-strategies  
-**Current canonical destination:** https://siya.health/answers/adhd-and-weight-loss-connection  
+**Research date:** 2026-08-28
+**Topic:** Combining ADHD Treatment & Weight Loss Strategies (2026)
+**Submitted anchor:** https://siya.health/blog/combining-adhd-treatment-and-weight-loss-strategies
+**Current canonical destination:** https://siya.health/answers/adhd-and-weight-loss-connection
 **Stage:** Research + Phase 1 copy only. No render, captions, tracker, WorkDrive, or site edits.
 
 > **Anchor status found during audit:** the submitted blog URL is retired and redirects to the concise `/answers/adhd-and-weight-loss-connection` page. The corresponding blog file is not present in the current repository. This research therefore audits the current answer page and adjacent owned content rather than treating the old URL as a full live article.

@@ -1,9 +1,9 @@
 # Compliance Checklist — AD-K-02
 
-**SOP:** `brand/MEDICAL-COMPLIANCE-MARKETING.md` v2.0  
-**Pack:** `editorial-packs/AD-K-02-adhd-weight-systems/`  
-**Date:** 2026-08-28  
-**Stage:** Phase 1 draft  
+**SOP:** `brand/MEDICAL-COMPLIANCE-MARKETING.md` v2.0
+**Pack:** `editorial-packs/AD-K-02-adhd-weight-systems/`
+**Date:** 2026-08-28
+**Stage:** Phase 1 draft
 
 ## Claim tags used in this pack
 
