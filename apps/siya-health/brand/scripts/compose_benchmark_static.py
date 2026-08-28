@@ -5,7 +5,7 @@ Standardized against the official benchmark reference layout:
 - Canvas: 4:5 1080x1350
 - Cream background: #F6E8DC (exact benchmark tone: RGB 246, 232, 220)
 - Left margin: x = 68px
-- Official full logo lockup: placed at (52, 60), height ~176px
+- Official full logo lockup: placed at (58, 72), size ~242x40px
 - Headline: Georgia/LiberationSerif Bold (~92px font size, line-height ~126px)
   - Colors: Deep Navy (#081C5C) and Siya Magenta (#D00668)
 - Magenta horizontal divider rule: x=68 to 184 (w=116px, h=5px) at y = headline_bottom + 36px
@@ -14,7 +14,7 @@ Standardized against the official benchmark reference layout:
   - "siya.health" in Siya Magenta Bold (~25px)
   - " | " vertical separator
   - "Educational only" in Slate Navy Regular (~25px)
-- Photo placement: Right-weighted with soft organic dissolve starting around x=480 to 680
+- Photo placement: Right-weighted with soft organic dissolve starting around x=500 to 700
 """
 
 from __future__ import annotations
@@ -186,7 +186,6 @@ def compose_benchmark(
 
     # 3. Logo Placement (x=58, y=72, size ~242x40 maintaining aspect ratio)
     logo = Image.open(logo_path).convert("RGBA")
-    # Maintain aspect ratio to match approximate target box 242x40
     scale = min(242 / logo.width, 40 / logo.height)
     logo_w = int(logo.width * scale)
     logo_h = int(logo.height * scale)
