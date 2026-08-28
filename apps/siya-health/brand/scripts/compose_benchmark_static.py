@@ -202,7 +202,7 @@ def compose_benchmark(
     )
 
     # 5. Horizontal Magenta Rule Divider
-    # Gap from last headline baseline: divider is 116px wide, 5px high
+    # Gap from last headline line: divider is 116px wide, 5px high
     divider_y = y_after_head - 126 + 112
     draw.rectangle([left_margin, divider_y, left_margin + 116, divider_y + 5], fill=MAGENTA_ACCENT)
 
