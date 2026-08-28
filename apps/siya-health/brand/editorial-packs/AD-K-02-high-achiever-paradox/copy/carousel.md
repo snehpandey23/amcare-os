@@ -48,4 +48,6 @@
 
 **Claim risk:** MEDIUM — general educational description of comprehensive assessment.
 
+**CTA:** Talk to a Clinician
+
 **Visual direction:** Adult with an open notebook and laptop, prepared for a telehealth conversation; no clinician depiction.

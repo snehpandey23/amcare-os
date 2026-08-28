@@ -22,6 +22,6 @@ The earlier unsupported superlative (“the most common misconception”) was re
 | 2 | Intelligence can mask executive strain. | Success can conceal the effort it takes to stay organized. | MEDIUM |
 | 3 | Capable outside. Depleted at home. | Work took everything. Evening routines got what was left. | LOW |
 | 4 | High achievement isn’t a rule-out. | A proper evaluation considers history, impairment, and the cost of coping. | MEDIUM |
-| 5 | Get clarity on your timeline. | Assessment looks at childhood, work, relationships, sleep, mood, and daily life. | MEDIUM |
+| 5 | Get clarity on your timeline. | Assessment looks at childhood, work, relationships, sleep, mood, and daily life. CTA: Talk to a Clinician. | MEDIUM |
 
 Outputs: `ready-to-post/slide-02.png` through `slide-05.png`.

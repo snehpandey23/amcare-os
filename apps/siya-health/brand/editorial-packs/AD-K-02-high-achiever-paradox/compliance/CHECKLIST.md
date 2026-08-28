@@ -12,7 +12,7 @@
 7. N/A — No outcome claim.
 8. PASS — Educational footer is present.
 9. PASS — Copy does not imply that achievement or social-media recognition establishes a diagnosis; slide 5 describes assessment generally.
-10. PASS — A-03 lean structure, approved typography benchmark, right-weighted face-safe photography, and visual gate followed on all five frames.
+10. PASS — A-03 lean structure, one permitted close-slide CTA, approved typography benchmark, right-weighted face-safe photography, and visual gate followed on all five frames.
 
 **Legal trigger:** None.
 **Medical Director:** MEDIUM clinical framing should receive review before Phase 3 publishing.

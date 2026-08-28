@@ -171,6 +171,7 @@ def compose_benchmark(
     headline_lines: list[str],
     accent_words: list[str],
     subhead_lines: list[str],
+    cta: str | None = None,
     left_margin: int = 68,
     start_y_headline: int = 300,
 ) -> None:
@@ -212,7 +213,7 @@ def compose_benchmark(
     # 6. Supporting Text (Arial Bold @ 40px, line_height 56px)
     s_font = resolve_font("body_bold", 40)
     subhead_start_y = divider_y + 42
-    draw_subhead_benchmark(
+    y_after_subhead = draw_subhead_benchmark(
         draw=draw,
         subhead_lines=subhead_lines,
         xy=(left_margin, subhead_start_y),
@@ -220,7 +221,24 @@ def compose_benchmark(
         line_height=56,
     )
 
-    # 7. Benchmark Footer at (52, 1272)
+    # 7. Optional close-slide CTA — one only, fully inside the left text field.
+    if cta:
+        cta_font = resolve_font("body_bold", 28)
+        cta_width = int(draw.textlength(cta, font=cta_font))
+        cta_x = left_margin
+        cta_y = min(max(y_after_subhead + 34, 980), 1160)
+        cta_right = cta_x + cta_width + 48
+        if cta_right > 485:
+            raise SystemExit("SHIP GATE: CTA overflows the left text field")
+        draw.rounded_rectangle(
+            [cta_x, cta_y, cta_right, cta_y + 58],
+            radius=29,
+            outline=MAGENTA_ACCENT,
+            width=3,
+        )
+        draw.text((cta_x + 24, cta_y + 13), cta, font=cta_font, fill=NAVY_HEADLINE)
+
+    # 8. Benchmark Footer at (52, 1272)
     foot_mag_font = resolve_font("body_bold", 25)
     foot_reg_font = resolve_font("body_reg", 25)
     
@@ -254,6 +272,7 @@ def main() -> None:
     p.add_argument("--headline", nargs="+", required=True, help="Headline lines (space separated strings)")
     p.add_argument("--accent", nargs="+", required=True, help="Accent words or phrases")
     p.add_argument("--subhead", nargs="+", required=True, help="Subhead lines (space separated strings)")
+    p.add_argument("--cta", default=None, help="Optional close-slide CTA; one only")
     args = p.parse_args()
 
     compose_benchmark(
@@ -263,6 +282,7 @@ def main() -> None:
         headline_lines=args.headline,
         accent_words=args.accent,
         subhead_lines=args.subhead,
+        cta=args.cta,
     )
 
 
