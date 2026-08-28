@@ -1,6 +1,6 @@
 # Compliance checklist — AD-K-02
 
-**Phase:** 2 · slides 1–5
+**Phase:** 3 · final pack
 **Claim risk:** LOW–MEDIUM
 
 1. PASS — No individualized advice, diagnosis, or treatment recommendation.
@@ -15,4 +15,4 @@
 10. PASS — A-03 lean structure, one permitted close-slide CTA, approved typography benchmark, right-weighted face-safe photography, and visual gate followed on all five frames.
 
 **Legal trigger:** None.
-**Medical Director:** MEDIUM clinical framing should receive review before Phase 3 publishing.
+**Medical Director:** MEDIUM clinical framing remains pending before public posting. The cloud delivery target is the non-live `_API-DRY-RUN` lane.
