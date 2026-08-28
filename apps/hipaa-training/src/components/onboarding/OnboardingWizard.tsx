@@ -35,9 +35,6 @@ export function OnboardingWizard() {
   const [experience, setExperience] = useState<string[]>(existing.experience ?? []);
   const [improveGoals, setImproveGoals] = useState<string[]>(existing.improveGoals ?? []);
   const [biggestChallenge, setBiggestChallenge] = useState(existing.biggestChallenge ?? "");
-  const [aiCoachOptIn, setAiCoachOptIn] = useState<boolean | null>(
-    existing.aiCoachOptIn === undefined ? null : existing.aiCoachOptIn,
-  );
   const [workShift, setWorkShift] = useState<"morning" | "evening" | "night">(existing.workShift ?? "morning");
   const [pending, setPending] = useState(false);
 
@@ -60,6 +57,7 @@ export function OnboardingWizard() {
     if (user?.id) bindPortalProfileToUser(user.id);
     let profile: PortalProfile = {
       onboardingComplete: true,
+      onboardingSkipped: false,
       department,
       experience,
       improveGoals,
@@ -68,13 +66,49 @@ export function OnboardingWizard() {
       preferredName: preferredName.trim() || undefined,
       assistantName: assistantName.trim() || undefined,
       trainingReminder,
-      aiCoachOptIn: aiCoachOptIn === true,
+      /** Coach is mandatory — always on (Stage 2). */
+      aiCoachOptIn: true,
       workShift,
     };
     profile = appendGrowthEvent(profile, "Completed onboarding");
-    persistPortalProfile(profile);
+    persistPortalProfile(profile, user?.id);
     setPending(false);
     router.replace("/");
+  }
+
+  /** Skip personalization — same gate for staff and admin; Personalize later via /onboarding. */
+  async function skipToMyDay() {
+    setPending(true);
+    if (user?.id) bindPortalProfileToUser(user.id);
+    const base = loadLocalPortalProfile();
+    let profile: PortalProfile = {
+      ...base,
+      onboardingComplete: false,
+      onboardingSkipped: true,
+      skippedAt: Date.now(),
+      aiCoachOptIn: true,
+      preferredName: preferredName.trim() || base.preferredName,
+      assistantName: assistantName.trim() || base.assistantName,
+      trainingReminder: trainingReminder || base.trainingReminder,
+      department: department || base.department,
+    };
+    profile = appendGrowthEvent(profile, "Skipped onboarding — opened My day");
+    persistPortalProfile(profile, user?.id);
+    setPending(false);
+    router.replace("/");
+  }
+
+  function SkipLink() {
+    return (
+      <button
+        type="button"
+        disabled={pending}
+        onClick={() => void skipToMyDay()}
+        className="text-sm text-[var(--siya-text-muted)] underline underline-offset-2 hover:text-[var(--siya-text)] disabled:opacity-50"
+      >
+        {pending ? "Opening My day…" : "Skip for now — go to My day"}
+      </button>
+    );
   }
 
   return (
@@ -95,6 +129,9 @@ export function OnboardingWizard() {
           <button type="button" className={`mt-8 ${trainingLinkPrimaryClass}`} onClick={() => setStep(2)}>
             Continue
           </button>
+          <p className="mt-4">
+            <SkipLink />
+          </p>
         </div>
       ) : null}
 
@@ -114,13 +151,14 @@ export function OnboardingWizard() {
             className="mt-4 w-full rounded-lg border border-[var(--siya-border)] px-3 py-2 text-sm outline-none focus:border-[var(--siya-accent)]"
             autoComplete="nickname"
           />
-          <div className="mt-6 flex gap-2">
+          <div className="mt-6 flex flex-wrap items-center gap-2">
             <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(1)}>
               Back
             </button>
             <button type="button" className={trainingLinkPrimaryClass} onClick={() => setStep(3)}>
               Continue
             </button>
+            <SkipLink />
           </div>
         </div>
       ) : null}
@@ -140,13 +178,14 @@ export function OnboardingWizard() {
             placeholder="Siya Assist"
             className="mt-4 w-full rounded-lg border border-[var(--siya-border)] px-3 py-2 text-sm outline-none focus:border-[var(--siya-accent)]"
           />
-          <div className="mt-6 flex gap-2">
+          <div className="mt-6 flex flex-wrap items-center gap-2">
             <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(2)}>
               Back
             </button>
             <button type="button" className={trainingLinkPrimaryClass} onClick={() => setStep(4)}>
               Continue
             </button>
+            <SkipLink />
           </div>
         </div>
       ) : null}
@@ -177,13 +216,14 @@ export function OnboardingWizard() {
               </li>
             ))}
           </ul>
-          <div className="mt-6 flex gap-2">
+          <div className="mt-6 flex flex-wrap items-center gap-2">
             <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(3)}>
               Back
             </button>
             <button type="button" className={trainingLinkPrimaryClass} onClick={() => setStep(5)}>
               Continue
             </button>
+            <SkipLink />
           </div>
         </div>
       ) : null}
@@ -210,7 +250,7 @@ export function OnboardingWizard() {
               </li>
             ))}
           </ul>
-          <div className="mt-6 flex gap-2">
+          <div className="mt-6 flex flex-wrap items-center gap-2">
             <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(4)}>
               Back
             </button>
@@ -222,6 +262,7 @@ export function OnboardingWizard() {
             >
               Continue
             </button>
+            <SkipLink />
           </div>
         </div>
       ) : null}
@@ -247,13 +288,14 @@ export function OnboardingWizard() {
               </li>
             ))}
           </ul>
-          <div className="mt-6 flex gap-2">
+          <div className="mt-6 flex flex-wrap items-center gap-2">
             <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(5)}>
               Back
             </button>
             <button type="button" className={trainingLinkPrimaryClass} onClick={() => setStep(7)}>
               Continue
             </button>
+            <SkipLink />
           </div>
         </div>
       ) : null}
@@ -280,7 +322,7 @@ export function OnboardingWizard() {
               </button>
             ))}
           </div>
-          <div className="mt-6 flex gap-2">
+          <div className="mt-6 flex flex-wrap items-center gap-2">
             <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(6)}>
               Back
             </button>
@@ -292,6 +334,7 @@ export function OnboardingWizard() {
             >
               Continue
             </button>
+            <SkipLink />
           </div>
         </div>
       ) : null}
@@ -311,7 +354,7 @@ export function OnboardingWizard() {
             placeholder='e.g. "I hesitate while speaking" or "I want to become a manager"'
             className="mt-4 w-full rounded-lg border border-[var(--siya-border)] px-3 py-2 text-sm outline-none focus:border-[var(--siya-accent)]"
           />
-          <div className="mt-6 flex gap-2">
+          <div className="mt-6 flex flex-wrap items-center gap-2">
             <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(7)}>
               Back
             </button>
@@ -323,6 +366,7 @@ export function OnboardingWizard() {
             >
               Continue
             </button>
+            <SkipLink />
           </div>
         </div>
       ) : null}
@@ -330,34 +374,13 @@ export function OnboardingWizard() {
       {step === 9 ? (
         <div>
           <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
-            Personal AI coach
+            When does your work usually start?
           </h1>
           <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
-            Optional. A coach remembers your goals and nudges you gently — never labels you. You can change this later.
+            My Day will follow your shift, not midnight. Practice coaching stays on for everyone — we&apos;ll use your
+            goals and drill history to nudge what to practice next.
           </p>
-          <div className="mt-4 flex gap-2">
-            <button
-              type="button"
-              onClick={() => setAiCoachOptIn(true)}
-              className={`flex-1 rounded-xl border px-4 py-3 text-sm ${
-                aiCoachOptIn === true ? "border-[var(--siya-primary)] bg-[var(--siya-primary)]/5 font-semibold" : ""
-              }`}
-            >
-              Yes — help me stay on track
-            </button>
-            <button
-              type="button"
-              onClick={() => setAiCoachOptIn(false)}
-              className={`flex-1 rounded-xl border px-4 py-3 text-sm ${
-                aiCoachOptIn === false ? "border-[var(--siya-primary)] bg-[var(--siya-primary)]/5 font-semibold" : ""
-              }`}
-            >
-              No — stateless Ask only
-            </button>
-          </div>
-          <h2 className="mt-6 text-sm font-semibold text-[var(--siya-primary)]">When does your work usually start?</h2>
-          <p className="mt-1 text-xs text-[var(--siya-text-muted)]">My Day will follow your shift, not midnight.</p>
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="mt-4 flex flex-wrap gap-2">
             {(
               [
                 ["morning", "Morning"],
@@ -377,18 +400,19 @@ export function OnboardingWizard() {
               </button>
             ))}
           </div>
-          <div className="mt-6 flex gap-2">
+          <div className="mt-6 flex flex-wrap items-center gap-2">
             <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(8)}>
               Back
             </button>
             <button
               type="button"
-              disabled={pending || aiCoachOptIn === null}
+              disabled={pending}
               className={trainingLinkPrimaryClass}
               onClick={() => void finish()}
             >
               {pending ? "Saving…" : "Open my day"}
             </button>
+            <SkipLink />
           </div>
         </div>
       ) : null}

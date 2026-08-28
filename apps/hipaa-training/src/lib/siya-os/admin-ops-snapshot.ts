@@ -33,6 +33,15 @@ async function apiGet<T>(token: string, path: string): Promise<T | null> {
   return (await res.json()) as T;
 }
 
+/** Any signed-in staff — today’s assigned tasks (My day). */
+export async function fetchMyTasksToday(
+  token: string,
+): Promise<{ date: string; tasks: TaskRecord[] } | null> {
+  const myRes = await apiGet<MyTasksResponse>(token, "/api/tasks/me?date=today");
+  if (!myRes) return null;
+  return { date: myRes.date, tasks: myRes.tasks ?? [] };
+}
+
 export async function fetchAdminOpsSnapshot(token: string): Promise<AdminOpsSnapshot | null> {
   const me = await apiGet<{ id: string; email: string; name: string | null; role: string }>(
     token,
@@ -94,5 +103,31 @@ export async function createTaskViaApi(
   });
   if (!res.ok) return null;
   const data = (await res.json()) as { task?: TaskRecord };
-  return data.task ?? null;
+  const task = data.task ?? null;
+  if (task?.assigneeEmail && task.assigneeId !== (await actorId(token, base))) {
+    try {
+      const { notifyTaskAssigned } = await import("@/lib/task-assignment-email");
+      await notifyTaskAssigned({
+        title: task.title,
+        dueDate: task.dueDate,
+        assigneeEmail: task.assigneeEmail,
+        assigneeName: task.assigneeName,
+        assignerName: task.assignedByName,
+        kind: "created",
+      });
+    } catch (err) {
+      console.error("[admin-ops] task assign notify failed", err);
+    }
+  }
+  return task;
+}
+
+async function actorId(token: string, base: string): Promise<string | null> {
+  const res = await fetch(`${base}/api/auth/me`, {
+    headers: { Authorization: `Bearer ${token}` },
+    cache: "no-store",
+  });
+  if (!res.ok) return null;
+  const me = (await res.json()) as { id?: string };
+  return me.id ?? null;
 }

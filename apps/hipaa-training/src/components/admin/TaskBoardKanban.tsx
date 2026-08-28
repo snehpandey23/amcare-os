@@ -26,14 +26,24 @@ import {
 } from "@/lib/tasks-api";
 import type { TaskRecord, TaskStatus } from "@/lib/tasks-types";
 import { boardColumn, formatDueTime, priorityBadgeClass } from "@/lib/tasks-types";
-import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
-import { portalBtnGhostSm, portalH1, portalLinkBack } from "@/lib/portal-ui";
+import {
+  portalBtnAccentSm,
+  portalBtnGhostSm,
+  portalCard,
+  portalH1,
+  portalH3,
+  portalInput,
+  portalLinkBack,
+  portalStatusErrorText,
+} from "@/lib/portal-ui";
 
 const COLS: { id: TaskStatus; label: string }[] = [
   { id: "todo", label: "To do" },
   { id: "in_progress", label: "In progress" },
   { id: "done", label: "Done" },
 ];
+
+const filterSelectClass = `${portalInput} w-auto min-w-[8.5rem] py-1.5 text-xs`;
 
 function Column({
   col,
@@ -46,8 +56,11 @@ function Column({
 }) {
   const { setNodeRef } = useDroppable({ id: col.id });
   return (
-    <div ref={setNodeRef} className="rounded-xl border bg-[var(--siya-bg-subtle)]/50 p-3">
-      <h2 className="text-xs font-semibold uppercase text-[var(--siya-text-muted)]">{col.label}</h2>
+    <div
+      ref={setNodeRef}
+      className="rounded-[var(--siya-radius-lg)] border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)]/50 p-3"
+    >
+      <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-text-muted)]">{col.label}</h2>
       <SortableContext items={tasks.map((t) => t.id)} strategy={verticalListSortingStrategy}>
         <ul className="mt-3 min-h-[120px] space-y-2">
           {tasks.map((task) => (
@@ -80,19 +93,19 @@ function TaskCard({
       {...attributes}
       {...listeners}
       onClick={() => onOpen(task)}
-      className="w-full rounded-lg border border-[var(--siya-border)] bg-white p-3 text-left text-sm shadow-sm"
+      className={`w-full text-left text-sm ${portalCard} p-3`}
     >
       <p className="font-medium text-[var(--siya-primary)]">{task.title}</p>
       <p className="mt-1 text-[10px] text-[var(--siya-text-muted)]">
         {task.assigneeName || task.assigneeEmail || "Assignee"} · {task.type.toUpperCase()}
       </p>
-      <div className="mt-2 flex flex-wrap gap-1">
+      <div className="mt-2 flex flex-wrap items-center gap-1">
         <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase ${priorityBadgeClass(task.priority)}`}>
           {task.priority}
         </span>
         <span className="text-[10px] text-[var(--siya-text-muted)]">{task.dueDate}</span>
         {task.status === "overdue" ? (
-          <span className="text-[10px] font-semibold text-red-700">Overdue</span>
+          <span className={`text-[10px] font-semibold ${portalStatusErrorText}`}>Overdue</span>
         ) : null}
       </div>
     </button>
@@ -206,8 +219,8 @@ export function TaskBoardKanban() {
           <h1 className={portalH1}>Task board</h1>
           <p className="mt-1 text-sm text-[var(--siya-text-muted)]">Drag cards to update status.</p>
         </div>
-        <div className="flex flex-wrap gap-2">
-          <button type="button" className={trainingLinkPrimaryClass} onClick={() => setAssignOpen(true)}>
+        <div className="flex flex-wrap items-center gap-2">
+          <button type="button" className={portalBtnAccentSm} onClick={() => setAssignOpen(true)}>
             Assign task
           </button>
           <Link href="/admin/task-templates" className={portalBtnGhostSm}>
@@ -216,9 +229,9 @@ export function TaskBoardKanban() {
         </div>
       </header>
 
-      <div className="flex flex-wrap gap-2 text-xs">
+      <div className="flex flex-wrap items-center gap-2 text-xs text-[var(--siya-text-secondary)]">
         <select
-          className="rounded-lg border px-2 py-1.5"
+          className={filterSelectClass}
           value={filters.assignee ?? ""}
           onChange={(e) => setFilters((f) => ({ ...f, assignee: e.target.value }))}
         >
@@ -230,7 +243,7 @@ export function TaskBoardKanban() {
           ))}
         </select>
         <select
-          className="rounded-lg border px-2 py-1.5"
+          className={filterSelectClass}
           value={filters.type ?? ""}
           onChange={(e) => setFilters((f) => ({ ...f, type: e.target.value }))}
         >
@@ -239,7 +252,7 @@ export function TaskBoardKanban() {
           <option value="adhoc">Ad hoc</option>
         </select>
         <select
-          className="rounded-lg border px-2 py-1.5"
+          className={filterSelectClass}
           value={filters.priority ?? ""}
           onChange={(e) => setFilters((f) => ({ ...f, priority: e.target.value }))}
         >
@@ -249,9 +262,10 @@ export function TaskBoardKanban() {
           <option value="high">High</option>
           <option value="urgent">Urgent</option>
         </select>
-        <label className="flex items-center gap-1">
+        <label className="flex items-center gap-1.5 text-[var(--siya-text-secondary)]">
           <input
             type="checkbox"
+            className="accent-[var(--siya-btn-primary)]"
             checked={filters.overdue === "true"}
             onChange={(e) => setFilters((f) => ({ ...f, overdue: e.target.checked ? "true" : "" }))}
           />
@@ -259,7 +273,7 @@ export function TaskBoardKanban() {
         </label>
       </div>
 
-      {error ? <p className="text-sm text-red-600">{error.message}</p> : null}
+      {error ? <p className={`text-sm ${portalStatusErrorText}`}>{error.message}</p> : null}
       {isLoading ? <p className="text-sm text-[var(--siya-text-muted)]">Loading board…</p> : null}
 
       <DndContext sensors={sensors} onDragEnd={(e) => void onDragEnd(e)}>
@@ -272,12 +286,34 @@ export function TaskBoardKanban() {
       </DndContext>
 
       {assignOpen ? (
-        <form onSubmit={submitAssign} className="fixed inset-0 z-[200] flex items-end justify-center bg-black/40 p-4 sm:items-center">
-          <div className="w-full max-w-md rounded-2xl bg-white p-5 shadow-xl">
-            <h2 className="text-sm font-semibold">Assign task</h2>
-            <TrainingInput required placeholder="Title" className="mt-3 w-full" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
-            <TrainingInput placeholder="Description" className="mt-2 w-full" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
-            <select required className="mt-2 w-full rounded-lg border px-2 py-2 text-sm" value={form.assigneeId} onChange={(e) => setForm({ ...form, assigneeId: e.target.value })}>
+        <form
+          onSubmit={submitAssign}
+          className="fixed inset-0 z-[200] flex items-end justify-center bg-black/50 p-4 sm:items-center"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setAssignOpen(false);
+          }}
+        >
+          <div className={`w-full max-w-md space-y-3 p-5 shadow-[var(--siya-shadow-lg)] ${portalCard}`}>
+            <h2 className={portalH3}>Assign task</h2>
+            <input
+              required
+              placeholder="Title"
+              className={portalInput}
+              value={form.title}
+              onChange={(e) => setForm({ ...form, title: e.target.value })}
+            />
+            <input
+              placeholder="Description"
+              className={portalInput}
+              value={form.description}
+              onChange={(e) => setForm({ ...form, description: e.target.value })}
+            />
+            <select
+              required
+              className={portalInput}
+              value={form.assigneeId}
+              onChange={(e) => setForm({ ...form, assigneeId: e.target.value })}
+            >
               <option value="">Assignee…</option>
               {roster.map((m) => (
                 <option key={m.id} value={m.id}>
@@ -285,21 +321,35 @@ export function TaskBoardKanban() {
                 </option>
               ))}
             </select>
-            <div className="mt-2 grid grid-cols-2 gap-2">
-              <input type="date" className="rounded-lg border px-2 py-2 text-sm" value={form.dueDate} onChange={(e) => setForm({ ...form, dueDate: e.target.value })} />
-              <input type="time" className="rounded-lg border px-2 py-2 text-sm" value={form.dueTime} onChange={(e) => setForm({ ...form, dueTime: e.target.value })} />
+            <div className="grid grid-cols-2 gap-2">
+              <input
+                type="date"
+                className={portalInput}
+                value={form.dueDate}
+                onChange={(e) => setForm({ ...form, dueDate: e.target.value })}
+              />
+              <input
+                type="time"
+                className={portalInput}
+                value={form.dueTime}
+                onChange={(e) => setForm({ ...form, dueTime: e.target.value })}
+              />
             </div>
-            <select className="mt-2 w-full rounded-lg border px-2 py-2 text-sm" value={form.priority} onChange={(e) => setForm({ ...form, priority: e.target.value })}>
+            <select
+              className={portalInput}
+              value={form.priority}
+              onChange={(e) => setForm({ ...form, priority: e.target.value })}
+            >
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
               <option value="urgent">Urgent</option>
             </select>
-            <div className="mt-4 flex gap-2">
-              <button type="submit" disabled={pending} className={trainingLinkPrimaryClass}>
+            <div className="flex flex-wrap gap-2 pt-1">
+              <button type="submit" disabled={pending} className={portalBtnAccentSm}>
                 {pending ? "Saving…" : "Create"}
               </button>
-              <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setAssignOpen(false)}>
+              <button type="button" className={portalBtnGhostSm} onClick={() => setAssignOpen(false)}>
                 Cancel
               </button>
             </div>
@@ -308,18 +358,29 @@ export function TaskBoardKanban() {
       ) : null}
 
       {detail ? (
-        <div className="fixed inset-0 z-[200] flex items-end justify-center bg-black/40 p-4 sm:items-center">
-          <div className="w-full max-w-md rounded-2xl bg-white p-5 shadow-xl">
-            <h2 className="font-semibold">{detail.title}</h2>
-            <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
-              {detail.assigneeName} · Due {detail.dueDate} {detail.dueTime ? formatDueTime(detail.dueTime) : ""}
+        <div
+          className="fixed inset-0 z-[200] flex items-end justify-center bg-black/50 p-4 sm:items-center"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setDetail(null);
+          }}
+        >
+          <div className={`w-full max-w-md space-y-3 p-5 shadow-[var(--siya-shadow-lg)] ${portalCard}`}>
+            <h2 className={portalH3}>{detail.title}</h2>
+            <p className="text-xs text-[var(--siya-text-muted)]">
+              {detail.assigneeName} · Due {detail.dueDate}{" "}
+              {detail.dueTime ? formatDueTime(detail.dueTime) : ""}
             </p>
-            <label className="mt-3 block text-xs">
+            <label className="block text-xs font-medium text-[var(--siya-text-secondary)]">
               Reassign
               <select
-                className="mt-1 w-full rounded-lg border px-2 py-2 text-sm"
+                className={`mt-1 ${portalInput}`}
                 value={detail.assigneeId}
-                onChange={(e) => void patchTask(detail.id, { assigneeId: e.target.value }).then((t) => { setDetail(t); void mutate(); })}
+                onChange={(e) =>
+                  void patchTask(detail.id, { assigneeId: e.target.value }).then((t) => {
+                    setDetail(t);
+                    void mutate();
+                  })
+                }
               >
                 {roster.map((m) => (
                   <option key={m.id} value={m.id}>
@@ -328,7 +389,7 @@ export function TaskBoardKanban() {
                 ))}
               </select>
             </label>
-            <button type="button" className="mt-4 text-sm font-semibold text-[var(--siya-accent)]" onClick={() => setDetail(null)}>
+            <button type="button" className={portalLinkBack} onClick={() => setDetail(null)}>
               Close
             </button>
           </div>

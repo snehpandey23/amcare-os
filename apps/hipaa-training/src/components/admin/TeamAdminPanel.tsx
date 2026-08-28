@@ -21,6 +21,9 @@ import { buildInviteCopyText } from "@/lib/invite-email";
 import { downloadShiftAttendanceCsv } from "@/lib/portal-analytics";
 import { portalBtnGhostSm, portalH1, portalH2, portalSection } from "@/lib/portal-ui";
 import { DepartmentLeadsSection } from "@/components/admin/DepartmentLeadsSection";
+import { WeeklyPracticeReportView } from "@/components/level-up/WeeklyPracticeReportView";
+import { buildWeeklyPracticeReport, coerceDayLedger } from "@/lib/level-up/weekly-report";
+import type { LevelUpProgress } from "@/lib/level-up/progress";
 
 const LOGIN_URL =
   typeof window !== "undefined"
@@ -73,6 +76,7 @@ export function TeamAdminPanel() {
   const [inviteResult, setInviteResult] = useState<string | null>(null);
   const [inviteCopyBlock, setInviteCopyBlock] = useState<string | null>(null);
   const [csvPending, setCsvPending] = useState(false);
+  const [reportMemberId, setReportMemberId] = useState<string | null>(null);
   const invitePanelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -609,6 +613,13 @@ export function TeamAdminPanel() {
                         Last active {m.levelUp.lastActiveDate}
                       </span>
                     ) : null}
+                    <button
+                      type="button"
+                      className="mt-1 text-[10px] font-semibold text-[var(--siya-accent)] underline"
+                      onClick={() => setReportMemberId(reportMemberId === m.id ? null : m.id)}
+                    >
+                      {reportMemberId === m.id ? "Hide weekly report" : "Weekly practice report"}
+                    </button>
                   </td>
                   <td className="px-3 py-3 text-xs">{m.levelUp.chatPracticeSessions || "—"}</td>
                   <td className="px-3 py-3 text-xs">{m.levelUp.usCultureSessions || "—"}</td>
@@ -619,6 +630,29 @@ export function TeamAdminPanel() {
           </table>
         </div>
       ) : null}
+
+      {reportMemberId ? (() => {
+        const m = members.find((x) => x.id === reportMemberId);
+        if (!m) return null;
+        const progress: LevelUpProgress = {
+          streak: m.levelUp.streak,
+          lastActiveDate: m.levelUp.lastActiveDate,
+          completedToday: [],
+          totalXp: m.levelUp.totalXp,
+          dayLedger: coerceDayLedger(m.levelUp.dayLedger),
+        };
+        const report = buildWeeklyPracticeReport(progress, {
+          subjectLabel: m.name?.trim() || m.email,
+        });
+        return (
+          <div className="mt-4">
+            <p className="mb-2 text-xs text-[var(--siya-text-muted)]">
+              Same weekly report component as staff Learn / Practice (shared results only).
+            </p>
+            <WeeklyPracticeReportView report={report} />
+          </div>
+        );
+      })() : null}
 
       {!loading && members.length === 0 && !error ? (
         <p className="text-sm text-[var(--siya-text-muted)]">No team members yet. Invite someone to get started.</p>

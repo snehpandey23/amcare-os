@@ -53,11 +53,14 @@ export type MyTasksResponse = {
   adhoc: TaskRecord[];
 };
 
+/** Priority pills — portal status tokens only (no slate/blue/amber Tailwind). */
 const PRIORITY_STYLE: Record<TaskPriority, string> = {
-  low: "bg-slate-100 text-slate-800",
-  medium: "bg-blue-50 text-blue-900",
-  high: "bg-amber-50 text-amber-950",
-  urgent: "bg-red-50 text-red-900",
+  low: "border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] text-[var(--siya-text-secondary)]",
+  medium:
+    "border border-[var(--siya-status-info-border)] bg-[var(--siya-status-info-bg)] text-[var(--siya-status-info-text)]",
+  high: "border border-[var(--siya-status-warn-border)] bg-[var(--siya-status-warn-bg)] text-[var(--siya-status-warn-text)]",
+  urgent:
+    "border border-[var(--siya-status-error-border)] bg-[var(--siya-status-error-bg)] text-[var(--siya-status-error-text)]",
 };
 
 export function priorityBadgeClass(p: TaskPriority): string {

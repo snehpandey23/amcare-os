@@ -11,12 +11,15 @@ alwaysApply: true
 
 1. `apps/siya-health/brand/AGENT-BOOTSTRAP.md` ← **full stack map**
 2. `apps/siya-health/brand/BRAND-STYLE-LOCK.md` ← pixel tokens
-3. `apps/siya-health/brand/VISUAL-OS.md`
-4. `apps/siya-health/brand/VISUAL-OS-TEMPLATES.md`
-5. `apps/siya-health/brand/EDITORIAL-OS.md` (when starting from research/insight)
-6. `apps/siya-health/brand/prompts/README.md` (when drafting copy/prompts)
+3. `apps/siya-health/brand/MEDICAL-COMPLIANCE-MARKETING.md` ← **claims / checklist / Legal triggers**
+4. `apps/siya-health/brand/VISUAL-OS.md`
+5. `apps/siya-health/brand/VISUAL-OS-TEMPLATES.md`
+6. `apps/siya-health/brand/EDITORIAL-OS.md` (when starting from research/insight)
+7. `apps/siya-health/brand/prompts/README.md` (when drafting copy/prompts)
 
 Then use what the brief needs: captions · founder voice · video-prompt · tracker · WorkDrive.
+
+Also: `siya-medical-compliance-marketing.mdc` (alwaysApply) — checklist before compose/ship.
 
 ## Tokens (fail closed)
 
@@ -30,10 +33,10 @@ Plum `#8D3A78` · brown ink · hard-seam L · text shadows · ambient watermarks
 
 Classify → template ID → copy plan → source photo only → **`brand/scripts/compose_*.py`** → captions / video-prompt / tracker / WorkDrive
 
-Also: `siya-visual-approval-gate.mdc` · `siya-a03-lean-lock.mdc` · `zoho-workdrive-team.mdc`
+Also: `siya-visual-approval-gate.mdc` · `siya-a03-lean-lock.mdc` · `siya-medical-compliance-marketing.mdc` · `zoho-workdrive-team.mdc`
 
 ## Cloud note
 
-If `BRAND-STYLE-LOCK.md` / `AGENT-BOOTSTRAP.md` are missing from the clone, **stop** and say the branch is stale — do not fall back to Jul-24 plum docs or Instagram-static alone.
+If `BRAND-STYLE-LOCK.md` / `AGENT-BOOTSTRAP.md` / `MEDICAL-COMPLIANCE-MARKETING.md` are missing from the clone, **stop** and say the branch is stale — do not fall back to Jul-24 plum docs or Instagram-static alone.
 
 **Image-only cloud runs:** paste `apps/siya-health/brand/CLOUD-AGENT-IMAGE-BRIEF.md`. Rule: `siya-cloud-image-only.mdc` (no site/deploy).

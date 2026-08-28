@@ -36,6 +36,11 @@ export type MetaConversationReply = {
   links?: { label: string; href: string }[];
 };
 
+export type MetaConversationOpts = {
+  /** Personalization “call the assistant” label from the client profile, when known. */
+  assistantLabel?: string | null;
+};
+
 const ONBOARDING_LINK = [{ label: "Open onboarding", href: "/onboarding" }];
 
 const IDENTITY = [
@@ -67,7 +72,7 @@ const PRODUCT_MAP = [
   "• **Clear chat** (top of the thread, after you’ve sent something) — empty *this* conversation and start fresh. It does **not** remove other chats from the sidebar.",
   "• **Archive** (on a sidebar chat) — remove that chat from your list (day-to-day “delete”).",
   "• **Search chats…** — find an older thread by title/text.",
-  "• **Mic** then **Send** — dictate into the box; each Mic session is a fresh take.",
+  "• **Mic** — dictate, tap Mic again to **send** (box clears). Fresh take each session.",
   "• 👍 / 👎 — “was this reply helpful?” for review. Does not teach me policy.",
   "• **Notify owner** — only when a **staff guide is missing**. Not email, not a transcript dump.",
   "• **Copy escalation summary** — when it appears: copy a handoff you paste yourself.",
@@ -290,17 +295,89 @@ const FOCUS_HELP = [
   "Tap **Back to working** when you’re done. I can’t turn Focus on/off from chat.",
 ].join("\n");
 
+const MY_DAY_WHY = [
+  "That’s on me — **“what should I do first / what’s my job today”** should open your **My day** checklist, not a policy soft-stop or a Marketing SOP dump.",
+  "",
+  "Live assigned work lives on **My day** (checklist **above Ask**). **Focus** hides that panel until you leave Focus.",
+  "Ask again with **my tasks**, **what should I do today**, or **plan my day** — I’ll list today’s open items from the portal.",
+  "I don’t invent a separate “job plan” from Marketing guides when your checklist already exists.",
+].join("\n");
+
+/** Personalization “call the assistant X” — opening label vs product identity. */
+export function buildAssistantNameReply(opts?: {
+  preferredLabel?: string | null;
+  saidLabel?: string | null;
+}): string {
+  const preferred = opts?.preferredLabel?.trim();
+  const said = opts?.saidLabel?.trim();
+  const opening = preferred || said;
+  const lines = [
+    "Got it — that’s **personalization**, not a missing staff guide.",
+    "",
+    "In **Personalize / onboarding**, “What should you call the assistant?” sets the **label on the My Day chat opening** (leave blank for **Siya Assist**).",
+  ];
+  if (opening) {
+    lines.push(
+      `Your opening label${preferred ? "" : " (from what you just said)"} is **${opening}**${
+        preferred && said && preferred.toLowerCase() !== said.toLowerCase()
+          ? ` (you also said **${said}**)`
+          : ""
+      }.`,
+    );
+  }
+  lines.push(
+    "",
+    "In Ask replies I still say **Siya Assist** as the **product help-desk name** so it’s clear which tool this is — the opening label doesn’t rewrite every policy answer.",
+    "Change the opening label anytime via **Personalize** under My day (or **Open onboarding**).",
+  );
+  return lines.join("\n");
+}
+
+/** Extract a short assistant nickname from “named you X / call yourself X / be X”. */
+export function extractSaidAssistantLabel(text: string): string | null {
+  const t = text.trim();
+  const patterns = [
+    /\bi\s+named\s+(?:you|u)\s+([A-Za-z][\w\s-]{0,24}?)(?:\s+not\b|\s*$|,)/i,
+    /\b(?:call|calling)\s+(?:yourself|you|u)\s+([A-Za-z][\w\s-]{0,24}?)(?:\s+not\b|\s*$|,)/i,
+    /\b(?:would like|want|told|said)\s+(?:you|u)\s+to\s+be\s+([A-Za-z][\w\s-]{0,24}?)(?:\s+not\b|\s*$|,|\.)/i,
+    /\bbe\s+([A-Za-z][\w-]{1,24})\s+not\s+siya\s+assist\b/i,
+  ];
+  for (const re of patterns) {
+    const m = re.exec(t);
+    if (m?.[1]) {
+      const label = m[1]
+        .replace(/\s+/g, " ")
+        .trim()
+        .replace(/\b([a-z])/g, (c) => c.toUpperCase());
+      if (label && !/^siya\s+assist$/i.test(label)) return label;
+    }
+  }
+  return null;
+}
+
+export function isAssistantNamingComplaint(t: string): boolean {
+  return (
+    /\bi\s+named\s+(?:you|u)\b/.test(t) ||
+    /\b(?:call|calling)\s+(?:yourself|you|u)\b/.test(t) ||
+    /\b(?:would like|want|told|said)\s+(?:you|u)\s+to\s+be\b/.test(t) ||
+    (/\bpersonaliz/.test(t) &&
+      /\b(?:be|call|named|name)\b/.test(t) &&
+      /\b(?:siya|assist|assistant|you|u)\b/.test(t)) ||
+    (/\bnot\s+siya\s+assist\b/.test(t) && /\b(?:named|call|be|want)\b/.test(t))
+  );
+}
+
 const NAV_HELP = [
   "Left sidebar: **My day** (this home + Assist), **Learn** (HIPAA + Practice drills), **Memory** (published knowledge), **Team** (people / presence).",
   "",
-  "Staff also have **Account**, **Sign out**, **Light/Dark**, and shift controls (**Focus**, **Break**, **End shift**).",
+  "Staff also have **Account**, **Sign out**, a **sun/moon** appearance control, and shift controls (**Focus**, **Break**, **End shift**).",
   "Admins see **Admin** instead of shift Focus, and **Talk** for founder questions — Talk never writes This week’s plan.",
 ].join("\n");
 
 const MIC_HELP = [
-  "**Mic** turns speech into text in the box. Tap Mic again to stop, then tap **Send**.",
+  "**Mic** turns speech into text, then **sends** when you tap Mic again to stop.",
   "",
-  "Each Mic session starts a **fresh** take (it won’t glue onto old leftover text).",
+  "Each Mic session starts a **fresh** take (it won’t glue onto old leftover text), and the box clears after send.",
   "Dictation typos are OK — if something is unclear, ask me to clarify.",
 ].join("\n");
 
@@ -357,6 +434,13 @@ const CASES: MetaCase[] = [
     answer: FEELINGS,
   },
   {
+    id: "assistant-name",
+    category: "chrome",
+    test: (t) => isAssistantNamingComplaint(t),
+    answer: buildAssistantNameReply(),
+    links: ONBOARDING_LINK,
+  },
+  {
     id: "portal-onboarding-troubleshoot",
     category: "chrome",
     test: (t, _prior, priorAssist) =>
@@ -383,16 +467,17 @@ const CASES: MetaCase[] = [
     id: "portal-onboarding",
     category: "chrome",
     test: (t) =>
-      /\bwhy\b.*\b(you|u|assist|siya)\b.*\b(do|did|run|make|skip|skipped)\b.*\bonboard/.test(t) ||
-      /\bwhy\b.*\b(do|did|skip|skipped)\b.*\bmy\b.*\bonboard/.test(t) ||
-      /\bportal\b.*\bonboard/.test(t) ||
-      (/\bpersonaliz(e|ation)\b/.test(t) &&
-        !/\b(don'?t see|can't find|cannot find|do the personalization now|personalization now)\b/.test(t) &&
-        !/\b(can|could|cant|can't)\s+(you|u)\s+(do|run|start|open)\b/.test(t)) ||
-      /\b(preferred name|assistant name|training reminder|what should i call you|what should you call)\b/.test(t) ||
-      (/\bonboard/.test(t) &&
-        /\b(wizard|portal|app|siyaos|my day|personalize|assist|you|u|skip|skipped)\b/.test(t)) ||
-      /\bwhat\b.*\bonboarding\b.*\b(for|about|do)\b/.test(t),
+      !isAssistantNamingComplaint(t) &&
+      (/\bwhy\b.*\b(you|u|assist|siya)\b.*\b(do|did|run|make|skip|skipped)\b.*\bonboard/.test(t) ||
+        /\bwhy\b.*\b(do|did|skip|skipped)\b.*\bmy\b.*\bonboard/.test(t) ||
+        /\bportal\b.*\bonboard/.test(t) ||
+        (/\bpersonaliz(e|ation)\b/.test(t) &&
+          !/\b(don'?t see|can't find|cannot find|do the personalization now|personalization now)\b/.test(t) &&
+          !/\b(can|could|cant|can't)\s+(you|u)\s+(do|run|start|open)\b/.test(t)) ||
+        /\b(preferred name|assistant name|training reminder|what should i call you|what should you call)\b/.test(t) ||
+        (/\bonboard/.test(t) &&
+          /\b(wizard|portal|app|siyaos|my day|personalize|assist|you|u|skip|skipped)\b/.test(t)) ||
+        /\bwhat\b.*\bonboarding\b.*\b(for|about|do)\b/.test(t)),
     answer: PORTAL_ONBOARDING,
     links: ONBOARDING_LINK,
   },
@@ -647,6 +732,18 @@ const CASES: MetaCase[] = [
     answer: DELETE_CHATS,
   },
   {
+    id: "my-day-why",
+    category: "chrome",
+    test: (t) =>
+      (/\bwhy\s+(didn'?t|did\s+not|dont|don'?t)\s+(you\s+)?(include|mention|list|show|give)\b/.test(t) &&
+        /\b(task|job|my day|them|checklist)\b/.test(t)) ||
+      (/\bwhy\s+(weren'?t|wasn'?t)\s+(they|those|my\s+tasks?)\b/.test(t) && /\b(first|job|ask|earlier|before)\b/.test(t)) ||
+      /\binclude\s+them\s+in\s+my\s+job\b/.test(t) ||
+      /\bwhen\s+i\s+first\s+asked\b/.test(t) && /\b(task|job|include|mention)\b/.test(t),
+    answer: MY_DAY_WHY,
+    links: [{ label: "My day", href: "/" }],
+  },
+  {
     id: "focus-help",
     category: "chrome",
     test: (t) =>
@@ -801,6 +898,24 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
     mustMatch: /shift presence|Back to working/i,
     mustNot: /right staff guide for that yet/i,
   },
+  {
+    id: "my-day-why",
+    text: "why didnt you include them in my job or when i first asked",
+    mustMatch: /My day|checklist|my tasks|what should I do today/i,
+    mustNot: /right staff guide for that yet|No approved guide/i,
+  },
+  {
+    id: "assistant-name",
+    text: "i named you siya not siya assist",
+    mustMatch: /personalization|opening|Siya Assist/i,
+    mustNot: /right staff guide for that yet|No approved guide/i,
+  },
+  {
+    id: "assistant-name",
+    text: "in personalization i said i would like u to be siya",
+    mustMatch: /personalization|opening|Siya Assist/i,
+    mustNot: /right staff guide for that yet|No approved guide|Personalize link under/i,
+  },
   { id: "what-can-you-do", text: "what can you do", mustMatch: /help desk|this app|approved/i, mustNot: /approved staff guide for that/i },
   { id: "train-learn-permanent", text: "i want to train you regarding american culture", mustMatch: /Practice|culture|can.?t permanently/i, mustNot: /approved staff guide for that/i },
   { id: "remember-other-chats", text: "do you remember previous chats", mustMatch: /this chat thread|don.?t reliably recall other/i, mustNot: /approved staff guide/i },
@@ -890,6 +1005,7 @@ export function answerMetaConversation(
   text: string,
   priorUser?: string,
   priorAssistant?: string,
+  opts?: MetaConversationOpts,
 ): MetaConversationReply | null {
   const t = normalizeMetaText(text);
   const prior = priorUser ? normalizeMetaText(priorUser) : "";
@@ -897,6 +1013,20 @@ export function answerMetaConversation(
   if (!t || t.length > 1200) return null;
   for (const c of CASES) {
     if (c.test(t, prior, priorAssist)) {
+      if (c.id === "assistant-name") {
+        const preferred =
+          opts?.assistantLabel?.trim() && !/^siya\s+assist$/i.test(opts.assistantLabel.trim())
+            ? opts.assistantLabel.trim()
+            : null;
+        return {
+          id: c.id,
+          answer: buildAssistantNameReply({
+            preferredLabel: preferred,
+            saidLabel: extractSaidAssistantLabel(text),
+          }),
+          links: c.links,
+        };
+      }
       return { id: c.id, answer: c.answer, links: c.links };
     }
   }

@@ -162,7 +162,7 @@ Infrastructure is harder to replace than features.
 | Never ask twice | Ask, 👎, gap log | Auto backlog + owner routing |
 | Growth + accountability | My Day, onboarding goals | Nudges from goals + last practice |
 | Celebrate | Streak, XP | Milestones + timeline events |
-| Coach opt-in | `aiCoachOptIn` on profile | Gate memory in Ask |
+| Coach (mandatory) | Always on — no opt-out in onboarding | Practice reports / nudges use goals + day ledger |
 | Struggles not failures | Copy in nudges (draft) | Coach tone in prompts |
 | Shifts | Start/End shift, Working · Focus · Break | Morning brief, Work Memory search |
 | Presence | Self-declared only; Focus changes UX + Ask | Team trends (30d), no manager log export |

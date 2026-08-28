@@ -5,7 +5,7 @@ Standardized against the official benchmark reference layout:
 - Canvas: 4:5 1080x1350
 - Cream background: #F6E8DC (exact benchmark tone: RGB 246, 232, 220)
 - Left margin: x = 68px
-- Official full logo lockup: placed at (52, 60), height ~176px
+- Official full logo lockup: placed at (58, 72), size ~242x40px
 - Headline: Georgia/LiberationSerif Bold (~92px font size, line-height ~126px)
   - Colors: Deep Navy (#081C5C) and Siya Magenta (#D00668)
 - Magenta horizontal divider rule: x=68 to 184 (w=116px, h=5px) at y = headline_bottom + 36px
@@ -14,7 +14,7 @@ Standardized against the official benchmark reference layout:
   - "siya.health" in Siya Magenta Bold (~25px)
   - " | " vertical separator
   - "Educational only" in Slate Navy Regular (~25px)
-- Photo placement: Right-weighted with soft organic dissolve starting around x=480 to 680
+- Photo placement: Right-weighted with soft organic dissolve starting around x=500 to 700
 """
 
 from __future__ import annotations
@@ -74,8 +74,10 @@ def fit_cover_right(photo: Image.Image, box_w: int, box_h: int) -> Image.Image:
     return src.crop((left, top, left + box_w, top + box_h))
 
 
-def soft_cream_dissolve_mask(width: int, height: int, start_x: int = 460, end_x: int = 680) -> Image.Image:
-    """Creates benchmark-exact left cream to right photo dissolve."""
+def soft_cream_dissolve_mask(width: int, height: int, start_x: int = 500, end_x: int = 700) -> Image.Image:
+    """Creates benchmark-exact left cream to right photo dissolve.
+    Keeps x=0 to 500 as pure solid cream so all text stays safely in the clean left text field.
+    """
     mask = Image.new("L", (width, height), 0)
     px = mask.load()
     span = max(1, end_x - start_x)
@@ -92,7 +94,7 @@ def soft_cream_dissolve_mask(width: int, height: int, start_x: int = 460, end_x:
         for y in range(height):
             # Keep bottom left area clean for footer
             a = a_x
-            if y > height - 120 and x < 500:
+            if y > height - 120 and x < 520:
                 a = 0
             px[x, y] = a
     return mask
@@ -177,17 +179,17 @@ def compose_benchmark(
 
     # 2. Fit Photo and Blend
     photo = fit_cover_right(Image.open(photo_path), W, H)
-    mask = soft_cream_dissolve_mask(W, H, start_x=470, end_x=680)
+    mask = soft_cream_dissolve_mask(W, H, start_x=500, end_x=700)
     canvas = Image.composite(photo, canvas, mask)
     draw = ImageDraw.Draw(canvas)
 
-    # 3. Logo (Locked LOGO-PRIMARY at top-left ~92px height, left=68)
+    # 3. Logo Placement (x=58, y=72, size ~242x40 maintaining aspect ratio)
     logo = Image.open(logo_path).convert("RGBA")
-    target_h = 92
-    scale = target_h / logo.height
+    scale = min(242 / logo.width, 40 / logo.height)
     logo_w = int(logo.width * scale)
-    logo_resized = logo.resize((logo_w, target_h), Image.Resampling.LANCZOS)
-    canvas.paste(logo_resized, (left_margin, 80), logo_resized)
+    logo_h = int(logo.height * scale)
+    logo_resized = logo.resize((logo_w, logo_h), Image.Resampling.LANCZOS)
+    canvas.paste(logo_resized, (58, 72), logo_resized)
 
     # 4. Headline Typography (Georgia Bold @ 92px, line_height 126px)
     h_font = resolve_font("display", 92)
@@ -202,13 +204,13 @@ def compose_benchmark(
     )
 
     # 5. Horizontal Magenta Rule Divider
-    # Gap from last headline baseline: divider is 116px wide, 5px high
-    divider_y = y_after_head - 126 + 112
+    # Gap from last headline line: divider is 116px wide, 5px high
+    divider_y = y_after_head - 126 + 106
     draw.rectangle([left_margin, divider_y, left_margin + 116, divider_y + 5], fill=MAGENTA_ACCENT)
 
     # 6. Supporting Text (Arial Bold @ 40px, line_height 56px)
     s_font = resolve_font("body_bold", 40)
-    subhead_start_y = divider_y + 46
+    subhead_start_y = divider_y + 42
     draw_subhead_benchmark(
         draw=draw,
         subhead_lines=subhead_lines,

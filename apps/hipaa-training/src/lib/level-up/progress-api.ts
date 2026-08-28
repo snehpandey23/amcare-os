@@ -1,6 +1,7 @@
 import { getTrainingApiUrl, isPortalAuthEnabled } from "@/lib/trainingConfig";
 import { getStoredToken } from "@/lib/authStorage";
 import type { DailyCompletion, LevelUpProgress } from "@/lib/level-up/progress";
+import { DAY_LEDGER_MAX_ENTRIES } from "@/lib/level-up/progress";
 
 const REMOTE_DEBOUNCE_MS = 800;
 
@@ -57,7 +58,7 @@ export function scheduleLevelUpRemoteSave(state: LevelUpProgress): void {
   }, REMOTE_DEBOUNCE_MS);
 }
 
-/** Prefer higher XP; union same-day completions so a mark is not lost after sync. */
+/** Prefer higher XP; union same-day completions + day ledger by id so history is not lost after sync. */
 export function mergeLevelUpProgress(local: LevelUpProgress, remote: LevelUpProgress | null): LevelUpProgress {
   if (!remote) return local;
   const today = new Date().toISOString().slice(0, 10);
@@ -75,5 +76,10 @@ export function mergeLevelUpProgress(local: LevelUpProgress, remote: LevelUpProg
   for (const k of Object.keys(lifetimeDrills) as DailyCompletion[]) {
     lifetimeDrills[k] = Math.max(local.lifetimeDrills?.[k] ?? 0, remote.lifetimeDrills?.[k] ?? 0);
   }
-  return { streak, lastActiveDate, completedToday, totalXp, lifetimeDrills };
+  const byId = new Map<string, NonNullable<LevelUpProgress["dayLedger"]>[number]>();
+  for (const e of [...(remote.dayLedger ?? []), ...(local.dayLedger ?? [])]) {
+    byId.set(e.id, e);
+  }
+  const dayLedger = [...byId.values()].sort((a, b) => a.at - b.at).slice(-DAY_LEDGER_MAX_ENTRIES);
+  return { streak, lastActiveDate, completedToday, totalXp, lifetimeDrills, dayLedger };
 }

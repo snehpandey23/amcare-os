@@ -254,6 +254,7 @@ export function SiyaChat({
             focusMode,
             threadId: resolvedThreadId,
             surface: founderCoach ? "founder-coach" : "default",
+            assistantLabel: profile.assistantName?.trim() || undefined,
           }),
         });
         const data = await res.json();
@@ -730,7 +731,13 @@ export function SiyaChat({
               }
               autoFocus={homeVariant}
             />
-            <VoiceInputButton value={input} onChange={setInput} disabled={loading} size="md" />
+            <VoiceInputButton
+              value={input}
+              onChange={setInput}
+              disabled={loading || threadLoading}
+              size="md"
+              onAutoSend={(text) => void send(text)}
+            />
             <button
               type="submit"
               disabled={loading || !input.trim()}

@@ -19,6 +19,23 @@ async function taskFetch(path: string, init?: RequestInit) {
   return data;
 }
 
+/** Same-origin BFF — proxies auth API and sends Resend assignment emails. */
+async function staffPortalTaskFetch(path: string, init?: RequestInit) {
+  const token = getStoredToken();
+  if (!token) throw new Error("Sign in required.");
+  const res = await fetch(path, {
+    ...init,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+      ...init?.headers,
+    },
+  });
+  const data = (await res.json().catch(() => ({}))) as { error?: string };
+  if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+  return data;
+}
+
 export async function fetchMyTasks(date = "today"): Promise<MyTasksResponse> {
   return (await taskFetch(`/api/tasks/me?date=${encodeURIComponent(date)}`)) as MyTasksResponse;
 }
@@ -44,6 +61,14 @@ export async function patchTask(
     priority?: string;
   },
 ): Promise<TaskRecord> {
+  // Reassign goes through BFF so Resend can notify the new assignee.
+  if (patch.assigneeId) {
+    const data = (await staffPortalTaskFetch(`/api/tasks/${encodeURIComponent(id)}`, {
+      method: "PATCH",
+      body: JSON.stringify(patch),
+    })) as { task: TaskRecord };
+    return data.task;
+  }
   const data = (await taskFetch(`/api/tasks/${id}`, { method: "PATCH", body: JSON.stringify(patch) })) as {
     task: TaskRecord;
   };
@@ -71,9 +96,10 @@ export async function createAdhocTask(payload: {
   dueTime?: string;
   checklistItems?: { id: string; label: string; isChecked: boolean; checkedAt: string | null }[];
 }): Promise<TaskRecord> {
-  const data = (await taskFetch("/api/tasks", { method: "POST", body: JSON.stringify(payload) })) as {
-    task: TaskRecord;
-  };
+  const data = (await staffPortalTaskFetch("/api/tasks", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  })) as { task: TaskRecord };
   return data.task;
 }
 

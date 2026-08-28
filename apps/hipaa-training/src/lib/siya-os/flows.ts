@@ -165,7 +165,7 @@ const FLOWS: {
       "Phone, portal chat, or in-visit?",
       "Any safety threat (harm to self/others/staff)?",
     ],
-    retrievalBoost: ["escalation", "supervisor", "clinical", "angry", "hostile", "billing"],
+    retrievalBoost: ["verbally abusive", "abusive patient", "hostile", "verbal abuse", "de-escalation"],
   },
   {
     id: "hr-workplace",
@@ -183,6 +183,19 @@ const FLOWS: {
       /(coworker|colleague|teammate|manager|supervisor).*(rude|mean|unfair)/i,
       /(rude|mean|unfair).*(coworker|colleague|teammate|manager|staff)/i,
       /complain(t|ing)? about (staff|a coworker|my manager)/i,
+      // Staff-side abuse / exploitation (not patient hostility)
+      /\b(exploit|exploited|exploitation)\b/i,
+      /\bmental\s+harass/i,
+      /\b(abuse|abused|abusive)\b(?![\s\S]{0,40}\bpatient\b)/i,
+      /\b(seniors?|manager|supervisor|boss).{0,40}\b(abuse|harass|exploit|mistreat)/i,
+      /\b(abuse|harass|exploit|mistreat).{0,40}\b(seniors?|manager|supervisor|boss|job)\b/i,
+      /\bconfidential\b.{0,40}\b(this|chat|ask|conversation|reading)\b/i,
+      /\b(who|somebody|someone).{0,24}(reading|watching|see[s]?)\s+(this|my\s+chat)\b/i,
+      /\bmake\s+this\s+confidential\b/i,
+      /\bsexual\s+(abuse|harass|harassment|misconduct)\b/i,
+      /\b(posh|quid\s+pro\s+quo)\b/i,
+      /\b(policy|policies).{0,40}\b(sexual|harass|workplace\s+abuse)\b/i,
+      /\b(sexual|harass|workplace\s+abuse).{0,40}\b(policy|policies)\b/i,
     ],
     followUpQuestions: [
       "Is this about a teammate, a manager, or something else?",
@@ -230,9 +243,14 @@ const SHORT_QUERY_EXPAND: Record<string, string> = {
 };
 
 export function expandShortQuery(message: string): string {
-  const t = message.trim().toLowerCase();
+  let raw = message.trim();
+  // Dictation: "WordPress" for "workplace" when asking about abuse/harassment policies
+  if (/\b(sexual|abuse|harass|mistreat|exploit)\b/i.test(raw) && /\bwordpress\b/i.test(raw)) {
+    raw = raw.replace(/\bwordpress\b/gi, "workplace");
+  }
+  const t = raw.toLowerCase();
   if (SHORT_QUERY_EXPAND[t]) return SHORT_QUERY_EXPAND[t];
-  return message.trim();
+  return raw;
 }
 
 export function hasRoutableIntent(message: string): boolean {
@@ -282,6 +300,11 @@ export function routeIntent(message: string): RouteResult {
     followUpQuestions: [],
     // Do not attach a weak near-miss flowId — that poisons retrieval boosts.
   };
+}
+
+/** True when Ask should take the HR workplace-concern path (not My day / plan_day). */
+export function isStaffWorkplaceConcernQuery(text: string): boolean {
+  return routeIntent(text).flowId === "hr-workplace";
 }
 
 export function retrievalQueryBoost(message: string, route: RouteResult): string {

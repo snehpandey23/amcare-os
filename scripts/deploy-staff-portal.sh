@@ -7,13 +7,16 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
-echo "==> Auth API (siya-staff-auth-api)"
+# Explicit scope — default team id in CLI config can 401 without this.
+SCOPE="${VERCEL_SCOPE:-snehpandey23s-projects}"
+
+echo "==> Auth API (siya-staff-auth-api) scope=$SCOPE"
 cd integrations/hipaa-training-api
-npx vercel deploy --prod --yes
+npx vercel deploy --prod --yes --scope "$SCOPE"
 cd "$ROOT"
 
-echo "==> Staff app (siya-staff-assist)"
-npx vercel deploy --prod --yes --project siya-staff-assist --local-config vercel.siya-staff-assist.json
+echo "==> Staff app (siya-staff-assist) scope=$SCOPE"
+npx vercel deploy --prod --yes --project siya-staff-assist --local-config vercel.siya-staff-assist.json --scope "$SCOPE"
 
 echo "==> Smoke"
 curl -sfS https://siya-staff-auth-api.vercel.app/api/health | head -c 200
