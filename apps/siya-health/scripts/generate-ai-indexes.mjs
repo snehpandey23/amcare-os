@@ -168,7 +168,6 @@ function writeLlmsTxt(pages) {
     `- Dr. Natasha Desai, MD — Behavioral / ADHD (TX, FL): ${BASE}/providers/dr-natasha-desai`,
     `- Dr. Swati Pandey, MD — ADHD evaluation (PA): ${BASE}/providers/dr-swati-pandey`,
     `- Megan Wunderlich, FNP-C — ADHD & mental health (PA): ${BASE}/providers/megan-wunderlich`,
-    `- Derek Timbs, FNP-BC — Weight loss & men's health (TX): ${BASE}/providers/derek-timbs`,
     `- Wendy Delgado, PA-C — Medical weight loss (CA): ${BASE}/providers/wendy-delgado`,
     '',
     `- Machine-readable indexes`,

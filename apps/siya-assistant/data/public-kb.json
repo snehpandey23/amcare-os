@@ -2,7 +2,7 @@
   "version": 1,
   "source": "siya-health public indexes (llms-full + curated public facts)",
   "generated": "2026-09-01",
-  "chunkCount": 190,
+  "chunkCount": 189,
   "chunks": [
     {
       "id": "fact_states",
@@ -6502,38 +6502,6 @@
         "texas",
         "pennsylvania",
         "florida"
-      ]
-    },
-    {
-      "id": "providers_derek-timbs",
-      "title": "Derek Timbs, FNP-BC | Medical Weight Loss & Men's Health",
-      "url": "https://www.siya.health/providers/derek-timbs",
-      "path": "/providers/derek-timbs",
-      "summary": "Meet Derek Timbs, FNP-BC at Siya Health. GLP-1 weight loss and men's metabolic telehealth in Texas.",
-      "topics": [
-        "weight-loss"
-      ],
-      "keywords": [
-        "derek",
-        "timbs",
-        "fnp",
-        "bc",
-        "medical",
-        "weight",
-        "loss",
-        "men",
-        "s",
-        "health",
-        "meet",
-        "at",
-        "siya",
-        "glp",
-        "1",
-        "and",
-        "metabolic",
-        "telehealth",
-        "in",
-        "texas"
       ]
     },
     {

@@ -1,7 +1,7 @@
 {
-  "generated": "2026-09-01T12:23:38.325Z",
+  "generated": "2026-09-01T12:50:06.776Z",
   "hubUrl": "https://siya.health/providers",
-  "count": 7,
+  "count": 6,
   "providers": [
     {
       "name": "Dr. Sneh Pandey, MD",
@@ -143,34 +143,6 @@
         "Chronic disease"
       ],
       "npi": "1629930532",
-      "relatedContent": []
-    },
-    {
-      "name": "Derek Timbs, FNP-BC",
-      "slug": "derek-timbs",
-      "url": "https://siya.health/providers/derek-timbs",
-      "jobTitle": "Family Nurse Practitioner",
-      "providerType": "advanced-practice",
-      "medicalSpecialty": [
-        "Obesity Medicine",
-        "Family Medicine",
-        "Men's Health"
-      ],
-      "statesLicensed": [
-        "Texas",
-        "Ohio"
-      ],
-      "serviceStates": [
-        "Texas"
-      ],
-      "conditionsTreated": [
-        "Medical weight loss",
-        "Obesity",
-        "Metabolic health",
-        "Men's health",
-        "GLP-1 therapy"
-      ],
-      "npi": "1609886910",
       "relatedContent": []
     },
     {

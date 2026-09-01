@@ -9,13 +9,13 @@ export const REVIEW_STATUS = {
 
 /** Primary reviewer ownership by topic cluster (Wave 1+ routing). */
 export const REVIEWER_OWNERSHIP = {
-  metabolic: { primary: 'derek-timbs', secondary: 'dr-sneh-pandey', support: 'wendy-delgado' },
+  metabolic: { primary: 'dr-sneh-pandey', secondary: 'wendy-delgado', support: 'dr-vanessa-urbina' },
   adhdEval: { primary: 'dr-sneh-pandey', secondary: 'dr-natasha-desai' },
   adhdMedication: { primary: 'dr-swati-pandey', secondary: 'dr-sneh-pandey' },
   adhdBehavioral: { primary: 'dr-natasha-desai', secondary: 'megan-wunderlich' },
   telehealthTrust: { primary: 'dr-sneh-pandey', secondary: 'megan-wunderlich' },
   primaryCare: { primary: 'dr-vanessa-urbina', secondary: 'dr-sneh-pandey' },
-  mensHealth: { primary: 'derek-timbs', secondary: 'dr-sneh-pandey' },
+  mensHealth: { primary: 'dr-sneh-pandey', secondary: 'dr-vanessa-urbina' },
 };
 
 /**

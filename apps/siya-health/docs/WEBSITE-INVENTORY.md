@@ -5,15 +5,15 @@ Generated: 2026-09-01
 | Metric | Count |
 |--------|------:|
 | HTML files | 222 |
-| Indexable pages | 182 |
-| Non-indexable | 40 |
+| Indexable pages | 181 |
+| Non-indexable | 41 |
 
 ## Group summary
 
 | Group | Pages |
 |-------|------:|
 | Core Revenue Pages | 12 |
-| Trust Pages | 15 |
+| Trust Pages | 14 |
 | Educational Pages | 128 |
 | SEO Pages | 14 |
 | Utility Pages | 34 |
@@ -58,6 +58,7 @@ Generated: 2026-09-01
 - `/join-our-team`
 - `/online-adhd-test`
 - `/privacy-policy`
+- `/providers/derek-timbs`
 - `/redirect/adhd-evaluation`
 - `/redirect/adhd-walkthrough`
 - `/redirect/chat`
@@ -70,40 +71,39 @@ Generated: 2026-09-01
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/](https://siya.health/) | Homepage | Brand entry; route patients to core services and booking | Book Free Meet & Greet → /redirect/me… | How can we help? → #care-journeys | Navigational / Commercial | Something feels off—and you want clearer answers. | 1080 | 196 | 41 |
-| [/adhd-care](https://siya.health/adhd-care) | Service Page | Convert ADHD evaluation and treatment interest to booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Struggling to focus—even when you care? | 1475 | 197 | 49 |
+| [/](https://siya.health/) | Homepage | Brand entry; route patients to core services and booking | Book Free Meet & Greet → /redirect/me… | How can we help? → #care-journeys | Navigational / Commercial | Something feels off—and you want clearer answers. | 1081 | 195 | 41 |
+| [/adhd-care](https://siya.health/adhd-care) | Service Page | Convert ADHD evaluation and treatment interest to booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Struggling to focus—even when you care? | 1482 | 196 | 49 |
 | [/adhd-diagnosis-texas](https://siya.health/adhd-diagnosis-texas) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Local SEO / Commercial | Online ADHD Diagnosis in Texas | 439 | 5 | 38 |
-| [/adhd-screening](https://siya.health/adhd-screening) | Service Page | Top-of-funnel ADHD screening; lead to evaluation | Continue to next steps → /adhd-screen… | — | Commercial / Transactional | What are you looking for help with? | 446 | 194 | 38 |
-| [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Choose How You Want to Get Started | 203 | 192 | 34 |
+| [/adhd-screening](https://siya.health/adhd-screening) | Service Page | Top-of-funnel ADHD screening; lead to evaluation | Continue to next steps → /adhd-screen… | — | Commercial / Transactional | What are you looking for help with? | 446 | 193 | 38 |
+| [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Choose How You Want to Get Started | 203 | 191 | 34 |
 | [/creyos-adhd-testing](https://siya.health/creyos-adhd-testing) | Service Page | Creyos cognitive testing for ADHD as part of your $149 on… | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Creyos ADHD Testing (Included in Your Evaluation) | 405 | 5 | 37 |
-| [/labs](https://siya.health/labs) | Service Page | Explore transparent direct-pay laboratory testing for thy… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Labs & Blood Tests with Transparent Direct-Pay … | 1810 | 192 | 47 |
-| [/mens-health-longevity](https://siya.health/mens-health-longevity) | Service Page | Men's health / TRT / longevity service conversion | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Commercial / Transactional | When energy, drive, and focus don't feel like t… | 656 | 192 | 43 |
-| [/prescriptions](https://siya.health/prescriptions) | Service Page | Provider-reviewed prescriptions through Siya Health teleh… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Online Prescription Services | 137 | 192 | 33 |
-| [/primary-urgent-care](https://siya.health/primary-urgent-care) | Service Page | Virtual primary and urgent care across California, Texas,… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Primary & Urgent Care — Virtual, Same-Week | 456 | 192 | 43 |
-| [/telehealth](https://siya.health/telehealth) | Service Page | Explain virtual care model; route to services | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Commercial / Transactional | Need a doctor without rearranging your entire day? | 989 | 192 | 46 |
-| [/weight-loss-metabolic-health](https://siya.health/weight-loss-metabolic-health) | Service Page | Convert GLP-1 / medical weight loss interest to consult | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Commercial / Transactional | When your appetite, energy, and weight stop mak… | 1151 | 192 | 45 |
+| [/labs](https://siya.health/labs) | Service Page | Explore transparent direct-pay laboratory testing for thy… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Labs & Blood Tests with Transparent Direct-Pay … | 1810 | 191 | 47 |
+| [/mens-health-longevity](https://siya.health/mens-health-longevity) | Service Page | Men's health / TRT / longevity service conversion | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Commercial / Transactional | When energy, drive, and focus don't feel like t… | 648 | 191 | 42 |
+| [/prescriptions](https://siya.health/prescriptions) | Service Page | Provider-reviewed prescriptions through Siya Health teleh… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Online Prescription Services | 137 | 191 | 33 |
+| [/primary-urgent-care](https://siya.health/primary-urgent-care) | Service Page | Virtual primary and urgent care across California, Texas,… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Primary & Urgent Care — Virtual, Same-Week | 456 | 191 | 43 |
+| [/telehealth](https://siya.health/telehealth) | Service Page | Explain virtual care model; route to services | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Commercial / Transactional | Need a doctor without rearranging your entire day? | 980 | 191 | 45 |
+| [/weight-loss-metabolic-health](https://siya.health/weight-loss-metabolic-health) | Service Page | Convert GLP-1 / medical weight loss interest to consult | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Commercial / Transactional | When your appetite, energy, and weight stop mak… | 1142 | 191 | 44 |
 
 ---
 
-## Trust Pages (15)
+## Trust Pages (14)
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/about](https://siya.health/about) | About | Build trust; explain mission and care team | Book Free Meet & Greet → /redirect/me… | Explore Care Options → /telehealth | Trust / Navigational | Care for adults who are done guessing about the… | 876 | 192 | 40 |
-| [/legal](https://siya.health/legal) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Legal & Compliance | 148 | 192 | 34 |
+| [/about](https://siya.health/about) | About | Build trust; explain mission and care team | Book Free Meet & Greet → /redirect/me… | Explore Care Options → /telehealth | Trust / Navigational | Care for adults who are done guessing about the… | 859 | 191 | 39 |
+| [/legal](https://siya.health/legal) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Legal & Compliance | 148 | 191 | 34 |
 | [/legal/controlled-substance-treatment-agreement](https://siya.health/legal/controlled-substance-treatment-agreement) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Controlled Substance Treatment Agreement | 829 | 84 | 33 |
-| [/legal/cookie-policy](https://siya.health/legal/cookie-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Cookie Policy | 475 | 194 | 33 |
-| [/legal/notice-of-privacy-practices](https://siya.health/legal/notice-of-privacy-practices) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Notice of Privacy Practices | 1547 | 194 | 33 |
-| [/legal/privacy-policy](https://siya.health/legal/privacy-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Privacy Policy | 2874 | 194 | 33 |
-| [/legal/terms-of-use](https://siya.health/legal/terms-of-use) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Terms of Use | 4490 | 194 | 33 |
-| [/providers](https://siya.health/providers) | Provider Hub | Show clinician roster; drive profile views and booking | Book Free Meet & Greet → /redirect/me… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Our Care Team | 474 | 194 | 40 |
-| [/providers/derek-timbs](https://siya.health/providers/derek-timbs) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Derek Timbs, FNP-BC | 614 | 8 | 38 |
-| [/providers/dr-natasha-desai](https://siya.health/providers/dr-natasha-desai) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Natasha Desai, MD | 723 | 19 | 40 |
-| [/providers/dr-sneh-pandey](https://siya.health/providers/dr-sneh-pandey) | Provider Profile | Clinician credibility; convert to booking with this provider | Book Free Meet & Greet → /redirect/me… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Sneh Pandey, MD | 869 | 24 | 38 |
-| [/providers/dr-swati-pandey](https://siya.health/providers/dr-swati-pandey) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Swati Pandey, MD | 722 | 10 | 40 |
-| [/providers/dr-vanessa-urbina](https://siya.health/providers/dr-vanessa-urbina) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Vanessa Urbina, MD | 662 | 16 | 37 |
+| [/legal/cookie-policy](https://siya.health/legal/cookie-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Cookie Policy | 475 | 193 | 33 |
+| [/legal/notice-of-privacy-practices](https://siya.health/legal/notice-of-privacy-practices) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Notice of Privacy Practices | 1547 | 193 | 33 |
+| [/legal/privacy-policy](https://siya.health/legal/privacy-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Privacy Policy | 2874 | 193 | 33 |
+| [/legal/terms-of-use](https://siya.health/legal/terms-of-use) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Terms of Use | 4490 | 193 | 33 |
+| [/providers](https://siya.health/providers) | Provider Hub | Show clinician roster; drive profile views and booking | Book Free Meet & Greet → /redirect/me… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Our Care Team | 425 | 194 | 39 |
+| [/providers/dr-natasha-desai](https://siya.health/providers/dr-natasha-desai) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Natasha Desai, MD | 723 | 21 | 40 |
+| [/providers/dr-sneh-pandey](https://siya.health/providers/dr-sneh-pandey) | Provider Profile | Clinician credibility; convert to booking with this provider | Book Free Meet & Greet → /redirect/me… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Sneh Pandey, MD | 870 | 23 | 38 |
+| [/providers/dr-swati-pandey](https://siya.health/providers/dr-swati-pandey) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Swati Pandey, MD | 722 | 11 | 40 |
+| [/providers/dr-vanessa-urbina](https://siya.health/providers/dr-vanessa-urbina) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Vanessa Urbina, MD | 663 | 15 | 37 |
 | [/providers/megan-wunderlich](https://siya.health/providers/megan-wunderlich) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Megan Wunderlich, FNP-C | 612 | 8 | 38 |
-| [/providers/wendy-delgado](https://siya.health/providers/wendy-delgado) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Wendy Delgado, PA-C | 601 | 20 | 38 |
+| [/providers/wendy-delgado](https://siya.health/providers/wendy-delgado) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Wendy Delgado, PA-C | 602 | 19 | 38 |
 
 ---
 
@@ -111,7 +111,7 @@ Generated: 2026-09-01
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/answers](https://siya.health/answers) | Health Guide Hub | FAQ/PAA discovery hub for AI and organic search | Join Our Health Guide → /siya-circle#… | View all Metabolic Health guides → #g… | Informational / Navigational | Health Guides | 1005 | 192 | 69 |
+| [/answers](https://siya.health/answers) | Health Guide Hub | FAQ/PAA discovery hub for AI and organic search | Join Our Health Guide → /siya-circle#… | View all Metabolic Health guides → #g… | Informational / Navigational | Health Guides | 1005 | 191 | 69 |
 | [/answers/adderall-vs-vyvanse-adults](https://siya.health/answers/adderall-vs-vyvanse-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | When might Vyvanse be preferred over Adderall f… | 569 | 2 | 37 |
 | [/answers/adhd-and-weight-loss-connection](https://siya.health/answers/adhd-and-weight-loss-connection) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Is there a connection between ADHD and weight l… | 529 | 5 | 37 |
 | [/answers/adhd-in-women](https://siya.health/answers/adhd-in-women) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | How does ADHD present differently in women? | 582 | 7 | 38 |
@@ -141,7 +141,7 @@ Generated: 2026-09-01
 | [/answers/how-online-prescriptions-work](https://siya.health/answers/how-online-prescriptions-work) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | — | Informational | How do online prescriptions work legally? | 786 | 6 | 37 |
 | [/answers/insulin-resistance-without-diabetes](https://siya.health/answers/insulin-resistance-without-diabetes) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Can you have insulin resistance without diabetes? | 868 | 3 | 37 |
 | [/answers/is-adhd-medication-safe-long-term](https://siya.health/answers/is-adhd-medication-safe-long-term) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What does long-term ADHD medication safety moni… | 564 | 6 | 38 |
-| [/answers/is-online-adhd-diagnosis-legitimate](https://siya.health/answers/is-online-adhd-diagnosis-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What should you look for in a legitimate online… | 889 | 192 | 38 |
+| [/answers/is-online-adhd-diagnosis-legitimate](https://siya.health/answers/is-online-adhd-diagnosis-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What should you look for in a legitimate online… | 889 | 191 | 38 |
 | [/answers/is-telehealth-legitimate](https://siya.health/answers/is-telehealth-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | — | Informational | Is telehealth legitimate for medical care? | 787 | 8 | 37 |
 | [/answers/late-adhd-diagnosis-adults](https://siya.health/answers/late-adhd-diagnosis-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Why are so many adults diagnosed with ADHD late… | 567 | 12 | 38 |
 | [/answers/medical-weight-loss-vs-dieting](https://siya.health/answers/medical-weight-loss-vs-dieting) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | When does medical weight loss outperform dietin… | 553 | 6 | 37 |
@@ -152,7 +152,7 @@ Generated: 2026-09-01
 | [/answers/rejection-sensitivity-adhd](https://siya.health/answers/rejection-sensitivity-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What is rejection sensitive dysphoria (RSD) and… | 550 | 3 | 38 |
 | [/answers/screening-vs-adhd-evaluation](https://siya.health/answers/screening-vs-adhd-evaluation) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What is the difference between ADHD screening a… | 551 | 13 | 38 |
 | [/answers/semaglutide-weight-loss-how-it-works](https://siya.health/answers/semaglutide-weight-loss-how-it-works) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | How quickly does semaglutide start working for … | 1016 | 6 | 38 |
-| [/answers/signs-of-adult-adhd](https://siya.health/answers/signs-of-adult-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What are the signs of adult ADHD? | 916 | 192 | 38 |
+| [/answers/signs-of-adult-adhd](https://siya.health/answers/signs-of-adult-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What are the signs of adult ADHD? | 916 | 191 | 38 |
 | [/answers/signs-of-sleep-apnea-in-adults](https://siya.health/answers/signs-of-sleep-apnea-in-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | — | Informational | What are the signs of sleep apnea in adults? | 650 | 6 | 38 |
 | [/answers/starting-adhd-medication-adults](https://siya.health/answers/starting-adhd-medication-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What should adults expect when starting ADHD me… | 924 | 27 | 38 |
 | [/answers/telehealth-adhd-california](https://siya.health/answers/telehealth-adhd-california) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | How does ADHD telehealth work in California? | 534 | 7 | 38 |
@@ -166,16 +166,16 @@ Generated: 2026-09-01
 | [/answers/what-included-199-adhd-evaluation](https://siya.health/answers/what-included-199-adhd-evaluation) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What is included in a Siya Health ADHD evaluation? | 552 | 10 | 38 |
 | [/answers/what-is-food-noise](https://siya.health/answers/what-is-food-noise) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | What is food noise? | 926 | 22 | 36 |
 | [/answers/what-is-free-testosterone](https://siya.health/answers/what-is-free-testosterone) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | What is free testosterone? | 854 | 13 | 38 |
-| [/answers/what-is-insulin-resistance](https://siya.health/answers/what-is-insulin-resistance) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | What is insulin resistance? | 1039 | 192 | 38 |
+| [/answers/what-is-insulin-resistance](https://siya.health/answers/what-is-insulin-resistance) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | What is insulin resistance? | 1039 | 191 | 38 |
 | [/answers/what-to-do-after-lab-results](https://siya.health/answers/what-to-do-after-lab-results) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Labs → → /labs | — | Informational | What to do after you get lab results | 1158 | 3 | 39 |
 | [/answers/when-is-testosterone-therapy-appropriate](https://siya.health/answers/when-is-testosterone-therapy-appropriate) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | What symptoms warrant testosterone therapy eval… | 880 | 10 | 38 |
 | [/answers/which-preventive-blood-tests-adults](https://siya.health/answers/which-preventive-blood-tests-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Which preventive blood tests do adults usually … | 1276 | 5 | 39 |
-| [/answers/who-qualifies-glp-1-weight-loss](https://siya.health/answers/who-qualifies-glp-1-weight-loss) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Who qualifies for GLP-1 weight loss medications? | 549 | 4 | 38 |
-| [/answers/why-am-i-tired-even-after-sleeping](https://siya.health/answers/why-am-i-tired-even-after-sleeping) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | — | Informational | Why am I tired even after sleeping? | 724 | 192 | 42 |
+| [/answers/who-qualifies-glp-1-weight-loss](https://siya.health/answers/who-qualifies-glp-1-weight-loss) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Who qualifies for GLP-1 weight loss medications? | 549 | 3 | 38 |
+| [/answers/why-am-i-tired-even-after-sleeping](https://siya.health/answers/why-am-i-tired-even-after-sleeping) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | — | Informational | Why am I tired even after sleeping? | 724 | 191 | 42 |
 | [/answers/why-normal-labs-dont-mean-healthy](https://siya.health/answers/why-normal-labs-dont-mean-healthy) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Why don't normal labs mean you're healthy? | 1362 | 8 | 37 |
-| [/blog](https://siya.health/blog) | Blog Hub | Content discovery; distribute authority to articles | Join our newsletter → https://link.yo… | Read health guides → /answers | Informational / Navigational | Health Insights — Evidence-Based, Clinical | 872 | 192 | 54 |
+| [/blog](https://siya.health/blog) | Blog Hub | Content discovery; distribute authority to articles | Join our newsletter → https://link.yo… | Read health guides → /answers | Informational / Navigational | Health Insights — Evidence-Based, Clinical | 872 | 191 | 54 |
 | [/blog/adderall-for-adhd-how-it-works](https://siya.health/blog/adderall-for-adhd-how-it-works) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | Adderall for ADHD: How It Works (2026 Clinical … | 1676 | 6 | 39 |
-| [/blog/adhd](https://siya.health/blog/adhd) | Blog Hub | Content discovery; distribute authority to articles | Book Free Meet & Greet → → /adhd-care | — | Informational / Navigational | ADHD articles | 753 | 192 | 63 |
+| [/blog/adhd](https://siya.health/blog/adhd) | Blog Hub | Content discovery; distribute authority to articles | Book Free Meet & Greet → → /adhd-care | — | Informational / Navigational | ADHD articles | 753 | 191 | 63 |
 | [/blog/adhd-and-binge-eating](https://siya.health/blog/adhd-and-binge-eating) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD and Binge Eating: Why the Link Matters (an… | 2112 | 7 | 52 |
 | [/blog/adhd-brain-imaging-subtypes](https://siya.health/blog/adhd-brain-imaging-subtypes) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | Not All ADHD Is the Same: What New Brain Imagin… | 3482 | 3 | 43 |
 | [/blog/adhd-evaluation-california-online-vs-in-person](https://siya.health/blog/adhd-evaluation-california-online-vs-in-person) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD Evaluation in California: Online vs In-Per… | 566 | 9 | 43 |
@@ -204,11 +204,11 @@ Generated: 2026-09-01
 | [/blog/fatigue-despite-normal-labs](https://siya.health/blog/fatigue-despite-normal-labs) | Blog Article | Educational SEO; nurture toward clinical services | Book a primary care visit → /book-app… | Start Secure Medical Chat → /redirect… | Informational | Fatigue Despite Normal Blood Tests | 336 | 8 | 41 |
 | [/blog/food-noise-and-glp-1-what-it-means-and-what-helps](https://siya.health/blog/food-noise-and-glp-1-what-it-means-and-what-helps) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Explore Care Options → /weight-loss-m… | Informational | Food Noise and GLP-1: What It Means and What Ac… | 3342 | 17 | 44 |
 | [/blog/free-testosterone-vs-total-testosterone-what-patients-should-know](https://siya.health/blog/free-testosterone-vs-total-testosterone-what-patients-should-know) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Explore Care Options → /mens-health-l… | Informational | Free Testosterone vs Total Testosterone: What P… | 2550 | 13 | 46 |
-| [/blog/glp1-side-effects-and-how-to-manage-them](https://siya.health/blog/glp1-side-effects-and-how-to-manage-them) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Informational | GLP-1 Side Effects and How to Manage Them (2026) | 872 | 5 | 42 |
+| [/blog/glp1-side-effects-and-how-to-manage-them](https://siya.health/blog/glp1-side-effects-and-how-to-manage-them) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Informational | GLP-1 Side Effects and How to Manage Them (2026) | 872 | 4 | 42 |
 | [/blog/how-adhd-medication-is-prescribed-online](https://siya.health/blog/how-adhd-medication-is-prescribed-online) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | How ADHD Medication Is Prescribed Online (2026) | 648 | 8 | 39 |
 | [/blog/how-mental-health-affects-weight-loss-outcomes](https://siya.health/blog/how-mental-health-affects-weight-loss-outcomes) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Informational | How Mental Health Affects Weight Loss Outcomes … | 784 | 8 | 40 |
 | [/blog/how-to-choose-adhd-provider-california](https://siya.health/blog/how-to-choose-adhd-provider-california) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | How to Choose an ADHD Provider in California | 623 | 10 | 45 |
-| [/blog/how-to-know-if-you-have-adhd-adult](https://siya.health/blog/how-to-know-if-you-have-adhd-adult) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | How to Know If You Have ADHD as an Adult (Real … | 802 | 192 | 42 |
+| [/blog/how-to-know-if-you-have-adhd-adult](https://siya.health/blog/how-to-know-if-you-have-adhd-adult) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | How to Know If You Have ADHD as an Adult (Real … | 802 | 191 | 42 |
 | [/blog/how-to-safely-get-prescriptions-online](https://siya.health/blog/how-to-safely-get-prescriptions-online) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Join Our Health Guide → https://link.… | Informational | How to Safely Get Prescriptions Online (2026) | 1657 | 10 | 42 |
 | [/blog/insomnia-treatment-options-beyond-medication](https://siya.health/blog/insomnia-treatment-options-beyond-medication) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Informational | Insomnia Treatment Beyond Medication (2026) | 555 | 2 | 41 |
 | [/blog/insulin-resistance-and-weight-loss-clinician-overview](https://siya.health/blog/insulin-resistance-and-weight-loss-clinician-overview) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Explore Care Options → /weight-loss-m… | Informational | Insulin Resistance and Weight Loss: A Clinician… | 2878 | 19 | 45 |
@@ -231,12 +231,12 @@ Generated: 2026-09-01
 | [/blog/semaglutide-for-weight-loss-how-it-works](https://siya.health/blog/semaglutide-for-weight-loss-how-it-works) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Informational | Semaglutide for Weight Loss: How It Works (2026… | 2276 | 8 | 41 |
 | [/blog/sildenafil-for-erectile-dysfunction-what-to-expect](https://siya.health/blog/sildenafil-for-erectile-dysfunction-what-to-expect) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Informational | Sildenafil for Erectile Dysfunction: What to Ex… | 611 | 4 | 39 |
 | [/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign](https://siya.health/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Explore metabolic health → /weight-lo… | Informational | Sleep Apnea, Fatigue, and Metabolic Risk: When … | 2365 | 7 | 43 |
-| [/blog/telehealth](https://siya.health/blog/telehealth) | Blog Hub | Content discovery; distribute authority to articles | — | — | Informational / Navigational | Telehealth articles | 216 | 192 | 43 |
+| [/blog/telehealth](https://siya.health/blog/telehealth) | Blog Hub | Content discovery; distribute authority to articles | — | — | Informational / Navigational | Telehealth articles | 216 | 191 | 43 |
 | [/blog/telehealth-prescriptions-how-online-treatment-works](https://siya.health/blog/telehealth-prescriptions-how-online-treatment-works) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Explore Care Options → /telehealth | Informational | Telehealth Prescriptions: How Online Treatment … | 551 | 5 | 40 |
 | [/blog/thyroid-and-fatigue](https://siya.health/blog/thyroid-and-fatigue) | Blog Article | Educational SEO; nurture toward clinical services | Book a primary care visit → /book-app… | Start Secure Medical Chat → /redirect… | Informational | Thyroid Problems and Fatigue | 305 | 1 | 41 |
 | [/blog/tirzepatide-vs-semaglutide-which-is-better](https://siya.health/blog/tirzepatide-vs-semaglutide-which-is-better) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Informational | Tirzepatide vs Semaglutide: Which Is Better for… | 1190 | 4 | 41 |
 | [/blog/vyvanse-vs-adderall-differences](https://siya.health/blog/vyvanse-vs-adderall-differences) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Take Free ADHD Screening → /adhd-scre… | Informational | Vyvanse vs Adderall: Which Lasts Longer for Adu… | 799 | 6 | 40 |
-| [/blog/weight-loss](https://siya.health/blog/weight-loss) | Blog Hub | Content discovery; distribute authority to articles | — | — | Informational / Navigational | Weight loss articles | 289 | 192 | 46 |
+| [/blog/weight-loss](https://siya.health/blog/weight-loss) | Blog Hub | Content discovery; distribute authority to articles | — | — | Informational / Navigational | Weight loss articles | 289 | 191 | 46 |
 | [/blog/when-is-testosterone-therapy-appropriate](https://siya.health/blog/when-is-testosterone-therapy-appropriate) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Informational | When Is Testosterone Therapy Appropriate? (2026) | 599 | 6 | 42 |
 | [/blog/youre-not-lazy-signs-undiagnosed-adult-adhd](https://siya.health/blog/youre-not-lazy-signs-undiagnosed-adult-adhd) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | You’re Not Lazy: Signs You May Have Undiagnosed… | 1193 | 7 | 44 |
 
@@ -268,11 +268,11 @@ Generated: 2026-09-01
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
 | [/adult-adhd-california](https://siya.health/adult-adhd-california) | Page | The complete guide to adult ADHD in California: what it l… | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Mixed | Adult ADHD care in California | 1622 | 24 | 48 |
-| [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Choose How You Want to Get Started | 203 | 192 | 34 |
+| [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Choose How You Want to Get Started | 203 | 191 | 34 |
 | [/brain-fog](https://siya.health/brain-fog) | Page | Brain fog is a symptom with many possible contributors — … | Book Free Meet & Greet → /redirect/me… | See what it could be → #what-it-could-be | Mixed | Brain fog: when thinking feels slower than usual | 1457 | 17 | 49 |
-| [/employers](https://siya.health/employers) | Page | Structured screening and physician-led telehealth for wor… | Request employer information → #emplo… | See how it works → #how-it-works | Mixed | Cognitive health support for working professionals | 623 | 192 | 33 |
+| [/employers](https://siya.health/employers) | Page | Structured screening and physician-led telehealth for wor… | Request employer information → #emplo… | See how it works → #how-it-works | Mixed | Cognitive health support for working professionals | 623 | 191 | 33 |
 | [/fatigue](https://siya.health/fatigue) | Page | Persistent fatigue is a symptom with many possible causes… | Book Free Meet & Greet → /redirect/me… | See what it could be → #what-it-could-be | Mixed | Fatigue: when tired stops being normal | 1536 | 43 | 50 |
-| [/labs](https://siya.health/labs) | Service Page | Explore transparent direct-pay laboratory testing for thy… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Labs & Blood Tests with Transparent Direct-Pay … | 1810 | 192 | 47 |
+| [/labs](https://siya.health/labs) | Service Page | Explore transparent direct-pay laboratory testing for thy… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Labs & Blood Tests with Transparent Direct-Pay … | 1810 | 191 | 47 |
 | [/labs/a1c-blood-sugar](https://siya.health/labs/a1c-blood-sugar) | Page | What HbA1c broadly measures about average blood sugar, wh… | Book Free Meet & Greet → /redirect/me… | Preventive labs overview → /labs/prev… | Mixed | Hemoglobin A1c (HbA1c) | 479 | 29 | 42 |
 | [/labs/adhd-support](https://siya.health/labs/adhd-support) | Page | Blood tests do not diagnose ADHD. Learn when selected lab… | Browse Lab Tests → https://labs.rupah… | Browse Lab Tests → https://labs.rupah… | Mixed | Labs When Focus, Fatigue & Brain Fog Overlap | 406 | 9 | 38 |
 | [/labs/cbc](https://siya.health/labs/cbc) | Page | What a CBC broadly measures, why clinicians may order it,… | Book Free Meet & Greet → /redirect/me… | Preventive labs overview → /labs/prev… | Mixed | Complete Blood Count (CBC) | 506 | 12 | 41 |
@@ -287,19 +287,19 @@ Generated: 2026-09-01
 | [/labs/vitamin-b12](https://siya.health/labs/vitamin-b12) | Page | What vitamin B12 testing broadly measures, why clinicians… | Book Free Meet & Greet → /redirect/me… | Preventive labs overview → /labs/prev… | Mixed | Vitamin B12 | 468 | 13 | 42 |
 | [/labs/vitamin-d](https://siya.health/labs/vitamin-d) | Page | What 25-OH vitamin D testing broadly measures, why clinic… | Book Free Meet & Greet → /redirect/me… | Preventive labs overview → /labs/prev… | Mixed | Vitamin D (25-OH) | 487 | 5 | 42 |
 | [/labs/womens-midlife](https://siya.health/labs/womens-midlife) | Page | Learn how laboratory testing may support women’s midlife … | Browse Lab Tests → https://labs.rupah… | Browse Lab Tests → https://labs.rupah… | Mixed | Women's Midlife Lab Evaluation | 486 | 9 | 40 |
-| [/legal](https://siya.health/legal) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Legal & Compliance | 148 | 192 | 34 |
+| [/legal](https://siya.health/legal) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Legal & Compliance | 148 | 191 | 34 |
 | [/legal/controlled-substance-treatment-agreement](https://siya.health/legal/controlled-substance-treatment-agreement) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Controlled Substance Treatment Agreement | 829 | 84 | 33 |
-| [/legal/cookie-policy](https://siya.health/legal/cookie-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Cookie Policy | 475 | 194 | 33 |
-| [/legal/notice-of-privacy-practices](https://siya.health/legal/notice-of-privacy-practices) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Notice of Privacy Practices | 1547 | 194 | 33 |
-| [/legal/privacy-policy](https://siya.health/legal/privacy-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Privacy Policy | 2874 | 194 | 33 |
-| [/legal/terms-of-use](https://siya.health/legal/terms-of-use) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Terms of Use | 4490 | 194 | 33 |
-| [/prescriptions](https://siya.health/prescriptions) | Service Page | Provider-reviewed prescriptions through Siya Health teleh… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Online Prescription Services | 137 | 192 | 33 |
+| [/legal/cookie-policy](https://siya.health/legal/cookie-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Cookie Policy | 475 | 193 | 33 |
+| [/legal/notice-of-privacy-practices](https://siya.health/legal/notice-of-privacy-practices) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Notice of Privacy Practices | 1547 | 193 | 33 |
+| [/legal/privacy-policy](https://siya.health/legal/privacy-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Privacy Policy | 2874 | 193 | 33 |
+| [/legal/terms-of-use](https://siya.health/legal/terms-of-use) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Terms of Use | 4490 | 193 | 33 |
+| [/prescriptions](https://siya.health/prescriptions) | Service Page | Provider-reviewed prescriptions through Siya Health teleh… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Online Prescription Services | 137 | 191 | 33 |
 | [/preventive-care](https://siya.health/preventive-care) | Page | Preventive care is how adults stay ahead of problems: ann… | Book Free Meet & Greet → /redirect/me… | See what it covers → #what-it-covers | Mixed | Preventive care: stay healthy before something … | 1162 | 26 | 47 |
-| [/pricing](https://siya.health/pricing) | Page | Transparent physician-led telehealth pricing: $149 initia… | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Mixed | Transparent pricing for physician-led care | 501 | 194 | 37 |
+| [/pricing](https://siya.health/pricing) | Page | Transparent physician-led telehealth pricing: $149 initia… | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Mixed | Transparent pricing for physician-led care | 501 | 193 | 37 |
 | [/primary-care](https://siya.health/primary-care) | Page | Primary care is the root of ongoing health at Siya: sympt… | Book Free Meet & Greet → /redirect/me… | See how care fits together → #how-it-… | Mixed | Primary care: where ongoing health starts | 876 | 19 | 45 |
-| [/primary-urgent-care](https://siya.health/primary-urgent-care) | Service Page | Virtual primary and urgent care across California, Texas,… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Primary & Urgent Care — Virtual, Same-Week | 456 | 192 | 43 |
-| [/siya-circle](https://siya.health/siya-circle) | Utility | Community membership signup | Join Our Health Guide → /siya-circle#… | — | Transactional / Utility | Join Siya Circle | 196 | 192 | 33 |
-| [/womens-health](https://siya.health/womens-health) | Page | Women | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Mixed | When energy, cycles, and mood stop making sense… | 760 | 192 | 44 |
+| [/primary-urgent-care](https://siya.health/primary-urgent-care) | Service Page | Virtual primary and urgent care across California, Texas,… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Primary & Urgent Care — Virtual, Same-Week | 456 | 191 | 43 |
+| [/siya-circle](https://siya.health/siya-circle) | Utility | Community membership signup | Join Our Health Guide → /siya-circle#… | — | Transactional / Utility | Join Siya Circle | 196 | 191 | 33 |
+| [/womens-health](https://siya.health/womens-health) | Page | Women | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Mixed | When energy, cycles, and mood stop making sense… | 763 | 191 | 44 |
 | [/womens-midlife-health](https://siya.health/womens-midlife-health) | Page | Women's midlife health is not one disease—it is brain, ho… | Book Free Meet & Greet → /redirect/me… | Women's health services → /womens-health | Mixed | Women's Midlife Health: Brain, Hormones & Metab… | 1812 | 8 | 38 |
 
 ---
@@ -325,7 +325,7 @@ Generated: 2026-09-01
 | [/answers/compounded-vs-branded-glp-1](https://siya.health/answers/compounded-vs-branded-glp-1) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | What should you ask about compounded vs branded… | 551 | 3 | 36 |
 | [/answers/glp-1-side-effects](https://siya.health/answers/glp-1-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Which GLP-1 side effects usually improve with t… | 1011 | 10 | 38 |
 | [/answers/is-adhd-medication-safe-long-term](https://siya.health/answers/is-adhd-medication-safe-long-term) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What does long-term ADHD medication safety moni… | 564 | 6 | 38 |
-| [/answers/is-online-adhd-diagnosis-legitimate](https://siya.health/answers/is-online-adhd-diagnosis-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What should you look for in a legitimate online… | 889 | 192 | 38 |
+| [/answers/is-online-adhd-diagnosis-legitimate](https://siya.health/answers/is-online-adhd-diagnosis-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What should you look for in a legitimate online… | 889 | 191 | 38 |
 | [/answers/medical-weight-loss-vs-dieting](https://siya.health/answers/medical-weight-loss-vs-dieting) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | When does medical weight loss outperform dietin… | 553 | 6 | 37 |
 | [/answers/oral-vs-topical-minoxidil](https://siya.health/answers/oral-vs-topical-minoxidil) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | When is topical minoxidil enough vs oral minoxi… | 481 | 1 | 36 |
 | [/answers/semaglutide-weight-loss-how-it-works](https://siya.health/answers/semaglutide-weight-loss-how-it-works) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | How quickly does semaglutide start working for … | 1016 | 6 | 38 |
@@ -345,8 +345,8 @@ Generated: 2026-09-01
 - **Secondary CTA:** How can we help? → #care-journeys
 - **Traffic Intent:** Navigational / Commercial
 - **Target Keyword:** Something feels off—and you want clearer answers.
-- **Word Count:** 1080
-- **Internal Links In:** 196
+- **Word Count:** 1081
+- **Internal Links In:** 195
 - **Internal Links Out:** 41
 - **Groups:** Core Revenue Pages
 
@@ -359,9 +359,9 @@ Generated: 2026-09-01
 - **Secondary CTA:** Explore Care Options → /telehealth
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Care for adults who are done guessing about their health
-- **Word Count:** 876
-- **Internal Links In:** 192
-- **Internal Links Out:** 40
+- **Word Count:** 859
+- **Internal Links In:** 191
+- **Internal Links Out:** 39
 - **Groups:** Trust Pages
 
 ### /adhd-care
@@ -373,8 +373,8 @@ Generated: 2026-09-01
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Struggling to focus—even when you care?
-- **Word Count:** 1475
-- **Internal Links In:** 197
+- **Word Count:** 1482
+- **Internal Links In:** 196
 - **Internal Links Out:** 49
 - **Groups:** Core Revenue Pages
 
@@ -444,7 +444,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** What are you looking for help with?
 - **Word Count:** 446
-- **Internal Links In:** 194
+- **Internal Links In:** 193
 - **Internal Links Out:** 38
 - **Groups:** Core Revenue Pages
 
@@ -472,7 +472,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Informational / Navigational
 - **Target Keyword:** Health Guides
 - **Word Count:** 1005
-- **Internal Links In:** 192
+- **Internal Links In:** 191
 - **Internal Links Out:** 69
 - **Groups:** Educational Pages
 
@@ -897,7 +897,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Informational
 - **Target Keyword:** What should you look for in a legitimate online ADHD diagnosis?
 - **Word Count:** 889
-- **Internal Links In:** 192
+- **Internal Links In:** 191
 - **Internal Links Out:** 38
 - **Groups:** Duplicate Pages, Educational Pages
 - **Duplicate of:** https://siya.health/blog/is-online-adhd-diagnosis-legit
@@ -1055,7 +1055,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Informational
 - **Target Keyword:** What are the signs of adult ADHD?
 - **Word Count:** 916
-- **Internal Links In:** 192
+- **Internal Links In:** 191
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
 
@@ -1252,7 +1252,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Informational
 - **Target Keyword:** What is insulin resistance?
 - **Word Count:** 1039
-- **Internal Links In:** 192
+- **Internal Links In:** 191
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
 
@@ -1309,7 +1309,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Informational
 - **Target Keyword:** Who qualifies for GLP-1 weight loss medications?
 - **Word Count:** 549
-- **Internal Links In:** 4
+- **Internal Links In:** 3
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
 
@@ -1323,7 +1323,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Informational
 - **Target Keyword:** Why am I tired even after sleeping?
 - **Word Count:** 724
-- **Internal Links In:** 192
+- **Internal Links In:** 191
 - **Internal Links Out:** 42
 - **Groups:** Educational Pages
 
@@ -1351,7 +1351,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Informational / Navigational
 - **Target Keyword:** Health Insights — Evidence-Based, Clinical
 - **Word Count:** 872
-- **Internal Links In:** 192
+- **Internal Links In:** 191
 - **Internal Links Out:** 54
 - **Groups:** Educational Pages
 
@@ -1379,7 +1379,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Informational / Navigational
 - **Target Keyword:** ADHD articles
 - **Word Count:** 753
-- **Internal Links In:** 192
+- **Internal Links In:** 191
 - **Internal Links Out:** 63
 - **Groups:** Educational Pages
 
@@ -1785,7 +1785,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Informational
 - **Target Keyword:** GLP-1 Side Effects and How to Manage Them (2026)
 - **Word Count:** 872
-- **Internal Links In:** 5
+- **Internal Links In:** 4
 - **Internal Links Out:** 42
 - **Groups:** Educational Pages
 
@@ -1841,7 +1841,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Informational
 - **Target Keyword:** How to Know If You Have ADHD as an Adult (Real Signs Explained)
 - **Word Count:** 802
-- **Internal Links In:** 192
+- **Internal Links In:** 191
 - **Internal Links Out:** 42
 - **Groups:** Educational Pages
 
@@ -2163,7 +2163,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Informational / Navigational
 - **Target Keyword:** Telehealth articles
 - **Word Count:** 216
-- **Internal Links In:** 192
+- **Internal Links In:** 191
 - **Internal Links Out:** 43
 - **Groups:** Educational Pages
 
@@ -2233,7 +2233,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Informational / Navigational
 - **Target Keyword:** Weight loss articles
 - **Word Count:** 289
-- **Internal Links In:** 192
+- **Internal Links In:** 191
 - **Internal Links Out:** 46
 - **Groups:** Educational Pages
 
@@ -2275,7 +2275,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Choose How You Want to Get Started
 - **Word Count:** 203
-- **Internal Links In:** 192
+- **Internal Links In:** 191
 - **Internal Links Out:** 34
 - **Groups:** Core Revenue Pages, Utility Pages
 
@@ -2317,7 +2317,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Cognitive health support for working professionals
 - **Word Count:** 623
-- **Internal Links In:** 192
+- **Internal Links In:** 191
 - **Internal Links Out:** 33
 - **Groups:** Utility Pages
 
@@ -2345,7 +2345,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Labs & Blood Tests with Transparent Direct-Pay Options
 - **Word Count:** 1810
-- **Internal Links In:** 192
+- **Internal Links In:** 191
 - **Internal Links Out:** 47
 - **Groups:** Core Revenue Pages, Utility Pages
 
@@ -2555,7 +2555,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Compliance / Navigational
 - **Target Keyword:** Legal & Compliance
 - **Word Count:** 148
-- **Internal Links In:** 192
+- **Internal Links In:** 191
 - **Internal Links Out:** 34
 - **Groups:** Utility Pages, Trust Pages
 
@@ -2583,7 +2583,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Compliance / Navigational
 - **Target Keyword:** Cookie Policy
 - **Word Count:** 475
-- **Internal Links In:** 194
+- **Internal Links In:** 193
 - **Internal Links Out:** 33
 - **Groups:** Utility Pages, Trust Pages
 
@@ -2597,7 +2597,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Compliance / Navigational
 - **Target Keyword:** Notice of Privacy Practices
 - **Word Count:** 1547
-- **Internal Links In:** 194
+- **Internal Links In:** 193
 - **Internal Links Out:** 33
 - **Groups:** Utility Pages, Trust Pages
 
@@ -2611,7 +2611,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Compliance / Navigational
 - **Target Keyword:** Privacy Policy
 - **Word Count:** 2874
-- **Internal Links In:** 194
+- **Internal Links In:** 193
 - **Internal Links Out:** 33
 - **Groups:** Utility Pages, Trust Pages
 
@@ -2625,7 +2625,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Compliance / Navigational
 - **Target Keyword:** Terms of Use
 - **Word Count:** 4490
-- **Internal Links In:** 194
+- **Internal Links In:** 193
 - **Internal Links Out:** 33
 - **Groups:** Utility Pages, Trust Pages
 
@@ -2638,9 +2638,9 @@ Generated: 2026-09-01
 - **Secondary CTA:** Start Secure Medical Chat → /redirect/chat
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** When energy, drive, and focus don't feel like they used to
-- **Word Count:** 656
-- **Internal Links In:** 192
-- **Internal Links Out:** 43
+- **Word Count:** 648
+- **Internal Links In:** 191
+- **Internal Links Out:** 42
 - **Groups:** Core Revenue Pages
 
 ### /prescriptions
@@ -2653,7 +2653,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Online Prescription Services
 - **Word Count:** 137
-- **Internal Links In:** 192
+- **Internal Links In:** 191
 - **Internal Links Out:** 33
 - **Groups:** Core Revenue Pages, Utility Pages
 
@@ -2681,7 +2681,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Transparent pricing for physician-led care
 - **Word Count:** 501
-- **Internal Links In:** 194
+- **Internal Links In:** 193
 - **Internal Links Out:** 37
 - **Groups:** Utility Pages
 
@@ -2709,7 +2709,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Primary & Urgent Care — Virtual, Same-Week
 - **Word Count:** 456
-- **Internal Links In:** 192
+- **Internal Links In:** 191
 - **Internal Links Out:** 43
 - **Groups:** Core Revenue Pages, Utility Pages
 
@@ -2722,23 +2722,9 @@ Generated: 2026-09-01
 - **Secondary CTA:** Book Online via Zocdoc → https://www.zocdoc.com/booking-link/practice/siya-healthcare-182234
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Our Care Team
-- **Word Count:** 474
+- **Word Count:** 425
 - **Internal Links In:** 194
-- **Internal Links Out:** 40
-- **Groups:** Trust Pages
-
-### /providers/derek-timbs
-
-- **URL:** https://siya.health/providers/derek-timbs
-- **Page Type:** Provider Profile
-- **Primary Purpose:** Clinician credibility; convert to booking with this provider
-- **Primary CTA:** Start Secure Medical Chat → /redirect/chat
-- **Secondary CTA:** Book Online via Zocdoc → https://www.zocdoc.com/booking-link/practice/siya-healthcare-182234
-- **Traffic Intent:** Trust / Navigational
-- **Target Keyword:** Derek Timbs, FNP-BC
-- **Word Count:** 614
-- **Internal Links In:** 8
-- **Internal Links Out:** 38
+- **Internal Links Out:** 39
 - **Groups:** Trust Pages
 
 ### /providers/dr-natasha-desai
@@ -2751,7 +2737,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Dr. Natasha Desai, MD
 - **Word Count:** 723
-- **Internal Links In:** 19
+- **Internal Links In:** 21
 - **Internal Links Out:** 40
 - **Groups:** Trust Pages
 
@@ -2764,8 +2750,8 @@ Generated: 2026-09-01
 - **Secondary CTA:** Book Online via Zocdoc → https://www.zocdoc.com/booking-link/practice/siya-healthcare-182234
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Dr. Sneh Pandey, MD
-- **Word Count:** 869
-- **Internal Links In:** 24
+- **Word Count:** 870
+- **Internal Links In:** 23
 - **Internal Links Out:** 38
 - **Groups:** Trust Pages
 
@@ -2779,7 +2765,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Dr. Swati Pandey, MD
 - **Word Count:** 722
-- **Internal Links In:** 10
+- **Internal Links In:** 11
 - **Internal Links Out:** 40
 - **Groups:** Trust Pages
 
@@ -2792,8 +2778,8 @@ Generated: 2026-09-01
 - **Secondary CTA:** Book Online via Zocdoc → https://www.zocdoc.com/booking-link/practice/siya-healthcare-182234
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Dr. Vanessa Urbina, MD
-- **Word Count:** 662
-- **Internal Links In:** 16
+- **Word Count:** 663
+- **Internal Links In:** 15
 - **Internal Links Out:** 37
 - **Groups:** Trust Pages
 
@@ -2820,8 +2806,8 @@ Generated: 2026-09-01
 - **Secondary CTA:** Book Online via Zocdoc → https://www.zocdoc.com/booking-link/practice/siya-healthcare-182234
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Wendy Delgado, PA-C
-- **Word Count:** 601
-- **Internal Links In:** 20
+- **Word Count:** 602
+- **Internal Links In:** 19
 - **Internal Links Out:** 38
 - **Groups:** Trust Pages
 
@@ -2835,7 +2821,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Transactional / Utility
 - **Target Keyword:** Join Siya Circle
 - **Word Count:** 196
-- **Internal Links In:** 192
+- **Internal Links In:** 191
 - **Internal Links Out:** 33
 - **Groups:** Utility Pages
 
@@ -2848,9 +2834,9 @@ Generated: 2026-09-01
 - **Secondary CTA:** Start Secure Medical Chat → /redirect/chat
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Need a doctor without rearranging your entire day?
-- **Word Count:** 989
-- **Internal Links In:** 192
-- **Internal Links Out:** 46
+- **Word Count:** 980
+- **Internal Links In:** 191
+- **Internal Links Out:** 45
 - **Groups:** Core Revenue Pages
 
 ### /weight-loss-metabolic-health
@@ -2862,9 +2848,9 @@ Generated: 2026-09-01
 - **Secondary CTA:** Start Secure Medical Chat → /redirect/chat
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** When your appetite, energy, and weight stop making sense
-- **Word Count:** 1151
-- **Internal Links In:** 192
-- **Internal Links Out:** 45
+- **Word Count:** 1142
+- **Internal Links In:** 191
+- **Internal Links Out:** 44
 - **Groups:** Core Revenue Pages
 
 ### /womens-health
@@ -2876,8 +2862,8 @@ Generated: 2026-09-01
 - **Secondary CTA:** Start Secure Medical Chat → /redirect/chat
 - **Traffic Intent:** Mixed
 - **Target Keyword:** When energy, cycles, and mood stop making sense together
-- **Word Count:** 760
-- **Internal Links In:** 192
+- **Word Count:** 763
+- **Internal Links In:** 191
 - **Internal Links Out:** 44
 - **Groups:** Utility Pages
 

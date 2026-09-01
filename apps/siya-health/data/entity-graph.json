@@ -69,9 +69,6 @@
         "@id": "https://siya.health/providers/megan-wunderlich#practitioner"
       },
       {
-        "@id": "https://siya.health/providers/derek-timbs#practitioner"
-      },
-      {
         "@id": "https://siya.health/providers/wendy-delgado#practitioner"
       }
     ]
@@ -142,9 +139,9 @@
       "relatedContent": [],
       "reviewerOwnership": {
         "metabolic": {
-          "primary": "derek-timbs",
-          "secondary": "dr-sneh-pandey",
-          "support": "wendy-delgado"
+          "primary": "dr-sneh-pandey",
+          "secondary": "wendy-delgado",
+          "support": "dr-vanessa-urbina"
         },
         "adhdEval": {
           "primary": "dr-sneh-pandey",
@@ -167,8 +164,8 @@
           "secondary": "dr-sneh-pandey"
         },
         "mensHealth": {
-          "primary": "derek-timbs",
-          "secondary": "dr-sneh-pandey"
+          "primary": "dr-sneh-pandey",
+          "secondary": "dr-vanessa-urbina"
         }
       }
     },
@@ -227,9 +224,9 @@
       "relatedContent": [],
       "reviewerOwnership": {
         "metabolic": {
-          "primary": "derek-timbs",
-          "secondary": "dr-sneh-pandey",
-          "support": "wendy-delgado"
+          "primary": "dr-sneh-pandey",
+          "secondary": "wendy-delgado",
+          "support": "dr-vanessa-urbina"
         },
         "adhdEval": {
           "primary": "dr-sneh-pandey",
@@ -252,8 +249,8 @@
           "secondary": "dr-sneh-pandey"
         },
         "mensHealth": {
-          "primary": "derek-timbs",
-          "secondary": "dr-sneh-pandey"
+          "primary": "dr-sneh-pandey",
+          "secondary": "dr-vanessa-urbina"
         }
       }
     },
@@ -318,9 +315,9 @@
       "relatedContent": [],
       "reviewerOwnership": {
         "metabolic": {
-          "primary": "derek-timbs",
-          "secondary": "dr-sneh-pandey",
-          "support": "wendy-delgado"
+          "primary": "dr-sneh-pandey",
+          "secondary": "wendy-delgado",
+          "support": "dr-vanessa-urbina"
         },
         "adhdEval": {
           "primary": "dr-sneh-pandey",
@@ -343,8 +340,8 @@
           "secondary": "dr-sneh-pandey"
         },
         "mensHealth": {
-          "primary": "derek-timbs",
-          "secondary": "dr-sneh-pandey"
+          "primary": "dr-sneh-pandey",
+          "secondary": "dr-vanessa-urbina"
         }
       }
     },
@@ -403,9 +400,9 @@
       "relatedContent": [],
       "reviewerOwnership": {
         "metabolic": {
-          "primary": "derek-timbs",
-          "secondary": "dr-sneh-pandey",
-          "support": "wendy-delgado"
+          "primary": "dr-sneh-pandey",
+          "secondary": "wendy-delgado",
+          "support": "dr-vanessa-urbina"
         },
         "adhdEval": {
           "primary": "dr-sneh-pandey",
@@ -428,8 +425,8 @@
           "secondary": "dr-sneh-pandey"
         },
         "mensHealth": {
-          "primary": "derek-timbs",
-          "secondary": "dr-sneh-pandey"
+          "primary": "dr-sneh-pandey",
+          "secondary": "dr-vanessa-urbina"
         }
       }
     },
@@ -485,9 +482,9 @@
       "relatedContent": [],
       "reviewerOwnership": {
         "metabolic": {
-          "primary": "derek-timbs",
-          "secondary": "dr-sneh-pandey",
-          "support": "wendy-delgado"
+          "primary": "dr-sneh-pandey",
+          "secondary": "wendy-delgado",
+          "support": "dr-vanessa-urbina"
         },
         "adhdEval": {
           "primary": "dr-sneh-pandey",
@@ -510,94 +507,8 @@
           "secondary": "dr-sneh-pandey"
         },
         "mensHealth": {
-          "primary": "derek-timbs",
-          "secondary": "dr-sneh-pandey"
-        }
-      }
-    },
-    {
-      "@id": "https://siya.health/providers/derek-timbs#practitioner",
-      "slug": "derek-timbs",
-      "url": "https://siya.health/providers/derek-timbs",
-      "name": "Derek Timbs, FNP-BC",
-      "givenName": "Derek",
-      "familyName": "Timbs",
-      "honorificSuffix": "FNP-BC",
-      "providerType": "advanced-practice",
-      "providerCategory": "np",
-      "jobTitle": "Family Nurse Practitioner",
-      "worksFor": {
-        "@id": "https://siya.health/#organization"
-      },
-      "medicalSpecialty": [
-        "Obesity Medicine",
-        "Family Medicine",
-        "Men's Health"
-      ],
-      "hasCredential": [
-        "FNP-BC"
-      ],
-      "statesLicensed": [
-        "Texas",
-        "Ohio"
-      ],
-      "serviceStates": [
-        "Texas"
-      ],
-      "conditionsTreated": [
-        "Medical weight loss",
-        "Obesity",
-        "Metabolic health",
-        "Men's health",
-        "GLP-1 therapy"
-      ],
-      "npi": "1609886910",
-      "image": "https://siya.health/assets/images/derek-timbs.png",
-      "photoStatus": "approved",
-      "expertiseTopics": [
-        "weight-loss",
-        "glp-1",
-        "mens-health",
-        "testosterone",
-        "telehealth"
-      ],
-      "reviewerForTopics": [
-        "weight-loss",
-        "glp-1",
-        "mens-health",
-        "testosterone",
-        "telehealth"
-      ],
-      "relatedContent": [],
-      "reviewerOwnership": {
-        "metabolic": {
-          "primary": "derek-timbs",
-          "secondary": "dr-sneh-pandey",
-          "support": "wendy-delgado"
-        },
-        "adhdEval": {
           "primary": "dr-sneh-pandey",
-          "secondary": "dr-natasha-desai"
-        },
-        "adhdMedication": {
-          "primary": "dr-swati-pandey",
-          "secondary": "dr-sneh-pandey"
-        },
-        "adhdBehavioral": {
-          "primary": "dr-natasha-desai",
-          "secondary": "megan-wunderlich"
-        },
-        "telehealthTrust": {
-          "primary": "dr-sneh-pandey",
-          "secondary": "megan-wunderlich"
-        },
-        "primaryCare": {
-          "primary": "dr-vanessa-urbina",
-          "secondary": "dr-sneh-pandey"
-        },
-        "mensHealth": {
-          "primary": "derek-timbs",
-          "secondary": "dr-sneh-pandey"
+          "secondary": "dr-vanessa-urbina"
         }
       }
     },
@@ -662,9 +573,9 @@
       "relatedContent": [],
       "reviewerOwnership": {
         "metabolic": {
-          "primary": "derek-timbs",
-          "secondary": "dr-sneh-pandey",
-          "support": "wendy-delgado"
+          "primary": "dr-sneh-pandey",
+          "secondary": "wendy-delgado",
+          "support": "dr-vanessa-urbina"
         },
         "adhdEval": {
           "primary": "dr-sneh-pandey",
@@ -687,8 +598,8 @@
           "secondary": "dr-sneh-pandey"
         },
         "mensHealth": {
-          "primary": "derek-timbs",
-          "secondary": "dr-sneh-pandey"
+          "primary": "dr-sneh-pandey",
+          "secondary": "dr-vanessa-urbina"
         }
       }
     }

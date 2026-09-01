@@ -17,7 +17,6 @@ const EXPERTISE_BY_SLUG = {
   'dr-natasha-desai': ['adhd-diagnosis', 'adhd-anxiety', 'behavioral-health', 'burnout', 'telehealth'],
   'dr-swati-pandey': ['adhd-medication', 'adhd-diagnosis', 'depression', 'anxiety', 'telehealth'],
   'megan-wunderlich': ['adhd-screening', 'mental-health', 'family-medicine', 'telehealth'],
-  'derek-timbs': ['weight-loss', 'glp-1', 'mens-health', 'testosterone', 'telehealth'],
   'wendy-delgado': ['weight-loss', 'glp-1', 'food-noise', 'patient-education', 'telehealth'],
 };
 

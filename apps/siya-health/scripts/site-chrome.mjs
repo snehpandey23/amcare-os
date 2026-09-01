@@ -388,7 +388,12 @@ const MEET_PHYSICIANS_BY_PAGE = {
       { heading: 'Meet the clinicians behind your care' },
     ),
   'mens-health-longevity.html': () =>
-    buildMeetPhysiciansBlock('mens-health-longevity', "Evidence-based men's health and hormone care."),
+    buildMeetPhysiciansBlock(
+      'mens-health-longevity',
+      "Physician-led men's health and hormone care—evaluation first, treatment when clinically appropriate.",
+      null,
+      { heading: "Your men's health clinician" },
+    ),
   'womens-health.html': () =>
     buildMeetPhysiciansBlock('womens-health', "Evidence-based women's health and hormone care."),
   'primary-urgent-care.html': () =>
@@ -785,6 +790,26 @@ export function injectSitewideTrustMetrics(html) {
   html = html.replace(
     /<span class="homepage-trust-stat-value">44<\/span>\s*<span class="homepage-trust-stat-label">Google reviews<\/span>/g,
     `<span class="homepage-trust-stat-value">${googleReviews}</span> <span class="homepage-trust-stat-label">Google reviews</span>`,
+  );
+  html = html.replace(
+    /<span class="homepage-trust-stat-value">600\+<\/span>\s*<span class="homepage-trust-stat-label">Verified patient reviews<\/span>/g,
+    `<span class="homepage-trust-stat-value">${M.verifiedReviews.value}</span> <span class="homepage-trust-stat-label">${M.verifiedReviews.label}</span>`,
+  );
+
+  const googleReviewsLine = `<span aria-hidden="true">⭐</span> <span class="trust-metric-value" data-target="${M.googleRating.value}" data-suffix="★">${ratingDisplay}</span> average · <span class="trust-metric-value" data-target="100" data-suffix="+">${googleReviews}</span> Google reviews · <span class="trust-metric-value" data-target="600" data-suffix="+">${M.verifiedReviews.value}</span> verified across platforms`;
+  html = html.replace(
+    /<span aria-hidden="true">⭐<\/span>[\s\S]*?verified patient reviews/g,
+    googleReviewsLine,
+  );
+
+  const fullDeckStrong = `<p class="trust-metrics-rewrite-line trust-metrics-rewrite-line-strong"><span class="trust-metric-value" data-target="${patientsTarget}" data-suffix="+">${patients}</span> patients treated · <span class="trust-metric-value" data-target="${neuroTarget}" data-suffix="+">${neuro}</span> ${neuroLabel.toLowerCase()}</p>`;
+  html = html.replace(
+    /<p class="trust-metrics-rewrite-line trust-metrics-rewrite-line-strong">\s*<span class="trust-metric-value" data-target="2700" data-suffix="\+">2,700\+<\/span> patients treated\s*<\/p>/g,
+    fullDeckStrong,
+  );
+  html = html.replace(
+    /<p class="trust-metrics-rewrite-line trust-metrics-rewrite-line-strong">\s*<span class="trust-metric-value" data-target="1200" data-suffix="\+">1,200\+<\/span> Neurocognitive evaluations\s*<\/p>/gi,
+    fullDeckStrong,
   );
 
   return html;
@@ -1557,6 +1582,11 @@ function renderHomepageCareCompactCard(provider) {
             </article>`;
 }
 
+function activeClinicianCountLabel() {
+  const n = getAllProviders().length;
+  return `${n} clinician${n === 1 ? '' : 's'}`;
+}
+
 function buildHomepageCareTeam() {
   const founders = HOMEPAGE_FOUNDER_SLUGS.map((slug) => getAllProviders().find((p) => p.slug === slug)).filter(
     Boolean,
@@ -1573,7 +1603,7 @@ function buildHomepageCareTeam() {
             <div class="homepage-care-compact-founders">
             ${founderCards}
             </div>
-            <a class="button secondary" href="/providers">Meet the full care team (7 clinicians)</a>
+            <a class="button secondary" href="/providers">Meet the full care team (${activeClinicianCountLabel()})</a>
           </div>
         </div>
       </section>
@@ -1685,10 +1715,10 @@ export function injectProvidersNav(html) {
 
 export function injectAboutProviderHub(html, relPath) {
   if (relPath !== 'about.html') return html;
-  if (html.includes('View full care team') || html.includes('View Our Care Team (7 clinicians)')) {
+  if (html.includes('View full care team') || html.includes('View Our Care Team (')) {
     return html;
   }
-  const hubLink = `<p class="blog-hub-see-all"><a href="/providers">View Our Care Team (7 clinicians)</a></p>`;
+  const hubLink = `<p class="blog-hub-see-all"><a href="/providers">View Our Care Team (${activeClinicianCountLabel()})</a></p>`;
   if (html.includes('about-care-team-grid')) {
     return html.replace(
       /(<div class="about-team-grid about-care-team-grid">[\s\S]*?<\/div>)(\s*<p class="blog-hub-see-all)/,
@@ -1766,7 +1796,7 @@ function buildAboutCareTeamSection() {
           <div class="about-team-grid about-care-team-grid">
 ${cards}
           </div>
-          <p class="blog-hub-see-all"><a href="/providers">View full care team (7 clinicians)</a></p>
+          <p class="blog-hub-see-all"><a href="/providers">View full care team (${activeClinicianCountLabel()})</a></p>
           <p class="blog-hub-see-all about-hub-links"><a href="/telehealth">Explore Telehealth Care</a> · <a href="/pricing">View Pricing</a></p>
         </div>
       </section>

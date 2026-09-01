@@ -1,6 +1,6 @@
 # Link Equity Report — Canonical Winning Blogs
 
-Generated: 2026-09-01T12:23:30.927Z
+Generated: 2026-09-01T12:49:59.733Z
 
 ## Top 20 blogs needing more internal links
 
@@ -14,7 +14,7 @@ Generated: 2026-09-01T12:23:30.927Z
 | 6 | /fatigue | 43 | ✗ | ✗ | ✓ | ✗ | ✓ | 2/5 |
 | 7 | /blog/non-stimulant-adhd-medications-explained | 4 | ✗ | ✗ | ✓ | ✓ | ✓ | 3/5 |
 | 8 | /blog/is-adhd-medication-safe-long-term | 4 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
-| 9 | /blog/glp1-side-effects-and-how-to-manage-them | 5 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
+| 9 | /blog/glp1-side-effects-and-how-to-manage-them | 4 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 10 | /blog/compounded-vs-branded-glp1-medications | 5 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 11 | /blog/adhd-medication-side-effects-what-to-expect | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 12 | /blog/oral-vs-topical-minoxidil-which-is-right | 6 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
@@ -47,10 +47,10 @@ Generated: 2026-09-01T12:23:30.927Z
 | /blog/when-is-testosterone-therapy-appropriate | 6 |
 | /blog/oral-vs-topical-minoxidil-which-is-right | 6 |
 | /blog/adhd-telehealth-california | 6 |
-| /blog/glp1-side-effects-and-how-to-manage-them | 5 |
 | /blog/compounded-vs-branded-glp1-medications | 5 |
 | /blog/is-adhd-medication-safe-long-term | 4 |
 | /blog/non-stimulant-adhd-medications-explained | 4 |
+| /blog/glp1-side-effects-and-how-to-manage-them | 4 |
 | /blog/tirzepatide-vs-semaglutide-which-is-better | 4 |
 | /blog/sildenafil-for-erectile-dysfunction-what-to-expect | 4 |
 | /blog/oral-vs-injectable-weight-loss-medications | 2 |

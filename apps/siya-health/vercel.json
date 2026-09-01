@@ -360,6 +360,11 @@
       "permanent": true
     },
     {
+      "source": "/providers/derek-timbs",
+      "destination": "/providers",
+      "permanent": true
+    },
+    {
       "source": "/(.*)",
       "has": [
         {

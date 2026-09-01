@@ -39,6 +39,7 @@
     "/join-our-team",
     "/online-adhd-test",
     "/privacy-policy",
+    "/providers/derek-timbs",
     "/redirect/adhd-walkthrough",
     "/terms"
   ],
@@ -192,6 +193,10 @@
       "count": 0
     },
     {
+      "path": "/providers/derek-timbs",
+      "count": 0
+    },
+    {
       "path": "/redirect/adhd-walkthrough",
       "count": 0
     },
@@ -286,17 +291,17 @@
     {
       "path": "/",
       "outboundCount": 41,
-      "uniqueInbound": 196
+      "uniqueInbound": 195
     },
     {
       "path": "/adhd-care",
       "outboundCount": 49,
-      "uniqueInbound": 191
+      "uniqueInbound": 190
     },
     {
       "path": "/blog",
       "outboundCount": 54,
-      "uniqueInbound": 186
+      "uniqueInbound": 185
     },
     {
       "path": "/blog/adhd",
@@ -306,17 +311,17 @@
     {
       "path": "/answers",
       "outboundCount": 83,
-      "uniqueInbound": 185
+      "uniqueInbound": 184
     },
     {
       "path": "/about",
-      "outboundCount": 37,
-      "uniqueInbound": 192
+      "outboundCount": 39,
+      "uniqueInbound": 191
     },
     {
       "path": "/weight-loss-metabolic-health",
-      "outboundCount": 45,
-      "uniqueInbound": 186
+      "outboundCount": 44,
+      "uniqueInbound": 185
     }
   ],
   "topSuggestions": [
@@ -1990,29 +1995,29 @@
     ]
   },
   "inboundCounts": {
-    "/": 196,
-    "/about": 192,
-    "/adhd-care": 191,
-    "/blog": 186,
-    "/telehealth": 186,
-    "/weight-loss-metabolic-health": 186,
-    "/answers": 185,
-    "/labs": 185,
-    "/prescriptions": 184,
-    "/primary-urgent-care": 184,
-    "/redirect/chat": 184,
+    "/": 195,
+    "/about": 191,
+    "/adhd-care": 190,
+    "/blog": 185,
+    "/telehealth": 185,
+    "/weight-loss-metabolic-health": 185,
+    "/answers": 184,
+    "/labs": 184,
+    "/prescriptions": 183,
+    "/primary-urgent-care": 183,
+    "/redirect/chat": 183,
     "/blog/adhd": 140,
     "/blog/weight-loss": 134,
-    "/legal/cookie-policy": 133,
-    "/legal/notice-of-privacy-practices": 133,
-    "/legal/privacy-policy": 133,
-    "/legal/terms-of-use": 133,
-    "/legal": 131,
+    "/legal/cookie-policy": 132,
+    "/legal/notice-of-privacy-practices": 132,
+    "/legal/privacy-policy": 132,
+    "/legal/terms-of-use": 132,
+    "/legal": 130,
     "/answers/signs-of-adult-adhd": 129,
     "/blog/telehealth": 129,
-    "/mens-health-longevity": 129,
-    "/redirect/meet-greet": 129,
+    "/mens-health-longevity": 128,
     "/providers": 128,
+    "/redirect/meet-greet": 128,
     "/answers/what-is-insulin-resistance": 126,
     "/pricing": 124,
     "/answers/why-am-i-tired-even-after-sleeping": 122,
@@ -2029,15 +2034,15 @@
     "/answers/starting-adhd-medication-adults": 27,
     "/preventive-care": 25,
     "/adult-adhd-california": 24,
-    "/providers/dr-sneh-pandey": 24,
     "/blog/adhd-medication-options-for-adults": 23,
     "/labs/how-to-read-results": 23,
+    "/providers/dr-sneh-pandey": 23,
     "/answers/what-is-food-noise": 22,
+    "/providers/dr-natasha-desai": 21,
     "/blog/adhd-in-women": 19,
     "/blog/insulin-resistance-and-weight-loss-clinician-overview": 19,
     "/primary-care": 19,
-    "/providers/dr-natasha-desai": 19,
-    "/providers/wendy-delgado": 18,
+    "/providers/wendy-delgado": 19,
     "/blog/adhd-treatment-texas": 17,
     "/blog/executive-dysfunction-adhd": 17,
     "/blog/food-noise-and-glp-1-what-it-means-and-what-helps": 17,
@@ -2045,9 +2050,9 @@
     "/labs/a1c-blood-sugar": 17,
     "/labs/preventive": 17,
     "/blog/is-online-adhd-diagnosis-legit": 16,
-    "/providers/dr-vanessa-urbina": 16,
     "/answers/adhd-vs-anxiety": 15,
     "/labs/iron-ferritin": 15,
+    "/providers/dr-vanessa-urbina": 15,
     "/answers/brain-fog-after-eating": 14,
     "/answers/late-adhd-diagnosis-adults": 13,
     "/answers/screening-vs-adhd-evaluation": 13,
@@ -2065,10 +2070,10 @@
     "/blog/adhd-symptoms-overlooked": 11,
     "/blog/medical-weight-loss-glp1-semaglutide-texas": 11,
     "/labs/vitamin-b12": 11,
+    "/providers/dr-swati-pandey": 11,
     "/answers/what-included-199-adhd-evaluation": 10,
     "/blog/how-to-choose-adhd-provider-california": 10,
     "/blog/how-to-safely-get-prescriptions-online": 10,
-    "/providers/dr-swati-pandey": 10,
     "/answers/how-long-adhd-evaluation": 9,
     "/blog/adhd-evaluation-california-online-vs-in-person": 9,
     "/labs/cmp": 9,
@@ -2085,6 +2090,7 @@
     "/blog/semaglutide-for-weight-loss-how-it-works": 8,
     "/labs/lipid-panel": 8,
     "/labs/womens-midlife": 8,
+    "/providers/megan-wunderlich": 8,
     "/womens-midlife-health": 8,
     "/answers/adhd-in-women": 7,
     "/answers/is-adhd-medication-safe-long-term": 7,
@@ -2117,16 +2123,12 @@
     "/blog/oral-vs-topical-minoxidil-which-is-right": 6,
     "/blog/vyvanse-vs-adderall-differences": 6,
     "/blog/when-is-testosterone-therapy-appropriate": 6,
-    "/providers/derek-timbs": 6,
-    "/providers/megan-wunderlich": 6,
     "/adhd-diagnosis-texas": 5,
     "/answers/can-sleep-apnea-cause-fatigue": 5,
     "/answers/which-preventive-blood-tests-adults": 5,
-    "/answers/who-qualifies-glp-1-weight-loss": 5,
     "/blog/adhd-evaluation-cost-texas": 5,
     "/blog/brain-fog-and-sleep": 5,
     "/blog/compounded-vs-branded-glp1-medications": 5,
-    "/blog/glp1-side-effects-and-how-to-manage-them": 5,
     "/blog/iron-deficiency-brain-fog-adhd": 5,
     "/blog/perimenopause-brain-fog": 5,
     "/blog/telehealth-prescriptions-how-online-treatment-works": 5,
@@ -2144,7 +2146,9 @@
     "/answers/telehealth-adhd-texas": 4,
     "/answers/testosterone-and-adhd-overlap": 4,
     "/answers/time-blindness-adhd": 4,
+    "/answers/who-qualifies-glp-1-weight-loss": 4,
     "/blog/brain-fog-at-work": 4,
+    "/blog/glp1-side-effects-and-how-to-manage-them": 4,
     "/blog/iron-deficiency-and-fatigue": 4,
     "/blog/is-adhd-medication-safe-long-term": 4,
     "/blog/non-stimulant-adhd-medications-explained": 4,
@@ -2211,6 +2215,7 @@
     "/join-our-team": 0,
     "/online-adhd-test": 0,
     "/privacy-policy": 0,
+    "/providers/derek-timbs": 0,
     "/redirect/adhd-walkthrough": 0,
     "/terms": 0
   }

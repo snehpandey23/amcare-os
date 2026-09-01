@@ -576,7 +576,7 @@ ${stateChips}
 ${serviceChips}
               </div>
             </div>
-            <p class="provider-filter-status" id="provider-filter-status" aria-live="polite">Showing all 7 clinicians</p>
+            <p class="provider-filter-status" id="provider-filter-status" aria-live="polite">Showing all ${getAllProviders().length} clinicians</p>
           </div>`;
 }
 

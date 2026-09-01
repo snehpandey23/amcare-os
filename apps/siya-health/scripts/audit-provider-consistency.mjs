@@ -32,7 +32,6 @@ const PROVIDER_SEARCH = [
   { slug: 'dr-natasha-desai', patterns: [/Natasha Desai/i, /dr-natasha-desai/i] },
   { slug: 'dr-swati-pandey', patterns: [/Swati Pandey/i, /dr-swati-pandey/i] },
   { slug: 'megan-wunderlich', patterns: [/Megan Wunderlich/i, /megan-wunderlich/i] },
-  { slug: 'derek-timbs', patterns: [/Derek Timbs/i, /derek-timbs/i] },
   { slug: 'wendy-delgado', patterns: [/Wendy Delgado/i, /wendy-delgado/i] },
 ];
 
@@ -299,14 +298,14 @@ function detectIssues(provider, truth, allOccurrences) {
       const aboutHtml = fs.readFileSync(aboutPath, 'utf8');
       const cardCount = (aboutHtml.match(/about-team-card/g) || []).length;
       const listedOnAbout = aboutHtml.includes('dr-vanessa-urbina');
-      if (cardCount < 7 || !listedOnAbout) {
+      if (cardCount < getAllProviders().length || !listedOnAbout) {
         issues.push({
           type: 'positioning',
           severity: 'high',
           file: 'about.html',
           field: 'care-team section',
           current: `Lists ${cardCount} providers (Urbina ${listedOnAbout ? 'present' : 'missing'})`,
-          expected: 'All 7 providers or explicit link to /providers',
+          expected: `All ${getAllProviders().length} providers or explicit link to /providers`,
           message: 'About care team section omits contracted clinicians from §2 roster',
         });
       }
@@ -384,14 +383,15 @@ const crossCutting = [
     id: 'CC-03',
     type: 'positioning',
     severity: 'high',
-    message: 'about.html care team should list all 7 providers (resolved when 7-card grid present)',
+    message: 'about.html care team should list all active providers (resolved when full-card grid present)',
     surfaces: ['about.html'],
-    fix: 'Regenerate About care team from getAllProviders() or match homepage 7-card grid',
+    fix: 'Regenerate About care team from getAllProviders() or match homepage care team grid',
     resolvedWhen: () => {
       const aboutPath = path.join(SITE_ROOT, 'about.html');
       if (!fs.existsSync(aboutPath)) return false;
       const html = fs.readFileSync(aboutPath, 'utf8');
-      return (html.match(/about-team-card/g) || []).length >= 7;
+      const expected = getAllProviders().length;
+      return (html.match(/about-team-card/g) || []).length >= expected;
     },
   },
   {
@@ -401,14 +401,6 @@ const crossCutting = [
     message: 'State landing pages should use "Licensed, ADHD-CCSP–trained clinicians" on mixed MD/NP/PA roster pages',
     surfaces: ['adhd-diagnosis-*.html', 'adult-adhd-diagnosis.html', 'adhd-treatment-online.html'],
     fix: 'Use "Licensed, ADHD-CCSP–trained clinicians" on pages listing mixed roster',
-  },
-  {
-    id: 'CC-06',
-    type: 'states',
-    severity: 'low',
-    message: 'Derek Timbs OH license shown on cards (TX, OH) but Siya service footprint is TX only; profile explains this but compact cards do not',
-    surfaces: ['index.html', 'telehealth.html', 'weight-loss-metabolic-health.html', 'mens-health-longevity.html'],
-    fix: 'Add license-only styling (site-chrome already has provider-state-chip--license-only on profiles); extend to homepage cards',
   },
 ];
 

@@ -21,6 +21,7 @@ const RAW = {
   '/blog/glutathione-and-peptides-what-do-they-actually-do': '/mens-health-longevity',
   // EG-P0-01: garbled California 2026 ADHD article → CA cornerstone (canonical entity)
   '/blog/adult-adhd-treatment-california-2026': '/adult-adhd-california',
+  '/providers/derek-timbs': '/providers',
   '/blog/why-am-i-always-tired-causes-when-to-see-doctor': '/fatigue',
   '/adult-adhd-screening-california': '/adhd-evaluation-california',
   '/adult-adhd-screening-texas': '/adhd-evaluation-texas',

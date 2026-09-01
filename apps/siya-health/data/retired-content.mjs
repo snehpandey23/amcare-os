@@ -30,6 +30,12 @@ export const RETIRED_CONTENT_REDIRECTS = {
     reason:
       'Google Ads TX screening LP retired 2026-08-16. Final Ads destination is the lean evaluation LP /adhd-evaluation-texas.',
   },
+  '/providers/derek-timbs': {
+    destination: '/providers',
+    entity: 'providers',
+    reason:
+      'Provider removed from public roster due to licensing issue (2026-09-01). Profile retired with permanent redirect to care team hub.',
+  },
 };
 
 export const RETIRED_CONTENT_STATS = {
