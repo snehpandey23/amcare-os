@@ -56,6 +56,8 @@ const lonely = answerMetaConversation("I am feeling really lonely and I want to 
 assert.equal(lonely?.id, "feelings", "lonely support");
 const practice = answerMetaConversation("will doing practice make me better");
 assert.equal(practice?.id, "practice-drills-benefit", "practice benefit");
-console.log("OK feelings + practice meta");
+const feedback = answerMetaConversation("Feedback assistance");
+assert.equal(feedback?.id, "team-feedback", "feedback tool");
+console.log("OK feelings + practice + feedback meta");
 
 console.log("smoke-transcript-routing: PASS");

@@ -91,6 +91,7 @@ const PRODUCT_MAP = [
   "• **Learn** — HIPAA training + **Practice** drills (typing, English, culture, map, timezones).",
   "• **Memory** — published internal knowledge (as your role allows).",
   "• **Team** — teammates / presence.",
+  "• **Feedback** — **Feedback Friday** peer/lead notes (`/feedback`).",
   "• **Admin** — admin tools (admins only).",
   "• **Account** / **Sign out** — header: your profile and logout.",
   "",
@@ -186,6 +187,16 @@ const THUMBS_WHO = [
   "",
   "The click is stored as an anonymous **helpful / not helpful** count for Assist quality (engineering/ops can tally 👎 over a week). You only see **“Thanks — logged…”** under that reply.",
   "That is **not** **Chat Review** (`/chat-review`) — Chat Review is a separate admin/clinical-lead log of *patient* chats. Staff volume still goes on **End shift** handoff.",
+].join("\n");
+
+const TEAM_FEEDBACK = [
+  "**Feedback Friday** lives in the left sidebar → **Feedback** (`/feedback`). Same page for **admin and staff**.",
+  "",
+  "**To give feedback:** open **Feedback** → **Give feedback** → choose a **peer** or **department lead** → write your note → send **named** or **anonymous**. Recipients read it under **Feedback for you** on that page.",
+  "",
+  "**Different tools (don’t mix them up):**",
+  "• 👍 / 👎 under an Assist reply — helpful yes/no on **that answer only** (no inbox)",
+  "• **Notify owner** — missing staff guide signal, not peer feedback",
 ].join("\n");
 
 const PLAN_RECORD = [
@@ -650,6 +661,10 @@ const CASES: MetaCase[] = [
       ) {
         return false;
       }
+      // Explicit open/start → tryPracticeLookup deep-link, not orientation copy.
+      if (/\b(open|start|take|go\s+to|show\s+me|launch)\b/.test(t) && /\b(practice|learn|drill|hipaa|training)\b/.test(t)) {
+        return false;
+      }
       const drillPractice =
         /\b(practice\s+(drills?|hub|modules?)|learn\s*→?\s*practice|doing\s+practice)\b/.test(t) ||
         /\b(will|would|does|do|should)\b[\s\S]{0,40}\bpractice\b[\s\S]{0,40}\b(better|help|improve|worth|useful)\b/.test(t) ||
@@ -746,6 +761,20 @@ const CASES: MetaCase[] = [
     category: "chrome",
     test: (t) => /\bnotify\s+owner\b/.test(t) && /\b(what|do|does|button|mean|for|how|when|why|click)\b/.test(t),
     answer: NOTIFY,
+  },
+  {
+    id: "team-feedback",
+    category: "chrome",
+    test: (t) =>
+      /\bfeedback\s+(assist(ance)?|friday|tool|page|portal|form|feature)\b/.test(t) ||
+      /\b(how|where)\b[\s\S]{0,40}\b(give|submit|send|share|leave|write)\b[\s\S]{0,40}\bfeedback\b/.test(t) ||
+      /\b(give|submit|send|share|leave|write)\b[\s\S]{0,32}\bfeedback\b/.test(t) ||
+      /\b(open|go to|use)\b[\s\S]{0,24}\bfeedback\b/.test(t) ||
+      /\bpeer\s+feedback\b/.test(t) ||
+      /\bfeedback\s+for\s+(a\s+)?(peer|lead|colleague|teammate|manager)\b/.test(t) ||
+      /^feedback\s*(assist(ance)?|friday|tool)?\s*$/i.test(t.trim()),
+    answer: TEAM_FEEDBACK,
+    links: [{ label: "Feedback Friday", href: "/feedback" }],
   },
   {
     id: "thumbs",
@@ -1076,6 +1105,18 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
     text: "why r u asking me to practice then",
     mustMatch: /Learn → Practice|optional skill/i,
     mustNot: /practice-wide hours|prove the practice/i,
+  },
+  {
+    id: "team-feedback",
+    text: "Feedback assistance",
+    mustMatch: /Feedback Friday|\/feedback|Give feedback/i,
+    mustNot: /approved staff guide|right staff guide for that yet/i,
+  },
+  {
+    id: "team-feedback",
+    text: "how do I give feedback to a teammate",
+    mustMatch: /Feedback Friday|peer|anonymous/i,
+    mustNot: /approved staff guide/i,
   },
   {
     id: "portal-onboarding",
