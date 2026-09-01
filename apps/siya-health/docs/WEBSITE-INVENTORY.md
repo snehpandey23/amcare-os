@@ -79,9 +79,9 @@ Generated: 2026-09-01
 | [/labs](https://siya.health/labs) | Service Page | Explore transparent direct-pay laboratory testing for thy… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Labs & Blood Tests with Transparent Direct-Pay … | 1810 | 192 | 47 |
 | [/mens-health-longevity](https://siya.health/mens-health-longevity) | Service Page | Men's health / TRT / longevity service conversion | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Commercial / Transactional | When energy, drive, and focus don't feel like t… | 656 | 192 | 43 |
 | [/prescriptions](https://siya.health/prescriptions) | Service Page | Provider-reviewed prescriptions through Siya Health teleh… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Online Prescription Services | 137 | 192 | 33 |
-| [/primary-urgent-care](https://siya.health/primary-urgent-care) | Service Page | Virtual primary and urgent care across California, Texas,… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Primary & Urgent Care — Virtual, Same-Week | 451 | 192 | 43 |
-| [/telehealth](https://siya.health/telehealth) | Service Page | Explain virtual care model; route to services | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Commercial / Transactional | Need a doctor without rearranging your entire day? | 966 | 192 | 43 |
-| [/weight-loss-metabolic-health](https://siya.health/weight-loss-metabolic-health) | Service Page | Convert GLP-1 / medical weight loss interest to consult | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Commercial / Transactional | When your appetite, energy, and weight stop mak… | 1146 | 192 | 45 |
+| [/primary-urgent-care](https://siya.health/primary-urgent-care) | Service Page | Virtual primary and urgent care across California, Texas,… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Primary & Urgent Care — Virtual, Same-Week | 456 | 192 | 43 |
+| [/telehealth](https://siya.health/telehealth) | Service Page | Explain virtual care model; route to services | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Commercial / Transactional | Need a doctor without rearranging your entire day? | 989 | 192 | 46 |
+| [/weight-loss-metabolic-health](https://siya.health/weight-loss-metabolic-health) | Service Page | Convert GLP-1 / medical weight loss interest to consult | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Commercial / Transactional | When your appetite, energy, and weight stop mak… | 1151 | 192 | 45 |
 
 ---
 
@@ -89,7 +89,7 @@ Generated: 2026-09-01
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/about](https://siya.health/about) | About | Build trust; explain mission and care team | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Trust / Navigational | Care for adults who are done guessing about the… | 854 | 192 | 37 |
+| [/about](https://siya.health/about) | About | Build trust; explain mission and care team | Book Free Meet & Greet → /redirect/me… | Explore Care Options → /telehealth | Trust / Navigational | Care for adults who are done guessing about the… | 876 | 192 | 40 |
 | [/legal](https://siya.health/legal) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Legal & Compliance | 148 | 192 | 34 |
 | [/legal/controlled-substance-treatment-agreement](https://siya.health/legal/controlled-substance-treatment-agreement) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Controlled Substance Treatment Agreement | 829 | 84 | 33 |
 | [/legal/cookie-policy](https://siya.health/legal/cookie-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Cookie Policy | 475 | 194 | 33 |
@@ -97,13 +97,13 @@ Generated: 2026-09-01
 | [/legal/privacy-policy](https://siya.health/legal/privacy-policy) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Privacy Policy | 2874 | 194 | 33 |
 | [/legal/terms-of-use](https://siya.health/legal/terms-of-use) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Terms of Use | 4490 | 194 | 33 |
 | [/providers](https://siya.health/providers) | Provider Hub | Show clinician roster; drive profile views and booking | Book Free Meet & Greet → /redirect/me… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Our Care Team | 474 | 194 | 40 |
-| [/providers/derek-timbs](https://siya.health/providers/derek-timbs) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Derek Timbs, FNP-BC | 614 | 6 | 38 |
+| [/providers/derek-timbs](https://siya.health/providers/derek-timbs) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Derek Timbs, FNP-BC | 614 | 8 | 38 |
 | [/providers/dr-natasha-desai](https://siya.health/providers/dr-natasha-desai) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Natasha Desai, MD | 723 | 19 | 40 |
 | [/providers/dr-sneh-pandey](https://siya.health/providers/dr-sneh-pandey) | Provider Profile | Clinician credibility; convert to booking with this provider | Book Free Meet & Greet → /redirect/me… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Sneh Pandey, MD | 869 | 24 | 38 |
 | [/providers/dr-swati-pandey](https://siya.health/providers/dr-swati-pandey) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Swati Pandey, MD | 722 | 10 | 40 |
 | [/providers/dr-vanessa-urbina](https://siya.health/providers/dr-vanessa-urbina) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Dr. Vanessa Urbina, MD | 662 | 16 | 37 |
-| [/providers/megan-wunderlich](https://siya.health/providers/megan-wunderlich) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Megan Wunderlich, FNP-C | 612 | 6 | 38 |
-| [/providers/wendy-delgado](https://siya.health/providers/wendy-delgado) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Wendy Delgado, PA-C | 601 | 18 | 38 |
+| [/providers/megan-wunderlich](https://siya.health/providers/megan-wunderlich) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Megan Wunderlich, FNP-C | 612 | 8 | 38 |
+| [/providers/wendy-delgado](https://siya.health/providers/wendy-delgado) | Provider Profile | Clinician credibility; convert to booking with this provider | Start Secure Medical Chat → /redirect… | Book Online via Zocdoc → https://www.… | Trust / Navigational | Wendy Delgado, PA-C | 601 | 20 | 38 |
 
 ---
 
@@ -297,9 +297,9 @@ Generated: 2026-09-01
 | [/preventive-care](https://siya.health/preventive-care) | Page | Preventive care is how adults stay ahead of problems: ann… | Book Free Meet & Greet → /redirect/me… | See what it covers → #what-it-covers | Mixed | Preventive care: stay healthy before something … | 1162 | 26 | 47 |
 | [/pricing](https://siya.health/pricing) | Page | Transparent physician-led telehealth pricing: $149 initia… | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Mixed | Transparent pricing for physician-led care | 501 | 194 | 37 |
 | [/primary-care](https://siya.health/primary-care) | Page | Primary care is the root of ongoing health at Siya: sympt… | Book Free Meet & Greet → /redirect/me… | See how care fits together → #how-it-… | Mixed | Primary care: where ongoing health starts | 876 | 19 | 45 |
-| [/primary-urgent-care](https://siya.health/primary-urgent-care) | Service Page | Virtual primary and urgent care across California, Texas,… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Primary & Urgent Care — Virtual, Same-Week | 451 | 192 | 43 |
+| [/primary-urgent-care](https://siya.health/primary-urgent-care) | Service Page | Virtual primary and urgent care across California, Texas,… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Primary & Urgent Care — Virtual, Same-Week | 456 | 192 | 43 |
 | [/siya-circle](https://siya.health/siya-circle) | Utility | Community membership signup | Join Our Health Guide → /siya-circle#… | — | Transactional / Utility | Join Siya Circle | 196 | 192 | 33 |
-| [/womens-health](https://siya.health/womens-health) | Page | Women | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Mixed | When energy, cycles, and mood stop making sense… | 755 | 192 | 44 |
+| [/womens-health](https://siya.health/womens-health) | Page | Women | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Mixed | When energy, cycles, and mood stop making sense… | 760 | 192 | 44 |
 | [/womens-midlife-health](https://siya.health/womens-midlife-health) | Page | Women's midlife health is not one disease—it is brain, ho… | Book Free Meet & Greet → /redirect/me… | Women's health services → /womens-health | Mixed | Women's Midlife Health: Brain, Hormones & Metab… | 1812 | 8 | 38 |
 
 ---
@@ -356,12 +356,12 @@ Generated: 2026-09-01
 - **Page Type:** About
 - **Primary Purpose:** Build trust; explain mission and care team
 - **Primary CTA:** Book Free Meet & Greet → /redirect/meet-greet
-- **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
+- **Secondary CTA:** Explore Care Options → /telehealth
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Care for adults who are done guessing about their health
-- **Word Count:** 854
+- **Word Count:** 876
 - **Internal Links In:** 192
-- **Internal Links Out:** 37
+- **Internal Links Out:** 40
 - **Groups:** Trust Pages
 
 ### /adhd-care
@@ -2708,7 +2708,7 @@ Generated: 2026-09-01
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Primary & Urgent Care — Virtual, Same-Week
-- **Word Count:** 451
+- **Word Count:** 456
 - **Internal Links In:** 192
 - **Internal Links Out:** 43
 - **Groups:** Core Revenue Pages, Utility Pages
@@ -2737,7 +2737,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Derek Timbs, FNP-BC
 - **Word Count:** 614
-- **Internal Links In:** 6
+- **Internal Links In:** 8
 - **Internal Links Out:** 38
 - **Groups:** Trust Pages
 
@@ -2807,7 +2807,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Megan Wunderlich, FNP-C
 - **Word Count:** 612
-- **Internal Links In:** 6
+- **Internal Links In:** 8
 - **Internal Links Out:** 38
 - **Groups:** Trust Pages
 
@@ -2821,7 +2821,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Trust / Navigational
 - **Target Keyword:** Wendy Delgado, PA-C
 - **Word Count:** 601
-- **Internal Links In:** 18
+- **Internal Links In:** 20
 - **Internal Links Out:** 38
 - **Groups:** Trust Pages
 
@@ -2848,9 +2848,9 @@ Generated: 2026-09-01
 - **Secondary CTA:** Start Secure Medical Chat → /redirect/chat
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Need a doctor without rearranging your entire day?
-- **Word Count:** 966
+- **Word Count:** 989
 - **Internal Links In:** 192
-- **Internal Links Out:** 43
+- **Internal Links Out:** 46
 - **Groups:** Core Revenue Pages
 
 ### /weight-loss-metabolic-health
@@ -2862,7 +2862,7 @@ Generated: 2026-09-01
 - **Secondary CTA:** Start Secure Medical Chat → /redirect/chat
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** When your appetite, energy, and weight stop making sense
-- **Word Count:** 1146
+- **Word Count:** 1151
 - **Internal Links In:** 192
 - **Internal Links Out:** 45
 - **Groups:** Core Revenue Pages
@@ -2876,7 +2876,7 @@ Generated: 2026-09-01
 - **Secondary CTA:** Start Secure Medical Chat → /redirect/chat
 - **Traffic Intent:** Mixed
 - **Target Keyword:** When energy, cycles, and mood stop making sense together
-- **Word Count:** 755
+- **Word Count:** 760
 - **Internal Links In:** 192
 - **Internal Links Out:** 44
 - **Groups:** Utility Pages

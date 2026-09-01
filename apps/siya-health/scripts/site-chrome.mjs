@@ -820,14 +820,26 @@ function injectHeroPrimaryCta(html, relPath) {
   if (isAdsLandingPage(relPath, html)) return html;
   const heroBlock = html.match(/<div class="hero-ctas[^"]*">[\s\S]*?<\/div>/i);
   if (!heroBlock) return html;
-  const { primary } = resolveConversion(relPath);
+  const { primary, secondary } = resolveConversion(relPath);
   const slot = primary ?? CTA_SLOTS.primary;
   const btn = renderButton({
     ...slotToButton(slot, { location: 'hero', relPath }),
     variant: 'primary',
     ctaSlot: slot.id ?? 'primary',
   });
-  if (heroBlock[0].includes('data-conversion-goal') && heroBlock[0].includes(slot.url)) {
+
+  /** About (and similar): rebuild hero CTA row so secondary is not a duplicate Meet & Greet. */
+  if (relPath === 'about.html' && secondary) {
+    const secondaryBtn = renderButton({
+      ...slotToButton(secondary, { location: 'hero', relPath }),
+      variant: 'secondary',
+      ctaSlot: secondary.id ?? 'secondary',
+    });
+    html = html.replace(
+      /<div class="hero-ctas[^"]*">[\s\S]*?<\/div>/i,
+      `<div class="hero-ctas hero-ctas-row">\n            ${btn}\n            ${secondaryBtn}\n          </div>`,
+    );
+  } else if (heroBlock[0].includes('data-conversion-goal') && heroBlock[0].includes(slot.url)) {
     /* Still refresh mobile sticky CTA if present */
   } else {
     html = html.replace(/<div class="hero-ctas[^"]*">[\s\S]*?<\/div>/i, (block) => {
@@ -1673,10 +1685,15 @@ export function injectProvidersNav(html) {
 
 export function injectAboutProviderHub(html, relPath) {
   if (relPath !== 'about.html') return html;
+  if (html.includes('View full care team') || html.includes('View Our Care Team (7 clinicians)')) {
+    return html;
+  }
   const hubLink = `<p class="blog-hub-see-all"><a href="/providers">View Our Care Team (7 clinicians)</a></p>`;
-  if (html.includes('View full care team')) return html;
-  if (html.includes('about-team-grid')) {
-    html = html.replace(/(<div class="about-team-grid">[\s\S]*?<\/div>)/, `$1\n          ${hubLink}`);
+  if (html.includes('about-care-team-grid')) {
+    return html.replace(
+      /(<div class="about-team-grid about-care-team-grid">[\s\S]*?<\/div>)(\s*<p class="blog-hub-see-all)/,
+      `$1\n          ${hubLink}$2`,
+    );
   }
   return html;
 }

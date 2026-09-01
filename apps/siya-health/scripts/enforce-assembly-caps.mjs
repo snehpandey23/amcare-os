@@ -79,9 +79,11 @@ function demoteExtraPrimaries(mainHtml) {
 function isListingGridSection(attrs = '', inner = '') {
   return (
     /\b(blog-featured|blog-index|blog-hub-section)\b/i.test(attrs) ||
-    /\b(blog-grid|blog-featured-grid|cornerstone-articles-grid|provider-index-grid)\b/i.test(
+    /\b(blog-grid|blog-featured-grid|cornerstone-articles-grid|provider-index-grid|about-care-team-grid|about-team-grid)\b/i.test(
       inner,
-    )
+    ) ||
+    /\bid=["']care-team["']/i.test(attrs) ||
+    /\bid=["']meet-physicians["']/i.test(attrs)
   );
 }
 
