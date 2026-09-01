@@ -1,6 +1,6 @@
 # Provider Expansion — Implementation Report
 
-Generated: 2026-09-01T12:10:08.835Z
+Generated: 2026-09-01T12:23:41.528Z
 
 ## Summary
 
@@ -46,9 +46,9 @@ Generated: 2026-09-01T12:10:08.835Z
 | /providers/dr-vanessa-urbina | 21 |
 | /providers/dr-natasha-desai | 20 |
 | /providers/dr-swati-pandey | 11 |
-| /providers/megan-wunderlich | 7 |
-| /providers/derek-timbs | 7 |
-| /providers/wendy-delgado | 19 |
+| /providers/megan-wunderlich | 9 |
+| /providers/derek-timbs | 9 |
+| /providers/wendy-delgado | 21 |
 
 ## Hub features
 
