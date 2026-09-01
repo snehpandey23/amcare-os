@@ -7,7 +7,10 @@
 #   source scripts/agent-qa-env.sh
 #   npx tsx apps/hipaa-training/scripts/verify-qa-account.ts
 set -euo pipefail
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+# When sourced, $0 is the shell — use BASH_SOURCE so we resolve the repo root.
+_AGENT_QA_SRC="${BASH_SOURCE[0]:-$0}"
+ROOT="$(cd "$(dirname "$_AGENT_QA_SRC")/.." && pwd)"
+unset _AGENT_QA_SRC
 ENV_FILE="${AGENT_QA_ENV_FILE:-$ROOT/.env.agent-qa}"
 
 if [[ -f "$ENV_FILE" ]]; then

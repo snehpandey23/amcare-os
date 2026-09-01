@@ -99,6 +99,16 @@ function bookmarkMessage(item: PortalItem): string {
 
 export function tryWorkplaceLinkLookup(text: string): WorkplaceLinkHit | null {
   const t = expandStaffSlang(text.trim().toLowerCase().replace(/\s+/g, " "));
+  if (!t) return null;
+  // Presence thread ambiguity ("dashboard for login of staff") is handled in engine / Team pulse —
+  // do not dump Workplace links when the ask is about staff login status.
+  if (
+    /\b(dashboard|view|screen|page|see|show)\b/.test(t) &&
+    /\b(login|log\s*in|logged|logging|online|presence)\b/.test(t) &&
+    /\b(staff|team|people|everyone|employees?|roster)\b/.test(t)
+  ) {
+    return null;
+  }
   if (!isToolShortcutQuery(t)) return null;
 
   const label = matchLabel(t);

@@ -126,15 +126,25 @@ export function AssistWorkspaceSidebar({ onNavigate }: { onNavigate?: () => void
             Memory
           </SideLink>
         ) : null}
-        {user && !isPortalAdmin(user.role) ? (
+        {user ? (
           <SideLink href="/team" active={path === "/team" || path.startsWith("/team/")} onNavigate={onNavigate}>
             Team
           </SideLink>
         ) : null}
-        {user && isPortalAdmin(user.role) ? (
-          <SideLink href="/admin/team" active={path.startsWith("/admin")} onNavigate={onNavigate}>
-            Admin
+        {user ? (
+          <SideLink href="/feedback" active={path.startsWith("/feedback")} onNavigate={onNavigate}>
+            Feedback
           </SideLink>
+        ) : null}
+        {user && isPortalAdmin(user.role) ? (
+          <>
+            <SideLink href="/ops" active={path.startsWith("/ops")} onNavigate={onNavigate}>
+              Ops
+            </SideLink>
+            <SideLink href="/admin/team" active={path.startsWith("/admin")} onNavigate={onNavigate}>
+              Admin
+            </SideLink>
+          </>
         ) : null}
       </nav>
     </aside>

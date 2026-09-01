@@ -13,8 +13,25 @@ export const TRACKING = {
 };
 
 /**
- * Inline JS (minified) — skip GTM load on local/dev hosts so lab traffic
- * does not pollute production GA4 (G-9WTQWHCTFT).
+ * Production marketing hosts only — fail closed for Vercel previews,
+ * *.vercel.app aliases, localhost, and any non-siya.health host so staging
+ * traffic cannot pollute GA4 (G-9WTQWHCTFT) / Ads / Meta.
+ *
+ * Allow: siya.health and *.siya.health (www, adhd, assist, getfit, …)
  */
-export const GTM_DEV_HOST_GUARD =
-  "var h=(w.location&&w.location.hostname)||'';if(h==='localhost'||h==='127.0.0.1'||h==='[::1]'||/\\.local$/.test(h))return;";
+export const isProductionAnalyticsHostJs = `
+function __siyaIsProdAnalyticsHost(h) {
+  h = String(h || '').toLowerCase();
+  return h === 'siya.health' || /\\.siya\\.health$/.test(h);
+}
+`.trim();
+
+/**
+ * Inline JS for the GTM bootstrap IIFE — early return unless production host.
+ * Uses `w` (window) from the GTM snippet signature.
+ */
+export const GTM_PRODUCTION_HOST_GUARD =
+  "var h=(w.location&&w.location.hostname)||'';if(!(h==='siya.health'||/\\.siya\\.health$/i.test(h)))return;";
+
+/** @deprecated Use GTM_PRODUCTION_HOST_GUARD (allowlist). Kept for import compatibility. */
+export const GTM_DEV_HOST_GUARD = GTM_PRODUCTION_HOST_GUARD;

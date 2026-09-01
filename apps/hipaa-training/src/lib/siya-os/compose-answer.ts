@@ -20,7 +20,7 @@ const VAGUE_ONLY = new Set([
 ]);
 
 const CONFUSED_FOLLOW_UP =
-  /^(what(\s+the\s+heck|\s+the\s+fuck|\s+are\s+you|\s+r\s+u|\s+do\s+you\s+mean)\b|huh+\??|wtf\??|idk|this (doesn'?t|dont) make sense|that (doesn'?t|dont) (help|make sense)|speak english)\b/i;
+  /^(what(\s+the\s+heck|\s+the\s+fuck|\s+are\s+you|\s+r\s+u|\s+do\s+(you|u)\s+mean)\b|wdym\??|wym\??|huh+\??|wtf\??|idk|this (doesn'?t|dont) make sense|that (doesn'?t|dont) (help|make sense)|speak english)\b/i;
 
 export function isVagueUserMessage(text: string): boolean {
   const t = text.trim().toLowerCase();
@@ -38,6 +38,7 @@ export function isVagueUserMessage(text: string): boolean {
 export function isConfusedAboutPriorAnswer(text: string): boolean {
   const t = text.trim();
   if (!t) return false;
+  if (/^(wdym|wym)\??$/i.test(t)) return true;
   if (CONFUSED_FOLLOW_UP.test(t) && t.length < 100) return true;
   if (
     /^(what (the heck|are you saying|r u saying|does that mean)|i don'?t understand|that'?s not (what i|helpful)|stop)\b/i.test(
@@ -514,6 +515,16 @@ function formatPrimaryAnswer(
     ];
   }
 
+  if (primary.id === "leave-pto-request-provisional") {
+    return formatLeavePtoProvisionalAnswer().split("\n");
+  }
+  if (primary.id === "patient-manager-request-provisional") {
+    return formatPatientManagerProvisionalAnswer().split("\n");
+  }
+  if (primary.provisional && /leave|pto|time\s*off/i.test(primary.id + primary.title)) {
+    return formatLeavePtoProvisionalAnswer().split("\n");
+  }
+
   if (primary.id === "patient-pricing-public-canonical") {
     return [
       "**Public pricing (siya.health):**",
@@ -542,10 +553,21 @@ export function composeAnswerFromChunks(
   }
 
   const primary = chunks[0];
+  if (primary.id === "leave-pto-request-provisional") {
+    return formatLeavePtoProvisionalAnswer();
+  }
+  if (primary.id === "patient-manager-request-provisional") {
+    return formatPatientManagerProvisionalAnswer();
+  }
+
   const parts: string[] = [...formatPrimaryAnswer(userMessage, primary, flowId)];
 
   const steps = numberedSteps(primary.snippet);
-  if (steps.length >= 2 && primary.id !== "homepage-cta-meet-and-greet") {
+  if (
+    steps.length >= 2 &&
+    primary.id !== "homepage-cta-meet-and-greet" &&
+    !primary.provisional
+  ) {
     parts.push("");
     parts.push("**Steps:**");
     steps.forEach((step, i) => {
@@ -554,7 +576,7 @@ export function composeAnswerFromChunks(
   }
 
   const related = relatedChunks(userMessage, primary, chunks.slice(1, 4));
-  if (related.length && !knowledgeGap) {
+  if (related.length && !knowledgeGap && !primary.provisional) {
     parts.push("");
     parts.push("**Also see:** " + related.map((r) => r.title).join(" · "));
   }
@@ -571,6 +593,64 @@ export function composeAnswerFromChunks(
 
 export const DRAFT_LIVE_HEDGE =
   "**Note:** This guidance is from an **active draft SOP**, not finalized policy. Confirm with the department lead before treating it as required procedure.";
+
+/** UI eyebrow — keep short; body disclaimer is separate. */
+export const PROVISIONAL_CHIP_LABEL = "Provisional · not an approved policy";
+
+export const PROVISIONAL_LEAVE_DISCLAIMER =
+  "Practical next steps only — not signed-off leave policy. Your manager/HR must confirm before you treat time off as approved.";
+
+export const PROVISIONAL_SOURCE_HR = "HR · provisional stub";
+
+export const PROVISIONAL_MANAGER_DISCLAIMER =
+  "Practical next steps only — not a signed-off escalation SOP. Confirm with Clinical Program Manager / Ops before treating this as required procedure.";
+
+export const PROVISIONAL_SOURCE_OPS = "Clinical Ops · provisional stub";
+
+export function formatLeavePtoProvisionalAnswer(): string {
+  return [
+    "To request leave or time off:",
+    "",
+    "1. **Request leave** — Reach out to your **manager** or **HR contact** to formally request the time off. Do **not** assume approval from Ask.",
+    "2. **Include details** — the date(s), type of leave (e.g. personal, sick), and any **coverage notes** for your role while you are out.",
+    "3. **Wait for approval** — treat time off as confirmed only after you get **explicit approval** from your manager or HR.",
+    "",
+    PROVISIONAL_LEAVE_DISCLAIMER,
+  ].join("\n");
+}
+
+export function formatPatientManagerProvisionalAnswer(): string {
+  return [
+    "When a **patient** asks to speak with a **manager** or **supervisor**:",
+    "",
+    "1. **Acknowledge** — Stay calm and confirm you heard the request. Keep patient identifiers out of Ask.",
+    "2. **One resolution attempt (when safe)** — If the issue is within MA scope and the patient is willing, offer **one** clear attempt to help (scheduling status, visit logistics, documenting their concern).",
+    "   **Escalate immediately** instead if: abusive / threatening / safety; they refuse further MA help; clinical or medication questions; billing refund/waiver demands; or you are unsure.",
+    "3. **Escalate / transfer to** — **Clinical Program Manager** (provisional default). Do not invent another title. If CPM is unavailable, use coverage your lead already documented — don’t guess contacts here.",
+    "4. **Document** — In Spruce / EHR: that they requested a manager/supervisor, what you tried, time, and handoff/outcome.",
+    "",
+    PROVISIONAL_MANAGER_DISCLAIMER,
+  ].join("\n");
+}
+
+export function provisionalSourceLabel(chunkId: string | undefined): string {
+  if (chunkId === "leave-pto-request-provisional") return PROVISIONAL_SOURCE_HR;
+  if (chunkId === "patient-manager-request-provisional") return PROVISIONAL_SOURCE_OPS;
+  return "Provisional stub (not approved policy)";
+}
+
+export function provisionalRoutingMeta(chunkId: string | undefined): {
+  department: "HR" | "Clinical Operations" | "General";
+  task: string;
+} {
+  if (chunkId === "leave-pto-request-provisional") {
+    return { department: "HR", task: "Leave / PTO request" };
+  }
+  if (chunkId === "patient-manager-request-provisional") {
+    return { department: "Clinical Operations", task: "Patient requests manager" };
+  }
+  return { department: "General", task: "Provisional guidance" };
+}
 
 /** Append once when any retrieved SOP is draft-live. */
 export function appendDraftLiveHedge(message: string, chunks: RetrievedChunk[]): string {

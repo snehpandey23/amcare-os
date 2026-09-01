@@ -4,6 +4,20 @@
   "buildCommand": "npm run build",
   "outputDirectory": ".",
   "installCommand": "echo 'No install needed'",
+  "rewrites": [
+    {
+      "source": "/api/employer-inquiry",
+      "destination": "https://siya-staff-auth-api.vercel.app/api/public/employer-inquiry"
+    },
+    {
+      "source": "/api/siya-circle-signup",
+      "destination": "https://siya-staff-auth-api.vercel.app/api/public/siya-circle-signup"
+    },
+    {
+      "source": "/api/provider-careers-inquiry",
+      "destination": "https://siya-staff-auth-api.vercel.app/api/public/provider-careers-inquiry"
+    }
+  ],
   "redirects": [
     {
       "source": "/terms",
@@ -234,11 +248,6 @@
       "source": "/(.*).mjs",
       "destination": "/",
       "permanent": true
-    },
-    {
-      "source": "/siya-circle",
-      "destination": "https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl",
-      "permanent": false
     },
     {
       "source": "/blog/adhd-treatment-los-angeles-ca",

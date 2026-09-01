@@ -1,0 +1,59 @@
+# Research extract — ADHD × Insulin Resistance (calibration)
+
+```yaml
+pillar: adhd-metabolic / insulin-resistance
+date: 2026-08-05
+status: submitted_for_review
+clinical_review_required: true
+evidence_level: Emerging–Moderate association; causation not established
+audience: adults_18_49_men_women
+business_goal: educational
+formats: [carousel, blog, reel]
+```
+
+## Citations (science layer)
+
+### C1 — Shared genetics / insulin-related traits
+- Multivariate / factor models linking ADHD traits with IR-related traits (BMI, glucose, HbA1c) in population genetics (preprint / related Nature insulinopathy literature).
+- Use: shared liability framing — **not** “IR causes ADHD.”
+
+### C2 — MetS / T2D ↔ ADHD
+- Observational comorbidity + Mendelian randomization literature suggesting bidirectional / shared risk with metabolic syndrome and T2D.
+- Use: association strong enough to educate; still confounded by lifestyle and comorbidity.
+
+### C3 — Adult ADHD metabolic outpatient studies
+- Higher MetS / IR signals in some adult ADHD clinical samples.
+- Limitation: clinic samples, BMI/meds/sleep confounders.
+
+### C4 — T1D glycemic control meta (adjacent only)
+- ADHD associated with worse glycemic outcomes in T1D in meta-analysis.
+- **Out of scope for IR carousel** unless clearly labeled diabetes-management education.
+
+## Insights (patient_why)
+
+| id | claim | patient_why | evidence | emotion |
+|----|-------|-------------|---------|---------|
+| I1 | ADHD and insulin resistance commonly co-occur; association ≠ causation | Stops panic from “I was misdiagnosed” influencer hooks | C1–C3 | Relief, Confusion |
+| I2 | ADHD + IR ± PCOS often stack in women’s lived reports | Validates fragmented-care experience | Reddit r/adhdwomen capture | Validation, Anger |
+| I3 | Blood-sugar swings can worsen focus/energy even when ADHD is real | Explains post-meal crashes without replacing ADHD | Reddit blood-sugar thread + physiology | Curiosity |
+| I4 | Other conditions can mimic or worsen ADHD-like symptoms | Whole-person evaluation without invalidation | r/ADHD differential thread | Fear→Empowerment |
+| I5 | Dopamine slogans oversimplify ADHD | Myth-bust without contempt | TooAfraidToAsk pattern | Confusion |
+| I6 | Weight × ADHD co-occurrence is real and multi-causal | Allows metabolic talk without fat-shaming or “it’s not ADHD” | loseit high engagement (reframed only) | Shame→Validation |
+| I7 | Saves > likes on clinician TikToks signal demand for calm explainers | Prioritize physician-led Reel craft | TikTok @dr.stoychev saves 241 | Hope, Trust |
+
+## Out of scope (for now)
+
+- IR causes ADHD / ADHD causes IR as settled fact
+- GLP-1 as ADHD treatment
+- Stimulant fear marketing
+- Fat-shaming remakes of viral loseit framing
+- DIY lab/medication protocols
+- On-frame false-precision prevalence
+
+## Ranked creative opportunities (CMO picks before production)
+
+1. Roommates not rivals — ADHD + IR ± PCOS (I1, I2)
+2. What science says vs what Reels say (I1, I5)
+3. Mimics & co-travelers including metabolic (I4)
+4. Focus crash after eating (I3)
+5. Questions to ask when both show up (I2, I4, I7)

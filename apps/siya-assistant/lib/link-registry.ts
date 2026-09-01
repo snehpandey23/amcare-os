@@ -290,7 +290,7 @@ export const LINK_REGISTRY: Record<string, LinkRecord> = {
     siya_circle_join: {
         id: 'siya_circle_join',
         label: 'Join Siya Circle',
-        url: 'https://form.carepatron.com/Forms/XRMFIPAWuXhTlncGx',
+        url: 'https://www.siya.health/siya-circle#siya-circle-signup',
         kind: 'contact'
     },
     prescriptions: {
@@ -362,6 +362,12 @@ export const QUICK_ACTIONS = [
         id: 'human',
         label: 'Talk to a human',
         prompt: 'I want to talk to a human',
+        linkHint: 'call_siya'
+    },
+    {
+        id: 'contact_me',
+        label: 'Contact me',
+        prompt: 'Please have someone contact me',
         linkHint: 'call_siya'
     },
     {

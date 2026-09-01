@@ -4,6 +4,46 @@ import type { WorkspaceKbEntry } from "./workspace-kb.types";
 
 export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
   {
+    "id": "patient-manager-request-provisional",
+    "category": "operations",
+    "title": "Patient asks for a manager / supervisor — provisional steps",
+    "keywords": [
+      "manager",
+      "supervisor",
+      "speak to a manager",
+      "talk to a manager",
+      "ask for a manager",
+      "transfer to manager",
+      "patient wants manager",
+      "escalate to supervisor",
+      "speak to supervisor",
+      "talk to supervisor"
+    ],
+    "body": "**Provisional** staff guidance when a **patient** asks to speak with a **manager** or **supervisor**. This is **not** a signed-off escalation SOP. MAs need a clear transfer/escalation path while Ops finalizes the handbook. Prefer an authored provisional stub over inventing titles mid-chat. 1. **Acknowledge** — Stay calm. Confirm you heard the request (e.g. they want a manager/supervisor). Keep names and chart details out of Ask. 2. **One resolution attempt (when safe)** — If the issue is within MA scope (scheduling status, visit logistics, documenting a concern) and the patient is willing, offer **one** clear attempt to help. **Escalate immediately** (skip the extra attempt) if: abusive / threatening / safety concern; patient refuses further MA help; clinical advice or meds; billing refund/waiver demands; or you are unsure. 3. **Escalate / transfer to** — **Clinical Program Manager** (default provisional owner for patient→manager requests). Do not invent another title. If CPM is unavailable, use your shift’s documented coverage / on-call path your lead has already shared — do not guess contacts in Ask. 4. **Document** — In Spruce / EHR (not Ask): that the patient requested a manager/supervisor, what you tried, time, and outcome/handoff. No PHI in this chat. **Can Ask approve transferring to “anyone who will listen”?** No. Use the Clinical Program Manager path above. **Is this the hostile/abusive patient playbook?** No — use the reviewed abusive-patient SOP when the interaction is hostile, abusive, or threatening. This stub is for an ordinary manager request. Use when staff ask what to do if a **patient** wants a manager/supervisor. Always keep provisional framing. Cite **Clinical Ops · provisional stub** only. Never invent alternate escalate-to roles mid-chat. Never treat Ask as the transfer channel.",
+    "escalate": "Clinical Program Manager",
+    "answerTrust": "provisional"
+  },
+  {
+    "id": "leave-pto-request-provisional",
+    "category": "hr",
+    "title": "Leave / PTO request — provisional staff steps",
+    "keywords": [
+      "leave",
+      "PTO",
+      "time off",
+      "vacation",
+      "holiday",
+      "day off",
+      "request leave",
+      "take leave",
+      "call in sick",
+      "sick leave"
+    ],
+    "body": "**Provisional** staff guidance for requesting leave or time off. This is **not** a signed-off leave / PTO / attendance handbook. Ask never approves time off. Staff need clear next steps while the full HR leave policy is still pending founder + HR sign-off. Prefer honest provisional process over inventing accrual rules or treating chat as approval. 1. **Request leave** — Reach out to your **manager** or **HR contact** to formally request the time off. Do **not** assume approval from Ask. 2. **Include details** — date(s) of leave, type (e.g. personal, sick), and any **coverage notes** for your role while you are out. 3. **Wait for approval** — Treat time off as confirmed only after you receive **explicit approval** from your manager or HR. **Can Ask approve my leave?** No. Ask can outline these steps only. **Where is the full PTO handbook?** Not published in Ask yet — escalate **HR** / your manager. Use for leave / PTO / time-off / day-off / vacation / sick-leave request questions. Always keep provisional framing. Never invent days of accrual, pay rules, or approval. Never cite Clinical Operations for this topic. Source label: **HR · provisional stub**.",
+    "escalate": "HR / your manager",
+    "answerTrust": "provisional"
+  },
+  {
     "id": "refill-pharmacy-staff-guidance",
     "category": "clinical_operations",
     "title": "Refill and pharmacy — staff guidance until full playbook",
@@ -18,7 +58,28 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "medication not received"
     ],
     "body": "**Short answer from Clinical Program coverage map:** There is **not yet** a complete internal refill / pharmacy playbook for every complicated case. Staff have CSA/public policy anchors, approved message fragments, and escalation rules. **Missing** full internal SOPs for travel/early-refill exceptions, declined-refill reinstatement, and run-out vs scheduling bridge (provider only). **Staff default until full playbook is complete:** empathize → document facts in chart/Spruce → **do not promise** fees, refunds, refills, or waivers → escalate per table below. Concierge chat must not authorize clinical or billing exceptions. Use approved timing language and escalate. ### Escalation cheat sheet | If… | Escalate to | |-----|-------------| | Fees, refunds, no-show, $150/$50 charges | **Billing lead** | | Refill, withdrawal, side effects, med change, travel exception | **Provider / clinical lead** (urgent: same day) | | Severe symptoms, suicidality, patient refuses ER | **Provider immediately** + document 911 advice per CSA | | “Is CREYOS/UDS required for my program?” | **Provider** or Clinical Program (written criteria TBD) | | Angry / threatening | Supervisor + document | Never authorize refunds, fee waivers, early refills, or prescription changes in concierge chat. ### Policy anchors staff may cite (not invent) - CSA / public controlled-substance agreement: **early refills are not permitted**; lost/stolen not replaced; Rx may take **≤5 business days**; travel exception **only provider**. - Follow-up before refill: schedule follow-up **≥5 days before** next 30-day prescription due date; prescriptions may take time after required steps. - Medication not received / wants immediate refund: cite ≤5 business days + pharmacy check; **no refund promise** → Billing. ### Post-visit cadence (founder post-visit protocol) **Clock:** Days are **calendar days after the visit** unless ops defines otherwise (confirm timezone with supervisor). **Global rule — no response:** If the patient does not respond, schedule the **next follow-up reminder 10 days later** (confirm with supervisor; default: 10 days after unanswered touchpoint). | Day | Goal | |-----|------| | **Day 3** | Confirm patient **received medications**; then UDS/labs outreach if required per protocol | | **Day 10** | Med working / wellness; periodic med break **only as per doctor’s note** | | **Day 10–15** | Schedule/complete **video pill count** when CSA v2 applies; refuse → escalate provider | | **Day 15** | CREYOS on day 15 or per provider order | Do not invent med-break schedules — follow chart/note. ### Approved pharmacy / refill message fragments (use in Spruce — no PHI in Ask) **Pharmacy details request:** Could you please share your preferred pharmacy's name and full address? **Meds sent:** Your prescription has been sent to your preferred pharmacy and should be ready soon. Please call the pharmacy before you go to make sure it’s ready for pickup. **Medicine pickup check:** Were you able to swing by the pharmacy to pick up your medication? **Follow-up timing + $50 fee (controlled substance):** Follow-up should be scheduled at least **5 days before** next 30-day prescription due date; try **one week in advance**; missing follow-up may result in a **$50 fee** per controlled substance agreement. **Can staff approve an early refill for travel?** No. Escalate provider; CSA: early refills not permitted. **Patient says med ran out and wants same-day bridge?** Escalate **provider only** — no bridge/emergency refill promise in chat. **Is there a full reinstatement SOP after declined refill?** Not yet — escalate provider / clinical lead immediately (especially withdrawal). Retrieve for refill / pharmacy / early refill / med-not-received staff questions. Prefer escalation rules and approved timing language. Do **not** invent reinstatement, travel exceptions, or fee waivers. Full controlled-substance staff playbook remains a Clinical Program build item.",
-    "escalate": "Provider / clinical lead"
+    "escalate": "Provider / clinical lead",
+    "answerTrust": "approved"
+  },
+  {
+    "id": "discovery-call-staff-billing",
+    "category": "operations",
+    "title": "Discovery Call — staff billing, cancel, and no-show",
+    "keywords": [
+      "Discovery Call",
+      "Meet and Greet",
+      "no-show",
+      "cancellation",
+      "refund",
+      "Carepatron",
+      "Spruce",
+      "patientsupport",
+      "$79",
+      "$10"
+    ],
+    "body": "Staff cheat sheet for **Siya Health Discovery Call** billing and attendance (also related to site “Meet & Greet” naming — align SKUs separately). Support email: **patientsupport@siya.health**. This topic is for **Discovery Call only** — not full ADHD evaluation / CSV / Klarity-booked visits (use Klarity topics for Klarity). Concierge and MAs must apply Discovery Call fee rules without waiving fees in chat or inventing refunds. ### Money | Item | Amount | |------|--------| | Total | $79 | | At booking (non-refundable) | $10 | | Due ≥1 h before visit | $69 | From Terms: remaining **$69** must be paid at least **1 hour before** the appointment. Covers an **initial evaluation and management visit only** — not emergency care. **No controlled medications** prescribed on this visit. ### Refunds / cancel (staff language — no promises) - **$10:** never refunded. - **$69:** refunded if patient cancels **≥24 h** before; kept if **<24 h** (patient charged full $79). - **Exceptions:** Billing lead only — document and escalate. ### No-show / late - No-show → **$79 forfeited**. - **Late >5 min** from start → may be documented as no-show per provider (full $79). - **One** discretionary free reschedule possible (provider) — staff do **not** grant; ask supervisor/provider. - Rebook otherwise: **full upfront** per policy. - Arrive/log in **5–10 minutes early** for check-in (Terms). ### Tech issues | Side | Action | |------|--------| | Patient (wifi, device, app) | Not Siya liability; no automatic refund — empathize, offer rebook per Billing | | Siya (platform/outage) | May free reschedule — escalate IT + Billing; email patientsupport | ### Before call Intake + telehealth consent **required** or visit may cancel with fee forfeiture. ### Clinical scope (set expectations) - Not emergency care. - **No controlled substances** prescribed on Discovery Call. - Further care = separate paid services. ### Disputes - Chargebacks → patientsupport first. - “I was on the call” disputes → document times, Zoom/telehealth logs, chart → **Billing lead**. ### Do not - Waive $10 or $79 in chat. - Promise refund without Billing. - Give medical advice or prescribe. **Is this the same as Klarity cancellation?** No. Klarity-booked visits use Klarity billing topics. Discovery Call uses this topic and patientsupport@siya.health. **Can staff grant one free reschedule after a no-show?** No. Provider discretion only; staff escalate. Cite for Discovery Call / Meet & Greet billing and no-show only. Never promise refunds. Escalate Billing lead. Do not apply these dollar amounts to Klarity or full evaluation products.",
+    "escalate": "Billing lead",
+    "answerTrust": "approved"
   },
   {
     "id": "ma-platforms-zoho-spruce",
@@ -37,7 +98,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "EHR"
     ],
     "body": "**Audience:** Medical Assistant / Clinical Program Manager (Amcare → Siya Health). Platforms overview for telemedicine remote support. Additional chapters (Carepatron, Klarity, Rupa) add when pasted. **This topic does not define an IT access-request workflow** — escalate Technology / supervisor for login provisioning. MAs need correct Zoho vs Spruce boundaries (internal vs patient PHI) and basic Spruce how-to. ### 1. Zoho suite Internal comms, storage, admin — **not** for patient PHI in Mail/Cliq. #### Zoho Mail - Official email only; assigned work ID; no personal email for work. #### Zoho Cliq - Team chat; **Remote Work** status on at shift start, off at end; respond promptly in hours. #### Zoho WorkDrive Under **Shared With Me**, maintain: | Folder | Contents | |--------|----------| | Personal | CV, marksheets, HR docs | | Tasks | Assignments | | Meeting Notes | Meeting notes | Create docs: **Writer** (text), **Sheet** (spreadsheets) via New menu. Label files clearly. #### Zoho TrueSync - Sync with WorkDrive; **EHR/PHI only in TrueSync/WorkDrive** — not desktop/personal drives. - Delete completed PHI files from WorkDrive/TrueSync when done (HIPAA hygiene). - Ref: https://www.zoho.com/workdrive/truesync.html Company Memory path: `Common Folder/SiyaOS/` (team KB — separate from patient PHI). ### 2. Spruce **Purpose:** HIPAA-compliant **patient** messaging. **Primary uses:** - Appointments; CREYOS; UDS comms; patient Q&A; calls to patients/pharmacies - Scheduled sends; internal reminders - Patient invite; **Pages** tab tasks **Rules:** - All patient comms via Spruce — not personal SMS/email/social. - Professional, timely responses. #### Spruce how-to (summary) | Task | Steps | |------|--------| | **Call settings** | Settings → Call Settings → Desktop & Web: **Softphone** (not Proxy) → Save | | **Place call** | New → Call → number → Call | | **Schedule message** | Chat → type → clock icon → date/time → Schedule | | **Internal note / reminder** | Internal Note → assign/mention → optional reminder time | | **Invite patient** | New → Invite Patient → name + phone or email → Send | | **Pages** | Left panel → Pages → complete → mark resolved | **How do I request new system access?** Not documented in this topic. Escalate Technology / supervisor. Do not invent provisioning steps. **Can I put PHI in Zoho Mail or Cliq?** No. Patient PHI stays in approved clinical tools; WorkDrive/TrueSync hygiene rules above for files. Retrieve for Zoho / Spruce how-to and PHI channel rules. For “I can’t log in” or access provisioning, escalate Technology — do not invent access workflows.",
-    "escalate": "Technology / supervisor"
+    "escalate": "Technology / supervisor",
+    "answerTrust": "approved"
   },
   {
     "id": "ma-onboarding-field-lessons",
@@ -57,7 +119,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "orientation"
     ],
     "body": "Operational field lessons for **Medical Assistant / Concierge** Day-1 orientation. Distilled from staff work-experience reflection (2026-07-26). This is **not** a complete onboarding handbook — improve Day-1 orientation from real hire experience; escalate HR / Clinical Program for full schedule and SOW scope. New hires hit tool surprise and title/expectation mismatch. Orientation must set systems map and role clarity early. ### Problem: tool surprise - Week 1 training may cover only **Klarity + Spruce**. - Full role requires **~5–6 applications** (CREYOS, Rupa, Carepatron, Zoho, plus chart/scheduling rules). - **Fix:** Single **Day-1 systems map** in orientation; link WorkDrive `operations/WORKFLOWS-INDEX.md` and product manual Ch.1 (Zoho / Spruce platforms topic in Ask). ### Problem: title vs expectations - Hires may expect **Clinical Dietitian** (or other clinical title) but role is **Medical Assistant / Concierge Specialist** with scope per Clinical Program Manager / MA SOW. - **Fix:** Offer letter + Day-1 verbal: MA = coordination & protocol, **not** independent clinical nutrition/diet prescribing unless licensed and scoped. ### Role clarity over time - Responsibilities may expand (e.g. Klarity booking, Spruce independently) as trust grows. - Document **escalation boundaries** early (MA key competencies; git KB `escalation-pathways`). ### Culture note (internal) - Organization is **still developing**; workflows will change — use WorkDrive `operations/WORKFLOW-CONFLICTS.md` and suggest updates via supervisor. - **Future programs** (e.g. structured diet/weight therapeutic offering) require **clinical + product approval** before staff assume duties — route ideas to Leadership, not ad hoc patient promises. ### Personal reflections Individual career reflections belong in **1:1 / HR file**, not Company Memory. Operational bullets above are the durable ingest. **Is there a full step-by-step onboarding SOP?** Not in this topic. Use Day-1 systems map + SOW + escalate HR / Clinical Program. Full MA training schedules remain in WorkDrive drafts until promoted. Use for MA / new-hire orientation questions about which tools exist and role vs clinical title. Do not invent PTO, reimbursement, or clinical protocols from this topic.",
-    "escalate": "HR / Clinical Program"
+    "escalate": "HR / Clinical Program",
+    "answerTrust": "approved"
   },
   {
     "id": "escalation-pathways",
@@ -80,7 +143,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
         "label": "HIPAA certification course",
         "href": "/training"
       }
-    ]
+    ],
+    "answerTrust": "approved"
   },
   {
     "id": "klarity-billing-cancellation",
@@ -99,7 +163,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "billing"
     ],
     "body": "Staff-facing summary of **Klarity Health** published billing / cancel / no-show / chargeback rules for patients booked on Klarity. **Do not invent Siya-only exceptions** in chat. Klarity Billing Policy last revised on Klarity site: **Jul 30, 2025** (verified 2026-08-03). Refund and cancel language is a liability magnet. Klarity already publishes rules; MAs need one place to retrieve them and escalate correctly. **Can MA approve a refund?** No. Billing lead / provider / Klarity support only. **Is the $10 deposit ever refundable?** Klarity publishes it as **non-refundable** for initial visits. **Klarity vs Siya.health cancel rules?** Different channels. Use this topic for Klarity bookings; use Siya finance/clinical policies for direct Siya.health bookings. | Symptom | Action | |---------|--------| | Patient demands same-day refund | Empathy + Klarity 24h rule; escalate Billing; no promise | | Chargeback threat | Direct to Klarity support first; Billing lead | | “Klarity charged me after insurance denial” | Expected per Payment Agreement; escalate Billing / provider | Klarity self-pay: $10 non-refundable initial deposit; remainder and many follow-ups charge ~24h prior. Refunds only if cancel ≥24h (deposit kept). No refunds for late cancel, no-show, completed care, Rx issues, or dissatisfaction. Chargebacks discouraged — contact Klarity support. MAs and Assist never authorize refunds. Escalate Billing lead.",
-    "escalate": "Billing lead"
+    "escalate": "Billing lead",
+    "answerTrust": "approved"
   },
   {
     "id": "klarity-previsit-checklist",
@@ -118,7 +183,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "MA checklist"
     ],
     "body": "Before a Klarity-booked visit goes live, MAs confirm: **(1) invoices / balances are cleared or ready**, and **(2) intake + consent forms are complete**. Incomplete forms can delay the visit and may trigger **extra fees** for extended time. Klarity policy puts documentation and payment readiness on the patient — but ops quality depends on MAs catching gaps early so providers are not surprised and patients are not charged unexpectedly for admin delay. **Must intake be done before the patient can see the schedule?** Klarity states incomplete intake prompts on login and that forms should be done before accessing the appointment schedule — but bypass paths exist for joining video. Treat incomplete forms as a **pre-visit defect**, not “optional.” **Who completes forms?** Patient in Klarity (or IntakeQ) client portal. MA coaches steps; does not fill clinical history for the patient. **Payment not cleared 24h before?** Escalate Billing; follow release/hold practice set by Clinical Program — do not promise the visit will proceed unpaid. | Symptom | Action | |---------|--------| | Forms incomplete night before | Message patient via portal; escalate if no response | | Deposit paid, remainder failed | Billing lead + Klarity support if platform error | | Patient joined without forms | Notify provider; document; complete forms ASAP | | Patient asks “will I be charged extra?” | Quote Klarity incomplete-intake fee language; no custom promises | For Klarity visits, MAs verify payment timing ($10 initial deposit; remainder / follow-ups ~24h prior) and completed intake + ID. Incomplete forms can cause extra fees. Patients may still join video without finishing forms — still chase forms. No refund or fee waivers in Assist. Escalate payment blocks to Billing lead.",
-    "escalate": "Billing lead"
+    "escalate": "Billing lead",
+    "answerTrust": "approved"
   },
   {
     "id": "patient-pricing-public-canonical",
@@ -131,16 +197,17 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "evaluation",
       "follow-up",
       "membership",
-      "meet and greet",
+      "discovery",
       "adhd"
     ],
-    "body": "Staff must align patient-facing answers with **published** siya.health pricing (`site-standards.mjs` → `PRICING`) unless billing leadership publishes an update. Prefer the Ask **facts-lookup** layer for SKU amounts. **Published (siya.health/pricing + `PRICING`):** - **Free** — Meet & Greet (non-clinical intro). The paid **$79 Discovery Call is discontinued** (archived 2026-08-06). - **$149** — initial physician evaluation (one-time). - **$79/month** — follow-up plan (non-controlled medication management where applicable). - **$149/month** — follow-up plan when controlled-substance monitoring applies. **Homepage CTA:** Primary hero action is **Book Free Meet & Greet** (owned flow), not third-party marketplace checkout — see decision `homepage-cta-meet-and-greet`. **Other legacy drafts** (intake **$199**, Bronze tiers, neuro-spiritual bundles, etc.) may still appear in WorkDrive — do **not** quote them as current. Escalate CEO/Billing if someone insists on a draft number. **Which price do I quote on Spruce?** Use the invoice type billing lead configured in Klarity/Carepatron. Meet & Greet is **free**. Full evaluation is **$149**. Do not quote Discovery Call **$79**. Cite **Free Meet & Greet**, **$149 initial**, **$79 / $149 monthly** follow-up from the public site / facts-lookup. Never quote Discovery Call $79. Never promise refunds or discounts not in written policy.",
+    "body": "Staff must align patient-facing answers with **published** siya.health pricing unless billing leadership publishes an update. **Published (siya.health/pricing):** - **$149** — initial physician evaluation (one-time). - **$79/month** — follow-up plan (non-controlled medication management where applicable). - **$149/month** — follow-up plan when controlled-substance monitoring applies. **Homepage CTA:** Primary hero action is **Book Free Meet & Greet** (owned flow), not third-party marketplace checkout — see decision `homepage-cta-meet-and-greet`. **Internal drafts may conflict:** Legacy docs mention Discovery **$79**, intake **$199**, Bronze **$49**, neuro-spiritual bundle **$149**, **$69/mo** maintenance, ads at **$79 consult**. **Do not** state those as current policy in chat until `FOUNDER-RESOLVE` items are closed and this topic is updated. **Which price do I quote on Spruce?** Use the invoice type billing lead configured in Klarity/Carepatron. If unsure, escalate **Billing** — do not guess between $79 discovery and $149 eval. For pricing questions: cite **$149 initial**, **$79 / $149 monthly** follow-up tiers from the public site; mention Meet & Greet for entry; flag that internal legacy funnels differ and require founder confirmation; never promise refunds or discounts not in written policy.",
     "links": [
       {
         "label": "Public pricing page",
         "href": "https://siya.health/pricing"
       }
-    ]
+    ],
+    "answerTrust": "approved"
   },
   {
     "id": "hipaa-breach",
@@ -162,7 +229,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
         "href": "/module/breach"
       }
     ],
-    "escalate": "Privacy Officer immediately"
+    "escalate": "Privacy Officer immediately",
+    "answerTrust": "approved"
   },
   {
     "id": "marketing-staff-daily-help",
@@ -179,7 +247,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "what to work on"
     ],
     "body": "Practical guidance when someone asks for a marketing plan or what to work on today. 1. **Calendar first** — confirm today’s priorities with **Marketing lead (CMO)** and the editorial / content tracker (what’s scheduled, what’s in review). 2. **Patient-facing work** — run the **pre-publish content QA** (states, disclaimers, CTAs, link checks) before anything goes live. 3. **Claims & compliance** — any clinical, pricing, or outcome language needs **Medical Director** review per marketing compliance SOP; do not self-approve. 4. **Strategy & ad spend** — long-range campaign plans and budgets are owned by leadership/CMO; this assistant does not generate daily ad plans. 5. **Need assets** — use brand voice / entity rules; company voice only unless leadership requests otherwise. **Can the helpdesk tell me today’s posts?** No — it does not read your calendar. Ask Marketing lead or check the tracker. **I have a draft caption** Run QA + compliance path; escalate clinical wording to Medical Director. Reply like a helpful marketing ops colleague. Never mention file systems, repositories, or how the bot is built. Offer QA checklist, compliance path, brand voice, and “talk to CMO for calendar/strategy.”",
-    "escalate": "Marketing lead (CMO)"
+    "escalate": "Marketing lead (CMO)",
+    "answerTrust": "approved"
   },
   {
     "id": "company-memory-workdrive-index",
@@ -195,7 +264,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "legacy"
     ],
     "body": "**Authoritative for staff AI (this assistant):** `docs/siyaos-knowledge-base/` topics with `status: live` only. **Extended company memory (drafts):** Zoho WorkDrive `Common Folder/SiyaOS/` — HR SOWs, MA playbooks, marketing strategy, clinical templates. Most legacy ingests are **`draft`** and **`bot_retrieve: false`** until founders mark **`live`** and copy approved sections into git. 1. Staff question → retrieve from **live git KB** first. 2. If answer missing or marked unresolved → **escalate** to owner in frontmatter; do not invent from memory. 3. Founders edit WorkDrive → resolve conflicts in `SiyaOS/00-START-HERE/FOUNDER-RESOLVE-from-legacy-docs.md` → promote slices to git `topics/*.md` → run `npm run kb:build -w @amcare/hipaa-training`. **Does the bot know the full 6-month ads plan or neuro-spiritual GTM?** Not until promoted. Summaries may exist in WorkDrive `marketing/strategy/` as **draft** — route marketing strategy questions to **CMO (Sonakshi Soni)**. **Patient-facing Siya Guide?** Separate app (`apps/siya-assistant`) uses **public** site content only, not WorkDrive. When asked about ingested legacy docs, MA workflows, Spruce scripts, or CMO strategy: state that only **live** git KB is in retrieval; WorkDrive holds drafts; never quote conflicting prices or 24/7 claims; use the public pricing topic for patient-facing fees; escalate operational contradictions to leadership.",
-    "escalate": "CEO or document owner"
+    "escalate": "CEO or document owner",
+    "answerTrust": "approved"
   },
   {
     "id": "internal-assistant-guardrails",
@@ -210,7 +280,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "knowledge base",
       "retrieval"
     ],
-    "body": "How **Siya Assistant** answers staff questions using **company memory**, not the open internet. General-purpose ChatGPT does not know our escalation paths, entity structure, or compliance boundaries. 1. Answers come from **SiyaOS Knowledge Base** topics with `status: live`. 2. **No PHI** in chat (names, DOB, MRN, etc.) — refused automatically. 3. **No clinical advice** — route to provider/clinical lead. 4. **No refund promises** — billing lead. 5. Optional **HIPAA certification** at `/training` for structured learning. 6. Public **Siya Guide** (`apps/siya-assistant`) is separate — patient/public KB only; **retrieval-only by default** (no LLM unless `SIYA_GUIDE_DETERMINISTIC=0`). 7. Persona + guardrails: [siya-helpdesk-assistant-persona.md](./siya-helpdesk-assistant-persona.md); LLM system prompt: `apps/hipaa-training/src/lib/siya-os/system-prompt.ts` when `SIYA_WORKFORCE_USE_LLM=1`. **How do we add what the bot knows?** Add a topic under `docs/siyaos-knowledge-base/**/topics/*.md`, set `status: live`, run `npm run kb:build -w @amcare/hipaa-training`. | Symptom | Action | |---------|--------| | Bot has no match | Add keywords + AI Context section; rebuild KB | | Wrong answer | Fix topic; revision history; never tune by hidden prompt alone | You are a workforce helper for all functions (ops, marketing, HR, eng, clinical coordination) — not a clinician. Prefer SOP and AI Context sections. Always show escalation contacts when relevant."
+    "body": "How **Siya Assistant** answers staff questions using **company memory**, not the open internet. General-purpose ChatGPT does not know our escalation paths, entity structure, or compliance boundaries. 1. Answers come from **SiyaOS Knowledge Base** topics with `status: live`. 2. **No PHI** in chat (names, DOB, MRN, etc.) — refused automatically. 3. **No clinical advice** — route to provider/clinical lead. 4. **No refund promises** — billing lead. 5. Optional **HIPAA certification** at `/training` for structured learning. 6. Public **Siya Guide** (`apps/siya-assistant`) is separate — patient/public KB only; **retrieval-only by default** (no LLM unless `SIYA_GUIDE_DETERMINISTIC=0`). 7. Persona + guardrails: [siya-helpdesk-assistant-persona.md](./siya-helpdesk-assistant-persona.md); LLM system prompt: `apps/hipaa-training/src/lib/siya-os/system-prompt.ts` when `SIYA_WORKFORCE_USE_LLM=1`. **How do we add what the bot knows?** Add a topic under `docs/siyaos-knowledge-base/**/topics/*.md`, set `status: live`, run `npm run kb:build -w @amcare/hipaa-training`. | Symptom | Action | |---------|--------| | Bot has no match | Add keywords + AI Context section; rebuild KB | | Wrong answer | Fix topic; revision history; never tune by hidden prompt alone | You are a workforce helper for all functions (ops, marketing, HR, eng, clinical coordination) — not a clinician. Prefer SOP and AI Context sections. Always show escalation contacts when relevant.",
+    "answerTrust": "approved"
   },
   {
     "id": "klarity-channel-overview",
@@ -228,7 +299,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "medical assistant"
     ],
     "body": "**Klarity** (public site: [helloklarity.com](https://www.helloklarity.com), also branded Hello Klarity) is a telehealth **marketplace + EHR** used by Siya providers. Klarity Health, Inc. does **not** provide medical services; care is delivered by **independent practices** on the platform. Siya gets patients via Klarity acquisition (ads → site → condition → provider list → book). MAs then manage those visits inside the **Klarity EHR / portal**. MAs must know the patient path and platform boundaries so they do not invent Siya-only policies for Klarity bookings, or confuse Klarity with the public Siya.health cash-pay funnel. **Is Klarity the same as Siya.health booking?** No. Klarity is a separate marketplace/EHR channel. Siya public site pricing and Meet & Greet rules live in Finance / Clinical KB — do not mix. **Who answers patient billing emails?** Klarity patient support: **patientsupport@helloklarity.com**. Medical questions → provider via portal messaging (Klarity guidance). **Hours for Klarity phone support?** (866) 391-3314 · Monday–Friday · 7:00 AM–4:00 PM PST (published on Klarity site). | Symptom | Action | |---------|--------| | New booking but MA not notified | Check Klarity EHR alerts / filters; escalate Technology if persistent | | Patient confused Siya.health vs Klarity | Explain channel; use the booking source of truth in EHR | | Provider mismatch / wrong specialty | Do not diagnose; Klarity support or clinical lead | Klarity = Hello Klarity marketplace/EHR. Siya MAs prepare Klarity-booked visits (payment + intake). Platform is not Siya’s clinic entity. No refund promises. Point staff to klarity-previsit-checklist and klarity-billing-cancellation. Escalate clinical to Clinical lead; billing disputes to Billing lead / Klarity patient support.",
-    "escalate": "Clinical lead"
+    "escalate": "Clinical lead",
+    "answerTrust": "approved"
   },
   {
     "id": "patient-faq-adhd-evaluation-included",
@@ -245,8 +317,9 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "DIVA",
       "diagnosis guarantee"
     ],
-    "body": "Staff summary of the **$149** adult ADHD initial evaluation (direct siya.health). Use facts-lookup for the dollar amount; this topic covers **what’s included** and what is **not** promised. Patients often assume evaluation = automatic stimulant Rx. Staff need one clear inclusion list and the diagnosis ≠ medication line. 1. Quote price from facts-lookup / public pricing: **$149** one-time initial evaluation (not legacy $199 draft unless CEO/Billing re-locks). 2. Describe visit: **60–90 minute** telehealth with a **licensed medical provider**. 3. Includes (as clinically appropriate): clinical interview / structured history, validated tools when indicated (e.g. ASRS, DIVA, Wender Utah, SWAN, Creyos), comorbidity screening, documented plan. 4. **Not every patient gets every instrument** — clinician judgment. 5. **Diagnosis does not guarantee medication.** Stimulants/controlled meds only when clinically appropriate and legally permitted. 6. Optional follow-up plans (if appropriate): **$79/mo** non-controlled or **$149/mo** controlled follow-up — quote public pricing; do not invent tiers. 7. Screening quizzes are **not** the evaluation. **Is this a real ADHD diagnosis?** Yes when DSM criteria are met after clinician evaluation — formal diagnosis and documented plan. Still **not** a medication guarantee. **Do I need insurance?** No — cash-pay. See `patient-faq-insurance-cash-pay` / FSA topic. **What’s the difference between Meet & Greet and evaluation?** Meet & Greet is **free**, non-clinical intro. Evaluation is the paid clinical visit. | Symptom | Action | |---------|--------| | Patient expects same-day stimulant | Reset expectations; escalate Clinical if pressured | | Staff quotes $199 intake | Correct to public **$149**; escalate Billing if conflict persists | $149 · 60–90 min · licensed provider · tools as appropriate · comorbidity screen · plan. Diagnosis ≠ medication. Follow-up $79/$149 mo when applicable. No insurance required. Escalate Clinical for clinical promises.",
-    "escalate": "Clinical Program"
+    "body": "Staff summary of the **$149** adult ADHD initial evaluation (direct siya.health). Use facts-lookup for the dollar amount; this topic covers **what’s included** and what is **not** promised. Patients often assume evaluation = automatic stimulant Rx. Staff need one clear inclusion list and the diagnosis ≠ medication line. 1. Quote price from facts-lookup / public pricing: **$149** one-time initial evaluation (not legacy $199 draft unless CEO/Billing re-locks). 2. Describe visit: **60–90 minute** telehealth with a **licensed medical provider**. 3. Includes (as clinically appropriate): clinical interview / structured history, validated tools when indicated (e.g. ASRS, DIVA, Wender Utah, SWAN, Creyos), comorbidity screening, documented plan. 4. **Not every patient gets every instrument** — clinician judgment. 5. **Diagnosis does not guarantee medication.** Stimulants/controlled meds only when clinically appropriate and legally permitted. 6. Optional follow-up plans (if appropriate): **$79/mo** non-controlled or **$149/mo** controlled follow-up — quote public pricing; do not invent tiers. 7. Screening quizzes are **not** the evaluation. **Is this a real ADHD diagnosis?** Yes when DSM criteria are met after clinician evaluation — formal diagnosis and documented plan. Still **not** a medication guarantee. **Do I need insurance?** No — cash-pay. See `patient-faq-insurance-cash-pay` / FSA topic. **What’s the difference between Meet & Greet and evaluation?** Meet & Greet is **free**, non-clinical intro (no invoice, no Creyos, no medication). Evaluation is the **$149** paid clinical visit; Creyos may be used there when the clinician decides it fits — not as a Meet & Greet add-on. | Symptom | Action | |---------|--------| | Patient expects same-day stimulant | Reset expectations; escalate Clinical if pressured | | Staff quotes $199 intake | Correct to public **$149**; escalate Billing if conflict persists | $149 · 60–90 min · licensed provider · tools as appropriate · comorbidity screen · plan. Diagnosis ≠ medication. Follow-up $79/$149 mo when applicable. No insurance required. Escalate Clinical for clinical promises.",
+    "escalate": "Clinical Program",
+    "answerTrust": "approved"
   },
   {
     "id": "patient-faq-fsa-hsa",
@@ -262,7 +335,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "debit card"
     ],
     "body": "Staff talk-track when patients ask whether FSA/HSA cards can pay for Siya visits (especially ADHD evaluation). **Plan administrator decides** eligibility — Siya provides documentation, not eligibility rulings. Patients often treat “FSA-eligible” as a clinic promise. Staff need a clear split: what we can document vs what the plan covers. 1. Say: many patients use FSA/HSA for **qualified medical expenses**, including physician telehealth visits when documented as medical care. 2. Siya provides **itemized receipts** for eligible visit/evaluation charges. 3. Confirm with **their plan administrator** — Siya does not decide what qualifies. 4. Clinical evaluation and many visit fees **may** qualify; not all membership/coaching-style fees do. 5. **Medication** is usually paid at the pharmacy under separate pharmacy/plan rules — not the same as the visit fee. 6. Card declines → try alternate payment; escalate Billing lead. Never collect full card data in Ask. **Will my FSA/HSA cover the ADHD evaluation?** Often clinical evaluations qualify as medical expenses when documented — **your administrator decides**. We provide receipts. **Can I use my FSA debit card at checkout?** Many patients do when the plan allows. Declines often mean the plan does not treat that charge as eligible — escalate Billing if needed. **Does medication count the same way?** Usually separate: pharmacy + plan Rx rules. Do not promise FSA coverage for meds at the clinic checkout. | Symptom | Action | |---------|--------| | Patient wants a “letter of medical necessity” for FSA | Escalate Billing / Clinical — do not invent letters in Ask | | Staff guarantees FSA coverage | Correct: administrator decides; we provide receipts | FSA/HSA: receipts yes; eligibility = plan administrator. Meds usually pharmacy-side. Cash-pay clinic. Escalate Billing lead. No card numbers in Ask.",
-    "escalate": "Billing lead"
+    "escalate": "Billing lead",
+    "answerTrust": "approved"
   },
   {
     "id": "patient-faq-insurance-cash-pay",
@@ -281,12 +355,13 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "in-network"
     ],
     "body": "Staff talk-track for **siya.health direct** patients asking about insurance. Siya Health is **cash-pay today** and does **not** accept insurance. Do not mix with Klarity insured-patient rules. Insurance questions are high-volume and easy to over-promise. One consistent answer protects trust and billing. 1. Confirm channel: **siya.health direct** vs **Klarity**. 2. **Direct:** “We do not accept insurance. Care is cash-pay with transparent pricing on siya.health/pricing.” 3. Offer **itemized receipt / Superbill** so the patient can submit to their plan for possible out-of-network reimbursement — **we do not guarantee reimbursement**. 4. FSA/HSA: point to `patient-faq-fsa-hsa` (plan administrator decides eligibility). 5. “Will you be in-network later?” → “Insurance options may be added later; today we are cash-pay.” Do not invent a go-live date. 6. Never collect card/insurance member IDs in Ask. Escalate Billing lead for Superbill disputes or special billing requests. **Do you take my insurance / Aetna / Blue Cross / Medicare?** No. Siya Health does not accept insurance on the direct site. Cash-pay only. Klarity marketplace insurance rules are a **different channel** — use Klarity topics if the visit was booked on Klarity. **Can I get reimbursed by my plan?** Maybe — out-of-network / FSA rules vary. We provide itemized receipts; the **plan** decides. Do not promise coverage. **Can you bill insurance after the visit?** No for direct cash-pay visits. Escalate Billing lead if a patient insists on an exception — do not commit in chat. **What about Klarity patients who have insurance?** Different channel. Use `klarity-billing-cancellation` / Klarity payment agreement language. Do not apply this cash-pay FAQ to Klarity insured flows. | Symptom | Action | |---------|--------| | Patient sends EOB / claim denial | Empathy + clarify we are cash-pay; escalate Billing if Superbill wording disputed | | Staff quotes “we take insurance” | Correct immediately; cite this topic + pricing page | Direct siya.health: **does not accept insurance**; cash-pay; receipts for patient-driven reimbursement/FSA. No coverage guarantees. Klarity ≠ this answer. Escalate Billing lead for exceptions. No PHI in chat.",
-    "escalate": "Billing lead"
+    "escalate": "Billing lead",
+    "answerTrust": "approved"
   },
   {
     "id": "medical-compliance-marketing",
     "category": "marketing_os",
-    "title": "Medical compliance in marketing (SOP)",
+    "title": "Medical compliance in marketing (SOP v2.0)",
     "keywords": [
       "marketing",
       "compliance",
@@ -297,10 +372,13 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "claims",
       "ads",
       "medical director",
-      "LegitScript"
+      "LegitScript",
+      "claim-risk",
+      "checklist"
     ],
-    "body": "How marketing content is created, reviewed, and approved so ads and posts stay medically compliant. Healthcare claims are regulated (FDA/FTC/DEA/state boards). Unreviewed copy creates legal and platform risk. 1. **Content Creator** drafts within this SOP and related compliance guidelines. 2. **Marketing** reviews for brand + process alignment; maintains this SOP. 3. **Medical Director** approves clinical accuracy and medical ethics before publish. 4. **Legal Counsel** reviews high-risk content when needed. 5. Track approvals in project management (who signed off, when). ### Medical claims standards - Substantiated (peer-reviewed / labeled evidence) - Balanced (limitations / side effects where required) - Current (latest approved labeling where relevant) - Physician-reviewed before publication ### Before / after - No before/after photos for prescription medications - Disclaimers for cosmetic-style results when used - Individual results may vary - Timeline / protocol disclosure when results are shown ### Testimonials - Compensation disclosure when required - No atypical-results promotion - Medical supervision disclaimers as required - Verify patient treatment completion before use ### Monitoring - Monthly: LegitScript / compliance documentation review - Quarterly: broader compliance audit - Annually: policy review + staff retraining **Can we run a weight-loss before/after ad with GLP-1?** Not with before/after photos for prescription meds. Escalate claim language to Medical Director. **Who approves clinical claims in a carousel?** Medical Director after Marketing review. High-risk → Legal. **Is this the same as HIPAA?** Related but separate — this SOP is advertising/claims compliance. PHI incidents use Legal/Compliance breach topics. | Symptom | Action | |---------|--------| | Creator wants unverified “cure / guaranteed” language | Block; rewrite; Medical Director | | Platform rejected ad for health claims | Pull live creative; Medical Director + Marketing | | Unclear if content is high-risk | Escalate Legal Counsel | For staff questions about marketing medical claims, ads, testimonials, before/after, FDA/FTC risk, or who must approve healthcare copy: follow this SOP. Route clinical accuracy to Medical Director. Do not invent clinical claims. Do not authorize advertising language in chat — describe the review path and escalate. Point to the WorkDrive SOP file for the full document.",
-    "escalate": "Medical Director · Legal Counsel for high-risk"
+    "body": "How marketing content is created, reviewed, and approved so ads and posts stay medically compliant (SOP **v2.0**). Healthcare claims are regulated (FDA/FTC/DEA/state boards). Unreviewed copy creates legal and platform risk. FTC healthcare enforcement attention increased in 2026. **Can we run a weight-loss before/after ad with GLP-1?** No before/after photos for prescription meds. Escalate claim language to Medical Director (+ Legal if outcome content). **Who approves clinical claims in a carousel?** Creator checklist → Marketing → Medical Director for clinical/HIGH. §7.3 → Legal. **Is this the same as HIPAA?** Related but separate — this SOP is advertising/claims compliance. PHI incidents use Legal/Compliance breach topics. | Symptom | Action | |---------|--------| | Creator wants unverified “cure / guaranteed” language | Block; rewrite; Medical Director | | HIGH claim in research “parked” with no owner | Route Medical Director — parked ≠ cleared | | Platform rejected ad for health claims | Pull live creative; Medical Director + Marketing | | Unclear if content is high-risk | Escalate Legal Counsel (§7.3) | For staff questions about marketing medical claims, ads, testimonials, before/after, FDA/FTC risk, or who must approve healthcare copy: follow **v2.0**. Point agents to `brand/MEDICAL-COMPLIANCE-MARKETING.md`. Do not invent clinical claims. Do not authorize advertising language in chat — describe the review path and escalate. Never cite the old v1 “no compensation disclosure required” line.",
+    "escalate": "Medical Director · Legal Counsel for high-risk / §7.3 triggers",
+    "answerTrust": "approved"
   },
   {
     "id": "siya-helpdesk-assistant-persona",
@@ -314,23 +392,23 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "guardrails",
       "workforce"
     ],
-    "body": "Canonical behavior for **Siya Helpdesk (Internal)** — workforce chat at the workforce Vercel app (not siya.health, not public Siya Guide). **Audience:** Siya Health US staff + Amcare India offshore concierge/MA support. **Source of truth:** `docs/siyaos-knowledge-base` topics with `status: live`. WorkDrive `SiyaOS/` drafts are not policy until promoted. **Departments (routing):** Accounts · HR · Marketing · Clinical Operations · Compliance · Technology · Leadership · General. **Answer shape:** intent → retrieve live KB → plain-language steps → cite topic title(s) → escalate if gap or conflict. **What pricing do staff quote?** Public site / facts-lookup: **Free Meet & Greet**; **$149** initial eval; **$79/mo** or **$149/mo** follow-up. Discovery Call **$79** is discontinued (2026-08-06). Other conflicting drafts → escalate Billing lead or CEO. **Reimbursement SOP?** If no live Accounts topic, say missing and notify Accounts owner. You are Siya Helpdesk (Internal). Retrieve-first from live Company Memory only. No PHI, no clinical dosing/prescribing advice, no refund promises, no 24/7 claims unless in sources. If sources conflict, explain conflict and escalate. Not patient-facing; not legal/HR authority when no approved guidance. Reference topic titles used (e.g. Escalation pathways, Third-party caller, Patient pricing public canonical). Use placeholders Billing lead, Privacy Officer, Clinical lead — do not invent emails or Slack channels."
+    "body": "Canonical behavior for **Siya Helpdesk (Internal)** — workforce chat at the workforce Vercel app (not siya.health, not public Siya Guide). **Audience:** Siya Health US staff + Amcare India offshore concierge/MA support. **Source of truth:** `docs/siyaos-knowledge-base` topics with `status: live`. WorkDrive `SiyaOS/` drafts are not policy until promoted. **Departments (routing):** Accounts · HR · Marketing · Clinical Operations · Compliance · Technology · Leadership · General. **Answer shape:** intent → retrieve live KB → plain-language steps → cite topic title(s) → escalate if gap or conflict. **What pricing do staff quote?** Public site: **$149** initial eval; **$79/mo** or **$149/mo** follow-up. Legacy $79 discovery / conflicting drafts → escalate Billing lead or CEO; do not guess. **Reimbursement SOP?** If no live Accounts topic, say missing and notify Accounts owner. You are Siya Helpdesk (Internal). Retrieve-first from live Company Memory only. No PHI, no clinical dosing/prescribing advice, no refund promises, no 24/7 claims unless in sources. If sources conflict, explain conflict and escalate. Not patient-facing; not legal/HR authority when no approved guidance. Reference topic titles used (e.g. Escalation pathways, Third-party caller, Patient pricing public canonical). Use placeholders Billing lead, Privacy Officer, Clinical lead — do not invent emails or Slack channels.",
+    "answerTrust": "approved"
   },
   {
     "id": "billing-late-cancel",
     "category": "operations",
-    "title": "Late cancellation, no-show, and refunds (direct + Klarity)",
+    "title": "Late cancellation and refunds",
     "keywords": [
       "late cancel",
       "cancellation",
       "refund",
       "same day",
-      "billing",
-      "no-show",
-      "$50"
+      "billing"
     ],
-    "body": "How staff talk about cancellations and no-shows without promising refunds. Prefer Ask **facts-lookup** for the locked **$50** direct no-show fee. Refund authority sits with billing; inconsistent promises create liability and patient conflict. Legacy **$40 / $79** no-show drafts are **retired** — do not quote them. 1. Confirm booking **channel** first: **siya.health direct** vs **Klarity**. 2. **Direct no-show / missed appointment:** fee is **$50** (facts-lookup). Do **not** waive in chat. 3. **Direct late-cancel** (patient cancelled before start): fee wording **not locked** — escalate **Billing lead**; do not invent an amount. 4. **Klarity-booked:** use `klarity-billing-cancellation` only (24h rule; $10 deposit) — never apply the $50 Siya direct fee to Klarity. 5. Document cancel/no-show date/time in the record. 6. Do **not** promise refunds in chat or phone — escalate exceptions to **billing lead**. **What is the no-show fee for a CarePatron / siya.health booking?** **$50** for missed / no-show appointments on direct bookings. Disputes → Billing lead. Do not quote legacy $40 or $79. **Patient cancels same-day / late-cancel (direct)?** Late-cancel amount is **pending founder confirmation**. Empathy + document time + escalate **Billing lead**. Do **not** invent a fee. If it was actually a no-show, use **$50**. **Klarity-booked cancel / no-show?** Use `klarity-billing-cancellation` (24h rule; $10 initial deposit non-refundable). Different channel — do not mix. **Provider no-show / emergency?** Offer **reschedule** first. Refund only when billing policy and billing lead (or documented provider direction) support it. **Payment not captured before visit (card failed)?** Follow ops workflow to **release slot** after the defined window so others can book — document in chart/billing tools. Klarity timing: `klarity-previsit-checklist`. **FSA / HSA cards?** May work when plan allows; declines often mean visit type not covered. Never collect card data in Ask. Escalate **billing**. Use Siya cash-pay / FSA facts-lookup for siya.health payment questions (not Klarity insured language). **Duplicate charge already refunded in portal?** Confirm ledger, explain refund timeline; do not double-refund without billing review. | Symptom | Action | |---------|--------| | Patient demands refund in portal chat | Empathy + billing follow-up; no commitment | | Staff cites old $40 or $79 no-show | Correct to **$50** direct no-show (or Klarity topic if Klarity) | Never authorize refunds. Direct no-show = **$50** via facts-lookup. Late-cancel amount not locked — escalate. Klarity → `klarity-billing-cancellation`. Never surface retired $40/$79 no-show drafts.",
-    "escalate": "Billing lead"
+    "body": "How staff talk about cancellations without promising refunds. Refund authority sits with billing; inconsistent promises create liability and patient conflict. 1. Follow **written billing policy** for the cancellation window. 2. Document cancel date/time in the record. 3. Do **not** promise refunds in chat or phone — use approved language. 4. Escalate exceptions to **billing lead**. **Patient cancels same-day / inside late-cancel window?** Use approved late-cancel language; do **not** promise refund in chat. Route to **billing lead** or Klarity support per policy. For **Klarity-booked** visits, use `klarity-billing-cancellation` (24h rule; $10 initial deposit non-refundable). **Provider no-show / emergency?** Offer **reschedule** first. Refund only when billing policy and billing lead (or documented provider direction) support it. **Patient no-show?** Explain no-show policy; do **not** proactively offer refund. Disputes → billing / Klarity. Klarity channel details: `klarity-billing-cancellation`. **Payment not captured before visit (card failed)?** Follow ops workflow to **release slot** after the defined window so others can book — document in chart/billing tools. Klarity timing: `klarity-previsit-checklist`. **FSA / HSA cards?** May work in Klarity/Carepatron when plan allows; declines often mean visit type not covered. Never collect card data in Siya Assistant. Escalate **billing**. **Duplicate charge already refunded in portal?** Confirm ledger, explain refund timeline; do not double-refund without billing review. | Symptom | Action | |---------|--------| | Patient demands refund in portal chat | Empathy + billing follow-up; no commitment | Never authorize refunds. Point to written policy and billing lead. For Klarity bookings prefer `klarity-billing-cancellation`. Suggest documenting cancel time.",
+    "escalate": "Billing lead",
+    "answerTrust": "approved"
   },
   {
     "id": "daily-payment-check",
@@ -345,7 +423,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "appointment",
       "daily task"
     ],
-    "body": "Verify payment and pre-auth status before scheduled visits. Unpaid or unverified visits create front-desk conflict and compliance risk. 1. Review daily payment reports from Zoho Books. 2. Match payments to scheduled appointments. 3. Verify insurance pre-authorizations where required. 4. Flag issues for billing follow-up. 5. Update billing status in EHR before the visit. Deliverable: payments verified before patient visits. **Where do reports live?** Zoho Books sync — see Operations hub / integration runbooks in Technology module. | Symptom | Action | |---------|--------| | Payment shows paid but EHR not updated | Sync + document; billing if stuck | | Pre-auth missing | Hold scheduling per policy; billing lead | Describe the Zoho → appointment → EHR verification loop. Do not access live patient accounts in chat. Escalate payment disputes to billing lead."
+    "body": "Verify payment and pre-auth status before scheduled visits. Unpaid or unverified visits create front-desk conflict and compliance risk. 1. Review daily payment reports from Zoho Books. 2. Match payments to scheduled appointments. 3. Verify insurance pre-authorizations where required. 4. Flag issues for billing follow-up. 5. Update billing status in EHR before the visit. Deliverable: payments verified before patient visits. **Where do reports live?** Zoho Books sync — see Operations hub / integration runbooks in Technology module. | Symptom | Action | |---------|--------| | Payment shows paid but EHR not updated | Sync + document; billing if stuck | | Pre-auth missing | Hold scheduling per policy; billing lead | Describe the Zoho → appointment → EHR verification loop. Do not access live patient accounts in chat. Escalate payment disputes to billing lead.",
+    "answerTrust": "approved"
   },
   {
     "id": "klarity-patient-consents",
@@ -363,7 +442,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "consent"
     ],
     "body": "Patients booking on Klarity acknowledge multiple **platform agreements**. MAs need to know **what exists** and **where to send patients**, not to reinterpret legal text. This topic is **training / retrieval aid**. For disputes, use Klarity published pages + Privacy Officer / Compliance. Incomplete or misunderstood consents delay visits and create PHI / billing risk. MAs should verify forms are **signed in portal**, not paraphrase law. **Can MA explain every legal clause?** No. Point to the portal form + Klarity URL. Escalate Privacy Officer / Compliance for disputes. **Patient refuses telehealth consent?** Cannot proceed with telehealth under Klarity rules; escalate Clinical / Klarity support for alternatives. **Siya Assist legal advice?** Never. Retrieve this brief + escalate. | Symptom | Action | |---------|--------| | Consent unsigned in EHR | Coach portal Forms path (`klarity-previsit-checklist`) | | Third-party caller wants info | Follow `third-party-caller` + check Klarity auth | | Privacy complaint | Privacy Officer; Klarity compliance@helloklarity.com if platform-side | Klarity patients sign telehealth consent, payment agreement, HIPAA transfer authorization, and terms. Klarity does not record visits and does not submit insurance claims. MAs verify forms are complete; they do not give legal advice. PHI third-party disclosure needs authorization on file. Escalate Privacy Officer for privacy issues; Billing lead for payment disputes.",
-    "escalate": "Privacy Officer"
+    "escalate": "Privacy Officer",
+    "answerTrust": "approved"
   },
   {
     "id": "legacy-pricing-funnel-unresolved",
@@ -378,8 +458,9 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "klarity",
       "spruce"
     ],
-    "body": "Some legacy ingests still disagree. Staff and the assistant must **not** pick a side without CEO/billing confirmation — except where a row below is marked **Resolved**. | Topic | Status | |-------|--------| | Front-end offer | **Resolved 2026-08-06:** Discovery Call **$79** discontinued → **free Meet & Greet**. Remaining draft noise: neuro-assessment **$149** bundles in old GTM — do not quote without CEO confirmation | | **No-show (direct siya.health)** | **Resolved 2026-08-06:** **$50** no-show / missed appointment. Legacy **$40** / **$79** / “full fee” drafts are **retired** — do not quote. Late-cancel amount still **pending** — escalate Billing. Klarity stays on `klarity-billing-cancellation`. Prefer Ask facts-lookup. | | Intake | **$199** with $79 credit vs **$149** initial evaluation on site — still unresolved for old drafts; quote public **$149** | | Membership | **$69/mo** draft vs **$79 / $149** public follow-up — still unresolved; quote public follow-up SKUs | | Chat SLA | 5 min vs 24h vs 48h backlog in old decks — use live `chat-review-sla` | | Systems | Carepatron vs **Klarity** primary scheduling; Spruce for messaging | | Marketing / hours | Old **24/7** job copy is wrong. **No fixed practice-wide hours** — provider schedules set weekly in EHR; direct patients to booking availability (facts-lookup hours) | **Action:** Escalate to **CEO** (or billing/clinical program lead) only for rows still unresolved. For patient-facing fees use **public pricing** + facts-lookup (including **$50** direct no-show). When users cite pasted SOWs, ads plans, or WorkDrive drafts that conflict with live KB: acknowledge the conflict, point to this topic, give only **live** + **public pricing** / facts-lookup facts, and offer escalation — never merge draft numbers into a single answer. Never quote retired no-show **$40** or **$79**.",
-    "escalate": "CEO"
+    "body": "Multiple legacy ingests disagree. Staff and the assistant must **not** pick a side without CEO/billing confirmation. | Topic | Conflict | |-------|----------| | Front-end offer | Discovery **$79** vs site **$149** eval vs neuro-assessment **$149** bundle in draft GTM | | Intake | **$199** with $79 credit vs **$149** initial evaluation on site | | Membership | **$69/mo** draft vs **$79 / $149** public follow-up | | No-show | **$40** vs **$79** vs full appointment fee | | Chat SLA | 5 min vs 24h vs 48h backlog in old decks | | Systems | Carepatron vs **Klarity** primary scheduling; Spruce for messaging | | Marketing | **24/7** in old job/5W1H vs founder direction **not 24/7** | **Action:** Escalate to **CEO** (or billing/clinical program lead) with the specific conflict. Quote **public pricing topic** for patient-facing fees until resolved. When users cite pasted SOWs, ads plans, or WorkDrive drafts that conflict with live KB: acknowledge the conflict, point to this topic, give only **live** + **public pricing** facts, and offer escalation — never merge draft numbers into a single answer.",
+    "escalate": "CEO",
+    "answerTrust": "approved"
   },
   {
     "id": "patient-faq-telehealth-legitimate",
@@ -396,7 +477,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "online doctor legit"
     ],
     "body": "How staff answer “Is telehealth / Siya legitimate?” without overselling. Legitimate telehealth = licensed clinicians, HIPAA-aware tools, informed consent, documented visits, and continuity — not anonymous chatbots or uncontrolled “med mills.” Trust objections block booking. Staff need a calm, factual script tied to how Siya actually operates. 1. Affirm: Siya Health is **physician-led telehealth** with **licensed medical providers** in states we serve (CA, TX, PA, FL on the public site). 2. Explain legitimacy markers: verified clinician identity, state license where the patient is located, secure visit/messaging, documentation in the medical record, clear Rx/refill/crisis expectations. 3. Clarify limits: emergencies and some exams need **in-person / 911**; labs/imaging may complement telehealth. 4. Push back gently on myths: format ≠ quality; apps cannot skip assessment for controlled substances; intro visits ≠ full diagnosis. 5. Point patients to Meet & Greet (free) or public provider pages for credentials — do not invent credentials. 6. Escalate Clinical Program or Privacy Officer for serious “scam” accusations, credential disputes, or privacy incidents. **Is an online ADHD diagnosis legitimate?** When done by a licensed clinician with structured history, appropriate tools, documentation, and follow-up — yes, under state rules. Screening quizzes alone are **not** a diagnosis. See also `patient-faq-adhd-evaluation-included`. **Do you prescribe without seeing me?** Care requires an appropriate clinician–patient relationship and assessment. Never promise controlled substances without evaluation. **What if I’m in a state you don’t serve?** We only care for patients where we have licensed/serviceable coverage. Use facts-lookup for states/providers — do not invent expansion. | Symptom | Action | |---------|--------| | Patient compares us to a banned telehealth brand | Stay factual: licensure + documentation + follow-up; escalate Clinical if needed | | Credential challenge | Send public provider profile URL; escalate Clinical Program | Legitimacy = licensure + documentation + follow-up + HIPAA-aware tools. Siya = physician-led cash-pay telehealth in published states. No instant controlled-Rx promises. Escalate Clinical/Privacy for disputes. No PHI.",
-    "escalate": "Clinical Program / Privacy Officer"
+    "escalate": "Clinical Program / Privacy Officer",
+    "answerTrust": "approved"
   },
   {
     "id": "service-line-blurbs",
@@ -416,7 +498,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "what services"
     ],
     "body": "Short staff-facing blurbs for each public service line. Prefer Ask **facts-lookup** for “Do we offer X?” (yes/no + one paragraph). Use this topic when staff need the same language with links or slightly more context. **States:** Care is offered in **California, Texas, Pennsylvania, and Florida** unless a specific product page says otherwise. Confirm provider×state with facts-lookup when asked. Marketing pages are long. Staff need one calm paragraph per line — enough to explain, not sell. 1. If Ask already answered via facts-lookup, do not contradict it. 2. Keep clinical promises conservative: medication only when appropriate; no outcome guarantees. 3. Point to the matching public page for patient self-serve detail. 4. Unsupported services (e.g. pediatrics, in-person ER) → say we don’t offer that; escalate Clinical if unsure. **Adult ADHD** Physician-led adult ADHD evaluation and follow-up via telehealth. Structured clinical history, validated tools as appropriate, comorbidity screening, and a documented plan. Diagnosis does not guarantee medication. Public page: `/adhd-care`. See also `patient-faq-adhd-evaluation-included`. **Weight loss / GLP-1 / metabolic** Provider-guided medical weight-loss and metabolic care (including GLP-1 or other options when clinically appropriate). Board-certified obesity-medicine framing on the public site — not a meds-only storefront. Page: `/weight-loss-metabolic-health`. **Primary & urgent care** Virtual primary and urgent-style visits for adults — wellness, chronic care support, preventive lab review, and clear follow-up plans in licensed states. Not an emergency room. Page: `/primary-urgent-care`. **Men’s health** Physician-led men’s health telehealth — testosterone evaluation, erectile dysfunction support, metabolic/longevity planning — not testosterone-first marketing. Page: `/mens-health-longevity`. **Women’s health** Women’s health telehealth covering PCOS, perimenopause, thyroid/metabolic concerns, ADHD in women, and preventive care. Page: `/womens-health`. **Labs & blood tests** Transparent direct-pay lab testing (thyroid, blood sugar, vitamins, iron, metabolic/preventive panels) with physician guidance available through Siya. Labs do not diagnose ADHD by themselves. Page: `/labs`. **Prescriptions / Rx pathway** Provider-reviewed prescriptions through Siya telehealth when clinically appropriate. Availability varies by state and clinical indication — never promise a specific controlled substance. Page: `/prescriptions`. Refill edge cases → Clinical / refill guidance topics (CSA playbook is a separate workstream). | Symptom | Action | |---------|--------| | “Do you do pediatrics / therapy-only / surgery?” | We don’t offer that on the public service menu — escalate Clinical if borderline | | Staff pastes full marketing hero copy | Trim to the blurb above | Yes we offer: ADHD, weight/GLP-1, primary/urgent telehealth, men’s, women’s, labs, Rx pathway — in CA/TX/PA/FL as published. One-paragraph blurbs only. Meds never guaranteed. Pair with facts-lookup service offer. Escalate Clinical when unsure.",
-    "escalate": "Clinical Program"
+    "escalate": "Clinical Program",
+    "answerTrust": "approved"
   },
   {
     "id": "third-party-caller",
@@ -431,7 +514,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "authorization"
     ],
     "body": "Minimum necessary rules when someone other than the patient contacts us. HIPAA authorization rules apply to billing and clinical information. Verify identity and documented authorization before any PHI or billing detail. Minimum necessary only. If unsure — do not release; escalate. Never suggest sharing account details with unverified callers. Escalate to Privacy Officer when authorization is unclear.",
-    "escalate": "Privacy Officer / supervisor"
+    "escalate": "Privacy Officer / supervisor",
+    "answerTrust": "approved"
   },
   {
     "id": "homepage-cta-meet-and-greet",
@@ -444,7 +528,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "zocdoc",
       "booking"
     ],
-    "body": "When staff ask why we don't lead with Zocdoc or alternate CTAs on the homepage, explain trust/friction rationale and point to SIYA-STANDARDS CTA section—not folklore. Standardize the primary homepage CTA to **Book Free Meet & Greet** (per SIYA-STANDARDS CTA hierarchy), not third-party marketplace checkout as the hero action. Highest trust and lower friction for physician-led telehealth positioning; keeps booking on owned flows."
+    "body": "When staff ask why we don't lead with Zocdoc or alternate CTAs on the homepage, explain trust/friction rationale and point to SIYA-STANDARDS CTA section—not folklore. Standardize the primary homepage CTA to **Book Free Meet & Greet** (per SIYA-STANDARDS CTA hierarchy), not third-party marketplace checkout as the hero action. Highest trust and lower friction for physician-led telehealth positioning; keeps booking on owned flows.",
+    "answerTrust": "approved"
   },
   {
     "id": "chat-review-sla",
@@ -459,7 +544,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "clinical",
       "escalate provider"
     ],
-    "body": "How to triage and respond to secure portal messages. Patients expect timely non-clinical replies; clinical content must reach licensed clinicians immediately. 1. Review new portal messages. 2. Classify: **routine** vs **clinical**. 3. Routine: respond within **24 hours**. 4. Clinical: escalate to **provider immediately** — do not advise. 5. Document communications in the chart. **Is scheduling clinical?** Usually routine unless symptoms or treatment change are involved — when unsure, escalate. | Symptom | Action | |---------|--------| | Message mentions side effects / suicidality | Provider immediately + emergency protocol | | Backlog > 24h | Supervisor + staffing | Emphasize 24h for non-clinical, immediate provider escalation for clinical. Never give medical advice in assistant or chat without provider direction."
+    "body": "How to triage and respond to secure portal messages. Patients expect timely non-clinical replies; clinical content must reach licensed clinicians immediately. 1. Review new portal messages. 2. Classify: **routine** vs **clinical**. 3. Routine: respond within **24 hours**. 4. Clinical: escalate to **provider immediately** — do not advise. 5. Document communications in the chart. **Is scheduling clinical?** Usually routine unless symptoms or treatment change are involved — when unsure, escalate. | Symptom | Action | |---------|--------| | Message mentions side effects / suicidality | Provider immediately + emergency protocol | | Backlog > 24h | Supervisor + staffing | Emphasize 24h for non-clinical, immediate provider escalation for clinical. Never give medical advice in assistant or chat without provider direction.",
+    "answerTrust": "approved"
   },
   {
     "id": "telehealth-privacy-background",
@@ -473,7 +559,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "private"
     ],
     "body": "Handling others visible or audible during a video visit. Require a private setting. If unauthorized viewers may hear/see PHI — pause visit, request private space, report if disclosure may have occurred. Explain pause-and-reposition workflow. Escalate to Privacy Officer if PHI may have been disclosed.",
-    "escalate": "Privacy Officer if PHI exposed"
+    "escalate": "Privacy Officer if PHI exposed",
+    "answerTrust": "approved"
   },
   {
     "id": "brand-entities-voice",
@@ -488,7 +575,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "physician-led",
       "health guides"
     ],
-    "body": "How we describe the company on any surface — internal or external. Entity confusion (admin vs clinical) and marketplace language create legal and trust risk. - **Siya Health Inc.** — administrative / non-clinical support. - **Siya Healthcare, PLLC** — medical services via licensed clinicians. - Position as **physician-led telehealth for adults** — not a membership marketplace or med vending. - Education hub: **Health Guides** at `/answers`. - Use SIYA-STANDARDS + `data/site-standards.mjs` for pricing, states, CTAs. **Can we guarantee medication?** No — evaluation and shared decision-making; see standards. | Symptom | Action | |---------|--------| | Copy says “psychiatry practice” | Fix to physician-led telehealth per standards | | Wrong state list | Run state availability audit doc | Summarize entity split and voice rules. For exact pricing/states, defer to site standards — do not guess. Internal staff asking for ad copy should also read Marketing OS content QA topic."
+    "body": "How we describe the company on any surface — internal or external. Entity confusion (admin vs clinical) and marketplace language create legal and trust risk. - **Siya Health Inc.** — administrative / non-clinical support. - **Siya Healthcare, PLLC** — medical services via licensed clinicians. - Position as **physician-led telehealth for adults** — not a membership marketplace or med vending. - Education hub: **Health Guides** at `/answers`. - Use SIYA-STANDARDS + `data/site-standards.mjs` for pricing, states, CTAs. **Can we guarantee medication?** No — evaluation and shared decision-making; see standards. | Symptom | Action | |---------|--------| | Copy says “psychiatry practice” | Fix to physician-led telehealth per standards | | Wrong state list | Run state availability audit doc | Summarize entity split and voice rules. For exact pricing/states, defer to site standards — do not guess. Internal staff asking for ad copy should also read Marketing OS content QA topic.",
+    "answerTrust": "approved"
   },
   {
     "id": "marketing-os-v1-frozen",
@@ -502,7 +590,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "versioning",
       "department"
     ],
-    "body": "When staff ask what Marketing OS is: it is the Marketing department manual under Siya OS Architecture. Do not invent a separate marketing company operating model. Point to `MARKETING-OS-v1.0.md` (frozen) and `SIYA-OS-ARCHITECTURE.md`. Suggest v1.1+ for changes instead of rewriting v1.0. Do not confuse **company Siya OS** (how departments run) with **product SiyaOS** (clinical OS for ADHD care). CMO / planning agents should use the CMO prompt in `MARKETING-OS-v1.0.md` (five lenses: patient trust, clinical integrity, commercial impact, operational scalability, measurable outcomes). Marketing is a **department module of Siya OS**, not an independent Marketing OS. Foundation is frozen as **Siya Marketing Operating System v1.0**; further changes ship as versioned updates or new decision entries. Independent departmental “OS” philosophies create incompatible systems. One shared Siya OS architecture (mission, pipelines, SOPs, KPIs, decision rights, AI assist, improvement log) keeps Clinical, Compliance, Technology, Ops, and Marketing reconcilable."
+    "body": "When staff ask what Marketing OS is: it is the Marketing department manual under Siya OS Architecture. Do not invent a separate marketing company operating model. Point to `MARKETING-OS-v1.0.md` (frozen) and `SIYA-OS-ARCHITECTURE.md`. Suggest v1.1+ for changes instead of rewriting v1.0. Do not confuse **company Siya OS** (how departments run) with **product SiyaOS** (clinical OS for ADHD care). CMO / planning agents should use the CMO prompt in `MARKETING-OS-v1.0.md` (five lenses: patient trust, clinical integrity, commercial impact, operational scalability, measurable outcomes). Marketing is a **department module of Siya OS**, not an independent Marketing OS. Foundation is frozen as **Siya Marketing Operating System v1.0**; further changes ship as versioned updates or new decision entries. Independent departmental “OS” philosophies create incompatible systems. One shared Siya OS architecture (mission, pipelines, SOPs, KPIs, decision rights, AI assist, improvement log) keeps Clinical, Compliance, Technology, Ops, and Marketing reconcilable.",
+    "answerTrust": "approved"
   },
   {
     "id": "adhd-wellness-platform-vision",
@@ -519,7 +608,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "telehealth"
     ],
     "body": "Directional vision (not a promise of shipped products): **integrated ADHD care ecosystem** — evidence and whole-person care through community. Position as a **modern ADHD wellness platform**, not a traditional clinic brochure site. Differentiate from commodity stimulant telehealth and generic DPC; build retention through data (e.g. CREYOS where clinically appropriate), relationships, and community programs. **Near-term clinical products (in market or building):** diagnosis/evaluation, prescriptions per state rules, provider-led ADHD management, telehealth in licensed states (CA, TX, PA, FL per public site). **Long-term ideas (draft only — do not sell in chat):** parent programs (Siya Smart), self-management subscriptions, support communities, cohort experiences (e.g. Siya Circle), creative/network apps. Require Medical Director + Legal before marketing. **Support messaging:** Human Spruce support during **defined business hours** — do **not** claim **24/7 concierge** unless ops and legal approve updated copy. Explain vision at a high level; route product launch dates, cohort pricing ($80/mo group), neuro-spiritual branding, and ad funnel details to **CMO**; route clinical eligibility and meds to **providers**; use public pricing topic for fees.",
-    "escalate": "CMO or Medical Director"
+    "escalate": "CMO or Medical Director",
+    "answerTrust": "approved"
   },
   {
     "id": "content-qa-checklist",
@@ -535,7 +625,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "seo",
       "editorial"
     ],
-    "body": "Minimum QA before any patient-facing page, guide, or post ships. One knowledge graph feeds website, ads, and assistants — errors scale across surfaces. Run the ten checks in `apps/siya-health/docs/CONTENT-QA-CHECKLIST.md`: flow, geography/states, disclaimers, CTA caps, assembly rules, links, claims register alignment, etc. **Where does Reddit research go?** Editorial pipeline → insight pack → tracker (Marketing OS); not random Drive folders without a row in the content tracker. | Symptom | Action | |---------|--------| | New pricing claim | Update `site-standards.mjs` + claims register first | | Clinical promise | Clinical owner + medical flags on pack | Point marketers to CONTENT-QA-CHECKLIST and Brand OS. Do not invent pricing or state lists — canonical values live in site standards. Company voice only unless exec requests founder voice."
+    "body": "Minimum QA before any patient-facing page, guide, or post ships. One knowledge graph feeds website, ads, and assistants — errors scale across surfaces. Run the ten checks in `apps/siya-health/docs/CONTENT-QA-CHECKLIST.md`: flow, geography/states, disclaimers, CTA caps, assembly rules, links, claims register alignment, etc. **Where does Reddit research go?** Editorial pipeline → insight pack → tracker (Marketing OS); not random Drive folders without a row in the content tracker. | Symptom | Action | |---------|--------| | New pricing claim | Update `site-standards.mjs` + claims register first | | Clinical promise | Clinical owner + medical flags on pack | Point marketers to CONTENT-QA-CHECKLIST and Brand OS. Do not invent pricing or state lists — canonical values live in site standards. Company voice only unless exec requests founder voice.",
+    "answerTrust": "approved"
   },
   {
     "id": "hipaa-training-cert",
@@ -555,7 +646,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
         "label": "Open training",
         "href": "/training"
       }
-    ]
+    ],
+    "answerTrust": "approved"
   },
   {
     "id": "agent-org-chart-deferred",
@@ -570,7 +662,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "department manager agents",
       "orchestration layer"
     ],
-    "body": "When asked \"should we build the agent org chart / Executive Office / COO agent?\": point here. The answer is *deferred, not rejected forever* — cite the revisit criteria. Direct founder-attention features to the Executive Workspace v2 spec; direct marketing agent behavior to `MARKETING-OS-v1.1.md`. Do not silently build the enterprise version. Do **not** build the proposed seven-agent C-suite (COO, CMO, CTO, Intelligence, Content, Memory, Executive Advisor) with an \"Executive Office\" orchestration layer above them. Adopt the salvageable pieces as **Marketing OS v1.1** (CMO prompt, Intelligence prompt, weekly report SOP, insight cards, Friday knowledge ritual) and defer the rest. 1. **Attention math.** Seven agents each producing Friday reports means seven reports on the founder's desk — increasing founder dependency, the exact thing the proposal aimed to reduce. Executive Workspace v2 already enforces a hard attention budget (Critical ≤1 · Important ≤2 · Watch ≤3). 2. **Duplication.** The \"Executive Office\" is the Founder Decision Coach already specified in `apps/hipaa-training/docs/EXECUTIVE-WORKSPACE-v2-FOUNDER-DECISION-COACH.md`, with a deliberate phase order. The COO prompt is that coach minus its guardrails (evidence citation, no invented signals). The Executive Advisor's useful questions already exist in the coach's recommendation format (Why / Why now / If ignored / Confidence / Evidence). 3. **Sequencing.** A management layer that \"reviews KPIs every Friday\" requires KPIs that exist. Marketing OS v1.0 is at \"definitions first\" — conversion events and dashboards are not yet wired. Measurement is the real bottleneck, not agent org design. 4. **Content quota contradiction.** The proposed Content Agent mandated ~10 assets per research topic while claiming not to optimize for volume. The frozen six-month plan says the opposite: less net-new publishing; finish clusters, optimize, internally link. 5. **Scale.** At current team size, an orchestration layer is coordination overhead with nothing to coordinate — work that should not exist yet."
+    "body": "When asked \"should we build the agent org chart / Executive Office / COO agent?\": point here. The answer is *deferred, not rejected forever* — cite the revisit criteria. Direct founder-attention features to the Executive Workspace v2 spec; direct marketing agent behavior to `MARKETING-OS-v1.1.md`. Do not silently build the enterprise version. Do **not** build the proposed seven-agent C-suite (COO, CMO, CTO, Intelligence, Content, Memory, Executive Advisor) with an \"Executive Office\" orchestration layer above them. Adopt the salvageable pieces as **Marketing OS v1.1** (CMO prompt, Intelligence prompt, weekly report SOP, insight cards, Friday knowledge ritual) and defer the rest. 1. **Attention math.** Seven agents each producing Friday reports means seven reports on the founder's desk — increasing founder dependency, the exact thing the proposal aimed to reduce. Executive Workspace v2 already enforces a hard attention budget (Critical ≤1 · Important ≤2 · Watch ≤3). 2. **Duplication.** The \"Executive Office\" is the Founder Decision Coach already specified in `apps/hipaa-training/docs/EXECUTIVE-WORKSPACE-v2-FOUNDER-DECISION-COACH.md`, with a deliberate phase order. The COO prompt is that coach minus its guardrails (evidence citation, no invented signals). The Executive Advisor's useful questions already exist in the coach's recommendation format (Why / Why now / If ignored / Confidence / Evidence). 3. **Sequencing.** A management layer that \"reviews KPIs every Friday\" requires KPIs that exist. Marketing OS v1.0 is at \"definitions first\" — conversion events and dashboards are not yet wired. Measurement is the real bottleneck, not agent org design. 4. **Content quota contradiction.** The proposed Content Agent mandated ~10 assets per research topic while claiming not to optimize for volume. The frozen six-month plan says the opposite: less net-new publishing; finish clusters, optimize, internally link. 5. **Scale.** At current team size, an orchestration layer is coordination overhead with nothing to coordinate — work that should not exist yet.",
+    "answerTrust": "approved"
   },
   {
     "id": "amcare-os-overview",
@@ -586,7 +679,8 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "audit",
       "hipaa"
     ],
-    "body": "Internal platform modules in `amcare-os` for staff, patients, ops, analytics, and integrations. Eventual **SiyaOS** product vision: one architecture reused across portfolio companies. - Staff workflows → `apps/staff-dashboard` - Patient chart/comms → `apps/patient-management` - Billing/scheduling integrations → `apps/operations-hub` - Audit trail → `@amcare/audit` (RBAC-aligned, retention) - Changes ship via monorepo with compliance docs in `docs/compliance/` **Is this the same as the public website?** No — `apps/siya-health` is patient-facing; AmCare OS is internal tooling. | Symptom | Action | |---------|--------| | Need API behavior | `docs/api-specs/` + audit logging requirements | | Zoho out of sync | `integrations/zoho-sync/README.md` | Describe AmCare OS at architecture level only — no credentials, no internal URLs with secrets. Point developers to README and audit package. Future CAPR.AI inherits patterns, not Siya-only hacks."
+    "body": "Internal platform modules in `amcare-os` for staff, patients, ops, analytics, and integrations. Eventual **SiyaOS** product vision: one architecture reused across portfolio companies. - Staff workflows → `apps/staff-dashboard` - Patient chart/comms → `apps/patient-management` - Billing/scheduling integrations → `apps/operations-hub` - Audit trail → `@amcare/audit` (RBAC-aligned, retention) - Changes ship via monorepo with compliance docs in `docs/compliance/` **Is this the same as the public website?** No — `apps/siya-health` is patient-facing; AmCare OS is internal tooling. | Symptom | Action | |---------|--------| | Need API behavior | `docs/api-specs/` + audit logging requirements | | Zoho out of sync | `integrations/zoho-sync/README.md` | Describe AmCare OS at architecture level only — no credentials, no internal URLs with secrets. Point developers to README and audit package. Future CAPR.AI inherits patterns, not Siya-only hacks.",
+    "answerTrust": "approved"
   },
   {
     "id": "legacy-website-social-archive",
@@ -607,6 +701,7 @@ export const GENERATED_WORKSPACE_KB: WorkspaceKbEntry[] = [
       "workdrive"
     ],
     "body": "Historical marketing dump under **Siya Knowledge Editorial → Website / Social Media**. Use as **background** for Siya Assist Marketing questions — not as live patient-facing brand copy. Staff need to find past ads, blogs, SOPs, and media plans without treating every old tagline as current policy. 1. Treat this folder as a **library**, not the source of truth for website voice. 2. For live brand / editorial rules, prefer `00-Brand-System/` and git Brand OS paths. 3. For medical claims in ads or posts, follow `medical-compliance-marketing` and escalate clinical claims to Medical Director. 4. Do **not** recommend old urgency / insurance-bashing taglines from `Main Tag Lines.docx` on the new coded site — current website brief is calm, transparent, direct-pay (no insurance-bashing). 5. Zoho Writer `.zwriterlnk` files are shortcuts only — ask Marketing to export if full text is required. **Can I paste old taglines onto the new website?** No. Use the approved website brand brief. Archive taglines are historical. **Where do I put new social posts?** Editorial pipeline → Content Tracker → `05-Carousels` / `06-Statics` — not a one-off dump in this archive. **Where is Website Content Final?** Zoho Writer link in the archive; export to `.docx`/`.md` before promoting anything to live KB or the coded site. | Symptom | Action | |---------|--------| | Staff treating archive as live brand | Point to Brand System + website brief; mark archive historical | | Need full Zoho doc text | Ask Marketing to export; do not invent content | | Ad claim risk | Route to medical-compliance-marketing + Medical Director | When Marketing staff ask about past website, social, ads, blogs, banners, Google Ads, or “what we used to say,” point them to the WorkDrive folder **Siya Knowledge Editorial → Website / Social Media** as background. Prefer live Brand System and content tracker for publishable work. Do not reuse historical insurance-bashing or hyper-urgency taglines as current website copy. For medical advertising rules, use the medical compliance marketing topic. Escalate ambiguous brand or clinical claims to Marketing Lead / Medical Director.",
-    "escalate": "Marketing Lead"
+    "escalate": "Marketing Lead",
+    "answerTrust": "approved"
   }
 ];

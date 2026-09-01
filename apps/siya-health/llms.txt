@@ -62,7 +62,7 @@
 
 ## Providers (care team hub)
 - All providers: https://siya.health/providers
-- Dr. Sneh Pandey, MD — Medical Director (CA, TX, PA, FL): https://siya.health/providers/dr-sneh-pandey
+- Dr. Sneh Pandey, MD — Medical Director (CA, PA, FL): https://siya.health/providers/dr-sneh-pandey
 - Dr. Vanessa Urbina, MD — Family medicine / ADHD (FL): https://siya.health/providers/dr-vanessa-urbina
 - Dr. Natasha Desai, MD — Behavioral / ADHD (TX, FL): https://siya.health/providers/dr-natasha-desai
 - Dr. Swati Pandey, MD — ADHD evaluation (PA): https://siya.health/providers/dr-swati-pandey

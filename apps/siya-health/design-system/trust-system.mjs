@@ -39,11 +39,11 @@ export const TRUST_ITEMS = {
     headline: `${M.googleRating.value}${M.googleRating.suffix}`,
     subline: `${M.verifiedReviews.value} verified reviews`,
   },
-  adhdEvaluations: {
-    id: 'adhdEvaluations',
+  neurocognitiveEvaluations: {
+    id: 'neurocognitiveEvaluations',
     type: 'metric',
-    headline: M.adhdEvaluations.value,
-    subline: M.adhdEvaluations.label,
+    headline: M.neurocognitiveEvaluations.value,
+    subline: M.neurocognitiveEvaluations.label,
   },
   googleReviews: {
     id: 'googleReviews',
@@ -116,7 +116,7 @@ export const TRUST_ITEMS = {
 
 /** Trust profile → ordered item ids */
 export const TRUST_PROFILES = {
-  homepage: ['patientCount', 'adhdEvaluations', 'reviews', 'googleReviews', 'telehealth'],
+  homepage: ['patientCount', 'neurocognitiveEvaluations', 'reviews', 'googleReviews', 'telehealth'],
   landing: ['boardCertified', 'patientCount', 'reviews', 'transparentPricing', 'telehealth'],
   'landing-adhd': ['reviews', 'patientCount', 'transparentPricing', 'telehealth'],
   adhd: ['reviews', 'patientCount', 'transparentPricing', 'creyos', 'hipaa'],

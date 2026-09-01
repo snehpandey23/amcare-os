@@ -3,9 +3,11 @@
  * Pages declare goals in data/page-conversion-config.mjs; unlisted pages use intent detection.
  */
 import { getPageConversionConfig } from '../data/page-conversion-config.mjs';
+import { EMPLOYER_INQUIRY_TRACK } from '../data/employer-config.mjs';
+import { CAREERS_INQUIRY_TRACK } from '../data/careers-config.mjs';
 import { CTA_SLOTS, ctaTrackingAttrs } from './cta-system.mjs';
 
-/** @typedef {'meetGreet'|'secureChat'|'consultation'|'screening'|'newsletter'|'bookDemo'|'exploreCare'|'viewPricing'|'zocdoc'} ConversionGoal */
+/** @typedef {'meetGreet'|'secureChat'|'consultation'|'screening'|'newsletter'|'bookDemo'|'exploreCare'|'viewPricing'|'zocdoc'|'careers'} ConversionGoal */
 
 /** Conversion goal → default CTA slot id */
 export const CONVERSION_GOAL_SLOTS = {
@@ -18,6 +20,7 @@ export const CONVERSION_GOAL_SLOTS = {
   exploreCare: 'exploreCare',
   viewPricing: 'viewPricing',
   zocdoc: 'zocdoc',
+  careers: 'careers',
 };
 
 /**
@@ -33,17 +36,27 @@ export const USER_INTENT_RULES = {
   weight: { intent: 'weight', primaryGoal: 'meetGreet', secondaryGoal: 'viewPricing' },
   telehealth: { intent: 'telehealth', primaryGoal: 'meetGreet', secondaryGoal: 'exploreCare' },
   employer: { intent: 'employer', primaryGoal: 'bookDemo', secondaryGoal: 'secureChat' },
+  careers: { intent: 'careers', primaryGoal: 'careers', secondaryGoal: null },
   landing: { intent: 'landing', primaryGoal: null, secondaryGoal: null },
   default: { intent: 'default', primaryGoal: 'meetGreet', secondaryGoal: 'exploreCare' },
 };
 
-/** Custom slot for employer / demo flows (Pass 2 wiring) */
+/** Custom slot for employer / B2B inquiry (on-page form — distinct from patient booking) */
 CTA_SLOTS.bookDemo = {
   id: 'bookDemo',
-  label: 'Book a Demo',
-  url: 'mailto:care@siya.health?subject=Employer%20Health%20Demo',
+  label: 'Request employer information',
+  url: '#employer-inquiry-form',
   external: false,
-  track: 'book-demo-click',
+  track: EMPLOYER_INQUIRY_TRACK,
+};
+
+/** Custom slot for provider careers / join-our-team */
+CTA_SLOTS.careers = {
+  id: 'careers',
+  label: 'Express interest',
+  url: '#careers-inquiry-form',
+  external: false,
+  track: CAREERS_INQUIRY_TRACK,
 };
 
 const INTENT_DETECTORS = [
@@ -74,6 +87,7 @@ const INTENT_DETECTORS = [
   },
   { intent: 'telehealth', test: (p) => p === 'telehealth.html' || /^blog\/telehealth/.test(p) },
   { intent: 'employer', test: (p) => /employer|workplace/i.test(p) },
+  { intent: 'careers', test: (p) => /join-our-team|careers/i.test(p) },
   { intent: 'provider', test: (p) => p.startsWith('providers/') },
   { intent: 'blog', test: (p) => p.startsWith('blog/') || p.startsWith('answers/') },
   {
@@ -194,6 +208,7 @@ const PAGE_TYPE_PATH = {
   pricing: 'pricing.html',
   hormones: 'mens-health-longevity.html',
   weight: 'weight-loss-metabolic-health.html',
+  careers: 'join-our-team.html',
 };
 
 /**

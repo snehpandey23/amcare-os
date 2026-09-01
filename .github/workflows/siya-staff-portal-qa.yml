@@ -1,0 +1,48 @@
+# Production smoke + authenticated QA for Siya staff portal (auth API + staff app proxy).
+# Secrets: Settings → Secrets and variables → Actions (see apps/hipaa-training/docs/QA-STAFF-PORTAL.md)
+
+name: Siya Staff — production QA
+
+on:
+  workflow_dispatch:
+  schedule:
+    # IST-friendly: 06:00, 12:00, 18:00, 00:00 UTC ≈ morning/midday/evening/night IST
+    - cron: "0 0,6,12,18 * * *"
+  push:
+    branches: [main]
+    paths:
+      - "integrations/hipaa-training-api/**"
+      - "apps/hipaa-training/**"
+      - ".github/workflows/siya-staff-portal-qa.yml"
+      - "integrations/hipaa-training-api/scripts/qa-staff-portal.mjs"
+
+concurrency:
+  group: siya-staff-portal-qa
+  cancel-in-progress: false
+
+jobs:
+  qa-portal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Production QA (auth API + team pulse + admin paths)
+        env:
+          QA_STRICT: "1"
+          QA_API_URL: https://siya-staff-auth-api.vercel.app
+          QA_STAFF_URL: https://siya-staff-assist.vercel.app
+          QA_EMAIL: ${{ secrets.STAFF_PORTAL_QA_EMAIL }}
+          QA_PASSWORD: ${{ secrets.STAFF_PORTAL_QA_PASSWORD }}
+          DATABASE_URL: ${{ secrets.STAFF_PORTAL_DATABASE_URL }}
+        run: npm run qa:portal -w @amcare/hipaa-training-api

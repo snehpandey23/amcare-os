@@ -39,6 +39,41 @@ import {
   logShiftAttendance,
 } from "./shift-attendance.js";
 import { buildShiftDashboard, opsDayBounds } from "./shift-dashboard.js";
+import {
+  countRecentEmployerInquiries,
+  ensureEmployerInquiryTables,
+  insertEmployerInquiry,
+  listEmployerInquiries,
+  markEmployerInquiryEmailSent,
+  validateEmployerInquiryInput,
+} from "./employer-inquiry-service.js";
+import { sendEmployerInquiryEmail } from "./employer-inquiry-email.js";
+import {
+  countRecentSiyaCircleSignups,
+  ensureSiyaCircleSignupTables,
+  insertSiyaCircleSignup,
+  markSiyaCircleSignupEmailSent,
+  validateSiyaCircleSignupInput,
+} from "./siya-circle-signup-service.js";
+import {
+  countRecentWebsiteCallbacks,
+  ensureWebsiteCallbackTables,
+  insertWebsiteCallback,
+  markWebsiteCallbackEmailSent,
+  validateWebsiteCallbackInput,
+} from "./website-callback-service.js";
+import {
+  countRecentProviderCareersInquiries,
+  ensureProviderCareersTables,
+  insertProviderCareersInquiry,
+  markProviderCareersEmailSent,
+  validateProviderCareersInput,
+} from "./provider-careers-service.js";
+import {
+  sendProviderCareersEmail,
+  sendSiyaCircleSignupEmail,
+  sendWebsiteCallbackEmail,
+} from "./website-leads-email.js";
 
 const PORT = parseInt(process.env.HIPAA_TRAINING_API_PORT || "3012", 10);
 
@@ -89,6 +124,161 @@ app.get("/api/health", (_req, res) => {
     database: getPool() ? "configured" : "not configured",
     registerOpen: registerAllowed(),
   });
+});
+
+function clientIp(req: express.Request): string | null {
+  const fwd = req.headers["x-forwarded-for"];
+  if (typeof fwd === "string" && fwd.trim()) return fwd.split(",")[0].trim();
+  if (Array.isArray(fwd) && fwd[0]) return String(fwd[0]).trim();
+  return req.socket?.remoteAddress || null;
+}
+
+/** Public — siya.health /employers partnership inquiry (store + email). */
+app.post("/api/public/employer-inquiry", async (req: express.Request, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) {
+    return res.status(503).json({ error: "Database not configured." });
+  }
+  const parsed = validateEmployerInquiryInput(req.body);
+  if (!parsed.ok) {
+    return res.status(400).json({ error: parsed.error });
+  }
+  const ip = clientIp(req);
+  const ua = typeof req.headers["user-agent"] === "string" ? req.headers["user-agent"] : null;
+  try {
+    await ensureEmployerInquiryTables(pool);
+    const recent = await countRecentEmployerInquiries(pool, { clientIp: ip, email: parsed.data.email });
+    if (recent >= 5) {
+      return res.status(429).json({ error: "Too many submissions. Please try again later or email care@siya.health." });
+    }
+    const record = await insertEmployerInquiry(pool, parsed.data, { clientIp: ip, userAgent: ua });
+    const emailResult = await sendEmployerInquiryEmail({
+      id: record.id,
+      companyName: record.companyName,
+      contactName: record.contactName,
+      email: record.email,
+      phone: record.phone,
+      employeeCount: record.employeeCount,
+      states: record.states,
+      message: record.message,
+      sourceUrl: record.sourceUrl,
+      createdAt: record.createdAt,
+    });
+    if (emailResult.sent && emailResult.resendId) {
+      await markEmployerInquiryEmailSent(pool, record.id, emailResult.resendId);
+    }
+    return res.status(201).json({
+      ok: true,
+      id: record.id,
+      emailSent: emailResult.sent,
+    });
+  } catch (err) {
+    console.error("[employer-inquiry] submit failed", err);
+    return res.status(500).json({ error: "Unable to submit inquiry. Please email care@siya.health." });
+  }
+});
+
+/** Public — siya.health /siya-circle newsletter signup. */
+app.post("/api/public/siya-circle-signup", async (req: express.Request, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const parsed = validateSiyaCircleSignupInput(req.body);
+  if (!parsed.ok) return res.status(400).json({ error: parsed.error });
+  const ip = clientIp(req);
+  const ua = typeof req.headers["user-agent"] === "string" ? req.headers["user-agent"] : null;
+  try {
+    await ensureSiyaCircleSignupTables(pool);
+    const recent = await countRecentSiyaCircleSignups(pool, { clientIp: ip, email: parsed.data.email });
+    if (recent >= 5) {
+      return res.status(429).json({ error: "Too many submissions. Please try again later." });
+    }
+    const record = await insertSiyaCircleSignup(pool, parsed.data, { clientIp: ip, userAgent: ua });
+    const emailResult = await sendSiyaCircleSignupEmail(record);
+    if (emailResult.sent && emailResult.resendId) {
+      await markSiyaCircleSignupEmailSent(pool, record.id, emailResult.resendId);
+    }
+    return res.status(201).json({ ok: true, id: record.id, emailSent: emailResult.sent });
+  } catch (err) {
+    console.error("[siya-circle-signup] submit failed", err);
+    return res.status(500).json({ error: "Unable to submit signup. Please try again later." });
+  }
+});
+
+/** Public — Siya Guide callback / contact-me requests. */
+app.post("/api/public/website-callback", async (req: express.Request, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const parsed = validateWebsiteCallbackInput(req.body);
+  if (!parsed.ok) return res.status(400).json({ error: parsed.error });
+  const ip = clientIp(req);
+  const ua = typeof req.headers["user-agent"] === "string" ? req.headers["user-agent"] : null;
+  try {
+    await ensureWebsiteCallbackTables(pool);
+    const recent = await countRecentWebsiteCallbacks(pool, { clientIp: ip, email: parsed.data.email });
+    if (recent >= 5) {
+      return res.status(429).json({ error: "Too many submissions. Please try again later or call (215) 445-1244." });
+    }
+    const record = await insertWebsiteCallback(pool, parsed.data, { clientIp: ip, userAgent: ua });
+    const emailResult = await sendWebsiteCallbackEmail({
+      id: record.id,
+      name: record.name,
+      email: record.email,
+      phone: record.phone,
+      message: record.message,
+      sourceUrl: record.sourceUrl,
+      createdAt: record.createdAt,
+    });
+    if (emailResult.sent && emailResult.resendId) {
+      await markWebsiteCallbackEmailSent(pool, record.id, emailResult.resendId);
+    }
+    return res.status(201).json({ ok: true, id: record.id, emailSent: emailResult.sent });
+  } catch (err) {
+    console.error("[website-callback] submit failed", err);
+    return res.status(500).json({ error: "Unable to submit request. Please call (215) 445-1244." });
+  }
+});
+
+/** Public — provider careers inquiry (siya.health /join-our-team). */
+app.post("/api/public/provider-careers-inquiry", async (req: express.Request, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const parsed = validateProviderCareersInput(req.body);
+  if (!parsed.ok) return res.status(400).json({ error: parsed.error });
+  const ip = clientIp(req);
+  const ua = typeof req.headers["user-agent"] === "string" ? req.headers["user-agent"] : null;
+  try {
+    await ensureProviderCareersTables(pool);
+    const recent = await countRecentProviderCareersInquiries(pool, { clientIp: ip, email: parsed.data.email });
+    if (recent >= 5) {
+      return res.status(429).json({ error: "Too many submissions. Please try again later." });
+    }
+    const record = await insertProviderCareersInquiry(pool, parsed.data, { clientIp: ip, userAgent: ua });
+    const emailResult = await sendProviderCareersEmail(record);
+    if (emailResult.sent && emailResult.resendId) {
+      await markProviderCareersEmailSent(pool, record.id, emailResult.resendId);
+    }
+    return res.status(201).json({ ok: true, id: record.id, emailSent: emailResult.sent });
+  } catch (err) {
+    console.error("[provider-careers] submit failed", err);
+    return res.status(500).json({ error: "Unable to submit inquiry. Please email care@siya.health." });
+  }
+});
+
+app.get("/api/admin/employer-inquiries", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) {
+    return res.status(503).json({ error: "Database not configured." });
+  }
+  const limit = parseInt(String(req.query.limit || "50"), 10);
+  const offset = parseInt(String(req.query.offset || "0"), 10);
+  try {
+    await ensureEmployerInquiryTables(pool);
+    const inquiries = await listEmployerInquiries(pool, { limit, offset });
+    return res.json({ inquiries });
+  } catch (err) {
+    console.error("[employer-inquiry] admin list failed", err);
+    return res.status(500).json({ error: "Unable to load inquiries." });
+  }
 });
 
 app.post("/api/auth/register", async (req: express.Request, res: express.Response) => {
@@ -807,6 +997,198 @@ app.post("/api/internal/lead-gap-digests/mark-sent", async (req, res) => {
   return res.json({ ok: true });
 });
 
+/** Weekday team messages — usage + recipient payload for Mon–Fri Resend cron. */
+app.get("/api/internal/weekday-messages", async (req, res) => {
+  if (!cronAuthorized(req)) return res.status(401).json({ error: "Unauthorized" });
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const {
+      istDateString,
+      weekdayThemeForDate,
+      listWeekdayRecipients,
+      ALL_THEMES,
+    } = await import("./team-weekday-service.js");
+    const sendDate =
+      typeof req.query.sendDate === "string" && /^\d{4}-\d{2}-\d{2}$/.test(req.query.sendDate)
+        ? req.query.sendDate
+        : istDateString();
+    const themeRaw = typeof req.query.theme === "string" ? req.query.theme : "";
+    const theme =
+      ALL_THEMES.includes(themeRaw as (typeof ALL_THEMES)[number])
+        ? (themeRaw as (typeof ALL_THEMES)[number])
+        : weekdayThemeForDate(new Date());
+    if (!theme) {
+      return res.json({ sendDate, theme: null, recipients: [], note: "Weekend — no weekday theme (IST)." });
+    }
+    const userId = typeof req.query.userId === "string" ? req.query.userId : undefined;
+    const includeAlreadySent = req.query.includeAlreadySent === "1";
+    const recipients = await listWeekdayRecipients(pool, {
+      sendDate,
+      theme,
+      userId,
+      includeAlreadySent,
+    });
+    return res.json({
+      sendDate,
+      theme,
+      recipientCount: recipients.length,
+      recipients,
+      note: "Segments from Ask message turns (14/30d) + level_up_json practice drills.",
+    });
+  } catch (err) {
+    console.error("[internal/weekday-messages]", err);
+    return res.status(500).json({ error: "Could not build weekday payload." });
+  }
+});
+
+app.get("/api/internal/weekday-messages/usage", async (req, res) => {
+  if (!cronAuthorized(req)) return res.status(401).json({ error: "Unauthorized" });
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const email = typeof req.query.email === "string" ? req.query.email.trim().toLowerCase() : "";
+  const userId = typeof req.query.userId === "string" ? req.query.userId : "";
+  try {
+    const { getUserUsageStats } = await import("./team-weekday-service.js");
+    let uid = userId;
+    if (!uid && email) {
+      const r = await pool.query(`SELECT id FROM hipaa_training_users WHERE email = $1`, [email]);
+      uid = r.rows[0]?.id as string;
+    }
+    if (!uid) return res.status(400).json({ error: "userId or email required" });
+    const stats = await getUserUsageStats(pool, uid);
+    const u = await pool.query(`SELECT email, name FROM hipaa_training_users WHERE id = $1`, [uid]);
+    return res.json({
+      userId: uid,
+      email: u.rows[0]?.email,
+      name: u.rows[0]?.name,
+      ...stats,
+    });
+  } catch (err) {
+    console.error("[internal/weekday-messages/usage]", err);
+    return res.status(500).json({ error: "Could not load usage." });
+  }
+});
+
+app.post("/api/internal/weekday-messages/mark-sent", async (req, res) => {
+  if (!cronAuthorized(req)) return res.status(401).json({ error: "Unauthorized" });
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const userId = typeof req.body?.userId === "string" ? req.body.userId : "";
+  const sendDate = typeof req.body?.sendDate === "string" ? req.body.sendDate : "";
+  const theme = typeof req.body?.theme === "string" ? req.body.theme : "";
+  const segment = typeof req.body?.segment === "string" ? req.body.segment : "new_ask";
+  const resendId = typeof req.body?.resendId === "string" ? req.body.resendId : null;
+  if (!userId || !/^\d{4}-\d{2}-\d{2}$/.test(sendDate) || !theme) {
+    return res.status(400).json({ error: "userId, sendDate, theme required" });
+  }
+  try {
+    const { markWeekdayMessageSent, ALL_THEMES } = await import("./team-weekday-service.js");
+    if (!ALL_THEMES.includes(theme as (typeof ALL_THEMES)[number])) {
+      return res.status(400).json({ error: "Invalid theme" });
+    }
+    await markWeekdayMessageSent(pool, {
+      userId,
+      sendDate,
+      theme: theme as (typeof ALL_THEMES)[number],
+      segment: segment as "new_ask" | "regular_ask" | "practice_bridge",
+      resendId,
+    });
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error("[internal/weekday-messages/mark-sent]", err);
+    return res.status(500).json({ error: "Could not mark sent." });
+  }
+});
+
+/** Admin — usage segments + pilot send payload (no CRON_SECRET required). */
+app.get("/api/admin/weekday-messages/usage", requireAuth, requireAdmin, async (req: AuthRequest, res) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const email = typeof req.query.email === "string" ? req.query.email.trim().toLowerCase() : "";
+  const userId = typeof req.query.userId === "string" ? req.query.userId : "";
+  try {
+    const { getUserUsageStats } = await import("./team-weekday-service.js");
+    let uid = userId;
+    if (!uid && email) {
+      const r = await pool.query(`SELECT id FROM hipaa_training_users WHERE email = $1`, [email]);
+      uid = r.rows[0]?.id as string;
+    }
+    if (!uid) return res.status(400).json({ error: "userId or email required" });
+    const stats = await getUserUsageStats(pool, uid);
+    const u = await pool.query(`SELECT email, name FROM hipaa_training_users WHERE id = $1`, [uid]);
+    return res.json({ userId: uid, email: u.rows[0]?.email, name: u.rows[0]?.name, ...stats });
+  } catch (err) {
+    console.error("[admin/weekday-messages/usage]", err);
+    return res.status(500).json({ error: "Could not load usage." });
+  }
+});
+
+app.get("/api/admin/weekday-messages/recipients", requireAuth, requireAdmin, async (req: AuthRequest, res) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const {
+      istDateString,
+      weekdayThemeForDate,
+      listWeekdayRecipients,
+      ALL_THEMES,
+    } = await import("./team-weekday-service.js");
+    const sendDate =
+      typeof req.query.sendDate === "string" && /^\d{4}-\d{2}-\d{2}$/.test(req.query.sendDate)
+        ? req.query.sendDate
+        : istDateString();
+    const themeRaw = typeof req.query.theme === "string" ? req.query.theme : "";
+    const theme =
+      ALL_THEMES.includes(themeRaw as (typeof ALL_THEMES)[number])
+        ? (themeRaw as (typeof ALL_THEMES)[number])
+        : weekdayThemeForDate(new Date());
+    if (!theme) return res.json({ sendDate, theme: null, recipients: [] });
+    const userId = typeof req.query.userId === "string" ? req.query.userId : undefined;
+    const includeAlreadySent = req.query.includeAlreadySent === "1";
+    const recipients = await listWeekdayRecipients(pool, {
+      sendDate,
+      theme,
+      userId,
+      includeAlreadySent,
+    });
+    return res.json({ sendDate, theme, recipients });
+  } catch (err) {
+    console.error("[admin/weekday-messages/recipients]", err);
+    return res.status(500).json({ error: "Could not list recipients." });
+  }
+});
+
+app.post("/api/admin/weekday-messages/mark-sent", requireAuth, requireAdmin, async (req: AuthRequest, res) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const userId = typeof req.body?.userId === "string" ? req.body.userId : "";
+  const sendDate = typeof req.body?.sendDate === "string" ? req.body.sendDate : "";
+  const theme = typeof req.body?.theme === "string" ? req.body.theme : "";
+  const segment = typeof req.body?.segment === "string" ? req.body.segment : "new_ask";
+  const resendId = typeof req.body?.resendId === "string" ? req.body.resendId : null;
+  if (!userId || !/^\d{4}-\d{2}-\d{2}$/.test(sendDate) || !theme) {
+    return res.status(400).json({ error: "userId, sendDate, theme required" });
+  }
+  try {
+    const { markWeekdayMessageSent, ALL_THEMES } = await import("./team-weekday-service.js");
+    if (!ALL_THEMES.includes(theme as (typeof ALL_THEMES)[number])) {
+      return res.status(400).json({ error: "Invalid theme" });
+    }
+    await markWeekdayMessageSent(pool, {
+      userId,
+      sendDate,
+      theme: theme as (typeof ALL_THEMES)[number],
+      segment: segment as "new_ask" | "regular_ask" | "practice_bridge",
+      resendId,
+    });
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error("[admin/weekday-messages/mark-sent]", err);
+    return res.status(500).json({ error: "Could not mark sent." });
+  }
+});
+
 app.post("/api/assist/feedback", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
@@ -1181,6 +1563,207 @@ app.get("/api/weekly-checkins", requireAuth, async (req: AuthRequest, res: expre
   const week = typeof req.query.week === "string" ? req.query.week : "current";
   const checkins = await listWeeklyLeadCheckIns(pool, week);
   return res.json({ checkins, week });
+});
+
+/**
+ * Ops dashboard — Section A (staff engagement, admin) + Section B (lead responsiveness).
+ * Reuses existing tables only. Leads see their own Section B row; admins see all.
+ */
+app.get("/api/ops/dashboard", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { buildOpsDashboard } = await import("./ops-dashboard-service.js");
+    const data = await buildOpsDashboard(pool, {
+      viewerUserId: req.user!.userId,
+      viewerRole: req.user!.role ?? "trainee",
+    });
+    return res.json(data);
+  } catch (e) {
+    if (e instanceof Error && e.message === "FORBIDDEN") {
+      return res.status(403).json({ error: "Ops dashboard is for admins and department leads." });
+    }
+    console.error("[ops/dashboard]", e);
+    return res.status(500).json({ error: "Could not load ops dashboard." });
+  }
+});
+
+/**
+ * Scheduled vs actual presence — same payload shape for ops (admin/all) and My day (self).
+ * GET /api/shift-roster/planned?date=YYYY-MM-DD&scope=me|team
+ */
+app.get("/api/shift-roster/planned", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { buildScheduledVsActual, istDateString } = await import("./shift-roster-service.js");
+    const rosterDate =
+      typeof req.query.date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(req.query.date)
+        ? req.query.date
+        : istDateString();
+    const scope = typeof req.query.scope === "string" ? req.query.scope : "me";
+    const role = req.user!.role ?? "trainee";
+    if (scope === "team") {
+      if (role !== "admin") {
+        return res.status(403).json({ error: "Team planned view is admin-only." });
+      }
+      const rows = await buildScheduledVsActual(pool, { rosterDate });
+      return res.json({ rosterDate, scope: "team", rows });
+    }
+    const rows = await buildScheduledVsActual(pool, {
+      rosterDate,
+      userId: req.user!.userId,
+    });
+    return res.json({ rosterDate, scope: "me", rows });
+  } catch (e) {
+    console.error("[shift-roster/planned]", e);
+    return res.status(500).json({ error: "Could not load planned vs actual." });
+  }
+});
+
+/**
+ * Signed-in user's imported MA schedule — deterministic list for Ask "my shifts".
+ * GET /api/shift-roster/me?from=YYYY-MM-DD&to=YYYY-MM-DD
+ * GET /api/shift-roster/me?month=9&year=2026  (month 1–12 or name)
+ */
+app.get("/api/shift-roster/me", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { listRosterForUserRange, monthEndDate, istDateString } = await import(
+      "./shift-roster-service.js"
+    );
+    let fromDate: string | null =
+      typeof req.query.from === "string" && /^\d{4}-\d{2}-\d{2}$/.test(req.query.from)
+        ? req.query.from
+        : null;
+    let toDate: string | null =
+      typeof req.query.to === "string" && /^\d{4}-\d{2}-\d{2}$/.test(req.query.to)
+        ? req.query.to
+        : null;
+
+    if (!fromDate || !toDate) {
+      const monthRaw = typeof req.query.month === "string" ? req.query.month.trim().toLowerCase() : "";
+      const yearRaw = typeof req.query.year === "string" ? req.query.year.trim() : "";
+      const monthNames: Record<string, number> = {
+        january: 1,
+        jan: 1,
+        february: 2,
+        feb: 2,
+        march: 3,
+        mar: 3,
+        april: 4,
+        apr: 4,
+        may: 5,
+        june: 6,
+        jun: 6,
+        july: 7,
+        jul: 7,
+        august: 8,
+        aug: 8,
+        september: 9,
+        sep: 9,
+        sept: 9,
+        october: 10,
+        oct: 10,
+        november: 11,
+        nov: 11,
+        december: 12,
+        dec: 12,
+      };
+      let monthNum = /^\d{1,2}$/.test(monthRaw) ? Number(monthRaw) : monthNames[monthRaw];
+      if (!monthNum || monthNum < 1 || monthNum > 12) {
+        return res.status(400).json({ error: "from/to (YYYY-MM-DD) or month (+ optional year) required" });
+      }
+      const yearNum = /^\d{4}$/.test(yearRaw) ? Number(yearRaw) : Number(istDateString().slice(0, 4));
+      fromDate = `${yearNum}-${String(monthNum).padStart(2, "0")}-01`;
+      toDate = monthEndDate(yearNum, monthNum);
+    }
+
+    const rows = await listRosterForUserRange(pool, req.user!.userId, fromDate, toDate);
+    return res.json({
+      from: fromDate,
+      to: toDate,
+      count: rows.length,
+      rows,
+      timezone: "Asia/Kolkata",
+      source: "shift_roster",
+    });
+  } catch (e) {
+    console.error("[shift-roster/me]", e);
+    return res.status(500).json({ error: "Could not load your schedule." });
+  }
+});
+
+/** Soft check: assignee scheduled OFF on due date (task assign warning). */
+app.get("/api/shift-roster/assignment-check", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const assigneeId = typeof req.query.assigneeId === "string" ? req.query.assigneeId : "";
+  const date =
+    typeof req.query.date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(req.query.date)
+      ? req.query.date
+      : null;
+  if (!assigneeId || !date) {
+    return res.status(400).json({ error: "assigneeId and date (YYYY-MM-DD) required" });
+  }
+  const role = req.user!.role ?? "trainee";
+  if (role !== "admin" && assigneeId !== req.user!.userId) {
+    return res.status(403).json({ error: "Forbidden" });
+  }
+  try {
+    const { isUserScheduledOff } = await import("./shift-roster-service.js");
+    const result = await isUserScheduledOff(pool, assigneeId, date);
+    return res.json({
+      assigneeId,
+      date,
+      scheduledOff: result.scheduledOff,
+      rawCells: result.rawCells,
+      warning: result.scheduledOff
+        ? `This person is scheduled OFF on ${date} (roster: ${result.rawCells.join("; ") || "OFF"}). You can still assign — soft warning only.`
+        : null,
+    });
+  } catch (e) {
+    console.error("[shift-roster/assignment-check]", e);
+    return res.status(500).json({ error: "Check failed" });
+  }
+});
+
+/** Internal cron: shift-start reminder candidates + mark-sent. */
+app.get("/api/internal/shift-roster-reminders", async (req, res) => {
+  if (!cronAuthorized(req)) return res.status(401).json({ error: "Unauthorized" });
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { listShiftReminderCandidates, reminderSendBucket } = await import("./shift-roster-service.js");
+    const candidates = await listShiftReminderCandidates(pool);
+    return res.json({
+      at: new Date().toISOString(),
+      candidates: candidates.map((c) => ({
+        ...c,
+        sendBucket: c.shiftStart ? reminderSendBucket(c.shiftStart) : null,
+      })),
+    });
+  } catch (e) {
+    console.error("[internal/shift-roster-reminders]", e);
+    return res.status(500).json({ error: "Failed" });
+  }
+});
+
+app.post("/api/internal/shift-roster-reminders/mark-sent", async (req, res) => {
+  if (!cronAuthorized(req)) return res.status(401).json({ error: "Unauthorized" });
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const rosterRowId = typeof req.body?.rosterRowId === "string" ? req.body.rosterRowId : "";
+  const userId = typeof req.body?.userId === "string" ? req.body.userId : "";
+  const sendBucket = typeof req.body?.sendBucket === "string" ? req.body.sendBucket : "";
+  const resendId = typeof req.body?.resendId === "string" ? req.body.resendId : null;
+  if (!rosterRowId || !userId || !sendBucket) {
+    return res.status(400).json({ error: "rosterRowId, userId, sendBucket required" });
+  }
+  const { markShiftReminderSent } = await import("./shift-roster-service.js");
+  await markShiftReminderSent(pool, { rosterRowId, userId, sendBucket, resendId });
+  return res.json({ ok: true });
 });
 
 app.post("/api/weekly-checkins", requireAuth, async (req: AuthRequest, res: express.Response) => {
@@ -1621,6 +2204,93 @@ app.get("/api/knowledge/team-assignees", requireAuth, async (_req: AuthRequest, 
     })),
   });
 });
+
+/** Feedback Friday — peer/lead notes with per-submission anonymity. */
+app.get("/api/team-feedback/directory", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { listFeedbackDirectory } = await import("./team-feedback-service.js");
+    const dir = await listFeedbackDirectory(pool, req.user!.userId);
+    return res.json(dir);
+  } catch (err) {
+    console.error("[team-feedback directory]", err);
+    return res.status(500).json({ error: "Could not load directory." });
+  }
+});
+
+app.get("/api/team-feedback/inbox", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { listInboxForRecipient } = await import("./team-feedback-service.js");
+    const items = await listInboxForRecipient(pool, req.user!.userId);
+    return res.json({
+      items,
+      note: "Anonymous notes show no name, email, or team of the giver.",
+    });
+  } catch (err) {
+    console.error("[team-feedback inbox]", err);
+    return res.status(500).json({ error: "Could not load inbox." });
+  }
+});
+
+app.post("/api/team-feedback", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const recipientUserId = typeof req.body?.recipientUserId === "string" ? req.body.recipientUserId : "";
+  const body = typeof req.body?.body === "string" ? req.body.body : "";
+  const targetKind = req.body?.targetKind === "lead" ? "lead" : "peer";
+  const anonymous = req.body?.anonymous === true;
+  try {
+    const { submitTeamFeedback } = await import("./team-feedback-service.js");
+    const result = await submitTeamFeedback(pool, {
+      giverUserId: req.user!.userId,
+      recipientUserId,
+      targetKind,
+      body,
+      anonymous,
+    });
+    if (!result.ok) {
+      return res.status(400).json({ error: result.reason, status: result.status });
+    }
+    return res.status(201).json({
+      ok: true,
+      status: result.status,
+      /** Exact payload the recipient will see — never includes giver id when anonymous. */
+      recipientFacing: result.feedback,
+    });
+  } catch (err) {
+    console.error("[team-feedback submit]", err);
+    return res.status(500).json({ error: "Could not send feedback." });
+  }
+});
+
+/**
+ * Abuse investigation only — includes giver identity.
+ * Not used by recipient inbox or normal admin “view their feedback” UIs.
+ */
+app.get(
+  "/api/admin/team-feedback/moderation/:id",
+  requireAuth,
+  requireAdmin,
+  async (req: AuthRequest, res: express.Response) => {
+    const pool = getPool();
+    if (!pool) return res.status(503).json({ error: "Database not configured." });
+    try {
+      const { getFeedbackForModeration } = await import("./team-feedback-service.js");
+      const row = await getFeedbackForModeration(pool, req.params.id);
+      if (!row) return res.status(404).json({ error: "Not found" });
+      return res.json({
+        investigation: row,
+        warning: "Abuse-investigation path only. Do not surface giver identity in recipient UIs.",
+      });
+    } catch (err) {
+      console.error("[team-feedback moderation]", err);
+      return res.status(500).json({ error: "Could not load moderation record." });
+    }
+  },
+);
 
 /** Layer 2 — department SOPs (Knowledge). */
 app.get("/api/knowledge/sops/context", requireAuth, async (req: AuthRequest, res: express.Response) => {
@@ -2091,7 +2761,17 @@ app.post("/api/tasks", requireAuth, async (req: AuthRequest, res: express.Respon
       },
       uiActivitySource(role),
     );
-    return res.status(201).json({ task });
+    let assignmentWarning: string | null = null;
+    try {
+      const { isUserScheduledOff } = await import("./shift-roster-service.js");
+      const off = await isUserScheduledOff(pool, assigneeId, dueDate);
+      if (off.scheduledOff) {
+        assignmentWarning = `Assignee is scheduled OFF on ${dueDate} (roster: ${off.rawCells.join("; ") || "OFF"}). Assignment still created — soft warning only.`;
+      }
+    } catch {
+      /* roster optional */
+    }
+    return res.status(201).json({ task, assignmentWarning });
   } catch (e) {
     return res.status(400).json({ error: e instanceof Error ? e.message : "Create failed" });
   }
@@ -2123,7 +2803,19 @@ app.patch("/api/tasks/:id", requireAuth, async (req: AuthRequest, res: express.R
         req.body?.dueTime === null || typeof req.body?.dueTime === "string" ? req.body.dueTime : undefined,
       priority: req.body?.priority != null ? parseTaskPriority(req.body.priority) : undefined,
     }, uiActivitySource(req.user!.role));
-    return res.json({ task });
+    let assignmentWarning: string | null = null;
+    if (typeof req.body?.assigneeId === "string" || typeof req.body?.dueDate === "string") {
+      try {
+        const { isUserScheduledOff } = await import("./shift-roster-service.js");
+        const off = await isUserScheduledOff(pool, task.assigneeId, task.dueDate);
+        if (off.scheduledOff) {
+          assignmentWarning = `Assignee is scheduled OFF on ${task.dueDate} (roster: ${off.rawCells.join("; ") || "OFF"}). Update saved — soft warning only.`;
+        }
+      } catch {
+        /* optional */
+      }
+    }
+    return res.json({ task, assignmentWarning });
   } catch (e) {
     const msg = e instanceof Error ? e.message : "Update failed";
     return res.status(msg.includes("admin") || msg.includes("own") ? 403 : 404).json({ error: msg });

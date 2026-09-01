@@ -88,6 +88,15 @@ const DRILLS: Drill[] = [
     blurb: "Open **Quick compliance** for today’s MCQ.",
   },
   {
+    id: "hipaa-quiz",
+    href: "/training",
+    label: "HIPAA training modules",
+    match:
+      /\b((mock|practice|sample|quick)\s+quiz|quiz\s+me|mcq|mcqs|multiple\s+choice|\d+\s*mcqs?)\b[\s\S]{0,48}\b(hipaa|privacy|phi|breach)\b|\b(hipaa|privacy)\b[\s\S]{0,48}\b((mock|practice|sample|quick)\s+quiz|quiz\s+me|mcq|mcqs|multiple\s+choice|\d+\s*mcqs?|create\s+(a\s+)?quiz)\b/i,
+    blurb:
+      "Ask doesn’t generate custom HIPAA quizzes. Use **HIPAA certification modules** for the official course, or **Learn → Practice → Quick compliance** for daily MCQs.",
+  },
+  {
     id: "hipaa-training",
     href: "/training",
     label: "HIPAA training modules",
@@ -124,13 +133,17 @@ export function isPracticeExplanationAsk(text: string): boolean {
     return false;
   }
   if (
-    /\b(what\s+(is|are)|what'?s|how\s+(do|will|does|can)|why|explain|orientation|this\s+tool|this\s+app)\b/.test(
+    /\b(what\s+(is|are)|what'?s|how\s+(do|will|does|can)|why|explain|orientation|this\s+tool|this\s+app|will|would|does|should)\b/.test(
       t,
     ) &&
     /\b(learn|practice|drill|chat\s+speed|typing|hub)\b/.test(t)
   ) {
     return true;
   }
+  if (/\b(will|would|does|do|should)\b[\s\S]{0,40}\bpractice\b[\s\S]{0,40}\b(better|help|improve|worth|useful)\b/.test(t)) {
+    return true;
+  }
+  if (/\bmake\s+me\s+better\b/.test(t) && /\bpractice\b/.test(t)) return true;
   if (
     /\b(top\s+\d+\s+uses|become\s+a\s+(better\s+)?medical\s+assistant|change\s+my\s+life|what\s+is\s+this\s+(tool|app)|get\s+some\s+orientation)\b/.test(
       t,

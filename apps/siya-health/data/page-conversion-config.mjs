@@ -4,7 +4,7 @@
  * Unlisted pages fall back to intent detection in conversion-system.mjs.
  */
 
-/** @typedef {'meetGreet'|'secureChat'|'consultation'|'screening'|'newsletter'|'bookDemo'|'exploreCare'|'viewPricing'|'zocdoc'} ConversionGoal */
+/** @typedef {'meetGreet'|'secureChat'|'consultation'|'screening'|'newsletter'|'bookDemo'|'exploreCare'|'viewPricing'|'zocdoc'|'careers'} ConversionGoal */
 
 /**
  * @type {Record<string, {
@@ -112,6 +112,22 @@ export const PAGE_CONVERSION_CONFIG = {
     intent: 'newsletter',
     primarySlot: 'newsletter',
     secondarySlot: null,
+  },
+  'employers.html': {
+    conversionGoal: 'bookDemo',
+    intent: 'employer',
+    funnel: 'employer_b2b',
+    primarySlot: 'bookDemo',
+    secondarySlot: 'secureChat',
+    notes: 'B2B landing — employer inquiry form, not patient booking; staging noindex',
+  },
+  'join-our-team.html': {
+    conversionGoal: 'careers',
+    intent: 'careers',
+    funnel: 'provider_careers',
+    primarySlot: 'careers',
+    secondarySlot: null,
+    notes: 'Provider recruitment — express interest form, not patient booking; noindex',
   },
 };
 

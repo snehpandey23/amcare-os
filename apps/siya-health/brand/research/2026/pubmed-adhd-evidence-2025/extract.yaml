@@ -1,0 +1,64 @@
+# Structured extracts — PubMed academic track (companion to CONTENT-BANK doc)
+# clinical_review_required: true — Dr. Swati Pandey before any publish under her name
+
+entries:
+  - id: PMED-2026-08-06-adhd-interventions-umbrella
+    track: PubMed/academic
+    citation: "Gosling CJ, et al. Benefits and harms of ADHD interventions: umbrella review. BMJ. 2025;391:e085875."
+    url: https://pmc.ncbi.nlm.nih.gov/articles/PMC12651917/
+    pmcid: PMC12651917
+    evidence_level: PeerReviewed
+    design: umbrella_review_of_RCT_meta_analyses
+    clinical_review_required: true
+    clinical_reviewer: Dr. Swati Pandey
+    publish_status: banked_not_approved
+    core_finding_plain: >
+      Short-term, several ADHD medications show moderate-to-high certainty benefit
+      for symptoms (especially in youth; also selected adult options). Long-term
+      high/moderate certainty is largely absent. Some non-drug interventions show
+      large effect sizes with only low certainty.
+    evidence_strength_notes:
+      - "221 re-estimated PICO combinations from 47 MA reports"
+      - "Methylphenidate youth short-term: moderate–high certainty; SMD often >0.75"
+      - "Adult drug tolerability often worse than placebo (high certainty)"
+      - "No high/moderate certainty long-term evidence for any intervention"
+      - "Acupuncture/CBT/mindfulness large SMDs but low/very low certainty — do not overclaim"
+    safety_caveats:
+      - No start/stop/switch medication advice in content
+      - Pair every efficacy claim with evidence certainty
+      - Age-label pediatric vs adult findings
+    angles:
+      linkedin_swati: "What the newest ADHD evidence map actually says — and what it doesn’t"
+      ig_carousel_hook: "A huge ADHD treatment review ranked how sure the science is — not just what ‘worked’"
+      blog_seo_title: "ADHD Treatment Evidence in 2025: What an Umbrella Review Says About Meds, Therapy, and Certainty"
+
+  - id: PMED-2026-08-06-adhd-meds-pregnancy-sr
+    track: PubMed/academic
+    citation: "Taylor S, et al. Maternal and offspring outcomes associated with prescribed ADHD medication in pregnancy: a systematic review. Arch Womens Ment Health. 2025;28(6):1425–1446."
+    url: https://pmc.ncbi.nlm.nih.gov/articles/PMC12702805/
+    pmcid: PMC12702805
+    evidence_level: PeerReviewed
+    design: systematic_review_narrative_no_meta_analysis
+    clinical_review_required: true
+    clinical_reviewer: Dr. Swati Pandey
+    publish_status: banked_not_approved
+    core_finding_plain: >
+      Recent cohorts often find no clear large harm from continuing many prescribed
+      ADHD medications in pregnancy, while untreated ADHD and stopping meds also
+      carry risks. Modafinil is a notable exception with a malformation signal.
+      Decisions need individualized shared counseling — not social-media absolutes.
+    evidence_strength_notes:
+      - "12 high-quality cohorts (NOS ≥7); aggregate N ~7.56M; narrative only"
+      - "Modafinil: OR ~2.7–3.4 for major malformations — hard callout"
+      - "Threatened-abortion OR 2.28 on stopping DEX — small N, fragile; do not lead"
+      - "Most registry studies cannot confirm pills were taken; dose/duration unstudied"
+      - "Authors: benefits of continuing may outweigh risks when meds help — MD must approve any public use of this frame"
+    safety_caveats:
+      - Explicit not personal medical advice; decide with psychiatry + OB
+      - Never blanket continue/stop instructions
+      - Handle birth-defect stats with absolute-risk care or omit numbers
+      - Do not imply Siya replaces obstetric care
+    angles:
+      linkedin_swati: "ADHD medication in pregnancy isn’t a simple yes/no — here’s how recent evidence changed the conversation"
+      ig_carousel_hook: "Pregnant or planning and on ADHD meds? TikTok says stop everything. Science is more careful."
+      blog_seo_title: "ADHD Medication in Pregnancy: What a 2025 Systematic Review Means for Women"

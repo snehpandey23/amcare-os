@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build -w @amcare/siya-health",
+  "outputDirectory": "apps/siya-health",
+  "installCommand": "echo 'No install needed'"
+}

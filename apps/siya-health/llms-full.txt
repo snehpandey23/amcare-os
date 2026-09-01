@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
-Generated: 2026-08-16
-Total pages: 187
+Generated: 2026-09-01
+Total pages: 183
 
 ---
 
@@ -459,11 +459,6 @@ Total pages: 187
   Summary: Adults with ADHD face higher rates of binge eating. Learn how common it is, ADHD vs emotional eating, food noise, Vyvanse for BED, and when an ADHD evaluation helps.
   Topics: adhd
 
-- ADHD and Insulin Resistance: Roommates, Not Rivals
-  URL: https://siya.health/blog/adhd-and-insulin-resistance
-  Summary: ADHD and insulin resistance often co-occur. Learn what association means (and does not), where PCOS fits, and questions to ask before self-diagnosing.
-  Topics: adhd, labs
-
 - ADHD Brain Imaging Subtypes: What New Research May Mean
   URL: https://siya.health/blog/adhd-brain-imaging-subtypes
   Summary: Emerging JAMA Psychiatry research describes three ADHD-related brain patterns. Learn what biotypes may mean—and what they do not change about diagnosis today.
@@ -492,11 +487,6 @@ Total pages: 187
 - Do You Need ADHD Medication Every Day? (Daily vs PRN for Adults)
   URL: https://siya.health/blog/adhd-medication-daily-or-as-needed-adults
   Summary: Daily ADHD dosing vs weekends off—what's safe for adults? Learn PRN vs daily trade-offs before changing your medication schedule.
-  Topics: adhd, medication
-
-- Looking for an Adderall or Vyvanse Doctor Near You? How ADHD Treatment Actually Works
-  URL: https://siya.health/blog/adhd-medication-doctor-near-you
-  Summary: Searching for an Adderall doctor or Vyvanse prescription near you? Here’s the real process: evaluation first, no same-day guarantees, and how physician-led ADHD care works at Siya Health.
   Topics: adhd, medication
 
 - Can You Get ADHD Medication Online in California? (2026 Guide)
@@ -575,11 +565,6 @@ Total pages: 187
   Summary: Compounded vs branded GLP-1 in 2026: manufacturing standards, regulatory context, risks of unapproved copies, and why clinician oversight matters.
   Topics: weight-loss, medication
 
-- Conditions That Commonly Occur With ADHD
-  URL: https://siya.health/blog/conditions-that-occur-with-adhd
-  Summary: ADHD often coexists with depression, anxiety, bipolar disorder, PTSD, and binge eating. Learn why overlap matters—and why treating one condition alone may not be enough.
-  Topics: adhd
-
 - Executive Dysfunction in ADHD: Signs, Domains &amp; What Helps
   URL: https://siya.health/blog/executive-dysfunction-adhd
   Summary: Learn how executive dysfunction shows up in adult ADHD—task initiation, working memory, planning, organization, decision fatigue, and when evaluation helps.
@@ -593,11 +578,6 @@ Total pages: 187
   URL: https://siya.health/blog/fatigue-despite-normal-labs
   Summary: Normal labs do not always mean your fatigue is “all in your head.” Learn what normal results can miss and how primary care continues the workup.
   Topics: labs
-
-- Focalin vs Adderall: Key Differences for Adults
-  URL: https://siya.health/blog/focalin-vs-adderall-comparison
-  Summary: Focalin vs Adderall for adults with ADHD: methylphenidate vs amphetamine class, duration, side effects, and questions to discuss with your clinician—education only.
-  Topics: adhd
 
 - Food Noise and GLP-1: What It Means and What Actually Helps (2026)
   URL: https://siya.health/blog/food-noise-and-glp-1-what-it-means-and-what-helps
@@ -721,19 +701,9 @@ Total pages: 187
   Summary: Phentermine for weight loss in 2026: FDA history, cardiovascular cautions, short-term use norms, monitoring, and alternatives—educational only.
   Topics: weight-loss
 
-- Physical Signs of ADHD: Common to Notice, Not Enough to Diagnose
-  URL: https://siya.health/blog/physical-signs-of-adhd
-  Summary: Fidgeting and restlessness can show up with ADHD—and with anxiety or sleep issues. Learn why physical signs inform evaluation but do not diagnose ADHD alone.
-  Topics: adhd
-
 - POTS and ADHD: Shared Symptoms, Overlap &amp; What Research Shows
   URL: https://siya.health/blog/pots-and-adhd
   Summary: POTS and ADHD can share brain fog, fatigue, and attention problems. Learn orthostatic intolerance, current evidence, and why overlap creates diagnostic confusion.
-  Topics: adhd
-
-- Ritalin, Concerta &amp; Methylphenidate for ADHD: How Treatment Actually Works
-  URL: https://siya.health/blog/ritalin-concerta-methylphenidate-for-adhd
-  Summary: What Ritalin, Concerta, and other methylphenidate meds are, how they differ from Adderall/Vyvanse, and why a formal ADHD evaluation comes before any prescription decision.
   Topics: adhd
 
 - Semaglutide for Weight Loss: How It Works in 2026 (GLP-1 Science)
@@ -807,6 +777,10 @@ Total pages: 187
 - Siya Health — Tint Options A / B / C
   URL: https://siya.health/docs/tint-options-preview
   Summary: Learn more about Siya Health — Tint Options A / B / C with Siya Health telehealth.
+
+- Employer Cognitive Health Programs
+  URL: https://siya.health/employers
+  Summary: Structured screening and physician-led telehealth for working professionals—ADHD, sleep, stress, and attention markers—with concierge-team-supported care and proactive monitoring. Partnership inquirie…
 
 - Fatigue — Why You Are Always Tired, and When to Get Evaluated
   URL: https://siya.health/fatigue
@@ -948,12 +922,12 @@ Total pages: 187
 
 - Dr. Natasha Desai, MD | Adult ADHD &amp; Family Medicine
   URL: https://siya.health/providers/dr-natasha-desai
-  Summary: Meet Dr. Natasha Desai—Family Medicine Physician at Siya Health. ADHD-CCSP. Adult ADHD with anxiety and emotional overlap via telehealth in TX & FL.
+  Summary: Meet Dr. Natasha Desai—Family Medicine Physician at Siya Health. ADHD-CCSP. Adult ADHD with anxiety and emotional overlap via telehealth in TX, PA & FL.
   Topics: adhd
 
 - Dr. Sneh Pandey, MD | Adult ADHD &amp; Metabolic Care
   URL: https://siya.health/providers/dr-sneh-pandey
-  Summary: Meet Dr. Sneh Pandey—Medical Director at Siya Health. Board-certified Internal Medicine, Obesity Medicine, ADHD-CCSP. Structured adult ADHD evaluations and weight-inclusive telehealth in CA, TX, PA & …
+  Summary: Meet Dr. Sneh Pandey—Medical Director at Siya Health. Board-certified Internal Medicine, Obesity Medicine, ADHD-CCSP. Structured adult ADHD evaluations and weight-inclusive telehealth in CA, PA & FL.
   Topics: adhd, weight-loss
 
 - Dr. Swati Pandey, MD | Internal Medicine &amp; Adult ADHD
@@ -971,10 +945,14 @@ Total pages: 187
   Summary: Meet Megan Wunderlich, FNP-C at Siya Health. Mental health and family medicine telehealth with ADHD support in Pennsylvania.
   Topics: adhd, telehealth
 
-- Wendy Delgado, PA-C | Medical Weight Loss Telehealth
+- Wendy Delgado, PA-C | Adult ADHD, Women's Health &amp; Weight Loss
   URL: https://siya.health/providers/wendy-delgado
-  Summary: Meet Wendy Delgado, PA-C at Siya Health. GLP-1 and medical weight loss telehealth support in California.
-  Topics: weight-loss, telehealth, pennsylvania
+  Summary: Meet Wendy Delgado, PA-C at Siya Health. Adult ADHD, women's health, medical weight loss, and telehealth primary care in California, Texas, Pennsylvania, and Florida.
+  Topics: adhd, weight-loss, pennsylvania
+
+- Siya Circle | Free Health Education Newsletter
+  URL: https://siya.health/siya-circle
+  Summary: Join Siya Circle, a free health education newsletter from Siya Health with clinician-informed guides on focus, energy, weight, mood, hormones, and everyday health.
 
 - Virtual Medical Care | Siya Health Telehealth
   URL: https://siya.health/telehealth
@@ -1001,7 +979,7 @@ Total pages: 187
 
 ### Dr. Sneh Pandey, MD
 URL: https://siya.health/providers/dr-sneh-pandey
-Licensed: California, Texas, Pennsylvania, Florida
+Licensed: California, Pennsylvania, Florida
 Reviewer topics: adhd-diagnosis, adhd-medication, weight-loss, glp-1, metabolic-health, mens-health, telehealth
 
 ### Dr. Vanessa Urbina, MD
@@ -1011,7 +989,7 @@ Reviewer topics: primary-care, adhd-diagnosis, weight-loss, lifestyle-medicine, 
 
 ### Dr. Natasha Desai, MD
 URL: https://siya.health/providers/dr-natasha-desai
-Licensed: Texas, Florida
+Licensed: Texas, Florida, Pennsylvania
 Reviewer topics: adhd-diagnosis, adhd-anxiety, behavioral-health, burnout, telehealth
 
 ### Dr. Swati Pandey, MD
@@ -1031,5 +1009,5 @@ Reviewer topics: weight-loss, glp-1, mens-health, testosterone, telehealth
 
 ### Wendy Delgado, PA-C
 URL: https://siya.health/providers/wendy-delgado
-Licensed: California
+Licensed: California, Texas, Pennsylvania, Florida
 Reviewer topics: weight-loss, glp-1, food-noise, patient-education, telehealth

@@ -95,12 +95,22 @@ export async function createAdhocTask(payload: {
   dueDate?: string;
   dueTime?: string;
   checklistItems?: { id: string; label: string; isChecked: boolean; checkedAt: string | null }[];
-}): Promise<TaskRecord> {
+}): Promise<{ task: TaskRecord; assignmentWarning: string | null }> {
   const data = (await staffPortalTaskFetch("/api/tasks", {
     method: "POST",
     body: JSON.stringify(payload),
-  })) as { task: TaskRecord };
-  return data.task;
+  })) as { task: TaskRecord; assignmentWarning?: string | null };
+  return { task: data.task, assignmentWarning: data.assignmentWarning ?? null };
+}
+
+export async function checkAssigneeScheduledOff(
+  assigneeId: string,
+  date: string,
+): Promise<{ scheduledOff: boolean; warning: string | null }> {
+  const data = (await taskFetch(
+    `/api/shift-roster/assignment-check?assigneeId=${encodeURIComponent(assigneeId)}&date=${encodeURIComponent(date)}`,
+  )) as { scheduledOff?: boolean; warning?: string | null };
+  return { scheduledOff: Boolean(data.scheduledOff), warning: data.warning ?? null };
 }
 
 export async function fetchSopTemplates(): Promise<SopTemplateRecord[]> {

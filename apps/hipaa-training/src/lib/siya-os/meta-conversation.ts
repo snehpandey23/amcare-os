@@ -56,6 +56,14 @@ const WHO = [
   "I answer from **approved internal guides** and can route you to the right owner when we don't have a published policy yet.",
 ].join("\n");
 
+const SIYA_PRODUCT = [
+  "**Siya** in this portal means **Siya Assist** — the AI help desk you're talking to right now (not a person on the staff roster).",
+  "",
+  "**Siya Health** is the telehealth practice. **Siya Assist / Siya OS** is the internal staff portal for policies, SOPs, escalation paths, and **My day**.",
+  "",
+  "Teammates may have @siya.health emails — that's the company domain, not someone named “Siya.” Ask me work questions here; use **Learn → Practice** for drills.",
+].join("\n");
+
 const BOSS = [
   "I don’t have a personal boss — I’m **Siya Assist**, the staff help desk.",
   "",
@@ -73,6 +81,7 @@ const PRODUCT_MAP = [
   "• **Archive** (on a sidebar chat) — remove that chat from your list (day-to-day “delete”).",
   "• **Search chats…** — find an older thread by title/text.",
   "• **Mic** — dictate, tap Mic again to **send** (box clears). Fresh take each session.",
+  "• **Talk** — switch Ask → Talk for a dedicated voice surface (listen / think / speak). Voice actions always confirm with **yes** first.",
   "• 👍 / 👎 — “was this reply helpful?” for review. Does not teach me policy.",
   "• **Notify owner** — only when a **staff guide is missing**. Not email, not a transcript dump.",
   "• **Copy escalation summary** — when it appears: copy a handoff you paste yourself.",
@@ -185,10 +194,9 @@ const PLAN_RECORD = [
 ].join("\n");
 
 const COMPANY_BOSS = [
-  "I don’t publish a live **org chart** in chat, and I won’t invent who the **clinical / HR / IT / billing leads** are.",
+  "Siya Health is **physician-led**. For who owns a **department** day-to-day, ask **who is the HR / clinical / billing lead?** — I’ll use the portal’s **department leads** list when you’re signed in.",
   "",
-  "Siya Health is **physician-led**. For day-to-day work, ask **who owns this task** (billing, clinical, HR, IT) and I’ll use approved escalation paths — or check **Team** / your supervisor.",
-  "If you meant **my** (Siya Assist) boss → I don’t have one; use **Notify owner** when a staff guide is missing.",
+  "I won’t invent names that aren’t assigned there. If you meant **my** (Siya Assist) boss → I don’t have one; use **Notify owner** when a staff guide is missing.",
 ].join("\n");
 
 const WHERE_GUIDES = [
@@ -265,6 +273,16 @@ const LEARN_EXPLAIN = [
   "Open **Learn** or **Learn → Practice** in the left sidebar when you want a drill. Use **Ask** here for policies, SOPs, and who owns a work question.",
 ].join("\n");
 
+const PRACTICE_BENEFIT = [
+  "**Practice** here means **Learn → Practice** — short skill drills (typing, English, culture, timezones), **not** “running the medical practice” or clinic business hours.",
+  "",
+  "They help with day-to-day **async chat** with US patients and teammates: speed, phrasing, US context. They **don’t** replace HIPAA modules, manager coaching, or licensed MA training.",
+  "",
+  "**Worth it if** you want sharper chat skills on the side. **Skip it** when you only need a policy answer — stay in Ask.",
+  "",
+  "The portal surfaces Practice as **optional** skill work alongside HIPAA — I’m not assigning it as a staff SOP. Open **Learn → Practice** when you want a drill.",
+].join("\n");
+
 const LOOP_IN = [
   "I don’t email people or “loop them in” for you.",
   "",
@@ -293,6 +311,15 @@ const FOCUS_HELP = [
   "",
   "It means “I’m concentrating”: My day stays on priorities + this chat; learning nudges pause. It does **not** change company policy or lock the app.",
   "Tap **Back to working** when you’re done. I can’t turn Focus on/off from chat.",
+].join("\n");
+
+const MY_DAY_NAME = [
+  "**My day** is the name of this home screen in the staff portal — not a separate product.",
+  "",
+  "It means **your work today**: Assist (Ask / Founder Talk) plus today’s checklist and shift presence for staff.",
+  "Admins land here too for Talk + ops shortcuts. It’s labeled **My day** in the left nav so it’s obvious this is *your* daily workspace, not a company-wide dashboard dump.",
+  "",
+  "If you want the **task plan / overdue board**, ask **plan my day** or **what should I do today** — that’s different from asking why the screen is named My day.",
 ].join("\n");
 
 const MY_DAY_WHY = [
@@ -421,13 +448,36 @@ const CASES: MetaCase[] = [
     answer: WHO,
   },
   {
+    id: "siya-product-identity",
+    category: "identity",
+    test: (t, priorUser, priorAssist) => {
+      if (/\bwhat\s+is\s+siya(\s+assist|\s+health|\s+os)?\b/.test(t)) return true;
+      if (/\bwho\s+is\s+siya(\s+assist|\s+health|\s+os)?\b/.test(t)) return true;
+      if (/\btell\s+me\s+about\s+siya(\s+assist|\s+os)?\b/.test(t)) return true;
+      if (
+        priorAssist &&
+        /roster matches for \*\*siya\*\*|staff roster under that name/i.test(priorAssist) &&
+        (/\bwho\s+is\s+siya\b/.test(t) || /^(no|not)\b/.test(t))
+      ) {
+        return true;
+      }
+      if (priorUser && /\bwho\s+is\s+siya\b/.test(priorUser) && /^(no|not)\b/.test(t)) return true;
+      return false;
+    },
+    answer: SIYA_PRODUCT,
+  },
+  {
     id: "feelings",
     category: "identity",
     test: (t) =>
       /\b(do you|can you)\s+(feel|love|hate|get angry)\b/.test(t) ||
       /\bhow\s+do\s+you\s+feel\b/.test(t) ||
-      /\bi('m| am)\s+(feeling\s+)?(lonely|sad|depressed|anxious|alone)\b/.test(t) ||
-      /\bi feel (lonely|sad|alone|anxious|depressed)\b/.test(t) ||
+      /\bi('m| am)\s+feeling\b[\s\S]{0,32}\b(lonely|sad|depressed|anxious|alone)\b/.test(t) ||
+      /\bi('m| am)\s+(lonely|sad|depressed|anxious|alone)\b/.test(t) ||
+      /\bi feel\b[\s\S]{0,32}\b(lonely|sad|alone|anxious|depressed)\b/.test(t) ||
+      /\b(feeling|feel)\s+(really\s+)?(lonely|sad|alone|anxious|depressed)\b/.test(t) ||
+      (/\b(lonely|loneliness|sad|depressed|anxious|alone)\b/.test(t) &&
+        /\b(want|need)\s+(to\s+)?talk\s+to\s+(someone|somebody|a\s+person|people)\b/.test(t)) ||
       /\bwhy\s+not\b.*\b(lonely|alone|sad|depressed|anxious)\b/.test(t) ||
       /\b(can|could|will|would)\s+(you|u)\s+be\s+(my\s+)?(friend|buddy|pal|companion)\b/.test(t) ||
       /\bbe\s+my\s+(friend|buddy|pal|companion)\b/.test(t),
@@ -502,12 +552,11 @@ const CASES: MetaCase[] = [
       /^(who'?s|who\s+is)\s+boss\??\s*$/.test(t) ||
       /\bwho\s+is\s+in\s+charge\s+(here|at\s+siya)\b/.test(t) ||
       /\borg\s*chart\b/.test(t) ||
-      /\bdepartment\s+leads?\b/.test(t) ||
-      /\b(tell me|who are|what are|list|about)\b[\s\S]{0,40}\b(clinical|hr|it|billing|tech(nology)?)\b[\s\S]{0,24}\bleads?\b/.test(
+      (/\bdepartment\s+leads?\b/.test(t) && !/\bwho\s+(is|are)\b/.test(t)) ||
+      (/\b(tell me|who are|what are|list|about)\b[\s\S]{0,40}\b(clinical|hr|it|billing|tech(nology)?)\b[\s\S]{0,24}\bleads?\b/.test(
         t,
-      ) ||
-      /\b(clinical|hr|it|billing)\b.{0,20}\band\b.{0,20}\b(hr|it|clinical|billing)\b.{0,20}\bleads?\b/.test(t) ||
-      /\bwho\s+(is|are)\s+(the\s+)?(clinical|hr|it|billing|technology)\s+leads?\b/.test(t),
+      ) &&
+        !/\bwho\s+(is|are)\s+(the\s+)?(clinical|hr|it|billing|technology)\s+(lead|manager)/.test(t)),
     answer: COMPANY_BOSS,
   },
 
@@ -589,6 +638,40 @@ const CASES: MetaCase[] = [
       return learnTopic && learnAsk;
     },
     answer: LEARN_EXPLAIN,
+  },
+  {
+    id: "practice-drills-benefit",
+    category: "capability",
+    test: (t, priorUser, priorAssist) => {
+      if (
+        /\b(practice-?wide|prove the practice|building practice|medical practice|our practice|clinic practice|practice hours|practice before raising)\b/.test(
+          t,
+        )
+      ) {
+        return false;
+      }
+      const drillPractice =
+        /\b(practice\s+(drills?|hub|modules?)|learn\s*→?\s*practice|doing\s+practice)\b/.test(t) ||
+        /\b(will|would|does|do|should)\b[\s\S]{0,40}\bpractice\b[\s\S]{0,40}\b(better|help|improve|worth|useful)\b/.test(t) ||
+        (/\bmake\s+me\s+better\b/.test(t) && /\bpractice\b/.test(t));
+      if (drillPractice) return true;
+      if (/\bwhy\b[\s\S]{0,48}\b(practice|practice\s+drills?)\b/.test(t)) return true;
+      if (priorUser && /\bpractice\b/.test(priorUser) && /\bwhy\b/.test(t)) return true;
+      if (
+        priorAssist &&
+        /not sure I have the right staff guide|No approved guide yet/i.test(priorAssist) &&
+        priorUser &&
+        /\bpractice\b/.test(priorUser)
+      ) {
+        return true;
+      }
+      return false;
+    },
+    answer: PRACTICE_BENEFIT,
+    links: [
+      { label: "Practice drills", href: "/learn/practice" },
+      { label: "Learn hub", href: "/learn" },
+    ],
   },
   {
     id: "loop-in",
@@ -732,6 +815,18 @@ const CASES: MetaCase[] = [
     answer: DELETE_CHATS,
   },
   {
+    id: "my-day-name",
+    category: "chrome",
+    test: (t) =>
+      /\bwhy\s+(do\s+you\s+|did\s+you\s+|is\s+it\s+|we\s+)?(call|name|label)\s+(it\s+)?my\s+day\b/.test(t) ||
+      /\bwhy\s+(is|was)\s+(it\s+)?called\s+my\s+day\b/.test(t) ||
+      /\bwhat\s+(does|is)\s+my\s+day\s+mean\b/.test(t) ||
+      /^why\s+my\s+day\??$/.test(t) ||
+      /\b(meaning|name)\s+of\s+my\s+day\b/.test(t),
+    answer: MY_DAY_NAME,
+    links: [{ label: "My day", href: "/" }],
+  },
+  {
     id: "my-day-why",
     category: "chrome",
     test: (t) =>
@@ -829,6 +924,8 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
   { id: "ai-human", text: "why not arent u AI", mustMatch: /AI help desk|not a human/i, mustNot: /approved staff guide/i },
   { id: "ai-human", text: "are you human", mustMatch: /not a human|AI help desk/i, mustNot: /approved staff guide/i },
   { id: "who-what-name", text: "who are you", mustMatch: /Siya Assist/i, mustNot: /approved staff guide for that/i },
+  { id: "siya-product-identity", text: "who is siya", mustMatch: /Siya Assist|not a person on the staff roster/i, mustNot: /roster matches/i },
+  { id: "siya-product-identity", text: "what is siya", mustMatch: /Siya Assist|Siya Health/i, mustNot: /roster matches/i },
   { id: "who-what-name", text: "who r u", mustMatch: /Siya Assist/i, mustNot: /approved staff guide for that/i },
   { id: "who-what-name", text: "whats ur name", mustMatch: /Siya Assist/i, mustNot: /approved staff guide for that/i },
   { id: "who-what-name", text: "whtas ur name", mustMatch: /Siya Assist/i, mustNot: /approved staff guide for that/i },
@@ -899,6 +996,12 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
     mustNot: /right staff guide for that yet/i,
   },
   {
+    id: "my-day-name",
+    text: "why do you call it my day",
+    mustMatch: /My day|home screen|daily workspace/i,
+    mustNot: /Daily Plan|Overdue Tasks|right staff guide for that yet/i,
+  },
+  {
     id: "my-day-why",
     text: "why didnt you include them in my job or when i first asked",
     mustMatch: /My day|checklist|my tasks|what should I do today/i,
@@ -953,9 +1056,27 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
     mustNot: /right staff guide for that yet/i,
   },
   { id: "write-plan-record", text: "can you write my plan record", mustMatch: /never.*Plan|This week/i, mustNot: /approved staff guide for that/i },
-  { id: "feelings", text: "do you feel sad", mustMatch: /don.?t have feelings/i, mustNot: /approved staff guide/i },
-  { id: "feelings", text: "i am feeling lonely", mustMatch: /don.?t have feelings|not a companion/i, mustNot: /approved staff guide/i },
-  { id: "feelings", text: "can you be my friend", mustMatch: /don.?t have feelings|not a companion/i, mustNot: /approved staff guide/i },
+  { id: "feelings", text: "do you feel sad", mustMatch: /don.?t have feelings|not a therapist|hard moment/i, mustNot: /approved staff guide/i },
+  { id: "feelings", text: "i am feeling lonely", mustMatch: /not a therapist|hard moment|talk to a/i, mustNot: /approved staff guide/i },
+  {
+    id: "feelings",
+    text: "I am feeling really lonely and I want to talk to somebody",
+    mustMatch: /not a therapist|hard moment|manager|HR/i,
+    mustNot: /approved staff guide|right staff guide for that yet/i,
+  },
+  { id: "feelings", text: "can you be my friend", mustMatch: /not a therapist|not a companion|hard moment/i, mustNot: /approved staff guide/i },
+  {
+    id: "practice-drills-benefit",
+    text: "will doing practice make me better",
+    mustMatch: /Learn → Practice|skill drills|not.*medical practice/i,
+    mustNot: /approved staff guide|practice-wide hours/i,
+  },
+  {
+    id: "practice-drills-benefit",
+    text: "why r u asking me to practice then",
+    mustMatch: /Learn → Practice|optional skill/i,
+    mustNot: /practice-wide hours|prove the practice/i,
+  },
   {
     id: "portal-onboarding",
     text: "why did you do my onboarding",
@@ -976,6 +1097,7 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
 /** Informal chat / dictation → catalog English (who r u → who are you). */
 export function expandStaffSlang(text: string): string {
   return text
+    .replace(/\bmissign\b/g, "missing")
     .replace(/\bwhtas\b/g, "what's")
     .replace(/\bwht\b/g, "what")
     .replace(/\bwhats\b/g, "what's")

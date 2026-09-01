@@ -16,7 +16,11 @@ npx vercel deploy --prod --yes --scope "$SCOPE"
 cd "$ROOT"
 
 echo "==> Staff app (siya-staff-assist) scope=$SCOPE"
-npx vercel deploy --prod --yes --project siya-staff-assist --local-config vercel.siya-staff-assist.json --scope "$SCOPE"
+# Crons only register reliably from root vercel.json (not --local-config alternate
+# filenames — those upload build settings but leave project.crons.definitions empty).
+# Keep vercel.siya-staff-assist.json as the source of truth, sync into vercel.json.
+cp "$ROOT/vercel.siya-staff-assist.json" "$ROOT/vercel.json"
+npx vercel deploy --prod --yes --project siya-staff-assist --scope "$SCOPE"
 
 echo "==> Smoke"
 curl -sfS https://siya-staff-auth-api.vercel.app/api/health | head -c 200

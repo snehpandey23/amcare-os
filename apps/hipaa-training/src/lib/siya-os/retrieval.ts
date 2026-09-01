@@ -18,6 +18,10 @@ export interface RetrievedChunk {
   layerLabel?: string;
   /** Tier-1 SOP published as draft-live — hedge in the answer. */
   draftLive?: boolean;
+  /** Authored provisional KB stub — not signed-off policy; UI chip + disclaimer. */
+  provisional?: boolean;
+  /** Citation label override (e.g. HR · provisional stub). */
+  sourceLabel?: string;
 }
 
 export const LAYER_LABEL: Record<KnowledgeLayerId, string> = {
@@ -199,9 +203,25 @@ function withLayer(chunk: RetrievedChunk, layer: KnowledgeLayerId): RetrievedChu
   return { ...chunk, layer, layerLabel: LAYER_LABEL[layer] };
 }
 
+function provisionalKbSourceLabel(id: string): string {
+  if (id === "leave-pto-request-provisional") return "HR · provisional stub";
+  if (id === "patient-manager-request-provisional") return "Clinical Ops · provisional stub";
+  return "Provisional stub (not approved policy)";
+}
+
 function fromKb(e: WorkspaceKbEntry, s: number): RetrievedChunk {
+  const provisional = e.answerTrust === "provisional";
   return withLayer(
-    { id: e.id, title: e.title, snippet: e.body, score: s, links: e.links, escalate: e.escalate },
+    {
+      id: e.id,
+      title: e.title,
+      snippet: e.body,
+      score: s,
+      links: e.links,
+      escalate: e.escalate,
+      provisional,
+      sourceLabel: provisional ? provisionalKbSourceLabel(e.id) : undefined,
+    },
     2,
   );
 }
@@ -320,6 +340,13 @@ export function retrieveWorkspaceKnowledge(query: string, limit = 6): RetrievedC
     { pattern: /late cancel|refund|cancellation|no-show/, id: "billing-late-cancel", boost: 16 },
     { pattern: /refill|pharmacy|early refill|prescription (sent|ready)|med(ication)? not received|pill count|video pill|csa v2|controlled.?substance/, id: "refill-pharmacy-staff-guidance", boost: 22 },
     { pattern: /\b(new hire|day.?1|ma orientation|tool surprise|concierge\b.*\bonboard|onboard\b.*\b(new hire|ma\b|concierge))\b/, id: "ma-onboarding-field-lessons", boost: 20 },
+    { pattern: /\b(leave|pto|time\s*off|day\s*off|vacation|holiday|sick\s+leave|request\s+leave|take\s+(a\s+)?leave)\b/, id: "leave-pto-request-provisional", boost: 32 },
+    {
+      pattern:
+        /\b(patient|caller|they|he|she).{0,40}\b(want|wants|ask|asked|asking|request|requested).{0,30}\b(manager|supervisor)\b|\b(speak|talk|transfer).{0,20}\b(to\s+)?(a\s+)?(manager|supervisor)\b|\bask(ed|ing)?\s+for\s+(a\s+)?(manager|supervisor)\b/i,
+      id: "patient-manager-request-provisional",
+      boost: 34,
+    },
     { pattern: /\bzoho\b|workdrive|true.?sync|\bspruce\b/, id: "ma-platforms-zoho-spruce", boost: 22 },
     { pattern: /zoho.{0,40}(access|login|provision)|request.{0,30}zoho|new hire.{0,30}(zoho|access)|access.{0,20}(zoho|workdrive)/, id: "ma-platforms-zoho-spruce", boost: 28 },
     { pattern: /spruce.{0,40}(notif|workaround|another app|background|push)|notif.{0,20}spruce/, id: "ma-platforms-zoho-spruce", boost: 28 },
@@ -464,6 +491,8 @@ export function retrieveDynamicSops(query: string, entries: DynamicSopEntry[], l
             score: s,
             links: [{ label: `SOP · ${e.department}`, href: MEMORY_DEEP_LINKS.sops.href }],
             draftLive,
+            /** Citation must reflect live Postgres department — never a provisional stub label. */
+            sourceLabel: `${e.title} · ${e.department}${e.status === "live" ? " · live" : e.status === "draft_live" ? " · draft-live" : ""}`,
           },
           2,
         ),

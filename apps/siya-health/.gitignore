@@ -6,3 +6,6 @@ data/ads-landing-smoke-latest.json
 
 # Ephemeral visual QA screenshots (never ship)
 .tmp-visual-qa/
+
+# Phase 0 live HTML + git archive backups (local only; do not commit)
+.site-snapshots/

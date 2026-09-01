@@ -18,8 +18,9 @@ import {
 import { persistPortalProfile } from "@/lib/portal-profile-api";
 import { trainingLinkPrimaryClass } from "@/components/training/training-ui";
 import { BRAND } from "@/lib/brand";
+import { TalkVoicePicker } from "@/components/siya/TalkVoicePicker";
 
-const STEPS = 9;
+const STEPS = 10;
 
 export function OnboardingWizard() {
   const router = useRouter();
@@ -31,6 +32,7 @@ export function OnboardingWizard() {
   const [trainingReminder, setTrainingReminder] = useState<TrainingReminderPref>(
     existing.trainingReminder ?? "start",
   );
+  const [talkVoiceURI, setTalkVoiceURI] = useState<string | undefined>(existing.talkVoiceURI);
   const [department, setDepartment] = useState<DepartmentId | "">(existing.department ?? "");
   const [experience, setExperience] = useState<string[]>(existing.experience ?? []);
   const [improveGoals, setImproveGoals] = useState<string[]>(existing.improveGoals ?? []);
@@ -66,6 +68,7 @@ export function OnboardingWizard() {
       preferredName: preferredName.trim() || undefined,
       assistantName: assistantName.trim() || undefined,
       trainingReminder,
+      talkVoiceURI: talkVoiceURI || undefined,
       /** Coach is mandatory — always on (Stage 2). */
       aiCoachOptIn: true,
       workShift,
@@ -90,6 +93,7 @@ export function OnboardingWizard() {
       preferredName: preferredName.trim() || base.preferredName,
       assistantName: assistantName.trim() || base.assistantName,
       trainingReminder: trainingReminder || base.trainingReminder,
+      talkVoiceURI: talkVoiceURI || base.talkVoiceURI,
       department: department || base.department,
     };
     profile = appendGrowthEvent(profile, "Skipped onboarding — opened My day");
@@ -231,6 +235,44 @@ export function OnboardingWizard() {
       {step === 5 ? (
         <div>
           <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
+            Pick a voice for Talk Mode
+          </h1>
+          <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+            Optional — used when Ask answers are read aloud. You can change this anytime in Talk.
+          </p>
+          <TalkVoicePicker
+            value={talkVoiceURI}
+            onChange={setTalkVoiceURI}
+            variant="wizard"
+            previewOnChange
+            id="onboarding-talk-voice"
+          />
+          {/* Picker hides itself when &lt;2 voices — still allow continue with default */}
+          <div className="mt-6 flex flex-wrap items-center gap-2">
+            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(4)}>
+              Back
+            </button>
+            <button type="button" className={trainingLinkPrimaryClass} onClick={() => setStep(6)}>
+              Continue
+            </button>
+            <button
+              type="button"
+              className="rounded-lg border px-4 py-2 text-sm text-[var(--siya-text-muted)]"
+              onClick={() => {
+                setTalkVoiceURI(undefined);
+                setStep(6);
+              }}
+            >
+              Skip — use browser default
+            </button>
+            <SkipLink />
+          </div>
+        </div>
+      ) : null}
+
+      {step === 6 ? (
+        <div>
+          <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
             What team are you joining?
           </h1>
           <ul className="mt-4 space-y-2">
@@ -251,14 +293,14 @@ export function OnboardingWizard() {
             ))}
           </ul>
           <div className="mt-6 flex flex-wrap items-center gap-2">
-            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(4)}>
+            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(5)}>
               Back
             </button>
             <button
               type="button"
               disabled={!department}
               className={trainingLinkPrimaryClass}
-              onClick={() => setStep(6)}
+              onClick={() => setStep(7)}
             >
               Continue
             </button>
@@ -267,7 +309,7 @@ export function OnboardingWizard() {
         </div>
       ) : null}
 
-      {step === 6 ? (
+      {step === 7 ? (
         <div>
           <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
             What best describes you?
@@ -289,10 +331,10 @@ export function OnboardingWizard() {
             ))}
           </ul>
           <div className="mt-6 flex flex-wrap items-center gap-2">
-            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(5)}>
+            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(6)}>
               Back
             </button>
-            <button type="button" className={trainingLinkPrimaryClass} onClick={() => setStep(7)}>
+            <button type="button" className={trainingLinkPrimaryClass} onClick={() => setStep(8)}>
               Continue
             </button>
             <SkipLink />
@@ -300,7 +342,7 @@ export function OnboardingWizard() {
         </div>
       ) : null}
 
-      {step === 7 ? (
+      {step === 8 ? (
         <div>
           <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
             What would you like to improve most?
@@ -323,14 +365,14 @@ export function OnboardingWizard() {
             ))}
           </div>
           <div className="mt-6 flex flex-wrap items-center gap-2">
-            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(6)}>
+            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(7)}>
               Back
             </button>
             <button
               type="button"
               disabled={improveGoals.length === 0}
               className={trainingLinkPrimaryClass}
-              onClick={() => setStep(8)}
+              onClick={() => setStep(9)}
             >
               Continue
             </button>
@@ -339,7 +381,7 @@ export function OnboardingWizard() {
         </div>
       ) : null}
 
-      {step === 8 ? (
+      {step === 9 ? (
         <div>
           <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
             What&apos;s your biggest challenge right now?
@@ -355,14 +397,14 @@ export function OnboardingWizard() {
             className="mt-4 w-full rounded-lg border border-[var(--siya-border)] px-3 py-2 text-sm outline-none focus:border-[var(--siya-accent)]"
           />
           <div className="mt-6 flex flex-wrap items-center gap-2">
-            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(7)}>
+            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(8)}>
               Back
             </button>
             <button
               type="button"
               disabled={pending || biggestChallenge.trim().length < 4}
               className={trainingLinkPrimaryClass}
-              onClick={() => setStep(9)}
+              onClick={() => setStep(10)}
             >
               Continue
             </button>
@@ -371,7 +413,7 @@ export function OnboardingWizard() {
         </div>
       ) : null}
 
-      {step === 9 ? (
+      {step === 10 ? (
         <div>
           <h1 className="mt-2 font-[family-name:var(--font-poppins)] text-xl font-semibold text-[var(--siya-primary)]">
             When does your work usually start?
@@ -401,7 +443,7 @@ export function OnboardingWizard() {
             ))}
           </div>
           <div className="mt-6 flex flex-wrap items-center gap-2">
-            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(8)}>
+            <button type="button" className="rounded-lg border px-4 py-2 text-sm" onClick={() => setStep(9)}>
               Back
             </button>
             <button

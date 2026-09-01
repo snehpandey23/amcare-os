@@ -27,6 +27,15 @@ const INTENT_PATTERNS: Array<{
   event?: GuideResponse['analyticsEvent']
 }> = [
   {
+    id: 'callback_request',
+    re: /\b(contact me|call me back|reach out to me|have someone (call|email|contact)|get back to me|follow up with me|request a callback|callback please)\b/i,
+    message:
+      'Happy to help — share your contact details below and our team will follow up. This is not for emergencies; for urgent needs call 911 or 988.',
+    followUp: 'Fill in the short form below (no clinical details, please).',
+    links: ['call_siya', 'meet_and_greet'],
+    event: 'callback_form_shown',
+  },
+  {
     id: 'human_handoff',
     re: HUMAN_HANDOFF_RE,
     message: '',
@@ -196,6 +205,23 @@ export function matchDeterministicIntent(text: string): IntentMatch | null {
     if (intent.re.test(text)) {
       if (intent.id === 'human_handoff') {
         return { id: intent.id, confidence: 0.95, response: humanHandoffResponse() }
+      }
+      if (intent.id === 'callback_request') {
+        const limit = intent.linkLimit || 3
+        return {
+          id: intent.id,
+          confidence: 0.92,
+          response: {
+            state: 'verified',
+            message: intent.message,
+            followUp: intent.followUp,
+            links: resolveLinks(intent.links, limit),
+            citations: resolveLinks(intent.links.slice(0, 2)),
+            refusalCategory: 'none',
+            analyticsEvent: intent.event,
+            showCallbackForm: true,
+          },
+        }
       }
       const isPrivate = intent.id === 'private_discussion'
       const limit = intent.linkLimit || 3

@@ -247,6 +247,9 @@ export function TeamAdminPanel() {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
+          <Link href="/ops" className={`${portalBtnGhostSm} text-[var(--siya-accent)]`}>
+            Ops dashboard
+          </Link>
           <Link href="/admin/tasks" className={`${portalBtnGhostSm} text-[var(--siya-accent)]`}>
             Task board
           </Link>

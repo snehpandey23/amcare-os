@@ -77,7 +77,7 @@ export const INTERNAL_PROVIDER_RECORDS = {
     featured: true,
     photoStatus: 'approved',
     npi: null,
-    licenses: licenseEntries(['California', 'Texas', 'Pennsylvania', 'Florida'], 'MD'),
+    licenses: licenseEntries(['California', 'Pennsylvania', 'Florida'], 'MD'),
     education: {
       medicalSchool: null,
       graduationYear: null,

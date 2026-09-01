@@ -25,6 +25,24 @@ import {
 } from "@/lib/portal-ui";
 import { loadLocalPortalProfile, displayPreferredName, displayAssistantLabel } from "@/lib/portal-profile";
 import { VoiceInputButton } from "@/components/ui/VoiceInputButton";
+import { TalkModeView } from "@/components/siya/TalkModeView";
+import { assessStaffMessageSafety } from "@/lib/siya-os/phi-guard";
+import { isSpeechToTextSupported } from "@/lib/speech-to-text";
+import { cancelSpeech } from "@/lib/text-to-speech";
+import {
+  isConfirmNo,
+  isConfirmYes,
+  looksLikeVoiceAction,
+  resolveVoiceActionCommand,
+  type PendingVoiceAction,
+  type VoicePerson,
+} from "@/lib/voice-actions";
+import { fetchMyTasks, fetchTaskBoard, patchTask } from "@/lib/tasks-api";
+import { getTrainingApiUrl } from "@/lib/trainingConfig";
+import { getStoredToken } from "@/lib/authStorage";
+import { useShiftOptional } from "@/context/ShiftContext";
+import { startShift as apiStartShift } from "@/lib/shift-api";
+import type { TaskRecord } from "@/lib/tasks-types";
 
 type ChatLink = { label: string; href: string };
 type RoutingMeta = {
@@ -50,6 +68,7 @@ type ChatMessage = {
   sources?: SourceMeta[];
   escalationPreview?: string | null;
   knowledgeGap?: boolean;
+  answerTrust?: "approved" | "provisional";
   userQuestion?: string;
   gapNotified?: boolean;
   gapEmailSent?: boolean;
@@ -59,6 +78,8 @@ type ChatMessage = {
   memorySaved?: boolean;
   pendingTask?: PendingTask | null;
   taskApproved?: boolean;
+  /** Talk surface: confirmation readback (not a normal answer). */
+  confirmPrompt?: boolean;
   executiveMeta?: {
     confidence: string;
     freshnessSeconds: number;
@@ -117,9 +138,18 @@ export function SiyaChat({
   openingOverride?: string;
 }) {
   const { user, token } = useAuth();
+  const shift = useShiftOptional();
   const adminCoPilot = isPortalAdmin(user?.role);
   const founderCoach = surface === "founder-coach";
   const homeVariant = variant === "home";
+  const [talkSurfaceAvailable, setTalkSurfaceAvailable] = useState(false);
+  /** Ask = text chat; Talk = dedicated voice surface (not an overlay on text). */
+  const [chatSurface, setChatSurface] = useState<"ask" | "talk">("ask");
+  const talkModeRef = useRef(false);
+  talkModeRef.current = chatSurface === "talk";
+  const [pendingVoice, setPendingVoice] = useState<PendingVoiceAction | null>(null);
+  const pendingVoiceRef = useRef<PendingVoiceAction | null>(null);
+  pendingVoiceRef.current = pendingVoice;
   const storageKey =
     threadId
       ? null
@@ -230,6 +260,83 @@ export function SiyaChat({
     [messages]
   );
 
+  useEffect(() => {
+    // Talk surface needs STT to capture voice. TTS alone is not enough to show Talk.
+    setTalkSurfaceAvailable(isSpeechToTextSupported());
+  }, []);
+
+  useEffect(() => {
+    if (chatSurface !== "talk") {
+      cancelSpeech();
+      setPendingVoice(null);
+      pendingVoiceRef.current = null;
+    }
+  }, [chatSurface]);
+
+  const appendAssistantLocal = useCallback((content: string, extra?: Partial<ChatMessage>) => {
+    const id = `a-${Date.now()}`;
+    setMessages((m) => [
+      ...m,
+      {
+        id,
+        role: "assistant",
+        content,
+        answerTrust: "approved",
+        ...extra,
+      },
+    ]);
+    return id;
+  }, []);
+
+  async function loadVoiceActionContext(): Promise<{ tasks: TaskRecord[]; people: VoicePerson[] }> {
+    const mine = await fetchMyTasks("today");
+    let tasks = [...(mine.tasks ?? [])];
+    if (adminCoPilot) {
+      try {
+        const board = await fetchTaskBoard({});
+        const seen = new Set(tasks.map((t) => t.id));
+        for (const t of board) {
+          if (!seen.has(t.id)) tasks.push(t);
+        }
+      } catch {
+        /* board is admin-only; keep my tasks */
+      }
+    }
+    const people: VoicePerson[] = [];
+    const base = getTrainingApiUrl();
+    const tok = getStoredToken();
+    if (base && tok) {
+      try {
+        const res = await fetch(`${base}/api/knowledge/team-assignees`, {
+          headers: { Authorization: `Bearer ${tok}`, "Content-Type": "application/json" },
+        });
+        const data = (await res.json().catch(() => ({}))) as {
+          members?: { id: string; name: string | null; email: string }[];
+        };
+        for (const m of data.members ?? []) {
+          people.push({ id: m.id, name: m.name, email: m.email });
+        }
+      } catch {
+        /* ignore */
+      }
+    }
+    return { tasks, people };
+  }
+
+  async function executePendingVoice(action: PendingVoiceAction): Promise<string> {
+    if (action.kind === "start_shift") {
+      if (shift?.startShift) await shift.startShift(action.workShift);
+      else await apiStartShift(action.workShift);
+      return `Started your ${action.workShift} shift.`;
+    }
+    if (action.kind === "mark_task_done") {
+      await patchTask(action.taskId, { status: "done" });
+      return `Marked “${action.taskTitle}” done.`;
+    }
+    await patchTask(action.taskId, { assigneeId: action.assigneeId });
+    return `Assigned “${action.taskTitle}” to ${action.assigneeLabel}.`;
+  }
+
   const send = useCallback(
     async (text: string) => {
       const trimmed = text.trim();
@@ -276,6 +383,7 @@ export function SiyaChat({
             sources: data.sources,
             escalationPreview: data.escalationPreview,
             knowledgeGap: data.knowledgeGap,
+            answerTrust: data.answerTrust === "provisional" ? "provisional" : "approved",
             userQuestion: trimmed,
             pendingTask: data.pendingTask ?? null,
             executiveMeta: data.executiveMeta ?? null,
@@ -293,6 +401,83 @@ export function SiyaChat({
       }
     },
     [loading, threadLoading, historyPayload, focusMode, token, threadId, onThreadMetaChange, founderCoach]
+  );
+
+  /** Talk Mode entry: confirm gate → voice actions → same /api/chat pipeline as typed Ask. */
+  const handleUtterance = useCallback(
+    async (text: string) => {
+      const trimmed = text.trim();
+      if (!trimmed || loading || threadLoading) return;
+
+      // Confirm / cancel pending voice action (Talk Mode only).
+      if (talkModeRef.current && pendingVoiceRef.current) {
+        setMessages((m) => [...m, { id: `u-${Date.now()}`, role: "user", content: trimmed }]);
+        setInput("");
+        if (isConfirmYes(trimmed)) {
+          const action = pendingVoiceRef.current;
+          setPendingVoice(null);
+          pendingVoiceRef.current = null;
+          setLoading(true);
+          try {
+            const okMsg = await executePendingVoice(action);
+            appendAssistantLocal(okMsg);
+          } catch (err) {
+            appendAssistantLocal(
+              err instanceof Error ? err.message : "Could not complete that action. Try again from My day.",
+            );
+          } finally {
+            setLoading(false);
+          }
+          return;
+        }
+        if (isConfirmNo(trimmed)) {
+          setPendingVoice(null);
+          pendingVoiceRef.current = null;
+          appendAssistantLocal("Cancelled — nothing was changed.");
+          return;
+        }
+        appendAssistantLocal(`Still waiting: ${pendingVoiceRef.current.readback}`, { confirmPrompt: true });
+        return;
+      }
+
+      // Stage-2 voice actions — Talk Mode only; hard-stops still go through /api/chat.
+      if (talkModeRef.current && looksLikeVoiceAction(trimmed)) {
+        const safety = assessStaffMessageSafety(trimmed, historyPayload());
+        if (!safety.blocked) {
+          setLoading(true);
+          setInput("");
+          try {
+            const ctx = await loadVoiceActionContext();
+            const resolved = resolveVoiceActionCommand(trimmed, ctx);
+            if (resolved.status === "need_clarify") {
+              setMessages((m) => [...m, { id: `u-${Date.now()}`, role: "user", content: trimmed }]);
+              appendAssistantLocal(resolved.message);
+              return;
+            }
+            if (resolved.status === "pending_confirm") {
+              setMessages((m) => [...m, { id: `u-${Date.now()}`, role: "user", content: trimmed }]);
+              setPendingVoice(resolved.action);
+              pendingVoiceRef.current = resolved.action;
+              appendAssistantLocal(resolved.action.readback, { confirmPrompt: true });
+              return;
+            }
+          } catch (err) {
+            setMessages((m) => [...m, { id: `u-${Date.now()}`, role: "user", content: trimmed }]);
+            appendAssistantLocal(
+              err instanceof Error
+                ? err.message
+                : "I couldn’t look up tasks for that action. Ask in text, or try again.",
+            );
+            return;
+          } finally {
+            setLoading(false);
+          }
+        }
+      }
+
+      await send(trimmed);
+    },
+    [loading, threadLoading, send, appendAssistantLocal, historyPayload, adminCoPilot, shift],
   );
 
   useEffect(() => {
@@ -502,11 +687,46 @@ export function SiyaChat({
 
   return (
     <div className={`flex h-full min-h-0 flex-col ${homeVariant ? "" : "bg-[var(--siya-white)]/50"}`}>
-      {threadLoading ? (
-        <p className="px-1 py-3 text-sm text-[var(--siya-text-muted)]">Loading conversation…</p>
-      ) : null}
-      {!threadLoading && messages.length > 0 ? (
-        <div className="mx-auto flex w-full max-w-2xl shrink-0 justify-end px-1 pb-1">
+      <div className="mx-auto flex w-full max-w-2xl shrink-0 items-center justify-between gap-2 px-1 pb-2 pt-1">
+        <div
+          className="inline-flex rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] p-0.5"
+          role="tablist"
+          aria-label="Ask or Talk"
+        >
+          <button
+            type="button"
+            role="tab"
+            aria-selected={chatSurface === "ask"}
+            onClick={() => setChatSurface("ask")}
+            className={`rounded-md px-3 py-1.5 text-xs font-semibold transition ${
+              chatSurface === "ask"
+                ? "bg-[var(--siya-primary)] text-white"
+                : "text-[var(--siya-text-muted)] hover:text-[var(--siya-text)]"
+            }`}
+          >
+            Ask
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={chatSurface === "talk"}
+            disabled={!talkSurfaceAvailable}
+            title={
+              talkSurfaceAvailable
+                ? "Voice conversation — dedicated Talk surface"
+                : "Talk needs Chrome or Edge speech recognition on desktop"
+            }
+            onClick={() => talkSurfaceAvailable && setChatSurface("talk")}
+            className={`rounded-md px-3 py-1.5 text-xs font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 ${
+              chatSurface === "talk"
+                ? "bg-[var(--siya-primary)] text-white"
+                : "text-[var(--siya-text-muted)] hover:text-[var(--siya-text)]"
+            }`}
+          >
+            Talk
+          </button>
+        </div>
+        {chatSurface === "ask" && !threadLoading && messages.length > 0 ? (
           <button
             type="button"
             onClick={clearConversation}
@@ -514,7 +734,37 @@ export function SiyaChat({
           >
             Clear
           </button>
+        ) : (
+          <span className="text-[10px] text-[var(--siya-text-muted)]">
+            {chatSurface === "talk" ? "Voice surface" : null}
+          </span>
+        )}
+      </div>
+
+      {chatSurface === "talk" ? (
+        <div className="min-h-0 flex-1">
+          <TalkModeView
+            messages={messages
+              .filter((m) => m.id !== "open")
+              .map((m) => ({
+                id: m.id,
+                role: m.role,
+                content: m.content,
+                answerTrust: m.answerTrust,
+                sources: m.sources,
+                knowledgeGap: m.knowledgeGap,
+                confirmPrompt: m.confirmPrompt,
+              }))}
+            loading={loading || threadLoading}
+            pendingVoice={pendingVoice}
+            disabled={threadLoading}
+            onUtterance={(text) => void handleUtterance(text)}
+          />
         </div>
+      ) : (
+        <>
+      {threadLoading ? (
+        <p className="px-1 py-3 text-sm text-[var(--siya-text-muted)]">Loading conversation…</p>
       ) : null}
       <div ref={listRef} className={`flex-1 overflow-y-auto ${homeVariant ? "px-1 py-2" : "px-4 py-6 md:px-8"}`}>
         <div className={`mx-auto max-w-2xl ${homeVariant ? "flex min-h-[min(48vh,420px)] flex-col" : "space-y-4"}`}>
@@ -535,13 +785,33 @@ export function SiyaChat({
                 className={`max-w-[92%] px-3 py-2 text-sm leading-relaxed whitespace-pre-wrap ${
                   msg.role === "user"
                     ? "rounded-lg bg-[var(--siya-white)] text-[var(--siya-text)]"
-                    : "text-[var(--siya-text-secondary)]"
+                    : msg.confirmPrompt
+                      ? "rounded-lg border-2 border-amber-500/60 bg-amber-50 text-amber-950"
+                      : "text-[var(--siya-text-secondary)]"
                 }`}
               >
+                {msg.confirmPrompt ? (
+                  <p className="mb-1 text-[11px] font-bold uppercase tracking-wide text-amber-800">
+                    Confirmation required
+                  </p>
+                ) : null}
                 {msg.routing && msg.routing.department !== "General" ? (
                   <RoutingBadge routing={msg.routing} />
                 ) : null}
+                {msg.answerTrust === "provisional" ? (
+                  <p
+                    className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-amber-800"
+                    data-answer-trust="provisional"
+                  >
+                    Provisional · not an approved policy
+                  </p>
+                ) : null}
                 {msg.role === "assistant" ? mdLite(msg.content) : msg.content}
+                {msg.sources?.length && !msg.knowledgeGap ? (
+                  <p className="mt-2 text-[10px] text-[var(--siya-text-muted)]" data-sources>
+                    {msg.sources.map((s) => s.title).join(" · ")}
+                  </p>
+                ) : null}
                 {msg.links?.length ? (
                   <ul className="mt-2 space-y-1 border-t border-[var(--siya-border)] pt-2">
                     {msg.links.map((l) => (
@@ -753,6 +1023,8 @@ export function SiyaChat({
           ) : null}
         </div>
       </div>
+        </>
+      )}
     </div>
   );
 }

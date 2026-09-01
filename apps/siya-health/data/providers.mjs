@@ -39,8 +39,8 @@ export const PROVIDERS = [
     credentials: ['MD'],
     photo: 'assets/images/dr-sneh-pandey.png',
     altText: 'Dr. Sneh Pandey, MD',
-    statesLicensed: ['California', 'Texas', 'Pennsylvania', 'Florida'],
-    stateAbbreviations: ['CA', 'TX', 'PA', 'FL'],
+    statesLicensed: ['California', 'Pennsylvania', 'Florida'],
+    stateAbbreviations: ['CA', 'PA', 'FL'],
     licenses: [],
     boardCertifications: [
       'Board Certified Internal Medicine',
@@ -98,15 +98,15 @@ export const PROVIDERS = [
     ],
     trustCards: [
       { title: 'Board-certified', text: 'Internal Medicine; Obesity Medicine specialist training; ADHD Clinical Services Provider Program (ADHD-CCSP).' },
-      { title: 'States licensed', text: 'Telehealth appointments where eligible: <strong>California</strong>, <strong>Texas</strong>, <strong>Pennsylvania</strong>, and <strong>Florida</strong>—confirm at scheduling.' },
+      { title: 'States licensed', text: 'Telehealth appointments where eligible: <strong>California</strong>, <strong>Pennsylvania</strong>, and <strong>Florida</strong>—confirm at scheduling.' },
       { title: 'HIPAA-compliant', text: 'Secure video, documented visits, and practice policies aligned with telehealth standards.' },
     ],
     testimonials: [
-      { quote: 'I finally stopped feeling lazy. The evaluation was thorough and kind—I wish I’d done it years ago.', cite: 'Adult ADHD patient, TX (verified)', needsVerification: true },
+      { quote: 'I finally stopped feeling lazy. The evaluation was thorough and kind—I wish I’d done it years ago.', cite: 'Adult ADHD patient, CA (verified)', needsVerification: true },
       { quote: 'He actually listened to how my weight and focus issues connected. Nothing felt gimmicky.', cite: 'Metabolic + ADHD follow-up patient (verified)', needsVerification: true },
     ],
     relatedLinksHtml:
-      'Explore education: <a href="/blog/adhd-symptoms-overlooked">overlooked adult ADHD symptoms</a>, <a href="/blog/how-to-know-if-you-have-adhd-adult">signs it may be ADHD</a>, and <a href="/blog/online-adhd-diagnosis-texas">online diagnosis in Texas</a>.',
+      'Explore education: <a href="/blog/adhd-symptoms-overlooked">overlooked adult ADHD symptoms</a>, <a href="/blog/how-to-know-if-you-have-adhd-adult">signs it may be ADHD</a>, and <a href="/adult-adhd-california">adult ADHD care in California</a>.',
     inlineCtas: [
       { label: 'See ADHD evaluation & care', path: '/adhd-care', primary: true },
       { label: 'View pricing', path: '/pricing', primary: false },

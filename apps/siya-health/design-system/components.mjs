@@ -733,10 +733,15 @@ export function renderAboutTeamCard(provider, { variant = 'homepage', photoHtml 
   }
   const tagline = p.homepageBio ?? p.servicePageTagline ?? '';
   const clean = String(tagline).replace(/<[^>]+>/g, '').trim();
+  const founderRole =
+    p.homepageRole && /co-founder/i.test(String(p.homepageRole)) ? p.homepageRole : '';
+  const roleLine = founderRole
+    ? `<p class="about-team-role">${escHtml(founderRole)}</p>\n              `
+    : '';
   return `            <article class="${dualClass('about-team-card', 'ds-provider-card')}">
               ${photo}
               <h3><a href="/providers/${p.slug}">${escHtml(displayName)}</a></h3>
-              <p class="about-team-tagline">${escHtml(clean)}</p>
+              ${roleLine}<p class="about-team-tagline">${escHtml(clean)}</p>
               <a class="button secondary" href="/providers/${p.slug}">View profile</a>
             </article>`;
 }

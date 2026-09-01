@@ -4,11 +4,12 @@
 
 Daily workflows, escalations, billing coordination, and cross-department handoffs.
 
-## Topics (live)
+## Topics (live / provisional)
 
-| Topic | ID |
-|-------|-----|
-| Escalation pathways | `escalation-pathways` |
+| Topic | ID | Status |
+|-------|-----|--------|
+| Patient asks for manager / supervisor — provisional | `patient-manager-request-provisional` | provisional |
+| Escalation pathways | `escalation-pathways` | live |
 | Daily payment check | `daily-payment-check` |
 | Late cancel / refunds | `billing-late-cancel` |
 | Klarity channel overview | `klarity-channel-overview` |

@@ -31,6 +31,7 @@ import { MyDayTasksPanel } from "@/components/tasks/MyDayTasksPanel";
 import { FounderCoachPanel } from "@/components/executive/FounderCoachPanel";
 import { StaffHomeChat } from "@/components/companion/StaffHomeChat";
 import { WeeklyCheckInCard } from "@/components/ops/WeeklyCheckInCard";
+import { MyDayPlannedVsActual } from "@/components/shift/MyDayPlannedVsActual";
 import { isPortalAdmin } from "@/lib/portal-role";
 import { WorkplaceLinksPanel } from "@/components/companion/WorkplaceLinksPanel";
 import { PortalNavLink } from "@/components/training/PortalNavLink";
@@ -106,6 +107,7 @@ function MyDayHeader({
       {/* Single SOP lead surface — ownership + queue (avoid stacking with MySopOwnershipNotice). */}
       {!isAdmin ? <SopLeadMyDayCard className="mt-3" /> : null}
       {!isAdmin ? <LeadKnowledgeGapsCard className="mt-3" /> : null}
+      <MyDayPlannedVsActual />
       {!isAdmin ? (
         !inFocus ? (
           <p className="mt-1 text-xs italic text-[var(--siya-text-muted)]">{BRAND.growthLine}</p>
@@ -331,7 +333,16 @@ export function HomeHub() {
       {!showBreakScreen ? (
         <>
           {isAdmin ? (
-            introGate === "ready" ? <FounderCoachPanel firstName={firstName} /> : null
+            introGate === "ready" ? (
+              <div className="flex h-full min-h-0 flex-col">
+                <div className="shrink-0 px-3 pt-2 md:px-4">
+                  <WeeklyCheckInCard />
+                </div>
+                <div className="min-h-0 flex-1">
+                  <FounderCoachPanel firstName={firstName} />
+                </div>
+              </div>
+            ) : null
           ) : introGate === "ready" ? (
             <div className={`flex h-full min-h-0 flex-col ${inFocus ? portalFocusRail : ""}`}>
               {complianceDue ? (

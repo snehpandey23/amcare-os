@@ -2,13 +2,14 @@
 
 **Owner:** People / CEO · **Status:** seeded (field lessons only)
 
-People ops, onboarding lessons, contractor vs employee. **Leave / PTO / attendance handbook is blocked** pending founder + HR sign-off — do not invent policy in Ask.
+People ops, onboarding lessons, contractor vs employee. **Full leave / PTO / attendance handbook** is still pending founder + HR sign-off. Ask may use the **provisional** leave-request stub (process steps only — never invent accrual/pay or treat Ask as approval).
 
-## Topics (live)
+## Topics (live / provisional)
 
-| Topic | ID |
-|-------|-----|
-| MA onboarding — field lessons | `ma-onboarding-field-lessons` |
+| Topic | ID | Status |
+|-------|-----|--------|
+| MA onboarding — field lessons | `ma-onboarding-field-lessons` | live |
+| Leave / PTO request — provisional steps | `leave-pto-request-provisional` | provisional |
 
 ## Source (WorkDrive)
 

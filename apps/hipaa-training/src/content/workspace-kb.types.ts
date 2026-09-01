@@ -1,6 +1,9 @@
 /** Categories align with SiyaOS KB modules (see docs/siyaos-knowledge-base/manifest.json). */
 export type KbCategory = string;
 
+/** Answer trust for UI / compose — live = approved; provisional = low-risk stub not signed off. */
+export type KbAnswerTrust = "approved" | "provisional";
+
 export interface WorkspaceKbEntry {
   id: string;
   category: KbCategory;
@@ -9,4 +12,6 @@ export interface WorkspaceKbEntry {
   body: string;
   links?: { label: string; href: string }[];
   escalate?: string;
+  /** From frontmatter status: live → approved; provisional → provisional. */
+  answerTrust?: KbAnswerTrust;
 }

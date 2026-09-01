@@ -1047,7 +1047,7 @@ const CORE_ANSWER_SEEDS = [
     slug: 'telehealth-adhd-california',
     question: 'How does ADHD telehealth work in California?',
     shortAnswer:
-      'California residents may receive adult ADHD evaluation and follow-up via telehealth when treated by a clinician licensed in California, using secure video, validated tools, and documented visits. Siya Health Medical Director Dr. Sneh Pandey is licensed in CA among other states.',
+      'California residents may receive adult ADHD evaluation and follow-up via telehealth when treated by a clinician licensed in California, using secure video, validated tools, and documented visits. Siya Health Medical Director Dr. Sneh Pandey is licensed in California, Pennsylvania, and Florida.',
     paragraphs: [
       'Instant stimulant promises remain a red flag regardless of state.',
     ],

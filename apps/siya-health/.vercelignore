@@ -3,3 +3,6 @@ public/
 
 # Brand asset library (source of truth for photography selection; not a public route)
 brand/
+
+# Local Phase 0 backups (never deploy)
+.site-snapshots/
