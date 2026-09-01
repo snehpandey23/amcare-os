@@ -48,7 +48,11 @@ export async function PATCH(req: Request, ctx: { params: Promise<{ id: string }>
     headers: { Authorization: auth, "Content-Type": "application/json" },
     body: JSON.stringify(body),
   });
-  const data = (await res.json().catch(() => ({}))) as { task?: TaskPayload; error?: string };
+  const data = (await res.json().catch(() => ({}))) as {
+    task?: TaskPayload;
+    error?: string;
+    assignmentWarning?: string | null;
+  };
   if (!res.ok) {
     return Response.json({ error: data.error || "Update failed" }, { status: res.status });
   }
@@ -76,5 +80,9 @@ export async function PATCH(req: Request, ctx: { params: Promise<{ id: string }>
     email = { sent: false, error: err instanceof Error ? err.message : "notify failed" };
   }
 
-  return Response.json({ task: data.task, email });
+  return Response.json({
+    task: data.task,
+    email,
+    assignmentWarning: data.assignmentWarning ?? null,
+  });
 }

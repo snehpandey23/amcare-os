@@ -37,7 +37,14 @@ function isWriteSop(t: string): boolean {
   return false;
 }
 
+function isMissingSopsChrome(t: string): boolean {
+  return /\b(missing|missign|gap|gaps|outstanding|backlog|incomplete|not\s+(live|published|approved)|still\s+need|needed)\b/.test(
+    t,
+  );
+}
+
 function isListSops(t: string): boolean {
+  if (isMissingSopsChrome(t)) return false;
   if (/\b(existing|published|live|approved)\s+sops?\b/.test(t)) return true;
   if (/\bsops?\s+(already\s+)?(there|exist|published|live|listed)\b/.test(t)) return true;
   if (/\b(what|which|list|show|see)\s+(sops?|standard operating procedures?)\b/.test(t)) return true;

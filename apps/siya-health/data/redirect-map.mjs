@@ -57,7 +57,7 @@ const RAW = {
 };
 
 /** Paths that 301 to external URLs — exclude from sitemap; never use as internal link targets */
-export const EXTERNAL_REDIRECT_SOURCES = new Set(['/siya-circle']);
+export const EXTERNAL_REDIRECT_SOURCES = new Set([]);
 
 /** HTML shells on disk whose URLs redirect elsewhere */
 export const REDIRECT_SHELL_FILES = {
@@ -68,7 +68,6 @@ export const REDIRECT_SHELL_FILES = {
   'adhd-diagnosis-florida.html': '/adhd-care',
   'adhd-evaluation-cost.html': '/pricing',
   'online-adhd-test.html': '/adhd-screening',
-  'siya-circle.html': null,
 };
 
 /**

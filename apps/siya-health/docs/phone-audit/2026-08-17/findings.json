@@ -1,0 +1,246 @@
+{
+  "findings": [
+    {
+      "pageId": "home",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"Free screening →\" 109×22; \"See how pricing maps to this journey →\" 283×19; \"Explore Primary Care\" 144×24)"
+        }
+      ],
+      "title": "Siya Health | When Focus, Energy, or Weight Won't Budge",
+      "url": "https://www.siya.health/"
+    },
+    {
+      "pageId": "adhd-care",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"Dr. Sneh Pandey, MD\" 160×20; \"Creyos cognitive testing\" 173×19; \"Dr. Sneh Pandey, MD\" 176×24)"
+        }
+      ],
+      "title": "Adult ADHD Diagnosis Online — Same-Week Evaluation | Siya Health",
+      "url": "https://www.siya.health/adhd-care"
+    },
+    {
+      "pageId": "pricing",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"preventive labs\" 105×18; \"Labs & Blood Tests\" 133×18; \"Creyos\" 48×18)"
+        }
+      ],
+      "title": "Pricing | Siya Health",
+      "url": "https://www.siya.health/pricing"
+    },
+    {
+      "pageId": "adhd-screening",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"ADHD evaluation pricing\" 185×20; \"ADHD evaluation & care\" 152×16; \"Free ADHD screening\" 137×16)"
+        }
+      ],
+      "title": "Start screening | Siya Health",
+      "url": "https://www.siya.health/adhd-screening"
+    },
+    {
+      "pageId": "adhd-evaluation-texas",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"Creyos cognitive testing\" 173×19; \"Dr. Sneh Pandey, MD\" 176×24; \"Dr. Natasha Desai, MD\" 190×24)"
+        }
+      ],
+      "title": "Adult ADHD Evaluation in Texas | Same-Week Online Eval | Siya Health",
+      "url": "https://www.siya.health/adhd-evaluation-texas"
+    },
+    {
+      "pageId": "adhd-evaluation-california",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"Creyos cognitive testing\" 173×19; \"Dr. Sneh Pandey, MD\" 176×24; \"Wendy Delgado, PA-C\" 191×24)"
+        }
+      ],
+      "title": "Adult ADHD Evaluation in California | Same-Week Online Eval | Siya Health",
+      "url": "https://www.siya.health/adhd-evaluation-california"
+    },
+    {
+      "pageId": "adult-adhd-california",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"ADHD Care\" 86×20; \"What ADHD can look like in adults\" 252×19; \"Frequently asked questions\" 204×19)"
+        }
+      ],
+      "title": "Adult ADHD Care in California — Diagnosis, Treatment & Screening | Siya Health",
+      "url": "https://www.siya.health/adult-adhd-california"
+    },
+    {
+      "pageId": "weight-loss",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"Dr. Sneh Pandey, MD\" 160×20; \"Dr. Sneh Pandey, MD\" 176×24; \"Dr. Vanessa Urbina, MD\" 201×24)"
+        }
+      ],
+      "title": "Provider-Guided Medical Weight Loss | Siya Health",
+      "url": "https://www.siya.health/weight-loss-metabolic-health"
+    },
+    {
+      "pageId": "telehealth",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"physician-guided lab options\" 219×20; \"interpretation\" 101×20; \"primary and urgent care\" 173×19)"
+        }
+      ],
+      "title": "Virtual Medical Care | Siya Health Telehealth",
+      "url": "https://www.siya.health/telehealth"
+    },
+    {
+      "pageId": "mens-health",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"Labs\" 36×19; \"Dr. Sneh Pandey, MD\" 160×20; \"Dr. Sneh Pandey, MD\" 176×24)"
+        }
+      ],
+      "title": "Men's Health & Longevity | Siya Health",
+      "url": "https://www.siya.health/mens-health-longevity"
+    },
+    {
+      "pageId": "labs",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"preventive care\" 117×20; \"Women’s health\" 117×19; \"Women’s midlife health\" 171×19)"
+        }
+      ],
+      "title": "Labs & Blood Tests | Transparent Direct-Pay Testing | Siya Health",
+      "url": "https://www.siya.health/labs"
+    },
+    {
+      "pageId": "intake",
+      "issues": [
+        {
+          "severity": "med",
+          "code": "small-tap-targets",
+          "message": "8+ tap targets under ~40px (sample: \"Terms of Use\" 92×18; \"Privacy Policy\" 96×18; \"Notice of Privacy Practices\" 186×18)"
+        }
+      ],
+      "title": "Secure Intake | Siya Health",
+      "url": "https://www.siya.health/intake"
+    }
+  ],
+  "lhScores": [
+    {
+      "id": "home",
+      "path": "/",
+      "performance": 64,
+      "accessibility": 96,
+      "bestPractices": 73,
+      "seo": 100
+    },
+    {
+      "id": "adhd-care",
+      "path": "/adhd-care",
+      "performance": 62,
+      "accessibility": 96,
+      "bestPractices": 73,
+      "seo": 100
+    },
+    {
+      "id": "pricing",
+      "path": "/pricing",
+      "performance": 67,
+      "accessibility": 96,
+      "bestPractices": 73,
+      "seo": 100
+    },
+    {
+      "id": "adhd-screening",
+      "path": "/adhd-screening",
+      "performance": 67,
+      "accessibility": 95,
+      "bestPractices": 73,
+      "seo": 100
+    },
+    {
+      "id": "adhd-evaluation-texas",
+      "path": "/adhd-evaluation-texas",
+      "performance": 72,
+      "accessibility": 96,
+      "bestPractices": 77,
+      "seo": 69
+    },
+    {
+      "id": "adhd-evaluation-california",
+      "path": "/adhd-evaluation-california",
+      "performance": 65,
+      "accessibility": 96,
+      "bestPractices": 77,
+      "seo": 69
+    },
+    {
+      "id": "adult-adhd-california",
+      "path": "/adult-adhd-california",
+      "performance": 61,
+      "accessibility": 95,
+      "bestPractices": 77,
+      "seo": 100
+    },
+    {
+      "id": "weight-loss",
+      "path": "/weight-loss-metabolic-health",
+      "performance": 65,
+      "accessibility": 96,
+      "bestPractices": 77,
+      "seo": 100
+    },
+    {
+      "id": "telehealth",
+      "path": "/telehealth",
+      "performance": 65,
+      "accessibility": 96,
+      "bestPractices": 77,
+      "seo": 100
+    },
+    {
+      "id": "mens-health",
+      "path": "/mens-health-longevity",
+      "performance": 64,
+      "accessibility": 96,
+      "bestPractices": 77,
+      "seo": 100
+    },
+    {
+      "id": "labs",
+      "path": "/labs",
+      "performance": 62,
+      "accessibility": 95,
+      "bestPractices": 77,
+      "seo": 92
+    },
+    {
+      "id": "intake",
+      "path": "/intake",
+      "performance": 67,
+      "accessibility": 95,
+      "bestPractices": 77,
+      "seo": 69
+    }
+  ]
+}

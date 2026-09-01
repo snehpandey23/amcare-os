@@ -9,13 +9,39 @@ import type { AdminOpsSnapshot } from "./admin-ops-snapshot";
 import { synthesizeAdminOpsAnswer } from "./admin-ops-llm";
 import { isStaffWorkplaceConcernQuery } from "./flows";
 
+/** Staff how-to: patient asks for manager — must not steal into Daily Plan. */
+export function isPatientManagerRequestQuery(message: string): boolean {
+  const t = message.trim().toLowerCase();
+  return (
+    /\b(patient|caller|they|he|she).{0,40}\b(want|wants|ask|asked|asking|request|requested).{0,30}\b(manager|supervisor)\b/.test(
+      t,
+    ) ||
+    /\b(speak|talk|transfer).{0,20}\b(to\s+)?(a\s+)?(manager|supervisor)\b/.test(t) ||
+    /\bask(ed|ing)?\s+for\s+(a\s+)?(manager|supervisor)\b/.test(t)
+  );
+}
+
+/** Naming / chrome questions about My day — must not steal into Daily Plan. */
+export function isMyDayNamingQuery(message: string): boolean {
+  const t = message.trim().toLowerCase();
+  return (
+    /\bwhy\s+(do\s+you\s+|did\s+you\s+|is\s+it\s+|we\s+)?(call|name|label)\s+(it\s+)?my\s+day\b/.test(t) ||
+    /\bwhy\s+(is|was)\s+(it\s+)?called\s+my\s+day\b/.test(t) ||
+    /\bwhat\s+(does|is)\s+my\s+day\s+mean\b/.test(t) ||
+    /\bwhy\s+my\s+day\b/.test(t) ||
+    /\b(meaning|name)\s+of\s+my\s+day\b/.test(t)
+  );
+}
+
 export type AdminOpsIntent =
   | { kind: "plan_day" }
   | { kind: "team_pulse" }
   | { kind: "task_status" }
   | { kind: "overdue" }
   | { kind: "create_task"; title: string; assigneeHint: string; priority?: TaskPriority }
-  | { kind: "ops_brief" };
+  | { kind: "ops_brief" }
+  /** Staff usage / engagement metrics → Ops dashboard Section A (not live presence). */
+  | { kind: "ops_engagement" };
 
 export type AdminOpsReply = {
   message: string;
@@ -39,7 +65,135 @@ const PRIORITY_RANK: Record<TaskPriority, number> = {
   low: 3,
 };
 
-export function detectAdminOpsIntent(message: string): AdminOpsIntent | null {
+/** Informal dictation → presence matching (r→are, loggin→logging). */
+export function normalizePresenceAskText(message: string): string {
+  return message
+    .trim()
+    .toLowerCase()
+    .replace(/\bloggin\b/g, "logging")
+    .replace(/\br\b/g, "are")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const PRESENCE_STATUS =
+  "(?:working|online|present|here|active|around|available|logged\\s*in|logging\\s*in|log\\s*in|on(?:\\s+the)?\\s+(?:clock|shift|floor)|currently\\s+working)";
+
+/** Live who’s-on / online / logged-in asks (Team pulse). */
+export function isTeamPulseAsk(message: string): boolean {
+  const t = normalizePresenceAskText(message);
+  if (!t) return false;
+  if (/\b(team\s*pulse|coverage)\b/.test(t)) return true;
+  // Short status labels (not org-chart / usage analytics).
+  if (/\b(?:my\s+)?team\s+status\b/.test(t)) return true;
+  if (/\b(?:my\s+)?team\s+(?:roster|presence)\b/.test(t)) return true;
+  // "who all in my team" / "who all in my team are currently working"
+  if (/\bwho\s+all\b[\s\S]{0,48}\bin\s+(?:my\s+)?team\b/.test(t)) return true;
+  // "who's on my team" / "who's on my team right now"
+  if (/\bwho(?:'s|’s| is| are)\s+on\s+(?:my\s+)?team\b/.test(t)) return true;
+  // who / who all / who's … online|working|logged in|… (allow words between "all" and is/are)
+  if (
+    (/\bwho(?:'s|’s)?\s+(?:all\s+)?(?:is|are)\b[\s\S]{0,48}\b/.test(t) ||
+      /\bwho\s+all\b[\s\S]{0,48}\b(?:is|are)\b[\s\S]{0,40}\b/.test(t)) &&
+    new RegExp(`\\b${PRESENCE_STATUS}\\b`).test(t)
+  ) {
+    return true;
+  }
+  if (/\bwho(?:'s|’s| is| are)\b[\s\S]{0,40}\b(?:logged|logging)\s*in\b/.test(t)) return true;
+  if (/\b(working right now|present today|on the clock|who(?:'s|’s| is) here)\b/.test(t)) return true;
+  if (/\bwho(?:'s|’s| is) on(?: the)? (shift|floor|clock)\b/.test(t)) return true;
+  if (/\b(?:anyone|anybody|people|staff|everyone)\b[\s\S]{0,24}\b(?:online|working|logged\s*in|present)\b/.test(t)) {
+    return true;
+  }
+  if (/\b(?:online|logged\s*in|working)\s+(?:right\s+)?now\b/.test(t) && /\bwho\b/.test(t)) return true;
+  return false;
+}
+
+/**
+ * Team usage / engagement / “who’s using the OS” → Ops dashboard Section A
+ * (not thumbs chrome, not live Team pulse).
+ */
+export function isOpsEngagementAsk(message: string): boolean {
+  const t = message.trim().toLowerCase().replace(/\s+/g, " ");
+  if (!t) return false;
+  // How-to “how do I use the OS” is not engagement analytics.
+  if (/\bhow\s+(do\s+i|to|can\s+i)\s+use\b/.test(t)) return false;
+  if (/\bthumbs?\s*(up|down)?\b/.test(t) && !/\b(team|staff|engagement|usage|ops)\b/.test(t)) return false;
+
+  const osOrPortal = /\b(os|siya\s*os|portal|staff\s*(?:app|portal)|assist|siya\s*assist)\b/.test(t);
+  const usageVerb =
+    /\b(who(?:'s|’s| is| are)?\s+using|using|usage|adoption|how\s+often|engagement)\b/.test(t);
+  const problemsFacing =
+    /\b(what\s+)?problems?\b/.test(t) && /\b(facing|have|having|they)\b/.test(t);
+  const teamUsageLabel = /\b(staff|team)\s+(engagement|usage|adoption)\b/.test(t);
+  const opsSectionA =
+    /\bops\b/.test(t) && /\b(engagement|usage|section\s*a|dashboard)\b/.test(t);
+
+  if (teamUsageLabel || opsSectionA) return true;
+  if (osOrPortal && usageVerb) return true;
+  if (osOrPortal && problemsFacing) return true;
+  if (usageVerb && problemsFacing && /\b(team|staff|people|they)\b/.test(t)) return true;
+  if (/\bhow\s+often\b/.test(t) && /\b(staff|team|people|using|ask|turns?)\b/.test(t)) return true;
+  return false;
+}
+
+/**
+ * Ambiguous: tool login bookmarks vs who’s currently online.
+ * With presence thread context → Team pulse; otherwise ask which meaning.
+ */
+export function isAmbiguousStaffLoginDashboardQuery(message: string): boolean {
+  const t = normalizePresenceAskText(message);
+  if (!t || t.length > 160) return false;
+  const wantsView = /\b(dashboard|view|screen|page|see|show|check)\b/.test(t);
+  const loginish = /\b(login|log\s*in|logged|logging|sign(?:ing)?\s*in|online|presence)\b/.test(t);
+  const staffish = /\b(staff|team|people|everyone|employees?|roster)\b/.test(t);
+  return wantsView && loginish && staffish;
+}
+
+/** Recent turns were about who’s online / on shift. */
+export function historySuggestsPresenceTopic(
+  history: { role: string; content: string }[],
+): boolean {
+  const recent = history.slice(-8);
+  for (const h of recent) {
+    if (h.role === "user" && (isTeamPulseAsk(h.content) || isAmbiguousStaffLoginDashboardQuery(h.content))) {
+      return true;
+    }
+    if (
+      h.role === "assistant" &&
+      /\b(team pulse|on shift|who.?s online|working right now|team presence|open \*\*team\*\*|live presence)\b/i.test(
+        h.content,
+      )
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/** Short / typo continuation after a presence ask — stay on Team pulse, don’t restart as name lookup. */
+export function isPresenceTopicContinuation(
+  message: string,
+  history: { role: string; content: string }[],
+): boolean {
+  if (!historySuggestsPresenceTopic(history)) return false;
+  const t = normalizePresenceAskText(message);
+  if (!t || t.length > 100) return false;
+  if (isTeamPulseAsk(message) || isAmbiguousStaffLoginDashboardQuery(message)) return true;
+  if (/\b(online|logged?\s*in|logging\s*in|log\s*in|working|present|active|around|pulse|on\s+shift)\b/.test(t)) {
+    return true;
+  }
+  // "who is loggin in" style after presence — status words, not a person name
+  if (/^who\s+is\s+/.test(t) && /\b(loggin|logging|logged|online|working|present|here|active)\b/.test(t)) {
+    return true;
+  }
+  return false;
+}
+
+export function detectAdminOpsIntent(
+  message: string,
+  history: { role: string; content: string }[] = [],
+): AdminOpsIntent | null {
   const t = message.trim().toLowerCase();
   if (!t) return null;
 
@@ -58,8 +212,12 @@ export function detectAdminOpsIntent(message: string): AdminOpsIntent | null {
   }
 
   // Day-start / “what first” — staff path lists My day (not Marketing SOP dumps).
-  // Never steal workplace / people concerns that end with “what should I do”.
-  if (!isStaffWorkplaceConcernQuery(message) && (
+  // Never steal workplace / people concerns, patient→manager how-tos, or “why call it My day” naming.
+  if (
+    !isStaffWorkplaceConcernQuery(message) &&
+    !isPatientManagerRequestQuery(message) &&
+    !isMyDayNamingQuery(message) &&
+    (
     /\b(plan|prioriti[sz]e|run my day|morning brief|daily plan)\b/.test(t) ||
     /\bwhat\s+(should|shall)\s+i\s+(do|work\s+on|focus\s+on)\b/.test(t) ||
     /\bwhat\s+(do\s+i|should\s+i|shall\s+i)\s+(do\s+)?first\b/.test(t) ||
@@ -68,20 +226,21 @@ export function detectAdminOpsIntent(message: string): AdminOpsIntent | null {
     /\bmy\s+job\s+today\b/.test(t) ||
     /\bwhat\s+should\s+i\s+work\s+on\b/.test(t) ||
     /\bstart\s+(my\s+)?(work\s+)?day\b/.test(t) ||
-    (/\bmy day\b/.test(t) && !/\b(personalize|personalisation|onboarding|onboard)\b/.test(t))
+    (/\bmy day\b/.test(t) && !/\b(personalize|personalisation|onboarding|onboard|call|name|mean|why)\b/.test(t))
   )) {
     return { kind: "plan_day" };
   }
+  // Usage / engagement analytics BEFORE presence — "who's using the OS" is Ops, not Team pulse.
+  if (isOpsEngagementAsk(message)) {
+    return { kind: "ops_engagement" };
+  }
   // Live presence / shift — hard Team pulse path (never Founder Talk portal LLM).
-  // Match natural asks: "who all are working", "who's present today", "on the clock", "who's here".
-  if (
-    /\b(team pulse|coverage)\b/.test(t) ||
-    /\bwho(?:'s|’s| is| are| all are)\b[\s\S]{0,40}\b(working|online|present|here|on(?: the)? clock|on shift)\b/.test(
-      t,
-    ) ||
-    /\b(working right now|present today|on the clock|who(?:'s|’s| is) here)\b/.test(t) ||
-    /\bwho(?:'s|’s| is) on(?: the)? (shift|floor|clock)\b/.test(t)
-  ) {
+  // Match natural asks + typo/slang ("who all r online", "who is loggin in") + thread continuations.
+  if (isTeamPulseAsk(message) || isPresenceTopicContinuation(message, history)) {
+    return { kind: "team_pulse" };
+  }
+  // Presence-thread + "dashboard for login of staff" → stay on pulse (not Workplace links).
+  if (isAmbiguousStaffLoginDashboardQuery(message) && historySuggestsPresenceTopic(history)) {
     return { kind: "team_pulse" };
   }
   if (/\b(overdue|past due|late tasks|slipping)\b/.test(t)) {
@@ -288,6 +447,17 @@ function opsBriefMessage(snapshot: AdminOpsSnapshot): string {
   return `${planDayMessage(snapshot)}\n\n---\n\n**Board summary:** ${snapshot.boardOpen.length} active · ${snapshot.boardOverdue.length} overdue.`;
 }
 
+/** Pointer only — live numbers live on the Ops dashboard, not in chat. */
+export function opsEngagementPointerMessage(): string {
+  return [
+    "For **who’s using the portal**, **how often**, and related staff signals, open the **Ops dashboard**.",
+    "",
+    "**Section A · Staff engagement** shows Ask activity and engagement by person (admin sees the full team table).",
+    "",
+    "That’s the right place for usage/engagement — not the 👍/👎 buttons (those only log whether a single Assist reply was helpful).",
+  ].join("\n");
+}
+
 function defaultLinks(intent: AdminOpsIntent["kind"]): { label: string; href: string }[] {
   const links = [
     { label: "My day", href: "/" },
@@ -295,6 +465,13 @@ function defaultLinks(intent: AdminOpsIntent["kind"]): { label: string; href: st
     { label: "Team", href: "/team" },
   ];
   if (intent === "team_pulse") return [{ label: "Team", href: "/team" }, ...links.slice(1)];
+  if (intent === "ops_engagement") {
+    return [
+      { label: "Ops dashboard", href: "/ops" },
+      { label: "Team", href: "/team" },
+      { label: "My day", href: "/" },
+    ];
+  }
   return links;
 }
 
@@ -304,7 +481,7 @@ export async function runAdminOpsCoach(
   token: string,
   history: { role: string; content: string }[],
 ): Promise<AdminOpsReply | null> {
-  const intent = detectAdminOpsIntent(message);
+  const intent = detectAdminOpsIntent(message, history);
   if (!intent) return null;
 
   if (intent.kind === "create_task") {
@@ -362,12 +539,15 @@ export async function runAdminOpsCoach(
     case "ops_brief":
       messageOut = opsBriefMessage(snapshot);
       break;
+    case "ops_engagement":
+      messageOut = opsEngagementPointerMessage();
+      break;
     default:
       return null;
   }
 
-  // Team pulse is deterministic live presence — never LLM-rewrite (avoids lead-roster / 7d-login invent).
-  if (intent.kind !== "team_pulse") {
+  // Team pulse + ops engagement are deterministic pointers — never LLM-rewrite.
+  if (intent.kind !== "team_pulse" && intent.kind !== "ops_engagement") {
     const llm = await synthesizeAdminOpsAnswer({
       userMessage: message,
       intent: intent.kind,

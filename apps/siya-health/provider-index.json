@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-16T02:32:57.438Z",
+  "generated": "2026-09-01T12:10:05.920Z",
   "hubUrl": "https://siya.health/providers",
   "count": 7,
   "providers": [
@@ -16,13 +16,11 @@
       ],
       "statesLicensed": [
         "California",
-        "Texas",
         "Pennsylvania",
         "Florida"
       ],
       "serviceStates": [
         "California",
-        "Texas",
         "Pennsylvania",
         "Florida"
       ],
@@ -76,11 +74,13 @@
       ],
       "statesLicensed": [
         "Texas",
-        "Florida"
+        "Florida",
+        "Pennsylvania"
       ],
       "serviceStates": [
         "Texas",
-        "Florida"
+        "Florida",
+        "Pennsylvania"
       ],
       "conditionsTreated": [
         "Adult ADHD",
@@ -89,7 +89,7 @@
         "ADHD with anxiety overlap",
         "Behavioral health"
       ],
-      "npi": null,
+      "npi": "1861074247",
       "relatedContent": []
     },
     {
@@ -180,14 +180,22 @@
       "jobTitle": "Physician Associate",
       "providerType": "advanced-practice",
       "medicalSpecialty": [
+        "Family Medicine",
         "Obesity Medicine",
-        "Family Medicine"
+        "Adult ADHD",
+        "Women's Health"
       ],
       "statesLicensed": [
-        "California"
+        "California",
+        "Texas",
+        "Pennsylvania",
+        "Florida"
       ],
       "serviceStates": [
-        "California"
+        "California",
+        "Texas",
+        "Pennsylvania",
+        "Florida"
       ],
       "conditionsTreated": [
         "Medical weight loss",

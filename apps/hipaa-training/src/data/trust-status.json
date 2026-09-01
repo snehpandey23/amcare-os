@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-05T05:55:52.715Z",
+  "generatedAt": "2026-08-31T02:14:20.903Z",
   "release": {
     "level": 1,
     "label": "Internal Preview",
@@ -8,7 +8,7 @@
   },
   "scores": {
     "knowledgeArchitecture": 92,
-    "knowledgeContent": 31,
+    "knowledgeContent": 36,
     "criticalFailures": 0,
     "phiTestsPercent": 100,
     "unsafeClinical": 0,
@@ -18,12 +18,12 @@
     "redTeam": "PASS",
     "redTeamPass": true,
     "phiPass": true,
-    "liveTopics": 31
+    "liveTopics": 36
   },
   "deployment": {
     "blocked": true,
     "reasons": [
-      "Knowledge content 31/100 below pilot bar (80)"
+      "Knowledge content 36/100 below pilot bar (80)"
     ]
   },
   "checklist": {

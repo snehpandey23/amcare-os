@@ -5,13 +5,9 @@
 (function () {
   'use strict';
 
-  var host = (window.location && window.location.hostname) || '';
-  if (
-    host === 'localhost' ||
-    host === '127.0.0.1' ||
-    host === '[::1]' ||
-    /\.local$/.test(host)
-  ) {
+  var host = String((window.location && window.location.hostname) || '').toLowerCase();
+  /* Production marketing hosts only — block Vercel previews / localhost */
+  if (!(host === 'siya.health' || /\.siya\.health$/.test(host))) {
     return;
   }
 
@@ -317,6 +313,16 @@
     });
   }
 
+  /* Employer B2B landing pageview (distinct from patient funnel) */
+  if (window.location.pathname.replace(/\/$/, '') === '/employers') {
+    pushEvent('employer_page_view', {
+      page_path: window.location.pathname,
+      page_location: window.location.href,
+      funnel: 'employer_b2b',
+      audience: 'employer',
+    });
+  }
+
   /* ---- Global CTA click tracking (Task 5) + Entity Utilization ---- */
   document.addEventListener(
     'click',
@@ -342,7 +348,10 @@
         link_text: text,
         page_path: window.location.pathname,
         page_location: window.location.href,
-        funnel: 'adhd_california',
+        funnel:
+          window.location.pathname.replace(/\/$/, '') === '/employers'
+            ? 'employer_b2b'
+            : 'adhd_california',
       };
 
       var isScreeningToolLink =
@@ -413,6 +422,24 @@
 
       if (linkHref.indexOf('mailto:') === 0) {
         pushEvent('email_click', baseParams);
+      }
+
+      if (
+        track === 'employer_inquiry_click' ||
+        track === 'employer_inquiry_submit' ||
+        (linkHref.indexOf('#employer-inquiry') !== -1 &&
+          window.location.pathname.replace(/\/$/, '') === '/employers')
+      ) {
+        pushEvent('employer_inquiry_click', Object.assign({}, baseParams, {
+          audience: 'employer',
+          cta_track: track || 'employer_inquiry_click',
+        }));
+      }
+
+      if (track === 'employer_inquiry_submit') {
+        pushEvent('employer_inquiry_submit', Object.assign({}, baseParams, {
+          audience: 'employer',
+        }));
       }
 
       /* Entity Utilization click taxonomy */

@@ -21,6 +21,8 @@ export type AnalyticsEventName =
   | 'screening_link_clicked'
   | 'secure_chat_handoff'
   | 'booking_handoff'
+  | 'callback_form_shown'
+  | 'callback_form_submit'
   | 'bot_refusal_category'
   | 'quick_action_clicked'
 
@@ -59,4 +61,6 @@ export interface GuideResponse {
   citations: GuideLink[]
   refusalCategory: RefusalCategory
   analyticsEvent?: AnalyticsEventName
+  /** When true, show inline callback form (name, email, optional phone). */
+  showCallbackForm?: boolean
 }

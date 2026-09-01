@@ -163,7 +163,7 @@ function writeLlmsTxt(pages) {
     '',
     '## Providers (care team hub)',
     `- All providers: ${BASE}/providers`,
-    `- Dr. Sneh Pandey, MD — Medical Director (CA, TX, PA, FL): ${BASE}/providers/dr-sneh-pandey`,
+    `- Dr. Sneh Pandey, MD — Medical Director (CA, PA, FL): ${BASE}/providers/dr-sneh-pandey`,
     `- Dr. Vanessa Urbina, MD — Family medicine / ADHD (FL): ${BASE}/providers/dr-vanessa-urbina`,
     `- Dr. Natasha Desai, MD — Behavioral / ADHD (TX, FL): ${BASE}/providers/dr-natasha-desai`,
     `- Dr. Swati Pandey, MD — ADHD evaluation (PA): ${BASE}/providers/dr-swati-pandey`,

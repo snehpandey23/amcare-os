@@ -38,7 +38,11 @@ export async function POST(req: Request) {
     headers: { Authorization: auth, "Content-Type": "application/json" },
     body: JSON.stringify(body),
   });
-  const data = (await res.json().catch(() => ({}))) as { task?: TaskPayload; error?: string };
+  const data = (await res.json().catch(() => ({}))) as {
+    task?: TaskPayload;
+    error?: string;
+    assignmentWarning?: string | null;
+  };
   if (!res.ok) {
     return Response.json({ error: data.error || "Create failed" }, { status: res.status });
   }
@@ -69,5 +73,8 @@ export async function POST(req: Request) {
     email = { sent: false, error: err instanceof Error ? err.message : "notify failed" };
   }
 
-  return Response.json({ task: data.task, email }, { status: 201 });
+  return Response.json(
+    { task: data.task, email, assignmentWarning: data.assignmentWarning ?? null },
+    { status: 201 },
+  );
 }

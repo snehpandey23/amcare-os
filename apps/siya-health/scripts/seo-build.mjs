@@ -47,7 +47,6 @@ const REDIRECT_SHELLS = {
 /** External redirect shells + dev surfaces — never in sitemap */
 const SITEMAP_EXCLUDE = new Set([
   'visual-components.html',
-  'siya-circle.html',
   'adhd-screening-results.html',
   'blog/adult-adhd-treatment-california-2026.html', // EG-P0-01 retired stub
   ...Object.keys(REDIRECT_SHELLS),
@@ -160,16 +159,8 @@ function ensureNoindexUtilityPages(html, relPath) {
   return html;
 }
 
-/** External 302 shells — noindex, no self-referential canonical */
-function ensureExternalRedirectShell(html, relPath) {
-  if (relPath !== 'siya-circle.html') return html;
-  const tag = '<meta name="robots" content="noindex, nofollow" />';
-  if (html.match(/<meta\s+name="robots"/i)) {
-    html = html.replace(/<meta\s+name="robots"\s+content="[^"]*"\s*\/?>/i, tag);
-  } else {
-    html = html.replace(/(<meta\s+name="viewport"[^>]*\/?>)/i, `$1\n    ${tag}`);
-  }
-  html = html.replace(/<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>\s*/i, '');
+/** Legacy external redirect shells — noindex (siya-circle is now first-party). */
+function ensureExternalRedirectShell(html, _relPath) {
   return html;
 }
 
@@ -204,7 +195,6 @@ function ensureGSC(html) {
 }
 
 function ensureCanonical(html, relPath) {
-  if (relPath === 'siya-circle.html') return html;
   const urlPath = fileToUrlPath(relPath);
   const full = urlPath === '/' ? `${BASE}/` : `${BASE}${urlPath}`;
   if (extractCanonical(html)) return html;

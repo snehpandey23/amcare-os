@@ -112,7 +112,8 @@ for (const file of files) {
     continue;
   }
   const { meta, body, keywords, links } = parsed;
-  if (meta.status !== 'live') continue;
+  // live = approved Ask index; provisional = authored low-risk stub (not soft-stop, not invented)
+  if (meta.status !== 'live' && meta.status !== 'provisional') continue;
   if (meta.bot_retrieve === 'false' || meta.kind === 'idea') continue;
   if (!meta.id || !meta.title) {
     console.warn('Skip (missing id/title):', file);
@@ -132,6 +133,7 @@ for (const file of files) {
     body: compileBody(body, meta),
     links: links.length ? links : undefined,
     escalate: meta.escalate || undefined,
+    answerTrust: meta.status === 'provisional' ? 'provisional' : 'approved',
     priority: Number(meta.priority) || 1,
   });
 }

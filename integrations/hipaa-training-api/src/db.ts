@@ -47,6 +47,16 @@ export async function initDb(): Promise<void> {
     await ensureKnowledgeTables(p);
     const { ensureClinicProfileTables } = await import("./clinic-profile-service.js");
     await ensureClinicProfileTables(p);
+    const { ensureShiftRosterTables } = await import("./shift-roster-service.js");
+    await ensureShiftRosterTables(p);
+    const { ensureEmployerInquiryTables } = await import("./employer-inquiry-service.js");
+    await ensureEmployerInquiryTables(p);
+    const { ensureSiyaCircleSignupTables } = await import("./siya-circle-signup-service.js");
+    await ensureSiyaCircleSignupTables(p);
+    const { ensureWebsiteCallbackTables } = await import("./website-callback-service.js");
+    await ensureWebsiteCallbackTables(p);
+    const { ensureProviderCareersTables } = await import("./provider-careers-service.js");
+    await ensureProviderCareersTables(p);
   } catch (err) {
     console.warn("[hipaa-training-api] schema file read failed, using inline DDL:", err);
     const sql = `

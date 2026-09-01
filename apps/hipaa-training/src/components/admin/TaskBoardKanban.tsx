@@ -19,6 +19,7 @@ import { useAuth } from "@/context/AuthContext";
 import { isPortalAdmin } from "@/lib/portal-role";
 import { fetchTeamRoster } from "@/lib/admin-api";
 import {
+  checkAssigneeScheduledOff,
   createAdhocTask,
   fetchTaskBoard,
   patchTask,
@@ -192,7 +193,15 @@ export function TaskBoardKanban() {
     e.preventDefault();
     setPending(true);
     try {
-      await createAdhocTask({
+      const check = await checkAssigneeScheduledOff(form.assigneeId, form.dueDate);
+      if (check.scheduledOff && check.warning) {
+        const ok = window.confirm(`${check.warning}\n\nAssign anyway?`);
+        if (!ok) {
+          setPending(false);
+          return;
+        }
+      }
+      const { assignmentWarning } = await createAdhocTask({
         title: form.title.trim(),
         description: form.description,
         assigneeId: form.assigneeId,
@@ -200,6 +209,9 @@ export function TaskBoardKanban() {
         dueTime: form.dueTime || undefined,
         priority: form.priority,
       });
+      if (assignmentWarning) {
+        window.alert(assignmentWarning);
+      }
       setAssignOpen(false);
       setForm((f) => ({ ...f, title: "", description: "" }));
       await mutate();

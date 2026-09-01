@@ -100,7 +100,7 @@ export interface FactsSnapshot {
 }
 
 export const FACTS_SNAPSHOT: FactsSnapshot = {
-  "generated": "2026-08-14",
+  "generated": "2026-08-31",
   "source": "apps/siya-health site-standards + providers + provider-canonical + homepage-trust-metrics + providers-core + service-index.json + founder-locked cancel/hours facts",
   "availableServiceStates": [
     "California",
@@ -218,22 +218,25 @@ export const FACTS_SNAPSHOT: FactsSnapshot = {
       "specialtyChips": [
         "Family Medicine",
         "ADHD-CCSP",
-        "Family & Behavioral Medicine"
+        "American Board of Family Medicine"
       ],
       "role": "Family Medicine Physician",
       "profilePath": "/providers/dr-natasha-desai",
       "profileUrl": "https://www.siya.health/providers/dr-natasha-desai",
       "statesLicensed": [
         "Texas",
-        "Florida"
+        "Florida",
+        "Pennsylvania"
       ],
       "statesService": [
         "Texas",
-        "Florida"
+        "Florida",
+        "Pennsylvania"
       ],
       "stateAbbreviations": [
         "TX",
-        "FL"
+        "FL",
+        "PA"
       ]
     },
     {
@@ -333,21 +336,32 @@ export const FACTS_SNAPSHOT: FactsSnapshot = {
       ],
       "specialtyChips": [
         "PA-C",
+        "ADHD",
+        "Women's Health",
         "Weight Loss",
         "Telehealth",
         "NCCPA Certified PA"
       ],
-      "role": "Physician Associate",
+      "role": "Physician Associate · Adult telehealth generalist",
       "profilePath": "/providers/wendy-delgado",
       "profileUrl": "https://www.siya.health/providers/wendy-delgado",
       "statesLicensed": [
-        "California"
+        "California",
+        "Texas",
+        "Pennsylvania",
+        "Florida"
       ],
       "statesService": [
-        "California"
+        "California",
+        "Texas",
+        "Pennsylvania",
+        "Florida"
       ],
       "stateAbbreviations": [
-        "CA"
+        "CA",
+        "TX",
+        "PA",
+        "FL"
       ]
     }
   ],

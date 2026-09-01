@@ -4,13 +4,8 @@
 (function () {
   'use strict';
 
-  var host = (window.location && window.location.hostname) || '';
-  if (
-    host === 'localhost' ||
-    host === '127.0.0.1' ||
-    host === '[::1]' ||
-    /\.local$/.test(host)
-  ) {
+  var host = String((window.location && window.location.hostname) || '').toLowerCase();
+  if (!(host === 'siya.health' || /\.siya\.health$/.test(host))) {
     return;
   }
 

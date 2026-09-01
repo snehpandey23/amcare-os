@@ -79,6 +79,7 @@ export async function POST(req: Request) {
       links: result.links,
       citations: result.citations,
       refusalCategory: result.refusalCategory,
+      showCallbackForm: result.showCallbackForm || false,
     })
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Chat failed'

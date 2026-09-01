@@ -72,6 +72,11 @@ export type PortalProfile = {
   /** When to surface Learn/training nudges on My Day. */
   trainingReminder?: TrainingReminderPref;
   /**
+   * Talk Mode TTS voice — SpeechSynthesisVoice.voiceURI from this browser.
+   * Optional; unset = browser default. Voices are device/browser-specific.
+   */
+  talkVoiceURI?: string;
+  /**
    * Legacy profile field — coach is mandatory for everyone (Stage 2).
    * Always treated as on; do not gate features on this flag.
    */

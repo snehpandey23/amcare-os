@@ -1,8 +1,19 @@
 import { getEscalationContacts } from "./config";
 import { defaultEscalationOwner } from "./escalation";
 import { retrievalQueryBoost, routeIntent, expandShortQuery, hasRoutableIntent } from "./flows";
-import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, isHrContactQuery, buildHrContactAnswer, abusivePatientAnswer, pickLiveAbusivePatientSop, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, isClarifyingFollowUp, answerFromPriorAssistIfCovered, isGapContributionFollowUp, answerGapContributionFollowUp, polishStaffMessage, isCasualOffTopic, casualOffTopicReply, appendDraftLiveHedge } from "./compose-answer";
+import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, isHrContactQuery, buildHrContactAnswer, abusivePatientAnswer, pickLiveAbusivePatientSop, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, isClarifyingFollowUp, answerFromPriorAssistIfCovered, isGapContributionFollowUp, answerGapContributionFollowUp, polishStaffMessage, isCasualOffTopic, casualOffTopicReply, appendDraftLiveHedge, provisionalSourceLabel, provisionalRoutingMeta } from "./compose-answer";
 import { staffTopicLabel } from "./staff-voice";
+import {
+  formatDepartmentLeadAnswer,
+  formatLeadsFollowUpAnswer,
+  fetchDepartmentLeads,
+  isDepartmentLeadFollowUp,
+  isDepartmentLeadQuery,
+} from "./department-leads-ask";
+import { isSopAssignmentQuery, answerSopAssignmentAsk } from "./sop-assignment-ask";
+import { isMissingSopsQuery, answerMissingSopsAsk } from "./sop-missing-ask";
+import { isMyScheduleQuery, answerMyScheduleQuery } from "./shift-roster-ask";
+import { answerWhoIsQuery, isWhoAmIQuery, extractWhoIsName } from "./staff-identity-ask";
 import { synthesizeWorkforceAnswer } from "./llm-answer";
 import {
   retrieveLayeredKnowledge,
@@ -21,7 +32,7 @@ import {
   type StaffRefusalCategory,
 } from "./phi-guard";
 import { fetchAdminOpsSnapshot, fetchMyTasksToday } from "./admin-ops-snapshot";
-import { detectAdminOpsIntent, runAdminOpsCoach, staffMyTasksReply } from "./admin-ops-coach";
+import { detectAdminOpsIntent, runAdminOpsCoach, staffMyTasksReply, isAmbiguousStaffLoginDashboardQuery, historySuggestsPresenceTopic } from "./admin-ops-coach";
 import { tryFactsLookup } from "./facts-lookup";
 import { tryPracticeLookup } from "./practice-lookup";
 import { trySopChromeLookup } from "./sop-chrome-lookup";
@@ -64,6 +75,12 @@ export interface SiyaReply {
   escalationPreview?: string;
   /** No approved KB match — show notify-owner flow */
   knowledgeGap?: boolean;
+  /**
+   * Answer trust for UI:
+   * - approved (default): live guide
+   * - provisional: authored stub, not signed-off — chip + disclaimer, no soft-stop
+   */
+  answerTrust?: "approved" | "provisional";
   /** Admin ops co-pilot quick links (task board, team, etc.) */
   portalLinks?: { label: string; href: string }[];
   /** True when reply used live task/team data */
@@ -191,6 +208,75 @@ export async function runSiyaAssistantAsync(
   const founderCoach = opts?.surface === "founder-coach";
   const assistantLabel = opts?.assistantLabel?.trim() || null;
 
+  // Department leads — live portal data (before meta "no org chart" legacy copy).
+  if (token && (isDepartmentLeadQuery(message) || isDepartmentLeadFollowUp(message))) {
+    const leads = await fetchDepartmentLeads(token);
+    if (isDepartmentLeadFollowUp(message) && !isDepartmentLeadQuery(message)) {
+      return {
+        message: polishStaffMessage(formatLeadsFollowUpAnswer(leads)),
+        chunks: [],
+        sources: [{ title: "Department leads (portal)", id: "department-leads" }],
+        knowledgeGap: false,
+        answerTrust: "approved",
+        ruleFinal: true,
+        routing: {
+          department: "HR",
+          task: "Department leads",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    if (isDepartmentLeadQuery(message)) {
+      const { message: leadMsg, departmentLabel } = formatDepartmentLeadAnswer(message, leads);
+      const dept: Department =
+        departmentLabel === "Clinical Operations"
+          ? "Clinical Operations"
+          : departmentLabel === "Accounts"
+            ? "Accounts"
+            : departmentLabel === "Technology"
+              ? "Technology"
+              : departmentLabel === "Marketing"
+                ? "Marketing"
+                : departmentLabel === "Compliance"
+                  ? "Compliance"
+                  : "HR";
+      return {
+        message: polishStaffMessage(leadMsg),
+        chunks: [],
+        sources: [{ title: "Department leads (portal)", id: "department-leads" }],
+        knowledgeGap: false,
+        answerTrust: "approved",
+        ruleFinal: true,
+        routing: {
+          department: dept,
+          task: "Department leads",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+  }
+
+  // Leads follow-up without token — still avoid soft-stop / inventing names.
+  if (!token && isDepartmentLeadFollowUp(message)) {
+    return {
+      message: polishStaffMessage(
+        "Yes — when you’re signed in I can read **department leads** from the portal and name whoever is assigned. Sign in and ask again (e.g. “who is the HR lead?”), or open **Team**. I won’t invent names.",
+      ),
+      chunks: [],
+      sources: [],
+      knowledgeGap: false,
+      ruleFinal: true,
+      routing: {
+        department: "HR",
+        task: "Department leads",
+        confidence: "medium",
+        followUpQuestions: [],
+      },
+    };
+  }
+
   const metaEarly = metaConversationReply(
     message,
     history,
@@ -199,13 +285,210 @@ export async function runSiyaAssistantAsync(
   );
   if (metaEarly) return metaEarly;
 
+  // Ambiguous "staff login dashboard" with no presence thread → ask which meaning (don't dump Workplace links).
+  if (
+    isAmbiguousStaffLoginDashboardQuery(message) &&
+    !historySuggestsPresenceTopic(history) &&
+    detectAdminOpsIntent(message, history)?.kind !== "team_pulse"
+  ) {
+    return {
+      message: polishStaffMessage(
+        [
+          "Do you mean **which tool to log into** (Workplace links on My day), or **who’s currently online / on shift** (Team pulse)?",
+          "",
+          "Say **tool links** or **who’s online** and I’ll route you.",
+        ].join("\n"),
+      ),
+      chunks: [],
+      sources: [],
+      portalLinks: [
+        { label: "Team", href: "/team" },
+        { label: "My day", href: "/" },
+      ],
+      knowledgeGap: false,
+      ruleFinal: true,
+      routing: {
+        department: founderCoach ? "Leadership" : "General",
+        task: "Clarify login vs presence",
+        confidence: "high",
+        followUpQuestions: ["Who’s online now?", "Show workplace login links"],
+      },
+    };
+  }
+
+  // Team pulse / presence BEFORE name lookup — "who is online" / "who is loggin in" must not become roster search.
+  const opsIntentEarly = token ? detectAdminOpsIntent(message, history) : null;
+  if (token && opsIntentEarly?.kind === "team_pulse") {
+    const snapshot = await fetchAdminOpsSnapshot(token);
+    if (snapshot) {
+      const ops = await runAdminOpsCoach(message, snapshot, token, history);
+      if (ops) {
+        return {
+          message: polishStaffMessage(ops.message),
+          chunks: [],
+          sources: [],
+          portalLinks: ops.links,
+          opsCoPilot: true,
+          ruleFinal: true,
+          pendingTask: founderCoach ? undefined : ops.pendingTask,
+          executiveMeta: {
+            confidence: "high",
+            freshnessSeconds: 0,
+            recommendedAction: "Open Team for live presence, or continue in Ask.",
+            evidenceCount: 1,
+          },
+          routing: {
+            department: "Leadership",
+            task: "Team presence",
+            confidence: "high",
+            followUpQuestions: [],
+          },
+        };
+      }
+    }
+    return {
+      message: polishStaffMessage(
+        "I don’t have the live **Team pulse** roster on this login (that’s an admin signal). Open **Team** to see who’s on shift — I won’t invent a list.",
+      ),
+      chunks: [],
+      sources: [],
+      portalLinks: [{ label: "Team", href: "/team" }],
+      opsCoPilot: false,
+      ruleFinal: true,
+      routing: {
+        department: "General",
+        task: "Team presence",
+        confidence: "high",
+        followUpQuestions: [],
+      },
+    };
+  }
+
+  // Session / roster identity — before soft-stop or Daily Plan.
+  if (isWhoAmIQuery(message) || extractWhoIsName(message)) {
+    const idAnswer = await answerWhoIsQuery(message, token);
+    if (idAnswer) {
+      return {
+        message: polishStaffMessage(idAnswer.message),
+        chunks: [],
+        sources: idAnswer.sources,
+        knowledgeGap: false,
+        answerTrust: "approved",
+        ruleFinal: true,
+        routing: {
+          department: founderCoach ? "Leadership" : "General",
+          task: "Staff identity",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+  }
+
+  // Missing / gap SOP inventory — live portal queue, not Memory chrome.
+  if (token && isMissingSopsQuery(message)) {
+    const missing = await answerMissingSopsAsk(token);
+    return {
+      message: polishStaffMessage(missing.message),
+      chunks: [],
+      sources: missing.sources,
+      portalLinks: missing.links,
+      knowledgeGap: false,
+      answerTrust: "approved",
+      ruleFinal: true,
+      routing: {
+        department: founderCoach ? "Leadership" : "Clinical Operations",
+        task: "Missing SOPs",
+        confidence: "high",
+        followUpQuestions: [],
+      },
+    };
+  }
+
+  // SOP assignment / who is reviewing — live portal data, not SOP body.
+  if (token && isSopAssignmentQuery(message, history)) {
+    const assign = await answerSopAssignmentAsk(message, history, token);
+    if (assign) {
+      return {
+        message: polishStaffMessage(assign.message),
+        chunks: [],
+        sources: assign.sources,
+        portalLinks: assign.links,
+        knowledgeGap: false,
+        answerTrust: "approved",
+        ruleFinal: true,
+        routing: {
+          department: "Clinical Operations",
+          task: "SOP assignment",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+  }
+
+  // My shifts / my schedule — shift_roster for signed-in user only (deterministic).
+  if (isMyScheduleQuery(message)) {
+    if (!token) {
+      return {
+        message: polishStaffMessage(
+          "Sign in to see **your** schedule from the imported MA roster. I read `shift_roster` for your account only — I won’t invent shifts or guess a team roster.",
+        ),
+        chunks: [],
+        sources: [],
+        knowledgeGap: false,
+        ruleFinal: true,
+        routing: {
+          department: "General",
+          task: "My shift schedule",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    const sched = await answerMyScheduleQuery(message, token);
+    if (sched) {
+      return {
+        message: polishStaffMessage(sched.message),
+        chunks: [],
+        sources: sched.sources,
+        portalLinks: [{ label: "My day", href: "/" }],
+        knowledgeGap: false,
+        answerTrust: "approved",
+        factsLookup: true,
+        ruleFinal: true,
+        routing: {
+          department: "General",
+          task: "My shift schedule",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    return {
+      message: polishStaffMessage(
+        "I couldn’t load your schedule from **shift_roster** just now. Refresh and try again, or check **Did today go as planned?** on **My day**.",
+      ),
+      chunks: [],
+      sources: [],
+      knowledgeGap: false,
+      ruleFinal: true,
+      routing: {
+        department: "General",
+        task: "My shift schedule",
+        confidence: "medium",
+        followUpQuestions: [],
+      },
+    };
+  }
+
   const toolEarly = toolShortcutReply(
     message,
     founderCoach ? "Founder Talk — tool bookmark" : "Tool bookmark",
   );
   if (toolEarly) return toolEarly;
 
-  const opsIntent = token ? detectAdminOpsIntent(message) : null;
+  const opsIntent = token ? detectAdminOpsIntent(message, history) : null;
   if (token && opsIntent) {
     const snapshot = await fetchAdminOpsSnapshot(token);
     if (snapshot) {
@@ -218,7 +501,11 @@ export async function runSiyaAssistantAsync(
           portalLinks: ops.links,
           opsCoPilot: true,
           // Presence / ops snapshot answers are definitive — never Founder Talk LLM enhancement.
-          ruleFinal: ops.intent === "team_pulse" || ops.intent === "overdue" || ops.intent === "task_status",
+          ruleFinal:
+            ops.intent === "team_pulse" ||
+            ops.intent === "ops_engagement" ||
+            ops.intent === "overdue" ||
+            ops.intent === "task_status",
           pendingTask: founderCoach ? undefined : ops.pendingTask,
           executiveMeta: {
             confidence: ops.mode === "recommend" ? "high" : "medium",
@@ -343,8 +630,15 @@ export async function runSiyaAssistantAsync(
     hasPortalSignals: Boolean(portalSignals),
   });
   // Definitive rule answers always stick — portalSignals must NEVER unlock LLM overwrite.
+  // Provisional authored stubs must not be LLM-rewritten (prevents wrong SOP citations).
   // Only intentional empty-message + portal (Founder Talk soft ground) may continue to LLM.
-  if (base.refused || base.factsLookup || base.knowledgeGap || base.ruleFinal) {
+  if (
+    base.refused ||
+    base.factsLookup ||
+    base.knowledgeGap ||
+    base.ruleFinal ||
+    base.answerTrust === "provisional"
+  ) {
     return base;
   }
   if (!base.chunks.length) {
@@ -711,7 +1005,9 @@ function buildSiyaReply(
     }
   }
 
-  const unknownPerson = answerUnknownPersonAsk(text);
+  // Also skip unknown-person soft path when identity handler already covers who-is.
+  const unknownPerson =
+    extractWhoIsName(text) || isWhoAmIQuery(text) ? null : answerUnknownPersonAsk(text);
   if (unknownPerson) {
     return {
       message: polishStaffMessage(unknownPerson),
@@ -750,6 +1046,34 @@ function buildSiyaReply(
   }
 
   if (isConfusedAboutPriorAnswer(text) && history.some((h) => h.role === "assistant")) {
+    if (historySuggestsPresenceTopic(history)) {
+      return {
+        message: polishStaffMessage(
+          [
+            "Sorry — I may have drifted from what you meant.",
+            "",
+            "If you meant **who’s online / on shift right now**, ask **who’s online now** (or open **Team**).",
+            "If you meant **tool login bookmarks**, say **workplace links**.",
+            "Otherwise say what you need in one short line.",
+          ].join("\n"),
+        ),
+        chunks: [],
+        knowledgeGap: false,
+        sources: [],
+        portalLinks: [
+          { label: "Team", href: "/team" },
+          { label: "My day", href: "/" },
+        ],
+        escalationPreview: undefined,
+        ruleFinal: true,
+        routing: {
+          department: "General",
+          task: "Clarify presence ask",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
     return {
       message: clarifyConfusedFollowUp(),
       chunks: [],
@@ -899,7 +1223,29 @@ function buildSiyaReply(
         }),
       };
     }
-    chunks = [liveHit, ...chunks.filter((c) => c.id !== liveHit.id)];
+    // Live safety SOP — cite only this record; do not LLM-rewrite or co-cite provisional stubs.
+    chunks = [liveHit];
+    const msg = composeAnswerFromChunks(normalized, chunks, false, routing.flowId);
+    return {
+      message: polishStaffMessage(appendDraftLiveHedge(msg, chunks)),
+      chunks,
+      escalate: liveHit.escalate ?? defaultEscalationOwner("Clinical Operations"),
+      knowledgeGap: false,
+      answerTrust: "approved",
+      ruleFinal: true,
+      sources: [
+        {
+          title: liveHit.sourceLabel || staffTopicLabel(liveHit.title),
+          id: liveHit.id,
+        },
+      ],
+      routing: {
+        department: "Clinical Operations",
+        task: routing.task,
+        confidence: "high",
+        followUpQuestions: [],
+      },
+    };
   }
 
   const STRONG_SCORE = 3;
@@ -987,9 +1333,21 @@ function buildSiyaReply(
   }
 
   const knowledgeGap = false;
+  const provisional = Boolean(chunks[0]?.provisional);
+  const provisionalId = provisional ? chunks[0]?.id : undefined;
+  const primaryIsLiveSop = Boolean(chunks[0]?.id?.startsWith("sop-db-"));
+  // Cite live Postgres SOPs alone — never co-cite provisional stubs (safety / label integrity).
+  // Provisional answers cite only authored provisional stubs.
+  const citeChunks = provisional
+    ? chunks.filter((c) => c.provisional || c.id === provisionalId).slice(0, 1)
+    : primaryIsLiveSop
+      ? chunks.filter((c) => c.id === chunks[0]!.id).slice(0, 1)
+      : chunks.filter((c) => !c.provisional).slice(0, 2);
 
-  const sources = chunks.slice(0, 2).map((c) => ({
-    title: staffTopicLabel(c.title),
+  const sources = citeChunks.map((c) => ({
+    title:
+      c.sourceLabel ||
+      (c.provisional ? provisionalSourceLabel(c.id) : staffTopicLabel(c.title)),
     id: c.id,
   }));
   const escalateOwner = chunks[0]?.escalate ?? defaultEscalationOwner(routing.department);
@@ -1018,6 +1376,7 @@ function buildSiyaReply(
   }
 
   const showFollowUps =
+    !provisional &&
     !focusMode &&
     routing.followUpQuestions.length > 0 &&
     (routing.confidence === "high" ||
@@ -1051,9 +1410,12 @@ function buildSiyaReply(
     : undefined;
 
   const showRouting =
+    provisional ||
     routing.confidence === "high" ||
     routing.confidence === "medium" ||
     (routing.task !== "Company memory lookup" && routing.department !== "General");
+
+  const provRoute = provisional ? provisionalRoutingMeta(provisionalId) : null;
 
   return {
     message: polishStaffMessage(msg),
@@ -1061,14 +1423,16 @@ function buildSiyaReply(
     escalate: escalateOwner,
     routing: showRouting
       ? {
-          department: routing.department,
-          task: routing.task,
-          confidence: routing.confidence,
+          department: provRoute ? provRoute.department : routing.department,
+          task: provRoute ? provRoute.task : routing.task,
+          confidence: provisional ? "high" : routing.confidence,
           followUpQuestions: showFollowUps ? routing.followUpQuestions : [],
         }
       : undefined,
-    sources: sources.map((s) => ({ ...s, title: staffTopicLabel(s.title) })),
+    sources,
     escalationPreview,
-    knowledgeGap,
+    knowledgeGap: false,
+    answerTrust: provisional ? "provisional" : "approved",
+    ruleFinal: provisional,
   };
 }

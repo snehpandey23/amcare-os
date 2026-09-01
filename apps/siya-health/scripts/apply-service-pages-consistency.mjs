@@ -36,13 +36,13 @@ function trustBlock({ photo, photoAlt, serviceLine, quote, cite, bullets }) {
             <img src="${photo}" width="1100" height="733" alt="${photoAlt}" loading="lazy" decoding="async" />
           </figure>
           <div class="trust-metrics-rewrite-inner">
-          <h2 class="trust-metrics-rewrite-headline">Trusted by <span class="trust-metric-value" data-target="2200" data-suffix="+">2,200+</span> adults for physician-led care</h2>
+          <h2 class="trust-metrics-rewrite-headline">Trusted by <span class="trust-metric-value" data-target="2700" data-suffix="+">2,700+</span> adults for physician-led care</h2>
           <p class="trust-metrics-rewrite-line">
             <span aria-hidden="true">⭐</span>
-            <span class="trust-metric-value" data-target="4.8" data-suffix="★">4.8★</span> average Google rating · <span class="trust-metric-value" data-target="600" data-suffix="+">600+</span> verified patient reviews
+            <span class="trust-metric-value" data-target="4.9" data-suffix="★">4.9★</span> average Google rating · <span class="trust-metric-value" data-target="600" data-suffix="+">600+</span> verified patient reviews
           </p>
           <p class="trust-metrics-rewrite-line trust-metrics-rewrite-line-strong">
-            <span class="trust-metric-value" data-target="2200" data-suffix="+">2,200+</span> patients treated
+            <span class="trust-metric-value" data-target="2700" data-suffix="+">2,700+</span> patients treated
           </p>
           <p class="trust-metrics-rewrite-meta">${serviceLine}</p>
           <blockquote class="hero-inline-testimonial trust-metrics-quote">

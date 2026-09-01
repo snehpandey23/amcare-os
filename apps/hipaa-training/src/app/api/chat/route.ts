@@ -257,6 +257,7 @@ export async function POST(req: Request) {
       sources: staffSafeSources(result.sources ?? []),
       escalationPreview: result.escalationPreview ?? null,
       knowledgeGap: result.knowledgeGap ?? false,
+      answerTrust: result.answerTrust ?? "approved",
       gapAuto,
       refused: result.refused ?? false,
       refusalCategory: result.refusalCategory ?? null,

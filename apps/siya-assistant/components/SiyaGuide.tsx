@@ -5,6 +5,63 @@ import { QUICK_ACTIONS } from '@/lib/link-registry'
 import { OPENING_MESSAGE } from '@/lib/templates'
 import type { GuideLink, GuideResponse } from '@/lib/types'
 
+function CallbackInlineForm({
+  disabled,
+  onSubmit,
+}: {
+  disabled: boolean
+  onSubmit: (form: { name: string; email: string; phone: string; message: string }) => void
+}) {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [message, setMessage] = useState('')
+
+  return (
+    <form
+      className="sg-callback-form"
+      onSubmit={(e) => {
+        e.preventDefault()
+        onSubmit({ name: name.trim(), email: email.trim(), phone: phone.trim(), message: message.trim() })
+      }}
+    >
+      <label>
+        Name
+        <input value={name} onChange={(e) => setName(e.target.value)} required maxLength={120} disabled={disabled} />
+      </label>
+      <label>
+        Email
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          maxLength={254}
+          disabled={disabled}
+        />
+      </label>
+      <label>
+        Phone <span className="sg-callback-optional">(optional)</span>
+        <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={40} disabled={disabled} />
+      </label>
+      <label>
+        How can we help?
+        <textarea
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          rows={2}
+          maxLength={500}
+          placeholder="General question — no clinical details, please."
+          disabled={disabled}
+        />
+      </label>
+      <button type="submit" disabled={disabled || !name.trim() || !email.trim()}>
+        Request callback
+      </button>
+    </form>
+  )
+}
+
 type ChatItem =
   | { id: string; role: 'user'; text: string }
   | {
@@ -14,6 +71,8 @@ type ChatItem =
       followUp?: string
       links?: GuideLink[]
       state?: string
+      showCallbackForm?: boolean
+      callbackSubmitted?: boolean
     }
 
 async function track(name: string, props: Record<string, string> = {}) {
@@ -89,10 +148,11 @@ export function SiyaGuide({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: trimmed }),
       })
-      const data = (await res.json()) as GuideResponse & { error?: string }
+      const data = (await res.json()) as GuideResponse & { error?: string; showCallbackForm?: boolean }
       if (!res.ok) {
         throw new Error(data.error || 'Request failed')
       }
+      if (data.showCallbackForm) void track('callback_form_shown')
       setItems((prev) => [
         ...prev,
         {
@@ -102,6 +162,7 @@ export function SiyaGuide({
           followUp: data.followUp,
           links: data.links,
           state: data.state,
+          showCallbackForm: data.showCallbackForm,
         },
       ])
     } catch (e) {
@@ -118,6 +179,47 @@ export function SiyaGuide({
       void track('booking_handoff', { linkId: link.id })
     else if (link.id === 'adhd_screening') void track('screening_link_clicked', { linkId: link.id })
     else void track('service_link_clicked', { linkId: link.id })
+  }
+
+  async function submitCallback(
+    itemId: string,
+    form: { name: string; email: string; phone: string; message: string },
+  ) {
+    setError(null)
+    setBusy(true)
+    try {
+      const res = await fetch('/api/callback-request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...form,
+          consent: true,
+          sourceUrl: typeof window !== 'undefined' ? window.parent?.location?.href || document.referrer || '' : '',
+        }),
+      })
+      const data = (await res.json()) as { error?: string; ok?: boolean }
+      if (!res.ok) throw new Error(data.error || 'Unable to submit request.')
+      void track('callback_form_submit')
+      setItems((prev) =>
+        prev.map((m) =>
+          m.id === itemId && m.role === 'assistant'
+            ? { ...m, showCallbackForm: false, callbackSubmitted: true }
+            : m,
+        ),
+      )
+      setItems((prev) => [
+        ...prev,
+        {
+          id: `a_cb_${Date.now()}`,
+          role: 'assistant',
+          text: 'Thanks — our team will follow up by email. For urgent needs, call (215) 445-1244.',
+        },
+      ])
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Something went wrong')
+    } finally {
+      setBusy(false)
+    }
   }
 
   const showQuick = items.length === 0
@@ -168,6 +270,12 @@ export function SiyaGuide({
                       )
                     })}
                   </div>
+                )}
+                {m.role === 'assistant' && m.showCallbackForm && !m.callbackSubmitted && (
+                  <CallbackInlineForm
+                    disabled={busy}
+                    onSubmit={(form) => void submitCallback(m.id, form)}
+                  />
                 )}
               </div>
             ))}

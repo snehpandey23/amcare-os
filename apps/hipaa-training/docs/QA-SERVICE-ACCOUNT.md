@@ -36,11 +36,15 @@ gh secret set STAFF_PORTAL_QA_PASSWORD --body "$ASSIST_PASSWORD"
 ```bash
 source scripts/agent-qa-env.sh
 npx tsx apps/hipaa-training/scripts/verify-qa-account.ts
+# Full E2E (practice weekly report + Ask + admin roster):
+npx tsx apps/hipaa-training/scripts/verify-qa-e2e-practice-ask.ts
 # or existing suite:
 npm run qa:portal -w @amcare/hipaa-training-api
 ```
 
-Scripts refuse emails that do not look like QA/test (`verify-qa-account.ts`).
+Scripts refuse emails that do not look like QA/test.
+
+**Secret status (2026-08-26):** Local `.env.agent-qa` + macOS keychain are set and used by agents. GitHub Actions `STAFF_PORTAL_QA_*` still needs a one-time human `gh auth login` + `gh secret set` (see above) before CI can authenticate without local env.
 
 ## Bootstrap history (2026-08-26)
 

@@ -1,16 +1,16 @@
 # Provider Expansion — Implementation Report
 
-Generated: 2026-07-26T11:41:12.075Z
+Generated: 2026-09-01T12:10:08.835Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| Sitemap URLs | 159 |
+| Sitemap URLs | 183 |
 | Contracted providers in data | 7 |
 | Live profile pages | 7 |
 | Hub URL | https://siya.health/providers |
-| Pages linking to /providers hub | 167 |
+| Pages linking to /providers hub | 194 |
 | Broken internal links (sample) | 20 |
 | JSON-LD issues on profiles | 0 |
 
@@ -30,25 +30,25 @@ Generated: 2026-07-26T11:41:12.075Z
 
 | Service | Path | Providers | Count |
 |---------|------|-----------|------:|
-| adhd-care | /adhd-care | Dr. Sneh Pandey, MD; Dr. Vanessa Urbina, MD; Dr. Natasha Desai, MD; Dr. Swati Pandey, MD; Megan Wunderlich, FNP-C | 5 |
-| telehealth | /telehealth | Dr. Sneh Pandey, MD; Dr. Natasha Desai, MD; Dr. Swati Pandey, MD; Dr. Vanessa Urbina, MD; Megan Wunderlich, FNP-C; Derek Timbs, FNP-BC | 6 |
+| adhd-care | /adhd-care | Dr. Sneh Pandey, MD; Dr. Vanessa Urbina, MD; Dr. Natasha Desai, MD; Dr. Swati Pandey, MD; Megan Wunderlich, FNP-C; Wendy Delgado, PA-C | 6 |
+| telehealth | /telehealth | Dr. Sneh Pandey, MD; Dr. Natasha Desai, MD; Dr. Swati Pandey, MD; Dr. Vanessa Urbina, MD; Megan Wunderlich, FNP-C; Derek Timbs, FNP-BC; Wendy Delgado, PA-C | 7 |
 | weight-loss-metabolic-health | /weight-loss-metabolic-health | Dr. Sneh Pandey, MD; Dr. Vanessa Urbina, MD; Derek Timbs, FNP-BC; Wendy Delgado, PA-C | 4 |
-| primary-urgent-care | /primary-urgent-care | Dr. Vanessa Urbina, MD; Dr. Natasha Desai, MD; Dr. Sneh Pandey, MD | 3 |
+| primary-urgent-care | /primary-urgent-care | Dr. Vanessa Urbina, MD; Dr. Natasha Desai, MD; Dr. Sneh Pandey, MD; Wendy Delgado, PA-C | 4 |
 | mens-health-longevity | /mens-health-longevity | Dr. Sneh Pandey, MD; Derek Timbs, FNP-BC | 2 |
-| womens-health | /womens-health | Dr. Swati Pandey, MD; Dr. Vanessa Urbina, MD; Dr. Natasha Desai, MD | 3 |
+| womens-health | /womens-health | Dr. Swati Pandey, MD; Dr. Vanessa Urbina, MD; Dr. Natasha Desai, MD; Wendy Delgado, PA-C | 4 |
 
 ## Internal link counts (pages referencing profile)
 
 | Target | Inbound pages |
 |--------|-------------:|
-| /providers hub | 167 |
-| /providers/dr-sneh-pandey | 25 |
-| /providers/dr-vanessa-urbina | 16 |
-| /providers/dr-natasha-desai | 16 |
-| /providers/dr-swati-pandey | 10 |
+| /providers hub | 194 |
+| /providers/dr-sneh-pandey | 26 |
+| /providers/dr-vanessa-urbina | 21 |
+| /providers/dr-natasha-desai | 20 |
+| /providers/dr-swati-pandey | 11 |
 | /providers/megan-wunderlich | 7 |
 | /providers/derek-timbs | 7 |
-| /providers/wendy-delgado | 5 |
+| /providers/wendy-delgado | 19 |
 
 ## Hub features
 
@@ -65,19 +65,19 @@ Generated: 2026-07-26T11:41:12.075Z
 - `about.html` → `/assets/favicon.ico`
 - `about.html` → `/styles.css`
 - `about.html` → `/styles.css`
-- `adhd-care.html` → `/assets/favicon-32x32.png`
-- `adhd-care.html` → `/assets/favicon-16x16.png`
-- `adhd-care.html` → `/assets/apple-touch-icon.png`
-- `adhd-care.html` → `/assets/favicon.ico`
-- `adhd-care.html` → `/assets/favicon.ico`
-- `adhd-care.html` → `/styles.css`
-- `adhd-care.html` → `/styles.css`
-- `adhd-diagnosis-florida.html` → `/assets/favicon-32x32.png`
-- `adhd-diagnosis-florida.html` → `/assets/favicon-16x16.png`
-- `adhd-diagnosis-florida.html` → `/assets/apple-touch-icon.png`
-- `adhd-diagnosis-florida.html` → `/assets/favicon.ico`
-- `adhd-diagnosis-florida.html` → `/assets/favicon.ico`
-- `adhd-diagnosis-florida.html` → `/styles.css`
+- `adhd-care/miami.html` → `/assets/favicon-32x32.png`
+- `adhd-care/miami.html` → `/assets/favicon-16x16.png`
+- `adhd-care/miami.html` → `/assets/apple-touch-icon.png`
+- `adhd-care/miami.html` → `/assets/favicon.ico`
+- `adhd-care/miami.html` → `/styles.css`
+- `adhd-care/orlando.html` → `/assets/favicon-32x32.png`
+- `adhd-care/orlando.html` → `/assets/favicon-16x16.png`
+- `adhd-care/orlando.html` → `/assets/apple-touch-icon.png`
+- `adhd-care/orlando.html` → `/assets/favicon.ico`
+- `adhd-care/orlando.html` → `/styles.css`
+- `adhd-care/san-diego.html` → `/assets/favicon-32x32.png`
+- `adhd-care/san-diego.html` → `/assets/favicon-16x16.png`
+- `adhd-care/san-diego.html` → `/assets/apple-touch-icon.png`
 
 ## Operational note
 

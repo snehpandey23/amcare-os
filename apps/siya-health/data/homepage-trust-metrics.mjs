@@ -5,20 +5,20 @@
  */
 export const HOMEPAGE_TRUST_METRICS = {
   patientsTreated: {
-    value: '2,200+',
+    value: '2,700+',
     label: 'Patients treated',
   },
-  adhdEvaluations: {
-    value: '1,000+',
-    label: 'ADHD evaluations & screenings',
+  neurocognitiveEvaluations: {
+    value: '1,200+',
+    label: 'Neurocognitive evaluations',
   },
   googleRating: {
-    value: '4.8',
+    value: '4.9',
     label: 'Average Google rating',
     suffix: '★',
   },
   googleReviews: {
-    value: '44',
+    value: '100+',
     label: 'Google reviews',
   },
   verifiedReviews: {
@@ -27,12 +27,15 @@ export const HOMEPAGE_TRUST_METRICS = {
   },
 };
 
+/** @deprecated Use neurocognitiveEvaluations */
+export const adhdEvaluations = HOMEPAGE_TRUST_METRICS.neurocognitiveEvaluations;
+
 /** Compact ordered list for homepage trust summary UI */
 export const HOMEPAGE_TRUST_SUMMARY = [
   HOMEPAGE_TRUST_METRICS.googleRating,
   HOMEPAGE_TRUST_METRICS.googleReviews,
   HOMEPAGE_TRUST_METRICS.patientsTreated,
-  HOMEPAGE_TRUST_METRICS.adhdEvaluations,
+  HOMEPAGE_TRUST_METRICS.neurocognitiveEvaluations,
   HOMEPAGE_TRUST_METRICS.verifiedReviews,
 ];
 

@@ -1,15 +1,15 @@
 # SEO Deployment QA Report
 
-Generated: 2026-07-26T11:41:11.785Z
+Generated: 2026-09-01T12:10:08.455Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| HTML pages scanned | 195 |
-| Sitemap URLs | 159 |
+| HTML pages scanned | 223 |
+| Sitemap URLs | 183 |
 | Pages with Meet & Greet in nav | 0 |
-| Non-ADHD pages still referencing adhd-screening | 66 |
+| Non-ADHD pages still referencing adhd-screening | 85 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
 
@@ -39,10 +39,17 @@ Generated: 2026-07-26T11:41:11.785Z
 - **Default secondary CTA:** Explore Care Options → `#services` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, `adhd-screening.html`
 
-### Non-ADHD pages still containing `adhd-screening` (66)
+### Non-ADHD pages still containing `adhd-screening` (85)
 
 - `about.html`
+- `blog/brain-fog-after-covid.html`
+- `blog/brain-fog-and-anxiety.html`
+- `blog/brain-fog-and-sleep.html`
+- `blog/brain-fog-at-work.html`
+- `blog/chronic-fatigue-vs-everyday-tiredness.html`
 - `blog/compounded-vs-branded-glp1-medications.html`
+- `blog/fatigue-after-illness.html`
+- `blog/fatigue-despite-normal-labs.html`
 - `blog/food-noise-and-glp-1-what-it-means-and-what-helps.html`
 - `blog/free-testosterone-vs-total-testosterone-what-patients-should-know.html`
 - `blog/glp1-side-effects-and-how-to-manage-them.html`
@@ -51,9 +58,11 @@ Generated: 2026-07-26T11:41:11.785Z
 - `blog/index.html`
 - `blog/insomnia-treatment-options-beyond-medication.html`
 - `blog/insulin-resistance-and-weight-loss-clinician-overview.html`
+- `blog/iron-deficiency-and-fatigue.html`
 - `blog/medical-weight-loss-glp1-semaglutide-texas.html`
 - `blog/medical-weight-loss-vs-dieting-what-actually-works.html`
 - `blog/minoxidil-for-hair-loss-does-it-work.html`
+- `blog/morning-fatigue.html`
 - `blog/oral-vs-injectable-weight-loss-medications.html`
 - `blog/oral-vs-topical-minoxidil-which-is-right.html`
 - `blog/perimenopause-brain-fog.html`
@@ -63,23 +72,31 @@ Generated: 2026-07-26T11:41:11.785Z
 - `blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign.html`
 - `blog/telehealth-prescriptions-how-online-treatment-works.html`
 - `blog/telehealth.html`
+- `blog/thyroid-and-fatigue.html`
 - `blog/tirzepatide-vs-semaglutide-which-is-better.html`
 - `blog/vyvanse-vs-adderall-differences.html`
 - `blog/weight-loss.html`
 - `blog/when-is-testosterone-therapy-appropriate.html`
 - `book-appointment.html`
+- `brain-fog.html`
+- `employers.html`
 - `fatigue.html`
 - `index.html`
 - `intake/index.html`
+- `join-our-team.html`
 - `labs/a1c-blood-sugar.html`
 - `labs/adhd-support.html`
+- `labs/cbc.html`
+- `labs/cmp.html`
 - `labs/fatigue-brain-fog.html`
 - `labs/how-to-read-results.html`
 - `labs/iron-ferritin.html`
+- `labs/lipid-panel.html`
 - `labs/mens-health.html`
 - `labs/preventive.html`
 - `labs/thyroid.html`
 - `labs/vitamin-b12.html`
+- `labs/vitamin-d.html`
 - `labs/womens-midlife.html`
 - `labs.html`
 - `legal/controlled-substance-treatment-agreement/index.html`
@@ -90,7 +107,9 @@ Generated: 2026-07-26T11:41:11.785Z
 - `legal/terms-of-use/index.html`
 - `mens-health-longevity.html`
 - `prescriptions.html`
+- `preventive-care.html`
 - `pricing.html`
+- `primary-care.html`
 - `primary-urgent-care.html`
 - `privacy-policy.html`
 - `providers/derek-timbs.html`
@@ -108,19 +127,23 @@ Generated: 2026-07-26T11:41:11.785Z
 - `womens-health.html`
 - `womens-midlife-health.html`
 
-### All pages with any `adhd-screening` reference (168)
+### All pages with any `adhd-screening` reference (194)
 
 - `about.html`
+- `adhd-care/miami.html`
+- `adhd-care/orlando.html`
+- `adhd-care/san-diego.html`
 - `adhd-care.html`
 - `adhd-diagnosis-florida.html`
 - `adhd-diagnosis-texas.html`
+- `adhd-evaluation-california.html`
 - `adhd-evaluation-cost.html`
+- `adhd-evaluation-texas.html`
 - `adhd-screening-results.html`
 - `adhd-screening.html`
 - `adhd-treatment-online.html`
 - `adult-adhd-california.html`
 - `adult-adhd-diagnosis.html`
-- `adult-adhd-screening-california.html`
 - `answers/adderall-vs-vyvanse-adults.html`
 - `answers/adhd-and-weight-loss-connection.html`
 - `answers/adhd-in-women.html`
@@ -128,6 +151,7 @@ Generated: 2026-07-26T11:41:11.785Z
 - `answers/adhd-medication-side-effects.html`
 - `answers/adhd-vs-anxiety.html`
 - `answers/adhd-vs-burnout.html`
+- `answers/adhd-workplace-accommodations.html`
 - `answers/afternoon-energy-crash-after-lunch.html`
 - `answers/asrs-adhd-screening-explained.html`
 - `answers/brain-fog-after-eating.html`
@@ -145,13 +169,8 @@ Generated: 2026-07-26T11:41:11.785Z
 - `answers/high-functioning-adhd.html`
 - `answers/high-shbg-low-free-testosterone.html`
 - `answers/how-long-adhd-evaluation.html`
-- `answers/how-much-does-adhd-testing-cost.html`
-- `answers/how-online-prescriptions-work.html`
-- `answers/index.html`
-- `answers/insulin-resistance-without-diabetes.html`
-- `answers/is-adhd-medication-safe-long-term.html`
 
-_…and 128 more (expected on ADHD funnels)._
+_…and 154 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 
@@ -178,6 +197,9 @@ _None detected in static HTML scan._
 
 ## Orphan pages (low inbound links, sample)
 
+- `adhd-care/miami.html`
+- `adhd-care/orlando.html`
+- `adhd-care/san-diego.html`
 - `adhd-diagnosis-austin.html`
 - `adhd-diagnosis-florida.html`
 - `adhd-diagnosis-houston.html`
@@ -186,6 +208,9 @@ _None detected in static HTML scan._
 - `adhd-evaluation-cost.html`
 - `adhd-treatment-online.html`
 - `adult-adhd-diagnosis.html`
+- `adult-adhd-screening-california.html`
+- `adult-adhd-screening-texas.html`
+- `answers/adhd-workplace-accommodations.html`
 - `answers/weight-gain-after-stopping-ozempic.html`
 - `blog/adhd-evaluation-cost-california.html`
 - `blog/adhd-treatment-austin-tx.html`
@@ -202,12 +227,6 @@ _None detected in static HTML scan._
 - `blog/adhd-treatment-san-antonio-tx.html`
 - `blog/adhd-treatment-san-diego-ca.html`
 - `blog/adhd-treatment-san-francisco-ca.html`
-- `blog/adhd-treatment-san-jose-ca.html`
-- `blog/adult-adhd-treatment-california-2026.html`
-- `blog/phentermine-for-weight-loss-safety-and-effectiveness.html`
-- `blog/pots-and-adhd.html`
-- `blog/why-am-i-always-tired-causes-when-to-see-doctor.html`
-- `docs/tint-options-preview.html`
 
 ## Recommendations
 

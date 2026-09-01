@@ -15,7 +15,7 @@
       },
       "role": {
         "profileHero": "Medical Director",
-        "homepage": "Medical Director \u00b7 Internal Medicine Physician",
+        "homepage": "Co-founder \u00b7 Medical Director",
         "hub": "Medical Director \u00b7 Internal Medicine Physician",
         "schemaJobTitle": "Medical Director"
       },
@@ -57,25 +57,23 @@
       "states": {
         "licensed": [
           "California",
-          "Texas",
           "Pennsylvania",
           "Florida"
         ],
         "service": [
           "California",
-          "Texas",
           "Pennsylvania",
           "Florida"
         ],
         "licenseOnly": [],
         "display": {
-          "hub": "Licensed in: California \u00b7 Texas \u00b7 Pennsylvania \u00b7 Florida",
-          "homepageCards": "CA, TX, PA, FL",
-          "profileTrust": "Telehealth appointments where eligible: California, Texas, Pennsylvania, and Florida\u2014confirm at scheduling."
+          "hub": "Licensed in: California \u00b7 Pennsylvania \u00b7 Florida",
+          "homepageCards": "CA, PA, FL",
+          "profileTrust": "Telehealth appointments where eligible: California, Pennsylvania, and Florida\u2014confirm at scheduling."
         }
       },
       "positioning": {
-        "homepageBio": "Focus on metabolic health, weight management, ADHD, and whole-person wellness for adults in CA, TX, PA, and FL.",
+        "homepageBio": "Focus on metabolic health, weight management, ADHD, and whole-person wellness for adults in CA, PA, and FL.",
         "hubBio": "Dr. Pandey focuses on structured evaluations, personalized care plans, and helping patients understand how focus, weight, energy, and long-term health connect.",
         "defaultTagline": "Adult ADHD & metabolic care",
         "serviceTaglines": {
@@ -88,7 +86,7 @@
       },
       "seo": {
         "title": "Dr. Sneh Pandey, MD | Adult ADHD & Metabolic Care | Siya Health",
-        "description": "Meet Dr. Sneh Pandey\u2014Medical Director at Siya Health. Board-certified Internal Medicine, Obesity Medicine, ADHD-CCSP. Structured adult ADHD evaluations and weight-inclusive telehealth in CA, TX, PA & FL.",
+        "description": "Meet Dr. Sneh Pandey\u2014Medical Director at Siya Health. Board-certified Internal Medicine, Obesity Medicine, ADHD-CCSP. Structured adult ADHD evaluations and weight-inclusive telehealth in CA, PA & FL.",
         "focusLead": "ADHD-first positioning\u2014with room for metabolic and weight overlap."
       },
       "schema": {
@@ -308,7 +306,7 @@
       },
       "role": {
         "profileHero": "Internal Medicine Physician",
-        "homepage": "Internal Medicine Physician",
+        "homepage": "Co-founder \u00b7 Clinical Advisor",
         "hub": "Internal Medicine Physician",
         "schemaJobTitle": "Internal Medicine Physician"
       },

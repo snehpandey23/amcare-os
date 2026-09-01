@@ -15,3 +15,27 @@ coverage/
 .vscode/
 .idea/
 apps/siya-health/public/
+.local-backups/
+
+# Local secrets / env dumps — never commit
+.env.staff-cron.tmp
+.env*.tmp
+
+# Local Vercel link metadata
+.vercel/
+**/.vercel/
+
+# Agent / browser verify artifacts
+.cursor-verify/
+**/.cursor-verify/
+
+# Large local document dumps (not part of deployable apps)
+Medical Guidelines/
+
+# Binary originals / scratch
+*.original-2mb
+*.original-*
+
+# Brand fuse operational logs (regenerated locally)
+apps/siya-health/brand/04-Content-Tracker/fuse-logs/
+tmp/

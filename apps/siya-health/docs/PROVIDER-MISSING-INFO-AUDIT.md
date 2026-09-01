@@ -1,13 +1,13 @@
 # Provider Missing Information Audit
 
-Generated: 2026-07-26
+Generated: 2026-09-01
 
 Fields with null, empty arrays, or pending verification in `data/providers.mjs`.
 
 ## Dr. Sneh Pandey, MD
 
 | Field | license type per state |
-| Current value | [object Object]; [object Object]; [object Object]; [object Object] |
+| Current value | [object Object]; [object Object]; [object Object] |
 | Status | Missing |
 | Priority | Required before adding provider #4 |
 | Question | Please provide license type per state for Dr. Sneh Pandey, MD. |
@@ -159,7 +159,7 @@ Fields with null, empty arrays, or pending verification in `data/providers.mjs`.
 ## Dr. Natasha Desai, MD
 
 | Field | license type per state |
-| Current value | [object Object]; [object Object] |
+| Current value | [object Object]; [object Object]; [object Object] |
 | Status | Missing |
 | Priority | Required before adding provider #4 |
 | Question | Please provide license type per state for Dr. Natasha Desai, MD. |
@@ -177,9 +177,9 @@ Fields with null, empty arrays, or pending verification in `data/providers.mjs`.
 | Question | Please provide accepting patients per state for Dr. Natasha Desai, MD. |
 
 | Field | medical school |
-| Current value | — |
+| Current value | [object Object] |
 | Status | Missing |
-| Priority | Required before publishing |
+| Priority | Required before adding provider #4 |
 | Question | Please provide medical school for Dr. Natasha Desai, MD. |
 
 | Field | residency |
@@ -219,7 +219,7 @@ Fields with null, empty arrays, or pending verification in `data/providers.mjs`.
 | Question | Please provide authoredContent for Dr. Natasha Desai, MD. |
 
 | Field | NPI |
-| Current value | — |
+| Current value | 1861074247 |
 | Status | Missing |
 | Priority | Nice to have |
 | Question | Please provide NPI for Dr. Natasha Desai, MD. |
@@ -445,15 +445,15 @@ Fields with null, empty arrays, or pending verification in `data/providers.mjs`.
 ## Wendy Delgado, PA-C
 
 | Field | license type per state |
-| Current value | [object Object] |
+| Current value | [object Object]; [object Object]; [object Object]; [object Object] |
 | Status | Missing |
 | Priority | Required before adding provider #4 |
 | Question | Please provide license type per state for Wendy Delgado, PA-C. |
 
 | Field | license verification source |
-| Current value | Siya Health Credentialing |
+| Current value | — |
 | Status | Missing |
-| Priority | Required before adding provider #4 |
+| Priority | Required before publishing |
 | Question | Please provide license verification source for Wendy Delgado, PA-C. |
 
 | Field | accepting patients per state |

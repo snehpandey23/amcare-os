@@ -1,7 +1,7 @@
 {
   "@context": "https://schema.org",
   "@type": "KnowledgeGraph",
-  "version": "2026-07-27",
+  "version": "2026-09-01",
   "organization": {
     "@id": "https://siya.health/#organization",
     "@type": "MedicalOrganization",
@@ -104,13 +104,11 @@
       ],
       "statesLicensed": [
         "California",
-        "Texas",
         "Pennsylvania",
         "Florida"
       ],
       "serviceStates": [
         "California",
-        "Texas",
         "Pennsylvania",
         "Florida"
       ],
@@ -280,16 +278,18 @@
         "Behavioral health"
       ],
       "hasCredential": [
-        "Family & Behavioral Medicine",
+        "American Board of Family Medicine",
         "ADHD-CCSP"
       ],
       "statesLicensed": [
         "Texas",
-        "Florida"
+        "Florida",
+        "Pennsylvania"
       ],
       "serviceStates": [
         "Texas",
-        "Florida"
+        "Florida",
+        "Pennsylvania"
       ],
       "conditionsTreated": [
         "Adult ADHD",
@@ -298,6 +298,7 @@
         "ADHD with anxiety overlap",
         "Behavioral health"
       ],
+      "npi": "1861074247",
       "image": "https://siya.health/assets/images/dr-natasha-desai.png",
       "photoStatus": "approved",
       "expertiseTopics": [
@@ -615,17 +616,25 @@
         "@id": "https://siya.health/#organization"
       },
       "medicalSpecialty": [
+        "Family Medicine",
         "Obesity Medicine",
-        "Family Medicine"
+        "Adult ADHD",
+        "Women's Health"
       ],
       "hasCredential": [
         "NCCPA Certified PA"
       ],
       "statesLicensed": [
-        "California"
+        "California",
+        "Texas",
+        "Pennsylvania",
+        "Florida"
       ],
       "serviceStates": [
-        "California"
+        "California",
+        "Texas",
+        "Pennsylvania",
+        "Florida"
       ],
       "conditionsTreated": [
         "Medical weight loss",

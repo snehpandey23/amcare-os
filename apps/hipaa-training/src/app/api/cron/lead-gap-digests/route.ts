@@ -56,9 +56,28 @@ export async function POST(req: Request) {
   }
 
   const digests = listData.digests ?? [];
-  const results: { email: string; sent: boolean; error?: string; gapCount: number }[] = [];
+  const dryRun = url.searchParams.get("dryRun") === "1";
+  const results: {
+    email: string;
+    sent: boolean;
+    error?: string;
+    gapCount: number;
+    resendId?: string;
+    departments?: string[];
+    gapTasks?: string[];
+  }[] = [];
 
   for (const d of digests) {
+    if (dryRun) {
+      results.push({
+        email: d.email,
+        sent: false,
+        gapCount: d.gaps.length,
+        departments: d.departments,
+        gapTasks: d.gaps.map((g) => `${g.department}: ${g.taskLabel}`),
+      });
+      continue;
+    }
     const send = await sendLeadGapDigestEmail({
       to: d.email,
       name: d.name,
@@ -86,17 +105,21 @@ export async function POST(req: Request) {
       sent: send.sent,
       error: send.error,
       gapCount: d.gaps.length,
+      resendId: send.id,
+      departments: d.departments,
+      gapTasks: d.gaps.map((g) => `${g.department}: ${g.taskLabel}`),
     });
   }
 
   return Response.json({
     ok: true,
+    dryRun,
     weekStart: listData.weekStart,
     digestCount: digests.length,
     results,
     honestyNote:
       listData.honestyNote ||
-      "Open Notify owner gaps only (category + task label). Not every unanswered Ask turn.",
+      "Open gaps with signal no_match or notify_owner (category + task). Not every unanswered Ask turn. First run for a week includes the full open backlog for that lead.",
     sampleText:
       digests[0] != null
         ? (

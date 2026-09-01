@@ -37,11 +37,14 @@ import {
 } from '../data/providers.mjs';
 import { SPRUCE_CHAT_URL, MEET_GREET_BOOKING_URL, ADHD_EVALUATION_199_LINK, REDIRECT_CHAT_URL, REDIRECT_MEET_GREET_URL, REDIRECT_ADHD_WALKTHROUGH_URL, REDIRECT_ADHD_EVALUATION_URL, ZOCDOC_BOOKING_URL } from '../data/providers-core.mjs';
 import { applyPricingTokens, initialEvaluationPriceDisplay } from '../data/pricing-display.mjs';
-import { TRACKING } from '../data/tracking-config.mjs';
+import { TRACKING, GTM_PRODUCTION_HOST_GUARD } from '../data/tracking-config.mjs';
+import { HOMEPAGE_TRUST_METRICS } from '../data/homepage-trust-metrics.mjs';
+import { ABOUT_COMPANY_COPY, ABOUT_COMPANY_STATS } from '../data/about-company-config.mjs';
 import { getServiceTagline } from '../data/provider-canonical.mjs';
 import {
   SIYA_CIRCLE_GHL_FORM_URL,
   SIYA_CIRCLE_JOIN_TRACK,
+  SIYA_CIRCLE_SIGNUP_URL,
 } from '../data/siya-circle-config.mjs';
 import {
   renderNavCtaMarkup,
@@ -82,6 +85,7 @@ const SITE_ROOT = path.join(__dirname, '..');
 export const NAV_HEALTH_GUIDES = { path: '/answers', label: 'Health Guides', shortLabel: 'Health guides' };
 export const NAV_PROVIDERS = { path: '/providers', label: 'Care Team', shortLabel: 'Care Team' };
 export const NAV_MENS_HEALTH = { path: '/mens-health-longevity', label: "Men's Health", shortLabel: "Men's Health" };
+export const NAV_EMPLOYERS = { path: '/employers', label: 'For Employers', shortLabel: 'Employers' };
 /** Circular brand mark (icon only). Wordmark is rendered in HTML via renderBrandLockup(). */
 export const BRAND_MARK_ICON = '/assets/images/siya-health-mark.png';
 /** @deprecated Use BRAND_MARK_ICON + renderBrandLockup(); kept for legacy src swaps. */
@@ -702,6 +706,27 @@ export function injectLabsNav(html) {
   return html;
 }
 
+function injectEmployersInNavBlock(navHtml) {
+  const link = `<a href="${NAV_EMPLOYERS.path}">${NAV_EMPLOYERS.label}</a>`;
+  if (navHtml.includes(`href="${NAV_EMPLOYERS.path}"`)) return navHtml;
+  if (navHtml.includes('href="/blog">Blog</a>')) {
+    return navHtml.replace(/(<a href="\/blog">Blog<\/a>)/, `${link}\n          $1`);
+  }
+  if (navHtml.includes(`href="${NAV_LABS.path}"`)) {
+    return navHtml.replace(
+      new RegExp(`(<a href="${NAV_LABS.path}">[^<]*</a>)`),
+      `$1\n          ${link}`,
+    );
+  }
+  return navHtml;
+}
+
+export function injectEmployersNav(html) {
+  html = html.replace(/<nav class="nav-center"[\s\S]*?<\/nav>/gi, (nav) => injectEmployersInNavBlock(nav));
+  html = html.replace(/<div class="nav-mobile">[\s\S]*?<\/div>/gi, (nav) => injectEmployersInNavBlock(nav));
+  return html;
+}
+
 function escHtml(s) {
   return String(s)
     .replace(/&/g, '&amp;')
@@ -726,6 +751,43 @@ function injectLandingTrust(html, relPath) {
         </div>
       </section>`;
   return html.replace(/<section class="lp-trust-row"[\s\S]*?<\/section>/, block);
+}
+
+/** Sync legacy hardcoded trust figures from homepage-trust-metrics.mjs (Phase 1 numbers reconcile). */
+export function injectSitewideTrustMetrics(html) {
+  const M = HOMEPAGE_TRUST_METRICS;
+  const patients = M.patientsTreated.value;
+  const patientsTarget = patients.replace(/[^\d]/g, '');
+  const ratingDisplay = `${M.googleRating.value}${M.googleRating.suffix}`;
+  const neuro = M.neurocognitiveEvaluations.value;
+  const neuroTarget = neuro.replace(/[^\d]/g, '');
+  const neuroLabel = M.neurocognitiveEvaluations.label;
+  const googleReviews = M.googleReviews.value;
+
+  html = html.replace(/data-target="2200"/g, `data-target="${patientsTarget}"`);
+  html = html.replace(/2,200\+/g, patients);
+  html = html.replace(/data-target="4\.8"(?= data-suffix="★")/g, `data-target="${M.googleRating.value}"`);
+  html = html.replace(/4\.8★/g, ratingDisplay);
+  html = html.replace(
+    /<span class="trust-metric-value" data-target="1000" data-suffix="\+">1,000\+<\/span> ADHD evaluations &amp; screenings/g,
+    `<span class="trust-metric-value" data-target="${neuroTarget}" data-suffix="+">${neuro}</span> ${neuroLabel}`,
+  );
+  html = html.replace(/data-target="1000"(?= data-suffix="\+")/g, `data-target="${neuroTarget}"`);
+  html = html.replace(/1,000\+/g, neuro);
+  html = html.replace(
+    /<span class="homepage-trust-stat-value">1,000\+<\/span>\s*<span class="homepage-trust-stat-label">ADHD evaluations &amp; screenings<\/span>/g,
+    `<span class="homepage-trust-stat-value">${neuro}</span> <span class="homepage-trust-stat-label">${neuroLabel}</span>`,
+  );
+  html = html.replace(
+    /<span class="homepage-trust-stat-value">1,200\+<\/span>\s*<span class="homepage-trust-stat-label">ADHD evaluations &amp; screenings<\/span>/g,
+    `<span class="homepage-trust-stat-value">${neuro}</span> <span class="homepage-trust-stat-label">${neuroLabel}</span>`,
+  );
+  html = html.replace(
+    /<span class="homepage-trust-stat-value">44<\/span>\s*<span class="homepage-trust-stat-label">Google reviews<\/span>/g,
+    `<span class="homepage-trust-stat-value">${googleReviews}</span> <span class="homepage-trust-stat-label">Google reviews</span>`,
+  );
+
+  return html;
 }
 
 /** Sync hero trust bar from trust-system (homepage + cornerstone service pages) */
@@ -1128,10 +1190,13 @@ const FOOTER_COMPANY_LINKS = [
     track: 'zocdoc_booking_click',
   },
   {
-    href: SIYA_CIRCLE_GHL_FORM_URL,
+    href: SIYA_CIRCLE_SIGNUP_URL,
     label: 'Siya Circle',
-    external: true,
     track: SIYA_CIRCLE_JOIN_TRACK,
+  },
+  {
+    href: NAV_EMPLOYERS.path,
+    label: NAV_EMPLOYERS.label,
   },
 ];
 
@@ -1244,7 +1309,7 @@ export function injectCookieConsentBootstrap(html) {
 const GTM_ID = TRACKING.GTM_CONTAINER_ID;
 
 const GTM_HEAD_SNIPPET = `<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+<script>(function(w,d,s,l,i){${GTM_PRODUCTION_HOST_GUARD}w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -1467,8 +1532,24 @@ export function injectLearnMoreSections(html, relPath) {
   return html;
 }
 
+const HOMEPAGE_FOUNDER_SLUGS = ['dr-sneh-pandey', 'dr-swati-pandey'];
+
+function renderHomepageCareCompactCard(provider) {
+  const role = provider.homepageRole || provider.role || '';
+  return `<article class="homepage-care-compact-card">
+              ${renderCareTeamPhoto(provider, 72, 72)}
+              <div>
+                <h3><a href="/providers/${provider.slug}">${provider.name}</a></h3>
+                <p>${role}</p>
+              </div>
+            </article>`;
+}
+
 function buildHomepageCareTeam() {
-  const director = getAllProviders().find((p) => p.slug === 'dr-sneh-pandey') || getAllProviders()[0];
+  const founders = HOMEPAGE_FOUNDER_SLUGS.map((slug) => getAllProviders().find((p) => p.slug === slug)).filter(
+    Boolean,
+  );
+  const founderCards = founders.map((p) => renderHomepageCareCompactCard(p)).join('\n            ');
   return `<!-- SIYA:CARE-TEAM -->
       <section class="section" id="care-team" aria-labelledby="care-team-heading">
         <div class="container">
@@ -1477,14 +1558,10 @@ function buildHomepageCareTeam() {
             <p class="lead">Physician-led telehealth with a full multidisciplinary team behind your care.</p>
           </div>
           <div class="homepage-care-compact">
-            <article class="homepage-care-compact-card">
-              ${renderCareTeamPhoto(director, 72, 72)}
-              <div>
-                <h3><a href="/providers/${director.slug}">${director.name}</a></h3>
-                <p>${director.role || 'Medical Director'}</p>
-              </div>
-            </article>
-            <a class="button secondary" href="/providers">Meet the full care team</a>
+            <div class="homepage-care-compact-founders">
+            ${founderCards}
+            </div>
+            <a class="button secondary" href="/providers">Meet the full care team (7 clinicians)</a>
           </div>
         </div>
       </section>
@@ -1600,6 +1677,54 @@ export function injectAboutProviderHub(html, relPath) {
   if (html.includes('View full care team')) return html;
   if (html.includes('about-team-grid')) {
     html = html.replace(/(<div class="about-team-grid">[\s\S]*?<\/div>)/, `$1\n          ${hubLink}`);
+  }
+  return html;
+}
+
+function buildAboutCompanySection() {
+  const copy = ABOUT_COMPANY_COPY;
+  const stats = ABOUT_COMPANY_STATS.map(
+    (s) => `            <article class="about-company-stat">
+              <p class="about-company-stat-value">${s.value}</p>
+              <p class="about-company-stat-label">${s.label}</p>
+            </article>`,
+  ).join('\n');
+  const paragraphs = copy.paragraphs.map((p) => `            <p>${p}</p>`).join('\n');
+  return `<!-- SIYA:ABOUT-COMPANY -->
+      <section class="section section-tinted" id="about-company" aria-labelledby="about-company-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="about-company-heading">${copy.heading}</h2>
+            <p class="lead">${copy.lead}</p>
+          </div>
+          <div class="about-company-layout">
+            <div class="about-company-copy">
+${paragraphs}
+            </div>
+            <div class="about-company-stats" aria-label="Siya Health at a glance">
+${stats}
+            </div>
+          </div>
+          <p class="blog-hub-see-all about-company-employer">
+            ${copy.employerCta.text}
+            <a href="${copy.employerCta.href}">${copy.employerCta.label}</a>
+          </p>
+        </div>
+      </section>
+      <!-- /SIYA:ABOUT-COMPANY -->`;
+}
+
+export function injectAboutCompany(html, relPath) {
+  if (relPath !== 'about.html') return html;
+  const block = buildAboutCompanySection();
+  if (html.includes('SIYA:ABOUT-COMPANY')) {
+    return html.replace(/<!-- SIYA:ABOUT-COMPANY -->[\s\S]*?<!-- \/SIYA:ABOUT-COMPANY -->/, block);
+  }
+  if (html.includes('id="medical-director"')) {
+    return html.replace(
+      /(\s*<!-- 3\. MEDICAL DIRECTOR -->)/,
+      `\n\n      ${block}\n$1`,
+    );
   }
   return html;
 }
@@ -1963,8 +2088,9 @@ export function isAdsLandingPage(relPath, html = '') {
   return /\bclass="[^"]*siya-landing-page/.test(html) || /data-siya-landing=/.test(html);
 }
 
-/** Route legacy /siya-circle join CTAs to direct GHL form URL */
+/** Route legacy join CTAs to on-site Siya Circle signup */
 export function normalizeSiyaCircleJoinLinks(html) {
+  html = html.replaceAll(SIYA_CIRCLE_GHL_FORM_URL, SIYA_CIRCLE_SIGNUP_URL);
   html = html.replace(
     /<a(\s[^>]*?)href="\/siya-circle"([^>]*)>([^<]*(?:Join|Siya Circle|newsletter|Subscribe|Get updates)[^<]*)<\/a>/gi,
     (_m, before, after, label) => {
@@ -1972,13 +2098,27 @@ export function normalizeSiyaCircleJoinLinks(html) {
       const display =
         /newsletter/i.test(trimmed) ? 'Siya Circle' : trimmed.replace(/\s*→\s*$/, '').trim();
       const arrow = label.includes('→') ? ' →' : '';
-      return `<a${before}href="${SIYA_CIRCLE_GHL_FORM_URL}" target="_blank" rel="noopener noreferrer" data-siya-track="${SIYA_CIRCLE_JOIN_TRACK}"${after}>${display}${arrow}</a>`;
+      return `<a${before}href="${SIYA_CIRCLE_SIGNUP_URL}" data-siya-track="${SIYA_CIRCLE_JOIN_TRACK}"${after}>${display}${arrow}</a>`;
     },
   );
   html = html.replace(
     /<a(\s[^>]*?)href="#siya-circle-signup"([^>]*)>([^<]+)<\/a>/gi,
     (_m, before, after, label) =>
-      `<a${before}href="${SIYA_CIRCLE_GHL_FORM_URL}" target="_blank" rel="noopener noreferrer" data-siya-track="${SIYA_CIRCLE_JOIN_TRACK}"${after}>${label}</a>`,
+      `<a${before}href="${SIYA_CIRCLE_SIGNUP_URL}" data-siya-track="${SIYA_CIRCLE_JOIN_TRACK}"${after}>${label}</a>`,
+  );
+  html = html.replace(
+    new RegExp(
+      `<a([^>]*?)href="${SIYA_CIRCLE_SIGNUP_URL.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"([^>]*?)target="_blank"([^>]*)>`,
+      'gi',
+    ),
+    '<a$1href="' + SIYA_CIRCLE_SIGNUP_URL + '"$2$3>',
+  );
+  html = html.replace(
+    new RegExp(
+      `<a([^>]*?)href="${SIYA_CIRCLE_SIGNUP_URL.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"([^>]*?)rel="noopener noreferrer"([^>]*)>`,
+      'gi',
+    ),
+    '<a$1href="' + SIYA_CIRCLE_SIGNUP_URL + '"$2$3>',
   );
   return html;
 }
@@ -2380,6 +2520,7 @@ export function applySiteChrome(html, relPath, title = '') {
     html = injectCookieNotice(html, relPath);
     html = injectLandingTrust(html, relPath);
     html = injectFaqAccordion(html);
+    html = injectSitewideTrustMetrics(html);
     html = injectHeaderScroll(html);
     html = stripInlineChromeScripts(html);
     html = normalizeLegalLinks(html);
@@ -2401,11 +2542,13 @@ export function applySiteChrome(html, relPath, title = '') {
   html = injectProvidersNav(html);
   html = injectMensHealthNav(html);
   html = injectLabsNav(html);
+  html = injectEmployersNav(html);
   html = injectAnswersNav(html);
   html = injectSeoFooterArchitecture(html, relPath);
   html = injectLearnMoreSections(html, relPath);
   html = injectHomepageCareTeam(html, relPath);
   html = injectAboutCareTeam(html, relPath);
+  html = injectAboutCompany(html, relPath);
   html = injectAboutProviderHub(html, relPath);
   html = injectMeetPhysiciansSection(html, relPath);
   html = injectContinueReading(html, relPath, title);
@@ -2416,6 +2559,7 @@ export function applySiteChrome(html, relPath, title = '') {
   html = injectCookieNotice(html, relPath);
   html = injectHeaderScroll(html);
   html = injectFaqAccordion(html);
+  html = injectSitewideTrustMetrics(html);
   html = injectHeroTrustBar(html, relPath);
   html = injectHeroPrimaryCta(html, relPath);
   html = restoreSecureChatSecondaryCtas(html, relPath);
