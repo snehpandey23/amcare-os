@@ -1,15 +1,15 @@
 # SEO Deployment QA Report
 
-Generated: 2026-09-01T12:23:41.126Z
+Generated: 2026-09-01T12:50:08.920Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
 | HTML pages scanned | 223 |
-| Sitemap URLs | 183 |
+| Sitemap URLs | 182 |
 | Pages with Meet & Greet in nav | 0 |
-| Non-ADHD pages still referencing adhd-screening | 85 |
+| Non-ADHD pages still referencing adhd-screening | 84 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
 
@@ -39,7 +39,7 @@ Generated: 2026-09-01T12:23:41.126Z
 - **Default secondary CTA:** Explore Care Options → `#services` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, `adhd-screening.html`
 
-### Non-ADHD pages still containing `adhd-screening` (85)
+### Non-ADHD pages still containing `adhd-screening` (84)
 
 - `about.html`
 - `blog/brain-fog-after-covid.html`
@@ -112,7 +112,6 @@ Generated: 2026-09-01T12:23:41.126Z
 - `primary-care.html`
 - `primary-urgent-care.html`
 - `privacy-policy.html`
-- `providers/derek-timbs.html`
 - `providers/dr-natasha-desai.html`
 - `providers/dr-sneh-pandey.html`
 - `providers/dr-swati-pandey.html`
@@ -127,7 +126,7 @@ Generated: 2026-09-01T12:23:41.126Z
 - `womens-health.html`
 - `womens-midlife-health.html`
 
-### All pages with any `adhd-screening` reference (194)
+### All pages with any `adhd-screening` reference (193)
 
 - `about.html`
 - `adhd-care/miami.html`
@@ -170,7 +169,7 @@ Generated: 2026-09-01T12:23:41.126Z
 - `answers/high-shbg-low-free-testosterone.html`
 - `answers/how-long-adhd-evaluation.html`
 
-_…and 154 more (expected on ADHD funnels)._
+_…and 153 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 

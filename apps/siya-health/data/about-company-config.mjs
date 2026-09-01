@@ -15,7 +15,7 @@ export const ABOUT_COMPANY_STATS = [
     value: `${M.googleRating.value}${M.googleRating.suffix ?? '★'}`,
     label: `${M.googleReviews.label} (${M.googleReviews.value})`,
   },
-  { value: '7', label: 'Licensed clinicians' },
+  { value: '6', label: 'Licensed clinicians' },
   { value: '4', label: 'Telehealth states (CA · TX · PA · FL)' },
 ];
 

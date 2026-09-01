@@ -60,32 +60,37 @@ for (const rel of ['legal/index.html', ...PUBLISHED_LEGAL_DOCUMENTS.map((d) => `
   }
 }
 
-// 3. Derek / Ohio service availability
-const derekHtml = read('providers/derek-timbs.html');
-const derekForbidden = [
-  /Texas and Ohio adults/i,
-  /telehealth in Texas and Ohio/i,
-  /see adults in <strong>Texas and Ohio<\/strong>/i,
-  /men's metabolic telehealth in Texas and Ohio/i,
-];
-for (const re of derekForbidden) {
-  if (re.test(derekHtml)) {
-    errors.push(`Derek profile service-implying Ohio pattern: ${re}`);
+// 3. Derek Timbs must not appear on the public site (licensing removal)
+const derekPatterns = [/derek-timbs/i, /Derek Timbs/i];
+for (const rel of walkHtml('.')) {
+  if (rel === 'providers/derek-timbs.html') {
+    const html = read(rel);
+    if (!/noindex/i.test(html)) errors.push('providers/derek-timbs.html must be noindex retirement stub');
+    continue;
+  }
+  const html = read(rel);
+  for (const re of derekPatterns) {
+    if (re.test(html)) {
+      errors.push(`Derek Timbs reference must be removed: ${rel}`);
+      break;
+    }
   }
 }
-const derekSchema = derekHtml.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
-if (derekSchema && /areaServed[\s\S]*"name":"Ohio"/.test(derekSchema[1])) {
-  errors.push('Derek JSON-LD areaServed includes Ohio');
+for (const rel of ['llms.txt', 'llms-full.txt', 'provider-index.json', 'sitemap.xml']) {
+  const content = read(rel);
+  for (const re of derekPatterns) {
+    if (re.test(content)) {
+      errors.push(`Derek Timbs reference must be removed: ${rel}`);
+      break;
+    }
+  }
 }
-const hubHtml = read('providers/index.html');
-if (/Texas and Ohio/i.test(hubHtml)) {
-  errors.push('Provider hub teaser implies Texas and Ohio service');
-}
-
 const entityGraph = JSON.parse(read('data/entity-graph.json'));
-const derekNode = entityGraph.providers?.find((p) => p.slug === 'derek-timbs');
-if (derekNode?.serviceStates?.includes('Ohio')) {
-  errors.push('entity-graph derek-timbs serviceStates must not include Ohio');
+if (entityGraph.providers?.some((p) => p.slug === 'derek-timbs')) {
+  errors.push('entity-graph must not include derek-timbs');
+}
+if (/Texas and Ohio/i.test(read('providers/index.html'))) {
+  errors.push('Provider hub teaser implies Texas and Ohio service');
 }
 
 // 4. Psychiatry / telepsychiatry self-positioning (sitewide scan)
@@ -99,13 +104,7 @@ for (const rel of ['llms.txt', 'about.html', ...walkHtml('blog').filter((f) => /
   }
 }
 
-// 5. Derek llms line
-const llms = read('llms.txt');
-if (/Derek Timbs.*\(TX, OH\)/i.test(llms)) {
-  errors.push('llms.txt Derek line implies OH service availability');
-}
-
-// 6. Published operational legal docs
+// 5. Published operational legal docs
 for (const slug of ['controlled-substance-treatment-agreement', 'cookie-policy']) {
   if (!fs.existsSync(path.join(SITE_ROOT, 'legal', slug, 'index.html'))) {
     errors.push(`Missing published legal page: /legal/${slug}`);

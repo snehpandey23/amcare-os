@@ -23,7 +23,7 @@ export const HOMEPAGE_TRUST_METRICS = {
   },
   verifiedReviews: {
     value: '600+',
-    label: 'Total verified patient reviews',
+    label: 'Verified reviews (all platforms)',
   },
 };
 

@@ -15,8 +15,8 @@
       },
       "role": {
         "profileHero": "Medical Director",
-        "homepage": "Co-founder \u00b7 Medical Director",
-        "hub": "Medical Director \u00b7 Internal Medicine Physician",
+        "homepage": "Co-founder · Medical Director",
+        "hub": "Medical Director · Internal Medicine Physician",
         "schemaJobTitle": "Medical Director"
       },
       "credentials": {
@@ -29,7 +29,7 @@
           "ADHD-CCSP",
           "Medical Director"
         ],
-        "hubLine": "Board-certified Internal Medicine \u00b7 Diplomate, American Board of Obesity Medicine \u00b7 ADHD-CCSP",
+        "hubLine": "Board-certified Internal Medicine · Diplomate, American Board of Obesity Medicine · ADHD-CCSP",
         "auditFocus": [
           "Internal Medicine",
           "Obesity Medicine",
@@ -67,9 +67,9 @@
         ],
         "licenseOnly": [],
         "display": {
-          "hub": "Licensed in: California \u00b7 Pennsylvania \u00b7 Florida",
+          "hub": "Licensed in: California · Pennsylvania · Florida",
           "homepageCards": "CA, PA, FL",
-          "profileTrust": "Telehealth appointments where eligible: California, Pennsylvania, and Florida\u2014confirm at scheduling."
+          "profileTrust": "Telehealth appointments where eligible: California, Pennsylvania, and Florida—confirm at scheduling."
         }
       },
       "positioning": {
@@ -77,7 +77,7 @@
         "hubBio": "Dr. Pandey focuses on structured evaluations, personalized care plans, and helping patients understand how focus, weight, energy, and long-term health connect.",
         "defaultTagline": "Adult ADHD & metabolic care",
         "serviceTaglines": {
-          "adhd-care": "Medical Director \u00b7 Adult ADHD evaluation & care",
+          "adhd-care": "Medical Director · Adult ADHD evaluation & care",
           "telehealth": "Adult ADHD & metabolic care",
           "weight-loss-metabolic-health": "Adult ADHD & metabolic care",
           "primary-urgent-care": "Adult ADHD & metabolic care",
@@ -86,8 +86,8 @@
       },
       "seo": {
         "title": "Dr. Sneh Pandey, MD | Adult ADHD & Metabolic Care | Siya Health",
-        "description": "Meet Dr. Sneh Pandey\u2014Medical Director at Siya Health. Board-certified Internal Medicine, Obesity Medicine, ADHD-CCSP. Structured adult ADHD evaluations and weight-inclusive telehealth in CA, PA & FL.",
-        "focusLead": "ADHD-first positioning\u2014with room for metabolic and weight overlap."
+        "description": "Meet Dr. Sneh Pandey—Medical Director at Siya Health. Board-certified Internal Medicine, Obesity Medicine, ADHD-CCSP. Structured adult ADHD evaluations and weight-inclusive telehealth in CA, PA & FL.",
+        "focusLead": "ADHD-first positioning—with room for metabolic and weight overlap."
       },
       "schema": {
         "medicalSpecialty": [
@@ -165,7 +165,7 @@
         "display": {
           "hub": "Licensed in: Florida",
           "homepageCards": "FL",
-          "profileTrust": "Telehealth where eligible: Florida\u2014confirm at scheduling."
+          "profileTrust": "Telehealth where eligible: Florida—confirm at scheduling."
         }
       },
       "positioning": {
@@ -180,7 +180,7 @@
       },
       "seo": {
         "title": "Dr. Vanessa Urbina, MD | Family Medicine & ADHD | Siya Health",
-        "description": "Meet Dr. Vanessa Urbina\u2014family medicine physician at Siya Health. Adult ADHD, primary telehealth, and medical weight loss in Florida.",
+        "description": "Meet Dr. Vanessa Urbina—family medicine physician at Siya Health. Adult ADHD, primary telehealth, and medical weight loss in Florida.",
         "focusLead": "Family medicine with ADHD and metabolic care in Florida."
       },
       "schema": {
@@ -257,9 +257,9 @@
         ],
         "licenseOnly": [],
         "display": {
-          "hub": "Licensed in: Texas \u00b7 Florida \u00b7 Pennsylvania",
+          "hub": "Licensed in: Texas · Florida · Pennsylvania",
           "homepageCards": "TX, PA, FL",
-          "profileTrust": "Telehealth where eligible: Texas, Florida, and Pennsylvania\u2014confirm when you book."
+          "profileTrust": "Telehealth where eligible: Texas, Florida, and Pennsylvania—confirm when you book."
         }
       },
       "positioning": {
@@ -274,8 +274,8 @@
       },
       "seo": {
         "title": "Dr. Natasha Desai, MD | Adult ADHD & Family Medicine | Siya Health",
-        "description": "Meet Dr. Natasha Desai\u2014Family Medicine Physician at Siya Health. ADHD-CCSP. Adult ADHD with anxiety and emotional overlap via telehealth in TX, PA & FL.",
-        "focusLead": "ADHD at the center\u2014with behavioral and emotional overlap addressed honestly."
+        "description": "Meet Dr. Natasha Desai—Family Medicine Physician at Siya Health. ADHD-CCSP. Adult ADHD with anxiety and emotional overlap via telehealth in TX, PA & FL.",
+        "focusLead": "ADHD at the center—with behavioral and emotional overlap addressed honestly."
       },
       "schema": {
         "medicalSpecialty": [
@@ -306,7 +306,7 @@
       },
       "role": {
         "profileHero": "Internal Medicine Physician",
-        "homepage": "Co-founder \u00b7 Clinical Advisor",
+        "homepage": "Co-founder · Clinical Advisor",
         "hub": "Internal Medicine Physician",
         "schemaJobTitle": "Internal Medicine Physician"
       },
@@ -354,7 +354,7 @@
         "display": {
           "hub": "Licensed in: Pennsylvania",
           "homepageCards": "PA",
-          "profileTrust": "Telehealth where eligible: Pennsylvania\u2014confirm at scheduling."
+          "profileTrust": "Telehealth where eligible: Pennsylvania—confirm at scheduling."
         }
       },
       "positioning": {
@@ -368,8 +368,8 @@
       },
       "seo": {
         "title": "Dr. Swati Pandey, MD | Internal Medicine & Adult ADHD | Siya Health",
-        "description": "Meet Dr. Swati Pandey\u2014Internal Medicine Physician at Siya Health. ADHD-CCSP. Adult ADHD with depression, anxiety, and complex medication histories via telehealth in PA.",
-        "focusLead": "ADHD in adults\u2014with mood and anxiety overlap addressed within primary care scope."
+        "description": "Meet Dr. Swati Pandey—Internal Medicine Physician at Siya Health. ADHD-CCSP. Adult ADHD with depression, anxiety, and complex medication histories via telehealth in PA.",
+        "focusLead": "ADHD in adults—with mood and anxiety overlap addressed within primary care scope."
       },
       "schema": {
         "medicalSpecialty": [
@@ -444,7 +444,7 @@
         "display": {
           "hub": "Licensed in: Pennsylvania",
           "homepageCards": "PA",
-          "profileTrust": "Telehealth where eligible: Pennsylvania\u2014confirm at scheduling."
+          "profileTrust": "Telehealth where eligible: Pennsylvania—confirm at scheduling."
         }
       },
       "positioning": {
@@ -475,100 +475,6 @@
         ]
       }
     },
-    "derek-timbs": {
-      "identity": {
-        "displayName": "Derek Timbs, FNP-BC",
-        "givenName": "Derek",
-        "familyName": "Timbs",
-        "honorificPrefix": "",
-        "honorificSuffix": "FNP-BC",
-        "providerType": "advanced-practice",
-        "hubSection": "advanced-practice",
-        "sortOrder": 6,
-        "photo": "assets/images/derek-timbs.png"
-      },
-      "role": {
-        "profileHero": "Family Nurse Practitioner",
-        "homepage": "Family Nurse Practitioner",
-        "hub": "Family Nurse Practitioner",
-        "schemaJobTitle": "Family Nurse Practitioner"
-      },
-      "credentials": {
-        "suffixes": [
-          "FNP-BC"
-        ],
-        "chips": [
-          "FNP-BC",
-          "Weight Loss",
-          "Men's Health"
-        ],
-        "hubLine": "FNP-BC",
-        "auditFocus": [
-          "Weight Loss",
-          "Men's Health",
-          "Metabolic Care"
-        ]
-      },
-      "focus": {
-        "hubTags": [
-          "Medical weight loss",
-          "Men's health",
-          "Hormone support",
-          "Metabolic health"
-        ],
-        "audit": [
-          "Weight Loss",
-          "Men's Health",
-          "Metabolic Care"
-        ]
-      },
-      "states": {
-        "licensed": [
-          "Texas",
-          "Ohio"
-        ],
-        "service": [
-          "Texas"
-        ],
-        "licenseOnly": [
-          "Ohio"
-        ],
-        "display": {
-          "hub": "Licensed in: Texas (Ohio license only)",
-          "homepageCards": "TX (OH license only)",
-          "profileTrust": "Licensed in Texas and Ohio. Siya Healthcare, PLLC provides telehealth in Texas only; Ohio license displayed for transparency."
-        }
-      },
-      "positioning": {
-        "homepageBio": "Focus on weight management, men's health, and metabolic care for adults in Texas.",
-        "hubBio": "Derek brings experience in weight management, men's health, and metabolic care, with a practical approach to improving energy, body composition, and long-term health.",
-        "defaultTagline": "Weight loss & men's health",
-        "serviceTaglines": {
-          "telehealth": "Weight loss & men's health",
-          "weight-loss-metabolic-health": "Weight loss & men's health",
-          "mens-health-longevity": "Weight loss & men's health"
-        }
-      },
-      "seo": {
-        "title": "Derek Timbs, FNP-BC | Medical Weight Loss & Men's Health | Siya Health",
-        "description": "Meet Derek Timbs, FNP-BC at Siya Health. GLP-1 weight loss and men's metabolic telehealth in Texas.",
-        "focusLead": "NP-led weight loss and men's metabolic care (TX)."
-      },
-      "schema": {
-        "medicalSpecialty": [
-          "Obesity Medicine",
-          "Family Medicine",
-          "Men's Health"
-        ],
-        "knowsAbout": [
-          "Medical weight loss",
-          "Obesity",
-          "Metabolic health",
-          "Men's health",
-          "GLP-1 therapy"
-        ]
-      }
-    },
     "wendy-delgado": {
       "identity": {
         "displayName": "Wendy Delgado, PA-C",
@@ -583,8 +489,8 @@
       },
       "role": {
         "profileHero": "Physician Associate",
-        "homepage": "Physician Associate \u00b7 Adult telehealth generalist",
-        "hub": "Physician Associate \u00b7 Adult telehealth generalist",
+        "homepage": "Physician Associate · Adult telehealth generalist",
+        "hub": "Physician Associate · Adult telehealth generalist",
         "schemaJobTitle": "Physician Associate"
       },
       "credentials": {
@@ -598,7 +504,7 @@
           "Weight Loss",
           "Telehealth"
         ],
-        "hubLine": "PA-C \u00b7 Adult ADHD, women's health, weight loss & telehealth",
+        "hubLine": "PA-C · Adult ADHD, women's health, weight loss & telehealth",
         "auditFocus": [
           "Adult ADHD",
           "Women's Health",
@@ -639,9 +545,9 @@
         ],
         "licenseOnly": [],
         "display": {
-          "hub": "Licensed in: California \u00b7 Texas \u00b7 Pennsylvania \u00b7 Florida",
+          "hub": "Licensed in: California · Texas · Pennsylvania · Florida",
           "homepageCards": "CA, TX, PA, FL",
-          "profileTrust": "Telehealth where eligible: California, Texas, Pennsylvania, and Florida\u2014confirm at scheduling."
+          "profileTrust": "Telehealth where eligible: California, Texas, Pennsylvania, and Florida—confirm at scheduling."
         }
       },
       "positioning": {
@@ -659,7 +565,7 @@
       "seo": {
         "title": "Wendy Delgado, PA-C | Adult ADHD, Women's Health & Weight Loss | Siya Health",
         "description": "Meet Wendy Delgado, PA-C at Siya Health. Adult ADHD, women's health, medical weight loss, and telehealth primary care in California, Texas, Pennsylvania, and Florida.",
-        "focusLead": "Generalist PA telehealth\u2014ADHD, women's health, weight loss, and primary care (CA, TX, PA, FL)."
+        "focusLead": "Generalist PA telehealth—ADHD, women's health, weight loss, and primary care (CA, TX, PA, FL)."
       },
       "schema": {
         "medicalSpecialty": [

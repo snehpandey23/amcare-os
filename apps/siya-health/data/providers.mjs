@@ -367,12 +367,11 @@ export const SERVICE_PROVIDER_SLUGS = {
     'dr-swati-pandey',
     'dr-vanessa-urbina',
     'megan-wunderlich',
-    'derek-timbs',
     'wendy-delgado',
   ],
-  'weight-loss-metabolic-health': ['dr-sneh-pandey', 'dr-vanessa-urbina', 'derek-timbs', 'wendy-delgado'],
+  'weight-loss-metabolic-health': ['dr-sneh-pandey', 'dr-vanessa-urbina', 'wendy-delgado'],
   'primary-urgent-care': ['dr-vanessa-urbina', 'dr-natasha-desai', 'dr-sneh-pandey', 'wendy-delgado'],
-  'mens-health-longevity': ['dr-sneh-pandey', 'derek-timbs'],
+  'mens-health-longevity': ['dr-sneh-pandey'],
   'womens-health': ['dr-swati-pandey', 'dr-vanessa-urbina', 'dr-natasha-desai', 'wendy-delgado'],
 };
 

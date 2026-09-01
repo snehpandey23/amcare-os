@@ -227,12 +227,6 @@ export const LINK_REGISTRY: Record<string, LinkRecord> = {
         url: 'https://www.siya.health/providers/megan-wunderlich',
         kind: 'education'
     },
-    provider_derek: {
-        id: 'provider_derek',
-        label: 'Derek Timbs, FNP-BC',
-        url: 'https://www.siya.health/providers/derek-timbs',
-        kind: 'education'
-    },
     provider_wendy: {
         id: 'provider_wendy',
         label: 'Wendy Delgado, PA-C',
