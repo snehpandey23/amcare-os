@@ -86,6 +86,90 @@ export const NAV_HEALTH_GUIDES = { path: '/answers', label: 'Health Guides', sho
 export const NAV_PROVIDERS = { path: '/providers', label: 'Care Team', shortLabel: 'Care Team' };
 export const NAV_MENS_HEALTH = { path: '/mens-health-longevity', label: "Men's Health", shortLabel: "Men's Health" };
 export const NAV_EMPLOYERS = { path: '/employers', label: 'For Employers', shortLabel: 'Employers' };
+export const NAV_LABS = { path: '/labs', label: 'Labs' };
+export const NAV_JOIN_OUR_TEAM = {
+  path: '/join-our-team',
+  label: 'Join Our Team',
+  shortLabel: 'Join Our Team',
+};
+
+/** Primary nav service links — Join Our Team replaces Men's Health at top level. */
+const STANDARD_SERVICE_NAV_LINKS = [
+  { path: '/adhd-care', label: 'ADHD Care' },
+  { path: '/weight-loss-metabolic-health', label: 'Weight Loss' },
+  { path: '/telehealth', label: 'Telehealth' },
+  { path: NAV_JOIN_OUR_TEAM.path, label: NAV_JOIN_OUR_TEAM.label },
+  { path: NAV_LABS.path, label: NAV_LABS.label },
+  { path: NAV_EMPLOYERS.path, label: NAV_EMPLOYERS.label },
+  { path: '/blog', label: 'Blog' },
+];
+
+function renderAboutNavDropdown() {
+  return `<div class="nav-dropdown">
+          <button type="button" class="nav-dropdown__toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-about-menu" id="nav-about-toggle">About</button>
+          <div class="nav-dropdown__menu" id="nav-about-menu" role="menu">
+            <a href="/about" role="menuitem">About Us</a>
+            <a href="${NAV_PROVIDERS.path}" role="menuitem">${NAV_PROVIDERS.label}</a>
+          </div>
+        </div>`;
+}
+
+function renderStandardDesktopNav() {
+  const links = STANDARD_SERVICE_NAV_LINKS.map((l) => `<a href="${l.path}">${l.label}</a>`).join('\n          ');
+  return `<nav class="nav-center" aria-label="Primary">
+          <a href="/">Home</a>
+          ${renderAboutNavDropdown()}
+          ${links}
+        </nav>`;
+}
+
+function renderStandardMobileNavShell() {
+  const links = STANDARD_SERVICE_NAV_LINKS.map((l) => `<a href="${l.path}">${l.label}</a>`).join('\n          ');
+  return `<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
+        <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
+        <div class="nav-mobile">
+          <a href="/">Home</a>
+          <a href="/about">About Us</a>
+          ${links}
+        </div>`;
+}
+
+function primaryNavIsSparse(navHtml = '') {
+  return !/href="\/adhd-care"/i.test(navHtml);
+}
+
+function normalizeProviderCareersNav(html) {
+  html = html.replace(new RegExp(`\\s*<a href="${NAV_MENS_HEALTH.path}">[^<]*</a>`, 'gi'), '');
+  html = html.replace(new RegExp(`\\s*<a href="${NAV_PROVIDERS.path}">[^<]*</a>`, 'gi'), '');
+  html = html.replace(/\s*<a href="\/providers">[^<]*<\/a>/gi, '');
+  const desktopNav = html.match(/<nav class="nav-center"[\s\S]*?<\/nav>/i)?.[0] || '';
+  if (desktopNav && !new RegExp(`href="${NAV_JOIN_OUR_TEAM.path}"`).test(desktopNav)) {
+    html = html.replace(
+      /(<a href="\/telehealth">Telehealth<\/a>)/i,
+      `$1\n          <a href="${NAV_JOIN_OUR_TEAM.path}">${NAV_JOIN_OUR_TEAM.label}</a>`,
+    );
+  }
+  return html;
+}
+
+function injectSparsePrimaryNav(html) {
+  const navMatch = html.match(/<nav class="nav-center"[\s\S]*?<\/nav>/i)?.[0] || '';
+  if (!primaryNavIsSparse(navMatch)) return html;
+  html = html.replace(/<nav class="nav-center"[\s\S]*?<\/nav>/i, renderStandardDesktopNav());
+  if (!html.includes('id="nav-toggle"')) {
+    html = html.replace(
+      /(<div class="nav-cta">[\s\S]*?<\/div>)/i,
+      `$1\n        ${renderStandardMobileNavShell()}`,
+    );
+  }
+  if (!/<header class="site-header[^"]*" id="site-header"/i.test(html)) {
+    html = html.replace(
+      /<header class="site-header([^"]*)">/i,
+      '<header class="site-header$1" id="site-header">',
+    );
+  }
+  return html;
+}
 /** Circular brand mark (icon only). Wordmark is rendered in HTML via renderBrandLockup(). */
 export const BRAND_MARK_ICON = '/assets/images/siya-health-mark.png';
 /** @deprecated Use BRAND_MARK_ICON + renderBrandLockup(); kept for legacy src swaps. */
@@ -671,14 +755,7 @@ export function injectAnswersNav(html) {
 }
 
 function injectMensHealthInNavBlock(navHtml) {
-  const link = `<a href="${NAV_MENS_HEALTH.path}">${NAV_MENS_HEALTH.label}</a>`;
-  if (navHtml.includes(`href="${NAV_MENS_HEALTH.path}"`)) return navHtml;
-  if (navHtml.includes('href="/blog">Blog</a>')) {
-    return navHtml.replace(/(<a href="\/blog">Blog<\/a>)/, `${link}\n          $1`);
-  }
-  if (navHtml.includes('href="/telehealth">Telehealth</a>')) {
-    return navHtml.replace(/(<a href="\/telehealth">Telehealth<\/a>)/, `$1\n          ${link}`);
-  }
+  /* Men's Health stays in footer/service links — not primary nav (Care Team holds that slot). */
   return navHtml;
 }
 
@@ -688,19 +765,17 @@ export function injectMensHealthNav(html) {
   return html;
 }
 
-const NAV_LABS = { path: '/labs', label: 'Labs' };
-
 function injectLabsInNavBlock(navHtml) {
   const link = `<a href="${NAV_LABS.path}">${NAV_LABS.label}</a>`;
   if (navHtml.includes(`href="${NAV_LABS.path}"`)) return navHtml;
-  if (navHtml.includes('href="/blog">Blog</a>')) {
-    return navHtml.replace(/(<a href="\/blog">Blog<\/a>)/, `${link}\n          $1`);
-  }
-  if (navHtml.includes(`href="${NAV_MENS_HEALTH.path}"`)) {
+  if (navHtml.includes(`href="${NAV_JOIN_OUR_TEAM.path}"`)) {
     return navHtml.replace(
-      new RegExp(`(<a href="${NAV_MENS_HEALTH.path}">[^<]*</a>)`),
+      new RegExp(`(<a href="${NAV_JOIN_OUR_TEAM.path}">[^<]*</a>)`),
       `$1\n          ${link}`,
     );
+  }
+  if (navHtml.includes('href="/blog">Blog</a>')) {
+    return navHtml.replace(/(<a href="\/blog">Blog<\/a>)/, `${link}\n          $1`);
   }
   return navHtml;
 }
@@ -1663,32 +1738,26 @@ export function injectHomepageCareTeam(html, relPath) {
 }
 
 export function injectProvidersNav(html) {
-  const aboutDropdown = `<div class="nav-dropdown">
-          <button type="button" class="nav-dropdown__toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-about-menu" id="nav-about-toggle">About</button>
-          <div class="nav-dropdown__menu" id="nav-about-menu" role="menu">
-            <a href="/about" role="menuitem">About Us</a>
-            <a href="${NAV_PROVIDERS.path}" role="menuitem">${NAV_PROVIDERS.label}</a>
-          </div>
-        </div>`;
-  const aboutMobile = `<a href="/about">About Us</a>
-          <a href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>`;
+  html = injectSparsePrimaryNav(html);
+  html = normalizeProviderCareersNav(html);
 
   html = html.replaceAll('href="/providers">Our Care Team</a>', `href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>`);
   html = html.replaceAll('href="/providers">Our providers</a>', `href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>`);
   html = html.replaceAll('href="/providers">Our physicians</a>', `href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>`);
 
+  const aboutDropdown = renderAboutNavDropdown();
   const DROPDOWN_RE =
     /<div class="nav-dropdown">\s*<button[\s\S]*?<\/button>\s*<div class="nav-dropdown__menu"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*/gi;
 
   const collapseDesktopNav = (nav) => {
     if (!/class="nav-center"/i.test(nav)) return nav;
+    if (primaryNavIsSparse(nav)) return renderStandardDesktopNav();
     let next = nav
       .replace(DROPDOWN_RE, '')
       .replace(/<a href="\/about">About(?: Us)?<\/a>\s*/gi, '')
       .replace(new RegExp(`<a href="${NAV_PROVIDERS.path}">[^<]*</a>\\s*`, 'gi'), '')
       .replace(/<a href="\/providers">[^<]*<\/a>\s*/gi, '')
-      // Repair prior broken injects that closed nav early
-      .replace(/<\/div>\s*(?=<a href="\/(?:adhd-care|weight-loss|telehealth|mens-health|blog|answers)")/gi, '');
+      .replace(/<\/div>\s*(?=<a href="\/(?:adhd-care|weight-loss|telehealth|mens-health|join-our-team|blog|answers)")/gi, '');
     if (next.includes('nav-dropdown')) return next;
     return next.replace(
       /(<nav class="nav-center"[^>]*>\s*(?:<a href="\/">Home<\/a>\s*)?)/i,
@@ -1696,16 +1765,19 @@ export function injectProvidersNav(html) {
     );
   };
 
+  const standardMobileInner = `<a href="/">Home</a>
+          <a href="/about">About Us</a>
+          <a href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>
+          ${STANDARD_SERVICE_NAV_LINKS.map((l) => `<a href="${l.path}">${l.label}</a>`).join('\n          ')}`;
+
   const collapseMobileNav = (nav) => {
     if (!/class="nav-mobile"/i.test(nav)) return nav;
-    let next = nav
-      .replace(/<a href="\/about">About(?: Us)?<\/a>\s*/gi, '')
-      .replace(new RegExp(`<a href="${NAV_PROVIDERS.path}">[^<]*</a>\\s*`, 'gi'), '')
-      .replace(/<a href="\/providers">[^<]*<\/a>\s*/gi, '');
-    if (next.includes('href="/about">About Us</a>') && next.includes(`href="${NAV_PROVIDERS.path}"`)) {
-      return next;
-    }
-    return next.replace(/(<div class="nav-mobile">\s*(?:<a href="\/">Home<\/a>\s*)?)/i, `$1${aboutMobile}\n          `);
+    return nav.replace(
+      /<div class="nav-mobile">[\s\S]*?<\/div>/i,
+      `<div class="nav-mobile">
+          ${standardMobileInner}
+        </div>`,
+    );
   };
 
   html = html.replace(/<nav class="nav-center"[\s\S]*?<\/nav>/gi, collapseDesktopNav);

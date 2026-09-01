@@ -1,11 +1,11 @@
 {
-  "generated": "2026-09-01T12:50:06.776Z",
-  "count": 66,
+  "generated": "2026-09-01T14:56:51.455Z",
+  "count": 68,
   "articles": [
     {
       "title": "Health Insights &amp; Blog Hub (2026) | ADHD, Weight Loss &amp; Telehealth",
       "url": "https://siya.health/blog",
-      "description": "Evidence-based ADHD, weight loss & telehealth articles (2026). Browse by category, read medication education, and book licensed providers in TX, PA & FL.",
+      "description": "Evidence-based ADHD, weight loss & telehealth articles (2026). Browse by category, read medication education, and book licensed providers in CA, TX, PA & FL.",
       "topics": [
         "adhd",
         "weight-loss",
@@ -204,6 +204,12 @@
       "topics": [
         "adhd"
       ]
+    },
+    {
+      "title": "Chronic Fatigue and Work Performance: When Exhaustion Won't Lift",
+      "url": "https://siya.health/blog/chronic-fatigue-and-work-performance",
+      "description": "Chronic fatigue at work—unrelenting exhaustion, crash cycles, brain fog—may have medical causes. Learn framing for evaluation before blaming burnout alone.",
+      "topics": []
     },
     {
       "title": "Chronic Fatigue vs Everyday Tiredness: Knowing When to Dig Deeper",
@@ -470,6 +476,14 @@
       "description": "Sildenafil for erectile dysfunction in 2026: mechanism, cardiovascular precautions, interactions, and telehealth norms—informational, not prescribing advice.",
       "topics": [
         "mens-health"
+      ]
+    },
+    {
+      "title": "Sleep, Focus, and Cognitive Load at Work",
+      "url": "https://siya.health/blog/sleep-and-focus-at-work",
+      "description": "Poor sleep and heavy cognitive load can look like ADHD or burnout at work. Learn when to treat sleep as a medical issue—not just a schedule problem.",
+      "topics": [
+        "sleep"
       ]
     },
     {

@@ -1,15 +1,15 @@
 # SEO Deployment QA Report
 
-Generated: 2026-09-01T12:50:08.920Z
+Generated: 2026-09-01T14:56:53.718Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| HTML pages scanned | 223 |
-| Sitemap URLs | 182 |
+| HTML pages scanned | 225 |
+| Sitemap URLs | 184 |
 | Pages with Meet & Greet in nav | 0 |
-| Non-ADHD pages still referencing adhd-screening | 84 |
+| Non-ADHD pages still referencing adhd-screening | 86 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
 
@@ -39,13 +39,14 @@ Generated: 2026-09-01T12:50:08.920Z
 - **Default secondary CTA:** Explore Care Options → `#services` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, `adhd-screening.html`
 
-### Non-ADHD pages still containing `adhd-screening` (84)
+### Non-ADHD pages still containing `adhd-screening` (86)
 
 - `about.html`
 - `blog/brain-fog-after-covid.html`
 - `blog/brain-fog-and-anxiety.html`
 - `blog/brain-fog-and-sleep.html`
 - `blog/brain-fog-at-work.html`
+- `blog/chronic-fatigue-and-work-performance.html`
 - `blog/chronic-fatigue-vs-everyday-tiredness.html`
 - `blog/compounded-vs-branded-glp1-medications.html`
 - `blog/fatigue-after-illness.html`
@@ -69,6 +70,7 @@ Generated: 2026-09-01T12:50:08.920Z
 - `blog/phentermine-for-weight-loss-safety-and-effectiveness.html`
 - `blog/semaglutide-for-weight-loss-how-it-works.html`
 - `blog/sildenafil-for-erectile-dysfunction-what-to-expect.html`
+- `blog/sleep-and-focus-at-work.html`
 - `blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign.html`
 - `blog/telehealth-prescriptions-how-online-treatment-works.html`
 - `blog/telehealth.html`
@@ -126,7 +128,7 @@ Generated: 2026-09-01T12:50:08.920Z
 - `womens-health.html`
 - `womens-midlife-health.html`
 
-### All pages with any `adhd-screening` reference (193)
+### All pages with any `adhd-screening` reference (195)
 
 - `about.html`
 - `adhd-care/miami.html`
@@ -169,7 +171,7 @@ Generated: 2026-09-01T12:50:08.920Z
 - `answers/high-shbg-low-free-testosterone.html`
 - `answers/how-long-adhd-evaluation.html`
 
-_…and 153 more (expected on ADHD funnels)._
+_…and 155 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 
@@ -209,7 +211,6 @@ _None detected in static HTML scan._
 - `adult-adhd-diagnosis.html`
 - `adult-adhd-screening-california.html`
 - `adult-adhd-screening-texas.html`
-- `answers/adhd-workplace-accommodations.html`
 - `answers/weight-gain-after-stopping-ozempic.html`
 - `blog/adhd-evaluation-cost-california.html`
 - `blog/adhd-treatment-austin-tx.html`
@@ -226,6 +227,7 @@ _None detected in static HTML scan._
 - `blog/adhd-treatment-san-antonio-tx.html`
 - `blog/adhd-treatment-san-diego-ca.html`
 - `blog/adhd-treatment-san-francisco-ca.html`
+- `blog/adhd-treatment-san-jose-ca.html`
 
 ## Recommendations
 

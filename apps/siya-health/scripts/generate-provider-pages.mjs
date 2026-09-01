@@ -617,7 +617,7 @@ function renderProvidersIndex() {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="index, follow" />
     <title>Our Care Team | Siya Health</title>
-    <meta name="description" content="Meet Siya Health physicians and advanced practice providers—primary care–led ADHD, metabolic, and telehealth care across ${STATES_INLINE}." />
+    <meta name="description" content="Meet Siya Health physicians and advanced practice providers—primary care–led telehealth for working adults across ADHD, metabolic, fatigue, and neurocognitive evaluation in ${STATES_INLINE}." />
     <link rel="canonical" href="${BASE_URL}/providers" />
     <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
     <link rel="stylesheet" href="../styles.css" />
@@ -683,8 +683,8 @@ function renderProvidersIndex() {
             <div class="provider-index-hero-copy">
               <div class="section-header">
                 <h1>Our Care Team</h1>
-                <p class="lead">Physicians and advanced practice clinicians supporting ADHD care, metabolic health, weight management, primary care, mental health, and telehealth.</p>
-                <p>Different training backgrounds—one standard: thoughtful evaluation, clear communication, and patient-centered care.</p>
+                <p class="lead">Physicians and advanced practice clinicians supporting structured evaluation for working adults—ADHD, metabolic health, fatigue, neurocognitive testing, primary care, and telehealth.</p>
+                <p>Different training backgrounds—one standard: thoughtful evaluation, clear communication, and follow-through that does not vanish after one visit. <a href="/employers" class="text-link">Employer program overview →</a></p>
               </div>
               <div class="provider-lp-ctas">
                 ${indexPrimaryBtn}
@@ -702,8 +702,26 @@ function renderProvidersIndex() {
         <div class="container">
           <div class="section-header">
             <h2>How our care team works</h2>
-            <p class="lead">Siya Health uses a physician-led care model. Depending on your state and clinical needs, you may work with a physician, nurse practitioner, or Physician Associate—always with structured evaluation and clear follow-up.</p>
+            <p class="lead">Siya Health uses a physician-led, primary care–first model—not a psychiatry-only or wellness-app approach. Depending on your state and clinical needs, you may work with a physician, nurse practitioner, or Physician Associate.</p>
           </div>
+          <div class="flow-cards flow-cards--journey">
+            <div class="flow-card">
+              <span class="flow-step-num">1</span>
+              <h3>Structured evaluation</h3>
+              <p>History, validated tools when appropriate, and labs or neurocognitive testing when clinically indicated. Screening is not diagnosis.</p>
+            </div>
+            <div class="flow-card">
+              <span class="flow-step-num">2</span>
+              <h3>Physician-led plan</h3>
+              <p>Findings explained in plain language. Medication, lifestyle, and follow-up only when clinically appropriate—not guaranteed outcomes.</p>
+            </div>
+            <div class="flow-card">
+              <span class="flow-step-num">3</span>
+              <h3>Concierge-supported follow-through</h3>
+              <p>Intake coordination, pharmacy logistics, and care navigation so plans survive between visits—especially for busy working adults.</p>
+            </div>
+          </div>
+          <p class="symptoms-transition">Licensed telehealth in ${STATES_INLINE}. <a href="/employers" class="text-link">Employer &amp; benefits teams →</a></p>
         </div>
       </section>
 

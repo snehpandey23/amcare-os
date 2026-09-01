@@ -33,6 +33,14 @@ const CROSS_TOPIC_BRIDGE = {
     'insulin-resistance-and-weight-loss-clinician-overview',
     'free-testosterone-vs-total-testosterone-what-patients-should-know',
     'how-mental-health-affects-weight-loss-outcomes',
+    'brain-fog-at-work',
+    'sleep-and-focus-at-work',
+    'chronic-fatigue-and-work-performance',
+  ],
+  adhd: [
+    'brain-fog-at-work',
+    'executive-dysfunction-adhd',
+    'sleep-and-focus-at-work',
   ],
   hormone: [
     'perimenopause-brain-fog',
@@ -71,6 +79,9 @@ const TOPIC_FALLBACKS = {
     'iron-deficiency-brain-fog-adhd',
     'sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign',
     'insomnia-treatment-options-beyond-medication',
+    'brain-fog-at-work',
+    'sleep-and-focus-at-work',
+    'chronic-fatigue-and-work-performance',
   ],
   telehealth: [
     'telehealth-prescriptions-how-online-treatment-works',
@@ -82,6 +93,9 @@ const TOPIC_FALLBACKS = {
 
 export function topicFromBlog(slug, title = '') {
   const t = `${slug} ${title}`.toLowerCase();
+  if (/brain-fog-at-work|sleep-and-focus-at-work|chronic-fatigue-and-work|workplace|at work|work performance/.test(t)) {
+    return 'energy';
+  }
   if (/testosterone|trt|sildenafil|erectile|minoxidil|libido|peptide/.test(t)) return 'hormone';
   if (/sleep-apnea|apnea|insomnia|always-tired|fatigue|modafinil/.test(t)) return 'energy';
   if (/glp|semaglutide|tirzepatide|phentermine|weight|food-noise|insulin|metabolic|dieting|obesity/.test(t)) {

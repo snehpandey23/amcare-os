@@ -47,6 +47,22 @@ const FAQS = [
     q: 'How is this different from patient self-booking on siya.health?',
     a: 'This page is for HR, benefits, and leadership teams exploring structured programs for working professionals. Individual employees can still use our standard patient pathways (Meet &amp; Greet, screening, and evaluation) without an employer contract.',
   },
+  {
+    q: 'How is employee health information handled?',
+    a: 'Siya Health follows HIPAA-aligned telehealth practices. Employer partnership conversations are separate from individual patient charts. We do not share individual clinical details with employers without appropriate patient authorization—program design focuses on access pathways, not surveillance.',
+  },
+  {
+    q: 'Who pays—employer or employee?',
+    a: 'Packaging varies by partnership stage. Some pathways may be employer-sponsored; others may remain individual cash-pay or membership options for employees. Exact billing models are finalized during pilot design—not published on this page.',
+  },
+  {
+    q: 'What documentation can employers receive?',
+    a: 'Employers typically receive program-level information—implementation scope, eligibility states (CA, TX, PA, FL), and operational contact points. Individual diagnoses, medications, or visit notes are part of the clinician–patient relationship, not an employer report.',
+  },
+  {
+    q: 'Is screening the same as diagnosis?',
+    a: 'No. Structured screening identifies patterns that may warrant clinical follow-up. Physician-led evaluation determines diagnosis and treatment options when appropriate. Outcomes vary by individual and are not guaranteed.',
+  },
 ];
 
 function faqAccordion(faqs, prefix) {

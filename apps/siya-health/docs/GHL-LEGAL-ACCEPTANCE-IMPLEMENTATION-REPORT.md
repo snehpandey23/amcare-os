@@ -1,6 +1,6 @@
 # GHL Legal Acceptance — Implementation Report
 
-Generated: 2026-09-01T12:50:08.612Z
+Generated: 2026-09-01T14:56:53.384Z
 
 ## Objective
 
@@ -44,7 +44,7 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 
 ## Audit totals
 
-- HTML pages scanned: **223**
+- HTML pages scanned: **225**
 - Pages with legacy GHL booking links: **7**
 - Total legacy GHL booking anchor targets: **7**
 - Pages with CarePatron booking links: **3**

@@ -1,6 +1,6 @@
 {
   "generated": "2026-09-01",
-  "totalPages": 223,
+  "totalPages": 225,
   "zeroInbound": [
     "/adhd-care/miami",
     "/adhd-care/orlando",
@@ -15,7 +15,6 @@
     "/adult-adhd-diagnosis",
     "/adult-adhd-screening-california",
     "/adult-adhd-screening-texas",
-    "/answers/adhd-workplace-accommodations",
     "/blog/adhd-evaluation-cost-california",
     "/blog/adhd-treatment-austin-tx",
     "/blog/adhd-treatment-dallas-tx",
@@ -36,7 +35,6 @@
     "/blog/why-am-i-always-tired-causes-when-to-see-doctor",
     "/docs/tint-options-preview",
     "/intake",
-    "/join-our-team",
     "/online-adhd-test",
     "/privacy-policy",
     "/providers/derek-timbs",
@@ -94,10 +92,6 @@
     },
     {
       "path": "/adult-adhd-screening-texas",
-      "count": 0
-    },
-    {
-      "path": "/answers/adhd-workplace-accommodations",
       "count": 0
     },
     {
@@ -181,10 +175,6 @@
       "count": 0
     },
     {
-      "path": "/join-our-team",
-      "count": 0
-    },
-    {
       "path": "/online-adhd-test",
       "count": 0
     },
@@ -221,6 +211,10 @@
       "count": 1
     },
     {
+      "path": "/blog/iron-deficiency-and-fatigue",
+      "count": 1
+    },
+    {
       "path": "/blog/morning-fatigue",
       "count": 1
     },
@@ -233,8 +227,16 @@
       "count": 1
     },
     {
+      "path": "/blog/sleep-and-focus-at-work",
+      "count": 1
+    },
+    {
       "path": "/blog/thyroid-and-fatigue",
       "count": 1
+    },
+    {
+      "path": "/answers/adhd-workplace-accommodations",
+      "count": 2
     },
     {
       "path": "/answers/afternoon-energy-crash-after-lunch",
@@ -290,38 +292,38 @@
   "highAuthorityOutbound": [
     {
       "path": "/",
-      "outboundCount": 41,
-      "uniqueInbound": 195
+      "outboundCount": 42,
+      "uniqueInbound": 197
     },
     {
       "path": "/adhd-care",
-      "outboundCount": 49,
-      "uniqueInbound": 190
+      "outboundCount": 50,
+      "uniqueInbound": 192
     },
     {
       "path": "/blog",
-      "outboundCount": 54,
-      "uniqueInbound": 185
+      "outboundCount": 55,
+      "uniqueInbound": 187
     },
     {
       "path": "/blog/adhd",
-      "outboundCount": 63,
-      "uniqueInbound": 140
+      "outboundCount": 64,
+      "uniqueInbound": 142
     },
     {
       "path": "/answers",
       "outboundCount": 83,
-      "uniqueInbound": 184
+      "uniqueInbound": 186
     },
     {
       "path": "/about",
-      "outboundCount": 39,
-      "uniqueInbound": 191
+      "outboundCount": 40,
+      "uniqueInbound": 193
     },
     {
       "path": "/weight-loss-metabolic-health",
-      "outboundCount": 44,
-      "uniqueInbound": 185
+      "outboundCount": 45,
+      "uniqueInbound": 187
     }
   ],
   "topSuggestions": [
@@ -1221,6 +1223,23 @@
         "title": "Why do I get brain fog after eating?"
       }
     ],
+    "/blog/chronic-fatigue-and-work-performance": [
+      {
+        "p": "/answers/can-sleep-apnea-cause-fatigue",
+        "score": 9,
+        "title": "Can sleep apnea cause fatigue?"
+      },
+      {
+        "p": "/blog/chronic-fatigue-vs-everyday-tiredness",
+        "score": 9,
+        "title": "Chronic Fatigue vs Everyday Tiredness: Knowing When to Dig Deeper"
+      },
+      {
+        "p": "/answers/afternoon-energy-crash-after-lunch",
+        "score": 7,
+        "title": "Why do I crash every afternoon after lunch?"
+      }
+    ],
     "/blog/chronic-fatigue-vs-everyday-tiredness": [
       {
         "p": "/answers/can-sleep-apnea-cause-fatigue",
@@ -1228,14 +1247,14 @@
         "title": "Can sleep apnea cause fatigue?"
       },
       {
+        "p": "/blog/chronic-fatigue-and-work-performance",
+        "score": 9,
+        "title": "Chronic Fatigue and Work Performance: When Exhaustion Won't Lift"
+      },
+      {
         "p": "/answers/afternoon-energy-crash-after-lunch",
         "score": 7,
         "title": "Why do I crash every afternoon after lunch?"
-      },
-      {
-        "p": "/answers/signs-of-sleep-apnea-in-adults",
-        "score": 7,
-        "title": "What are the signs of sleep apnea in adults?"
       }
     ],
     "/blog/compounded-vs-branded-glp1-medications": [
@@ -1842,6 +1861,23 @@
         "title": "What should I expect from a first telehealth visit?"
       }
     ],
+    "/blog/sleep-and-focus-at-work": [
+      {
+        "p": "/answers/can-sleep-apnea-cause-fatigue",
+        "score": 9,
+        "title": "Can sleep apnea cause fatigue?"
+      },
+      {
+        "p": "/answers/signs-of-sleep-apnea-in-adults",
+        "score": 9,
+        "title": "What are the signs of sleep apnea in adults?"
+      },
+      {
+        "p": "/answers/poor-sleep-feels-like-adhd",
+        "score": 4,
+        "title": "Can poor sleep feel like ADHD?"
+      }
+    ],
     "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign": [
       {
         "p": "/answers/can-sleep-apnea-cause-fatigue",
@@ -1995,41 +2031,42 @@
     ]
   },
   "inboundCounts": {
-    "/": 195,
-    "/about": 191,
-    "/adhd-care": 190,
-    "/blog": 185,
-    "/telehealth": 185,
-    "/weight-loss-metabolic-health": 185,
-    "/answers": 184,
-    "/labs": 184,
-    "/prescriptions": 183,
-    "/primary-urgent-care": 183,
-    "/redirect/chat": 183,
-    "/blog/adhd": 140,
-    "/blog/weight-loss": 134,
-    "/legal/cookie-policy": 132,
-    "/legal/notice-of-privacy-practices": 132,
-    "/legal/privacy-policy": 132,
-    "/legal/terms-of-use": 132,
-    "/legal": 130,
-    "/answers/signs-of-adult-adhd": 129,
-    "/blog/telehealth": 129,
-    "/mens-health-longevity": 128,
-    "/providers": 128,
-    "/redirect/meet-greet": 128,
-    "/answers/what-is-insulin-resistance": 126,
-    "/pricing": 124,
-    "/answers/why-am-i-tired-even-after-sleeping": 122,
-    "/blog/how-to-know-if-you-have-adhd-adult": 122,
-    "/adhd-screening": 121,
-    "/answers/is-online-adhd-diagnosis-legitimate": 119,
-    "/siya-circle": 118,
-    "/book-appointment": 117,
-    "/employers": 117,
-    "/womens-health": 117,
+    "/": 197,
+    "/about": 193,
+    "/adhd-care": 192,
+    "/blog": 187,
+    "/telehealth": 187,
+    "/weight-loss-metabolic-health": 187,
+    "/answers": 186,
+    "/labs": 186,
+    "/prescriptions": 185,
+    "/primary-urgent-care": 185,
+    "/redirect/chat": 185,
+    "/blog/adhd": 142,
+    "/blog/weight-loss": 136,
+    "/legal/cookie-policy": 134,
+    "/legal/notice-of-privacy-practices": 134,
+    "/legal/privacy-policy": 134,
+    "/legal/terms-of-use": 134,
+    "/legal": 132,
+    "/answers/signs-of-adult-adhd": 131,
+    "/blog/telehealth": 131,
+    "/mens-health-longevity": 130,
+    "/providers": 130,
+    "/redirect/meet-greet": 130,
+    "/answers/what-is-insulin-resistance": 128,
+    "/pricing": 126,
+    "/answers/why-am-i-tired-even-after-sleeping": 124,
+    "/blog/how-to-know-if-you-have-adhd-adult": 124,
+    "/adhd-screening": 123,
+    "/answers/is-online-adhd-diagnosis-legitimate": 121,
+    "/employers": 120,
+    "/siya-circle": 120,
+    "/book-appointment": 119,
+    "/womens-health": 119,
+    "/join-our-team": 118,
     "/legal/controlled-substance-treatment-agreement": 55,
-    "/fatigue": 43,
+    "/fatigue": 44,
     "/answers/can-adhd-be-diagnosed-online": 35,
     "/answers/starting-adhd-medication-adults": 27,
     "/preventive-care": 25,
@@ -2038,15 +2075,14 @@
     "/labs/how-to-read-results": 23,
     "/providers/dr-sneh-pandey": 23,
     "/answers/what-is-food-noise": 22,
+    "/blog/executive-dysfunction-adhd": 21,
     "/providers/dr-natasha-desai": 21,
+    "/primary-care": 20,
     "/blog/adhd-in-women": 19,
     "/blog/insulin-resistance-and-weight-loss-clinician-overview": 19,
-    "/primary-care": 19,
     "/providers/wendy-delgado": 19,
     "/blog/adhd-treatment-texas": 17,
-    "/blog/executive-dysfunction-adhd": 17,
     "/blog/food-noise-and-glp-1-what-it-means-and-what-helps": 17,
-    "/brain-fog": 17,
     "/labs/a1c-blood-sugar": 17,
     "/labs/preventive": 17,
     "/blog/is-online-adhd-diagnosis-legit": 16,
@@ -2054,6 +2090,7 @@
     "/labs/iron-ferritin": 15,
     "/providers/dr-vanessa-urbina": 15,
     "/answers/brain-fog-after-eating": 14,
+    "/brain-fog": 14,
     "/answers/late-adhd-diagnosis-adults": 13,
     "/answers/screening-vs-adhd-evaluation": 13,
     "/answers/what-does-low-testosterone-feel-like": 13,
@@ -2072,22 +2109,24 @@
     "/labs/vitamin-b12": 11,
     "/providers/dr-swati-pandey": 11,
     "/answers/what-included-199-adhd-evaluation": 10,
+    "/blog/chronic-fatigue-and-work-performance": 10,
+    "/blog/chronic-fatigue-vs-everyday-tiredness": 10,
     "/blog/how-to-choose-adhd-provider-california": 10,
     "/blog/how-to-safely-get-prescriptions-online": 10,
     "/answers/how-long-adhd-evaluation": 9,
     "/blog/adhd-evaluation-california-online-vs-in-person": 9,
+    "/blog/fatigue-after-illness": 9,
     "/labs/cmp": 9,
     "/answers/is-telehealth-legitimate": 8,
     "/answers/telehealth-adhd-california": 8,
     "/answers/why-normal-labs-dont-mean-healthy": 8,
     "/blog/adhd-medication-daily-or-as-needed-adults": 8,
     "/blog/adhd-medication-online-california": 8,
-    "/blog/chronic-fatigue-vs-everyday-tiredness": 8,
-    "/blog/fatigue-after-illness": 8,
-    "/blog/fatigue-despite-normal-labs": 8,
     "/blog/how-adhd-medication-is-prescribed-online": 8,
     "/blog/how-mental-health-affects-weight-loss-outcomes": 8,
+    "/blog/perimenopause-brain-fog": 8,
     "/blog/semaglutide-for-weight-loss-how-it-works": 8,
+    "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign": 8,
     "/labs/lipid-panel": 8,
     "/labs/womens-midlife": 8,
     "/providers/megan-wunderlich": 8,
@@ -2100,11 +2139,10 @@
     "/answers/signs-of-sleep-apnea-in-adults": 7,
     "/blog/adhd-and-binge-eating": 7,
     "/blog/adult-adhd-symptoms-california": 7,
-    "/blog/brain-fog-after-covid": 7,
+    "/blog/brain-fog-at-work": 7,
     "/blog/medical-weight-loss-vs-dieting-what-actually-works": 7,
     "/blog/minoxidil-for-hair-loss-does-it-work": 7,
     "/blog/online-adhd-diagnosis-texas": 7,
-    "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign": 7,
     "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd": 7,
     "/labs/fatigue-brain-fog": 7,
     "/labs/mens-health": 7,
@@ -2119,7 +2157,7 @@
     "/blog/adhd-medication-side-effects-what-to-expect": 6,
     "/blog/adhd-telehealth-california": 6,
     "/blog/adhd-testing-online-california-screening-vs-evaluation": 6,
-    "/blog/brain-fog-and-anxiety": 6,
+    "/blog/brain-fog-after-covid": 6,
     "/blog/oral-vs-topical-minoxidil-which-is-right": 6,
     "/blog/vyvanse-vs-adderall-differences": 6,
     "/blog/when-is-testosterone-therapy-appropriate": 6,
@@ -2127,10 +2165,9 @@
     "/answers/can-sleep-apnea-cause-fatigue": 5,
     "/answers/which-preventive-blood-tests-adults": 5,
     "/blog/adhd-evaluation-cost-texas": 5,
-    "/blog/brain-fog-and-sleep": 5,
+    "/blog/brain-fog-and-anxiety": 5,
     "/blog/compounded-vs-branded-glp1-medications": 5,
     "/blog/iron-deficiency-brain-fog-adhd": 5,
-    "/blog/perimenopause-brain-fog": 5,
     "/blog/telehealth-prescriptions-how-online-treatment-works": 5,
     "/creyos-adhd-testing": 5,
     "/labs/vitamin-d": 5,
@@ -2147,9 +2184,9 @@
     "/answers/testosterone-and-adhd-overlap": 4,
     "/answers/time-blindness-adhd": 4,
     "/answers/who-qualifies-glp-1-weight-loss": 4,
-    "/blog/brain-fog-at-work": 4,
+    "/blog/brain-fog-and-sleep": 4,
+    "/blog/fatigue-despite-normal-labs": 4,
     "/blog/glp1-side-effects-and-how-to-manage-them": 4,
-    "/blog/iron-deficiency-and-fatigue": 4,
     "/blog/is-adhd-medication-safe-long-term": 4,
     "/blog/non-stimulant-adhd-medications-explained": 4,
     "/blog/sildenafil-for-erectile-dysfunction-what-to-expect": 4,
@@ -2162,6 +2199,7 @@
     "/answers/what-to-do-after-lab-results": 3,
     "/blog/adhd-brain-imaging-subtypes": 3,
     "/blog/brain-fog-vs-adhd": 3,
+    "/answers/adhd-workplace-accommodations": 2,
     "/answers/afternoon-energy-crash-after-lunch": 2,
     "/answers/ed-telehealth-legitimate": 2,
     "/answers/fsa-hsa-adhd-evaluation": 2,
@@ -2174,9 +2212,11 @@
     "/adhd-screening-results": 1,
     "/answers/weight-gain-after-stopping-ozempic": 1,
     "/answers/what-happens-after-adhd-evaluation": 1,
+    "/blog/iron-deficiency-and-fatigue": 1,
     "/blog/morning-fatigue": 1,
     "/blog/phentermine-for-weight-loss-safety-and-effectiveness": 1,
     "/blog/pots-and-adhd": 1,
+    "/blog/sleep-and-focus-at-work": 1,
     "/blog/thyroid-and-fatigue": 1,
     "/adhd-care/miami": 0,
     "/adhd-care/orlando": 0,
@@ -2191,7 +2231,6 @@
     "/adult-adhd-diagnosis": 0,
     "/adult-adhd-screening-california": 0,
     "/adult-adhd-screening-texas": 0,
-    "/answers/adhd-workplace-accommodations": 0,
     "/blog/adhd-evaluation-cost-california": 0,
     "/blog/adhd-treatment-austin-tx": 0,
     "/blog/adhd-treatment-dallas-tx": 0,
@@ -2212,7 +2251,6 @@
     "/blog/why-am-i-always-tired-causes-when-to-see-doctor": 0,
     "/docs/tint-options-preview": 0,
     "/intake": 0,
-    "/join-our-team": 0,
     "/online-adhd-test": 0,
     "/privacy-policy": 0,
     "/providers/derek-timbs": 0,

@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
 Generated: 2026-09-01
-Total pages: 182
+Total pages: 184
 
 ---
 
@@ -438,7 +438,7 @@ Total pages: 182
 
 - Health Insights &amp; Blog Hub (2026) | ADHD, Weight Loss &amp; Telehealth
   URL: https://siya.health/blog
-  Summary: Evidence-based ADHD, weight loss & telehealth articles (2026). Browse by category, read medication education, and book licensed providers in TX, PA & FL.
+  Summary: Evidence-based ADHD, weight loss & telehealth articles (2026). Browse by category, read medication education, and book licensed providers in CA, TX, PA & FL.
   Topics: adhd, weight-loss, telehealth
 
 - Adderall for ADHD: How It Works in 2026 (Mechanism, Benefits &amp; Safety)
@@ -552,6 +552,10 @@ Total pages: 182
   URL: https://siya.health/blog/brain-fog-vs-adhd
   Summary: Brain fog and ADHD can feel similar. Learn how clinicians sort short-term fog from lifelong attention patterns—and when primary care evaluation helps.
   Topics: adhd
+
+- Chronic Fatigue and Work Performance: When Exhaustion Won't Lift
+  URL: https://siya.health/blog/chronic-fatigue-and-work-performance
+  Summary: Chronic fatigue at work—unrelenting exhaustion, crash cycles, brain fog—may have medical causes. Learn framing for evaluation before blaming burnout alone.
 
 - Chronic Fatigue vs Everyday Tiredness: Knowing When to Dig Deeper
   URL: https://siya.health/blog/chronic-fatigue-vs-everyday-tiredness
@@ -712,6 +716,11 @@ Total pages: 182
   URL: https://siya.health/blog/sildenafil-for-erectile-dysfunction-what-to-expect
   Summary: Sildenafil for erectile dysfunction in 2026: mechanism, cardiovascular precautions, interactions, and telehealth norms—informational, not prescribing advice.
   Topics: mens-health
+
+- Sleep, Focus, and Cognitive Load at Work
+  URL: https://siya.health/blog/sleep-and-focus-at-work
+  Summary: Poor sleep and heavy cognitive load can look like ADHD or burnout at work. Learn when to treat sleep as a medical issue—not just a schedule problem.
+  Topics: sleep
 
 - Sleep Apnea, Fatigue &amp; Metabolic Risk: When Snoring Is Not Benign
   URL: https://siya.health/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign
@@ -910,7 +919,7 @@ Total pages: 182
 
 - Our Care Team
   URL: https://siya.health/providers
-  Summary: Meet Siya Health physicians and advanced practice providers—primary care–led ADHD, metabolic, and telehealth care across California, Texas, Pennsylvania, and Florida.
+  Summary: Meet Siya Health physicians and advanced practice providers—primary care–led telehealth for working adults across ADHD, metabolic, fatigue, and neurocognitive evaluation in California, Texas, Pennsylv…
 
 - Dr. Natasha Desai, MD | Adult ADHD &amp; Family Medicine
   URL: https://siya.health/providers/dr-natasha-desai

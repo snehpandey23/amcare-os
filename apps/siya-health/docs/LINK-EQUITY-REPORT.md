@@ -1,6 +1,6 @@
 # Link Equity Report — Canonical Winning Blogs
 
-Generated: 2026-09-01T12:49:59.733Z
+Generated: 2026-09-01T14:56:42.991Z
 
 ## Top 20 blogs needing more internal links
 
@@ -11,7 +11,7 @@ Generated: 2026-09-01T12:49:59.733Z
 | 3 | /blog/tirzepatide-vs-semaglutide-which-is-better | 4 | ✗ | ✗ | ✓ | ✓ | ✗ | 2/5 |
 | 4 | /blog/sildenafil-for-erectile-dysfunction-what-to-expect | 4 | ✗ | ✗ | ✓ | ✓ | ✗ | 2/5 |
 | 5 | /blog/minoxidil-for-hair-loss-does-it-work | 7 | ✗ | ✗ | ✓ | ✓ | ✗ | 2/5 |
-| 6 | /fatigue | 43 | ✗ | ✗ | ✓ | ✗ | ✓ | 2/5 |
+| 6 | /fatigue | 44 | ✗ | ✗ | ✓ | ✗ | ✓ | 2/5 |
 | 7 | /blog/non-stimulant-adhd-medications-explained | 4 | ✗ | ✗ | ✓ | ✓ | ✓ | 3/5 |
 | 8 | /blog/is-adhd-medication-safe-long-term | 4 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
 | 9 | /blog/glp1-side-effects-and-how-to-manage-them | 4 | ✓ | ✓ | ✓ | ✓ | ✗ | 4/5 |
@@ -24,24 +24,24 @@ Generated: 2026-09-01T12:49:59.733Z
 | 16 | /blog/vyvanse-vs-adderall-differences | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | 5/5 |
 | 17 | /blog/when-is-testosterone-therapy-appropriate | 6 | ✓ | ✓ | ✓ | ✓ | ✓ | 5/5 |
 | 18 | /blog/medical-weight-loss-vs-dieting-what-actually-works | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | 5/5 |
-| 19 | /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 7 | ✓ | ✓ | ✓ | ✓ | ✓ | 5/5 |
-| 20 | /blog/semaglutide-for-weight-loss-how-it-works | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | 5/5 |
+| 19 | /blog/semaglutide-for-weight-loss-how-it-works | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | 5/5 |
+| 20 | /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 8 | ✓ | ✓ | ✓ | ✓ | ✓ | 5/5 |
 
 ## All canonical blogs
 
 | Blog | Inbound |
 |------|--------:|
-| /fatigue | 43 |
+| /fatigue | 44 |
 | /blog/insulin-resistance-and-weight-loss-clinician-overview | 19 |
 | /blog/food-noise-and-glp-1-what-it-means-and-what-helps | 17 |
 | /blog/is-online-adhd-diagnosis-legit | 16 |
 | /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | 13 |
 | /blog/medical-weight-loss-glp1-semaglutide-texas | 11 |
 | /blog/semaglutide-for-weight-loss-how-it-works | 8 |
+| /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 8 |
 | /blog/adhd-medication-daily-or-as-needed-adults | 8 |
 | /blog/medical-weight-loss-vs-dieting-what-actually-works | 7 |
 | /blog/minoxidil-for-hair-loss-does-it-work | 7 |
-| /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 7 |
 | /blog/vyvanse-vs-adderall-differences | 6 |
 | /blog/adhd-medication-side-effects-what-to-expect | 6 |
 | /blog/when-is-testosterone-therapy-appropriate | 6 |

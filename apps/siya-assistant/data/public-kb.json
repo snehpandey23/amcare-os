@@ -2,7 +2,7 @@
   "version": 1,
   "source": "siya-health public indexes (llms-full + curated public facts)",
   "generated": "2026-09-01",
-  "chunkCount": 189,
+  "chunkCount": 191,
   "chunks": [
     {
       "id": "fact_states",
@@ -2984,7 +2984,7 @@
       "title": "Health Insights & Blog Hub (2026) | ADHD, Weight Loss & Telehealth",
       "url": "https://www.siya.health/blog",
       "path": "/blog",
-      "summary": "Evidence-based ADHD, weight loss & telehealth articles (2026). Browse by category, read medication education, and book licensed providers in TX, PA & FL.",
+      "summary": "Evidence-based ADHD, weight loss & telehealth articles (2026). Browse by category, read medication education, and book licensed providers in CA, TX, PA & FL.",
       "topics": [
         "adhd",
         "weight-loss",
@@ -3014,6 +3014,7 @@
         "licensed",
         "providers",
         "in",
+        "ca",
         "tx",
         "pa",
         "fl"
@@ -3876,6 +3877,44 @@
         "care",
         "evaluation",
         "helps"
+      ]
+    },
+    {
+      "id": "blog_chronic-fatigue-and-work-performance",
+      "title": "Chronic Fatigue and Work Performance: When Exhaustion Won't Lift",
+      "url": "https://www.siya.health/blog/chronic-fatigue-and-work-performance",
+      "path": "/blog/chronic-fatigue-and-work-performance",
+      "summary": "Chronic fatigue at work—unrelenting exhaustion, crash cycles, brain fog—may have medical causes. Learn framing for evaluation before blaming burnout alone.",
+      "topics": [],
+      "keywords": [
+        "chronic",
+        "fatigue",
+        "and",
+        "work",
+        "performance",
+        "when",
+        "exhaustion",
+        "won",
+        "t",
+        "lift",
+        "at",
+        "unrelenting",
+        "crash",
+        "cycles",
+        "brain",
+        "fog",
+        "may",
+        "have",
+        "medical",
+        "causes",
+        "learn",
+        "framing",
+        "for",
+        "evaluation",
+        "before",
+        "blaming",
+        "burnout",
+        "alone"
       ]
     },
     {
@@ -5133,6 +5172,45 @@
         "advice",
         "mens",
         "health"
+      ]
+    },
+    {
+      "id": "blog_sleep-and-focus-at-work",
+      "title": "Sleep, Focus, and Cognitive Load at Work",
+      "url": "https://www.siya.health/blog/sleep-and-focus-at-work",
+      "path": "/blog/sleep-and-focus-at-work",
+      "summary": "Poor sleep and heavy cognitive load can look like ADHD or burnout at work. Learn when to treat sleep as a medical issue—not just a schedule problem.",
+      "topics": [
+        "sleep"
+      ],
+      "keywords": [
+        "sleep",
+        "focus",
+        "and",
+        "cognitive",
+        "load",
+        "at",
+        "work",
+        "poor",
+        "heavy",
+        "can",
+        "look",
+        "like",
+        "adhd",
+        "or",
+        "burnout",
+        "learn",
+        "when",
+        "to",
+        "treat",
+        "as",
+        "a",
+        "medical",
+        "issue",
+        "not",
+        "just",
+        "schedule",
+        "problem"
       ]
     },
     {
@@ -6478,7 +6556,7 @@
       "title": "Our Care Team",
       "url": "https://www.siya.health/providers",
       "path": "/providers",
-      "summary": "Meet Siya Health physicians and advanced practice providers—primary care–led ADHD, metabolic, and telehealth care across California, Texas, Pennsylvania, and Florida.",
+      "summary": "Meet Siya Health physicians and advanced practice providers—primary care–led telehealth for working adults across ADHD, metabolic, fatigue, and neurocognitive evaluation in California, Texas, Pennsylv…",
       "topics": [],
       "keywords": [
         "our",
@@ -6494,14 +6572,20 @@
         "providers",
         "primary",
         "led",
+        "telehealth",
+        "for",
+        "working",
+        "adults",
+        "across",
         "adhd",
         "metabolic",
-        "telehealth",
-        "across",
+        "fatigue",
+        "neurocognitive",
+        "evaluation",
+        "in",
         "california",
         "texas",
-        "pennsylvania",
-        "florida"
+        "pennsylv"
       ]
     },
     {
