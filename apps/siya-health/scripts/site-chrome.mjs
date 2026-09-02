@@ -90,18 +90,17 @@ export const NAV_LABS = { path: '/labs', label: 'Labs' };
 export const NAV_JOIN_OUR_TEAM = {
   path: '/join-our-team',
   label: 'Join Our Team',
-  shortLabel: 'Join Our Team',
+  shortLabel: 'Careers',
 };
 
 /** Primary nav service links — Join Our Team replaces Men's Health at top level. */
 const STANDARD_SERVICE_NAV_LINKS = [
-  { path: '/adhd-care', label: 'ADHD Care' },
-  { path: '/weight-loss-metabolic-health', label: 'Weight Loss' },
-  { path: '/telehealth', label: 'Telehealth' },
-  { path: NAV_JOIN_OUR_TEAM.path, label: NAV_JOIN_OUR_TEAM.label },
-  { path: NAV_LABS.path, label: NAV_LABS.label },
-  { path: NAV_EMPLOYERS.path, label: NAV_EMPLOYERS.label },
-  { path: '/blog', label: 'Blog' },
+  { path: '/adhd-care', label: 'ADHD Care', shortLabel: 'ADHD Care' },
+  { path: '/weight-loss-metabolic-health', label: 'Weight Loss', shortLabel: 'Weight Loss' },
+  { path: '/telehealth', label: 'Telehealth', shortLabel: 'Telehealth' },
+  { path: NAV_JOIN_OUR_TEAM.path, label: NAV_JOIN_OUR_TEAM.label, shortLabel: NAV_JOIN_OUR_TEAM.shortLabel },
+  { path: NAV_EMPLOYERS.path, label: NAV_EMPLOYERS.label, shortLabel: NAV_EMPLOYERS.shortLabel },
+  { path: '/blog', label: 'Blog', shortLabel: 'Blog' },
 ];
 
 function renderAboutNavDropdown() {
@@ -110,12 +109,13 @@ function renderAboutNavDropdown() {
           <div class="nav-dropdown__menu" id="nav-about-menu" role="menu">
             <a href="/about" role="menuitem">About Us</a>
             <a href="${NAV_PROVIDERS.path}" role="menuitem">${NAV_PROVIDERS.label}</a>
+            <a href="${NAV_LABS.path}" role="menuitem">${NAV_LABS.label}</a>
           </div>
         </div>`;
 }
 
 function renderStandardDesktopNav() {
-  const links = STANDARD_SERVICE_NAV_LINKS.map((l) => `<a href="${l.path}">${l.label}</a>`).join('\n          ');
+  const links = STANDARD_SERVICE_NAV_LINKS.map((l) => `<a href="${l.path}">${l.shortLabel || l.label}</a>`).join('\n          ');
   return `<nav class="nav-center" aria-label="Primary">
           <a href="/">Home</a>
           ${renderAboutNavDropdown()}
@@ -130,6 +130,8 @@ function renderStandardMobileNavShell() {
         <div class="nav-mobile">
           <a href="/">Home</a>
           <a href="/about">About Us</a>
+          <a href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>
+          <a href="${NAV_LABS.path}">${NAV_LABS.label}</a>
           ${links}
         </div>`;
 }
@@ -787,7 +789,7 @@ export function injectLabsNav(html) {
 }
 
 function injectEmployersInNavBlock(navHtml) {
-  const link = `<a href="${NAV_EMPLOYERS.path}">${NAV_EMPLOYERS.label}</a>`;
+  const link = `<a href="${NAV_EMPLOYERS.path}">${NAV_EMPLOYERS.shortLabel}</a>`;
   if (navHtml.includes(`href="${NAV_EMPLOYERS.path}"`)) return navHtml;
   if (navHtml.includes('href="/blog">Blog</a>')) {
     return navHtml.replace(/(<a href="\/blog">Blog<\/a>)/, `${link}\n          $1`);
@@ -1745,29 +1747,15 @@ export function injectProvidersNav(html) {
   html = html.replaceAll('href="/providers">Our providers</a>', `href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>`);
   html = html.replaceAll('href="/providers">Our physicians</a>', `href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>`);
 
-  const aboutDropdown = renderAboutNavDropdown();
-  const DROPDOWN_RE =
-    /<div class="nav-dropdown">\s*<button[\s\S]*?<\/button>\s*<div class="nav-dropdown__menu"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*/gi;
-
   const collapseDesktopNav = (nav) => {
     if (!/class="nav-center"/i.test(nav)) return nav;
-    if (primaryNavIsSparse(nav)) return renderStandardDesktopNav();
-    let next = nav
-      .replace(DROPDOWN_RE, '')
-      .replace(/<a href="\/about">About(?: Us)?<\/a>\s*/gi, '')
-      .replace(new RegExp(`<a href="${NAV_PROVIDERS.path}">[^<]*</a>\\s*`, 'gi'), '')
-      .replace(/<a href="\/providers">[^<]*<\/a>\s*/gi, '')
-      .replace(/<\/div>\s*(?=<a href="\/(?:adhd-care|weight-loss|telehealth|mens-health|join-our-team|blog|answers)")/gi, '');
-    if (next.includes('nav-dropdown')) return next;
-    return next.replace(
-      /(<nav class="nav-center"[^>]*>\s*(?:<a href="\/">Home<\/a>\s*)?)/i,
-      `$1${aboutDropdown}\n          `,
-    );
+    return renderStandardDesktopNav();
   };
 
   const standardMobileInner = `<a href="/">Home</a>
           <a href="/about">About Us</a>
           <a href="${NAV_PROVIDERS.path}">${NAV_PROVIDERS.label}</a>
+          <a href="${NAV_LABS.path}">${NAV_LABS.label}</a>
           ${STANDARD_SERVICE_NAV_LINKS.map((l) => `<a href="${l.path}">${l.label}</a>`).join('\n          ')}`;
 
   const collapseMobileNav = (nav) => {

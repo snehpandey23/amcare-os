@@ -186,6 +186,7 @@ p {
 }
 
 .site-header-transparent .nav-center a,
+.site-header-transparent .nav-center .nav-dropdown__toggle,
 .site-header-transparent .nav-toggle-label { color: var(--white); }
 .site-header-transparent .nav-toggle-label { border-color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.08); }
 .site-header-transparent .nav-toggle-label::before { color: var(--white); }
@@ -210,6 +211,7 @@ p {
   -webkit-backdrop-filter: blur(12px);
 }
 .site-header-transparent.site-header-scrolled .nav-center a,
+.site-header-transparent.site-header-scrolled .nav-center .nav-dropdown__toggle,
 .site-header-transparent.site-header-scrolled .nav-toggle-label { color: var(--text); }
 .site-header-transparent.site-header-scrolled .nav-toggle-label { border-color: var(--border); background: var(--white); }
 .site-header-transparent.site-header-scrolled .nav-toggle-label::before { color: var(--text); }
@@ -358,10 +360,11 @@ p {
   .nav-center {
     display: flex;
     align-items: center;
-    gap: 22px;
+    gap: 14px;
     flex: 1;
     justify-content: center;
-    margin: 0 20px;
+    margin: 0 12px;
+    min-width: 0;
   }
 
   /* Even nav rhythm — single flex gap; no cluster margin after Care Team */
@@ -371,8 +374,16 @@ p {
   }
 }
 
-.nav-center a {
-  font-size: 1.125rem;
+@media (min-width: 1280px) {
+  .nav-center {
+    gap: 18px;
+    margin: 0 16px;
+  }
+}
+
+.nav-center a,
+.nav-center .nav-dropdown__toggle {
+  font-size: 1.0625rem;
   font-weight: 500;
   color: var(--text);
   transition: color 0.2s;
@@ -380,7 +391,11 @@ p {
 }
 
 .nav-center a:hover,
-.nav-center a:focus { color: var(--primary); }
+.nav-center a:focus,
+.nav-center .nav-dropdown__toggle:hover,
+.nav-center .nav-dropdown__toggle:focus-visible {
+  color: var(--primary);
+}
 
 .nav-cta {
   flex-shrink: 0;
@@ -467,15 +482,16 @@ p {
   border: 0;
   background: transparent;
   font-family: inherit;
-  font-size: 1.125rem;
-  font-weight: 500;
+  font-size: inherit;
+  font-weight: inherit;
   line-height: inherit;
+  letter-spacing: inherit;
   color: inherit;
   cursor: pointer;
   padding: 0;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   white-space: nowrap;
 }
 
@@ -8288,12 +8304,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
    Sprint B1 — Visual polish (measurement-safe)
    ============================================ */
 
-@media (min-width: 900px) {
-  .nav-center a {
-    font-size: 1.2rem;
-    letter-spacing: 0.01em;
-  }
-}
+/* Sprint B1 nav sizing removed — unified with .nav-center a + .nav-dropdown__toggle above */
 
 #symptoms.section,
 #why-patients.section,
@@ -9947,13 +9958,6 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
 @media (min-width: 900px) {
   .page-home .brand-lockup__wordmark {
     font-size: 1.2rem;
-  }
-
-  .page-home .nav-center {
-    gap: 20px;
-    justify-content: center;
-    margin-left: 8px;
-    margin-right: 24px;
   }
 
   .page-home .site-header .container {
