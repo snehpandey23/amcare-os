@@ -643,6 +643,7 @@ const CASES: MetaCase[] = [
     id: "practice-drills-benefit",
     category: "capability",
     test: (t, priorUser, priorAssist) => {
+      if (/\b(open|start|take|go\s+to|show\s+me|launch|navigate)\b/.test(t)) return false;
       if (
         /\b(practice-?wide|prove the practice|building practice|medical practice|our practice|clinic practice|practice hours|practice before raising)\b/.test(
           t,

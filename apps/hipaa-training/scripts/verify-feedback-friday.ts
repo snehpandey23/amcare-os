@@ -11,7 +11,7 @@ import { assessFeedbackBody } from "../../../integrations/hipaa-training-api/src
 /** Must stay in sync with feedback-received-email.ts — static privacy template only. */
 const FEEDBACK_EMAIL_SUBJECT = "You've received feedback from a teammate";
 const FEEDBACK_EMAIL_BODY_SNIPPETS = [
-  "You've received feedback from a teammate on Feedback Friday.",
+  "You've received feedback from a teammate.",
   "We don't include feedback text in email",
   "/feedback",
 ];

@@ -1,5 +1,6 @@
 /**
- * Feedback Friday — recipient notification (Resend).
+ * Peer feedback — recipient notification (Resend).
+ * Feedback Friday is a themed reminder day only; feedback can arrive any weekday.
  * Same sender / API-key pattern as sop-review-email.ts and task-assignment-email.ts.
  * Never includes feedback body or giver identity in email (read in-app at /feedback).
  */
@@ -96,7 +97,7 @@ export function buildFeedbackReceivedEmail(opts: {
     text: [
       `Hi ${opts.recipientName || "there"},`,
       "",
-      "You've received feedback from a teammate on Feedback Friday.",
+      "You've received feedback from a teammate.",
       "",
       "We don't include feedback text in email — read it in the portal:",
       link,

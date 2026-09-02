@@ -13,7 +13,7 @@ import {
 import { isSopAssignmentQuery, answerSopAssignmentAsk } from "./sop-assignment-ask";
 import { isMissingSopsQuery, answerMissingSopsAsk } from "./sop-missing-ask";
 import { isMyScheduleQuery, answerMyScheduleQuery } from "./shift-roster-ask";
-import { answerWhoIsQuery, isWhoAmIQuery, extractWhoIsName } from "./staff-identity-ask";
+import { answerWhoIsQuery, isWhoAmIQuery, extractWhoIsName, fetchViewerIdentity } from "./staff-identity-ask";
 import { synthesizeWorkforceAnswer } from "./llm-answer";
 import {
   retrieveLayeredKnowledge,
@@ -34,9 +34,14 @@ import {
 import { fetchAdminOpsSnapshot, fetchMyTasksToday } from "./admin-ops-snapshot";
 import { detectAdminOpsIntent, runAdminOpsCoach, staffMyTasksReply, isAmbiguousStaffLoginDashboardQuery, historySuggestsPresenceTopic } from "./admin-ops-coach";
 import { tryFactsLookup } from "./facts-lookup";
-import { tryPracticeLookup } from "./practice-lookup";
 import { trySopChromeLookup } from "./sop-chrome-lookup";
 import { tryWorkplaceLinkLookup } from "./workplace-link-lookup";
+import {
+  buildCapabilityCatalogReply,
+  isBroadCapabilityAsk,
+  tryFeatureNavigation,
+  type FeatureNavOpts,
+} from "./feature-navigation";
 import { answerMetaConversation, type MetaConversationReply } from "./meta-conversation";
 import {
   acknowledgePersonalPreference,
@@ -58,6 +63,7 @@ import {
   portalDomainFilter,
   asksDomainFlags,
 } from "./founder-chat-context";
+import { isPortalAdmin } from "@/lib/portal-role";
 
 export interface SiyaReply {
   message: string;
@@ -192,6 +198,69 @@ function toolShortcutReply(text: string, task = "Tool bookmark"): SiyaReply | nu
   };
 }
 
+async function resolveFeatureNavOpts(token: string | null): Promise<FeatureNavOpts> {
+  if (!token) return { isSignedIn: false, isAdmin: false };
+  const viewer = await fetchViewerIdentity(token);
+  return {
+    isSignedIn: !!viewer,
+    isAdmin: isPortalAdmin(viewer?.role),
+  };
+}
+
+function featureNavigationReply(
+  hit: { id: string; label: string; message: string; links: { label: string; href: string }[] },
+  founderCoach: boolean,
+  task = "Portal navigation",
+): SiyaReply {
+  return {
+    message: polishStaffMessage(hit.message),
+    chunks: [],
+    knowledgeGap: false,
+    sources: [],
+    portalLinks: hit.links,
+    escalationPreview: undefined,
+    ruleFinal: true,
+    routing: {
+      department: founderCoach ? "Leadership" : "General",
+      task: `${task} · ${hit.label}`,
+      confidence: "high",
+      followUpQuestions: [],
+    },
+  };
+}
+
+async function featureNavigationEarly(
+  message: string,
+  token: string | null,
+  founderCoach: boolean,
+): Promise<SiyaReply | null> {
+  const navOpts = await resolveFeatureNavOpts(token);
+  if (isBroadCapabilityAsk(message)) {
+    return featureNavigationReply(
+      buildCapabilityCatalogReply(navOpts),
+      founderCoach,
+      "Portal capabilities",
+    );
+  }
+  const hit = tryFeatureNavigation(message, navOpts);
+  if (hit) return featureNavigationReply(hit, founderCoach);
+  return null;
+}
+
+function featureNavigationSync(message: string, founderCoach: boolean): SiyaReply | null {
+  const navOpts: FeatureNavOpts = { isSignedIn: undefined, isAdmin: false };
+  if (isBroadCapabilityAsk(message)) {
+    return featureNavigationReply(
+      buildCapabilityCatalogReply(navOpts),
+      founderCoach,
+      "Portal capabilities",
+    );
+  }
+  const hit = tryFeatureNavigation(message, navOpts);
+  if (hit) return featureNavigationReply(hit, founderCoach);
+  return null;
+}
+
 export async function runSiyaAssistantAsync(
   message: string,
   history: { role: string; content: string }[] = [],
@@ -276,6 +345,9 @@ export async function runSiyaAssistantAsync(
       },
     };
   }
+
+  const featureNavEarly = await featureNavigationEarly(message, token, founderCoach);
+  if (featureNavEarly) return featureNavEarly;
 
   const metaEarly = metaConversationReply(
     message,
@@ -791,25 +863,8 @@ function buildSiyaReply(
     };
   }
 
-  // Learn / Practice deep-links before meta — culture “train you” must deep-link, not only catalog text.
-  const practiceHit = tryPracticeLookup(text);
-  if (practiceHit) {
-    return {
-      message: polishStaffMessage(practiceHit.message),
-      chunks: [],
-      knowledgeGap: false,
-      sources: [],
-      portalLinks: practiceHit.links,
-      escalationPreview: undefined,
-      ruleFinal: true,
-      routing: {
-        department: "General",
-        task: "Learn / Practice link",
-        confidence: "high",
-        followUpQuestions: [],
-      },
-    };
-  }
+  const featureNav = featureNavigationSync(text, founderCoach);
+  if (featureNav) return featureNav;
 
   const toolShortcut = toolShortcutReply(text);
   if (toolShortcut) return toolShortcut;

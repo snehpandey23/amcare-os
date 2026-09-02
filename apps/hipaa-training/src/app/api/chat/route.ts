@@ -65,8 +65,10 @@ function staffSafeLinks(links: { label: string; href: string }[]): { label: stri
   const out: { label: string; href: string }[] = [];
   for (const l of links) {
     if (!l.href || seen.has(l.href)) continue;
-    if (/\/memory(\?|$)/i.test(l.href) && !/\/memory\/knowledge\/sops/i.test(l.href)) continue;
-    if (/^(the siya way|decision log|policies\s*&\s*requirements|knowledge|memory)$/i.test(l.label.trim())) {
+    const label = l.label.trim();
+    // KB retrieval tab deep-links — not deterministic portal nav buttons.
+    if (/\/memory\?tab=/i.test(l.href)) continue;
+    if (/^(the siya way|decision log|policies\s*&\s*requirements|knowledge)$/i.test(label)) {
       continue;
     }
     seen.add(l.href);
