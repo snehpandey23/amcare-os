@@ -1,5 +1,5 @@
 /**
- * Workplace / working-professionals blog posts — sleep+focus, chronic fatigue at work.
+ * Workplace / working-professionals blog posts — employee guides + HR/employer primers.
  * Run before apply-workplace-seo-cluster.mjs and seo-build.mjs.
  */
 import fs from 'fs';
@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BLOG_DIR = path.join(__dirname, '..', 'blog');
-const DATE = '2026-09-01';
+const DEFAULT_DATE = '2026-09-01';
 
 const POSTS = [
   {
@@ -119,6 +119,200 @@ const POSTS = [
     relatedHub: '/fatigue',
     relatedHubLabel: 'Fatigue evaluation hub',
   },
+  {
+    slug: 'cognitive-health-benefits-for-employers',
+    datePublished: '2026-09-02',
+    audience: 'employer',
+    title: 'Cognitive Health Benefits for Employers: What Clinical Programs Include | Siya Health',
+    headline: 'Cognitive Health Benefits for Employers',
+    breadcrumbShort: 'Cognitive Health Benefits',
+    metaDescription:
+      'HR and benefits leaders: learn what physician-led cognitive health programs include—screening, evaluation, and follow-up—and how they differ from wellness apps.',
+    meta: 'Employers · HR & benefits guide',
+    hubHref: '/employers',
+    hubLabel: 'Employers',
+    parentEntity: '/employers',
+    cluster: 'workplace',
+    lead: 'Benefits teams are asked to solve focus, fatigue, and attention problems at work. The hard part is knowing what counts as clinical care—and what is only a perk.',
+    body: `
+            <p>“Cognitive health” shows up in vendor decks, EAP renewals, and leadership offsites. Some offerings are coaching apps. Others are physician-led telehealth with structured screening and evaluation pathways. The difference matters for compliance, employee trust, and whether anyone actually gets a diagnosis—or only a dashboard.</p>
+            <h2>Three layers HR should separate</h2>
+            <ul>
+              <li><strong>Screening</strong> — structured questionnaires or markers that flag patterns (attention, sleep, stress). Screening is not diagnosis.</li>
+              <li><strong>Clinical evaluation</strong> — physician-led history, functional review, and medical decision-making when follow-up is appropriate.</li>
+              <li><strong>Ongoing care</strong> — treatment, monitoring, and documentation within the clinician–patient relationship—not an employer report.</li>
+            </ul>
+            <h2>What structured clinical programs can include</h2>
+            <p>Programs built for working adults may offer licensed telehealth in eligible states, concierge-supported scheduling, and pathways for ADHD-related attention patterns, sleep disruption, and fatigue that affects focus. That is different from a meditation library or a generic “mental fitness” score.</p>
+            <p>Siya Health’s <a href="/employers">employer program overview</a> describes partnership pathways for HR teams. Individual employees can also use standard patient booking without a contract.</p>
+            <h2>What responsible programs do not do</h2>
+            <ul>
+              <li>Share individual diagnoses, medications, or visit notes with employers without appropriate patient authorization</li>
+              <li>Replace occupational medicine, disability determination, or legal accommodation processes</li>
+              <li>Guarantee outcomes—clinical results vary by individual</li>
+              <li>Publish one-size-fits-all B2B pricing before pilot design (packaging is finalized with early partners)</li>
+            </ul>
+            <h2>Wellness apps versus physician-led telehealth</h2>
+            <p>Apps can support habits and stress management. They generally cannot prescribe, interpret labs, or document conditions for accommodations. When employees need answers about ADHD, sleep apnea risk, or persistent fatigue, a licensed clinician—not an algorithm—should be in the loop.</p>
+            <h2>Licensed states and eligibility</h2>
+            <p>Siya Health provides adult telehealth in California, Texas, Pennsylvania, and Florida. Eligibility is confirmed at scheduling based on where the employee is located at the time of visit.</p>
+            <p><em>Educational only—for HR and benefits planning. Not medical, legal, or benefits advice. Program design varies by partnership stage.</em></p>
+            <aside class="blog-internal-links" aria-label="Knowledge graph" data-assembly="supporting-cluster">
+              <p><strong>In this graph:</strong>
+                <a href="/employers">Employers</a>
+                → <a href="/answers/adhd-workplace-accommodations">Workplace accommodations</a>
+                → <a href="/adhd-care">ADHD care</a>
+              </p>
+            </aside>`,
+    faqs: [
+      [
+        'Is cognitive health the same as mental health benefits?',
+        'They overlap but are not identical. Cognitive health in a workplace context often includes attention, sleep, and fatigue patterns that affect job performance—some of which are medical and some situational. Benefits design should clarify which vendor handles clinical care versus coaching.',
+      ],
+      [
+        'Can employers receive employee screening results?',
+        'Responsible clinical programs treat individual health information as part of the clinician–patient relationship. Employers typically receive program-level implementation information—not individual results—unless law and patient authorization require otherwise.',
+      ],
+      [
+        'Does Siya publish employer pricing on the website?',
+        'No. B2B packaging and pricing are finalized with early partners. Submit an inquiry on the employers page for what is available for your organization size and goals.',
+      ],
+    ],
+    relatedArticles: [
+      { href: '/blog/adhd-accommodations-hr-primer', label: 'ADHD Accommodations: An HR Primer' },
+      { href: '/blog/focus-fatigue-workforce-issue', label: 'Focus & Fatigue as a Workforce Issue' },
+      { href: '/answers/adhd-workplace-accommodations', label: 'Workplace Accommodations Guide' },
+    ],
+    relatedHub: '/employers',
+    relatedHubLabel: 'Employer cognitive health programs',
+  },
+  {
+    slug: 'adhd-accommodations-hr-primer',
+    datePublished: '2026-09-02',
+    audience: 'employer',
+    title: 'ADHD Accommodations at Work: An HR Primer (Clinical vs Legal) | Siya Health',
+    headline: 'ADHD Accommodations at Work: An HR Primer',
+    breadcrumbShort: 'ADHD Accommodations HR Primer',
+    metaDescription:
+      'HR teams: separate the clinical documentation employees may need from the legal accommodation process. Educational framing—not legal or medical advice.',
+    meta: 'Employers · HR & benefits guide',
+    hubHref: '/employers',
+    hubLabel: 'Employers',
+    parentEntity: '/employers',
+    cluster: 'workplace',
+    lead: 'When an employee mentions ADHD or focus problems, HR is often the first desk—not the clinician. Knowing where clinical documentation ends and accommodation law begins saves confusion on all sides.',
+    body: `
+            <p>Workplace accommodations for ADHD are a coordination problem. Employees need accurate clinical information. Employers need consistent, lawful processes. Clinicians document conditions and functional limitations within the treatment relationship—they do not manage your ADA interactive process or decide reasonable accommodations.</p>
+            <h2>Clinical documentation: what it is</h2>
+            <p>After a proper evaluation, a licensed clinician may document a diagnosis, treatment plan, and functional impacts relevant to work—extended focus time, reduced distractions, flexible scheduling, and similar needs. That documentation supports the employee’s accommodation request; it is not a prescription for what HR must approve.</p>
+            <p>Our detailed guide for employees and HR teams: <a href="/answers/adhd-workplace-accommodations">workplace accommodations &amp; clinical documentation</a>.</p>
+            <h2>Legal and HR process: what it is</h2>
+            <ul>
+              <li>Interactive dialogue between employer and employee</li>
+              <li>Assessment of essential job functions and business operations</li>
+              <li>Documentation of requests, offers, and denials per company policy and applicable law</li>
+              <li>Coordination with legal counsel when cases are complex</li>
+            </ul>
+            <p>Siya Health does not provide legal advice or act as an employer’s ADA consultant. Partnership conversations focus on access to physician-led care—not on managing HR casework.</p>
+            <h2>Common HR questions—clinical angle only</h2>
+            <p><strong>“Can online ADHD evaluation support accommodations?”</strong> Proper documentation from a licensed clinician—telehealth or in person—is often accepted for accommodation requests. Employers may have their own forms and renewal timelines; check internal policy.</p>
+            <p><strong>“Should we require a specific test?”</strong> Clinical standards vary. Responsible evaluation includes history and functional impairment review—not a single checklist score in isolation.</p>
+            <p><strong>“What if sleep or fatigue looks like ADHD?”</strong> See <a href="/blog/sleep-and-focus-at-work">sleep and focus at work</a> and <a href="/blog/brain-fog-at-work">brain fog at work</a>. Evaluation should consider overlapping causes before assumptions harden on either side.</p>
+            <h2>How structured employer programs help—without replacing HR</h2>
+            <p>Benefits teams can offer clearer pathways to screening and physician-led follow-up so employees get answers sooner. That may reduce ad hoc crises—but it does not remove the employer’s obligation to run lawful accommodation processes. <a href="/employers">Request employer information</a> for program scope; employees can <a href="/redirect/meet-greet" data-siya-track="meet_greet_click">Book Free Meet &amp; Greet</a> individually.</p>
+            <p><em>Educational only—not legal, HR, or medical advice. Consult counsel for accommodation decisions.</em></p>
+            <aside class="blog-internal-links" aria-label="Knowledge graph" data-assembly="supporting-cluster">
+              <p><strong>In this graph:</strong>
+                <a href="/answers/adhd-workplace-accommodations">Accommodations guide</a>
+                → <a href="/adhd-care">ADHD care</a>
+                → <a href="/employers">Employers</a>
+              </p>
+            </aside>`,
+    faqs: [
+      [
+        'Does Siya Health talk to our HR team about individual employees?',
+        'No—not without appropriate patient authorization. Employer partnerships focus on program access and operations, not individual clinical details.',
+      ],
+      [
+        'Can managers request proof of ADHD diagnosis?',
+        'That is an HR and legal question about what documentation is appropriate during an accommodation process. Clinicians provide medical documentation to the patient; how it is shared with employers follows policy and law.',
+      ],
+      [
+        'Is screening the same as documentation for accommodations?',
+        'No. Screening identifies patterns that may warrant follow-up. Accommodations typically require clinical evaluation and documented functional impact—not a self-reported screen alone.',
+      ],
+    ],
+    relatedArticles: [
+      { href: '/answers/adhd-workplace-accommodations', label: 'Workplace Accommodations & Clinical Documentation' },
+      { href: '/blog/cognitive-health-benefits-for-employers', label: 'Cognitive Health Benefits for Employers' },
+      { href: '/blog/executive-dysfunction-adhd', label: 'Executive Dysfunction in Adult ADHD' },
+    ],
+    relatedHub: '/employers',
+    relatedHubLabel: 'Employer cognitive health programs',
+  },
+  {
+    slug: 'focus-fatigue-workforce-issue',
+    datePublished: '2026-09-02',
+    audience: 'employer',
+    title: 'When Focus and Fatigue Show Up as a Workforce Issue | Siya Health',
+    headline: 'When Focus and Fatigue Show Up as a Workforce Issue',
+    breadcrumbShort: 'Focus & Fatigue at Work',
+    metaDescription:
+      'Leadership and HR: when concentration and exhaustion spread across teams, distinguish burnout from treatable medical causes—and what clinical programs can offer.',
+    meta: 'Employers · HR & benefits guide',
+    hubHref: '/employers',
+    hubLabel: 'Employers',
+    parentEntity: '/employers',
+    cluster: 'workplace',
+    lead: 'Quarterly reviews mention “burnout.” Slack is quieter. Projects slip. Sometimes the problem is workload—and sometimes it is untreated sleep apnea, ADHD, thyroid disease, or months of non-restorative sleep wearing people down.',
+    body: `
+            <p>Workforce focus problems rarely arrive as a tidy HR ticket. They show up as missed deadlines, meeting fatigue, irritability, and employees who swear they are sleeping “enough” but never feel restored. Leadership often reaches for resilience training first. That may help culture—it does not treat sleep disorders or iron deficiency.</p>
+            <h2>Burnout versus medical fatigue</h2>
+            <p>Burnout tracks with sustained overload, unclear priorities, and low control. Medical fatigue and brain fog can overlap—especially after illness, perimenopause, sleep apnea, or mood conditions—but may persist even when a team rightsizes workload. The distinction matters because the intervention differs.</p>
+            <h2>Patterns leaders and HR hear repeatedly</h2>
+            <ul>
+              <li>Afternoon crashes despite caffeine and “good sleep hygiene”</li>
+              <li>High performers who suddenly cannot finish routine tasks</li>
+              <li>Remote workers blaming distractions—when the issue followed them home</li>
+              <li>Post-illness teams that never fully “bounced back”</li>
+            </ul>
+            <p>Employee-facing depth: <a href="/blog/brain-fog-at-work">brain fog at work</a>, <a href="/blog/sleep-and-focus-at-work">sleep and focus at work</a>, and <a href="/blog/chronic-fatigue-and-work-performance">chronic fatigue and work performance</a>.</p>
+            <h2>Why wellness apps hit a ceiling</h2>
+            <p>Meditation subscriptions and step challenges have a role. They do not diagnose sleep apnea, prescribe when appropriate, or interpret labs. When symptoms are persistent, employees need licensed clinicians—not another gamified streak.</p>
+            <h2>What benefits teams can structure instead</h2>
+            <p>Clear pathways to screening and physician-led telehealth reduce the friction of “find a doctor on your own.” Programs can cover ADHD-related attention patterns, sleep disruption, and fatigue markers—with concierge-supported scheduling for busy professionals. See <a href="/employers">employer cognitive health programs</a> for partnership scope.</p>
+            <h2>Privacy and trust</h2>
+            <p>Employees hesitate to disclose focus or fatigue problems when they fear surveillance. Clinical programs should make explicit that individual diagnoses and visit notes stay in the patient chart unless authorization says otherwise—while employers receive implementation and access information at the program level.</p>
+            <p><em>Educational only—not occupational medicine, workforce analytics, or medical advice for individual employees.</em></p>
+            <aside class="blog-internal-links" aria-label="Knowledge graph" data-assembly="supporting-cluster">
+              <p><strong>In this graph:</strong>
+                <a href="/fatigue">Fatigue</a>
+                → <a href="/brain-fog">Brain fog</a>
+                → <a href="/employers">Employers</a>
+              </p>
+            </aside>`,
+    faqs: [
+      [
+        'Should we survey the workforce about focus and fatigue?',
+        'Aggregated pulse surveys can surface themes. They are not a substitute for individual medical evaluation. Avoid framing surveys as diagnostic.',
+      ],
+      [
+        'Can we refer everyone to the same screening tool?',
+        'Structured screening can be a starting point—not an endpoint. Positive screens should route to clinical follow-up when employees choose to pursue it.',
+      ],
+      [
+        'How does this relate to EAP?',
+        'EAPs often handle counseling and referrals. Physician-led telehealth for ADHD, sleep, and fatigue can complement EAP—but roles should be clear so employees know which door to use.',
+      ],
+    ],
+    relatedArticles: [
+      { href: '/blog/sleep-and-focus-at-work', label: 'Sleep, Focus & Cognitive Load at Work' },
+      { href: '/blog/chronic-fatigue-and-work-performance', label: 'Chronic Fatigue & Work Performance' },
+      { href: '/blog/cognitive-health-benefits-for-employers', label: 'Cognitive Health Benefits for Employers' },
+    ],
+    relatedHub: '/employers',
+    relatedHubLabel: 'Employer cognitive health programs',
+  },
 ];
 
 function escAttr(s) {
@@ -139,7 +333,40 @@ function faqJsonLd(faqs) {
 
 function buildPage(post) {
   const url = `https://siya.health/blog/${post.slug}`;
+  const datePublished = post.datePublished || DEFAULT_DATE;
   const faqHtml = post.faqs.map(([q, a]) => `\n            <h3>${q}</h3>\n            <p>${a}</p>`).join('');
+  const isEmployer = post.audience === 'employer';
+  const about = isEmployer ? ['Employers', 'Workplace health'] : [post.hubLabel, 'Primary care'];
+  const metaSuffix = post.meta.includes(' · ') ? post.meta.split(' · ')[1] : post.meta;
+
+  const relatedArticles = post.relatedArticles || [
+    { href: '/blog/brain-fog-at-work', label: 'Brain Fog at Work' },
+    { href: '/blog/brain-fog-and-sleep', label: 'Brain Fog and Sleep' },
+    { href: '/blog/always-tired-no-energy', label: 'Always Tired With No Energy' },
+  ];
+  const relatedLis = relatedArticles
+    .map((a) => `                <li><a href="${a.href}">${a.label}</a></li>`)
+    .join('\n');
+
+  const ctaSection = isEmployer
+    ? `            <section class="blog-provider-cta blog-employer-cta" aria-labelledby="employer-cta-heading">
+              <h2 id="employer-cta-heading">Explore employer programs</h2>
+              <p>Structured screening and physician-led telehealth for working professionals—partnership inquiries welcome; program packaging finalized with early partners.</p>
+              <div class="blog-provider-cta-actions">
+                <a class="button ds-button ds-button--primary" href="/employers#employer-inquiry-form" data-siya-track="employer_inquiry_click" data-siya-location="blog-employer-cta" data-page-type="employer" data-intent="employer" data-conversion-goal="bookDemo" data-cta-slot="bookDemo" data-component="button">Request employer information</a>
+                <a href="/employers" class="button ds-button ds-button--secondary secondary" data-siya-location="blog-employer-cta">Employer program overview</a>
+              </div>
+              <p class="blog-provider-cta-foot">Individual employees: <a href="/redirect/meet-greet" data-siya-track="meet_greet_click">Book Free Meet &amp; Greet</a> · <a href="/adhd-care">ADHD care</a></p>
+            </section>`
+    : `            <section class="blog-provider-cta" aria-labelledby="supporting-cta-heading">
+              <h2 id="supporting-cta-heading">Talk with primary care</h2>
+              <p>These articles describe patterns—they cannot assess your history. A licensed clinician can sort fatigue look-alikes and decide what evaluation, if any, fits your situation.</p>
+              <div class="blog-provider-cta-actions">
+                <a class="button ds-button ds-button--primary" href="/book-appointment" data-siya-track="book_appointment_click" data-siya-location="blog-supporting-cta">Book a primary care visit</a>
+                <a href="/redirect/meet-greet" class="button ds-button ds-button--secondary secondary" data-siya-location="blog-supporting-cta" data-siya-track="meet_greet_click">Book Free Meet &amp; Greet</a>
+              </div>
+              <p class="blog-provider-cta-foot"><a href="${post.hubHref}">${post.hubLabel} hub</a> · <a href="/primary-care">Primary care</a> · <a href="/employers">For employers</a></p>
+            </section>`;
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -169,12 +396,12 @@ function buildPage(post) {
       '@type': 'BlogPosting',
       headline: post.headline,
       description: post.metaDescription,
-      datePublished: DATE,
-      dateModified: DATE,
+      datePublished: datePublished,
+      dateModified: datePublished,
       author: { '@type': 'Organization', name: 'Siya Health', url: 'https://siya.health' },
       publisher: { '@type': 'Organization', name: 'Siya Health', url: 'https://siya.health' },
       mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-      about: [post.hubLabel, 'Primary care'],
+      about,
     })}</script>
     <script type="application/ld+json">${faqJsonLd(post.faqs)}</script>
     <script type="application/ld+json">${JSON.stringify({
@@ -202,7 +429,7 @@ function buildPage(post) {
       <article class="blog-article">
         <div class="container blog-container">
           <header class="blog-header">
-            <p class="blog-meta"><a href="${post.hubHref}">${post.hubLabel}</a> · ${post.meta.split(' · ')[1] || 'Supporting guide'}</p>
+            <p class="blog-meta"><a href="${post.hubHref}">${post.hubLabel}</a> · ${metaSuffix}</p>
             <h1>${post.headline}</h1>
             <p class="blog-lead">${post.lead}</p>
           </header>
@@ -217,22 +444,12 @@ ${post.body}
             <section class="related-articles" aria-labelledby="related-articles-heading">
               <h2 id="related-articles-heading">Related Articles</h2>
               <ul>
-                <li><a href="/blog/brain-fog-at-work">Brain Fog at Work</a></li>
-                <li><a href="/blog/brain-fog-and-sleep">Brain Fog and Sleep</a></li>
-                <li><a href="/blog/always-tired-no-energy">Always Tired With No Energy</a></li>
+${relatedLis}
               </ul>
               <p class="related-articles-care"><a href="${post.relatedHub}">${post.relatedHubLabel} →</a></p>
             </section>
 
-            <section class="blog-provider-cta" aria-labelledby="supporting-cta-heading">
-              <h2 id="supporting-cta-heading">Talk with primary care</h2>
-              <p>These articles describe patterns—they cannot assess your history. A licensed clinician can sort fatigue look-alikes and decide what evaluation, if any, fits your situation.</p>
-              <div class="blog-provider-cta-actions">
-                <a class="button ds-button ds-button--primary" href="/book-appointment" data-siya-track="book_appointment_click" data-siya-location="blog-supporting-cta">Book a primary care visit</a>
-                <a href="/redirect/meet-greet" class="button ds-button ds-button--secondary secondary" data-siya-location="blog-supporting-cta" data-siya-track="meet_greet_click">Book Free Meet &amp; Greet</a>
-              </div>
-              <p class="blog-provider-cta-foot"><a href="${post.hubHref}">${post.hubLabel} hub</a> · <a href="/primary-care">Primary care</a> · <a href="/employers">For employers</a></p>
-            </section>
+${ctaSection}
           </div>
         </div>
       </article>

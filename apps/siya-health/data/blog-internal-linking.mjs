@@ -18,6 +18,7 @@ export const BLOG_CATEGORIES = {
   hormone: "Men's health",
   energy: 'Sleep & energy',
   telehealth: 'Telehealth',
+  employer: 'Employers & workplace',
 };
 
 export const LANDING_BY_TOPIC = {
@@ -26,6 +27,7 @@ export const LANDING_BY_TOPIC = {
   hormone: { href: '/mens-health-longevity', label: "Men's health & longevity care" },
   energy: { href: '/telehealth', label: 'Telehealth fatigue & sleep care' },
   telehealth: { href: '/telehealth', label: 'Telehealth services' },
+  employer: { href: '/employers', label: 'Employer cognitive health programs' },
 };
 
 const CROSS_TOPIC_BRIDGE = {
@@ -51,6 +53,13 @@ const CROSS_TOPIC_BRIDGE = {
     'how-to-safely-get-prescriptions-online',
     'is-online-adhd-diagnosis-legit',
     'how-adhd-medication-is-prescribed-online',
+  ],
+  employer: [
+    'cognitive-health-benefits-for-employers',
+    'adhd-accommodations-hr-primer',
+    'focus-fatigue-workforce-issue',
+    'sleep-and-focus-at-work',
+    'brain-fog-at-work',
   ],
 };
 
@@ -89,10 +98,24 @@ const TOPIC_FALLBACKS = {
     'is-online-adhd-diagnosis-legit',
     'how-adhd-medication-is-prescribed-online',
   ],
+  employer: [
+    'cognitive-health-benefits-for-employers',
+    'adhd-accommodations-hr-primer',
+    'focus-fatigue-workforce-issue',
+    'chronic-fatigue-and-work-performance',
+    'executive-dysfunction-adhd',
+  ],
 };
 
 export function topicFromBlog(slug, title = '') {
   const t = `${slug} ${title}`.toLowerCase();
+  if (
+    /cognitive-health-benefits-for-employers|adhd-accommodations-hr-primer|focus-fatigue-workforce|for employers|hr primer|workforce issue/.test(
+      t,
+    )
+  ) {
+    return 'employer';
+  }
   if (/brain-fog-at-work|sleep-and-focus-at-work|chronic-fatigue-and-work|workplace|at work|work performance/.test(t)) {
     return 'energy';
   }
@@ -227,7 +250,7 @@ export function renderMasterIndexHtml(registry) {
     byCategory[entry.topic].push(entry);
   }
 
-  const order = ['adhd', 'metabolic', 'energy', 'hormone', 'telehealth'];
+  const order = ['adhd', 'metabolic', 'energy', 'employer', 'hormone', 'telehealth'];
   const sections = order
     .filter((t) => byCategory[t]?.length)
     .map((topic) => {

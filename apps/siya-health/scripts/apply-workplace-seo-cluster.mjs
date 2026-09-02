@@ -137,6 +137,21 @@ function main() {
       anchors: ['<section class="related-articles"', '</article>'],
     },
     {
+      file: 'blog/cognitive-health-benefits-for-employers.html',
+      block: employeeStrip,
+      anchors: ['<section class="related-articles"', '</article>'],
+    },
+    {
+      file: 'blog/adhd-accommodations-hr-primer.html',
+      block: employeeStrip,
+      anchors: ['<section class="related-articles"', '</article>'],
+    },
+    {
+      file: 'blog/focus-fatigue-workforce-issue.html',
+      block: employeeStrip,
+      anchors: ['<section class="related-articles"', '</article>'],
+    },
+    {
       file: 'answers/executive-dysfunction-adhd.html',
       block: `<aside class="workplace-seo-cluster" data-link-pass="${WORKPLACE_CLUSTER_MARKER}" aria-label="Work and cognitive health resources">
               <p class="workplace-seo-cluster__intro">At work, executive dysfunction often shows up as missed deadlines, inbox paralysis, or starting friction—not laziness.</p>

@@ -13,6 +13,9 @@ export const WORKPLACE_PATHS = {
   executiveDysfunctionAnswer: '/answers/executive-dysfunction-adhd',
   sleepFocusAtWork: '/blog/sleep-and-focus-at-work',
   fatigueWork: '/blog/chronic-fatigue-and-work-performance',
+  cognitiveHealthEmployers: '/blog/cognitive-health-benefits-for-employers',
+  adhdAccommodationsHrPrimer: '/blog/adhd-accommodations-hr-primer',
+  focusFatigueWorkforce: '/blog/focus-fatigue-workforce-issue',
   brainFogHub: '/brain-fog',
   fatigueHub: '/fatigue',
   adhdCare: '/adhd-care',
@@ -21,6 +24,21 @@ export const WORKPLACE_PATHS = {
 
 /** Related reading list for /employers (employee + HR paths). */
 export const EMPLOYER_RELATED_GUIDES = [
+  {
+    href: WORKPLACE_PATHS.cognitiveHealthEmployers,
+    label: 'Cognitive health benefits — what clinical programs include',
+    audience: 'HR & benefits',
+  },
+  {
+    href: WORKPLACE_PATHS.adhdAccommodationsHrPrimer,
+    label: 'ADHD accommodations at work — HR primer (clinical vs legal)',
+    audience: 'HR & people leaders',
+  },
+  {
+    href: WORKPLACE_PATHS.focusFatigueWorkforce,
+    label: 'When focus and fatigue show up as a workforce issue',
+    audience: 'Leadership & HR',
+  },
   {
     href: WORKPLACE_PATHS.workplaceAccommodations,
     label: 'Workplace accommodations & clinical documentation',
@@ -98,6 +116,9 @@ export function renderEmployeeWorkplaceStrip() {
 /** Blog hub spotlight — work & cognitive health cluster (phase 2). */
 export function renderWorkplaceBlogSpotlight() {
   const items = [
+    { href: WORKPLACE_PATHS.cognitiveHealthEmployers, label: 'Cognitive health benefits for employers' },
+    { href: WORKPLACE_PATHS.adhdAccommodationsHrPrimer, label: 'ADHD accommodations — HR primer' },
+    { href: WORKPLACE_PATHS.focusFatigueWorkforce, label: 'Focus & fatigue as a workforce issue' },
     { href: WORKPLACE_PATHS.brainFogAtWork, label: 'Brain fog at work' },
     { href: WORKPLACE_PATHS.sleepFocusAtWork, label: 'Sleep, focus & cognitive load at work' },
     { href: WORKPLACE_PATHS.fatigueWork, label: 'Chronic fatigue & work performance' },
