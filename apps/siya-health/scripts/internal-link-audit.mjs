@@ -5,6 +5,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { isAuditExcludedPath } from '../data/retired-pages.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -13,8 +14,6 @@ const BASE = 'https://siya.health';
 const SERVICE_PAGES = new Set([
   '/adhd-care',
   '/adhd-screening',
-  '/adult-adhd-diagnosis',
-  '/adhd-treatment-online',
   '/pricing',
   '/creyos-adhd-testing',
   '/online-adhd-test',
@@ -165,7 +164,13 @@ for (const rel of files) {
   }
 }
 
-const zeroInbound = [...allPaths].filter((p) => inbound.get(p).length === 0);
+const zeroInboundAll = [...allPaths].filter((p) => inbound.get(p).length === 0);
+const pageHtml = new Map();
+for (const rel of files) {
+  pageHtml.set(fileToPath(rel), fs.readFileSync(path.join(SITE_ROOT, rel), 'utf8'));
+}
+const zeroInboundExcluded = zeroInboundAll.filter((p) => isAuditExcludedPath(p, pageHtml.get(p) || ''));
+const zeroInbound = zeroInboundAll.filter((p) => !isAuditExcludedPath(p, pageHtml.get(p) || ''));
 const under3 = [...allPaths].filter((p) => {
   const unique = new Set(inbound.get(p));
   return unique.size < 3;
@@ -176,7 +181,8 @@ const blogArticles = files.filter((f) => f.startsWith('blog/') && !['blog/index.
 const blogNoService = [];
 for (const rel of blogArticles) {
   const src = fileToPath(rel);
-  const html = fs.readFileSync(path.join(SITE_ROOT, rel), 'utf8');
+  const html = pageHtml.get(src) || fs.readFileSync(path.join(SITE_ROOT, rel), 'utf8');
+  if (isAuditExcludedPath(src, html)) continue;
   const links = extractLinks(html).map((l) => l.dest);
   const hasService = links.some((d) => SERVICE_PAGES.has(d) || d === '/adhd-care' || d === '/adhd-screening');
   if (!hasService) blogNoService.push(src);
@@ -261,6 +267,7 @@ const report = {
   generated: new Date().toISOString().split('T')[0],
   totalPages: allPaths.size,
   zeroInbound: zeroInbound.sort(),
+  zeroInboundExcluded: zeroInboundExcluded.sort(),
   under3Inbound: under3.map((p) => ({ path: p, count: new Set(inbound.get(p)).size })).sort((a, b) => a.count - b.count),
   blogNoServiceLink: blogNoService,
   serviceNoBlogLink: serviceNoBlog,
@@ -280,7 +287,8 @@ const outPath = path.join(SITE_ROOT, 'data', 'internal-link-audit.json');
 fs.writeFileSync(outPath, JSON.stringify(report, null, 2) + '\n', 'utf8');
 console.log('Wrote', outPath);
 console.log('Pages:', allPaths.size);
-console.log('Zero inbound:', zeroInbound.length);
+console.log('Zero inbound (actionable):', zeroInbound.length);
+console.log('Zero inbound (excluded retired/stubs):', zeroInboundExcluded.length);
 console.log('Under 3 inbound:', under3.length);
 console.log('Blog without service link:', blogNoService.length);
 console.log('Service without blog link:', serviceNoBlog.length);

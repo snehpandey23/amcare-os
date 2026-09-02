@@ -143,7 +143,6 @@ const GLP1_SLUGS = new Set([
   'compounded-vs-branded-glp-1',
   'who-qualifies-glp-1-weight-loss',
   'food-noise-returned-on-glp-1',
-  'weight-gain-after-stopping-ozempic',
 ]);
 
 const GEO_PATH_RE =

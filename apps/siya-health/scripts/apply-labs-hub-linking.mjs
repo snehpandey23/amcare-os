@@ -406,7 +406,7 @@ const CONTENT_LINKS = [
       </section>`,
   },
   {
-    file: 'answers/weight-gain-after-stopping-ozempic.html',
+    file: 'blog/food-noise-and-glp-1-what-it-means-and-what-helps.html',
     marker: 'LABS-LINK-OZEMPIC-STOP',
     html: `      <section class="section section-tinted" aria-label="Metabolic labs">
         <div class="container">

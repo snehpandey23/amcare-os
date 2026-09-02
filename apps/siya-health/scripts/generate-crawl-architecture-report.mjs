@@ -6,6 +6,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { isAuditExcludedPath } from '../data/retired-pages.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -81,7 +82,7 @@ function buildGraph() {
     }
   }
 
-  return { allPaths, outbound, inbound, titles };
+  return { allPaths, outbound, inbound, titles, files };
 }
 
 function computeCrawlDepths(allPaths, outbound, root = ROOT) {
@@ -105,7 +106,7 @@ function computeCrawlDepths(allPaths, outbound, root = ROOT) {
 }
 
 function main() {
-  const { allPaths, outbound, inbound, titles } = buildGraph();
+  const { allPaths, outbound, inbound, titles, files } = buildGraph();
   const depth = computeCrawlDepths(allPaths, outbound);
 
   const reachable = [...depth.entries()].filter(([, d]) => d !== null);
@@ -125,7 +126,13 @@ function main() {
     title: titles.get(p) || p,
   }));
 
-  const orphans = inboundCounts.filter((x) => x.count === 0 && x.path !== ROOT);
+  const orphansAll = inboundCounts.filter((x) => x.count === 0 && x.path !== ROOT);
+  const orphans = orphansAll.filter((x) => {
+    const rel = files.find((f) => fileToPath(f) === x.path);
+    const html = rel ? fs.readFileSync(path.join(SITE_ROOT, rel), 'utf8') : '';
+    return !isAuditExcludedPath(x.path, html);
+  });
+  const orphansExcluded = orphansAll.length - orphans.length;
   const under2 = inboundCounts.filter((x) => x.count < 2 && x.path !== ROOT);
   const over100Out = [...allPaths]
     .map((p) => ({ path: p, count: outbound.get(p).size, title: titles.get(p) || p }))
@@ -150,6 +157,7 @@ Internal link graph analysis only — not a general SEO audit.
 | Unreachable from \`/\` (by internal links) | ${unreachable.length} |
 | **Average crawl depth** (reachable pages) | **${avgDepth.toFixed(2)}** |
 | Orphan pages (0 inbound internal links) | ${orphans.length} |
+| Orphan pages excluded (retired/stubs/utilities) | ${orphansExcluded} |
 | Pages with &lt; 2 inbound links | ${under2.length} |
 | Pages with &gt; 100 outbound internal links | ${over100Out.length} |
 | Pages with &gt; 100 inbound internal links | ${over100In.length} |
@@ -170,6 +178,8 @@ ${Object.entries(depthDistribution)
 ${top20Inbound.map((x, i) => `| ${i + 1} | ${x.count} | \`${x.path}\` | ${x.title.replace(/\|/g, '\\|')} |`).join('\n')}
 
 ## Orphan pages (0 inbound internal links)
+
+_Actionable only — retired noindex stubs, redirect shells, and /redirect/* utilities are excluded (${orphansExcluded} excluded)._
 
 ${orphans.length ? orphans.map((x) => `- \`${x.path}\` — ${x.title}`).join('\n') : '_None_'}
 

@@ -35,6 +35,7 @@ export const RETIRED_GUIDE_SLUGS = new Set([
   'tirzepatide-vs-semaglutide',
   'minoxidil-hair-loss-does-it-work',
   'sildenafil-erectile-dysfunction-expectations',
+  'weight-gain-after-stopping-ozempic',
 ]);
 
 /** Blog HTML filenames removed from blog/ */

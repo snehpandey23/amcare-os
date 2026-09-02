@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url';
 import { ANSWER_SEEDS } from '../data/answer-seeds.mjs';
 import { BOOKING_LINK } from '../data/providers-core.mjs';
 import { isAdhdFunnelPage } from './site-chrome.mjs';
+import { isAuditExcludedPath, stripFooterHtml } from '../data/retired-pages.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -66,6 +67,12 @@ function validateJsonLd(html) {
   return errors;
 }
 
+function relToPath(rel) {
+  if (rel === 'index.html') return '/';
+  if (rel.endsWith('/index.html')) return `/${rel.slice(0, -'/index.html'.length)}`;
+  return `/${rel.replace(/\.html$/i, '')}`;
+}
+
 const files = walkHtml(SITE_ROOT);
 const allLinks = new Map();
 const inbound = new Map();
@@ -88,7 +95,13 @@ for (const rel of files) {
   if (ldErr.length) schemaErrors.push({ rel, errors: ldErr });
 
   if (html.includes('Book a Meet &amp; Greet') && html.includes('nav-cta')) meetGreetNav++;
-  if (!isAdhdFunnelPage(rel) && !rel.startsWith('answers/') && /adhd-screening/.test(html)) {
+  const contentHtml = stripFooterHtml(html);
+  if (
+    !isAdhdFunnelPage(rel) &&
+    !rel.startsWith('answers/') &&
+    /adhd-screening/.test(contentHtml) &&
+    !isAuditExcludedPath(relToPath(rel), html)
+  ) {
     screeningNavNonAdhd.push(rel);
   }
   if (/adhd-screening/.test(html)) adhdScreeningRemaining.push(rel);
@@ -177,7 +190,7 @@ Generated: ${new Date().toISOString()}
 | HTML pages scanned | ${files.length} |
 | Sitemap URLs | ${sitemapCount} |
 | Pages with Meet & Greet in nav | ${meetGreetNav} |
-| Non-ADHD pages still referencing adhd-screening | ${screeningNavNonAdhd.length} |
+| Non-ADHD pages with in-content \`adhd-screening\` (footer excluded) | ${screeningNavNonAdhd.length} |
 | Broken internal links (sample) | ${broken.length} |
 | JSON-LD parse errors | ${schemaErrors.length} |
 
@@ -201,7 +214,9 @@ ${deployAnswerStatus.map((r) => `| ${r.slug} | ${r.exists ? '✓' : '✗'} | ${r
 - **Default secondary CTA:** Explore Care Options → \`#services\` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, \`adhd-screening.html\`
 
-### Non-ADHD pages still containing \`adhd-screening\` (${screeningNavNonAdhd.length})
+### Non-ADHD pages with in-content \`adhd-screening\` (${screeningNavNonAdhd.length})
+
+_Footer “Free ADHD screening” service link is intentional sitewide cross-sell and excluded from this count._
 
 ${screeningNavNonAdhd.length ? screeningNavNonAdhd.map((p) => `- \`${p}\``).join('\n') : '_None detected._'}
 
@@ -241,7 +256,7 @@ ${orphans.length ? orphans.map((p) => `- \`${p}\``).join('\n') : '_No obvious or
 1. Deploy via Netlify after merge; publish root is \`apps/siya-health\`.
 2. Re-run this script after any manual HTML edits: \`node scripts/seo-deployment-qa-report.mjs\`.
 3. Monitor Search Console for new cornerstone URLs indexing.
-4. Review remaining \`adhd-screening\` references—intentional on ADHD funnels only.
+4. Review remaining in-content \`adhd-screening\` references—intentional on ADHD funnels only (footer cross-sell excluded).
 
 ## Build command
 

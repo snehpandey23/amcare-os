@@ -36,6 +36,30 @@ export const RETIRED_CONTENT_REDIRECTS = {
     reason:
       'Provider removed from public roster due to licensing issue (2026-09-01). Profile retired with permanent redirect to care team hub.',
   },
+  '/adhd-diagnosis-florida': {
+    destination: '/adhd-care',
+    entity: 'adhd-care',
+    reason:
+      'Thin Florida geo landing with no unique value (SITE-PRUNING-AUDIT). National ADHD care hub owns commercial intent; FL city content consolidated.',
+  },
+  '/adult-adhd-diagnosis': {
+    destination: '/adhd-care',
+    entity: 'adhd-care',
+    reason:
+      'Legacy ADHD funnel duplicate splitting commercial intent with /adhd-care (SITE-PRUNING-AUDIT). Permanent redirect preserves equity on canonical service page.',
+  },
+  '/adhd-treatment-online': {
+    destination: '/adhd-care',
+    entity: 'adhd-care',
+    reason:
+      'Legacy post-diagnosis treatment URL duplicating /adhd-care sections (SITE-PRUNING-AUDIT). Redirect rather than maintain parallel funnel.',
+  },
+  '/answers/weight-gain-after-stopping-ozempic': {
+    destination: '/blog/food-noise-and-glp-1-what-it-means-and-what-helps',
+    entity: 'food-noise-and-glp-1',
+    reason:
+      'Ozempic cessation / GLP-1 rebound narrative owned by food-noise cornerstone blog (SITE-PRUNING-AUDIT). Guide retired; blog retains long-form depth.',
+  },
 };
 
 export const RETIRED_CONTENT_STATS = {

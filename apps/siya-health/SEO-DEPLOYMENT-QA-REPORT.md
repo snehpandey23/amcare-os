@@ -1,6 +1,6 @@
 # SEO Deployment QA Report
 
-Generated: 2026-09-02T00:40:10.792Z
+Generated: 2026-09-02T00:59:34.615Z
 
 ## Summary
 
@@ -9,7 +9,7 @@ Generated: 2026-09-02T00:40:10.792Z
 | HTML pages scanned | 225 |
 | Sitemap URLs | 184 |
 | Pages with Meet & Greet in nav | 0 |
-| Non-ADHD pages still referencing adhd-screening | 86 |
+| Non-ADHD pages with in-content `adhd-screening` (footer excluded) | 6 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
 
@@ -39,139 +39,61 @@ Generated: 2026-09-02T00:40:10.792Z
 - **Default secondary CTA:** Explore Care Options → `#services` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, `adhd-screening.html`
 
-### Non-ADHD pages still containing `adhd-screening` (86)
+### Non-ADHD pages with in-content `adhd-screening` (6)
 
-- `about.html`
-- `blog/brain-fog-after-covid.html`
-- `blog/brain-fog-and-anxiety.html`
-- `blog/brain-fog-and-sleep.html`
-- `blog/brain-fog-at-work.html`
-- `blog/chronic-fatigue-and-work-performance.html`
-- `blog/chronic-fatigue-vs-everyday-tiredness.html`
-- `blog/compounded-vs-branded-glp1-medications.html`
-- `blog/fatigue-after-illness.html`
-- `blog/fatigue-despite-normal-labs.html`
-- `blog/food-noise-and-glp-1-what-it-means-and-what-helps.html`
-- `blog/free-testosterone-vs-total-testosterone-what-patients-should-know.html`
-- `blog/glp1-side-effects-and-how-to-manage-them.html`
-- `blog/how-mental-health-affects-weight-loss-outcomes.html`
-- `blog/how-to-safely-get-prescriptions-online.html`
-- `blog/index.html`
-- `blog/insomnia-treatment-options-beyond-medication.html`
-- `blog/insulin-resistance-and-weight-loss-clinician-overview.html`
-- `blog/iron-deficiency-and-fatigue.html`
-- `blog/medical-weight-loss-glp1-semaglutide-texas.html`
-- `blog/medical-weight-loss-vs-dieting-what-actually-works.html`
-- `blog/minoxidil-for-hair-loss-does-it-work.html`
-- `blog/morning-fatigue.html`
-- `blog/oral-vs-injectable-weight-loss-medications.html`
-- `blog/oral-vs-topical-minoxidil-which-is-right.html`
+_Footer “Free ADHD screening” service link is intentional sitewide cross-sell and excluded from this count._
+
 - `blog/perimenopause-brain-fog.html`
-- `blog/phentermine-for-weight-loss-safety-and-effectiveness.html`
-- `blog/semaglutide-for-weight-loss-how-it-works.html`
-- `blog/sildenafil-for-erectile-dysfunction-what-to-expect.html`
-- `blog/sleep-and-focus-at-work.html`
-- `blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign.html`
-- `blog/telehealth-prescriptions-how-online-treatment-works.html`
-- `blog/telehealth.html`
-- `blog/thyroid-and-fatigue.html`
-- `blog/tirzepatide-vs-semaglutide-which-is-better.html`
 - `blog/vyvanse-vs-adderall-differences.html`
-- `blog/weight-loss.html`
-- `blog/when-is-testosterone-therapy-appropriate.html`
-- `book-appointment.html`
-- `brain-fog.html`
-- `employers.html`
-- `fatigue.html`
 - `index.html`
-- `intake/index.html`
-- `join-our-team.html`
-- `labs/a1c-blood-sugar.html`
 - `labs/adhd-support.html`
-- `labs/cbc.html`
-- `labs/cmp.html`
-- `labs/fatigue-brain-fog.html`
-- `labs/how-to-read-results.html`
-- `labs/iron-ferritin.html`
-- `labs/lipid-panel.html`
-- `labs/mens-health.html`
-- `labs/preventive.html`
-- `labs/thyroid.html`
-- `labs/vitamin-b12.html`
-- `labs/vitamin-d.html`
-- `labs/womens-midlife.html`
-- `labs.html`
-- `legal/controlled-substance-treatment-agreement/index.html`
-- `legal/cookie-policy/index.html`
-- `legal/index.html`
-- `legal/notice-of-privacy-practices/index.html`
-- `legal/privacy-policy/index.html`
-- `legal/terms-of-use/index.html`
-- `mens-health-longevity.html`
-- `prescriptions.html`
-- `preventive-care.html`
-- `pricing.html`
-- `primary-care.html`
-- `primary-urgent-care.html`
-- `privacy-policy.html`
-- `providers/dr-natasha-desai.html`
-- `providers/dr-sneh-pandey.html`
-- `providers/dr-swati-pandey.html`
-- `providers/dr-vanessa-urbina.html`
-- `providers/index.html`
 - `providers/megan-wunderlich.html`
-- `providers/wendy-delgado.html`
-- `siya-circle.html`
-- `telehealth.html`
-- `terms.html`
-- `weight-loss-metabolic-health.html`
-- `womens-health.html`
 - `womens-midlife-health.html`
 
-### All pages with any `adhd-screening` reference (195)
+### All pages with any `adhd-screening` reference (137)
 
 - `about.html`
 - `adhd-care/miami.html`
 - `adhd-care/orlando.html`
 - `adhd-care/san-diego.html`
 - `adhd-care.html`
-- `adhd-diagnosis-florida.html`
 - `adhd-diagnosis-texas.html`
 - `adhd-evaluation-california.html`
 - `adhd-evaluation-cost.html`
 - `adhd-evaluation-texas.html`
 - `adhd-screening-results.html`
 - `adhd-screening.html`
-- `adhd-treatment-online.html`
 - `adult-adhd-california.html`
-- `adult-adhd-diagnosis.html`
-- `answers/adderall-vs-vyvanse-adults.html`
-- `answers/adhd-and-weight-loss-connection.html`
-- `answers/adhd-in-women.html`
-- `answers/adhd-medication-every-day.html`
-- `answers/adhd-medication-side-effects.html`
 - `answers/adhd-vs-anxiety.html`
-- `answers/adhd-vs-burnout.html`
 - `answers/adhd-workplace-accommodations.html`
-- `answers/afternoon-energy-crash-after-lunch.html`
 - `answers/asrs-adhd-screening-explained.html`
-- `answers/brain-fog-after-eating.html`
-- `answers/can-adhd-be-diagnosed-online.html`
-- `answers/can-adhd-cause-anxiety.html`
-- `answers/can-sleep-apnea-cause-fatigue.html`
-- `answers/can-you-get-adhd-medication-online.html`
-- `answers/compounded-vs-branded-glp-1.html`
-- `answers/ed-telehealth-legitimate.html`
-- `answers/executive-dysfunction-adhd.html`
-- `answers/food-noise-returned-on-glp-1.html`
-- `answers/fsa-hsa-adhd-evaluation.html`
-- `answers/glp-1-nausea-management.html`
-- `answers/glp-1-side-effects.html`
-- `answers/high-functioning-adhd.html`
-- `answers/high-shbg-low-free-testosterone.html`
 - `answers/how-long-adhd-evaluation.html`
+- `answers/index.html`
+- `answers/screening-vs-adhd-evaluation.html`
+- `answers/what-happens-after-adhd-evaluation.html`
+- `blog/adderall-for-adhd-how-it-works.html`
+- `blog/adhd-and-binge-eating.html`
+- `blog/adhd-brain-imaging-subtypes.html`
+- `blog/adhd-evaluation-california-online-vs-in-person.html`
+- `blog/adhd-evaluation-cost-texas.html`
+- `blog/adhd-hormones-women.html`
+- `blog/adhd-in-women.html`
+- `blog/adhd-medication-daily-or-as-needed-adults.html`
+- `blog/adhd-medication-online-california.html`
+- `blog/adhd-medication-options-california.html`
+- `blog/adhd-medication-options-for-adults.html`
+- `blog/adhd-medication-side-effects-what-to-expect.html`
+- `blog/adhd-symptoms-overlooked.html`
+- `blog/adhd-telehealth-california.html`
+- `blog/adhd-testing-online-california-screening-vs-evaluation.html`
+- `blog/adhd-treatment-texas.html`
+- `blog/adhd.html`
+- `blog/adult-adhd-symptoms-california.html`
+- `blog/brain-fog-after-covid.html`
+- `blog/brain-fog-and-anxiety.html`
+- `blog/brain-fog-and-sleep.html`
 
-_…and 155 more (expected on ADHD funnels)._
+_…and 97 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 
@@ -203,7 +125,6 @@ _None detected in static HTML scan._
 - `adhd-diagnosis-houston.html`
 - `adhd-diagnosis-pennsylvania.html`
 - `adhd-diagnosis-philadelphia.html`
-- `adhd-evaluation-cost.html`
 - `adhd-treatment-online.html`
 - `adult-adhd-diagnosis.html`
 - `adult-adhd-screening-california.html`
@@ -228,13 +149,14 @@ _None detected in static HTML scan._
 - `blog/adult-adhd-treatment-california-2026.html`
 - `blog/why-am-i-always-tired-causes-when-to-see-doctor.html`
 - `docs/tint-options-preview.html`
+- `intake/index.html`
 
 ## Recommendations
 
 1. Deploy via Netlify after merge; publish root is `apps/siya-health`.
 2. Re-run this script after any manual HTML edits: `node scripts/seo-deployment-qa-report.mjs`.
 3. Monitor Search Console for new cornerstone URLs indexing.
-4. Review remaining `adhd-screening` references—intentional on ADHD funnels only.
+4. Review remaining in-content `adhd-screening` references—intentional on ADHD funnels only (footer cross-sell excluded).
 
 ## Build command
 

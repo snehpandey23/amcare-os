@@ -1118,14 +1118,12 @@ export const ANSWER_SEEDS = [...mergePhase5Seeds(CORE_ANSWER_SEEDS), ...PHASE3_A
  * - afternoon-energy-crash-after-lunch
  * - food-noise-returned-on-glp-1
  * - high-shbg-low-free-testosterone
- * - weight-gain-after-stopping-ozempic
  * - why-normal-labs-dont-mean-healthy
  */
 export const HAND_MAINTAINED_ANSWER_SLUGS = [
   'afternoon-energy-crash-after-lunch',
   'food-noise-returned-on-glp-1',
   'high-shbg-low-free-testosterone',
-  'weight-gain-after-stopping-ozempic',
   'why-normal-labs-dont-mean-healthy',
 ];
 

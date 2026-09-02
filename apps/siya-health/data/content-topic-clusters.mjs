@@ -439,11 +439,6 @@ export const CONSOLIDATION_RECOMMENDATIONS = [
     reason: 'Nausea subset fully covered in GLP-1 side effects cornerstone.',
   },
   {
-    keep: '/blog/food-noise-and-glp-1-what-it-means-and-what-helps',
-    merge: '/answers/weight-gain-after-stopping-ozempic',
-    reason: 'Ozempic cessation / food-noise rebound owned by food-noise cornerstone.',
-  },
-  {
     keep: '/blog/how-to-know-if-you-have-adhd-adult',
     merge: '/answers/rejection-sensitivity-adhd',
     reason: 'RSD micro-guide; symptom covered in signs cornerstone and ADHD blog cluster.',

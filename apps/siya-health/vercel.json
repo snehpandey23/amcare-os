@@ -365,6 +365,11 @@
       "permanent": true
     },
     {
+      "source": "/answers/weight-gain-after-stopping-ozempic",
+      "destination": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "permanent": true
+    },
+    {
       "source": "/(.*)",
       "has": [
         {
