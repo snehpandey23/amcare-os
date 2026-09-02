@@ -98,13 +98,18 @@ function main() {
   let n = 0;
 
   if (
-    upsertMarker('adhd-care.html', metroHubBlock, [
-      '<section class="section section-tinted" id="graph-adhd-california"',
-      '<section class="section faq-accordion-section" id="faq"',
-      'id="meet-physicians"',
-    ])
+    upsertMarker(
+      'adhd-care.html',
+      `${metroHubBlock}
+      <p class="symptoms-transition link-equity-cost"><a href="/pricing">ADHD evaluation pricing</a> · <a href="/adhd-evaluation-california">California evaluation LP</a> · <a href="/adhd-evaluation-texas">Texas evaluation LP</a></p>`,
+      [
+        '<section class="section section-tinted" id="graph-adhd-california"',
+        '<section class="section faq-accordion-section" id="faq"',
+        'id="meet-physicians"',
+      ],
+    )
   ) {
-    console.log('  adhd-care.html — metro hub links');
+    console.log('  adhd-care.html — metro hub + pricing links');
     n++;
   }
 
@@ -120,29 +125,68 @@ function main() {
     n++;
   }
 
+  const costLinkStrip = (extra = '') =>
+    `            <p class="symptoms-transition link-equity-cost"><a href="/pricing">ADHD evaluation pricing</a> · <a href="/adhd-care">ADHD care hub</a>${extra ? ` · ${extra}` : ''}</p>`;
+
+  const costAnswerTargets = [
+    {
+      file: 'answers/what-included-199-adhd-evaluation.html',
+      anchors: ['<section class="answer-short"', '<section class="answer-detailed"'],
+    },
+    {
+      file: 'answers/how-much-does-adhd-testing-cost.html',
+      anchors: ['<section class="answer-short"', '<section class="answer-detailed"'],
+    },
+    {
+      file: 'answers/fsa-hsa-adhd-evaluation.html',
+      anchors: ['<section class="answer-short"', '<section class="answer-detailed"'],
+    },
+    {
+      file: 'answers/what-happens-after-adhd-evaluation.html',
+      anchors: ['<section class="answer-closing"', '<section class="answer-internal-links"'],
+    },
+  ];
+
+  for (const { file, anchors } of costAnswerTargets) {
+    if (upsertMarker(file, costLinkStrip(), anchors)) {
+      console.log(`  ${file} — pricing link equity`);
+      n++;
+    }
+  }
+
   if (
-    upsertListLinks(
-      'adhd-diagnosis-florida.html',
-      'metro-adhd-florida',
-      [
-        { href: '/adhd-care/miami', label: 'Miami metro ADHD care' },
-        { href: '/adhd-care/orlando', label: 'Orlando metro ADHD care' },
-      ],
-      ['<main id="main">', '<section class="section'],
+    upsertMarker(
+      'adhd-diagnosis-texas.html',
+      `      <p class="symptoms-transition"><a href="/adhd-evaluation-texas">Same-week Texas ADHD evaluation</a> · <a href="/blog/adhd-treatment-texas">Texas treatment hub</a></p>`,
+      ['<section class="section faq-accordion-section"', 'id="meet-physicians"'],
     )
   ) {
-    console.log('  adhd-diagnosis-florida.html — Florida metro links');
+    console.log('  adhd-diagnosis-texas.html — evaluation LP link');
     n++;
+  }
+
+  for (const metro of ['adhd-care/miami.html', 'adhd-care/orlando.html', 'adhd-care/san-diego.html']) {
+    const label = metro.includes('miami') ? 'Miami' : metro.includes('orlando') ? 'Orlando' : 'San Diego';
+    if (
+      upsertMarker(
+        metro,
+        `      <p class="symptoms-transition"><a href="/adhd-care">National ADHD care hub</a> · <a href="/pricing">Evaluation pricing</a></p>`,
+        ['<section class="section faq-accordion-section"', 'id="related-resources"'],
+      )
+    ) {
+      console.log(`  ${metro} — hub + pricing links`);
+      n++;
+    }
   }
 
   if (
     upsertMarker(
       'pricing.html',
-      `      <p class="symptoms-transition"><a href="/adhd-evaluation-cost">ADHD evaluation cost overview</a> · <a href="/adhd-care">ADHD care hub</a></p>`,
+      `      <p class="symptoms-transition"><a href="#pricing-plans">ADHD evaluation pricing on this page</a> · <a href="/adhd-care">ADHD care hub</a></p>`,
       ['<section class="section faq-accordion-section"', '</main>'],
     )
   ) {
-    console.log('  pricing.html — adhd-evaluation-cost link');
+    console.log('  pricing.html — in-page pricing anchor link');
     n++;
   }
 

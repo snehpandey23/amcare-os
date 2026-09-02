@@ -69,6 +69,10 @@ function build() {
     ['Adult ADHD Evaluation &amp; Testing · Texas', 'Adult ADHD Evaluation &amp; Testing · California'],
     ['Virtual ADHD care in <strong>Texas</strong>', 'Virtual ADHD care in <strong>California</strong>'],
     ['within 48 hours across Texas.', 'within 48 hours across California.'],
+    [
+      '<h1>Adult ADHD evaluation in Texas—same-week, physician-led</h1>',
+      '<h1>Adult ADHD evaluation in California—same-week, physician-led</h1>',
+    ],
     ['faq-tx-eval-', 'faq-ca-eval-'],
     [
       'eligible adults in Texas and other licensed states',

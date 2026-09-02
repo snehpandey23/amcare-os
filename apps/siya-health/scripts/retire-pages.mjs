@@ -42,9 +42,9 @@ function pathToFile(urlPath) {
   return path.join(ROOT, `${clean}.html`);
 }
 
-function stubHtml(dest, note) {
-  const slug = dest.replace(/^\//, '').replace(/\//g, ' · ');
-  const title = slug ? `Moved to ${slug} — Siya Health` : 'Moved — Siya Health';
+function stubHtml(sourcePath, dest, note) {
+  const sourceSlug = sourcePath.replace(/^\//, '').replace(/\//g, ' · ');
+  const title = sourceSlug ? `Moved · ${sourceSlug} — Siya Health` : 'Moved — Siya Health';
   return `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -121,7 +121,7 @@ for (const [from, { destination, note }] of Object.entries(ALL_RETIREMENTS)) {
     skipped += 1;
     continue;
   }
-  fs.writeFileSync(file, stubHtml(destination, note));
+  fs.writeFileSync(file, stubHtml(from, destination, note));
   stubs += 1;
 }
 

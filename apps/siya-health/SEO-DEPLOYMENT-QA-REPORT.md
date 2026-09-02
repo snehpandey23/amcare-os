@@ -1,15 +1,15 @@
 # SEO Deployment QA Report
 
-Generated: 2026-09-02T00:59:34.615Z
+Generated: 2026-09-02T01:07:40.807Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
 | HTML pages scanned | 225 |
-| Sitemap URLs | 184 |
+| Sitemap URLs | 183 |
 | Pages with Meet & Greet in nav | 0 |
-| Non-ADHD pages with in-content `adhd-screening` (footer excluded) | 6 |
+| Non-ADHD pages with in-content `adhd-screening` (footer excluded) | 5 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
 
@@ -39,18 +39,17 @@ Generated: 2026-09-02T00:59:34.615Z
 - **Default secondary CTA:** Explore Care Options → `#services` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, `adhd-screening.html`
 
-### Non-ADHD pages with in-content `adhd-screening` (6)
+### Non-ADHD pages with in-content `adhd-screening` (5)
 
 _Footer “Free ADHD screening” service link is intentional sitewide cross-sell and excluded from this count._
 
 - `blog/perimenopause-brain-fog.html`
-- `blog/vyvanse-vs-adderall-differences.html`
 - `index.html`
 - `labs/adhd-support.html`
 - `providers/megan-wunderlich.html`
 - `womens-midlife-health.html`
 
-### All pages with any `adhd-screening` reference (137)
+### All pages with any `adhd-screening` reference (193)
 
 - `about.html`
 - `adhd-care/miami.html`
@@ -64,36 +63,36 @@ _Footer “Free ADHD screening” service link is intentional sitewide cross-sel
 - `adhd-screening-results.html`
 - `adhd-screening.html`
 - `adult-adhd-california.html`
+- `adult-adhd-screening-california.html`
+- `adult-adhd-screening-texas.html`
+- `answers/adderall-vs-vyvanse-adults.html`
+- `answers/adhd-and-weight-loss-connection.html`
+- `answers/adhd-in-women.html`
+- `answers/adhd-medication-every-day.html`
+- `answers/adhd-medication-side-effects.html`
 - `answers/adhd-vs-anxiety.html`
+- `answers/adhd-vs-burnout.html`
 - `answers/adhd-workplace-accommodations.html`
+- `answers/afternoon-energy-crash-after-lunch.html`
 - `answers/asrs-adhd-screening-explained.html`
+- `answers/brain-fog-after-eating.html`
+- `answers/can-adhd-be-diagnosed-online.html`
+- `answers/can-adhd-cause-anxiety.html`
+- `answers/can-sleep-apnea-cause-fatigue.html`
+- `answers/can-you-get-adhd-medication-online.html`
+- `answers/compounded-vs-branded-glp-1.html`
+- `answers/ed-telehealth-legitimate.html`
+- `answers/executive-dysfunction-adhd.html`
+- `answers/food-noise-returned-on-glp-1.html`
+- `answers/fsa-hsa-adhd-evaluation.html`
+- `answers/glp-1-nausea-management.html`
+- `answers/glp-1-side-effects.html`
+- `answers/high-functioning-adhd.html`
+- `answers/high-shbg-low-free-testosterone.html`
 - `answers/how-long-adhd-evaluation.html`
-- `answers/index.html`
-- `answers/screening-vs-adhd-evaluation.html`
-- `answers/what-happens-after-adhd-evaluation.html`
-- `blog/adderall-for-adhd-how-it-works.html`
-- `blog/adhd-and-binge-eating.html`
-- `blog/adhd-brain-imaging-subtypes.html`
-- `blog/adhd-evaluation-california-online-vs-in-person.html`
-- `blog/adhd-evaluation-cost-texas.html`
-- `blog/adhd-hormones-women.html`
-- `blog/adhd-in-women.html`
-- `blog/adhd-medication-daily-or-as-needed-adults.html`
-- `blog/adhd-medication-online-california.html`
-- `blog/adhd-medication-options-california.html`
-- `blog/adhd-medication-options-for-adults.html`
-- `blog/adhd-medication-side-effects-what-to-expect.html`
-- `blog/adhd-symptoms-overlooked.html`
-- `blog/adhd-telehealth-california.html`
-- `blog/adhd-testing-online-california-screening-vs-evaluation.html`
-- `blog/adhd-treatment-texas.html`
-- `blog/adhd.html`
-- `blog/adult-adhd-symptoms-california.html`
-- `blog/brain-fog-after-covid.html`
-- `blog/brain-fog-and-anxiety.html`
-- `blog/brain-fog-and-sleep.html`
+- `answers/how-much-does-adhd-testing-cost.html`
 
-_…and 97 more (expected on ADHD funnels)._
+_…and 153 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 
@@ -120,6 +119,9 @@ _None detected in static HTML scan._
 
 ## Orphan pages (low inbound links, sample)
 
+- `adhd-care/miami.html`
+- `adhd-care/orlando.html`
+- `adhd-care/san-diego.html`
 - `adhd-diagnosis-austin.html`
 - `adhd-diagnosis-florida.html`
 - `adhd-diagnosis-houston.html`
@@ -147,9 +149,6 @@ _None detected in static HTML scan._
 - `blog/adhd-treatment-san-francisco-ca.html`
 - `blog/adhd-treatment-san-jose-ca.html`
 - `blog/adult-adhd-treatment-california-2026.html`
-- `blog/why-am-i-always-tired-causes-when-to-see-doctor.html`
-- `docs/tint-options-preview.html`
-- `intake/index.html`
 
 ## Recommendations
 

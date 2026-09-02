@@ -8,6 +8,7 @@
     "/adhd-diagnosis-houston",
     "/adhd-diagnosis-pennsylvania",
     "/adhd-diagnosis-philadelphia",
+    "/adhd-evaluation-cost",
     "/adhd-treatment-online",
     "/adult-adhd-diagnosis",
     "/adult-adhd-screening-california",
@@ -58,6 +59,10 @@
     },
     {
       "path": "/adhd-diagnosis-philadelphia",
+      "count": 0
+    },
+    {
+      "path": "/adhd-evaluation-cost",
       "count": 0
     },
     {
@@ -193,14 +198,6 @@
       "count": 1
     },
     {
-      "path": "/adhd-evaluation-cost",
-      "count": 1
-    },
-    {
-      "path": "/adhd-evaluation-texas",
-      "count": 1
-    },
-    {
       "path": "/adhd-screening-results",
       "count": 1
     },
@@ -275,7 +272,7 @@
     },
     {
       "path": "/adhd-care",
-      "outboundCount": 53,
+      "outboundCount": 55,
       "uniqueInbound": 197
     },
     {
@@ -286,11 +283,11 @@
     {
       "path": "/blog/adhd",
       "outboundCount": 64,
-      "uniqueInbound": 153
+      "uniqueInbound": 189
     },
     {
       "path": "/answers",
-      "outboundCount": 82,
+      "outboundCount": 105,
       "uniqueInbound": 189
     },
     {
@@ -573,19 +570,19 @@
     ],
     "/blog/adhd-evaluation-cost-california": [
       {
-        "p": "/adult-adhd-screening-california",
-        "score": 11,
-        "title": "Moved to adhd-evaluation-california — Siya Health"
+        "p": "/answers/what-included-199-adhd-evaluation",
+        "score": 10,
+        "title": "What is included in a Siya Health ADHD evaluation?"
       },
       {
-        "p": "/blog/adult-adhd-treatment-california-2026",
-        "score": 11,
-        "title": "Moved to adult-adhd-california — Siya Health"
+        "p": "/adhd-evaluation-california",
+        "score": 9,
+        "title": "Adult ADHD Evaluation in California | Same-Week Online Eval"
       },
       {
         "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/answers/when-is-testosterone-therapy-appropriate",
@@ -817,19 +814,19 @@
     ],
     "/blog/adhd-treatment-austin-tx": [
       {
-        "p": "/blog/adhd-treatment-dallas-tx",
-        "score": 10,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "p": "/adhd-diagnosis-austin",
+        "score": 9,
+        "title": "Moved · adhd-diagnosis-austin — Siya Health"
       },
       {
-        "p": "/blog/adhd-treatment-fort-worth-tx",
-        "score": 10,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "p": "/adhd-treatment-online",
+        "score": 9,
+        "title": "Moved · adhd-treatment-online — Siya Health"
       },
       {
         "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/mens-health-longevity",
@@ -839,19 +836,19 @@
     ],
     "/blog/adhd-treatment-dallas-tx": [
       {
-        "p": "/blog/adhd-treatment-austin-tx",
-        "score": 10,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "p": "/adhd-treatment-online",
+        "score": 9,
+        "title": "Moved · adhd-treatment-online — Siya Health"
       },
       {
-        "p": "/blog/adhd-treatment-fort-worth-tx",
-        "score": 10,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "p": "/blog/adhd-treatment-austin-tx",
+        "score": 9,
+        "title": "Moved · blog · adhd-treatment-austin-tx — Siya Health"
       },
       {
         "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/mens-health-longevity",
@@ -861,19 +858,19 @@
     ],
     "/blog/adhd-treatment-fort-worth-tx": [
       {
-        "p": "/blog/adhd-treatment-austin-tx",
-        "score": 10,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "p": "/adhd-treatment-online",
+        "score": 9,
+        "title": "Moved · adhd-treatment-online — Siya Health"
       },
       {
-        "p": "/blog/adhd-treatment-dallas-tx",
-        "score": 10,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "p": "/blog/adhd-treatment-austin-tx",
+        "score": 9,
+        "title": "Moved · blog · adhd-treatment-austin-tx — Siya Health"
       },
       {
         "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/mens-health-longevity",
@@ -883,19 +880,19 @@
     ],
     "/blog/adhd-treatment-houston-tx": [
       {
-        "p": "/blog/adhd-treatment-austin-tx",
-        "score": 10,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "p": "/adhd-diagnosis-houston",
+        "score": 9,
+        "title": "Moved · adhd-diagnosis-houston — Siya Health"
       },
       {
-        "p": "/blog/adhd-treatment-dallas-tx",
-        "score": 10,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "p": "/adhd-treatment-online",
+        "score": 9,
+        "title": "Moved · adhd-treatment-online — Siya Health"
       },
       {
         "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/mens-health-longevity",
@@ -905,19 +902,19 @@
     ],
     "/blog/adhd-treatment-los-angeles-ca": [
       {
-        "p": "/blog/adult-adhd-treatment-california-2026",
-        "score": 12,
-        "title": "Moved to adult-adhd-california — Siya Health"
+        "p": "/adhd-treatment-online",
+        "score": 9,
+        "title": "Moved · adhd-treatment-online — Siya Health"
       },
       {
-        "p": "/adult-adhd-california",
-        "score": 10,
-        "title": "Adult ADHD Care in California — Diagnosis, Treatment &amp; Screening"
+        "p": "/blog/adhd-treatment-austin-tx",
+        "score": 9,
+        "title": "Moved · blog · adhd-treatment-austin-tx — Siya Health"
       },
       {
         "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/mens-health-longevity",
@@ -927,19 +924,19 @@
     ],
     "/blog/adhd-treatment-miami-fl": [
       {
-        "p": "/blog/adhd-treatment-austin-tx",
+        "p": "/adhd-treatment-online",
         "score": 9,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "title": "Moved · adhd-treatment-online — Siya Health"
       },
       {
-        "p": "/blog/adhd-treatment-dallas-tx",
+        "p": "/blog/adhd-treatment-austin-tx",
         "score": 9,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "title": "Moved · blog · adhd-treatment-austin-tx — Siya Health"
       },
       {
         "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/mens-health-longevity",
@@ -949,19 +946,19 @@
     ],
     "/blog/adhd-treatment-oakland-ca": [
       {
-        "p": "/blog/adult-adhd-treatment-california-2026",
-        "score": 12,
-        "title": "Moved to adult-adhd-california — Siya Health"
+        "p": "/adhd-treatment-online",
+        "score": 9,
+        "title": "Moved · adhd-treatment-online — Siya Health"
       },
       {
-        "p": "/adult-adhd-california",
-        "score": 10,
-        "title": "Adult ADHD Care in California — Diagnosis, Treatment &amp; Screening"
+        "p": "/blog/adhd-treatment-austin-tx",
+        "score": 9,
+        "title": "Moved · blog · adhd-treatment-austin-tx — Siya Health"
       },
       {
         "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/mens-health-longevity",
@@ -971,19 +968,19 @@
     ],
     "/blog/adhd-treatment-orange-county-ca": [
       {
-        "p": "/blog/adult-adhd-treatment-california-2026",
-        "score": 12,
-        "title": "Moved to adult-adhd-california — Siya Health"
+        "p": "/adhd-treatment-online",
+        "score": 9,
+        "title": "Moved · adhd-treatment-online — Siya Health"
       },
       {
-        "p": "/adult-adhd-california",
-        "score": 10,
-        "title": "Adult ADHD Care in California — Diagnosis, Treatment &amp; Screening"
+        "p": "/blog/adhd-treatment-austin-tx",
+        "score": 9,
+        "title": "Moved · blog · adhd-treatment-austin-tx — Siya Health"
       },
       {
         "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/mens-health-longevity",
@@ -993,19 +990,19 @@
     ],
     "/blog/adhd-treatment-orlando-fl": [
       {
-        "p": "/blog/adhd-treatment-austin-tx",
+        "p": "/adhd-treatment-online",
         "score": 9,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "title": "Moved · adhd-treatment-online — Siya Health"
       },
       {
-        "p": "/blog/adhd-treatment-dallas-tx",
+        "p": "/blog/adhd-treatment-austin-tx",
         "score": 9,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "title": "Moved · blog · adhd-treatment-austin-tx — Siya Health"
       },
       {
         "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/mens-health-longevity",
@@ -1015,19 +1012,19 @@
     ],
     "/blog/adhd-treatment-philadelphia-pa": [
       {
-        "p": "/blog/adhd-treatment-austin-tx",
+        "p": "/adhd-diagnosis-philadelphia",
         "score": 9,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "title": "Moved · adhd-diagnosis-philadelphia — Siya Health"
       },
       {
-        "p": "/blog/adhd-treatment-dallas-tx",
+        "p": "/adhd-treatment-online",
         "score": 9,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "title": "Moved · adhd-treatment-online — Siya Health"
       },
       {
         "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/mens-health-longevity",
@@ -1037,19 +1034,19 @@
     ],
     "/blog/adhd-treatment-sacramento-ca": [
       {
-        "p": "/blog/adult-adhd-treatment-california-2026",
-        "score": 12,
-        "title": "Moved to adult-adhd-california — Siya Health"
+        "p": "/adhd-treatment-online",
+        "score": 9,
+        "title": "Moved · adhd-treatment-online — Siya Health"
       },
       {
-        "p": "/adult-adhd-california",
-        "score": 10,
-        "title": "Adult ADHD Care in California — Diagnosis, Treatment &amp; Screening"
+        "p": "/blog/adhd-treatment-austin-tx",
+        "score": 9,
+        "title": "Moved · blog · adhd-treatment-austin-tx — Siya Health"
       },
       {
         "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/mens-health-longevity",
@@ -1059,19 +1056,19 @@
     ],
     "/blog/adhd-treatment-san-antonio-tx": [
       {
-        "p": "/blog/adhd-treatment-austin-tx",
-        "score": 10,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "p": "/adhd-treatment-online",
+        "score": 9,
+        "title": "Moved · adhd-treatment-online — Siya Health"
       },
       {
-        "p": "/blog/adhd-treatment-dallas-tx",
-        "score": 10,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "p": "/blog/adhd-treatment-austin-tx",
+        "score": 9,
+        "title": "Moved · blog · adhd-treatment-austin-tx — Siya Health"
       },
       {
         "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/mens-health-longevity",
@@ -1081,19 +1078,19 @@
     ],
     "/blog/adhd-treatment-san-diego-ca": [
       {
-        "p": "/blog/adult-adhd-treatment-california-2026",
-        "score": 12,
-        "title": "Moved to adult-adhd-california — Siya Health"
+        "p": "/adhd-treatment-online",
+        "score": 9,
+        "title": "Moved · adhd-treatment-online — Siya Health"
       },
       {
-        "p": "/adult-adhd-california",
-        "score": 10,
-        "title": "Adult ADHD Care in California — Diagnosis, Treatment &amp; Screening"
+        "p": "/blog/adhd-treatment-austin-tx",
+        "score": 9,
+        "title": "Moved · blog · adhd-treatment-austin-tx — Siya Health"
       },
       {
         "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/mens-health-longevity",
@@ -1103,19 +1100,19 @@
     ],
     "/blog/adhd-treatment-san-francisco-ca": [
       {
-        "p": "/blog/adult-adhd-treatment-california-2026",
-        "score": 12,
-        "title": "Moved to adult-adhd-california — Siya Health"
+        "p": "/adhd-treatment-online",
+        "score": 9,
+        "title": "Moved · adhd-treatment-online — Siya Health"
       },
       {
-        "p": "/adult-adhd-california",
-        "score": 10,
-        "title": "Adult ADHD Care in California — Diagnosis, Treatment &amp; Screening"
+        "p": "/blog/adhd-treatment-austin-tx",
+        "score": 9,
+        "title": "Moved · blog · adhd-treatment-austin-tx — Siya Health"
       },
       {
         "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/mens-health-longevity",
@@ -1125,19 +1122,19 @@
     ],
     "/blog/adhd-treatment-san-jose-ca": [
       {
-        "p": "/blog/adult-adhd-treatment-california-2026",
-        "score": 12,
-        "title": "Moved to adult-adhd-california — Siya Health"
+        "p": "/adhd-treatment-online",
+        "score": 9,
+        "title": "Moved · adhd-treatment-online — Siya Health"
       },
       {
-        "p": "/adult-adhd-california",
-        "score": 10,
-        "title": "Adult ADHD Care in California — Diagnosis, Treatment &amp; Screening"
+        "p": "/blog/adhd-treatment-austin-tx",
+        "score": 9,
+        "title": "Moved · blog · adhd-treatment-austin-tx — Siya Health"
       },
       {
         "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/mens-health-longevity",
@@ -1152,14 +1149,14 @@
         "title": "How does ADHD telehealth work in Texas?"
       },
       {
-        "p": "/blog/adhd-treatment-austin-tx",
-        "score": 8,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "p": "/adhd-diagnosis-texas",
+        "score": 7,
+        "title": "Online ADHD Diagnosis Texas"
       },
       {
-        "p": "/blog/adhd-treatment-dallas-tx",
-        "score": 8,
-        "title": "Moved to blog · adhd-treatment-texas — Siya Health"
+        "p": "/adhd-evaluation-texas",
+        "score": 7,
+        "title": "Adult ADHD Evaluation in Texas | Same-Week Online Eval"
       }
     ],
     "/blog/adult-adhd-symptoms-california": [
@@ -1169,9 +1166,9 @@
         "title": "Adult ADHD Care in California — Diagnosis, Treatment &amp; Screening"
       },
       {
-        "p": "/answers/signs-of-adult-adhd",
+        "p": "/adult-adhd-screening-california",
         "score": 9,
-        "title": "What are the signs of adult ADHD?"
+        "title": "Moved · adult-adhd-screening-california — Siya Health"
       },
       {
         "p": "/answers/when-is-testosterone-therapy-appropriate",
@@ -1181,19 +1178,19 @@
     ],
     "/blog/adult-adhd-treatment-california-2026": [
       {
+        "p": "/adult-adhd-screening-california",
+        "score": 11,
+        "title": "Moved · adult-adhd-screening-california — Siya Health"
+      },
+      {
         "p": "/adult-adhd-california",
         "score": 10,
         "title": "Adult ADHD Care in California — Diagnosis, Treatment &amp; Screening"
       },
       {
-        "p": "/adult-adhd-screening-california",
-        "score": 10,
-        "title": "Moved to adhd-evaluation-california — Siya Health"
-      },
-      {
         "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/mens-health-longevity",
@@ -1213,14 +1210,14 @@
         "title": "Why do I crash every afternoon after lunch?"
       },
       {
+        "p": "/answers/weight-gain-after-stopping-ozempic",
+        "score": 4,
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
+      },
+      {
         "p": "/answers/what-happens-after-adhd-evaluation",
         "score": 4,
         "title": "What happens after an ADHD evaluation?"
-      },
-      {
-        "p": "/answers/weight-gain-after-stopping-ozempic",
-        "score": 3,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
       }
     ],
     "/blog/brain-fog-and-anxiety": [
@@ -1357,11 +1354,6 @@
         "p": "/answers/ed-telehealth-legitimate",
         "score": 3,
         "title": "Is telehealth for erectile dysfunction legitimate?"
-      },
-      {
-        "p": "/answers/weight-gain-after-stopping-ozempic",
-        "score": 3,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
       }
     ],
     "/blog/fatigue-after-illness": [
@@ -1381,14 +1373,14 @@
         "title": "Why do I get brain fog after eating?"
       },
       {
+        "p": "/answers/weight-gain-after-stopping-ozempic",
+        "score": 4,
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
+      },
+      {
         "p": "/answers/what-happens-after-adhd-evaluation",
         "score": 4,
         "title": "What happens after an ADHD evaluation?"
-      },
-      {
-        "p": "/answers/compounded-vs-branded-glp-1",
-        "score": 3,
-        "title": "What should you ask about compounded vs branded GLP-1?"
       }
     ],
     "/blog/fatigue-despite-normal-labs": [
@@ -1415,11 +1407,6 @@
     ],
     "/blog/food-noise-and-glp-1-what-it-means-and-what-helps": [
       {
-        "p": "/answers/weight-gain-after-stopping-ozempic",
-        "score": 10,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
-      },
-      {
         "p": "/answers/food-noise-returned-on-glp-1",
         "score": 9,
         "title": "Why did food noise come back on GLP-1?"
@@ -1428,6 +1415,11 @@
         "p": "/answers/what-is-food-noise",
         "score": 9,
         "title": "What is food noise?"
+      },
+      {
+        "p": "/answers/compounded-vs-branded-glp-1",
+        "score": 7,
+        "title": "What should you ask about compounded vs branded GLP-1?"
       }
     ],
     "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know": [
@@ -1493,14 +1485,14 @@
     ],
     "/blog/how-mental-health-affects-weight-loss-outcomes": [
       {
+        "p": "/answers/weight-gain-after-stopping-ozempic",
+        "score": 10,
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
+      },
+      {
         "p": "/answers/medical-weight-loss-vs-dieting",
         "score": 9,
         "title": "When does medical weight loss outperform dieting alone?"
-      },
-      {
-        "p": "/answers/semaglutide-weight-loss-how-it-works",
-        "score": 9,
-        "title": "How quickly does semaglutide start working for weight loss?"
       },
       {
         "p": "/answers/adhd-and-weight-loss-connection",
@@ -1970,9 +1962,9 @@
         "title": "How do online prescriptions work legally?"
       },
       {
-        "p": "/answers/can-adhd-be-diagnosed-online",
+        "p": "/adhd-treatment-online",
         "score": 4,
-        "title": "Can ADHD be diagnosed online?"
+        "title": "Moved · adhd-treatment-online — Siya Health"
       },
       {
         "p": "/answers/ed-telehealth-legitimate",
@@ -2065,19 +2057,14 @@
     ],
     "/blog/why-am-i-always-tired-causes-when-to-see-doctor": [
       {
-        "p": "/answers/can-sleep-apnea-cause-fatigue",
-        "score": 9,
-        "title": "Can sleep apnea cause fatigue?"
+        "p": "/answers/weight-gain-after-stopping-ozempic",
+        "score": 4,
+        "title": "Moved · answers · weight-gain-after-stopping-ozempic — Siya Health"
       },
       {
         "p": "/answers/why-am-i-tired-even-after-sleeping",
-        "score": 9,
-        "title": "Why am I tired even after sleeping?"
-      },
-      {
-        "p": "/answers/weight-gain-after-stopping-ozempic",
         "score": 4,
-        "title": "Moved to blog · food-noise-and-glp-1-what-it-means-and-what-helps — Siya Health"
+        "title": "Why am I tired even after sleeping?"
       },
       {
         "p": "/answers/what-included-199-adhd-evaluation",
@@ -2111,45 +2098,46 @@
   "inboundCounts": {
     "/adhd-care": 197,
     "/": 193,
+    "/providers": 192,
+    "/adhd-screening": 191,
+    "/legal/cookie-policy": 191,
+    "/legal/notice-of-privacy-practices": 191,
+    "/legal/privacy-policy": 191,
+    "/legal/terms-of-use": 191,
+    "/pricing": 191,
+    "/redirect/meet-greet": 191,
     "/about": 189,
     "/answers": 189,
+    "/answers/is-online-adhd-diagnosis-legitimate": 189,
+    "/answers/signs-of-adult-adhd": 189,
+    "/answers/what-is-insulin-resistance": 189,
+    "/answers/why-am-i-tired-even-after-sleeping": 189,
+    "/blog/adhd": 189,
+    "/blog/how-to-know-if-you-have-adhd-adult": 189,
     "/blog": 189,
+    "/blog/telehealth": 189,
+    "/blog/weight-loss": 189,
+    "/book-appointment": 189,
+    "/employers": 189,
     "/labs": 189,
+    "/legal": 189,
+    "/mens-health-longevity": 189,
     "/prescriptions": 189,
     "/primary-urgent-care": 189,
+    "/redirect/chat": 189,
+    "/siya-circle": 189,
     "/telehealth": 189,
     "/weight-loss-metabolic-health": 189,
-    "/redirect/chat": 188,
-    "/blog/adhd": 153,
-    "/blog/weight-loss": 146,
-    "/answers/signs-of-adult-adhd": 142,
-    "/blog/telehealth": 142,
-    "/answers/what-is-insulin-resistance": 139,
-    "/mens-health-longevity": 139,
-    "/answers/why-am-i-tired-even-after-sleeping": 135,
-    "/pricing": 135,
-    "/blog/how-to-know-if-you-have-adhd-adult": 134,
-    "/adhd-screening": 133,
-    "/providers": 133,
-    "/redirect/meet-greet": 133,
-    "/answers/is-online-adhd-diagnosis-legitimate": 132,
-    "/legal/cookie-policy": 132,
-    "/legal/notice-of-privacy-practices": 132,
-    "/legal/privacy-policy": 132,
-    "/legal/terms-of-use": 132,
-    "/siya-circle": 131,
-    "/book-appointment": 130,
-    "/employers": 130,
-    "/legal": 130,
-    "/womens-health": 130,
-    "/join-our-team": 123,
-    "/legal/controlled-substance-treatment-agreement": 53,
+    "/womens-health": 189,
+    "/join-our-team": 183,
+    "/legal/controlled-substance-treatment-agreement": 81,
     "/fatigue": 44,
     "/answers/can-adhd-be-diagnosed-online": 35,
+    "/labs/a1c-blood-sugar": 29,
+    "/labs/how-to-read-results": 28,
     "/answers/starting-adhd-medication-adults": 27,
-    "/preventive-care": 25,
+    "/preventive-care": 26,
     "/adult-adhd-california": 24,
-    "/labs/how-to-read-results": 23,
     "/answers/what-is-food-noise": 22,
     "/blog/adhd-medication-options-for-adults": 21,
     "/blog/executive-dysfunction-adhd": 21,
@@ -2157,26 +2145,29 @@
     "/providers/dr-sneh-pandey": 20,
     "/blog/adhd-in-women": 19,
     "/blog/insulin-resistance-and-weight-loss-clinician-overview": 19,
+    "/labs/iron-ferritin": 18,
+    "/labs/preventive": 18,
     "/providers/dr-natasha-desai": 18,
     "/blog/adhd-treatment-texas": 17,
     "/blog/food-noise-and-glp-1-what-it-means-and-what-helps": 17,
-    "/labs/a1c-blood-sugar": 17,
-    "/labs/preventive": 17,
     "/blog/is-online-adhd-diagnosis-legit": 16,
     "/providers/wendy-delgado": 16,
-    "/labs/iron-ferritin": 15,
     "/answers/brain-fog-after-eating": 14,
     "/brain-fog": 14,
+    "/labs/fatigue-brain-fog": 14,
+    "/labs/mens-health": 14,
+    "/labs/thyroid": 14,
+    "/adhd-evaluation-california": 13,
     "/answers/adhd-vs-anxiety": 13,
     "/answers/screening-vs-adhd-evaluation": 13,
     "/answers/what-does-low-testosterone-feel-like": 13,
     "/answers/what-is-free-testosterone": 13,
     "/blog/adhd-medication-options-california": 13,
     "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know": 13,
-    "/adhd-evaluation-california": 12,
+    "/labs/vitamin-b12": 13,
+    "/blog/brain-fog-at-work": 12,
     "/blog/online-adhd-diagnosis-california": 12,
     "/labs/cbc": 12,
-    "/labs/thyroid": 12,
     "/providers/dr-vanessa-urbina": 12,
     "/answers/executive-dysfunction-adhd": 11,
     "/answers/late-adhd-diagnosis-adults": 11,
@@ -2184,7 +2175,6 @@
     "/blog/adhd-symptoms-overlooked": 11,
     "/blog/chronic-fatigue-and-work-performance": 11,
     "/blog/medical-weight-loss-glp1-semaglutide-texas": 11,
-    "/labs/vitamin-b12": 11,
     "/answers/glp-1-side-effects": 10,
     "/answers/what-included-199-adhd-evaluation": 10,
     "/blog/chronic-fatigue-vs-everyday-tiredness": 10,
@@ -2193,23 +2183,24 @@
     "/answers/how-long-adhd-evaluation": 9,
     "/blog/adhd-evaluation-california-online-vs-in-person": 9,
     "/blog/fatigue-after-illness": 9,
+    "/labs/adhd-support": 9,
     "/labs/cmp": 9,
+    "/labs/womens-midlife": 9,
     "/providers/dr-swati-pandey": 9,
     "/answers/is-telehealth-legitimate": 8,
     "/answers/telehealth-adhd-california": 8,
     "/answers/why-normal-labs-dont-mean-healthy": 8,
     "/blog/adhd-medication-daily-or-as-needed-adults": 8,
     "/blog/adhd-medication-online-california": 8,
-    "/blog/brain-fog-at-work": 8,
     "/blog/how-adhd-medication-is-prescribed-online": 8,
     "/blog/how-mental-health-affects-weight-loss-outcomes": 8,
     "/blog/perimenopause-brain-fog": 8,
     "/blog/semaglutide-for-weight-loss-how-it-works": 8,
     "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign": 8,
     "/labs/lipid-panel": 8,
-    "/labs/womens-midlife": 8,
     "/womens-midlife-health": 8,
     "/answers/adhd-in-women": 7,
+    "/answers/adhd-workplace-accommodations": 7,
     "/answers/is-adhd-medication-safe-long-term": 7,
     "/answers/medical-weight-loss-vs-dieting": 7,
     "/answers/meet-and-greet-telehealth-expectations": 7,
@@ -2220,8 +2211,6 @@
     "/blog/minoxidil-for-hair-loss-does-it-work": 7,
     "/blog/online-adhd-diagnosis-texas": 7,
     "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd": 7,
-    "/labs/fatigue-brain-fog": 7,
-    "/labs/mens-health": 7,
     "/answers/adhd-and-weight-loss-connection": 6,
     "/answers/adhd-medication-side-effects": 6,
     "/answers/adhd-vs-burnout": 6,
@@ -2269,9 +2258,8 @@
     "/blog/non-stimulant-adhd-medications-explained": 4,
     "/blog/sildenafil-for-erectile-dysfunction-what-to-expect": 4,
     "/blog/tirzepatide-vs-semaglutide-which-is-better": 4,
-    "/labs/adhd-support": 4,
+    "/adhd-evaluation-texas": 3,
     "/answers/adderall-vs-vyvanse-adults": 3,
-    "/answers/adhd-workplace-accommodations": 3,
     "/answers/can-adhd-cause-anxiety": 3,
     "/answers/poor-sleep-feels-like-adhd": 3,
     "/answers/what-to-do-after-lab-results": 3,
@@ -2290,8 +2278,6 @@
     "/adhd-care/miami": 1,
     "/adhd-care/orlando": 1,
     "/adhd-care/san-diego": 1,
-    "/adhd-evaluation-cost": 1,
-    "/adhd-evaluation-texas": 1,
     "/adhd-screening-results": 1,
     "/answers/what-happens-after-adhd-evaluation": 1,
     "/blog/iron-deficiency-and-fatigue": 1,
@@ -2304,6 +2290,7 @@
     "/adhd-diagnosis-houston": 0,
     "/adhd-diagnosis-pennsylvania": 0,
     "/adhd-diagnosis-philadelphia": 0,
+    "/adhd-evaluation-cost": 0,
     "/adhd-treatment-online": 0,
     "/adult-adhd-diagnosis": 0,
     "/adult-adhd-screening-california": 0,

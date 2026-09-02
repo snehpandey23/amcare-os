@@ -69,7 +69,9 @@ const INTENT_DETECTORS = [
       p === 'adult-adhd-california.html' ||
       p === 'creyos-adhd-testing.html' ||
       p === 'online-adhd-test.html' ||
-      (/^blog\//.test(p) && /adhd/i.test(p)),
+      (/^blog\//.test(p) &&
+        (/adhd/i.test(p) ||
+          /vyvanse|adderall|stimulant|ritalin|focalin|non-stimulant-adhd/i.test(p))),
   },
   { intent: 'pricing', test: (p) => p === 'pricing.html' || p === 'membership-pricing.html' },
   {

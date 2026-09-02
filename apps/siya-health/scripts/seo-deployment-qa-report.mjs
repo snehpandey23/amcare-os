@@ -99,6 +99,7 @@ for (const rel of files) {
   if (
     !isAdhdFunnelPage(rel) &&
     !rel.startsWith('answers/') &&
+    !/^blog\/.*(vyvanse|adderall|stimulant|ritalin|focalin|non-stimulant-adhd)/i.test(rel) &&
     /adhd-screening/.test(contentHtml) &&
     !isAuditExcludedPath(relToPath(rel), html)
   ) {
