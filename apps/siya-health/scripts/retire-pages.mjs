@@ -43,13 +43,15 @@ function pathToFile(urlPath) {
 }
 
 function stubHtml(dest, note) {
+  const slug = dest.replace(/^\//, '').replace(/\//g, ' · ');
+  const title = slug ? `Moved to ${slug} — Siya Health` : 'Moved — Siya Health';
   return `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Moved — Siya Health</title>
+    <title>${title}</title>
     <link rel="canonical" href="https://siya.health${dest}" />
     <meta http-equiv="refresh" content="0;url=${dest}" />
     <script>location.replace('${dest}');</script>

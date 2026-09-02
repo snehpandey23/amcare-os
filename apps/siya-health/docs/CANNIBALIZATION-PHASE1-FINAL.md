@@ -1,13 +1,13 @@
 # Cannibalization Phase 1 — Final Report
 
-Generated: 2026-09-01T14:56:54.251Z
+Generated: 2026-09-02T00:40:11.245Z
 
 ## Build validation
 
 | Check | Result |
 |-------|--------|
 | Broken internal links | ✓ 0 |
-| Duplicate title tags | ✗ 1 groups |
+| Duplicate title tags | ✗ 4 groups |
 | Duplicate H1s | ✗ 2 groups |
 | JSON-LD parse errors | ✓ 0 |
 | Sitemap URLs | 184 |
@@ -48,7 +48,7 @@ Generated: 2026-09-01T14:56:54.251Z
 
 ### Canonical pointer blocks
 
-0/28 guides have top pointer + full-guide CTA.
+28/28 guides have top pointer + full-guide CTA.
 
 ## Titles / H1s changed (duplicate pairs)
 

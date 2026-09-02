@@ -11,6 +11,7 @@ import {
   renderEmployerHrStrip,
   renderEmployeeWorkplaceStrip,
   renderEmployerRelatedGuidesSection,
+  renderWorkplaceBlogSpotlight,
 } from '../data/workplace-seo-cluster.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -24,6 +25,8 @@ const CLUSTER_RE = new RegExp(
 const RELATED_SECTION_RE = new RegExp(
   `<section class="section section-tinted" id="related-workplace-guides"[\\s\\S]*?</section>\\n?`,
 );
+
+const WORKPLACE_SPOTLIGHT_RE = /<!-- SIYA:WORKPLACE-BLOG-SPOTLIGHT -->[\s\S]*?<!-- \/SIYA:WORKPLACE-BLOG-SPOTLIGHT -->\n?/g;
 
 function upsertBlock(rel, block, anchors = []) {
   const filePath = path.join(ROOT, rel);
@@ -73,6 +76,26 @@ function upsertEmployerRelatedSection() {
   return true;
 }
 
+function upsertBlogWorkplaceSpotlight() {
+  const rel = 'blog/index.html';
+  const filePath = path.join(ROOT, rel);
+  if (!fs.existsSync(filePath)) return false;
+  let html = fs.readFileSync(filePath, 'utf8');
+  const block = renderWorkplaceBlogSpotlight();
+  if (WORKPLACE_SPOTLIGHT_RE.test(html)) {
+    html = html.replace(WORKPLACE_SPOTLIGHT_RE, `${block}\n`);
+  } else if (html.includes('<section class="section blog-featured">')) {
+    html = html.replace(
+      '<section class="section blog-featured">',
+      `${block}\n\n      <section class="section blog-featured">`,
+    );
+  } else {
+    return false;
+  }
+  fs.writeFileSync(filePath, html, 'utf8');
+  return true;
+}
+
 function main() {
   let n = 0;
 
@@ -89,7 +112,7 @@ function main() {
       file: 'answers/adhd-workplace-accommodations.html',
       block: `<aside class="workplace-seo-cluster" data-link-pass="${WORKPLACE_CLUSTER_MARKER}" aria-label="Work and cognitive health resources">
               <p class="workplace-seo-cluster__intro">Related reading for employees and HR teams:</p>
-              <p class="workplace-seo-cluster__links"><a href="${WORKPLACE_PATHS.employers}">Employer cognitive health programs</a> · <a href="${WORKPLACE_PATHS.brainFogAtWork}">Brain fog at work</a> · <a href="${WORKPLACE_PATHS.executiveDysfunctionBlog}">Executive dysfunction guide</a></p>
+              <p class="workplace-seo-cluster__links"><a href="${WORKPLACE_PATHS.employers}">Employer cognitive health programs</a> · <a href="${WORKPLACE_PATHS.brainFogAtWork}">Brain fog at work</a> · <a href="${WORKPLACE_PATHS.executiveDysfunctionBlog}">Executive dysfunction guide</a> · <a href="${WORKPLACE_PATHS.sleepFocusAtWork}">Sleep &amp; focus at work</a></p>
             </aside>`,
       anchors: ['<aside class="answer-ask-siya"', '<section class="related-articles"'],
     },
@@ -173,6 +196,11 @@ function main() {
       console.log(`  ${file} — employer bridge`);
       n++;
     }
+  }
+
+  if (upsertBlogWorkplaceSpotlight()) {
+    console.log('  blog/index.html — workplace spotlight');
+    n++;
   }
 
   console.log(`apply-workplace-seo-cluster: ${n} updates`);

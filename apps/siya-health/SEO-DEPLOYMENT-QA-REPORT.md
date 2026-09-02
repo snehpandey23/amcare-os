@@ -1,6 +1,6 @@
 # SEO Deployment QA Report
 
-Generated: 2026-09-01T14:56:53.718Z
+Generated: 2026-09-02T00:40:10.792Z
 
 ## Summary
 
@@ -198,9 +198,6 @@ _None detected in static HTML scan._
 
 ## Orphan pages (low inbound links, sample)
 
-- `adhd-care/miami.html`
-- `adhd-care/orlando.html`
-- `adhd-care/san-diego.html`
 - `adhd-diagnosis-austin.html`
 - `adhd-diagnosis-florida.html`
 - `adhd-diagnosis-houston.html`
@@ -228,6 +225,9 @@ _None detected in static HTML scan._
 - `blog/adhd-treatment-san-diego-ca.html`
 - `blog/adhd-treatment-san-francisco-ca.html`
 - `blog/adhd-treatment-san-jose-ca.html`
+- `blog/adult-adhd-treatment-california-2026.html`
+- `blog/why-am-i-always-tired-causes-when-to-see-doctor.html`
+- `docs/tint-options-preview.html`
 
 ## Recommendations
 

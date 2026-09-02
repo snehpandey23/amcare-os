@@ -63,6 +63,10 @@ const FAQS = [
     q: 'Is screening the same as diagnosis?',
     a: 'No. Structured screening identifies patterns that may warrant clinical follow-up. Physician-led evaluation determines diagnosis and treatment options when appropriate. Outcomes vary by individual and are not guaranteed.',
   },
+  {
+    q: 'Is employer/B2B work part of Siya Health’s current fundraising round?',
+    a: 'This raise funds clinical capacity—providers, medical director oversight, and concierge care coordination—that serves individual patients and structured employer programs alike. Employer partnership development and pilot design are advanced with dedicated operating support outside that raise. This page describes real programs we are building with early partners; it is not a claim about B2B marketing budget from investor capital.',
+  },
 ];
 
 function faqAccordion(faqs, prefix) {
@@ -152,6 +156,12 @@ const html = `<!DOCTYPE html>
             </div>
             <p class="cta-microcopy">Partnership pricing is not published yet. This page is for employer and HR inquiries—not individual patient booking.</p>
           </div>
+        </div>
+      </section>
+
+      <section class="section employer-clinical-positioning" id="clinical-infrastructure" aria-label="Clinical infrastructure">
+        <div class="container">
+          <p class="lead employer-positioning-lead">Our clinical infrastructure—licensed providers, medical oversight, and care coordination—is what makes employer partnerships possible. We are building employer pilots alongside our care team&rsquo;s growth; partnership outreach runs on dedicated operating support separate from our patient-facing fundraising narrative.</p>
         </div>
       </section>
 

@@ -1,6 +1,6 @@
 # Siya Health — Full AI Retrieval Index
 
-Generated: 2026-09-01
+Generated: 2026-09-02
 Total pages: 184
 
 ---

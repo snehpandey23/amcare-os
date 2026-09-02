@@ -529,6 +529,7 @@ ${engagement.evidenceCard}
             </section>
 ${learnMoreHtml}
 ${buildAnswerInternalLinksHtml(seed)}
+${canonicalBlogFullHtml(seed)}
 ${contextClosing}
             <p class="cta-microcopy">Browse <a href="/answers">all Health Guides</a> · <a href="${hub.url}">${hub.label} articles</a>${reviewRecord.reviewer ? ` · <a href="/providers/${reviewRecord.reviewer.slug}">${reviewRecord.reviewer.name}</a>` : ''}</p>
           </div>

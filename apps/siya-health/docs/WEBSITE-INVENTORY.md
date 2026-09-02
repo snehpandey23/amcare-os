@@ -1,6 +1,6 @@
 # Siya Health — Complete Website Inventory
 
-Generated: 2026-09-01
+Generated: 2026-09-02
 
 | Metric | Count |
 |--------|------:|
@@ -16,8 +16,8 @@ Generated: 2026-09-01
 | Trust Pages | 14 |
 | Educational Pages | 130 |
 | SEO Pages | 14 |
-| Utility Pages | 34 |
-| Orphan Pages | 4 |
+| Utility Pages | 37 |
+| Orphan Pages | 1 |
 | Duplicate Pages | 11 |
 | Legacy Pages | 0 |
 
@@ -72,7 +72,7 @@ Generated: 2026-09-01
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
 | [/](https://siya.health/) | Homepage | Brand entry; route patients to core services and booking | Book Free Meet & Greet → /redirect/me… | How can we help? → #care-journeys | Navigational / Commercial | Something feels off—and you want clearer answers. | 1098 | 197 | 42 |
-| [/adhd-care](https://siya.health/adhd-care) | Service Page | Convert ADHD evaluation and treatment interest to booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Struggling to focus—even when you care? | 1510 | 198 | 50 |
+| [/adhd-care](https://siya.health/adhd-care) | Service Page | Convert ADHD evaluation and treatment interest to booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Struggling to focus—even when you care? | 1537 | 198 | 53 |
 | [/adhd-diagnosis-texas](https://siya.health/adhd-diagnosis-texas) | Geo SEO Landing | Local/state ADHD intent capture; drive evaluation booking | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Local SEO / Commercial | Online ADHD Diagnosis in Texas | 439 | 5 | 39 |
 | [/adhd-screening](https://siya.health/adhd-screening) | Service Page | Top-of-funnel ADHD screening; lead to evaluation | Continue to next steps → /adhd-screen… | — | Commercial / Transactional | What are you looking for help with? | 446 | 195 | 39 |
 | [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Choose How You Want to Get Started | 203 | 193 | 35 |
@@ -112,68 +112,68 @@ Generated: 2026-09-01
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
 | [/answers](https://siya.health/answers) | Health Guide Hub | FAQ/PAA discovery hub for AI and organic search | Join Our Health Guide → /siya-circle#… | View all Metabolic Health guides → #g… | Informational / Navigational | Health Guides | 1005 | 193 | 70 |
-| [/answers/adderall-vs-vyvanse-adults](https://siya.health/answers/adderall-vs-vyvanse-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | When might Vyvanse be preferred over Adderall f… | 569 | 2 | 38 |
+| [/answers/adderall-vs-vyvanse-adults](https://siya.health/answers/adderall-vs-vyvanse-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | Vyvanse vs Adderall: full comparison … | Informational | When might Vyvanse be preferred over Adderall f… | 605 | 2 | 38 |
 | [/answers/adhd-and-weight-loss-connection](https://siya.health/answers/adhd-and-weight-loss-connection) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Is there a connection between ADHD and weight l… | 529 | 5 | 38 |
-| [/answers/adhd-in-women](https://siya.health/answers/adhd-in-women) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | How does ADHD present differently in women? | 582 | 7 | 39 |
-| [/answers/adhd-medication-every-day](https://siya.health/answers/adhd-medication-every-day) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Do you have to take ADHD medication every day? | 538 | 3 | 39 |
-| [/answers/adhd-medication-side-effects](https://siya.health/answers/adhd-medication-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What ADHD medication side effects are most comm… | 618 | 5 | 39 |
+| [/answers/adhd-in-women](https://siya.health/answers/adhd-in-women) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | our full guide to ADHD in women → /bl… | Informational | How does ADHD present differently in women? | 619 | 7 | 39 |
+| [/answers/adhd-medication-every-day](https://siya.health/answers/adhd-medication-every-day) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | ADHD medication daily or as-needed (f… | Informational | Do you have to take ADHD medication every day? | 575 | 3 | 39 |
+| [/answers/adhd-medication-side-effects](https://siya.health/answers/adhd-medication-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | ADHD medication side effects: what to… | Informational | What ADHD medication side effects are most comm… | 657 | 5 | 39 |
 | [/answers/adhd-vs-anxiety](https://siya.health/answers/adhd-vs-anxiety) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | How do you tell ADHD apart from anxiety? | 985 | 14 | 39 |
-| [/answers/adhd-vs-burnout](https://siya.health/answers/adhd-vs-burnout) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Is it ADHD or burnout? | 1081 | 5 | 40 |
-| [/answers/adhd-workplace-accommodations](https://siya.health/answers/adhd-workplace-accommodations) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Can ADHD support workplace accommodations? | 664 | 2 | 39 |
-| [/answers/afternoon-energy-crash-after-lunch](https://siya.health/answers/afternoon-energy-crash-after-lunch) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Why do I crash every afternoon after lunch? | 1307 | 2 | 39 |
+| [/answers/adhd-vs-burnout](https://siya.health/answers/adhd-vs-burnout) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Is it ADHD or burnout? | 1102 | 5 | 42 |
+| [/answers/adhd-workplace-accommodations](https://siya.health/answers/adhd-workplace-accommodations) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Can ADHD support workplace accommodations? | 670 | 7 | 40 |
+| [/answers/afternoon-energy-crash-after-lunch](https://siya.health/answers/afternoon-energy-crash-after-lunch) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Read the full clinical guide → /fatigue | Informational | Why do I crash every afternoon after lunch? | 1342 | 2 | 39 |
 | [/answers/asrs-adhd-screening-explained](https://siya.health/answers/asrs-adhd-screening-explained) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What is the ASRS ADHD screening test? | 524 | 3 | 38 |
-| [/answers/brain-fog-after-eating](https://siya.health/answers/brain-fog-after-eating) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Why do I get brain fog after eating? | 1301 | 13 | 38 |
+| [/answers/brain-fog-after-eating](https://siya.health/answers/brain-fog-after-eating) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Read the full clinical guide → /blog/… | Informational | Why do I get brain fog after eating? | 1336 | 13 | 38 |
 | [/answers/can-adhd-be-diagnosed-online](https://siya.health/answers/can-adhd-be-diagnosed-online) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Can ADHD be diagnosed online? | 821 | 35 | 38 |
 | [/answers/can-adhd-cause-anxiety](https://siya.health/answers/can-adhd-cause-anxiety) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Can ADHD cause anxiety? | 842 | 2 | 37 |
-| [/answers/can-sleep-apnea-cause-fatigue](https://siya.health/answers/can-sleep-apnea-cause-fatigue) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | — | Informational | Can sleep apnea cause fatigue? | 647 | 4 | 37 |
+| [/answers/can-sleep-apnea-cause-fatigue](https://siya.health/answers/can-sleep-apnea-cause-fatigue) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | Sleep apnea, fatigue, and metabolic r… | Informational | Can sleep apnea cause fatigue? | 685 | 4 | 37 |
 | [/answers/can-you-get-adhd-medication-online](https://siya.health/answers/can-you-get-adhd-medication-online) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Can you get ADHD medication online? | 487 | 3 | 39 |
-| [/answers/compounded-vs-branded-glp-1](https://siya.health/answers/compounded-vs-branded-glp-1) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | What should you ask about compounded vs branded… | 551 | 3 | 37 |
+| [/answers/compounded-vs-branded-glp-1](https://siya.health/answers/compounded-vs-branded-glp-1) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Compounded vs branded GLP-1 medicatio… | Informational | What should you ask about compounded vs branded… | 588 | 3 | 37 |
 | [/answers/ed-telehealth-legitimate](https://siya.health/answers/ed-telehealth-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | Is telehealth for erectile dysfunction legitimate? | 432 | 1 | 37 |
-| [/answers/executive-dysfunction-adhd](https://siya.health/answers/executive-dysfunction-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What is executive dysfunction in adult ADHD? | 587 | 11 | 40 |
-| [/answers/food-noise-returned-on-glp-1](https://siya.health/answers/food-noise-returned-on-glp-1) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Why did food noise come back on GLP-1? | 1319 | 2 | 38 |
+| [/answers/executive-dysfunction-adhd](https://siya.health/answers/executive-dysfunction-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | our full guide to executive dysfuncti… | Informational | What is executive dysfunction in adult ADHD? | 625 | 11 | 40 |
+| [/answers/food-noise-returned-on-glp-1](https://siya.health/answers/food-noise-returned-on-glp-1) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Food noise and GLP-1: what it means a… | Informational | Why did food noise come back on GLP-1? | 1361 | 2 | 38 |
 | [/answers/fsa-hsa-adhd-evaluation](https://siya.health/answers/fsa-hsa-adhd-evaluation) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Can you use FSA or HSA for ADHD evaluation? | 535 | 1 | 39 |
-| [/answers/glp-1-nausea-management](https://siya.health/answers/glp-1-nausea-management) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | How do you manage GLP-1 nausea? | 510 | 3 | 38 |
-| [/answers/glp-1-side-effects](https://siya.health/answers/glp-1-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Which GLP-1 side effects usually improve with t… | 1011 | 10 | 39 |
-| [/answers/high-functioning-adhd](https://siya.health/answers/high-functioning-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Can you have ADHD and still be high-functioning? | 521 | 3 | 38 |
-| [/answers/high-shbg-low-free-testosterone](https://siya.health/answers/high-shbg-low-free-testosterone) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | What does high SHBG with low free testosterone … | 1238 | 2 | 40 |
+| [/answers/glp-1-nausea-management](https://siya.health/answers/glp-1-nausea-management) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | GLP-1 side effects and how to manage … | Informational | How do you manage GLP-1 nausea? | 550 | 3 | 38 |
+| [/answers/glp-1-side-effects](https://siya.health/answers/glp-1-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | GLP-1 side effects and how to manage … | Informational | Which GLP-1 side effects usually improve with t… | 1051 | 10 | 39 |
+| [/answers/high-functioning-adhd](https://siya.health/answers/high-functioning-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Can you have ADHD and still be high-functioning? | 542 | 3 | 40 |
+| [/answers/high-shbg-low-free-testosterone](https://siya.health/answers/high-shbg-low-free-testosterone) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | Free vs total testosterone: what pati… | Informational | What does high SHBG with low free testosterone … | 1278 | 2 | 40 |
 | [/answers/how-long-adhd-evaluation](https://siya.health/answers/how-long-adhd-evaluation) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | How long does an ADHD evaluation take? | 485 | 9 | 39 |
 | [/answers/how-much-does-adhd-testing-cost](https://siya.health/answers/how-much-does-adhd-testing-cost) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | How much does ADHD testing cost? | 495 | 3 | 39 |
 | [/answers/how-online-prescriptions-work](https://siya.health/answers/how-online-prescriptions-work) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | — | Informational | How do online prescriptions work legally? | 786 | 6 | 38 |
-| [/answers/insulin-resistance-without-diabetes](https://siya.health/answers/insulin-resistance-without-diabetes) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Can you have insulin resistance without diabetes? | 868 | 3 | 38 |
-| [/answers/is-adhd-medication-safe-long-term](https://siya.health/answers/is-adhd-medication-safe-long-term) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What does long-term ADHD medication safety moni… | 564 | 6 | 39 |
-| [/answers/is-online-adhd-diagnosis-legitimate](https://siya.health/answers/is-online-adhd-diagnosis-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What should you look for in a legitimate online… | 889 | 193 | 39 |
+| [/answers/insulin-resistance-without-diabetes](https://siya.health/answers/insulin-resistance-without-diabetes) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Insulin resistance and weight loss (c… | Informational | Can you have insulin resistance without diabetes? | 905 | 3 | 38 |
+| [/answers/is-adhd-medication-safe-long-term](https://siya.health/answers/is-adhd-medication-safe-long-term) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | Is ADHD medication safe long-term? (f… | Informational | What does long-term ADHD medication safety moni… | 601 | 6 | 39 |
+| [/answers/is-online-adhd-diagnosis-legitimate](https://siya.health/answers/is-online-adhd-diagnosis-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | Is online ADHD diagnosis legit? (full… | Informational | What should you look for in a legitimate online… | 927 | 193 | 39 |
 | [/answers/is-telehealth-legitimate](https://siya.health/answers/is-telehealth-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | — | Informational | Is telehealth legitimate for medical care? | 787 | 8 | 38 |
 | [/answers/late-adhd-diagnosis-adults](https://siya.health/answers/late-adhd-diagnosis-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Why are so many adults diagnosed with ADHD late… | 567 | 12 | 39 |
-| [/answers/medical-weight-loss-vs-dieting](https://siya.health/answers/medical-weight-loss-vs-dieting) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | When does medical weight loss outperform dietin… | 553 | 6 | 38 |
+| [/answers/medical-weight-loss-vs-dieting](https://siya.health/answers/medical-weight-loss-vs-dieting) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Medical weight loss vs dieting: what … | Informational | When does medical weight loss outperform dietin… | 593 | 6 | 38 |
 | [/answers/meet-and-greet-telehealth-expectations](https://siya.health/answers/meet-and-greet-telehealth-expectations) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | — | Informational | What should I expect from a first telehealth vi… | 812 | 7 | 38 |
-| [/answers/normal-a1c-insulin-resistance](https://siya.health/answers/normal-a1c-insulin-resistance) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Can you have insulin resistance with a normal A1C? | 942 | 5 | 38 |
-| [/answers/oral-vs-topical-minoxidil](https://siya.health/answers/oral-vs-topical-minoxidil) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | When is topical minoxidil enough vs oral minoxi… | 476 | 1 | 37 |
-| [/answers/poor-sleep-feels-like-adhd](https://siya.health/answers/poor-sleep-feels-like-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Can poor sleep feel like ADHD? | 1184 | 3 | 39 |
+| [/answers/normal-a1c-insulin-resistance](https://siya.health/answers/normal-a1c-insulin-resistance) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Insulin resistance and weight loss (c… | Informational | Can you have insulin resistance with a normal A1C? | 979 | 5 | 38 |
+| [/answers/oral-vs-topical-minoxidil](https://siya.health/answers/oral-vs-topical-minoxidil) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | Oral vs topical minoxidil: which is r… | Informational | When is topical minoxidil enough vs oral minoxi… | 515 | 1 | 37 |
+| [/answers/poor-sleep-feels-like-adhd](https://siya.health/answers/poor-sleep-feels-like-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | Read the full clinical guide → /fatigue | Informational | Can poor sleep feel like ADHD? | 1240 | 3 | 41 |
 | [/answers/rejection-sensitivity-adhd](https://siya.health/answers/rejection-sensitivity-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What is rejection sensitive dysphoria (RSD) and… | 550 | 3 | 39 |
 | [/answers/screening-vs-adhd-evaluation](https://siya.health/answers/screening-vs-adhd-evaluation) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What is the difference between ADHD screening a… | 551 | 13 | 39 |
-| [/answers/semaglutide-weight-loss-how-it-works](https://siya.health/answers/semaglutide-weight-loss-how-it-works) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | How quickly does semaglutide start working for … | 1016 | 6 | 39 |
-| [/answers/signs-of-adult-adhd](https://siya.health/answers/signs-of-adult-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What are the signs of adult ADHD? | 916 | 193 | 39 |
-| [/answers/signs-of-sleep-apnea-in-adults](https://siya.health/answers/signs-of-sleep-apnea-in-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | — | Informational | What are the signs of sleep apnea in adults? | 650 | 6 | 39 |
+| [/answers/semaglutide-weight-loss-how-it-works](https://siya.health/answers/semaglutide-weight-loss-how-it-works) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Semaglutide for weight loss: how it w… | Informational | How quickly does semaglutide start working for … | 1055 | 6 | 39 |
+| [/answers/signs-of-adult-adhd](https://siya.health/answers/signs-of-adult-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What are the signs of adult ADHD? | 938 | 193 | 41 |
+| [/answers/signs-of-sleep-apnea-in-adults](https://siya.health/answers/signs-of-sleep-apnea-in-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | Sleep apnea, fatigue, and metabolic r… | Informational | What are the signs of sleep apnea in adults? | 688 | 6 | 39 |
 | [/answers/starting-adhd-medication-adults](https://siya.health/answers/starting-adhd-medication-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What should adults expect when starting ADHD me… | 924 | 27 | 39 |
-| [/answers/telehealth-adhd-california](https://siya.health/answers/telehealth-adhd-california) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | How does ADHD telehealth work in California? | 534 | 7 | 39 |
+| [/answers/telehealth-adhd-california](https://siya.health/answers/telehealth-adhd-california) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | ADHD telehealth in California (full o… | Informational | How does ADHD telehealth work in California? | 570 | 7 | 39 |
 | [/answers/telehealth-adhd-texas](https://siya.health/answers/telehealth-adhd-texas) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | How does ADHD telehealth work in Texas? | 495 | 3 | 39 |
 | [/answers/testosterone-and-adhd-overlap](https://siya.health/answers/testosterone-and-adhd-overlap) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | Can low testosterone mimic ADHD? | 515 | 3 | 41 |
-| [/answers/time-blindness-adhd](https://siya.health/answers/time-blindness-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What is time blindness in ADHD? | 543 | 3 | 38 |
-| [/answers/trt-monitoring-requirements](https://siya.health/answers/trt-monitoring-requirements) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | How often is TRT monitoring required? | 877 | 5 | 39 |
-| [/answers/weight-gain-after-stopping-ozempic](https://siya.health/answers/weight-gain-after-stopping-ozempic) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Why am I gaining weight after stopping Ozempic? | 1292 | 0 | 40 |
-| [/answers/what-does-low-testosterone-feel-like](https://siya.health/answers/what-does-low-testosterone-feel-like) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | What does low testosterone feel like? | 506 | 13 | 39 |
+| [/answers/time-blindness-adhd](https://siya.health/answers/time-blindness-adhd) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | executive dysfunction and time blindn… | Informational | What is time blindness in ADHD? | 580 | 3 | 38 |
+| [/answers/trt-monitoring-requirements](https://siya.health/answers/trt-monitoring-requirements) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | When is testosterone therapy appropri… | Informational | How often is TRT monitoring required? | 914 | 5 | 39 |
+| [/answers/weight-gain-after-stopping-ozempic](https://siya.health/answers/weight-gain-after-stopping-ozempic) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Read the full clinical guide → /blog/… | Informational | Why am I gaining weight after stopping Ozempic? | 1327 | 0 | 40 |
+| [/answers/what-does-low-testosterone-feel-like](https://siya.health/answers/what-does-low-testosterone-feel-like) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | Free vs total testosterone: what pati… | Informational | What does low testosterone feel like? | 546 | 13 | 39 |
 | [/answers/what-happens-after-adhd-evaluation](https://siya.health/answers/what-happens-after-adhd-evaluation) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What happens after an ADHD evaluation? | 688 | 1 | 38 |
 | [/answers/what-included-199-adhd-evaluation](https://siya.health/answers/what-included-199-adhd-evaluation) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What is included in a Siya Health ADHD evaluation? | 552 | 10 | 39 |
-| [/answers/what-is-food-noise](https://siya.health/answers/what-is-food-noise) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | What is food noise? | 926 | 22 | 37 |
-| [/answers/what-is-free-testosterone](https://siya.health/answers/what-is-free-testosterone) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | What is free testosterone? | 849 | 13 | 39 |
-| [/answers/what-is-insulin-resistance](https://siya.health/answers/what-is-insulin-resistance) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | What is insulin resistance? | 1039 | 193 | 39 |
-| [/answers/what-to-do-after-lab-results](https://siya.health/answers/what-to-do-after-lab-results) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Labs → → /labs | — | Informational | What to do after you get lab results | 1158 | 3 | 40 |
-| [/answers/when-is-testosterone-therapy-appropriate](https://siya.health/answers/when-is-testosterone-therapy-appropriate) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | What symptoms warrant testosterone therapy eval… | 875 | 10 | 39 |
-| [/answers/which-preventive-blood-tests-adults](https://siya.health/answers/which-preventive-blood-tests-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Which preventive blood tests do adults usually … | 1276 | 5 | 40 |
-| [/answers/who-qualifies-glp-1-weight-loss](https://siya.health/answers/who-qualifies-glp-1-weight-loss) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Who qualifies for GLP-1 weight loss medications? | 549 | 3 | 39 |
-| [/answers/why-am-i-tired-even-after-sleeping](https://siya.health/answers/why-am-i-tired-even-after-sleeping) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | — | Informational | Why am I tired even after sleeping? | 724 | 193 | 43 |
-| [/answers/why-normal-labs-dont-mean-healthy](https://siya.health/answers/why-normal-labs-dont-mean-healthy) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Why don't normal labs mean you're healthy? | 1362 | 8 | 38 |
-| [/blog](https://siya.health/blog) | Blog Hub | Content discovery; distribute authority to articles | Join our newsletter → https://link.yo… | Read health guides → /answers | Informational / Navigational | Health Insights — Evidence-Based, Clinical | 872 | 193 | 55 |
+| [/answers/what-is-food-noise](https://siya.health/answers/what-is-food-noise) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Food noise and GLP-1: what it means a… | Informational | What is food noise? | 968 | 22 | 37 |
+| [/answers/what-is-free-testosterone](https://siya.health/answers/what-is-free-testosterone) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | Free vs total testosterone: what pati… | Informational | What is free testosterone? | 889 | 13 | 39 |
+| [/answers/what-is-insulin-resistance](https://siya.health/answers/what-is-insulin-resistance) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Insulin resistance and weight loss (c… | Informational | What is insulin resistance? | 1076 | 193 | 39 |
+| [/answers/what-to-do-after-lab-results](https://siya.health/answers/what-to-do-after-lab-results) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Labs → → /labs | Read the full clinical guide → /fatigue | Informational | What to do after you get lab results | 1193 | 3 | 40 |
+| [/answers/when-is-testosterone-therapy-appropriate](https://siya.health/answers/when-is-testosterone-therapy-appropriate) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | When is testosterone therapy appropri… | Informational | What symptoms warrant testosterone therapy eval… | 912 | 10 | 39 |
+| [/answers/which-preventive-blood-tests-adults](https://siya.health/answers/which-preventive-blood-tests-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Read the full clinical guide → /blog/… | Informational | Which preventive blood tests do adults usually … | 1311 | 5 | 40 |
+| [/answers/who-qualifies-glp-1-weight-loss](https://siya.health/answers/who-qualifies-glp-1-weight-loss) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Medical weight loss with GLP-1 in Tex… | Informational | Who qualifies for GLP-1 weight loss medications? | 588 | 3 | 39 |
+| [/answers/why-am-i-tired-even-after-sleeping](https://siya.health/answers/why-am-i-tired-even-after-sleeping) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Telehealth Care → → /telehealth | Read the full clinical guide → /fatigue | Informational | Why am I tired even after sleeping? | 759 | 193 | 43 |
+| [/answers/why-normal-labs-dont-mean-healthy](https://siya.health/answers/why-normal-labs-dont-mean-healthy) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Read the full clinical guide → /blog/… | Informational | Why don't normal labs mean you're healthy? | 1397 | 8 | 38 |
+| [/blog](https://siya.health/blog) | Blog Hub | Content discovery; distribute authority to articles | Join our newsletter → https://link.yo… | Read health guides → /answers | Informational / Navigational | Health Insights — Evidence-Based, Clinical | 912 | 193 | 59 |
 | [/blog/adderall-for-adhd-how-it-works](https://siya.health/blog/adderall-for-adhd-how-it-works) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | Adderall for ADHD: How It Works (2026 Clinical … | 1676 | 6 | 40 |
 | [/blog/adhd](https://siya.health/blog/adhd) | Blog Hub | Content discovery; distribute authority to articles | Book Free Meet & Greet → → /adhd-care | — | Informational / Navigational | ADHD articles | 753 | 193 | 64 |
 | [/blog/adhd-and-binge-eating](https://siya.health/blog/adhd-and-binge-eating) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | ADHD and Binge Eating: Why the Link Matters (an… | 2112 | 7 | 53 |
@@ -195,9 +195,9 @@ Generated: 2026-09-01
 | [/blog/brain-fog-after-covid](https://siya.health/blog/brain-fog-after-covid) | Blog Article | Educational SEO; nurture toward clinical services | Book a primary care visit → /book-app… | Book Free Meet & Greet → /redirect/me… | Informational | Brain Fog After COVID: What We Know and When to… | 343 | 6 | 41 |
 | [/blog/brain-fog-and-anxiety](https://siya.health/blog/brain-fog-and-anxiety) | Blog Article | Educational SEO; nurture toward clinical services | Book a primary care visit → /book-app… | Book Free Meet & Greet → /redirect/me… | Informational | Brain Fog and Anxiety: When Worry Crowds Out Cl… | 359 | 5 | 41 |
 | [/blog/brain-fog-and-sleep](https://siya.health/blog/brain-fog-and-sleep) | Blog Article | Educational SEO; nurture toward clinical services | Book a primary care visit → /book-app… | Start Secure Medical Chat → /redirect… | Informational | Brain Fog and Sleep: Why Poor Rest Clouds Thinking | 407 | 4 | 41 |
-| [/blog/brain-fog-at-work](https://siya.health/blog/brain-fog-at-work) | Blog Article | Educational SEO; nurture toward clinical services | Book a primary care visit → /book-app… | Book Free Meet & Greet → /redirect/me… | Informational | Brain Fog at Work | 3181 | 8 | 43 |
+| [/blog/brain-fog-at-work](https://siya.health/blog/brain-fog-at-work) | Blog Article | Educational SEO; nurture toward clinical services | Book a primary care visit → /book-app… | Book Free Meet & Greet → /redirect/me… | Informational | Brain Fog at Work | 11437 | 13 | 43 |
 | [/blog/brain-fog-vs-adhd](https://siya.health/blog/brain-fog-vs-adhd) | Blog Article | Educational SEO; nurture toward clinical services | Book a primary care visit → /book-app… | Take Free ADHD Screening → /adhd-scre… | Informational | Brain Fog vs ADHD: How to Tell the Difference | 516 | 3 | 42 |
-| [/blog/chronic-fatigue-and-work-performance](https://siya.health/blog/chronic-fatigue-and-work-performance) | Blog Article | Educational SEO; nurture toward clinical services | Book a primary care visit → /book-app… | Book Free Meet & Greet → /redirect/me… | Informational | Chronic Fatigue and Work Performance | 418 | 10 | 41 |
+| [/blog/chronic-fatigue-and-work-performance](https://siya.health/blog/chronic-fatigue-and-work-performance) | Blog Article | Educational SEO; nurture toward clinical services | Book a primary care visit → /book-app… | Book Free Meet & Greet → /redirect/me… | Informational | Chronic Fatigue and Work Performance | 418 | 11 | 41 |
 | [/blog/chronic-fatigue-vs-everyday-tiredness](https://siya.health/blog/chronic-fatigue-vs-everyday-tiredness) | Blog Article | Educational SEO; nurture toward clinical services | Book a primary care visit → /book-app… | Start Secure Medical Chat → /redirect… | Informational | Chronic Fatigue vs Everyday Tiredness | 316 | 10 | 40 |
 | [/blog/compounded-vs-branded-glp1-medications](https://siya.health/blog/compounded-vs-branded-glp1-medications) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Informational | Compounded vs Branded GLP-1 Medications: What P… | 1031 | 5 | 41 |
 | [/blog/executive-dysfunction-adhd](https://siya.health/blog/executive-dysfunction-adhd) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Informational | Executive Dysfunction in ADHD: What It Is and H… | 4621 | 23 | 49 |
@@ -231,7 +231,7 @@ Generated: 2026-09-01
 | [/blog/pots-and-adhd](https://siya.health/blog/pots-and-adhd) | Blog Article | Educational SEO; nurture toward clinical services | Take Free ADHD Screening → /adhd-scre… | Take Free ADHD Screening → /adhd-scre… | Informational | POTS and ADHD: Why Researchers Are Exploring th… | 3798 | 1 | 42 |
 | [/blog/semaglutide-for-weight-loss-how-it-works](https://siya.health/blog/semaglutide-for-weight-loss-how-it-works) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Informational | Semaglutide for Weight Loss: How It Works (2026… | 2276 | 8 | 42 |
 | [/blog/sildenafil-for-erectile-dysfunction-what-to-expect](https://siya.health/blog/sildenafil-for-erectile-dysfunction-what-to-expect) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Informational | Sildenafil for Erectile Dysfunction: What to Ex… | 607 | 4 | 40 |
-| [/blog/sleep-and-focus-at-work](https://siya.health/blog/sleep-and-focus-at-work) | Blog Article | Educational SEO; nurture toward clinical services | Book a primary care visit → /book-app… | Book Free Meet & Greet → /redirect/me… | Informational | Sleep, Focus, and Cognitive Load at Work | 482 | 1 | 42 |
+| [/blog/sleep-and-focus-at-work](https://siya.health/blog/sleep-and-focus-at-work) | Blog Article | Educational SEO; nurture toward clinical services | Book a primary care visit → /book-app… | Book Free Meet & Greet → /redirect/me… | Informational | Sleep, Focus, and Cognitive Load at Work | 482 | 3 | 42 |
 | [/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign](https://siya.health/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Explore metabolic health → /weight-lo… | Informational | Sleep Apnea, Fatigue, and Metabolic Risk: When … | 2358 | 8 | 44 |
 | [/blog/telehealth](https://siya.health/blog/telehealth) | Blog Hub | Content discovery; distribute authority to articles | — | — | Informational / Navigational | Telehealth articles | 216 | 193 | 44 |
 | [/blog/telehealth-prescriptions-how-online-treatment-works](https://siya.health/blog/telehealth-prescriptions-how-online-treatment-works) | Blog Article | Educational SEO; nurture toward clinical services | Book Free Meet & Greet → /redirect/me… | Explore Care Options → /telehealth | Informational | Telehealth Prescriptions: How Online Treatment … | 551 | 5 | 41 |
@@ -265,14 +265,17 @@ Generated: 2026-09-01
 
 ---
 
-## Utility Pages (34)
+## Utility Pages (37)
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
+| [/adhd-care/miami](https://siya.health/adhd-care/miami) | Page | Adult ADHD evaluation for Miami and South Florida via Flo… | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Mixed | Adult ADHD evaluation in Miami, FL | 793 | 2 | 40 |
+| [/adhd-care/orlando](https://siya.health/adhd-care/orlando) | Page | Adult ADHD evaluation for Orlando and Central Florida via… | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Mixed | Adult ADHD evaluation in Orlando, FL | 737 | 2 | 40 |
+| [/adhd-care/san-diego](https://siya.health/adhd-care/san-diego) | Page | Adult ADHD evaluation for San Diego via California-licens… | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Mixed | Adult ADHD evaluation in San Diego, CA | 762 | 1 | 40 |
 | [/adult-adhd-california](https://siya.health/adult-adhd-california) | Page | The complete guide to adult ADHD in California: what it l… | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Mixed | Adult ADHD care in California | 1622 | 24 | 49 |
 | [/book-appointment](https://siya.health/book-appointment) | Service Page | Direct appointment scheduling entry | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Choose How You Want to Get Started | 203 | 193 | 35 |
 | [/brain-fog](https://siya.health/brain-fog) | Page | Brain fog is a symptom with many possible contributors — … | Book Free Meet & Greet → /redirect/me… | See what it could be → #what-it-could-be | Mixed | Brain fog: when thinking feels slower than usual | 1485 | 14 | 50 |
-| [/employers](https://siya.health/employers) | Page | Structured screening and physician-led telehealth for wor… | Request employer information → #emplo… | See how it works → #how-it-works | Mixed | Cognitive health support for working professionals | 843 | 193 | 38 |
+| [/employers](https://siya.health/employers) | Page | Structured screening and physician-led telehealth for wor… | Request employer information → #emplo… | See how it works → #how-it-works | Mixed | Cognitive health support for working professionals | 949 | 193 | 38 |
 | [/fatigue](https://siya.health/fatigue) | Page | Persistent fatigue is a symptom with many possible causes… | Book Free Meet & Greet → /redirect/me… | See what it could be → #what-it-could-be | Mixed | Fatigue: when tired stops being normal | 1564 | 44 | 51 |
 | [/labs](https://siya.health/labs) | Service Page | Explore transparent direct-pay laboratory testing for thy… | Browse Lab Tests → https://labs.rupah… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Labs & Blood Tests with Transparent Direct-Pay … | 1806 | 193 | 48 |
 | [/labs/a1c-blood-sugar](https://siya.health/labs/a1c-blood-sugar) | Page | What HbA1c broadly measures about average blood sugar, wh… | Book Free Meet & Greet → /redirect/me… | Preventive labs overview → /labs/prev… | Mixed | Hemoglobin A1c (HbA1c) | 479 | 29 | 43 |
@@ -297,7 +300,7 @@ Generated: 2026-09-01
 | [/legal/terms-of-use](https://siya.health/legal/terms-of-use) | Legal | Legal compliance and policy disclosure | — | — | Compliance / Navigational | Terms of Use | 4490 | 195 | 33 |
 | [/prescriptions](https://siya.health/prescriptions) | Service Page | Provider-reviewed prescriptions through Siya Health teleh… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Online Prescription Services | 137 | 193 | 34 |
 | [/preventive-care](https://siya.health/preventive-care) | Page | Preventive care is how adults stay ahead of problems: ann… | Book Free Meet & Greet → /redirect/me… | See what it covers → #what-it-covers | Mixed | Preventive care: stay healthy before something … | 1162 | 26 | 48 |
-| [/pricing](https://siya.health/pricing) | Page | Transparent physician-led telehealth pricing: $149 initia… | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Mixed | Transparent pricing for physician-led care | 501 | 195 | 38 |
+| [/pricing](https://siya.health/pricing) | Page | Transparent physician-led telehealth pricing: $149 initia… | Book Free Meet & Greet → /redirect/me… | Start Secure Medical Chat → /redirect… | Mixed | Transparent pricing for physician-led care | 509 | 195 | 38 |
 | [/primary-care](https://siya.health/primary-care) | Page | Primary care is the root of ongoing health at Siya: sympt… | Book Free Meet & Greet → /redirect/me… | See how care fits together → #how-it-… | Mixed | Primary care: where ongoing health starts | 874 | 20 | 45 |
 | [/primary-urgent-care](https://siya.health/primary-urgent-care) | Service Page | Virtual primary and urgent care across California, Texas,… | Book Free Meet & Greet → /redirect/me… | Book Free Meet & Greet → /redirect/me… | Commercial / Transactional | Primary & Urgent Care — Virtual, Same-Week | 456 | 193 | 44 |
 | [/siya-circle](https://siya.health/siya-circle) | Utility | Community membership signup | Join Our Health Guide → /siya-circle#… | — | Transactional / Utility | Join Siya Circle | 196 | 193 | 34 |
@@ -306,14 +309,11 @@ Generated: 2026-09-01
 
 ---
 
-## Orphan Pages (4)
+## Orphan Pages (1)
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/adhd-care/miami](https://siya.health/adhd-care/miami) | Page | Adult ADHD evaluation for Miami and South Florida via Flo… | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Mixed | Adult ADHD evaluation in Miami, FL | 793 | 0 | 40 |
-| [/adhd-care/orlando](https://siya.health/adhd-care/orlando) | Page | Adult ADHD evaluation for Orlando and Central Florida via… | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Mixed | Adult ADHD evaluation in Orlando, FL | 737 | 0 | 40 |
-| [/adhd-care/san-diego](https://siya.health/adhd-care/san-diego) | Page | Adult ADHD evaluation for San Diego via California-licens… | Take Free ADHD Screening → /adhd-scre… | Book Free Meet & Greet → /redirect/me… | Mixed | Adult ADHD evaluation in San Diego, CA | 762 | 0 | 40 |
-| [/answers/weight-gain-after-stopping-ozempic](https://siya.health/answers/weight-gain-after-stopping-ozempic) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Why am I gaining weight after stopping Ozempic? | 1292 | 0 | 40 |
+| [/answers/weight-gain-after-stopping-ozempic](https://siya.health/answers/weight-gain-after-stopping-ozempic) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Read the full clinical guide → /blog/… | Informational | Why am I gaining weight after stopping Ozempic? | 1327 | 0 | 40 |
 
 ---
 
@@ -321,17 +321,17 @@ Generated: 2026-09-01
 
 | URL | Type | Purpose | Primary CTA | Secondary CTA | Intent | Target Keyword | Words | In | Out |
 |-----|------|---------|-------------|---------------|--------|----------------|------:|---:|---:|
-| [/answers/adderall-vs-vyvanse-adults](https://siya.health/answers/adderall-vs-vyvanse-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | When might Vyvanse be preferred over Adderall f… | 569 | 2 | 38 |
-| [/answers/adhd-medication-side-effects](https://siya.health/answers/adhd-medication-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What ADHD medication side effects are most comm… | 618 | 5 | 39 |
-| [/answers/compounded-vs-branded-glp-1](https://siya.health/answers/compounded-vs-branded-glp-1) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | What should you ask about compounded vs branded… | 551 | 3 | 37 |
-| [/answers/glp-1-side-effects](https://siya.health/answers/glp-1-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | Which GLP-1 side effects usually improve with t… | 1011 | 10 | 39 |
-| [/answers/is-adhd-medication-safe-long-term](https://siya.health/answers/is-adhd-medication-safe-long-term) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What does long-term ADHD medication safety moni… | 564 | 6 | 39 |
-| [/answers/is-online-adhd-diagnosis-legitimate](https://siya.health/answers/is-online-adhd-diagnosis-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | — | Informational | What should you look for in a legitimate online… | 889 | 193 | 39 |
-| [/answers/medical-weight-loss-vs-dieting](https://siya.health/answers/medical-weight-loss-vs-dieting) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | When does medical weight loss outperform dietin… | 553 | 6 | 38 |
-| [/answers/oral-vs-topical-minoxidil](https://siya.health/answers/oral-vs-topical-minoxidil) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | When is topical minoxidil enough vs oral minoxi… | 476 | 1 | 37 |
-| [/answers/semaglutide-weight-loss-how-it-works](https://siya.health/answers/semaglutide-weight-loss-how-it-works) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | — | Informational | How quickly does semaglutide start working for … | 1016 | 6 | 39 |
-| [/answers/trt-monitoring-requirements](https://siya.health/answers/trt-monitoring-requirements) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | How often is TRT monitoring required? | 877 | 5 | 39 |
-| [/answers/when-is-testosterone-therapy-appropriate](https://siya.health/answers/when-is-testosterone-therapy-appropriate) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | — | Informational | What symptoms warrant testosterone therapy eval… | 875 | 10 | 39 |
+| [/answers/adderall-vs-vyvanse-adults](https://siya.health/answers/adderall-vs-vyvanse-adults) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | Vyvanse vs Adderall: full comparison … | Informational | When might Vyvanse be preferred over Adderall f… | 605 | 2 | 38 |
+| [/answers/adhd-medication-side-effects](https://siya.health/answers/adhd-medication-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | ADHD medication side effects: what to… | Informational | What ADHD medication side effects are most comm… | 657 | 5 | 39 |
+| [/answers/compounded-vs-branded-glp-1](https://siya.health/answers/compounded-vs-branded-glp-1) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Compounded vs branded GLP-1 medicatio… | Informational | What should you ask about compounded vs branded… | 588 | 3 | 37 |
+| [/answers/glp-1-side-effects](https://siya.health/answers/glp-1-side-effects) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | GLP-1 side effects and how to manage … | Informational | Which GLP-1 side effects usually improve with t… | 1051 | 10 | 39 |
+| [/answers/is-adhd-medication-safe-long-term](https://siya.health/answers/is-adhd-medication-safe-long-term) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | Is ADHD medication safe long-term? (f… | Informational | What does long-term ADHD medication safety moni… | 601 | 6 | 39 |
+| [/answers/is-online-adhd-diagnosis-legitimate](https://siya.health/answers/is-online-adhd-diagnosis-legitimate) | Health Guide | Answer specific patient question; support SEO and conversion | Book Free Meet & Greet → → /adhd-care | Is online ADHD diagnosis legit? (full… | Informational | What should you look for in a legitimate online… | 927 | 193 | 39 |
+| [/answers/medical-weight-loss-vs-dieting](https://siya.health/answers/medical-weight-loss-vs-dieting) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Medical weight loss vs dieting: what … | Informational | When does medical weight loss outperform dietin… | 593 | 6 | 38 |
+| [/answers/oral-vs-topical-minoxidil](https://siya.health/answers/oral-vs-topical-minoxidil) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | Oral vs topical minoxidil: which is r… | Informational | When is topical minoxidil enough vs oral minoxi… | 515 | 1 | 37 |
+| [/answers/semaglutide-weight-loss-how-it-works](https://siya.health/answers/semaglutide-weight-loss-how-it-works) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Metabolic Care → → /weight-lo… | Semaglutide for weight loss: how it w… | Informational | How quickly does semaglutide start working for … | 1055 | 6 | 39 |
+| [/answers/trt-monitoring-requirements](https://siya.health/answers/trt-monitoring-requirements) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | When is testosterone therapy appropri… | Informational | How often is TRT monitoring required? | 914 | 5 | 39 |
+| [/answers/when-is-testosterone-therapy-appropriate](https://siya.health/answers/when-is-testosterone-therapy-appropriate) | Health Guide | Answer specific patient question; support SEO and conversion | Explore Men’s Health → → /mens-health… | When is testosterone therapy appropri… | Informational | What symptoms warrant testosterone therapy eval… | 912 | 10 | 39 |
 
 ---
 
@@ -374,9 +374,9 @@ Generated: 2026-09-01
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Struggling to focus—even when you care?
-- **Word Count:** 1510
+- **Word Count:** 1537
 - **Internal Links In:** 198
-- **Internal Links Out:** 50
+- **Internal Links Out:** 53
 - **Groups:** Core Revenue Pages
 
 ### /adhd-care/miami
@@ -389,9 +389,9 @@ Generated: 2026-09-01
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Adult ADHD evaluation in Miami, FL
 - **Word Count:** 793
-- **Internal Links In:** 0
+- **Internal Links In:** 2
 - **Internal Links Out:** 40
-- **Groups:** Orphan Pages
+- **Groups:** Utility Pages
 
 ### /adhd-care/orlando
 
@@ -403,9 +403,9 @@ Generated: 2026-09-01
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Adult ADHD evaluation in Orlando, FL
 - **Word Count:** 737
-- **Internal Links In:** 0
+- **Internal Links In:** 2
 - **Internal Links Out:** 40
-- **Groups:** Orphan Pages
+- **Groups:** Utility Pages
 
 ### /adhd-care/san-diego
 
@@ -417,9 +417,9 @@ Generated: 2026-09-01
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Adult ADHD evaluation in San Diego, CA
 - **Word Count:** 762
-- **Internal Links In:** 0
+- **Internal Links In:** 1
 - **Internal Links Out:** 40
-- **Groups:** Orphan Pages
+- **Groups:** Utility Pages
 
 ### /adhd-diagnosis-texas
 
@@ -483,10 +483,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Book Free Meet & Greet → → /adhd-care
-- **Secondary CTA:** —
+- **Secondary CTA:** Vyvanse vs Adderall: full comparison guide → /blog/vyvanse-vs-adderall-differences
 - **Traffic Intent:** Informational
 - **Target Keyword:** When might Vyvanse be preferred over Adderall for adults?
-- **Word Count:** 569
+- **Word Count:** 605
 - **Internal Links In:** 2
 - **Internal Links Out:** 38
 - **Groups:** Duplicate Pages, Educational Pages
@@ -512,10 +512,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Book Free Meet & Greet → → /adhd-care
-- **Secondary CTA:** —
+- **Secondary CTA:** our full guide to ADHD in women → /blog/adhd-in-women
 - **Traffic Intent:** Informational
 - **Target Keyword:** How does ADHD present differently in women?
-- **Word Count:** 582
+- **Word Count:** 619
 - **Internal Links In:** 7
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
@@ -526,10 +526,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Book Free Meet & Greet → → /adhd-care
-- **Secondary CTA:** —
+- **Secondary CTA:** ADHD medication daily or as-needed (full guide) → /blog/adhd-medication-daily-or-as-needed-adults
 - **Traffic Intent:** Informational
 - **Target Keyword:** Do you have to take ADHD medication every day?
-- **Word Count:** 538
+- **Word Count:** 575
 - **Internal Links In:** 3
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
@@ -540,10 +540,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Book Free Meet & Greet → → /adhd-care
-- **Secondary CTA:** —
+- **Secondary CTA:** ADHD medication side effects: what to expect (full guide) → /blog/adhd-medication-side-effects-what-to-expect
 - **Traffic Intent:** Informational
 - **Target Keyword:** What ADHD medication side effects are most common in the first weeks?
-- **Word Count:** 618
+- **Word Count:** 657
 - **Internal Links In:** 5
 - **Internal Links Out:** 39
 - **Groups:** Duplicate Pages, Educational Pages
@@ -572,9 +572,9 @@ Generated: 2026-09-01
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Is it ADHD or burnout?
-- **Word Count:** 1081
+- **Word Count:** 1102
 - **Internal Links In:** 5
-- **Internal Links Out:** 40
+- **Internal Links Out:** 42
 - **Groups:** Educational Pages
 
 ### /answers/adhd-workplace-accommodations
@@ -586,9 +586,9 @@ Generated: 2026-09-01
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can ADHD support workplace accommodations?
-- **Word Count:** 664
-- **Internal Links In:** 2
-- **Internal Links Out:** 39
+- **Word Count:** 670
+- **Internal Links In:** 7
+- **Internal Links Out:** 40
 - **Groups:** Educational Pages
 
 ### /answers/afternoon-energy-crash-after-lunch
@@ -597,10 +597,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
-- **Secondary CTA:** —
+- **Secondary CTA:** Read the full clinical guide → /fatigue
 - **Traffic Intent:** Informational
 - **Target Keyword:** Why do I crash every afternoon after lunch?
-- **Word Count:** 1307
+- **Word Count:** 1342
 - **Internal Links In:** 2
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
@@ -625,10 +625,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
-- **Secondary CTA:** —
+- **Secondary CTA:** Read the full clinical guide → /blog/insulin-resistance-and-weight-loss-clinician-overview
 - **Traffic Intent:** Informational
 - **Target Keyword:** Why do I get brain fog after eating?
-- **Word Count:** 1301
+- **Word Count:** 1336
 - **Internal Links In:** 13
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
@@ -667,10 +667,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Telehealth Care → → /telehealth
-- **Secondary CTA:** —
+- **Secondary CTA:** Sleep apnea, fatigue, and metabolic risk (full guide) → /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can sleep apnea cause fatigue?
-- **Word Count:** 647
+- **Word Count:** 685
 - **Internal Links In:** 4
 - **Internal Links Out:** 37
 - **Groups:** Educational Pages
@@ -695,10 +695,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
-- **Secondary CTA:** —
+- **Secondary CTA:** Compounded vs branded GLP-1 medications (full guide) → /blog/compounded-vs-branded-glp1-medications
 - **Traffic Intent:** Informational
 - **Target Keyword:** What should you ask about compounded vs branded GLP-1?
-- **Word Count:** 551
+- **Word Count:** 588
 - **Internal Links In:** 3
 - **Internal Links Out:** 37
 - **Groups:** Duplicate Pages, Educational Pages
@@ -724,10 +724,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Book Free Meet & Greet → → /adhd-care
-- **Secondary CTA:** —
+- **Secondary CTA:** our full guide to executive dysfunction in ADHD → /blog/executive-dysfunction-adhd
 - **Traffic Intent:** Informational
 - **Target Keyword:** What is executive dysfunction in adult ADHD?
-- **Word Count:** 587
+- **Word Count:** 625
 - **Internal Links In:** 11
 - **Internal Links Out:** 40
 - **Groups:** Educational Pages
@@ -738,10 +738,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
-- **Secondary CTA:** —
+- **Secondary CTA:** Food noise and GLP-1: what it means and what helps (full guide) → /blog/food-noise-and-glp-1-what-it-means-and-what-helps
 - **Traffic Intent:** Informational
 - **Target Keyword:** Why did food noise come back on GLP-1?
-- **Word Count:** 1319
+- **Word Count:** 1361
 - **Internal Links In:** 2
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
@@ -766,10 +766,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
-- **Secondary CTA:** —
+- **Secondary CTA:** GLP-1 side effects and how to manage them (full guide) → /blog/glp1-side-effects-and-how-to-manage-them
 - **Traffic Intent:** Informational
 - **Target Keyword:** How do you manage GLP-1 nausea?
-- **Word Count:** 510
+- **Word Count:** 550
 - **Internal Links In:** 3
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
@@ -780,10 +780,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
-- **Secondary CTA:** —
+- **Secondary CTA:** GLP-1 side effects and how to manage them (full guide) → /blog/glp1-side-effects-and-how-to-manage-them
 - **Traffic Intent:** Informational
 - **Target Keyword:** Which GLP-1 side effects usually improve with titration?
-- **Word Count:** 1011
+- **Word Count:** 1051
 - **Internal Links In:** 10
 - **Internal Links Out:** 39
 - **Groups:** Duplicate Pages, Educational Pages
@@ -798,9 +798,9 @@ Generated: 2026-09-01
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can you have ADHD and still be high-functioning?
-- **Word Count:** 521
+- **Word Count:** 542
 - **Internal Links In:** 3
-- **Internal Links Out:** 38
+- **Internal Links Out:** 40
 - **Groups:** Educational Pages
 
 ### /answers/high-shbg-low-free-testosterone
@@ -809,10 +809,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Men’s Health → → /mens-health-longevity
-- **Secondary CTA:** —
+- **Secondary CTA:** Free vs total testosterone: what patients should know (full guide) → /blog/free-testosterone-vs-total-testosterone-what-patients-should-know
 - **Traffic Intent:** Informational
 - **Target Keyword:** What does high SHBG with low free testosterone mean?
-- **Word Count:** 1238
+- **Word Count:** 1278
 - **Internal Links In:** 2
 - **Internal Links Out:** 40
 - **Groups:** Educational Pages
@@ -865,10 +865,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
-- **Secondary CTA:** —
+- **Secondary CTA:** Insulin resistance and weight loss (clinician overview) → /blog/insulin-resistance-and-weight-loss-clinician-overview
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can you have insulin resistance without diabetes?
-- **Word Count:** 868
+- **Word Count:** 905
 - **Internal Links In:** 3
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
@@ -879,10 +879,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Book Free Meet & Greet → → /adhd-care
-- **Secondary CTA:** —
+- **Secondary CTA:** Is ADHD medication safe long-term? (full guide) → /blog/is-adhd-medication-safe-long-term
 - **Traffic Intent:** Informational
 - **Target Keyword:** What does long-term ADHD medication safety monitoring include?
-- **Word Count:** 564
+- **Word Count:** 601
 - **Internal Links In:** 6
 - **Internal Links Out:** 39
 - **Groups:** Duplicate Pages, Educational Pages
@@ -894,10 +894,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Book Free Meet & Greet → → /adhd-care
-- **Secondary CTA:** —
+- **Secondary CTA:** Is online ADHD diagnosis legit? (full clinical guide) → /blog/is-online-adhd-diagnosis-legit
 - **Traffic Intent:** Informational
 - **Target Keyword:** What should you look for in a legitimate online ADHD diagnosis?
-- **Word Count:** 889
+- **Word Count:** 927
 - **Internal Links In:** 193
 - **Internal Links Out:** 39
 - **Groups:** Duplicate Pages, Educational Pages
@@ -937,10 +937,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
-- **Secondary CTA:** —
+- **Secondary CTA:** Medical weight loss vs dieting: what actually works (full guide) → /blog/medical-weight-loss-vs-dieting-what-actually-works
 - **Traffic Intent:** Informational
 - **Target Keyword:** When does medical weight loss outperform dieting alone?
-- **Word Count:** 553
+- **Word Count:** 593
 - **Internal Links In:** 6
 - **Internal Links Out:** 38
 - **Groups:** Duplicate Pages, Educational Pages
@@ -966,10 +966,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
-- **Secondary CTA:** —
+- **Secondary CTA:** Insulin resistance and weight loss (clinician overview) → /blog/insulin-resistance-and-weight-loss-clinician-overview
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can you have insulin resistance with a normal A1C?
-- **Word Count:** 942
+- **Word Count:** 979
 - **Internal Links In:** 5
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
@@ -980,10 +980,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Men’s Health → → /mens-health-longevity
-- **Secondary CTA:** —
+- **Secondary CTA:** Oral vs topical minoxidil: which is right? (full guide) → /blog/oral-vs-topical-minoxidil-which-is-right
 - **Traffic Intent:** Informational
 - **Target Keyword:** When is topical minoxidil enough vs oral minoxidil?
-- **Word Count:** 476
+- **Word Count:** 515
 - **Internal Links In:** 1
 - **Internal Links Out:** 37
 - **Groups:** Duplicate Pages, Educational Pages
@@ -995,12 +995,12 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Book Free Meet & Greet → → /adhd-care
-- **Secondary CTA:** —
+- **Secondary CTA:** Read the full clinical guide → /fatigue
 - **Traffic Intent:** Informational
 - **Target Keyword:** Can poor sleep feel like ADHD?
-- **Word Count:** 1184
+- **Word Count:** 1240
 - **Internal Links In:** 3
-- **Internal Links Out:** 39
+- **Internal Links Out:** 41
 - **Groups:** Educational Pages
 
 ### /answers/rejection-sensitivity-adhd
@@ -1037,10 +1037,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
-- **Secondary CTA:** —
+- **Secondary CTA:** Semaglutide for weight loss: how it works (full guide) → /blog/semaglutide-for-weight-loss-how-it-works
 - **Traffic Intent:** Informational
 - **Target Keyword:** How quickly does semaglutide start working for weight loss?
-- **Word Count:** 1016
+- **Word Count:** 1055
 - **Internal Links In:** 6
 - **Internal Links Out:** 39
 - **Groups:** Duplicate Pages, Educational Pages
@@ -1055,9 +1055,9 @@ Generated: 2026-09-01
 - **Secondary CTA:** —
 - **Traffic Intent:** Informational
 - **Target Keyword:** What are the signs of adult ADHD?
-- **Word Count:** 916
+- **Word Count:** 938
 - **Internal Links In:** 193
-- **Internal Links Out:** 39
+- **Internal Links Out:** 41
 - **Groups:** Educational Pages
 
 ### /answers/signs-of-sleep-apnea-in-adults
@@ -1066,10 +1066,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Telehealth Care → → /telehealth
-- **Secondary CTA:** —
+- **Secondary CTA:** Sleep apnea, fatigue, and metabolic risk (full guide) → /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign
 - **Traffic Intent:** Informational
 - **Target Keyword:** What are the signs of sleep apnea in adults?
-- **Word Count:** 650
+- **Word Count:** 688
 - **Internal Links In:** 6
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
@@ -1094,10 +1094,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Book Free Meet & Greet → → /adhd-care
-- **Secondary CTA:** —
+- **Secondary CTA:** ADHD telehealth in California (full overview) → /blog/adhd-telehealth-california
 - **Traffic Intent:** Informational
 - **Target Keyword:** How does ADHD telehealth work in California?
-- **Word Count:** 534
+- **Word Count:** 570
 - **Internal Links In:** 7
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
@@ -1136,10 +1136,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Book Free Meet & Greet → → /adhd-care
-- **Secondary CTA:** —
+- **Secondary CTA:** executive dysfunction and time blindness in ADHD → /blog/executive-dysfunction-adhd
 - **Traffic Intent:** Informational
 - **Target Keyword:** What is time blindness in ADHD?
-- **Word Count:** 543
+- **Word Count:** 580
 - **Internal Links In:** 3
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
@@ -1150,10 +1150,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Men’s Health → → /mens-health-longevity
-- **Secondary CTA:** —
+- **Secondary CTA:** When is testosterone therapy appropriate? (full guide) → /blog/when-is-testosterone-therapy-appropriate
 - **Traffic Intent:** Informational
 - **Target Keyword:** How often is TRT monitoring required?
-- **Word Count:** 877
+- **Word Count:** 914
 - **Internal Links In:** 5
 - **Internal Links Out:** 39
 - **Groups:** Duplicate Pages, Educational Pages
@@ -1165,10 +1165,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
-- **Secondary CTA:** —
+- **Secondary CTA:** Read the full clinical guide → /blog/food-noise-and-glp-1-what-it-means-and-what-helps
 - **Traffic Intent:** Informational
 - **Target Keyword:** Why am I gaining weight after stopping Ozempic?
-- **Word Count:** 1292
+- **Word Count:** 1327
 - **Internal Links In:** 0
 - **Internal Links Out:** 40
 - **Groups:** Orphan Pages, Educational Pages
@@ -1179,10 +1179,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Men’s Health → → /mens-health-longevity
-- **Secondary CTA:** —
+- **Secondary CTA:** Free vs total testosterone: what patients should know (full guide) → /blog/free-testosterone-vs-total-testosterone-what-patients-should-know
 - **Traffic Intent:** Informational
 - **Target Keyword:** What does low testosterone feel like?
-- **Word Count:** 506
+- **Word Count:** 546
 - **Internal Links In:** 13
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
@@ -1221,10 +1221,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
-- **Secondary CTA:** —
+- **Secondary CTA:** Food noise and GLP-1: what it means and what helps (full guide) → /blog/food-noise-and-glp-1-what-it-means-and-what-helps
 - **Traffic Intent:** Informational
 - **Target Keyword:** What is food noise?
-- **Word Count:** 926
+- **Word Count:** 968
 - **Internal Links In:** 22
 - **Internal Links Out:** 37
 - **Groups:** Educational Pages
@@ -1235,10 +1235,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Men’s Health → → /mens-health-longevity
-- **Secondary CTA:** —
+- **Secondary CTA:** Free vs total testosterone: what patients should know (full guide) → /blog/free-testosterone-vs-total-testosterone-what-patients-should-know
 - **Traffic Intent:** Informational
 - **Target Keyword:** What is free testosterone?
-- **Word Count:** 849
+- **Word Count:** 889
 - **Internal Links In:** 13
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
@@ -1249,10 +1249,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
-- **Secondary CTA:** —
+- **Secondary CTA:** Insulin resistance and weight loss (clinician overview) → /blog/insulin-resistance-and-weight-loss-clinician-overview
 - **Traffic Intent:** Informational
 - **Target Keyword:** What is insulin resistance?
-- **Word Count:** 1039
+- **Word Count:** 1076
 - **Internal Links In:** 193
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
@@ -1263,10 +1263,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Labs → → /labs
-- **Secondary CTA:** —
+- **Secondary CTA:** Read the full clinical guide → /fatigue
 - **Traffic Intent:** Informational
 - **Target Keyword:** What to do after you get lab results
-- **Word Count:** 1158
+- **Word Count:** 1193
 - **Internal Links In:** 3
 - **Internal Links Out:** 40
 - **Groups:** Educational Pages
@@ -1277,10 +1277,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Men’s Health → → /mens-health-longevity
-- **Secondary CTA:** —
+- **Secondary CTA:** When is testosterone therapy appropriate? (full guide) → /blog/when-is-testosterone-therapy-appropriate
 - **Traffic Intent:** Informational
 - **Target Keyword:** What symptoms warrant testosterone therapy evaluation?
-- **Word Count:** 875
+- **Word Count:** 912
 - **Internal Links In:** 10
 - **Internal Links Out:** 39
 - **Groups:** Duplicate Pages, Educational Pages
@@ -1292,10 +1292,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
-- **Secondary CTA:** —
+- **Secondary CTA:** Read the full clinical guide → /blog/insulin-resistance-and-weight-loss-clinician-overview
 - **Traffic Intent:** Informational
 - **Target Keyword:** Which preventive blood tests do adults usually need?
-- **Word Count:** 1276
+- **Word Count:** 1311
 - **Internal Links In:** 5
 - **Internal Links Out:** 40
 - **Groups:** Educational Pages
@@ -1306,10 +1306,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
-- **Secondary CTA:** —
+- **Secondary CTA:** Medical weight loss with GLP-1 in Texas (full overview) → /blog/medical-weight-loss-glp1-semaglutide-texas
 - **Traffic Intent:** Informational
 - **Target Keyword:** Who qualifies for GLP-1 weight loss medications?
-- **Word Count:** 549
+- **Word Count:** 588
 - **Internal Links In:** 3
 - **Internal Links Out:** 39
 - **Groups:** Educational Pages
@@ -1320,10 +1320,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Telehealth Care → → /telehealth
-- **Secondary CTA:** —
+- **Secondary CTA:** Read the full clinical guide → /fatigue
 - **Traffic Intent:** Informational
 - **Target Keyword:** Why am I tired even after sleeping?
-- **Word Count:** 724
+- **Word Count:** 759
 - **Internal Links In:** 193
 - **Internal Links Out:** 43
 - **Groups:** Educational Pages
@@ -1334,10 +1334,10 @@ Generated: 2026-09-01
 - **Page Type:** Health Guide
 - **Primary Purpose:** Answer specific patient question; support SEO and conversion
 - **Primary CTA:** Explore Metabolic Care → → /weight-loss-metabolic-health
-- **Secondary CTA:** —
+- **Secondary CTA:** Read the full clinical guide → /blog/insulin-resistance-and-weight-loss-clinician-overview
 - **Traffic Intent:** Informational
 - **Target Keyword:** Why don't normal labs mean you're healthy?
-- **Word Count:** 1362
+- **Word Count:** 1397
 - **Internal Links In:** 8
 - **Internal Links Out:** 38
 - **Groups:** Educational Pages
@@ -1351,9 +1351,9 @@ Generated: 2026-09-01
 - **Secondary CTA:** Read health guides → /answers
 - **Traffic Intent:** Informational / Navigational
 - **Target Keyword:** Health Insights — Evidence-Based, Clinical
-- **Word Count:** 872
+- **Word Count:** 912
 - **Internal Links In:** 193
-- **Internal Links Out:** 55
+- **Internal Links Out:** 59
 - **Groups:** Educational Pages
 
 ### /blog/adderall-for-adhd-how-it-works
@@ -1659,8 +1659,8 @@ Generated: 2026-09-01
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Informational
 - **Target Keyword:** Brain Fog at Work
-- **Word Count:** 3181
-- **Internal Links In:** 8
+- **Word Count:** 11437
+- **Internal Links In:** 13
 - **Internal Links Out:** 43
 - **Groups:** Educational Pages
 
@@ -1688,7 +1688,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Informational
 - **Target Keyword:** Chronic Fatigue and Work Performance
 - **Word Count:** 418
-- **Internal Links In:** 10
+- **Internal Links In:** 11
 - **Internal Links Out:** 41
 - **Groups:** Educational Pages
 
@@ -2164,7 +2164,7 @@ Generated: 2026-09-01
 - **Traffic Intent:** Informational
 - **Target Keyword:** Sleep, Focus, and Cognitive Load at Work
 - **Word Count:** 482
-- **Internal Links In:** 1
+- **Internal Links In:** 3
 - **Internal Links Out:** 42
 - **Groups:** Educational Pages
 
@@ -2345,7 +2345,7 @@ Generated: 2026-09-01
 - **Secondary CTA:** See how it works → #how-it-works
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Cognitive health support for working professionals
-- **Word Count:** 843
+- **Word Count:** 949
 - **Internal Links In:** 193
 - **Internal Links Out:** 38
 - **Groups:** Utility Pages
@@ -2709,7 +2709,7 @@ Generated: 2026-09-01
 - **Secondary CTA:** Start Secure Medical Chat → /redirect/chat
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Transparent pricing for physician-led care
-- **Word Count:** 501
+- **Word Count:** 509
 - **Internal Links In:** 195
 - **Internal Links Out:** 38
 - **Groups:** Utility Pages

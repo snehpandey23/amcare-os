@@ -94,3 +94,28 @@ export function renderEmployeeWorkplaceStrip() {
     ],
   });
 }
+
+/** Blog hub spotlight — work & cognitive health cluster (phase 2). */
+export function renderWorkplaceBlogSpotlight() {
+  const items = [
+    { href: WORKPLACE_PATHS.brainFogAtWork, label: 'Brain fog at work' },
+    { href: WORKPLACE_PATHS.sleepFocusAtWork, label: 'Sleep, focus & cognitive load at work' },
+    { href: WORKPLACE_PATHS.fatigueWork, label: 'Chronic fatigue & work performance' },
+    { href: WORKPLACE_PATHS.workplaceAccommodations, label: 'Workplace accommodations (HR & employees)' },
+    { href: WORKPLACE_PATHS.employers, label: 'Employer cognitive health programs' },
+  ];
+  const lis = items.map((i) => `            <li><a href="${i.href}">${i.label}</a></li>`).join('\n');
+  return `<!-- SIYA:WORKPLACE-BLOG-SPOTLIGHT -->
+      <section class="section section-tinted" id="workplace-articles" aria-labelledby="workplace-articles-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="workplace-articles-heading">Work, focus &amp; cognitive health</h2>
+            <p class="lead">Educational articles for working adults—and HR teams exploring structured programs.</p>
+          </div>
+          <ul class="learn-more-links workplace-blog-spotlight">
+${lis}
+          </ul>
+        </div>
+      </section>
+<!-- /SIYA:WORKPLACE-BLOG-SPOTLIGHT -->`;
+}

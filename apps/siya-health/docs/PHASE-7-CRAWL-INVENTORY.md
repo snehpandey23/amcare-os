@@ -1,6 +1,6 @@
 # Phase 7 — Crawl Inventory
 
-**Generated:** 2026-09-01
+**Generated:** 2026-09-02
 **HTML routes:** 225 · **Sitemap URLs:** 184
 
 ## Issue summary
@@ -17,10 +17,10 @@
 | URL | Status | Indexable | Sitemap | Inbound | Canonical | Redirect |
 |-----|--------|-----------|---------|--------:|-----------|----------|
 | /about | 200 | yes | yes | 573 | /about | — |
-| /adhd-care | 200 | yes | yes | 822 | /adhd-care | — |
-| /adhd-care/miami | 200 | yes | yes | 0 | /adhd-care/miami | — |
-| /adhd-care/orlando | 200 | yes | yes | 0 | /adhd-care/orlando | — |
-| /adhd-care/san-diego | 200 | yes | yes | 0 | /adhd-care/san-diego | — |
+| /adhd-care | 200 | yes | yes | 823 | /adhd-care | — |
+| /adhd-care/miami | 200 | yes | yes | 2 | /adhd-care/miami | — |
+| /adhd-care/orlando | 200 | yes | yes | 2 | /adhd-care/orlando | — |
+| /adhd-care/san-diego | 200 | yes | yes | 1 | /adhd-care/san-diego | — |
 | /adhd-diagnosis-austin | 301 | no | no | 0 | /adhd-diagnosis-texas | /adhd-diagnosis-texas |
 | /adhd-diagnosis-florida | 301 | no | no | 0 | /adhd-care | /adhd-care |
 | /adhd-diagnosis-houston | 301 | no | no | 0 | /adhd-diagnosis-texas | /adhd-diagnosis-texas |
@@ -44,7 +44,7 @@
 | /answers/adhd-medication-side-effects | 200 | yes | yes | 9 | /answers/adhd-medication-side-effects | — |
 | /answers/adhd-vs-anxiety | 200 | yes | yes | 17 | /answers/adhd-vs-anxiety | — |
 | /answers/adhd-vs-burnout | 200 | yes | yes | 7 | /answers/adhd-vs-burnout | — |
-| /answers/adhd-workplace-accommodations | 200 | yes | yes | 2 | /answers/adhd-workplace-accommodations | — |
+| /answers/adhd-workplace-accommodations | 200 | yes | yes | 7 | /answers/adhd-workplace-accommodations | — |
 | /answers/afternoon-energy-crash-after-lunch | 200 | yes | yes | 3 | /answers/afternoon-energy-crash-after-lunch | — |
 | /answers/asrs-adhd-screening-explained | 200 | yes | yes | 4 | /answers/asrs-adhd-screening-explained | — |
 | /answers/brain-fog-after-eating | 200 | yes | yes | 14 | /answers/brain-fog-after-eating | — |
@@ -106,14 +106,14 @@
 | /blog/adhd-evaluation-cost-california | 301 | no | no | 0 | /adult-adhd-california | /adult-adhd-california |
 | /blog/adhd-evaluation-cost-texas | 200 | yes | yes | 9 | /blog/adhd-evaluation-cost-texas | — |
 | /blog/adhd-hormones-women | 200 | yes | yes | 9 | /blog/adhd-hormones-women | — |
-| /blog/adhd-in-women | 200 | yes | yes | 36 | /blog/adhd-in-women | — |
-| /blog/adhd-medication-daily-or-as-needed-adults | 200 | yes | yes | 11 | /blog/adhd-medication-daily-or-as-needed-adults | — |
+| /blog/adhd-in-women | 200 | yes | yes | 37 | /blog/adhd-in-women | — |
+| /blog/adhd-medication-daily-or-as-needed-adults | 200 | yes | yes | 12 | /blog/adhd-medication-daily-or-as-needed-adults | — |
 | /blog/adhd-medication-online-california | 200 | yes | yes | 10 | /blog/adhd-medication-online-california | — |
 | /blog/adhd-medication-options-california | 200 | yes | yes | 17 | /blog/adhd-medication-options-california | — |
 | /blog/adhd-medication-options-for-adults | 200 | yes | yes | 29 | /blog/adhd-medication-options-for-adults | — |
-| /blog/adhd-medication-side-effects-what-to-expect | 200 | yes | yes | 9 | /blog/adhd-medication-side-effects-what-to-expect | — |
+| /blog/adhd-medication-side-effects-what-to-expect | 200 | yes | yes | 10 | /blog/adhd-medication-side-effects-what-to-expect | — |
 | /blog/adhd-symptoms-overlooked | 200 | yes | yes | 12 | /blog/adhd-symptoms-overlooked | — |
-| /blog/adhd-telehealth-california | 200 | yes | yes | 8 | /blog/adhd-telehealth-california | — |
+| /blog/adhd-telehealth-california | 200 | yes | yes | 9 | /blog/adhd-telehealth-california | — |
 | /blog/adhd-testing-online-california-screening-vs-evaluation | 200 | yes | yes | 8 | /blog/adhd-testing-online-california-screening-vs-evaluation | — |
 | /blog/adhd-treatment-austin-tx | 301 | no | no | 0 | /blog/adhd-treatment-texas | /blog/adhd-treatment-texas |
 | /blog/adhd-treatment-dallas-tx | 301 | no | no | 0 | /blog/adhd-treatment-texas | /blog/adhd-treatment-texas |
@@ -137,17 +137,17 @@
 | /blog/brain-fog-after-covid | 200 | yes | yes | 6 | /blog/brain-fog-after-covid | — |
 | /blog/brain-fog-and-anxiety | 200 | yes | yes | 5 | /blog/brain-fog-and-anxiety | — |
 | /blog/brain-fog-and-sleep | 200 | yes | yes | 4 | /blog/brain-fog-and-sleep | — |
-| /blog/brain-fog-at-work | 200 | yes | yes | 72 | /blog/brain-fog-at-work | — |
+| /blog/brain-fog-at-work | 200 | yes | yes | 269 | /blog/brain-fog-at-work | — |
 | /blog/brain-fog-vs-adhd | 200 | yes | yes | 3 | /blog/brain-fog-vs-adhd | — |
-| /blog/chronic-fatigue-and-work-performance | 200 | yes | yes | 10 | /blog/chronic-fatigue-and-work-performance | — |
+| /blog/chronic-fatigue-and-work-performance | 200 | yes | yes | 11 | /blog/chronic-fatigue-and-work-performance | — |
 | /blog/chronic-fatigue-vs-everyday-tiredness | 200 | yes | yes | 10 | /blog/chronic-fatigue-vs-everyday-tiredness | — |
-| /blog/compounded-vs-branded-glp1-medications | 200 | yes | yes | 7 | /blog/compounded-vs-branded-glp1-medications | — |
-| /blog/executive-dysfunction-adhd | 200 | yes | yes | 104 | /blog/executive-dysfunction-adhd | — |
+| /blog/compounded-vs-branded-glp1-medications | 200 | yes | yes | 8 | /blog/compounded-vs-branded-glp1-medications | — |
+| /blog/executive-dysfunction-adhd | 200 | yes | yes | 298 | /blog/executive-dysfunction-adhd | — |
 | /blog/fatigue-after-illness | 200 | yes | yes | 9 | /blog/fatigue-after-illness | — |
 | /blog/fatigue-despite-normal-labs | 200 | yes | yes | 4 | /blog/fatigue-despite-normal-labs | — |
-| /blog/food-noise-and-glp-1-what-it-means-and-what-helps | 200 | yes | yes | 26 | /blog/food-noise-and-glp-1-what-it-means-and-what-helps | — |
-| /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | 200 | yes | yes | 19 | /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | — |
-| /blog/glp1-side-effects-and-how-to-manage-them | 200 | yes | yes | 7 | /blog/glp1-side-effects-and-how-to-manage-them | — |
+| /blog/food-noise-and-glp-1-what-it-means-and-what-helps | 200 | yes | yes | 29 | /blog/food-noise-and-glp-1-what-it-means-and-what-helps | — |
+| /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | 200 | yes | yes | 22 | /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | — |
+| /blog/glp1-side-effects-and-how-to-manage-them | 200 | yes | yes | 9 | /blog/glp1-side-effects-and-how-to-manage-them | — |
 | /blog/how-adhd-medication-is-prescribed-online | 200 | yes | yes | 10 | /blog/how-adhd-medication-is-prescribed-online | — |
 | /blog/how-mental-health-affects-weight-loss-outcomes | 200 | yes | yes | 9 | /blog/how-mental-health-affects-weight-loss-outcomes | — |
 | /blog/how-to-choose-adhd-provider-california | 200 | yes | yes | 12 | /blog/how-to-choose-adhd-provider-california | — |
@@ -155,42 +155,42 @@
 | /blog/how-to-safely-get-prescriptions-online | 200 | yes | yes | 11 | /blog/how-to-safely-get-prescriptions-online | — |
 | /blog | 200 | yes | yes | 567 | /blog | — |
 | /blog/insomnia-treatment-options-beyond-medication | 200 | yes | yes | 4 | /blog/insomnia-treatment-options-beyond-medication | — |
-| /blog/insulin-resistance-and-weight-loss-clinician-overview | 200 | yes | yes | 30 | /blog/insulin-resistance-and-weight-loss-clinician-overview | — |
+| /blog/insulin-resistance-and-weight-loss-clinician-overview | 200 | yes | yes | 36 | /blog/insulin-resistance-and-weight-loss-clinician-overview | — |
 | /blog/iron-deficiency-and-fatigue | 200 | yes | yes | 1 | /blog/iron-deficiency-and-fatigue | — |
 | /blog/iron-deficiency-brain-fog-adhd | 200 | yes | yes | 6 | /blog/iron-deficiency-brain-fog-adhd | — |
-| /blog/is-adhd-medication-safe-long-term | 200 | yes | yes | 6 | /blog/is-adhd-medication-safe-long-term | — |
-| /blog/is-online-adhd-diagnosis-legit | 200 | yes | yes | 18 | /blog/is-online-adhd-diagnosis-legit | — |
-| /blog/medical-weight-loss-glp1-semaglutide-texas | 200 | yes | yes | 18 | /blog/medical-weight-loss-glp1-semaglutide-texas | — |
-| /blog/medical-weight-loss-vs-dieting-what-actually-works | 200 | yes | yes | 9 | /blog/medical-weight-loss-vs-dieting-what-actually-works | — |
+| /blog/is-adhd-medication-safe-long-term | 200 | yes | yes | 7 | /blog/is-adhd-medication-safe-long-term | — |
+| /blog/is-online-adhd-diagnosis-legit | 200 | yes | yes | 19 | /blog/is-online-adhd-diagnosis-legit | — |
+| /blog/medical-weight-loss-glp1-semaglutide-texas | 200 | yes | yes | 19 | /blog/medical-weight-loss-glp1-semaglutide-texas | — |
+| /blog/medical-weight-loss-vs-dieting-what-actually-works | 200 | yes | yes | 10 | /blog/medical-weight-loss-vs-dieting-what-actually-works | — |
 | /blog/minoxidil-for-hair-loss-does-it-work | 200 | yes | yes | 9 | /blog/minoxidil-for-hair-loss-does-it-work | — |
 | /blog/morning-fatigue | 200 | yes | yes | 1 | /blog/morning-fatigue | — |
 | /blog/non-stimulant-adhd-medications-explained | 200 | yes | yes | 5 | /blog/non-stimulant-adhd-medications-explained | — |
 | /blog/online-adhd-diagnosis-california | 200 | yes | yes | 15 | /blog/online-adhd-diagnosis-california | — |
 | /blog/online-adhd-diagnosis-texas | 200 | yes | yes | 15 | /blog/online-adhd-diagnosis-texas | — |
 | /blog/oral-vs-injectable-weight-loss-medications | 200 | yes | yes | 3 | /blog/oral-vs-injectable-weight-loss-medications | — |
-| /blog/oral-vs-topical-minoxidil-which-is-right | 200 | yes | yes | 8 | /blog/oral-vs-topical-minoxidil-which-is-right | — |
+| /blog/oral-vs-topical-minoxidil-which-is-right | 200 | yes | yes | 9 | /blog/oral-vs-topical-minoxidil-which-is-right | — |
 | /blog/perimenopause-brain-fog | 200 | yes | yes | 12 | /blog/perimenopause-brain-fog | — |
 | /blog/phentermine-for-weight-loss-safety-and-effectiveness | 200 | yes | yes | 2 | /blog/phentermine-for-weight-loss-safety-and-effectiveness | — |
 | /blog/pots-and-adhd | 200 | yes | yes | 2 | /blog/pots-and-adhd | — |
-| /blog/semaglutide-for-weight-loss-how-it-works | 200 | yes | yes | 13 | /blog/semaglutide-for-weight-loss-how-it-works | — |
+| /blog/semaglutide-for-weight-loss-how-it-works | 200 | yes | yes | 14 | /blog/semaglutide-for-weight-loss-how-it-works | — |
 | /blog/sildenafil-for-erectile-dysfunction-what-to-expect | 200 | yes | yes | 6 | /blog/sildenafil-for-erectile-dysfunction-what-to-expect | — |
-| /blog/sleep-and-focus-at-work | 200 | yes | yes | 1 | /blog/sleep-and-focus-at-work | — |
-| /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 200 | yes | yes | 16 | /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | — |
+| /blog/sleep-and-focus-at-work | 200 | yes | yes | 3 | /blog/sleep-and-focus-at-work | — |
+| /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | 200 | yes | yes | 18 | /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | — |
 | /blog/telehealth-prescriptions-how-online-treatment-works | 200 | yes | yes | 7 | /blog/telehealth-prescriptions-how-online-treatment-works | — |
 | /blog/telehealth | 200 | yes | yes | 232 | /blog/telehealth | — |
 | /blog/thyroid-and-fatigue | 200 | yes | yes | 1 | /blog/thyroid-and-fatigue | — |
 | /blog/tirzepatide-vs-semaglutide-which-is-better | 200 | yes | yes | 6 | /blog/tirzepatide-vs-semaglutide-which-is-better | — |
-| /blog/vyvanse-vs-adderall-differences | 200 | yes | yes | 9 | /blog/vyvanse-vs-adderall-differences | — |
+| /blog/vyvanse-vs-adderall-differences | 200 | yes | yes | 10 | /blog/vyvanse-vs-adderall-differences | — |
 | /blog/weight-loss | 200 | yes | yes | 247 | /blog/weight-loss | — |
-| /blog/when-is-testosterone-therapy-appropriate | 200 | yes | yes | 12 | /blog/when-is-testosterone-therapy-appropriate | — |
+| /blog/when-is-testosterone-therapy-appropriate | 200 | yes | yes | 14 | /blog/when-is-testosterone-therapy-appropriate | — |
 | /blog/why-am-i-always-tired-causes-when-to-see-doctor | 301 | no | no | 0 | /fatigue | /fatigue |
 | /blog/youre-not-lazy-signs-undiagnosed-adult-adhd | 200 | yes | yes | 8 | /blog/youre-not-lazy-signs-undiagnosed-adult-adhd | — |
 | /book-appointment | 200 | yes | yes | 420 | /book-appointment | — |
 | /brain-fog | 200 | yes | yes | 37 | /brain-fog | — |
 | /creyos-adhd-testing | 200 | yes | yes | 5 | /creyos-adhd-testing | — |
 | /docs/tint-options-preview | 200 | yes | yes | 0 | /docs/tint-options-preview | — |
-| /employers | 200 | yes | yes | 638 | /employers | — |
-| /fatigue | 200 | yes | yes | 97 | /fatigue | — |
+| /employers | 200 | yes | yes | 835 | /employers | — |
+| /fatigue | 200 | yes | yes | 101 | /fatigue | — |
 | / | 200 | yes | yes | 764 | / | — |
 | /intake | 200 | no | no | 0 | /intake | — |
 | /join-our-team | 200 | no | no | 367 | /join-our-team | — |
@@ -219,7 +219,7 @@
 | /online-adhd-test | 301 | no | no | 0 | /adhd-screening | /adhd-screening |
 | /prescriptions | 200 | yes | yes | 194 | /prescriptions | — |
 | /preventive-care | 200 | yes | yes | 33 | /preventive-care | — |
-| /pricing | 200 | yes | yes | 308 | /pricing | — |
+| /pricing | 200 | yes | yes | 309 | /pricing | — |
 | /primary-care | 200 | yes | yes | 50 | /primary-care | — |
 | /primary-urgent-care | 200 | yes | yes | 219 | /primary-urgent-care | — |
 | /privacy-policy | 301 | no | no | 0 | /legal/privacy-policy | /legal/privacy-policy |
@@ -234,7 +234,7 @@
 | /redirect/adhd-evaluation | 200 | no | no | 2 | /redirect/adhd-evaluation | — |
 | /redirect/adhd-walkthrough | 200 | no | no | 0 | /redirect/adhd-walkthrough | — |
 | /redirect/chat | 200 | no | no | 494 | /redirect/chat | — |
-| /redirect/meet-greet | 200 | no | no | 584 | /redirect/meet-greet | — |
+| /redirect/meet-greet | 200 | no | no | 776 | /redirect/meet-greet | — |
 | /siya-circle | 200 | yes | yes | 196 | /siya-circle | — |
 | /telehealth | 200 | yes | yes | 827 | /telehealth | — |
 | /terms | 301 | no | no | 0 | /legal/terms-of-use | /legal/terms-of-use |

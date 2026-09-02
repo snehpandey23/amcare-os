@@ -123,6 +123,9 @@ function main() {
   for (const file of fs.readdirSync(blogDir)) {
     if (!file.endsWith('.html') || BLOG_HUBS.has(file)) continue;
     const rel = `blog/${file}`;
+    const filePath = path.join(SITE_ROOT, rel);
+    let html = fs.readFileSync(filePath, 'utf8');
+    if (/name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) continue;
     const slug = file.replace(/\.html$/, '');
     if (isAdhdBlog(slug)) {
       // Pillar hubs own Meet & Greet + Evaluation CTAs (restored post-build).
