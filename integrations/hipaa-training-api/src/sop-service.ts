@@ -396,12 +396,17 @@ export async function listSops(pool: pg.Pool, opts: { departmentSlug?: string; s
   return r.rows.map(rowToSop);
 }
 
+/**
+ * Ask Layer 2 merge — **live only**.
+ * Never include pending_review / needs_review / draft (unapproved).
+ * `draft_live` is a client citation label only; DB status enum has no draft_live row.
+ */
 export async function listSopsForRetrieval(pool: pg.Pool): Promise<SopRecord[]> {
   await refreshExpiredLiveSops(pool);
   const r = await pool.query(
     `SELECT s.*, u.name AS owner_name FROM siya_sops s
      JOIN hipaa_training_users u ON u.id = s.owner_user_id
-     WHERE s.status IN ('live', 'pending_review', 'needs_review')
+     WHERE s.status = 'live'
      ORDER BY s.updated_at DESC`,
   );
   return r.rows.map(rowToSop);
