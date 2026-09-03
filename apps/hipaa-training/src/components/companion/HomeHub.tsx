@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { navigateToAsk } from "@/lib/companion/quick-actions";
 import { phraseOfTheDay, healthTermOfTheDay } from "@/lib/level-up/catalog";
 import { loadLevelUpProgress, getDisplayStreak, type LevelUpProgress } from "@/lib/level-up/progress";
@@ -22,8 +22,6 @@ import { BRAND } from "@/lib/brand";
 import { useAuth } from "@/context/AuthContext";
 import { useShiftOptional } from "@/context/ShiftContext";
 import { consumeMorningBriefToday } from "@/lib/shift-presence";
-import { shouldShowBrandIntro } from "@/lib/brand-intro";
-import { BrandIntroSplash } from "@/components/siya/BrandIntroSplash";
 import { MorningBrief } from "@/components/shift/MorningBrief";
 import { SopLeadMyDayCard } from "@/components/sops/SopLeadMyDayCard";
 import { LeadKnowledgeGapsCard } from "@/components/ops/LeadKnowledgeGapsCard";
@@ -31,6 +29,7 @@ import { MyDayTasksPanel } from "@/components/tasks/MyDayTasksPanel";
 import { FounderCoachPanel } from "@/components/executive/FounderCoachPanel";
 import { StaffHomeChat } from "@/components/companion/StaffHomeChat";
 import { WeeklyCheckInCard } from "@/components/ops/WeeklyCheckInCard";
+import { ProductTourNudgeBanner } from "@/components/onboarding/ProductTourNudgeBanner";
 import { MyDayPlannedVsActual } from "@/components/shift/MyDayPlannedVsActual";
 import { isPortalAdmin } from "@/lib/portal-role";
 import { WorkplaceLinksPanel } from "@/components/companion/WorkplaceLinksPanel";
@@ -90,6 +89,10 @@ function MyDayHeader({
             <Link href="/onboarding" className="font-semibold underline">
               Personalize
             </Link>
+            {" · "}
+            <Link href="/product-tour" className="font-semibold underline">
+              Run through the tour
+            </Link>
           </p>
         ) : (
           <p className="mt-1 text-xs text-amber-800">
@@ -98,8 +101,13 @@ function MyDayHeader({
               {profile.onboardingSkipped ? "Personalize" : "onboarding"}
             </Link>
             {profile.onboardingSkipped
-              ? " anytime so My day matches your role and goals."
-              : " so My day matches your role and goals."}
+              ? " anytime so My day matches your role and goals"
+              : " so My day matches your role and goals"}
+            {" · "}
+            <Link href="/product-tour" className="font-semibold underline">
+              Run through the tour
+            </Link>
+            .
           </p>
         )
       ) : null}
@@ -215,11 +223,6 @@ export function HomeHub() {
   const inFocus = shift?.presence === "focus";
   const onBreak = shift?.presence === "break";
   const isAdmin = isPortalAdmin(user?.role);
-  /** intro → splash; ready → hub. No "checking" cream flash (that was the old splash layer). */
-  const [introGate, setIntroGate] = useState<"intro" | "ready">(() =>
-    typeof window !== "undefined" && shouldShowBrandIntro() ? "intro" : "ready",
-  );
-  const introCheckedRef = useRef(false);
   const [showBrief, setShowBrief] = useState(false);
   const [progress, setProgress] = useState<LevelUpProgress | null>(null);
   const [modulesDone, setModulesDone] = useState(0);
@@ -251,12 +254,6 @@ export function HomeHub() {
 
   useEffect(() => {
     refresh();
-    // Once per mount path — do not re-open splash when auth/profile refresh re-runs.
-    if (!introCheckedRef.current) {
-      introCheckedRef.current = true;
-      // Reconcile after mount (SSR/hydration); skip once already set from useState init on client.
-      setIntroGate(shouldShowBrandIntro() ? "intro" : "ready");
-    }
     if (!isAdmin && consumeMorningBriefToday()) setShowBrief(true);
     const onProfile = () => refresh();
     window.addEventListener("siya-portal-profile-updated", onProfile);
@@ -304,15 +301,7 @@ export function HomeHub() {
 
   return (
     <div className={isAdmin ? "h-full min-h-0" : "flex h-full min-h-0 flex-col"}>
-      {introGate === "intro" ? (
-        <BrandIntroSplash
-          onComplete={() => {
-            setIntroGate("ready");
-          }}
-        />
-      ) : null}
-
-      {introGate === "ready" && !isAdmin && showBrief && showStartTrainingNudge ? (
+      {!isAdmin && showBrief && showStartTrainingNudge ? (
         <MorningBrief
           firstName={firstName}
           focus={focus}
@@ -333,17 +322,16 @@ export function HomeHub() {
       {!showBreakScreen ? (
         <>
           {isAdmin ? (
-            introGate === "ready" ? (
-              <div className="flex h-full min-h-0 flex-col">
-                <div className="shrink-0 px-3 pt-2 md:px-4">
-                  <WeeklyCheckInCard />
-                </div>
-                <div className="min-h-0 flex-1">
-                  <FounderCoachPanel firstName={firstName} />
-                </div>
+            <div className="flex h-full min-h-0 flex-col">
+              <div className="shrink-0 space-y-2 px-3 pt-2 md:px-4">
+                <ProductTourNudgeBanner />
+                <WeeklyCheckInCard />
               </div>
-            ) : null
-          ) : introGate === "ready" ? (
+              <div className="min-h-0 flex-1">
+                <FounderCoachPanel firstName={firstName} />
+              </div>
+            </div>
+          ) : (
             <div className={`flex h-full min-h-0 flex-col ${inFocus ? portalFocusRail : ""}`}>
               {complianceDue ? (
                 <p className="shrink-0 px-4 py-2 text-[11px] text-[var(--siya-text-muted)]">
@@ -360,7 +348,12 @@ export function HomeHub() {
                       <Link href="/onboarding" className="font-semibold underline">
                         Personalize
                       </Link>{" "}
-                      anytime so Assist matches your role.
+                      anytime so Assist matches your role
+                      {" · "}
+                      <Link href="/product-tour" className="font-semibold underline">
+                        Run through the tour
+                      </Link>
+                      .
                     </>
                   ) : (
                     <>
@@ -368,14 +361,19 @@ export function HomeHub() {
                       <Link href="/onboarding" className="font-semibold underline">
                         onboarding
                       </Link>{" "}
-                      so personalization matches your role.
+                      so personalization matches your role
+                      {" · "}
+                      <Link href="/product-tour" className="font-semibold underline">
+                        Run through the tour
+                      </Link>
+                      .
                     </>
                   )}
                 </p>
               ) : null}
               <StaffHomeChat firstName={firstName} inFocus={inFocus} onBreak={onBreak} />
             </div>
-          ) : null}
+          )}
         </>
       ) : null}
     </div>

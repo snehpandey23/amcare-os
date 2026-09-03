@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useState } from "react";
+import { useCallback, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
 import { useAuth } from "@/context/AuthContext";
 import { isPortalAdmin } from "@/lib/portal-role";
@@ -763,6 +764,20 @@ function tabClass(active: boolean) {
     : "shrink-0 rounded-md px-2.5 py-1.5 text-[12px] font-normal text-[var(--siya-text-muted)] hover:text-[var(--siya-text-secondary)]";
 }
 
+function FounderTalkChat({ firstName }: { firstName?: string }) {
+  const params = useSearchParams();
+  const tourAsk = params.get("tour") === "ask";
+  const initialQuery = params.get("q")?.trim() || (tourAsk ? "what can this do" : undefined);
+  return (
+    <AssistChatShell
+      firstName={firstName}
+      surface="founder-coach"
+      openingOverride={FOUNDER_TALK_OPENING}
+      initialQuery={initialQuery}
+    />
+  );
+}
+
 export function FounderCoachPanel({ firstName }: { firstName?: string }) {
   const { user } = useAuth();
   const resolvedName = firstName ?? user?.name?.trim().split(/\s+/)[0];
@@ -789,15 +804,17 @@ export function FounderCoachPanel({ firstName }: { firstName?: string }) {
         <strong>This week&apos;s plan</strong>.{" "}
         <Link href="/onboarding" className="font-semibold underline underline-offset-2">
           Personalize
+        </Link>
+        {" · "}
+        <Link href="/product-tour" className="font-semibold underline underline-offset-2">
+          Run through the tour
         </Link>{" "}
         (name, assistant label, training reminders).
       </p>
       <div className="min-h-0 flex-1">
-        <AssistChatShell
-          firstName={resolvedName}
-          surface="founder-coach"
-          openingOverride={FOUNDER_TALK_OPENING}
-        />
+        <Suspense fallback={<p className="p-4 text-sm text-[var(--siya-text-muted)]">Loading Ask…</p>}>
+          <FounderTalkChat firstName={resolvedName} />
+        </Suspense>
       </div>
     </div>
   );

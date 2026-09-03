@@ -580,7 +580,7 @@ export function TeamAdminPanel() {
                         href={`/admin/team/edit?userId=${encodeURIComponent(m.id)}`}
                         className="text-xs font-semibold text-[var(--siya-accent)] hover:underline"
                       >
-                        Edit name / reset password
+                        Edit name / emergency password
                       </Link>
                       {m.id !== user.id ? (
                         <button

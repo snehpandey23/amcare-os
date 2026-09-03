@@ -12,6 +12,7 @@ type DirectoryPerson = {
 /**
  * Same-origin BFF: proxy feedback submit to auth API, then Resend recipient notification
  * (RESEND_API_KEY lives on siya-staff-assist, not the auth API).
+ * tourMode=true → simulated success only (no DB write, no email).
  */
 export async function POST(req: Request) {
   const auth = req.headers.get("authorization");
@@ -29,7 +30,40 @@ export async function POST(req: Request) {
     return Response.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
+  const tourMode = body.tourMode === true;
   const recipientUserId = typeof body.recipientUserId === "string" ? body.recipientUserId : "";
+
+  if (tourMode) {
+    const res = await fetch(`${base}/api/team-feedback`, {
+      method: "POST",
+      headers: { Authorization: auth, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        tourMode: true,
+        body: typeof body.body === "string" ? body.body : "",
+        anonymous: body.anonymous === true,
+      }),
+    });
+    const data = (await res.json().catch(() => ({}))) as {
+      ok?: boolean;
+      tourMode?: boolean;
+      recipientFacing?: { id: string };
+      error?: string;
+      status?: string;
+    };
+    if (!res.ok) {
+      return Response.json({ error: data.error || "Submit failed" }, { status: res.status });
+    }
+    return Response.json(
+      {
+        ok: data.ok ?? true,
+        tourMode: true,
+        status: data.status ?? "tour_simulated",
+        recipientFacing: data.recipientFacing,
+        email: { sent: false, error: "tour_mode", to: [] as string[] },
+      },
+      { status: 201 },
+    );
+  }
 
   const res = await fetch(`${base}/api/team-feedback`, {
     method: "POST",

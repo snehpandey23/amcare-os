@@ -13,7 +13,11 @@ import {
   type SopTaskStatus,
   type SopTaskType,
 } from "./sop-store.js";
-import { OPERATIONAL_SOP_PACK } from "./lead-operational-pack.js";
+import {
+  FOUNDER_ZOCDOC_TEAM_CONSOLIDATION_FLAG,
+  OPERATIONAL_SOP_PACK,
+  RETIRED_OPERATIONAL_PACK_IDS,
+} from "./lead-operational-pack.js";
 
 export async function ensureSopTables(pool: pg.Pool): Promise<void> {
   await pool.query(`
@@ -101,9 +105,103 @@ async function resolveDepartmentOwner(pool: pg.Pool, departmentSlug: string): Pr
   return firstAdminUserId(pool);
 }
 
+/**
+ * Close seed tasks + remove seed SOP stubs for packs that team work now covers.
+ * Never touches non–`sop-pack-*` (team-authored) rows.
+ */
+export async function retireDuplicateSeedPacks(pool: pg.Pool): Promise<{
+  retiredPackIds: string[];
+  tasksClosed: number;
+  seedSopsRemoved: number;
+}> {
+  await ensureSopTables(pool);
+  let tasksClosed = 0;
+  let seedSopsRemoved = 0;
+  for (const packId of RETIRED_OPERATIONAL_PACK_IDS) {
+    const task = await pool.query(
+      `UPDATE siya_sop_tasks
+       SET status = 'done'
+       WHERE id = $1 AND status = 'open'
+       RETURNING id`,
+      [packId],
+    );
+    tasksClosed += task.rowCount ?? 0;
+
+    const sopId = `sop-pack-${packId}`;
+    // Only remove the system seed stub — never team-authored SOPs.
+    const sop = await pool.query(
+      `DELETE FROM siya_sops
+       WHERE id = $1
+         AND ai_drafted = TRUE
+         AND status IN ('draft', 'pending_review', 'needs_review')
+       RETURNING id`,
+      [sopId],
+    );
+    seedSopsRemoved += sop.rowCount ?? 0;
+  }
+  return {
+    retiredPackIds: [...RETIRED_OPERATIONAL_PACK_IDS],
+    tasksClosed,
+    seedSopsRemoved,
+  };
+}
+
+export type FounderSopConsolidationFlag = {
+  id: string;
+  topic: string;
+  department: string;
+  action: string;
+  candidates: {
+    id: string;
+    title: string;
+    status: string;
+    ownerName: string | null;
+    ownerUserId: string;
+  }[];
+};
+
+/**
+ * Surface the 4-way team Zocdoc duplicate cluster for founder pick-one.
+ * Detection only — no merge/delete.
+ */
+export async function listFounderSopConsolidationFlags(
+  pool: pg.Pool,
+): Promise<FounderSopConsolidationFlag[]> {
+  await ensureSopTables(pool);
+  const flag = FOUNDER_ZOCDOC_TEAM_CONSOLIDATION_FLAG;
+  const r = await pool.query(
+    `SELECT s.id, s.title, s.status, s.owner_user_id, u.name AS owner_name
+     FROM siya_sops s
+     LEFT JOIN hipaa_training_users u ON u.id = s.owner_user_id
+     WHERE s.id NOT LIKE 'sop-pack-%'
+       AND s.department_label = $1
+       AND s.title ~* $2
+       AND s.status IN ('draft', 'pending_review', 'needs_review', 'live')
+     ORDER BY s.status ASC, s.updated_at DESC`,
+    [flag.department, "zocdoc"],
+  );
+  if (r.rows.length < 2) return [];
+  return [
+    {
+      id: flag.id,
+      topic: flag.topic,
+      department: flag.department,
+      action: flag.action,
+      candidates: r.rows.map((row) => ({
+        id: String(row.id),
+        title: String(row.title),
+        status: String(row.status),
+        ownerName: (row.owner_name as string) ?? null,
+        ownerUserId: String(row.owner_user_id),
+      })),
+    },
+  ];
+}
+
 /** Idempotent install of meeting-derived Knowledge tasks (+ draft SOP stubs when an owner exists). */
 export async function ensureOperationalSopPack(pool: pg.Pool): Promise<void> {
   await ensureSopTables(pool);
+  await retireDuplicateSeedPacks(pool);
   for (const item of OPERATIONAL_SOP_PACK) {
     const slug = departmentToSlug(item.department);
     await pool.query(

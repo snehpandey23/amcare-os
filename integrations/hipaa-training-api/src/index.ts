@@ -2,6 +2,7 @@
  * HIPAA Training API — auth + per-user progress (Postgres JSON).
  * - POST /api/auth/login, POST /api/auth/register (if HIPAA_TRAINING_ALLOW_REGISTER=true)
  * - GET /api/auth/me
+ * - POST /api/auth/change-password, POST /api/auth/forgot-password, POST /api/auth/reset-password
  * - GET /api/training/progress, PUT /api/training/progress
  * - GET /api/admin/training/summary, GET /api/admin/training/progress/:userId
  */
@@ -398,6 +399,61 @@ app.post("/api/auth/change-password", requireAuth, async (req: AuthRequest, res:
   return res.json({ ok: true });
 });
 
+/** Self-service forgot password — always returns a neutral message (no email enumeration). */
+app.post("/api/auth/forgot-password", async (req: express.Request, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const email = typeof req.body?.email === "string" ? req.body.email : "";
+  /** Authenticated self-test only: reveal reset URL when JWT email matches requested email. */
+  let revealResetUrlForEmail: string | null = null;
+  const authHeader = req.headers.authorization;
+  if (typeof authHeader === "string" && authHeader.startsWith("Bearer ") && req.body?.selfTest === true) {
+    try {
+      const { verifyToken } = await import("./auth.js");
+      const payload = verifyToken(authHeader.slice(7).trim());
+      revealResetUrlForEmail = payload.email;
+    } catch {
+      revealResetUrlForEmail = null;
+    }
+  }
+  try {
+    const { requestPasswordReset } = await import("./password-reset-service.js");
+    const result = await requestPasswordReset(pool, {
+      email,
+      requestIp: clientIp(req),
+      revealResetUrlForEmail,
+    });
+    return res.json({
+      ok: result.ok,
+      message: result.message,
+      ...(result.selfTest ? { selfTest: result.selfTest } : {}),
+    });
+  } catch (err) {
+    console.error("[password-reset] forgot failed", err);
+    return res.json({
+      ok: true,
+      message: "If that account exists, we sent a link.",
+    });
+  }
+});
+
+/** Complete password reset with a single-use token from email. */
+app.post("/api/auth/reset-password", async (req: express.Request, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const token = typeof req.body?.token === "string" ? req.body.token : "";
+  const newPassword = typeof req.body?.newPassword === "string" ? req.body.newPassword : "";
+  try {
+    const { resetPasswordWithToken } = await import("./password-reset-service.js");
+    const result = await resetPasswordWithToken(pool, { token, newPassword });
+    if (!result.ok) return res.status(result.status).json({ error: result.error });
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error("[password-reset] reset failed", err);
+    return res.status(500).json({ error: "Could not reset password." });
+  }
+});
+
 /** Per-user clinic letterhead for prescription-generator (one profile per staff user). */
 app.get("/api/clinic-profile", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
@@ -504,6 +560,9 @@ app.put("/api/level-up/progress", requireAuth, async (req: AuthRequest, res: exp
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
   const { userId } = req.user!;
+  if (req.body?.tourMode === true) {
+    return res.json({ ok: true, skipped: true, reason: "tour_mode" });
+  }
   const body = req.body;
   if (!body || typeof body !== "object" || Array.isArray(body)) {
     return res.status(400).json({ error: "Progress body must be a JSON object" });
@@ -869,13 +928,23 @@ app.post("/api/assist/gaps", requireAuth, async (req: AuthRequest, res: express.
   const phiRedacted = req.body?.phiRedacted === true;
   const signalRaw = typeof req.body?.signalType === "string" ? req.body.signalType : "no_match";
   try {
-    const { insertAssistGap, newGapId, parseAssistGapSignalType } = await import("./assist-telemetry.js");
+    const { insertAssistGap, newGapId, parseAssistGapSignalType, parseReportedByUserId } = await import(
+      "./assist-telemetry.js"
+    );
+    // Staff always stamp themselves. Admins may set reportedByUserId (UUID only) for
+    // multi-staff pattern verification / historical repair — never question text.
+    let reportedByUserId: string | null = req.user!.userId;
+    if (req.user!.role === "admin") {
+      const override = parseReportedByUserId(req.body?.reportedByUserId);
+      if (override) reportedByUserId = override;
+    }
     const { gap, route, digestEligible } = await insertAssistGap(pool, {
       id: id || newGapId(),
       department,
       task,
       phiRedacted,
       signalType: parseAssistGapSignalType(signalRaw),
+      reportedByUserId,
     });
     return res.status(201).json({
       ok: true,
@@ -1219,6 +1288,7 @@ app.post("/api/assist/feedback", requireAuth, async (req: AuthRequest, res: expr
         task,
         phiRedacted: true,
         signalType: "thumbs_down",
+        reportedByUserId: req.user!.userId,
       });
     }
     return res.json({ ok: true });
@@ -2238,10 +2308,30 @@ app.get("/api/team-feedback/inbox", requireAuth, async (req: AuthRequest, res: e
 app.post("/api/team-feedback", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
-  const recipientUserId = typeof req.body?.recipientUserId === "string" ? req.body.recipientUserId : "";
+  const tourMode = req.body?.tourMode === true;
   const body = typeof req.body?.body === "string" ? req.body.body : "";
-  const targetKind = req.body?.targetKind === "lead" ? "lead" : "peer";
   const anonymous = req.body?.anonymous === true;
+  if (tourMode) {
+    try {
+      const { buildTourFeedbackDemo } = await import("./team-feedback-service.js");
+      const g = await pool.query(`SELECT name, email FROM hipaa_training_users WHERE id = $1`, [req.user!.userId]);
+      const name = (g.rows[0]?.name as string | null) || null;
+      const email = (g.rows[0]?.email as string) || "";
+      const giverDisplay = (name && name.trim()) || email.split("@")[0] || "A teammate";
+      const facing = buildTourFeedbackDemo({ body, anonymous, giverDisplayName: giverDisplay });
+      return res.status(201).json({
+        ok: true,
+        tourMode: true,
+        status: "tour_simulated",
+        recipientFacing: facing,
+      });
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Invalid tour feedback.";
+      return res.status(400).json({ error: msg, status: "rejected" });
+    }
+  }
+  const recipientUserId = typeof req.body?.recipientUserId === "string" ? req.body.recipientUserId : "";
+  const targetKind = req.body?.targetKind === "lead" ? "lead" : "peer";
   try {
     const { submitTeamFeedback } = await import("./team-feedback-service.js");
     const result = await submitTeamFeedback(pool, {

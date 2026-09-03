@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import { usePortalTour } from "@/context/PortalTourContext";
 import {
   DEPARTMENTS,
   EXPERIENCE_OPTIONS,
@@ -16,6 +17,7 @@ import {
   loadLocalPortalProfile,
 } from "@/lib/portal-profile";
 import { persistPortalProfile } from "@/lib/portal-profile-api";
+import { shouldChainOnboardingToTour } from "@/lib/portal-product-tour";
 import { trainingLinkPrimaryClass } from "@/components/training/training-ui";
 import { BRAND } from "@/lib/brand";
 import { TalkVoicePicker } from "@/components/siya/TalkVoicePicker";
@@ -25,7 +27,10 @@ const STEPS = 10;
 export function OnboardingWizard() {
   const router = useRouter();
   const { user } = useAuth();
+  const { startTour } = usePortalTour();
   const existing = loadLocalPortalProfile();
+  /** Capture at mount — first-run continuum vs later Personalize revisit. */
+  const [chainToTour] = useState(() => shouldChainOnboardingToTour(existing));
   const [step, setStep] = useState(1);
   const [preferredName, setPreferredName] = useState(existing.preferredName ?? "");
   const [assistantName, setAssistantName] = useState(existing.assistantName ?? "");
@@ -57,7 +62,9 @@ export function OnboardingWizard() {
   async function finish() {
     setPending(true);
     if (user?.id) bindPortalProfileToUser(user.id);
+    const base = loadLocalPortalProfile();
     let profile: PortalProfile = {
+      ...base,
       onboardingComplete: true,
       onboardingSkipped: false,
       department,
@@ -73,13 +80,24 @@ export function OnboardingWizard() {
       aiCoachOptIn: true,
       workShift,
     };
-    profile = appendGrowthEvent(profile, "Completed onboarding");
+    profile = appendGrowthEvent(
+      profile,
+      chainToTour ? "Completed onboarding — continuing to product tour" : "Completed onboarding",
+    );
     persistPortalProfile(profile, user?.id);
+    if (chainToTour) {
+      // One continuous first-run: personalization → tour (no separate /product-tour hop).
+      startTour();
+      return;
+    }
     setPending(false);
     router.replace("/");
   }
 
-  /** Skip personalization — same gate for staff and admin; Personalize later via /onboarding. */
+  /**
+   * Skip the whole first-run (personalization + tour). Lands on My day;
+   * Personalize (/onboarding) and Run through the tour (/product-tour) stay available.
+   */
   async function skipToMyDay() {
     setPending(true);
     if (user?.id) bindPortalProfileToUser(user.id);
@@ -96,7 +114,7 @@ export function OnboardingWizard() {
       talkVoiceURI: talkVoiceURI || base.talkVoiceURI,
       department: department || base.department,
     };
-    profile = appendGrowthEvent(profile, "Skipped onboarding — opened My day");
+    profile = appendGrowthEvent(profile, "Skipped first-run — opened My day");
     persistPortalProfile(profile, user?.id);
     setPending(false);
     router.replace("/");
@@ -127,11 +145,21 @@ export function OnboardingWizard() {
             Welcome to {BRAND.appName}
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-[var(--siya-text-secondary)]">
-            We&apos;re excited to have you here. This is your company operating system — work, learning, and growth in
-            one place. Let&apos;s personalize your workspace.
+            {chainToTour ? (
+              <>
+                A short optional first-run: <strong>personalize</strong> your workspace, then a hands-on{" "}
+                <strong>essentials tour</strong> (My day, Ask, Learn, Practice, Team, Feedback). About 15 minutes
+                total — one continuous flow. You can skip and do either part later from My day.
+              </>
+            ) : (
+              <>
+                Update how Assist greets you, your team, goals, and training reminders. The product tour is separate —
+                start it anytime from My day.
+              </>
+            )}
           </p>
           <button type="button" className={`mt-8 ${trainingLinkPrimaryClass}`} onClick={() => setStep(2)}>
-            Continue
+            {chainToTour ? "Get started" : "Continue"}
           </button>
           <p className="mt-4">
             <SkipLink />
@@ -452,7 +480,13 @@ export function OnboardingWizard() {
               className={trainingLinkPrimaryClass}
               onClick={() => void finish()}
             >
-              {pending ? "Saving…" : "Open my day"}
+              {pending
+                ? chainToTour
+                  ? "Starting tour…"
+                  : "Saving…"
+                : chainToTour
+                  ? "Continue to product tour"
+                  : "Save and go to My day"}
             </button>
             <SkipLink />
           </div>

@@ -6,13 +6,24 @@ import { usePathname, useRouter } from "next/navigation";
 import { TrainingLayout } from "./TrainingLayout";
 import { AssistantShell } from "@/components/siya/AssistantShell";
 import { SiyaLoadingScreen } from "@/components/siya/SiyaLoadingScreen";
+import { TourCoachBar } from "@/components/onboarding/TourCoachBar";
+import { PortalTourProvider } from "@/context/PortalTourContext";
 import { useClientProgress } from "@/hooks/useClientProgress";
 import { useAuth } from "@/context/AuthContext";
 import { useShiftOptional } from "@/context/ShiftContext";
 import { isPortalLoginRequired } from "@/lib/trainingConfig";
 import { getModulesForRole } from "@/content/modules";
-import { isOnboardingComplete, loadLocalPortalProfile, canUsePortalWithoutOnboarding } from "@/lib/portal-profile";
+import { canUsePortalWithoutOnboarding, loadLocalPortalProfile } from "@/lib/portal-profile";
 import { isPortalAdmin } from "@/lib/portal-role";
+
+/** Unauthenticated auth pages — no portal chrome / login redirect. */
+function isPublicAuthPath(path: string) {
+  return (
+    path === "/login" ||
+    path === "/forgot-password" ||
+    path.startsWith("/reset-password")
+  );
+}
 
 function isAssistantRoute(path: string) {
   return (
@@ -28,6 +39,9 @@ function isAssistantRoute(path: string) {
     path.startsWith("/team") ||
     path.startsWith("/chat-review") ||
     path.startsWith("/onboarding") ||
+    path.startsWith("/product-tour") ||
+    path === "/feedback" ||
+    path.startsWith("/feedback/") ||
     path === "/start-shift"
   );
 }
@@ -42,7 +56,7 @@ function isTrainingRoute(path: string) {
   );
 }
 
-export default function ClientShell({ children }: { children: ReactNode }) {
+function ClientShellRoutes({ children }: { children: ReactNode }) {
   const pathname = usePathname() ?? "/";
   const router = useRouter();
   const { authReady, authRequired, user } = useAuth();
@@ -52,25 +66,25 @@ export default function ClientShell({ children }: { children: ReactNode }) {
 
   const assistantRoute = isAssistantRoute(pathname);
   const trainingRoute = isTrainingRoute(pathname);
+  const publicAuth = isPublicAuthPath(pathname);
 
   useEffect(() => {
     if (!authReady || (!authRequired && !portalGate)) return;
-    if (user && pathname === "/login") {
+    if (user && publicAuth) {
       router.replace(canUsePortalWithoutOnboarding(loadLocalPortalProfile()) ? "/" : "/onboarding");
     }
-  }, [authReady, authRequired, portalGate, user, pathname, router]);
+  }, [authReady, authRequired, portalGate, user, pathname, router, publicAuth]);
 
-  /** Portal mode: sign in for the whole app. Training-only mode: sign in for /training only. */
   useEffect(() => {
     if (!authReady) return;
     if (portalGate) {
-      if (!user && pathname !== "/login") router.replace("/login");
+      if (!user && !publicAuth) router.replace("/login");
       return;
     }
     if (!authRequired) return;
-    if (!trainingRoute && pathname !== "/login") return;
-    if (!user && pathname !== "/login") router.replace("/login");
-  }, [authReady, authRequired, portalGate, user, pathname, router, trainingRoute]);
+    if (!trainingRoute && !publicAuth) return;
+    if (!user && !publicAuth) router.replace("/login");
+  }, [authReady, authRequired, portalGate, user, pathname, router, trainingRoute, publicAuth]);
 
   useEffect(() => {
     if (!authReady || !portalGate || !user) return;
@@ -78,28 +92,27 @@ export default function ClientShell({ children }: { children: ReactNode }) {
       router.replace("/");
       return;
     }
-    if (pathname === "/login" || pathname.startsWith("/onboarding")) return;
+    if (publicAuth || pathname.startsWith("/onboarding")) return;
     if (pathname === "/trust" && isPortalAdmin(user.role)) return;
     const profile = loadLocalPortalProfile();
     if (!canUsePortalWithoutOnboarding(profile) && pathname !== "/onboarding") {
       router.replace("/onboarding");
     }
-  }, [authReady, portalGate, user, pathname, router]);
+  }, [authReady, portalGate, user, pathname, router, publicAuth]);
 
   useEffect(() => {
     if (!authReady || !portalGate || !user || !shift?.shiftReady) return;
-    if (pathname === "/login" || pathname.startsWith("/onboarding")) return;
+    if (publicAuth || pathname.startsWith("/onboarding")) return;
     if (pathname === "/start-shift") {
       if (shift.onShift) router.replace("/");
-      return;
     }
-  }, [authReady, portalGate, user, shift?.shiftReady, shift?.onShift, pathname, router]);
+  }, [authReady, portalGate, user, shift?.shiftReady, shift?.onShift, pathname, router, publicAuth]);
 
   if (portalGate && !authReady) {
     return <SiyaLoadingScreen variant="boot" message="Loading employee portal…" />;
   }
 
-  if (portalGate && !user && pathname !== "/login") {
+  if (portalGate && !user && !publicAuth) {
     return <SiyaLoadingScreen variant="boot" message="Redirecting to sign in…" />;
   }
 
@@ -107,11 +120,11 @@ export default function ClientShell({ children }: { children: ReactNode }) {
     return <SiyaLoadingScreen variant="boot" message="Redirecting…" />;
   }
 
-  if (pathname === "/onboarding") {
+  if (pathname === "/onboarding" || pathname === "/product-tour" || publicAuth) {
     return <>{children}</>;
   }
 
-  if (portalGate && user && pathname !== "/login") {
+  if (portalGate && user && !publicAuth) {
     const profile = loadLocalPortalProfile();
     const trustOk = pathname === "/trust" && isPortalAdmin(user.role);
     if (!trustOk && !canUsePortalWithoutOnboarding(profile) && !pathname.startsWith("/onboarding")) {
@@ -126,8 +139,6 @@ export default function ClientShell({ children }: { children: ReactNode }) {
   if (!authReady) {
     return <SiyaLoadingScreen variant="boot" />;
   }
-
-  if (pathname === "/login") return <>{children}</>;
 
   if (authRequired && !user && trainingRoute) {
     return <SiyaLoadingScreen variant="boot" message="Redirecting to sign in…" />;
@@ -148,4 +159,14 @@ export default function ClientShell({ children }: { children: ReactNode }) {
   }
 
   return <AssistantShell>{children}</AssistantShell>;
+}
+
+/** Single tour provider + coach bar; splash owned by BrandIntroBootProvider in root layout. */
+export default function ClientShell({ children }: { children: ReactNode }) {
+  return (
+    <PortalTourProvider>
+      <ClientShellRoutes>{children}</ClientShellRoutes>
+      <TourCoachBar />
+    </PortalTourProvider>
+  );
 }

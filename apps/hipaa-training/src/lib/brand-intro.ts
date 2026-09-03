@@ -2,7 +2,11 @@
  * Brand intro — once per local calendar day (localStorage).
  * Skip-once avoids a double splash on the login → My day hop.
  * Sign-out must not clear the date key — the daily gate survives logout.
+ * Product tour in progress: skip splash for that session (do not layer over coach bar).
  */
+
+import { isPortalTourInProgress } from "./portal-product-tour";
+import { loadLocalPortalProfile } from "./portal-profile";
 
 const SKIP_ONCE_KEY = "siya-brand-intro-skip-once";
 const SHOWN_DATE_KEY = "siya-brand-intro-shown-on";
@@ -35,10 +39,25 @@ function readShownDate(): string | null {
   }
 }
 
-/** True once per local day, unless skip-once (post-login hop) or already marked today. */
-export function shouldShowBrandIntro(): boolean {
+export type BrandIntroGateOpts = {
+  /**
+   * When true (or when omitted and a portal tour is in progress), skip splash
+   * so it does not cover the tour coach bar on first My day after tour start.
+   * Preview query still forces show.
+   */
+  tourInProgress?: boolean;
+};
+
+/** True once per local day, unless skip-once, tour in progress, or already marked today. */
+export function shouldShowBrandIntro(opts?: BrandIntroGateOpts): boolean {
   if (typeof window === "undefined") return false;
   if (isBrandIntroPreviewQuery()) return true;
+
+  const tourActive =
+    opts?.tourInProgress === true ||
+    (opts?.tourInProgress !== false && isPortalTourInProgress(loadLocalPortalProfile()));
+  if (tourActive) return false;
+
   try {
     if (sessionStorage.getItem(SKIP_ONCE_KEY) === "1") {
       sessionStorage.removeItem(SKIP_ONCE_KEY);

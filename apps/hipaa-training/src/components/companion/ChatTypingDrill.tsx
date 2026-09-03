@@ -52,11 +52,14 @@ function PassageView({ target, typed }: { target: string; typed: string }) {
 export function ChatTypingDrill({
   onComplete,
   onAttempt,
+  sandboxMode = false,
 }: {
   /** Qualifying finish (accuracy ≥ 92) — awards daily XP. */
   onComplete?: (score: TypingScore) => void;
   /** Every finished attempt (any accuracy) — for day-ledger WPM history. */
   onAttempt?: (score: TypingScore, meta: { passageId: string }) => void;
+  /** Product tour — skip personal-best persistence. */
+  sandboxMode?: boolean;
 }) {
   const [passage, setPassage] = useState<TypingPassage>(() => typingPassageOfDay());
   const [duration, setDuration] = useState<TypingDurationSec>(60);
@@ -92,12 +95,14 @@ export function ChatTypingDrill({
       setScore(s);
       setPhase("done");
       setElapsed(sec);
-      saveTypingBestIfBetter(s, passage.id);
-      setBest(loadTypingBest());
+      if (!sandboxMode) {
+        saveTypingBestIfBetter(s, passage.id);
+        setBest(loadTypingBest());
+      }
       onAttempt?.(s, { passageId: passage.id });
       if (finished && s.accuracy >= 92) onComplete?.(s);
     },
-    [target, typed, passage.id, onComplete, onAttempt],
+    [target, typed, passage.id, onComplete, onAttempt, sandboxMode],
   );
 
   const reset = useCallback(() => {

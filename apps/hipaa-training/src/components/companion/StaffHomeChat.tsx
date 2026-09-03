@@ -13,6 +13,7 @@ import {
 } from "@/components/ops/LeadYourFocusStrip";
 import { WeeklyCheckInCard } from "@/components/ops/WeeklyCheckInCard";
 import { PracticeInactivityNudgeBanner } from "@/components/level-up/PracticeInactivityNudgeBanner";
+import { ProductTourNudgeBanner } from "@/components/onboarding/ProductTourNudgeBanner";
 
 /**
  * My day = continuous Assist chat (merged former Ask).
@@ -28,7 +29,8 @@ function StaffHomeChatInner({
   onBreak: boolean;
 }) {
   const params = useSearchParams();
-  const initialQuery = params.get("q")?.trim() || undefined;
+  const tourAsk = params.get("tour") === "ask";
+  const initialQuery = params.get("q")?.trim() || (tourAsk ? "what can this do" : undefined);
   const focusFromUrl = params.get("focus") === "1";
   const [showToday, setShowToday] = useState(false);
   const isClinicalFocusLead = useIsClinicalYourFocusLead();
@@ -36,7 +38,8 @@ function StaffHomeChatInner({
   return (
     <div className="flex h-full min-h-0 flex-col">
       {!onBreak && !inFocus ? (
-        <div className="shrink-0 px-3 pt-2">
+        <div className="shrink-0 space-y-2 px-3 pt-2">
+          <ProductTourNudgeBanner />
           <PracticeInactivityNudgeBanner />
         </div>
       ) : null}

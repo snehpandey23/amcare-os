@@ -130,19 +130,29 @@ export async function buildOpsDashboard(
   viewer: { isAdmin: boolean; isLead: boolean };
   engagement: OpsEngagementRow[] | null;
   leadResponsiveness: OpsLeadResponsivenessRow[];
+  /** B2 · Recurring knowledge gaps (surface only — no auto-draft). */
+  recurringGapPatterns: import("./assist-telemetry.js").RecurringGapPattern[];
+  /** Volume-only (≥3 open) without ≥2 known reporters. */
+  volumeGapPatternsUnknownPeople: import("./assist-telemetry.js").RecurringGapPattern[];
+  /** Admin-only: team Zocdoc duplicate cluster for human consolidation. */
+  founderSopConsolidationFlags: import("./sop-service.js").FounderSopConsolidationFlag[];
   coverageGaps: import("./shift-roster-service.js").CoverageGapWindow[];
   scheduledVsActual: import("./shift-roster-service.js").ScheduledVsActualRow[];
   rosterDate: string;
   generatedAt: string;
 }> {
-  const { ensureAssistTelemetryTables } = await import("./assist-telemetry.js");
+  const { ensureAssistTelemetryTables, listRecurringGapPatterns, listVolumeGapPatternsUnknownPeople } =
+    await import("./assist-telemetry.js");
   const { ensureOpsCoordinationTablesReady } = await import("./ops-coordination-service.js");
-  const { ensureSopTables } = await import("./sop-service.js");
+  const { ensureSopTables, listFounderSopConsolidationFlags, retireDuplicateSeedPacks } =
+    await import("./sop-service.js");
   await Promise.all([
     ensureAssistTelemetryTables(pool),
     ensureOpsCoordinationTablesReady(pool),
     ensureSopTables(pool),
   ]);
+  // Idempotent: close seed Zocdoc/Chargebacks stubs once team SOPs cover those topics.
+  await retireDuplicateSeedPacks(pool);
 
   const isAdmin = opts.viewerRole === "admin";
   const myLeadSlugs = await listMyLeadDepartments(pool, opts.viewerUserId);
@@ -354,10 +364,22 @@ export async function buildOpsDashboard(
     });
   }
 
+  // B2 ACL: founder/admin = all departments; leads = own lead slugs only.
+  const patternScope = isAdmin ? null : myLeadSlugs;
+  const [recurringGapPatterns, volumeGapPatternsUnknownPeople, founderSopConsolidationFlags] =
+    await Promise.all([
+      listRecurringGapPatterns(pool, { departmentSlugs: patternScope }),
+      listVolumeGapPatternsUnknownPeople(pool, { departmentSlugs: patternScope }),
+      isAdmin ? listFounderSopConsolidationFlags(pool) : Promise.resolve([]),
+    ]);
+
   return {
     viewer: { isAdmin, isLead },
     engagement,
     leadResponsiveness,
+    recurringGapPatterns,
+    volumeGapPatternsUnknownPeople,
+    founderSopConsolidationFlags,
     coverageGaps,
     scheduledVsActual,
     rosterDate,

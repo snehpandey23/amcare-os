@@ -41,7 +41,7 @@ export async function sendTeamInviteEmail(
     `Email: ${payload.toEmail}`,
     `Temporary password: ${payload.temporaryPassword}`,
     "",
-    "Use a password manager and change your password when self-service reset is available.",
+    "Use a password manager. Change your password from Account after sign-in, or use Forgot password on the login page if locked out.",
     "Do not share this email — it contains credentials.",
     "",
     "— Siya Health internal systems —",

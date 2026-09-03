@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
+import { BrandIntroBootProvider } from "@/context/BrandIntroBootContext";
 import ClientShell from "@/components/training/ClientShell";
 import { ShiftProvider } from "@/context/ShiftContext";
 import { PortalSessionSync } from "@/components/companion/PortalSessionSync";
@@ -40,8 +41,10 @@ export default function RootLayout({
       <body className="min-h-screen antialiased">
         <AuthProvider>
           <ShiftProvider>
-            <PortalSessionSync />
-            <ClientShell>{children}</ClientShell>
+            <BrandIntroBootProvider>
+              <PortalSessionSync />
+              <ClientShell>{children}</ClientShell>
+            </BrandIntroBootProvider>
           </ShiftProvider>
         </AuthProvider>
       </body>

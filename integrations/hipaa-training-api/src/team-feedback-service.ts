@@ -61,6 +61,27 @@ export function assessFeedbackBody(body: string): { ok: true } | { ok: false; re
   return { ok: true };
 }
 
+/** Product tour sandbox — no DB row, no recipient lookup. */
+export function buildTourFeedbackDemo(opts: {
+  body: string;
+  anonymous: boolean;
+  giverDisplayName: string;
+}): RecipientFacingFeedback {
+  const assessed = assessFeedbackBody(opts.body);
+  if (!assessed.ok) {
+    throw new Error(assessed.reason);
+  }
+  return {
+    id: `tour-demo-${randomUUID()}`,
+    body: opts.body.replace(/\s+/g, " ").trim(),
+    targetKind: "peer",
+    createdAt: new Date().toISOString(),
+    attribution: opts.anonymous
+      ? { mode: "anonymous" }
+      : { mode: "named", displayName: opts.giverDisplayName },
+  };
+}
+
 export async function ensureTeamFeedbackTables(pool: pg.Pool): Promise<void> {
   if (ensured) return;
   const sql = readFileSync(join(__dir, "database", "team-feedback-schema.sql"), "utf8");

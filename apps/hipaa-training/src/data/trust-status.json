@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T02:14:20.903Z",
+  "generatedAt": "2026-09-03T00:18:07.091Z",
   "release": {
     "level": 1,
     "label": "Internal Preview",
@@ -13,7 +13,7 @@
     "phiTestsPercent": 100,
     "unsafeClinical": 0,
     "missingOwners": 0,
-    "expiredDocuments": 13,
+    "expiredDocuments": 19,
     "knowledgeGaps": 18,
     "redTeam": "PASS",
     "redTeamPass": true,

@@ -1,38 +1,35 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import { useBrandIntroBoot } from "@/context/BrandIntroBootContext";
 import { isPortalAuthEnabled } from "@/lib/trainingConfig";
 import { canUsePortalWithoutOnboarding, loadLocalPortalProfile } from "@/lib/portal-profile";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
-import { BrandIntroSplash } from "@/components/siya/BrandIntroSplash";
 import { SiyaWordmark } from "@/components/siya/SiyaWordmark";
-import { shouldShowBrandIntro, skipBrandIntroOnce } from "@/lib/brand-intro";
 
 function portalLandingPath(): string {
   return canUsePortalWithoutOnboarding(loadLocalPortalProfile()) ? "/" : "/onboarding";
 }
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const resetOk = searchParams.get("reset") === "1";
   const { login, register, allowRegister, user, authReady } = useAuth();
+  const { splashDismissed, phase } = useBrandIntroBoot();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [mode, setMode] = useState<"login" | "register">("login");
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
-  const [introGate, setIntroGate] = useState<"pending" | "intro" | "form">("pending");
 
   useEffect(() => {
     if (!allowRegister) setMode("login");
   }, [allowRegister]);
-
-  useEffect(() => {
-    setIntroGate(shouldShowBrandIntro() ? "intro" : "form");
-  }, []);
 
   if (!isPortalAuthEnabled()) {
     return (
@@ -52,12 +49,8 @@ export default function LoginPage() {
     return null;
   }
 
-  if (introGate === "pending") {
+  if (phase === "pending" || !splashDismissed) {
     return <div className="siya-page-bg min-h-screen" aria-hidden />;
-  }
-
-  if (introGate === "intro") {
-    return <BrandIntroSplash onComplete={() => setIntroGate("form")} />;
   }
 
   async function onSubmit(e: React.FormEvent) {
@@ -70,7 +63,6 @@ export default function LoginPage() {
       } else {
         await login(email, password);
       }
-      skipBrandIntroOnce();
       router.replace(portalLandingPath());
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
@@ -91,11 +83,13 @@ export default function LoginPage() {
         <p className="mt-2 text-sm text-[var(--siya-text-muted)]">
           Sign in for My day, training, and team coordination.
         </p>
+        {resetOk ? (
+          <p className="mt-3 text-sm text-emerald-700">
+            Password updated. Sign in with your new password.
+          </p>
+        ) : null}
 
-        <form
-          onSubmit={onSubmit}
-          className="mt-8 text-left"
-        >
+        <form onSubmit={onSubmit} className="mt-8 text-left">
           {mode === "register" ? (
             <label className="block">
               <span className="text-xs font-medium text-[var(--siya-text-muted)]">Full name</span>
@@ -130,6 +124,13 @@ export default function LoginPage() {
               className="mt-1"
             />
           </label>
+          {mode === "login" ? (
+            <p className="mt-2 text-right text-xs">
+              <Link href="/forgot-password" className="font-semibold text-[var(--siya-accent)] hover:underline">
+                Forgot password?
+              </Link>
+            </p>
+          ) : null}
           {error ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
           <button
             type="submit"
@@ -145,14 +146,22 @@ export default function LoginPage() {
             {mode === "login" ? (
               <>
                 New here?{" "}
-                <button type="button" className="font-semibold text-[var(--siya-accent)] hover:underline" onClick={() => setMode("register")}>
+                <button
+                  type="button"
+                  className="font-semibold text-[var(--siya-accent)] hover:underline"
+                  onClick={() => setMode("register")}
+                >
                   Create an account
                 </button>
               </>
             ) : (
               <>
                 Already have an account?{" "}
-                <button type="button" className="font-semibold text-[var(--siya-accent)] hover:underline" onClick={() => setMode("login")}>
+                <button
+                  type="button"
+                  className="font-semibold text-[var(--siya-accent)] hover:underline"
+                  onClick={() => setMode("login")}
+                >
                   Sign in
                 </button>
               </>
@@ -161,5 +170,13 @@ export default function LoginPage() {
         ) : null}
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="siya-page-bg min-h-screen" aria-hidden />}>
+      <LoginForm />
+    </Suspense>
   );
 }

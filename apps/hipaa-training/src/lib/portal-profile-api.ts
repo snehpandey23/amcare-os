@@ -7,6 +7,7 @@ import {
   loadLocalPortalProfile,
   saveLocalPortalProfile,
 } from "@/lib/portal-profile";
+import { mergePortalTourState } from "@/lib/portal-product-tour";
 
 export async function pullPortalProfile(token: string): Promise<PortalProfile | null> {
   const api = getTrainingApiUrl();
@@ -50,12 +51,16 @@ export function persistPortalProfile(profile: PortalProfile, userId?: string) {
 
 export function hydratePortalProfile(remote: PortalProfile | null): PortalProfile {
   const local = loadLocalPortalProfile();
-  if (local.onboardingComplete && local.department) return local;
-  if (remote?.onboardingComplete && remote.department) return remote;
-  if (remote?.onboardingComplete) return { ...defaultPortalProfile(), ...remote };
-  if (local.onboardingComplete) return local;
+  const mergedTour = mergePortalTourState(local.productTour, remote?.productTour);
+  const withTour = (p: PortalProfile): PortalProfile =>
+    mergedTour ? { ...p, productTour: mergedTour } : p;
+
+  if (local.onboardingComplete && local.department) return withTour(local);
+  if (remote?.onboardingComplete && remote.department) return withTour({ ...defaultPortalProfile(), ...remote });
+  if (remote?.onboardingComplete) return withTour({ ...defaultPortalProfile(), ...remote });
+  if (local.onboardingComplete) return withTour(local);
   // Skipped personalization — keep gate open across devices when API has the flag.
-  if (local.onboardingSkipped) return local;
-  if (remote?.onboardingSkipped) return { ...defaultPortalProfile(), ...remote };
-  return remote ? { ...defaultPortalProfile(), ...remote } : local;
+  if (local.onboardingSkipped) return withTour(local);
+  if (remote?.onboardingSkipped) return withTour({ ...defaultPortalProfile(), ...remote });
+  return withTour(remote ? { ...defaultPortalProfile(), ...remote } : local);
 }

@@ -74,7 +74,10 @@ export function TeamMemberEditPanel() {
           Edit teammate
         </h1>
         <p className="mt-1 text-sm text-[var(--siya-text-muted)]">
-          Update display name or set a new temporary password. Share passwords over a secure channel only.
+          Update display name anytime. Setting a password here is{" "}
+          <strong>emergency / break-glass only</strong> — staff should use{" "}
+          <em>Forgot password?</em> on the login page. Share any temporary password over a secure
+          channel only.
         </p>
       </header>
 

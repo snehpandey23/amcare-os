@@ -28,18 +28,22 @@ export async function pullLevelUpFromServer(token: string): Promise<LevelUpProgr
   }
 }
 
-export async function pushLevelUpToServer(state: LevelUpProgress): Promise<boolean> {
+export async function pushLevelUpToServer(
+  state: LevelUpProgress,
+  opts?: { tourMode?: boolean },
+): Promise<boolean> {
   const api = getTrainingApiUrl();
   const token = getStoredToken();
   if (!api || !token) return false;
   try {
+    const payload = opts?.tourMode ? { tourMode: true, progress: state } : state;
     const res = await fetch(`${api}/api/level-up/progress`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(state),
+      body: JSON.stringify(payload),
     });
     return res.ok;
   } catch {

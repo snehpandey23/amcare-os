@@ -24,6 +24,7 @@ import {
   portalStatusWarnText,
 } from "@/lib/portal-ui";
 import { loadLocalPortalProfile, displayPreferredName, displayAssistantLabel } from "@/lib/portal-profile";
+import { recordTourAskMessage } from "@/lib/portal-product-tour";
 import { VoiceInputButton } from "@/components/ui/VoiceInputButton";
 import { TalkModeView } from "@/components/siya/TalkModeView";
 import { assessStaffMessageSafety } from "@/lib/siya-os/phi-guard";
@@ -341,6 +342,7 @@ export function SiyaChat({
     async (text: string) => {
       const trimmed = text.trim();
       if (!trimmed || loading || threadLoading) return;
+      recordTourAskMessage(trimmed);
       setMessages((m) => [...m, { id: `u-${Date.now()}`, role: "user", content: trimmed }]);
       setInput("");
       setLoading(true);
@@ -481,10 +483,12 @@ export function SiyaChat({
   );
 
   useEffect(() => {
-    if (!initialQuery || sentInitial.current || threadLoading) return;
+    if (!initialQuery || sentInitial.current || threadLoading || loading) return;
     sentInitial.current = true;
+    // Record tour Ask intent before send so a racey early-return cannot skip verification.
+    recordTourAskMessage(initialQuery);
     void send(initialQuery);
-  }, [initialQuery, send, threadLoading]);
+  }, [initialQuery, send, threadLoading, loading]);
 
   const notifyOwner = useCallback(async (msg: ChatMessage) => {
     if (!msg.userQuestion) return;
@@ -987,6 +991,7 @@ export function SiyaChat({
             }}
           >
             <input
+              data-tour="ask-input"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={

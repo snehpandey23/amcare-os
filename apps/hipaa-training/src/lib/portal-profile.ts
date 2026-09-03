@@ -49,6 +49,7 @@ export type GrowthEvent = {
 };
 
 import { isPortalLoginRequired, isPortalOnboardingPaused } from "@/lib/trainingConfig";
+import type { PortalTourState } from "@/lib/portal-product-tour";
 
 export type TrainingReminderPref = "start" | "end" | "none";
 
@@ -85,6 +86,8 @@ export type PortalProfile = {
   workShift?: "morning" | "evening" | "night";
   /** Principle 8: living growth history */
   growthEvents?: GrowthEvent[];
+  /** Hands-on product tour (Ask, Practice, Feedback, etc.) */
+  productTour?: PortalTourState;
 };
 
 /** First name for greetings — preferred name wins over account name. */

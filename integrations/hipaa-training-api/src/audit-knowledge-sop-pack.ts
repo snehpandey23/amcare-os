@@ -2,7 +2,10 @@ import type { OperationalSopTaskDef } from "./lead-operational-pack.js";
 
 /**
  * 2026-08-24 ops-knowledge audit batch → Knowledge SOP drafts only.
- * Installed by ensureOperationalSopPack as status=draft + open create_sop tasks.
+ * Installed historically into prod as status=draft + open create_sop tasks.
+ * `ensureOperationalSopPack` currently installs meeting packs from `lead-operational-pack.ts`
+ * (scheduling only after Zocdoc + Chargebacks were retired). Expense
+ * (`task-pack-audit-expense-reimbursement`) stays until team "Reimbursement workflow" is live.
  * Never live until a lead/admin submits and approves.
  */
 export const AUDIT_KNOWLEDGE_SOP_PACK: OperationalSopTaskDef[] = [

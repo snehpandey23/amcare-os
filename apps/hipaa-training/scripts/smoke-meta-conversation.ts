@@ -150,9 +150,15 @@ function main() {
     { role: "assistant" as const, content: t2.message },
   ];
   const t3 = await runSiyaAssistantAsync("cant u do the personalization now", history2);
-  assert.ok(/can't run the personalization|Open onboarding/i.test(t3.message), t3.message.slice(0, 200));
+  assert.ok(/can.?t run the personalization|Open onboarding/i.test(t3.message), t3.message.slice(0, 200));
   assert.notEqual(t3.message.trim(), t1.message.trim(), "verbatim repeat");
   assert.ok(t3.portalLinks?.some((l) => l.href === "/onboarding"), "onboarding link");
+  assert.ok(
+    !/Preferred name, assistant label, training reminders, department|direct link to a portal screen/i.test(
+      t3.message,
+    ),
+    "feature-nav steal",
+  );
 
   console.log("smoke-meta-conversation: OK");
   })();

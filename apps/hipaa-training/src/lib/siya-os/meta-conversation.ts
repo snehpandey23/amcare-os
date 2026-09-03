@@ -1084,6 +1084,18 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
     mustMatch: /personalization wizard|Personalize|not Medical Assistant Day-1/i,
     mustNot: /Klarity.*Spruce.*Week 1|offer letter|Concierge Specialist/i,
   },
+  {
+    id: "portal-onboarding-troubleshoot",
+    text: "i dont see personalize on my day",
+    mustMatch: /not on admin|Open onboarding|\/onboarding/i,
+    mustNot: /Overdue Tasks|Preferred name, assistant label/i,
+  },
+  {
+    id: "portal-onboarding-action",
+    text: "cant u do the personalization now",
+    mustMatch: /can.?t run the personalization|Open onboarding/i,
+    mustNot: /Preferred name, assistant label, training reminders, department|direct link to a portal screen/i,
+  },
   { id: "greeting", text: "how r u", mustMatch: /Hi —/i, mustNot: /approved staff guide/i },
   { id: "frustration", text: "this isnt working good", mustMatch: /Sorry|This week.?s plan|Notify owner|domain/i, mustNot: /right staff guide for that yet|approved staff guide for that/i },
   {

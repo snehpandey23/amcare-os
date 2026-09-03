@@ -54,4 +54,9 @@ assert.equal(shouldShowBrandIntro(), true, "skip-once is single use");
 markBrandIntroShownToday();
 assert.equal(shouldShowBrandIntro(), false, "logout must still respect daily gate");
 
+// Product tour in progress — never layer splash over coach bar
+delete mem["siya-brand-intro-shown-on"];
+assert.equal(shouldShowBrandIntro({ tourInProgress: true }), false, "tour active → skip splash");
+assert.equal(shouldShowBrandIntro({ tourInProgress: false }), true, "no tour → splash ok");
+
 console.log("smoke-brand-intro: OK", BRAND_INTRO_TOTAL_MS, "ms", "date", localDateKey());

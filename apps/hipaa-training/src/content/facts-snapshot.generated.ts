@@ -100,7 +100,7 @@ export interface FactsSnapshot {
 }
 
 export const FACTS_SNAPSHOT: FactsSnapshot = {
-  "generated": "2026-08-31",
+  "generated": "2026-09-03",
   "source": "apps/siya-health site-standards + providers + provider-canonical + homepage-trust-metrics + providers-core + service-index.json + founder-locked cancel/hours facts",
   "availableServiceStates": [
     "California",
@@ -161,19 +161,16 @@ export const FACTS_SNAPSHOT: FactsSnapshot = {
       "profileUrl": "https://www.siya.health/providers/dr-sneh-pandey",
       "statesLicensed": [
         "California",
-        "Texas",
         "Pennsylvania",
         "Florida"
       ],
       "statesService": [
         "California",
-        "Texas",
         "Pennsylvania",
         "Florida"
       ],
       "stateAbbreviations": [
         "CA",
-        "TX",
         "PA",
         "FL"
       ]
@@ -293,36 +290,6 @@ export const FACTS_SNAPSHOT: FactsSnapshot = {
       ],
       "stateAbbreviations": [
         "PA"
-      ]
-    },
-    {
-      "slug": "derek-timbs",
-      "name": "Derek Timbs, FNP-BC",
-      "displayName": "Derek Timbs, FNP-BC",
-      "givenName": "Derek",
-      "familyName": "Timbs",
-      "credentials": [
-        "MSN",
-        "FNP-BC"
-      ],
-      "specialtyChips": [
-        "FNP-BC",
-        "Weight Loss",
-        "Men's Health"
-      ],
-      "role": "Family Nurse Practitioner",
-      "profilePath": "/providers/derek-timbs",
-      "profileUrl": "https://www.siya.health/providers/derek-timbs",
-      "statesLicensed": [
-        "Texas",
-        "Ohio"
-      ],
-      "statesService": [
-        "Texas"
-      ],
-      "stateAbbreviations": [
-        "TX",
-        "OH"
       ]
     },
     {

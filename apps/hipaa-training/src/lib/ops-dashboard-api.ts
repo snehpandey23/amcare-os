@@ -50,10 +50,41 @@ export type OpsLeadResponsivenessRow = {
   };
 };
 
+export type OpsRecurringGapPattern = {
+  departmentSlug: string;
+  departmentLabel: string;
+  taskLabel: string;
+  normalizedTaskLabel: string;
+  openGapCount: number;
+  distinctPeople: number;
+  multiStaff: boolean;
+  windowDays: number;
+  lastSeenAt: string;
+  gapIds: string[];
+  surfaceOnlyNote: string;
+};
+
+export type OpsFounderSopConsolidationFlag = {
+  id: string;
+  topic: string;
+  department: string;
+  action: string;
+  candidates: {
+    id: string;
+    title: string;
+    status: string;
+    ownerName: string | null;
+    ownerUserId: string;
+  }[];
+};
+
 export type OpsDashboardPayload = {
   viewer: { isAdmin: boolean; isLead: boolean };
   engagement: OpsEngagementRow[] | null;
   leadResponsiveness: OpsLeadResponsivenessRow[];
+  recurringGapPatterns?: OpsRecurringGapPattern[];
+  volumeGapPatternsUnknownPeople?: OpsRecurringGapPattern[];
+  founderSopConsolidationFlags?: OpsFounderSopConsolidationFlag[];
   coverageGaps: {
     rosterDate: string;
     windowStart: string;

@@ -10,6 +10,8 @@ import {
   type OpsDashboardPayload,
   type OpsEngagementRow,
   type OpsLeadResponsivenessRow,
+  type OpsRecurringGapPattern,
+  type OpsFounderSopConsolidationFlag,
 } from "@/lib/ops-dashboard-api";
 import { WeeklyPracticeReportView } from "@/components/level-up/WeeklyPracticeReportView";
 import { buildWeeklyPracticeReport, coerceDayLedger } from "@/lib/level-up/weekly-report";
@@ -258,6 +260,86 @@ function LeadCard({
   );
 }
 
+function RecurringGapPatternCard({
+  pattern,
+  volumeUnknown,
+}: {
+  pattern: OpsRecurringGapPattern;
+  volumeUnknown?: boolean;
+}) {
+  const unknownPeople = volumeUnknown || !pattern.multiStaff;
+  return (
+    <article className="rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-4 py-3">
+      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-primary)]">
+        Recurring gap pattern
+      </p>
+      <p className="mt-1 text-sm font-medium text-[var(--siya-text)]">
+        {pattern.departmentLabel} ·{" "}
+        <code className="rounded bg-[var(--siya-bg-subtle)] px-1.5 py-0.5 text-[12px]">
+          {pattern.taskLabel}
+        </code>
+      </p>
+      <p className="mt-2 text-sm tabular-nums text-[var(--siya-text-secondary)]">
+        <span className="font-semibold text-[var(--siya-text)]">{pattern.openGapCount}</span> open
+        gaps
+        {!unknownPeople ? (
+          <>
+            {" "}
+            · <span className="font-semibold text-[var(--siya-text)]">{pattern.distinctPeople}</span>{" "}
+            staff
+          </>
+        ) : null}{" "}
+        · last {pattern.windowDays} days
+      </p>
+      {unknownPeople ? (
+        <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+          Volume pattern (people unknown).
+        </p>
+      ) : null}
+      <p className="mt-2 text-[11px] italic text-[var(--siya-text-muted)]">
+        {pattern.surfaceOnlyNote || "Surfaced for human action — no auto-draft."}
+      </p>
+      <p className="mt-2 text-[11px] text-[var(--siya-text-muted)]">
+        Review matching rows in{" "}
+        <Link href="/team" className="font-semibold text-[var(--siya-accent)] underline">
+          Open knowledge gaps
+        </Link>{" "}
+        (category + task only). Write or merge an SOP yourself — this card never creates drafts.
+      </p>
+    </article>
+  );
+}
+
+function FounderConsolidationFlags({ flags }: { flags: OpsFounderSopConsolidationFlag[] }) {
+  if (!flags.length) return null;
+  return (
+    <section
+      className="mb-4 rounded-[var(--siya-radius-md)] border border-amber-500/40 bg-amber-50/80 p-4 dark:border-amber-500/30 dark:bg-amber-950/25"
+      aria-labelledby="ops-sop-consolidate-heading"
+    >
+      <h3 id="ops-sop-consolidate-heading" className="text-sm font-semibold text-amber-950 dark:text-amber-100">
+        Founder action — consolidate team SOP duplicates
+      </h3>
+      {flags.map((flag) => (
+        <div key={flag.id} className="mt-3">
+          <p className="text-sm font-medium text-[var(--siya-text)]">
+            {flag.department} · {flag.topic} ({flag.candidates.length} team versions)
+          </p>
+          <p className="mt-1 text-xs text-[var(--siya-text-muted)]">{flag.action}</p>
+          <ul className="mt-2 space-y-1 text-xs text-[var(--siya-text-secondary)]">
+            {flag.candidates.map((c) => (
+              <li key={c.id}>
+                <span className="font-medium">{c.status}</span> — {c.title}
+                {c.ownerName ? ` · ${c.ownerName}` : ""}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </section>
+  );
+}
+
 function AttentionStrip({ items }: { items: ReturnType<typeof buildOpsAttentionSummary> }) {
   const warnings = items.filter((i) => i.tone === "warn");
   const oks = items.filter((i) => i.tone !== "warn");
@@ -479,6 +561,9 @@ export function OpsDashboardPanel() {
             <p className="mt-1 mb-4 text-xs text-[var(--siya-text-muted)]">
               Sorted by urgency — oldest pending SOP first. The age and pending count sit large on each card.
             </p>
+            {data.viewer.isAdmin && (data.founderSopConsolidationFlags?.length ?? 0) > 0 ? (
+              <FounderConsolidationFlags flags={data.founderSopConsolidationFlags || []} />
+            ) : null}
             {leadsSorted.length === 0 ? (
               <p className="text-sm text-[var(--siya-text-muted)]">No department leads assigned.</p>
             ) : (
@@ -493,6 +578,48 @@ export function OpsDashboardPanel() {
                 ))}
               </div>
             )}
+          </section>
+
+          {/* Section B2 — Recurring knowledge gaps (surface only) */}
+          <section className={portalSection} aria-labelledby="ops-recurring-gaps-heading">
+            <h2 id="ops-recurring-gaps-heading" className={portalH2}>
+              B2 · Recurring knowledge gaps
+            </h2>
+            <p className="mt-1 mb-4 text-xs text-[var(--siya-text-muted)]">
+              Same department + task, ≥3 open gaps, ≥2 distinct staff, last 30 days (thumbs-down excluded).
+              Detection only — no auto-draft, no auto-assign, no auto pending_review.
+              {data.viewer.isAdmin
+                ? " Showing all departments."
+                : " Showing your lead department(s) only."}
+            </p>
+            {(() => {
+              const multi = data.recurringGapPatterns || [];
+              const volume = data.volumeGapPatternsUnknownPeople || [];
+              if (!multi.length && !volume.length) {
+                return (
+                  <p className="text-sm text-[var(--siya-text-muted)]">
+                    No recurring multi-staff gap patterns in the last 30 days.
+                  </p>
+                );
+              }
+              return (
+                <div className="space-y-3">
+                  {multi.map((p) => (
+                    <RecurringGapPatternCard
+                      key={`multi-${p.departmentSlug}-${p.normalizedTaskLabel}`}
+                      pattern={p}
+                    />
+                  ))}
+                  {volume.map((p) => (
+                    <RecurringGapPatternCard
+                      key={`vol-${p.departmentSlug}-${p.normalizedTaskLabel}`}
+                      pattern={p}
+                      volumeUnknown
+                    />
+                  ))}
+                </div>
+              );
+            })()}
           </section>
 
           {/* Section C — Coverage gaps (admin) */}

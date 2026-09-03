@@ -244,6 +244,17 @@ export const PORTAL_FEATURES: FeatureDef[] = [
   },
   // --- Home / account / shift ---
   {
+    id: "product-tour",
+    label: "Product walkthrough",
+    href: "/product-tour",
+    section: "Home & chat",
+    blurb: "Hands-on tour — Ask, Practice, Team, Feedback with verification.",
+    patterns: [
+      /\b(product\s+(tour|walkthrough|training)|portal\s+tour|hands-?on\s+tour|how\s+do\s+i\s+learn\s+the\s+portal)\b/,
+      /\b(take|start|open)\s+(the\s+)?(product\s+)?tour\b/,
+    ],
+  },
+  {
     id: "help-page",
     label: "Help",
     href: "/help",

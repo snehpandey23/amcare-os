@@ -74,14 +74,15 @@ async function staffPortalFeedbackFetch(path: string, init?: RequestInit) {
 }
 
 export async function submitTeamFeedback(input: {
-  recipientUserId: string;
-  targetKind: FeedbackTargetKind;
+  tourMode?: boolean;
+  recipientUserId?: string;
+  targetKind?: FeedbackTargetKind;
   body: string;
-  anonymous: boolean;
-}): Promise<{ recipientFacing: RecipientFacingFeedback }> {
+  anonymous?: boolean;
+}): Promise<{ recipientFacing: RecipientFacingFeedback; tourMode?: boolean }> {
   const data = (await staffPortalFeedbackFetch("/api/team-feedback", {
     method: "POST",
     body: JSON.stringify(input),
-  })) as { recipientFacing: RecipientFacingFeedback };
+  })) as { recipientFacing: RecipientFacingFeedback; tourMode?: boolean };
   return data;
 }

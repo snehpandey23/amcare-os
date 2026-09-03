@@ -14,6 +14,7 @@ import { useShiftOptional } from "@/context/ShiftContext";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { SiyaWordmark } from "@/components/siya/SiyaWordmark";
 import { AssistWorkspaceSidebar } from "@/components/siya/AssistWorkspaceSidebar";
+import { TourCoachSpacer } from "@/components/onboarding/TourCoachBar";
 
 export function AssistantShell({ children }: { children: ReactNode }) {
   const path = usePathname() ?? "/";
@@ -93,6 +94,7 @@ export function AssistantShell({ children }: { children: ReactNode }) {
             </div>
           ) : null}
           <main className={`min-h-0 min-w-0 flex-1 ${chatHome ? "overflow-hidden" : "overflow-y-auto"}`}>
+            <TourCoachSpacer />
             {children}
           </main>
         </div>

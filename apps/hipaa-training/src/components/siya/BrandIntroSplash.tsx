@@ -2,85 +2,59 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  BRAND_INTRO_EXIT_MS,
-  BRAND_INTRO_HOLD_MS,
-  BRAND_INTRO_PREVIEW_MS,
-  BRAND_INTRO_REDUCED_MS,
   BRAND_INTRO_SOUND_ENABLED,
   BRAND_INTRO_TAGLINE,
-  isBrandIntroPreviewQuery,
   markBrandIntroShownToday,
 } from "@/lib/brand-intro";
+import { logBootDebug } from "@/lib/brand-intro-boot";
 
 type Props = {
-  onComplete: () => void;
+  /** Controlled by BrandIntroBootProvider — fade-out phase. */
+  exiting?: boolean;
+  /** User tap / key skip — provider owns timers. */
+  onSkip?: () => void;
+  /** Idempotent exit completion (after fade or reduced motion). */
+  onExitComplete?: () => void;
 };
 
 /**
- * First-load brand splash — once per day (localStorage), skippable, silent by default.
- * Hold + fade ≈ 2.2s. Tap/click/Escape skips straight to the next screen.
+ * Branded splash visuals only — timing and boot phase owned by BrandIntroBootProvider.
+ * Hold + fade ≈ 2.2s total when provider timers run normally.
  */
-export function BrandIntroSplash({ onComplete }: Props) {
-  const [exiting, setExiting] = useState(false);
+export function BrandIntroSplash({ exiting = false, onSkip, onExitComplete }: Props) {
   const [reducedMotion, setReducedMotion] = useState(false);
-  const doneRef = useRef(false);
-  const releasedRef = useRef(false);
-  const onCompleteRef = useRef(onComplete);
-  const finishRef = useRef<() => void>(() => {});
-  onCompleteRef.current = onComplete;
+  const mountedRef = useRef(false);
+  const skipRef = useRef(onSkip);
+  const exitCompleteRef = useRef(onExitComplete);
+  skipRef.current = onSkip;
+  exitCompleteRef.current = onExitComplete;
 
   useEffect(() => {
+    if (mountedRef.current) return;
+    mountedRef.current = true;
     markBrandIntroShownToday();
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setReducedMotion(reduce);
+    logBootDebug("mount", { component: "BrandIntroSplash" });
+    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 
     if (BRAND_INTRO_SOUND_ENABLED) {
       // playIntroChime();
     }
 
-    let exitTimer: number | undefined;
-
-    const release = () => {
-      if (releasedRef.current) return;
-      releasedRef.current = true;
-      onCompleteRef.current();
-    };
-
-    const finish = () => {
-      if (doneRef.current) return;
-      doneRef.current = true;
-      markBrandIntroShownToday();
-      const instant = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (instant) {
-        release();
-        return;
-      }
-      setExiting(true);
-      exitTimer = window.setTimeout(release, BRAND_INTRO_EXIT_MS);
-    };
-    finishRef.current = finish;
-
-    const ms = reduce
-      ? BRAND_INTRO_REDUCED_MS
-      : isBrandIntroPreviewQuery()
-        ? BRAND_INTRO_PREVIEW_MS
-        : BRAND_INTRO_HOLD_MS;
-    const auto = window.setTimeout(finish, ms);
-
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape" || e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        finish();
+        skipRef.current?.();
       }
     };
     window.addEventListener("keydown", onKey);
-
-    return () => {
-      window.clearTimeout(auto);
-      if (exitTimer !== undefined) window.clearTimeout(exitTimer);
-      window.removeEventListener("keydown", onKey);
-    };
+    return () => window.removeEventListener("keydown", onKey);
   }, []);
+
+  /** Reduced motion: skip fade — complete immediately when exiting. */
+  useEffect(() => {
+    if (!exiting || !reducedMotion) return;
+    exitCompleteRef.current?.();
+  }, [exiting, reducedMotion]);
 
   return (
     <div
@@ -94,7 +68,7 @@ export function BrandIntroSplash({ onComplete }: Props) {
       role="dialog"
       aria-label="Siya brand introduction"
       aria-live="polite"
-      onPointerDown={() => finishRef.current()}
+      onPointerDown={() => skipRef.current?.()}
     >
       <div className="siya-brand-intro__stage">
         <p className="siya-brand-intro__wordmark" aria-label="Siya">
