@@ -288,8 +288,19 @@ export const PORTAL_FEATURES: FeatureDef[] = [
     section: "Home & chat",
     blurb: "Preferred name, assistant label, training reminders, department.",
     patterns: [
-      /\b(open\s+onboarding|personaliz(e|ation)|preferred\s+name|assistant\s+label)\b/,
-      /\b(how\s+do\s+i\s+personalize)\b/,
+      /\b(open|go\s+to|show|launch|take\s+me\s+to)\s+(personaliz(e|ation)|onboarding)\b/,
+      /\b(where\s+(is|'?s)\s+(the\s+)?(personaliz(e|ation)|onboarding|personalize))\b/,
+      /\b(how\s+do\s+i\s+(personalize|open\s+onboarding))\b/,
+      /\bopen\s+onboarding\b/,
+      /\b(preferred\s+name|assistant\s+label)\b/,
+    ],
+    /** Meta catalog owns “why / can’t you do personalization” — don’t steal those. */
+    exclude: [
+      /\b(can|could|cant|can't|cannot)\s+(you|u)\s+(do|run|start|open)\b/,
+      /\bwhy\b[\s\S]{0,48}\b(onboard|personaliz)/,
+      /\b(don'?t|do not|cant|can't|cannot)\s+(see|find|show)\b[\s\S]{0,40}\bpersonaliz/,
+      /\bdo\s+the\s+personalization\b/,
+      /\bpersonalization\s+now\b/,
     ],
   },
   {
