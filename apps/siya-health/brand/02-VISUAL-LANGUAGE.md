@@ -189,20 +189,23 @@ Do **not** remove CTAs merely because they repeat down the page.
 
 ## Atmosphere & color (roles, not a style guide dump)
 
-Runtime values live in CSS. Roles live here.
+Runtime values live in CSS (`styles.css` / `design-system/tokens.css`).  
+**Pixel source of truth:** `BRAND-STYLE-LOCK.md` (same hexes as the logo). Roles live here.
 
-| Role | Intent | Live direction (July 2026) |
-|------|--------|----------------------------|
-| Page | Warm, bright, calm — not cold clinical blue | Soft butter / cream page (`#fffdf6`) |
-| Section tint | Quiet separation without sky-blue SaaS wash | Warm tint (`#faf4e4`) |
-| Primary | Trust, headings, brand chrome | Navy (`#1e3a8a`) |
-| Accent | Small accents, chips, quiet CTAs — not a teal flood | Quieter teal (`#0f766e`) |
+| Role | Intent | Locked value |
+|------|--------|----------------|
+| Page | Warm cream canvas — matches social Style Lock | Cream (`#F4EFE7`) |
+| Section tint | Quiet separation; lighter than page, not identical | Cream tint (`#F9F6F1`) |
+| Primary | Trust, headings, brand chrome, primary CTAs | Deep Siya Navy (`#001878`) |
+| Primary hover / supporting navy | Secondary navy for hover on navy elements only | Dark Navy (`#0A246B`) |
+| Accent | Filled accent CTAs, brand highlights | Siya Magenta (`#D81088`) |
+| Accent hover / accessible text | Accent fill hover; text links; outline button border/text (AA on cream/white) | Accessible magenta (`#A80C6A`) |
 | Text | Readable stone, not pure marketing black | Warm charcoal |
-| Cards / surfaces | White content on warm page | `#ffffff` on page cream |
+| Cards / surfaces | White content on cream page | `#ffffff` on `#F4EFE7` |
 | Shadows | Neutral / warm — never blue-tinted corporate glow | Soft charcoal shadows |
 | Hero treatments | Prefer bright editorial when possible; if overlay needed, charcoal — not corporate blue frost | See tokens |
 
-**Never return to:** purple SaaS washes, sky-blue section floods (`#f0f9ff`-era), glow effects, dark frosted “consultant” hero cards as the default brand look.
+**Never return to:** teal/Option C accents (`#0f766e`, `#0d9488`, `#0ea5a4`), Tailwind-like blue primary (`#1e3a8a`), purple SaaS washes, sky-blue section floods (`#f0f9ff`-era), glow effects, dark frosted “consultant” hero cards as the default brand look.
 
 ---
 

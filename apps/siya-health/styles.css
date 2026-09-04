@@ -8,19 +8,25 @@
    ============================================ */
 
 :root {
-  /* Colors — Option C + soft yellow tint (bright butter wash, teal accents) */
+  /* Colors — logo + BRAND-STYLE-LOCK (navy / magenta / cream) */
   --white: #ffffff;
-  --primary: #1e3a8a;
-  --primary-hover: #1e40af;
-  --accent: #0f766e;
-  --accent-hover: #115e59;
+  --primary: #001878;
+  --primary-hover: #0A246B; /* Dark Navy — navy element hover only */
+  --accent: #D81088; /* filled accent CTAs / brand highlights */
+  --accent-hover: #A80C6A; /* accent fill hover */
+  --accent-accessible: #A80C6A; /* text links + outline borders/text (WCAG AA on cream/white) */
+  --navy: var(--primary);
+  --dark-navy: #0A246B;
+  --brand: var(--accent);
+  --brand-dark: var(--accent-hover);
+  --brand-primary: var(--primary);
   --text: #1c1917;
   --text-secondary: #57534e;
   --text-muted: #78716c;
   --border: #ebe5d6;
-  --bg-subtle: #faf4e4;
-  --bg-tinted: #faf4e4;
-  --page-bg: #fffdf6;
+  --bg-subtle: #F9F6F1; /* lighter cream tint than page-bg */
+  --bg-tinted: #F9F6F1;
+  --page-bg: #F4EFE7; /* Style Lock cream — unified with social brand */
   
   /* Layout - Stripe/modern SaaS */
   --section-padding: 72px;
@@ -653,7 +659,7 @@ button.secondary:hover {
 .ds-hero { position: relative; min-height: 58vh; display: flex; align-items: center; padding: calc(var(--header-height) + 32px) 0 48px; }
 .ds-hero__content { position: relative; z-index: 2; max-width: 560px; color: var(--white); }
 
-.ds-cta-band { background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%); color: var(--white); border-radius: 16px; padding: 40px 28px; text-align: center; }
+.ds-cta-band { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%); color: var(--white); border-radius: 16px; padding: 40px 28px; text-align: center; }
 .ds-cta-band h3 { color: var(--white); margin-bottom: 12px; }
 .ds-cta-band p { color: rgba(255,255,255,0.92); margin-bottom: 20px; }
 .ds-cta-band .button { background: var(--accent); border: none; }
@@ -675,7 +681,7 @@ button.secondary:hover {
 
 .hero, .page-hero {
   padding: var(--section-padding-mobile) 0;
-  background: linear-gradient(180deg, #faf4e4 0%, var(--page-bg) 100%);
+  background: linear-gradient(180deg, var(--bg-subtle) 0%, var(--page-bg) 100%);
 }
 
 /* Hero - unified across all pages */
@@ -806,7 +812,7 @@ button.secondary:hover {
 }
 
 .hero-merged .button:hover {
-  background: #115e59;
+  background: var(--accent-hover);
   color: var(--white);
 }
 
@@ -1060,7 +1066,7 @@ button.secondary:hover {
   width: 44px;
   height: 44px;
   margin-bottom: 14px;
-  color: var(--accent);
+  color: var(--accent-accessible);
 }
 .care-approach-icon svg {
   width: 100%;
@@ -1119,7 +1125,7 @@ button.secondary:hover {
   content: "✓";
   position: absolute;
   left: 0;
-  color: var(--accent);
+  color: var(--accent-accessible);
   font-weight: 700;
 }
 .hero-merged-lead--primary {
@@ -1284,7 +1290,7 @@ button.secondary:hover {
 }
 
 .hero-fullwidth .button:hover {
-  background: #115e59;
+  background: var(--accent-hover);
   color: #fff;
 }
 
@@ -1341,7 +1347,7 @@ button.secondary:hover {
   font-size: 0.95rem;
 }
 .blog-hub-jump a {
-  color: var(--brand-primary, #1a6b5c);
+  color: var(--brand-primary);
   font-weight: 500;
 }
 .blog-hub-section h2 {
@@ -1905,7 +1911,7 @@ button.secondary:hover {
   content: "✓";
   position: absolute;
   left: 0;
-  color: var(--accent);
+  color: var(--accent-accessible);
   font-weight: 700;
 }
 
@@ -1984,7 +1990,7 @@ button.secondary:hover {
   display: block;
   font-size: 12px;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--accent-accessible);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 12px;
@@ -2074,7 +2080,7 @@ button.secondary:hover {
   display: inline-block;
   font-size: 14px;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--accent-accessible);
   margin-bottom: 12px;
 }
 
@@ -2109,7 +2115,7 @@ button.secondary:hover {
   content: "✓";
   position: absolute;
   left: 0;
-  color: var(--accent);
+  color: var(--accent-accessible);
   font-weight: 700;
 }
 
@@ -2301,7 +2307,7 @@ button.secondary:hover {
   color: var(--text);
 }
 
-.trust-stats span::before { content: "✔ "; color: var(--accent); }
+.trust-stats span::before { content: "✔ "; color: var(--accent-accessible); }
 
 /* Trust metrics - rolling numbers below hero */
 .trust-metrics {
@@ -2799,7 +2805,7 @@ img[loading="lazy"] { loading: lazy; }
 }
 
 .asrs-next--ready {
-  box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.35);
+  box-shadow: 0 0 0 2px rgba(216, 16, 136, 0.35);
 }
 
 .asrs-nav {
@@ -3029,15 +3035,15 @@ img[loading="lazy"] { loading: lazy; }
 }
 
 .screening-outcome-badge--positive {
-  background: rgba(15, 118, 110, 0.1);
-  color: var(--accent);
-  border-color: rgba(15, 118, 110, 0.25);
+  background: rgba(216, 16, 136, 0.1);
+  color: var(--accent-accessible);
+  border-color: rgba(216, 16, 136, 0.25);
 }
 
 .screening-outcome-badge--negative {
-  background: rgba(30, 58, 138, 0.08);
+  background: rgba(0, 24, 120, 0.08);
   color: var(--primary);
-  border-color: rgba(30, 58, 138, 0.2);
+  border-color: rgba(0, 24, 120, 0.2);
 }
 
 .screening-outcome-badge--borderline {
@@ -3634,8 +3640,8 @@ a.asrs-interest-btn:hover {
   font-size: 0.95rem;
   line-height: 1.55;
   color: var(--text-secondary);
-  background: rgba(15, 118, 110, 0.08);
-  border: 1px solid rgba(15, 118, 110, 0.25);
+  background: rgba(216, 16, 136, 0.08);
+  border: 1px solid rgba(216, 16, 136, 0.25);
   border-radius: var(--radius);
   padding: 14px 18px;
   margin-bottom: 20px;
@@ -3783,7 +3789,7 @@ a.asrs-interest-btn:hover {
 .blog-engage-list li:last-child { margin-bottom: 0; }
 
 .blog-engage--takeaway {
-  background: linear-gradient(135deg, rgba(28, 25, 23, 0.06) 0%, rgba(15, 118, 110, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(28, 25, 23, 0.06) 0%, rgba(216, 16, 136, 0.08) 100%);
   border-left: 4px solid var(--accent);
 }
 
@@ -3853,8 +3859,8 @@ a.asrs-interest-btn:hover {
 }
 
 .blog-engage-tag--ok {
-  background: rgba(15, 118, 110, 0.15);
-  color: #0f766e;
+  background: rgba(216, 16, 136, 0.15);
+  color: var(--accent-accessible);
 }
 
 .blog-engage--reddit {
@@ -3881,7 +3887,7 @@ a.asrs-interest-btn:hover {
   content: "“";
   position: absolute;
   left: 0;
-  color: var(--accent);
+  color: var(--accent-accessible);
   font-style: normal;
   font-weight: 700;
 }
@@ -3889,7 +3895,7 @@ a.asrs-interest-btn:hover {
 .blog-engage-quotes li:last-child { border-bottom: none; }
 
 .blog-engage--pearl {
-  background: rgba(15, 118, 110, 0.08);
+  background: rgba(216, 16, 136, 0.08);
   border-left: 4px solid var(--accent);
 }
 
@@ -4076,7 +4082,7 @@ a.asrs-interest-btn:hover {
 .blog-snippet-def {
   margin: 16px 0 20px;
   padding: 14px 16px;
-  background: rgba(15, 118, 110, 0.06);
+  background: rgba(216, 16, 136, 0.06);
   border-radius: 8px;
   border-left: 3px solid var(--accent);
   font-size: 0.95rem;
@@ -4453,7 +4459,7 @@ a.asrs-interest-btn:hover {
   border-radius: var(--radius-lg, 16px);
   overflow: hidden;
   border: 1px solid var(--border);
-  background: linear-gradient(135deg, rgba(28, 25, 23, 0.10) 0%, rgba(15, 118, 110, 0.12) 100%);
+  background: linear-gradient(135deg, rgba(28, 25, 23, 0.10) 0%, rgba(216, 16, 136, 0.12) 100%);
   aspect-ratio: 16 / 9;
   display: flex;
   flex-direction: column;
@@ -4886,7 +4892,7 @@ a.asrs-interest-btn:hover {
 .health-guide-feature-icon--metabolic { background: rgba(0, 107, 125, 0.1); }
 .health-guide-feature-icon--energy { background: rgba(99, 102, 241, 0.12); color: #4338ca; }
 .health-guide-feature-icon--hormone { background: rgba(180, 83, 9, 0.1); color: #b45309; }
-.health-guide-feature-icon--adhd { background: rgba(13, 148, 136, 0.1); color: #0d9488; }
+.health-guide-feature-icon--adhd { background: rgba(216, 16, 136, 0.1); color: var(--accent-accessible); }
 .health-guide-feature-icon--telehealth { background: rgba(37, 99, 235, 0.1); color: #2563eb; }
 
 .health-guide-feature-title {
@@ -5235,8 +5241,8 @@ a.asrs-interest-btn:hover {
   width: 48px;
   height: 48px;
   border-radius: var(--radius);
-  background: rgba(15, 118, 110, 0.15);
-  color: var(--accent);
+  background: rgba(216, 16, 136, 0.15);
+  color: var(--accent-accessible);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -5336,7 +5342,7 @@ img.footer-trust-logo[src*="hipaa-compliant"] {
   max-height: 72px;
   width: 72px;
   height: 72px;
-  background: #fffdf6;
+  background: var(--page-bg);
   border-radius: 50%;
   padding: 2px;
   box-shadow: 0 0 0 1px rgba(255, 253, 246, 0.35);
@@ -5462,7 +5468,7 @@ img.footer-trust-logo[src*="legitscript"] {
   content: "✓";
   position: absolute;
   left: 0;
-  color: var(--accent);
+  color: var(--accent-accessible);
   font-weight: 700;
 }
 
@@ -6299,11 +6305,11 @@ img.footer-trust-logo[src*="legitscript"] {
   content: "✓";
   position: absolute;
   left: 0;
-  color: var(--accent);
+  color: var(--accent-accessible);
   font-weight: 700;
   font-size: 1rem;
 }
-.pricing-friction { font-size: 13px; color: var(--accent); font-weight: 500; margin: -4px 0 12px 0; }
+.pricing-friction { font-size: 13px; color: var(--accent-accessible); font-weight: 500; margin: -4px 0 12px 0; }
 .pricing-note { font-size: 13px; color: var(--text-secondary); margin-top: 16px; }
 
 /* ADHD care: evaluation-first pricing hierarchy */
@@ -6403,7 +6409,7 @@ img.footer-trust-logo[src*="legitscript"] {
 
 .symptoms-transition { font-size: 0.95rem; color: var(--text-secondary); margin: 0 0 16px 0; text-align: center; }
 .physician-specialty { font-weight: 600; color: var(--primary); margin: 0 0 8px 0; font-size: 0.95rem; }
-.reviews-label { font-size: 0.8rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 8px 0; text-align: center; }
+.reviews-label { font-size: 0.8rem; font-weight: 600; color: var(--accent-accessible); text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 8px 0; text-align: center; }
 
 /* FAQ section */
 .faq-list { max-width: 640px; }
@@ -6593,7 +6599,7 @@ img.footer-trust-logo[src*="legitscript"] {
 }
 .pricing-comparison-table tr:last-child td { border-bottom: none; }
 .pricing-comparison-table .col-featured { background: rgba(28, 25, 23, 0.04); }
-.pricing-comparison-table .check { color: var(--accent); font-weight: 600; }
+.pricing-comparison-table .check { color: var(--accent-accessible); font-weight: 600; }
 .pricing-comparison-table .dash { color: var(--text-muted); }
 .pricing-comparison-wrap { overflow-x: auto; margin: 0 -24px; padding: 0 24px; }
 @media (min-width: 769px) { .pricing-comparison-wrap { margin: 0; padding: 0; } }
@@ -6653,7 +6659,7 @@ img.footer-trust-logo[src*="legitscript"] {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: rgba(15, 118, 110, 0.14);
+  background: rgba(216, 16, 136, 0.14);
   color: var(--primary);
   padding: 6px 12px;
   border-radius: 999px;
@@ -7148,7 +7154,7 @@ img.footer-trust-logo[src*="legitscript"] {
 .about-how-step-num {
   font-size: 0.6875rem;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--accent-accessible);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-bottom: 8px;
@@ -7505,7 +7511,7 @@ body.ghl-legal-gate-open {
 .ghl-legal-gate__adhd {
   margin: 0 0 14px;
   padding: 12px 14px;
-  border-left: 3px solid var(--accent, #0d9488);
+  border-left: 3px solid var(--accent);
   background: var(--surface-tinted, #f8fafc);
   font-size: 0.9rem;
   color: var(--text-secondary);
@@ -7705,9 +7711,10 @@ body.ghl-legal-gate-open {
   line-height: 1.2;
   padding: 10px 12px;
   border-radius: 8px;
-  border: 2px solid var(--brand, #0d9488);
+  /* Outline reject control — accessible magenta (AA on white) */
+  border: 2px solid var(--accent-accessible);
   background: var(--surface, #fff);
-  color: var(--brand, #0d9488);
+  color: var(--accent-accessible);
   cursor: pointer;
   text-align: center;
   min-height: 44px;
@@ -7715,16 +7722,18 @@ body.ghl-legal-gate-open {
 }
 .cookie-notice__btn:hover,
 .cookie-notice__btn:focus-visible {
-  background: rgba(13, 148, 136, 0.08);
+  background: rgba(168, 12, 106, 0.08);
   outline: none;
 }
 .cookie-notice__btn--accept {
-  background: var(--brand, #0d9488);
+  background: var(--brand);
+  border-color: var(--brand);
   color: #fff;
 }
 .cookie-notice__btn--accept:hover,
 .cookie-notice__btn--accept:focus-visible {
-  background: var(--brand-dark, #0f766e);
+  background: var(--brand-dark);
+  border-color: var(--brand-dark);
   color: #fff;
 }
 .cookie-notice__policy {
@@ -7738,7 +7747,7 @@ body.ghl-legal-gate-open {
 }
 .cookie-notice__policy:hover,
 .cookie-notice__policy:focus-visible {
-  color: var(--brand, #0d9488);
+  color: var(--accent-accessible);
 }
 body.cookie-notice-visible {
   padding-bottom: var(--cookie-notice-height, 0px);
@@ -7839,7 +7848,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
 .symptoms-card--link .symptoms-card-secondary,
 .symptoms-card--dual .symptoms-card-actions .symptoms-card-secondary {
   font-size: 0.82rem;
-  color: var(--accent);
+  color: var(--accent-accessible);
   font-weight: 500;
   text-decoration: none;
 }
@@ -7856,7 +7865,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-accessible);
   margin-bottom: 8px;
 }
 .why-patients-grid {
@@ -7947,7 +7956,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   color: var(--primary);
 }
 .pathway-card-links a.pathway-secondary {
-  color: var(--accent);
+  color: var(--accent-accessible);
   font-weight: 500;
 }
 .pathway-badge {
@@ -8250,7 +8259,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
 .siya-circle-promo {
   margin: 32px 0 0;
   border-radius: 16px;
-  background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
   color: #fff;
   padding: 28px 24px;
 }
@@ -8274,11 +8283,11 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
 }
 .siya-circle-promo .button {
   background: #fff;
-  color: #0f766e;
+  color: var(--accent-accessible);
   flex-shrink: 0;
 }
 .siya-circle-promo .button:hover {
-  background: #faf4e4;
+  background: var(--bg-subtle);
 }
 .siya-circle-home-band {
   margin-top: 20px;
@@ -9588,7 +9597,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--teal-700, #0f766e);
+  color: var(--accent-accessible);
 }
 
 .siya-landing-page--ca-screening .lp-hero-conversion h1 {
@@ -9614,7 +9623,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   margin: 0 0 0.5rem;
   font-size: 1rem;
   font-weight: 600;
-  box-shadow: 0 10px 24px rgba(13, 148, 136, 0.28);
+  box-shadow: 0 10px 24px rgba(216, 16, 136, 0.28);
 }
 
 /* ADHD CTA architecture (2026-07): low-friction "hesitation" secondary in the
@@ -9629,9 +9638,9 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   margin: 0 0 0.5rem;
   padding: 12px 20px;
   border-radius: 999px;
-  border: 1.5px solid var(--primary, #1e3a8a);
+  border: 1.5px solid var(--primary);
   background: #fff;
-  color: var(--primary, #1e3a8a);
+  color: var(--primary);
   font-size: 0.98rem;
   font-weight: 600;
   text-decoration: none;
@@ -9668,7 +9677,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
 }
 
 .siya-landing-page--ca-screening .lp-hero-trust-bullets span[aria-hidden="true"] {
-  color: var(--teal-600, #0d9488);
+  color: var(--accent-accessible);
   font-weight: 700;
   flex-shrink: 0;
   margin-top: 1px;
@@ -9828,7 +9837,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   height: 44px;
   border-radius: 10px;
   background: #ecfdf5;
-  color: #0d9488;
+  color: var(--accent-accessible);
 }
 
 .siya-landing-page--ca-screening .lp-how-step h3 {
@@ -9850,7 +9859,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   margin-top: 10px;
   font-size: 0.92rem;
   font-weight: 600;
-  color: var(--teal-700, #0f766e);
+  color: var(--accent-accessible);
   text-decoration: none;
 }
 
@@ -10168,7 +10177,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--accent, #0f766e);
+  background: var(--accent);
 }
 
 .scan-list {
@@ -10472,7 +10481,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-accessible);
 }
 .medication-guide-card strong {
   font-size: 1rem;
@@ -10614,7 +10623,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
 .page-adhd-care .trust-metrics-adhd-human .hero-inline-testimonial,
 .page-adhd-care .trust-metrics-quote {
   background: rgba(15, 23, 42, 0.04);
-  border-left-color: var(--accent);
+  border-left-color: var(--accent-accessible);
   backdrop-filter: none;
 }
 .page-adhd-care .trust-metrics-adhd-human .hero-inline-testimonial-quote,
@@ -10651,7 +10660,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   text-align: left;
 }
 .symptoms-context-list li::marker {
-  color: var(--accent);
+  color: var(--accent-accessible);
 }
 
 /* Homepage-style 3-step process (no photo column) */
@@ -10711,8 +10720,8 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 999px;
-  background: rgba(13, 148, 136, 0.12);
-  color: var(--accent);
+  background: rgba(216, 16, 136, 0.12);
+  color: var(--accent-accessible);
   font-weight: 700;
   font-size: 0.85rem;
   display: inline-flex;
@@ -10887,7 +10896,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
 .page-service .trust-metrics-adhd-human .hero-inline-testimonial,
 .page-service .trust-metrics-quote {
   background: rgba(15, 23, 42, 0.04);
-  border-left-color: var(--accent);
+  border-left-color: var(--accent-accessible);
   backdrop-filter: none;
 }
 .page-service .trust-metrics-adhd-human .hero-inline-testimonial-quote,
@@ -11026,7 +11035,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   gap: 16px;
   margin: 0 0 28px;
   padding: 20px 18px;
-  background: linear-gradient(180deg, rgba(28, 25, 23, 0.06) 0%, rgba(15, 118, 110, 0.05) 100%);
+  background: linear-gradient(180deg, rgba(28, 25, 23, 0.06) 0%, rgba(216, 16, 136, 0.05) 100%);
   border: 1px solid rgba(28, 25, 23, 0.12);
   border-radius: var(--radius);
 }
@@ -11302,7 +11311,7 @@ body.siya-lab-leave-open {
   justify-content: center;
   font-size: 0.85rem;
   font-weight: 700;
-  background: var(--accent, #0d9488);
+  background: var(--accent);
   color: #fff;
 }
 .labs-care-funnel__step h3 {
