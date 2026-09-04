@@ -27,7 +27,7 @@ export const STATES_BULLET = LICENSED_STATES.join(' • ');
 export const STATES_INLINE =
   'California, Texas, Pennsylvania, and Florida';
 
-export const FOOTER_STATES_LINE = `Board-certified providers providing telehealth care across ${STATES_INLINE}.`;
+export const FOOTER_STATES_LINE = `Licensed clinicians providing telehealth care across ${STATES_INLINE}.`;
 
 /** Mixed MD/NP/PA roster pages — avoid implying all clinicians are board-certified physicians. */
 export const MIXED_ROSTER_CLINICIAN_PHRASE = 'Licensed, ADHD-CCSP–trained clinicians';
@@ -219,6 +219,7 @@ export const LEGACY_FOOTER_PATTERNS = [
   'Board-certified providers providing telehealth care across California, Texas, Pennsylvania, and Florida.',
   'Board-certified providers providing telehealth care across California, Texas, Florida, and Pennsylvania.',
   'Board-certified providers providing telehealth care across California, California, Texas, Pennsylvania, and Florida.',
+  'Licensed clinicians providing telehealth care across Texas, Pennsylvania, and Florida.',
   'Modern telehealth care for ADHD, weight loss, and concierge primary care across California, California, Texas, Pennsylvania, and Florida.',
 ];
 

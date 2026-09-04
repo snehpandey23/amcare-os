@@ -101,7 +101,7 @@ function writeLlmsTxt(pages) {
   const lines = [
     '# Siya Health',
     '',
-    '> Board-certified telehealth clinic for adult ADHD evaluation, medical weight loss, and whole-person care.',
+    '> Physician-led telehealth clinic for adult ADHD evaluation, medical weight loss, and whole-person care.',
     '> Licensed providers in California, Texas, Florida, and Pennsylvania.',
     '',
     '## Primary entity',

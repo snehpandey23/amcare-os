@@ -7042,6 +7042,10 @@ img.footer-trust-logo[src*="legitscript"] {
   gap: 28px;
   align-items: center;
 }
+.provider-index-hero-layout--copy-only {
+  grid-template-columns: 1fr;
+  max-width: 720px;
+}
 .provider-index-hero-media {
   margin: 0;
   border-radius: var(--radius, 10px);
@@ -7055,7 +7059,7 @@ img.footer-trust-logo[src*="legitscript"] {
   max-height: 320px;
 }
 @media (min-width: 900px) {
-  .provider-index-hero-layout {
+  .provider-index-hero-layout:not(.provider-index-hero-layout--copy-only) {
     grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
     gap: 40px;
   }

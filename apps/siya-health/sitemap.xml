@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://siya.health/</loc><lastmod>2026-09-02</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://siya.health/about</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
+  <url><loc>https://siya.health/</loc><lastmod>2026-09-04</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://siya.health/about</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
   <url><loc>https://siya.health/adhd-care</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.95</priority></url>
   <url><loc>https://siya.health/adhd-care/miami</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
   <url><loc>https://siya.health/adhd-care/orlando</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
@@ -17,7 +17,7 @@
   <url><loc>https://siya.health/answers/adhd-medication-side-effects</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
   <url><loc>https://siya.health/answers/adhd-vs-anxiety</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
   <url><loc>https://siya.health/answers/adhd-vs-burnout</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
-  <url><loc>https://siya.health/answers/adhd-workplace-accommodations</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
+  <url><loc>https://siya.health/answers/adhd-workplace-accommodations</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
   <url><loc>https://siya.health/answers/afternoon-energy-crash-after-lunch</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
   <url><loc>https://siya.health/answers/asrs-adhd-screening-explained</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
   <url><loc>https://siya.health/answers/brain-fog-after-eating</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
@@ -27,7 +27,7 @@
   <url><loc>https://siya.health/answers/can-you-get-adhd-medication-online</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
   <url><loc>https://siya.health/answers/compounded-vs-branded-glp-1</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
   <url><loc>https://siya.health/answers/ed-telehealth-legitimate</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
-  <url><loc>https://siya.health/answers/executive-dysfunction-adhd</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
+  <url><loc>https://siya.health/answers/executive-dysfunction-adhd</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
   <url><loc>https://siya.health/answers/food-noise-returned-on-glp-1</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
   <url><loc>https://siya.health/answers/fsa-hsa-adhd-evaluation</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
   <url><loc>https://siya.health/answers/glp-1-nausea-management</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
@@ -70,10 +70,10 @@
   <url><loc>https://siya.health/answers/who-qualifies-glp-1-weight-loss</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
   <url><loc>https://siya.health/answers/why-am-i-tired-even-after-sleeping</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
   <url><loc>https://siya.health/answers/why-normal-labs-dont-mean-healthy</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.76</priority></url>
-  <url><loc>https://siya.health/blog</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://siya.health/blog</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://siya.health/blog/adderall-for-adhd-how-it-works</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/adhd</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.82</priority></url>
-  <url><loc>https://siya.health/blog/adhd-accommodations-hr-primer</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
+  <url><loc>https://siya.health/blog/adhd-accommodations-hr-primer</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/adhd-and-binge-eating</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/adhd-brain-imaging-subtypes</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/adhd-evaluation-california-online-vs-in-person</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
@@ -93,16 +93,16 @@
   <url><loc>https://siya.health/blog/brain-fog-after-covid</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/brain-fog-and-anxiety</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/brain-fog-and-sleep</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
-  <url><loc>https://siya.health/blog/brain-fog-at-work</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
+  <url><loc>https://siya.health/blog/brain-fog-at-work</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/brain-fog-vs-adhd</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
-  <url><loc>https://siya.health/blog/chronic-fatigue-and-work-performance</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
+  <url><loc>https://siya.health/blog/chronic-fatigue-and-work-performance</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/chronic-fatigue-vs-everyday-tiredness</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
-  <url><loc>https://siya.health/blog/cognitive-health-benefits-for-employers</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
+  <url><loc>https://siya.health/blog/cognitive-health-benefits-for-employers</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/compounded-vs-branded-glp1-medications</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
-  <url><loc>https://siya.health/blog/executive-dysfunction-adhd</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
+  <url><loc>https://siya.health/blog/executive-dysfunction-adhd</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/fatigue-after-illness</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/fatigue-despite-normal-labs</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
-  <url><loc>https://siya.health/blog/focus-fatigue-workforce-issue</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
+  <url><loc>https://siya.health/blog/focus-fatigue-workforce-issue</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/food-noise-and-glp-1-what-it-means-and-what-helps</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/free-testosterone-vs-total-testosterone-what-patients-should-know</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/glp1-side-effects-and-how-to-manage-them</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
@@ -131,7 +131,7 @@
   <url><loc>https://siya.health/blog/pots-and-adhd</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/semaglutide-for-weight-loss-how-it-works</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/sildenafil-for-erectile-dysfunction-what-to-expect</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
-  <url><loc>https://siya.health/blog/sleep-and-focus-at-work</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
+  <url><loc>https://siya.health/blog/sleep-and-focus-at-work</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
   <url><loc>https://siya.health/blog/telehealth</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.82</priority></url>
   <url><loc>https://siya.health/blog/telehealth-prescriptions-how-online-treatment-works</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.74</priority></url>
@@ -145,7 +145,7 @@
   <url><loc>https://siya.health/brain-fog</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
   <url><loc>https://siya.health/creyos-adhd-testing</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://siya.health/docs/tint-options-preview</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
-  <url><loc>https://siya.health/employers</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
+  <url><loc>https://siya.health/employers</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
   <url><loc>https://siya.health/fatigue</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
   <url><loc>https://siya.health/labs</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.88</priority></url>
   <url><loc>https://siya.health/labs/a1c-blood-sugar</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -171,16 +171,16 @@
   <url><loc>https://siya.health/mens-health-longevity</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
   <url><loc>https://siya.health/prescriptions</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
   <url><loc>https://siya.health/preventive-care</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
-  <url><loc>https://siya.health/pricing</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
+  <url><loc>https://siya.health/pricing</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
   <url><loc>https://siya.health/primary-care</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
   <url><loc>https://siya.health/primary-urgent-care</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
-  <url><loc>https://siya.health/providers</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://siya.health/providers/dr-natasha-desai</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://siya.health/providers/dr-sneh-pandey</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://siya.health/providers/dr-swati-pandey</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://siya.health/providers/dr-vanessa-urbina</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://siya.health/providers/megan-wunderlich</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://siya.health/providers/wendy-delgado</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://siya.health/providers</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://siya.health/providers/dr-natasha-desai</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://siya.health/providers/dr-sneh-pandey</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://siya.health/providers/dr-swati-pandey</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://siya.health/providers/dr-vanessa-urbina</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://siya.health/providers/megan-wunderlich</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://siya.health/providers/wendy-delgado</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://siya.health/siya-circle</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.78</priority></url>
   <url><loc>https://siya.health/telehealth</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.95</priority></url>
   <url><loc>https://siya.health/weight-loss-metabolic-health</loc><lastmod>2026-09-02</lastmod><changefreq>monthly</changefreq><priority>0.95</priority></url>

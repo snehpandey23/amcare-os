@@ -96,8 +96,8 @@ function replaceOnce(html, find, repl, label) {
     html,
     `<div class="trust-strip-compact trust-strip-compact--quad">
             <article>
-              <h3>Board-certified providers</h3>
-              <p>Licensed physicians with training across primary care, ADHD, obesity medicine, and behavioral health.</p>
+              <h3>Licensed clinicians</h3>
+              <p>Licensed physicians and advanced practice clinicians with training across primary care, ADHD, obesity medicine, and behavioral health.</p>
             </article>
             <article>
               <h3>HIPAA-compliant care</h3>
@@ -115,8 +115,8 @@ function replaceOnce(html, find, repl, label) {
     `<div class="trust-strip-compact trust-strip-compact--quad trust-strip-compact--logos">
             <article>
               <img class="trust-logo-img" src="/assets/images/siya-health-mark.png" alt="" width="48" height="48" loading="lazy" />
-              <h3>Board-certified providers</h3>
-              <p>Licensed physicians with training across primary care, ADHD, obesity medicine, and behavioral health.</p>
+              <h3>Licensed clinicians</h3>
+              <p>Licensed physicians and advanced practice clinicians with training across primary care, ADHD, obesity medicine, and behavioral health.</p>
             </article>
             <article>
               <img class="trust-logo-img" src="/assets/images/hipaa-compliant.png" alt="HIPAA compliant" width="72" height="72" loading="lazy" />

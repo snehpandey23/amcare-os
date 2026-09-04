@@ -80,7 +80,7 @@ export function renderEmployerRelatedGuidesSection() {
           <ul class="learn-more-links employer-related-guides">
 ${items}
           </ul>
-          <p class="symptoms-transition">Individual employees can <a href="/redirect/meet-greet" data-siya-track="meet_greet_click">Book Free Meet &amp; Greet</a> without an employer contract.</p>
+          <p class="symptoms-transition">Individual employees can always start through <a href="/redirect/meet-greet" data-siya-track="meet_greet_click">Book Free Meet &amp; Greet</a> without an employer contract.</p>
         </div>
       </section>`;
 }

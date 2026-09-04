@@ -1024,7 +1024,7 @@ export const PHASE3_ANSWER_SEEDS = [
     ],
     learnMore: [
       { href: '/labs/how-to-read-results', label: 'How to read your lab results' },
-      { href: '/redirect/meet-greet', label: 'Book a free meet & greet' },
+      { href: '/redirect/meet-greet', label: 'Book Free Meet & Greet' },
       { href: '/pricing', label: 'Follow-up plans & pricing' },
       { href: '/labs', label: 'Labs & blood tests hub' },
       { href: '/labs/preventive', label: 'Preventive & wellness labs' },

@@ -198,7 +198,7 @@ ${post.bodyHtml}${appendFaqDetails(post)}
           <a href="/" class="footer-logo-link"><img src="../assets/images/siya-health-logo.png" alt="Siya Health" class="footer-logo-img" /></a>
         </div>
         <div class="footer-brand">
-          <p>Board-certified providers providing telehealth care across Texas, Pennsylvania, Florida, and California.</p>
+          <p>Licensed clinicians providing telehealth care across Texas, Pennsylvania, Florida, and California.</p>
         </div>
         <div><h4>Services</h4><p><a href="/adhd-care">ADHD Care</a></p><p><a href="/adhd-screening">Start Free Screening</a></p></div>
         <div><h4>Contact</h4><p><a href="mailto:care@siya.health">care@siya.health</a></p><p><a href="tel:+12154451244">(215) 445-1244</a></p></div>

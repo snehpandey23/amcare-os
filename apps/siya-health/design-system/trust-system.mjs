@@ -60,8 +60,8 @@ export const TRUST_ITEMS = {
   boardCertified: {
     id: 'boardCertified',
     type: 'badge',
-    headline: 'Board-certified',
-    subline: 'licensed clinicians',
+    headline: 'Licensed clinicians',
+    subline: 'physician-led care team',
   },
   legitscript: {
     id: 'legitscript',
@@ -116,7 +116,8 @@ export const TRUST_ITEMS = {
 
 /** Trust profile → ordered item ids */
 export const TRUST_PROFILES = {
-  homepage: ['patientCount', 'neurocognitiveEvaluations', 'reviews', 'googleReviews', 'telehealth'],
+  /** Hero strip shows first 4 scroll items — keep 2,700+ / 1,200+ / 4.9★ / states. */
+  homepage: ['patientCount', 'neurocognitiveEvaluations', 'reviews', 'telehealth'],
   landing: ['boardCertified', 'patientCount', 'reviews', 'transparentPricing', 'telehealth'],
   'landing-adhd': ['reviews', 'patientCount', 'transparentPricing', 'telehealth'],
   adhd: ['reviews', 'patientCount', 'transparentPricing', 'creyos', 'hipaa'],

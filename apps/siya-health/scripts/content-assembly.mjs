@@ -33,7 +33,7 @@ export const INTENTIONAL_BOILERPLATE = [
   /emergency symptoms require local urgent or emergency care/i,
   /clinician-informed/i,
   /physician review pending/i,
-  /board-certified providers providing telehealth care across/i,
+  /licensed clinicians providing telehealth care across/i,
   /cookie/i,
   /© 20\d{2} siya health/i,
   /educational content informed by clinical practice/i,

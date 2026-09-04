@@ -494,7 +494,7 @@ ${testimonialBlock}
         <div class="footer-logo-col">
           <a href="/" class="footer-logo-link"><img src="../assets/images/siya-health-logo.png" alt="Siya Health" class="footer-logo-img" /></a>
         </div>
-        <div class="footer-brand"><p>Board-certified providers providing telehealth care across California, Texas, Pennsylvania, and Florida.</p></div>
+        <div class="footer-brand"><p>Licensed clinicians providing telehealth care across California, Texas, Pennsylvania, and Florida.</p></div>
         <div><h4>Services</h4>
           <p><a href="/answers">Health Guides</a></p><p><a href="/adhd-care">ADHD Care</a></p><p><a href="/telehealth">Telehealth</a></p></div>
         <div><h4>Healthcare Services</h4><p><a href="/primary-urgent-care">Primary &amp; urgent care</a></p><p><a href="/labs">Diagnostic labs</a></p><p><a href="/prescriptions">Prescriptions</a></p></div>
@@ -679,7 +679,7 @@ function renderProvidersIndex() {
     <main id="main">
       <section class="provider-index-hero section">
         <div class="container">
-          <div class="provider-index-hero-layout">
+          <div class="provider-index-hero-layout provider-index-hero-layout--copy-only">
             <div class="provider-index-hero-copy">
               <div class="section-header">
                 <h1>Our Care Team</h1>
@@ -691,9 +691,6 @@ function renderProvidersIndex() {
                 ${indexSecondaryBtn}
               </div>
             </div>
-            <figure class="provider-index-hero-media">
-              <img src="/assets/images/care-team-group.jpg" alt="Siya Health care team of clinicians" width="640" height="420" loading="eager" decoding="async" />
-            </figure>
           </div>
         </div>
       </section>
@@ -745,7 +742,7 @@ ${advancedCards}
         <div class="footer-logo-col">
           <a href="/" class="footer-logo-link"><img src="../assets/images/siya-health-logo.png" alt="Siya Health" class="footer-logo-img" /></a>
         </div>
-        <div class="footer-brand"><p>Board-certified providers providing telehealth care across California, Texas, Pennsylvania, and Florida.</p></div>
+        <div class="footer-brand"><p>Licensed clinicians providing telehealth care across California, Texas, Pennsylvania, and Florida.</p></div>
         <div><h4>Services</h4>
           <p><a href="/answers">Health Guides</a></p><p><a href="/adhd-care">ADHD Care</a></p><p><a href="/telehealth">Telehealth</a></p></div>
         <div><h4>Contact</h4><p><a href="mailto:care@siya.health">care@siya.health</a></p></div>

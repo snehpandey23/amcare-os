@@ -10,6 +10,7 @@ import {
   COPY_STANDARDS,
   CTA_SYSTEM,
   STATES_INLINE,
+  FOOTER_STATES_LINE,
   CANONICAL_ENTITY_STATEMENT,
 } from '../data/site-standards.mjs';
 import { REDIRECT_MEET_GREET_URL, REDIRECT_CHAT_URL } from '../data/providers-core.mjs';
@@ -77,7 +78,7 @@ const html = `<!DOCTYPE html>
               <a class="button ds-button ds-button--secondary secondary" href="${REDIRECT_CHAT_URL}" data-siya-track="secure_chat_click" data-siya-location="hero" data-page-type="pricing" data-cta-slot="secureChat" data-component="button">Start Secure Medical Chat</a>
             </div>
             <div class="hero-trust-bar">
-              <span>Board-certified physicians</span>
+              <span>Licensed clinicians</span>
               <span>Transparent pricing</span>
               <span>HIPAA-Compliant</span>
               <span>${STATES_INLINE}</span>
@@ -195,7 +196,7 @@ const html = `<!DOCTYPE html>
           <div class="footer-brand-bar__left">
             <a href="/" class="footer-logo-link footer-logo-link--compact"><img src="/assets/images/siya-health-logo-registered.png" alt="Siya Health" class="footer-logo-img footer-logo-img--compact" /></a>
             <div class="footer-brand-meta">
-              <p class="footer-brand-tagline">Board-certified providers providing telehealth care across ${STATES_INLINE}.</p>
+              <p class="footer-brand-tagline">${FOOTER_STATES_LINE}</p>
               <p><a href="mailto:care@siya.health">care@siya.health</a> · <a href="tel:+12154451244">(215) 445-1244</a></p>
             </div>
           </div>

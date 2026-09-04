@@ -213,7 +213,7 @@ const CORE_ANSWER_SEEDS = [
     shortAnswer:
       'Yes—when a licensed clinician in your state conducts a full telehealth evaluation using clinical interview, validated tools, and safety screening. A free online quiz alone is screening, not diagnosis. Legitimate care uses HIPAA-compliant video and documented visits.',
     paragraphs: [
-      'At Siya Health, adult ADHD evaluation is a 60–90 minute visit with board-certified, ADHD-CCSP–trained providers in eligible states.',
+      'At Siya Health, adult ADHD evaluation is a 60–90 minute visit with licensed, ADHD-CCSP–trained clinicians in eligible states.',
       'Instant stimulant promises without evaluation are a red flag in any state.',
     ],
     evidence: ['State telehealth practice rules', 'HIPAA-compliant telehealth standards', 'ASRS + clinical interview best practices'],
