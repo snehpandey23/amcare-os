@@ -2519,6 +2519,20 @@ button.secondary:hover {
   align-items: start;
 }
 
+/* Provider profile Meet & Greet — standalone primary conversion (gradient) */
+a.button[data-siya-location="provider-hero-meet-greet"],
+a.button[data-siya-location="provider-final-meet-greet"] {
+  background: var(--accent-gradient);
+  background-color: var(--accent);
+  color: var(--white);
+  border: none;
+}
+a.button[data-siya-location="provider-hero-meet-greet"]:hover,
+a.button[data-siya-location="provider-final-meet-greet"]:hover {
+  background: var(--accent-gradient-hover);
+  color: var(--white);
+}
+
 @media (min-width: 640px) {
   .physician-main { grid-template-columns: auto 1fr; }
 }
@@ -3734,7 +3748,7 @@ a.asrs-interest-btn:hover {
   font-size: 0.9rem;
   line-height: 1.55;
   color: var(--text-secondary);
-  background: rgba(0, 107, 125, 0.06);
+  background: color-mix(in srgb, var(--accent-tertiary) 14%, var(--page-bg));
   border-left: 4px solid var(--primary);
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: 14px 18px;
@@ -3764,7 +3778,7 @@ a.asrs-interest-btn:hover {
 }
 
 .clinical-review--reviewed {
-  background: rgba(0, 107, 125, 0.06);
+  background: color-mix(in srgb, var(--accent-tertiary) 14%, var(--page-bg));
   border-left-color: var(--primary);
 }
 
@@ -4927,7 +4941,7 @@ a.asrs-interest-btn:hover {
 }
 
 .health-guide-feature-card:hover {
-  border-color: rgba(0, 107, 125, 0.35);
+  border-color: color-mix(in srgb, var(--primary) 35%, var(--border));
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
@@ -4947,14 +4961,23 @@ a.asrs-interest-btn:hover {
   font-weight: 700;
   margin-bottom: 12px;
   color: var(--primary);
-  background: rgba(0, 107, 125, 0.08);
+  background: color-mix(in srgb, var(--accent-tertiary) 22%, #ffffff);
 }
 
-.health-guide-feature-icon--metabolic { background: rgba(0, 107, 125, 0.1); }
-.health-guide-feature-icon--energy { background: rgba(99, 102, 241, 0.12); color: #4338ca; }
+.health-guide-feature-icon--metabolic {
+  background: color-mix(in srgb, var(--accent-tertiary) 26%, #ffffff);
+  color: var(--primary);
+}
+.health-guide-feature-icon--energy {
+  background: color-mix(in srgb, var(--primary) 10%, #ffffff);
+  color: var(--primary);
+}
 .health-guide-feature-icon--hormone { background: rgba(180, 83, 9, 0.1); color: #b45309; }
 .health-guide-feature-icon--adhd { background: rgba(216, 16, 136, 0.1); color: var(--accent-accessible); }
-.health-guide-feature-icon--telehealth { background: rgba(37, 99, 235, 0.1); color: #2563eb; }
+.health-guide-feature-icon--telehealth {
+  background: color-mix(in srgb, var(--primary) 10%, #ffffff);
+  color: var(--primary);
+}
 
 .health-guide-feature-title {
   font-size: 1rem;
@@ -6283,7 +6306,7 @@ img.footer-trust-logo[src*="legitscript"] {
 /* Pricing section */
 .pricing-section {
   padding: 70px 0;
-  background: linear-gradient(180deg, var(--white) 0%, #f3f6fb 100%);
+  background: linear-gradient(180deg, var(--white) 0%, var(--bg-subtle) 100%);
   text-align: center;
 }
 
@@ -6936,9 +6959,9 @@ img.footer-trust-logo[src*="legitscript"] {
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 999px;
-  background: var(--surface-tinted, #f0f4f8);
+  background: color-mix(in srgb, var(--accent-tertiary) 26%, #ffffff);
   color: var(--primary);
-  border: 1px solid var(--border);
+  border: 1px solid color-mix(in srgb, var(--accent-tertiary) 40%, #ffffff);
 }
 .provider-state-chip--license-only {
   border-style: dashed;
@@ -7029,7 +7052,7 @@ img.footer-trust-logo[src*="legitscript"] {
 .provider-photo-img--placeholder {
   display: block;
   object-fit: contain;
-  background: #e7f0ff;
+  background: color-mix(in srgb, var(--accent-tertiary) 18%, var(--page-bg));
 }
 .provider-photo-initials {
   position: absolute;
@@ -7092,7 +7115,7 @@ img.footer-trust-logo[src*="legitscript"] {
   font-size: 0.7rem;
   padding: 3px 8px;
   border-radius: 4px;
-  background: var(--surface-tinted, #f0f4f8);
+  background: color-mix(in srgb, var(--accent-tertiary) 22%, #ffffff);
   color: var(--text-secondary);
 }
 .provider-index-teaser {
@@ -7353,7 +7376,7 @@ img.footer-trust-logo[src*="legitscript"] {
   text-decoration: none;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
 }
-.siya-contact-fab__btn--messenger { background: #0866ff; color: #fff; }
+/* Messenger FAB channel paused/stripped — no Meta blue in live CSS */
 .siya-contact-fab__btn--chat {
   background: var(--white);
   color: var(--primary);
@@ -7480,7 +7503,7 @@ body.legal-page .legal-document-main {
   padding: 16px 18px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: var(--surface-tinted, #f8fafc);
+  background: var(--bg-subtle);
   font-size: 0.9rem;
   color: var(--text-secondary);
 }
@@ -7573,7 +7596,7 @@ body.ghl-legal-gate-open {
   margin: 0 0 14px;
   padding: 12px 14px;
   border-left: 3px solid var(--accent);
-  background: var(--surface-tinted, #f8fafc);
+  background: var(--bg-subtle);
   font-size: 0.9rem;
   color: var(--text-secondary);
 }
@@ -7772,10 +7795,10 @@ body.ghl-legal-gate-open {
   line-height: 1.2;
   padding: 10px 12px;
   border-radius: 8px;
-  /* Outline reject control — accessible magenta (AA on white) */
-  border: 2px solid var(--accent-accessible);
-  background: var(--surface, #fff);
-  color: var(--accent-accessible);
+  /* Utility UI — navy sitewide (not a conversion CTA) */
+  border: 2px solid var(--primary);
+  background: var(--white);
+  color: var(--primary);
   cursor: pointer;
   text-align: center;
   min-height: 44px;
@@ -7783,19 +7806,19 @@ body.ghl-legal-gate-open {
 }
 .cookie-notice__btn:hover,
 .cookie-notice__btn:focus-visible {
-  background: rgba(168, 12, 106, 0.08);
+  background: rgba(0, 24, 120, 0.08);
   outline: none;
 }
 .cookie-notice__btn--accept {
-  background: var(--brand);
-  border-color: var(--brand);
-  color: #fff;
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
 }
 .cookie-notice__btn--accept:hover,
 .cookie-notice__btn--accept:focus-visible {
-  background: var(--brand-dark);
-  border-color: var(--brand-dark);
-  color: #fff;
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: var(--white);
 }
 .cookie-notice__policy {
   display: block;
@@ -7808,7 +7831,7 @@ body.ghl-legal-gate-open {
 }
 .cookie-notice__policy:hover,
 .cookie-notice__policy:focus-visible {
-  color: var(--accent-accessible);
+  color: var(--primary);
 }
 body.cookie-notice-visible {
   padding-bottom: var(--cookie-notice-height, 0px);
@@ -8027,7 +8050,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--primary);
-  background: #dbeafe;
+  background: color-mix(in srgb, var(--accent-tertiary) 28%, #ffffff);
   padding: 3px 8px;
   border-radius: 6px;
   margin-bottom: 6px;
@@ -9156,11 +9179,11 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
 }
 
 .siya-landing-page .lp-next-steps {
-  background: linear-gradient(180deg, #eef6ff 0%, var(--bg-subtle) 100%);
+  background: linear-gradient(180deg, var(--bg-subtle) 0%, var(--page-bg) 100%);
 }
 
 .siya-landing-page .lp-final-cta {
-  background: linear-gradient(180deg, #e8f4f8 0%, #f0f7ff 100%);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent-tertiary) 12%, var(--page-bg)) 0%, var(--bg-subtle) 100%);
   text-align: center;
   padding: 40px 0 48px;
 }
@@ -9821,7 +9844,7 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
 
 .siya-landing-page--ca-screening .lp-trust-grid-section {
   padding: 20px 0 24px;
-  background: #f8fafc;
+  background: var(--bg-subtle);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
@@ -10104,6 +10127,11 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   gap: 16px 24px;
 }
 
+/*
+  Listen heroes are cream/editorial (no photo overlay) — navy primary is intentional
+  for light-surface hierarchy, not a missed gradient. Class currently unused in HTML.
+  Do not inherit photo-hero gradient without a product decision.
+*/
 .hero-merged--listen .hero-ctas .button.ds-button--primary {
   background: var(--primary);
   color: var(--white);
@@ -11138,7 +11166,8 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   box-shadow: 0 6px 20px rgba(28, 25, 23, 0.06);
 }
 .cta-band--warm {
-  background: linear-gradient(160deg, #eef3fb 0%, #e8f6f5 55%, #f4f7fc 100%);
+  /* Cream family — no leftover blue/teal wash */
+  background: linear-gradient(160deg, var(--bg-subtle) 0%, #ffffff 55%, var(--page-bg) 100%);
   border: 1px solid rgba(28, 25, 23, 0.18);
   color: var(--text);
   box-shadow: 0 10px 28px rgba(28, 25, 23, 0.08);
@@ -11552,32 +11581,6 @@ body.page-home .mobile-sticky-cta .button:hover {
   color: var(--white);
 }
 
-/* Cookie banner: utility UI — navy only, no magenta */
-body.page-home .cookie-notice__btn {
-  border-color: var(--primary);
-  color: var(--primary);
-  background: var(--white);
-}
-body.page-home .cookie-notice__btn:hover,
-body.page-home .cookie-notice__btn:focus-visible {
-  background: rgba(0, 24, 120, 0.08);
-}
-body.page-home .cookie-notice__btn--accept {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: var(--white);
-}
-body.page-home .cookie-notice__btn--accept:hover,
-body.page-home .cookie-notice__btn--accept:focus-visible {
-  background: var(--primary-hover);
-  border-color: var(--primary-hover);
-  color: var(--white);
-}
-body.page-home .cookie-notice__policy:hover,
-body.page-home .cookie-notice__policy:focus-visible {
-  color: var(--primary);
-}
-
 /* Decorative accents — tertiary gold / navy links (never a second magenta fill) */
 body.page-home .flow-step-num {
   color: color-mix(in srgb, var(--accent-tertiary) 55%, var(--primary));
@@ -11586,10 +11589,5 @@ body.page-home .symptoms-card-secondary,
 body.page-home .symptoms-card--link .symptoms-card-secondary,
 body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-secondary {
   color: var(--primary);
-}
-/* Trust wash inherits sitewide champagne highlight */
-body.page-home .cta-band--warm {
-  /* Drop leftover teal wash; stay in cream / white family */
-  background: linear-gradient(160deg, var(--bg-subtle) 0%, #ffffff 55%, var(--page-bg) 100%);
 }
 

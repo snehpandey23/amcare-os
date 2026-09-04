@@ -195,10 +195,10 @@ function renderProviderPage(provider) {
   const meetGreetLabel = COPY_STANDARDS.meetGreetCta;
   const zocdocLabel = 'Book Online via Zocdoc';
   const heroPrimaryCta = isMedicalDirector
-    ? `<a class="button" href="${meetGreetUrl}" data-siya-track="meet_greet_click" data-siya-location="provider-hero-meet-greet" data-provider-cta="${provider.slug}">${meetGreetLabel}</a>`
+    ? `<a class="button ds-button ds-button--accent" href="${meetGreetUrl}" data-siya-track="meet_greet_click" data-siya-location="provider-hero-meet-greet" data-provider-cta="${provider.slug}">${meetGreetLabel}</a>`
     : `<a class="button" href="${REDIRECT_CHAT_URL}" data-siya-track="secure_chat_click" data-siya-location="provider-hero-chat" data-provider-cta="${provider.slug}">${COPY_STANDARDS.secureChatCta}</a>`;
   const finalPrimaryCta = isMedicalDirector
-    ? `<a class="button" href="${meetGreetUrl}" data-siya-track="meet_greet_click" data-siya-location="provider-final-meet-greet" data-provider-cta="${provider.slug}">${meetGreetLabel}</a>`
+    ? `<a class="button ds-button ds-button--accent" href="${meetGreetUrl}" data-siya-track="meet_greet_click" data-siya-location="provider-final-meet-greet" data-provider-cta="${provider.slug}">${meetGreetLabel}</a>`
     : `<a class="button" href="${REDIRECT_CHAT_URL}" data-siya-track="secure_chat_click" data-siya-location="provider-final-chat" data-provider-cta="${provider.slug}">${COPY_STANDARDS.secureChatCta}</a>`;
   const acceptingBadge = provider.acceptingNewPatients
     ? '<span class="provider-accepting-badge">Accepting new patients</span>'

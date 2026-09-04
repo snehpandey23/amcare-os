@@ -209,33 +209,33 @@ Eliminate duplicate aliases: `service-col` vs `service-card` → one name.
 
 ### Primary palette (`:root`)
 
+Canonical pixels: `brand/BRAND-STYLE-LOCK.md` + live `styles.css` / `design-system/tokens.css` (updated 2026-09).
+
 | Token | Hex | Role |
 |-------|-----|------|
-| `--primary` | `#1e3a8a` | Brand blue |
-| `--primary-hover` | `#1e40af` | Hover |
-| `--accent` | `#0ea5a4` | Teal accent |
-| `--text` | `#111827` | Body heading |
-| `--text-secondary` | `#6b7280` | Body |
-| `--text-muted` | `#9ca3af` | Muted |
-| `--border` | `#e5e7eb` | Borders |
-| `--bg-subtle` | `#f9fafb` | Tinted sections |
+| `--primary` | `#001878` | Deep Siya Navy — chrome, headings, navy CTAs |
+| `--primary-hover` | `#0A246B` | Dark Navy — navy hover only |
+| `--accent` | `#D81088` | Magenta — solid accents; filled conversion CTAs use `--accent-gradient` |
+| `--accent-accessible` / `--accent-hover` | `#A80C6A` | Text links, outline borders, solid hover fallback |
+| `--accent-tertiary` / `--gold-accent` | `#C4A574` | Champagne — pills/tags/dividers/washes only (never button fill) |
+| `--page-bg` | `#F4EFE7` | Cream canvas |
 
-**Hard-coded duplicates:** `background-color: #1e3a8a` on heroes (should use `var(--primary)`).
+**Do not revive:** Option C teal (`#0f766e` / `#0ea5a4`) or Tailwind blue (`#1e3a8a`).
 
 ### Legacy / inconsistent colors
 
+Historical audit notes (pre-2026-09 brand align). Re-check `styles.css` before treating any row as still live.
+
 | Location | Value | Issue |
 |----------|-------|-------|
-| `.health-guides-card:hover` | `rgba(0, 107, 125, 0.35)` | **Legacy teal** not in `:root` |
-| Hero gradient | `rgba(30, 58, 138, …)` | OK, matches primary |
-| CTA band | `var(--primary)` | OK |
-| Various shadows | `rgba(0,0,0,0.04–0.08)` | Not tokenized |
+| Health-guide icons / clinical review | Was `rgba(0, 107, 125, …)` teal | Replaced with navy / champagne family |
+| Cool section washes | Was `#eef6ff` / `#dbeafe`-era | Replaced with cream / champagne |
 
-**Color palette count:** **1 intentional palette** + **legacy teal accent** + **ad hoc neutrals** in shadows.
+**Color palette count:** logo navy/magenta/cream + champagne tertiary + semantic success green (unchanged).
 
 ### Recommended
 
-Add `--accent-hover`, `--focus-ring`, tokenize shadows as `--shadow-sm`, `--shadow-md`, `--shadow-lg`.
+Keep shadows warm/neutral; prefer `var(--*)` over hardcoded cool blues.
 
 ---
 

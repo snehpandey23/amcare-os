@@ -21,7 +21,7 @@ Reusable, physician-credible engagement blocks for long-form Siya Health educati
 | 7 | Symptom Flowchart | `blog-engage--flowchart` | Ordered differential steps |
 | 8 | Decision Tree | `blog-engage--decision` | When to seek care / labs |
 
-All components share `.blog-engage` base styles in `styles.css` (Siya primary `#1e3a8a`, accent `#0ea5a4`).
+All components share `.blog-engage` base styles in `styles.css` (Siya navy `#001878`, magenta `#D81088`, cream `#F4EFE7` — see `brand/BRAND-STYLE-LOCK.md`).
 
 ## Authoring
 

@@ -6,3 +6,7 @@ brand/
 
 # Local Phase 0 backups (never deploy)
 .site-snapshots/
+
+# Local homepage color previews (never production)
+previews/
+preview-home-*.html

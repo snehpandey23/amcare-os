@@ -208,6 +208,19 @@ Runtime values live in CSS (`styles.css` / `design-system/tokens.css`).
 
 **Never return to:** teal/Option C accents (`#0f766e`, `#0d9488`, `#0ea5a4`), Tailwind-like blue primary (`#1e3a8a`), purple SaaS washes, sky-blue section floods (`#f0f9ff`-era), glow effects, dark frosted “consultant” hero cards as the default brand look.
 
+### Third-party surfaces (outside site CSS)
+
+These UIs are embedded or opened off-site. Agents must **not** treat them as restylable through `styles.css` / design-system tokens:
+
+| Surface | How it appears | Control |
+|---------|----------------|---------|
+| **Siya AI Concierge** | Fixed iframe → `siya-guide.vercel.app/embed` (`siya-concierge.js`) | Launcher chrome lives in the Guide app; patient site only sizes/positions the iframe |
+| **CarePatron** | Booking after `/redirect/meet-greet` (and related redirects) | External booking product |
+| **Zocdoc** | Outbound “Book Online via Zocdoc” links | External marketplace |
+| **GHL intake embed** | `/intake` iframe + LeadConnector forms when used | Third-party form chrome |
+
+LeadConnector chat + Messenger FAB scripts are currently **stripped** by site-chrome (not live). If re-enabled, chat widget chrome remains third-party.
+
 ---
 
 ## Typography (roles)
