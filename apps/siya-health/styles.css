@@ -11423,3 +11423,109 @@ a.text-link:hover,
   }
 }
 
+/* ============================================
+   Homepage accent discipline (body.page-home only)
+   One filled magenta CTA per viewport (hero Meet & Greet).
+   Tokens unchanged — usage/proportion only.
+   ============================================ */
+
+/* Hero: keep primary Meet & Greet as the one filled accent; demote paired CTA to ghost outline */
+body.page-home .hero-merged .hero-ctas .button.ds-button--primary {
+  background: var(--accent);
+  color: var(--white);
+  border: none;
+}
+body.page-home .hero-merged .hero-ctas .button.ds-button--primary:hover {
+  background: var(--accent-hover);
+  color: var(--white);
+}
+body.page-home .hero-merged .hero-ctas .button.secondary,
+body.page-home .hero-merged .hero-ctas .button.ds-button--secondary {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  color: var(--white);
+}
+body.page-home .hero-merged .hero-ctas .button.secondary:hover,
+body.page-home .hero-merged .hero-ctas .button.ds-button--secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.95);
+}
+
+/* Nav CTA: navy (never magenta) */
+body.page-home .nav-cta .button,
+body.page-home .site-header .button.ds-button--primary {
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+}
+body.page-home .nav-cta .button:hover,
+body.page-home .site-header .button.ds-button--primary:hover {
+  background: var(--primary-hover);
+  color: var(--white);
+}
+body.page-home .site-header-transparent:not(.site-header-scrolled) .nav-cta .button,
+body.page-home .site-header-transparent:not(.site-header-scrolled) .button.ds-button--primary {
+  background: var(--white);
+  color: var(--primary);
+}
+body.page-home .site-header-transparent:not(.site-header-scrolled) .nav-cta .button:hover,
+body.page-home .site-header-transparent:not(.site-header-scrolled) .button.ds-button--primary:hover {
+  background: var(--bg-subtle);
+  color: var(--primary);
+}
+
+/* Mobile sticky Meet & Greet: navy when hero is off-screen (no second magenta) */
+body.page-home .mobile-sticky-cta .button {
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+}
+body.page-home .mobile-sticky-cta .button:hover {
+  background: var(--primary-hover);
+  color: var(--white);
+}
+
+/* Cookie banner: utility UI — navy only, no magenta */
+body.page-home .cookie-notice__btn {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--white);
+}
+body.page-home .cookie-notice__btn:hover,
+body.page-home .cookie-notice__btn:focus-visible {
+  background: rgba(0, 24, 120, 0.08);
+}
+body.page-home .cookie-notice__btn--accept {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+}
+body.page-home .cookie-notice__btn--accept:hover,
+body.page-home .cookie-notice__btn--accept:focus-visible {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: var(--white);
+}
+body.page-home .cookie-notice__policy:hover,
+body.page-home .cookie-notice__policy:focus-visible {
+  color: var(--primary);
+}
+
+/* Decorative / secondary accent → navy or neutral */
+body.page-home .flow-step-num {
+  color: var(--primary);
+}
+body.page-home .symptoms-card-secondary,
+body.page-home .symptoms-card--link .symptoms-card-secondary,
+body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-secondary {
+  color: var(--primary);
+}
+body.page-home .homepage-trust-summary {
+  background: linear-gradient(180deg, rgba(28, 25, 23, 0.06) 0%, rgba(0, 24, 120, 0.05) 100%);
+}
+body.page-home .cta-band--warm {
+  /* Drop leftover teal wash; stay in cream / white family */
+  background: linear-gradient(160deg, var(--bg-subtle) 0%, #ffffff 55%, var(--page-bg) 100%);
+}
+
