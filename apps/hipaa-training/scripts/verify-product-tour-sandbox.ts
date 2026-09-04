@@ -62,6 +62,32 @@ async function main() {
 
   const authHeaders = { Authorization: `Bearer ${token}`, "Content-Type": "application/json" };
 
+  type SqlSnap = {
+    siya_team_feedback_total: number;
+    qa_feedback_rows: number;
+    level_up_fp: string;
+    level_up_updated_at: string | null;
+    totalXp: number | null;
+    marker_row_count?: number | null;
+  };
+
+  async function sqlSnap(marker?: string): Promise<SqlSnap> {
+    const q = marker ? `?marker=${encodeURIComponent(marker)}` : "";
+    const res = await fetch(`${AUTH}/api/admin/tour-sandbox-isolation-snapshot${q}`, {
+      headers: authHeaders,
+    });
+    const data = (await res.json()) as SqlSnap & { error?: string; ok?: boolean };
+    if (!res.ok) throw new Error(data.error || `snapshot HTTP ${res.status}`);
+    return data;
+  }
+
+  const marker = `sandbox-http-${Date.now()}`;
+  const sqlBefore = await sqlSnap(marker);
+  pass(
+    "sql-before",
+    `feedback_total=${sqlBefore.siya_team_feedback_total} qa_rows=${sqlBefore.qa_feedback_rows} level_fp=${sqlBefore.level_up_fp} xp=${sqlBefore.totalXp}`,
+  );
+
   const inboxBeforeRes = await fetch(`${AUTH}/api/team-feedback/inbox`, { headers: authHeaders });
   const inboxBefore = (await inboxBeforeRes.json()) as { items?: { id: string }[] };
   const inboxCountBefore = inboxBefore.items?.length ?? 0;
@@ -73,7 +99,7 @@ async function main() {
   pass("progress-before", `fp=${progressFpBefore}`);
 
   const tourBody =
-    "[Product tour practice] Sandbox verify — no real recipient, no email, no DB row.";
+    `[Product tour practice] Sandbox verify — no real recipient, no email, no DB row. ${marker}`;
   const feedbackAuthRes = await fetch(`${AUTH}/api/team-feedback`, {
     method: "POST",
     headers: authHeaders,
@@ -173,6 +199,37 @@ async function main() {
     } else {
       pass("feedback-no-db-row", `moderation HTTP ${modRes.status}`);
     }
+  }
+
+  const sqlAfter = await sqlSnap(marker);
+  const sqlOk =
+    sqlBefore.siya_team_feedback_total === sqlAfter.siya_team_feedback_total &&
+    sqlBefore.qa_feedback_rows === sqlAfter.qa_feedback_rows &&
+    sqlBefore.level_up_fp === sqlAfter.level_up_fp &&
+    sqlBefore.level_up_updated_at === sqlAfter.level_up_updated_at &&
+    (sqlAfter.marker_row_count ?? 0) === 0;
+  if (!sqlOk) {
+    fail(
+      "sql-unchanged",
+      `before=${JSON.stringify(sqlBefore)} after=${JSON.stringify(sqlAfter)}`,
+    );
+  } else {
+    pass(
+      "sql-unchanged",
+      `feedback_total=${sqlAfter.siya_team_feedback_total} qa_rows=${sqlAfter.qa_feedback_rows} level_fp=${sqlAfter.level_up_fp} marker_rows=${sqlAfter.marker_row_count}`,
+    );
+  }
+
+  const inProcess = await fetch(`${AUTH}/api/admin/tour-sandbox-isolation-check`, {
+    method: "POST",
+    headers: authHeaders,
+    body: "{}",
+  });
+  const inProcessJson = (await inProcess.json()) as { ok?: boolean; before?: unknown; after?: unknown };
+  if (!inProcess.ok || !inProcessJson.ok) {
+    fail("sql-inprocess-check", JSON.stringify(inProcessJson));
+  } else {
+    pass("sql-inprocess-check", "admin SQL before/after pass");
   }
 
   mkdirSync(dirname(OUT), { recursive: true });

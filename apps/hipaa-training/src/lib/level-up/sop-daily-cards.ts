@@ -83,21 +83,16 @@ function sopTermFromSop(sop: SopRetrievalRow): { term: string; plain: string; so
 }
 
 export function resolveDailyPhraseCard(
-  sops: SopRetrievalRow[],
-  departments: string[],
+  _sops: SopRetrievalRow[],
+  _departments: string[],
   date = new Date(),
 ): PhraseCard & { source?: string } {
-  const live = filterLiveSopsForDepartments(sops, departments);
-  const pool: PhraseCard[] = [];
-  for (const sop of live) pool.push(...sopPhraseCandidates(sop));
-  if (pool.length) {
-    const card = pool[dailyIndex("sop-phrase-pool", pool.length, date)]!;
-    return { ...card, source: card.meaning };
-  }
+  // Language & Communication must use English-phrase drill content only.
+  // SOP titles/keywords are procedures, not learnable workplace phrases.
   const slang = phraseOfTheDay(date);
   return {
     ...slang,
-    source: "American workplace slang (no live SOP phrase for your department yet)",
+    source: "American workplace slang (English phrase drill)",
   };
 }
 

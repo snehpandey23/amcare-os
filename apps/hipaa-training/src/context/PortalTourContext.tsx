@@ -27,6 +27,7 @@ import {
   isPortalTourFinished,
   isPortalTourInProgress,
   isTourStepReadyToComplete,
+  markTourSessionActive,
   normalizePortalTour,
   recordTourVisit,
   shouldOfferProductTour,
@@ -132,6 +133,7 @@ export function PortalTourProvider({ children }: { children: ReactNode }) {
     if (!user?.id) return;
     bindPortalProfileToUser(user.id);
     clearTourSessionFlags();
+    markTourSessionActive();
     const base = loadLocalPortalProfile();
     let nextProfile: PortalProfile = {
       ...base,

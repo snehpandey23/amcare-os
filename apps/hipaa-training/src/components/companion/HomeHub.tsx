@@ -86,27 +86,27 @@ function MyDayHeader({
             Personalized for <strong>{deptLabel}</strong>
             {profile.improveGoals.length ? ` · goals: ${profile.improveGoals.slice(0, 3).join(", ")}` : null}
             {" · "}
-            <Link href="/onboarding" className="font-semibold underline">
+            <PortalNavLink href="/onboarding" className="font-semibold underline">
               Personalize
-            </Link>
+            </PortalNavLink>
             {" · "}
-            <Link href="/product-tour" className="font-semibold underline">
+            <PortalNavLink href="/product-tour" className="font-semibold underline">
               Run through the tour
-            </Link>
+            </PortalNavLink>
           </p>
         ) : (
           <p className="mt-1 text-xs text-amber-800">
             {profile.onboardingSkipped ? "Optional: " : "Finish "}
-            <Link href="/onboarding" className="font-semibold underline">
+            <PortalNavLink href="/onboarding" className="font-semibold underline">
               {profile.onboardingSkipped ? "Personalize" : "onboarding"}
-            </Link>
+            </PortalNavLink>
             {profile.onboardingSkipped
               ? " anytime so My day matches your role and goals"
               : " so My day matches your role and goals"}
             {" · "}
-            <Link href="/product-tour" className="font-semibold underline">
+            <PortalNavLink href="/product-tour" className="font-semibold underline">
               Run through the tour
-            </Link>
+            </PortalNavLink>
             .
           </p>
         )
@@ -345,27 +345,27 @@ export function HomeHub() {
                 <p className="mb-3 text-xs text-amber-800">
                   {profile.onboardingSkipped ? (
                     <>
-                      <Link href="/onboarding" className="font-semibold underline">
+                      <PortalNavLink href="/onboarding" className="font-semibold underline">
                         Personalize
-                      </Link>{" "}
+                      </PortalNavLink>{" "}
                       anytime so Assist matches your role
                       {" · "}
-                      <Link href="/product-tour" className="font-semibold underline">
+                      <PortalNavLink href="/product-tour" className="font-semibold underline">
                         Run through the tour
-                      </Link>
+                      </PortalNavLink>
                       .
                     </>
                   ) : (
                     <>
                       Finish{" "}
-                      <Link href="/onboarding" className="font-semibold underline">
+                      <PortalNavLink href="/onboarding" className="font-semibold underline">
                         onboarding
-                      </Link>{" "}
+                      </PortalNavLink>{" "}
                       so personalization matches your role
                       {" · "}
-                      <Link href="/product-tour" className="font-semibold underline">
+                      <PortalNavLink href="/product-tour" className="font-semibold underline">
                         Run through the tour
-                      </Link>
+                      </PortalNavLink>
                       .
                     </>
                   )}

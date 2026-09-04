@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { PortalNavLink } from "@/components/training/PortalNavLink";
 import { useEffect, useState } from "react";
 import { loadLocalPortalProfile } from "@/lib/portal-profile";
 import { shouldOfferProductTour } from "@/lib/portal-product-tour";
@@ -26,13 +26,13 @@ export function ProductTourNudgeBanner() {
   return (
     <div className={`${portalStatusInfoBox} px-3 py-2 text-xs ${portalStatusInfoText}`}>
       Optional:{" "}
-      <Link href="/product-tour" className="font-semibold underline underline-offset-2">
+      <PortalNavLink href="/product-tour" className="font-semibold underline underline-offset-2">
         Run through the tour
-      </Link>{" "}
+      </PortalNavLink>{" "}
       — My day, Ask, Learn, Practice, Team, Feedback.{" "}
-      <Link href="/onboarding" className="font-semibold underline underline-offset-2">
+      <PortalNavLink href="/onboarding" className="font-semibold underline underline-offset-2">
         Personalize
-      </Link>{" "}
+      </PortalNavLink>{" "}
       anytime too.
     </div>
   );

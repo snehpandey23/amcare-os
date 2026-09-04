@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { PortalNavLink } from "@/components/training/PortalNavLink";
 import { useCallback, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
@@ -802,13 +802,13 @@ export function FounderCoachPanel({ firstName }: { firstName?: string }) {
       <p className="shrink-0 text-xs text-[var(--siya-text-muted)]">
         Policies, coverage, difficult-patient paths — same engine as staff Ask. Plan Record stays on{" "}
         <strong>This week&apos;s plan</strong>.{" "}
-        <Link href="/onboarding" className="font-semibold underline underline-offset-2">
+        <PortalNavLink href="/onboarding" className="font-semibold underline underline-offset-2">
           Personalize
-        </Link>
+        </PortalNavLink>
         {" · "}
-        <Link href="/product-tour" className="font-semibold underline underline-offset-2">
+        <PortalNavLink href="/product-tour" className="font-semibold underline underline-offset-2">
           Run through the tour
-        </Link>{" "}
+        </PortalNavLink>{" "}
         (name, assistant label, training reminders).
       </p>
       <div className="min-h-0 flex-1">

@@ -16,6 +16,7 @@ import {
   aiTipOfTheDay,
   docExerciseOfTheDay,
   complianceQuestionOfTheDay,
+  phraseOfTheDay,
 } from "@/lib/level-up/catalog";
 import {
   loadLevelUpProgress,
@@ -39,9 +40,9 @@ import { useAuth } from "@/context/AuthContext";
 import {
   profileDepartmentLabel,
   resolveDailyHealthTerm,
-  resolveDailyPhraseCard,
   sopDepartmentsForUser,
 } from "@/lib/level-up/sop-daily-cards";
+import { usePortalTour } from "@/context/PortalTourContext";
 import {
   categoryForSection,
   practiceCategoryById,
@@ -74,15 +75,20 @@ function sectionVisible(
 
 export function LevelUpHub() {
   const { user } = useAuth();
+  const { active: tourActive } = usePortalTour();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const tourPracticeMode = isTourUrlParam(searchParams.get("tour"));
+  /** Sandbox only when the product tour is session-active AND this is the tour practice deep-link. */
+  const tourPracticeMode = tourActive && isTourUrlParam(searchParams.get("tour"));
   const catParam = searchParams.get("cat");
 
   const [progress, setProgress] = useState<LevelUpProgress | null>(null);
   const [sharePending, setSharePending] = useState<DayLedgerEntry | null>(null);
   const [tourTypingComplete, setTourTypingComplete] = useState(false);
-  const [phrase, setPhrase] = useState(() => resolveDailyPhraseCard([], ["General"]));
+  const [phrase, setPhrase] = useState(() => ({
+    ...phraseOfTheDay(),
+    source: "American workplace slang (English phrase drill)",
+  }));
   const [term, setTerm] = useState(() => resolveDailyHealthTerm([], ["General"]));
   const [activeCategory, setActiveCategory] = useState<PracticeCategory | null>(() =>
     practiceCategoryById(catParam),
@@ -158,7 +164,10 @@ export function LevelUpHub() {
         const departments = sopDepartmentsForUser(profile.department, leadDepts);
         const sops = await fetchSopsForRetrieval();
         if (cancelled) return;
-        setPhrase(resolveDailyPhraseCard(sops, departments));
+        setPhrase({
+          ...phraseOfTheDay(),
+          source: "American workplace slang (English phrase drill)",
+        });
         setTerm(resolveDailyHealthTerm(sops, departments));
       } catch {
         /* catalog fallbacks already set */
@@ -189,15 +198,12 @@ export function LevelUpHub() {
   }, [progress, subjectLabel]);
 
   const phraseSubtitle = useMemo(() => {
-    if (phrase.source?.includes("American workplace")) {
-      return deptLabel ? `American slang for today · ${deptLabel}` : "American slang for today";
-    }
-    return "Team language from your lead’s live SOP";
-  }, [phrase.source, deptLabel]);
+    return deptLabel ? `American slang for today · ${deptLabel}` : "American slang for today";
+  }, [deptLabel]);
 
   const inCategory = activeCategory != null;
-  // Tour mode: typing only, no category chrome / no full dump.
-  const tourOnlyTyping = tourPracticeMode && !inCategory;
+  // Tour practice deep-link: typing drill only (ignore ?cat= / #typing category expansion).
+  const tourOnlyTyping = tourPracticeMode;
   const showLanding = !inCategory && !tourPracticeMode;
   const showDrills = inCategory || tourOnlyTyping;
   const vis = (id: PracticeSectionId) => sectionVisible(activeCategory, id, tourOnlyTyping);
@@ -247,13 +253,7 @@ export function LevelUpHub() {
             <section id="english">
               <h2 className={`mb-1 ${portalH2}`}>🇺🇸 {phraseSubtitle}</h2>
               <p className="mb-3 text-xs text-[var(--siya-text-muted)]">
-                One phrase per day — rotates from live department SOPs when available.{" "}
-                <Link
-                  href="/memory/knowledge/sops"
-                  className="font-semibold text-[var(--siya-accent)] hover:underline"
-                >
-                  SOP workspace
-                </Link>
+                One workplace phrase per day from the English phrase drill catalog.
               </p>
               <div className={portalCard}>
                 <p className="text-xl font-semibold text-[var(--siya-primary)]">
@@ -403,39 +403,47 @@ export function LevelUpHub() {
           {vis("typing") ? (
             <section id="typing">
               <h2 className={`mb-3 ${portalH2}`}>⌨️ Chat speed & accuracy</h2>
-              {tourPracticeMode ? (
-                <p className="mb-3 rounded-md border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] px-3 py-2 text-xs text-[var(--siya-text-secondary)]">
-                  <strong>Product tour sandbox:</strong> finish one passage at 92%+ accuracy. Results are shown here
-                  only — nothing is saved to your streak, XP, or weekly report.
-                </p>
-              ) : null}
-              <ChatTypingDrill
-                sandboxMode={tourPracticeMode}
-                onAttempt={(s, meta) => {
-                  if (tourPracticeMode) {
-                    if (s.finished && s.accuracy >= 92) {
-                      setTourTypingComplete(true);
-                      recordTourPracticeDone();
+              <div
+                className={
+                  tourPracticeMode
+                    ? "rounded-xl border-2 border-[var(--siya-accent)] bg-[var(--siya-white)] p-1 shadow-[0_0_0_4px_color-mix(in_srgb,var(--siya-accent)_18%,transparent)]"
+                    : undefined
+                }
+                data-tour-highlight={tourPracticeMode ? "practice-typing" : undefined}
+              >
+                {tourPracticeMode ? (
+                  <p className="mb-2 px-2 pt-2 text-[11px] font-medium leading-snug text-[var(--siya-accent)]">
+                    Tour · finish one passage at 92%+ — sandbox only (no XP / streak write).
+                  </p>
+                ) : null}
+                <ChatTypingDrill
+                  sandboxMode={tourPracticeMode}
+                  onAttempt={(s, meta) => {
+                    if (tourPracticeMode) {
+                      if (s.finished && s.accuracy >= 92) {
+                        setTourTypingComplete(true);
+                        recordTourPracticeDone();
+                      }
+                      return;
                     }
-                    return;
-                  }
-                  afterProgress(
-                    recordTypingAttempt(
-                      { wpm: s.wpm, accuracy: s.accuracy },
-                      {
-                        passageId: meta.passageId,
-                        awardDailyXp: s.finished && s.accuracy >= 92,
-                      },
-                    ),
-                  );
-                  if (s.finished && s.accuracy >= 92) recordTourPracticeDone();
-                }}
-              />
-              {tourPracticeMode && tourTypingComplete ? (
-                <p className={`mt-3 ${portalStatusSuccessBox} text-xs font-semibold ${portalStatusSuccessText}`}>
-                  Tour drill complete — sandbox only (not saved to your progress).
-                </p>
-              ) : null}
+                    afterProgress(
+                      recordTypingAttempt(
+                        { wpm: s.wpm, accuracy: s.accuracy },
+                        {
+                          passageId: meta.passageId,
+                          awardDailyXp: s.finished && s.accuracy >= 92,
+                        },
+                      ),
+                    );
+                    if (s.finished && s.accuracy >= 92) recordTourPracticeDone();
+                  }}
+                />
+                {tourPracticeMode && tourTypingComplete ? (
+                  <p className={`m-2 ${portalStatusSuccessBox} text-xs font-semibold ${portalStatusSuccessText}`}>
+                    Tour drill complete — sandbox only (not saved to your progress).
+                  </p>
+                ) : null}
+              </div>
             </section>
           ) : null}
 

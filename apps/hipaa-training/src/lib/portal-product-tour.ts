@@ -186,6 +186,8 @@ export const PORTAL_TOUR_STEPS: TourStep[] = [
 ];
 
 const SESSION = {
+  /** Set only by explicit startTour(); cleared on dismiss/finish. Required for coach UI. */
+  active: "siya-portal-tour-active",
   ask: "siya-tour-ask-done",
   practice: "siya-tour-practice-done",
   feedback: "siya-tour-feedback-done",
@@ -199,10 +201,18 @@ export function mergePortalTourState(
   if (!local && !remote) return undefined;
   const l = local ? normalizePortalTour(local) : undefined;
   const r = remote ? normalizePortalTour(remote) : undefined;
+  const lDone = Boolean(l && (l.finishedAt || l.dismissedAt));
+  const rDone = Boolean(r && (r.finishedAt || r.dismissedAt));
+  // Never resurrect an in-progress remote tour over a local Pause/Finish.
+  if (lDone && rDone) {
+    const lAt = Math.max(l!.finishedAt ?? 0, l!.dismissedAt ?? 0);
+    const rAt = Math.max(r!.finishedAt ?? 0, r!.dismissedAt ?? 0);
+    return lAt >= rAt ? l : r;
+  }
+  if (lDone) return l;
+  if (rDone) return r;
   if (l?.startedAt && !l.finishedAt && !l.dismissedAt) return l;
   if (r?.startedAt && !r.finishedAt && !r.dismissedAt) return r;
-  if (l?.finishedAt || l?.dismissedAt) return l;
-  if (r?.finishedAt || r?.dismissedAt) return r;
   return l ?? r;
 }
 
@@ -230,6 +240,20 @@ export function isPortalTourFinished(profile: PortalProfile | null | undefined):
 
 export function isPortalTourInProgress(profile: PortalProfile | null | undefined): boolean {
   const t = profile?.productTour;
+  if (!t?.startedAt || t.finishedAt || t.dismissedAt) return false;
+  // Explicit session gate: profile.startedAt alone must not reopen the coach after
+  // login / new browser. Only startTour() sets SESSION.active.
+  try {
+    if (typeof sessionStorage === "undefined") return false;
+    return sessionStorage.getItem(SESSION.active) === "1";
+  } catch {
+    return false;
+  }
+}
+
+/** True when profile has an unfinished tour record (may or may not be session-active). */
+export function hasUnfinishedTourRecord(profile: PortalProfile | null | undefined): boolean {
+  const t = profile?.productTour;
   return Boolean(t?.startedAt && !t.finishedAt && !t.dismissedAt);
 }
 
@@ -241,7 +265,7 @@ export function isPortalTourInProgress(profile: PortalProfile | null | undefined
 export function shouldChainOnboardingToTour(profile: PortalProfile | null | undefined): boolean {
   if (!profile) return true;
   if (profile.onboardingComplete || profile.onboardingSkipped) return false;
-  if (isPortalTourFinished(profile) || isPortalTourInProgress(profile)) return false;
+  if (isPortalTourFinished(profile) || hasUnfinishedTourRecord(profile)) return false;
   return true;
 }
 
@@ -332,12 +356,26 @@ export function recordTourFeedbackDone(): void {
 }
 
 export function clearTourSessionFlags(): void {
-  if (typeof window === "undefined") return;
-  sessionStorage.removeItem(SESSION.ask);
-  sessionStorage.removeItem(SESSION.practice);
-  sessionStorage.removeItem(SESSION.feedback);
-  for (const step of PORTAL_TOUR_STEPS) {
-    if (step.kind === "visit") sessionStorage.removeItem(SESSION.visit(step.id));
+  try {
+    if (typeof sessionStorage === "undefined") return;
+    sessionStorage.removeItem(SESSION.active);
+    sessionStorage.removeItem(SESSION.ask);
+    sessionStorage.removeItem(SESSION.practice);
+    sessionStorage.removeItem(SESSION.feedback);
+    for (const step of PORTAL_TOUR_STEPS) {
+      if (step.kind === "visit") sessionStorage.removeItem(SESSION.visit(step.id));
+    }
+  } catch {
+    /* private mode / SSR */
+  }
+}
+
+export function markTourSessionActive(): void {
+  try {
+    if (typeof sessionStorage === "undefined") return;
+    sessionStorage.setItem(SESSION.active, "1");
+  } catch {
+    /* private mode / SSR */
   }
 }
 

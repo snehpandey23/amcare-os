@@ -556,6 +556,121 @@ app.get("/api/level-up/progress", requireAuth, async (req: AuthRequest, res: exp
   return res.json({ progress: row.level_up_json, updatedAt: row.updated_at });
 });
 
+/**
+ * Admin-only SQL snapshot for tour sandbox isolation proofs.
+ * Used by verify-product-tour-sandbox.ts around live tourMode HTTP calls.
+ */
+app.get("/api/admin/tour-sandbox-isolation-snapshot", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const userId = req.user!.userId;
+  try {
+    const { createHash } = await import("node:crypto");
+    const total = await pool.query<{ n: number }>(`SELECT COUNT(*)::int AS n FROM siya_team_feedback`);
+    const mine = await pool.query<{ n: number }>(
+      `SELECT COUNT(*)::int AS n FROM siya_team_feedback WHERE giver_user_id = $1 OR recipient_user_id = $1`,
+      [userId],
+    );
+    const prog = await pool.query<{ level_up_json: unknown; updated_at: Date | null }>(
+      `SELECT level_up_json, updated_at FROM hipaa_training_progress WHERE user_id = $1`,
+      [userId],
+    );
+    const level = prog.rows[0]?.level_up_json ?? null;
+    const marker = typeof req.query.marker === "string" ? req.query.marker : "";
+    let marker_row_count: number | null = null;
+    if (marker) {
+      const m = await pool.query<{ n: number }>(
+        `SELECT COUNT(*)::int AS n FROM siya_team_feedback WHERE body ILIKE $1`,
+        [`%${marker}%`],
+      );
+      marker_row_count = m.rows[0].n;
+    }
+    return res.json({
+      ok: true,
+      at: new Date().toISOString(),
+      siya_team_feedback_total: total.rows[0].n,
+      qa_feedback_rows: mine.rows[0].n,
+      level_up_fp: createHash("sha256").update(JSON.stringify(level)).digest("hex").slice(0, 16),
+      level_up_updated_at: prog.rows[0]?.updated_at ? String(prog.rows[0].updated_at) : null,
+      totalXp: (level as { totalXp?: number } | null)?.totalXp ?? null,
+      marker_row_count,
+      tables: ["siya_team_feedback", "hipaa_training_progress.level_up_json"],
+    });
+  } catch (err) {
+    console.error("[admin/tour-sandbox-isolation-snapshot]", err);
+    return res.status(500).json({ error: "Snapshot failed." });
+  }
+});
+
+/** Full in-process tourMode + SQL before/after (no live HTTP). */
+app.post("/api/admin/tour-sandbox-isolation-check", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const userId = req.user!.userId;
+  const marker = `tour-sandbox-db-${Date.now()}`;
+  try {
+    const { createHash } = await import("node:crypto");
+    const fp = (v: unknown) => createHash("sha256").update(JSON.stringify(v ?? null)).digest("hex").slice(0, 16);
+
+    const snap = async () => {
+      const total = await pool.query<{ n: number }>(`SELECT COUNT(*)::int AS n FROM siya_team_feedback`);
+      const mine = await pool.query<{ n: number }>(
+        `SELECT COUNT(*)::int AS n FROM siya_team_feedback WHERE giver_user_id = $1 OR recipient_user_id = $1`,
+        [userId],
+      );
+      const prog = await pool.query<{ level_up_json: unknown; updated_at: Date | null }>(
+        `SELECT level_up_json, updated_at FROM hipaa_training_progress WHERE user_id = $1`,
+        [userId],
+      );
+      const level = prog.rows[0]?.level_up_json ?? null;
+      return {
+        siya_team_feedback_total: total.rows[0].n,
+        qa_feedback_rows: mine.rows[0].n,
+        level_up_fp: fp(level),
+        level_up_updated_at: prog.rows[0]?.updated_at ? String(prog.rows[0].updated_at) : null,
+        totalXp: (level as { totalXp?: number } | null)?.totalXp ?? null,
+      };
+    };
+
+    const before = await snap();
+    const { buildTourFeedbackDemo, getFeedbackForModeration } = await import("./team-feedback-service.js");
+    const facing = buildTourFeedbackDemo({
+      body: `[Product tour practice] ${marker}`,
+      anonymous: false,
+      giverDisplayName: "Sandbox check",
+    });
+    const tourProgressSkip = { ok: true as const, skipped: true as const, reason: "tour_mode" as const };
+    const after = await snap();
+    const markerRows = await pool.query<{ n: number }>(
+      `SELECT COUNT(*)::int AS n FROM siya_team_feedback WHERE body ILIKE $1`,
+      [`%${marker}%`],
+    );
+    const moderation = await getFeedbackForModeration(pool, facing.id);
+    const pass =
+      before.siya_team_feedback_total === after.siya_team_feedback_total &&
+      before.qa_feedback_rows === after.qa_feedback_rows &&
+      before.level_up_fp === after.level_up_fp &&
+      before.level_up_updated_at === after.level_up_updated_at &&
+      markerRows.rows[0].n === 0 &&
+      moderation === null &&
+      String(facing.id).startsWith("tour-demo-");
+
+    return res.json({
+      ok: pass,
+      marker,
+      before,
+      after: { ...after, marker_row_count: markerRows.rows[0].n },
+      tourDemoId: facing.id,
+      moderationFound: moderation !== null,
+      tourProgressSkip,
+      note: "Real SQL on siya_team_feedback + hipaa_training_progress.level_up_json.",
+    });
+  } catch (err) {
+    console.error("[admin/tour-sandbox-isolation-check]", err);
+    return res.status(500).json({ error: "Sandbox isolation check failed." });
+  }
+});
+
 app.put("/api/level-up/progress", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });

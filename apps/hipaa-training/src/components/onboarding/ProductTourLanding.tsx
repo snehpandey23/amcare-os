@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
@@ -15,6 +14,7 @@ import {
 import { trainingLinkPrimaryClass } from "@/components/training/training-ui";
 import { portalBtnGhostSm, portalH1, portalPage, portalSection } from "@/lib/portal-ui";
 import { BRAND } from "@/lib/brand";
+import { PortalNavLink } from "@/components/training/PortalNavLink";
 
 /** Later re-entry / re-run for the essentials tour (first-run chains from onboarding). */
 export function ProductTourLanding() {
@@ -47,9 +47,9 @@ export function ProductTourLanding() {
       </p>
       <p className="mt-2 text-xs text-[var(--siya-text-muted)]">
         Personalization lives under{" "}
-        <Link href="/onboarding" className="font-semibold underline underline-offset-2">
+        <PortalNavLink href="/onboarding" className="font-semibold underline underline-offset-2">
           Personalize
-        </Link>
+        </PortalNavLink>
         . You can take this tour anytime — it is not required to use My day.
       </p>
 
@@ -80,9 +80,9 @@ export function ProductTourLanding() {
             Begin essentials tour
           </button>
         )}
-        <Link href="/" className={`${portalBtnGhostSm} text-center`}>
+        <PortalNavLink href="/" className={`${portalBtnGhostSm} text-center`}>
           Back to My day
-        </Link>
+        </PortalNavLink>
       </div>
     </div>
   );
