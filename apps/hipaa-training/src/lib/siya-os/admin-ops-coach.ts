@@ -8,6 +8,7 @@ import { taskIsComplete } from "@/lib/tasks-types";
 import type { AdminOpsSnapshot } from "./admin-ops-snapshot";
 import { synthesizeAdminOpsAnswer } from "./admin-ops-llm";
 import { isStaffWorkplaceConcernQuery } from "./flows";
+import { isOpsTestAccount } from "@/lib/ops-dashboard-view";
 
 /** Staff how-to: patient asks for manager — must not steal into Daily Plan. */
 export function isPatientManagerRequestQuery(message: string): boolean {
@@ -122,7 +123,10 @@ export function isOpsEngagementAsk(message: string): boolean {
 
   const osOrPortal = /\b(os|siya\s*os|portal|staff\s*(?:app|portal)|assist|siya\s*assist)\b/.test(t);
   const usageVerb =
-    /\b(who(?:'s|’s| is| are)?\s+using|using|usage|adoption|how\s+often|engagement)\b/.test(t);
+    /\b(who(?:'s|’s| is| are)?\s+using|using|used|usage|adoption|how\s+often|engagement)\b/.test(t) ||
+    /\bwho\s+all\b[\s\S]{0,40}\b(used|using|have\s+used)\b/.test(t) ||
+    /\bwho\s+(has|have)\s+used\b/.test(t);
+  const windowHint = /\b(last|past|this)\s+week\b|\b(7|fourteen|14|30)\s*days?\b|\brecently\b/.test(t);
   const problemsFacing =
     /\b(what\s+)?problems?\b/.test(t) && /\b(facing|have|having|they)\b/.test(t);
   const teamUsageLabel = /\b(staff|team)\s+(engagement|usage|adoption)\b/.test(t);
@@ -131,6 +135,7 @@ export function isOpsEngagementAsk(message: string): boolean {
 
   if (teamUsageLabel || opsSectionA) return true;
   if (osOrPortal && usageVerb) return true;
+  if (osOrPortal && windowHint && /\bwho\b/.test(t)) return true;
   if (osOrPortal && problemsFacing) return true;
   if (usageVerb && problemsFacing && /\b(team|staff|people|they)\b/.test(t)) return true;
   if (/\bhow\s+often\b/.test(t) && /\b(staff|team|people|using|ask|turns?)\b/.test(t)) return true;
@@ -447,7 +452,59 @@ function opsBriefMessage(snapshot: AdminOpsSnapshot): string {
   return `${planDayMessage(snapshot)}\n\n---\n\n**Board summary:** ${snapshot.boardOpen.length} active · ${snapshot.boardOverdue.length} overdue.`;
 }
 
-/** Pointer only — live numbers live on the Ops dashboard, not in chat. */
+/** Live roster answer for “who used the OS last week” (+ Ops link for Ask detail). */
+export function opsEngagementMessage(snapshot: AdminOpsSnapshot, windowDays = 7): string {
+  const cutoff = Date.now() - windowDays * 24 * 60 * 60 * 1000;
+  const active = snapshot.roster
+    .filter((m) => !m.deactivatedAt)
+    .filter((m) => !isOpsTestAccount(m.email))
+    .map((m) => {
+      const raw = m.lastLoginAt;
+      const ms = raw ? Date.parse(raw) : NaN;
+      return {
+        label: (m.name && m.name.trim()) || m.email,
+        email: m.email,
+        lastLoginAt: Number.isFinite(ms) ? ms : null,
+      };
+    })
+    .filter((m) => m.lastLoginAt != null && m.lastLoginAt! >= cutoff)
+    .sort((a, b) => (b.lastLoginAt ?? 0) - (a.lastLoginAt ?? 0));
+
+  const fmt = (ms: number) =>
+    new Date(ms).toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+  if (!active.length) {
+    return [
+      `**Portal logins (last ${windowDays} days, IST):** no non-test accounts have a recorded login in that window.`,
+      "",
+      "Open **Ops → Section A · Staff engagement** for Ask turns and practice activity (not the same as login).",
+    ].join("\n");
+  }
+
+  const lines = active.slice(0, 20).map((m) => `• **${m.label}** — last login ${fmt(m.lastLoginAt!)} IST`);
+  const more =
+    active.length > 20 ? `\n…and **${active.length - 20}** more (see Ops dashboard).` : "";
+
+  return [
+    `**Who used the staff portal in the last ${windowDays} days** (login signal; QA/test accounts hidden):`,
+    "",
+    `**${active.length}** people:`,
+    ...lines,
+    more,
+    "",
+    "For **Ask turns / engagement segments**, open **Ops → Section A · Staff engagement** (thumbs 👍/👎 are not team usage).",
+  ]
+    .filter((l) => l !== "")
+    .join("\n");
+}
+
+/** Pointer only — used when we can’t load the admin roster. */
 export function opsEngagementPointerMessage(): string {
   return [
     "For **who’s using the portal**, **how often**, and related staff signals, open the **Ops dashboard**.",
@@ -540,7 +597,7 @@ export async function runAdminOpsCoach(
       messageOut = opsBriefMessage(snapshot);
       break;
     case "ops_engagement":
-      messageOut = opsEngagementPointerMessage();
+      messageOut = opsEngagementMessage(snapshot);
       break;
     default:
       return null;

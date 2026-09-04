@@ -615,6 +615,32 @@ export async function runSiyaAssistantAsync(
         },
       };
     }
+    if (opsIntent.kind === "ops_engagement") {
+      return {
+        message: polishStaffMessage(
+          [
+            "Staff portal **usage / who logged in** is on the **Ops dashboard** (admin).",
+            "",
+            "Open **Ops → Section A · Staff engagement** for Ask activity by person — I won’t invent a list here.",
+          ].join("\n"),
+        ),
+        chunks: [],
+        sources: [],
+        portalLinks: [
+          { label: "Ops dashboard", href: "/ops" },
+          { label: "Team", href: "/team" },
+        ],
+        opsCoPilot: false,
+        ruleFinal: true,
+        knowledgeGap: false,
+        routing: {
+          department: founderCoach ? "Leadership" : "General",
+          task: founderCoach ? "Founder Talk" : "Ops engagement",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
     // Staff: personal task asks must not soft-stop — list My day from /api/tasks/me.
     if (
       opsIntent.kind === "task_status" ||

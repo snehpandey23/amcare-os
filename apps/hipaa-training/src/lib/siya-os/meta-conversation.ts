@@ -165,6 +165,53 @@ const FEELINGS = [
   "If you need a person, talk to a teammate or your lead. For work, ask an SOP, billing path, or who owns something.",
 ].join("\n");
 
+/** Short courtesy reply — also used when staff ask Assist to “say hello / how was your day first”. */
+const GREETING_COURTESY = [
+  "Hi — I’m **Siya Assist**, a staff help desk (not a companion chat), so I keep openings short on purpose.",
+  "",
+  "Ask me about policies, SOPs, tools, or who to contact. I’ll use approved internal guides first.",
+].join("\n");
+
+/** Bare hi/hello/how-are-you — keep cheap so we don’t soft-stop or auto-capture gaps. */
+function isShortGreeting(t: string): boolean {
+  if (t.length >= 40) return false;
+  return /^(hi+|hello+|hey+|how\s+(are|r)\s+(you|u)|how'?s\s+it\s+going|how\s+was\s+your\s+day)\b/.test(t);
+}
+
+/**
+ * Staff asking Assist to open with social small-talk (“just say hello how are you… first”).
+ * These are product-shape asks, not missing SOPs — must not become knowledgeGap / auto-email.
+ */
+function isGreetingStyleAsk(t: string): boolean {
+  if (/\bjust\s+say\s+(hello|hi|hey)\b/.test(t)) return true;
+  if (
+    /\b(say\s+)?(hello|hi|hey)\b/.test(t) &&
+    /\b(how\s+(are|r)\s+(you|u)|how\s+was\s+your\s+day)\b/.test(t)
+  ) {
+    return true;
+  }
+  if (
+    /\b(greet\s+me|friendli(er)?\s+(greeting|hello|opening)|start\s+with\s+(a\s+)?(hello|hi|greeting)|say\s+hi\s+first)\b/.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  if (/\bhow\s+was\s+your\s+day\b/.test(t) && t.length < 80) return true;
+  return false;
+}
+
+/** True when an Ask should never auto-capture a knowledge-gap email (courtesy / greeting noise). */
+export function isCourtesyNoiseForGapCapture(text: string): boolean {
+  const t = text
+    .trim()
+    .toLowerCase()
+    .replace(/[’‘]/g, "'")
+    .replace(/\s+/g, " ");
+  if (!t) return false;
+  return isShortGreeting(t) || isGreetingStyleAsk(t);
+}
+
 const NOTIFY = [
   "**Notify owner** logs a **knowledge-gap click** for the suggested department lead’s weekly digest (or founder if there’s no lead).",
   "",
@@ -903,8 +950,8 @@ const CASES: MetaCase[] = [
   {
     id: "greeting",
     category: "courtesy",
-    test: (t) => /^(hi|hello|hey|how\s+(are|r)\s+(you|u)|how'?s\s+it\s+going)\b/.test(t) && t.length < 28,
-    answer: "Hi — ask me about policies, SOPs, tools, or who to contact. I'll use approved internal guides first.",
+    test: (t) => isShortGreeting(t) || isGreetingStyleAsk(t),
+    answer: GREETING_COURTESY,
   },
   {
     id: "thanks",
@@ -1096,7 +1143,19 @@ export const META_SMOKE_SAMPLES: { id: string; text: string; mustMatch: RegExp; 
     mustMatch: /can.?t run the personalization|Open onboarding/i,
     mustNot: /Preferred name, assistant label, training reminders, department|direct link to a portal screen/i,
   },
-  { id: "greeting", text: "how r u", mustMatch: /Hi —/i, mustNot: /approved staff guide/i },
+  { id: "greeting", text: "how r u", mustMatch: /Hi —|Siya Assist/i, mustNot: /approved staff guide|right staff guide for that yet/i },
+  {
+    id: "greeting",
+    text: "just say hello how are you how was your day first",
+    mustMatch: /help desk|Siya Assist|policies, SOPs/i,
+    mustNot: /right staff guide for that yet|Company memory/i,
+  },
+  {
+    id: "greeting",
+    text: "how was your day",
+    mustMatch: /Hi —|Siya Assist|help desk/i,
+    mustNot: /right staff guide for that yet/i,
+  },
   { id: "frustration", text: "this isnt working good", mustMatch: /Sorry|This week.?s plan|Notify owner|domain/i, mustNot: /right staff guide for that yet|approved staff guide for that/i },
   {
     id: "frustration",

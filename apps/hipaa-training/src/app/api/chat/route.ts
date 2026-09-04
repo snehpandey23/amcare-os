@@ -7,6 +7,7 @@ import { BRAND } from "@/lib/brand";
 import { persistAssistGap } from "@/lib/siya-os/assist-gap-persist";
 import { priorContextTurns } from "@/lib/siya-os/gap-email-context";
 import { isSyntheticGapEmailProbe } from "@/lib/siya-os/gap-email-mode";
+import { isCourtesyNoiseForGapCapture } from "@/lib/siya-os/meta-conversation";
 
 export const maxDuration = 60;
 
@@ -190,7 +191,13 @@ export async function POST(req: Request) {
       autoResolved?: boolean;
       syntheticProbe?: boolean;
     } | null = null;
-    if (authToken && result.knowledgeGap === true && !result.refused) {
+    // Courtesy / greeting-style asks must never auto-email a knowledge gap (noise).
+    if (
+      authToken &&
+      result.knowledgeGap === true &&
+      !result.refused &&
+      !isCourtesyNoiseForGapCapture(message)
+    ) {
       const department = result.routing?.department || (surface === "founder-coach" ? "Leadership" : "General");
       const task =
         result.routing?.task || (surface === "founder-coach" ? "Founder Talk" : "Unmatched Ask");

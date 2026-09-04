@@ -10,6 +10,8 @@ export type AdminOpsRosterMember = {
   id: string;
   email: string;
   name: string | null;
+  lastLoginAt?: string | null;
+  deactivatedAt?: string | null;
 };
 
 export type AdminOpsSnapshot = {
@@ -54,10 +56,15 @@ export async function fetchAdminOpsSnapshot(token: string): Promise<AdminOpsSnap
     apiGet<{ tasks: TaskRecord[] }>(token, "/api/tasks/board?status=todo"),
     apiGet<{ tasks: TaskRecord[] }>(token, "/api/tasks/board?overdue=1"),
     apiGet<TeamPulse>(token, "/api/team/pulse"),
-    apiGet<{ members: { id: string; email: string; name: string | null }[] }>(
-      token,
-      "/api/admin/team/roster",
-    ),
+    apiGet<{
+      members: {
+        id: string;
+        email: string;
+        name: string | null;
+        lastLoginAt?: string | null;
+        deactivatedAt?: string | null;
+      }[];
+    }>(token, "/api/admin/team/roster"),
   ]);
 
   const inProgress = await apiGet<{ tasks: TaskRecord[] }>(
@@ -77,7 +84,13 @@ export async function fetchAdminOpsSnapshot(token: string): Promise<AdminOpsSnap
     boardOpen,
     boardOverdue: overdueBoard?.tasks ?? [],
     pulse: pulse ?? null,
-    roster: (rosterRes?.members ?? []).map((m) => ({ id: m.id, email: m.email, name: m.name })),
+    roster: (rosterRes?.members ?? []).map((m) => ({
+      id: m.id,
+      email: m.email,
+      name: m.name,
+      lastLoginAt: m.lastLoginAt ?? null,
+      deactivatedAt: m.deactivatedAt ?? null,
+    })),
   };
 }
 
