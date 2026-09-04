@@ -1,7 +1,7 @@
 # Siya Brand Style Lock — social graphics (CANONICAL)
 
 ```text
-Status: CANONICAL for agents — 2026-08-10
+Status: CANONICAL for agents — 2026-08-10 · palette note 2026-09-04 (champagne tertiary)
 Applies to: Every carousel, static, LinkedIn banner, Pinterest graphic under brand/
 Parents: VISUAL-OS.md v2.1 · VISUAL-OS-TEMPLATES.md · scripts/compose_*.py
 Freeze: Do not invent layouts, colors, or type. Classify → template → replace fields only.
@@ -22,6 +22,7 @@ Agents (desktop **and** mobile) must **Read this file** before generating or com
 | Deep Siya Navy | `#001878` | RGB `(0, 24, 120)` — headlines + primary type |
 | Dark Navy | `#0A246B` | RGB `(10, 36, 107)` — supporting / sub |
 | Siya Magenta | `#D81088` | RGB `(216, 16, 136)` — accent ≤**3 words** · rules · CTA outline |
+| Champagne gold (tertiary) | `#C4A574` | RGB `(196, 165, 116)` — **website + shared palette addition approved 2026-09-04**. Pills · tags · thin dividers · soft section washes only. **Never** a filled button / competing CTA alongside magenta (or the logo CTA gradient). Not logo-sampled — deliberate expansion. Alias: `--accent-tertiary` / `--gold-accent`. |
 | Display font | **Georgia** (Bold for hero) | Headlines only — **no Inter / Roboto / system sans headlines** |
 | Body font | **Arial** Bold (compositor) | Sub-headlines, bullets, footer |
 | Aspect (default) | **4:5 · 1080×1350** | Instagram / Meta carousel + static |
@@ -77,7 +78,7 @@ Stopping at a raw generated photo or freehand overlay = off-brand.
 
 ## Quick self-audit (every frame)
 
-- [ ] Cream `#F4EFE7` · Navy `#001878` · Magenta `#D81088` only for type accents  
+- [ ] Cream `#F4EFE7` · Navy `#001878` · Magenta `#D81088` only for type accents · Champagne `#C4A574` only for tertiary chrome (pills/tags/dividers — never CTA fill)  
 - [ ] Georgia headline · no plum · no brown type · no text shadow  
 - [ ] Soft scrim / soft dissolve — **not** hard L seam  
 - [ ] Single full-opacity photo · face clear  

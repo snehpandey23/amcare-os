@@ -12,9 +12,17 @@
   --white: #ffffff;
   --primary: #001878;
   --primary-hover: #0A246B; /* Dark Navy — navy element hover only */
-  --accent: #D81088; /* filled accent CTAs / brand highlights */
-  --accent-hover: #A80C6A; /* accent fill hover */
+  --accent: #D81088; /* filled accent CTAs / brand highlights (solid for non-button uses) */
+  --accent-hover: #A80C6A; /* accent fill hover (solid fallback) */
   --accent-accessible: #A80C6A; /* text links + outline borders/text (WCAG AA on cream/white) */
+  /* Logo-sampled primary CTA fill — mark magenta→violet→navy (subtle, not rainbow) */
+  --accent-gradient: linear-gradient(145deg, #d81088 0%, #c32889 28%, #87218b 68%, #642eae 100%);
+  --accent-gradient-hover: linear-gradient(145deg, #c32889 0%, #87218b 40%, #642eae 100%);
+  /* Champagne gold — tertiary only (pills/tags/dividers/washes). Never a button fill. */
+  --accent-tertiary: #C4A574;
+  --accent-tertiary-soft: rgba(196, 165, 116, 0.22);
+  --accent-tertiary-wash: rgba(196, 165, 116, 0.1);
+  --gold-accent: var(--accent-tertiary);
   --navy: var(--primary);
   --dark-navy: #0A246B;
   --brand: var(--accent);
@@ -662,8 +670,8 @@ button.secondary:hover {
 .ds-cta-band { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%); color: var(--white); border-radius: 16px; padding: 40px 28px; text-align: center; }
 .ds-cta-band h3 { color: var(--white); margin-bottom: 12px; }
 .ds-cta-band p { color: rgba(255,255,255,0.92); margin-bottom: 20px; }
-.ds-cta-band .button { background: var(--accent); border: none; }
-.ds-cta-band .button:hover { background: var(--accent-hover); }
+.ds-cta-band .button { background: var(--accent-gradient); background-color: var(--accent); border: none; color: var(--white); }
+.ds-cta-band .button:hover { background: var(--accent-gradient-hover); color: var(--white); }
 .ds-cta-band .button.secondary { background: transparent; border: 2px solid rgba(255,255,255,0.9); color: var(--white); }
 .ds-cta-band .button.secondary:hover { background: rgba(255,255,255,0.15); color: var(--white); }
 
@@ -805,15 +813,34 @@ button.secondary:hover {
   margin-bottom: 24px;
 }
 
-.hero-merged .button {
-  background: var(--accent);
+/* Primary conversion CTA on photo heroes — logo gradient (not flat magenta) */
+.hero-merged .button:not(.secondary):not(.ds-button--secondary),
+.hero-merged .button.ds-button--primary {
+  background: var(--accent-gradient);
+  background-color: var(--accent);
   color: var(--white);
   border: none;
 }
 
-.hero-merged .button:hover {
-  background: var(--accent-hover);
+.hero-merged .button:not(.secondary):not(.ds-button--secondary):hover,
+.hero-merged .button.ds-button--primary:hover {
+  background: var(--accent-gradient-hover);
   color: var(--white);
+}
+
+/* One primary per screen: paired hero CTAs stay ghost outline */
+.hero-merged .button.secondary,
+.hero-merged .button.ds-button--secondary {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  color: var(--white);
+}
+
+.hero-merged .button.secondary:hover,
+.hero-merged .button.ds-button--secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.95);
 }
 
 .hero-merged .hero-ctas {
@@ -1283,14 +1310,30 @@ button.secondary:hover {
   margin-top: 0;
 }
 
-.hero-fullwidth .button {
-  background: var(--accent);
+.hero-fullwidth .button:not(.secondary):not(.ds-button--secondary),
+.hero-fullwidth .button.ds-button--primary {
+  background: var(--accent-gradient);
+  background-color: var(--accent);
   color: #fff;
   border: none;
 }
 
-.hero-fullwidth .button:hover {
-  background: var(--accent-hover);
+.hero-fullwidth .button:not(.secondary):not(.ds-button--secondary):hover,
+.hero-fullwidth .button.ds-button--primary:hover {
+  background: var(--accent-gradient-hover);
+  color: #fff;
+}
+
+.hero-fullwidth .button.secondary,
+.hero-fullwidth .button.ds-button--secondary {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  color: #fff;
+}
+
+.hero-fullwidth .button.secondary:hover,
+.hero-fullwidth .button.ds-button--secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
   color: #fff;
 }
 
@@ -1531,7 +1574,8 @@ button.secondary:hover {
   font-size: 14px;
   font-weight: 600;
   color: var(--primary);
-  background: rgba(28, 25, 23, 0.1);
+  background: color-mix(in srgb, var(--accent-tertiary) 28%, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--accent-tertiary) 42%, #ffffff);
   border-radius: 999px;
   margin-bottom: 16px;
 }
@@ -1572,6 +1616,22 @@ button.secondary:hover {
 #pricing .section-header .lead {
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Thin champagne rule above centered section titles (tertiary accent — not a CTA) */
+#how-it-works .section-header::before,
+#services .section-header::before,
+#pricing .section-header::before,
+#reviews .section-header::before,
+#doctor .section-header::before,
+#why-not-traditional .section-header::before,
+.ds-section-header--center::before {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: var(--accent-tertiary);
+  margin: 0 auto 16px;
 }
 
 #how-it-works .cta-block,
@@ -1990,7 +2050,7 @@ button.secondary:hover {
   display: block;
   font-size: 12px;
   font-weight: 600;
-  color: var(--accent-accessible);
+  color: color-mix(in srgb, var(--accent-tertiary) 55%, var(--primary));
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 12px;
@@ -2193,7 +2253,8 @@ button.secondary:hover {
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--primary);
-  background: rgba(28, 25, 23, 0.08);
+  background: color-mix(in srgb, var(--accent-tertiary) 26%, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--accent-tertiary) 40%, #ffffff);
   padding: 4px 12px;
   border-radius: 999px;
 }
@@ -3478,7 +3539,7 @@ a.asrs-interest-btn:hover {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--primary);
+  color: color-mix(in srgb, var(--accent-tertiary) 45%, var(--primary));
   margin-bottom: 12px;
 }
 
@@ -7812,9 +7873,9 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
 .hero-symptom-chips span {
   font-size: 0.8rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.92);
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: var(--primary);
+  background: color-mix(in srgb, var(--accent-tertiary) 28%, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--accent-tertiary) 42%, #ffffff);
   padding: 5px 12px;
   border-radius: 20px;
 }
@@ -11035,8 +11096,12 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   gap: 16px;
   margin: 0 0 28px;
   padding: 20px 18px;
-  background: linear-gradient(180deg, rgba(28, 25, 23, 0.06) 0%, rgba(216, 16, 136, 0.05) 100%);
-  border: 1px solid rgba(28, 25, 23, 0.12);
+  background: linear-gradient(
+    180deg,
+    var(--accent-tertiary-wash) 0%,
+    color-mix(in srgb, var(--accent-tertiary) 14%, var(--page-bg)) 100%
+  );
+  border: 1px solid color-mix(in srgb, var(--accent-tertiary) 35%, var(--border));
   border-radius: var(--radius);
 }
 .homepage-trust-stat {
@@ -11429,14 +11494,15 @@ a.text-link:hover,
    Tokens unchanged — usage/proportion only.
    ============================================ */
 
-/* Hero: keep primary Meet & Greet as the one filled accent; demote paired CTA to ghost outline */
+/* Hero: keep primary Meet & Greet as logo gradient; demote paired CTA to ghost outline */
 body.page-home .hero-merged .hero-ctas .button.ds-button--primary {
-  background: var(--accent);
+  background: var(--accent-gradient);
+  background-color: var(--accent);
   color: var(--white);
   border: none;
 }
 body.page-home .hero-merged .hero-ctas .button.ds-button--primary:hover {
-  background: var(--accent-hover);
+  background: var(--accent-gradient-hover);
   color: var(--white);
 }
 body.page-home .hero-merged .hero-ctas .button.secondary,
@@ -11512,18 +11578,16 @@ body.page-home .cookie-notice__policy:focus-visible {
   color: var(--primary);
 }
 
-/* Decorative / secondary accent → navy or neutral */
+/* Decorative accents — tertiary gold / navy links (never a second magenta fill) */
 body.page-home .flow-step-num {
-  color: var(--primary);
+  color: color-mix(in srgb, var(--accent-tertiary) 55%, var(--primary));
 }
 body.page-home .symptoms-card-secondary,
 body.page-home .symptoms-card--link .symptoms-card-secondary,
 body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-secondary {
   color: var(--primary);
 }
-body.page-home .homepage-trust-summary {
-  background: linear-gradient(180deg, rgba(28, 25, 23, 0.06) 0%, rgba(0, 24, 120, 0.05) 100%);
-}
+/* Trust wash inherits sitewide champagne highlight */
 body.page-home .cta-band--warm {
   /* Drop leftover teal wash; stay in cream / white family */
   background: linear-gradient(160deg, var(--bg-subtle) 0%, #ffffff 55%, var(--page-bg) 100%);

@@ -198,8 +198,9 @@ Runtime values live in CSS (`styles.css` / `design-system/tokens.css`).
 | Section tint | Quiet separation; lighter than page, not identical | Cream tint (`#F9F6F1`) |
 | Primary | Trust, headings, brand chrome, primary CTAs | Deep Siya Navy (`#001878`) |
 | Primary hover / supporting navy | Secondary navy for hover on navy elements only | Dark Navy (`#0A246B`) |
-| Accent | Filled accent CTAs, brand highlights | Siya Magenta (`#D81088`) |
-| Accent hover / accessible text | Accent fill hover; text links; outline button border/text (AA on cream/white) | Accessible magenta (`#A80C6A`) |
+| Accent | Solid for chips/highlights; **filled primary CTAs use logo gradient** | Magenta `#D81088` · CTA gradient `#D81088 → #C32889 → #87218B → #642EAE` |
+| Accent hover / accessible text | Accent fill hover (gradient darkens); text links; outline button border/text | Accessible magenta (`#A80C6A`) · CTA hover gradient (violet-weighted) |
+| Tertiary / champagne gold | Pills · tags · thin dividers · soft section washes — **never** a button fill or second CTA | Champagne gold (`#C4A574`) — palette addition approved **2026-09-04**; CSS `--accent-tertiary` / `--gold-accent`. Same hex + rules as `BRAND-STYLE-LOCK.md`. |
 | Text | Readable stone, not pure marketing black | Warm charcoal |
 | Cards / surfaces | White content on cream page | `#ffffff` on `#F4EFE7` |
 | Shadows | Neutral / warm — never blue-tinted corporate glow | Soft charcoal shadows |

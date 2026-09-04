@@ -12,6 +12,12 @@
   --ds-color-accent: #D81088;
   --ds-color-accent-hover: #A80C6A;
   --ds-color-accent-accessible: #A80C6A;
+  --ds-color-accent-gradient: linear-gradient(145deg, #d81088 0%, #c32889 28%, #87218b 68%, #642eae 100%);
+  --ds-color-accent-gradient-hover: linear-gradient(145deg, #c32889 0%, #87218b 40%, #642eae 100%);
+  /* Champagne gold — tertiary only (pills/tags/dividers/washes). Never a button fill. */
+  --ds-color-accent-tertiary: #C4A574;
+  --ds-color-accent-tertiary-soft: rgba(196, 165, 116, 0.22);
+  --ds-color-accent-tertiary-wash: rgba(196, 165, 116, 0.1);
   --ds-color-text: #1c1917;
   --ds-color-text-secondary: #57534e;
   --ds-color-text-muted: #78716c;
@@ -30,6 +36,12 @@
   --ds-accent: var(--ds-color-accent);
   --ds-accent-hover: var(--ds-color-accent-hover);
   --ds-accent-accessible: var(--ds-color-accent-accessible);
+  --ds-accent-gradient: var(--ds-color-accent-gradient);
+  --ds-accent-gradient-hover: var(--ds-color-accent-gradient-hover);
+  --ds-accent-tertiary: var(--ds-color-accent-tertiary);
+  --ds-accent-tertiary-soft: var(--ds-color-accent-tertiary-soft);
+  --ds-accent-tertiary-wash: var(--ds-color-accent-tertiary-wash);
+  --ds-gold-accent: var(--ds-color-accent-tertiary);
   --ds-text: var(--ds-color-text);
   --ds-text-secondary: var(--ds-color-text-secondary);
   --ds-text-muted: var(--ds-color-text-muted);

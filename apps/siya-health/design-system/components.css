@@ -50,14 +50,15 @@
 
 .ds-button--accent,
 .button.ds-button--accent {
-  background: var(--ds-accent);
+  background: var(--ds-accent-gradient);
+  background-color: var(--ds-accent); /* fallback */
   color: var(--ds-white);
   border: none;
 }
 
 .ds-button--accent:hover,
 .button.ds-button--accent:hover {
-  background: var(--ds-color-accent-hover);
+  background: var(--ds-accent-gradient-hover);
   color: var(--ds-white);
 }
 
@@ -139,7 +140,8 @@
   font-size: 14px;
   font-weight: 600;
   color: var(--ds-primary);
-  background: rgba(255, 255, 255, 0.92);
+  background: color-mix(in srgb, var(--ds-accent-tertiary) 28%, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--ds-accent-tertiary) 42%, #ffffff);
   border-radius: var(--ds-radius-pill);
   margin-bottom: var(--ds-space-4);
 }
@@ -315,7 +317,8 @@
 .ds-cta-secondary { /* alias */ }
 .ds-cta-lead-magnet .ds-cta-block__actions .button:first-child,
 .ds-cta-lead-magnet .ds-cta-block__actions .ds-button:first-child {
-  background: var(--ds-accent);
+  background: var(--ds-accent-gradient);
+  background-color: var(--ds-accent);
   color: var(--ds-white);
   border: none;
 }
@@ -762,9 +765,10 @@
   font-size: var(--ds-font-size-xs);
   font-weight: 500;
   padding: 4px 10px;
-  background: var(--ds-bg-subtle);
+  background: color-mix(in srgb, var(--ds-accent-tertiary) 26%, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--ds-accent-tertiary) 40%, #ffffff);
   border-radius: var(--ds-radius-pill);
-  color: var(--ds-text-secondary);
+  color: var(--ds-primary);
 }
 
 .ds-testimonial__quote {
