@@ -28,6 +28,7 @@ import {
 import { fetchSopsForRetrieval } from "@/lib/sop-api";
 import { fetchDecisionsForRetrieval } from "@/lib/knowledge-api";
 import { searchMemory } from "@/lib/memory-api";
+import { getTrainingApiUrl } from "@/lib/trainingConfig";
 import { displayDepartment, type Confidence, type Department } from "./departments";
 import {
   assessStaffMessageSafety,
@@ -202,11 +203,30 @@ function toolShortcutReply(text: string, task = "Tool bookmark"): SiyaReply | nu
 }
 
 async function resolveFeatureNavOpts(token: string | null): Promise<FeatureNavOpts> {
-  if (!token) return { isSignedIn: false, isAdmin: false };
+  if (!token) return { isSignedIn: false, isAdmin: false, isLead: false };
   const viewer = await fetchViewerIdentity(token);
+  const isAdmin = isPortalAdmin(viewer?.role);
+  let isLead = false;
+  if (viewer && !isAdmin) {
+    try {
+      const base = getTrainingApiUrl();
+      if (base) {
+        const res = await fetch(`${base}/api/knowledge/sops/my-ownership`, {
+          headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+        });
+        if (res.ok) {
+          const data = (await res.json().catch(() => ({}))) as { departments?: string[] };
+          isLead = (data.departments?.length ?? 0) > 0;
+        }
+      }
+    } catch {
+      isLead = false;
+    }
+  }
   return {
     isSignedIn: !!viewer,
-    isAdmin: isPortalAdmin(viewer?.role),
+    isAdmin,
+    isLead: isAdmin || isLead,
   };
 }
 

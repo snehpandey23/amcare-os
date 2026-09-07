@@ -70,7 +70,7 @@ assert.equal(items[0].title, "Oldest SOP");
 assert.equal(items[1].title, "Mid SOP");
 assert.equal(items[2].title, "Older gap");
 assert.equal(items[3].title, "Newer gap");
-assert.ok(items[0].href.includes("/memory/knowledge/sops?edit="));
+assert.ok(items[0].href.includes("/admin/sop-review?id="));
 assert.ok(items[2].href.includes("/lead/your-focus/gap/"));
 
 const six = buildLeadFocusItems({

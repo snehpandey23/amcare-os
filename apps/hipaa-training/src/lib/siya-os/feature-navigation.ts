@@ -14,6 +14,8 @@ export type FeatureNavHit = {
 
 export type FeatureNavOpts = {
   isAdmin?: boolean;
+  /** Department SOP lead (non-admin) — can open SOP review queue. */
+  isLead?: boolean;
   isSignedIn?: boolean;
 };
 
@@ -24,6 +26,8 @@ type FeatureDef = {
   blurb: string;
   section: string;
   adminOnly?: boolean;
+  /** Visible to admins and department leads. */
+  adminOrLead?: boolean;
   requiresAuth?: boolean;
   /** Match message (normalized). First match wins by order in FEATURES. */
   patterns: RegExp[];
@@ -368,9 +372,9 @@ export const PORTAL_FEATURES: FeatureDef[] = [
     label: "SOP review",
     href: "/admin/sop-review",
     section: "Admin",
-    adminOnly: true,
-    blurb: "Approve or send back pending SOPs.",
-    patterns: [/\b(sop\s+review|review\s+queue|pending\s+sops?\s+review)\b/],
+    adminOrLead: true,
+    blurb: "Read, approve, or send back pending policy SOPs.",
+    patterns: [/\b(sop\s+review|review\s+queue|pending\s+sops?\s+review|approve\s+sops?)\b/],
   },
   {
     id: "lead-your-focus",
@@ -464,6 +468,7 @@ export function isBroadCapabilityAsk(text: string): boolean {
 
 function featureAllowed(f: FeatureDef, opts?: FeatureNavOpts): boolean {
   if (f.adminOnly && !opts?.isAdmin) return false;
+  if (f.adminOrLead && !opts?.isAdmin && !opts?.isLead) return false;
   if (f.requiresAuth && opts?.isSignedIn === false) return false;
   return true;
 }

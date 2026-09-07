@@ -45,9 +45,9 @@ type Assignee = { id: string; name: string | null; email: string };
 type BucketKey = "draft" | "submitted" | "sent_back" | "live";
 
 const BUCKETS: { key: BucketKey; title: string; hint: string }[] = [
-  { key: "draft", title: "Draft", hint: "Not submitted yet" },
-  { key: "submitted", title: "Submitted / in review", hint: "Waiting on admin — collaborative edit still open" },
+  { key: "draft", title: "My drafts", hint: "Not submitted yet" },
   { key: "sent_back", title: "Sent back", hint: "Needs changes after review" },
+  { key: "submitted", title: "In review", hint: "Waiting for lead/admin — open Read to review the full text" },
   { key: "live", title: "Live", hint: "Published for Ask" },
 ];
 
@@ -111,6 +111,8 @@ export function SopWorkspace() {
   const [notice, setNotice] = useState<string | null>(null);
   const [editorOpen, setEditorOpen] = useState(false);
   const [editing, setEditing] = useState<SopRecord | null>(null);
+  const [reading, setReading] = useState<SopRecord | null>(null);
+  const [tasksOpen, setTasksOpen] = useState(false);
   const [formDept, setFormDept] = useState("");
   const [formTitle, setFormTitle] = useState("");
   const [formBody, setFormBody] = useState("");
@@ -548,17 +550,19 @@ export function SopWorkspace() {
       <header>
         <p className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-accent)]">Knowledge · Layer 2</p>
         <h1 className={portalH1}>Department SOPs</h1>
-        <p className="mt-2 text-sm text-[var(--siya-text-secondary)]">
-          Any teammate can draft and submit <strong>department policy SOPs</strong> (prose docs for Ask). Daily operational
-          checklists for My day live in the{" "}
+        <p className="mt-2 max-w-xl text-sm text-[var(--siya-text-secondary)]">
+          Write a short policy guide for Ask, submit for review, then a lead or admin publishes it. Use{" "}
           <Link href="/memory/knowledge/sop-builder" className="font-semibold text-[var(--siya-accent)] hover:underline">
             AI checklist builder
-          </Link>
-          . Admin publishes when no department lead is assigned; leads approve their own departments.
+          </Link>{" "}
+          only for My day checklists — not policy docs.
         </p>
         {ctx?.isAdmin || (ctx?.myLeadSlugs?.length ?? 0) > 0 ? (
-          <Link href="/admin/sop-review" className={`mt-2 inline-block text-sm font-semibold ${portalLinkBack}`}>
-            SOP review queue →
+          <Link
+            href="/admin/sop-review"
+            className="mt-2 inline-block text-sm font-semibold text-[var(--siya-accent)] hover:underline"
+          >
+            Review submitted SOPs →
           </Link>
         ) : null}
       </header>
@@ -602,13 +606,27 @@ export function SopWorkspace() {
       </div>
 
       <section className={portalSection}>
-        <h2 className={portalH2}>Open SOP tasks</h2>
-        <p className="mt-1 text-xs text-[var(--siya-text-muted)]">Create or update assignments for your team.</p>
-        {loading ? (
-          <p className="mt-4 text-sm text-[var(--siya-text-muted)]">Loading…</p>
-        ) : tasks.length === 0 ? (
-          <p className="mt-4 text-sm text-[var(--siya-text-muted)]">No open tasks in this view.</p>
-        ) : (
+        <button
+          type="button"
+          className="flex w-full items-center justify-between gap-2 text-left"
+          onClick={() => setTasksOpen((v) => !v)}
+        >
+          <div>
+            <h2 className={portalH2}>Open SOP tasks {tasks.length ? `(${tasks.length})` : ""}</h2>
+            <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+              Assignments to create or update a guide — optional.
+            </p>
+          </div>
+          <span className="text-xs font-semibold text-[var(--siya-accent)]">
+            {tasksOpen ? "Hide" : "Show"}
+          </span>
+        </button>
+        {tasksOpen ? (
+          loading ? (
+            <p className="mt-4 text-sm text-[var(--siya-text-muted)]">Loading…</p>
+          ) : tasks.length === 0 ? (
+            <p className="mt-4 text-sm text-[var(--siya-text-muted)]">No open tasks in this view.</p>
+          ) : (
           <ul className="mt-4 space-y-3">
             {tasks.map((t) => (
               <li key={t.id} className={`${portalCard} text-sm`}>
@@ -668,13 +686,18 @@ export function SopWorkspace() {
               </li>
             ))}
           </ul>
-        )}
+          )
+        ) : null}
       </section>
 
       <section className={portalSection}>
         <h2 className={portalH2}>SOP library</h2>
         <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
-          Status columns for your drafts — edit stays open during Submitted / in review for you and admin.
+          Tap <strong>Read</strong> for the full text. Leads/admins approve from{" "}
+          <Link href="/admin/sop-review" className="font-semibold text-[var(--siya-accent)] hover:underline">
+            SOP review
+          </Link>
+          .
         </p>
         {loading ? (
           <p className="mt-4 text-sm text-[var(--siya-text-muted)]">Loading…</p>
@@ -699,41 +722,56 @@ export function SopWorkspace() {
                           <span className="text-[10px] uppercase text-[var(--siya-text-muted)]">{s.department}</span>
                         </div>
                         <h3 className="mt-2 font-semibold text-[var(--siya-primary)]">{s.title}</h3>
-                        <p className="mt-1 line-clamp-3 text-xs text-[var(--siya-text-secondary)]">{s.body || "—"}</p>
+                        <p className="mt-1 line-clamp-2 text-xs text-[var(--siya-text-secondary)]">{s.body || "—"}</p>
                         {s.reviewerComment ? (
                           <p className={`mt-2 px-2 py-1 text-xs ${portalStatusWarnBox} ${portalStatusWarnText}`}>
                             <strong>Reviewer:</strong> {s.reviewerComment}
                           </p>
                         ) : null}
                         <p className="mt-2 text-[10px] text-[var(--siya-text-muted)]">
-                          Owner {s.ownerName ?? "—"} · Review {s.reviewDate ?? "—"} · Half-life {s.halfLifeDays}d
-                        </p>
-                        <p className="mt-0.5 text-[10px] text-[var(--siya-text-muted)]">
-                          Created {formatSopWhen(s.createdAt)} · Updated {formatSopWhen(s.updatedAt)}
+                          Owner {s.ownerName ?? "—"}
                           {s.submittedAt ? ` · Submitted ${formatSopWhen(s.submittedAt)}` : ""}
                           {s.approvedAt ? ` · Published ${formatSopWhen(s.approvedAt)}` : ""}
                         </p>
-                        {canEditDept(s.department) && canEditStatus(s.status) ? (
-                          <div className="mt-3 flex flex-wrap gap-2">
-                            <button
-                              type="button"
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          <button
+                            type="button"
+                            className="text-xs font-semibold text-[var(--siya-accent)] underline"
+                            onClick={() => setReading(s)}
+                          >
+                            Read
+                          </button>
+                          {s.status === "pending_review" &&
+                          (ctx?.isAdmin || (ctx?.myLeadSlugs ?? []).includes(deptSlug(s.department))) ? (
+                            <Link
+                              href={`/admin/sop-review?id=${encodeURIComponent(s.id)}`}
                               className="text-xs font-semibold text-[var(--siya-accent)] underline"
-                              onClick={() => openEdit(s)}
                             >
-                              Edit
-                            </button>
-                            {s.status === "draft" || s.status === "needs_review" ? (
+                              Review / approve
+                            </Link>
+                          ) : null}
+                          {canEditDept(s.department) && canEditStatus(s.status) ? (
+                            <>
                               <button
                                 type="button"
-                                disabled={pending}
-                                className="rounded-lg bg-[var(--siya-primary)] px-3 py-1 text-xs font-semibold text-white disabled:opacity-50"
-                                onClick={() => void onSubmitReview(s.id)}
+                                className="text-xs font-semibold text-[var(--siya-accent)] underline"
+                                onClick={() => openEdit(s)}
                               >
-                                Submit for review
+                                Edit
                               </button>
-                            ) : null}
-                          </div>
-                        ) : null}
+                              {s.status === "draft" || s.status === "needs_review" ? (
+                                <button
+                                  type="button"
+                                  disabled={pending}
+                                  className="rounded-lg bg-[var(--siya-primary)] px-3 py-1 text-xs font-semibold text-white disabled:opacity-50"
+                                  onClick={() => void onSubmitReview(s.id)}
+                                >
+                                  Submit for review
+                                </button>
+                              ) : null}
+                            </>
+                          ) : null}
+                        </div>
                       </li>
                     ))}
                   </ul>
@@ -916,6 +954,72 @@ export function SopWorkspace() {
               ) : null}
             </div>
           </form>
+        </div>
+      ) : null}
+
+      {reading ? (
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center">
+          <div
+            className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-5 shadow-xl"
+            role="dialog"
+            aria-labelledby="sop-read-title"
+          >
+            <div className="flex flex-wrap items-start justify-between gap-2">
+              <div>
+                <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--siya-accent)]">
+                  {reading.department} · {SOP_STATUS_LABEL[reading.status]}
+                </p>
+                <h2 id="sop-read-title" className="mt-1 text-lg font-semibold text-[var(--siya-primary)]">
+                  {reading.title}
+                </h2>
+                <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+                  Owner {reading.ownerName ?? "—"}
+                  {reading.submittedAt ? ` · Submitted ${formatSopWhen(reading.submittedAt)}` : ""}
+                </p>
+              </div>
+              <button
+                type="button"
+                className={portalBtnGhostSm}
+                onClick={() => setReading(null)}
+              >
+                Close
+              </button>
+            </div>
+            {reading.reviewerComment ? (
+              <p className={`mt-3 px-2 py-1 text-xs ${portalStatusWarnBox} ${portalStatusWarnText}`}>
+                <strong>Reviewer:</strong> {reading.reviewerComment}
+              </p>
+            ) : null}
+            <article className="mt-4 whitespace-pre-wrap text-sm leading-relaxed text-[var(--siya-text)]">
+              {reading.body || "—"}
+            </article>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {reading.status === "pending_review" &&
+              (ctx?.isAdmin || (ctx?.myLeadSlugs ?? []).includes(deptSlug(reading.department))) ? (
+                <Link
+                  href={`/admin/sop-review?id=${encodeURIComponent(reading.id)}`}
+                  className={trainingLinkPrimaryClass}
+                >
+                  Open in review queue
+                </Link>
+              ) : null}
+              {canEditDept(reading.department) && canEditStatus(reading.status) ? (
+                <button
+                  type="button"
+                  className="rounded-lg border border-[var(--siya-border)] px-3 py-1.5 text-xs font-semibold"
+                  onClick={() => {
+                    setReading(null);
+                    openEdit(reading);
+                  }}
+                >
+                  Edit
+                </button>
+              ) : null}
+              <button type="button" className={portalBtnGhostSm} onClick={() => setReading(null)}>
+                Done
+              </button>
+            </div>
+          </div>
         </div>
       ) : null}
     </div>

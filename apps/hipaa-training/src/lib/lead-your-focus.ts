@@ -68,7 +68,7 @@ export function buildLeadFocusItems(opts: {
       kind: "sop",
       title: s.title?.trim() || "SOP pending review",
       subtitle: `SOP review · ${(when || "").slice(0, 10)}`,
-      href: `/memory/knowledge/sops?edit=${encodeURIComponent(s.id)}`,
+      href: `/admin/sop-review?id=${encodeURIComponent(s.id)}`,
       sortAt: when || s.createdAt,
     });
   }

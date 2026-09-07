@@ -179,8 +179,8 @@ async function main() {
     .every((i) => i.href.includes("/lead/your-focus/gap/"));
   const sopHrefOk = preview
     .filter((i) => i.kind === "sop")
-    .every((i) => i.href.includes("/memory/knowledge/sops?edit="));
-  if (gapHrefOk && sopHrefOk) pass("actionable-hrefs", "gap→detail · sop→?edit=");
+    .every((i) => i.href.includes("/admin/sop-review?id="));
+  if (gapHrefOk && sopHrefOk) pass("actionable-hrefs", "gap→detail · sop→review queue");
   else fail("actionable-hrefs", JSON.stringify(preview.map((p) => p.href)));
 
   const outDir = resolve(process.cwd(), "apps/hipaa-training/.cursor-verify");

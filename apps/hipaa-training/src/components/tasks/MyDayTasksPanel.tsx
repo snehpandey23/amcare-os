@@ -33,16 +33,21 @@ function applyTaskUpdate(data: { sop: TaskRecord[]; adhoc: TaskRecord[]; tasks: 
   return { ...data, sop, adhoc, tasks };
 }
 
-/** Knowledge-layer daily tasks → open the real SOP (or workspace). */
+/** Knowledge-layer daily tasks → review queue or workspace. */
 function knowledgeSopHref(task: TaskRecord): string | null {
   const id = task.id;
-  const review = id.match(/^kn-sop-(?:admin-review|lead-review|refresh)-(.+)$/);
-  if (review?.[1]) {
-    return `/memory/knowledge/sops?edit=${encodeURIComponent(review[1])}`;
+  const adminOrLeadReview = id.match(/^kn-sop-(?:admin-review|lead-review)-(.+)$/);
+  if (adminOrLeadReview?.[1]) {
+    return `/admin/sop-review?id=${encodeURIComponent(adminOrLeadReview[1])}`;
+  }
+  const refresh = id.match(/^kn-sop-refresh-(.+)$/);
+  if (refresh?.[1]) {
+    return `/memory/knowledge/sops?edit=${encodeURIComponent(refresh[1])}`;
   }
   if (id.startsWith("kn-sop-task-")) return "/memory/knowledge/sops";
   if (/^SOP review:/i.test(task.title)) return "/admin/sop-review";
-  if (/^(Lead review|Refresh SOP):/i.test(task.title)) return "/memory/knowledge/sops";
+  if (/^Lead review:/i.test(task.title)) return "/admin/sop-review";
+  if (/^Refresh SOP:/i.test(task.title)) return "/memory/knowledge/sops";
   return null;
 }
 

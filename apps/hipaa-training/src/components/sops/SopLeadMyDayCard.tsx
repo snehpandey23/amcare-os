@@ -70,14 +70,23 @@ export function SopLeadMyDayCard({ className = "" }: { className?: string }) {
             href: "/memory/knowledge/sops",
           });
         }
-        const pending = sops.filter(
+        const pendingMine = sops.filter(
           (s) => deptSet.has(s.department) && s.status === "pending_review" && s.ownerUserId === user.id,
         );
-        if (pending.length) {
+        const pendingDept = sops.filter(
+          (s) => deptSet.has(s.department) && s.status === "pending_review",
+        );
+        if (pendingDept.length) {
+          out.push({
+            id: "review-queue",
+            text: `${pendingDept.length} SOP${pendingDept.length === 1 ? "" : "s"} waiting for your review`,
+            href: "/admin/sop-review",
+          });
+        } else if (pendingMine.length) {
           out.push({
             id: "pending",
-            text: `${pending.length} SOP${pending.length === 1 ? "" : "s"} waiting on admin approval`,
-            href: "/memory/knowledge/sops",
+            text: `${pendingMine.length} of your SOP${pendingMine.length === 1 ? "" : "s"} in review`,
+            href: "/admin/sop-review",
           });
         }
         if (!out.length) {
@@ -113,11 +122,11 @@ export function SopLeadMyDayCard({ className = "" }: { className?: string }) {
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className={portalH3}>SOP work queue</h2>
         <div className="flex flex-wrap items-center gap-3 text-xs font-semibold">
+          <PortalNavLink href="/admin/sop-review" className="text-[var(--siya-accent)] hover:underline">
+            Review queue →
+          </PortalNavLink>
           <PortalNavLink href="/memory/knowledge/sops" className="text-[var(--siya-accent)] hover:underline">
             Department SOPs →
-          </PortalNavLink>
-          <PortalNavLink href="/memory/knowledge/sop-builder" className="text-[var(--siya-accent)] hover:underline">
-            AI checklist builder →
           </PortalNavLink>
         </div>
       </div>
