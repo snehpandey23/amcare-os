@@ -1531,6 +1531,83 @@ app.post("/api/assist/threads/:id/turns", requireAuth, async (req: AuthRequest, 
   return res.status(201).json(turn);
 });
 
+app.get("/api/admin/shift/late-start-nudge-stats", requireAuth, requireAdmin, async (_req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS shift_roster_late_start_nudge_log (
+        id TEXT PRIMARY KEY,
+        roster_row_id TEXT NOT NULL,
+        user_id UUID NOT NULL,
+        recipient_emails JSONB NOT NULL DEFAULT '[]'::jsonb,
+        recipient_roles JSONB NOT NULL DEFAULT '[]'::jsonb,
+        resend_ids JSONB NOT NULL DEFAULT '[]'::jsonb,
+        sent_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+    const sends = await pool.query(
+      `SELECT COUNT(*)::int AS c, MIN(sent_at) AS first_sent, MAX(sent_at) AS last_sent
+       FROM shift_roster_reminder_sends WHERE send_bucket = 'late_start'`,
+    );
+    const log = await pool.query(
+      `SELECT COUNT(*)::int AS c, MIN(sent_at) AS first_sent, MAX(sent_at) AS last_sent
+       FROM shift_roster_late_start_nudge_log`,
+    );
+    const recent = await pool.query(
+      `SELECT s.sent_at, u.email, u.name, r.roster_date::text AS roster_date, r.shift_start,
+              s.resend_id
+       FROM shift_roster_reminder_sends s
+       JOIN hipaa_training_users u ON u.id = s.user_id
+       LEFT JOIN shift_roster r ON r.id = s.roster_row_id
+       WHERE s.send_bucket = 'late_start'
+       ORDER BY s.sent_at DESC
+       LIMIT 25`,
+    );
+    const buckets = await pool.query(
+      `SELECT send_bucket, COUNT(*)::int AS c, MIN(sent_at) AS first_sent, MAX(sent_at) AS last_sent
+       FROM shift_roster_reminder_sends
+       GROUP BY send_bucket
+       ORDER BY c DESC`,
+    );
+    const {
+      listLateStartNudgeCandidates,
+      LATE_START_GRACE_MINUTES,
+      LATE_START_LOOKBACK_HOURS,
+    } = await import("./shift-late-start-nudge.js");
+    const openCandidates = await listLateStartNudgeCandidates(pool);
+    return res.json({
+      ok: true,
+      graceMinutes: LATE_START_GRACE_MINUTES,
+      lookbackHours: LATE_START_LOOKBACK_HOURS,
+      lateStartSends: {
+        count: sends.rows[0]?.c ?? 0,
+        firstSent: sends.rows[0]?.first_sent ?? null,
+        lastSent: sends.rows[0]?.last_sent ?? null,
+      },
+      lateStartLog: {
+        count: log.rows[0]?.c ?? 0,
+        firstSent: log.rows[0]?.first_sent ?? null,
+        lastSent: log.rows[0]?.last_sent ?? null,
+      },
+      openCandidatesNow: openCandidates.length,
+      openCandidateEmails: openCandidates.slice(0, 20).map((c) => ({
+        email: c.email,
+        minutesLate: c.minutesLate,
+        shiftStart: c.shiftStart,
+        rosterDate: c.rosterDate,
+      })),
+      recentSends: recent.rows,
+      allSendBuckets: buckets.rows,
+      note:
+        "late_start count=0 means the nudge has never successfully mark-sent after email. Open candidates are currently late with no late_start send yet.",
+    });
+  } catch (e) {
+    console.error("[admin/late-start-nudge-stats]", e);
+    return res.status(500).json({ error: "Could not load late-start nudge stats." });
+  }
+});
+
 app.get("/api/admin/shift/today", requireAuth, requireAdmin, async (_req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
