@@ -10,6 +10,7 @@ export type LeadGapDigestGap = {
   id: string;
   department: string;
   taskLabel: string;
+  topicHint?: string;
   createdAt: string;
 };
 
@@ -29,7 +30,9 @@ export function buildLeadGapDigestEmail(opts: LeadGapDigestEmailInput): { subjec
   const link = `${staffAppBase()}/team`;
   const lines = opts.gaps.slice(0, 40).map((g, i) => {
     const day = g.createdAt.slice(0, 10);
-    return `${i + 1}. [${g.department}] ${g.taskLabel || "Missing approved policy"} (${day})`;
+    const hint = g.topicHint?.trim();
+    const label = hint || g.taskLabel || "Missing approved policy";
+    return `${i + 1}. [${g.department}] ${label} (${day})`;
   });
   return {
     subject: `[Siya] Knowledge gaps this week — ${opts.departments.join(", ") || "your departments"}`,
@@ -38,8 +41,8 @@ export function buildLeadGapDigestEmail(opts: LeadGapDigestEmailInput): { subjec
       "",
       `Open knowledge gaps for week of ${opts.weekStart} (your lead departments).`,
       "",
-      "Important: these counts are Notify owner clicks in Ask — not every unanswered query.",
-      "Each row is category/task only. Verbatim questions are never emailed or stored for digests.",
+      "Important: these counts are Notify owner / auto-gap clicks — not every unanswered Ask.",
+      "Each row is department + PHI-safe question hint (or task label). Identifiers are never stored when the guard trips.",
       "",
       ...lines,
       opts.gaps.length > 40 ? `…and ${opts.gaps.length - 40} more open gaps.` : "",

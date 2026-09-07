@@ -1,6 +1,7 @@
 import type pg from "pg";
 import { randomUUID } from "node:crypto";
 import { departmentToSlug, slugToDepartment } from "./sop-store.js";
+import { normalizeGapTopicHint, sanitizeGapTopicHint } from "./gap-topic-hint.js";
 
 let ensured = false;
 
@@ -9,7 +10,7 @@ export const FOUNDER_INSTANT_DEPARTMENTS = new Set(["Leadership", "General"]);
 
 export type AssistGapStatus = "open" | "resolved";
 
-/** How the gap entered the table — never stores question text. */
+/** How the gap entered the table. */
 export type AssistGapSignalType =
   | "no_match"
   | "notify_owner"
@@ -21,6 +22,8 @@ export type AssistGapRecord = {
   department: string;
   departmentSlug: string;
   taskLabel: string;
+  /** PHI-safe Ask question / pattern when guard passed; empty when redacted or historical. */
+  topicHint: string;
   status: AssistGapStatus;
   signalType: AssistGapSignalType;
   phiRedacted: boolean;
@@ -53,7 +56,7 @@ export type LeadGapDigestPayload = {
   name: string | null;
   weekStart: string;
   departments: string[];
-  gaps: { id: string; department: string; taskLabel: string; createdAt: string }[];
+  gaps: { id: string; department: string; taskLabel: string; topicHint?: string; createdAt: string }[];
 };
 
 /**
@@ -103,6 +106,12 @@ export async function ensureAssistTelemetryTables(pool: pg.Pool): Promise<void> 
   await pool.query(
     `CREATE INDEX IF NOT EXISTS idx_siya_assist_gaps_reported_by ON siya_assist_gaps(reported_by_user_id, created_at DESC)`,
   );
+  await pool.query(
+    `ALTER TABLE siya_assist_gaps ADD COLUMN IF NOT EXISTS topic_hint TEXT NOT NULL DEFAULT ''`,
+  );
+  await pool.query(
+    `CREATE INDEX IF NOT EXISTS idx_siya_assist_gaps_topic_hint ON siya_assist_gaps(department_slug, status, topic_hint)`,
+  );
 
   await pool.query(`
     CREATE TABLE IF NOT EXISTS siya_assist_feedback (
@@ -143,6 +152,7 @@ function rowToGap(row: Record<string, unknown>): AssistGapRecord {
     department: String(row.department || "General"),
     departmentSlug: String(row.department_slug || "general"),
     taskLabel: String(row.task_label || ""),
+    topicHint: String(row.topic_hint || ""),
     status,
     signalType: parseAssistGapSignalType(row.signal_type),
     phiRedacted: Boolean(row.phi_redacted),
@@ -246,27 +256,32 @@ export async function insertAssistGap(
     task: string;
     phiRedacted?: boolean;
     signalType?: AssistGapSignalType;
-    /** Optional reporter UUID only — never question text. */
+    /** Optional reporter UUID only. */
     reportedByUserId?: string | null;
+    /** Candidate Ask text — stored only after sanitize + when not PHI-redacted. */
+    topicHint?: string | null;
   },
 ): Promise<{ gap: AssistGapRecord; route: GapNotifyRoute; digestEligible: boolean }> {
   await ensureAssistTelemetryTables(pool);
   const route = await resolveGapNotifyRoute(pool, input.department);
   const signalType = parseAssistGapSignalType(input.signalType ?? "no_match");
   const reportedBy = parseReportedByUserId(input.reportedByUserId ?? null);
+  const phiRedacted = Boolean(input.phiRedacted);
+  const topicHint = sanitizeGapTopicHint(input.topicHint, { phiRedacted });
   await pool.query(
     `INSERT INTO siya_assist_gaps
-       (id, department, department_slug, task_label, status, phi_redacted, signal_type, reported_by_user_id)
-     VALUES ($1, $2, $3, $4, 'open', $5, $6, $7)
+       (id, department, department_slug, task_label, status, phi_redacted, signal_type, reported_by_user_id, topic_hint)
+     VALUES ($1, $2, $3, $4, 'open', $5, $6, $7, $8)
      ON CONFLICT (id) DO NOTHING`,
     [
       input.id,
       route.departmentLabel.slice(0, 64),
       route.departmentSlug,
       input.task.slice(0, 200),
-      Boolean(input.phiRedacted),
+      phiRedacted,
       signalType,
       reportedBy,
+      topicHint,
     ],
   );
   const gap =
@@ -276,9 +291,10 @@ export async function insertAssistGap(
       department: route.departmentLabel,
       departmentSlug: route.departmentSlug,
       taskLabel: input.task.slice(0, 200),
+      topicHint,
       status: "open" as const,
       signalType,
-      phiRedacted: Boolean(input.phiRedacted),
+      phiRedacted,
       reportedByUserId: reportedBy,
       createdAt: new Date().toISOString(),
       resolvedAt: null,
@@ -303,7 +319,9 @@ export async function listOpenGapsForViewer(
   await ensureSopTables(pool);
   if (opts.role === "admin") {
     const r = await pool.query(
-      `SELECT * FROM siya_assist_gaps WHERE status = 'open' ORDER BY created_at DESC LIMIT 200`,
+      `SELECT * FROM siya_assist_gaps
+       WHERE status = 'open' AND signal_type <> 'thumbs_down'
+       ORDER BY created_at DESC LIMIT 200`,
     );
     return r.rows.map((row) => rowToGap(row as Record<string, unknown>));
   }
@@ -312,7 +330,9 @@ export async function listOpenGapsForViewer(
   if (!slugs.length) return [];
   const r = await pool.query(
     `SELECT * FROM siya_assist_gaps
-     WHERE status = 'open' AND department_slug = ANY($1::text[])
+     WHERE status = 'open'
+       AND signal_type <> 'thumbs_down'
+       AND department_slug = ANY($1::text[])
      ORDER BY created_at DESC LIMIT 200`,
     [slugs],
   );
@@ -433,7 +453,7 @@ export async function buildLeadGapDigestPayloads(
 ): Promise<LeadGapDigestPayload[]> {
   await ensureAssistTelemetryTables(pool);
   const r = await pool.query(
-    `SELECT g.id, g.department, g.department_slug, g.task_label, g.created_at,
+    `SELECT g.id, g.department, g.department_slug, g.task_label, g.topic_hint, g.created_at,
             l.user_id, u.email, u.name, u.role
      FROM siya_assist_gaps g
      JOIN siya_department_leads l ON l.department_slug = g.department_slug AND l.user_id IS NOT NULL
@@ -475,6 +495,7 @@ export async function buildLeadGapDigestPayloads(
       id: String(row.id),
       department: dept,
       taskLabel: String(row.task_label || "Missing approved policy"),
+      topicHint: String(row.topic_hint || ""),
       createdAt: new Date(row.created_at as string).toISOString(),
     });
   }
@@ -540,6 +561,14 @@ export type RecurringGapPattern = {
   departmentLabel: string;
   taskLabel: string;
   normalizedTaskLabel: string;
+  /** Pattern key: question hint when available, else task bucket. */
+  patternKey: string;
+  /** Display: actual Ask question (PHI-safe) when captured; else empty. */
+  topicHint: string;
+  /** Up to a few distinct question samples in this cluster. */
+  sampleHints: string[];
+  /** question = real Ask text; task_bucket = old router label only. */
+  patternKind: "question" | "task_bucket";
   openGapCount: number;
   /** Distinct reporters with a UUID; 0 means historical-only / unknown people. */
   distinctPeople: number;
@@ -553,16 +582,14 @@ export type RecurringGapPattern = {
 };
 
 /**
- * Recurring knowledge-gap patterns for Ops B2.
- * Locked threshold: ≥3 open rows, same dept + normalized task_label, ≥2 distinct
- * reported_by_user_id, rolling 30 days. Excludes thumbs_down from the multi-staff count.
- *
- * Detection and surfacing only — never creates SOPs, assignments, or pending_review rows.
+ * Recurring knowledge-gap patterns for Ops.
+ * Prefer grouping by PHI-safe topic_hint (actual question). Fall back to task_label
+ * for historical rows with no hint.
+ * Threshold: ≥3 open rows, ≥2 distinct reporters, rolling 30 days (thumbs_down excluded).
  */
 export async function listRecurringGapPatterns(
   pool: pg.Pool,
   opts: {
-    /** Admin: all depts. Lead: restrict to these slugs. */
     departmentSlugs?: string[] | null;
     windowDays?: number;
     minOpenGaps?: number;
@@ -582,7 +609,6 @@ export async function listRecurringGapPatterns(
     deptClause = `AND department_slug = ANY($${params.length}::text[])`;
   }
 
-  // thumbs_down excluded from pattern detection (quality signal ≠ missing SOP).
   const r = await pool.query(
     `WITH eligible AS (
        SELECT
@@ -590,60 +616,58 @@ export async function listRecurringGapPatterns(
          department,
          department_slug,
          task_label,
+         topic_hint,
          reported_by_user_id,
          created_at,
-         lower(regexp_replace(trim(task_label), '\\s+', ' ', 'g')) AS norm_task
+         CASE
+           WHEN trim(topic_hint) <> '' THEN
+             'q:' || lower(regexp_replace(trim(topic_hint), '\\s+', ' ', 'g'))
+           ELSE
+             't:' || lower(regexp_replace(trim(task_label), '\\s+', ' ', 'g'))
+         END AS pattern_key,
+         CASE WHEN trim(topic_hint) <> '' THEN 'question' ELSE 'task_bucket' END AS pattern_kind
        FROM siya_assist_gaps
        WHERE status = 'open'
          AND signal_type <> 'thumbs_down'
          AND created_at >= NOW() - ($1::int * INTERVAL '1 day')
-         AND trim(task_label) <> ''
+         AND (trim(topic_hint) <> '' OR trim(task_label) <> '')
          ${deptClause}
      ),
      grouped AS (
        SELECT
          department_slug,
+         pattern_key,
+         (array_agg(pattern_kind ORDER BY created_at DESC))[1] AS pattern_kind,
          (array_agg(department ORDER BY created_at DESC))[1] AS department_label,
          (array_agg(task_label ORDER BY created_at DESC))[1] AS task_label,
-         norm_task,
+         (array_agg(topic_hint ORDER BY CASE WHEN trim(topic_hint) = '' THEN 1 ELSE 0 END, created_at DESC))[1] AS topic_hint,
+         array_remove(array_agg(DISTINCT NULLIF(trim(topic_hint), '')), NULL) AS sample_hints,
          COUNT(*)::int AS open_gap_count,
          COUNT(DISTINCT reported_by_user_id) FILTER (WHERE reported_by_user_id IS NOT NULL)::int AS distinct_people,
          MAX(created_at) AS last_seen_at,
          array_agg(id ORDER BY created_at DESC) AS gap_ids
        FROM eligible
-       GROUP BY department_slug, norm_task
+       GROUP BY department_slug, pattern_key
      )
      SELECT *
      FROM grouped
      WHERE open_gap_count >= $2
        AND distinct_people >= $3
-     ORDER BY distinct_people DESC, open_gap_count DESC, department_slug ASC, norm_task ASC
+     ORDER BY
+       CASE WHEN pattern_kind = 'question' THEN 0 ELSE 1 END,
+       distinct_people DESC,
+       open_gap_count DESC,
+       department_slug ASC,
+       pattern_key ASC
      LIMIT 50`,
     params,
   );
 
-  return r.rows.map((row) => {
-    const distinctPeople = Number(row.distinct_people) || 0;
-    const multiStaff = distinctPeople >= minDistinctPeople;
-    return {
-      departmentSlug: String(row.department_slug),
-      departmentLabel: String(row.department_label || "General"),
-      taskLabel: String(row.task_label || ""),
-      normalizedTaskLabel: String(row.norm_task || ""),
-      openGapCount: Number(row.open_gap_count) || 0,
-      distinctPeople,
-      multiStaff,
-      windowDays,
-      lastSeenAt: new Date(row.last_seen_at as string).toISOString(),
-      gapIds: Array.isArray(row.gap_ids) ? row.gap_ids.map(String) : [],
-      surfaceOnlyNote: "Surfaced for human action — no auto-draft.",
-    } satisfies RecurringGapPattern;
-  });
+  return r.rows.map((row) => mapRecurringRow(row, windowDays, true));
 }
 
 /**
  * Volume-only patterns (≥3 open, same key, 30d) that lack ≥2 known reporters.
- * Display label: "Volume pattern (people unknown)." Never auto-drafts.
  */
 export async function listVolumeGapPatternsUnknownPeople(
   pool: pg.Pool,
@@ -671,51 +695,87 @@ export async function listVolumeGapPatternsUnknownPeople(
          department,
          department_slug,
          task_label,
+         topic_hint,
          reported_by_user_id,
          created_at,
-         lower(regexp_replace(trim(task_label), '\\s+', ' ', 'g')) AS norm_task
+         CASE
+           WHEN trim(topic_hint) <> '' THEN
+             'q:' || lower(regexp_replace(trim(topic_hint), '\\s+', ' ', 'g'))
+           ELSE
+             't:' || lower(regexp_replace(trim(task_label), '\\s+', ' ', 'g'))
+         END AS pattern_key,
+         CASE WHEN trim(topic_hint) <> '' THEN 'question' ELSE 'task_bucket' END AS pattern_kind
        FROM siya_assist_gaps
        WHERE status = 'open'
          AND signal_type <> 'thumbs_down'
          AND created_at >= NOW() - ($1::int * INTERVAL '1 day')
-         AND trim(task_label) <> ''
+         AND (trim(topic_hint) <> '' OR trim(task_label) <> '')
          ${deptClause}
      ),
      grouped AS (
        SELECT
          department_slug,
+         pattern_key,
+         (array_agg(pattern_kind ORDER BY created_at DESC))[1] AS pattern_kind,
          (array_agg(department ORDER BY created_at DESC))[1] AS department_label,
          (array_agg(task_label ORDER BY created_at DESC))[1] AS task_label,
-         norm_task,
+         (array_agg(topic_hint ORDER BY CASE WHEN trim(topic_hint) = '' THEN 1 ELSE 0 END, created_at DESC))[1] AS topic_hint,
+         array_remove(array_agg(DISTINCT NULLIF(trim(topic_hint), '')), NULL) AS sample_hints,
          COUNT(*)::int AS open_gap_count,
          COUNT(DISTINCT reported_by_user_id) FILTER (WHERE reported_by_user_id IS NOT NULL)::int AS distinct_people,
          MAX(created_at) AS last_seen_at,
          array_agg(id ORDER BY created_at DESC) AS gap_ids
        FROM eligible
-       GROUP BY department_slug, norm_task
+       GROUP BY department_slug, pattern_key
      )
      SELECT *
      FROM grouped
      WHERE open_gap_count >= $2
        AND distinct_people < 2
-     ORDER BY open_gap_count DESC, department_slug ASC, norm_task ASC
+     ORDER BY
+       CASE WHEN pattern_kind = 'question' THEN 0 ELSE 1 END,
+       open_gap_count DESC,
+       department_slug ASC,
+       pattern_key ASC
      LIMIT 50`,
     params,
   );
 
-  return r.rows.map((row) => ({
+  return r.rows.map((row) => mapRecurringRow(row, windowDays, false));
+}
+
+function mapRecurringRow(
+  row: Record<string, unknown>,
+  windowDays: number,
+  multiStaffDefault: boolean,
+): RecurringGapPattern {
+  const distinctPeople = Number(row.distinct_people) || 0;
+  const patternKind = row.pattern_kind === "question" ? "question" : "task_bucket";
+  const topicHint = String(row.topic_hint || "").trim();
+  const taskLabel = String(row.task_label || "");
+  const sampleRaw = Array.isArray(row.sample_hints) ? row.sample_hints.map(String).filter(Boolean) : [];
+  const sampleHints = (sampleRaw.length ? sampleRaw : topicHint ? [topicHint] : []).slice(0, 5);
+  const patternKey = String(row.pattern_key || "");
+  return {
     departmentSlug: String(row.department_slug),
     departmentLabel: String(row.department_label || "General"),
-    taskLabel: String(row.task_label || ""),
-    normalizedTaskLabel: String(row.norm_task || ""),
+    taskLabel,
+    normalizedTaskLabel: normalizeGapTaskLabel(taskLabel) || normalizeGapTopicHint(topicHint),
+    patternKey,
+    topicHint,
+    sampleHints,
+    patternKind,
     openGapCount: Number(row.open_gap_count) || 0,
-    distinctPeople: Number(row.distinct_people) || 0,
-    multiStaff: false,
+    distinctPeople,
+    multiStaff: multiStaffDefault ? distinctPeople >= 2 : false,
     windowDays,
     lastSeenAt: new Date(row.last_seen_at as string).toISOString(),
     gapIds: Array.isArray(row.gap_ids) ? row.gap_ids.map(String) : [],
-    surfaceOnlyNote: "Surfaced for human action — no auto-draft.",
-  }));
+    surfaceOnlyNote:
+      patternKind === "question"
+        ? "Real Ask wording (PHI-safe) — write or merge an SOP if needed."
+        : "Older rows only have a router bucket label — new gaps store the question when safe.",
+  };
 }
 
 export async function markLeadGapDigestSent(

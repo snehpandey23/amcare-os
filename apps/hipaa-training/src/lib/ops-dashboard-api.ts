@@ -57,6 +57,10 @@ export type OpsRecurringGapPattern = {
   departmentLabel: string;
   taskLabel: string;
   normalizedTaskLabel: string;
+  patternKey?: string;
+  topicHint?: string;
+  sampleHints?: string[];
+  patternKind?: "question" | "task_bucket";
   openGapCount: number;
   distinctPeople: number;
   multiStaff: boolean;

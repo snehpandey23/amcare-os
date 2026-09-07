@@ -3,6 +3,13 @@
  * Tokens live in `src/app/globals.css` — use these instead of ad-hoc Tailwind per screen.
  */
 
+/**
+ * Consolidated portal UI class strings.
+ * Tokens live in `src/app/globals.css` — use these instead of ad-hoc Tailwind per screen.
+ * List length: use `PORTAL_LIST_VISIBLE_CAP` + `CappedStack` from `@/lib/portal-list-cap` /
+ * `@/components/ops/CappedStack` — max ~5 similar rows, then an overflow box.
+ */
+
 export const portalPage = "mx-auto max-w-3xl space-y-6 px-4 py-8 md:px-6";
 
 /** My day / Assist chat — same width for staff Ask and admin Founder Talk. */

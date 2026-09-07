@@ -8,6 +8,7 @@ import { persistAssistGap } from "@/lib/siya-os/assist-gap-persist";
 import { priorContextTurns } from "@/lib/siya-os/gap-email-context";
 import { isSyntheticGapEmailProbe } from "@/lib/siya-os/gap-email-mode";
 import { isCourtesyNoiseForGapCapture } from "@/lib/siya-os/meta-conversation";
+import { assessStaffMessageSafety } from "@/lib/siya-os/phi-guard";
 
 export const maxDuration = 60;
 
@@ -204,12 +205,14 @@ export async function POST(req: Request) {
       const chatCategory =
         surface === "founder-coach" ? "Leadership · Founder Talk" : `${department} · ${task}`;
       const syntheticProbe = isSyntheticGapEmailProbe(message);
+      const safety = assessStaffMessageSafety(message);
       const persisted = await persistAssistGap({
         token: authToken,
         department,
         task,
         signalType: "no_match",
-        phiRedacted: true,
+        phiRedacted: safety.blocked,
+        topicHint: safety.blocked ? "" : message,
         sendFounderInstantEmail: true,
         chatCategory,
         botReply: result.message,

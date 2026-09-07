@@ -6,6 +6,8 @@ export type AssistGapRecord = {
   department: string;
   departmentSlug: string;
   taskLabel: string;
+  /** PHI-safe Ask question when captured; empty on older / redacted rows. */
+  topicHint?: string;
   status: "open" | "resolved";
   phiRedacted: boolean;
   createdAt: string;

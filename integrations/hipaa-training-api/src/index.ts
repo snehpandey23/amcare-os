@@ -1048,12 +1048,13 @@ app.post("/api/assist/gaps", requireAuth, async (req: AuthRequest, res: express.
       "./assist-telemetry.js"
     );
     // Staff always stamp themselves. Admins may set reportedByUserId (UUID only) for
-    // multi-staff pattern verification / historical repair — never question text.
+    // multi-staff pattern verification / historical repair — never raw PHI.
     let reportedByUserId: string | null = req.user!.userId;
     if (req.user!.role === "admin") {
       const override = parseReportedByUserId(req.body?.reportedByUserId);
       if (override) reportedByUserId = override;
     }
+    const topicHint = typeof req.body?.topicHint === "string" ? req.body.topicHint : "";
     const { gap, route, digestEligible } = await insertAssistGap(pool, {
       id: id || newGapId(),
       department,
@@ -1061,6 +1062,7 @@ app.post("/api/assist/gaps", requireAuth, async (req: AuthRequest, res: express.
       phiRedacted,
       signalType: parseAssistGapSignalType(signalRaw),
       reportedByUserId,
+      topicHint,
     });
     return res.status(201).json({
       ok: true,
@@ -1108,7 +1110,7 @@ app.get("/api/assist/gaps", requireAuth, async (req: AuthRequest, res: express.R
     return res.json({
       gaps,
       honestyNote:
-        "Counts reflect Notify owner clicks in Ask — not every unanswered query. Category and task label only; question text is never stored.",
+        "Counts reflect Notify owner / auto-gap clicks — not every unanswered Ask. Similar topics are grouped. PHI-safe question hints are stored when the guard passes; thumbs-down quality votes are omitted from this list.",
     });
   } catch (err) {
     console.error("[assist/gaps list]", err);

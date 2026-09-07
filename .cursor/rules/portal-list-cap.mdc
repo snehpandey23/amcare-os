@@ -1,0 +1,28 @@
+---
+description: Cap stacked ops lists at ~5 rows; overflow becomes one summary box
+globs: apps/hipaa-training/src/components/ops/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Portal list length (ops / lead surfaces)
+
+Long walls of near-identical rows look bad and are hard to scan.
+
+## Rule
+
+1. Soft-cap stacked lists at **5** visible items (`PORTAL_LIST_VISIBLE_CAP` in `portal-list-cap.ts`).
+2. If there are more, **do not** keep rendering the rest — use one **overflow summary box** (`CappedStack` + `ListOverflowBox`).
+3. Prefer **grouping** similar rows first (same dept + topic), then cap the groups.
+4. Overflow copy should name what’s hidden (counts + top labels), not dump another mini-list.
+
+## Use
+
+```tsx
+import { CappedStack, ListOverflowBox } from "@/components/ops/CappedStack";
+import { summarizeHiddenLabels } from "@/lib/portal-list-cap";
+```
+
+## Don’t
+
+- Infinite “show more” that still paints 40+ similar cards by default
+- Tables of 50 identical knowledge-gap rows without clustering

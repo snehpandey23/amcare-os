@@ -85,6 +85,8 @@ export async function POST(req: Request) {
       department,
       task,
       phiRedacted,
+      topicHint: phiRedacted ? "" : question,
+      userQuestion: question,
       signalType: "notify_owner",
       sendFounderInstantEmail: false,
     });
@@ -170,7 +172,7 @@ export async function POST(req: Request) {
       emailError: routeMode === "founder_instant" && !email.sent && email.delivery !== "dry_run" ? email.error : undefined,
       message,
       honestyNote:
-        "Notify owner: founder_instant emails report emailDelivery (live | dry_run | test_recipient). Synthetic probes force dry_run and auto-resolve. Postgres stores category/task only.",
+        "Notify owner: founder_instant emails report emailDelivery (live | dry_run | test_recipient). Synthetic probes force dry_run and auto-resolve. Postgres stores category/task plus a PHI-safe question hint when the guard passes.",
     });
   } catch {
     return Response.json({ error: "Something went wrong." }, { status: 500 });

@@ -73,7 +73,7 @@ const { text, subject } = buildLeadGapDigestEmail({
 });
 assert(!text.includes(planted), "digest must not include planted PHI question");
 assert(!text.includes("Jane Doe"), "digest must not include patient name");
-assert(text.includes("Notify owner clicks"), "digest honesty note");
+assert(text.includes("Notify owner / auto-gap"), "digest honesty note");
 assert(text.includes("Missing approved policy"), "digest includes task label");
 assert(text.includes("Clinical Operations"), "digest includes department");
 assert(subject.includes("Knowledge gaps"), "digest subject");

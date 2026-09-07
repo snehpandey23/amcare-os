@@ -1,11 +1,12 @@
 /**
  * Persist Assist knowledge gaps to auth API + optional founder instant email.
- * Postgres stores category/task only — never verbatim question text.
+ * Postgres stores category/task + optional PHI-safe topic_hint (never when guard trips).
  */
 import { getTrainingApiUrl } from "@/lib/trainingConfig";
 import { sendAutoGapFounderEmail, escalationInbox } from "@/lib/siya-os/escalation-email";
 import type { GapContextTurn } from "@/lib/siya-os/gap-email-context";
 import type { GapEmailDeliveryMode } from "@/lib/siya-os/gap-email-mode";
+import { sanitizeGapTopicHint } from "@/lib/siya-os/gap-topic-hint";
 
 export type AssistGapSignalType = "no_match" | "notify_owner" | "thumbs_down" | "unresolved_repeat";
 
@@ -28,7 +29,15 @@ export type PersistAssistGapResult = {
     reason?: string;
     leadName?: string | null;
   };
-  gap?: { id: string; department: string; departmentSlug: string; taskLabel: string; status: string; signalType?: string };
+  gap?: {
+    id: string;
+    department: string;
+    departmentSlug: string;
+    taskLabel: string;
+    topicHint?: string;
+    status: string;
+    signalType?: string;
+  };
 };
 
 export async function persistAssistGap(opts: {
@@ -36,9 +45,10 @@ export async function persistAssistGap(opts: {
   department: string;
   task: string;
   signalType: AssistGapSignalType;
-  /** Auto-capture: never pass question text to Postgres. */
   phiRedacted?: boolean;
   id?: string;
+  /** PHI-safe Ask wording candidate — server re-sanitizes; empty when redacted. */
+  topicHint?: string | null;
   /** When true and route is founder_instant, send enriched PHI-safe email. */
   sendFounderInstantEmail?: boolean;
   chatCategory?: string;
@@ -53,6 +63,8 @@ export async function persistAssistGap(opts: {
   if (!base) return { ok: false, persistError: "API URL not configured" };
 
   const id = opts.id || `gap-${Date.now()}`;
+  const phiRedacted = opts.phiRedacted ?? true;
+  const topicHint = sanitizeGapTopicHint(opts.topicHint ?? opts.userQuestion, { phiRedacted });
   try {
     const res = await fetch(`${base}/api/assist/gaps`, {
       method: "POST",
@@ -61,8 +73,9 @@ export async function persistAssistGap(opts: {
         id,
         department: opts.department,
         task: opts.task,
-        phiRedacted: opts.phiRedacted ?? true,
+        phiRedacted,
         signalType: opts.signalType,
+        topicHint,
       }),
     });
     const data = (await res.json().catch(() => ({}))) as PersistAssistGapResult & { error?: string };

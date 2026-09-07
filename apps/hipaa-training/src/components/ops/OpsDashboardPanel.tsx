@@ -27,6 +27,8 @@ import {
 import { WeeklyCheckInFeed } from "@/components/ops/WeeklyCheckInFeed";
 import { ChatSimOpsReviewPanel } from "@/components/ops/ChatSimOpsReviewPanel";
 import { OpsAttendanceHoursPanel } from "@/components/ops/OpsAttendanceHoursPanel";
+import { CappedStack, ListOverflowBox } from "@/components/ops/CappedStack";
+import { summarizeHiddenLabels } from "@/lib/portal-list-cap";
 import {
   portalBtnGhostSm,
   portalH1,
@@ -277,17 +279,35 @@ function RecurringGapPatternCard({
   volumeUnknown?: boolean;
 }) {
   const unknownPeople = volumeUnknown || !pattern.multiStaff;
+  const headline =
+    pattern.topicHint?.trim() ||
+    pattern.sampleHints?.[0]?.trim() ||
+    pattern.taskLabel;
+  const isQuestion = pattern.patternKind === "question" || Boolean(pattern.topicHint?.trim());
+  const extraSamples = (pattern.sampleHints || []).filter((h) => h && h !== headline).slice(0, 2);
+
   return (
     <article className="rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-4 py-3">
       <p className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-primary)]">
-        Keeps coming up
+        {isQuestion ? "Keeps coming up" : "Keeps coming up · router bucket"}
       </p>
       <p className="mt-1 text-sm font-medium text-[var(--siya-text)]">
-        {pattern.departmentLabel} ·{" "}
-        <code className="rounded bg-[var(--siya-bg-subtle)] px-1.5 py-0.5 text-[12px]">
-          {pattern.taskLabel}
-        </code>
+        {pattern.departmentLabel}
       </p>
+      <p className="mt-1 text-sm text-[var(--siya-text-secondary)]">
+        {isQuestion ? (
+          <span>“{headline}”</span>
+        ) : (
+          <code className="rounded bg-[var(--siya-bg-subtle)] px-1.5 py-0.5 text-[12px]">{headline}</code>
+        )}
+      </p>
+      {extraSamples.length > 0 ? (
+        <ul className="mt-1.5 space-y-0.5 text-xs text-[var(--siya-text-muted)]">
+          {extraSamples.map((s) => (
+            <li key={s}>also: “{s}”</li>
+          ))}
+        </ul>
+      ) : null}
       <p className="mt-2 text-sm tabular-nums text-[var(--siya-text-secondary)]">
         <span className="font-semibold text-[var(--siya-text)]">{pattern.openGapCount}</span> open
         gaps
@@ -307,13 +327,6 @@ function RecurringGapPatternCard({
       ) : null}
       <p className="mt-2 text-[11px] italic text-[var(--siya-text-muted)]">
         {pattern.surfaceOnlyNote || "Just a heads-up — nothing auto-drafts from here."}
-      </p>
-      <p className="mt-2 text-[11px] text-[var(--siya-text-muted)]">
-        Peek at matching rows in{" "}
-        <Link href="/team" className="font-semibold text-[var(--siya-accent)] underline">
-          Open knowledge gaps
-        </Link>
-        . Write or merge an SOP yourself if it needs one.
       </p>
     </article>
   );
@@ -747,16 +760,31 @@ export function OpsDashboardPanel() {
                   {leadsSorted.length === 0 ? (
                     <p className="text-sm text-[var(--siya-text-muted)]">No department leads assigned.</p>
                   ) : (
-                    <div className="space-y-3">
-                      {leadsSorted.map((row, idx) => (
+                    <CappedStack
+                      className="space-y-3"
+                      items={leadsSorted}
+                      renderItem={(row, idx) => (
                         <LeadCard
                           key={row.userId}
                           row={row}
                           highlightSelf={row.userId === user.id}
                           emphasize={idx === 0 && topLeadUrgent}
                         />
-                      ))}
-                    </div>
+                      )}
+                      renderOverflow={({ hiddenCount, hidden }) => {
+                        const { topLabels, extraLabelKinds } = summarizeHiddenLabels(
+                          hidden.map((h) => h.name?.trim() || h.email),
+                        );
+                        return (
+                          <ListOverflowBox
+                            title={`+${hiddenCount} more leads`}
+                            detail={`${topLabels.join(" · ")}${
+                              extraLabelKinds > 0 ? ` · +${extraLabelKinds} other` : ""
+                            }`}
+                          />
+                        );
+                      }}
+                    />
                   )}
                 </section>
               ) : null}
@@ -780,14 +808,19 @@ export function OpsDashboardPanel() {
                     Same questions keep coming
                   </h2>
                   <p className="mt-1 mb-4 text-xs text-[var(--siya-text-muted)]">
-                    Same department + topic, a few people asking, last 30 days. Just a heads-up — we don’t
-                    auto-write SOPs from this.
+                    Same department + question (when we have a PHI-safe hint), a few people asking, last 30
+                    days. Showing up to 5; the rest collapse into one box. We don’t auto-write SOPs from
+                    this.
                     {data.viewer.isAdmin ? " Showing all departments." : " Your lead departments only."}
                   </p>
                   {(() => {
                     const multi = data.recurringGapPatterns || [];
                     const volume = data.volumeGapPatternsUnknownPeople || [];
-                    if (!multi.length && !volume.length) {
+                    const all = [
+                      ...multi.map((p) => ({ pattern: p, volumeUnknown: false as const })),
+                      ...volume.map((p) => ({ pattern: p, volumeUnknown: true as const })),
+                    ];
+                    if (!all.length) {
                       return (
                         <p className="text-sm text-[var(--siya-text-muted)]">
                           Nothing repeating hard enough to call out right now.
@@ -795,21 +828,35 @@ export function OpsDashboardPanel() {
                       );
                     }
                     return (
-                      <div className="space-y-3">
-                        {multi.map((p) => (
+                      <CappedStack
+                        className="space-y-3"
+                        items={all}
+                        renderItem={({ pattern, volumeUnknown }) => (
                           <RecurringGapPatternCard
-                            key={`multi-${p.departmentSlug}-${p.normalizedTaskLabel}`}
-                            pattern={p}
+                            key={`${volumeUnknown ? "vol" : "multi"}-${pattern.patternKey || pattern.normalizedTaskLabel}-${pattern.departmentSlug}`}
+                            pattern={pattern}
+                            volumeUnknown={volumeUnknown}
                           />
-                        ))}
-                        {volume.map((p) => (
-                          <RecurringGapPatternCard
-                            key={`vol-${p.departmentSlug}-${p.normalizedTaskLabel}`}
-                            pattern={p}
-                            volumeUnknown
-                          />
-                        ))}
-                      </div>
+                        )}
+                        renderOverflow={({ hiddenCount, hidden }) => {
+                          const { topLabels, extraLabelKinds } = summarizeHiddenLabels(
+                            hidden.map(
+                              ({ pattern }) =>
+                                pattern.topicHint?.trim() ||
+                                pattern.sampleHints?.[0] ||
+                                `${pattern.departmentLabel} · ${pattern.taskLabel}`,
+                            ),
+                          );
+                          return (
+                            <ListOverflowBox
+                              title={`+${hiddenCount} more repeating patterns`}
+                              detail={`${topLabels.join(" · ")}${
+                                extraLabelKinds > 0 ? ` · +${extraLabelKinds} other` : ""
+                              }`}
+                            />
+                          );
+                        }}
+                      />
                     );
                   })()}
                 </section>
