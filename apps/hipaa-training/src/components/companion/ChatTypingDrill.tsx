@@ -39,7 +39,7 @@ function PassageView({ target, typed }: { target: string; typed: string }) {
               ? "bg-[var(--siya-status-success-bg)] text-[var(--siya-status-success-text)]"
               : c.state === "bad"
                 ? "bg-[var(--siya-status-error-bg)] text-[var(--siya-status-error-text)] underline decoration-[var(--siya-status-error-border)]"
-                : "text-[var(--siya-text-muted)]"
+                : "text-[var(--siya-text-secondary)]"
           }
         >
           {c.ch}
@@ -87,11 +87,12 @@ export function ChatTypingDrill({
   );
 
   const finish = useCallback(
-    (finished: boolean) => {
+    (finished: boolean, typedOverride?: string) => {
       if (timerRef.current) clearInterval(timerRef.current);
       timerRef.current = null;
+      const text = typedOverride ?? typed;
       const sec = startRef.current ? (Date.now() - startRef.current) / 1000 : 0;
-      const s = scoreTyping(target, typed, sec, finished);
+      const s = scoreTyping(target, text, sec, finished);
       setScore(s);
       setPhase("done");
       setElapsed(sec);
@@ -121,10 +122,11 @@ export function ChatTypingDrill({
     setTyped("");
     setScore(null);
     setElapsed(0);
-    startRef.current = Date.now();
+    // Timed runs: clock from Start. Full-passage: clock from first keystroke (not idle wait).
+    startRef.current = duration === 0 ? null : Date.now();
     setPhase("active");
     requestAnimationFrame(() => inputRef.current?.focus());
-  }, []);
+  }, [duration]);
 
   useEffect(() => {
     if (phase !== "active") return;
@@ -143,11 +145,14 @@ export function ChatTypingDrill({
     if (phase === "idle") {
       setPhase("active");
       startRef.current = Date.now();
+    } else if (phase === "active" && startRef.current == null && value.length > 0) {
+      startRef.current = Date.now();
     }
     if (phase !== "active" && phase !== "idle") return;
     setTyped(value);
     if (value.length >= target.length) {
-      finish(true);
+      // Pass current value — finish() would otherwise score stale `typed` (paste / last key).
+      finish(true, value);
     }
   };
 
@@ -164,7 +169,7 @@ export function ChatTypingDrill({
         <label className="flex items-center gap-1.5">
           Time
           <select
-            className="rounded-lg border border-[var(--siya-border)] bg-white px-2 py-1"
+            className="rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-2 py-1"
             value={duration}
             disabled={phase === "active"}
             onChange={(e) => setDuration(Number(e.target.value) as TypingDurationSec)}
@@ -177,7 +182,7 @@ export function ChatTypingDrill({
         <label className="flex items-center gap-1.5">
           Topic
           <select
-            className="rounded-lg border border-[var(--siya-border)] bg-white px-2 py-1"
+            className="rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-2 py-1"
             value={category}
             disabled={phase === "active"}
             onChange={(e) => {
@@ -195,15 +200,15 @@ export function ChatTypingDrill({
           </select>
         </label>
         {best ? (
-          <span className="ml-auto self-center text-[var(--siya-text-muted)]">
+          <span className="ml-auto self-center text-[var(--siya-text-secondary)]">
             Personal best: <strong>{best.wpm} WPM</strong> ({best.accuracy}% acc)
           </span>
         ) : null}
       </div>
 
-      <div className="rounded-2xl border border-[var(--siya-border)] bg-white p-4 shadow-[var(--siya-shadow)]">
+      <div className="rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4 shadow-[var(--siya-shadow)]">
         <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-          <span className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-text-muted)]">
+          <span className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-text-secondary)]">
             {passage.title} · {passage.category}
           </span>
           <span className="font-mono text-sm font-semibold text-[var(--siya-primary)]">
@@ -266,19 +271,28 @@ export function ChatTypingDrill({
       </div>
 
       {score ? (
-        <div className="grid grid-cols-3 gap-3 rounded-2xl border border-[var(--siya-border)] bg-white p-4 text-center text-sm">
-          <div>
-            <p className="text-2xl font-bold text-[var(--siya-primary)]">{score.wpm}</p>
-            <p className="text-xs text-[var(--siya-text-muted)]">WPM</p>
+        <div className="space-y-2 rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4 text-sm">
+          <div className="grid grid-cols-3 gap-3 text-center">
+            <div>
+              <p className="text-2xl font-bold text-[var(--siya-primary)]">
+                {score.wpmReliable ? score.wpm : "—"}
+              </p>
+              <p className="text-xs text-[var(--siya-text-secondary)]">WPM</p>
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-[var(--siya-primary)]">{score.accuracy}%</p>
+              <p className="text-xs text-[var(--siya-text-secondary)]">Accuracy</p>
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-[var(--siya-primary)]">{score.elapsedSec}s</p>
+              <p className="text-xs text-[var(--siya-text-secondary)]">Time</p>
+            </div>
           </div>
-          <div>
-            <p className="text-2xl font-bold text-[var(--siya-primary)]">{score.accuracy}%</p>
-            <p className="text-xs text-[var(--siya-text-muted)]">Accuracy</p>
-          </div>
-          <div>
-            <p className="text-2xl font-bold text-[var(--siya-primary)]">{score.elapsedSec}s</p>
-            <p className="text-xs text-[var(--siya-text-muted)]">Time</p>
-          </div>
+          {!score.wpmReliable ? (
+            <p className="text-center text-xs text-[var(--siya-text-secondary)]">
+              {score.wpmNote ?? "Unable to estimate WPM — timing too short or pace implausible."}
+            </p>
+          ) : null}
         </div>
       ) : null}
     </div>

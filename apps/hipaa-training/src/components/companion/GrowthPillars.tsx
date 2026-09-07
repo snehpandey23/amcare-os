@@ -23,6 +23,14 @@ const PILLARS = [
     cta: "Open practice",
   },
   {
+    id: "chat-simulator",
+    emoji: "🗣️",
+    title: "Chat simulator",
+    blurb: "Live patient conversation practice — pick a persona and chat like Ask.",
+    href: "/learn/chat-simulator",
+    cta: "Try simulator",
+  },
+  {
     id: "ask",
     emoji: "💬",
     title: "Ask",
@@ -36,7 +44,7 @@ export function GrowthPillars() {
   const { user } = useAuth();
 
   return (
-    <section className="grid gap-3 sm:grid-cols-3">
+    <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
       {PILLARS.map((p) => (
         <Link
           key={p.id}
@@ -49,7 +57,7 @@ export function GrowthPillars() {
           <h3 className={`mt-2 ${portalH3}`}>
             {p.title}
           </h3>
-          <p className="mt-1 text-xs leading-relaxed text-[var(--siya-text-muted)]">{p.blurb}</p>
+          <p className="mt-1 text-xs leading-relaxed text-[var(--siya-text-secondary)]">{p.blurb}</p>
           <span className="mt-3 inline-block text-xs font-semibold text-[var(--siya-accent)] group-hover:underline">
             {p.cta} →
           </span>
@@ -66,7 +74,7 @@ export function GrowthPillars() {
           <h3 className="mt-2 font-[family-name:var(--font-poppins)] text-base font-semibold text-[var(--siya-primary)]">
             Team (admin)
           </h3>
-          <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+          <p className="mt-1 text-xs text-[var(--siya-text-secondary)]">
             Invite colleagues, assign roles, and track learning & practice progress.
           </p>
           <span className="mt-3 inline-block text-xs font-semibold text-[var(--siya-accent)] group-hover:underline">

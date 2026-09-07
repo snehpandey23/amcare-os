@@ -34,7 +34,6 @@ function focusAskInput() {
 }
 
 function navigateTour(href: string) {
-  // Match PortalNavLink — App Router soft navigation is unreliable for tour hops.
   window.location.assign(href);
 }
 
@@ -51,7 +50,6 @@ function TourActionButton({ href, label }: { href: string; label: string }) {
       type="button"
       className={portalBtnAccent}
       onClick={() => {
-        // Same path, no query/hash — focus in-page target (Ask input on My day).
         if (samePath && !queryPart && hashIdx < 0) {
           if (targetPath === "/") {
             focusAskInput();
@@ -68,10 +66,23 @@ function TourActionButton({ href, label }: { href: string; label: string }) {
   );
 }
 
+function detectionLabel(kind: string, verified: boolean): string {
+  if (!verified) return "";
+  if (kind === "visit") return "✓ Page visited — you can continue.";
+  if (kind === "ask" || kind === "practice" || kind === "feedback") {
+    return "✓ Action completed — you can continue.";
+  }
+  return "✓ Ready — you can continue.";
+}
+
+/**
+ * Docked coach (top-right on md+) — not a full-width overlay.
+ * Pause keeps progress; resume from My day.
+ */
 export function TourCoachBar() {
   const pathname = usePathname() ?? "/";
   const { splashDismissed } = useBrandIntroBoot();
-  const { active, tourState, stepReady, progressPct, completeCurrentStep, finishTour, dismissTour } =
+  const { active, tourState, stepReady, progressPct, completeCurrentStep, finishTour, pauseTour } =
     usePortalTour();
 
   if (!splashDismissed || !active || pathname === "/product-tour" || pathname === "/login") return null;
@@ -82,8 +93,8 @@ export function TourCoachBar() {
   const total = PORTAL_TOUR_STEPS.length;
   const verified = checkTourStepVerified(step);
   const isFinish = step.id === "finish";
-  /** Unverified steps with a target page: Continue navigates there (never a dead disabled click). */
-  const continueNavigates = !verified && Boolean(step.actionHref);
+  /** Unverified + has href: one CTA opens the target (no duplicate same-label button). */
+  const needsNavigate = !verified && Boolean(step.actionHref);
 
   function onContinue() {
     if (isFinish) {
@@ -104,54 +115,49 @@ export function TourCoachBar() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-x-0 top-11 z-[55] flex justify-center px-3 pt-2 md:px-4"
+      className="pointer-events-none fixed inset-x-0 top-12 z-[55] flex justify-end px-3 pt-2 md:inset-x-auto md:right-3 md:top-14 md:w-[min(100%,22rem)] md:px-0"
       role="region"
       aria-label="Product tour coach"
     >
-      <div className="pointer-events-auto w-full max-w-2xl rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] shadow-lg">
-        <div className="flex items-center justify-between gap-3 border-b border-[var(--siya-border)] px-4 py-2">
-          <p className="text-xs font-medium text-[var(--siya-text-muted)]">
-            Product tour · Step {stepNum} of {total} · {progressPct}%
+      <div className="pointer-events-auto w-full max-w-md rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] shadow-lg md:max-w-none">
+        <div className="flex items-center justify-between gap-3 border-b border-[var(--siya-border)] px-3 py-2">
+          <p className="text-[11px] font-medium text-[var(--siya-text-muted)]">
+            Tour · {stepNum}/{total} · {progressPct}%
           </p>
-          <button type="button" onClick={dismissTour} className={`${portalBtnGhostSm} text-xs`}>
+          <button type="button" onClick={pauseTour} className={`${portalBtnGhostSm} text-xs`}>
             Pause tour
           </button>
         </div>
-        <div className="max-h-[40vh] space-y-2 overflow-y-auto px-4 py-3">
-          <h2 className="text-base font-semibold text-[var(--siya-text)]">{step.title}</h2>
+        <div className="max-h-[36vh] space-y-2 overflow-y-auto px-3 py-2.5">
+          <h2 className="text-sm font-semibold text-[var(--siya-text)]">{step.title}</h2>
           {step.lines.map((line) => (
-            <p key={line} className="text-sm leading-relaxed text-[var(--siya-text-secondary)]">
+            <p key={line} className="text-xs leading-relaxed text-[var(--siya-text-secondary)]">
               {renderLine(line)}
             </p>
           ))}
-          <p className="text-xs text-[var(--siya-text-muted)]">
+          <p className="text-[11px] text-[var(--siya-text-muted)]">
             {verified
-              ? "✓ Step detected — you can continue."
-              : continueNavigates
-                ? `${step.verifyHint} (Continue opens it.)`
+              ? detectionLabel(step.kind, verified)
+              : needsNavigate
+                ? `${step.verifyHint} (button below opens it.)`
                 : step.verifyHint}
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-2 border-t border-[var(--siya-border)] px-4 py-3">
-          {step.actionHref ? (
-            <TourActionButton href={step.actionHref} label={step.actionLabel ?? "Open"} />
-          ) : null}
+        <div className="flex flex-wrap items-center gap-2 border-t border-[var(--siya-border)] px-3 py-2.5">
           {isFinish ? (
             <button type="button" className={portalBtnAccent} onClick={finishTour}>
               Finish tour
             </button>
+          ) : needsNavigate ? (
+            <TourActionButton href={step.actionHref!} label={step.actionLabel ?? "Open"} />
           ) : (
             <button
               type="button"
               className={portalBtnAccent}
-              disabled={!stepReady && !continueNavigates && step.id !== "welcome"}
+              disabled={!stepReady && step.id !== "welcome"}
               onClick={onContinue}
             >
-              {step.id === "welcome"
-                ? "Start hands-on steps"
-                : continueNavigates
-                  ? step.actionLabel ?? "Continue"
-                  : "Continue"}
+              {step.id === "welcome" ? "Start hands-on steps" : "Continue"}
             </button>
           )}
         </div>
@@ -160,11 +166,11 @@ export function TourCoachBar() {
   );
 }
 
-/** Top coach bar clearance so content is not hidden under the panel. */
+/** Clearance so content is not hidden under the docked coach. */
 export function TourCoachSpacer() {
   const pathname = usePathname() ?? "/";
   const { splashDismissed } = useBrandIntroBoot();
   const { active } = usePortalTour();
   if (!splashDismissed || !active || pathname === "/product-tour" || pathname === "/login") return null;
-  return <div className="h-36 shrink-0 md:h-32" aria-hidden />;
+  return <div className="h-4 shrink-0 md:h-2" aria-hidden />;
 }

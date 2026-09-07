@@ -283,7 +283,7 @@ export function TeamAdminPanel() {
         >
           <div
             ref={invitePanelRef}
-            className="w-full max-w-lg rounded-xl border border-[var(--siya-border)] bg-white p-5 shadow-xl"
+            className="w-full max-w-lg rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-5 shadow-xl"
           >
             <form onSubmit={onInvite}>
               <h2 id="invite-team-title" className="text-sm font-semibold text-[var(--siya-primary)]">
@@ -298,7 +298,7 @@ export function TeamAdminPanel() {
                   <p>{inviteResult}</p>
                   {inviteCopyBlock ? (
                     <div className="mt-2">
-                      <pre className="max-h-40 overflow-auto rounded-md bg-white p-2 text-xs">{inviteCopyBlock}</pre>
+                      <pre className="max-h-40 overflow-auto rounded-md bg-[var(--siya-white)] p-2 text-xs">{inviteCopyBlock}</pre>
                       <button
                         type="button"
                         className={`mt-2 ${trainingLinkPrimaryClass}`}
@@ -548,7 +548,7 @@ export function TeamAdminPanel() {
       {loading ? <p className="text-sm text-[var(--siya-text-muted)]">Loading roster…</p> : null}
 
       {!loading && members.length > 0 ? (
-        <div className="overflow-x-auto rounded-xl border border-[var(--siya-border)] bg-white shadow-[var(--siya-shadow)]">
+        <div className="overflow-x-auto rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] shadow-[var(--siya-shadow)]">
           <table className="min-w-full text-left text-sm">
             <thead className="border-b border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] text-xs uppercase text-[var(--siya-text-muted)]">
               <tr>

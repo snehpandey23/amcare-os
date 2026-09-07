@@ -42,7 +42,11 @@ type PortalTourContextValue = {
   stepReady: boolean;
   progressPct: number;
   startTour: () => void;
+  /** Pause — keeps progress; resume from My day. Not a permanent skip. */
+  pauseTour: () => void;
+  /** @deprecated Prefer pauseTour — kept for any callers that meant “skip forever”. */
   dismissTour: () => void;
+  resumeTour: () => void;
   completeCurrentStep: () => void;
   finishTour: () => void;
 };
@@ -59,7 +63,9 @@ export function usePortalTour(): PortalTourContextValue {
       stepReady: false,
       progressPct: 0,
       startTour: () => {},
+      pauseTour: () => {},
       dismissTour: () => {},
+      resumeTour: () => {},
       completeCurrentStep: () => {},
       finishTour: () => {},
     };
@@ -147,22 +153,69 @@ export function PortalTourProvider({ children }: { children: ReactNode }) {
     nextProfile = appendGrowthEvent(nextProfile, "Started product tour");
     setProfile(nextProfile);
     saveTour(nextProfile, user?.id);
-    // Hard nav — soft router.push often fails to leave /onboarding or /product-tour.
     window.location.assign("/");
   }, [user?.id]);
 
+  /** Pause: keep progress, clear session coach; do not mark finished/skipped. */
+  const pauseTour = useCallback(() => {
+    const base = loadLocalPortalProfile();
+    const prev = normalizePortalTour(base.productTour);
+    let nextProfile: PortalProfile = {
+      ...base,
+      productTour: {
+        ...prev,
+        pausedAt: Date.now(),
+        dismissedAt: undefined,
+      },
+    };
+    nextProfile = appendGrowthEvent(nextProfile, "Paused product tour");
+    setProfile(nextProfile);
+    saveTour(nextProfile, user?.id);
+    clearTourSessionFlags();
+  }, [user?.id]);
+
+  /** Permanent skip — not used by Pause button. */
   const dismissTour = useCallback(() => {
     const base = loadLocalPortalProfile();
     const prev = normalizePortalTour(base.productTour);
     let nextProfile: PortalProfile = {
       ...base,
-      productTour: { ...prev, dismissedAt: Date.now() },
+      productTour: {
+        ...prev,
+        dismissedAt: Date.now(),
+        pausedAt: undefined,
+      },
     };
-    nextProfile = appendGrowthEvent(nextProfile, "Dismissed product tour");
+    nextProfile = appendGrowthEvent(nextProfile, "Skipped product tour");
     setProfile(nextProfile);
     saveTour(nextProfile, user?.id);
     clearTourSessionFlags();
   }, [user?.id]);
+
+  const resumeTour = useCallback(() => {
+    if (!user?.id) return;
+    bindPortalProfileToUser(user.id);
+    const base = loadLocalPortalProfile();
+    const prev = normalizePortalTour(base.productTour);
+    if (!prev.startedAt || prev.finishedAt || prev.dismissedAt) {
+      startTour();
+      return;
+    }
+    markTourSessionActive();
+    const step = PORTAL_TOUR_STEPS[prev.currentStepIndex] ?? PORTAL_TOUR_STEPS[0];
+    let nextProfile: PortalProfile = {
+      ...base,
+      productTour: {
+        ...prev,
+        pausedAt: undefined,
+      },
+    };
+    nextProfile = appendGrowthEvent(nextProfile, "Resumed product tour");
+    setProfile(nextProfile);
+    saveTour(nextProfile, user.id);
+    const href = step.actionHref || "/";
+    window.location.assign(href);
+  }, [user?.id, startTour]);
 
   const completeCurrentStep = useCallback(() => {
     const base = loadLocalPortalProfile();
@@ -207,11 +260,24 @@ export function PortalTourProvider({ children }: { children: ReactNode }) {
       stepReady,
       progressPct: tourState ? tourProgressPercent(tourState) : 0,
       startTour,
+      pauseTour,
       dismissTour,
+      resumeTour,
       completeCurrentStep,
       finishTour,
     }),
-    [tourState, active, stepIndex, stepReady, startTour, dismissTour, completeCurrentStep, finishTour],
+    [
+      tourState,
+      active,
+      stepIndex,
+      stepReady,
+      startTour,
+      pauseTour,
+      dismissTour,
+      resumeTour,
+      completeCurrentStep,
+      finishTour,
+    ],
   );
 
   return <PortalTourContext.Provider value={value}>{children}</PortalTourContext.Provider>;

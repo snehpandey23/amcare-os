@@ -39,7 +39,7 @@ export function PracticeCategoryLanding({ progress, onOpenCategory }: Props) {
           <p className="mt-1 text-lg font-semibold text-[var(--siya-primary)]">
             {progress?.totalXp ?? 0} XP
           </p>
-          <p className="mt-0.5 text-xs text-[var(--siya-text-muted)]">
+          <p className="mt-0.5 text-xs text-[var(--siya-text-secondary)]">
             {lifetime} lifetime drill{lifetime === 1 ? "" : "s"} · today {todayCount}/4 mini-lessons
           </p>
         </div>
@@ -48,7 +48,7 @@ export function PracticeCategoryLanding({ progress, onOpenCategory }: Props) {
           <p className="mt-1 text-lg font-semibold text-[var(--siya-primary)]">
             {streak > 0 ? `${streak} day${streak === 1 ? "" : "s"}` : "—"}
           </p>
-          <p className="mt-0.5 text-xs text-[var(--siya-text-muted)]">
+          <p className="mt-0.5 text-xs text-[var(--siya-text-secondary)]">
             {streak > 0 ? "Keep one drill going each day" : "Complete a drill to start a streak"}
           </p>
         </div>
@@ -59,14 +59,14 @@ export function PracticeCategoryLanding({ progress, onOpenCategory }: Props) {
               <p className="mt-1 text-lg font-semibold text-[var(--siya-primary)]">
                 {lastTyping.wpm} WPM
               </p>
-              <p className="mt-0.5 text-xs text-[var(--siya-text-muted)]">
+              <p className="mt-0.5 text-xs text-[var(--siya-text-secondary)]">
                 {lastTyping.accuracy}% accuracy
               </p>
             </>
           ) : (
             <>
-              <p className="mt-1 text-lg font-semibold text-[var(--siya-text-muted)]">—</p>
-              <p className="mt-0.5 text-xs text-[var(--siya-text-muted)]">
+              <p className="mt-1 text-lg font-semibold text-[var(--siya-text-secondary)]">—</p>
+              <p className="mt-0.5 text-xs text-[var(--siya-text-secondary)]">
                 Open Language → Chat speed when ready
               </p>
             </>
@@ -76,7 +76,7 @@ export function PracticeCategoryLanding({ progress, onOpenCategory }: Props) {
 
       <div>
         <h2 className={portalH2}>Categories</h2>
-        <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+        <p className="mt-1 text-xs text-[var(--siya-text-secondary)]">
           Pick a block — drills and scoring inside are unchanged.{" "}
           <span className={portalStatusInfoText}>Labels provisional pending founder OK.</span>
         </p>
@@ -107,7 +107,7 @@ export function PracticeCategoryLanding({ progress, onOpenCategory }: Props) {
         })}
       </ul>
 
-      <p className="text-xs text-[var(--siya-text-muted)]">
+      <p className="text-xs text-[var(--siya-text-secondary)]">
         Prefer a direct link? Deep links like{" "}
         <Link href="/learn/practice#typing" className="font-medium text-[var(--siya-accent)] hover:underline">
           #typing

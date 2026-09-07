@@ -143,7 +143,7 @@ export function DepartmentLeadsSection() {
                 <button
                   type="button"
                   disabled={!dirty || saving}
-                  className="rounded-lg border border-[var(--siya-border)] bg-white px-4 py-2 text-sm font-medium text-[var(--siya-text-secondary)] disabled:opacity-40"
+                  className="rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-4 py-2 text-sm font-medium text-[var(--siya-text-secondary)] disabled:opacity-40"
                   onClick={() => cancelLeadDraft(lead.departmentSlug)}
                 >
                   Cancel

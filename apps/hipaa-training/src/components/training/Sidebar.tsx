@@ -37,7 +37,7 @@ export function Sidebar({
   );
 
   return (
-    <aside className="flex w-64 shrink-0 flex-col border-r border-[var(--siya-border)] bg-white">
+    <aside className="flex w-64 shrink-0 flex-col border-r border-[var(--siya-border)] bg-[var(--siya-white)]">
       <div className="border-b border-[var(--siya-border)] p-4">
         <Link href="/" className="text-sm font-semibold text-[var(--siya-primary)]">
           ← {BRAND.appName}

@@ -1,5 +1,6 @@
 import passages from "@/data/level-up/typing-passages.json";
 import { dailyIndex } from "@/lib/level-up/catalog";
+import { estimateWpmFromChars } from "@/lib/level-up/wpm";
 
 export type TypingPassage = {
   id: string;
@@ -33,7 +34,12 @@ export function normalizeTypingText(s: string): string {
 }
 
 export type TypingScore = {
+  /** Reliable WPM only; 0 when timing is too short / implausible (paste, etc.). */
   wpm: number;
+  wpmReliable: boolean;
+  /** Uncapped estimate before sanity gate (diagnostics / regression tests). */
+  rawWpm: number;
+  wpmNote?: string;
   accuracy: number;
   correctChars: number;
   typedChars: number;
@@ -54,16 +60,20 @@ export function scoreTyping(targetRaw: string, typedRaw: string, elapsedSec: num
     if (k && t === k) correctChars += 1;
   }
   const typedChars = typed.length;
-  const minutes = Math.max(elapsedSec / 60, 1 / 60);
-  const wpm = Math.round(correctChars / 5 / minutes);
+  const est = estimateWpmFromChars(correctChars, elapsedSec);
   const accuracy = typedChars === 0 ? 0 : Math.round((100 * correctChars) / typedChars);
   return {
-    wpm,
+    wpm: est.wpm,
+    wpmReliable: est.reliable,
+    rawWpm: est.rawWpm,
+    wpmNote: est.reliable
+      ? undefined
+      : "Unable to estimate — timing too short or pace implausible (often paste / accidental finish).",
     accuracy,
     correctChars,
     typedChars,
     targetChars,
-    elapsedSec: Math.round(elapsedSec * 10) / 10,
+    elapsedSec: Math.round(Math.max(0, elapsedSec) * 10) / 10,
     finished,
   };
 }
@@ -85,6 +95,7 @@ export function loadTypingBest(): TypingBest | null {
 
 export function saveTypingBestIfBetter(score: TypingScore, passageId: string) {
   if (typeof window === "undefined") return;
+  if (!score.wpmReliable || score.wpm <= 0) return;
   const prev = loadTypingBest();
   if (prev && prev.wpm >= score.wpm) return;
   const next: TypingBest = {

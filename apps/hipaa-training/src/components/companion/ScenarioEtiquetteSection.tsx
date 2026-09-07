@@ -52,7 +52,7 @@ export function ScenarioEtiquetteSection() {
       <h2 className="mb-1 font-[family-name:var(--font-poppins)] text-lg font-semibold text-[var(--siya-primary)]">
         💬 Scenario for today
       </h2>
-      <p className="mb-3 text-xs text-[var(--siya-text-muted)]">
+      <p className="mb-3 text-xs text-[var(--siya-text-secondary)]">
         One etiquette scenario per day. Optional practice mode for more reps — no extra XP after the first
         culture/trivia drills you complete elsewhere.
       </p>
@@ -65,7 +65,7 @@ export function ScenarioEtiquetteSection() {
       />
       <button
         type="button"
-        className="mt-3 rounded-lg border border-[var(--siya-border)] bg-white px-4 py-2 text-xs font-semibold text-[var(--siya-accent)] hover:bg-[var(--siya-bg-subtle)]"
+        className="mt-3 rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-4 py-2 text-xs font-semibold text-[var(--siya-accent)] hover:bg-[var(--siya-bg-subtle)]"
         onClick={openPractice}
       >
         Practice more scenarios…
@@ -80,7 +80,7 @@ export function ScenarioEtiquetteSection() {
           onClick={() => setPracticeOpen(false)}
         >
           <div
-            className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-[var(--siya-border)] bg-white p-5 shadow-xl"
+            className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-5 shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start justify-between gap-3">
@@ -88,13 +88,13 @@ export function ScenarioEtiquetteSection() {
                 <h3 id="scenario-practice-title" className="text-sm font-semibold text-[var(--siya-primary)]">
                   Practice mode
                 </h3>
-                <p className="mt-1 text-[11px] text-[var(--siya-text-muted)]">
+                <p className="mt-1 text-[11px] text-[var(--siya-text-secondary)]">
                   Scenario {((practiceIndex % pool.length) + pool.length) % pool.length + 1} of {pool.length} in rotation
                 </p>
               </div>
               <button
                 type="button"
-                className="shrink-0 rounded-lg px-2 py-1 text-xs text-[var(--siya-text-muted)] hover:bg-[var(--siya-bg-subtle)]"
+                className="shrink-0 rounded-lg px-2 py-1 text-xs text-[var(--siya-text-secondary)] hover:bg-[var(--siya-bg-subtle)]"
                 onClick={() => setPracticeOpen(false)}
               >
                 Close

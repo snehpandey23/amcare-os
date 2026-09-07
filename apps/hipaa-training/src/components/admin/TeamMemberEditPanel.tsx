@@ -85,7 +85,7 @@ export function TeamMemberEditPanel() {
       {error ? <p className="text-sm text-red-600">{error}</p> : null}
 
       {!loading && !error ? (
-        <form onSubmit={onSave} className="space-y-4 rounded-xl border border-[var(--siya-border)] bg-white p-5 shadow-[var(--siya-shadow)]">
+        <form onSubmit={onSave} className="space-y-4 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-5 shadow-[var(--siya-shadow)]">
           <p className="text-xs text-[var(--siya-text-muted)]">
             Account: <strong className="text-[var(--siya-text-secondary)]">{email}</strong>
           </p>

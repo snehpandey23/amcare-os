@@ -63,7 +63,7 @@ export function UsMapInteractive({ onComplete }: { onComplete?: () => void }) {
             className={`rounded-full px-3 py-1.5 text-xs font-semibold ${
               mode === m
                 ? "bg-[var(--siya-primary)] text-white"
-                : "border border-[var(--siya-border)] bg-white text-[var(--siya-text-secondary)]"
+                : "border border-[var(--siya-border)] bg-[var(--siya-white)] text-[var(--siya-text-secondary)]"
             }`}
           >
             {label}
@@ -118,7 +118,7 @@ export function UsMapInteractive({ onComplete }: { onComplete?: () => void }) {
       </div>
 
       {selected && mode === "explore" ? (
-        <div className="rounded-xl bg-white p-4 text-sm shadow-[var(--siya-shadow)]">
+        <div className="rounded-xl bg-[var(--siya-white)] p-4 text-sm shadow-[var(--siya-shadow)]">
           <p className="text-lg font-semibold text-[var(--siya-primary)]">
             {selected.name} ({selected.abbr})
           </p>
@@ -136,7 +136,7 @@ export function UsMapInteractive({ onComplete }: { onComplete?: () => void }) {
       ) : null}
 
       {mode === "capital" ? (
-        <div className="rounded-2xl border border-[var(--siya-border)] bg-white p-4">
+        <div className="rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4">
           <p className="text-sm font-medium">{capitalQuiz.prompt}</p>
           <ul className="mt-3 space-y-2">
             {capitalQuiz.choices.map((c, i) => (

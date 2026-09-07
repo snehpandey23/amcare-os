@@ -22,6 +22,7 @@ import {
 } from "@/lib/portal-ui";
 
 const DRILL_LINKS = [
+  { label: "Chat simulator", href: "/learn/chat-simulator" },
   { label: "Chat speed & accuracy", href: "/learn/practice#typing" },
   { label: "US map", href: "/learn/practice#map" },
   { label: "Timezone drill", href: "/learn/practice#timezone" },
@@ -82,29 +83,37 @@ export function LearnHub() {
         </div>
       ) : null}
 
-      <div className="grid gap-3 sm:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <div className={portalCard}>
-          <p className="text-xs font-medium uppercase text-[var(--siya-text-muted)]">HIPAA training</p>
-          <p className="mt-1 text-2xl font-semibold text-[var(--siya-primary)]">
-            {modulesDone}/{moduleTotal}
-          </p>
-          <p className="text-xs text-[var(--siya-text-muted)]">modules complete</p>
-          <Link href="/training" className="mt-2 inline-block text-xs font-semibold text-[var(--siya-accent)] hover:underline">
-            Continue training →
+          <p className="text-xs font-medium uppercase text-[var(--siya-text-secondary)]">Chat simulator</p>
+          <p className="mt-1 text-2xl font-semibold text-[var(--siya-primary)]">Live</p>
+          <p className="text-xs text-[var(--siya-text-secondary)]">Patient conversation practice</p>
+          <Link href="/learn/chat-simulator" className="mt-2 inline-block text-xs font-semibold text-[var(--siya-accent)] hover:underline">
+            Try chat simulator →
           </Link>
         </div>
         <div className={portalCard}>
-          <p className="text-xs font-medium uppercase text-[var(--siya-text-muted)]">Daily practice</p>
+          <p className="text-xs font-medium uppercase text-[var(--siya-text-secondary)]">Daily practice</p>
           <p className="mt-1 text-2xl font-semibold text-[var(--siya-primary)]">{xp}</p>
-          <p className="text-xs text-[var(--siya-text-muted)]">{streak > 0 ? `🔥 ${streak} day streak` : "Start a streak today"}</p>
+          <p className="text-xs text-[var(--siya-text-secondary)]">{streak > 0 ? `🔥 ${streak} day streak` : "Start a streak today"}</p>
           <Link href="/learn/practice" className="mt-2 inline-block text-xs font-semibold text-[var(--siya-accent)] hover:underline">
             Today&apos;s drills →
           </Link>
         </div>
         <div className={portalCard}>
-          <p className="text-xs font-medium uppercase text-[var(--siya-text-muted)]">Certification</p>
+          <p className="text-xs font-medium uppercase text-[var(--siya-text-secondary)]">HIPAA training</p>
+          <p className="mt-1 text-2xl font-semibold text-[var(--siya-primary)]">
+            {modulesDone}/{moduleTotal}
+          </p>
+          <p className="text-xs text-[var(--siya-text-secondary)]">modules complete</p>
+          <Link href="/training" className="mt-2 inline-block text-xs font-semibold text-[var(--siya-accent)] hover:underline">
+            Continue training →
+          </Link>
+        </div>
+        <div className={portalCard}>
+          <p className="text-xs font-medium uppercase text-[var(--siya-text-secondary)]">Certification</p>
           <p className="mt-1 text-2xl font-semibold text-[var(--siya-primary)]">{finalReady ? "Ready" : "In progress"}</p>
-          <p className="text-xs text-[var(--siya-text-muted)]">Final exam & certificate</p>
+          <p className="text-xs text-[var(--siya-text-secondary)]">Final exam & certificate</p>
           <Link href="/certificate" className="mt-2 inline-block text-xs font-semibold text-[var(--siya-accent)] hover:underline">
             View certificate →
           </Link>
@@ -115,7 +124,7 @@ export function LearnHub() {
 
       <section className={portalSection}>
         <h2 className={portalH3}>Department SOPs</h2>
-        <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+        <p className="mt-1 text-xs text-[var(--siya-text-secondary)]">
           Draft and update team procedures in Memory → Knowledge. Submit for review when ready.
         </p>
         <PortalNavLink
@@ -128,7 +137,7 @@ export function LearnHub() {
 
       <section className={portalSection}>
         <h2 className={portalH3}>Practice library</h2>
-        <p className="mt-1 text-xs text-[var(--siya-text-muted)]">Short sessions — do one or two per day.</p>
+        <p className="mt-1 text-xs text-[var(--siya-text-secondary)]">Short sessions — do one or two per day.</p>
         <ul className="mt-3 flex flex-wrap gap-2">
           {DRILL_LINKS.map((d) => (
             <li key={d.href}>
@@ -143,7 +152,7 @@ export function LearnHub() {
         </ul>
       </section>
 
-      <p className="text-center text-xs text-[var(--siya-text-muted)]">
+      <p className="text-center text-xs text-[var(--siya-text-secondary)]">
         Company policy questions →{" "}
         <Link href="/help" className="text-[var(--siya-accent)] hover:underline">
           Ask

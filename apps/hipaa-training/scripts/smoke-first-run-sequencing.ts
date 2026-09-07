@@ -43,12 +43,24 @@ const toured = {
 assert.equal(shouldChainOnboardingToTour(toured), false);
 assert.equal(shouldOfferProductTour(toured), false);
 
-// Tour dismissed (Pause) — treated as finished for offer
-const dismissed = {
+// Explicit skip forever (never started) — no offer
+const skipped = {
   onboardingComplete: true,
-  productTour: { ...defaultPortalTourState(), dismissedAt: Date.now(), startedAt: 1 },
+  productTour: { ...defaultPortalTourState(), dismissedAt: Date.now() },
 } as MiniProfile;
-assert.equal(shouldOfferProductTour(dismissed), false);
+assert.equal(shouldOfferProductTour(skipped), false);
+
+// Paused mid-tour — still offer resume from My day
+const paused = {
+  onboardingComplete: true,
+  productTour: {
+    ...defaultPortalTourState(),
+    startedAt: 1,
+    pausedAt: Date.now(),
+    currentStepIndex: 2,
+  },
+} as MiniProfile;
+assert.equal(shouldOfferProductTour(paused), true);
 
 const wizard = readFileSync(join(ROOT, "src/components/onboarding/OnboardingWizard.tsx"), "utf8");
 assert.match(wizard, /shouldChainOnboardingToTour/);
@@ -61,9 +73,17 @@ assert.match(wizard, /Skipped first-run/);
 const landing = readFileSync(join(ROOT, "src/components/onboarding/ProductTourLanding.tsx"), "utf8");
 assert.match(landing, /Run through the tour/);
 assert.match(landing, /Personalize/);
+assert.match(landing, /Resume tour/);
+assert.match(landing, /You completed this tour earlier/);
+assert.match(landing, /You skipped this tour earlier/);
 
 const nudge = readFileSync(join(ROOT, "src/components/onboarding/ProductTourNudgeBanner.tsx"), "utf8");
 assert.match(nudge, /Run through the tour/);
 assert.match(nudge, /Personalize/);
+assert.match(nudge, /Resume tour/);
+
+const coach = readFileSync(join(ROOT, "src/components/onboarding/TourCoachBar.tsx"), "utf8");
+assert.match(coach, /pauseTour/);
+assert.doesNotMatch(coach, /onClick=\{dismissTour\}/);
 
 console.log("smoke-first-run-sequencing: OK");

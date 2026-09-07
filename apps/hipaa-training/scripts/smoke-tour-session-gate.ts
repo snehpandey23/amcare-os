@@ -1,5 +1,6 @@
 /**
  * Tour must not appear from profile.startedAt alone — only after explicit startTour session flag.
+ * Pause keeps unfinished progress (pausedAt); skip uses dismissedAt.
  *   npx tsx apps/hipaa-training/scripts/smoke-tour-session-gate.ts
  */
 import assert from "node:assert/strict";
@@ -7,7 +8,9 @@ import {
   defaultPortalTourState,
   hasUnfinishedTourRecord,
   isPortalTourInProgress,
+  isPortalTourSkipped,
   mergePortalTourState,
+  normalizePortalTour,
   markTourSessionActive,
   clearTourSessionFlags,
 } from "../src/lib/portal-product-tour";
@@ -43,18 +46,40 @@ assert.equal(isPortalTourInProgress(stale), true, "explicit session + startedAt 
 clearTourSessionFlags();
 assert.equal(isPortalTourInProgress(stale), false);
 
-const localDismissed = {
+const paused = {
+  productTour: {
+    ...defaultPortalTourState(),
+    startedAt: 1,
+    pausedAt: Date.now(),
+    currentStepIndex: 3,
+    completedStepIds: ["welcome", "my-day"],
+  },
+};
+assert.equal(isPortalTourInProgress(paused), false, "paused must not show coach");
+assert.equal(hasUnfinishedTourRecord(paused), true, "paused remains unfinished");
+
+// Legacy pause stored as dismissedAt → normalize to pausedAt
+const legacyPause = normalizePortalTour({
   ...defaultPortalTourState(),
   startedAt: 1,
   dismissedAt: Date.now(),
+});
+assert.ok(legacyPause.pausedAt, "legacy dismiss-after-start → pausedAt");
+assert.equal(Boolean(legacyPause.dismissedAt), false);
+assert.equal(isPortalTourSkipped({ productTour: legacyPause }), false);
+
+const localPaused = {
+  ...defaultPortalTourState(),
+  startedAt: 1,
+  pausedAt: Date.now(),
 };
 const remoteInProgress = {
   ...defaultPortalTourState(),
   startedAt: Date.now(),
 };
-const merged = mergePortalTourState(localDismissed, remoteInProgress);
-assert.ok(merged?.dismissedAt, "local Pause must win over remote in-progress");
-assert.equal(Boolean(merged?.startedAt && !merged.finishedAt && !merged.dismissedAt), false);
+const merged = mergePortalTourState(localPaused, remoteInProgress);
+assert.ok(merged?.pausedAt, "local Pause must win over remote in-progress");
+assert.equal(Boolean(merged?.startedAt && !merged.finishedAt && !merged.dismissedAt && !merged.pausedAt), false);
 
 const phrase = resolveDailyPhraseCard(
   [

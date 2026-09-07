@@ -83,7 +83,7 @@ export function CollapsibleDomainItemList({
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className="mt-3 w-full rounded-lg border border-[var(--siya-border)] bg-white px-3 py-2 text-xs font-semibold text-[var(--siya-accent)] hover:bg-[var(--siya-bg-subtle)]"
+          className="mt-3 w-full rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-3 py-2 text-xs font-semibold text-[var(--siya-accent)] hover:bg-[var(--siya-bg-subtle)]"
         >
           {expanded ? "Show less" : `Show all (${sorted.length}) — ${hidden} more`}
         </button>

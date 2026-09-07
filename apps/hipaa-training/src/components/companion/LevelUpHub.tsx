@@ -223,7 +223,7 @@ export function LevelUpHub() {
         <h1 className={`mt-3 ${portalH1}`}>
           {inCategory ? activeCategory.label : "Practice"}
         </h1>
-        <p className="mt-1 text-sm text-[var(--siya-text-muted)]">
+        <p className="mt-1 text-sm text-[var(--siya-text-secondary)]">
           {inCategory
             ? activeCategory.blurb
             : "~8–10 minutes a day — American English, culture, and healthcare communication. XP saves to your account when signed in (syncs within a few seconds)."}
@@ -252,7 +252,7 @@ export function LevelUpHub() {
           {vis("english") ? (
             <section id="english">
               <h2 className={`mb-1 ${portalH2}`}>🇺🇸 {phraseSubtitle}</h2>
-              <p className="mb-3 text-xs text-[var(--siya-text-muted)]">
+              <p className="mb-3 text-xs text-[var(--siya-text-secondary)]">
                 One workplace phrase per day from the English phrase drill catalog.
               </p>
               <div className={portalCard}>
@@ -295,7 +295,7 @@ export function LevelUpHub() {
           {vis("healthcare") ? (
             <section id="healthcare">
               <h2 className={`mb-1 ${portalH2}`}>🏥 Healthcare term for today</h2>
-              <p className="mb-3 text-xs text-[var(--siya-text-muted)]">
+              <p className="mb-3 text-xs text-[var(--siya-text-secondary)]">
                 {term.source ?? "Rotates with your department’s live SOPs"}
               </p>
               <div className={portalCard}>
@@ -320,13 +320,13 @@ export function LevelUpHub() {
               <h2 className={`mb-3 ${portalH2}`}>✍️ Documentation & email</h2>
               <div className={`space-y-4 ${portalCard} text-sm`}>
                 <div>
-                  <p className="text-xs font-medium text-[var(--siya-text-muted)]">Today&apos;s messy note</p>
+                  <p className="text-xs font-medium text-[var(--siya-text-secondary)]">Today&apos;s messy note</p>
                   <p className="mt-1 font-mono text-xs">{docDay.messy}</p>
-                  <p className="mt-2 text-xs font-medium text-[var(--siya-text-muted)]">Professional rewrite</p>
+                  <p className="mt-2 text-xs font-medium text-[var(--siya-text-secondary)]">Professional rewrite</p>
                   <p className="mt-1">{docDay.clean}</p>
                 </div>
                 <div className="border-t border-[var(--siya-border)] pt-4">
-                  <p className="text-xs font-medium text-[var(--siya-text-muted)]">Email sample (static)</p>
+                  <p className="text-xs font-medium text-[var(--siya-text-secondary)]">Email sample (static)</p>
                   <p className="mt-1">{LEVEL_UP_CATALOG.emailRewrite.messy}</p>
                   <pre className="mt-2 whitespace-pre-wrap rounded-[var(--siya-radius-md)] bg-[var(--siya-bg-subtle)] p-3 text-xs">
                     {LEVEL_UP_CATALOG.emailRewrite.clean}
@@ -347,7 +347,7 @@ export function LevelUpHub() {
           {vis("billing-practice") ? (
             <section id="billing-practice">
               <h2 className={`mb-3 ${portalH2}`}>💳 Billing & refunds (practice)</h2>
-              <p className="mb-4 text-xs text-[var(--siya-text-muted)]">
+              <p className="mb-4 text-xs text-[var(--siya-text-secondary)]">
                 From team training — scenarios only. Written Clarity/billing policy wins; escalate exceptions to{" "}
                 <strong>billing lead</strong>.
               </p>
@@ -428,7 +428,10 @@ export function LevelUpHub() {
                     }
                     afterProgress(
                       recordTypingAttempt(
-                        { wpm: s.wpm, accuracy: s.accuracy },
+                        {
+                          wpm: s.wpmReliable ? s.wpm : 0,
+                          accuracy: s.accuracy,
+                        },
                         {
                           passageId: meta.passageId,
                           awardDailyXp: s.finished && s.accuracy >= 92,

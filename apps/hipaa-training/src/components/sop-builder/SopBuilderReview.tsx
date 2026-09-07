@@ -420,7 +420,7 @@ export function SopBuilderReview({ session, isAdmin, onBack, onPublished }: Prop
           <button
             type="button"
             disabled={busy || alreadySubmitted}
-            className="rounded-lg border border-[var(--siya-border)] bg-white px-4 py-2 text-sm font-medium text-[var(--siya-text-secondary)] disabled:opacity-40"
+            className="rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-4 py-2 text-sm font-medium text-[var(--siya-text-secondary)] disabled:opacity-40"
             onClick={() => void onSaveDraft()}
           >
             {pending === "save" ? "Saving…" : "Save draft for later"}

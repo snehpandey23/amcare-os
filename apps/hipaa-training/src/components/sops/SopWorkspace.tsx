@@ -887,7 +887,7 @@ export function SopWorkspace() {
               <button
                 type="submit"
                 disabled={pending || refining}
-                className="rounded-lg border border-[var(--siya-border)] bg-white px-3 py-2 text-sm font-medium disabled:opacity-50"
+                className="rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-3 py-2 text-sm font-medium disabled:opacity-50"
               >
                 {pending ? "Saving…" : editing?.status === "pending_review" ? "Save changes" : "Save draft"}
               </button>

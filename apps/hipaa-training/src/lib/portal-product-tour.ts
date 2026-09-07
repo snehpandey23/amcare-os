@@ -55,7 +55,10 @@ export type PortalTourState = {
   version: number;
   startedAt?: number;
   finishedAt?: number;
+  /** Explicit “don’t show again” — not Pause. */
   dismissedAt?: number;
+  /** Pause — unfinished; resume from My day. */
+  pausedAt?: number;
   completedStepIds: string[];
   /** Index into PORTAL_TOUR_STEPS while in progress */
   currentStepIndex: number;
@@ -97,7 +100,7 @@ export const PORTAL_TOUR_STEPS: TourStep[] = [
     ],
     actionLabel: "Open My day",
     actionHref: "/",
-    verifyHint: "Visit **My day** (`/`) — we'll detect it automatically.",
+    verifyHint: "Open **My day** — page visit counts (you don’t need to click anything else).",
   },
   {
     id: "ask-capability",
@@ -109,7 +112,7 @@ export const PORTAL_TOUR_STEPS: TourStep[] = [
     ],
     actionLabel: "Go to My day chat",
     actionHref: "/?tour=ask",
-    verifyHint: "Send **what can this do** in Ask.",
+    verifyHint: "Type and **send** **what can this do** in Ask (opening the page alone is not enough).",
   },
   {
     id: "learn-hub",
@@ -121,7 +124,7 @@ export const PORTAL_TOUR_STEPS: TourStep[] = [
     ],
     actionLabel: "Open Learn",
     actionHref: "/learn",
-    verifyHint: "Open the **Learn** page.",
+    verifyHint: "Open the **Learn** page — page visit counts.",
   },
   {
     id: "practice-typing",
@@ -133,7 +136,7 @@ export const PORTAL_TOUR_STEPS: TourStep[] = [
     ],
     actionLabel: "Open typing drill",
     actionHref: "/learn/practice?tour=1#typing",
-    verifyHint: "Complete one typing drill on Practice.",
+    verifyHint: "Complete one typing drill on Practice (opening Practice alone is not enough).",
   },
   {
     id: "hipaa-training",
@@ -145,7 +148,7 @@ export const PORTAL_TOUR_STEPS: TourStep[] = [
     ],
     actionLabel: "Open HIPAA training",
     actionHref: "/training",
-    verifyHint: "Open **HIPAA training** (`/training`).",
+    verifyHint: "Open **HIPAA training** (`/training`) — page visit counts.",
   },
   {
     id: "team",
@@ -157,7 +160,7 @@ export const PORTAL_TOUR_STEPS: TourStep[] = [
     ],
     actionLabel: "Open Team",
     actionHref: "/team",
-    verifyHint: "Open the **Team** page.",
+    verifyHint: "Open the **Team** page — page visit counts.",
   },
   {
     id: "feedback-practice",
@@ -169,7 +172,7 @@ export const PORTAL_TOUR_STEPS: TourStep[] = [
     ],
     actionLabel: "Open Feedback",
     actionHref: "/feedback?tour=1",
-    verifyHint: "Submit the sandbox feedback form once.",
+    verifyHint: "Submit the sandbox feedback form once (opening Feedback alone is not enough).",
   },
   {
     id: "finish",
@@ -201,16 +204,16 @@ export function mergePortalTourState(
   if (!local && !remote) return undefined;
   const l = local ? normalizePortalTour(local) : undefined;
   const r = remote ? normalizePortalTour(remote) : undefined;
-  const lDone = Boolean(l && (l.finishedAt || l.dismissedAt));
-  const rDone = Boolean(r && (r.finishedAt || r.dismissedAt));
-  // Never resurrect an in-progress remote tour over a local Pause/Finish.
-  if (lDone && rDone) {
-    const lAt = Math.max(l!.finishedAt ?? 0, l!.dismissedAt ?? 0);
-    const rAt = Math.max(r!.finishedAt ?? 0, r!.dismissedAt ?? 0);
+  // Finished / skipped / paused all beat remote in-progress (do not resurrect).
+  const lSettled = Boolean(l && (l.finishedAt || l.dismissedAt || l.pausedAt));
+  const rSettled = Boolean(r && (r.finishedAt || r.dismissedAt || r.pausedAt));
+  if (lSettled && rSettled) {
+    const lAt = Math.max(l!.finishedAt ?? 0, l!.dismissedAt ?? 0, l!.pausedAt ?? 0);
+    const rAt = Math.max(r!.finishedAt ?? 0, r!.dismissedAt ?? 0, r!.pausedAt ?? 0);
     return lAt >= rAt ? l : r;
   }
-  if (lDone) return l;
-  if (rDone) return r;
+  if (lSettled) return l;
+  if (rSettled) return r;
   if (l?.startedAt && !l.finishedAt && !l.dismissedAt) return l;
   if (r?.startedAt && !r.finishedAt && !r.dismissedAt) return r;
   return l ?? r;
@@ -222,7 +225,7 @@ export function defaultPortalTourState(): PortalTourState {
 
 export function normalizePortalTour(raw?: PortalTourState | null): PortalTourState {
   if (!raw || raw.version !== PORTAL_TOUR_VERSION) return defaultPortalTourState();
-  return {
+  const next: PortalTourState = {
     ...defaultPortalTourState(),
     ...raw,
     completedStepIds: raw.completedStepIds ?? [],
@@ -231,18 +234,30 @@ export function normalizePortalTour(raw?: PortalTourState | null): PortalTourSta
       PORTAL_TOUR_STEPS.length - 1,
     ),
   };
+  // Legacy: Pause used to set dismissedAt. If they had started and never finished,
+  // treat that as paused so resume works.
+  if (next.dismissedAt && next.startedAt && !next.finishedAt && !next.pausedAt) {
+    next.pausedAt = next.dismissedAt;
+    delete next.dismissedAt;
+  }
+  return next;
 }
 
+/** True only when the tour was completed end-to-end (not pause, not skip). */
 export function isPortalTourFinished(profile: PortalProfile | null | undefined): boolean {
   const t = profile?.productTour;
-  return Boolean(t?.finishedAt || t?.dismissedAt);
+  return Boolean(t?.finishedAt);
+}
+
+/** Explicit skip forever (not Pause). */
+export function isPortalTourSkipped(profile: PortalProfile | null | undefined): boolean {
+  const t = profile?.productTour;
+  return Boolean(t?.dismissedAt && !t?.finishedAt);
 }
 
 export function isPortalTourInProgress(profile: PortalProfile | null | undefined): boolean {
   const t = profile?.productTour;
-  if (!t?.startedAt || t.finishedAt || t.dismissedAt) return false;
-  // Explicit session gate: profile.startedAt alone must not reopen the coach after
-  // login / new browser. Only startTour() sets SESSION.active.
+  if (!t?.startedAt || t.finishedAt || t.dismissedAt || t.pausedAt) return false;
   try {
     if (typeof sessionStorage === "undefined") return false;
     return sessionStorage.getItem(SESSION.active) === "1";
@@ -251,10 +266,15 @@ export function isPortalTourInProgress(profile: PortalProfile | null | undefined
   }
 }
 
-/** True when profile has an unfinished tour record (may or may not be session-active). */
+/** True when profile has an unfinished tour (paused or mid-session). */
 export function hasUnfinishedTourRecord(profile: PortalProfile | null | undefined): boolean {
   const t = profile?.productTour;
   return Boolean(t?.startedAt && !t.finishedAt && !t.dismissedAt);
+}
+
+export function tourRemainingStepCount(state: PortalTourState): number {
+  const done = new Set(state.completedStepIds);
+  return PORTAL_TOUR_STEPS.filter((s) => !done.has(s.id)).length;
 }
 
 /**
@@ -265,14 +285,17 @@ export function hasUnfinishedTourRecord(profile: PortalProfile | null | undefine
 export function shouldChainOnboardingToTour(profile: PortalProfile | null | undefined): boolean {
   if (!profile) return true;
   if (profile.onboardingComplete || profile.onboardingSkipped) return false;
-  if (isPortalTourFinished(profile) || hasUnfinishedTourRecord(profile)) return false;
+  if (isPortalTourFinished(profile) || isPortalTourSkipped(profile) || hasUnfinishedTourRecord(profile)) {
+    return false;
+  }
   return true;
 }
 
-/** My day / settings — offer tour when not finished and not already running. */
+/** My day / settings — offer tour when not finished/skipped and not already running. */
 export function shouldOfferProductTour(profile: PortalProfile | null | undefined): boolean {
   if (!profile) return true;
-  return !isPortalTourFinished(profile) && !isPortalTourInProgress(profile);
+  if (isPortalTourFinished(profile) || isPortalTourSkipped(profile)) return false;
+  return !isPortalTourInProgress(profile);
 }
 
 export function tourProgressPercent(state: PortalTourState): number {

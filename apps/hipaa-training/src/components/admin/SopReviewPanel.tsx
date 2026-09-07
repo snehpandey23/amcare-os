@@ -142,7 +142,7 @@ export function SopReviewPanel() {
             {builderSubmitted.map((s) => {
               const draft = s.draftJson;
               return (
-                <li key={`b-${s.id}`} className="rounded-xl border border-[var(--siya-border)] bg-white p-4">
+                <li key={`b-${s.id}`} className="rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4">
                   <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--siya-accent)]">
                     Checklist SOP (AI Builder)
                   </p>
@@ -168,7 +168,7 @@ export function SopReviewPanel() {
               );
             })}
             {queue.map((sop) => (
-              <li key={sop.id} className="rounded-xl border border-[var(--siya-border)] bg-white p-4">
+              <li key={sop.id} className="rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4">
                 <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--siya-accent)]">
                   Policy SOP · {sop.department}
                 </p>

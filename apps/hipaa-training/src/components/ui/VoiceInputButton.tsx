@@ -160,7 +160,7 @@ export function VoiceInputButton({
       className={`inline-flex shrink-0 items-center gap-1.5 rounded-lg border text-sm font-medium transition disabled:opacity-50 ${pad} ${
         listening
           ? "border-red-400 bg-red-50 text-red-700"
-          : "border-[var(--siya-border)] bg-white text-[var(--siya-text-secondary)] hover:border-[var(--siya-accent)] hover:bg-[var(--siya-bg-subtle)]"
+          : "border-[var(--siya-border)] bg-[var(--siya-white)] text-[var(--siya-text-secondary)] hover:border-[var(--siya-accent)] hover:bg-[var(--siya-bg-subtle)]"
       } ${className}`}
     >
       <MicIcon listening={listening} />

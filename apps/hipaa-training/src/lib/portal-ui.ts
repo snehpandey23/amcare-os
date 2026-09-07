@@ -33,7 +33,7 @@ export const portalH2 =
 export const portalH3 =
   "font-[family-name:var(--font-poppins)] text-sm font-semibold text-[var(--siya-primary)]";
 
-export const portalCapsLabel = "text-xs font-medium uppercase tracking-wide text-[var(--siya-text-muted)]";
+export const portalCapsLabel = "text-xs font-medium uppercase tracking-wide text-[var(--siya-text-secondary)]";
 
 export const portalTabActive =
   "rounded-[var(--siya-radius-md)] bg-[var(--siya-btn-primary)] px-3 py-1.5 text-xs font-semibold text-white";
@@ -44,10 +44,10 @@ export const portalTabInactive =
 export const portalFocusRail = "rounded-none border-l-4 border-[var(--siya-primary)]/35";
 
 export const portalInput =
-  "w-full rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-3 py-2 text-sm text-[var(--siya-text)] outline-none focus:border-[var(--siya-accent)] focus:ring-2 focus:ring-[var(--siya-accent)]/20";
+  "w-full rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-3 py-2 text-sm text-[var(--siya-text)] placeholder:text-[var(--siya-text-secondary)] outline-none focus:border-[var(--siya-accent)] focus:ring-2 focus:ring-[var(--siya-accent)]/20";
 
 export const portalInputCompact =
-  "min-w-0 flex-1 rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-3 py-2 text-xs outline-none focus:border-[var(--siya-accent)] focus:ring-2 focus:ring-[var(--siya-accent)]/20";
+  "min-w-0 flex-1 rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-3 py-2 text-xs text-[var(--siya-text)] placeholder:text-[var(--siya-text-secondary)] outline-none focus:border-[var(--siya-accent)] focus:ring-2 focus:ring-[var(--siya-accent)]/20";
 
 export const portalBtnAccent =
   "rounded-[var(--siya-radius-md)] bg-[var(--siya-btn-accent)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--siya-btn-accent-hover)] disabled:opacity-60";
@@ -94,7 +94,7 @@ export const portalBadgeWip =
 export const portalLinkBack = "text-xs text-[var(--siya-accent)] hover:underline";
 
 export const portalAskInput =
-  "min-w-0 flex-1 rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-4 py-2.5 text-sm outline-none focus:border-[var(--siya-accent)] focus:ring-2 focus:ring-[var(--siya-accent)]/20";
+  "min-w-0 flex-1 rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-4 py-2.5 text-sm text-[var(--siya-text)] placeholder:text-[var(--siya-text-muted)] outline-none focus:border-[var(--siya-accent)] focus:ring-2 focus:ring-[var(--siya-accent)]/20";
 
 export const portalAskSendBtn =
   "rounded-lg bg-[var(--siya-btn-primary)] px-3.5 py-2 text-sm font-medium text-white transition hover:bg-[var(--siya-btn-primary-hover)] disabled:opacity-40";
@@ -104,7 +104,7 @@ export const portalWorkspaceNavActive =
   "font-medium text-[var(--siya-text)] bg-[var(--siya-white)]";
 
 export const portalWorkspaceNavIdle =
-  "text-[var(--siya-text-muted)] hover:bg-[var(--siya-white)] hover:text-[var(--siya-text)]";
+  "text-[var(--siya-text-secondary)] hover:bg-[var(--siya-white)] hover:text-[var(--siya-text)]";
 
 /** Lead / dept notice strip (was violet — now info tint on core palette). */
 export const portalNoticeLead =

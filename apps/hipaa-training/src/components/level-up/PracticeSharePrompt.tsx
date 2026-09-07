@@ -20,7 +20,7 @@ export function PracticeSharePrompt({
       <p id="share-practice-title" className="text-sm font-semibold text-[var(--siya-primary)]">
         Share this result to your weekly report?
       </p>
-      <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+      <p className="mt-1 text-xs text-[var(--siya-text-secondary)]">
         {drillLabel(entry.drill)}
         {typeof entry.wpm === "number" ? ` · ${entry.wpm} WPM` : ""}
         {entry.xpAwarded ? ` · +${entry.xpAwarded} XP` : ""} — asked every time; nothing is shared unless you tap Yes.

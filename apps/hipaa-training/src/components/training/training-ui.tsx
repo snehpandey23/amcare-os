@@ -7,7 +7,7 @@ export function TrainingShell({ children }: { children: ReactNode }) {
 export function TrainingCard({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
     <div
-      className={`rounded-[var(--siya-radius-lg)] border border-[var(--siya-border)] bg-white p-6 shadow-[var(--siya-shadow)] ${className}`}
+      className={`rounded-[var(--siya-radius-lg)] border border-[var(--siya-border)] bg-[var(--siya-white)] p-6 shadow-[var(--siya-shadow)] ${className}`}
     >
       {children}
     </div>
@@ -16,7 +16,7 @@ export function TrainingCard({ children, className = "" }: { children: ReactNode
 
 export function TrainingStat({ label, value }: { label: string; value: ReactNode }) {
   return (
-    <div className="rounded-xl border border-[var(--siya-border)] bg-white p-4 shadow-[var(--siya-shadow)]">
+    <div className="rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4 shadow-[var(--siya-shadow)]">
       <dt className="text-xs font-medium text-[var(--siya-text-muted)]">{label}</dt>
       <dd className="mt-1 font-[family-name:var(--font-poppins)] text-2xl font-semibold text-[var(--siya-primary)]">
         {value}
@@ -72,7 +72,7 @@ export function TrainingLinkPrimary({ href, children }: { href: string; children
 export const trainingLinkPrimaryClass =
   "inline-flex rounded-[var(--siya-radius-md)] bg-[var(--siya-btn-accent)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--siya-btn-accent-hover)]";
 export const trainingLinkSecondaryClass =
-  "inline-flex rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-white px-4 py-2.5 text-sm font-medium text-[var(--siya-text-secondary)] transition hover:bg-[var(--siya-bg-page)]";
+  "inline-flex rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-[var(--siya-white)] px-4 py-2.5 text-sm font-medium text-[var(--siya-text-secondary)] transition hover:bg-[var(--siya-bg-page)]";
 export const trainingLinkNavyClass =
   "inline-flex rounded-[var(--siya-radius-md)] bg-[var(--siya-primary)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--siya-primary-hover)]";
 
@@ -102,11 +102,11 @@ export function quizOptionClass(state: QuizOptionState, interactive: boolean) {
   const base =
     "flex w-full rounded-xl border px-4 py-3 text-left text-sm transition-colors text-[var(--siya-text-secondary)]";
   const map: Record<QuizOptionState, string> = {
-    default: "border-[var(--siya-border)] bg-white",
+    default: "border-[var(--siya-border)] bg-[var(--siya-white)]",
     selected: "border-[var(--siya-accent)] bg-[var(--siya-bg-subtle)]",
     correct: "border-[var(--siya-primary)] bg-[var(--siya-bg-subtle)]",
     incorrect: "border-[var(--siya-status-error-border)] bg-[var(--siya-status-error-bg)]",
-    muted: "border-[var(--siya-border)] bg-white opacity-60",
+    muted: "border-[var(--siya-border)] bg-[var(--siya-white)] opacity-60",
   };
   const hover = interactive ? " hover:border-[var(--siya-accent)]/50 hover:bg-[var(--siya-bg-page)]" : "";
   return `${base} ${map[state]}${hover}`;

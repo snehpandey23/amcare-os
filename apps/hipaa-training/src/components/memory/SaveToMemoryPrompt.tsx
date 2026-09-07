@@ -65,7 +65,7 @@ export function SaveToMemoryPrompt({
             key={level}
             type="button"
             onClick={() => setImportance(level)}
-            className={`rounded-full border px-2 py-1 ${importance === level ? "border-[var(--siya-primary)] bg-white font-semibold" : ""}`}
+            className={`rounded-full border px-2 py-1 ${importance === level ? "border-[var(--siya-primary)] bg-[var(--siya-white)] font-semibold" : ""}`}
             title={IMPORTANCE_HINT[level]}
           >
             L{level} {IMPORTANCE_LABEL[level]}

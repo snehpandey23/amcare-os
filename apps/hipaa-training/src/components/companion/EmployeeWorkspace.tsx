@@ -26,7 +26,7 @@ export function EmployeeWorkspace() {
         </p>
       </div>
       <GrowthPillars />
-      <details className="rounded-2xl border border-[var(--siya-border)] bg-white/80 px-4 py-3">
+      <details className="rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)]/80 px-4 py-3">
         <summary className="cursor-pointer text-sm font-semibold text-[var(--siya-text-secondary)]">
           {data.title} ↓
         </summary>

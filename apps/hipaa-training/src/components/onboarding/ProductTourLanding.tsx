@@ -6,10 +6,14 @@ import { useAuth } from "@/context/AuthContext";
 import { usePortalTour } from "@/context/PortalTourContext";
 import { loadLocalPortalProfile } from "@/lib/portal-profile";
 import {
-  isPortalTourInProgress,
+  hasUnfinishedTourRecord,
   isPortalTourFinished,
+  isPortalTourInProgress,
+  isPortalTourSkipped,
+  normalizePortalTour,
   PORTAL_TOUR_STEPS,
   PORTAL_TOUR_ESSENTIALS,
+  tourRemainingStepCount,
 } from "@/lib/portal-product-tour";
 import { trainingLinkPrimaryClass } from "@/components/training/training-ui";
 import { portalBtnGhostSm, portalH1, portalPage, portalSection } from "@/lib/portal-ui";
@@ -20,10 +24,15 @@ import { PortalNavLink } from "@/components/training/PortalNavLink";
 export function ProductTourLanding() {
   const router = useRouter();
   const { authReady, user } = useAuth();
-  const { startTour } = usePortalTour();
+  const { startTour, resumeTour } = usePortalTour();
   const profile = loadLocalPortalProfile();
+  const tour = normalizePortalTour(profile.productTour);
   const inProgress = isPortalTourInProgress(profile);
   const finished = isPortalTourFinished(profile);
+  const skipped = isPortalTourSkipped(profile);
+  const paused = hasUnfinishedTourRecord(profile) && Boolean(tour.pausedAt || tour.startedAt);
+  const remaining = tourRemainingStepCount(tour);
+  const stepNum = Math.min(tour.currentStepIndex + 1, PORTAL_TOUR_STEPS.length);
   const firstName = user?.name?.trim().split(/\s+/)[0] || "there";
 
   useEffect(() => {
@@ -63,16 +72,40 @@ export function ProductTourLanding() {
           ))}
         </ul>
         <p className="text-xs text-[var(--siya-text-muted)]">
-          About 10 minutes · progress saves to your account · other tools stay available later as you need them
+          About 10 minutes · progress saves to your account · pause anytime and resume from My day
         </p>
       </section>
 
       <div className="mt-8 flex flex-col gap-3">
         {finished ? (
           <>
-            <p className="text-sm text-[var(--siya-status-success-text)]">You completed or skipped this tour earlier.</p>
+            <p className="text-sm text-[var(--siya-status-success-text)]">You completed this tour earlier.</p>
             <button type="button" className={trainingLinkPrimaryClass} onClick={startTour} disabled={!canStart}>
               Run through again
+            </button>
+          </>
+        ) : skipped ? (
+          <>
+            <p className="text-sm text-[var(--siya-text-secondary)]">You skipped this tour earlier.</p>
+            <button type="button" className={trainingLinkPrimaryClass} onClick={startTour} disabled={!canStart}>
+              Start essentials tour
+            </button>
+          </>
+        ) : paused && hasUnfinishedTourRecord(profile) ? (
+          <>
+            <p className="text-sm text-[var(--siya-text)]">
+              Paused · step {stepNum} of {PORTAL_TOUR_STEPS.length} · {remaining} remaining
+            </p>
+            <button type="button" className={trainingLinkPrimaryClass} onClick={resumeTour} disabled={!canStart}>
+              Resume tour
+            </button>
+            <button
+              type="button"
+              className={`${portalBtnGhostSm} text-center`}
+              onClick={startTour}
+              disabled={!canStart}
+            >
+              Restart from the beginning
             </button>
           </>
         ) : (

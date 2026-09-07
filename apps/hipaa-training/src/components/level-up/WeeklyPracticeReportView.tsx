@@ -17,7 +17,7 @@ export function WeeklyPracticeReportView({ report }: { report: WeeklyPracticeRep
         <h3 className="font-[family-name:var(--font-poppins)] text-sm font-semibold text-[var(--siya-primary)]">
           Weekly practice report
         </h3>
-        <p className="mt-0.5 text-xs text-[var(--siya-text-muted)]">
+        <p className="mt-0.5 text-xs text-[var(--siya-text-secondary)]">
           {report.subjectLabel} · {report.weekStart} → {report.weekEnd} (UTC)
         </p>
         <p className="mt-2 text-sm text-[var(--siya-text)]">
@@ -26,14 +26,14 @@ export function WeeklyPracticeReportView({ report }: { report: WeeklyPracticeRep
           </strong>{" "}
           drill-days shared this week
         </p>
-        <p className="mt-1 text-[10px] text-[var(--siya-text-muted)]">
+        <p className="mt-1 text-[10px] text-[var(--siya-text-secondary)]">
           Only results you chose to share appear here. Fingerprint: {report.contentFingerprint}
         </p>
       </header>
 
       {report.typingTrend.length ? (
         <div className="mb-3">
-          <h4 className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-text-muted)]">
+          <h4 className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-text-secondary)]">
             Typing (shared)
           </h4>
           <ul className="mt-1 space-y-1 text-sm">
@@ -45,12 +45,12 @@ export function WeeklyPracticeReportView({ report }: { report: WeeklyPracticeRep
           </ul>
         </div>
       ) : (
-        <p className="mb-3 text-xs text-[var(--siya-text-muted)]">No shared typing results this week.</p>
+        <p className="mb-3 text-xs text-[var(--siya-text-secondary)]">No shared typing results this week.</p>
       )}
 
       {report.cultureProgress.length ? (
         <div className="mb-3">
-          <h4 className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-text-muted)]">
+          <h4 className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-text-secondary)]">
             Culture / map / trivia (shared)
           </h4>
           <ul className="mt-1 space-y-1 text-sm">
@@ -62,12 +62,12 @@ export function WeeklyPracticeReportView({ report }: { report: WeeklyPracticeRep
           </ul>
         </div>
       ) : (
-        <p className="mb-3 text-xs text-[var(--siya-text-muted)]">No shared culture/map results this week.</p>
+        <p className="mb-3 text-xs text-[var(--siya-text-secondary)]">No shared culture/map results this week.</p>
       )}
 
       {report.sharedEvents.length ? (
         <div>
-          <h4 className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-text-muted)]">
+          <h4 className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-text-secondary)]">
             Shared events
           </h4>
           <ul className="mt-1 max-h-40 space-y-1 overflow-y-auto text-xs text-[var(--siya-text-secondary)]">
