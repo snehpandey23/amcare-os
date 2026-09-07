@@ -28,12 +28,14 @@ type GapCluster = {
   latestAt: string;
   phiRedacted: boolean;
   ids: string[];
+  hasQuestion: boolean;
 };
 
 function clusterOpenGaps(gaps: AssistGapRecord[]): GapCluster[] {
   const map = new Map<string, GapCluster>();
   for (const g of gaps) {
-    const title = (g.topicHint?.trim() || g.taskLabel?.trim() || "Missing approved policy").slice(0, 200);
+    const hint = g.topicHint?.trim() || "";
+    const title = (hint || g.taskLabel?.trim() || "Missing approved policy").slice(0, 200);
     const key = `${g.departmentSlug || g.department}::${title.toLowerCase()}`;
     const cur = map.get(key);
     if (!cur) {
@@ -45,6 +47,7 @@ function clusterOpenGaps(gaps: AssistGapRecord[]): GapCluster[] {
         latestAt: g.createdAt,
         phiRedacted: g.phiRedacted,
         ids: [g.id],
+        hasQuestion: Boolean(hint),
       });
       continue;
     }
@@ -52,14 +55,19 @@ function clusterOpenGaps(gaps: AssistGapRecord[]): GapCluster[] {
     cur.ids.push(g.id);
     if (g.createdAt > cur.latestAt) cur.latestAt = g.createdAt;
     if (g.phiRedacted) cur.phiRedacted = true;
+    if (hint) cur.hasQuestion = true;
   }
   return [...map.values()].sort(
-    (a, b) => b.count - a.count || b.latestAt.localeCompare(a.latestAt) || a.title.localeCompare(b.title),
+    (a, b) =>
+      Number(b.hasQuestion) - Number(a.hasQuestion) ||
+      b.count - a.count ||
+      b.latestAt.localeCompare(a.latestAt) ||
+      a.title.localeCompare(b.title),
   );
 }
 
 /**
- * Lead/admin open knowledge gaps — clustered + capped (max 5 rows, then overflow box).
+ * Lead/admin open knowledge gaps — question clusters first; router-label noise capped.
  */
 export function LeadKnowledgeGapsCard({ className = "" }: Props) {
   const { authReady, user } = useAuth();
@@ -71,6 +79,8 @@ export function LeadKnowledgeGapsCard({ className = "" }: Props) {
   const [pendingKey, setPendingKey] = useState<string | null>(null);
 
   const clusters = useMemo(() => clusterOpenGaps(gaps), [gaps]);
+  const questionClusters = useMemo(() => clusters.filter((c) => c.hasQuestion), [clusters]);
+  const labelBacklog = useMemo(() => clusters.filter((c) => !c.hasQuestion), [clusters]);
 
   const load = useCallback(async () => {
     if (!authReady || !user) return;
@@ -117,16 +127,42 @@ export function LeadKnowledgeGapsCard({ className = "" }: Props) {
     }
   }
 
+  async function clearLabelBacklog() {
+    setPendingKey("__backlog__");
+    setError(null);
+    setNotice(null);
+    try {
+      let ok = 0;
+      for (const c of labelBacklog) {
+        for (const id of c.ids) {
+          try {
+            await resolveKnowledgeGap(id);
+            ok += 1;
+          } catch {
+            /* continue */
+          }
+        }
+      }
+      setNotice(`Cleared ${ok} old label rows.`);
+      await load();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Could not clear");
+    } finally {
+      setPendingKey(null);
+    }
+  }
+
   return (
     <section className={`${portalSectionCompact} ${className}`} aria-label="Open knowledge gaps">
       <h2 className={portalH3}>Open knowledge gaps</h2>
       <p className="mt-0.5 text-[11px] text-[var(--siya-text-muted)]">
         {honestyNote ||
-          "Notify owner / auto-gap signals — similar asks are grouped. Thumbs-down quality votes are omitted here."}
+          "Shows PHI-safe Ask wording when we have it. Old router labels are a separate backlog."}
       </p>
       {!loading && gaps.length > 0 ? (
         <p className="mt-1 text-[11px] text-[var(--siya-text-muted)]">
-          {gaps.length} open · {clusters.length} topic{clusters.length === 1 ? "" : "s"}
+          {questionClusters.length} with wording · {labelBacklog.length} old labels · {gaps.length} open
+          rows
         </p>
       ) : null}
 
@@ -136,62 +172,89 @@ export function LeadKnowledgeGapsCard({ className = "" }: Props) {
       {loading ? (
         <p className="mt-2 text-xs text-[var(--siya-text-muted)]">Loading…</p>
       ) : (
-        <div className="mt-3">
-          <CappedStack
-            items={clusters}
-            renderItem={(c) => (
-              <div
-                key={c.key}
-                className="flex flex-wrap items-start justify-between gap-2 rounded-lg border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-3 py-2"
-              >
-                <div className="min-w-0 flex-1">
-                  <p className="text-xs font-semibold text-[var(--siya-primary)]">
-                    {c.department}
-                    {c.count > 1 ? (
-                      <span className="ml-2 font-semibold tabular-nums text-[var(--siya-accent)]">
-                        ×{c.count}
-                      </span>
-                    ) : null}
-                  </p>
-                  <p className="text-sm text-[var(--siya-text-secondary)]">{c.title}</p>
-                  <p className="mt-0.5 text-[10px] text-[var(--siya-text-muted)]">
-                    Latest {c.latestAt.slice(0, 10)}
-                    {c.phiRedacted ? " · some PHI-safe" : ""}
-                  </p>
+        <div className="mt-3 space-y-4">
+          {questionClusters.length === 0 ? (
+            <p className="text-sm text-[var(--siya-text-muted)]">
+              No open gaps with saved question wording yet. New Notify owner clicks will show the Ask here.
+            </p>
+          ) : (
+            <CappedStack
+              items={questionClusters}
+              renderItem={(c) => (
+                <div
+                  key={c.key}
+                  className="flex flex-wrap items-start justify-between gap-2 rounded-lg border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-3 py-2"
+                >
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs font-semibold text-[var(--siya-primary)]">
+                      {c.department}
+                      {c.count > 1 ? (
+                        <span className="ml-2 font-semibold tabular-nums text-[var(--siya-accent)]">
+                          ×{c.count}
+                        </span>
+                      ) : null}
+                    </p>
+                    <p className="text-sm text-[var(--siya-text-secondary)]">“{c.title}”</p>
+                    <p className="mt-0.5 text-[10px] text-[var(--siya-text-muted)]">
+                      Latest {c.latestAt.slice(0, 10)}
+                      {c.phiRedacted ? " · some PHI-safe" : ""}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    className={portalBtnGhostSm}
+                    disabled={pendingKey === c.key}
+                    onClick={() => void onResolveCluster(c)}
+                  >
+                    {pendingKey === c.key ? "…" : c.count > 1 ? "Mark all handled" : "Mark handled"}
+                  </button>
                 </div>
+              )}
+              renderOverflow={({ hiddenCount, hidden }) => {
+                const { topLabels, extraLabelKinds } = summarizeHiddenLabels(
+                  hidden.map((h) => `${h.department} · ${h.title}`),
+                );
+                return (
+                  <ListOverflowBox
+                    title={`+${hiddenCount} more questions`}
+                    detail={`${topLabels.join(" · ")}${
+                      extraLabelKinds > 0 ? ` · +${extraLabelKinds} other` : ""
+                    }`}
+                    action={
+                      <Link
+                        href="/ops"
+                        className="text-xs font-semibold text-[var(--siya-accent)] hover:underline"
+                      >
+                        Same questions on Ops →
+                      </Link>
+                    }
+                  />
+                );
+              }}
+            />
+          )}
+
+          {labelBacklog.length > 0 ? (
+            <ListOverflowBox
+              title={`Old label backlog · ${labelBacklog.reduce((n, c) => n + c.count, 0)} rows`}
+              detail={
+                summarizeHiddenLabels(
+                  labelBacklog.map((c) => `${c.department} · ${c.title} ×${c.count}`),
+                  4,
+                ).topLabels.join(" · ") + " — not real question text."
+              }
+              action={
                 <button
                   type="button"
                   className={portalBtnGhostSm}
-                  disabled={pendingKey === c.key}
-                  onClick={() => void onResolveCluster(c)}
+                  disabled={pendingKey === "__backlog__"}
+                  onClick={() => void clearLabelBacklog()}
                 >
-                  {pendingKey === c.key ? "…" : c.count > 1 ? "Mark all handled" : "Mark handled"}
+                  {pendingKey === "__backlog__" ? "Clearing…" : "Clear old labels"}
                 </button>
-              </div>
-            )}
-            renderOverflow={({ hiddenCount, hidden, total }) => {
-              const { topLabels, extraLabelKinds } = summarizeHiddenLabels(
-                hidden.map((h) => `${h.department} · ${h.title}`),
-              );
-              const hiddenRows = hidden.reduce((n, h) => n + h.count, 0);
-              return (
-                <ListOverflowBox
-                  title={`+${hiddenCount} more topic${hiddenCount === 1 ? "" : "s"} (${hiddenRows} open)`}
-                  detail={`${topLabels.join(" · ")}${
-                    extraLabelKinds > 0 ? ` · +${extraLabelKinds} other` : ""
-                  } · ${total} topics total`}
-                  action={
-                    <Link
-                      href="/ops"
-                      className="text-xs font-semibold text-[var(--siya-accent)] hover:underline"
-                    >
-                      Same questions on Ops →
-                    </Link>
-                  }
-                />
-              );
-            }}
-          />
+              }
+            />
+          ) : null}
         </div>
       )}
     </section>

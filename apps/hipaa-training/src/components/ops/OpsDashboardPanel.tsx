@@ -13,6 +13,7 @@ import {
   type OpsRecurringGapPattern,
   type OpsFounderSopConsolidationFlag,
 } from "@/lib/ops-dashboard-api";
+import { resolveKnowledgeGap } from "@/lib/assist-gaps-api";
 import { WeeklyPracticeReportView } from "@/components/level-up/WeeklyPracticeReportView";
 import { buildWeeklyPracticeReport, coerceDayLedger } from "@/lib/level-up/weekly-report";
 import type { LevelUpProgress } from "@/lib/level-up/progress";
@@ -35,6 +36,7 @@ import {
   portalH2,
   portalSection,
   portalStatusErrorText,
+  portalStatusSuccessText,
   portalStatusWarnText,
 } from "@/lib/portal-ui";
 
@@ -271,6 +273,20 @@ function LeadCard({
   );
 }
 
+function isQuestionPattern(p: OpsRecurringGapPattern): boolean {
+  if (p.patternKind === "question") return true;
+  if (p.topicHint?.trim()) return true;
+  return Boolean(p.sampleHints?.some((h) => h.trim()));
+}
+
+function patternHeadline(p: OpsRecurringGapPattern): string {
+  return (
+    p.topicHint?.trim() ||
+    p.sampleHints?.find((h) => h.trim()) ||
+    `${p.departmentLabel} · ${p.taskLabel}`
+  );
+}
+
 function RecurringGapPatternCard({
   pattern,
   volumeUnknown,
@@ -279,28 +295,16 @@ function RecurringGapPatternCard({
   volumeUnknown?: boolean;
 }) {
   const unknownPeople = volumeUnknown || !pattern.multiStaff;
-  const headline =
-    pattern.topicHint?.trim() ||
-    pattern.sampleHints?.[0]?.trim() ||
-    pattern.taskLabel;
-  const isQuestion = pattern.patternKind === "question" || Boolean(pattern.topicHint?.trim());
+  const headline = patternHeadline(pattern);
   const extraSamples = (pattern.sampleHints || []).filter((h) => h && h !== headline).slice(0, 2);
 
   return (
     <article className="rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-4 py-3">
       <p className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-primary)]">
-        {isQuestion ? "Keeps coming up" : "Keeps coming up · router bucket"}
+        Repeating question
       </p>
-      <p className="mt-1 text-sm font-medium text-[var(--siya-text)]">
-        {pattern.departmentLabel}
-      </p>
-      <p className="mt-1 text-sm text-[var(--siya-text-secondary)]">
-        {isQuestion ? (
-          <span>“{headline}”</span>
-        ) : (
-          <code className="rounded bg-[var(--siya-bg-subtle)] px-1.5 py-0.5 text-[12px]">{headline}</code>
-        )}
-      </p>
+      <p className="mt-1 text-sm font-medium text-[var(--siya-text)]">{pattern.departmentLabel}</p>
+      <p className="mt-1 text-sm text-[var(--siya-text-secondary)]">“{headline}”</p>
       {extraSamples.length > 0 ? (
         <ul className="mt-1.5 space-y-0.5 text-xs text-[var(--siya-text-muted)]">
           {extraSamples.map((s) => (
@@ -310,7 +314,6 @@ function RecurringGapPatternCard({
       ) : null}
       <p className="mt-2 text-sm tabular-nums text-[var(--siya-text-secondary)]">
         <span className="font-semibold text-[var(--siya-text)]">{pattern.openGapCount}</span> open
-        gaps
         {!unknownPeople ? (
           <>
             {" "}
@@ -321,12 +324,10 @@ function RecurringGapPatternCard({
         · last {pattern.windowDays} days
       </p>
       {unknownPeople ? (
-        <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
-          Lots of volume — we don’t know exactly who yet.
-        </p>
+        <p className="mt-1 text-xs text-[var(--siya-text-muted)]">Volume is high — reporters not all known.</p>
       ) : null}
-      <p className="mt-2 text-[11px] italic text-[var(--siya-text-muted)]">
-        {pattern.surfaceOnlyNote || "Just a heads-up — nothing auto-drafts from here."}
+      <p className="mt-2 text-[11px] text-[var(--siya-text-muted)]">
+        Write or merge a guide if this still has no approved answer.
       </p>
     </article>
   );
@@ -480,6 +481,8 @@ export function OpsDashboardPanel() {
   const [reportUserId, setReportUserId] = useState<string | null>(null);
   const [showTestAccounts, setShowTestAccounts] = useState(false);
   const [openSection, setOpenSection] = useState<OpsSectionId | null>(null);
+  const [clearingBacklog, setClearingBacklog] = useState(false);
+  const [gapNotice, setGapNotice] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -529,6 +532,26 @@ export function OpsDashboardPanel() {
     });
   }, [data, showTestAccounts]);
 
+  const gapQuestionPatterns = useMemo(() => {
+    if (!data) return [];
+    const multi = data.recurringGapPatterns || [];
+    const volume = data.volumeGapPatternsUnknownPeople || [];
+    return [
+      ...multi.filter(isQuestionPattern).map((p) => ({ pattern: p, volumeUnknown: false as const })),
+      ...volume.filter(isQuestionPattern).map((p) => ({ pattern: p, volumeUnknown: true as const })),
+    ];
+  }, [data]);
+
+  const gapRouterBacklog = useMemo(() => {
+    if (!data) return [];
+    const multi = data.recurringGapPatterns || [];
+    const volume = data.volumeGapPatternsUnknownPeople || [];
+    return [
+      ...multi.filter((p) => !isQuestionPattern(p)),
+      ...volume.filter((p) => !isQuestionPattern(p)),
+    ];
+  }, [data]);
+
   const hubTiles = useMemo((): OpsHubTile[] => {
     if (!data) return [];
     const cold =
@@ -536,8 +559,7 @@ export function OpsDashboardPanel() {
       (data.engagement ? filterEngagementRows(data.engagement, false).visible.filter(isNotEngagedYet).length : 0);
     const missingNotes = leadsSorted.filter((l) => !l.weeklyCheckIn.submittedThisWeek).length;
     const pendingSops = leadsSorted.reduce((n, l) => n + l.sopQueue.pendingCount, 0);
-    const gapPatterns =
-      (data.recurringGapPatterns?.length ?? 0) + (data.volumeGapPatternsUnknownPeople?.length ?? 0);
+    const questionCount = gapQuestionPatterns.length;
     const coverage = data.coverageGaps?.length ?? 0;
     const todayRows = data.scheduledVsActual?.length ?? 0;
 
@@ -572,9 +594,9 @@ export function OpsDashboardPanel() {
       {
         id: "gaps",
         title: "Same questions keep coming",
-        blurb: "Topics people keep asking about with no solid guide yet.",
-        stat: gapPatterns > 0 ? `${gapPatterns} patterns` : "None right now",
-        warn: gapPatterns > 0,
+        blurb: "Repeating Ask wording (not old router labels like Company memory lookup).",
+        stat: questionCount > 0 ? `${questionCount} questions` : "None with wording yet",
+        warn: questionCount > 0,
       },
       {
         id: "today",
@@ -603,7 +625,7 @@ export function OpsDashboardPanel() {
     }
 
     return tiles;
-  }, [data, engagementView, leadsSorted]);
+  }, [data, engagementView, leadsSorted, gapQuestionPatterns.length]);
 
   if (!authReady || !user) return null;
 
@@ -808,57 +830,108 @@ export function OpsDashboardPanel() {
                     Same questions keep coming
                   </h2>
                   <p className="mt-1 mb-4 text-xs text-[var(--siya-text-muted)]">
-                    Same department + question (when we have a PHI-safe hint), a few people asking, last 30
-                    days. Showing up to 5; the rest collapse into one box. We don’t auto-write SOPs from
-                    this.
-                    {data.viewer.isAdmin ? " Showing all departments." : " Your lead departments only."}
+                    Only shows <strong>real Ask wording</strong> we’ve saved (PHI-safe). Labels like “Company
+                    memory lookup” or “Founder Talk” are router buckets — not topics — so they stay out of this
+                    list.
+                    {data.viewer.isAdmin ? " All departments." : " Your lead departments only."}
                   </p>
-                  {(() => {
-                    const multi = data.recurringGapPatterns || [];
-                    const volume = data.volumeGapPatternsUnknownPeople || [];
-                    const all = [
-                      ...multi.map((p) => ({ pattern: p, volumeUnknown: false as const })),
-                      ...volume.map((p) => ({ pattern: p, volumeUnknown: true as const })),
-                    ];
-                    if (!all.length) {
-                      return (
-                        <p className="text-sm text-[var(--siya-text-muted)]">
-                          Nothing repeating hard enough to call out right now.
-                        </p>
-                      );
-                    }
-                    return (
-                      <CappedStack
-                        className="space-y-3"
-                        items={all}
-                        renderItem={({ pattern, volumeUnknown }) => (
-                          <RecurringGapPatternCard
-                            key={`${volumeUnknown ? "vol" : "multi"}-${pattern.patternKey || pattern.normalizedTaskLabel}-${pattern.departmentSlug}`}
-                            pattern={pattern}
-                            volumeUnknown={volumeUnknown}
+                  {gapNotice ? (
+                    <p className={`mb-3 text-xs ${portalStatusSuccessText}`}>{gapNotice}</p>
+                  ) : null}
+                  {gapQuestionPatterns.length === 0 ? (
+                    <div className="rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-4 py-3">
+                      <p className="text-sm font-medium text-[var(--siya-text)]">
+                        No repeating questions with wording yet
+                      </p>
+                      <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+                        After the next few Notify owner / auto-gaps (when the PHI guard passes), you’ll see the
+                        actual questions here — e.g. “how do we handle late cancel fees?” — not a stack of
+                        router labels.
+                      </p>
+                    </div>
+                  ) : (
+                    <CappedStack
+                      className="space-y-3"
+                      items={gapQuestionPatterns}
+                      renderItem={({ pattern, volumeUnknown }) => (
+                        <RecurringGapPatternCard
+                          key={`${volumeUnknown ? "vol" : "multi"}-${pattern.patternKey || pattern.normalizedTaskLabel}-${pattern.departmentSlug}`}
+                          pattern={pattern}
+                          volumeUnknown={volumeUnknown}
+                        />
+                      )}
+                      renderOverflow={({ hiddenCount, hidden }) => {
+                        const { topLabels, extraLabelKinds } = summarizeHiddenLabels(
+                          hidden.map(({ pattern }) => patternHeadline(pattern)),
+                        );
+                        return (
+                          <ListOverflowBox
+                            title={`+${hiddenCount} more repeating questions`}
+                            detail={`${topLabels.join(" · ")}${
+                              extraLabelKinds > 0 ? ` · +${extraLabelKinds} other` : ""
+                            }`}
                           />
-                        )}
-                        renderOverflow={({ hiddenCount, hidden }) => {
-                          const { topLabels, extraLabelKinds } = summarizeHiddenLabels(
-                            hidden.map(
-                              ({ pattern }) =>
-                                pattern.topicHint?.trim() ||
-                                pattern.sampleHints?.[0] ||
-                                `${pattern.departmentLabel} · ${pattern.taskLabel}`,
+                        );
+                      }}
+                    />
+                  )}
+
+                  {gapRouterBacklog.length > 0 ? (
+                    <div className="mt-6">
+                      <ListOverflowBox
+                        title={`Old label backlog · ${gapRouterBacklog.reduce((n, p) => n + p.openGapCount, 0)} open rows`}
+                        detail={
+                          summarizeHiddenLabels(
+                            gapRouterBacklog.map(
+                              (p) => `${p.departmentLabel} · ${p.taskLabel} ×${p.openGapCount}`,
                             ),
-                          );
-                          return (
-                            <ListOverflowBox
-                              title={`+${hiddenCount} more repeating patterns`}
-                              detail={`${topLabels.join(" · ")}${
-                                extraLabelKinds > 0 ? ` · +${extraLabelKinds} other` : ""
-                              }`}
-                            />
-                          );
-                        }}
+                            5,
+                          ).topLabels.join(" · ") +
+                          " — these are not questions; safe to clear if you’re not using them as a queue."
+                        }
+                        action={
+                          data.viewer.isAdmin ? (
+                            <button
+                              type="button"
+                              className={portalBtnGhostSm}
+                              disabled={clearingBacklog}
+                              onClick={() => {
+                                void (async () => {
+                                  setClearingBacklog(true);
+                                  setGapNotice(null);
+                                  setError(null);
+                                  try {
+                                    const ids = gapRouterBacklog.flatMap((p) => p.gapIds || []);
+                                    let ok = 0;
+                                    for (const id of ids) {
+                                      try {
+                                        await resolveKnowledgeGap(id);
+                                        ok += 1;
+                                      } catch {
+                                        /* keep going */
+                                      }
+                                    }
+                                    setGapNotice(`Cleared ${ok} old label rows.`);
+                                    await load();
+                                  } catch (e) {
+                                    setError(e instanceof Error ? e.message : "Could not clear backlog");
+                                  } finally {
+                                    setClearingBacklog(false);
+                                  }
+                                })();
+                              }}
+                            >
+                              {clearingBacklog ? "Clearing…" : "Clear old label backlog"}
+                            </button>
+                          ) : (
+                            <span className="text-[11px] text-[var(--siya-text-muted)]">
+                              Ask an admin to clear this backlog if it’s noise.
+                            </span>
+                          )
+                        }
                       />
-                    );
-                  })()}
+                    </div>
+                  ) : null}
                 </section>
               ) : null}
 

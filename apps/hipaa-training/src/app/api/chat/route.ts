@@ -193,11 +193,18 @@ export async function POST(req: Request) {
       syntheticProbe?: boolean;
     } | null = null;
     // Courtesy / greeting-style asks must never auto-email a knowledge gap (noise).
+    // Vague router tasks (Company memory lookup / Founder Talk) are not real topics —
+    // staff can still Notify owner; that path stores a PHI-safe question hint.
+    const vagueRouterTask =
+      task === "Company memory lookup" ||
+      task === "Founder Talk" ||
+      task === "Unmatched Ask";
     if (
       authToken &&
       result.knowledgeGap === true &&
       !result.refused &&
-      !isCourtesyNoiseForGapCapture(message)
+      !isCourtesyNoiseForGapCapture(message) &&
+      !vagueRouterTask
     ) {
       const department = result.routing?.department || (surface === "founder-coach" ? "Leadership" : "General");
       const task =
