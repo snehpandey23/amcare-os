@@ -6,6 +6,10 @@
 
 import { generateText } from "ai";
 import { getPersona, type Persona } from "@/data/patient-drill/personas";
+import {
+  deriveToneStateFromHistory,
+  frustratedExitStop,
+} from "@/lib/patient-drill/escalation";
 import { buildPatientDrillSystemPrompt } from "@/lib/patient-drill/prompt";
 import {
   EMPTY_REPLY_FALLBACK,
@@ -59,7 +63,7 @@ function parseCustomPersona(raw: unknown): Persona | null {
   };
 }
 
-function stopResponse(stop: SafetyStop, personaId: string): Response {
+function stopResponse(stop: SafetyStop | ReturnType<typeof frustratedExitStop>, personaId: string): Response {
   return Response.json(
     {
       ok: true,
@@ -70,6 +74,7 @@ function stopResponse(stop: SafetyStop, personaId: string): Response {
       breakTitle: stop.breakTitle,
       breakBody: stop.breakBody,
       patientReply: stop.patientReply || EMPTY_REPLY_FALLBACK,
+      outcome: stop.kind === "frustrated_exit" ? "patient_left_frustrated" : undefined,
     },
     {
       headers: {
@@ -82,7 +87,8 @@ function stopResponse(stop: SafetyStop, personaId: string): Response {
 }
 
 /** Deterministic pool reply when LLM is down — keeps drills runnable. */
-function poolFallback(persona: Persona, maText: string): string {
+function poolFallback(persona: Persona, maText: string, preferredLine?: string | null): string {
+  if (preferredLine?.trim()) return preferredLine.trim();
   const lower = maText.toLowerCase();
   const pools = persona.responsePools;
   const pick = (arr: string[]) => (arr.length ? arr[Math.floor(Math.random() * arr.length)]! : "");
@@ -180,23 +186,49 @@ export async function POST(req: Request) {
     prior = prior.slice(0, -1);
   }
 
+  // Safety always wins over tone ladder.
   const safety = evaluateTurnSafety({ history: prior, latestMaText: content });
   if (safety.action === "stop") {
     return stopResponse(safety.stop, persona.id);
   }
 
+  const tone = deriveToneStateFromHistory(persona, prior, content);
+  if (tone.endFrustrated) {
+    const line = tone.patientLine || EMPTY_REPLY_FALLBACK;
+    return stopResponse(frustratedExitStop(line), persona.id);
+  }
+
   const turns = prior.filter((m) => m.role === "user").length;
-  const system = buildPatientDrillSystemPrompt(persona, turns, prior);
+  const system = buildPatientDrillSystemPrompt(persona, turns, prior, {
+    toneStep: tone.state.step,
+  });
   const messages = [
     ...prior.map((m) => ({ role: m.role, content: m.content })),
     { role: "user" as const, content },
   ];
 
+  const toneMeta = {
+    toneStep: tone.state.step,
+    weakStreak: tone.state.weakStreak,
+    replyStrength: tone.state.lastStrength,
+    escalationReason: tone.reason,
+  };
+
+  // T2 ladder lines are deterministic training content (Relevance decides tier; line pool phrases it).
+  const useLadderLine =
+    Boolean(tone.patientLine) &&
+    (tone.state.step === "T2-A" || tone.state.step === "T2-B" || tone.state.step === "T2-C");
+
+  if (useLadderLine && tone.patientLine) {
+    return okReply(persona.id, tone.patientLine, { via: "t2-ladder", ...toneMeta });
+  }
+
   if (!workforceLlmConfigured()) {
     const disabled = workforceLlmDisabledMessage();
-    return okReply(persona.id, poolFallback(persona, content), {
+    return okReply(persona.id, poolFallback(persona, content, tone.patientLine), {
       warn: disabled.userMessage,
       via: "persona-pool",
+      ...toneMeta,
     });
   }
 
@@ -213,15 +245,16 @@ export async function POST(req: Request) {
       if (!trimmed) throw new Error("empty_llm_patient_reply");
       return trimmed;
     });
-    return okReply(persona.id, text, { via: "llm" });
+    return okReply(persona.id, text, { via: "llm", ...toneMeta });
   } catch (err) {
     markWorkforceLlmFailure(err);
     const classified = classifyWorkforceLlmError(err);
     // Keep the drill usable — pool fallback instead of hard failure.
-    return okReply(persona.id, poolFallback(persona, content), {
+    return okReply(persona.id, poolFallback(persona, content, tone.patientLine), {
       warn: classified.userMessage,
       via: "persona-pool",
       code: classified.code,
+      ...toneMeta,
     });
   }
 }

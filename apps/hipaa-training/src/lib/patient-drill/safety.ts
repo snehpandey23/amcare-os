@@ -11,9 +11,10 @@ export type SessionOutcome =
   | "red_flag"
   | "soft_stop"
   | "walk_away"
+  | "patient_left_frustrated"
   | "completed";
 
-export type SafetyStopKind = "red_flag" | "soft_stop" | "walk_away";
+export type SafetyStopKind = "red_flag" | "soft_stop" | "walk_away" | "frustrated_exit";
 
 export type SafetyReasonCode =
   | "bribe_or_money"
@@ -159,7 +160,8 @@ const UNAPPROVED_CLINICAL_PATTERNS = [
   /appetite\s+suppression\s+is\s+(very\s+)?mild/i,
 ];
 
-const ABUSE_PATTERNS = [
+/** Exported for T2 line audits — T2 must never match these (T3/hostile path stays separate). */
+export const ABUSE_PATTERNS = [
   /\b(idiot|stupid|moron|retard)\b/i,
   /shut\s+up/i,
   /go\s+to\s+hell/i,
@@ -167,6 +169,10 @@ const ABUSE_PATTERNS = [
   /fuck\s+you/i,
   /\basshole\b/i,
 ];
+
+export function matchesAbusePatterns(text: string): boolean {
+  return ABUSE_PATTERNS.some((p) => p.test(text || ""));
+}
 
 const RUDE_PATTERNS = [
   ...ABUSE_PATTERNS,

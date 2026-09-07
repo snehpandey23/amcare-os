@@ -9,12 +9,17 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import {
-  PERSONAS,
   getPersonaShortId,
+  listStaffSelectablePersonas,
   type Persona,
 } from "@/data/patient-drill/personas";
 import { evaluateSimulatorSession, type SimulatorFeedback } from "@/lib/patient-drill/evaluate";
-import { EMPTY_REPLY_FALLBACK, classifyCompletedSession, type SafetyReasonCode } from "@/lib/patient-drill/safety";
+import {
+  EMPTY_REPLY_FALLBACK,
+  classifyCompletedSession,
+  type SafetyReasonCode,
+  type SessionOutcome,
+} from "@/lib/patient-drill/safety";
 import {
   buildChatSimTranscript,
   markDailyComplete,
@@ -27,22 +32,21 @@ import {
   portalH1,
   portalLinkBack,
 } from "@/lib/portal-ui";
-
-const SESSION_MS = 2 * 60 * 1000;
-const MAX_MA_TURNS = 12;
+import { MAX_MA_TURNS } from "@/lib/patient-drill/session-bounds";
 
 type Phase = "pick" | "chat" | "summary";
 type Line = { who: "you" | string; text: string; startedAt?: number; sentAt?: number };
 
 type ApiStopPayload = {
   stop?: boolean;
-  kind?: "red_flag" | "soft_stop" | "walk_away";
+  kind?: "red_flag" | "soft_stop" | "walk_away" | "frustrated_exit";
   redFlagged?: boolean;
   reasons?: SafetyReasonCode[];
   breakTitle?: string;
   breakBody?: string;
   patientReply?: string;
   warn?: string;
+  outcome?: SessionOutcome;
 };
 
 type CustomDraft = {
@@ -129,8 +133,6 @@ export function PatientChatSimulator() {
   const [streaming, setStreaming] = useState(false);
   const [liveOk, setLiveOk] = useState<boolean | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [startedAt, setStartedAt] = useState<number | null>(null);
-  const [secondsLeft, setSecondsLeft] = useState(SESSION_MS / 1000);
   const [feedback, setFeedback] = useState<SimulatorFeedback | null>(null);
   const [endReason, setEndReason] = useState<string>("");
   const [breakBanner, setBreakBanner] = useState<{ title: string; body: string } | null>(null);
@@ -218,6 +220,13 @@ export function PatientChatSimulator() {
           title: "Patient signed off",
           body: safetyNotes[0] || "Tone caused the patient to disengage.",
         });
+      } else if (outcome === "patient_left_frustrated") {
+        setBreakBanner({
+          title: "Patient left frustrated",
+          body:
+            safetyNotes[0] ||
+            "Under escalating stress (T2) after vague replies — not an abuse / walk-away stop.",
+        });
       } else {
         setBreakBanner(null);
       }
@@ -248,18 +257,6 @@ export function PatientChatSimulator() {
     [],
   );
 
-  useEffect(() => {
-    if (phase !== "chat" || startedAt == null) return;
-    const tick = () => {
-      const left = Math.max(0, Math.ceil((SESSION_MS - (Date.now() - startedAt)) / 1000));
-      setSecondsLeft(left);
-      if (left <= 0) finishSession("Time’s up (2 minutes).");
-    };
-    tick();
-    const id = window.setInterval(tick, 500);
-    return () => window.clearInterval(id);
-  }, [finishSession, phase, startedAt]);
-
   const startWithPersona = (p: Persona) => {
     awardedRef.current = false;
     setPersona(p);
@@ -270,8 +267,6 @@ export function PatientChatSimulator() {
     setBreakBanner(null);
     setSavedTranscript([]);
     setShowTranscript(false);
-    setStartedAt(Date.now());
-    setSecondsLeft(SESSION_MS / 1000);
     setPhase("chat");
   };
 
@@ -289,8 +284,15 @@ export function PatientChatSimulator() {
     const withPatient = [...lines, { who: patientName, text: reply }];
     setMessages(withPatient);
     const kind = payload.kind || "red_flag";
-    const outcome =
-      kind === "red_flag" ? "red_flag" : kind === "soft_stop" ? "soft_stop" : "walk_away";
+    const outcome: SessionOutcome =
+      payload.outcome ||
+      (kind === "red_flag"
+        ? "red_flag"
+        : kind === "soft_stop"
+          ? "soft_stop"
+          : kind === "frustrated_exit"
+            ? "patient_left_frustrated"
+            : "walk_away");
     finishSession(payload.breakTitle || "Session ended", {
       outcome,
       redFlagged: Boolean(payload.redFlagged ?? kind === "red_flag"),
@@ -436,7 +438,6 @@ export function PatientChatSimulator() {
     setShowTranscript(false);
     setError(null);
     setShowCustom(false);
-    setStartedAt(null);
   };
 
   if (phase === "pick") {
@@ -452,8 +453,9 @@ export function PatientChatSimulator() {
             training patient.
           </p>
           <p className="mt-2 text-sm text-[var(--siya-text)]">
-            Sessions run about <strong>2 minutes</strong> or up to <strong>{MAX_MA_TURNS} of your replies</strong>. Safety
-            tiers may end a session early (red flag, soft stop, or patient walk-away).
+            Sessions run up to <strong>{MAX_MA_TURNS} of your replies</strong> (no clock cutoff). End early anytime for
+            feedback. Safety tiers may end a session early (red flag, soft stop, or patient walk-away). Vague replies can
+            also escalate stressed personas until they leave frustrated (not the same as abuse).
           </p>
           <span
             className={`mt-3 inline-block rounded-full px-2.5 py-1 text-[10px] font-semibold ${
@@ -471,7 +473,7 @@ export function PatientChatSimulator() {
         <div>
           <h2 className="mb-3 text-sm font-semibold text-[var(--siya-primary)]">Choose a persona</h2>
           <ul className="grid gap-3 sm:grid-cols-2">
-            {PERSONAS.map((p) => (
+            {listStaffSelectablePersonas().map((p) => (
               <li key={p.id}>
                 <button
                   type="button"
@@ -483,6 +485,9 @@ export function PatientChatSimulator() {
                   <p className="mt-2 line-clamp-2 text-[11px] font-medium leading-relaxed text-white">
                     {p.demographicSnapshot}
                   </p>
+                  {p.tierPolicy === "allows_t2" ? (
+                    <p className="mt-2 text-[10px] font-medium text-white/90">Response-driven stress escalation</p>
+                  ) : null}
                   <span className="mt-3 inline-block text-xs font-bold text-white underline underline-offset-2">
                     Start chat →
                   </span>
@@ -574,7 +579,9 @@ export function PatientChatSimulator() {
             className={`rounded-xl border px-4 py-3 text-sm ${
               feedback.redFlagged
                 ? "border-[var(--siya-status-error-text)] bg-[var(--siya-status-error-bg)] text-[var(--siya-status-error-text)]"
-                : feedback.outcome === "soft_stop" || feedback.outcome === "walk_away"
+                : feedback.outcome === "soft_stop" ||
+                    feedback.outcome === "walk_away" ||
+                    feedback.outcome === "patient_left_frustrated"
                   ? "border-[var(--siya-accent)] bg-[var(--siya-bg-subtle)] text-[var(--siya-text)]"
                   : "border-[var(--siya-border)] bg-[var(--siya-bg-subtle)]"
             }`}
@@ -707,8 +714,7 @@ export function PatientChatSimulator() {
             Chat simulator · {persona?.name}
           </p>
           <p className="text-[11px] font-semibold text-[var(--siya-text)]">
-            {Math.floor(secondsLeft / 60)}:{String(secondsLeft % 60).padStart(2, "0")} left · {maTurns}/{MAX_MA_TURNS}{" "}
-            replies
+            {maTurns}/{MAX_MA_TURNS} replies
           </p>
         </div>
         <button
@@ -765,7 +771,7 @@ export function PatientChatSimulator() {
                 void send();
               }
             }}
-            disabled={streaming || !token || secondsLeft <= 0}
+            disabled={streaming || !token}
             placeholder="Type as the MA — process, booking, forms. No clinical decisions."
             className={portalAskInput}
           />

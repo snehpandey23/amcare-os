@@ -2,7 +2,7 @@
  * System prompt for Difficult Patient Chat practice drill.
  */
 
-import type { Persona } from "@/data/patient-drill/personas";
+import type { EscalationStepId, Persona } from "@/data/patient-drill/personas";
 import { processRedirectPromptBlock } from "./safety";
 
 function mapPersonality(archetype: string): string {
@@ -14,13 +14,31 @@ function mapPersonality(archetype: string): string {
   if (lower.includes("uninsured") || lower.includes("pragmatist")) return "practical";
   if (lower.includes("boomer")) return "skeptical";
   if (lower.includes("symptom")) return "worried";
+  if (lower.includes("refill")) return "stressed";
   return "cooperative";
+}
+
+function toneGuidanceBlock(persona: Persona, toneStep?: EscalationStepId): string {
+  if (!persona.tierPolicy || !persona.escalationLadder || !toneStep) return "";
+  const step = persona.escalationLadder.steps.find((s) => s.id === toneStep);
+  const stakes = (persona.stakes ?? []).slice(0, 4).map((s) => `  • ${s}`).join("\n");
+  const examples = (step?.exampleLines ?? []).slice(0, 2).map((l) => `  • "${l}"`).join("\n");
+  return `
+PERSONAL STAKES (stay true; never invent clinical facts beyond backstory):
+${stakes || "  • (see backstory)"}
+
+CURRENT TONE TIER: ${toneStep}${step ? ` — ${step.tone}` : ""}
+- Match this pressure level. T2 = stressed / accusatory / may exit — NEVER profanity, slurs, or threats (that is a different hostile path).
+- Prefer phrasing in this family when answering:
+${examples || "  • Stay in character at this pressure level."}
+`;
 }
 
 export function buildPatientDrillSystemPrompt(
   persona: Persona,
   conversationTurns: number,
   history: Array<{ role: "user" | "assistant"; content: string }>,
+  opts?: { toneStep?: EscalationStepId },
 ): string {
   const personality = mapPersonality(persona.archetype);
 
@@ -43,7 +61,7 @@ PERSONA:
 
 WHY YOU'RE HERE:
 ${persona.backstory}
-
+${toneGuidanceBlock(persona, opts?.toneStep)}
 WHAT LANDS: ${persona.communicationPreferences.whatLands.join(" ")}
 WHAT DOESN'T: ${persona.communicationPreferences.whatDoesnt.join(", ")}
 
@@ -59,6 +77,7 @@ ENGAGEMENT (walk-away design):
 - Stay engaged through normal friction and clarifying questions.
 - If the MA is curt once, push back briefly — do not immediately hang up.
 - If they are clearly abusive or repeatedly dismissive, you may say you're ending the chat (short, realistic). The training system may also end the session.
+- Frustrated exit (T2-C) is allowed when the system says so — leave angry without swearing or threats.
 
 ${processRedirectPromptBlock()}
 
