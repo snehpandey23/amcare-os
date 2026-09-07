@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { getSessionHistory } from '../data/dashboardData'
+import { useState, useEffect, useMemo } from 'react'
+import { getSessionHistory, summarizeSessionStats } from '../data/dashboardData'
 import { useAuth } from '../contexts/AuthContext'
 import { fetchMySessions } from '../api/client'
 
@@ -14,15 +14,6 @@ interface SessionDisplay {
   calgaryScore?: number | null
   calgaryMax?: number | null
 }
-
-const BY_PERSONA = [
-  { label: 'Emma (Fast-Tracker)', value: 75 },
-  { label: 'Michael (Burnt-Out Parent)', value: 88 },
-  { label: 'Dr. Priya (Researcher)', value: 92 },
-  { label: 'Janet (Defensive Parent)', value: 80 },
-  { label: 'Carlos (Uninsured)', value: 85 },
-  { label: 'Robert (Skeptic)', value: 68 },
-]
 
 function formatSessionDate(ts: number): string {
   const d = new Date(ts)
@@ -49,106 +40,150 @@ export default function Progress() {
     }
     setLoading(true)
     fetchMySessions()
-      .then((s) => setApiSessions(s.map((x) => ({ id: x.id, personaName: x.personaName, timestamp: x.timestamp, messageCount: x.messageCount, empathyScore: x.empathyScore, grammarScore: x.grammarScore, avgWpm: x.avgWpm, calgaryScore: x.calgaryScore, calgaryMax: x.calgaryMax }))))
+      .then((s) =>
+        setApiSessions(
+          s.map((x) => ({
+            id: x.id,
+            personaName: x.personaName,
+            timestamp: x.timestamp,
+            messageCount: x.messageCount,
+            empathyScore: x.empathyScore,
+            grammarScore: x.grammarScore,
+            avgWpm: x.avgWpm,
+            calgaryScore: x.calgaryScore,
+            calgaryMax: x.calgaryMax,
+          })),
+        ),
+      )
+      .catch(() => setApiSessions([]))
       .finally(() => setLoading(false))
   }, [user])
 
-  const sessionHistory = user && apiSessions.length > 0 ? apiSessions : localHistory.map((s) => ({ id: s.id, personaName: s.personaName, timestamp: s.timestamp, messageCount: s.messageCount, empathyScore: s.empathyScore, grammarScore: s.grammarScore, avgWpm: s.avgWpm, calgaryScore: s.calgaryScore, calgaryMax: s.calgaryMax }))
+  const sessionHistory =
+    user && apiSessions.length > 0
+      ? apiSessions
+      : localHistory.map((s) => ({
+          id: s.id,
+          personaName: s.personaName,
+          timestamp: s.timestamp,
+          messageCount: s.messageCount,
+          empathyScore: s.empathyScore,
+          grammarScore: s.grammarScore,
+          avgWpm: s.avgWpm,
+          calgaryScore: s.calgaryScore,
+          calgaryMax: s.calgaryMax,
+        }))
+
+  const stats = useMemo(
+    () =>
+      summarizeSessionStats(
+        sessionHistory.map((s) => ({
+          id: s.id,
+          personaId: s.personaName,
+          personaName: s.personaName,
+          timestamp: s.timestamp,
+          messageCount: s.messageCount,
+          empathyScore: s.empathyScore,
+          grammarScore: s.grammarScore,
+          avgWpm: s.avgWpm,
+          calgaryScore: s.calgaryScore ?? undefined,
+          calgaryMax: s.calgaryMax ?? undefined,
+        })),
+      ),
+    [sessionHistory],
+  )
 
   return (
     <>
       <div className="siya-dash-header">
         <div className="siya-user-greeting">Your Progress Report</div>
-        <div className="siya-user-subtext">Detailed breakdown of your performance across all scenarios</div>
+        <div className="siya-user-subtext">
+          Only sessions you completed appear here. Fake improvement %, streaks, and hours are not shown.
+        </div>
       </div>
 
-      {(loading || sessionHistory.length > 0) && (
-        <div className="siya-performance-section" style={{ marginBottom: 24 }}>
-          <div className="siya-section-title">Recent Sessions {user && '(saved to your account)'}</div>
-          {loading ? (
-            <p className="siya-chat-small">Loading…</p>
-          ) : (
-            <>
-              <p className="siya-chat-small" style={{ marginBottom: 12 }}>End a chat with &quot;End session & see feedback&quot; to record it here. Sign in to sync across devices.</p>
-              <div className="siya-session-list">
-                {sessionHistory.slice(0, 10).map((s) => (
-                  <div key={s.id} className="siya-session-row">
-                    <div className="siya-session-persona">{s.personaName}</div>
-                    <div className="siya-session-meta">{formatSessionDate(s.timestamp)} · {s.messageCount} replies</div>
-                    <div className="siya-session-scores">
-                      Empathy {s.empathyScore}% · Grammar {s.grammarScore}% · {s.avgWpm} WPM
-                      {s.calgaryScore != null && s.calgaryMax != null && ` · Calgary ${s.calgaryScore}/${s.calgaryMax}`}
-                    </div>
+      <div className="siya-performance-section" style={{ marginBottom: 24 }}>
+        <div className="siya-section-title">Recent sessions {user && '(saved to your account when API is up)'}</div>
+        {loading ? (
+          <p className="siya-chat-small">Loading…</p>
+        ) : sessionHistory.length === 0 ? (
+          <p className="siya-chat-small">
+            No sessions yet. Open <strong>Chat Simulator</strong>, practice, then tap{' '}
+            <strong>End session &amp; see feedback</strong>.
+          </p>
+        ) : (
+          <>
+            <p className="siya-chat-small" style={{ marginBottom: 12 }}>
+              Empathy / grammar are heuristic scores (not LanguageTool or human clinical review). Clinical accuracy
+              is not scored automatically.
+            </p>
+            <div className="siya-session-list">
+              {sessionHistory.slice(0, 20).map((s) => (
+                <div key={s.id} className="siya-session-row">
+                  <div className="siya-session-persona">{s.personaName}</div>
+                  <div className="siya-session-meta">
+                    {formatSessionDate(s.timestamp)} · {s.messageCount} replies
                   </div>
-                ))}
-              </div>
-            </>
-          )}
-        </div>
-      )}
+                  <div className="siya-session-scores">
+                    Empathy {s.empathyScore}% · Grammar {s.grammarScore}% · {s.avgWpm} WPM
+                    {s.calgaryScore != null && s.calgaryMax != null && ` · Calgary ${s.calgaryScore}/${s.calgaryMax}`}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
 
       <div className="siya-metrics-grid">
         <div className="siya-metric-card">
-          <div className="siya-metric-icon">📈</div>
-          <div className="siya-metric-label">Overall Improvement</div>
-          <div className="siya-metric-value">+18%</div>
-          <div className="siya-metric-subtext">From first session to now</div>
-          <div className="siya-stat-bar">
-            <div className="siya-stat-bar-fill" style={{ width: '100%' }} />
-          </div>
+          <div className="siya-metric-icon">💬</div>
+          <div className="siya-metric-label">Sessions completed</div>
+          <div className="siya-metric-value">{loading ? '…' : stats.totalSessions}</div>
+          <div className="siya-metric-subtext">Real count only</div>
         </div>
         <div className="siya-metric-card">
-          <div className="siya-metric-icon">🎯</div>
-          <div className="siya-metric-label">Goal Completion Rate</div>
-          <div className="siya-metric-value">78%</div>
-          <div className="siya-metric-subtext">Successful appointment scheduling</div>
-          <div className="siya-stat-bar">
-            <div className="siya-stat-bar-fill" style={{ width: '78%' }} />
+          <div className="siya-metric-icon">❤️</div>
+          <div className="siya-metric-label">Avg empathy</div>
+          <div className="siya-metric-value">
+            {loading ? '…' : stats.avgEmpathy != null ? `${stats.avgEmpathy}%` : '—'}
           </div>
+          <div className="siya-metric-subtext">Heuristic phrase match</div>
         </div>
         <div className="siya-metric-card">
-          <div className="siya-metric-icon">🔥</div>
-          <div className="siya-metric-label">Current Streak</div>
-          <div className="siya-metric-value">7 days</div>
-          <div className="siya-metric-subtext">Keep practicing to extend it</div>
-          <div className="siya-stat-bar">
-            <div className="siya-stat-bar-fill" style={{ width: '70%' }} />
+          <div className="siya-metric-icon">⌨️</div>
+          <div className="siya-metric-label">Avg WPM</div>
+          <div className="siya-metric-value">
+            {loading ? '…' : stats.avgWpm != null ? String(stats.avgWpm) : '—'}
           </div>
+          <div className="siya-metric-subtext">From timed replies</div>
         </div>
       </div>
+
       <div className="siya-performance-section">
         <div className="siya-performance-stats">
-          <div className="siya-section-title">Performance by Persona</div>
-          {BY_PERSONA.map((item) => (
-            <div key={item.label}>
-              <div className="siya-stat-item">
-                <div className="siya-stat-label">{item.label}</div>
-                <div className="siya-stat-value">{item.value}%</div>
+          <div className="siya-section-title">By persona (from your sessions)</div>
+          {stats.byPersona.length === 0 ? (
+            <p className="siya-chat-small">No persona breakdown yet.</p>
+          ) : (
+            stats.byPersona.map((item) => (
+              <div key={item.label}>
+                <div className="siya-stat-item">
+                  <div className="siya-stat-label">{item.label}</div>
+                  <div className="siya-stat-value">
+                    {item.sessions} session{item.sessions === 1 ? '' : 's'} · avg empathy {item.avgEmpathy}%
+                  </div>
+                </div>
               </div>
-              <div className="siya-stat-bar">
-                <div className="siya-stat-bar-fill" style={{ width: `${item.value}%` }} />
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
         <div className="siya-performance-chart">
-          <div className="siya-section-title">Key Metrics</div>
-          <div className="siya-stat-item">
-            <div className="siya-stat-label">Total Practice Hours</div>
-            <div className="siya-stat-value">12.5 hrs</div>
-          </div>
-          <div className="siya-stat-item">
-            <div className="siya-stat-label">Sessions Completed</div>
-            <div className="siya-stat-value">{sessionHistory.length > 0 ? sessionHistory.length : '24'}</div>
-          </div>
-          <div className="siya-stat-item">
-            <div className="siya-stat-label">Average Session Length</div>
-            <div className="siya-stat-value">6:45 min</div>
-          </div>
-          <div className="siya-stat-item">
-            <div className="siya-stat-label">Consistency (Last 7 Days)</div>
-            <div className="siya-stat-value">100%</div>
-          </div>
+          <div className="siya-section-title">Not tracked yet</div>
+          <p className="siya-chat-small">
+            Practice hours, streaks, “goal completion,” and week-over-week improvement charts are not implemented.
+            Those numbers will not appear until they can be computed from real data.
+          </p>
         </div>
       </div>
     </>

@@ -3,11 +3,12 @@
  */
 
 import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
+import jwt, { type SignOptions } from 'jsonwebtoken'
 
 const SALT_ROUNDS = 12
 const JWT_SECRET = process.env.JWT_SECRET || process.env.OET_LMS_JWT_SECRET || 'oet-lms-dev-secret-change-in-production'
-const JWT_EXPIRES = process.env.JWT_EXPIRES_IN || '7d'
+/** String form accepted by jsonwebtoken (e.g. `7d`, `12h`). */
+const JWT_EXPIRES_IN = (process.env.JWT_EXPIRES_IN || '7d') as SignOptions['expiresIn']
 
 export async function hashPassword(password: string): Promise<string> {
   return bcrypt.hash(password, SALT_ROUNDS)
@@ -24,7 +25,8 @@ export interface TokenPayload {
 }
 
 export function signToken(payload: TokenPayload): string {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES })
+  const options: SignOptions = { expiresIn: JWT_EXPIRES_IN }
+  return jwt.sign(payload, JWT_SECRET, options)
 }
 
 export function verifyToken(token: string): TokenPayload {

@@ -1,6 +1,6 @@
 /**
- * WebSocket hook for adaptive patient chat simulator.
- * Connects to oet-lms-chat backend, sends ma_message, receives streaming patient_token and patient_complete.
+ * Patient chat via HTTP NDJSON stream (Vercel serverless + local Vite proxy).
+ * Replaces the old WebSocket-only path for production.
  */
 
 import { useState, useCallback, useRef, useEffect } from 'react'
@@ -13,33 +13,55 @@ function generateSessionId(): string {
   })
 }
 
-const getWsUrl = (): string => {
-  const envWs = import.meta.env.VITE_CHAT_WS_ORIGIN as string | undefined
-  if (envWs) return envWs
-  const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-  const host = window.location.host
-  return `${protocol}//${host}/chat-ws`
+function chatApiBase(): string {
+  const origin = (import.meta.env.VITE_CHAT_HTTP_ORIGIN as string | undefined)?.replace(/\/$/, '')
+  return origin || ''
+}
+
+function healthUrl(): string {
+  return `${chatApiBase()}/api/oet-chat-health`
+}
+
+function patientChatUrl(): string {
+  return `${chatApiBase()}/api/patient-chat`
 }
 
 export type ConnectionStatus = 'disconnected' | 'connecting' | 'connected' | 'error'
 
+export type ChatHistoryLine = { who: string; text: string }
+
 export interface UseChatWebSocketResult {
-  sendMessage: (content: string, typingStartedAt?: number, typingCompletedAt?: number) => void
+  sendMessage: (
+    content: string,
+    typingStartedAt?: number,
+    typingCompletedAt?: number,
+    history?: ChatHistoryLine[],
+  ) => void
   connectionStatus: ConnectionStatus
   error: string | null
   lastResponseLatencyMs: number | null
 }
 
+function toLlmHistory(history: ChatHistoryLine[] | undefined): Array<{ role: 'user' | 'assistant'; content: string }> {
+  if (!history?.length) return []
+  return history
+    .filter((l) => l.text?.trim())
+    .map((l) => ({
+      role: (l.who === 'you' ? 'user' : 'assistant') as 'user' | 'assistant',
+      content: l.text,
+    }))
+}
+
 export function useChatWebSocket(
   personaId: string | null,
   onToken: (token: string) => void,
-  onComplete: (fullResponse: string, responseLatencyMs?: number) => void
+  onComplete: (fullResponse: string, responseLatencyMs?: number) => void,
 ): UseChatWebSocketResult {
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('disconnected')
   const [error, setError] = useState<string | null>(null)
   const [lastResponseLatencyMs, setLastResponseLatencyMs] = useState<number | null>(null)
-  const wsRef = useRef<WebSocket | null>(null)
   const sessionIdRef = useRef<string>(generateSessionId())
+  const abortRef = useRef<AbortController | null>(null)
 
   const onTokenRef = useRef(onToken)
   const onCompleteRef = useRef(onComplete)
@@ -53,73 +75,131 @@ export function useChatWebSocket(
       return
     }
 
+    sessionIdRef.current = generateSessionId()
     setConnectionStatus('connecting')
     setError(null)
-    const wsUrl = getWsUrl()
-    const ws = new WebSocket(wsUrl)
-    wsRef.current = ws
 
-    ws.onopen = () => {
-      setConnectionStatus('connected')
-      setError(null)
-    }
-
-    ws.onclose = (event) => {
-      wsRef.current = null
-      setConnectionStatus('error')
-      if (event.code !== 1000) {
-        setError('Connection closed. Is the chat backend running? Set OPENAI_API_KEY and run: npm run dev --workspace=integrations/oet-lms-chat')
-      }
-    }
-
-    ws.onerror = () => {
-      setConnectionStatus('error')
-      setError('WebSocket error. Check that OPENAI_API_KEY is set and the chat backend is running.')
-    }
-
-    ws.onmessage = (event) => {
+    let cancelled = false
+    const probe = async () => {
       try {
-        const data = JSON.parse(event.data)
-        if (data.type === 'patient_token' && data.token) {
-          onTokenRef.current(data.token)
-        } else if (data.type === 'patient_complete') {
-          onCompleteRef.current(data.fullResponse || '', data.responseLatencyMs)
-          if (data.responseLatencyMs != null) {
-            setLastResponseLatencyMs(data.responseLatencyMs)
-          }
-        } else if (data.type === 'error') {
-          setError(data.message || 'Unknown error')
+        const res = await fetch(healthUrl(), { method: 'GET' })
+        const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string }
+        if (cancelled) return
+        if (res.ok && data.ok) {
+          setConnectionStatus('connected')
+          setError(null)
+        } else {
+          setConnectionStatus('error')
+          setError(data.error || 'Live chat API not ready')
         }
       } catch {
-        setError('Invalid message from server')
+        if (cancelled) return
+        setConnectionStatus('error')
+        setError('Cannot reach live chat API (/api/oet-chat-health)')
       }
     }
 
+    void probe()
     return () => {
-      ws.close(1000)
-      wsRef.current = null
-      setConnectionStatus('disconnected')
+      cancelled = true
+      abortRef.current?.abort()
     }
   }, [personaId])
 
   const sendMessage = useCallback(
-    (content: string, typingStartedAt?: number, typingCompletedAt?: number) => {
-      const ws = wsRef.current
-      if (!ws || ws.readyState !== WebSocket.OPEN || !personaId) return
+    (
+      content: string,
+      typingStartedAt?: number,
+      typingCompletedAt?: number,
+      history?: ChatHistoryLine[],
+    ) => {
+      if (!personaId || !content.trim()) return
 
-      ws.send(
-        JSON.stringify({
-          type: 'ma_message',
-          content,
-          sessionId: sessionIdRef.current,
-          personaId,
-          typingStartedAt,
-          typingCompletedAt,
-        })
-      )
+      abortRef.current?.abort()
+      const ac = new AbortController()
+      abortRef.current = ac
+
+      const maMessageSentTime = typingCompletedAt ?? Date.now()
+      const messages = toLlmHistory(history)
+      // Ensure latest MA line is present as user
+      if (!messages.length || messages[messages.length - 1]?.content !== content) {
+        messages.push({ role: 'user', content })
+      }
+
+      void (async () => {
+        try {
+          const res = await fetch(patientChatUrl(), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            signal: ac.signal,
+            body: JSON.stringify({
+              personaId,
+              sessionId: sessionIdRef.current,
+              content,
+              messages,
+              maMessageSentTime,
+              typingStartedAt,
+              typingCompletedAt,
+            }),
+          })
+
+          if (!res.ok || !res.body) {
+            const errBody = (await res.json().catch(() => ({}))) as { message?: string }
+            setError(errBody.message || `Chat API error (${res.status})`)
+            onCompleteRef.current('', undefined)
+            return
+          }
+
+          const reader = res.body.getReader()
+          const decoder = new TextDecoder()
+          let buffer = ''
+
+          while (true) {
+            const { done, value } = await reader.read()
+            if (done) break
+            buffer += decoder.decode(value, { stream: true })
+            const lines = buffer.split('\n')
+            buffer = lines.pop() || ''
+            for (const line of lines) {
+              const trimmed = line.trim()
+              if (!trimmed) continue
+              try {
+                const data = JSON.parse(trimmed) as {
+                  type: string
+                  token?: string
+                  fullResponse?: string
+                  responseLatencyMs?: number
+                  message?: string
+                }
+                if (data.type === 'patient_token' && data.token) {
+                  onTokenRef.current(data.token)
+                } else if (data.type === 'patient_complete') {
+                  onCompleteRef.current(data.fullResponse || '', data.responseLatencyMs)
+                  if (data.responseLatencyMs != null) {
+                    setLastResponseLatencyMs(data.responseLatencyMs)
+                  }
+                } else if (data.type === 'error') {
+                  setError(data.message || 'Chat error')
+                  onCompleteRef.current('', undefined)
+                }
+              } catch {
+                setError('Invalid stream chunk from chat API')
+              }
+            }
+          }
+        } catch (err) {
+          if (ac.signal.aborted) return
+          const message = err instanceof Error ? err.message : String(err)
+          setError(message)
+          onCompleteRef.current('', undefined)
+        }
+      })()
     },
-    [personaId]
+    [personaId],
   )
 
   return { sendMessage, connectionStatus, error, lastResponseLatencyMs }
 }
+
+/** @deprecated alias — same HTTP hook */
+export const usePatientChat = useChatWebSocket

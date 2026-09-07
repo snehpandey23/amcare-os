@@ -39,3 +39,7 @@ Medical Guidelines/
 # Brand fuse operational logs (regenerated locally)
 apps/siya-health/brand/04-Content-Tracker/fuse-logs/
 tmp/
+
+# OET LMS local LLM/env pulls — never commit
+integrations/oet-lms-chat/.env.staff-llm
+**/.env.staff-llm

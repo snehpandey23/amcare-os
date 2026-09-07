@@ -1,6 +1,10 @@
 # LMS Module Spec: Snippet-Based Activities & Evaluation
 
-This document describes how the four modules (Comprehension, Chatting, Understanding, Communicating) use conversation snippets and clinical notes to generate activities, measure performance, and send results to supervisors.
+> **Status (Phase 1):** This document is an **aspirational design** for a larger four-module LMS.
+> What ships today is the **MA Chat Simulator** only (see `../README.md`). Do not treat the modules
+> below as implemented unless a section is explicitly marked as built.
+
+This document describes how the four modules (Comprehension, Chatting, Understanding, Communicating) *could* use conversation snippets and clinical notes to generate activities, measure performance, and send results to supervisors.
 
 ---
 

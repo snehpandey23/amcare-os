@@ -1,9 +1,8 @@
 /**
- * Dashboard data for Siya Health Virtual Medical Assistant Chat Simulator.
- * Recommended tasks, progress over time, gaps, suggested reading.
- * In production these would come from backend based on assistant performance.
+ * Dashboard helpers for MA Chat Simulator.
+ * Session history is real (localStorage / API). Aggregate analytics that are not
+ * yet computed from sessions must return empty — never fabricated numbers.
  */
-
 
 export interface RecommendedTask {
   id: string
@@ -35,88 +34,75 @@ export interface SuggestedReading {
   url?: string
 }
 
-/** 3 key recommended tasks based on performance (mock – replace with API). */
-export function getRecommendedTasks(): RecommendedTask[] {
+/**
+ * Static practice suggestions (not performance-derived).
+ * Do not claim the learner “struggled” without real session analysis.
+ */
+export function getPracticeSuggestions(): RecommendedTask[] {
   return [
     {
       id: 'rec-1',
-      title: 'Master "The Fast-Tracker" Scenario',
-      description: 'You struggled with Emma\'s frustration when mentioning neuropsych testing. Practice explaining complex requirements in simple terms without jargon.',
+      title: 'Practice Emma — The Fast-Tracker',
+      description:
+        'College student seeking Adderall renewal; practice clear timelines and plain-language explanations (not jargon).',
       action: 'emma',
       priority: 'high',
     },
     {
       id: 'rec-2',
-      title: 'Improve Cost Communication',
-      description: 'Carlos requires upfront pricing clarity. Practice addressing financial concerns without being dismissive or vague about costs.',
+      title: 'Practice Carlos — cost clarity',
+      description: 'Uninsured / cost-sensitive caller; practice naming fees and next steps early.',
       action: 'carlos',
       priority: 'medium',
     },
     {
       id: 'rec-3',
-      title: 'Build Advanced Technical Knowledge',
-      description: 'Dr. Priya\'s questions about ADHD methodology showed knowledge gaps. Read the protocols and return to her scenario.',
+      title: 'Browse Resources',
+      description: 'Read the listed MA resources, then return to a persona chat.',
       action: 'priya',
       priority: 'low',
     },
   ]
 }
 
-/** Progress over time (mock – replace with API). */
+/** @deprecated Use getPracticeSuggestions — name kept for older imports. */
+export function getRecommendedTasks(): RecommendedTask[] {
+  return getPracticeSuggestions()
+}
+
+/**
+ * Aggregated progress over time — not implemented yet.
+ * Returns empty so UI can show an honest empty state (never mock weeks/scores).
+ */
 export function getProgressOverTime(): ProgressPoint[] {
-  return [
-    { week: 'Week 1', chatsCompleted: 2, avgRubricScore: 62, label: 'Getting started' },
-    { week: 'Week 2', chatsCompleted: 5, avgRubricScore: 71 },
-    { week: 'Week 3', chatsCompleted: 4, avgRubricScore: 68 },
-    { week: 'Week 4', chatsCompleted: 6, avgRubricScore: 78 },
-    { week: 'This week', chatsCompleted: 3, avgRubricScore: 82 },
-  ]
+  return []
 }
 
-/** Gaps identified from recent performance (mock – replace with API). */
+/**
+ * Auto-identified gaps — not implemented yet.
+ * Returns empty for an honest empty state.
+ */
 export function getGapsIdentified(): Gap[] {
-  return [
-    {
-      id: 'gap-1',
-      label: 'Timeline clarity',
-      description: 'Providing specific timeframes (e.g. "1–2 weeks") instead of "we\'ll get you scheduled soon."',
-      suggestedAction: 'Practice with Emma and Carlos; always state a number + unit.',
-    },
-    {
-      id: 'gap-2',
-      label: 'Avoiding jargon',
-      description: 'Using plain language for neuropsych testing, prior auth, and processes.',
-      suggestedAction: 'Review "Communication preferences" for each persona before chatting.',
-    },
-    {
-      id: 'gap-3',
-      label: 'Cost transparency',
-      description: 'Addressing cost or payment plan early when the patient is uninsured or cost-sensitive.',
-      suggestedAction: 'Practice with Carlos; mention cost in the first exchange when relevant.',
-    },
-  ]
+  return []
 }
 
-/** Suggested reading (mock – replace with API). */
+/** Static reading list (not personalized analytics). */
 export function getSuggestedReading(): SuggestedReading[] {
   return [
     {
       id: 'read-1',
       title: 'ADHD care: What MAs need to know',
       description: 'Controlled substances, CSA, and neuropsych testing in plain language.',
-      url: '#',
     },
     {
       id: 'read-2',
       title: 'Talking cost with uninsured patients',
       description: 'How to be upfront about fees and payment options without sounding salesy.',
-      url: '#',
     },
     {
       id: 'read-3',
       title: 'De-escalating frustrated callers',
       description: 'Phrases that help vs. phrases that escalate.',
-      url: '#',
     },
   ]
 }
@@ -136,9 +122,11 @@ export interface SessionRecord {
   avgWpm: number
   calgaryScore?: number
   calgaryMax?: number
+  /** true when patient replies were canned demo (not live LLM). */
+  demoMode?: boolean
 }
 
-/** Append a completed session to history (for Progress report). */
+/** Append a completed session to history (for Progress / Dashboard). */
 export function saveSessionToHistory(record: SessionRecord): void {
   try {
     const raw = localStorage.getItem(SESSION_HISTORY_KEY)
@@ -159,6 +147,39 @@ export function getSessionHistory(): SessionRecord[] {
     return JSON.parse(raw) as SessionRecord[]
   } catch {
     return []
+  }
+}
+
+/** Real totals from saved sessions only. */
+export function summarizeSessionStats(sessions: SessionRecord[]): {
+  totalSessions: number
+  avgEmpathy: number | null
+  avgGrammar: number | null
+  avgWpm: number | null
+  byPersona: { label: string; sessions: number; avgEmpathy: number }[]
+} {
+  if (!sessions.length) {
+    return { totalSessions: 0, avgEmpathy: null, avgGrammar: null, avgWpm: null, byPersona: [] }
+  }
+  const avg = (nums: number[]) =>
+    nums.length ? Math.round(nums.reduce((a, b) => a + b, 0) / nums.length) : null
+  const byMap = new Map<string, { empathy: number[]; count: number }>()
+  for (const s of sessions) {
+    const cur = byMap.get(s.personaName) ?? { empathy: [], count: 0 }
+    cur.empathy.push(s.empathyScore)
+    cur.count += 1
+    byMap.set(s.personaName, cur)
+  }
+  return {
+    totalSessions: sessions.length,
+    avgEmpathy: avg(sessions.map((s) => s.empathyScore)),
+    avgGrammar: avg(sessions.map((s) => s.grammarScore)),
+    avgWpm: avg(sessions.map((s) => s.avgWpm).filter((n) => n > 0)),
+    byPersona: [...byMap.entries()].map(([label, v]) => ({
+      label,
+      sessions: v.count,
+      avgEmpathy: avg(v.empathy) ?? 0,
+    })),
   }
 }
 
@@ -192,7 +213,7 @@ export function sendTranscriptToSupervisor(
       console.log('Send transcript to supervisor:', { supervisorEmail, transcript })
       resolve({
         ok: true,
-        message: `Transcript for ${transcript.personaName} has been sent to ${supervisorEmail}. (Stub – wire to your email/API.)`,
+        message: `Transcript for ${transcript.personaName} queued for ${supervisorEmail}. (Email delivery not wired yet — stub only.)`,
       })
     }, 500)
   })

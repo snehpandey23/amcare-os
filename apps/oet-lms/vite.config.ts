@@ -14,6 +14,7 @@ export default defineConfig({
       '/chat-ws': {
         target: process.env.OET_LMS_CHAT_ORIGIN || 'http://localhost:3007',
         ws: true,
+        rewrite: (path) => path.replace(/^\/chat-ws/, '') || '/',
       },
     },
   },

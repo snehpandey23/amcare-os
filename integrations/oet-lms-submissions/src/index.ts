@@ -6,13 +6,24 @@
  */
 
 import 'dotenv/config'
+import dotenv from 'dotenv'
+import path from 'path'
+import { fileURLToPath } from 'url'
 import cors from 'cors'
 import express from 'express'
 import multer from 'multer'
-import nodemailer from 'nodemailer'
 import { getPool, initDb } from './db.js'
 import { hashPassword, comparePassword, signToken } from './auth.js'
 import { requireAuth, requireAdmin, type AuthRequest } from './middleware.js'
+import { sendEmail } from './email.js'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const repoRoot = path.resolve(__dirname, '../../..')
+// Prefer local submissions .env, then staff portal env files for RESEND_API_KEY.
+dotenv.config({ path: path.resolve(__dirname, '../.env') })
+dotenv.config({ path: path.resolve(repoRoot, 'apps/hipaa-training/.env.local') })
+dotenv.config({ path: path.resolve(repoRoot, 'apps/hipaa-training/.env.staff-assist.prod') })
+dotenv.config({ path: path.resolve(repoRoot, '.env') })
 
 const SUPERVISOR_EMAIL = process.env.LMS_SUPERVISOR_EMAIL || 'concierge1@siya.health'
 const PORT = parseInt(process.env.OET_LMS_SUBMISSIONS_PORT || '3006', 10)

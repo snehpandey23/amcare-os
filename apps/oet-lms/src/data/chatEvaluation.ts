@@ -118,7 +118,8 @@ export function evaluateChat(maMessages: MessageWithTiming[], responseLatencies?
   return {
     empathyScore: n > 0 ? Math.round((empathyCount / n) * 100) : 0,
     grammarScore: n > 0 ? Math.round((grammarOkCount / n) * 100) : 0,
-    accuracyNote: 'Reviewed manually — we check how well your replies address what the patient asked.',
+    accuracyNote:
+      'Not scored automatically (placeholder). Clinical / content accuracy still needs human review — this field is not a real score yet.',
     avgWpm: totalMinutes > 0 ? Math.round(totalWords / totalMinutes) : 0,
     messageCount: n,
     avgResponseLatencyMs,

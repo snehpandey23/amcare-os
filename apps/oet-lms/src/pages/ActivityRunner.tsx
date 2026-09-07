@@ -87,12 +87,12 @@ export default function ActivityRunner() {
 
     const startedAt = typingStartRef.current ?? Date.now()
     const sentAt = Date.now()
-
-    setChatLines((prev) => [...prev, { who: 'you', text, startedAt, sentAt }])
+    const nextLines = [...chatLines, { who: 'you' as const, text, startedAt, sentAt }]
+    setChatLines(nextLines)
     setChatInput('')
     typingStartRef.current = null
     setIsStreaming(true)
-    sendMessage(text, startedAt, sentAt)
+    sendMessage(text, startedAt, sentAt, nextLines)
   }
 
   const handleChatSubmit = () => {
@@ -163,7 +163,7 @@ export default function ActivityRunner() {
           }}
         >
           {connectionStatus === 'connecting' && 'Connecting to chat backend…'}
-          {connectionStatus === 'error' && (error || 'Connection failed. Run: npm run dev --workspace=integrations/oet-lms-chat (requires OPENAI_API_KEY)')}
+          {connectionStatus === 'error' && (error || 'Connection failed. Live chat API unavailable — check deploy / AI Gateway.')}
         </div>
       )}
 
@@ -244,7 +244,10 @@ export default function ActivityRunner() {
               <div className="siya-session-summary">
                 <p><strong>Timing:</strong> {chatEvaluation.messageCount} MA messages · Avg response latency: {chatEvaluation.avgResponseLatencyMs != null ? `${chatEvaluation.avgResponseLatencyMs}ms (${chatEvaluation.latencyQuality})` : '—'}</p>
                 <p><strong>Empathy:</strong> {chatEvaluation.empathyScore}% · <strong>Grammar:</strong> {chatEvaluation.grammarScore}%{chatEvaluation.grammarErrorCount != null && chatEvaluation.grammarErrorCount > 0 && ` (${chatEvaluation.grammarErrorCount} issues, ${chatEvaluation.grammarSeverity})`} · <strong>Typing speed:</strong> {chatEvaluation.avgWpm} WPM</p>
-                <p className="siya-chat-small"><strong>Accuracy:</strong> {chatEvaluation.accuracyNote}</p>
+                <p className="siya-chat-small">
+                  <strong>Clinical accuracy:</strong>{' '}
+                  <em>Placeholder — not scored.</em> {chatEvaluation.accuracyNote}
+                </p>
               </div>
             ) : (
               <p>Send at least one reply to see metrics.</p>

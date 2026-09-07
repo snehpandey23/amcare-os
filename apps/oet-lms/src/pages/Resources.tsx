@@ -7,7 +7,7 @@ export default function Resources() {
     <>
       <div className="siya-dash-header">
         <div className="siya-user-greeting">Training Resources</div>
-        <div className="siya-user-subtext">Recommended reading and training materials based on your gaps</div>
+        <div className="siya-user-subtext">Training materials (static list — not personalized from gap analytics)</div>
       </div>
       <div className="siya-resources-list">
         {resources.map((r) => (
@@ -16,7 +16,16 @@ export default function Resources() {
               <h3>{r.title}</h3>
               <p>{r.description}</p>
             </div>
-            <a href={r.url ?? '#'} className="siya-resource-btn" target="_blank" rel="noopener noreferrer">Read</a>
+            <a
+              href={r.url && r.url !== '#' ? r.url : undefined}
+              className="siya-resource-btn"
+              onClick={(e) => {
+                if (!r.url || r.url === '#') e.preventDefault()
+              }}
+              aria-disabled={!r.url || r.url === '#'}
+            >
+              {!r.url || r.url === '#' ? 'No link yet' : 'Read'}
+            </a>
           </div>
         ))}
       </div>
