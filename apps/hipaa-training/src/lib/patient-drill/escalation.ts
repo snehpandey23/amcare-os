@@ -129,7 +129,7 @@ export function advanceToneAfterMaReply(opts: {
 
   const relevance = scoreRelevanceTurn(patientAsk, maReply);
   const strength = classifyReplyStrength(relevance);
-  let step = opts.priorState.step;
+  let step: EscalationStepId = opts.priorState.step;
   let weakStreak = opts.priorState.weakStreak;
   let reason = `relevance=${relevance.score.toFixed(2)} (${strength})`;
   let usedDeEscalatePool = false;
