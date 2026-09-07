@@ -2323,18 +2323,58 @@ app.get("/api/internal/shift-late-start-nudges", async (req, res) => {
       listLateStartNudgeCandidates,
       resolveLateStartRecipients,
     } = await import("./shift-late-start-nudge.js");
-    const candidates = await listLateStartNudgeCandidates(pool);
+    const lookbackRaw = Number(req.query.lookbackHours);
+    const lookbackHours =
+      Number.isFinite(lookbackRaw) && lookbackRaw > 0 ? Math.floor(lookbackRaw) : undefined;
+    const candidates = await listLateStartNudgeCandidates(pool, new Date(), { lookbackHours });
     const enriched = [];
     for (const c of candidates) {
       const recipients = await resolveLateStartRecipients(pool, c);
       enriched.push({ ...c, recipients });
     }
-    return res.json({ at: new Date().toISOString(), candidates: enriched });
+    return res.json({
+      at: new Date().toISOString(),
+      lookbackHours: lookbackHours ?? null,
+      candidates: enriched,
+    });
   } catch (e) {
     console.error("[internal/shift-late-start-nudges]", e);
     return res.status(500).json({ error: "Failed" });
   }
 });
+
+/** Admin: candidate list without cron secret (founder force-run). */
+app.get(
+  "/api/admin/shift/late-start-nudge-candidates",
+  requireAuth,
+  requireAdmin,
+  async (req: AuthRequest, res: express.Response) => {
+    const pool = getPool();
+    if (!pool) return res.status(503).json({ error: "Database not configured." });
+    try {
+      const {
+        listLateStartNudgeCandidates,
+        resolveLateStartRecipients,
+        LATE_START_LOOKBACK_HOURS,
+      } = await import("./shift-late-start-nudge.js");
+      const lookbackRaw = Number(req.query.lookbackHours);
+      const lookbackHours =
+        Number.isFinite(lookbackRaw) && lookbackRaw > 0
+          ? Math.floor(lookbackRaw)
+          : LATE_START_LOOKBACK_HOURS;
+      const candidates = await listLateStartNudgeCandidates(pool, new Date(), { lookbackHours });
+      const enriched = [];
+      for (const c of candidates) {
+        const recipients = await resolveLateStartRecipients(pool, c);
+        enriched.push({ ...c, recipients });
+      }
+      return res.json({ at: new Date().toISOString(), lookbackHours, candidates: enriched });
+    } catch (e) {
+      console.error("[admin/late-start-nudge-candidates]", e);
+      return res.status(500).json({ error: "Failed" });
+    }
+  },
+);
 
 app.post("/api/internal/shift-late-start-nudges/mark-sent", async (req, res) => {
   if (!cronAuthorized(req)) return res.status(401).json({ error: "Unauthorized" });
@@ -2364,6 +2404,40 @@ app.post("/api/internal/shift-late-start-nudges/mark-sent", async (req, res) => 
   });
   return res.json({ ok: true });
 });
+
+/** Admin mark-sent (same as cron) — for founder force-run when invoking via QA token. */
+app.post(
+  "/api/admin/shift/late-start-nudge-mark-sent",
+  requireAuth,
+  requireAdmin,
+  async (req: AuthRequest, res: express.Response) => {
+    const pool = getPool();
+    if (!pool) return res.status(503).json({ error: "Database not configured." });
+    const rosterRowId = typeof req.body?.rosterRowId === "string" ? req.body.rosterRowId : "";
+    const userId = typeof req.body?.userId === "string" ? req.body.userId : "";
+    const recipientEmails = Array.isArray(req.body?.recipientEmails)
+      ? req.body.recipientEmails.filter((e: unknown) => typeof e === "string")
+      : [];
+    const recipientRoles = Array.isArray(req.body?.recipientRoles)
+      ? req.body.recipientRoles.filter((e: unknown) => typeof e === "string")
+      : [];
+    const resendIds = Array.isArray(req.body?.resendIds)
+      ? req.body.resendIds.filter((e: unknown) => typeof e === "string")
+      : [];
+    if (!rosterRowId || !userId) {
+      return res.status(400).json({ error: "rosterRowId, userId required" });
+    }
+    const { markLateStartNudgeSent } = await import("./shift-late-start-nudge.js");
+    await markLateStartNudgeSent(pool, {
+      rosterRowId,
+      userId,
+      recipientEmails,
+      recipientRoles,
+      resendIds,
+    });
+    return res.json({ ok: true });
+  },
+);
 
 /**
  * Verification: resolve the four recipient parties for a staff email (no send).

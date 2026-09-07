@@ -48,10 +48,15 @@ function firstName(name: string | null, email: string): string {
 export async function listLateStartNudgeCandidates(
   pool: pg.Pool,
   at = new Date(),
+  opts?: { lookbackHours?: number },
 ): Promise<LateStartNudgeCandidate[]> {
   await ensureShiftRosterTables(pool);
+  const lookbackHours = Math.min(
+    168,
+    Math.max(1, opts?.lookbackHours ?? LATE_START_LOOKBACK_HOURS),
+  );
   const lateAfter = new Date(at.getTime() - LATE_START_GRACE_MINUTES * 60 * 1000);
-  const lookbackFrom = new Date(at.getTime() - LATE_START_LOOKBACK_HOURS * 3600 * 1000);
+  const lookbackFrom = new Date(at.getTime() - lookbackHours * 3600 * 1000);
 
   const r = await pool.query(
     `SELECT r.id, r.user_id, r.roster_date::text AS roster_date, r.shift_start, r.shift_end,
