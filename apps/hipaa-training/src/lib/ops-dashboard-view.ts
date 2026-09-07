@@ -94,34 +94,34 @@ export function buildOpsAttentionSummary(input: {
   if (staleSopCount > 0) {
     items.push({
       id: "stale-sops",
-      label: `${staleSopCount} SOP${staleSopCount === 1 ? "" : "s"} pending ≥3 weeks${
-        maxStaleAge ? ` (oldest ${maxStaleAge}d)` : ""
+      label: `${staleSopCount} SOP${staleSopCount === 1 ? "" : "s"} waiting 3+ weeks${
+        maxStaleAge ? ` (oldest ${maxStaleAge} days)` : ""
       }`,
       tone: "warn",
     });
   } else {
-    items.push({ id: "stale-sops-ok", label: "No SOP queues ≥3 weeks old", tone: "ok" });
+    items.push({ id: "stale-sops-ok", label: "No SOPs stuck 3+ weeks", tone: "ok" });
   }
 
   const missingCheckIns = leads.filter((l) => !l.weeklyCheckIn.submittedThisWeek).length;
   if (missingCheckIns > 0) {
     items.push({
       id: "checkins",
-      label: `${missingCheckIns} lead${missingCheckIns === 1 ? "" : "s"} missing this week’s check-in`,
+      label: `${missingCheckIns} lead${missingCheckIns === 1 ? "" : "s"} still need this week’s note`,
       tone: "warn",
     });
   } else if (leads.length > 0) {
-    items.push({ id: "checkins-ok", label: "All leads filed this week’s check-in", tone: "ok" });
+    items.push({ id: "checkins-ok", label: "Every lead sent this week’s note", tone: "ok" });
   }
 
   if (input.coverageGapCount > 0) {
     items.push({
       id: "coverage",
-      label: `${input.coverageGapCount} coverage gap hour${input.coverageGapCount === 1 ? "" : "s"} in next 7 days`,
+      label: `${input.coverageGapCount} hour${input.coverageGapCount === 1 ? "" : "s"} with nobody on the roster (next 7 days)`,
       tone: "warn",
     });
   } else {
-    items.push({ id: "coverage-ok", label: "No zero-coverage hours in next 7 days", tone: "ok" });
+    items.push({ id: "coverage-ok", label: "Roster looks covered for the next week", tone: "ok" });
   }
 
   if (input.engagement) {
@@ -130,13 +130,13 @@ export function buildOpsAttentionSummary(input: {
     if (cold > 0) {
       items.push({
         id: "not-engaged",
-        label: `${cold} staff not engaged yet (0 Ask · 0 practice)`,
+        label: `${cold} person${cold === 1 ? "" : "s"} haven’t tried Ask or practice yet`,
         tone: "warn",
       });
     } else {
       items.push({
         id: "not-engaged-ok",
-        label: "Every listed staff member has some Ask or practice activity",
+        label: "Everyone on the list has used Ask or practice at least once",
         tone: "ok",
       });
     }

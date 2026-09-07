@@ -41,9 +41,9 @@ function displayName(row: { name: string | null; email: string }) {
 }
 
 function segmentLabel(segment: string): string {
-  if (segment === "new_ask") return "New / light Ask";
-  if (segment === "regular_ask") return "Regular Ask";
-  if (segment === "practice_bridge") return "Practice bridge";
+  if (segment === "new_ask") return "Just getting started";
+  if (segment === "regular_ask") return "Uses Ask often";
+  if (segment === "practice_bridge") return "Practice + Ask";
   return segment;
 }
 
@@ -61,12 +61,12 @@ function EngagementTable({
       <table className="w-full min-w-[720px] text-left text-sm">
         <thead>
           <tr className="border-b border-[var(--siya-border)] text-xs uppercase tracking-wide text-[var(--siya-text-muted)]">
-            <th className="px-2 py-2 font-medium">Staff</th>
-            <th className="px-2 py-2 font-medium">Ask 14d</th>
-            <th className="px-2 py-2 font-medium">Ask 30d</th>
-            <th className="px-2 py-2 font-medium">Segment</th>
+            <th className="px-2 py-2 font-medium">Person</th>
+            <th className="px-2 py-2 font-medium">Ask · 2 wks</th>
+            <th className="px-2 py-2 font-medium">Ask · 30d</th>
+            <th className="px-2 py-2 font-medium">Habit</th>
             <th className="px-2 py-2 font-medium">Practice</th>
-            <th className="px-2 py-2 font-medium">This week share</th>
+            <th className="px-2 py-2 font-medium">Sharing this week?</th>
           </tr>
         </thead>
         <tbody>
@@ -84,7 +84,7 @@ function EngagementTable({
                     <span className="font-medium text-[var(--siya-text)]">{displayName(r)}</span>
                     {cold ? (
                       <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-900 dark:bg-amber-900/40 dark:text-amber-100">
-                        Not engaged yet
+                        Quiet so far
                       </span>
                     ) : null}
                   </div>
@@ -114,7 +114,7 @@ function EngagementTable({
                     </span>
                   ) : (
                     <span className="text-[var(--siya-text-muted)]">
-                      Not sharing this week
+                      Not sharing
                       {r.practiceShareThisWeek.drillDaysActive > 0
                         ? ` (${r.practiceShareThisWeek.drillDaysActive}d active)`
                         : ""}
@@ -245,13 +245,12 @@ function LeadCard({
                 check.submittedThisWeek ? "text-[var(--siya-status-success-text)]" : portalStatusWarnText
               }`}
             >
-              {check.submittedThisWeek ? "Submitted" : "Missing"}
+              {check.submittedThisWeek ? "In" : "Missing"}
             </span>
           </p>
           <p className="mt-0.5 text-xs text-[var(--siya-text-muted)]">
             Last {check.lastNWeeks} weeks: {check.weeksSubmittedOfLastN}/{check.lastNWeeks}
-            {" · "}Full text for this week is in <strong>Weekly lead check-ins</strong> below (not just
-            submitted/missing).
+            {" · "}Read the actual note under <strong>This week’s lead notes</strong>.
           </p>
           <div className="mt-2 flex flex-wrap gap-1" aria-label="Check-in history">
             {check.history.map((h) => (
@@ -281,7 +280,7 @@ function RecurringGapPatternCard({
   return (
     <article className="rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-4 py-3">
       <p className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-primary)]">
-        Recurring gap pattern
+        Keeps coming up
       </p>
       <p className="mt-1 text-sm font-medium text-[var(--siya-text)]">
         {pattern.departmentLabel} ·{" "}
@@ -296,25 +295,25 @@ function RecurringGapPatternCard({
           <>
             {" "}
             · <span className="font-semibold text-[var(--siya-text)]">{pattern.distinctPeople}</span>{" "}
-            staff
+            people
           </>
         ) : null}{" "}
         · last {pattern.windowDays} days
       </p>
       {unknownPeople ? (
         <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
-          Volume pattern (people unknown).
+          Lots of volume — we don’t know exactly who yet.
         </p>
       ) : null}
       <p className="mt-2 text-[11px] italic text-[var(--siya-text-muted)]">
-        {pattern.surfaceOnlyNote || "Surfaced for human action — no auto-draft."}
+        {pattern.surfaceOnlyNote || "Just a heads-up — nothing auto-drafts from here."}
       </p>
       <p className="mt-2 text-[11px] text-[var(--siya-text-muted)]">
-        Review matching rows in{" "}
+        Peek at matching rows in{" "}
         <Link href="/team" className="font-semibold text-[var(--siya-accent)] underline">
           Open knowledge gaps
-        </Link>{" "}
-        (category + task only). Write or merge an SOP yourself — this card never creates drafts.
+        </Link>
+        . Write or merge an SOP yourself if it needs one.
       </p>
     </article>
   );
@@ -328,7 +327,7 @@ function FounderConsolidationFlags({ flags }: { flags: OpsFounderSopConsolidatio
       aria-labelledby="ops-sop-consolidate-heading"
     >
       <h3 id="ops-sop-consolidate-heading" className="text-sm font-semibold text-amber-950 dark:text-amber-100">
-        Founder action — consolidate team SOP duplicates
+        Founder note — pick one Zocdoc SOP version
       </h3>
       {flags.map((flag) => (
         <div key={flag.id} className="mt-3">
@@ -350,7 +349,13 @@ function FounderConsolidationFlags({ flags }: { flags: OpsFounderSopConsolidatio
   );
 }
 
-function AttentionStrip({ items }: { items: ReturnType<typeof buildOpsAttentionSummary> }) {
+function AttentionStrip({
+  items,
+  onOpen,
+}: {
+  items: ReturnType<typeof buildOpsAttentionSummary>;
+  onOpen?: (section: OpsSectionId) => void;
+}) {
   const warnings = items.filter((i) => i.tone === "warn");
   const oks = items.filter((i) => i.tone !== "warn");
   return (
@@ -359,10 +364,10 @@ function AttentionStrip({ items }: { items: ReturnType<typeof buildOpsAttentionS
       aria-labelledby="ops-attention-heading"
     >
       <h2 id="ops-attention-heading" className="text-sm font-semibold text-amber-950 dark:text-amber-100">
-        Needs attention
+        Start here
       </h2>
       <p className="mt-0.5 text-[11px] text-amber-900/80 dark:text-amber-100/70">
-        Scan this first — same data as the sections below, surfaced as problems.
+        Quick look at what’s off — tap a tile below for the full picture.
       </p>
       {warnings.length > 0 ? (
         <ul className="mt-3 space-y-1.5">
@@ -375,7 +380,7 @@ function AttentionStrip({ items }: { items: ReturnType<typeof buildOpsAttentionS
         </ul>
       ) : (
         <p className="mt-3 text-sm font-medium text-[var(--siya-status-success-text)]">
-          No urgent flags right now.
+          Nothing urgent on this list right now.
         </p>
       )}
       {oks.length > 0 ? (
@@ -390,7 +395,66 @@ function AttentionStrip({ items }: { items: ReturnType<typeof buildOpsAttentionS
           ))}
         </ul>
       ) : null}
+      {onOpen && warnings.length > 0 ? (
+        <p className="mt-3 text-[11px] text-amber-900/70 dark:text-amber-100/60">
+          Tip: open{" "}
+          <button type="button" className="font-semibold underline" onClick={() => onOpen("leads")}>
+            Lead follow-through
+          </button>{" "}
+          or{" "}
+          <button type="button" className="font-semibold underline" onClick={() => onOpen("engagement")}>
+            Who’s using Ask
+          </button>{" "}
+          next.
+        </p>
+      ) : null}
     </section>
+  );
+}
+
+type OpsSectionId =
+  | "engagement"
+  | "chatSim"
+  | "leads"
+  | "checkIns"
+  | "gaps"
+  | "coverage"
+  | "hours"
+  | "today";
+
+type OpsHubTile = {
+  id: OpsSectionId;
+  title: string;
+  blurb: string;
+  stat: string;
+  warn?: boolean;
+  adminOnly?: boolean;
+};
+
+function OpsHubTileButton({
+  tile,
+  onOpen,
+}: {
+  tile: OpsHubTile;
+  onOpen: (id: OpsSectionId) => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={() => onOpen(tile.id)}
+      className={`flex min-h-[7.5rem] flex-col rounded-[var(--siya-radius-lg)] border p-4 text-left shadow-[var(--siya-shadow)] transition hover:border-[var(--siya-accent)]/50 hover:bg-[var(--siya-bg-subtle)]/60 focus:outline-none focus:ring-2 focus:ring-[var(--siya-accent)]/30 ${
+        tile.warn
+          ? "border-amber-500/45 bg-amber-50/70 dark:bg-amber-950/25"
+          : "border-[var(--siya-border)] bg-[var(--siya-white)]/90"
+      }`}
+    >
+      <p className="text-sm font-semibold text-[var(--siya-primary)]">{tile.title}</p>
+      <p className="mt-1 flex-1 text-xs leading-snug text-[var(--siya-text-muted)]">{tile.blurb}</p>
+      <p className={`mt-3 text-lg font-semibold tabular-nums ${tile.warn ? portalStatusWarnText : "text-[var(--siya-text)]"}`}>
+        {tile.stat}
+      </p>
+      <span className="mt-1 text-[11px] font-semibold text-[var(--siya-accent)]">Open →</span>
+    </button>
   );
 }
 
@@ -402,6 +466,7 @@ export function OpsDashboardPanel() {
   const [error, setError] = useState<string | null>(null);
   const [reportUserId, setReportUserId] = useState<string | null>(null);
   const [showTestAccounts, setShowTestAccounts] = useState(false);
+  const [openSection, setOpenSection] = useState<OpsSectionId | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -410,7 +475,7 @@ export function OpsDashboardPanel() {
       const payload = await fetchOpsDashboard();
       setData(payload);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Could not load ops dashboard");
+      setError(e instanceof Error ? e.message : "Could not load ops");
       setData(null);
     } finally {
       setLoading(false);
@@ -451,6 +516,82 @@ export function OpsDashboardPanel() {
     });
   }, [data, showTestAccounts]);
 
+  const hubTiles = useMemo((): OpsHubTile[] => {
+    if (!data) return [];
+    const cold =
+      engagementView?.visible.filter(isNotEngagedYet).length ??
+      (data.engagement ? filterEngagementRows(data.engagement, false).visible.filter(isNotEngagedYet).length : 0);
+    const missingNotes = leadsSorted.filter((l) => !l.weeklyCheckIn.submittedThisWeek).length;
+    const pendingSops = leadsSorted.reduce((n, l) => n + l.sopQueue.pendingCount, 0);
+    const gapPatterns =
+      (data.recurringGapPatterns?.length ?? 0) + (data.volumeGapPatternsUnknownPeople?.length ?? 0);
+    const coverage = data.coverageGaps?.length ?? 0;
+    const todayRows = data.scheduledVsActual?.length ?? 0;
+
+    const tiles: OpsHubTile[] = [
+      {
+        id: "engagement",
+        title: "Who’s using Ask",
+        blurb: "Who’s chatting with Assist, and who’s gone quiet.",
+        stat: cold > 0 ? `${cold} quiet` : `${engagementView?.visible.length ?? "—"} people`,
+        warn: cold > 0,
+      },
+      {
+        id: "chatSim",
+        title: "Chat practice flags",
+        blurb: "Practice chats that hit a safety stop.",
+        stat: "Review",
+      },
+      {
+        id: "leads",
+        title: "Lead follow-through",
+        blurb: "SOP queues and whether leads filed this week’s note.",
+        stat: pendingSops > 0 ? `${pendingSops} SOPs waiting` : `${missingNotes} notes missing`,
+        warn: pendingSops > 0 || missingNotes > 0,
+      },
+      {
+        id: "checkIns",
+        title: "This week’s lead notes",
+        blurb: "The actual write-ups — not just submitted / missing.",
+        stat: missingNotes > 0 ? `${missingNotes} missing` : "Open notes",
+        warn: missingNotes > 0,
+      },
+      {
+        id: "gaps",
+        title: "Same questions keep coming",
+        blurb: "Topics people keep asking about with no solid guide yet.",
+        stat: gapPatterns > 0 ? `${gapPatterns} patterns` : "None right now",
+        warn: gapPatterns > 0,
+      },
+      {
+        id: "today",
+        title: "Today vs the roster",
+        blurb: "Scheduled shifts vs who actually started Working.",
+        stat: todayRows > 0 ? `${todayRows} rows` : "No roster rows",
+      },
+    ];
+
+    if (data.viewer.isAdmin) {
+      tiles.splice(5, 0, {
+        id: "coverage",
+        title: "Empty coverage hours",
+        blurb: "Times in the next week with nobody on the imported roster.",
+        stat: coverage > 0 ? `${coverage} gaps` : "Covered",
+        warn: coverage > 0,
+        adminOnly: true,
+      });
+      tiles.splice(6, 0, {
+        id: "hours",
+        title: "Time on shift",
+        blurb: "Working / break / focus hours — for review, not payroll math.",
+        stat: "Open hours",
+        adminOnly: true,
+      });
+    }
+
+    return tiles;
+  }, [data, engagementView, leadsSorted]);
+
   if (!authReady || !user) return null;
 
   const reportRow =
@@ -464,20 +605,21 @@ export function OpsDashboardPanel() {
     topLead.sopQueue.pendingCount > 0 &&
     (topLead.sopQueue.oldestPendingAgeDays ?? 0) >= 14;
 
+  const openMeta = openSection ? hubTiles.find((t) => t.id === openSection) : null;
+
   return (
-    <div className="mx-auto max-w-6xl space-y-8 px-4 py-8 md:px-6">
+    <div className="mx-auto max-w-5xl space-y-6 px-4 py-8 md:px-6">
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className={portalH1}>Ops dashboard</h1>
-          <p className="mt-1 max-w-2xl text-sm text-[var(--siya-text-muted)]">
-            Problems first, then detail — staff engagement and lead responsiveness stay separate (not a combined
-            score).
+          <h1 className={portalH1}>Ops</h1>
+          <p className="mt-1 max-w-xl text-sm text-[var(--siya-text-muted)]">
+            A short home for what’s going on with the team — pick a square, dig in, come back.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
           {isPortalAdmin(user.role) ? (
             <Link href="/admin/team" className={`${portalBtnGhostSm} text-[var(--siya-accent)]`}>
-              Team health
+              Team board
             </Link>
           ) : (
             <Link href="/team" className={`${portalBtnGhostSm} text-[var(--siya-accent)]`}>
@@ -495,214 +637,242 @@ export function OpsDashboardPanel() {
 
       {data && !loading ? (
         <>
-          <AttentionStrip items={attention} />
+          <AttentionStrip items={attention} onOpen={setOpenSection} />
 
-          {/* Section A — Staff engagement */}
-          <section className={portalSection} aria-labelledby="ops-engagement-heading">
-            <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <h2 id="ops-engagement-heading" className={portalH2}>
-                  A · Staff engagement
-                </h2>
-                <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
-                  Not engaged (0 Ask · 0 practice) listed first, then highest Ask activity. QA/test accounts hidden by
-                  default.
-                </p>
-              </div>
-              {data.engagement != null && (rawTestAccountCount > 0 || showTestAccounts) ? (
-                <label className="flex cursor-pointer items-center gap-2 text-xs text-[var(--siya-text-muted)]">
-                  <input
-                    type="checkbox"
-                    checked={showTestAccounts}
-                    onChange={(e) => setShowTestAccounts(e.target.checked)}
-                    className="rounded border-[var(--siya-border)]"
-                  />
-                  Show test accounts
-                  {!showTestAccounts && rawTestAccountCount > 0 ? ` (${rawTestAccountCount} hidden)` : ""}
-                </label>
-              ) : null}
-            </div>
-            {data.engagement == null ? (
-              <p className="text-sm text-[var(--siya-text-muted)]">
-                Full team engagement is admin-only. Your lead responsiveness is below.
-              </p>
-            ) : !engagementView || engagementView.visible.length === 0 ? (
-              <p className="text-sm text-[var(--siya-text-muted)]">
-                {engagementView?.hiddenTestCount
-                  ? "Only test accounts in this list — toggle Show test accounts to inspect them."
-                  : "No active staff found."}
-              </p>
-            ) : (
-              <>
-                <EngagementTable
-                  rows={engagementView.visible}
-                  reportUserId={reportUserId}
-                  onToggleReport={(id) => setReportUserId((cur) => (cur === id ? null : id))}
-                />
-                {reportRow ? (() => {
-                  const progress: LevelUpProgress = {
-                    streak: reportRow.streak,
-                    lastActiveDate: reportRow.lastActiveDate,
-                    completedToday: [],
-                    totalXp: reportRow.totalXp,
-                    dayLedger: coerceDayLedger(reportRow.dayLedger),
-                  };
-                  const report = buildWeeklyPracticeReport(progress, {
-                    subjectLabel: displayName(reportRow),
-                  });
-                  return (
-                    <div className="mt-4">
-                      <p className="mb-2 text-xs text-[var(--siya-text-muted)]">
-                        Same weekly report component as Learn / Admin Team (shared results only).
-                      </p>
-                      <WeeklyPracticeReportView report={report} />
-                    </div>
-                  );
-                })() : null}
-              </>
-            )}
-          </section>
-
-          <ChatSimOpsReviewPanel engagement={data.engagement} />
-
-          {/* Section B — Lead responsiveness */}
-          <section className={portalSection} aria-labelledby="ops-leads-heading">
-            <h2 id="ops-leads-heading" className={portalH2}>
-              B · Leads&apos; operational responsiveness
-            </h2>
-            <p className="mt-1 mb-4 text-xs text-[var(--siya-text-muted)]">
-              Sorted by urgency — oldest pending SOP first. The age and pending count sit large on each card.
-            </p>
-            {data.viewer.isAdmin && (data.founderSopConsolidationFlags?.length ?? 0) > 0 ? (
-              <FounderConsolidationFlags flags={data.founderSopConsolidationFlags || []} />
-            ) : null}
-            {leadsSorted.length === 0 ? (
-              <p className="text-sm text-[var(--siya-text-muted)]">No department leads assigned.</p>
-            ) : (
-              <div className="space-y-3">
-                {leadsSorted.map((row, idx) => (
-                  <LeadCard
-                    key={row.userId}
-                    row={row}
-                    highlightSelf={row.userId === user.id}
-                    emphasize={idx === 0 && topLeadUrgent}
-                  />
+          {!openSection ? (
+            <div>
+              <h2 className="mb-3 text-sm font-semibold text-[var(--siya-primary)]">Browse</h2>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {hubTiles.map((tile) => (
+                  <OpsHubTileButton key={tile.id} tile={tile} onOpen={setOpenSection} />
                 ))}
               </div>
-            )}
-          </section>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <button
+                type="button"
+                className="text-xs font-semibold text-[var(--siya-accent)] hover:underline"
+                onClick={() => setOpenSection(null)}
+              >
+                ← Back to Ops home
+              </button>
+              {openMeta ? (
+                <p className="text-xs text-[var(--siya-text-muted)]">{openMeta.blurb}</p>
+              ) : null}
 
-          {/* Full weekly check-in text (same feed as Team) — not status dots only */}
-          <section className={portalSection} aria-labelledby="ops-checkin-text-heading">
-            <h2 id="ops-checkin-text-heading" className={portalH2}>
-              B · Weekly lead check-ins (full text)
-            </h2>
-            <p className="mt-1 mb-4 text-xs text-[var(--siya-text-muted)]">
-              Same content as Team / Founder — what changed, numbers, blockers, founder notes. Lead cards
-              above only show submitted vs missing; read substance here.
-            </p>
-            <WeeklyCheckInFeed />
-          </section>
+              {openSection === "engagement" ? (
+                <section className={portalSection} aria-labelledby="ops-engagement-heading">
+                  <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <h2 id="ops-engagement-heading" className={portalH2}>
+                        Who’s using Ask
+                      </h2>
+                      <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+                        Quiet people (no Ask, no practice) show up first. Test accounts stay hidden unless you
+                        flip the switch.
+                      </p>
+                    </div>
+                    {data.engagement != null && (rawTestAccountCount > 0 || showTestAccounts) ? (
+                      <label className="flex cursor-pointer items-center gap-2 text-xs text-[var(--siya-text-muted)]">
+                        <input
+                          type="checkbox"
+                          checked={showTestAccounts}
+                          onChange={(e) => setShowTestAccounts(e.target.checked)}
+                          className="rounded border-[var(--siya-border)]"
+                        />
+                        Show test accounts
+                        {!showTestAccounts && rawTestAccountCount > 0 ? ` (${rawTestAccountCount} hidden)` : ""}
+                      </label>
+                    ) : null}
+                  </div>
+                  {data.engagement == null ? (
+                    <p className="text-sm text-[var(--siya-text-muted)]">
+                      Full team list is admin-only. Your lead view is under Lead follow-through.
+                    </p>
+                  ) : !engagementView || engagementView.visible.length === 0 ? (
+                    <p className="text-sm text-[var(--siya-text-muted)]">
+                      {engagementView?.hiddenTestCount
+                        ? "Only test accounts here — turn on Show test accounts if you need them."
+                        : "No active staff found."}
+                    </p>
+                  ) : (
+                    <>
+                      <EngagementTable
+                        rows={engagementView.visible}
+                        reportUserId={reportUserId}
+                        onToggleReport={(id) => setReportUserId((cur) => (cur === id ? null : id))}
+                      />
+                      {reportRow
+                        ? (() => {
+                            const progress: LevelUpProgress = {
+                              streak: reportRow.streak,
+                              lastActiveDate: reportRow.lastActiveDate,
+                              completedToday: [],
+                              totalXp: reportRow.totalXp,
+                              dayLedger: coerceDayLedger(reportRow.dayLedger),
+                            };
+                            const report = buildWeeklyPracticeReport(progress, {
+                              subjectLabel: displayName(reportRow),
+                            });
+                            return (
+                              <div className="mt-4">
+                                <p className="mb-2 text-xs text-[var(--siya-text-muted)]">
+                                  Same weekly practice summary as Learn.
+                                </p>
+                                <WeeklyPracticeReportView report={report} />
+                              </div>
+                            );
+                          })()
+                        : null}
+                    </>
+                  )}
+                </section>
+              ) : null}
 
-          {/* Section B2 — Recurring knowledge gaps (surface only) */}
-          <section className={portalSection} aria-labelledby="ops-recurring-gaps-heading">
-            <h2 id="ops-recurring-gaps-heading" className={portalH2}>
-              B2 · Recurring knowledge gaps
-            </h2>
-            <p className="mt-1 mb-4 text-xs text-[var(--siya-text-muted)]">
-              Same department + task, ≥3 open gaps, ≥2 distinct staff, last 30 days (thumbs-down excluded).
-              Detection only — no auto-draft, no auto-assign, no auto pending_review.
-              {data.viewer.isAdmin
-                ? " Showing all departments."
-                : " Showing your lead department(s) only."}
-            </p>
-            {(() => {
-              const multi = data.recurringGapPatterns || [];
-              const volume = data.volumeGapPatternsUnknownPeople || [];
-              if (!multi.length && !volume.length) {
-                return (
-                  <p className="text-sm text-[var(--siya-text-muted)]">
-                    No recurring multi-staff gap patterns in the last 30 days.
+              {openSection === "chatSim" ? <ChatSimOpsReviewPanel engagement={data.engagement} /> : null}
+
+              {openSection === "leads" ? (
+                <section className={portalSection} aria-labelledby="ops-leads-heading">
+                  <h2 id="ops-leads-heading" className={portalH2}>
+                    Lead follow-through
+                  </h2>
+                  <p className="mt-1 mb-4 text-xs text-[var(--siya-text-muted)]">
+                    Sorted so the oldest waiting SOP floats up. Big number on each card = how long it’s been
+                    sitting.
                   </p>
-                );
-              }
-              return (
-                <div className="space-y-3">
-                  {multi.map((p) => (
-                    <RecurringGapPatternCard
-                      key={`multi-${p.departmentSlug}-${p.normalizedTaskLabel}`}
-                      pattern={p}
-                    />
-                  ))}
-                  {volume.map((p) => (
-                    <RecurringGapPatternCard
-                      key={`vol-${p.departmentSlug}-${p.normalizedTaskLabel}`}
-                      pattern={p}
-                      volumeUnknown
-                    />
-                  ))}
-                </div>
-              );
-            })()}
-          </section>
-
-          {/* Section C — Coverage gaps (admin) */}
-          {data.viewer.isAdmin ? (
-            <section className={portalSection} aria-labelledby="ops-coverage-heading">
-              <h2 id="ops-coverage-heading" className={portalH2}>
-                C · MA coverage gaps (next 7 days IST)
-              </h2>
-              <p className="mt-1 mb-4 text-xs text-[var(--siya-text-muted)]">
-                Hours with zero scheduled people on <code className="text-[10px]">shift_roster</code>. From the imported
-                MA roster — not a new attendance system.
-              </p>
-              {!data.coverageGaps?.length ? (
-                <p className="text-sm text-[var(--siya-text-muted)]">No zero-coverage hours in the next 7 days.</p>
-              ) : (
-                <ul className="max-h-64 space-y-1 overflow-y-auto text-sm">
-                  {data.coverageGaps.slice(0, 40).map((g) => (
-                    <li key={`${g.windowStart}-${g.windowEnd}`} className={portalStatusWarnText}>
-                      {g.label}
-                    </li>
-                  ))}
-                  {data.coverageGaps.length > 40 ? (
-                    <li className="text-xs text-[var(--siya-text-muted)]">
-                      …and {data.coverageGaps.length - 40} more
-                    </li>
+                  {data.viewer.isAdmin && (data.founderSopConsolidationFlags?.length ?? 0) > 0 ? (
+                    <FounderConsolidationFlags flags={data.founderSopConsolidationFlags || []} />
                   ) : null}
-                </ul>
-              )}
-            </section>
-          ) : null}
+                  {leadsSorted.length === 0 ? (
+                    <p className="text-sm text-[var(--siya-text-muted)]">No department leads assigned.</p>
+                  ) : (
+                    <div className="space-y-3">
+                      {leadsSorted.map((row, idx) => (
+                        <LeadCard
+                          key={row.userId}
+                          row={row}
+                          highlightSelf={row.userId === user.id}
+                          emphasize={idx === 0 && topLeadUrgent}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </section>
+              ) : null}
 
-          {/* Section C2 — Derived attendance hours (admin) */}
-          {data.viewer.isAdmin ? (
-            <section className={portalSection} aria-labelledby="ops-attendance-hours-heading">
-              <h2 id="ops-attendance-hours-heading" className={portalH2}>
-                C2 · Attendance hours (Working / Break / Focus, IST)
-              </h2>
-              <p className="mt-1 mb-4 text-xs text-[var(--siya-text-muted)]">
-                Derived from shift attendance events — reporting only, no pay rates. Staff see the same day
-                record on My day (shared fingerprint).
-              </p>
-              <OpsAttendanceHoursPanel />
-            </section>
-          ) : null}
+              {openSection === "checkIns" ? (
+                <section className={portalSection} aria-labelledby="ops-checkin-text-heading">
+                  <h2 id="ops-checkin-text-heading" className={portalH2}>
+                    This week’s lead notes
+                  </h2>
+                  <p className="mt-1 mb-4 text-xs text-[var(--siya-text-muted)]">
+                    Full write-ups from leads — what changed, blockers, notes for you. The lead cards only show
+                    whether they submitted.
+                  </p>
+                  <WeeklyCheckInFeed />
+                </section>
+              ) : null}
 
-          {/* Section D — Scheduled vs actual (transparent), grouped by person */}
-          <PlannedVsActualPanel
-            rows={data.scheduledVsActual || []}
-            rosterDate={data.rosterDate || ""}
-            title={data.viewer.isAdmin ? "D · Did today go as planned?" : "C · Did today go as planned?"}
-            subtitle={
-              data.viewer.isAdmin
-                ? "One card per person — multiple shift segments nest under their name (not duplicate rows)."
-                : "Your roster vs self-declared status — same card staff see on My day (own data only)."
-            }
-          />
+              {openSection === "gaps" ? (
+                <section className={portalSection} aria-labelledby="ops-recurring-gaps-heading">
+                  <h2 id="ops-recurring-gaps-heading" className={portalH2}>
+                    Same questions keep coming
+                  </h2>
+                  <p className="mt-1 mb-4 text-xs text-[var(--siya-text-muted)]">
+                    Same department + topic, a few people asking, last 30 days. Just a heads-up — we don’t
+                    auto-write SOPs from this.
+                    {data.viewer.isAdmin ? " Showing all departments." : " Your lead departments only."}
+                  </p>
+                  {(() => {
+                    const multi = data.recurringGapPatterns || [];
+                    const volume = data.volumeGapPatternsUnknownPeople || [];
+                    if (!multi.length && !volume.length) {
+                      return (
+                        <p className="text-sm text-[var(--siya-text-muted)]">
+                          Nothing repeating hard enough to call out right now.
+                        </p>
+                      );
+                    }
+                    return (
+                      <div className="space-y-3">
+                        {multi.map((p) => (
+                          <RecurringGapPatternCard
+                            key={`multi-${p.departmentSlug}-${p.normalizedTaskLabel}`}
+                            pattern={p}
+                          />
+                        ))}
+                        {volume.map((p) => (
+                          <RecurringGapPatternCard
+                            key={`vol-${p.departmentSlug}-${p.normalizedTaskLabel}`}
+                            pattern={p}
+                            volumeUnknown
+                          />
+                        ))}
+                      </div>
+                    );
+                  })()}
+                </section>
+              ) : null}
+
+              {openSection === "coverage" && data.viewer.isAdmin ? (
+                <section className={portalSection} aria-labelledby="ops-coverage-heading">
+                  <h2 id="ops-coverage-heading" className={portalH2}>
+                    Empty coverage hours
+                  </h2>
+                  <p className="mt-1 mb-4 text-xs text-[var(--siya-text-muted)]">
+                    Hours in the next 7 days (IST) with nobody on the imported MA roster — not a new attendance
+                    system.
+                  </p>
+                  {!data.coverageGaps?.length ? (
+                    <p className="text-sm text-[var(--siya-text-muted)]">Looks covered for the next week.</p>
+                  ) : (
+                    <ul className="max-h-64 space-y-1 overflow-y-auto text-sm">
+                      {data.coverageGaps.slice(0, 40).map((g) => (
+                        <li key={`${g.windowStart}-${g.windowEnd}`} className={portalStatusWarnText}>
+                          {g.label}
+                        </li>
+                      ))}
+                      {data.coverageGaps.length > 40 ? (
+                        <li className="text-xs text-[var(--siya-text-muted)]">
+                          …and {data.coverageGaps.length - 40} more
+                        </li>
+                      ) : null}
+                    </ul>
+                  )}
+                </section>
+              ) : null}
+
+              {openSection === "hours" && data.viewer.isAdmin ? (
+                <section className={portalSection} aria-labelledby="ops-attendance-hours-heading">
+                  <h2 id="ops-attendance-hours-heading" className={portalH2}>
+                    Time on shift
+                  </h2>
+                  <p className="mt-1 mb-4 text-xs text-[var(--siya-text-muted)]">
+                    Working / break / focus from shift events. Good for spotting odd days — not for setting pay.
+                    Staff see their own day on My day.
+                  </p>
+                  <OpsAttendanceHoursPanel />
+                </section>
+              ) : null}
+
+              {openSection === "today" ? (
+                <PlannedVsActualPanel
+                  rows={data.scheduledVsActual || []}
+                  rosterDate={data.rosterDate || ""}
+                  title="Today vs the roster"
+                  subtitle={
+                    data.viewer.isAdmin
+                      ? "One card per person — extra shift pieces nest under their name."
+                      : "Your roster vs what you marked on My day."
+                  }
+                />
+              ) : null}
+            </div>
+          )}
 
           <p className="text-[10px] text-[var(--siya-text-muted)]">
-            Generated {new Date(data.generatedAt).toLocaleString()} · existing tables + shift_roster
+            Updated {new Date(data.generatedAt).toLocaleString()}
           </p>
         </>
       ) : null}

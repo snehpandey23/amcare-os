@@ -113,11 +113,11 @@ export function ChatSimOpsReviewPanel({ engagement }: { engagement: OpsEngagemen
   return (
     <section className={portalSection} aria-labelledby="ops-chat-sim-review-heading">
       <h2 id="ops-chat-sim-review-heading" className={portalH2}>
-        A2 · Chat simulator safety review
+        Chat practice flags
       </h2>
-      <p className="mt-1 mb-3 text-xs text-[var(--siya-text)]">
-        Red-flagged and soft-stop sessions with safety codes, scores, and full transcripts (when
-        saved). Going forward only — older flags without a transcript are not recoverable.
+      <p className="mt-1 mb-3 text-xs text-[var(--siya-text-muted)]">
+        Sessions that stopped for safety (red flag or soft stop). Open a transcript when one was saved —
+        older ones only have a summary.
       </p>
       {engagement == null ? (
         <p className="text-sm text-[var(--siya-text-muted)]">Admin-only — team engagement required.</p>

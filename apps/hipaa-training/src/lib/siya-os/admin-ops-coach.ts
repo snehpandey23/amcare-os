@@ -127,6 +127,34 @@ export function isTeamPulseAsk(message: string): boolean {
 }
 
 /**
+ * Founder/lead hypothesis about someone’s Start shift / End shift state
+ * (“forgot to log out”, “still showing online”). Not first-person IT login help.
+ */
+export function isPresenceStatusHypothesis(message: string): boolean {
+  const t = normalizePresenceAskText(message);
+  if (!t) return false;
+  // First-person “I forgot to login” → workplace/IT, not Team pulse.
+  if (/\bi(?:'?ve| have)?\s+forgot\b/.test(t) && !/\b(?:he|she|they|[a-z]{3,})\s+forgot\b/.test(t)) {
+    return false;
+  }
+  if (
+    /\bforgot\s+to\s+(?:log\s*in|login|log\s*out|logout|sign\s*out|end(?:\s+(?:the\s+)?shift)?|start(?:\s+(?:the\s+)?shift)?)\b/.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  if (
+    /\b(?:didn'?t|did\s+not|never)\s+(?:log\s*out|logout|end(?:\s+(?:the\s+)?shift)|log\s*in|login)\b/.test(t)
+  ) {
+    return true;
+  }
+  if (/\bstill\s+(?:showing|marked|listed|online|working|on\s+shift|logged)\b/.test(t)) return true;
+  if (/\bneeds?\s+to\s+(?:log\s*out|logout|end\s+shift)\b/.test(t)) return true;
+  return false;
+}
+
+/**
  * Team usage / engagement / “who’s using the OS” → Ops dashboard Section A
  * (not thumbs chrome, not live Team pulse).
  */
@@ -260,9 +288,14 @@ export function isPresenceTopicContinuation(
 ): boolean {
   if (!historySuggestsPresenceTopic(history)) return false;
   const t = normalizePresenceAskText(message);
-  if (!t || t.length > 100) return false;
+  if (!t || t.length > 120) return false;
   if (isTeamPulseAsk(message) || isAmbiguousStaffLoginDashboardQuery(message)) return true;
-  if (/\b(online|logged?\s*in|logging\s*in|log\s*in|working|present|active|around|pulse|on\s+shift)\b/.test(t)) {
+  if (isPresenceStatusHypothesis(message)) return true;
+  if (
+    /\b(online|logged?\s*in|logging\s*in|log\s*in|log\s*out|logout|signed?\s*out|end\s+shift|start\s+shift|working|present|active|around|pulse|on\s+shift|forgot)\b/.test(
+      t,
+    )
+  ) {
     return true;
   }
   // "who is loggin in" style after presence — status words, not a person name
@@ -321,8 +354,13 @@ export function detectAdminOpsIntent(
     return { kind: "ops_engagement" };
   }
   // Live presence / shift — hard Team pulse path (never Founder Talk portal LLM).
-  // Match natural asks + typo/slang ("who all r online", "who is loggin in") + thread continuations.
-  if (isTeamPulseAsk(message) || isPresenceTopicContinuation(message, history)) {
+  // Match natural asks + typo/slang ("who all r online", "who is loggin in") + thread continuations
+  // + named login/out hypotheses ("anmol forgot to log out").
+  if (
+    isTeamPulseAsk(message) ||
+    isPresenceTopicContinuation(message, history) ||
+    isPresenceStatusHypothesis(message)
+  ) {
     return { kind: "team_pulse" };
   }
   // Presence-thread + "dashboard for login of staff" → stay on pulse (not Workplace links).
@@ -435,9 +473,96 @@ function planDayMessage(snapshot: AdminOpsSnapshot): string {
   return msg;
 }
 
-function teamPulseMessage(snapshot: AdminOpsSnapshot): string {
+function teamPulsePresenceLabel(m: {
+  onShift: boolean;
+  presence: string | null;
+}): string {
+  if (!m.onShift) return "off shift";
+  if (m.presence === "break") return "on break";
+  if (m.presence === "focus") return "in focus";
+  return "working";
+}
+
+/** Match a pulse member named in the message (first/last token ≥3 chars). */
+export function findMentionedPulseMember(
+  message: string,
+  members: { id: string; name: string | null; email: string; onShift: boolean; presence: string | null }[],
+): (typeof members)[number] | null {
+  const t = normalizePresenceAskText(message);
+  if (!t) return null;
+  let best: (typeof members)[number] | null = null;
+  let bestLen = 0;
+  for (const m of members) {
+    const label = (m.name || m.email.split("@")[0] || "").trim();
+    if (!label) continue;
+    const lower = label.toLowerCase();
+    if (lower.length >= 4 && t.includes(lower) && lower.length > bestLen) {
+      best = m;
+      bestLen = lower.length;
+      continue;
+    }
+    for (const part of lower.split(/\s+/).filter((p) => p.length >= 3)) {
+      if (new RegExp(`\\b${part.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`).test(t) && part.length > bestLen) {
+        best = m;
+        bestLen = part.length;
+      }
+    }
+  }
+  return best;
+}
+
+function personPresenceHypothesisMessage(
+  message: string,
+  m: { name: string | null; email: string; onShift: boolean; presence: string | null },
+): string {
+  const t = normalizePresenceAskText(message);
+  const display = m.name?.trim() || m.email;
+  const status = teamPulsePresenceLabel(m);
+  const forgotIn = /\bforgot\s+to\s+(?:log\s*in|login|start(?:\s+(?:the\s+)?shift)?)\b/.test(t);
+  const forgotOut =
+    /\bforgot\s+to\s+(?:log\s*out|logout|sign\s*out|end(?:\s+(?:the\s+)?shift)?)\b/.test(t) ||
+    /\bstill\s+(?:showing|marked|listed|online|working|on\s+shift|logged)\b/.test(t) ||
+    /\bneeds?\s+to\s+(?:log\s*out|logout|end\s+shift)\b/.test(t);
+
+  let msg = `**${display}** on Team pulse right now: **${m.onShift ? "on shift" : "off shift"} · ${status}**.\n\n`;
+
+  if (m.onShift && forgotIn) {
+    msg +=
+      "So they **did** start a shift (self-declared presence) — this isn’t “forgot to log in.” " +
+      "If they look idle or already left, they’re more likely to need **End shift** or **Break** on My day.\n";
+  } else if (m.onShift && forgotOut) {
+    msg +=
+      "Pulse still shows them **on shift**. If they’re done for the day, they should tap **End shift** on My day — presence won’t clear until they do.\n";
+  } else if (!m.onShift && forgotIn) {
+    msg +=
+      "Pulse shows them **off shift** — they haven’t started a shift (or already ended). They can tap **Start shift** on My day.\n";
+  } else if (!m.onShift && forgotOut) {
+    msg +=
+      "Pulse already shows them **off shift** — either they ended shift, or they never started. They’re not marked online right now.\n";
+  } else if (m.onShift) {
+    msg += "They’re currently marked on shift. Open **Team** for the full board.\n";
+  } else {
+    msg += "They’re currently marked off shift. Open **Team** for the full board.\n";
+  }
+
+  msg +=
+    "\n_Team pulse = Start shift / presence on My day — not Zoho/OS password login._\n\n" +
+    "Say **who’s online** for the full list.";
+  return msg;
+}
+
+function teamPulseMessage(snapshot: AdminOpsSnapshot, userMessage?: string): string {
   const p = snapshot.pulse;
   if (!p) return "I couldn't load team presence. Open **Team** on My day or try again in a moment.";
+
+  if (userMessage) {
+    const mentioned = findMentionedPulseMember(userMessage, p.members);
+    // Named follow-up / login-out hypothesis → focused answer (not a full roster dump).
+    if (mentioned && (isPresenceStatusHypothesis(userMessage) || !isTeamPulseAsk(userMessage))) {
+      return personPresenceHypothesisMessage(userMessage, mentioned);
+    }
+  }
+
   let msg = `**Team pulse** (${p.date})\n\n`;
   msg += `Working ${p.live.working} · Break ${p.live.onBreak} · Focus ${p.live.inFocus} · On shift ${p.live.onShift} · Off ${p.live.offShift}\n\n`;
   const active = p.members.filter((m) => m.onShift);
@@ -454,6 +579,11 @@ function teamPulseMessage(snapshot: AdminOpsSnapshot): string {
     msg += "No one is marked on shift right now. They can tap **Start shift** on My day.\n";
   }
   return msg;
+}
+
+/** Exported for smokes — Team pulse list or named login/out hypothesis reply. */
+export function composeTeamPulseAskMessage(message: string, snapshot: AdminOpsSnapshot): string {
+  return teamPulseMessage(snapshot, message);
 }
 
 function taskStatusMessage(snapshot: AdminOpsSnapshot): string {
@@ -787,7 +917,7 @@ export async function runAdminOpsCoach(
       messageOut = planDayMessage(snapshot);
       break;
     case "team_pulse":
-      messageOut = teamPulseMessage(snapshot);
+      messageOut = composeTeamPulseAskMessage(message, snapshot);
       break;
     case "task_status": {
       const preferUrgent = /\burgent\b/i.test(message);
