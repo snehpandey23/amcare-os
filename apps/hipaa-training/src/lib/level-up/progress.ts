@@ -28,7 +28,7 @@ export type ChatSimTranscriptTurn = {
 export type ChatSimLedgerMeta = {
   personaId?: string;
   personaName?: string;
-  outcome?: "in_bounds" | "red_flag" | "soft_stop" | "walk_away" | "completed";
+  outcome?: "in_bounds" | "red_flag" | "soft_stop" | "walk_away" | "patient_left_frustrated" | "completed";
   redFlagged?: boolean;
   safetyReasons?: string[];
   politenessScore?: number;
