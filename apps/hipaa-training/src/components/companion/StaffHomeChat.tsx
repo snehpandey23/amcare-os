@@ -14,6 +14,7 @@ import {
 import { WeeklyCheckInCard } from "@/components/ops/WeeklyCheckInCard";
 import { PracticeInactivityNudgeBanner } from "@/components/level-up/PracticeInactivityNudgeBanner";
 import { ProductTourNudgeBanner } from "@/components/onboarding/ProductTourNudgeBanner";
+import { EomNominationNudgeBanner } from "@/components/ops/EomNominationNudgeBanner";
 
 /**
  * My day = continuous Assist chat (merged former Ask).
@@ -41,6 +42,7 @@ function StaffHomeChatInner({
         <div className="shrink-0 space-y-2 px-3 pt-2">
           <ProductTourNudgeBanner />
           <PracticeInactivityNudgeBanner />
+          <EomNominationNudgeBanner compact />
         </div>
       ) : null}
       {/* Phase 1: Clinical lead Your Focus — always visible above Ask, not buried in Today. */}

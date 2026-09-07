@@ -27,6 +27,8 @@ import {
   tourFeedbackPracticeBody,
   recordTourFeedbackDone,
 } from "@/lib/portal-product-tour";
+import { EomNominationSection } from "@/components/ops/EomNominationSection";
+import { EomNominationNudgeBanner } from "@/components/ops/EomNominationNudgeBanner";
 import { useSearchParams } from "next/navigation";
 
 function labelPerson(p: DirectoryPerson) {
@@ -300,6 +302,14 @@ export function FeedbackFridayPage() {
           <strong>any day</strong> — Friday is only a reminder theme in email.
         </p>
       </header>
+
+      <div className="mb-6">
+        <EomNominationNudgeBanner />
+      </div>
+
+      <div className="mb-6">
+        <EomNominationSection />
+      </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
         <section className={portalSection} aria-label="Give feedback">

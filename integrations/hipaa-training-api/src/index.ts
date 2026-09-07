@@ -2924,6 +2924,137 @@ app.get("/api/knowledge/team-assignees", requireAuth, async (_req: AuthRequest, 
   });
 });
 
+/** Employee of the month — nominations (Feedback page). */
+app.get("/api/eom-nominations/status", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { getEomMonthStatus, currentEomMonthKey } = await import("./eom-nominations-service.js");
+    const month =
+      typeof req.query.month === "string" && /^\d{4}-\d{2}$/.test(req.query.month)
+        ? req.query.month
+        : currentEomMonthKey();
+    const status = await getEomMonthStatus(pool, req.user!.userId, month);
+    return res.json(status);
+  } catch (err) {
+    console.error("[eom-nominations status]", err);
+    return res.status(500).json({ error: "Could not load nominations." });
+  }
+});
+
+app.post("/api/eom-nominations", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { submitEomNomination } = await import("./eom-nominations-service.js");
+    const body = req.body as { nomineeUserId?: string; reason?: string; monthKey?: string };
+    const result = await submitEomNomination(pool, {
+      nominatorUserId: req.user!.userId,
+      nomineeUserId: typeof body.nomineeUserId === "string" ? body.nomineeUserId : "",
+      reason: typeof body.reason === "string" ? body.reason : "",
+      monthKey: typeof body.monthKey === "string" ? body.monthKey : undefined,
+    });
+    if (!result.ok) {
+      return res.status(400).json({ error: result.reason });
+    }
+    return res.json({ ok: true, nomination: result.nomination });
+  } catch (err) {
+    console.error("[eom-nominations submit]", err);
+    return res.status(500).json({ error: "Could not save nomination." });
+  }
+});
+
+app.get("/api/admin/eom-nominations", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { listEomNominationsForMonth, currentEomMonthKey } = await import("./eom-nominations-service.js");
+    const month =
+      typeof req.query.month === "string" && /^\d{4}-\d{2}$/.test(req.query.month)
+        ? req.query.month
+        : currentEomMonthKey();
+    const data = await listEomNominationsForMonth(pool, month);
+    return res.json(data);
+  } catch (err) {
+    console.error("[eom-nominations admin]", err);
+    return res.status(500).json({ error: "Could not load nominations." });
+  }
+});
+
+/** Internal cron: employee-of-the-month email nudge candidates (20th / 25th IST). */
+app.get("/api/internal/eom-nomination-nudges", async (req, res) => {
+  if (!cronAuthorized(req)) return res.status(401).json({ error: "Unauthorized" });
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const {
+      istDateString,
+      isEomNudgeDay,
+      currentEomMonthKey,
+      eomMonthLabel,
+      EOM_PRIZE_COPY,
+      listEomNudgeRecipients,
+    } = await import("./eom-nominations-service.js");
+    const sendDate =
+      typeof req.query.sendDate === "string" && /^\d{4}-\d{2}-\d{2}$/.test(req.query.sendDate)
+        ? req.query.sendDate
+        : istDateString();
+    const force = req.query.force === "1";
+    const dayNum = Number(sendDate.slice(8, 10));
+    const nudgeDay = force || dayNum === 20 || dayNum === 25 || isEomNudgeDay();
+    if (!nudgeDay) {
+      return res.json({
+        sendDate,
+        monthKey: currentEomMonthKey(),
+        nudgeDay: false,
+        recipients: [],
+        note: "Not an EOM nudge day (IST 20 or 25). Pass force=1 to override.",
+      });
+    }
+    const monthKey = sendDate.slice(0, 7);
+    const recipients = await listEomNudgeRecipients(pool, {
+      sendDate,
+      monthKey,
+      includeAlreadySent: req.query.includeAlreadySent === "1",
+      includeAlreadyNominated: req.query.includeAlreadyNominated === "1",
+      userId: typeof req.query.userId === "string" ? req.query.userId : undefined,
+    });
+    return res.json({
+      sendDate,
+      monthKey,
+      monthLabel: eomMonthLabel(monthKey),
+      prizeCopy: EOM_PRIZE_COPY,
+      nudgeDay: true,
+      recipientCount: recipients.length,
+      recipients,
+    });
+  } catch (err) {
+    console.error("[internal/eom-nomination-nudges]", err);
+    return res.status(500).json({ error: "Could not build EOM nudge payload." });
+  }
+});
+
+app.post("/api/internal/eom-nomination-nudges/mark-sent", async (req, res) => {
+  if (!cronAuthorized(req)) return res.status(401).json({ error: "Unauthorized" });
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const userId = typeof req.body?.userId === "string" ? req.body.userId : "";
+  const sendDate = typeof req.body?.sendDate === "string" ? req.body.sendDate : "";
+  const monthKey = typeof req.body?.monthKey === "string" ? req.body.monthKey : undefined;
+  const resendId = typeof req.body?.resendId === "string" ? req.body.resendId : null;
+  if (!userId || !/^\d{4}-\d{2}-\d{2}$/.test(sendDate)) {
+    return res.status(400).json({ error: "userId and sendDate required" });
+  }
+  try {
+    const { markEomNudgeSent } = await import("./eom-nominations-service.js");
+    await markEomNudgeSent(pool, { userId, sendDate, monthKey, resendId });
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error("[internal/eom-nomination-nudges/mark-sent]", err);
+    return res.status(500).json({ error: "Could not mark sent." });
+  }
+});
+
 /** Feedback Friday — peer/lead notes with per-submission anonymity. */
 app.get("/api/team-feedback/directory", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();

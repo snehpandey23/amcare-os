@@ -29,6 +29,10 @@
     {
       "path": "/api/cron/shift-late-start-nudges",
       "schedule": "45 13 * * *"
+    },
+    {
+      "path": "/api/cron/eom-nomination-nudges",
+      "schedule": "30 3 20,25 * *"
     }
   ]
 }
