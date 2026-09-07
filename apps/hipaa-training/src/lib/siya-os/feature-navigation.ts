@@ -46,6 +46,16 @@ export const PORTAL_FEATURES: FeatureDef[] = [
     exclude: [/\b(mock|sample)\s+quiz\b/, /\bpractice\s+drills?\b/],
   },
   {
+    id: "chat-simulator",
+    label: "Chat simulator",
+    href: "/learn/chat-simulator",
+    section: "Learn & training",
+    blurb: "Live patient conversation practice — pick a persona and chat.",
+    patterns: [
+      /\b(chat\s+simulator|patient\s+chat\s+simulator|try\s+chat\s+simulator|mock\s+patient\s+chat)\b/,
+    ],
+  },
+  {
     id: "typing-drill",
     label: "Chat speed & accuracy",
     href: "/learn/practice#typing",

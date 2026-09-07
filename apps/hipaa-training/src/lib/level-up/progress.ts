@@ -14,7 +14,52 @@ export type DailyCompletion =
   | "map"
   | "timezone"
   | "typing"
-  | "billing";
+  | "billing"
+  | "patientChat";
+
+/** One turn in a chat-simulator transcript (persisted for Ops + trainee review). */
+export type ChatSimTranscriptTurn = {
+  /** "you" = trainee MA; otherwise patient display name */
+  who: string;
+  text: string;
+};
+
+/** Chat simulator session outcome (Ops-queryable via level_up day ledger). */
+export type ChatSimLedgerMeta = {
+  personaId?: string;
+  personaName?: string;
+  outcome?: "in_bounds" | "red_flag" | "soft_stop" | "walk_away" | "completed";
+  redFlagged?: boolean;
+  safetyReasons?: string[];
+  politenessScore?: number;
+  grammarScore?: number;
+  relevanceScore?: number;
+  /** Full turn-by-turn conversation (persona + trainee). Present only for sessions saved after transcript persistence shipped. */
+  transcript?: ChatSimTranscriptTurn[];
+  endReason?: string;
+  /** Schema marker — Ops uses this to tell reviewable vs legacy summary-only flags. */
+  transcriptVersion?: 1;
+};
+
+const TRANSCRIPT_MAX_TURNS = 48;
+const TRANSCRIPT_MAX_CHARS = 1200;
+
+/** Normalize simulator lines into a persistable transcript (capped). */
+export function buildChatSimTranscript(
+  lines: Array<{ who: string; text: string }>,
+): ChatSimTranscriptTurn[] {
+  return lines
+    .filter((l) => (l.text || "").trim())
+    .slice(-TRANSCRIPT_MAX_TURNS)
+    .map((l) => ({
+      who: l.who === "you" ? "you" : l.who,
+      text: (l.text || "").trim().slice(0, TRANSCRIPT_MAX_CHARS),
+    }));
+}
+
+export function chatSimHasReviewableTranscript(meta: ChatSimLedgerMeta | undefined): boolean {
+  return Boolean(meta?.transcript && meta.transcript.length > 0);
+}
 
 /** One logged drill event — day-wise history (not just running totals). */
 export type DayLedgerEntry = {
@@ -35,6 +80,8 @@ export type DayLedgerEntry = {
   wpm?: number;
   accuracy?: number;
   passageId?: string;
+  /** Patient chat simulator — persisted for Ops review */
+  chatSim?: ChatSimLedgerMeta;
 };
 
 export type LevelUpProgress = {
@@ -52,6 +99,7 @@ export type DrillEventOpts = {
   /** Override calendar day (UTC YYYY-MM-DD) — tests / backfill */
   date?: string;
   now?: number;
+  chatSim?: ChatSimLedgerMeta;
 };
 
 export type TypingAttemptOpts = DrillEventOpts & {
@@ -138,12 +186,65 @@ export function applyDailyComplete(
     at: now,
     xpAwarded,
     shareDecision: null,
+    ...(opts?.chatSim ? { chatSim: opts.chatSim } : {}),
   };
 
   return {
     ...p,
     dayLedger: trimLedger([...(p.dayLedger ?? []), entry]),
   };
+}
+
+/** Red-flagged / soft-stop / all chat-simulator sessions from the day ledger — Ops query. */
+export function listChatSimSessions(
+  p: LevelUpProgress,
+  opts?: { redFlaggedOnly?: boolean; reviewOutcomesOnly?: boolean },
+): DayLedgerEntry[] {
+  let rows = (p.dayLedger ?? []).filter((e) => e.drill === "patientChat" && e.chatSim);
+  if (opts?.redFlaggedOnly) rows = rows.filter((e) => e.chatSim?.redFlagged === true);
+  if (opts?.reviewOutcomesOnly) {
+    rows = rows.filter(
+      (e) => e.chatSim?.redFlagged === true || e.chatSim?.outcome === "soft_stop",
+    );
+  }
+  return rows;
+}
+
+/** Flatten review sessions from Ops engagement day ledgers (admin team rows). */
+export function collectChatSimReviewsFromEngagement(
+  rows: Array<{
+    userId: string;
+    email: string;
+    name: string | null;
+    dayLedger?: unknown[];
+  }>,
+): Array<{
+  userId: string;
+  email: string;
+  name: string | null;
+  entry: DayLedgerEntry;
+}> {
+  const out: Array<{
+    userId: string;
+    email: string;
+    name: string | null;
+    entry: DayLedgerEntry;
+  }> = [];
+  for (const r of rows) {
+    const ledger = Array.isArray(r.dayLedger) ? (r.dayLedger as DayLedgerEntry[]) : [];
+    const fake: LevelUpProgress = {
+      streak: 0,
+      lastActiveDate: "",
+      completedToday: [],
+      totalXp: 0,
+      dayLedger: ledger,
+    };
+    for (const entry of listChatSimSessions(fake, { reviewOutcomesOnly: true })) {
+      out.push({ userId: r.userId, email: r.email, name: r.name, entry });
+    }
+  }
+  out.sort((a, b) => (b.entry.at ?? 0) - (a.entry.at ?? 0));
+  return out;
 }
 
 /**
@@ -180,7 +281,8 @@ export function applyTypingAttempt(
     at: now,
     xpAwarded,
     shareDecision: null,
-    wpm: score.wpm,
+    // Omit absurd/zero WPM so weekly trends never show timing artifacts.
+    wpm: score.wpm > 0 ? score.wpm : undefined,
     accuracy: score.accuracy,
     passageId: opts?.passageId,
   };

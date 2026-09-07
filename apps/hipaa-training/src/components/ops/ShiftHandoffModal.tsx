@@ -68,7 +68,7 @@ export function ShiftHandoffModal({ open, shiftEndEventId, onClose }: Props) {
       <div className="flex min-h-full items-end justify-center sm:items-center">
         <form
           onSubmit={onSubmit}
-          className="my-auto w-full max-w-md max-h-[min(92dvh,calc(100%-2rem))] overflow-y-auto overscroll-contain rounded-2xl border border-[var(--siya-border)] bg-white p-5 shadow-xl"
+          className="my-auto w-full max-w-md max-h-[min(92dvh,calc(100%-2rem))] overflow-y-auto overscroll-contain rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-5 shadow-xl"
         >
         <h2 className="text-lg font-semibold text-[var(--siya-primary)]">Shift handoff</h2>
         <p className="mt-1 text-xs text-[var(--siya-text-muted)]">

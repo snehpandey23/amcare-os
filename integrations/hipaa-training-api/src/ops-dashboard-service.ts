@@ -18,6 +18,7 @@ const ALL_DRILLS: DrillKey[] = [
   "timezone",
   "typing",
   "billing",
+  "patientChat",
 ];
 
 function daysBetween(isoA: string, isoB = new Date().toISOString()): number {
@@ -84,6 +85,8 @@ export type OpsEngagementRow = {
   streak: number;
   lastActiveDate: string;
   practiceLifetime: number;
+  /** Chat simulator sessions marked red-flagged (from day ledger). */
+  chatSimRedFlags: number;
   /** Raw day ledger so UI can reuse WeeklyPracticeReportView (shared results only). */
   dayLedger: unknown[];
   practiceShareThisWeek: {
@@ -186,6 +189,7 @@ export async function buildOpsDashboard(
         streak: level.streak,
         lastActiveDate: level.lastActiveDate,
         practiceLifetime: drillCount(level.lifetimeDrills, ALL_DRILLS),
+        chatSimRedFlags: level.chatSimRedFlags,
         dayLedger: ledger,
         practiceShareThisWeek: practiceShareThisWeek(ledger),
       });

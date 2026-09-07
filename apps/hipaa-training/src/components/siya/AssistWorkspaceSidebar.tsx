@@ -50,16 +50,16 @@ export function AssistWorkspaceSidebar({ onNavigate }: { onNavigate?: () => void
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search"
-            className="w-full rounded-md border-0 bg-[var(--siya-white)] px-2.5 py-1.5 text-xs text-[var(--siya-text)] outline-none placeholder:text-[var(--siya-text-muted)]"
+            className="w-full rounded-md border-0 bg-[var(--siya-white)] px-2.5 py-1.5 text-xs text-[var(--siya-text)] outline-none placeholder:text-[var(--siya-text-secondary)]"
           />
         </form>
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto px-1.5 py-1">
         {loadingList ? (
-          <p className="px-2 text-[11px] text-[var(--siya-text-muted)]">Loading…</p>
+          <p className="px-2 text-[11px] text-[var(--siya-text-secondary)]">Loading…</p>
         ) : threads.length === 0 ? (
-          <p className="px-2 text-[11px] text-[var(--siya-text-muted)]">No saved chats yet.</p>
+          <p className="px-2 text-[11px] text-[var(--siya-text-secondary)]">No saved chats yet.</p>
         ) : (
           <ul className="space-y-px">
             {threads.map((t) => {
@@ -75,20 +75,24 @@ export function AssistWorkspaceSidebar({ onNavigate }: { onNavigate?: () => void
                     className={`w-full rounded-md px-2.5 py-1.5 pr-8 text-left text-[13px] leading-snug ${
                       active
                         ? "bg-[var(--siya-white)] text-[var(--siya-text)]"
-                        : "text-[var(--siya-text-muted)] hover:bg-[var(--siya-white)] hover:text-[var(--siya-text)]"
+                        : "text-[var(--siya-text-secondary)] hover:bg-[var(--siya-white)] hover:text-[var(--siya-text)]"
                     }`}
                   >
-                    <span className="line-clamp-1">{t.title || "New chat"}</span>
+                    <span className="line-clamp-1">
+                      {!t.title?.trim() || /^new chat$/i.test(t.title.trim())
+                        ? "Untitled chat"
+                        : t.title}
+                    </span>
                   </button>
                   <button
                     type="button"
-                    className="absolute right-1 top-1/2 -translate-y-1/2 rounded px-1.5 text-[11px] text-[var(--siya-text-muted)] opacity-0 hover:text-[var(--siya-text)] group-hover:opacity-100"
+                    className="absolute right-1 top-1/2 -translate-y-1/2 rounded px-1.5 text-[11px] text-[var(--siya-text-secondary)] opacity-0 hover:text-[var(--siya-text)] group-hover:opacity-100"
                     onClick={(e) => {
                       e.stopPropagation();
                       void archiveThread(t.id);
                     }}
-                    aria-label="Archive chat (remove from list)"
-                    title="Archive — remove from your chat list"
+                    aria-label="Delete chat permanently"
+                    title="Delete — remove this chat for good"
                   >
                     ×
                   </button>
@@ -121,7 +125,7 @@ export function AssistWorkspaceSidebar({ onNavigate }: { onNavigate?: () => void
         >
           Learn
         </SideLink>
-        {isPortalMemoryEnabled() ? (
+        {isPortalMemoryEnabled() && user && isPortalAdmin(user.role) ? (
           <SideLink href="/memory" active={path.startsWith("/memory")} onNavigate={onNavigate}>
             Memory
           </SideLink>

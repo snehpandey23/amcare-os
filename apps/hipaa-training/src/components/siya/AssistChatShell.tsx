@@ -26,7 +26,7 @@ export function AssistChatShell({
   openingOverride,
 }: Props) {
   const { token } = useAuth();
-  const { activeId, ready, bootError, search, refreshList, newChat } = useAssistThreads();
+  const { activeId, ready, bootError, search, refreshList, clearAndNewChat } = useAssistThreads();
 
   if (!token) {
     return (
@@ -54,7 +54,7 @@ export function AssistChatShell({
         surface={surface}
         openingOverride={openingOverride}
         onThreadMetaChange={() => void refreshList(search.trim() || undefined)}
-        onRequestNewThread={() => void newChat()}
+        onRequestNewThread={() => void clearAndNewChat()}
       />
     </div>
   );

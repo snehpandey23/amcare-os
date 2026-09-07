@@ -5,7 +5,7 @@ import { useSpeechCapture } from "@/lib/use-speech-capture";
 import { cancelSpeech, isTextToSpeechSupported, speakText } from "@/lib/text-to-speech";
 import { buildTalkModeSpokenText } from "@/lib/talk-mode-utterance";
 import { isSpeechToTextSupported } from "@/lib/speech-to-text";
-import type { PendingVoiceAction } from "@/lib/voice-actions";
+import { isConfirmNo, isConfirmYes, type PendingVoiceAction } from "@/lib/voice-actions";
 import { TalkVoicePicker } from "@/components/siya/TalkVoicePicker";
 import { loadLocalPortalProfile, saveLocalPortalProfile } from "@/lib/portal-profile";
 import { persistPortalProfile } from "@/lib/portal-profile-api";
@@ -51,7 +51,7 @@ const PHASE_COPY: Record<TalkPhase, { title: string; hint: string }> = {
   },
   awaiting_confirm: {
     title: "Confirm action",
-    hint: "Say yes to run this action, or no to cancel. Nothing happens until you confirm.",
+    hint: "I’ll listen for yes or no after the readback — or tap Yes / No below. Nothing runs until you confirm.",
   },
 };
 
@@ -65,8 +65,17 @@ export function TalkModeView({ messages, loading, pendingVoice, disabled, onUtte
   talkVoiceURIRef.current = talkVoiceURI;
   const lastSpokenIdRef = useRef<string | null>(null);
   const wasListeningRef = useRef(false);
+  const pendingVoiceRef = useRef(pendingVoice);
+  pendingVoiceRef.current = pendingVoice;
+  const confirmAutoSubmitRef = useRef(false);
   const onUtteranceRef = useRef(onUtterance);
   onUtteranceRef.current = onUtterance;
+  const speechStartRef = useRef(speech.start);
+  speechStartRef.current = speech.start;
+  const speechStopRef = useRef(speech.stop);
+  speechStopRef.current = speech.stop;
+  const speechAbortRef = useRef(speech.abort);
+  speechAbortRef.current = speech.abort;
 
   useEffect(() => {
     setTtsSupported(isTextToSpeechSupported());
@@ -101,12 +110,13 @@ export function TalkModeView({ messages, loading, pendingVoice, disabled, onUtte
     wasListeningRef.current = false;
     const text = speech.finalText.trim();
     if (text) {
+      confirmAutoSubmitRef.current = false;
       speech.clear();
       void onUtteranceRef.current(text);
     }
   }, [speech.listening, speech.finalText, speech.clear]);
 
-  // Speak new assistant lines (incl. confirm readbacks).
+  // Speak new assistant lines (incl. confirm readbacks). After a confirm readback, auto-listen for yes/no.
   useEffect(() => {
     if (loading || speech.listening) return;
     const last = messages[messages.length - 1];
@@ -120,27 +130,61 @@ export function TalkModeView({ messages, loading, pendingVoice, disabled, onUtte
       sources: last.sources,
       knowledgeGap: last.knowledgeGap,
     });
+    const wasConfirm = Boolean(last.confirmPrompt);
     void speakText(spoken, {
       voiceURI: talkVoiceURIRef.current,
       onStart: () => setSpeaking(true),
-      onEnd: () => setSpeaking(false),
+      onEnd: () => {
+        setSpeaking(false);
+        // Confirm gate: don't leave the user stranded — start listening for yes/no.
+        if (wasConfirm && pendingVoiceRef.current && !loading) {
+          confirmAutoSubmitRef.current = false;
+          try {
+            speechStartRef.current();
+          } catch {
+            /* start() surfaces its own error state */
+          }
+        }
+      },
     });
   }, [messages, loading, speech.listening]);
+
+  // While confirming and listening, auto-submit a clear yes/no (no second mic tap).
+  useEffect(() => {
+    if (!pendingVoice || !speech.listening || confirmAutoSubmitRef.current) return;
+    // Prefer finals only — interim "yes" can vanish if we stop before isFinal.
+    const candidate = speech.finalText.trim();
+    if (!candidate) return;
+    if (!isConfirmYes(candidate) && !isConfirmNo(candidate)) return;
+    confirmAutoSubmitRef.current = true;
+    speechStopRef.current();
+  }, [pendingVoice, speech.listening, speech.finalText]);
+
+  // Reset auto-submit latch when the pending action changes.
+  useEffect(() => {
+    confirmAutoSubmitRef.current = false;
+  }, [pendingVoice]);
 
   useEffect(() => {
     return () => cancelSpeech();
   }, []);
 
   const phase: TalkPhase = useMemo(() => {
-    if (pendingVoice) return "awaiting_confirm";
+    // Listening wins so the orb / live caption show while confirming.
     if (speech.listening) return "listening";
+    if (pendingVoice) return "awaiting_confirm";
     if (loading) return "thinking";
     if (speaking) return "speaking";
     return "idle";
   }, [pendingVoice, speech.listening, loading, speaking]);
 
   const liveLine = [speech.finalText, speech.interimText].filter(Boolean).join(" ").trim();
-  const copy = PHASE_COPY[phase];
+  const copy = pendingVoice && phase === "listening"
+    ? {
+        title: "Listening for yes / no",
+        hint: "Say yes to run this action, or no to cancel — or use the buttons.",
+      }
+    : PHASE_COPY[phase];
 
   const toggleListen = useCallback(() => {
     if (disabled || loading) return;
@@ -152,6 +196,18 @@ export function TalkModeView({ messages, loading, pendingVoice, disabled, onUtte
     setSpeaking(false);
     speech.start();
   }, [disabled, loading, speech]);
+
+  const confirmChoice = useCallback(
+    (choice: "yes" | "no") => {
+      if (disabled || loading || !pendingVoice) return;
+      cancelSpeech();
+      setSpeaking(false);
+      speechAbortRef.current();
+      confirmAutoSubmitRef.current = false;
+      void onUtterance(choice);
+    },
+    [disabled, loading, pendingVoice, onUtterance],
+  );
 
   const sttOk = speech.supported && isSpeechToTextSupported();
 
@@ -194,10 +250,30 @@ export function TalkModeView({ messages, loading, pendingVoice, disabled, onUtte
               Confirmation required
             </p>
             <p className="mt-1 whitespace-pre-wrap leading-relaxed">{pendingVoice.readback}</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <button
+                type="button"
+                className="rounded-lg bg-amber-700 px-3 py-1.5 text-xs font-semibold text-white hover:bg-amber-800 disabled:opacity-40"
+                disabled={disabled || loading}
+                data-talk-confirm-yes="true"
+                onClick={() => confirmChoice("yes")}
+              >
+                Yes — do it
+              </button>
+              <button
+                type="button"
+                className="rounded-lg border border-amber-700/40 bg-white px-3 py-1.5 text-xs font-semibold text-amber-950 hover:bg-amber-100 disabled:opacity-40"
+                disabled={disabled || loading}
+                data-talk-confirm-no="true"
+                onClick={() => confirmChoice("no")}
+              >
+                No — cancel
+              </button>
+            </div>
           </div>
         ) : null}
 
-        {liveLine && phase === "listening" ? (
+        {liveLine && (phase === "listening" || pendingVoice) ? (
           <p className="mt-3 max-w-md text-center text-sm italic text-[var(--siya-text-secondary)]">
             “{liveLine}”
           </p>
@@ -236,7 +312,13 @@ export function TalkModeView({ messages, loading, pendingVoice, disabled, onUtte
           <MicGlyph />
         </button>
         <p className="mt-2 text-[11px] text-[var(--siya-text-muted)]">
-          {phase === "listening" ? "Tap to send" : phase === "awaiting_confirm" ? "Or tap mic to say yes / no" : "Tap to talk"}
+          {phase === "listening"
+            ? pendingVoice
+              ? "Listening — say yes or no (or use the buttons)"
+              : "Tap to send"
+            : pendingVoice
+              ? "Or tap mic to say yes / no"
+              : "Tap to talk"}
         </p>
         {!ttsSupported ? (
           <p className="mt-2 text-[11px] text-[var(--siya-text-muted)]">

@@ -1,5 +1,5 @@
 import type pg from "pg";
-import { parseShiftStore, isSameCalendarDay } from "./shift-store.js";
+import { parseShiftStore, isSameCalendarDay, istDateString } from "./shift-store.js";
 import { ensureShiftAttendanceTables } from "./shift-attendance.js";
 
 /** Fixed offset — whole team ops day (India). */
@@ -22,12 +22,9 @@ export function opsDayBounds(dateParam: unknown): { from: string; to: string; la
   };
 }
 
+/** @deprecated Prefer istDateString from shift-store — kept as alias for call sites. */
 export function istDateLabel(at: Date): string {
-  const ist = new Date(at.getTime() + IST_OFFSET_MS);
-  const y = ist.getUTCFullYear();
-  const m = String(ist.getUTCMonth() + 1).padStart(2, "0");
-  const d = String(ist.getUTCDate()).padStart(2, "0");
-  return `${y}-${m}-${d}`;
+  return istDateString(at);
 }
 
 export type ShiftDashboardPayload = {
@@ -83,6 +80,9 @@ export type LiveTeamMember = {
 };
 
 export async function buildLiveTeamRoster(pool: pg.Pool): Promise<LiveTeamMember[]> {
+  const { closeAllStaleActiveShifts } = await import("./shift-progress.js");
+  await closeAllStaleActiveShifts(pool);
+
   const roster = await pool.query(
     `SELECT u.id, u.email, u.name, p.shift_json
      FROM hipaa_training_users u

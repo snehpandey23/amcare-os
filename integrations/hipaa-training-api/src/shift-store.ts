@@ -86,13 +86,20 @@ export function parseShiftStore(raw: unknown): ShiftStore {
   };
 }
 
+/** IST calendar date YYYY-MM-DD — ops day boundary for all shift/hours reporting. */
+export function istDateString(at: Date | string = new Date()): string {
+  const d = typeof at === "string" ? new Date(at) : at;
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Kolkata",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(d);
+}
+
+/** True when `iso` falls on the same IST calendar day as `ref` (default: now). */
 export function isSameCalendarDay(iso: string, ref = new Date()): boolean {
-  const d = new Date(iso);
-  return (
-    d.getUTCFullYear() === ref.getUTCFullYear() &&
-    d.getUTCMonth() === ref.getUTCMonth() &&
-    d.getUTCDate() === ref.getUTCDate()
-  );
+  return istDateString(iso) === istDateString(ref);
 }
 
 export function startedShiftToday(store: ShiftStore): boolean {

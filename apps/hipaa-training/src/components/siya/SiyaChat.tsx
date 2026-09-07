@@ -12,6 +12,7 @@ import { PortalNavLink } from "@/components/training/PortalNavLink";
 import { isPortalMemoryEnabled } from "@/lib/trainingConfig";
 import { useAuth } from "@/context/AuthContext";
 import { getAssistSessionActiveId } from "@/lib/assist-session";
+import { persistAssistTurn } from "@/lib/assist-chat-api";
 import { isPortalAdmin } from "@/lib/portal-role";
 import { createAdhocTask } from "@/lib/tasks-api";
 import {
@@ -289,6 +290,26 @@ export function SiyaChat({
     return id;
   }, []);
 
+  const resolveThreadId = useCallback((): string | null => {
+    const fromProp = threadId && threadId.startsWith("ath-") ? threadId : null;
+    const fromSession =
+      typeof window !== "undefined" ? getAssistSessionActiveId() : null;
+    return fromProp || (fromSession?.startsWith("ath-") ? fromSession : null);
+  }, [threadId]);
+
+  /** Persist Talk Mode voice-action turns to the same Assist message history as typed Ask. */
+  const persistVoiceTurn = useCallback(
+    (userContent: string, assistantContent: string, kind: string) => {
+      const tid = resolveThreadId();
+      if (!tid || !token) return;
+      void persistAssistTurn(tid, userContent, assistantContent, {
+        voiceAction: true,
+        voiceActionKind: kind,
+      });
+    },
+    [resolveThreadId, token],
+  );
+
   async function loadVoiceActionContext(): Promise<{ tasks: TaskRecord[]; people: VoicePerson[] }> {
     const mine = await fetchMyTasks("today");
     let tasks = [...(mine.tasks ?? [])];
@@ -423,10 +444,12 @@ export function SiyaChat({
           try {
             const okMsg = await executePendingVoice(action);
             appendAssistantLocal(okMsg);
+            persistVoiceTurn(trimmed, okMsg, `confirm_yes:${action.kind}`);
           } catch (err) {
-            appendAssistantLocal(
-              err instanceof Error ? err.message : "Could not complete that action. Try again from My day.",
-            );
+            const errMsg =
+              err instanceof Error ? err.message : "Could not complete that action. Try again from My day.";
+            appendAssistantLocal(errMsg);
+            persistVoiceTurn(trimmed, errMsg, `confirm_yes_failed:${action.kind}`);
           } finally {
             setLoading(false);
           }
@@ -435,10 +458,14 @@ export function SiyaChat({
         if (isConfirmNo(trimmed)) {
           setPendingVoice(null);
           pendingVoiceRef.current = null;
-          appendAssistantLocal("Cancelled — nothing was changed.");
+          const cancelMsg = "Cancelled — nothing was changed.";
+          appendAssistantLocal(cancelMsg);
+          persistVoiceTurn(trimmed, cancelMsg, "confirm_no");
           return;
         }
-        appendAssistantLocal(`Still waiting: ${pendingVoiceRef.current.readback}`, { confirmPrompt: true });
+        const waitMsg = `Still waiting: ${pendingVoiceRef.current.readback}`;
+        appendAssistantLocal(waitMsg, { confirmPrompt: true });
+        persistVoiceTurn(trimmed, waitMsg, "confirm_waiting");
         return;
       }
 
@@ -454,6 +481,7 @@ export function SiyaChat({
             if (resolved.status === "need_clarify") {
               setMessages((m) => [...m, { id: `u-${Date.now()}`, role: "user", content: trimmed }]);
               appendAssistantLocal(resolved.message);
+              persistVoiceTurn(trimmed, resolved.message, "need_clarify");
               return;
             }
             if (resolved.status === "pending_confirm") {
@@ -461,15 +489,17 @@ export function SiyaChat({
               setPendingVoice(resolved.action);
               pendingVoiceRef.current = resolved.action;
               appendAssistantLocal(resolved.action.readback, { confirmPrompt: true });
+              persistVoiceTurn(trimmed, resolved.action.readback, `pending_confirm:${resolved.action.kind}`);
               return;
             }
           } catch (err) {
             setMessages((m) => [...m, { id: `u-${Date.now()}`, role: "user", content: trimmed }]);
-            appendAssistantLocal(
+            const errMsg =
               err instanceof Error
                 ? err.message
-                : "I couldn’t look up tasks for that action. Ask in text, or try again.",
-            );
+                : "I couldn’t look up tasks for that action. Ask in text, or try again.";
+            appendAssistantLocal(errMsg);
+            persistVoiceTurn(trimmed, errMsg, "voice_action_error");
             return;
           } finally {
             setLoading(false);
@@ -479,14 +509,22 @@ export function SiyaChat({
 
       await send(trimmed);
     },
-    [loading, threadLoading, send, appendAssistantLocal, historyPayload, adminCoPilot, shift],
+    [
+      loading,
+      threadLoading,
+      send,
+      appendAssistantLocal,
+      persistVoiceTurn,
+      historyPayload,
+      adminCoPilot,
+      shift,
+    ],
   );
 
   useEffect(() => {
     if (!initialQuery || sentInitial.current || threadLoading || loading) return;
     sentInitial.current = true;
-    // Record tour Ask intent before send so a racey early-return cannot skip verification.
-    recordTourAskMessage(initialQuery);
+    // Do not mark Ask tour step verified until send() runs (user-initiated / auto-send).
     void send(initialQuery);
   }, [initialQuery, send, threadLoading, loading]);
 
@@ -734,6 +772,7 @@ export function SiyaChat({
           <button
             type="button"
             onClick={clearConversation}
+            title="Delete this chat permanently and start a new one"
             className="rounded-md px-2 py-1 text-[11px] text-[var(--siya-text-muted)] hover:text-[var(--siya-text)]"
           >
             Clear
@@ -1001,7 +1040,7 @@ export function SiyaChat({
               }
               className={
                 homeVariant
-                  ? "min-w-0 flex-1 rounded-lg bg-[var(--siya-white)] px-3 py-2.5 text-sm outline-none placeholder:text-[var(--siya-text-muted)]"
+                  ? "min-w-0 flex-1 rounded-lg bg-[var(--siya-white)] px-3 py-2.5 text-sm outline-none placeholder:text-[var(--siya-text-secondary)]"
                   : portalAskInput
               }
               autoFocus={homeVariant}

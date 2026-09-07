@@ -31,6 +31,7 @@ import { StaffHomeChat } from "@/components/companion/StaffHomeChat";
 import { WeeklyCheckInCard } from "@/components/ops/WeeklyCheckInCard";
 import { ProductTourNudgeBanner } from "@/components/onboarding/ProductTourNudgeBanner";
 import { MyDayPlannedVsActual } from "@/components/shift/MyDayPlannedVsActual";
+import { MyDayAttendanceHours } from "@/components/shift/MyDayAttendanceHours";
 import { isPortalAdmin } from "@/lib/portal-role";
 import { WorkplaceLinksPanel } from "@/components/companion/WorkplaceLinksPanel";
 import { PortalNavLink } from "@/components/training/PortalNavLink";
@@ -116,6 +117,7 @@ function MyDayHeader({
       {!isAdmin ? <SopLeadMyDayCard className="mt-3" /> : null}
       {!isAdmin ? <LeadKnowledgeGapsCard className="mt-3" /> : null}
       <MyDayPlannedVsActual />
+      <MyDayAttendanceHours />
       {!isAdmin ? (
         !inFocus ? (
           <p className="mt-1 text-xs italic text-[var(--siya-text-muted)]">{BRAND.growthLine}</p>
@@ -334,43 +336,14 @@ export function HomeHub() {
           ) : (
             <div className={`flex h-full min-h-0 flex-col ${inFocus ? portalFocusRail : ""}`}>
               {complianceDue ? (
-                <p className="shrink-0 px-4 py-2 text-[11px] text-[var(--siya-text-muted)]">
+                <p className="shrink-0 px-4 py-2 text-[11px] text-[var(--siya-text)]">
                   HIPAA certification in progress ({modulesDone}/{moduleTotal}).{" "}
                   <Link href="/training" className="underline underline-offset-2 hover:text-[var(--siya-text)]">
                     Continue
                   </Link>
                 </p>
               ) : null}
-              {!profile.onboardingComplete ? (
-                <p className="mb-3 text-xs text-amber-800">
-                  {profile.onboardingSkipped ? (
-                    <>
-                      <PortalNavLink href="/onboarding" className="font-semibold underline">
-                        Personalize
-                      </PortalNavLink>{" "}
-                      anytime so Assist matches your role
-                      {" · "}
-                      <PortalNavLink href="/product-tour" className="font-semibold underline">
-                        Run through the tour
-                      </PortalNavLink>
-                      .
-                    </>
-                  ) : (
-                    <>
-                      Finish{" "}
-                      <PortalNavLink href="/onboarding" className="font-semibold underline">
-                        onboarding
-                      </PortalNavLink>{" "}
-                      so personalization matches your role
-                      {" · "}
-                      <PortalNavLink href="/product-tour" className="font-semibold underline">
-                        Run through the tour
-                      </PortalNavLink>
-                      .
-                    </>
-                  )}
-                </p>
-              ) : null}
+              {/* Personalize + tour: single surface via ProductTourNudgeBanner inside StaffHomeChat */}
               <StaffHomeChat firstName={firstName} inFocus={inFocus} onBreak={onBreak} />
             </div>
           )}

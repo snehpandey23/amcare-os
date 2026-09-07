@@ -24,6 +24,9 @@ import {
   isOpsTestAccount,
   sortLeadsByUrgency,
 } from "@/lib/ops-dashboard-view";
+import { WeeklyCheckInFeed } from "@/components/ops/WeeklyCheckInFeed";
+import { ChatSimOpsReviewPanel } from "@/components/ops/ChatSimOpsReviewPanel";
+import { OpsAttendanceHoursPanel } from "@/components/ops/OpsAttendanceHoursPanel";
 import {
   portalBtnGhostSm,
   portalH1,
@@ -92,6 +95,11 @@ function EngagementTable({
                 <td className="px-2 py-2.5 text-xs">{segmentLabel(r.usageSegment)}</td>
                 <td className="px-2 py-2.5 text-xs">
                   {r.practiceLifetime} lifetime · streak {r.streak}
+                  {(r.chatSimRedFlags ?? 0) > 0 ? (
+                    <span className="mt-0.5 block text-[10px] font-semibold text-[var(--siya-status-error-text)]">
+                      Chat sim red flags: {r.chatSimRedFlags}
+                    </span>
+                  ) : null}
                   {r.lastActiveDate ? (
                     <span className="block text-[10px] text-[var(--siya-text-muted)]">
                       Last active {r.lastActiveDate}
@@ -242,6 +250,8 @@ function LeadCard({
           </p>
           <p className="mt-0.5 text-xs text-[var(--siya-text-muted)]">
             Last {check.lastNWeeks} weeks: {check.weeksSubmittedOfLastN}/{check.lastNWeeks}
+            {" · "}Full text for this week is in <strong>Weekly lead check-ins</strong> below (not just
+            submitted/missing).
           </p>
           <div className="mt-2 flex flex-wrap gap-1" aria-label="Check-in history">
             {check.history.map((h) => (
@@ -373,7 +383,7 @@ function AttentionStrip({ items }: { items: ReturnType<typeof buildOpsAttentionS
           {oks.map((item) => (
             <li
               key={item.id}
-              className="rounded-full bg-white/70 px-2.5 py-1 text-[11px] text-[var(--siya-text-muted)] dark:bg-black/20"
+              className="rounded-full bg-[var(--siya-white)]/70 px-2.5 py-1 text-[11px] text-[var(--siya-text-muted)] dark:bg-black/20"
             >
               {item.label}
             </li>
@@ -553,6 +563,8 @@ export function OpsDashboardPanel() {
             )}
           </section>
 
+          <ChatSimOpsReviewPanel engagement={data.engagement} />
+
           {/* Section B — Lead responsiveness */}
           <section className={portalSection} aria-labelledby="ops-leads-heading">
             <h2 id="ops-leads-heading" className={portalH2}>
@@ -578,6 +590,18 @@ export function OpsDashboardPanel() {
                 ))}
               </div>
             )}
+          </section>
+
+          {/* Full weekly check-in text (same feed as Team) — not status dots only */}
+          <section className={portalSection} aria-labelledby="ops-checkin-text-heading">
+            <h2 id="ops-checkin-text-heading" className={portalH2}>
+              B · Weekly lead check-ins (full text)
+            </h2>
+            <p className="mt-1 mb-4 text-xs text-[var(--siya-text-muted)]">
+              Same content as Team / Founder — what changed, numbers, blockers, founder notes. Lead cards
+              above only show submitted vs missing; read substance here.
+            </p>
+            <WeeklyCheckInFeed />
           </section>
 
           {/* Section B2 — Recurring knowledge gaps (surface only) */}
@@ -648,6 +672,20 @@ export function OpsDashboardPanel() {
                   ) : null}
                 </ul>
               )}
+            </section>
+          ) : null}
+
+          {/* Section C2 — Derived attendance hours (admin) */}
+          {data.viewer.isAdmin ? (
+            <section className={portalSection} aria-labelledby="ops-attendance-hours-heading">
+              <h2 id="ops-attendance-hours-heading" className={portalH2}>
+                C2 · Attendance hours (Working / Break / Focus, IST)
+              </h2>
+              <p className="mt-1 mb-4 text-xs text-[var(--siya-text-muted)]">
+                Derived from shift attendance events — reporting only, no pay rates. Staff see the same day
+                record on My day (shared fingerprint).
+              </p>
+              <OpsAttendanceHoursPanel />
             </section>
           ) : null}
 

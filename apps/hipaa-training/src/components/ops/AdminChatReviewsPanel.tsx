@@ -82,7 +82,7 @@ export function AdminChatReviewsPanel() {
       {loading ? <p className="text-xs text-[var(--siya-text-muted)]">Loading…</p> : null}
 
       {[...byReviewer.entries()].map(([key, items]) => (
-        <section key={key} className="rounded-xl border bg-white p-4">
+        <section key={key} className="rounded-xl border bg-[var(--siya-white)] p-4">
           <h2 className="text-sm font-semibold text-[var(--siya-primary)]">
             {items[0]?.reviewerName || items[0]?.reviewerEmail}
             {items[0]?.reviewerDepartment ? (

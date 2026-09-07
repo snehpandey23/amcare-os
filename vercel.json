@@ -21,6 +21,14 @@
     {
       "path": "/api/cron/shift-roster-reminders",
       "schedule": "30 13 * * *"
+    },
+    {
+      "path": "/api/cron/shift-late-start-nudges",
+      "schedule": "15 1 * * *"
+    },
+    {
+      "path": "/api/cron/shift-late-start-nudges",
+      "schedule": "45 13 * * *"
     }
   ]
 }

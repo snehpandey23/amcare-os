@@ -59,6 +59,8 @@ export async function initDb(): Promise<void> {
     await ensureProviderCareersTables(p);
     const { ensurePasswordResetTables } = await import("./password-reset-service.js");
     await ensurePasswordResetTables(p);
+    const { ensureAttendanceDisputeTables } = await import("./attendance-hours-service.js");
+    await ensureAttendanceDisputeTables(p);
   } catch (err) {
     console.warn("[hipaa-training-api] schema file read failed, using inline DDL:", err);
     const sql = `

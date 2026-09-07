@@ -136,7 +136,7 @@ export function ChatReviewPanel() {
           <li
             key={r.id}
             className={`rounded-xl border p-3 text-sm ${
-              r.status === "open" ? portalStatusWarnBox : "border-[var(--siya-border)] bg-white"
+              r.status === "open" ? portalStatusWarnBox : "border-[var(--siya-border)] bg-[var(--siya-white)]"
             }`}
           >
             <div className="flex flex-wrap items-start justify-between gap-2">

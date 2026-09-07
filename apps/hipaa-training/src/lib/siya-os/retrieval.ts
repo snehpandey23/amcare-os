@@ -473,9 +473,8 @@ export function retrieveDynamicSops(query: string, entries: DynamicSopEntry[], l
       )
     ) {
       if (
-        /\b(abusive|hostile|angry|threatening|yelling|screaming|verbal\s+abuse|patient\s+threat)\b/i.test(
-          qLower,
-        )
+        /\b(abusive|hostile|angry|yelling|screaming|verbal\s+abuse|patient\s+threat)\b/i.test(qLower) ||
+        (/\bthreatening\b/i.test(qLower) && !/\blife[-\s]?threatening\b/i.test(qLower))
       ) {
         s += 28;
       }

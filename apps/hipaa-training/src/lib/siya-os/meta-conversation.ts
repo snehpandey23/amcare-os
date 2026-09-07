@@ -209,7 +209,17 @@ export function isCourtesyNoiseForGapCapture(text: string): boolean {
     .replace(/[’‘]/g, "'")
     .replace(/\s+/g, " ");
   if (!t) return false;
-  return isShortGreeting(t) || isGreetingStyleAsk(t);
+  if (isShortGreeting(t) || isGreetingStyleAsk(t)) return true;
+  // Belt-and-suspenders: short continuers / underspecified company-wide SOP asks.
+  if (/^(more|and|continue|go on|tell me more|what else|anything else)\??$/.test(t)) return true;
+  if (
+    /\b(sop|sops|policy|policies|procedure|procedures)\b/.test(t) &&
+    /\b(siya(\s+health)?|the\s+company|our\s+company|everything|all)\b/.test(t) &&
+    !/\b(reimburs|roi|records|pricing|brand|escalat|leave|refund|hipaa|spruce|creyos)\b/.test(t)
+  ) {
+    return true;
+  }
+  return false;
 }
 
 const NOTIFY = [

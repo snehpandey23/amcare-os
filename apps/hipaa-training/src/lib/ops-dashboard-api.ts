@@ -12,6 +12,8 @@ export type OpsEngagementRow = {
   streak: number;
   lastActiveDate: string;
   practiceLifetime: number;
+  /** Chat simulator red-flag sessions (from synced day ledger). */
+  chatSimRedFlags?: number;
   dayLedger: unknown[];
   practiceShareThisWeek: {
     optedInShared: boolean;

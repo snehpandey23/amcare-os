@@ -51,6 +51,8 @@ export function LeadKnowledgeGapsCard({ className = "" }: Props) {
   }, [load]);
 
   if (!authReady || !user) return null;
+  // Lead digest UI — not for general staff Team presence view.
+  if (user.role !== "admin") return null;
   if (!loading && gaps.length === 0 && !error) return null;
 
   async function onResolve(id: string) {

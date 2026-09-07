@@ -24,16 +24,91 @@ export async function saveShiftStore(pool: pg.Pool, userId: string, store: Shift
   );
 }
 
+/** Open shifts older than this are treated as abandoned and auto-closed (attendance integrity). */
+export const STALE_OPEN_SHIFT_HOURS = 24;
+
+/**
+ * If the user has an active shift older than `maxAgeHours`, close it as of
+ * startedAt + maxAgeHours (not "now") so weeks of phantom Working time are not attributed.
+ * Logs shift_end with source=system.
+ */
+export async function closeStaleActiveShiftIfNeeded(
+  pool: pg.Pool,
+  userId: string,
+  opts?: { now?: Date; maxAgeHours?: number },
+): Promise<{ closed: boolean; store: ShiftStore; ageHours?: number }> {
+  const maxAgeHours = opts?.maxAgeHours ?? STALE_OPEN_SHIFT_HOURS;
+  const now = opts?.now ?? new Date();
+  let store = await loadShiftStore(pool, userId);
+  if (!store.active?.startedAt) return { closed: false, store };
+
+  const startedMs = new Date(store.active.startedAt).getTime();
+  if (Number.isNaN(startedMs)) return { closed: false, store };
+  const ageHours = (now.getTime() - startedMs) / 3600000;
+  if (ageHours < maxAgeHours) return { closed: false, store, ageHours };
+
+  const { countPresenceSessions } = await import("./shift-store.js");
+  const { breakCount, focusSessionCount } = countPresenceSessions(store.active.presenceLog);
+  const endedAtMs = startedMs + maxAgeHours * 3600000;
+  const endedAt = new Date(Math.min(endedAtMs, now.getTime())).toISOString();
+  const ended = {
+    id: `sh-stale-${Date.now()}`,
+    startedAt: store.active.startedAt,
+    endedAt,
+    workShift: store.active.workShift,
+    breakCount,
+    focusSessionCount,
+  };
+  store = { active: null, recent: [ended, ...store.recent].slice(0, 60) };
+  await saveShiftStore(pool, userId, store);
+  await ensureShiftAttendanceTables(pool);
+  await logShiftAttendance(pool, userId, "shift_end", "system", {
+    workShift: ended.workShift,
+    breakCount,
+    focusSessionCount,
+    autoClosed: true,
+    reason: "stale_open_shift",
+    endedAt,
+    startedAt: ended.startedAt,
+    ageHoursAtClose: Math.round(ageHours),
+    staleThresholdHours: maxAgeHours,
+  });
+  return { closed: true, store, ageHours };
+}
+
+/** Sweep all users with a stale active shift (admin / hours report integrity). */
+export async function closeAllStaleActiveShifts(
+  pool: pg.Pool,
+  opts?: { now?: Date; maxAgeHours?: number },
+): Promise<{ closedUserIds: string[]; checked: number }> {
+  const r = await pool.query(
+    `SELECT u.id, p.shift_json
+     FROM hipaa_training_users u
+     JOIN hipaa_training_progress p ON p.user_id = u.id
+     WHERE u.deactivated_at IS NULL
+       AND p.shift_json ? 'active'
+       AND p.shift_json->'active' IS NOT NULL
+       AND p.shift_json->>'active' <> 'null'`,
+  );
+  const closedUserIds: string[] = [];
+  for (const row of r.rows) {
+    const result = await closeStaleActiveShiftIfNeeded(pool, row.id as string, opts);
+    if (result.closed) closedUserIds.push(row.id as string);
+  }
+  return { closedUserIds, checked: r.rows.length };
+}
+
 export async function ensureActiveShift(
   pool: pg.Pool,
   userId: string,
   workShift: WorkShift,
   source: ShiftAttendanceSource,
-): Promise<{ store: ShiftStore; started: boolean }> {
+): Promise<{ store: ShiftStore; started: boolean; staleClosed?: boolean }> {
   await ensureShiftAttendanceTables(pool);
-  let store = await loadShiftStore(pool, userId);
+  const stale = await closeStaleActiveShiftIfNeeded(pool, userId);
+  let store = stale.store;
   if (store.active) {
-    return { store, started: false };
+    return { store, started: false, staleClosed: stale.closed };
   }
   const now = new Date().toISOString();
   store = {
@@ -48,7 +123,7 @@ export async function ensureActiveShift(
   };
   await saveShiftStore(pool, userId, store);
   await logShiftAttendance(pool, userId, "shift_start", source, { workShift });
-  return { store, started: true };
+  return { store, started: true, staleClosed: stale.closed };
 }
 
 export async function logPresenceTransition(

@@ -86,8 +86,13 @@ const FLOWS: {
       /\breels?\b/i,
       /make.*content/i,
       /adhd.*post/i,
-      /\bpost\b/i,
+      /\bposts?\b/i,
       /caption/i,
+      /design\s+ideas?/i,
+      /\bwant\s+to\s+design\b/i,
+      /content\s+creation/i,
+      /social\s+content/i,
+      /creative\s+(ideas?|brief)/i,
     ],
     followUpQuestions: [
       "What is the topic or insight ID?",
@@ -145,6 +150,36 @@ const FLOWS: {
     retrievalBoost: ["hr", "onboarding", "contractor", "SOW"],
   },
   {
+    // Before abusive-patient — "life-threatening" must not route to verbal-abuse SOP.
+    id: "clinical-ops-patient-emergency",
+    department: "Clinical Operations",
+    task: "Patient emergency / red-flag symptoms",
+    patterns: [
+      /\blife[-\s]?threat/i,
+      /\bchest\s+pain\b/i,
+      /\b(can'?t|cannot)\s+breathe\b/i,
+      /\bshort(ness)?\s+of\s+breath\b/i,
+      /\b(stroke|heart\s+attack|suicid|self[-\s]?harm)\b/i,
+      /\b(er|ed|911|urgent\s+care)\b.{0,40}\b(patient|tell|say|script|protocol)\b/i,
+      /\b(patient|caller).{0,50}\b(emergency|emergent|red\s*flag|life[-\s]?threat)\b/i,
+      /\b(protocol|sop|script|what\s+(should|do)\s+i\s+(tell|say)).{0,60}\b(emergency|life[-\s]?threat|chest\s+pain|911)\b/i,
+      /\bwhat\s+(should|do)\s+i\s+(tell|say).{0,40}\b(chest\s+pain|anxiety|emergency|life[-\s]?threat)\b/i,
+    ],
+    followUpQuestions: [
+      "Is this happening live in chat/phone right now?",
+      "Chest pain, breathing, stroke/heart attack language, or another red flag?",
+    ],
+    retrievalBoost: [
+      "patient emergency",
+      "chest pain",
+      "911",
+      "urgent care",
+      "red-flag",
+      "life-threatening",
+      "escalate provider",
+    ],
+  },
+  {
     id: "clinical-ops-abusive-patient",
     department: "Clinical Operations",
     task: "Hostile / abusive patient interaction",
@@ -153,10 +188,12 @@ const FLOWS: {
       /hostile\s+patient/i,
       /angry\s+patient/i,
       /patient\s+(is\s+)?(abusive|hostile|angry|threatening|yelling|screaming|cursing)/i,
-      /(abusive|hostile|threatening|yelling|screaming).{0,40}\bpatient\b/i,
-      /\bpatient\b.{0,40}(abusive|hostile|threatening|yell|scream|threat|curse|swear)/i,
+      /(?<!life[- ])\b(abusive|hostile|threatening|yelling|screaming)\b.{0,40}\bpatient\b/i,
+      // Each alt must be a whole word — "threatening" is a substring of "lifethreatening".
+      /\bpatient\b.{0,40}\b(abusive|hostile|threatening|yell(?:ing|ed)?|scream(?:ing|ed)?|curs(?:e|ing)|swear(?:ing)?)\b/i,
+      /\bpatient\b.{0,40}\bthreat(?:en(?:ed|ing|s)?|s)?\b/i,
       /verbal\s+abuse/i,
-      /patient\s+threat/i,
+      /patient\s+threat(?!en)/i,
       /(caller|patient).{0,30}(hung up|screaming|cursing|swearing|threatening)/i,
       /threaten(ed|ing)?\s+(me|us|staff)/i,
     ],
@@ -267,7 +304,12 @@ export function routeIntent(message: string): RouteResult {
   let best: (typeof FLOWS)[0] | null = null;
   let bestScore = 0;
   for (const flow of FLOWS) {
-    const s = scoreFlow(text, flow);
+    let s = scoreFlow(text, flow);
+    // Prefer medical emergency / red-flag over hostile-patient when both could fire.
+    if (flow.id === "clinical-ops-patient-emergency" && s >= 3) s += 8;
+    if (flow.id === "clinical-ops-abusive-patient" && /\blife[-\s]?threat|\bchest\s+pain\b/i.test(text)) {
+      s = 0;
+    }
     if (s > bestScore) {
       bestScore = s;
       best = flow;

@@ -743,7 +743,8 @@ app.post("/api/shift/ensure-active", requireAuth, async (req: AuthRequest, res: 
 app.get("/api/shift/state", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
-  const store = await loadShiftStore(pool, req.user!.userId);
+  const { closeStaleActiveShiftIfNeeded } = await import("./shift-progress.js");
+  const { store } = await closeStaleActiveShiftIfNeeded(pool, req.user!.userId);
   return res.json(store);
 });
 
@@ -1077,6 +1078,21 @@ app.post("/api/assist/gaps", requireAuth, async (req: AuthRequest, res: express.
   } catch (err) {
     console.error("[assist/gaps]", err);
     return res.status(500).json({ error: "Could not record gap." });
+  }
+});
+
+app.get("/api/assist/weekly-pulse", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const daysRaw = Number(req.query.days);
+    const days = Number.isFinite(daysRaw) && daysRaw > 0 && daysRaw <= 90 ? Math.floor(daysRaw) : 7;
+    const { getAssistWeeklyPulse } = await import("./assist-telemetry.js");
+    const pulse = await getAssistWeeklyPulse(pool, days);
+    return res.json({ ok: true, pulse });
+  } catch (err) {
+    console.error("[assist/weekly-pulse]", err);
+    return res.status(500).json({ error: "Could not load Assist weekly pulse." });
   }
 });
 
@@ -1454,10 +1470,21 @@ app.patch("/api/assist/threads/:id", requireAuth, async (req: AuthRequest, res: 
 app.post("/api/assist/threads/:id/archive", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
-  const { archiveAssistThread } = await import("./assist-chat-service.js");
-  const ok = await archiveAssistThread(pool, req.user!.userId, req.params.id);
+  // Permanent delete (messages cascade). Soft-archive left staff thinking chats were gone,
+  // then Clear/new-session brought the same threads back via list.
+  const { deleteAssistThread } = await import("./assist-chat-service.js");
+  const ok = await deleteAssistThread(pool, req.user!.userId, req.params.id);
   if (!ok) return res.status(404).json({ error: "Thread not found" });
-  return res.json({ ok: true });
+  return res.json({ ok: true, deleted: true });
+});
+
+app.delete("/api/assist/threads/:id", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { deleteAssistThread } = await import("./assist-chat-service.js");
+  const ok = await deleteAssistThread(pool, req.user!.userId, req.params.id);
+  if (!ok) return res.status(404).json({ error: "Thread not found" });
+  return res.json({ ok: true, deleted: true });
 });
 
 app.get("/api/assist/threads/:id/history", requireAuth, async (req: AuthRequest, res: express.Response) => {
@@ -1507,6 +1534,8 @@ app.post("/api/assist/threads/:id/turns", requireAuth, async (req: AuthRequest, 
 app.get("/api/admin/shift/today", requireAuth, requireAdmin, async (_req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { closeAllStaleActiveShifts } = await import("./shift-progress.js");
+  const sweep = await closeAllStaleActiveShifts(pool);
   const r = await pool.query(
     `SELECT u.id, u.email, u.name, u.role, p.shift_json
      FROM hipaa_training_users u
@@ -1549,6 +1578,8 @@ app.get("/api/admin/shift/today", requireAuth, requireAdmin, async (_req: AuthRe
     onBreak,
     inFocus,
     offShift,
+    staleClosedCount: sweep.closedUserIds.length,
+    staleClosedUserIds: sweep.closedUserIds,
     /** @deprecated use `working` */
     available: working,
     members,
@@ -1592,6 +1623,174 @@ app.get("/api/admin/shift/attendance-log.csv", requireAuth, requireAdmin, async 
   res.setHeader("Content-Disposition", `attachment; filename="shift-attendance-${label}.csv"`);
   return res.send(csv);
 });
+
+/**
+ * IST attendance hours (Working/Break/Focus minutes) — reporting only, no pay math.
+ * GET /api/attendance/hours?scope=me|team&date=YYYY-MM-DD
+ * GET /api/attendance/hours?scope=me|team&month=YYYY-MM
+ * GET /api/attendance/hours?scope=me|team&from=YYYY-MM-DD&to=YYYY-MM-DD
+ */
+app.get("/api/attendance/hours", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { buildAttendanceHoursReport } = await import("./attendance-hours-service.js");
+    const scope = typeof req.query.scope === "string" ? req.query.scope : "me";
+    if (scope === "team" && (req.user!.role ?? "trainee") !== "admin") {
+      return res.status(403).json({ error: "Team attendance hours are admin-only." });
+    }
+    const month =
+      typeof req.query.month === "string" && /^\d{4}-\d{2}$/.test(req.query.month)
+        ? req.query.month
+        : undefined;
+    const date =
+      typeof req.query.date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(req.query.date)
+        ? req.query.date
+        : undefined;
+    const from =
+      typeof req.query.from === "string" && /^\d{4}-\d{2}-\d{2}$/.test(req.query.from)
+        ? req.query.from
+        : date;
+    const to =
+      typeof req.query.to === "string" && /^\d{4}-\d{2}-\d{2}$/.test(req.query.to)
+        ? req.query.to
+        : date;
+    const report = await buildAttendanceHoursReport(pool, {
+      scope: scope === "team" ? "team" : "me",
+      viewerUserId: req.user!.userId,
+      month,
+      fromDate: month ? undefined : from,
+      toDate: month ? undefined : to,
+    });
+    return res.json(report);
+  } catch (e) {
+    console.error("[attendance/hours]", e);
+    return res.status(500).json({ error: "Could not load attendance hours." });
+  }
+});
+
+/** Single day record — staff (self) or admin (any). Same fingerprint for both viewers. */
+app.get("/api/attendance/hours/day", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { getAttendanceDayRecordForUser } = await import("./attendance-hours-service.js");
+    const { istDateString } = await import("./shift-store.js");
+    const attendanceDate =
+      typeof req.query.date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(req.query.date)
+        ? req.query.date
+        : istDateString();
+    let userId = req.user!.userId;
+    if (typeof req.query.userId === "string" && req.query.userId.trim()) {
+      if ((req.user!.role ?? "trainee") !== "admin") {
+        return res.status(403).json({ error: "Only admins can view another person's day." });
+      }
+      userId = req.query.userId.trim();
+    }
+    const record = await getAttendanceDayRecordForUser(pool, { userId, attendanceDate });
+    if (!record) {
+      return res.json({
+        record: null,
+        attendanceDate,
+        userId,
+        note: "No derived activity for this IST day.",
+      });
+    }
+    return res.json({ record, attendanceDate, userId });
+  } catch (e) {
+    console.error("[attendance/hours/day]", e);
+    return res.status(500).json({ error: "Could not load attendance day." });
+  }
+});
+
+/** Staff flags a day as inaccurate → under_review (does not auto-resolve). */
+app.post("/api/attendance/hours/dispute", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { flagAttendanceDayDispute } = await import("./attendance-hours-service.js");
+    const attendanceDate =
+      typeof req.body?.attendanceDate === "string" ? req.body.attendanceDate.trim() : "";
+    const staffNote = typeof req.body?.staffNote === "string" ? req.body.staffNote : "";
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(attendanceDate)) {
+      return res.status(400).json({ error: "attendanceDate (YYYY-MM-DD IST) required." });
+    }
+    const result = await flagAttendanceDayDispute(pool, {
+      userId: req.user!.userId,
+      attendanceDate,
+      staffNote,
+    });
+    return res.json({ ok: true, ...result });
+  } catch (e) {
+    if (e instanceof Error && e.message === "NOTE_REQUIRED") {
+      return res.status(400).json({ error: "A short note is required." });
+    }
+    console.error("[attendance/hours/dispute]", e);
+    return res.status(500).json({ error: "Could not flag attendance day." });
+  }
+});
+
+/** Admin resolves under_review → stands or corrected. Never auto-finalizes. */
+app.post(
+  "/api/attendance/hours/dispute/resolve",
+  requireAuth,
+  requireAdmin,
+  async (req: AuthRequest, res: express.Response) => {
+    const pool = getPool();
+    if (!pool) return res.status(503).json({ error: "Database not configured." });
+    try {
+      const { resolveAttendanceDayDispute } = await import("./attendance-hours-service.js");
+      const userId = typeof req.body?.userId === "string" ? req.body.userId.trim() : "";
+      const attendanceDate =
+        typeof req.body?.attendanceDate === "string" ? req.body.attendanceDate.trim() : "";
+      const resolution = req.body?.resolution === "corrected" ? "corrected" : "stands";
+      const resolutionNote =
+        typeof req.body?.resolutionNote === "string" ? req.body.resolutionNote : "";
+      if (!userId || !/^\d{4}-\d{2}-\d{2}$/.test(attendanceDate)) {
+        return res.status(400).json({ error: "userId and attendanceDate required." });
+      }
+      const result = await resolveAttendanceDayDispute(pool, {
+        userId,
+        attendanceDate,
+        resolverUserId: req.user!.userId,
+        resolution,
+        resolutionNote,
+        correctedWorkingMinutes:
+          typeof req.body?.correctedWorkingMinutes === "number"
+            ? req.body.correctedWorkingMinutes
+            : undefined,
+        correctedBreakMinutes:
+          typeof req.body?.correctedBreakMinutes === "number"
+            ? req.body.correctedBreakMinutes
+            : undefined,
+        correctedFocusMinutes:
+          typeof req.body?.correctedFocusMinutes === "number"
+            ? req.body.correctedFocusMinutes
+            : undefined,
+      });
+      return res.json({ ok: true, ...result });
+    } catch (e) {
+      if (e instanceof Error) {
+        if (e.message === "NOTE_REQUIRED") {
+          return res.status(400).json({ error: "resolutionNote required." });
+        }
+        if (e.message === "NOT_FOUND") {
+          return res.status(404).json({ error: "No dispute found for that day." });
+        }
+        if (e.message === "NOT_UNDER_REVIEW") {
+          return res.status(409).json({ error: "Dispute is not under_review." });
+        }
+        if (e.message === "CORRECTION_REQUIRED") {
+          return res.status(400).json({
+            error: "Corrected minutes required for resolution=corrected.",
+          });
+        }
+      }
+      console.error("[attendance/hours/dispute/resolve]", e);
+      return res.status(500).json({ error: "Could not resolve dispute." });
+    }
+  },
+);
 
 app.post("/api/portal/tool-link-opened", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
@@ -1880,6 +2079,92 @@ app.get("/api/shift-roster/me", requireAuth, async (req: AuthRequest, res: expre
   }
 });
 
+/**
+ * Team / MA duty roster — admin or department lead only.
+ * GET /api/shift-roster/team?from=YYYY-MM-DD&to=YYYY-MM-DD
+ */
+app.get("/api/shift-roster/team", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const role = req.user!.role ?? "trainee";
+    const { listMyLeadDepartments } = await import("./sop-service.js");
+    const leadSlugs = await listMyLeadDepartments(pool, req.user!.userId);
+    const isLead = leadSlugs.length > 0;
+    if (role !== "admin" && !isLead) {
+      return res.status(403).json({
+        error: "Team MA roster is for admins and department leads only.",
+        code: "team_roster_forbidden",
+      });
+    }
+
+    const { listRosterForDateRange, monthEndDate, istDateString } = await import(
+      "./shift-roster-service.js"
+    );
+    let fromDate: string | null =
+      typeof req.query.from === "string" && /^\d{4}-\d{2}-\d{2}$/.test(req.query.from)
+        ? req.query.from
+        : null;
+    let toDate: string | null =
+      typeof req.query.to === "string" && /^\d{4}-\d{2}-\d{2}$/.test(req.query.to)
+        ? req.query.to
+        : null;
+
+    if (!fromDate || !toDate) {
+      const monthRaw = typeof req.query.month === "string" ? req.query.month.trim().toLowerCase() : "";
+      const yearRaw = typeof req.query.year === "string" ? req.query.year.trim() : "";
+      const monthNames: Record<string, number> = {
+        january: 1,
+        jan: 1,
+        february: 2,
+        feb: 2,
+        march: 3,
+        mar: 3,
+        april: 4,
+        apr: 4,
+        may: 5,
+        june: 6,
+        jun: 6,
+        july: 7,
+        jul: 7,
+        august: 8,
+        aug: 8,
+        september: 9,
+        sep: 9,
+        sept: 9,
+        october: 10,
+        oct: 10,
+        november: 11,
+        nov: 11,
+        december: 12,
+        dec: 12,
+      };
+      const monthNum = /^\d{1,2}$/.test(monthRaw) ? Number(monthRaw) : monthNames[monthRaw];
+      if (!monthNum || monthNum < 1 || monthNum > 12) {
+        return res.status(400).json({ error: "from/to (YYYY-MM-DD) or month (+ optional year) required" });
+      }
+      const yearNum = /^\d{4}$/.test(yearRaw) ? Number(yearRaw) : Number(istDateString().slice(0, 4));
+      fromDate = `${yearNum}-${String(monthNum).padStart(2, "0")}-01`;
+      toDate = monthEndDate(yearNum, monthNum);
+    }
+
+    const rows = await listRosterForDateRange(pool, fromDate, toDate);
+    return res.json({
+      from: fromDate,
+      to: toDate,
+      count: rows.length,
+      rows,
+      timezone: "Asia/Kolkata",
+      source: "shift_roster",
+      scope: "team",
+      viewer: { role, isLead, leadDepartments: leadSlugs },
+    });
+  } catch (e) {
+    console.error("[shift-roster/team]", e);
+    return res.status(500).json({ error: "Could not load team roster." });
+  }
+});
+
 /** Soft check: assignee scheduled OFF on due date (task assign warning). */
 app.get("/api/shift-roster/assignment-check", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
@@ -1949,6 +2234,104 @@ app.post("/api/internal/shift-roster-reminders/mark-sent", async (req, res) => {
   const { markShiftReminderSent } = await import("./shift-roster-service.js");
   await markShiftReminderSent(pool, { rosterRowId, userId, sendBucket, resendId });
   return res.json({ ok: true });
+});
+
+/** Internal cron: late shift-start nudge candidates (+1h, no Working). */
+app.get("/api/internal/shift-late-start-nudges", async (req, res) => {
+  if (!cronAuthorized(req)) return res.status(401).json({ error: "Unauthorized" });
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const {
+      listLateStartNudgeCandidates,
+      resolveLateStartRecipients,
+    } = await import("./shift-late-start-nudge.js");
+    const candidates = await listLateStartNudgeCandidates(pool);
+    const enriched = [];
+    for (const c of candidates) {
+      const recipients = await resolveLateStartRecipients(pool, c);
+      enriched.push({ ...c, recipients });
+    }
+    return res.json({ at: new Date().toISOString(), candidates: enriched });
+  } catch (e) {
+    console.error("[internal/shift-late-start-nudges]", e);
+    return res.status(500).json({ error: "Failed" });
+  }
+});
+
+app.post("/api/internal/shift-late-start-nudges/mark-sent", async (req, res) => {
+  if (!cronAuthorized(req)) return res.status(401).json({ error: "Unauthorized" });
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const rosterRowId = typeof req.body?.rosterRowId === "string" ? req.body.rosterRowId : "";
+  const userId = typeof req.body?.userId === "string" ? req.body.userId : "";
+  const recipientEmails = Array.isArray(req.body?.recipientEmails)
+    ? req.body.recipientEmails.filter((e: unknown) => typeof e === "string")
+    : [];
+  const recipientRoles = Array.isArray(req.body?.recipientRoles)
+    ? req.body.recipientRoles.filter((e: unknown) => typeof e === "string")
+    : [];
+  const resendIds = Array.isArray(req.body?.resendIds)
+    ? req.body.resendIds.filter((e: unknown) => typeof e === "string")
+    : [];
+  if (!rosterRowId || !userId) {
+    return res.status(400).json({ error: "rosterRowId, userId required" });
+  }
+  const { markLateStartNudgeSent } = await import("./shift-late-start-nudge.js");
+  await markLateStartNudgeSent(pool, {
+    rosterRowId,
+    userId,
+    recipientEmails,
+    recipientRoles,
+    resendIds,
+  });
+  return res.json({ ok: true });
+});
+
+/**
+ * Verification: resolve the four recipient parties for a staff email (no send).
+ * Cron-auth only.
+ */
+app.get("/api/internal/shift-late-start-nudges/preview-recipients", async (req, res) => {
+  if (!cronAuthorized(req)) return res.status(401).json({ error: "Unauthorized" });
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const staffEmail = typeof req.query.email === "string" ? req.query.email.trim().toLowerCase() : "";
+  if (!staffEmail.includes("@")) return res.status(400).json({ error: "email required" });
+  try {
+    const u = await pool.query(
+      `SELECT id, email, name FROM hipaa_training_users WHERE lower(email) = $1 AND deactivated_at IS NULL`,
+      [staffEmail],
+    );
+    if (!u.rows[0]) return res.status(404).json({ error: "user not found" });
+    const { resolveLateStartRecipients } = await import("./shift-late-start-nudge.js");
+    const recipients = await resolveLateStartRecipients(pool, {
+      rosterRowId: "preview",
+      userId: u.rows[0].id as string,
+      email: u.rows[0].email as string,
+      name: u.rows[0].name as string | null,
+      firstName: String(u.rows[0].name || u.rows[0].email).split(/\s+/)[0],
+      shiftStart: new Date().toISOString(),
+      shiftEnd: null,
+      rawCell: "preview",
+      rosterDate: new Date().toISOString().slice(0, 10),
+      minutesLate: 60,
+      departmentSlug: null,
+    });
+    const roles = new Set(recipients.map((r) => r.role));
+    return res.json({
+      staffEmail,
+      recipients,
+      hasStaff: roles.has("staff"),
+      hasHr: roles.has("hr"),
+      hasAdmin: roles.has("admin"),
+      hasDepartmentLead: roles.has("department_lead"),
+      roleCount: roles.size,
+    });
+  } catch (e) {
+    console.error("[preview-recipients]", e);
+    return res.status(500).json({ error: "Failed" });
+  }
 });
 
 app.post("/api/weekly-checkins", requireAuth, async (req: AuthRequest, res: express.Response) => {

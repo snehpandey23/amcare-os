@@ -94,6 +94,32 @@ export async function fetchAdminOpsSnapshot(token: string): Promise<AdminOpsSnap
   };
 }
 
+/** Admin Ops Section A engagement rows (practice + Ask turns). */
+export type OpsCoachEngagementRow = {
+  email: string;
+  name: string | null;
+  practiceLifetime: number;
+  lastActiveDate: string;
+  askTurnsLast14d?: number;
+  askTurnsLast30d?: number;
+  chatSimRedFlags?: number;
+  practiceShareThisWeek?: {
+    optedInShared: boolean;
+    drillDaysActive: number;
+    drillDaysShared: number;
+  };
+};
+
+export async function fetchOpsEngagementRows(
+  token: string,
+): Promise<OpsCoachEngagementRow[] | null> {
+  const dash = await apiGet<{
+    engagement: OpsCoachEngagementRow[] | null;
+  }>(token, "/api/ops/dashboard");
+  if (!dash?.engagement) return null;
+  return dash.engagement;
+}
+
 export async function createTaskViaApi(
   token: string,
   payload: {

@@ -121,6 +121,25 @@ export async function listRosterForUserRange(
   return r.rows.map((row) => rowToRoster(row as Record<string, unknown>));
 }
 
+/** Team / MA duty roster for a date range (admin / lead Ask). */
+export async function listRosterForDateRange(
+  pool: pg.Pool,
+  fromDate: string,
+  toDate: string,
+): Promise<ShiftRosterRow[]> {
+  await ensureShiftRosterTables(pool);
+  const r = await pool.query(
+    `SELECT r.*, u.name AS user_name, u.email AS user_email
+     FROM shift_roster r
+     LEFT JOIN hipaa_training_users u ON u.id = r.user_id
+     WHERE r.roster_date >= $1::date
+       AND r.roster_date <= $2::date
+     ORDER BY r.roster_date ASC, r.person_key ASC, r.shift_start ASC NULLS LAST`,
+    [fromDate, toDate],
+  );
+  return r.rows.map((row) => rowToRoster(row as Record<string, unknown>));
+}
+
 /** Last calendar day of month (UTC date math — roster_date is IST calendar day stored as DATE). */
 export function monthEndDate(year: number, month: number): string {
   const d = new Date(Date.UTC(year, month, 0));
@@ -232,7 +251,7 @@ export type ScheduledVsActualRow = {
 };
 
 /** Find a self-declared start that belongs to this scheduled window (active or recent). */
-function matchDeclaredStart(
+export function matchDeclaredStart(
   store: ShiftStore,
   windowStartMs: number,
   windowEndMs: number,

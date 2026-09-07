@@ -63,14 +63,19 @@ export async function loadAssistThread(
 }
 
 export async function archiveAssistThread(id: string): Promise<void> {
-  const res = await assistFetch(`/api/assist/threads/${encodeURIComponent(id)}/archive`, {
-    method: "POST",
-    body: "{}",
+  // Permanent delete — staff expect × / Clear to remove chats for good.
+  const res = await assistFetch(`/api/assist/threads/${encodeURIComponent(id)}`, {
+    method: "DELETE",
   });
   if (!res.ok) {
     const data = (await res.json().catch(() => ({}))) as { error?: string };
-    throw new Error(data.error || "Could not archive chat");
+    throw new Error(data.error || "Could not delete chat");
   }
+}
+
+/** @deprecated alias — same permanent delete */
+export async function deleteAssistThread(id: string): Promise<void> {
+  return archiveAssistThread(id);
 }
 
 export async function fetchAssistHistoryForLlm(
@@ -86,4 +91,29 @@ export async function fetchAssistHistoryForLlm(
   };
   if (!res.ok) throw new Error(data.error || "Could not load history");
   return data.history ?? [];
+}
+
+/**
+ * Persist a user + assistant turn (same path as Ask /api/chat persistTurn).
+ * Used for Talk Mode voice-action confirm loops so side-effect turns stay auditable.
+ */
+export async function persistAssistTurn(
+  threadId: string,
+  userContent: string,
+  assistantContent: string,
+  meta?: Record<string, unknown>,
+): Promise<boolean> {
+  if (!threadId.startsWith("ath-")) return false;
+  const u = userContent.trim();
+  const a = assistantContent.trim();
+  if (!u || !a) return false;
+  try {
+    const res = await assistFetch(`/api/assist/threads/${encodeURIComponent(threadId)}/turns`, {
+      method: "POST",
+      body: JSON.stringify({ userContent: u, assistantContent: a, meta }),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
 }

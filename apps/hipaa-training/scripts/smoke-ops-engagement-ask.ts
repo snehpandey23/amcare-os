@@ -1,20 +1,41 @@
 /**
- * Ops engagement ask matcher + message shape.
+ * Ops engagement / practice / personal-task matchers + message shape.
  *   npx tsx apps/hipaa-training/scripts/smoke-ops-engagement-ask.ts
  */
 import assert from "node:assert/strict";
 import {
   detectAdminOpsIntent,
   isOpsEngagementAsk,
+  isOpsPracticeDrillAsk,
+  isOpsStaffPerformanceAsk,
+  isPersonalTasksAsk,
   opsEngagementMessage,
+  opsPerformanceMessage,
+  opsPracticeMessage,
 } from "../src/lib/siya-os/admin-ops-coach";
 import type { AdminOpsSnapshot } from "../src/lib/siya-os/admin-ops-snapshot";
 
 assert.equal(isOpsEngagementAsk("who all have used our OS in last week?"), true);
 assert.equal(isOpsEngagementAsk("who used the portal last week"), true);
 assert.equal(isOpsEngagementAsk("who is using the OS"), true);
+assert.equal(isOpsEngagementAsk("are staff members loggin into OS?"), true);
+assert.equal(isOpsEngagementAsk("are staff members logging into OS?"), true);
+assert.equal(isOpsEngagementAsk("i want to know staff performance"), true);
 assert.equal(isOpsEngagementAsk("how do I use the OS"), false);
 assert.equal(detectAdminOpsIntent("who all have used our OS in last week?")?.kind, "ops_engagement");
+assert.equal(detectAdminOpsIntent("are staff members loggin into OS?")?.kind, "ops_engagement");
+assert.equal(detectAdminOpsIntent("i want to know staff performance")?.kind, "ops_engagement");
+assert.equal(isOpsStaffPerformanceAsk("i want to know staff performance"), true);
+
+assert.equal(isOpsPracticeDrillAsk("has anyone tried any drills"), true);
+assert.equal(isOpsPracticeDrillAsk("has anyone tried any drills?"), true);
+assert.equal(isOpsPracticeDrillAsk("who has done practice drills"), true);
+assert.equal(isOpsPracticeDrillAsk("how do I practice drills"), false);
+assert.equal(detectAdminOpsIntent("has anyone tried any drills")?.kind, "ops_practice");
+
+assert.equal(isPersonalTasksAsk("urgent tasks for me?"), true);
+assert.equal(isPersonalTasksAsk("my tasks"), true);
+assert.equal(detectAdminOpsIntent("urgent tasks for me?")?.kind, "task_status");
 
 const weekAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString();
 const old = new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString();
@@ -39,5 +60,41 @@ assert.match(msg, /Rock Star/);
 assert.doesNotMatch(msg, /Old User/);
 assert.doesNotMatch(msg, /qa-test@siya\.health|QA Test/i);
 assert.match(msg, /Ops → Section A/i);
+
+const practice = opsPracticeMessage([
+  {
+    email: "sneh@siya.health",
+    name: "Sneh Pandey",
+    practiceLifetime: 4,
+    lastActiveDate: "2026-09-03",
+  },
+  {
+    email: "qa-test@siya.health",
+    name: "QA Test",
+    practiceLifetime: 99,
+    lastActiveDate: "2026-09-04",
+  },
+  {
+    email: "cold@siya.health",
+    name: "Cold",
+    practiceLifetime: 0,
+    lastActiveDate: "",
+  },
+]);
+assert.match(practice, /Sneh Pandey/);
+assert.doesNotMatch(practice, /QA Test|Cold/);
+
+const perf = opsPerformanceMessage([
+  {
+    email: "sneh@siya.health",
+    name: "Sneh Pandey",
+    practiceLifetime: 2,
+    lastActiveDate: "2026-09-03",
+    askTurnsLast14d: 5,
+    askTurnsLast30d: 8,
+  },
+]);
+assert.match(perf, /Sneh Pandey/);
+assert.match(perf, /Ask turn/);
 
 console.log("smoke-ops-engagement-ask: OK");

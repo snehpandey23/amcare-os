@@ -57,6 +57,7 @@ const DRILL_LABELS: Record<DailyCompletion, string> = {
   timezone: "Timezones",
   typing: "Chat speed / typing",
   billing: "Billing practice",
+  patientChat: "Difficult patient chat",
 };
 
 /** Monday 00:00 UTC of the week containing `date` (YYYY-MM-DD). */

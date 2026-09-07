@@ -1,7 +1,7 @@
 import { getEscalationContacts } from "./config";
 import { defaultEscalationOwner } from "./escalation";
 import { retrievalQueryBoost, routeIntent, expandShortQuery, hasRoutableIntent } from "./flows";
-import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, isHrContactQuery, buildHrContactAnswer, abusivePatientAnswer, pickLiveAbusivePatientSop, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, isClarifyingFollowUp, answerFromPriorAssistIfCovered, isGapContributionFollowUp, answerGapContributionFollowUp, polishStaffMessage, isCasualOffTopic, casualOffTopicReply, appendDraftLiveHedge, provisionalSourceLabel, provisionalRoutingMeta } from "./compose-answer";
+import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, isHrContactQuery, buildHrContactAnswer, abusivePatientAnswer, patientEmergencyAnswer, pickLiveAbusivePatientSop, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, isClarifyingFollowUp, isShortTopicContinue, isSpecificEnoughForGapCapture, answerFromPriorAssistIfCovered, isGapContributionFollowUp, answerGapContributionFollowUp, polishStaffMessage, isCasualOffTopic, casualOffTopicReply, appendDraftLiveHedge, provisionalSourceLabel, provisionalRoutingMeta } from "./compose-answer";
 import { staffTopicLabel } from "./staff-voice";
 import {
   formatDepartmentLeadAnswer,
@@ -12,7 +12,10 @@ import {
 } from "./department-leads-ask";
 import { isSopAssignmentQuery, answerSopAssignmentAsk } from "./sop-assignment-ask";
 import { isMissingSopsQuery, answerMissingSopsAsk } from "./sop-missing-ask";
-import { isMyScheduleQuery, answerMyScheduleQuery } from "./shift-roster-ask";
+import { isMyScheduleQuery, answerMyScheduleQuery, isTeamRosterQuery, answerTeamRosterQuery } from "./shift-roster-ask";
+import { isMyTypingSpeedQuery, answerMyTypingSpeedQuery } from "./practice-stats-ask";
+import { isOpsNeedsAttentionQuery, answerOpsNeedsAttentionQuery } from "./ops-attention-ask";
+import { isFounderFocusQuery, answerFounderFocusQuery } from "./founder-focus-ask";
 import { answerWhoIsQuery, isWhoAmIQuery, extractWhoIsName, fetchViewerIdentity } from "./staff-identity-ask";
 import { synthesizeWorkforceAnswer } from "./llm-answer";
 import {
@@ -346,6 +349,177 @@ export async function runSiyaAssistantAsync(
     };
   }
 
+  // Personal Practice WPM / chat-sim stats — before feature nav (typing drill open).
+  if (isMyTypingSpeedQuery(message)) {
+    if (!token) {
+      return {
+        message: polishStaffMessage(
+          "Sign in to see **your** typing speed and Practice ledger (personal best WPM, recent scores). I won’t invent stats.",
+        ),
+        chunks: [],
+        sources: [],
+        knowledgeGap: false,
+        ruleFinal: true,
+        routing: {
+          department: founderCoach ? "Leadership" : "General",
+          task: founderCoach ? "Founder Talk" : "Practice stats",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    const stats = await answerMyTypingSpeedQuery(token);
+    if (stats) {
+      return {
+        message: polishStaffMessage(stats.message),
+        chunks: [],
+        sources: stats.sources,
+        portalLinks: [
+          { label: "Practice", href: "/learn/practice" },
+          { label: "Chat simulator", href: "/learn/chat-simulator" },
+        ],
+        knowledgeGap: false,
+        answerTrust: "approved",
+        factsLookup: true,
+        ruleFinal: true,
+        routing: {
+          department: founderCoach ? "Leadership" : "General",
+          task: founderCoach ? "Founder Talk" : "Practice stats",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    return {
+      message: polishStaffMessage(
+        "I couldn’t load your Practice progress just now. Refresh and try again, or open **Learn → Practice**.",
+      ),
+      chunks: [],
+      sources: [],
+      knowledgeGap: false,
+      ruleFinal: true,
+      routing: {
+        department: founderCoach ? "Leadership" : "General",
+        task: founderCoach ? "Founder Talk" : "Practice stats",
+        confidence: "medium",
+        followUpQuestions: [],
+      },
+    };
+  }
+
+  // Ops Needs Attention strip — before soft-stop / generic plan_day.
+  if (isOpsNeedsAttentionQuery(message)) {
+    if (!token) {
+      return {
+        message: polishStaffMessage(
+          "Sign in as admin to see the live **Ops → Needs Attention** summary (SOP queues, check-ins, coverage, engagement).",
+        ),
+        chunks: [],
+        sources: [],
+        knowledgeGap: false,
+        ruleFinal: true,
+        routing: {
+          department: founderCoach ? "Leadership" : "General",
+          task: founderCoach ? "Founder Talk" : "Ops Needs Attention",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    const attention = await answerOpsNeedsAttentionQuery(token);
+    if (attention) {
+      return {
+        message: polishStaffMessage(attention.message),
+        chunks: [],
+        sources: attention.sources,
+        portalLinks: attention.links,
+        opsCoPilot: true,
+        knowledgeGap: false,
+        answerTrust: "approved",
+        factsLookup: true,
+        ruleFinal: true,
+        routing: {
+          department: founderCoach ? "Leadership" : "General",
+          task: founderCoach ? "Founder Talk" : "Ops Needs Attention",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    return {
+      message: polishStaffMessage(
+        "I couldn’t load **Ops → Needs Attention** just now. Open **Ops** directly, or try again in a moment.",
+      ),
+      chunks: [],
+      sources: [],
+      portalLinks: [{ label: "Ops", href: "/ops" }],
+      knowledgeGap: false,
+      ruleFinal: true,
+      routing: {
+        department: founderCoach ? "Leadership" : "General",
+        task: founderCoach ? "Founder Talk" : "Ops Needs Attention",
+        confidence: "medium",
+        followUpQuestions: [],
+      },
+    };
+  }
+
+  // Founder Focus from This week’s plan — before plan_day / soft-stop.
+  if (isFounderFocusQuery(message)) {
+    if (!token) {
+      return {
+        message: polishStaffMessage(
+          "Sign in as admin to read **Founder Focus** from **This week’s plan**. I won’t invent a focus.",
+        ),
+        chunks: [],
+        sources: [],
+        knowledgeGap: false,
+        ruleFinal: true,
+        routing: {
+          department: founderCoach ? "Leadership" : "General",
+          task: founderCoach ? "Founder Talk" : "Founder Focus",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    const focus = await answerFounderFocusQuery(token);
+    if (focus) {
+      return {
+        message: polishStaffMessage(focus.message),
+        chunks: [],
+        sources: focus.sources,
+        portalLinks: focus.links,
+        knowledgeGap: false,
+        answerTrust: "approved",
+        factsLookup: true,
+        ruleFinal: true,
+        routing: {
+          department: founderCoach ? "Leadership" : "General",
+          task: founderCoach ? "Founder Talk" : "Founder Focus",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    return {
+      message: polishStaffMessage(
+        "I couldn’t load **Founder Focus** from This week’s plan just now. Open **This week’s plan** directly.",
+      ),
+      chunks: [],
+      sources: [],
+      portalLinks: [{ label: "This week’s plan", href: "/executive" }],
+      knowledgeGap: false,
+      ruleFinal: true,
+      routing: {
+        department: founderCoach ? "Leadership" : "General",
+        task: founderCoach ? "Founder Talk" : "Founder Focus",
+        confidence: "medium",
+        followUpQuestions: [],
+      },
+    };
+  }
+
   const featureNavEarly = await featureNavigationEarly(message, token, founderCoach);
   if (featureNavEarly) return featureNavEarly;
 
@@ -388,9 +562,9 @@ export async function runSiyaAssistantAsync(
     };
   }
 
-  // Team pulse / presence BEFORE name lookup — "who is online" / "who is loggin in" must not become roster search.
+  // Team pulse / presence BEFORE name lookup — but not calendar MA duty roster asks.
   const opsIntentEarly = token ? detectAdminOpsIntent(message, history) : null;
-  if (token && opsIntentEarly?.kind === "team_pulse") {
+  if (token && opsIntentEarly?.kind === "team_pulse" && !isTeamRosterQuery(message)) {
     const snapshot = await fetchAdminOpsSnapshot(token);
     if (snapshot) {
       const ops = await runAdminOpsCoach(message, snapshot, token, history);
@@ -431,6 +605,65 @@ export async function runSiyaAssistantAsync(
         department: "General",
         task: "Team presence",
         confidence: "high",
+        followUpQuestions: [],
+      },
+    };
+  }
+
+  // Team / MA duty roster — BEFORE who-is (otherwise "who is on duty" becomes a name lookup).
+  if (isTeamRosterQuery(message)) {
+    if (!token) {
+      return {
+        message: polishStaffMessage(
+          "Sign in as an **admin or department lead** to see the team MA duty roster. Staff can ask **when do I work this week?** for their own shifts.",
+        ),
+        chunks: [],
+        sources: [],
+        knowledgeGap: false,
+        ruleFinal: true,
+        routing: {
+          department: founderCoach ? "Leadership" : "Clinical Operations",
+          task: founderCoach ? "Founder Talk" : "Team MA roster",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    const team = await answerTeamRosterQuery(message, token);
+    if (team) {
+      return {
+        message: polishStaffMessage(team.message),
+        chunks: [],
+        sources: team.sources,
+        portalLinks: [
+          { label: "Ops", href: "/ops" },
+          { label: "My day", href: "/" },
+        ],
+        knowledgeGap: false,
+        answerTrust: "approved",
+        factsLookup: true,
+        ruleFinal: true,
+        routing: {
+          department: founderCoach ? "Leadership" : "Clinical Operations",
+          task: founderCoach ? "Founder Talk" : "Team MA roster",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    return {
+      message: polishStaffMessage(
+        "I couldn’t load the team **shift_roster** just now. Open **Ops** → planned vs actual, or try again.",
+      ),
+      chunks: [],
+      sources: [],
+      portalLinks: [{ label: "Ops", href: "/ops" }],
+      knowledgeGap: false,
+      ruleFinal: true,
+      routing: {
+        department: founderCoach ? "Leadership" : "Clinical Operations",
+        task: founderCoach ? "Founder Talk" : "Team MA roster",
+        confidence: "medium",
         followUpQuestions: [],
       },
     };
@@ -576,6 +809,7 @@ export async function runSiyaAssistantAsync(
           ruleFinal:
             ops.intent === "team_pulse" ||
             ops.intent === "ops_engagement" ||
+            ops.intent === "ops_practice" ||
             ops.intent === "overdue" ||
             ops.intent === "task_status",
           pendingTask: founderCoach ? undefined : ops.pendingTask,
@@ -636,6 +870,32 @@ export async function runSiyaAssistantAsync(
         routing: {
           department: founderCoach ? "Leadership" : "General",
           task: founderCoach ? "Founder Talk" : "Ops engagement",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    if (opsIntent.kind === "ops_practice") {
+      return {
+        message: polishStaffMessage(
+          [
+            "Who’s done **Practice drills** is on the **Ops dashboard** (admin) — Section A shows lifetime drills and shared weekly practice.",
+            "",
+            "Tour sandbox drills don’t count. Open **Learn → Practice** for your own drills — I won’t invent a team list here.",
+          ].join("\n"),
+        ),
+        chunks: [],
+        sources: [],
+        portalLinks: [
+          { label: "Ops dashboard", href: "/ops" },
+          { label: "Practice", href: "/learn/practice" },
+        ],
+        opsCoPilot: false,
+        ruleFinal: true,
+        knowledgeGap: false,
+        routing: {
+          department: founderCoach ? "Leadership" : "General",
+          task: founderCoach ? "Founder Talk" : "Practice engagement",
           confidence: "high",
           followUpQuestions: [],
         },
@@ -846,6 +1106,10 @@ function resolveQuery(message: string, history: { role: string; content: string 
       return `${priorUser.content.trim()} — ${reply}`;
     }
     return mapped;
+  }
+  // “more?” / “go on” — re-run the prior staff question; do not soft-stop as a new miss.
+  if (isShortTopicContinue(mapped) && priorUser && priorUser.content.trim().length > 12) {
+    return priorUser.content.trim();
   }
   // Clarifying follow-ups (“what if the number is unreachable?”) keep prior topic for retrieval.
   if (isClarifyingFollowUp(mapped) && priorUser && priorUser.content.trim().length > 12) {
@@ -1278,6 +1542,63 @@ function buildSiyaReply(
   chunks = filterStaffFacingChunks(chunks, normalized);
 
   // Hostile/abusive patient: prefer live reviewed SOP; hardcoded script only if none retrieved.
+  if (routing.flowId === "clinical-ops-patient-emergency") {
+    const emergencyHit = chunks.find(
+      (c) =>
+        c.score >= 3 &&
+        /patient\s+emergency|red-?flag|chest\s+pain|life[-\s]?threat|911|urgent\s+care/i.test(
+          `${c.title ?? ""} ${c.snippet ?? ""} ${c.id}`,
+        ),
+    );
+    const escalateOwner = emergencyHit?.escalate ?? defaultEscalationOwner("Clinical Operations");
+    if (emergencyHit) {
+      const msg = composeAnswerFromChunks(normalized, [emergencyHit], false, routing.flowId);
+      return {
+        message: polishStaffMessage(appendDraftLiveHedge(msg, [emergencyHit])),
+        chunks: [emergencyHit],
+        escalate: escalateOwner,
+        knowledgeGap: false,
+        answerTrust: "approved",
+        ruleFinal: true,
+        sources: [
+          {
+            title: emergencyHit.sourceLabel || staffTopicLabel(emergencyHit.title),
+            id: emergencyHit.id,
+          },
+        ],
+        routing: {
+          department: "Clinical Operations",
+          task: routing.task,
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    return {
+      message: polishStaffMessage(patientEmergencyAnswer()),
+      chunks: [],
+      escalate: escalateOwner,
+      knowledgeGap: false,
+      answerTrust: "approved",
+      ruleFinal: true,
+      sources: [],
+      routing: {
+        department: "Clinical Operations",
+        task: routing.task,
+        confidence: "high",
+        followUpQuestions: routing.followUpQuestions,
+      },
+      escalationPreview: formatEscalationForSlack({
+        question: text,
+        department: displayDepartment("Clinical Operations"),
+        task: routing.task,
+        escalateTo: escalateOwner,
+        sourceTitles: [],
+        followUps: routing.followUpQuestions,
+      }),
+    };
+  }
+
   if (routing.flowId === "clinical-ops-abusive-patient") {
     const liveHit = pickLiveAbusivePatientSop(chunks);
     if (!liveHit) {
@@ -1396,11 +1717,13 @@ function buildSiyaReply(
         },
       };
     }
+    // Soft ask-back is fine for vague asks; only mark knowledgeGap (→ auto-email) when the
+    // question named a concrete process we failed to match — not “SOP of Siya Health” / “more?”.
+    const captureGap = isSpecificEnoughForGapCapture(text) || isSpecificEnoughForGapCapture(normalized);
     return {
       message: polishStaffMessage(askClarifyingQuestion(normalized)),
       chunks: [],
-      // Genuine retrieval miss — same soft-stop on every surface; auto gap-capture keys off this flag.
-      knowledgeGap: true,
+      knowledgeGap: captureGap,
       sources: [],
       escalationPreview: undefined,
       ruleFinal: true,
@@ -1514,6 +1837,13 @@ function buildSiyaReply(
     escalationPreview,
     knowledgeGap: false,
     answerTrust: provisional ? "provisional" : "approved",
-    ruleFinal: provisional,
+    // Keep entity/voice + social process answers from LLM mangling (empty URLs / invented steps).
+    ruleFinal:
+      provisional ||
+      citeChunks[0]?.id === "brand-entities-voice" ||
+      (Boolean(routing.flowId?.startsWith("marketing-")) &&
+        (citeChunks[0]?.id === "content-qa-checklist" ||
+          citeChunks[0]?.id === "marketing-staff-daily-help" ||
+          citeChunks[0]?.id === "brand-entities-voice")),
   };
 }

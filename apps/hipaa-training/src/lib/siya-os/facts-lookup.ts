@@ -111,6 +111,12 @@ export function tryFactsLookup(query: string): FactsLookupHit | null {
   const brandTokens = matchBrandTokens(q);
   if (brandTokens) return brandTokens;
 
+  const companyVoice = matchCompanyVoice(q);
+  if (companyVoice) return companyVoice;
+
+  const socialDesign = matchSocialDesignOrContent(q);
+  if (socialDesign) return socialDesign;
+
   const serviceOffer = matchServiceOffer(q);
   if (serviceOffer) return serviceOffer;
 
@@ -500,6 +506,93 @@ function matchBrandTokens(q: string): FactsLookupHit | null {
   ].join("\n");
 
   return hit(message, "facts-brand-bg-page", "Facts · Brand · Background", "Marketing", "Brand tokens");
+}
+
+/** Company / brand voice — deterministic (never invent empty URLs). */
+function matchCompanyVoice(q: string): FactsLookupHit | null {
+  const lower = q.toLowerCase().replace(/\s+/g, " ").trim();
+  const asksVoice =
+    /\b(company\s+voice|brand\s+voice|our\s+voice|entities?\s+(,?|&|and)\s+voice|voice\s+and\s+positioning)\b/.test(
+      lower,
+    ) ||
+    /\bwhere\s+(is|are|do\s+i\s+find)\b[\s\S]{0,40}\b(company\s+)?voice\b/.test(lower) ||
+    /\b(how\s+do\s+we\s+(describe|talk\s+about)\s+(siya|the\s+company|ourselves))\b/.test(lower) ||
+    /\b(entity|entities)\s+(split|rules|naming)\b/.test(lower);
+  if (!asksVoice) return null;
+
+  const message = [
+    "**Company voice & entities** (canonical):",
+    "",
+    "• **Siya Health Inc.** — administrative / non-clinical support.",
+    "• **Siya Healthcare, PLLC** — medical services via licensed clinicians.",
+    "• Position as **physician-led telehealth for adults** — not a membership marketplace or med vending.",
+    "• Education hub for patients: **Health Guides** on the public site (`/answers`).",
+    "• Pricing, states, and CTAs: use **SIYA-STANDARDS** (Marketing / Brand) — don’t guess numbers here.",
+    "",
+    "Avoid “psychiatry practice”; say physician-led telehealth. Company voice is default for social unless leadership asks for an approved physician profile post.",
+    "",
+    "Open **Memory** for the published **Entities, voice, and positioning** guide, or ask Marketing lead (CMO) for Brand System / Visual OS files.",
+  ].join("\n");
+
+  return hit(
+    message,
+    "brand-entities-voice",
+    "Entities, voice, and positioning (canonical)",
+    "Marketing",
+    "Company voice",
+  );
+}
+
+/**
+ * Social design / Instagram content — process pointer only.
+ * Do not invent post ideas, captions, or freehand layouts.
+ */
+function matchSocialDesignOrContent(q: string): FactsLookupHit | null {
+  const lower = q.toLowerCase().replace(/\s+/g, " ").trim();
+  if (!lower) return null;
+  // Don’t steal brand-token background asks.
+  if (/\b(background|bg|hex|token)\b/.test(lower) && /\b(brand|page|portal)\b/.test(lower)) {
+    return null;
+  }
+  const designAsk =
+    /\bdesign\s+ideas?\b/.test(lower) ||
+    /\b(want\s+to\s+)?design\s+(something|a\s+)?(post|posts|carousel|static|creative|reel)?s?\b/.test(
+      lower,
+    ) ||
+    /\b(post|social|instagram|carousel)\s+design\b/.test(lower) ||
+    /\bcreative\s+(ideas?|direction|brief)\b/.test(lower) ||
+    /\bvisual\s+os\b/.test(lower) ||
+    /\bbrand\s+style\s+lock\b/.test(lower);
+  const contentAsk =
+    /\bcontent\s+creation\b/.test(lower) ||
+    /\b(create|make|draft)\s+.{0,24}\b(instagram|insta|linkedin|facebook|tiktok|carousel|social\s+post|reel)\b/.test(
+      lower,
+    ) ||
+    (/\b(instagram|insta|linkedin|carousel|social\s+post)\b/.test(lower) &&
+      /\b(content|post|posts|caption|create|make|draft)\b/.test(lower)) ||
+    (/\bposts?\b/.test(lower) && /\b(design|ideas?|creative)\b/.test(lower));
+
+  if (!designAsk && !contentAsk) return null;
+
+  const message = [
+    "**Social / design work — process (I don’t invent layouts or post ideas):**",
+    "",
+    "1. **Tracker first** — confirm insight ID / row on the marketing **content tracker** (no orphan posts).",
+    "2. **Brand creative stack** (Marketing): Style Lock tokens · Visual OS template ID (usually A-03 lean) · Medical compliance checklist — then compose from a **source photo**, not freehand AI as the final frame.",
+    "3. **Copy** — lean on-frame (headline + one recognition line); teaching depth goes in the **caption**. Company voice unless an approved physician profile post.",
+    "4. **Pre-publish QA** — states (CA, TX, PA, FL), disclaimers, CTAs, links, claims register.",
+    "5. **Clinical / pricing / HIGH claims** → **Medical Director** (and Legal when triggered) before publish.",
+    "",
+    "Tell me the **topic or insight ID**, and whether you need a **static** or **carousel**, and I’ll narrow the checklist. For Brand System files or today’s calendar, ask **Marketing lead (CMO)**.",
+  ].join("\n");
+
+  return hit(
+    message,
+    "content-qa-checklist",
+    "Pre-publish content QA (10 checks)",
+    "Marketing",
+    "Social content (carousel / post)",
+  );
 }
 
 /** No fixed practice-wide hours — provider schedules live in the EHR. */

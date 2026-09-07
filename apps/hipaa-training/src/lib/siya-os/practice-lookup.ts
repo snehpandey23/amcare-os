@@ -44,6 +44,14 @@ const DRILLS: Drill[] = [
     blurb: "Open today’s **American English / slang phrase** card.",
   },
   {
+    id: "patient-chat",
+    href: "/learn/chat-simulator",
+    label: "Chat simulator",
+    match:
+      /\b(chat\s+simulator|patient\s+chat(\s+simulator)?|difficult\s+patient|hard\s+patient|mock\s+patient|persona\s+chat|oet\s+chat|practice\s+(with\s+a\s+)?patient|try\s+chat\s+simulator)\b/i,
+    blurb: "Open the **Chat simulator** — live patient conversation practice (separate from daily drills).",
+  },
+  {
     id: "culture",
     href: "/learn/practice#culture",
     label: "Culture & trivia",
@@ -117,7 +125,7 @@ const DRILLS: Drill[] = [
     label: "Practice drills",
     match:
       /\b(practice\s+(drills?|hub)|open\s+practice|i\s+want\s+to\s+practice|help\s+me\s+practice)\b/i,
-    blurb: "Open **Practice** for English, culture, typing, map, and timezone drills.",
+    blurb: "Open **Practice** for English, culture, typing, map, and timezone drills. For live patient chats, use **Chat simulator**.",
   },
 ];
 

@@ -736,3 +736,97 @@ export async function markLeadGapDigestSent(
 export function newGapId(): string {
   return `gap-${Date.now()}-${randomUUID().slice(0, 8)}`;
 }
+
+/** Screenshotable Assist weekly pulse (investor / Trust) — no question text. */
+export type AssistWeeklyPulse = {
+  periodDays: number;
+  since: string;
+  generatedAt: string;
+  /** Assistant turns with persisted thread meta in the window. */
+  assistantTurns: number;
+  /** Turns where meta.knowledgeGap was true. */
+  gapTurns: number;
+  /** Approx first-answer rate from persisted turns (excludes soft-stop gaps). */
+  firstAnswerRatePct: number | null;
+  gapsOpened: number;
+  gapsResolved: number;
+  gapsStillOpen: number;
+  feedbackHelpful: number;
+  feedbackUnhelpful: number;
+  feedbackHelpfulRatePct: number | null;
+  notes: string[];
+};
+
+export async function getAssistWeeklyPulse(pool: pg.Pool, days = 7): Promise<AssistWeeklyPulse> {
+  await ensureAssistTelemetryTables(pool);
+  const { ensureAssistChatTables } = await import("./assist-chat-service.js");
+  await ensureAssistChatTables(pool);
+
+  const since = new Date(Date.now() - Math.max(1, days) * 86400000);
+  const sinceIso = since.toISOString();
+  const notes: string[] = [
+    "Rates use persisted Ask threads + gap/feedback tables only (no PHI / question text).",
+    "Browser-local metrics on Trust are per-device and separate from this server pulse.",
+  ];
+
+  const turns = await pool.query(
+    `SELECT
+       COUNT(*)::int AS total,
+       COUNT(*) FILTER (
+         WHERE COALESCE((meta->>'knowledgeGap')::boolean, false) = true
+       )::int AS gaps
+     FROM siya_assist_messages
+     WHERE role = 'assistant' AND created_at >= $1`,
+    [sinceIso],
+  );
+  const assistantTurns = Number(turns.rows[0]?.total) || 0;
+  const gapTurns = Number(turns.rows[0]?.gaps) || 0;
+  const firstAnswerRatePct =
+    assistantTurns > 0 ? Math.round((100 * (assistantTurns - gapTurns)) / assistantTurns) : null;
+
+  const opened = await pool.query(
+    `SELECT COUNT(*)::int AS c FROM siya_assist_gaps WHERE created_at >= $1`,
+    [sinceIso],
+  );
+  const resolved = await pool.query(
+    `SELECT COUNT(*)::int AS c FROM siya_assist_gaps
+     WHERE resolved_at IS NOT NULL AND resolved_at >= $1`,
+    [sinceIso],
+  );
+  const stillOpen = await pool.query(
+    `SELECT COUNT(*)::int AS c FROM siya_assist_gaps WHERE status = 'open'`,
+  );
+
+  const fb = await pool.query(
+    `SELECT
+       COUNT(*) FILTER (WHERE helpful = TRUE)::int AS helpful,
+       COUNT(*) FILTER (WHERE helpful = FALSE)::int AS unhelpful
+     FROM siya_assist_feedback WHERE created_at >= $1`,
+    [sinceIso],
+  );
+  const feedbackHelpful = Number(fb.rows[0]?.helpful) || 0;
+  const feedbackUnhelpful = Number(fb.rows[0]?.unhelpful) || 0;
+  const fbTotal = feedbackHelpful + feedbackUnhelpful;
+  const feedbackHelpfulRatePct =
+    fbTotal > 0 ? Math.round((100 * feedbackHelpful) / fbTotal) : null;
+
+  if (assistantTurns < 10) {
+    notes.push("Low turn volume this window — treat rates as directional, not fundraise-grade yet.");
+  }
+
+  return {
+    periodDays: days,
+    since: sinceIso,
+    generatedAt: new Date().toISOString(),
+    assistantTurns,
+    gapTurns,
+    firstAnswerRatePct,
+    gapsOpened: Number(opened.rows[0]?.c) || 0,
+    gapsResolved: Number(resolved.rows[0]?.c) || 0,
+    gapsStillOpen: Number(stillOpen.rows[0]?.c) || 0,
+    feedbackHelpful,
+    feedbackUnhelpful,
+    feedbackHelpfulRatePct,
+    notes,
+  };
+}

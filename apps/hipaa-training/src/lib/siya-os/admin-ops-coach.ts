@@ -5,7 +5,8 @@
 
 import type { TaskRecord, TaskPriority } from "@/lib/tasks-types";
 import { taskIsComplete } from "@/lib/tasks-types";
-import type { AdminOpsSnapshot } from "./admin-ops-snapshot";
+import type { AdminOpsSnapshot, OpsCoachEngagementRow } from "./admin-ops-snapshot";
+import { fetchOpsEngagementRows } from "./admin-ops-snapshot";
 import { synthesizeAdminOpsAnswer } from "./admin-ops-llm";
 import { isStaffWorkplaceConcernQuery } from "./flows";
 import { isOpsTestAccount } from "@/lib/ops-dashboard-view";
@@ -42,7 +43,9 @@ export type AdminOpsIntent =
   | { kind: "create_task"; title: string; assigneeHint: string; priority?: TaskPriority }
   | { kind: "ops_brief" }
   /** Staff usage / engagement metrics → Ops dashboard Section A (not live presence). */
-  | { kind: "ops_engagement" };
+  | { kind: "ops_engagement" }
+  /** Practice drill adoption → Ops Section A level_up signals. */
+  | { kind: "ops_practice" };
 
 export type AdminOpsReply = {
   message: string;
@@ -84,6 +87,19 @@ const PRESENCE_STATUS =
 export function isTeamPulseAsk(message: string): boolean {
   const t = normalizePresenceAskText(message);
   if (!t) return false;
+
+  // Calendar / MA duty roster (“who works tomorrow”, “on duty”, month roster) is
+  // shift_roster Ask — not live presence. Keep pulse for right-now / online.
+  if (/\bon\s+duty\b/.test(t) || /\b(ma\s+)?(duty\s+)?roster\b/.test(t)) return false;
+  if (
+    /\b(tomorrow|this\s+week|next\s+week|september|october|november|december|january|february|march|april|may|june|july|august)\b/.test(
+      t,
+    ) &&
+    !/\b(right\s+now|currently|online|logged\s*in|logging\s*in)\b/.test(t)
+  ) {
+    return false;
+  }
+
   if (/\b(team\s*pulse|coverage)\b/.test(t)) return true;
   // Short status labels (not org-chart / usage analytics).
   if (/\b(?:my\s+)?team\s+status\b/.test(t)) return true;
@@ -115,11 +131,14 @@ export function isTeamPulseAsk(message: string): boolean {
  * (not thumbs chrome, not live Team pulse).
  */
 export function isOpsEngagementAsk(message: string): boolean {
-  const t = message.trim().toLowerCase().replace(/\s+/g, " ");
+  // Normalize loggin→logging so “are staff loggin into OS” matches.
+  const t = normalizePresenceAskText(message);
   if (!t) return false;
   // How-to “how do I use the OS” is not engagement analytics.
   if (/\bhow\s+(do\s+i|to|can\s+i)\s+use\b/.test(t)) return false;
   if (/\bthumbs?\s*(up|down)?\b/.test(t) && !/\b(team|staff|engagement|usage|ops)\b/.test(t)) return false;
+  // Practice drills have their own intent.
+  if (isOpsPracticeDrillAsk(message)) return false;
 
   const osOrPortal = /\b(os|siya\s*os|portal|staff\s*(?:app|portal)|assist|siya\s*assist)\b/.test(t);
   const usageVerb =
@@ -129,17 +148,75 @@ export function isOpsEngagementAsk(message: string): boolean {
   const windowHint = /\b(last|past|this)\s+week\b|\b(7|fourteen|14|30)\s*days?\b|\brecently\b/.test(t);
   const problemsFacing =
     /\b(what\s+)?problems?\b/.test(t) && /\b(facing|have|having|they)\b/.test(t);
-  const teamUsageLabel = /\b(staff|team)\s+(engagement|usage|adoption)\b/.test(t);
+  const teamUsageLabel = /\b(staff|team)\s+(engagement|usage|adoption|performance)\b/.test(t);
+  const staffPerformance =
+    /\bstaff\s+performance\b/.test(t) ||
+    (/\bperformance\b/.test(t) && /\b(staff|team|people)\b/.test(t));
+  const loginIntoOs =
+    osOrPortal &&
+    /\b(staff|team|people|members|everyone|employees?)\b/.test(t) &&
+    /\b(logg?(?:ing|ed)?\s*(?:in|into)|signing\s*(?:in|into)|logins?)\b/.test(t);
   const opsSectionA =
-    /\bops\b/.test(t) && /\b(engagement|usage|section\s*a|dashboard)\b/.test(t);
+    /\bops\b/.test(t) && /\b(engagement|usage|section\s*a|dashboard|performance)\b/.test(t);
 
-  if (teamUsageLabel || opsSectionA) return true;
+  if (teamUsageLabel || opsSectionA || staffPerformance || loginIntoOs) return true;
   if (osOrPortal && usageVerb) return true;
   if (osOrPortal && windowHint && /\bwho\b/.test(t)) return true;
   if (osOrPortal && problemsFacing) return true;
   if (usageVerb && problemsFacing && /\b(team|staff|people|they)\b/.test(t)) return true;
   if (/\bhow\s+often\b/.test(t) && /\b(staff|team|people|using|ask|turns?)\b/.test(t)) return true;
   return false;
+}
+
+/** “Has anyone tried drills / practice” → Ops Section A level_up signals. */
+export function isOpsPracticeDrillAsk(message: string): boolean {
+  const t = normalizePresenceAskText(message);
+  if (!t) return false;
+  if (/\b(corporate\s+)?practice\s+of\s+medicine\b|\bcpom\b/.test(t)) return false;
+  if (/\b(medical\s+practice|the\s+practice)\b/.test(t) && !/\bdrills?\b/.test(t)) return false;
+  // Personal how-to stays on Practice nav / meta — not team analytics.
+  if (
+    /\b(how\s+(do|can)\s+i|why\s+(do\s+we|should)|open\s+practice|my\s+practice\s+progress)\b/.test(t) &&
+    !/\b(anyone|anybody|who|team|staff|people)\b/.test(t)
+  ) {
+    return false;
+  }
+  const drillish =
+    /\b(drills?|practice\s+drills?|level\s*[- ]?up|typing\s+drill|culture\s+trivia)\b/.test(t) ||
+    (/\bpractice\b/.test(t) && /\b(learn|portal|os|team|staff|anyone|anybody|who)\b/.test(t));
+  if (!drillish) return false;
+  return (
+    /\b(anyone|anybody|who|who\s+all|team|staff|people)\b/.test(t) ||
+    /\b(tried|try|done|doing|completed|attempted|started|using|used|did)\b[\s\S]{0,32}\b(drills?|practice)\b/.test(
+      t,
+    )
+  );
+}
+
+/** Staff performance / Section A Ask+practice summary (not a clinical performance review). */
+export function isOpsStaffPerformanceAsk(message: string): boolean {
+  const t = normalizePresenceAskText(message);
+  if (!t) return false;
+  return (
+    /\bstaff\s+performance\b/.test(t) ||
+    (/\bperformance\b/.test(t) && /\b(staff|team|people)\b/.test(t)) ||
+    /\b(engagement|usage)\s+(by\s+)?(person|staff|team)\b/.test(t)
+  );
+}
+
+/** Personal My day / urgent tasks (not “assign task to X”). */
+export function isPersonalTasksAsk(message: string): boolean {
+  const t = message.trim().toLowerCase().replace(/\s+/g, " ");
+  if (!t) return false;
+  if (/\b(assign|create|add|give)\s+(a\s+)?task\b/.test(t)) return false;
+  return (
+    /\burgent\s+tasks?\s+(for\s+)?me\b/.test(t) ||
+    /\b(my|today'?s)\s+(urgent\s+)?tasks?\b/.test(t) ||
+    /\btasks?\s+for\s+me\b/.test(t) ||
+    /\b(do\s+i\s+have|have\s+i\s+got|any)\s+.{0,24}\btasks?\b/.test(t) ||
+    /\bwhat\s+tasks?\s+(do\s+i\s+have|are\s+assigned)\b/.test(t) ||
+    /\btasks?\s+assigned(\s+to\s+me)?\b/.test(t)
+  );
 }
 
 /**
@@ -235,6 +312,10 @@ export function detectAdminOpsIntent(
   )) {
     return { kind: "plan_day" };
   }
+  // Practice drills before generic engagement (“has anyone tried drills”).
+  if (isOpsPracticeDrillAsk(message)) {
+    return { kind: "ops_practice" };
+  }
   // Usage / engagement analytics BEFORE presence — "who's using the OS" is Ops, not Team pulse.
   if (isOpsEngagementAsk(message)) {
     return { kind: "ops_engagement" };
@@ -253,13 +334,11 @@ export function detectAdminOpsIntent(
   }
   // Personal + board visibility (staff get My day list; admins get board via snapshot).
   if (
+    isPersonalTasksAsk(message) ||
     /\b(task board|open tasks|assignments|track tasks|company tasks|ops status)\b/.test(t) ||
     /\bwhere\s+(are|is)\s+(my|the)\s+tasks?\b/.test(t) ||
-    /\b(do\s+i\s+have|have\s+i\s+got|any)\s+.{0,24}\btasks?\b/.test(t) ||
-    /\btasks?\s+assigned(\s+to\s+me)?\b/.test(t) ||
-    /\b(my|today'?s)\s+tasks?\b/.test(t) ||
-    /\bwhat\s+tasks?\s+(do\s+i\s+have|are\s+assigned)\b/.test(t) ||
-    /\bare\s+these\s+(my\s+)?tasks?\b/.test(t)
+    /\bare\s+these\s+(my\s+)?tasks?\b/.test(t) ||
+    /\burgent\s+tasks?\b/.test(t)
   ) {
     return { kind: "task_status" };
   }
@@ -515,6 +594,128 @@ export function opsEngagementPointerMessage(): string {
   ].join("\n");
 }
 
+export function opsPracticePointerMessage(): string {
+  return [
+    "For **who’s done Practice drills**, open **Ops → Section A · Staff engagement** (lifetime drills + shared weekly report).",
+    "",
+    "Tour sandbox drills do **not** count toward real progress. Staff Practice is under **Learn → Practice**.",
+  ].join("\n");
+}
+
+/** Live answer for “has anyone tried drills”. */
+export function opsPracticeMessage(rows: OpsCoachEngagementRow[]): string {
+  const active = rows
+    .filter((r) => !isOpsTestAccount(r.email))
+    .filter((r) => (r.practiceLifetime ?? 0) > 0)
+    .sort((a, b) => (b.practiceLifetime ?? 0) - (a.practiceLifetime ?? 0));
+
+  if (!active.length) {
+    return [
+      "**Practice drills:** no non-test accounts have saved drill progress yet (lifetime count = 0).",
+      "",
+      "Tour sandbox drills don’t write progress. Open **Ops → Section A** or **Learn → Practice** to check live.",
+    ].join("\n");
+  }
+
+  const lines = active.slice(0, 20).map((r) => {
+    const label = (r.name && r.name.trim()) || r.email;
+    const last = r.lastActiveDate ? ` · last active ${r.lastActiveDate}` : "";
+    const week = r.practiceShareThisWeek?.optedInShared
+      ? ` · shared ${r.practiceShareThisWeek.drillDaysShared} day(s) this week`
+      : "";
+    return `• **${label}** — ${r.practiceLifetime} lifetime drill(s)${last}${week}${
+      (r.chatSimRedFlags ?? 0) > 0 ? ` · chat-sim red flags: ${r.chatSimRedFlags}` : ""
+    }`;
+  });
+  const more =
+    active.length > 20 ? `\n…and **${active.length - 20}** more on Ops Section A.` : "";
+
+  return [
+    "**Who has tried Practice drills** (saved progress; QA/test hidden):",
+    "",
+    `**${active.length}** people:`,
+    ...lines,
+    more,
+    "",
+    "Open **Ops → Section A · Staff engagement** for Ask turns + weekly shared practice detail.",
+  ]
+    .filter((l) => l !== "")
+    .join("\n");
+}
+
+/** Section A Ask + practice snapshot for “staff performance”. */
+export function opsPerformanceMessage(rows: OpsCoachEngagementRow[]): string {
+  const people = rows
+    .filter((r) => !isOpsTestAccount(r.email))
+    .map((r) => ({
+      label: (r.name && r.name.trim()) || r.email,
+      ask14: r.askTurnsLast14d ?? 0,
+      ask30: r.askTurnsLast30d ?? 0,
+      practice: r.practiceLifetime ?? 0,
+      last: r.lastActiveDate || "",
+    }))
+    .filter((r) => r.ask30 > 0 || r.practice > 0 || r.ask14 > 0)
+    .sort((a, b) => b.ask14 - a.ask14 || b.practice - a.practice);
+
+  if (!people.length) {
+    return [
+      "**Staff engagement / performance signals:** no Ask turns or Practice drills recorded yet for non-test accounts.",
+      "",
+      "Open **Ops → Section A · Staff engagement** for the live table. This is portal engagement — not a clinical performance review.",
+    ].join("\n");
+  }
+
+  const lines = people.slice(0, 15).map((r) => {
+    const bits = [
+      r.ask14 ? `${r.ask14} Ask turn(s) / 14d` : null,
+      r.ask30 && !r.ask14 ? `${r.ask30} Ask turn(s) / 30d` : null,
+      r.practice ? `${r.practice} practice drill(s)` : null,
+      r.last ? `last practice day ${r.last}` : null,
+    ].filter(Boolean);
+    return `• **${r.label}** — ${bits.join(" · ")}`;
+  });
+  const more =
+    people.length > 15 ? `\n…and **${people.length - 15}** more on Ops Section A.` : "";
+
+  return [
+    "**Staff portal engagement** (Ask turns + Practice drills; QA/test hidden):",
+    "",
+    `**${people.length}** people with activity:`,
+    ...lines,
+    more,
+    "",
+    "This is **Ops Section A** engagement — not HR performance ratings. Open **Ops** for the full table.",
+  ]
+    .filter((l) => l !== "")
+    .join("\n");
+}
+
+function personalUrgentTasksMessage(snapshot: AdminOpsSnapshot, preferUrgent: boolean): string {
+  const mine = sortByPriority(openMyTasks(snapshot.myTasks));
+  const urgent = mine.filter((t) => t.priority === "urgent" || t.priority === "high");
+  const list = preferUrgent && urgent.length ? urgent : mine;
+  if (!list.length) {
+    return [
+      `**Your My day (${snapshot.date}):** no open tasks${preferUrgent ? " marked urgent/high" : ""} right now.`,
+      "",
+      "Check the checklist above Ask (leave **Focus** if it’s hidden), or ask **task board** for company-wide work.",
+    ].join("\n");
+  }
+  const label =
+    preferUrgent && urgent.length
+      ? `**Your urgent / high tasks (${snapshot.date}):**`
+      : `**Your My day (${snapshot.date}):**`;
+  return (
+    `${label} ${list.length} open\n\n` +
+    list
+      .slice(0, 12)
+      .map((t) => formatTaskLine(t))
+      .join("\n") +
+    (list.length > 12 ? `\n_…${list.length - 12} more on My day._` : "") +
+    "\n\nCheck them off on **My day**. Ask **task board** for company-wide open work."
+  );
+}
+
 function defaultLinks(intent: AdminOpsIntent["kind"]): { label: string; href: string }[] {
   const links = [
     { label: "My day", href: "/" },
@@ -522,9 +723,10 @@ function defaultLinks(intent: AdminOpsIntent["kind"]): { label: string; href: st
     { label: "Team", href: "/team" },
   ];
   if (intent === "team_pulse") return [{ label: "Team", href: "/team" }, ...links.slice(1)];
-  if (intent === "ops_engagement") {
+  if (intent === "ops_engagement" || intent === "ops_practice") {
     return [
       { label: "Ops dashboard", href: "/ops" },
+      { label: "Practice", href: "/learn/practice" },
       { label: "Team", href: "/team" },
       { label: "My day", href: "/" },
     ];
@@ -587,24 +789,47 @@ export async function runAdminOpsCoach(
     case "team_pulse":
       messageOut = teamPulseMessage(snapshot);
       break;
-    case "task_status":
-      messageOut = taskStatusMessage(snapshot);
+    case "task_status": {
+      const preferUrgent = /\burgent\b/i.test(message);
+      if (isPersonalTasksAsk(message)) {
+        messageOut = personalUrgentTasksMessage(snapshot, preferUrgent);
+      } else {
+        messageOut = taskStatusMessage(snapshot);
+      }
       break;
+    }
     case "overdue":
       messageOut = overdueMessage(snapshot);
       break;
     case "ops_brief":
       messageOut = opsBriefMessage(snapshot);
       break;
-    case "ops_engagement":
-      messageOut = opsEngagementMessage(snapshot);
+    case "ops_engagement": {
+      if (isOpsStaffPerformanceAsk(message)) {
+        const rows = await fetchOpsEngagementRows(token);
+        messageOut = rows?.length
+          ? opsPerformanceMessage(rows)
+          : opsEngagementPointerMessage();
+      } else {
+        messageOut = opsEngagementMessage(snapshot);
+      }
       break;
+    }
+    case "ops_practice": {
+      const rows = await fetchOpsEngagementRows(token);
+      messageOut = rows ? opsPracticeMessage(rows) : opsPracticePointerMessage();
+      break;
+    }
     default:
       return null;
   }
 
-  // Team pulse + ops engagement are deterministic pointers — never LLM-rewrite.
-  if (intent.kind !== "team_pulse" && intent.kind !== "ops_engagement") {
+  // Team pulse + ops engagement/practice are deterministic — never LLM-rewrite.
+  if (
+    intent.kind !== "team_pulse" &&
+    intent.kind !== "ops_engagement" &&
+    intent.kind !== "ops_practice"
+  ) {
     const llm = await synthesizeAdminOpsAnswer({
       userMessage: message,
       intent: intent.kind,

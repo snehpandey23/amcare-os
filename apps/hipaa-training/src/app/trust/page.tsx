@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import status from "@/data/trust-status.json";
+import { AssistWeeklyPulseCard } from "@/components/trust/AssistWeeklyPulseCard";
 
 export default function TrustDashboardPage() {
   const s = status as {
@@ -41,9 +42,16 @@ export default function TrustDashboardPage() {
           {s.release.label} · v{s.release.version} · Level {s.release.level} · Updated{' '}
           {new Date(s.generatedAt).toLocaleString()}
         </p>
+        <p className="mt-2 text-xs text-[var(--siya-text-secondary)]">
+          Internal help desk — not Guide, not clinician, not ERP. Demo pack:{' '}
+          <code className="text-[10px]">docs/ASSIST-INVESTOR-READY.md</code>
+        </p>
       </header>
 
+      <AssistWeeklyPulseCard />
+
       <div className="rounded-2xl border border-[var(--siya-border)] bg-white p-5 shadow-[var(--siya-shadow)]">
+        <h2 className="mb-3 text-sm font-semibold text-[var(--siya-primary)]">Deploy / content gate</h2>
         <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
           <Metric label="Knowledge architecture" value={String(sc.knowledgeArchitecture)} />
           <Metric label="Knowledge content" value={String(sc.knowledgeContent)} />

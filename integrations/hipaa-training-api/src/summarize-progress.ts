@@ -9,7 +9,8 @@ export type DrillKey =
   | "map"
   | "timezone"
   | "typing"
-  | "billing";
+  | "billing"
+  | "patientChat";
 
 export function summarizeTrainingProgress(progress: Record<string, unknown> | null | undefined) {
   if (!progress || typeof progress !== "object") {
@@ -34,6 +35,16 @@ export function summarizeTrainingProgress(progress: Record<string, unknown> | nu
   };
 }
 
+export function countChatSimRedFlags(dayLedger: unknown[]): number {
+  let n = 0;
+  for (const row of dayLedger) {
+    if (!row || typeof row !== "object") continue;
+    const e = row as { drill?: string; chatSim?: { redFlagged?: boolean } };
+    if (e.drill === "patientChat" && e.chatSim?.redFlagged === true) n += 1;
+  }
+  return n;
+}
+
 export function summarizeLevelUpProgress(levelUp: Record<string, unknown> | null | undefined) {
   if (!levelUp || typeof levelUp !== "object") {
     return {
@@ -42,6 +53,7 @@ export function summarizeLevelUpProgress(levelUp: Record<string, unknown> | null
       lastActiveDate: "",
       lifetimeDrills: {} as Partial<Record<DrillKey, number>>,
       dayLedger: [] as unknown[],
+      chatSimRedFlags: 0,
     };
   }
   const lifetime = (levelUp.lifetimeDrills as Partial<Record<DrillKey, number>>) || {};
@@ -52,6 +64,7 @@ export function summarizeLevelUpProgress(levelUp: Record<string, unknown> | null
     lastActiveDate: typeof levelUp.lastActiveDate === "string" ? levelUp.lastActiveDate : "",
     lifetimeDrills: lifetime,
     dayLedger,
+    chatSimRedFlags: countChatSimRedFlags(dayLedger),
   };
 }
 

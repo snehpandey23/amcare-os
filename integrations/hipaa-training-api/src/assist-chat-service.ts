@@ -153,6 +153,24 @@ export async function archiveAssistThread(
   return (r.rowCount ?? 0) > 0;
 }
 
+/**
+ * Permanently remove a thread + messages (CASCADE). Used when staff delete/clear a chat
+ * so it cannot reappear in a later session.
+ */
+export async function deleteAssistThread(
+  pool: pg.Pool,
+  userId: string,
+  threadId: string,
+): Promise<boolean> {
+  await ensureAssistChatTables(pool);
+  const r = await pool.query(
+    `DELETE FROM siya_assist_threads
+     WHERE id = $1 AND user_id = $2`,
+    [threadId, userId],
+  );
+  return (r.rowCount ?? 0) > 0;
+}
+
 export async function listAssistMessages(
   pool: pg.Pool,
   userId: string,

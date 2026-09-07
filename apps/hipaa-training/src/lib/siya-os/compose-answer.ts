@@ -88,10 +88,29 @@ export function answerGapContributionFollowUp(): string {
   ].join("\n");
 }
 
+/**
+ * Short continuer on the same thread topic (“more?”, “go on”) — not a new SOP lookup.
+ * Reuse the prior user question for retrieval instead of soft-stopping / auto-gap.
+ */
+export function isShortTopicContinue(text: string): boolean {
+  const t = text
+    .trim()
+    .toLowerCase()
+    .replace(/[’‘]/g, "'")
+    .replace(/[.!?]+$/g, "")
+    .replace(/\s+/g, " ");
+  if (!t || t.length > 48) return false;
+  if (/^(more|and|continue|go on|keep going|carry on|proceed)\??$/.test(t)) return true;
+  if (/^(tell me more|any(thing| more)? else|what else|and then|go ahead)\??$/.test(t)) return true;
+  if (/^(can you )?(say|tell|explain|give) more\??$/.test(t)) return true;
+  return false;
+}
+
 /** Clarifying / exception follow-up on the same topic (e.g. “what if the number is unreachable?”). */
 export function isClarifyingFollowUp(text: string): boolean {
   const t = text.trim();
   if (!t || t.length > 220) return false;
+  if (isShortTopicContinue(t)) return true;
   if (
     /^(what if|what about|and if|but what if|how about if|if (the|they|it|that)|suppose|in case)\b/i.test(
       t,
@@ -106,6 +125,17 @@ export function isClarifyingFollowUp(text: string): boolean {
     return true;
   }
   return false;
+}
+
+/**
+ * Soft-stop clarifiers should not auto-email as “missing SOP” unless the ask named a
+ * concrete process (tokens beyond siya/health/sop/policy noise).
+ */
+export function isSpecificEnoughForGapCapture(text: string): boolean {
+  const tokens = tokenizeForSearch(text).filter(
+    (t) => t.length > 2 && !CLARIFY_GENERIC.has(t) && !VAGUE_ONLY.has(t),
+  );
+  return tokens.length >= 2;
 }
 
 const SOFT_STOP_MARK =
@@ -124,6 +154,16 @@ export function answerFromPriorAssistIfCovered(
   if (!user || !prior || prior.length < 120) return null;
   if (SOFT_STOP_MARK.test(prior)) return null;
   if (!isClarifyingFollowUp(user)) return null;
+
+  // “more?” after a real answer — restating beats soft-stop / gap email.
+  if (isShortTopicContinue(user)) {
+    const clipped = prior.length > 1400 ? `${prior.slice(0, 1400).trim()}…` : prior;
+    return [
+      "Here’s that path again — say which step you want more detail on (or ask a specific follow-up).",
+      "",
+      clipped,
+    ].join("\n");
+  }
 
   const userTokens = new Set(
     tokenizeForSearch(user).filter((t) => t.length > 2 && !VAGUE_ONLY.has(t)),
@@ -393,6 +433,26 @@ export function abusivePatientAnswer(): string {
   ].join("\n");
 }
 
+/**
+ * MA workflow for emergency / red-flag patient symptoms (not clinical advice).
+ * Prefer retrieved KB topic when present; this is the rule-final fallback.
+ */
+export function patientEmergencyAnswer(): string {
+  return [
+    "**Patient emergency / red-flag symptoms** (chest pain, can’t breathe, stroke/heart-attack language, life-threatening concerns, suicidality) — workflow only, not a diagnosis:",
+    "",
+    "1. **Stop the routine thread** — this is not billing/scheduling FAQ time.",
+    "2. **Tell the patient (approved):** *“If this feels urgent and you can’t wait for a doctor’s reply, please go to urgent care or the ER, or call 911.”* If danger is immediate: *call 911 / local emergency now.*",
+    "3. **Do not** triage “is it anxiety or a heart attack,” dose, or promise a fast provider reply.",
+    "4. **Escalate to the provider / clinical lead immediately** and flag emergency / red-flag.",
+    "5. **Document** in the clinical system (what they said, what you told them, who you looped) — **no PHI in Ask.**",
+    "",
+    "**Chest pain + anxiety:** same redirect — MAs don’t decide it’s “only anxiety.” Empathy yes; clinical reassurance no.",
+    "",
+    "Guide: **Patient emergency / red-flag symptoms — MA chat & phone script** · related: portal chat clinical → provider immediately.",
+  ].join("\n");
+}
+
 const LIVE_ABUSIVE_PATIENT_SOP_ID = "sop-1786241888864-djh6i5";
 
 /** Prefer the reviewed live Postgres SOP over the hardcoded fallback. */
@@ -482,11 +542,13 @@ function formatPrimaryAnswer(
   const socialQuery =
     flowId === "marketing-carousel" ||
     flowId === "marketing-daily" ||
-    /\b(instagram|linkedin|facebook|tiktok|social\s+media|social\s+post|carousel|caption|patient-facing\s+post)\b/i.test(
+    /\b(instagram|linkedin|facebook|tiktok|social\s+media|social\s+post|carousel|caption|patient-facing\s+post|content\s+creation|design\s+ideas?)\b/i.test(
       userMessage,
     ) ||
     (/\bposts?\b/i.test(userMessage) &&
-      /\b(social|instagram|linkedin|facebook|tiktok|draft|caption|publish|editorial)\b/i.test(userMessage));
+      /\b(social|instagram|linkedin|facebook|tiktok|draft|caption|publish|editorial|design|ideas?)\b/i.test(
+        userMessage,
+      ));
 
   if (socialQuery && (primary.id === "content-qa-checklist" || primary.id === "marketing-staff-daily-help")) {
     return formatSocialPostAnswer();
@@ -502,6 +564,22 @@ function formatPrimaryAnswer(
       "4. **Big campaigns or ad plans** — owned by leadership/CMO; I won't invent a strategy deck for you.",
       "",
       "If you tell me whether you're drafting a post, checking compliance, or asking about brand voice, I can narrow this down.",
+    ];
+  }
+
+  if (primary.id === "brand-entities-voice") {
+    return [
+      "**Company voice & entities** (canonical):",
+      "",
+      "• **Siya Health Inc.** — administrative / non-clinical support.",
+      "• **Siya Healthcare, PLLC** — medical services via licensed clinicians.",
+      "• Position as **physician-led telehealth for adults** — not a membership marketplace or med vending.",
+      "• Education hub for patients: **Health Guides** on the public site (`/answers`).",
+      "• Pricing, states, and CTAs: use **SIYA-STANDARDS** (Marketing / Brand) — don’t guess numbers here.",
+      "",
+      "Avoid “psychiatry practice”; say physician-led telehealth. Company voice is default for social unless leadership asks for an approved physician profile post.",
+      "",
+      "Open **Memory** for this guide, or ask Marketing lead (CMO) for Brand System / Visual OS files.",
     ];
   }
 

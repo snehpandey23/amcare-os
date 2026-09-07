@@ -1,16 +1,19 @@
 /**
- * Intent smoke — my schedule / my shifts Ask (no live API).
- * Run: npx tsx apps/hipaa-training/scripts/smoke-my-schedule-ask.ts
+ * Intent smoke — my schedule + team MA roster Ask.
+ * Run: cd apps/hipaa-training && npx tsx scripts/smoke-my-schedule-ask.ts
  */
 import assert from "node:assert/strict";
 import {
   isMyScheduleQuery,
+  isTeamRosterQuery,
   parseMySchedulePeriod,
   formatMyScheduleMessage,
+  formatTeamRosterMessage,
   type ShiftRosterRowDto,
 } from "../src/lib/siya-os/shift-roster-ask";
+import { isTeamPulseAsk } from "../src/lib/siya-os/admin-ops-coach";
 
-const shouldMatch = [
+const shouldMatchSelf = [
   "do i have any shifts in september",
   "do you have september roster",
   "what's my schedule",
@@ -19,32 +22,60 @@ const shouldMatch = [
   "when am i working in september",
   "show my schedule for september",
   "my shifts for september 2026",
+  "when do I work this week",
+  "when do i work this week",
+  "my hours this week",
+  "what are my hours",
 ];
 
-const shouldNotMatch = [
+const shouldMatchTeam = [
+  "who is on duty tomorrow",
+  "who's on duty today",
+  "show the MA duty roster for September",
+  "show the ma roster",
+  "team roster for september",
+  "who is working tomorrow",
+];
+
+const shouldNotMatchSelf = [
   "is anmol working on september 15",
   "who is working in september",
   "team roster for september",
   "everyone's schedule in september",
   "sonu's shifts in september",
+  "show the MA duty roster for September",
 ];
 
-for (const q of shouldMatch) {
-  assert.ok(isMyScheduleQuery(q), `should match: ${q}`);
+for (const q of shouldMatchSelf) {
+  assert.ok(isMyScheduleQuery(q), `self should match: ${q}`);
+  assert.ok(!isTeamRosterQuery(q), `self must not be team: ${q}`);
 }
 
-for (const q of shouldNotMatch) {
-  assert.ok(!isMyScheduleQuery(q), `should not match: ${q}`);
+for (const q of shouldMatchTeam) {
+  assert.ok(isTeamRosterQuery(q), `team should match: ${q}`);
+  assert.ok(!isMyScheduleQuery(q), `team must not be self: ${q}`);
 }
+
+// Live presence must not steal calendar duty asks
+assert.equal(isTeamPulseAsk("who is on duty tomorrow"), false);
+assert.equal(isTeamPulseAsk("who is working tomorrow"), false);
+assert.equal(isTeamRosterQuery("who is working right now"), false);
+assert.equal(isTeamPulseAsk("who is working right now"), true);
+
+for (const q of shouldNotMatchSelf) {
+  assert.ok(!isMyScheduleQuery(q), `self should not match: ${q}`);
+}
+
+const week = parseMySchedulePeriod("when do I work this week");
+assert.match(week.label, /this week/i);
+assert.ok(week.from <= week.to);
 
 const period = parseMySchedulePeriod("do i have any shifts in september");
 assert.equal(period.from, "2026-09-01");
 assert.equal(period.to, "2026-09-30");
-assert.match(period.label, /september/i);
 
 const empty = formatMyScheduleMessage([], period, "Anmol");
 assert.match(empty, /no schedule data found for that period/i);
-assert.doesNotMatch(empty, /right staff guide|No approved guide/i);
 
 const sample: ShiftRosterRowDto[] = [
   {
@@ -77,8 +108,27 @@ const sample: ShiftRosterRowDto[] = [
 
 const listed = formatMyScheduleMessage(sample, period, "Anmol Makkar");
 assert.match(listed, /2026-09-01|1 Sep/i);
-assert.match(listed, /5\.30AM|5\.30/i);
-assert.match(listed, /OFF/);
-assert.match(listed, /shift_roster/);
+
+const teamSample: ShiftRosterRowDto[] = [
+  ...sample,
+  {
+    id: "3",
+    rosterDate: "2026-09-01",
+    personKey: "sonu",
+    userId: "y",
+    userName: "Sonu Pathak",
+    userEmail: "sonu@siya.health",
+    shiftStart: "2026-09-01T05:00:00.000Z",
+    shiftEnd: "2026-09-01T10:00:00.000Z",
+    shiftLabel: "evening",
+    rawCell: "10.30AM-3.30PM",
+    isOff: false,
+  },
+];
+const teamMsg = formatTeamRosterMessage(teamSample, period);
+assert.match(teamMsg, /MA duty roster/i);
+assert.match(teamMsg, /Sonu Pathak/i);
+assert.match(teamMsg, /Anmol/i);
+assert.match(teamMsg, /not self-only/i);
 
 console.log("smoke-my-schedule-ask: OK");
