@@ -5,11 +5,12 @@ import { useSpeechCapture } from "@/lib/use-speech-capture";
 import { cancelSpeech, isTextToSpeechSupported, speakText } from "@/lib/text-to-speech";
 import { buildTalkModeSpokenText } from "@/lib/talk-mode-utterance";
 import { isSpeechToTextSupported } from "@/lib/speech-to-text";
-import { isConfirmNo, isConfirmYes, type PendingVoiceAction } from "@/lib/voice-actions";
+import { evaluateConfirmUtterance, type PendingVoiceAction } from "@/lib/voice-actions";
 import { TalkVoicePicker } from "@/components/siya/TalkVoicePicker";
 import { loadLocalPortalProfile, saveLocalPortalProfile } from "@/lib/portal-profile";
 import { persistPortalProfile } from "@/lib/portal-profile-api";
 import { useAuth } from "@/context/AuthContext";
+import { startWavCapture, type WavCapture } from "@/lib/talk-wav-capture";
 
 export type TalkTranscriptLine = {
   id: string;
@@ -29,7 +30,10 @@ type Props = {
   loading: boolean;
   pendingVoice: PendingVoiceAction | null;
   disabled?: boolean;
-  onUtterance: (text: string) => void | Promise<void>;
+  onUtterance: (
+    text: string,
+    meta?: { confidence?: number | null; source?: "voice" | "button" },
+  ) => void | Promise<void>;
 };
 
 const PHASE_COPY: Record<TalkPhase, { title: string; hint: string }> = {
@@ -51,12 +55,18 @@ const PHASE_COPY: Record<TalkPhase, { title: string; hint: string }> = {
   },
   awaiting_confirm: {
     title: "Confirm action",
-    hint: "I’ll listen for yes or no after the readback — or tap Yes / No below. Nothing runs until you confirm.",
+    hint: "Say exactly yes or no (or tap the buttons). Vague words like ok/sure won’t run the action.",
   },
 };
 
+type CloudDraft = {
+  transcript: string;
+  provider: string;
+  note?: string;
+};
+
 export function TalkModeView({ messages, loading, pendingVoice, disabled, onUtterance }: Props) {
-  const { user } = useAuth();
+  const { user, token } = useAuth();
   const speech = useSpeechCapture();
   const [speaking, setSpeaking] = useState(false);
   const [ttsSupported, setTtsSupported] = useState(false);
@@ -76,6 +86,26 @@ export function TalkModeView({ messages, loading, pendingVoice, disabled, onUtte
   speechStopRef.current = speech.stop;
   const speechAbortRef = useRef(speech.abort);
   speechAbortRef.current = speech.abort;
+  const cloudCapRef = useRef<WavCapture | null>(null);
+  const [cloudRecording, setCloudRecording] = useState(false);
+  const [cloudBusy, setCloudBusy] = useState(false);
+  const [cloudError, setCloudError] = useState<string | null>(null);
+  const [cloudDraft, setCloudDraft] = useState<CloudDraft | null>(null);
+
+  useEffect(() => {
+    return () => {
+      cloudCapRef.current?.abort();
+      cloudCapRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!pendingVoice) return;
+    cloudCapRef.current?.abort();
+    cloudCapRef.current = null;
+    setCloudRecording(false);
+    setCloudDraft(null);
+  }, [pendingVoice]);
 
   useEffect(() => {
     setTtsSupported(isTextToSpeechSupported());
@@ -111,10 +141,11 @@ export function TalkModeView({ messages, loading, pendingVoice, disabled, onUtte
     const text = speech.finalText.trim();
     if (text) {
       confirmAutoSubmitRef.current = false;
+      const confidence = speech.finalConfidence;
       speech.clear();
-      void onUtteranceRef.current(text);
+      void onUtteranceRef.current(text, { confidence, source: "voice" });
     }
-  }, [speech.listening, speech.finalText, speech.clear]);
+  }, [speech.listening, speech.finalText, speech.finalConfidence, speech.clear]);
 
   // Speak new assistant lines (incl. confirm readbacks). After a confirm readback, auto-listen for yes/no.
   useEffect(() => {
@@ -149,16 +180,20 @@ export function TalkModeView({ messages, loading, pendingVoice, disabled, onUtte
     });
   }, [messages, loading, speech.listening]);
 
-  // While confirming and listening, auto-submit a clear yes/no (no second mic tap).
+  // While confirming and listening, auto-stop only on a gate-clear yes/no (exact phrase + confidence).
   useEffect(() => {
     if (!pendingVoice || !speech.listening || confirmAutoSubmitRef.current) return;
-    // Prefer finals only — interim "yes" can vanish if we stop before isFinal.
     const candidate = speech.finalText.trim();
     if (!candidate) return;
-    if (!isConfirmYes(candidate) && !isConfirmNo(candidate)) return;
+    const verdict = evaluateConfirmUtterance(candidate, {
+      action: pendingVoice,
+      confidence: speech.finalConfidence,
+      source: "voice",
+    });
+    if (verdict.decision !== "yes" && verdict.decision !== "no") return;
     confirmAutoSubmitRef.current = true;
     speechStopRef.current();
-  }, [pendingVoice, speech.listening, speech.finalText]);
+  }, [pendingVoice, speech.listening, speech.finalText, speech.finalConfidence]);
 
   // Reset auto-submit latch when the pending action changes.
   useEffect(() => {
@@ -197,6 +232,77 @@ export function TalkModeView({ messages, loading, pendingVoice, disabled, onUtte
     speech.start();
   }, [disabled, loading, speech]);
 
+  const stopCloudListen = useCallback(async () => {
+    const cap = cloudCapRef.current;
+    cloudCapRef.current = null;
+    setCloudRecording(false);
+    if (!cap) return;
+    setCloudBusy(true);
+    setCloudError(null);
+    try {
+      const wav = await cap.stop();
+      if (pendingVoiceRef.current) {
+        setCloudError("Confirm is still the browser mic — cloud listen won’t send a yes/no.");
+        return;
+      }
+      const headers: Record<string, string> = {};
+      if (token) headers.Authorization = `Bearer ${token}`;
+      const body = new FormData();
+      body.append("file", wav, "turn.wav");
+      const res = await fetch("/api/talk/cloud-stt", { method: "POST", headers, body });
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        transcript?: string;
+        provider?: string;
+        fallbackReason?: string;
+        sarvamTranscript?: string;
+        error?: string;
+      };
+      if (!res.ok || !data.ok || !data.transcript?.trim()) {
+        setCloudError(data.error || "Cloud listen didn’t return a transcript. Nothing was sent.");
+        return;
+      }
+      const note = data.fallbackReason
+        ? `Fallback (${data.fallbackReason})${data.sarvamTranscript ? ` — Sarvam heard “${data.sarvamTranscript}”` : ""}`
+        : data.provider || "sarvam";
+      setCloudDraft({
+        transcript: data.transcript.trim(),
+        provider: data.provider || "sarvam",
+        note,
+      });
+    } catch (err) {
+      setCloudError(err instanceof Error ? err.message : "Cloud listen failed. Nothing was sent.");
+    } finally {
+      setCloudBusy(false);
+    }
+  }, [token]);
+
+  const toggleCloudListen = useCallback(() => {
+    if (disabled || loading || pendingVoiceRef.current || speech.listening) return;
+    if (cloudRecording) {
+      void stopCloudListen();
+      return;
+    }
+    setCloudDraft(null);
+    setCloudError(null);
+    void startWavCapture()
+      .then((cap) => {
+        cloudCapRef.current = cap;
+        setCloudRecording(true);
+      })
+      .catch((err: unknown) => {
+        setCloudError(err instanceof Error ? err.message : "Microphone permission denied.");
+      });
+  }, [cloudRecording, disabled, loading, speech.listening, stopCloudListen]);
+
+  const sendCloudDraft = useCallback(() => {
+    const draft = cloudDraft;
+    if (!draft || pendingVoiceRef.current || disabled || loading) return;
+    setCloudDraft(null);
+    // Explicit button — still not a confirm. Confirm stays on the browser path.
+    void onUtterance(draft.transcript, { source: "button", confidence: 1 });
+  }, [cloudDraft, disabled, loading, onUtterance]);
+
   const confirmChoice = useCallback(
     (choice: "yes" | "no") => {
       if (disabled || loading || !pendingVoice) return;
@@ -204,7 +310,7 @@ export function TalkModeView({ messages, loading, pendingVoice, disabled, onUtte
       setSpeaking(false);
       speechAbortRef.current();
       confirmAutoSubmitRef.current = false;
-      void onUtterance(choice);
+      void onUtterance(choice, { source: "button", confidence: 1 });
     },
     [disabled, loading, pendingVoice, onUtterance],
   );
@@ -320,6 +426,57 @@ export function TalkModeView({ messages, loading, pendingVoice, disabled, onUtte
               ? "Or tap mic to say yes / no"
               : "Tap to talk"}
         </p>
+
+        <button
+          type="button"
+          data-talk-cloud-stt="true"
+          disabled={disabled || loading || !!pendingVoice || speech.listening || cloudBusy}
+          onClick={toggleCloudListen}
+          className="mt-3 rounded-full border border-[var(--siya-border)] bg-[var(--siya-white)] px-3 py-1.5 text-[11px] font-semibold text-[var(--siya-text-secondary)] hover:bg-[var(--siya-bg-page)] disabled:opacity-40"
+        >
+          {cloudRecording ? "Stop cloud listen" : cloudBusy ? "Transcribing…" : "Cloud listen (Sarvam prototype)"}
+        </button>
+        <p className="mt-1 max-w-sm text-center text-[10px] text-[var(--siya-text-muted)]">
+          Prototype only — default mic stays browser speech. Nothing runs until you send the transcript below.
+        </p>
+
+        {cloudDraft ? (
+          <div
+            className="mt-3 w-full max-w-md rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] px-3 py-3 text-sm"
+            data-talk-cloud-draft="true"
+            role="status"
+          >
+            <p className="text-[10px] font-bold uppercase tracking-wide text-[var(--siya-text-muted)]">
+              Transcript — not sent
+            </p>
+            <p className="mt-1 whitespace-pre-wrap leading-relaxed text-[var(--siya-text)]">“{cloudDraft.transcript}”</p>
+            <p className="mt-1 text-[10px] text-[var(--siya-text-muted)]">{cloudDraft.note}</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <button
+                type="button"
+                data-talk-cloud-send="true"
+                disabled={disabled || loading || !!pendingVoice}
+                className="rounded-lg bg-[var(--siya-primary)] px-3 py-1.5 text-xs font-semibold text-white disabled:opacity-40"
+                onClick={sendCloudDraft}
+              >
+                Send this transcript
+              </button>
+              <button
+                type="button"
+                className="rounded-lg border border-[var(--siya-border)] px-3 py-1.5 text-xs font-semibold text-[var(--siya-text)]"
+                onClick={() => setCloudDraft(null)}
+              >
+                Discard
+              </button>
+            </div>
+          </div>
+        ) : null}
+
+        {cloudError ? (
+          <p className="mt-2 max-w-md text-center text-xs text-red-700" role="alert">
+            {cloudError}
+          </p>
+        ) : null}
         {!ttsSupported ? (
           <p className="mt-2 text-[11px] text-[var(--siya-text-muted)]">
             Text-to-speech unavailable — answers still show in the transcript.
@@ -350,8 +507,8 @@ export function TalkModeView({ messages, loading, pendingVoice, disabled, onUtte
                 <span className="font-semibold text-[var(--siya-text-muted)]">
                   {m.confirmPrompt ? "Confirm · " : m.role === "user" ? "You · " : "Siya · "}
                 </span>
-                {m.content.slice(0, 280)}
-                {m.content.length > 280 ? "…" : ""}
+                {m.content.replace(/\[\[detail\]\][\s\S]*?\[\[\/detail\]\]/g, "").replace(/\s+/g, " ").trim().slice(0, 280)}
+                {m.content.replace(/\[\[detail\]\][\s\S]*?\[\[\/detail\]\]/g, "").trim().length > 280 ? "…" : ""}
               </li>
             ))}
           </ul>

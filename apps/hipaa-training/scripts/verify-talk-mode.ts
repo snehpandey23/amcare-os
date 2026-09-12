@@ -139,6 +139,8 @@ assert.equal(stripForSpeech("**Hello** world"), "Hello world");
 
 assert.equal(isConfirmYes("yes"), true);
 assert.equal(isConfirmYes("go ahead"), true);
+assert.equal(isConfirmYes("ok"), false);
+assert.equal(isConfirmYes("sure"), false);
 assert.equal(isConfirmNo("no"), true);
 assert.equal(isConfirmYes("mark task done"), false);
 console.log("OK yes/no gate helpers");

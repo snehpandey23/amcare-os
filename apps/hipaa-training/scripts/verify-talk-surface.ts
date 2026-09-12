@@ -9,6 +9,7 @@ import { isSpeechToTextSupported, getSpeechRecognitionCtor } from "../src/lib/sp
 import { isTextToSpeechSupported } from "../src/lib/text-to-speech";
 import { buildTalkModeSpokenText } from "../src/lib/talk-mode-utterance";
 import {
+  evaluateConfirmUtterance,
   isConfirmYes,
   resolveVoiceActionCommand,
 } from "../src/lib/voice-actions";
@@ -35,8 +36,17 @@ console.log("OK Talk gated on STT (not TTS-only silent toggle)");
   const r = resolveVoiceActionCommand("start my shift", { tasks: [], people: [] });
   assert.equal(r.status, "pending_confirm");
   assert.equal(isConfirmYes("yes"), true);
+  assert.equal(isConfirmYes("ok"), false);
   assert.equal(isConfirmYes("start my shift"), false);
-  console.log("OK confirm-before-execute still mandatory");
+  if (r.status === "pending_confirm") {
+    const garbled = evaluateConfirmUtterance("ok india.com is my basic email ID", {
+      action: r.action,
+      confidence: 0.99,
+      source: "voice",
+    });
+    assert.equal(garbled.decision, "unclear");
+  }
+  console.log("OK confirm-before-execute still mandatory + garbled ok blocked");
 }
 
 {

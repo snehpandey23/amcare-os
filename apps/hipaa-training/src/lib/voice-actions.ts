@@ -43,14 +43,147 @@ function norm(s: string): string {
     .replace(/\s+/g, " ");
 }
 
+/** Minimum STT confidence for voice confirm when the browser reports a real score. */
+export const CONFIRM_STT_MIN_CONFIDENCE = 0.75;
+
+/**
+ * Closed yes phrases — entire utterance must match (not a prefix in longer garble).
+ * Deliberately excludes ok / okay / sure (common in garbled STT).
+ */
+const CONFIRM_YES_EXACT = new Set([
+  "yes",
+  "yeah",
+  "yep",
+  "yup",
+  "confirm",
+  "do it",
+  "go ahead",
+  "correct",
+  "thats right",
+  "that's right",
+]);
+
+const CONFIRM_NO_EXACT = new Set([
+  "no",
+  "nope",
+  "cancel",
+  "stop",
+  "never mind",
+  "nevermind",
+  "dont",
+  "don't",
+  "do not",
+  "abort",
+]);
+
+export type ConfirmUtteranceSource = "voice" | "button";
+
+export type ConfirmDecision =
+  | { decision: "yes" }
+  | { decision: "no" }
+  | {
+      decision: "unclear";
+      reason: "low_confidence" | "not_exact" | "garbled";
+      message: string;
+    };
+
+const CONFIRM_UNCLEAR_MSG =
+  "I didn’t catch that clearly — please confirm again. Say **yes** or **no**, or tap Yes / No below. Nothing was changed.";
+
+function actionAnchorTokens(action: PendingVoiceAction): string[] {
+  if (action.kind === "start_shift") {
+    return ["shift", "start", "begin", action.workShift];
+  }
+  if (action.kind === "mark_task_done") {
+    const titleBits = norm(action.taskTitle)
+      .split(" ")
+      .filter((w) => w.length > 2)
+      .slice(0, 6);
+    return ["done", "complete", "completed", "finish", "task", ...titleBits];
+  }
+  const titleBits = norm(action.taskTitle)
+    .split(" ")
+    .filter((w) => w.length > 2)
+    .slice(0, 6);
+  const personBits = norm(action.assigneeLabel)
+    .split(" ")
+    .filter((w) => w.length > 1)
+    .slice(0, 4);
+  return ["assign", "task", ...titleBits, ...personBits];
+}
+
+/**
+ * True only when the whole utterance is a closed yes phrase (legacy helper).
+ * Prefer {@link evaluateConfirmUtterance} for Talk Mode execute gating.
+ */
 export function isConfirmYes(text: string): boolean {
-  const t = text.trim().toLowerCase();
-  return /^(yes|yeah|yep|yup|confirm|do it|go ahead|correct|that'?s right|sure|ok|okay)\b/.test(t);
+  const t = norm(text);
+  return CONFIRM_YES_EXACT.has(t);
 }
 
 export function isConfirmNo(text: string): boolean {
-  const t = text.trim().toLowerCase();
-  return /^(no|nope|cancel|stop|never\s*mind|dont|don't|abort)\b/.test(t);
+  const t = norm(text);
+  return CONFIRM_NO_EXACT.has(t);
+}
+
+/**
+ * Confirm-before-execute gate: exact phrase (or yes/no + action anchors), plus STT confidence for voice.
+ * Button source skips confidence (UI click is intentional).
+ */
+export function evaluateConfirmUtterance(
+  text: string,
+  opts: {
+    action: PendingVoiceAction;
+    confidence?: number | null;
+    source?: ConfirmUtteranceSource;
+  },
+): ConfirmDecision {
+  const source = opts.source ?? "voice";
+  const t = norm(text);
+  if (!t) {
+    return { decision: "unclear", reason: "not_exact", message: CONFIRM_UNCLEAR_MSG };
+  }
+
+  // Voice: refuse when STT reports a real low score (ignore 0 — Chrome often returns 0/absent).
+  if (source === "voice") {
+    const c = opts.confidence;
+    if (typeof c === "number" && Number.isFinite(c) && c > 0 && c < CONFIRM_STT_MIN_CONFIDENCE) {
+      return { decision: "unclear", reason: "low_confidence", message: CONFIRM_UNCLEAR_MSG };
+    }
+  }
+
+  if (CONFIRM_YES_EXACT.has(t)) {
+    return { decision: "yes" };
+  }
+  if (CONFIRM_NO_EXACT.has(t)) {
+    return { decision: "no" };
+  }
+
+  // Anchored confirm: "yes start morning shift" / "yes mark refund done" — short, must include yes/no + action cue.
+  const words = t.split(" ").filter(Boolean);
+  if (words.length >= 2 && words.length <= 10) {
+    const head = words[0]!;
+    const rest = words.slice(1);
+    const anchors = actionAnchorTokens(opts.action);
+    const hitAnchor = rest.some((w) => anchors.some((a) => a === w || (a.length > 3 && w.includes(a))));
+    if ((head === "yes" || head === "yeah" || head === "yep" || head === "yup" || head === "confirm") && hitAnchor) {
+      // Reject if leftover looks like unrelated garble (URL-ish / email-ish).
+      if (/\b(com|www|http|email|gmail|hotmail)\b/.test(t)) {
+        return { decision: "unclear", reason: "garbled", message: CONFIRM_UNCLEAR_MSG };
+      }
+      return { decision: "yes" };
+    }
+    if ((head === "no" || head === "nope" || head === "cancel") && hitAnchor) {
+      return { decision: "no" };
+    }
+  }
+
+  // Prefix traps like "ok …", "sure …", "yes india.com …" must never execute.
+  if (/^(ok|okay|sure|yes|yeah|yep|yup)\b/.test(t) && !CONFIRM_YES_EXACT.has(t)) {
+    return { decision: "unclear", reason: "garbled", message: CONFIRM_UNCLEAR_MSG };
+  }
+
+  return { decision: "unclear", reason: "not_exact", message: CONFIRM_UNCLEAR_MSG };
 }
 
 /** Looks like one of the three Stage-2 commands (even if args are incomplete). */

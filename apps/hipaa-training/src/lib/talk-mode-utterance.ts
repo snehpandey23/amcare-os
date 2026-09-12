@@ -1,5 +1,7 @@
+import { leadForSpeech } from "./siya-os/compose-answer";
+
 /**
- * Build what Talk Mode speaks aloud — same answer as on screen, plus trust/citation context.
+ * Build what Talk Mode speaks aloud — short lead + one source, not the collapsed process.
  */
 
 export type TalkModeSpeakInput = {
@@ -39,10 +41,10 @@ export function buildTalkModeSpokenText(input: TalkModeSpeakInput): string {
     parts.push("This is from approved staff guidance.");
   }
 
-  const body = stripForSpeech(input.content || "");
+  const body = stripForSpeech(leadForSpeech(input.content || ""));
   if (body) parts.push(body);
 
-  if (input.sources?.length && !input.knowledgeGap) {
+  if (input.sources?.length && !input.knowledgeGap && !/source:/i.test(input.content || "")) {
     const titles = input.sources
       .map((s) => s.title?.trim())
       .filter(Boolean)

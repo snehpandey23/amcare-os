@@ -1,5 +1,6 @@
 /**
  * Speech recognition hook for Talk surface — surfaces real errors (permission, unsupported).
+ * Tracks final-result confidence when the browser provides it (Chrome often returns 0).
  */
 
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -23,6 +24,8 @@ export type UseSpeechCaptureResult = {
   listening: boolean;
   interimText: string;
   finalText: string;
+  /** Mean confidence of final results in this session; null if never reported / always 0. */
+  finalConfidence: number | null;
   error: SpeechCaptureError | null;
   errorDetail: string | null;
   start: () => void;
@@ -44,11 +47,14 @@ export function useSpeechCapture(): UseSpeechCaptureResult {
   const [listening, setListening] = useState(false);
   const [interimText, setInterimText] = useState("");
   const [finalText, setFinalText] = useState("");
+  const [finalConfidence, setFinalConfidence] = useState<number | null>(null);
   const [error, setError] = useState<SpeechCaptureError | null>(null);
   const [errorDetail, setErrorDetail] = useState<string | null>(null);
 
   const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
   const finalsRef = useRef("");
+  const confSumRef = useRef(0);
+  const confCountRef = useRef(0);
 
   useEffect(() => {
     setSupported(isSpeechToTextSupported());
@@ -64,8 +70,11 @@ export function useSpeechCapture(): UseSpeechCaptureResult {
 
   const clear = useCallback(() => {
     finalsRef.current = "";
+    confSumRef.current = 0;
+    confCountRef.current = 0;
     setInterimText("");
     setFinalText("");
+    setFinalConfidence(null);
     setError(null);
     setErrorDetail(null);
   }, []);
@@ -104,8 +113,11 @@ export function useSpeechCapture(): UseSpeechCaptureResult {
     }
 
     finalsRef.current = "";
+    confSumRef.current = 0;
+    confCountRef.current = 0;
     setInterimText("");
     setFinalText("");
+    setFinalConfidence(null);
     setError(null);
     setErrorDetail(null);
 
@@ -118,22 +130,30 @@ export function useSpeechCapture(): UseSpeechCaptureResult {
     recognition.onresult = (event) => {
       let interim = "";
       for (let i = event.resultIndex; i < event.results.length; i++) {
-        const piece = event.results[i]![0]!.transcript;
+        const alt = event.results[i]![0]!;
+        const piece = alt.transcript;
         if (event.results[i]!.isFinal) {
           finalsRef.current += piece;
+          const c = typeof alt.confidence === "number" ? alt.confidence : 0;
+          if (c > 0) {
+            confSumRef.current += c;
+            confCountRef.current += 1;
+          }
         } else {
           interim += piece;
         }
       }
       setFinalText(finalsRef.current.trim());
       setInterimText(interim.trim());
+      setFinalConfidence(
+        confCountRef.current > 0 ? confSumRef.current / confCountRef.current : null,
+      );
     };
 
     recognition.onerror = (ev) => {
       const code = ev?.error || "unknown";
       const mapped = mapError(code);
       if (mapped === "aborted") {
-        /* user/system abort — not a hard failure for UI */
         console.info("[talk-speech] aborted", code);
       } else {
         setError(mapped);
@@ -149,7 +169,14 @@ export function useSpeechCapture(): UseSpeechCaptureResult {
       recognitionRef.current = null;
       setFinalText(finalsRef.current.trim());
       setInterimText("");
-      console.info("[talk-speech] recognition ended", { finals: finalsRef.current.trim().slice(0, 80) });
+      setFinalConfidence(
+        confCountRef.current > 0 ? confSumRef.current / confCountRef.current : null,
+      );
+      console.info("[talk-speech] recognition ended", {
+        finals: finalsRef.current.trim().slice(0, 80),
+        confidence:
+          confCountRef.current > 0 ? confSumRef.current / confCountRef.current : null,
+      });
     };
 
     try {
@@ -172,6 +199,7 @@ export function useSpeechCapture(): UseSpeechCaptureResult {
     listening,
     interimText,
     finalText,
+    finalConfidence,
     error,
     errorDetail,
     start,

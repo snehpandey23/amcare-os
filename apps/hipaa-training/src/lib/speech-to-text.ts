@@ -19,7 +19,7 @@ type SpeechRecognitionEventLike = {
   resultIndex: number;
   results: ArrayLike<{
     isFinal: boolean;
-    0: { transcript: string };
+    0: { transcript: string; confidence?: number };
     length: number;
   }>;
 };
