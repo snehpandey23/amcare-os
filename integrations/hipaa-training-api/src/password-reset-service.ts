@@ -49,7 +49,7 @@ function staffPortalBaseUrl(): string {
   return (
     process.env.STAFF_PORTAL_URL?.trim() ||
     process.env.PORTAL_PUBLIC_URL?.trim() ||
-    "https://siya-staff-assist.vercel.app"
+    "https://www.siyahealth.net"
   ).replace(/\/$/, "");
 }
 

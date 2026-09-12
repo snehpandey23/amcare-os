@@ -11,7 +11,12 @@ import {
   type WeekdayEmailMode,
 } from "@/lib/team-weekday-email";
 
-const FEEDBACK_EOM = "https://siya-staff-assist.vercel.app/feedback#employee-of-the-month";
+const PORTAL = (
+  process.env.NEXT_PUBLIC_SIYA_ASSISTANT_URL?.trim() ||
+  process.env.NEXT_PUBLIC_SIYA_STAFF_LOGIN_URL?.trim()?.replace(/\/login\/?$/, "") ||
+  "https://www.siyahealth.net"
+).replace(/\/$/, "");
+const FEEDBACK_EOM = `${PORTAL}/feedback#employee-of-the-month`;
 
 export { filterRecipientsForMode, resolveWeekdayEmailMode };
 export type { WeekdayEmailMode };

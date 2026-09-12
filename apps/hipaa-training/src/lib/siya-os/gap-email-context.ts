@@ -6,7 +6,8 @@ import { assessStaffMessageSafety } from "@/lib/siya-os/phi-guard";
 export function staffPortalBaseUrl(): string {
   return (
     process.env.NEXT_PUBLIC_SIYA_ASSISTANT_URL?.trim() ||
-    "https://siya-staff-assist.vercel.app"
+    process.env.NEXT_PUBLIC_SIYA_STAFF_LOGIN_URL?.trim()?.replace(/\/login\/?$/, "") ||
+    "https://www.siyahealth.net"
   ).replace(/\/$/, "");
 }
 

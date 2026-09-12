@@ -3,8 +3,10 @@ import { sendTeamInviteEmail } from "@/lib/invite-email";
 
 const LOGIN_URL =
   process.env.NEXT_PUBLIC_SIYA_STAFF_LOGIN_URL?.trim() ||
-  process.env.NEXT_PUBLIC_SIYA_ASSISTANT_URL?.trim() ||
-  "https://siya-staff-assist.vercel.app/login";
+  (process.env.NEXT_PUBLIC_SIYA_ASSISTANT_URL?.trim()
+    ? `${process.env.NEXT_PUBLIC_SIYA_ASSISTANT_URL.trim().replace(/\/$/, "")}/login`
+    : "") ||
+  "https://www.siyahealth.net/login";
 
 async function requirePortalAdmin(req: Request): Promise<{ ok: true } | { ok: false; status: number; error: string }> {
   const auth = req.headers.get("authorization");

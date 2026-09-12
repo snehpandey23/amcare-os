@@ -2,14 +2,16 @@
  * Staff-facing URL for Siya Assistant (internal helpdesk).
  * Not siya.health (patients). Not siya-guide (public Guide).
  *
- * Target: https://siya-staff-assist.vercel.app (Vercel project siya-staff-assist — no DNS).
- * `siya-assistant.vercel.app` is taken by another Vercel account — do not use.
+ * Canonical: https://www.siyahealth.net
+ * Legacy bookmark host siya-staff-assist.vercel.app 301s here.
  */
-const DEFAULT_STAFF_URL = "https://siya-staff-assist.vercel.app";
+const DEFAULT_STAFF_URL = "https://www.siyahealth.net";
 
 export const SIYA_ASSISTANT_CANONICAL_URL = (
-  process.env.NEXT_PUBLIC_SIYA_ASSISTANT_URL || DEFAULT_STAFF_URL
+  process.env.NEXT_PUBLIC_SIYA_ASSISTANT_URL ||
+  process.env.NEXT_PUBLIC_SIYA_STAFF_LOGIN_URL?.replace(/\/login\/?$/, "") ||
+  DEFAULT_STAFF_URL
 ).replace(/\/$/, "");
 
-/** Deployment that works today while DNS for assist.siya.health is pending. */
-export const SIYA_ASSISTANT_FALLBACK_URL = "https://hipaa-training-eight.vercel.app";
+/** Legacy Vercel hostname — still 301s to the canonical staff URL. */
+export const SIYA_ASSISTANT_FALLBACK_URL = "https://siya-staff-assist.vercel.app";

@@ -29,7 +29,10 @@ import type { LevelUpProgress } from "@/lib/level-up/progress";
 const LOGIN_URL =
   typeof window !== "undefined"
     ? `${window.location.origin}/login`
-    : "https://siya-staff-assist.vercel.app/login";
+    : process.env.NEXT_PUBLIC_SIYA_STAFF_LOGIN_URL?.trim() ||
+      (process.env.NEXT_PUBLIC_SIYA_ASSISTANT_URL?.trim()
+        ? `${process.env.NEXT_PUBLIC_SIYA_ASSISTANT_URL.trim().replace(/\/$/, "")}/login`
+        : "https://www.siyahealth.net/login");
 
 function fmtWhen(iso: string | null | undefined): string {
   if (!iso) return "—";

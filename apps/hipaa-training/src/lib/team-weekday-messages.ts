@@ -11,7 +11,11 @@ export type WeekdayTheme =
   | "thoughtful_thursday"
   | "feedback_friday";
 
-const PORTAL = "https://siya-staff-assist.vercel.app";
+const PORTAL = (
+  process.env.NEXT_PUBLIC_SIYA_ASSISTANT_URL?.trim() ||
+  process.env.NEXT_PUBLIC_SIYA_STAFF_LOGIN_URL?.trim()?.replace(/\/login\/?$/, "") ||
+  "https://www.siyahealth.net"
+).replace(/\/$/, "");
 const PRACTICE = `${PORTAL}/learn/practice`;
 const FEEDBACK = `${PORTAL}/feedback`;
 
