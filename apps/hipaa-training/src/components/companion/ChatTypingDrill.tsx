@@ -53,6 +53,7 @@ export function ChatTypingDrill({
   onComplete,
   onAttempt,
   sandboxMode = false,
+  examMode,
 }: {
   /** Qualifying finish (accuracy ≥ 92) — awards daily XP. */
   onComplete?: (score: TypingScore) => void;
@@ -60,15 +61,32 @@ export function ChatTypingDrill({
   onAttempt?: (score: TypingScore, meta: { passageId: string }) => void;
   /** Product tour — skip personal-best persistence. */
   sandboxMode?: boolean;
+  /** Competency exam — 120s locked, no personal best, no new passage. */
+  examMode?: {
+    passage: TypingPassage;
+    onFinish: (score: TypingScore) => void;
+    /**
+     * Same remaining/total the drill uses for auto-finish (duration − elapsed).
+     * Parent HUD must not invent a second clock.
+     */
+    onTimer?: (state: {
+      remainingSec: number;
+      totalSec: number;
+      clockStarted: boolean;
+      phase: Phase;
+    }) => void;
+  };
 }) {
-  const [passage, setPassage] = useState<TypingPassage>(() => typingPassageOfDay());
-  const [duration, setDuration] = useState<TypingDurationSec>(60);
+  const [passage, setPassage] = useState<TypingPassage>(() => examMode?.passage ?? typingPassageOfDay());
+  const [duration, setDuration] = useState<TypingDurationSec>(examMode ? 120 : 60);
   const [category, setCategory] = useState<string>("all");
   const [phase, setPhase] = useState<Phase>("idle");
   const [typed, setTyped] = useState("");
   const [elapsed, setElapsed] = useState(0);
   const [score, setScore] = useState<TypingScore | null>(null);
   const [best, setBest] = useState(() => loadTypingBest());
+  /** True once the timed clock has actually started (first keystroke). */
+  const [clockStarted, setClockStarted] = useState(false);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const startRef = useRef<number | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -96,14 +114,18 @@ export function ChatTypingDrill({
       setScore(s);
       setPhase("done");
       setElapsed(sec);
-      if (!sandboxMode) {
-        saveTypingBestIfBetter(s, passage.id);
-        setBest(loadTypingBest());
+      if (examMode) {
+        examMode.onFinish(s);
+      } else {
+        if (!sandboxMode) {
+          saveTypingBestIfBetter(s, passage.id);
+          setBest(loadTypingBest());
+        }
+        onAttempt?.(s, { passageId: passage.id });
+        if (finished && s.accuracy >= 92) onComplete?.(s);
       }
-      onAttempt?.(s, { passageId: passage.id });
-      if (finished && s.accuracy >= 92) onComplete?.(s);
     },
-    [target, typed, passage.id, onComplete, onAttempt, sandboxMode],
+    [target, typed, passage.id, onComplete, onAttempt, sandboxMode, examMode],
   );
 
   const reset = useCallback(() => {
@@ -113,6 +135,7 @@ export function ChatTypingDrill({
     setTyped("");
     setScore(null);
     setElapsed(0);
+    setClockStarted(false);
     setPhase("idle");
     inputRef.current?.focus();
   }, []);
@@ -122,11 +145,13 @@ export function ChatTypingDrill({
     setTyped("");
     setScore(null);
     setElapsed(0);
-    // Timed runs: clock from Start. Full-passage: clock from first keystroke (not idle wait).
-    startRef.current = duration === 0 ? null : Date.now();
+    setClockStarted(false);
+    // Unified trigger: clock starts on first keystroke only (not on this click).
+    // Start = arm/focus so the person can finish reading before time counts.
+    startRef.current = null;
     setPhase("active");
     requestAnimationFrame(() => inputRef.current?.focus());
-  }, [duration]);
+  }, []);
 
   useEffect(() => {
     if (phase !== "active") return;
@@ -141,22 +166,43 @@ export function ChatTypingDrill({
     };
   }, [phase, duration, finish]);
 
+  const timeLeft = duration > 0 ? Math.max(0, duration - elapsed) : null;
+
+  // Report the same remainingSec the drill uses for scoring/auto-finish (not a second clock).
+  useEffect(() => {
+    const onTimer = examMode?.onTimer;
+    if (!onTimer || duration <= 0) return;
+    const remainingSec =
+      phase === "done" ? 0 : phase === "active" && clockStarted ? Math.max(0, duration - elapsed) : duration;
+    onTimer({
+      remainingSec,
+      totalSec: duration,
+      clockStarted,
+      phase,
+    });
+  }, [examMode?.onTimer, duration, elapsed, clockStarted, phase]);
+
   const onChange = (value: string) => {
+    if (phase === "done") return;
+    // First keystroke starts the clock for every entry path (Start click or type-from-idle).
     if (phase === "idle") {
       setPhase("active");
-      startRef.current = Date.now();
+      if (value.length > 0) {
+        startRef.current = Date.now();
+        setClockStarted(true);
+      }
     } else if (phase === "active" && startRef.current == null && value.length > 0) {
       startRef.current = Date.now();
+      setClockStarted(true);
     }
-    if (phase !== "active" && phase !== "idle") return;
     setTyped(value);
     if (value.length >= target.length) {
-      // Pass current value — finish() would otherwise score stale `typed` (paste / last key).
       finish(true, value);
     }
   };
 
-  const timeLeft = duration > 0 ? Math.max(0, duration - elapsed) : null;
+  /** Both exam and practice: passage is visible in idle; Start is optional arm/focus; clock = first key. */
+  const inputLocked = phase === "done";
 
   return (
     <div className="space-y-4">
@@ -165,6 +211,13 @@ export function ChatTypingDrill({
         red = fix before continuing. Aim for <strong>92%+ accuracy</strong> and steady speed — not rush with errors.
       </div>
 
+      {examMode ? (
+        <p className="text-xs text-[var(--siya-text-secondary)]">
+          Exam lock — 2 minutes, this passage only. The passage is shown before the clock runs. Read it first, then
+          click <strong>Start test</strong> or type in the box — either way the clock starts on your{" "}
+          <strong>first keystroke</strong>, not on the Start click. Does not update your practice personal best.
+        </p>
+      ) : (
       <div className="flex flex-wrap gap-2 text-xs">
         <label className="flex items-center gap-1.5">
           Time
@@ -205,6 +258,13 @@ export function ChatTypingDrill({
           </span>
         ) : null}
       </div>
+      )}
+
+      {!examMode ? (
+        <p className="text-xs text-[var(--siya-text-secondary)]">
+          Clock starts on your <strong>first keystroke</strong> (whether you click Start first or type directly).
+        </p>
+      ) : null}
 
       <div className="rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4 shadow-[var(--siya-shadow)]">
         <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
@@ -212,7 +272,13 @@ export function ChatTypingDrill({
             {passage.title} · {passage.category}
           </span>
           <span className="font-mono text-sm font-semibold text-[var(--siya-primary)]">
-            {phase === "done" ? "Done" : timeLeft !== null ? `${Math.ceil(timeLeft)}s` : "Full text"}
+            {phase === "done"
+              ? "Done"
+              : timeLeft !== null
+                ? phase === "active" && !clockStarted
+                  ? `${Math.ceil(duration)}s · waiting for first key`
+                  : `${Math.ceil(timeLeft)}s`
+                : "Full text"}
           </span>
         </div>
         <PassageView target={target} typed={typed} />
@@ -222,8 +288,14 @@ export function ChatTypingDrill({
         ref={inputRef}
         value={typed}
         onChange={(e) => onChange(e.target.value)}
-        disabled={phase === "done"}
-        placeholder={phase === "idle" ? "Click Start, then type here…" : "Type the passage…"}
+        disabled={inputLocked}
+        placeholder={
+          phase === "idle"
+            ? "Read the passage above — Start or type here; clock starts on first key…"
+            : phase === "active" && !clockStarted
+              ? "Type to start the clock…"
+              : "Type the passage…"
+        }
         rows={4}
         spellCheck={false}
         autoComplete="off"
@@ -248,10 +320,10 @@ export function ChatTypingDrill({
             onClick={() => finish(typed.length >= target.length * 0.9)}
             className="rounded-xl border border-[var(--siya-border)] px-4 py-2 text-sm font-semibold text-[var(--siya-text-secondary)] hover:bg-[var(--siya-bg-subtle)]"
           >
-            Finish early
+            {examMode ? "Submit section" : "Finish early"}
           </button>
         ) : null}
-        {phase === "done" ? (
+        {phase === "done" && !examMode ? (
           <>
             <button
               type="button"

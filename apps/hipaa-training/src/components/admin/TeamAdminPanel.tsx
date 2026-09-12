@@ -22,6 +22,7 @@ import { downloadShiftAttendanceCsv } from "@/lib/portal-analytics";
 import { portalBtnGhostSm, portalH1, portalH2, portalSection } from "@/lib/portal-ui";
 import { DepartmentLeadsSection } from "@/components/admin/DepartmentLeadsSection";
 import { WeeklyPracticeReportView } from "@/components/level-up/WeeklyPracticeReportView";
+import { ExamAttemptsPanel } from "@/components/competency-exam/ExamAttemptsPanel";
 import { buildWeeklyPracticeReport, coerceDayLedger } from "@/lib/level-up/weekly-report";
 import type { LevelUpProgress } from "@/lib/level-up/progress";
 
@@ -656,6 +657,8 @@ export function TeamAdminPanel() {
           </div>
         );
       })() : null}
+
+      <ExamAttemptsPanel />
 
       {!loading && members.length === 0 && !error ? (
         <p className="text-sm text-[var(--siya-text-muted)]">No team members yet. Invite someone to get started.</p>

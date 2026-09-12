@@ -22,6 +22,7 @@ import {
 } from "@/lib/portal-ui";
 
 const DRILL_LINKS = [
+  { label: "MA competency exam", href: "/learn/competency-exam" },
   { label: "Chat simulator", href: "/learn/chat-simulator" },
   { label: "Chat speed & accuracy", href: "/learn/practice#typing" },
   { label: "US map", href: "/learn/practice#map" },

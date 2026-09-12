@@ -2,36 +2,36 @@
   {
     "id": "doc-refill",
     "category": "documentation",
-    "title": "Refill — pharmacy",
-    "text": "Patient called stating the pharmacy has not received the prescription.",
+    "title": "Refill - pharmacy",
+    "text": "Patient called stating the pharmacy has not received the prescription yet.",
     "difficulty": "easy"
   },
   {
     "id": "doc-vm",
     "category": "documentation",
     "title": "Voicemail",
-    "text": "Called patient — no answer. Left voicemail requesting return call.",
+    "text": "Called patient - no answer. Left voicemail requesting a return call.",
     "difficulty": "easy"
   },
   {
     "id": "doc-auth",
     "category": "documentation",
     "title": "Prior auth",
-    "text": "Insurance denied prior authorization. Team will submit appeal per workflow.",
+    "text": "Insurance denied prior authorization. Team will submit the appeal per workflow.",
     "difficulty": "medium"
   },
   {
     "id": "doc-wait",
     "category": "documentation",
     "title": "Wait time",
-    "text": "Patient expressed concern about wait time. Apologized and offered callback from supervisor.",
+    "text": "Patient expressed concern about wait time. Apologized and offered a supervisor callback.",
     "difficulty": "medium"
   },
   {
     "id": "doc-portal",
     "category": "documentation",
     "title": "Portal message",
-    "text": "Portal message reviewed and routed to provider for clinical response.",
+    "text": "Portal message reviewed and routed to the provider for a clinical response.",
     "difficulty": "easy"
   },
   {
@@ -45,28 +45,28 @@
     "id": "call-chart",
     "category": "call",
     "title": "Pull chart",
-    "text": "Let me pull up your chart.",
+    "text": "One moment please - let me pull up your chart and confirm your visit details.",
     "difficulty": "easy"
   },
   {
     "id": "call-empathy",
     "category": "call",
     "title": "Empathy",
-    "text": "I hear you — I'm here to help. Can you tell me what happened?",
+    "text": "I hear you - I'm here to help. Can you tell me what happened?",
     "difficulty": "easy"
   },
   {
     "id": "email-unavail",
     "category": "email",
     "title": "Provider unavailable",
-    "text": "Good morning,\n\nDr. Smith is unavailable today. We'll contact you shortly to arrange the next available appointment.\n\nThank you for your patience.",
+    "text": "Dr. Smith is unavailable today. We will contact you shortly to arrange the next appointment.",
     "difficulty": "medium"
   },
   {
     "id": "phrase-heads-up",
     "category": "english",
     "title": "Heads up",
-    "text": "Heads up — the provider is running fifteen minutes behind today.",
+    "text": "Heads up - the provider is running fifteen minutes behind today.",
     "difficulty": "easy"
   },
   {
@@ -80,28 +80,28 @@
     "id": "phrase-touch-base",
     "category": "english",
     "title": "Touch base",
-    "text": "Let's touch base after your shift about the backlog.",
+    "text": "Let's touch base after your shift about the backlog on the schedule.",
     "difficulty": "easy"
   },
   {
     "id": "chat-portal",
     "category": "chat",
     "title": "Secure channel",
-    "text": "Please send that through the patient portal or approved secure channel — not personal email.",
+    "text": "Please send that through the patient portal or approved secure channel - not personal email.",
     "difficulty": "medium"
   },
   {
     "id": "chat-follow-up",
     "category": "chat",
     "title": "Follow-up",
-    "text": "I'll follow up tomorrow if we don't hear from billing.",
+    "text": "I'll follow up tomorrow if we don't hear back from billing by then.",
     "difficulty": "easy"
   },
   {
     "id": "chat-escalate",
     "category": "chat",
     "title": "Escalation",
-    "text": "I'll loop in the supervisor with a short summary — no patient identifiers in this thread.",
+    "text": "I'll loop in the supervisor with a short summary - no patient identifiers in this thread.",
     "difficulty": "medium"
   }
 ]

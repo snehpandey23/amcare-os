@@ -2732,6 +2732,102 @@ app.get("/api/admin/training/summary", requireAuth, requireAdmin, async (_req: A
   return res.json(r.rows);
 });
 
+/**
+ * Competency exam attempts — staff POST (own), GET mine; admin list + detail.
+ * Server is source of truth; browser may cache a copy for immediate UI.
+ */
+app.post("/api/competency-exam/attempts", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const {
+      upsertCompetencyAttempt,
+      isUuid,
+    } = await import("./competency-exam-service.js");
+    const body = (req.body || {}) as Record<string, unknown>;
+    const id = typeof body.id === "string" ? body.id : typeof body.attemptId === "string" ? body.attemptId : "";
+    const attemptType = body.attemptType === "isolated" ? "isolated" : "full";
+    const userId = req.user!.userId;
+    if (!isUuid(userId)) return res.status(400).json({ error: "Signed-in user id is invalid for persistence." });
+    const result = await upsertCompetencyAttempt(pool, {
+      id,
+      userId,
+      attemptType,
+      section: typeof body.section === "string" ? body.section : null,
+      subjectLabel: typeof body.subjectLabel === "string" ? body.subjectLabel : "",
+      startedAt: (body.startedAt as string | number | null | undefined) ?? null,
+      submittedAt: (body.submittedAt as string | number | null | undefined) ?? Date.now(),
+      pointsEarned: typeof body.pointsEarned === "number" ? body.pointsEarned : null,
+      pointsPossible: typeof body.pointsPossible === "number" ? body.pointsPossible : null,
+      sectionScore: typeof body.sectionScore === "number" ? body.sectionScore : null,
+      safetyRedFlagged: Boolean(body.safetyRedFlagged),
+      safetyJson: body.safetyJson ?? body.safety ?? {},
+      sectionsJson: body.sectionsJson ?? body.sections ?? [],
+      reportJson: body.reportJson ?? body.report ?? {},
+      hipaaItemsJson: body.hipaaItemsJson ?? body.hipaaItems ?? null,
+      writingJson: body.writingJson ?? body.writingTrail ?? null,
+      chatJson: body.chatJson ?? body.chatTrail ?? null,
+      itemIds: body.itemIds ?? [],
+      repeatedIds: body.repeatedIds ?? [],
+      contentFingerprint: typeof body.contentFingerprint === "string" ? body.contentFingerprint : null,
+    });
+    return res.json({ ok: true, id: result.id });
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    if (msg === "INVALID_USER_ID" || msg === "MISSING_ATTEMPT_ID") {
+      return res.status(400).json({ error: msg });
+    }
+    console.error("[competency-exam/attempts POST]", e);
+    return res.status(500).json({ error: "Could not save competency exam attempt." });
+  }
+});
+
+app.get("/api/competency-exam/attempts/mine", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { listCompetencyAttemptsForUser } = await import("./competency-exam-service.js");
+    const attempts = await listCompetencyAttemptsForUser(pool, req.user!.userId, 40);
+    return res.json({ attempts });
+  } catch (e) {
+    console.error("[competency-exam/attempts/mine]", e);
+    return res.status(500).json({ error: "Could not load attempts." });
+  }
+});
+
+app.get("/api/competency-exam/attempts/:id", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { getCompetencyAttempt } = await import("./competency-exam-service.js");
+    const row = await getCompetencyAttempt(pool, String(req.params.id || ""));
+    if (!row) return res.status(404).json({ error: "Attempt not found." });
+    const isAdmin = req.user!.role === "admin";
+    if (!isAdmin && row.userId !== req.user!.userId) {
+      return res.status(403).json({ error: "Forbidden." });
+    }
+    return res.json({ attempt: row });
+  } catch (e) {
+    console.error("[competency-exam/attempts/:id]", e);
+    return res.status(500).json({ error: "Could not load attempt." });
+  }
+});
+
+app.get("/api/admin/competency-exam/attempts", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { listCompetencyAttemptsForAdmin } = await import("./competency-exam-service.js");
+    const userId = typeof req.query.userId === "string" ? req.query.userId : undefined;
+    const limit = typeof req.query.limit === "string" ? Number(req.query.limit) : 100;
+    const attempts = await listCompetencyAttemptsForAdmin(pool, { userId, limit });
+    return res.json({ attempts });
+  } catch (e) {
+    console.error("[admin/competency-exam/attempts]", e);
+    return res.status(500).json({ error: "Could not load team competency attempts." });
+  }
+});
+
 app.get("/api/admin/team/roster", requireAuth, requireAdmin, async (_req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });
