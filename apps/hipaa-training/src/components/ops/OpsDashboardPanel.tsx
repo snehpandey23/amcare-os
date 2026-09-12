@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { isPortalAdmin } from "@/lib/portal-role";
@@ -55,10 +55,13 @@ function EngagementTable({
   rows,
   reportUserId,
   onToggleReport,
+  reportPanel,
 }: {
   rows: OpsEngagementRow[];
   reportUserId: string | null;
   onToggleReport: (id: string) => void;
+  /** Inline under the selected person (not below the whole table). */
+  reportPanel?: ReactNode;
 }) {
   return (
     <div className="overflow-x-auto">
@@ -76,63 +79,73 @@ function EngagementTable({
         <tbody>
           {rows.map((r) => {
             const cold = isNotEngagedYet(r);
+            const open = reportUserId === r.userId;
             return (
-              <tr
-                key={r.userId}
-                className={`border-b border-[var(--siya-border)]/60 align-top ${
-                  cold ? "bg-amber-50/80 dark:bg-amber-950/20" : ""
-                }`}
-              >
-                <td className="px-2 py-2.5">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-medium text-[var(--siya-text)]">{displayName(r)}</span>
-                    {cold ? (
-                      <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-900 dark:bg-amber-900/40 dark:text-amber-100">
-                        Quiet so far
+              <Fragment key={r.userId}>
+                <tr
+                  className={`border-b border-[var(--siya-border)]/60 align-top ${
+                    cold ? "bg-amber-50/80 dark:bg-amber-950/20" : ""
+                  }`}
+                >
+                  <td className="px-2 py-2.5">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="font-medium text-[var(--siya-text)]">{displayName(r)}</span>
+                      {cold ? (
+                        <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-900 dark:bg-amber-900/40 dark:text-amber-100">
+                          Quiet so far
+                        </span>
+                      ) : null}
+                    </div>
+                    <div className="text-[11px] text-[var(--siya-text-muted)]">{r.email}</div>
+                  </td>
+                  <td className="px-2 py-2.5 tabular-nums">{r.askTurnsLast14d}</td>
+                  <td className="px-2 py-2.5 tabular-nums">{r.askTurnsLast30d}</td>
+                  <td className="px-2 py-2.5 text-xs">{segmentLabel(r.usageSegment)}</td>
+                  <td className="px-2 py-2.5 text-xs">
+                    {r.practiceLifetime} lifetime · streak {r.streak}
+                    {(r.chatSimRedFlags ?? 0) > 0 ? (
+                      <span className="mt-0.5 block text-[10px] font-semibold text-[var(--siya-status-error-text)]">
+                        Chat sim red flags: {r.chatSimRedFlags}
                       </span>
                     ) : null}
-                  </div>
-                  <div className="text-[11px] text-[var(--siya-text-muted)]">{r.email}</div>
-                </td>
-                <td className="px-2 py-2.5 tabular-nums">{r.askTurnsLast14d}</td>
-                <td className="px-2 py-2.5 tabular-nums">{r.askTurnsLast30d}</td>
-                <td className="px-2 py-2.5 text-xs">{segmentLabel(r.usageSegment)}</td>
-                <td className="px-2 py-2.5 text-xs">
-                  {r.practiceLifetime} lifetime · streak {r.streak}
-                  {(r.chatSimRedFlags ?? 0) > 0 ? (
-                    <span className="mt-0.5 block text-[10px] font-semibold text-[var(--siya-status-error-text)]">
-                      Chat sim red flags: {r.chatSimRedFlags}
-                    </span>
-                  ) : null}
-                  {r.lastActiveDate ? (
-                    <span className="block text-[10px] text-[var(--siya-text-muted)]">
-                      Last active {r.lastActiveDate}
-                    </span>
-                  ) : null}
-                </td>
-                <td className="px-2 py-2.5 text-xs">
-                  {r.practiceShareThisWeek.optedInShared ? (
-                    <span>
-                      Opted in ({r.practiceShareThisWeek.drillDaysShared}d shared /{" "}
-                      {r.practiceShareThisWeek.drillDaysActive}d active)
-                    </span>
-                  ) : (
-                    <span className="text-[var(--siya-text-muted)]">
-                      Not sharing
-                      {r.practiceShareThisWeek.drillDaysActive > 0
-                        ? ` (${r.practiceShareThisWeek.drillDaysActive}d active)`
-                        : ""}
-                    </span>
-                  )}
-                  <button
-                    type="button"
-                    className="mt-1 block text-[10px] font-semibold text-[var(--siya-accent)] underline"
-                    onClick={() => onToggleReport(r.userId)}
-                  >
-                    {reportUserId === r.userId ? "Hide weekly report" : "Weekly practice report"}
-                  </button>
-                </td>
-              </tr>
+                    {r.lastActiveDate ? (
+                      <span className="block text-[10px] text-[var(--siya-text-muted)]">
+                        Last active {r.lastActiveDate}
+                      </span>
+                    ) : null}
+                  </td>
+                  <td className="px-2 py-2.5 text-xs">
+                    {r.practiceShareThisWeek.optedInShared ? (
+                      <span>
+                        Opted in ({r.practiceShareThisWeek.drillDaysShared}d shared /{" "}
+                        {r.practiceShareThisWeek.drillDaysActive}d active)
+                      </span>
+                    ) : (
+                      <span className="text-[var(--siya-text-muted)]">
+                        Not sharing
+                        {r.practiceShareThisWeek.drillDaysActive > 0
+                          ? ` (${r.practiceShareThisWeek.drillDaysActive}d active)`
+                          : ""}
+                      </span>
+                    )}
+                    <button
+                      type="button"
+                      className="mt-1 block text-[10px] font-semibold text-[var(--siya-accent)] underline"
+                      onClick={() => onToggleReport(r.userId)}
+                      aria-expanded={open}
+                    >
+                      {open ? "Hide weekly report" : "Weekly practice report"}
+                    </button>
+                  </td>
+                </tr>
+                {open && reportPanel ? (
+                  <tr className="border-b border-[var(--siya-border)]/60 bg-[var(--siya-bg-page)]/50">
+                    <td colSpan={6} className="px-2 py-3" id={`ops-weekly-report-${r.userId}`}>
+                      {reportPanel}
+                    </td>
+                  </tr>
+                ) : null}
+              </Fragment>
             );
           })}
         </tbody>
@@ -507,6 +520,12 @@ export function OpsDashboardPanel() {
     void load();
   }, [authReady, user, router, load]);
 
+  useEffect(() => {
+    if (!reportUserId) return;
+    const el = document.getElementById(`ops-weekly-report-${reportUserId}`);
+    el?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [reportUserId]);
+
   const engagementView = useMemo(() => {
     if (!data?.engagement) return null;
     return filterEngagementRows(data.engagement, showTestAccounts);
@@ -737,29 +756,31 @@ export function OpsDashboardPanel() {
                         rows={engagementView.visible}
                         reportUserId={reportUserId}
                         onToggleReport={(id) => setReportUserId((cur) => (cur === id ? null : id))}
+                        reportPanel={
+                          reportRow
+                            ? (() => {
+                                const progress: LevelUpProgress = {
+                                  streak: reportRow.streak,
+                                  lastActiveDate: reportRow.lastActiveDate,
+                                  completedToday: [],
+                                  totalXp: reportRow.totalXp,
+                                  dayLedger: coerceDayLedger(reportRow.dayLedger),
+                                };
+                                const report = buildWeeklyPracticeReport(progress, {
+                                  subjectLabel: displayName(reportRow),
+                                });
+                                return (
+                                  <div>
+                                    <p className="mb-2 text-xs text-[var(--siya-text-muted)]">
+                                      Same weekly practice summary as Learn.
+                                    </p>
+                                    <WeeklyPracticeReportView report={report} />
+                                  </div>
+                                );
+                              })()
+                            : null
+                        }
                       />
-                      {reportRow
-                        ? (() => {
-                            const progress: LevelUpProgress = {
-                              streak: reportRow.streak,
-                              lastActiveDate: reportRow.lastActiveDate,
-                              completedToday: [],
-                              totalXp: reportRow.totalXp,
-                              dayLedger: coerceDayLedger(reportRow.dayLedger),
-                            };
-                            const report = buildWeeklyPracticeReport(progress, {
-                              subjectLabel: displayName(reportRow),
-                            });
-                            return (
-                              <div className="mt-4">
-                                <p className="mb-2 text-xs text-[var(--siya-text-muted)]">
-                                  Same weekly practice summary as Learn.
-                                </p>
-                                <WeeklyPracticeReportView report={report} />
-                              </div>
-                            );
-                          })()
-                        : null}
                     </>
                   )}
                 </section>
