@@ -12,10 +12,13 @@ import { typingSectionScore } from "../src/lib/competency-exam/scoring";
 import { scoreTyping } from "../src/lib/level-up/typing-drill";
 import { recordSeen, freshDrawSeed } from "../src/lib/competency-exam/seen-set";
 import {
+  adjustEscalationScore,
   blendWritingScore,
   combineWritingPartScores,
   escalationLooksLikeAsk,
   scoreWritingPartDeterministic,
+  writingPartsSimilarity,
+  WRITING_DUPLICATE_PART_B_CAP,
 } from "../src/lib/competency-exam/writing-score";
 import { COMPETENCY_EXAM_TIMERS } from "../src/lib/competency-exam/exam-timer";
 import {
@@ -52,6 +55,11 @@ assert.match(examSrc, /writing-chart-note/);
 assert.match(examSrc, /writing-escalation/);
 assert.match(examSrc, /Message to provider/);
 assert.match(examSrc, /combineWritingPartScores/);
+assert.match(examSrc, /adjustEscalationScore/);
+assert.match(examSrc, /Write only what you&apos;d put in the patient&apos;s chart/);
+assert.match(examSrc, /make a specific ask/);
+assert.doesNotMatch(examSrc, /setWritingEscalation\(writingChartNote\)/);
+assert.doesNotMatch(examSrc, /setWritingChartNote\(writingEscalation\)/);
 assert.match(examSrc, /practice writing exercise for the MA competency exam/i);
 assert.match(examSrc, /won&apos;t count toward anything/);
 assert.match(examSrc, /chart note/);
@@ -183,10 +191,31 @@ const detA = scoreWritingPartDeterministic(chartSample, "chart");
 const detB = scoreWritingPartDeterministic(escSample, "escalation");
 assert.ok(detA.wordCount >= 20 && detB.wordCount >= 20);
 const blendA = blendWritingScore(detA.score, 80);
-const blendB = blendWritingScore(detB.score, 82);
+const blendBRaw = blendWritingScore(detB.score, 82);
+const escAdjGood = adjustEscalationScore({
+  blendedScore: blendBRaw.score,
+  chartNote: chartSample,
+  escalationText: escSample,
+});
+assert.ok(!escAdjGood.nearDuplicateOfChart);
+assert.ok(writingPartsSimilarity(chartSample, escSample) < 0.85);
+const blendB = { score: escAdjGood.score };
 const combined = combineWritingPartScores(blendA.score, blendB.score);
 assert.ok(combined.score >= 0 && combined.score <= 100);
 assert.ok(escalationLooksLikeAsk(escSample), "sample escalation includes ask");
+
+// Identical Part B must hard-cap (not ~88).
+const blendDupRaw = blendWritingScore(detA.score, 88);
+const escAdjDup = adjustEscalationScore({
+  blendedScore: blendDupRaw.score,
+  chartNote: chartSample,
+  escalationText: chartSample,
+});
+assert.equal(writingPartsSimilarity(chartSample, chartSample), 1);
+assert.ok(escAdjDup.nearDuplicateOfChart);
+assert.equal(escAdjDup.score, WRITING_DUPLICATE_PART_B_CAP);
+assert.ok(escAdjDup.score < 20, "duplicate Part B must score clearly low");
+assert.ok(escAdjGood.score > escAdjDup.score + 40, "genuine escalation must beat duplicate by a wide margin");
 
 const mem = new Map<string, string>();
 const ls = {

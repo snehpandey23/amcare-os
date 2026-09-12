@@ -17,7 +17,7 @@ import { parseExamSectionFocus } from "@/lib/competency-exam/section-focus";
 import { recordSeen, freshDrawSeed, type SeenEntry } from "@/lib/competency-exam/seen-set";
 import { loadSeen, saveAttempt, saveSeen, saveIsolatedReview, type IsolatedReviewItemResult, type IsolatedWritingTrail } from "@/lib/competency-exam/storage";
 import type { ExamReportModel, SafetyFlag, SectionResult } from "@/lib/competency-exam/types";
-import { blendWritingScore, combineWritingPartScores, escalationLooksLikeAsk, scoreWritingPartDeterministic } from "@/lib/competency-exam/writing-score";
+import { adjustEscalationScore, blendWritingScore, combineWritingPartScores, scoreWritingPartDeterministic } from "@/lib/competency-exam/writing-score";
 import { EXAM_WEIGHTS, SECTION_LABEL } from "@/lib/competency-exam/weights";
 import { ExamReportView } from "./ExamReportView";
 import { ExamCountdownHud } from "./ExamCountdownHud";
@@ -171,7 +171,11 @@ function SectionDoneCard({
                     ? " · no LLM estimate"
                     : ` · LLM estimate ${writingTrail.partB.llmEstimate}`}{" "}
                   · blended <strong>{writingTrail.partB?.blendedScore ?? "—"}/100</strong>
-                  {writingTrail.escalationHasAskHint === false ? " · ask wording weak/missing" : ""}
+                  {writingTrail.nearDuplicateOfChart
+                    ? ` · near-duplicate of chart (sim ${Math.round((writingTrail.partsSimilarity ?? 0) * 100)}%)`
+                    : writingTrail.escalationHasAskHint === false
+                      ? " · ask wording weak/missing"
+                      : ""}
                 </p>
                 <p className="text-[var(--siya-text-secondary)]">
                   Section (50/50) <strong>{writingTrail.blendedScore}/100</strong>
@@ -692,20 +696,32 @@ export function CompetencyExam() {
       fetchEstimate("escalation", writingEscalation),
     ]);
     const blendA = blendWritingScore(detA.score, llmA.estimate);
-    const blendB = blendWritingScore(detB.score, llmB.estimate);
+    const blendBRaw = blendWritingScore(detB.score, llmB.estimate);
+    const escAdj = adjustEscalationScore({
+      blendedScore: blendBRaw.score,
+      chartNote: writingChartNote,
+      escalationText: writingEscalation,
+    });
+    const blendB = { score: escAdj.score, note: `${blendBRaw.note}${escAdj.note ? ` ${escAdj.note}` : ""}`.trim() };
     const combined = combineWritingPartScores(blendA.score, blendB.score);
-    const askHint = escalationLooksLikeAsk(writingEscalation);
+    const askHint = !escAdj.missingAsk;
     const row: SectionResult = {
       id: "writing",
       label: SECTION_LABEL.writing,
       weight: EXAM_WEIGHTS.writing,
       status: "scored",
       score: combined.score,
-      note: `${combined.note} ${llmA.note} ${llmB.note}`.trim(),
+      note: `${combined.note} ${llmA.note} ${blendB.note} ${llmB.note}`.trim(),
       itemIds: [writingPrompt.id],
       repeatedIds: writingPrompt.repeated ? [writingPrompt.id] : [],
       draftContent: true,
-      detail: `Chart ${blendA.score}/100 · Escalation ${blendB.score}/100 · ${detA.wordCount + detB.wordCount} words total${askHint ? "" : " · escalation ask weak/missing"}`,
+      detail: `Chart ${blendA.score}/100 · Escalation ${blendB.score}/100 · ${detA.wordCount + detB.wordCount} words total${
+        escAdj.nearDuplicateOfChart
+          ? ` · near-duplicate Part B (sim ${Math.round(escAdj.similarity * 100)}%)`
+          : askHint
+            ? ""
+            : " · escalation ask weak/missing"
+      }`,
     };
 
     const trail: IsolatedWritingTrail = {
@@ -718,11 +734,18 @@ export function CompetencyExam() {
       escalationText: writingEscalation,
       wordCount: detA.wordCount + detB.wordCount,
       grammarScore: Math.round((detA.grammarScore + detB.grammarScore) / 2),
-      issues: [...detA.issues, ...detB.issues],
+      issues: [
+        ...detA.issues,
+        ...detB.issues,
+        ...(escAdj.nearDuplicateOfChart
+          ? [`Near-duplicate of chart note (similarity ${Math.round(escAdj.similarity * 100)}%)`]
+          : []),
+        ...(escAdj.missingAsk && !escAdj.nearDuplicateOfChart ? ["Missing explicit ask to provider"] : []),
+      ],
       llmEstimate:
         llmA.estimate == null && llmB.estimate == null
           ? null
-          : Math.round(((llmA.estimate ?? blendA.score) + (llmB.estimate ?? blendB.score)) / 2),
+          : Math.round(((llmA.estimate ?? blendA.score) + (llmB.estimate ?? blendBRaw.score)) / 2),
       blendedScore: combined.score,
       partA: {
         wordCount: detA.wordCount,
@@ -739,6 +762,8 @@ export function CompetencyExam() {
         blendedScore: blendB.score,
       },
       escalationHasAskHint: askHint,
+      partsSimilarity: escAdj.similarity,
+      nearDuplicateOfChart: escAdj.nearDuplicateOfChart,
     };
 
     if (focus === "writing") {
@@ -1110,6 +1135,10 @@ export function CompetencyExam() {
             <label className="block text-xs font-semibold text-[var(--siya-primary)]" htmlFor="writing-chart-note">
               1. Chart note
             </label>
+            <p className="rounded-lg bg-[var(--siya-bg-subtle)] px-3 py-2 text-xs text-[var(--siya-text)]">
+              Write only what you&apos;d put in the patient&apos;s chart — what was observed or reported. Do not include a
+              request to the provider here.
+            </p>
             <p className="text-xs text-[var(--siya-text-secondary)]">{writingPrompt.chartHint}</p>
             <textarea
               id="writing-chart-note"
@@ -1117,7 +1146,7 @@ export function CompetencyExam() {
               onChange={(e) => setWritingChartNote(e.target.value)}
               rows={6}
               className="w-full rounded-xl border border-[var(--siya-border)] p-3 text-sm"
-              placeholder="Document what was observed or reported…"
+              placeholder="Chart only — observations / what the patient reported…"
               data-no-voice-input="true"
             />
           </div>
@@ -1125,6 +1154,10 @@ export function CompetencyExam() {
             <label className="block text-xs font-semibold text-[var(--siya-primary)]" htmlFor="writing-escalation">
               2. Message to provider
             </label>
+            <p className="rounded-lg bg-[var(--siya-bg-subtle)] px-3 py-2 text-xs text-[var(--siya-text)]">
+              Write the message you&apos;d actually send the provider. State your concern clearly, include the key facts,
+              and make a specific ask (e.g. what you want them to do or decide).
+            </p>
             <p className="text-xs text-[var(--siya-text-secondary)]">{writingPrompt.escalationHint}</p>
             <textarea
               id="writing-escalation"
@@ -1132,7 +1165,7 @@ export function CompetencyExam() {
               onChange={(e) => setWritingEscalation(e.target.value)}
               rows={6}
               className="w-full rounded-xl border border-[var(--siya-border)] p-3 text-sm"
-              placeholder="Relay the concern and include a clear ask…"
+              placeholder="Provider message — concern + key facts + clear ask…"
               data-no-voice-input="true"
             />
           </div>

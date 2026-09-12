@@ -49,6 +49,9 @@ export type IsolatedWritingTrail = {
   partA?: IsolatedWritingPartTrail;
   partB?: IsolatedWritingPartTrail;
   escalationHasAskHint?: boolean;
+  /** Jaccard similarity chart vs escalation (0–1). */
+  partsSimilarity?: number;
+  nearDuplicateOfChart?: boolean;
 };
 
 export type IsolatedReviewAttempt = {
