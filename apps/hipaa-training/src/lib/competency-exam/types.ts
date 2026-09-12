@@ -37,12 +37,17 @@ export type WritingTrail = {
   promptId: string;
   promptTitle: string;
   promptText: string;
+  format?: "clinical-two-part" | "legacy-single";
   text: string;
+  chartNote?: string;
+  escalationText?: string;
   wordCount: number;
   grammarScore: number;
   issues: string[];
   llmEstimate: number | null;
   blendedScore: number;
+  partAScore?: number;
+  partBScore?: number;
 };
 
 export type ChatTrail = {

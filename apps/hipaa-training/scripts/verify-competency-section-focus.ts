@@ -11,13 +11,19 @@ import { drawTypingPassage, drawHipaaExam, drawWritingPrompt, HIPAA_EXAM_COUNT }
 import { typingSectionScore } from "../src/lib/competency-exam/scoring";
 import { scoreTyping } from "../src/lib/level-up/typing-drill";
 import { recordSeen, freshDrawSeed } from "../src/lib/competency-exam/seen-set";
-import { blendWritingScore, scoreWritingDeterministic } from "../src/lib/competency-exam/writing-score";
+import {
+  blendWritingScore,
+  combineWritingPartScores,
+  escalationLooksLikeAsk,
+  scoreWritingPartDeterministic,
+} from "../src/lib/competency-exam/writing-score";
 import { COMPETENCY_EXAM_TIMERS } from "../src/lib/competency-exam/exam-timer";
 import {
   saveIsolatedReview,
   getIsolatedReview,
   type IsolatedWritingTrail,
 } from "../src/lib/competency-exam/storage";
+import { WRITING_CLINICAL_PROMPTS } from "../src/content/competency-exam/writing-clinical-prompts.draft";
 import { WRITING_PROMPTS } from "../src/content/competency-exam/writing-prompts.draft";
 import passages from "../src/data/level-up/typing-passages.json";
 import { ALL_QUESTIONS } from "../src/content/questionBank";
@@ -34,15 +40,26 @@ assert.equal(examSectionReviewHref("writing"), "/learn/competency-exam?section=w
 assert.equal(passages.length, 15, "typing bank size");
 assert.equal(COMPETENCY_EXAM_TIMERS.writing, 10 * 60, "writing lock is 10 minutes");
 
-// UI must allow writing when isolated (not gated behind !isolated alone).
 const examSrc = readFileSync(join(__dirname, "../src/components/competency-exam/CompetencyExam.tsx"), "utf8");
 assert.match(examSrc, /focus === "writing"/);
 assert.match(examSrc, /beginWritingOnly/);
 assert.match(examSrc, /Start writing section/);
 assert.doesNotMatch(examSrc, /VoiceInputButton/);
 assert.match(examSrc, /data-no-voice-input="true"/);
-assert.match(examSrc, /Mic\/dictation is not available/);
+assert.match(examSrc, /Voice dictation isn&apos;t available/);
 assert.doesNotMatch(examSrc, /phase === "writing" && writingPrompt && !isolated/);
+assert.match(examSrc, /writing-chart-note/);
+assert.match(examSrc, /writing-escalation/);
+assert.match(examSrc, /Message to provider/);
+assert.match(examSrc, /combineWritingPartScores/);
+assert.match(examSrc, /practice writing exercise for the MA competency exam/i);
+assert.match(examSrc, /won&apos;t count toward anything/);
+assert.match(examSrc, /chart note/);
+const writingOrient = examSrc.match(
+  /phase === "orient" && focus === "writing" \? \([\s\S]*?Start writing section[\s\S]*?\) : null/,
+);
+assert.ok(writingOrient, "writing orient block present");
+assert.doesNotMatch(writingOrient![0], /Ephemeral|seen-set|blended|LLM|draft_pending_sonu|HUD|composite/i);
 
 const PUNCT = new Set(".,!?;:'\"()-/");
 type Row = { id: string; title: string; text: string };
@@ -126,29 +143,50 @@ const againFresh = hipaaAgain.questions.filter((q) => !hipaaIds.includes(q.id));
 assert.equal(againFresh.length, HIPAA_EXAM_COUNT, "second HIPAA review with room in bank should avoid prior 20");
 assert.equal(hipaaAgain.repeatedIds.length, 0);
 
-// Writing isolated review: draft bank, draw, score, trail persistence (same REVIEW_ATTEMPTS_KEY).
-assert.ok(WRITING_PROMPTS.length >= 5, "writing bank should have several prompts");
+assert.equal(WRITING_CLINICAL_PROMPTS.length, 5, "five clinical families drafted");
+assert.equal(WRITING_PROMPTS.length, 10, "patient-comms bank kept (supplement)");
 for (const p of WRITING_PROMPTS) {
-  assert.equal(p.reviewStatus, "draft_pending_sonu", `${p.id} must stay draft_pending_sonu`);
+  assert.equal(p.reviewStatus, "draft_pending_sonu", `${p.id} patient bank stays draft_pending_sonu`);
 }
+const families = new Set(WRITING_CLINICAL_PROMPTS.map((p) => p.family));
+assert.equal(families.size, 5, "all five families present");
+assert.ok(families.has("side-effect"), "side-effect stays in Writing (#19)");
+
+const JUDGMENT = /\b(non-compliant|noncompliant|abusing|diverting|diversion|wrong dose)\b/i;
+for (const p of WRITING_CLINICAL_PROMPTS) {
+  const blob = `${p.title}\n${p.scenario}\n${p.chartHint}\n${p.escalationHint}`;
+  assert.doesNotMatch(blob, JUDGMENT, `${p.id} must stay judgment-neutral (#17)`);
+  assert.match(p.escalationHint, /\bask\b/i, `${p.id} Part B must require an explicit ask (#18)`);
+  assert.ok(p.scenario.length > 40, `${p.id} scenario present`);
+}
+
 const writeA = drawWritingPrompt([], freshDrawSeed());
 assert.equal(writeA.items.length, 1);
 assert.equal(writeA.repeatedIds.length, 0);
 const wp = writeA.items[0]!;
+assert.ok("scenario" in wp && "chartHint" in wp, "draw returns clinical two-part prompt");
 const writeSeen = recordSeen([], "writing", [wp.id], [], "review-writing-1");
 const writeAgain = drawWritingPrompt(writeSeen, freshDrawSeed());
 assert.equal(writeAgain.items.length, 1);
 assert.notEqual(writeAgain.items[0]!.id, wp.id, "Run again must exclude prior writing prompt when unused remain");
 
-const sampleText = [
-  "Thank you for messaging. I see your refill request and will send it to the care team for review today.",
-  "I cannot promise a prescription myself, but I will document what the pharmacy said and ask the clinician to follow up.",
-  "Chart note: Patient reports pharmacy never received refill. Requested same-day send. Escalated to clinician; no Rx promised by MA.",
+const chartSample = [
+  "Patient reports 21 tablets remaining on day 18 of a 30-day once-daily controlled fill.",
+  "Expected remaining about 12. Not requesting early refill today. Pharmacy verified.",
 ].join(" ");
-const det = scoreWritingDeterministic(sampleText);
-assert.ok(det.wordCount >= 40, "sample should meet length floor");
-const blended = blendWritingScore(det.score, 78);
-assert.ok(blended.score >= 0 && blended.score <= 100);
+const escSample = [
+  "Provider: pill count higher than expected (21 vs ~12 on day 18).",
+  "Pharmacy checked and verified; no order pended pending your review.",
+  "Please advise next steps for counseling or refill timing.",
+].join(" ");
+const detA = scoreWritingPartDeterministic(chartSample, "chart");
+const detB = scoreWritingPartDeterministic(escSample, "escalation");
+assert.ok(detA.wordCount >= 20 && detB.wordCount >= 20);
+const blendA = blendWritingScore(detA.score, 80);
+const blendB = blendWritingScore(detB.score, 82);
+const combined = combineWritingPartScores(blendA.score, blendB.score);
+assert.ok(combined.score >= 0 && combined.score <= 100);
+assert.ok(escalationLooksLikeAsk(escSample), "sample escalation includes ask");
 
 const mem = new Map<string, string>();
 const ls = {
@@ -172,21 +210,39 @@ const attemptId = `review-writing-verify-${Date.now()}`;
 const trail: IsolatedWritingTrail = {
   promptId: wp.id,
   title: wp.title,
-  prompt: wp.prompt,
-  text: sampleText,
-  wordCount: det.wordCount,
-  grammarScore: det.grammarScore,
-  issues: det.issues,
-  llmEstimate: 78,
-  blendedScore: blended.score,
+  prompt: wp.scenario,
+  format: "clinical-two-part",
+  text: "",
+  chartNote: chartSample,
+  escalationText: escSample,
+  wordCount: detA.wordCount + detB.wordCount,
+  grammarScore: Math.round((detA.grammarScore + detB.grammarScore) / 2),
+  issues: [],
+  llmEstimate: 81,
+  blendedScore: combined.score,
+  partA: {
+    wordCount: detA.wordCount,
+    grammarScore: detA.grammarScore,
+    issues: detA.issues,
+    llmEstimate: 80,
+    blendedScore: blendA.score,
+  },
+  partB: {
+    wordCount: detB.wordCount,
+    grammarScore: detB.grammarScore,
+    issues: detB.issues,
+    llmEstimate: 82,
+    blendedScore: blendB.score,
+  },
+  escalationHasAskHint: true,
 };
 saveIsolatedReview({
   attemptId,
   userId: "verify-user",
   section: "writing",
   at: Date.now(),
-  score: blended.score,
-  detail: `${det.wordCount} words · grammar ${det.grammarScore} · LLM estimate 78`,
+  score: combined.score,
+  detail: `Chart ${blendA.score}/100 · Escalation ${blendB.score}/100`,
   itemIds: [wp.id],
   repeatedIds: [],
   items: [],
@@ -195,13 +251,15 @@ saveIsolatedReview({
 const loaded = getIsolatedReview(attemptId);
 assert.ok(loaded, "writing trail must persist");
 assert.equal(loaded!.section, "writing");
+assert.equal(loaded!.writing?.format, "clinical-two-part");
 assert.equal(loaded!.writing?.promptId, wp.id);
-assert.equal(loaded!.writing?.text, sampleText);
-assert.equal(loaded!.writing?.blendedScore, blended.score);
-assert.ok(loaded!.writing?.prompt.includes(" "), "prompt text stored");
+assert.equal(loaded!.writing?.chartNote, chartSample);
+assert.equal(loaded!.writing?.escalationText, escSample);
+assert.equal(loaded!.writing?.blendedScore, combined.score);
+assert.equal(loaded!.writing?.partA?.blendedScore, blendA.score);
+assert.equal(loaded!.writing?.partB?.blendedScore, blendB.score);
 assert.equal(loaded!.items.length, 0, "writing uses writing trail, not HIPAA items[]");
 
-// Isolated writing submit must close out (section-done) and return — not continue to chat.
 const writingSubmitCloseout =
   /if \(focus === "writing"\) \{[\s\S]*?setWritingTrail\(trail\);[\s\S]*?setLastSection\(row\);[\s\S]*?setPhase\("section-done"\);\s*return;/;
 assert.match(examSrc, writingSubmitCloseout);
@@ -209,6 +267,7 @@ const submitWritingFn = examSrc.match(/const submitWriting = useCallback\(async 
 assert.ok(submitWritingFn, "submitWriting callback present");
 assert.match(submitWritingFn![0], /setPhase\("section-done"\)/);
 assert.doesNotMatch(submitWritingFn![0], /setPhase\("chat"\)/);
+assert.match(submitWritingFn![0], /combineWritingPartScores/);
 
 const learnHub = readFileSync(join(__dirname, "../src/components/companion/LearnHub.tsx"), "utf8");
 assert.match(learnHub, /Competency · Writing review/);
@@ -226,14 +285,19 @@ console.log("verify-competency-section-focus: OK", {
   hipaaBank: ALL_QUESTIONS.length,
   hipaaDrawSizes: [hipaaA.questions.length, hipaaB.questions.length],
   hipaaRunAgainFresh: againFresh.length,
-  writingBank: WRITING_PROMPTS.length,
+  writingBank: WRITING_CLINICAL_PROMPTS.length,
+  writingPatientBankKept: WRITING_PROMPTS.length,
   writingDraw: wp.id,
   writingAgain: writeAgain.items[0]!.id,
   writingTrailAttempt: attemptId,
-  writingScore: blended.score,
-  writingWords: det.wordCount,
+  writingScore: combined.score,
+  writingPartA: blendA.score,
+  writingPartB: blendB.score,
+  writingWords: detA.wordCount + detB.wordCount,
   writingTimerSec: COMPETENCY_EXAM_TIMERS.writing,
   writingNoMic: true,
-  writingDraftStatus: "draft_pending_sonu",
+  writingFormat: "clinical-two-part",
   writingCloseout: "section-done",
+  writingSupplement: true,
+  writingWeights: "50/50",
 });

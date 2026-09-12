@@ -5,6 +5,10 @@ import passages from "@/data/level-up/typing-passages.json";
 import type { TypingPassage } from "@/lib/level-up/typing-drill";
 import { CHAT_EXAM_BRIEFS, type ChatExamBrief } from "@/content/competency-exam/chat-briefs.draft";
 import { WRITING_PROMPTS, type WritingPrompt } from "@/content/competency-exam/writing-prompts.draft";
+import {
+  WRITING_CLINICAL_PROMPTS,
+  type ClinicalWritingPrompt,
+} from "@/content/competency-exam/writing-clinical-prompts.draft";
 import { drawUnseen, type SeenEntry } from "./seen-set";
 
 const TYPING = passages as TypingPassage[];
@@ -16,7 +20,13 @@ export function drawTypingPassage(seen: SeenEntry[], seed: number) {
   return drawUnseen(TYPING, seen, 1, seed, "typing");
 }
 
+/** Primary Writing path — clinical two-part documentation + escalation. */
 export function drawWritingPrompt(seen: SeenEntry[], seed: number) {
+  return drawUnseen(WRITING_CLINICAL_PROMPTS, seen, 1, seed, "writing");
+}
+
+/** Supplemental patient-communication bank (kept; not the default exam draw). */
+export function drawWritingPatientPrompt(seen: SeenEntry[], seed: number) {
   return drawUnseen(WRITING_PROMPTS, seen, 1, seed, "writing");
 }
 
@@ -75,4 +85,4 @@ export function cultureSectionEnabled(): false {
   return false;
 }
 
-export type { WritingPrompt, ChatExamBrief };
+export type { WritingPrompt, ClinicalWritingPrompt, ChatExamBrief };

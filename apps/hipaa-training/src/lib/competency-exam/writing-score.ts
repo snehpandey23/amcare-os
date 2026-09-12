@@ -1,6 +1,9 @@
 import { evaluateSimulatorSession, type SimMessage } from "@/lib/patient-drill/evaluate";
 
-const MIN_WORDS = 40;
+/** Legacy single-box Writing (patient-communication bank). */
+const LEGACY_MIN_WORDS = 40;
+/** Two-part clinical Writing — per box. */
+export const WRITING_PART_MIN_WORDS = 25;
 
 export type WritingDeterministic = {
   wordCount: number;
@@ -11,17 +14,19 @@ export type WritingDeterministic = {
   note: string;
 };
 
-export function scoreWritingDeterministic(text: string): WritingDeterministic {
+export type WritingPartId = "chart" | "escalation";
+
+function scoreLengthAndGrammar(text: string, minWords: number, noteLabel: string): WritingDeterministic {
   const words = text.trim().split(/\s+/).filter(Boolean);
   const wordCount = text.trim() ? words.length : 0;
-  const meetsLength = wordCount >= MIN_WORDS;
+  const meetsLength = wordCount >= minWords;
   const fake: SimMessage[] = [
     { who: "patient", text: "Please rewrite this workplace note." },
     { who: "you", text: text.trim() || "" },
   ];
   const fb = evaluateSimulatorSession(fake);
   const issues = fb.grammarIssues.map((g) => g.detail || g.kinds.join(", "));
-  const lengthPart = meetsLength ? 100 : Math.round((wordCount / MIN_WORDS) * 100);
+  const lengthPart = meetsLength ? 100 : Math.round((wordCount / minWords) * 100);
   const score = Math.round(lengthPart * 0.5 + fb.grammarScore * 0.5);
   return {
     wordCount,
@@ -29,8 +34,17 @@ export function scoreWritingDeterministic(text: string): WritingDeterministic {
     grammarScore: fb.grammarScore,
     issues,
     score,
-    note: `Deterministic — length (aim ${MIN_WORDS}+ words) and chat-register grammar. Not a full writing rubric. Missing caps/periods are not scored.`,
+    note: `Deterministic (${noteLabel}) — length (aim ${minWords}+ words) and chat-register grammar. Not a full writing rubric.`,
   };
+}
+
+export function scoreWritingDeterministic(text: string): WritingDeterministic {
+  return scoreLengthAndGrammar(text, LEGACY_MIN_WORDS, "legacy single box");
+}
+
+export function scoreWritingPartDeterministic(text: string, part: WritingPartId): WritingDeterministic {
+  const label = part === "chart" ? "chart note" : "provider escalation";
+  return scoreLengthAndGrammar(text, WRITING_PART_MIN_WORDS, label);
 }
 
 export function blendWritingScore(deterministic: number, llm: number | null): {
@@ -47,4 +61,26 @@ export function blendWritingScore(deterministic: number, llm: number | null): {
     score: Math.round(deterministic * 0.4 + llm * 0.6),
     note: "Combined: 40% deterministic (length + chat-register grammar) and 60% LLM content/coherence estimate. The LLM part is an estimate, not a certified grade.",
   };
+}
+
+/** Founder default 2026-09-12: 50/50 Part A / Part B — revisit after real attempt data. */
+export const WRITING_PART_WEIGHT_A = 0.5;
+export const WRITING_PART_WEIGHT_B = 0.5;
+
+export function combineWritingPartScores(scoreA: number, scoreB: number): {
+  score: number;
+  note: string;
+} {
+  const score = Math.round(scoreA * WRITING_PART_WEIGHT_A + scoreB * WRITING_PART_WEIGHT_B);
+  return {
+    score,
+    note: `Section score: ${Math.round(WRITING_PART_WEIGHT_A * 100)}% chart note + ${Math.round(WRITING_PART_WEIGHT_B * 100)}% provider message (founder default; revisit after real attempts).`,
+  };
+}
+
+/** Soft check: escalation text should look like it includes an ask (not scored hard-fail). */
+export function escalationLooksLikeAsk(text: string): boolean {
+  return /\b(please|ask|advise|review|confirm|clarify|guidance|recommend|can you|could you|would you)\b/i.test(
+    text,
+  );
 }

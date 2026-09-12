@@ -23,16 +23,32 @@ export type IsolatedReviewItemResult = {
 };
 
 /** Writing isolated review trail — same REVIEW_ATTEMPTS_KEY as HIPAA items. */
-export type IsolatedWritingTrail = {
-  promptId: string;
-  title: string;
-  prompt: string;
-  text: string;
+export type IsolatedWritingPartTrail = {
   wordCount: number;
   grammarScore: number;
   issues: string[];
   llmEstimate: number | null;
   blendedScore: number;
+};
+
+export type IsolatedWritingTrail = {
+  promptId: string;
+  title: string;
+  /** Scenario / prompt text shown to the taker */
+  prompt: string;
+  format: "clinical-two-part" | "legacy-single";
+  /** Legacy single-box text (patient-comms); empty when clinical-two-part */
+  text: string;
+  chartNote: string;
+  escalationText: string;
+  wordCount: number;
+  grammarScore: number;
+  issues: string[];
+  llmEstimate: number | null;
+  blendedScore: number;
+  partA?: IsolatedWritingPartTrail;
+  partB?: IsolatedWritingPartTrail;
+  escalationHasAskHint?: boolean;
 };
 
 export type IsolatedReviewAttempt = {

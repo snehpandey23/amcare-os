@@ -17,7 +17,7 @@ import { parseExamSectionFocus } from "@/lib/competency-exam/section-focus";
 import { recordSeen, freshDrawSeed, type SeenEntry } from "@/lib/competency-exam/seen-set";
 import { loadSeen, saveAttempt, saveSeen, saveIsolatedReview, type IsolatedReviewItemResult, type IsolatedWritingTrail } from "@/lib/competency-exam/storage";
 import type { ExamReportModel, SafetyFlag, SectionResult } from "@/lib/competency-exam/types";
-import { blendWritingScore, scoreWritingDeterministic } from "@/lib/competency-exam/writing-score";
+import { blendWritingScore, combineWritingPartScores, escalationLooksLikeAsk, scoreWritingPartDeterministic } from "@/lib/competency-exam/writing-score";
 import { EXAM_WEIGHTS, SECTION_LABEL } from "@/lib/competency-exam/weights";
 import { ExamReportView } from "./ExamReportView";
 import { ExamCountdownHud } from "./ExamCountdownHud";
@@ -80,7 +80,7 @@ function SectionDoneCard({
       : section.id === "hipaa"
         ? "This run does not continue into other sections. Sign off when HIPAA looks good, then open Writing. Item-level results are saved in this browser for audit."
         : section.id === "writing"
-          ? "This run does not continue into other sections. Writing trail (prompt + text + score) is saved in this browser for audit. Prompts remain draft pending Sonu — not approved for official scoring."
+          ? "This run does not continue into other sections. Writing trail (scenario + chart note + provider message + scores) is saved in this browser for audit. Clinical prompts remain draft — not approved for official scoring."
           : "This run does not continue into other sections.";
   return (
     <div className="space-y-3 rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4 text-sm">
@@ -136,24 +136,62 @@ function SectionDoneCard({
       ) : null}
       {writingTrail ? (
         <details className="rounded-xl border border-[var(--siya-border)] p-3 text-xs" open>
-          <summary className="cursor-pointer font-semibold">Writing trail (prompt + text + scores)</summary>
+          <summary className="cursor-pointer font-semibold">Writing trail (scenario + chart + escalation + scores)</summary>
           <div className="mt-2 space-y-2">
             <p>
               <code className="font-mono text-[10px]">{writingTrail.promptId}</code> · {writingTrail.title}
+              {writingTrail.format === "clinical-two-part" ? " · clinical two-part" : ""}
             </p>
-            <p className="font-semibold text-[var(--siya-text)]">Prompt</p>
+            <p className="font-semibold text-[var(--siya-text)]">Scenario</p>
             <p className="text-[var(--siya-text)]">{writingTrail.prompt}</p>
-            <p className="font-semibold text-[var(--siya-text)]">Submitted text ({writingTrail.wordCount} words)</p>
-            <pre className="whitespace-pre-wrap rounded-lg bg-[var(--siya-bg-subtle)] p-2 text-[var(--siya-text)]">
-              {writingTrail.text || "(empty)"}
-            </pre>
-            <p className="text-[var(--siya-text-secondary)]">
-              Grammar {writingTrail.grammarScore}
-              {writingTrail.llmEstimate == null
-                ? " · no LLM estimate"
-                : ` · LLM estimate ${writingTrail.llmEstimate}`}{" "}
-              · blended <strong>{writingTrail.blendedScore}/100</strong>
-            </p>
+            {writingTrail.format === "clinical-two-part" ? (
+              <>
+                <p className="font-semibold text-[var(--siya-text)]">
+                  Chart note ({writingTrail.partA?.wordCount ?? 0} words)
+                </p>
+                <pre className="whitespace-pre-wrap rounded-lg bg-[var(--siya-bg-subtle)] p-2 text-[var(--siya-text)]">
+                  {writingTrail.chartNote || "(empty)"}
+                </pre>
+                <p className="text-[var(--siya-text-secondary)]">
+                  Part A · grammar {writingTrail.partA?.grammarScore ?? "—"}
+                  {writingTrail.partA?.llmEstimate == null
+                    ? " · no LLM estimate"
+                    : ` · LLM estimate ${writingTrail.partA.llmEstimate}`}{" "}
+                  · blended <strong>{writingTrail.partA?.blendedScore ?? "—"}/100</strong>
+                </p>
+                <p className="font-semibold text-[var(--siya-text)]">
+                  Message to provider ({writingTrail.partB?.wordCount ?? 0} words)
+                </p>
+                <pre className="whitespace-pre-wrap rounded-lg bg-[var(--siya-bg-subtle)] p-2 text-[var(--siya-text)]">
+                  {writingTrail.escalationText || "(empty)"}
+                </pre>
+                <p className="text-[var(--siya-text-secondary)]">
+                  Part B · grammar {writingTrail.partB?.grammarScore ?? "—"}
+                  {writingTrail.partB?.llmEstimate == null
+                    ? " · no LLM estimate"
+                    : ` · LLM estimate ${writingTrail.partB.llmEstimate}`}{" "}
+                  · blended <strong>{writingTrail.partB?.blendedScore ?? "—"}/100</strong>
+                  {writingTrail.escalationHasAskHint === false ? " · ask wording weak/missing" : ""}
+                </p>
+                <p className="text-[var(--siya-text-secondary)]">
+                  Section (50/50) <strong>{writingTrail.blendedScore}/100</strong>
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="font-semibold text-[var(--siya-text)]">Submitted text ({writingTrail.wordCount} words)</p>
+                <pre className="whitespace-pre-wrap rounded-lg bg-[var(--siya-bg-subtle)] p-2 text-[var(--siya-text)]">
+                  {writingTrail.text || "(empty)"}
+                </pre>
+                <p className="text-[var(--siya-text-secondary)]">
+                  Grammar {writingTrail.grammarScore}
+                  {writingTrail.llmEstimate == null
+                    ? " · no LLM estimate"
+                    : ` · LLM estimate ${writingTrail.llmEstimate}`}{" "}
+                  · blended <strong>{writingTrail.blendedScore}/100</strong>
+                </p>
+              </>
+            )}
             {writingTrail.issues.length ? (
               <ul className="list-disc pl-4 text-[var(--siya-text-secondary)]">
                 {writingTrail.issues.map((issue, i) => (
@@ -229,8 +267,16 @@ export function CompetencyExam() {
   const [hipaaRepeated, setHipaaRepeated] = useState<string[]>([]);
   const [hipaaAnswers, setHipaaAnswers] = useState<Record<string, string>>({});
   const [hipaaLeft, setHipaaLeft] = useState(HIPAA_SEC);
-  const [writingPrompt, setWritingPrompt] = useState<{ id: string; title: string; prompt: string; repeated: boolean } | null>(null);
-  const [writingText, setWritingText] = useState("");
+  const [writingPrompt, setWritingPrompt] = useState<{
+    id: string;
+    title: string;
+    scenario: string;
+    chartHint: string;
+    escalationHint: string;
+    repeated: boolean;
+  } | null>(null);
+  const [writingChartNote, setWritingChartNote] = useState("");
+  const [writingEscalation, setWritingEscalation] = useState("");
   const [writingLeft, setWritingLeft] = useState(WRITING_SEC);
   const [chatLeft, setChatLeft] = useState(CHAT_SEC);
   const [chatForceEnd, setChatForceEnd] = useState(false);
@@ -265,7 +311,8 @@ export function CompetencyExam() {
     setHipaaRepeated([]);
     setHipaaAnswers({});
     setWritingPrompt(null);
-    setWritingText("");
+    setWritingChartNote("");
+    setWritingEscalation("");
     setChatBrief(null);
     setReviewNote("");
     setBusy(false);
@@ -331,7 +378,8 @@ export function CompetencyExam() {
     setSections([heldCulture()]);
     setLastSection(null);
     setTypingRaw(null);
-    setWritingText("");
+    setWritingChartNote("");
+    setWritingEscalation("");
     setWritingTrail(null);
     setItemResults(null);
     const seed = freshDrawSeed();
@@ -341,7 +389,9 @@ export function CompetencyExam() {
       setWritingPrompt({
         id: wp.id,
         title: wp.title,
-        prompt: wp.prompt,
+        scenario: wp.scenario,
+        chartHint: wp.chartHint,
+        escalationHint: wp.escalationHint,
         repeated: writing.repeatedIds.includes(wp.id),
       });
     }
@@ -376,7 +426,8 @@ export function CompetencyExam() {
     setTypingRaw(null);
     setLastSection(null);
     setHipaaAnswers({});
-    setWritingText("");
+    setWritingChartNote("");
+    setWritingEscalation("");
     setReviewNote("");
 
     seenRef.current = loadSeen(userId);
@@ -396,7 +447,15 @@ export function CompetencyExam() {
     setHipaaRepeated(hipaa.repeatedIds);
     const writing = drawWritingPrompt(seenRef.current, seed + 7);
     const wp = writing.items[0];
-    if (wp) setWritingPrompt({ id: wp.id, title: wp.title, prompt: wp.prompt, repeated: writing.repeatedIds.includes(wp.id) });
+    if (wp)
+      setWritingPrompt({
+        id: wp.id,
+        title: wp.title,
+        scenario: wp.scenario,
+        chartHint: wp.chartHint,
+        escalationHint: wp.escalationHint,
+        repeated: writing.repeatedIds.includes(wp.id),
+      });
     const chat = drawChatBrief(seenRef.current, seed + 11);
     const brief = chat.items[0];
     if (brief) {
@@ -599,50 +658,90 @@ export function CompetencyExam() {
   const submitWriting = useCallback(async () => {
     if (!writingPrompt || phase !== "writing" || busy) return;
     setBusy(true);
-    const det = scoreWritingDeterministic(writingText);
-    let llm: number | null = null;
-    let llmNote = "";
-    try {
-      const res = await fetch("/api/competency-exam/estimate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({ prompt: writingPrompt.prompt, text: writingText }),
-      });
-      const data = (await res.json().catch(() => ({}))) as { estimate?: number | null; note?: string };
-      llm = typeof data.estimate === "number" ? data.estimate : null;
-      llmNote = data.note || "";
-    } catch {
-      llm = null;
-      llmNote = "LLM estimate unavailable.";
-    }
-    const blended = blendWritingScore(det.score, llm);
+
+    const detA = scoreWritingPartDeterministic(writingChartNote, "chart");
+    const detB = scoreWritingPartDeterministic(writingEscalation, "escalation");
+    const taskPrompt = [
+      writingPrompt.scenario,
+      `Chart note task: ${writingPrompt.chartHint}`,
+      `Provider message task: ${writingPrompt.escalationHint}`,
+    ].join("\n\n");
+
+    const fetchEstimate = async (part: "chart" | "escalation", text: string) => {
+      try {
+        const res = await fetch("/api/competency-exam/estimate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          body: JSON.stringify({ prompt: taskPrompt, text, part }),
+        });
+        const data = (await res.json().catch(() => ({}))) as { estimate?: number | null; note?: string };
+        return {
+          estimate: typeof data.estimate === "number" ? data.estimate : null,
+          note: data.note || "",
+        };
+      } catch {
+        return { estimate: null as number | null, note: "LLM estimate unavailable." };
+      }
+    };
+
+    const [llmA, llmB] = await Promise.all([
+      fetchEstimate("chart", writingChartNote),
+      fetchEstimate("escalation", writingEscalation),
+    ]);
+    const blendA = blendWritingScore(detA.score, llmA.estimate);
+    const blendB = blendWritingScore(detB.score, llmB.estimate);
+    const combined = combineWritingPartScores(blendA.score, blendB.score);
+    const askHint = escalationLooksLikeAsk(writingEscalation);
     const row: SectionResult = {
       id: "writing",
       label: SECTION_LABEL.writing,
       weight: EXAM_WEIGHTS.writing,
       status: "scored",
-      score: blended.score,
-      note: `${blended.note} ${llmNote}`.trim(),
+      score: combined.score,
+      note: `${combined.note} ${llmA.note} ${llmB.note}`.trim(),
       itemIds: [writingPrompt.id],
       repeatedIds: writingPrompt.repeated ? [writingPrompt.id] : [],
       draftContent: true,
-      detail: `${det.wordCount} words · grammar ${det.grammarScore}${llm == null ? " · no LLM estimate" : ` · LLM estimate ${llm}`}`,
+      detail: `Chart ${blendA.score}/100 · Escalation ${blendB.score}/100 · ${detA.wordCount + detB.wordCount} words total${askHint ? "" : " · escalation ask weak/missing"}`,
     };
+
+    const trail: IsolatedWritingTrail = {
+      promptId: writingPrompt.id,
+      title: writingPrompt.title,
+      prompt: writingPrompt.scenario,
+      format: "clinical-two-part",
+      text: "",
+      chartNote: writingChartNote,
+      escalationText: writingEscalation,
+      wordCount: detA.wordCount + detB.wordCount,
+      grammarScore: Math.round((detA.grammarScore + detB.grammarScore) / 2),
+      issues: [...detA.issues, ...detB.issues],
+      llmEstimate:
+        llmA.estimate == null && llmB.estimate == null
+          ? null
+          : Math.round(((llmA.estimate ?? blendA.score) + (llmB.estimate ?? blendB.score)) / 2),
+      blendedScore: combined.score,
+      partA: {
+        wordCount: detA.wordCount,
+        grammarScore: detA.grammarScore,
+        issues: detA.issues,
+        llmEstimate: llmA.estimate,
+        blendedScore: blendA.score,
+      },
+      partB: {
+        wordCount: detB.wordCount,
+        grammarScore: detB.grammarScore,
+        issues: detB.issues,
+        llmEstimate: llmB.estimate,
+        blendedScore: blendB.score,
+      },
+      escalationHasAskHint: askHint,
+    };
+
     if (focus === "writing") {
-      const trail: IsolatedWritingTrail = {
-        promptId: writingPrompt.id,
-        title: writingPrompt.title,
-        prompt: writingPrompt.prompt,
-        text: writingText,
-        wordCount: det.wordCount,
-        grammarScore: det.grammarScore,
-        issues: det.issues,
-        llmEstimate: llm,
-        blendedScore: blended.score,
-      };
       reviewSeenRef.current = recordSeen(
         reviewSeenRef.current,
         "writing",
@@ -655,7 +754,7 @@ export function CompetencyExam() {
         userId,
         section: "writing",
         at: Date.now(),
-        score: blended.score,
+        score: combined.score,
         detail: row.detail || "",
         itemIds: [writingPrompt.id],
         repeatedIds: writingPrompt.repeated ? [writingPrompt.id] : [],
@@ -671,9 +770,9 @@ export function CompetencyExam() {
     remember("writing", [writingPrompt.id], writingPrompt.repeated ? [writingPrompt.id] : [], attemptId);
     pushSection(row);
     setBusy(false);
-    setReviewNote(`Writing recorded at ${blended.score}/100. Prompt is a draft pending Sonu review.`);
+    setReviewNote(`Writing recorded at ${combined.score}/100 (chart ${blendA.score} · escalation ${blendB.score}). Clinical prompt is still a draft.`);
     setPhase("review");
-  }, [busy, phase, token, writingPrompt, writingText, focus, attemptId, userId]);
+  }, [busy, phase, token, writingPrompt, writingChartNote, writingEscalation, focus, attemptId, userId]);
 
   useEffect(() => {
     if (phase === "writing" && writingLeft === 0) void submitWriting();
@@ -759,7 +858,7 @@ export function CompetencyExam() {
             : focus === "hipaa"
               ? "HIPAA only — 20 items, 12-minute lock, separate draw from certification. No typing, writing, or chat."
               : focus === "writing"
-                ? "Writing only — one draft prompt, locked 10-minute timer, deterministic + LLM-estimate score. No mic. No typing, HIPAA, or chat."
+                ? "Practice clinical documentation for the MA competency exam — chart note + message to the provider, 10 minutes. Draft scenarios; not an official score yet."
                 : "Typing, HIPAA, writing, and chat simulator only. Culture/language is held. Listening and speaking are not in this pass."}
         </p>
       </header>
@@ -822,24 +921,26 @@ export function CompetencyExam() {
 
       {phase === "orient" && focus === "writing" ? (
         <div className="space-y-3 rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4 text-sm">
-          <p className="font-semibold text-[var(--siya-primary)]">What you are reviewing</p>
-          <ul className="list-disc space-y-1 pl-4 text-[var(--siya-text)]">
-            <li>One prompt drawn from the writing bank (draft_pending_sonu — UI for inspection, not official scoring approval)</li>
-            <li>Locked 10-minute timer — starts when you begin this section (same clock as the fixed countdown HUD)</li>
-            <li>
-              Section score: deterministic length + chat-register grammar, blended with LLM content estimate when available;
-              weight {EXAM_WEIGHTS.writing} pts in composite
-            </li>
-            <li>Type your answer — mic/dictation is not available (measures written composition)</li>
-            <li>Ephemeral review seen-set only — does not write the official exam seen-set or feed a full sitting</li>
-            <li>Stops after this section — you will not be pushed into chat</li>
-          </ul>
-          <p className="text-xs text-[var(--siya-text-secondary)]">
-            Content status: <strong>draft pending Sonu</strong> — shipping the mechanism for inspection; bank is not approved for real competency decisions.
-          </p>
+          <p className="font-semibold text-[var(--siya-primary)]">Before you start</p>
+          <div className="space-y-2 text-[var(--siya-text)]">
+            <p>This is a practice writing exercise for the MA competency exam.</p>
+            <p>
+              You&apos;ll get one clinical scenario. Write two things: a <strong>chart note</strong> documenting what was
+              observed or reported, and a <strong>message to the provider</strong> that escalates the concern with a clear
+              ask. You have 10 minutes.
+            </p>
+            <p>
+              These are draft scenarios we&apos;re still reviewing — your answer here won&apos;t count toward anything
+              official yet.
+            </p>
+            <p className="text-xs text-[var(--siya-text-secondary)]">
+              Type your answers yourself (voice dictation isn&apos;t available). Stick to facts — no judgment labels.
+              When you submit, you&apos;ll see a short summary — you won&apos;t move on to another exam section.
+            </p>
+          </div>
           <label className="flex items-start gap-2 text-sm">
             <input type="checkbox" checked={ack} onChange={(e) => setAck(e.target.checked)} />
-            <span>I am reviewing Writing in isolation for inspection / sign-off of the flow.</span>
+            <span>I understand this is practice only and won&apos;t count toward an official score.</span>
           </label>
           <button
             type="button"
@@ -996,23 +1097,45 @@ export function CompetencyExam() {
             Writing · {fmt(writingLeft)} left
             <span className="sr-only"> (same remaining seconds as the fixed countdown)</span>
           </p>
-          <p className="text-xs font-semibold">DRAFT — pending Sonu review. Not an approved official prompt.</p>
+          <p className="text-xs font-semibold">Draft clinical scenario — still under review. Not used for an official score yet.</p>
           {writingPrompt.repeated ? <p className="text-xs font-semibold">Repeat prompt — not a fresh measure.</p> : null}
           <p className="text-xs text-[var(--siya-text-secondary)]">
-            Prompt: <strong>{writingPrompt.title}</strong> · id <code>{writingPrompt.id}</code>
+            Scenario: <strong>{writingPrompt.title}</strong> · id <code>{writingPrompt.id}</code>
           </p>
-          <p className="text-sm">{writingPrompt.prompt}</p>
+          <p className="text-sm">{writingPrompt.scenario}</p>
           <p className="text-[11px] text-[var(--siya-text-muted)]">
-            Type your answer. Mic/dictation is not available on this section.
+            Type both answers. Voice dictation isn&apos;t available on this exercise. Use facts only — no judgment labels.
           </p>
-          <textarea
-            value={writingText}
-            onChange={(e) => setWritingText(e.target.value)}
-            rows={8}
-            className="w-full rounded-xl border border-[var(--siya-border)] p-3 text-sm"
-            placeholder="Write the chart note and the patient reply…"
-            data-no-voice-input="true"
-          />
+          <div className="space-y-2">
+            <label className="block text-xs font-semibold text-[var(--siya-primary)]" htmlFor="writing-chart-note">
+              1. Chart note
+            </label>
+            <p className="text-xs text-[var(--siya-text-secondary)]">{writingPrompt.chartHint}</p>
+            <textarea
+              id="writing-chart-note"
+              value={writingChartNote}
+              onChange={(e) => setWritingChartNote(e.target.value)}
+              rows={6}
+              className="w-full rounded-xl border border-[var(--siya-border)] p-3 text-sm"
+              placeholder="Document what was observed or reported…"
+              data-no-voice-input="true"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="block text-xs font-semibold text-[var(--siya-primary)]" htmlFor="writing-escalation">
+              2. Message to provider
+            </label>
+            <p className="text-xs text-[var(--siya-text-secondary)]">{writingPrompt.escalationHint}</p>
+            <textarea
+              id="writing-escalation"
+              value={writingEscalation}
+              onChange={(e) => setWritingEscalation(e.target.value)}
+              rows={6}
+              className="w-full rounded-xl border border-[var(--siya-border)] p-3 text-sm"
+              placeholder="Relay the concern and include a clear ask…"
+              data-no-voice-input="true"
+            />
+          </div>
           <button
             type="button"
             disabled={busy}
