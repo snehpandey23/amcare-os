@@ -7,10 +7,13 @@ import {
   classifyCompletedSession,
   evaluateTurnSafety,
   HIGH_URGENCY_CLINICAL_SIGN_OFF,
+  SCREENING_AS_DIAGNOSIS_LABEL,
+  isScreeningMisrepresentedAsDiagnosis,
 } from "../src/lib/patient-drill/safety";
 import { PROCESS_REDIRECT_LINES, REDIRECT_SET_NOTE } from "../src/lib/patient-drill/redirects";
 import {
   applyDailyComplete,
+  collectChatSimRepeatPatterns,
   listChatSimSessions,
   type LevelUpProgress,
 } from "../src/lib/level-up/progress";
@@ -215,6 +218,152 @@ console.log("ok: placeholder redirect set marked");
     assert.ok(r.stop.reasons.includes("clinical_decision_making"));
   }
   console.log("ok: red-flag clinical dose opinion");
+}
+
+// --- Moderate tier: screening misrepresented as diagnosis (not a hard stop) ---
+{
+  const PRIYA_REPLY_3 = "its okay take a free screening to diagnose";
+  const CONTROL =
+    "A free screening is a first step, not a diagnosis. A clinician decides that after the evaluation — the screening will not tell you if you have ADHD.";
+
+  assert.equal(isScreeningMisrepresentedAsDiagnosis(PRIYA_REPLY_3), true);
+  assert.equal(isScreeningMisrepresentedAsDiagnosis(CONTROL), false);
+  assert.equal(
+    isScreeningMisrepresentedAsDiagnosis("the screening will tell you if you have ADHD"),
+    true,
+  );
+  assert.equal(isScreeningMisrepresentedAsDiagnosis("you can take a free screening on the site"), false);
+
+  const live = evaluateTurnSafety({
+    history: [
+      {
+        role: "assistant",
+        content:
+          "How would I actually know if I have ADHD — is the free screening enough, or do I still need the evaluation?",
+      },
+    ],
+    latestMaText: PRIYA_REPLY_3,
+  });
+  assert.equal(live.action, "continue", "screening-as-diagnosis must not hard-stop the session");
+
+  // On-file Dr. Priya line is MA reply 3. Prior turns keep that index; reply 3 is the recorded miss.
+  const priyaHistory = [
+    {
+      role: "assistant" as const,
+      content:
+        "I'm interested in an ADHD assessment. I've read your clinical protocols and I have a few questions about methodology—why neuropsych testing versus a continuous performance test, and how you rule out sleep apnea. Can you walk me through that?",
+    },
+    {
+      role: "user" as const,
+      content:
+        "Neuropsych testing looks at several thinking skills in one visit. A continuous performance test is only one attention task. Sleep apnea is ruled out with a separate screen the provider orders if symptoms fit — I can outline the booking steps.",
+    },
+    { role: "assistant" as const, content: "And if the tests are inconclusive, what happens next?" },
+    {
+      role: "user" as const,
+      content:
+        "The provider reviews the results with you and decides whether more history or another visit is needed. I can help schedule that follow-up.",
+    },
+    {
+      role: "assistant" as const,
+      content: "So how do I find out if I actually have ADHD? Is there a quicker way to get the diagnosis?",
+    },
+    { role: "user" as const, content: PRIYA_REPLY_3 },
+  ];
+
+  const classified = classifyCompletedSession({ history: priyaHistory });
+  assert.equal(classified.outcome, "completed");
+  assert.equal(classified.redFlagged, false);
+  assert.ok(classified.reasons.includes("screening_as_diagnosis"));
+  assert.equal(classified.reasons.includes("clinical_decision_making"), false);
+  assert.ok(classified.notes.includes(SCREENING_AS_DIAGNOSIS_LABEL));
+
+  const fb = evaluateSimulatorSession(
+    priyaHistory.map((m) => ({
+      who: m.role === "user" ? ("you" as const) : "Dr. Priya",
+      text: m.content,
+    })),
+    {
+      outcome: classified.outcome,
+      redFlagged: classified.redFlagged,
+      safetyReasons: classified.reasons,
+      safetyNotes: classified.notes,
+    },
+  );
+  assert.equal(fb.clinicalAccuracyHits.length, 1);
+  assert.equal(fb.clinicalAccuracyHits[0]!.replyIndex, 2);
+  assert.equal(fb.clinicalAccuracyHits[0]!.label, SCREENING_AS_DIAGNOSIS_LABEL);
+  assert.ok(fb.clinicalAccuracyHits[0]!.replyExcerpt.includes("free screening to diagnose"));
+  assert.ok(fb.safetyReasons.includes("screening_as_diagnosis"));
+  const displayedRelevance = fb.relevanceTurns
+    .map((t, i) => ({ t, i }))
+    .filter(({ t, i }) => t.score < 0.5 && !fb.clinicalAccuracyHits.some((h) => h.replyIndex === i));
+  assert.equal(
+    displayedRelevance.some((row) => row.i === 2),
+    false,
+    "reply 3 must not keep the generic Relevance off-topic label on the feedback screen",
+  );
+
+  const controlHistory = [
+    {
+      role: "assistant" as const,
+      content: "So how do I find out if I actually have ADHD? Is there a quicker way to get the diagnosis?",
+    },
+    { role: "user" as const, content: CONTROL },
+  ];
+  const controlClass = classifyCompletedSession({ history: controlHistory });
+  assert.equal(controlClass.reasons.includes("screening_as_diagnosis"), false);
+  const controlFb = evaluateSimulatorSession(
+    controlHistory.map((m) => ({
+      who: m.role === "user" ? ("you" as const) : "Dr. Priya",
+      text: m.content,
+    })),
+    {
+      outcome: controlClass.outcome,
+      redFlagged: controlClass.redFlagged,
+      safetyReasons: controlClass.reasons,
+      safetyNotes: controlClass.notes,
+    },
+  );
+  assert.equal(controlFb.clinicalAccuracyHits.length, 0);
+
+  let ledger = empty();
+  ledger = applyDailyComplete(ledger, "patientChat", {
+    date: "2026-09-08",
+    now: Date.parse("2026-09-08T12:00:00Z"),
+    chatSim: {
+      personaId: "persona-priya",
+      personaName: "Dr. Priya",
+      outcome: "completed",
+      redFlagged: false,
+      safetyReasons: classified.reasons,
+      transcript: priyaHistory.map((m) => ({
+        who: m.role === "user" ? "you" : "Dr. Priya",
+        text: m.content,
+      })),
+    },
+  });
+  ledger = applyDailyComplete(ledger, "patientChat", {
+    date: "2026-09-08",
+    now: Date.parse("2026-09-08T13:00:00Z"),
+    chatSim: {
+      personaId: "persona-priya",
+      personaName: "Dr. Priya",
+      outcome: "completed",
+      redFlagged: false,
+      safetyReasons: ["screening_as_diagnosis"],
+    },
+  });
+  const review = listChatSimSessions(ledger, { reviewOutcomesOnly: true });
+  assert.equal(review.length, 2);
+  assert.equal(listChatSimSessions(ledger, { redFlaggedOnly: true }).length, 0);
+  const repeats = collectChatSimRepeatPatterns([
+    { userId: "u-priya", email: "ma@siya.health", name: "MA", dayLedger: ledger.dayLedger },
+  ]);
+  assert.equal(repeats.length, 1);
+  assert.equal(repeats[0]!.count, 2);
+  assert.equal(repeats[0]!.label, SCREENING_AS_DIAGNOSIS_LABEL);
+  console.log("ok: moderate screening-as-diagnosis — Priya reply 3 flagged, control clear, Ops repeat logged");
 }
 
 console.log("\nAll chat-sim safety smokes passed.");

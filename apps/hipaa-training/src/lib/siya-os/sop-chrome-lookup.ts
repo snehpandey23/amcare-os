@@ -26,6 +26,14 @@ function isGenAiSopHowTo(t: string): boolean {
 function isWriteSop(t: string): boolean {
   if (/\bsop builder\b/.test(t)) return true;
   if (isGenAiSopHowTo(t)) return true;
+  // Hinglish how-to, including glossary leftovers ("SOP how banana is") and Devanagari.
+  if (
+    /\bsops?\b/.test(t) &&
+    /(?:kaise|kese|कैसे|\bhow\b)/.test(t) &&
+    /(?:bana(?:na|te|ye|o|ni)|banate|banaye|likh(?:na|o|en|e)?|बन|लिख|write|creat|draft|mak(?:e|ing)?)/.test(t)
+  ) {
+    return true;
+  }
   if (/\bnew sop\b/.test(t) && /\b(write|how|create|draft|start|make|making)\b/.test(t)) return true;
   if (
     /\b(write|creat(?:e|ing)|draft(?:ing)?|mak(?:e|ing)|start|build(?:ing)?)\b/.test(t) &&

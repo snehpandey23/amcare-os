@@ -15,6 +15,10 @@ const taskStatusPhrases = [
   "what tasks do I have",
   "tasks assigned to me",
   "are these my tasks?",
+  "sop is done what else",
+  "no i mean there were two SOPs marked for my review n i reviewed them, whats next task",
+  "what's next",
+  "why are you showing lead review, is that my task too?",
 ];
 
 const planDayPhrases = [

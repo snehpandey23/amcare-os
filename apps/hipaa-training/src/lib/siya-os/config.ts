@@ -5,7 +5,12 @@ export const SIYA_OPENING =
 
 export const CHAT_SECTION_LABEL = "Some things I can help you with:";
 
-export { CHAT_QUICK_PROMPTS as SIYA_QUICK_PROMPTS, ADMIN_CHAT_QUICK_PROMPTS, SIYA_ADMIN_OPENING } from "@/lib/companion/quick-actions";
+export {
+  ASK_PERSONAL_PROMPTS,
+  CHAT_QUICK_PROMPTS as SIYA_QUICK_PROMPTS,
+  ADMIN_CHAT_QUICK_PROMPTS,
+  SIYA_ADMIN_OPENING,
+} from "@/lib/companion/quick-actions";
 
 export function getEscalationContacts() {
   return [

@@ -180,6 +180,7 @@ export function isOpsEngagementAsk(message: string): boolean {
   const staffPerformance =
     /\bstaff\s+performance\b/.test(t) ||
     (/\bperformance\b/.test(t) && /\b(staff|team|people)\b/.test(t));
+  const namedPerson = Boolean(extractNamedPerformanceSubject(message));
   const loginIntoOs =
     osOrPortal &&
     /\b(staff|team|people|members|everyone|employees?)\b/.test(t) &&
@@ -187,7 +188,7 @@ export function isOpsEngagementAsk(message: string): boolean {
   const opsSectionA =
     /\bops\b/.test(t) && /\b(engagement|usage|section\s*a|dashboard|performance)\b/.test(t);
 
-  if (teamUsageLabel || opsSectionA || staffPerformance || loginIntoOs) return true;
+  if (namedPerson || teamUsageLabel || opsSectionA || staffPerformance || loginIntoOs) return true;
   if (osOrPortal && usageVerb) return true;
   if (osOrPortal && windowHint && /\bwho\b/.test(t)) return true;
   if (osOrPortal && problemsFacing) return true;
@@ -225,6 +226,7 @@ export function isOpsPracticeDrillAsk(message: string): boolean {
 export function isOpsStaffPerformanceAsk(message: string): boolean {
   const t = normalizePresenceAskText(message);
   if (!t) return false;
+  if (extractNamedPerformanceSubject(message)) return true;
   return (
     /\bstaff\s+performance\b/.test(t) ||
     (/\bperformance\b/.test(t) && /\b(staff|team|people)\b/.test(t)) ||
@@ -232,19 +234,92 @@ export function isOpsStaffPerformanceAsk(message: string): boolean {
   );
 }
 
+const PERFORMANCE_NAME_STOP = new Set([
+  "staff",
+  "team",
+  "people",
+  "someone",
+  "anyone",
+  "everyone",
+  "my",
+  "our",
+  "the",
+  "a",
+  "an",
+  "their",
+  "his",
+  "her",
+  "your",
+  "this",
+  "that",
+  "overall",
+  "general",
+]);
+
+/**
+ * “Sonu's performance”, “how is Sonu doing”, “about Alex engagement”.
+ * Returns first-name / display hint for Ops Section A lookup.
+ */
+export function extractNamedPerformanceSubject(message: string): string | null {
+  const raw = message.trim();
+  if (!raw || raw.length > 200) return null;
+  const patterns: RegExp[] = [
+    /\b(?:about|know\s+about|see|show|check|tell\s+me\s+about)\s+([A-Za-z][A-Za-z-]{1,40})(?:'s|’s)?\s+performance\b/i,
+    /\b([A-Za-z][A-Za-z-]{1,40})(?:'s|’s)\s+performance\b/i,
+    /\bhow\s+is\s+([A-Za-z][A-Za-z-]{1,40})\s+(?:doing|performing|progressing)\b/i,
+    /\b(?:how\s+is|what\s+about)\s+([A-Za-z][A-Za-z-]{1,40})(?:'s|’s)?\s+(?:usage|engagement|practice|scores?)\b/i,
+    /\b([A-Za-z][A-Za-z-]{1,40})\s+(?:engagement|practice\s+stats?|ask\s+usage|portal\s+usage)\b/i,
+  ];
+  for (const re of patterns) {
+    const m = raw.match(re);
+    let name = m?.[1]?.trim() ?? "";
+    name = name.replace(/['’]s$/i, "").trim();
+    if (!name) continue;
+    if (PERFORMANCE_NAME_STOP.has(name.toLowerCase())) continue;
+    if (/^(performance|review|rating|appraisal)$/i.test(name)) continue;
+    return name;
+  }
+  return null;
+}
+
+/** Named teammate portal engagement (Ask turns + Practice) — founder/admin Ops data. */
+export function isNamedPersonPerformanceAsk(message: string): boolean {
+  return Boolean(extractNamedPerformanceSubject(message));
+}
+
 /** Personal My day / urgent tasks (not “assign task to X”). */
 export function isPersonalTasksAsk(message: string): boolean {
   const t = message.trim().toLowerCase().replace(/\s+/g, " ");
   if (!t) return false;
   if (/\b(assign|create|add|give)\s+(a\s+)?task\b/.test(t)) return false;
+  if (isWhatsNextTaskAsk(message)) return true;
   return (
     /\burgent\s+tasks?\s+(for\s+)?me\b/.test(t) ||
     /\b(my|today'?s)\s+(urgent\s+)?tasks?\b/.test(t) ||
+    /\bwhat\s+are\s+my\s+(urgent\s+)?tasks?\b/.test(t) ||
     /\btasks?\s+for\s+me\b/.test(t) ||
     /\b(do\s+i\s+have|have\s+i\s+got|any)\s+.{0,24}\btasks?\b/.test(t) ||
     /\bwhat\s+tasks?\s+(do\s+i\s+have|are\s+assigned)\b/.test(t) ||
-    /\btasks?\s+assigned(\s+to\s+me)?\b/.test(t)
+    /\btasks?\s+assigned(\s+to\s+me)?\b/.test(t) ||
+    /\b(is\s+that|are\s+those|is\s+lead\s+review)\s+my\s+tasks?\b/.test(t) ||
+    /\bwhy\s+(are\s+you\s+)?showing\s+lead\s+review\b/.test(t)
   );
+}
+
+/**
+ * “SOP is done, what else” / “I reviewed them, what’s next task” — remaining My day,
+ * not an SOP body dump or a Leadership soft-stop.
+ */
+export function isWhatsNextTaskAsk(message: string): boolean {
+  const t = message.trim().toLowerCase().replace(/\s+/g, " ");
+  if (!t || t.length > 280) return false;
+  if (/\bwhat('?s| is)\s+next(\s+task)?\b/.test(t)) return true;
+  if (/\bwhat\s+else\b/.test(t) && /\b(sop|task|review|done|reviewed|finished|next)\b/.test(t)) return true;
+  if (/\b(sop|sops)\s+(is|are|was|were)\s+done\b/.test(t)) return true;
+  if (/\b(i\s+)?reviewed\s+(them|those|the\s+sops?)\b/.test(t) && /\b(next|else|task)\b/.test(t)) return true;
+  if (/\bmarked\s+for\s+my\s+review\b/.test(t) && /\b(next|reviewed|what)\b/.test(t)) return true;
+  if (/\b(next|remaining)\s+tasks?\b/.test(t) && /\b(my|me|after|else|what)\b/.test(t)) return true;
+  return false;
 }
 
 /**
@@ -349,8 +424,8 @@ export function detectAdminOpsIntent(
   if (isOpsPracticeDrillAsk(message)) {
     return { kind: "ops_practice" };
   }
-  // Usage / engagement analytics BEFORE presence — "who's using the OS" is Ops, not Team pulse.
-  if (isOpsEngagementAsk(message)) {
+  // Named person performance / team usage BEFORE presence.
+  if (isOpsEngagementAsk(message) || isNamedPersonPerformanceAsk(message)) {
     return { kind: "ops_engagement" };
   }
   // Live presence / shift — hard Team pulse path (never Founder Talk portal LLM).
@@ -403,12 +478,25 @@ function openMyTasks(tasks: TaskRecord[]): TaskRecord[] {
   return tasks.filter((t) => !taskIsComplete(t));
 }
 
+function sopReviewHref(t: TaskRecord): string | null {
+  const adminOrLead = t.id.match(/^kn-sop-(?:admin-review|lead-review)-(.+)$/);
+  if (adminOrLead?.[1]) return `/admin/sop-review?id=${encodeURIComponent(adminOrLead[1])}`;
+  if (/^(SOP review|Lead review):/i.test(t.title)) return "/admin/sop-review";
+  return null;
+}
+
 function formatTaskLine(t: TaskRecord, showAssignee = false): string {
   const who =
     showAssignee && (t.assigneeName || t.assigneeEmail)
       ? ` → ${t.assigneeName || t.assigneeEmail}`
       : "";
-  return `• **${t.title}** (${t.priority}, due ${t.dueDate})${who}`;
+  const href = sopReviewHref(t);
+  const link = href ? ` — [Open review](${href})` : "";
+  return `• **${t.title}** (${t.priority}, due ${t.dueDate})${who}${link}`;
+}
+
+function isMine(t: TaskRecord, snapshot: AdminOpsSnapshot): boolean {
+  return t.assigneeId === snapshot.user.id;
 }
 
 function resolveAssignee(
@@ -439,36 +527,46 @@ function resolveAssignee(
 function planDayMessage(snapshot: AdminOpsSnapshot): string {
   const mine = sortByPriority(openMyTasks(snapshot.myTasks));
   const overdue = sortByPriority(snapshot.boardOverdue);
+  const overdueMine = overdue.filter((t) => isMine(t, snapshot));
+  const overdueOthers = overdue.filter((t) => !isMine(t, snapshot));
   const live = snapshot.pulse?.live;
+  const me = snapshot.user.name || snapshot.user.email;
 
-  let msg = `**Your ops snapshot** (${snapshot.date})\n\n`;
+  let msg = `**Your day** (${snapshot.date}) — assigned to **${me}**\n\n`;
 
   if (live) {
     msg += `**Team now:** ${live.working} working · ${live.onBreak} on break · ${live.inFocus} focus · ${live.offShift} off shift\n\n`;
   }
 
-  if (overdue.length) {
-    msg += `**Overdue (${overdue.length}) — needs attention:**\n`;
-    overdue.slice(0, 8).forEach((t) => {
-      msg += `${formatTaskLine(t, true)}\n`;
-    });
-    if (overdue.length > 8) msg += `_…and ${overdue.length - 8} more on the board._\n`;
-    msg += "\n";
-  }
-
   if (mine.length) {
-    msg += `**Your priorities today:**\n`;
-    mine.slice(0, 6).forEach((t) => {
+    msg += `**Your open tasks (${mine.length}):**\n`;
+    mine.slice(0, 5).forEach((t) => {
       msg += `${formatTaskLine(t)}\n`;
     });
+    if (mine.length > 5) msg += `_…${mine.length - 5} more on My day._\n`;
+    msg += "\n";
   } else {
-    msg += `**Your My day:** no open tasks — good time to clear overdue items or assign follow-ups.\n`;
+    msg += `**Your My day:** no open tasks assigned to you.\n\n`;
+  }
+
+  if (overdueMine.length) {
+    msg += `**Yours and overdue (${overdueMine.length}):** already in the list above — start with the first high-priority one.\n\n`;
+  }
+
+  if (overdueOthers.length) {
+    msg += `**Not your tasks — company overdue assigned to others (${overdueOthers.length}):**\n`;
+    overdueOthers.slice(0, 5).forEach((t) => {
+      msg += `${formatTaskLine(t, true)}\n`;
+    });
+    if (overdueOthers.length > 5) msg += `_…${overdueOthers.length - 5} more on the task board._\n`;
+    msg +=
+      "\n_Lead review / SOP review lines with someone else’s name are **their** queue, not yours — unless your name is on the line._\n\n";
   }
 
   msg +=
-    "\n**Suggested focus:** tackle overdue + urgent first, then your top My day items. Use the task board to reassign or add ad-hoc work.\n";
+    "**Suggested focus:** work **your** open list top to bottom. Others’ lead reviews are not for you to complete.\n";
   msg +=
-    "\nAsk me to **assign a task to [name]: [title]**, **who's working**, or any **policy/SOP** question — I'll mix live ops with approved guides.";
+    "\nSay **what’s next** after you finish one, or **open SOP review** for the queue.";
 
   return msg;
 }
@@ -773,6 +871,80 @@ export function opsPracticeMessage(rows: OpsCoachEngagementRow[]): string {
     .join("\n");
 }
 
+/** One teammate’s Ops Section A signals (Ask + Practice) — not HR ratings. */
+export function opsPersonPerformanceMessage(
+  rows: OpsCoachEngagementRow[],
+  nameHint: string,
+): string {
+  const hint = nameHint.trim().toLowerCase();
+  const people = rows.filter((r) => !isOpsTestAccount(r.email));
+  const hits = people.filter((r) => {
+    const name = (r.name || "").trim().toLowerCase();
+    const email = r.email.toLowerCase();
+    const local = email.split("@")[0] || "";
+    if (!hint) return false;
+    if (name === hint || local === hint || email === hint) return true;
+    if (name.includes(hint) || local.includes(hint)) return true;
+    if (name.split(/\s+/).some((p) => p === hint || p.startsWith(hint))) return true;
+    return false;
+  });
+
+  if (hits.length === 0) {
+    return [
+      `I couldn’t match **${nameHint}** to someone on **Ops → Staff engagement** (Ask turns + Practice drills).`,
+      "",
+      "Try their **first name as on the roster**, or open **Ops** and search the table. This is portal engagement — not an HR performance review.",
+    ].join("\n");
+  }
+
+  if (hits.length > 1) {
+    const labels = hits
+      .slice(0, 6)
+      .map((r) => (r.name && r.name.trim()) || r.email)
+      .join(" · ");
+    return [
+      `**${nameHint}** matches more than one person: ${labels}${hits.length > 6 ? " …" : ""}.`,
+      "",
+      "Ask again with a fuller name or email, e.g. **Sonu Sharma’s performance**.",
+    ].join("\n");
+  }
+
+  const r = hits[0]!;
+  const label = (r.name && r.name.trim()) || r.email;
+  const ask14 = r.askTurnsLast14d ?? 0;
+  const ask30 = r.askTurnsLast30d ?? 0;
+  const practice = r.practiceLifetime ?? 0;
+  const flags = r.chatSimRedFlags ?? 0;
+  const share = r.practiceShareThisWeek;
+  const shareLine =
+    share?.optedInShared != null
+      ? share.optedInShared
+        ? `Shared practice this week: **${share.drillDaysShared}** of **${share.drillDaysActive}** active day(s)`
+        : "Practice sharing this week: **not opted in**"
+      : null;
+
+  const quiet = ask14 === 0 && ask30 === 0 && practice === 0;
+  return [
+    `**${label}** — portal engagement (Ops Section A)`,
+    `• **Email:** ${r.email}`,
+    `• **Ask turns:** ${ask14} in last 14 days · ${ask30} in last 30 days`,
+    `• **Practice drills (lifetime):** ${practice}`,
+    r.lastActiveDate ? `• **Last practice day:** ${r.lastActiveDate}` : null,
+    flags > 0 ? `• **Chat sim red flags:** ${flags}` : null,
+    shareLine ? `• ${shareLine}` : null,
+    quiet
+      ? ""
+      : null,
+    quiet
+      ? "_No Ask or Practice activity recorded yet for this account._"
+      : null,
+    "",
+    "This is **portal engagement** (Ask + Practice), not an HR performance review or clinical scorecard. Full table: **Ops**.",
+  ]
+    .filter((l) => l !== null)
+    .join("\n");
+}
+
 /** Section A Ask + practice snapshot for “staff performance”. */
 export function opsPerformanceMessage(rows: OpsCoachEngagementRow[]): string {
   const people = rows
@@ -838,11 +1010,11 @@ function personalUrgentTasksMessage(snapshot: AdminOpsSnapshot, preferUrgent: bo
   return (
     `${label} ${list.length} open\n\n` +
     list
-      .slice(0, 12)
+      .slice(0, 5)
       .map((t) => formatTaskLine(t))
       .join("\n") +
-    (list.length > 12 ? `\n_…${list.length - 12} more on My day._` : "") +
-    "\n\nCheck them off on **My day**. Ask **task board** for company-wide open work."
+    (list.length > 5 ? `\n_…${list.length - 5} more on My day._` : "") +
+    "\n\nThese are **assigned to you** — not other people’s Lead review. Open the first link, finish it, then say **what’s next**."
   );
 }
 
@@ -935,7 +1107,17 @@ export async function runAdminOpsCoach(
       messageOut = opsBriefMessage(snapshot);
       break;
     case "ops_engagement": {
-      if (isOpsStaffPerformanceAsk(message)) {
+      const named = extractNamedPerformanceSubject(message);
+      if (named) {
+        const rows = await fetchOpsEngagementRows(token);
+        messageOut = rows?.length
+          ? opsPersonPerformanceMessage(rows, named)
+          : [
+              `I can’t load **Ops → Staff engagement** on this login (admin Ops access needed for named teammate stats).`,
+              "",
+              `Open **Ops** and look up **${named}** in Section A — I won’t invent Ask/Practice numbers.`,
+            ].join("\n");
+      } else if (isOpsStaffPerformanceAsk(message)) {
         const rows = await fetchOpsEngagementRows(token);
         messageOut = rows?.length
           ? opsPerformanceMessage(rows)
@@ -954,11 +1136,15 @@ export async function runAdminOpsCoach(
       return null;
   }
 
-  // Team pulse + ops engagement/practice are deterministic — never LLM-rewrite.
+  // Deterministic — never LLM-rewrite (LLM was mixing others' lead reviews into "your" plan).
+  const personalQueue =
+    intent.kind === "task_status" && isPersonalTasksAsk(message);
   if (
     intent.kind !== "team_pulse" &&
     intent.kind !== "ops_engagement" &&
-    intent.kind !== "ops_practice"
+    intent.kind !== "ops_practice" &&
+    intent.kind !== "plan_day" &&
+    !personalQueue
   ) {
     const llm = await synthesizeAdminOpsAnswer({
       userMessage: message,

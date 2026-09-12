@@ -1,23 +1,34 @@
 /**
- * Unit checks for Knowledge SOP deep-link guard (Bug 2).
- * Run: node --experimental-strip-types apps/hipaa-training/scripts/verify-sop-editor-session.mjs
- * or: npx tsx apps/hipaa-training/scripts/verify-sop-editor-session.ts
+ * Unit checks for Knowledge SOP deep-link guard (Bug 2) + unsaved-draft leave guards.
+ * Run: node apps/hipaa-training/scripts/verify-sop-editor-session.mjs
  */
-import { createRequire } from "module";
+import { readFileSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { readFileSync } from "fs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const src = readFileSync(join(__dirname, "../src/lib/sop-editor-session.ts"), "utf8");
+const workspace = readFileSync(join(__dirname, "../src/components/sops/SopWorkspace.tsx"), "utf8");
 
-// Lightweight assert that the source exports suppress (avoid TS compile dependency).
 function shouldApplySopEditDeepLink(opts) {
   if (opts.suppress) return false;
   const editId = opts.editId?.trim() || null;
   if (!editId) return false;
   if (opts.openedEditId === editId) return false;
   return true;
+}
+
+function isSopEditorDirty(opts) {
+  if (!opts.editorOpen) return false;
+  const hasContent = opts.title.trim().length > 0 || opts.body.trim().length > 0;
+  if (!hasContent) return false;
+  if (!opts.saved) return true;
+  return (
+    opts.title !== opts.saved.title ||
+    opts.body !== opts.saved.body ||
+    opts.department !== opts.saved.department ||
+    opts.reviewDate !== opts.saved.reviewDate
+  );
 }
 
 let failed = 0;
@@ -43,8 +54,89 @@ assert(
   "Bug2: suppress blocks even when openedEditId cleared",
 );
 
+assert(src.includes("SOP_UNSAVED_LEAVE_MSG"), "leave message exported");
+assert(src.includes("SOP_NEW_DRAFT_SAVE_HINT"), "new-draft save hint exported");
+assert(src.includes("isSopEditorDirty"), "dirty helper exported");
+
+assert(
+  isSopEditorDirty({
+    editorOpen: true,
+    title: "AI title",
+    body: "AI body",
+    department: "Clinical Operations",
+    reviewDate: "",
+    saved: null,
+  }) === true,
+  "unsaved AI draft is dirty",
+);
+assert(
+  isSopEditorDirty({
+    editorOpen: true,
+    title: "AI title",
+    body: "AI body",
+    department: "Clinical Operations",
+    reviewDate: "",
+    saved: {
+      title: "AI title",
+      body: "AI body",
+      department: "Clinical Operations",
+      reviewDate: "",
+    },
+  }) === false,
+  "auto-saved draft is clean",
+);
+assert(
+  isSopEditorDirty({
+    editorOpen: true,
+    title: "AI title",
+    body: "edited body",
+    department: "Clinical Operations",
+    reviewDate: "",
+    saved: {
+      title: "AI title",
+      body: "AI body",
+      department: "Clinical Operations",
+      reviewDate: "",
+    },
+  }) === true,
+  "post-save edits are dirty",
+);
+assert(
+  isSopEditorDirty({
+    editorOpen: false,
+    title: "AI title",
+    body: "AI body",
+    department: "Clinical Operations",
+    reviewDate: "",
+    saved: null,
+  }) === false,
+  "closed editor is not dirty",
+);
+assert(
+  isSopEditorDirty({
+    editorOpen: true,
+    title: "",
+    body: "   ",
+    department: "Clinical Operations",
+    reviewDate: "",
+    saved: null,
+  }) === false,
+  "empty editor is not dirty",
+);
+
+assert(workspace.includes("createSop({"), "workspace still creates SOPs");
+assert(workspace.includes("Draft auto-saved"), "auto-save notice after generate");
+assert(workspace.includes("beforeunload"), "beforeunload leave guard");
+assert(workspace.includes("requestCloseEditor"), "Cancel uses confirm close");
+assert(workspace.includes("SOP_NEW_DRAFT_SAVE_HINT"), "explicit unsaved hint in UI");
+assert(workspace.includes("SOP_UNSAVED_LEAVE_MSG"), "confirm uses shared leave message");
+assert(
+  /createSop\(\{[\s\S]*?aiDrafted:\s*true[\s\S]*?\}\)/.test(workspace),
+  "generate path auto-saves with aiDrafted",
+);
+
 if (failed) {
   console.error(`${failed} failed`);
   process.exit(1);
 }
-console.log("All Bug 2 deep-link guards passed.");
+console.log("All SOP editor session + unsaved-draft guards passed.");

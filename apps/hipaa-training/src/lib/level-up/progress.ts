@@ -1,4 +1,5 @@
 import { scheduleLevelUpRemoteSave } from "@/lib/level-up/progress-api";
+import { SCREENING_AS_DIAGNOSIS_LABEL, SCREENING_AS_DIAGNOSIS_REASON } from "@/lib/patient-drill/safety";
 
 const KEY = "siya-level-up-v1";
 
@@ -195,7 +196,18 @@ export function applyDailyComplete(
   };
 }
 
-/** Red-flagged / soft-stop / all chat-simulator sessions from the day ledger — Ops query. */
+/** Moderate clinical-accuracy codes that stay visible to Ops without ending the session. */
+export function chatSimHasModerateClinicalFlag(meta: ChatSimLedgerMeta | undefined): boolean {
+  return Boolean(meta?.safetyReasons?.includes(SCREENING_AS_DIAGNOSIS_REASON));
+}
+
+/** Hard stops plus moderate clinical-accuracy flags — Ops review list. */
+export function isChatSimOpsReviewSession(meta: ChatSimLedgerMeta | undefined): boolean {
+  if (!meta) return false;
+  return meta.redFlagged === true || meta.outcome === "soft_stop" || chatSimHasModerateClinicalFlag(meta);
+}
+
+/** Red-flagged / soft-stop / moderate clinical-accuracy / all chat-simulator sessions from the day ledger — Ops query. */
 export function listChatSimSessions(
   p: LevelUpProgress,
   opts?: { redFlaggedOnly?: boolean; reviewOutcomesOnly?: boolean },
@@ -203,11 +215,54 @@ export function listChatSimSessions(
   let rows = (p.dayLedger ?? []).filter((e) => e.drill === "patientChat" && e.chatSim);
   if (opts?.redFlaggedOnly) rows = rows.filter((e) => e.chatSim?.redFlagged === true);
   if (opts?.reviewOutcomesOnly) {
-    rows = rows.filter(
-      (e) => e.chatSim?.redFlagged === true || e.chatSim?.outcome === "soft_stop",
-    );
+    rows = rows.filter((e) => isChatSimOpsReviewSession(e.chatSim));
   }
   return rows;
+}
+
+export type ChatSimRepeatPattern = {
+  reason: typeof SCREENING_AS_DIAGNOSIS_REASON;
+  label: string;
+  userId: string;
+  email: string;
+  name: string | null;
+  count: number;
+  lastSeenAt: number;
+};
+
+/**
+ * Same person, same moderate clinical-accuracy code, across chat-sim sessions.
+ * Same role as recurring Ask-gap patterns, but this feed is the chat-sim safety ledger — not Ask telemetry.
+ */
+export function collectChatSimRepeatPatterns(
+  rows: Array<{
+    userId: string;
+    email: string;
+    name: string | null;
+    dayLedger?: unknown[];
+  }>,
+  opts?: { minSessions?: number },
+): ChatSimRepeatPattern[] {
+  const minSessions = opts?.minSessions ?? 2;
+  const out: ChatSimRepeatPattern[] = [];
+  for (const r of rows) {
+    const ledger = Array.isArray(r.dayLedger) ? (r.dayLedger as DayLedgerEntry[]) : [];
+    const hits = ledger.filter(
+      (e) => e.drill === "patientChat" && chatSimHasModerateClinicalFlag(e.chatSim),
+    );
+    if (hits.length < minSessions) continue;
+    out.push({
+      reason: SCREENING_AS_DIAGNOSIS_REASON,
+      label: SCREENING_AS_DIAGNOSIS_LABEL,
+      userId: r.userId,
+      email: r.email,
+      name: r.name,
+      count: hits.length,
+      lastSeenAt: Math.max(...hits.map((e) => e.at ?? 0)),
+    });
+  }
+  out.sort((a, b) => b.count - a.count || b.lastSeenAt - a.lastSeenAt);
+  return out;
 }
 
 /** Flatten review sessions from Ops engagement day ledgers (admin team rows). */

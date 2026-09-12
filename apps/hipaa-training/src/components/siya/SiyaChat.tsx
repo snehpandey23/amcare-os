@@ -2,7 +2,14 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { SIYA_OPENING, SIYA_QUICK_PROMPTS, SIYA_ADMIN_OPENING, ADMIN_CHAT_QUICK_PROMPTS, CHAT_SECTION_LABEL } from "@/lib/siya-os/config";
+import {
+  ASK_PERSONAL_PROMPTS,
+  SIYA_OPENING,
+  SIYA_QUICK_PROMPTS,
+  SIYA_ADMIN_OPENING,
+  ADMIN_CHAT_QUICK_PROMPTS,
+  CHAT_SECTION_LABEL,
+} from "@/lib/siya-os/config";
 import { displayDepartment, type Department } from "@/lib/siya-os/departments";
 import { BRAND } from "@/lib/brand";
 import { notifyOwnerForGap } from "@/lib/siya-os/knowledge-gap";
@@ -32,13 +39,18 @@ import { assessStaffMessageSafety } from "@/lib/siya-os/phi-guard";
 import { isSpeechToTextSupported } from "@/lib/speech-to-text";
 import { cancelSpeech } from "@/lib/text-to-speech";
 import {
-  isConfirmNo,
-  isConfirmYes,
+  evaluateConfirmUtterance,
   looksLikeVoiceAction,
   resolveVoiceActionCommand,
   type PendingVoiceAction,
   type VoicePerson,
 } from "@/lib/voice-actions";
+import { expandStaffSlang } from "@/lib/siya-os/meta-conversation";
+import { normalizeHinglishForAsk } from "@/lib/siya-os/hinglish-normalize";
+
+function normalizeTalkIntent(text: string): string {
+  return expandStaffSlang(normalizeHinglishForAsk(text.trim()));
+}
 import { fetchMyTasks, fetchTaskBoard, patchTask } from "@/lib/tasks-api";
 import { getTrainingApiUrl } from "@/lib/trainingConfig";
 import { getStoredToken } from "@/lib/authStorage";
@@ -91,12 +103,50 @@ type ChatMessage = {
 };
 
 function mdLite(text: string) {
-  return text.split(/(\*\*[^*]+\*\*)/g).map((chunk, i) =>
-    chunk.startsWith("**") && chunk.endsWith("**") ? (
-      <strong key={i}>{chunk.slice(2, -2)}</strong>
-    ) : (
-      <span key={i}>{chunk}</span>
-    )
+  return text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g).map((chunk, i) => {
+    if (chunk.startsWith("**") && chunk.endsWith("**")) {
+      return <strong key={i}>{chunk.slice(2, -2)}</strong>;
+    }
+    const link = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(chunk);
+    if (link) {
+      const href = link[2];
+      const className = "font-medium text-[var(--siya-accent)] underline underline-offset-2";
+      return /^https?:\/\//i.test(href) ? (
+        <a key={i} href={href} target="_blank" rel="noopener noreferrer" className={className}>
+          {link[1]}
+        </a>
+      ) : (
+        <span key={i} className={className}>
+          {link[1]}
+        </span>
+      );
+    }
+    return <span key={i}>{chunk}</span>;
+  });
+}
+
+function AssistantAnswer({ text }: { text: string }) {
+  const open = "[[detail]]";
+  const close = "[[/detail]]";
+  const start = text.indexOf(open);
+  const end = text.indexOf(close);
+  if (start === -1 || end === -1 || end <= start) return <>{mdLite(text)}</>;
+  const lead = text.slice(0, start).trim();
+  const detail = text.slice(start + open.length, end).trim();
+  const after = text.slice(end + close.length).trim();
+  return (
+    <>
+      {mdLite(lead)}
+      {detail ? (
+        <details className="mt-2 rounded-lg border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] px-3 py-2">
+          <summary className="cursor-pointer text-xs font-semibold text-[var(--siya-text-secondary)]">
+            More detail
+          </summary>
+          <div className="mt-2 text-sm">{mdLite(detail)}</div>
+        </details>
+      ) : null}
+      {after ? <div className="mt-2">{mdLite(after)}</div> : null}
+    </>
   );
 }
 
@@ -171,8 +221,8 @@ export function SiyaChat({
         "What should I know from lead check-ins?",
       ]
     : adminCoPilot
-      ? [...ADMIN_CHAT_QUICK_PROMPTS, ...SIYA_QUICK_PROMPTS.slice(0, 2)]
-      : SIYA_QUICK_PROMPTS;
+      ? [...ASK_PERSONAL_PROMPTS, ...ADMIN_CHAT_QUICK_PROMPTS, ...SIYA_QUICK_PROMPTS.slice(0, 2)]
+      : [...ASK_PERSONAL_PROMPTS, ...SIYA_QUICK_PROMPTS];
   const sectionLabel = founderCoach
     ? "Try asking:"
     : adminCoPilot
@@ -428,15 +478,25 @@ export function SiyaChat({
 
   /** Talk Mode entry: confirm gate → voice actions → same /api/chat pipeline as typed Ask. */
   const handleUtterance = useCallback(
-    async (text: string) => {
+    async (
+      text: string,
+      meta?: { confidence?: number | null; source?: "voice" | "button" },
+    ) => {
       const trimmed = text.trim();
       if (!trimmed || loading || threadLoading) return;
+      const source = meta?.source ?? "voice";
+      const confidence = meta?.confidence ?? null;
 
       // Confirm / cancel pending voice action (Talk Mode only).
       if (talkModeRef.current && pendingVoiceRef.current) {
         setMessages((m) => [...m, { id: `u-${Date.now()}`, role: "user", content: trimmed }]);
         setInput("");
-        if (isConfirmYes(trimmed)) {
+        const verdict = evaluateConfirmUtterance(trimmed, {
+          action: pendingVoiceRef.current,
+          confidence,
+          source,
+        });
+        if (verdict.decision === "yes") {
           const action = pendingVoiceRef.current;
           setPendingVoice(null);
           pendingVoiceRef.current = null;
@@ -455,7 +515,7 @@ export function SiyaChat({
           }
           return;
         }
-        if (isConfirmNo(trimmed)) {
+        if (verdict.decision === "no") {
           setPendingVoice(null);
           pendingVoiceRef.current = null;
           const cancelMsg = "Cancelled — nothing was changed.";
@@ -463,21 +523,23 @@ export function SiyaChat({
           persistVoiceTurn(trimmed, cancelMsg, "confirm_no");
           return;
         }
-        const waitMsg = `Still waiting: ${pendingVoiceRef.current.readback}`;
-        appendAssistantLocal(waitMsg, { confirmPrompt: true });
-        persistVoiceTurn(trimmed, waitMsg, "confirm_waiting");
+        // Unclear / low confidence / garbled — keep pending; ask again (do not execute).
+        appendAssistantLocal(verdict.message, { confirmPrompt: true });
+        persistVoiceTurn(trimmed, verdict.message, `confirm_unclear:${verdict.reason}`);
         return;
       }
 
+      const forIntent = normalizeTalkIntent(trimmed);
+
       // Stage-2 voice actions — Talk Mode only; hard-stops still go through /api/chat.
-      if (talkModeRef.current && looksLikeVoiceAction(trimmed)) {
-        const safety = assessStaffMessageSafety(trimmed, historyPayload());
+      if (talkModeRef.current && looksLikeVoiceAction(forIntent)) {
+        const safety = assessStaffMessageSafety(forIntent, historyPayload());
         if (!safety.blocked) {
           setLoading(true);
           setInput("");
           try {
             const ctx = await loadVoiceActionContext();
-            const resolved = resolveVoiceActionCommand(trimmed, ctx);
+            const resolved = resolveVoiceActionCommand(forIntent, ctx);
             if (resolved.status === "need_clarify") {
               setMessages((m) => [...m, { id: `u-${Date.now()}`, role: "user", content: trimmed }]);
               appendAssistantLocal(resolved.message);
@@ -507,7 +569,7 @@ export function SiyaChat({
         }
       }
 
-      await send(trimmed);
+      await send(forIntent === trimmed ? trimmed : forIntent);
     },
     [
       loading,
@@ -849,8 +911,8 @@ export function SiyaChat({
                     Provisional · not an approved policy
                   </p>
                 ) : null}
-                {msg.role === "assistant" ? mdLite(msg.content) : msg.content}
-                {msg.sources?.length && !msg.knowledgeGap ? (
+                {msg.role === "assistant" ? <AssistantAnswer text={msg.content} /> : msg.content}
+                {msg.sources?.length && !msg.knowledgeGap && !/source:/i.test(msg.content) ? (
                   <p className="mt-2 text-[10px] text-[var(--siya-text-muted)]" data-sources>
                     {msg.sources.map((s) => s.title).join(" · ")}
                   </p>
@@ -992,7 +1054,7 @@ export function SiyaChat({
         <div className={`mx-auto max-w-2xl ${homeVariant ? "px-0 pb-3" : ""}`}>
           {homeVariant && messages.length === 0 && !threadLoading ? (
             <div className="mb-3 flex flex-wrap justify-start gap-1.5 px-0.5">
-              {quickPrompts.slice(0, 3).map((p) => (
+              {(founderCoach ? quickPrompts.slice(0, 3) : [...ASK_PERSONAL_PROMPTS]).map((p) => (
                 <button
                   key={p}
                   type="button"

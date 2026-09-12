@@ -135,7 +135,23 @@ export function isSpecificEnoughForGapCapture(text: string): boolean {
   const tokens = tokenizeForSearch(text).filter(
     (t) => t.length > 2 && !CLARIFY_GENERIC.has(t) && !VAGUE_ONLY.has(t),
   );
-  return tokens.length >= 2;
+  if (tokens.length >= 2) return true;
+  // tokenizeForSearch drops Devanagari, so "SOP कैसे बनाना है" looks like only "sop".
+  // A named how-to that failed is a real miss — notify — not company-wide SOP noise.
+  return isScriptAwareProcessAsk(text);
+}
+
+/** Concrete process ask whose wording is mostly non-ASCII or Hinglish leftovers. */
+function isScriptAwareProcessAsk(text: string): boolean {
+  const t = text.trim();
+  if (!t) return false;
+  if (/\b(siya(\s+health)?|the\s+company|our\s+company|everything|all)\b/i.test(t) && /\bsops?\b/i.test(t)) {
+    return false;
+  }
+  const howTo =
+    /(?:kaise|kese|कैसे|\bhow\b)/i.test(t) &&
+    /(?:bana|banat|banay|likh|बन|लिख|write|creat|draft|make)/i.test(t);
+  return /\b(sop|sops|procedure|policy)\b/i.test(t) && howTo;
 }
 
 const SOFT_STOP_MARK =
@@ -507,15 +523,132 @@ function numberedSteps(body: string): string[] {
   return steps;
 }
 
+/** Markers the chat UI renders as a collapsed “more detail” block. */
+export const ANSWER_DETAIL_OPEN = "[[detail]]";
+export const ANSWER_DETAIL_CLOSE = "[[/detail]]";
+
+function asksAboutEscalation(text: string): boolean {
+  return /\b(escalat\w*|who do i call|who to call|supervisor)\b/i.test(text);
+}
+
 function relatedChunks(userMessage: string, primary: RetrievedChunk, rest: RetrievedChunk[]): RetrievedChunk[] {
   const qt = tokenizeForSearch(userMessage);
   return rest.filter((c) => {
-    if (c.score < primary.score * 0.88) return false;
+    if (c.score < primary.score * 0.92) return false;
     if (c.id === primary.id) return false;
+    // “reschedule” is not an escalation ask — don’t co-cite that map.
+    if (c.id === "escalation-pathways" && !asksAboutEscalation(userMessage)) return false;
     const title = c.title.toLowerCase();
-    const sharesToken = qt.some((t) => t.length > 3 && (title.includes(t) || c.snippet.toLowerCase().includes(t)));
-    return sharesToken || c.score >= primary.score * 0.98;
+    const distinctive = qt.filter((t) => t.length > 4 && !CLARIFY_GENERIC.has(t));
+    const sharesToken = distinctive.some((t) => title.includes(t));
+    return sharesToken && c.score >= primary.score * 0.95;
   });
+}
+
+const TOPIC_SOP_HREF: Record<string, string> = {
+  "klarity-billing-cancellation": "https://www.helloklarity.com/billing-and-cancellation-policy",
+};
+
+function readableDetail(snippet: string): string[] {
+  const flat = snippet
+    .replace(/\*\*/g, "")
+    .replace(/\|/g, " ")
+    .replace(/-{3,}/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  const sentences = flat
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.replace(/\s+/g, " ").trim())
+    .filter((s) => s.length >= 40 && s.length <= 280)
+    .filter((s) => !/staff-facing summary|do not invent|symptom|action/i.test(s))
+    .filter((s) => !/^[-–—|]+$/.test(s));
+  const useful = sentences.filter((s) =>
+    /(24\s*h|refund|deposit|non-refundable|reschedul|no-show|do not promise|billing lead|charged)/i.test(s),
+  );
+  return (useful.length ? useful : sentences).slice(0, 4);
+}
+
+function sourceCiteLine(primary: RetrievedChunk): string {
+  const title = primary.sourceLabel || primary.title;
+  const href = TOPIC_SOP_HREF[primary.id] || primary.links?.[0]?.href;
+  return href ? `Source: [${title}](${href})` : `Source: ${title}`;
+}
+
+function isRescheduleFeeAsk(text: string): boolean {
+  const t = text.toLowerCase();
+  const move = /\breschedul|cancel|fee|charge|refund|charged\b/.test(t);
+  return move && /\breschedul|cancel/.test(t) && /\b(fee|charge|charged|refund|pay|payment)\b/.test(t);
+}
+
+/**
+ * Short first line when the retrieved guide already states a yes/no, amount, or policy outcome.
+ * Not a new policy — a lead cut from the primary SOP.
+ */
+export function directLeadLine(userMessage: string, primary: RetrievedChunk): string | null {
+  const id = primary.id;
+  if (
+    (id === "klarity-billing-cancellation" || id === "billing-late-cancel") &&
+    isRescheduleFeeAsk(userMessage)
+  ) {
+    return "Yes, they can reschedule — but they'll be charged again per Klarity's cancellation policy unless it's 24+ hours out.";
+  }
+  const cleaned = primary.snippet
+    .replace(/\*\*/g, "")
+    .replace(/`[^`]+`/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  const sentences = cleaned.split(/(?<=[.!?])\s+/).filter((s) => s.length > 20 && s.length < 220);
+  const outcome = sentences.find((s) =>
+    /(\byes\b|\bno\b|\$\d+|24\s*hour|no refund|non-refundable|charged|do not promise)/i.test(s),
+  );
+  if (!outcome) return null;
+  if (/staff-facing summary|do not invent/i.test(outcome)) return null;
+  return outcome.replace(/\s+/g, " ").trim();
+}
+
+/** True when compose already put a short policy outcome on line 1 — don't rewrite or tack on follow-ups. */
+export function hasDirectLead(message: string): boolean {
+  const first = message.trim().split("\n").find((l) => l.trim()) || "";
+  const plain = first.replace(/\*\*/g, "").trim();
+  if (plain.length < 20 || plain.length > 240) return false;
+  if (/^(to address|here'?s how|here is how|empathize|i'm not sure|happy to help|\d+\.)/i.test(plain)) {
+    return false;
+  }
+  return first.startsWith("**") && /(\byes\b|\bno\b|\$\d+|24\+?\s*hours?)/i.test(plain);
+}
+
+/**
+ * When the model still writes a process essay, keep the outcome up front and collapse numbered steps.
+ * Does not invent policy — only reorders text the model already produced.
+ */
+export function shapeLlmAnswer(text: string): string {
+  let t = text
+    .replace(/\n+\*\*(A few quick questions|To help you faster):\*\*[\s\S]*$/i, "")
+    .replace(/\n+If you need further assistance[\s\S]*$/i, "")
+    .trim();
+  if (!t || t.includes(ANSWER_DETAIL_OPEN)) return t;
+
+  const lines = t.split("\n");
+  const stepAt = lines.findIndex((l) => /^\s*\d+\.\s+/.test(l));
+  if (stepAt > 0) {
+    const lead = lines.slice(0, stepAt).join("\n").trim();
+    const steps = lines.slice(stepAt).join("\n").trim();
+    if (lead && steps) {
+      t = `${lead}\n\n${ANSWER_DETAIL_OPEN}\n${steps}\n${ANSWER_DETAIL_CLOSE}`;
+    }
+  }
+  return t;
+}
+
+/** Drop process essays and tacked follow-ups from spoken Talk. */
+export function leadForSpeech(text: string): string {
+  const start = text.indexOf(ANSWER_DETAIL_OPEN);
+  const end = text.indexOf(ANSWER_DETAIL_CLOSE);
+  const visible =
+    start !== -1 && end > start
+      ? `${text.slice(0, start)}\n${text.slice(end + ANSWER_DETAIL_CLOSE.length)}`
+      : text;
+  return visible.replace(/\n+\*\*(A few quick questions|To help you faster):\*\*[\s\S]*$/i, "").trim();
 }
 
 function formatSocialPostAnswer(): string[] {
@@ -638,23 +771,60 @@ export function composeAnswerFromChunks(
     return formatPatientManagerProvisionalAnswer();
   }
 
-  const parts: string[] = [...formatPrimaryAnswer(userMessage, primary, flowId)];
-
+  const lead = directLeadLine(userMessage, primary);
+  const body = formatPrimaryAnswer(userMessage, primary, flowId);
   const steps = numberedSteps(primary.snippet);
-  if (
-    steps.length >= 2 &&
-    primary.id !== "homepage-cta-meet-and-greet" &&
-    !primary.provisional
-  ) {
+  const parts: string[] = [];
+
+  if (lead) {
+    parts.push(lead.startsWith("**") ? lead : `**${lead}**`);
     parts.push("");
-    parts.push("**Steps:**");
-    steps.forEach((step, i) => {
-      parts.push(`${i + 1}. ${step}`);
-    });
+    parts.push(sourceCiteLine(primary));
+    const detail =
+      isRescheduleFeeAsk(userMessage) &&
+      (primary.id === "klarity-billing-cancellation" || primary.id === "billing-late-cancel")
+        ? [
+            "Do not promise a refund or waiver in chat.",
+            "Under 24 hours: they can still move the visit, but there is no refund — the $10 initial deposit is non-refundable.",
+            "24+ hours out: the remaining fee may be refunded; the deposit is kept.",
+            "Fee disputes or exceptions → Billing lead.",
+          ]
+        : readableDetail(primary.snippet);
+    if (
+      steps.length >= 2 &&
+      primary.id !== "homepage-cta-meet-and-greet" &&
+      !primary.provisional
+    ) {
+      detail.push("", "**Steps**");
+      steps.forEach((step, i) => detail.push(`${i + 1}. ${step}`));
+    }
+    if (detail.length) {
+      parts.push("");
+      parts.push(ANSWER_DETAIL_OPEN);
+      parts.push(...detail);
+      parts.push(ANSWER_DETAIL_CLOSE);
+    }
+  } else {
+    parts.push(...body);
+    if (
+      steps.length >= 2 &&
+      primary.id !== "homepage-cta-meet-and-greet" &&
+      !primary.provisional
+    ) {
+      parts.push("");
+      parts.push(ANSWER_DETAIL_OPEN);
+      parts.push("**Steps**");
+      steps.forEach((step, i) => {
+        parts.push(`${i + 1}. ${step}`);
+      });
+      parts.push(ANSWER_DETAIL_CLOSE);
+    }
+    parts.push("");
+    parts.push(sourceCiteLine(primary));
   }
 
   const related = relatedChunks(userMessage, primary, chunks.slice(1, 4));
-  if (related.length && !knowledgeGap && !primary.provisional) {
+  if (related.length && !knowledgeGap && !primary.provisional && !lead) {
     parts.push("");
     parts.push("**Also see:** " + related.map((r) => r.title).join(" · "));
   }

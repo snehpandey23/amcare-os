@@ -23,7 +23,14 @@ export type SafetyReasonCode =
   | "abuse"
   | "missed_high_urgency_triage"
   | "missed_moderate_safety_net"
-  | "rude_disengage";
+  | "rude_disengage"
+  /** Moderate clinical-accuracy tier — not a hard stop, not a red flag. */
+  | "screening_as_diagnosis";
+
+/** Trainee-facing label for screening treated as diagnosis. Do not fold this into Relevance. */
+export const SCREENING_AS_DIAGNOSIS_REASON = "screening_as_diagnosis" as const;
+export const SCREENING_AS_DIAGNOSIS_LABEL =
+  "Clinical accuracy: a screening is not a diagnosis";
 
 export type SafetyStop = {
   kind: SafetyStopKind;
@@ -151,6 +158,43 @@ const CLINICAL_DECISION_PATTERNS = [
   /i\s+would\s+(increase|decrease|raise|lower)\s+(the\s+)?dose/i,
 ];
 
+/**
+ * Moderate clinical-accuracy: screening tool described as equivalent to, or sufficient for, a diagnosis.
+ * Not misconduct — session continues. Correct framing ("not a diagnosis") must not match.
+ */
+const SCREENING_WORD = /\bscreenings?\b/i;
+
+const CORRECT_SCREENING_FRAMING = [
+  /\bnot\s+(a\s+)?diagnos/i,
+  /\bisn'?t\s+(a\s+)?diagnos/i,
+  /\b(does|do)\s+not\s+diagnos/i,
+  /\bdoesn'?t\s+diagnos/i,
+  /\bwon'?t\s+diagnos/i,
+  /\b(cannot|can'?t)\s+diagnos/i,
+  /\bnot\s+(the\s+)?same\s+as\s+(a\s+)?diagnos/i,
+  /\bnot\s+(enough|sufficient)\s+(for|to)\s+(a\s+)?diagnos/i,
+  /\bonly\s+(a\s+)?(clinician|provider|doctor|physician)\b.{0,48}\bdiagnos/i,
+];
+
+const SCREENING_AS_DIAGNOSIS_PATTERNS = [
+  /\bscreenings?\b.{0,60}\bto\s+diagnos/i,
+  /\bscreenings?\b.{0,80}\b(will|can|could|would|should)\s+(tell\s+you\s+if\s+you\s+have|diagnos|give\s+you\s+(a\s+)?diagnos)/i,
+  /\bscreenings?\b.{0,50}\b(is|equals|means)\s+(a\s+)?diagnos/i,
+  /\bdiagnos\w*.{0,40}\b(with|by|via|using|from)\s+(a\s+)?(free\s+)?screenings?/i,
+  /\b(free\s+)?screenings?\s+(diagnos|gives?\s+(you\s+)?(a\s+)?diagnos)/i,
+];
+
+export function isScreeningMisrepresentedAsDiagnosis(text: string): boolean {
+  const t = (text || "").trim();
+  if (!t || !SCREENING_WORD.test(t)) return false;
+  if (CORRECT_SCREENING_FRAMING.some((p) => p.test(t))) return false;
+  return SCREENING_AS_DIAGNOSIS_PATTERNS.some((p) => p.test(t));
+}
+
+export function screeningAsDiagnosisReplyIndexes(maMessages: string[]): number[] {
+  return maMessages.flatMap((text, i) => (isScreeningMisrepresentedAsDiagnosis(text) ? [i] : []));
+}
+
 const UNAPPROVED_CLINICAL_PATTERNS = [
   /side\s+effects?\s+(are|include|of)/i,
   /the\s+dose\s+should\s+be/i,
@@ -249,6 +293,23 @@ function softStop(patientReply: string): SafetyStop {
   };
 }
 
+function mergeScreeningAsDiagnosis(
+  ma: string[],
+  result: { outcome: SessionOutcome; reasons: SafetyReasonCode[]; redFlagged: boolean; notes: string[] },
+): { outcome: SessionOutcome; reasons: SafetyReasonCode[]; redFlagged: boolean; notes: string[] } {
+  if (!ma.some(isScreeningMisrepresentedAsDiagnosis)) return result;
+  const notes = result.notes.includes(SCREENING_AS_DIAGNOSIS_LABEL)
+    ? result.notes
+    : [...result.notes, SCREENING_AS_DIAGNOSIS_LABEL];
+  return {
+    ...result,
+    reasons: [...new Set([...result.reasons, SCREENING_AS_DIAGNOSIS_REASON])],
+    notes,
+    // Moderate tier never promotes a completed session into a hard red-flag by itself.
+    redFlagged: result.redFlagged,
+  };
+}
+
 function walkAwayStop(patientReply: string): SafetyStop {
   return {
     kind: "walk_away",
@@ -340,42 +401,47 @@ export function classifyCompletedSession(opts: {
   }
   const unique = [...new Set(reasons)];
   if (unique.length) {
-    return { outcome: "red_flag", reasons: unique, redFlagged: true, notes: ["Hard-stop criteria met in transcript."] };
+    return mergeScreeningAsDiagnosis(ma, {
+      outcome: "red_flag",
+      reasons: unique,
+      redFlagged: true,
+      notes: ["Hard-stop criteria met in transcript."],
+    });
   }
 
   if (detectHighUrgencyHits(corpus).length && !hasEscalateIfWorseLanguage(ma)) {
-    return {
+    return mergeScreeningAsDiagnosis(ma, {
       outcome: "red_flag",
       reasons: ["missed_high_urgency_triage"],
       redFlagged: true,
       notes: ["High-urgency symptoms appeared; escalate language was missing."],
-    };
+    });
   }
 
   if ((hasModerateSymptoms(corpus) || patients.some(hasModerateSymptoms)) && !hasEscalateIfWorseLanguage(ma)) {
     notes.push("Moderate/worsening symptoms without escalate-if-worse safety-net language.");
-    return {
+    return mergeScreeningAsDiagnosis(ma, {
       outcome: "soft_stop",
       reasons: ["missed_moderate_safety_net"],
       redFlagged: false,
       notes,
-    };
+    });
   }
 
   if (countRudeMaTurns(ma) >= 2) {
-    return {
+    return mergeScreeningAsDiagnosis(ma, {
       outcome: "walk_away",
       reasons: ["rude_disengage"],
       redFlagged: false,
       notes: ["Multiple rude turns — patient would likely walk away."],
-    };
+    });
   }
 
   if (hasEscalateIfWorseLanguage(ma)) {
     notes.push("Safety-net / escalate-if-worse language was present.");
   }
   notes.push(`Process redirects available (placeholder): ${REDIRECT_SET_NOTE}`);
-  return { outcome: "completed", reasons: [], redFlagged: false, notes };
+  return mergeScreeningAsDiagnosis(ma, { outcome: "completed", reasons: [], redFlagged: false, notes });
 }
 
 export function processRedirectPromptBlock(): string {

@@ -18,7 +18,13 @@ import {
   type SopSubmitFeedbackPayload,
 } from "@/lib/sop-api";
 import type { SopDraftAnswers } from "@/lib/sop-draft-assist";
-import { shouldApplySopEditDeepLink } from "@/lib/sop-editor-session";
+import {
+  isSopEditorDirty,
+  shouldApplySopEditDeepLink,
+  SOP_NEW_DRAFT_SAVE_HINT,
+  SOP_UNSAVED_LEAVE_MSG,
+  type SopEditorSavedSnapshot,
+} from "@/lib/sop-editor-session";
 import { SopDraftGuide } from "@/components/sops/SopDraftGuide";
 import { SopSubmitFeedbackCard } from "@/components/sops/SopSubmitFeedbackCard";
 import { SOP_STATUS_LABEL, type SopRecord, type SopTaskRecord } from "@/lib/sop-types";
@@ -135,6 +141,19 @@ export function SopWorkspace() {
   const [submitFeedback, setSubmitFeedback] = useState<SopSubmitFeedbackPayload | null>(null);
   const [submitFeedbackNote, setSubmitFeedbackNote] = useState<string | null>(null);
   const [submitFeedbackReady, setSubmitFeedbackReady] = useState(false);
+  /** Last fields written to the DB for this editor session (null = never persisted). */
+  const [savedSnapshot, setSavedSnapshot] = useState<SopEditorSavedSnapshot | null>(null);
+  const dirtyRef = useRef(false);
+
+  const editorDirty = isSopEditorDirty({
+    editorOpen,
+    title: formTitle,
+    body: formBody,
+    department: formDept,
+    reviewDate: formReviewDate,
+    saved: savedSnapshot,
+  });
+  dirtyRef.current = editorDirty;
 
   const canEditDept = useMemo((): ((dept: string) => boolean) => {
     if (!ctx) return () => false;
@@ -178,6 +197,42 @@ export function SopWorkspace() {
     if (!authReady || !user) return;
     void load();
   }, [authReady, user, load]);
+
+  // Browser refresh / tab close while unsaved.
+  useEffect(() => {
+    if (!editorDirty) return;
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = SOP_UNSAVED_LEAVE_MSG;
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () => window.removeEventListener("beforeunload", onBeforeUnload);
+  }, [editorDirty]);
+
+  // In-app Next.js link clicks while unsaved (beforeunload does not fire for client nav).
+  useEffect(() => {
+    if (!editorDirty) return;
+    const onClickCapture = (e: MouseEvent) => {
+      if (!dirtyRef.current) return;
+      const target = e.target as HTMLElement | null;
+      const anchor = target?.closest?.("a[href]") as HTMLAnchorElement | null;
+      if (!anchor?.href) return;
+      if (anchor.target === "_blank" || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      try {
+        const url = new URL(anchor.href, window.location.href);
+        if (url.origin !== window.location.origin) return;
+        if (url.pathname === window.location.pathname && url.search === window.location.search) return;
+      } catch {
+        return;
+      }
+      if (!window.confirm(SOP_UNSAVED_LEAVE_MSG)) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
+    document.addEventListener("click", onClickCapture, true);
+    return () => document.removeEventListener("click", onClickCapture, true);
+  }, [editorDirty]);
 
   useEffect(() => {
     if (!editId || loading || !sops.length) return;
@@ -234,6 +289,7 @@ export function SopWorkspace() {
   function openBlankEditor(dept: string, title = "") {
     clearEditQuery();
     setEditing(null);
+    setSavedSnapshot(null);
     setFormDept(dept);
     setFormTitle(title);
     setFormBody("");
@@ -270,33 +326,63 @@ export function SopWorkspace() {
         setGuideError("error" in result ? result.error : "Draft assist failed");
         return;
       }
-      setFormDept(guideDept);
-      setFormTitle(result.draft.title);
-      setFormBody(result.draft.body);
+      const title = result.draft.title;
+      const body = result.draft.body;
+      const dept = guideDept;
+      const method =
+        result.method === "deterministic" || result.draft.method === "deterministic"
+          ? ("deterministic" as const)
+          : ("llm" as const);
+      setFormDept(dept);
+      setFormTitle(title);
+      setFormBody(body);
       setFormReviewDate("");
       setPendingAiDrafted(true);
-      setDraftMethod(
-        result.method === "deterministic" || result.draft.method === "deterministic"
-          ? "deterministic"
-          : "llm",
-      );
+      setDraftMethod(method);
       setLastGuideAnswers(answers);
       setRefineText("");
       setRefineNote(
         result.note ||
           result.draft.note ||
-          (result.method === "deterministic" || result.draft.method === "deterministic"
+          (method === "deterministic"
             ? "Not an AI rewrite — your answers were structured into sections. Fix AI access or edit manually."
-            : "AI draft ready — refine or edit before Save/Submit."),
+            : "AI draft ready — refine or edit before Submit."),
       );
       setGuideThinWarning(null);
       setGuideOpen(false);
       setEditing(null);
+      setSavedSnapshot(null);
       submitSnapRef.current = null;
       setEditorOpen(true);
       // New draft is not the ?edit= SOP — clear deep link before any save/load cycle.
       clearEditQuery();
       openedEditIdRef.current = "__new_draft__";
+
+      // Persist immediately so Cancel / refresh cannot discard the generation.
+      try {
+        const saved = await createSop({
+          department: dept,
+          title: title.trim(),
+          body,
+          aiDrafted: true,
+        });
+        setEditing(saved);
+        setSavedSnapshot({
+          title: saved.title,
+          body: saved.body,
+          department: saved.department,
+          reviewDate: saved.reviewDate ?? "",
+        });
+        bindEditorToSop(saved);
+        setNotice("Draft auto-saved to My drafts. You can leave safely — keep editing or Submit for review.");
+        void load();
+      } catch (saveErr) {
+        setError(
+          saveErr instanceof Error
+            ? `Draft generated but not saved yet: ${saveErr.message}. Click Save draft before leaving.`
+            : "Draft generated but not saved yet. Click Save draft before leaving.",
+        );
+      }
     } catch (err) {
       setGuideError(err instanceof Error ? err.message : "Draft assist failed");
     } finally {
@@ -330,8 +416,10 @@ export function SopWorkspace() {
         setError("error" in result ? result.error : "Refine failed");
         return;
       }
-      setFormTitle(result.draft.title);
-      setFormBody(result.draft.body);
+      const nextTitle = result.draft.title;
+      const nextBody = result.draft.body;
+      setFormTitle(nextTitle);
+      setFormBody(nextBody);
       setPendingAiDrafted(true);
       setDraftMethod(result.method === "deterministic" || result.draft.method === "deterministic" ? "deterministic" : "llm");
       setRefineText("");
@@ -343,7 +431,17 @@ export function SopWorkspace() {
         );
         setError(result.note || result.draft.note || "Refine failed — draft unchanged.");
       } else {
-        setRefineNote("Draft refined — edit further or refine again before Save/Submit.");
+        setRefineNote("Draft refined — edit further or Submit for review.");
+        // Keep refined text in DB so a leave/refresh cannot roll back to the pre-refine version.
+        const saved = await persistDraft({
+          title: nextTitle,
+          body: nextBody,
+          department: formDept,
+          aiDrafted: true,
+        });
+        if (saved) {
+          setRefineNote("Draft refined and auto-saved — edit further or Submit for review.");
+        }
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Refine failed");
@@ -359,6 +457,12 @@ export function SopWorkspace() {
     setFormTitle(sop.title);
     setFormBody(sop.body);
     setFormReviewDate(sop.reviewDate ?? "");
+    setSavedSnapshot({
+      title: sop.title,
+      body: sop.body,
+      department: sop.department,
+      reviewDate: sop.reviewDate ?? "",
+    });
     setPendingAiDrafted(false);
     setDraftMethod(null);
     setLastGuideAnswers(null);
@@ -370,36 +474,63 @@ export function SopWorkspace() {
     setEditorOpen(true);
   }
 
+  function requestCloseEditor() {
+    if (editorDirty && !window.confirm(SOP_UNSAVED_LEAVE_MSG)) return;
+    setEditorOpen(false);
+    setSubmitFeedback(null);
+    setSubmitFeedbackReady(false);
+    submitSnapRef.current = null;
+  }
+
   async function saveDraft(e: React.FormEvent) {
     e.preventDefault();
     await persistDraft();
   }
 
-  async function persistDraft(): Promise<SopRecord | null> {
-    if (!formTitle.trim() || !formDept) return null;
+  async function persistDraft(overrides?: {
+    title?: string;
+    body?: string;
+    department?: string;
+    aiDrafted?: boolean;
+  }): Promise<SopRecord | null> {
+    const title = (overrides?.title ?? formTitle).trim();
+    const body = overrides?.body ?? formBody;
+    const department = overrides?.department ?? formDept;
+    const aiDrafted = overrides?.aiDrafted ?? pendingAiDrafted;
+    if (!title || !department) return null;
     setPending(true);
     setError(null);
     try {
       let saved: SopRecord;
       if (editing) {
         saved = await updateSop(editing.id, {
-          title: formTitle.trim(),
-          body: formBody,
+          title,
+          body,
           reviewDate: formReviewDate || undefined,
         });
         setEditing(saved);
         bindEditorToSop(saved);
       } else {
         saved = await createSop({
-          department: formDept,
-          title: formTitle.trim(),
-          body: formBody,
+          department,
+          title,
+          body,
           reviewDate: formReviewDate || undefined,
-          aiDrafted: pendingAiDrafted,
+          aiDrafted,
         });
         setEditing(saved);
         bindEditorToSop(saved);
       }
+      setFormTitle(saved.title);
+      setFormBody(saved.body);
+      setFormDept(saved.department);
+      setFormReviewDate(saved.reviewDate ?? "");
+      setSavedSnapshot({
+        title: saved.title,
+        body: saved.body,
+        department: saved.department,
+        reviewDate: saved.reviewDate ?? "",
+      });
       // Reload library in background — do not let deep-link effects replace formBody.
       void load();
       return saved;
@@ -810,16 +941,20 @@ export function SopWorkspace() {
             className={`max-h-[90vh] w-full max-w-lg overflow-y-auto p-5 shadow-[var(--siya-shadow-lg)] ${portalSection}`}
           >
             <h2 className={portalH2}>{editing ? "Edit SOP" : "New SOP draft"}</h2>
-            {!editing && pendingAiDrafted && draftMethod === "llm" ? (
+            {pendingAiDrafted && draftMethod === "llm" ? (
               <p className={`mt-1 text-xs ${portalBadgeAiDrafted} inline-block`}>
-                AI suggested this draft — edit anything before you save or submit.
+                {editing
+                  ? "AI draft auto-saved to My drafts — edit anything before Submit for review."
+                  : "AI draft generated — click Save draft or your work will be lost if you leave."}
               </p>
             ) : null}
-            {!editing && pendingAiDrafted && draftMethod === "deterministic" ? (
+            {pendingAiDrafted && draftMethod === "deterministic" ? (
               <p className={`mt-2 px-3 py-2 text-xs ${portalStatusWarnBox} ${portalStatusWarnText}`}>
                 <strong>Not an AI rewrite.</strong> Generation failed or was unavailable — this is your answers
-                rearranged into Purpose / Scope / Steps. Edit thoroughly before submit, or ask an admin to fix AI
-                Gateway / OPENAI_API_KEY.
+                rearranged into Purpose / Scope / Steps.{" "}
+                {editing
+                  ? "Auto-saved — edit thoroughly before submit."
+                  : "Not saved yet — click Save draft before leaving."}
               </p>
             ) : null}
             {formDept ? (
@@ -904,21 +1039,21 @@ export function SopWorkspace() {
                 Created {formatSopWhen(editing.createdAt)} · Updated {formatSopWhen(editing.updatedAt)}
                 {editing.submittedAt ? ` · Submitted ${formatSopWhen(editing.submittedAt)}` : ""}
                 {editing.approvedAt ? ` · Published ${formatSopWhen(editing.approvedAt)}` : ""}
+                {editorDirty ? (
+                  <span className="ml-1 font-semibold text-amber-800">· Unsaved edits</span>
+                ) : (
+                  <span className="ml-1 text-[var(--siya-text-secondary)]">· Saved</span>
+                )}
               </p>
             ) : (
-              <p className="mt-2 text-[10px] text-[var(--siya-text-muted)]">New draft — dates appear after first save.</p>
+              <p className="mt-2 text-[10px] font-semibold text-amber-800">{SOP_NEW_DRAFT_SAVE_HINT}</p>
             )}
             <div className="mt-5 flex flex-wrap justify-end gap-2">
               <button
                 type="button"
                 className="rounded-lg border px-3 py-2 text-sm"
                 disabled={pending || refining}
-                onClick={() => {
-                  setEditorOpen(false);
-                  setSubmitFeedback(null);
-                  setSubmitFeedbackReady(false);
-                  submitSnapRef.current = null;
-                }}
+                onClick={() => requestCloseEditor()}
               >
                 Cancel
               </button>

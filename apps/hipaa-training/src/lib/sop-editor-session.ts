@@ -19,3 +19,38 @@ export function shouldApplySopEditDeepLink(opts: {
   if (opts.openedEditId === editId) return false;
   return true;
 }
+
+/** Snapshot of last DB-persisted editor fields (null = never saved this session). */
+export type SopEditorSavedSnapshot = {
+  title: string;
+  body: string;
+  department: string;
+  reviewDate: string;
+};
+
+export const SOP_UNSAVED_LEAVE_MSG =
+  "You have an unsaved SOP draft — are you sure you want to leave without saving? Your work will be lost.";
+
+export const SOP_NEW_DRAFT_SAVE_HINT =
+  "Not saved yet — click Save draft or your work will be lost if you leave this page.";
+
+/** True when the open editor has content that is not yet persisted. */
+export function isSopEditorDirty(opts: {
+  editorOpen: boolean;
+  title: string;
+  body: string;
+  department: string;
+  reviewDate: string;
+  saved: SopEditorSavedSnapshot | null;
+}): boolean {
+  if (!opts.editorOpen) return false;
+  const hasContent = opts.title.trim().length > 0 || opts.body.trim().length > 0;
+  if (!hasContent) return false;
+  if (!opts.saved) return true;
+  return (
+    opts.title !== opts.saved.title ||
+    opts.body !== opts.saved.body ||
+    opts.department !== opts.saved.department ||
+    opts.reviewDate !== opts.saved.reviewDate
+  );
+}

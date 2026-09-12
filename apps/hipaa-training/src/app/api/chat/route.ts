@@ -167,7 +167,11 @@ export async function POST(req: Request) {
       surface,
       assistantLabel,
     });
-    const kbLinks = result.chunks.flatMap((c) => c.links ?? []).slice(0, 8);
+    const citedIds = new Set((result.sources ?? []).map((s) => s.id));
+    const citedChunks = citedIds.size
+      ? result.chunks.filter((c) => citedIds.has(c.id))
+      : result.chunks.slice(0, 1);
+    const kbLinks = citedChunks.flatMap((c) => c.links ?? []).slice(0, 2);
     const links = staffSafeLinks(
       result.portalLinks?.length
         ? result.portalLinks
@@ -193,22 +197,18 @@ export async function POST(req: Request) {
       syntheticProbe?: boolean;
     } | null = null;
     // Courtesy / greeting-style asks must never auto-email a knowledge gap (noise).
-    // Vague router tasks (Company memory lookup / Founder Talk) are not real topics —
-    // staff can still Notify owner; that path stores a PHI-safe question hint.
+    // knowledgeGap already means a concrete miss — do not also drop it because the
+    // router labeled the task "Company memory lookup" or "Founder Talk". Those labels
+    // are the unmatched bucket, and skipping them silenced failure notices.
     const department =
       result.routing?.department || (surface === "founder-coach" ? "Leadership" : "General");
     const task =
       result.routing?.task || (surface === "founder-coach" ? "Founder Talk" : "Unmatched Ask");
-    const vagueRouterTask =
-      task === "Company memory lookup" ||
-      task === "Founder Talk" ||
-      task === "Unmatched Ask";
     if (
       authToken &&
       result.knowledgeGap === true &&
       !result.refused &&
-      !isCourtesyNoiseForGapCapture(message) &&
-      !vagueRouterTask
+      !isCourtesyNoiseForGapCapture(message)
     ) {
       const chatCategory =
         surface === "founder-coach" ? "Leadership · Founder Talk" : `${department} · ${task}`;

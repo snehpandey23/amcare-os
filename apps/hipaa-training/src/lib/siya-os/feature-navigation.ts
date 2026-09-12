@@ -50,6 +50,15 @@ export const PORTAL_FEATURES: FeatureDef[] = [
     exclude: [/\b(mock|sample)\s+quiz\b/, /\bpractice\s+drills?\b/],
   },
   {
+    id: "competency-exam",
+    label: "MA competency exam",
+    href: "/learn/competency-exam",
+    section: "Learn & training",
+    blurb: "Partial timed exam — typing, HIPAA, writing, chat simulator. Not certification.",
+    patterns: [/\b(competency\s+exam|ma\s+exam|staff\s+competency)\b/],
+    exclude: [/\b(hipaa\s+cert(ification)?|final\s+exam)\b/],
+  },
+  {
     id: "chat-simulator",
     label: "Chat simulator",
     href: "/learn/chat-simulator",

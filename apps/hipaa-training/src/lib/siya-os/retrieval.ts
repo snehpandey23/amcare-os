@@ -338,6 +338,11 @@ export function retrieveWorkspaceKnowledge(query: string, limit = 6): RetrievedC
     { pattern: /pricing|price|\$149|\$79|evaluation cost|membership|how much|meet.?and.?greet/, id: "patient-pricing-public-canonical", boost: 20 },
     { pattern: /meet.*greet|homepage cta|book free|discovery call/, id: "homepage-cta-meet-and-greet", boost: 18 },
     { pattern: /late cancel|refund|cancellation|no-show/, id: "billing-late-cancel", boost: 16 },
+    {
+      pattern: /reschedul|(fee|charge|charged|refund).{0,40}(cancel|reschedul)|(cancel|reschedul).{0,40}(fee|charge|charged|refund)/,
+      id: "klarity-billing-cancellation",
+      boost: 26,
+    },
     { pattern: /refill|pharmacy|early refill|prescription (sent|ready)|med(ication)? not received|pill count|video pill|csa v2|controlled.?substance/, id: "refill-pharmacy-staff-guidance", boost: 22 },
     { pattern: /\b(new hire|day.?1|ma orientation|tool surprise|concierge\b.*\bonboard|onboard\b.*\b(new hire|ma\b|concierge))\b/, id: "ma-onboarding-field-lessons", boost: 20 },
     { pattern: /\b(leave|pto|time\s*off|day\s*off|vacation|holiday|sick\s+leave|request\s+leave|take\s+(a\s+)?leave)\b/, id: "leave-pto-request-provisional", boost: 32 },
@@ -355,7 +360,7 @@ export function retrieveWorkspaceKnowledge(query: string, limit = 6): RetrievedC
     { pattern: /third party|family member|authorization/, id: "third-party-caller", boost: 16 },
     { pattern: /workdrive|company memory|where.*sop|knowledge base/, id: "company-memory-workdrive-index", boost: 14 },
     { pattern: /marketing.*claim|fda|ftc|testimonial|ads compliance/, id: "medical-compliance-marketing", boost: 14 },
-    { pattern: /escalat|who do i call|supervisor/, id: "escalation-pathways", boost: 12 },
+    { pattern: /\b(escalat\w*|who do i call|who to call|supervisor)\b/, id: "escalation-pathways", boost: 12 },
     // Hostile/abusive patient → live Postgres SOP (see retrieveDynamicSops), not escalation-pathways.
     { pattern: /hipaa|breach|phi|privacy/, id: "hipaa-breach", boost: 12 },
   ];

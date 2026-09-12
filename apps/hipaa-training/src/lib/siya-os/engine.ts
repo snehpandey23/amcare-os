@@ -1,7 +1,7 @@
 import { getEscalationContacts } from "./config";
 import { defaultEscalationOwner } from "./escalation";
 import { retrievalQueryBoost, routeIntent, expandShortQuery, hasRoutableIntent } from "./flows";
-import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, isHrContactQuery, buildHrContactAnswer, abusivePatientAnswer, patientEmergencyAnswer, pickLiveAbusivePatientSop, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, isClarifyingFollowUp, isShortTopicContinue, isSpecificEnoughForGapCapture, answerFromPriorAssistIfCovered, isGapContributionFollowUp, answerGapContributionFollowUp, polishStaffMessage, isCasualOffTopic, casualOffTopicReply, appendDraftLiveHedge, provisionalSourceLabel, provisionalRoutingMeta } from "./compose-answer";
+import { composeAnswerFromChunks, clarifyVagueMessage, clarifyConfusedFollowUp, askClarifyingQuestion, isConfidentAssistAnswer, workplaceConcernAnswer, isHrContactQuery, buildHrContactAnswer, abusivePatientAnswer, patientEmergencyAnswer, pickLiveAbusivePatientSop, formatEscalationForSlack, isVagueUserMessage, isConfusedAboutPriorAnswer, isClarifyingFollowUp, isShortTopicContinue, isSpecificEnoughForGapCapture, answerFromPriorAssistIfCovered, isGapContributionFollowUp, answerGapContributionFollowUp, polishStaffMessage, isCasualOffTopic, casualOffTopicReply, appendDraftLiveHedge, provisionalSourceLabel, provisionalRoutingMeta, hasDirectLead, shapeLlmAnswer } from "./compose-answer";
 import { staffTopicLabel } from "./staff-voice";
 import {
   formatDepartmentLeadAnswer,
@@ -13,7 +13,17 @@ import {
 import { isSopAssignmentQuery, answerSopAssignmentAsk } from "./sop-assignment-ask";
 import { isMissingSopsQuery, answerMissingSopsAsk } from "./sop-missing-ask";
 import { isMyScheduleQuery, answerMyScheduleQuery, isTeamRosterQuery, answerTeamRosterQuery } from "./shift-roster-ask";
-import { isMyTypingSpeedQuery, answerMyTypingSpeedQuery } from "./practice-stats-ask";
+import {
+  classifyPersonalPracticeAsk,
+  isMyTypingSpeedQuery,
+  answerMyTypingSpeedQuery,
+} from "./practice-stats-ask";
+import {
+  answerMyAttendanceQuery,
+  answerMyFeedbackQuery,
+  isMyAttendanceQuery,
+  isMyFeedbackQuery,
+} from "./personal-self-ask";
 import { isOpsNeedsAttentionQuery, answerOpsNeedsAttentionQuery } from "./ops-attention-ask";
 import { isFounderFocusQuery, answerFounderFocusQuery } from "./founder-focus-ask";
 import { answerWhoIsQuery, isWhoAmIQuery, extractWhoIsName, fetchViewerIdentity } from "./staff-identity-ask";
@@ -36,7 +46,7 @@ import {
   type StaffRefusalCategory,
 } from "./phi-guard";
 import { fetchAdminOpsSnapshot, fetchMyTasksToday } from "./admin-ops-snapshot";
-import { detectAdminOpsIntent, runAdminOpsCoach, staffMyTasksReply, isAmbiguousStaffLoginDashboardQuery, historySuggestsPresenceTopic } from "./admin-ops-coach";
+import { detectAdminOpsIntent, runAdminOpsCoach, staffMyTasksReply, isAmbiguousStaffLoginDashboardQuery, historySuggestsPresenceTopic, extractNamedPerformanceSubject } from "./admin-ops-coach";
 import { tryFactsLookup } from "./facts-lookup";
 import { trySopChromeLookup } from "./sop-chrome-lookup";
 import { tryWorkplaceLinkLookup } from "./workplace-link-lookup";
@@ -46,7 +56,8 @@ import {
   tryFeatureNavigation,
   type FeatureNavOpts,
 } from "./feature-navigation";
-import { answerMetaConversation, type MetaConversationReply } from "./meta-conversation";
+import { answerMetaConversation, expandStaffSlang, type MetaConversationReply } from "./meta-conversation";
+import { normalizeHinglishForAsk } from "./hinglish-normalize";
 import {
   acknowledgePersonalPreference,
   acknowledgeRoleAuthorityClaim,
@@ -141,6 +152,10 @@ function isPatientFacingMarketingAsk(text: string): boolean {
   );
 }
 
+export function normalizeStaffAskText(text: string): string {
+  return expandStaffSlang(normalizeHinglishForAsk(text.trim()));
+}
+
 export function runSiyaAssistant(
   message: string,
   history: { role: string; content: string }[] = [],
@@ -150,7 +165,7 @@ export function runSiyaAssistant(
     queryOverride?: string;
   },
 ): SiyaReply {
-  return buildSiyaReply(message, history, opts);
+  return buildSiyaReply(normalizeStaffAskText(message), history, opts);
 }
 
 function metaConversationReply(
@@ -299,6 +314,7 @@ export async function runSiyaAssistantAsync(
   const token = opts?.authToken?.trim() || null;
   const founderCoach = opts?.surface === "founder-coach";
   const assistantLabel = opts?.assistantLabel?.trim() || null;
+  message = normalizeStaffAskText(message);
 
   // Department leads — live portal data (before meta "no org chart" legacy copy).
   if (token && (isDepartmentLeadQuery(message) || isDepartmentLeadFollowUp(message))) {
@@ -369,12 +385,22 @@ export async function runSiyaAssistantAsync(
     };
   }
 
-  // Personal Practice WPM / chat-sim stats — before feature nav (typing drill open).
-  if (isMyTypingSpeedQuery(message)) {
+  // Personal Practice / training — before feature nav (so “what drills should I do” is not “open a drill”).
+  const practiceKind = classifyPersonalPracticeAsk(message);
+  if (practiceKind || isMyTypingSpeedQuery(message)) {
+    const kind = practiceKind ?? "stats";
+    const taskLabel =
+      kind === "recommend"
+        ? "Practice next"
+        : kind === "last_typing"
+          ? "Last typing speed"
+          : kind === "last_chat_sim"
+            ? "Last chat simulator"
+            : "Practice stats";
     if (!token) {
       return {
         message: polishStaffMessage(
-          "Sign in to see **your** typing speed and Practice ledger (personal best WPM, recent scores). I won’t invent stats.",
+          "Sign in to see **your** training scores, typing speed, and Practice ledger. I won’t invent stats.",
         ),
         chunks: [],
         sources: [],
@@ -382,13 +408,13 @@ export async function runSiyaAssistantAsync(
         ruleFinal: true,
         routing: {
           department: founderCoach ? "Leadership" : "General",
-          task: founderCoach ? "Founder Talk" : "Practice stats",
+          task: founderCoach ? "Founder Talk" : taskLabel,
           confidence: "high",
           followUpQuestions: [],
         },
       };
     }
-    const stats = await answerMyTypingSpeedQuery(token);
+    const stats = await answerMyTypingSpeedQuery(token, kind);
     if (stats) {
       return {
         message: polishStaffMessage(stats.message),
@@ -397,6 +423,7 @@ export async function runSiyaAssistantAsync(
         portalLinks: [
           { label: "Practice", href: "/learn/practice" },
           { label: "Chat simulator", href: "/learn/chat-simulator" },
+          { label: "HIPAA training", href: "/training" },
         ],
         knowledgeGap: false,
         answerTrust: "approved",
@@ -404,7 +431,7 @@ export async function runSiyaAssistantAsync(
         ruleFinal: true,
         routing: {
           department: founderCoach ? "Leadership" : "General",
-          task: founderCoach ? "Founder Talk" : "Practice stats",
+          task: founderCoach ? "Founder Talk" : taskLabel,
           confidence: "high",
           followUpQuestions: [],
         },
@@ -420,7 +447,115 @@ export async function runSiyaAssistantAsync(
       ruleFinal: true,
       routing: {
         department: founderCoach ? "Leadership" : "General",
-        task: founderCoach ? "Founder Talk" : "Practice stats",
+        task: founderCoach ? "Founder Talk" : taskLabel,
+        confidence: "medium",
+        followUpQuestions: [],
+      },
+    };
+  }
+
+  if (isMyAttendanceQuery(message)) {
+    if (!token) {
+      return {
+        message: polishStaffMessage(
+          "Sign in to see **your** attendance hours. I only read this account’s IST hours — I won’t invent them.",
+        ),
+        chunks: [],
+        sources: [],
+        knowledgeGap: false,
+        ruleFinal: true,
+        routing: {
+          department: founderCoach ? "Leadership" : "General",
+          task: founderCoach ? "Founder Talk" : "My attendance",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    const attendance = await answerMyAttendanceQuery(token);
+    if (attendance) {
+      return {
+        message: polishStaffMessage(attendance.message),
+        chunks: [],
+        sources: attendance.sources,
+        portalLinks: attendance.links,
+        knowledgeGap: false,
+        answerTrust: "approved",
+        factsLookup: true,
+        ruleFinal: true,
+        routing: {
+          department: founderCoach ? "Leadership" : "General",
+          task: founderCoach ? "Founder Talk" : "My attendance",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    return {
+      message: polishStaffMessage(
+        "I couldn’t load your attendance hours just now. Open **My day** — the hours card is the same data.",
+      ),
+      chunks: [],
+      sources: [],
+      knowledgeGap: false,
+      ruleFinal: true,
+      routing: {
+        department: founderCoach ? "Leadership" : "General",
+        task: founderCoach ? "Founder Talk" : "My attendance",
+        confidence: "medium",
+        followUpQuestions: [],
+      },
+    };
+  }
+
+  if (isMyFeedbackQuery(message)) {
+    if (!token) {
+      return {
+        message: polishStaffMessage(
+          "Sign in to see **feedback you’ve received**. I only read your Feedback inbox — I won’t invent notes.",
+        ),
+        chunks: [],
+        sources: [],
+        knowledgeGap: false,
+        ruleFinal: true,
+        routing: {
+          department: founderCoach ? "Leadership" : "General",
+          task: founderCoach ? "Founder Talk" : "My feedback",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    const feedback = await answerMyFeedbackQuery(token);
+    if (feedback) {
+      return {
+        message: polishStaffMessage(feedback.message),
+        chunks: [],
+        sources: feedback.sources,
+        portalLinks: feedback.links,
+        knowledgeGap: false,
+        answerTrust: "approved",
+        factsLookup: true,
+        ruleFinal: true,
+        routing: {
+          department: founderCoach ? "Leadership" : "General",
+          task: founderCoach ? "Founder Talk" : "My feedback",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    return {
+      message: polishStaffMessage(
+        "I couldn’t load your feedback inbox just now. Open **Feedback** — that’s the same inbox.",
+      ),
+      chunks: [],
+      sources: [],
+      knowledgeGap: false,
+      ruleFinal: true,
+      routing: {
+        department: founderCoach ? "Leadership" : "General",
+        task: founderCoach ? "Founder Talk" : "My feedback",
         confidence: "medium",
         followUpQuestions: [],
       },
@@ -831,7 +966,8 @@ export async function runSiyaAssistantAsync(
             ops.intent === "ops_engagement" ||
             ops.intent === "ops_practice" ||
             ops.intent === "overdue" ||
-            ops.intent === "task_status",
+            ops.intent === "task_status" ||
+            ops.intent === "plan_day",
           pendingTask: founderCoach ? undefined : ops.pendingTask,
           executiveMeta: {
             confidence: ops.mode === "recommend" ? "high" : "medium",
@@ -870,13 +1006,20 @@ export async function runSiyaAssistantAsync(
       };
     }
     if (opsIntent.kind === "ops_engagement") {
+      const named = extractNamedPerformanceSubject(message);
       return {
         message: polishStaffMessage(
-          [
-            "Staff portal **usage / who logged in** is on the **Ops dashboard** (admin).",
-            "",
-            "Open **Ops → Section A · Staff engagement** for Ask activity by person — I won’t invent a list here.",
-          ].join("\n"),
+          named
+            ? [
+                `Named teammate stats for **${named}** need **Ops** access (Ask turns + Practice drills).`,
+                "",
+                "Open **Ops → Section A · Staff engagement** and search their name — I won’t invent numbers here. This is portal engagement, not an HR review.",
+              ].join("\n")
+            : [
+                "Staff portal **usage / who logged in** is on the **Ops dashboard** (admin).",
+                "",
+                "Open **Ops → Section A · Staff engagement** for Ask activity by person — I won’t invent a list here.",
+              ].join("\n"),
         ),
         chunks: [],
         sources: [],
@@ -1033,7 +1176,10 @@ export async function runSiyaAssistantAsync(
     userMessage: message,
     routingLine,
     chunks: base.chunks,
-    followUpQuestions: founderCoach ? [] : (base.routing?.followUpQuestions ?? []),
+    followUpQuestions:
+      founderCoach || hasDirectLead(base.message || "")
+        ? []
+        : (base.routing?.followUpQuestions ?? []),
     history,
     focusMode,
     // Tier-1 preferences only — never pass unconfirmed role claims as LLM "facts"
@@ -1042,13 +1188,17 @@ export async function runSiyaAssistantAsync(
   });
 
   if (synthesis.text) {
-    let msg = appendDraftLiveHedge(polishStaffMessage(synthesis.text), base.chunks);
+    let msg = appendDraftLiveHedge(polishStaffMessage(shapeLlmAnswer(synthesis.text)), base.chunks);
     if (base.chunks[0]?.escalate && !msg.includes(base.chunks[0].escalate!)) {
       msg += `\n\n**Loop in:** ${base.chunks[0].escalate}`;
     }
 
+    // Follow-ups only when the reply still doesn't state an outcome. A finished answer
+    // plus "Routine or urgent?" reads as the system not trusting its own answer.
     if (
       !founderCoach &&
+      !hasDirectLead(msg) &&
+      !hasDirectLead(base.message || "") &&
       base.routing?.confidence === "high" &&
       base.routing.followUpQuestions.length &&
       !focusMode
@@ -1766,7 +1916,7 @@ function buildSiyaReply(
     ? chunks.filter((c) => c.provisional || c.id === provisionalId).slice(0, 1)
     : primaryIsLiveSop
       ? chunks.filter((c) => c.id === chunks[0]!.id).slice(0, 1)
-      : chunks.filter((c) => !c.provisional).slice(0, 2);
+      : chunks.filter((c) => !c.provisional).slice(0, 1);
 
   const sources = citeChunks.map((c) => ({
     title:
@@ -1802,6 +1952,7 @@ function buildSiyaReply(
   const showFollowUps =
     !provisional &&
     !focusMode &&
+    !hasDirectLead(msg) &&
     routing.followUpQuestions.length > 0 &&
     (routing.confidence === "high" ||
       (routing.confidence === "medium" &&
@@ -1854,12 +2005,22 @@ function buildSiyaReply(
         }
       : undefined,
     sources,
+    portalLinks:
+      citeChunks[0]?.id === "klarity-billing-cancellation"
+        ? [
+            {
+              label: "Klarity cancellation policy",
+              href: "https://www.helloklarity.com/billing-and-cancellation-policy",
+            },
+          ]
+        : undefined,
     escalationPreview,
     knowledgeGap: false,
     answerTrust: provisional ? "provisional" : "approved",
     // Keep entity/voice + social process answers from LLM mangling (empty URLs / invented steps).
     ruleFinal:
       provisional ||
+      hasDirectLead(msg) ||
       citeChunks[0]?.id === "brand-entities-voice" ||
       (Boolean(routing.flowId?.startsWith("marketing-")) &&
         (citeChunks[0]?.id === "content-qa-checklist" ||

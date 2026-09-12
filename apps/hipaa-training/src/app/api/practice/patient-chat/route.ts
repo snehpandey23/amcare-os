@@ -199,8 +199,10 @@ export async function POST(req: Request) {
   }
 
   const turns = prior.filter((m) => m.role === "user").length;
+  const examBrief = typeof o.examBrief === "string" ? o.examBrief.trim() : "";
   const system = buildPatientDrillSystemPrompt(persona, turns, prior, {
     toneStep: tone.state.step,
+    examBrief: examBrief || undefined,
   });
   const messages = [
     ...prior.map((m) => ({ role: m.role, content: m.content })),

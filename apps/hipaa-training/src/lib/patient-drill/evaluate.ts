@@ -11,7 +11,13 @@
  * and not exact-phrase-only.
  */
 
-import type { SafetyReasonCode, SessionOutcome } from "./safety";
+import {
+  SCREENING_AS_DIAGNOSIS_LABEL,
+  SCREENING_AS_DIAGNOSIS_REASON,
+  isScreeningMisrepresentedAsDiagnosis,
+  type SafetyReasonCode,
+  type SessionOutcome,
+} from "./safety";
 import { estimateWpmFromWords, MAX_PLAUSIBLE_WPM } from "@/lib/level-up/wpm";
 
 /** Expanded courtesy / tone stems — natural variations welcome. */
@@ -457,6 +463,13 @@ export function isPoliteMessage(text: string): boolean {
   return false;
 }
 
+export type ClinicalAccuracyHit = {
+  /** Index among MA replies (same order as relevanceTurns). */
+  replyIndex: number;
+  label: string;
+  replyExcerpt: string;
+};
+
 export type SimulatorFeedback = {
   /** @deprecated use politenessScore */
   empathyScore: number;
@@ -476,6 +489,8 @@ export type SimulatorFeedback = {
   messageCount: number;
   grammarErrorCount: number;
   accuracyNote: string;
+  /** Moderate clinical-accuracy hits — not Relevance, not a hard stop. */
+  clinicalAccuracyHits: ClinicalAccuracyHit[];
   outcome: SessionOutcome;
   redFlagged: boolean;
   safetyReasons: SafetyReasonCode[];
@@ -529,6 +544,29 @@ export function evaluateSimulatorSession(
   const politenessScore = n > 0 ? Math.round((politeCount / n) * 100) : 0;
   const grammarScore = n > 0 ? Math.round((grammarOkCount / n) * 100) : 0;
   const relevance = scoreRelevanceSession(messages);
+  const clinicalAccuracyHits: ClinicalAccuracyHit[] = ma.flatMap((msg, replyIndex) =>
+    isScreeningMisrepresentedAsDiagnosis(msg.text || "")
+      ? [
+          {
+            replyIndex,
+            label: SCREENING_AS_DIAGNOSIS_LABEL,
+            replyExcerpt: (msg.text || "").trim().slice(0, 120),
+          },
+        ]
+      : [],
+  );
+  const safetyReasons = [
+    ...new Set([
+      ...(opts?.safetyReasons ?? []),
+      ...(clinicalAccuracyHits.length ? [SCREENING_AS_DIAGNOSIS_REASON] : []),
+    ]),
+  ];
+  const safetyNotes = [
+    ...new Set([
+      ...(opts?.safetyNotes ?? []),
+      ...(clinicalAccuracyHits.length ? [SCREENING_AS_DIAGNOSIS_LABEL] : []),
+    ]),
+  ];
   const rawAvg = totalMinutes > 0 ? totalWords / totalMinutes : 0;
   const avgEst =
     totalMinutes > 0
@@ -552,13 +590,14 @@ export function evaluateSimulatorSession(
     rawAvgWpm: Math.round(rawAvg) || avgEst.rawWpm,
     messageCount: n,
     grammarErrorCount,
+    clinicalAccuracyHits,
     accuracyNote: avgEst.reliable
       ? `Typing pace estimated from first keystroke → send (capped sanity ≤ ${MAX_PLAUSIBLE_WPM} WPM). Accuracy is not measured here — clinical content uses safety tiers.`
       : "Typing pace unable to estimate — send timing was too short or implausibly fast (often paste, or timer started late). Clinical content is scored via safety tiers, not this number.",
     outcome: opts?.outcome ?? "completed",
     redFlagged: opts?.redFlagged ?? false,
-    safetyReasons: opts?.safetyReasons ?? [],
-    safetyNotes: opts?.safetyNotes ?? [],
+    safetyReasons,
+    safetyNotes,
   };
 }
 

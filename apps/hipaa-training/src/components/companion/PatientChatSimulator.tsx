@@ -16,6 +16,7 @@ import {
 import { evaluateSimulatorSession, type SimulatorFeedback } from "@/lib/patient-drill/evaluate";
 import {
   EMPTY_REPLY_FALLBACK,
+  SCREENING_AS_DIAGNOSIS_LABEL,
   classifyCompletedSession,
   type SafetyReasonCode,
   type SessionOutcome,
@@ -32,7 +33,7 @@ import {
   portalH1,
   portalLinkBack,
 } from "@/lib/portal-ui";
-import { MAX_MA_TURNS } from "@/lib/patient-drill/session-bounds";
+import { CONCLUDE_OFFER_AFTER_TURNS, MAX_MA_TURNS } from "@/lib/patient-drill/session-bounds";
 
 type Phase = "pick" | "chat" | "summary";
 type Line = { who: "you" | string; text: string; startedAt?: number; sentAt?: number };
@@ -122,8 +123,23 @@ function grammarKindLabel(kind: string): string {
   }
 }
 
-export function PatientChatSimulator() {
+export function PatientChatSimulator({
+  examMode,
+}: {
+  /** Competency exam — locked brief, turn cap, no practice XP. */
+  examMode?: {
+    persona: Persona;
+    opening: string;
+    briefId: string;
+    maxTurns?: number;
+    /** When true, end the chat using the same finishSession path as turn-cap (exam wall clock). */
+    forceComplete?: boolean;
+    onComplete: (feedback: SimulatorFeedback) => void;
+  };
+} = {}) {
   const { token } = useAuth();
+  const turnCap = examMode?.maxTurns ?? MAX_MA_TURNS;
+  const examDoneRef = useRef(false);
   const [phase, setPhase] = useState<Phase>("pick");
   const [persona, setPersona] = useState<Persona | null>(null);
   const [showCustom, setShowCustom] = useState(false);
@@ -138,6 +154,8 @@ export function PatientChatSimulator() {
   const [breakBanner, setBreakBanner] = useState<{ title: string; body: string } | null>(null);
   const [savedTranscript, setSavedTranscript] = useState<ChatSimTranscriptTurn[]>([]);
   const [showTranscript, setShowTranscript] = useState(false);
+  /** Hide conclude offer until the next completed exchange. */
+  const [concludeDismissedAtTurn, setConcludeDismissedAtTurn] = useState(0);
   const typingStartRef = useRef<number | null>(null);
   const endRef = useRef<HTMLDivElement>(null);
   const awardedRef = useRef(false);
@@ -169,6 +187,14 @@ export function PatientChatSimulator() {
   }, [messages, streaming]);
 
   const maTurns = messages.filter((m) => m.who === "you").length;
+  const lastLine = messages[messages.length - 1];
+  const patientReplied = Boolean(lastLine && lastLine.who !== "you" && lastLine.text.trim());
+  const offerConclude =
+    phase === "chat" &&
+    !streaming &&
+    maTurns >= CONCLUDE_OFFER_AFTER_TURNS &&
+    patientReplied &&
+    concludeDismissedAtTurn < maTurns;
 
   const finishSession = useCallback(
     (
@@ -233,7 +259,12 @@ export function PatientChatSimulator() {
       setPhase("summary");
       setStreaming(false);
 
-      if (!awardedRef.current && (fb.messageCount > 0 || transcript.length > 0)) {
+      if (examMode) {
+        if (!examDoneRef.current) {
+          examDoneRef.current = true;
+          examMode.onComplete(fb);
+        }
+      } else if (!awardedRef.current && (fb.messageCount > 0 || transcript.length > 0)) {
         awardedRef.current = true;
         const p = personaRef.current;
         markDailyComplete("patientChat", {
@@ -254,7 +285,7 @@ export function PatientChatSimulator() {
         window.dispatchEvent(new Event("siya-level-up-updated"));
       }
     },
-    [],
+    [examMode],
   );
 
   const startWithPersona = (p: Persona) => {
@@ -267,8 +298,37 @@ export function PatientChatSimulator() {
     setBreakBanner(null);
     setSavedTranscript([]);
     setShowTranscript(false);
+    setConcludeDismissedAtTurn(0);
     setPhase("chat");
   };
+
+  const examStartedRef = useRef(false);
+  useEffect(() => {
+    if (!examMode || examStartedRef.current) return;
+    examStartedRef.current = true;
+    const locked = { ...examMode.persona, openingMessage: examMode.opening };
+    awardedRef.current = false;
+    setPersona(locked);
+    setMessages([{ who: locked.name, text: locked.openingMessage }]);
+    setInput("");
+    setError(null);
+    setFeedback(null);
+    setBreakBanner(null);
+    setSavedTranscript([]);
+    setShowTranscript(false);
+    setConcludeDismissedAtTurn(0);
+    setPhase("chat");
+  }, [examMode]);
+
+  // Exam wall-clock (owned by CompetencyExam) — same finishSession as turn-cap, not a parallel score path.
+  useEffect(() => {
+    if (!examMode?.forceComplete) return;
+    if (phaseRef.current !== "chat" || examDoneRef.current) return;
+    finishSession("Exam time limit reached.", {
+      breakTitle: "Time’s up",
+      breakBody: "The exam chat timer ended this section.",
+    });
+  }, [examMode?.forceComplete, finishSession]);
 
   const startCustom = () => {
     if (custom.name.trim().length < 2 || custom.backstory.trim().length < 20) {
@@ -315,8 +375,8 @@ export function PatientChatSimulator() {
       setError("Live chat is offline right now. Try again in a moment.");
       return;
     }
-    if (maTurns >= MAX_MA_TURNS) {
-      finishSession(`Reached ${MAX_MA_TURNS} replies.`);
+    if (maTurns >= turnCap) {
+      finishSession(`Reached ${turnCap} replies.`);
       return;
     }
 
@@ -338,6 +398,9 @@ export function PatientChatSimulator() {
       body.customPersona = persona;
     } else {
       body.personaId = getPersonaShortId(persona);
+    }
+    if (examMode) {
+      body.examBrief = examMode.opening;
     }
 
     try {
@@ -368,8 +431,8 @@ export function PatientChatSimulator() {
         const via = (payload as { via?: string }).via;
         // Pool/offline reply kept the drill going — don't flash Gateway failure as a hard error.
         if (payload.warn && via !== "persona-pool" && via !== "llm") setError(payload.warn);
-        else if (next.filter((m) => m.who === "you").length >= MAX_MA_TURNS) {
-          finishSession(`Reached ${MAX_MA_TURNS} replies.`, {
+        else if (next.filter((m) => m.who === "you").length >= turnCap) {
+          finishSession(`Reached ${turnCap} replies.`, {
             lines: [...next, { who: persona.name, text: fallback }],
           });
         }
@@ -415,8 +478,8 @@ export function PatientChatSimulator() {
       }
 
       const withReply = [...next, { who: persona.name, text: finalText }];
-      if (next.filter((m) => m.who === "you").length >= MAX_MA_TURNS) {
-        finishSession(`Reached ${MAX_MA_TURNS} replies.`, { lines: withReply });
+      if (next.filter((m) => m.who === "you").length >= turnCap) {
+        finishSession(`Reached ${turnCap} replies.`, { lines: withReply });
       }
     } catch (err) {
       // Never leave a blank patient bubble — inject fallback and keep going.
@@ -436,9 +499,16 @@ export function PatientChatSimulator() {
     setBreakBanner(null);
     setSavedTranscript([]);
     setShowTranscript(false);
+    setConcludeDismissedAtTurn(0);
     setError(null);
     setShowCustom(false);
   };
+
+  if (phase === "pick" && examMode) {
+    return (
+      <div className="p-6 text-sm text-[var(--siya-text)]">Starting exam chat…</div>
+    );
+  }
 
   if (phase === "pick") {
     return (
@@ -453,7 +523,8 @@ export function PatientChatSimulator() {
             training patient.
           </p>
           <p className="mt-2 text-sm text-[var(--siya-text)]">
-            Sessions run up to <strong>{MAX_MA_TURNS} of your replies</strong> (no clock cutoff). End early anytime for
+            Sessions run up to <strong>{MAX_MA_TURNS} of your replies</strong> (no clock cutoff). After{" "}
+            <strong>{CONCLUDE_OFFER_AFTER_TURNS} exchanges</strong> you can conclude and see feedback, or keep going. End early anytime for
             feedback. Safety tiers may end a session early (red flag, soft stop, or patient walk-away). Vague replies can
             also escalate stressed personas until they leave frustrated (not the same as abuse).
           </p>
@@ -622,15 +693,37 @@ export function PatientChatSimulator() {
             <strong>Politeness:</strong> {feedback.politenessScore}/100
           </p>
           <p className="text-sm text-[var(--siya-text)]">{feedback.politenessNote}</p>
+          {feedback.clinicalAccuracyHits.length > 0 ? (
+            <div className="rounded-lg border border-[var(--siya-status-warn-border)] bg-[var(--siya-status-warn-bg)] px-3 py-2 text-sm text-[var(--siya-status-warn-text)]">
+              <p className="font-semibold">{SCREENING_AS_DIAGNOSIS_LABEL}</p>
+              <p className="mt-1 text-xs">
+                A free or preliminary screening can be a first step. It does not diagnose, and it is not enough
+                for a diagnosis. This is a clinical-accuracy miss — not an off-topic score, and not a session stop.
+              </p>
+              <ul className="mt-2 list-disc space-y-1 pl-5 text-xs">
+                {feedback.clinicalAccuracyHits.map((h) => (
+                  <li key={`clin-${h.replyIndex}-${h.replyExcerpt}`}>
+                    Reply {h.replyIndex + 1}
+                    {h.replyExcerpt ? ` — “${h.replyExcerpt}${h.replyExcerpt.length >= 120 ? "…" : ""}”` : ""}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
           <p>
             <strong>Relevance / engagement:</strong> {feedback.relevanceScore}/100
           </p>
           <p className="text-sm text-[var(--siya-text)]">{feedback.relevanceNote}</p>
-          {feedback.relevanceTurns.some((t) => t.score < 0.5) ? (
+          {feedback.relevanceTurns.some(
+            (t, i) => t.score < 0.5 && !feedback.clinicalAccuracyHits.some((h) => h.replyIndex === i),
+          ) ? (
             <ul className="list-disc space-y-1 pl-5 text-sm text-[var(--siya-text)]">
               {feedback.relevanceTurns
                 .map((t, i) => ({ t, i }))
-                .filter(({ t }) => t.score < 0.5)
+                .filter(
+                  ({ t, i }) =>
+                    t.score < 0.5 && !feedback.clinicalAccuracyHits.some((h) => h.replyIndex === i),
+                )
                 .slice(0, 4)
                 .map(({ t, i }) => (
                   <li key={`rel-${i}-${t.replyExcerpt}`}>
@@ -688,15 +781,21 @@ export function PatientChatSimulator() {
         </div>
 
         <div className="flex flex-wrap gap-2">
+          {examMode ? (
+            <p className="text-sm text-[var(--siya-text)]">Exam section recorded. Safety flags are separate from the section score.</p>
+          ) : (
           <button type="button" className={portalAskSendBtn} onClick={resetToPick}>
             New session
           </button>
+          )}
+          {!examMode ? (
           <Link
             href="/learn/practice"
             className="rounded-lg border border-[var(--siya-border)] px-3.5 py-2 text-sm font-medium text-[var(--siya-primary)]"
           >
             Daily Practice drills
           </Link>
+          ) : null}
         </div>
       </div>
     );
@@ -707,14 +806,18 @@ export function PatientChatSimulator() {
     <div className="flex h-full min-h-0 flex-col bg-[var(--siya-bg-page)]">
       <header className="flex shrink-0 items-center justify-between gap-3 border-b border-[var(--siya-border)] bg-[var(--siya-white)] px-4 py-3">
         <div className="min-w-0">
+          {examMode ? (
+            <p className={portalLinkBack}>Exam section · no return to prior sections</p>
+          ) : (
           <button type="button" onClick={resetToPick} className={`${portalLinkBack} block`}>
             ← Personas
           </button>
+          )}
           <p className="truncate text-sm font-semibold text-[var(--siya-primary)]">
             Chat simulator · {persona?.name}
           </p>
           <p className="text-[11px] font-semibold text-[var(--siya-text)]">
-            {maTurns}/{MAX_MA_TURNS} replies
+            {maTurns}/{turnCap} replies{examMode ? " · exam" : ""}
           </p>
         </div>
         <button
@@ -750,6 +853,37 @@ export function PatientChatSimulator() {
       </div>
 
       {error ? <p className="px-4 text-xs text-[var(--siya-status-error-text)]">{error}</p> : null}
+
+      {offerConclude ? (
+        <div
+          className="shrink-0 border-t border-[var(--siya-border)] bg-[var(--siya-status-info-bg)] px-4 py-3"
+          data-chat-sim-conclude="true"
+        >
+          <p className="text-sm font-semibold text-[var(--siya-text)]">
+            {CONCLUDE_OFFER_AFTER_TURNS} exchanges done — conclude this chat and see feedback?
+          </p>
+          <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
+            You can keep chatting, or stop here and review grammar, tone, and relevance.
+          </p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            <button
+              type="button"
+              className={portalAskSendBtn}
+              data-chat-sim-conclude-yes="true"
+              onClick={() => finishSession("You concluded the chat after 3 exchanges.")}
+            >
+              Conclude & see feedback
+            </button>
+            <button
+              type="button"
+              className="rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-3.5 py-2 text-sm font-medium text-[var(--siya-primary)]"
+              onClick={() => setConcludeDismissedAtTurn(maTurns)}
+            >
+              Keep chatting
+            </button>
+          </div>
+        </div>
+      ) : null}
 
       <div className="shrink-0 border-t border-[var(--siya-border)] bg-[var(--siya-white)] p-3">
         <div className="mx-auto flex max-w-3xl gap-2">

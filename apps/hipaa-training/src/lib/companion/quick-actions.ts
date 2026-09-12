@@ -17,6 +17,14 @@ export const HOME_QUICK_ACTIONS: QuickAction[] = [
   { label: "Request leave", comingSoon: true, note: "HR module — tracked via portal activity for now" },
 ];
 
+/** Visible Ask chips — personal ledger answers, so staff don’t have to guess the phrasing. */
+export const ASK_PERSONAL_PROMPTS = [
+  "practice chat simulator",
+  "check my scores",
+  "my feedback",
+  "my attendance",
+] as const;
+
 export const CHAT_QUICK_PROMPTS = [
   "How do I submit a reimbursement?",
   "Where is the leave policy?",

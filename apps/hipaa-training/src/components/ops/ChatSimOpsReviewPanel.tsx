@@ -8,10 +8,13 @@
 import { useMemo, useState } from "react";
 import type { OpsEngagementRow } from "@/lib/ops-dashboard-api";
 import {
+  chatSimHasModerateClinicalFlag,
   chatSimHasReviewableTranscript,
+  collectChatSimRepeatPatterns,
   collectChatSimReviewsFromEngagement,
   type DayLedgerEntry,
 } from "@/lib/level-up/progress";
+import { SCREENING_AS_DIAGNOSIS_LABEL } from "@/lib/patient-drill/safety";
 import { portalCard, portalH2, portalSection } from "@/lib/portal-ui";
 
 function displayName(row: { name: string | null; email: string }) {
@@ -64,6 +67,13 @@ function SessionCard({
         Safety codes:{" "}
         {(meta.safetyReasons || []).length ? meta.safetyReasons!.join(", ") : "—"}
       </p>
+      {chatSimHasModerateClinicalFlag(meta) ? (
+        <p className="rounded-lg border border-[var(--siya-status-warn-border)] bg-[var(--siya-status-warn-bg)] px-3 py-2 text-xs text-[var(--siya-status-warn-text)]">
+          {SCREENING_AS_DIAGNOSIS_LABEL}
+          {" — "}
+          moderate clinical-accuracy flag. Session was not stopped.
+        </p>
+      ) : null}
       <p className="text-xs text-[var(--siya-text)]">
         Scores — politeness {meta.politenessScore ?? "—"}/100 · grammar {meta.grammarScore ?? "—"}/100
       </p>
@@ -106,6 +116,10 @@ export function ChatSimOpsReviewPanel({ engagement }: { engagement: OpsEngagemen
     () => (engagement ? collectChatSimReviewsFromEngagement(engagement) : []),
     [engagement],
   );
+  const repeats = useMemo(
+    () => (engagement ? collectChatSimRepeatPatterns(engagement) : []),
+    [engagement],
+  );
 
   const withTx = reviews.filter((r) => chatSimHasReviewableTranscript(r.entry.chatSim));
   const legacy = reviews.length - withTx.length;
@@ -116,14 +130,29 @@ export function ChatSimOpsReviewPanel({ engagement }: { engagement: OpsEngagemen
         Chat practice flags
       </h2>
       <p className="mt-1 mb-3 text-xs text-[var(--siya-text-muted)]">
-        Sessions that stopped for safety (red flag or soft stop). Open a transcript when one was saved —
-        older ones only have a summary.
+        Hard stops (red flag or soft stop) and moderate clinical-accuracy flags. Open a transcript when one
+        was saved — older ones only have a summary.
       </p>
+      {repeats.length > 0 ? (
+        <ul className="mb-3 space-y-2">
+          {repeats.map((p) => (
+            <li
+              key={`${p.userId}-${p.reason}`}
+              className="rounded-lg border border-[var(--siya-status-warn-border)] bg-[var(--siya-status-warn-bg)] px-3 py-2 text-xs text-[var(--siya-status-warn-text)]"
+            >
+              <span className="font-semibold">
+                {p.name?.trim() || p.email} — same miss {p.count} times
+              </span>
+              <span className="block mt-0.5">{p.label}</span>
+            </li>
+          ))}
+        </ul>
+      ) : null}
       {engagement == null ? (
         <p className="text-sm text-[var(--siya-text-muted)]">Admin-only — team engagement required.</p>
       ) : reviews.length === 0 ? (
         <p className="text-sm text-[var(--siya-text-muted)]">
-          No red-flag or soft-stop chat-sim sessions in synced practice ledgers yet.
+          No red-flag, soft-stop, or clinical-accuracy chat-sim sessions in synced practice ledgers yet.
         </p>
       ) : (
         <>

@@ -23,6 +23,7 @@ const ASKS = [
   "has anyone tried any drills",
   "are staff members loggin into OS?",
   "i want to know staff performance",
+  "i want to know about Sonu's performance",
   "urgent tasks for me?",
 ];
 

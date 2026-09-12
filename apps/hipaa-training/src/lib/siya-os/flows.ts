@@ -247,7 +247,8 @@ const FLOWS: {
     task: "Scheduling & portal workflow",
     patterns: [/portal chat/i, /schedule/i, /appointment/i, /no-show/i, /late cancel/i, /payment check/i],
     followUpQuestions: ["Routine or urgent?", "Same-day deadline?"],
-    retrievalBoost: ["chat", "24", "payment", "cancel", "escalation"],
+    // Do not append "escalation" — that co-retrieves Escalation pathways (and its HIPAA link) on ordinary scheduling asks.
+    retrievalBoost: ["klarity", "reschedule", "cancel", "fee", "payment"],
   },
 ];
 

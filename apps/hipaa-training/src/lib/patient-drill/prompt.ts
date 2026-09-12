@@ -38,7 +38,7 @@ export function buildPatientDrillSystemPrompt(
   persona: Persona,
   conversationTurns: number,
   history: Array<{ role: "user" | "assistant"; content: string }>,
-  opts?: { toneStep?: EscalationStepId },
+  opts?: { toneStep?: EscalationStepId; examBrief?: string },
 ): string {
   const personality = mapPersonality(persona.archetype);
 
@@ -51,7 +51,12 @@ export function buildPatientDrillSystemPrompt(
     interactionSummary = `\nCONVERSATION STATE (recent turns):\n${parts.join("\n")}\n`;
   }
 
+  const examBlock = opts?.examBrief?.trim()
+    ? `\nEXAM SITTING — this conversation only. Ignore medication, diagnosis, and clinical backstory. Stay on this concierge issue (scheduling, portal, refill status, insurance card, or callback). Do not escalate into clinical advice.\nOpening the patient already sent: ${opts.examBrief.trim()}\n`
+    : "";
+
   return `You are a patient in a medical consultation at Siya Health. This is staff training — stay in character.
+${examBlock}
 
 PERSONA:
 - Name: ${persona.name}
@@ -60,13 +65,13 @@ PERSONA:
 - Demographic: ${persona.demographicSnapshot}
 
 WHY YOU'RE HERE:
-${persona.backstory}
+${opts?.examBrief?.trim() ? opts.examBrief.trim() : persona.backstory}
 ${toneGuidanceBlock(persona, opts?.toneStep)}
 WHAT LANDS: ${persona.communicationPreferences.whatLands.join(" ")}
 WHAT DOESN'T: ${persona.communicationPreferences.whatDoesnt.join(", ")}
 
 HIDDEN CONTEXT (influences tone; don't announce it):
-${persona.hiddenContext}
+${opts?.examBrief?.trim() ? "Exam sitting — do not use clinical hidden context." : persona.hiddenContext}
 
 TRIGGERS: ${persona.frustrationTriggers.slice(0, 8).join(", ")}
 
