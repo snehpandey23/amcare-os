@@ -200,7 +200,99 @@ const INTENT_PATTERNS: Array<{
   },
 ]
 
+/** Clinician recruitment — must beat the patient “which provider will I see” intent. */
+const CLINICIAN_JOIN_RE =
+  /\b(join (our |your |the |siya )?(clinical )?team|how (do|can|should) i join|i(?:'| a)?m a (provider|clinician|physician|np|pa)\b[\s\S]{0,60}\b(join|job|jobs|hire|hiring|career|careers|apply|work)|clinician jobs?|provider jobs?|provider career|clinician career|work (for|at|with) siya|apply (to join|as a)|recruit(?:ment|ing)?)\b/i
+
+const EMPLOYER_RE =
+  /\b(i(?:'| a)?m an employer|we(?:'| a)?re an employer|employer (program|partnership|partnerships|inquiry|page)|become a partner|how (?:do|can|should) (?:i|we) (?:become|be) a partner|partner with (?:you|siya)|workplace partnership|benefits partnership|employer partnerships?)\b/i
+
+const EMPLOYER_GAP_RE =
+  /\b(partnership (?:pric(?:e|ing)|cost|fee|package)|employer (?:pric(?:e|ing)|cost|package)|b2b (?:pric(?:e|ing)|cost|package)|who pays|package name|response timeline|how soon will|when will (?:you|someone|they|the team) (?:reply|respond|get back|follow))\b/i
+
+const CLINICIAN_GAP_RE =
+  /\b(salary|compensation|pay rate|how much (?:do you |does siya )?pay|w-?2|1099|employment type|contractor|open roles?|job openings?|what roles|interview(?: process)?|clinician schedule|provider schedule)\b/i
+
+const EMPLOYER_MESSAGE =
+  'Use this page if you are HR, benefits, or leadership exploring a program for employees. It is not for booking your own visit. Partnership pricing is not published. The next step is Request employer information at siya.health/employers. The page describes inquiry, then a Discovery call to align on scope, then pilot design where pricing and contract terms are set. Screening is not diagnosis, and outcomes are not guaranteed. If they are an employee seeking care themselves, direct them to Meet & Greet instead, not the employer form.'
+
+const CAREERS_MESSAGE =
+  "Use this only if they're a clinician asking to join — not a patient asking who they'll see. Point to siya.health/join-our-team. This is initial interest, not a contract offer. Arrangements vary by role and state. Clinical leadership follows up by email. The page describes concierge admin support, licensing/credentialing coordination (not legal advice), and adult telehealth in supported states."
+
+function intentReply(
+  id: string,
+  message: string,
+  followUp: string,
+  links: string[],
+): IntentMatch {
+  return {
+    id,
+    confidence: 0.94,
+    response: {
+      state: 'verified',
+      message,
+      followUp,
+      links: resolveLinks(links, 3),
+      citations: resolveLinks(links.slice(0, 2)),
+      refusalCategory: 'none',
+    },
+  }
+}
+
+function isEmployerContext(text: string): boolean {
+  return EMPLOYER_RE.test(text) || /\b(employer|partnership|partner with|b2b)\b/i.test(text)
+}
+
+function isClinicianJoinContext(text: string): boolean {
+  return (
+    CLINICIAN_JOIN_RE.test(text) ||
+    /\b(clinician|provider).{0,40}\b(join|job|jobs|hire|hiring|career|apply)\b/i.test(text) ||
+    /\b(join|job|jobs|hire|hiring|career|apply).{0,40}\b(provider|clinician|physician)\b/i.test(text)
+  )
+}
+
 export function matchDeterministicIntent(text: string): IntentMatch | null {
+  const q = text.trim()
+
+  if (
+    CLINICIAN_GAP_RE.test(q) &&
+    (isClinicianJoinContext(q) || /\b(clinician|provider|physician)\b/i.test(q))
+  ) {
+    return intentReply(
+      'careers_unpublished',
+      'Pay, employment type, open roles, schedule, and interview process are not published. This is initial interest, not a contract offer. Arrangements vary by role and state. Clinical leadership follows up by email after you express interest — this chat will not guess those details.',
+      'Express interest on the join page. Do not use Meet & Greet for clinician recruitment.',
+      ['careers_inquiry'],
+    )
+  }
+
+  if (isEmployerContext(q) && (EMPLOYER_GAP_RE.test(q) || /\b(pric(?:e|ing)|cost|fee|package)\b/i.test(q))) {
+    return intentReply(
+      'employer_unpublished',
+      'Partnership pricing, package names, who pays, and response timelines are not published. The next step is Request employer information at siya.health/employers. Inquiry, then a Discovery call to align on scope, then pilot design — that Discovery call is not a patient Meet & Greet.',
+      'If you are an employee seeking your own care, use Book Free Meet & Greet instead of the employer form.',
+      ['employer_inquiry', 'meet_and_greet'],
+    )
+  }
+
+  if (CLINICIAN_JOIN_RE.test(q) || (/\bi(?:'| a)?m a provider\b/i.test(q) && /\b(join|job|jobs|hire|career|apply|work)\b/i.test(q))) {
+    return intentReply(
+      'careers',
+      CAREERS_MESSAGE,
+      'Express interest is for clinicians. Meet & Greet is only for patients seeking care — not how a clinician joins.',
+      ['careers_inquiry'],
+    )
+  }
+
+  if (EMPLOYER_RE.test(q)) {
+    return intentReply(
+      'employer',
+      EMPLOYER_MESSAGE,
+      'Request employer information starts a Discovery call for HR and benefits. Meet & Greet is only for an employee booking their own care.',
+      ['employer_inquiry', 'meet_and_greet'],
+    )
+  }
+
   for (const intent of INTENT_PATTERNS) {
     if (intent.re.test(text)) {
       if (intent.id === 'human_handoff') {

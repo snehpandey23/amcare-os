@@ -1,0 +1,93 @@
+/**
+ * Homepage preview — Variant A (logo-native tertiary)
+ * Source sample: apps/siya-health/assets/images/siya-health-mark.png
+ * Mid-gradient (magenta→navy) avg of 7,610 px in hue 245–275°: #5A32B8
+ * Frequent nearby stop: #5030B8 (mark ~x552,y551)
+ * Preview only — does not change production tokens.
+ */
+
+body.preview-variant-a {
+  --accent-secondary: #5A32B8;
+  --accent-secondary-soft: rgba(90, 50, 184, 0.12);
+  --accent-secondary-wash: rgba(90, 50, 184, 0.06);
+}
+
+/* Soft periwinkle wash behind hero photo (depth, not a button) */
+body.preview-variant-a .hero-merged::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(90, 50, 184, 0.18) 0%,
+    transparent 42%,
+    rgba(0, 24, 120, 0.12) 100%
+  );
+}
+body.preview-variant-a .hero-merged .container,
+body.preview-variant-a .hero-merged .hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Thin lavender rule under hero headline */
+body.preview-variant-a .hero-merged h1 {
+  border-bottom: 2px solid rgba(90, 50, 184, 0.45);
+  padding-bottom: 12px;
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* Symptom chips: soft tertiary tint + navy text (not gray glass) */
+body.preview-variant-a .hero-symptom-chips span {
+  color: var(--primary);
+  background: color-mix(in srgb, var(--accent-secondary) 18%, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--accent-secondary) 28%, #ffffff);
+}
+
+/* Stats row soft highlight */
+body.preview-variant-a .homepage-trust-summary {
+  background: linear-gradient(
+    180deg,
+    var(--accent-secondary-wash) 0%,
+    color-mix(in srgb, var(--accent-secondary) 8%, var(--page-bg)) 100%
+  );
+  border-color: color-mix(in srgb, var(--accent-secondary) 22%, var(--border));
+}
+
+/* Light tertiary hover on outline/nav utility (not CTA fills) */
+body.preview-variant-a .symptoms-card--editorial:hover {
+  box-shadow: 0 8px 24px rgba(90, 50, 184, 0.12);
+}
+body.preview-variant-a .text-link:hover {
+  color: var(--accent-secondary);
+}
+
+/* Cookie banner — cream-integrated, soft shadow */
+body.preview-variant-a .cookie-notice {
+  background: var(--page-bg);
+  border-top: 1px solid color-mix(in srgb, var(--primary) 12%, var(--border));
+  box-shadow: 0 -4px 18px rgba(0, 24, 120, 0.06);
+}
+body.preview-variant-a .cookie-notice__btn {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: color-mix(in srgb, var(--page-bg) 70%, #ffffff);
+}
+body.preview-variant-a .cookie-notice__btn:hover,
+body.preview-variant-a .cookie-notice__btn:focus-visible {
+  background: rgba(0, 24, 120, 0.08);
+}
+body.preview-variant-a .cookie-notice__btn--accept {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+body.preview-variant-a .cookie-notice__btn--accept:hover,
+body.preview-variant-a .cookie-notice__btn--accept:focus-visible {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: #fff;
+}

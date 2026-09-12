@@ -275,6 +275,18 @@ export const LINK_REGISTRY: Record<string, LinkRecord> = {
         url: 'https://www.siya.health/book-appointment',
         kind: 'booking'
     },
+    employer_inquiry: {
+        id: 'employer_inquiry',
+        label: 'Request employer information',
+        url: 'https://www.siya.health/employers#employer-inquiry-form',
+        kind: 'contact'
+    },
+    careers_inquiry: {
+        id: 'careers_inquiry',
+        label: 'Express interest',
+        url: 'https://www.siya.health/join-our-team#careers-inquiry-form',
+        kind: 'contact'
+    },
     siya_circle: {
         id: 'siya_circle',
         label: 'Siya Circle',

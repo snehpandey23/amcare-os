@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>CTA button comparison — Variant B</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #001878;
+      --page-bg: #F4EFE7;
+      --text: #1c1917;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--page-bg);
+      color: var(--text);
+      padding: 40px 24px 64px;
+    }
+    h1 {
+      font-family: Poppins, Inter, sans-serif;
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin: 0 0 8px;
+    }
+    .lead { color: #57534e; max-width: 42rem; margin: 0 0 32px; line-height: 1.5; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      max-width: 960px;
+    }
+    @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+    .card {
+      background: #1c1917;
+      border-radius: 16px;
+      padding: 28px 24px 32px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .card h2 {
+      font-family: Poppins, Inter, sans-serif;
+      font-size: 1rem;
+      color: #fff;
+      margin: 0;
+    }
+    .meta {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.45;
+      margin: 0;
+    }
+    .meta code {
+      font-size: 0.78rem;
+      color: #f4efe7;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      min-height: 48px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 16px;
+      font-family: inherit;
+      text-decoration: none;
+      border: none;
+      color: #fff;
+      margin-top: auto;
+    }
+    .btn-v1 {
+      background: linear-gradient(145deg, #d81088 0%, #c32889 28%, #87218b 68%, #642eae 100%);
+    }
+    .btn-v2 {
+      background: #b80d74;
+    }
+    .swatches {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 36px;
+      max-width: 960px;
+    }
+    .swatch {
+      width: 120px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #ebe5d6;
+      background: #fff;
+      font-size: 0.72rem;
+    }
+    .swatch i {
+      display: block;
+      height: 44px;
+    }
+    .swatch span {
+      display: block;
+      padding: 8px;
+      color: #57534e;
+    }
+    .links { margin-top: 28px; font-size: 0.9rem; }
+    .links a { color: var(--primary); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <h1>Variant B — primary CTA button only</h1>
+  <p class="lead">
+    Side-by-side comparison of the filled “Book Free Meet &amp; Greet” treatment.
+    Full homepage context: V1 on port <strong>8771</strong>, V2 on <strong>8772</strong>.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Version 1 — Logo-sampled gradient</h2>
+      <p class="meta">
+        Stops (from <code>siya-health-mark.png</code>):<br />
+        <code>#D81088</code> → <code>#C32889</code> → <code>#87218B</code> → <code>#642EAE</code><br />
+        (brand magenta · near-brand avg · magenta–violet band · blue-violet band)
+      </p>
+      <a class="button btn-v1" href="#">Book Free Meet &amp; Greet</a>
+    </div>
+    <div class="card">
+      <h2>Version 2 — Flat muted magenta</h2>
+      <p class="meta">
+        Selected fill: <code>#B80D74</code><br />
+        (lerp 65% from <code>#D81088</code> toward <code>#A80C6A</code>)<br />
+        White text contrast ≈ 6.27:1
+      </p>
+      <a class="button btn-v2" href="#">Book Free Meet &amp; Greet</a>
+    </div>
+  </div>
+
+  <h2 style="color:var(--primary);font-size:1.1rem;margin:40px 0 12px;font-family:Poppins,sans-serif;">Flat options tested</h2>
+  <div class="swatches">
+    <div class="swatch"><i style="background:#D81088"></i><span>#D81088<br />current brand</span></div>
+    <div class="swatch"><i style="background:#CC0F80"></i><span>#CC0F80<br />t=0.25</span></div>
+    <div class="swatch"><i style="background:#C20E7A"></i><span>#C20E7A<br />t=0.45</span></div>
+    <div class="swatch"><i style="background:#B80D74"></i><span>#B80D74<br />t=0.65 ★ V2</span></div>
+    <div class="swatch"><i style="background:#A80C6A"></i><span>#A80C6A<br />accessible</span></div>
+  </div>
+
+  <p class="links">
+    Full page: <a href="http://127.0.0.1:8771/">V1 homepage</a> ·
+    <a href="http://127.0.0.1:8772/">V2 homepage</a>
+  </p>
+</body>
+</html>

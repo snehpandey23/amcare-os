@@ -1,0 +1,105 @@
+/**
+ * Homepage preview — Variant B (gold / champagne — NEW palette candidate)
+ * Proposed: #C4A574 — muted champagne gold (warm, low-chroma; not bright yellow-gold).
+ * Why: sits between cream #F4EFE7 and navy #001878 without fighting magenta #D81088;
+ * reads “premium wellness” on soft surfaces. NOT sampled from the logo — expanding brand
+ * if approved.
+ * Preview only — does not change production tokens.
+ */
+
+body.preview-variant-b {
+  --accent-secondary: #C4A574;
+  --accent-secondary-soft: rgba(196, 165, 116, 0.22);
+  --accent-secondary-wash: rgba(196, 165, 116, 0.1);
+}
+
+/* Soft champagne wash on hero (depth only) */
+body.preview-variant-b .hero-merged::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(
+    125deg,
+    rgba(196, 165, 116, 0.16) 0%,
+    transparent 40%,
+    rgba(0, 24, 120, 0.14) 100%
+  );
+}
+body.preview-variant-b .hero-merged .container,
+body.preview-variant-b .hero-merged .hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Thin gold underline near hero headline */
+body.preview-variant-b .hero-merged h1 {
+  border-bottom: 2px solid var(--accent-secondary);
+  padding-bottom: 12px;
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* Symptom chips: soft champagne tint + navy text */
+body.preview-variant-b .hero-symptom-chips span {
+  color: var(--primary);
+  background: color-mix(in srgb, var(--accent-secondary) 28%, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--accent-secondary) 42%, #ffffff);
+}
+
+/* Stats row champagne highlight */
+body.preview-variant-b .homepage-trust-summary {
+  background: linear-gradient(
+    180deg,
+    var(--accent-secondary-wash) 0%,
+    color-mix(in srgb, var(--accent-secondary) 14%, var(--page-bg)) 100%
+  );
+  border-color: color-mix(in srgb, var(--accent-secondary) 35%, var(--border));
+}
+
+/* Gold divider above “How care usually unfolds” */
+body.preview-variant-b #how-it-works .section-header::before {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: var(--accent-secondary);
+  margin: 0 auto 16px;
+}
+
+/* Step numerals — gold accent (not magenta) */
+body.preview-variant-b .flow-step-num {
+  color: color-mix(in srgb, var(--accent-secondary) 55%, var(--primary));
+}
+
+body.preview-variant-b .symptoms-card--editorial:hover {
+  box-shadow: 0 8px 24px rgba(196, 165, 116, 0.2);
+}
+
+/* Cookie banner — cream-integrated, soft shadow (same treatment as A) */
+body.preview-variant-b .cookie-notice {
+  background: var(--page-bg);
+  border-top: 1px solid color-mix(in srgb, var(--primary) 12%, var(--border));
+  box-shadow: 0 -4px 18px rgba(0, 24, 120, 0.06);
+}
+body.preview-variant-b .cookie-notice__btn {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: color-mix(in srgb, var(--page-bg) 70%, #ffffff);
+}
+body.preview-variant-b .cookie-notice__btn:hover,
+body.preview-variant-b .cookie-notice__btn:focus-visible {
+  background: rgba(0, 24, 120, 0.08);
+}
+body.preview-variant-b .cookie-notice__btn--accept {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+body.preview-variant-b .cookie-notice__btn--accept:hover,
+body.preview-variant-b .cookie-notice__btn--accept:focus-visible {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: #fff;
+}

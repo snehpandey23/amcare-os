@@ -1,0 +1,34 @@
+/**
+ * Variant B — CTA button Version 1 (logo-sampled gradient fill)
+ * ONLY hero primary "Book Free Meet & Greet" — nothing else.
+ *
+ * Gradient stops sampled from siya-health-mark.png:
+ *   Magenta (near brand cluster avg):     #C32889  (n≈9339 near #D81088)
+ *   Magenta→violet band avg:              #87218B
+ *   Blue-violet band avg:                 #642EAE
+ * Start anchored to brand magenta #D81088 for recognition; end whispers toward
+ * violet/navy — shallow 145° so it reads as depth, not a rainbow.
+ */
+
+body.preview-b-btn-v1 .hero-merged .hero-ctas .button.ds-button--primary {
+  background: linear-gradient(
+    145deg,
+    #d81088 0%,
+    #c32889 28%,
+    #87218b 68%,
+    #642eae 100%
+  );
+  background-color: #d81088; /* fallback */
+  color: #ffffff;
+  border: none;
+}
+
+body.preview-b-btn-v1 .hero-merged .hero-ctas .button.ds-button--primary:hover {
+  background: linear-gradient(
+    145deg,
+    #c32889 0%,
+    #87218b 40%,
+    #642eae 100%
+  );
+  color: #ffffff;
+}

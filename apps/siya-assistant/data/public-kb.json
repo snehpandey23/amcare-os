@@ -1,8 +1,8 @@
 {
   "version": 1,
   "source": "siya-health public indexes (llms-full + curated public facts)",
-  "generated": "2026-09-02",
-  "chunkCount": 191,
+  "generated": "2026-09-09",
+  "chunkCount": 195,
   "chunks": [
     {
       "id": "fact_states",
@@ -258,6 +258,46 @@
         "blog",
         "faq",
         "education"
+      ]
+    },
+    {
+      "id": "fact_employer",
+      "title": "Employer partnerships",
+      "url": "https://www.siya.health/employers#employer-inquiry-form",
+      "path": "/employers",
+      "summary": "Use this page if you are HR, benefits, or leadership exploring a program for employees. It is not for booking your own visit. Partnership pricing is not published. The next step is Request employer information at siya.health/employers. The page describes inquiry, then a Discovery call to align on scope, then pilot design where pricing and contract terms are set. Screening is not diagnosis, and outcomes are not guaranteed. If they are an employee seeking care themselves, direct them to Meet & Greet instead, not the employer form. Do not answer cost, package name, who pays, or response timeline.",
+      "topics": [
+        "employer"
+      ],
+      "keywords": [
+        "employer",
+        "hr",
+        "benefits",
+        "partnership",
+        "partner",
+        "discovery",
+        "inquiry",
+        "pilot"
+      ]
+    },
+    {
+      "id": "fact_careers",
+      "title": "Join the clinical team",
+      "url": "https://www.siya.health/join-our-team#careers-inquiry-form",
+      "path": "/join-our-team",
+      "summary": "Use this only if they are a clinician asking to join — not a patient asking who they will see. Point to siya.health/join-our-team. This is initial interest, not a contract offer. Arrangements vary by role and state. Clinical leadership follows up by email. The page describes concierge admin support, licensing/credentialing coordination (not legal advice), and adult telehealth in supported states. Do not answer pay, employment type, open roles, schedule, or interview process.",
+      "topics": [
+        "careers"
+      ],
+      "keywords": [
+        "join",
+        "clinician",
+        "career",
+        "careers",
+        "job",
+        "jobs",
+        "hiring",
+        "recruit"
       ]
     },
     {
@@ -2482,45 +2522,6 @@
       ]
     },
     {
-      "id": "answers_weight-gain-after-stopping-ozempic",
-      "title": "Why am I gaining weight after stopping Ozempic?",
-      "url": "https://www.siya.health/answers/weight-gain-after-stopping-ozempic",
-      "path": "/answers/weight-gain-after-stopping-ozempic",
-      "summary": "Weight regain after stopping Ozempic (semaglutide) is common when appetite signaling returns. Learn rebound drivers, metabolic factors, and clinician-guide…",
-      "topics": [
-        "weight-loss",
-        "health-guide"
-      ],
-      "keywords": [
-        "why",
-        "am",
-        "i",
-        "gaining",
-        "weight",
-        "after",
-        "stopping",
-        "ozempic",
-        "regain",
-        "semaglutide",
-        "is",
-        "common",
-        "when",
-        "appetite",
-        "signaling",
-        "returns",
-        "learn",
-        "rebound",
-        "drivers",
-        "metabolic",
-        "factors",
-        "and",
-        "clinician",
-        "guide",
-        "loss",
-        "health"
-      ]
-    },
-    {
       "id": "answers_what-does-low-testosterone-feel-like",
       "title": "What does low testosterone feel like?",
       "url": "https://www.siya.health/answers/what-does-low-testosterone-feel-like",
@@ -3093,6 +3094,44 @@
         "clear",
         "internal",
         "links"
+      ]
+    },
+    {
+      "id": "blog_adhd-accommodations-hr-primer",
+      "title": "ADHD Accommodations at Work: An HR Primer (Clinical vs Legal)",
+      "url": "https://www.siya.health/blog/adhd-accommodations-hr-primer",
+      "path": "/blog/adhd-accommodations-hr-primer",
+      "summary": "HR teams: separate the clinical documentation employees may need from the legal accommodation process. Educational framing—not legal or medical advice.",
+      "topics": [
+        "adhd"
+      ],
+      "keywords": [
+        "adhd",
+        "accommodations",
+        "at",
+        "work",
+        "an",
+        "hr",
+        "primer",
+        "clinical",
+        "vs",
+        "legal",
+        "teams",
+        "separate",
+        "the",
+        "documentation",
+        "employees",
+        "may",
+        "need",
+        "from",
+        "accommodation",
+        "process",
+        "educational",
+        "framing",
+        "not",
+        "or",
+        "medical",
+        "advice"
       ]
     },
     {
@@ -3956,6 +3995,41 @@
       ]
     },
     {
+      "id": "blog_cognitive-health-benefits-for-employers",
+      "title": "Cognitive Health Benefits for Employers: What Clinical Programs Include",
+      "url": "https://www.siya.health/blog/cognitive-health-benefits-for-employers",
+      "path": "/blog/cognitive-health-benefits-for-employers",
+      "summary": "HR and benefits leaders: learn what physician-led cognitive health programs include—screening, evaluation, and follow-up—and how they differ from wellness apps.",
+      "topics": [],
+      "keywords": [
+        "cognitive",
+        "health",
+        "benefits",
+        "for",
+        "employers",
+        "what",
+        "clinical",
+        "programs",
+        "include",
+        "hr",
+        "and",
+        "leaders",
+        "learn",
+        "physician",
+        "led",
+        "screening",
+        "evaluation",
+        "follow",
+        "up",
+        "how",
+        "they",
+        "differ",
+        "from",
+        "wellness",
+        "apps"
+      ]
+    },
+    {
       "id": "blog_compounded-vs-branded-glp1-medications",
       "title": "Compounded vs Branded GLP-1 Medications (2026): Safety & Standards",
       "url": "https://www.siya.health/blog/compounded-vs-branded-glp1-medications",
@@ -4104,6 +4178,44 @@
         "continues",
         "the",
         "workup"
+      ]
+    },
+    {
+      "id": "blog_focus-fatigue-workforce-issue",
+      "title": "When Focus and Fatigue Show Up as a Workforce Issue",
+      "url": "https://www.siya.health/blog/focus-fatigue-workforce-issue",
+      "path": "/blog/focus-fatigue-workforce-issue",
+      "summary": "Leadership and HR: when concentration and exhaustion spread across teams, distinguish burnout from treatable medical causes—and what clinical programs can offer.",
+      "topics": [],
+      "keywords": [
+        "when",
+        "focus",
+        "and",
+        "fatigue",
+        "show",
+        "up",
+        "as",
+        "a",
+        "workforce",
+        "issue",
+        "leadership",
+        "hr",
+        "concentration",
+        "exhaustion",
+        "spread",
+        "across",
+        "teams",
+        "distinguish",
+        "burnout",
+        "from",
+        "treatable",
+        "medical",
+        "causes",
+        "what",
+        "clinical",
+        "programs",
+        "can",
+        "offer"
       ]
     },
     {
@@ -4887,7 +4999,7 @@
       "title": "Online ADHD Diagnosis in Texas (2026): Cost, Process & What to Expect",
       "url": "https://www.siya.health/blog/online-adhd-diagnosis-texas",
       "path": "/blog/online-adhd-diagnosis-texas",
-      "summary": "Online ADHD diagnosis in Texas (2026): real costs, telehealth steps, and what a legitimate evaluation includes—with board-certified providers.",
+      "summary": "Online ADHD diagnosis in Texas (2026): real costs, telehealth steps, and what a legitimate evaluation includes—with licensed clinicians.",
       "topics": [
         "adhd",
         "texas"
@@ -4914,9 +5026,8 @@
         "evaluation",
         "includes",
         "with",
-        "board",
-        "certified",
-        "providers"
+        "licensed",
+        "clinicians"
       ]
     },
     {
@@ -6844,7 +6955,7 @@
       "title": "Virtual Medical Care | Siya Health Telehealth",
       "url": "https://www.siya.health/telehealth",
       "path": "/telehealth",
-      "summary": "Fast, convenient telehealth from board-certified providers. Primary care, urgent care, prescriptions, labs. CA, TX, PA, FL. No waiting rooms.",
+      "summary": "Fast, convenient telehealth from licensed clinicians. Primary care, urgent care, prescriptions, labs. CA, TX, PA, FL. No waiting rooms.",
       "topics": [
         "telehealth"
       ],
@@ -6858,9 +6969,8 @@
         "fast",
         "convenient",
         "from",
-        "board",
-        "certified",
-        "providers",
+        "licensed",
+        "clinicians",
         "primary",
         "urgent",
         "prescriptions",

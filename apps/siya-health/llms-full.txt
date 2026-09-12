@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
-Generated: 2026-09-02
-Total pages: 184
+Generated: 2026-09-09
+Total pages: 186
 
 ---
 
@@ -371,11 +371,6 @@ Total pages: 184
   Summary: Quick FAQ on TRT lab and symptom monitoring intervals. Full appropriateness guide linked.
   Topics: health-guide, mens-health
 
-- Why am I gaining weight after stopping Ozempic?
-  URL: https://siya.health/answers/weight-gain-after-stopping-ozempic
-  Summary: Weight regain after stopping Ozempic (semaglutide) is common when appetite signaling returns. Learn rebound drivers, metabolic factors, and clinician-guide…
-  Topics: weight-loss, health-guide
-
 - What does low testosterone feel like?
   URL: https://siya.health/answers/what-does-low-testosterone-feel-like
   Summary: Quick FAQ on low testosterone symptoms—not a lab guide. Full free vs total testosterone article linked.
@@ -450,6 +445,11 @@ Total pages: 184
   URL: https://siya.health/blog/adhd
   Summary: Explore Siya Health ADHD articles: evaluation, medication education for adults, symptoms, and online care—indexed for search with clear internal links.
   Topics: adhd, medication
+
+- ADHD Accommodations at Work: An HR Primer (Clinical vs Legal)
+  URL: https://siya.health/blog/adhd-accommodations-hr-primer
+  Summary: HR teams: separate the clinical documentation employees may need from the legal accommodation process. Educational framing—not legal or medical advice.
+  Topics: adhd
 
 - ADHD and Binge Eating: The Link, Food Noise & What Helps
   URL: https://siya.health/blog/adhd-and-binge-eating
@@ -561,6 +561,10 @@ Total pages: 184
   URL: https://siya.health/blog/chronic-fatigue-vs-everyday-tiredness
   Summary: Busy-life tiredness and persistent medical fatigue are not the same. Learn red flags, how Siya frames fatigue, and when to book primary care.
 
+- Cognitive Health Benefits for Employers: What Clinical Programs Include
+  URL: https://siya.health/blog/cognitive-health-benefits-for-employers
+  Summary: HR and benefits leaders: learn what physician-led cognitive health programs include—screening, evaluation, and follow-up—and how they differ from wellness apps.
+
 - Compounded vs Branded GLP-1 Medications (2026): Safety &amp; Standards
   URL: https://siya.health/blog/compounded-vs-branded-glp1-medications
   Summary: Compounded vs branded GLP-1 in 2026: manufacturing standards, regulatory context, risks of unapproved copies, and why clinician oversight matters.
@@ -579,6 +583,10 @@ Total pages: 184
   URL: https://siya.health/blog/fatigue-despite-normal-labs
   Summary: Normal labs do not always mean your fatigue is “all in your head.” Learn what normal results can miss and how primary care continues the workup.
   Topics: labs
+
+- When Focus and Fatigue Show Up as a Workforce Issue
+  URL: https://siya.health/blog/focus-fatigue-workforce-issue
+  Summary: Leadership and HR: when concentration and exhaustion spread across teams, distinguish burnout from treatable medical causes—and what clinical programs can offer.
 
 - Food Noise and GLP-1: What It Means and What Actually Helps (2026)
   URL: https://siya.health/blog/food-noise-and-glp-1-what-it-means-and-what-helps
@@ -680,7 +688,7 @@ Total pages: 184
 
 - Online ADHD Diagnosis in Texas (2026): Cost, Process &amp; What to Expect
   URL: https://siya.health/blog/online-adhd-diagnosis-texas
-  Summary: Online ADHD diagnosis in Texas (2026): real costs, telehealth steps, and what a legitimate evaluation includes—with board-certified providers.
+  Summary: Online ADHD diagnosis in Texas (2026): real costs, telehealth steps, and what a legitimate evaluation includes—with licensed clinicians.
   Topics: adhd, texas
 
 - Oral vs Injectable Weight Loss Medications (2026): GLP-1 &amp; Beyond
@@ -957,7 +965,7 @@ Total pages: 184
 
 - Virtual Medical Care | Siya Health Telehealth
   URL: https://siya.health/telehealth
-  Summary: Fast, convenient telehealth from board-certified providers. Primary care, urgent care, prescriptions, labs. CA, TX, PA, FL. No waiting rooms.
+  Summary: Fast, convenient telehealth from licensed clinicians. Primary care, urgent care, prescriptions, labs. CA, TX, PA, FL. No waiting rooms.
   Topics: telehealth
 
 - Provider-Guided Medical Weight Loss

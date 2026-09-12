@@ -80,7 +80,8 @@ function topicTags(rel, title) {
 function buildPageIndex(htmlFiles) {
   return htmlFiles.flatMap((rel) => {
     const html = fs.readFileSync(path.join(SITE_ROOT, rel), 'utf8');
-    // Skip retired / noindex stubs (EG-P0-01 and similar)
+    // Skip retired / noindex stubs (EG-P0-01 and similar).
+    // /join-our-team stays noindex (SEO). Chatbot reach is via curated fact_careers only — do not add it here.
     if (/name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) return [];
     const title = extractTitle(html);
     const description = extractDescription(html);

@@ -1245,8 +1245,12 @@ export function normalizeSitewideCopy(html, relPath = '') {
   html = html.replace(/book a Meet &amp; Greet/gi, COPY_STANDARDS.primaryCta);
   html = html.replace(/book a Meet & Greet/gi, COPY_STANDARDS.primaryCta);
   html = html.replace(/Discuss pricing on a Meet and Greet/gi, 'View Pricing');
-  html = html.replace(/\bfree discovery call\b/gi, 'free Meet &amp; Greet');
-  html = html.replace(/\bdiscovery call\b/gi, 'Meet &amp; Greet');
+  /* Employer partnership step 2 is "Discovery call" — never rewrite it to patient Meet & Greet. */
+  const isEmployerPage = /employers\.html$/i.test(String(relPath));
+  if (!isEmployerPage) {
+    html = html.replace(/\bfree discovery call\b/gi, 'free Meet &amp; Greet');
+    html = html.replace(/\bdiscovery call\b/gi, 'Meet &amp; Greet');
+  }
   html = html.replace(/Talk to a clinician when you['']re ready/gi, COPY_STANDARDS.primaryCta);
   html = html.replace(
     /Ongoing medication management is available on a monthly plan if clinically appropriate\./g,

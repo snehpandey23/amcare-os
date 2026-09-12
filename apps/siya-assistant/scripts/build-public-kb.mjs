@@ -33,6 +33,8 @@ while ((m = re.exec(text))) {
   chunks.push({ id, title, url, path: pth || '/', summary, topics, keywords })
 }
 
+// fact_* chunks are curated and always kept. fact_careers is the chatbot-only
+// carve-out for /join-our-team (page stays noindex; do not add it to llms-full.txt).
 const curated = JSON.parse(fs.readFileSync(OUT, 'utf8')).chunks.filter((c) => c.id.startsWith('fact_'))
 const all = [...curated, ...chunks.filter((c) => !curated.some((x) => x.id === c.id))]
 const payload = {

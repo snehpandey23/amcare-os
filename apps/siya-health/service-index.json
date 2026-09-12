@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-02T00:40:08.237Z",
+  "generated": "2026-09-09T06:48:04.345Z",
   "services": [
     {
       "title": "Siya Health | When Focus, Energy, or Weight Won't Budge",
@@ -167,7 +167,7 @@
       "title": "Virtual Medical Care | Siya Health Telehealth",
       "url": "https://siya.health/telehealth",
       "type": "service-telehealth",
-      "description": "Fast, convenient telehealth from board-certified providers. Primary care, urgent care, prescriptions, labs. CA, TX, PA, FL. No waiting rooms."
+      "description": "Fast, convenient telehealth from licensed clinicians. Primary care, urgent care, prescriptions, labs. CA, TX, PA, FL. No waiting rooms."
     },
     {
       "title": "Provider-Guided Medical Weight Loss",

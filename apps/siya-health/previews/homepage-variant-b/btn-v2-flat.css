@@ -1,0 +1,24 @@
+/**
+ * Variant B — CTA button Version 2 (desaturated / darkened flat fill)
+ * ONLY hero primary "Book Free Meet & Greet" — nothing else.
+ *
+ * Selected flat: #B80D74
+ *   lerp(t=0.65) between brand #D81088 and approved accessible #A80C6A
+ *   Contrast white-on-fill ≈ 6.27:1 (AA pass)
+ *
+ * Also tested (not applied):
+ *   #CC0F80  (t=0.25, closer to brand — still quite hot)
+ *   #C20E7A  (t=0.45 mid)
+ *   #A80C6A  (full accessible text magenta — safest, least “brand hot”)
+ */
+
+body.preview-b-btn-v2 .hero-merged .hero-ctas .button.ds-button--primary {
+  background: #b80d74;
+  color: #ffffff;
+  border: none;
+}
+
+body.preview-b-btn-v2 .hero-merged .hero-ctas .button.ds-button--primary:hover {
+  background: #a80c6a; /* approved darker magenta already in tokens */
+  color: #ffffff;
+}
