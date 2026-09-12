@@ -1,0 +1,22 @@
+# Static Creative Pack: AD-R-03-8pm-collapse
+
+- **Topic:** Why are so many adults diagnosed with ADHD late in life?
+- **Concept:** Concept 3 — Static Option C (“The 8 PM Collapse”)
+- **Template ID:** `B-01` (Lean Recognition with Single CTA)
+- **Claim Risk:** LOW
+- **Typography & Layout Benchmark:**
+  - Canvas: 4:5 (`1080×1350px`)
+  - Cream Background: `#F6E8DC` solid on left text column ($x=0\dots500\text{px}$)
+  - Soft Organic Dissolve: $x=500\dots700\text{px}$ keeping subject unobstructed
+  - Logo: Canonical `LOGO-PRIMARY` lockup (`Siya Health®`) at `(x=58, y=72)`, size `~242×40px`
+  - Headline: Georgia Bold @ `92px`, leading `126px`, starting `y=300px`, left margin `x=68px`
+    - Line 1: *"The day"* (Deep Navy `#081C5C`)
+    - Line 2: *"worked."* (Deep Navy `#081C5C`)
+    - Line 3: *"You"* (Siya Magenta `#D00668`)
+    - Line 4: *"collapsed."* (Siya Magenta `#D00668`)
+  - Divider Rule: Solid magenta horizontal rule (`116px` width $\times$ `5px` height)
+  - Subhead / Recognition: Arial Bold @ `40px`, leading `56px`, in Deep Navy `#0A1A5E`
+    - *"When keeping up professionally takes all of your executive capacity."*
+  - CTA Button: Outlined magenta button (`Talk to a Clinician`)
+  - Footer: Bottom-left anchored `siya.health | Educational only` at `(52, 1270)`
+- **Output:** `ready-to-post/static-01.png`
