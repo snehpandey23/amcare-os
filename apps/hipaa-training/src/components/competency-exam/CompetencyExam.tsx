@@ -15,7 +15,7 @@ import { buildExamReport } from "@/lib/competency-exam/report";
 import { chatSectionScore, typingSectionScore } from "@/lib/competency-exam/scoring";
 import { parseExamSectionFocus } from "@/lib/competency-exam/section-focus";
 import { recordSeen, freshDrawSeed, type SeenEntry } from "@/lib/competency-exam/seen-set";
-import { loadSeen, saveAttempt, saveSeen, saveIsolatedReview, type IsolatedReviewItemResult } from "@/lib/competency-exam/storage";
+import { loadSeen, saveAttempt, saveSeen, saveIsolatedReview, type IsolatedReviewItemResult, type IsolatedWritingTrail } from "@/lib/competency-exam/storage";
 import type { ExamReportModel, SafetyFlag, SectionResult } from "@/lib/competency-exam/types";
 import { blendWritingScore, scoreWritingDeterministic } from "@/lib/competency-exam/writing-score";
 import { EXAM_WEIGHTS, SECTION_LABEL } from "@/lib/competency-exam/weights";
@@ -57,25 +57,31 @@ function SectionDoneCard({
   attemptId,
   onAgain,
   itemResults,
+  writingTrail,
 }: {
   section: SectionResult;
   rawTyping?: TypingScore | null;
   attemptId: string;
   onAgain: () => void;
   itemResults?: IsolatedReviewItemResult[] | null;
+  writingTrail?: IsolatedWritingTrail | null;
 }) {
   const next =
     section.id === "typing"
       ? { href: "/learn/competency-exam?section=hipaa", label: "Open HIPAA review" }
       : section.id === "hipaa"
-        ? null
-        : null;
+        ? { href: "/learn/competency-exam?section=writing", label: "Open Writing review" }
+        : section.id === "writing"
+          ? null
+          : null;
   const closeout =
     section.id === "typing"
       ? "This run does not continue into other sections. Typing is signed off — open HIPAA next when ready."
       : section.id === "hipaa"
-        ? "This run does not continue into other sections. Sign off in chat when HIPAA looks good, then we open Writing. Item-level results are saved in this browser for audit."
-        : "This run does not continue into other sections.";
+        ? "This run does not continue into other sections. Sign off when HIPAA looks good, then open Writing. Item-level results are saved in this browser for audit."
+        : section.id === "writing"
+          ? "This run does not continue into other sections. Writing trail (prompt + text + score) is saved in this browser for audit. Prompts remain draft pending Sonu — not approved for official scoring."
+          : "This run does not continue into other sections.";
   return (
     <div className="space-y-3 rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4 text-sm">
       <p className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-accent)]">
@@ -126,6 +132,36 @@ function SectionDoneCard({
               </li>
             ))}
           </ol>
+        </details>
+      ) : null}
+      {writingTrail ? (
+        <details className="rounded-xl border border-[var(--siya-border)] p-3 text-xs" open>
+          <summary className="cursor-pointer font-semibold">Writing trail (prompt + text + scores)</summary>
+          <div className="mt-2 space-y-2">
+            <p>
+              <code className="font-mono text-[10px]">{writingTrail.promptId}</code> · {writingTrail.title}
+            </p>
+            <p className="font-semibold text-[var(--siya-text)]">Prompt</p>
+            <p className="text-[var(--siya-text)]">{writingTrail.prompt}</p>
+            <p className="font-semibold text-[var(--siya-text)]">Submitted text ({writingTrail.wordCount} words)</p>
+            <pre className="whitespace-pre-wrap rounded-lg bg-[var(--siya-bg-subtle)] p-2 text-[var(--siya-text)]">
+              {writingTrail.text || "(empty)"}
+            </pre>
+            <p className="text-[var(--siya-text-secondary)]">
+              Grammar {writingTrail.grammarScore}
+              {writingTrail.llmEstimate == null
+                ? " · no LLM estimate"
+                : ` · LLM estimate ${writingTrail.llmEstimate}`}{" "}
+              · blended <strong>{writingTrail.blendedScore}/100</strong>
+            </p>
+            {writingTrail.issues.length ? (
+              <ul className="list-disc pl-4 text-[var(--siya-text-secondary)]">
+                {writingTrail.issues.map((issue, i) => (
+                  <li key={i}>{issue}</li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
         </details>
       ) : null}
       {rawTyping ? (
@@ -211,7 +247,9 @@ export function CompetencyExam() {
   const [reviewNote, setReviewNote] = useState("");
   const [typingKey, setTypingKey] = useState(0);
   const [hipaaKey, setHipaaKey] = useState(0);
+  const [writingKey, setWritingKey] = useState(0);
   const [itemResults, setItemResults] = useState<IsolatedReviewItemResult[] | null>(null);
+  const [writingTrail, setWritingTrail] = useState<IsolatedWritingTrail | null>(null);
 
   const resetToOrient = useCallback(() => {
     setPhase("orient");
@@ -232,6 +270,7 @@ export function CompetencyExam() {
     setReviewNote("");
     setBusy(false);
     setItemResults(null);
+    setWritingTrail(null);
     // Ephemeral isolated-review seen dies with the orient reset (mode flip / remount path).
     // "Run again" calls beginTypingOnly without this reset, so within-session exclusion still works.
     reviewSeenRef.current = [];
@@ -286,6 +325,31 @@ export function CompetencyExam() {
     setPhase("hipaa");
   };
 
+  const beginWritingOnly = () => {
+    const nextAttempt = `review-writing-${Date.now()}`;
+    setAttemptId(nextAttempt);
+    setSections([heldCulture()]);
+    setLastSection(null);
+    setTypingRaw(null);
+    setWritingText("");
+    setWritingTrail(null);
+    setItemResults(null);
+    const seed = freshDrawSeed();
+    const writing = drawWritingPrompt(reviewSeenRef.current, seed);
+    const wp = writing.items[0];
+    if (wp) {
+      setWritingPrompt({
+        id: wp.id,
+        title: wp.title,
+        prompt: wp.prompt,
+        repeated: writing.repeatedIds.includes(wp.id),
+      });
+    }
+    startedAt.current = Date.now();
+    setWritingKey((k) => k + 1);
+    setPhase("writing");
+  };
+
   const begin = () => {
     if (focus === "typing") {
       beginTypingOnly();
@@ -295,8 +359,12 @@ export function CompetencyExam() {
       beginHipaaOnly();
       return;
     }
+    if (focus === "writing") {
+      beginWritingOnly();
+      return;
+    }
     if (isolated) {
-      setReviewNote(`Isolated review for “${focus}” is not opened yet — finish HIPAA sign-off first.`);
+      setReviewNote(`Isolated review for “${focus}” is not opened yet — finish Writing sign-off first.`);
       return;
     }
     // Real sitting: always fresh attempt + empty section scores (never inherit isolated review).
@@ -551,8 +619,7 @@ export function CompetencyExam() {
       llmNote = "LLM estimate unavailable.";
     }
     const blended = blendWritingScore(det.score, llm);
-    remember("writing", [writingPrompt.id], writingPrompt.repeated ? [writingPrompt.id] : [], attemptId);
-    pushSection({
+    const row: SectionResult = {
       id: "writing",
       label: SECTION_LABEL.writing,
       weight: EXAM_WEIGHTS.writing,
@@ -563,11 +630,50 @@ export function CompetencyExam() {
       repeatedIds: writingPrompt.repeated ? [writingPrompt.id] : [],
       draftContent: true,
       detail: `${det.wordCount} words · grammar ${det.grammarScore}${llm == null ? " · no LLM estimate" : ` · LLM estimate ${llm}`}`,
-    });
+    };
+    if (focus === "writing") {
+      const trail: IsolatedWritingTrail = {
+        promptId: writingPrompt.id,
+        title: writingPrompt.title,
+        prompt: writingPrompt.prompt,
+        text: writingText,
+        wordCount: det.wordCount,
+        grammarScore: det.grammarScore,
+        issues: det.issues,
+        llmEstimate: llm,
+        blendedScore: blended.score,
+      };
+      reviewSeenRef.current = recordSeen(
+        reviewSeenRef.current,
+        "writing",
+        [writingPrompt.id],
+        writingPrompt.repeated ? [writingPrompt.id] : [],
+        attemptId,
+      );
+      saveIsolatedReview({
+        attemptId,
+        userId,
+        section: "writing",
+        at: Date.now(),
+        score: blended.score,
+        detail: row.detail || "",
+        itemIds: [writingPrompt.id],
+        repeatedIds: writingPrompt.repeated ? [writingPrompt.id] : [],
+        items: [],
+        writing: trail,
+      });
+      setWritingTrail(trail);
+      setLastSection(row);
+      setBusy(false);
+      setPhase("section-done");
+      return;
+    }
+    remember("writing", [writingPrompt.id], writingPrompt.repeated ? [writingPrompt.id] : [], attemptId);
+    pushSection(row);
     setBusy(false);
     setReviewNote(`Writing recorded at ${blended.score}/100. Prompt is a draft pending Sonu review.`);
     setPhase("review");
-  }, [busy, phase, token, writingPrompt, writingText]);
+  }, [busy, phase, token, writingPrompt, writingText, focus, attemptId, userId]);
 
   useEffect(() => {
     if (phase === "writing" && writingLeft === 0) void submitWriting();
@@ -641,16 +747,20 @@ export function CompetencyExam() {
             ? "Isolated review · Typing"
             : focus === "hipaa"
               ? "Isolated review · HIPAA"
-              : isolated
-                ? `Isolated review · ${focus}`
-                : "Partial sitting"}
+              : focus === "writing"
+                ? "Isolated review · Writing"
+                : isolated
+                  ? `Isolated review · ${focus}`
+                  : "Partial sitting"}
         </h1>
         <p className="mt-1 text-sm text-[var(--siya-text)]">
           {focus === "typing"
             ? "Typing only — real passage, locked 120s timer, real section score. No HIPAA, writing, or chat."
             : focus === "hipaa"
               ? "HIPAA only — 20 items, 12-minute lock, separate draw from certification. No typing, writing, or chat."
-              : "Typing, HIPAA, writing, and chat simulator only. Culture/language is held. Listening and speaking are not in this pass."}
+              : focus === "writing"
+                ? "Writing only — one draft prompt, locked 10-minute timer, deterministic + LLM-estimate score. No mic. No typing, HIPAA, or chat."
+                : "Typing, HIPAA, writing, and chat simulator only. Culture/language is held. Listening and speaking are not in this pass."}
         </p>
       </header>
 
@@ -710,6 +820,38 @@ export function CompetencyExam() {
         </div>
       ) : null}
 
+      {phase === "orient" && focus === "writing" ? (
+        <div className="space-y-3 rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4 text-sm">
+          <p className="font-semibold text-[var(--siya-primary)]">What you are reviewing</p>
+          <ul className="list-disc space-y-1 pl-4 text-[var(--siya-text)]">
+            <li>One prompt drawn from the writing bank (draft_pending_sonu — UI for inspection, not official scoring approval)</li>
+            <li>Locked 10-minute timer — starts when you begin this section (same clock as the fixed countdown HUD)</li>
+            <li>
+              Section score: deterministic length + chat-register grammar, blended with LLM content estimate when available;
+              weight {EXAM_WEIGHTS.writing} pts in composite
+            </li>
+            <li>Type your answer — mic/dictation is not available (measures written composition)</li>
+            <li>Ephemeral review seen-set only — does not write the official exam seen-set or feed a full sitting</li>
+            <li>Stops after this section — you will not be pushed into chat</li>
+          </ul>
+          <p className="text-xs text-[var(--siya-text-secondary)]">
+            Content status: <strong>draft pending Sonu</strong> — shipping the mechanism for inspection; bank is not approved for real competency decisions.
+          </p>
+          <label className="flex items-start gap-2 text-sm">
+            <input type="checkbox" checked={ack} onChange={(e) => setAck(e.target.checked)} />
+            <span>I am reviewing Writing in isolation for inspection / sign-off of the flow.</span>
+          </label>
+          <button
+            type="button"
+            disabled={!ack}
+            onClick={begin}
+            className="rounded-xl bg-[var(--siya-accent)] px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+          >
+            Start writing section
+          </button>
+        </div>
+      ) : null}
+
       {phase === "orient" && !focus ? (
         <div className="space-y-3 rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4 text-sm">
           <p>Sections are sequential and locked. You cannot return to a prior section. A short review appears before you continue.</p>
@@ -722,9 +864,17 @@ export function CompetencyExam() {
           <p className="rounded-xl bg-[var(--siya-bg-subtle)] p-3 text-xs">{CULTURE_SECTION_HELD_REASON}</p>
           <p>A person reviews the report. It does not decide employment, pay, or certification.</p>
           <p className="text-xs">
-            Prefer section-by-section review? Typing is signed off — open{" "}
+            Prefer section-by-section review? Open{" "}
+            <a className="font-semibold text-[var(--siya-accent)] underline" href="/learn/competency-exam?section=typing">
+              Typing
+            </a>
+            ,{" "}
             <a className="font-semibold text-[var(--siya-accent)] underline" href="/learn/competency-exam?section=hipaa">
-              HIPAA only
+              HIPAA
+            </a>
+            , or{" "}
+            <a className="font-semibold text-[var(--siya-accent)] underline" href="/learn/competency-exam?section=writing">
+              Writing
             </a>
             .
           </p>
@@ -743,17 +893,17 @@ export function CompetencyExam() {
         </div>
       ) : null}
 
-      {phase === "orient" && isolated && focus !== "typing" && focus !== "hipaa" ? (
+      {phase === "orient" && isolated && focus !== "typing" && focus !== "hipaa" && focus !== "writing" ? (
         <div className="space-y-3 rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4 text-sm">
           <p>
-            Isolated review for <strong>{focus}</strong> is queued after HIPAA sign-off. Open HIPAA first.
+            Isolated review for <strong>{focus}</strong> is queued after Writing sign-off. Open Writing first, or continue from HIPAA.
           </p>
           {reviewNote ? <p className="text-xs text-[var(--siya-text-secondary)]">{reviewNote}</p> : null}
           <a
-            href="/learn/competency-exam?section=hipaa"
+            href="/learn/competency-exam?section=writing"
             className="inline-block rounded-xl bg-[var(--siya-accent)] px-4 py-2 text-sm font-semibold text-white"
           >
-            Go to HIPAA review
+            Go to Writing review
           </a>
         </div>
       ) : null}
@@ -778,13 +928,16 @@ export function CompetencyExam() {
         </div>
       ) : null}
 
-      {phase === "section-done" && lastSection && (focus === "typing" || focus === "hipaa") ? (
+      {phase === "section-done" && lastSection && (focus === "typing" || focus === "hipaa" || focus === "writing") ? (
         <SectionDoneCard
           section={lastSection}
           rawTyping={focus === "typing" ? typingRaw : null}
           attemptId={attemptId}
-          onAgain={focus === "typing" ? beginTypingOnly : beginHipaaOnly}
+          onAgain={
+            focus === "typing" ? beginTypingOnly : focus === "hipaa" ? beginHipaaOnly : beginWritingOnly
+          }
           itemResults={focus === "hipaa" ? itemResults : null}
+          writingTrail={focus === "writing" ? writingTrail : null}
         />
       ) : null}
 
@@ -832,18 +985,33 @@ export function CompetencyExam() {
         </div>
       ) : null}
 
-      {phase === "writing" && writingPrompt && !isolated ? (
-        <div className="space-y-3">
-          <p className="text-sm font-semibold">Writing · {fmt(writingLeft)} left</p>
+      {phase === "writing" && writingPrompt ? (
+        <div className="space-y-3" key={writingKey}>
+          {focus === "writing" ? (
+            <p className="text-xs font-semibold text-[var(--siya-accent)]">
+              Isolated · Writing — finish or wait for the 10-minute lock · attempt <code>{attemptId}</code>
+            </p>
+          ) : null}
+          <p className="text-sm font-semibold">
+            Writing · {fmt(writingLeft)} left
+            <span className="sr-only"> (same remaining seconds as the fixed countdown)</span>
+          </p>
           <p className="text-xs font-semibold">DRAFT — pending Sonu review. Not an approved official prompt.</p>
           {writingPrompt.repeated ? <p className="text-xs font-semibold">Repeat prompt — not a fresh measure.</p> : null}
+          <p className="text-xs text-[var(--siya-text-secondary)]">
+            Prompt: <strong>{writingPrompt.title}</strong> · id <code>{writingPrompt.id}</code>
+          </p>
           <p className="text-sm">{writingPrompt.prompt}</p>
+          <p className="text-[11px] text-[var(--siya-text-muted)]">
+            Type your answer. Mic/dictation is not available on this section.
+          </p>
           <textarea
             value={writingText}
             onChange={(e) => setWritingText(e.target.value)}
             rows={8}
             className="w-full rounded-xl border border-[var(--siya-border)] p-3 text-sm"
             placeholder="Write the chart note and the patient reply…"
+            data-no-voice-input="true"
           />
           <button
             type="button"
@@ -851,7 +1019,7 @@ export function CompetencyExam() {
             onClick={() => void submitWriting()}
             className="rounded-xl bg-[var(--siya-accent)] px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
           >
-            {busy ? "Scoring…" : "Submit writing"}
+            {busy ? "Scoring…" : focus === "writing" ? "Submit writing review" : "Submit writing"}
           </button>
         </div>
       ) : null}

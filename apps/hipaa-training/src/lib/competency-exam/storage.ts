@@ -22,6 +22,19 @@ export type IsolatedReviewItemResult = {
   options?: { key: string; text: string }[];
 };
 
+/** Writing isolated review trail — same REVIEW_ATTEMPTS_KEY as HIPAA items. */
+export type IsolatedWritingTrail = {
+  promptId: string;
+  title: string;
+  prompt: string;
+  text: string;
+  wordCount: number;
+  grammarScore: number;
+  issues: string[];
+  llmEstimate: number | null;
+  blendedScore: number;
+};
+
 export type IsolatedReviewAttempt = {
   attemptId: string;
   userId: string;
@@ -32,6 +45,7 @@ export type IsolatedReviewAttempt = {
   itemIds: string[];
   repeatedIds: string[];
   items: IsolatedReviewItemResult[];
+  writing?: IsolatedWritingTrail;
 };
 
 function readJson<T>(key: string, fallback: T): T {
