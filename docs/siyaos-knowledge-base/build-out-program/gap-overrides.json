@@ -1,0 +1,634 @@
+{
+  "Clinical SOPs": {
+    "Informed Consent for Telehealth Visits": {
+      "gap": "Partial",
+      "citations": [
+        "docs/siyaos-knowledge-base/11-operations/topics/klarity-patient-consents.md",
+        "Org-Knowledge-Approved/Clinical-Operations/01-git-kb-live/klarity-patient-consents.md",
+        "SiyaOS/clinical/intake/"
+      ],
+      "why": "Klarity patient consents (live) + intake forms; not a clinician telehealth informed-consent SOP covering state statutes."
+    },
+    "Patient Identity & Location Verification": { "gap": "Missing", "citations": [], "why": "No dedicated identity/location-at-visit SOP in live KB or approved mirror." },
+    "Standard of Care / Visit Documentation": { "gap": "Missing", "citations": [], "why": "No visit documentation / standard-of-care SOP found." },
+    "Controlled Substance Prescribing via Telehealth": {
+      "gap": "Partial",
+      "citations": [
+        "SiyaOS/clinical/controlled-substance-agreement-modifications-draft.md",
+        "docs/siyaos-knowledge-base/04-clinical-operations/topics/refill-pharmacy-staff-guidance.md"
+      ],
+      "why": "CSA modifications draft + refill staff guidance; not Ryan Haight / DEA telehealth prescribing SOP."
+    },
+    "Non-Controlled Prescribing SOP": { "gap": "Missing", "citations": [], "why": "" },
+    "PDMP (Prescription Drug Monitoring Program) Query Policy": { "gap": "Missing", "citations": [], "why": "" },
+    "Clinical Escalation & Emergency Protocol": {
+      "gap": "Partial",
+      "citations": [
+        "docs/siyaos-knowledge-base/04-clinical-operations/topics/patient-emergency-red-flag-staff.md",
+        "Org-Knowledge-Approved/Clinical-Operations/01-git-kb-live/patient-emergency-red-flag-staff.md",
+        "docs/siyaos-knowledge-base/11-operations/topics/escalation-pathways.md",
+        "SiyaOS/clinical/crisis-suicidal-thoughts-ma-workflow-draft.md"
+      ],
+      "why": "Staff MA emergency/red-flag + escalation pathways live; clinician emergency protocol SOP not written as tracker item."
+    },
+    "Referral & Care Coordination SOP": { "gap": "Missing", "citations": [], "why": "" },
+    "Diagnostic Criteria & Assessment Tools SOP": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/clinical/creyos-clinical-overview.md", "SiyaOS/clinical/intake/"],
+      "why": "Creyos/intake materials on WorkDrive; not an approved diagnostic-criteria SOP."
+    },
+    "Lab Ordering & Results Management": { "gap": "Missing", "citations": [], "why": "" },
+    "Scope of Practice by License Type": { "gap": "Missing", "citations": [], "why": "" },
+    "Chart/EHR Documentation Standards": {
+      "gap": "Partial",
+      "citations": ["docs/siyaos-knowledge-base/04-clinical-operations/topics/chat-review-sla.md"],
+      "why": "Chat review SLA exists; not full chart/EHR documentation standards."
+    },
+    "Informed Refusal & Non-Compliance Documentation": { "gap": "Missing", "citations": [], "why": "" },
+    "Clinical Peer Review / Quality Assurance Program": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/HR/vc-patient-feedback-survey-healthie.md", "SiyaOS/HR/README-vc-quality.md"],
+      "why": "VC quality/feedback drafts only; no peer-review program SOP."
+    },
+    "Adverse Event & Sentinel Event Reporting SOP": {
+      "gap": "Partial",
+      "citations": ["docs/siyaos-knowledge-base/13-legal-compliance/topics/hipaa-breach.md"],
+      "why": "HIPAA breach topic covers privacy incidents; clinical adverse/sentinel-event SOP not found."
+    },
+    "Medication Reconciliation SOP": {
+      "gap": "Partial",
+      "citations": ["docs/siyaos-knowledge-base/04-clinical-operations/topics/refill-pharmacy-staff-guidance.md"],
+      "why": "Refill/pharmacy staff guidance only."
+    },
+    "Termination of Care / Patient Discharge SOP": { "gap": "Missing", "citations": [], "why": "" },
+    "Telehealth Visit Technical-Failure Contingency": { "gap": "Missing", "citations": [], "why": "" }
+  },
+  "Operational SOPs": {
+    "Vendor & Third-Party Risk Management SOP": {
+      "gap": "Partial",
+      "citations": [
+        "docs/siyaos-knowledge-base/13-legal-compliance/topics/hipaa-breach.md",
+        "SiyaOS/compliance/exhibit-b-hipaa-subcontractor-standalone.md"
+      ],
+      "why": "BAA/subcontractor exhibit draft + breach topic; no annual vendor risk-management SOP."
+    },
+    "EHR / Telehealth Platform Validation & Change Control": {
+      "gap": "Partial",
+      "citations": [
+        "docs/siyaos-knowledge-base/08-technology/topics/ma-platforms-zoho-spruce.md",
+        "SiyaOS/operations/product-manual-ma-platforms-draft.md"
+      ],
+      "why": "Platform inventory topics exist; validation/change-control SOP missing."
+    },
+    "Incident Response & Breach Notification SOP": {
+      "gap": "Have it",
+      "citations": [
+        "docs/siyaos-knowledge-base/13-legal-compliance/topics/hipaa-breach.md",
+        "Org-Knowledge-Approved/Compliance/01-git-kb-live/hipaa-breach.md"
+      ],
+      "why": "Live HIPAA breach / notification topic in git KB + approved mirror."
+    },
+    "Business Continuity & Disaster Recovery Plan": { "gap": "Missing", "citations": [], "why": "" },
+    "Scheduling & No-Show/Cancellation Policy": {
+      "gap": "Partial",
+      "citations": ["docs/siyaos-knowledge-base/11-operations/topics/billing-late-cancel.md"],
+      "why": "Late cancel/no-show billing covered; full scheduling SOP incomplete."
+    },
+    "Patient Complaint & Grievance SOP": {
+      "gap": "Partial",
+      "citations": ["docs/siyaos-knowledge-base/11-operations/topics/patient-manager-request-provisional.md"],
+      "why": "Provisional patient→manager path only."
+    },
+    "Billing, Coding & Claims SOP": {
+      "gap": "Partial",
+      "citations": [
+        "docs/siyaos-knowledge-base/11-operations/topics/discovery-call-staff-billing.md",
+        "docs/siyaos-knowledge-base/11-operations/topics/daily-payment-check.md",
+        "docs/siyaos-knowledge-base/12-finance/topics/patient-pricing-public-canonical.md"
+      ],
+      "why": "Cash-pay billing/pricing topics live; formal coding/claims SOP for insurance not present."
+    },
+    "Refund & Membership Cancellation Policy": {
+      "gap": "Partial",
+      "citations": [
+        "docs/siyaos-knowledge-base/11-operations/topics/klarity-billing-cancellation.md",
+        "docs/siyaos-knowledge-base/11-operations/topics/billing-late-cancel.md"
+      ],
+      "why": "Klarity cancellation + late-cancel topics; unified refund/membership policy incomplete."
+    },
+    "Records Retention & Destruction Schedule": { "gap": "Missing", "citations": [], "why": "" },
+    "Access Control & Role-Based Permissions SOP": {
+      "gap": "Partial",
+      "citations": [
+        "SiyaOS/compliance/hipaa-remote-workstation-standards.md",
+        "SiyaOS/compliance/hipaa-workstation-technical-standards-draft.md"
+      ],
+      "why": "Workstation standards drafts; not full RBAC SOP."
+    },
+    "Device & Endpoint Security Policy": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/compliance/hipaa-remote-workstation-standards.md"],
+      "why": "Remote workstation standards on WorkDrive; not approved live SOP."
+    },
+    "Vendor Business Associate Agreement (BAA) Tracker": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/compliance/exhibit-b-hipaa-subcontractor-standalone.md"],
+      "why": "Exhibit B template exists; no live BAA tracker artifact."
+    },
+    "Quality Metrics & KPI Reporting Cadence": { "gap": "Missing", "citations": [], "why": "" },
+    "Corporate Practice of Medicine (CPOM) Structure Review": {
+      "gap": "Partial",
+      "citations": [
+        "integrations/hipaa-training-api/src/decision-json-seed.generated.ts (CPOM/MSO decisions)",
+        "apps/hipaa-training/docs/FOUNDER-COACH-PHASE1.md"
+      ],
+      "why": "Decisions seeded: CPOM → healthcare regulatory counsel (not AI). Structure-review work product itself not in approved KB."
+    },
+    "Facilities-Free Operations Attestation": { "gap": "Missing", "citations": [], "why": "" },
+    "Insurance & Liability Coverage Review": { "gap": "Missing", "citations": [], "why": "" }
+  },
+  "HR SOPs & Policies": {
+    "Employee Handbook (Remote-First)": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/HR/employee-handbook-outline-telemedicine.md", "SiyaOS/HR/README-policy-stack.md"],
+      "why": "Outline + policy-stack roadmap only — not a finished handbook."
+    },
+    "Background Check & Screening Policy": { "gap": "Missing", "citations": [], "why": "" },
+    "Licensure & Credential Verification Policy (Clinical)": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/HR/provider-credentialing-requirements-checklist.md"],
+      "why": "Credentialing checklist on WorkDrive; not live/approved policy."
+    },
+    "I-9 / Employment Eligibility Verification SOP": { "gap": "Missing", "citations": [], "why": "" },
+    "Multi-State Payroll & Tax Registration SOP": { "gap": "Missing", "citations": [], "why": "" },
+    "Remote Work & Home-Office Policy": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/compliance/hipaa-remote-workstation-standards.md"],
+      "why": "HIPAA remote workstation draft; broader remote-work HR policy missing."
+    },
+    "Anti-Harassment & Non-Discrimination Policy": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/HR/posh-policy-outline-india-remote.md"],
+      "why": "India POSH outline only; US multi-state anti-harassment policy missing."
+    },
+    "Leave of Absence Policy (FMLA/State Leave)": {
+      "gap": "Partial",
+      "citations": ["docs/siyaos-knowledge-base/10-hr/topics/leave-pto-request-provisional.md"],
+      "why": "Provisional leave/PTO steps only — not approved FMLA/state leave policy."
+    },
+    "Performance Management & PIP Process": { "gap": "Missing", "citations": [], "why": "" },
+    "Disciplinary Action & Termination SOP": { "gap": "Missing", "citations": [], "why": "" },
+    "Independent Contractor vs. Employee Classification Policy": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/HR/templates/contractor-service-agreement-CORE-summary.md", "SiyaOS/HR/sow/"],
+      "why": "Contractor templates + SOWs; classification policy not formalized."
+    },
+    "Confidentiality, IP Assignment & Non-Solicit Agreement": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/HR/templates/contractor-service-agreement-CORE-summary.md"],
+      "why": "Contractor agreement summary; not a standalone confidentiality/IP policy pack."
+    },
+    "Code of Conduct & Conflict of Interest Policy": { "gap": "Missing", "citations": [], "why": "" },
+    "Workplace Safety / Ergonomics Policy (Remote)": { "gap": "Missing", "citations": [], "why": "" },
+    "Compensation & Benefits Administration SOP": { "gap": "Missing", "citations": [], "why": "" },
+    "New Hire Data Privacy & Acceptable Use Policy": {
+      "gap": "Partial",
+      "citations": [
+        "docs/siyaos-knowledge-base/13-legal-compliance/topics/hipaa-training-cert.md",
+        "SiyaOS/compliance/hipaa-remote-workstation-standards.md"
+      ],
+      "why": "Related HIPAA/security materials; dedicated AUP not written."
+    }
+  },
+  "Telehealth SOPs": {
+    "State Medical Licensure Matrix Maintenance": { "gap": "Missing", "citations": [], "why": "No live licensure matrix artifact found in KB/approved." },
+    "Interstate Medical Licensure Compact (IMLC) Utilization SOP": { "gap": "Missing", "citations": [], "why": "" },
+    "Telehealth Modality Standards (Audio-Video vs. Audio-Only)": { "gap": "Missing", "citations": [], "why": "" },
+    "Patient Originating-Site / Physical-Location Documentation": { "gap": "Missing", "citations": [], "why": "" },
+    "Technology Platform HIPAA Security Requirements": {
+      "gap": "Partial",
+      "citations": [
+        "docs/siyaos-knowledge-base/08-technology/topics/ma-platforms-zoho-spruce.md",
+        "SiyaOS/compliance/hipaa-workstation-technical-standards-draft.md"
+      ],
+      "why": "Platform + workstation drafts; formal telehealth platform HIPAA requirements SOP incomplete."
+    },
+    "Cross-State Prescribing Rules Matrix": { "gap": "Missing", "citations": [], "why": "" },
+    "Telehealth Informed Consent Language by State": {
+      "gap": "Partial",
+      "citations": ["docs/siyaos-knowledge-base/11-operations/topics/klarity-patient-consents.md"],
+      "why": "Klarity consents exist; state-by-state telehealth consent language pack missing."
+    },
+    "Out-of-State Emergency Coverage Protocol": {
+      "gap": "Partial",
+      "citations": ["docs/siyaos-knowledge-base/04-clinical-operations/topics/patient-emergency-red-flag-staff.md"],
+      "why": "Emergency staff script exists; per-location out-of-state coverage protocol missing."
+    },
+    "Telehealth Parity & Reimbursement Policy Tracking": { "gap": "Missing", "citations": [], "why": "" },
+    "Corporate Practice of Medicine (CPOM) Compliance by State": {
+      "gap": "Partial",
+      "citations": [
+        "integrations/hipaa-training-api/src/decision-json-seed.generated.ts (CPOM/MSO decisions)",
+        "State Compliance Roadmap tab (tracker)"
+      ],
+      "why": "CPOM decisions seeded (counsel-not-AI + extraction-only attorney docs); per-state compliance pack not in approved KB."
+    },
+    "Telehealth Platform Downtime / Failover SOP": { "gap": "Missing", "citations": [], "why": "" },
+    "Minor/Pediatric Telehealth Consent SOP": { "gap": "Missing", "citations": [], "why": "" }
+  },
+  "Data Room Build-Out": {
+    "One-pager": {
+      "gap": "Partial",
+      "citations": ["docs/siyaos-knowledge-base/SEED-DECK-V8-PLACEHOLDER.md"],
+      "why": "No dedicated public one-pager; seed deck placeholder only."
+    },
+    "Pitch deck (financials, ask, valuation, terms)": {
+      "gap": "Partial",
+      "citations": ["docs/siyaos-knowledge-base/SEED-DECK-V8-PLACEHOLDER.md", "apps/siya-health/brand/investor"],
+      "why": "Placeholder/investor folder; not a completed data-room pitch deck."
+    },
+    "Brand guidelines & visual identity": {
+      "gap": "Have it",
+      "citations": ["apps/siya-health/brand/BRAND-STYLE-LOCK.md", "apps/siya-health/brand/AGENT-BOOTSTRAP.md"],
+      "why": "Brand Style Lock is the visual identity source of truth."
+    },
+    "Revenue & growth projections (min. covers raise period)": { "gap": "Missing", "citations": [], "why": "" },
+    "Key KPIs (revenue, active members, retention, CAC/LTV)": { "gap": "Missing", "citations": [], "why": "" },
+    "P&L / historical cash flow statements": { "gap": "Missing", "citations": [], "why": "" },
+    "Cap table": { "gap": "Missing", "citations": [], "why": "" },
+    "Trademarks (registered/pending) & IP strategy": { "gap": "Missing", "citations": [], "why": "" },
+    "Market sizing & competitive analysis": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/marketing/strategy/competitor-concierge-access-matrix.md"],
+      "why": "Competitor matrix draft on WorkDrive; not data-room-ready package."
+    },
+    "Sales process & pipeline (pilot partners)": { "gap": "Missing", "citations": [], "why": "" },
+    "Employee/contractor roster, titles, agreements": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/HR/sow/active-sow-assignments-registry.md"],
+      "why": "SOW assignment registry exists; full roster/agreements pack not assembled for data room."
+    },
+    "Clinician roster with licensure status": { "gap": "Missing", "citations": [], "why": "" },
+    "System architecture diagram + platform BAAs": {
+      "gap": "Partial",
+      "citations": [
+        "docs/siyaos-knowledge-base/08-technology/topics/amcare-os-overview.md",
+        "docs/siyaos-knowledge-base/08-technology/topics/ma-platforms-zoho-spruce.md"
+      ],
+      "why": "Platform overview topics; architecture diagram + BAA binder missing."
+    },
+    "Board and shareholder actions/minutes": { "gap": "Missing", "citations": [], "why": "" },
+    "Articles/Certificate of Incorporation, Bylaws, Cap Table, Shareholder Agreements": { "gap": "Missing", "citations": [], "why": "" },
+    "PC/MSO management services agreement": {
+      "gap": "Partial",
+      "citations": ["integrations/hipaa-training-api/src/decision-json-seed.generated.ts (CPOM/MSO attorney docs decision)"],
+      "why": "Decision: attorney-drafted CPOM/MSO docs are extraction-only / restricted; agreement itself not in approved KB."
+    },
+    "Risk factors and mitigation summary": { "gap": "Missing", "citations": [], "why": "" },
+    "Pending/threatened litigation disclosures": { "gap": "Missing", "citations": [], "why": "" },
+    "Most recent audited/unaudited financials": { "gap": "Missing", "citations": [], "why": "" },
+    "State medical licenses — entity & clinicians": { "gap": "Missing", "citations": [], "why": "" },
+    "DEA registrations": { "gap": "Missing", "citations": [], "why": "" },
+    "Malpractice/professional liability insurance certificates": { "gap": "Missing", "citations": [], "why": "" },
+    "HIPAA policies, Security Risk Assessment, breach log": {
+      "gap": "Partial",
+      "citations": [
+        "docs/siyaos-knowledge-base/13-legal-compliance/topics/hipaa-breach.md",
+        "docs/siyaos-knowledge-base/13-legal-compliance/topics/hipaa-training-cert.md",
+        "SiyaOS/compliance/"
+      ],
+      "why": "Breach + training topics + compliance drafts; full SRA + policy binder + breach log for data room not assembled."
+    },
+    "Signed Business Associate Agreements (BAAs)": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/compliance/exhibit-b-hipaa-subcontractor-standalone.md"],
+      "why": "Template/exhibit; signed BAA set not in approved mirror."
+    },
+    "Collaborative practice / supervision agreements (NP/PA)": { "gap": "Missing", "citations": [], "why": "" },
+    "Telehealth registration/certificate where states require it": { "gap": "Missing", "citations": [], "why": "" },
+    "Standard customer/membership agreement template": {
+      "gap": "Partial",
+      "citations": [
+        "SiyaOS/accounts/bronze-plan-terms-and-conditions.md",
+        "docs/siyaos-knowledge-base/12-finance/topics/patient-pricing-public-canonical.md"
+      ],
+      "why": "Bronze plan T&Cs on WorkDrive + public pricing; membership agreement template may need legal finalize."
+    },
+    "Vendor, NDA, and partnership agreements": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/marketing/partnerships/"],
+      "why": "Partnership frameworks draft; agreement binder not assembled."
+    }
+  },
+  "Marketing Re-Brand": {
+    "Brand style guide finalization": {
+      "gap": "Have it",
+      "citations": [
+        "apps/siya-health/brand/BRAND-STYLE-LOCK.md",
+        "apps/siya-health/brand/AGENT-BOOTSTRAP.md",
+        "Org-Knowledge-Approved/Marketing/01-git-kb-live/brand-entities-voice.md"
+      ],
+      "why": "Style Lock is the locked brand system (cream/navy/magenta). Tracker notes cite superseded plum palette — treat Style Lock as canonical; update tracker notes."
+    },
+    "Logo usage & lock-up guidelines": {
+      "gap": "Partial",
+      "citations": ["apps/siya-health/brand/BRAND-STYLE-LOCK.md", "SiyaOS/_shared/brand-assets/README.md"],
+      "why": "Tokens/logo rules in Style Lock; dedicated lock-up one-pager not isolated."
+    },
+    "Investor pitch deck (rebrand pass)": {
+      "gap": "Partial",
+      "citations": ["docs/siyaos-knowledge-base/SEED-DECK-V8-PLACEHOLDER.md", "apps/siya-health/brand/investor"],
+      "why": "Seed deck placeholder + investor brand folder; not a finished rebranded pitch deck."
+    },
+    "Website refresh — patient-facing": {
+      "gap": "Partial",
+      "citations": ["apps/siya-health/", "docs/siyaos-knowledge-base/decisions/homepage-cta-meet-and-greet.md"],
+      "why": "Live patient site exists; continuous refresh vs closed rebrand deliverable."
+    },
+    "Website refresh — provider/careers page": {
+      "gap": "Partial",
+      "citations": ["apps/siya-health/ (provider careers / site)", "integrations/hipaa-training-api/src/database/provider-careers-schema.sql"],
+      "why": "Careers inquiry path exists; full provider/careers page refresh not closed."
+    },
+    "Sales one-pager (general)": {
+      "gap": "Partial",
+      "citations": ["docs/siyaos-knowledge-base/11-operations/topics/service-line-blurbs.md"],
+      "why": "Service-line blurbs live; dedicated sales one-pager incomplete."
+    },
+    "Pilot partner proposal template": { "gap": "Missing", "citations": [], "why": "" },
+    "Email signature & internal templates": { "gap": "Missing", "citations": [], "why": "" },
+    "Social media templates (LinkedIn, IG)": {
+      "gap": "Partial",
+      "citations": [
+        "apps/siya-health/brand/VISUAL-OS.md",
+        "apps/siya-health/brand/statics/",
+        "apps/siya-health/brand/editorial-packs/"
+      ],
+      "why": "Visual OS + statics/editorial packs; not packaged as a single social template kit."
+    },
+    "Patient intake / welcome packet re-skin": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/clinical/intake/", "SiyaOS/marketing/onboarding/welcome-newsletter-spec.md"],
+      "why": "Intake forms + welcome newsletter spec; branded welcome packet re-skin incomplete."
+    },
+    "Provider bios & photography refresh": {
+      "gap": "Partial",
+      "citations": ["apps/siya-health/brand/photography/"],
+      "why": "Photography system exists; provider bio refresh not closed."
+    },
+    "Press kit / media one-pager": { "gap": "Missing", "citations": [], "why": "" },
+    "Brand asset library (Canva/Figma source files)": {
+      "gap": "Partial",
+      "citations": ["apps/siya-health/brand/assets/", "SiyaOS/_shared/brand-assets/"],
+      "why": "Brand assets folders exist; Canva/Figma library packaging unclear."
+    }
+  },
+  "Employer Materials": {
+    "Employer benefits booklet (full)": { "gap": "Missing", "citations": [], "why": "" },
+    "Employer one-page leave-behind": { "gap": "Missing", "citations": [], "why": "" },
+    "Employee enrollment flyer (for distribution by employer)": { "gap": "Missing", "citations": [], "why": "" },
+    "Employer ROI / outcomes one-pager": { "gap": "Missing", "citations": [], "why": "" },
+    "HR/benefits-broker slide deck": { "gap": "Missing", "citations": [], "why": "" },
+    "Employer FAQ document (privacy, eligibility, billing)": {
+      "gap": "Partial",
+      "citations": [
+        "apps/siya-health/employers.html",
+        "docs/siyaos-knowledge-base/11-operations/topics/patient-faq-insurance-cash-pay.md"
+      ],
+      "why": "Employers page + patient FAQs; dedicated employer FAQ pack missing."
+    },
+    "Pilot program overview one-pager": { "gap": "Missing", "citations": [], "why": "" },
+    "Case study / testimonial template": {
+      "gap": "Partial",
+      "citations": ["apps/siya-health/brand/MEDICAL-COMPLIANCE-MARKETING.md"],
+      "why": "Compliance rules for testimonials exist; case-study template itself missing."
+    }
+  },
+  "Onboarding - Employees": {
+    "Offer letter & background check completion": { "gap": "Missing", "citations": [], "why": "" },
+    "I-9 / E-Verify completion": { "gap": "Missing", "citations": [], "why": "" },
+    "State new-hire reporting filed": { "gap": "Missing", "citations": [], "why": "" },
+    "Payroll & tax withholding setup (state of residence)": { "gap": "Missing", "citations": [], "why": "" },
+    "Equipment provisioning (laptop, MFA, VPN)": {
+      "gap": "Partial",
+      "citations": [
+        "SiyaOS/technology/systems-stack-india-ops-draft.md",
+        "SiyaOS/technology/vpn-nordlayer-procurement-draft.md"
+      ],
+      "why": "Systems/VPN drafts; no complete provisioning checklist as approved SOP."
+    },
+    "HIPAA & security awareness training (initial)": {
+      "gap": "Have it",
+      "citations": [
+        "docs/siyaos-knowledge-base/13-legal-compliance/topics/hipaa-training-cert.md",
+        "apps/hipaa-training/",
+        "Org-Knowledge-Approved/Compliance/01-git-kb-live/hipaa-training-cert.md"
+      ],
+      "why": "Staff HIPAA training product + certification topic live."
+    },
+    "Handbook acknowledgment signed": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/HR/employee-handbook-outline-telemedicine.md"],
+      "why": "Handbook not finished; acknowledgment step cannot be complete."
+    },
+    "Benefits enrollment": { "gap": "Missing", "citations": [], "why": "" },
+    "Role-based systems access provisioned": {
+      "gap": "Partial",
+      "citations": ["docs/siyaos-knowledge-base/08-technology/topics/ma-platforms-zoho-spruce.md"],
+      "why": "Platform overview live; onboarding access checklist form missing."
+    },
+    "Manager 30/60/90 check-ins scheduled": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/HR/training/ma-7-day-training-schedule.md", "SiyaOS/HR/ceo-weekly-1on1-scan-focus-act.md"],
+      "why": "MA training + 1:1 templates; formal 30/60/90 onboarding cadence missing."
+    },
+    "Remote work / home-office policy acknowledgment": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/compliance/hipaa-remote-workstation-standards.md"],
+      "why": "Related workstation standards; policy acknowledgment depends on finished remote-work policy."
+    },
+    "Anti-harassment training (state-mandated where applicable)": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/HR/posh-policy-outline-india-remote.md"],
+      "why": "India POSH outline only; US state-mandated training program missing."
+    },
+    "90-day performance check-in": { "gap": "Missing", "citations": [], "why": "" }
+  },
+  "Onboarding - Clinicians": {
+    "State medical license verification (primary source)": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/HR/provider-credentialing-requirements-checklist.md"],
+      "why": "Checklist draft on WorkDrive; not live approved SOP + matrix."
+    },
+    "DEA registration verification (if prescribing controlled substances)": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/HR/provider-credentialing-requirements-checklist.md"],
+      "why": "Checklist draft on WorkDrive."
+    },
+    "NPI number confirmation": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/HR/provider-credentialing-requirements-checklist.md"],
+      "why": "Checklist draft on WorkDrive."
+    },
+    "Malpractice / professional liability insurance certificate": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/HR/provider-credentialing-requirements-checklist.md"],
+      "why": "Checklist draft on WorkDrive."
+    },
+    "Board certification verification": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/HR/provider-credentialing-requirements-checklist.md"],
+      "why": "Checklist draft on WorkDrive."
+    },
+    "OIG/SAM exclusion list & sanctions check": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/HR/provider-credentialing-requirements-checklist.md"],
+      "why": "Likely covered in credentialing checklist draft; confirm when promoting."
+    },
+    "Credentialing committee approval / privileging": { "gap": "Missing", "citations": [], "why": "" },
+    "Collaborative practice / supervision agreement executed (NP/PA)": { "gap": "Missing", "citations": [], "why": "" },
+    "Multi-state licensure gap review vs. active/target states": { "gap": "Missing", "citations": [], "why": "" },
+    "EHR / e-prescribing platform training & credential setup": {
+      "gap": "Partial",
+      "citations": ["docs/siyaos-knowledge-base/08-technology/topics/ma-platforms-zoho-spruce.md"],
+      "why": "Platform docs for MA stack; clinician curriculum missing."
+    },
+    "Clinical SOP acknowledgment (all titles in Clinical SOPs tab)": {
+      "gap": "Missing",
+      "citations": [],
+      "why": "Depends on Clinical SOPs being written; cannot acknowledge what does not exist."
+    },
+    "HIPAA & security awareness training": {
+      "gap": "Have it",
+      "citations": [
+        "docs/siyaos-knowledge-base/13-legal-compliance/topics/hipaa-training-cert.md",
+        "apps/hipaa-training/"
+      ],
+      "why": "Staff HIPAA training product + certification topic live (clinicians can use same track)."
+    },
+    "PDMP registration in each prescribing state": { "gap": "Missing", "citations": [], "why": "" },
+    "Shadowing / clinical onboarding visits": { "gap": "Missing", "citations": [], "why": "" },
+    "Peer review / QA program enrollment": { "gap": "Missing", "citations": [], "why": "" },
+    "Payer/cash-pay billing training": {
+      "gap": "Partial",
+      "citations": [
+        "docs/siyaos-knowledge-base/11-operations/topics/discovery-call-staff-billing.md",
+        "docs/siyaos-knowledge-base/12-finance/topics/patient-pricing-public-canonical.md"
+      ],
+      "why": "Staff billing/pricing topics; clinician billing training curriculum missing."
+    },
+    "90-day clinical quality check-in": { "gap": "Missing", "citations": [], "why": "" }
+  },
+  "Go-To-Market": {
+    "Finalize ICP & messaging (DTC patient vs. employer/pilot buyer)": {
+      "gap": "Partial",
+      "citations": [
+        "docs/siyaos-knowledge-base/05-marketing-os/MARKETING-OS-v1.1.md",
+        "SiyaOS/marketing/strategy/5w1h-marketing-framework-draft.md"
+      ],
+      "why": "Marketing OS frozen/live; ICP finalize still a GTM action."
+    },
+    "Competitive differentiation refresh": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/marketing/strategy/competitor-concierge-access-matrix.md"],
+      "why": "Competitor matrix on WorkDrive; refresh not closed."
+    },
+    "Paid social / search channel plan": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/marketing/strategy/six-month-patient-acquisition-plan-draft.md"],
+      "why": "Acquisition plan draft only."
+    },
+    "Content/SEO plan for ADHD, fatigue, metabolic health": {
+      "gap": "Partial",
+      "citations": ["apps/siya-health/brand/EDITORIAL-OS.md", "apps/siya-health/ (condition pages / indexes)"],
+      "why": "Editorial OS + site content graph; formal SEO plan doc incomplete."
+    },
+    "Referral / affiliate program design": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/marketing/partnerships/"],
+      "why": "Partnership frameworks draft; program not launched."
+    },
+    "Conversion funnel & landing page build": {
+      "gap": "Partial",
+      "citations": [
+        "docs/siyaos-knowledge-base/11-operations/topics/legacy-pricing-funnel-unresolved.md",
+        "apps/siya-health/"
+      ],
+      "why": "Site live; funnel unresolved topic acknowledges gap."
+    },
+    "Target pilot partner list (employers, health systems)": { "gap": "Missing", "citations": [], "why": "" },
+    "Pilot program structure & success metrics defined": { "gap": "Missing", "citations": [], "why": "" },
+    "Outreach sequence & pitch materials": { "gap": "Missing", "citations": [], "why": "" },
+    "Pilot-to-contract conversion playbook": { "gap": "Missing", "citations": [], "why": "" },
+    "Prioritize next 3-5 states by demand + regulatory ease": {
+      "gap": "Partial",
+      "citations": ["State Compliance Roadmap tab (tracker)", "integrations/hipaa-training-api/src/decision-json-seed.generated.ts (CPOM)"],
+      "why": "Roadmap lists active + next states; prioritization analysis not documented."
+    },
+    "Membership retention / win-back program": { "gap": "Missing", "citations": [], "why": "" },
+    "NPS / patient satisfaction tracking cadence": {
+      "gap": "Partial",
+      "citations": ["SiyaOS/HR/vc-patient-feedback-survey-healthie.md"],
+      "why": "Feedback survey draft; NPS cadence not operationalized."
+    },
+    "GTM KPI dashboard (CAC, LTV, conversion, pilot pipeline)": { "gap": "Missing", "citations": [], "why": "" },
+    "Launch communications plan for re-brand rollout": {
+      "gap": "Partial",
+      "citations": ["apps/siya-health/brand/BRAND-STYLE-LOCK.md", "docs/siyaos-knowledge-base/05-marketing-os/MARKETING-OS-v1.1.md"],
+      "why": "Brand + Marketing OS exist; launch communications plan not written."
+    }
+  },
+  "Financial Audit": {
+    "Full GL reconciliation (bank, credit card, merchant processor)": { "gap": "Missing", "citations": [], "why": "No finance audit artifacts in live KB/approved mirror." },
+    "Chart of accounts standardization": { "gap": "Missing", "citations": [], "why": "" },
+    "AR/AP aging review & cleanup": { "gap": "Missing", "citations": [], "why": "" },
+    "Revenue recognition policy for membership revenue": { "gap": "Missing", "citations": [], "why": "" },
+    "Payroll & contractor payment reconciliation (1099 vs W-2)": { "gap": "Missing", "citations": [], "why": "" },
+    "Sales/use tax nexus review by state": { "gap": "Missing", "citations": [], "why": "" },
+    "State business registration / foreign qualification review": { "gap": "Missing", "citations": [], "why": "" },
+    "1099 issuance readiness for contractors/clinicians": { "gap": "Missing", "citations": [], "why": "" },
+    "Produce clean P&L, balance sheet, cash flow (trailing 24 mo)": { "gap": "Missing", "citations": [], "why": "" },
+    "Independent review or audit engagement (if targeting institutional capital)": { "gap": "Missing", "citations": [], "why": "" },
+    "Build 3-statement financial model with state-expansion scenarios": { "gap": "Missing", "citations": [], "why": "" },
+    "Unit economics: CAC, LTV, contribution margin by state/channel": { "gap": "Missing", "citations": [], "why": "" },
+    "Cash runway & burn multiple tracking": { "gap": "Missing", "citations": [], "why": "" },
+    "Pilot/employer revenue scenario modeling": { "gap": "Missing", "citations": [], "why": "" },
+    "Monthly close checklist & calendar": { "gap": "Missing", "citations": [], "why": "" },
+    "Expense approval / spend policy": {
+      "gap": "Partial",
+      "citations": ["integrations/hipaa-training-api/src/audit-knowledge-sop-pack.ts (expense reimbursement interim draft SOP)"],
+      "why": "Interim expense reimbursement draft SOP in audit pack; spend policy not finalized."
+    }
+  },
+  "State Compliance Roadmap": {
+    "California (active)": {
+      "gap": "Partial",
+      "citations": [
+        "integrations/hipaa-training-api/src/decision-json-seed.generated.ts (CPOM/MSO decisions)",
+        "docs/siyaos-knowledge-base/13-legal-compliance/topics/"
+      ],
+      "why": "Active PC state; CPOM → counsel. No completed per-state checklist pack in approved KB."
+    },
+    "Texas (active)": {
+      "gap": "Partial",
+      "citations": [
+        "integrations/hipaa-training-api/src/decision-json-seed.generated.ts (CPOM/MSO decisions)",
+        "docs/siyaos-knowledge-base/13-legal-compliance/topics/"
+      ],
+      "why": "Active PC state; roadmap research columns not evidenced as completed docs."
+    },
+    "Pennsylvania (active)": {
+      "gap": "Partial",
+      "citations": ["integrations/hipaa-training-api/src/decision-json-seed.generated.ts (CPOM decisions)"],
+      "why": "Listed active; no state compliance pack in approved KB."
+    },
+    "Florida (active)": {
+      "gap": "Partial",
+      "citations": ["integrations/hipaa-training-api/src/decision-json-seed.generated.ts (CPOM decisions)"],
+      "why": "Listed active; FL telehealth registration verification pack not found."
+    },
+    "[Next expansion state #1]": { "gap": "Missing", "citations": [], "why": "Placeholder row — state not named." },
+    "[Next expansion state #2]": { "gap": "Missing", "citations": [], "why": "Placeholder row — state not named." },
+    "[Next expansion state #3]": { "gap": "Missing", "citations": [], "why": "Placeholder row — state not named." }
+  }
+}
