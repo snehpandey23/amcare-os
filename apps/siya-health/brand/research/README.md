@@ -54,4 +54,15 @@ items:
 
 Then run [`../prompts/`](../prompts/) per item and file outputs under `creative-registry/`.
 
+## Mining / audit passes (review only)
+
+Claim-risk mining before scripts:
+
+```text
+research/audits/YYYY-MM-DD-{topic}-mining.md
+research/REDDIT-{slug}.md   # optional companion hook bank
+```
+
+Example: `audits/2026-08-14-ADHD-adult-signs-symptoms-mining.md` (signs of adult ADHD — no live page edits).
+
 **Do not expand this into a full Research OS until ~50 registry entries are `approved` or `published`.**
