@@ -15,6 +15,7 @@ import {
   portalStatusErrorText,
   portalStatusSuccessText,
 } from "@/lib/portal-ui";
+import { VoiceInputButton } from "@/components/ui/VoiceInputButton";
 
 type Props = { className?: string };
 
@@ -137,6 +138,14 @@ export function WeeklyCheckInCard({ className = "" }: Props) {
               maxLength={4000}
             />
           </label>
+          <div className="mt-2">
+            <VoiceInputButton
+              value={whatChanged}
+              onChange={setWhatChanged}
+              disabled={pending}
+              size="md"
+            />
+          </div>
           <label className="block text-xs font-medium text-[var(--siya-text-muted)]">
             Key numbers / status
             <textarea
@@ -147,6 +156,14 @@ export function WeeklyCheckInCard({ className = "" }: Props) {
               maxLength={4000}
             />
           </label>
+          <div className="mt-2">
+            <VoiceInputButton
+              value={keyNumbersStatus}
+              onChange={setKeyNumbersStatus}
+              disabled={pending}
+              size="md"
+            />
+          </div>
           <label className="block text-xs font-medium text-[var(--siya-text-muted)]">
             Anything blocking
             <textarea
@@ -157,6 +174,9 @@ export function WeeklyCheckInCard({ className = "" }: Props) {
               placeholder="Optional"
             />
           </label>
+          <div className="mt-2">
+            <VoiceInputButton value={blockers} onChange={setBlockers} disabled={pending} size="md" />
+          </div>
           <label className="block text-xs font-medium text-[var(--siya-text-muted)]">
             Anything the founder should know
             <textarea
@@ -167,6 +187,14 @@ export function WeeklyCheckInCard({ className = "" }: Props) {
               placeholder="Optional"
             />
           </label>
+          <div className="mt-2">
+            <VoiceInputButton
+              value={founderShouldKnow}
+              onChange={setFounderShouldKnow}
+              disabled={pending}
+              size="md"
+            />
+          </div>
           <button type="submit" disabled={pending} className={portalBtnAccentSm}>
             {pending ? "Saving…" : "Submit check-in"}
           </button>

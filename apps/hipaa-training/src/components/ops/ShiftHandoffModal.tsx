@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { submitShiftHandoff, type HandoffFollowup } from "@/lib/ops-coordination-api";
 import { trainingLinkPrimaryClass } from "@/components/training/training-ui";
+import { VoiceInputButton } from "@/components/ui/VoiceInputButton";
 
 type Props = {
   open: boolean;
@@ -145,6 +146,14 @@ export function ShiftHandoffModal({ open, shiftEndEventId, onClose }: Props) {
             onChange={(e) => setScheduled(e.target.value)}
           />
         </label>
+        <div className="mt-2">
+          <VoiceInputButton
+            value={scheduled}
+            onChange={setScheduled}
+            disabled={pending}
+            size="md"
+          />
+        </div>
 
         <label className="mt-3 block text-xs font-medium text-[var(--siya-text-muted)]">
           General note
@@ -155,6 +164,9 @@ export function ShiftHandoffModal({ open, shiftEndEventId, onClose }: Props) {
             onChange={(e) => setGeneral(e.target.value)}
           />
         </label>
+        <div className="mt-2">
+          <VoiceInputButton value={general} onChange={setGeneral} disabled={pending} size="md" />
+        </div>
 
         {error ? <p className="mt-2 text-xs text-red-600">{error}</p> : null}
 

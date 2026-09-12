@@ -8,6 +8,7 @@ import type { MemoryImportance } from "@/lib/memory-api";
 import { IMPORTANCE_HINT, IMPORTANCE_LABEL } from "@/lib/memory-api";
 import { isPortalMemoryEnabled } from "@/lib/trainingConfig";
 import type { LearningPick } from "@/lib/my-day";
+import { VoiceInputButton } from "@/components/ui/VoiceInputButton";
 
 export function EndShiftModal({
   open,
@@ -167,6 +168,14 @@ export function EndShiftModal({
                 placeholder="Finished landing page. Found 3 SEO issues. Created two SOPs."
               />
             </label>
+            <div className="mt-2">
+              <VoiceInputButton
+                value={accomplishments}
+                onChange={setAccomplishments}
+                disabled={pending}
+                size="md"
+              />
+            </div>
             {isPortalMemoryEnabled() && accomplishments.trim() ? (
               <div className="mt-2">
                 <p className="text-xs font-medium text-[var(--siya-text-secondary)]">Remember for the company?</p>
@@ -205,6 +214,14 @@ export function EndShiftModal({
                 className="mt-1 w-full rounded-lg border border-[var(--siya-border)] px-3 py-2 text-sm"
               />
             </label>
+            <div className="mt-2">
+              <VoiceInputButton
+                value={reflection}
+                onChange={setReflection}
+                disabled={pending}
+                size="md"
+              />
+            </div>
             <div className="mt-5 flex gap-2">
               <button
                 type="button"

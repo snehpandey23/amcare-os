@@ -29,6 +29,7 @@ import {
 } from "@/lib/portal-product-tour";
 import { EomNominationSection } from "@/components/ops/EomNominationSection";
 import { EomNominationNudgeBanner } from "@/components/ops/EomNominationNudgeBanner";
+import { VoiceInputButton } from "@/components/ui/VoiceInputButton";
 import { useSearchParams } from "next/navigation";
 
 function labelPerson(p: DirectoryPerson) {
@@ -213,6 +214,9 @@ export function FeedbackFridayPage() {
                   required
                 />
               </label>
+              <div className="mt-2">
+                <VoiceInputButton value={body} onChange={setBody} disabled={pending} size="md" />
+              </div>
 
               <fieldset className="space-y-2 rounded-lg border border-[var(--siya-border)] p-3">
                 <legend className="px-1 text-xs font-semibold text-[var(--siya-primary)]">
@@ -359,6 +363,9 @@ export function FeedbackFridayPage() {
                 required
               />
             </label>
+            <div className="mt-2">
+              <VoiceInputButton value={body} onChange={setBody} disabled={pending} size="md" />
+            </div>
 
             <fieldset className="space-y-2 rounded-lg border border-[var(--siya-border)] p-3">
               <legend className="px-1 text-xs font-semibold text-[var(--siya-primary)]">

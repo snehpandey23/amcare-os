@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { AttendanceDayRecord } from "@/lib/attendance-hours-api";
 import { formatHoursMinutes, flagAttendanceDispute } from "@/lib/attendance-hours-api";
+import { VoiceInputButton } from "@/components/ui/VoiceInputButton";
 
 function disputeLabel(status: AttendanceDayRecord["dispute"]["status"]): string {
   switch (status) {
@@ -136,6 +137,9 @@ export function AttendanceDayRecordView({
             value={note}
             onChange={(e) => setNote(e.target.value)}
           />
+          <div>
+            <VoiceInputButton value={note} onChange={setNote} disabled={busy} size="md" />
+          </div>
           {err ? <p className="text-xs text-red-600">{err}</p> : null}
           <button
             type="button"
@@ -172,6 +176,14 @@ export function AttendanceDayRecordView({
             value={resolveNote}
             onChange={(e) => setResolveNote(e.target.value)}
           />
+          <div>
+            <VoiceInputButton
+              value={resolveNote}
+              onChange={setResolveNote}
+              disabled={busy}
+              size="md"
+            />
+          </div>
           <div className="flex flex-wrap gap-2 text-xs">
             <label>
               Work{" "}
