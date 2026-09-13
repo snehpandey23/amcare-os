@@ -409,6 +409,7 @@ export function SpokenScoringCalibration() {
 }
 
 function CalibrationBreakdown({ result }: { result: SpokenCalibrationResult }) {
+  const styleMuted = result.styleScoresDeemphasized;
   return (
     <div className={`${portalCard} space-y-4 text-sm`} data-spoken-calibration-result="true">
       <div>
@@ -420,6 +421,19 @@ function CalibrationBreakdown({ result }: { result: SpokenCalibrationResult }) {
           {result.transcriptEdited ? " · transcript was edited" : " · transcript unchanged from STT"}
         </p>
       </div>
+
+      {styleMuted && result.styleScoresDeemphasizedNote ? (
+        <div
+          className="rounded-xl border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-950"
+          data-style-scores-deemphasized="true"
+        >
+          <p className="font-semibold">Off-topic reply</p>
+          <p className="mt-1 text-xs">{result.styleScoresDeemphasizedNote}</p>
+          <p className="mt-1 text-xs text-amber-900/80">
+            Raw scores are still shown below for audit — they are not a pass signal for this turn.
+          </p>
+        </div>
+      ) : null}
 
       <section className="space-y-1 rounded-xl border border-[var(--siya-border)] p-3">
         <h2 className="font-semibold text-[var(--siya-primary)]">Transcripts</h2>
@@ -435,9 +449,18 @@ function CalibrationBreakdown({ result }: { result: SpokenCalibrationResult }) {
         </div>
       </section>
 
-      <section className="space-y-1 rounded-xl border border-[var(--siya-border)] p-3">
+      <section
+        className={`space-y-1 rounded-xl border border-[var(--siya-border)] p-3 ${
+          styleMuted ? "opacity-45" : ""
+        }`}
+        data-rubric="grammar"
+        data-deemphasized={styleMuted ? "true" : "false"}
+      >
         <h2 className="font-semibold text-[var(--siya-primary)]">
           Grammar · {result.grammar.score}/100
+          {styleMuted ? (
+            <span className="ml-2 text-xs font-medium text-amber-900">(not meaningful — off-topic)</span>
+          ) : null}
         </h2>
         <p className="text-xs text-[var(--siya-text-secondary)]">{result.grammar.note}</p>
         <p className="text-xs">
@@ -460,9 +483,18 @@ function CalibrationBreakdown({ result }: { result: SpokenCalibrationResult }) {
         )}
       </section>
 
-      <section className="space-y-1 rounded-xl border border-[var(--siya-border)] p-3">
+      <section
+        className={`space-y-1 rounded-xl border border-[var(--siya-border)] p-3 ${
+          styleMuted ? "opacity-45" : ""
+        }`}
+        data-rubric="politeness"
+        data-deemphasized={styleMuted ? "true" : "false"}
+      >
         <h2 className="font-semibold text-[var(--siya-primary)]">
           Politeness · {result.politeness.score}/100
+          {styleMuted ? (
+            <span className="ml-2 text-xs font-medium text-amber-900">(not meaningful — off-topic)</span>
+          ) : null}
         </h2>
         <p className="text-xs text-[var(--siya-text-secondary)]">{result.politeness.note}</p>
         {result.politeness.toneFlags.length > 0 ? (
@@ -481,7 +513,7 @@ function CalibrationBreakdown({ result }: { result: SpokenCalibrationResult }) {
         )}
       </section>
 
-      <section className="space-y-1 rounded-xl border border-[var(--siya-border)] p-3">
+      <section className="space-y-1 rounded-xl border border-[var(--siya-border)] p-3" data-rubric="relevance">
         <h2 className="font-semibold text-[var(--siya-primary)]">
           Relevance ·{" "}
           {result.relevance.skipped ? "skipped" : `${result.relevance.score ?? "—"}/100`}
@@ -497,6 +529,7 @@ function CalibrationBreakdown({ result }: { result: SpokenCalibrationResult }) {
             {result.relevance.turn ? (
               <ul className="list-disc pl-5 text-xs">
                 <li>Ask type: {result.relevance.turn.askType}</li>
+                <li>Fit: {result.relevance.turn.fit}</li>
                 <li>Reason: {result.relevance.turn.reason}</li>
                 {result.relevance.turn.humanNote ? (
                   <li className="font-medium text-[var(--siya-primary)]">

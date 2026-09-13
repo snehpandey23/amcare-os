@@ -121,6 +121,23 @@ export const CALIBRATION_SCENARIOS: CalibrationScenario[] = [
     expect: { coherence: "pass" },
   },
   {
+    id: "offtopic-eiffel",
+    label: "Relevance · off-topic (Eiffel)",
+    probe: "Clear digression — Relevance near floor; Grammar/Politeness display de-emphasized.",
+    patientAsk: "How long will this actually take? I have finals next week.",
+    sampleReply:
+      "The Eiffel Tower is in Paris and is a very famous landmark that many tourists visit every year.",
+    expect: { coherence: "pass", relevanceMax: 15 },
+  },
+  {
+    id: "weak-on-topic-michael",
+    label: "Relevance · weak but on-topic",
+    probe: "Incomplete care answer — low-ish Relevance but G/P stay meaningful (no off-topic banner).",
+    patientAsk: "How long will this actually take? I have finals next week.",
+    sampleReply: "That would depend upon the providers' review and advise",
+    expect: { coherence: "pass", relevanceMin: 20, relevanceMax: 45 },
+  },
+  {
     id: "empathy-offshape",
     label: "Relevance · empathy only (timeline ask)",
     probe: "Coherent empathy without timeline shape — Relevance mid/low.",

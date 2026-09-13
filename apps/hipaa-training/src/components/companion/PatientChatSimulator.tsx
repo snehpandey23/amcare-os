@@ -13,7 +13,12 @@ import {
   listStaffSelectablePersonas,
   type Persona,
 } from "@/data/patient-drill/personas";
-import { evaluateSimulatorSession, type SimulatorFeedback } from "@/lib/patient-drill/evaluate";
+import {
+  evaluateSimulatorSession,
+  OFF_TOPIC_STYLE_SCORES_NOTE,
+  styleScoresDeemphasizedForSession,
+  type SimulatorFeedback,
+} from "@/lib/patient-drill/evaluate";
 import { startWavCapture, type WavCapture } from "@/lib/talk-wav-capture";
 import {
   EMPTY_REPLY_FALLBACK,
@@ -794,13 +799,43 @@ export function PatientChatSimulator({
           <p>
             <strong>Your replies:</strong> {feedback.messageCount}
           </p>
-          <p>
+          {styleScoresDeemphasizedForSession(feedback.relevanceTurns) ? (
+            <div
+              className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-950"
+              data-style-scores-deemphasized="true"
+            >
+              <p className="font-semibold">Off-topic reply</p>
+              <p className="mt-1 text-xs">{OFF_TOPIC_STYLE_SCORES_NOTE}</p>
+              <p className="mt-1 text-xs text-amber-900/80">
+                Grammar and Politeness numbers below are kept for audit — they are not a pass signal
+                for an unrelated response.
+              </p>
+            </div>
+          ) : null}
+          <p
+            className={
+              styleScoresDeemphasizedForSession(feedback.relevanceTurns) ? "opacity-45" : undefined
+            }
+          >
             <strong>Grammar / clarity (chat register):</strong> {feedback.grammarScore}/100
             {feedback.grammarErrorCount > 0 ? ` (${feedback.grammarErrorCount} flagged)` : ""}
+            {styleScoresDeemphasizedForSession(feedback.relevanceTurns) ? (
+              <span className="ml-2 text-xs font-medium text-amber-900">(not meaningful — off-topic)</span>
+            ) : null}
           </p>
-          <p className="text-sm text-[var(--siya-text)]">{feedback.grammarNote}</p>
+          <p
+            className={`text-sm text-[var(--siya-text)] ${
+              styleScoresDeemphasizedForSession(feedback.relevanceTurns) ? "opacity-45" : ""
+            }`}
+          >
+            {feedback.grammarNote}
+          </p>
           {feedback.grammarIssues.length > 0 ? (
-            <ul className="list-disc space-y-1 pl-5 text-sm text-[var(--siya-text)]">
+            <ul
+              className={`list-disc space-y-1 pl-5 text-sm text-[var(--siya-text)] ${
+                styleScoresDeemphasizedForSession(feedback.relevanceTurns) ? "opacity-45" : ""
+              }`}
+            >
               {feedback.grammarIssues.slice(0, 6).map((g) => (
                 <li key={`${g.messageIndex}-${g.excerpt}`}>
                   Reply {g.messageIndex + 1}: {g.kinds.map(grammarKindLabel).join(", ")}
@@ -810,10 +845,23 @@ export function PatientChatSimulator({
               ))}
             </ul>
           ) : null}
-          <p>
+          <p
+            className={
+              styleScoresDeemphasizedForSession(feedback.relevanceTurns) ? "opacity-45" : undefined
+            }
+          >
             <strong>Politeness:</strong> {feedback.politenessScore}/100
+            {styleScoresDeemphasizedForSession(feedback.relevanceTurns) ? (
+              <span className="ml-2 text-xs font-medium text-amber-900">(not meaningful — off-topic)</span>
+            ) : null}
           </p>
-          <p className="text-sm text-[var(--siya-text)]">{feedback.politenessNote}</p>
+          <p
+            className={`text-sm text-[var(--siya-text)] ${
+              styleScoresDeemphasizedForSession(feedback.relevanceTurns) ? "opacity-45" : ""
+            }`}
+          >
+            {feedback.politenessNote}
+          </p>
           {feedback.clinicalAccuracyHits.length > 0 ? (
             <div className="rounded-lg border border-[var(--siya-status-warn-border)] bg-[var(--siya-status-warn-bg)] px-3 py-2 text-sm text-[var(--siya-status-warn-text)]">
               <p className="font-semibold">{SCREENING_AS_DIAGNOSIS_LABEL}</p>

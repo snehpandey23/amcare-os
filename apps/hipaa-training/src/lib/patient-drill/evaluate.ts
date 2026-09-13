@@ -258,9 +258,98 @@ export type RelevanceTurnResult = {
   /** 0–1 engagement for this turn */
   score: number;
   reason: string;
+  /**
+   * How the reply relates to the ask — used for UI framing.
+   * `unrelated` = clearly off-topic (e.g. landmark trivia); not the same as weak-but-on-topic.
+   */
+  fit:
+    | "on_topic"
+    | "partial"
+    | "weak_on_topic"
+    | "unrelated"
+    | "non_answer"
+    | "thin"
+    | "filler"
+    | "empty"
+    | "curt"
+    | "incoherent";
   /** Trainee-facing explanation when score is low — plain language, not just the numeric score. */
   humanNote?: string;
 };
+
+export const OFF_TOPIC_STYLE_SCORES_NOTE =
+  "This reply didn't address what was asked — grammar/politeness scores below are not meaningful for an off-topic response.";
+
+/** Display helper: de-emphasize Grammar/Politeness for clearly unrelated replies only. */
+export function styleScoresDeemphasizedForTurn(
+  turn: Pick<RelevanceTurnResult, "fit"> | null | undefined,
+): boolean {
+  return turn?.fit === "unrelated";
+}
+
+/**
+ * Session summary: de-emphasize G/P only when replies are unrelated and none are
+ * care-relevant (on-topic / partial / weak-on-topic). Weak incomplete answers do not qualify.
+ */
+export function styleScoresDeemphasizedForSession(turns: RelevanceTurnResult[]): boolean {
+  if (!turns.length) return false;
+  const hasUnrelated = turns.some((t) => t.fit === "unrelated");
+  const hasCareRelevant = turns.some(
+    (t) => t.fit === "on_topic" || t.fit === "partial" || t.fit === "weak_on_topic",
+  );
+  return hasUnrelated && !hasCareRelevant;
+}
+
+/** Care / clinic / ask-bridging tokens — marks weak-but-relevant vs pure digression. */
+const CARE_DOMAIN_RE =
+  /\b(provider|providers|doctor|clinician|appointment|appointments|timeline|medication|medications|meds|renewal|agreement|book|booking|schedul\w*|intake|process|review|advise|advice|finals|waiting\s+list|how\s+long|usually|typically|escalate|escalat\w*|clinical|neuropsych|prescription|refill|portal|care\s+team|follow[- ]?up|evaluation|assess(?:ment)?|screening|controlled\s+substance|(?:office|clinic|testing)\s+visit)\b/i;
+
+const UNRELATED_DOMAIN_RE =
+  /\b(eiffel|tower|paris|tourist|tourists|landmark|landmarks|museum|olympics|football|soccer|recipe|pizza|vacation|beach|weather forecast|movie|concert|celebrity)\b/i;
+
+function contentLemmaTokens(text: string): Set<string> {
+  const stop = COHERENCE_FUNCTION_WORDS;
+  const out = new Set<string>();
+  for (const w of coherenceTokens(text)) {
+    const bare = w.replace(/'s$/, "");
+    if (bare.length <= 2) continue;
+    if (stop.has(bare)) continue;
+    if (/^\d+$/.test(bare)) continue;
+    out.add(bare);
+  }
+  return out;
+}
+
+function askReplyContentOverlap(patientText: string, reply: string): { overlap: number; ratio: number } {
+  const ask = contentLemmaTokens(patientText);
+  const rep = contentLemmaTokens(reply);
+  if (ask.size === 0) return { overlap: 0, ratio: 0 };
+  let overlap = 0;
+  for (const t of ask) {
+    if (rep.has(t)) overlap++;
+  }
+  return { overlap, ratio: overlap / ask.size };
+}
+
+/**
+ * True when a substantive reply is a clear digression from the ask (not merely
+ * incomplete / wrong-shape care talk).
+ */
+export function isClearlyUnrelatedToAsk(
+  patientText: string,
+  reply: string,
+  askType: PatientAskType,
+): boolean {
+  if (shapeMatch(askType, reply)) return false;
+  if (isGenericNonAnswer(reply)) return false;
+  if (wordCount(reply) < 8) return false;
+  if (CARE_DOMAIN_RE.test(reply)) return false;
+  const { overlap, ratio } = askReplyContentOverlap(patientText, reply);
+  if (UNRELATED_DOMAIN_RE.test(reply) && overlap < 2) return true;
+  // No care bridge + almost no shared content with the ask
+  if (overlap < 2 && ratio < 0.12) return true;
+  return false;
+}
 
 const ASK_TYPE_PLAIN: Record<PatientAskType, string> = {
   timeline: "timeline / how-long question",
@@ -273,12 +362,15 @@ const ASK_TYPE_PLAIN: Record<PatientAskType, string> = {
 
 /** Plain-language note for a weak relevance turn (for feedback UI). */
 export function plainLanguageRelevanceNote(
-  turn: Pick<RelevanceTurnResult, "askType" | "score" | "reason">,
+  turn: Pick<RelevanceTurnResult, "askType" | "score" | "reason" | "fit">,
   turnIndex: number,
 ): string | undefined {
   if (turn.score >= 0.5) return undefined;
   const ask = ASK_TYPE_PLAIN[turn.askType] || "question";
   const turnLabel = `turn ${turnIndex + 1}`;
+  if (turn.fit === "unrelated" || turn.reason.toLowerCase().includes("unrelated to the ask")) {
+    return `Reply ${turnLabel} was unrelated to the patient's ${ask} — off-topic content, not a weak/incomplete answer.`;
+  }
   if (turn.reason.toLowerCase().includes("empty")) {
     return `You left reply ${turnLabel} empty — nothing addressed the patient's ${ask}.`;
   }
@@ -291,6 +383,9 @@ export function plainLanguageRelevanceNote(
   }
   if (turn.reason.toLowerCase().includes("generic non-answer")) {
     return `You didn't directly answer the ${ask} the patient asked on ${turnLabel} (reply was a generic non-answer like “ok/sure/thanks”).`;
+  }
+  if (turn.fit === "weak_on_topic" || turn.reason.toLowerCase().includes("weak") || turn.reason.toLowerCase().includes("incomplete")) {
+    return `You didn't fully answer the ${ask} the patient asked on ${turnLabel} — the reply was on-topic but weak or incomplete for what they asked.`;
   }
   if (turn.reason.toLowerCase().includes("not") && turn.reason.toLowerCase().includes("shaped")) {
     return `You didn't directly answer the ${ask} the patient asked on ${turnLabel} — your reply was substantive but off-shape for what they asked.`;
@@ -314,26 +409,31 @@ export function scoreRelevanceTurn(patientText: string, maReply: string): Releva
   const patientExcerpt = (patientText || "").trim().slice(0, 72);
   const replyExcerpt = reply.slice(0, 72);
 
-  const base = (score: number, reason: string): RelevanceTurnResult => ({
+  const base = (
+    score: number,
+    reason: string,
+    fit: RelevanceTurnResult["fit"],
+  ): RelevanceTurnResult => ({
     askType,
     patientExcerpt,
     replyExcerpt,
     score,
     reason,
+    fit,
   });
 
   if (!reply) {
-    return base(0, "Empty reply");
+    return base(0, "Empty reply", "empty");
   }
   const coherence = assessReplyCoherence(reply);
   if (!coherence.coherent) {
-    return base(0, coherence.reason);
+    return base(0, coherence.reason, "incoherent");
   }
   if (CURT_MARKERS.test(reply)) {
-    return base(0, "Dismissive / curt — not engaged");
+    return base(0, "Dismissive / curt — not engaged", "curt");
   }
   if (isGenericNonAnswer(reply)) {
-    return base(0, "Generic non-answer (e.g. “ok sure”) — does not address the ask");
+    return base(0, "Generic non-answer (e.g. “ok sure”) — does not address the ask", "non_answer");
   }
 
   const substantive = wordCount(reply) >= 8;
@@ -343,21 +443,37 @@ export function scoreRelevanceTurn(patientText: string, maReply: string): Releva
 
   // “okay sure, …” that never answers the ask — treat as gaming / non-engagement
   if (fillerLead && !matched) {
-    return base(substantive ? 0.2 : 0, "Filler ack without answering the ask (e.g. “ok sure” + off-topic)");
+    return base(
+      substantive ? 0.2 : 0,
+      "Filler ack without answering the ask (e.g. “ok sure” + off-topic)",
+      "filler",
+    );
   }
 
   // Greeting-only / thin ack with a trailing half-question still weak for a real ask
   if (!substantive && !matched) {
-    return base(0.15, "Too thin / off-shape for this ask type");
+    return base(0.15, "Too thin / off-shape for this ask type", "thin");
   }
   if (matched && substantive) {
-    return base(1, `On-topic ${askType}-shaped answer`);
+    return base(1, `On-topic ${askType}-shaped answer`, "on_topic");
   }
   if (matched && !substantive) {
-    return base(0.55, `Partially ${askType}-shaped but thin`);
+    return base(0.55, `Partially ${askType}-shaped but thin`, "partial");
   }
-  // Substantive but wrong shape — some engagement, not what was asked
-  return base(0.35, `Substantive but not ${askType}-shaped (may be off-topic)`);
+
+  // Substantive but wrong shape — split clear digression from weak care-related replies
+  if (isClearlyUnrelatedToAsk(patientText, reply, askType)) {
+    return base(
+      0.08,
+      `Unrelated to the ask (off-topic) — not a ${askType}-shaped answer`,
+      "unrelated",
+    );
+  }
+  return base(
+    0.35,
+    `On-topic but weak/incomplete for this ${askType} ask (not fully ${askType}-shaped)`,
+    "weak_on_topic",
+  );
 }
 
 export type SimMessage = {
@@ -390,6 +506,7 @@ export function scoreRelevanceSession(messages: SimMessage[]): {
           replyExcerpt: (m.text || "").slice(0, 72),
           score: isGenericNonAnswer(m.text || "") ? 0 : Math.min(0.5, wordCount(m.text || "") >= 8 ? 0.5 : 0.2),
           reason: "No preceding patient ask",
+          fit: isGenericNonAnswer(m.text || "") ? "non_answer" : "thin",
         });
         continue;
       }

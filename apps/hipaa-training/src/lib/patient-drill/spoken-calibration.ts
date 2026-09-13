@@ -10,9 +10,11 @@ import {
   grammarIssuesForMessage,
   INCOHERENT_REPLY_LABEL,
   normalizeSpeechDisfluencyForGrammar,
+  OFF_TOPIC_STYLE_SCORES_NOTE,
   plainLanguageRelevanceNote,
   scorePolitenessMessage,
   scoreRelevanceTurn,
+  styleScoresDeemphasizedForTurn,
   type GrammarIssueKind,
   type RelevanceTurnResult,
 } from "@/lib/patient-drill/evaluate";
@@ -58,6 +60,12 @@ export type SpokenCalibrationResult = {
     toneFlags: string[];
     note: string;
   };
+  /**
+   * When true, Grammar/Politeness are still computed but should be framed as
+   * not meaningful (clearly off-topic reply). Display-only.
+   */
+  styleScoresDeemphasized: boolean;
+  styleScoresDeemphasizedNote: string | null;
   relevance: {
     skipped: boolean;
     skipReason?: string;
@@ -123,6 +131,9 @@ export function runSpokenCalibration(input: SpokenCalibrationInput): SpokenCalib
       note: turn.humanNote || turn.reason,
     };
   }
+
+  const styleDeemphasized =
+    !relevance.skipped && styleScoresDeemphasizedForTurn(relevance.turn);
 
   const misconduct = detectMaMisconduct(confirmedText);
   const turnSafety = evaluateTurnSafety({
@@ -197,6 +208,8 @@ export function runSpokenCalibration(input: SpokenCalibrationInput): SpokenCalib
           ? `Sounds dismissive/blaming toward the patient (${polite.toneFlags.join("; ")}). Overrides courtesy/helpfulness markers.`
           : "Politeness — courtesy / ack / help markers. Not empathy or relevance.",
     },
+    styleScoresDeemphasized: styleDeemphasized,
+    styleScoresDeemphasizedNote: styleDeemphasized ? OFF_TOPIC_STYLE_SCORES_NOTE : null,
     relevance,
     safety: {
       misconductReasons: misconduct,
