@@ -36,11 +36,11 @@ export type IsolatedWritingTrail = {
   title: string;
   /** Scenario / prompt text shown to the taker */
   prompt: string;
-  format: "clinical-two-part" | "legacy-single";
-  /** Legacy single-box text (patient-comms); empty when clinical-two-part */
+  format: "clinical-two-part" | "legacy-single" | "listening-provider-message";
+  /** Legacy single-box / listening provider message; empty when clinical-two-part */
   text: string;
-  chartNote: string;
-  escalationText: string;
+  chartNote?: string;
+  escalationText?: string;
   wordCount: number;
   grammarScore: number;
   issues: string[];
@@ -60,7 +60,16 @@ export type IsolatedWritingTrail = {
 export type IsolatedReviewAttempt = {
   attemptId: string;
   userId: string;
-  section: "typing" | "hipaa" | "writing" | "listening" | "chat-sim";
+  section:
+    | "typing"
+    | "mcq"
+    | "listening"
+    | "chat-sim"
+    | "chat-sim-typed"
+    | "chat-sim-spoken"
+    /** @deprecated aliases — prefer mcq / listening */
+    | "hipaa"
+    | "writing";
   at: number;
   score: number | null;
   detail: string;

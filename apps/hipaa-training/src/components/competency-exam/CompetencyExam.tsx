@@ -9,16 +9,30 @@ import type { TypingScore } from "@/lib/level-up/typing-drill";
 import type { SimulatorFeedback } from "@/lib/patient-drill/evaluate";
 import { ChatTypingDrill } from "@/components/companion/ChatTypingDrill";
 import { PatientChatSimulator } from "@/components/companion/PatientChatSimulator";
-import { CULTURE_SECTION_HELD_REASON } from "@/content/competency-exam/culture-bank";
-import { drawChatBrief, drawHipaaExam, drawListeningPrompt, drawTypingPassage, drawWritingPrompt } from "@/lib/competency-exam/draws";
+import {
+  drawChatBrief,
+  drawCombinedMcqExam,
+  drawListeningPrompt,
+  drawTypingPassage,
+  MCQ_EXAM_COUNT,
+} from "@/lib/competency-exam/draws";
 import { buildExamReport } from "@/lib/competency-exam/report";
 import { chatSectionScore, typingSectionScore } from "@/lib/competency-exam/scoring";
 import { parseExamSectionFocus } from "@/lib/competency-exam/section-focus";
 import { recordSeen, freshDrawSeed, type SeenEntry } from "@/lib/competency-exam/seen-set";
-import { loadSeen, saveAttempt, saveSeen, saveIsolatedReview, type IsolatedReviewItemResult, type IsolatedWritingTrail } from "@/lib/competency-exam/storage";
+import {
+  loadSeen,
+  saveAttempt,
+  saveSeen,
+  saveIsolatedReview,
+  type IsolatedReviewItemResult,
+  type IsolatedWritingTrail,
+} from "@/lib/competency-exam/storage";
 import type { ExamReportModel, SafetyFlag, SectionResult } from "@/lib/competency-exam/types";
-import { adjustEscalationScore, blendWritingScore, combineWritingPartScores, scoreWritingPartDeterministic, WRITING_DETERMINISTIC_ONLY_CAP } from "@/lib/competency-exam/writing-score";
-import { WRITING_ESCALATION_WORKED_EXAMPLE } from "@/content/competency-exam/writing-escalation-example";
+import {
+  scoreListeningProviderMessage,
+  WRITING_DETERMINISTIC_ONLY_CAP,
+} from "@/lib/competency-exam/writing-score";
 import { EXAM_WEIGHTS, SECTION_LABEL } from "@/lib/competency-exam/weights";
 import { ExamReportView } from "./ExamReportView";
 import { ExamCountdownHud } from "./ExamCountdownHud";
@@ -27,29 +41,32 @@ import {
   type ExamTimerHudModel,
 } from "@/lib/competency-exam/exam-timer";
 
-type Phase = "orient" | "typing" | "hipaa" | "writing" | "chat" | "review" | "report" | "section-done";
+type Phase =
+  | "orient"
+  | "typing"
+  | "mcq"
+  | "listening"
+  | "chat-typed"
+  | "chat-spoken"
+  | "review"
+  | "report"
+  | "section-done";
 
-const HIPAA_SEC = COMPETENCY_EXAM_TIMERS.hipaa;
-const WRITING_SEC = COMPETENCY_EXAM_TIMERS.writing;
+type ChatBriefState = {
+  id: string;
+  personaId: "persona-janet" | "persona-emma";
+  opening: string;
+  title: string;
+  repeated: boolean;
+};
+
+const MCQ_SEC = COMPETENCY_EXAM_TIMERS.mcq;
+const LISTENING_SEC = COMPETENCY_EXAM_TIMERS.listening;
 const CHAT_SEC = COMPETENCY_EXAM_TIMERS.chat;
 
 function fmt(sec: number) {
   const s = Math.max(0, Math.ceil(sec));
   return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
-}
-
-function heldCulture(): SectionResult {
-  return {
-    id: "culture",
-    label: SECTION_LABEL.culture,
-    weight: EXAM_WEIGHTS.culture,
-    status: "held",
-    score: null,
-    note: CULTURE_SECTION_HELD_REASON,
-    itemIds: [],
-    repeatedIds: [],
-    draftContent: false,
-  };
 }
 
 function SectionDoneCard({
@@ -69,22 +86,18 @@ function SectionDoneCard({
 }) {
   const next =
     section.id === "typing"
-      ? { href: "/learn/competency-exam?section=hipaa", label: "Open HIPAA review" }
-      : section.id === "hipaa"
-        ? { href: "/learn/competency-exam?section=writing", label: "Open Writing review" }
-        : section.id === "writing"
-          ? null
-          : null;
+      ? { href: "/learn/competency-exam?section=mcq", label: "Open MCQ review" }
+      : section.id === "mcq"
+        ? { href: "/learn/competency-exam?section=listening", label: "Open Listening review" }
+        : null;
   const closeout =
     section.id === "typing"
-      ? "This run does not continue into other sections. Typing is signed off — open HIPAA next when ready."
-      : section.id === "hipaa"
-        ? "This run does not continue into other sections. Sign off when HIPAA looks good, then open Writing. Item-level results are saved in this browser for audit."
-        : section.label === "Listening"
-          ? "This run does not continue into other sections. Listening trail (voicemail id + chart + provider message + scores) is saved in this browser. Prototype content — not approved for official scoring."
-          : section.id === "writing"
-            ? "This run does not continue into other sections. Writing trail (scenario + chart note + provider message + scores) is saved in this browser for audit. Clinical prompts remain draft — not approved for official scoring."
-            : "This run does not continue into other sections.";
+      ? "This run does not continue into other sections. Typing is signed off — open Combined MCQ next when ready."
+      : section.id === "mcq"
+        ? "This run does not continue into other sections. Sign off when MCQ looks good, then open Listening. Item-level results are saved in this browser for audit."
+        : section.id === "listening"
+          ? "This run does not continue into other sections. Listening trail (voicemail id + provider message + scores) is saved in this browser. Prototype content — not approved for official scoring."
+          : "This run does not continue into other sections.";
   return (
     <div className="space-y-3 rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4 text-sm">
       <p className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-accent)]">
@@ -140,13 +153,13 @@ function SectionDoneCard({
       {writingTrail ? (
         <details className="rounded-xl border border-[var(--siya-border)] p-3 text-xs" open>
           <summary className="cursor-pointer font-semibold">
-            {writingTrail.audioSrc ? "Listening" : "Writing"} trail (scenario + chart + escalation + scores)
+            Listening trail (voicemail + provider message + scores)
           </summary>
           <div className="mt-2 space-y-2">
             <p>
               <code className="font-mono text-[10px]">{writingTrail.promptId}</code> · {writingTrail.title}
-              {writingTrail.format === "clinical-two-part" ? " · clinical two-part" : ""}
               {writingTrail.audioSrc ? " · voicemail" : ""}
+              {writingTrail.format === "listening-provider-message" ? " · provider message only" : ""}
             </p>
             {writingTrail.llmEstimate == null ? (
               <p className="font-semibold text-amber-800">
@@ -155,58 +168,20 @@ function SectionDoneCard({
             ) : null}
             <p className="font-semibold text-[var(--siya-text)]">Scenario</p>
             <p className="text-[var(--siya-text)]">{writingTrail.prompt}</p>
-            {writingTrail.format === "clinical-two-part" ? (
-              <>
-                <p className="font-semibold text-[var(--siya-text)]">
-                  Chart note ({writingTrail.partA?.wordCount ?? 0} words)
-                </p>
-                <pre className="whitespace-pre-wrap rounded-lg bg-[var(--siya-bg-subtle)] p-2 text-[var(--siya-text)]">
-                  {writingTrail.chartNote || "(empty)"}
-                </pre>
-                <p className="text-[var(--siya-text-secondary)]">
-                  Part A · grammar {writingTrail.partA?.grammarScore ?? "—"}
-                  {writingTrail.partA?.llmEstimate == null
-                    ? " · no LLM estimate"
-                    : ` · LLM estimate ${writingTrail.partA.llmEstimate}`}{" "}
-                  · blended <strong>{writingTrail.partA?.blendedScore ?? "—"}/100</strong>
-                </p>
-                <p className="font-semibold text-[var(--siya-text)]">
-                  Message to provider ({writingTrail.partB?.wordCount ?? 0} words)
-                </p>
-                <pre className="whitespace-pre-wrap rounded-lg bg-[var(--siya-bg-subtle)] p-2 text-[var(--siya-text)]">
-                  {writingTrail.escalationText || "(empty)"}
-                </pre>
-                <p className="text-[var(--siya-text-secondary)]">
-                  Part B · grammar {writingTrail.partB?.grammarScore ?? "—"}
-                  {writingTrail.partB?.llmEstimate == null
-                    ? " · no LLM estimate"
-                    : ` · LLM estimate ${writingTrail.partB.llmEstimate}`}{" "}
-                  · blended <strong>{writingTrail.partB?.blendedScore ?? "—"}/100</strong>
-                  {writingTrail.nearDuplicateOfChart
-                    ? ` · near-duplicate of chart (sim ${Math.round((writingTrail.partsSimilarity ?? 0) * 100)}%)`
-                    : writingTrail.escalationHasAskHint === false
-                      ? " · ask wording weak/missing"
-                      : ""}
-                </p>
-                <p className="text-[var(--siya-text-secondary)]">
-                  Section (50/50) <strong>{writingTrail.blendedScore}/100</strong>
-                </p>
-              </>
-            ) : (
-              <>
-                <p className="font-semibold text-[var(--siya-text)]">Submitted text ({writingTrail.wordCount} words)</p>
-                <pre className="whitespace-pre-wrap rounded-lg bg-[var(--siya-bg-subtle)] p-2 text-[var(--siya-text)]">
-                  {writingTrail.text || "(empty)"}
-                </pre>
-                <p className="text-[var(--siya-text-secondary)]">
-                  Grammar {writingTrail.grammarScore}
-                  {writingTrail.llmEstimate == null
-                    ? " · no LLM estimate"
-                    : ` · LLM estimate ${writingTrail.llmEstimate}`}{" "}
-                  · blended <strong>{writingTrail.blendedScore}/100</strong>
-                </p>
-              </>
-            )}
+            <p className="font-semibold text-[var(--siya-text)]">
+              Message to provider ({writingTrail.wordCount} words)
+            </p>
+            <pre className="whitespace-pre-wrap rounded-lg bg-[var(--siya-bg-subtle)] p-2 text-[var(--siya-text)]">
+              {writingTrail.text || writingTrail.escalationText || "(empty)"}
+            </pre>
+            <p className="text-[var(--siya-text-secondary)]">
+              Grammar {writingTrail.grammarScore}
+              {writingTrail.llmEstimate == null
+                ? " · no LLM estimate"
+                : ` · LLM estimate ${writingTrail.llmEstimate}`}{" "}
+              · blended <strong>{writingTrail.blendedScore}/100</strong>
+              {writingTrail.escalationHasAskHint === false ? " · ask wording weak/missing" : ""}
+            </p>
             {writingTrail.issues.length ? (
               <ul className="list-disc pl-4 text-[var(--siya-text-secondary)]">
                 {writingTrail.issues.map((issue, i) => (
@@ -278,24 +253,23 @@ export function CompetencyExam() {
   const [typing, setTyping] = useState<{ passageId: string; text: string; title: string; repeated: boolean } | null>(null);
   const [typingRaw, setTypingRaw] = useState<TypingScore | null>(null);
   const [lastSection, setLastSection] = useState<SectionResult | null>(null);
-  const [hipaaQs, setHipaaQs] = useState<Question[]>([]);
-  const [hipaaRepeated, setHipaaRepeated] = useState<string[]>([]);
-  const [hipaaAnswers, setHipaaAnswers] = useState<Record<string, string>>({});
-  const [hipaaLeft, setHipaaLeft] = useState(HIPAA_SEC);
-  const [writingPrompt, setWritingPrompt] = useState<{
+  const [mcqQs, setMcqQs] = useState<Question[]>([]);
+  const [mcqRepeated, setMcqRepeated] = useState<string[]>([]);
+  const [mcqDraftPools, setMcqDraftPools] = useState<Array<"clinical-knowledge" | "culture">>([]);
+  const [mcqMix, setMcqMix] = useState<{ hipaa: number; clinical: number; trivia: number } | null>(null);
+  const [mcqAnswers, setMcqAnswers] = useState<Record<string, string>>({});
+  const [mcqLeft, setMcqLeft] = useState(MCQ_SEC);
+  const [listeningPrompt, setListeningPrompt] = useState<{
     id: string;
     title: string;
     scenario: string;
-    chartHint: string;
-    escalationHint: string;
+    providerMessageHint: string;
     repeated: boolean;
-    audioSrc?: string;
-    voicemailScript?: string;
+    audioSrc: string;
+    voicemailScript: string;
   } | null>(null);
-  const [writingChartNote, setWritingChartNote] = useState("");
-  const [writingEscalation, setWritingEscalation] = useState("");
-  const [showEscalationExample, setShowEscalationExample] = useState(false);
-  const [writingLeft, setWritingLeft] = useState(WRITING_SEC);
+  const [providerMessage, setProviderMessage] = useState("");
+  const [listeningLeft, setListeningLeft] = useState(LISTENING_SEC);
   const [chatLeft, setChatLeft] = useState(CHAT_SEC);
   const [chatForceEnd, setChatForceEnd] = useState(false);
   /** Typing HUD mirrors ChatTypingDrill’s duration−elapsed — not a second clock. */
@@ -304,46 +278,50 @@ export function CompetencyExam() {
     totalSec: number;
     clockStarted: boolean;
   } | null>(null);
-  const [chatBrief, setChatBrief] = useState<{ id: string; personaId: "persona-janet" | "persona-emma"; opening: string; title: string; repeated: boolean } | null>(null);
-  const [sections, setSections] = useState<SectionResult[]>([heldCulture()]);
+  const [chatTypedBrief, setChatTypedBrief] = useState<ChatBriefState | null>(null);
+  const [chatSpokenBrief, setChatSpokenBrief] = useState<ChatBriefState | null>(null);
+  const [sections, setSections] = useState<SectionResult[]>([]);
   const [safety, setSafety] = useState<SafetyFlag>({ redFlagged: false, reasons: [], notes: [] });
   const [busy, setBusy] = useState(false);
   const [reviewNote, setReviewNote] = useState("");
   const [typingKey, setTypingKey] = useState(0);
-  const [hipaaKey, setHipaaKey] = useState(0);
-  const [writingKey, setWritingKey] = useState(0);
+  const [mcqKey, setMcqKey] = useState(0);
+  const [listeningKey, setListeningKey] = useState(0);
+  const [chatKey, setChatKey] = useState(0);
   const [itemResults, setItemResults] = useState<IsolatedReviewItemResult[] | null>(null);
-  const [writingTrail, setWritingTrail] = useState<IsolatedWritingTrail | null>(null);
+  const [listeningTrail, setListeningTrail] = useState<IsolatedWritingTrail | null>(null);
+
+  const activeChatBrief =
+    phase === "chat-spoken" ? chatSpokenBrief : phase === "chat-typed" ? chatTypedBrief : null;
+  const activeChatModality: "typed" | "spoken" | null =
+    phase === "chat-spoken" ? "spoken" : phase === "chat-typed" ? "typed" : null;
 
   const resetToOrient = useCallback(() => {
     setPhase("orient");
     setAck(false);
     setAttemptId(`exam-${Date.now()}`);
-    setSections([heldCulture()]);
+    setSections([]);
     setSafety({ redFlagged: false, reasons: [], notes: [] });
     setReport(null);
     setTyping(null);
     setTypingRaw(null);
     setLastSection(null);
-    setHipaaQs([]);
-    setHipaaRepeated([]);
-    setHipaaAnswers({});
-    setWritingPrompt(null);
-    setWritingChartNote("");
-    setWritingEscalation("");
-    setShowEscalationExample(false);
-    setChatBrief(null);
+    setMcqQs([]);
+    setMcqRepeated([]);
+    setMcqDraftPools([]);
+    setMcqMix(null);
+    setMcqAnswers({});
+    setListeningPrompt(null);
+    setProviderMessage("");
+    setChatTypedBrief(null);
+    setChatSpokenBrief(null);
     setReviewNote("");
     setBusy(false);
     setItemResults(null);
-    setWritingTrail(null);
-    // Ephemeral isolated-review seen dies with the orient reset (mode flip / remount path).
-    // "Run again" calls beginTypingOnly without this reset, so within-session exclusion still works.
+    setListeningTrail(null);
     reviewSeenRef.current = [];
   }, []);
 
-  // Soft-nav between ?section=typing and full sitting reuses this client component —
-  // always wipe prior section scores / attempt id when the mode changes.
   useEffect(() => {
     resetToOrient();
     // eslint-disable-next-line react-hooks/exhaustive-deps -- only when mode flips
@@ -352,11 +330,9 @@ export function CompetencyExam() {
   const beginTypingOnly = () => {
     const nextAttempt = `review-typing-${Date.now()}`;
     setAttemptId(nextAttempt);
-    setSections([heldCulture()]);
+    setSections([]);
     setLastSection(null);
     setTypingRaw(null);
-    // Ephemeral seen only — do not load or write the official exam seen-set.
-    // Crypto seed + improved shuffle so consecutive empty-pool draws actually vary.
     const seed = freshDrawSeed();
     const typingDraw = drawTypingPassage(reviewSeenRef.current, seed);
     const passage = typingDraw.items[0];
@@ -373,82 +349,51 @@ export function CompetencyExam() {
     setPhase("typing");
   };
 
-  const beginHipaaOnly = () => {
-    const nextAttempt = `review-hipaa-${Date.now()}`;
+  const beginMcqOnly = () => {
+    const nextAttempt = `review-mcq-${Date.now()}`;
     setAttemptId(nextAttempt);
-    setSections([heldCulture()]);
+    setSections([]);
     setLastSection(null);
     setTypingRaw(null);
-    setHipaaAnswers({});
-    setItemResults(null);
-    // Ephemeral seen only — never persist to official exam seen-set / never feed a real sitting.
-    const seed = freshDrawSeed();
-    const hipaa = drawHipaaExam(reviewSeenRef.current, seed);
-    setHipaaQs(hipaa.questions);
-    setHipaaRepeated(hipaa.repeatedIds);
-    startedAt.current = Date.now();
-    setHipaaKey((k) => k + 1);
-    setPhase("hipaa");
-  };
-
-  const beginWritingOnly = () => {
-    const nextAttempt = `review-writing-${Date.now()}`;
-    setAttemptId(nextAttempt);
-    setSections([heldCulture()]);
-    setLastSection(null);
-    setTypingRaw(null);
-    setWritingChartNote("");
-    setWritingEscalation("");
-    setShowEscalationExample(false);
-    setWritingTrail(null);
+    setMcqAnswers({});
     setItemResults(null);
     const seed = freshDrawSeed();
-    const writing = drawWritingPrompt(reviewSeenRef.current, seed);
-    const wp = writing.items[0];
-    if (wp) {
-      setWritingPrompt({
-        id: wp.id,
-        title: wp.title,
-        scenario: wp.scenario,
-        chartHint: wp.chartHint,
-        escalationHint: wp.escalationHint,
-        repeated: writing.repeatedIds.includes(wp.id),
-      });
-    }
+    const mcq = drawCombinedMcqExam(reviewSeenRef.current, seed);
+    setMcqQs(mcq.questions);
+    setMcqRepeated(mcq.repeatedIds);
+    setMcqDraftPools(mcq.draftPools);
+    setMcqMix(mcq.mix);
     startedAt.current = Date.now();
-    setWritingKey((k) => k + 1);
-    setPhase("writing");
+    setMcqKey((k) => k + 1);
+    setPhase("mcq");
   };
 
   const beginListeningOnly = () => {
     const nextAttempt = `review-listening-${Date.now()}`;
     setAttemptId(nextAttempt);
-    setSections([heldCulture()]);
+    setSections([]);
     setLastSection(null);
     setTypingRaw(null);
-    setWritingChartNote("");
-    setWritingEscalation("");
-    setShowEscalationExample(false);
-    setWritingTrail(null);
+    setProviderMessage("");
+    setListeningTrail(null);
     setItemResults(null);
     const seed = freshDrawSeed();
     const listening = drawListeningPrompt(reviewSeenRef.current, seed);
     const lp = listening.items[0];
     if (lp) {
-      setWritingPrompt({
+      setListeningPrompt({
         id: lp.id,
         title: lp.title,
         scenario: lp.scenario,
-        chartHint: lp.chartHint,
-        escalationHint: lp.escalationHint,
+        providerMessageHint: lp.providerMessageHint,
         repeated: listening.repeatedIds.includes(lp.id),
         audioSrc: lp.audioSrc,
         voicemailScript: lp.voicemailScript,
       });
     }
     startedAt.current = Date.now();
-    setWritingKey((k) => k + 1);
-    setPhase("writing");
+    setListeningKey((k) => k + 1);
+    setPhase("listening");
   };
 
   const begin = () => {
@@ -456,12 +401,8 @@ export function CompetencyExam() {
       beginTypingOnly();
       return;
     }
-    if (focus === "hipaa") {
-      beginHipaaOnly();
-      return;
-    }
-    if (focus === "writing") {
-      beginWritingOnly();
+    if (focus === "mcq") {
+      beginMcqOnly();
       return;
     }
     if (focus === "listening") {
@@ -472,17 +413,16 @@ export function CompetencyExam() {
       setReviewNote(`Isolated review for “${focus}” is not opened yet.`);
       return;
     }
-    // Real sitting: always fresh attempt + empty section scores (never inherit isolated review).
+
     const nextAttempt = `exam-${Date.now()}`;
     setAttemptId(nextAttempt);
-    setSections([heldCulture()]);
+    setSections([]);
     setSafety({ redFlagged: false, reasons: [], notes: [] });
     setReport(null);
     setTypingRaw(null);
     setLastSection(null);
-    setHipaaAnswers({});
-    setWritingChartNote("");
-    setWritingEscalation("");
+    setMcqAnswers({});
+    setProviderMessage("");
     setReviewNote("");
 
     seenRef.current = loadSeen(userId);
@@ -497,29 +437,52 @@ export function CompetencyExam() {
         repeated: typingDraw.repeatedIds.includes(passage.id),
       });
     }
-    const hipaa = drawHipaaExam(seenRef.current, seed + 3);
-    setHipaaQs(hipaa.questions);
-    setHipaaRepeated(hipaa.repeatedIds);
-    const writing = drawWritingPrompt(seenRef.current, seed + 7);
-    const wp = writing.items[0];
-    if (wp)
-      setWritingPrompt({
-        id: wp.id,
-        title: wp.title,
-        scenario: wp.scenario,
-        chartHint: wp.chartHint,
-        escalationHint: wp.escalationHint,
-        repeated: writing.repeatedIds.includes(wp.id),
+    const mcq = drawCombinedMcqExam(seenRef.current, seed + 3);
+    setMcqQs(mcq.questions);
+    setMcqRepeated(mcq.repeatedIds);
+    setMcqDraftPools(mcq.draftPools);
+    setMcqMix(mcq.mix);
+    const listening = drawListeningPrompt(seenRef.current, seed + 7);
+    const lp = listening.items[0];
+    if (lp) {
+      setListeningPrompt({
+        id: lp.id,
+        title: lp.title,
+        scenario: lp.scenario,
+        providerMessageHint: lp.providerMessageHint,
+        repeated: listening.repeatedIds.includes(lp.id),
+        audioSrc: lp.audioSrc,
+        voicemailScript: lp.voicemailScript,
       });
-    const chat = drawChatBrief(seenRef.current, seed + 11);
-    const brief = chat.items[0];
-    if (brief) {
-      setChatBrief({
-        id: brief.id,
-        personaId: brief.personaId,
-        opening: brief.opening,
-        title: brief.title,
-        repeated: chat.repeatedIds.includes(brief.id),
+    }
+    const chatA = drawChatBrief(seenRef.current, seed + 11);
+    const briefA = chatA.items[0];
+    let seenForChatB = seenRef.current;
+    if (briefA) {
+      setChatTypedBrief({
+        id: briefA.id,
+        personaId: briefA.personaId,
+        opening: briefA.opening,
+        title: briefA.title,
+        repeated: chatA.repeatedIds.includes(briefA.id),
+      });
+      seenForChatB = recordSeen(
+        seenForChatB,
+        "chat-sim",
+        [briefA.id],
+        chatA.repeatedIds.includes(briefA.id) ? [briefA.id] : [],
+        nextAttempt,
+      );
+    }
+    const chatB = drawChatBrief(seenForChatB, seed + 17);
+    const briefB = chatB.items[0];
+    if (briefB) {
+      setChatSpokenBrief({
+        id: briefB.id,
+        personaId: briefB.personaId,
+        opening: briefB.opening,
+        title: briefB.title,
+        repeated: chatB.repeatedIds.includes(briefB.id),
       });
     }
     startedAt.current = Date.now();
@@ -552,7 +515,6 @@ export function CompetencyExam() {
       detail: `${score.accuracy}% accuracy · ${score.wpmReliable ? `${score.wpm} WPM` : "WPM not counted"}`,
     };
     if (focus === "typing") {
-      // Isolated review: never persist to official seen-set / never feed a real sitting.
       reviewSeenRef.current = recordSeen(
         reviewSeenRef.current,
         "typing",
@@ -573,26 +535,30 @@ export function CompetencyExam() {
     setPhase("review");
   };
 
-  const submitHipaa = useCallback(() => {
-    if (!hipaaQs.length || phase !== "hipaa") return;
-    const correct = hipaaQs.filter((q) => hipaaAnswers[q.id] === q.correctKey).length;
-    const score = Math.round((100 * correct) / hipaaQs.length);
-    const ids = hipaaQs.map((q) => q.id);
+  const submitMcq = useCallback(() => {
+    if (!mcqQs.length || phase !== "mcq") return;
+    const correct = mcqQs.filter((q) => mcqAnswers[q.id] === q.correctKey).length;
+    const score = Math.round((100 * correct) / mcqQs.length);
+    const ids = mcqQs.map((q) => q.id);
+    const draft = mcqDraftPools.length > 0;
+    const mixNote = mcqMix
+      ? `Mix HIPAA ${mcqMix.hipaa} · clinical ${mcqMix.clinical} · trivia ${mcqMix.trivia}.`
+      : "";
     const row: SectionResult = {
-      id: "hipaa",
-      label: SECTION_LABEL.hipaa,
-      weight: EXAM_WEIGHTS.hipaa,
+      id: "mcq",
+      label: SECTION_LABEL.mcq,
+      weight: EXAM_WEIGHTS.mcq,
       status: "scored",
       score,
-      note: "Separate exam draw from the certification final exam. Unanswered items count as incorrect.",
+      note: `Combined MCQ draw (HIPAA + clinical knowledge + trivia/culture). Unanswered items count as incorrect. ${mixNote}`.trim(),
       itemIds: ids,
-      repeatedIds: hipaaRepeated,
-      draftContent: false,
-      detail: `${correct}/${hipaaQs.length} correct`,
+      repeatedIds: mcqRepeated,
+      draftContent: draft,
+      detail: `${correct}/${mcqQs.length} correct`,
     };
-    if (focus === "hipaa") {
-      const items: IsolatedReviewItemResult[] = hipaaQs.map((q) => {
-        const selectedKey = hipaaAnswers[q.id] ?? null;
+    if (focus === "mcq") {
+      const items: IsolatedReviewItemResult[] = mcqQs.map((q) => {
+        const selectedKey = mcqAnswers[q.id] ?? null;
         return {
           id: q.id,
           moduleId: q.moduleId,
@@ -603,16 +569,23 @@ export function CompetencyExam() {
           options: q.options.map((o) => ({ key: o.key, text: o.text })),
         };
       });
-      reviewSeenRef.current = recordSeen(reviewSeenRef.current, "hipaa", ids, hipaaRepeated, attemptId);
+      const hipaaIds = mcqQs.filter((q) => q.moduleId !== "clinical-knowledge-draft" && q.moduleId !== "culture-exam-draft").map((q) => q.id);
+      const clinicalIds = mcqQs.filter((q) => q.moduleId === "clinical-knowledge-draft").map((q) => q.id);
+      const cultureIds = mcqQs.filter((q) => q.moduleId === "culture-exam-draft").map((q) => q.id);
+      if (hipaaIds.length) reviewSeenRef.current = recordSeen(reviewSeenRef.current, "hipaa", hipaaIds, [], attemptId);
+      if (clinicalIds.length) {
+        reviewSeenRef.current = recordSeen(reviewSeenRef.current, "clinical-knowledge", clinicalIds, [], attemptId);
+      }
+      if (cultureIds.length) reviewSeenRef.current = recordSeen(reviewSeenRef.current, "culture", cultureIds, [], attemptId);
       saveIsolatedReview({
         attemptId,
         userId,
-        section: "hipaa",
+        section: "mcq",
         at: Date.now(),
         score,
         detail: row.detail || "",
         itemIds: ids,
-        repeatedIds: hipaaRepeated,
+        repeatedIds: mcqRepeated,
         items,
       });
       setItemResults(items);
@@ -620,17 +593,26 @@ export function CompetencyExam() {
       setPhase("section-done");
       return;
     }
-    remember("hipaa", ids, hipaaRepeated, attemptId);
+    const hipaaIds = mcqQs
+      .filter((q) => q.moduleId !== "clinical-knowledge-draft" && q.moduleId !== "culture-exam-draft")
+      .map((q) => q.id);
+    const clinicalIds = mcqQs.filter((q) => q.moduleId === "clinical-knowledge-draft").map((q) => q.id);
+    const cultureIds = mcqQs.filter((q) => q.moduleId === "culture-exam-draft").map((q) => q.id);
+    if (hipaaIds.length) remember("hipaa", hipaaIds, mcqRepeated.filter((id) => hipaaIds.includes(id)), attemptId);
+    if (clinicalIds.length) remember("clinical-knowledge", clinicalIds, [], attemptId);
+    if (cultureIds.length) remember("culture", cultureIds, [], attemptId);
     pushSection(row);
-    setReviewNote(`HIPAA recorded at ${score}/100 (${correct}/${hipaaQs.length}). This is not the certification exam.`);
+    setReviewNote(
+      `Combined MCQ recorded at ${score}/100 (${correct}/${mcqQs.length}). ${draft ? "Includes draft pool items." : ""}`.trim(),
+    );
     setPhase("review");
-  }, [hipaaAnswers, hipaaQs, hipaaRepeated, phase, attemptId, focus, userId]);
+  }, [mcqAnswers, mcqQs, mcqRepeated, mcqDraftPools, mcqMix, phase, attemptId, focus, userId]);
 
   useEffect(() => {
-    if (phase !== "hipaa") return;
-    setHipaaLeft(HIPAA_SEC);
+    if (phase !== "mcq") return;
+    setMcqLeft(MCQ_SEC);
     const t = setInterval(() => {
-      setHipaaLeft((n) => {
+      setMcqLeft((n) => {
         if (n <= 1) {
           clearInterval(t);
           return 0;
@@ -639,33 +621,33 @@ export function CompetencyExam() {
       });
     }, 1000);
     return () => clearInterval(t);
-  }, [phase]);
+  }, [phase, mcqKey]);
 
   useEffect(() => {
-    if (phase === "hipaa" && hipaaLeft === 0) submitHipaa();
-  }, [phase, hipaaLeft, submitHipaa]);
+    if (phase === "mcq" && mcqLeft === 0) submitMcq();
+  }, [phase, mcqLeft, submitMcq]);
 
   useEffect(() => {
-    if (phase !== "writing") return;
-    setWritingLeft(WRITING_SEC);
+    if (phase !== "listening") return;
+    setListeningLeft(LISTENING_SEC);
     const t = setInterval(() => {
-      setWritingLeft((n) => (n <= 1 ? 0 : n - 1));
+      setListeningLeft((n) => (n <= 1 ? 0 : n - 1));
     }, 1000);
     return () => clearInterval(t);
-  }, [phase]);
+  }, [phase, listeningKey]);
 
   useEffect(() => {
-    if (phase !== "chat") return;
+    if (phase !== "chat-typed" && phase !== "chat-spoken") return;
     setChatLeft(CHAT_SEC);
     setChatForceEnd(false);
     const t = setInterval(() => {
       setChatLeft((n) => (n <= 1 ? 0 : n - 1));
     }, 1000);
     return () => clearInterval(t);
-  }, [phase]);
+  }, [phase, chatKey]);
 
   useEffect(() => {
-    if (phase === "chat" && chatLeft === 0) setChatForceEnd(true);
+    if ((phase === "chat-typed" || phase === "chat-spoken") && chatLeft === 0) setChatForceEnd(true);
   }, [phase, chatLeft]);
 
   const onTypingTimer = useCallback(
@@ -684,11 +666,9 @@ export function CompetencyExam() {
       setTypingTimer(null);
       return;
     }
-    // Seed HUD immediately from the same allotted total the drill will use (120s).
     setTypingTimer((prev) => prev ?? { remainingSec: COMPETENCY_EXAM_TIMERS.typing, totalSec: COMPETENCY_EXAM_TIMERS.typing, clockStarted: false });
   }, [phase]);
 
-  /** Single HUD model — remainingSec is always the section’s scoring/auto-submit clock. */
   const timerHud: ExamTimerHudModel | null = useMemo(() => {
     if (phase === "typing" && typingTimer) {
       return {
@@ -698,220 +678,182 @@ export function CompetencyExam() {
         awaitingStart: !typingTimer.clockStarted,
       };
     }
-    if (phase === "hipaa") {
-      return { remainingSec: hipaaLeft, totalSec: HIPAA_SEC, label: "HIPAA" };
+    if (phase === "mcq") {
+      return { remainingSec: mcqLeft, totalSec: MCQ_SEC, label: "Combined MCQ" };
     }
-    if (phase === "writing") {
-      return {
-        remainingSec: writingLeft,
-        totalSec: WRITING_SEC,
-        label: focus === "listening" ? "Listening" : "Writing",
-      };
+    if (phase === "listening") {
+      return { remainingSec: listeningLeft, totalSec: LISTENING_SEC, label: "Listening" };
     }
-    if (phase === "chat") {
-      return { remainingSec: chatLeft, totalSec: CHAT_SEC, label: "Chat sim" };
+    if (phase === "chat-typed") {
+      return { remainingSec: chatLeft, totalSec: CHAT_SEC, label: "Chat sim (typed)" };
+    }
+    if (phase === "chat-spoken") {
+      return { remainingSec: chatLeft, totalSec: CHAT_SEC, label: "Chat sim (spoken)" };
     }
     return null;
-  }, [phase, typingTimer, hipaaLeft, writingLeft, chatLeft, focus]);
+  }, [phase, typingTimer, mcqLeft, listeningLeft, chatLeft]);
 
-  const submitWriting = useCallback(async () => {
-    if (!writingPrompt || phase !== "writing" || busy) return;
+  const submitListening = useCallback(async () => {
+    if (!listeningPrompt || phase !== "listening" || busy) return;
     setBusy(true);
 
-    const detA = scoreWritingPartDeterministic(writingChartNote, "chart");
-    const detB = scoreWritingPartDeterministic(writingEscalation, "escalation");
-    const taskPrompt = [
-      writingPrompt.scenario,
-      `Chart note task: ${writingPrompt.chartHint}`,
-      `Provider message task: ${writingPrompt.escalationHint}`,
-    ].join("\n\n");
+    const taskPrompt = [listeningPrompt.scenario, `Provider message task: ${listeningPrompt.providerMessageHint}`].join(
+      "\n\n",
+    );
 
-    const fetchEstimate = async (part: "chart" | "escalation", text: string) => {
-      try {
-        const res = await fetch("/api/competency-exam/estimate", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
-          },
-          body: JSON.stringify({ prompt: taskPrompt, text, part }),
-        });
-        const data = (await res.json().catch(() => ({}))) as { estimate?: number | null; note?: string };
-        return {
-          estimate: typeof data.estimate === "number" ? data.estimate : null,
-          note: data.note || "",
-        };
-      } catch {
-        return { estimate: null as number | null, note: "LLM estimate unavailable." };
-      }
-    };
+    let llmEstimate: number | null = null;
+    let llmNote = "";
+    try {
+      const res = await fetch("/api/competency-exam/estimate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({ prompt: taskPrompt, text: providerMessage, part: "escalation" }),
+      });
+      const data = (await res.json().catch(() => ({}))) as { estimate?: number | null; note?: string };
+      llmEstimate = typeof data.estimate === "number" ? data.estimate : null;
+      llmNote = data.note || "";
+    } catch {
+      llmNote = "LLM estimate unavailable.";
+    }
 
-    const [llmA, llmB] = await Promise.all([
-      fetchEstimate("chart", writingChartNote),
-      fetchEstimate("escalation", writingEscalation),
-    ]);
-    const blendA = blendWritingScore(detA.score, llmA.estimate);
-    const blendBRaw = blendWritingScore(detB.score, llmB.estimate);
-    const escAdj = adjustEscalationScore({
-      blendedScore: blendBRaw.score,
-      chartNote: writingChartNote,
-      escalationText: writingEscalation,
-    });
-    const blendB = { score: escAdj.score, note: `${blendBRaw.note}${escAdj.note ? ` ${escAdj.note}` : ""}`.trim() };
-    const combined = combineWritingPartScores(blendA.score, blendB.score);
-    const askHint = !escAdj.missingAsk;
-    const llmPartial = blendA.partial || blendBRaw.partial;
-    const sectionLabel = focus === "listening" ? "Listening" : SECTION_LABEL.writing;
+    const scored = scoreListeningProviderMessage({ text: providerMessage, llmEstimate });
     const row: SectionResult = {
-      id: "writing",
-      label: sectionLabel,
-      weight: EXAM_WEIGHTS.writing,
+      id: "listening",
+      label: SECTION_LABEL.listening,
+      weight: EXAM_WEIGHTS.listening,
       status: "scored",
-      score: combined.score,
-      note: `${combined.note} ${llmA.note} ${blendB.note} ${llmB.note}${
-        llmPartial ? ` Partial — LLM estimate missing (deterministic cap ${WRITING_DETERMINISTIC_ONLY_CAP}).` : ""
+      score: scored.score,
+      note: `${scored.note} ${llmNote}${
+        scored.partial ? ` Partial — LLM estimate missing (deterministic cap ${WRITING_DETERMINISTIC_ONLY_CAP}).` : ""
       }`.trim(),
-      itemIds: [writingPrompt.id],
-      repeatedIds: writingPrompt.repeated ? [writingPrompt.id] : [],
+      itemIds: [listeningPrompt.id],
+      repeatedIds: listeningPrompt.repeated ? [listeningPrompt.id] : [],
       draftContent: true,
-      detail: `Chart ${blendA.score}/100 · Escalation ${blendB.score}/100 · ${detA.wordCount + detB.wordCount} words total${
-        llmPartial ? " · partial (LLM unavailable)" : ""
-      }${
-        escAdj.nearDuplicateOfChart
-          ? ` · near-duplicate Part B (sim ${Math.round(escAdj.similarity * 100)}%)`
-          : askHint
-            ? ""
-            : " · escalation ask weak/missing"
-      }`,
+      detail: `Provider message · ${scored.det.wordCount} words${
+        scored.partial ? " · partial (LLM unavailable)" : ""
+      }${scored.missingAsk ? " · ask weak/missing" : ""}`,
     };
 
     const trail: IsolatedWritingTrail = {
-      promptId: writingPrompt.id,
-      title: writingPrompt.title,
-      prompt: writingPrompt.scenario,
-      format: "clinical-two-part",
-      text: "",
-      chartNote: writingChartNote,
-      escalationText: writingEscalation,
-      wordCount: detA.wordCount + detB.wordCount,
-      grammarScore: Math.round((detA.grammarScore + detB.grammarScore) / 2),
+      promptId: listeningPrompt.id,
+      title: listeningPrompt.title,
+      prompt: listeningPrompt.scenario,
+      format: "listening-provider-message",
+      text: providerMessage,
+      escalationText: providerMessage,
+      wordCount: scored.det.wordCount,
+      grammarScore: scored.det.grammarScore,
       issues: [
-        ...detA.issues,
-        ...detB.issues,
-        ...(llmPartial
-          ? [`Partial score — LLM estimate unavailable (capped at ${WRITING_DETERMINISTIC_ONLY_CAP} for affected parts)`]
+        ...scored.det.issues,
+        ...(scored.partial
+          ? [`Partial score — LLM estimate unavailable (capped at ${WRITING_DETERMINISTIC_ONLY_CAP})`]
           : []),
-        ...(escAdj.nearDuplicateOfChart
-          ? [`Near-duplicate of chart note (similarity ${Math.round(escAdj.similarity * 100)}%)`]
-          : []),
-        ...(escAdj.missingAsk && !escAdj.nearDuplicateOfChart ? ["Missing explicit ask to provider"] : []),
+        ...(scored.missingAsk ? ["Missing explicit ask to provider"] : []),
+        ...(!scored.substance.ok && scored.substance.reason ? [scored.substance.reason] : []),
       ],
-      llmEstimate:
-        llmA.estimate == null && llmB.estimate == null
-          ? null
-          : Math.round(((llmA.estimate ?? blendA.score) + (llmB.estimate ?? blendBRaw.score)) / 2),
-      blendedScore: combined.score,
-      partA: {
-        wordCount: detA.wordCount,
-        grammarScore: detA.grammarScore,
-        issues: detA.issues,
-        llmEstimate: llmA.estimate,
-        blendedScore: blendA.score,
-      },
-      partB: {
-        wordCount: detB.wordCount,
-        grammarScore: detB.grammarScore,
-        issues: detB.issues,
-        llmEstimate: llmB.estimate,
-        blendedScore: blendB.score,
-      },
-      escalationHasAskHint: askHint,
-      partsSimilarity: escAdj.similarity,
-      nearDuplicateOfChart: escAdj.nearDuplicateOfChart,
-      audioSrc: writingPrompt.audioSrc,
-      voicemailScript: writingPrompt.voicemailScript,
+      llmEstimate,
+      blendedScore: scored.score,
+      escalationHasAskHint: !scored.missingAsk,
+      audioSrc: listeningPrompt.audioSrc,
+      voicemailScript: listeningPrompt.voicemailScript,
     };
 
-    if (focus === "writing" || focus === "listening") {
-      const pool = focus === "listening" ? "listening" : "writing";
+    if (focus === "listening") {
       reviewSeenRef.current = recordSeen(
         reviewSeenRef.current,
-        pool,
-        [writingPrompt.id],
-        writingPrompt.repeated ? [writingPrompt.id] : [],
+        "listening",
+        [listeningPrompt.id],
+        listeningPrompt.repeated ? [listeningPrompt.id] : [],
         attemptId,
       );
       saveIsolatedReview({
         attemptId,
         userId,
-        section: focus === "listening" ? "listening" : "writing",
+        section: "listening",
         at: Date.now(),
-        score: combined.score,
+        score: scored.score,
         detail: row.detail || "",
-        itemIds: [writingPrompt.id],
-        repeatedIds: writingPrompt.repeated ? [writingPrompt.id] : [],
+        itemIds: [listeningPrompt.id],
+        repeatedIds: listeningPrompt.repeated ? [listeningPrompt.id] : [],
         items: [],
         writing: trail,
-        listeningAudioSrc: writingPrompt.audioSrc,
+        listeningAudioSrc: listeningPrompt.audioSrc,
       });
-      setWritingTrail(trail);
+      setListeningTrail(trail);
       setLastSection(row);
       setBusy(false);
       setPhase("section-done");
       return;
     }
-    remember("writing", [writingPrompt.id], writingPrompt.repeated ? [writingPrompt.id] : [], attemptId);
+    remember("listening", [listeningPrompt.id], listeningPrompt.repeated ? [listeningPrompt.id] : [], attemptId);
     pushSection(row);
     setBusy(false);
-    setReviewNote(`Writing recorded at ${combined.score}/100 (chart ${blendA.score} · escalation ${blendB.score}). Clinical prompt is still a draft.`);
+    setReviewNote(`Listening recorded at ${scored.score}/100. Prototype voicemail — draft content.`);
     setPhase("review");
-  }, [busy, phase, token, writingPrompt, writingChartNote, writingEscalation, focus, attemptId, userId]);
+  }, [busy, phase, token, listeningPrompt, providerMessage, focus, attemptId, userId]);
 
   useEffect(() => {
-    if (phase === "writing" && writingLeft === 0) void submitWriting();
-  }, [phase, writingLeft, submitWriting]);
+    if (phase === "listening" && listeningLeft === 0) void submitListening();
+  }, [phase, listeningLeft, submitListening]);
 
   const onChat = (fb: SimulatorFeedback) => {
-    if (!chatBrief) return;
+    const brief = activeChatBrief;
+    const modality = activeChatModality;
+    if (!brief || !modality) return;
+    const sectionId = modality === "spoken" ? "chat-sim-spoken" : "chat-sim-typed";
     const score = chatSectionScore(fb);
-    remember("chat-sim", [chatBrief.id], chatBrief.repeated ? [chatBrief.id] : [], attemptId);
+    remember("chat-sim", [brief.id], brief.repeated ? [brief.id] : [], attemptId);
     const flag: SafetyFlag = {
       redFlagged: fb.redFlagged || fb.outcome === "red_flag" || fb.safetyReasons.length > 0,
-      reasons: fb.safetyReasons,
+      reasons: [...safety.reasons, ...fb.safetyReasons],
       notes: [
+        ...safety.notes,
         ...fb.safetyNotes,
         ...(fb.clinicalAccuracyHits || []).map((h) => h.label || h.replyExcerpt || "clinical-accuracy note"),
       ].filter(Boolean),
     };
     setSafety(flag);
     pushSection({
-      id: "chat-sim",
-      label: SECTION_LABEL["chat-sim"],
-      weight: EXAM_WEIGHTS["chat-sim"],
+      id: sectionId,
+      label: SECTION_LABEL[sectionId],
+      weight: EXAM_WEIGHTS[sectionId],
       status: "scored",
       score,
-      note: "Section score is the mean of Grammar, Politeness, and Relevance. Safety is a separate flag and is not folded into this number. Relevance is an estimate.",
-      itemIds: [chatBrief.id],
-      repeatedIds: chatBrief.repeated ? [chatBrief.id] : [],
+      note: `${modality === "spoken" ? "Spoken" : "Typed"} chat lane. Section score is the mean of Grammar, Politeness, and Relevance. Safety is a separate flag.`,
+      itemIds: [brief.id],
+      repeatedIds: brief.repeated ? [brief.id] : [],
       draftContent: true,
       detail: `Grammar ${fb.grammarScore} · Politeness ${fb.politenessScore} · Relevance ${fb.relevanceScore}`,
     });
-    setReviewNote(`Chat simulator recorded at ${score}/100. ${flag.redFlagged ? "A safety flag was raised for the human reviewer." : "No safety flag."}`);
+    setReviewNote(
+      `Chat simulator (${modality}) recorded at ${score}/100. ${flag.redFlagged ? "A safety flag was raised for the human reviewer." : "No safety flag."}`,
+    );
     setPhase("review");
   };
 
   const afterReview = () => {
     if (!sections.some((s) => s.id === "typing")) return;
-    if (!sections.some((s) => s.id === "hipaa")) {
-      setPhase("hipaa");
+    if (!sections.some((s) => s.id === "mcq")) {
+      setMcqKey((k) => k + 1);
+      setPhase("mcq");
       return;
     }
-    if (!sections.some((s) => s.id === "writing")) {
-      setPhase("writing");
+    if (!sections.some((s) => s.id === "listening")) {
+      setListeningKey((k) => k + 1);
+      setPhase("listening");
       return;
     }
-    if (!sections.some((s) => s.id === "chat-sim")) {
-      setPhase("chat");
+    if (!sections.some((s) => s.id === "chat-sim-typed")) {
+      setChatKey((k) => k + 1);
+      setPhase("chat-typed");
+      return;
+    }
+    if (!sections.some((s) => s.id === "chat-sim-spoken")) {
+      setChatKey((k) => k + 1);
+      setPhase("chat-spoken");
       return;
     }
     const model = buildExamReport({
@@ -927,7 +869,10 @@ export function CompetencyExam() {
     setPhase("report");
   };
 
-  const persona = useMemo(() => (chatBrief ? getPersona(chatBrief.personaId) : undefined), [chatBrief]);
+  const persona = useMemo(
+    () => (activeChatBrief ? getPersona(activeChatBrief.personaId) : undefined),
+    [activeChatBrief],
+  );
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 px-4 py-6">
@@ -937,26 +882,22 @@ export function CompetencyExam() {
         <h1 className="text-xl font-semibold text-[var(--siya-primary)]">
           {focus === "typing"
             ? "Isolated review · Typing"
-            : focus === "hipaa"
-              ? "Isolated review · HIPAA"
-              : focus === "writing"
-                ? "Isolated review · Writing"
-                : focus === "listening"
-                  ? "Isolated review · Listening"
-                  : isolated
-                    ? `Isolated review · ${focus}`
-                    : "Partial sitting"}
+            : focus === "mcq"
+              ? "Isolated review · Combined MCQ"
+              : focus === "listening"
+                ? "Isolated review · Listening"
+                : isolated
+                  ? `Isolated review · ${focus}`
+                  : "Full sitting"}
         </h1>
         <p className="mt-1 text-sm text-[var(--siya-text)]">
           {focus === "typing"
-            ? "Typing only — real passage, locked 120s timer, real section score. No HIPAA, writing, or chat."
-            : focus === "hipaa"
-              ? "HIPAA only — 20 items, 12-minute lock, separate draw from certification. No typing, writing, or chat."
-              : focus === "writing"
-                ? "Practice clinical documentation for the MA competency exam — chart note + message to the provider, 10 minutes. Draft scenarios; not an official score yet."
-                : focus === "listening"
-                  ? "Play one patient voicemail, then write the chart note + provider message (same Writing rubric). Prototype — draft content; not an official score yet."
-                  : "Typing, HIPAA, writing, and chat simulator only. Culture/language is held. Speaking is not in this pass."}
+            ? "Typing only — real passage, locked 120s timer, real section score. No MCQ, listening, or chat."
+            : focus === "mcq"
+              ? `Combined MCQ only — ${MCQ_EXAM_COUNT} items (HIPAA + clinical + trivia), 20-minute lock. No typing, listening, or chat.`
+              : focus === "listening"
+                ? "Play one patient voicemail, then write one provider message. Prototype — draft content; not an official score yet."
+                : "Typing → Combined MCQ → Listening → typed chat → spoken chat. Human-reviewed; not a certification or employment decision."}
         </p>
       </header>
 
@@ -968,7 +909,7 @@ export function CompetencyExam() {
             <li>Locked 2-minute timer — clock starts on first keystroke (Start test only arms/focuses)</li>
             <li>Section score (DEFAULT — needs founder confirmation): 60% accuracy + 40% pace (50 WPM → 100); unreliable WPM → accuracy only</li>
             <li>Does not update practice personal best</li>
-            <li>Stops after this section — you will not be pushed into HIPAA</li>
+            <li>Stops after this section — you will not be pushed into MCQ</li>
           </ul>
           <p className="text-xs text-[var(--siya-text-secondary)]">
             Content status: <strong>finalized for review</strong> (reuses Learn typing bank; not draft / not pending Sonu). Typing is signed off — keep this URL for re-checks.
@@ -988,22 +929,26 @@ export function CompetencyExam() {
         </div>
       ) : null}
 
-      {phase === "orient" && focus === "hipaa" ? (
+      {phase === "orient" && focus === "mcq" ? (
         <div className="space-y-3 rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4 text-sm">
           <p className="font-semibold text-[var(--siya-primary)]">What you are reviewing</p>
           <ul className="list-disc space-y-1 pl-4 text-[var(--siya-text)]">
-            <li>20 items drawn from the live HIPAA training bank (73 questions) — separate from the certification final exam</li>
-            <li>Locked 12-minute timer — starts when you begin this section</li>
-            <li>Section score: percent correct (unanswered = incorrect); weight {EXAM_WEIGHTS.hipaa} pts in composite</li>
+            <li>
+              {MCQ_EXAM_COUNT} items — HIPAA live bank + clinical-knowledge draft + culture/trivia draft (target mix 20 /
+              10 / 10)
+            </li>
+            <li>Locked 20-minute timer — starts when you begin this section</li>
+            <li>Section score: percent correct (unanswered = incorrect); weight {EXAM_WEIGHTS.mcq} pts in composite</li>
             <li>Ephemeral review seen-set only — does not write the official exam seen-set or feed a full sitting</li>
-            <li>Stops after this section — you will not be pushed into Writing or chat</li>
+            <li>Stops after this section — you will not be pushed into Listening or chat</li>
           </ul>
           <p className="text-xs text-[var(--siya-text-secondary)]">
-            Content status: <strong>finalized for review</strong> (same question bank as staff HIPAA training; not a draft pending Sonu).
+            Content status: HIPAA items are live; clinical and trivia pools remain <strong>draft</strong> until
+            reviewers clear them.
           </p>
           <label className="flex items-start gap-2 text-sm">
             <input type="checkbox" checked={ack} onChange={(e) => setAck(e.target.checked)} />
-            <span>I am reviewing HIPAA in isolation for sign-off.</span>
+            <span>I am reviewing Combined MCQ in isolation for sign-off.</span>
           </label>
           <button
             type="button"
@@ -1011,41 +956,7 @@ export function CompetencyExam() {
             onClick={begin}
             className="rounded-xl bg-[var(--siya-accent)] px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
           >
-            Start HIPAA section
-          </button>
-        </div>
-      ) : null}
-
-      {phase === "orient" && focus === "writing" ? (
-        <div className="space-y-3 rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4 text-sm">
-          <p className="font-semibold text-[var(--siya-primary)]">Before you start</p>
-          <div className="space-y-2 text-[var(--siya-text)]">
-            <p>This is a practice writing exercise for the MA competency exam.</p>
-            <p>
-              You&apos;ll get one clinical scenario. Write two things: a <strong>chart note</strong> documenting what was
-              observed or reported, and a <strong>message to the provider</strong> that escalates the concern with a clear
-              ask. You have 10 minutes.
-            </p>
-            <p>
-              These are draft scenarios we&apos;re still reviewing — your answer here won&apos;t count toward anything
-              official yet.
-            </p>
-            <p className="text-xs text-[var(--siya-text-secondary)]">
-              Type your answers yourself (voice dictation isn&apos;t available). Stick to facts — no judgment labels.
-              When you submit, you&apos;ll see a short summary — you won&apos;t move on to another exam section.
-            </p>
-          </div>
-          <label className="flex items-start gap-2 text-sm">
-            <input type="checkbox" checked={ack} onChange={(e) => setAck(e.target.checked)} />
-            <span>I understand this is practice only and won&apos;t count toward an official score.</span>
-          </label>
-          <button
-            type="button"
-            disabled={!ack}
-            onClick={begin}
-            className="rounded-xl bg-[var(--siya-accent)] px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
-          >
-            Start writing section
+            Start MCQ section
           </button>
         </div>
       ) : null}
@@ -1056,16 +967,16 @@ export function CompetencyExam() {
           <div className="space-y-2 text-[var(--siya-text)]">
             <p>This is a practice Listening exercise for the MA competency exam.</p>
             <p>
-              You&apos;ll hear one patient voicemail (fixed recording). Then write the same two things as Writing: a{" "}
-              <strong>chart note</strong> and a <strong>message to the provider</strong> with a clear ask. You have 10
-              minutes.
+              You&apos;ll hear one patient voicemail (fixed recording). Then write one{" "}
+              <strong>message to the provider</strong> with a clear ask — as if you already tried calling the patient
+              back and they did not answer. You have 10 minutes.
             </p>
             <p>
-              Prototype content — still under clinical review. Your answer here won&apos;t count toward anything official
-              yet.
+              Prototype content — still under clinical review. Your answer here won&apos;t count toward anything
+              official yet.
             </p>
             <p className="text-xs text-[var(--siya-text-secondary)]">
-              Use headphones if you can. Replay is allowed. Type your answers yourself. Placeholder names only (John Doe
+              Use headphones if you can. Replay is allowed. Type your answer yourself. Placeholder names only (John Doe
               / Jane Doe / James Doe).
             </p>
           </div>
@@ -1088,12 +999,14 @@ export function CompetencyExam() {
         <div className="space-y-3 rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4 text-sm">
           <p>Sections are sequential and locked. You cannot return to a prior section. A short review appears before you continue.</p>
           <ul className="list-disc pl-4 text-[var(--siya-text)]">
-            <li>Typing — 2 minutes, one passage</li>
-            <li>HIPAA — 20 items, 12 minutes, separate from certification</li>
-            <li>Writing — 10 minutes, draft prompt pending Sonu</li>
-            <li>Chat simulator — up to 6 of your replies</li>
+            <li>Typing — 2 minutes, one passage ({EXAM_WEIGHTS.typing} pts)</li>
+            <li>
+              Combined MCQ — {MCQ_EXAM_COUNT} items, 20 minutes ({EXAM_WEIGHTS.mcq} pts)
+            </li>
+            <li>Listening — voicemail → provider message, 10 minutes ({EXAM_WEIGHTS.listening} pts)</li>
+            <li>Chat simulator (typed) — up to 6 replies ({EXAM_WEIGHTS["chat-sim-typed"]} pts)</li>
+            <li>Chat simulator (spoken) — up to 6 replies ({EXAM_WEIGHTS["chat-sim-spoken"]} pts)</li>
           </ul>
-          <p className="rounded-xl bg-[var(--siya-bg-subtle)] p-3 text-xs">{CULTURE_SECTION_HELD_REASON}</p>
           <p>A person reviews the report. It does not decide employment, pay, or certification.</p>
           <p className="text-xs">
             Prefer section-by-section review? Open{" "}
@@ -1101,18 +1014,21 @@ export function CompetencyExam() {
               Typing
             </a>
             ,{" "}
-            <a className="font-semibold text-[var(--siya-accent)] underline" href="/learn/competency-exam?section=hipaa">
-              HIPAA
+            <a className="font-semibold text-[var(--siya-accent)] underline" href="/learn/competency-exam?section=mcq">
+              MCQ
             </a>
             , or{" "}
-            <a className="font-semibold text-[var(--siya-accent)] underline" href="/learn/competency-exam?section=writing">
-              Writing
+            <a
+              className="font-semibold text-[var(--siya-accent)] underline"
+              href="/learn/competency-exam?section=listening"
+            >
+              Listening
             </a>
             .
           </p>
           <label className="flex items-start gap-2 text-sm">
             <input type="checkbox" checked={ack} onChange={(e) => setAck(e.target.checked)} />
-            <span>I understand this is a human-reviewed partial exam, not a certification or employment decision.</span>
+            <span>I understand this is a human-reviewed exam sitting, not a certification or employment decision.</span>
           </label>
           <button
             type="button"
@@ -1125,17 +1041,17 @@ export function CompetencyExam() {
         </div>
       ) : null}
 
-      {phase === "orient" && isolated && focus !== "typing" && focus !== "hipaa" && focus !== "writing" && focus !== "listening" ? (
+      {phase === "orient" && isolated && focus !== "typing" && focus !== "mcq" && focus !== "listening" ? (
         <div className="space-y-3 rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4 text-sm">
           <p>
-            Isolated review for <strong>{focus}</strong> is not wired yet. Try Typing, HIPAA, Writing, or Listening.
+            Isolated review for <strong>{focus}</strong> is not wired yet. Try Typing, MCQ, or Listening.
           </p>
           {reviewNote ? <p className="text-xs text-[var(--siya-text-secondary)]">{reviewNote}</p> : null}
           <a
             href="/learn/competency-exam?section=listening"
             className="inline-block rounded-xl bg-[var(--siya-accent)] px-4 py-2 text-sm font-semibold text-white"
           >
-            Open Listening prototype
+            Open Listening review
           </a>
         </div>
       ) : null}
@@ -1160,41 +1076,41 @@ export function CompetencyExam() {
         </div>
       ) : null}
 
-      {phase === "section-done" && lastSection && (focus === "typing" || focus === "hipaa" || focus === "writing" || focus === "listening") ? (
+      {phase === "section-done" && lastSection && (focus === "typing" || focus === "mcq" || focus === "listening") ? (
         <SectionDoneCard
           section={lastSection}
           rawTyping={focus === "typing" ? typingRaw : null}
           attemptId={attemptId}
           onAgain={
-            focus === "typing"
-              ? beginTypingOnly
-              : focus === "hipaa"
-                ? beginHipaaOnly
-                : focus === "listening"
-                  ? beginListeningOnly
-                  : beginWritingOnly
+            focus === "typing" ? beginTypingOnly : focus === "mcq" ? beginMcqOnly : beginListeningOnly
           }
-          itemResults={focus === "hipaa" ? itemResults : null}
-          writingTrail={focus === "writing" || focus === "listening" ? writingTrail : null}
+          itemResults={focus === "mcq" ? itemResults : null}
+          writingTrail={focus === "listening" ? listeningTrail : null}
         />
       ) : null}
 
-      {phase === "hipaa" && hipaaQs.length ? (
-        <div className="space-y-3" key={hipaaKey}>
-          {focus === "hipaa" ? (
+      {phase === "mcq" && mcqQs.length ? (
+        <div className="space-y-3" key={mcqKey}>
+          {focus === "mcq" ? (
             <p className="text-xs font-semibold text-[var(--siya-accent)]">
-              Isolated · HIPAA — finish or wait for the 12-minute lock · attempt <code>{attemptId}</code>
+              Isolated · Combined MCQ — finish or wait for the 20-minute lock · attempt <code>{attemptId}</code>
             </p>
           ) : null}
           <p className="text-sm font-semibold">
-            HIPAA · {fmt(hipaaLeft)} left · not the certification exam
+            Combined MCQ · {fmt(mcqLeft)} left · {mcqQs.length} items
             <span className="sr-only"> (same remaining seconds as the fixed countdown)</span>
           </p>
-          {hipaaRepeated.length ? (
-            <p className="text-xs font-semibold">Repeat items — not a fresh measure: {hipaaRepeated.join(", ")}</p>
+          {mcqMix ? (
+            <p className="text-xs text-[var(--siya-text-secondary)]">
+              Drawn mix: HIPAA {mcqMix.hipaa} · clinical {mcqMix.clinical} · trivia {mcqMix.trivia}
+              {mcqDraftPools.length ? ` · draft pools: ${mcqDraftPools.join(", ")}` : ""}
+            </p>
+          ) : null}
+          {mcqRepeated.length ? (
+            <p className="text-xs font-semibold">Repeat items — not a fresh measure: {mcqRepeated.join(", ")}</p>
           ) : null}
           <ol className="space-y-3">
-            {hipaaQs.map((q, i) => (
+            {mcqQs.map((q, i) => (
               <li key={q.id} className="rounded-xl border border-[var(--siya-border)] p-3 text-sm">
                 <p className="font-medium">
                   {i + 1}. {q.prompt}
@@ -1205,8 +1121,8 @@ export function CompetencyExam() {
                       <input
                         type="radio"
                         name={q.id}
-                        checked={hipaaAnswers[q.id] === opt.key}
-                        onChange={() => setHipaaAnswers((prev) => ({ ...prev, [q.id]: opt.key }))}
+                        checked={mcqAnswers[q.id] === opt.key}
+                        onChange={() => setMcqAnswers((prev) => ({ ...prev, [q.id]: opt.key }))}
                       />
                       <span>
                         {opt.key}. {opt.text}
@@ -1217,118 +1133,63 @@ export function CompetencyExam() {
               </li>
             ))}
           </ol>
-          <button type="button" onClick={submitHipaa} className="rounded-xl bg-[var(--siya-accent)] px-4 py-2 text-sm font-semibold text-white">
-            {focus === "hipaa" ? "Submit HIPAA review" : "Submit HIPAA section"}
+          <button type="button" onClick={submitMcq} className="rounded-xl bg-[var(--siya-accent)] px-4 py-2 text-sm font-semibold text-white">
+            {focus === "mcq" ? "Submit MCQ review" : "Submit MCQ section"}
           </button>
         </div>
       ) : null}
 
-      {phase === "writing" && writingPrompt ? (
-        <div className="space-y-3" key={writingKey}>
-          {focus === "writing" || focus === "listening" ? (
+      {phase === "listening" && listeningPrompt ? (
+        <div className="space-y-3" key={listeningKey}>
+          {focus === "listening" ? (
             <p className="text-xs font-semibold text-[var(--siya-accent)]">
-              Isolated · {focus === "listening" ? "Listening" : "Writing"} — finish or wait for the 10-minute lock ·
-              attempt <code>{attemptId}</code>
+              Isolated · Listening — finish or wait for the 10-minute lock · attempt <code>{attemptId}</code>
             </p>
           ) : null}
           <p className="text-sm font-semibold">
-            {focus === "listening" ? "Listening" : "Writing"} · {fmt(writingLeft)} left
+            Listening · {fmt(listeningLeft)} left
             <span className="sr-only"> (same remaining seconds as the fixed countdown)</span>
           </p>
-          <p className="text-xs font-semibold">
-            {focus === "listening" ? "Prototype voicemail scenario" : "Draft clinical scenario"} — still under review.
-            Not used for an official score yet.
-          </p>
-          {writingPrompt.repeated ? <p className="text-xs font-semibold">Repeat prompt — not a fresh measure.</p> : null}
+          <p className="text-xs font-semibold">Prototype voicemail scenario — still under review. Not used for an official score yet.</p>
+          {listeningPrompt.repeated ? <p className="text-xs font-semibold">Repeat prompt — not a fresh measure.</p> : null}
           <p className="text-xs text-[var(--siya-text-secondary)]">
-            Scenario: <strong>{writingPrompt.title}</strong> · id <code>{writingPrompt.id}</code>
+            Scenario: <strong>{listeningPrompt.title}</strong> · id <code>{listeningPrompt.id}</code>
           </p>
-          {writingPrompt.audioSrc ? (
-            <div className="space-y-2 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] p-3">
-              <p className="text-xs font-semibold text-[var(--siya-primary)]">1. Play the voicemail</p>
-              <audio
-                controls
-                preload="metadata"
-                src={writingPrompt.audioSrc}
-                className="w-full"
-                data-listening-voicemail="true"
-              >
-                Your browser does not support audio playback.
-              </audio>
-              <details className="text-xs text-[var(--siya-text-secondary)]">
-                <summary className="cursor-pointer font-semibold">Transcript (accessibility)</summary>
-                <p className="mt-2 whitespace-pre-wrap leading-relaxed">{writingPrompt.voicemailScript}</p>
-              </details>
-            </div>
-          ) : null}
-          <p className="text-sm">{writingPrompt.scenario}</p>
-          <p className="text-[11px] text-[var(--siya-text-muted)]">
-            Type both answers. Voice dictation isn&apos;t available on this exercise. Use facts only — no judgment labels.
-            Placeholder names (John / Jane / James Doe) are OK.
-          </p>
-          <div className="space-y-2">
-            <label className="block text-xs font-semibold text-[var(--siya-primary)]" htmlFor="writing-chart-note">
-              1. Chart note
-            </label>
-            <p className="rounded-lg bg-[var(--siya-bg-subtle)] px-3 py-2 text-xs text-[var(--siya-text)]">
-              Write only what you&apos;d put in the patient&apos;s chart — what was observed or reported. Do not include a
-              request to the provider here.
-            </p>
-            <p className="text-xs text-[var(--siya-text-secondary)]">{writingPrompt.chartHint}</p>
-            <textarea
-              id="writing-chart-note"
-              value={writingChartNote}
-              onChange={(e) => setWritingChartNote(e.target.value)}
-              rows={6}
-              className="w-full rounded-xl border border-[var(--siya-border)] p-3 text-sm"
-              placeholder="Chart only — observations / what the patient reported…"
-              data-no-voice-input="true"
-            />
+          <div className="space-y-2 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] p-3">
+            <p className="text-xs font-semibold text-[var(--siya-primary)]">1. Play the voicemail</p>
+            <audio
+              controls
+              preload="metadata"
+              src={listeningPrompt.audioSrc}
+              className="w-full"
+              data-listening-voicemail="true"
+            >
+              Your browser does not support audio playback.
+            </audio>
+            <details className="text-xs text-[var(--siya-text-secondary)]">
+              <summary className="cursor-pointer font-semibold">Transcript (accessibility)</summary>
+              <p className="mt-2 whitespace-pre-wrap leading-relaxed">{listeningPrompt.voicemailScript}</p>
+            </details>
           </div>
+          <p className="text-sm">{listeningPrompt.scenario}</p>
+          <p className="text-[11px] text-[var(--siya-text-muted)]">
+            Type your provider message. Voice dictation isn&apos;t available on this exercise. Use facts only — no
+            judgment labels. Placeholder names (John / Jane / James Doe) are OK.
+          </p>
           <div className="space-y-2">
-            <label className="block text-xs font-semibold text-[var(--siya-primary)]" htmlFor="writing-escalation">
+            <label className="block text-xs font-semibold text-[var(--siya-primary)]" htmlFor="listening-provider-message">
               2. Message to provider
             </label>
             <p className="rounded-lg bg-[var(--siya-bg-subtle)] px-3 py-2 text-xs text-[var(--siya-text)]">
-              Write the message the way you&apos;d actually send it to the provider on the secure channel for this
-              scenario — same style as your real notes. Don&apos;t paste the chart note here.
+              Write the message you would send the provider after an unsuccessful callback attempt — clear ask, MA
+              scope only.
             </p>
-            <p className="text-xs text-[var(--siya-text-secondary)]">{writingPrompt.escalationHint}</p>
-            <div className="space-y-2">
-              {!showEscalationExample ? (
-                <button
-                  type="button"
-                  onClick={() => setShowEscalationExample(true)}
-                  className="text-xs font-semibold text-[var(--siya-primary)] underline-offset-2 hover:underline"
-                >
-                  Optional: see one example
-                </button>
-              ) : (
-                <div
-                  className="rounded-xl border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] p-3 text-xs text-[var(--siya-text)]"
-                  data-writing-escalation-example="true"
-                >
-                  <div className="mb-2 flex items-start justify-between gap-2">
-                    <p className="font-semibold text-[var(--siya-primary)]">
-                      Example tone only (John Doe / James Doe placeholders) — write your own for this scenario
-                    </p>
-                    <button
-                      type="button"
-                      onClick={() => setShowEscalationExample(false)}
-                      className="shrink-0 text-xs font-semibold text-[var(--siya-text-secondary)] underline-offset-2 hover:underline"
-                    >
-                      Dismiss
-                    </button>
-                  </div>
-                  <p className="whitespace-pre-wrap leading-relaxed">{WRITING_ESCALATION_WORKED_EXAMPLE}</p>
-                </div>
-              )}
-            </div>
+            <p className="text-xs text-[var(--siya-text-secondary)]">{listeningPrompt.providerMessageHint}</p>
             <textarea
-              id="writing-escalation"
-              value={writingEscalation}
-              onChange={(e) => setWritingEscalation(e.target.value)}
-              rows={7}
+              id="listening-provider-message"
+              value={providerMessage}
+              onChange={(e) => setProviderMessage(e.target.value)}
+              rows={8}
               className="w-full rounded-xl border border-[var(--siya-border)] p-3 text-sm"
               placeholder="Type the message you'd actually send the provider…"
               data-no-voice-input="true"
@@ -1337,18 +1198,20 @@ export function CompetencyExam() {
           <button
             type="button"
             disabled={busy}
-            onClick={() => void submitWriting()}
+            onClick={() => void submitListening()}
             className="rounded-xl bg-[var(--siya-accent)] px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
           >
-            {busy ? "Scoring…" : focus === "listening" ? "Submit listening review" : focus === "writing" ? "Submit writing review" : "Submit writing"}
+            {busy ? "Scoring…" : focus === "listening" ? "Submit listening review" : "Submit listening"}
           </button>
         </div>
       ) : null}
 
-      {phase === "chat" && chatBrief && persona && !isolated ? (
-        <div className="space-y-2">
-          <p className="text-xs font-semibold">DRAFT brief — pending Sonu review. {chatBrief.title}</p>
-          {chatBrief.repeated ? <p className="text-xs font-semibold">Repeat brief — not a fresh measure.</p> : null}
+      {(phase === "chat-typed" || phase === "chat-spoken") && activeChatBrief && persona && activeChatModality && !isolated ? (
+        <div className="space-y-2" key={`${chatKey}-${activeChatModality}`}>
+          <p className="text-xs font-semibold">
+            DRAFT brief — pending Sonu review. {activeChatBrief.title} · {activeChatModality} lane
+          </p>
+          {activeChatBrief.repeated ? <p className="text-xs font-semibold">Repeat brief — not a fresh measure.</p> : null}
           <p className="text-xs text-[var(--siya-text-secondary)]">
             Exam chat wall clock · {fmt(chatLeft)} left (same clock as the fixed timer) · 6-reply turn cap also applies
           </p>
@@ -1356,10 +1219,11 @@ export function CompetencyExam() {
             <PatientChatSimulator
               examMode={{
                 persona,
-                opening: chatBrief.opening,
-                briefId: chatBrief.id,
+                opening: activeChatBrief.opening,
+                briefId: activeChatBrief.id,
                 maxTurns: 6,
                 forceComplete: chatForceEnd,
+                inputModality: activeChatModality,
                 onComplete: onChat,
               }}
             />

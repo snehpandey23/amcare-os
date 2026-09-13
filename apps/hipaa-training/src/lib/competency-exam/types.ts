@@ -1,4 +1,9 @@
-export type ExamSectionId = "typing" | "hipaa" | "writing" | "chat-sim" | "culture";
+export type ExamSectionId =
+  | "typing"
+  | "mcq"
+  | "listening"
+  | "chat-sim-typed"
+  | "chat-sim-spoken";
 
 export type SectionStatus = "scored" | "held" | "deferred";
 
@@ -37,7 +42,7 @@ export type WritingTrail = {
   promptId: string;
   promptTitle: string;
   promptText: string;
-  format?: "clinical-two-part" | "legacy-single";
+  format?: "clinical-two-part" | "legacy-single" | "listening-provider-message";
   text: string;
   chartNote?: string;
   escalationText?: string;
@@ -67,6 +72,7 @@ export type ChatTrail = {
     replyExcerpt: string;
     score: number;
     reason: string;
+    humanNote?: string;
   }[];
   clinicalAccuracyHits: { replyIndex: number; label: string; replyExcerpt: string }[];
   outcome: string;

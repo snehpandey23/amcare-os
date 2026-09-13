@@ -1,10 +1,11 @@
 /**
- * Listening bank — voicemail → clinical two-part write-up (prototype).
+ * Listening bank — voicemail → single provider message (prototype).
  *
- * DRAFT — urgent-refill item for founder E2E only. Clinical review still pending Vayushi/Sonu.
+ * DRAFT — urgent-refill item. Clinical review still pending Vayushi.
  * Audio: pre-rendered static mp3 under /competency-exam/listening/ (not live browser TTS).
+ * Chart-note half removed (2026-09-13) — real ops: callback attempt → message the provider.
  */
-export type ListeningResponseShape = "clinical-two-part" | "patient-message-only";
+export type ListeningResponseShape = "provider-message-only";
 
 export type ListeningPrompt = {
   id: string;
@@ -14,10 +15,10 @@ export type ListeningPrompt = {
   audioSrc: string;
   /** Exact script used to generate the clip (review / a11y transcript) */
   voicemailScript: string;
-  /** Short stem after play — facts the MA may rely on */
+  /** Short stem after play — context only; do not rewrite the whole stem into the box */
   scenario: string;
-  chartHint: string;
-  escalationHint: string;
+  /** What to write: provider message after callback attempt */
+  providerMessageHint: string;
   responseShape: ListeningResponseShape;
   reviewStatus: "draft_pending_vayushi" | "draft_pending_sonu" | "prototype";
   reviewer: "Vayushi" | "Sonu";
@@ -38,17 +39,16 @@ export const LISTENING_PROMPTS: ListeningPrompt[] = [
       "Please call me back. Thanks.",
     ].join(" "),
     scenario: [
-      "You just played a patient voicemail (John Doe — placeholder name only).",
-      "From the message: about two days of medication left; patient is stressed about running out;",
-      "pharmacy previously said they were waiting on something from the office; wants help before the weekend;",
-      "asks for a callback; does not want to miss doses.",
-      "Treat the medication as a controlled once-daily fill unless your workflow says otherwise — do not invent prior-auth status.",
+      "You heard this patient voicemail (John Doe — placeholder name only).",
+      "In real ops you would try to call the patient back. For this exercise, assume you called and they did not answer.",
+      "Write the message you would send the provider — not a thank-you, and not a copy of this stem.",
     ].join(" "),
-    chartHint:
-      "Chart what was reported: remaining supply (~2 days), distress, pharmacy waiting-on-office claim, callback requested before weekend. Facts only — no judgment labels.",
-    escalationHint:
-      "Message the provider with the near-runout concern, pharmacy delay claim, and weekend timing. End with a clear ask (review / advise next steps / whether to call the patient). Do not authorize a refill yourself.",
-    responseShape: "clinical-two-part",
+    providerMessageHint: [
+      "Include: near-runout (~2 days), pharmacy waiting-on-office claim, weekend timing, that you attempted callback with no answer,",
+      "and a clear ask (review / advise next steps / whether to call the patient).",
+      "Do not authorize a refill yourself.",
+    ].join(" "),
+    responseShape: "provider-message-only",
     reviewStatus: "prototype",
     reviewer: "Vayushi",
   },

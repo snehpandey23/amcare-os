@@ -2,8 +2,22 @@ import { evaluateSimulatorSession, type SimMessage } from "@/lib/patient-drill/e
 
 /** Legacy single-box Writing (patient-communication bank). */
 const LEGACY_MIN_WORDS = 40;
-/** Two-part clinical Writing — per box. */
+/** Two-part clinical Writing — per box. Listening single-response uses escalation min. */
 export const WRITING_PART_MIN_WORDS = 25;
+/**
+ * Hard cap when text fails the substance floor (e.g. chart note = “thank you”).
+ * Must stay very low — deterministic/LLM blend must not rescue empty/non-clinical text.
+ */
+export const WRITING_EMPTY_SUBSTANCE_CAP = 12;
+/** Below this word count → automatic substance fail (unless richer clinical tokens somehow appear — still fail). */
+export const WRITING_SUBSTANCE_MIN_WORDS = 8;
+
+const COURTESY_ONLY =
+  /^(thanks|thank\s*you|thx|ty|ok|okay|sure|yes|no|noted|got\s*it|will\s*do|sounds\s*good)[\s.!,]*$/i;
+
+/** Lightweight clinical / ops tokens — absence + short courtesy text ⇒ non-clinical. */
+const CLINICAL_OR_OPS_TOKEN =
+  /\b(patient|pt\b|refill|rx|prescription|pharmacy|medication|meds?|dose|provider|doctor|clinician|chart|call(?:ed|back)?|voicemail|escalate|urgent|weekend|days?\s+left|controlled|stimulant|adderall|appointment|follow[\s-]?up|symptom|bp\b|vitals?|allergy|dob|mrn)\b/i;
 
 /** Jaccard token similarity at/above this → Part B treated as a chart-note copy, not an escalation. */
 export const WRITING_DUPLICATE_SIMILARITY_THRESHOLD = 0.85;
@@ -23,16 +37,72 @@ export type WritingDeterministic = {
 
 export type WritingPartId = "chart" | "escalation";
 
+export type WritingSubstanceAssessment = {
+  ok: boolean;
+  wordCount: number;
+  reason: string;
+};
+
+/**
+ * Substance floor: word count AND clinical/ops relevance — not length alone.
+ * “thank you” / empty / courtesy-only → fail (trust-breaker fix from Listening review).
+ */
+export function assessWritingSubstance(text: string): WritingSubstanceAssessment {
+  const trimmed = (text || "").trim();
+  const words = trimmed ? trimmed.split(/\s+/).filter(Boolean) : [];
+  const wordCount = words.length;
+  if (!trimmed || wordCount === 0) {
+    return { ok: false, wordCount: 0, reason: "Empty response — no clinical documentation substance." };
+  }
+  if (COURTESY_ONLY.test(trimmed)) {
+    return {
+      ok: false,
+      wordCount,
+      reason: "Courtesy-only text (e.g. “thank you”) — not a clinical chart or provider note.",
+    };
+  }
+  if (wordCount < WRITING_SUBSTANCE_MIN_WORDS) {
+    return {
+      ok: false,
+      wordCount,
+      reason: `Near-empty (${wordCount} words; need about ${WRITING_SUBSTANCE_MIN_WORDS}+ with clinical/ops content).`,
+    };
+  }
+  if (!CLINICAL_OR_OPS_TOKEN.test(trimmed)) {
+    return {
+      ok: false,
+      wordCount,
+      reason: "No clinical/ops content detected — response does not look like chart or provider documentation.",
+    };
+  }
+  return { ok: true, wordCount, reason: "Passes substance floor (length + clinical/ops signals)." };
+}
+
 function scoreLengthAndGrammar(text: string, minWords: number, noteLabel: string): WritingDeterministic {
   const words = text.trim().split(/\s+/).filter(Boolean);
   const wordCount = text.trim() ? words.length : 0;
   const meetsLength = wordCount >= minWords;
+  const substance = assessWritingSubstance(text);
   const fake: SimMessage[] = [
     { who: "patient", text: "Please rewrite this workplace note." },
     { who: "you", text: text.trim() || "" },
   ];
   const fb = evaluateSimulatorSession(fake);
   const issues = fb.grammarIssues.map((g) => g.detail || g.kinds.join(", "));
+  if (!substance.ok) {
+    const score = Math.min(
+      WRITING_EMPTY_SUBSTANCE_CAP,
+      Math.round((wordCount / Math.max(minWords, 1)) * WRITING_EMPTY_SUBSTANCE_CAP),
+    );
+    return {
+      wordCount,
+      meetsLength: false,
+      grammarScore: fb.grammarScore,
+      issues: [...issues, substance.reason],
+      score,
+      note: `Deterministic (${noteLabel}) — substance floor failed: ${substance.reason} Score capped at ${WRITING_EMPTY_SUBSTANCE_CAP}/100.`,
+    };
+  }
   const lengthPart = meetsLength ? 100 : Math.round((wordCount / minWords) * 100);
   const score = Math.round(lengthPart * 0.5 + fb.grammarScore * 0.5);
   return {
@@ -54,12 +124,28 @@ export function scoreWritingPartDeterministic(text: string, part: WritingPartId)
   return scoreLengthAndGrammar(text, WRITING_PART_MIN_WORDS, label);
 }
 
-export function blendWritingScore(deterministic: number, llm: number | null): {
+/** Cap when LLM estimate is missing — never present deterministic-only as a full 100. */
+export const WRITING_DETERMINISTIC_ONLY_CAP = 68;
+
+export function blendWritingScore(
+  deterministic: number,
+  llm: number | null,
+  opts?: { substanceOk?: boolean },
+): {
   score: number;
   note: string;
   /** True when LLM estimate was unavailable — score is grammar/length only and capped. */
   partial: boolean;
 } {
+  const substanceOk = opts?.substanceOk !== false;
+  if (!substanceOk) {
+    const score = Math.min(deterministic, WRITING_EMPTY_SUBSTANCE_CAP);
+    return {
+      score,
+      note: `Substance floor failed — score capped at ${WRITING_EMPTY_SUBSTANCE_CAP}/100. LLM estimate is not allowed to rescue empty or non-clinical text.`,
+      partial: llm == null,
+    };
+  }
   if (llm == null) {
     const score = Math.min(deterministic, WRITING_DETERMINISTIC_ONLY_CAP);
     return {
@@ -74,9 +160,6 @@ export function blendWritingScore(deterministic: number, llm: number | null): {
     partial: false,
   };
 }
-
-/** Cap when LLM estimate is missing — never present deterministic-only as a full 100. */
-export const WRITING_DETERMINISTIC_ONLY_CAP = 68;
 
 /** Founder default 2026-09-12: 50/50 Part A / Part B — revisit after real attempt data. */
 export const WRITING_PART_WEIGHT_A = 0.5;
@@ -117,6 +200,43 @@ export function escalationLooksLikeAsk(text: string): boolean {
     /\bbefore your next (visit|refill)\b/i.test(t) ||
     /\bif anything else could be done\b/i.test(t)
   );
+}
+
+/**
+ * Score a single Listening provider-message response (no chart half).
+ * Applies substance floor + ask hint cap (no chart duplicate check).
+ */
+export function scoreListeningProviderMessage(args: {
+  text: string;
+  llmEstimate: number | null;
+}): {
+  score: number;
+  det: WritingDeterministic;
+  substance: WritingSubstanceAssessment;
+  missingAsk: boolean;
+  note: string;
+  partial: boolean;
+} {
+  const det = scoreWritingPartDeterministic(args.text, "escalation");
+  const substance = assessWritingSubstance(args.text);
+  const blend = blendWritingScore(det.score, args.llmEstimate, { substanceOk: substance.ok });
+  const missingAsk = !escalationLooksLikeAsk(args.text);
+  let score = blend.score;
+  const notes = [det.note, blend.note];
+  if (substance.ok && missingAsk) {
+    score = Math.min(score, WRITING_MISSING_ASK_PART_B_CAP);
+    notes.push(
+      `Provider message missing an explicit ask; capped at ${WRITING_MISSING_ASK_PART_B_CAP}.`,
+    );
+  }
+  return {
+    score,
+    det,
+    substance,
+    missingAsk,
+    note: notes.filter(Boolean).join(" "),
+    partial: blend.partial,
+  };
 }
 
 export function normalizeWritingCompareText(text: string): string {

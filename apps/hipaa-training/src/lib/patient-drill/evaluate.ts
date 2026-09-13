@@ -218,7 +218,44 @@ export type RelevanceTurnResult = {
   /** 0–1 engagement for this turn */
   score: number;
   reason: string;
+  /** Trainee-facing explanation when score is low — plain language, not just the numeric score. */
+  humanNote?: string;
 };
+
+const ASK_TYPE_PLAIN: Record<PatientAskType, string> = {
+  timeline: "timeline / how-long question",
+  process: "process / steps question",
+  scheduling: "scheduling question",
+  clarification: "clarification question",
+  emotional: "emotional concern",
+  general: "question",
+};
+
+/** Plain-language note for a weak relevance turn (for feedback UI). */
+export function plainLanguageRelevanceNote(
+  turn: Pick<RelevanceTurnResult, "askType" | "score" | "reason">,
+  turnIndex: number,
+): string | undefined {
+  if (turn.score >= 0.5) return undefined;
+  const ask = ASK_TYPE_PLAIN[turn.askType] || "question";
+  const turnLabel = `turn ${turnIndex + 1}`;
+  if (turn.reason.toLowerCase().includes("empty")) {
+    return `You left reply ${turnLabel} empty — nothing addressed the patient's ${ask}.`;
+  }
+  if (turn.reason.toLowerCase().includes("generic non-answer")) {
+    return `You didn't directly answer the ${ask} the patient asked on ${turnLabel} (reply was a generic non-answer like “ok/sure/thanks”).`;
+  }
+  if (turn.reason.toLowerCase().includes("not") && turn.reason.toLowerCase().includes("shaped")) {
+    return `You didn't directly answer the ${ask} the patient asked on ${turnLabel} — your reply was substantive but off-shape for what they asked.`;
+  }
+  if (turn.reason.toLowerCase().includes("thin") || turn.reason.toLowerCase().includes("off-shape")) {
+    return `You didn't directly answer the ${ask} the patient asked on ${turnLabel} — the reply was too thin or off-shape.`;
+  }
+  if (turn.reason.toLowerCase().includes("filler")) {
+    return `You didn't directly answer the ${ask} the patient asked on ${turnLabel} — filler acknowledgment without answering the ask.`;
+  }
+  return `You didn't directly answer the ${ask} the patient asked on ${turnLabel}. (${turn.reason})`;
+}
 
 /**
  * Score one MA reply against the preceding patient turn.
@@ -230,32 +267,22 @@ export function scoreRelevanceTurn(patientText: string, maReply: string): Releva
   const patientExcerpt = (patientText || "").trim().slice(0, 72);
   const replyExcerpt = reply.slice(0, 72);
 
+  const base = (score: number, reason: string): RelevanceTurnResult => ({
+    askType,
+    patientExcerpt,
+    replyExcerpt,
+    score,
+    reason,
+  });
+
   if (!reply) {
-    return {
-      askType,
-      patientExcerpt,
-      replyExcerpt,
-      score: 0,
-      reason: "Empty reply",
-    };
+    return base(0, "Empty reply");
   }
   if (CURT_MARKERS.test(reply)) {
-    return {
-      askType,
-      patientExcerpt,
-      replyExcerpt,
-      score: 0,
-      reason: "Dismissive / curt — not engaged",
-    };
+    return base(0, "Dismissive / curt — not engaged");
   }
   if (isGenericNonAnswer(reply)) {
-    return {
-      askType,
-      patientExcerpt,
-      replyExcerpt,
-      score: 0,
-      reason: "Generic non-answer (e.g. “ok sure”) — does not address the ask",
-    };
+    return base(0, "Generic non-answer (e.g. “ok sure”) — does not address the ask");
   }
 
   const substantive = wordCount(reply) >= 8;
@@ -265,51 +292,21 @@ export function scoreRelevanceTurn(patientText: string, maReply: string): Releva
 
   // “okay sure, …” that never answers the ask — treat as gaming / non-engagement
   if (fillerLead && !matched) {
-    return {
-      askType,
-      patientExcerpt,
-      replyExcerpt,
-      score: substantive ? 0.2 : 0,
-      reason: "Filler ack without answering the ask (e.g. “ok sure” + off-topic)",
-    };
+    return base(substantive ? 0.2 : 0, "Filler ack without answering the ask (e.g. “ok sure” + off-topic)");
   }
 
   // Greeting-only / thin ack with a trailing half-question still weak for a real ask
   if (!substantive && !matched) {
-    return {
-      askType,
-      patientExcerpt,
-      replyExcerpt,
-      score: 0.15,
-      reason: "Too thin / off-shape for this ask type",
-    };
+    return base(0.15, "Too thin / off-shape for this ask type");
   }
   if (matched && substantive) {
-    return {
-      askType,
-      patientExcerpt,
-      replyExcerpt,
-      score: 1,
-      reason: `On-topic ${askType}-shaped answer`,
-    };
+    return base(1, `On-topic ${askType}-shaped answer`);
   }
   if (matched && !substantive) {
-    return {
-      askType,
-      patientExcerpt,
-      replyExcerpt,
-      score: 0.55,
-      reason: `Partially ${askType}-shaped but thin`,
-    };
+    return base(0.55, `Partially ${askType}-shaped but thin`);
   }
   // Substantive but wrong shape — some engagement, not what was asked
-  return {
-    askType,
-    patientExcerpt,
-    replyExcerpt,
-    score: 0.35,
-    reason: `Substantive but not ${askType}-shaped (may be off-topic)`,
-  };
+  return base(0.35, `Substantive but not ${askType}-shaped (may be off-topic)`);
 }
 
 export type SimMessage = {
@@ -351,12 +348,22 @@ export function scoreRelevanceSession(messages: SimMessage[]): {
     }
   }
   const n = turns.length;
-  const score = n > 0 ? Math.round((turns.reduce((s, t) => s + t.score, 0) / n) * 100) : 0;
+  const scoredTurns = turns.map((t, i) => {
+    const humanNote = plainLanguageRelevanceNote(t, i);
+    return humanNote ? { ...t, humanNote } : t;
+  });
+  const score = n > 0 ? Math.round((scoredTurns.reduce((s, t) => s + t.score, 0) / n) * 100) : 0;
+  const weakNotes = scoredTurns.map((t) => t.humanNote).filter(Boolean) as string[];
+  const plainSummary =
+    weakNotes.length > 0
+      ? ` Low-relevance detail: ${weakNotes.slice(0, 2).join(" ")}`
+      : "";
   return {
     score,
-    turns,
+    turns: scoredTurns,
     note:
-      "Relevance / engagement (estimate) — checks whether each reply is substantive and shape-matched to what the patient just asked (timeline → time-shaped, process → steps, etc.). Not a full meaning judge / LLM. Generic non-answers like “ok sure” score low. Does not measure clinical correctness (see safety tiers).",
+      "Relevance / engagement (estimate) — checks whether each reply is substantive and shape-matched to what the patient just asked (timeline → time-shaped, process → steps, etc.). Not a full meaning judge / LLM. Generic non-answers like “ok sure” score low. Does not measure clinical correctness (see safety tiers)." +
+      plainSummary,
   };
 }
 

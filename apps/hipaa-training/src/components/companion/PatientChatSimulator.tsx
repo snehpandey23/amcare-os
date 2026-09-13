@@ -153,12 +153,15 @@ export function PatientChatSimulator({
     maxTurns?: number;
     /** When true, end the chat using the same finishSession path as turn-cap (exam wall clock). */
     forceComplete?: boolean;
+    /** Competency exam lanes — locks Type/Speak toggle. */
+    inputModality?: ReplyMode;
     onComplete: (feedback: SimulatorFeedback) => void;
   };
 } = {}) {
   const { token } = useAuth();
   const turnCap = examMode?.maxTurns ?? MAX_MA_TURNS;
   const examDoneRef = useRef(false);
+  const lockedModality = examMode?.inputModality;
   const [phase, setPhase] = useState<Phase>("pick");
   const [persona, setPersona] = useState<Persona | null>(null);
   const [showCustom, setShowCustom] = useState(false);
@@ -175,7 +178,7 @@ export function PatientChatSimulator({
   const [showTranscript, setShowTranscript] = useState(false);
   /** Hide conclude offer until the next completed exchange. */
   const [concludeDismissedAtTurn, setConcludeDismissedAtTurn] = useState(0);
-  const [replyMode, setReplyMode] = useState<ReplyMode>("typed");
+  const [replyMode, setReplyMode] = useState<ReplyMode>(lockedModality ?? "typed");
   const [speakRecording, setSpeakRecording] = useState(false);
   const [speakBusy, setSpeakBusy] = useState(false);
   const [speakError, setSpeakError] = useState<string | null>(null);
@@ -349,8 +352,14 @@ export function PatientChatSimulator({
     setSavedTranscript([]);
     setShowTranscript(false);
     setConcludeDismissedAtTurn(0);
+    if (examMode.inputModality) setReplyMode(examMode.inputModality);
     setPhase("chat");
   }, [examMode]);
+
+  useEffect(() => {
+    if (!lockedModality) return;
+    setReplyMode(lockedModality);
+  }, [lockedModality]);
 
   // Exam wall-clock (owned by CompetencyExam) — same finishSession as turn-cap, not a parallel score path.
   useEffect(() => {
@@ -837,8 +846,23 @@ export function PatientChatSimulator({
                 .slice(0, 4)
                 .map(({ t, i }) => (
                   <li key={`rel-${i}-${t.replyExcerpt}`}>
-                    Reply {i + 1} ({t.askType}): {t.reason}
-                    {t.replyExcerpt ? ` — “${t.replyExcerpt}${t.replyExcerpt.length >= 72 ? "…" : ""}”` : ""}
+                    {t.humanNote ? (
+                      <>
+                        <span className="font-medium text-[var(--siya-primary)]">{t.humanNote}</span>
+                        {t.replyExcerpt ? (
+                          <span className="text-[var(--siya-text-secondary)]">
+                            {" "}
+                            — “{t.replyExcerpt}
+                            {t.replyExcerpt.length >= 72 ? "…" : ""}”
+                          </span>
+                        ) : null}
+                      </>
+                    ) : (
+                      <>
+                        Reply {i + 1} ({t.askType}): {t.reason}
+                        {t.replyExcerpt ? ` — “${t.replyExcerpt}${t.replyExcerpt.length >= 72 ? "…" : ""}”` : ""}
+                      </>
+                    )}
                   </li>
                 ))}
             </ul>
@@ -1019,6 +1043,12 @@ export function PatientChatSimulator({
         <div className="mx-auto max-w-3xl space-y-2">
           <div className="flex flex-wrap items-center gap-2 text-xs">
             <span className="font-semibold text-[var(--siya-text-secondary)]">Reply by</span>
+            {lockedModality ? (
+              <span className="rounded-full bg-[var(--siya-primary)] px-3 py-1 font-semibold text-white">
+                {lockedModality === "spoken" ? "Speak (exam lane)" : "Type (exam lane)"}
+              </span>
+            ) : (
+              <>
             <button
               type="button"
               disabled={streaming || speakRecording || speakBusy || Boolean(speakDraft)}
@@ -1050,6 +1080,8 @@ export function PatientChatSimulator({
             >
               Speak
             </button>
+              </>
+            )}
             <span className="text-[var(--siya-text-muted)]">Turn-based · not live two-way</span>
           </div>
 
@@ -1140,8 +1172,11 @@ export function PatientChatSimulator({
                     <button
                       type="button"
                       className="rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-3.5 py-2 text-sm font-medium text-[var(--siya-primary)]"
-                      disabled={streaming || speakRecording || speakBusy}
-                      onClick={() => setReplyMode("typed")}
+                      disabled={streaming || speakRecording || speakBusy || Boolean(lockedModality)}
+                      onClick={() => {
+                        if (lockedModality) return;
+                        setReplyMode("typed");
+                      }}
                     >
                       Switch to type
                     </button>

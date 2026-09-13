@@ -34,7 +34,7 @@ export function buildExamReport(args: {
     pointsPossible,
     partial: true,
     partialNote:
-      "Partial exam. Culture/language is held until a reviewed MCQ bank exists. Listening and reading accuracy are not in this pass. This total is not the full 100-point competency score and does not decide employment, pay, or certification.",
+      "Human-reviewed competency sitting. Combined MCQ may include draft clinical/trivia items until banks are cleared. This total does not decide employment, pay, or certification.",
     humanReviewRequired: true,
     employmentDecision: false,
     sections: args.sections,

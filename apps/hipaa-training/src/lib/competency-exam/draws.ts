@@ -3,6 +3,7 @@ import { MODULES } from "@/content/modules";
 import { buildFinalExam } from "@/lib/quizEngine";
 import passages from "@/data/level-up/typing-passages.json";
 import type { TypingPassage } from "@/lib/level-up/typing-drill";
+import type { Question } from "@/lib/types";
 import { CHAT_EXAM_BRIEFS, type ChatExamBrief } from "@/content/competency-exam/chat-briefs.draft";
 import { WRITING_PROMPTS, type WritingPrompt } from "@/content/competency-exam/writing-prompts.draft";
 import {
@@ -10,34 +11,120 @@ import {
   type ClinicalWritingPrompt,
 } from "@/content/competency-exam/writing-clinical-prompts.draft";
 import { LISTENING_PROMPTS } from "@/content/competency-exam/listening-prompts.draft";
+import { clinicalKnowledgeDraftAsQuestions } from "@/content/competency-exam/clinical-knowledge-bank.draft";
+import { cultureDraftAsQuestions } from "@/lib/competency-exam/mcq-adapters";
 import { drawUnseen, type SeenEntry } from "./seen-set";
 
 const TYPING = passages as TypingPassage[];
 
+/** Combined MCQ sitting size (HIPAA + clinical knowledge + trivia/culture). */
+export const MCQ_EXAM_COUNT = 40;
+/** Legacy HIPAA-only draw size (isolated review / transition). */
 export const HIPAA_EXAM_COUNT = 20;
 export const CULTURE_READY_MIN = 25;
+
+/** Target mix inside a 40-item Combined MCQ draw. */
+export const MCQ_MIX = {
+  hipaa: 20,
+  clinical: 10,
+  trivia: 10,
+} as const;
 
 export function drawTypingPassage(seen: SeenEntry[], seed: number) {
   return drawUnseen(TYPING, seen, 1, seed, "typing");
 }
 
-/** Primary Writing path — clinical two-part documentation + escalation. */
+/** @deprecated Writing removed from live exam — kept for legacy content / smokes. */
 export function drawWritingPrompt(seen: SeenEntry[], seed: number) {
   return drawUnseen(WRITING_CLINICAL_PROMPTS, seen, 1, seed, "writing");
 }
 
-/** Supplemental patient-communication bank (kept; not the default exam draw). */
+/** Supplemental patient-communication bank (not live exam). */
 export function drawWritingPatientPrompt(seen: SeenEntry[], seed: number) {
   return drawUnseen(WRITING_PROMPTS, seen, 1, seed, "writing");
 }
 
-/** Isolated Listening review — voicemail → same clinical two-part write-up as Writing. */
+/** Isolated Listening — voicemail → single provider message. */
 export function drawListeningPrompt(seen: SeenEntry[], seed: number) {
   return drawUnseen(LISTENING_PROMPTS, seen, 1, seed, "listening");
 }
 
 export function drawChatBrief(seen: SeenEntry[], seed: number) {
   return drawUnseen(CHAT_EXAM_BRIEFS, seen, 1, seed, "chat-sim");
+}
+
+function fillFromPool(
+  pool: Question[],
+  seen: SeenEntry[],
+  count: number,
+  seed: number,
+  poolKey: string,
+): { items: Question[]; repeatedIds: string[] } {
+  if (count <= 0 || pool.length === 0) return { items: [], repeatedIds: [] };
+  const draw = drawUnseen(pool, seen, Math.min(count, pool.length), seed, poolKey);
+  return { items: draw.items, repeatedIds: draw.repeatedIds };
+}
+
+/**
+ * Combined MCQ: mix HIPAA live bank + clinical-knowledge draft + culture/trivia draft.
+ * Anti-repeat uses per-pool seen keys (hipaa / clinical-knowledge / culture).
+ * Draft pools mark the sitting as draftContent until reviewers clear items.
+ */
+export function drawCombinedMcqExam(
+  seen: SeenEntry[],
+  seed: number,
+): {
+  questions: Question[];
+  repeatedIds: string[];
+  mix: { hipaa: number; clinical: number; trivia: number };
+  draftPools: Array<"clinical-knowledge" | "culture">;
+} {
+  const hipaaPool = ALL_QUESTIONS;
+  const clinicalPool = clinicalKnowledgeDraftAsQuestions();
+  const triviaPool = cultureDraftAsQuestions();
+
+  let hipaaN = MCQ_MIX.hipaa;
+  let clinicalN = Math.min(MCQ_MIX.clinical, clinicalPool.length);
+  let triviaN = Math.min(MCQ_MIX.trivia, triviaPool.length);
+  // If draft pools are short, give leftover seats to HIPAA so we still hit 40 when possible.
+  const shortfall = MCQ_EXAM_COUNT - (hipaaN + clinicalN + triviaN);
+  if (shortfall > 0) hipaaN += shortfall;
+
+  const hipaa = fillFromPool(hipaaPool, seen, hipaaN, seed + 11, "hipaa");
+  const clinical = fillFromPool(clinicalPool, seen, clinicalN, seed + 29, "clinical-knowledge");
+  const trivia = fillFromPool(triviaPool, seen, triviaN, seed + 47, "culture");
+
+  const questions = [...hipaa.items, ...clinical.items, ...trivia.items];
+  // Stable shuffle of the combined list so topics interleave on the form.
+  const shuffled = shuffleQuestions(questions, seed + 99).slice(0, MCQ_EXAM_COUNT);
+  const repeatedIds = [...hipaa.repeatedIds, ...clinical.repeatedIds, ...trivia.repeatedIds].filter((id) =>
+    shuffled.some((q) => q.id === id),
+  );
+  const draftPools: Array<"clinical-knowledge" | "culture"> = [];
+  if (clinical.items.length) draftPools.push("clinical-knowledge");
+  if (trivia.items.length) draftPools.push("culture");
+
+  return {
+    questions: shuffled,
+    repeatedIds,
+    mix: {
+      hipaa: shuffled.filter((q) => hipaa.items.some((h) => h.id === q.id)).length,
+      clinical: shuffled.filter((q) => clinical.items.some((h) => h.id === q.id)).length,
+      trivia: shuffled.filter((q) => trivia.items.some((h) => h.id === q.id)).length,
+    },
+    draftPools,
+  };
+}
+
+function shuffleQuestions<T>(arr: T[], seed: number): T[] {
+  const a = [...arr];
+  let s = seed || 1;
+  for (let i = a.length - 1; i > 0; i--) {
+    s = (s * 1664525 + 1013904223) >>> 0;
+    const j = s % (i + 1);
+    [a[i], a[j]] = [a[j]!, a[i]!];
+  }
+  return a;
 }
 
 /**

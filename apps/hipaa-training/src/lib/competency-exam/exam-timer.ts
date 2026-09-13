@@ -43,7 +43,13 @@ export type ExamTimerHudModel = {
 
 export const COMPETENCY_EXAM_TIMERS = {
   typing: 120,
-  hipaa: 12 * 60,
+  /** Combined MCQ (40 items) — HIPAA was 12 min / 20; scaled for 40. */
+  mcq: 20 * 60,
+  /** @deprecated use mcq */
+  hipaa: 20 * 60,
+  /** Listening single provider-message response */
+  listening: 10 * 60,
+  /** @deprecated Writing removed — timer kept for any leftover paths */
   writing: 10 * 60,
   /** Exam-only wall clock for chat-sim (practice still uses turn cap only). */
   chat: 10 * 60,
