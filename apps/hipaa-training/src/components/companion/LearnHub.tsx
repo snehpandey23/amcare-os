@@ -12,6 +12,8 @@ import { loadLocalProgress } from "@/lib/progressStorage";
 import { GrowthPillars } from "@/components/companion/GrowthPillars";
 import { MySopOwnershipNotice } from "@/components/sops/MySopOwnershipNotice";
 import { PortalNavLink } from "@/components/training/PortalNavLink";
+import { useAuth } from "@/context/AuthContext";
+import { isPortalAdmin } from "@/lib/portal-role";
 import {
   portalCard,
   portalH1,
@@ -36,6 +38,8 @@ const DRILL_LINKS = [
 ];
 
 export function LearnHub() {
+  const { user } = useAuth();
+  const isAdmin = isPortalAdmin(user?.role);
   const [level, setLevel] = useState<LevelUpProgress | null>(null);
   const [modulesDone, setModulesDone] = useState(0);
   const [moduleTotal, setModuleTotal] = useState(MODULES.length);
@@ -153,6 +157,16 @@ export function LearnHub() {
               </Link>
             </li>
           ))}
+          {isAdmin ? (
+            <li>
+              <Link
+                href="/learn/spoken-calibration"
+                className="rounded-full border border-[var(--siya-accent)] bg-[var(--siya-bg-page)] px-3 py-1.5 text-xs font-medium text-[var(--siya-accent)] hover:bg-[var(--siya-accent)] hover:text-white"
+              >
+                Spoken scoring calibration (admin)
+              </Link>
+            </li>
+          ) : null}
         </ul>
       </section>
 

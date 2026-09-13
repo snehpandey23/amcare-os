@@ -499,6 +499,25 @@ export function isPoliteMessage(text: string): boolean {
   return false;
 }
 
+/** Which politeness / courtesy signals fired (for calibration inspection). */
+export function detectPolitenessMarkers(text: string): string[] {
+  const t = (text || "").trim();
+  if (!t) return [];
+  const hits: string[] = [];
+  if (CURT_MARKERS.test(t)) {
+    hits.push("curt/dismissive marker (blocks politeness)");
+    return hits;
+  }
+  const lower = t.toLowerCase();
+  for (const p of POLITENESS_PHRASES) {
+    if (lower.includes(p)) hits.push(`phrase: “${p}”`);
+  }
+  if (WARM_GREETING.test(t)) hits.push("warm greeting pattern");
+  if (ACK_MARKERS.test(t)) hits.push("acknowledgment marker");
+  if (HELP_MARKERS.test(t)) hits.push("helpfulness marker");
+  return hits;
+}
+
 export type ClinicalAccuracyHit = {
   /** Index among MA replies (same order as relevanceTurns). */
   replyIndex: number;
