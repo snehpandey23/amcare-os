@@ -26,6 +26,40 @@ function empty(): LevelUpProgress {
 assert.equal(HIGH_URGENCY_CLINICAL_SIGN_OFF.status, "signed");
 console.log("ok: high-urgency triage clinically signed");
 
+// --- 0. Red flag: bribery / personal-payment solicitation (coverage audit) ---
+{
+  const bribeCases = [
+    "you can pay me some money via venmo and i can see what to do",
+    "just transfer some money to my account and i will take care of it",
+    "transfer money to my account",
+    "pay me via venmo and I'll expedite this",
+    "venmo me and I'll see what I can do",
+    "send me money on zelle and I'll put you first",
+    "send me a gift card and I'll rush your refill",
+    "give me some cash under the table",
+    "I'll pay you if you get me the rx",
+  ];
+  for (const latestMaText of bribeCases) {
+    const r = evaluateTurnSafety({
+      history: [{ role: "assistant", content: "Can you help me get this done faster?" }],
+      latestMaText,
+    });
+    assert.equal(r.action, "stop", `expected hard stop for: ${latestMaText}`);
+    if (r.action === "stop") {
+      assert.equal(r.stop.kind, "red_flag");
+      assert.equal(r.stop.redFlagged, true);
+      assert.ok(r.stop.reasons.includes("bribe_or_money"), `bribe_or_money missing for: ${latestMaText}`);
+    }
+  }
+  // Clinic billing must not hard-stop
+  const legit = evaluateTurnSafety({
+    history: [{ role: "assistant", content: "How do I pay my balance?" }],
+    latestMaText: "You can pay your invoice through the patient portal payment link.",
+  });
+  assert.equal(legit.action, "continue", "portal invoice payment must not be bribe_or_money");
+  console.log("ok: red-flag bribery / personal-payment solicitation (incl. venmo + transfer money)");
+}
+
 // --- 1. Red flag: clinical decision / promising meds (Emma-style) ---
 {
   const r = evaluateTurnSafety({
@@ -45,6 +79,27 @@ console.log("ok: high-urgency triage clinically signed");
     assert.ok(r.stop.reasons.includes("clinical_decision_making"));
   }
   console.log("ok: red-flag clinical decision / meds promise");
+}
+
+// --- 1a. Red flag: unapproved meds/refill promises (phrasing coverage) ---
+{
+  const clinicalCases = [
+    "you can get you meds within 30 minutes",
+    "I can get you Adderall today",
+    "meds in 30 minutes no problem",
+    "I'll authorize your refill right now",
+  ];
+  for (const latestMaText of clinicalCases) {
+    const r = evaluateTurnSafety({
+      history: [{ role: "assistant", content: "How soon can I get medication?" }],
+      latestMaText,
+    });
+    assert.equal(r.action, "stop", `expected clinical hard stop for: ${latestMaText}`);
+    if (r.action === "stop") {
+      assert.ok(r.stop.reasons.includes("clinical_decision_making"), latestMaText);
+    }
+  }
+  console.log("ok: red-flag unapproved prescribing / refill promise phrasing");
 }
 
 // --- 1b. Red flag: missed high-urgency triage ---
@@ -198,6 +253,40 @@ console.log("ok: placeholder redirect set marked");
   assert.equal(flagged[0]!.chatSim?.personaName, "Emma");
   assert.equal(listChatSimSessions(p).length, 2);
   console.log("ok: Ops-queryable red-flag session in day ledger");
+}
+
+// --- Ops retroactive: saved completed session with bribe in transcript surfaces after detector upgrade ---
+{
+  let p = empty();
+  p = applyDailyComplete(p, "patientChat", {
+    date: "2026-09-13",
+    now: Date.parse("2026-09-13T02:00:00Z"),
+    chatSim: {
+      personaId: "persona-michael",
+      personaName: "Michael",
+      outcome: "completed",
+      redFlagged: false,
+      safetyReasons: [],
+      transcript: [
+        { who: "Michael", text: "I need help with focus. How soon can I get this done?" },
+        {
+          who: "you",
+          text: "you can pay me some money via venmo and i can see what to do",
+        },
+      ],
+      transcriptVersion: 1,
+    },
+  });
+  // Stored as completed/false — Ops list re-scans transcript and promotes.
+  assert.equal(p.dayLedger?.[0]?.chatSim?.redFlagged, false, "stored ledger row remains as saved");
+  const review = listChatSimSessions(p, { reviewOutcomesOnly: true });
+  assert.equal(review.length, 1, "transcript re-scan must promote missed bribe into Ops review");
+  assert.equal(review[0]!.chatSim?.redFlagged, true);
+  assert.ok(review[0]!.chatSim?.safetyReasons?.includes("bribe_or_money"));
+  const flagged = listChatSimSessions(p, { redFlaggedOnly: true });
+  assert.equal(flagged.length, 1);
+  assert.equal(flagged[0]!.chatSim?.redFlagged, true);
+  console.log("ok: Ops retroactive reclassify from saved transcript (venmo bribe)");
 }
 
 // --- Clinical opinion on dose (Janet-style trap) ---

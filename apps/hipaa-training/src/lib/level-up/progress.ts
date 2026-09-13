@@ -1,5 +1,9 @@
 import { scheduleLevelUpRemoteSave } from "@/lib/level-up/progress-api";
-import { SCREENING_AS_DIAGNOSIS_LABEL, SCREENING_AS_DIAGNOSIS_REASON } from "@/lib/patient-drill/safety";
+import {
+  SCREENING_AS_DIAGNOSIS_LABEL,
+  SCREENING_AS_DIAGNOSIS_REASON,
+  classifyFromChatSimTranscript,
+} from "@/lib/patient-drill/safety";
 
 const KEY = "siya-level-up-v1";
 
@@ -83,6 +87,37 @@ export function buildChatSimTranscript(
 
 export function chatSimHasReviewableTranscript(meta: ChatSimLedgerMeta | undefined): boolean {
   return Boolean(meta?.transcript && meta.transcript.length > 0);
+}
+
+/**
+ * Re-run safety classification on a saved transcript (does not mutate storage).
+ * Lets Ops surface missed hard stops after detector upgrades when the transcript was kept.
+ */
+export function reclassifyChatSimMetaFromTranscript(
+  meta: ChatSimLedgerMeta | undefined,
+): ChatSimLedgerMeta | undefined {
+  if (!meta?.transcript?.length) return meta;
+  const classified = classifyFromChatSimTranscript(meta.transcript);
+  const reasons = [...new Set([...(meta.safetyReasons ?? []), ...classified.reasons])];
+  return {
+    ...meta,
+    outcome: classified.redFlagged
+      ? "red_flag"
+      : classified.outcome === "soft_stop"
+        ? "soft_stop"
+        : meta.outcome === "red_flag" && !classified.redFlagged
+          ? meta.outcome
+          : classified.outcome === "walk_away"
+            ? "walk_away"
+            : meta.outcome ?? classified.outcome,
+    redFlagged: Boolean(meta.redFlagged || classified.redFlagged),
+    safetyReasons: reasons,
+  };
+}
+
+/** Effective Ops meta: stored flags plus any hard-stop/soft-stop found by re-scanning the transcript. */
+export function effectiveChatSimMetaForOps(meta: ChatSimLedgerMeta | undefined): ChatSimLedgerMeta | undefined {
+  return reclassifyChatSimMetaFromTranscript(meta);
 }
 
 /** One logged drill event — day-wise history (not just running totals). */
@@ -226,8 +261,13 @@ export function chatSimHasModerateClinicalFlag(meta: ChatSimLedgerMeta | undefin
 
 /** Hard stops plus moderate clinical-accuracy flags — Ops review list. */
 export function isChatSimOpsReviewSession(meta: ChatSimLedgerMeta | undefined): boolean {
-  if (!meta) return false;
-  return meta.redFlagged === true || meta.outcome === "soft_stop" || chatSimHasModerateClinicalFlag(meta);
+  const effective = effectiveChatSimMetaForOps(meta);
+  if (!effective) return false;
+  return (
+    effective.redFlagged === true ||
+    effective.outcome === "soft_stop" ||
+    chatSimHasModerateClinicalFlag(effective)
+  );
 }
 
 /** Red-flagged / soft-stop / moderate clinical-accuracy / all chat-simulator sessions from the day ledger — Ops query. */
@@ -236,11 +276,17 @@ export function listChatSimSessions(
   opts?: { redFlaggedOnly?: boolean; reviewOutcomesOnly?: boolean },
 ): DayLedgerEntry[] {
   let rows = (p.dayLedger ?? []).filter((e) => e.drill === "patientChat" && e.chatSim);
-  if (opts?.redFlaggedOnly) rows = rows.filter((e) => e.chatSim?.redFlagged === true);
+  if (opts?.redFlaggedOnly) {
+    rows = rows.filter((e) => effectiveChatSimMetaForOps(e.chatSim)?.redFlagged === true);
+  }
   if (opts?.reviewOutcomesOnly) {
     rows = rows.filter((e) => isChatSimOpsReviewSession(e.chatSim));
   }
-  return rows;
+  return rows.map((e) => {
+    const effective = effectiveChatSimMetaForOps(e.chatSim);
+    if (!effective || effective === e.chatSim) return e;
+    return { ...e, chatSim: effective };
+  });
 }
 
 export type ChatSimRepeatPattern = {

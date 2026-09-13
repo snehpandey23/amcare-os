@@ -135,16 +135,65 @@ const ESCALATE_IF_WORSE_PATTERNS = [
   /seek\s+(emergency|urgent)\s+care/i,
 ];
 
+/**
+ * MA soliciting personal payment / bribes for care shortcuts.
+ * Concept: personal money to the MA (Venmo, Zelle, Cash App, gift cards, cash, “pay me”),
+ * not clinic invoice / portal billing language.
+ *
+ * Earlier gap: only patient→MA “I’ll pay you” / “under the table” matched. Real MA
+ * solicitation (“pay me via venmo”, “transfer money to my account”) did not.
+ */
 const BRIBE_MONEY_PATTERNS = [
+  // Patient-offer phrasing if MA echoes/accepts it in their own reply
   /i'?ll\s+(pay|venmo|zelle|cash|tip)\s+you/i,
   /pay\s+you\s+(extra|under\s+the\s+table)/i,
   /under\s+the\s+table/i,
-  /if\s+you\s+(just\s+)?(get|send|write)\s+(me\s+)?(the\s+)?(rx|prescription|adderall|meds)/i,
   /bribe/i,
+  // MA solicits personal payment (any channel)
+  /\b(pay|venmo|zelle|cash\s*app|cashapp|paypal|tip)\s+me\b/i,
+  /\byou\s+can\s+(pay|venmo|zelle|tip|send)\s+me\b/i,
+  /\bsend\s+me\s+(some\s+)?(money|cash)\b/i,
+  /\bsend\s+me\s+(a\s+)?gift\s*cards?\b/i,
+  /\bgift\s*cards?\s+(to\s+me|for\s+me)\b/i,
+  /\b(transfer|send|wire)\s+(some\s+)?(money|cash|funds|payment)\s+to\s+(my|me)\b/i,
+  /\b(transfer|send|wire)\s+to\s+my\s+(account|venmo|zelle|paypal|cash\s*app|cashapp)\b/i,
+  /\bgive\s+me\s+(some\s+)?(cash|money)\b/i,
+  /\b(pay|money|cash|tip|funds)\b.{0,48}\b(via|through|on|with)\s+(venmo|zelle|cash\s*app|cashapp|paypal)\b/i,
+  /\b(via|through|on|with)\s+(venmo|zelle|cash\s*app|cashapp|paypal)\b.{0,48}\b(pay|money|cash|tip|funds)\b/i,
+  // Care shortcut in exchange for personal pay
+  /if\s+you\s+(just\s+)?(get|send|write)\s+(me\s+)?(the\s+)?(rx|prescription|adderall|meds)/i,
+];
+
+/** Clinic / portal billing — must not trip bribe_or_money when there is no personal solicitation. */
+const LEGIT_CLINIC_PAYMENT_PATTERNS = [
+  /\b(patient\s+)?portal\b/i,
+  /\binvoice\b/i,
+  /\bbilling\s+(office|team|department)\b/i,
+  /\bpay\s+(your|the)\s+(bill|invoice|balance|copay|co-?pay)\b/i,
+  /\b(official|clinic|office)\s+(payment|billing)\b/i,
+  /\bpayment\s+link\b/i,
+];
+
+const PERSONAL_PAYMENT_SOLICIT_MARKERS = [
+  /\b(pay|venmo|zelle|cash\s*app|cashapp|paypal|tip)\s+me\b/i,
+  /\byou\s+can\s+(pay|venmo|zelle|tip|send)\s+me\b/i,
+  /\bsend\s+me\s+(some\s+)?(money|cash)\b/i,
+  /\bsend\s+me\s+(a\s+)?gift\s*cards?\b/i,
+  /\b(transfer|send|wire)\s+(some\s+)?(money|cash|funds|payment)\s+to\s+(my|me)\b/i,
+  /\b(transfer|send|wire)\s+to\s+my\s+(account|venmo|zelle|paypal|cash\s*app|cashapp)\b/i,
+  /\bgive\s+me\s+(some\s+)?(cash|money)\b/i,
+  /\bunder\s+the\s+table\b/i,
+  /\bbribe\b/i,
+  /\b(via|through|on|with)\s+(venmo|zelle|cash\s*app|cashapp|paypal)\b/i,
 ];
 
 const CLINICAL_DECISION_PATTERNS = [
   /i'?ll\s+(get|give|send|write)\s+you\s+(the\s+)?(adderall|prescription|rx|meds|medication)/i,
+  /i\s+can\s+(get|give|send|write)\s+you\s+(the\s+)?(adderall|prescription|rx|meds|medication)/i,
+  /you\s+can\s+get\s+(you|your|the)\s+(meds|medication|adderall|prescription|rx)\b/i,
+  /meds?\s+(within|in)\s+\d+\s*(minutes?|mins?|hours?)/i,
+  /i'?ll\s+authorize\s+(your|the)\s+refill/i,
+  /i\s+can\s+authorize\s+(your|the)\s+refill/i,
   /you\s+(can|should)\s+(start|take|increase|stop)\s+(the\s+)?(med|medication|adderall|dose)/i,
   /i\s+(can|will)\s+prescrib/i,
   /you\s+don'?t\s+need\s+(to\s+)?(see\s+)?(a\s+)?doctor/i,
@@ -252,9 +301,34 @@ export function hasModerateSymptoms(text: string): boolean {
   return MODERATE_SYMPTOM_PATTERNS.some((p) => p.test(text));
 }
 
+export function isBribeOrPersonalPaymentSolicitation(text: string): boolean {
+  const t = (text || "").trim();
+  if (!t) return false;
+  if (!BRIBE_MONEY_PATTERNS.some((p) => p.test(t))) return false;
+  const solicitsPersonal = PERSONAL_PAYMENT_SOLICIT_MARKERS.some((p) => p.test(t));
+  if (!solicitsPersonal && LEGIT_CLINIC_PAYMENT_PATTERNS.some((p) => p.test(t))) return false;
+  return true;
+}
+
+/**
+ * Rebuild safety classification from a saved transcript (Ops retroactive review).
+ * Role mapping matches the live sim: trainee = user, patient = assistant.
+ */
+export function classifyFromChatSimTranscript(
+  transcript: Array<{ who: string; text: string }>,
+): { outcome: SessionOutcome; reasons: SafetyReasonCode[]; redFlagged: boolean; notes: string[] } {
+  const history = transcript
+    .filter((t) => (t.text || "").trim())
+    .map((t) => ({
+      role: (t.who === "you" ? "user" : "assistant") as "user" | "assistant",
+      content: t.text,
+    }));
+  return classifyCompletedSession({ history });
+}
+
 export function detectMaMisconduct(text: string): SafetyReasonCode[] {
   const reasons: SafetyReasonCode[] = [];
-  if (BRIBE_MONEY_PATTERNS.some((p) => p.test(text))) reasons.push("bribe_or_money");
+  if (isBribeOrPersonalPaymentSolicitation(text)) reasons.push("bribe_or_money");
   if (CLINICAL_DECISION_PATTERNS.some((p) => p.test(text))) reasons.push("clinical_decision_making");
   if (UNAPPROVED_CLINICAL_PATTERNS.some((p) => p.test(text))) reasons.push("unapproved_clinical_info");
   if (ABUSE_PATTERNS.some((p) => p.test(text))) reasons.push("abuse");
