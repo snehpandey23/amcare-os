@@ -3,13 +3,15 @@
  * No attempt persistence, no seen-set, no day ledger.
  */
 
-  import {
+import {
+  assessReplyCoherence,
   detectPolitenessMarkers,
   evaluateSimulatorSession,
   grammarIssuesForMessage,
-  isPoliteMessage,
+  INCOHERENT_REPLY_LABEL,
   normalizeSpeechDisfluencyForGrammar,
   plainLanguageRelevanceNote,
+  scorePolitenessMessage,
   scoreRelevanceTurn,
   type GrammarIssueKind,
   type RelevanceTurnResult,
@@ -52,6 +54,8 @@ export type SpokenCalibrationResult = {
     score: number;
     markers: string[];
     isPolite: boolean;
+    /** Blaming/scolding constructions — when set, score is forced low. */
+    toneFlags: string[];
     note: string;
   };
   relevance: {
@@ -90,12 +94,13 @@ export function runSpokenCalibration(input: SpokenCalibrationInput): SpokenCalib
   const sttRaw = (input.sttRaw || "").trim();
   const patientAsk = (input.patientAsk || "").trim();
   const stripped = normalizeSpeechDisfluencyForGrammar(confirmedText);
+  const coherence = assessReplyCoherence(confirmedText);
   const grammarHit = grammarIssuesForMessage(confirmedText);
   const grammarScore = grammarHit.kinds.length === 0 && confirmedText ? 100 : confirmedText ? 0 : 0;
 
   const markers = detectPolitenessMarkers(confirmedText);
-  const polite = isPoliteMessage(confirmedText);
-  const politenessScore = confirmedText ? (polite ? 100 : 0) : 0;
+  const polite = scorePolitenessMessage(confirmedText);
+  const politenessScore = confirmedText ? polite.score : 0;
 
   let relevance: SpokenCalibrationResult["relevance"];
   if (!patientAsk) {
@@ -178,13 +183,19 @@ export function runSpokenCalibration(input: SpokenCalibrationInput): SpokenCalib
           ? [{ kinds: grammarHit.kinds, detail: grammarHit.detail, excerpt: confirmedText.slice(0, 120) }]
           : [],
       disfluencyStrippedText: stripped,
-      note: "Grammar uses disfluency-stripped text (um/uh/repeats removed). Does not score pronunciation.",
+      note: !coherence.coherent
+        ? INCOHERENT_REPLY_LABEL
+        : "Grammar uses disfluency-stripped text (um/uh/repeats removed). Includes a basic coherence gate (word-salad → 0). Does not score pronunciation.",
     },
     politeness: {
       score: politenessScore,
       markers,
-      isPolite: polite,
-      note: "Politeness — courtesy / ack / help markers. Not empathy or relevance.",
+      isPolite: polite.isPolite,
+      toneFlags: polite.toneFlags,
+      note:
+        polite.toneFlags.length > 0
+          ? `Sounds dismissive/blaming toward the patient (${polite.toneFlags.join("; ")}). Overrides courtesy/helpfulness markers.`
+          : "Politeness — courtesy / ack / help markers. Not empathy or relevance.",
     },
     relevance,
     safety: {

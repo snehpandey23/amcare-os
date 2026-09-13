@@ -120,6 +120,8 @@ function linesToHistory(lines: Line[]): Array<{ role: "user" | "assistant"; cont
 
 function grammarKindLabel(kind: string): string {
   switch (kind) {
+    case "incoherent_or_word_salad":
+      return "incoherent / not a sentence";
     case "subject_verb_disagreement":
       return "subject–verb disagreement";
     case "wrong_word_or_typo":

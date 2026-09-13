@@ -4,6 +4,10 @@
  * Grammar = competence (agreement, tense, garbled structure, wrong word) —
  * NOT casual-chat formatting (missing caps / end punctuation).
  *
+ * Coherence gate (before Grammar + Relevance): replies that are unstructured
+ * word-salad / not sentence-shaped score very low on both — keyword hits alone
+ * must not look like “on-topic” or “perfect grammar.”
+ *
  * LanguageTool is NOT wired yet (scoped separately). This scorer is the
  * interim chat-register rule set: formatting rigidity is explicitly off.
  *
@@ -63,6 +67,42 @@ const WARM_GREETING = /\b(hi|hello|hey)\b.*\b(how are you|hope)\b|\bhow are you\
 
 const CURT_MARKERS =
   /\b(whatever|not my problem|deal with it|figure it out yourself|stop bothering|get lost|go to hell)\b/i;
+
+/**
+ * Blaming / condescending / scolding toward the patient.
+ * When present, politeness must drop even if a help/ack marker appears elsewhere.
+ */
+const DISMISSIVE_BLAMING_PATTERNS: Array<{ re: RegExp; label: string }> = [
+  { re: /\byou\s+should\s+have\b/i, label: "“you should have”" },
+  { re: /\byou\s+should'?ve\b/i, label: "“you should've”" },
+  { re: /\byou\s+should\s+know\b/i, label: "“you should know”" },
+  { re: /\byou\s+ought\s+to\s+have\b/i, label: "“you ought to have”" },
+  { re: /\b(that'?s|that\s+is)\s+your\s+fault\b/i, label: "“that's your fault”" },
+  { re: /\bit'?s\s+your\s+fault\b/i, label: "“it's your fault”" },
+  { re: /\bi\s+already\s+told\s+you\b/i, label: "“I already told you”" },
+  { re: /\bi'?ve\s+already\s+told\s+you\b/i, label: "“I've already told you”" },
+  { re: /\bas\s+i\s+(already\s+)?(said|told)\s+you\b/i, label: "“as I already said/told you”" },
+  { re: /\bobviously\b/i, label: "“obviously”" },
+  { re: /\bwhy\s+didn'?t\s+you\b/i, label: "“why didn't you”" },
+  { re: /\bdon'?t\s+you\s+(know|understand)\b/i, label: "“don't you know/understand”" },
+  { re: /\byou\s+need\s+to\s+understand\b/i, label: "“you need to understand”" },
+  { re: /\bif\s+you\s+had\s+planned\b/i, label: "“if you had planned”" },
+  { re: /\bplanned\s+ahead\s+of\s+(this|that)\b/i, label: "“planned ahead of this” (blame framing)" },
+];
+
+export const DISMISSIVE_BLAMING_TONE_LABEL =
+  "tone: dismissive/blaming toward the patient";
+
+/** Detect blaming/scolding constructions (deterministic tone check). */
+export function detectDismissiveBlamingTone(text: string): string[] {
+  const t = (text || "").trim();
+  if (!t) return [];
+  const hits: string[] = [];
+  for (const { re, label } of DISMISSIVE_BLAMING_PATTERNS) {
+    if (re.test(t)) hits.push(label);
+  }
+  return hits;
+}
 
 /**
  * Relevance / engagement — decision note
@@ -242,6 +282,13 @@ export function plainLanguageRelevanceNote(
   if (turn.reason.toLowerCase().includes("empty")) {
     return `You left reply ${turnLabel} empty — nothing addressed the patient's ${ask}.`;
   }
+  if (
+    turn.reason.toLowerCase().includes("coherent sentence") ||
+    turn.reason.toLowerCase().includes("word-salad") ||
+    turn.reason.toLowerCase().includes("incoherent")
+  ) {
+    return `Reply ${turnLabel} does not form a coherent sentence — relevance cannot treat keyword hits as an answer to the patient's ${ask}.`;
+  }
   if (turn.reason.toLowerCase().includes("generic non-answer")) {
     return `You didn't directly answer the ${ask} the patient asked on ${turnLabel} (reply was a generic non-answer like “ok/sure/thanks”).`;
   }
@@ -277,6 +324,10 @@ export function scoreRelevanceTurn(patientText: string, maReply: string): Releva
 
   if (!reply) {
     return base(0, "Empty reply");
+  }
+  const coherence = assessReplyCoherence(reply);
+  if (!coherence.coherent) {
+    return base(0, coherence.reason);
   }
   if (CURT_MARKERS.test(reply)) {
     return base(0, "Dismissive / curt — not engaged");
@@ -362,17 +413,200 @@ export function scoreRelevanceSession(messages: SimMessage[]): {
     score,
     turns: scoredTurns,
     note:
-      "Relevance / engagement (estimate) — checks whether each reply is substantive and shape-matched to what the patient just asked (timeline → time-shaped, process → steps, etc.). Not a full meaning judge / LLM. Generic non-answers like “ok sure” score low. Does not measure clinical correctness (see safety tiers)." +
+      "Relevance / engagement (estimate) — checks whether each reply is substantive and shape-matched to what the patient just asked (timeline → time-shaped, process → steps, etc.). Not a full meaning judge / LLM. Incoherent / word-salad replies score 0 (coherence gate). Generic non-answers like “ok sure” score low. Does not measure clinical correctness (see safety tiers)." +
       plainSummary,
   };
 }
 
 export type GrammarIssueKind =
   | "empty"
+  | "incoherent_or_word_salad"
   | "subject_verb_disagreement"
   | "wrong_word_or_typo"
   | "garbled_or_unclear"
   | "wrong_tense";
+
+export const INCOHERENT_REPLY_LABEL =
+  "Response does not form a coherent sentence — cannot be scored as normal Grammar/Relevance.";
+
+/**
+ * Lightweight English function-word set for coherence heuristics.
+ * Used only to detect unstructured word lists — not a full POS tagger.
+ */
+const COHERENCE_FUNCTION_WORDS = new Set(
+  (
+    "a an the to for of in on at with by from as that this these those and or but if so because than then " +
+    "about into over after before between within your my our their his her its you i we they he she it me us them " +
+    "am is are was were be been being do does did have has had can could will would shall should may might must " +
+    "not no yes ok okay sure how what when where why who which there here also just only very really actually " +
+    "typically usually normally generally first next then please somehow something someone anything anyone " +
+    "everything everyone else own same such each every few more most other some any both while during until " +
+    "unless whether whose whom across against among behind below beside beyond inside outside toward towards " +
+    "under upon via per " +
+    // Common contractions — keep SVA / casual chat from looking like content-word runs
+    "i'm you're we're they're he's she's it's that's what's who's where's there's here's let's " +
+    "don't doesn't didn't can't couldn't won't wouldn't shouldn't haven't hasn't hadn't " +
+    "aren't isn't wasn't weren't ain't"
+  ).split(/\s+/),
+);
+
+function coherenceTokens(text: string): string[] {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9'\s-]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((w) => w.replace(/^'+|'+$/g, ""));
+}
+
+/** Recognizable clause / chat-sentence skeleton (subject+aux, WH+aux, MA openers, etc.). */
+function hasClauseSkeleton(text: string): boolean {
+  const t = text;
+  if (
+    /\b(i|we|you|they|he|she|it)\s+(am|is|are|was|were|do|does|did|have|has|had|can|could|will|would|should|may|might|must|need|want|think|see|get|got|don'?t|doesn'?t|can'?t|won'?t|'m|'re|'ll|'ve)\b/i.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  if (/\b(this|that|there|it)\s+(is|are|was|were|can|will|would|could|takes?|means?|might|should)\b/i.test(t)) {
+    return true;
+  }
+  if (/\b(how|what|when|where|who|why)\s+(are|is|do|does|did|can|will|would|am|have|has)\b/i.test(t)) {
+    return true;
+  }
+  if (/\b(can|will|could|would|should)\s+(you|we|i|it|they)\b/i.test(t)) return true;
+  if (/\b(let me|here'?s|first thing|how (may|can) i|thank you|sorry to|happy to|glad to)\b/i.test(t)) {
+    return true;
+  }
+  if (/\b(typically|usually|normally|generally)\b/i.test(t) && /\b(can|will|is|are|have|get|takes?)\b/i.test(t)) {
+    return true;
+  }
+  if (/\b\w+\s+is\s+\w+/i.test(t) && /\b(the|a|an|your|our|to|for|with)\b/i.test(t)) return true;
+  if (/\b(okay|ok|sure|alright|all right)\b/i.test(t) && coherenceTokens(t).length <= 14) return true;
+  if (
+    /^(um+|uh+|er+)?\s*(i|we|let|please|sure|okay|ok|hi|hello|hey|thank|sorry|first|typically|usually)\b/i.test(
+      t.trim(),
+    )
+  ) {
+    return true;
+  }
+  return false;
+}
+
+function maxContentWordRun(words: string[]): number {
+  let max = 0;
+  let run = 0;
+  for (const w of words) {
+    const bare = w.replace(/'s$/, "");
+    if (!COHERENCE_FUNCTION_WORDS.has(bare) && !/^\d+$/.test(bare)) {
+      run++;
+      max = Math.max(max, run);
+    } else {
+      run = 0;
+    }
+  }
+  return max;
+}
+
+/** Deterministic word-salad / jumbled-order markers (cheap; not a parser). */
+function wordSaladPatternHits(text: string): string[] {
+  const hits: string[] = [];
+  const pats: Array<{ re: RegExp; label: string }> = [
+    {
+      re: /\b(can|could|will|would|should|may|might|must)\s+(some|any|hours?|days?|weeks?|months?|finals?)\b/i,
+      label: "modal stuck to a noun/time word (not a verb phrase)",
+    },
+    {
+      re: /\b(hours?|days?|weeks?)\s+(hours?|days?|weeks?)\b/i,
+      label: "stacked time nouns without sentence glue",
+    },
+    {
+      re: /\b(what|where|how|why)\s+(mean|find|take|get|see)\s+(do|find|where|mean|take|what)\b/i,
+      label: "question-word + verb jumble",
+    },
+    {
+      re: /\b(mean|find|take|get)\s+(do|find|where|mean)\s+(where|find|do|what|mean)\b/i,
+      label: "verb-verb word salad",
+    },
+  ];
+  for (const { re, label } of pats) {
+    if (re.test(text)) hits.push(label);
+  }
+  return hits;
+}
+
+export type ReplyCoherenceAssessment = {
+  coherent: boolean;
+  /** Trainee-facing reason when incoherent. */
+  reason: string;
+  /** Debug / calibration flags. */
+  flags: string[];
+};
+
+/**
+ * Basic well-formedness gate: does this look like actual sentence(s), or an
+ * unstructured keyword list? Deterministic — catches word-salad without a parser.
+ * Short acks (“ok sure”) pass; normal MA chat sentences pass; jumbled topic words fail.
+ */
+export function assessReplyCoherence(text: string): ReplyCoherenceAssessment {
+  const raw = (text || "").trim();
+  if (!raw) {
+    return {
+      coherent: false,
+      reason: INCOHERENT_REPLY_LABEL,
+      flags: ["empty"],
+    };
+  }
+  // Grammar path already strips um/uh; use the same view for fairness.
+  const t = normalizeSpeechDisfluencyForGrammar(raw) || raw;
+  const words = coherenceTokens(t);
+  if (words.length === 0) {
+    return { coherent: false, reason: INCOHERENT_REPLY_LABEL, flags: ["empty"] };
+  }
+
+  // Very short replies (acks, thanks) are not word-salad.
+  if (words.length <= 4) {
+    return { coherent: true, reason: "Short reply", flags: [] };
+  }
+
+  const skeleton = hasClauseSkeleton(t);
+  const contentRun = maxContentWordRun(words);
+  const saladHits = wordSaladPatternHits(t);
+  const funcCount = words.filter((w) => COHERENCE_FUNCTION_WORDS.has(w.replace(/'s$/, ""))).length;
+  const funcRatio = funcCount / words.length;
+  const flags: string[] = [];
+  if (!skeleton) flags.push("no clause skeleton");
+  if (contentRun >= 4) flags.push(`long content-word run (${contentRun})`);
+  if (funcRatio < 0.28) flags.push(`low function-word density (${funcRatio.toFixed(2)})`);
+  for (const h of saladHits) flags.push(h);
+
+  // Strong salad evidence
+  if (saladHits.length >= 2) {
+    return { coherent: false, reason: INCOHERENT_REPLY_LABEL, flags };
+  }
+
+  // Medium replies: fail only with salad n-gram or long content run and no skeleton
+  if (words.length <= 7) {
+    if (!skeleton && (saladHits.length >= 1 || contentRun >= 4)) {
+      return { coherent: false, reason: INCOHERENT_REPLY_LABEL, flags };
+    }
+    return { coherent: true, reason: "Acceptable short/medium sentence shape", flags: [] };
+  }
+
+  if (!skeleton && (saladHits.length >= 1 || contentRun >= 4 || funcRatio < 0.28)) {
+    return { coherent: false, reason: INCOHERENT_REPLY_LABEL, flags };
+  }
+  if (!skeleton && words.length >= 10 && funcRatio < 0.35) {
+    return { coherent: false, reason: INCOHERENT_REPLY_LABEL, flags };
+  }
+
+  return {
+    coherent: true,
+    reason: skeleton ? "Recognizable sentence shape" : "Acceptable phrase structure",
+    flags: [],
+  };
+}
 
 export type GrammarIssue = {
   messageIndex: number;
@@ -444,6 +678,15 @@ function grammarIssuesFor(text: string): { kinds: GrammarIssueKind[]; detail?: s
   const kinds: GrammarIssueKind[] = [];
   const details: string[] = [];
 
+  // Coherence gate first — word-salad is not “perfect grammar.”
+  const coherence = assessReplyCoherence(raw);
+  if (!coherence.coherent) {
+    return {
+      kinds: ["incoherent_or_word_salad"],
+      detail: INCOHERENT_REPLY_LABEL,
+    };
+  }
+
   // Chat register: do NOT flag missing capitalization or end punctuation.
 
   for (const { re, detail } of TYPO_OR_WRONG_WORD) {
@@ -490,6 +733,8 @@ export function isPoliteMessage(text: string): boolean {
   const t = (text || "").trim();
   if (!t) return false;
   if (CURT_MARKERS.test(t)) return false;
+  // Blaming/scolding overrides any courtesy or help marker in the same reply.
+  if (detectDismissiveBlamingTone(t).length > 0) return false;
   const lower = t.toLowerCase();
   if (POLITENESS_PHRASES.some((p) => lower.includes(p))) return true;
   if (WARM_GREETING.test(t)) return true;
@@ -499,15 +744,19 @@ export function isPoliteMessage(text: string): boolean {
   return false;
 }
 
-/** Which politeness / courtesy signals fired (for calibration inspection). */
+/**
+ * Which politeness / tone signals fired (for calibration + feedback inspection).
+ * Dismissive/blaming flags are listed even when positive markers also match —
+ * scoring treats blame as an override.
+ */
 export function detectPolitenessMarkers(text: string): string[] {
   const t = (text || "").trim();
   if (!t) return [];
   const hits: string[] = [];
   if (CURT_MARKERS.test(t)) {
     hits.push("curt/dismissive marker (blocks politeness)");
-    return hits;
   }
+  const blame = detectDismissiveBlamingTone(t);
   const lower = t.toLowerCase();
   for (const p of POLITENESS_PHRASES) {
     if (lower.includes(p)) hits.push(`phrase: “${p}”`);
@@ -515,7 +764,33 @@ export function detectPolitenessMarkers(text: string): string[] {
   if (WARM_GREETING.test(t)) hits.push("warm greeting pattern");
   if (ACK_MARKERS.test(t)) hits.push("acknowledgment marker");
   if (HELP_MARKERS.test(t)) hits.push("helpfulness marker");
+  for (const label of blame) {
+    hits.push(`${DISMISSIVE_BLAMING_TONE_LABEL} — ${label}`);
+  }
+  if (blame.length > 0) {
+    hits.push("(blame/scolding overrides courtesy/helpfulness markers for the Politeness score)");
+  }
   return hits;
+}
+
+/** Per-message politeness 0–100 with explicit tone flags (used by calibration + session mean). */
+export function scorePolitenessMessage(text: string): {
+  score: number;
+  isPolite: boolean;
+  markers: string[];
+  toneFlags: string[];
+} {
+  const markers = detectPolitenessMarkers(text);
+  const toneFlags = detectDismissiveBlamingTone(text);
+  if (!text.trim()) {
+    return { score: 0, isPolite: false, markers, toneFlags };
+  }
+  if (CURT_MARKERS.test(text) || toneFlags.length > 0) {
+    // Meaningfully low — not rescued by help/ack markers elsewhere in the reply.
+    return { score: 0, isPolite: false, markers, toneFlags };
+  }
+  const polite = isPoliteMessage(text);
+  return { score: polite ? 100 : 0, isPolite: polite, markers, toneFlags };
 }
 
 export type ClinicalAccuracyHit = {
@@ -572,7 +847,8 @@ export function evaluateSimulatorSession(
   const grammarIssues: GrammarIssue[] = [];
 
   ma.forEach((msg, messageIndex) => {
-    if (isPoliteMessage(msg.text || "")) politeCount++;
+    const polite = scorePolitenessMessage(msg.text || "");
+    if (polite.isPolite) politeCount++;
     const { kinds, detail } = grammarIssuesFor(msg.text || "");
     if (kinds.length === 0) grammarOkCount++;
     else {
@@ -635,11 +911,11 @@ export function evaluateSimulatorSession(
     empathyScore: politenessScore,
     politenessScore,
     politenessNote:
-      "Politeness — acknowledgment, helpfulness, or courtesy wording (chat register). Not a measure of empathy, substance, or whether you answered the patient’s question.",
+      "Politeness — acknowledgment, helpfulness, or courtesy wording (chat register). Blaming or scolding the patient (e.g. “you should have…”) overrides help markers in the same reply. Not a measure of empathy, substance, or whether you answered the patient’s question.",
     grammarScore,
     grammarNote: spokenSession
-      ? "Grammar (chat register) — scores the confirmed transcript only. Natural speech fillers (um/uh) and simple self-corrections are not writing errors. Does not score pronunciation or fluency."
-      : "Grammar (chat register) — flags real issues (agreement, wrong word/typo, unclear wording). Missing caps/periods are not scored. Does not score relevance or substance. LanguageTool formal checks are not wired yet.",
+      ? "Grammar (chat register) — scores the confirmed transcript only. Natural speech fillers (um/uh) and simple self-corrections are not writing errors. Incoherent word-salad scores 0 (coherence gate). Does not score pronunciation or fluency."
+      : "Grammar (chat register) — flags real issues (agreement, wrong word/typo, unclear wording) plus a basic coherence gate (word-salad / non-sentences score 0). Missing caps/periods are not scored. Does not score relevance or substance. LanguageTool formal checks are not wired yet.",
     grammarIssues,
     relevanceScore: relevance.score,
     relevanceNote: relevance.note,

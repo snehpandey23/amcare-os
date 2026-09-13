@@ -75,4 +75,63 @@ import { runSpokenCalibration } from "../src/lib/patient-drill/spoken-calibratio
   console.log("ok: grammar issue detail present");
 }
 
+// --- 5. Politeness: clean timeline stays high; blaming drops despite help markers ---
+{
+  const clean = runSpokenCalibration({
+    confirmedText: "This can take anywhere between 5 to 7 days.",
+    sttRaw: "This can take anywhere between 5 to 7 days.",
+    patientAsk: "How long will this take? I have finals next week.",
+  });
+  assert.equal(clean.politeness.score, 100, `clean timeline politeness: ${clean.politeness.score}`);
+  assert.equal(clean.politeness.toneFlags.length, 0);
+  assert.equal(clean.politeness.isPolite, true);
+
+  const blame = runSpokenCalibration({
+    confirmedText:
+      "I think if you have a finals next week you should have planned ahead of this because things like that can take time.",
+    sttRaw:
+      "I think if you have a finals next week you should have planned ahead of this because things like that can take time.",
+    patientAsk: "How long will this take? I have finals next week.",
+  });
+  assert.ok(blame.politeness.score <= 20, `blaming politeness should be low, got ${blame.politeness.score}`);
+  assert.equal(blame.politeness.isPolite, false);
+  assert.ok(blame.politeness.toneFlags.length > 0, "expected dismissive/blaming tone flags");
+  assert.ok(
+    blame.politeness.markers.some((m) => /dismissive\/blaming/i.test(m)),
+    `expected blame in markers: ${blame.politeness.markers.join(" | ")}`,
+  );
+  assert.ok(
+    /dismissive|blaming/i.test(blame.politeness.note),
+    `expected dismissive note: ${blame.politeness.note}`,
+  );
+  // Helpfulness marker alone must not rescue the score
+  assert.ok(blame.politeness.markers.some((m) => /helpfulness/i.test(m)));
+  console.log(
+    `ok: politeness calibration — clean=${clean.politeness.score}, blame=${blame.politeness.score} flags=[${blame.politeness.toneFlags.join("; ")}]`,
+  );
+}
+
+// --- 6. Coherence gate: word-salad fails Grammar + Relevance; clean timeline still passes ---
+{
+  const salad =
+    "Long take might some hours days no final next week what mean do find where";
+  const ask = "How long will this actually take? I have finals next week.";
+  const bad = runSpokenCalibration({ confirmedText: salad, sttRaw: salad, patientAsk: ask });
+  assert.equal(bad.grammar.score, 0);
+  assert.equal(bad.relevance.score, 0);
+  assert.ok(bad.grammar.issues.some((i) => i.kinds.includes("incoherent_or_word_salad")));
+  assert.match(bad.grammar.note, /coherent sentence/i);
+
+  const good = runSpokenCalibration({
+    confirmedText: "This can take anywhere between 5 to 7 days.",
+    sttRaw: "This can take anywhere between 5 to 7 days.",
+    patientAsk: ask,
+  });
+  assert.equal(good.grammar.score, 100);
+  assert.ok((good.relevance.score ?? 0) >= 90);
+  console.log(
+    `ok: coherence gate — salad G${bad.grammar.score}/R${bad.relevance.score}, clean G${good.grammar.score}/R${good.relevance.score}`,
+  );
+}
+
 console.log("\nAll spoken-calibration smokes passed.");

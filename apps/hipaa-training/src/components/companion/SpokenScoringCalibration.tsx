@@ -11,6 +11,10 @@ import { useAuth } from "@/context/AuthContext";
 import { isPortalAdmin } from "@/lib/portal-role";
 import { startWavCapture, type WavCapture } from "@/lib/talk-wav-capture";
 import {
+  CALIBRATION_SCENARIOS,
+  type CalibrationScenario,
+} from "@/lib/patient-drill/calibration-scenarios";
+import {
   runSpokenCalibration,
   type SpokenCalibrationResult,
 } from "@/lib/patient-drill/spoken-calibration";
@@ -24,15 +28,19 @@ type SpeakDraft = {
   recordingElapsedSec: number;
 };
 
-const MAX_HISTORY = 8;
+const MAX_HISTORY = 16;
 
 export function SpokenScoringCalibration() {
   const router = useRouter();
   const { user, token, authReady } = useAuth();
   const isAdmin = isPortalAdmin(user?.role);
 
+  const [scenarioId, setScenarioId] = useState(CALIBRATION_SCENARIOS[0]?.id ?? "timeline-clean");
+  const activeScenario =
+    CALIBRATION_SCENARIOS.find((s) => s.id === scenarioId) ?? CALIBRATION_SCENARIOS[0];
+
   const [patientAsk, setPatientAsk] = useState(
-    "How long will this actually take? I have finals next week.",
+    activeScenario?.patientAsk ?? "How long will this actually take? I have finals next week.",
   );
   const [useRelevance, setUseRelevance] = useState(true);
   const [recording, setRecording] = useState(false);
@@ -54,6 +62,40 @@ export function SpokenScoringCalibration() {
       capRef.current = null;
     };
   }, []);
+
+  const loadScenario = useCallback((scenario: CalibrationScenario, withSample: boolean) => {
+    setScenarioId(scenario.id);
+    setPatientAsk(scenario.patientAsk);
+    setUseRelevance(true);
+    setError(null);
+    capRef.current?.abort();
+    capRef.current = null;
+    setRecording(false);
+    setBusy(false);
+    if (withSample) {
+      setDraft({
+        transcript: scenario.sampleReply,
+        sttRaw: scenario.sampleReply,
+        provider: "typed-paste",
+        note: `Scenario sample · ${scenario.label}`,
+        recordingElapsedSec: 0,
+      });
+    } else {
+      setDraft(null);
+    }
+  }, []);
+
+  const startTypedDraft = useCallback(() => {
+    if (recording || busy) return;
+    setError(null);
+    setDraft({
+      transcript: "",
+      sttRaw: "",
+      provider: "typed-paste",
+      note: "Typed / pasted (no STT)",
+      recordingElapsedSec: 0,
+    });
+  }, [recording, busy]);
 
   const startRecord = useCallback(async () => {
     if (!token || busy || recording) return;
@@ -120,15 +162,15 @@ export function SpokenScoringCalibration() {
     if (!draft) return;
     const confirmed = draft.transcript.trim();
     if (confirmed.length < 2) {
-      setError("Edit the transcript to at least a short phrase before scoring.");
+      setError("Enter at least a short phrase before scoring.");
       return;
     }
     const result = runSpokenCalibration({
       confirmedText: confirmed,
-      sttRaw: draft.sttRaw,
+      sttRaw: draft.sttRaw || confirmed,
       sttProvider: draft.provider,
       patientAsk: useRelevance ? patientAsk : null,
-      recordingElapsedSec: draft.recordingElapsedSec,
+      recordingElapsedSec: draft.recordingElapsedSec > 0 ? draft.recordingElapsedSec : null,
     });
     setHistory((prev) => [result, ...prev].slice(0, MAX_HISTORY));
     setDraft(null);
@@ -159,12 +201,54 @@ export function SpokenScoringCalibration() {
         </p>
         <h1 className={portalH1}>Spoken scoring calibration</h1>
         <p className="mt-1 max-w-2xl text-sm text-[var(--siya-text)]">
-          Speak freely, confirm the transcript, then inspect every rubric. Nothing is saved to exam
-          attempts, seen-sets, or Ops ledgers — pure inspection for tuning.
+          Load a scenario (or type/paste a longer reply), confirm the text, then inspect every rubric.
+          Record is optional. Nothing is saved to exam attempts, seen-sets, or Ops ledgers.
         </p>
       </header>
 
       <div className={`${portalCard} space-y-3`}>
+        <div>
+          <label className="text-xs font-semibold text-[var(--siya-text-secondary)]" htmlFor="cal-scenario">
+            Scenario bank
+          </label>
+          <select
+            id="cal-scenario"
+            value={scenarioId}
+            onChange={(e) => {
+              const next = CALIBRATION_SCENARIOS.find((s) => s.id === e.target.value);
+              if (next) loadScenario(next, false);
+            }}
+            className="mt-1 w-full rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-3 text-sm"
+          >
+            {CALIBRATION_SCENARIOS.map((s) => (
+              <option key={s.id} value={s.id}>
+                {s.label}
+              </option>
+            ))}
+          </select>
+          {activeScenario ? (
+            <p className="mt-2 text-xs text-[var(--siya-text-secondary)]">{activeScenario.probe}</p>
+          ) : null}
+          <div className="mt-2 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => activeScenario && loadScenario(activeScenario, true)}
+              disabled={!activeScenario || recording || busy}
+              className="rounded-xl border border-[var(--siya-border)] px-3 py-1.5 text-xs font-semibold disabled:opacity-50"
+            >
+              Load sample reply into editor
+            </button>
+            <button
+              type="button"
+              onClick={() => activeScenario && loadScenario(activeScenario, false)}
+              disabled={!activeScenario || recording || busy}
+              className="rounded-xl border border-[var(--siya-border)] px-3 py-1.5 text-xs font-semibold disabled:opacity-50"
+            >
+              Load ask only (blank reply)
+            </button>
+          </div>
+        </div>
+
         <label className="flex items-start gap-2 text-sm text-[var(--siya-text)]">
           <input
             type="checkbox"
@@ -185,7 +269,7 @@ export function SpokenScoringCalibration() {
               id="cal-ask"
               value={patientAsk}
               onChange={(e) => setPatientAsk(e.target.value)}
-              rows={2}
+              rows={3}
               className="mt-1 w-full rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-3 text-sm"
               placeholder="e.g. How long will this take?"
             />
@@ -194,14 +278,24 @@ export function SpokenScoringCalibration() {
 
         <div className="flex flex-wrap gap-2">
           {!recording && !draft ? (
-            <button
-              type="button"
-              onClick={() => void startRecord()}
-              disabled={busy || !token}
-              className="rounded-xl bg-[var(--siya-accent)] px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
-            >
-              Record
-            </button>
+            <>
+              <button
+                type="button"
+                onClick={startTypedDraft}
+                disabled={busy}
+                className="rounded-xl bg-[var(--siya-accent)] px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+              >
+                Type / paste reply
+              </button>
+              <button
+                type="button"
+                onClick={() => void startRecord()}
+                disabled={busy || !token}
+                className="rounded-xl border border-[var(--siya-border)] px-4 py-2 text-sm font-semibold disabled:opacity-50"
+              >
+                Record
+              </button>
+            </>
           ) : null}
           {recording ? (
             <button
@@ -226,18 +320,27 @@ export function SpokenScoringCalibration() {
                 onClick={resetForAnother}
                 className="rounded-xl border border-[var(--siya-border)] px-4 py-2 text-sm font-semibold"
               >
-                Discard &amp; re-record
+                Discard
               </button>
             </>
           ) : null}
           {latest && !draft && !recording ? (
-            <button
-              type="button"
-              onClick={() => void startRecord()}
-              className="rounded-xl border border-[var(--siya-border)] px-4 py-2 text-sm font-semibold"
-            >
-              Record again
-            </button>
+            <>
+              <button
+                type="button"
+                onClick={startTypedDraft}
+                className="rounded-xl border border-[var(--siya-border)] px-4 py-2 text-sm font-semibold"
+              >
+                Type another
+              </button>
+              <button
+                type="button"
+                onClick={() => void startRecord()}
+                className="rounded-xl border border-[var(--siya-border)] px-4 py-2 text-sm font-semibold"
+              >
+                Record again
+              </button>
+            </>
           ) : null}
         </div>
 
@@ -247,31 +350,37 @@ export function SpokenScoringCalibration() {
         {draft ? (
           <div className="space-y-2 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] p-3">
             <p className="text-xs font-semibold text-[var(--siya-primary)]">
-              Review before score · STT {draft.note} · recording {draft.recordingElapsedSec.toFixed(1)}s
+              Review before score · {draft.note}
+              {draft.recordingElapsedSec > 0
+                ? ` · recording ${draft.recordingElapsedSec.toFixed(1)}s`
+                : " · no recording duration"}
             </p>
             <label className="text-xs font-semibold text-[var(--siya-text-secondary)]">
-              Editable transcript (scored)
+              Editable reply (scored) — use a full sentence or multi-sentence answer when probing rubrics
             </label>
             <textarea
               value={draft.transcript}
               onChange={(e) => setDraft({ ...draft, transcript: e.target.value })}
-              rows={4}
+              rows={8}
               className="w-full rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] p-3 text-sm"
+              placeholder="Paste or write the MA reply here…"
             />
-            <div className="grid gap-2 sm:grid-cols-2">
-              <div>
-                <p className="text-xs font-semibold">Raw STT</p>
-                <pre className="mt-1 whitespace-pre-wrap rounded-lg bg-[var(--siya-white)] p-2 text-xs text-[var(--siya-text)]">
-                  {draft.sttRaw || "(empty)"}
-                </pre>
+            {draft.provider !== "typed-paste" ? (
+              <div className="grid gap-2 sm:grid-cols-2">
+                <div>
+                  <p className="text-xs font-semibold">Raw STT</p>
+                  <pre className="mt-1 whitespace-pre-wrap rounded-lg bg-[var(--siya-white)] p-2 text-xs text-[var(--siya-text)]">
+                    {draft.sttRaw || "(empty)"}
+                  </pre>
+                </div>
+                <div>
+                  <p className="text-xs font-semibold">Edited (will score)</p>
+                  <pre className="mt-1 whitespace-pre-wrap rounded-lg bg-[var(--siya-white)] p-2 text-xs text-[var(--siya-text)]">
+                    {draft.transcript.trim() || "(empty)"}
+                  </pre>
+                </div>
               </div>
-              <div>
-                <p className="text-xs font-semibold">Edited (will score)</p>
-                <pre className="mt-1 whitespace-pre-wrap rounded-lg bg-[var(--siya-white)] p-2 text-xs text-[var(--siya-text)]">
-                  {draft.transcript.trim() || "(empty)"}
-                </pre>
-              </div>
-            </div>
+            ) : null}
           </div>
         ) : null}
       </div>
@@ -279,7 +388,7 @@ export function SpokenScoringCalibration() {
       {latest ? <CalibrationBreakdown result={latest} /> : null}
 
       {history.length > 1 ? (
-        <details className={`${portalCard} text-sm`}>
+        <details className={`${portalCard} text-sm`} open>
           <summary className="cursor-pointer font-semibold">
             Prior runs this session ({history.length - 1}) — not persisted
           </summary>
@@ -288,8 +397,8 @@ export function SpokenScoringCalibration() {
               <li key={`${r.scoredAt}-${i}`}>
                 {new Date(r.scoredAt).toLocaleTimeString()} · G{r.grammar.score} · P{r.politeness.score}
                 {r.relevance.skipped ? " · Rel skipped" : ` · Rel ${r.relevance.score}`}
-                {r.safety.redFlagged ? " · RED FLAG" : ""} — “{r.confirmedText.slice(0, 60)}
-                {r.confirmedText.length > 60 ? "…" : ""}”
+                {r.safety.redFlagged ? " · RED FLAG" : ""} — “{r.confirmedText.slice(0, 80)}
+                {r.confirmedText.length > 80 ? "…" : ""}”
               </li>
             ))}
           </ul>
@@ -356,6 +465,11 @@ function CalibrationBreakdown({ result }: { result: SpokenCalibrationResult }) {
           Politeness · {result.politeness.score}/100
         </h2>
         <p className="text-xs text-[var(--siya-text-secondary)]">{result.politeness.note}</p>
+        {result.politeness.toneFlags.length > 0 ? (
+          <p className="text-xs font-medium text-amber-900">
+            Tone: dismissive/blaming — {result.politeness.toneFlags.join("; ")}
+          </p>
+        ) : null}
         {result.politeness.markers.length === 0 ? (
           <p className="text-xs text-amber-800">No courtesy markers detected.</p>
         ) : (
