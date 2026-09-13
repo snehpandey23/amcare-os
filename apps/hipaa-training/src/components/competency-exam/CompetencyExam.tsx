@@ -18,6 +18,7 @@ import { recordSeen, freshDrawSeed, type SeenEntry } from "@/lib/competency-exam
 import { loadSeen, saveAttempt, saveSeen, saveIsolatedReview, type IsolatedReviewItemResult, type IsolatedWritingTrail } from "@/lib/competency-exam/storage";
 import type { ExamReportModel, SafetyFlag, SectionResult } from "@/lib/competency-exam/types";
 import { adjustEscalationScore, blendWritingScore, combineWritingPartScores, scoreWritingPartDeterministic } from "@/lib/competency-exam/writing-score";
+import { WRITING_ESCALATION_WORKED_EXAMPLE } from "@/content/competency-exam/writing-escalation-example";
 import { EXAM_WEIGHTS, SECTION_LABEL } from "@/lib/competency-exam/weights";
 import { ExamReportView } from "./ExamReportView";
 import { ExamCountdownHud } from "./ExamCountdownHud";
@@ -281,6 +282,7 @@ export function CompetencyExam() {
   } | null>(null);
   const [writingChartNote, setWritingChartNote] = useState("");
   const [writingEscalation, setWritingEscalation] = useState("");
+  const [showEscalationExample, setShowEscalationExample] = useState(false);
   const [writingLeft, setWritingLeft] = useState(WRITING_SEC);
   const [chatLeft, setChatLeft] = useState(CHAT_SEC);
   const [chatForceEnd, setChatForceEnd] = useState(false);
@@ -317,6 +319,7 @@ export function CompetencyExam() {
     setWritingPrompt(null);
     setWritingChartNote("");
     setWritingEscalation("");
+    setShowEscalationExample(false);
     setChatBrief(null);
     setReviewNote("");
     setBusy(false);
@@ -384,6 +387,7 @@ export function CompetencyExam() {
     setTypingRaw(null);
     setWritingChartNote("");
     setWritingEscalation("");
+    setShowEscalationExample(false);
     setWritingTrail(null);
     setItemResults(null);
     const seed = freshDrawSeed();
@@ -1155,24 +1159,47 @@ export function CompetencyExam() {
               2. Message to provider
             </label>
             <p className="rounded-lg bg-[var(--siya-bg-subtle)] px-3 py-2 text-xs text-[var(--siya-text)]">
-              Write the message you&apos;d actually send the provider — not a copy of the chart note (a greeting + the
-              same text still isn&apos;t an escalation). Your message should: (1) name the concern in one line, (2)
-              include only the facts relevant to that concern, (3) end with a specific ask — e.g. &quot;Requesting
-              guidance on whether to counsel the patient or adjust the plan.&quot;
+              Write the message the way you&apos;d actually send it to the provider on the secure channel for this
+              scenario — same style as your real notes. Don&apos;t paste the chart note here.
             </p>
             <p className="text-xs text-[var(--siya-text-secondary)]">{writingPrompt.escalationHint}</p>
+            <div className="space-y-2">
+              {!showEscalationExample ? (
+                <button
+                  type="button"
+                  onClick={() => setShowEscalationExample(true)}
+                  className="text-xs font-semibold text-[var(--siya-primary)] underline-offset-2 hover:underline"
+                >
+                  Optional: see one example
+                </button>
+              ) : (
+                <div
+                  className="rounded-xl border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] p-3 text-xs text-[var(--siya-text)]"
+                  data-writing-escalation-example="true"
+                >
+                  <div className="mb-2 flex items-start justify-between gap-2">
+                    <p className="font-semibold text-[var(--siya-primary)]">
+                      Example tone only (John Doe / James Doe placeholders) — write your own for this scenario
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setShowEscalationExample(false)}
+                      className="shrink-0 text-xs font-semibold text-[var(--siya-text-secondary)] underline-offset-2 hover:underline"
+                    >
+                      Dismiss
+                    </button>
+                  </div>
+                  <p className="whitespace-pre-wrap leading-relaxed">{WRITING_ESCALATION_WORKED_EXAMPLE}</p>
+                </div>
+              )}
+            </div>
             <textarea
               id="writing-escalation"
               value={writingEscalation}
               onChange={(e) => setWritingEscalation(e.target.value)}
               rows={7}
               className="w-full rounded-xl border border-[var(--siya-border)] p-3 text-sm"
-              placeholder={
-                "Example shape (replace with this scenario):\n" +
-                "Concern: Pill count higher than expected on controlled med.\n" +
-                "Facts: Reports 21 tablets on day 18 of 30-day once-daily fill (expected ~12). Pharmacy verified; no order pended.\n" +
-                "Ask: Requesting guidance on whether to counsel the patient or adjust the plan."
-              }
+              placeholder="Type the message you'd actually send the provider…"
               data-no-voice-input="true"
             />
           </div>

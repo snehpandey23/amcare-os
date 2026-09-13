@@ -85,10 +85,29 @@ export function combineWritingPartScores(scoreA: number, scoreB: number): {
   };
 }
 
-/** Soft check: escalation text should look like it includes an ask (not scored hard-fail alone). */
+/**
+ * Soft check: Part B should signal an ask to the provider.
+ * Accepts labeled asks ("please advise") and natural MA narrative closes
+ * (e.g. keep you in the loop / reach out if you need / before next visit or refill).
+ */
 export function escalationLooksLikeAsk(text: string): boolean {
-  return /\b(please|ask|advise|review|confirm|clarify|guidance|recommend|can you|could you|would you)\b/i.test(
-    text,
+  const t = text.trim();
+  if (!t) return false;
+  if (
+    /\b(please|ask|advise|review|confirm|clarify|guidance|recommend|can you|could you|would you)\b/i.test(t)
+  ) {
+    return true;
+  }
+  return (
+    /\bkeep you in the loop\b/i.test(t) ||
+    /\breach out if you need\b/i.test(t) ||
+    /\bfeel free to reach out\b/i.test(t) ||
+    /\blet me know\b/i.test(t) ||
+    /\bhow (you'd|you would) like\b/i.test(t) ||
+    /\bwhat you'd like us to\b/i.test(t) ||
+    /\b(awaiting your|for your (review|guidance|decision))\b/i.test(t) ||
+    /\bbefore your next (visit|refill)\b/i.test(t) ||
+    /\bif anything else could be done\b/i.test(t)
   );
 }
 

@@ -28,6 +28,7 @@ import {
 } from "../src/lib/competency-exam/storage";
 import { WRITING_CLINICAL_PROMPTS } from "../src/content/competency-exam/writing-clinical-prompts.draft";
 import { WRITING_PROMPTS } from "../src/content/competency-exam/writing-prompts.draft";
+import { WRITING_ESCALATION_WORKED_EXAMPLE } from "../src/content/competency-exam/writing-escalation-example";
 import passages from "../src/data/level-up/typing-passages.json";
 import { ALL_QUESTIONS } from "../src/content/questionBank";
 
@@ -57,10 +58,12 @@ assert.match(examSrc, /Message to provider/);
 assert.match(examSrc, /combineWritingPartScores/);
 assert.match(examSrc, /adjustEscalationScore/);
 assert.match(examSrc, /Write only what you&apos;d put in the patient&apos;s chart/);
-assert.match(examSrc, /name the concern in one line/);
-assert.match(examSrc, /Requesting guidance on whether to counsel the patient or adjust the plan/);
-assert.match(examSrc, /Example shape \(replace with this scenario\)/);
-assert.match(examSrc, /Concern: Pill count higher than expected/);
+assert.match(examSrc, /Write the message the way you&apos;d actually send it to the provider/);
+assert.match(examSrc, /Optional: see one example/);
+assert.match(examSrc, /WRITING_ESCALATION_WORKED_EXAMPLE/);
+assert.match(examSrc, /data-writing-escalation-example/);
+assert.doesNotMatch(examSrc, /Example shape \(replace with this scenario\)/);
+assert.doesNotMatch(examSrc, /Concern: Pill count higher than expected/);
 assert.doesNotMatch(examSrc, /setWritingEscalation\(writingChartNote\)/);
 assert.doesNotMatch(examSrc, /setWritingChartNote\(writingEscalation\)/);
 assert.match(examSrc, /practice writing exercise for the MA competency exam/i);
@@ -206,6 +209,37 @@ const blendB = { score: escAdjGood.score };
 const combined = combineWritingPartScores(blendA.score, blendB.score);
 assert.ok(combined.score >= 0 && combined.score <= 100);
 assert.ok(escalationLooksLikeAsk(escSample), "sample escalation includes ask");
+
+// Founder-style natural narrative ask (worked example + voice variations).
+assert.ok(
+  escalationLooksLikeAsk(WRITING_ESCALATION_WORKED_EXAMPLE),
+  "worked example must count as an ask",
+);
+assert.match(WRITING_ESCALATION_WORKED_EXAMPLE, /\bJohn Doe\b/);
+assert.match(WRITING_ESCALATION_WORKED_EXAMPLE, /\bJames Doe\b/);
+assert.match(WRITING_ESCALATION_WORKED_EXAMPLE, /empty the pill bottle/i);
+assert.match(WRITING_ESCALATION_WORKED_EXAMPLE, /put the pills back into the bottle one by one/i);
+assert.match(WRITING_ESCALATION_WORKED_EXAMPLE, /keep you in the loop/i);
+assert.match(WRITING_ESCALATION_WORKED_EXAMPLE, /Please feel free to reach out/i);
+const naturalAskNoPlease = WRITING_ESCALATION_WORKED_EXAMPLE.replace(
+  /Please feel free to reach out if you need more information, or if anything else could be done for the patient\.?/i,
+  "Feel free to reach out if you need more information, or if anything else could be done for the patient.",
+);
+assert.ok(
+  escalationLooksLikeAsk(naturalAskNoPlease),
+  "natural close without 'please' still counts as ask",
+);
+const naturalAskLoopOnly = [
+  "Update on John Doe after today's pill count — count higher than expected for day 18.",
+  "Wanted to keep you in the loop before your next visit or refill decision.",
+].join(" ");
+assert.ok(escalationLooksLikeAsk(naturalAskLoopOnly), "keep you in the loop signals ask");
+assert.ok(
+  !escalationLooksLikeAsk(
+    "FYI only — pill count done today. Count was 21. No further action needed from anyone.",
+  ),
+  "pure FYI without ask signal must fail",
+);
 
 // Identical Part B must hard-cap (not ~88).
 const blendDupRaw = blendWritingScore(detA.score, 88);

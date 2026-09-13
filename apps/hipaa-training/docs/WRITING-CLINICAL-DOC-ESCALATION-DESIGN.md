@@ -296,6 +296,7 @@ Source: founder-captured answers to clinical review questions. Treat as **bindin
 
 ### Implications for sample scenarios (authoring)
 
+- **PHI-safety (mandatory for all Writing scenario / example content):** Patient and related names must be **clearly generic placeholders only** (e.g. John Doe, James Doe). Never use real-sounding unique identifiers. Prefer “the patient” when a name is not needed. Same PHI-free boundary as the rest of the staff portal.
 - **Sample 1 (pill count):** Only use when the med is framed as **controlled**; include expected-remaining calc vs 30-day supply; always escalate result; mark **urgent** if short by **>3 days’ supply**; escalation includes pharmacy verified + orders pended if needed; end with an **explicit ask**.
 - **Sample 2 (dose mismatch):** Neutral report/order wording (no “wrong dose”); patient told not to change until reply; stem requires **bottle/imprint verification** before escalate; explicit ask to provider.
 - **Sample 3 (missed doses):** Default escalate; patient “is it a big deal?” → defer; any home readings = numbers + environment only; no judgment labels; explicit ask.

@@ -4,6 +4,11 @@
  * DRAFT — clinical rules locked from Vayushi decision log (2026-09-12).
  * Still pending Sonu MA-clarity pass and founder ship for official scoring.
  * Patient-communication prompts remain in writing-prompts.draft.ts (supplement, not replace).
+ *
+ * PHI-safety (all scenario / example content — this bank and future prompts):
+ * If a patient (or related) name appears, use only clearly generic placeholders
+ * (John Doe, James Doe, etc.). Never invent real-sounding unique identifiers.
+ * Prefer "the patient" when a name is not needed.
  */
 export type ClinicalWritingFamily =
   | "pill-count"
