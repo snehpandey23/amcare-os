@@ -1155,17 +1155,24 @@ export function CompetencyExam() {
               2. Message to provider
             </label>
             <p className="rounded-lg bg-[var(--siya-bg-subtle)] px-3 py-2 text-xs text-[var(--siya-text)]">
-              Write the message you&apos;d actually send the provider. State your concern clearly, include the key facts,
-              and make a specific ask (e.g. what you want them to do or decide).
+              Write the message you&apos;d actually send the provider — not a copy of the chart note (a greeting + the
+              same text still isn&apos;t an escalation). Your message should: (1) name the concern in one line, (2)
+              include only the facts relevant to that concern, (3) end with a specific ask — e.g. &quot;Requesting
+              guidance on whether to counsel the patient or adjust the plan.&quot;
             </p>
             <p className="text-xs text-[var(--siya-text-secondary)]">{writingPrompt.escalationHint}</p>
             <textarea
               id="writing-escalation"
               value={writingEscalation}
               onChange={(e) => setWritingEscalation(e.target.value)}
-              rows={6}
+              rows={7}
               className="w-full rounded-xl border border-[var(--siya-border)] p-3 text-sm"
-              placeholder="Provider message — concern + key facts + clear ask…"
+              placeholder={
+                "Example shape (replace with this scenario):\n" +
+                "Concern: Pill count higher than expected on controlled med.\n" +
+                "Facts: Reports 21 tablets on day 18 of 30-day once-daily fill (expected ~12). Pharmacy verified; no order pended.\n" +
+                "Ask: Requesting guidance on whether to counsel the patient or adjust the plan."
+              }
               data-no-voice-input="true"
             />
           </div>
