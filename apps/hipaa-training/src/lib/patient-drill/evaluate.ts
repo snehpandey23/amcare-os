@@ -317,6 +317,11 @@ export type SimMessage = {
   text: string;
   startedAt?: number;
   sentAt?: number;
+  /** How the MA entered this reply (spoken = STT → edit → submit). */
+  inputModality?: "typed" | "spoken";
+  /** Raw cloud STT before MA edit — Ops audit only; never used for scoring. */
+  sttRaw?: string;
+  sttProvider?: string;
 };
 
 /** Pair each MA reply with the nearest preceding patient turn; average 0–100. */
@@ -407,9 +412,27 @@ const SVA_PATTERNS: Array<{ re: RegExp; detail: string }> = [
   },
 ];
 
+/**
+ * Strip natural speech disfluency before grammar checks only.
+ * Does not change the submitted text used for politeness / relevance / safety.
+ * Fillers left in the transcript must not count as writing errors.
+ */
+export function normalizeSpeechDisfluencyForGrammar(text: string): string {
+  let t = (text || "").trim();
+  if (!t) return t;
+  // Standalone fillers / hesitation markers
+  t = t.replace(/\b(um+|uh+|er+|ah+|hmm+|huh+|mm+|mhm)\b[,.]?/gi, " ");
+  // Self-correction stutter: "I I can" / "the the appointment"
+  t = t.replace(/\b(\w+)(\s+\1\b)+/gi, "$1");
+  return t.replace(/\s+/g, " ").trim();
+}
+
 function grammarIssuesFor(text: string): { kinds: GrammarIssueKind[]; detail?: string } {
-  const t = text.trim();
-  if (!t) return { kinds: ["empty"], detail: "Empty message" };
+  const raw = text.trim();
+  if (!raw) return { kinds: ["empty"], detail: "Empty message" };
+
+  // Score grammar on disfluency-normalized text so um/uh/repeats are not writing errors.
+  const t = normalizeSpeechDisfluencyForGrammar(raw) || raw;
 
   const kinds: GrammarIssueKind[] = [];
   const details: string[] = [];
@@ -439,6 +462,7 @@ function grammarIssuesFor(text: string): { kinds: GrammarIssueKind[]; detail?: s
   }
 
   // Garbled: mostly non-words, or collapsed nonsense (very short + no vowels pattern)
+  // Ignore leftover filler tokens if any slipped through.
   const words = t.split(/\s+/).filter(Boolean);
   const weird = words.filter((w) => /^[a-z]{4,}$/i.test(w) && !/[aeiou]/i.test(w));
   if (weird.length >= 2) {
@@ -447,6 +471,11 @@ function grammarIssuesFor(text: string): { kinds: GrammarIssueKind[]; detail?: s
   }
 
   return { kinds: [...new Set(kinds)], detail: details[0] };
+}
+
+/** Exported for smokes — same rules as session grammar scoring. */
+export function grammarIssuesForMessage(text: string): { kinds: GrammarIssueKind[]; detail?: string } {
+  return grammarIssuesFor(text);
 }
 
 /** True when the message shows courtesy / helpful chat tone (forgiving). */
@@ -486,6 +515,8 @@ export type SimulatorFeedback = {
   wpmReliable: boolean;
   /** Uncapped average before sanity gate. */
   rawAvgWpm: number;
+  /** True when any MA reply was spoken (WPM n/a — show honesty copy instead). */
+  spokenSession: boolean;
   messageCount: number;
   grammarErrorCount: number;
   accuracyNote: string;
@@ -567,9 +598,10 @@ export function evaluateSimulatorSession(
       ...(clinicalAccuracyHits.length ? [SCREENING_AS_DIAGNOSIS_LABEL] : []),
     ]),
   ];
+  const spokenSession = ma.some((m) => m.inputModality === "spoken");
   const rawAvg = totalMinutes > 0 ? totalWords / totalMinutes : 0;
   const avgEst =
-    totalMinutes > 0
+    !spokenSession && totalMinutes > 0
       ? estimateWpmFromWords(totalWords, totalMinutes * 60)
       : { wpm: 0, reliable: false, rawWpm: 0, reason: "no_sample" as const };
 
@@ -579,8 +611,9 @@ export function evaluateSimulatorSession(
     politenessNote:
       "Politeness — acknowledgment, helpfulness, or courtesy wording (chat register). Not a measure of empathy, substance, or whether you answered the patient’s question.",
     grammarScore,
-    grammarNote:
-      "Grammar (chat register) — flags real issues (agreement, wrong word/typo, unclear wording). Missing caps/periods are not scored. Does not score relevance or substance. LanguageTool formal checks are not wired yet.",
+    grammarNote: spokenSession
+      ? "Grammar (chat register) — scores the confirmed transcript only. Natural speech fillers (um/uh) and simple self-corrections are not writing errors. Does not score pronunciation or fluency."
+      : "Grammar (chat register) — flags real issues (agreement, wrong word/typo, unclear wording). Missing caps/periods are not scored. Does not score relevance or substance. LanguageTool formal checks are not wired yet.",
     grammarIssues,
     relevanceScore: relevance.score,
     relevanceNote: relevance.note,
@@ -588,12 +621,15 @@ export function evaluateSimulatorSession(
     avgWpm: avgEst.wpm,
     wpmReliable: avgEst.reliable,
     rawAvgWpm: Math.round(rawAvg) || avgEst.rawWpm,
+    spokenSession,
     messageCount: n,
     grammarErrorCount,
     clinicalAccuracyHits,
-    accuracyNote: avgEst.reliable
-      ? `Typing pace estimated from first keystroke → send (capped sanity ≤ ${MAX_PLAUSIBLE_WPM} WPM). Accuracy is not measured here — clinical content uses safety tiers.`
-      : "Typing pace unable to estimate — send timing was too short or implausibly fast (often paste, or timer started late). Clinical content is scored via safety tiers, not this number.",
+    accuracyNote: spokenSession
+      ? "Spoken mode scores what you said after you confirm the transcript — the same Grammar, Politeness, Relevance, and Safety checks as typed chat-sim. It does not score pronunciation, fluency, or how quickly you replied. Typing pace (WPM) does not apply."
+      : avgEst.reliable
+        ? `Typing pace estimated from first keystroke → send (capped sanity ≤ ${MAX_PLAUSIBLE_WPM} WPM). Accuracy is not measured here — clinical content uses safety tiers.`
+        : "Typing pace unable to estimate — send timing was too short or implausibly fast (often paste, or timer started late). Clinical content is scored via safety tiers, not this number.",
     outcome: opts?.outcome ?? "completed",
     redFlagged: opts?.redFlagged ?? false,
     safetyReasons,

@@ -76,6 +76,7 @@ function SessionCard({
       ) : null}
       <p className="text-xs text-[var(--siya-text)]">
         Scores — politeness {meta.politenessScore ?? "—"}/100 · grammar {meta.grammarScore ?? "—"}/100
+        {meta.spokenSession ? " · spoken replies" : ""}
       </p>
       {meta.endReason ? (
         <p className="text-xs text-[var(--siya-text)]">End: {meta.endReason}</p>
@@ -100,9 +101,12 @@ function SessionCard({
               }`}
             >
               <span className="font-semibold opacity-80">
-                {t.who === "you" ? "MA" : t.who}:{" "}
+                {t.who === "you" ? (t.inputModality === "spoken" ? "MA (spoken)" : "MA") : t.who}:{" "}
               </span>
               {t.text}
+              {t.who === "you" && t.sttRaw && t.sttRaw !== t.text ? (
+                <p className="mt-1 text-[10px] opacity-75">STT raw (audit): {t.sttRaw}</p>
+              ) : null}
             </li>
           ))}
         </ul>

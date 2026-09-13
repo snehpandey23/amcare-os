@@ -23,6 +23,11 @@ export type ChatSimTranscriptTurn = {
   /** "you" = trainee MA; otherwise patient display name */
   who: string;
   text: string;
+  /** How the MA entered this reply (spoken = STT → edit → submit). */
+  inputModality?: "typed" | "spoken";
+  /** Raw cloud STT before MA edit — Ops audit only; never used for scoring. */
+  sttRaw?: string;
+  sttProvider?: string;
 };
 
 /** Chat simulator session outcome (Ops-queryable via level_up day ledger). */
@@ -40,6 +45,8 @@ export type ChatSimLedgerMeta = {
   endReason?: string;
   /** Schema marker — Ops uses this to tell reviewable vs legacy summary-only flags. */
   transcriptVersion?: 1;
+  /** At least one MA reply used spoken capture. */
+  spokenSession?: boolean;
 };
 
 const TRANSCRIPT_MAX_TURNS = 48;
@@ -47,15 +54,31 @@ const TRANSCRIPT_MAX_CHARS = 1200;
 
 /** Normalize simulator lines into a persistable transcript (capped). */
 export function buildChatSimTranscript(
-  lines: Array<{ who: string; text: string }>,
+  lines: Array<{
+    who: string;
+    text: string;
+    inputModality?: "typed" | "spoken";
+    sttRaw?: string;
+    sttProvider?: string;
+  }>,
 ): ChatSimTranscriptTurn[] {
   return lines
     .filter((l) => (l.text || "").trim())
     .slice(-TRANSCRIPT_MAX_TURNS)
-    .map((l) => ({
-      who: l.who === "you" ? "you" : l.who,
-      text: (l.text || "").trim().slice(0, TRANSCRIPT_MAX_CHARS),
-    }));
+    .map((l) => {
+      const turn: ChatSimTranscriptTurn = {
+        who: l.who === "you" ? "you" : l.who,
+        text: (l.text || "").trim().slice(0, TRANSCRIPT_MAX_CHARS),
+      };
+      if (l.who === "you" && l.inputModality === "spoken") {
+        turn.inputModality = "spoken";
+        if (l.sttRaw?.trim()) turn.sttRaw = l.sttRaw.trim().slice(0, TRANSCRIPT_MAX_CHARS);
+        if (l.sttProvider?.trim()) turn.sttProvider = l.sttProvider.trim().slice(0, 40);
+      } else if (l.who === "you" && l.inputModality === "typed") {
+        turn.inputModality = "typed";
+      }
+      return turn;
+    });
 }
 
 export function chatSimHasReviewableTranscript(meta: ChatSimLedgerMeta | undefined): boolean {

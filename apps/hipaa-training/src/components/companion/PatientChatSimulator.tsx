@@ -14,6 +14,7 @@ import {
   type Persona,
 } from "@/data/patient-drill/personas";
 import { evaluateSimulatorSession, type SimulatorFeedback } from "@/lib/patient-drill/evaluate";
+import { startWavCapture, type WavCapture } from "@/lib/talk-wav-capture";
 import {
   EMPTY_REPLY_FALLBACK,
   SCREENING_AS_DIAGNOSIS_LABEL,
@@ -36,7 +37,25 @@ import {
 import { CONCLUDE_OFFER_AFTER_TURNS, MAX_MA_TURNS } from "@/lib/patient-drill/session-bounds";
 
 type Phase = "pick" | "chat" | "summary";
-type Line = { who: "you" | string; text: string; startedAt?: number; sentAt?: number };
+type ReplyMode = "typed" | "spoken";
+type Line = {
+  who: "you" | string;
+  text: string;
+  startedAt?: number;
+  sentAt?: number;
+  inputModality?: "typed" | "spoken";
+  sttRaw?: string;
+  sttProvider?: string;
+};
+
+type SpeakDraft = {
+  /** Editable field — what will be scored if submitted. */
+  transcript: string;
+  /** Unedited STT — Ops audit only. */
+  sttRaw: string;
+  provider: string;
+  note: string;
+};
 
 type ApiStopPayload = {
   stop?: boolean;
@@ -156,7 +175,13 @@ export function PatientChatSimulator({
   const [showTranscript, setShowTranscript] = useState(false);
   /** Hide conclude offer until the next completed exchange. */
   const [concludeDismissedAtTurn, setConcludeDismissedAtTurn] = useState(0);
+  const [replyMode, setReplyMode] = useState<ReplyMode>("typed");
+  const [speakRecording, setSpeakRecording] = useState(false);
+  const [speakBusy, setSpeakBusy] = useState(false);
+  const [speakError, setSpeakError] = useState<string | null>(null);
+  const [speakDraft, setSpeakDraft] = useState<SpeakDraft | null>(null);
   const typingStartRef = useRef<number | null>(null);
+  const cloudCapRef = useRef<WavCapture | null>(null);
   const endRef = useRef<HTMLDivElement>(null);
   const awardedRef = useRef(false);
   const messagesRef = useRef(messages);
@@ -280,6 +305,7 @@ export function PatientChatSimulator({
             transcript,
             endReason: reason,
             transcriptVersion: 1,
+            spokenSession: fb.spokenSession,
           },
         });
         window.dispatchEvent(new Event("siya-level-up-updated"));
@@ -299,6 +325,12 @@ export function PatientChatSimulator({
     setSavedTranscript([]);
     setShowTranscript(false);
     setConcludeDismissedAtTurn(0);
+    setSpeakDraft(null);
+    setSpeakError(null);
+    setSpeakRecording(false);
+    setSpeakBusy(false);
+    cloudCapRef.current?.abort();
+    cloudCapRef.current = null;
     setPhase("chat");
   };
 
@@ -364,8 +396,11 @@ export function PatientChatSimulator({
     });
   };
 
-  const send = async () => {
-    const text = input.trim();
+  const send = async (
+    rawText?: string,
+    meta?: { inputModality?: "typed" | "spoken"; sttRaw?: string; sttProvider?: string },
+  ) => {
+    const text = (rawText ?? input).trim();
     if (!text || text.length < 3 || !persona || streaming || phase !== "chat") return;
     if (!token) {
       setError("Sign in to use the chat simulator.");
@@ -380,12 +415,26 @@ export function PatientChatSimulator({
       return;
     }
 
-    const startedTyping = typingStartRef.current ?? Date.now();
+    const modality = meta?.inputModality ?? "typed";
+    const startedTyping = modality === "typed" ? (typingStartRef.current ?? Date.now()) : undefined;
     const sentAt = Date.now();
     typingStartRef.current = null;
-    const next: Line[] = [...messages, { who: "you", text, startedAt: startedTyping, sentAt }];
+    const next: Line[] = [
+      ...messages,
+      {
+        who: "you",
+        text,
+        startedAt: startedTyping,
+        sentAt,
+        inputModality: modality,
+        sttRaw: modality === "spoken" ? meta?.sttRaw : undefined,
+        sttProvider: modality === "spoken" ? meta?.sttProvider : undefined,
+      },
+    ];
     setMessages(next);
     setInput("");
+    setSpeakDraft(null);
+    setSpeakError(null);
     setStreaming(true);
     setError(null);
 
@@ -447,51 +496,111 @@ export function PatientChatSimulator({
       setMessages((prev) => [...prev, { who: persona.name, text: "" }]);
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
-      let full = "";
+      let acc = "";
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        const chunk = decoder.decode(value, { stream: true });
-        if (!chunk) continue;
-        full += chunk;
-        const snapshot = full;
+        acc += decoder.decode(value, { stream: true });
+        const snapshot = acc;
         setMessages((prev) => {
           const copy = [...prev];
           const last = copy[copy.length - 1];
-          if (last && last.who === persona.name) {
-            copy[copy.length - 1] = { ...last, text: snapshot };
-          }
+          if (last && last.who === persona.name) copy[copy.length - 1] = { ...last, text: snapshot };
           return copy;
         });
       }
-
-      const finalText = full.trim() || EMPTY_REPLY_FALLBACK;
-      if (!full.trim()) {
-        setMessages((prev) => {
-          const copy = [...prev];
-          const last = copy[copy.length - 1];
-          if (last && last.who === persona.name) {
-            copy[copy.length - 1] = { ...last, text: EMPTY_REPLY_FALLBACK };
-          }
-          return copy;
-        });
-      }
-
-      const withReply = [...next, { who: persona.name, text: finalText }];
       if (next.filter((m) => m.who === "you").length >= turnCap) {
-        finishSession(`Reached ${turnCap} replies.`, { lines: withReply });
+        finishSession(`Reached ${turnCap} replies.`, {
+          lines: [...next, { who: persona.name, text: acc || EMPTY_REPLY_FALLBACK }],
+        });
       }
-    } catch (err) {
-      // Never leave a blank patient bubble — inject fallback and keep going.
+    } catch (e) {
       const fallbackLine = { who: persona.name, text: EMPTY_REPLY_FALLBACK };
       setMessages([...next, fallbackLine]);
-      setError(err instanceof Error ? err.message : String(err));
+      setError(e instanceof Error ? e.message : "Chat failed");
     } finally {
       setStreaming(false);
     }
   };
 
+  const startSpeakCapture = useCallback(async () => {
+    if (streaming || speakBusy || speakRecording || !token) return;
+    setSpeakError(null);
+    setSpeakDraft(null);
+    try {
+      const cap = await startWavCapture();
+      cloudCapRef.current = cap;
+      setSpeakRecording(true);
+    } catch (err) {
+      setSpeakError(err instanceof Error ? err.message : "Microphone permission denied.");
+    }
+  }, [streaming, speakBusy, speakRecording, token]);
+
+  const stopSpeakCapture = useCallback(async () => {
+    const cap = cloudCapRef.current;
+    cloudCapRef.current = null;
+    setSpeakRecording(false);
+    if (!cap) return;
+    setSpeakBusy(true);
+    setSpeakError(null);
+    try {
+      const wav = await cap.stop();
+      const headers: Record<string, string> = {};
+      if (token) headers.Authorization = `Bearer ${token}`;
+      const body = new FormData();
+      body.append("file", wav, "turn.wav");
+      const res = await fetch("/api/talk/cloud-stt", { method: "POST", headers, body });
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        transcript?: string;
+        provider?: string;
+        fallbackReason?: string;
+        sarvamTranscript?: string;
+        error?: string;
+      };
+      if (!res.ok || !data.ok || !data.transcript?.trim()) {
+        setSpeakError(data.error || "Cloud listen didn’t return a transcript. Nothing was sent.");
+        return;
+      }
+      const raw = data.transcript.trim();
+      const note = data.fallbackReason
+        ? `Fallback (${data.fallbackReason})${data.sarvamTranscript ? ` — Sarvam heard “${data.sarvamTranscript}”` : ""}`
+        : data.provider || "sarvam";
+      setSpeakDraft({
+        transcript: raw,
+        sttRaw: raw,
+        provider: data.provider || "sarvam",
+        note,
+      });
+    } catch (err) {
+      setSpeakError(err instanceof Error ? err.message : "Cloud listen failed. Nothing was sent.");
+    } finally {
+      setSpeakBusy(false);
+    }
+  }, [token]);
+
+  const submitSpeakDraft = () => {
+    const draft = speakDraft;
+    if (!draft || streaming) return;
+    const text = draft.transcript.trim();
+    if (text.length < 3) {
+      setSpeakError("Edit the transcript to at least a short reply before submitting.");
+      return;
+    }
+    void send(text, {
+      inputModality: "spoken",
+      sttRaw: draft.sttRaw,
+      sttProvider: draft.provider,
+    });
+  };
+
   const resetToPick = () => {
+    cloudCapRef.current?.abort();
+    cloudCapRef.current = null;
+    setSpeakRecording(false);
+    setSpeakBusy(false);
+    setSpeakDraft(null);
+    setSpeakError(null);
     setPhase("pick");
     setPersona(null);
     setMessages([]);
@@ -520,7 +629,8 @@ export function PatientChatSimulator({
           <h1 className={`mt-3 ${portalH1}`}>Chat simulator</h1>
           <p className="mt-2 text-sm text-[var(--siya-text)]">
             Practice a live patient conversation. Choose a persona to get started — same AI as Ask, used here only as a
-            training patient.
+            training patient. Reply by <strong>typing</strong> or <strong>speaking</strong> (turn-based: record → review
+            transcript → submit — not a live phone call).
           </p>
           <p className="mt-2 text-sm text-[var(--siya-text)]">
             Sessions run up to <strong>{MAX_MA_TURNS} of your replies</strong> (no clock cutoff). After{" "}
@@ -735,9 +845,18 @@ export function PatientChatSimulator({
           ) : null}
           <p>
             <strong>Typing pace (est.):</strong>{" "}
-            {feedback.wpmReliable && feedback.avgWpm > 0 ? `${feedback.avgWpm} WPM` : "Unable to estimate"}
+            {feedback.spokenSession
+              ? "n/a (spoken)"
+              : feedback.wpmReliable && feedback.avgWpm > 0
+                ? `${feedback.avgWpm} WPM`
+                : "Unable to estimate"}
           </p>
           <p className="text-sm text-[var(--siya-text)]">{feedback.accuracyNote}</p>
+          {feedback.spokenSession ? (
+            <p className="text-xs text-[var(--siya-text-muted)]">
+              Spoken replies were confirmed from an editable transcript before scoring — not live two-way conversation.
+            </p>
+          ) : null}
           {feedback.safetyReasons.length > 0 ? (
             <p className="text-sm text-[var(--siya-text)]">
               Safety codes: {feedback.safetyReasons.join(", ")}
@@ -765,9 +884,18 @@ export function PatientChatSimulator({
                   }`}
                 >
                   <p className="mb-0.5 text-[10px] font-semibold uppercase tracking-wide opacity-80">
-                    {t.who === "you" ? "You (MA)" : t.who}
+                    {t.who === "you"
+                      ? t.inputModality === "spoken"
+                        ? "You (MA · spoken)"
+                        : "You (MA)"
+                      : t.who}
                   </p>
                   {t.text}
+                  {t.who === "you" && t.sttRaw && t.sttRaw !== t.text ? (
+                    <p className="mt-1 text-[10px] opacity-75">
+                      STT raw (audit only{t.sttProvider ? ` · ${t.sttProvider}` : ""}): {t.sttRaw}
+                    </p>
+                  ) : null}
                 </li>
               ))}
               {!savedTranscript.length ? (
@@ -844,6 +972,8 @@ export function PatientChatSimulator({
                 <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-[var(--siya-primary)]">
                   {m.who}
                 </p>
+              ) : m.inputModality === "spoken" ? (
+                <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-white/80">Spoken</p>
               ) : null}
               {m.text || (streaming ? "…" : "")}
             </div>
@@ -886,37 +1016,175 @@ export function PatientChatSimulator({
       ) : null}
 
       <div className="shrink-0 border-t border-[var(--siya-border)] bg-[var(--siya-white)] p-3">
-        <div className="mx-auto flex max-w-3xl gap-2">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => {
-              const next = e.target.value;
-              // First keystroke (not focus) starts the WPM clock — avoids focus→paste→send absurd rates.
-              if (typingStartRef.current == null && next.length > 0) {
-                typingStartRef.current = Date.now();
-              }
-              if (next.length === 0) typingStartRef.current = null;
-              setInput(next);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                void send();
-              }
-            }}
-            disabled={streaming || !token}
-            placeholder="Type as the MA — process, booking, forms. No clinical decisions."
-            className={portalAskInput}
-          />
-          <button
-            type="button"
-            className={portalAskSendBtn}
-            disabled={streaming || input.trim().length < 3 || !token}
-            onClick={() => void send()}
-          >
-            Send
-          </button>
+        <div className="mx-auto max-w-3xl space-y-2">
+          <div className="flex flex-wrap items-center gap-2 text-xs">
+            <span className="font-semibold text-[var(--siya-text-secondary)]">Reply by</span>
+            <button
+              type="button"
+              disabled={streaming || speakRecording || speakBusy || Boolean(speakDraft)}
+              className={`rounded-full px-3 py-1 font-semibold ${
+                replyMode === "typed"
+                  ? "bg-[var(--siya-primary)] text-white"
+                  : "border border-[var(--siya-border)] text-[var(--siya-primary)]"
+              }`}
+              onClick={() => {
+                setReplyMode("typed");
+                setSpeakError(null);
+              }}
+            >
+              Type
+            </button>
+            <button
+              type="button"
+              disabled={streaming}
+              className={`rounded-full px-3 py-1 font-semibold ${
+                replyMode === "spoken"
+                  ? "bg-[var(--siya-primary)] text-white"
+                  : "border border-[var(--siya-border)] text-[var(--siya-primary)]"
+              }`}
+              onClick={() => {
+                setReplyMode("spoken");
+                setInput("");
+                typingStartRef.current = null;
+              }}
+            >
+              Speak
+            </button>
+            <span className="text-[var(--siya-text-muted)]">Turn-based · not live two-way</span>
+          </div>
+
+          {replyMode === "spoken" ? (
+            <div className="space-y-2 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] p-3">
+              {speakDraft ? (
+                <>
+                  <p className="text-xs font-semibold text-[var(--siya-primary)]">
+                    Review transcript before submit
+                  </p>
+                  <p className="text-[11px] text-[var(--siya-text-muted)]">
+                    Fix STT mistakes or clean up false starts — only this edited text is scored ({speakDraft.note}).
+                  </p>
+                  <textarea
+                    value={speakDraft.transcript}
+                    onChange={(e) =>
+                      setSpeakDraft((d) => (d ? { ...d, transcript: e.target.value } : d))
+                    }
+                    rows={3}
+                    disabled={streaming || speakBusy}
+                    className={`${portalAskInput} min-h-[4.5rem] resize-y`}
+                    data-spoken-chat-sim-transcript="true"
+                    aria-label="Editable spoken reply transcript"
+                  />
+                  {speakDraft.sttRaw !== speakDraft.transcript.trim() ? (
+                    <p className="text-[10px] text-[var(--siya-text-muted)]">
+                      Raw STT (audit only): {speakDraft.sttRaw}
+                    </p>
+                  ) : null}
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      className={portalAskSendBtn}
+                      disabled={streaming || speakDraft.transcript.trim().length < 3}
+                      data-spoken-chat-sim-submit="true"
+                      onClick={() => submitSpeakDraft()}
+                    >
+                      Submit reply
+                    </button>
+                    <button
+                      type="button"
+                      className="rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-3.5 py-2 text-sm font-medium text-[var(--siya-primary)]"
+                      disabled={streaming || speakBusy}
+                      onClick={() => {
+                        setSpeakDraft(null);
+                        void startSpeakCapture();
+                      }}
+                    >
+                      Re-record
+                    </button>
+                    <button
+                      type="button"
+                      className="rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-3.5 py-2 text-sm font-medium text-[var(--siya-text-secondary)]"
+                      disabled={streaming || speakBusy}
+                      onClick={() => setSpeakDraft(null)}
+                    >
+                      Discard
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p className="text-[11px] text-[var(--siya-text-muted)]">
+                    Record one reply, then edit the transcript before it is scored. Same Grammar · Politeness ·
+                    Relevance · Safety as typing — not pronunciation.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {!speakRecording ? (
+                      <button
+                        type="button"
+                        className={portalAskSendBtn}
+                        disabled={streaming || speakBusy || !token}
+                        data-spoken-chat-sim-record="true"
+                        onClick={() => void startSpeakCapture()}
+                      >
+                        {speakBusy ? "Transcribing…" : "Record reply"}
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        className="rounded-lg bg-[var(--siya-status-error-text)] px-3.5 py-2 text-sm font-semibold text-white"
+                        data-spoken-chat-sim-stop="true"
+                        onClick={() => void stopSpeakCapture()}
+                      >
+                        Stop & transcribe
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      className="rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-3.5 py-2 text-sm font-medium text-[var(--siya-primary)]"
+                      disabled={streaming || speakRecording || speakBusy}
+                      onClick={() => setReplyMode("typed")}
+                    >
+                      Switch to type
+                    </button>
+                  </div>
+                </>
+              )}
+              {speakError ? (
+                <p className="text-xs text-[var(--siya-status-error-text)]">{speakError}</p>
+              ) : null}
+            </div>
+          ) : (
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => {
+                  const next = e.target.value;
+                  if (typingStartRef.current == null && next.length > 0) {
+                    typingStartRef.current = Date.now();
+                  }
+                  if (next.length === 0) typingStartRef.current = null;
+                  setInput(next);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    void send();
+                  }
+                }}
+                disabled={streaming || !token}
+                placeholder="Type as the MA — process, booking, forms. No clinical decisions."
+                className={portalAskInput}
+              />
+              <button
+                type="button"
+                className={portalAskSendBtn}
+                disabled={streaming || input.trim().length < 3 || !token}
+                onClick={() => void send()}
+              >
+                Send
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
