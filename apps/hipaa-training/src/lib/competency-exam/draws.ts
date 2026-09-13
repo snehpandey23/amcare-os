@@ -9,6 +9,7 @@ import {
   WRITING_CLINICAL_PROMPTS,
   type ClinicalWritingPrompt,
 } from "@/content/competency-exam/writing-clinical-prompts.draft";
+import { LISTENING_PROMPTS } from "@/content/competency-exam/listening-prompts.draft";
 import { drawUnseen, type SeenEntry } from "./seen-set";
 
 const TYPING = passages as TypingPassage[];
@@ -28,6 +29,11 @@ export function drawWritingPrompt(seen: SeenEntry[], seed: number) {
 /** Supplemental patient-communication bank (kept; not the default exam draw). */
 export function drawWritingPatientPrompt(seen: SeenEntry[], seed: number) {
   return drawUnseen(WRITING_PROMPTS, seen, 1, seed, "writing");
+}
+
+/** Isolated Listening review — voicemail → same clinical two-part write-up as Writing. */
+export function drawListeningPrompt(seen: SeenEntry[], seed: number) {
+  return drawUnseen(LISTENING_PROMPTS, seen, 1, seed, "listening");
 }
 
 export function drawChatBrief(seen: SeenEntry[], seed: number) {

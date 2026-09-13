@@ -73,7 +73,7 @@ assert.equal(stripForSpeech("**Hello** world"), "Hello world");
 
 // --- Stage 1: PHI still blocked (same guard Talk Mode routes through) ---
 {
-  const r = assessStaffMessageSafety("patient name is Jane Doe MRN 12345");
+  const r = assessStaffMessageSafety("patient name is Sarah Chen MRN 12345");
   assert.equal(r.blocked, true);
   assert.equal(r.category, "phi");
   console.log("OK PHI hard-stop unchanged");

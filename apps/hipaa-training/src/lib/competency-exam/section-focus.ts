@@ -1,12 +1,12 @@
 /**
  * Isolated section review for the MA competency exam.
  * Full sitting stays at /learn/competency-exam with no query.
- * Review one section: /learn/competency-exam?section=typing|hipaa|writing|chat-sim|report
+ * Review one section: /learn/competency-exam?section=typing|hipaa|writing|listening|chat-sim|report
  */
 
-export type ExamSectionFocus = "typing" | "hipaa" | "writing" | "chat-sim" | "report";
+export type ExamSectionFocus = "typing" | "hipaa" | "writing" | "listening" | "chat-sim" | "report";
 
-const FOCUS: ExamSectionFocus[] = ["typing", "hipaa", "writing", "chat-sim", "report"];
+const FOCUS: ExamSectionFocus[] = ["typing", "hipaa", "writing", "listening", "chat-sim", "report"];
 
 export function parseExamSectionFocus(raw: string | null | undefined): ExamSectionFocus | null {
   const v = (raw || "").trim().toLowerCase();

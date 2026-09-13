@@ -52,12 +52,15 @@ export type IsolatedWritingTrail = {
   /** Jaccard similarity chart vs escalation (0–1). */
   partsSimilarity?: number;
   nearDuplicateOfChart?: boolean;
+  /** Listening: fixed voicemail asset path */
+  audioSrc?: string;
+  voicemailScript?: string;
 };
 
 export type IsolatedReviewAttempt = {
   attemptId: string;
   userId: string;
-  section: "typing" | "hipaa" | "writing" | "chat-sim";
+  section: "typing" | "hipaa" | "writing" | "listening" | "chat-sim";
   at: number;
   score: number | null;
   detail: string;
@@ -65,6 +68,8 @@ export type IsolatedReviewAttempt = {
   repeatedIds: string[];
   items: IsolatedReviewItemResult[];
   writing?: IsolatedWritingTrail;
+  /** Listening adds voicemail metadata on the writing trail. */
+  listeningAudioSrc?: string;
 };
 
 function readJson<T>(key: string, fallback: T): T {

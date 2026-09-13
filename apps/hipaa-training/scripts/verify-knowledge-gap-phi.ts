@@ -56,7 +56,7 @@ assert(
   "safe question may be cached locally",
 );
 
-const planted = "Patient Jane Doe DOB 1/1/90 needs refill ASAP";
+const planted = "Patient Sarah Chen DOB 1/1/90 needs refill ASAP";
 const { text, subject } = buildLeadGapDigestEmail({
   to: "lead@example.com",
   name: "Alex Lead",
@@ -72,7 +72,7 @@ const { text, subject } = buildLeadGapDigestEmail({
   ],
 });
 assert(!text.includes(planted), "digest must not include planted PHI question");
-assert(!text.includes("Jane Doe"), "digest must not include patient name");
+assert(!text.includes("Sarah Chen"), "digest must not include patient name");
 assert(text.includes("Notify owner / auto-gap"), "digest honesty note");
 assert(text.includes("Missing approved policy"), "digest includes task label");
 assert(text.includes("Clinical Operations"), "digest includes department");

@@ -26,6 +26,7 @@ const DRILL_LINKS = [
   { label: "Competency · Typing review", href: "/learn/competency-exam?section=typing" },
   { label: "Competency · HIPAA review", href: "/learn/competency-exam?section=hipaa" },
   { label: "Competency · Writing review", href: "/learn/competency-exam?section=writing" },
+  { label: "Competency · Listening prototype", href: "/learn/competency-exam?section=listening" },
   { label: "Chat simulator", href: "/learn/chat-simulator" },
   { label: "Chat speed & accuracy", href: "/learn/practice#typing" },
   { label: "US map", href: "/learn/practice#map" },

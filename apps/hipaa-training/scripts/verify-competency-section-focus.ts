@@ -41,6 +41,8 @@ assert.equal(parseExamSectionFocus("writing"), "writing");
 assert.equal(examSectionReviewHref("typing"), "/learn/competency-exam?section=typing");
 assert.equal(examSectionReviewHref("hipaa"), "/learn/competency-exam?section=hipaa");
 assert.equal(examSectionReviewHref("writing"), "/learn/competency-exam?section=writing");
+assert.equal(examSectionReviewHref("listening"), "/learn/competency-exam?section=listening");
+assert.equal(parseExamSectionFocus("listening"), "listening");
 assert.equal(passages.length, 15, "typing bank size");
 assert.equal(COMPETENCY_EXAM_TIMERS.writing, 10 * 60, "writing lock is 10 minutes");
 
@@ -60,6 +62,10 @@ assert.match(examSrc, /adjustEscalationScore/);
 assert.match(examSrc, /Write only what you&apos;d put in the patient&apos;s chart/);
 assert.match(examSrc, /Write the message the way you&apos;d actually send it to the provider/);
 assert.match(examSrc, /Optional: see one example/);
+assert.match(examSrc, /drawListeningPrompt/);
+assert.match(examSrc, /data-listening-voicemail/);
+assert.match(examSrc, /Start listening section/);
+assert.match(examSrc, /WRITING_DETERMINISTIC_ONLY_CAP/);
 assert.match(examSrc, /WRITING_ESCALATION_WORKED_EXAMPLE/);
 assert.match(examSrc, /data-writing-escalation-example/);
 assert.doesNotMatch(examSrc, /Example shape \(replace with this scenario\)/);
@@ -338,6 +344,7 @@ assert.match(submitWritingFn![0], /combineWritingPartScores/);
 const learnHub = readFileSync(join(__dirname, "../src/components/companion/LearnHub.tsx"), "utf8");
 assert.match(learnHub, /Competency · Writing review/);
 assert.match(learnHub, /\/learn\/competency-exam\?section=writing/);
+assert.match(learnHub, /\/learn\/competency-exam\?section=listening/);
 
 console.log("EVIDENCE writing isolated trail:", JSON.stringify(loaded, null, 2));
 console.log("verify-competency-section-focus: OK", {

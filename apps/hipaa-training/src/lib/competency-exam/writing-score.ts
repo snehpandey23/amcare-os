@@ -57,18 +57,26 @@ export function scoreWritingPartDeterministic(text: string, part: WritingPartId)
 export function blendWritingScore(deterministic: number, llm: number | null): {
   score: number;
   note: string;
+  /** True when LLM estimate was unavailable — score is grammar/length only and capped. */
+  partial: boolean;
 } {
   if (llm == null) {
+    const score = Math.min(deterministic, WRITING_DETERMINISTIC_ONLY_CAP);
     return {
-      score: deterministic,
-      note: "LLM content/coherence estimate unavailable — deterministic checks only. Not a complete writing judgment.",
+      score,
+      note: `Partial score — LLM content/coherence estimate unavailable. Reflects length/grammar only (capped at ${WRITING_DETERMINISTIC_ONLY_CAP}/100); not a full writing judgment.`,
+      partial: true,
     };
   }
   return {
     score: Math.round(deterministic * 0.4 + llm * 0.6),
     note: "Combined: 40% deterministic (length + chat-register grammar) and 60% LLM content/coherence estimate. The LLM part is an estimate, not a certified grade.",
+    partial: false,
   };
 }
+
+/** Cap when LLM estimate is missing — never present deterministic-only as a full 100. */
+export const WRITING_DETERMINISTIC_ONLY_CAP = 68;
 
 /** Founder default 2026-09-12: 50/50 Part A / Part B — revisit after real attempt data. */
 export const WRITING_PART_WEIGHT_A = 0.5;
