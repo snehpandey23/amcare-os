@@ -67,10 +67,18 @@ export async function archiveAssistThread(id: string): Promise<void> {
   const res = await assistFetch(`/api/assist/threads/${encodeURIComponent(id)}`, {
     method: "DELETE",
   });
+  // Already gone (empty-thread cleanup, other tab, stale Clear) — treat as success.
+  if (res.status === 404) return;
   if (!res.ok) {
     const data = (await res.json().catch(() => ({}))) as { error?: string };
     throw new Error(data.error || "Could not delete chat");
   }
+}
+
+/** True when the API says this thread id no longer exists for the user. */
+export function isAssistThreadMissingError(err: unknown): boolean {
+  const msg = err instanceof Error ? err.message : String(err ?? "");
+  return /thread not found/i.test(msg) || /chat not found/i.test(msg);
 }
 
 /** @deprecated alias — same permanent delete */

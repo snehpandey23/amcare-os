@@ -30,7 +30,13 @@ export function setAssistSessionActiveId(id: string | null): void {
 }
 
 export function createFreshAssistThreadOnce(): Promise<AssistThread> {
-  if (!freshCreateInflight) freshCreateInflight = createAssistThread();
+  if (!freshCreateInflight) {
+    freshCreateInflight = createAssistThread().catch((err) => {
+      // Allow a later boot/recovery create after a failed mint.
+      freshCreateInflight = null;
+      throw err;
+    });
+  }
   return freshCreateInflight;
 }
 

@@ -169,6 +169,7 @@ export function SiyaChat({
   threadId,
   onThreadMetaChange,
   onRequestNewThread,
+  onThreadMissing,
   surface = "default",
   openingOverride,
 }: {
@@ -185,6 +186,8 @@ export function SiyaChat({
   onThreadMetaChange?: () => void;
   /** Assist v2: Clear chat → start a new server thread. */
   onRequestNewThread?: () => void;
+  /** Assist v2: active thread id is gone server-side — open a fresh empty chat (no delete). */
+  onThreadMissing?: () => void;
   /** founder-coach = Talk thread: same engine, no Plan Record writes, no 1–5 triage. */
   surface?: "default" | "founder-coach";
   openingOverride?: string;
@@ -263,6 +266,9 @@ export function SiyaChat({
     ? `I'm ${assistantLabel}. Policies, SOPs, tools, or who to contact.`
     : "Policies, SOPs, tools, or who to contact.";
 
+  const onThreadMissingRef = useRef(onThreadMissing);
+  onThreadMissingRef.current = onThreadMissing;
+
   useEffect(() => {
     if (!threadId || !token) {
       setThreadLoading(false);
@@ -272,8 +278,8 @@ export function SiyaChat({
     setThreadLoading(true);
     sentInitial.current = false;
     (async () => {
+      const { loadAssistThread, isAssistThreadMissingError } = await import("@/lib/assist-chat-api");
       try {
-        const { loadAssistThread } = await import("@/lib/assist-chat-api");
         const { messages: rows } = await loadAssistThread(threadId);
         if (cancelled) return;
         setMessages(
@@ -283,8 +289,12 @@ export function SiyaChat({
             content: r.content,
           })),
         );
-      } catch {
-        if (!cancelled) setMessages([]);
+      } catch (e) {
+        if (cancelled) return;
+        setMessages([]);
+        if (isAssistThreadMissingError(e) && onThreadMissingRef.current) {
+          onThreadMissingRef.current();
+        }
       } finally {
         if (!cancelled) setThreadLoading(false);
       }

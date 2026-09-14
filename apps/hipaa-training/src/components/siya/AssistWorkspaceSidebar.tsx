@@ -103,7 +103,7 @@ export function AssistWorkspaceSidebar({ onNavigate }: { onNavigate?: () => void
         )}
       </div>
 
-      {bootError ? (
+      {bootError && !/thread not found/i.test(bootError) ? (
         <p className="border-t border-[var(--siya-border)] px-3 py-2 text-[10px] text-[var(--siya-status-warn-text)]">
           {bootError}
         </p>

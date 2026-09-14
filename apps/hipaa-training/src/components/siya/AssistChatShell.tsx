@@ -26,7 +26,7 @@ export function AssistChatShell({
   openingOverride,
 }: Props) {
   const { token } = useAuth();
-  const { activeId, ready, bootError, search, refreshList, clearAndNewChat } = useAssistThreads();
+  const { activeId, ready, search, refreshList, clearAndNewChat, openFreshChat } = useAssistThreads();
 
   if (!token) {
     return (
@@ -34,12 +34,10 @@ export function AssistChatShell({
     );
   }
 
+  // Never land My Day on a bare API error — keep showing Loading until we have an active thread.
+  // Boot / Clear / missing-thread recovery always mint or reuse a blank chat.
   if (!ready || !activeId) {
-    return (
-      <p className="p-4 text-sm text-[var(--siya-text-muted)]">
-        {bootError || "Loading Assist…"}
-      </p>
-    );
+    return <p className="p-4 text-sm text-[var(--siya-text-muted)]">Loading Assist…</p>;
   }
 
   return (
@@ -55,6 +53,7 @@ export function AssistChatShell({
         openingOverride={openingOverride}
         onThreadMetaChange={() => void refreshList(search.trim() || undefined)}
         onRequestNewThread={() => void clearAndNewChat()}
+        onThreadMissing={() => void openFreshChat({ replaceMissingId: activeId ?? undefined })}
       />
     </div>
   );

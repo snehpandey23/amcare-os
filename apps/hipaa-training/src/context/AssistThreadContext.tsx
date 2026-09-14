@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -13,6 +14,7 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   archiveAssistThread,
   createAssistThread,
+  isAssistThreadMissingError,
   listAssistThreads,
   type AssistThread,
 } from "@/lib/assist-chat-api";
@@ -36,6 +38,8 @@ type AssistThreadContextValue = {
   newChat: () => Promise<void>;
   /** Delete current thread (if any), then open a fresh one — used by Clear. */
   clearAndNewChat: () => Promise<void>;
+  /** Open a fresh empty chat without deleting (stale / missing thread recovery). */
+  openFreshChat: (opts?: { replaceMissingId?: string }) => Promise<void>;
   selectThread: (id: string) => void;
   archiveThread: (id: string) => Promise<void>;
   refreshList: (q?: string) => Promise<void>;
@@ -71,6 +75,18 @@ function pickReusableEmptyThread(list: AssistThread[]): AssistThread | undefined
   return list.find(isEmptyAssistThread);
 }
 
+function stripStaleThreadQuery() {
+  if (typeof window === "undefined") return;
+  try {
+    const url = new URL(window.location.href);
+    if (!url.searchParams.has("thread")) return;
+    url.searchParams.delete("thread");
+    window.history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+  } catch {
+    /* ignore */
+  }
+}
+
 export function AssistThreadProvider({ children }: { children: ReactNode }) {
   const { token } = useAuth();
   const path = usePathname() ?? "/";
@@ -82,6 +98,7 @@ export function AssistThreadProvider({ children }: { children: ReactNode }) {
   const [bootError, setBootError] = useState<string | null>(null);
   const [loadingList, setLoadingList] = useState(true);
   const [ready, setReady] = useState(false);
+  const recoveringRef = useRef(false);
 
   useEffect(() => {
     setDeepThreadId(readDeepThreadIdFromUrl());
@@ -104,6 +121,52 @@ export function AssistThreadProvider({ children }: { children: ReactNode }) {
     [token],
   );
 
+  const activateThread = useCallback((t: AssistThread, list: AssistThread[]) => {
+    markAssistSessionBooted();
+    setAssistSessionActiveId(t.id);
+    setThreads(list);
+    setActiveId(t.id);
+    setBootError(null);
+  }, []);
+
+  /** Mint or reuse a blank thread — never leave My Day without an active chat. */
+  const ensureFreshActiveThread = useCallback(
+    async (list: AssistThread[], cancelled?: () => boolean): Promise<boolean> => {
+      const reusable = pickReusableEmptyThread(list);
+      if (reusable) {
+        if (cancelled?.()) return false;
+        const dupes = list.filter((x) => x.id !== reusable.id && isEmptyAssistThread(x));
+        activateThread(reusable, [
+          reusable,
+          ...list.filter((x) => x.id !== reusable.id && !isEmptyAssistThread(x)),
+        ]);
+        if (dupes.length) {
+          void Promise.allSettled(dupes.map((d) => archiveAssistThread(d.id)));
+        }
+        return true;
+      }
+      try {
+        const t = await createFreshAssistThreadOnce();
+        if (cancelled?.()) return false;
+        activateThread(t, [t, ...list.filter((x) => x.id !== t.id)]);
+        return true;
+      } catch {
+        try {
+          const t = await createAssistThread();
+          if (cancelled?.()) return false;
+          activateThread(t, [t, ...list.filter((x) => x.id !== t.id)]);
+          return true;
+        } catch (e) {
+          if (!cancelled?.()) {
+            setBootError(e instanceof Error ? e.message : "Could not start Assist");
+          }
+          return false;
+        }
+      }
+    },
+    [activateThread],
+  );
+
   useEffect(() => {
     if (!token) {
       setLoadingList(false);
@@ -113,6 +176,7 @@ export function AssistThreadProvider({ children }: { children: ReactNode }) {
       return;
     }
     let cancelled = false;
+    const isCancelled = () => cancelled;
     (async () => {
       setLoadingList(true);
       try {
@@ -125,33 +189,13 @@ export function AssistThreadProvider({ children }: { children: ReactNode }) {
           if (deepId) {
             const match = list.find((x) => x.id === deepId);
             if (match) {
-              markAssistSessionBooted();
-              setAssistSessionActiveId(match.id);
-              setThreads(list);
-              setActiveId(match.id);
+              activateThread(match, list);
               return;
             }
+            // Stale deep link — drop ?thread= and land on a fresh empty chat.
+            stripStaleThreadQuery();
           }
-          // Reuse a blank "New chat" if one already exists — don't keep minting empties.
-          const reusable = pickReusableEmptyThread(list);
-          if (reusable) {
-            markAssistSessionBooted();
-            setAssistSessionActiveId(reusable.id);
-            // Drop other empty duplicates from the sidebar (delete in background).
-            const dupes = list.filter((x) => x.id !== reusable.id && isEmptyAssistThread(x));
-            setThreads([reusable, ...list.filter((x) => x.id !== reusable.id && !isEmptyAssistThread(x))]);
-            setActiveId(reusable.id);
-            if (dupes.length) {
-              void Promise.allSettled(dupes.map((d) => archiveAssistThread(d.id)));
-            }
-            return;
-          }
-          const t = await createFreshAssistThreadOnce();
-          if (cancelled) return;
-          markAssistSessionBooted();
-          setAssistSessionActiveId(t.id);
-          setThreads([t, ...list.filter((x) => x.id !== t.id)]);
-          setActiveId(t.id);
+          await ensureFreshActiveThread(list, isCancelled);
           return;
         }
 
@@ -162,31 +206,42 @@ export function AssistThreadProvider({ children }: { children: ReactNode }) {
           setThreads(list);
           setActiveId(match.id);
           setAssistSessionActiveId(match.id);
-        } else if (list[0]) {
+          setBootError(null);
+          // Clean duplicate blanks, but never delete the active thread.
+          const empties = list.filter(isEmptyAssistThread);
+          if (empties.length > 1) {
+            const keep = empties.find((e) => e.id === match.id) ?? empties[0]!;
+            const drop = empties.filter((e) => e.id !== keep.id);
+            setThreads([keep, ...list.filter((x) => !isEmptyAssistThread(x) || x.id === keep.id)]);
+            void Promise.allSettled(drop.map((d) => archiveAssistThread(d.id)));
+          }
+          return;
+        }
+
+        if (deepId && !fromUrl) stripStaleThreadQuery();
+
+        if (list[0]) {
+          // Saved / URL id is gone — fall back to newest remaining chat (or a blank).
+          const empties = list.filter(isEmptyAssistThread);
+          if (empties.length > 0) {
+            await ensureFreshActiveThread(list, isCancelled);
+            return;
+          }
           setThreads(list);
           setActiveId(list[0].id);
           setAssistSessionActiveId(list[0].id);
-          // Opportunistic cleanup of duplicate blank threads after boot.
-          const empties = list.filter(isEmptyAssistThread);
-          if (empties.length > 1) {
-            const keep = empties[0]!;
-            const drop = empties.slice(1);
-            setThreads([keep, ...list.filter((x) => !isEmptyAssistThread(x) || x.id === keep.id)]);
-            void Promise.allSettled(drop.map((d) => archiveAssistThread(d.id)));
-            if (!fromUrl && (!saved || empties.some((e) => e.id === saved))) {
-              setActiveId(keep.id);
-              setAssistSessionActiveId(keep.id);
-            }
-          }
-        } else {
-          const t = await createAssistThread();
-          if (cancelled) return;
-          setThreads([t]);
-          setActiveId(t.id);
-          setAssistSessionActiveId(t.id);
+          setBootError(null);
+          return;
         }
+
+        await ensureFreshActiveThread(list, isCancelled);
       } catch (e) {
-        if (!cancelled) setBootError(e instanceof Error ? e.message : "Could not start Assist");
+        if (cancelled) return;
+        // Last resort: still try to mint a blank chat so My Day is usable.
+        const recovered = await ensureFreshActiveThread([], isCancelled);
+        if (!recovered && !isAssistThreadMissingError(e)) {
+          setBootError(e instanceof Error ? e.message : "Could not start Assist");
+        }
       } finally {
         if (!cancelled) {
           setLoadingList(false);
@@ -197,7 +252,7 @@ export function AssistThreadProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true;
     };
-  }, [token, deepThreadId]);
+  }, [token, deepThreadId, activateThread, ensureFreshActiveThread]);
 
   // When ?thread= changes after boot (e.g. email deep link while already signed in).
   useEffect(() => {
@@ -207,20 +262,39 @@ export function AssistThreadProvider({ children }: { children: ReactNode }) {
     if (match) {
       setActiveId(match.id);
       setAssistSessionActiveId(match.id);
+      setBootError(null);
+      return;
     }
+    // Deep link points at a deleted / foreign thread — clear query and stay on current / fresh.
+    stripStaleThreadQuery();
   }, [token, deepThreadId, ready, activeId, threads]);
 
-  const newChat = useCallback(async () => {
+  const openFreshChat = useCallback(async (opts?: { replaceMissingId?: string }) => {
+    if (recoveringRef.current) return;
+    recoveringRef.current = true;
+    const missingId = opts?.replaceMissingId ?? null;
     try {
-      // If the active thread is already empty, just focus it — don't spawn another blank.
-      const current = threads.find((t) => t.id === activeId);
+      // Drop a known-missing id from the sidebar so we don't "reuse" a ghost Untitled chat.
+      const baseList = missingId
+        ? threads.filter((t) => t.id !== missingId)
+        : threads;
+      if (missingId) {
+        setThreads(baseList);
+        if (getAssistSessionActiveId() === missingId) setAssistSessionActiveId(null);
+      }
+
+      const current = baseList.find((t) => t.id === activeId && t.id !== missingId);
       if (current && isEmptyAssistThread(current)) {
+        setActiveId(current.id);
+        setAssistSessionActiveId(current.id);
         setSearch("");
         setBootError(null);
         goToMyDay(path, router);
         return;
       }
-      const reusable = pickReusableEmptyThread(threads.filter((t) => t.id !== activeId));
+      const reusable = pickReusableEmptyThread(
+        baseList.filter((t) => t.id !== activeId && t.id !== missingId),
+      );
       if (reusable) {
         setActiveId(reusable.id);
         setAssistSessionActiveId(reusable.id);
@@ -230,7 +304,10 @@ export function AssistThreadProvider({ children }: { children: ReactNode }) {
         return;
       }
       const t = await createAssistThread();
-      setThreads((prev) => [t, ...prev.filter((x) => x.id !== t.id)]);
+      setThreads((prev) => {
+        const cleaned = missingId ? prev.filter((x) => x.id !== missingId) : prev;
+        return [t, ...cleaned.filter((x) => x.id !== t.id)];
+      });
       setActiveId(t.id);
       setAssistSessionActiveId(t.id);
       setSearch("");
@@ -238,17 +315,41 @@ export function AssistThreadProvider({ children }: { children: ReactNode }) {
       goToMyDay(path, router);
     } catch (e) {
       setBootError(e instanceof Error ? e.message : "Could not create chat");
+    } finally {
+      recoveringRef.current = false;
     }
   }, [path, router, threads, activeId]);
+
+  const newChat = useCallback(async () => {
+    await openFreshChat();
+  }, [openFreshChat]);
 
   /** Clear / delete current conversation permanently, then start fresh. */
   const clearAndNewChat = useCallback(async () => {
     const current = activeId;
     try {
       if (current) {
-        await archiveAssistThread(current);
+        await archiveAssistThread(current); // 404 = already gone
         setThreads((prev) => prev.filter((t) => t.id !== current));
         if (getAssistSessionActiveId() === current) setAssistSessionActiveId(null);
+      }
+      // Prefer reusing another blank over minting when Clear races with cleanup.
+      const remaining = threads.filter((t) => t.id !== current);
+      const reusable = pickReusableEmptyThread(remaining);
+      if (reusable) {
+        setThreads((prev) => {
+          const withoutCurrent = prev.filter((x) => x.id !== current);
+          return [
+            reusable,
+            ...withoutCurrent.filter((x) => x.id !== reusable.id && !isEmptyAssistThread(x)),
+          ];
+        });
+        setActiveId(reusable.id);
+        setAssistSessionActiveId(reusable.id);
+        setSearch("");
+        setBootError(null);
+        goToMyDay(path, router);
+        return;
       }
       const t = await createAssistThread();
       setThreads((prev) => [t, ...prev.filter((x) => x.id !== t.id && x.id !== current)]);
@@ -258,14 +359,30 @@ export function AssistThreadProvider({ children }: { children: ReactNode }) {
       setBootError(null);
       goToMyDay(path, router);
     } catch (e) {
-      setBootError(e instanceof Error ? e.message : "Could not clear chat");
+      // Never leave My Day parked on "Thread not found" — open a fresh chat instead.
+      if (isAssistThreadMissingError(e)) {
+        await openFreshChat({ replaceMissingId: current ?? undefined });
+        return;
+      }
+      try {
+        const t = await createAssistThread();
+        setThreads((prev) => [t, ...prev.filter((x) => x.id !== t.id && x.id !== current)]);
+        setActiveId(t.id);
+        setAssistSessionActiveId(t.id);
+        setSearch("");
+        setBootError(null);
+        goToMyDay(path, router);
+      } catch (inner) {
+        setBootError(inner instanceof Error ? inner.message : "Could not clear chat");
+      }
     }
-  }, [activeId, path, router]);
+  }, [activeId, path, router, threads, openFreshChat]);
 
   const selectThread = useCallback(
     (id: string) => {
       setActiveId(id);
       setAssistSessionActiveId(id);
+      setBootError(null);
       goToMyDay(path, router);
     },
     [path, router],
@@ -274,7 +391,7 @@ export function AssistThreadProvider({ children }: { children: ReactNode }) {
   const archiveThread = useCallback(
     async (id: string) => {
       try {
-        await archiveAssistThread(id);
+        await archiveAssistThread(id); // 404 = already gone
         const next = threads.filter((t) => t.id !== id);
         setThreads(next);
         if (getAssistSessionActiveId() === id) setAssistSessionActiveId(null);
@@ -282,18 +399,26 @@ export function AssistThreadProvider({ children }: { children: ReactNode }) {
           if (next[0]) {
             setActiveId(next[0].id);
             setAssistSessionActiveId(next[0].id);
+            setBootError(null);
           } else {
             const t = await createAssistThread();
             setThreads([t]);
             setActiveId(t.id);
             setAssistSessionActiveId(t.id);
+            setBootError(null);
           }
         }
       } catch (e) {
+        if (isAssistThreadMissingError(e)) {
+          const next = threads.filter((t) => t.id !== id);
+          setThreads(next);
+          if (activeId === id) await openFreshChat({ replaceMissingId: id });
+          return;
+        }
         setBootError(e instanceof Error ? e.message : "Could not delete chat");
       }
     },
-    [activeId, threads],
+    [activeId, threads, openFreshChat],
   );
 
   const searchSubmit = useCallback(async () => {
@@ -313,6 +438,7 @@ export function AssistThreadProvider({ children }: { children: ReactNode }) {
       bootError,
       newChat,
       clearAndNewChat,
+      openFreshChat,
       selectThread,
       archiveThread,
       refreshList,
@@ -327,6 +453,7 @@ export function AssistThreadProvider({ children }: { children: ReactNode }) {
       bootError,
       newChat,
       clearAndNewChat,
+      openFreshChat,
       selectThread,
       archiveThread,
       refreshList,
