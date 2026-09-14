@@ -24,10 +24,11 @@ import {
 } from "@/lib/portal-ui";
 
 const DRILL_LINKS = [
-  { label: "MA competency exam", href: "/learn/competency-exam" },
-  { label: "Competency · Typing review", href: "/learn/competency-exam?section=typing" },
-  { label: "Competency · MCQ review", href: "/learn/competency-exam?section=mcq" },
-  { label: "Competency · Listening review", href: "/learn/competency-exam?section=listening" },
+  { label: "MA competency exam (linear)", href: "/learn/competency-exam" },
+  { label: "MA competency · monthly hub", href: "/learn/competency-exam/sitting" },
+  { label: "Competency · Typing review", href: "/learn/competency-exam?section=typing&mode=review" },
+  { label: "Competency · MCQ review", href: "/learn/competency-exam?section=mcq&mode=review" },
+  { label: "Competency · Listening review", href: "/learn/competency-exam?section=listening&mode=review" },
   { label: "Chat simulator", href: "/learn/chat-simulator" },
   { label: "Chat speed & accuracy", href: "/learn/practice#typing" },
   { label: "US map", href: "/learn/practice#map" },

@@ -1,7 +1,9 @@
 /**
  * Isolated section review for the MA competency exam.
- * Full sitting: /learn/competency-exam
- * Review one section: ?section=typing|mcq|listening|chat-sim|report
+ * Full sitting (linear): /learn/competency-exam
+ * Monthly hub: /learn/competency-exam/sitting
+ * Hub section attempt: /learn/competency-exam/sitting?section=typing|mcq|…
+ * Founder isolated review: /learn/competency-exam?section=…&mode=review
  * Legacy aliases: hipaa → mcq; writing → listening (Writing removed).
  */
 
@@ -10,6 +12,8 @@ export type ExamSectionFocus =
   | "mcq"
   | "listening"
   | "chat-sim"
+  | "chat-sim-typed"
+  | "chat-sim-spoken"
   | "report"
   /** @deprecated alias → mcq */
   | "hipaa"
@@ -21,6 +25,8 @@ const FOCUS: ExamSectionFocus[] = [
   "mcq",
   "listening",
   "chat-sim",
+  "chat-sim-typed",
+  "chat-sim-spoken",
   "report",
   "hipaa",
   "writing",
@@ -35,7 +41,19 @@ export function parseExamSectionFocus(raw: string | null | undefined): ExamSecti
   return v as ExamSectionFocus;
 }
 
+export function isFounderReviewMode(mode: string | null | undefined): boolean {
+  const v = (mode || "").trim().toLowerCase();
+  return v === "review" || v === "isolated";
+}
+
 export function examSectionReviewHref(section: ExamSectionFocus): string {
-  const canonical = section === "hipaa" ? "mcq" : section === "writing" ? "listening" : section;
-  return `/learn/competency-exam?section=${canonical}`;
+  const canonical =
+    section === "hipaa" ? "mcq" : section === "writing" ? "listening" : section;
+  return `/learn/competency-exam?section=${canonical}&mode=review`;
+}
+
+export function examSittingSectionHref(section: ExamSectionFocus): string {
+  const canonical =
+    section === "hipaa" ? "mcq" : section === "writing" ? "listening" : section;
+  return `/learn/competency-exam/sitting?section=${canonical}`;
 }

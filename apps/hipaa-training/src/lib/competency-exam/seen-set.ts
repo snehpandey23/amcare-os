@@ -10,6 +10,8 @@ export type SeenEntry = {
   attemptId: string;
   at: number;
   repeated: boolean;
+  /** Monthly sitting scope — when set, only entries with the same sittingId apply (see sitting-seen-scope.ts). */
+  sittingId?: string;
 };
 
 export type SeenDraw<T extends { id: string }> = {

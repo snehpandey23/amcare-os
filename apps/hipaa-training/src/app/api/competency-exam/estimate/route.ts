@@ -1,6 +1,12 @@
 import { generateText } from "ai";
 import { assessStaffMessageSafety, staffRefusalMessage } from "@/lib/siya-os/phi-guard";
 import { withWorkforceModelFallback, workforceLlmConfigured, workforceLlmDisabledMessage } from "@/lib/siya-os/model";
+import {
+  ESTIMATE_UNAVAILABLE_LABEL,
+  mapSafetyCategoryToUnavailableReason,
+  type EstimateUnavailableReason,
+} from "@/lib/competency-exam/estimate-unavailable";
+import { WRITING_SUBSTANCE_MIN_WORDS } from "@/lib/competency-exam/writing-score";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -39,9 +45,28 @@ function systemForPart(part: EstimatePart): string {
   );
 }
 
+function wordCount(text: string): number {
+  return text.trim() ? text.trim().split(/\s+/).filter(Boolean).length : 0;
+}
+
+function nullEstimate(
+  part: EstimatePart,
+  reason: EstimateUnavailableReason,
+  note?: string,
+) {
+  return Response.json({
+    ok: true,
+    estimate: null,
+    label: "estimate",
+    part,
+    unavailableReason: reason,
+    note: note || ESTIMATE_UNAVAILABLE_LABEL[reason],
+  });
+}
+
 /**
- * Writing section — LLM content/coherence estimate only.
- * Not a certified grade. Deterministic checks stay on the client.
+ * Writing / Listening — LLM content/coherence estimate only.
+ * Returns unavailableReason when estimate is null so UI can show a specific label.
  */
 export async function POST(req: Request) {
   let body: { prompt?: string; text?: string; part?: string };
@@ -61,25 +86,27 @@ export async function POST(req: Request) {
   if (!prompt || !text) {
     return Response.json({ ok: false, error: "Prompt and text are required" }, { status: 400 });
   }
+
+  // PHI / safety first — most actionable for staff (e.g. "patient called" guard).
   const safety = assessStaffMessageSafety(text, []);
   if (safety.blocked && safety.category) {
-    return Response.json({
-      ok: true,
-      estimate: null,
-      label: "estimate",
-      part,
-      note: staffRefusalMessage(safety.category),
-    });
+    const reason = mapSafetyCategoryToUnavailableReason(safety.category);
+    return nullEstimate(part, reason, staffRefusalMessage(safety.category));
   }
+
+  // Near-empty: skip LLM — substance floor owns the score; avoid a misleading "service down" look.
+  const words = wordCount(text);
+  if (words < WRITING_SUBSTANCE_MIN_WORDS) {
+    return nullEstimate(
+      part,
+      "too_short",
+      `${ESTIMATE_UNAVAILABLE_LABEL.too_short} (${words} words; need about ${WRITING_SUBSTANCE_MIN_WORDS}+ with clinical/ops content).`,
+    );
+  }
+
   if (!workforceLlmConfigured()) {
     const disabled = workforceLlmDisabledMessage();
-    return Response.json({
-      ok: true,
-      estimate: null,
-      label: "estimate",
-      part,
-      note: disabled.userMessage,
-    });
+    return nullEstimate(part, "llm_disabled", disabled.userMessage);
   }
 
   try {
@@ -92,22 +119,25 @@ export async function POST(req: Request) {
       return r.text;
     });
     const match = raw.match(/\{[\s\S]*\}/);
-    const parsed = match ? (JSON.parse(match[0]) as { score?: number; note?: string }) : {};
+    let parsed: { score?: number; note?: string } = {};
+    try {
+      parsed = match ? (JSON.parse(match[0]) as { score?: number; note?: string }) : {};
+    } catch {
+      return nullEstimate(part, "parse_failed");
+    }
     const score = typeof parsed.score === "number" ? Math.max(0, Math.min(100, Math.round(parsed.score))) : null;
+    if (score == null) {
+      return nullEstimate(part, "parse_failed");
+    }
     return Response.json({
       ok: true,
       estimate: score,
       label: "estimate",
       part,
+      unavailableReason: null,
       note: parsed.note || "LLM content/coherence estimate.",
     });
   } catch {
-    return Response.json({
-      ok: true,
-      estimate: null,
-      label: "estimate",
-      part,
-      note: "LLM estimate failed — use deterministic checks only.",
-    });
+    return nullEstimate(part, "llm_failed");
   }
 }

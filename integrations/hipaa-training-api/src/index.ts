@@ -2828,6 +2828,214 @@ app.get("/api/admin/competency-exam/attempts", requireAuth, requireAdmin, async 
   }
 });
 
+/**
+ * Monthly sitting API (P1) — thin HTTP over competency-exam-sitting-service.
+ * §8.2: current / mine / :id/seen / :id/sections/:section/attempts
+ */
+app.get("/api/competency-exam/sittings/current", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { getCurrentSittingForUser } = await import("./competency-exam-sitting-service.js");
+    const { isUuid: isUserUuid } = await import("./competency-exam-service.js");
+    const userId = req.user!.userId;
+    if (!isUserUuid(userId)) return res.status(400).json({ error: "Signed-in user id is invalid." });
+    const bundle = await getCurrentSittingForUser(pool, userId);
+    return res.json({
+      sitting: bundle.sitting,
+      status: bundle.status,
+      sectionAggregates: bundle.sectionAggregates,
+      compositePreview: bundle.compositePreview,
+      compositeSummary: bundle.compositeSummary,
+      firstActivityAt: bundle.firstActivityAt,
+      closedAt: bundle.closedAt,
+      attempts: bundle.attempts,
+    });
+  } catch (e) {
+    console.error("[competency-exam/sittings/current]", e);
+    return res.status(500).json({ error: "Could not load current sitting." });
+  }
+});
+
+app.get("/api/competency-exam/sittings/mine", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { listUserSittingHistory, trendsForHistory } = await import("./competency-exam-sitting-service.js");
+    const { isUuid } = await import("./competency-exam-service.js");
+    const userId = req.user!.userId;
+    if (!isUuid(userId)) return res.status(400).json({ error: "Signed-in user id is invalid." });
+    const limit = typeof req.query.limit === "string" ? Number(req.query.limit) : 24;
+    const sittings = await listUserSittingHistory(pool, userId, limit);
+    const trends = trendsForHistory(sittings);
+    return res.json({ sittings, trends });
+  } catch (e) {
+    console.error("[competency-exam/sittings/mine]", e);
+    return res.status(500).json({ error: "Could not load sitting history." });
+  }
+});
+
+app.get("/api/admin/competency-exam/sittings", requireAuth, requireAdmin, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { listAdminSittingHistory, trendsForHistory } = await import("./competency-exam-sitting-service.js");
+    const userId = typeof req.query.userId === "string" ? req.query.userId : undefined;
+    const sittingId = typeof req.query.sittingId === "string" ? req.query.sittingId : undefined;
+    const limit = typeof req.query.limit === "string" ? Number(req.query.limit) : 100;
+    const sittings = await listAdminSittingHistory(pool, { userId, sittingId, limit });
+    // MoM trends only when scoped to one person — mixed-staff lists would invent fake deltas.
+    const uniqueUsers = new Set(sittings.map((s) => s.userId));
+    const trends = uniqueUsers.size === 1 ? trendsForHistory(sittings) : [];
+    return res.json({ sittings, trends });
+  } catch (e) {
+    console.error("[admin/competency-exam/sittings]", e);
+    return res.status(500).json({ error: "Could not load admin sitting history." });
+  }
+});
+
+app.get(
+  "/api/admin/competency-exam/sittings/:id/users",
+  requireAuth,
+  requireAdmin,
+  async (req: AuthRequest, res: express.Response) => {
+    const pool = getPool();
+    if (!pool) return res.status(503).json({ error: "Database not configured." });
+    try {
+      const { listSittingRosterUsers } = await import("./competency-exam-sitting-service.js");
+      const sittingId = String(req.params.id || "").trim();
+      if (!sittingId) return res.status(400).json({ error: "MISSING_SITTING_ID" });
+      const roster = await listSittingRosterUsers(pool, sittingId);
+      return res.json(roster);
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      if (msg === "UNKNOWN_SITTING") return res.status(404).json({ error: msg });
+      console.error("[admin/competency-exam/sittings/:id/users]", e);
+      return res.status(500).json({ error: "Could not load sitting roster." });
+    }
+  },
+);
+app.get("/api/competency-exam/sittings/:id/seen", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  try {
+    const { loadSeenForSitting, loadSeenForSittingDraw, getSittingCatalog, ensureSittingCatalogForDate } =
+      await import("./competency-exam-sitting-service.js");
+    const { isUuid } = await import("./competency-exam-service.js");
+    const userId = req.user!.userId;
+    if (!isUuid(userId)) return res.status(400).json({ error: "Signed-in user id is invalid." });
+    const sittingId = String(req.params.id || "").trim();
+    if (!sittingId) return res.status(400).json({ error: "MISSING_SITTING_ID" });
+    // Ensure current-month catalog exists when clients ask for the open id before first submit.
+    const open = await ensureSittingCatalogForDate(pool);
+    if (sittingId === open.id) {
+      /* catalog ensured */
+    } else {
+      const catalog = await getSittingCatalog(pool, sittingId);
+      if (!catalog) return res.status(404).json({ error: "UNKNOWN_SITTING" });
+    }
+    const poolKey = typeof req.query.pool === "string" ? req.query.pool.trim() : "";
+    const seen = poolKey
+      ? await loadSeenForSittingDraw(pool, userId, sittingId, poolKey)
+      : await loadSeenForSitting(pool, userId, sittingId);
+    return res.json({ sittingId, pool: poolKey || null, seen });
+  } catch (e) {
+    console.error("[competency-exam/sittings/:id/seen]", e);
+    return res.status(500).json({ error: "Could not load sitting seen-set." });
+  }
+});
+
+app.post(
+  "/api/competency-exam/sittings/:id/sections/:section/attempts",
+  requireAuth,
+  async (req: AuthRequest, res: express.Response) => {
+    const pool = getPool();
+    if (!pool) return res.status(503).json({ error: "Database not configured." });
+    try {
+      const { submitSectionAttempt, isExamSectionId, ensureSittingCatalogForDate, getSittingCatalog } =
+        await import("./competency-exam-sitting-service.js");
+      const { isUuid } = await import("./competency-exam-service.js");
+      const userId = req.user!.userId;
+      if (!isUuid(userId)) return res.status(400).json({ error: "Signed-in user id is invalid." });
+      const sittingId = String(req.params.id || "").trim();
+      const sectionRaw = String(req.params.section || "").trim();
+      if (!sittingId) return res.status(400).json({ error: "MISSING_SITTING_ID" });
+      if (!isExamSectionId(sectionRaw)) {
+        return res.status(400).json({ error: "INVALID_SECTION", section: sectionRaw });
+      }
+      const open = await ensureSittingCatalogForDate(pool);
+      if (sittingId === open.id) {
+        /* ok — current month */
+      } else {
+        const catalog = await getSittingCatalog(pool, sittingId);
+        if (!catalog) return res.status(404).json({ error: "UNKNOWN_SITTING" });
+      }
+      const body = (req.body || {}) as Record<string, unknown>;
+      const id =
+        typeof body.id === "string"
+          ? body.id
+          : typeof body.attemptId === "string"
+            ? body.attemptId
+            : "";
+      const seenRecords = Array.isArray(body.seenRecords)
+        ? (body.seenRecords as Array<{ pool?: string; ids?: string[]; repeatedIds?: string[] }>)
+            .filter((r) => r && typeof r.pool === "string" && Array.isArray(r.ids))
+            .map((r) => ({
+              pool: String(r.pool),
+              ids: (r.ids || []).map(String),
+              repeatedIds: Array.isArray(r.repeatedIds) ? r.repeatedIds.map(String) : [],
+            }))
+        : [];
+      const result = await submitSectionAttempt(pool, {
+        id,
+        userId,
+        sittingId,
+        section: sectionRaw,
+        startedAt: (body.startedAt as string | null | undefined) ?? null,
+        submittedAt: typeof body.submittedAt === "string" ? body.submittedAt : undefined,
+        activeSec: typeof body.activeSec === "number" ? body.activeSec : Number(body.activeSec) || 0,
+        sectionScore:
+          typeof body.sectionScore === "number"
+            ? body.sectionScore
+            : body.sectionScore == null
+              ? null
+              : Number(body.sectionScore),
+        weight: typeof body.weight === "number" ? body.weight : undefined,
+        itemIds: Array.isArray(body.itemIds) ? body.itemIds.map(String) : [],
+        repeatedIds: Array.isArray(body.repeatedIds) ? body.repeatedIds.map(String) : [],
+        safetyRedFlagged: Boolean(body.safetyRedFlagged),
+        safetyJson: body.safetyJson ?? {},
+        trailJson: body.trailJson ?? {},
+        contentFingerprint: typeof body.contentFingerprint === "string" ? body.contentFingerprint : null,
+        seenRecords,
+      });
+      const { computeCompositeSummary } = await import("./competency-exam-sitting-service.js");
+      return res.status(201).json({
+        ok: true,
+        attempt: result.attempt,
+        sectionAggregates: result.sectionAggregates,
+        compositePreview: computeCompositeSummary(result.sectionAggregates),
+      });
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      if (msg === "INVALID_USER_ID" || msg === "MISSING_ATTEMPT_ID" || msg === "UNKNOWN_SITTING") {
+        return res.status(400).json({ error: msg });
+      }
+      if (msg === "SITTING_CLOSED") {
+        return res.status(409).json({
+          error: "SITTING_CLOSED",
+          message:
+            "This monthly sitting is closed. Start a new attempt in the current open sitting (GET /api/competency-exam/sittings/current).",
+        });
+      }
+      if (String(msg).includes("duplicate key") || String(msg).includes("unique")) {
+        return res.status(409).json({ error: "ATTEMPT_ID_EXISTS" });
+      }
+      console.error("[competency-exam/sittings/:id/sections/:section/attempts]", e);
+      return res.status(500).json({ error: "Could not submit section attempt." });
+    }
+  },
+);
 app.get("/api/admin/team/roster", requireAuth, requireAdmin, async (_req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });

@@ -1,6 +1,9 @@
 import type { ExamReportModel } from "@/lib/competency-exam/types";
+import { buildExamImprovementPlansFromReport } from "@/lib/competency-exam/improvement-plan";
+import { ExamImprovementPlans } from "./ExamImprovementPlans";
 
 export function ExamReportView({ report }: { report: ExamReportModel }) {
+  const plans = buildExamImprovementPlansFromReport(report);
   return (
     <div className="space-y-4 rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-4">
       <div>
@@ -54,6 +57,7 @@ export function ExamReportView({ report }: { report: ExamReportModel }) {
           </li>
         ))}
       </ul>
+      <ExamImprovementPlans plans={plans} />
     </div>
   );
 }

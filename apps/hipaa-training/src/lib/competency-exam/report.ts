@@ -15,6 +15,8 @@ export function buildExamReport(args: {
   sections: SectionResult[];
   safety: SafetyFlag;
   hipaaItems?: HipaaItemResult[];
+  mcqItems?: HipaaItemResult[];
+  typingMetrics?: { wpm: number; wpmReliable: boolean; accuracy: number } | null;
   writingTrail?: WritingTrail | null;
   chatTrail?: ChatTrail | null;
 }): ExamReportModel {
@@ -25,6 +27,7 @@ export function buildExamReport(args: {
   const fingerprint = args.sections
     .map((s) => `${s.id}:${s.status}:${s.score ?? "—"}:${s.itemIds.join(",")}:${s.repeatedIds.join("|")}`)
     .join(";");
+  const mcqItems = args.mcqItems ?? args.hipaaItems;
   return {
     attemptId: args.attemptId,
     subjectLabel: args.subjectLabel,
@@ -40,7 +43,9 @@ export function buildExamReport(args: {
     sections: args.sections,
     safety: args.safety,
     contentFingerprint: fingerprint,
-    hipaaItems: args.hipaaItems,
+    hipaaItems: args.hipaaItems ?? mcqItems,
+    mcqItems,
+    typingMetrics: args.typingMetrics ?? null,
     writingTrail: args.writingTrail ?? null,
     chatTrail: args.chatTrail ?? null,
   };

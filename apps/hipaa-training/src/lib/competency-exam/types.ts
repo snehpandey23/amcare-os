@@ -53,6 +53,11 @@ export type WritingTrail = {
   blendedScore: number;
   partAScore?: number;
   partBScore?: number;
+  /** Listening / escalation: soft ask detector result */
+  escalationHasAskHint?: boolean;
+  /** Listening: fixed voicemail script (for miss classification / audit) */
+  voicemailScript?: string;
+  audioSrc?: string;
 };
 
 export type ChatTrail = {
@@ -97,8 +102,12 @@ export type ExamReportModel = {
   sections: SectionResult[];
   safety: SafetyFlag;
   contentFingerprint: string;
-  /** Present when HIPAA was scored this sitting (full or isolated). */
+  /** @deprecated Prefer mcqItems — kept for older stored attempts. */
   hipaaItems?: HipaaItemResult[];
+  /** Combined MCQ item trail (HIPAA + draft pools) for improvement plans. */
+  mcqItems?: HipaaItemResult[];
+  /** Typing raw metrics for below-target WPM tips. */
+  typingMetrics?: { wpm: number; wpmReliable: boolean; accuracy: number } | null;
   writingTrail?: WritingTrail | null;
   chatTrail?: ChatTrail | null;
   /** Server persistence status when dual-written. */
