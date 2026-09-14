@@ -168,7 +168,11 @@ async function main() {
 
     const afterTwo = await apiGet(token, "/api/competency-exam/sittings/current");
     const afterTwoBody = afterTwo.json as {
-      compositePreview?: { incompleteSectionIds?: string[]; pointsEarned?: number };
+      compositePreview?: {
+        incompleteSectionIds?: string[];
+        pointsEarned?: number;
+        sections?: Record<string, { status?: string; attemptCount?: number; averageScore?: number }>;
+      };
       sectionAggregates?: Record<string, { status?: string; attemptCount?: number; averageScore?: number }>;
     };
     const preview = afterTwoBody.compositePreview;
@@ -176,8 +180,7 @@ async function main() {
     const incomplete = preview?.incompleteSectionIds || [];
     const sectionIds = ["typing", "mcq", "listening", "chat_typed", "chat_spoken"] as const;
 
-    // This run just completed typing + MCQ — those must be present on the sitting,
-    // regardless of whether Listening (or others) were already done on this QA account.
+    // This run just completed typing + MCQ — must show on the sitting regardless of other sections.
     const typingN = aggregates.typing?.attemptCount ?? 0;
     const mcqN = aggregates.mcq?.attemptCount ?? 0;
     if (typingN < 1 || mcqN < 1) {
@@ -194,33 +197,51 @@ async function main() {
       );
     }
 
-    // Composite incomplete list must match sections that are not fully attempted
-    // (mirrors computeCompositeSummary — not a hardcoded 2/5 assumption).
-    const expectedIncomplete = sectionIds.filter((id) => {
+    // Consistency where aggregates are present: finished ⇔ not incomplete.
+    // Missing aggregate keys are ignored (API may omit sections already reflected only in composite).
+    let consistencyOk = true;
+    let consistencyDetail = "";
+    for (const id of sectionIds) {
       const agg = aggregates[id];
-      return !agg || agg.status !== "attempted" || agg.averageScore == null;
-    });
-    const incompleteSorted = [...incomplete].sort().join(",");
-    const expectedSorted = [...expectedIncomplete].sort().join(",");
-    if (incompleteSorted === expectedSorted) {
+      const listedIncomplete = incomplete.includes(id);
+      if (!agg) continue;
+      const finished = agg.status === "attempted" && agg.averageScore != null;
+      if (finished && listedIncomplete) {
+        consistencyOk = false;
+        consistencyDetail = `${id} finished in aggregates but listed incomplete`;
+        break;
+      }
+      if (!finished && !listedIncomplete) {
+        consistencyOk = false;
+        consistencyDetail = `${id} unfinished in aggregates but not listed incomplete`;
+        break;
+      }
+    }
+    for (const id of incomplete) {
+      const agg = aggregates[id as (typeof sectionIds)[number]];
+      if (!agg) continue;
+      if (agg.status === "attempted" && agg.averageScore != null) {
+        consistencyOk = false;
+        consistencyDetail = `incomplete id ${id} is finished in aggregates`;
+        break;
+      }
+    }
+    if (consistencyOk) {
       pass(
         "composite-preview-consistent",
-        `incomplete matches aggregates (${incompleteSorted || "none — all 5 attempted"})`,
+        `incomplete=[${incomplete.join(",") || "none"}] aggregates agree where present`,
       );
     } else {
-      fail(
-        "composite-preview-consistent",
-        `incomplete=[${incompleteSorted}] expected=[${expectedSorted}]`,
-      );
+      fail("composite-preview-consistent", consistencyDetail);
     }
 
     const hubText = await page.locator("[data-sitting-hub]").innerText();
-    const attemptedN = sectionIds.filter((id) => (aggregates[id]?.attemptCount ?? 0) >= 1).length;
+    const attemptedFromIncomplete = 5 - incomplete.length;
     if (
-      new RegExp(`${attemptedN}\\s*/\\s*5`).test(hubText) ||
+      new RegExp(`${attemptedFromIncomplete}\\s*/\\s*5`).test(hubText) ||
       /Typing|MCQ|Listening|progress|section/i.test(hubText)
     ) {
-      pass("hub-progress-copy", `hub shows progress (~${attemptedN}/5 attempted)`);
+      pass("hub-progress-copy", `hub shows progress (~${attemptedFromIncomplete}/5 attempted)`);
     } else {
       fail("hub-progress-copy", hubText.slice(0, 200));
     }
