@@ -167,20 +167,63 @@ async function main() {
     await shot(page, "04-hub-after-two");
 
     const afterTwo = await apiGet(token, "/api/competency-exam/sittings/current");
-    const preview = (afterTwo.json as {
+    const afterTwoBody = afterTwo.json as {
       compositePreview?: { incompleteSectionIds?: string[]; pointsEarned?: number };
       sectionAggregates?: Record<string, { status?: string; attemptCount?: number; averageScore?: number }>;
-    }).compositePreview;
+    };
+    const preview = afterTwoBody.compositePreview;
+    const aggregates = afterTwoBody.sectionAggregates || {};
     const incomplete = preview?.incompleteSectionIds || [];
-    const attempted = 5 - incomplete.length;
-    if (attempted >= 2 && incomplete.includes("listening")) {
-      pass("composite-2-of-5", `attempted≈${attempted} incomplete=${incomplete.join(",")}`);
+    const sectionIds = ["typing", "mcq", "listening", "chat_typed", "chat_spoken"] as const;
+
+    // This run just completed typing + MCQ — those must be present on the sitting,
+    // regardless of whether Listening (or others) were already done on this QA account.
+    const typingN = aggregates.typing?.attemptCount ?? 0;
+    const mcqN = aggregates.mcq?.attemptCount ?? 0;
+    if (typingN < 1 || mcqN < 1) {
+      fail("composite-after-typing-mcq", `expected typing+mcq attempts, got typing=${typingN} mcq=${mcqN}`);
+    } else if (incomplete.includes("typing") || incomplete.includes("mcq")) {
+      fail(
+        "composite-after-typing-mcq",
+        `typing/mcq still listed incomplete after this run: ${incomplete.join(",") || "(none)"}`,
+      );
     } else {
-      fail("composite-2-of-5", `attempted=${attempted} incomplete=${incomplete.join(",")}`);
+      pass(
+        "composite-after-typing-mcq",
+        `typing=${typingN} mcq=${mcqN} incomplete=[${incomplete.join(",")}] points=${preview?.pointsEarned ?? "?"}`,
+      );
     }
+
+    // Composite incomplete list must match sections that are not fully attempted
+    // (mirrors computeCompositeSummary — not a hardcoded 2/5 assumption).
+    const expectedIncomplete = sectionIds.filter((id) => {
+      const agg = aggregates[id];
+      return !agg || agg.status !== "attempted" || agg.averageScore == null;
+    });
+    const incompleteSorted = [...incomplete].sort().join(",");
+    const expectedSorted = [...expectedIncomplete].sort().join(",");
+    if (incompleteSorted === expectedSorted) {
+      pass(
+        "composite-preview-consistent",
+        `incomplete matches aggregates (${incompleteSorted || "none — all 5 attempted"})`,
+      );
+    } else {
+      fail(
+        "composite-preview-consistent",
+        `incomplete=[${incompleteSorted}] expected=[${expectedSorted}]`,
+      );
+    }
+
     const hubText = await page.locator("[data-sitting-hub]").innerText();
-    if (/2\/5|Listening|incomplete/i.test(hubText)) pass("hub-incomplete-copy", "hub shows progress");
-    else fail("hub-incomplete-copy", hubText.slice(0, 200));
+    const attemptedN = sectionIds.filter((id) => (aggregates[id]?.attemptCount ?? 0) >= 1).length;
+    if (
+      new RegExp(`${attemptedN}\\s*/\\s*5`).test(hubText) ||
+      /Typing|MCQ|Listening|progress|section/i.test(hubText)
+    ) {
+      pass("hub-progress-copy", `hub shows progress (~${attemptedN}/5 attempted)`);
+    } else {
+      fail("hub-progress-copy", hubText.slice(0, 200));
+    }
 
     // Second typing attempt — average update
     const tCount = afterTwo.json as { sectionAggregates?: { typing?: { attemptCount?: number; averageScore?: number } } };
