@@ -1,12 +1,25 @@
 /**
  * Ask — personal Practice / chat-sim stats and “what should I practice next”.
  * Same pattern as my-shifts: live data for the signed-in user only. Not a staff-guide lookup.
+ *
+ * Competency exam improvement tips share builders with ExamReportView
+ * (`competency-exam/improvement-plan.ts`) — do not invent a parallel tip engine here.
  */
 import { MODULES } from "@/content/modules";
 import { getTrainingApiUrl } from "@/lib/trainingConfig";
 import type { DailyCompletion, DayLedgerEntry, LevelUpProgress } from "@/lib/level-up/progress";
 import type { ProgressState } from "@/lib/types";
 import { pullProgressFromServer } from "@/lib/progressStorage";
+import type { ExamReportModel } from "@/lib/competency-exam/types";
+import {
+  TYPING_DRILL_HREF,
+  TYPING_TARGET_WPM,
+  buildExamImprovementPlansFromReport,
+  buildHipaaImprovementPlan,
+  buildTypingImprovementPlan,
+  formatImprovementPlansMessage,
+  typingSpeedTips,
+} from "@/lib/competency-exam/improvement-plan";
 
 export type PracticeStatsAnswer = {
   message: string;
@@ -180,16 +193,55 @@ function hipaaLine(hipaa: ProgressState | null): { incomplete: boolean; line: st
   };
 }
 
-/** Rank next practice from live ledger + HIPAA progress. Always includes real numbers. */
+function nextIncompleteHipaaModules(hipaa: ProgressState | null, limit = 2): { id: string; title: string }[] {
+  const done = new Set(hipaa?.modulesCompleted ?? []);
+  return MODULES.filter((m) => !done.has(m.id))
+    .slice(0, limit)
+    .map((m) => ({ id: m.id, title: m.title }));
+}
+
+/** Rank next practice from live ledger + HIPAA progress (+ optional latest exam report). Always includes real numbers. */
 export function formatPracticeRecommendation(
   progress: LevelUpProgress | null,
   hipaa: ProgressState | null,
   now = new Date(),
+  latestExam?: ExamReportModel | null,
 ): string {
   const suggestions: string[] = [];
   const hipaaInfo = hipaaLine(hipaa);
   if (hipaaInfo.incomplete) {
-    suggestions.push("Continue **HIPAA training** — it is still incomplete.");
+    const nextMods = nextIncompleteHipaaModules(hipaa, 2);
+    if (nextMods.length) {
+      suggestions.push(
+        `Continue **HIPAA training** — next: ${nextMods
+          .map((m) => `**${m.title}** (\`/module/${m.id}\`)`)
+          .join("; ")}.`,
+      );
+    } else {
+      suggestions.push("Continue **HIPAA training** — it is still incomplete.");
+    }
+  }
+
+  const lastType = typingEntries(progress)[0];
+  if (lastType?.wpm != null && lastType.wpm > 0 && lastType.wpm < TYPING_TARGET_WPM) {
+    const typingPlan = buildTypingImprovementPlan({
+      section: { status: "scored", score: Math.min(100, Math.round((lastType.wpm / 50) * 100)) },
+      metrics: {
+        wpm: lastType.wpm,
+        wpmReliable: true,
+        accuracy:
+          typeof lastType.accuracy === "number"
+            ? lastType.accuracy <= 1
+              ? Math.round(lastType.accuracy * 100)
+              : Math.round(lastType.accuracy)
+            : 0,
+      },
+    });
+    if (typingPlan) {
+      suggestions.push(
+        `${typingPlan.headline} ${typingSpeedTips(lastType.wpm).slice(1, 3).join(" ")} Open \`${TYPING_DRILL_HREF}\`.`,
+      );
+    }
   }
 
   const lastSim = chatSimEntries(progress)[0];
@@ -221,6 +273,30 @@ export function formatPracticeRecommendation(
     suggestions.push("Nothing is stale. Keep the streak — a short typing passage or one persona chat is enough today.");
   }
 
+  const examBlock =
+    latestExam != null ? formatImprovementPlansMessage(buildExamImprovementPlansFromReport(latestExam)) : "";
+
+  const quizWrongItems =
+    hipaa == null
+      ? []
+      : Object.entries(hipaa.moduleQuizScores ?? {}).flatMap(([moduleId, q]) => {
+          const wrong = Math.max(0, (q.total || 0) - (q.correct || 0));
+          if (wrong <= 0) return [];
+          return Array.from({ length: Math.min(wrong, 3) }, (_, i) => ({
+            id: `quiz-gap-${moduleId}-${i}`,
+            moduleId,
+            prompt: "",
+            selectedKey: null,
+            correctKey: "a",
+            correct: false,
+          }));
+        });
+  const quizGapPlan =
+    !examBlock && quizWrongItems.length
+      ? buildHipaaImprovementPlan({ section: null, items: quizWrongItems })
+      : null;
+  const quizGapBlock = quizGapPlan ? formatImprovementPlansMessage([quizGapPlan]) : "";
+
   return [
     "**What to practice next** (from your ledger, not a generic guide):",
     "",
@@ -228,9 +304,12 @@ export function formatPracticeRecommendation(
     "",
     hipaaInfo.line,
     ...snapshotLines(progress),
+    examBlock ? `\n${examBlock}` : quizGapBlock ? `\n${quizGapBlock}` : "",
     "",
-    "Open **Learn → Practice** or **Chat simulator**. I only used scores already on your account.",
-  ].join("\n");
+    "Open **Learn → Practice** or **Chat simulator**. Competency exam results also show a **What to work on** plan on the report screen. I only used scores already on your account.",
+  ]
+    .filter((line, i, arr) => !(line === "" && arr[i - 1] === ""))
+    .join("\n");
 }
 
 export function formatLastTypingMessage(progress: LevelUpProgress | null): string {

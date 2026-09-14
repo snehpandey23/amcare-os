@@ -119,10 +119,12 @@ export function isTeamPulseAsk(message: string): boolean {
   if (/\bwho(?:'s|’s| is| are)\b[\s\S]{0,40}\b(?:logged|logging)\s*in\b/.test(t)) return true;
   if (/\b(working right now|present today|on the clock|who(?:'s|’s| is) here)\b/.test(t)) return true;
   if (/\bwho(?:'s|’s| is) on(?: the)? (shift|floor|clock)\b/.test(t)) return true;
+  // Explicit live scope: "who is on shift now" / "who's on shift (now)"
+  if (/\bon\s+shift\b/.test(t) && /\b(now|today|currently)\b/.test(t) && /\bwho\b/.test(t)) return true;
   if (/\b(?:anyone|anybody|people|staff|everyone)\b[\s\S]{0,24}\b(?:online|working|logged\s*in|present)\b/.test(t)) {
     return true;
   }
-  if (/\b(?:online|logged\s*in|working)\s+(?:right\s+)?now\b/.test(t) && /\bwho\b/.test(t)) return true;
+  if (/\b(?:online|logged\s*in|working|on\s+shift)\s+(?:right\s+)?now\b/.test(t) && /\bwho\b/.test(t)) return true;
   return false;
 }
 
@@ -167,10 +169,17 @@ export function isOpsEngagementAsk(message: string): boolean {
   if (/\bthumbs?\s*(up|down)?\b/.test(t) && !/\b(team|staff|engagement|usage|ops)\b/.test(t)) return false;
   // Practice drills have their own intent.
   if (isOpsPracticeDrillAsk(message)) return false;
+  // Top-user ranking is a specialized engagement answer (same data).
+  if (isOpsTopUserAsk(message)) return true;
 
-  const osOrPortal = /\b(os|siya\s*os|portal|staff\s*(?:app|portal)|assist|siya\s*assist)\b/.test(t);
+  const osOrPortal =
+    /\b(os|siya\s*os|siyaos|portal|staff\s*(?:app|portal)|assist|siya\s*assist|lms|learning\s+management(?:\s+system)?)\b/.test(
+      t,
+    );
   const usageVerb =
-    /\b(who(?:'s|’s| is| are)?\s+using|using|used|usage|adoption|how\s+often|engagement)\b/.test(t) ||
+    /\b(who(?:'s|’s| is| are)?\s+using|who\s+uses|is\s+anyone\s+using|anyone\s+using|using|used|usage|adoption|how\s+often|engagement)\b/.test(
+      t,
+    ) ||
     /\bwho\s+all\b[\s\S]{0,40}\b(used|using|have\s+used)\b/.test(t) ||
     /\bwho\s+(has|have)\s+used\b/.test(t);
   const windowHint = /\b(last|past|this)\s+week\b|\b(7|fourteen|14|30)\s*days?\b|\brecently\b/.test(t);
@@ -195,6 +204,23 @@ export function isOpsEngagementAsk(message: string): boolean {
   if (usageVerb && problemsFacing && /\b(team|staff|people|they)\b/.test(t)) return true;
   if (/\bhow\s+often\b/.test(t) && /\b(staff|team|people|using|ask|turns?)\b/.test(t)) return true;
   return false;
+}
+
+/** “Who is the top user / most active on SiyaOS” → ranked Ops engagement. */
+export function isOpsTopUserAsk(message: string): boolean {
+  const t = normalizePresenceAskText(message);
+  if (!t) return false;
+  if (/\bhow\s+(do\s+i|to|can\s+i)\s+use\b/.test(t)) return false;
+  const platform =
+    /\b(os|siya\s*os|siyaos|portal|assist|siya\s*assist|lms|staff\s*(?:app|portal)|siya)\b/.test(t) ||
+    /\bfor\s+siya\b/.test(t);
+  const topish =
+    /\b(top|most\s+active|highest|busiest|number\s*one|#\s*1)\s+users?\b/.test(t) ||
+    /\bwho\s+is\s+(the\s+)?(top|most\s+active|biggest|busiest)\s+user\b/.test(t) ||
+    /\bmost\s+(active|engaged)\s+(user|person|staff|teammate|people)\b/.test(t) ||
+    /\bwho\s+uses?\b[\s\S]{0,40}\b(the\s+)?most\b/.test(t) ||
+    /\bwho\s+has\s+(the\s+)?(most|highest)\s+(ask|usage|engagement|turns?|activity)\b/.test(t);
+  return topish && (platform || /\buser\b/.test(t));
 }
 
 /** “Has anyone tried drills / practice” → Ops Section A level_up signals. */
@@ -335,24 +361,50 @@ export function isAmbiguousStaffLoginDashboardQuery(message: string): boolean {
   return wantsView && loginish && staffish;
 }
 
-/** Recent turns were about who’s online / on shift. */
+/** Recent turns were about who’s online / on shift (or a mistaken full roster dump). */
 export function historySuggestsPresenceTopic(
   history: { role: string; content: string }[],
 ): boolean {
   const recent = history.slice(-8);
   for (const h of recent) {
-    if (h.role === "user" && (isTeamPulseAsk(h.content) || isAmbiguousStaffLoginDashboardQuery(h.content))) {
+    if (
+      h.role === "user" &&
+      (isTeamPulseAsk(h.content) ||
+        isAmbiguousStaffLoginDashboardQuery(h.content) ||
+        /\b(on\s+shift|who.?s online|working right now|live presence)\b/i.test(h.content))
+    ) {
       return true;
     }
     if (
       h.role === "assistant" &&
-      /\b(team pulse|on shift|who.?s online|working right now|team presence|open \*\*team\*\*|live presence)\b/i.test(
+      /\b(team pulse|on shift now|who.?s online|working right now|team presence|open \*\*team\*\*|live presence|ma duty roster|shift_roster|imported ma roster)\b/i.test(
         h.content,
       )
     ) {
       return true;
     }
   }
+  return false;
+}
+
+/**
+ * User narrowing a prior presence/roster answer to live now
+ * (“today, right now, not the entire thing”).
+ */
+export function isPresenceRescopeCorrection(message: string): boolean {
+  const t = normalizePresenceAskText(message);
+  if (!t || t.length > 160) return false;
+  const wantsLive =
+    /\b(right\s+now|just\s+now|now|currently|live|today)\b/.test(t) ||
+    /^(today|now|right\s+now)\b/.test(t);
+  const rejectsDump =
+    /\b(not|don'?t|dont|no)\b[\s\S]{0,40}\b(entire|whole|full|all|month|roster|export|list|dump|everything)\b/.test(
+      t,
+    ) || /\b(narrow|just\s+(today|now)|only\s+(today|now))\b/.test(t);
+  if (wantsLive && rejectsDump) return true;
+  // Short correction after a dump: "today" / "right now" / "now only"
+  if (t.length <= 64 && /^(today|right\s+now|now)([,!.\s]|$)/.test(t)) return true;
+  if (t.length <= 80 && /\b(today|right\s+now)\b/.test(t) && /\b(not|only|just)\b/.test(t)) return true;
   return false;
 }
 
@@ -363,11 +415,12 @@ export function isPresenceTopicContinuation(
 ): boolean {
   if (!historySuggestsPresenceTopic(history)) return false;
   const t = normalizePresenceAskText(message);
-  if (!t || t.length > 120) return false;
+  if (!t || t.length > 160) return false;
   if (isTeamPulseAsk(message) || isAmbiguousStaffLoginDashboardQuery(message)) return true;
   if (isPresenceStatusHypothesis(message)) return true;
+  if (isPresenceRescopeCorrection(message)) return true;
   if (
-    /\b(online|logged?\s*in|logging\s*in|log\s*in|log\s*out|logout|signed?\s*out|end\s+shift|start\s+shift|working|present|active|around|pulse|on\s+shift|forgot)\b/.test(
+    /\b(online|logged?\s*in|logging\s*in|log\s*in|log\s*out|logout|signed?\s*out|end\s+shift|start\s+shift|working|present|active|around|pulse|on\s+shift|forgot|right\s+now|currently|now|today)\b/.test(
       t,
     )
   ) {
@@ -582,6 +635,65 @@ function teamPulsePresenceLabel(m: {
 }
 
 /** Match a pulse member named in the message (first/last token ≥3 chars). */
+const PULSE_NAME_STOP = new Set([
+  "the",
+  "and",
+  "for",
+  "not",
+  "now",
+  "today",
+  "right",
+  "just",
+  "only",
+  "all",
+  "who",
+  "are",
+  "is",
+  "was",
+  "were",
+  "has",
+  "have",
+  "had",
+  "use",
+  "used",
+  "real",
+  "data",
+  "team",
+  "shift",
+  "online",
+  "working",
+  "pulse",
+  "entire",
+  "whole",
+  "full",
+  "thing",
+  "list",
+  "month",
+  "roster",
+  "do",
+  "or",
+  "to",
+  "of",
+  "in",
+  "on",
+  "at",
+  "by",
+  "from",
+  "with",
+  "this",
+  "that",
+  "they",
+  "them",
+  "their",
+  "our",
+  "your",
+  "you",
+  "me",
+  "my",
+  "yes",
+  "no",
+]);
+
 export function findMentionedPulseMember(
   message: string,
   members: { id: string; name: string | null; email: string; onShift: boolean; presence: string | null }[],
@@ -594,12 +706,14 @@ export function findMentionedPulseMember(
     const label = (m.name || m.email.split("@")[0] || "").trim();
     if (!label) continue;
     const lower = label.toLowerCase();
-    if (lower.length >= 4 && t.includes(lower) && lower.length > bestLen) {
+    // Prefer full display name / email-local ≥4 chars contained as a phrase
+    if (lower.length >= 4 && !PULSE_NAME_STOP.has(lower) && t.includes(lower) && lower.length > bestLen) {
       best = m;
       bestLen = lower.length;
       continue;
     }
-    for (const part of lower.split(/\s+/).filter((p) => p.length >= 3)) {
+    for (const part of lower.split(/[^a-z0-9]+/).filter((p) => p.length >= 3)) {
+      if (PULSE_NAME_STOP.has(part)) continue;
       if (new RegExp(`\\b${part.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`).test(t) && part.length > bestLen) {
         best = m;
         bestLen = part.length;
@@ -654,10 +768,13 @@ function teamPulseMessage(snapshot: AdminOpsSnapshot, userMessage?: string): str
   if (!p) return "I couldn't load team presence. Open **Team** on My day or try again in a moment.";
 
   if (userMessage) {
-    const mentioned = findMentionedPulseMember(userMessage, p.members);
-    // Named follow-up / login-out hypothesis → focused answer (not a full roster dump).
-    if (mentioned && (isPresenceStatusHypothesis(userMessage) || !isTeamPulseAsk(userMessage))) {
-      return personPresenceHypothesisMessage(userMessage, mentioned);
+    // Re-scope corrections always want the live on-shift list — not a named person guess.
+    if (!isPresenceRescopeCorrection(userMessage)) {
+      const mentioned = findMentionedPulseMember(userMessage, p.members);
+      // Named follow-up / login-out hypothesis → focused answer (not a full roster dump).
+      if (mentioned && (isPresenceStatusHypothesis(userMessage) || !isTeamPulseAsk(userMessage))) {
+        return personPresenceHypothesisMessage(userMessage, mentioned);
+      }
     }
   }
 
@@ -759,7 +876,7 @@ function opsBriefMessage(snapshot: AdminOpsSnapshot): string {
   return `${planDayMessage(snapshot)}\n\n---\n\n**Board summary:** ${snapshot.boardOpen.length} active · ${snapshot.boardOverdue.length} overdue.`;
 }
 
-/** Live roster answer for “who used the OS last week” (+ Ops link for Ask detail). */
+/** Live answer for “who’s using the portal” login list. */
 export function opsEngagementMessage(snapshot: AdminOpsSnapshot, windowDays = 7): string {
   const cutoff = Date.now() - windowDays * 24 * 60 * 60 * 1000;
   const active = snapshot.roster
@@ -809,6 +926,116 @@ export function opsEngagementMessage(snapshot: AdminOpsSnapshot, windowDays = 7)
   ]
     .filter((l) => l !== "")
     .join("\n");
+}
+
+/**
+ * Ranked “top user” from Ops Section A (Ask turns primary, practice secondary).
+ * Falls back to recent login when Ask/practice are all zero.
+ */
+export function opsTopUserMessage(
+  rows: OpsCoachEngagementRow[],
+  snapshot?: AdminOpsSnapshot | null,
+): string {
+  const people = rows.filter((r) => !isOpsTestAccount(r.email));
+  type Ranked = {
+    label: string;
+    email: string;
+    ask14: number;
+    ask30: number;
+    practice: number;
+    score: number;
+  };
+  const ranked: Ranked[] = people
+    .map((r) => {
+      const ask14 = r.askTurnsLast14d ?? 0;
+      const ask30 = r.askTurnsLast30d ?? 0;
+      const practice = r.practiceLifetime ?? 0;
+      // Weight recent Ask volume highest — matches “most active on Assist/OS”.
+      const score = ask14 * 4 + ask30 + practice * 0.25;
+      return {
+        label: (r.name && r.name.trim()) || r.email,
+        email: r.email,
+        ask14,
+        ask30,
+        practice,
+        score,
+      };
+    })
+    .sort((a, b) => b.score - a.score || b.ask14 - a.ask14 || b.ask30 - a.ask30);
+
+  const anySignal = ranked.some((r) => r.score > 0);
+  if (anySignal) {
+    const top = ranked[0]!;
+    const ties = ranked.filter((r) => r.score === top.score);
+    const runners = ranked.slice(ties.length, ties.length + 4);
+    const head =
+      ties.length > 1
+        ? `**Top users (tied)** by Ask / Practice activity (Ops Section A; QA/test hidden):`
+        : `**Top user** by Ask / Practice activity (Ops Section A; QA/test hidden):`;
+    const topLines = ties.map(
+      (r) =>
+        `• **${r.label}** — ${r.ask14} Ask turns (14d) · ${r.ask30} (30d) · ${r.practice} lifetime drill(s)`,
+    );
+    const more =
+      runners.length > 0
+        ? [
+            "",
+            "**Next:**",
+            ...runners.map(
+              (r) =>
+                `• **${r.label}** — ${r.ask14} Ask (14d) · ${r.ask30} (30d) · ${r.practice} drills`,
+            ),
+          ]
+        : [];
+    return [
+      head,
+      "",
+      ...topLines,
+      ...more,
+      "",
+      "Ranking uses **Ask turns** (last 14 days weighted highest) plus Practice lifetime — not live presence. Open **Ops → Section A** for the full table.",
+    ].join("\n");
+  }
+
+  // Fallback: most recent logins from roster
+  if (snapshot?.roster?.length) {
+    const logins = snapshot.roster
+      .filter((m) => !m.deactivatedAt && !isOpsTestAccount(m.email))
+      .map((m) => {
+        const ms = m.lastLoginAt ? Date.parse(m.lastLoginAt) : NaN;
+        return {
+          label: (m.name && m.name.trim()) || m.email,
+          lastLoginAt: Number.isFinite(ms) ? ms : null,
+        };
+      })
+      .filter((m) => m.lastLoginAt != null)
+      .sort((a, b) => (b.lastLoginAt ?? 0) - (a.lastLoginAt ?? 0));
+    if (logins.length) {
+      const top = logins[0]!;
+      const fmt = (ms: number) =>
+        new Date(ms).toLocaleString("en-IN", {
+          timeZone: "Asia/Kolkata",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      return [
+        "**Most recent portal login** (Ask/Practice volume is all zero so far; using login recency):",
+        "",
+        `• **${top.label}** — last login ${fmt(top.lastLoginAt!)} IST`,
+        ...logins.slice(1, 5).map((m) => `• **${m.label}** — ${fmt(m.lastLoginAt!)} IST`),
+        "",
+        "Open **Ops → Section A** once Ask turns appear for a stronger activity ranking.",
+      ].join("\n");
+    }
+  }
+
+  return [
+    "I don’t have enough non-test **Ask / Practice / login** signal yet to name a top user.",
+    "",
+    "Open **Ops → Section A · Staff engagement** — I won’t invent a ranking.",
+  ].join("\n");
 }
 
 /** Pointer only — used when we can’t load the admin roster. */
@@ -1117,6 +1344,11 @@ export async function runAdminOpsCoach(
               "",
               `Open **Ops** and look up **${named}** in Section A — I won’t invent Ask/Practice numbers.`,
             ].join("\n");
+      } else if (isOpsTopUserAsk(message)) {
+        const rows = await fetchOpsEngagementRows(token);
+        messageOut = rows?.length
+          ? opsTopUserMessage(rows, snapshot)
+          : opsEngagementPointerMessage();
       } else if (isOpsStaffPerformanceAsk(message)) {
         const rows = await fetchOpsEngagementRows(token);
         messageOut = rows?.length

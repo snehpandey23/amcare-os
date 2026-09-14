@@ -40,7 +40,19 @@ export async function fetchDecisions(limit = 50): Promise<DecisionRecord[]> {
 
 /** Lean decision rows for Ask Layer 2 (mirrors fetchSopsForRetrieval). */
 export async function fetchDecisionsForRetrieval(authToken?: string | null): Promise<
-  { id: string; title: string; body: string; keywords: string[]; status: string; department: string }[]
+  {
+    id: string;
+    title: string;
+    body: string;
+    keywords: string[];
+    status: string;
+    department: string;
+    actionHook?: string | null;
+    importance?: number;
+    decisionDate?: string | null;
+    createdAt?: string | null;
+    updatedAt?: string | null;
+  }[]
 > {
   const base = getTrainingApiUrl();
   const token = authToken?.trim() || getStoredToken();
@@ -50,7 +62,19 @@ export async function fetchDecisionsForRetrieval(authToken?: string | null): Pro
   });
   if (!res.ok) return [];
   const data = (await res.json().catch(() => ({}))) as {
-    decisions?: { id: string; title: string; body: string; keywords: string[]; status: string; department: string }[];
+    decisions?: {
+      id: string;
+      title: string;
+      body: string;
+      keywords: string[];
+      status: string;
+      department: string;
+      actionHook?: string | null;
+      importance?: number;
+      decisionDate?: string | null;
+      createdAt?: string | null;
+      updatedAt?: string | null;
+    }[];
   };
   return data.decisions ?? [];
 }

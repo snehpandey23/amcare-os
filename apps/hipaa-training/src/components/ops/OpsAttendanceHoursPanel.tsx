@@ -10,6 +10,12 @@ import {
   type AttendanceHoursReport,
   formatHoursMinutes,
 } from "@/lib/attendance-hours-api";
+import {
+  portalDenseTableXs,
+  portalDenseTableWrap,
+  portalTableRowParity,
+  portalTableTh,
+} from "@/lib/portal-ui";
 
 function istToday(): string {
   return new Intl.DateTimeFormat("en-CA", {
@@ -104,30 +110,27 @@ export function OpsAttendanceHoursPanel() {
       {report.people.length === 0 ? (
         <p className="text-sm text-[var(--siya-text-muted)]">No shift activity this month.</p>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[720px] text-left text-xs">
+        <div className={portalDenseTableWrap}>
+          <table className={`${portalDenseTableXs} min-w-[720px]`}>
             <thead>
-              <tr className="border-b border-[var(--siya-border)] text-[var(--siya-text-secondary)]">
-                <th className="py-2 pr-2 font-medium">Person</th>
-                <th className="py-2 pr-2 font-medium">Days</th>
-                <th className="py-2 pr-2 font-medium">Working</th>
-                <th className="py-2 pr-2 font-medium">Break</th>
-                <th className="py-2 pr-2 font-medium">Focus</th>
-                <th className="py-2 pr-2 font-medium">Total</th>
-                <th className="py-2 pr-2 font-medium">Payroll-eligible</th>
-                <th className="py-2 font-medium">Open disputes</th>
+              <tr>
+                <th className={portalTableTh}>Person</th>
+                <th className={portalTableTh}>Days</th>
+                <th className={portalTableTh}>Working</th>
+                <th className={portalTableTh}>Break</th>
+                <th className={portalTableTh}>Focus</th>
+                <th className={portalTableTh}>Total</th>
+                <th className={portalTableTh}>Payroll-eligible</th>
+                <th className={`${portalTableTh} !normal-case`}>Open disputes</th>
               </tr>
             </thead>
             <tbody>
-              {report.people.map((p) => {
+              {report.people.map((p, rowIndex) => {
                 const open = p.days.filter((d) => d.dispute.status === "under_review").length;
                 const staleN = p.days.filter((d) => d.derivation.quality === "stale_affected").length;
                 return (
-                  <tr
-                    key={p.userId}
-                    className="border-b border-[var(--siya-border)]/60 text-[var(--siya-text)]"
-                  >
-                    <td className="py-2 pr-2">
+                  <tr key={p.userId} data-row-parity={portalTableRowParity(rowIndex)}>
+                    <td className="px-2 py-2">
                       <button
                         type="button"
                         className="text-left font-medium underline"
@@ -145,17 +148,17 @@ export function OpsAttendanceHoursPanel() {
                         </span>
                       ) : null}
                     </td>
-                    <td className="py-2 pr-2">{p.monthRollup.dayCount}</td>
-                    <td className="py-2 pr-2">
+                    <td className="px-2 py-2">{p.monthRollup.dayCount}</td>
+                    <td className="px-2 py-2">
                       {formatHoursMinutes(p.monthRollup.workingMinutes)}
                     </td>
-                    <td className="py-2 pr-2">{formatHoursMinutes(p.monthRollup.breakMinutes)}</td>
-                    <td className="py-2 pr-2">{formatHoursMinutes(p.monthRollup.focusMinutes)}</td>
-                    <td className="py-2 pr-2 font-medium">{p.monthRollupLabel}</td>
-                    <td className="py-2 pr-2 font-medium">
+                    <td className="px-2 py-2">{formatHoursMinutes(p.monthRollup.breakMinutes)}</td>
+                    <td className="px-2 py-2">{formatHoursMinutes(p.monthRollup.focusMinutes)}</td>
+                    <td className="px-2 py-2 font-medium">{p.monthRollupLabel}</td>
+                    <td className="px-2 py-2 font-medium">
                       {formatHoursMinutes(p.monthRollup.payrollEligibleMinutes ?? 0)}
                     </td>
-                    <td className="py-2">{open || "—"}</td>
+                    <td className="px-2 py-2">{open || "—"}</td>
                   </tr>
                 );
               })}

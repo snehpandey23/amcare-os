@@ -28,8 +28,6 @@ import { LeadKnowledgeGapsCard } from "@/components/ops/LeadKnowledgeGapsCard";
 import { MyDayTasksPanel } from "@/components/tasks/MyDayTasksPanel";
 import { FounderCoachPanel } from "@/components/executive/FounderCoachPanel";
 import { StaffHomeChat } from "@/components/companion/StaffHomeChat";
-import { WeeklyCheckInCard } from "@/components/ops/WeeklyCheckInCard";
-import { ProductTourNudgeBanner } from "@/components/onboarding/ProductTourNudgeBanner";
 import { MyDayPlannedVsActual } from "@/components/shift/MyDayPlannedVsActual";
 import { MyDayAttendanceHours } from "@/components/shift/MyDayAttendanceHours";
 import { isPortalAdmin } from "@/lib/portal-role";
@@ -325,10 +323,6 @@ export function HomeHub() {
         <>
           {isAdmin ? (
             <div className="flex h-full min-h-0 flex-col">
-              <div className="shrink-0 space-y-2 px-3 pt-2 md:px-4">
-                <ProductTourNudgeBanner />
-                <WeeklyCheckInCard />
-              </div>
               <div className="min-h-0 flex-1">
                 <FounderCoachPanel firstName={firstName} />
               </div>

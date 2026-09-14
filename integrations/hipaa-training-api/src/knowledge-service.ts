@@ -132,6 +132,11 @@ export async function listDecisionsForRetrieval(pool: pg.Pool): Promise<
     keywords: string[];
     department: string;
     status: string;
+    actionHook: string | null;
+    importance: 1 | 2 | 3;
+    decisionDate: string | null;
+    createdAt: string;
+    updatedAt: string;
   }[]
 > {
   const decisions = await listDecisions(pool, 80);
@@ -152,6 +157,11 @@ export async function listDecisionsForRetrieval(pool: pg.Pool): Promise<
         keywords: [...new Set(keywords)].slice(0, 24),
         department: d.department || "General",
         status: d.status,
+        actionHook: d.actionHook?.trim() ? d.actionHook.trim() : null,
+        importance: d.importance,
+        decisionDate: d.decisionDate,
+        createdAt: d.createdAt,
+        updatedAt: d.updatedAt,
       };
     });
 }

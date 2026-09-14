@@ -17,7 +17,7 @@ export function wantsFounderPortalSignals(message: string): boolean {
       t,
     ) ||
     /\b(what('s| is) flagged|domain (tab|signal)|lead check-?ins?)\b/.test(t) ||
-    /\b(decision log|why did we|who decided)\b/.test(t)
+    /\b(decision log|why did we|who decided|decisions? (i|we) should (remember|know)|any decisions)\b/.test(t)
   );
 }
 

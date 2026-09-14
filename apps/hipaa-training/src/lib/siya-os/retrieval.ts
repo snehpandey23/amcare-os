@@ -432,6 +432,12 @@ export type DynamicDecisionEntry = {
   body: string;
   keywords: string[];
   department: string;
+  status?: string;
+  actionHook?: string | null;
+  importance?: number;
+  decisionDate?: string | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 export type MemorySearchHit = {
@@ -544,7 +550,8 @@ export function retrieveDynamicDecisions(
         intentHit = true;
       }
     }
-    if (/why did we|decision log|who decided|why (is|are|do|did)/i.test(qLower)) s += 3;
+    if (/why did we|decision log|who decided|why (is|are|do|did)|decisions? (i|we) should (remember|know)|any decisions/i.test(qLower))
+      s += 3;
     if (tokenScore <= 0 && !intentHit) continue;
     if (s > 0) {
       out.push(

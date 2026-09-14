@@ -32,13 +32,21 @@ import { CappedStack, ListOverflowBox } from "@/components/ops/CappedStack";
 import { summarizeHiddenLabels } from "@/lib/portal-list-cap";
 import {
   portalBtnGhostSm,
+  portalDenseTable,
+  portalDenseTableWrap,
   portalH1,
   portalH2,
   portalSection,
   portalStatusErrorText,
   portalStatusSuccessText,
   portalStatusWarnText,
+  portalTableRowParity,
+  portalTableTh,
 } from "@/lib/portal-ui";
+import { LearningHealthTiles, computeLearningHealthStats } from "@/components/admin/LearningHealthTiles";
+import { fetchTeamRoster, type TeamRosterMember } from "@/lib/admin-api";
+import { fetchAdminSittingHistory, type SittingHistoryRow } from "@/lib/competency-exam/sitting-api";
+import { MODULES } from "@/content/modules";
 
 function displayName(row: { name: string | null; email: string }) {
   return row.name?.trim() || row.email;
@@ -64,27 +72,28 @@ function EngagementTable({
   reportPanel?: ReactNode;
 }) {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full min-w-[720px] text-left text-sm">
+    <div className={portalDenseTableWrap}>
+      <table className={`${portalDenseTable} min-w-[720px]`}>
         <thead>
-          <tr className="border-b border-[var(--siya-border)] text-xs uppercase tracking-wide text-[var(--siya-text-muted)]">
-            <th className="px-2 py-2 font-medium">Person</th>
-            <th className="px-2 py-2 font-medium">Ask · 2 wks</th>
-            <th className="px-2 py-2 font-medium">Ask · 30d</th>
-            <th className="px-2 py-2 font-medium">Habit</th>
-            <th className="px-2 py-2 font-medium">Practice</th>
-            <th className="px-2 py-2 font-medium">Sharing this week?</th>
+          <tr>
+            <th className={portalTableTh}>Person</th>
+            <th className={portalTableTh}>Ask · 2 wks</th>
+            <th className={portalTableTh}>Ask · 30d</th>
+            <th className={portalTableTh}>Habit</th>
+            <th className={portalTableTh}>Practice</th>
+            <th className={portalTableTh}>Sharing this week?</th>
           </tr>
         </thead>
         <tbody>
-          {rows.map((r) => {
+          {rows.map((r, rowIndex) => {
             const cold = isNotEngagedYet(r);
             const open = reportUserId === r.userId;
             return (
               <Fragment key={r.userId}>
                 <tr
-                  className={`border-b border-[var(--siya-border)]/60 align-top ${
-                    cold ? "bg-amber-50/80 dark:bg-amber-950/20" : ""
+                  data-row-parity={portalTableRowParity(rowIndex)}
+                  className={`align-top ${
+                    cold ? "!bg-amber-50/80 dark:!bg-amber-950/20" : ""
                   }`}
                 >
                   <td className="px-2 py-2.5">
@@ -139,7 +148,7 @@ function EngagementTable({
                   </td>
                 </tr>
                 {open && reportPanel ? (
-                  <tr className="border-b border-[var(--siya-border)]/60 bg-[var(--siya-bg-page)]/50">
+                  <tr data-table-expand="true">
                     <td colSpan={6} className="px-2 py-3" id={`ops-weekly-report-${r.userId}`}>
                       {reportPanel}
                     </td>
@@ -496,6 +505,9 @@ export function OpsDashboardPanel() {
   const [openSection, setOpenSection] = useState<OpsSectionId | null>(null);
   const [clearingBacklog, setClearingBacklog] = useState(false);
   const [gapNotice, setGapNotice] = useState<string | null>(null);
+  const [learningMembers, setLearningMembers] = useState<TeamRosterMember[] | null>(null);
+  const [learningSittings, setLearningSittings] = useState<SittingHistoryRow[] | null>(null);
+  const [learningLoading, setLearningLoading] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -511,6 +523,21 @@ export function OpsDashboardPanel() {
     }
   }, []);
 
+  const loadLearningHealth = useCallback(async () => {
+    if (!isPortalAdmin(user?.role)) return;
+    setLearningLoading(true);
+    try {
+      const [roster, sittingPayload] = await Promise.all([
+        fetchTeamRoster().catch(() => [] as TeamRosterMember[]),
+        fetchAdminSittingHistory().catch(() => null),
+      ]);
+      setLearningMembers(roster);
+      setLearningSittings(sittingPayload?.sittings ?? null);
+    } finally {
+      setLearningLoading(false);
+    }
+  }, [user]);
+
   useEffect(() => {
     if (!authReady) return;
     if (!user) {
@@ -518,7 +545,13 @@ export function OpsDashboardPanel() {
       return;
     }
     void load();
-  }, [authReady, user, router, load]);
+    void loadLearningHealth();
+  }, [authReady, user, router, load, loadLearningHealth]);
+
+  const learningStats = useMemo(() => {
+    if (!learningMembers) return null;
+    return computeLearningHealthStats(learningMembers, MODULES.length, learningSittings);
+  }, [learningMembers, learningSittings]);
 
   useEffect(() => {
     if (!reportUserId) return;
@@ -691,6 +724,10 @@ export function OpsDashboardPanel() {
 
       {data && !loading ? (
         <>
+          {isPortalAdmin(user?.role) ? (
+            <LearningHealthTiles stats={learningStats} loading={learningLoading} />
+          ) : null}
+
           <AttentionStrip items={attention} onOpen={setOpenSection} />
 
           {!openSection ? (

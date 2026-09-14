@@ -62,6 +62,14 @@ export function extractWhoIsName(message: string): string | null {
   ) {
     return null;
   }
+  // Portal usage / engagement — Ops Section A path, not directory ("who is using SiyaOS").
+  if (
+    /\b(using|uses|used)\b/i.test(name) ||
+    /\b(top|most\s+active|busiest)\s+user\b/i.test(name) ||
+    /\b(the\s+)?(os|siya\s*os|siyaos|portal|lms|assist)\b/i.test(name)
+  ) {
+    return null;
+  }
   if (/\b(lead|hr|billing|clinical|manager|supervisor)\b/i.test(name) && name.split(/\s+/).length <= 2) {
     // department-lead asks handled elsewhere
     if (/^(hr|clinical|billing|marketing|compliance|accounts|technology)\s+lead$/i.test(name)) return null;

@@ -61,6 +61,12 @@ assert.equal(isTeamPulseAsk("who is on duty tomorrow"), false);
 assert.equal(isTeamPulseAsk("who is working tomorrow"), false);
 assert.equal(isTeamRosterQuery("who is working right now"), false);
 assert.equal(isTeamPulseAsk("who is working right now"), true);
+assert.equal(isTeamRosterQuery("who is on shift now"), false);
+assert.equal(isTeamPulseAsk("who is on shift now"), true);
+assert.equal(isTeamRosterQuery("who is on shift (now)"), false);
+assert.equal(isTeamPulseAsk("who is on shift (now)"), true);
+assert.equal(isTeamRosterQuery("who is on shift"), false);
+assert.equal(isTeamPulseAsk("who is on shift"), true);
 
 for (const q of shouldNotMatchSelf) {
   assert.ok(!isMyScheduleQuery(q), `self should not match: ${q}`);

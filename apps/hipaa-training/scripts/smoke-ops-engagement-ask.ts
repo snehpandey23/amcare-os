@@ -14,17 +14,29 @@ import {
   opsPerformanceMessage,
   opsPersonPerformanceMessage,
   opsPracticeMessage,
+  opsTopUserMessage,
+  isOpsTopUserAsk,
 } from "../src/lib/siya-os/admin-ops-coach";
 import type { AdminOpsSnapshot } from "../src/lib/siya-os/admin-ops-snapshot";
+import { extractWhoIsName } from "../src/lib/siya-os/staff-identity-ask";
+import { tryFeatureNavigation } from "../src/lib/siya-os/feature-navigation";
 
 assert.equal(isOpsEngagementAsk("who all have used our OS in last week?"), true);
 assert.equal(isOpsEngagementAsk("who used the portal last week"), true);
 assert.equal(isOpsEngagementAsk("who is using the OS"), true);
+assert.equal(isOpsEngagementAsk("who is using siyaos"), true);
+assert.equal(isOpsEngagementAsk("who is using our lms"), true);
+assert.equal(isOpsEngagementAsk("who uses the portal"), true);
+assert.equal(isOpsEngagementAsk("is anyone using Assist"), true);
+assert.equal(isOpsEngagementAsk("who is the top user for siyaos"), true);
 assert.equal(isOpsEngagementAsk("are staff members loggin into OS?"), true);
 assert.equal(isOpsEngagementAsk("are staff members logging into OS?"), true);
 assert.equal(isOpsEngagementAsk("i want to know staff performance"), true);
 assert.equal(isOpsEngagementAsk("i want to know about Sonu's performance"), true);
 assert.equal(isOpsEngagementAsk("how do I use the OS"), false);
+assert.equal(detectAdminOpsIntent("who is using siyaos")?.kind, "ops_engagement");
+assert.equal(detectAdminOpsIntent("who is using our lms")?.kind, "ops_engagement");
+assert.equal(detectAdminOpsIntent("who is the top user for siyaos")?.kind, "ops_engagement");
 assert.equal(detectAdminOpsIntent("who all have used our OS in last week?")?.kind, "ops_engagement");
 assert.equal(detectAdminOpsIntent("are staff members loggin into OS?")?.kind, "ops_engagement");
 assert.equal(detectAdminOpsIntent("i want to know staff performance")?.kind, "ops_engagement");
@@ -37,6 +49,20 @@ assert.equal(isOpsPracticeDrillAsk("has anyone tried any drills?"), true);
 assert.equal(isOpsPracticeDrillAsk("who has done practice drills"), true);
 assert.equal(isOpsPracticeDrillAsk("how do I practice drills"), false);
 assert.equal(detectAdminOpsIntent("has anyone tried any drills")?.kind, "ops_practice");
+
+assert.equal(isOpsTopUserAsk("who is the top user for siyaos"), true);
+assert.equal(extractWhoIsName("who is using siyaos"), null);
+assert.equal(extractWhoIsName("who is using our lms"), null);
+assert.equal(extractWhoIsName("who is the top user for siyaos"), null);
+assert.equal(extractWhoIsName("who is Itika"), "Itika");
+
+const eomNav = tryFeatureNavigation("can I vote for employee of the month");
+assert.ok(eomNav);
+assert.match(eomNav!.message, /Employee of the month|Feedback|₹5,000|voucher/i);
+assert.ok(eomNav!.links?.some((l) => l.href.includes("/feedback")));
+const voucherNav = tryFeatureNavigation("what is the gift voucher on Feedback");
+assert.ok(voucherNav);
+assert.match(voucherNav!.message, /₹5,000|voucher|Employee of the month/i);
 
 assert.equal(isPersonalTasksAsk("urgent tasks for me?"), true);
 assert.equal(isPersonalTasksAsk("my tasks"), true);
@@ -137,5 +163,39 @@ assert.match(
   ),
   /couldn’t match/i,
 );
+
+const top = opsTopUserMessage(
+  [
+    {
+      email: "busy@siya.health",
+      name: "Busy Bee",
+      practiceLifetime: 2,
+      lastActiveDate: "2026-09-05",
+      askTurnsLast14d: 20,
+      askTurnsLast30d: 40,
+    },
+    {
+      email: "quiet@siya.health",
+      name: "Quiet One",
+      practiceLifetime: 10,
+      lastActiveDate: "2026-09-04",
+      askTurnsLast14d: 1,
+      askTurnsLast30d: 2,
+    },
+    {
+      email: "qa-test@siya.health",
+      name: "QA Test",
+      practiceLifetime: 999,
+      lastActiveDate: "2026-09-05",
+      askTurnsLast14d: 999,
+      askTurnsLast30d: 999,
+    },
+  ],
+  snap,
+);
+assert.match(top, /Busy Bee/);
+assert.match(top, /Top user/i);
+assert.doesNotMatch(top, /QA Test/);
+assert.match(top, /Quiet One/);
 
 console.log("smoke-ops-engagement-ask: OK");

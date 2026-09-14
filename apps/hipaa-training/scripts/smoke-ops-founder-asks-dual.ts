@@ -25,6 +25,10 @@ const ASKS = [
   "i want to know staff performance",
   "i want to know about Sonu's performance",
   "urgent tasks for me?",
+  "who is using siyaos",
+  "who is using our lms",
+  "who is the top user for siyaos",
+  "can I vote for employee of the month",
 ];
 
 async function login(): Promise<string> {
@@ -53,6 +57,28 @@ async function main() {
       assert.ok(!r.knowledgeGap, `${label} knowledgeGap=${r.knowledgeGap} msg=${(r.message || "").slice(0, 160)}`);
       assert.equal(r.ruleFinal, true, `${label} ruleFinal`);
       assert.ok(!SOFT.test(r.message || ""), `${label} soft-stop: ${r.message?.slice(0, 160)}`);
+      if (/who is using/i.test(message)) {
+        assert.ok(
+          /portal|login|Ops|Section A|using|people/i.test(r.message || ""),
+          `${label} expected usage answer: ${(r.message || "").slice(0, 160)}`,
+        );
+        assert.ok(
+          !/don.?t see \*\*using/i.test(r.message || ""),
+          `${label} name-lookup leak: ${(r.message || "").slice(0, 160)}`,
+        );
+      }
+      if (/top user/i.test(message)) {
+        assert.ok(
+          /Top user|most recent portal login|Ask turns|Ops → Section A/i.test(r.message || ""),
+          `${label} expected top-user answer: ${(r.message || "").slice(0, 160)}`,
+        );
+      }
+      if (/employee of the month/i.test(message)) {
+        assert.ok(
+          /Employee of the month|Feedback|₹5,000|voucher|nominate/i.test(r.message || ""),
+          `${label} expected EOM nav: ${(r.message || "").slice(0, 160)}`,
+        );
+      }
       console.log(`OK\t${label}\t${(r.message || "").slice(0, 80).replace(/\n/g, " ")}`);
     }
   }

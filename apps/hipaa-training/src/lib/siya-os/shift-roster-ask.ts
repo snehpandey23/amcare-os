@@ -177,13 +177,33 @@ export function isTeamRosterQuery(message: string): boolean {
   const t = norm(message);
   if (!t) return false;
 
-  // Live presence stays on Team pulse — not imported roster.
-  if (/\b(right\s+now|currently|online|logged\s*in|logging\s*in|on\s+the\s+clock)\b/.test(t)) {
+  // Live presence (Team pulse / Start shift) — never the imported calendar dump.
+  // "right now", bare "now", "currently", online/logged-in all win over roster.
+  if (
+    /\b(right\s+now|currently|online|logged\s*in|logging\s*in|on\s+the\s+clock)\b/.test(t) ||
+    (/\bnow\b/.test(t) && /\b(on\s+shift|working|online|logged|present)\b/.test(t))
+  ) {
     return false;
   }
 
+  // Calendar / duty language
   if (/\bwho('?s| is| are)\s+on\s+duty\b/.test(t)) return true;
-  if (/\bwho('?s| is| are)\s+(working|scheduled|on\s+shift)\b/.test(t)) return true;
+  if (/\bwho('?s| is| are)\s+scheduled\b/.test(t)) return true;
+  // "who is working tomorrow / this week / September" — calendar, not live pulse
+  if (
+    /\bwho('?s| is| are)\s+(working|on\s+shift)\b/.test(t) &&
+    /\b(tomorrow|this\s+week|next\s+week|today|september|october|november|december|january|february|march|april|may|june|july|august)\b/.test(
+      t,
+    )
+  ) {
+    // "who's working today right now" already excluded above; "who's on duty today" is duty.
+    // Bare "who's working today" → calendar for that day (not a 30-day dump of "on shift" presence).
+    return true;
+  }
+  // Bare "who is on shift" / "who is working" without a schedule window → live pulse, not roster.
+  if (/\bwho('?s| is| are)\s+(working|on\s+shift)\b/.test(t)) {
+    return false;
+  }
   if (/\b(show|list|open|see|get)\s+(the\s+)?(ma\s+)?(duty\s+)?(team\s+)?roster\b/.test(t)) return true;
   if (
     /\b(ma\s+)?(duty\s+)?roster\s+for\b/.test(t) &&

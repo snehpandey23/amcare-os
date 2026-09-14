@@ -1,6 +1,5 @@
 "use client";
 
-import { PortalNavLink } from "@/components/training/PortalNavLink";
 import { useCallback, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
@@ -29,6 +28,7 @@ import {
   type WeeklyPlanRecord,
 } from "@/lib/founder-coach-api";
 import { AssistChatShell } from "@/components/siya/AssistChatShell";
+import { WeeklyCheckInCard } from "@/components/ops/WeeklyCheckInCard";
 import {
   portalBadgeWip,
   portalBtnAccentSm,
@@ -651,7 +651,12 @@ function PlanThreadView({
   const isLocked = Boolean(data.isWeekLocked || wp?.lockedAt);
 
   if (!wp || !(data.canEditWeekly || data.canEditMonthly || isLocked)) {
-    return <p className="text-sm text-[var(--siya-text-muted)]">Weekly plan not available yet.</p>;
+    return (
+      <div className="space-y-4">
+        <WeeklyCheckInCard />
+        <p className="text-sm text-[var(--siya-text-muted)]">Weekly plan not available yet.</p>
+      </div>
+    );
   }
 
   return (
@@ -660,6 +665,7 @@ function PlanThreadView({
         <h2 className={portalH3}>This week&apos;s plan</h2>
         <p className="mt-1 text-xs text-[var(--siya-text-muted)]">Week of {data.weekStart}</p>
       </header>
+      <WeeklyCheckInCard />
       <WeeklyPlanManualForm
         key={`${wp.updatedAt}-${wp.lockedAt ?? "open"}`}
         plan={wp}
@@ -801,15 +807,7 @@ export function FounderCoachPanel({ firstName }: { firstName?: string }) {
     <div className="flex min-h-[calc(100dvh-7.5rem)] flex-col gap-2">
       <p className="shrink-0 text-xs text-[var(--siya-text-muted)]">
         Policies, coverage, difficult-patient paths — same engine as staff Ask. Plan Record stays on{" "}
-        <strong>This week&apos;s plan</strong>.{" "}
-        <PortalNavLink href="/onboarding" className="font-semibold underline underline-offset-2">
-          Personalize
-        </PortalNavLink>
-        {" · "}
-        <PortalNavLink href="/product-tour" className="font-semibold underline underline-offset-2">
-          Run through the tour
-        </PortalNavLink>{" "}
-        (name, assistant label, training reminders).
+        <strong>This week&apos;s plan</strong>.
       </p>
       <div className="min-h-0 flex-1">
         <Suspense fallback={<p className="p-4 text-sm text-[var(--siya-text-muted)]">Loading Ask…</p>}>

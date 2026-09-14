@@ -199,6 +199,23 @@ export const PORTAL_FEATURES: FeatureDef[] = [
   },
   // --- People & feedback ---
   {
+    id: "eom-nomination",
+    label: "Employee of the month",
+    href: "/feedback#employee-of-the-month",
+    section: "People & feedback",
+    requiresAuth: true,
+    blurb:
+      "Nominate a teammate (or yourself) on Feedback — winner gets ₹5,000 as an Amazon voucher or preferred gift voucher of the same value.",
+    patterns: [
+      /\b(employee\s+of\s+the\s+month|e\.?o\.?m\.?)\b/,
+      /\b(nominate|nomination|vote)\b[\s\S]{0,40}\b(employee\s+of\s+the\s+month|e\.?o\.?m\.?|teammate|peer|colleague)\b/,
+      /\b(can\s+i|how\s+(do|can)\s+i|where\s+(do|can)\s+i)\b[\s\S]{0,32}\b(nominate|vote)\b/,
+      /\b(eom\s+nomination|nomination\s+for\s+eom)\b/,
+      /\b(gift\s+voucher|amazon\s+voucher|₹\s*5,?000|rs\.?\s*5,?000)\b/,
+    ],
+    exclude: [/\bthumbs?\b/],
+  },
+  {
     id: "team-feedback",
     label: "Feedback Friday",
     href: "/feedback",
@@ -212,7 +229,10 @@ export const PORTAL_FEATURES: FeatureDef[] = [
       /\bpeer\s+feedback\b/,
       /^feedback\s*(assist(ance)?|friday|tool)?\s*$/i,
     ],
-    exclude: [/\b(thumbs?|helpful|notify\s+owner)\b/],
+    exclude: [
+      /\b(thumbs?|helpful|notify\s+owner)\b/,
+      /\b(employee\s+of\s+the\s+month|e\.?o\.?m\.?|nominate|nomination|gift\s+voucher|amazon\s+voucher)\b/,
+    ],
   },
   {
     id: "weekly-check-in",

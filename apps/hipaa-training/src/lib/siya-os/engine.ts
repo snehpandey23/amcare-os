@@ -26,6 +26,7 @@ import {
 } from "./personal-self-ask";
 import { isOpsNeedsAttentionQuery, answerOpsNeedsAttentionQuery } from "./ops-attention-ask";
 import { isFounderFocusQuery, answerFounderFocusQuery } from "./founder-focus-ask";
+import { wantsDecisionLogOverview, formatDecisionLogOverview, inferOverviewDepartment, asDepartment } from "./decision-log-ask";
 import { answerWhoIsQuery, isWhoAmIQuery, extractWhoIsName, fetchViewerIdentity } from "./staff-identity-ask";
 import { synthesizeWorkforceAnswer } from "./llm-answer";
 import {
@@ -718,8 +719,10 @@ export async function runSiyaAssistantAsync(
   }
 
   // Team pulse / presence BEFORE name lookup — but not calendar MA duty roster asks.
+  // Prefer pulse when intent is team_pulse even if a broad roster matcher also fires
+  // ("who is on shift now" must not dump the month calendar).
   const opsIntentEarly = token ? detectAdminOpsIntent(message, history) : null;
-  if (token && opsIntentEarly?.kind === "team_pulse" && !isTeamRosterQuery(message)) {
+  if (token && opsIntentEarly?.kind === "team_pulse") {
     const snapshot = await fetchAdminOpsSnapshot(token);
     if (snapshot) {
       const ops = await runAdminOpsCoach(message, snapshot, token, history);
@@ -763,6 +766,42 @@ export async function runSiyaAssistantAsync(
         followUpQuestions: [],
       },
     };
+  }
+
+  // Portal usage / top-user / practice-adoption BEFORE who-is name lookup
+  // (same ordering fix as presence — "who is using SiyaOS" must not become a person name).
+  if (
+    token &&
+    (opsIntentEarly?.kind === "ops_engagement" || opsIntentEarly?.kind === "ops_practice")
+  ) {
+    const snapshot = await fetchAdminOpsSnapshot(token);
+    if (snapshot) {
+      const ops = await runAdminOpsCoach(message, snapshot, token, history);
+      if (ops) {
+        return {
+          message: polishStaffMessage(ops.message),
+          chunks: [],
+          sources: [],
+          portalLinks: ops.links,
+          opsCoPilot: true,
+          ruleFinal: true,
+          pendingTask: founderCoach ? undefined : ops.pendingTask,
+          executiveMeta: {
+            confidence: "high",
+            freshnessSeconds: 0,
+            recommendedAction: "Open Ops → Section A for the full table, or continue in Ask.",
+            evidenceCount: 1,
+          },
+          routing: {
+            department: "Leadership",
+            task: opsIntentEarly.kind === "ops_practice" ? "Ops practice drills" : "Ops engagement",
+            confidence: "high",
+            followUpQuestions: [],
+          },
+        };
+      }
+    }
+    // Fall through to the later opsIntent block’s staff-safe pointers if snapshot missing.
   }
 
   // Team / MA duty roster — BEFORE who-is (otherwise "who is on duty" becomes a name lookup).
@@ -1124,6 +1163,31 @@ export async function runSiyaAssistantAsync(
   } catch {
     decisions = [];
   }
+
+  // Broad decision-log overview ("any decisions I should remember?") — before soft-stop.
+  if (wantsDecisionLogOverview(message) || wantsDecisionLogOverview(normalized)) {
+    // Prefer last-turn context only — do not bias from the overview ask itself (routes to Leadership).
+    const preferredDepartment = inferOverviewDepartment(history);
+    const overview = formatDecisionLogOverview(decisions, {
+      preferredDepartment,
+      history,
+    });
+    return {
+      message: polishStaffMessage(overview.message),
+      chunks: [],
+      sources: overview.links.map((l) => ({ title: l.label, id: l.href })),
+      portalLinks: overview.links,
+      knowledgeGap: false,
+      ruleFinal: true,
+      routing: {
+        department: asDepartment(preferredDepartment) ?? "Leadership",
+        task: founderCoach ? "Founder Talk" : "Decision log / context",
+        confidence: "high",
+        followUpQuestions: [],
+      },
+    };
+  }
+
   if (token && isHistoricalMemoryQuery(query)) {
     try {
       memories = await searchMemory(query, token);
