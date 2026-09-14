@@ -31,6 +31,10 @@ const BROWSER_VOICES: TtsVoiceOption[] = [
   { voiceURI: "Google UK English Male", name: "Google UK English Male", lang: "en-GB", label: "Male", localService: false, default: false },
   { voiceURI: "hi-IN-Neel", name: "Neel", lang: "hi-IN", label: "Hindi — Neel", localService: false, default: false },
   { voiceURI: "hi-IN-Veena", name: "Veena", lang: "hi-IN", label: "Hindi — Veena", localService: false, default: false },
+  // Spanish-locale traps — must never win for English-speaking personas (Carlos).
+  { voiceURI: "com.apple.voice.Jorge", name: "Jorge", lang: "es-MX", label: "Spanish (Mexico) — Jorge", localService: true, default: false },
+  { voiceURI: "com.apple.voice.Juan", name: "Juan", lang: "es-MX", label: "Spanish (Mexico) — Juan", localService: true, default: false },
+  { voiceURI: "com.apple.voice.Paulina", name: "Paulina", lang: "es-MX", label: "Spanish (Mexico) — Paulina", localService: true, default: false },
 ];
 
 assert.equal(classifyVoiceGender(BROWSER_VOICES[0]!), "male"); // Alex
@@ -77,6 +81,25 @@ console.log("Persona voice audit:", audit);
 // Priya must never get Neel
 const priya = resolvePersonaTtsVoice("persona-priya", BROWSER_VOICES);
 assert.ok(!/neel/i.test(priya.voiceName || ""), `Priya must never get Neel, got ${priya.voiceName}`);
+assert.ok(
+  priya.voiceLang && /^en/i.test(priya.voiceLang),
+  `Priya must use English locale, got ${priya.voiceLang}`,
+);
+
+// Carlos: never Spanish-locale (es_MX) even when Jorge/Juan are present
+const carlos = resolvePersonaTtsVoice("persona-carlos", BROWSER_VOICES);
+console.log("Carlos resolved:", carlos);
+assert.ok(carlos.voiceURI, "Carlos must resolve a voice");
+assert.ok(
+  carlos.voiceLang && /^en/i.test(carlos.voiceLang),
+  `Carlos must use English locale (not Spanish), got lang=${carlos.voiceLang} name=${carlos.voiceName}`,
+);
+assert.ok(
+  !/jorge|juan|diego|paulina/i.test(carlos.voiceName || ""),
+  `Carlos must not pick Spanish-named voice, got ${carlos.voiceName}`,
+);
+assert.match(carlos.accentNote || "", /Mexican-accented English unavailable/i);
+assert.equal(carlos.classifiedGender, "male");
 
 // --- Edit distance ---
 const minor = measureSttTranscriptEdit("use the Mick please", "use the mic please");

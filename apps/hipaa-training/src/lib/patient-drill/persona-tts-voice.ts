@@ -5,6 +5,8 @@
  * - Same personaId → same voiceURI for the session (and across sessions on that browser).
  * - Female personas NEVER resolve to a male-tagged voice (and vice versa).
  * - Does NOT use the staff Talk Mode voice.
+ * - Personas speak English in chat-sim → only English (en-*) voices.
+ *   Never Spanish/Hindi language packs (those are not accented English).
  */
 
 import { listTtsVoices, type TtsVoiceOption } from "@/lib/text-to-speech";
@@ -15,8 +17,13 @@ export type PersonaVoiceProfile = {
   displayName: string;
   gender: PersonaVoiceGender;
   ageBand: "young" | "adult" | "senior";
-  /** Ordered name substrings — only applied inside the gender-safe pool. */
+  /** Ordered name substrings — only applied inside the gender-safe English pool. */
   preferNameSubstrings: string[];
+  /**
+   * Optional note for reviewers — e.g. accent intent deferred until a real
+   * accented-English TTS option is bake-off approved.
+   */
+  accentNote?: string;
 };
 
 /** Fixed profile per catalog persona — gender is authoritative for voice choice. */
@@ -37,7 +44,9 @@ export const PERSONA_TTS_PROFILES: Record<string, PersonaVoiceProfile> = {
     displayName: "Dr. Priya",
     gender: "female",
     ageBand: "adult",
-    preferNameSubstrings: ["Veena", "Raveena", "Lekha", "Moira", "Samantha", "Zira", "Female"],
+    // English-only pool: do not prefer Lekha/Veena Hindi-locale voices for English lines.
+    preferNameSubstrings: ["Moira", "Samantha", "Karen", "Zira", "Female"],
+    accentNote: "Indian-accented English deferred — uses neutral English until bake-off.",
   },
   "persona-janet": {
     displayName: "Janet",
@@ -49,7 +58,11 @@ export const PERSONA_TTS_PROFILES: Record<string, PersonaVoiceProfile> = {
     displayName: "Carlos",
     gender: "male",
     ageBand: "adult",
-    preferNameSubstrings: ["Jorge", "Juan", "Diego", "Daniel", "Alex", "David", "Male"],
+    // Do NOT prefer Jorge/Juan/Diego — those match es_MX Spanish-language voices.
+    // Mexican-accented English is not in the browser set; use neutral English male until bake-off.
+    preferNameSubstrings: ["Daniel", "Alex", "Fred", "David", "Mark", "Male"],
+    accentNote:
+      "Mexican-accented English unavailable in browser TTS. Uses neutral English male (not es_MX Spanish).",
   },
   "persona-aisha": {
     displayName: "Aisha",
@@ -78,6 +91,10 @@ export const FEMALE_VOICE_HINT =
 /** Names/labels that clearly present as male — includes Neel (must never map to Priya/Janet/etc.). */
 export const MALE_VOICE_HINT =
   /male|\bman\b|\balex\b|\bdaniel\b|\bfred\b|\bdavid\b|\bmark\b|\bbruce\b|\bralph\b|\balbert\b|\bjorge\b|\bjuan\b|\bdiego\b|\btom\b|\baaron\b|\bmatthew\b|\bjustin\b|\bjoey\b|\bbrian\b|\bguy\b|\beric\b|\bravi\b|\bneel\b|\bnathan\b|\bjames\b/i;
+
+export function isEnglishTtsLocale(lang: string): boolean {
+  return /^en([-_]|$)/i.test((lang || "").trim());
+}
 
 function hashPersonaId(id: string): number {
   let h = 0;
@@ -118,16 +135,14 @@ export function personaVoiceProfile(personaId: string): PersonaVoiceProfile {
   };
 }
 
-/** Gender-safe pool: never include opposite-tagged voices for female/male personas. */
+/** Gender-safe English pool — chat-sim lines are English; never pick Spanish/Hindi language packs. */
 export function genderSafeVoicePool(
   personaId: string,
   voices: TtsVoiceOption[],
 ): TtsVoiceOption[] {
   const profile = personaVoiceProfile(personaId);
-  const langOk = voices.filter(
-    (v) => /^en/i.test(v.lang) || /^hi/i.test(v.lang) || /^es/i.test(v.lang),
-  );
-  const pool = langOk.length ? langOk : voices;
+  const english = voices.filter((v) => isEnglishTtsLocale(v.lang));
+  const pool = english.length ? english : voices;
 
   if (profile.gender === "neutral") return pool;
 
@@ -136,7 +151,9 @@ export function genderSafeVoicePool(
 
   // No clearly gendered voices — use ambiguous/neutral only (never opposite gender).
   const ambiguous = pool.filter((v) => classifyVoiceGender(v) === "neutral");
-  return ambiguous.length ? ambiguous : pool.filter((v) => classifyVoiceGender(v) !== (profile.gender === "female" ? "male" : "female"));
+  return ambiguous.length
+    ? ambiguous
+    : pool.filter((v) => classifyVoiceGender(v) !== (profile.gender === "female" ? "male" : "female"));
 }
 
 /**
@@ -166,7 +183,9 @@ export function resolvePersonaTtsVoiceURI(
   if (profile.gender === "female" || profile.gender === "male") {
     const g = classifyVoiceGender(chosen);
     if (g !== "neutral" && g !== profile.gender) {
-      const fallback = ranked.find((v) => classifyVoiceGender(v) === profile.gender || classifyVoiceGender(v) === "neutral");
+      const fallback = ranked.find(
+        (v) => classifyVoiceGender(v) === profile.gender || classifyVoiceGender(v) === "neutral",
+      );
       return fallback?.voiceURI ?? null;
     }
   }
@@ -177,15 +196,24 @@ export function resolvePersonaTtsVoiceURI(
 export function resolvePersonaTtsVoice(
   personaId: string,
   voices: TtsVoiceOption[] = listTtsVoices(),
-): { voiceURI: string | null; voiceName: string | null; classifiedGender: PersonaVoiceGender | null; profileGender: PersonaVoiceGender } {
+): {
+  voiceURI: string | null;
+  voiceName: string | null;
+  voiceLang: string | null;
+  classifiedGender: PersonaVoiceGender | null;
+  profileGender: PersonaVoiceGender;
+  accentNote?: string;
+} {
   const profile = personaVoiceProfile(personaId);
   const uri = resolvePersonaTtsVoiceURI(personaId, voices);
   const voice = uri ? voices.find((v) => v.voiceURI === uri) : undefined;
   return {
     voiceURI: uri,
     voiceName: voice?.name ?? null,
+    voiceLang: voice?.lang ?? null,
     classifiedGender: voice ? classifyVoiceGender(voice) : null,
     profileGender: profile.gender,
+    accentNote: profile.accentNote,
   };
 }
 
