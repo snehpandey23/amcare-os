@@ -4,7 +4,8 @@ import Link from "next/link";
 import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { resetPasswordWithToken } from "@/lib/account-api";
-import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
+import { trainingLinkPrimaryClass } from "@/components/training/training-ui";
+import { PasswordInput } from "@/components/ui/PasswordInput";
 import { SiyaWordmark } from "@/components/siya/SiyaWordmark";
 
 function ResetPasswordForm() {
@@ -68,8 +69,7 @@ function ResetPasswordForm() {
               <span className="text-xs font-medium text-[var(--siya-text-muted)]">
                 New password (8+ characters)
               </span>
-              <TrainingInput
-                type="password"
+              <PasswordInput
                 required
                 autoComplete="new-password"
                 value={newPassword}
@@ -81,8 +81,7 @@ function ResetPasswordForm() {
               <span className="text-xs font-medium text-[var(--siya-text-muted)]">
                 Confirm new password
               </span>
-              <TrainingInput
-                type="password"
+              <PasswordInput
                 required
                 autoComplete="new-password"
                 value={confirmPassword}

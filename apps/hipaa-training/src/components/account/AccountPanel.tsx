@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { changePassword } from "@/lib/account-api";
-import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
+import { trainingLinkPrimaryClass } from "@/components/training/training-ui";
+import { PasswordInput } from "@/components/ui/PasswordInput";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export function AccountPanel() {
@@ -59,8 +60,7 @@ export function AccountPanel() {
         <form onSubmit={(e) => void onSubmit(e)} className="mt-4 space-y-3">
           <label className="block text-xs font-medium text-[var(--siya-text-muted)]">
             Current password
-            <TrainingInput
-              type="password"
+            <PasswordInput
               autoComplete="current-password"
               className="mt-1 w-full"
               value={currentPassword}
@@ -70,8 +70,7 @@ export function AccountPanel() {
           </label>
           <label className="block text-xs font-medium text-[var(--siya-text-muted)]">
             New password (8+ characters)
-            <TrainingInput
-              type="password"
+            <PasswordInput
               autoComplete="new-password"
               className="mt-1 w-full"
               value={newPassword}
@@ -81,8 +80,7 @@ export function AccountPanel() {
           </label>
           <label className="block text-xs font-medium text-[var(--siya-text-muted)]">
             Confirm new password
-            <TrainingInput
-              type="password"
+            <PasswordInput
               autoComplete="new-password"
               className="mt-1 w-full"
               value={confirmPassword}

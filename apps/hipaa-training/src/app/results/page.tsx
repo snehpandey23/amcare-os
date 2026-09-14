@@ -15,6 +15,10 @@ import {
   portalStatusSuccessText,
   portalStatusWarnText,
   portalLinkBack,
+  portalDenseTable,
+  portalDenseTableWrap,
+  portalTableRowParity,
+  portalTableTh,
 } from "@/lib/portal-ui";
 
 export default function ResultsPage() {
@@ -156,24 +160,24 @@ export default function ResultsPage() {
         <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
           Reinforcement-only attempts are excluded from these totals.
         </p>
-        <div className="mt-4 overflow-x-auto">
-          <table className="w-full text-left text-sm text-[var(--siya-text-secondary)]">
+        <div className={`mt-4 ${portalDenseTableWrap}`}>
+          <table className={portalDenseTable}>
             <thead>
-              <tr className="border-b border-[var(--siya-border)]">
-                <th className="py-2 pr-4">Topic</th>
-                <th className="py-2">Correct</th>
-                <th className="py-2">Attempts</th>
-                <th className="py-2">Score</th>
+              <tr>
+                <th className={portalTableTh}>Topic</th>
+                <th className={portalTableTh}>Correct</th>
+                <th className={portalTableTh}>Attempts</th>
+                <th className={portalTableTh}>Score</th>
               </tr>
             </thead>
             <tbody>
               {topicRows.length ? (
-                topicRows.map((row) => (
-                  <tr key={row.tag} className="border-b border-[var(--siya-border)]">
-                    <td className="py-2 pr-4">{row.label}</td>
-                    <td className="py-2">{row.correct}</td>
-                    <td className="py-2">{row.attempted}</td>
-                    <td className="py-2">
+                topicRows.map((row, rowIndex) => (
+                  <tr key={row.tag} data-row-parity={portalTableRowParity(rowIndex)}>
+                    <td className="px-2 py-2 text-[var(--siya-text-secondary)]">{row.label}</td>
+                    <td className="px-2 py-2">{row.correct}</td>
+                    <td className="px-2 py-2">{row.attempted}</td>
+                    <td className="px-2 py-2">
                       <span className={row.rate >= 70 ? portalStatusSuccessText : portalStatusWarnText}>
                         {row.rate}%
                       </span>
@@ -181,8 +185,8 @@ export default function ResultsPage() {
                   </tr>
                 ))
               ) : (
-                <tr>
-                  <td colSpan={4} className="py-4 text-[var(--siya-text-muted)]">
+                <tr data-table-expand="true">
+                  <td colSpan={4} className="px-2 py-4 text-[var(--siya-text-muted)]">
                     No topic data yet — complete a module quiz or the final assessment.
                   </td>
                 </tr>

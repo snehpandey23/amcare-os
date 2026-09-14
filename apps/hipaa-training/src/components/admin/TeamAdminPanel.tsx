@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { isPortalAdmin } from "@/lib/portal-role";
@@ -16,13 +16,26 @@ import { fetchTeamShiftTrends, fetchShiftDashboard, type ShiftDashboard, type Pr
 import { PRESENCE_EMOJI } from "@/lib/shift-presence";
 import { MODULES } from "@/content/modules";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
+import { PasswordInput } from "@/components/ui/PasswordInput";
 import { getStoredToken } from "@/lib/authStorage";
 import { buildInviteCopyText } from "@/lib/invite-email";
 import { downloadShiftAttendanceCsv } from "@/lib/portal-analytics";
-import { portalBtnGhostSm, portalH1, portalH2, portalSection } from "@/lib/portal-ui";
+import {
+  portalBtnGhostSm,
+  portalDenseTable,
+  portalDenseTableWrap,
+  portalH1,
+  portalH2,
+  portalSection,
+  portalTableRowParity,
+  portalTableTh,
+} from "@/lib/portal-ui";
 import { DepartmentLeadsSection } from "@/components/admin/DepartmentLeadsSection";
 import { WeeklyPracticeReportView } from "@/components/level-up/WeeklyPracticeReportView";
 import { ExamAttemptsPanel } from "@/components/competency-exam/ExamAttemptsPanel";
+import { SittingHistoryAdminPanel } from "@/components/competency-exam/SittingHistoryPanel";
+import { LearningHealthTiles, computeLearningHealthStats } from "@/components/admin/LearningHealthTiles";
+import { fetchAdminSittingHistory, type SittingHistoryRow } from "@/lib/competency-exam/sitting-api";
 import { buildWeeklyPracticeReport, coerceDayLedger } from "@/lib/level-up/weekly-report";
 import type { LevelUpProgress } from "@/lib/level-up/progress";
 
@@ -81,6 +94,7 @@ export function TeamAdminPanel() {
   const [inviteCopyBlock, setInviteCopyBlock] = useState<string | null>(null);
   const [csvPending, setCsvPending] = useState(false);
   const [reportMemberId, setReportMemberId] = useState<string | null>(null);
+  const [sittingRows, setSittingRows] = useState<SittingHistoryRow[] | null>(null);
   const invitePanelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -94,15 +108,17 @@ export function TeamAdminPanel() {
       setError(null);
     }
     try {
-      const [roster, dashboard, trends] = await Promise.all([
+      const [roster, dashboard, trends, sittingsPayload] = await Promise.all([
         fetchTeamRoster(),
         fetchShiftDashboard(),
         fetchTeamShiftTrends(),
+        fetchAdminSittingHistory().catch(() => null),
       ]);
       setMembers(roster);
       setShiftDashboard(dashboard);
       setDashboardUpdatedAt(Date.now());
       setShiftTrends(trends);
+      setSittingRows(sittingsPayload?.sittings ?? null);
     } catch (e) {
       if (!opts?.quiet) {
         setError(e instanceof Error ? e.message : "Could not load team");
@@ -237,6 +253,10 @@ export function TeamAdminPanel() {
   }
 
   const moduleTotal = MODULES.length;
+  const learningStats = useMemo(
+    () => computeLearningHealthStats(members, moduleTotal, sittingRows),
+    [members, moduleTotal, sittingRows],
+  );
 
   return (
     <div className="mx-auto max-w-6xl space-y-6 px-4 py-8 md:px-6">
@@ -274,6 +294,8 @@ export function TeamAdminPanel() {
           </button>
         </div>
       </header>
+
+      <LearningHealthTiles stats={loading ? null : learningStats} loading={loading} />
 
       {inviteOpen ? (
         <div
@@ -341,14 +363,14 @@ export function TeamAdminPanel() {
                 <label className="block text-xs font-medium text-[var(--siya-text-muted)] sm:col-span-2">
                   Temporary password (8+ chars)
                   <div className="mt-1 flex gap-2">
-                    <TrainingInput
-                      required
-                      type="text"
-                      autoComplete="new-password"
-                      value={invitePass}
-                      onChange={(e) => setInvitePass(e.target.value)}
-                      className="flex-1"
-                    />
+                    <div className="min-w-0 flex-1">
+                      <PasswordInput
+                        required
+                        autoComplete="new-password"
+                        value={invitePass}
+                        onChange={(e) => setInvitePass(e.target.value)}
+                      />
+                    </div>
                     <button
                       type="button"
                       className="shrink-0 rounded-lg border border-[var(--siya-border)] px-3 py-2 text-xs font-medium hover:bg-[var(--siya-bg-subtle)]"
@@ -485,10 +507,15 @@ export function TeamAdminPanel() {
 
           {shiftDashboard.live.members.length > 0 ? (
             <ul className="mt-4 divide-y divide-[var(--siya-border)] text-sm">
-              {shiftDashboard.live.members.map((m) => {
+              {shiftDashboard.live.members.map((m, rowIndex) => {
                 const p = (m.presence ?? "working") as PresenceStatus;
                 return (
-                  <li key={m.id} className="flex flex-wrap items-center justify-between gap-2 py-2">
+                  <li
+                    key={m.id}
+                    className={`flex flex-wrap items-center justify-between gap-2 px-1 py-2 ${
+                      rowIndex % 2 === 1 ? "bg-[var(--siya-row-alt)]" : ""
+                    }`}
+                  >
                     <span>
                       {m.name || m.email}
                       <span className="ml-2 text-xs text-[var(--siya-text-muted)]">{m.email}</span>
@@ -552,25 +579,25 @@ export function TeamAdminPanel() {
       {loading ? <p className="text-sm text-[var(--siya-text-muted)]">Loading roster…</p> : null}
 
       {!loading && members.length > 0 ? (
-        <div className="overflow-x-auto rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] shadow-[var(--siya-shadow)]">
-          <table className="min-w-full text-left text-sm">
-            <thead className="border-b border-[var(--siya-border)] bg-[var(--siya-bg-subtle)] text-xs uppercase text-[var(--siya-text-muted)]">
+        <div className={portalDenseTableWrap}>
+          <table className={`${portalDenseTable} min-w-full`}>
+            <thead>
               <tr>
-                <th className="px-3 py-2">Person</th>
-                <th className="px-3 py-2">Manage</th>
-                <th className="px-3 py-2">Account</th>
-                <th className="px-3 py-2">Last sign-in</th>
-                <th className="px-3 py-2">HIPAA modules</th>
-                <th className="px-3 py-2">Cert ready</th>
-                <th className="px-3 py-2">Level Up</th>
-                <th className="px-3 py-2">Chat practice</th>
-                <th className="px-3 py-2">US culture</th>
-                <th className="px-3 py-2">Billing drill</th>
+                <th className={portalTableTh}>Person</th>
+                <th className={portalTableTh}>Manage</th>
+                <th className={portalTableTh}>Account</th>
+                <th className={portalTableTh}>Last sign-in</th>
+                <th className={portalTableTh}>HIPAA modules</th>
+                <th className={portalTableTh}>Cert ready</th>
+                <th className={portalTableTh}>Level Up</th>
+                <th className={portalTableTh}>Chat practice</th>
+                <th className={portalTableTh}>US culture</th>
+                <th className={portalTableTh}>Billing drill</th>
               </tr>
             </thead>
             <tbody>
-              {members.map((m) => (
-                <tr key={m.id} className="border-b border-[var(--siya-border)] last:border-0">
+              {members.map((m, rowIndex) => (
+                <tr key={m.id} data-row-parity={portalTableRowParity(rowIndex)}>
                   <td className="px-3 py-3">
                     <div className="font-medium text-[var(--siya-text-secondary)]">{m.name || "—"}</div>
                     <div className="text-xs text-[var(--siya-text-muted)]">{m.email}</div>
@@ -661,6 +688,7 @@ export function TeamAdminPanel() {
         );
       })() : null}
 
+      <SittingHistoryAdminPanel />
       <ExamAttemptsPanel />
 
       {!loading && members.length === 0 && !error ? (

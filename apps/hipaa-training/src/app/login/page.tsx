@@ -8,6 +8,7 @@ import { useBrandIntroBoot } from "@/context/BrandIntroBootContext";
 import { isPortalAuthEnabled } from "@/lib/trainingConfig";
 import { canUsePortalWithoutOnboarding, loadLocalPortalProfile } from "@/lib/portal-profile";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
+import { PasswordInput } from "@/components/ui/PasswordInput";
 import { SiyaWordmark } from "@/components/siya/SiyaWordmark";
 
 function portalLandingPath(): string {
@@ -115,8 +116,7 @@ function LoginForm() {
           </label>
           <label className="mt-4 block">
             <span className="text-xs font-medium text-[var(--siya-text-muted)]">Password</span>
-            <TrainingInput
-              type="password"
+            <PasswordInput
               required
               autoComplete={mode === "register" ? "new-password" : "current-password"}
               value={password}

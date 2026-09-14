@@ -31,6 +31,38 @@ export const portalSectionSubtle =
 export const portalCard =
   "rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-[var(--siya-white)] p-4 shadow-[var(--siya-shadow)]";
 
+/** Dense data table shell — zebra via `.siya-dense-table` in globals.css */
+export const portalDenseTableWrap =
+  "overflow-x-auto rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-[var(--siya-white)] shadow-[var(--siya-shadow)]";
+
+export const portalDenseTable = "siya-dense-table min-w-full text-left text-sm text-[var(--siya-text)]";
+
+export const portalDenseTableXs = "siya-dense-table min-w-full text-left text-xs text-[var(--siya-text)]";
+
+export const portalTableTh =
+  "px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-[var(--siya-text-secondary)]";
+
+export const portalTableTd = "px-2 py-2.5 align-top text-[var(--siya-text)]";
+
+/** KPI glance tile (admin learning health / Ops summary). */
+export const portalKpiTile =
+  "rounded-[var(--siya-radius-md)] border border-[var(--siya-border)] bg-[var(--siya-white)] px-3 py-3 shadow-[var(--siya-shadow)]";
+
+export const portalKpiLabel = "text-[10px] font-semibold uppercase tracking-wide text-[var(--siya-text-muted)]";
+
+export const portalKpiValue =
+  "mt-1 font-[family-name:var(--font-poppins)] text-2xl font-semibold tabular-nums text-[var(--siya-primary)]";
+
+export const portalKpiHint = "mt-1 text-[11px] leading-snug text-[var(--siya-text-secondary)]";
+
+/**
+ * When a table has expand/detail rows, set data-row-parity from the data-row index
+ * so zebra stays tied to people/items, not DOM children.
+ */
+export function portalTableRowParity(index: number): "odd" | "even" {
+  return index % 2 === 0 ? "odd" : "even";
+}
+
 export const portalH1 =
   "font-[family-name:var(--font-poppins)] text-2xl font-semibold text-[var(--siya-primary)] md:text-3xl";
 

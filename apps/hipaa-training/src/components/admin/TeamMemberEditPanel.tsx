@@ -7,6 +7,7 @@ import { useAuth } from "@/context/AuthContext";
 import { isPortalAdmin } from "@/lib/portal-role";
 import { fetchTeamMember, updateTeamMember } from "@/lib/admin-api";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
+import { PasswordInput } from "@/components/ui/PasswordInput";
 
 export function TeamMemberEditPanel() {
   const searchParams = useSearchParams();
@@ -95,8 +96,7 @@ export function TeamMemberEditPanel() {
           </label>
           <label className="block text-xs font-medium text-[var(--siya-text-muted)]">
             New password (optional, 8+ characters)
-            <TrainingInput
-              type="text"
+            <PasswordInput
               autoComplete="new-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}

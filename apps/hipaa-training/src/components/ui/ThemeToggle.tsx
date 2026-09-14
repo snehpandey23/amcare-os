@@ -43,7 +43,7 @@ function MoonIcon({ className }: { className?: string }) {
 }
 
 export function ThemeToggle({ variant = "account" }: Props) {
-  const [theme, setTheme] = useState<PortalTheme>("dark");
+  const [theme, setTheme] = useState<PortalTheme>("light");
   const [hydrated, setHydrated] = useState(false);
   const [showSystemHint, setShowSystemHint] = useState(false);
 
@@ -89,7 +89,7 @@ export function ThemeToggle({ variant = "account" }: Props) {
     <section className="rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-5">
       <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Appearance</h2>
       <p className="mt-1 text-xs text-[var(--siya-text-muted)]">
-        Default is dark. Light is optional.
+        Default is light. Dark stays available anytime.
       </p>
       <div className="mt-3 flex flex-wrap gap-2">
         <button
@@ -123,7 +123,7 @@ export function ThemeToggle({ variant = "account" }: Props) {
       </div>
       {showSystemHint ? (
         <p className="mt-2 text-[11px] text-[var(--siya-text-muted)]">
-          Your device prefers dark — already the default.
+          Your device prefers dark — switch here if you want that look.
         </p>
       ) : null}
     </section>

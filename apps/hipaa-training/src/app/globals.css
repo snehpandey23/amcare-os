@@ -12,23 +12,26 @@
   --siya-btn-primary-hover: #1e40af;
   --siya-btn-accent: #0f766e;
   --siya-btn-accent-hover: #115e59;
-  /* Text — high contrast on cream/white (avoid gray-on-white washout) */
+  /* Text — stronger hierarchy on cream (muted still readable, distinct from body) */
   --siya-text: #0c0a09;
-  --siya-text-secondary: #292524;
+  --siya-text-secondary: #1c1917;
   --siya-text-muted: #44403c;
-  /* Surfaces */
-  --siya-border: #ebe5d6;
+  /* Surfaces — borders slightly heavier vs cream wash */
+  --siya-border: #d6cebc;
   --siya-bg-page: #fffdf6;
   --siya-bg-subtle: #faf4e4;
+  --siya-bg-elevated: #ffffff;
   --siya-white: #ffffff;
+  /* Dense table zebra — cream base vs lightly tinted cream (no new hues) */
+  --siya-row-alt: #f3ecd8;
   /* Radius scale */
   --siya-radius-sm: 8px;
   --siya-radius-md: 12px;
   --siya-radius-lg: 16px;
   --siya-radius-xl: 20px;
   /* Elevation */
-  --siya-shadow: 0 4px 16px rgba(28, 25, 23, 0.06);
-  --siya-shadow-lg: 0 18px 40px rgba(28, 25, 23, 0.1);
+  --siya-shadow: 0 4px 16px rgba(28, 25, 23, 0.08);
+  --siya-shadow-lg: 0 18px 40px rgba(28, 25, 23, 0.12);
   /* Semantic status (warn / info / success / error) */
   --siya-status-warn-bg: #fffbeb;
   --siya-status-warn-border: #fde68a;
@@ -56,12 +59,14 @@ html.dark {
   --siya-btn-accent: #1e3a8a;
   --siya-btn-accent-hover: #1e40af;
   --siya-text: #ececec;
-  --siya-text-secondary: #c4c4c4;
-  --siya-text-muted: #a3a3a3;
-  --siya-border: #2a2a2c;
+  --siya-text-secondary: #d4d4d4;
+  --siya-text-muted: #b0b0b0;
+  --siya-border: #3f3f44;
   --siya-bg-page: #0f0f11;
   --siya-bg-subtle: #141416;
+  --siya-bg-elevated: #1a1a1c;
   --siya-white: #1a1a1c;
+  --siya-row-alt: #18181b;
   --siya-shadow: none;
   --siya-shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
   --siya-status-warn-bg: #3b2a12;
@@ -110,14 +115,16 @@ body {
   --siya-btn-accent: #0f766e;
   --siya-btn-accent-hover: #115e59;
   --siya-text: #0c0a09;
-  --siya-text-secondary: #292524;
+  --siya-text-secondary: #1c1917;
   --siya-text-muted: #44403c;
-  --siya-border: #ebe5d6;
+  --siya-border: #d6cebc;
   --siya-bg-page: #fffdf6;
   --siya-bg-subtle: #faf4e4;
+  --siya-bg-elevated: #ffffff;
   --siya-white: #ffffff;
-  --siya-shadow: 0 4px 16px rgba(28, 25, 23, 0.06);
-  --siya-shadow-lg: 0 18px 40px rgba(28, 25, 23, 0.1);
+  --siya-row-alt: #f3ecd8;
+  --siya-shadow: 0 4px 16px rgba(28, 25, 23, 0.08);
+  --siya-shadow-lg: 0 18px 40px rgba(28, 25, 23, 0.12);
   --siya-status-warn-bg: #fffbeb;
   --siya-status-warn-border: #fde68a;
   --siya-status-warn-text: #78350f;
@@ -141,6 +148,37 @@ body {
 
 html.dark .siya-page-bg {
   background: var(--siya-bg-page);
+}
+
+/**
+ * Shared dense-table zebra — apply class `siya-dense-table` on <table>.
+ * Set `data-row-parity="odd"|"even"` on each data row (see `portalTableRowParity`).
+ * Mark expand/detail rows with `data-table-expand` (no zebra fill).
+ */
+.siya-dense-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.siya-dense-table > thead > tr {
+  border-bottom: 2px solid var(--siya-border);
+  background: var(--siya-bg-subtle);
+}
+
+.siya-dense-table > tbody > tr:not([data-table-expand]) {
+  border-bottom: 1px solid var(--siya-border);
+}
+
+.siya-dense-table > tbody > tr[data-row-parity="odd"] {
+  background-color: transparent;
+}
+
+.siya-dense-table > tbody > tr[data-row-parity="even"] {
+  background-color: var(--siya-row-alt);
+}
+
+.siya-dense-table > tbody > tr[data-table-expand] {
+  background-color: var(--siya-bg-subtle);
 }
 
 @media print {

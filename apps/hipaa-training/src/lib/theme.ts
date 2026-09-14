@@ -1,4 +1,4 @@
-/** Staff portal theme — dark default; light is opt-in via toggle. */
+/** Staff portal theme — light default; dark remains available via Account/header toggle. */
 
 export const THEME_STORAGE_KEY = "siya-portal-theme-v2";
 
@@ -15,9 +15,9 @@ export function readStoredTheme(): PortalTheme | null {
   return null;
 }
 
-/** Fresh session with no stored preference → dark (Cursor-like workspace). */
+/** Fresh session with no stored preference → light. */
 export function resolveInitialTheme(): PortalTheme {
-  return readStoredTheme() ?? "dark";
+  return readStoredTheme() ?? "light";
 }
 
 export function systemPrefersDark(): boolean {
@@ -39,5 +39,5 @@ export function persistTheme(theme: PortalTheme): void {
   }
 }
 
-/** Inline boot script — dark unless the user explicitly chose light. */
-export const THEME_BOOT_SCRIPT = `(function(){try{var t=localStorage.getItem("${THEME_STORAGE_KEY}");if(t!=="light")document.documentElement.classList.add("dark");}catch(e){}})();`;
+/** Inline boot script — light unless the user explicitly chose dark. */
+export const THEME_BOOT_SCRIPT = `(function(){try{var t=localStorage.getItem("${THEME_STORAGE_KEY}");if(t==="dark")document.documentElement.classList.add("dark");else document.documentElement.classList.remove("dark");}catch(e){}})();`;
