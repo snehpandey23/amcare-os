@@ -2,26 +2,86 @@ import passages from "@/data/level-up/typing-passages.json";
 import { dailyIndex } from "@/lib/level-up/catalog";
 import { estimateWpmFromChars } from "@/lib/level-up/wpm";
 
+/** Content complexity for practice filters. Blind is a UI mode, not a content tier. */
+export type TypingContentDifficulty = "easy" | "medium" | "hard";
+
+/**
+ * Practice tier control (Monkeytype-style row).
+ * Blind = medium job-register content + no live correct/incorrect highlighting.
+ */
+export type TypingPracticeTier = "easy" | "medium" | "hard" | "blind";
+
 export type TypingPassage = {
   id: string;
   category: string;
   title: string;
   text: string;
-  difficulty: "easy" | "medium" | "hard";
+  difficulty: TypingContentDifficulty;
+  /** Competency exam draw pool — must stay length/complexity comparable. */
+  examStandard?: boolean;
 };
 
-export type TypingDurationSec = 60 | 120 | 0;
+/**
+ * Practice duration:
+ * - 60 = 1 min
+ * - 120 = 2 min benchmark
+ * - 0 = full passage (untimed finish)
+ * - other positive = custom seconds
+ */
+export type TypingDurationSec = number;
 
 const ALL = passages as TypingPassage[];
 
-export function typingPassageOfDay(date = new Date()): TypingPassage {
-  const i = dailyIndex("typing", ALL.length, date);
-  return ALL[i];
+export function allTypingPassages(): TypingPassage[] {
+  return ALL;
 }
 
-export function randomTypingPassage(excludeId?: string): TypingPassage {
-  const pool = excludeId ? ALL.filter((p) => p.id !== excludeId) : ALL;
-  return pool[Math.floor(Math.random() * pool.length)] ?? ALL[0];
+/** Exam-only pool: standardized short/medium bank (excludes hard/pro practice passages). */
+export function examStandardTypingPassages(): TypingPassage[] {
+  const marked = ALL.filter((p) => p.examStandard === true);
+  if (marked.length > 0) return marked;
+  // Fallback if older JSON lacks the flag
+  return ALL.filter((p) => p.difficulty !== "hard");
+}
+
+export function contentDifficultyForTier(tier: TypingPracticeTier): TypingContentDifficulty {
+  if (tier === "blind") return "medium";
+  return tier;
+}
+
+export function filterTypingPassages(opts?: {
+  difficulty?: TypingContentDifficulty;
+  category?: string;
+  examStandardOnly?: boolean;
+}): TypingPassage[] {
+  let pool = opts?.examStandardOnly ? examStandardTypingPassages() : ALL;
+  if (opts?.difficulty) pool = pool.filter((p) => p.difficulty === opts.difficulty);
+  if (opts?.category && opts.category !== "all") {
+    pool = pool.filter((p) => p.category === opts.category);
+  }
+  return pool;
+}
+
+export function typingPassageOfDay(date = new Date()): TypingPassage {
+  const pool = examStandardTypingPassages();
+  const i = dailyIndex("typing", pool.length, date);
+  return pool[i] ?? ALL[0]!;
+}
+
+export function randomTypingPassage(
+  excludeId?: string,
+  opts?: { difficulty?: TypingContentDifficulty; category?: string },
+): TypingPassage {
+  let pool = filterTypingPassages({
+    difficulty: opts?.difficulty,
+    category: opts?.category,
+  });
+  if (excludeId) pool = pool.filter((p) => p.id !== excludeId);
+  if (pool.length === 0) {
+    pool = filterTypingPassages({ difficulty: opts?.difficulty });
+  }
+  if (pool.length === 0) pool = [...ALL];
+  return pool[Math.floor(Math.random() * pool.length)] ?? ALL[0]!;
 }
 
 export function passagesByCategory(category: string): TypingPassage[] {
@@ -114,3 +174,21 @@ export const TYPING_CATEGORIES = [
   { id: "email", label: "Email" },
   { id: "english", label: "Workplace English" },
 ] as const;
+
+export const PRACTICE_DURATION_PRESETS = [
+  { id: "60" as const, seconds: 60, label: "1 min" },
+  { id: "120" as const, seconds: 120, label: "2 min", badge: "benchmark" },
+  { id: "custom" as const, seconds: null, label: "custom" },
+  { id: "full" as const, seconds: 0, label: "full text" },
+] as const;
+
+export const PRACTICE_TIER_OPTIONS: Array<{
+  id: TypingPracticeTier;
+  label: string;
+  hint: string;
+}> = [
+  { id: "easy", label: "easy", hint: "Short, simple sentences" },
+  { id: "medium", label: "medium", hint: "Job-register workplace lines" },
+  { id: "hard", label: "hard", hint: "Longer · punctuation · pro pace" },
+  { id: "blind", label: "blind", hint: "No live correct/incorrect feedback" },
+];

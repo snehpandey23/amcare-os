@@ -1,9 +1,8 @@
 import { ALL_QUESTIONS, getQuestionById } from "@/content/questionBank";
 import { MODULES } from "@/content/modules";
 import { buildFinalExam } from "@/lib/quizEngine";
-import passages from "@/data/level-up/typing-passages.json";
-import type { TypingPassage } from "@/lib/level-up/typing-drill";
 import type { Question } from "@/lib/types";
+import { examStandardTypingPassages, type TypingPassage } from "@/lib/level-up/typing-drill";
 import { CHAT_EXAM_BRIEFS, type ChatExamBrief } from "@/content/competency-exam/chat-briefs.draft";
 import { WRITING_PROMPTS, type WritingPrompt } from "@/content/competency-exam/writing-prompts.draft";
 import {
@@ -15,7 +14,14 @@ import { clinicalKnowledgeDraftAsQuestions } from "@/content/competency-exam/cli
 import { cultureDraftAsQuestions } from "@/lib/competency-exam/mcq-adapters";
 import { drawUnseen, type SeenEntry } from "./seen-set";
 
-const TYPING = passages as TypingPassage[];
+/**
+ * Exam typing stays on the standardized bank only — never hard/pro practice passages.
+ *
+ * Founder lock 2026-09-14 (Option A): keep the existing 120s / examStandard pool.
+ * Do not swap in a harder exam tier without evidence that live scores fail to
+ * discriminate (e.g. near-perfect clustering). Practice flexibility is separate.
+ */
+const TYPING: TypingPassage[] = examStandardTypingPassages();
 
 /** Combined MCQ sitting size (HIPAA + clinical knowledge + trivia/culture). */
 export const MCQ_EXAM_COUNT = 40;

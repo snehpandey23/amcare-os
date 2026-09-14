@@ -4,104 +4,167 @@
     "category": "documentation",
     "title": "Refill - pharmacy",
     "text": "Patient called stating the pharmacy has not received the prescription yet.",
-    "difficulty": "easy"
+    "difficulty": "easy",
+    "examStandard": true
   },
   {
     "id": "doc-vm",
     "category": "documentation",
     "title": "Voicemail",
     "text": "Called patient - no answer. Left voicemail requesting a return call.",
-    "difficulty": "easy"
+    "difficulty": "easy",
+    "examStandard": true
   },
   {
     "id": "doc-auth",
     "category": "documentation",
     "title": "Prior auth",
     "text": "Insurance denied prior authorization. Team will submit the appeal per workflow.",
-    "difficulty": "medium"
+    "difficulty": "medium",
+    "examStandard": true
   },
   {
     "id": "doc-wait",
     "category": "documentation",
     "title": "Wait time",
     "text": "Patient expressed concern about wait time. Apologized and offered a supervisor callback.",
-    "difficulty": "medium"
+    "difficulty": "medium",
+    "examStandard": true
   },
   {
     "id": "doc-portal",
     "category": "documentation",
     "title": "Portal message",
     "text": "Portal message reviewed and routed to the provider for a clinical response.",
-    "difficulty": "easy"
+    "difficulty": "easy",
+    "examStandard": true
   },
   {
     "id": "call-open",
     "category": "call",
     "title": "Opening line",
     "text": "Thank you for calling Siya Health. How may I help you today?",
-    "difficulty": "easy"
+    "difficulty": "easy",
+    "examStandard": true
   },
   {
     "id": "call-chart",
     "category": "call",
     "title": "Pull chart",
     "text": "One moment please - let me pull up your chart and confirm your visit details.",
-    "difficulty": "easy"
+    "difficulty": "easy",
+    "examStandard": true
   },
   {
     "id": "call-empathy",
     "category": "call",
     "title": "Empathy",
     "text": "I hear you - I'm here to help. Can you tell me what happened?",
-    "difficulty": "easy"
+    "difficulty": "easy",
+    "examStandard": true
   },
   {
     "id": "email-unavail",
     "category": "email",
     "title": "Provider unavailable",
     "text": "Dr. Smith is unavailable today. We will contact you shortly to arrange the next appointment.",
-    "difficulty": "medium"
+    "difficulty": "medium",
+    "examStandard": true
   },
   {
     "id": "phrase-heads-up",
     "category": "english",
     "title": "Heads up",
     "text": "Heads up - the provider is running fifteen minutes behind today.",
-    "difficulty": "easy"
+    "difficulty": "easy",
+    "examStandard": true
   },
   {
     "id": "phrase-circle-back",
     "category": "english",
     "title": "Circle back",
     "text": "I'll circle back with billing once I have the invoice number.",
-    "difficulty": "easy"
+    "difficulty": "easy",
+    "examStandard": true
   },
   {
     "id": "phrase-touch-base",
     "category": "english",
     "title": "Touch base",
     "text": "Let's touch base after your shift about the backlog on the schedule.",
-    "difficulty": "easy"
+    "difficulty": "easy",
+    "examStandard": true
   },
   {
     "id": "chat-portal",
     "category": "chat",
     "title": "Secure channel",
     "text": "Please send that through the patient portal or approved secure channel - not personal email.",
-    "difficulty": "medium"
+    "difficulty": "medium",
+    "examStandard": true
   },
   {
     "id": "chat-follow-up",
     "category": "chat",
     "title": "Follow-up",
     "text": "I'll follow up tomorrow if we don't hear back from billing by then.",
-    "difficulty": "easy"
+    "difficulty": "easy",
+    "examStandard": true
   },
   {
     "id": "chat-escalate",
     "category": "chat",
     "title": "Escalation",
     "text": "I'll loop in the supervisor with a short summary - no patient identifiers in this thread.",
-    "difficulty": "medium"
+    "difficulty": "medium",
+    "examStandard": true
+  },
+  {
+    "id": "hard-doc-handoff",
+    "category": "documentation",
+    "title": "Shift handoff (pro)",
+    "text": "End-of-shift handoff (IST → EST overlap): three portal threads remain open — (1) refill status for pharmacy #4821, (2) prior-auth appeal packet due by Friday 5:00 p.m. ET, and (3) supervisor callback promised after yesterday's wait-time complaint. Do not paste DOB, MRN, or full street address into Slack; use the chart note + approved secure channel only. If billing replies after 8:00 p.m. IST, park it for the next on-call MA and leave a one-line \"circle back\" flag.",
+    "difficulty": "hard",
+    "examStandard": false
+  },
+  {
+    "id": "hard-call-reschedule",
+    "category": "call",
+    "title": "Reschedule script (pro)",
+    "text": "\"Thanks for holding — I'm confirming Tuesday, March 18 at 10:30 a.m. Eastern (that's 8:00 p.m. IST on your side). If that doesn't work, I can offer Wednesday 2:15 p.m. ET or a same-week telehealth slot. I'll send the portal invite within 15 minutes; please complete the intake forms before the visit. Anything else I can help with before we hang up?\"",
+    "difficulty": "hard",
+    "examStandard": false
+  },
+  {
+    "id": "hard-email-benefits",
+    "category": "email",
+    "title": "Benefits clarification (pro)",
+    "text": "Hi — following up on your benefits question. Coverage for this visit type depends on your plan's in-network rules, deductible status, and any prior-authorization requirement. I can't quote a final patient-responsibility amount from chat; billing can review once we have the CPT/ICD pairing from the provider. Reply in the portal (not personal email) with your member ID last four digits only, and we'll route this to billing within one business day.",
+    "difficulty": "hard",
+    "examStandard": false
+  },
+  {
+    "id": "hard-chat-privacy",
+    "category": "chat",
+    "title": "Privacy redirect (pro)",
+    "text": "Quick privacy note: please don't send lab PDFs, insurance cards, or full SSN over WhatsApp/SMS. Upload through the patient portal or the approved secure channel, then reply here with \"uploaded — see portal.\" If you're stuck on login, I can walk you through reset steps (no passwords in this thread). For urgent symptoms, call the clinic line or use emergency services — chat isn't for medical emergencies.",
+    "difficulty": "hard",
+    "examStandard": false
+  },
+  {
+    "id": "hard-english-ops",
+    "category": "english",
+    "title": "Ops English (pro)",
+    "text": "Heads-up for the afternoon desk: Dr. Patel's 1:00–3:30 block is double-booked after a same-day add-on; please (a) warn arriving patients of a 20–25 minute delay, (b) offer a callback or telehealth swap where appropriate, and (c) escalate to the charge MA if anyone mentions leaving a negative review mid-wait. Keep tone calm, specific, and short — no over-promising exact start times.",
+    "difficulty": "hard",
+    "examStandard": false
+  },
+  {
+    "id": "hard-call-intake",
+    "category": "call",
+    "title": "New-patient intake (pro)",
+    "text": "For new-patient intake I'll need: preferred name + legal name if different, best callback number, time zone, insurance vs. self-pay, and whether you've been seen here before under another spelling. I'll also confirm pharmacy name/city (not Rx numbers on this call unless the workflow requires it). After we book, watch for a portal invite — forms must be done 24 hours ahead or we may need to reschedule. Questions before I place the hold?",
+    "difficulty": "hard",
+    "examStandard": false
   }
 ]

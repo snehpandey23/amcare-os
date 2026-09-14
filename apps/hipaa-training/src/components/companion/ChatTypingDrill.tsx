@@ -1,33 +1,49 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
   type TypingDurationSec,
   type TypingPassage,
+  type TypingPracticeTier,
   type TypingScore,
+  contentDifficultyForTier,
   randomTypingPassage,
   scoreTyping,
   saveTypingBestIfBetter,
   loadTypingBest,
   typingPassageOfDay,
   TYPING_CATEGORIES,
-  passagesByCategory,
+  PRACTICE_DURATION_PRESETS,
+  PRACTICE_TIER_OPTIONS,
 } from "@/lib/level-up/typing-drill";
 
 type Phase = "idle" | "active" | "done";
 
-function PassageView({ target, typed }: { target: string; typed: string }) {
+function PassageView({
+  target,
+  typed,
+  blind,
+}: {
+  target: string;
+  typed: string;
+  /** No live correct/incorrect coloring — still show the passage. */
+  blind?: boolean;
+}) {
   const chars = useMemo(() => {
     const out: { ch: string; state: "ok" | "bad" | "pending" }[] = [];
     for (let i = 0; i < target.length; i++) {
-      const t = target[i];
+      const t = target[i]!;
       const k = typed[i];
+      if (blind) {
+        out.push({ ch: t, state: k === undefined ? "pending" : "ok" });
+        continue;
+      }
       if (k === undefined) out.push({ ch: t, state: "pending" });
       else if (k === t) out.push({ ch: t, state: "ok" });
       else out.push({ ch: t, state: "bad" });
     }
     return out;
-  }, [target, typed]);
+  }, [target, typed, blind]);
 
   return (
     <p className="font-mono text-sm leading-relaxed whitespace-pre-wrap break-words">
@@ -35,17 +51,52 @@ function PassageView({ target, typed }: { target: string; typed: string }) {
         <span
           key={i}
           className={
-            c.state === "ok"
-              ? "bg-[var(--siya-status-success-bg)] text-[var(--siya-status-success-text)]"
-              : c.state === "bad"
-                ? "bg-[var(--siya-status-error-bg)] text-[var(--siya-status-error-text)] underline decoration-[var(--siya-status-error-border)]"
+            blind
+              ? i === typed.length
+                ? "bg-[var(--siya-primary)]/15 text-[var(--siya-text-primary)]"
                 : "text-[var(--siya-text-secondary)]"
+              : c.state === "ok"
+                ? "bg-[var(--siya-status-success-bg)] text-[var(--siya-status-success-text)]"
+                : c.state === "bad"
+                  ? "bg-[var(--siya-status-error-bg)] text-[var(--siya-status-error-text)] underline decoration-[var(--siya-status-error-border)]"
+                  : "text-[var(--siya-text-secondary)]"
           }
         >
           {c.ch}
         </span>
       ))}
     </p>
+  );
+}
+
+function ModePill({
+  active,
+  disabled,
+  onClick,
+  children,
+  title,
+}: {
+  active: boolean;
+  disabled?: boolean;
+  onClick: () => void;
+  children: ReactNode;
+  title?: string;
+}) {
+  return (
+    <button
+      type="button"
+      title={title}
+      disabled={disabled}
+      onClick={onClick}
+      className={
+        "rounded-md px-2.5 py-1 text-xs font-medium transition-colors disabled:opacity-50 " +
+        (active
+          ? "bg-[var(--siya-primary)] text-white"
+          : "text-[var(--siya-text-secondary)] hover:bg-[var(--siya-bg-subtle)] hover:text-[var(--siya-text-primary)]")
+      }
+    >
+      {children}
+    </button>
   );
 }
 
@@ -61,7 +112,7 @@ export function ChatTypingDrill({
   onAttempt?: (score: TypingScore, meta: { passageId: string }) => void;
   /** Product tour — skip personal-best persistence. */
   sandboxMode?: boolean;
-  /** Competency exam — 120s locked, no personal best, no new passage. */
+  /** Competency exam — 120s locked, no personal best, no new passage / no difficulty menu. */
   examMode?: {
     passage: TypingPassage;
     onFinish: (score: TypingScore) => void;
@@ -78,7 +129,12 @@ export function ChatTypingDrill({
   };
 }) {
   const [passage, setPassage] = useState<TypingPassage>(() => examMode?.passage ?? typingPassageOfDay());
-  const [duration, setDuration] = useState<TypingDurationSec>(examMode ? 120 : 60);
+  const [duration, setDuration] = useState<TypingDurationSec>(examMode ? 120 : 120);
+  const [durationPreset, setDurationPreset] = useState<"60" | "120" | "custom" | "full">(
+    examMode ? "120" : "120",
+  );
+  const [customSec, setCustomSec] = useState(90);
+  const [tier, setTier] = useState<TypingPracticeTier>("medium");
   const [category, setCategory] = useState<string>("all");
   const [phase, setPhase] = useState<Phase>("idle");
   const [typed, setTyped] = useState("");
@@ -91,18 +147,30 @@ export function ChatTypingDrill({
   const startRef = useRef<number | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  const blind = !examMode && tier === "blind";
   const target = passage.text;
+  const controlsLocked = phase === "active" || Boolean(examMode);
 
   const pickPassage = useCallback(
-    (cat: string) => {
-      if (cat === "all") setPassage(randomTypingPassage());
-      else {
-        const pool = passagesByCategory(cat);
-        setPassage(pool[Math.floor(Math.random() * pool.length)] ?? typingPassageOfDay());
-      }
+    (cat: string, nextTier: TypingPracticeTier = tier) => {
+      const difficulty = contentDifficultyForTier(nextTier);
+      setPassage(
+        randomTypingPassage(undefined, {
+          difficulty,
+          category: cat === "all" ? undefined : cat,
+        }),
+      );
     },
-    [],
+    [tier],
   );
+
+  const applyDurationPreset = (id: "60" | "120" | "custom" | "full") => {
+    setDurationPreset(id);
+    if (id === "60") setDuration(60);
+    else if (id === "120") setDuration(120);
+    else if (id === "full") setDuration(0);
+    else setDuration(Math.max(15, Math.min(600, customSec || 90)));
+  };
 
   const finish = useCallback(
     (finished: boolean, typedOverride?: string) => {
@@ -147,7 +215,6 @@ export function ChatTypingDrill({
     setElapsed(0);
     setClockStarted(false);
     // Unified trigger: clock starts on first keystroke only (not on this click).
-    // Start = arm/focus so the person can finish reading before time counts.
     startRef.current = null;
     setPhase("active");
     requestAnimationFrame(() => inputRef.current?.focus());
@@ -168,7 +235,6 @@ export function ChatTypingDrill({
 
   const timeLeft = duration > 0 ? Math.max(0, duration - elapsed) : null;
 
-  // Report the same remainingSec the drill uses for scoring/auto-finish (not a second clock).
   useEffect(() => {
     const onTimer = examMode?.onTimer;
     if (!onTimer || duration <= 0) return;
@@ -184,7 +250,6 @@ export function ChatTypingDrill({
 
   const onChange = (value: string) => {
     if (phase === "done") return;
-    // First keystroke starts the clock for every entry path (Start click or type-from-idle).
     if (phase === "idle") {
       setPhase("active");
       if (value.length > 0) {
@@ -201,14 +266,17 @@ export function ChatTypingDrill({
     }
   };
 
-  /** Both exam and practice: passage is visible in idle; Start is optional arm/focus; clock = first key. */
   const inputLocked = phase === "done";
 
   return (
     <div className="space-y-4">
       <div className="rounded-xl bg-[var(--siya-bg-subtle)] p-4 text-xs text-[var(--siya-text-secondary)]">
-        <strong>Chat speed & accuracy</strong> — type real workplace lines (notes, calls, chat). Green = correct,
-        red = fix before continuing. Aim for <strong>92%+ accuracy</strong> and steady speed — not rush with errors.
+        <strong>Chat speed & accuracy</strong> — type real workplace lines (notes, calls, chat).
+        {examMode
+          ? " Exam mode uses the standardized 2-minute passage bank (no difficulty menu)."
+          : blind
+            ? " Blind mode hides live green/red feedback — accuracy still scores at the end."
+            : " Green = correct, red = fix before continuing. Aim for 92%+ accuracy and steady speed."}
       </div>
 
       {examMode ? (
@@ -218,46 +286,106 @@ export function ChatTypingDrill({
           <strong>first keystroke</strong>, not on the Start click. Does not update your practice personal best.
         </p>
       ) : (
-      <div className="flex flex-wrap gap-2 text-xs">
-        <label className="flex items-center gap-1.5">
-          Time
-          <select
-            className="rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-2 py-1"
-            value={duration}
-            disabled={phase === "active"}
-            onChange={(e) => setDuration(Number(e.target.value) as TypingDurationSec)}
-          >
-            <option value={60}>1 min</option>
-            <option value={120}>2 min</option>
-            <option value={0}>Full passage</option>
-          </select>
-        </label>
-        <label className="flex items-center gap-1.5">
-          Topic
-          <select
-            className="rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-2 py-1"
-            value={category}
-            disabled={phase === "active"}
-            onChange={(e) => {
-              setCategory(e.target.value);
-              pickPassage(e.target.value);
-              reset();
-            }}
-          >
-            <option value="all">Mixed</option>
-            {TYPING_CATEGORIES.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.label}
-              </option>
-            ))}
-          </select>
-        </label>
-        {best ? (
-          <span className="ml-auto self-center text-[var(--siya-text-secondary)]">
-            Personal best: <strong>{best.wpm} WPM</strong> ({best.accuracy}% acc)
-          </span>
-        ) : null}
-      </div>
+        <div className="space-y-2">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 rounded-xl border border-[var(--siya-border)] bg-[var(--siya-white)] px-3 py-2">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--siya-text-secondary)]">
+              time
+            </span>
+            <div className="flex flex-wrap items-center gap-1">
+              {PRACTICE_DURATION_PRESETS.map((p) => (
+                <ModePill
+                  key={p.id}
+                  active={durationPreset === p.id}
+                  disabled={controlsLocked}
+                  title={p.id === "120" ? "2-minute practice benchmark" : undefined}
+                  onClick={() => {
+                    applyDurationPreset(p.id);
+                    reset();
+                  }}
+                >
+                  {p.label}
+                  {"badge" in p && p.badge ? (
+                    <span className="ml-1 text-[9px] opacity-80">{p.badge}</span>
+                  ) : null}
+                </ModePill>
+              ))}
+            </div>
+            {durationPreset === "custom" ? (
+              <label className="flex items-center gap-1 text-xs text-[var(--siya-text-secondary)]">
+                <input
+                  type="number"
+                  min={15}
+                  max={600}
+                  step={15}
+                  disabled={controlsLocked}
+                  value={customSec}
+                  onChange={(e) => {
+                    const n = Math.max(15, Math.min(600, Number(e.target.value) || 90));
+                    setCustomSec(n);
+                    setDuration(n);
+                  }}
+                  className="w-16 rounded-md border border-[var(--siya-border)] bg-[var(--siya-bg-page)] px-1.5 py-0.5 font-mono text-xs"
+                />
+                sec
+              </label>
+            ) : null}
+
+            <span className="mx-1 hidden h-4 w-px bg-[var(--siya-border)] sm:block" aria-hidden />
+
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--siya-text-secondary)]">
+              text
+            </span>
+            <div className="flex flex-wrap items-center gap-1">
+              {PRACTICE_TIER_OPTIONS.map((t) => (
+                <ModePill
+                  key={t.id}
+                  active={tier === t.id}
+                  disabled={controlsLocked}
+                  title={t.hint}
+                  onClick={() => {
+                    setTier(t.id);
+                    pickPassage(category, t.id);
+                    reset();
+                  }}
+                >
+                  {t.label}
+                </ModePill>
+              ))}
+            </div>
+
+            {best ? (
+              <span className="ml-auto self-center text-[11px] text-[var(--siya-text-secondary)]">
+                Best: <strong>{best.wpm} WPM</strong> ({best.accuracy}%)
+              </span>
+            ) : null}
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 text-xs">
+            <label className="flex items-center gap-1.5 text-[var(--siya-text-secondary)]">
+              Topic
+              <select
+                className="rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-2 py-1"
+                value={category}
+                disabled={controlsLocked}
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                  pickPassage(e.target.value);
+                  reset();
+                }}
+              >
+                <option value="all">Mixed</option>
+                {TYPING_CATEGORIES.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <span className="text-[var(--siya-text-secondary)]">
+              {PRACTICE_TIER_OPTIONS.find((t) => t.id === tier)?.hint}
+            </span>
+          </div>
+        </div>
       )}
 
       {!examMode ? (
@@ -270,6 +398,8 @@ export function ChatTypingDrill({
         <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
           <span className="text-xs font-semibold uppercase tracking-wide text-[var(--siya-text-secondary)]">
             {passage.title} · {passage.category}
+            {!examMode ? ` · ${passage.difficulty}` : null}
+            {blind ? " · blind" : null}
           </span>
           <span className="font-mono text-sm font-semibold text-[var(--siya-primary)]">
             {phase === "done"
@@ -281,7 +411,7 @@ export function ChatTypingDrill({
                 : "Full text"}
           </span>
         </div>
-        <PassageView target={target} typed={typed} />
+        <PassageView target={target} typed={typed} blind={blind} />
       </div>
 
       <textarea
