@@ -81,9 +81,9 @@ export function normalizePresenceAskText(message: string): string {
 }
 
 const PRESENCE_STATUS =
-  "(?:working|online|present|here|active|around|available|logged\\s*in|logging\\s*in|log\\s*in|on(?:\\s+the)?\\s+(?:clock|shift|floor)|currently\\s+working)";
+  "(?:working|online|present|here|active|around|available|logged\\s*in|logging\\s*in|log\\s*in|on(?:\\s+the)?\\s+(?:clock|shift|floor)|on\\s*-?\\s*call|currently\\s+working)";
 
-/** Live who’s-on / online / logged-in asks (Team pulse). */
+/** Live who’s-on / online / logged-in / on-call / who-to-talk-to-now asks (Team pulse). */
 export function isTeamPulseAsk(message: string): boolean {
   const t = normalizePresenceAskText(message);
   if (!t) return false;
@@ -95,7 +95,7 @@ export function isTeamPulseAsk(message: string): boolean {
     /\b(tomorrow|this\s+week|next\s+week|september|october|november|december|january|february|march|april|may|june|july|august)\b/.test(
       t,
     ) &&
-    !/\b(right\s+now|currently|online|logged\s*in|logging\s*in)\b/.test(t)
+    !/\b(right\s+now|currently|online|logged\s*in|logging\s*in|on\s*-?\s*call)\b/.test(t)
   ) {
     return false;
   }
@@ -108,23 +108,41 @@ export function isTeamPulseAsk(message: string): boolean {
   if (/\bwho\s+all\b[\s\S]{0,48}\bin\s+(?:my\s+)?team\b/.test(t)) return true;
   // "who's on my team" / "who's on my team right now"
   if (/\bwho(?:'s|’s| is| are)\s+on\s+(?:my\s+)?team\b/.test(t)) return true;
-  // who / who all / who's … online|working|logged in|… (allow words between "all" and is/are)
+
+  // who / who all / who's … online|working|logged in|available|around|on call
   if (
     (/\bwho(?:'s|’s)?\s+(?:all\s+)?(?:is|are)\b[\s\S]{0,48}\b/.test(t) ||
-      /\bwho\s+all\b[\s\S]{0,48}\b(?:is|are)\b[\s\S]{0,40}\b/.test(t)) &&
+      /\bwho\s+all\b[\s\S]{0,48}\b(?:is|are)\b[\s\S]{0,40}\b/.test(t) ||
+      /\bwho(?:'s|’s)\s+(?:all\s+)?/.test(t)) &&
     new RegExp(`\\b${PRESENCE_STATUS}\\b`).test(t)
   ) {
     return true;
   }
+  // who's on call / who is on-call (dedicated — not calendar "on duty")
+  if (/\bwho(?:'s|’s| is| are)\b[\s\S]{0,24}\bon\s*-?\s*call\b/.test(t)) return true;
   if (/\bwho(?:'s|’s| is| are)\b[\s\S]{0,40}\b(?:logged|logging)\s*in\b/.test(t)) return true;
   if (/\b(working right now|present today|on the clock|who(?:'s|’s| is) here)\b/.test(t)) return true;
   if (/\bwho(?:'s|’s| is) on(?: the)? (shift|floor|clock)\b/.test(t)) return true;
   // Explicit live scope: "who is on shift now" / "who's on shift (now)"
   if (/\bon\s+shift\b/.test(t) && /\b(now|today|currently)\b/.test(t) && /\bwho\b/.test(t)) return true;
-  if (/\b(?:anyone|anybody|people|staff|everyone)\b[\s\S]{0,24}\b(?:online|working|logged\s*in|present)\b/.test(t)) {
+  if (/\b(?:anyone|anybody|people|staff|everyone)\b[\s\S]{0,24}\b(?:online|working|logged\s*in|present|available|on\s*-?\s*call)\b/.test(t)) {
     return true;
   }
-  if (/\b(?:online|logged\s*in|working|on\s+shift)\s+(?:right\s+)?now\b/.test(t) && /\bwho\b/.test(t)) return true;
+  if (/\b(?:online|logged\s*in|working|on\s+shift|available|around|on\s*-?\s*call)\s+(?:right\s+)?now\b/.test(t) && /\bwho\b/.test(t)) {
+    return true;
+  }
+  // Escalation / "who do I talk to … now" → same live presence answer
+  if (
+    /\bwho\s+(?:do|should|can)\s+i\s+(?:talk\s+to|speak\s+(?:to|with)|escalate\s+to|ask|reach)\b/.test(t) &&
+    /\b(now|right\s+now|currently|urgent|need\s+(?:something|help|someone))\b/.test(t)
+  ) {
+    return true;
+  }
+  if (
+    /\bwho\s+(?:do|should|can)\s+i\s+(?:talk\s+to|escalate\s+to)\s+right\s+now\b/.test(t)
+  ) {
+    return true;
+  }
   return false;
 }
 

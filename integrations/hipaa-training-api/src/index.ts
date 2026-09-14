@@ -1715,8 +1715,17 @@ app.get("/api/attendance/hours", requireAuth, async (req: AuthRequest, res: expr
   try {
     const { buildAttendanceHoursReport } = await import("./attendance-hours-service.js");
     const scope = typeof req.query.scope === "string" ? req.query.scope : "me";
-    if (scope === "team" && (req.user!.role ?? "trainee") !== "admin") {
-      return res.status(403).json({ error: "Team attendance hours are admin-only." });
+    if (scope === "team") {
+      const role = req.user!.role ?? "trainee";
+      const { listMyLeadDepartments } = await import("./sop-service.js");
+      const leadSlugs = await listMyLeadDepartments(pool, req.user!.userId);
+      const isLead = leadSlugs.length > 0;
+      if (role !== "admin" && !isLead) {
+        return res.status(403).json({
+          error: "Team attendance hours are for admins and department leads only.",
+          code: "team_attendance_forbidden",
+        });
+      }
     }
     const month =
       typeof req.query.month === "string" && /^\d{4}-\d{2}$/.test(req.query.month)

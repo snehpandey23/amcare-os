@@ -24,10 +24,15 @@ function norm(s: string): string {
 export function isMyAttendanceQuery(message: string): boolean {
   const t = norm(message);
   if (!t) return false;
+  // Someone else's attendance ("show me Sonu's attendance") — not self.
+  if (/\b[a-z][a-z-]{1,30}'s\s+(attendance|hours|working\s+time|break)\b/.test(t)) return false;
+  if (/\bhow\s+(many\s+hours|much\s+time)\s+did\s+[a-z]/.test(t) && !/\bdid\s+i\b/.test(t)) return false;
   if (/\b(team|their|his|her|everyone|all staff|ops)\b/.test(t) && !/\bmy\b/.test(t)) return false;
   if (/\b(how('?s| is| are)|what('?s| is)|show|see|check)\s+my\s+attendance\b/.test(t)) return true;
   if (/\bmy\s+attendance(\s+hours?)?\b/.test(t)) return true;
-  if (/\battendance\b/.test(t) && /\b(my|i|me)\b/.test(t)) return true;
+  // "me" alone in "show me …" must not count — require my/mine/i as subject.
+  if (/\battendance\b/.test(t) && /\b(my|mine)\b/.test(t)) return true;
+  if (/\battendance\b/.test(t) && /\bi\b/.test(t) && /\b(my|have|got|logged)\b/.test(t)) return true;
   return false;
 }
 

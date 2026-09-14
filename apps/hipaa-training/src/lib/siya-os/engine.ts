@@ -24,6 +24,10 @@ import {
   isMyAttendanceQuery,
   isMyFeedbackQuery,
 } from "./personal-self-ask";
+import {
+  answerPersonAttendanceQuery,
+  isPersonAttendanceQuery,
+} from "./attendance-person-ask";
 import { isOpsNeedsAttentionQuery, answerOpsNeedsAttentionQuery } from "./ops-attention-ask";
 import { isFounderFocusQuery, answerFounderFocusQuery } from "./founder-focus-ask";
 import { wantsDecisionLogOverview, formatDecisionLogOverview, inferOverviewDepartment, asDepartment } from "./decision-log-ask";
@@ -449,6 +453,60 @@ export async function runSiyaAssistantAsync(
       routing: {
         department: founderCoach ? "Leadership" : "General",
         task: founderCoach ? "Founder Talk" : taskLabel,
+        confidence: "medium",
+        followUpQuestions: [],
+      },
+    };
+  }
+
+  if (isPersonAttendanceQuery(message)) {
+    if (!token) {
+      return {
+        message: polishStaffMessage(
+          "Sign in as an **admin or department lead** to see another person’s attendance hours. For your own hours, ask **what’s my attendance?** after signing in.",
+        ),
+        chunks: [],
+        sources: [],
+        knowledgeGap: false,
+        ruleFinal: true,
+        routing: {
+          department: founderCoach ? "Leadership" : "General",
+          task: founderCoach ? "Founder Talk" : "Person attendance",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    const personAttendance = await answerPersonAttendanceQuery(message, token);
+    if (personAttendance) {
+      return {
+        message: polishStaffMessage(personAttendance.message),
+        chunks: [],
+        sources: personAttendance.sources,
+        portalLinks: personAttendance.links,
+        knowledgeGap: false,
+        answerTrust: "approved",
+        factsLookup: true,
+        ruleFinal: true,
+        routing: {
+          department: founderCoach ? "Leadership" : "Clinical Operations",
+          task: founderCoach ? "Founder Talk" : "Person attendance",
+          confidence: "high",
+          followUpQuestions: [],
+        },
+      };
+    }
+    return {
+      message: polishStaffMessage(
+        "I couldn’t load that person’s attendance hours just now. Open **Ops** → attendance hours, or try again.",
+      ),
+      chunks: [],
+      sources: [],
+      knowledgeGap: false,
+      ruleFinal: true,
+      routing: {
+        department: founderCoach ? "Leadership" : "Clinical Operations",
+        task: founderCoach ? "Founder Talk" : "Person attendance",
         confidence: "medium",
         followUpQuestions: [],
       },
