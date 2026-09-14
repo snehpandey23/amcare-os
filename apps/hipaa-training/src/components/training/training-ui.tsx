@@ -4,10 +4,15 @@ export function TrainingShell({ children }: { children: ReactNode }) {
   return <div className="siya-cert min-h-full text-[var(--siya-text)]">{children}</div>;
 }
 
-export function TrainingCard({ children, className = "" }: { children: ReactNode; className?: string }) {
+export function TrainingCard({
+  children,
+  className = "",
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={`rounded-[var(--siya-radius-lg)] border border-[var(--siya-border)] bg-[var(--siya-white)] p-6 shadow-[var(--siya-shadow)] ${className}`}
+      {...props}
     >
       {children}
     </div>
