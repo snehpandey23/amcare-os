@@ -368,9 +368,14 @@ export function PatientChatSimulator({
         safetyNotes,
       });
       const transcript = buildChatSimTranscript(lines);
+      const fbWithTrail: SimulatorFeedback = {
+        ...fb,
+        transcript,
+        transcriptVersion: 1,
+      };
       setSavedTranscript(transcript);
       setShowTranscript(false);
-      setFeedback(fb);
+      setFeedback(fbWithTrail);
       setEndReason(reason);
       if (opts?.breakTitle) {
         setBreakBanner({ title: opts.breakTitle, body: opts.breakBody || "" });
@@ -405,9 +410,9 @@ export function PatientChatSimulator({
       if (examMode) {
         if (!examDoneRef.current) {
           examDoneRef.current = true;
-          examMode.onComplete(fb);
+          examMode.onComplete(fbWithTrail);
         }
-      } else if (!awardedRef.current && (fb.messageCount > 0 || transcript.length > 0)) {
+      } else if (!awardedRef.current && (fbWithTrail.messageCount > 0 || transcript.length > 0)) {
         awardedRef.current = true;
         const p = personaRef.current;
         markDailyComplete("patientChat", {
@@ -417,13 +422,13 @@ export function PatientChatSimulator({
             outcome,
             redFlagged,
             safetyReasons,
-            politenessScore: fb.politenessScore,
-            grammarScore: fb.grammarScore,
-            relevanceScore: fb.relevanceScore,
+            politenessScore: fbWithTrail.politenessScore,
+            grammarScore: fbWithTrail.grammarScore,
+            relevanceScore: fbWithTrail.relevanceScore,
             transcript,
             endReason: reason,
             transcriptVersion: 1,
-            spokenSession: fb.spokenSession,
+            spokenSession: fbWithTrail.spokenSession,
           },
         });
         window.dispatchEvent(new Event("siya-level-up-updated"));

@@ -7,6 +7,10 @@ import { getPersona } from "@/data/patient-drill/personas";
 import type { Question } from "@/lib/types";
 import type { TypingScore } from "@/lib/level-up/typing-drill";
 import type { SimulatorFeedback } from "@/lib/patient-drill/evaluate";
+import {
+  buildExamChatSimTrailJson,
+  buildExamListeningTrailJson,
+} from "@/lib/competency-exam/exam-trail";
 import { ChatTypingDrill } from "@/components/companion/ChatTypingDrill";
 import { PatientChatSimulator } from "@/components/companion/PatientChatSimulator";
 import {
@@ -1066,10 +1070,10 @@ export function CompetencyExam({ sittingMode = false }: { sittingMode?: boolean 
           },
         ],
         activeSec: Math.max(0, LISTENING_SEC - listeningLeft),
-        trailJson: {
+        trailJson: buildExamListeningTrailJson({
           ...trail,
           estimateUnavailableReason: partialReason,
-        },
+        }),
       });
       return;
     }
@@ -1156,7 +1160,11 @@ export function CompetencyExam({ sittingMode = false }: { sittingMode?: boolean 
           },
         ],
         activeSec: Math.max(0, CHAT_SEC - chatLeft),
-        trailJson: { grammar: fb.grammarScore, politeness: fb.politenessScore, relevance: fb.relevanceScore },
+        trailJson: buildExamChatSimTrailJson({
+          feedback: fb,
+          modality,
+          briefId: brief.id,
+        }),
         safetyRedFlagged: flag.redFlagged,
         safetyJson: flag,
       });

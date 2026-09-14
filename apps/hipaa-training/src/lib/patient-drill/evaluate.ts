@@ -275,7 +275,170 @@ export type RelevanceTurnResult = {
     | "incoherent";
   /** Trainee-facing explanation when score is low — plain language, not just the numeric score. */
   humanNote?: string;
+  /** Typed-only: 3+ near-duplicate explanations in one turn (not a safety hit). */
+  typedRepetition?: TypedContentRepetitionAssessment;
 };
+
+/**
+ * Typed chat-sim only — substantial repeated explanations within one turn.
+ * Threshold is 3+ similar segments (2 is allowed as confirm/clarity restatement).
+ * Spoken mode must not use this (disfluency already handled separately).
+ */
+export type TypedContentRepetitionAssessment = {
+  excessive: boolean;
+  /** Size of the largest near-duplicate cluster (≥ 3 when excessive). */
+  maxOccurrences: number;
+  /** Short excerpt of the repeated material (when excessive). */
+  phraseExcerpt?: string;
+};
+
+/** Bounded 0–1 Relevance deduction for typed excessive repetition (not a hard fail). */
+export const TYPED_REPETITION_RELEVANCE_PENALTY = 0.18;
+
+const REPETITION_MIN_CONTENT_WORDS = 6;
+const REPETITION_SIMILARITY = 0.85;
+const REPETITION_TRIGGER_COUNT = 3;
+
+/** Short factual / confirmation language — not “explanations” for repetition scoring. */
+const FACTUAL_ECHO_RE =
+  /\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday|am|pm|a\.m\.|p\.m\.|january|february|march|april|may|june|july|august|september|october|november|december|\d{1,2}:\d{2}|\d{1,2}\/\d{1,2}|\d{4}|got\s+it|okay|ok|sure|thanks|thank\s+you|confirmed|confirm|noted|copied|understood)\b/i;
+
+function normalizeForRepetitionCompare(text: string): string {
+  return (text || "")
+    .toLowerCase()
+    .replace(/\b(um+|uh+|er+|ah+|hmm+|huh+|mm+|mhm)\b/gi, " ")
+    .replace(/[^a-z0-9'\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function contentWordsForRepetition(text: string): string[] {
+  const stop = COHERENCE_FUNCTION_WORDS;
+  return normalizeForRepetitionCompare(text)
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((w) => w.replace(/'s$/, ""))
+    .filter((w) => w.length > 2 && !stop.has(w) && !/^\d+$/.test(w));
+}
+
+function segmentForRepetition(text: string): string[] {
+  const parts = (text || "").match(/[^.!?]+[.!?]+|[^.!?]+$/g);
+  if (!parts) return text.trim() ? [text.trim()] : [];
+  return parts.map((p) => p.trim()).filter(Boolean);
+}
+
+function tokenJaccard(a: string[], b: string[]): number {
+  if (!a.length || !b.length) return 0;
+  const sa = new Set(a);
+  const sb = new Set(b);
+  let inter = 0;
+  for (const t of sa) if (sb.has(t)) inter++;
+  const union = sa.size + sb.size - inter;
+  return union === 0 ? 0 : inter / union;
+}
+
+/**
+ * True for brief confirmations / time-date echoes — must not trigger repetition.
+ * Genuine explanations are longer and not dominated by schedule tokens alone.
+ */
+export function isShortFactualEchoForRepetition(segment: string): boolean {
+  const words = contentWordsForRepetition(segment);
+  if (words.length < REPETITION_MIN_CONTENT_WORDS) return true;
+  if (words.length <= 10) {
+    const factualHits = words.filter((w) => FACTUAL_ECHO_RE.test(w)).length;
+    if (factualHits / words.length >= 0.45) return true;
+  }
+  return false;
+}
+
+/**
+ * Detect 3+ near-duplicate explanation segments in one typed reply.
+ * Does not score stutter/filler (spoken) and ignores short factual restatements.
+ */
+export function assessTypedContentRepetition(text: string): TypedContentRepetitionAssessment {
+  const segments = segmentForRepetition(text)
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0)
+    .filter((s) => !isShortFactualEchoForRepetition(s));
+
+  if (segments.length < REPETITION_TRIGGER_COUNT) {
+    return { excessive: false, maxOccurrences: segments.length ? 1 : 0 };
+  }
+
+  const tokens = segments.map((s) => contentWordsForRepetition(s));
+  const clusterSize = new Array(segments.length).fill(1);
+  const clusterRoot = segments.map((_, i) => i);
+
+  function find(i: number): number {
+    let r = i;
+    while (clusterRoot[r] !== r) r = clusterRoot[r]!;
+    return r;
+  }
+  function unite(a: number, b: number) {
+    const ra = find(a);
+    const rb = find(b);
+    if (ra === rb) return;
+    clusterRoot[rb] = ra;
+    clusterSize[ra] += clusterSize[rb]!;
+  }
+
+  for (let i = 0; i < segments.length; i++) {
+    for (let j = i + 1; j < segments.length; j++) {
+      const ti = tokens[i]!;
+      const tj = tokens[j]!;
+      const lenRatio =
+        Math.min(ti.length, tj.length) / Math.max(ti.length, tj.length || 1);
+      if (lenRatio < 0.75) continue;
+      if (tokenJaccard(ti, tj) >= REPETITION_SIMILARITY) unite(i, j);
+    }
+  }
+
+  let maxOccurrences = 1;
+  let bestRoot = 0;
+  for (let i = 0; i < segments.length; i++) {
+    if (find(i) !== i) continue;
+    if (clusterSize[i]! > maxOccurrences) {
+      maxOccurrences = clusterSize[i]!;
+      bestRoot = i;
+    }
+  }
+
+  if (maxOccurrences < REPETITION_TRIGGER_COUNT) {
+    return { excessive: false, maxOccurrences };
+  }
+
+  return {
+    excessive: true,
+    maxOccurrences,
+    phraseExcerpt: segments[bestRoot]!.slice(0, 96),
+  };
+}
+
+function applyTypedRepetitionPenalty(
+  result: RelevanceTurnResult,
+  reply: string,
+  inputModality?: "typed" | "spoken",
+): RelevanceTurnResult {
+  // Spoken: never — overlaps disfluency handling; would double-penalize.
+  if (inputModality === "spoken") return result;
+  // Only typed (or legacy messages with no modality = typed chat-sim).
+  if (inputModality === undefined) {
+    // treat as typed for classic chat-sim
+  } else if (inputModality !== "typed") {
+    return result;
+  }
+
+  const rep = assessTypedContentRepetition(reply);
+  if (!rep.excessive) return { ...result, typedRepetition: rep };
+
+  const nextScore = Math.max(0, Math.round((result.score - TYPED_REPETITION_RELEVANCE_PENALTY) * 100) / 100);
+  return {
+    ...result,
+    score: nextScore,
+    typedRepetition: rep,
+    reason: `${result.reason} · repeated the same explanation ${rep.maxOccurrences}× in one reply (clarity)`,
+  };
+}
 
 export const OFF_TOPIC_STYLE_SCORES_NOTE =
   "This reply didn't address what was asked — grammar/politeness scores below are not meaningful for an off-topic response.";
@@ -541,7 +704,9 @@ export type GrammarIssueKind =
   | "subject_verb_disagreement"
   | "wrong_word_or_typo"
   | "garbled_or_unclear"
-  | "wrong_tense";
+  | "wrong_tense"
+  | "esl_collocation"
+  | "relevance_floor_cross_check";
 
 export const INCOHERENT_REPLY_LABEL =
   "Response does not form a coherent sentence — cannot be scored as normal Grammar/Relevance.";
@@ -676,7 +841,11 @@ export function assessReplyCoherence(text: string): ReplyCoherenceAssessment {
     };
   }
   // Grammar path already strips um/uh; use the same view for fairness.
-  const t = normalizeSpeechDisfluencyForGrammar(raw) || raw;
+  // Also strip markdown bold/italic so clinical templates aren't scored as salad.
+  const strippedMd = (normalizeSpeechDisfluencyForGrammar(raw) || raw)
+    .replace(/\*\*([^*]+)\*\*/g, "$1")
+    .replace(/\*([^*]+)\*/g, "$1");
+  const t = strippedMd.trim() || raw;
   const words = coherenceTokens(t);
   if (words.length === 0) {
     return { coherent: false, reason: INCOHERENT_REPLY_LABEL, flags: ["empty"] };
@@ -739,6 +908,10 @@ const TYPO_OR_WRONG_WORD: Array<{ re: RegExp; detail: string }> = [
   { re: /\badn\b/i, detail: "Typo: “adn” → “and”" },
   { re: /\bwoudl\b/i, detail: "Typo: “woudl” → “would”" },
   { re: /\brecieve\b/i, detail: "Typo: “recieve” → “receive”" },
+  { re: /\binital\b/i, detail: "Typo: “inital” → “initial”" },
+  { re: /\badral\b/i, detail: "Likely misspelling of “Adderall”" },
+  { re: /\btou have\b/i, detail: "Typo: “tou have” → “you have”" },
+  { re: /\bcan;'?t\b/i, detail: "Garbled contraction — use “can’t”" },
   { re: /\bappart?ment\b/i, detail: "Wrong word/typo for “appointment”" },
   {
     re: /\bare you showing (for|up)?\s*(the\s+)?first\s+time\b/i,
@@ -747,6 +920,45 @@ const TYPO_OR_WRONG_WORD: Array<{ re: RegExp; detail: string }> = [
   {
     re: /\bshowing for the first time\b/i,
     detail: "Wrong/unclear wording — “showing” is not standard for a first visit",
+  },
+];
+
+/**
+ * High-frequency ESL / collocation errors from live audit (2026-09).
+ * These are real mistakes human reviewers catch that the thin typo list missed.
+ */
+const ESL_COLLOCATION: Array<{ re: RegExp; detail: string }> = [
+  {
+    re: /\bshare me\b/i,
+    detail: "ESL collocation: “share me” → “share with me” / “share your …”",
+  },
+  {
+    re: /\bhelp you\s+(scheduling|booking|getting|filling|completing|doing)\b/i,
+    detail: "ESL collocation: “help you scheduling” → “help you schedule” (bare infinitive)",
+  },
+  {
+    re: /\b(review|providers?'?\s+review)\s+and\s+advise\b/i,
+    detail: "Wrong word form: “advise” (verb) → “advice” (noun) in “review and advice”",
+  },
+  {
+    re: /\bcontrol substance\b/i,
+    detail: "Wrong form: “control substance” → “controlled substance”",
+  },
+  {
+    re: /\bthank you to thank you\b/i,
+    detail: "Unclear / repeated phrasing — “Thank you for …”",
+  },
+  {
+    re: /\bnear by\b/i,
+    detail: "Prefer “nearby” (one word) as an adjective",
+  },
+  {
+    re: /\bappointment done the\b/i,
+    detail: "Missing verb: “once the appointment is done, the …”",
+  },
+  {
+    re: /\btake a free screening to diagnose\b/i,
+    detail: "Unclear clinical English — screenings do not “diagnose”; prefer “screening to help assess …”",
   },
 ];
 
@@ -809,6 +1021,14 @@ function grammarIssuesFor(text: string): { kinds: GrammarIssueKind[]; detail?: s
   for (const { re, detail } of TYPO_OR_WRONG_WORD) {
     if (re.test(t)) {
       kinds.push("wrong_word_or_typo");
+      details.push(detail);
+      break;
+    }
+  }
+
+  for (const { re, detail } of ESL_COLLOCATION) {
+    if (re.test(t)) {
+      kinds.push("esl_collocation");
       details.push(detail);
       break;
     }
@@ -944,6 +1164,14 @@ export type SimulatorFeedback = {
   redFlagged: boolean;
   safetyReasons: SafetyReasonCode[];
   safetyNotes: string[];
+  /**
+   * Full conversation for exam/Ops audit (set by chat UI after evaluate).
+   * Spoken turns should include sttRaw when available.
+   */
+  transcript?: import("@/lib/level-up/progress").ChatSimTranscriptTurn[];
+  transcriptVersion?: 1;
+  /** True when grammar was capped because session relevance was near-floor. */
+  grammarCappedForLowRelevance?: boolean;
 };
 
 export function evaluateSimulatorSession(
@@ -992,8 +1220,37 @@ export function evaluateSimulatorSession(
 
   const n = ma.length;
   const politenessScore = n > 0 ? Math.round((politeCount / n) * 100) : 0;
-  const grammarScore = n > 0 ? Math.round((grammarOkCount / n) * 100) : 0;
+  let grammarScore = n > 0 ? Math.round((grammarOkCount / n) * 100) : 0;
   const relevance = scoreRelevanceSession(messages);
+
+  // Per-turn: near-floor relevance → grammar cannot stay "perfect" on that reply.
+  const RELEVANCE_TURN_NEAR_FLOOR = 0.25;
+  relevance.turns.forEach((turn, messageIndex) => {
+    if (turn.score > RELEVANCE_TURN_NEAR_FLOOR) return;
+    if (messageIndex < 0 || messageIndex >= ma.length) return;
+    if (grammarIssues.some((g) => g.messageIndex === messageIndex)) return;
+    const msg = ma[messageIndex]!;
+    grammarErrorCount++;
+    grammarOkCount = Math.max(0, grammarOkCount - 1);
+    grammarIssues.push({
+      messageIndex,
+      kinds: ["relevance_floor_cross_check"],
+      excerpt: (msg.text || "").trim().slice(0, 80),
+      detail:
+        "Relevance near-floor on this turn — grammar cannot stay perfect when the reply barely engaged the ask",
+    });
+  });
+  grammarScore = n > 0 ? Math.round((grammarOkCount / n) * 100) : 0;
+
+  // Session-level safety: if relevance is still near-floor and grammar looks excellent, cap it.
+  const RELEVANCE_SESSION_NEAR_FLOOR = 25;
+  const GRAMMAR_CAP_WHEN_RELEVANCE_NEAR_FLOOR = 70;
+  let grammarCappedForLowRelevance = false;
+  if (relevance.score <= RELEVANCE_SESSION_NEAR_FLOOR && grammarScore >= 95) {
+    grammarScore = Math.min(grammarScore, GRAMMAR_CAP_WHEN_RELEVANCE_NEAR_FLOOR);
+    grammarCappedForLowRelevance = true;
+  }
+
   const clinicalAccuracyHits: ClinicalAccuracyHit[] = ma.flatMap((msg, replyIndex) =>
     isScreeningMisrepresentedAsDiagnosis(msg.text || "")
       ? [
@@ -1024,15 +1281,20 @@ export function evaluateSimulatorSession(
       ? estimateWpmFromWords(totalWords, totalMinutes * 60)
       : { wpm: 0, reliable: false, rawWpm: 0, reason: "no_sample" as const };
 
+  const baseGrammarNote = spokenSession
+    ? "Grammar (chat register) — scores the raw cloud transcription (no edit step). Natural speech fillers (um/uh) and simple self-corrections are not writing errors. Incoherent word-salad scores 0 (coherence gate). Does not score pronunciation or fluency."
+    : "Grammar (chat register) — flags real issues (agreement, wrong word/typo, ESL collocations, unclear wording) plus a basic coherence gate (word-salad / non-sentences score 0). Missing caps/periods are not scored. Does not score relevance or substance. LanguageTool formal checks are not wired yet.";
+  const grammarNote = grammarCappedForLowRelevance
+    ? `${baseGrammarNote} Cross-check: grammar capped because session relevance was near-floor (≤25) — a perfect grammar score is not allowed when replies barely engaged the ask.`
+    : baseGrammarNote;
+
   return {
     empathyScore: politenessScore,
     politenessScore,
     politenessNote:
       "Politeness — acknowledgment, helpfulness, or courtesy wording (chat register). Blaming or scolding the patient (e.g. “you should have…”) overrides help markers in the same reply. Not a measure of empathy, substance, or whether you answered the patient’s question.",
     grammarScore,
-    grammarNote: spokenSession
-      ? "Grammar (chat register) — scores the raw cloud transcription (no edit step). Natural speech fillers (um/uh) and simple self-corrections are not writing errors. Incoherent word-salad scores 0 (coherence gate). Does not score pronunciation or fluency."
-      : "Grammar (chat register) — flags real issues (agreement, wrong word/typo, unclear wording) plus a basic coherence gate (word-salad / non-sentences score 0). Missing caps/periods are not scored. Does not score relevance or substance. LanguageTool formal checks are not wired yet.",
+    grammarNote,
     grammarIssues,
     relevanceScore: relevance.score,
     relevanceNote: relevance.note,
@@ -1044,6 +1306,7 @@ export function evaluateSimulatorSession(
     messageCount: n,
     grammarErrorCount,
     clinicalAccuracyHits,
+    grammarCappedForLowRelevance,
     accuracyNote: spokenSession
       ? "Spoken mode scores the raw cloud transcription immediately after you stop the mic — the same Grammar, Politeness, Relevance, and Safety checks as typed chat-sim. There is no transcript edit or confirm step; STT mishears count as written. It does not score pronunciation, fluency, or how quickly you replied. Typing pace (WPM) does not apply."
       : avgEst.reliable
