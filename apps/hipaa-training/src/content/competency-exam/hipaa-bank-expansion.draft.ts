@@ -61,25 +61,38 @@ export const HIPAA_BANK_EXPANSION_DRAFT_V1: DraftHipaaExpansionItem[] = [
     parentConceptId: "t-8",
     variantMove: "actor",
     reviewStatus: "draft",
-    sourceRef: "DRAFT expansion v1 — pending review",
+    sourceRef: "DRAFT expansion v1 — pending Sonu re-check (MA clarity rewrite)",
     moduleId: "ce-ba",
     tags: ["scope", "ba", "draft-expansion"],
     difficulty: 1,
     type: "mcq",
     prompt:
-      "A contracted cleaning company staff member occasionally sees papers on a desk while emptying trash but has no job duties involving PHI. Under the training distinction used on your exam, this person is best described as:",
+      "A contracted cleaning staff member empties the trash and briefly sees papers with patient names on a desk. Cleaning is their only job — they do not schedule visits, bill, or work in the chart. What is the best takeaway?",
     options: [
-      { key: "a", text: "A business associate because they can see PHI on site" },
-      { key: "b", text: "Not a business associate based on incidental exposure alone" },
-      { key: "c", text: "A covered entity" },
-      { key: "d", text: "A hybrid entity" },
+      {
+        key: "a",
+        text: "Seeing those papers, even briefly, means the cleaner now has the same legal responsibilities as a company hired to handle patient information for the clinic",
+      },
+      {
+        key: "b",
+        text: "Briefly seeing patient information by accident while doing non-records work does not, by itself, create those extra legal responsibilities for them",
+      },
+      {
+        key: "c",
+        text: "The cleaner is now treated like a second medical clinic that bills insurance on its own",
+      },
+      {
+        key: "d",
+        text: "The cleaner becomes a “hybrid” organization that must split its business into healthcare and non-healthcare parts",
+      },
     ],
     correctKey: "b",
-    explanation: "Incidental exposure without PHI functions does not by itself create BA status (classic training distractor).",
+    explanation:
+      "Incidental exposure without PHI job duties does not by itself create business-associate status — same concept as the parent item, in plain workplace language.",
     distractorHints: {
-      a: "Seeing PHI incidentally is not the same as performing PHI functions for the CE.",
-      c: "CEs are plans, clearinghouses, or covered providers — not incidental vendors.",
-      d: "Hybrid entity is an organizational designation, not a vendor label.",
+      a: "Seeing PHI incidentally is not the same as being hired to create, receive, maintain, or transmit PHI for the clinic.",
+      c: "That describes a covered entity-like role, not a cleaner with no PHI duties.",
+      d: "Hybrid entity is an organizational designation for one company with mixed functions — not a cleaner.",
     },
   },
   {
@@ -87,21 +100,34 @@ export const HIPAA_BANK_EXPANSION_DRAFT_V1: DraftHipaaExpansionItem[] = [
     parentConceptId: "t-8",
     variantMove: "actor",
     reviewStatus: "draft",
-    sourceRef: "DRAFT expansion v1 — pending review",
+    sourceRef: "DRAFT expansion v1 — pending Sonu re-check (MA clarity rewrite)",
     moduleId: "ce-ba",
     tags: ["scope", "ba", "draft-expansion"],
     difficulty: 1,
     type: "mcq",
     prompt:
-      "Which arrangement is most clearly BA-like under your training materials?",
+      "Which of these is the clearest example of an outside company that handles patient health information on the clinic’s (or health plan’s) behalf — the kind of vendor relationship HIPAA treats as a business associate?",
     options: [
-      { key: "a", text: "A claims TPA that receives and processes PHI for the health plan" },
-      { key: "b", text: "A food delivery driver who never handles clinical records" },
-      { key: "c", text: "A patient waiting in the lobby" },
-      { key: "d", text: "A visitor who walks past a closed chart room door" },
+      {
+        key: "a",
+        text: "A billing company that processes patient claims and works with patient health information for the clinic or health plan",
+      },
+      {
+        key: "b",
+        text: "A food delivery driver who drops lunch at the front desk and never sees charts or billing files",
+      },
+      {
+        key: "c",
+        text: "A patient waiting in the lobby for their own appointment",
+      },
+      {
+        key: "d",
+        text: "A visitor who walks past a closed chart-room door without going in or reading anything",
+      },
     ],
     correctKey: "a",
-    explanation: "BA creates/receives/maintains/transmits PHI for or on behalf of a CE; TPA claims processing is the clear match.",
+    explanation:
+      "A business associate creates, receives, maintains, or transmits PHI for or on behalf of a covered entity — claims/billing processing is the clear match; incidental passers-by are not.",
   },
   {
     id: "draft-v1-005",
@@ -332,42 +358,68 @@ export const HIPAA_BANK_EXPANSION_DRAFT_V1: DraftHipaaExpansionItem[] = [
     parentConceptId: "t-47",
     variantMove: "failure",
     reviewStatus: "draft",
-    sourceRef: "DRAFT expansion v1 — pending review",
+    sourceRef: "DRAFT expansion v1 — pending Sonu re-check (MA clarity rewrite)",
     moduleId: "safeguards",
     tags: ["safeguard-types", "draft-expansion"],
     difficulty: 1,
     type: "mcq",
     prompt:
-      "Requiring unique user IDs and automatic logoff for the EHR is best categorized as which safeguard type?",
+      "Your clinic’s EHR requires each staff member to sign in with their own username and password, and it logs you out automatically after you leave the screen idle. What kind of protection is that mainly describing?",
     options: [
-      { key: "a", text: "Technical" },
-      { key: "b", text: "Only “procedural marketing”" },
-      { key: "c", text: "A Privacy Rule authorization form" },
-      { key: "d", text: "Breach media notice" },
+      {
+        key: "a",
+        text: "A technology / system control (built into the computer or software — sometimes called a technical safeguard)",
+      },
+      {
+        key: "b",
+        text: "A marketing brochure rule about how the clinic advertises",
+      },
+      {
+        key: "c",
+        text: "A patient permission form for sharing information with a family member",
+      },
+      {
+        key: "d",
+        text: "A public news notice the clinic sends after a large data breach",
+      },
     ],
     correctKey: "a",
-    explanation: "Access control / logoff patterns are technical safeguards in the Security Rule structure.",
+    explanation:
+      "Unique user IDs and automatic logoff are access-control / technology controls (technical safeguards) — not marketing, authorization forms, or breach notices.",
   },
   {
     id: "draft-v1-017",
     parentConceptId: "t-47",
     variantMove: "setting",
     reviewStatus: "draft",
-    sourceRef: "DRAFT expansion v1 — pending review",
+    sourceRef: "DRAFT expansion v1 — pending Sonu re-check (MA clarity rewrite)",
     moduleId: "safeguards",
     tags: ["safeguard-types", "physical", "draft-expansion"],
     difficulty: 1,
     type: "mcq",
     prompt:
-      "Locking the telehealth closet where spare workstations are stored overnight is primarily an example of a ________ safeguard.",
+      "At closing time, staff lock the closet where spare clinic computers are stored overnight so strangers cannot walk off with them. What is the main point of that step?",
     options: [
-      { key: "a", text: "Physical" },
-      { key: "b", text: "Transaction code set" },
-      { key: "c", text: "Criminal prosecution tool" },
-      { key: "d", text: "Marketing authorization" },
+      {
+        key: "a",
+        text: "Protecting the devices and the space with a real-world lock / room control (a physical safeguard)",
+      },
+      {
+        key: "b",
+        text: "Choosing the right medical billing code for an insurance claim",
+      },
+      {
+        key: "c",
+        text: "Writing a stronger password so the EHR software is harder to guess",
+      },
+      {
+        key: "d",
+        text: "Getting a patient’s signed OK before using their photo in a clinic Facebook ad",
+      },
     ],
     correctKey: "a",
-    explanation: "Facility/workstation control is physical safeguards territory.",
+    explanation:
+      "Locking a room/closet that holds workstations is a facility / physical control — not coding, password policy, or marketing authorization.",
   },
   {
     id: "draft-v1-018",
@@ -454,21 +506,25 @@ export const HIPAA_BANK_EXPANSION_DRAFT_V1: DraftHipaaExpansionItem[] = [
     parentConceptId: "t-61",
     variantMove: "actor",
     reviewStatus: "draft",
-    sourceRef: "DRAFT expansion v1 — pending review",
+    sourceRef: "DRAFT expansion v1 — pending Sonu re-check (MA clarity rewrite)",
     moduleId: "enforcement",
     tags: ["ocr-role", "draft-expansion"],
     difficulty: 2,
     type: "mcq",
     prompt:
-      "Which activity is generally NOT an OCR civil-enforcement tool listed in your training (the “does not apply” pattern)?",
+      "OCR is the federal office that watches HIPAA privacy and security (the “HIPAA watchdog”). It receives complaints, looks into many of them, and can run compliance checks. Which of these is generally NOT something OCR itself does?",
     options: [
-      { key: "a", text: "Investigating complaints" },
-      { key: "b", text: "Conducting compliance reviews/audits" },
-      { key: "c", text: "Criminal prosecution (typically DOJ territory)" },
-      { key: "d", text: "Receiving and reviewing HIPAA complaints" },
+      { key: "a", text: "Look into HIPAA complaints people file" },
+      { key: "b", text: "Review whether a clinic is following HIPAA rules (compliance checks / audits)" },
+      {
+        key: "c",
+        text: "Put someone in jail for a HIPAA crime — that kind of criminal case is usually handled by a different agency (the Department of Justice), not OCR",
+      },
+      { key: "d", text: "Receive and review HIPAA complaints that come in" },
     ],
     correctKey: "c",
-    explanation: "OCR civil tools vs criminal prosecution through DOJ — same distinction as parent item.",
+    explanation:
+      "OCR’s civil role includes receiving/reviewing complaints and compliance reviews; criminal prosecution is generally DOJ territory — same distinction as the parent item.",
   },
   {
     id: "draft-v1-023",
