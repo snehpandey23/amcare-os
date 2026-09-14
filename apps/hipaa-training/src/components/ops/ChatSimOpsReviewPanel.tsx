@@ -104,8 +104,18 @@ function SessionCard({
                 {t.who === "you" ? (t.inputModality === "spoken" ? "MA (spoken)" : "MA") : t.who}:{" "}
               </span>
               {t.text}
+              {t.who === "you" && t.sttHeavilyEdited ? (
+                <p className="mt-1 rounded bg-black/20 px-1.5 py-0.5 text-[10px] font-semibold text-amber-100">
+                  {t.sttIntegrityNote ||
+                    `Heavily edited from original transcription (${t.sttWordChangePct ?? "?"}% words changed)`}
+                </p>
+              ) : null}
               {t.who === "you" && t.sttRaw && t.sttRaw !== t.text ? (
-                <p className="mt-1 text-[10px] opacity-75">STT raw (audit): {t.sttRaw}</p>
+                <p className="mt-1 text-[10px] opacity-75">
+                  STT raw (audit)
+                  {typeof t.sttWordChangePct === "number" ? ` · ${t.sttWordChangePct}% words changed` : ""}
+                  {t.sttProvider ? ` · ${t.sttProvider}` : ""}: {t.sttRaw}
+                </p>
               ) : null}
             </li>
           ))}

@@ -1031,7 +1031,7 @@ export function evaluateSimulatorSession(
       "Politeness — acknowledgment, helpfulness, or courtesy wording (chat register). Blaming or scolding the patient (e.g. “you should have…”) overrides help markers in the same reply. Not a measure of empathy, substance, or whether you answered the patient’s question.",
     grammarScore,
     grammarNote: spokenSession
-      ? "Grammar (chat register) — scores the confirmed transcript only. Natural speech fillers (um/uh) and simple self-corrections are not writing errors. Incoherent word-salad scores 0 (coherence gate). Does not score pronunciation or fluency."
+      ? "Grammar (chat register) — scores the raw cloud transcription (no edit step). Natural speech fillers (um/uh) and simple self-corrections are not writing errors. Incoherent word-salad scores 0 (coherence gate). Does not score pronunciation or fluency."
       : "Grammar (chat register) — flags real issues (agreement, wrong word/typo, unclear wording) plus a basic coherence gate (word-salad / non-sentences score 0). Missing caps/periods are not scored. Does not score relevance or substance. LanguageTool formal checks are not wired yet.",
     grammarIssues,
     relevanceScore: relevance.score,
@@ -1045,7 +1045,7 @@ export function evaluateSimulatorSession(
     grammarErrorCount,
     clinicalAccuracyHits,
     accuracyNote: spokenSession
-      ? "Spoken mode scores what you said after you confirm the transcript — the same Grammar, Politeness, Relevance, and Safety checks as typed chat-sim. It does not score pronunciation, fluency, or how quickly you replied. Typing pace (WPM) does not apply."
+      ? "Spoken mode scores the raw cloud transcription immediately after you stop the mic — the same Grammar, Politeness, Relevance, and Safety checks as typed chat-sim. There is no transcript edit or confirm step; STT mishears count as written. It does not score pronunciation, fluency, or how quickly you replied. Typing pace (WPM) does not apply."
       : avgEst.reliable
         ? `Typing pace estimated from first keystroke → send (capped sanity ≤ ${MAX_PLAUSIBLE_WPM} WPM). Accuracy is not measured here — clinical content uses safety tiers.`
         : "Typing pace unable to estimate — send timing was too short or implausibly fast (often paste, or timer started late). Clinical content is scored via safety tiers, not this number.",

@@ -32,6 +32,13 @@ export type ChatSimTranscriptTurn = {
   /** Raw cloud STT before MA edit — Ops audit only; never used for scoring. */
   sttRaw?: string;
   sttProvider?: string;
+  /** Word-level edit distance STT → submitted (spoken only). */
+  sttWordEditDistance?: number;
+  /** 0–100 share of words changed. */
+  sttWordChangePct?: number;
+  /** Substantial rewrite vs mishear fix — Ops integrity signal, not a live gate. */
+  sttHeavilyEdited?: boolean;
+  sttIntegrityNote?: string;
 };
 
 /** Chat simulator session outcome (Ops-queryable via level_up day ledger). */
@@ -64,6 +71,10 @@ export function buildChatSimTranscript(
     inputModality?: "typed" | "spoken";
     sttRaw?: string;
     sttProvider?: string;
+    sttWordEditDistance?: number;
+    sttWordChangePct?: number;
+    sttHeavilyEdited?: boolean;
+    sttIntegrityNote?: string;
   }>,
 ): ChatSimTranscriptTurn[] {
   return lines
@@ -78,6 +89,12 @@ export function buildChatSimTranscript(
         turn.inputModality = "spoken";
         if (l.sttRaw?.trim()) turn.sttRaw = l.sttRaw.trim().slice(0, TRANSCRIPT_MAX_CHARS);
         if (l.sttProvider?.trim()) turn.sttProvider = l.sttProvider.trim().slice(0, 40);
+        if (typeof l.sttWordEditDistance === "number") turn.sttWordEditDistance = l.sttWordEditDistance;
+        if (typeof l.sttWordChangePct === "number") turn.sttWordChangePct = l.sttWordChangePct;
+        if (l.sttHeavilyEdited) {
+          turn.sttHeavilyEdited = true;
+          if (l.sttIntegrityNote?.trim()) turn.sttIntegrityNote = l.sttIntegrityNote.trim().slice(0, 240);
+        }
       } else if (l.who === "you" && l.inputModality === "typed") {
         turn.inputModality = "typed";
       }

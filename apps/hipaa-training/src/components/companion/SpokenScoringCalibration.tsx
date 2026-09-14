@@ -137,26 +137,34 @@ export function SpokenScoringCalibration() {
         error?: string;
       };
       if (!res.ok || !data.ok || !data.transcript?.trim()) {
-        setError(data.error || "Cloud STT returned no transcript.");
+        setError(
+          data.error ||
+            "Cloud STT returned no transcript. Nothing scored — tap Record to try again.",
+        );
         return;
       }
       const raw = data.transcript.trim();
-      const note = data.fallbackReason
-        ? `Fallback (${data.fallbackReason})${data.sarvamTranscript ? ` — Sarvam heard “${data.sarvamTranscript}”` : ""}`
-        : data.provider || "sarvam";
-      setDraft({
-        transcript: raw,
+      if (raw.length < 2) {
+        setError("Transcription too short. Nothing scored — tap Record to try again.");
+        return;
+      }
+      // Record path: score raw STT immediately (no edit/confirm). Type/paste remains editable below.
+      const result = runSpokenCalibration({
+        confirmedText: raw,
         sttRaw: raw,
-        provider: data.provider || "sarvam",
-        note,
-        recordingElapsedSec: elapsedSec ?? 0,
+        sttProvider: data.provider || "sarvam",
+        patientAsk: useRelevance ? patientAsk : null,
+        recordingElapsedSec: elapsedSec != null && elapsedSec > 0 ? elapsedSec : null,
       });
+      setHistory((prev) => [result, ...prev].slice(0, MAX_HISTORY));
+      setDraft(null);
+      setError(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Cloud STT failed.");
     } finally {
       setBusy(false);
     }
-  }, [token]);
+  }, [token, patientAsk, useRelevance]);
 
   const scoreDraft = () => {
     if (!draft) return;
@@ -201,8 +209,8 @@ export function SpokenScoringCalibration() {
         </p>
         <h1 className={portalH1}>Spoken scoring calibration</h1>
         <p className="mt-1 max-w-2xl text-sm text-[var(--siya-text)]">
-          Load a scenario (or type/paste a longer reply), confirm the text, then inspect every rubric.
-          Record is optional. Nothing is saved to exam attempts, seen-sets, or Ops ledgers.
+          Record scores raw cloud STT immediately (no edit step). Type/paste remains available for
+          sandbox probing. Nothing is saved to exam attempts, seen-sets, or Ops ledgers.
         </p>
       </header>
 
@@ -303,7 +311,7 @@ export function SpokenScoringCalibration() {
               onClick={() => void stopRecord()}
               className="rounded-xl bg-rose-600 px-4 py-2 text-sm font-semibold text-white"
             >
-              Stop &amp; transcribe
+              Stop &amp; score raw STT
             </button>
           ) : null}
           {draft ? (

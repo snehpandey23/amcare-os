@@ -4,6 +4,10 @@
  *
  * Each entry is meant to stress a different rubric slice (relevance shape, tone,
  * safety, coherence, off-topic framing) — not reworded timeline clones.
+ *
+ * Multi-turn strong examples (full session transcripts) live under
+ * `fixtures/` — see `janet-spoken-scheduling-strong.ts` +
+ * `scripts/smoke-chat-sim-scoring-janet-spoken.ts`.
  */
 
 export type CalibrationScenario = {

@@ -112,6 +112,8 @@ export type SpeakOptions = {
   onEnd?: () => void;
   /** Persisted SpeechSynthesisVoice.voiceURI — ignored if missing/unavailable. */
   voiceURI?: string | null;
+  rate?: number;
+  pitch?: number;
 };
 
 /** Speak plain text; cancels any in-flight utterance first. */
@@ -127,8 +129,8 @@ export function speakText(text: string, opts?: SpeakOptions): Promise<void> {
   return new Promise((resolve) => {
     try {
       const u = new SpeechSynthesisUtterance(cleaned);
-      u.rate = 1;
-      u.pitch = 1;
+      u.rate = opts?.rate ?? 1;
+      u.pitch = opts?.pitch ?? 1;
       const voice = resolveTtsVoice(opts?.voiceURI);
       if (voice) u.voice = voice;
       u.onstart = () => opts?.onStart?.();
