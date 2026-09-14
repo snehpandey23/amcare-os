@@ -121,8 +121,19 @@ async function confirmSittingStart(page: Page) {
   });
 }
 
-async function runListening(page: Page, text: string) {
+/** Hub card → optional start modal → section UI. */
+async function openHubSection(page: Page, sectionAttr: string, ready: RegExp) {
+  await page.locator(`[data-sitting-hub-section="${sectionAttr}"]`).click();
   await confirmSittingStart(page);
+  await page.getByText(ready).first().waitFor({ timeout: 45_000 });
+}
+
+async function runListening(page: Page, text: string) {
+  // Caller already opened section + confirmed start when using openHubSection.
+  const modalStill = page.locator("[data-sitting-start-modal]");
+  if (await modalStill.isVisible().catch(() => false)) {
+    await confirmSittingStart(page);
+  }
   await page.locator("#listening-provider-message").waitFor({ timeout: 30_000 });
   await page.locator("#listening-provider-message").fill(text);
   await page.getByRole("button", { name: /Submit listening/i }).click();
@@ -150,8 +161,15 @@ async function sendTyped(page: Page, text: string, turnIndex: number) {
 }
 
 async function runTypedChat(page: Page) {
-  await confirmSittingStart(page);
-  await page.getByText("Type (exam lane)", { exact: true }).waitFor({ timeout: 30_000 });
+  const modalStill = page.locator("[data-sitting-start-modal]");
+  if (await modalStill.isVisible().catch(() => false)) await confirmSittingStart(page);
+  await page
+    .getByText(/Sitting · Typed chat-sim|Type \(exam lane\)/i)
+    .first()
+    .waitFor({ timeout: 30_000 })
+    .catch(() => {});
+  const input = page.getByPlaceholder("Type as the MA — process, booking, forms. No clinical decisions.");
+  await input.waitFor({ state: "visible", timeout: 60_000 });
   for (let i = 0; i < TYPED_REPLIES.length; i++) await sendTyped(page, TYPED_REPLIES[i]!, i);
   await page.locator('[data-sitting-section-done="true"]').waitFor({ timeout: 180_000 });
   await page.waitForTimeout(2000);
@@ -175,17 +193,31 @@ async function spokenTurn(page: Page, transcript: string, turnIndex: number) {
       body: JSON.stringify({ ok: true, transcript, provider: "sarvam" }),
     });
   });
+  await page.locator("[data-spoken-call-ui]").waitFor({ timeout: 60_000 });
+  // Exam lane auto-opens mic after persona TTS — accept either Mic or already-Listening Stop.
   const record = page.locator('[data-spoken-chat-sim-record="true"]');
-  await record.waitFor({ state: "visible", timeout: 30_000 });
-  await record.click();
-  await page.waitForTimeout(2200);
   const stop = page.locator('[data-spoken-chat-sim-stop="true"]');
+  await Promise.race([
+    record.waitFor({ state: "visible", timeout: 90_000 }),
+    stop.waitFor({ state: "visible", timeout: 90_000 }),
+  ]);
   if (await stop.isVisible().catch(() => false)) {
-    await stop.click();
+    await page.waitForTimeout(1800);
+    await stop.click({ timeout: 30_000 });
   } else {
-    await record.click({ timeout: 5_000 }).catch(() => {});
-    await page.waitForTimeout(800);
-    await page.locator('[data-spoken-chat-sim-stop="true"]').click({ timeout: 10_000 });
+    for (let attempt = 0; attempt < 5; attempt++) {
+      if (!(await record.isDisabled().catch(() => true))) break;
+      await page.waitForTimeout(1200);
+    }
+    await record.click({ timeout: 30_000 });
+    await page.waitForTimeout(2500);
+    const stop2 = page.locator('[data-spoken-chat-sim-stop="true"]');
+    if (await stop2.isVisible().catch(() => false)) await stop2.click();
+    else {
+      await record.click({ timeout: 5_000 }).catch(() => {});
+      await page.waitForTimeout(1200);
+      await page.locator('[data-spoken-chat-sim-stop="true"]').click({ timeout: 20_000 });
+    }
   }
   // No editable draft — raw STT auto-submits.
   const draftCount = await page.locator('[data-spoken-chat-sim-transcript="true"]').count();
@@ -197,8 +229,16 @@ async function spokenTurn(page: Page, transcript: string, turnIndex: number) {
 }
 
 async function runSpokenChat(page: Page) {
-  await confirmSittingStart(page);
-  await page.getByText("Speak (exam lane)", { exact: true }).waitFor({ timeout: 30_000 });
+  const modalStill = page.locator("[data-sitting-start-modal]");
+  if (await modalStill.isVisible().catch(() => false)) await confirmSittingStart(page);
+  await page
+    .getByText(/Sitting · Spoken chat-sim|Speak \(exam lane\)/i)
+    .first()
+    .waitFor({ timeout: 30_000 })
+    .catch(() => {});
+  await page.locator("[data-spoken-call-ui], [data-spoken-chat-sim-record='true']").first().waitFor({
+    timeout: 60_000,
+  });
   for (let i = 0; i < SPOKEN.length; i++) await spokenTurn(page, SPOKEN[i]!, i);
   await page.locator('[data-sitting-section-done="true"]').waitFor({ timeout: 180_000 });
   await page.waitForTimeout(2000);
@@ -308,8 +348,7 @@ async function main() {
 
     // --- Listening #1 short (too_short) ---
     const listenBefore = agg(before.json, "listening");
-    await page.locator('[data-sitting-hub-section="listening"]').click();
-    await page.getByRole("heading", { name: /Sitting · Listening/i }).waitFor({ timeout: 30_000 });
+    await openHubSection(page, "listening", /Sitting · Listening|Listening ·/i);
     await runListening(page, SHORT_LISTENING);
     await shot(page, "01-listening-short-done");
     const shortDone = await page.locator("[data-sitting-section-done]").innerText();
@@ -332,7 +371,7 @@ async function main() {
     // --- Listening #2 good (retry — average should move) ---
     const nAfterShort = L?.attemptCount ?? 0;
     const avgAfterShort = L?.averageScore;
-    await page.locator('[data-sitting-hub-section="listening"]').click();
+    await openHubSection(page, "listening", /Sitting · Listening|Listening ·/i);
     await runListening(page, GOOD_LISTENING);
     await shot(page, "02-listening-good-done");
     await backToHub(page);
@@ -388,8 +427,7 @@ async function main() {
     }
     // --- Typed chat ---
     const typedBefore = agg(cur.json, "chat-sim-typed");
-    await page.locator('[data-sitting-hub-section="chat-sim-typed"]').click();
-    await page.getByRole("heading", { name: /Sitting · Typed chat-sim/i }).waitFor({ timeout: 30_000 });
+    await openHubSection(page, "chat-sim-typed", /Sitting · Typed|Type \(exam lane\)/i);
     await runTypedChat(page);
     await shot(page, "03-typed-chat-done");
     const typedNote = await page.locator("[data-sitting-section-done]").innerText();
@@ -404,7 +442,7 @@ async function main() {
 
     const typedN = T?.attemptCount ?? 0;
     const typedAvg = T?.averageScore;
-    await page.locator('[data-sitting-hub-section="chat-sim-typed"]').click();
+    await openHubSection(page, "chat-sim-typed", /Sitting · Typed|Type \(exam lane\)/i);
     await runTypedChat(page);
     await shot(page, "04-typed-chat-retry");
     await backToHub(page);
@@ -416,8 +454,7 @@ async function main() {
 
     // --- Spoken chat ---
     const spokenBefore = agg(cur.json, "chat-sim-spoken");
-    await page.locator('[data-sitting-hub-section="chat-sim-spoken"]').click();
-    await page.getByRole("heading", { name: /Sitting · Spoken chat-sim/i }).waitFor({ timeout: 30_000 });
+    await openHubSection(page, "chat-sim-spoken", /Sitting · Spoken chat-sim|Speak \(exam lane\)/i);
     await runSpokenChat(page);
     await shot(page, "05-spoken-chat-done");
     const spokenNote = await page.locator("[data-sitting-section-done]").innerText();
@@ -432,7 +469,7 @@ async function main() {
 
     const spokenN = S?.attemptCount ?? 0;
     const spokenAvg = S?.averageScore;
-    await page.locator('[data-sitting-hub-section="chat-sim-spoken"]').click();
+    await openHubSection(page, "chat-sim-spoken", /Sitting · Spoken chat-sim|Speak \(exam lane\)/i);
     await runSpokenChat(page);
     await shot(page, "06-spoken-chat-retry");
     await backToHub(page);
