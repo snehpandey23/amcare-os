@@ -528,9 +528,13 @@ export function plainLanguageRelevanceNote(
   turn: Pick<RelevanceTurnResult, "askType" | "score" | "reason" | "fit">,
   turnIndex: number,
 ): string | undefined {
-  if (turn.score >= 0.5) return undefined;
   const ask = ASK_TYPE_PLAIN[turn.askType] || "question";
   const turnLabel = `turn ${turnIndex + 1}`;
+  // Clarity note even when score stays mid/high after a bounded penalty
+  if (turn.reason.toLowerCase().includes("repeated the same explanation")) {
+    return `Reply ${turnLabel} repeated the same explanation multiple times — say it once clearly (a short time/date confirmation is fine; restating the whole answer 3+ times hurts clarity).`;
+  }
+  if (turn.score >= 0.5) return undefined;
   if (turn.fit === "unrelated" || turn.reason.toLowerCase().includes("unrelated to the ask")) {
     return `Reply ${turnLabel} was unrelated to the patient's ${ask} — off-topic content, not a weak/incomplete answer.`;
   }
@@ -565,8 +569,15 @@ export function plainLanguageRelevanceNote(
 /**
  * Score one MA reply against the preceding patient turn.
  * Returns 0–1. Exported for smokes / demos.
+ *
+ * @param opts.inputModality — typed (default) may apply bounded repetition penalty;
+ *   spoken never does (disfluency already handled for grammar).
  */
-export function scoreRelevanceTurn(patientText: string, maReply: string): RelevanceTurnResult {
+export function scoreRelevanceTurn(
+  patientText: string,
+  maReply: string,
+  opts?: { inputModality?: "typed" | "spoken" },
+): RelevanceTurnResult {
   const askType = classifyPatientAsk(patientText);
   const reply = (maReply || "").trim();
   const patientExcerpt = (patientText || "").trim().slice(0, 72);
@@ -586,17 +597,29 @@ export function scoreRelevanceTurn(patientText: string, maReply: string): Releva
   });
 
   if (!reply) {
-    return base(0, "Empty reply", "empty");
+    return applyTypedRepetitionPenalty(base(0, "Empty reply", "empty"), reply, opts?.inputModality);
   }
   const coherence = assessReplyCoherence(reply);
   if (!coherence.coherent) {
-    return base(0, coherence.reason, "incoherent");
+    return applyTypedRepetitionPenalty(
+      base(0, coherence.reason, "incoherent"),
+      reply,
+      opts?.inputModality,
+    );
   }
   if (CURT_MARKERS.test(reply)) {
-    return base(0, "Dismissive / curt — not engaged", "curt");
+    return applyTypedRepetitionPenalty(
+      base(0, "Dismissive / curt — not engaged", "curt"),
+      reply,
+      opts?.inputModality,
+    );
   }
   if (isGenericNonAnswer(reply)) {
-    return base(0, "Generic non-answer (e.g. “ok sure”) — does not address the ask", "non_answer");
+    return applyTypedRepetitionPenalty(
+      base(0, "Generic non-answer (e.g. “ok sure”) — does not address the ask", "non_answer"),
+      reply,
+      opts?.inputModality,
+    );
   }
 
   const substantive = wordCount(reply) >= 8;
@@ -606,36 +629,60 @@ export function scoreRelevanceTurn(patientText: string, maReply: string): Releva
 
   // “okay sure, …” that never answers the ask — treat as gaming / non-engagement
   if (fillerLead && !matched) {
-    return base(
-      substantive ? 0.2 : 0,
-      "Filler ack without answering the ask (e.g. “ok sure” + off-topic)",
-      "filler",
+    return applyTypedRepetitionPenalty(
+      base(
+        substantive ? 0.2 : 0,
+        "Filler ack without answering the ask (e.g. “ok sure” + off-topic)",
+        "filler",
+      ),
+      reply,
+      opts?.inputModality,
     );
   }
 
   // Greeting-only / thin ack with a trailing half-question still weak for a real ask
   if (!substantive && !matched) {
-    return base(0.15, "Too thin / off-shape for this ask type", "thin");
+    return applyTypedRepetitionPenalty(
+      base(0.15, "Too thin / off-shape for this ask type", "thin"),
+      reply,
+      opts?.inputModality,
+    );
   }
   if (matched && substantive) {
-    return base(1, `On-topic ${askType}-shaped answer`, "on_topic");
+    return applyTypedRepetitionPenalty(
+      base(1, `On-topic ${askType}-shaped answer`, "on_topic"),
+      reply,
+      opts?.inputModality,
+    );
   }
   if (matched && !substantive) {
-    return base(0.55, `Partially ${askType}-shaped but thin`, "partial");
+    return applyTypedRepetitionPenalty(
+      base(0.55, `Partially ${askType}-shaped but thin`, "partial"),
+      reply,
+      opts?.inputModality,
+    );
   }
 
   // Substantive but wrong shape — split clear digression from weak care-related replies
   if (isClearlyUnrelatedToAsk(patientText, reply, askType)) {
-    return base(
-      0.08,
-      `Unrelated to the ask (off-topic) — not a ${askType}-shaped answer`,
-      "unrelated",
+    return applyTypedRepetitionPenalty(
+      base(
+        0.08,
+        `Unrelated to the ask (off-topic) — not a ${askType}-shaped answer`,
+        "unrelated",
+      ),
+      reply,
+      opts?.inputModality,
     );
   }
-  return base(
-    0.35,
-    `On-topic but weak/incomplete for this ${askType} ask (not fully ${askType}-shaped)`,
-    "weak_on_topic",
+  return applyTypedRepetitionPenalty(
+    base(
+      0.35,
+      `On-topic but weak/incomplete for this ${askType} ask (not fully ${askType}-shaped)`,
+      "weak_on_topic",
+    ),
+    reply,
+    opts?.inputModality,
   );
 }
 
@@ -673,7 +720,11 @@ export function scoreRelevanceSession(messages: SimMessage[]): {
         });
         continue;
       }
-      turns.push(scoreRelevanceTurn(lastPatient, m.text || ""));
+      turns.push(
+        scoreRelevanceTurn(lastPatient, m.text || "", {
+          inputModality: m.inputModality,
+        }),
+      );
     } else {
       lastPatient = m.text || "";
     }
