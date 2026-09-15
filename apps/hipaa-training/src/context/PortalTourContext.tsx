@@ -18,6 +18,7 @@ import {
   type PortalProfile,
 } from "@/lib/portal-profile";
 import { persistPortalProfile } from "@/lib/portal-profile-api";
+import { takeStashedPostLoginNext } from "@/lib/login-next";
 import {
   PORTAL_TOUR_STEPS,
   checkTourStepVerified,
@@ -249,7 +250,7 @@ export function PortalTourProvider({ children }: { children: ReactNode }) {
     setProfile(nextProfile);
     saveTour(nextProfile, user?.id);
     clearTourSessionFlags();
-    router.push("/");
+    router.push(takeStashedPostLoginNext() ?? "/");
   }, [router, user?.id]);
 
   const value = useMemo(

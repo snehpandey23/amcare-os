@@ -21,8 +21,13 @@ import { shouldChainOnboardingToTour } from "@/lib/portal-product-tour";
 import { trainingLinkPrimaryClass } from "@/components/training/training-ui";
 import { BRAND } from "@/lib/brand";
 import { TalkVoicePicker } from "@/components/siya/TalkVoicePicker";
+import { takeStashedPostLoginNext } from "@/lib/login-next";
 
 const STEPS = 10;
+
+function afterOnboardingHome(): string {
+  return takeStashedPostLoginNext() ?? "/";
+}
 
 export function OnboardingWizard() {
   const router = useRouter();
@@ -91,7 +96,7 @@ export function OnboardingWizard() {
       return;
     }
     setPending(false);
-    router.replace("/");
+    router.replace(afterOnboardingHome());
   }
 
   /**
@@ -117,7 +122,7 @@ export function OnboardingWizard() {
     profile = appendGrowthEvent(profile, "Skipped first-run — opened My day");
     persistPortalProfile(profile, user?.id);
     setPending(false);
-    router.replace("/");
+    router.replace(afterOnboardingHome());
   }
 
   function SkipLink() {

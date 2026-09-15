@@ -7,18 +7,24 @@ import { useAuth } from "@/context/AuthContext";
 import { useBrandIntroBoot } from "@/context/BrandIntroBootContext";
 import { isPortalAuthEnabled } from "@/lib/trainingConfig";
 import { canUsePortalWithoutOnboarding, loadLocalPortalProfile } from "@/lib/portal-profile";
+import { safeInternalNextPath, stashPostLoginNext } from "@/lib/login-next";
 import { TrainingInput, trainingLinkPrimaryClass } from "@/components/training/training-ui";
 import { PasswordInput } from "@/components/ui/PasswordInput";
 import { SiyaWordmark } from "@/components/siya/SiyaWordmark";
 
-function portalLandingPath(): string {
-  return canUsePortalWithoutOnboarding(loadLocalPortalProfile()) ? "/" : "/onboarding";
+function portalLandingPath(nextRaw: string | null): string {
+  if (!canUsePortalWithoutOnboarding(loadLocalPortalProfile())) {
+    stashPostLoginNext(nextRaw);
+    return "/onboarding";
+  }
+  return safeInternalNextPath(nextRaw) ?? "/";
 }
 
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const resetOk = searchParams.get("reset") === "1";
+  const nextRaw = searchParams.get("next");
   const { login, register, allowRegister, user, authReady } = useAuth();
   const { splashDismissed, phase } = useBrandIntroBoot();
   const [email, setEmail] = useState("");
@@ -46,7 +52,7 @@ function LoginForm() {
   }
 
   if (authReady && user) {
-    router.replace(portalLandingPath());
+    router.replace(portalLandingPath(nextRaw));
     return null;
   }
 
@@ -64,7 +70,7 @@ function LoginForm() {
       } else {
         await login(email, password);
       }
-      router.replace(portalLandingPath());
+      router.replace(portalLandingPath(nextRaw));
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {

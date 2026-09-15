@@ -1,12 +1,13 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { AssistThreadProvider } from "@/context/AssistThreadContext";
 import { isTrainingAuthRequired, isPortalAuthEnabled } from "@/lib/trainingConfig";
+import { loginHrefForCurrentPage } from "@/lib/login-next";
 import { isPortalAdmin } from "@/lib/portal-role";
 import { ShiftPresenceBar } from "@/components/shift/ShiftPresenceBar";
 import { ShiftRitualStrip } from "@/components/shift/ShiftRitualStrip";
@@ -22,7 +23,12 @@ export function AssistantShell({ children }: { children: ReactNode }) {
   const { user, logout } = useAuth();
   const shift = useShiftOptional();
   const [mobileNav, setMobileNav] = useState(false);
+  const [signInHref, setSignInHref] = useState("/login");
   const chatHome = path === "/" || path.startsWith("/help");
+
+  useEffect(() => {
+    setSignInHref(loginHrefForCurrentPage());
+  }, [path]);
 
   return (
     <AssistThreadProvider>
@@ -67,7 +73,7 @@ export function AssistantShell({ children }: { children: ReactNode }) {
               </>
             ) : isPortalAuthEnabled() || isTrainingAuthRequired() ? (
               <Link
-                href="/login"
+                href={signInHref}
                 className="rounded-md bg-[var(--siya-btn-primary)] px-3 py-1.5 font-medium text-white hover:bg-[var(--siya-btn-primary-hover)]"
               >
                 Sign in

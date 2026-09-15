@@ -15,6 +15,11 @@ import { isPortalLoginRequired } from "@/lib/trainingConfig";
 import { getModulesForRole } from "@/content/modules";
 import { canUsePortalWithoutOnboarding, loadLocalPortalProfile } from "@/lib/portal-profile";
 import { isPortalAdmin } from "@/lib/portal-role";
+import {
+  loginHrefForCurrentPage,
+  safeInternalNextPath,
+  stashPostLoginNext,
+} from "@/lib/login-next";
 
 /** Unauthenticated auth pages — no portal chrome / login redirect. */
 function isPublicAuthPath(path: string) {
@@ -23,6 +28,21 @@ function isPublicAuthPath(path: string) {
     path === "/forgot-password" ||
     path.startsWith("/reset-password")
   );
+}
+
+function postAuthDestination(): string {
+  if (!canUsePortalWithoutOnboarding(loadLocalPortalProfile())) {
+    if (typeof window !== "undefined") {
+      const fromQuery = safeInternalNextPath(new URLSearchParams(window.location.search).get("next"));
+      stashPostLoginNext(fromQuery);
+    }
+    return "/onboarding";
+  }
+  if (typeof window !== "undefined") {
+    const fromQuery = safeInternalNextPath(new URLSearchParams(window.location.search).get("next"));
+    if (fromQuery) return fromQuery;
+  }
+  return "/";
 }
 
 function isAssistantRoute(path: string) {
@@ -71,19 +91,19 @@ function ClientShellRoutes({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!authReady || (!authRequired && !portalGate)) return;
     if (user && publicAuth) {
-      router.replace(canUsePortalWithoutOnboarding(loadLocalPortalProfile()) ? "/" : "/onboarding");
+      router.replace(postAuthDestination());
     }
   }, [authReady, authRequired, portalGate, user, pathname, router, publicAuth]);
 
   useEffect(() => {
     if (!authReady) return;
     if (portalGate) {
-      if (!user && !publicAuth) router.replace("/login");
+      if (!user && !publicAuth) router.replace(loginHrefForCurrentPage());
       return;
     }
     if (!authRequired) return;
     if (!trainingRoute && !publicAuth) return;
-    if (!user && !publicAuth) router.replace("/login");
+    if (!user && !publicAuth) router.replace(loginHrefForCurrentPage());
   }, [authReady, authRequired, portalGate, user, pathname, router, trainingRoute, publicAuth]);
 
   useEffect(() => {

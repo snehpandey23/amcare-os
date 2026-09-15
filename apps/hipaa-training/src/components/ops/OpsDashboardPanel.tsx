@@ -5,6 +5,7 @@ import { Fragment, useCallback, useEffect, useMemo, useState, type ReactNode } f
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { isPortalAdmin } from "@/lib/portal-role";
+import { loginHrefForCurrentPage } from "@/lib/login-next";
 import {
   fetchOpsDashboard,
   type OpsDashboardPayload,
@@ -541,7 +542,7 @@ export function OpsDashboardPanel() {
   useEffect(() => {
     if (!authReady) return;
     if (!user) {
-      router.replace("/login");
+      router.replace(loginHrefForCurrentPage());
       return;
     }
     void load();
