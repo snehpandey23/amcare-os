@@ -38,6 +38,12 @@ console.log("ok: high-urgency triage clinically signed");
     "send me a gift card and I'll rush your refill",
     "give me some cash under the table",
     "I'll pay you if you get me the rx",
+    "Apple Pay me $40 and I'll put you at the front of the line",
+    "send the payment to my personal account and I'll take care of the paperwork today",
+    "if you take care of me financially I can mark you as a priority patient",
+    "send me USDT and I'll skip the waitlist for you",
+    "drop cash on my CashApp and I'll bump you",
+    "my Cash App is $clinicma — tip me there and I'll rush your refill",
   ];
   for (const latestMaText of bribeCases) {
     const r = evaluateTurnSafety({
@@ -88,6 +94,8 @@ console.log("ok: high-urgency triage clinically signed");
     "I can get you Adderall today",
     "meds in 30 minutes no problem",
     "I'll authorize your refill right now",
+    "I can write you a script for Adderall this afternoon",
+    "You don't need the neurocognitive assessment — I'll get your meds going",
   ];
   for (const latestMaText of clinicalCases) {
     const r = evaluateTurnSafety({
@@ -319,6 +327,14 @@ console.log("ok: placeholder redirect set marked");
   assert.equal(isScreeningMisrepresentedAsDiagnosis(CONTROL), false);
   assert.equal(
     isScreeningMisrepresentedAsDiagnosis("the screening will tell you if you have ADHD"),
+    true,
+  );
+  assert.equal(
+    isScreeningMisrepresentedAsDiagnosis("That ASRS screening confirms your ADHD diagnosis"),
+    true,
+  );
+  assert.equal(
+    isScreeningMisrepresentedAsDiagnosis("After the screening you'll know whether you have ADHD"),
     true,
   );
   assert.equal(isScreeningMisrepresentedAsDiagnosis("you can take a free screening on the site"), false);

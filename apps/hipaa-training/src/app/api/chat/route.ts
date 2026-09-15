@@ -27,19 +27,31 @@ async function resolveGapQuietly(token: string, id: string): Promise<boolean> {
   }
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   const health = getWorkforceLlmHealth();
+  const authed = !!parseBearerToken(req);
+  // Public: product identity only. LLM/provider readiness is auth-gated (red-team 2026-09).
   return Response.json({
     name: BRAND.appName,
     openingMessage: SIYA_OPENING,
     product: "internal-helpdesk",
     canonicalUrl: SIYA_ASSISTANT_CANONICAL_URL,
-    llmEnabled: health.enabled,
-    llmConfigured: health.configured,
-    llmStatus: health.status,
-    llmError: health.lastError
-      ? { code: health.lastError.code, kind: health.lastError.kind, message: health.lastError.userMessage }
-      : null,
+    ...(authed
+      ? {
+          llmEnabled: health.enabled,
+          llmConfigured: health.configured,
+          llmStatus: health.status,
+          llmError: health.lastError
+            ? {
+                code: health.lastError.code,
+                kind: health.lastError.kind,
+                message: health.lastError.userMessage,
+              }
+            : null,
+        }
+      : {
+          llmStatus: "auth_required" as const,
+        }),
   });
 }
 
