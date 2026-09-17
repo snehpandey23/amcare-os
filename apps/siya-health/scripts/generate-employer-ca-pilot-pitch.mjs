@@ -37,8 +37,9 @@ const CTA_HREF = '/employers#employer-inquiry-form';
 const CTA_LABEL = "Let's talk";
 
 /**
- * Standing post-pilot price currently on this page / original founder brief: $100.
- * FLAG: confirm with founders whether standing rate is $75 or $100 before treating as final.
+ * Standing post–Month 1 price — LOCKED 2026-09-17 at $100/employee/month.
+ * Founder-confirmed from staffing-cost margin model. Do not change without a new cost model.
+ * ($75 drafts are obsolete; do not reopen that debate.)
  */
 const POST_PILOT_PRICE = 100;
 
@@ -96,34 +97,84 @@ function careFlowSvg() {
                 </linearGradient>
               </defs>
             </svg>
-            <figcaption class="employer-pitch-flow-caption">What care looks like after someone enrolls — a simple path, not a maze of portals.</figcaption>
+            <figcaption class="employer-pitch-flow-caption">Intake and scheduled visits set the plan; day-to-day check-ins usually happen in Spruce (message, photo, or video) — not only through new appointment slots.</figcaption>
           </figure>`;
 }
 
-/** Illustrative scheduling UI — not a live CarePatron screenshot. */
-function schedulingMockSvg() {
-  return `<svg class="employer-pitch-tool-svg" viewBox="0 0 420 260" role="img" aria-label="Illustrative scheduling interface mockup">
-              <title>Illustrative scheduling UI</title>
+/**
+ * Illustrative Spruce-class care coordination UI — fully staged fake demo.
+ * Never use a real account screenshot (even cropped). PHI-safe: fake name, fake copy,
+ * generic diagram (not a real patient photo).
+ */
+function spruceMockSvg() {
+  return `<svg class="employer-pitch-tool-svg" viewBox="0 0 420 300" role="img" aria-label="Illustrative care coordination mockup with messaging, photo share, and video call">
+              <title>Illustrative Spruce-class care coordination UI</title>
+              <rect width="420" height="300" rx="12" fill="#F4EFE7" stroke="#ebe5d6" />
+              <rect x="0" y="0" width="420" height="40" rx="12" fill="#001878" />
+              <rect x="0" y="28" width="420" height="12" fill="#001878" />
+              <text x="16" y="26" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600">Care team chat (demo)</text>
+              <!-- thread -->
+              <rect x="12" y="52" width="250" height="210" rx="8" fill="#ffffff" stroke="#ebe5d6" />
+              <text x="24" y="74" fill="#001878" font-family="Poppins, Arial, sans-serif" font-size="11" font-weight="700">Jordan Lee (demo patient)</text>
+              <text x="24" y="90" fill="#57534e" font-family="Inter, Arial, sans-serif" font-size="9">Fake name · staged thread · not a real account</text>
+              <rect x="24" y="104" width="200" height="36" rx="8" fill="#F4EFE7" />
+              <text x="34" y="120" fill="#001878" font-family="Inter, Arial, sans-serif" font-size="10">Hi — can I share a photo of a</text>
+              <text x="34" y="134" fill="#001878" font-family="Inter, Arial, sans-serif" font-size="10">rash on my arm?</text>
+              <rect x="48" y="150" width="190" height="52" rx="8" fill="#F4EFE7" stroke="#C4A574" />
+              <!-- generic medical reference diagram (not a photo) -->
+              <ellipse cx="78" cy="176" rx="18" ry="14" fill="none" stroke="#001878" stroke-width="1.5" />
+              <circle cx="78" cy="176" r="6" fill="#C4A574" opacity="0.55" />
+              <text x="104" y="172" fill="#001878" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="600">Demo reference image</text>
+              <text x="104" y="186" fill="#57534e" font-family="Inter, Arial, sans-serif" font-size="8">(diagram only · not a photo)</text>
+              <rect x="24" y="212" width="210" height="28" rx="8" fill="url(#spruceGrad)" opacity="0.92" />
+              <text x="34" y="230" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="600">Provider: Thanks — we&apos;ll review today.</text>
+              <rect x="24" y="248" width="150" height="22" rx="6" fill="#ffffff" stroke="#C4A574" />
+              <text x="34" y="263" fill="#001878" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="600">+ Attach photo / video</text>
+              <!-- video panel -->
+              <rect x="274" y="52" width="134" height="210" rx="8" fill="#001878" />
+              <text x="286" y="74" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="600">Video visit</text>
+              <circle cx="341" cy="130" r="28" fill="#0A246B" />
+              <circle cx="341" cy="122" r="10" fill="#C4A574" opacity="0.7" />
+              <ellipse cx="341" cy="148" rx="16" ry="10" fill="#C4A574" opacity="0.45" />
+              <text x="300" y="188" fill="#F4EFE7" font-family="Inter, Arial, sans-serif" font-size="9">Demo · not live</text>
+              <rect x="292" y="204" width="98" height="24" rx="12" fill="url(#spruceGrad)" />
+              <text x="308" y="220" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="600">Join call</text>
+              <text x="16" y="288" fill="#57534e" font-family="Inter, Arial, sans-serif" font-size="10">Illustrative mockup — no real patient data</text>
+              <defs>
+                <linearGradient id="spruceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#D81088" />
+                  <stop offset="100%" stop-color="#642EAE" />
+                </linearGradient>
+              </defs>
+            </svg>`;
+}
+
+/** Illustrative CarePatron-class backend UI — scheduling / notes / billing chrome only. */
+function carePatronMockSvg() {
+  return `<svg class="employer-pitch-tool-svg" viewBox="0 0 420 260" role="img" aria-label="Illustrative scheduling and documentation backend mockup">
+              <title>Illustrative CarePatron-class scheduling and documentation UI</title>
               <rect width="420" height="260" rx="12" fill="#F4EFE7" stroke="#ebe5d6" />
               <rect x="0" y="0" width="420" height="40" rx="12" fill="#001878" />
               <rect x="0" y="28" width="420" height="12" fill="#001878" />
-              <text x="16" y="26" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600">Scheduling</text>
-              <rect x="16" y="56" width="120" height="188" rx="8" fill="#ffffff" stroke="#ebe5d6" />
+              <text x="16" y="26" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600">Scheduling &amp; charting (provider)</text>
+              <rect x="16" y="56" width="120" height="168" rx="8" fill="#ffffff" stroke="#ebe5d6" />
               <rect x="28" y="72" width="96" height="10" rx="3" fill="#C4A574" opacity="0.55" />
               <rect x="28" y="96" width="88" height="8" rx="3" fill="#ebe5d6" />
               <rect x="28" y="116" width="88" height="8" rx="3" fill="#ebe5d6" />
               <rect x="28" y="136" width="88" height="8" rx="3" fill="#ebe5d6" />
-              <rect x="152" y="56" width="252" height="188" rx="8" fill="#ffffff" stroke="#ebe5d6" />
+              <text x="28" y="168" fill="#57534e" font-family="Inter, Arial, sans-serif" font-size="9">Book · notes · billing</text>
+              <rect x="152" y="56" width="252" height="168" rx="8" fill="#ffffff" stroke="#ebe5d6" />
               <text x="168" y="80" fill="#001878" font-family="Poppins, Arial, sans-serif" font-size="12" font-weight="700">Week view</text>
               <rect x="168" y="96" width="64" height="36" rx="6" fill="#F4EFE7" stroke="#C4A574" />
               <rect x="244" y="96" width="64" height="36" rx="6" fill="#F4EFE7" stroke="#ebe5d6" />
               <rect x="320" y="96" width="64" height="36" rx="6" fill="#F4EFE7" stroke="#ebe5d6" />
-              <rect x="168" y="144" width="216" height="28" rx="6" fill="url(#schedGrad)" opacity="0.85" />
-              <text x="180" y="163" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600">Available slot</text>
-              <rect x="168" y="184" width="140" height="28" rx="6" fill="#F4EFE7" stroke="#ebe5d6" />
-              <text x="16" y="252" fill="#57534e" font-family="Inter, Arial, sans-serif" font-size="10">Illustrative mockup — UI chrome only · no patient data</text>
+              <rect x="168" y="144" width="216" height="28" rx="6" fill="url(#carePatronGrad)" opacity="0.85" />
+              <text x="180" y="163" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="600">Scheduled visit slot</text>
+              <rect x="168" y="184" width="160" height="22" rx="6" fill="#F4EFE7" stroke="#ebe5d6" />
+              <text x="178" y="199" fill="#57534e" font-family="Inter, Arial, sans-serif" font-size="9">AI scribe / note tools (demo)</text>
+              <text x="16" y="248" fill="#57534e" font-family="Inter, Arial, sans-serif" font-size="10">Illustrative mockup — no real patient data</text>
               <defs>
-                <linearGradient id="schedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient id="carePatronGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#D81088" />
                   <stop offset="100%" stop-color="#642EAE" />
                 </linearGradient>
@@ -150,7 +201,7 @@ function creyosMockSvg() {
               <rect x="232" y="136" width="156" height="10" rx="3" fill="#ebe5d6" />
               <rect x="232" y="156" width="120" height="10" rx="3" fill="#ebe5d6" />
               <rect x="232" y="176" width="140" height="10" rx="3" fill="#C4A574" opacity="0.45" />
-              <text x="16" y="252" fill="#57534e" font-family="Inter, Arial, sans-serif" font-size="10">Illustrative mockup — UI chrome only · no patient data</text>
+              <text x="16" y="252" fill="#57534e" font-family="Inter, Arial, sans-serif" font-size="10">Illustrative mockup — no real patient data</text>
             </svg>`;
 }
 
@@ -301,7 +352,7 @@ const html = `<!DOCTYPE html>
         <div class="container">
           <header class="employer-pitch-section-header">
             <h2 id="care-flow-heading">What to expect.</h2>
-            <p class="employer-pitch-section-lead">We start by getting to know you — a real intake and a baseline check of how you&rsquo;re doing cognitively. Then you meet your provider, build a plan together, and we stay with you as things progress.</p>
+            <p class="employer-pitch-section-lead">We start with intake and a cognitive baseline, then a formally scheduled visit to meet your provider and build a plan. After that, most day-to-day contact happens in <strong>Spruce</strong> — secure messaging, a quick photo or video of a concern, or a video call when you need face-to-face — so you can share what&rsquo;s going on and hear back the same day. A licensed provider still reviews and responds; this is fast communication, not automated diagnosis. <strong>CarePatron</strong> stays the backend for booking, notes, and billing on those scheduled visits.</p>
           </header>
 ${careFlowSvg()}
         </div>
@@ -316,7 +367,7 @@ ${careFlowSvg()}
           <ol class="employer-pitch-access">
             <li>Employer-branded login</li>
             <li>Verified against employer roster</li>
-            <li>Book directly with your dedicated provider team</li>
+            <li>Book scheduled visits with your dedicated provider team; message the team in Spruce between visits</li>
             <li>Zero cost to the employee</li>
           </ol>
         </div>
@@ -325,22 +376,29 @@ ${careFlowSvg()}
       <section class="employer-pitch-section employer-pitch-section--tint" id="tools" aria-labelledby="tools-heading">
         <div class="container">
           <header class="employer-pitch-section-header">
-            <h2 id="tools-heading">How we deliver care</h2>
-            <p class="employer-pitch-section-lead">Behind the scenes, your care team uses real clinical tools for scheduling and cognitive testing. The panels below are <strong>illustrative UI mockups</strong> — not live account screenshots — so no patient information is shown.</p>
+            <h2 id="tools-heading">How you actually reach your care team</h2>
+            <p class="employer-pitch-section-lead"><strong>Spruce</strong> is the day-to-day care coordination channel patients use — secure messaging, photo/video of a concern, and video visits when needed. <strong>CarePatron</strong> is the scheduling, billing, and clinical documentation backend (including AI scribe tools for providers). <strong>Creyos</strong> supports objective cognitive testing. Panels below are <strong>fully staged illustrative mockups</strong> — fake names and copy only — not live account screenshots.</p>
           </header>
-          <div class="employer-pitch-tools">
-            <figure class="employer-pitch-tool-card">
-              ${schedulingMockSvg()}
+          <div class="employer-pitch-tools employer-pitch-tools--three">
+            <figure class="employer-pitch-tool-card employer-pitch-tool-card--primary">
+              ${spruceMockSvg()}
               <figcaption>
-                <strong>Scheduling</strong>
-                <span>Illustrative mockup of scheduling UI chrome (CarePatron-class workflow). Demo/PHI-free live screenshots not yet verified for this page.</span>
+                <strong>Spruce — primary patient experience</strong>
+                <span>Share what&rsquo;s going on (message, attach a photo of a rash or concern, or join video) and hear back the same day from a licensed provider. Illustrative mockup — no real patient data.</span>
+              </figcaption>
+            </figure>
+            <figure class="employer-pitch-tool-card">
+              ${carePatronMockSvg()}
+              <figcaption>
+                <strong>CarePatron — scheduling &amp; documentation backend</strong>
+                <span>Booking, notes, billing, and provider workflow — not the primary day-to-day patient chat surface. Illustrative mockup — no real patient data.</span>
               </figcaption>
             </figure>
             <figure class="employer-pitch-tool-card">
               ${creyosMockSvg()}
               <figcaption>
-                <strong>Cognitive testing</strong>
-                <span>Illustrative mockup of cognitive testing UI chrome (Creyos-class workflow). Demo/PHI-free live screenshots not yet verified for this page.</span>
+                <strong>Creyos — cognitive testing</strong>
+                <span>Objective attention, memory, and executive-function batteries at baseline and follow-up. Illustrative mockup — no real patient data.</span>
               </figcaption>
             </figure>
           </div>
@@ -402,20 +460,20 @@ ${careFlowSvg()}
           </header>
           <ol class="employer-pitch-journey">
             <li>
-              <strong>First login</strong>
-              <p>Someone on your team signs in through the employer-branded login, gets verified against your roster, and books with your dedicated providers — at zero cost to them.</p>
+              <strong>First login &amp; scheduled onboarding</strong>
+              <p>Someone on your team signs in through the employer-branded login, gets verified against your roster, and books an initial visit in CarePatron with your dedicated providers — at zero cost to them.</p>
             </li>
             <li>
               <strong>Intake &amp; cognitive baseline</strong>
-              <p>They complete a real intake and objective cognitive testing, so the first visit starts with a clear baseline — not guesswork from a rushed chat.</p>
+              <p>They complete a real intake and objective cognitive testing (Creyos), so the first visit starts with a clear baseline — not guesswork from a rushed chat.</p>
             </li>
             <li>
               <strong>Provider evaluation &amp; plan</strong>
-              <p>They meet the care team (usually Wendy for scheduled visits, with Dr. Pandey supervising and available when things get complex). Together they build a plan that can include primary care, ADHD/mental health support, metabolic or hormonal work, and a sensible follow-up rhythm.</p>
+              <p>They meet the care team in a formally scheduled visit (usually Wendy, with Dr. Pandey supervising and available when things get complex). Together they build a plan that can include primary care, ADHD/mental health support, metabolic or hormonal work, and a sensible follow-up rhythm.</p>
             </li>
             <li>
-              <strong>Ongoing management</strong>
-              <p>Check-ins keep going, and the care team helps with pharmacy coordination, prior authorization, and lab routing — so the plan doesn&rsquo;t stall between visits.</p>
+              <strong>Ongoing management via Spruce</strong>
+              <p>Most day-to-day contact happens in Spruce — messaging, a quick photo-based check-in, or video when needed — so people can share what&rsquo;s going on and hear back the same day from a licensed provider (not an automated diagnosis). CarePatron remains for later scheduled visits, notes, and billing. Concierge still helps with pharmacy, prior auth, and labs so the plan doesn&rsquo;t stall.</p>
             </li>
           </ol>
         </div>

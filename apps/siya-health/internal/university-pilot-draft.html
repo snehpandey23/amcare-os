@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="googlebot" content="noindex, nofollow, noarchive" />
+    <title>DRAFT — University Pilot Concept (Internal Review) | Siya Health</title>
+    <meta
+      name="description"
+      content="Internal draft for review only. University/college health-partnership concept — not for external distribution."
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Internal memo draft — scoped; do not reuse for public pitch pages */
+      .page-internal-draft {
+        --draft-cream: #f4efe7;
+        --draft-navy: #001878;
+        --draft-champagne: #c4a574;
+        --draft-ink: #1a1a1a;
+        --draft-muted: #3d3d3d;
+        --draft-warn-bg: #fff8e8;
+        --draft-warn-border: #c4a574;
+        background: var(--draft-cream);
+        color: var(--draft-ink);
+        font-family: Inter, system-ui, sans-serif;
+        line-height: 1.55;
+        margin: 0;
+      }
+      .page-internal-draft .internal-draft-banner {
+        background: var(--draft-warn-bg);
+        border-bottom: 3px solid var(--draft-navy);
+        padding: 0.85rem 1.25rem;
+      }
+      .page-internal-draft .internal-draft-banner-inner {
+        max-width: 42rem;
+        margin: 0 auto;
+        border: 2px solid var(--draft-warn-border);
+        border-left: 6px solid var(--draft-navy);
+        padding: 0.75rem 1rem;
+        background: #fff;
+      }
+      .page-internal-draft .internal-draft-banner strong {
+        display: block;
+        font-family: Poppins, Inter, sans-serif;
+        font-size: 0.95rem;
+        letter-spacing: 0.02em;
+        color: var(--draft-navy);
+        text-transform: uppercase;
+      }
+      .page-internal-draft .internal-draft-banner p {
+        margin: 0.35rem 0 0;
+        font-size: 0.9rem;
+        color: var(--draft-muted);
+      }
+      .page-internal-draft .internal-draft-shell {
+        max-width: 42rem;
+        margin: 0 auto;
+        padding: 1.5rem 1.25rem 3rem;
+      }
+      .page-internal-draft .internal-draft-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 1.25rem;
+        font-family: Poppins, Inter, sans-serif;
+        font-weight: 700;
+        color: var(--draft-navy);
+        font-size: 0.95rem;
+      }
+      .page-internal-draft .internal-draft-brand img {
+        width: 36px;
+        height: 36px;
+      }
+      .page-internal-draft .internal-draft-meta {
+        font-size: 0.85rem;
+        color: var(--draft-muted);
+        margin: 0 0 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--draft-champagne);
+      }
+      .page-internal-draft h1 {
+        font-family: Poppins, Inter, sans-serif;
+        font-size: 1.65rem;
+        line-height: 1.25;
+        color: var(--draft-navy);
+        margin: 0 0 0.5rem;
+        font-weight: 700;
+      }
+      .page-internal-draft h2 {
+        font-family: Poppins, Inter, sans-serif;
+        font-size: 1.15rem;
+        color: var(--draft-navy);
+        margin: 2rem 0 0.75rem;
+        font-weight: 700;
+        padding-top: 0.25rem;
+        border-top: 1px solid rgba(196, 165, 116, 0.45);
+      }
+      .page-internal-draft h2:first-of-type {
+        border-top: none;
+        padding-top: 0;
+      }
+      .page-internal-draft p,
+      .page-internal-draft li {
+        font-size: 0.98rem;
+        color: var(--draft-ink);
+      }
+      .page-internal-draft ul {
+        margin: 0.5rem 0 1rem;
+        padding-left: 1.25rem;
+      }
+      .page-internal-draft li + li {
+        margin-top: 0.45rem;
+      }
+      .page-internal-draft .internal-draft-open {
+        background: #fff;
+        border: 1px solid var(--draft-champagne);
+        border-left: 4px solid #d81088;
+        padding: 0.85rem 1rem;
+        margin: 0.75rem 0;
+      }
+      .page-internal-draft .internal-draft-open strong {
+        display: block;
+        color: var(--draft-navy);
+        font-size: 0.9rem;
+        margin-bottom: 0.35rem;
+      }
+      .page-internal-draft .internal-draft-open p {
+        margin: 0;
+        font-size: 0.92rem;
+        color: var(--draft-muted);
+      }
+      .page-internal-draft .internal-draft-ask {
+        margin-top: 2rem;
+        padding: 1.1rem 1.15rem;
+        background: #fff;
+        border: 2px solid var(--draft-navy);
+      }
+      .page-internal-draft .internal-draft-ask h2 {
+        margin-top: 0;
+        border-top: none;
+        padding-top: 0;
+      }
+      .page-internal-draft .internal-draft-ask p {
+        margin: 0.5rem 0 0;
+      }
+      .page-internal-draft a {
+        color: var(--draft-navy);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+      }
+      .page-internal-draft .internal-draft-tools {
+        display: grid;
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+      .page-internal-draft .internal-draft-tool-card {
+        margin: 0;
+        background: #fff;
+        border: 1px solid var(--draft-champagne);
+        padding: 0.75rem;
+      }
+      .page-internal-draft .internal-draft-tool-card svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .page-internal-draft .internal-draft-tool-card figcaption {
+        margin-top: 0.65rem;
+        font-size: 0.88rem;
+        color: var(--draft-muted);
+      }
+      .page-internal-draft .internal-draft-tool-card figcaption strong {
+        display: block;
+        color: var(--draft-navy);
+        margin-bottom: 0.25rem;
+      }
+      .page-internal-draft .internal-draft-footer-note {
+        margin-top: 2.5rem;
+        font-size: 0.8rem;
+        color: var(--draft-muted);
+      }
+    </style>
+  </head>
+  <body class="page-internal-draft">
+    <div class="internal-draft-banner" role="status">
+      <div class="internal-draft-banner-inner">
+        <strong>Draft — Internal Review, Not for External Use</strong>
+        <p>
+          Discussion memo for Rebecca&rsquo;s feedback only. Not a finished pitch, not approved for
+          universities or other external distribution.
+        </p>
+      </div>
+    </div>
+
+    <div class="internal-draft-shell">
+      <div class="internal-draft-brand">
+        <img
+          src="/assets/images/siya-health-mark.png"
+          alt=""
+          width="36"
+          height="36"
+          decoding="async"
+          aria-hidden="true"
+        />
+        <span>Siya Health · Internal</span>
+      </div>
+
+      <header>
+        <h1>University / college health partnership — concept draft</h1>
+        <p class="internal-draft-meta">
+          Audience: Rebecca (internal review) · Status: early concept · Pricing &amp; utilization
+          assumptions are directional, not locked · Related model:
+          <a href="/employers/california-pilot">California employer pilot</a> (reference only)
+        </p>
+      </header>
+
+      <main>
+        <section aria-labelledby="concept-heading">
+          <h2 id="concept-heading">The concept</h2>
+          <p>
+            A campus health partnership that would offer Siya Health&rsquo;s cognitive / psychiatric
+            monitoring and care access to college students. Framing under discussion: a safety net
+            and early-detection option for a population that is often outside parents&rsquo;
+            insurance coverage and underserved by campus mental health capacity.
+          </p>
+          <p>
+            This is an idea we want challenge on — not a claim that demand or unit economics are
+            proven.
+          </p>
+        </section>
+
+        <section aria-labelledby="structure-heading">
+          <h2 id="structure-heading">Proposed structure (draft, not finalized)</h2>
+          <ul>
+            <li>
+              <strong>Base plan:</strong> roughly $19–20 per student per month, paid by the
+              university (not by individual students) for enrolled participants.
+            </li>
+            <li>
+              <strong>Includes:</strong> regular Creyos-based cognitive / psychiatric monitoring
+              (attention, memory, executive function, mood screening); provider-approved wellness
+              guidance; one annual comprehensive physical / consultation.
+            </li>
+            <li>
+              <strong>À la carte (billed separately from the base plan):</strong> routine visits
+              (~$25–30 — e.g. acne, minor illness); ongoing condition-management pathways
+              (~$100/month — e.g. ADHD diagnosis and treatment).
+            </li>
+            <li>
+              <strong>Staffing at meaningful scale:</strong> e.g. ~10,000 enrolled students —
+              base-plan revenue would be intended to support a dedicated, fixed-salary provider
+              (same economic shape as the
+              <a href="/employers/california-pilot">California employer pilot</a>), rather than
+              classic per-visit reimbursement economics.
+            </li>
+            <li>
+              <strong>Self-monitoring + Spruce between formal visits (key differentiator):</strong>
+              students track their own data and reach the care team in <strong>Spruce</strong> —
+              secure messaging, a quick photo of a concern, or video when needed — without waiting
+              for an appointment slot to ask a quick question. Siya would not proactively interpret
+              every data point; a licensed provider responds when a student reaches out. Share
+              what&rsquo;s going on and hear back the same day; this is fast communication, not
+              automated diagnosis. <strong>CarePatron</strong> stays the scheduling / billing /
+              documentation backend for the annual physical and any formally booked visits.
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="reach-heading">
+          <h2 id="reach-heading">How students would actually reach the care team</h2>
+          <p>
+            For a lower-acuity, high-volume campus population, most enrolled students are expected
+            to be light utilizers. The operational bet is that day-to-day contact lives in Spruce
+            (async by default), while CarePatron is used for intake booking, the annual
+            comprehensive visit, and any à-la-carte scheduled consultations — not as the primary
+            patient chat surface.
+          </p>
+          <div class="internal-draft-tools">
+            <figure class="internal-draft-tool-card">
+              <svg viewBox="0 0 420 300" role="img" aria-label="Illustrative care coordination mockup with messaging, photo share, and video call">
+                <title>Illustrative Spruce-class care coordination UI</title>
+                <rect width="420" height="300" rx="12" fill="#F4EFE7" stroke="#ebe5d6" />
+                <rect x="0" y="0" width="420" height="40" rx="12" fill="#001878" />
+                <rect x="0" y="28" width="420" height="12" fill="#001878" />
+                <text x="16" y="26" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600">Care team chat (demo)</text>
+                <rect x="12" y="52" width="250" height="210" rx="8" fill="#ffffff" stroke="#ebe5d6" />
+                <text x="24" y="74" fill="#001878" font-family="Poppins, Arial, sans-serif" font-size="11" font-weight="700">Jordan Lee (demo patient)</text>
+                <text x="24" y="90" fill="#57534e" font-family="Inter, Arial, sans-serif" font-size="9">Fake name · staged thread · not a real account</text>
+                <rect x="24" y="104" width="200" height="36" rx="8" fill="#F4EFE7" />
+                <text x="34" y="120" fill="#001878" font-family="Inter, Arial, sans-serif" font-size="10">Hi — can I share a photo of a</text>
+                <text x="34" y="134" fill="#001878" font-family="Inter, Arial, sans-serif" font-size="10">rash on my arm?</text>
+                <rect x="48" y="150" width="190" height="52" rx="8" fill="#F4EFE7" stroke="#C4A574" />
+                <ellipse cx="78" cy="176" rx="18" ry="14" fill="none" stroke="#001878" stroke-width="1.5" />
+                <circle cx="78" cy="176" r="6" fill="#C4A574" opacity="0.55" />
+                <text x="104" y="172" fill="#001878" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="600">Demo reference image</text>
+                <text x="104" y="186" fill="#57534e" font-family="Inter, Arial, sans-serif" font-size="8">(diagram only · not a photo)</text>
+                <rect x="24" y="212" width="210" height="28" rx="8" fill="url(#uniSpruceGrad)" opacity="0.92" />
+                <text x="34" y="230" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="600">Provider: Thanks — we'll review today.</text>
+                <rect x="24" y="248" width="150" height="22" rx="6" fill="#ffffff" stroke="#C4A574" />
+                <text x="34" y="263" fill="#001878" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="600">+ Attach photo / video</text>
+                <rect x="274" y="52" width="134" height="210" rx="8" fill="#001878" />
+                <text x="286" y="74" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="600">Video visit</text>
+                <circle cx="341" cy="130" r="28" fill="#0A246B" />
+                <circle cx="341" cy="122" r="10" fill="#C4A574" opacity="0.7" />
+                <ellipse cx="341" cy="148" rx="16" ry="10" fill="#C4A574" opacity="0.45" />
+                <text x="300" y="188" fill="#F4EFE7" font-family="Inter, Arial, sans-serif" font-size="9">Demo · not live</text>
+                <rect x="292" y="204" width="98" height="24" rx="12" fill="url(#uniSpruceGrad)" />
+                <text x="308" y="220" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="600">Join call</text>
+                <text x="16" y="288" fill="#57534e" font-family="Inter, Arial, sans-serif" font-size="10">Illustrative mockup — no real patient data</text>
+                <defs>
+                  <linearGradient id="uniSpruceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#D81088" />
+                    <stop offset="100%" stop-color="#642EAE" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <figcaption>
+                <strong>Spruce — primary student experience</strong>
+                Day-to-day care coordination: message, attach a photo of a concern, or video —
+                without needing a scheduled slot for every question. Illustrative mockup — no real
+                patient data.
+              </figcaption>
+            </figure>
+            <figure class="internal-draft-tool-card">
+              <svg viewBox="0 0 420 200" role="img" aria-label="Illustrative scheduling and documentation backend mockup">
+                <title>Illustrative CarePatron-class backend UI</title>
+                <rect width="420" height="200" rx="12" fill="#F4EFE7" stroke="#ebe5d6" />
+                <rect x="0" y="0" width="420" height="36" rx="12" fill="#001878" />
+                <rect x="0" y="24" width="420" height="12" fill="#001878" />
+                <text x="16" y="24" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600">Scheduling &amp; charting (provider)</text>
+                <rect x="16" y="52" width="388" height="110" rx="8" fill="#ffffff" stroke="#ebe5d6" />
+                <text x="28" y="78" fill="#001878" font-family="Poppins, Arial, sans-serif" font-size="12" font-weight="700">CarePatron backend</text>
+                <text x="28" y="98" fill="#57534e" font-family="Inter, Arial, sans-serif" font-size="11">Book annual / à-la-carte visits · notes · billing · AI scribe</text>
+                <text x="28" y="118" fill="#57534e" font-family="Inter, Arial, sans-serif" font-size="11">Not the primary day-to-day student chat surface</text>
+                <rect x="28" y="132" width="160" height="18" rx="4" fill="#C4A574" opacity="0.45" />
+                <text x="16" y="188" fill="#57534e" font-family="Inter, Arial, sans-serif" font-size="10">Illustrative mockup — no real patient data</text>
+              </svg>
+              <figcaption>
+                <strong>CarePatron — scheduling &amp; documentation backend</strong>
+                Formal visits and provider workflow only. Illustrative mockup — no real patient
+                data.
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section aria-labelledby="open-heading">
+          <h2 id="open-heading">Open questions — not yet resolved</h2>
+          <p>
+            These are explicit unknowns. Do not treat them as closed when reading this draft.
+          </p>
+
+          <div class="internal-draft-open">
+            <strong>Student demand is unverified</strong>
+            <p>
+              Would students actually value or engage with this, or is it a benefit universities
+              buy that goes largely unused? No student survey or demand-testing has been done yet.
+            </p>
+          </div>
+
+          <div class="internal-draft-open">
+            <strong>Utilization assumptions are unconfirmed</strong>
+            <p>
+              The fixed-cost provider math only works if usage stays proportionally low across a
+              large enrolled population. That has been reasoned through directionally — not modeled
+              with real numbers.
+            </p>
+          </div>
+
+          <div class="internal-draft-open">
+            <strong>Backup provider coverage is not planned</strong>
+            <p>
+              Backup coverage is not yet designed for this concept or for the employer model.
+            </p>
+          </div>
+
+          <div class="internal-draft-open">
+            <strong>Basic-plan pricing vs. real visit cost is unchecked</strong>
+            <p>
+              The $19–20 base and the add-on consultation prices have not been stress-tested against
+              real per-visit cost the way the employer pilot standing price ($100) was.
+            </p>
+          </div>
+        </section>
+
+        <section aria-labelledby="reference-heading">
+          <h2 id="reference-heading">Reference point</h2>
+          <p>
+            This mirrors the employer pilot&rsquo;s core proposition — one dedicated care
+            relationship, with combined primary / psychiatric / cognitive care under a single
+            institutional price, rather than fragmented single-purpose apps — but adapted for a
+            lower-acuity, high-volume population where most enrolled users are expected to be low
+            utilizers. Spruce-first messaging is part of that adaptation: students should not need
+            an appointment slot to ask a quick question. That adaptation is still the risky part:
+            the employer math and the campus math are not the same until utilization and demand are
+            tested.
+          </p>
+        </section>
+
+        <section class="internal-draft-ask" aria-labelledby="ask-heading">
+          <h2 id="ask-heading">Ask for Rebecca</h2>
+          <p>
+            Does this concept make sense as a pilot to pursue? What would you change, and do you
+            have existing university / school-system contacts worth approaching?
+          </p>
+        </section>
+      </main>
+
+      <p class="internal-draft-footer-note">
+        Path: <code>/internal/university-pilot-draft.html</code> · Direct link only · Not in site
+        navigation or sitemap · <code>noindex</code>
+      </p>
+    </div>
+  </body>
+</html>

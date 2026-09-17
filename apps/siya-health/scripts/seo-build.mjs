@@ -52,6 +52,11 @@ const SITEMAP_EXCLUDE = new Set([
   ...Object.keys(REDIRECT_SHELLS),
 ]);
 
+/** Internal review drafts under /internal/ — never in sitemap (also noindex in HTML). */
+function isInternalDraftPath(rel) {
+  return rel === 'internal' || rel.startsWith('internal/');
+}
+
 /** Any page whose HTML declares robots noindex must never appear in the sitemap. */
 function isNoindexFile(rel) {
   try {
@@ -106,7 +111,13 @@ function priorityFor(rel) {
 function generateSitemap(htmlFiles) {
   const lines = [`<?xml version="1.0" encoding="UTF-8"?>`, `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`];
   const sorted = [...htmlFiles]
-    .filter((r) => !SITEMAP_EXCLUDE.has(r) && !r.startsWith('redirect/') && !isNoindexFile(r))
+    .filter(
+      (r) =>
+        !SITEMAP_EXCLUDE.has(r) &&
+        !r.startsWith('redirect/') &&
+        !isInternalDraftPath(r) &&
+        !isNoindexFile(r)
+    )
     .sort((a, b) => fileToUrlPath(a).localeCompare(fileToUrlPath(b)));
   for (const rel of sorted) {
     const loc = `${BASE}${fileToUrlPath(rel)}`;

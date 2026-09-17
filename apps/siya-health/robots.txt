@@ -4,6 +4,9 @@ Allow: /
 # Legacy mirror folder (duplicate HTML); crawlers should prefer extensionless URLs at site root.
 Disallow: /public/
 
+# Internal review drafts — not for indexing or public discovery.
+Disallow: /internal/
+
 Sitemap: https://siya.health/sitemap.xml
 
 # AI retrieval (llms.txt convention)

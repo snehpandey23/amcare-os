@@ -12160,6 +12160,24 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
   .employer-pitch-tools {
     grid-template-columns: 1fr 1fr;
   }
+
+  .employer-pitch-tools--three {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .employer-pitch-tools--three .employer-pitch-tool-card--primary {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1100px) {
+  .employer-pitch-tools--three {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+
+  .employer-pitch-tools--three .employer-pitch-tool-card--primary {
+    grid-column: auto;
+  }
 }
 
 .employer-pitch-tool-card {
@@ -12169,6 +12187,11 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
   border-radius: var(--radius);
   padding: 16px;
   box-shadow: var(--shadow);
+}
+
+.employer-pitch-tool-card--primary {
+  border-color: var(--accent-tertiary, #c4a574);
+  box-shadow: var(--shadow), 0 0 0 1px rgba(196, 165, 116, 0.35);
 }
 
 .employer-pitch-tool-svg {
