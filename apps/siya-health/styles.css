@@ -11743,7 +11743,7 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
   margin-top: 4px;
   font-size: 0.8rem;
   font-weight: 500;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .employer-pitch-compare-card ul,
@@ -11915,7 +11915,7 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .employer-pitch-price {
@@ -11990,12 +11990,16 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
 .employer-pitch-foot {
   margin: 20px 0 0;
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .employer-pitch-footer {
   padding: 24px 0 40px;
   background: var(--page-bg);
+}
+
+.employer-pitch-footer .footer-legal-micro {
+  color: var(--text-secondary);
 }
 
 .employer-pitch-footer code {
@@ -12070,7 +12074,28 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
 .employer-pitch-micro {
   margin: 14px 0 0;
   font-size: 0.9rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
+}
+
+.employer-pitch-flow-caption {
+  margin: 12px 0 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.employer-pitch-foot {
+  margin: 20px 0 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.employer-pitch-footer {
+  padding: 24px 0 40px;
+  background: var(--page-bg);
+}
+
+.employer-pitch-footer .footer-legal-micro {
+  color: var(--text-secondary);
 }
 
 .employer-pitch-card-badge {
@@ -12123,7 +12148,7 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
 .employer-pitch-flow-caption {
   margin: 12px 0 0;
   font-size: 0.9rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .employer-pitch-tools {

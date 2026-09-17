@@ -356,7 +356,10 @@ ${careFlowSvg()}
           <div class="employer-pitch-team">
             <article class="employer-pitch-provider">
               <div class="employer-pitch-provider-media">
-                <img src="${PHOTO_SNEH}" alt="Dr. Sneh Pandey, MD" width="160" height="160" loading="lazy" decoding="async" />
+                <picture>
+                  <source srcset="/assets/images/dr-sneh-pandey-176.webp" type="image/webp" />
+                  <img src="/assets/images/dr-sneh-pandey-176.png" alt="Dr. Sneh Pandey, MD" width="160" height="160" loading="lazy" decoding="async" />
+                </picture>
               </div>
               <div class="employer-pitch-provider-body">
                 <h3>Dr. Sneh Pandey, MD</h3>
