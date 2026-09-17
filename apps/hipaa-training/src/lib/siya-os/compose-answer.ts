@@ -59,7 +59,7 @@ export function isConfusedAboutPriorAnswer(text: string): boolean {
 
 /** Prior Assist turn flagged a missing guide / gap — staff asking how to contribute input. */
 const GAP_PRIOR_MARK =
-  /no approved guidance|don'?t have a (full )?approved guide|Notify owner|knowledge gap|not documented in|requires input from|recommended actions|AI-assisted in the portal|SOP builder|AI interview/i;
+  /no approved guidance|don'?t have a (full )?approved guide|Notify owner|knowledge gap|not documented in|requires input from|recommended actions|AI-assisted in the portal|AI checklist builder|SOP builder|AI interview|Department SOPs/i;
 
 export function isGapContributionFollowUp(text: string, lastAssistant?: string | null): boolean {
   const t = text.trim();
@@ -82,7 +82,7 @@ export function answerGapContributionFollowUp(): string {
     "",
     "1. **Notify owner** (when it appears after a gap) — logs the topic for the department lead’s digest.",
     "2. **Copy escalation summary** — paste a de-identified note to Compliance / Leadership or your supervisor.",
-    "3. **Drafting a new SOP?** Use **Memory → SOP builder**; submitted drafts go through review before Ask can cite them.",
+    "3. **Drafting a new policy SOP?** Use **Memory → Department SOPs** (guided draft). For **My day checklists** only, use **AI checklist builder**. Submitted drafts go through review before Ask can cite them.",
     "",
     "Include what you want the guide to say, who should own it, and any compliance concerns (e.g. Gen AI use).",
   ].join("\n");

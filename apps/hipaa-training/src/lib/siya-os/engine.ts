@@ -1463,7 +1463,12 @@ function buildSiyaReply(
       ruleFinal: true,
       routing: {
         department: "General",
-        task: sopChrome.id === "write" ? "SOP builder" : "Department SOPs",
+        task:
+          sopChrome.id === "checklist"
+            ? "AI checklist builder"
+            : sopChrome.id === "write"
+              ? "Department SOPs"
+              : "Department SOPs",
         confidence: "high",
         followUpQuestions: [],
       },
@@ -1729,8 +1734,8 @@ function buildSiyaReply(
       knowledgeGap: false,
       sources: [],
       portalLinks: [
-        { label: "SOP builder", href: "/memory/knowledge/sop-builder" },
         { label: "Department SOPs", href: "/memory/knowledge/sops" },
+        { label: "AI checklist builder", href: "/memory/knowledge/sop-builder" },
       ],
       escalationPreview: undefined,
       ruleFinal: true,

@@ -116,7 +116,7 @@ export function TaskTemplatesAdmin() {
           href="/memory/knowledge/sop-builder"
           className={`mt-3 inline-block ${trainingLinkPrimaryClass}`}
         >
-          Build with AI
+          Build My day checklist (AI)
         </Link>
       </header>
 

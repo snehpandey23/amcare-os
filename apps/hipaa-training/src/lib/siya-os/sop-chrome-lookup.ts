@@ -4,7 +4,7 @@
 import { expandStaffSlang } from "./meta-conversation";
 
 export type SopChromeHit = {
-  id: "write" | "list";
+  id: "write" | "list" | "checklist";
   message: string;
   links: { label: string; href: string }[];
 };
@@ -13,7 +13,17 @@ function normalize(text: string): string {
   return expandStaffSlang(text.trim().toLowerCase().replace(/\s+/g, " "));
 }
 
-/** “Use Gen AI / ChatGPT to make SOPs” → our AI SOP Builder, not a missing Compliance guide. */
+/** Explicit checklist / old “SOP builder” name → AI checklist tool. */
+function isChecklistBuilderHowTo(t: string): boolean {
+  if (/\b(ai\s+)?checklist\s+builder\b/.test(t)) return true;
+  if (/\bsop\s+builder\b/.test(t)) return true;
+  if (/\b(daily|my\s+day|operational)\s+checklist\b/.test(t) && /\b(build|creat|draft|mak|how)\b/.test(t)) {
+    return true;
+  }
+  return false;
+}
+
+/** “Use Gen AI / ChatGPT to make SOPs” → explain both paths; Gen-AI interview = checklist builder. */
 function isGenAiSopHowTo(t: string): boolean {
   const mentionsSop = /\b(sop|sops|standard operating procedure)\b/.test(t);
   if (!mentionsSop) return false;
@@ -24,7 +34,7 @@ function isGenAiSopHowTo(t: string): boolean {
 }
 
 function isWriteSop(t: string): boolean {
-  if (/\bsop builder\b/.test(t)) return true;
+  if (isChecklistBuilderHowTo(t)) return false;
   if (isGenAiSopHowTo(t)) return true;
   // Hinglish how-to, including glossary leftovers ("SOP how banana is") and Devanagari.
   if (
@@ -63,7 +73,7 @@ function isListSops(t: string): boolean {
 /** Policy lookup (“SOP for refills”) — not a chrome how-to. */
 function isSopPolicyLookup(t: string): boolean {
   // How-to / Gen-AI drafting is product chrome, not “SOP about X policy”.
-  if (isWriteSop(t) || isListSops(t) || isGenAiSopHowTo(t)) return false;
+  if (isWriteSop(t) || isListSops(t) || isGenAiSopHowTo(t) || isChecklistBuilderHowTo(t)) return false;
   if (
     /\b(for|about|on|regarding)\s+\w+/.test(t) &&
     !/\b(write|creat|draft|build|mak|start|already|list|existing)\b/.test(t)
@@ -78,6 +88,21 @@ export function trySopChromeLookup(text: string): SopChromeHit | null {
   if (!t || t.length > 240) return null;
   if (isSopPolicyLookup(t)) return null;
 
+  if (isChecklistBuilderHowTo(t)) {
+    return {
+      id: "checklist",
+      message: [
+        "Use the **AI checklist builder** in Memory for **My day operational checklists** (step lists) — not long policy docs.",
+        "",
+        "For department **policy / prose SOPs** (Purpose · Scope · Escalation), open **Department SOPs** instead.",
+      ].join("\n"),
+      links: [
+        { label: "AI checklist builder", href: "/memory/knowledge/sop-builder" },
+        { label: "Department SOPs", href: "/memory/knowledge/sops" },
+      ],
+    };
+  }
+
   if (isWriteSop(t)) {
     const genAi = isGenAiSopHowTo(t);
     return {
@@ -85,17 +110,17 @@ export function trySopChromeLookup(text: string): SopChromeHit | null {
       message: [
         genAi
           ? "Yes — Siya’s SOP process is **AI-assisted in the portal**, not free-form ChatGPT inventing company policy."
-          : "Use the **SOP builder** in Memory — that’s the screen for drafting a new staff SOP.",
+          : "To draft a **department policy SOP**, open **Department SOPs** in Memory (guided Purpose / Scope / Escalation draft).",
         "",
         "**Two paths (by design):**",
-        "1. **SOP builder** (`/memory/knowledge/sop-builder`) — **AI interview** for shorter **checklist** SOPs; you answer questions, AI drafts, then you submit for review.",
-        "2. **Department SOPs / Knowledge SOP** — **paste-and-review** for longer **policy/prose** SOPs (preferred for higher-stakes policy).",
+        "1. **Department SOPs / Knowledge SOP** — **paste-and-review** for longer **policy/prose** SOPs (preferred for higher-stakes policy).",
+        "2. **AI checklist builder** — **AI interview** for shorter **My day checklists** only — not policy docs.",
         "",
-        "AI drafts are **not live** until a lead/admin approves. Chat won’t write the SOP body here — open the builder.",
+        "AI drafts are **not live** until a lead/admin approves. Chat won’t write the SOP body here — open the workspace.",
       ].join("\n"),
       links: [
-        { label: "SOP builder", href: "/memory/knowledge/sop-builder" },
         { label: "Department SOPs", href: "/memory/knowledge/sops" },
+        { label: "AI checklist builder", href: "/memory/knowledge/sop-builder" },
       ],
     };
   }

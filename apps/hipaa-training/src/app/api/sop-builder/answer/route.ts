@@ -1,13 +1,10 @@
 import {
   generateInterviewNext,
   countUserAnswers,
-  countSubstantiveAnswers,
-  MAX_QUESTIONS,
-  MIN_QUESTIONS,
+  isDontKnowAnswer,
   SopBuilderLlmError,
   type SopBuilderTranscriptEntry,
 } from "@/lib/sop-builder-assist";
-import { assessAnswerSubstantiveness } from "@/lib/answer-quality";
 import { assessStaffMessageSafety, staffRefusalMessage } from "@/lib/siya-os/phi-guard";
 import { apiFetch, requireSopBuilderAuth } from "@/lib/sop-builder-route-auth";
 
@@ -25,10 +22,15 @@ export async function POST(req: Request) {
     return Response.json({ error: "Invalid JSON" }, { status: 400 });
   }
   const sessionId = typeof (body as { sessionId?: string })?.sessionId === "string" ? (body as { sessionId: string }).sessionId : "";
-  const skipped = Boolean((body as { skipped?: boolean })?.skipped);
+  let skipped = Boolean((body as { skipped?: boolean })?.skipped);
   const answer = typeof (body as { answer?: string })?.answer === "string" ? (body as { answer: string }).answer.trim() : "";
   if (!sessionId) return Response.json({ error: "sessionId required" }, { status: 400 });
   if (!skipped && !answer) return Response.json({ error: "answer required (or set skipped)" }, { status: 400 });
+
+  // Explicit don't-know text ≡ Skip for gap / advance behavior.
+  if (!skipped && answer && isDontKnowAnswer(answer)) {
+    skipped = true;
+  }
 
   const sessionData = (await apiFetch(auth, `/api/sop-builder/sessions/${sessionId}`)) as {
     session: {
@@ -63,37 +65,6 @@ export async function POST(req: Request) {
   }
 
   const answerCount = countUserAnswers(transcript);
-  const substantive = countSubstantiveAnswers(transcript);
-  const lastUser = transcript[transcript.length - 1];
-  const lastQuestion =
-    [...transcript].reverse().find((e) => e.role === "assistant")?.content ??
-    `Interview question about: ${session.topic}`;
-
-  // Cap turns only after a substantive last answer (heuristic + LLM gate).
-  if (
-    answerCount >= MAX_QUESTIONS &&
-    substantive >= MIN_QUESTIONS &&
-    lastUser?.role === "user" &&
-    (lastUser.skipped ||
-      (
-        await assessAnswerSubstantiveness({
-          question: lastQuestion,
-          answer: lastUser.content,
-          skipped: false,
-        })
-      ).ok)
-  ) {
-    const updated = (await apiFetch(auth, `/api/sop-builder/sessions/${sessionId}`, {
-      method: "PATCH",
-      body: JSON.stringify({ transcript }),
-    })) as { session: unknown };
-    return Response.json({
-      session: updated.session,
-      question: null,
-      readyToDraft: true,
-      questionNumber: answerCount,
-    });
-  }
 
   let next: Awaited<ReturnType<typeof generateInterviewNext>>;
   try {
@@ -121,8 +92,21 @@ export async function POST(req: Request) {
     );
   }
 
+  if (next.markLastUserAsGap) {
+    const lastIdx = transcript.length - 1;
+    const last = transcript[lastIdx];
+    if (last?.role === "user") {
+      transcript[lastIdx] = { ...last, gapFlagged: true };
+    }
+  }
+
   if (next.question) {
-    transcript.push({ role: "assistant", content: next.question });
+    transcript.push({
+      role: "assistant",
+      content: next.question,
+      coverageTag: next.nextQuestionMeta?.coverageTag,
+      isPushback: next.nextQuestionMeta?.isPushback,
+    });
   }
 
   const updated = (await apiFetch(auth, `/api/sop-builder/sessions/${sessionId}`, {
@@ -134,6 +118,6 @@ export async function POST(req: Request) {
     session: updated.session,
     question: next.question,
     readyToDraft: next.readyToDraft,
-    questionNumber: next.questionNumber,
+    questionNumber: next.questionNumber ?? answerCount,
   });
 }

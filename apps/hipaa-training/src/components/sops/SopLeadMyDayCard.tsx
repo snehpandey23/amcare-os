@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { isPortalAuthEnabled } from "@/lib/trainingConfig";
 import { fetchMySopOwnership, fetchSopTasks, fetchSops } from "@/lib/sop-api";
+import { knowledgeSopNewDraftHref } from "@/lib/sop-editor-session";
 import { PortalNavLink } from "@/components/training/PortalNavLink";
 import { portalH3, portalSectionCompact } from "@/lib/portal-ui";
 import { FOUNDER_QUEUE_PREVIEW } from "@/components/executive/CollapsibleDomainItemList";
@@ -51,9 +52,10 @@ export function SopLeadMyDayCard({ className = "" }: { className?: string }) {
           out.push({
             id: `task-${t.id}`,
             text: t.assigneeUserId ? t.title : `${t.title} — assign an owner in workspace`,
+            // create_sop → Knowledge SOP guided draft (not AI checklist builder).
             href:
               t.taskType === "create_sop"
-                ? `/memory/knowledge/sop-builder?topic=${encodeURIComponent(clean)}`
+                ? knowledgeSopNewDraftHref({ department: t.department, purpose: clean })
                 : "/memory/knowledge/sops",
           });
         }

@@ -23,6 +23,7 @@ export async function POST(req: Request) {
   if (!topic) return Response.json({ error: "topic required" }, { status: 400 });
 
   const sourceRefs = await gatherSopBuilderContext(topic, auth);
+  // generateInterviewStart falls back to a deterministic first question if LLM is down.
   let interview: Awaited<ReturnType<typeof generateInterviewStart>>;
   try {
     interview = await generateInterviewStart({ topic, sourceRefs });
@@ -35,19 +36,14 @@ export async function POST(req: Request) {
     }
     throw err;
   }
-  if (!interview) {
-    return Response.json(
-      {
-        error: "Interview generation returned invalid output. Try again.",
-        code: "llm_error",
-        kind: "unknown",
-      },
-      { status: 503 },
-    );
-  }
 
   const transcript: SopBuilderTranscriptEntry[] = [
-    { role: "assistant", content: interview.questions[0]! },
+    {
+      role: "assistant",
+      content: interview.questions[0]!,
+      coverageTag: interview.firstQuestionMeta.coverageTag,
+      isPushback: false,
+    },
   ];
 
   const created = (await apiFetch(auth, "/api/sop-builder/sessions", {

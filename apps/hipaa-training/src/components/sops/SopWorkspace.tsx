@@ -20,7 +20,9 @@ import {
 import type { SopDraftAnswers } from "@/lib/sop-draft-assist";
 import {
   isSopEditorDirty,
+  parseSopNewDraftDeepLink,
   shouldApplySopEditDeepLink,
+  shouldApplySopNewDraftDeepLink,
   SOP_NEW_DRAFT_SAVE_HINT,
   SOP_UNSAVED_LEAVE_MSG,
   type SopEditorSavedSnapshot,
@@ -100,8 +102,11 @@ export function SopWorkspace() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const editId = searchParams.get("edit");
+  const newDraftDeepLink = parseSopNewDraftDeepLink(searchParams);
   /** Prevents ?edit= from re-opening on every sops reload (clobbers newer drafts in the modal). */
   const openedEditIdRef = useRef<string | null>(null);
+  /** Prevents ?new= from re-opening the guided draft on every list refresh. */
+  const openedNewDraftKeyRef = useRef<string | null>(null);
   /**
    * Body/title frozen at first successful save in the submit handshake.
    * Confirm must write these — not whatever React state is after a late openEdit(oldId).
@@ -254,9 +259,34 @@ export function SopWorkspace() {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- open once per editId; never on every sops refresh
   }, [editId, loading, sops, canEditDept, editorOpen, guideOpen]);
 
+  // My Day create_sop → ?new=1&department=&purpose= opens guided Knowledge SOP draft (not checklist builder).
+  useEffect(() => {
+    if (loading || !ctx || !newDraftDeepLink) return;
+    const newKey = `${newDraftDeepLink.department}::${newDraftDeepLink.purpose}`;
+    if (
+      !shouldApplySopNewDraftDeepLink({
+        hasNewParam: true,
+        openedNewKey: openedNewDraftKeyRef.current,
+        newKey,
+        suppress: editorOpen || guideOpen || Boolean(submitSnapRef.current),
+      })
+    ) {
+      return;
+    }
+    const deptMatch =
+      leadDepartments.find((d) => d.toLowerCase() === newDraftDeepLink.department.toLowerCase()) ||
+      leadDepartments.find((d) => deptSlug(d) === deptSlug(newDraftDeepLink.department)) ||
+      (canEditDept(newDraftDeepLink.department) ? newDraftDeepLink.department : null);
+    if (!deptMatch) return;
+    openedNewDraftKeyRef.current = newKey;
+    openCreate(deptMatch, newDraftDeepLink.purpose || undefined);
+    router.replace("/memory/knowledge/sops");
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one-shot deep link; openCreate is stable enough
+  }, [loading, ctx, newDraftDeepLink, leadDepartments, canEditDept, editorOpen, guideOpen, router]);
+
   /** Drop stale ?edit= so list refresh cannot resurrect another SOP into the open editor. */
   function clearEditQuery() {
-    if (!editId) return;
+    if (!editId && !newDraftDeepLink) return;
     // Keep openedEditIdRef pointing at the consumed id until the URL actually clears.
     // Nulling it while ?edit= is still present re-arms shouldApplySopEditDeepLink → openEdit(old).
     router.replace("/memory/knowledge/sops");

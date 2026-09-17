@@ -3,6 +3,7 @@ import {
   notifySopApproved,
   notifySopSubmittedForReview,
 } from "@/lib/sop-review-email";
+import { draftHasUnresolvedPlaceholders } from "@/lib/sop-builder-assist";
 
 export const maxDuration = 30;
 
@@ -23,6 +24,23 @@ export async function PATCH(req: Request, ctx: { params: Promise<{ id: string }>
     body = await req.json();
   } catch {
     return Response.json({ error: "Invalid JSON" }, { status: 400 });
+  }
+
+  const patch = body as { status?: string; draftJson?: unknown };
+  if (patch.status === "published") {
+    const draft = patch.draftJson as
+      | { description?: string; checklistItems?: { label?: string }[]; gaps?: string[] }
+      | undefined;
+    if (draft && draftHasUnresolvedPlaceholders(draft)) {
+      return Response.json(
+        {
+          error:
+            "Cannot publish while [PLACEHOLDER — …] gaps remain. Replace every placeholder with real operational detail first.",
+          code: "placeholders_unresolved",
+        },
+        { status: 400 },
+      );
+    }
   }
 
   const { id } = await ctx.params;

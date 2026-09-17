@@ -159,8 +159,13 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
         return;
       }
       setSession(result.session);
+      setReadyToDraft(true);
       setPhase("review");
     } catch (err) {
+      if (err instanceof SopBuilderUnavailableError) {
+        setLlmUnavailable(true);
+        setLlmIssue({ code: err.code, kind: err.kind, message: err.message });
+      }
       setError(err instanceof Error ? err.message : "Draft failed");
       setPhase("interview");
     } finally {
@@ -255,7 +260,8 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
         {readyToDraft ? (
           <div className={`${portalStatusSuccessBox} p-4`}>
             <p className={`text-sm ${portalStatusSuccessText}`}>
-              You&apos;ve answered enough — generate the checklist, then submit it for admin approval.
+              You&apos;ve covered enough — generate the checklist. Skipped or unanswered slots become explicit
+              placeholders (not invented steps). Fill placeholders before publish.
             </p>
             <button
               type="button"
@@ -264,6 +270,22 @@ export function SopBuilderWizard({ initialResumeId = null, initialTopic = "" }: 
               onClick={() => void onGenerateDraft()}
             >
               {pending ? "Generating…" : "Generate draft → review & submit"}
+            </button>
+          </div>
+        ) : answerCount >= 1 ? (
+          <div className={`${portalStatusWarnBox} p-4`}>
+            <p className={`text-sm ${portalStatusWarnText}`}>
+              Want to stop early? Generate a rough draft now — anything you skipped or left thin becomes a visible
+              [PLACEHOLDER] gap for Ops / Engineering / Clinical as tagged. Nothing publishes until placeholders are
+              filled.
+            </p>
+            <button
+              type="button"
+              disabled={pending}
+              className={`mt-3 ${trainingLinkPrimaryClass}`}
+              onClick={() => void onGenerateDraft()}
+            >
+              {pending ? "Generating…" : "Generate draft with placeholders →"}
             </button>
           </div>
         ) : null}

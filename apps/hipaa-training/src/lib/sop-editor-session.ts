@@ -20,6 +20,44 @@ export function shouldApplySopEditDeepLink(opts: {
   return true;
 }
 
+/**
+ * Deep-link for guided Knowledge SOP draft (?new=1&department=&purpose=).
+ * Used by My Day create_sop tasks — must open SopDraftGuide, not the checklist builder.
+ */
+export function parseSopNewDraftDeepLink(searchParams: {
+  get(name: string): string | null;
+}): { department: string; purpose: string } | null {
+  const flag = (searchParams.get("new") || "").trim().toLowerCase();
+  if (flag !== "1" && flag !== "true" && flag !== "yes") return null;
+  const department = (searchParams.get("department") || "").trim();
+  if (!department) return null;
+  const purpose = (searchParams.get("purpose") || "").trim().replace(/ — unassigned$/, "");
+  return { department, purpose };
+}
+
+/** One-shot guard so ?new= does not re-open the guide on every list refresh. */
+export function shouldApplySopNewDraftDeepLink(opts: {
+  hasNewParam: boolean;
+  /** Fingerprint of the last ?new= we already opened (null = never). */
+  openedNewKey: string | null;
+  newKey: string | null;
+  suppress?: boolean;
+}): boolean {
+  if (opts.suppress) return false;
+  if (!opts.hasNewParam || !opts.newKey) return false;
+  if (opts.openedNewKey === opts.newKey) return false;
+  return true;
+}
+
+/** Build My Day → Knowledge SOP guided-draft URL (create_sop tasks only). */
+export function knowledgeSopNewDraftHref(opts: { department: string; purpose: string }): string {
+  const q = new URLSearchParams();
+  q.set("new", "1");
+  q.set("department", opts.department);
+  if (opts.purpose.trim()) q.set("purpose", opts.purpose.trim());
+  return `/memory/knowledge/sops?${q.toString()}`;
+}
+
 /** Snapshot of last DB-persisted editor fields (null = never saved this session). */
 export type SopEditorSavedSnapshot = {
   title: string;

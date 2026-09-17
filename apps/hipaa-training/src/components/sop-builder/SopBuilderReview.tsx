@@ -22,6 +22,7 @@ import {
   portalStatusWarnBox,
   portalStatusWarnText,
 } from "@/lib/portal-ui";
+import { draftHasUnresolvedPlaceholders, PLACEHOLDER_PREFIX } from "@/lib/sop-builder-assist";
 
 type ChecklistRow = { id: string; label: string; order: number };
 
@@ -80,6 +81,11 @@ export function SopBuilderReview({ session, isAdmin, onBack, onPublished }: Prop
       gaps,
     };
   }
+
+  const unresolvedPlaceholders = draftHasUnresolvedPlaceholders(buildDraftJson());
+  const placeholderCount =
+    items.filter((it) => it.label.includes(PLACEHOLDER_PREFIX)).length +
+    gaps.filter((g) => g.includes(PLACEHOLDER_PREFIX)).length;
 
   async function onRefine() {
     const instruction = refineText.trim();
@@ -170,6 +176,12 @@ export function SopBuilderReview({ session, isAdmin, onBack, onPublished }: Prop
   async function onPublish() {
     if (!title.trim() || !assigneeId || !items.some((it) => it.label.trim())) {
       setError("Title, assignee, and at least one checklist step are required to publish.");
+      return;
+    }
+    if (draftHasUnresolvedPlaceholders(buildDraftJson())) {
+      setError(
+        "This draft still has [PLACEHOLDER — …] gaps. Replace every placeholder with real operational detail before publishing to My day.",
+      );
       return;
     }
     setPending("publish");
@@ -283,14 +295,25 @@ export function SopBuilderReview({ session, isAdmin, onBack, onPublished }: Prop
         </p>
       </div>
 
-      {gaps.length > 0 ? (
+      {gaps.length > 0 || unresolvedPlaceholders ? (
         <div className={`p-3 ${portalStatusWarnBox}`}>
-          <p className={`text-xs font-semibold ${portalStatusWarnText}`}>AI flagged — please verify</p>
-          <ul className={`mt-2 list-disc space-y-1 pl-4 text-xs ${portalStatusWarnText}`}>
-            {gaps.map((g) => (
-              <li key={g}>{g}</li>
-            ))}
-          </ul>
+          <p className={`text-xs font-semibold ${portalStatusWarnText}`}>
+            {unresolvedPlaceholders
+              ? `${placeholderCount || gaps.length} placeholder gap(s) — not real steps yet`
+              : "AI flagged — please verify"}
+          </p>
+          <p className={`mt-1 text-xs ${portalStatusWarnText}`}>
+            {unresolvedPlaceholders
+              ? "Replace every [PLACEHOLDER — …] line with real operational detail before publish. You can still save a draft or submit for review with gaps visible."
+              : "Review flagged items before submit."}
+          </p>
+          {gaps.length > 0 ? (
+            <ul className={`mt-2 list-disc space-y-1 pl-4 text-xs ${portalStatusWarnText}`}>
+              {gaps.map((g) => (
+                <li key={g}>{g}</li>
+              ))}
+            </ul>
+          ) : null}
         </div>
       ) : null}
 

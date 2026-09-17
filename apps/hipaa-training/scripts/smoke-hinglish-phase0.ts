@@ -65,11 +65,19 @@ for (const phrase of sopHowToPhrases) {
   for (const founderCoach of [false, true]) {
     const reply = runSiyaAssistant(phrase, [], { founderCoach });
     assert.equal(reply.knowledgeGap, false, `${phrase} founder=${founderCoach} gap`);
-    assert.equal(reply.routing?.task, "SOP builder", `${phrase} founder=${founderCoach} task`);
-    assert.ok(/SOP builder/i.test(reply.message || ""), `${phrase} soft-stop`);
     assert.ok(
-      (reply.portalLinks || []).some((l) => l.href.includes("sop-builder")),
-      `${phrase} missing sop-builder`,
+      reply.routing?.task === "Department SOPs" ||
+        reply.routing?.task === "Portal navigation · Department SOPs",
+      `${phrase} founder=${founderCoach} task=${reply.routing?.task}`,
+    );
+    assert.ok(/Department SOPs|Knowledge SOP|policy|SOP workspace/i.test(reply.message || ""), `${phrase} soft-stop`);
+    assert.ok(
+      (reply.portalLinks || []).some((l) => l.href.includes("/memory/knowledge/sops")),
+      `${phrase} missing department sops link`,
+    );
+    assert.ok(
+      !(reply.portalLinks || []).some((l) => l.href.includes("sop-builder") && !(reply.portalLinks || []).some((x) => x.href.includes("/memory/knowledge/sops"))),
+      `${phrase} checklist-only without department SOPs`,
     );
   }
 }

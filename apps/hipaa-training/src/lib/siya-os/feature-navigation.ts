@@ -259,23 +259,30 @@ export const PORTAL_FEATURES: FeatureDef[] = [
   // --- Memory / knowledge ---
   {
     id: "sop-builder",
-    label: "SOP builder",
+    label: "AI checklist builder",
     href: "/memory/knowledge/sop-builder",
     section: "Memory & SOPs",
-    blurb: "AI-assisted checklist SOP drafting.",
-    patterns: [/\b(sop\s+builder|build\s+a\s+sop|create\s+a\s+sop)\b/],
+    blurb: "AI-assisted My day checklist drafting (not department policy SOPs).",
+    patterns: [
+      /\b(ai\s+checklist\s+builder|checklist\s+builder|my\s+day\s+checklist)\b/,
+      /\b(sop\s+builder)\b/,
+    ],
+    // Prefer Department SOPs for generic "create/build/write a SOP" — checklist needs checklist wording.
+    exclude: [/\b(create|build|write|draft)\s+(?:(?:a|an|new)\s+)*sops?\b/],
   },
   {
     id: "department-sops",
     label: "Department SOPs",
     href: "/memory/knowledge/sops",
     section: "Memory & SOPs",
-    blurb: "Browse live and draft department SOPs.",
+    blurb: "Browse and draft department policy SOPs (Knowledge SOP).",
     patterns: [
       /\b(department\s+sops?|open\s+sops?|sop\s+library|memory\s+sops?)\b/,
       /\b(what\s+sops?\s+(do\s+we|we)\s+have|list\s+sops?)\b/,
+      /\b(create|build|write|draft)\s+(?:(?:a|an|new)\s+)*sops?\b/,
+      /\b(new\s+department\s+sop|knowledge\s+sop)\b/,
     ],
-    exclude: [/\b(missing|missign|gap|outstanding)\b/],
+    exclude: [/\b(missing|missign|gap|outstanding|checklist\s+builder|my\s+day\s+checklist)\b/],
   },
   {
     id: "memory-hub",

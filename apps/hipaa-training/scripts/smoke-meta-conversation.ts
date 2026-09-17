@@ -10,6 +10,7 @@ import {
 } from "../src/lib/siya-os/meta-conversation";
 import { runSiyaAssistant, runSiyaAssistantAsync } from "../src/lib/siya-os/engine";
 import { detectAdminOpsIntent } from "../src/lib/siya-os/admin-ops-coach";
+import { tryFeatureNavigation } from "../src/lib/siya-os/feature-navigation";
 
 function main() {
   return (async () => {
@@ -96,12 +97,14 @@ function main() {
   const writeSop = runSiyaAssistant("want to write a sop");
   assert.ok(writeSop.ruleFinal);
   assert.equal(writeSop.knowledgeGap, false);
-  assert.ok(/SOP builder/i.test(writeSop.message));
-  assert.ok(writeSop.portalLinks?.some((l) => l.href.includes("sop-builder")));
+  assert.ok(/Department SOPs/i.test(writeSop.message));
+  assert.ok(writeSop.portalLinks?.some((l) => l.href.includes("/memory/knowledge/sops")));
+  assert.equal(writeSop.portalLinks?.[0]?.href, "/memory/knowledge/sops");
   assert.ok(!/right staff guide for that yet/i.test(writeSop.message));
 
   const howWrite = runSiyaAssistant("new sop how to write");
-  assert.ok(/SOP builder/i.test(howWrite.message));
+  assert.ok(/Department SOPs/i.test(howWrite.message));
+  assert.ok(howWrite.portalLinks?.some((l) => l.href.includes("/memory/knowledge/sops")));
   assert.ok(!/right staff guide for that yet/i.test(howWrite.message));
 
   const listSops = runSiyaAssistant("what sops r already there");
@@ -115,9 +118,21 @@ function main() {
   const genAiSop = runSiyaAssistant("Tell me about how to use GEn AI for making SOP's");
   assert.ok(genAiSop.ruleFinal);
   assert.equal(genAiSop.knowledgeGap, false);
-  assert.ok(/AI-assisted|SOP builder|AI interview/i.test(genAiSop.message), genAiSop.message.slice(0, 200));
+  assert.ok(/AI-assisted|AI checklist builder|AI interview|Department SOPs/i.test(genAiSop.message), genAiSop.message.slice(0, 200));
+  assert.ok(genAiSop.portalLinks?.some((l) => l.href.includes("/memory/knowledge/sops")));
   assert.ok(genAiSop.portalLinks?.some((l) => l.href.includes("sop-builder")));
   assert.ok(!/no approved guidance|Compliance or Leadership/i.test(genAiSop.message));
+
+  const createSopNav = tryFeatureNavigation("create a sop", { isSignedIn: true });
+  assert.equal(createSopNav?.id, "department-sops", createSopNav?.id);
+  assert.equal(createSopNav?.href, "/memory/knowledge/sops");
+
+  const checklistNav = tryFeatureNavigation("open AI checklist builder", { isSignedIn: true });
+  assert.equal(checklistNav?.id, "sop-builder", checklistNav?.id);
+  assert.ok(checklistNav?.href.includes("sop-builder"));
+
+  const oldNameNav = tryFeatureNavigation("open sop builder", { isSignedIn: true });
+  assert.equal(oldNameNav?.id, "sop-builder", oldNameNav?.id);
 
   const creyos = runSiyaAssistant("where is creyos link");
   assert.ok(creyos.ruleFinal);
