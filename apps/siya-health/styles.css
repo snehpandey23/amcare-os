@@ -11591,3 +11591,647 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
   color: var(--primary);
 }
 
+
+/* ── California employer pilot pitch (/employers/california-pilot) ──
+   Colors: CSS vars only (BRAND-STYLE-LOCK + site tokens).
+   Single magenta gradient CTA in close section; champagne tertiary chrome only. */
+.page-employer-pitch {
+  background: var(--page-bg);
+  color: var(--text);
+}
+
+.employer-pitch-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.employer-pitch-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: var(--header-height);
+}
+
+.employer-pitch-eyebrow {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.employer-pitch-section {
+  padding: var(--section-padding) 0;
+}
+
+.employer-pitch-section--tint {
+  background: var(--accent-tertiary-wash);
+}
+
+.employer-pitch-section-header {
+  margin-bottom: 28px;
+}
+
+.employer-pitch-section-header h2,
+.employer-pitch h1,
+.employer-pitch h2,
+.employer-pitch h3 {
+  color: var(--primary);
+  font-family: var(--font-heading);
+}
+
+.employer-pitch-kicker {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--accent-accessible);
+}
+
+.employer-pitch-kicker--support {
+  margin: 12px 0 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.employer-pitch-kicker--support .employer-pitch-token {
+  color: var(--primary);
+}
+
+.employer-pitch-hero h1 {
+  max-width: 22ch;
+  font-size: clamp(2rem, 4vw, 2.85rem);
+  line-height: 1.12;
+  margin: 0;
+}
+
+.employer-pitch-scope {
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--primary);
+  border-radius: var(--radius);
+}
+
+.employer-pitch-scope p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+}
+
+.employer-pitch-token {
+  color: var(--primary);
+  border-bottom: 2px solid var(--accent-tertiary);
+}
+
+.employer-pitch-accent-rule {
+  width: 72px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--accent-gradient);
+  margin: 0 0 20px;
+}
+
+.employer-pitch-lead {
+  max-width: 62ch;
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin: 0 0 24px;
+}
+
+.employer-pitch-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.employer-pitch-compare {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 900px) {
+  .employer-pitch-compare {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
+  }
+}
+
+.employer-pitch-compare-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.employer-pitch-compare-card h3 {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+}
+
+.employer-pitch-card-note {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.employer-pitch-compare-card ul,
+.employer-pitch-creds,
+.employer-pitch-included,
+.employer-pitch-coverage ul,
+.employer-pitch-access {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--text-secondary);
+}
+
+.employer-pitch-compare-card li,
+.employer-pitch-creds li,
+.employer-pitch-included li,
+.employer-pitch-coverage li,
+.employer-pitch-access li {
+  margin-bottom: 8px;
+}
+
+.employer-pitch-compare-card--highlight {
+  border-color: var(--accent-tertiary);
+  box-shadow: 0 0 0 1px var(--accent-tertiary-soft), var(--shadow);
+}
+
+.employer-pitch-compare-card--highlight h3 {
+  color: var(--primary);
+}
+
+.employer-pitch-team {
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 800px) {
+  .employer-pitch-team {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.employer-pitch-provider {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.employer-pitch-provider h3 {
+  margin: 0 0 6px;
+  font-size: 1.25rem;
+}
+
+.employer-pitch-role {
+  margin: 0 0 14px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.employer-pitch-supervision {
+  margin-top: 20px;
+  padding: 18px 20px;
+  background: var(--white);
+  border-left: 3px solid var(--accent-tertiary);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.employer-pitch-supervision p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.employer-pitch-reviews {
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 800px) {
+  .employer-pitch-reviews {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.employer-pitch-quote {
+  margin: 0;
+  padding: 24px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.employer-pitch-quote p {
+  margin: 0 0 16px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.employer-pitch-quote footer {
+  font-size: 0.9rem;
+  color: var(--primary);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.employer-pitch-quote cite {
+  font-style: normal;
+}
+
+.employer-pitch-included {
+  display: grid;
+  gap: 10px;
+  max-width: 40rem;
+  list-style: none;
+  padding-left: 0;
+}
+
+.employer-pitch-included li {
+  position: relative;
+  padding: 12px 16px 12px 36px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 0;
+  color: var(--text);
+}
+
+.employer-pitch-included li::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  background: var(--accent-tertiary);
+}
+
+.employer-pitch-coverage p {
+  max-width: 70ch;
+  margin: 0 0 16px;
+  color: var(--text-secondary);
+}
+
+.employer-pitch-pricing {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 700px) {
+  .employer-pitch-pricing {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.employer-pitch-price-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+}
+
+.employer-pitch-price-card--continued {
+  border-color: var(--accent-tertiary);
+}
+
+.employer-pitch-price-label {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.employer-pitch-price {
+  margin: 0;
+  color: var(--primary);
+}
+
+.employer-pitch-price-amount {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.employer-pitch-price-unit {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 4px;
+  color: var(--text-secondary);
+}
+
+.employer-pitch-price-note {
+  margin: 12px 0 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.employer-pitch-access {
+  max-width: 36rem;
+  list-style: none;
+  padding: 0;
+  counter-reset: access-step;
+}
+
+.employer-pitch-access li {
+  counter-increment: access-step;
+  position: relative;
+  padding: 14px 16px 14px 52px;
+  margin-bottom: 10px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+}
+
+.employer-pitch-access li::before {
+  content: counter(access-step);
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--accent-tertiary-soft);
+}
+
+.employer-pitch-close {
+  text-align: left;
+  border-top: 1px solid var(--border);
+}
+
+.employer-pitch-close h2 {
+  margin: 0 0 12px;
+}
+
+.employer-pitch-foot {
+  margin: 20px 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.employer-pitch-footer {
+  padding: 24px 0 40px;
+  background: var(--page-bg);
+}
+
+.employer-pitch-footer code {
+  font-size: 0.85em;
+  color: var(--primary);
+}
+
+@media print {
+  .employer-pitch-header {
+    position: static;
+  }
+  .employer-pitch-section {
+    padding: 28px 0;
+    break-inside: avoid;
+  }
+  .employer-pitch-cta-row .button {
+    box-shadow: none;
+  }
+  .employer-pitch-section--tint {
+    background: transparent;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+/* CA pilot pitch — extended layout (photos, flow, tools, journey) */
+.employer-pitch-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.employer-pitch-header-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.employer-pitch-header-link:hover {
+  color: var(--accent-accessible);
+}
+
+.employer-pitch-section-lead {
+  max-width: 62ch;
+  margin: 8px 0 0;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+}
+
+.employer-pitch-hero-hooks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: grid;
+  gap: 10px;
+  max-width: 40rem;
+}
+
+.employer-pitch-hero-hooks li {
+  padding: 12px 16px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-tertiary);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+}
+
+.employer-pitch-micro {
+  margin: 14px 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.employer-pitch-card-badge {
+  margin: 0 0 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-accessible);
+}
+
+.employer-pitch-price-card--pilot {
+  border-color: var(--accent-tertiary);
+  box-shadow: 0 0 0 1px var(--accent-tertiary-soft), var(--shadow);
+}
+
+.employer-pitch-provider {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 560px) {
+  .employer-pitch-provider {
+    grid-template-columns: 140px 1fr;
+    align-items: start;
+  }
+}
+
+.employer-pitch-provider-media img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--accent-tertiary-soft);
+  background: var(--bg-subtle);
+}
+
+.employer-pitch-flow {
+  margin: 0;
+}
+
+.employer-pitch-flow-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: transparent;
+}
+
+.employer-pitch-flow-caption {
+  margin: 12px 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.employer-pitch-tools {
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 800px) {
+  .employer-pitch-tools {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.employer-pitch-tool-card {
+  margin: 0;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.employer-pitch-tool-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.employer-pitch-tool-card figcaption {
+  margin-top: 12px;
+  display: grid;
+  gap: 4px;
+}
+
+.employer-pitch-tool-card figcaption strong {
+  color: var(--primary);
+  font-family: var(--font-heading);
+}
+
+.employer-pitch-tool-card figcaption span {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.employer-pitch-illustrative-note {
+  margin: 12px 0 0;
+  padding: 12px 14px;
+  background: var(--white);
+  border: 1px dashed var(--accent-tertiary);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.employer-pitch-journey {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  counter-reset: journey-step;
+  display: grid;
+  gap: 14px;
+}
+
+.employer-pitch-journey li {
+  counter-increment: journey-step;
+  position: relative;
+  padding: 18px 18px 18px 56px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.employer-pitch-journey li::before {
+  content: counter(journey-step);
+  position: absolute;
+  left: 16px;
+  top: 18px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--primary);
+}
+
+.employer-pitch-journey li:first-child::before {
+  background: var(--accent-gradient);
+  background-color: var(--accent);
+}
+
+.employer-pitch-journey strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--primary);
+  font-family: var(--font-heading);
+}
+
+.employer-pitch-journey p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 700px) {
+  .employer-pitch-flow-svg {
+    min-height: 280px;
+  }
+}
