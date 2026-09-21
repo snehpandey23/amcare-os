@@ -11623,6 +11623,10 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--primary);
+  white-space: normal;
+  line-height: 1.3;
+  max-width: 14rem;
+  text-align: right;
 }
 
 .employer-pitch-section {
@@ -12037,6 +12041,7 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
   gap: 16px;
   flex-wrap: wrap;
   justify-content: flex-end;
+  min-width: 0;
 }
 
 .employer-pitch-header-link {
@@ -12045,6 +12050,7 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
   color: var(--primary);
   text-decoration: underline;
   text-underline-offset: 3px;
+  white-space: nowrap;
 }
 
 .employer-pitch-header-link:hover {
@@ -12325,10 +12331,6 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
   background: var(--primary);
 }
 
-.employer-pitch-term-sheet {
-  margin-top: 1.5rem;
-}
-
 .employer-pitch-table {
   width: 100%;
   border-collapse: collapse;
@@ -12336,6 +12338,12 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
+}
+
+.employer-pitch-term-sheet {
+  margin-top: 1.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .employer-pitch-table th,
@@ -12349,6 +12357,7 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
 
 .employer-pitch-table th {
   width: 32%;
+  min-width: 7.5rem;
   color: var(--primary);
   font-weight: 600;
   background: #faf7f2;
@@ -12359,20 +12368,42 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
   border-bottom: none;
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 @media (max-width: 700px) {
+  .employer-pitch-header-inner {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .employer-pitch-header-actions {
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .employer-pitch-eyebrow {
+    max-width: none;
+    text-align: left;
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+  }
+
   .employer-pitch-flow-svg {
     min-height: 280px;
+  }
+
+  .employer-pitch-provider {
+    grid-template-columns: 1fr;
+  }
+
+  .employer-pitch-table th,
+  .employer-pitch-table td {
+    padding: 0.7rem 0.75rem;
+    font-size: 0.88rem;
+  }
+
+  .employer-pitch-split {
+    grid-template-columns: 1fr;
   }
 }
