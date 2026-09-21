@@ -7,7 +7,7 @@
     { "label": "Carepatron", "href": "https://app.carepatron.com/", "note": "Scheduling & chart" },
     { "label": "Kiwi EHR", "href": "https://ehr.kiwihealth.com/", "note": "Legacy chart — prefer Klarity when assigned" },
     { "label": "Creyos", "href": "https://health.creyos.com/", "note": "Cognitive assessments" },
-    { "label": "Rupa Labs", "href": "https://labs.rupahealth.com/", "note": "Lab orders & results" },
+    { "label": "Fullscript Labs", "href": "https://us.fullscript.com/s/siyahealth/shop", "note": "Lab orders & results" },
     { "label": "Zoho Mail", "href": "https://mail.zoho.in/", "note": "Work email — no patient PHI" },
     { "label": "Zoho Cliq", "href": "https://cliq.zoho.in/", "note": "Team chat — no patient PHI" },
     { "label": "Zoho WorkDrive", "href": "https://workdrive.zoho.in/", "note": "Shared files & TrueSync" },
@@ -40,7 +40,7 @@
         { "label": "Carepatron", "href": "https://app.carepatron.com/", "note": "Scheduling & chart" },
         { "label": "Kiwi EHR", "href": "https://ehr.kiwihealth.com/", "note": "Clinical chart" },
         { "label": "Creyos", "href": "https://health.creyos.com/", "note": "Assessments" },
-        { "label": "Rupa Health (labs)", "href": "https://labs.rupahealth.com/", "note": "Labs portal" }
+        { "label": "Fullscript Labs", "href": "https://us.fullscript.com/s/siyahealth/shop", "note": "Labs portal" }
       ]
     },
     {
