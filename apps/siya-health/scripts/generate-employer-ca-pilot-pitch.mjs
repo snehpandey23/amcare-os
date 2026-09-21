@@ -1,9 +1,8 @@
 /**
- * California employer pilot pitch — outbound page for HR / benefits buyers.
- * Content locked to founder-supplied facts + approved clinical-scope additions.
- * Provider photos: local assets only (never Klarity hotlinks).
- * noindex — invitation-only prospect page.
- * Run before seo-build: node scripts/generate-employer-ca-pilot-pitch.mjs
+ * California employer pilot — invitation-only prospect page.
+ * Confirmed content only; unresolved items stay as [bracket] placeholders.
+ * noindex · no vendor names · no competitor comparisons · no marketing pixels (site-chrome skip).
+ * Run: node scripts/generate-employer-ca-pilot-pitch.mjs
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -17,33 +16,24 @@ const OUT = path.join(OUT_DIR, 'california-pilot.html');
 const CANONICAL = 'https://siya.health/employers/california-pilot';
 const TITLE = 'California Employer Pilot | Siya Health';
 const DESCRIPTION =
-  'Dedicated concierge primary care and ADHD/psychiatric management for California employer pilots—physician-supervised care team, fixed pricing, zero cost to employees.';
+  'California employer pilot with Siya Healthcare PC — dedicated care team, enrolled-employee pricing, and clear included vs separately billed services.';
 
-/**
- * Prospect personalization. When unset, use a neutral fallback — never show [Employer Name].
- * Set a real name only when personalizing a send.
- */
+/** Neutral fallback when no prospect name is set — never show [Employer Name]. */
 const EMPLOYER_NAME = 'your team';
 
-/**
- * Founder-confirmed framing (MBBS 2013 → residency 2015–2018):
- * 12 years of experience treating patients.
- */
-const DR_PANDEY_EXPERIENCE = '12 years of experience treating patients';
+/** Contracting medical entity — confirmed. */
+const LEGAL_ENTITY = 'Siya Healthcare PC';
 
-/** Local assets only — already in repo; do not hotlink Klarity. */
+const DR_PANDEY_EXPERIENCE = '12 years of experience treating patients';
 const PHOTO_SNEH = '/assets/images/dr-sneh-pandey.png';
 const PHOTO_WENDY = '/assets/images/wendy-delgado.png';
 
 const CTA_HREF = '/employers#employer-inquiry-form';
 const CTA_LABEL = "Let's talk";
 
-/**
- * Standing post–Month 1 price — LOCKED 2026-09-17 at $100/employee/month.
- * Founder-confirmed from staffing-cost margin model. Do not change without a new cost model.
- * ($75 drafts are obsolete; do not reopen that debate.)
- */
-const POST_PILOT_PRICE = 100;
+/** Standard rate — locked; intro is $50 for first 1–2 months. */
+const INTRO_PRICE = 50;
+const STANDARD_PRICE = 100;
 
 function esc(s) {
   return String(s)
@@ -57,34 +47,28 @@ function ctaButton(location) {
   return `<a class="button ds-button ds-button--accent" href="${CTA_HREF}" data-siya-track="employer_inquiry_click" data-siya-location="${location}" data-page-type="employer" data-intent="employer" data-conversion-goal="bookDemo" data-cta-slot="bookDemo" data-component="button">${esc(CTA_LABEL)}</a>`;
 }
 
-/** Clinical care flow — inline SVG (navy structure + champagne accent on step 1). */
 function careFlowSvg() {
   return `<figure class="employer-pitch-flow" aria-labelledby="care-flow-heading">
             <svg class="employer-pitch-flow-svg" viewBox="0 0 960 160" role="img" aria-label="Care flow: Intake and Cognitive Baseline, Provider Evaluation, Personalized Care Plan, Ongoing Management and Check-ins">
               <title>Clinical care flow</title>
-              <!-- connectors -->
               <line x1="210" y1="56" x2="250" y2="56" stroke="#C4A574" stroke-width="2" />
               <line x1="450" y1="56" x2="490" y2="56" stroke="#C4A574" stroke-width="2" />
               <line x1="690" y1="56" x2="730" y2="56" stroke="#C4A574" stroke-width="2" />
-              <!-- step 1 active accent -->
               <rect x="16" y="16" width="190" height="80" rx="10" fill="#ffffff" stroke="#C4A574" stroke-width="2.5" />
               <circle cx="48" cy="56" r="16" fill="url(#pitchFlowGrad)" />
               <text x="48" y="61" text-anchor="middle" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700">1</text>
               <text x="74" y="48" fill="#001878" font-family="Poppins, Arial, sans-serif" font-size="13" font-weight="700">Intake &amp;</text>
               <text x="74" y="66" fill="#001878" font-family="Poppins, Arial, sans-serif" font-size="13" font-weight="700">Cognitive Baseline</text>
-              <!-- step 2 -->
               <rect x="256" y="16" width="190" height="80" rx="10" fill="#ffffff" stroke="#001878" stroke-width="1.5" />
               <circle cx="288" cy="56" r="16" fill="#001878" />
               <text x="288" y="61" text-anchor="middle" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700">2</text>
               <text x="314" y="48" fill="#001878" font-family="Poppins, Arial, sans-serif" font-size="13" font-weight="700">Provider</text>
               <text x="314" y="66" fill="#001878" font-family="Poppins, Arial, sans-serif" font-size="13" font-weight="700">Evaluation</text>
-              <!-- step 3 -->
               <rect x="496" y="16" width="190" height="80" rx="10" fill="#ffffff" stroke="#001878" stroke-width="1.5" />
               <circle cx="528" cy="56" r="16" fill="#001878" />
               <text x="528" y="61" text-anchor="middle" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700">3</text>
               <text x="554" y="48" fill="#001878" font-family="Poppins, Arial, sans-serif" font-size="13" font-weight="700">Personalized</text>
               <text x="554" y="66" fill="#001878" font-family="Poppins, Arial, sans-serif" font-size="13" font-weight="700">Care Plan</text>
-              <!-- step 4 -->
               <rect x="736" y="16" width="208" height="80" rx="10" fill="#ffffff" stroke="#001878" stroke-width="1.5" />
               <circle cx="768" cy="56" r="16" fill="#001878" />
               <text x="768" y="61" text-anchor="middle" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700">4</text>
@@ -106,7 +90,7 @@ function careFlowSvg() {
 for (const rel of [PHOTO_SNEH, PHOTO_WENDY]) {
   const abs = path.join(ROOT, rel.replace(/^\//, ''));
   if (!fs.existsSync(abs)) {
-    console.warn(`WARNING: missing local photo ${rel} — page will reference it anyway`);
+    console.warn(`WARNING: missing local photo ${rel}`);
   }
 }
 
@@ -150,17 +134,34 @@ const html = `<!DOCTYPE html>
           <h1 id="pitch-hero-heading">One Care Team. Your Whole Team.</h1>
           <p class="employer-pitch-kicker employer-pitch-kicker--support">For <span class="employer-pitch-token">${esc(EMPLOYER_NAME)}</span> in California — dedicated care, not a network referral</p>
           <div class="employer-pitch-accent-rule" aria-hidden="true"></div>
-          <p class="employer-pitch-lead">Your California employees get a doctor and provider who actually know them — for everyday health, ADHD, mental health, hormones, and more. No juggling five apps. No cost to them, ever.</p>
+          <p class="employer-pitch-lead">Your California employees get a doctor and care team who actually know them — for everyday health, ADHD, mental health, hormones, and more. No juggling five apps. Covered clinical visits are included for enrolled employees; medications, labs, and other extras are billed separately and disclosed before anything is ordered.</p>
           <ul class="employer-pitch-hero-hooks" aria-label="Pilot highlights">
-            <li><strong>Month 1:</strong> $50 per employee — just to see if it&rsquo;s a fit</li>
-            <li><strong>If you continue:</strong> $${POST_PILOT_PRICE} per employee each month</li>
-            <li><strong>Small by design:</strong> each care team stays around 500–600 people, so visits don&rsquo;t turn into a rush</li>
-            <li><strong>California-licensed</strong> providers on your team — not a rotating clinic list</li>
+            <li><strong>Introductory:</strong> $${INTRO_PRICE} per enrolled employee/month for the first 1–2 months</li>
+            <li><strong>Standard:</strong> $${STANDARD_PRICE} per enrolled employee/month thereafter</li>
+            <li><strong>Pilot term:</strong> 6 months, with checkpoint reviews at month 3 and month 6</li>
+            <li><strong>California-licensed</strong> clinicians on your dedicated care team</li>
           </ul>
           <div class="employer-pitch-cta-row">
             ${ctaButton('ca-pilot-hero')}
           </div>
           <p class="employer-pitch-micro">Just a conversation to start. This page isn&rsquo;t for individual patient booking.</p>
+        </div>
+      </section>
+
+      <section class="employer-pitch-section employer-pitch-section--tint" id="credibility" aria-labelledby="credibility-heading">
+        <div class="container">
+          <header class="employer-pitch-section-header">
+            <h2 id="credibility-heading">Proof points</h2>
+            <p class="employer-pitch-section-lead">Operational scale and published ratings. Bracketed items still need a display date or source link before you treat them as send-ready.</p>
+          </header>
+          <ul class="employer-pitch-included employer-pitch-proof">
+            <li>2,700+ patients treated, 1,200+ clinical evaluations completed</li>
+            <li>Averaging about 180 new patients and 200 returning patients every month <span class="employer-pitch-placeholder">[confirm date range to display, e.g. &ldquo;as of September 2026&rdquo;]</span></li>
+            <li>Google: 4.90/5 average (88 reviews) <span class="employer-pitch-placeholder">[as of [date]]</span> <span class="employer-pitch-placeholder">[link/citation to Google reviews source]</span></li>
+            <li>Klarity: 4.66/5 average across 589 provider reviews <span class="employer-pitch-placeholder">[as of [date]]</span> <span class="employer-pitch-placeholder">[link/citation to Klarity source]</span></li>
+            <li>Concierge/care-management sessions have grown from 25/month to 50/month over the past quarter — an active care-management team already in place</li>
+          </ul>
+          <p class="employer-pitch-micro">Cognitive percentile improvement, after-hours/weekend appointment share, and retention rate: <span class="employer-pitch-placeholder">Coming soon</span> (metrics still in progress — no numbers published here).</p>
         </div>
       </section>
 
@@ -175,8 +176,8 @@ const html = `<!DOCTYPE html>
               <p class="employer-pitch-card-badge">Siya Health for ${esc(EMPLOYER_NAME)}</p>
               <h3>Your dedicated care team</h3>
               <ul>
-                <li>$${POST_PILOT_PRICE}/employee/month after Month 1</li>
-                <li>Primary care + ADHD/psychiatric management + objective cognitive testing — in one relationship</li>
+                <li>$${STANDARD_PRICE}/enrolled employee/month after the introductory period</li>
+                <li>Primary care + ADHD/psychiatric management + cognitive assessment — in one relationship</li>
                 <li>Each care team stays around 500–600 people</li>
               </ul>
             </article>
@@ -184,45 +185,83 @@ const html = `<!DOCTYPE html>
         </div>
       </section>
 
-      <section class="employer-pitch-section employer-pitch-section--tint" id="pricing" aria-labelledby="pricing-heading">
+      <section class="employer-pitch-section employer-pitch-section--tint" id="included" aria-labelledby="included-heading">
         <div class="container">
           <header class="employer-pitch-section-header">
-            <h2 id="pricing-heading">Try it first.</h2>
-            <p class="employer-pitch-section-lead">Month 1 is $50 per employee — genuinely just to see if it&rsquo;s a fit. If it is, we settle into $${POST_PILOT_PRICE}/employee/month going forward. No surprises, no renegotiation, just a fair next step if you want to keep going.</p>
+            <p class="employer-pitch-section-label">Section 4</p>
+            <h2 id="included-heading">What&rsquo;s included vs. billed separately</h2>
+            <p class="employer-pitch-section-lead">Covered clinical care is included for enrolled employees at $0 to them. Other services are billed separately and disclosed before anything is ordered.</p>
           </header>
-          <div class="employer-pitch-pricing">
-            <div class="employer-pitch-price-card employer-pitch-price-card--pilot">
-              <p class="employer-pitch-price-label">Month 1</p>
-              <p class="employer-pitch-price"><span class="employer-pitch-price-amount">$50</span><span class="employer-pitch-price-unit">/employee/month</span></p>
-              <p class="employer-pitch-price-note">A real try-out for ${esc(EMPLOYER_NAME)} — not a lock-in</p>
+          <div class="employer-pitch-split">
+            <div>
+              <h3 class="employer-pitch-subhead">Included at $0 to employees</h3>
+              <ul class="employer-pitch-included">
+                <li>Primary care visits and follow-ups</li>
+                <li>ADHD evaluation and ongoing management</li>
+                <li>General psychiatric care (depression, anxiety, sleep, stress-related conditions)</li>
+                <li>Cognitive assessment (baseline + follow-up, one input to clinician evaluation)</li>
+                <li>Metabolic and weight management, including obesity medicine consultations</li>
+                <li>Hormonal health evaluation and treatment <span class="employer-pitch-placeholder">[scope: confirm which conditions — e.g. menopause, thyroid]</span></li>
+                <li>Secure messaging and care navigation</li>
+                <li>Ongoing care management through our Medical Assistant team (concierge check-ins, monitoring, follow-up)</li>
+              </ul>
             </div>
-            <div class="employer-pitch-price-card employer-pitch-price-card--continued">
-              <p class="employer-pitch-price-label">If you continue</p>
-              <p class="employer-pitch-price"><span class="employer-pitch-price-amount">$${POST_PILOT_PRICE}</span><span class="employer-pitch-price-unit">/employee/month</span></p>
-              <p class="employer-pitch-price-note">Same clear number from Month 2 onward — no quiet renegotiation</p>
+            <div>
+              <h3 class="employer-pitch-subhead">Billed separately (disclosed before ordered)</h3>
+              <ul class="employer-pitch-included employer-pitch-included--separate">
+                <li>Prescription medications</li>
+                <li>Laboratory services and additional/extra testing</li>
+                <li>Specialist consultations and referrals</li>
+                <li>In-person, urgent, and emergency care</li>
+              </ul>
             </div>
           </div>
-          <aside class="employer-pitch-scope" role="note">
-            <p>This pilot is for your employees — we&rsquo;re keeping it simple to start. If it&rsquo;s a great fit, extending to spouses and family is a natural next conversation.</p>
-          </aside>
         </div>
       </section>
 
-      <section class="employer-pitch-section" id="included" aria-labelledby="included-heading">
+      <section class="employer-pitch-section" id="pricing" aria-labelledby="pricing-heading">
         <div class="container">
           <header class="employer-pitch-section-header">
-            <h2 id="included-heading">Everything, in one place.</h2>
-            <p class="employer-pitch-section-lead">Primary care. ADHD and mental health support. Hormone and metabolic health. Real cognitive testing, not guesswork. One team, one relationship, one place to go.</p>
+            <p class="employer-pitch-section-label">Section 5 · Pricing &amp; term</p>
+            <h2 id="pricing-heading">Pricing (per enrolled employee)</h2>
+            <p class="employer-pitch-section-lead">Billed per <strong>enrolled</strong> employee — not per eligible employee. Pilot term is 6 months, with checkpoint reviews at month 3 and month 6. If you continue after the pilot, the standard rate is held for 12 months.</p>
           </header>
-          <ul class="employer-pitch-included">
-            <li>Primary care</li>
-            <li>ADHD/psychiatric diagnosis and management</li>
-            <li>Objective cognitive testing</li>
-            <li>Concierge navigation (pharmacy coordination, prior authorization, lab routing)</li>
-            <li>Metabolic and weight management (including obesity medicine)</li>
-            <li>Hormonal health evaluation and treatment</li>
-            <li>General psychiatric care (depression, anxiety, sleep, stress-related conditions) beyond ADHD specifically</li>
-          </ul>
+          <div class="employer-pitch-pricing">
+            <div class="employer-pitch-price-card employer-pitch-price-card--pilot">
+              <p class="employer-pitch-price-label">Introductory (first 1–2 months)</p>
+              <p class="employer-pitch-price"><span class="employer-pitch-price-amount">$${INTRO_PRICE}</span><span class="employer-pitch-price-unit">/enrolled employee/month</span></p>
+              <p class="employer-pitch-price-note">A real try-out for ${esc(EMPLOYER_NAME)}</p>
+            </div>
+            <div class="employer-pitch-price-card employer-pitch-price-card--continued">
+              <p class="employer-pitch-price-label">Standard rate</p>
+              <p class="employer-pitch-price"><span class="employer-pitch-price-amount">$${STANDARD_PRICE}</span><span class="employer-pitch-price-unit">/enrolled employee/month</span></p>
+              <p class="employer-pitch-price-note">Held for 12 months after the pilot if you continue</p>
+            </div>
+          </div>
+          <div class="employer-pitch-term-sheet" id="term-sheet">
+            <h3 class="employer-pitch-subhead">Term sheet summary</h3>
+            <table class="employer-pitch-table">
+              <caption class="visually-hidden">Pilot commercial terms</caption>
+              <tbody>
+                <tr>
+                  <th scope="row">Part 3A — Billing unit</th>
+                  <td>Per enrolled employee / month</td>
+                </tr>
+                <tr>
+                  <th scope="row">Part 3B — Rates</th>
+                  <td>$${INTRO_PRICE} introductory (months 1–2) · $${STANDARD_PRICE} standard thereafter · 12-month standard-rate lock if continued after pilot</td>
+                </tr>
+                <tr>
+                  <th scope="row">Pilot term</th>
+                  <td>6 months · checkpoint reviews at month 3 and month 6</td>
+                </tr>
+                <tr>
+                  <th scope="row">Contracting entity</th>
+                  <td>${esc(LEGAL_ENTITY)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <aside class="employer-pitch-scope" role="note">
             <p>This pilot is for your employees — we&rsquo;re keeping it simple to start. If it&rsquo;s a great fit, extending to spouses and family is a natural next conversation.</p>
           </aside>
@@ -232,8 +271,8 @@ const html = `<!DOCTYPE html>
       <section class="employer-pitch-section employer-pitch-section--tint" id="care-flow" aria-labelledby="care-flow-heading">
         <div class="container">
           <header class="employer-pitch-section-header">
-            <h2 id="care-flow-heading">What to expect.</h2>
-            <p class="employer-pitch-section-lead">We start with intake and a cognitive baseline, then a formally scheduled visit to meet your provider and build a plan. After that, most day-to-day contact happens via secure messaging, a quick photo or video of a concern, or a video call when you need face-to-face — so you can share what&rsquo;s going on and hear back the same day. A licensed provider still reviews and responds; this is fast communication, not automated diagnosis. Scheduled visits still use our booking, notes, and billing workflow.</p>
+            <h2 id="care-flow-heading">What to expect</h2>
+            <p class="employer-pitch-section-lead">We start with intake and a cognitive baseline, then a formally scheduled visit to meet your provider and build a plan. After that, most day-to-day contact happens via secure messaging, a quick photo or video of a concern, or a video call when needed — so you can share what&rsquo;s going on and hear back the same day. A licensed provider still reviews and responds; this is fast communication, not automated diagnosis.</p>
           </header>
 ${careFlowSvg()}
         </div>
@@ -243,22 +282,43 @@ ${careFlowSvg()}
         <div class="container">
           <header class="employer-pitch-section-header">
             <h2 id="access-heading">How your people get in</h2>
-            <p class="employer-pitch-section-lead">Simple for HR. Easy for employees. And it&rsquo;s <strong>always free for them</strong>.</p>
+            <p class="employer-pitch-section-lead">Simple for HR. Easy for employees. Covered clinical visits in the base plan are <strong>$0 to enrolled employees</strong>; separately billed items are disclosed before ordered.</p>
           </header>
           <ol class="employer-pitch-access">
             <li>Employer-branded login</li>
             <li>Verified against employer roster</li>
-            <li>Book scheduled visits with your dedicated provider team; message the team between visits</li>
-            <li>Zero cost to the employee</li>
+            <li>Book scheduled visits with your dedicated care team; message between visits</li>
+            <li>Covered visits included; extras disclosed before ordered</li>
           </ol>
         </div>
       </section>
 
-      <section class="employer-pitch-section" id="care-team" aria-labelledby="care-team-heading">
+      <section class="employer-pitch-section employer-pitch-section--tint" id="confidentiality" aria-labelledby="confidentiality-heading">
         <div class="container">
           <header class="employer-pitch-section-header">
-            <h2 id="care-team-heading">Meet the people behind your care</h2>
-            <p class="employer-pitch-section-lead">Your employees will know who they&rsquo;re talking to. You&rsquo;ll know who&rsquo;s accountable.</p>
+            <p class="employer-pitch-section-label">Section 7 · Confidentiality</p>
+            <h2 id="confidentiality-heading">What employers see — and what they don&rsquo;t</h2>
+            <p class="employer-pitch-section-lead">Employers receive de-identified, aggregate reports only, for groups of 10 or more employees. Never who enrolled, who visited, or why.</p>
+          </header>
+        </div>
+      </section>
+
+      <section class="employer-pitch-section" id="controlled-substance" aria-labelledby="controlled-heading">
+        <div class="container">
+          <header class="employer-pitch-section-header">
+            <p class="employer-pitch-section-label">Section 8</p>
+            <h2 id="controlled-heading">Controlled-substance contingency</h2>
+            <p class="employer-pitch-section-lead"><span class="employer-pitch-placeholder">[Controlled-substance contingency plan detail — policy not yet finalized]</span></p>
+          </header>
+        </div>
+      </section>
+
+      <section class="employer-pitch-section employer-pitch-section--tint" id="care-team" aria-labelledby="care-team-heading">
+        <div class="container">
+          <header class="employer-pitch-section-header">
+            <p class="employer-pitch-section-label">Section 9 · Care team</p>
+            <h2 id="care-team-heading">A dynamic care team of board-certified clinicians</h2>
+            <p class="employer-pitch-section-lead">Your people work with a dedicated team — not a rotating clinic list. Leads below; the fuller roster is dynamic and staffed to the panel.</p>
           </header>
           <div class="employer-pitch-team">
             <article class="employer-pitch-provider">
@@ -269,12 +329,13 @@ ${careFlowSvg()}
                 </picture>
               </div>
               <div class="employer-pitch-provider-body">
-                <h3>Dr. Sneh Pandey, MD</h3>
+                <h3>Sneh Pandey, MD <span class="employer-pitch-card-note">(lead)</span></h3>
                 <p class="employer-pitch-role">Internal Medicine &amp; Obesity Medicine (Board Certified, American Board of Obesity Medicine)</p>
                 <ul class="employer-pitch-creds">
                   <li>${esc(DR_PANDEY_EXPERIENCE)}</li>
                   <li>4.72 rating (296 verified patient reviews)</li>
                   <li>Licensed in California, Texas, Pennsylvania, Florida</li>
+                  <li>License number: <span class="employer-pitch-placeholder">[confirm]</span></li>
                   <li>Residency: University of Pittsburgh Medical Center</li>
                   <li>Medical degree: Maulana Azad Medical College</li>
                 </ul>
@@ -285,44 +346,56 @@ ${careFlowSvg()}
                 <img src="${PHOTO_WENDY}" alt="Wendy Delgado, PA-C" width="160" height="160" loading="lazy" decoding="async" />
               </div>
               <div class="employer-pitch-provider-body">
-                <h3>Wendy Delgado, PA-C</h3>
+                <h3>Wendy Delgado, PA-C <span class="employer-pitch-card-note">(lead)</span></h3>
                 <p class="employer-pitch-role">Specializes in psychiatric/mental health and ADHD management alongside general primary care</p>
                 <ul class="employer-pitch-creds">
                   <li>17 years of clinical experience</li>
                   <li>4.89 rating (52 verified patient reviews)</li>
                   <li>Multi-state licensed including California</li>
+                  <li>License number: <span class="employer-pitch-placeholder">[confirm]</span></li>
                 </ul>
               </div>
             </article>
           </div>
-          <aside class="employer-pitch-supervision" aria-label="Supervision structure">
-            <p><strong>How it works day to day:</strong> Wendy is usually your team&rsquo;s first stop for scheduled care (Mon–Fri, 10am–6pm). Dr. Pandey supervises, and he&rsquo;s there for complex cases, urgent escalations, and evenings or weekends when someone needs him.</p>
+          <aside class="employer-pitch-supervision" aria-label="Team structure">
+            <p><strong>How it works day to day:</strong> Wendy is often the first stop for scheduled care (Mon–Fri, 10am–6pm). Dr. Pandey supervises and is available for complex cases and escalations. Additional board-certified clinicians join the panel as enrollment grows — this page does not list every team member.</p>
           </aside>
+        </div>
+      </section>
+
+      <section class="employer-pitch-section" id="response-times" aria-labelledby="response-heading">
+        <div class="container">
+          <header class="employer-pitch-section-header">
+            <p class="employer-pitch-section-label">Section 10 · Response times</p>
+            <h2 id="response-heading">How quickly we respond</h2>
+            <p class="employer-pitch-section-lead">Scheduling and non-urgent questions: concierge team responds within 1 hour during business hours.</p>
+          </header>
+          <p class="employer-pitch-section-lead">Emergency: call <strong>911</strong>. Mental health crisis: call or text <strong>988</strong>. Do not use this page or messaging for emergencies.</p>
         </div>
       </section>
 
       <section class="employer-pitch-section employer-pitch-section--tint" id="sample-journey" aria-labelledby="sample-journey-heading">
         <div class="container">
           <header class="employer-pitch-section-header">
-            <h2 id="sample-journey-heading">A Typical Care Journey</h2>
-            <p class="employer-pitch-illustrative-note" role="note"><strong>Illustrative example — not an individual patient&rsquo;s story.</strong> This narrative is a composite walkthrough for employers. It is separate from the verified, attributed patient reviews below.</p>
+            <h2 id="sample-journey-heading">A typical care journey</h2>
+            <p class="employer-pitch-illustrative-note" role="note"><strong>Illustrative example — not an individual patient&rsquo;s story.</strong> Composite walkthrough for employers; separate from attributed reviews below.</p>
           </header>
           <ol class="employer-pitch-journey">
             <li>
               <strong>First login &amp; scheduled onboarding</strong>
-              <p>Someone on your team signs in through the employer-branded login, gets verified against your roster, and books an initial visit with your dedicated providers — at zero cost to them.</p>
+              <p>Someone on your team signs in through the employer-branded login, gets verified against your roster, and books an initial visit with your dedicated care team.</p>
             </li>
             <li>
               <strong>Intake &amp; cognitive baseline</strong>
-              <p>They complete a real intake and objective cognitive testing, so the first visit starts with a clear baseline — not guesswork from a rushed chat.</p>
+              <p>They complete intake and a cognitive assessment (baseline), so the first visit starts with a clear clinical input — not guesswork from a rushed chat.</p>
             </li>
             <li>
               <strong>Provider evaluation &amp; plan</strong>
-              <p>They meet the care team in a formally scheduled visit (usually Wendy, with Dr. Pandey supervising and available when things get complex). Together they build a plan that can include primary care, ADHD/mental health support, metabolic or hormonal work, and a sensible follow-up rhythm.</p>
+              <p>They meet the care team in a formally scheduled visit. Together they build a plan that can include primary care, ADHD/mental health support, metabolic or hormonal work, and a sensible follow-up rhythm.</p>
             </li>
             <li>
               <strong>Ongoing management</strong>
-              <p>Most day-to-day contact happens via messaging, a quick photo-based check-in, or video when needed — so people can share what&rsquo;s going on and hear back the same day from a licensed provider (not an automated diagnosis). Later scheduled visits still use our booking, notes, and billing workflow. Concierge still helps with pharmacy, prior auth, and labs so the plan doesn&rsquo;t stall.</p>
+              <p>Day-to-day contact via messaging, photo-based check-ins, or video when needed — share what&rsquo;s going on and hear back the same day from a licensed clinician (not an automated diagnosis). Concierge and Medical Assistant care management keep pharmacy, prior auth, and labs from stalling the plan.</p>
             </li>
           </ol>
         </div>
@@ -332,7 +405,7 @@ ${careFlowSvg()}
         <div class="container">
           <header class="employer-pitch-section-header">
             <h2 id="reviews-heading">What patients say about this team</h2>
-            <p class="employer-pitch-section-lead">These are real, attributed reviews for the providers who&rsquo;d care for ${esc(EMPLOYER_NAME)} — not a platform-wide average, and not the illustrative journey above.</p>
+            <p class="employer-pitch-section-lead">Attributed reviews for clinicians who lead care for ${esc(EMPLOYER_NAME)} — not a platform-wide average, and not the illustrative journey above.</p>
           </header>
           <div class="employer-pitch-reviews">
             <blockquote class="employer-pitch-quote">
@@ -347,18 +420,24 @@ ${careFlowSvg()}
         </div>
       </section>
 
-      <section class="employer-pitch-section employer-pitch-section--tint" id="coverage" aria-labelledby="coverage-heading">
+      <section class="employer-pitch-section employer-pitch-section--tint" id="security" aria-labelledby="security-heading">
         <div class="container">
           <header class="employer-pitch-section-header">
-            <h2 id="coverage-heading">We&rsquo;ll always tell you the truth about availability.</h2>
-            <p class="employer-pitch-section-lead">Wendy&rsquo;s your go-to, weekdays 10–6. Evenings, weekends, and anything urgent — Dr. Pandey&rsquo;s got you, usually within 2 hours. We&rsquo;re a small, dedicated team, which means real relationships — and also means that, very occasionally, someone might be out sick just like anywhere else. We&rsquo;d rather tell you that upfront than pretend otherwise.</p>
+            <p class="employer-pitch-section-label">Section 13 · Security and compliance</p>
+            <h2 id="security-heading">Security and compliance</h2>
+            <p class="employer-pitch-section-lead">Clinical services under this pilot are provided through <strong>${esc(LEGAL_ENTITY)}</strong>. We follow HIPAA-aligned telehealth practices for employee care. Employer partnership reporting is limited to de-identified aggregates as described in Section 7.</p>
           </header>
-          <div class="employer-pitch-coverage">
-            <ul>
-              <li>Concierge team response within 30 minutes</li>
-              <li>Provider response to escalations within 24 hours</li>
-            </ul>
-          </div>
+          <p class="employer-pitch-section-lead"><span class="employer-pitch-placeholder">[Knox-Keene / benefit classification / ERISA language — awaiting counsel]</span></p>
+        </div>
+      </section>
+
+      <section class="employer-pitch-section" id="hsa" aria-labelledby="hsa-heading">
+        <div class="container">
+          <header class="employer-pitch-section-header">
+            <p class="employer-pitch-section-label">Section 14 · HSA</p>
+            <h2 id="hsa-heading">HSA compatibility</h2>
+            <p class="employer-pitch-section-lead"><span class="employer-pitch-placeholder">[HSA compatibility — reviewing with tax counsel; no claim of compatibility]</span></p>
+          </header>
         </div>
       </section>
 
@@ -369,14 +448,14 @@ ${careFlowSvg()}
           <div class="employer-pitch-cta-row">
             ${ctaButton('ca-pilot-close')}
           </div>
-          <p class="employer-pitch-foot">Partnership information only—not medical advice. Emergency: call 911.</p>
+          <p class="employer-pitch-foot">Partnership information only — not medical advice. Emergency: call 911. Mental health crisis: 988.</p>
         </div>
       </section>
     </main>
 
     <footer class="footer employer-pitch-footer">
       <div class="container">
-        <p class="footer-legal-micro">Siya Health · California employer pilot</p>
+        <p class="footer-legal-micro">${esc(LEGAL_ENTITY)} · Siya Health · California employer pilot · Invitation-only</p>
       </div>
     </footer>
   </body>

@@ -12283,6 +12283,94 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
   color: var(--text-secondary);
 }
 
+.employer-pitch-section-label {
+  margin: 0 0 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.employer-pitch-subhead {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  color: var(--primary);
+}
+
+.employer-pitch-placeholder {
+  color: #7a1f5c;
+  font-weight: 600;
+  background: #fff8e8;
+  border: 1px dashed #c4a574;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+.employer-pitch-split {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 800px) {
+  .employer-pitch-split {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+}
+
+.employer-pitch-included--separate li::before {
+  background: var(--primary);
+}
+
+.employer-pitch-term-sheet {
+  margin-top: 1.5rem;
+}
+
+.employer-pitch-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.employer-pitch-table th,
+.employer-pitch-table td {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.95rem;
+}
+
+.employer-pitch-table th {
+  width: 32%;
+  color: var(--primary);
+  font-weight: 600;
+  background: #faf7f2;
+}
+
+.employer-pitch-table tr:last-child th,
+.employer-pitch-table tr:last-child td {
+  border-bottom: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 @media (max-width: 700px) {
   .employer-pitch-flow-svg {
     min-height: 280px;
