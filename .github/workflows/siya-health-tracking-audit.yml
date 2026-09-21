@@ -66,6 +66,7 @@ jobs:
 
       - name: Deliver markdown summary to Zoho WorkDrive
         if: always() && steps.audit.outputs.md != ''
+        continue-on-error: true
         env:
           ZOHO_CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID }}
           ZOHO_CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}
@@ -85,6 +86,7 @@ jobs:
             exit 0
           fi
           python3 apps/siya-health/scripts/upload-tracking-audit-workdrive.py --md "$MD"
+          echo "WorkDrive target: Siya Knowledge Editorial/_API-DRY-RUN/04-Content-Tracker/tracking-audits/"
 
       - name: Open GitHub Issue on regression / failure
         if: failure()
@@ -99,7 +101,7 @@ jobs:
               `- Workflow: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
               `- Stamp: ${stamp}`,
               '- Check artifacts for full JSON/MD report.',
-              '- WorkDrive (if secrets set): `Siya Knowledge Editorial/_API-DRY-RUN/08-Tracking-Audits/`',
+              '- WorkDrive (if secrets set): `Siya Knowledge Editorial/_API-DRY-RUN/04-Content-Tracker/tracking-audits/`',
               '',
               'Health-identifying pages must stay free of Meta Pixel, GTM/GA4, Google Ads, and DoubleClick.',
               'Vendor destinations must not load our GTM-PLBD4TTQ.',

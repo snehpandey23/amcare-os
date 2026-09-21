@@ -66,7 +66,9 @@ Each run: full HTML crawl + content classification + Playwright network check on
 1. GitHub Actions **artifact** (`siya-health-tracking-audit-YYYY-MM`)
 2. Commit into `apps/siya-health/docs/tracking-audits/` when the job succeeds on `main`
 3. GitHub **Issue** if health pages regress, our GTM appears on vendor pages, or the job fails
-4. **WorkDrive** markdown summary → `Siya Knowledge Editorial/_API-DRY-RUN/08-Tracking-Audits/`  
-   (same Zoho OAuth secrets as Phase-3 cloud content pipeline: `ZOHO_CLIENT_ID` / `ZOHO_CLIENT_SECRET` / `ZOHO_REFRESH_TOKEN` / `ZOHO_ACCOUNTS_URL` + `WORKDRIVE_DRYRUN_04_ID` to resolve the dry-run root)
+4. **WorkDrive** markdown summary →  
+   `Siya Knowledge Editorial/_API-DRY-RUN/04-Content-Tracker/tracking-audits/`  
+   (same Zoho OAuth secrets as Phase-3 cloud content pipeline: `ZOHO_CLIENT_ID` / `ZOHO_CLIENT_SECRET` / `ZOHO_REFRESH_TOKEN` / `ZOHO_ACCOUNTS_URL` + `WORKDRIVE_DRYRUN_04_ID`)
 
-Optional override: `WORKDRIVE_TRACKING_AUDIT_FOLDER_ID` if you prefer a fixed folder id.
+Optional override: `WORKDRIVE_TRACKING_AUDIT_FOLDER_ID` for a fixed destination folder id.  
+WorkDrive step is `continue-on-error` so a Zoho outage does not block the git/artifact delivery.
