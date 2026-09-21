@@ -11723,6 +11723,11 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
     grid-template-columns: repeat(3, 1fr);
     align-items: stretch;
   }
+
+  .employer-pitch-compare--solo {
+    grid-template-columns: minmax(0, 28rem);
+    justify-content: start;
+  }
 }
 
 .employer-pitch-compare-card {

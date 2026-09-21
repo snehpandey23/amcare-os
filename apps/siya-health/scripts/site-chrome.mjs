@@ -1523,6 +1523,16 @@ export function injectGtmAndTracking(html, relPath = '') {
   html = stripExistingGtag(html);
   html = stripExistingMetaPixel(html);
 
+  // Invitation-only / internal review surfaces — no marketing pixels
+  if (
+    /^employers\/california-pilot\.html$/i.test(relPath) ||
+    /^internal\//i.test(relPath)
+  ) {
+    html = html.replace(/<!--\s*SIYA:TRACKING\s*-->[\s\S]*?<!--\s*\/SIYA:TRACKING\s*-->\s*/gi, '');
+    html = html.replace(/<script src="\/scripts\/siya-tracking\.js"(?:\s+defer)?><\/script>\s*/gi, '');
+    return html;
+  }
+
   if (!html.includes(`gtm.js?id=${GTM_ID}`)) {
     if (html.includes('cookie-consent-bootstrap.js')) {
       html = html.replace(
