@@ -1,7 +1,7 @@
 # Siya Health × Rupa Labs — UX Journey Audit
 
 **Date:** 2026-07-20  
-**Storefront:** https://labs.rupahealth.com/store/storefront_42daXx7  
+**Storefront:** https://us.fullscript.com/s/siyahealth/shop  
 **Siya Labs hub:** https://www.siya.health/labs  
 **Screenshots:** `apps/siya-health/audit/labs-storefront/`  
 **Scope:** Audit only — no website code changes in this phase.

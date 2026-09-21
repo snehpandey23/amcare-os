@@ -17,9 +17,8 @@ export const REDIRECT_ADHD_WALKTHROUGH_URL = '/redirect/adhd-walkthrough';
 export const REDIRECT_ADHD_EVALUATION_URL = '/redirect/adhd-evaluation';
 export const ZOCDOC_BOOKING_URL =
   'https://www.zocdoc.com/booking-link/practice/siya-healthcare-182234';
-/** Direct-pay laboratory storefront (Rupa Health) — browse tests & pricing externally */
-export const RUPA_LAB_STOREFRONT_URL =
-  'https://labs.rupahealth.com/store/storefront_42daXx7';
+/** Direct-pay laboratory storefront (Fullscript) — browse tests & pricing externally */
+export const LAB_STOREFRONT_URL = 'https://us.fullscript.com/s/siyahealth/shop';
 /** Free 15-minute Meet & Greet / discovery call (non-clinical) */
 export const MEET_GREET_BOOKING_URL = `${CAREPATRON_BASE}&i=kkarJfxH`;
 /** @deprecated Alias — intro call / walkthrough now routes to Meet & Greet slot */

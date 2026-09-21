@@ -1,10 +1,11 @@
 /**
- * Intercept Rupa lab storefront clicks → lightweight "Leaving Siya" modal.
+ * Intercept lab storefront clicks → lightweight "Leaving Siya" modal.
  * Continue opens storefront in a new tab and fires lab_storefront_click.
  */
 (function () {
   window.__siyaLabLeaveModal = true;
-  var STORE_HOST = 'labs.rupahealth.com';
+  var STORE_HOST = 'us.fullscript.com';
+  var STORE_PATH_PREFIX = '/s/siyahealth';
   var pendingHref = '';
   var overlay = null;
 
@@ -29,7 +30,7 @@
       '<div class="siya-lab-leave-modal__panel">' +
       '<h2 id="siya-lab-leave-title">Leaving Siya Health</h2>' +
       '<p>You&rsquo;re opening <strong>Siya&rsquo;s laboratory storefront</strong>.</p>' +
-      '<p class="siya-lab-leave-modal__muted">Powered by Rupa Health. Prices and availability are shown there and may change.</p>' +
+      '<p class="siya-lab-leave-modal__muted">Powered by Fullscript. Prices and availability are shown there and may change.</p>' +
       '<p>You can always return to Siya for interpretation and ongoing care.</p>' +
       '<div class="siya-lab-leave-modal__actions">' +
       '<button type="button" class="button ds-button ds-button--secondary secondary" data-siya-lab-leave-dismiss>Stay on Siya</button>' +
@@ -89,7 +90,9 @@
   function isStorefrontLink(a) {
     if (!a || !a.getAttribute) return false;
     var href = a.href || a.getAttribute('href') || '';
-    if (href.indexOf(STORE_HOST) !== -1) return true;
+    if (href.indexOf(STORE_HOST) !== -1 && href.indexOf(STORE_PATH_PREFIX) !== -1) {
+      return true;
+    }
     return (a.getAttribute('data-siya-track') || '') === 'lab_storefront_click';
   }
 

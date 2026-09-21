@@ -2,7 +2,7 @@
 
 Goal: burn monthly Cursor capacity on high-leverage Siya Health work while keeping:
 
-> **Siya owns relationship, education, clinical judgment. Rupa owns ordering logistics.**
+> **Siya owns relationship, education, clinical judgment. Fullscript owns ordering logistics.**
 
 Language: **follow-up plans** (not membership tiers). `/membership-pricing` stays 301 → `/pricing`.
 
@@ -35,7 +35,7 @@ Language: **follow-up plans** (not membership tiers). `/membership-pricing` stay
 
 ### Day 4 — QA / polish
 - [x] QA punch-list — leave `adhd-evaluation-cost.html`; how-to-read full chrome; hub + how-to-read link new guides (deployed)
-- [ ] Analytics: confirm `lab_storefront_modal_open` → `lab_storefront_click` in GTM (human)
+- [x] Analytics: confirm `lab_storefront_modal_open` → `lab_storefront_click` in dataLayer on www.siya.health/labs (2026-09-21 Fullscript swap; destination_url=`https://us.fullscript.com/s/siyahealth/shop`). GTM container still must have Custom Event triggers if GA4/Ads should receive these — dataLayer push verified live.
 - [ ] Visual pass desktop/mobile on funnel pages (optional)
 - [x] Final polish deploy for QA fixes
 
@@ -43,7 +43,7 @@ Language: **follow-up plans** (not membership tiers). `/membership-pricing` stay
 - Blog cornerstone inbound wave to `/labs/preventive` + how-to-read
 - State availability preview before storefront leave
 - Medical review flags from LABS audit §7
-- Rupa admin: LabCorop → LabCorp (human)
+- Fullscript storefront catalog QA (human)
 
 ## Explicit non-goals
 - No sticky Labs CTA / Services dropdown / storefront screenshots

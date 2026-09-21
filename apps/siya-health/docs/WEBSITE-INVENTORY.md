@@ -2369,7 +2369,7 @@ Generated: 2026-09-02
 - **URL:** https://siya.health/labs
 - **Page Type:** Service Page
 - **Primary Purpose:** Explore transparent direct-pay laboratory testing for thyroid, blood sugar, vitamins, iron, metabolic health and preventive care. Physician guidance available through Siya Health.
-- **Primary CTA:** Browse Lab Tests → https://labs.rupahealth.com/store/storefront_42daXx7
+- **Primary CTA:** Browse Lab Tests → https://us.fullscript.com/s/siyahealth/shop
 - **Secondary CTA:** Book Free Meet & Greet → /redirect/meet-greet
 - **Traffic Intent:** Commercial / Transactional
 - **Target Keyword:** Labs & Blood Tests with Transparent Direct-Pay Options
@@ -2397,8 +2397,8 @@ Generated: 2026-09-02
 - **URL:** https://siya.health/labs/adhd-support
 - **Page Type:** Page
 - **Primary Purpose:** Blood tests do not diagnose ADHD. Learn when selected labs may help evaluate other contributors to fatigue, concentration problems, or brain fog—and how Siya Health approaches testing.
-- **Primary CTA:** Browse Lab Tests → https://labs.rupahealth.com/store/storefront_42daXx7
-- **Secondary CTA:** Browse Lab Tests → https://labs.rupahealth.com/store/storefront_42daXx7
+- **Primary CTA:** Browse Lab Tests → https://us.fullscript.com/s/siyahealth/shop
+- **Secondary CTA:** Browse Lab Tests → https://us.fullscript.com/s/siyahealth/shop
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Labs When Focus, Fatigue & Brain Fog Overlap
 - **Word Count:** 406
@@ -2439,8 +2439,8 @@ Generated: 2026-09-02
 - **URL:** https://siya.health/labs/fatigue-brain-fog
 - **Page Type:** Page
 - **Primary Purpose:** Learn which laboratory tests clinicians may consider for fatigue and brain fog—and why results need clinical context. Transparent direct-pay options available.
-- **Primary CTA:** Browse Lab Tests → https://labs.rupahealth.com/store/storefront_42daXx7
-- **Secondary CTA:** Browse Lab Tests → https://labs.rupahealth.com/store/storefront_42daXx7
+- **Primary CTA:** Browse Lab Tests → https://us.fullscript.com/s/siyahealth/shop
+- **Secondary CTA:** Browse Lab Tests → https://us.fullscript.com/s/siyahealth/shop
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Fatigue & Brain Fog Labs
 - **Word Count:** 586
@@ -2495,8 +2495,8 @@ Generated: 2026-09-02
 - **URL:** https://siya.health/labs/mens-health
 - **Page Type:** Page
 - **Primary Purpose:** Learn when testosterone and related laboratory testing may be appropriate for energy, drive, or metabolic concerns—and why results need clinical context. Direct-pay options available.
-- **Primary CTA:** Browse Lab Tests → https://labs.rupahealth.com/store/storefront_42daXx7
-- **Secondary CTA:** Browse Lab Tests → https://labs.rupahealth.com/store/storefront_42daXx7
+- **Primary CTA:** Browse Lab Tests → https://us.fullscript.com/s/siyahealth/shop
+- **Secondary CTA:** Browse Lab Tests → https://us.fullscript.com/s/siyahealth/shop
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Men's Health Lab Evaluation
 - **Word Count:** 506
@@ -2509,8 +2509,8 @@ Generated: 2026-09-02
 - **URL:** https://siya.health/labs/preventive
 - **Page Type:** Page
 - **Primary Purpose:** Explore commonly ordered preventive laboratory tests—CBC, metabolic panel, lipids, A1c—and how physician-guided testing supports primary care. Transparent direct-pay options available.
-- **Primary CTA:** Browse Lab Tests → https://labs.rupahealth.com/store/storefront_42daXx7
-- **Secondary CTA:** Browse Lab Tests → https://labs.rupahealth.com/store/storefront_42daXx7
+- **Primary CTA:** Browse Lab Tests → https://us.fullscript.com/s/siyahealth/shop
+- **Secondary CTA:** Browse Lab Tests → https://us.fullscript.com/s/siyahealth/shop
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Preventive Primary Care Labs
 - **Word Count:** 616
@@ -2565,8 +2565,8 @@ Generated: 2026-09-02
 - **URL:** https://siya.health/labs/womens-midlife
 - **Page Type:** Page
 - **Primary Purpose:** Learn how laboratory testing may support women’s midlife concerns—fatigue, brain fog, iron, thyroid, and metabolic markers—without claiming a hormone panel diagnoses perimenopause.
-- **Primary CTA:** Browse Lab Tests → https://labs.rupahealth.com/store/storefront_42daXx7
-- **Secondary CTA:** Browse Lab Tests → https://labs.rupahealth.com/store/storefront_42daXx7
+- **Primary CTA:** Browse Lab Tests → https://us.fullscript.com/s/siyahealth/shop
+- **Secondary CTA:** Browse Lab Tests → https://us.fullscript.com/s/siyahealth/shop
 - **Traffic Intent:** Mixed
 - **Target Keyword:** Women's Midlife Lab Evaluation
 - **Word Count:** 486

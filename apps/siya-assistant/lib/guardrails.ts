@@ -81,7 +81,7 @@ const ALLOWED_URL_HOSTS = new Set([
   'book.carepatron.com',
   'spruce.care',
   'www.zocdoc.com',
-  'labs.rupahealth.com',
+  'us.fullscript.com',
 ])
 
 export function scrubOutputText(text: string): string {

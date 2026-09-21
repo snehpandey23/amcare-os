@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
-const SKIP_DIRS = new Set(['node_modules', '.vercel', '.git', 'docs', 'data', 'public']);
+const SKIP_DIRS = new Set(['node_modules', '.vercel', '.git', 'docs', 'data', 'public', 'previews']);
 
 const PLACEHOLDER_HREFS = new Set([
   '',

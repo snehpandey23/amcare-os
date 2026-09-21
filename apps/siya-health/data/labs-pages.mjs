@@ -2,9 +2,9 @@
  * Follow-up Labs & Blood Tests topic pages (under /labs/*).
  * Physician-guided positioning — not a lab marketplace catalogue.
  */
-import { RUPA_LAB_STOREFRONT_URL } from './providers-core.mjs';
+import { LAB_STOREFRONT_URL } from './providers-core.mjs';
 
-export const LABS_STOREFRONT_URL = RUPA_LAB_STOREFRONT_URL;
+export const LABS_STOREFRONT_URL = LAB_STOREFRONT_URL;
 
 /** @typedef {{
  *   slug: string,

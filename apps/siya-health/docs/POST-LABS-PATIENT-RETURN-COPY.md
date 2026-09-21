@@ -23,6 +23,6 @@ Subject/context: Lab results ready
 
 ## Do not
 
-- Deep-link Rupa as the “interpretation” destination
+- Deep-link Fullscript as the “interpretation” destination
 - Promise a diagnosis from labs alone
 - Push a sticky “buy blood” CTA

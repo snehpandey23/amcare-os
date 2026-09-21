@@ -24,7 +24,7 @@
 
 ## 2. Strategy applied
 
-Repositioned `/labs` as **Labs & Blood Tests** — physician-guided testing with transparent direct-pay options via Rupa storefront — not a discount lab marketplace.
+Repositioned `/labs` as **Labs & Blood Tests** — physician-guided testing with transparent direct-pay options via Fullscript storefront — not a discount lab marketplace.
 
 Journey framing: Symptoms → Knowledge → Consultation → Labs → Diagnosis → Treatment → Follow-up.
 
@@ -35,9 +35,9 @@ Journey framing: Symptoms → Knowledge → Consultation → Labs → Diagnosis 
 | File | Why |
 |------|-----|
 | `labs.html` | Full hub rebuild: hero, categories, how-it-works, guidance, direct-pay, results, related links, FAQ, dual CTAs, schema |
-| `data/providers-core.mjs` | Added `RUPA_LAB_STOREFRONT_URL` |
+| `data/providers-core.mjs` | Added `LAB_STOREFRONT_URL` (Fullscript lab shop) |
 | `scripts/site-chrome.mjs` | Footer label → “Labs & blood tests”; `injectLabsNav()` (header + mobile “Labs”) |
-| `scripts/siya-tracking.js` | `lab_storefront_click` for Rupa outbound |
+| `scripts/siya-tracking.js` | `lab_storefront_click` for Fullscript outbound |
 | `scripts/apply-labs-hub-linking.mjs` | Contextual body links from services/guides/blogs |
 | Service/content pages (via script) | Telehealth, men’s, women’s, primary care, weight, ADHD, midlife, fatigue, A1c, testosterone, iron blog |
 
@@ -80,7 +80,7 @@ Journey framing: Symptoms → Knowledge → Consultation → Labs → Diagnosis 
 
 `lab_storefront_click` **implemented** in `scripts/siya-tracking.js` when:
 
-- `href` contains `labs.rupahealth.com`, or
+- `href` contains `us.fullscript.com/s/siyahealth`, or
 - `data-siya-track="lab_storefront_click"`
 
 Params include existing base params + `destination_url` (origin path only). No test names or PHI.
@@ -136,6 +136,6 @@ Hub `/labs` includes “Explore labs by topic” + Learn more on category cards.
 
 ## 10. Storefront
 
-https://labs.rupahealth.com/store/storefront_42daXx7  
+https://us.fullscript.com/s/siyahealth/shop  
 
 Described as direct-pay laboratory storefront; fulfillment network details left to storefront copy (no invented Quest/draw claims in body).

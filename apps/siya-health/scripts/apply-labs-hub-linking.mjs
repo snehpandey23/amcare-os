@@ -51,7 +51,7 @@ function chipsBlock({ title, items, href, cta, ctaExtra = '' }) {
       </aside>`;
 }
 
-/** Content pages → topic labs (never Rupa). */
+/** Content pages → topic labs (never external lab storefront). */
 const CONTENT_LINKS = [
   {
     file: 'answers/why-normal-labs-dont-mean-healthy.html',
@@ -542,7 +542,7 @@ for (const row of PATHWAY_CHIPS) {
 console.log(`Labs linking/chips applied: ${n} files`);
 
 // Health Guides hub: optional Labs jump (careFunnel-style — only when answers/index exists).
-// Idempotent SIYA:LABS-HUB-JUMP; re-runs replace in place. Topic pages only (never Rupa).
+// Idempotent SIYA:LABS-HUB-JUMP; re-runs replace in place. Topic pages only (never storefront).
 {
   const hub = 'answers/index.html';
   if (fs.existsSync(path.join(ROOT, hub))) {
