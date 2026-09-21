@@ -76,7 +76,6 @@ function renderPage(page) {
   return `<!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src="/scripts/cookie-consent-bootstrap.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />

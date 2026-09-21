@@ -1414,7 +1414,11 @@ export function injectFooterGuideHubs(html) {
 }
 
 /** Google Consent Mode bootstrap — must run synchronously before GTM on every public page */
-export function injectCookieConsentBootstrap(html) {
+export function injectCookieConsentBootstrap(html, relPath = '') {
+  // Care-flow pages: strip any prior bootstrap; do not re-inject (no GTM/Meta to consent for)
+  if (isPatientCareFlowPage(relPath)) {
+    return html.replace(/\s*<script src="\/scripts\/cookie-consent-bootstrap\.js"><\/script>\s*/gi, '\n');
+  }
   const tag = '<script src="/scripts/cookie-consent-bootstrap.js"></script>';
   html = html.replace(/\s*<script src="\/scripts\/cookie-consent-bootstrap\.js"><\/script>\s*/gi, '\n');
   if (html.includes(tag)) return html;
@@ -1523,13 +1527,16 @@ export function injectGtmAndTracking(html, relPath = '') {
   html = stripExistingGtag(html);
   html = stripExistingMetaPixel(html);
 
-  // Invitation-only / internal review surfaces — no marketing pixels
+  // No marketing pixels: invitation-only surfaces + patient intake/scheduling/health-entry
   if (
     /^employers\/california-pilot\.html$/i.test(relPath) ||
-    /^internal\//i.test(relPath)
+    /^internal\//i.test(relPath) ||
+    isPatientCareFlowPage(relPath)
   ) {
     html = html.replace(/<!--\s*SIYA:TRACKING\s*-->[\s\S]*?<!--\s*\/SIYA:TRACKING\s*-->\s*/gi, '');
     html = html.replace(/<script src="\/scripts\/siya-tracking\.js"(?:\s+defer)?><\/script>\s*/gi, '');
+    // Collapse leftover empty Meta Pixel comment stubs from older builds
+    html = html.replace(/<!--\s*Meta Pixel noscript\s*-->\s*<!--\s*End Meta Pixel noscript\s*-->\s*/gi, '');
     return html;
   }
 
@@ -1599,7 +1606,11 @@ export function injectGtmAndTracking(html, relPath = '') {
 
 /** Non-blocking cookie notice — localStorage acceptance only */
 export function injectCookieNotice(html, relPath) {
-  if (isLegalContentPage(relPath)) return html;
+  if (isLegalContentPage(relPath) || isPatientCareFlowPage(relPath)) {
+    html = html.replace(/<!--\s*SIYA:COOKIE-NOTICE\s*-->[\s\S]*?<!--\s*\/SIYA:COOKIE-NOTICE\s*-->\s*/gi, '');
+    html = html.replace(/<script src="\/scripts\/cookie-notice\.js"(?:\s+defer)?><\/script>\s*/gi, '');
+    return html;
+  }
   if (html.includes('cookie-notice.js')) return html;
   const block = `<!-- SIYA:COOKIE-NOTICE -->
     <script src="/scripts/cookie-notice.js" defer></script>
@@ -2201,6 +2212,23 @@ export function isRedirectTransitionPage(relPath) {
   return relPath.startsWith('redirect/');
 }
 
+/**
+ * Patient intake / scheduling / health-info entry surfaces.
+ * No Meta Pixel, GTM, or marketing analytics on these (CIPA / health-intake risk).
+ * Marketing pages keep standard analytics.
+ */
+export function isPatientCareFlowPage(relPath) {
+  const p = String(relPath || '').replace(/^\.\//, '');
+  return (
+    /^intake(\/|$)/i.test(p) ||
+    /^book-appointment\.html$/i.test(p) ||
+    /^redirect\//i.test(p) ||
+    /^adhd-screening\.html$/i.test(p) ||
+    /^adhd-screening-results\.html$/i.test(p) ||
+    /^online-adhd-test\.html$/i.test(p)
+  );
+}
+
 /** Google Ads / minimal landing pages — skip full nav/footer injection */
 export function isAdsLandingPage(relPath, html = '') {
   if (relPath === 'adhd-evaluation-texas.html' || relPath === 'adhd-evaluation-california.html') {
@@ -2623,9 +2651,15 @@ export function stripChatWidgets(html) {
 }
 
 export function applySiteChrome(html, relPath, title = '') {
-  html = injectCookieConsentBootstrap(html);
+  html = injectCookieConsentBootstrap(html, relPath);
   if (isRedirectTransitionPage(relPath)) {
-    html = injectCookieNotice(html, relPath);
+    if (!isPatientCareFlowPage(relPath)) {
+      html = injectCookieNotice(html, relPath);
+    } else {
+      // Strip cookie notice UI if a prior build left it on a care-flow redirect
+      html = html.replace(/<!--\s*SIYA:COOKIE-NOTICE\s*-->[\s\S]*?<!--\s*\/SIYA:COOKIE-NOTICE\s*-->\s*/gi, '');
+      html = html.replace(/<script src="\/scripts\/cookie-notice\.js"(?:\s+defer)?><\/script>\s*/gi, '');
+    }
     return injectGtmAndTracking(html, relPath);
   }
   if (isLegalContentPage(relPath)) {
