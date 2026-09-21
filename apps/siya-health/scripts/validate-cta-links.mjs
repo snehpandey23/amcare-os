@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
-const SKIP_DIRS = new Set(['node_modules', '.vercel', '.git', 'docs', 'data', 'public', 'previews']);
+const SKIP_DIRS = new Set(['node_modules', '.vercel', '.git', 'docs', 'data', 'public', 'previews', 'brand', 'audit']);
 
 const PLACEHOLDER_HREFS = new Set([
   '',
@@ -22,11 +22,21 @@ const PLACEHOLDER_HREFS = new Set([
   '[object Object]',
 ]);
 
+function shouldSkipRel(rel) {
+  if (!rel) return true;
+  if (rel.startsWith('previews/') || rel.includes('/previews/')) return true;
+  if (/^preview-home/i.test(path.basename(rel))) return true;
+  if (path.basename(rel) === 'homepage2.html') return true;
+  return false;
+}
+
 function walkHtml(dir, baseRel = '') {
   const out = [];
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (e.name.startsWith('.')) continue;
     if (SKIP_DIRS.has(e.name)) continue;
     const rel = path.join(baseRel, e.name).replace(/\\/g, '/');
+    if (shouldSkipRel(rel)) continue;
     const full = path.join(dir, e.name);
     if (e.isDirectory()) out.push(...walkHtml(full, rel));
     else if (e.name.endsWith('.html')) out.push(rel);

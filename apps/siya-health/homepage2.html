@@ -203,11 +203,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         gap: clamp(1.5rem, 4vw, 3rem);
         align-items: center;
         width: 100%;
+        min-width: 0;
       }
 
       .siya-hero-preview__copy {
         max-width: 34rem;
         width: 100%;
+        min-width: 0;
         background: rgba(0, 12, 48, 0.42);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
@@ -221,16 +223,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .siya-hero-preview__title {
         margin: 0;
         color: #fff;
-        font-size: clamp(1.85rem, 4.2vw, 2.65rem);
-        line-height: 1.15;
+        /* Slightly tighter than prior so the larger journey card doesn't top-light the hero */
+        font-size: clamp(1.65rem, 3.6vw, 2.35rem);
+        line-height: 1.18;
         letter-spacing: -0.02em;
         font-weight: 600;
+        overflow-wrap: anywhere;
       }
 
       .siya-hero-preview__rotate-shell {
         display: inline-grid;
         vertical-align: baseline;
         overflow: hidden;
+        max-width: 100%;
       }
 
       .siya-hero-preview__rotate-sizer,
@@ -241,6 +246,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         line-height: inherit;
         letter-spacing: inherit;
         white-space: nowrap;
+      }
+
+      .siya-hero-preview__rotate-word.is-unlinked {
+        cursor: default;
+        pointer-events: none;
+      }
+
+      @media (max-width: 480px) {
+        .siya-hero-preview__rotate-sizer,
+        .siya-hero-preview__rotate-word {
+          white-space: normal;
+          max-width: min(12rem, 100%);
+        }
       }
 
       .siya-hero-preview__rotate-sizer {
@@ -270,20 +288,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
 
       .siya-hero-preview__lead {
-        margin: 1rem 0 0;
+        margin: 0.85rem 0 0;
         max-width: 32rem;
         color: rgba(255, 255, 255, 0.88);
+        font-size: clamp(0.92rem, 1.6vw, 1.05rem);
+        line-height: 1.45;
+      }
+
+      .siya-hero-preview__philosophy {
+        margin: 0.65rem 0 0;
+        max-width: 32rem;
+        color: rgba(244, 239, 231, 0.92);
+        font-size: clamp(0.9rem, 1.5vw, 1.02rem);
+        line-height: 1.4;
+        font-style: italic;
       }
 
       .siya-hero-preview__card {
         position: relative;
         justify-self: end;
-        width: min(100%, 22.5rem);
-        background: rgba(244, 239, 231, 0.92);
+        width: min(100%, 26rem);
+        max-width: 100%;
+        overflow: hidden; /* clip animated border pseudo so it can't widen the hero */
+        background: rgba(244, 239, 231, 0.94);
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
         border-radius: 1.5rem;
-        padding: 1.25rem 1.35rem 1.4rem;
+        padding: 1.45rem 1.5rem 1.55rem;
         border: 1px solid rgba(196, 165, 116, 0.35);
         box-shadow: 0 22px 54px rgba(0, 24, 120, 0.18);
         color: var(--siya-preview-navy);
@@ -328,43 +359,88 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       .siya-hero-preview__card-title {
         margin: 0;
-        font-size: 1.15rem;
+        font-size: clamp(1.2rem, 2.2vw, 1.4rem);
         color: var(--siya-preview-navy);
         font-weight: 650;
+        line-height: 1.25;
+        letter-spacing: -0.015em;
       }
 
       .siya-hero-preview__card-sub {
-        margin: 0.25rem 0 0;
-        font-size: 0.82rem;
+        margin: 0.35rem 0 0;
+        font-size: 0.92rem;
         color: rgba(0, 24, 120, 0.68);
+        line-height: 1.35;
       }
 
       .siya-hero-preview__card-icon {
-        width: 2.25rem;
-        height: 2.25rem;
+        display: none;
+      }
+
+      /* Numbered 1 → 2 → 3 journey flow */
+      .siya-hero-preview__flow {
+        list-style: none;
+        margin: 0 0 1.2rem;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+      }
+
+      .siya-hero-preview__flow-step {
+        display: grid;
+        grid-template-columns: 2.35rem minmax(0, 1fr);
+        gap: 0.7rem;
+        align-items: start;
+        position: relative;
+      }
+
+      .siya-hero-preview__flow-step:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        left: 1.05rem;
+        top: 2.45rem;
+        bottom: -0.85rem;
+        width: 2px;
+        background: linear-gradient(
+          180deg,
+          rgba(216, 16, 136, 0.55),
+          rgba(196, 165, 116, 0.45)
+        );
+      }
+
+      .siya-hero-preview__flow-num {
+        width: 2.35rem;
+        height: 2.35rem;
         border-radius: 50%;
-        background: rgba(196, 165, 116, 0.28);
-        color: var(--siya-preview-magenta);
         display: grid;
         place-items: center;
+        font-size: 1.05rem;
         font-weight: 700;
+        color: #fff;
+        background: linear-gradient(145deg, #001878 0%, #0A246B 55%, #D81088 140%);
+        box-shadow: 0 6px 16px rgba(0, 24, 120, 0.22);
         flex-shrink: 0;
       }
 
-      .siya-hero-preview__card-steps {
-        margin: 0 0 1.1rem;
-        padding-left: 1.15rem;
-        color: rgba(0, 24, 120, 0.78);
-        font-size: 0.9rem;
-        line-height: 1.5;
+      .siya-hero-preview__flow-body {
+        min-width: 0;
+        padding-top: 0.15rem;
       }
 
-      .siya-hero-preview__card-steps li + li {
-        margin-top: 0.4rem;
-      }
-
-      .siya-hero-preview__card-steps strong {
+      .siya-hero-preview__flow-label {
+        margin: 0;
+        font-size: 1.02rem;
+        font-weight: 700;
         color: var(--siya-preview-navy);
+        line-height: 1.25;
+      }
+
+      .siya-hero-preview__flow-text {
+        margin: 0.28rem 0 0;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        color: rgba(0, 24, 120, 0.78);
       }
 
       .siya-hero-preview__card-cta {
@@ -438,12 +514,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
 
       @media (max-width: 640px) {
-        /* Leave an open video band at the top — content sits lower */
+        /* Leave an open video band at the top — content sits lower.
+           height:auto so 5-term rotate (e.g. hormonal issues) can't clip the H1. */
         .hero-merged--video-preview {
           align-items: flex-end !important;
           padding-top: calc(var(--header-height, 72px) + 12px) !important;
           padding-bottom: 1.25rem !important;
           min-height: 100dvh;
+          height: auto !important;
+          max-height: none !important;
           overflow: hidden !important;
         }
         /* Video: lighter veil + face-favoring crop */
@@ -478,28 +557,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           border-radius: 14px;
         }
         .siya-hero-preview__title {
-          font-size: clamp(1.45rem, 6.8vw, 1.85rem);
-          line-height: 1.16;
+          font-size: clamp(1.35rem, 6.2vw, 1.7rem);
+          line-height: 1.18;
         }
         .siya-hero-preview__lead {
-          margin-top: 0.55rem;
-          font-size: 0.9rem;
+          margin-top: 0.5rem;
+          font-size: 0.88rem;
           line-height: 1.4;
+        }
+        .siya-hero-preview__philosophy {
+          margin-top: 0.5rem;
+          font-size: 0.86rem;
+          line-height: 1.35;
         }
         .hero-preview-banner {
           margin-bottom: 8px;
           font-size: 0.62rem;
         }
         .siya-hero-preview__card {
-          padding: 0.95rem 1rem 1.05rem;
+          padding: 1.15rem 1.1rem 1.2rem;
         }
-        .siya-hero-preview__card-steps {
+        .siya-hero-preview__card-title {
+          font-size: 1.15rem;
+        }
+        .siya-hero-preview__card-sub {
+          font-size: 0.86rem;
+        }
+        .siya-hero-preview__flow {
+          gap: 0.7rem;
+          margin-bottom: 1rem;
+        }
+        .siya-hero-preview__flow-step:not(:last-child)::after {
+          top: 2.3rem;
+          bottom: -0.7rem;
+        }
+        .siya-hero-preview__flow-num {
+          width: 2.15rem;
+          height: 2.15rem;
+          font-size: 0.95rem;
+        }
+        .siya-hero-preview__flow-label {
+          font-size: 0.95rem;
+        }
+        .siya-hero-preview__flow-text {
           font-size: 0.84rem;
-          margin-bottom: 0.75rem;
-          line-height: 1.4;
-        }
-        .siya-hero-preview__card-steps li + li {
-          margin-top: 0.28rem;
         }
         .siya-hero-preview__inner {
           gap: 0.75rem;
@@ -760,7 +861,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
             <h1 class="siya-hero-preview__title">
               Physician-led care for your
               <span class="siya-hero-preview__rotate-shell" aria-live="polite">
-                <span class="siya-hero-preview__rotate-sizer" aria-hidden="true">brain fog</span>
+                <span class="siya-hero-preview__rotate-sizer" aria-hidden="true">hormonal issues</span>
                 <a
                   id="siya-hero-rotate-word"
                   class="siya-hero-preview__rotate-word"
@@ -774,20 +875,40 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
             <p class="hero-merged-lead siya-hero-preview__lead">
               You’re not looking for a quick label—you’re looking for a clinician who’ll sit with what’s going on and help you figure out the next step.
             </p>
+            <p class="siya-hero-preview__philosophy">
+              We believe care starts with actually knowing you — not just diagnosing you.
+            </p>
           </div>
 
-          <aside class="siya-hero-preview__card" aria-label="How care starts">
+          <aside class="siya-hero-preview__card" aria-label="Your journey to care with Siya Health">
             <div class="siya-hero-preview__card-head">
               <div>
-                <h2 class="siya-hero-preview__card-title">How it starts</h2>
-                <p class="siya-hero-preview__card-sub">You don’t need a diagnosis to begin</p>
+                <h2 class="siya-hero-preview__card-title">Your journey to care with Siya Health</h2>
+                <p class="siya-hero-preview__card-sub">You don’t need a diagnosis to begin.</p>
               </div>
-              <span class="siya-hero-preview__card-icon" aria-hidden="true">✓</span>
             </div>
-            <ol class="siya-hero-preview__card-steps">
-              <li><strong>Meet &amp; Greet</strong> — a free chat about what’s going on</li>
-              <li><strong>Evaluation</strong> — a real history and a clear next step</li>
-              <li><strong>Your plan</strong> — findings in plain language</li>
+            <ol class="siya-hero-preview__flow">
+              <li class="siya-hero-preview__flow-step">
+                <span class="siya-hero-preview__flow-num" aria-hidden="true">1</span>
+                <div class="siya-hero-preview__flow-body">
+                  <p class="siya-hero-preview__flow-label">Book a free discovery call</p>
+                  <p class="siya-hero-preview__flow-text">A real conversation about what’s going on — and whether we’re a good fit.</p>
+                </div>
+              </li>
+              <li class="siya-hero-preview__flow-step">
+                <span class="siya-hero-preview__flow-num" aria-hidden="true">2</span>
+                <div class="siya-hero-preview__flow-body">
+                  <p class="siya-hero-preview__flow-label">Extensive virtual evaluation</p>
+                  <p class="siya-hero-preview__flow-text">Objective tools, labs, and record reviews when clinically appropriate.</p>
+                </div>
+              </li>
+              <li class="siya-hero-preview__flow-step">
+                <span class="siya-hero-preview__flow-num" aria-hidden="true">3</span>
+                <div class="siya-hero-preview__flow-body">
+                  <p class="siya-hero-preview__flow-label">Personalized plan + ongoing care coordination</p>
+                  <p class="siya-hero-preview__flow-text">Follow-up and coordination so nothing falls through the cracks.</p>
+                </div>
+              </li>
             </ol>
             <a
               href="/redirect/meet-greet"
@@ -1020,21 +1141,43 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
 
     <script id="siya-hero-rotate-preview">
       (function () {
+        /*
+          Link targets verified against repo HTML:
+          - focus → /adhd-care
+          - ADHD → /adhd-care (always rendered as ADHD)
+          - weight management → /weight-loss-metabolic-health
+          - fatigue → /fatigue
+          - hormonal issues → /womens-health (wired per founder; see content-fit flag in chat —
+            page is women-specific, not a general hormonal hub)
+        */
         var terms = [
           { label: "focus", href: "/adhd-care" },
-          { label: "adhd", href: "/adhd-care" },
-          { label: "brain fog", href: "/brain-fog" },
-          { label: "weight", href: "/weight-loss-metabolic-health" }
+          { label: "ADHD", href: "/adhd-care" },
+          { label: "weight management", href: "/weight-loss-metabolic-health" },
+          { label: "fatigue", href: "/fatigue" },
+          { label: "hormonal issues", href: "/womens-health" }
         ];
         var el = document.getElementById("siya-hero-rotate-word");
+        var sizer = document.querySelector(".siya-hero-preview__rotate-sizer");
         if (!el) return;
+        if (sizer) {
+          var longest = terms.reduce(function (a, b) {
+            return a.label.length >= b.label.length ? a : b;
+          });
+          sizer.textContent = longest.label;
+        }
         var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         var i = 0;
+        function displayLabel(raw) {
+          if (/^adhd$/i.test(String(raw).trim())) return "ADHD";
+          return raw;
+        }
         function show(idx) {
           var t = terms[idx];
-          el.textContent = t.label;
+          el.textContent = displayLabel(t.label);
           el.setAttribute("href", t.href);
-          // retrigger enter animation when motion allowed
+          el.classList.remove("is-unlinked");
+          el.removeAttribute("aria-disabled");
           if (!reduce) {
             el.style.animation = "none";
             void el.offsetWidth;

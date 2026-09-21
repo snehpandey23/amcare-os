@@ -46,6 +46,7 @@ const REDIRECT_SHELLS = {
 
 /** External redirect shells + dev surfaces — never in sitemap */
 const SITEMAP_EXCLUDE = new Set([
+  'homepage2.html', // team hero review — noindex, not in primary nav
   'visual-components.html',
   'adhd-screening-results.html',
   'blog/adult-adhd-treatment-california-2026.html', // EG-P0-01 retired stub
@@ -73,10 +74,25 @@ function normalizeGtag(html) {
 }
 
 function walkHtmlFiles(dir, baseRel = '') {
+  const skipDirs = new Set([
+    'public',
+    'node_modules',
+    'scripts',
+    'docs',
+    'data',
+    'brand',
+    'audit',
+    'previews',
+    '.vercel',
+    '.git',
+  ]);
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   const out = [];
   for (const e of entries) {
-    if (e.name === 'public' || e.name === 'node_modules' || e.name === 'scripts') continue;
+    if (e.name.startsWith('.')) continue;
+    if (skipDirs.has(e.name)) continue;
+    // Local homepage experiments — never production chrome
+    if (/^preview-home/i.test(e.name) || e.name === 'homepage2.html') continue;
     const rel = path.join(baseRel, e.name).replace(/\\/g, '/');
     const full = path.join(dir, e.name);
     if (e.isDirectory()) out.push(...walkHtmlFiles(full, rel));
