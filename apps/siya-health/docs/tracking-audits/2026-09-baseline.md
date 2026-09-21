@@ -1,0 +1,285 @@
+# Siya Health tracking audit — 2026-09-21T11:02:52.731Z
+
+- Pages: **227**
+- Health-identifying: **9**
+- Generic: **218**
+- Sitemap URLs: 186
+
+## GTM container fingerprint (published gtm.js)
+
+- GA4 IDs: G-9WTQWHCTFT
+- Ads IDs: AW-17553537456
+- Unexpected Ads IDs: none
+- Unexpected GA4 IDs: none
+
+## Changed since last month
+
+0 added, 0 removed, 14 changed, 0 tracking regressions on health pages
+
+### Classification / script changes
+- /labs/a1c-blood-sugar: generic GTM=true Meta=true → generic GTM=false Meta=false
+- /labs/adhd-support: generic GTM=true Meta=true → generic GTM=false Meta=false
+- /labs/cbc: generic GTM=true Meta=true → generic GTM=false Meta=false
+- /labs/cmp: generic GTM=true Meta=true → generic GTM=false Meta=false
+- /labs/fatigue-brain-fog: generic GTM=true Meta=true → generic GTM=false Meta=false
+- /labs/how-to-read-results: generic GTM=true Meta=true → generic GTM=false Meta=false
+- /labs/iron-ferritin: generic GTM=true Meta=true → generic GTM=false Meta=false
+- /labs/lipid-panel: generic GTM=true Meta=true → generic GTM=false Meta=false
+- /labs/mens-health: generic GTM=true Meta=true → generic GTM=false Meta=false
+- /labs/preventive: generic GTM=true Meta=true → generic GTM=false Meta=false
+- /labs/thyroid: generic GTM=true Meta=true → generic GTM=false Meta=false
+- /labs/vitamin-b12: generic GTM=true Meta=true → generic GTM=false Meta=false
+- /labs/vitamin-d: generic GTM=true Meta=true → generic GTM=false Meta=false
+- /labs/womens-midlife: generic GTM=true Meta=true → generic GTM=false Meta=false
+
+## Vendor destinations (CarePatron / Spruce)
+
+Patients leave siya.health via redirect bridges. We do not control these deploys — monitor for Meta / Ads / DoubleClick / our GTM each month.
+
+_Not run (pass `--live`)._
+
+## Health-identifying pages
+
+| URL | Why | GTM HTML | Meta HTML | Live network | Status |
+|-----|-----|----------|-----------|--------------|--------|
+| /adhd-screening-results | care_flow_gate, results_personalization | false | false | n/a | OK |
+| /adhd-screening | care_flow_gate, asrs_dom, results_personalization | false | false | n/a | OK |
+| /book-appointment | care_flow_gate | false | false | n/a | OK |
+| /intake | care_flow_gate | false | false | n/a | OK |
+| /online-adhd-test | care_flow_gate | false | false | n/a | OK |
+| /redirect/adhd-evaluation | care_flow_gate | false | false | n/a | OK |
+| /redirect/adhd-walkthrough | care_flow_gate | false | false | n/a | OK |
+| /redirect/chat | care_flow_gate | false | false | n/a | OK |
+| /redirect/meet-greet | care_flow_gate | false | false | n/a | OK |
+
+## Full inventory
+
+| URL | Classification | Scripts | Recommendation | Status |
+|-----|----------------|---------|----------------|--------|
+| /about | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adhd-care | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adhd-care/miami | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adhd-care/orlando | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adhd-care/san-diego | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adhd-diagnosis-austin | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adhd-diagnosis-florida | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adhd-diagnosis-houston | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adhd-diagnosis-pennsylvania | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adhd-diagnosis-philadelphia | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adhd-diagnosis-texas | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adhd-evaluation-california | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adhd-evaluation-cost | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adhd-evaluation-texas | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adhd-screening-results | health-identifying | NONE (stripped) | REMOVE ads (gate) | CLEAN |
+| /adhd-screening | health-identifying | NONE (stripped) | REMOVE ads (gate) | CLEAN |
+| /adhd-treatment-online | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adult-adhd-california | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adult-adhd-diagnosis | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adult-adhd-screening-california | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /adult-adhd-screening-texas | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/adderall-vs-vyvanse-adults | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/adhd-and-weight-loss-connection | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/adhd-in-women | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/adhd-medication-every-day | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/adhd-medication-side-effects | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/adhd-vs-anxiety | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/adhd-vs-burnout | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/adhd-workplace-accommodations | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/afternoon-energy-crash-after-lunch | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/asrs-adhd-screening-explained | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/brain-fog-after-eating | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/can-adhd-be-diagnosed-online | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/can-adhd-cause-anxiety | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/can-sleep-apnea-cause-fatigue | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/can-you-get-adhd-medication-online | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/compounded-vs-branded-glp-1 | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/ed-telehealth-legitimate | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/executive-dysfunction-adhd | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/food-noise-returned-on-glp-1 | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/fsa-hsa-adhd-evaluation | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/glp-1-nausea-management | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/glp-1-side-effects | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/high-functioning-adhd | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/high-shbg-low-free-testosterone | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/how-long-adhd-evaluation | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/how-much-does-adhd-testing-cost | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/how-online-prescriptions-work | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/insulin-resistance-without-diabetes | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/is-adhd-medication-safe-long-term | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/is-online-adhd-diagnosis-legitimate | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/is-telehealth-legitimate | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/late-adhd-diagnosis-adults | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/medical-weight-loss-vs-dieting | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/meet-and-greet-telehealth-expectations | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/normal-a1c-insulin-resistance | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/oral-vs-topical-minoxidil | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/poor-sleep-feels-like-adhd | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/rejection-sensitivity-adhd | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/screening-vs-adhd-evaluation | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/semaglutide-weight-loss-how-it-works | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/signs-of-adult-adhd | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/signs-of-sleep-apnea-in-adults | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/starting-adhd-medication-adults | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/telehealth-adhd-california | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/telehealth-adhd-texas | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/testosterone-and-adhd-overlap | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/time-blindness-adhd | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/trt-monitoring-requirements | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/weight-gain-after-stopping-ozempic | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/what-does-low-testosterone-feel-like | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/what-happens-after-adhd-evaluation | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/what-included-199-adhd-evaluation | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/what-is-food-noise | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/what-is-free-testosterone | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/what-is-insulin-resistance | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/what-to-do-after-lab-results | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/when-is-testosterone-therapy-appropriate | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/which-preventive-blood-tests-adults | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/who-qualifies-glp-1-weight-loss | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/why-am-i-tired-even-after-sleeping | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /answers/why-normal-labs-dont-mean-healthy | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adderall-for-adhd-how-it-works | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-accommodations-hr-primer | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-and-binge-eating | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-brain-imaging-subtypes | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-evaluation-california-online-vs-in-person | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-evaluation-cost-california | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-evaluation-cost-texas | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-hormones-women | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-in-women | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-medication-daily-or-as-needed-adults | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-medication-online-california | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-medication-options-california | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-medication-options-for-adults | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-medication-side-effects-what-to-expect | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-symptoms-overlooked | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-telehealth-california | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-testing-online-california-screening-vs-evaluation | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-treatment-austin-tx | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-treatment-dallas-tx | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-treatment-fort-worth-tx | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-treatment-houston-tx | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-treatment-los-angeles-ca | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-treatment-miami-fl | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-treatment-oakland-ca | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-treatment-orange-county-ca | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-treatment-orlando-fl | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-treatment-philadelphia-pa | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-treatment-sacramento-ca | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-treatment-san-antonio-tx | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-treatment-san-diego-ca | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-treatment-san-francisco-ca | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-treatment-san-jose-ca | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd-treatment-texas | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adhd | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adult-adhd-symptoms-california | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/adult-adhd-treatment-california-2026 | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/brain-fog-after-covid | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/brain-fog-and-anxiety | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/brain-fog-and-sleep | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/brain-fog-at-work | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/brain-fog-vs-adhd | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/chronic-fatigue-and-work-performance | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/chronic-fatigue-vs-everyday-tiredness | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/cognitive-health-benefits-for-employers | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/compounded-vs-branded-glp1-medications | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/executive-dysfunction-adhd | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/fatigue-after-illness | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/fatigue-despite-normal-labs | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/focus-fatigue-workforce-issue | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/food-noise-and-glp-1-what-it-means-and-what-helps | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/free-testosterone-vs-total-testosterone-what-patients-should-know | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/glp1-side-effects-and-how-to-manage-them | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/how-adhd-medication-is-prescribed-online | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/how-mental-health-affects-weight-loss-outcomes | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/how-to-choose-adhd-provider-california | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/how-to-know-if-you-have-adhd-adult | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/how-to-safely-get-prescriptions-online | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/insomnia-treatment-options-beyond-medication | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/insulin-resistance-and-weight-loss-clinician-overview | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/iron-deficiency-and-fatigue | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/iron-deficiency-brain-fog-adhd | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/is-adhd-medication-safe-long-term | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/is-online-adhd-diagnosis-legit | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/medical-weight-loss-glp1-semaglutide-texas | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/medical-weight-loss-vs-dieting-what-actually-works | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/minoxidil-for-hair-loss-does-it-work | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/morning-fatigue | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/non-stimulant-adhd-medications-explained | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/online-adhd-diagnosis-california | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/online-adhd-diagnosis-texas | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/oral-vs-injectable-weight-loss-medications | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/oral-vs-topical-minoxidil-which-is-right | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/perimenopause-brain-fog | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/phentermine-for-weight-loss-safety-and-effectiveness | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/pots-and-adhd | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/semaglutide-for-weight-loss-how-it-works | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/sildenafil-for-erectile-dysfunction-what-to-expect | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/sleep-and-focus-at-work | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/telehealth-prescriptions-how-online-treatment-works | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/telehealth | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/thyroid-and-fatigue | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/tirzepatide-vs-semaglutide-which-is-better | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/vyvanse-vs-adderall-differences | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/weight-loss | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/when-is-testosterone-therapy-appropriate | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/why-am-i-always-tired-causes-when-to-see-doctor | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /blog/youre-not-lazy-signs-undiagnosed-adult-adhd | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /book-appointment | health-identifying | NONE (stripped) | REMOVE ads (gate) | CLEAN |
+| /brain-fog | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /creyos-adhd-testing | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /employers | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /employers/california-pilot | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /fatigue | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| / | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /intake | health-identifying | NONE (stripped) | REMOVE ads (gate) | CLEAN |
+| /join-our-team | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /labs | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /labs/a1c-blood-sugar | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /labs/adhd-support | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /labs/cbc | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /labs/cmp | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /labs/fatigue-brain-fog | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /labs/how-to-read-results | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /labs/iron-ferritin | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /labs/lipid-panel | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /labs/mens-health | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /labs/preventive | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /labs/thyroid | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /labs/vitamin-b12 | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /labs/vitamin-d | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /labs/womens-midlife | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /legal/controlled-substance-treatment-agreement | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /legal/cookie-policy | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /legal | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /legal/notice-of-privacy-practices | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /legal/privacy-policy | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /legal/terms-of-use | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /mens-health-longevity | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /online-adhd-test | health-identifying | NONE (stripped) | REMOVE ads (gate) | CLEAN |
+| /prescriptions | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /preventive-care | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /pricing | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /primary-care | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /primary-urgent-care | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /privacy-policy | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /providers/dr-natasha-desai | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /providers/dr-sneh-pandey | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /providers/dr-swati-pandey | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /providers/dr-vanessa-urbina | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /providers | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /providers/megan-wunderlich | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /providers/wendy-delgado | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /redirect/adhd-evaluation | health-identifying | NONE (stripped) | REMOVE ads (gate) | CLEAN |
+| /redirect/adhd-walkthrough | health-identifying | NONE (stripped) | REMOVE ads (gate) | CLEAN |
+| /redirect/chat | health-identifying | NONE (stripped) | REMOVE ads (gate) | CLEAN |
+| /redirect/meet-greet | health-identifying | NONE (stripped) | REMOVE ads (gate) | CLEAN |
+| /siya-circle | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /telehealth | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /terms | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /weight-loss-metabolic-health | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /womens-health | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |
+| /womens-midlife-health | generic | GTM+GA4+AW+DC+Meta+siya-tracking | KEEP ads; harden GA4 | KEEP_ADS_OK |

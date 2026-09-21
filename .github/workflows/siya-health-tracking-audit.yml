@@ -1,0 +1,126 @@
+# Monthly full-site tracking audit (siya.health)
+# Classifies health-identifying vs generic pages; fails if health pages regain trackers.
+# Also network-checks CarePatron / Spruce redirect destinations (vendor-owned).
+# Delivery: docs/tracking-audits/ + GitHub artifact/Issue + WorkDrive _API-DRY-RUN/08-Tracking-Audits/
+# WorkDrive auth: same Zoho OAuth secrets as Phase-3 cloud content pipeline.
+
+name: Siya Health — monthly tracking audit
+
+on:
+  schedule:
+    # 1st of each month, 06:00 UTC
+    - cron: "0 6 1 * *"
+  workflow_dispatch:
+
+concurrency:
+  group: siya-health-tracking-audit
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  tracking-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Setup Python (WorkDrive upload)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Playwright (live network checks)
+        working-directory: apps/siya-health
+        run: |
+          npm install --no-save playwright@1.49.1
+          npx playwright install --with-deps chromium
+
+      - name: Run full-site tracking audit (HTML + live + vendor destinations)
+        id: audit
+        working-directory: apps/siya-health
+        run: |
+          STAMP=$(date -u +%Y-%m)
+          node scripts/tracking-full-site-audit.mjs --live --out "docs/tracking-audits/${STAMP}.json"
+          echo "stamp=${STAMP}" >> "$GITHUB_OUTPUT"
+          echo "md=docs/tracking-audits/${STAMP}.md" >> "$GITHUB_OUTPUT"
+
+      - name: Upload audit artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: siya-health-tracking-audit-${{ steps.audit.outputs.stamp || 'run' }}
+          path: |
+            apps/siya-health/docs/tracking-audits/*.json
+            apps/siya-health/docs/tracking-audits/*.md
+            apps/siya-health/docs/tracking-full-site-audit.json
+          if-no-files-found: warn
+
+      - name: Deliver markdown summary to Zoho WorkDrive
+        if: always() && steps.audit.outputs.md != ''
+        env:
+          ZOHO_CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID }}
+          ZOHO_CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}
+          ZOHO_REFRESH_TOKEN: ${{ secrets.ZOHO_REFRESH_TOKEN }}
+          ZOHO_ACCOUNTS_URL: ${{ secrets.ZOHO_ACCOUNTS_URL }}
+          WORKDRIVE_DRYRUN_04_ID: ${{ secrets.WORKDRIVE_DRYRUN_04_ID }}
+          WORKDRIVE_TRACKING_AUDIT_FOLDER_ID: ${{ secrets.WORKDRIVE_TRACKING_AUDIT_FOLDER_ID }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${ZOHO_REFRESH_TOKEN:-}" || -z "${WORKDRIVE_DRYRUN_04_ID:-}" ]]; then
+            echo "SKIP WorkDrive: Zoho secrets not configured (same as Phase-3 pipeline)."
+            exit 0
+          fi
+          MD="apps/siya-health/${{ steps.audit.outputs.md }}"
+          if [[ ! -f "$MD" ]]; then
+            echo "SKIP WorkDrive: markdown missing at $MD"
+            exit 0
+          fi
+          python3 apps/siya-health/scripts/upload-tracking-audit-workdrive.py --md "$MD"
+
+      - name: Open GitHub Issue on regression / failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const stamp = '${{ steps.audit.outputs.stamp }}' || 'unknown';
+            const title = `[tracking-audit] Regression or failure — ${stamp}`;
+            const body = [
+              'Automated monthly tracking audit failed.',
+              '',
+              `- Workflow: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+              `- Stamp: ${stamp}`,
+              '- Check artifacts for full JSON/MD report.',
+              '- WorkDrive (if secrets set): `Siya Knowledge Editorial/_API-DRY-RUN/08-Tracking-Audits/`',
+              '',
+              'Health-identifying pages must stay free of Meta Pixel, GTM/GA4, Google Ads, and DoubleClick.',
+              'Vendor destinations must not load our GTM-PLBD4TTQ.',
+            ].join('\n');
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body,
+            });
+
+      - name: Commit report into docs/tracking-audits (main only)
+        if: success() && github.ref == 'refs/heads/main'
+        working-directory: apps/siya-health
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/tracking-audits/ docs/tracking-full-site-audit.json
+          if git diff --staged --quiet; then
+            echo "No audit file changes to commit"
+            exit 0
+          fi
+          git commit -m "chore(siya-health): monthly tracking audit ${{ steps.audit.outputs.stamp }}"
+          git push

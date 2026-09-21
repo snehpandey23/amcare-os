@@ -1,6 +1,10 @@
 /**
  * Sitewide analytics IDs — GTM + Meta Pixel (consent-gated) in HTML.
  * Configure GA4 (G-*) and Google Ads (AW-*) tags inside the GTM container.
+ *
+ * GA4 privacy: cookie-consent-bootstrap.js sets allow_google_signals=false and
+ * allow_ad_personalization_signals=false on generic pages. Mirror those fields
+ * on the GTM GA4 Config tag + GA4 Admin (see docs/GA4-PRIVACY-HARDENING.md).
  */
 export const TRACKING = {
   GTM_CONTAINER_ID: 'GTM-PLBD4TTQ',

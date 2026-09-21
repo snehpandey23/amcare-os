@@ -1,6 +1,8 @@
 /**
  * Cookie consent bootstrap — must load synchronously before GTM/gtag.
  * Sets Google Consent Mode defaults; restores prior choice from localStorage.
+ * Also hardens GA4 privacy flags sitewide on pages that load this file
+ * (care-flow pages strip this script — no GA4/GTM there).
  */
 (function () {
   'use strict';
@@ -13,6 +15,28 @@
     window.dataLayer.push(arguments);
   }
   window.gtag = window.gtag || gtag;
+
+  /**
+   * Privacy-harden GA4 (and linked Google tags) regardless of consent choice.
+   * Signals + ads personalization off; measurement can still run when
+   * analytics_storage is granted. Requires matching GTM GA4 Config fields
+   * and GA4 Admin toggles for full effect — see docs/GA4-PRIVACY-HARDENING.md.
+   */
+  function applyGa4PrivacyHardening() {
+    try {
+      gtag('set', {
+        allow_google_signals: false,
+        allow_ad_personalization_signals: false,
+      });
+      window.dataLayer.push({
+        allow_google_signals: false,
+        allow_ad_personalization_signals: false,
+        siya_ga4_privacy: 'hardened',
+      });
+    } catch (e) {
+      /* ignore */
+    }
+  }
 
   function readConsent() {
     try {
@@ -36,6 +60,8 @@
 
   function applyConsent(level) {
     gtag('consent', 'update', consentFlags(level === 'all'));
+    // Re-assert GA4 privacy after consent updates (GTM may re-config tags).
+    applyGa4PrivacyHardening();
     window.dataLayer.push({ event: 'cookie_consent_update', consent_level: level });
   }
 
@@ -48,6 +74,9 @@
     security_storage: 'granted',
     wait_for_update: 500,
   });
+
+  // Before GTM loads GA4 Config — suppress Signals / ads personalization joins.
+  applyGa4PrivacyHardening();
 
   var stored = readConsent();
   if (stored === 'all') {

@@ -1,0 +1,3875 @@
+{
+  "generated": "2026-09-21T11:02:52.731Z",
+  "method": "content_test_interactive_or_care_flow",
+  "summary": {
+    "total": 227,
+    "health": 9,
+    "generic": 218,
+    "sitemap_urls": 186
+  },
+  "care_flow_gate": [
+    "intake/index.html",
+    "book-appointment.html",
+    "adhd-screening.html",
+    "adhd-screening-results.html",
+    "online-adhd-test.html",
+    "redirect/meet-greet/index.html",
+    "redirect/chat/index.html",
+    "redirect/adhd-evaluation/index.html",
+    "redirect/adhd-walkthrough/index.html"
+  ],
+  "gtm_container": {
+    "ok": true,
+    "url": "https://www.googletagmanager.com/gtm.js?id=GTM-PLBD4TTQ",
+    "bytes": 474758,
+    "measurement_ids": [
+      "G-9WTQWHCTFT"
+    ],
+    "ads_ids": [
+      "AW-17553537456"
+    ],
+    "meta_like_ids": [],
+    "has_doubleclick_string": true,
+    "expected": {
+      "ga4": "G-9WTQWHCTFT",
+      "ads": "AW-17553537456",
+      "meta": "2150753979117600"
+    },
+    "unexpected_ads": [],
+    "unexpected_ga4": []
+  },
+  "live_network": null,
+  "vendor_destinations": null,
+  "pages": [
+    {
+      "url": "/about",
+      "file": "about.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adhd-care",
+      "file": "adhd-care.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adhd-care/miami",
+      "file": "adhd-care/miami.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adhd-care/orlando",
+      "file": "adhd-care/orlando.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adhd-care/san-diego",
+      "file": "adhd-care/san-diego.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adhd-diagnosis-austin",
+      "file": "adhd-diagnosis-austin.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adhd-diagnosis-florida",
+      "file": "adhd-diagnosis-florida.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adhd-diagnosis-houston",
+      "file": "adhd-diagnosis-houston.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adhd-diagnosis-pennsylvania",
+      "file": "adhd-diagnosis-pennsylvania.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adhd-diagnosis-philadelphia",
+      "file": "adhd-diagnosis-philadelphia.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adhd-diagnosis-texas",
+      "file": "adhd-diagnosis-texas.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adhd-evaluation-california",
+      "file": "adhd-evaluation-california.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adhd-evaluation-cost",
+      "file": "adhd-evaluation-cost.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adhd-evaluation-texas",
+      "file": "adhd-evaluation-texas.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adhd-screening-results",
+      "file": "adhd-screening-results.html",
+      "in_sitemap": false,
+      "classification": "health-identifying",
+      "why": [
+        "care_flow_gate",
+        "results_personalization"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "REMOVE Meta + Google Ads/DoubleClick (care-flow gate)"
+    },
+    {
+      "url": "/adhd-screening",
+      "file": "adhd-screening.html",
+      "in_sitemap": true,
+      "classification": "health-identifying",
+      "why": [
+        "care_flow_gate",
+        "asrs_dom",
+        "results_personalization"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "REMOVE Meta + Google Ads/DoubleClick (care-flow gate)"
+    },
+    {
+      "url": "/adhd-treatment-online",
+      "file": "adhd-treatment-online.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adult-adhd-california",
+      "file": "adult-adhd-california.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adult-adhd-diagnosis",
+      "file": "adult-adhd-diagnosis.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adult-adhd-screening-california",
+      "file": "adult-adhd-screening-california.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/adult-adhd-screening-texas",
+      "file": "adult-adhd-screening-texas.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/adderall-vs-vyvanse-adults",
+      "file": "answers/adderall-vs-vyvanse-adults.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/adhd-and-weight-loss-connection",
+      "file": "answers/adhd-and-weight-loss-connection.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/adhd-in-women",
+      "file": "answers/adhd-in-women.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/adhd-medication-every-day",
+      "file": "answers/adhd-medication-every-day.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/adhd-medication-side-effects",
+      "file": "answers/adhd-medication-side-effects.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/adhd-vs-anxiety",
+      "file": "answers/adhd-vs-anxiety.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/adhd-vs-burnout",
+      "file": "answers/adhd-vs-burnout.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/adhd-workplace-accommodations",
+      "file": "answers/adhd-workplace-accommodations.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/afternoon-energy-crash-after-lunch",
+      "file": "answers/afternoon-energy-crash-after-lunch.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/asrs-adhd-screening-explained",
+      "file": "answers/asrs-adhd-screening-explained.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/brain-fog-after-eating",
+      "file": "answers/brain-fog-after-eating.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/can-adhd-be-diagnosed-online",
+      "file": "answers/can-adhd-be-diagnosed-online.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/can-adhd-cause-anxiety",
+      "file": "answers/can-adhd-cause-anxiety.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/can-sleep-apnea-cause-fatigue",
+      "file": "answers/can-sleep-apnea-cause-fatigue.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/can-you-get-adhd-medication-online",
+      "file": "answers/can-you-get-adhd-medication-online.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/compounded-vs-branded-glp-1",
+      "file": "answers/compounded-vs-branded-glp-1.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/ed-telehealth-legitimate",
+      "file": "answers/ed-telehealth-legitimate.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/executive-dysfunction-adhd",
+      "file": "answers/executive-dysfunction-adhd.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/food-noise-returned-on-glp-1",
+      "file": "answers/food-noise-returned-on-glp-1.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/fsa-hsa-adhd-evaluation",
+      "file": "answers/fsa-hsa-adhd-evaluation.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/glp-1-nausea-management",
+      "file": "answers/glp-1-nausea-management.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/glp-1-side-effects",
+      "file": "answers/glp-1-side-effects.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/high-functioning-adhd",
+      "file": "answers/high-functioning-adhd.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/high-shbg-low-free-testosterone",
+      "file": "answers/high-shbg-low-free-testosterone.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/how-long-adhd-evaluation",
+      "file": "answers/how-long-adhd-evaluation.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/how-much-does-adhd-testing-cost",
+      "file": "answers/how-much-does-adhd-testing-cost.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/how-online-prescriptions-work",
+      "file": "answers/how-online-prescriptions-work.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers",
+      "file": "answers/index.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/insulin-resistance-without-diabetes",
+      "file": "answers/insulin-resistance-without-diabetes.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/is-adhd-medication-safe-long-term",
+      "file": "answers/is-adhd-medication-safe-long-term.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/is-online-adhd-diagnosis-legitimate",
+      "file": "answers/is-online-adhd-diagnosis-legitimate.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/is-telehealth-legitimate",
+      "file": "answers/is-telehealth-legitimate.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/late-adhd-diagnosis-adults",
+      "file": "answers/late-adhd-diagnosis-adults.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/medical-weight-loss-vs-dieting",
+      "file": "answers/medical-weight-loss-vs-dieting.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/meet-and-greet-telehealth-expectations",
+      "file": "answers/meet-and-greet-telehealth-expectations.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/normal-a1c-insulin-resistance",
+      "file": "answers/normal-a1c-insulin-resistance.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/oral-vs-topical-minoxidil",
+      "file": "answers/oral-vs-topical-minoxidil.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/poor-sleep-feels-like-adhd",
+      "file": "answers/poor-sleep-feels-like-adhd.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/rejection-sensitivity-adhd",
+      "file": "answers/rejection-sensitivity-adhd.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/screening-vs-adhd-evaluation",
+      "file": "answers/screening-vs-adhd-evaluation.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/semaglutide-weight-loss-how-it-works",
+      "file": "answers/semaglutide-weight-loss-how-it-works.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/signs-of-adult-adhd",
+      "file": "answers/signs-of-adult-adhd.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/signs-of-sleep-apnea-in-adults",
+      "file": "answers/signs-of-sleep-apnea-in-adults.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/starting-adhd-medication-adults",
+      "file": "answers/starting-adhd-medication-adults.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/telehealth-adhd-california",
+      "file": "answers/telehealth-adhd-california.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/telehealth-adhd-texas",
+      "file": "answers/telehealth-adhd-texas.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/testosterone-and-adhd-overlap",
+      "file": "answers/testosterone-and-adhd-overlap.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/time-blindness-adhd",
+      "file": "answers/time-blindness-adhd.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/trt-monitoring-requirements",
+      "file": "answers/trt-monitoring-requirements.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/weight-gain-after-stopping-ozempic",
+      "file": "answers/weight-gain-after-stopping-ozempic.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/what-does-low-testosterone-feel-like",
+      "file": "answers/what-does-low-testosterone-feel-like.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/what-happens-after-adhd-evaluation",
+      "file": "answers/what-happens-after-adhd-evaluation.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/what-included-199-adhd-evaluation",
+      "file": "answers/what-included-199-adhd-evaluation.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/what-is-food-noise",
+      "file": "answers/what-is-food-noise.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/what-is-free-testosterone",
+      "file": "answers/what-is-free-testosterone.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/what-is-insulin-resistance",
+      "file": "answers/what-is-insulin-resistance.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/what-to-do-after-lab-results",
+      "file": "answers/what-to-do-after-lab-results.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/when-is-testosterone-therapy-appropriate",
+      "file": "answers/when-is-testosterone-therapy-appropriate.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/which-preventive-blood-tests-adults",
+      "file": "answers/which-preventive-blood-tests-adults.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/who-qualifies-glp-1-weight-loss",
+      "file": "answers/who-qualifies-glp-1-weight-loss.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/why-am-i-tired-even-after-sleeping",
+      "file": "answers/why-am-i-tired-even-after-sleeping.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/answers/why-normal-labs-dont-mean-healthy",
+      "file": "answers/why-normal-labs-dont-mean-healthy.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adderall-for-adhd-how-it-works",
+      "file": "blog/adderall-for-adhd-how-it-works.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-accommodations-hr-primer",
+      "file": "blog/adhd-accommodations-hr-primer.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-and-binge-eating",
+      "file": "blog/adhd-and-binge-eating.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-brain-imaging-subtypes",
+      "file": "blog/adhd-brain-imaging-subtypes.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-evaluation-california-online-vs-in-person",
+      "file": "blog/adhd-evaluation-california-online-vs-in-person.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-evaluation-cost-california",
+      "file": "blog/adhd-evaluation-cost-california.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-evaluation-cost-texas",
+      "file": "blog/adhd-evaluation-cost-texas.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-hormones-women",
+      "file": "blog/adhd-hormones-women.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-in-women",
+      "file": "blog/adhd-in-women.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-medication-daily-or-as-needed-adults",
+      "file": "blog/adhd-medication-daily-or-as-needed-adults.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-medication-online-california",
+      "file": "blog/adhd-medication-online-california.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-medication-options-california",
+      "file": "blog/adhd-medication-options-california.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-medication-options-for-adults",
+      "file": "blog/adhd-medication-options-for-adults.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-medication-side-effects-what-to-expect",
+      "file": "blog/adhd-medication-side-effects-what-to-expect.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-symptoms-overlooked",
+      "file": "blog/adhd-symptoms-overlooked.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-telehealth-california",
+      "file": "blog/adhd-telehealth-california.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-testing-online-california-screening-vs-evaluation",
+      "file": "blog/adhd-testing-online-california-screening-vs-evaluation.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-treatment-austin-tx",
+      "file": "blog/adhd-treatment-austin-tx.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-treatment-dallas-tx",
+      "file": "blog/adhd-treatment-dallas-tx.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-treatment-fort-worth-tx",
+      "file": "blog/adhd-treatment-fort-worth-tx.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-treatment-houston-tx",
+      "file": "blog/adhd-treatment-houston-tx.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-treatment-los-angeles-ca",
+      "file": "blog/adhd-treatment-los-angeles-ca.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-treatment-miami-fl",
+      "file": "blog/adhd-treatment-miami-fl.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-treatment-oakland-ca",
+      "file": "blog/adhd-treatment-oakland-ca.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-treatment-orange-county-ca",
+      "file": "blog/adhd-treatment-orange-county-ca.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-treatment-orlando-fl",
+      "file": "blog/adhd-treatment-orlando-fl.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-treatment-philadelphia-pa",
+      "file": "blog/adhd-treatment-philadelphia-pa.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-treatment-sacramento-ca",
+      "file": "blog/adhd-treatment-sacramento-ca.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-treatment-san-antonio-tx",
+      "file": "blog/adhd-treatment-san-antonio-tx.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-treatment-san-diego-ca",
+      "file": "blog/adhd-treatment-san-diego-ca.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-treatment-san-francisco-ca",
+      "file": "blog/adhd-treatment-san-francisco-ca.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-treatment-san-jose-ca",
+      "file": "blog/adhd-treatment-san-jose-ca.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd-treatment-texas",
+      "file": "blog/adhd-treatment-texas.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adhd",
+      "file": "blog/adhd.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adult-adhd-symptoms-california",
+      "file": "blog/adult-adhd-symptoms-california.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/adult-adhd-treatment-california-2026",
+      "file": "blog/adult-adhd-treatment-california-2026.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/brain-fog-after-covid",
+      "file": "blog/brain-fog-after-covid.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/brain-fog-and-anxiety",
+      "file": "blog/brain-fog-and-anxiety.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/brain-fog-and-sleep",
+      "file": "blog/brain-fog-and-sleep.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/brain-fog-at-work",
+      "file": "blog/brain-fog-at-work.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/brain-fog-vs-adhd",
+      "file": "blog/brain-fog-vs-adhd.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/chronic-fatigue-and-work-performance",
+      "file": "blog/chronic-fatigue-and-work-performance.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/chronic-fatigue-vs-everyday-tiredness",
+      "file": "blog/chronic-fatigue-vs-everyday-tiredness.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/cognitive-health-benefits-for-employers",
+      "file": "blog/cognitive-health-benefits-for-employers.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/compounded-vs-branded-glp1-medications",
+      "file": "blog/compounded-vs-branded-glp1-medications.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/executive-dysfunction-adhd",
+      "file": "blog/executive-dysfunction-adhd.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/fatigue-after-illness",
+      "file": "blog/fatigue-after-illness.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/fatigue-despite-normal-labs",
+      "file": "blog/fatigue-despite-normal-labs.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/focus-fatigue-workforce-issue",
+      "file": "blog/focus-fatigue-workforce-issue.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "file": "blog/food-noise-and-glp-1-what-it-means-and-what-helps.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+      "file": "blog/free-testosterone-vs-total-testosterone-what-patients-should-know.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/glp1-side-effects-and-how-to-manage-them",
+      "file": "blog/glp1-side-effects-and-how-to-manage-them.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/how-adhd-medication-is-prescribed-online",
+      "file": "blog/how-adhd-medication-is-prescribed-online.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/how-mental-health-affects-weight-loss-outcomes",
+      "file": "blog/how-mental-health-affects-weight-loss-outcomes.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/how-to-choose-adhd-provider-california",
+      "file": "blog/how-to-choose-adhd-provider-california.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/how-to-know-if-you-have-adhd-adult",
+      "file": "blog/how-to-know-if-you-have-adhd-adult.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/how-to-safely-get-prescriptions-online",
+      "file": "blog/how-to-safely-get-prescriptions-online.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog",
+      "file": "blog/index.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/insomnia-treatment-options-beyond-medication",
+      "file": "blog/insomnia-treatment-options-beyond-medication.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "file": "blog/insulin-resistance-and-weight-loss-clinician-overview.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/iron-deficiency-and-fatigue",
+      "file": "blog/iron-deficiency-and-fatigue.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/iron-deficiency-brain-fog-adhd",
+      "file": "blog/iron-deficiency-brain-fog-adhd.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/is-adhd-medication-safe-long-term",
+      "file": "blog/is-adhd-medication-safe-long-term.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/is-online-adhd-diagnosis-legit",
+      "file": "blog/is-online-adhd-diagnosis-legit.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/medical-weight-loss-glp1-semaglutide-texas",
+      "file": "blog/medical-weight-loss-glp1-semaglutide-texas.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/medical-weight-loss-vs-dieting-what-actually-works",
+      "file": "blog/medical-weight-loss-vs-dieting-what-actually-works.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/minoxidil-for-hair-loss-does-it-work",
+      "file": "blog/minoxidil-for-hair-loss-does-it-work.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/morning-fatigue",
+      "file": "blog/morning-fatigue.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/non-stimulant-adhd-medications-explained",
+      "file": "blog/non-stimulant-adhd-medications-explained.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/online-adhd-diagnosis-california",
+      "file": "blog/online-adhd-diagnosis-california.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/online-adhd-diagnosis-texas",
+      "file": "blog/online-adhd-diagnosis-texas.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/oral-vs-injectable-weight-loss-medications",
+      "file": "blog/oral-vs-injectable-weight-loss-medications.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/oral-vs-topical-minoxidil-which-is-right",
+      "file": "blog/oral-vs-topical-minoxidil-which-is-right.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/perimenopause-brain-fog",
+      "file": "blog/perimenopause-brain-fog.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
+      "file": "blog/phentermine-for-weight-loss-safety-and-effectiveness.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/pots-and-adhd",
+      "file": "blog/pots-and-adhd.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/semaglutide-for-weight-loss-how-it-works",
+      "file": "blog/semaglutide-for-weight-loss-how-it-works.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/sildenafil-for-erectile-dysfunction-what-to-expect",
+      "file": "blog/sildenafil-for-erectile-dysfunction-what-to-expect.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/sleep-and-focus-at-work",
+      "file": "blog/sleep-and-focus-at-work.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign",
+      "file": "blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/telehealth-prescriptions-how-online-treatment-works",
+      "file": "blog/telehealth-prescriptions-how-online-treatment-works.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/telehealth",
+      "file": "blog/telehealth.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/thyroid-and-fatigue",
+      "file": "blog/thyroid-and-fatigue.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/tirzepatide-vs-semaglutide-which-is-better",
+      "file": "blog/tirzepatide-vs-semaglutide-which-is-better.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/vyvanse-vs-adderall-differences",
+      "file": "blog/vyvanse-vs-adderall-differences.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/weight-loss",
+      "file": "blog/weight-loss.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/when-is-testosterone-therapy-appropriate",
+      "file": "blog/when-is-testosterone-therapy-appropriate.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/why-am-i-always-tired-causes-when-to-see-doctor",
+      "file": "blog/why-am-i-always-tired-causes-when-to-see-doctor.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd",
+      "file": "blog/youre-not-lazy-signs-undiagnosed-adult-adhd.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/book-appointment",
+      "file": "book-appointment.html",
+      "in_sitemap": true,
+      "classification": "health-identifying",
+      "why": [
+        "care_flow_gate"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "REMOVE Meta + Google Ads/DoubleClick (care-flow gate)"
+    },
+    {
+      "url": "/brain-fog",
+      "file": "brain-fog.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/creyos-adhd-testing",
+      "file": "creyos-adhd-testing.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/employers",
+      "file": "employers.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/employers/california-pilot",
+      "file": "employers/california-pilot.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/fatigue",
+      "file": "fatigue.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/",
+      "file": "index.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/intake",
+      "file": "intake/index.html",
+      "in_sitemap": false,
+      "classification": "health-identifying",
+      "why": [
+        "care_flow_gate"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "REMOVE Meta + Google Ads/DoubleClick (care-flow gate)"
+    },
+    {
+      "url": "/join-our-team",
+      "file": "join-our-team.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/labs",
+      "file": "labs.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/labs/a1c-blood-sugar",
+      "file": "labs/a1c-blood-sugar.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/labs/adhd-support",
+      "file": "labs/adhd-support.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/labs/cbc",
+      "file": "labs/cbc.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/labs/cmp",
+      "file": "labs/cmp.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/labs/fatigue-brain-fog",
+      "file": "labs/fatigue-brain-fog.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/labs/how-to-read-results",
+      "file": "labs/how-to-read-results.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/labs/iron-ferritin",
+      "file": "labs/iron-ferritin.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/labs/lipid-panel",
+      "file": "labs/lipid-panel.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/labs/mens-health",
+      "file": "labs/mens-health.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/labs/preventive",
+      "file": "labs/preventive.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/labs/thyroid",
+      "file": "labs/thyroid.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/labs/vitamin-b12",
+      "file": "labs/vitamin-b12.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/labs/vitamin-d",
+      "file": "labs/vitamin-d.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/labs/womens-midlife",
+      "file": "labs/womens-midlife.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/legal/controlled-substance-treatment-agreement",
+      "file": "legal/controlled-substance-treatment-agreement/index.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/legal/cookie-policy",
+      "file": "legal/cookie-policy/index.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/legal",
+      "file": "legal/index.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/legal/notice-of-privacy-practices",
+      "file": "legal/notice-of-privacy-practices/index.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/legal/privacy-policy",
+      "file": "legal/privacy-policy/index.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/legal/terms-of-use",
+      "file": "legal/terms-of-use/index.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/mens-health-longevity",
+      "file": "mens-health-longevity.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/online-adhd-test",
+      "file": "online-adhd-test.html",
+      "in_sitemap": false,
+      "classification": "health-identifying",
+      "why": [
+        "care_flow_gate"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "REMOVE Meta + Google Ads/DoubleClick (care-flow gate)"
+    },
+    {
+      "url": "/prescriptions",
+      "file": "prescriptions.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/preventive-care",
+      "file": "preventive-care.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/pricing",
+      "file": "pricing.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/primary-care",
+      "file": "primary-care.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/primary-urgent-care",
+      "file": "primary-urgent-care.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/privacy-policy",
+      "file": "privacy-policy.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/providers/dr-natasha-desai",
+      "file": "providers/dr-natasha-desai.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/providers/dr-sneh-pandey",
+      "file": "providers/dr-sneh-pandey.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/providers/dr-swati-pandey",
+      "file": "providers/dr-swati-pandey.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/providers/dr-vanessa-urbina",
+      "file": "providers/dr-vanessa-urbina.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/providers",
+      "file": "providers/index.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/providers/megan-wunderlich",
+      "file": "providers/megan-wunderlich.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/providers/wendy-delgado",
+      "file": "providers/wendy-delgado.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/redirect/adhd-evaluation",
+      "file": "redirect/adhd-evaluation/index.html",
+      "in_sitemap": false,
+      "classification": "health-identifying",
+      "why": [
+        "care_flow_gate"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "REMOVE Meta + Google Ads/DoubleClick (care-flow gate)"
+    },
+    {
+      "url": "/redirect/adhd-walkthrough",
+      "file": "redirect/adhd-walkthrough/index.html",
+      "in_sitemap": false,
+      "classification": "health-identifying",
+      "why": [
+        "care_flow_gate"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "REMOVE Meta + Google Ads/DoubleClick (care-flow gate)"
+    },
+    {
+      "url": "/redirect/chat",
+      "file": "redirect/chat/index.html",
+      "in_sitemap": false,
+      "classification": "health-identifying",
+      "why": [
+        "care_flow_gate"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "REMOVE Meta + Google Ads/DoubleClick (care-flow gate)"
+    },
+    {
+      "url": "/redirect/meet-greet",
+      "file": "redirect/meet-greet/index.html",
+      "in_sitemap": false,
+      "classification": "health-identifying",
+      "why": [
+        "care_flow_gate"
+      ],
+      "scripts_html": {
+        "GTM": false,
+        "Meta": false,
+        "siya_tracking": false,
+        "cookie_consent": false
+      },
+      "recommendation": "REMOVE Meta + Google Ads/DoubleClick (care-flow gate)"
+    },
+    {
+      "url": "/siya-circle",
+      "file": "siya-circle.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/telehealth",
+      "file": "telehealth.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/terms",
+      "file": "terms.html",
+      "in_sitemap": false,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/weight-loss-metabolic-health",
+      "file": "weight-loss-metabolic-health.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/womens-health",
+      "file": "womens-health.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    },
+    {
+      "url": "/womens-midlife-health",
+      "file": "womens-midlife-health.html",
+      "in_sitemap": true,
+      "classification": "generic",
+      "why": [
+        "informational_or_marketing"
+      ],
+      "scripts_html": {
+        "GTM": true,
+        "Meta": true,
+        "siya_tracking": true,
+        "cookie_consent": true
+      },
+      "recommendation": "KEEP GTM/Meta; GA4 hardened via consent bootstrap + Admin/GTM"
+    }
+  ],
+  "diff": {
+    "summary": "0 added, 0 removed, 14 changed, 0 tracking regressions on health pages",
+    "added": [],
+    "removed": [],
+    "changed": [
+      {
+        "url": "/labs/a1c-blood-sugar",
+        "before": {
+          "classification": "generic",
+          "GTM": true,
+          "Meta": true
+        },
+        "after": {
+          "classification": "generic",
+          "GTM": false,
+          "Meta": false
+        }
+      },
+      {
+        "url": "/labs/adhd-support",
+        "before": {
+          "classification": "generic",
+          "GTM": true,
+          "Meta": true
+        },
+        "after": {
+          "classification": "generic",
+          "GTM": false,
+          "Meta": false
+        }
+      },
+      {
+        "url": "/labs/cbc",
+        "before": {
+          "classification": "generic",
+          "GTM": true,
+          "Meta": true
+        },
+        "after": {
+          "classification": "generic",
+          "GTM": false,
+          "Meta": false
+        }
+      },
+      {
+        "url": "/labs/cmp",
+        "before": {
+          "classification": "generic",
+          "GTM": true,
+          "Meta": true
+        },
+        "after": {
+          "classification": "generic",
+          "GTM": false,
+          "Meta": false
+        }
+      },
+      {
+        "url": "/labs/fatigue-brain-fog",
+        "before": {
+          "classification": "generic",
+          "GTM": true,
+          "Meta": true
+        },
+        "after": {
+          "classification": "generic",
+          "GTM": false,
+          "Meta": false
+        }
+      },
+      {
+        "url": "/labs/how-to-read-results",
+        "before": {
+          "classification": "generic",
+          "GTM": true,
+          "Meta": true
+        },
+        "after": {
+          "classification": "generic",
+          "GTM": false,
+          "Meta": false
+        }
+      },
+      {
+        "url": "/labs/iron-ferritin",
+        "before": {
+          "classification": "generic",
+          "GTM": true,
+          "Meta": true
+        },
+        "after": {
+          "classification": "generic",
+          "GTM": false,
+          "Meta": false
+        }
+      },
+      {
+        "url": "/labs/lipid-panel",
+        "before": {
+          "classification": "generic",
+          "GTM": true,
+          "Meta": true
+        },
+        "after": {
+          "classification": "generic",
+          "GTM": false,
+          "Meta": false
+        }
+      },
+      {
+        "url": "/labs/mens-health",
+        "before": {
+          "classification": "generic",
+          "GTM": true,
+          "Meta": true
+        },
+        "after": {
+          "classification": "generic",
+          "GTM": false,
+          "Meta": false
+        }
+      },
+      {
+        "url": "/labs/preventive",
+        "before": {
+          "classification": "generic",
+          "GTM": true,
+          "Meta": true
+        },
+        "after": {
+          "classification": "generic",
+          "GTM": false,
+          "Meta": false
+        }
+      },
+      {
+        "url": "/labs/thyroid",
+        "before": {
+          "classification": "generic",
+          "GTM": true,
+          "Meta": true
+        },
+        "after": {
+          "classification": "generic",
+          "GTM": false,
+          "Meta": false
+        }
+      },
+      {
+        "url": "/labs/vitamin-b12",
+        "before": {
+          "classification": "generic",
+          "GTM": true,
+          "Meta": true
+        },
+        "after": {
+          "classification": "generic",
+          "GTM": false,
+          "Meta": false
+        }
+      },
+      {
+        "url": "/labs/vitamin-d",
+        "before": {
+          "classification": "generic",
+          "GTM": true,
+          "Meta": true
+        },
+        "after": {
+          "classification": "generic",
+          "GTM": false,
+          "Meta": false
+        }
+      },
+      {
+        "url": "/labs/womens-midlife",
+        "before": {
+          "classification": "generic",
+          "GTM": true,
+          "Meta": true
+        },
+        "after": {
+          "classification": "generic",
+          "GTM": false,
+          "Meta": false
+        }
+      }
+    ],
+    "regressions": []
+  },
+  "vendor_diff": {
+    "summary": "No prior vendor-destination audit to diff.",
+    "changed": []
+  },
+  "prior_audit": "docs/tracking-full-site-audit.json"
+}
