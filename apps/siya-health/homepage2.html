@@ -87,14 +87,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         --siya-preview-cream: #F4EFE7;
       }
 
-      .hero-preview-banner {
-        margin: 0 0 14px;
-        font-size: 0.72rem;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        opacity: 0.8;
-      }
-
       .hero-merged--video-preview {
         background-image: none !important;
         background-color: #0a0f2a;
@@ -228,51 +220,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         line-height: 1.18;
         letter-spacing: -0.02em;
         font-weight: 600;
-        overflow-wrap: anywhere;
       }
 
       .siya-hero-preview__rotate-shell {
-        display: inline-grid;
+        display: inline-block;
         vertical-align: baseline;
-        overflow: hidden;
         max-width: 100%;
+        text-align: left;
       }
 
-      .siya-hero-preview__rotate-sizer,
-      .siya-hero-preview__rotate-word {
-        grid-area: 1 / 1;
+      .siya-hero-preview__rotate-measure {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: auto;
+        height: auto;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        visibility: hidden;
+        pointer-events: none;
         font-size: inherit;
         font-weight: inherit;
         line-height: inherit;
         letter-spacing: inherit;
-        white-space: nowrap;
-      }
-
-      .siya-hero-preview__rotate-word.is-unlinked {
-        cursor: default;
-        pointer-events: none;
-      }
-
-      @media (max-width: 480px) {
-        .siya-hero-preview__rotate-sizer,
-        .siya-hero-preview__rotate-word {
-          white-space: normal;
-          max-width: min(12rem, 100%);
-        }
-      }
-
-      .siya-hero-preview__rotate-sizer {
-        visibility: hidden;
-        pointer-events: none;
       }
 
       .siya-hero-preview__rotate-word {
+        display: inline;
+        white-space: normal;
+        overflow-wrap: normal;
+        word-break: normal;
+        hyphens: none;
+        -webkit-hyphens: none;
         background: linear-gradient(90deg, #F4EFE7 0%, #D81088 45%, #C4A574 100%);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
         text-decoration: none;
         animation: siya-preview-rotate-in 0.55s ease both;
+      }
+
+      .siya-hero-preview__rotate-word.is-unlinked {
+        cursor: default;
+        pointer-events: none;
       }
 
       .siya-hero-preview__rotate-word:hover,
@@ -477,17 +468,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
     
       /* ===== homepage2 mobile density + video visibility ===== */
-      .siya-h2-review-flag {
-        margin: 0.75rem 0 0;
-        padding: 0.65rem 0.85rem;
-        font-size: 0.82rem;
-        line-height: 1.4;
-        color: #001878;
-        background: rgba(196, 165, 116, 0.18);
-        border: 1px solid rgba(196, 165, 116, 0.45);
-        border-radius: 10px;
-        max-width: 40rem;
-      }
       .siya-h2-more {
         margin-top: 0.75rem;
       }
@@ -569,10 +549,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           margin-top: 0.5rem;
           font-size: 0.86rem;
           line-height: 1.35;
-        }
-        .hero-preview-banner {
-          margin-bottom: 8px;
-          font-size: 0.62rem;
         }
         .siya-hero-preview__card {
           padding: 1.15rem 1.1rem 1.2rem;
@@ -857,11 +833,10 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
 
         <div class="container hero-inner siya-hero-preview__inner">
           <div class="hero-merged-content siya-hero-preview__copy">
-            <p class="hero-preview-banner">Team review preview — not the live homepage</p>
+            <span id="siya-hero-rotate-measure" class="siya-hero-preview__rotate-measure" aria-hidden="true"></span>
             <h1 class="siya-hero-preview__title">
               Physician-led care for your
               <span class="siya-hero-preview__rotate-shell" aria-live="polite">
-                <span class="siya-hero-preview__rotate-sizer" aria-hidden="true">hormonal issues</span>
                 <a
                   id="siya-hero-rotate-word"
                   class="siya-hero-preview__rotate-word"
@@ -876,7 +851,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
               You’re not looking for a quick label—you’re looking for a clinician who’ll sit with what’s going on and help you figure out the next step.
             </p>
             <p class="siya-hero-preview__philosophy">
-              We believe care starts with actually knowing you — not just diagnosing you.
+              We believe care starts with actually knowing who you are and understanding your care needs — not just a diagnosis.
             </p>
           </div>
 
@@ -937,6 +912,35 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
  </details>
  </div> <figure class="why-patients-media"> <img src="/assets/images/editorial-finally-heard.jpg" width="1100" height="733" alt="Adult on a quiet phone call at home, looking relieved after finally being taken seriously." loading="lazy" decoding="async" /> <figcaption>You don’t need a perfect label first—you need someone who takes the full picture seriously.</figcaption> </figure> </div> </div> </section>
 
+      <!-- HOW WE DIAGNOSE — cautious copy; confirm against CA pilot evaluation pathway before production promotion -->
+      <section class="section section-tinted" id="how-we-diagnose" aria-labelledby="how-we-diagnose-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="how-we-diagnose-heading">How we diagnose</h2>
+            <p class="lead siya-h2-lead-tight">Structured evaluation—not a quick label or an online quiz score alone.</p>
+          </div>
+          <p class="siya-h2-lede">Licensed clinicians review your history, how symptoms show up over time, and what else might overlap—then use objective inputs when they may change the plan. This is clinician-led care, not automated diagnosis.</p>
+          <ul class="scan-list">
+            <li>Structured clinical history across settings and over time—not a single checklist visit</li>
+            <li>Validated tools when clinically appropriate—as part of evaluation, not as a standalone answer</li>
+            <li>Review of prior records and context when you share them</li>
+            <li>Labs or other objective inputs only when they may clarify the picture—not a default test menu</li>
+          </ul>
+          <p class="symptoms-transition"><strong>Screening is not diagnosis.</strong> A licensed clinician determines appropriate next steps; treatment—including medication—is never guaranteed.</p>
+        </div>
+      </section>
+
+      <!-- HIPAA / privacy practices (no SOC2 claim) -->
+      <section class="section" id="privacy-practices" aria-labelledby="privacy-practices-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="privacy-practices-heading">Your privacy matters</h2>
+            <p class="lead siya-h2-lead-tight">Telehealth visits and medical records are handled under HIPAA-compliant practices.</p>
+          </div>
+          <p class="siya-h2-lede">We use secure telehealth and messaging workflows designed for protected health information. For how we collect, use, and safeguard your information, see our <a href="/legal/privacy-policy">Privacy Policy</a>.</p>
+        </div>
+      </section>
+
       <!-- HOW WE HELP -->
       <section class="section" id="how-it-works"> <div class="container"> <div class="section-header"> <h2>How care usually unfolds</h2> <p class="lead siya-h2-lead-tight">We start with what you’re noticing, then evaluate, plan, and stay with you.</p> </div> <div class="flow-cards flow-cards--journey"> <div class="flow-card"> <span class="flow-step-num">1</span> <h3>Meet &amp; Greet</h3> <p>A free conversation so we can understand what’s going on—often within 48 hours. You don’t need a label first.</p> </div> <div class="flow-card"> <span class="flow-step-num">2</span> <h3>Clinical evaluation</h3> <p>We take a structured history and give you a clear plan. Pricing stays transparent.</p> </div> <div class="flow-card"> <span class="flow-step-num">3</span> <h3>Care plan</h3> <p>We’ll explain what we found in plain language. Labs, lifestyle, or medication only when they actually fit.</p> </div> <div class="flow-card"> <span class="flow-step-num">4</span> <h3>Ongoing care</h3> <p>Follow-up that matches your plan—real continuity, not a one-and-done.</p> </div> </div> <p class="symptoms-transition"><a href="/pricing">See how pricing maps to this journey →</a></p> </div> </section>
 
@@ -975,8 +979,8 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
       <!-- /SIYA:CARE-TEAM -->
 
       <!-- SOCIAL PROOF -->
+      <!-- Testimonial quotes: founder sourcing decision pending before production promotion -->
       <section class="section reviews testimonials-premium" id="reviews"> <div class="container"> <div class="section-header testimonials-premium-header"> <h2>Trusted by adults seeking clearer answers</h2> <p class="lead siya-h2-lead-tight">Patient notes from telehealth visits. Individual experiences vary—outcomes aren’t guaranteed.</p>
- <p class="siya-h2-review-flag" role="note">Team review: quotes below need a founder sourcing decision before production. Do not treat as final.</p>
  </div> <div class="homepage-trust-summary" aria-label="Trust statistics"> <div class="homepage-trust-stat"> <span class="homepage-trust-stat-value">4.9★</span> <span class="homepage-trust-stat-label">Average Google rating</span> </div> <div class="homepage-trust-stat"> <span class="homepage-trust-stat-value">100+</span> <span class="homepage-trust-stat-label">Google reviews</span> </div> <div class="homepage-trust-stat"> <span class="homepage-trust-stat-value">2,700+</span> <span class="homepage-trust-stat-label">Patients treated</span> </div> <div class="homepage-trust-stat"> <span class="homepage-trust-stat-value">1,200+</span> <span class="homepage-trust-stat-label">Neurocognitive evaluations</span> </div> <div class="homepage-trust-stat"> <span class="homepage-trust-stat-value">600+</span> <span class="homepage-trust-stat-label">Verified reviews (all platforms)</span> </div> </div> <input type="checkbox" id="siya-h2-more-reviews" class="siya-h2-more-reviews-toggle" hidden />
  <label for="siya-h2-more-reviews" class="siya-h2-more-reviews-label">Show more patient notes</label>
  <div class="testimonial-cards-grid siya-h2-testimonials"> <article class="testimonial-card-premium"> <div class="testimonial-tags"> <span class="testimonial-tag">Feeling Heard</span> <span class="testimonial-tag">Compassionate Care</span> </div> <p class="testimonial-text">"I feel a personal connection and genuine empathy even through the screen... It's like someone really understood my pain and knew what to do about it."</p> <div class="testimonial-footer"> <span class="testimonial-verified">Verified Telehealth Patient</span> </div> </article> <article class="testimonial-card-premium"> <div class="testimonial-tags"> <span class="testimonial-tag">Not Rushed</span> <span class="testimonial-tag">Thorough</span> </div> <p class="testimonial-text">"Finally found a telehealth practice that feels thorough and respectful. I never feel rushed—the clinicians actually listen."</p> <div class="testimonial-footer"> <span class="testimonial-verified">Verified Telehealth Patient</span> </div> </article> <article class="testimonial-card-premium siya-h2-testimonial-extra"> <div class="testimonial-tags"> <span class="testimonial-tag">Responsive Support</span> <span class="testimonial-tag">Clear Communication</span> </div> <p class="testimonial-text">"Very knowledgeable, friendly, patient-focused and listens very well. Also very fast at helping me when one pharmacy wouldn't fill my prescription!"</p> <div class="testimonial-footer"> <span class="testimonial-verified">Verified Telehealth Patient</span> </div> </article> <article class="testimonial-card-premium siya-h2-testimonial-extra"> <div class="testimonial-tags"> <span class="testimonial-tag">Responsive Support</span> <span class="testimonial-tag">Follow-Up Care</span> </div> <p class="testimonial-text">"They cared, listened, and followed up very well. I am grateful."</p> <div class="testimonial-footer"> <span class="testimonial-verified">Verified Telehealth Patient</span> </div> </article> </div> </div> </section>
@@ -1158,23 +1162,40 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
           { label: "hormonal issues", href: "/womens-health" }
         ];
         var el = document.getElementById("siya-hero-rotate-word");
-        var sizer = document.querySelector(".siya-hero-preview__rotate-sizer");
+        var shell = document.querySelector(".siya-hero-preview__rotate-shell");
+        var measure = document.getElementById("siya-hero-rotate-measure");
+        var title = document.querySelector(".siya-hero-preview__title");
         if (!el) return;
-        if (sizer) {
-          var longest = terms.reduce(function (a, b) {
-            return a.label.length >= b.label.length ? a : b;
-          });
-          sizer.textContent = longest.label;
-        }
         var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         var i = 0;
         function displayLabel(raw) {
           if (/^adhd$/i.test(String(raw).trim())) return "ADHD";
           return raw;
         }
+        function formatDisplayLabel(raw) {
+          return displayLabel(raw).replace(/ /g, "\u00A0");
+        }
+        function syncMeasureTypography() {
+          if (!measure || !title) return;
+          var cs = getComputedStyle(title);
+          measure.style.fontSize = cs.fontSize;
+          measure.style.fontWeight = cs.fontWeight;
+          measure.style.lineHeight = cs.lineHeight;
+          measure.style.letterSpacing = cs.letterSpacing;
+        }
+        function reserveRotateWidth() {
+          if (!shell || !measure) return;
+          syncMeasureTypography();
+          var maxW = 0;
+          for (var j = 0; j < terms.length; j++) {
+            measure.textContent = formatDisplayLabel(terms[j].label);
+            maxW = Math.max(maxW, measure.offsetWidth);
+          }
+          shell.style.minWidth = maxW ? maxW + "px" : "";
+        }
         function show(idx) {
           var t = terms[idx];
-          el.textContent = displayLabel(t.label);
+          el.textContent = formatDisplayLabel(t.label);
           el.setAttribute("href", t.href);
           el.classList.remove("is-unlinked");
           el.removeAttribute("aria-disabled");
@@ -1184,7 +1205,9 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
             el.style.animation = "";
           }
         }
+        reserveRotateWidth();
         show(0);
+        window.addEventListener("resize", reserveRotateWidth);
         if (reduce) return;
         setInterval(function () {
           i = (i + 1) % terms.length;
