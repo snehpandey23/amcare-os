@@ -152,16 +152,15 @@ const html = `<!DOCTYPE html>
         <div class="container">
           <header class="employer-pitch-section-header">
             <h2 id="credibility-heading">Proof points</h2>
-            <p class="employer-pitch-section-lead">Operational scale and published ratings. Bracketed items still need a display date or source link before you treat them as send-ready.</p>
+            <p class="employer-pitch-section-lead">Operational scale and published ratings (as of September 2026).</p>
           </header>
           <ul class="employer-pitch-included employer-pitch-proof">
             <li>2,700+ patients treated, 1,200+ clinical evaluations completed</li>
-            <li>Averaging about 180 new patients and 200 returning patients every month <span class="employer-pitch-placeholder">[confirm date range to display, e.g. &ldquo;as of September 2026&rdquo;]</span></li>
-            <li>Google: 4.90/5 average (88 reviews) <span class="employer-pitch-placeholder">[as of [date]]</span> <span class="employer-pitch-placeholder">[link/citation to Google reviews source]</span></li>
-            <li>Klarity: 4.66/5 average across 589 provider reviews <span class="employer-pitch-placeholder">[as of [date]]</span> <span class="employer-pitch-placeholder">[link/citation to Klarity source]</span></li>
+            <li>Averaging about 180 new patients and 200 returning patients every month (as of September 2026)</li>
+            <li>Google: 4.90/5 average (88 reviews, as of September 2026)</li>
+            <li>Klarity: 4.66/5 average across 589 provider reviews (as of September 2026)</li>
             <li>Concierge/care-management sessions have grown from 25/month to 50/month over the past quarter — an active care-management team already in place</li>
           </ul>
-          <p class="employer-pitch-micro">Cognitive percentile improvement, after-hours/weekend appointment share, and retention rate: <span class="employer-pitch-placeholder">Coming soon</span> (metrics still in progress — no numbers published here).</p>
         </div>
       </section>
 
@@ -201,7 +200,7 @@ const html = `<!DOCTYPE html>
                 <li>General psychiatric care (depression, anxiety, sleep, stress-related conditions)</li>
                 <li>Cognitive assessment (baseline + follow-up, one input to clinician evaluation)</li>
                 <li>Metabolic and weight management, including obesity medicine consultations</li>
-                <li>Hormonal health evaluation and treatment <span class="employer-pitch-placeholder">[scope: confirm which conditions — e.g. menopause, thyroid]</span></li>
+                <li>Hormonal health evaluation and treatment (menopause, thyroid, diabetes, PCOS, low testosterone, and infertility)</li>
                 <li>Secure messaging and care navigation</li>
                 <li>Ongoing care management through our Medical Assistant team (concierge check-ins, monitoring, follow-up)</li>
               </ul>
@@ -259,6 +258,10 @@ const html = `<!DOCTYPE html>
                   <th scope="row">Contracting entity</th>
                   <td>${esc(LEGAL_ENTITY)}</td>
                 </tr>
+                <tr>
+                  <th scope="row">Insurance</th>
+                  <td>Professional liability and cyber insurance coverage maintained — details available in our security packet upon request.</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -308,8 +311,13 @@ ${careFlowSvg()}
           <header class="employer-pitch-section-header">
             <p class="employer-pitch-section-label">Section 8</p>
             <h2 id="controlled-heading">Controlled-substance contingency</h2>
-            <p class="employer-pitch-section-lead"><span class="employer-pitch-placeholder">[Controlled-substance contingency plan detail — policy not yet finalized]</span></p>
+            <p class="employer-pitch-section-lead">When stimulant medication is clinically appropriate, we follow a structured safety process—not a one-visit prescription.</p>
           </header>
+          <ul class="employer-pitch-included">
+            <li>No stimulant medication is prescribed at the first visit — every patient completes a signed controlled-substance treatment agreement before any stimulant is started.</li>
+            <li>Ongoing monitoring and follow-up on a set schedule: random urine drug screens and monthly pill counts.</li>
+          </ul>
+          <p class="employer-pitch-section-lead">We&rsquo;re actively developing an in-person evaluation pathway to ensure continuity of care for patients on controlled-substance medications, regardless of how federal telehealth rules evolve.</p>
         </div>
       </section>
 
@@ -334,8 +342,9 @@ ${careFlowSvg()}
                 <ul class="employer-pitch-creds">
                   <li>${esc(DR_PANDEY_EXPERIENCE)}</li>
                   <li>4.72 rating (296 verified patient reviews)</li>
-                  <li>Licensed in California, Texas, Pennsylvania, Florida</li>
-                  <li>License number: <span class="employer-pitch-placeholder">[confirm]</span></li>
+                  <li>NPI: 1154703528</li>
+                  <li>Licensed in: California, Texas, Pennsylvania, Florida</li>
+                  <li>Board certified: American Board of Obesity Medicine</li>
                   <li>Residency: University of Pittsburgh Medical Center</li>
                   <li>Medical degree: Maulana Azad Medical College</li>
                 </ul>
@@ -351,8 +360,9 @@ ${careFlowSvg()}
                 <ul class="employer-pitch-creds">
                   <li>17 years of clinical experience</li>
                   <li>4.89 rating (52 verified patient reviews)</li>
-                  <li>Multi-state licensed including California</li>
-                  <li>License number: <span class="employer-pitch-placeholder">[confirm]</span></li>
+                  <li>NPI: 1063725059</li>
+                  <li>Licensed in: California, Arizona, Florida, Illinois, New York, Oregon, Pennsylvania, Texas, Utah</li>
+                  <li>Credential: PA-C, NCCPA-certified</li>
                 </ul>
               </div>
             </article>
@@ -374,7 +384,17 @@ ${careFlowSvg()}
         </div>
       </section>
 
-      <section class="employer-pitch-section employer-pitch-section--tint" id="sample-journey" aria-labelledby="sample-journey-heading">
+      <section class="employer-pitch-section employer-pitch-section--tint" id="outcome-measures" aria-labelledby="outcome-measures-heading">
+        <div class="container">
+          <header class="employer-pitch-section-header">
+            <p class="employer-pitch-section-label">Section 11 · Outcome measures</p>
+            <h2 id="outcome-measures-heading">How we track clinical progress</h2>
+            <p class="employer-pitch-section-lead">PHQ-9, GAD-7, and ASRS, along with other validated screening tools as clinically appropriate.</p>
+          </header>
+        </div>
+      </section>
+
+      <section class="employer-pitch-section" id="sample-journey" aria-labelledby="sample-journey-heading">
         <div class="container">
           <header class="employer-pitch-section-header">
             <h2 id="sample-journey-heading">A typical care journey</h2>
@@ -427,17 +447,7 @@ ${careFlowSvg()}
             <h2 id="security-heading">Security and compliance</h2>
             <p class="employer-pitch-section-lead">Clinical services under this pilot are provided through <strong>${esc(LEGAL_ENTITY)}</strong>. We follow HIPAA-aligned telehealth practices for employee care. Employer partnership reporting is limited to de-identified aggregates as described in Section 7.</p>
           </header>
-          <p class="employer-pitch-section-lead"><span class="employer-pitch-placeholder">[Knox-Keene / benefit classification / ERISA language — awaiting counsel]</span></p>
-        </div>
-      </section>
-
-      <section class="employer-pitch-section" id="hsa" aria-labelledby="hsa-heading">
-        <div class="container">
-          <header class="employer-pitch-section-header">
-            <p class="employer-pitch-section-label">Section 14 · HSA</p>
-            <h2 id="hsa-heading">HSA compatibility</h2>
-            <p class="employer-pitch-section-lead"><span class="employer-pitch-placeholder">[HSA compatibility — reviewing with tax counsel; no claim of compatibility]</span></p>
-          </header>
+          <p class="employer-pitch-section-lead">Professional liability and cyber insurance coverage maintained — details available in our security packet upon request.</p>
         </div>
       </section>
 

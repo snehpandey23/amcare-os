@@ -926,6 +926,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
             <li>Review of prior records and context when you share them</li>
             <li>Labs or other objective inputs only when they may clarify the picture—not a default test menu</li>
           </ul>
+          <p class="siya-h2-lede">If medication is part of your plan, we don’t rush it. Stimulant medication isn’t started at the first visit. You’ll review and sign a treatment agreement first, and care includes ongoing check-ins—things like scheduled follow-up, pill counts, and urine screens when they’re part of keeping treatment safe.</p>
           <p class="symptoms-transition"><strong>Screening is not diagnosis.</strong> A licensed clinician determines appropriate next steps; treatment—including medication—is never guaranteed.</p>
         </div>
       </section>
@@ -1147,19 +1148,19 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
       (function () {
         /*
           Link targets verified against repo HTML:
-          - focus → /adhd-care
-          - ADHD → /adhd-care (always rendered as ADHD)
-          - weight management → /weight-loss-metabolic-health
-          - fatigue → /fatigue
-          - hormonal issues → /womens-health (wired per founder; see content-fit flag in chat —
+          - Focus issues → /adhd-care
+          - ADHD care → /adhd-care
+          - Weight management → /weight-loss-metabolic-health
+          - Ongoing fatigue → /fatigue
+          - Hormonal issues → /womens-health (wired per founder; see content-fit flag in chat —
             page is women-specific, not a general hormonal hub)
         */
         var terms = [
-          { label: "focus", href: "/adhd-care" },
-          { label: "ADHD", href: "/adhd-care" },
-          { label: "weight management", href: "/weight-loss-metabolic-health" },
-          { label: "fatigue", href: "/fatigue" },
-          { label: "hormonal issues", href: "/womens-health" }
+          { label: "Focus issues", href: "/adhd-care" },
+          { label: "ADHD care", href: "/adhd-care" },
+          { label: "Weight management", href: "/weight-loss-metabolic-health" },
+          { label: "Ongoing fatigue", href: "/fatigue" },
+          { label: "Hormonal issues", href: "/womens-health" }
         ];
         var el = document.getElementById("siya-hero-rotate-word");
         var shell = document.querySelector(".siya-hero-preview__rotate-shell");
@@ -1169,8 +1170,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
         var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         var i = 0;
         function displayLabel(raw) {
-          if (/^adhd$/i.test(String(raw).trim())) return "ADHD";
-          return raw;
+          return String(raw);
         }
         function formatDisplayLabel(raw) {
           return displayLabel(raw).replace(/ /g, "\u00A0");
