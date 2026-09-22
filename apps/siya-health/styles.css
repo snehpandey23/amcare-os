@@ -12298,6 +12298,16 @@ body.page-home .symptoms-card--dual .symptoms-card-actions .symptoms-card-second
   color: var(--text-secondary);
 }
 
+.employer-pitch-assessment {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(10, 36, 107, 0.12);
+}
+
+.employer-pitch-assessment .employer-pitch-section-lead {
+  margin-bottom: 1.25rem;
+}
+
 .employer-pitch-subhead {
   margin: 0 0 0.75rem;
   font-family: var(--font-heading);
