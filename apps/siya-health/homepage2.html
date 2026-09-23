@@ -796,34 +796,98 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         width: 100%;
         margin: 0.15rem 0 0.35rem;
       }
+      /* 1) Rotating term: no box / border / outline — text only */
       .hero-merged--abstract .siya-hero-preview__rotate-shell {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 3rem;
-        padding: 0.55rem 1.15rem;
-        border-radius: 0.65rem;
-        border: 1.5px solid rgba(0, 24, 120, 0.22);
-        background: rgba(255, 255, 255, 0.72);
-        box-shadow: 0 6px 24px rgba(0, 24, 120, 0.06);
+        display: inline;
+        margin: 0;
+        padding: 0;
+        border: 0 !important;
+        border-radius: 0;
+        background: none !important;
+        box-shadow: none !important;
+        min-height: 0;
+        min-width: 0;
       }
       .hero-merged--abstract .siya-hero-preview__rotate-word {
-        display: inline-block;
-        font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+        display: inline;
+        font-size: clamp(1.15rem, 2.4vw, 1.45rem);
         font-weight: 650;
-        line-height: 1.25;
+        line-height: 1.3;
         color: #001878 !important;
         background: none !important;
         -webkit-background-clip: unset !important;
         background-clip: unset !important;
         text-decoration: none;
         white-space: nowrap;
+        border: 0 !important;
+        box-shadow: none !important;
+        padding: 0;
       }
       .hero-merged--abstract .siya-hero-preview__rotate-word:hover,
       .hero-merged--abstract .siya-hero-preview__rotate-word:focus-visible {
         color: #D81088 !important;
         text-decoration: underline;
-        text-decoration-color: rgba(216, 16, 136, 0.45);
+        text-decoration-color: rgba(216, 16, 136, 0.4);
+        text-underline-offset: 0.12em;
+      }
+
+      /* 2) Typographic accent — "experience" (not a box) */
+      .siya-hero-preview__accent {
+        color: #D81088;
+        font-weight: 700;
+        font-style: normal;
+        background: none;
+        border: 0;
+        box-shadow: none;
+        text-decoration: underline;
+        text-decoration-thickness: 0.08em;
+        text-decoration-color: rgba(216, 16, 136, 0.38);
+        text-underline-offset: 0.14em;
+      }
+
+      /* 3) Moving rectangle around the whole hero focal block (same spin as journey card) */
+      .siya-hero-preview__focal--orbit {
+        position: relative;
+        isolation: isolate;
+        width: min(100%, 40rem);
+        margin: 0 auto;
+        padding: clamp(1.75rem, 3.5vw, 2.5rem) clamp(1.5rem, 3vw, 2.35rem);
+        border-radius: 1.5rem;
+        background: rgba(255, 255, 255, 0.28);
+        border: 0 !important; /* ring comes from ::before only — not a static outline */
+        overflow: hidden;
+      }
+      .siya-hero-preview__focal--orbit::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        border-radius: inherit;
+        padding: 2px;
+        background: conic-gradient(
+          from 0deg,
+          transparent,
+          var(--siya-preview-magenta, #D81088),
+          var(--siya-preview-champagne, #C4A574),
+          transparent 62%
+        );
+        -webkit-mask:
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        mask:
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        animation: siya-preview-spin 9s linear infinite;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .siya-hero-preview__focal--orbit > * {
+        position: relative;
+        z-index: 1;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .siya-hero-preview__focal--orbit::before { animation: none; opacity: 0.55; }
       }
 
 
@@ -1316,10 +1380,10 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
       <section class="hero-merged hero-merged--abstract" aria-label="Siya Health homepage hero">
 
         <div class="container hero-inner siya-hero-preview__inner siya-hero-preview__inner--solo">
-          <div class="hero-merged-content siya-hero-preview__copy siya-hero-preview__focal">
+          <div class="hero-merged-content siya-hero-preview__copy siya-hero-preview__focal siya-hero-preview__focal--orbit">
             <span id="siya-hero-rotate-measure" class="siya-hero-preview__rotate-measure" aria-hidden="true"></span>
             <h1 class="siya-hero-preview__title siya-hero-preview__title--plain">
-              An integrated care experience for busy professionals.
+              An integrated care <span class="siya-hero-preview__accent">experience</span> for busy professionals.
             </h1>
             <div class="siya-hero-preview__rotate-row" aria-label="Care areas we support">
               <span class="siya-hero-preview__rotate-shell" aria-live="polite">
