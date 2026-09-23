@@ -1203,8 +1203,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         gap: 0.85rem;
         margin-top: 0.35rem;
       }
+      /* Override global .hero-ctas .button { flex: 1 } which stretches the pill tall in a column */
+      .siya-h2-cta-pair .button,
       .siya-h2-cta-pair .ds-button--primary,
       .siya-h2-cta-pair .button.ds-button--primary {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        height: auto !important;
+        min-height: 2.75rem;
+        align-self: center;
         border-radius: 999px;
       }
       .siya-h2-cta-quiet {
