@@ -769,6 +769,63 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
       }
 
+
+      /* Focal hero: plain line + rotating term rectangle */
+      .siya-hero-preview__focal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.15rem;
+      }
+      .hero-merged--abstract .siya-hero-preview__title--plain {
+        font-size: clamp(1.85rem, 4.2vw, 2.75rem) !important;
+        font-weight: 650;
+        line-height: 1.2 !important;
+        letter-spacing: -0.015em;
+        color: #0A246B !important;
+        max-width: 22ch;
+        margin: 0 auto;
+        background: none !important;
+        -webkit-background-clip: unset !important;
+        background-clip: unset !important;
+      }
+      .siya-hero-preview__rotate-row {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 0.15rem 0 0.35rem;
+      }
+      .hero-merged--abstract .siya-hero-preview__rotate-shell {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 3rem;
+        padding: 0.55rem 1.15rem;
+        border-radius: 0.65rem;
+        border: 1.5px solid rgba(0, 24, 120, 0.22);
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: 0 6px 24px rgba(0, 24, 120, 0.06);
+      }
+      .hero-merged--abstract .siya-hero-preview__rotate-word {
+        display: inline-block;
+        font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+        font-weight: 650;
+        line-height: 1.25;
+        color: #001878 !important;
+        background: none !important;
+        -webkit-background-clip: unset !important;
+        background-clip: unset !important;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .hero-merged--abstract .siya-hero-preview__rotate-word:hover,
+      .hero-merged--abstract .siya-hero-preview__rotate-word:focus-visible {
+        color: #D81088 !important;
+        text-decoration: underline;
+        text-decoration-color: rgba(216, 16, 136, 0.45);
+      }
+
       /* ===== homepage2 polish pass ===== */
       .siya-h2-wip-pill {
         position: fixed;
@@ -1178,10 +1235,12 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
         </div>
 
         <div class="container hero-inner siya-hero-preview__inner siya-hero-preview__inner--solo">
-          <div class="hero-merged-content siya-hero-preview__copy">
+          <div class="hero-merged-content siya-hero-preview__copy siya-hero-preview__focal">
             <span id="siya-hero-rotate-measure" class="siya-hero-preview__rotate-measure" aria-hidden="true"></span>
-            <h1 class="siya-hero-preview__title">
-              Physician-led care for your
+            <h1 class="siya-hero-preview__title siya-hero-preview__title--plain">
+              An integrated care experience for busy professionals.
+            </h1>
+            <div class="siya-hero-preview__rotate-row" aria-label="Care areas we support">
               <span class="siya-hero-preview__rotate-shell" aria-live="polite">
                 <a
                   id="siya-hero-rotate-word"
@@ -1190,15 +1249,9 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
                   data-siya-location="hero-rotate"
                   data-page-type="homepage2"
                   data-siya-track="hero_rotate_journey_click"
-                >focus</a>
+                >Focus &amp; ADHD</a>
               </span>
-            </h1>
-            <p class="hero-merged-lead siya-hero-preview__lead">
-              A physician-led care platform for busy professionals who don’t have time to sign up on five different platforms for GLP-1s, ADHD meds, or psychotherapy — get it in one place, when you need it.
-            </p>
-            <p class="siya-hero-preview__support">
-              Built by physicians who know what patients actually go through. Longer visits than a typical 15–20 minute insurance slot. Shared plans that connect focus, stress, weight, and energy — not a prescription-and-done visit.
-            </p>
+            </div>
             <div class="hero-ctas siya-hero-preview__ctas">
               <a href="/redirect/meet-greet" class="button ds-button ds-button--primary" data-siya-location="hero" data-page-type="homepage2" data-intent="homepage" data-conversion-goal="meetGreet" data-cta-slot="meetGreet" data-component="button" data-siya-track="meet_greet_click">Book Free Meet &amp; Greet</a>
               <a href="/providers" class="button ds-button ds-button--secondary secondary" data-siya-location="hero" data-page-type="homepage2" data-intent="homepage" data-conversion-goal="exploreCare" data-cta-slot="exploreCare" data-component="button" data-siya-track="care_team_click">Meet the care team</a>
@@ -1593,16 +1646,17 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
             page is women-specific, not a general hormonal hub)
         */
         var terms = [
-          { label: "Focus issues", href: "/adhd-care" },
-          { label: "ADHD care", href: "/adhd-care" },
+          { label: "Focus & ADHD", href: "/adhd-care" },
           { label: "Weight management", href: "/weight-loss-metabolic-health" },
-          { label: "Ongoing fatigue", href: "/fatigue" },
-          { label: "Hormonal issues", href: "/womens-health" }
+          { label: "Hormonal health & low-T", href: "/mens-health-longevity" },
+          { label: "Sexual health", href: "/mens-health-longevity" },
+          { label: "Preventive care & infertility", href: "/preventive-care" },
+          { label: "Medication refills & forms", href: "/prescriptions" }
         ];
         var el = document.getElementById("siya-hero-rotate-word");
         var shell = document.querySelector(".siya-hero-preview__rotate-shell");
         var measure = document.getElementById("siya-hero-rotate-measure");
-        var title = document.querySelector(".siya-hero-preview__title");
+        var title = document.querySelector(".siya-hero-preview__rotate-word");
         if (!el) return;
         var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         var i = 0;
@@ -1615,6 +1669,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
         function syncMeasureTypography() {
           if (!measure || !title) return;
           var cs = getComputedStyle(title);
+          measure.style.fontFamily = cs.fontFamily;
           measure.style.fontSize = cs.fontSize;
           measure.style.fontWeight = cs.fontWeight;
           measure.style.lineHeight = cs.lineHeight;
