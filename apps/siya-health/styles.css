@@ -397,7 +397,7 @@ p {
 
 .nav-center a,
 .nav-center .nav-dropdown__toggle {
-  font-size: 1.0625rem;
+  font-size: 1.125rem; /* ~+1pt vs prior 1.0625rem — reduces awkward whitespace */
   font-weight: 500;
   color: var(--text);
   transition: color 0.2s;
@@ -2455,13 +2455,14 @@ button.secondary:hover {
   line-height: 1.5;
 }
 
-/* CTA Band */
+/* CTA Band — soft brand panel (not full navy slab); primary CTAs keep accent blue */
 .cta-band, .cta-section {
   text-align: center;
   padding: 60px 32px;
-  background: var(--primary);
-  color: var(--white);
+  background: linear-gradient(160deg, #F4EFE7 0%, #E8EEF8 55%, #F7F2EC 100%);
+  color: var(--text);
   border-radius: 16px;
+  border: 1px solid rgba(0, 24, 120, 0.1);
 }
 
 @media (min-width: 768px) {
@@ -2470,12 +2471,12 @@ button.secondary:hover {
 
 .cta-band h3, .cta-section h3 {
   font-size: clamp(1.5rem, 3vw, 1.75rem);
-  color: var(--white);
+  color: var(--primary);
   margin-bottom: 12px;
 }
 
 .cta-band p, .cta-section p {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-secondary);
   margin-bottom: 24px;
 }
 
@@ -5423,13 +5424,14 @@ a.asrs-interest-btn:hover {
   object-fit: contain;
 }
 img.footer-trust-logo[src*="hipaa-compliant"] {
-  max-height: 72px;
-  width: 72px;
-  height: 72px;
-  background: var(--page-bg);
-  border-radius: 50%;
-  padding: 2px;
-  box-shadow: 0 0 0 1px rgba(255, 253, 246, 0.35);
+  max-height: 48px;
+  width: auto;
+  height: 48px;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  opacity: 0.95;
 }
 img.footer-trust-logo[src*="legitscript"] {
   max-height: 52px;
@@ -6089,12 +6091,17 @@ img.footer-trust-logo[src*="legitscript"] {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  text-align: left;
+}
+.why-siya-story {
+  text-align: left;
 }
 .why-siya-story p {
   font-size: 1rem;
   line-height: 1.7;
   color: var(--text-secondary);
   margin: 0 0 1em;
+  text-align: left;
 }
 .why-siya-story p:last-child {
   margin-bottom: 0;
@@ -8663,9 +8670,9 @@ body.cookie-notice-visible .lp-mobile-sticky-cta {
   max-height: 48px;
 }
 .footer-brand-bar img.footer-trust-logo[src*="hipaa-compliant"] {
-  max-height: 68px;
-  width: 68px;
-  height: 68px;
+  max-height: 48px;
+  width: auto;
+  height: 48px;
 }
 
 .footer-brand-bar .footer-social {

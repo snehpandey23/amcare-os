@@ -93,12 +93,11 @@ export const NAV_JOIN_OUR_TEAM = {
   shortLabel: 'Careers',
 };
 
-/** Primary nav service links — Join Our Team replaces Men's Health at top level. */
+/** Primary nav service links — Careers lives in the footer (not top nav). */
 const STANDARD_SERVICE_NAV_LINKS = [
   { path: '/adhd-care', label: 'ADHD Care', shortLabel: 'ADHD Care' },
   { path: '/weight-loss-metabolic-health', label: 'Weight Loss', shortLabel: 'Weight Loss' },
   { path: '/telehealth', label: 'Telehealth', shortLabel: 'Telehealth' },
-  { path: NAV_JOIN_OUR_TEAM.path, label: NAV_JOIN_OUR_TEAM.label, shortLabel: NAV_JOIN_OUR_TEAM.shortLabel },
   { path: NAV_EMPLOYERS.path, label: NAV_EMPLOYERS.label, shortLabel: NAV_EMPLOYERS.shortLabel },
   { path: '/blog', label: 'Blog', shortLabel: 'Blog' },
 ];
@@ -144,13 +143,8 @@ function normalizeProviderCareersNav(html) {
   html = html.replace(new RegExp(`\\s*<a href="${NAV_MENS_HEALTH.path}">[^<]*</a>`, 'gi'), '');
   html = html.replace(new RegExp(`\\s*<a href="${NAV_PROVIDERS.path}">[^<]*</a>`, 'gi'), '');
   html = html.replace(/\s*<a href="\/providers">[^<]*<\/a>/gi, '');
-  const desktopNav = html.match(/<nav class="nav-center"[\s\S]*?<\/nav>/i)?.[0] || '';
-  if (desktopNav && !new RegExp(`href="${NAV_JOIN_OUR_TEAM.path}"`).test(desktopNav)) {
-    html = html.replace(
-      /(<a href="\/telehealth">Telehealth<\/a>)/i,
-      `$1\n          <a href="${NAV_JOIN_OUR_TEAM.path}">${NAV_JOIN_OUR_TEAM.label}</a>`,
-    );
-  }
+  // Careers / Join Our Team: footer only — strip from primary + mobile nav if present.
+  html = html.replace(new RegExp(`\\s*<a href="${NAV_JOIN_OUR_TEAM.path}">[^<]*</a>`, 'gi'), '');
   return html;
 }
 
@@ -1300,6 +1294,7 @@ const FOOTER_BLOG_LINKS = [
 const FOOTER_COMPANY_LINKS = [
   { href: '/about', label: 'About Siya Health' },
   { href: NAV_PROVIDERS.path, label: NAV_PROVIDERS.label },
+  { href: NAV_JOIN_OUR_TEAM.path, label: NAV_JOIN_OUR_TEAM.label },
   { href: PRICING.path, label: COPY_STANDARDS.pricingNavLabel },
   { href: '/telehealth', label: 'Explore Telehealth Care' },
   { href: '/book-appointment', label: 'Book Appointment', track: 'book_appointment_click' },
