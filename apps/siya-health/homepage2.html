@@ -814,18 +814,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 0.55rem 1.35rem;
+        padding: 0.7rem 1.55rem;
         border-radius: 999px;
-        font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+        font-size: clamp(1.28rem, 2.7vw, 1.65rem);
         font-weight: 700;
         letter-spacing: -0.01em;
         line-height: 1.25;
         color: #001878 !important;
-        background: rgba(255, 255, 255, 0.92) !important;
+        background: rgba(255, 255, 255, 0.96) !important;
         -webkit-background-clip: unset !important;
         background-clip: unset !important;
-        border: 1.5px solid rgba(0, 24, 120, 0.2) !important;
-        box-shadow: 0 6px 20px rgba(0, 24, 120, 0.08) !important;
+        border: 1.5px solid rgba(0, 24, 120, 0.28) !important;
+        box-shadow: 0 8px 24px rgba(0, 24, 120, 0.1) !important;
         text-decoration: none !important;
         white-space: nowrap;
         animation: siya-h2-chip-settle 0.65s ease both;
@@ -858,23 +858,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         -webkit-box-decoration-break: clone;
       }
       .siya-h2-welcome {
-        margin: 0 0 0.65rem;
+        margin: 0 0 0.55rem;
         font-family: Poppins, Inter, sans-serif;
-        font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-        font-weight: 600;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        color: rgba(10, 36, 107, 0.72);
-      }
-      .siya-h2-welcome__line {
-        display: block;
-        margin-top: 0.35rem;
-        font-size: clamp(1.35rem, 3vw, 1.85rem);
+        font-size: clamp(1.55rem, 3.4vw, 2.15rem);
         font-weight: 700;
         letter-spacing: -0.03em;
         text-transform: none;
         color: #0A246B;
         line-height: 1.2;
+        max-width: 22ch;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .siya-h2-welcome__line {
+        display: inline;
+        margin-top: 0;
+        font-size: inherit;
+        font-weight: inherit;
+        letter-spacing: inherit;
+        text-transform: none;
+        color: inherit;
+        line-height: inherit;
       }
 
       /* 3) Moving rectangle around the whole hero focal block (same spin as journey card) */
@@ -1955,9 +1959,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
         <div class="container hero-inner siya-hero-preview__inner siya-hero-preview__inner--solo">
           <div class="hero-merged-content siya-hero-preview__copy siya-hero-preview__focal siya-hero-preview__focal--orbit">
             <span id="siya-hero-rotate-measure" class="siya-hero-preview__rotate-measure" aria-hidden="true"></span>
-            <p class="siya-h2-welcome">Welcome
-              <span class="siya-h2-welcome__line">to an integrated care <span class="siya-hero-preview__accent">experience</span></span>
-            </p>
+            <p class="siya-h2-welcome">Welcome to an integrated care <span class="siya-hero-preview__accent">experience</span></p>
             <h1 class="siya-hero-preview__title siya-hero-preview__title--plain">
               for busy <span class="siya-hero-preview__accent">professionals</span>
             </h1>
