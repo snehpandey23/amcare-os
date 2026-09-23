@@ -826,6 +826,80 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         text-decoration-color: rgba(216, 16, 136, 0.45);
       }
 
+
+      /* Page-wide abstract background (homepage2 experiment) */
+      body.page-homepage2 {
+        background: #F4EFE7 !important;
+      }
+      .siya-h2-page-bg {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .siya-h2-page-bg__svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        min-height: 100vh;
+        min-height: 100dvh;
+      }
+      body.page-homepage2 .site-header,
+      body.page-homepage2 main,
+      body.page-homepage2 .footer {
+        position: relative;
+        z-index: 1;
+      }
+      /* Hero sits on the shared bg */
+      body.page-homepage2 .hero-merged--abstract {
+        background: transparent !important;
+        background-image: none !important;
+      }
+      body.page-homepage2 .hero-merged--abstract::before {
+        display: none !important;
+      }
+      /* Let sections read through the same canvas */
+      body.page-homepage2 .siya-h2-trust-strip {
+        background: rgba(244, 239, 231, 0.35) !important;
+        backdrop-filter: blur(2px);
+        border-bottom-color: rgba(0, 24, 120, 0.08) !important;
+      }
+      body.page-homepage2 .section,
+      body.page-homepage2 .section.section-tinted,
+      body.page-homepage2 .siya-h2-continuum,
+      body.page-homepage2 .siya-h2-continuum--soft,
+      body.page-homepage2 .symptoms-section {
+        background: transparent !important;
+      }
+      body.page-homepage2 .siya-h2-continuum::before,
+      body.page-homepage2 .siya-h2-continuum--soft::before {
+        display: none !important;
+      }
+      /* Frosted cards/panels for readability on the abstract field */
+      body.page-homepage2 .symptoms-card,
+      body.page-homepage2 .pathway-card,
+      body.page-homepage2 .flow-card,
+      body.page-homepage2 .testimonial-card-premium,
+      body.page-homepage2 .faq-accordion-card,
+      body.page-homepage2 .homepage-care-compact-card,
+      body.page-homepage2 .why-siya-quote-card {
+        background: rgba(255, 255, 255, 0.78) !important;
+        border: 1px solid rgba(0, 24, 120, 0.08);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+      body.page-homepage2 .cta-band,
+      body.page-homepage2 .cta-band--warm {
+        background: rgba(244, 239, 231, 0.82) !important;
+        border: 1px solid rgba(0, 24, 120, 0.1);
+        backdrop-filter: blur(10px);
+      }
+      body.page-homepage2 .footer {
+        background: rgba(10, 36, 107, 0.92) !important;
+      }
+      .siya-hero-drift--d { animation: siyaHeroDriftB 38s ease-in-out infinite alternate-reverse; }
+
       /* ===== homepage2 polish pass ===== */
       .siya-h2-wip-pill {
         position: fixed;
@@ -1024,6 +1098,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </style>
 </head>
   <body class="page-home page-homepage2">
+
+    <div class="siya-h2-page-bg" aria-hidden="true">
+          <svg class="siya-h2-page-bg__svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="presentation">
+            <defs>
+              <linearGradient id="siyaHeroCream" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#F4EFE7"/>
+                <stop offset="55%" stop-color="#E8EEF8"/>
+                <stop offset="100%" stop-color="#F7F2EC"/>
+              </linearGradient>
+              <radialGradient id="siyaHeroGlowA" cx="22%" cy="30%" r="45%">
+                <stop offset="0%" stop-color="#D81088" stop-opacity="0.22"/>
+                <stop offset="100%" stop-color="#D81088" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="siyaHeroGlowB" cx="78%" cy="62%" r="48%">
+                <stop offset="0%" stop-color="#001878" stop-opacity="0.18"/>
+                <stop offset="100%" stop-color="#001878" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="siyaHeroGlowC" cx="55%" cy="18%" r="35%">
+                <stop offset="0%" stop-color="#0A246B" stop-opacity="0.12"/>
+                <stop offset="100%" stop-color="#0A246B" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="1200" height="800" fill="url(#siyaHeroCream)"/>
+            <g class="siya-hero-drift siya-hero-drift--a">
+              <circle cx="260" cy="240" r="220" fill="url(#siyaHeroGlowA)"/>
+            </g>
+            <g class="siya-hero-drift siya-hero-drift--b">
+              <circle cx="920" cy="520" r="280" fill="url(#siyaHeroGlowB)"/>
+            </g>
+            <g class="siya-hero-drift siya-hero-drift--c">
+              <circle cx="680" cy="140" r="180" fill="url(#siyaHeroGlowC)"/>
+            </g>
+            <g class="siya-hero-drift siya-hero-drift--wave">
+              <path d="M80 640 C 280 520, 420 700, 620 580 S 980 520, 1140 420" fill="none" stroke="#C4A574" stroke-opacity="0.35" stroke-width="2"/>
+              <path d="M40 280 C 220 360, 360 200, 540 300 S 860 340, 1120 220" fill="none" stroke="#001878" stroke-opacity="0.12" stroke-width="2"/>
+            </g>
+            <!-- second band for scroll depth (same language, offset) -->
+            <g class="siya-hero-drift siya-hero-drift--d" opacity="0.85">
+              <circle cx="140" cy="720" r="160" fill="url(#siyaHeroGlowB)"/>
+              <circle cx="1040" cy="80" r="140" fill="url(#siyaHeroGlowA)"/>
+            </g>
+          </svg>
+    </div>
+
     <!-- Meta Pixel noscript -->
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=2150753979117600&ev=PageView&noscript=1"
@@ -1196,43 +1314,6 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
       <!-- WIP preview — do not promote to index until explicitly approved -->
       
       <section class="hero-merged hero-merged--abstract" aria-label="Siya Health homepage hero">
-        <div class="hero-merged__media hero-merged__media--abstract" aria-hidden="true">
-          <svg class="hero-merged__abstract" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="presentation">
-            <defs>
-              <linearGradient id="siyaHeroCream" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#F4EFE7"/>
-                <stop offset="55%" stop-color="#E8EEF8"/>
-                <stop offset="100%" stop-color="#F7F2EC"/>
-              </linearGradient>
-              <radialGradient id="siyaHeroGlowA" cx="22%" cy="30%" r="45%">
-                <stop offset="0%" stop-color="#D81088" stop-opacity="0.22"/>
-                <stop offset="100%" stop-color="#D81088" stop-opacity="0"/>
-              </radialGradient>
-              <radialGradient id="siyaHeroGlowB" cx="78%" cy="62%" r="48%">
-                <stop offset="0%" stop-color="#001878" stop-opacity="0.18"/>
-                <stop offset="100%" stop-color="#001878" stop-opacity="0"/>
-              </radialGradient>
-              <radialGradient id="siyaHeroGlowC" cx="55%" cy="18%" r="35%">
-                <stop offset="0%" stop-color="#0A246B" stop-opacity="0.12"/>
-                <stop offset="100%" stop-color="#0A246B" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
-            <rect width="1200" height="800" fill="url(#siyaHeroCream)"/>
-            <g class="siya-hero-drift siya-hero-drift--a">
-              <circle cx="260" cy="240" r="220" fill="url(#siyaHeroGlowA)"/>
-            </g>
-            <g class="siya-hero-drift siya-hero-drift--b">
-              <circle cx="920" cy="520" r="280" fill="url(#siyaHeroGlowB)"/>
-            </g>
-            <g class="siya-hero-drift siya-hero-drift--c">
-              <circle cx="680" cy="140" r="180" fill="url(#siyaHeroGlowC)"/>
-            </g>
-            <g class="siya-hero-drift siya-hero-drift--wave">
-              <path d="M80 640 C 280 520, 420 700, 620 580 S 980 520, 1140 420" fill="none" stroke="#C4A574" stroke-opacity="0.35" stroke-width="2"/>
-              <path d="M40 280 C 220 360, 360 200, 540 300 S 860 340, 1120 220" fill="none" stroke="#001878" stroke-opacity="0.12" stroke-width="2"/>
-            </g>
-          </svg>
-        </div>
 
         <div class="container hero-inner siya-hero-preview__inner siya-hero-preview__inner--solo">
           <div class="hero-merged-content siya-hero-preview__copy siya-hero-preview__focal">
