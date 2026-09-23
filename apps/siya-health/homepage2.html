@@ -844,8 +844,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
 
       /* ===== Brand emphasis LOCKED — Option E (gradient sweep) =====
-         Visible magenta→navy text gradient on .siya-em.
-         Wordmark split (Siya=navy / Health=gradient) deferred — brand guidelines later. */
+         Magenta→navy text fill must read as TWO colors on short words
+         (not solid pink). Wordmark Siya/Health split = pending, not now. */
       .siya-em,
       .siya-em--sweep,
       .siya-hero-preview__accent,
@@ -855,36 +855,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         text-decoration: none;
         display: inline;
         color: transparent !important;
-        -webkit-text-fill-color: transparent;
+        -webkit-text-fill-color: transparent !important;
+        /* Hard L→R split so even 5-letter words show magenta AND navy */
         background-image: linear-gradient(
-          95deg,
+          90deg,
           #D81088 0%,
-          #E02A96 22%,
-          #9B1A98 48%,
-          #3D1A8A 72%,
-          #0A246B 88%,
+          #D81088 28%,
+          #A81490 48%,
+          #0A246B 68%,
           #001878 100%
-        );
-        background-size: 100% 100%;
-        background-position: 0 0;
-        background-repeat: no-repeat;
-        -webkit-background-clip: text;
-        background-clip: text;
+        ) !important;
+        background-size: 100% 100% !important;
+        background-position: 0 0 !important;
+        background-repeat: no-repeat !important;
+        -webkit-background-clip: text !important;
+        background-clip: text !important;
         box-decoration-break: clone;
         -webkit-box-decoration-break: clone;
         padding: 0 0.02em;
-        animation: siya-em-sweep-in 1.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+        /* Sweep: oversized gradient slides in, settles on the visible bi-color fill */
+        animation: siya-em-sweep-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
         animation-delay: var(--siya-word-delay, 0ms);
       }
       @keyframes siya-em-sweep-in {
         from {
-          background-size: 260% 100%;
-          background-position: 100% 0;
-          opacity: 0.55;
+          background-size: 280% 100% !important;
+          background-position: 100% 0 !important;
+          opacity: 0.5;
+        }
+        70% {
+          opacity: 1;
         }
         to {
-          background-size: 100% 100%;
-          background-position: 0 0;
+          background-size: 100% 100% !important;
+          background-position: 0 0 !important;
           opacity: 1;
         }
       }
@@ -1989,10 +1993,10 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
         </div>
       </div>
     </header>
-    <!-- SIYA-H2-VERIFY: stamp=SIYA-H2-VERIFY-20260923T1620 route=/homepage2 NOT=/ -->
-    <div class="siya-h2-verify-stamp" aria-hidden="true">SIYA-H2-VERIFY-20260923T1620 · /homepage2</div>
+    <!-- SIYA-H2-VERIFY: stamp=SIYA-H2-VERIFY-E-20260923T1638 route=/homepage2 NOT=/ -->
+    <div class="siya-h2-verify-stamp" aria-hidden="true">SIYA-H2-VERIFY-E-20260923T1638 · Option E</div>
     <div class="siya-h2-wip-pill" role="status" title="Preview only — not the live homepage">
-      Preview · /homepage2 · emphasis: Option E (gradient)
+      Preview · /homepage2 · Option E live · wordmark pending
     </div>
 
 
