@@ -843,19 +843,200 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         to { opacity: 1; transform: translateY(0) scale(1); }
       }
 
-      /* Hero dual emphasis — soft magenta wash + underline */
-      .siya-hero-preview__accent {
-        color: #D81088;
-        font-weight: 700;
+      /* ===== Brand emphasis — draft options (pick one; do not finalize yet) =====
+         Reusable: .siya-em + modifier. Hero temporarily uses no fill until pick. */
+      .siya-em {
         font-style: normal;
-        background: linear-gradient(180deg, transparent 52%, rgba(216, 16, 136, 0.22) 52%);
+        font-weight: 700;
+        text-decoration: none;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+      }
+      /* A — Soft wash: muted magenta tint, navy ink (not highlighter magenta) */
+      .siya-em--wash {
+        color: #0A246B;
+        padding: 0.04em 0.12em;
+        border-radius: 0.18em;
+        background: rgba(216, 16, 136, 0.09);
+        box-shadow: inset 0 -0.06em 0 rgba(216, 16, 136, 0.12);
+      }
+      /* B — Ink stroke: thin brand underline, no block fill */
+      .siya-em--ink {
+        color: #0A246B;
+        padding: 0 0.02em 0.08em;
+        background: linear-gradient(
+          180deg,
+          transparent 0%,
+          transparent 78%,
+          rgba(0, 24, 120, 0.55) 78%,
+          rgba(0, 24, 120, 0.55) 86%,
+          transparent 86%
+        );
+        background-size: 100% 100%;
+      }
+      /* C — Hush pedestal: cream/champagne veil, almost editorial */
+      .siya-em--hush {
+        color: #0A246B;
+        padding: 0.05em 0.14em;
+        border-radius: 0.22em;
+        background: rgba(196, 165, 116, 0.22);
+        box-shadow: inset 0 0 0 1px rgba(0, 24, 120, 0.06);
+      }
+      /* Wordmark + ® under each treatment */
+      .siya-em-wordmark {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0;
+        font-family: Poppins, Inter, sans-serif;
+        font-size: 1.35rem;
+        font-weight: 650;
+        letter-spacing: -0.02em;
+        color: #0A246B;
+        line-height: 1;
+      }
+      .siya-em-wordmark .siya-em {
+        font-weight: inherit;
+        font-size: inherit;
+      }
+      .siya-em-wordmark__reg {
+        font-size: 0.42em;
+        font-weight: 600;
+        line-height: 0;
+        position: relative;
+        top: -0.85em;
+        margin-left: 0.12em;
+        color: inherit;
+        opacity: 0.72;
+        letter-spacing: 0;
+      }
+      .siya-em-wordmark .siya-em--wash .siya-em-wordmark__reg,
+      .siya-em-wordmark .siya-em--ink .siya-em-wordmark__reg,
+      .siya-em-wordmark .siya-em--hush .siya-em-wordmark__reg {
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        border-radius: 0;
+      }
+
+      /* Comparison board */
+      .siya-em-options {
+        position: relative;
+        z-index: 4;
+        padding: 1.25rem 0 1.75rem;
+        background: rgba(244, 239, 231, 0.92);
+        border-bottom: 1px solid rgba(0, 24, 120, 0.08);
+      }
+      .siya-em-options__intro {
+        max-width: 40rem;
+        margin: 0 auto 1.25rem;
+        text-align: center;
+      }
+      .siya-em-options__kicker {
+        margin: 0 0 0.35rem;
+        font-size: 0.72rem;
+        font-weight: 650;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(10, 36, 107, 0.55);
+      }
+      .siya-em-options__title {
+        margin: 0 0 0.4rem;
+        font-size: clamp(1.15rem, 2vw, 1.35rem);
+        font-weight: 700;
+        color: #0A246B;
+        letter-spacing: -0.02em;
+      }
+      .siya-em-options__note {
+        margin: 0;
+        font-size: 0.92rem;
+        line-height: 1.45;
+        color: rgba(10, 36, 107, 0.72);
+      }
+      .siya-em-options__grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.85rem;
+        align-items: stretch;
+      }
+      @media (max-width: 900px) {
+        .siya-em-options__grid { grid-template-columns: 1fr; }
+      }
+      .siya-em-option {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.15rem 1.2rem 1.25rem;
+        border-radius: 1rem;
+        background: #fff;
+        border: 1px solid rgba(0, 24, 120, 0.1);
+        box-shadow: 0 10px 28px rgba(0, 24, 120, 0.04);
+      }
+      .siya-em-option__label {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.5rem;
+      }
+      .siya-em-option__id {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #D81088;
+      }
+      .siya-em-option__name {
+        font-size: 0.95rem;
+        font-weight: 650;
+        color: #0A246B;
+      }
+      .siya-em-option__desc {
+        margin: 0;
+        font-size: 0.82rem;
+        line-height: 1.4;
+        color: rgba(10, 36, 107, 0.65);
+      }
+      .siya-em-option__sample {
+        margin: 0;
+        font-family: Poppins, Inter, sans-serif;
+        font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.25;
+        color: #0A246B;
+        text-align: center;
+        padding: 1.1rem 0.75rem;
+        border-radius: 0.75rem;
+        background: #F4EFE7;
+      }
+      .siya-em-option__sample-sub {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 1.15em;
+      }
+      .siya-em-option__wm {
+        display: flex;
+        justify-content: center;
+        padding: 0.85rem 0.5rem;
+        border-radius: 0.75rem;
+        background: #F4EFE7;
+      }
+      .siya-em-option__meta {
+        margin: 0;
+        font-size: 0.75rem;
+        color: rgba(10, 36, 107, 0.5);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+
+      /* Hero interim: navy weight only — no fill until a treatment is chosen */
+      .siya-hero-preview__accent {
+        color: #0A246B;
+        font-weight: 750;
+        font-style: normal;
+        background: none;
         border: 0;
         box-shadow: none;
         text-decoration: none;
-        padding: 0 0.06em;
-        border-radius: 0.12em;
-        box-decoration-break: clone;
-        -webkit-box-decoration-break: clone;
+        padding: 0;
       }
       .hero-merged--abstract .siya-h2-welcome,
       .hero-merged-content > p.siya-h2-welcome {
@@ -1948,12 +2129,69 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
       </div>
     </header>
     <div class="siya-h2-wip-pill" role="status" title="Preview only — not the live homepage">
-      Preview · /homepage2
+      Preview · /homepage2 · pick emphasis A/B/C below
     </div>
 
 
     <main id="main">
       <!-- WIP preview — do not promote to index until explicitly approved -->
+
+      <section class="siya-em-options" id="emphasis-options" aria-label="Emphasis treatment options — pick one">
+        <div class="container">
+          <div class="siya-em-options__intro">
+            <p class="siya-em-options__kicker">Review step · not finalized</p>
+            <h2 class="siya-em-options__title">Headline emphasis — pick A, B, or C</h2>
+            <p class="siya-em-options__note">Hero below is interim plain weight (no fill) until you choose. Winning treatment becomes <code>.siya-em</code> sitewide + wordmark — not applied yet.</p>
+          </div>
+          <div class="siya-em-options__grid">
+            <article class="siya-em-option" id="em-option-a">
+              <div class="siya-em-option__label">
+                <span class="siya-em-option__id">A</span>
+                <span class="siya-em-option__name">Soft wash</span>
+              </div>
+              <p class="siya-em-option__desc">Muted magenta veil at low opacity; navy ink. Soft inset edge — not a highlighter block.</p>
+              <p class="siya-em-option__sample">
+                integrated care <span class="siya-em siya-em--wash">experience</span>
+                <span class="siya-em-option__sample-sub">for busy <span class="siya-em siya-em--wash">professionals</span></span>
+              </p>
+              <div class="siya-em-option__wm" aria-label="Wordmark sample A">
+                <span class="siya-em-wordmark"><span class="siya-em siya-em--wash">Siya Health<sup class="siya-em-wordmark__reg">®</sup></span></span>
+              </div>
+              <p class="siya-em-option__meta">.siya-em.siya-em--wash</p>
+            </article>
+            <article class="siya-em-option" id="em-option-b">
+              <div class="siya-em-option__label">
+                <span class="siya-em-option__id">B</span>
+                <span class="siya-em-option__name">Ink stroke</span>
+              </div>
+              <p class="siya-em-option__desc">Thin navy underline only — no fill. Closest to editorial / corporate mark-up.</p>
+              <p class="siya-em-option__sample">
+                integrated care <span class="siya-em siya-em--ink">experience</span>
+                <span class="siya-em-option__sample-sub">for busy <span class="siya-em siya-em--ink">professionals</span></span>
+              </p>
+              <div class="siya-em-option__wm" aria-label="Wordmark sample B">
+                <span class="siya-em-wordmark"><span class="siya-em siya-em--ink">Siya Health<sup class="siya-em-wordmark__reg">®</sup></span></span>
+              </div>
+              <p class="siya-em-option__meta">.siya-em.siya-em--ink</p>
+            </article>
+            <article class="siya-em-option" id="em-option-c">
+              <div class="siya-em-option__label">
+                <span class="siya-em-option__id">C</span>
+                <span class="siya-em-option__name">Hush pedestal</span>
+              </div>
+              <p class="siya-em-option__desc">Champagne cream veil + hairline navy ring. Quietest of the three.</p>
+              <p class="siya-em-option__sample">
+                integrated care <span class="siya-em siya-em--hush">experience</span>
+                <span class="siya-em-option__sample-sub">for busy <span class="siya-em siya-em--hush">professionals</span></span>
+              </p>
+              <div class="siya-em-option__wm" aria-label="Wordmark sample C">
+                <span class="siya-em-wordmark"><span class="siya-em siya-em--hush">Siya Health<sup class="siya-em-wordmark__reg">®</sup></span></span>
+              </div>
+              <p class="siya-em-option__meta">.siya-em.siya-em--hush</p>
+            </article>
+          </div>
+        </div>
+      </section>
       
       <section class="hero-merged hero-merged--abstract" aria-label="Siya Health homepage hero">
 
