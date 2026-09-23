@@ -37,7 +37,7 @@ export const TRUST_ITEMS = {
     id: 'reviews',
     type: 'review',
     headline: `${M.googleRating.value}${M.googleRating.suffix}`,
-    subline: `${M.verifiedReviews.value} verified reviews`,
+    subline: `Google · ${M.googleReviews.value} reviews`,
   },
   neurocognitiveEvaluations: {
     id: 'neurocognitiveEvaluations',
@@ -48,8 +48,14 @@ export const TRUST_ITEMS = {
   googleReviews: {
     id: 'googleReviews',
     type: 'review',
-    headline: M.googleReviews.value,
-    subline: M.googleReviews.label,
+    headline: `${M.googleRating.value}${M.googleRating.suffix}`,
+    subline: `Google · ${M.googleReviews.value} reviews`,
+  },
+  klarityReviews: {
+    id: 'klarityReviews',
+    type: 'review',
+    headline: `${M.klarityRating.value}${M.klarityRating.suffix}`,
+    subline: `Klarity · ${M.klarityReviews.value} reviews`,
   },
   transparentPricing: {
     id: 'transparentPricing',
@@ -116,8 +122,8 @@ export const TRUST_ITEMS = {
 
 /** Trust profile → ordered item ids */
 export const TRUST_PROFILES = {
-  /** Hero strip shows first 4 scroll items — keep 2,700+ / 1,200+ / 4.9★ / states. */
-  homepage: ['patientCount', 'neurocognitiveEvaluations', 'reviews', 'telehealth'],
+  /** Hero strip shows first 4 scroll items — Google, Klarity, patients, evaluations. */
+  homepage: ['googleReviews', 'klarityReviews', 'patientCount', 'neurocognitiveEvaluations'],
   landing: ['boardCertified', 'patientCount', 'reviews', 'transparentPricing', 'telehealth'],
   'landing-adhd': ['reviews', 'patientCount', 'transparentPricing', 'telehealth'],
   adhd: ['reviews', 'patientCount', 'transparentPricing', 'creyos', 'hipaa'],

@@ -339,7 +339,6 @@ ${careFlowSvg()}
             <li>No stimulant medication is prescribed at the first visit — every patient completes a signed controlled-substance treatment agreement before any stimulant is started.</li>
             <li>Ongoing monitoring and follow-up on a set schedule: random urine drug screens and monthly pill counts.</li>
           </ul>
-          <p class="employer-pitch-section-lead">We&rsquo;re actively developing an in-person evaluation pathway to ensure continuity of care for patients on controlled-substance medications, regardless of how federal telehealth rules evolve.</p>
         </div>
       </section>
 
@@ -409,20 +408,20 @@ ${careFlowSvg()}
         </div>
       </section>
 
-      <section class="employer-pitch-section" id="reviews" aria-labelledby="reviews-heading">
+            <section class="employer-pitch-section" id="reviews" aria-labelledby="reviews-heading">
         <div class="container">
           <header class="employer-pitch-section-header">
-            <h2 id="reviews-heading">What patients say about this team</h2>
-            <p class="employer-pitch-section-lead">Attributed reviews for clinicians who lead care for ${esc(EMPLOYER_NAME)} — not a platform-wide average, and not the illustrative journey above.</p>
+            <h2 id="reviews-heading">What patients say</h2>
+            <p class="employer-pitch-section-lead">Role-attributed patient notes — not a named clinician roster. Individual experiences vary; outcomes are not guaranteed.</p>
           </header>
           <div class="employer-pitch-reviews">
             <blockquote class="employer-pitch-quote">
-              <p>&ldquo;Dr. S. P. Pandey was thorough, professional, and took time to address all my questions without making me feel rushed. He explained everything clearly and made sure I understood my health status and any recommendations. The examination was comprehensive, and I felt confident in his expertise&hellip; I&rsquo;ll definitely be returning and would recommend Dr. S. P. Pandey to anyone looking for quality healthcare.&rdquo;</p>
-              <footer>— Patient review for <cite>Dr. Sneh Pandey, MD</cite></footer>
+              <p>&ldquo;Thorough, professional, and took time to address all my questions without making me feel rushed. Everything was explained clearly so I understood my health status and any recommendations. The examination was comprehensive, and I felt confident in the expertise&hellip; I&rsquo;ll definitely be returning and would recommend this care to anyone looking for quality healthcare.&rdquo;</p>
+              <footer>— Patient, physician visit</footer>
             </blockquote>
             <blockquote class="employer-pitch-quote">
-              <p>&ldquo;My experience with Wendy Delgado, PA was excellent. She was knowledgeable, respectful, and genuinely attentive throughout the appointment. She took the time to understand my concerns, provided clear explanations, and ensured I felt comfortable with every step of my care. I would highly recommend her to anyone seeking high-quality, patient-centered care.&rdquo;</p>
-              <footer>— Patient review for <cite>Wendy Delgado, PA-C</cite></footer>
+              <p>&ldquo;My experience with the PA was excellent. She was knowledgeable, respectful, and genuinely attentive throughout the appointment. She took the time to understand my concerns, provided clear explanations, and ensured I felt comfortable with every step of my care. I would highly recommend this team to anyone seeking high-quality, patient-centered care.&rdquo;</p>
+              <footer>— Patient, PA-C visit</footer>
             </blockquote>
           </div>
         </div>

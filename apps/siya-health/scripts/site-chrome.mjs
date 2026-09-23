@@ -873,9 +873,12 @@ export function injectSitewideTrustMetrics(html) {
     `<span class="homepage-trust-stat-value">${M.verifiedReviews.value}</span> <span class="homepage-trust-stat-label">${M.verifiedReviews.label}</span>`,
   );
 
-  const googleReviewsLine = `<span aria-hidden="true">⭐</span> <span class="trust-metric-value" data-target="${M.googleRating.value}" data-suffix="★">${ratingDisplay}</span> average · <span class="trust-metric-value" data-target="100" data-suffix="+">${googleReviews}</span> Google reviews · <span class="trust-metric-value" data-target="600" data-suffix="+">${M.verifiedReviews.value}</span> verified across platforms`;
+  const googleReviewsTarget = String(googleReviews).replace(/[^\d.]/g, '') || '88';
+  const klarityReviewsTarget = String(M.klarityReviews?.value || M.verifiedReviews.value).replace(/[^\d.]/g, '') || '589';
+  const klarityRatingDisplay = `${M.klarityRating?.value || '4.66'}${M.klarityRating?.suffix || '★'}`;
+  const googleReviewsLine = `<span aria-hidden="true">⭐</span> <span class="trust-metric-value" data-target="${M.googleRating.value}" data-suffix="★">${ratingDisplay}</span> Google · <span class="trust-metric-value" data-target="${googleReviewsTarget}">${googleReviews}</span> reviews · <span class="trust-metric-value" data-target="${M.klarityRating?.value || '4.66'}" data-suffix="★">${klarityRatingDisplay}</span> Klarity · <span class="trust-metric-value" data-target="${klarityReviewsTarget}">${M.klarityReviews?.value || M.verifiedReviews.value}</span> reviews`;
   html = html.replace(
-    /<span aria-hidden="true">⭐<\/span>[\s\S]*?verified patient reviews/g,
+    /<span aria-hidden="true">⭐<\/span>[\s\S]*?(?:verified patient reviews|verified across platforms)/g,
     googleReviewsLine,
   );
 

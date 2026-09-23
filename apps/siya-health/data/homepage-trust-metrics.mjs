@@ -1,6 +1,7 @@
 /**
  * Homepage trust statistics — single editable source.
  * Owner-supplied figures (do not invent or extrapolate).
+ * As of: September 2026 (Google + Klarity confirmed; capacity from employer pilot proof).
  * Used by homepage reviews section and trust-system profiles.
  */
 export const HOMEPAGE_TRUST_METRICS = {
@@ -10,20 +11,33 @@ export const HOMEPAGE_TRUST_METRICS = {
   },
   neurocognitiveEvaluations: {
     value: '1,200+',
-    label: 'Neurocognitive evaluations',
+    label: 'Evaluations completed',
   },
   googleRating: {
-    value: '4.9',
-    label: 'Average Google rating',
+    value: '4.90',
+    label: 'Google rating',
     suffix: '★',
   },
   googleReviews: {
-    value: '100+',
+    value: '88',
     label: 'Google reviews',
   },
+  klarityRating: {
+    value: '4.66',
+    label: 'Klarity rating',
+    suffix: '★',
+  },
+  klarityReviews: {
+    value: '589',
+    label: 'Klarity reviews',
+  },
+  /**
+   * @deprecated Prefer klarityRating + klarityReviews.
+   * Kept so legacy injectors that still reference verifiedReviews do not invent a new number.
+   */
   verifiedReviews: {
-    value: '600+',
-    label: 'Verified reviews (all platforms)',
+    value: '589',
+    label: 'Klarity reviews',
   },
 };
 
@@ -36,7 +50,10 @@ export const HOMEPAGE_TRUST_SUMMARY = [
   HOMEPAGE_TRUST_METRICS.googleReviews,
   HOMEPAGE_TRUST_METRICS.patientsTreated,
   HOMEPAGE_TRUST_METRICS.neurocognitiveEvaluations,
-  HOMEPAGE_TRUST_METRICS.verifiedReviews,
+  {
+    value: `${HOMEPAGE_TRUST_METRICS.klarityRating.value}${HOMEPAGE_TRUST_METRICS.klarityRating.suffix}`,
+    label: `Klarity · ${HOMEPAGE_TRUST_METRICS.klarityReviews.value} reviews`,
+  },
 ];
 
 export const SITE_CONTACT = {
