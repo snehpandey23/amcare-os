@@ -8,7 +8,9 @@
   var DURATION = 1800;
   var EASING = function (t) { return 1 - Math.pow(1 - t, 3); };
 
-  function formatMetricValue(target, suffix) {
+  function formatMetricValue(target, suffix, decimalsAttr) {
+    var decimals = decimalsAttr != null && decimalsAttr !== '' ? parseInt(decimalsAttr, 10) : NaN;
+    if (!isNaN(decimals)) return Number(target).toFixed(decimals) + (suffix || '');
     var isDecimal = target % 1 !== 0;
     if (isDecimal) return target.toFixed(1) + (suffix || '');
     return Math.round(target).toLocaleString('en-US') + (suffix || '');
@@ -18,16 +20,19 @@
     container.querySelectorAll('.trust-metric-value').forEach(function (el) {
       var target = parseFloat(el.getAttribute('data-target'));
       if (isNaN(target)) return;
-      el.textContent = formatMetricValue(target, el.getAttribute('data-suffix') || '');
+      el.textContent = formatMetricValue(target, el.getAttribute('data-suffix') || '', el.getAttribute('data-decimals'));
     });
   }
 
   function animateValue(el) {
     var target = parseFloat(el.getAttribute('data-target')) || 0;
     var suffix = el.getAttribute('data-suffix') || '';
+    var decimalsAttr = el.getAttribute('data-decimals');
+    var decimals = decimalsAttr != null && decimalsAttr !== '' ? parseInt(decimalsAttr, 10) : NaN;
     var start = 0;
     var startTime = null;
-    var isDecimal = target % 1 !== 0;
+    var isDecimal = !isNaN(decimals) ? true : target % 1 !== 0;
+    var places = !isNaN(decimals) ? decimals : 1;
 
     function step(timestamp) {
       if (!startTime) startTime = timestamp;
@@ -37,15 +42,15 @@
       var current = start + (target - start) * eased;
 
       if (isDecimal) {
-        el.textContent = current.toFixed(1) + suffix;
+        el.textContent = current.toFixed(places) + suffix;
       } else {
-        el.textContent = Math.round(current) + suffix;
+        el.textContent = Math.round(current).toLocaleString('en-US') + suffix;
       }
 
       if (progress < 1) {
         requestAnimationFrame(step);
       } else {
-        el.textContent = formatMetricValue(target, suffix);
+        el.textContent = formatMetricValue(target, suffix, decimalsAttr);
       }
     }
 

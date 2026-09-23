@@ -143,8 +143,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .hero-merged--abstract .siya-hero-preview__title,
       .hero-merged--abstract .siya-hero-preview__lead,
       .hero-merged--abstract .siya-hero-preview__support {
-        color: #0A246B;
-        text-shadow: none;
+        color: #0A246B !important;
+        text-shadow: none !important;
       }
       .hero-merged--abstract .siya-hero-preview__rotate-word {
         color: #D81088;
@@ -769,6 +769,201 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
       }
 
+      /* ===== homepage2 polish pass ===== */
+      .siya-h2-wip-pill {
+        position: fixed;
+        top: 0.75rem;
+        right: 0.75rem;
+        z-index: 80;
+        padding: 0.35rem 0.7rem;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: rgba(10, 36, 107, 0.72);
+        background: rgba(244, 239, 231, 0.82);
+        border: 1px solid rgba(0, 24, 120, 0.14);
+        box-shadow: 0 1px 4px rgba(0, 24, 120, 0.06);
+        pointer-events: none;
+        backdrop-filter: blur(6px);
+      }
+      @media (max-width: 640px) {
+        .siya-h2-wip-pill { top: auto; bottom: 0.75rem; right: 0.75rem; font-size: 0.65rem; }
+      }
+
+      /* Nav legibility over light abstract hero — don't restyle Meet & Greet CTA */
+      body.page-homepage2 .site-header-transparent {
+        background: linear-gradient(
+          180deg,
+          rgba(244, 239, 231, 0.97) 0%,
+          rgba(232, 238, 248, 0.92) 55%,
+          rgba(244, 239, 231, 0.55) 85%,
+          rgba(244, 239, 231, 0) 100%
+        );
+        border-bottom: 1px solid transparent;
+      }
+      body.page-homepage2 .site-header-transparent .nav-center a,
+      body.page-homepage2 .site-header-transparent .nav-center .nav-dropdown__toggle,
+      body.page-homepage2 .site-header-transparent .brand-lockup__wordmark {
+        color: #0A246B;
+        text-shadow: none;
+      }
+      body.page-homepage2 .site-header-transparent .nav-center a:hover,
+      body.page-homepage2 .site-header-transparent .nav-center .nav-dropdown__toggle:hover {
+        color: #D81088;
+      }
+      body.page-homepage2 .site-header-transparent.site-header-scrolled {
+        background: rgba(244, 239, 231, 0.96);
+        border-bottom-color: rgba(0, 24, 120, 0.08);
+      }
+
+      /* Centered, larger hero focal point */
+      .siya-hero-preview__inner--solo {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 52rem !important;
+        margin: 0 auto !important;
+        text-align: center;
+        width: 100%;
+      }
+      .hero-merged--abstract .siya-hero-preview__copy {
+        width: 100%;
+        max-width: 46rem;
+        margin: 0 auto;
+        text-align: center;
+        background: transparent !important;
+        padding: 0 !important;
+        border: 0 !important;
+        box-shadow: none !important;
+      }
+      .hero-merged--abstract .siya-hero-preview__title {
+        color: #0A246B !important;
+        font-size: clamp(2.35rem, 5.5vw, 3.55rem) !important;
+        line-height: 1.12 !important;
+        letter-spacing: -0.02em;
+      }
+      .hero-merged--abstract .siya-hero-preview__lead {
+        font-size: clamp(1.05rem, 2vw, 1.2rem) !important;
+        max-width: 38rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-merged--abstract .siya-hero-preview__support {
+        max-width: 36rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .siya-hero-preview__ctas {
+        justify-content: center !important;
+      }
+
+      /* Subtle abstract drift */
+      .siya-hero-drift {
+        transform-origin: center;
+        transform-box: fill-box;
+        will-change: transform;
+      }
+      .siya-hero-drift--a { animation: siyaHeroDriftA 28s ease-in-out infinite alternate; }
+      .siya-hero-drift--b { animation: siyaHeroDriftB 34s ease-in-out infinite alternate; }
+      .siya-hero-drift--c { animation: siyaHeroDriftC 24s ease-in-out infinite alternate; }
+      .siya-hero-drift--wave { animation: siyaHeroWave 40s ease-in-out infinite alternate; }
+      @keyframes siyaHeroDriftA {
+        from { transform: translate(0, 0) scale(1); }
+        to { transform: translate(28px, -18px) scale(1.04); }
+      }
+      @keyframes siyaHeroDriftB {
+        from { transform: translate(0, 0) scale(1); }
+        to { transform: translate(-34px, 22px) scale(1.05); }
+      }
+      @keyframes siyaHeroDriftC {
+        from { transform: translate(0, 0); }
+        to { transform: translate(16px, 26px); }
+      }
+      @keyframes siyaHeroWave {
+        from { transform: translateX(0); }
+        to { transform: translateX(-18px); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .siya-hero-drift { animation: none !important; }
+      }
+
+      /* Trust strip: full-width equal columns + room to breathe */
+      .siya-h2-trust-strip {
+        background: linear-gradient(180deg, #E8EEF8 0%, #F4EFE7 100%) !important;
+        border-bottom: 1px solid rgba(0, 24, 120, 0.08) !important;
+        padding: 1.75rem 0 2rem !important;
+      }
+      .siya-h2-trust-strip__inner {
+        max-width: 1120px;
+      }
+      .siya-h2-trust-strip__grid {
+        display: grid !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        gap: 1.25rem 1.5rem !important;
+        width: 100%;
+        align-items: start;
+      }
+      .siya-h2-trust-tile {
+        text-align: center;
+        padding: 0.35rem 0.5rem;
+      }
+      .siya-h2-trust-tile__value {
+        font-size: clamp(1.45rem, 2.6vw, 1.85rem) !important;
+      }
+      .siya-h2-trust-tile__label {
+        font-weight: 600;
+        color: #0A246B !important;
+        margin-top: 0.4rem !important;
+      }
+      .siya-h2-trust-tile__sub {
+        display: block;
+        margin-top: 0.15rem;
+        font-size: 0.8rem;
+        color: rgba(0, 24, 120, 0.58);
+      }
+      .siya-h2-trust-strip__asof {
+        text-align: center;
+        margin-bottom: 1.1rem !important;
+      }
+      @media (max-width: 720px) {
+        .siya-h2-trust-strip__grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        }
+      }
+
+      /* Continuum: stop yellow jump after hero */
+      .siya-h2-continuum {
+        background: linear-gradient(180deg, #F4EFE7 0%, #E8EEF8 42%, #F7F2EC 100%) !important;
+        position: relative;
+        overflow: hidden;
+      }
+      .siya-h2-continuum::before {
+        content: "";
+        position: absolute;
+        inset: -10% -5% auto;
+        height: 55%;
+        background:
+          radial-gradient(ellipse 40% 50% at 18% 30%, rgba(216, 16, 136, 0.08), transparent 70%),
+          radial-gradient(ellipse 45% 55% at 82% 40%, rgba(0, 24, 120, 0.08), transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+      }
+      .siya-h2-continuum > .container {
+        position: relative;
+        z-index: 1;
+      }
+      .siya-h2-continuum--soft {
+        background: linear-gradient(180deg, #F7F2EC 0%, #F4EFE7 100%) !important;
+      }
+      .siya-h2-continuum--soft::before { opacity: 0.55; }
+      .siya-h2-continuum .symptoms-card {
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(0, 24, 120, 0.08);
+      }
+
+
     </style>
 </head>
   <body class="page-home page-homepage2">
@@ -935,23 +1130,9 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
         </div>
       </div>
     </header>
-
-    <div class="siya-h2-wip-banner" role="status">
-      <div class="container">WIP preview — <strong>/homepage2</strong> only. Production homepage stays at <a href="/">siya.health/</a> until this page is approved to replace it.</div>
+    <div class="siya-h2-wip-pill" role="status" title="Preview only — not the live homepage">
+      Preview · /homepage2
     </div>
-    <style>
-      .siya-h2-wip-banner {
-        background: #0A246B;
-        color: #F4EFE7;
-        font-size: 0.9rem;
-        padding: 0.55rem 0;
-        text-align: center;
-        position: relative;
-        z-index: 40;
-      }
-      .siya-h2-wip-banner a { color: #F4EFE7; text-decoration: underline; }
-      body.page-home .siya-h2-wip-banner { margin-top: 0; }
-    </style>
 
 
     <main id="main">
@@ -980,11 +1161,19 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
               </radialGradient>
             </defs>
             <rect width="1200" height="800" fill="url(#siyaHeroCream)"/>
-            <circle cx="260" cy="240" r="220" fill="url(#siyaHeroGlowA)"/>
-            <circle cx="920" cy="520" r="280" fill="url(#siyaHeroGlowB)"/>
-            <circle cx="680" cy="140" r="180" fill="url(#siyaHeroGlowC)"/>
-            <path d="M80 640 C 280 520, 420 700, 620 580 S 980 520, 1140 420" fill="none" stroke="#C4A574" stroke-opacity="0.35" stroke-width="2"/>
-            <path d="M40 280 C 220 360, 360 200, 540 300 S 860 340, 1120 220" fill="none" stroke="#001878" stroke-opacity="0.12" stroke-width="2"/>
+            <g class="siya-hero-drift siya-hero-drift--a">
+              <circle cx="260" cy="240" r="220" fill="url(#siyaHeroGlowA)"/>
+            </g>
+            <g class="siya-hero-drift siya-hero-drift--b">
+              <circle cx="920" cy="520" r="280" fill="url(#siyaHeroGlowB)"/>
+            </g>
+            <g class="siya-hero-drift siya-hero-drift--c">
+              <circle cx="680" cy="140" r="180" fill="url(#siyaHeroGlowC)"/>
+            </g>
+            <g class="siya-hero-drift siya-hero-drift--wave">
+              <path d="M80 640 C 280 520, 420 700, 620 580 S 980 520, 1140 420" fill="none" stroke="#C4A574" stroke-opacity="0.35" stroke-width="2"/>
+              <path d="M40 280 C 220 360, 360 200, 540 300 S 860 340, 1120 220" fill="none" stroke="#001878" stroke-opacity="0.12" stroke-width="2"/>
+            </g>
           </svg>
         </div>
 
@@ -1019,24 +1208,26 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
       </section>
 
       <!-- Post-hero trust strip -->
-      <section class="siya-h2-trust-strip" aria-label="Trust and outcomes snapshot">
-        <div class="container">
+      <section class="siya-h2-trust-strip trust-metrics" aria-label="Trust and outcomes snapshot">
+        <div class="container siya-h2-trust-strip__inner">
           <p class="siya-h2-trust-strip__asof">As of September 2026</p>
           <ul class="siya-h2-trust-strip__grid">
             <li class="siya-h2-trust-tile">
-              <span class="siya-h2-trust-tile__value">4.90★</span>
-              <span class="siya-h2-trust-tile__label">Google rating · 88 reviews</span>
+              <span class="siya-h2-trust-tile__value trust-metric-value" data-target="4.90" data-suffix="★" data-decimals="2">4.90★</span>
+              <span class="siya-h2-trust-tile__label">Google rating</span>
+              <span class="siya-h2-trust-tile__sub">88 reviews</span>
             </li>
             <li class="siya-h2-trust-tile">
-              <span class="siya-h2-trust-tile__value">4.66★</span>
-              <span class="siya-h2-trust-tile__label">Klarity rating · 589 reviews</span>
+              <span class="siya-h2-trust-tile__value trust-metric-value" data-target="4.66" data-suffix="★" data-decimals="2">4.66★</span>
+              <span class="siya-h2-trust-tile__label">Klarity rating</span>
+              <span class="siya-h2-trust-tile__sub">589 reviews</span>
             </li>
             <li class="siya-h2-trust-tile">
-              <span class="siya-h2-trust-tile__value">2,700+</span>
+              <span class="siya-h2-trust-tile__value trust-metric-value" data-target="2700" data-suffix="+">2,700+</span>
               <span class="siya-h2-trust-tile__label">Patients treated</span>
             </li>
             <li class="siya-h2-trust-tile">
-              <span class="siya-h2-trust-tile__value">1,200+</span>
+              <span class="siya-h2-trust-tile__value trust-metric-value" data-target="1200" data-suffix="+">1,200+</span>
               <span class="siya-h2-trust-tile__label">Evaluations completed</span>
             </li>
           </ul>
@@ -1045,7 +1236,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
 
       <!-- CARE JOURNEYS — recognition-first forks into the knowledge graph -->
       
-      <section class="section section-tinted symptoms-section" id="care-journeys">
+      <section class="section symptoms-section siya-h2-continuum" id="care-journeys">
         <div class="container">
           <div class="section-header">
             <h2>Have you noticed any of these lately?</h2>
@@ -1107,7 +1298,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
 
       <!-- JOURNEY (moved below symptoms; not a second hero) -->
 
-      <section class="section" id="care-journey" aria-labelledby="care-journey-heading">
+      <section class="section siya-h2-continuum siya-h2-continuum--soft" id="care-journey" aria-labelledby="care-journey-heading">
         <div class="container">
           <div class="section-header">
             <h2 id="care-journey-heading">Your journey to care with Siya Health</h2>
