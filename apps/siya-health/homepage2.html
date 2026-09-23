@@ -843,238 +843,63 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         to { opacity: 1; transform: translateY(0) scale(1); }
       }
 
-      /* ===== Brand emphasis — ROUND 2 options (D/E/F bold; A/B/C rejected) =====
-         Reusable: .siya-em + modifier. Hero interim plain until pick. */
-      .siya-em {
+      /* ===== Brand emphasis LOCKED — Option E (gradient sweep) =====
+         Visible magenta→navy text gradient on .siya-em.
+         Wordmark split (Siya=navy / Health=gradient) deferred — brand guidelines later. */
+      .siya-em,
+      .siya-em--sweep,
+      .siya-hero-preview__accent,
+      .siya-h2-word {
         font-style: normal;
         font-weight: 700;
         text-decoration: none;
-        box-decoration-break: clone;
-        -webkit-box-decoration-break: clone;
         display: inline;
-      }
-
-      /* D — Saturated magenta pill badge + pop-in */
-      .siya-em--pill {
-        color: #F4EFE7 !important;
-        padding: 0.12em 0.42em 0.14em;
-        border-radius: 999px;
-        background: #D81088;
-        box-shadow:
-          0 0.18em 0 rgba(0, 24, 120, 0.22),
-          0 0.35em 1.1em rgba(216, 16, 136, 0.35);
-        animation: siya-em-pill-in 0.7s cubic-bezier(0.22, 1.2, 0.36, 1) both;
-      }
-      @keyframes siya-em-pill-in {
-        from { opacity: 0; transform: scale(0.82) translateY(0.15em); filter: saturate(0.6); }
-        to { opacity: 1; transform: scale(1) translateY(0); filter: saturate(1); }
-      }
-
-      /* E — Magenta→navy gradient sweep across the word */
-      .siya-em--sweep {
         color: transparent !important;
+        -webkit-text-fill-color: transparent;
         background-image: linear-gradient(
-          105deg,
+          95deg,
           #D81088 0%,
-          #D81088 42%,
-          #0A246B 58%,
-          #0A246B 100%
+          #E02A96 22%,
+          #9B1A98 48%,
+          #3D1A8A 72%,
+          #0A246B 88%,
+          #001878 100%
         );
-        background-size: 220% 100%;
-        background-position: 100% 0;
+        background-size: 100% 100%;
+        background-position: 0 0;
+        background-repeat: no-repeat;
         -webkit-background-clip: text;
         background-clip: text;
-        padding: 0 0.04em;
-        animation: siya-em-sweep 1.35s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
-        filter: drop-shadow(0 1px 0 rgba(216, 16, 136, 0.25));
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+        padding: 0 0.02em;
+        animation: siya-em-sweep-in 1.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+        animation-delay: var(--siya-word-delay, 0ms);
       }
-      @keyframes siya-em-sweep {
-        from { background-position: 100% 0; }
-        to { background-position: 0% 0; }
+      @keyframes siya-em-sweep-in {
+        from {
+          background-size: 260% 100%;
+          background-position: 100% 0;
+          opacity: 0.55;
+        }
+        to {
+          background-size: 100% 100%;
+          background-position: 0 0;
+          opacity: 1;
+        }
       }
-
-      /* F — Skewed ticket / parallelogram badge */
-      .siya-em--ticket {
-        position: relative;
-        color: #001878 !important;
-        padding: 0.1em 0.38em 0.12em;
-        margin: 0 0.06em;
-        background: #F4EFE7;
-        box-shadow:
-          0 0 0 2px #D81088,
-          4px 4px 0 #0A246B;
-        transform: skewX(-8deg);
-        display: inline-block;
-        animation: siya-em-ticket-in 0.55s cubic-bezier(0.22, 1.15, 0.36, 1) both;
-      }
-      .siya-em--ticket > .siya-em-ticket__inner {
-        display: inline-block;
-        transform: skewX(8deg);
-      }
-      @keyframes siya-em-ticket-in {
-        from { opacity: 0; transform: skewX(-8deg) translateX(-0.4em); }
-        to { opacity: 1; transform: skewX(-8deg) translateX(0); }
-      }
-
       @media (prefers-reduced-motion: reduce) {
-        .siya-em--pill,
+        .siya-em,
         .siya-em--sweep,
-        .siya-em--ticket { animation: none !important; }
-        .siya-em--sweep { background-position: 0 0; }
+        .siya-hero-preview__accent,
+        .siya-h2-word {
+          animation: none !important;
+          background-size: 100% 100% !important;
+          background-position: 0 0 !important;
+          opacity: 1 !important;
+        }
       }
 
-      /* Wordmark + ® under each treatment */
-      .siya-em-wordmark {
-        display: inline-flex;
-        align-items: baseline;
-        gap: 0;
-        font-family: Poppins, Inter, sans-serif;
-        font-size: 1.35rem;
-        font-weight: 650;
-        letter-spacing: -0.02em;
-        color: #0A246B;
-        line-height: 1;
-      }
-      .siya-em-wordmark .siya-em {
-        font-weight: inherit;
-        font-size: inherit;
-      }
-      .siya-em-wordmark__reg {
-        font-size: 0.42em;
-        font-weight: 600;
-        line-height: 0;
-        position: relative;
-        top: -0.85em;
-        margin-left: 0.12em;
-        color: inherit;
-        opacity: 0.85;
-        letter-spacing: 0;
-        background: none !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-        border-radius: 0 !important;
-        transform: none !important;
-        -webkit-background-clip: unset !important;
-        background-clip: unset !important;
-        filter: none !important;
-        animation: none !important;
-      }
-
-      /* Comparison board */
-      .siya-em-options {
-        position: relative;
-        z-index: 4;
-        padding: 1.25rem 0 1.75rem;
-        background: rgba(244, 239, 231, 0.92);
-        border-bottom: 1px solid rgba(0, 24, 120, 0.08);
-      }
-      .siya-em-options__intro {
-        max-width: 42rem;
-        margin: 0 auto 1.25rem;
-        text-align: center;
-      }
-      .siya-em-options__kicker {
-        margin: 0 0 0.35rem;
-        font-size: 0.72rem;
-        font-weight: 650;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: rgba(10, 36, 107, 0.55);
-      }
-      .siya-em-options__title {
-        margin: 0 0 0.4rem;
-        font-size: clamp(1.15rem, 2vw, 1.35rem);
-        font-weight: 700;
-        color: #0A246B;
-        letter-spacing: -0.02em;
-      }
-      .siya-em-options__note {
-        margin: 0;
-        font-size: 0.92rem;
-        line-height: 1.45;
-        color: rgba(10, 36, 107, 0.72);
-      }
-      .siya-em-options__grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 0.85rem;
-        align-items: stretch;
-      }
-      @media (max-width: 900px) {
-        .siya-em-options__grid { grid-template-columns: 1fr; }
-      }
-      .siya-em-option {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1.15rem 1.2rem 1.25rem;
-        border-radius: 1rem;
-        background: #fff;
-        border: 1px solid rgba(0, 24, 120, 0.1);
-        box-shadow: 0 10px 28px rgba(0, 24, 120, 0.04);
-      }
-      .siya-em-option__label {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 0.5rem;
-      }
-      .siya-em-option__id {
-        font-size: 0.7rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: #D81088;
-      }
-      .siya-em-option__name {
-        font-size: 0.95rem;
-        font-weight: 650;
-        color: #0A246B;
-      }
-      .siya-em-option__desc {
-        margin: 0;
-        font-size: 0.82rem;
-        line-height: 1.4;
-        color: rgba(10, 36, 107, 0.65);
-      }
-      .siya-em-option__sample {
-        margin: 0;
-        font-family: Poppins, Inter, sans-serif;
-        font-size: clamp(1.15rem, 2.2vw, 1.4rem);
-        font-weight: 700;
-        letter-spacing: -0.03em;
-        line-height: 1.45;
-        color: #0A246B;
-        text-align: center;
-        padding: 1.25rem 0.75rem;
-        border-radius: 0.75rem;
-        background: #F4EFE7;
-        min-height: 5.5rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 0.45rem;
-      }
-      .siya-em-option__sample-sub {
-        display: block;
-        font-size: 1.15em;
-      }
-      .siya-em-option__wm {
-        display: flex;
-        justify-content: center;
-        padding: 0.95rem 0.5rem;
-        border-radius: 0.75rem;
-        background: #F4EFE7;
-      }
-      .siya-em-option__meta {
-        margin: 0;
-        font-size: 0.75rem;
-        color: rgba(10, 36, 107, 0.5);
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      }
-
-      /* Hard verify stamp — proves this HTML is homepage2 sandbox, not / */
       .siya-h2-verify-stamp {
         position: fixed;
         left: 0.65rem;
@@ -1091,17 +916,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         pointer-events: none;
       }
 
-      /* Hero interim: navy weight only — no fill until a treatment is chosen */
-      .siya-hero-preview__accent {
-        color: #0A246B;
-        font-weight: 750;
-        font-style: normal;
-        background: none;
-        border: 0;
-        box-shadow: none;
-        text-decoration: none;
-        padding: 0;
-      }
       .hero-merged--abstract .siya-h2-welcome,
       .hero-merged-content > p.siya-h2-welcome {
         margin: 0 0 0.55rem;
@@ -1663,22 +1477,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         font-size: clamp(1.2rem, 2vw, 1.45rem) !important;
         color: #0A246B !important;
       }
-      .siya-h2-word {
-        display: inline;
-        font-weight: 700;
-        color: #D81088;
-        background: linear-gradient(180deg, transparent 55%, rgba(216, 16, 136, 0.2) 55%);
-        background-size: 100% 100%;
-        animation: siya-h2-word-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-        animation-delay: var(--siya-word-delay, 0ms);
-      }
-      @keyframes siya-h2-word-in {
-        from { opacity: 0.35; filter: blur(4px); }
-        to { opacity: 1; filter: blur(0); }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .siya-h2-word { animation: none; }
-      }
       .siya-h2-unify {
         margin: 1.5rem auto 0;
         max-width: 40rem;
@@ -1688,7 +1486,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         color: #0A246B;
         font-weight: 500;
       }
-      .siya-h2-unify strong { color: #D81088; font-weight: 700; }
 
       /* Unified journey narrative */
       .siya-h2-journey {
@@ -2195,78 +1992,21 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
     <!-- SIYA-H2-VERIFY: stamp=SIYA-H2-VERIFY-20260923T1620 route=/homepage2 NOT=/ -->
     <div class="siya-h2-verify-stamp" aria-hidden="true">SIYA-H2-VERIFY-20260923T1620 · /homepage2</div>
     <div class="siya-h2-wip-pill" role="status" title="Preview only — not the live homepage">
-      Preview · /homepage2 · pick emphasis D/E/F below
+      Preview · /homepage2 · emphasis: Option E (gradient)
     </div>
 
 
     <main id="main">
       <!-- WIP preview — do not promote to index until explicitly approved -->
 
-      <section class="siya-em-options" id="emphasis-options" aria-label="Emphasis treatment options — pick one">
-        <div class="container">
-          <div class="siya-em-options__intro">
-            <p class="siya-em-options__kicker">Review step · round 2 · A/B/C rejected as too muted</p>
-            <h2 class="siya-em-options__title">Headline emphasis — pick D, E, or F</h2>
-            <p class="siya-em-options__note">Bolder contrast + motion. Hero stays interim plain until you choose. Winning treatment becomes <code>.siya-em</code> sitewide + wordmark — not applied yet.</p>
-          </div>
-          <div class="siya-em-options__grid">
-            <article class="siya-em-option" id="em-option-d">
-              <div class="siya-em-option__label">
-                <span class="siya-em-option__id">D</span>
-                <span class="siya-em-option__name">Magenta pill</span>
-              </div>
-              <p class="siya-em-option__desc">Full-saturation brand pill, cream type, drop shadow, pop-in on load.</p>
-              <p class="siya-em-option__sample">
-                integrated care <span class="siya-em siya-em--pill">experience</span>
-                <span class="siya-em-option__sample-sub">for busy <span class="siya-em siya-em--pill">professionals</span></span>
-              </p>
-              <div class="siya-em-option__wm" aria-label="Wordmark sample D">
-                <span class="siya-em-wordmark"><span class="siya-em siya-em--pill">Siya Health<sup class="siya-em-wordmark__reg">®</sup></span></span>
-              </div>
-              <p class="siya-em-option__meta">.siya-em.siya-em--pill</p>
-            </article>
-            <article class="siya-em-option" id="em-option-e">
-              <div class="siya-em-option__label">
-                <span class="siya-em-option__id">E</span>
-                <span class="siya-em-option__name">Gradient sweep</span>
-              </div>
-              <p class="siya-em-option__desc">Magenta→navy text gradient that sweeps across the word on load.</p>
-              <p class="siya-em-option__sample">
-                integrated care <span class="siya-em siya-em--sweep">experience</span>
-                <span class="siya-em-option__sample-sub">for busy <span class="siya-em siya-em--sweep">professionals</span></span>
-              </p>
-              <div class="siya-em-option__wm" aria-label="Wordmark sample E">
-                <span class="siya-em-wordmark"><span class="siya-em siya-em--sweep">Siya Health<sup class="siya-em-wordmark__reg">®</sup></span></span>
-              </div>
-              <p class="siya-em-option__meta">.siya-em.siya-em--sweep</p>
-            </article>
-            <article class="siya-em-option" id="em-option-f">
-              <div class="siya-em-option__label">
-                <span class="siya-em-option__id">F</span>
-                <span class="siya-em-option__name">Ticket stamp</span>
-              </div>
-              <p class="siya-em-option__desc">Skewed cream ticket with magenta frame + navy offset shadow — distinct shape, not a wash.</p>
-              <p class="siya-em-option__sample">
-                integrated care <span class="siya-em siya-em--ticket"><span class="siya-em-ticket__inner">experience</span></span>
-                <span class="siya-em-option__sample-sub">for busy <span class="siya-em siya-em--ticket"><span class="siya-em-ticket__inner">professionals</span></span></span>
-              </p>
-              <div class="siya-em-option__wm" aria-label="Wordmark sample F">
-                <span class="siya-em-wordmark"><span class="siya-em siya-em--ticket"><span class="siya-em-ticket__inner">Siya Health<sup class="siya-em-wordmark__reg">®</sup></span></span></span>
-              </div>
-              <p class="siya-em-option__meta">.siya-em.siya-em--ticket</p>
-            </article>
-          </div>
-        </div>
-      </section>
-      
       <section class="hero-merged hero-merged--abstract" aria-label="Siya Health homepage hero">
 
         <div class="container hero-inner siya-hero-preview__inner siya-hero-preview__inner--solo">
           <div class="hero-merged-content siya-hero-preview__copy siya-hero-preview__focal siya-hero-preview__focal--orbit">
             <span id="siya-hero-rotate-measure" class="siya-hero-preview__rotate-measure" aria-hidden="true"></span>
-            <p class="siya-h2-welcome">Welcome to an integrated care <span class="siya-hero-preview__accent">experience</span></p>
+            <p class="siya-h2-welcome">Welcome to an integrated care <span class="siya-em">experience</span></p>
             <h1 class="siya-hero-preview__title siya-hero-preview__title--plain">
-              for busy <span class="siya-hero-preview__accent">professionals</span>
+              for busy <span class="siya-em">professionals</span>
             </h1>
             <div class="siya-hero-preview__rotate-row" aria-label="Care areas we recognize">
               <span class="siya-hero-preview__rotate-shell" aria-live="polite">
@@ -2316,35 +2056,35 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
       <section class="section symptoms-section siya-h2-continuum" id="care-journeys">
         <div class="container">
           <div class="section-header">
-            <h2>Have you noticed any of these lately?</h2>
+            <h2>Have you noticed any of these <span class="siya-em">lately</span>?</h2>
           </div>
           <ul class="siya-h2-notice-grid">
             <li class="siya-h2-notice-item siya-h2-reveal">
-              <h3>I’m <span class="siya-h2-word" style="--siya-word-delay:0ms">exhausted</span> all the time</h3>
+              <h3>I’m <span class="siya-em" style="--siya-word-delay:0ms">exhausted</span> all the time</h3>
               <p>When rest doesn’t restore you.</p>
             </li>
             <li class="siya-h2-notice-item siya-h2-reveal">
-              <h3><span class="siya-h2-word" style="--siya-word-delay:90ms">Hormones</span> feel off</h3>
+              <h3><span class="siya-em" style="--siya-word-delay:90ms">Hormones</span> feel off</h3>
               <p>Mood, cycles, midlife shifts, or energy that won’t stabilize.</p>
             </li>
             <li class="siya-h2-notice-item siya-h2-reveal">
-              <h3>Weight feels <span class="siya-h2-word" style="--siya-word-delay:180ms">stuck</span></h3>
+              <h3>Weight feels <span class="siya-em" style="--siya-word-delay:180ms">stuck</span></h3>
               <p>Food noise, appetite changes, effort that doesn’t match results.</p>
             </li>
             <li class="siya-h2-notice-item siya-h2-reveal">
-              <h3><span class="siya-h2-word" style="--siya-word-delay:270ms">Brain fog</span> that won’t clear</h3>
+              <h3><span class="siya-em" style="--siya-word-delay:270ms">Brain fog</span> that won’t clear</h3>
               <p>Cloudy thinking, slow recall, hard-to-finish days.</p>
             </li>
             <li class="siya-h2-notice-item siya-h2-reveal">
-              <h3>No doctor I can <span class="siya-h2-word" style="--siya-word-delay:360ms">reach</span></h3>
+              <h3>No doctor I can <span class="siya-em" style="--siya-word-delay:360ms">reach</span></h3>
               <p>Forms, follow-ups, accommodations, staying ahead of problems.</p>
             </li>
             <li class="siya-h2-notice-item siya-h2-reveal">
-              <h3><span class="siya-h2-word" style="--siya-word-delay:450ms">Focus</span> keeps slipping</h3>
+              <h3><span class="siya-em" style="--siya-word-delay:450ms">Focus</span> keeps slipping</h3>
               <p>Organization, attention, and getting things done.</p>
             </li>
           </ul>
-          <p class="siya-h2-unify siya-h2-reveal">These often travel together — and they’re exactly why we <strong>unify care into one platform</strong>, instead of sending you to five different apps.</p>
+          <p class="siya-h2-unify siya-h2-reveal">These often travel together — and they’re exactly why we <strong class="siya-em">unify care into one platform</strong>, instead of sending you to five different apps.</p>
           <div class="siya-h2-cta-pair" style="margin:1.5rem 0 0">
             <a href="/redirect/meet-greet" class="button ds-button ds-button--primary" data-siya-location="care-journeys-transition" data-siya-track="meet_greet_click">Book Free Meet &amp; Greet</a>
             <a href="#how-it-works" class="siya-h2-cta-quiet" data-siya-location="care-journeys-transition">See how care unfolds</a>
@@ -2354,7 +2094,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
 
 
       <!-- WHY PATIENTS COME -->
-      <section class="section" id="why-patients"> <div class="container"> <div class="why-patients-grid"> <div class="why-patients-copy"> <div class="section-header why-patients-header"> <h2>You’re not failing. Your symptoms deserve a real look.</h2> </div> <p class="siya-h2-lede">A lot of adults show up after years of being told to “try harder.” When fatigue, focus, weight, and hormones overlap, a rushed visit rarely connects the dots.</p>
+      <section class="section" id="why-patients"> <div class="container"> <div class="why-patients-grid"> <div class="why-patients-copy"> <div class="section-header why-patients-header"> <h2>You’re not failing. Your symptoms deserve a <span class="siya-em">real look</span>.</h2> </div> <p class="siya-h2-lede">A lot of adults show up after years of being told to “try harder.” When fatigue, focus, weight, and hormones overlap, a rushed visit rarely connects the dots.</p>
  <details class="siya-h2-more">
  <summary>You shouldn’t have to figure it out alone — read more</summary>
  <ul class="scan-list"> <li>Telehealth for adults in <strong>California · Texas · Pennsylvania · Florida</strong></li> <li>Structured histories and validated tools when appropriate</li> <li>Clear explanations before any treatment plan</li> <li><strong>Screening is not diagnosis.</strong> Evaluation does not guarantee medication.</li> </ul>
@@ -2365,7 +2105,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
       <section class="section siya-h2-continuum" id="how-it-works" aria-labelledby="how-it-works-heading">
         <div class="container">
           <div class="section-header">
-            <h2 id="how-it-works-heading">How care unfolds with Siya</h2>
+            <h2 id="how-it-works-heading">How care unfolds with <span class="siya-em">Siya</span></h2>
             <p class="lead siya-h2-lead-tight">One process for every patient — whatever you’re noticing. We don’t start you on a separate “ADHD path” or “weight path.” We start with you.</p>
           </div>
           <div class="siya-h2-journey">
@@ -2409,7 +2149,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
       <section class="section" id="care-team" aria-labelledby="care-team-heading">
         <div class="container">
           <div class="section-header care-team-header">
-            <h2 id="care-team-heading">Meet the family caring for your family</h2>
+            <h2 id="care-team-heading">Meet the <span class="siya-em">family</span> caring for your family</h2>
           </div>
           <p class="care-team-lede siya-h2-reveal">Siya was started by two physicians — trained together, building this for the kind of care they’d want for their own family. It’s personal, not a call-center clinic.</p>
           <div class="homepage-care-compact">
