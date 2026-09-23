@@ -92,7 +92,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .hero-merged--abstract::before {
         background: transparent;
       }
-      .hero-merged__media--abstract {
+      .hero-merged--abstract .hero-merged__media--abstract { display:block !important; opacity:1 !important;
+      
         position: absolute;
         inset: 0;
         z-index: 0;
@@ -913,7 +914,6 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
           <a href="/adhd-care">ADHD Care</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
-          <a href="/join-our-team">Careers</a>
           <a href="/employers">Employers</a>
           <a href="/blog">Blog</a>
         </nav>
@@ -935,6 +935,24 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
         </div>
       </div>
     </header>
+
+    <div class="siya-h2-wip-banner" role="status">
+      <div class="container">WIP preview — <strong>/homepage2</strong> only. Production homepage stays at <a href="/">siya.health/</a> until this page is approved to replace it.</div>
+    </div>
+    <style>
+      .siya-h2-wip-banner {
+        background: #0A246B;
+        color: #F4EFE7;
+        font-size: 0.9rem;
+        padding: 0.55rem 0;
+        text-align: center;
+        position: relative;
+        z-index: 40;
+      }
+      .siya-h2-wip-banner a { color: #F4EFE7; text-decoration: underline; }
+      body.page-home .siya-h2-wip-banner { margin-top: 0; }
+    </style>
+
 
     <main id="main">
       <!-- WIP preview — do not promote to index until explicitly approved -->
@@ -1275,6 +1293,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
           <h4>Company</h4>
           <ul class="footer-links">
             <li><a href="/about">About Siya Health</a></li>
+            <li><a href="/join-our-team">Join Our Team</a></li>
             <li><a href="/providers">Care Team</a></li>
             <li><a href="/pricing">Pricing</a></li>
             <li><a href="/telehealth">Explore Telehealth Care</a></li>
