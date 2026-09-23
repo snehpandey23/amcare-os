@@ -16,7 +16,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
-    <meta name="siya-preview" content="homepage2" />
     <link rel="canonical" href="https://siya.health/homepage2" />
     <title>Siya Health | When Focus, Energy, or Weight Won't Budge</title>
     <meta name="description" content="Physician-led telehealth for adults who feel tired, unfocused, or stuck—structured evaluation for fatigue, ADHD symptoms, weight, and hormones in CA, TX, PA, and FL." />
@@ -38,7 +37,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
     <link rel="preload" href="/styles.css?v=1789609360717.9763" as="style" />
-    <link rel="preload" href="/assets/videos/homepage/hero-mental-care-poster.jpg" as="image" />
+    <link rel="preload" href="/assets/images/siya-health-logo.png" as="image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;600;700&display=swap" rel="stylesheet" />
@@ -78,6 +77,76 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           max-width: 70vw;
           max-height: 70vw;
         }
+      }
+
+
+      .hero-merged--abstract {
+        background-image: none !important;
+        background-color: #F4EFE7;
+        min-height: min(88vh, 820px);
+        align-items: center;
+        padding-top: calc(var(--header-height, 72px) + 40px);
+        padding-bottom: 48px;
+        box-sizing: border-box;
+      }
+      .hero-merged--abstract::before {
+        background: transparent;
+      }
+      .hero-merged__media--abstract {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .hero-merged__abstract {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .siya-hero-preview__inner--solo {
+        display: block;
+        max-width: 720px;
+        margin-left: 0;
+      }
+      .siya-hero-preview__support {
+        margin: 0.85rem 0 1.35rem;
+        max-width: 38rem;
+        font-size: 1.05rem;
+        line-height: 1.55;
+        color: rgba(10, 36, 107, 0.88);
+      }
+      .siya-hero-preview__ctas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .siya-journey-inline {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      .siya-diagnose-flow {
+        margin: 0 0 1.5rem;
+        overflow-x: auto;
+      }
+      .siya-diagnose-flow__svg {
+        display: block;
+        width: 100%;
+        min-width: 640px;
+        height: auto;
+      }
+      @media (max-width: 720px) {
+        .siya-hero-preview__title { font-size: clamp(1.85rem, 7vw, 2.4rem); }
+      }
+
+      .hero-merged--abstract .siya-hero-preview__title,
+      .hero-merged--abstract .siya-hero-preview__lead,
+      .hero-merged--abstract .siya-hero-preview__support {
+        color: #0A246B;
+        text-shadow: none;
+      }
+      .hero-merged--abstract .siya-hero-preview__rotate-word {
+        color: #D81088;
       }
 
       :root {
@@ -456,7 +525,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       @media (prefers-reduced-motion: reduce) {
         .hero-merged__video { display: none; }
         .hero-merged--video-preview {
-          background-image: url('/assets/videos/homepage/hero-mental-care-poster.jpg') !important;
+          background-image: url('/assets/images/siya-health-logo.png') !important;
           background-size: cover;
           background-position: center;
         }
@@ -849,7 +918,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
           <a href="/blog">Blog</a>
         </nav>
         <div class="nav-cta">
-          <a href="/redirect/meet-greet" class="button ds-button ds-button--primary" data-siya-location="nav" data-page-type="homepage" data-intent="homepage" data-conversion-goal="meetGreet" data-cta-slot="meetGreet" data-component="button" data-siya-track="meet_greet_click">Book Free Meet & Greet</a>
+          <a href="/redirect/meet-greet" class="button ds-button ds-button--primary" data-siya-location="nav" data-page-type="homepage2" data-intent="homepage" data-conversion-goal="meetGreet" data-cta-slot="meetGreet" data-component="button" data-siya-track="meet_greet_click">Book Free Meet & Greet</a>
         </div>
         <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
         <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
@@ -861,7 +930,6 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
           <a href="/adhd-care">ADHD Care</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
-          <a href="/join-our-team">Join Our Team</a>
           <a href="/employers">For Employers</a>
           <a href="/blog">Blog</a>
         </div>
@@ -869,29 +937,40 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
     </header>
 
     <main id="main">
-      <!-- /homepage2 team review — isolated from production index.html -->
-      <section class="hero-merged hero-merged--video-preview" aria-label="Homepage hero preview with video background">
-        <div class="hero-merged__media hero-merged__media--video" aria-hidden="true">
-          <video
-            class="hero-merged__video"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            poster="/assets/videos/homepage/hero-mental-care-poster.jpg"
-          >
-            <source src="/assets/videos/homepage/hero-mental-care-loop.mp4" type="video/mp4" />
-          </video>
+      <!-- WIP preview — do not promote to index until explicitly approved -->
+      
+      <section class="hero-merged hero-merged--abstract" aria-label="Siya Health homepage hero">
+        <div class="hero-merged__media hero-merged__media--abstract" aria-hidden="true">
+          <svg class="hero-merged__abstract" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="presentation">
+            <defs>
+              <linearGradient id="siyaHeroCream" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#F4EFE7"/>
+                <stop offset="55%" stop-color="#E8EEF8"/>
+                <stop offset="100%" stop-color="#F7F2EC"/>
+              </linearGradient>
+              <radialGradient id="siyaHeroGlowA" cx="22%" cy="30%" r="45%">
+                <stop offset="0%" stop-color="#D81088" stop-opacity="0.22"/>
+                <stop offset="100%" stop-color="#D81088" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="siyaHeroGlowB" cx="78%" cy="62%" r="48%">
+                <stop offset="0%" stop-color="#001878" stop-opacity="0.18"/>
+                <stop offset="100%" stop-color="#001878" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="siyaHeroGlowC" cx="55%" cy="18%" r="35%">
+                <stop offset="0%" stop-color="#0A246B" stop-opacity="0.12"/>
+                <stop offset="100%" stop-color="#0A246B" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="1200" height="800" fill="url(#siyaHeroCream)"/>
+            <circle cx="260" cy="240" r="220" fill="url(#siyaHeroGlowA)"/>
+            <circle cx="920" cy="520" r="280" fill="url(#siyaHeroGlowB)"/>
+            <circle cx="680" cy="140" r="180" fill="url(#siyaHeroGlowC)"/>
+            <path d="M80 640 C 280 520, 420 700, 620 580 S 980 520, 1140 420" fill="none" stroke="#C4A574" stroke-opacity="0.35" stroke-width="2"/>
+            <path d="M40 280 C 220 360, 360 200, 540 300 S 860 340, 1120 220" fill="none" stroke="#001878" stroke-opacity="0.12" stroke-width="2"/>
+          </svg>
         </div>
 
-        <div class="siya-hero-preview__blobs" aria-hidden="true">
-          <span class="siya-hero-preview__blob siya-hero-preview__blob--navy"></span>
-          <span class="siya-hero-preview__blob siya-hero-preview__blob--magenta"></span>
-          <span class="siya-hero-preview__blob siya-hero-preview__blob--champagne"></span>
-        </div>
-
-        <div class="container hero-inner siya-hero-preview__inner">
+        <div class="container hero-inner siya-hero-preview__inner siya-hero-preview__inner--solo">
           <div class="hero-merged-content siya-hero-preview__copy">
             <span id="siya-hero-rotate-measure" class="siya-hero-preview__rotate-measure" aria-hidden="true"></span>
             <h1 class="siya-hero-preview__title">
@@ -910,54 +989,18 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
             <p class="hero-merged-lead siya-hero-preview__lead">
               A physician-led care platform for busy professionals who don’t have time to sign up on five different platforms for GLP-1s, ADHD meds, or psychotherapy — get it in one place, when you need it.
             </p>
-          </div>
-
-          <aside class="siya-hero-preview__card" aria-label="Your journey to care with Siya Health">
-            <div class="siya-hero-preview__card-head">
-              <div>
-                <h2 class="siya-hero-preview__card-title">Your journey to care with Siya Health</h2>
-                <p class="siya-hero-preview__card-sub">You don’t need a diagnosis to begin.</p>
-              </div>
+            <p class="siya-hero-preview__support">
+              Built by physicians who know what patients actually go through. Longer visits than a typical 15–20 minute insurance slot. Shared plans that connect focus, stress, weight, and energy — not a prescription-and-done visit.
+            </p>
+            <div class="hero-ctas siya-hero-preview__ctas">
+              <a href="/redirect/meet-greet" class="button ds-button ds-button--primary" data-siya-location="hero" data-page-type="homepage2" data-intent="homepage" data-conversion-goal="meetGreet" data-cta-slot="meetGreet" data-component="button" data-siya-track="meet_greet_click">Book Free Meet &amp; Greet</a>
+              <a href="/providers" class="button ds-button ds-button--secondary secondary" data-siya-location="hero" data-page-type="homepage2" data-intent="homepage" data-conversion-goal="exploreCare" data-cta-slot="exploreCare" data-component="button" data-siya-track="care_team_click">Meet the care team</a>
             </div>
-            <ol class="siya-hero-preview__flow">
-              <li class="siya-hero-preview__flow-step">
-                <span class="siya-hero-preview__flow-num" aria-hidden="true">1</span>
-                <div class="siya-hero-preview__flow-body">
-                  <p class="siya-hero-preview__flow-label">Book a free discovery call</p>
-                  <p class="siya-hero-preview__flow-text">A real conversation about what’s going on — and whether we’re a good fit.</p>
-                </div>
-              </li>
-              <li class="siya-hero-preview__flow-step">
-                <span class="siya-hero-preview__flow-num" aria-hidden="true">2</span>
-                <div class="siya-hero-preview__flow-body">
-                  <p class="siya-hero-preview__flow-label">Extensive virtual evaluation</p>
-                  <p class="siya-hero-preview__flow-text">Objective tools, labs, and record reviews when clinically appropriate.</p>
-                </div>
-              </li>
-              <li class="siya-hero-preview__flow-step">
-                <span class="siya-hero-preview__flow-num" aria-hidden="true">3</span>
-                <div class="siya-hero-preview__flow-body">
-                  <p class="siya-hero-preview__flow-label">Personalized plan + ongoing care coordination</p>
-                  <p class="siya-hero-preview__flow-text">Follow-up and coordination so nothing falls through the cracks.</p>
-                </div>
-              </li>
-            </ol>
-            <a
-              href="/redirect/meet-greet"
-              class="button ds-button ds-button--primary siya-hero-preview__card-cta"
-              data-siya-location="hero"
-              data-page-type="homepage2"
-              data-intent="homepage"
-              data-conversion-goal="meetGreet"
-              data-cta-slot="meetGreet"
-              data-component="button"
-              data-siya-track="meet_greet_click"
-            >Meet &amp; Greet</a>
-          </aside>
+          </div>
         </div>
       </section>
 
-      <!-- Post-hero trust strip: confirmed ratings + pending placeholders -->
+      <!-- Post-hero trust strip -->
       <section class="siya-h2-trust-strip" aria-label="Trust and outcomes snapshot">
         <div class="container">
           <p class="siya-h2-trust-strip__asof">As of September 2026</p>
@@ -983,13 +1026,105 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
       </section>
 
       <!-- CARE JOURNEYS — recognition-first forks into the knowledge graph -->
-      <section class="section section-tinted symptoms-section" id="care-journeys"> <div class="container"> <div class="section-header"> <h2>Have you noticed any of these lately?</h2> <p class="lead siya-h2-lead-tight">Start with what you’re feeling—not a label. Each path can lead to a real evaluation when you’re ready.</p> </div> <div class="symptoms-card-grid symptoms-card-grid--home"> <article class="symptoms-card symptoms-card--editorial"> <a class="symptoms-card--link" href="/fatigue"> <figure class="symptoms-card-media"> <img src="/assets/images/editorial-exhausted-morning.jpg" alt="" width="900" height="600" loading="lazy" decoding="async" /> </figure> <h3>I’m exhausted all the time</h3> <p>Fatigue evaluation—when rest doesn’t restore you.</p> <div class="symptoms-card-actions"><span class="text-link">Fatigue journey →</span></div> </a> </article> <article class="symptoms-card symptoms-card--editorial"> <a class="symptoms-card--link" href="/brain-fog"> <figure class="symptoms-card-media"> <img src="/assets/images/editorial-energy-afternoon.jpg" alt="" width="900" height="600" loading="lazy" decoding="async" /> </figure> <h3>I’m dealing with brain fog</h3> <p>Cloudy thinking, slow recall, hard-to-finish days.</p> <div class="symptoms-card-actions"><span class="text-link">Brain fog journey →</span></div> </a> </article> <article class="symptoms-card symptoms-card--editorial symptoms-card--dual"> <figure class="symptoms-card-media"> <img src="/assets/images/editorial-focus-overwhelm.jpg" alt="" width="900" height="600" loading="lazy" decoding="async" /> </figure> <h3>I think I have ADHD</h3> <p>Lifelong focus, organization, and follow-through patterns.</p> <div class="symptoms-card-actions"> <a href="/adhd-care" class="text-link">Adult ADHD care →</a> <a href="/adhd-screening?start=asrs" class="symptoms-card-secondary" data-siya-track="screening-cta-click" data-siya-location="care-journeys-adhd">Free screening →</a> </div> </article> <article class="symptoms-card symptoms-card--editorial"> <a class="symptoms-card--link" href="/primary-care"> <figure class="symptoms-card-media"> <img src="/assets/images/telehealth-visit.png" alt="" width="900" height="600" loading="lazy" decoding="async" /> </figure> <h3>I want a primary care doctor</h3> <p>Ongoing visits, refills, and a clinician who knows your story.</p> <div class="symptoms-card-actions"><span class="text-link">Primary care →</span></div> </a> </article> <article class="symptoms-card symptoms-card--editorial"> <a class="symptoms-card--link" href="/preventive-care"> <figure class="symptoms-card-media"> <img src="/assets/images/doctor-office.png" alt="" width="900" height="600" loading="lazy" decoding="async" /> </figure> <h3>I want to improve my health</h3> <p>Prevention, labs when appropriate, and staying ahead of problems.</p> <div class="symptoms-card-actions"><span class="text-link">Preventive care →</span></div> </a> </article> <article class="symptoms-card symptoms-card--editorial"> <a class="symptoms-card--link" href="/weight-loss-metabolic-health"> <figure class="symptoms-card-media"> <img src="/assets/images/editorial-weight-effort.jpg" alt="" width="900" height="600" loading="lazy" decoding="async" /> </figure> <h3>Weight or metabolism feels stuck</h3> <p>Food noise, insulin resistance, appetite changes.</p> <div class="symptoms-card-actions"><span class="text-link">Metabolic health →</span></div> </a> </article> </div> <p class="symptoms-transition">Not sure which path fits? <a                                       href="/redirect/meet-greet" data-siya-location="care-journeys-transition" data-siya-track="meet_greet_click">Book a free Meet &amp; Greet</a> — you don’t need a label first. And screening isn’t a diagnosis.</p> </div> </section>
+      
+      <section class="section section-tinted symptoms-section" id="care-journeys">
+        <div class="container">
+          <div class="section-header">
+            <h2>Have you noticed any of these lately?</h2>
+          </div>
+          <div class="symptoms-card-grid symptoms-card-grid--home">
+            <article class="symptoms-card symptoms-card--editorial">
+              <a class="symptoms-card--link" href="/fatigue">
+                <figure class="symptoms-card-media"><img src="/assets/images/editorial-exhausted-morning.jpg" alt="" width="900" height="600" loading="lazy" decoding="async" /></figure>
+                <h3>I’m exhausted all the time</h3>
+                <p>When rest doesn’t restore you.</p>
+                <div class="symptoms-card-actions"><span class="text-link">Fatigue →</span></div>
+              </a>
+            </article>
+            <article class="symptoms-card symptoms-card--editorial">
+              <a class="symptoms-card--link" href="/womens-health">
+                <figure class="symptoms-card-media"><img src="/assets/images/editorial-energy-afternoon.jpg" alt="" width="900" height="600" loading="lazy" decoding="async" /></figure>
+                <h3>Hormones feel off</h3>
+                <p>Mood, cycles, midlife shifts, or energy that won’t stabilize.</p>
+                <div class="symptoms-card-actions"><span class="text-link">Hormones →</span></div>
+              </a>
+            </article>
+            <article class="symptoms-card symptoms-card--editorial">
+              <a class="symptoms-card--link" href="/weight-loss-metabolic-health">
+                <figure class="symptoms-card-media"><img src="/assets/images/editorial-weight-effort.jpg" alt="" width="900" height="600" loading="lazy" decoding="async" /></figure>
+                <h3>Weight or metabolism feels stuck</h3>
+                <p>Food noise, appetite changes, effort that doesn’t match results.</p>
+                <div class="symptoms-card-actions"><span class="text-link">Metabolic health →</span></div>
+              </a>
+            </article>
+            <article class="symptoms-card symptoms-card--editorial">
+              <a class="symptoms-card--link" href="/brain-fog">
+                <figure class="symptoms-card-media"><img src="/assets/images/editorial-energy-afternoon.jpg" alt="" width="900" height="600" loading="lazy" decoding="async" /></figure>
+                <h3>I’m dealing with brain fog</h3>
+                <p>Cloudy thinking, slow recall, hard-to-finish days.</p>
+                <div class="symptoms-card-actions"><span class="text-link">Brain fog →</span></div>
+              </a>
+            </article>
+            <article class="symptoms-card symptoms-card--editorial">
+              <a class="symptoms-card--link" href="/preventive-care">
+                <figure class="symptoms-card-media"><img src="/assets/images/doctor-office.png" alt="" width="900" height="600" loading="lazy" decoding="async" /></figure>
+                <h3>I don’t have a doctor I can reach</h3>
+                <p>For forms, follow-ups, accommodations, or staying ahead of problems.</p>
+                <div class="symptoms-card-actions"><span class="text-link">Preventive care →</span></div>
+              </a>
+            </article>
+            <article class="symptoms-card symptoms-card--editorial">
+              <a class="symptoms-card--link" href="/adhd-care">
+                <figure class="symptoms-card-media"><img src="/assets/images/editorial-focus-overwhelm.jpg" alt="" width="900" height="600" loading="lazy" decoding="async" /></figure>
+                <h3>Focus and follow-through keep slipping</h3>
+                <p>Lifelong patterns with organization, attention, and getting things done.</p>
+                <div class="symptoms-card-actions"><span class="text-link">ADHD care →</span></div>
+              </a>
+            </article>
+          </div>
+          <p class="symptoms-transition"><a href="/redirect/meet-greet" data-siya-location="care-journeys-transition" data-siya-track="meet_greet_click">Book a free Meet &amp; Greet</a> — you shouldn’t have to figure it out alone.</p>
+        </div>
+      </section>
+
+
+      <!-- JOURNEY (moved below symptoms; not a second hero) -->
+
+      <section class="section" id="care-journey" aria-labelledby="care-journey-heading">
+        <div class="container">
+          <div class="section-header">
+            <h2 id="care-journey-heading">Your journey to care with Siya Health</h2>
+            <p class="lead siya-h2-lead-tight">You shouldn’t have to figure it out alone.</p>
+          </div>
+          <ol class="siya-hero-preview__flow siya-journey-inline">
+            <li class="siya-hero-preview__flow-step">
+              <span class="siya-hero-preview__flow-num" aria-hidden="true">1</span>
+              <div class="siya-hero-preview__flow-body">
+                <p class="siya-hero-preview__flow-label">Book a free discovery call</p>
+                <p class="siya-hero-preview__flow-text">A real conversation about what’s going on — and whether we’re a good fit.</p>
+              </div>
+            </li>
+            <li class="siya-hero-preview__flow-step">
+              <span class="siya-hero-preview__flow-num" aria-hidden="true">2</span>
+              <div class="siya-hero-preview__flow-body">
+                <p class="siya-hero-preview__flow-label">Extensive virtual evaluation</p>
+                <p class="siya-hero-preview__flow-text">Objective tools, labs, and record reviews when clinically appropriate.</p>
+              </div>
+            </li>
+            <li class="siya-hero-preview__flow-step">
+              <span class="siya-hero-preview__flow-num" aria-hidden="true">3</span>
+              <div class="siya-hero-preview__flow-body">
+                <p class="siya-hero-preview__flow-label">Personalized plan + ongoing care coordination</p>
+                <p class="siya-hero-preview__flow-text">Follow-up and coordination so nothing falls through the cracks.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
 
       <!-- WHY PATIENTS COME -->
       <section class="section" id="why-patients"> <div class="container"> <div class="why-patients-grid"> <div class="why-patients-copy"> <div class="section-header why-patients-header"> <h2>You’re not failing. Your symptoms deserve a real look.</h2> </div> <p class="siya-h2-lede">A lot of adults show up after years of being told to “try harder.” When fatigue, focus, weight, and hormones overlap, a rushed visit rarely connects the dots.</p>
  <details class="siya-h2-more">
- <summary>Read more</summary>
- <p>You shouldn’t have to figure it out alone.</p>
+ <summary>You shouldn’t have to figure it out alone — read more</summary>
  <ul class="scan-list"> <li>Telehealth for adults in <strong>California · Texas · Pennsylvania · Florida</strong></li> <li>Structured histories and validated tools when appropriate</li> <li>Clear explanations before any treatment plan</li> <li><strong>Screening is not diagnosis.</strong> Evaluation does not guarantee medication.</li> </ul>
  </details>
  </div> <figure class="why-patients-media"> <img src="/assets/images/editorial-finally-heard.jpg" width="1100" height="733" alt="Adult on a quiet phone call at home, looking relieved after finally being taken seriously." loading="lazy" decoding="async" /> <figcaption>You don’t need a perfect label first—you need someone who takes the full picture seriously.</figcaption> </figure> </div> </div> </section>
@@ -1001,6 +1136,27 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
             <h2 id="how-we-diagnose-heading">How we diagnose</h2>
             <p class="lead siya-h2-lead-tight">Integrated means we look at the whole picture behind one symptom—not a claim of a multi-specialty network.</p>
           </div>
+
+          <figure class="siya-diagnose-flow" aria-labelledby="how-we-diagnose-heading">
+            <svg class="siya-diagnose-flow__svg" viewBox="0 0 960 140" role="img" aria-label="Diagnosis path: whole-picture history, tools when useful, clinician plan">
+              <title>How diagnosis works</title>
+              <rect x="16" y="24" width="220" height="72" rx="10" fill="#ffffff" stroke="#C4A574" stroke-width="2"/>
+              <text x="126" y="56" text-anchor="middle" fill="#001878" font-family="Poppins, Arial, sans-serif" font-size="14" font-weight="700">Whole picture</text>
+              <text x="126" y="76" text-anchor="middle" fill="#0A246B" font-family="Inter, Arial, sans-serif" font-size="12">History across symptoms</text>
+              <line x1="236" y1="60" x2="276" y2="60" stroke="#C4A574" stroke-width="2"/>
+              <rect x="276" y="24" width="220" height="72" rx="10" fill="#ffffff" stroke="#001878" stroke-width="1.5"/>
+              <text x="386" y="56" text-anchor="middle" fill="#001878" font-family="Poppins, Arial, sans-serif" font-size="14" font-weight="700">Useful inputs</text>
+              <text x="386" y="76" text-anchor="middle" fill="#0A246B" font-family="Inter, Arial, sans-serif" font-size="12">Tools · records · labs</text>
+              <line x1="496" y1="60" x2="536" y2="60" stroke="#C4A574" stroke-width="2"/>
+              <rect x="536" y="24" width="220" height="72" rx="10" fill="#ffffff" stroke="#001878" stroke-width="1.5"/>
+              <text x="646" y="56" text-anchor="middle" fill="#001878" font-family="Poppins, Arial, sans-serif" font-size="14" font-weight="700">Clinician plan</text>
+              <text x="646" y="76" text-anchor="middle" fill="#0A246B" font-family="Inter, Arial, sans-serif" font-size="12">Clear next steps</text>
+              <line x1="756" y1="60" x2="796" y2="60" stroke="#C4A574" stroke-width="2"/>
+              <rect x="796" y="24" width="148" height="72" rx="10" fill="#F4EFE7" stroke="#D81088" stroke-width="1.5"/>
+              <text x="870" y="66" text-anchor="middle" fill="#D81088" font-family="Poppins, Arial, sans-serif" font-size="13" font-weight="700">Ongoing</text>
+            </svg>
+          </figure>
+
           <p class="siya-h2-lede">Stress, weight, fatigue, and ADHD-type focus problems often travel together. Licensed clinicians take a structured history across those threads, then use objective inputs when they may change the plan. This is clinician-led care in one place—not automated diagnosis, and not a promise of in-house therapists or social workers.</p>
           <ul class="scan-list">
             <li>Whole-picture history: how focus, stress, sleep, weight, and energy show up together over time</li>
@@ -1010,17 +1166,6 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
           </ul>
           <p class="siya-h2-lede">If medication is part of your plan, we don’t rush it. Stimulant medication isn’t started at the first visit. You’ll review and sign a treatment agreement first, and care includes ongoing check-ins—things like scheduled follow-up, pill counts, and urine screens when they’re part of keeping treatment safe.</p>
           <p class="symptoms-transition"><strong>Screening is not diagnosis.</strong> A licensed clinician determines appropriate next steps; treatment—including medication—is never guaranteed.</p>
-        </div>
-      </section>
-
-      <!-- HIPAA / privacy practices (no SOC2 claim) -->
-      <section class="section" id="privacy-practices" aria-labelledby="privacy-practices-heading">
-        <div class="container">
-          <div class="section-header">
-            <h2 id="privacy-practices-heading">Your privacy matters</h2>
-            <p class="lead siya-h2-lead-tight">Telehealth visits and medical records are handled under HIPAA-aligned practices — with sources you can check.</p>
-          </div>
-          <p class="siya-h2-lede">We use secure telehealth and messaging workflows designed for protected health information. See our <a href="/legal/notice-of-privacy-practices">Notice of Privacy Practices</a>, <a href="/legal/privacy-policy">Privacy Policy</a>, and <a href="https://www.legitscript.com/websites/?checker_keywords=siya.health" target="_blank" rel="noopener noreferrer">LegitScript verification for siya.health</a>. Messaging security details: <a href="https://help.sprucehealth.com/hc/en-us/articles/23003305420571-Spruce-Safety-Security-and-HIPAA-Compliance-Overview" target="_blank" rel="noopener noreferrer">Spruce HIPAA &amp; security overview</a>.</p>
         </div>
       </section>
 
@@ -1064,19 +1209,19 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
       <!-- SOCIAL PROOF -->
       <!-- Testimonial quotes: founder sourcing decision pending before production promotion -->
       <section class="section reviews testimonials-premium" id="reviews"> <div class="container"> <div class="section-header testimonials-premium-header"> <h2>Trusted by adults seeking clearer answers</h2> <p class="lead siya-h2-lead-tight">Patient notes from telehealth visits. Individual experiences vary—outcomes aren’t guaranteed.</p>
- </div> <p class="siya-h2-lead-tight" style="margin:0 0 1.25rem;">Ratings live in the strip above the journeys. Quotes below still need a founder sourcing decision before production.</p> <input type="checkbox" id="siya-h2-more-reviews" class="siya-h2-more-reviews-toggle" hidden />
+ </div> <input type="checkbox" id="siya-h2-more-reviews" class="siya-h2-more-reviews-toggle" hidden />
  <label for="siya-h2-more-reviews" class="siya-h2-more-reviews-label">Show more patient notes</label>
  <div class="testimonial-cards-grid siya-h2-testimonials"> <article class="testimonial-card-premium"> <div class="testimonial-tags"> <span class="testimonial-tag">Feeling Heard</span> <span class="testimonial-tag">Compassionate Care</span> </div> <p class="testimonial-text">"I feel a personal connection and genuine empathy even through the screen... It's like someone really understood my pain and knew what to do about it."</p> <div class="testimonial-footer"> <span class="testimonial-verified">Verified Telehealth Patient</span> </div> </article> <article class="testimonial-card-premium"> <div class="testimonial-tags"> <span class="testimonial-tag">Not Rushed</span> <span class="testimonial-tag">Thorough</span> </div> <p class="testimonial-text">"Finally found a telehealth practice that feels thorough and respectful. I never feel rushed—the clinicians actually listen."</p> <div class="testimonial-footer"> <span class="testimonial-verified">Verified Telehealth Patient</span> </div> </article> <article class="testimonial-card-premium siya-h2-testimonial-extra"> <div class="testimonial-tags"> <span class="testimonial-tag">Responsive Support</span> <span class="testimonial-tag">Clear Communication</span> </div> <p class="testimonial-text">"Very knowledgeable, friendly, patient-focused and listens very well. Also very fast at helping me when one pharmacy wouldn't fill my prescription!"</p> <div class="testimonial-footer"> <span class="testimonial-verified">Verified Telehealth Patient</span> </div> </article> <article class="testimonial-card-premium siya-h2-testimonial-extra"> <div class="testimonial-tags"> <span class="testimonial-tag">Responsive Support</span> <span class="testimonial-tag">Follow-Up Care</span> </div> <p class="testimonial-text">"They cared, listened, and followed up very well. I am grateful."</p> <div class="testimonial-footer"> <span class="testimonial-verified">Verified Telehealth Patient</span> </div> </article> </div> </div> </section>
 
       <!-- STILL NOT SURE -->
-      <section class="section section-tinted" id="still-not-sure"> <div class="container"> <div class="cta-band cta-band--warm"> <h3>Still not sure where to start?</h3> <p>You don’t need to know which service you need before you reach out. Tell us what’s going on—we’ll help you figure out the next step.</p> <div class="cta-band-buttons"> <a                                           href="/redirect/meet-greet" class="button ds-button ds-button--secondary" data-siya-location="still-not-sure" data-page-type="homepage" data-component="button" data-conversion-goal="meetGreet" data-cta-slot="meetGreet" data-siya-track="meet_greet_click">Book Free Meet & Greet</a> <a href="/providers" class="button ds-button ds-button--secondary secondary" data-siya-location="still-not-sure" data-page-type="homepage" data-conversion-goal="exploreCare" data-cta-slot="exploreCare" data-component="button" data-siya-track="care_team_click">Meet the care team</a> </div> <p class="cta-microcopy homepage-contact-links"><a href="tel:+12154451244">(215) 445-1244</a> <a href="mailto:care@siya.health">care@siya.health</a></p> <p class="cta-microcopy">Secure chat and booking may open through a trusted external care platform.</p> </div> </div> </section>
+      <section class="section section-tinted" id="still-not-sure"> <div class="container"> <div class="cta-band cta-band--warm"> <h3>Still not sure where to start?</h3> <p>You don’t need to know which service you need before you reach out. Tell us what’s going on—we’ll help you figure out the next step.</p> <div class="cta-band-buttons"> <a                                           href="/redirect/meet-greet" class="button ds-button ds-button--secondary" data-siya-location="still-not-sure" data-page-type="homepage2" data-component="button" data-conversion-goal="meetGreet" data-cta-slot="meetGreet" data-siya-track="meet_greet_click">Book Free Meet & Greet</a> <a href="/providers" class="button ds-button ds-button--secondary secondary" data-siya-location="still-not-sure" data-page-type="homepage2" data-conversion-goal="exploreCare" data-cta-slot="exploreCare" data-component="button" data-siya-track="care_team_click">Meet the care team</a> </div> <p class="cta-microcopy homepage-contact-links"><a href="tel:+12154451244">(215) 445-1244</a> <a href="mailto:care@siya.health">care@siya.health</a></p> <p class="cta-microcopy">Secure chat and booking may open through a trusted external care platform.</p> </div> </div> </section>
 
       <!-- WHY SIYA EXISTS -->
       <section class="section section-tinted why-siya-exists" id="why-siya-exists"> <div class="container"> <div class="section-header"> <h2>Why Siya Health Exists</h2> <p class="lead">Built by a physician who saw what happens when healthcare prioritizes volume over people.</p> </div> <div class="why-siya-two-col"> <div class="why-siya-photo"> <img src="/assets/images/dr-sneh-pandey-founder.png" alt="Dr. Sneh Pandey, MD, founder of Siya Health, smiling in a modern office overlooking a city skyline." width="320" height="420" loading="lazy" class="why-siya-founder-img" /> </div> <div class="why-siya-content"> <div class="why-siya-story">
  <p><a href="/providers/dr-sneh-pandey">Dr. Sneh Pandey, MD</a> is board-certified in Internal Medicine and Obesity Medicine. He is licensed in <strong>California, Pennsylvania, and Florida</strong>. He's practiced across inpatient and outpatient care and has treated thousands of patients across metabolic and primary care. That experience shaped how he thinks about care.</p>
  <details class="siya-h2-more">
  <summary>Read more about why we built this</summary>
- <p>Modern healthcare often prioritizes volume over time and thoughtfulness. It affects everyone—patients who feel rushed, and providers who feel they can't practice the way they were trained.</p> <p>Siya Health was built to be different: more time with patients, clear evidence-based decisions, and no unnecessary system friction.</p> <p>Not just ADHD care—whole-person, provider-led care.</p>
+ <p>Modern healthcare often prioritizes volume over time and thoughtfulness. It affects everyone—patients who feel rushed, and providers who feel they can't practice the way they were trained.</p> <p>Siya Health was built to be different: more time with patients, clear evidence-based decisions, and no unnecessary system friction.</p> <p>Whole-person, provider-led care with time to connect the dots.</p>
  </details>
  </div> <div class="why-siya-quote-block"> <blockquote class="why-siya-quote-card"> <p class="why-siya-quote-text">"Modern healthcare forgot the human side of medicine. Siya Health was built to bring it back."</p> <cite class="why-siya-quote-cite">— Dr. Sneh Pandey, MD</cite> </blockquote> </div> </div> </div> </div> </section>
 
@@ -1085,8 +1230,8 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
 
       <!-- FINAL CTA -->
       <section class="section"> <div class="container"> <div class="cta-band"> <h3>You don't have to figure this out alone</h3> <p>A licensed clinician can help you sort symptoms, rule out overlap, and plan next steps—when clinically appropriate.</p> <div class="cta-band-buttons">
-              <a class="button ds-button ds-button--secondary secondary" href="/redirect/chat" data-siya-track="secure_chat_click" data-siya-location="final-cta" data-page-type="homepage" data-intent="homepage" data-conversion-goal="secureChat" data-cta-slot="secureChat" data-component="button">Start Secure Medical Chat</a>
-              <a class="button ds-button ds-button--secondary secondary" href="/redirect/meet-greet" data-siya-track="meet_greet_click" data-siya-location="final-cta" data-page-type="homepage" data-intent="homepage" data-conversion-goal="meetGreet" data-cta-slot="meetGreet" data-component="button">Book Free Meet &amp; Greet</a>
+              <a class="button ds-button ds-button--secondary secondary" href="/redirect/chat" data-siya-track="secure_chat_click" data-siya-location="final-cta" data-page-type="homepage2" data-intent="homepage" data-conversion-goal="secureChat" data-cta-slot="secureChat" data-component="button">Start Secure Medical Chat</a>
+              <a class="button ds-button ds-button--secondary secondary" href="/redirect/meet-greet" data-siya-track="meet_greet_click" data-siya-location="final-cta" data-page-type="homepage2" data-intent="homepage" data-conversion-goal="meetGreet" data-cta-slot="meetGreet" data-component="button">Book Free Meet &amp; Greet</a>
             </div> </div> </div> </section>
     </main>
 
@@ -1189,7 +1334,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
     <script src="trust-metrics.js"></script>
     <!-- MOBILE STICKY CTA -->
     <div class="mobile-sticky-cta" aria-hidden="true">
-      <a href="/redirect/meet-greet" class="button ds-button ds-button--primary" data-siya-location="mobile-sticky" data-page-type="homepage" data-intent="homepage" data-conversion-goal="meetGreet" data-cta-slot="meetGreet" data-component="button" data-siya-track="meet_greet_click">Book Free Meet & Greet</a>
+      <a href="/redirect/meet-greet" class="button ds-button ds-button--primary" data-siya-location="mobile-sticky" data-page-type="homepage2" data-intent="homepage" data-conversion-goal="meetGreet" data-cta-slot="meetGreet" data-component="button" data-siya-track="meet_greet_click">Book Free Meet & Greet</a>
     </div>
   <!-- SIYA:PROVIDER-ATTRIBUTION -->
     <script>
