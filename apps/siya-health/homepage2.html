@@ -1207,17 +1207,111 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
       body.page-homepage2 .symptoms-card h3,
       body.page-homepage2 .pathway-card-body h3,
-      body.page-homepage2 .flow-card h3 {
-        font-size: clamp(1.2rem, 1.6vw, 1.35rem) !important;
-        line-height: 1.25 !important;
-        letter-spacing: -0.015em;
+      body.page-homepage2 .flow-card h3,
+      body.page-homepage2 .homepage-care-compact-card h3,
+      body.page-homepage2 .siya-h2-unfolds__beat h3 {
+        font-size: clamp(1.35rem, 2vw, 1.65rem) !important;
+        line-height: 1.22 !important;
+        letter-spacing: -0.02em;
+        font-weight: 700 !important;
         color: #0A246B !important;
+      }
+      body.page-homepage2 .symptoms-card p,
+      body.page-homepage2 .pathway-card-body p {
+        font-size: var(--siya-h2-body-size);
+        line-height: var(--siya-h2-body-lh);
       }
       body.page-homepage2 .siya-h2-trust-strip__asof {
         font-size: 0.7rem;
         font-weight: 700;
         letter-spacing: 0.16em;
         text-transform: uppercase;
+      }
+
+
+      /* ===== one CTA hierarchy (primary pill | quiet text) ===== */
+      body.page-homepage2 main .siya-h2-cta-quiet,
+      body.page-homepage2 main a.siya-h2-cta-quiet {
+        display: inline;
+        color: #0A246B !important;
+        font-size: 0.95rem !important;
+        font-weight: 550 !important;
+        letter-spacing: 0.01em;
+        text-decoration: underline !important;
+        text-decoration-color: rgba(10, 36, 107, 0.28) !important;
+        text-underline-offset: 0.18em;
+        background: none !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+      }
+      body.page-homepage2 main .siya-h2-cta-quiet:hover,
+      body.page-homepage2 main .siya-h2-cta-quiet:focus-visible {
+        color: #D81088 !important;
+        text-decoration-color: rgba(216, 16, 136, 0.45) !important;
+      }
+      /* Downgrade legacy “learn more / explore / text-link” to quiet secondary */
+      body.page-homepage2 main .symptoms-card-actions .text-link,
+      body.page-homepage2 main .pathway-card-links a,
+      body.page-homepage2 main .symptoms-transition a:not(.ds-button--primary):not(.button),
+      body.page-homepage2 main a.button.secondary,
+      body.page-homepage2 main a.button.ds-button--secondary {
+        color: #0A246B !important;
+        font-size: 0.95rem !important;
+        font-weight: 550 !important;
+        text-decoration: underline !important;
+        text-decoration-color: rgba(10, 36, 107, 0.28) !important;
+        text-underline-offset: 0.18em;
+        background: none !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        display: inline !important;
+        min-height: 0 !important;
+        width: auto !important;
+      }
+      body.page-homepage2 main .pathway-card-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem 1.1rem;
+      }
+      body.page-homepage2 main .siya-h2-cta-pair .ds-button--primary,
+      body.page-homepage2 main .siya-h2-cta-pair .button.ds-button--primary,
+      body.page-homepage2 main a.ds-button--primary[href*="meet-greet"] {
+        border-radius: 999px !important;
+      }
+      /* Inline Book under symptoms → look like primary pill */
+      body.page-homepage2 main .symptoms-transition a[href*="meet-greet"] {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        padding: 0.7rem 1.35rem !important;
+        border-radius: 999px !important;
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+        text-decoration: none !important;
+        color: #fff !important;
+        background: linear-gradient(135deg, #D81088 0%, #7B2D8E 100%) !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        margin-right: 0.35rem;
+      }
+      body.page-homepage2 main .symptoms-transition a[href*="meet-greet"]:hover {
+        filter: brightness(1.05);
+        color: #fff !important;
+      }
+      body.page-homepage2 .siya-h2-more-reviews-label {
+        color: #0A246B;
+        font-size: 0.95rem;
+        font-weight: 550;
+        text-decoration: underline;
+        text-decoration-color: rgba(10, 36, 107, 0.28);
+        text-underline-offset: 0.18em;
+        cursor: pointer;
+        background: none;
+        border: 0;
       }
 
       /* ===== homepage2 scroll-motion pack ===== */
@@ -1775,7 +1869,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
               </a>
             </article>
           </div>
-          <p class="symptoms-transition"><a href="/redirect/meet-greet" data-siya-location="care-journeys-transition" data-siya-track="meet_greet_click">Book a free Meet &amp; Greet</a> — you shouldn’t have to figure it out alone.</p>
+          <div class="siya-h2-cta-pair" style="margin:1.25rem 0 0"><a href="/redirect/meet-greet" class="button ds-button ds-button--primary" data-siya-location="care-journeys-transition" data-siya-track="meet_greet_click">Book Free Meet &amp; Greet</a><a href="#how-it-works" class="siya-h2-cta-quiet" data-siya-location="care-journeys-transition">See how care unfolds</a></div>
         </div>
       </section>
 
@@ -1895,12 +1989,12 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
               </div>
             </div>
           </div>
-          <p class="symptoms-transition siya-h2-unfolds__after"><a href="/pricing">See how pricing maps to this journey →</a></p>
+          <p class="symptoms-transition siya-h2-unfolds__after"><a class="siya-h2-cta-quiet" href="/pricing">See how pricing maps to this journey →</a></p>
         </div>
       </section>
 
       <!-- COMMON CARE PATHS -->
-      <section class="section section-tinted" id="pathways"> <div class="container"> <div class="section-header"> <h2>Care journeys continue here</h2> <p class="lead siya-h2-lead-tight">What you’re noticing can lead to evaluation—and then to ongoing care.</p> </div> <div class="pathway-cards pathway-cards--five pathway-cards--editorial"> <article class="pathway-card pathway-card--editorial"> <figure class="pathway-card-media"> <img src="/assets/images/telehealth-visit.png" alt="" width="720" height="480" loading="lazy" decoding="async" /> </figure> <div class="pathway-card-body"> <h3>Primary Care</h3> <p>Ongoing visits, preventive care, refills, and follow-up—from home.</p> <div class="pathway-card-links"> <a href="/primary-care">Explore Primary Care</a> </div> </div> </article> <article class="pathway-card pathway-card--editorial"> <figure class="pathway-card-media"> <img src="/assets/images/doctor-office.png" alt="" width="720" height="480" loading="lazy" decoding="async" /> </figure> <div class="pathway-card-body"> <h3>Preventive Care</h3> <p>Stay ahead with thoughtful prevention and labs when they fit your story.</p> <div class="pathway-card-links"> <a href="/preventive-care">Explore Preventive Care</a> </div> </div> </article> <article class="pathway-card pathway-card--editorial"> <figure class="pathway-card-media"> <img src="/assets/images/pathway-adhd-care.jpg" alt="Man in his mid-30s looking satisfied and at ease" width="720" height="480" loading="lazy" decoding="async" /> </figure> <div class="pathway-card-body"> <h3>ADHD Care</h3> <p>Structured evaluation and ongoing ADHD care when appropriate—starting with our California hub.</p> <div class="pathway-card-links"> <a href="/adhd-care">ADHD evaluation &amp; care</a> <a href="/adult-adhd-california">Adult ADHD California</a> </div> </div> </article> <article class="pathway-card pathway-card--editorial"> <figure class="pathway-card-media"> <img src="/assets/images/weightloss-health.png" alt="" width="720" height="480" loading="lazy" decoding="async" /> </figure> <div class="pathway-card-body"> <h3>Weight &amp; Metabolic Health</h3> <p>Metabolic evaluation and medical weight-loss options when appropriate.</p> <div class="pathway-card-links"> <a href="/weight-loss-metabolic-health">Explore Metabolic Health</a> </div> </div> </article> <article class="pathway-card pathway-card--editorial"> <figure class="pathway-card-media"> <img src="/assets/images/editorial-exhausted-morning.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" /> </figure> <div class="pathway-card-body"> <h3>Fatigue &amp; Brain Fog</h3> <p>Symptom hubs that connect related labs and primary care—not stand-alone destinations.</p> <div class="pathway-card-links"> <a href="/fatigue">Fatigue</a> <a href="/brain-fog">Brain fog</a> </div> </div> </article> </div> </div> </section>
+      <section class="section section-tinted" id="pathways"> <div class="container"> <div class="section-header"> <h2>Care journeys continue here</h2> <p class="lead siya-h2-lead-tight">What you’re noticing can lead to evaluation—and then to ongoing care.</p> </div> <div class="pathway-cards pathway-cards--five pathway-cards--editorial"> <article class="pathway-card pathway-card--editorial"> <figure class="pathway-card-media"> <img src="/assets/images/telehealth-visit.png" alt="" width="720" height="480" loading="lazy" decoding="async" /> </figure> <div class="pathway-card-body"> <h3>Primary Care</h3> <p>Ongoing visits, preventive care, refills, and follow-up—from home.</p> <div class="pathway-card-links"> <a class="siya-h2-cta-quiet" href="/primary-care">Explore Primary Care</a> </div> </div> </article> <article class="pathway-card pathway-card--editorial"> <figure class="pathway-card-media"> <img src="/assets/images/doctor-office.png" alt="" width="720" height="480" loading="lazy" decoding="async" /> </figure> <div class="pathway-card-body"> <h3>Preventive Care</h3> <p>Stay ahead with thoughtful prevention and labs when they fit your story.</p> <div class="pathway-card-links"> <a class="siya-h2-cta-quiet" href="/preventive-care">Explore Preventive Care</a> </div> </div> </article> <article class="pathway-card pathway-card--editorial"> <figure class="pathway-card-media"> <img src="/assets/images/pathway-adhd-care.jpg" alt="Man in his mid-30s looking satisfied and at ease" width="720" height="480" loading="lazy" decoding="async" /> </figure> <div class="pathway-card-body"> <h3>ADHD Care</h3> <p>Structured evaluation and ongoing ADHD care when appropriate—starting with our California hub.</p> <div class="pathway-card-links"> <a class="siya-h2-cta-quiet" href="/adhd-care">ADHD evaluation &amp; care</a> <a class="siya-h2-cta-quiet" href="/adult-adhd-california">Adult ADHD California</a> </div> </div> </article> <article class="pathway-card pathway-card--editorial"> <figure class="pathway-card-media"> <img src="/assets/images/weightloss-health.png" alt="" width="720" height="480" loading="lazy" decoding="async" /> </figure> <div class="pathway-card-body"> <h3>Weight &amp; Metabolic Health</h3> <p>Metabolic evaluation and medical weight-loss options when appropriate.</p> <div class="pathway-card-links"> <a class="siya-h2-cta-quiet" href="/weight-loss-metabolic-health">Explore Metabolic Health</a> </div> </div> </article> <article class="pathway-card pathway-card--editorial"> <figure class="pathway-card-media"> <img src="/assets/images/editorial-exhausted-morning.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" /> </figure> <div class="pathway-card-body"> <h3>Fatigue &amp; Brain Fog</h3> <p>Symptom hubs that connect related labs and primary care—not stand-alone destinations.</p> <div class="pathway-card-links"> <a class="siya-h2-cta-quiet" href="/fatigue">Fatigue</a> <a class="siya-h2-cta-quiet" href="/brain-fog">Brain fog</a> </div> </div> </article> </div> </div> </section>
 
       <!-- PROVIDER TRUST -->
       <!-- SIYA:CARE-TEAM -->
@@ -1927,7 +2021,7 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
               </div>
             </article>
             </div>
-            <a class="button secondary" href="/providers">Meet the full care team (6 clinicians)</a>
+            <a class="siya-h2-cta-quiet" href="/providers" data-siya-location="care-team">Meet the full care team (6 clinicians)</a>
           </div>
         </div>
       </section>
@@ -2106,12 +2200,19 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
         var selectors = [
           ".section-header",
           ".symptoms-card",
+          ".pathway-card",
+          ".faq-accordion-card",
+          ".cta-band",
           "#how-we-diagnose .siya-diagnose-flow",
           "#how-we-diagnose .siya-h2-lede",
           "#how-we-diagnose li",
           "#how-we-diagnose .symptoms-transition",
           ".testimonial-card-premium",
-          ".homepage-care-compact-card"
+          ".homepage-care-compact-card",
+          ".siya-h2-unfolds__header",
+          ".siya-h2-trust-tile",
+          ".why-patients-copy",
+          ".why-siya-content"
         ];
         var nodes = [];
         selectors.forEach(function (sel) {
