@@ -24,14 +24,17 @@
 
 .ds-button--primary,
 .button.ds-button--primary {
-  background: var(--ds-primary);
+  background: var(--ds-accent-gradient);
   color: var(--ds-white);
   border: none;
+  border-radius: var(--ds-radius-pill);
+  box-shadow: var(--ds-shadow-button);
 }
 
 .ds-button--primary:hover,
 .button.ds-button--primary:hover {
-  background: var(--ds-primary-hover);
+  background: var(--ds-accent-gradient);
+  filter: brightness(1.05);
   color: var(--ds-white);
 }
 
@@ -51,14 +54,17 @@
 .ds-button--accent,
 .button.ds-button--accent {
   background: var(--ds-accent-gradient);
-  background-color: var(--ds-accent); /* fallback */
+  background-color: var(--ds-accent);
   color: var(--ds-white);
   border: none;
+  border-radius: var(--ds-radius-pill);
+  box-shadow: var(--ds-shadow-button);
 }
 
 .ds-button--accent:hover,
 .button.ds-button--accent:hover {
-  background: var(--ds-accent-gradient-hover);
+  background: var(--ds-accent-gradient);
+  filter: brightness(1.05);
   color: var(--ds-white);
 }
 

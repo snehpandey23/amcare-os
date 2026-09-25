@@ -46,7 +46,8 @@
     "entity:brain-fog": "node scripts/generate-brain-fog-entity-page.mjs",
     "entity:primary-care": "node scripts/generate-primary-care-entity-page.mjs",
     "guide:kb": "node ../siya-assistant/scripts/build-public-kb.mjs",
-    "assets:hipaa-badge": "node scripts/export-hipaa-badge.mjs"
+    "assets:hipaa-badge": "node scripts/export-hipaa-badge.mjs",
+    "export:video-cards": "node scripts/export-video-cards.mjs"
   },
   "main": "asrs-screener.js",
   "directories": {

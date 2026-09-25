@@ -1,8 +1,8 @@
 /**
  * Siya AI Concierge — sitewide embed loader (iframe → siya-guide.vercel.app/embed)
  *
- * Closed launcher must stay ~360×96 so the embed pill ("Need help? Talk to…")
- * is not clipped. Do NOT shrink to a square — that crops the chip and looks broken.
+ * Closed launcher is a compact circular FAB (~72×72). Do not force a wide pill —
+ * the Guide embed is icon-only until opened. Open expands the iframe to the chat panel.
  * Tap-theft on ASRS questions is handled by hiding the iframe while
  * body.asrs-questionnaire-active is set.
  */
@@ -11,8 +11,8 @@
   window.__siyaConciergeLoaded = true;
 
   var ORIGIN = 'https://siya-guide.vercel.app';
-  var CLOSED_H = 96;
-  var CLOSED_W = 360;
+  var CLOSED_H = 76;
+  var CLOSED_W = 76;
   var iframe = document.createElement('iframe');
   iframe.src = ORIGIN + '/embed';
   iframe.title = 'Siya AI Concierge';
@@ -58,10 +58,6 @@
     return lift;
   }
 
-  function closedWidth() {
-    return Math.min(CLOSED_W, Math.max(280, window.innerWidth - 24));
-  }
-
   function isOpen() {
     return parseInt(iframe.style.height, 10) > CLOSED_H + 24;
   }
@@ -96,8 +92,8 @@
       iframe.style.width = Math.min(440, window.innerWidth - 24) + 'px';
       iframe.style.height = Math.min(720, window.innerHeight - lift - 12) + 'px';
     } else {
-      // Match embed closed size (pill launcher). Never crop to a square.
-      iframe.style.width = closedWidth() + 'px';
+      // Compact circular FAB — matches Guide embed closed launcher
+      iframe.style.width = CLOSED_W + 'px';
       iframe.style.height = CLOSED_H + 'px';
     }
   }

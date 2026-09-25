@@ -46,8 +46,8 @@ const REDIRECT_SHELLS = {
 
 /** External redirect shells + dev surfaces — never in sitemap */
 const SITEMAP_EXCLUDE = new Set([
-  'homepage2.html', // team hero review — noindex, not in primary nav
-  'homepage3.html', // audience-split preview — noindex, not in primary nav
+  'homepage2.html', // WIP homepage — noindex until promoted
+  // homepage3 removed 2026-09 — redirect /homepage3 → /
   'visual-components.html',
   'adhd-screening-results.html',
   'blog/adult-adhd-treatment-california-2026.html', // EG-P0-01 retired stub
@@ -93,7 +93,7 @@ function walkHtmlFiles(dir, baseRel = '') {
     if (e.name.startsWith('.')) continue;
     if (skipDirs.has(e.name)) continue;
     // Local homepage experiments — never production chrome
-    if (/^preview-home/i.test(e.name) || e.name === 'homepage2.html' || e.name === 'homepage3.html') continue;
+    if (/^preview-home/i.test(e.name) || e.name === 'homepage2.html') continue;
     const rel = path.join(baseRel, e.name).replace(/\\/g, '/');
     const full = path.join(dir, e.name);
     if (e.isDirectory()) out.push(...walkHtmlFiles(full, rel));

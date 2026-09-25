@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Siya Health — video cards (internal)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #F4EFE7;
+      --navy: #001878;
+      --dark-navy: #0A246B;
+      --magenta: #D81088;
+      --font-heading: "Poppins", "Inter", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #1a1a1a;
+      color: #eee;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    .page-note {
+      max-width: 40rem;
+      margin: 0 auto 2rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #bbb;
+    }
+    .page-note code { color: #fff; }
+
+    .deck {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .card-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .card-meta {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #888;
+      font-family: Inter, sans-serif;
+    }
+
+    /* Checkerboard behind transparent cards so alpha is visible in browser */
+    .card-wrap--transparent {
+      background:
+        linear-gradient(45deg, #333 25%, transparent 25%) 0 0 / 24px 24px,
+        linear-gradient(-45deg, #333 25%, transparent 25%) 0 12px / 24px 24px,
+        linear-gradient(45deg, transparent 75%, #333 75%) 12px -12px / 24px 24px,
+        linear-gradient(-45deg, transparent 75%, #333 75%) -12px 0 / 24px 24px,
+        #222;
+      padding: 12px;
+      border-radius: 4px;
+    }
+
+    .video-card {
+      width: 1920px;
+      height: 1080px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 160px;
+      text-align: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .video-card--cream {
+      background: var(--cream);
+    }
+
+    .video-card--transparent {
+      background: transparent;
+    }
+
+    .video-card__line {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 64px;
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      color: var(--dark-navy);
+      max-width: 18ch;
+      text-wrap: balance;
+    }
+
+    /* Brand emphasis LOCKED — Option E (settled; no sweep for still export) */
+    .siya-em {
+      font-style: normal;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline;
+      color: transparent !important;
+      -webkit-text-fill-color: transparent !important;
+      background-image: linear-gradient(
+        90deg,
+        #D81088 0%,
+        #D81088 28%,
+        #A81490 48%,
+        #0A246B 68%,
+        #001878 100%
+      ) !important;
+      background-size: 100% 100% !important;
+      background-position: 0 0 !important;
+      background-repeat: no-repeat !important;
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      padding: 0 0.02em;
+      animation: none !important;
+    }
+
+    /* URL line slightly smaller when paired with a short CTA */
+    .video-card__line--cta {
+      max-width: 22ch;
+    }
+    .video-card__url {
+      display: block;
+      margin-top: 0.55em;
+      font-size: 0.72em;
+      letter-spacing: -0.02em;
+      color: var(--dark-navy);
+      -webkit-text-fill-color: var(--dark-navy);
+      background: none;
+    }
+  </style>
+</head>
+<body>
+  <p class="page-note">
+    Internal video title cards (noindex, unlinked). Style notes:
+    <code>exports/video-style/STYLE.md</code>. Export PNGs with
+    <code>node scripts/export-video-cards.mjs</code>.
+  </p>
+
+  <div class="deck" id="video-card-deck">
+
+    <!-- 01 -->
+    <div class="card-wrap" data-export="01-cream">
+      <span class="card-meta">01 · cream</span>
+      <article class="video-card video-card--cream" id="card-01" data-card="01" data-variant="cream">
+        <p class="video-card__line">Most people don’t lack health coverage.</p>
+      </article>
+    </div>
+    <div class="card-wrap card-wrap--transparent" data-export="01-transparent">
+      <span class="card-meta">01 · transparent</span>
+      <article class="video-card video-card--transparent" id="card-01-transparent" data-card="01" data-variant="transparent">
+        <p class="video-card__line">Most people don’t lack health coverage.</p>
+      </article>
+    </div>
+
+    <!-- 02 -->
+    <div class="card-wrap" data-export="02-cream">
+      <span class="card-meta">02 · cream</span>
+      <article class="video-card video-card--cream" id="card-02" data-card="02" data-variant="cream">
+        <p class="video-card__line">They lack care they can <span class="siya-em">actually use</span>.</p>
+      </article>
+    </div>
+    <div class="card-wrap card-wrap--transparent" data-export="02-transparent">
+      <span class="card-meta">02 · transparent</span>
+      <article class="video-card video-card--transparent" id="card-02-transparent" data-card="02" data-variant="transparent">
+        <p class="video-card__line">They lack care they can <span class="siya-em">actually use</span>.</p>
+      </article>
+    </div>
+
+    <!-- 03 -->
+    <div class="card-wrap" data-export="03-cream">
+      <span class="card-meta">03 · cream</span>
+      <article class="video-card video-card--cream" id="card-03" data-card="03" data-variant="cream">
+        <p class="video-card__line">Siya Health — <span class="siya-em">One care team.</span> Your whole team.</p>
+      </article>
+    </div>
+    <div class="card-wrap card-wrap--transparent" data-export="03-transparent">
+      <span class="card-meta">03 · transparent</span>
+      <article class="video-card video-card--transparent" id="card-03-transparent" data-card="03" data-variant="transparent">
+        <p class="video-card__line">Siya Health — <span class="siya-em">One care team.</span> Your whole team.</p>
+      </article>
+    </div>
+
+    <!-- 04 -->
+    <div class="card-wrap" data-export="04-cream">
+      <span class="card-meta">04 · cream</span>
+      <article class="video-card video-card--cream" id="card-04" data-card="04" data-variant="cream">
+        <p class="video-card__line">Sleep. Focus. Stress. Energy.</p>
+      </article>
+    </div>
+    <div class="card-wrap card-wrap--transparent" data-export="04-transparent">
+      <span class="card-meta">04 · transparent</span>
+      <article class="video-card video-card--transparent" id="card-04-transparent" data-card="04" data-variant="transparent">
+        <p class="video-card__line">Sleep. Focus. Stress. Energy.</p>
+      </article>
+    </div>
+
+    <!-- 05 -->
+    <div class="card-wrap" data-export="05-cream">
+      <span class="card-meta">05 · cream</span>
+      <article class="video-card video-card--cream" id="card-05" data-card="05" data-variant="cream">
+        <p class="video-card__line"><span class="siya-em">One conversation.</span> Not five referrals.</p>
+      </article>
+    </div>
+    <div class="card-wrap card-wrap--transparent" data-export="05-transparent">
+      <span class="card-meta">05 · transparent</span>
+      <article class="video-card video-card--transparent" id="card-05-transparent" data-card="05" data-variant="transparent">
+        <p class="video-card__line"><span class="siya-em">One conversation.</span> Not five referrals.</p>
+      </article>
+    </div>
+
+    <!-- 06 -->
+    <div class="card-wrap" data-export="06-cream">
+      <span class="card-meta">06 · cream</span>
+      <article class="video-card video-card--cream" id="card-06" data-card="06" data-variant="cream">
+        <p class="video-card__line">The same team. <span class="siya-em">Every time.</span></p>
+      </article>
+    </div>
+    <div class="card-wrap card-wrap--transparent" data-export="06-transparent">
+      <span class="card-meta">06 · transparent</span>
+      <article class="video-card video-card--transparent" id="card-06-transparent" data-card="06" data-variant="transparent">
+        <p class="video-card__line">The same team. <span class="siya-em">Every time.</span></p>
+      </article>
+    </div>
+
+    <!-- 07 -->
+    <div class="card-wrap" data-export="07-cream">
+      <span class="card-meta">07 · cream</span>
+      <article class="video-card video-card--cream" id="card-07" data-card="07" data-variant="cream">
+        <p class="video-card__line">None of this is her job. <span class="siya-em">All of it is ours.</span></p>
+      </article>
+    </div>
+    <div class="card-wrap card-wrap--transparent" data-export="07-transparent">
+      <span class="card-meta">07 · transparent</span>
+      <article class="video-card video-card--transparent" id="card-07-transparent" data-card="07" data-variant="transparent">
+        <p class="video-card__line">None of this is her job. <span class="siya-em">All of it is ours.</span></p>
+      </article>
+    </div>
+
+    <!-- 08 -->
+    <div class="card-wrap" data-export="08-cream">
+      <span class="card-meta">08 · cream</span>
+      <article class="video-card video-card--cream" id="card-08" data-card="08" data-variant="cream">
+        <p class="video-card__line">You see aggregate results. <span class="siya-em">Never who, or why.</span></p>
+      </article>
+    </div>
+    <div class="card-wrap card-wrap--transparent" data-export="08-transparent">
+      <span class="card-meta">08 · transparent</span>
+      <article class="video-card video-card--transparent" id="card-08-transparent" data-card="08" data-variant="transparent">
+        <p class="video-card__line">You see aggregate results. <span class="siya-em">Never who, or why.</span></p>
+      </article>
+    </div>
+
+    <!-- 09 -->
+    <div class="card-wrap" data-export="09-cream">
+      <span class="card-meta">09 · cream</span>
+      <article class="video-card video-card--cream" id="card-09" data-card="09" data-variant="cream">
+        <p class="video-card__line video-card__line--cta">
+          <span class="siya-em">Let’s talk.</span>
+          <span class="video-card__url">siya.health/employers</span>
+        </p>
+      </article>
+    </div>
+    <div class="card-wrap card-wrap--transparent" data-export="09-transparent">
+      <span class="card-meta">09 · transparent</span>
+      <article class="video-card video-card--transparent" id="card-09-transparent" data-card="09" data-variant="transparent">
+        <p class="video-card__line video-card__line--cta">
+          <span class="siya-em">Let’s talk.</span>
+          <span class="video-card__url">siya.health/employers</span>
+        </p>
+      </article>
+    </div>
+
+  </div>
+</body>
+</html>

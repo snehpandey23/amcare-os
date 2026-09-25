@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Preview — Care model (connected boxes) | Siya Health</title>
+    <link rel="preload" href="/styles.css" as="style" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      body.page-care-preview {
+        margin: 0;
+        background: #F4EFE7;
+        color: #0A246B;
+        font-family: Inter, system-ui, sans-serif;
+      }
+      .care-preview-banner {
+        background: #001878;
+        color: #fff;
+        padding: 0.75rem 1.25rem;
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+      .care-preview-banner a { color: #F4EFE7; }
+      .care-preview-banner strong { font-weight: 700; }
+      .care-preview-main {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 2.5rem 1.25rem 4rem;
+      }
+      .section-header { text-align: center; margin: 0 auto 1.75rem; max-width: 40rem; }
+      .section-header h2 {
+        margin: 0 0 0.65rem;
+        font-family: Poppins, Inter, sans-serif;
+        font-size: clamp(1.65rem, 3vw, 2.15rem);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        color: #0A246B;
+        line-height: 1.15;
+      }
+      .siya-em {
+        color: #D81088;
+      }
+      .lead {
+        margin: 0 auto;
+        font-size: 1.125rem;
+        line-height: 1.55;
+        color: rgba(10, 36, 107, 0.78);
+        max-width: 36rem;
+      }
+
+      /* Match homepage2 notice / access cards */
+      .siya-h2-notice-item {
+        margin: 0;
+        padding: 1.25rem 1.35rem;
+        border-radius: 1.1rem;
+        background: rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(0, 24, 120, 0.1);
+        text-align: left;
+        cursor: pointer;
+        transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        position: relative;
+        z-index: 2;
+      }
+      .siya-h2-notice-item:hover,
+      .siya-h2-notice-item.is-open,
+      .siya-h2-notice-item:focus-visible {
+        background: rgba(255, 255, 255, 0.82);
+        border-color: rgba(216, 16, 136, 0.28);
+        box-shadow: 0 10px 28px rgba(0, 24, 120, 0.07);
+        outline: none;
+      }
+      .siya-h2-notice-item__icon {
+        display: inline-flex;
+        width: 2.15rem;
+        height: 2.15rem;
+        margin: 0 0 0.65rem;
+        color: #D81088;
+      }
+      .siya-h2-notice-item__icon svg { width: 100%; height: 100%; }
+      .siya-h2-notice-item h3 {
+        margin: 0;
+        font-family: Poppins, Inter, sans-serif;
+        font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+        font-weight: 700;
+        line-height: 1.25;
+        color: #0A246B;
+      }
+      .siya-h2-care-flow__detail {
+        display: block;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.45;
+        color: rgba(10, 36, 107, 0.78);
+        transition: max-height 0.35s ease, opacity 0.3s ease, margin 0.3s ease;
+      }
+      .siya-h2-notice-item.is-open .siya-h2-care-flow__detail,
+      .siya-h2-notice-item:hover .siya-h2-care-flow__detail,
+      .siya-h2-notice-item:focus-within .siya-h2-care-flow__detail {
+        max-height: 7.5rem;
+        opacity: 1;
+        margin-top: 0.45rem;
+      }
+
+      /* Connected box flow — 3 × 2 snake */
+      .siya-h2-care-flow {
+        position: relative;
+        max-width: 56rem;
+        margin: 0 auto;
+      }
+      .siya-h2-care-flow__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 2.25rem minmax(0, 1fr) 2.25rem minmax(0, 1fr);
+        grid-template-rows: auto 2.25rem auto;
+        gap: 0;
+        align-items: stretch;
+      }
+      .siya-h2-care-flow__grid > [data-step="1"] { grid-column: 1; grid-row: 1; }
+      .siya-h2-care-flow__grid > [data-step="2"] { grid-column: 3; grid-row: 1; }
+      .siya-h2-care-flow__grid > [data-step="3"] { grid-column: 5; grid-row: 1; }
+      /* Bottom row snakes right→left: 4 under 3, then 5, then 6 */
+      .siya-h2-care-flow__grid > [data-step="4"] { grid-column: 5; grid-row: 3; }
+      .siya-h2-care-flow__grid > [data-step="5"] { grid-column: 3; grid-row: 3; }
+      .siya-h2-care-flow__grid > [data-step="6"] { grid-column: 1; grid-row: 3; }
+
+      .siya-h2-care-flow__arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #001878;
+        pointer-events: none;
+      }
+      .siya-h2-care-flow__arrow svg {
+        width: 1.65rem;
+        height: 1.65rem;
+        overflow: visible;
+      }
+      .siya-h2-care-flow__arrow--h { grid-row: 1; }
+      .siya-h2-care-flow__arrow--h[data-from="1"] { grid-column: 2; }
+      .siya-h2-care-flow__arrow--h[data-from="2"] { grid-column: 4; }
+      /* Bottom arrows point left (4→5→6 visually right-to-left) */
+      .siya-h2-care-flow__arrow--h[data-from="4"] { grid-column: 4; grid-row: 3; }
+      .siya-h2-care-flow__arrow--h[data-from="5"] { grid-column: 2; grid-row: 3; }
+      .siya-h2-care-flow__arrow--h[data-from="4"] svg,
+      .siya-h2-care-flow__arrow--h[data-from="5"] svg {
+        transform: scaleX(-1);
+      }
+      .siya-h2-care-flow__arrow--v {
+        grid-column: 5;
+        grid-row: 2;
+      }
+
+      /* Escalation chord overlay: 6 → 1 (dashed = as-needed; no caption) */
+      .siya-h2-care-flow__escalate-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        overflow: visible;
+      }
+      .siya-h2-care-flow__escalate-path {
+        fill: none;
+        stroke: #D81088;
+        stroke-width: 2.25;
+        stroke-linecap: round;
+        stroke-dasharray: 7 7;
+        opacity: 0.92;
+      }
+
+      .siya-h2-care-flow__caption {
+        margin: 1.5rem auto 0;
+        max-width: 38rem;
+        text-align: center;
+        font-size: 0.98rem;
+        line-height: 1.5;
+        color: rgba(10, 36, 107, 0.78);
+      }
+      .siya-h2-care-flow__hint {
+        margin: 0.5rem auto 0;
+        text-align: center;
+        font-size: 0.78rem;
+        color: rgba(10, 36, 107, 0.55);
+      }
+
+      @media (max-width: 800px) {
+        .siya-h2-care-flow__grid {
+          grid-template-columns: 1fr;
+          grid-template-rows: none;
+          gap: 0.35rem;
+        }
+        .siya-h2-care-flow__grid > [data-step],
+        .siya-h2-care-flow__arrow {
+          grid-column: 1 !important;
+          grid-row: auto !important;
+        }
+        .siya-h2-care-flow__arrow--h svg {
+          transform: rotate(90deg);
+        }
+        .siya-h2-care-flow__escalate-svg {
+          display: none;
+        }
+        .siya-h2-care-flow__escalate-mobile {
+          display: block;
+          margin: 0.85rem 0 0.25rem;
+          padding: 0.65rem 0.85rem;
+          border-left: 3px dashed #D81088;
+          font-size: 0.85rem;
+          color: #D81088;
+          font-weight: 650;
+        }
+      }
+      @media (min-width: 801px) {
+        .siya-h2-care-flow__escalate-mobile { display: none; }
+      }
+    </style>
+  </head>
+  <body class="page-care-preview">
+    <div class="care-preview-banner">
+      <strong>PREVIEW ONLY — not live on homepage2.</strong>
+      Connected-box care model (Prompt 26 revised). Review spacing + escalation chord, then say when to promote.
+      · <a href="/homepage2">Current live homepage2</a>
+    </div>
+
+    <main class="care-preview-main">
+      <section id="how-it-works" aria-labelledby="how-it-works-heading">
+        <div class="section-header">
+          <h2 id="how-it-works-heading">Explore our <span class="siya-em">care model</span></h2>
+          <p class="lead">One continuous loop — from what you’re noticing to a plan your care team actually follows through on.</p>
+        </div>
+
+        <div class="siya-h2-care-flow" data-siya-care-flow>
+          <div class="siya-h2-care-flow__grid">
+            <article class="siya-h2-notice-item" data-step="1" tabindex="0" role="button" aria-expanded="false">
+              <span class="siya-h2-notice-item__icon" aria-hidden="true">
+                <svg viewBox="0 0 40 40" fill="none"><path d="M8 12h18a5 5 0 0 1 5 5v7a5 5 0 0 1-5 5H18l-6 6v-6H8a5 5 0 0 1-5-5v-7a5 5 0 0 1 5-5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+              </span>
+              <h3>Tell us everything</h3>
+              <p class="siya-h2-care-flow__detail">A safe space to share every concern — physical and mental, without filtering down to one issue.</p>
+            </article>
+
+            <span class="siya-h2-care-flow__arrow siya-h2-care-flow__arrow--h" data-from="1" aria-hidden="true">
+              <svg viewBox="0 0 28 16" fill="none"><path d="M2 8h20" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"/><path d="M18 3.5L24.5 8 18 12.5" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+
+            <article class="siya-h2-notice-item" data-step="2" tabindex="0" role="button" aria-expanded="false">
+              <span class="siya-h2-notice-item__icon" aria-hidden="true">
+                <svg viewBox="0 0 40 40" fill="none"><path d="M13 28V15h14v13" stroke="currentColor" stroke-width="2"/><path d="M16 15v-3a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/><circle cx="20" cy="22" r="2.5" fill="currentColor"/></svg>
+              </span>
+              <h3>Comprehensive clinical evaluation</h3>
+              <p class="siya-h2-care-flow__detail">Unhurried, with your provider — more than one visit if that’s what it takes.</p>
+            </article>
+
+            <span class="siya-h2-care-flow__arrow siya-h2-care-flow__arrow--h" data-from="2" aria-hidden="true">
+              <svg viewBox="0 0 28 16" fill="none"><path d="M2 8h20" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"/><path d="M18 3.5L24.5 8 18 12.5" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+
+            <article class="siya-h2-notice-item" data-step="3" tabindex="0" role="button" aria-expanded="false">
+              <span class="siya-h2-notice-item__icon" aria-hidden="true">
+                <svg viewBox="0 0 40 40" fill="none"><path d="M15 6h10v7l3.5 5.5V32a3.5 3.5 0 0 1-3.5 3.5H15A3.5 3.5 0 0 1 11.5 32V18.5L15 13V6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M15 13h10" stroke="currentColor" stroke-width="2"/></svg>
+              </span>
+              <h3>Testing as needed</h3>
+              <p class="siya-h2-care-flow__detail">Additional or cognitive testing, ordered as needed.</p>
+            </article>
+
+            <span class="siya-h2-care-flow__arrow siya-h2-care-flow__arrow--v" aria-hidden="true">
+              <svg viewBox="0 0 16 28" fill="none"><path d="M8 2v20" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"/><path d="M3.5 18L8 24.5 12.5 18" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+
+            
+            <article class="siya-h2-notice-item" data-step="4" tabindex="0" role="button" aria-expanded="false">
+              <span class="siya-h2-notice-item__icon" aria-hidden="true">
+                <svg viewBox="0 0 40 40" fill="none"><rect x="10" y="7" width="20" height="26" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M15 15h10M15 20h10M15 25h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </span>
+              <h3>Personalized plan</h3>
+              <p class="siya-h2-care-flow__detail">Built on objective evidence, shaped around your job and your life — decided together with you.</p>
+            </article>
+
+            <span class="siya-h2-care-flow__arrow siya-h2-care-flow__arrow--h" data-from="4" aria-hidden="true">
+              <svg viewBox="0 0 28 16" fill="none"><path d="M2 8h20" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"/><path d="M18 3.5L24.5 8 18 12.5" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+
+            <article class="siya-h2-notice-item" data-step="5" tabindex="0" role="button" aria-expanded="false">
+              <span class="siya-h2-notice-item__icon" aria-hidden="true">
+                <svg viewBox="0 0 40 40" fill="none"><rect x="11" y="8" width="16" height="22" rx="2" stroke="currentColor" stroke-width="2"/><path d="M15 15h8M15 20h8M15 25h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="28" cy="28" r="6" fill="#F4EFE7" stroke="currentColor" stroke-width="2"/><path d="M25.8 28l1.5 1.5L30.5 26.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <h3>Continuous care</h3>
+              <p class="siya-h2-care-flow__detail">Care coordination handled by your care team — refills, follow-ups, and more.</p>
+            </article>
+
+            <span class="siya-h2-care-flow__arrow siya-h2-care-flow__arrow--h" data-from="5" aria-hidden="true">
+              <svg viewBox="0 0 28 16" fill="none"><path d="M2 8h20" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"/><path d="M18 3.5L24.5 8 18 12.5" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+
+            <article class="siya-h2-notice-item" data-step="6" tabindex="0" role="button" aria-expanded="false">
+              <span class="siya-h2-notice-item__icon" aria-hidden="true">
+                <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="12" stroke="currentColor" stroke-width="2"/><circle cx="20" cy="20" r="4" stroke="currentColor" stroke-width="2"/><path d="M20 8v3.5M20 28.5V32M8 20h3.5M28.5 20H32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </span>
+              <h3>Tracked &amp; escalated</h3>
+              <p class="siya-h2-care-flow__detail">Subjective + objective tracking — and a second look when something shifts.</p>
+            </article>
+</div>
+
+          <svg class="siya-h2-care-flow__escalate-svg" aria-hidden="true">
+            <defs>
+              <marker id="escArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="#D81088"/>
+              </marker>
+            </defs>
+            <path class="siya-h2-care-flow__escalate-path" id="siya-care-escalate-path" marker-end="url(#escArrow)" d="M0 0"/>
+          </svg>
+
+          <p class="siya-h2-care-flow__escalate-mobile">Dashed path escalates back to Tell us everything</p>
+
+          <p class="siya-h2-care-flow__caption">A closed loop — from the full story to follow-through, with a path back to the clinician when tracking says you need one.</p>
+          <p class="siya-h2-care-flow__hint">Hover or tap a step for one more beat · magenta dashed chord = escalate back to the start</p>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        var root = document.querySelector("[data-siya-care-flow]");
+        if (!root) return;
+        var cards = Array.prototype.slice.call(root.querySelectorAll(".siya-h2-notice-item"));
+        var canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+        cards.forEach(function (card) {
+          function open() {
+            cards.forEach(function (other) {
+              if (other !== card) {
+                other.classList.remove("is-open");
+                other.setAttribute("aria-expanded", "false");
+              }
+            });
+            card.classList.add("is-open");
+            card.setAttribute("aria-expanded", "true");
+          }
+          function close() {
+            card.classList.remove("is-open");
+            card.setAttribute("aria-expanded", "false");
+          }
+          if (canHover) {
+            card.addEventListener("mouseenter", open);
+            card.addEventListener("mouseleave", close);
+            card.addEventListener("focus", open);
+            card.addEventListener("blur", close);
+          } else {
+            card.addEventListener("click", function () {
+              if (card.classList.contains("is-open")) close();
+              else open();
+            });
+          }
+        });
+
+        function routeEscalate() {
+          var svg = root.querySelector(".siya-h2-care-flow__escalate-svg");
+          var path = root.querySelector("#siya-care-escalate-path");
+          var from = root.querySelector('[data-step="6"]');
+          var to = root.querySelector('[data-step="1"]');
+          if (!svg || !path || !from || !to || window.matchMedia("(max-width: 800px)").matches) return;
+
+          var rootBox = root.getBoundingClientRect();
+          var a = from.getBoundingClientRect();
+          var b = to.getBoundingClientRect();
+          /* 6 (bottom-left) → 1 (top-left): short vertical escalate on the left column */
+          var x1 = a.left + a.width * 0.5 - rootBox.left;
+          var y1 = a.top - rootBox.top + 4;
+          var x2 = b.left + b.width * 0.5 - rootBox.left;
+          var y2 = b.bottom - rootBox.top - 4;
+          var midX = (x1 + x2) / 2 - 28;
+          var midY = (y1 + y2) / 2;
+          path.setAttribute(
+            "d",
+            "M " + x1.toFixed(1) + " " + y1.toFixed(1) +
+            " C " + midX.toFixed(1) + " " + y1.toFixed(1) +
+            ", " + midX.toFixed(1) + " " + y2.toFixed(1) +
+            ", " + x2.toFixed(1) + " " + y2.toFixed(1)
+          );
+          svg.setAttribute("viewBox", "0 0 " + rootBox.width + " " + rootBox.height);
+          svg.setAttribute("width", String(Math.ceil(rootBox.width)));
+          svg.setAttribute("height", String(Math.ceil(rootBox.height)));
+        }
+
+        routeEscalate();
+        window.addEventListener("resize", routeEscalate);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(routeEscalate);
+      })();
+    </script>
+  </body>
+</html>

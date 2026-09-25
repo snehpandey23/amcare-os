@@ -75,14 +75,15 @@ for (const doc of PUBLISHED_LEGAL_DOCUMENTS) {
 const hubLegalPath = path.join(SITE_ROOT, 'legal', 'index.html');
 if (fs.existsSync(hubLegalPath)) {
   const hubHtml = fs.readFileSync(hubLegalPath, 'utf8');
-  if (!hubHtml.includes(CANONICAL_ENTITY_STATEMENT)) {
-    errors.push('Legal hub missing canonical entity statement');
+  // Entity statement may live in Terms (+ legal-meta aside), not as a hub H2.
+  if (!hubHtml.includes(CANONICAL_ENTITY_STATEMENT) && !hubHtml.includes('#entity-structure')) {
+    errors.push('Legal hub missing entity structure pointer (aside statement or Terms #entity-structure link)');
   }
 }
 
 const htmlFiles = walkHtml('.');
+// Footer primary policies: Terms + Privacy. Hub is no longer a footer link.
 const requiredFooterHrefs = [
-  LEGAL_LINKS.hub,
   LEGAL_LINKS.terms,
   LEGAL_LINKS.privacy,
   LEGAL_LINKS.noticeOfPrivacy,
@@ -107,14 +108,19 @@ for (const rel of htmlFiles) {
     }
   }
 
-  // Sitewide pages with footer must include standard legal links
+  // Sitewide pages with footer must include standard policy links
   if (html.includes('<footer')) {
     const footer = extractFooter(html);
-    if (footer.includes('<h4>Legal</h4>')) {
+    const isPolicyCol =
+      footer.includes('<h4>Policies</h4>') || footer.includes('<h4>Legal</h4>');
+    if (isPolicyCol) {
       for (const href of requiredFooterHrefs) {
         if (!footer.includes(`href="${href}"`)) {
           errors.push(`Missing legal footer link ${href}: ${rel}`);
         }
+      }
+      if (footer.includes('Legal &amp; Compliance') || footer.includes('>Legal & Compliance<')) {
+        errors.push(`Footer still exposes Legal & Compliance hub link (use Terms + Privacy only): ${rel}`);
       }
       if (isControlledSubstanceLinkPage(rel) && !footer.includes(LEGAL_LINKS.controlledSubstanceTreatment)) {
         errors.push(`Missing Controlled Substance Treatment Agreement link: ${rel}`);

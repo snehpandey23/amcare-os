@@ -278,7 +278,7 @@ function buildPage(city) {
 
     <footer class="footer">
       <div class="container">
-        <p><a href="/adhd-care">ADHD Care</a> · <a href="/providers">Care Team</a> · <a href="/legal">Legal</a></p>
+        <p><a href="/adhd-care">ADHD Care</a> · <a href="/providers">Care Team</a> · <a href="/legal/terms-of-use">Terms of Use</a></p>
       </div>
     </footer>
   </body>

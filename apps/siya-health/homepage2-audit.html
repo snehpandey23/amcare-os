@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Homepage2 audit proof · Siya Health</title>
+  <meta name="robots" content="noindex" />
+  <style>
+    body { margin: 0; font: 15px/1.45 system-ui, sans-serif; background: #F4EFE7; color: #0A246B; padding: 1.5rem; }
+    h1 { font-size: 1.25rem; margin: 0 0 0.5rem; }
+    code { background: rgba(0,24,120,0.08); padding: 0.1em 0.35em; border-radius: 4px; }
+    .card { background: #fff; border: 1px solid rgba(0,24,120,0.12); border-radius: 12px; padding: 1rem 1.15rem; margin: 1rem 0; }
+    img, video { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid rgba(0,24,120,0.12); }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { text-align: left; padding: 0.4rem 0.5rem; border-bottom: 1px solid rgba(0,24,120,0.1); vertical-align: top; }
+    .ok { color: #0a7a3e; font-weight: 650; }
+    .warn { color: #a15c00; font-weight: 650; }
+  </style>
+</head>
+<body>
+  <h1>Homepage2 live audit proof</h1>
+  <p>Public artifacts for <code>/homepage2</code> — not local paths. Stamp expected: <code>SIYA-H2-VERIFY-PASS-20260924T0630</code>.</p>
+
+  <div class="card">
+    <h2>Ambient motion (screen recording)</h2>
+    <p>Circles fading + wavy lines drifting. Open or play:</p>
+    <ul>
+      <li><a href="/previews/homepage2-ambient-motion-proof.mp4">MP4 recording</a></li>
+      <li><a href="/previews/homepage2-ambient-motion-proof.gif">GIF loop (ambient bg)</a></li>
+      <li><a href="/previews/homepage2-orbit-rotate-proof.mp4">Orbit rotate MP4</a></li>
+      <li><a href="/previews/homepage2-orbit-rotate-proof.gif">Orbit rotate GIF</a></li>
+    </ul>
+    <video controls autoplay muted loop playsinline src="/previews/homepage2-ambient-motion-proof.mp4" width="960"></video>
+  </div>
+
+  <div class="card">
+    <h2>Live page</h2>
+    <p><a href="/homepage2?cb=0635proof">https://www.siya.health/homepage2?cb=0635proof</a></p>
+    <p>Do not verify against <code>/</code> — that route still has the multi-column SEO footer and many Book CTAs.</p>
+  </div>
+
+  <div class="card" id="live-check">
+    <h2>Client-side live check (runs against /homepage2)</h2>
+    <p id="status">Loading…</p>
+    <table>
+      <thead><tr><th>Check</th><th>Result</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <script>
+    (async () => {
+      const rows = document.getElementById('rows');
+      const status = document.getElementById('status');
+      function add(name, ok, detail) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${name}</td><td class="${ok ? 'ok' : 'warn'}">${ok ? 'PASS' : 'FAIL'} — ${detail}</td>`;
+        rows.appendChild(tr);
+      }
+      try {
+        const url = '/homepage2?cb=' + Date.now();
+        const html = await (await fetch(url, { cache: 'no-store' })).text();
+        const stamp = (html.match(/SIYA-H2-VERIFY-PASS-[A-Z0-9]+/) || [])[0] || 'none';
+        add('Stamp', stamp.includes('20260924T0630'), stamp);
+        const books = [...html.matchAll(/Book Free Meet/g)].length;
+        add('Book Free Meet string count in HTML', books === 2, books + ' (expect 2: nav + mobile-sticky)');
+        add('Final-cta Book removed', !html.includes('data-siya-location="final-cta"'), html.includes('final-cta') ? 'still present' : 'gone');
+        add('Compact footer marker', html.includes('data-siya-footer="compact-v2"'), html.includes('compact-v2') ? 'compact-v2' : 'missing');
+        add('SEO multi-column footer gone', !html.includes('footer-grid--seo'), html.includes('footer-grid--seo') ? 'still seo-v2' : 'no seo grid');
+        add('Rotate script interval', html.includes('}, 2200);'), html.includes('}, 2200);') ? '2200ms' : 'not 2200');
+        add('Wordmark Option E CSS', /brand-lockup__wordmark[\s\S]{0,200}#D81088/.test(html), 'magenta stop in wordmark rule');
+        status.textContent = 'Fetched ' + url;
+      } catch (e) {
+        status.textContent = 'Fetch failed: ' + e.message;
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -408,7 +408,8 @@
       }
 
       // Lab storefront handoff is owned by lab-storefront-modal.js (fires on Continue).
-      if ((linkHref.indexOf('labs.rupahealth.com') !== -1 ||
+      if (((linkHref.indexOf('us.fullscript.com') !== -1 &&
+            linkHref.indexOf('/s/siyahealth') !== -1) ||
           track === 'lab_storefront_click') &&
           !window.__siyaLabLeaveModal) {
         pushEvent('lab_storefront_click', Object.assign({}, baseParams, {

@@ -30,6 +30,11 @@
       "permanent": true
     },
     {
+      "source": "/homepage3",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/membership-pricing",
       "destination": "/pricing",
       "permanent": true
@@ -240,7 +245,7 @@
       "permanent": true
     },
     {
-      "source": "/design-system/:path*",
+      "source": "/design-system/:path((?!.*\\.css$).*)",
       "destination": "/",
       "permanent": true
     },

@@ -175,14 +175,15 @@ function renderPage({ title, description, canonicalPath, mainHtml, isHub = false
         <a class="header-logo" href="/"><img src="/assets/images/siya-health-logo.png" alt="Siya Health" /></a>
         <nav class="nav-center" aria-label="Primary">
           <a href="/">Home</a>
-          <a href="${LEGAL_LINKS.hub}"${isHub ? ' aria-current="page"' : ''}>Legal</a>
+          <a href="${LEGAL_LINKS.terms}">Terms of Use</a>
+          <a href="${LEGAL_LINKS.privacy}">Privacy Policy</a>
           <a href="/about">About</a>
         </nav>
       </div>
     </header>
     <main id="main" class="legal-document-main">
       <div class="container legal-document-container">
-        ${isHub ? '' : `<nav class="legal-breadcrumb" aria-label="Breadcrumb"><a href="${LEGAL_LINKS.hub}">Legal</a> <span aria-hidden="true">/</span> <span>${escapeHtml(title)}</span></nav>`}
+        ${isHub ? '' : `<nav class="legal-breadcrumb" aria-label="Breadcrumb"><a href="${LEGAL_LINKS.hub}">Policies</a> <span aria-hidden="true">/</span> <span>${escapeHtml(title)}</span></nav>`}
         <article class="legal-document-body">
           ${mainHtml}
         </article>
@@ -216,20 +217,14 @@ function generateHub() {
     </tr>`;
   }).join('\n');
 
+  // Entity structure / CPOM disclosure lives in Terms of Use (competitor-aligned).
+  // Hub remains a thin policy index — not a standalone Corporate Structure page.
   const main = `
     <header class="legal-document-header">
       <h1>${escapeHtml(LEGAL_HUB.title)}</h1>
       <p class="legal-document-lead">Policies governing use of siya.health and Siya Healthcare, PLLC telehealth services.</p>
+      <p class="legal-document-lead">Entity structure and service-availability disclosures are in the <a href="${LEGAL_LINKS.terms}#entity-structure">Terms of Use</a>.</p>
     </header>
-    <section>
-      <h2>Entity structure</h2>
-      <p>${escapeHtml(CANONICAL_ENTITY_STATEMENT)}</p>
-    </section>
-    <section>
-      <h2>Organizational service availability</h2>
-      <p>Siya Healthcare, PLLC currently provides clinical telehealth services in: <strong>${escapeHtml(STATES_INLINE)}</strong>.</p>
-      <p>${escapeHtml(PROVIDER_LICENSE_DISCLAIMER)}</p>
-    </section>
     <section>
       <h2>Published policies</h2>
       <table class="legal-hub-table">
@@ -249,6 +244,19 @@ function generateHub() {
   fs.writeFileSync(path.join(LEGAL_DIR, 'index.html'), html);
 }
 
+function entityStructureSectionHtml() {
+  return `<section id="entity-structure" aria-labelledby="entity-structure-heading">
+<h2 id="entity-structure-heading">Entity structure</h2>
+<p>${escapeHtml(CANONICAL_ENTITY_STATEMENT)}</p>
+<p>Siya Health Inc. does not practice medicine. Clinical care is delivered solely by Siya Healthcare, PLLC and its employed and/or contracted licensed clinicians (the Professionals). Administrative, payment, technology, and other non-clinical support services are provided by Siya Health Inc.</p>
+</section>
+<section id="organizational-service-availability" aria-labelledby="service-availability-heading">
+<h2 id="service-availability-heading">Organizational service availability</h2>
+<p>Siya Healthcare, PLLC currently provides clinical telehealth services in: <strong>${escapeHtml(STATES_INLINE)}</strong>.</p>
+<p>${escapeHtml(PROVIDER_LICENSE_DISCLAIMER)}</p>
+</section>`;
+}
+
 function generateDocument(doc) {
   const { html: body, fromSource } = loadBody(doc);
   const effLabel = formatEffectiveDate(doc.effectiveDate);
@@ -261,7 +269,10 @@ function generateDocument(doc) {
     </header>
     <!-- SIYA:LEGAL-CONTENT -->`;
 
-  const main = `${header}\n${body}\n<!-- /SIYA:LEGAL-CONTENT -->`;
+  // Fold PC/CPOM/MSO entity explanation into Terms as named sections (presentation only).
+  const entityBlock =
+    doc.slug === 'terms-of-use' ? `\n${entityStructureSectionHtml()}\n` : '';
+  const main = `${header}\n${entityBlock}${body}\n<!-- /SIYA:LEGAL-CONTENT -->`;
 
   const page = renderPage({
     title: doc.title,
