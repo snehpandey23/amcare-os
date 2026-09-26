@@ -19,7 +19,7 @@
 </head>
 <body>
   <h1>Homepage2 live audit proof</h1>
-  <p>Public artifacts for <code>/homepage2</code> — not local paths. Stamp expected: <code>SIYA-H2-VERIFY-PASS-20260924T0630</code>.</p>
+  <p>Public artifacts for <code>/</code> — not local paths. Stamp expected: <code>SIYA-H2-VERIFY-PASS-20260924T0630</code>.</p>
 
   <div class="card">
     <h2>Ambient motion (screen recording)</h2>
@@ -35,12 +35,12 @@
 
   <div class="card">
     <h2>Live page</h2>
-    <p><a href="/homepage2?cb=0635proof">https://www.siya.health/homepage2?cb=0635proof</a></p>
+    <p><a href="/?cb=0635proof">https://www.siya.health/?cb=0635proof</a></p>
     <p>Do not verify against <code>/</code> — that route still has the multi-column SEO footer and many Book CTAs.</p>
   </div>
 
   <div class="card" id="live-check">
-    <h2>Client-side live check (runs against /homepage2)</h2>
+    <h2>Client-side live check (runs against /)</h2>
     <p id="status">Loading…</p>
     <table>
       <thead><tr><th>Check</th><th>Result</th></tr></thead>
@@ -58,7 +58,7 @@
         rows.appendChild(tr);
       }
       try {
-        const url = '/homepage2?cb=' + Date.now();
+        const url = '/?cb=' + Date.now();
         const html = await (await fetch(url, { cache: 'no-store' })).text();
         const stamp = (html.match(/SIYA-H2-VERIFY-PASS-[A-Z0-9]+/) || [])[0] || 'none';
         add('Stamp', stamp.includes('20260924T0630'), stamp);

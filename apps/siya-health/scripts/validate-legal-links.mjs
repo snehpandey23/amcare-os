@@ -5,13 +5,12 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { PUBLISHED_LEGAL_DOCUMENTS, LEGAL_HUB } from '../data/legal-documents.mjs';
+import { PUBLISHED_LEGAL_DOCUMENTS, LEGAL_HUB, LEGAL_SECTION_ANCHORS } from '../data/legal-documents.mjs';
 import {
   CANONICAL_ENTITY_STATEMENT,
   LEGAL_EFFECTIVE_DATE_DISPLAY,
   LEGAL_LINKS,
 } from '../data/site-standards.mjs';
-import { isControlledSubstanceLinkPage } from './site-chrome.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -45,52 +44,48 @@ function hasFalseNppLink(html) {
 const errors = [];
 const warnings = [];
 
-// Registry paths must exist after generate-legal-pages
-for (const doc of PUBLISHED_LEGAL_DOCUMENTS) {
-  const p = path.join(SITE_ROOT, 'legal', doc.slug, 'index.html');
-  if (!fs.existsSync(p)) {
-    errors.push(`Missing generated page: /legal/${doc.slug}`);
-  }
-}
 const hubPath = path.join(SITE_ROOT, 'legal', 'index.html');
 if (!fs.existsSync(hubPath)) {
   errors.push('Missing generated page: /legal');
+}
+for (const doc of PUBLISHED_LEGAL_DOCUMENTS) {
+  const separate = path.join(SITE_ROOT, 'legal', doc.slug, 'index.html');
+  if (!fs.existsSync(separate)) {
+    errors.push(`Missing legal page: /legal/${doc.slug}`);
+  }
 }
 
 if (LEGAL_LINKS.noticeOfPrivacy === LEGAL_LINKS.privacy) {
   errors.push('LEGAL_LINKS.noticeOfPrivacy must not equal LEGAL_LINKS.privacy');
 }
 
-for (const doc of PUBLISHED_LEGAL_DOCUMENTS) {
-  const pagePath = path.join(SITE_ROOT, 'legal', doc.slug, 'index.html');
-  if (!fs.existsSync(pagePath)) continue;
-  const legalHtml = fs.readFileSync(pagePath, 'utf8');
-  if (!legalHtml.includes(LEGAL_EFFECTIVE_DATE_DISPLAY)) {
-    errors.push(`Legal page missing effective date ${LEGAL_EFFECTIVE_DATE_DISPLAY}: /legal/${doc.slug}`);
-  }
-  if (!legalHtml.includes(CANONICAL_ENTITY_STATEMENT)) {
-    errors.push(`Legal page missing canonical entity statement: /legal/${doc.slug}`);
-  }
-}
 const hubLegalPath = path.join(SITE_ROOT, 'legal', 'index.html');
+let hubHtml = '';
 if (fs.existsSync(hubLegalPath)) {
-  const hubHtml = fs.readFileSync(hubLegalPath, 'utf8');
-  // Entity statement may live in Terms (+ legal-meta aside), not as a hub H2.
-  if (!hubHtml.includes(CANONICAL_ENTITY_STATEMENT) && !hubHtml.includes('#entity-structure')) {
-    errors.push('Legal hub missing entity structure pointer (aside statement or Terms #entity-structure link)');
+  hubHtml = fs.readFileSync(hubLegalPath, 'utf8');
+  if (!hubHtml.includes(LEGAL_EFFECTIVE_DATE_DISPLAY)) {
+    errors.push(`Legal page missing effective date ${LEGAL_EFFECTIVE_DATE_DISPLAY}: /legal`);
+  }
+  if (!hubHtml.includes(CANONICAL_ENTITY_STATEMENT)) {
+    errors.push('Legal page missing canonical entity statement: /legal');
+  }
+  if (!hubHtml.includes('id="entity-structure"')) {
+    errors.push('Legal page missing #entity-structure');
+  }
+  for (const doc of PUBLISHED_LEGAL_DOCUMENTS) {
+    const anchor = LEGAL_SECTION_ANCHORS[doc.slug];
+    if (!hubHtml.includes(`id="${anchor}"`)) {
+      errors.push(`Legal page missing section #${anchor} (${doc.title})`);
+    }
   }
 }
 
 const htmlFiles = walkHtml('.');
-// Footer primary policies: Terms + Privacy. Hub is no longer a footer link.
-const requiredFooterHrefs = [
-  LEGAL_LINKS.terms,
-  LEGAL_LINKS.privacy,
-  LEGAL_LINKS.noticeOfPrivacy,
-  LEGAL_LINKS.cookie,
-];
+const separatePolicyHrefs = PUBLISHED_LEGAL_DOCUMENTS.map((d) => `/legal/${d.slug}`);
 
 for (const rel of htmlFiles) {
+  const base = path.basename(rel);
+  if (/^preview-home/i.test(base) || rel.startsWith('previews/') || rel.includes('/previews/')) continue;
   const html = fs.readFileSync(path.join(SITE_ROOT, rel), 'utf8');
 
   if (hasFalseNppLink(html)) {
@@ -114,40 +109,31 @@ for (const rel of htmlFiles) {
     const isPolicyCol =
       footer.includes('<h4>Policies</h4>') || footer.includes('<h4>Legal</h4>');
     if (isPolicyCol) {
-      for (const href of requiredFooterHrefs) {
-        if (!footer.includes(`href="${href}"`)) {
-          errors.push(`Missing legal footer link ${href}: ${rel}`);
+      if (!footer.includes('href="/legal"') && !footer.includes('href="/legal#terms"')) {
+        errors.push(`Missing single Legal footer link: ${rel}`);
+      }
+      for (const href of separatePolicyHrefs) {
+        if (footer.includes(`href="${href}"`)) {
+          errors.push(`Footer still lists separate policy ${href}: ${rel}`);
         }
       }
-      if (footer.includes('Legal &amp; Compliance') || footer.includes('>Legal & Compliance<')) {
-        errors.push(`Footer still exposes Legal & Compliance hub link (use Terms + Privacy only): ${rel}`);
-      }
-      if (isControlledSubstanceLinkPage(rel) && !footer.includes(LEGAL_LINKS.controlledSubstanceTreatment)) {
-        errors.push(`Missing Controlled Substance Treatment Agreement link: ${rel}`);
+    }
+    if (footer.includes('siya-h2-footer') || footer.includes('id="siya-h2-footer"')) {
+      if (footer.includes('/terms2') || footer.includes('/privacy2')) {
+        errors.push(`Compact footer still lists Terms/Privacy separately: ${rel}`);
       }
     }
   }
 }
 
-// Legal hub must list published cookie + CS agreement
-const hubHtml = fs.readFileSync(hubPath, 'utf8');
-if (!hubHtml.includes('/legal/cookie-policy')) {
-  errors.push('Legal hub missing Cookie Policy link');
-}
-if (!hubHtml.includes('/legal/controlled-substance-treatment-agreement')) {
-  errors.push('Legal hub missing Controlled Substance Treatment Agreement link');
-}
-
-const csPage = path.join(SITE_ROOT, 'legal/controlled-substance-treatment-agreement/index.html');
-if (fs.existsSync(csPage)) {
-  const csHtml = fs.readFileSync(csPage, 'utf8');
-  if (/states the providers are licensed/i.test(csHtml)) {
+if (hubHtml) {
+  if (/states the providers are licensed/i.test(hubHtml)) {
     errors.push('CS agreement contains forbidden provider-license service expansion phrase');
   }
-  if (/Pennsylvania Prescription Drug Monitoring Program \(PA-PDMP\) monthly/i.test(csHtml)) {
+  if (/Pennsylvania Prescription Drug Monitoring Program \(PA-PDMP\) monthly/i.test(hubHtml)) {
     errors.push('CS agreement hardcodes PA-PDMP only — use multi-state PDMP language');
   }
-  if (!csHtml.includes('does not guarantee diagnosis, medication, or stimulant prescribing')) {
+  if (!hubHtml.includes('does not guarantee diagnosis, medication, or stimulant prescribing')) {
     errors.push('CS agreement missing non-guarantee header note');
   }
 }

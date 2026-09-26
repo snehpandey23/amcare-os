@@ -53,16 +53,17 @@ for (const name of fs.readdirSync(path.join(ROOT, 'providers'))) {
   console.log(`Normalized provider page: ${rel}`);
 }
 
-writeNormalized(
-  'about.html',
-  injectAboutCareTeam(fs.readFileSync(path.join(ROOT, 'about.html'), 'utf8'), 'about.html'),
-);
-console.log('Repaired roster page: about.html');
+function repairLegacyRoster(rel, transform) {
+  const html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+  if (html.includes('siya-h2-surface')) {
+    console.log(`Skip roster repair (new surface): ${rel}`);
+    return;
+  }
+  writeNormalized(rel, transform(html));
+  console.log(`Repaired roster page: ${rel}`);
+}
 
-writeNormalized(
-  'telehealth.html',
-  injectMeetPhysiciansSection(fs.readFileSync(path.join(ROOT, 'telehealth.html'), 'utf8'), 'telehealth.html'),
-);
-console.log('Repaired roster page: telehealth.html');
+repairLegacyRoster('about.html', (html) => injectAboutCareTeam(html, 'about.html'));
+repairLegacyRoster('telehealth.html', (html) => injectMeetPhysiciansSection(html, 'telehealth.html'));
 
 console.log('Provider roster repair complete');

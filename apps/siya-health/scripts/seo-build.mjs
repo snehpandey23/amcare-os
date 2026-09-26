@@ -47,6 +47,22 @@ const REDIRECT_SHELLS = {
 /** External redirect shells + dev surfaces — never in sitemap */
 const SITEMAP_EXCLUDE = new Set([
   'homepage2.html', // WIP homepage — noindex until promoted
+  'about2.html', // About visual pilot — noindex until promoted
+  'pricing2.html',
+  'social2.html',
+  'terms2.html',
+  'privacy2.html',
+  'telehealth2.html',
+  'adhd-care2.html',
+  'employers2.html',
+  'video-cards.html', // local export surface; public URL redirects home
+  'homepage2-audit.html',
+  'homepage2-care-preview.html',
+  'preview-home-a.html',
+  'preview-home-b.html',
+  'preview-home-b-btn-v1.html',
+  'preview-home-b-btn-v2.html',
+  'preview-home-hero-video.html',
   // homepage3 removed 2026-09 — redirect /homepage3 → /
   'visual-components.html',
   'adhd-screening-results.html',
@@ -93,7 +109,21 @@ function walkHtmlFiles(dir, baseRel = '') {
     if (e.name.startsWith('.')) continue;
     if (skipDirs.has(e.name)) continue;
     // Local homepage experiments — never production chrome
-    if (/^preview-home/i.test(e.name) || e.name === 'homepage2.html') continue;
+    if (
+      /^preview-home/i.test(e.name) ||
+      e.name === 'homepage2.html' ||
+      e.name === 'video-cards.html' ||
+      e.name === 'homepage2-audit.html' ||
+      e.name === 'homepage2-care-preview.html' ||
+      e.name === 'about2.html' ||
+      e.name === 'pricing2.html' ||
+      e.name === 'social2.html' ||
+      e.name === 'terms2.html' ||
+      e.name === 'privacy2.html' ||
+      e.name === 'telehealth2.html' ||
+      e.name === 'adhd-care2.html' ||
+      e.name === 'employers2.html'
+    ) continue;
     const rel = path.join(baseRel, e.name).replace(/\\/g, '/');
     const full = path.join(dir, e.name);
     if (e.isDirectory()) out.push(...walkHtmlFiles(full, rel));
@@ -527,9 +557,24 @@ function normalizeRootAssetPaths(html) {
   return h;
 }
 
+/** Live pages promoted from the *2 drafts. Their chrome is the compact footer, not the SEO-column injector. */
+const H2_LIVE_PAGES = new Set([
+  'index.html',
+  'about.html',
+  'telehealth.html',
+  'adhd-care.html',
+  'social.html',
+  'legal/index.html',
+]);
+
 function processHtml(relPath) {
   const fullPath = path.join(SITE_ROOT, relPath);
   let html = fs.readFileSync(fullPath, 'utf8');
+  if (H2_LIVE_PAGES.has(relPath) && html.includes('siya-h2-surface')) {
+    html = normalizeRootAssetPaths(html);
+    fs.writeFileSync(fullPath, html, 'utf8');
+    return;
+  }
   // Retirement / geo-clone stubs: leave noindex+refresh HTML alone (vercel.json owns the 308).
   if (
     /name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html) &&

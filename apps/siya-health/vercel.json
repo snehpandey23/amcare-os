@@ -35,6 +35,116 @@
       "permanent": true
     },
     {
+      "source": "/video-cards",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/video-cards.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/homepage2-audit",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/homepage2-audit.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/homepage2-care-preview",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/homepage2-care-preview.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/previews/homepage2-audit",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/previews/homepage2-audit.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/preview-home-a",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/preview-home-a.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/preview-home-b",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/preview-home-b.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/preview-home-b-btn-v1",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/preview-home-b-btn-v1.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/preview-home-b-btn-v2",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/preview-home-b-btn-v2.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/preview-home-hero-video",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/preview-home-hero-video.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/previews/homepage-variant-a",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/previews/homepage-variant-a/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/previews/homepage-variant-b",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/previews/homepage-variant-b/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/membership-pricing",
       "destination": "/pricing",
       "permanent": true

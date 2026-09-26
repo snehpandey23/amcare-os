@@ -1062,18 +1062,11 @@ function fixDuplicateCalifornia(html) {
   return html;
 }
 
-/** Policies column for sitewide footers — Terms + Privacy primary; no Legal hub link. */
-export function renderLegalFooter({ includeControlledSubstance = false } = {}) {
-  const csLink = includeControlledSubstance
-    ? `            <li><a href="${LEGAL_LINKS.controlledSubstanceTreatment}">Controlled Substance Agreement</a></li>`
-    : '';
+/** Policies column — one Legal link. Individual policies are sections of /legal. */
+export function renderLegalFooter() {
   return `        <div class="footer-col footer-col--legal"><h4>Policies</h4>
           <ul class="footer-links">
-            <li><a href="${LEGAL_LINKS.terms}">Terms of Use</a></li>
-            <li><a href="${LEGAL_LINKS.privacy}">Privacy Policy</a></li>
-            <li><a href="${LEGAL_LINKS.noticeOfPrivacy}">Notice of Privacy Practices</a></li>
-            <li><a href="${LEGAL_LINKS.cookie}">Cookie Policy</a></li>
-${csLink}
+            <li><a href="${LEGAL_LINKS.hub}">Legal</a></li>
           </ul>
         </div>`;
 }
@@ -1382,7 +1375,6 @@ ${linkHtml}
 }
 
 function renderSeoFooterColumns(relPath = '') {
-  const includeCs = relPath ? isControlledSubstanceLinkPage(relPath) : false;
   const showScreening =
     isAdhdFunnelPage(relPath) ||
     isAdhdLegalContext(relPath) ||
@@ -1399,7 +1391,7 @@ function renderSeoFooterColumns(relPath = '') {
     renderFooterLinkColumn('Blog', FOOTER_BLOG_LINKS, 'footer-col footer-col--blog'),
     renderFooterLinkColumn('Company', FOOTER_COMPANY_LINKS, 'footer-col footer-col--company'),
     renderFooterLinkColumn('Social', FOOTER_SOCIAL_LINKS, 'footer-col footer-col--social'),
-    renderLegalFooter({ includeControlledSubstance: includeCs }),
+    renderLegalFooter(),
   ].join('\n');
 }
 
@@ -1439,13 +1431,23 @@ ${FOOTER_SOCIAL_BLOCK}
       </div>`;
 }
 
+/**
+ * New-design pages mount the compact strip from scripts/h2-footer.js.
+ * Detection is the markup, not the filename — promoting homepage2.html to
+ * index.html must not make the next build swap in the six-column footer.
+ */
+export function hasCompactH2Footer(html) {
+  return /id="siya-h2-footer"|class="[^"]*siya-h2-footer|data-siya-footer="compact/.test(html);
+}
+
 /** Replace footer with HelloKlarity-style horizontal SEO architecture (visible links only). */
 export function injectSeoFooterArchitecture(html, relPath = '') {
   if (!html.includes('<footer')) return html;
+  if (hasCompactH2Footer(html)) return html;
 
   const notice = resolveFooterNotice(html, relPath);
   const markup = renderSeoFooterMarkup(relPath, notice);
-  return html.replace(/<footer class="footer">[\s\S]*?<\/footer>/i, `<footer class="footer">\n${markup}\n    </footer>`);
+  return html.replace(/<footer class="footer"[^>]*>[\s\S]*?<\/footer>/i, `<footer class="footer">\n${markup}\n    </footer>`);
 }
 
 /** @deprecated Merged into injectSeoFooterArchitecture — kept for import compatibility. */

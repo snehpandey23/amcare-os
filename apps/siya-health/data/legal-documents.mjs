@@ -130,7 +130,18 @@ export function getPublishedLegalDocument(slug) {
   return PUBLISHED_LEGAL_DOCUMENTS.find((d) => d.slug === slug) ?? null;
 }
 
+/** Anchors on the single /legal document. Old /legal/{slug} URLs redirect here. */
+export const LEGAL_SECTION_ANCHORS = {
+  'terms-of-use': 'terms',
+  'privacy-policy': 'privacy',
+  'notice-of-privacy-practices': 'notice-of-privacy-practices',
+  'controlled-substance-treatment-agreement': 'controlled-substance-agreement',
+  'cookie-policy': 'cookie-policy',
+};
+
 export function getLegalPath(slug) {
+  const anchor = LEGAL_SECTION_ANCHORS[slug];
+  if (anchor) return `/legal#${anchor}`;
   return `/legal/${slug}`;
 }
 

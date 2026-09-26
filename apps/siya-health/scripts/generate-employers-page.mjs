@@ -1,5 +1,7 @@
 /**
  * Generates /employers — B2B employer partnership landing (staging-first).
+ * If employers.html has already been promoted to the compact new design
+ * (siya-h2-surface / siya-h2-footer), this script does not overwrite it.
  * Run before seo-build.mjs: node scripts/generate-employers-page.mjs
  */
 import fs from 'node:fs';
@@ -12,6 +14,19 @@ import {
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.join(__dirname, '..', 'employers.html');
+
+/** Same marker the pricing generator and footer rewrite use. */
+function isPromotedNewDesign(html) {
+  return /siya-h2-surface|id="siya-h2-footer"|data-siya-footer="compact/.test(html);
+}
+
+if (fs.existsSync(OUT)) {
+  const existing = fs.readFileSync(OUT, 'utf8');
+  if (isPromotedNewDesign(existing)) {
+    console.log('Skip employers.html — compact new-design page is hand-maintained');
+    process.exit(0);
+  }
+}
 
 const CANONICAL = 'https://siya.health/employers';
 const TITLE = 'Employer Cognitive Health Programs | Siya Health';

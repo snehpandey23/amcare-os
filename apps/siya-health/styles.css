@@ -7522,6 +7522,14 @@ body.legal-page .legal-document-main {
   margin: 0 0 8px;
   font-size: 1.85rem;
 }
+.legal-policy-section,
+#entity-structure {
+  scroll-margin-top: 5.5rem;
+}
+.legal-toc ul {
+  margin: 0 0 2rem;
+  padding-left: 1.2rem;
+}
 .legal-document-meta {
   margin: 0;
   color: var(--text-secondary);

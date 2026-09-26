@@ -19,6 +19,8 @@ import {
   PUBLISHED_LEGAL_DOCUMENTS,
   LEGAL_HUB,
   LEGAL_DOC_STATUS,
+  LEGAL_SECTION_ANCHORS,
+  getLegalPath,
 } from '../data/legal-documents.mjs';
 import { renderLegalFooter } from './site-chrome.mjs';
 
@@ -60,8 +62,8 @@ function inlineMarkdown(text) {
   return parts.join('');
 }
 
-/** Counsel markdown → HTML (headings, paragraphs, lists, inline links/bold) */
-function markdownToHtml(md) {
+/** Counsel markdown → HTML. headingBump demotes headings so each policy sits under one h2. */
+function markdownToHtml(md, headingBump = 0) {
   const lines = md.split('\n');
   const out = [];
   let inList = false;
@@ -80,13 +82,13 @@ function markdownToHtml(md) {
         out.push('</ul>');
         inList = false;
       }
-      out.push(`<h3>${inlineMarkdown(t.slice(4))}</h3>`);
+      out.push(`<h${Math.min(6, 3 + headingBump)}>${inlineMarkdown(t.slice(4))}</h${Math.min(6, 3 + headingBump)}>`);
     } else if (t.startsWith('## ')) {
       if (inList) {
         out.push('</ul>');
         inList = false;
       }
-      out.push(`<h2>${inlineMarkdown(t.slice(3))}</h2>`);
+      out.push(`<h${Math.min(6, 2 + headingBump)}>${inlineMarkdown(t.slice(3))}</h${Math.min(6, 2 + headingBump)}>`);
     } else if (t.startsWith('# ')) {
       if (inList) {
         out.push('</ul>');
@@ -134,7 +136,7 @@ function loadBody(doc) {
       fromSource: false,
     };
   }
-  return { html: markdownToHtml(raw), fromSource: true };
+  return { html: markdownToHtml(raw, 1), fromSource: true };
 }
 
 function formatEffectiveDate(iso) {
@@ -148,7 +150,7 @@ function relatedLinks(doc) {
     .map((slug) => {
       const related = PUBLISHED_LEGAL_DOCUMENTS.find((d) => d.slug === slug);
       if (!related) return '';
-      return `<li><a href="/legal/${related.slug}">${escapeHtml(related.title)}</a></li>`;
+      return `<li><a href="${getLegalPath(related.slug)}">${escapeHtml(related.title)}</a></li>`;
     })
     .filter(Boolean)
     .join('\n');
@@ -167,18 +169,71 @@ function renderPage({ title, description, canonicalPath, mainHtml, isHub = false
     <link rel="canonical" href="${canonical}" />
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
     <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/design-system/h2-surface.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
   </head>
-  <body class="legal-page">
+  <body class="legal-page siya-h2-surface">
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header site-header--legal">
+    <div class="siya-h2-cursor-glow" aria-hidden="true"></div>
+    <div class="siya-h2-page-bg" aria-hidden="true">
+      <svg class="siya-h2-page-bg__svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="presentation">
+        <defs>
+          <linearGradient id="siyaHeroCream" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#F4EFE7"/>
+            <stop offset="55%" stop-color="#E8EEF8"/>
+            <stop offset="100%" stop-color="#F7F2EC"/>
+          </linearGradient>
+          <radialGradient id="siyaHeroGlowA" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#D81088" stop-opacity="0.50"/>
+            <stop offset="45%" stop-color="#D81088" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#D81088" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="siyaHeroGlowB" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#001878" stop-opacity="0.42"/>
+            <stop offset="50%" stop-color="#0A246B" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="#001878" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="siyaHeroGlowC" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#7B2D8E" stop-opacity="0.38"/>
+            <stop offset="55%" stop-color="#0A246B" stop-opacity="0.14"/>
+            <stop offset="100%" stop-color="#0A246B" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="1200" height="800" fill="url(#siyaHeroCream)"/>
+        <g class="siya-hero-drift siya-hero-drift--a">
+          <circle cx="240" cy="220" r="190" fill="url(#siyaHeroGlowA)"/>
+          <circle class="siya-h2-ring" cx="240" cy="220" r="88" fill="none" stroke="#D81088" stroke-width="2.75"/>
+          <circle class="siya-h2-ring siya-h2-ring--outer" cx="240" cy="220" r="132" fill="none" stroke="#D81088" stroke-width="1.6"/>
+        </g>
+        <g class="siya-hero-drift siya-hero-drift--b">
+          <circle cx="940" cy="500" r="230" fill="url(#siyaHeroGlowB)"/>
+          <circle class="siya-h2-ring" cx="940" cy="500" r="108" fill="none" stroke="#001878" stroke-width="2.75"/>
+          <circle class="siya-h2-ring siya-h2-ring--outer" cx="940" cy="500" r="156" fill="none" stroke="#0A246B" stroke-width="1.6"/>
+        </g>
+        <g class="siya-hero-drift siya-hero-drift--wave">
+          <path d="M40 620 C 220 500, 380 700, 560 560 S 900 480, 1180 380" fill="none" stroke="#D81088" stroke-width="2.75" stroke-linecap="round"/>
+          <path d="M20 300 C 200 380, 360 180, 540 280 S 840 360, 1160 200" fill="none" stroke="#001878" stroke-width="2.5" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+    <header class="site-header site-header-transparent" id="site-header">
       <div class="container">
-        <a class="header-logo" href="/"><img src="/assets/images/siya-health-logo.png" alt="Siya Health" /></a>
-        <nav class="nav-center" aria-label="Primary">
-          <a href="/">Home</a>
-          <a href="${LEGAL_LINKS.terms}">Terms of Use</a>
-          <a href="${LEGAL_LINKS.privacy}">Privacy Policy</a>
-          <a href="/about">About</a>
-        </nav>
+        <a class="header-logo brand-lockup" href="/" aria-label="Siya Health home">
+          <img class="brand-lockup__mark" src="/assets/images/siya-health-mark.png" alt="" width="44" height="44" decoding="async" aria-hidden="true" />
+          <span class="brand-lockup__wordmark">Siya Health<sup class="brand-lockup__reg" aria-hidden="true">®</sup></span>
+        </a>
+        <div class="nav-cta">
+          <a href="/redirect/meet-greet" class="button ds-button ds-button--primary" data-siya-location="nav" data-page-type="legal">Book Free Meet &amp; Greet</a>
+        </div>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
+        <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
+        <div class="nav-mobile">
+          <a href="/about">About Us</a>
+          <a href="/providers">Care Team</a>
+          <a href="/labs">Labs</a>
+          <a href="/pricing">Pricing</a>
+        </div>
       </div>
     </header>
     <main id="main" class="legal-document-main">
@@ -194,48 +249,61 @@ function renderPage({ title, description, canonicalPath, mainHtml, isHub = false
         </aside>
       </div>
     </main>
-    <footer class="footer">
-      <div class="container footer-grid">
-        <div class="footer-brand"><p>${escapeHtml(FOOTER_STATES_LINE)}</p></div>
-        ${renderLegalFooter()}
-      </div>
-      <div class="container">
-        <p class="footer-notice">For emergencies, call 911. All telehealth services are provided by licensed medical professionals in accordance with state regulations.</p>
-        <small>© 2026 Siya Health Inc. All rights reserved.</small>
-      </div>
-    </footer>
+    <footer class="footer siya-h2-footer-compact" id="siya-h2-footer"></footer>
+    <script src="/scripts/h2-footer.js"></script>
+    <script src="/scripts/h2-motion.js" defer></script>
+    <script src="/scripts/header-scroll.js" defer></script>
   </body>
 </html>`;
 }
 
-function generateHub() {
-  const rows = PUBLISHED_LEGAL_DOCUMENTS.map((d) => {
-    const eff = formatEffectiveDate(d.effectiveDate);
-    return `<tr>
-      <td><a href="/legal/${d.slug}">${escapeHtml(d.title)}</a></td>
-      <td>${eff}</td>
-    </tr>`;
+function rewritePublishedLegalHrefs(html) {
+  let out = html.replaceAll('/legal/terms-of-use#entity-structure', '/legal#entity-structure');
+  const slugs = [...PUBLISHED_LEGAL_DOCUMENTS.map((d) => d.slug)].sort((a, b) => b.length - a.length);
+  for (const slug of slugs) {
+    out = out.replaceAll(`/legal/${slug}`, getLegalPath(slug));
+  }
+  return out;
+}
+
+function generateCombinedPage() {
+  const toc = PUBLISHED_LEGAL_DOCUMENTS.map((d) => {
+    const anchor = LEGAL_SECTION_ANCHORS[d.slug];
+    return `<li><a href="#${anchor}">${escapeHtml(d.title)}</a></li>`;
   }).join('\n');
 
-  // Entity structure / CPOM disclosure lives in Terms of Use (competitor-aligned).
-  // Hub remains a thin policy index — not a standalone Corporate Structure page.
+  const sections = PUBLISHED_LEGAL_DOCUMENTS.map((doc) => {
+    const anchor = LEGAL_SECTION_ANCHORS[doc.slug];
+    const { html: body } = loadBody(doc);
+    const effLabel = formatEffectiveDate(doc.effectiveDate);
+    const related = relatedLinks(doc);
+    const entityBlock = doc.slug === 'terms-of-use' ? `\n${entityStructureSectionHtml()}\n` : '';
+    return `<section id="${anchor}" class="legal-policy-section" aria-labelledby="${anchor}-heading">
+    <header class="legal-document-header">
+      <h2 id="${anchor}-heading">${escapeHtml(doc.title)}</h2>
+      <p class="legal-document-meta">Effective: ${escapeHtml(effLabel)}</p>
+      ${related ? `<nav class="legal-related" aria-label="Related policies"><ul>${related}</ul></nav>` : ''}
+    </header>
+    <!-- SIYA:LEGAL-CONTENT -->
+    ${entityBlock}${rewritePublishedLegalHrefs(body)}
+    <!-- /SIYA:LEGAL-CONTENT -->
+    </section>`;
+  }).join('\n');
+
   const main = `
     <header class="legal-document-header">
       <h1>${escapeHtml(LEGAL_HUB.title)}</h1>
-      <p class="legal-document-lead">Policies governing use of siya.health and Siya Healthcare, PLLC telehealth services.</p>
-      <p class="legal-document-lead">Entity structure and service-availability disclosures are in the <a href="${LEGAL_LINKS.terms}#entity-structure">Terms of Use</a>.</p>
+      <p class="legal-document-lead">Policies governing use of siya.health and Siya Healthcare, PLLC telehealth services. Each policy below stays at its own link.</p>
+      <p class="legal-document-lead">Entity structure and service-availability disclosures are in the <a href="/legal#entity-structure">Terms of Use</a>.</p>
     </header>
-    <section>
-      <h2>Published policies</h2>
-      <table class="legal-hub-table">
-        <thead><tr><th>Document</th><th>Effective</th></tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
-    </section>`;
+    <nav class="legal-toc" aria-label="Policies on this page">
+      <ul>${toc}</ul>
+    </nav>
+    ${sections}`;
 
   const html = renderPage({
     title: LEGAL_HUB.title,
-    description: 'Legal and compliance policies for Siya Health telehealth services.',
+    description: 'Terms of Use, Privacy Policy, Notice of Privacy Practices, Controlled Substance Treatment Agreement, and Cookie Policy for Siya Health.',
     canonicalPath: LEGAL_HUB.path,
     mainHtml: main,
     isHub: true,
@@ -246,45 +314,25 @@ function generateHub() {
 
 function entityStructureSectionHtml() {
   return `<section id="entity-structure" aria-labelledby="entity-structure-heading">
-<h2 id="entity-structure-heading">Entity structure</h2>
+<h3 id="entity-structure-heading">Entity structure</h3>
 <p>${escapeHtml(CANONICAL_ENTITY_STATEMENT)}</p>
 <p>Siya Health Inc. does not practice medicine. Clinical care is delivered solely by Siya Healthcare, PLLC and its employed and/or contracted licensed clinicians (the Professionals). Administrative, payment, technology, and other non-clinical support services are provided by Siya Health Inc.</p>
 </section>
 <section id="organizational-service-availability" aria-labelledby="service-availability-heading">
-<h2 id="service-availability-heading">Organizational service availability</h2>
+<h3 id="service-availability-heading">Organizational service availability</h3>
 <p>Siya Healthcare, PLLC currently provides clinical telehealth services in: <strong>${escapeHtml(STATES_INLINE)}</strong>.</p>
 <p>${escapeHtml(PROVIDER_LICENSE_DISCLAIMER)}</p>
 </section>`;
 }
 
-function generateDocument(doc) {
-  const { html: body, fromSource } = loadBody(doc);
-  const effLabel = formatEffectiveDate(doc.effectiveDate);
-  const related = relatedLinks(doc);
-  const header = `
-    <header class="legal-document-header">
-      <h1>${escapeHtml(doc.title)}</h1>
-      <p class="legal-document-meta">Effective: ${escapeHtml(effLabel)}</p>
-      ${related ? `<nav class="legal-related" aria-label="Related policies"><ul>${related}</ul></nav>` : ''}
-    </header>
-    <!-- SIYA:LEGAL-CONTENT -->`;
-
-  // Fold PC/CPOM/MSO entity explanation into Terms as named sections (presentation only).
-  const entityBlock =
-    doc.slug === 'terms-of-use' ? `\n${entityStructureSectionHtml()}\n` : '';
-  const main = `${header}\n${entityBlock}${body}\n<!-- /SIYA:LEGAL-CONTENT -->`;
-
-  const page = renderPage({
-    title: doc.title,
-    description: `${doc.title} for Siya Health.`,
-    canonicalPath: `/legal/${doc.slug}`,
-    mainHtml: main,
-  });
-
-  const outDir = path.join(LEGAL_DIR, doc.slug);
-  fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(path.join(outDir, 'index.html'), page);
-  return { slug: doc.slug, fromSource };
+function removeSeparatePolicyDirs() {
+  for (const doc of PUBLISHED_LEGAL_DOCUMENTS) {
+    const dir = path.join(LEGAL_DIR, doc.slug);
+    if (fs.existsSync(dir)) {
+      fs.rmSync(dir, { recursive: true, force: true });
+      console.log(`  Removed separate page (now /legal#${LEGAL_SECTION_ANCHORS[doc.slug]}): /legal/${doc.slug}`);
+    }
+  }
 }
 
 function removePlannedPageDirs() {
@@ -300,11 +348,12 @@ function removePlannedPageDirs() {
 function main() {
   fs.mkdirSync(VERSIONS_DIR, { recursive: true });
   removePlannedPageDirs();
-  generateHub();
-  const report = PUBLISHED_LEGAL_DOCUMENTS.map(generateDocument);
-  console.log('Generated legal pages:', LEGAL_HUB.path);
-  for (const r of report) {
-    console.log(`  /legal/${r.slug} ${r.fromSource ? '(counsel source rendered)' : '(stub)'}`);
+  generateCombinedPage();
+  // Keep /legal/terms-of-use and the other document URLs serving until the
+  // redirect cutover is explicitly shipped. Do not delete them in this build.
+  console.log('Generated combined legal page:', LEGAL_HUB.path);
+  for (const doc of PUBLISHED_LEGAL_DOCUMENTS) {
+    console.log(`  ${getLegalPath(doc.slug)}  ${doc.title}`);
   }
   console.log('Published documents:', PUBLISHED_LEGAL_DOCUMENTS.length);
   console.log('AVAILABLE_SERVICE_STATES:', AVAILABLE_SERVICE_STATES.join(', '));

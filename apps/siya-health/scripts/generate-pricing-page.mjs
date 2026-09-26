@@ -1,5 +1,7 @@
 /**
- * Generates canonical /pricing page from site-standards.mjs
+ * Generates canonical /pricing from site-standards.mjs.
+ * If pricing.html has already been promoted to the compact new design
+ * (siya-h2-surface / siya-h2-footer), this script does not overwrite it.
  * Run: node scripts/generate-pricing-page.mjs
  */
 import fs from 'fs';
@@ -19,6 +21,19 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
 const OUT = path.join(SITE_ROOT, 'pricing.html');
 const BOOK = CTA_SYSTEM.primary.url;
+
+/** Same marker the footer rewrite uses: a promoted page, not the generated template. */
+function isPromotedNewDesign(html) {
+  return /siya-h2-surface|id="siya-h2-footer"|data-siya-footer="compact/.test(html);
+}
+
+if (fs.existsSync(OUT)) {
+  const existing = fs.readFileSync(OUT, 'utf8');
+  if (isPromotedNewDesign(existing)) {
+    console.log('Skip pricing.html — compact new-design page is hand-maintained');
+    process.exit(0);
+  }
+}
 
 const html = `<!DOCTYPE html>
 <html lang="en">
@@ -159,7 +174,7 @@ const html = `<!DOCTYPE html>
             </details>
             <details class="faq-item">
               <summary>Is medication included in the monthly price?</summary>
-              <p>Visit fees cover clinician time, evaluation, and monitoring. Medication costs are separate and depend on your pharmacy and plan.</p>
+              <p>Medication cost varies by medication and is decided by you and your clinician as part of your personalized plan.</p>
             </details>
             <details class="faq-item">
               <summary>Are lab tests included in visit pricing?</summary>
@@ -171,7 +186,11 @@ const html = `<!DOCTYPE html>
             </details>
             <details class="faq-item">
               <summary>Which follow-up plan will I need?</summary>
-              <p>Your clinician recommends non-controlled (${PRICING.nonControlledFollowUp.display}/month) or controlled (${PRICING.controlledFollowUp.display}/month) follow-up based on your treatment plan and state regulations—not every patient needs either plan.</p>
+              <p>Your clinician recommends non-controlled (${PRICING.nonControlledFollowUp.display}/month) or controlled (${PRICING.controlledFollowUp.display}/month) follow-up based on your treatment plan and state regulations—not every patient needs either plan. Follow-up cadence is set by you and your clinician as part of your personalized plan — not a fixed number of visits. Scheduled follow-ups within your plan aren’t billed separately.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Does this cover hospital, emergency, or specialist care?</summary>
+              <p>This is not a replacement for hospital, emergency, or specialist care. For emergencies, call 911. For specialist needs, the clinician can help point you in the right direction.</p>
             </details>
           </div>
         </div>

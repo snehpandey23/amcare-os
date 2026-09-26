@@ -4,9 +4,9 @@ This monorepo hosts **multiple Vercel projects**. A bare `vercel deploy --prod` 
 
 | Product | Deploy from |
 |---------|-------------|
-| **Staff portal** | `bash scripts/deploy-staff-portal.sh` |
-| **Auth API** | `cd integrations/hipaa-training-api && npx vercel deploy --prod --yes` |
-| **Patient site** | `cd apps/siya-health && npx vercel deploy --prod --yes` |
+| **Staff portal** (auth API + staff app) | `bash scripts/deploy-staff-portal.sh` — refuses dirty working tree unless `--allow-dirty` |
+| **Auth API alone** | Prefer the script above (same gate). Avoid bare `vercel deploy` — skips dirty check. |
+| **Patient site** | `bash scripts/deploy-siya-health.sh` — refuses if `apps/siya-health` is uncommitted. Do not `cd apps/siya-health && vercel deploy` (rootDirectory doubles the path, and a bare deploy skips the git check). |
 | **Patient Guide bot** | `cd apps/siya-assistant && npx vercel deploy --prod --yes` |
 
 See `.cursor/rules/staff-portal-vercel-deploy.mdc` and `apps/hipaa-training/docs/DEPLOYMENT-GATE.md`.

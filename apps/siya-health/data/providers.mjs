@@ -276,6 +276,7 @@ export const PROVIDERS = [
     carePhilosophy: [
       'Evaluations integrate developmental history, symptom course, family history, and standardized measures. When cognitive testing adds value, we use it as <em>data</em>, not a vending-machine diagnosis. Treatment plans respect your goals, contraindications, and what’s realistic in your week-to-week life.',
       'If controlled substances are not appropriate, you’ll understand why—and what alternatives exist.',
+      'If medication is part of your plan, we don’t rush it. Stimulant medication isn’t started at the first visit. You’ll review and sign a treatment agreement first, and care includes ongoing monitoring, including drug screening and pill counts when clinically indicated.',
     ],
     shortBio:
       'I’m Dr. Swati Pandey. I help adults who’ve white-knuckled their way through careers and relationships while their minds race or go numb. If you’re wondering whether it’s ADHD, mood, both, or something else entirely, we slow down enough to think clearly—together.',

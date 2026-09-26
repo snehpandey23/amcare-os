@@ -4,9 +4,8 @@
  * Usage (from apps/siya-health):
  *   node scripts/export-video-cards.mjs
  *
- * Optional:
- *   SIYA_BASE_URL=https://www.siya.health node scripts/export-video-cards.mjs
- *   (skips local static server)
+ * The public /video-cards URL redirects home. This script serves video-cards.html
+ * from disk on a local port. Do not point SIYA_BASE_URL at production.
  *
  * Requires playwright (monorepo root node_modules).
  */

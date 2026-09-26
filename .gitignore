@@ -38,6 +38,9 @@ Medical Guidelines/
 
 # Brand fuse operational logs (regenerated locally)
 apps/siya-health/brand/04-Content-Tracker/fuse-logs/
+
+# Local homepage previews — excluded from the patient-site deploy
+apps/siya-health/previews/
 tmp/
 
 # OET LMS local LLM/env pulls — never commit
