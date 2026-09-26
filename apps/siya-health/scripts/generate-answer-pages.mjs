@@ -718,12 +718,21 @@ ${hubViewAllScript}
 function main() {
   const activeSeeds = ANSWER_SEEDS.filter((s) => !RETIRED_GUIDE_SLUGS.has(s.slug));
   fs.mkdirSync(ANSWERS_DIR, { recursive: true });
+  let skipped = 0;
+  const isHandMaintained = (filePath) =>
+    fs.existsSync(filePath) && fs.readFileSync(filePath, 'utf8').includes('siya-h2-surface');
   for (const seed of activeSeeds.map(applyCannibalizationOverrides)) {
     const out = path.join(ANSWERS_DIR, `${seed.slug}.html`);
+    if (isHandMaintained(out)) {
+      skipped += 1;
+      continue;
+    }
     fs.writeFileSync(out, applyPricingTokens(buildAnswerPage(seed)), 'utf8');
   }
-  fs.writeFileSync(path.join(ANSWERS_DIR, 'index.html'), applyPricingTokens(buildIndexPage()), 'utf8');
-  console.log('Wrote', activeSeeds.length, 'answer pages + answers/index.html');
+  const indexOut = path.join(ANSWERS_DIR, 'index.html');
+  if (isHandMaintained(indexOut)) skipped += 1;
+  else fs.writeFileSync(indexOut, applyPricingTokens(buildIndexPage()), 'utf8');
+  console.log('Wrote answer pages; skipped hand-maintained homepage2 pages:', skipped);
 }
 
 main();
