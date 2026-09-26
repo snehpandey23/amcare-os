@@ -2815,4 +2815,16 @@
           grid-template-columns: 1fr;
         }
       }
+      body.siya-h2-surface .social-ig-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 540px);
+        justify-content: center;
+        gap: 1.5rem;
+      }
+      body.siya-h2-surface .social-ig-grid .instagram-media {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 540px !important;
+        margin: 0 !important;
+      }
 
