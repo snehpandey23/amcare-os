@@ -1280,9 +1280,47 @@
       body.siya-h2-surface .hero-merged--abstract h1,
       body.siya-h2-surface .hero-merged--abstract .hero-merged-lead,
       body.siya-h2-surface .hero-merged--abstract .hero-merged-content,
-      body.siya-h2-surface .hero-merged--abstract .hero-merged-content p {
-        color: #0A246B;
-        text-shadow: none;
+      body.siya-h2-surface .hero-merged--abstract .hero-merged-content p,
+      body.siya-h2-surface .hero-merged--abstract .hero-trust-bar,
+      body.siya-h2-surface .hero-merged--abstract .hero-trust-bar span,
+      body.siya-h2-surface .hero-merged--abstract .hero-trust-bar strong {
+        color: #0A246B !important;
+        text-shadow: none !important;
+      }
+      /* Primary pills stay white on the gradient in every state. */
+      body.siya-h2-surface .hero-merged--abstract a.button.ds-button--primary,
+      body.siya-h2-surface .hero-merged--abstract a.button.ds-button--primary:hover,
+      body.siya-h2-surface .hero-merged--abstract a.button.ds-button--primary:focus-visible,
+      body.siya-h2-surface .cta-band-buttons a.button.ds-button--primary,
+      body.siya-h2-surface .cta-band-buttons a.button.ds-button--primary:hover,
+      body.siya-h2-surface .cta-band-buttons a.button.ds-button--primary:focus-visible {
+        color: #fff !important;
+        background-color: #D81088 !important;
+        background-image: linear-gradient(135deg, #D81088 0%, #7B2D8E 50%, #001878 115%) !important;
+        border: 0 !important;
+      }
+      /* Secondary booking buttons were outline-white for dark photos.
+         On cream that is white text on a white page. Keep navy on a white fill. */
+      body.siya-h2-surface main .cta-band-buttons a.button.ds-button--secondary,
+      body.siya-h2-surface main .cta-band-buttons a.button.secondary,
+      body.siya-h2-surface main .cta-band-buttons a.button.ds-button--secondary:hover,
+      body.siya-h2-surface main .cta-band-buttons a.button.secondary:hover,
+      body.siya-h2-surface main .cta-band-buttons a.button.ds-button--secondary:focus-visible,
+      body.siya-h2-surface main .cta-band-buttons a.button.secondary:focus-visible,
+      body.siya-h2-surface .hero-merged--abstract a.button.ds-button--secondary,
+      body.siya-h2-surface .hero-merged--abstract a.button.secondary,
+      body.siya-h2-surface .hero-merged--abstract a.button.ds-button--secondary:hover,
+      body.siya-h2-surface .hero-merged--abstract a.button.secondary:hover,
+      body.siya-h2-surface .hero-merged--abstract a.button.ds-button--secondary:focus-visible,
+      body.siya-h2-surface .hero-merged--abstract a.button.secondary:focus-visible {
+        color: #0A246B !important;
+        background-color: #fff !important;
+        background-image: none !important;
+        border: 2px solid #0A246B !important;
+        display: inline-flex !important;
+        padding: 0.7rem 1.35rem !important;
+        border-radius: 999px !important;
+        text-decoration: none !important;
       }
       body.siya-h2-surface .hero-merged--abstract::before {
         display: none !important;
