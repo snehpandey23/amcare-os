@@ -5,11 +5,12 @@ import { isStrongPageHit, linksFromRetrieval, publicPageLink } from './public-ro
 import {
   classifyInputGuards,
   scrubOutputText,
+  stripOperatorInstructions,
 } from './guardrails'
 import { matchDeterministicIntent } from './intents'
 import { formatChunksForPrompt } from './knowledge'
 import { getChatModel, hasLiveModel } from './model'
-import { hasConfidentRetrieval, retrievePublicKnowledge } from './retrieval'
+import { hasConfidentRetrieval, isTopicallyRelevant, retrievePublicKnowledge } from './retrieval'
 import { SYSTEM_PROMPT } from './system-prompt'
 import {
   type ConversationContext,
@@ -47,8 +48,11 @@ function citationsFromChunks(chunks: RetrievedChunk[]) {
 
 function fromRetrievalFallback(chunks: RetrievedChunk[], query: string): GuideResponse {
   if (!hasConfidentRetrieval(chunks)) return notFoundResponse()
+  if (!isTopicallyRelevant(query, chunks[0])) return notFoundResponse()
 
   const top = chunks[0]
+  const visitorSummary = scrubOutputText(stripOperatorInstructions(top.summary))
+  if (!visitorSummary) return notFoundResponse()
   const pageLinks = linksFromRetrieval(chunks, { extras: ['meet_and_greet'], limit: 3 })
 
   // Weak / contested matches → ask, don’t guess
@@ -86,7 +90,7 @@ function fromRetrievalFallback(chunks: RetrievedChunk[], query: string): GuideRe
 
   return {
     state: 'verified',
-    message: top.summary,
+    message: visitorSummary,
     followUp: topicHint,
     links: pageLinks,
     citations: citationsFromChunks([top]),
@@ -136,6 +140,9 @@ async function llmGroundedAnswer(userText: string, chunks: RetrievedChunk[]): Pr
     if (object.state === 'not_found' || !message) {
       return notFoundResponse()
     }
+    if (object.state === 'verified' && !isTopicallyRelevant(userText, chunks[0])) {
+      return notFoundResponse()
+    }
 
     return {
       state: object.state,
@@ -155,6 +162,21 @@ async function llmGroundedAnswer(userText: string, chunks: RetrievedChunk[]): Pr
 }
 
 export async function runSiyaGuide(
+  userText: string,
+  context: ConversationContext = {},
+): Promise<GuideResponse> {
+  const result = await runSiyaGuideUnsanitized(userText, context)
+  return sanitizeVisitorResponse(result)
+}
+
+function sanitizeVisitorResponse(result: GuideResponse): GuideResponse {
+  const message = scrubOutputText(result.message)
+  const followUp = result.followUp ? scrubOutputText(result.followUp) : undefined
+  if (!message) return notFoundResponse()
+  return { ...result, message, followUp: followUp || undefined }
+}
+
+async function runSiyaGuideUnsanitized(
   userText: string,
   context: ConversationContext = {},
 ): Promise<GuideResponse> {

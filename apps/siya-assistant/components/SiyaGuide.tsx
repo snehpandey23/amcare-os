@@ -124,8 +124,8 @@ export function SiyaGuide({
     const payload = {
       source: 'siya-concierge',
       open,
-      width: open ? Math.min(440, window.innerWidth) : Math.min(360, window.innerWidth),
-      height: open ? Math.min(720, window.innerHeight - 12) : 96,
+      width: open ? Math.min(440, window.innerWidth) : 72,
+      height: open ? Math.min(720, window.innerHeight - 12) : 72,
     }
     window.parent?.postMessage(payload, '*')
   }, [embed, open])
@@ -227,10 +227,10 @@ export function SiyaGuide({
   return (
     <div className={`sg-root${embed ? ' sg-root--embed' : ''}`}>
       {open && (
-        <div className="sg-panel" role="dialog" aria-label="Siya AI Concierge">
+        <div className="sg-panel" role="dialog" aria-label="Talk to our AI Concierge">
           <div className="sg-header">
             <div className="sg-header-title">
-              <strong>Siya AI Concierge</strong>
+              <strong>Talk to our AI Concierge</strong>
               <span className="sg-online">Here to help you find the right next step</span>
             </div>
             <button
@@ -337,7 +337,8 @@ export function SiyaGuide({
       <button
         type="button"
         className={`sg-launcher${open ? ' sg-launcher--open' : ''}`}
-        aria-label={open ? 'Close Siya AI Concierge' : 'Talk to our Siya AI Concierge'}
+        aria-label={open ? 'Close AI Concierge' : 'Talk to our AI Concierge'}
+        aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
       >
         {open ? (
@@ -346,6 +347,9 @@ export function SiyaGuide({
           </span>
         ) : (
           <>
+            <span className="sg-launcher-ai" aria-hidden="true">
+              AI
+            </span>
             <span className="sg-launcher-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <path
@@ -354,11 +358,10 @@ export function SiyaGuide({
                   strokeWidth="1.7"
                   strokeLinejoin="round"
                 />
+                <circle cx="9" cy="11" r="1" fill="currentColor" />
+                <circle cx="12.5" cy="11" r="1" fill="currentColor" />
+                <circle cx="16" cy="11" r="1" fill="currentColor" />
               </svg>
-            </span>
-            <span className="sg-launcher-copy">
-              <span className="sg-launcher-kicker">Need help?</span>
-              <span className="sg-launcher-title">Talk to our Siya AI Concierge</span>
             </span>
           </>
         )}

@@ -67,3 +67,21 @@ export function retrievePublicKnowledge(query: string, limit = 5): RetrievedChun
 export function hasConfidentRetrieval(chunks: RetrievedChunk[]): boolean {
   return chunks.length > 0 && chunks[0].score >= 4
 }
+
+/**
+ * A score from one shared keyword is not the same question.
+ * Verified answers need the query's words in the page title, path, or topics.
+ */
+export function isTopicallyRelevant(query: string, chunk: KnowledgeChunk): boolean {
+  const tokens = tokenize(query)
+  if (!tokens.length) return false
+  const strong = new Set(
+    `${chunk.title} ${chunk.path.replace(/[/-]/g, ' ')} ${chunk.topics.join(' ')}`
+      .toLowerCase()
+      .split(/[^a-z0-9$]+/)
+      .filter((w) => w.length > 1),
+  )
+  const hits = tokens.filter((t) => strong.has(t))
+  if (!hits.length) return false
+  return hits.length / tokens.length >= 0.5
+}

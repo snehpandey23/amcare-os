@@ -84,12 +84,12 @@ export function clinicalResponse(extraLinks: string[] = ['adhd_care', 'adhd_scre
   }
 }
 
-export function notFoundResponse(extraLinks: string[] = ['health_guides', 'meet_and_greet', 'call_siya']): GuideResponse {
+export function notFoundResponse(): GuideResponse {
   return {
     state: 'not_found',
-    message: `${NOT_FOUND_MESSAGE} You’re welcome to browse Health Guides, book a free Meet & Greet, or reach our team by call/text.`,
-    followUp: 'Want ADHD care, pricing, labs — or to talk with a human (call, text, email, or Spruce)?',
-    links: resolveLinks(extraLinks),
+    message: `${NOT_FOUND_MESSAGE} I don’t have details on that yet — want me to connect you with someone on the team?`,
+    followUp: 'You can call or text (215) 445-1244, or book a free Meet & Greet. This chat can’t transfer you live.',
+    links: resolveLinks(['call_siya', 'text_siya', 'meet_and_greet']),
     citations: [],
     refusalCategory: 'unsupported',
     analyticsEvent: 'bot_refusal_category',

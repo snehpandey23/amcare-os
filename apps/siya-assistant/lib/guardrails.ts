@@ -84,8 +84,20 @@ const ALLOWED_URL_HOSTS = new Set([
   'us.fullscript.com',
 ])
 
+/** Sentences written to the model, not to a visitor. Apply on every user-facing string. */
+const OPERATOR_SENTENCE =
+  /^(do not|don['’]t|never)\b|\bdo not (answer|invent|share|reveal|discuss|use)\b|\b(use this (only|page)|point to |direct them|if they are)\b/i
+
+export function stripOperatorInstructions(text: string): string {
+  const kept = text
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.trim())
+    .filter((s) => s && !OPERATOR_SENTENCE.test(s))
+  return kept.join(' ').replace(/\s+/g, ' ').trim()
+}
+
 export function scrubOutputText(text: string): string {
-  let out = text.replace(/<[^>]*>/g, '')
+  let out = stripOperatorInstructions(text.replace(/<[^>]*>/g, ''))
   out = out.replace(/```[\s\S]*?```/g, '')
   out = out.replace(SECRETISH, '[redacted]')
   out = out.replace(URL_RE, (url) => {

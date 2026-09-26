@@ -335,16 +335,40 @@ export function linkByPath(path: string): GuideLink | null {
 
 export const QUICK_ACTIONS = [
     {
+        id: 'primary_care',
+        label: 'Primary care',
+        prompt: 'I want to learn about primary care',
+        linkHint: 'primary_care'
+    },
+    {
         id: 'adhd_care',
         label: 'ADHD care',
         prompt: 'I want to learn about ADHD care',
         linkHint: 'adhd_care'
     },
     {
-        id: 'adhd_screening',
-        label: 'Free ADHD screening',
-        prompt: 'How do I take the ADHD screening?',
-        linkHint: 'adhd_screening'
+        id: 'weight_loss',
+        label: 'Weight and metabolic health',
+        prompt: 'I want to learn about weight loss and metabolic health',
+        linkHint: 'weight_loss'
+    },
+    {
+        id: 'womens_health',
+        label: "Women's health",
+        prompt: "I want to learn about women's health",
+        linkHint: 'womens_health'
+    },
+    {
+        id: 'mens_health',
+        label: "Men's health",
+        prompt: "I want to learn about men's health",
+        linkHint: 'mens_health'
+    },
+    {
+        id: 'telehealth',
+        label: 'Telehealth',
+        prompt: 'How does telehealth work at Siya Health?',
+        linkHint: 'telehealth'
     },
     {
         id: 'pricing',
@@ -353,33 +377,9 @@ export const QUICK_ACTIONS = [
         linkHint: 'pricing'
     },
     {
-        id: 'meet_and_greet',
-        label: 'Meet & Greet',
-        prompt: 'How do I book a free Meet & Greet?',
-        linkHint: 'meet_and_greet'
-    },
-    {
-        id: 'contact',
-        label: 'Call or text us',
-        prompt: 'How do I call or text Siya Health?',
-        linkHint: 'call_siya'
-    },
-    {
         id: 'human',
-        label: 'Talk to a human',
+        label: 'Talk with the team',
         prompt: 'I want to talk to a human',
         linkHint: 'call_siya'
-    },
-    {
-        id: 'contact_me',
-        label: 'Contact me',
-        prompt: 'Please have someone contact me',
-        linkHint: 'call_siya'
-    },
-    {
-        id: 'labs',
-        label: 'Labs',
-        prompt: 'Where can I learn about labs and blood tests?',
-        linkHint: 'labs'
     }
 ];

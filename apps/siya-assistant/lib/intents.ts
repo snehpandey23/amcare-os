@@ -46,7 +46,7 @@ const INTENT_PATTERNS: Array<{
   },
   {
     id: 'pricing',
-    re: /\b(pric(e|ing)|cost|fee|how much|\$149|\$79)\b/i,
+    re: /\b(pric(?:e|ing)|\$149|\$79|how much (?:does|is|do|are) (?:siya|it|this|a visit|an evaluation|care|the visit)|(?:visit|evaluation|appointment) (?:cost|fee)|(?:cost|fee) of (?:a |an |the |your )?(?:visit|evaluation|appointment|care|siya))\b/i,
     message:
       'Happy to help with that. Published pricing includes a $149 initial evaluation, plus follow-up plans of $79/month or $149/month when a clinician recommends one. Details can change, so the pricing page is the best place to confirm.',
     followUp: 'Want the full pricing page, ADHD evaluation cost details, or a free Meet & Greet to talk it through?',
@@ -54,7 +54,7 @@ const INTENT_PATTERNS: Array<{
   },
   {
     id: 'adhd_screening',
-    re: /\b(adhd )?screen(ing)?|asrs|free (adhd )?test\b/i,
+    re: /\b(adhd screening|adhd screen|asrs|free (?:adhd )?test|free screening|health screening)\b/i,
     message:
       'There’s a free adult ADHD screening on the site — it only takes a couple of minutes. It’s educational and not a diagnosis, but it can be a calm first step.',
     followUp: 'Want to take the screening now, or read about ADHD care first?',
@@ -72,7 +72,7 @@ const INTENT_PATTERNS: Array<{
   },
   {
     id: 'states',
-    re: /\b(what states|which states|do you (serve|see patients in)|california|texas|florida|pennsylvania|availability|telehealth)\b/i,
+    re: /\b(what states|which states|do you (serve|see patients in)|(?:state|service) availability|availability (?:in|by) (?:state|california|texas|pennsylvania|florida)|telehealth)\b/i,
     message:
       'Siya currently provides telehealth for adults in California, Texas, Pennsylvania, and Florida. Eligibility is confirmed when you schedule.',
     followUp: 'Looking for ADHD, primary care, weight, or something else in your state?',
@@ -80,7 +80,7 @@ const INTENT_PATTERNS: Array<{
   },
   {
     id: 'meet_greet',
-    re: /\b(meet\s*&?\s*greet|book|appointment|schedule|intro call)\b/i,
+    re: /\b(meet\s*&?\s*greet|(?:book|schedule) (?:a |an |my )?(?:visit|appointment|meet(?:\s*&?\s*greet)?)|(?:book|schedule) (?:with|to see) (?:a |your )?(?:clinician|provider|doctor)|intro call)\b/i,
     message:
       'You can book a free Meet & Greet — a short, non-clinical conversation to understand your needs and choose a next step. It isn’t emergency care and doesn’t prescribe medication.',
     followUp: 'Want the Meet & Greet link, or would you rather call or text us?',
@@ -89,7 +89,7 @@ const INTENT_PATTERNS: Array<{
   },
   {
     id: 'private_discussion',
-    re: /\b(private (chat|message|discussion|conversation)|secure (medical )?chat|contact .{0,40}securely|securely|spruce|message (the )?(doctor|clinician|provider)|share (my )?(medical|health|clinical) (info|information|details|history)|before (i |we )?(pay|paying|booking a visit)|talk privately|clinical (message|messaging))\b/i,
+    re: /\b(private (chat|message|discussion|conversation)|secure (medical )?chat|contact .{0,40}securely|spruce|message (the |my )?(doctor|clinician|provider)|share (my )?(medical|health|clinical) (info|information|details|history)|before (i |we )?(pay|paying|booking a visit)|talk privately|clinical (message|messaging))\b/i,
     message:
       'If you’d like a more private conversation about your health before paying for a full visit, that isn’t something this website chat can do. You can book a free Meet & Greet, or download our partner app Spruce and join the Siya Health practice there for secure messaging.',
     followUp: 'Would you like the Meet & Greet booking link, or the Spruce join link?',
@@ -98,7 +98,7 @@ const INTENT_PATTERNS: Array<{
   },
   {
     id: 'contact_phone',
-    re: /\b(contact (the )?(team|clinic|doctor|siya)|talk to (a )?(clinician|provider)|call (siya|you|us)|text (siya|you|us)|phone number|phone|email (siya|you|us|the team)|how do i (reach|contact)|care@siya)\b/i,
+    re: /\b(contact (the )?(team|clinic|doctor|siya)|talk to (a )?(clinician|provider)|call (siya|you|us)|text (siya|you|us)|phone number|email (siya|you|us|the team)|how do i (reach|contact)|care@siya)\b/i,
     message:
       'You can reach a human on the Siya team by calling or texting (215) 445-1244, emailing care@siya.health, or booking a free Meet & Greet. For a more private clinical conversation, you can also join Siya on Spruce.',
     followUp: 'Prefer call, text, email, Meet & Greet, or Spruce?',
@@ -108,7 +108,7 @@ const INTENT_PATTERNS: Array<{
   },
   {
     id: 'providers',
-    re: /\b(who will i see|who do i see|who (would|will) i (meet|see)|which (doctor|provider|clinician)|provider|care team|who (are|is) (the )?(doctors|providers)|dr\.?\s*pandey|dr\.?\s*desai)\b/i,
+    re: /\b(who will i see|who do i see|who (would|will) i (meet|see)|which (doctor|provider|clinician)|(?:your|siya(?:'s)?) (?:doctor|provider|clinician)|care team|who (are|is) (the )?(doctors|providers)|dr\.?\s*pandey|dr\.?\s*desai)\b/i,
     message:
       'You’ll see a licensed Siya clinician appropriate for your visit and state — the public care team pages list who’s on the team and what they focus on. Exact clinician assignment is confirmed at scheduling.',
     followUp: 'Want the care team page, or a Meet & Greet to talk through fit?',
@@ -184,7 +184,7 @@ const INTENT_PATTERNS: Array<{
   },
   {
     id: 'guides',
-    re: /\b(health guides?|articles?|blog|faq|answers)\b/i,
+    re: /\b(health guides?|(?:the |siya )?(?:blog|articles?|faq)|where (?:are|can i (?:find|read)) (?:the )?(?:guides|articles|answers))\b/i,
     message:
       'You can browse Siya’s Health Guides and articles for educational information. They’re helpful context — not individualized medical advice.',
     followUp: 'Looking for ADHD guides, weight topics, or the full Health Guides hub?',
@@ -202,7 +202,7 @@ const INTENT_PATTERNS: Array<{
 
 /** Clinician recruitment — must beat the patient “which provider will I see” intent. */
 const CLINICIAN_JOIN_RE =
-  /\b(join (our |your |the |siya )?(clinical )?team|how (do|can|should) i join|i(?:'| a)?m a (provider|clinician|physician|np|pa)\b[\s\S]{0,60}\b(join|job|jobs|hire|hiring|career|careers|apply|work)|clinician jobs?|provider jobs?|provider career|clinician career|work (for|at|with) siya|apply (to join|as a)|recruit(?:ment|ing)?)\b/i
+  /\b(join (our |your |the |siya )?(clinical )?team|how (do|can|should) i join|how (?:do|can|should) i work(?:ing)? (?:for|at|with) siya|(?:want|like|looking) to work(?:ing)? (?:for|at|with) siya|interested in working (?:for|at|with) siya|i(?:'| a)?m a (provider|clinician|physician|np|pa)\b[\s\S]{0,60}\b(join|job|jobs|hire|hiring|career|careers|apply)|clinician jobs?|provider jobs?|provider career|clinician career|apply (to join|as a)|(?:are you |is siya )?hiring|job opening|recruit(?:ment|ing)?)\b/i
 
 const EMPLOYER_RE =
   /\b(i(?:'| a)?m an employer|we(?:'| a)?re an employer|employer (program|partnership|partnerships|inquiry|page)|become a partner|how (?:do|can|should) (?:i|we) (?:become|be) a partner|partner with (?:you|siya)|workplace partnership|benefits partnership|employer partnerships?)\b/i
@@ -251,6 +251,53 @@ function isClinicianJoinContext(text: string): boolean {
   )
 }
 
+function asksForUnlistedDetail(text: string): boolean {
+  return /\b(draft|unpublished|homepage2|about2|video-cards|california-pilot|university[ -]pilot|pilot)\b/i.test(
+    text,
+  )
+}
+
+const STATE_NAMES = ['california', 'texas', 'florida', 'pennsylvania']
+const STATE_QUESTION_WORDS = new Set([
+  'what',
+  'which',
+  'states',
+  'state',
+  'serve',
+  'patients',
+  'patient',
+  'available',
+  'availability',
+  'licensed',
+  'live',
+  'located',
+  'resident',
+  'from',
+  'based',
+  'telehealth',
+  'siya',
+  'health',
+  'you',
+  'your',
+  'do',
+  'does',
+  'can',
+  'the',
+  'and',
+  'for',
+  'in',
+  'am',
+  'im',
+])
+
+/** A state name alone is a service-area question. Extra topics are a different question. */
+function isBareStateQuestion(text: string): boolean {
+  if (!new RegExp(`\\b(${STATE_NAMES.join('|')})\\b`, 'i').test(text)) return false
+  const words = text.toLowerCase().match(/[a-z]+/g) || []
+  const extras = words.filter((w) => w.length > 2 && !STATE_QUESTION_WORDS.has(w) && !STATE_NAMES.includes(w))
+  return extras.length === 0
+}
+
 export function matchDeterministicIntent(text: string): IntentMatch | null {
   const q = text.trim()
 
@@ -293,8 +340,14 @@ export function matchDeterministicIntent(text: string): IntentMatch | null {
     )
   }
 
+  if (asksForUnlistedDetail(q)) return null
+
   for (const intent of INTENT_PATTERNS) {
-    if (intent.re.test(text)) {
+    const matched =
+      intent.id === 'states'
+        ? intent.re.test(text) || isBareStateQuestion(text)
+        : intent.re.test(text)
+    if (matched) {
       if (intent.id === 'human_handoff') {
         return { id: intent.id, confidence: 0.95, response: humanHandoffResponse() }
       }
