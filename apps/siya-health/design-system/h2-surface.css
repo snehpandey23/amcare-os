@@ -2821,10 +2821,15 @@
         justify-content: center;
         gap: 1.5rem;
       }
-      body.siya-h2-surface .social-ig-grid .instagram-media {
+      body.siya-h2-surface .social-ig-grid > blockquote.instagram-media {
+        width: 100%;
+        max-width: 540px;
+        margin: 0 auto;
+      }
+      body.siya-h2-surface .social-ig-grid > iframe.instagram-media {
         width: 100% !important;
-        min-width: 0 !important;
         max-width: 540px !important;
-        margin: 0 !important;
+        min-width: 326px !important;
+        margin: 0 auto !important;
       }
 
