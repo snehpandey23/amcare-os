@@ -1,6 +1,11 @@
 /**
- * Conversion redirect transition — preserves UTMs, fires analytics synchronously, then redirects.
- * Redirect view events MUST fire here (not deferred) so GTM has time before navigation.
+ * Conversion redirect transition — preserves UTMs, delivers the same analytics
+ * events, then redirects with no visible wait.
+ *
+ * These pages do not load GTM (care-flow gate). The published container
+ * GTM-PLBD4TTQ also has no tags for these event names, so dataLayer.push
+ * alone never becomes a network hit. navigator.sendBeacon to the GA4 collect
+ * endpoint is queued before unload and is what actually leaves the browser.
  */
 (function () {
   'use strict';
@@ -32,8 +37,11 @@
     'ttclid',
   ];
 
+  /* Same property the marketing pages send through GTM. Not a GTM load. */
+  var GA4_MEASUREMENT_ID = 'G-9WTQWHCTFT';
+
   function pushDataLayerEvent(eventName, params) {
-    if (!eventName) return;
+    if (!eventName) return null;
     window.dataLayer = window.dataLayer || [];
     var payload = { event: eventName };
     if (params) {
@@ -47,6 +55,59 @@
     if (DEBUG) {
       console.log('[Siya Redirect]', eventName, payload);
     }
+    return payload;
+  }
+
+  function gaClientId() {
+    var match = document.cookie.match(/(?:^|;\s*)_ga=GA\d+\.\d+\.(\d+\.\d+)/);
+    if (match) return match[1];
+    return Math.floor(Math.random() * 1e10) + '.' + Math.floor(Date.now() / 1000);
+  }
+
+  /**
+   * Queue the GA4 hit with sendBeacon so location.replace cannot cancel it.
+   * Returns false when the browser refuses the beacon; caller then waits briefly.
+   */
+  function sendGa4Beacon(eventName, params) {
+    if (!eventName) return false;
+    var q = new URLSearchParams();
+    q.set('v', '2');
+    q.set('tid', GA4_MEASUREMENT_ID);
+    q.set('cid', gaClientId());
+    q.set('en', eventName);
+    q.set('dl', window.location.href);
+    q.set('dt', document.title || '');
+    q.set('npa', '1');
+    q.set('_s', '1');
+    if (params) {
+      for (var key in params) {
+        if (!Object.prototype.hasOwnProperty.call(params, key)) continue;
+        var val = params[key];
+        if (val == null || val === '') continue;
+        q.set('ep.' + key, String(val).slice(0, 100));
+      }
+    }
+    var url = 'https://www.google-analytics.com/g/collect?' + q.toString();
+    if (typeof navigator.sendBeacon === 'function') {
+      try {
+        if (navigator.sendBeacon(url)) return true;
+      } catch (err) {
+        /* fall through */
+      }
+    }
+    try {
+      if (typeof fetch === 'function') {
+        fetch(url, { method: 'POST', mode: 'no-cors', keepalive: true, credentials: 'omit' });
+      }
+    } catch (err2) {
+      /* still delay below so a later hit has a chance */
+    }
+    return false;
+  }
+
+  function deliverEvent(eventName, params) {
+    pushDataLayerEvent(eventName, params);
+    return sendGa4Beacon(eventName, params);
   }
 
   var baseParams = {
@@ -58,15 +119,17 @@
     conversion_type: (config.type || 'redirect') + '_redirect',
   };
 
-  /* Standardized conversion event (GTM Preview / new triggers) */
+  /* Same event names as before. Beacon is queued here, before the URL is built
+     and before navigation, so unload cannot outrun the hit. */
+  var beaconOk = true;
   var standardEvent = REDIRECT_VIEW_EVENTS[config.type];
   if (standardEvent) {
-    pushDataLayerEvent(standardEvent, baseParams);
+    beaconOk = deliverEvent(standardEvent, baseParams) && beaconOk;
   }
 
-  /* Legacy event name from SIYA_REDIRECT_CONFIG (existing GTM triggers) */
+  /* Legacy event name from SIYA_REDIRECT_CONFIG (existing triggers) */
   if (config.analyticsEvent && config.analyticsEvent !== standardEvent) {
-    pushDataLayerEvent(config.analyticsEvent, baseParams);
+    beaconOk = deliverEvent(config.analyticsEvent, baseParams) && beaconOk;
   }
 
   function readStoredAttribution() {
@@ -124,9 +187,12 @@
   var link = document.getElementById('siya-redirect-fallback');
   if (link) link.href = dest.toString();
 
-  /* 2000ms gives async GTM + consent tags time to fire before leaving for Spruce/CarePatron */
-  var delay = typeof config.delayMs === 'number' ? config.delayMs : 2000;
-  window.setTimeout(function () {
+  function leave() {
     window.location.replace(dest.toString());
-  }, delay);
+  }
+
+  /* Beacon already queued the hit. If the browser refused it, the keepalive
+     fetch above needs a short head start — 150ms, not the old 2s spinner. */
+  if (beaconOk) leave();
+  else window.setTimeout(leave, 150);
 })();

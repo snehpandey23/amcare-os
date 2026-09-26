@@ -570,7 +570,7 @@ const H2_LIVE_PAGES = new Set([
 function processHtml(relPath) {
   const fullPath = path.join(SITE_ROOT, relPath);
   let html = fs.readFileSync(fullPath, 'utf8');
-  if (H2_LIVE_PAGES.has(relPath) && html.includes('siya-h2-surface')) {
+  if (html.includes('siya-h2-surface')) {
     html = normalizeRootAssetPaths(html);
     fs.writeFileSync(fullPath, html, 'utf8');
     return;

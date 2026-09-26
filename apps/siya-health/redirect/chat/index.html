@@ -1,40 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-<meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
-    <meta name="description" content="Learn more about Connecting to Secure Medical Chat with Siya Health telehealth." /><link rel="canonical" href="https://siya.health/redirect/chat" />
-    <meta property="og:title" content="Connecting to Secure Medical Chat | Siya Health" />
-    <meta property="og:description" content="Learn more about Connecting to Secure Medical Chat with Siya Health telehealth." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://siya.health/redirect/chat" />
-    <meta property="og:image" content="https://siya.health/assets/images/siya-health-logo.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="Siya Health" />
-    <meta property="og:locale" content="en_US" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Connecting to Secure Medical Chat | Siya Health" />
-    <meta name="twitter:description" content="Learn more about Connecting to Secure Medical Chat with Siya Health telehealth." />
-    <meta name="twitter:image" content="https://siya.health/assets/images/siya-health-logo.png" />
     <meta name="robots" content="noindex, nofollow" />
     <title>Connecting to Secure Medical Chat | Siya Health</title>
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
-    <link rel="stylesheet" href="/styles.css?v=1789609360717.9763" />
+    <script>window.SIYA_REDIRECT_CONFIG = {"destination":"https://spruce.care/siyahealth","analyticsEvent":"redirect_secure_chat","type":"secure_chat","delayMs":0};</script>
+    <!-- Before stylesheets so Slow 3G cannot delay the beacon or the redirect. -->
+    <script src="/scripts/redirect-transition.js"></script>
+    <link rel="stylesheet" href="/styles.css" />
     <style>
-      .redirect-transition { min-height: 70vh; display: flex; align-items: center; justify-content: center; padding: 48px 20px; }
+      .redirect-transition { display: none; }
       .redirect-transition__card { max-width: 520px; text-align: center; }
       .redirect-transition__logo { height: 56px; width: auto; max-width: 200px; margin: 0 auto 24px; display: block; object-fit: contain; }
       .redirect-transition__spinner { width: 36px; height: 36px; border: 3px solid rgba(216,16,136,.2); border-top-color: #D81088; border-radius: 50%; margin: 20px auto; animation: siya-spin .8s linear infinite; }
       @keyframes siya-spin { to { transform: rotate(360deg); } }
     </style>
-    <script>window.SIYA_REDIRECT_CONFIG = {"destination":"https://spruce.care/siyahealth","analyticsEvent":"redirect_secure_chat","type":"secure_chat","delayMs":2000};</script>
-  
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Siya Health","url":"https://siya.health","logo":"https://siya.health/assets/images/siya-health-logo.png"}</script>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Connecting to Secure Medical Chat | Siya Health","description":"Learn more about Connecting to Secure Medical Chat with Siya Health telehealth.","url":"https://siya.health/redirect/chat"}</script>
   </head>
   <body>
+    <noscript><p><a href="https://spruce.care/siyahealth">Continue to Secure Medical Chat</a></p></noscript>
     <main class="redirect-transition" id="main">
       <div class="redirect-transition__card">
         <a href="/"><img class="redirect-transition__logo" src="/assets/images/siya-health-logo-registered.png" alt="Siya Health" width="200" height="56" /></a>
@@ -45,6 +30,5 @@
         <p class="cta-microcopy">If you are not redirected automatically, use the button above.</p>
       </div>
     </main>
-    <script src="/scripts/redirect-transition.js"></script>
   </body>
 </html>

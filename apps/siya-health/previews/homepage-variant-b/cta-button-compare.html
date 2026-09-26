@@ -142,8 +142,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Siya Health","url":"https://siya.health","logo":"https://siya.health/assets/images/siya-health-logo.png"}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"CTA button comparison — Variant B","description":"Learn more about CTA button comparison — Variant B with Siya Health telehealth.","url":"https://siya.health/previews/homepage-variant-b/cta-button-compare"}</script>
+      <link rel="stylesheet" href="/design-system/h2-surface.css" />
   </head>
-<body>
+<body class="siya-h2-surface">
+    <div class="siya-h2-cursor-glow" aria-hidden="true"></div>
+    <div class="siya-h2-page-bg" aria-hidden="true">
+      <svg class="siya-h2-page-bg__svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="presentation">
+        <defs>
+          <linearGradient id="siyaHeroCream" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#F4EFE7"/><stop offset="55%" stop-color="#E8EEF8"/><stop offset="100%" stop-color="#F7F2EC"/>
+          </linearGradient>
+          <radialGradient id="siyaHeroGlowA" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#D81088" stop-opacity="0.5"/><stop offset="100%" stop-color="#D81088" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="siyaHeroGlowB" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#001878" stop-opacity="0.42"/><stop offset="100%" stop-color="#001878" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="1200" height="800" fill="url(#siyaHeroCream)"/>
+        <g class="siya-hero-drift siya-hero-drift--a"><circle cx="240" cy="220" r="190" fill="url(#siyaHeroGlowA)"/>
+          <circle class="siya-h2-ring" cx="240" cy="220" r="88" fill="none" stroke="#D81088" stroke-width="2.75"/>
+          <circle class="siya-h2-ring siya-h2-ring--outer" cx="240" cy="220" r="132" fill="none" stroke="#D81088" stroke-width="1.6"/></g>
+        <g class="siya-hero-drift siya-hero-drift--b"><circle cx="940" cy="500" r="230" fill="url(#siyaHeroGlowB)"/>
+          <circle class="siya-h2-ring" cx="940" cy="500" r="108" fill="none" stroke="#001878" stroke-width="2.75"/>
+          <circle class="siya-h2-ring siya-h2-ring--outer" cx="940" cy="500" r="156" fill="none" stroke="#0A246B" stroke-width="1.6"/></g>
+        <g class="siya-hero-drift siya-hero-drift--wave">
+          <path d="M40 620 C 220 500, 380 700, 560 560 S 900 480, 1180 380" fill="none" stroke="#D81088" stroke-width="2.75" stroke-linecap="round"/>
+          <path d="M20 300 C 200 380, 360 180, 540 280 S 840 360, 1160 200" fill="none" stroke="#001878" stroke-width="2.5" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
     <!-- Meta Pixel noscript -->
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=2150753979117600&ev=PageView&noscript=1"
@@ -233,5 +261,9 @@ height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe
 <!-- SIYA:CONCIERGE -->
     <script src="/scripts/siya-concierge.js" defer></script>
     <!-- /SIYA:CONCIERGE -->
-</body>
+    <footer class="footer siya-h2-footer-compact" id="siya-h2-footer"></footer>
+    <script src="/scripts/h2-footer.js"></script>
+    <script src="/scripts/h2-motion.js" defer></script>
+    <script src="/scripts/header-scroll.js" defer></script>
+  </body>
 </html>

@@ -70,7 +70,7 @@ function renderPage(page) {
     destination: page.destination,
     analyticsEvent: page.analyticsEvent,
     type: page.type,
-    delayMs: 2000,
+    delayMs: 0,
   });
 
   return `<!DOCTYPE html>
@@ -81,17 +81,20 @@ function renderPage(page) {
     <meta name="robots" content="noindex, nofollow" />
     <title>${esc(page.title)}</title>
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <script>window.SIYA_REDIRECT_CONFIG = ${config};</script>
+    <!-- Before stylesheets so Slow 3G cannot delay the beacon or the redirect. -->
+    <script src="/scripts/redirect-transition.js"></script>
     <link rel="stylesheet" href="/styles.css" />
     <style>
-      .redirect-transition { min-height: 70vh; display: flex; align-items: center; justify-content: center; padding: 48px 20px; }
+      .redirect-transition { display: none; }
       .redirect-transition__card { max-width: 520px; text-align: center; }
       .redirect-transition__logo { height: 56px; width: auto; max-width: 200px; margin: 0 auto 24px; display: block; object-fit: contain; }
       .redirect-transition__spinner { width: 36px; height: 36px; border: 3px solid rgba(216,16,136,.2); border-top-color: #D81088; border-radius: 50%; margin: 20px auto; animation: siya-spin .8s linear infinite; }
       @keyframes siya-spin { to { transform: rotate(360deg); } }
     </style>
-    <script>window.SIYA_REDIRECT_CONFIG = ${config};</script>
   </head>
   <body>
+    <noscript><p><a href="${esc(page.destination)}">${esc(page.ctaLabel)}</a></p></noscript>
     <main class="redirect-transition" id="main">
       <div class="redirect-transition__card">
         <a href="/"><img class="redirect-transition__logo" src="/assets/images/siya-health-logo-registered.png" alt="Siya Health" width="200" height="56" /></a>
@@ -102,7 +105,6 @@ function renderPage(page) {
         <p class="cta-microcopy">If you are not redirected automatically, use the button above.</p>
       </div>
     </main>
-    <script src="/scripts/redirect-transition.js"></script>
   </body>
 </html>
 `;

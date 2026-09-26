@@ -15,6 +15,7 @@
       if (!btn || !content) return;
       card.classList.add('is-open');
       btn.setAttribute('aria-expanded', 'true');
+      content.style.maxHeight = 'none';
       content.style.maxHeight = content.scrollHeight + 'px';
     }
 

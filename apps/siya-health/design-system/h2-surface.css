@@ -2773,6 +2773,25 @@
       body.legal-page.siya-h2-surface .legal-document-body a {
         color: #001878;
       }
+      body.siya-h2-surface,
+      body.siya-h2-surface .hero-merged h1,
+      body.siya-h2-surface .hero-merged-lead,
+      body.siya-h2-surface .hero-fullwidth h1,
+      body.siya-h2-surface .section h1,
+      body.siya-h2-surface .section h2,
+      body.siya-h2-surface .section h3,
+      body.siya-h2-surface .section p,
+      body.siya-h2-surface .section li {
+        text-shadow: none;
+      }
+      body.siya-h2-surface .hero-merged h1,
+      body.siya-h2-surface .hero-merged-lead,
+      body.siya-h2-surface .hero-merged-content,
+      body.siya-h2-surface .hero-merged-content p,
+      body.siya-h2-surface .hero-fullwidth h1 {
+        color: #0A246B;
+        text-shadow: none;
+      }
 
       /* /social accounts: six cards in even rows, icon beside the name. */
       body.siya-h2-surface .social-follow-grid {

@@ -42,27 +42,6 @@ function pathToFile(urlPath) {
   return path.join(ROOT, `${clean}.html`);
 }
 
-function stubHtml(sourcePath, dest, note) {
-  const sourceSlug = sourcePath.replace(/^\//, '').replace(/\//g, ' · ');
-  const title = sourceSlug ? `Moved · ${sourceSlug} — Siya Health` : 'Moved — Siya Health';
-  return `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>${title}</title>
-    <link rel="canonical" href="https://siya.health${dest}" />
-    <meta http-equiv="refresh" content="0;url=${dest}" />
-    <script>location.replace('${dest}');</script>
-  </head>
-  <body>
-    <p>This page was retired (${note}). Continues at <a href="${dest}">${dest}</a>.</p>
-  </body>
-</html>
-`;
-}
-
 function upsertVercelRedirects() {
   const vercelPath = path.join(ROOT, 'vercel.json');
   const vercel = JSON.parse(fs.readFileSync(vercelPath, 'utf8'));
@@ -114,15 +93,14 @@ function upsertRedirectMap() {
 
 let stubs = 0;
 let skipped = 0;
-for (const [from, { destination, note }] of Object.entries(ALL_RETIREMENTS)) {
+for (const [from] of Object.entries(ALL_RETIREMENTS)) {
   const file = pathToFile(from);
-  // Some retirements predate the file being deleted; redirect registration is enough.
-  if (!fs.existsSync(file) && !fs.existsSync(path.dirname(file))) {
+  if (fs.existsSync(file)) {
+    fs.unlinkSync(file);
+    stubs += 1;
+  } else {
     skipped += 1;
-    continue;
   }
-  fs.writeFileSync(file, stubHtml(from, destination, note));
-  stubs += 1;
 }
 
 const added = upsertVercelRedirects();
@@ -131,7 +109,7 @@ upsertRedirectMap();
 console.log(
   JSON.stringify(
     {
-      stubsWritten: stubs,
+      stubsRemoved: stubs,
       stubsSkippedMissingDir: skipped,
       vercelRedirectsAdded: added,
       ...GEO_CLONE_STATS,
