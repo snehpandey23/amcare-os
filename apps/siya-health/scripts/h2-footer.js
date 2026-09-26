@@ -9,7 +9,7 @@
     '<div class="container container--footer-wide siya-h2-footer-line" data-siya-footer="compact-v2">' +
     '<a href="/about">About</a>' +
     '<span class="siya-h2-footer-sep" aria-hidden="true">·</span>' +
-    '<a href="/pricing2">Pricing</a>' +
+    '<a href="/pricing">Pricing</a>' +
     '<span class="siya-h2-footer-sep" aria-hidden="true">·</span>' +
     '<a href="/social">Social</a>' +
     '<span class="siya-h2-footer-sep" aria-hidden="true">·</span>' +

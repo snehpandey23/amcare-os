@@ -1757,7 +1757,7 @@
         flex-wrap: wrap;
         justify-content: center;
         gap: 0.95rem 1.25rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0;
         list-style: none;
         padding: 0;
       }
@@ -2120,6 +2120,31 @@
         align-items: center;
         gap: 1rem;
       }
+      /* Header and main share z-index 1. The open menu hangs out of the header,
+         so the later main paints the headline over the items. */
+      body.siya-h2-surface .site-header,
+      body.siya-h2-surface .site-header-transparent,
+      body.siya-h2-surface .site-header-transparent.site-header-scrolled {
+        z-index: 200;
+      }
+      body.siya-h2-surface .nav-mobile {
+        z-index: 2;
+        background: #ffffff;
+        background-color: #ffffff;
+        color: #0A246B;
+        box-shadow: 0 18px 36px rgba(10, 36, 107, 0.16);
+      }
+      body.siya-h2-surface .nav-mobile a {
+        color: #0A246B;
+      }
+      body.siya-h2-surface .site-header-transparent .nav-toggle-label {
+        color: #0A246B;
+        border-color: rgba(10, 36, 107, 0.18);
+        background: #ffffff;
+      }
+      body.siya-h2-surface .site-header-transparent .nav-toggle-label::before {
+        color: #0A246B;
+      }
       body.siya-h2-surface .nav-center { display: none !important; }
       body.siya-h2-surface .header-logo.brand-lockup,
       body.siya-h2-surface .brand-lockup {
@@ -2422,7 +2447,7 @@
         justify-items: center;
         /* Prompt 21 — spacer below stats; was capped at 8rem which left
            “taught” in-view on ~1080px-tall desktops */
-        margin: 0 0 clamp(4.5rem, 28vh, 18rem);
+        margin: 0 0 1.75rem;
         padding: 0 0 1.85rem;
         border-bottom: 1px solid rgba(0, 24, 120, 0.08);
         text-align: center;
@@ -2558,8 +2583,123 @@
         color: rgba(10, 36, 107, 0.82);
       }
 
-      /* legacy pills unused */
       body.siya-h2-surface .siya-h2-scope-pills { display: none !important; }
+
+      .siya-h2-patterns-header {
+        margin-top: 4.75rem;
+        padding-top: 2.75rem;
+        border-top: 1px solid rgba(0, 24, 120, 0.14);
+      }
+
+      .siya-h2-compare-wrap { overflow-x: auto; }
+      .siya-h2-compare {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 36rem;
+      }
+      .siya-h2-compare th,
+      .siya-h2-compare td {
+        border-bottom: 1px solid rgba(10, 36, 107, 0.16);
+        padding: 0.95rem 0.85rem;
+        text-align: left;
+        vertical-align: top;
+        color: #0A246B;
+      }
+      .siya-h2-compare thead th {
+        border-bottom-width: 2px;
+        font-size: 1.05rem;
+      }
+      .siya-h2-compare tbody th {
+        width: 22%;
+        font-weight: 700;
+        background: rgba(255, 255, 255, 0.72);
+      }
+      .siya-h2-compare tbody tr:nth-child(even) td,
+      .siya-h2-compare tbody tr:nth-child(even) th {
+        background: rgba(244, 239, 231, 0.85);
+      }
+      .siya-h2-compare tbody tr:nth-child(odd) td {
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      body.siya-h2-surface #care-team .siya-h2-founder-card {
+        display: grid;
+        grid-template-columns: 148px minmax(0, 1fr);
+        gap: 1rem 1.15rem;
+        align-items: center;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(0, 24, 120, 0.1);
+        border-radius: 1rem;
+      }
+      body.siya-h2-surface #care-team .siya-h2-founder-card img {
+        width: 148px;
+        height: 190px;
+        border-radius: 0.85rem;
+        object-fit: cover;
+        object-position: center top;
+      }
+      body.siya-h2-surface #care-team .siya-h2-founder-role {
+        margin: 0.15rem 0 0.35rem;
+        font-weight: 700;
+        color: #0A246B;
+      }
+      body.siya-h2-surface #care-team .siya-h2-founder-cred {
+        margin: 0;
+        color: rgba(10, 36, 107, 0.82);
+        font-size: 0.95rem;
+        line-height: 1.45;
+      }
+      @media (max-width: 640px) {
+        body.siya-h2-surface #care-team .siya-h2-founder-card {
+          grid-template-columns: 1fr;
+        }
+        body.siya-h2-surface #care-team .siya-h2-founder-card img {
+          width: 100%;
+          height: 280px;
+        }
+      }
+
+      body.siya-h2-surface .about-team-card h3,
+      body.siya-h2-surface .about-team-card h3 a {
+        color: #0A246B !important;
+        -webkit-text-fill-color: #0A246B !important;
+        background: none !important;
+        background-image: none !important;
+        -webkit-background-clip: border-box !important;
+        background-clip: border-box !important;
+        text-decoration: none !important;
+      }
+      body.siya-h2-surface .about-team-card img {
+        width: 168px;
+        height: 210px;
+        border-radius: 0.9rem;
+        object-fit: cover;
+        object-position: center top;
+      }
+      body.siya-h2-surface .about-md-highlight img {
+        width: 180px;
+        height: 230px;
+        border-radius: 0.9rem;
+        object-fit: cover;
+        object-position: center top;
+      }
+      body.siya-h2-surface .about-team-card .button.secondary {
+        display: inline-flex !important;
+        width: auto !important;
+        align-self: center;
+        margin-top: auto;
+        padding: 0 !important;
+        min-height: 0 !important;
+        background: none !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        color: #0A246B !important;
+        -webkit-text-fill-color: #0A246B !important;
+        font-weight: 700 !important;
+        text-decoration: underline !important;
+        text-underline-offset: 0.16em;
+      }
 
       .siya-h2-story-close {
         margin: 1.75rem auto 0;
@@ -2651,13 +2791,24 @@
         display: block;
       }
       body.siya-h2-surface #still-not-sure .siya-h2-scope-note {
-        margin: 1.15rem 0 0;
-        max-width: 38rem;
+        margin: 1.15rem auto 0;
+        max-width: 40rem;
+        width: 100%;
+        text-align: center;
         font-size: 0.92rem;
         line-height: 1.5;
         color: rgba(10, 36, 107, 0.72);
       }
-      body.siya-h2-surface .faq-accordion-card {
+      body.siya-h2-surface #faq.faq-accordion-section {
+        padding-top: 1.75rem !important;
+      }
+      body.siya-h2-surface #faq .faq-accordion-header {
+        margin-top: 0;
+        margin-bottom: 1.25rem;
+      }
+      body.siya-h2-surface #faq .faq-accordion-header h2 {
+        margin-top: 0;
+      }
         background: rgba(255,255,255,0.5) !important;
         border: 1px solid rgba(0,24,120,0.1) !important;
         border-radius: 0.9rem !important;
@@ -2699,7 +2850,12 @@
         color: rgba(244,239,231,0.58);
         white-space: nowrap;
       }
-      body.siya-h2-surface .footer-notice { display: none !important; }
+      body.siya-h2-surface #employer-inquiry {
+        scroll-margin-top: 5.5rem;
+      }
+      body.siya-h2-surface:has(.site-header-transparent) .blog-article {
+        padding-top: calc(var(--header-height, 72px) + 1.75rem);
+      }
       body.siya-h2-surface .mobile-sticky-cta {
         display: none !important;
       }
@@ -2718,10 +2874,10 @@
       body.siya-h2-surface .siya-h2-employer-nudge__title {
         margin: 0 0 0.4rem;
         font-family: Georgia, "Times New Roman", serif;
-        font-size: clamp(1.05rem, 2.2vw, 1.25rem);
-        font-weight: 400;
+        font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+        font-weight: 700;
         color: #0A246B;
-        letter-spacing: -0.01em;
+        letter-spacing: -0.02em;
       }
       body.siya-h2-surface .siya-h2-employer-nudge__copy {
         margin: 0 0 0.85rem;
@@ -2736,9 +2892,17 @@
         justify-content: center;
         align-items: center;
       }
-      body.siya-h2-surface .siya-h2-employer-nudge__actions .button {
-        font-size: 0.82rem !important;
-        padding: 0.45rem 0.95rem !important;
+      body.siya-h2-surface .siya-h2-employer-nudge__actions .button,
+      body.siya-h2-surface .siya-h2-employer-nudge__cta {
+        font-family: Arial, Helvetica, sans-serif !important;
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        padding: 0.75rem 1.35rem !important;
+        border-radius: 999px !important;
+        text-decoration: none !important;
+        color: #fff !important;
+        background: var(--accent-gradient) !important;
+        display: inline-flex !important;
       }
       body.siya-h2-surface .siya-h2-employer-nudge__link {
         font-size: 0.82rem;

@@ -30,8 +30,28 @@
       "permanent": true
     },
     {
-      "source": "/homepage3",
-      "destination": "/",
+      "source": "/pricing2",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/terms2",
+      "destination": "/legal/terms-of-use",
+      "permanent": true
+    },
+    {
+      "source": "/privacy2",
+      "destination": "/legal/privacy-policy",
+      "permanent": true
+    },
+    {
+      "source": "/employers2",
+      "destination": "/employers",
+      "permanent": true
+    },
+    {
+      "source": "/about2",
+      "destination": "/about",
       "permanent": true
     },
     {

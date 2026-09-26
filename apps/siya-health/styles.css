@@ -5867,6 +5867,40 @@ img.footer-trust-logo[src*="legitscript"] {
   font-size: 0.8rem;
   color: rgba(10, 36, 107, 0.62);
 }
+.social-blog-carousel {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  padding-bottom: 0.5rem;
+}
+.social-blog-carousel__track {
+  display: flex;
+  gap: 1rem;
+  min-width: min-content;
+}
+.social-blog-card {
+  flex: 0 0 min(280px, 82vw);
+  scroll-snap-align: start;
+  background: var(--white);
+  border: 1px solid var(--ds-card-border);
+  border-radius: 0.75rem;
+  padding: 1.1rem 1.15rem 1.2rem;
+}
+.social-blog-card h3 {
+  margin: 0.35rem 0 0.5rem;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+.social-blog-card h3 a {
+  color: var(--primary);
+  text-decoration: none;
+}
+.social-blog-card p {
+  margin: 0 0 0.9rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
 .icon-card-icon {
   font-size: 1.75rem;
   display: block;
