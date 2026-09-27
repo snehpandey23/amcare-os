@@ -5871,8 +5871,14 @@ img.footer-trust-logo[src*="legitscript"] {
 .blog-compare { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
 .blog-compare th, .blog-compare td { border: 1px solid rgba(10, 36, 107, 0.15); padding: 0.65rem 0.75rem; text-align: left; vertical-align: top; }
 .blog-compare caption { text-align: left; font-size: 0.85rem; margin-bottom: 0.5rem; color: #0A246B; }
-.faq-accordion details.faq-item { border-bottom: 1px solid rgba(10, 36, 107, 0.12); padding: 0.65rem 0; }
-.faq-accordion details.faq-item summary { cursor: pointer; font-weight: 600; color: #001878; }
+/* Same premium FAQ cards as the homepage, inside an article column */
+.faq-accordion-section--embed {
+  padding: 0.25rem 0 0;
+}
+.faq-accordion-section--embed .faq-accordion {
+  max-width: none;
+  margin: 0;
+}
 .social-blog-carousel {
   overflow-x: auto;
   scroll-snap-type: x mandatory;

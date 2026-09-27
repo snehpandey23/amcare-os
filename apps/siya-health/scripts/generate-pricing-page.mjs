@@ -163,36 +163,15 @@ const html = `<!DOCTYPE html>
           <div class="section-header">
             <h2>Pricing FAQ</h2>
           </div>
-          <div class="faq-accordion">
-            <details class="faq-item">
-              <summary>Is this ADHD-only pricing?</summary>
-              <p>No. These are care-delivery plans used across service lines—evaluation first, then follow-up matched to your clinical needs.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Do you take insurance?</summary>
-              <p>We offer transparent cash pricing today. Many patients use FSA or HSA funds. Insurance-based options may be added later.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Is medication included in the monthly price?</summary>
-              <p>Medication cost varies by medication and is decided by you and your clinician as part of your personalized plan.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Are lab tests included in visit pricing?</summary>
-              <p>No. Laboratory tests are ordered and priced separately through our transparent direct-pay storefront. Clinician review of results is part of visits and follow-up plans when appropriate. Start at <a href="/labs">Labs &amp; Blood Tests</a>.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Is Creyos testing included in the evaluation?</summary>
-              <p>When clinically appropriate, cognitive testing such as <a href="/creyos-adhd-testing">Creyos</a> may be part of an adult ADHD evaluation. Your clinician decides which tools fit your history—not every patient receives every instrument.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Which follow-up plan will I need?</summary>
-              <p>Your clinician recommends non-controlled (${PRICING.nonControlledFollowUp.display}/month) or controlled (${PRICING.controlledFollowUp.display}/month) follow-up based on your treatment plan and state regulations—not every patient needs either plan. Follow-up cadence is set by you and your clinician as part of your personalized plan — not a fixed number of visits. Scheduled follow-ups within your plan aren’t billed separately.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Does this cover hospital, emergency, or specialist care?</summary>
-              <p>This is not a replacement for hospital, emergency, or specialist care. For emergencies, call 911. For specialist needs, the clinician can help point you in the right direction.</p>
-            </details>
-          </div>
+          <div class="faq-accordion-section faq-accordion-section--embed" data-faq-accordion><div class="faq-accordion"><div class="faq-accordion-list">
+<div class="faq-accordion-card" data-faq-item><h3 style="margin:0;"><button type="button" class="faq-accordion-trigger" data-faq-trigger aria-expanded="false" aria-controls="faq-generate-pricing-page-0" id="faq-generate-pricing-page-0-q"><span>Is this ADHD-only pricing?</span><span class="faq-accordion-icon" aria-hidden="true">+</span></button></h3><div id="faq-generate-pricing-page-0" class="faq-accordion-content" role="region" aria-labelledby="faq-generate-pricing-page-0-q" data-faq-content><div class="faq-accordion-inner"><p>No. These are care-delivery plans used across service lines—evaluation first, then follow-up matched to your clinical needs.</p></div></div></div>
+<div class="faq-accordion-card" data-faq-item><h3 style="margin:0;"><button type="button" class="faq-accordion-trigger" data-faq-trigger aria-expanded="false" aria-controls="faq-generate-pricing-page-1" id="faq-generate-pricing-page-1-q"><span>Do you take insurance?</span><span class="faq-accordion-icon" aria-hidden="true">+</span></button></h3><div id="faq-generate-pricing-page-1" class="faq-accordion-content" role="region" aria-labelledby="faq-generate-pricing-page-1-q" data-faq-content><div class="faq-accordion-inner"><p>We offer transparent cash pricing today. Many patients use FSA or HSA funds. Insurance-based options may be added later.</p></div></div></div>
+<div class="faq-accordion-card" data-faq-item><h3 style="margin:0;"><button type="button" class="faq-accordion-trigger" data-faq-trigger aria-expanded="false" aria-controls="faq-generate-pricing-page-2" id="faq-generate-pricing-page-2-q"><span>Is medication included in the monthly price?</span><span class="faq-accordion-icon" aria-hidden="true">+</span></button></h3><div id="faq-generate-pricing-page-2" class="faq-accordion-content" role="region" aria-labelledby="faq-generate-pricing-page-2-q" data-faq-content><div class="faq-accordion-inner"><p>Medication cost varies by medication and is decided by you and your clinician as part of your personalized plan.</p></div></div></div>
+<div class="faq-accordion-card" data-faq-item><h3 style="margin:0;"><button type="button" class="faq-accordion-trigger" data-faq-trigger aria-expanded="false" aria-controls="faq-generate-pricing-page-3" id="faq-generate-pricing-page-3-q"><span>Are lab tests included in visit pricing?</span><span class="faq-accordion-icon" aria-hidden="true">+</span></button></h3><div id="faq-generate-pricing-page-3" class="faq-accordion-content" role="region" aria-labelledby="faq-generate-pricing-page-3-q" data-faq-content><div class="faq-accordion-inner"><p>No. Laboratory tests are ordered and priced separately through our transparent direct-pay storefront. Clinician review of results is part of visits and follow-up plans when appropriate. Start at <a href="/labs">Labs &amp; Blood Tests</a>.</p></div></div></div>
+<div class="faq-accordion-card" data-faq-item><h3 style="margin:0;"><button type="button" class="faq-accordion-trigger" data-faq-trigger aria-expanded="false" aria-controls="faq-generate-pricing-page-4" id="faq-generate-pricing-page-4-q"><span>Is Creyos testing included in the evaluation?</span><span class="faq-accordion-icon" aria-hidden="true">+</span></button></h3><div id="faq-generate-pricing-page-4" class="faq-accordion-content" role="region" aria-labelledby="faq-generate-pricing-page-4-q" data-faq-content><div class="faq-accordion-inner"><p>When clinically appropriate, cognitive testing such as <a href="/creyos-adhd-testing">Creyos</a> may be part of an adult ADHD evaluation. Your clinician decides which tools fit your history—not every patient receives every instrument.</p></div></div></div>
+<div class="faq-accordion-card" data-faq-item><h3 style="margin:0;"><button type="button" class="faq-accordion-trigger" data-faq-trigger aria-expanded="false" aria-controls="faq-generate-pricing-page-5" id="faq-generate-pricing-page-5-q"><span>Which follow-up plan will I need?</span><span class="faq-accordion-icon" aria-hidden="true">+</span></button></h3><div id="faq-generate-pricing-page-5" class="faq-accordion-content" role="region" aria-labelledby="faq-generate-pricing-page-5-q" data-faq-content><div class="faq-accordion-inner"><p>Your clinician recommends non-controlled (${PRICING.nonControlledFollowUp.display}/month) or controlled (${PRICING.controlledFollowUp.display}/month) follow-up based on your treatment plan and state regulations—not every patient needs either plan. Follow-up cadence is set by you and your clinician as part of your personalized plan — not a fixed number of visits. Scheduled follow-ups within your plan aren’t billed separately.</p></div></div></div>
+<div class="faq-accordion-card" data-faq-item><h3 style="margin:0;"><button type="button" class="faq-accordion-trigger" data-faq-trigger aria-expanded="false" aria-controls="faq-generate-pricing-page-6" id="faq-generate-pricing-page-6-q"><span>Does this cover hospital, emergency, or specialist care?</span><span class="faq-accordion-icon" aria-hidden="true">+</span></button></h3><div id="faq-generate-pricing-page-6" class="faq-accordion-content" role="region" aria-labelledby="faq-generate-pricing-page-6-q" data-faq-content><div class="faq-accordion-inner"><p>This is not a replacement for hospital, emergency, or specialist care. For emergencies, call 911. For specialist needs, the clinician can help point you in the right direction.</p></div></div></div>
+</div></div></div>
         </div>
       </section>
 
@@ -227,7 +206,8 @@ const html = `<!DOCTYPE html>
         <p class="cta-microcopy">${CANONICAL_ENTITY_STATEMENT}</p>
       </div>
     </footer>
-  </body>
+      <script src="/scripts/faq-accordion.js" defer></script>
+</body>
 </html>
 `;
 
