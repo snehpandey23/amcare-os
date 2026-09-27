@@ -221,9 +221,9 @@ function headerNav(topic = 'general', slug = 'index') {
         <nav class="nav-center" aria-label="Primary">
           <a href="/">Home</a>
           <a href="/about">About</a>
-          <a href="/adhd-care">ADHD Care</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
+          <a href="/adhd-care">ADHD Care</a>
           <a href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a>
           <a href="/blog">Blog</a>
         </nav>
@@ -235,9 +235,9 @@ function headerNav(topic = 'general', slug = 'index') {
         <div class="nav-mobile">
           <a href="/">Home</a>
           <a href="/about">About</a>
-          <a href="/adhd-care">ADHD Care</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
+          <a href="/adhd-care">ADHD Care</a>
           <a href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a>
           <a href="/blog">Blog</a>
           ${mobileCta}

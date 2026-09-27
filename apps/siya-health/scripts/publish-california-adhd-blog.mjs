@@ -141,9 +141,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <nav class="nav-center" aria-label="Primary">
           <a href="/">Home</a>
           <a href="/about">About</a>
-          <a href="/adhd-care">ADHD Care</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
+          <a href="/adhd-care">ADHD Care</a>
           <a href="/blog">Blog</a>
         </nav>
         <div class="nav-cta">
@@ -154,9 +154,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="nav-mobile">
           <a href="/">Home</a>
           <a href="/about">About</a>
-          <a href="/adhd-care">ADHD Care</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
+          <a href="/adhd-care">ADHD Care</a>
           <a href="/blog">Blog</a>
           <a class="button" href="/adhd-screening">Start Free Screening</a>
         </div>

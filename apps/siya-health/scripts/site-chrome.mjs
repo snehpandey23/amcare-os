@@ -95,9 +95,9 @@ export const NAV_JOIN_OUR_TEAM = {
 
 /** Primary nav service links — Careers lives in the footer (not top nav). */
 const STANDARD_SERVICE_NAV_LINKS = [
-  { path: '/adhd-care', label: 'ADHD Care', shortLabel: 'ADHD Care' },
   { path: '/weight-loss-metabolic-health', label: 'Weight Loss', shortLabel: 'Weight Loss' },
   { path: '/telehealth', label: 'Telehealth', shortLabel: 'Telehealth' },
+  { path: '/adhd-care', label: 'ADHD Care', shortLabel: 'ADHD Care' },
   { path: NAV_EMPLOYERS.path, label: NAV_EMPLOYERS.label, shortLabel: NAV_EMPLOYERS.shortLabel },
   { path: '/blog', label: 'Blog', shortLabel: 'Blog' },
 ];

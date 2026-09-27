@@ -294,9 +294,9 @@ ${verifiedTestimonials
           <a href="/">Home</a>
           <a href="/about">About</a>
           <a href="/providers">Our Care Team</a>
-          <a href="/adhd-care">ADHD Care</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
+          <a href="/adhd-care">ADHD Care</a>
           <a href="/answers">Health Guides</a>
           <a href="/blog">Blog</a>
         </nav>
@@ -309,9 +309,9 @@ ${verifiedTestimonials
           <a href="/">Home</a>
           <a href="/about">About</a>
           <a href="/providers">Our Care Team</a>
-          <a href="/adhd-care">ADHD Care</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
+          <a href="/adhd-care">ADHD Care</a>
           <a href="/answers">Health Guides</a>
           <a href="/blog">Blog</a>
           ${renderNavCtaMarkup(`providers/${provider.slug}.html`, 'nav-mobile')}
@@ -651,9 +651,9 @@ function renderProvidersIndex() {
           <a href="/">Home</a>
           <a href="/about">About</a>
           <a href="/providers" aria-current="page">Our Care Team</a>
-          <a href="/adhd-care">ADHD Care</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
+          <a href="/adhd-care">ADHD Care</a>
           <a href="/answers">Health Guides</a>
           <a href="/blog">Blog</a>
         </nav>
@@ -666,9 +666,9 @@ function renderProvidersIndex() {
           <a href="/">Home</a>
           <a href="/about">About</a>
           <a href="/providers">Our Care Team</a>
-          <a href="/adhd-care">ADHD Care</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
+          <a href="/adhd-care">ADHD Care</a>
           <a href="/answers">Health Guides</a>
           <a href="/blog">Blog</a>
           ${renderNavCtaMarkup('providers/index.html', 'nav-mobile')}
