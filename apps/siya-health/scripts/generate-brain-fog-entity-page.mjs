@@ -344,7 +344,7 @@ ${renderDifferentialSection('brain_fog')}
           <ul class="footer-links">
             <li><a href="/fatigue">Fatigue: when tired stops being normal</a></li>
             <li><a href="/primary-care">Primary care</a></li>
-            <li><a href="/blog/brain-fog-vs-adhd">Brain fog vs ADHD</a></li>
+            <li><a href="/guides/mental-health-and-adhd#mh-diff">Brain fog vs ADHD</a></li>
             <li><a href="/blog/brain-fog-and-sleep">Brain fog and sleep</a></li>
             <li><a href="/blog/brain-fog-at-work">Brain fog at work</a></li>
             <li><a href="/blog/brain-fog-after-covid">Brain fog after COVID</a></li>

@@ -42,7 +42,7 @@ const html = `<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="index, follow" />
     <title>${PRICING.pageTitle}</title>
-    <meta name="description" content="Transparent physician-led telehealth pricing: ${PRICING.initialEvaluation.display} initial evaluation, $79 or $149/month follow-up plans. ADHD, weight loss, primary care, and telehealth in ${STATES_INLINE}." />
+    <meta name="description" content="Transparent physician-led telehealth pricing: ${PRICING.initialEvaluation.display} initial evaluation, then ${PRICING.monthlyCare.display}/month ongoing care. ADHD, weight loss, primary care, and telehealth in ${STATES_INLINE}." />
     <link rel="canonical" href="https://siya.health${PRICING.path}" />
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
     <link rel="stylesheet" href="/styles.css" />
@@ -115,14 +115,9 @@ const html = `<!DOCTYPE html>
               <p>${PRICING.initialEvaluation.description}</p>
             </article>
             <article class="pricing-card pricing-card--featured">
-              <h3>${PRICING.nonControlledFollowUp.label}</h3>
-              <p class="pricing-price">${PRICING.nonControlledFollowUp.display}<span>${PRICING.nonControlledFollowUp.period}</span></p>
-              <p>${PRICING.nonControlledFollowUp.description}</p>
-            </article>
-            <article class="pricing-card">
-              <h3>${PRICING.controlledFollowUp.label}</h3>
-              <p class="pricing-price">${PRICING.controlledFollowUp.display}<span>${PRICING.controlledFollowUp.period}</span></p>
-              <p>${PRICING.controlledFollowUp.description}</p>
+              <h3>${PRICING.monthlyCare.label}</h3>
+              <p class="pricing-price">${PRICING.monthlyCare.display}<span>${PRICING.monthlyCare.period}</span></p>
+              <p>${PRICING.monthlyCare.description}</p>
             </article>
           </div>
         </div>
@@ -151,7 +146,7 @@ const html = `<!DOCTYPE html>
           </div>
           <ul class="who-we-help-list">
             <li><strong>Storefront pricing</strong> — tests and panels are priced on the lab storefront and may change; we do not mark up a hidden catalogue here.</li>
-            <li><strong>Interpretation</strong> — included in clinician visits and follow-up plans when labs are clinically relevant (see $79/month non-controlled follow-up).</li>
+            <li><strong>Interpretation</strong> — included in clinician visits and the ${PRICING.monthlyCare.display}/month plan when labs are clinically relevant.</li>
             <li><strong>Clean loop</strong> — <a href="/labs/preventive">preventive labs</a> → <a href="/labs/how-to-read-results">how to read results</a> → follow-up when you need ongoing care.</li>
           </ul>
           <p class="blog-hub-see-all"><a href="/labs">Explore Labs &amp; Blood Tests</a> · <a href="/labs/preventive">Preventive labs</a></p>
@@ -169,7 +164,7 @@ const html = `<!DOCTYPE html>
 <div class="faq-accordion-card" data-faq-item><h3 style="margin:0;"><button type="button" class="faq-accordion-trigger" data-faq-trigger aria-expanded="false" aria-controls="faq-generate-pricing-page-2" id="faq-generate-pricing-page-2-q"><span>Is medication included in the monthly price?</span><span class="faq-accordion-icon" aria-hidden="true">+</span></button></h3><div id="faq-generate-pricing-page-2" class="faq-accordion-content" role="region" aria-labelledby="faq-generate-pricing-page-2-q" data-faq-content><div class="faq-accordion-inner"><p>Medication cost varies by medication and is decided by you and your clinician as part of your personalized plan.</p></div></div></div>
 <div class="faq-accordion-card" data-faq-item><h3 style="margin:0;"><button type="button" class="faq-accordion-trigger" data-faq-trigger aria-expanded="false" aria-controls="faq-generate-pricing-page-3" id="faq-generate-pricing-page-3-q"><span>Are lab tests included in visit pricing?</span><span class="faq-accordion-icon" aria-hidden="true">+</span></button></h3><div id="faq-generate-pricing-page-3" class="faq-accordion-content" role="region" aria-labelledby="faq-generate-pricing-page-3-q" data-faq-content><div class="faq-accordion-inner"><p>No. Laboratory tests are ordered and priced separately through our transparent direct-pay storefront. Clinician review of results is part of visits and follow-up plans when appropriate. Start at <a href="/labs">Labs &amp; Blood Tests</a>.</p></div></div></div>
 <div class="faq-accordion-card" data-faq-item><h3 style="margin:0;"><button type="button" class="faq-accordion-trigger" data-faq-trigger aria-expanded="false" aria-controls="faq-generate-pricing-page-4" id="faq-generate-pricing-page-4-q"><span>Is Creyos testing included in the evaluation?</span><span class="faq-accordion-icon" aria-hidden="true">+</span></button></h3><div id="faq-generate-pricing-page-4" class="faq-accordion-content" role="region" aria-labelledby="faq-generate-pricing-page-4-q" data-faq-content><div class="faq-accordion-inner"><p>When clinically appropriate, cognitive testing such as <a href="/creyos-adhd-testing">Creyos</a> may be part of an adult ADHD evaluation. Your clinician decides which tools fit your history—not every patient receives every instrument.</p></div></div></div>
-<div class="faq-accordion-card" data-faq-item><h3 style="margin:0;"><button type="button" class="faq-accordion-trigger" data-faq-trigger aria-expanded="false" aria-controls="faq-generate-pricing-page-5" id="faq-generate-pricing-page-5-q"><span>Which follow-up plan will I need?</span><span class="faq-accordion-icon" aria-hidden="true">+</span></button></h3><div id="faq-generate-pricing-page-5" class="faq-accordion-content" role="region" aria-labelledby="faq-generate-pricing-page-5-q" data-faq-content><div class="faq-accordion-inner"><p>Your clinician recommends non-controlled (${PRICING.nonControlledFollowUp.display}/month) or controlled (${PRICING.controlledFollowUp.display}/month) follow-up based on your treatment plan and state regulations—not every patient needs either plan. Follow-up cadence is set by you and your clinician as part of your personalized plan — not a fixed number of visits. Scheduled follow-ups within your plan aren’t billed separately.</p></div></div></div>
+<div class="faq-accordion-card" data-faq-item><h3 style="margin:0;"><button type="button" class="faq-accordion-trigger" data-faq-trigger aria-expanded="false" aria-controls="faq-generate-pricing-page-5" id="faq-generate-pricing-page-5-q"><span>How is follow-up billed?</span><span class="faq-accordion-icon" aria-hidden="true">+</span></button></h3><div id="faq-generate-pricing-page-5" class="faq-accordion-content" role="region" aria-labelledby="faq-generate-pricing-page-5-q" data-faq-content><div class="faq-accordion-inner"><p>Follow-up cadence is set by you and your clinician as part of your personalized plan — not a fixed number of visits. Scheduled follow-ups within your plan aren’t billed separately. Ongoing care is ${PRICING.monthlyCare.display}/month.</p></div></div></div>
 <div class="faq-accordion-card" data-faq-item><h3 style="margin:0;"><button type="button" class="faq-accordion-trigger" data-faq-trigger aria-expanded="false" aria-controls="faq-generate-pricing-page-6" id="faq-generate-pricing-page-6-q"><span>Does this cover hospital, emergency, or specialist care?</span><span class="faq-accordion-icon" aria-hidden="true">+</span></button></h3><div id="faq-generate-pricing-page-6" class="faq-accordion-content" role="region" aria-labelledby="faq-generate-pricing-page-6-q" data-faq-content><div class="faq-accordion-inner"><p>This is not a replacement for hospital, emergency, or specialist care. For emergencies, call 911. For specialist needs, the clinician can help point you in the right direction.</p></div></div></div>
 </div></div></div>
         </div>

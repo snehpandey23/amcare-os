@@ -1,6 +1,6 @@
 # GHL Legal Acceptance — Implementation Report
 
-Generated: 2026-09-02T00:40:10.463Z
+Generated: 2026-09-27T09:57:51.610Z
 
 ## Objective
 
@@ -44,11 +44,11 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 
 ## Audit totals
 
-- HTML pages scanned: **225**
-- Pages with legacy GHL booking links: **7**
-- Total legacy GHL booking anchor targets: **7**
+- HTML pages scanned: **219**
+- Pages with legacy GHL booking links: **6**
+- Total legacy GHL booking anchor targets: **6**
 - Pages with CarePatron booking links: **3**
-- Total CarePatron booking anchor targets: **3**
+- Total CarePatron booking anchor targets: **6**
 - Pages with acceptance script after build: **1**
 - Intake hub present: **yes**
 
@@ -60,11 +60,10 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - **/blog/minoxidil-for-hair-loss-does-it-work** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/blog/oral-vs-topical-minoxidil-which-is-right** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/blog/sildenafil-for-erectile-dysfunction-what-to-expect** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
-- **/blog/vyvanse-vs-adderall-differences** (general-cta) — 0 CarePatron link(s), 1 legacy GHL link(s), acceptance script: no
 - **/intake** (intake-hub) — 0 CarePatron link(s), 0 legacy GHL link(s), acceptance script: yes
-- **/redirect/adhd-evaluation** (adhd-related) — 1 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
-- **/redirect/adhd-walkthrough** (adhd-related) — 1 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
-- **/redirect/meet-greet** (general-cta) — 1 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
+- **/redirect/adhd-evaluation** (adhd-related) — 2 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
+- **/redirect/adhd-walkthrough** (adhd-related) — 2 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
+- **/redirect/meet-greet** (general-cta) — 2 CarePatron link(s), 0 legacy GHL link(s), acceptance script: no
 
 ## External funnels (GHL-side only)
 
@@ -82,7 +81,6 @@ terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31
 - `blog/minoxidil-for-hair-loss-does-it-work.html`
 - `blog/oral-vs-topical-minoxidil-which-is-right.html`
 - `blog/sildenafil-for-erectile-dysfunction-what-to-expect.html`
-- `blog/vyvanse-vs-adderall-differences.html`
 
 ### GHL / LeadConnector (ops — cannot be completed in repo)
 

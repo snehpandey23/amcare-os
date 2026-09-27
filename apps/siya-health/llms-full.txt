@@ -1,7 +1,7 @@
 # Siya Health — Full AI Retrieval Index
 
-Generated: 2026-09-09
-Total pages: 186
+Generated: 2026-09-27
+Total pages: 192
 
 ---
 
@@ -82,18 +82,16 @@ Total pages: 186
 
 ## All pages (title | URL | topics)
 
-- Siya Health | When Focus, Energy, or Weight Won't Budge
+- Siya Health | Integrated Care for Busy Professionals
   URL: https://siya.health/
-  Summary: Physician-led telehealth for adults who feel tired, unfocused, or stuck—structured evaluation for fatigue, ADHD symptoms, weight, and hormones in CA, TX, PA, and FL.
-  Topics: weight-loss
+  Summary: Physician-led integrated care for busy professionals — primary care, ADHD, weight, and hormonal health in one place. Licensed in CA, TX, PA, and FL.
 
-- About Siya Health | Mission, Team &amp; How Care Works
+- About
   URL: https://siya.health/about
   Summary: Siya Health is physician-led virtual care for adults seeking clear answers about focus, energy, weight, mood, metabolism, hormones, and everyday health. California, Texas, Pennsylvania, Florida.
 
-- Adult ADHD Diagnosis Online — Same-Week Evaluation
+- ADHD Care
   URL: https://siya.health/adhd-care
-  Summary: Primary care–led adult ADHD evaluation online — DSM-based assessment. Licensed medical providers. Individualized validated tools as clinically appropriate. CA, TX, PA, FL.
   Topics: adhd
 
 - ADHD Care in Miami, FL — Online Adult Evaluation
@@ -126,10 +124,10 @@ Total pages: 186
   Summary: The complete guide to adult ADHD in California: what it looks like, when evaluation helps, how online diagnosis works, treatment options, women & ADHD, executive dysfunction, pricing, and a free scree…
   Topics: adhd, california
 
-- Health Guides | Metabolic, ADHD, Hormones &amp; Telehealth
+- Health Guides | Weight, energy, hormones, sleep, and ADHD
   URL: https://siya.health/answers
   Summary: Physician-led Health Guides: short answers, evidence, and related topics for metabolic health, fatigue, hormones, ADHD, and telehealth.
-  Topics: adhd, weight-loss, telehealth, health-guide
+  Topics: adhd, weight-loss, health-guide, sleep
 
 - When might Vyvanse be preferred over Adderall for adults?
   URL: https://siya.health/answers/adderall-vs-vyvanse-adults
@@ -431,10 +429,9 @@ Total pages: 186
   Summary: Normal A1C, cholesterol, and “fine” bloodwork can still hide insulin resistance, sleep apnea, fatty liver risk, and burnout. Learn what labs miss and when …
   Topics: health-guide, labs
 
-- Health Insights &amp; Blog Hub (2026) | ADHD, Weight Loss &amp; Telehealth
+- Health insights for busy professionals
   URL: https://siya.health/blog
-  Summary: Evidence-based ADHD, weight loss & telehealth articles (2026). Browse by category, read medication education, and book licensed providers in CA, TX, PA & FL.
-  Topics: adhd, weight-loss, telehealth
+  Summary: Health insights for busy professionals: weight, energy, sleep, hormones, and focus. ADHD is one topic among several. Licensed clinicians in CA, TX, PA, and FL.
 
 - Adderall for ADHD: How It Works in 2026 (Mechanism, Benefits &amp; Safety)
   URL: https://siya.health/blog/adderall-for-adhd-how-it-works
@@ -800,6 +797,29 @@ Total pages: 186
   URL: https://siya.health/fatigue
   Summary: Persistent fatigue is a symptom with many possible causes — iron, thyroid, B12, sleep apnea, mood, hormones. Learn what fatigue actually means, when medical evaluation helps, which labs clinicians con…
 
+- Exhausted, with no explanation
+  URL: https://siya.health/guides/exhausted
+  Summary: Tiredness by itself does not name a cause. General education on iron, thyroid, and when to look at sleep or hormones.
+
+- Hormonal health
+  URL: https://siya.health/guides/hormonal-health
+  Summary: General education on testosterone, cycle and menopause changes in mood and focus, and what an erectile-dysfunction visit includes.
+
+- Mental health and ADHD
+  URL: https://siya.health/guides/mental-health-and-adhd
+  Summary: General education on adult attention problems, screening versus evaluation, work follow-through, and other explanations.
+  Topics: adhd
+
+- Sleep, including shift work
+  URL: https://siya.health/guides/sleep
+  Summary: General education on shift work, obstructive sleep apnea, and when poor sleep looks like a focus problem.
+  Topics: sleep
+
+- Weight that will not move
+  URL: https://siya.health/guides/weight
+  Summary: General education on weight that stays stuck, food noise, insulin resistance, and what a GLP-1 conversation covers.
+  Topics: weight-loss
+
 - Labs &amp; Blood Tests | Transparent Direct-Pay Testing
   URL: https://siya.health/labs
   Summary: Explore transparent direct-pay laboratory testing for thyroid, blood sugar, vitamins, iron, metabolic health and preventive care. Physician guidance available through Siya Health.
@@ -877,7 +897,7 @@ Total pages: 186
 
 - Legal &amp; Compliance
   URL: https://siya.health/legal
-  Summary: Legal and compliance policies for Siya Health telehealth services.
+  Summary: Terms of Use, Privacy Policy, Notice of Privacy Practices, Controlled Substance Treatment Agreement, and Cookie Policy for Siya Health.
 
 - Controlled Substance Treatment Agreement
   URL: https://siya.health/legal/controlled-substance-treatment-agreement
@@ -914,7 +934,7 @@ Total pages: 186
 
 - Pricing
   URL: https://siya.health/pricing
-  Summary: Transparent physician-led telehealth pricing: $149 initial evaluation, $79 or $149/month follow-up plans. ADHD, weight loss, primary care, and telehealth in California, Texas, Pennsylvania, and Florid…
+  Summary: Transparent physician-led telehealth pricing: $149 one-time evaluation, then $149/month for ongoing care. ADHD, weight loss, primary care, and telehealth in California, Texas, Pennsylvania, and Florid…
 
 - Primary Care — Where Ongoing Health Starts
   URL: https://siya.health/primary-care
@@ -963,9 +983,12 @@ Total pages: 186
   URL: https://siya.health/siya-circle
   Summary: Join Siya Circle, a free health education newsletter from Siya Health with clinician-informed guides on focus, energy, weight, mood, hormones, and everyday health.
 
-- Virtual Medical Care | Siya Health Telehealth
+- Social
+  URL: https://siya.health/social
+  Summary: Siya Health social channels. Educational only.
+
+- Telehealth
   URL: https://siya.health/telehealth
-  Summary: Fast, convenient telehealth from licensed clinicians. Primary care, urgent care, prescriptions, labs. CA, TX, PA, FL. No waiting rooms.
   Topics: telehealth
 
 - Provider-Guided Medical Weight Loss

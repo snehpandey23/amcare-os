@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-02T00:40:10.463Z",
+  "generatedAt": "2026-09-27T09:57:51.610Z",
   "formId": "mnWpgh0IEgFvJymdZqHY",
   "bookingUrl": "https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&i=kkarJfxH",
   "legalDocumentVersion": "terms:1.0.0-counsel;privacy:1.0.0-counsel;npp:1.0.0-counsel;effective:2025-10-31",
@@ -12,13 +12,13 @@
     "npp": "legal_acceptance_npp"
   },
   "summary": {
-    "htmlPagesScanned": 225,
-    "pagesWithGhlLinks": 7,
-    "totalGhlBookingLinks": 7,
+    "htmlPagesScanned": 219,
+    "pagesWithGhlLinks": 6,
+    "totalGhlBookingLinks": 6,
     "pagesWithCarepatronLinks": 3,
-    "totalCarepatronBookingLinks": 3,
+    "totalCarepatronBookingLinks": 6,
     "pagesWithAcceptanceScript": 1,
-    "pagesWithGhlMissingAcceptance": 7,
+    "pagesWithGhlMissingAcceptance": 6,
     "intakeHub": true
   },
   "externalFunnels": [
@@ -115,16 +115,6 @@
       "hasChatWidget": false
     },
     {
-      "path": "/blog/vyvanse-vs-adderall-differences",
-      "file": "blog/vyvanse-vs-adderall-differences.html",
-      "category": "general-cta",
-      "ghlBookingLinks": 1,
-      "carepatronBookingLinks": 0,
-      "hasLegalAcceptanceScript": false,
-      "adhdDisclaimerRequired": false,
-      "hasChatWidget": false
-    },
-    {
       "path": "/intake",
       "file": "intake/index.html",
       "category": "intake-hub",
@@ -139,7 +129,7 @@
       "file": "redirect/adhd-evaluation/index.html",
       "category": "adhd-related",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 1,
+      "carepatronBookingLinks": 2,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": false
@@ -149,7 +139,7 @@
       "file": "redirect/adhd-walkthrough/index.html",
       "category": "adhd-related",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 1,
+      "carepatronBookingLinks": 2,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": false
@@ -159,7 +149,7 @@
       "file": "redirect/meet-greet/index.html",
       "category": "general-cta",
       "ghlBookingLinks": 0,
-      "carepatronBookingLinks": 1,
+      "carepatronBookingLinks": 2,
       "hasLegalAcceptanceScript": false,
       "adhdDisclaimerRequired": false,
       "hasChatWidget": false
@@ -171,7 +161,6 @@
     "blog/insomnia-treatment-options-beyond-medication.html",
     "blog/minoxidil-for-hair-loss-does-it-work.html",
     "blog/oral-vs-topical-minoxidil-which-is-right.html",
-    "blog/sildenafil-for-erectile-dysfunction-what-to-expect.html",
-    "blog/vyvanse-vs-adderall-differences.html"
+    "blog/sildenafil-for-erectile-dysfunction-what-to-expect.html"
   ]
 }

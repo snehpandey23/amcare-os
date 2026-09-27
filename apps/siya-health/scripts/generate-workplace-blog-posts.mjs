@@ -39,7 +39,7 @@ const POSTS = [
             <h2>Cognitive load is not the same as laziness</h2>
             <p>Complex work taxes working memory and task switching. When sleep or underlying fatigue is impaired, the same workload feels impossible. That pattern deserves evaluation—not shame or a standing-desk upgrade alone.</p>
             <h2>What primary care can sort</h2>
-            <p><a href="/fatigue">Fatigue</a> and <a href="/brain-fog">brain fog</a> often travel together. A clinician can review sleep history, screen for apnea risk, check labs when appropriate, and decide whether referral or treatment fits. <a href="/answers/adhd-workplace-accommodations">Workplace accommodations</a> are a separate HR/legal conversation once you understand the clinical picture.</p>
+            <p><a href="/fatigue">Fatigue</a> and <a href="/brain-fog">brain fog</a> often travel together. A clinician can review sleep history, screen for apnea risk, check labs when appropriate, and decide whether referral or treatment fits. <a href="/guides/mental-health-and-adhd#mh-work">Workplace accommodations</a> are a separate HR/legal conversation once you understand the clinical picture.</p>
             <p><em>Educational only—not occupational medicine or disability advice.</em></p>
             <aside class="blog-internal-links" aria-label="Knowledge graph" data-assembly="supporting-cluster">
               <p><strong>In this graph:</strong>
@@ -160,7 +160,7 @@ const POSTS = [
             <aside class="blog-internal-links" aria-label="Knowledge graph" data-assembly="supporting-cluster">
               <p><strong>In this graph:</strong>
                 <a href="/employers">Employers</a>
-                → <a href="/answers/adhd-workplace-accommodations">Workplace accommodations</a>
+                → <a href="/guides/mental-health-and-adhd#mh-work">Workplace accommodations</a>
                 → <a href="/adhd-care">ADHD care</a>
               </p>
             </aside>`,
@@ -205,7 +205,7 @@ const POSTS = [
             <p>Workplace accommodations for ADHD are a coordination problem. Employees need accurate clinical information. Employers need consistent, lawful processes. Clinicians document conditions and functional limitations within the treatment relationship—they do not manage your ADA interactive process or decide reasonable accommodations.</p>
             <h2>Clinical documentation: what it is</h2>
             <p>After a proper evaluation, a licensed clinician may document a diagnosis, treatment plan, and functional impacts relevant to work—extended focus time, reduced distractions, flexible scheduling, and similar needs. That documentation supports the employee’s accommodation request; it is not a prescription for what HR must approve.</p>
-            <p>Our detailed guide for employees and HR teams: <a href="/answers/adhd-workplace-accommodations">workplace accommodations &amp; clinical documentation</a>.</p>
+            <p>Our detailed guide for employees and HR teams: <a href="/guides/mental-health-and-adhd#mh-work">workplace accommodations &amp; clinical documentation</a>.</p>
             <h2>Legal and HR process: what it is</h2>
             <ul>
               <li>Interactive dialogue between employer and employee</li>
@@ -223,7 +223,7 @@ const POSTS = [
             <p><em>Educational only—not legal, HR, or medical advice. Consult counsel for accommodation decisions.</em></p>
             <aside class="blog-internal-links" aria-label="Knowledge graph" data-assembly="supporting-cluster">
               <p><strong>In this graph:</strong>
-                <a href="/answers/adhd-workplace-accommodations">Accommodations guide</a>
+                <a href="/guides/mental-health-and-adhd#mh-work">Accommodations guide</a>
                 → <a href="/adhd-care">ADHD care</a>
                 → <a href="/employers">Employers</a>
               </p>

@@ -1,22 +1,22 @@
 # Title & Meta Duplicate Audit
 
-Generated: 2026-09-02T00:40:00.181Z
+Generated: 2026-09-27T09:57:42.726Z
 
-## Duplicate title tags (4)
+## Duplicate title tags (3)
 
-- **"Moved to adhd-diagnosis-texas — Siya Health"** — /adhd-diagnosis-austin, /adhd-diagnosis-houston
-- **"Moved to adhd-care — Siya Health"** — /adhd-diagnosis-pennsylvania, /adhd-diagnosis-philadelphia, /blog/adhd-treatment-miami-fl, /blog/adhd-treatment-orlando-fl, /blog/adhd-treatment-philadelphia-pa
-- **"Moved to adult-adhd-california — Siya Health"** — /blog/adhd-evaluation-cost-california, /blog/adhd-treatment-los-angeles-ca, /blog/adhd-treatment-oakland-ca, /blog/adhd-treatment-orange-county-ca, /blog/adhd-treatment-sacramento-ca, /blog/adhd-treatment-san-diego-ca, /blog/adhd-treatment-san-francisco-ca, /blog/adhd-treatment-san-jose-ca, /blog/adult-adhd-treatment-california-2026
-- **"Moved to blog · adhd-treatment-texas — Siya Health"** — /blog/adhd-treatment-austin-tx, /blog/adhd-treatment-dallas-tx, /blog/adhd-treatment-fort-worth-tx, /blog/adhd-treatment-houston-tx, /blog/adhd-treatment-san-antonio-tx
+- **"Homepage2 audit proof · Siya Health"** — /homepage2-audit, /previews/homepage2-audit
+- **"[A] Siya Health | When Focus, Energy, or Weight Won't Budge"** — /preview-home-a, /previews/homepage-variant-a
+- **"[B] Siya Health | When Focus, Energy, or Weight Won't Budge"** — /preview-home-b, /previews/homepage-variant-b
 
-## Duplicate H1s (2)
+## Duplicate H1s (3)
 
-- **"Struggling to focus—even when you care?"** — /adhd-care, /adhd-evaluation-california, /adhd-evaluation-texas
+- **"Homepage2 live audit proof"** — /homepage2-audit, /previews/homepage2-audit
+- **"Clear answers when focus, energy, or weight won't add up."** — /preview-home-a, /preview-home-b-btn-v1, /preview-home-b-btn-v2, /preview-home-b, /previews/homepage-variant-a, /previews/homepage-variant-b
 - **"Booking your free Meet & Greet"** — /redirect/adhd-walkthrough, /redirect/meet-greet
 
-## Duplicate meta descriptions (0)
+## Duplicate meta descriptions (1)
 
-_None detected._
+- /preview-home-a, /preview-home-b-btn-v1, /preview-home-b-btn-v2, /preview-home-b, /preview-home-hero-video, /previews/homepage-variant-a, /previews/homepage-variant-b
 
 ## Near-duplicate titles (≥75% token overlap)
 
@@ -24,6 +24,16 @@ _None detected._
 - 0.78: /adhd-evaluation-california ↔ /adhd-evaluation-texas
 - 0.75: /answers/telehealth-adhd-california ↔ /answers/telehealth-adhd-texas
 - 0.83: /blog/online-adhd-diagnosis-california ↔ /blog/online-adhd-diagnosis-texas
+- 0.82: /preview-home-a ↔ /preview-home-b-btn-v1
+- 0.82: /preview-home-a ↔ /preview-home-b-btn-v2
+- 0.82: /preview-home-a ↔ /preview-home-b
+- 0.90: /preview-home-a ↔ /preview-home-hero-video
+- 0.82: /preview-home-b-btn-v1 ↔ /preview-home-b-btn-v2
+- 0.82: /preview-home-b-btn-v1 ↔ /preview-home-b
+- 0.90: /preview-home-b-btn-v1 ↔ /preview-home-hero-video
+- 0.82: /preview-home-b-btn-v2 ↔ /preview-home-b
+- 0.90: /preview-home-b-btn-v2 ↔ /preview-home-hero-video
+- 0.90: /preview-home-b ↔ /preview-home-hero-video
 
 ## Fixes applied
 

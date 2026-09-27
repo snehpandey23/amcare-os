@@ -154,7 +154,7 @@ export const ADDITIONAL_PROVIDERS = [
     ],
     testimonials: [],
     relatedLinksHtml:
-      'Learn more: <a href="/answers/screening-vs-adhd-evaluation">screening vs evaluation</a>, <a href="/answers/is-telehealth-legitimate">telehealth legitimacy</a>.',
+      'Learn more: <a href="/guides/mental-health-and-adhd#mh-screen">screening vs evaluation</a>, <a href="/answers/is-telehealth-legitimate">telehealth legitimacy</a>.',
     inlineCtas: [
       { label: 'ADHD care overview', path: '/adhd-care', primary: true },
       { label: 'Free ADHD screening', path: '/adhd-screening', primary: false },
@@ -239,7 +239,7 @@ export const ADDITIONAL_PROVIDERS = [
     ],
     testimonials: [],
     relatedLinksHtml:
-      'Explore: <a href="/answers/what-is-food-noise">what is food noise</a>, <a href="/answers/glp-1-side-effects">GLP-1 side effects</a>.',
+      'Explore: <a href="/answers/what-is-food-noise">what is food noise</a>, <a href="/guides/weight#wt-glp1">GLP-1 side effects</a>.',
     inlineCtas: [
       { label: 'Medical weight loss', path: '/weight-loss-metabolic-health', primary: true },
       { label: 'Browse weight guides', path: '/answers', primary: false },

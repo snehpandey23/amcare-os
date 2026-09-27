@@ -1,16 +1,16 @@
 # Provider Expansion — Implementation Report
 
-Generated: 2026-09-02T00:40:11.139Z
+Generated: 2026-09-27T09:57:52.127Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| Sitemap URLs | 184 |
+| Sitemap URLs | 145 |
 | Contracted providers in data | 6 |
 | Live profile pages | 6 |
 | Hub URL | https://siya.health/providers |
-| Pages linking to /providers hub | 195 |
+| Pages linking to /providers hub | 207 |
 | Broken internal links (sample) | 20 |
 | JSON-LD issues on profiles | 0 |
 
@@ -40,13 +40,13 @@ Generated: 2026-09-02T00:40:11.139Z
 
 | Target | Inbound pages |
 |--------|-------------:|
-| /providers hub | 195 |
-| /providers/dr-sneh-pandey | 25 |
-| /providers/dr-vanessa-urbina | 20 |
-| /providers/dr-natasha-desai | 22 |
-| /providers/dr-swati-pandey | 12 |
-| /providers/megan-wunderlich | 9 |
-| /providers/wendy-delgado | 20 |
+| /providers hub | 207 |
+| /providers/dr-sneh-pandey | 26 |
+| /providers/dr-vanessa-urbina | 15 |
+| /providers/dr-natasha-desai | 17 |
+| /providers/dr-swati-pandey | 16 |
+| /providers/megan-wunderlich | 6 |
+| /providers/wendy-delgado | 15 |
 
 ## Hub features
 
@@ -63,19 +63,19 @@ Generated: 2026-09-02T00:40:11.139Z
 - `about.html` → `/assets/favicon.ico`
 - `about.html` → `/styles.css`
 - `about.html` → `/styles.css`
+- `about.html` → `/design-system/h2-surface.css`
 - `adhd-care/miami.html` → `/assets/favicon-32x32.png`
 - `adhd-care/miami.html` → `/assets/favicon-16x16.png`
 - `adhd-care/miami.html` → `/assets/apple-touch-icon.png`
 - `adhd-care/miami.html` → `/assets/favicon.ico`
 - `adhd-care/miami.html` → `/styles.css`
+- `adhd-care/miami.html` → `/design-system/h2-surface.css`
 - `adhd-care/orlando.html` → `/assets/favicon-32x32.png`
 - `adhd-care/orlando.html` → `/assets/favicon-16x16.png`
 - `adhd-care/orlando.html` → `/assets/apple-touch-icon.png`
 - `adhd-care/orlando.html` → `/assets/favicon.ico`
 - `adhd-care/orlando.html` → `/styles.css`
-- `adhd-care/san-diego.html` → `/assets/favicon-32x32.png`
-- `adhd-care/san-diego.html` → `/assets/favicon-16x16.png`
-- `adhd-care/san-diego.html` → `/assets/apple-touch-icon.png`
+- `adhd-care/orlando.html` → `/design-system/h2-surface.css`
 
 ## Operational note
 

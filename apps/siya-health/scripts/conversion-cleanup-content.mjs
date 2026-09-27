@@ -18,30 +18,27 @@ function pricingItemsFor(variant) {
   switch (variant) {
     case 'weight':
       return `${evalItem}
-                <li><strong>Weight / metabolic follow-up:</strong> ${PRICING.nonControlledFollowUp.display}/month</li>
+                <li><strong>Weight / metabolic follow-up:</strong> ${PRICING.monthlyCare.display}/month</li>
                 <li><strong>Medication management (when appropriate):</strong> included in follow-up plan</li>`;
     case 'mens':
       return `${evalItem}
-                <li><strong>Men&rsquo;s health follow-up:</strong> ${PRICING.nonControlledFollowUp.display}/month</li>
+                <li><strong>Men&rsquo;s health follow-up:</strong> ${PRICING.monthlyCare.display}/month</li>
                 <li><strong>Hormone / longevity monitoring:</strong> when clinically appropriate</li>`;
     case 'womens':
       return `${evalItem}
-                <li><strong>Women&rsquo;s health follow-up:</strong> ${PRICING.nonControlledFollowUp.display}/month</li>
+                <li><strong>Women&rsquo;s health follow-up:</strong> ${PRICING.monthlyCare.display}/month</li>
                 <li><strong>Ongoing care:</strong> when clinically appropriate</li>`;
     case 'telehealth':
       return `${evalItem}
-                <li><strong>ADHD care follow-up:</strong> ${PRICING.nonControlledFollowUp.display}&ndash;${PRICING.controlledFollowUp.display}/month</li>
-                <li><strong>Weight / metabolic follow-up:</strong> ${PRICING.nonControlledFollowUp.display}/month</li>
-                <li><strong>Primary / chronic care follow-up:</strong> ${PRICING.nonControlledFollowUp.display}/month</li>`;
+                <li><strong>Ongoing care:</strong> ${PRICING.monthlyCare.display}/month</li>`;
     case 'primary':
     case 'labs':
       return `${evalItem}
-                <li><strong>Ongoing care follow-up:</strong> ${PRICING.nonControlledFollowUp.display}/month</li>
+                <li><strong>Ongoing care follow-up:</strong> ${PRICING.monthlyCare.display}/month</li>
                 <li><strong>Labs &amp; care coordination:</strong> priced separately when ordered</li>`;
     default:
       return `${evalItem}
-                <li><strong>Non-controlled medication follow-up:</strong> ${PRICING.nonControlledFollowUp.display}/month</li>
-                <li><strong>Controlled medication follow-up:</strong> ${PRICING.controlledFollowUp.display}/month when clinically appropriate</li>`;
+                <li><strong>Ongoing care:</strong> ${PRICING.monthlyCare.display}/month</li>`;
   }
 }
 

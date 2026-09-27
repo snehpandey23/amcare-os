@@ -268,8 +268,8 @@ function nextStepsHtml(hub, topic = 'general') {
     topic === 'adhd'
       ? `<li><a href="/adhd-care">Explore ADHD evaluation pathways</a></li>
                 <li><a href="/adhd-screening">Free ADHD screening (not a diagnosis)</a></li>
-                <li><a href="/answers/signs-of-adult-adhd">Cornerstone guide: signs of adult ADHD</a></li>
-                <li><a href="/blog/how-to-know-if-you-have-adhd-adult">Cornerstone article: ADHD signs in adults</a></li>
+                <li><a href="/guides/mental-health-and-adhd#mh-signs">Cornerstone guide: signs of adult ADHD</a></li>
+                <li><a href="/guides/mental-health-and-adhd#mh-signs">Cornerstone article: ADHD signs in adults</a></li>
                 <li><a href="${hub.url}">Browse ${hub.label} articles</a></li>
                 <li><a href="/answers#topic-cluster-explorer-heading">All ADHD topic clusters</a></li>`
       : `<li><a href="${hub.care}">Explore ${hub.label} care</a></li>

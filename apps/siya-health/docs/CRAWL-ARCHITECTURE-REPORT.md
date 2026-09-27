@@ -1,6 +1,6 @@
 # Crawl architecture report
 
-Generated: 2026-09-02T01:07:40.548Z
+Generated: 2026-09-27T09:57:49.174Z
 
 Internal link graph analysis only — not a general SEO audit.
 
@@ -8,176 +8,174 @@ Internal link graph analysis only — not a general SEO audit.
 
 | Metric | Value |
 |--------|------:|
-| Total indexable HTML pages | 224 |
-| Pages reachable from `/` | 184 |
-| Unreachable from `/` (by internal links) | 40 |
-| **Average crawl depth** (reachable pages) | **1.80** |
-| Orphan pages (0 inbound internal links) | 3 |
-| Orphan pages excluded (retired/stubs/utilities) | 37 |
-| Pages with &lt; 2 inbound links | 48 |
-| Pages with &gt; 100 outbound internal links | 1 |
-| Pages with &gt; 100 inbound internal links | 32 |
+| Total indexable HTML pages | 218 |
+| Pages reachable from `/` | 172 |
+| Unreachable from `/` (by internal links) | 46 |
+| **Average crawl depth** (reachable pages) | **2.87** |
+| Orphan pages (0 inbound internal links) | 23 |
+| Orphan pages excluded (retired/stubs/utilities) | 22 |
+| Pages with &lt; 2 inbound links | 62 |
+| Pages with &gt; 100 outbound internal links | 0 |
+| Pages with &gt; 100 inbound internal links | 8 |
 
 ## Crawl depth distribution
 
 | Depth from homepage | Pages |
 |--------------------:|------:|
 | 0 | 1 |
-| 1 | 39 |
-| 2 | 140 |
-| 3 | 4 |
+| 1 | 7 |
+| 2 | 47 |
+| 3 | 81 |
+| 4 | 31 |
+| 5 | 5 |
 
 ## Top 20 most internally linked pages (inbound)
 
 | Rank | Inbound links | Path | Title |
 |------|-------------:|------|-------|
-| 1 | 197 | `/adhd-care` | Adult ADHD Diagnosis Online — Same-Week Evaluation |
-| 2 | 193 | `/` | Siya Health \| When Focus, Energy, or Weight Won't Budge |
-| 3 | 192 | `/providers` | Our Care Team |
-| 4 | 191 | `/adhd-screening` | Start screening |
-| 5 | 191 | `/legal/cookie-policy` | Cookie Policy |
-| 6 | 191 | `/legal/notice-of-privacy-practices` | Notice of Privacy Practices |
-| 7 | 191 | `/legal/privacy-policy` | Privacy Policy |
-| 8 | 191 | `/legal/terms-of-use` | Terms of Use |
-| 9 | 191 | `/pricing` | Pricing |
-| 10 | 189 | `/about` | About Siya Health \| Mission, Team &amp; How Care Works |
-| 11 | 189 | `/answers` | Health Guides \| Metabolic, ADHD, Hormones &amp; Telehealth |
-| 12 | 189 | `/answers/is-online-adhd-diagnosis-legitimate` | What should you look for in a legitimate online ADHD diagnosis? |
-| 13 | 189 | `/answers/signs-of-adult-adhd` | What are the signs of adult ADHD? |
-| 14 | 189 | `/answers/what-is-insulin-resistance` | What is insulin resistance? |
-| 15 | 189 | `/answers/why-am-i-tired-even-after-sleeping` | Why am I tired even after sleeping? |
-| 16 | 189 | `/blog/adhd` | ADHD Articles Hub (2026) — Diagnosis, Medication Education &amp; Care |
-| 17 | 189 | `/blog/how-to-know-if-you-have-adhd-adult` | How to Know If You Have ADHD as an Adult (Real Signs Explained) |
-| 18 | 189 | `/blog` | Health Insights &amp; Blog Hub (2026) \| ADHD, Weight Loss &amp; Telehe |
-| 19 | 189 | `/blog/telehealth` | Telehealth Articles (2026) — Safe Online Prescribing &amp; Remote Care |
-| 20 | 189 | `/blog/weight-loss` | Weight Loss Articles (2026) — GLP-1 &amp; Medical Metabolic Care \| Siy |
+| 1 | 213 | `/` | Siya Health \| Integrated Care for Busy Professionals |
+| 2 | 207 | `/providers` | Our Care Team |
+| 3 | 206 | `/about` | About |
+| 4 | 206 | `/labs` | Labs &amp; Blood Tests \| Transparent Direct-Pay Testing |
+| 5 | 192 | `/pricing` | Pricing |
+| 6 | 144 | `/adhd-care` | ADHD Care |
+| 7 | 106 | `/weight-loss-metabolic-health` | Provider-Guided Medical Weight Loss |
+| 8 | 104 | `/answers` | Health Guides \| Weight, energy, hormones, sleep, and ADHD |
+| 9 | 99 | `/telehealth` | Telehealth |
+| 10 | 95 | `/blog/adhd` | ADHD Articles Hub (2026) — Diagnosis, Medication Education &amp; Care |
+| 11 | 81 | `/employers` | Employer Cognitive Health Programs |
+| 12 | 74 | `/blog` | Health insights for busy professionals |
+| 13 | 67 | `/guides/mental-health-and-adhd` | Mental health and ADHD |
+| 14 | 62 | `/blog/weight-loss` | Weight Loss Articles (2026) — GLP-1 &amp; Medical Metabolic Care \| Siy |
+| 15 | 57 | `/adhd-screening` | Start screening |
+| 16 | 53 | `/blog/telehealth` | Telehealth Articles (2026) — Safe Online Prescribing &amp; Remote Care |
+| 17 | 49 | `/fatigue` | Fatigue — Why You Are Always Tired, and When to Get Evaluated |
+| 18 | 43 | `/mens-health-longevity` | Men's Health &amp; Longevity |
+| 19 | 42 | `/book-appointment` | Book an Appointment |
+| 20 | 39 | `/answers/why-am-i-tired-even-after-sleeping` | Why am I tired even after sleeping? |
 
 ## Orphan pages (0 inbound internal links)
 
-_Actionable only — retired noindex stubs, redirect shells, and /redirect/* utilities are excluded (37 excluded)._
+_Actionable only — retired noindex stubs, redirect shells, and /redirect/* utilities are excluded (22 excluded)._
 
 - `/adhd-care/miami` — ADHD Care in Miami, FL — Online Adult Evaluation
 - `/adhd-care/orlando` — ADHD Care in Orlando, FL — Online Adult Evaluation
 - `/adhd-care/san-diego` — ADHD Care in San Diego, CA — Online Adult Evaluation
+- `/answers/adhd-in-women` — How does ADHD present differently in women?
+- `/answers/adhd-vs-anxiety` — How do you tell ADHD apart from anxiety?
+- `/answers/adhd-vs-burnout` — Is it ADHD or burnout?
+- `/answers/asrs-adhd-screening-explained` — What is the ASRS ADHD screening test?
+- `/answers/can-adhd-cause-anxiety` — Can ADHD cause anxiety?
+- `/answers/can-sleep-apnea-cause-fatigue` — Can sleep apnea cause fatigue?
+- `/answers/food-noise-returned-on-glp-1` — Why did food noise come back on GLP-1?
+- `/answers/glp-1-nausea-management` — How do you manage GLP-1 nausea?
+- `/answers/glp-1-side-effects` — Which GLP-1 side effects usually improve with titration?
+- `/answers/high-functioning-adhd` — Can you have ADHD and still be high-functioning?
+- `/answers/high-shbg-low-free-testosterone` — What does high SHBG with low free testosterone mean?
+- `/answers/insulin-resistance-without-diabetes` — Can you have insulin resistance without diabetes?
+- `/answers/late-adhd-diagnosis-adults` — Why are so many adults diagnosed with ADHD late in life?
+- `/answers/normal-a1c-insulin-resistance` — Can you have insulin resistance with a normal A1C?
+- `/answers/poor-sleep-feels-like-adhd` — Can poor sleep feel like ADHD?
+- `/answers/rejection-sensitivity-adhd` — What is rejection sensitive dysphoria (RSD) and ADHD?
+- `/answers/testosterone-and-adhd-overlap` — Can low testosterone mimic ADHD?
+- `/answers/time-blindness-adhd` — What is time blindness in ADHD?
+- `/answers/who-qualifies-glp-1-weight-loss` — Who qualifies for GLP-1 weight loss medications?
+- `/blog/thyroid-and-fatigue` — Thyroid Problems and Fatigue: What to Know Before You Self-Diagnose
 
 ## Pages with fewer than 2 inbound links
 
 - `/adhd-care/miami` (0 inbound) — ADHD Care in Miami, FL — Online Adult Evaluation
 - `/adhd-care/orlando` (0 inbound) — ADHD Care in Orlando, FL — Online Adult Evaluation
 - `/adhd-care/san-diego` (0 inbound) — ADHD Care in San Diego, CA — Online Adult Evaluation
-- `/adhd-diagnosis-austin` (0 inbound) — Moved · adhd-diagnosis-austin — Siya Health
-- `/adhd-diagnosis-florida` (0 inbound) — Moved · adhd-diagnosis-florida — Siya Health
-- `/adhd-diagnosis-houston` (0 inbound) — Moved · adhd-diagnosis-houston — Siya Health
-- `/adhd-diagnosis-pennsylvania` (0 inbound) — Moved · adhd-diagnosis-pennsylvania — Siya Health
-- `/adhd-diagnosis-philadelphia` (0 inbound) — Moved · adhd-diagnosis-philadelphia — Siya Health
-- `/adhd-evaluation-cost` (1 inbound) — ADHD Evaluation Cost Online | Flat-Rate Pricing
+- `/adhd-evaluation-cost` (0 inbound) — ADHD Evaluation Cost Online | Flat-Rate Pricing
+- `/adhd-evaluation-texas` (1 inbound) — Adult ADHD Evaluation in Texas | Same-Week Online Eval
 - `/adhd-screening-results` (1 inbound) — ADHD Screening Results
-- `/adhd-treatment-online` (0 inbound) — Moved · adhd-treatment-online — Siya Health
-- `/adult-adhd-diagnosis` (0 inbound) — Moved · adult-adhd-diagnosis — Siya Health
-- `/adult-adhd-screening-california` (0 inbound) — Moved · adult-adhd-screening-california — Siya Health
-- `/adult-adhd-screening-texas` (0 inbound) — Moved · adult-adhd-screening-texas — Siya Health
-- `/answers/weight-gain-after-stopping-ozempic` (0 inbound) — Moved · answers · weight-gain-after-stopping-ozempic — Siya Health
+- `/answers/adhd-in-women` (0 inbound) — How does ADHD present differently in women?
+- `/answers/adhd-vs-anxiety` (0 inbound) — How do you tell ADHD apart from anxiety?
+- `/answers/adhd-vs-burnout` (0 inbound) — Is it ADHD or burnout?
+- `/answers/asrs-adhd-screening-explained` (0 inbound) — What is the ASRS ADHD screening test?
+- `/answers/can-adhd-cause-anxiety` (0 inbound) — Can ADHD cause anxiety?
+- `/answers/can-sleep-apnea-cause-fatigue` (0 inbound) — Can sleep apnea cause fatigue?
+- `/answers/ed-telehealth-legitimate` (1 inbound) — Is telehealth for erectile dysfunction legitimate?
+- `/answers/food-noise-returned-on-glp-1` (0 inbound) — Why did food noise come back on GLP-1?
+- `/answers/fsa-hsa-adhd-evaluation` (1 inbound) — Can you use FSA or HSA for ADHD evaluation?
+- `/answers/glp-1-nausea-management` (0 inbound) — How do you manage GLP-1 nausea?
+- `/answers/glp-1-side-effects` (0 inbound) — Which GLP-1 side effects usually improve with titration?
+- `/answers/high-functioning-adhd` (0 inbound) — Can you have ADHD and still be high-functioning?
+- `/answers/high-shbg-low-free-testosterone` (0 inbound) — What does high SHBG with low free testosterone mean?
+- `/answers/insulin-resistance-without-diabetes` (0 inbound) — Can you have insulin resistance without diabetes?
+- `/answers/late-adhd-diagnosis-adults` (0 inbound) — Why are so many adults diagnosed with ADHD late in life?
+- `/answers/normal-a1c-insulin-resistance` (0 inbound) — Can you have insulin resistance with a normal A1C?
+- `/answers/oral-vs-topical-minoxidil` (1 inbound) — When is topical minoxidil enough vs oral minoxidil?
+- `/answers/poor-sleep-feels-like-adhd` (0 inbound) — Can poor sleep feel like ADHD?
+- `/answers/rejection-sensitivity-adhd` (0 inbound) — What is rejection sensitive dysphoria (RSD) and ADHD?
+- `/answers/screening-vs-adhd-evaluation` (1 inbound) — What is the difference between ADHD screening and a full evaluation?
+- `/answers/testosterone-and-adhd-overlap` (0 inbound) — Can low testosterone mimic ADHD?
+- `/answers/time-blindness-adhd` (0 inbound) — What is time blindness in ADHD?
 - `/answers/what-happens-after-adhd-evaluation` (1 inbound) — What happens after an ADHD evaluation?
-- `/blog/adhd-evaluation-cost-california` (0 inbound) — Moved · blog · adhd-evaluation-cost-california — Siya Health
-- `/blog/adhd-treatment-austin-tx` (0 inbound) — Moved · blog · adhd-treatment-austin-tx — Siya Health
-- `/blog/adhd-treatment-dallas-tx` (0 inbound) — Moved · blog · adhd-treatment-dallas-tx — Siya Health
-- `/blog/adhd-treatment-fort-worth-tx` (0 inbound) — Moved · blog · adhd-treatment-fort-worth-tx — Siya Health
-- `/blog/adhd-treatment-houston-tx` (0 inbound) — Moved · blog · adhd-treatment-houston-tx — Siya Health
-- `/blog/adhd-treatment-los-angeles-ca` (0 inbound) — Moved · blog · adhd-treatment-los-angeles-ca — Siya Health
-- `/blog/adhd-treatment-miami-fl` (0 inbound) — Moved · blog · adhd-treatment-miami-fl — Siya Health
-- `/blog/adhd-treatment-oakland-ca` (0 inbound) — Moved · blog · adhd-treatment-oakland-ca — Siya Health
-- `/blog/adhd-treatment-orange-county-ca` (0 inbound) — Moved · blog · adhd-treatment-orange-county-ca — Siya Health
-- `/blog/adhd-treatment-orlando-fl` (0 inbound) — Moved · blog · adhd-treatment-orlando-fl — Siya Health
-- `/blog/adhd-treatment-philadelphia-pa` (0 inbound) — Moved · blog · adhd-treatment-philadelphia-pa — Siya Health
-- `/blog/adhd-treatment-sacramento-ca` (0 inbound) — Moved · blog · adhd-treatment-sacramento-ca — Siya Health
-- `/blog/adhd-treatment-san-antonio-tx` (0 inbound) — Moved · blog · adhd-treatment-san-antonio-tx — Siya Health
-- `/blog/adhd-treatment-san-diego-ca` (0 inbound) — Moved · blog · adhd-treatment-san-diego-ca — Siya Health
-- `/blog/adhd-treatment-san-francisco-ca` (0 inbound) — Moved · blog · adhd-treatment-san-francisco-ca — Siya Health
-- `/blog/adhd-treatment-san-jose-ca` (0 inbound) — Moved · blog · adhd-treatment-san-jose-ca — Siya Health
-- `/blog/adult-adhd-treatment-california-2026` (0 inbound) — Moved · blog · adult-adhd-treatment-california-2026 — Siya Health
+- `/answers/what-is-free-testosterone` (1 inbound) — What is free testosterone?
+- `/answers/when-is-testosterone-therapy-appropriate` (1 inbound) — What symptoms warrant testosterone therapy evaluation?
+- `/answers/who-qualifies-glp-1-weight-loss` (0 inbound) — Who qualifies for GLP-1 weight loss medications?
+- `/blog/glp1-side-effects-and-how-to-manage-them` (1 inbound) — GLP-1 Side Effects &amp; How to Manage Them (2026)
 - `/blog/iron-deficiency-and-fatigue` (1 inbound) — Iron Deficiency and Fatigue: What Ferritin Has to Do With Energy
 - `/blog/morning-fatigue` (1 inbound) — Morning Fatigue: Why You Wake Up Exhausted
 - `/blog/phentermine-for-weight-loss-safety-and-effectiveness` (1 inbound) — Phentermine for Weight Loss: Safety &amp; Effectiveness in 2026
 - `/blog/pots-and-adhd` (1 inbound) — POTS and ADHD: Shared Symptoms, Overlap &amp; What Research Shows
-- `/blog/thyroid-and-fatigue` (1 inbound) — Thyroid Problems and Fatigue: What to Know Before You Self-Diagnose
-- `/blog/why-am-i-always-tired-causes-when-to-see-doctor` (0 inbound) — Moved · blog · why-am-i-always-tired-causes-when-to-see-doctor — Siya 
-- `/intake` (0 inbound) — Secure Intake
+- `/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign` (1 inbound) — Sleep Apnea, Fatigue &amp; Metabolic Risk: When Snoring Is Not Benign
+- `/blog/thyroid-and-fatigue` (0 inbound) — Thyroid Problems and Fatigue: What to Know Before You Self-Diagnose
+- `/blog/when-is-testosterone-therapy-appropriate` (1 inbound) — When Is Testosterone Therapy Appropriate? (2026 Guide)
 
-_…and 8 more._
+_…and 22 more._
 
 ## Pages with more than 100 outbound internal links
 
-- `/answers` (103 outbound) — Health Guides | Metabolic, ADHD, Hormones &amp; Telehealth
+_None_
 
 ## Pages with more than 100 inbound internal links
 
-- `/about` (189 inbound) — About Siya Health | Mission, Team &amp; How Care Works
-- `/adhd-care` (197 inbound) — Adult ADHD Diagnosis Online — Same-Week Evaluation
-- `/adhd-screening` (191 inbound) — Start screening
-- `/answers` (189 inbound) — Health Guides | Metabolic, ADHD, Hormones &amp; Telehealth
-- `/answers/is-online-adhd-diagnosis-legitimate` (189 inbound) — What should you look for in a legitimate online ADHD diagnosis?
-- `/answers/signs-of-adult-adhd` (189 inbound) — What are the signs of adult ADHD?
-- `/answers/what-is-insulin-resistance` (189 inbound) — What is insulin resistance?
-- `/answers/why-am-i-tired-even-after-sleeping` (189 inbound) — Why am I tired even after sleeping?
-- `/blog/adhd` (189 inbound) — ADHD Articles Hub (2026) — Diagnosis, Medication Education &amp; Care
-- `/blog/how-to-know-if-you-have-adhd-adult` (189 inbound) — How to Know If You Have ADHD as an Adult (Real Signs Explained)
-- `/blog` (189 inbound) — Health Insights &amp; Blog Hub (2026) | ADHD, Weight Loss &amp; Telehe
-- `/blog/telehealth` (189 inbound) — Telehealth Articles (2026) — Safe Online Prescribing &amp; Remote Care
-- `/blog/weight-loss` (189 inbound) — Weight Loss Articles (2026) — GLP-1 &amp; Medical Metabolic Care | Siy
-- `/book-appointment` (189 inbound) — Book an Appointment
-- `/employers` (189 inbound) — Employer Cognitive Health Programs
-- `/` (193 inbound) — Siya Health | When Focus, Energy, or Weight Won't Budge
-- `/join-our-team` (183 inbound) — Join Our Clinical Team
-- `/labs` (189 inbound) — Labs &amp; Blood Tests | Transparent Direct-Pay Testing
-- `/legal/cookie-policy` (191 inbound) — Cookie Policy
-- `/legal` (189 inbound) — Legal &amp; Compliance
-- `/legal/notice-of-privacy-practices` (191 inbound) — Notice of Privacy Practices
-- `/legal/privacy-policy` (191 inbound) — Privacy Policy
-- `/legal/terms-of-use` (191 inbound) — Terms of Use
-- `/mens-health-longevity` (189 inbound) — Men's Health &amp; Longevity
-- `/prescriptions` (189 inbound) — Online Prescription Services
-- `/pricing` (191 inbound) — Pricing
-- `/primary-urgent-care` (189 inbound) — Primary &amp; Urgent Care Telehealth
-- `/providers` (192 inbound) — Our Care Team
-- `/siya-circle` (189 inbound) — Siya Circle | Free Health Education Newsletter
-- `/telehealth` (189 inbound) — Virtual Medical Care | Siya Health Telehealth
-- `/weight-loss-metabolic-health` (189 inbound) — Provider-Guided Medical Weight Loss
-- `/womens-health` (189 inbound) — Women's Health &amp; Hormone Care
+- `/about` (206 inbound) — About
+- `/adhd-care` (144 inbound) — ADHD Care
+- `/answers` (104 inbound) — Health Guides | Weight, energy, hormones, sleep, and ADHD
+- `/` (213 inbound) — Siya Health | Integrated Care for Busy Professionals
+- `/labs` (206 inbound) — Labs &amp; Blood Tests | Transparent Direct-Pay Testing
+- `/pricing` (192 inbound) — Pricing
+- `/providers` (207 inbound) — Our Care Team
+- `/weight-loss-metabolic-health` (106 inbound) — Provider-Guided Medical Weight Loss
 
 ## Unreachable from homepage (internal link graph)
 
 - `/adhd-care/miami`
 - `/adhd-care/orlando`
 - `/adhd-care/san-diego`
-- `/adhd-diagnosis-austin`
-- `/adhd-diagnosis-florida`
-- `/adhd-diagnosis-houston`
-- `/adhd-diagnosis-pennsylvania`
-- `/adhd-diagnosis-philadelphia`
-- `/adhd-treatment-online`
-- `/adult-adhd-diagnosis`
-- `/adult-adhd-screening-california`
-- `/adult-adhd-screening-texas`
-- `/answers/weight-gain-after-stopping-ozempic`
-- `/blog/adhd-evaluation-cost-california`
-- `/blog/adhd-treatment-austin-tx`
-- `/blog/adhd-treatment-dallas-tx`
-- `/blog/adhd-treatment-fort-worth-tx`
-- `/blog/adhd-treatment-houston-tx`
-- `/blog/adhd-treatment-los-angeles-ca`
-- `/blog/adhd-treatment-miami-fl`
-- `/blog/adhd-treatment-oakland-ca`
-- `/blog/adhd-treatment-orange-county-ca`
-- `/blog/adhd-treatment-orlando-fl`
-- `/blog/adhd-treatment-philadelphia-pa`
-- `/blog/adhd-treatment-sacramento-ca`
-- `/blog/adhd-treatment-san-antonio-tx`
-- `/blog/adhd-treatment-san-diego-ca`
-- `/blog/adhd-treatment-san-francisco-ca`
-- `/blog/adhd-treatment-san-jose-ca`
-- `/blog/adult-adhd-treatment-california-2026`
+- `/adhd-evaluation-cost`
+- `/answers/adhd-in-women`
+- `/answers/adhd-vs-anxiety`
+- `/answers/adhd-vs-burnout`
+- `/answers/asrs-adhd-screening-explained`
+- `/answers/can-adhd-cause-anxiety`
+- `/answers/can-sleep-apnea-cause-fatigue`
+- `/answers/food-noise-returned-on-glp-1`
+- `/answers/glp-1-nausea-management`
+- `/answers/glp-1-side-effects`
+- `/answers/high-functioning-adhd`
+- `/answers/high-shbg-low-free-testosterone`
+- `/answers/insulin-resistance-without-diabetes`
+- `/answers/late-adhd-diagnosis-adults`
+- `/answers/normal-a1c-insulin-resistance`
+- `/answers/poor-sleep-feels-like-adhd`
+- `/answers/rejection-sensitivity-adhd`
+- `/answers/testosterone-and-adhd-overlap`
+- `/answers/time-blindness-adhd`
+- `/answers/who-qualifies-glp-1-weight-loss`
+- `/blog/thyroid-and-fatigue`
+- `/employers/california-pilot`
+- `/homepage2-audit`
+- `/homepage2-care-preview`
+- `/intake`
+- `/internal/university-pilot-draft`
+- `/online-adhd-test`
 
-_…and 10 more._
+_…and 16 more._
 
 ## Remaining weak points
 

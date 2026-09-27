@@ -249,7 +249,7 @@ export const CORNERSTONE_ENGAGEMENT = {
         { heading: 'Waist / visceral pattern', body: 'Central adiposity even when scale change seems modest.' },
         { heading: 'Post-meal slump', body: 'Fatigue or brain fog 1–3 hours after high-glycemic meals.' },
         { heading: 'Labs trending', body: 'Triglycerides up, HDL down, blood pressure rising over years.' },
-        { heading: 'Normal A1C still possible', body: 'Compensation can mask glucose exposure early (<a href="/answers/normal-a1c-insulin-resistance">learn more</a>).' },
+        { heading: 'Normal A1C still possible', body: 'Compensation can mask glucose exposure early (<a href="/guides/weight#wt-insulin">learn more</a>).' },
       ],
     }),
     beforeEvidence: evidenceSnapshot({
@@ -292,7 +292,7 @@ export const CORNERSTONE_ENGAGEMENT = {
         },
         {
           question: 'Stalled loss despite real effort + snoring or unrefreshing sleep?',
-          yes: 'Screen for obstructive sleep apnea before blaming “willpower” (<a href="/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign">sleep apnea guide</a>).',
+          yes: 'Screen for obstructive sleep apnea before blaming “willpower” (<a href="/guides/sleep#sl-apnea">sleep apnea guide</a>).',
           branch: true,
         },
       ],
@@ -314,7 +314,7 @@ export const CORNERSTONE_ENGAGEMENT = {
         { heading: 'Medical & labs', body: 'Thyroid, iron, B12, glucose/insulin patterns, medications.' },
         { heading: 'Mental health', body: 'Depression, anxiety, PTSD—anergia is common.' },
         { heading: 'Endocrine & hormones', body: 'Low testosterone (men), thyroid; treat sleep apnea before TRT rush.' },
-        { heading: 'ADHD & burnout', body: 'Lifelong vs job-linked exhaustion (<a href="/answers/adhd-vs-burnout">ADHD vs burnout</a>).' },
+        { heading: 'ADHD & burnout', body: 'Lifelong vs job-linked exhaustion (<a href="/guides/mental-health-and-adhd#mh-diff">ADHD vs burnout</a>).' },
       ],
     }),
     afterMissedDiagnoses: evidenceSnapshot({
@@ -366,7 +366,7 @@ export const CORNERSTONE_ENGAGEMENT = {
       title: 'Quick differential anchors',
       segments: [
         { value: 'OSA', label: 'Snoring + unrefreshing sleep', note: 'Even without classic loud snoring' },
-        { value: 'IR', label: 'Afternoon slump + waist gain', note: '<a href="/blog/insulin-resistance-and-weight-loss-clinician-overview">Insulin guide</a>' },
+        { value: 'IR', label: 'Afternoon slump + waist gain', note: '<a href="/guides/weight#wt-insulin">Insulin guide</a>' },
         { value: 'ADHD', label: 'Lifelong chaos + sleep debt', note: '<a href="/adhd-care">ADHD care</a>' },
       ],
     }),

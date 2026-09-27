@@ -1,6 +1,6 @@
 # Cornerstone Protection Report
 
-Generated: 2026-09-02T00:40:00.178Z
+Generated: 2026-09-27T09:57:42.724Z
 
 ### Food Noise
 - **Cornerstone blog:** /blog/food-noise-and-glp-1-what-it-means-and-what-helps
@@ -12,14 +12,14 @@ Generated: 2026-09-02T00:40:00.178Z
 | Identical title? | ✓ No |
 | Identical H1? | ✓ No |
 | Identical meta? | ✓ No |
-| Canonical pointer to blog? | ✓ Yes |
+| Canonical pointer to blog? | ✗ No |
 
 | Guide | /answers/food-noise-returned-on-glp-1 |
 | Guide H1 | Why did food noise come back on GLP-1? |
 | Identical title? | ✓ No |
 | Identical H1? | ✓ No |
 | Identical meta? | ✓ No |
-| Canonical pointer to blog? | ✓ Yes |
+| Canonical pointer to blog? | ✗ No |
 
 ### Insulin Resistance
 - **Cornerstone blog:** /blog/insulin-resistance-and-weight-loss-clinician-overview
@@ -31,21 +31,21 @@ Generated: 2026-09-02T00:40:00.178Z
 | Identical title? | ✓ No |
 | Identical H1? | ✓ No |
 | Identical meta? | ✓ No |
-| Canonical pointer to blog? | ✓ Yes |
+| Canonical pointer to blog? | ✗ No |
 
 | Guide | /answers/insulin-resistance-without-diabetes |
 | Guide H1 | Can you have insulin resistance without diabetes? |
 | Identical title? | ✓ No |
 | Identical H1? | ✓ No |
 | Identical meta? | ✓ No |
-| Canonical pointer to blog? | ✓ Yes |
+| Canonical pointer to blog? | ✗ No |
 
 | Guide | /answers/normal-a1c-insulin-resistance |
 | Guide H1 | Can you have insulin resistance with a normal A1C? |
 | Identical title? | ✓ No |
 | Identical H1? | ✓ No |
 | Identical meta? | ✓ No |
-| Canonical pointer to blog? | ✓ Yes |
+| Canonical pointer to blog? | ✗ No |
 
 ### Fatigue
 - **Cornerstone blog:** /fatigue
@@ -76,14 +76,14 @@ Generated: 2026-09-02T00:40:00.178Z
 | Identical title? | ✓ No |
 | Identical H1? | ✓ No |
 | Identical meta? | ✓ No |
-| Canonical pointer to blog? | ✓ Yes |
+| Canonical pointer to blog? | ✗ No |
 
 | Guide | /answers/signs-of-sleep-apnea-in-adults |
 | Guide H1 | What are the signs of sleep apnea in adults? |
 | Identical title? | ✓ No |
 | Identical H1? | ✓ No |
 | Identical meta? | ✓ No |
-| Canonical pointer to blog? | ✓ Yes |
+| Canonical pointer to blog? | ✗ No |
 
 ### Free Testosterone
 - **Cornerstone blog:** /blog/free-testosterone-vs-total-testosterone-what-patients-should-know
@@ -95,19 +95,19 @@ Generated: 2026-09-02T00:40:00.178Z
 | Identical title? | ✓ No |
 | Identical H1? | ✓ No |
 | Identical meta? | ✓ No |
-| Canonical pointer to blog? | ✓ Yes |
+| Canonical pointer to blog? | ✗ No |
 
 | Guide | /answers/what-does-low-testosterone-feel-like |
 | Guide H1 | What does low testosterone feel like? |
 | Identical title? | ✓ No |
 | Identical H1? | ✓ No |
 | Identical meta? | ✓ No |
-| Canonical pointer to blog? | ✓ Yes |
+| Canonical pointer to blog? | ✗ No |
 
 | Guide | /answers/high-shbg-low-free-testosterone |
 | Guide H1 | What does high SHBG with low free testosterone mean? |
 | Identical title? | ✓ No |
 | Identical H1? | ✓ No |
 | Identical meta? | ✓ No |
-| Canonical pointer to blog? | ✓ Yes |
+| Canonical pointer to blog? | ✗ No |
 

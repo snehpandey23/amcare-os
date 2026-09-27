@@ -273,7 +273,7 @@ function render() {
               <p>Working harder than the people around you and still feeling behind&mdash;often quietly, for years.</p>
             </article>
           </div>
-          <p>Because these patterns usually trace back to childhood and show up across settings&mdash;work, home, relationships&mdash;rather than in just one stressful season, they are worth taking seriously. However, recognizing yourself here does not mean you have ADHD; it means a structured evaluation could be worth exploring. If you want a fuller picture of the signs, for example, the guide on <a href="/answers/signs-of-adult-adhd">signs of adult ADHD</a> goes deeper.</p>
+          <p>Because these patterns usually trace back to childhood and show up across settings&mdash;work, home, relationships&mdash;rather than in just one stressful season, they are worth taking seriously. However, recognizing yourself here does not mean you have ADHD; it means a structured evaluation could be worth exploring. If you want a fuller picture of the signs, for example, the guide on <a href="/guides/mental-health-and-adhd#mh-signs">signs of adult ADHD</a> goes deeper.</p>
         </div>
       </section>
 
@@ -327,11 +327,11 @@ function render() {
           <div class="why-choose-grid">
             <article class="why-choose-card">
               <h3>ADHD in women</h3>
-              <p>ADHD in women is often internalized&mdash;overwhelm, anxiety, and exhaustion rather than obvious hyperactivity&mdash;so it is frequently missed until adulthood, and symptoms can shift with hormonal changes. The guide on <a href="/blog/adhd-in-women">ADHD in women</a> covers this in depth.</p>
+              <p>ADHD in women is often internalized&mdash;overwhelm, anxiety, and exhaustion rather than obvious hyperactivity&mdash;so it is frequently missed until adulthood, and symptoms can shift with hormonal changes. The guide on <a href="/guides/hormonal-health#ho-women">ADHD in women</a> covers this in depth.</p>
             </article>
             <article class="why-choose-card">
               <h3>Executive dysfunction</h3>
-              <p>Executive dysfunction is the engine under most ADHD symptoms: trouble planning, starting, sequencing, and switching tasks. Understanding it reframes &ldquo;lazy&rdquo; as a real, workable challenge&mdash;see <a href="/blog/executive-dysfunction-adhd">executive dysfunction in ADHD</a>.</p>
+              <p>Executive dysfunction is the engine under most ADHD symptoms: trouble planning, starting, sequencing, and switching tasks. Understanding it reframes &ldquo;lazy&rdquo; as a real, workable challenge&mdash;see <a href="/guides/mental-health-and-adhd#mh-work">executive dysfunction in ADHD</a>.</p>
             </article>
           </div>
         </div>
@@ -355,7 +355,7 @@ function render() {
             </article>
             <article class="why-choose-card">
               <h3>&ldquo;A screening quiz is a diagnosis&rdquo;</h3>
-              <p>Screening only tells you whether an evaluation is worth exploring. Diagnosis requires clinical history and judgment&mdash;the difference is explained in <a href="/answers/screening-vs-adhd-evaluation">screening versus evaluation</a>.</p>
+              <p>Screening only tells you whether an evaluation is worth exploring. Diagnosis requires clinical history and judgment&mdash;the difference is explained in <a href="/guides/mental-health-and-adhd#mh-screen">screening versus evaluation</a>.</p>
             </article>
           </div>
           <p class="hero-state-line">Siya Health provides physician-led adult ADHD telehealth to patients located in <strong>California</strong>, with clinicians licensed in the state, so availability is confirmed when you book. However, there is no in-person location to visit and no city you need to live in&mdash;because it is telehealth, care reaches you wherever you are in California.</p>

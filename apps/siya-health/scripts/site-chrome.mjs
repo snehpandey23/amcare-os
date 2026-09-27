@@ -305,7 +305,7 @@ export const ANCHOR_LABELS = {
   '/answers/when-is-testosterone-therapy-appropriate': 'Symptoms that warrant TRT evaluation (FAQ)',
   '/answers/adhd-and-weight-loss-connection': 'ADHD and weight loss struggles',
   '/creyos-adhd-testing': 'Creyos cognitive testing for ADHD',
-  '/pricing': `Transparent care pricing (${initialEvaluationPriceDisplay()} evaluation · $79 / $149 follow-up)`,
+  '/pricing': `Transparent care pricing (${initialEvaluationPriceDisplay()} evaluation · $149/month ongoing care)`,
   '/blog/online-adhd-diagnosis-california': 'Online ADHD diagnosis in California',
   '/blog/online-adhd-diagnosis-texas': 'Online ADHD diagnosis in Texas',
   '/adhd-care': 'ADHD evaluation and ongoing care',
@@ -348,7 +348,7 @@ const LEARN_MORE_ADHD = `<!-- SIYA:LEARN-MORE-ADHD -->
             <p class="lead">A few starting points—before or after evaluation.</p>
           </div>
           <div class="adhd-reading-grid adhd-reading-grid--compact">
-            <a class="adhd-reading-card" href="/answers/late-adhd-diagnosis-adults">
+            <a class="adhd-reading-card" href="/guides/mental-health-and-adhd#mh-signs">
               <figure class="adhd-reading-card-media">
                 <img src="/assets/images/editorial-finally-heard.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
               </figure>
@@ -362,7 +362,7 @@ const LEARN_MORE_ADHD = `<!-- SIYA:LEARN-MORE-ADHD -->
               <strong>ADHD Medication Guide</strong>
               <span>Stimulant vs non-stimulant paths adults ask about first.</span>
             </a>
-            <a class="adhd-reading-card" href="/answers/adhd-vs-anxiety">
+            <a class="adhd-reading-card" href="/guides/mental-health-and-adhd#mh-diff">
               <figure class="adhd-reading-card-media">
                 <img src="/assets/images/editorial-adhd-racing.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
               </figure>
@@ -515,14 +515,14 @@ const LEARN_MORE_WEIGHT = `<!-- SIYA:LEARN-MORE-WEIGHT -->
             <p class="lead">Educational resources from Siya Health—so you can learn at your own pace before or after a visit.</p>
           </div>
           <div class="adhd-reading-grid">
-            <a class="adhd-reading-card" href="/blog/food-noise-and-glp-1-what-it-means-and-what-helps">
+            <a class="adhd-reading-card" href="/guides/weight#wt-food-noise">
               <figure class="adhd-reading-card-media">
                 <img src="/assets/images/editorial-weight-effort.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
               </figure>
               <strong>Food Noise &amp; GLP-1</strong>
               <span>What food noise means and what may help.</span>
             </a>
-            <a class="adhd-reading-card" href="/blog/insulin-resistance-and-weight-loss-clinician-overview">
+            <a class="adhd-reading-card" href="/guides/weight#wt-insulin">
               <figure class="adhd-reading-card-media">
                 <img src="/assets/images/editorial-insulin-metabolic.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
               </figure>
@@ -571,28 +571,28 @@ const LEARN_MORE_MENS = `<!-- SIYA:LEARN-MORE-MENS -->
             <p class="lead">Educational resources from Siya Health—so you can learn at your own pace before or after a visit.</p>
           </div>
           <div class="adhd-reading-grid">
-            <a class="adhd-reading-card" href="/blog/when-is-testosterone-therapy-appropriate">
+            <a class="adhd-reading-card" href="/guides/hormonal-health#ho-therapy">
               <figure class="adhd-reading-card-media">
                 <img src="/assets/images/editorial-trt-consult.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
               </figure>
               <strong>When Is TRT Appropriate?</strong>
               <span>Evidence-based criteria—not anti-aging hype.</span>
             </a>
-            <a class="adhd-reading-card" href="/blog/free-testosterone-vs-total-testosterone-what-patients-should-know">
+            <a class="adhd-reading-card" href="/guides/hormonal-health#ho-free">
               <figure class="adhd-reading-card-media">
                 <img src="/assets/images/editorial-mens-hero.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
               </figure>
               <strong>Free vs Total Testosterone</strong>
               <span>What lab numbers actually mean.</span>
             </a>
-            <a class="adhd-reading-card" href="/answers/what-does-low-testosterone-feel-like">
+            <a class="adhd-reading-card" href="/guides/hormonal-health#ho-symptoms">
               <figure class="adhd-reading-card-media">
                 <img src="/assets/images/editorial-mens-low-energy.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
               </figure>
               <strong>What Low T Can Feel Like</strong>
               <span>Symptoms that prompt evaluation.</span>
             </a>
-            <a class="adhd-reading-card" href="/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign">
+            <a class="adhd-reading-card" href="/guides/sleep#sl-apnea">
               <figure class="adhd-reading-card-media">
                 <img src="/assets/images/editorial-mens-recovery.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
               </figure>
@@ -606,7 +606,7 @@ const LEARN_MORE_MENS = `<!-- SIYA:LEARN-MORE-MENS -->
               <strong>Fatigue</strong>
               <span>Energy workups that go beyond caffeine.</span>
             </a>
-            <a class="adhd-reading-card" href="/answers/testosterone-and-adhd-overlap">
+            <a class="adhd-reading-card" href="/guides/hormonal-health#ho-symptoms">
               <figure class="adhd-reading-card-media">
                 <img src="/assets/images/editorial-mens-brain-fog.jpg" alt="" width="720" height="480" loading="lazy" decoding="async" />
               </figure>
@@ -627,13 +627,13 @@ const LEARN_MORE_WOMENS = `<!-- SIYA:LEARN-MORE-WOMENS -->
             <p class="lead">Evidence-based guides on ADHD in women, metabolic health, fatigue, and hormone-related concerns.</p>
           </div>
           <ul class="learn-more-links">
-            <li><a href="/answers/adhd-in-women">ADHD in women: why symptoms are often missed</a></li>
-            <li><a href="/answers/what-is-insulin-resistance">What is insulin resistance?</a></li>
+            <li><a href="/guides/hormonal-health#ho-women">ADHD in women: why symptoms are often missed</a></li>
+            <li><a href="/guides/weight#wt-insulin">What is insulin resistance?</a></li>
             <li><a href="/answers/why-am-i-tired-even-after-sleeping">Why am I tired even after sleeping?</a></li>
-            <li><a href="/answers/poor-sleep-feels-like-adhd">When poor sleep feels like ADHD</a></li>
+            <li><a href="/guides/sleep#sl-focus">When poor sleep feels like ADHD</a></li>
             <li><a href="/fatigue">Fatigue: when tired stops being normal</a></li>
-            <li><a href="/blog/insulin-resistance-and-weight-loss-clinician-overview">Insulin resistance and weight loss</a></li>
-            <li><a href="/blog/food-noise-and-glp-1-what-it-means-and-what-helps">Food noise and GLP-1</a></li>
+            <li><a href="/guides/weight#wt-insulin">Insulin resistance and weight loss</a></li>
+            <li><a href="/guides/weight#wt-food-noise">Food noise and GLP-1</a></li>
             <li><a href="/answers/what-is-food-noise">What is food noise?</a></li>
             <li><a href="/adhd-care">ADHD evaluation &amp; care</a></li>
             <li><a href="/weight-loss-metabolic-health">Medical weight loss</a></li>
@@ -1243,7 +1243,7 @@ export function normalizeSitewideCopy(html, relPath = '') {
   html = html.replace(/Talk to a clinician when you['']re ready/gi, COPY_STANDARDS.primaryCta);
   html = html.replace(
     /Ongoing medication management is available on a monthly plan if clinically appropriate\./g,
-    'Follow-up plans start at $79/month for non-controlled medications, or $149/month for controlled-medication follow-up when clinically appropriate. See <a href="/pricing">pricing</a>.',
+    'Ongoing care is $149/month. See <a href="/pricing">pricing</a>.',
   );
   html = fixDuplicateCalifornia(html);
   return html;

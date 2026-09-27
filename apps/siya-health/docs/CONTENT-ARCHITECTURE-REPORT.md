@@ -1,13 +1,13 @@
 # Content architecture report
 
-Generated: 2026-09-02T00:40:02.203Z
+Generated: 2026-09-27T09:57:45.098Z
 
 ## Summary
 
 - **Topic clusters defined:** 10 (ADHD, metabolic, energy, hormone)
 - **Priority informational URLs:** 32
 - **Priority blogs patched with cluster bridges:** 14
-- **Consolidation recommendations:** 12 (recommend only — no pages removed)
+- **Consolidation recommendations:** 11 (recommend only — no pages removed)
 
 ## Answers hub structure
 
@@ -48,7 +48,6 @@ These pairs target **essentially the same search intent**. Keep the canonical UR
 | /blog/is-online-adhd-diagnosis-legit | /answers/is-online-adhd-diagnosis-legitimate | Duplicate intent — guide narrowed to FAQ checklist; blog owns depth (already differentiated). |
 | /blog/vyvanse-vs-adderall-differences | /answers/adderall-vs-vyvanse-adults | Guide scoped to preference FAQ; blog owns full comparison. |
 | /blog/glp1-side-effects-and-how-to-manage-them | /answers/glp-1-nausea-management | Nausea subset fully covered in GLP-1 side effects cornerstone. |
-| /blog/food-noise-and-glp-1-what-it-means-and-what-helps | /answers/weight-gain-after-stopping-ozempic | Ozempic cessation / food-noise rebound owned by food-noise cornerstone. |
 | /blog/how-to-know-if-you-have-adhd-adult | /answers/rejection-sensitivity-adhd | RSD micro-guide; symptom covered in signs cornerstone and ADHD blog cluster. |
 
 ## Priority pages strengthened

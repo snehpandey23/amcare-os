@@ -16,10 +16,7 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
 
-const CLUSTER_RE = new RegExp(
-  `<aside class="workplace-seo-cluster" data-link-pass="${WORKPLACE_CLUSTER_MARKER}"[\\s\\S]*?</aside>\\n?`,
-  'g',
-);
+const CLUSTER_RE_SOURCE = `<aside class="workplace-seo-cluster" data-link-pass="${WORKPLACE_CLUSTER_MARKER}"[\\s\\S]*?</aside>\\n?`;
 
 const RELATED_SECTION_RE = new RegExp(
   `<section class="section section-tinted" id="related-workplace-guides"[\\s\\S]*?</section>\\n?`,
@@ -34,8 +31,18 @@ function upsertBlock(rel, block, anchors = []) {
     return false;
   }
   let html = fs.readFileSync(filePath, 'utf8');
-  if (CLUSTER_RE.test(html)) {
-    html = html.replace(CLUSTER_RE, `${block}\n`);
+  const clusterRe = new RegExp(CLUSTER_RE_SOURCE, 'g');
+  if (clusterRe.test(html)) {
+    html = html.replace(new RegExp(CLUSTER_RE_SOURCE, 'g'), '');
+    let placed = false;
+    for (const anchor of anchors) {
+      if (html.includes(anchor)) {
+        html = html.replace(anchor, `${block}\n${anchor}`);
+        placed = true;
+        break;
+      }
+    }
+    if (!placed) html = `${block}\n${html}`;
   } else {
     let placed = false;
     for (const anchor of anchors) {
@@ -72,8 +79,17 @@ function upsertBlogWorkplaceSpotlight() {
   if (!fs.existsSync(filePath)) return false;
   let html = fs.readFileSync(filePath, 'utf8');
   const block = renderWorkplaceBlogSpotlight();
-  if (WORKPLACE_SPOTLIGHT_RE.test(html)) {
-    html = html.replace(WORKPLACE_SPOTLIGHT_RE, `${block}\n`);
+  const spotlightRe = new RegExp(WORKPLACE_SPOTLIGHT_RE.source, 'g');
+  if (spotlightRe.test(html)) {
+    html = html.replace(new RegExp(WORKPLACE_SPOTLIGHT_RE.source, 'g'), '');
+    if (html.includes('<section class="section blog-featured">')) {
+      html = html.replace(
+        '<section class="section blog-featured">',
+        `${block}\n\n      <section class="section blog-featured">`,
+      );
+    } else {
+      html = `${block}\n${html}`;
+    }
   } else if (html.includes('<section class="section blog-featured">')) {
     html = html.replace(
       '<section class="section blog-featured">',

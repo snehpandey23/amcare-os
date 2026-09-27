@@ -80,7 +80,7 @@ export const CALIFORNIA_POSTS_REST = [
     ],
     bodyHtml: `
             <p class="blog-disclaimer"><strong>Educational only:</strong> This blog is for educational purposes only and does not replace medical advice. A licensed provider can help determine what care is appropriate for you.</p>
-            <div class="blog-internal-links"><p>Bookmark <a href="/blog/how-adhd-medication-is-prescribed-online">how ADHD medication gets prescribed online</a>, revisit <a href="/blog/how-to-know-if-you-have-adhd-adult">adult ADHD signs primer</a>, review <a href="/book-appointment">booking</a> logistics anytime.</p></div>
+            <div class="blog-internal-links"><p>Bookmark <a href="/blog/how-adhd-medication-is-prescribed-online">how ADHD medication gets prescribed online</a>, revisit <a href="/guides/mental-health-and-adhd#mh-signs">adult ADHD signs primer</a>, review <a href="/book-appointment">booking</a> logistics anytime.</p></div>
 
             <p>Hunting <strong>online ADHD treatment California</strong> often begins emotionally—years internalizing lazy branding, resentment toward missed deadlines, shame misgendering dopamine scarcity neurochemically untreated. Californians juggling housing precarity statewide, academia pressure pockets, entrepreneurial volatility Bay-to-Socal deserve frameworks prioritizing humane pacing—not influencer cortisol adrenaline manipulation nor MLM-esque supplement fetish rebrands masquerading psychiatry substitutes illegally.</p>
 
@@ -195,7 +195,7 @@ export const CALIFORNIA_POSTS_REST = [
             <div class="cta-block blog-cta"><a class="button" href="/adhd-screening?adhd=1">Try structured screening first</a></div>
 
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
-              <li><a href="/blog/how-to-know-if-you-have-adhd-adult">How to know if you have adult ADHD</a></li>
+              <li><a href="/guides/mental-health-and-adhd#mh-signs">How to know if you have adult ADHD</a></li>
               <li><a href="/blog/creyos-adhd-testing">Creyos cognitive testing context</a></li>
               <li><a href="/blog/online-adhd-diagnosis-california">Online diagnosis in California</a></li>
             </ul></section>
@@ -363,7 +363,7 @@ export const CALIFORNIA_POSTS_REST = [
     ],
     bodyHtml: `
             <p class="blog-disclaimer"><strong>Educational only:</strong> This blog is for educational purposes only and does not replace medical advice. A licensed provider can help determine what care is appropriate for you.</p>
-            <div class="blog-internal-links"><p>Start with structured triage tools like our <a href="/adhd-screening">online ADHD screening</a>, then contrast <a href="/blog/how-to-know-if-you-have-adhd-adult">how adult ADHD is evaluated</a> with <a href="/blog/adhd-testing-online-california-screening-vs-evaluation">online screening versus full evaluation in California</a>.</p></div>
+            <div class="blog-internal-links"><p>Start with structured triage tools like our <a href="/adhd-screening">online ADHD screening</a>, then contrast <a href="/guides/mental-health-and-adhd#mh-signs">how adult ADHD is evaluated</a> with <a href="/blog/adhd-testing-online-california-screening-vs-evaluation">online screening versus full evaluation in California</a>.</p></div>
 
             <p>People searching <strong>adult ADHD symptoms California</strong> are often reacting to contradictions society hands them: coworkers saying you seem “successful enough,” TikTok diagnosing from two symptoms, burnout coaches blaming mindset, psychiatrists implying you should have flunked high school decades ago—the whole bundle can leave you cynical. Yet symptoms still merit careful parsing medically: adults with clinically significant ADHD commonly describe chronic restlessness mentally, drifting during conversations unintentionally despite caring, losing wallets or keys repetitively, paying late fees episodically, hyperfocusing fiercely on passion projects yet avoiding routine admin painfully, procrastinating until adrenaline panic unlocks urgency, texting apologies for lateness exhausting relationships, binge-scrolling paralysis numbing anxiety—all patterns that may occur with ADHD, but overlap heavily with exhaustion, untreated mood disorders, post-traumatic hypervigilance, iron deficiency anemia, untreated hypothyroidism, apnea-driven daytime sedation—requiring clinician distinction—not Tumblr certainty.</p>
 

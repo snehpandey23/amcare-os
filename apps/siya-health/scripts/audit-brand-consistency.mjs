@@ -319,7 +319,7 @@ function main() {
 
   md += `\n---\n\n## Implementation priorities\n\n`;
   md += `### P0 — Brand-breaking\n`;
-  md += `- **REWRITE** \`/membership-pricing\` — legacy Bronze/Silver/Gold conflicts with $149/$79/$149 care-delivery model\n`;
+  md += `- **REWRITE** \`/membership-pricing\` — legacy Bronze/Silver/Gold conflicts with $149 evaluation and $149/month ongoing care\n`;
   md += `- **DELETE** legacy legal stubs and off-brand articles (see DELETE list)\n`;
   md += `- **MERGE** 17 cannibalizing guide→blog duplicate pairs\n\n`;
   md += `### P1 — Positioning drift\n`;

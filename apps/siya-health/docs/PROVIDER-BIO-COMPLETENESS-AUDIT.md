@@ -1,6 +1,6 @@
 # Provider Bio Completeness Audit
 
-Generated: 2026-09-02
+Generated: 2026-09-27
 
 ## Dr. Sneh Pandey, MD
 

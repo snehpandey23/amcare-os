@@ -1,15 +1,15 @@
 # SEO Deployment QA Report
 
-Generated: 2026-09-02T01:07:40.807Z
+Generated: 2026-09-27T09:57:51.861Z
 
 ## Summary
 
 | Metric | Value |
 |--------|------:|
-| HTML pages scanned | 225 |
-| Sitemap URLs | 183 |
+| HTML pages scanned | 219 |
+| Sitemap URLs | 145 |
 | Pages with Meet & Greet in nav | 0 |
-| Non-ADHD pages with in-content `adhd-screening` (footer excluded) | 5 |
+| Non-ADHD pages with in-content `adhd-screening` (footer excluded) | 4 |
 | Broken internal links (sample) | 0 |
 | JSON-LD parse errors | 0 |
 
@@ -19,18 +19,18 @@ Generated: 2026-09-02T01:07:40.807Z
 
 | URL | File exists | In sitemap |
 |-----|:-----------:|:----------:|
-| /blog/food-noise-and-glp-1-what-it-means-and-what-helps | ✓ | ✓ |
-| /blog/insulin-resistance-and-weight-loss-clinician-overview | ✓ | ✓ |
-| /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | ✓ | ✓ |
+| /blog/food-noise-and-glp-1-what-it-means-and-what-helps | ✓ | ✗ |
+| /blog/insulin-resistance-and-weight-loss-clinician-overview | ✓ | ✗ |
+| /blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign | ✓ | ✗ |
 
 ### Answer pages
 
 | Slug | Exists | Sitemap | Meet & Greet CTA | Blog backlink |
 |------|:------:|:-------:|:----------------:|:-------------:|
 | what-is-food-noise | ✓ | ✓ | ✗ | ✓ |
-| what-is-insulin-resistance | ✓ | ✓ | ✗ | ✓ |
-| insulin-resistance-without-diabetes | ✓ | ✓ | ✗ | ✓ |
-| normal-a1c-insulin-resistance | ✓ | ✓ | ✗ | ✓ |
+| what-is-insulin-resistance | ✓ | ✗ | ✗ | ✓ |
+| insulin-resistance-without-diabetes | ✓ | ✗ | ✗ | ✓ |
+| normal-a1c-insulin-resistance | ✓ | ✗ | ✗ | ✓ |
 | why-am-i-tired-even-after-sleeping | ✓ | ✓ | ✗ | ✓ |
 
 ## CTA repositioning
@@ -39,19 +39,17 @@ Generated: 2026-09-02T01:07:40.807Z
 - **Default secondary CTA:** Explore Care Options → `#services` or service hubs
 - **ADHD screening retained on:** ADHD service pages, ADHD blogs, ADHD answers, Creyos, geo diagnosis pages, `adhd-screening.html`
 
-### Non-ADHD pages with in-content `adhd-screening` (5)
+### Non-ADHD pages with in-content `adhd-screening` (4)
 
 _Footer “Free ADHD screening” service link is intentional sitewide cross-sell and excluded from this count._
 
 - `blog/perimenopause-brain-fog.html`
-- `index.html`
 - `labs/adhd-support.html`
 - `providers/megan-wunderlich.html`
 - `womens-midlife-health.html`
 
-### All pages with any `adhd-screening` reference (193)
+### All pages with any `adhd-screening` reference (59)
 
-- `about.html`
 - `adhd-care/miami.html`
 - `adhd-care/orlando.html`
 - `adhd-care/san-diego.html`
@@ -63,43 +61,44 @@ _Footer “Free ADHD screening” service link is intentional sitewide cross-sel
 - `adhd-screening-results.html`
 - `adhd-screening.html`
 - `adult-adhd-california.html`
-- `adult-adhd-screening-california.html`
-- `adult-adhd-screening-texas.html`
-- `answers/adderall-vs-vyvanse-adults.html`
-- `answers/adhd-and-weight-loss-connection.html`
-- `answers/adhd-in-women.html`
-- `answers/adhd-medication-every-day.html`
-- `answers/adhd-medication-side-effects.html`
-- `answers/adhd-vs-anxiety.html`
-- `answers/adhd-vs-burnout.html`
-- `answers/adhd-workplace-accommodations.html`
-- `answers/afternoon-energy-crash-after-lunch.html`
 - `answers/asrs-adhd-screening-explained.html`
-- `answers/brain-fog-after-eating.html`
-- `answers/can-adhd-be-diagnosed-online.html`
-- `answers/can-adhd-cause-anxiety.html`
-- `answers/can-sleep-apnea-cause-fatigue.html`
-- `answers/can-you-get-adhd-medication-online.html`
-- `answers/compounded-vs-branded-glp-1.html`
-- `answers/ed-telehealth-legitimate.html`
-- `answers/executive-dysfunction-adhd.html`
-- `answers/food-noise-returned-on-glp-1.html`
-- `answers/fsa-hsa-adhd-evaluation.html`
-- `answers/glp-1-nausea-management.html`
-- `answers/glp-1-side-effects.html`
-- `answers/high-functioning-adhd.html`
-- `answers/high-shbg-low-free-testosterone.html`
-- `answers/how-long-adhd-evaluation.html`
-- `answers/how-much-does-adhd-testing-cost.html`
+- `answers/index.html`
+- `blog/adderall-for-adhd-how-it-works.html`
+- `blog/adhd-accommodations-hr-primer.html`
+- `blog/adhd-and-binge-eating.html`
+- `blog/adhd-brain-imaging-subtypes.html`
+- `blog/adhd-evaluation-california-online-vs-in-person.html`
+- `blog/adhd-evaluation-cost-texas.html`
+- `blog/adhd-hormones-women.html`
+- `blog/adhd-in-women.html`
+- `blog/adhd-medication-daily-or-as-needed-adults.html`
+- `blog/adhd-medication-online-california.html`
+- `blog/adhd-medication-options-california.html`
+- `blog/adhd-medication-options-for-adults.html`
+- `blog/adhd-medication-side-effects-what-to-expect.html`
+- `blog/adhd-symptoms-overlooked.html`
+- `blog/adhd-telehealth-california.html`
+- `blog/adhd-testing-online-california-screening-vs-evaluation.html`
+- `blog/adhd-treatment-texas.html`
+- `blog/adhd.html`
+- `blog/adult-adhd-symptoms-california.html`
+- `blog/brain-fog-vs-adhd.html`
+- `blog/executive-dysfunction-adhd.html`
+- `blog/how-adhd-medication-is-prescribed-online.html`
+- `blog/how-to-choose-adhd-provider-california.html`
+- `blog/how-to-know-if-you-have-adhd-adult.html`
+- `blog/iron-deficiency-brain-fog-adhd.html`
+- `blog/is-adhd-medication-safe-long-term.html`
+- `blog/is-online-adhd-diagnosis-legit.html`
 
-_…and 153 more (expected on ADHD funnels)._
+_…and 19 more (expected on ADHD funnels)._
 
 ## Internal link cluster (food noise ↔ insulin ↔ fatigue)
 
 | From | To | Linked |
 |------|-----|:------:|
-| blog/food-noise-and-glp-1-what-it-means-and-what-helps.html | insulin-resistance-and-weight-loss-clinician-overview | ✓ |
-| blog/insulin-resistance-and-weight-loss-clinician-overview.html | food-noise-and-glp-1-what-it-means-and-what-helps | ✓ |
+| blog/food-noise-and-glp-1-what-it-means-and-what-helps.html | insulin-resistance-and-weight-loss-clinician-overview | ✗ |
+| blog/insulin-resistance-and-weight-loss-clinician-overview.html | food-noise-and-glp-1-what-it-means-and-what-helps | ✗ |
 
 ## Service page Learn More blocks
 
@@ -122,33 +121,33 @@ _None detected in static HTML scan._
 - `adhd-care/miami.html`
 - `adhd-care/orlando.html`
 - `adhd-care/san-diego.html`
-- `adhd-diagnosis-austin.html`
-- `adhd-diagnosis-florida.html`
-- `adhd-diagnosis-houston.html`
-- `adhd-diagnosis-pennsylvania.html`
-- `adhd-diagnosis-philadelphia.html`
-- `adhd-treatment-online.html`
-- `adult-adhd-diagnosis.html`
-- `adult-adhd-screening-california.html`
-- `adult-adhd-screening-texas.html`
-- `answers/weight-gain-after-stopping-ozempic.html`
-- `blog/adhd-evaluation-cost-california.html`
-- `blog/adhd-treatment-austin-tx.html`
-- `blog/adhd-treatment-dallas-tx.html`
-- `blog/adhd-treatment-fort-worth-tx.html`
-- `blog/adhd-treatment-houston-tx.html`
-- `blog/adhd-treatment-los-angeles-ca.html`
-- `blog/adhd-treatment-miami-fl.html`
-- `blog/adhd-treatment-oakland-ca.html`
-- `blog/adhd-treatment-orange-county-ca.html`
-- `blog/adhd-treatment-orlando-fl.html`
-- `blog/adhd-treatment-philadelphia-pa.html`
-- `blog/adhd-treatment-sacramento-ca.html`
-- `blog/adhd-treatment-san-antonio-tx.html`
-- `blog/adhd-treatment-san-diego-ca.html`
-- `blog/adhd-treatment-san-francisco-ca.html`
-- `blog/adhd-treatment-san-jose-ca.html`
-- `blog/adult-adhd-treatment-california-2026.html`
+- `adhd-evaluation-cost.html`
+- `answers/adhd-in-women.html`
+- `answers/adhd-vs-anxiety.html`
+- `answers/adhd-vs-burnout.html`
+- `answers/asrs-adhd-screening-explained.html`
+- `answers/can-adhd-cause-anxiety.html`
+- `answers/can-sleep-apnea-cause-fatigue.html`
+- `answers/food-noise-returned-on-glp-1.html`
+- `answers/glp-1-nausea-management.html`
+- `answers/glp-1-side-effects.html`
+- `answers/high-functioning-adhd.html`
+- `answers/high-shbg-low-free-testosterone.html`
+- `answers/insulin-resistance-without-diabetes.html`
+- `answers/late-adhd-diagnosis-adults.html`
+- `answers/normal-a1c-insulin-resistance.html`
+- `answers/poor-sleep-feels-like-adhd.html`
+- `answers/rejection-sensitivity-adhd.html`
+- `answers/testosterone-and-adhd-overlap.html`
+- `answers/time-blindness-adhd.html`
+- `answers/who-qualifies-glp-1-weight-loss.html`
+- `blog/thyroid-and-fatigue.html`
+- `docs/tint-options-preview.html`
+- `guides/weight.html`
+- `homepage2-audit.html`
+- `homepage2-care-preview.html`
+- `intake/index.html`
+- `internal/university-pilot-draft.html`
 
 ## Recommendations
 

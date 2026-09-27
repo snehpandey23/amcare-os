@@ -46,21 +46,27 @@ export const PRICING = {
     description:
       'Structured clinician visit: history, goals, and a clear plan. Applies to ADHD, weight, metabolic, primary care, and telehealth pathways.',
   },
-  nonControlledFollowUp: {
-    label: 'Non-Controlled Medication Follow-Up',
-    amount: 79,
-    display: '$79',
-    period: '/month',
-    description:
-      'Ongoing follow-up for non-controlled medications, lifestyle plans, labs review, and care coordination when appropriate.',
-  },
-  controlledFollowUp: {
-    label: 'Controlled Medication Follow-Up',
+  /** One monthly price. nonControlledFollowUp / controlledFollowUp stay as aliases so older templates cannot resurrect a second tier. */
+  monthlyCare: {
+    label: 'Ongoing care',
     amount: 149,
     display: '$149',
     period: '/month',
-    description:
-      'Ongoing follow-up when controlled medications are part of your plan—including monitoring, dose adjustments, and safety checks per state law.',
+    description: 'One monthly plan after the evaluation.',
+  },
+  nonControlledFollowUp: {
+    label: 'Ongoing care',
+    amount: 149,
+    display: '$149',
+    period: '/month',
+    description: 'One monthly plan after the evaluation.',
+  },
+  controlledFollowUp: {
+    label: 'Ongoing care',
+    amount: 149,
+    display: '$149',
+    period: '/month',
+    description: 'One monthly plan after the evaluation.',
   },
 };
 

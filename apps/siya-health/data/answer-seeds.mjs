@@ -1088,7 +1088,7 @@ const CORE_ANSWER_SEEDS = [
     shortAnswer:
       'Siya Health’s {{pricing.initialEvaluation}} adult ADHD evaluation is a 60–90 minute telehealth visit with a licensed medical provider—including clinical interview, validated assessment tools as clinically appropriate (such as ASRS, DIVA, Wender Utah, SWAN, or Creyos when indicated), comorbidity screening, and a documented plan. No insurance required. Diagnosis does not guarantee medication.',
     paragraphs: [
-      'Your clinician selects assessment tools based on clinical judgment—not every patient receives every instrument. Optional follow-up plans start at {{pricing.nonControlledFollowUp}}/month for non-controlled medications, or {{pricing.controlledFollowUp}}/month for controlled-medication follow-up when clinically appropriate. See /pricing for the current fee schedule.',
+      'Your clinician selects assessment tools based on clinical judgment—not every patient receives every instrument. Ongoing care is {{pricing.monthlyCare}}/month. See /pricing for the current fee schedule.',
     ],
     evidence: ['Siya Health /adhd-care service description', 'Published pricing at /pricing'],
     related: ['how-much-does-adhd-testing-cost', 'how-long-adhd-evaluation', 'screening-vs-adhd-evaluation'],

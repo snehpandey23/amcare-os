@@ -326,7 +326,7 @@ ${renderDifferentialSection('fatigue')}
             <li><a href="/primary-care">Primary care</a></li>
             <li><a href="/blog/fatigue-despite-normal-labs">Fatigue despite normal labs</a></li>
             <li><a href="/blog/iron-deficiency-and-fatigue">Iron deficiency and fatigue</a></li>
-            <li><a href="/blog/thyroid-and-fatigue">Thyroid and fatigue</a></li>
+            <li><a href="/guides/exhausted#ex-thyroid">Thyroid and fatigue</a></li>
             <li><a href="/blog/morning-fatigue">Morning fatigue</a></li>
             <li><a href="/blog/fatigue-after-illness">Fatigue after illness</a></li>
             <li><a href="/blog/chronic-fatigue-vs-everyday-tiredness">Chronic vs everyday tiredness</a></li>

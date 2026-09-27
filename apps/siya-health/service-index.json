@@ -1,23 +1,23 @@
 {
-  "generated": "2026-09-09T06:48:04.345Z",
+  "generated": "2026-09-27T09:57:49.870Z",
   "services": [
     {
-      "title": "Siya Health | When Focus, Energy, or Weight Won't Budge",
+      "title": "Siya Health | Integrated Care for Busy Professionals",
       "url": "https://siya.health/",
       "type": "home",
-      "description": "Physician-led telehealth for adults who feel tired, unfocused, or stuck—structured evaluation for fatigue, ADHD symptoms, weight, and hormones in CA, TX, PA, and FL."
+      "description": "Physician-led integrated care for busy professionals — primary care, ADHD, weight, and hormonal health in one place. Licensed in CA, TX, PA, and FL."
     },
     {
-      "title": "About Siya Health | Mission, Team &amp; How Care Works",
+      "title": "About",
       "url": "https://siya.health/about",
       "type": "about",
       "description": "Siya Health is physician-led virtual care for adults seeking clear answers about focus, energy, weight, mood, metabolism, hormones, and everyday health. California, Texas, Pennsylvania, Florida."
     },
     {
-      "title": "Adult ADHD Diagnosis Online — Same-Week Evaluation",
+      "title": "ADHD Care",
       "url": "https://siya.health/adhd-care",
       "type": "service-adhd",
-      "description": "Primary care–led adult ADHD evaluation online — DSM-based assessment. Licensed medical providers. Individualized validated tools as clinically appropriate. CA, TX, PA, FL."
+      "description": ""
     },
     {
       "title": "ADHD Care in Miami, FL — Online Adult Evaluation",
@@ -60,6 +60,12 @@
       "url": "https://siya.health/creyos-adhd-testing",
       "type": "service-adhd",
       "description": "Creyos cognitive testing for ADHD as part of your $149 online evaluation. clinical interview plus validated tools as clinically appropriate. Licensed providers in TX, PA, FL."
+    },
+    {
+      "title": "Mental health and ADHD",
+      "url": "https://siya.health/guides/mental-health-and-adhd",
+      "type": "service-adhd",
+      "description": "General education on adult attention problems, screening versus evaluation, work follow-through, and other explanations."
     },
     {
       "title": "Labs &amp; Blood Tests | Transparent Direct-Pay Testing",
@@ -164,10 +170,10 @@
       "description": "Virtual primary and urgent care across California, Texas, Pennsylvania, and Florida. Annual wellness, chronic care, preventive labs review, and clear follow-up plans."
     },
     {
-      "title": "Virtual Medical Care | Siya Health Telehealth",
+      "title": "Telehealth",
       "url": "https://siya.health/telehealth",
       "type": "service-telehealth",
-      "description": "Fast, convenient telehealth from licensed clinicians. Primary care, urgent care, prescriptions, labs. CA, TX, PA, FL. No waiting rooms."
+      "description": ""
     },
     {
       "title": "Provider-Guided Medical Weight Loss",

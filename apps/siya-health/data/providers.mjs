@@ -106,7 +106,7 @@ export const PROVIDERS = [
       { quote: 'He actually listened to how my weight and focus issues connected. Nothing felt gimmicky.', cite: 'Metabolic + ADHD follow-up patient (verified)', needsVerification: true },
     ],
     relatedLinksHtml:
-      'Explore education: <a href="/blog/adhd-symptoms-overlooked">overlooked adult ADHD symptoms</a>, <a href="/blog/how-to-know-if-you-have-adhd-adult">signs it may be ADHD</a>, and <a href="/adult-adhd-california">adult ADHD care in California</a>.',
+      'Explore education: <a href="/guides/mental-health-and-adhd#mh-signs">overlooked adult ADHD symptoms</a>, <a href="/guides/mental-health-and-adhd#mh-signs">signs it may be ADHD</a>, and <a href="/adult-adhd-california">adult ADHD care in California</a>.',
     inlineCtas: [
       { label: 'See ADHD evaluation & care', path: '/adhd-care', primary: true },
       { label: 'View pricing', path: '/pricing', primary: false },
@@ -207,7 +207,7 @@ export const PROVIDERS = [
       { quote: 'I cried after the visit—in a good way. Someone finally connected the dots.', cite: 'Behavioral health follow-up (verified)', needsVerification: true },
     ],
     relatedLinksHtml:
-      'Dig deeper: <a href="/blog/adhd-symptoms-overlooked">overlooked symptoms</a>, <a href="/blog/is-online-adhd-diagnosis-legit">legitimate online diagnosis</a>, <a href="/blog/non-stimulant-adhd-medications-explained">non-stimulant options</a>.',
+      'Dig deeper: <a href="/guides/mental-health-and-adhd#mh-signs">overlooked symptoms</a>, <a href="/blog/is-online-adhd-diagnosis-legit">legitimate online diagnosis</a>, <a href="/blog/non-stimulant-adhd-medications-explained">non-stimulant options</a>.',
     inlineCtas: [
       { label: 'ADHD care overview', path: '/adhd-care', primary: true },
       { label: 'Read: “You’re not lazy”', path: '/blog/youre-not-lazy-signs-undiagnosed-adult-adhd', primary: false },

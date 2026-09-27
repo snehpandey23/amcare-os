@@ -13,9 +13,8 @@ const OUT_PATH = path.join(SITE_ROOT, 'data', 'pricing-system-audit.json');
 
 /** Canonical care-delivery pricing model (audit target). */
 const CANONICAL = {
-  initialEvaluation: 199,
-  nonControlledFollowUp: 79,
-  controlledFollowUp: 149,
+  initialEvaluation: 149,
+  monthlyCare: 149,
 };
 
 const SKIP_DIRS = new Set(['node_modules', 'docs', 'scripts', 'data', 'public', 'legal-document-versions', 'content']);
@@ -137,7 +136,7 @@ function detectIssues(page) {
     issues.push({
       type: 'legacy-membership-tiers',
       severity: 'critical',
-      detail: 'Uses Bronze/Silver/Gold membership tiers instead of care-delivery $149/$79/$149 model',
+      detail: 'Uses Bronze/Silver/Gold membership tiers instead of $149 evaluation and $149/month ongoing care',
     });
   }
 
@@ -157,15 +156,12 @@ function detectIssues(page) {
     });
   }
 
-  if (flags.has149 && route !== '/membership-pricing' && flags.hasBronzeSilverGold === false) {
-    // $149 in blog/ADHD context as single follow-up price — may omit $79 tier
-    if (!flags.has79 && (route.startsWith('/blog') || route.startsWith('/answers') || PAGE_CATEGORIES.adhdFunnel.includes(route))) {
-      issues.push({
-        type: 'adhd-only-follow-up-149',
-        severity: 'medium',
-        detail: 'Mentions $149/month follow-up without $79 non-controlled tier or universal plan naming',
-      });
-    }
+  if (flags.has79 && route !== '/membership-pricing') {
+    issues.push({
+      type: 'stale-79-price',
+      severity: 'high',
+      detail: 'Shows $79 as a patient price. Canonical care is $149 evaluation and $149/month, with no controlled/non-controlled price split.',
+    });
   }
 
   if (flags.has79 && route === '/membership-pricing') {
@@ -252,7 +248,7 @@ function detectIssues(page) {
     issues.push({
       type: 'evaluation-cost-page-missing-follow-up-tiers',
       severity: 'medium',
-      detail: 'ADHD evaluation cost page shows $149 only; follow-up plans ($79/$149) not enumerated',
+      detail: 'ADHD evaluation cost page is missing the $149/month ongoing-care price',
     });
   }
 
@@ -279,7 +275,7 @@ function detectIssues(page) {
     issues.push({
       type: 'vague-monthly-plan',
       severity: 'medium',
-      detail: 'Says "monthly plan" without specifying $79 vs $149 follow-up tiers',
+      detail: 'Says "monthly plan" without the $149/month price',
     });
   }
 

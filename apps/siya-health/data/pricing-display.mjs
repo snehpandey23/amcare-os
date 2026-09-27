@@ -48,6 +48,7 @@ export function controlledFollowUpDisplay() {
  * Replace authoring tokens with live prices.
  * Supported:
  *   {{pricing.initialEvaluation}}
+ *   {{pricing.monthlyCare}}
  *   {{pricing.nonControlledFollowUp}}
  *   {{pricing.controlledFollowUp}}
  *   <!-- SIYA:PRICE:INITIAL_EVAL -->
@@ -91,6 +92,7 @@ export function applyPricingTokens(html) {
   return wrapInitialEvaluationPrices(
     html
       .replaceAll('{{pricing.initialEvaluation}}', PRICING.initialEvaluation.display)
+      .replaceAll('{{pricing.monthlyCare}}', PRICING.monthlyCare.display)
       .replaceAll('{{pricing.nonControlledFollowUp}}', PRICING.nonControlledFollowUp.display)
       .replaceAll('{{pricing.controlledFollowUp}}', PRICING.controlledFollowUp.display)
       .replaceAll('<!-- SIYA:PRICE:INITIAL_EVAL -->', renderInitialEvaluationPrice())
