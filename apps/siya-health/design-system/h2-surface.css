@@ -2853,7 +2853,7 @@
         box-shadow: none !important;
       }
 
-      /* Five-link footer strip */
+      /* Compact footer strip */
       body.siya-h2-surface .footer.siya-h2-footer-compact,
       body.siya-h2-surface .footer {
         background: linear-gradient(160deg, #001878 0%, #0A246B 45%, #7B2D8E 85%, #D81088 130%) !important;

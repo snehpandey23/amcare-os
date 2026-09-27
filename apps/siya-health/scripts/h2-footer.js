@@ -1,5 +1,5 @@
 /**
- * Shared five-link footer for the new surface. Do not paste a second copy.
+ * Shared compact footer for the new surface. Do not paste a second copy.
  * Lives under /scripts because /design-system only serves .css (other paths redirect home).
  */
 (function () {
@@ -10,6 +10,8 @@
     '<a href="/about">About</a>' +
     '<span class="siya-h2-footer-sep" aria-hidden="true">·</span>' +
     '<a href="/pricing">Pricing</a>' +
+    '<span class="siya-h2-footer-sep" aria-hidden="true">·</span>' +
+    '<a href="/employers">For Employers</a>' +
     '<span class="siya-h2-footer-sep" aria-hidden="true">·</span>' +
     '<a href="/social">Social</a>' +
     '<span class="siya-h2-footer-sep" aria-hidden="true">·</span>' +
