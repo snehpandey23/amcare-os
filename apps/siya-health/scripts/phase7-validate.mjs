@@ -52,6 +52,7 @@ for (const url of sitemap) {
 
 for (const rel of walkHtml(SITE_ROOT)) {
   const src = fileToPath(rel);
+  if (vercelRedirects[src] || ALL_REDIRECT_SOURCES.has(src)) continue;
   const html = fs.readFileSync(path.join(SITE_ROOT, rel), 'utf8');
   const canon = (html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i) || [])[1] || '';
   const canonPath = canon.replace(BASE, '').replace('https://www.siya.health', '');

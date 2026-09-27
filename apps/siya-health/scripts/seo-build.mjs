@@ -17,6 +17,7 @@ import {
   injectProviderPhysicianSchema,
 } from './clinical-entity.mjs';
 import { applySiteChrome } from './site-chrome.mjs';
+import { ALL_REDIRECT_SOURCES } from '../data/redirect-map.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -163,7 +164,8 @@ function generateSitemap(htmlFiles) {
         !SITEMAP_EXCLUDE.has(r) &&
         !r.startsWith('redirect/') &&
         !isInternalDraftPath(r) &&
-        !isNoindexFile(r)
+        !isNoindexFile(r) &&
+        !ALL_REDIRECT_SOURCES.has(fileToUrlPath(r))
     )
     .sort((a, b) => fileToUrlPath(a).localeCompare(fileToUrlPath(b)));
   for (const rel of sorted) {
