@@ -66,6 +66,7 @@ export const EMPLOYER_RELATED_GUIDES = [
   },
 ];
 
+/** Held off /employers until the workplace articles are finalized. Not injected. */
 export function renderEmployerRelatedGuidesSection() {
   const items = EMPLOYER_RELATED_GUIDES.map(
     (g) =>

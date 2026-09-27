@@ -10,7 +10,6 @@ import {
   WORKPLACE_PATHS,
   renderEmployerHrStrip,
   renderEmployeeWorkplaceStrip,
-  renderEmployerRelatedGuidesSection,
   renderWorkplaceBlogSpotlight,
 } from '../data/workplace-seo-cluster.mjs';
 
@@ -56,22 +55,13 @@ function upsertBlock(rel, block, anchors = []) {
 }
 
 function upsertEmployerRelatedSection() {
+  // Blog and Health Guide links stay off /employers until those articles are finalized.
   const rel = 'employers.html';
   const filePath = path.join(ROOT, rel);
   if (!fs.existsSync(filePath)) return false;
   let html = fs.readFileSync(filePath, 'utf8');
-  const block = renderEmployerRelatedGuidesSection();
-  if (RELATED_SECTION_RE.test(html)) {
-    html = html.replace(RELATED_SECTION_RE, `${block}\n`);
-  } else if (html.includes('<section class="section faq-accordion-section" id="faq"')) {
-    html = html.replace(
-      '<section class="section faq-accordion-section" id="faq"',
-      `${block}\n\n      <section class="section faq-accordion-section" id="faq"`,
-    );
-  } else {
-    console.warn('  could not place employer related guides');
-    return false;
-  }
+  if (!RELATED_SECTION_RE.test(html)) return false;
+  html = html.replace(RELATED_SECTION_RE, '');
   fs.writeFileSync(filePath, html, 'utf8');
   return true;
 }
