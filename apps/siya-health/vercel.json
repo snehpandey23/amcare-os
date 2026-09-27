@@ -226,7 +226,7 @@
     },
     {
       "source": "/answers/adhd-in-men",
-      "destination": "/answers/signs-of-adult-adhd",
+      "destination": "/guides/mental-health-and-adhd#mh-signs",
       "permanent": true
     },
     {
@@ -501,7 +501,237 @@
     },
     {
       "source": "/answers/weight-gain-after-stopping-ozempic",
-      "destination": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "destination": "/guides/weight#wt-food-noise",
+      "permanent": true
+    },
+    {
+      "source": "/blog/iron-deficiency-brain-fog-adhd",
+      "destination": "/guides/exhausted#ex-iron",
+      "permanent": true
+    },
+    {
+      "source": "/blog/thyroid-and-fatigue",
+      "destination": "/guides/exhausted#ex-thyroid",
+      "permanent": true
+    },
+    {
+      "source": "/blog/insulin-resistance-and-weight-loss-clinician-overview",
+      "destination": "/guides/weight#wt-insulin",
+      "permanent": true
+    },
+    {
+      "source": "/blog/food-noise-and-glp-1-what-it-means-and-what-helps",
+      "destination": "/guides/weight#wt-food-noise",
+      "permanent": true
+    },
+    {
+      "source": "/answers/food-noise-returned-on-glp-1",
+      "destination": "/guides/weight#wt-glp1",
+      "permanent": true
+    },
+    {
+      "source": "/answers/what-is-insulin-resistance",
+      "destination": "/guides/weight#wt-insulin",
+      "permanent": true
+    },
+    {
+      "source": "/answers/insulin-resistance-without-diabetes",
+      "destination": "/guides/weight#wt-insulin",
+      "permanent": true
+    },
+    {
+      "source": "/answers/normal-a1c-insulin-resistance",
+      "destination": "/guides/weight#wt-insulin",
+      "permanent": true
+    },
+    {
+      "source": "/answers/who-qualifies-glp-1-weight-loss",
+      "destination": "/guides/weight#wt-glp1",
+      "permanent": true
+    },
+    {
+      "source": "/blog/glp1-side-effects-and-how-to-manage-them",
+      "destination": "/guides/weight#wt-glp1",
+      "permanent": true
+    },
+    {
+      "source": "/answers/glp-1-side-effects",
+      "destination": "/guides/weight#wt-glp1",
+      "permanent": true
+    },
+    {
+      "source": "/answers/glp-1-nausea-management",
+      "destination": "/guides/weight#wt-glp1",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-to-know-if-you-have-adhd-adult",
+      "destination": "/guides/mental-health-and-adhd#mh-signs",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-symptoms-overlooked",
+      "destination": "/guides/mental-health-and-adhd#mh-signs",
+      "permanent": true
+    },
+    {
+      "source": "/blog/youre-not-lazy-signs-undiagnosed-adult-adhd",
+      "destination": "/guides/mental-health-and-adhd#mh-signs",
+      "permanent": true
+    },
+    {
+      "source": "/answers/signs-of-adult-adhd",
+      "destination": "/guides/mental-health-and-adhd#mh-signs",
+      "permanent": true
+    },
+    {
+      "source": "/answers/high-functioning-adhd",
+      "destination": "/guides/mental-health-and-adhd#mh-signs",
+      "permanent": true
+    },
+    {
+      "source": "/answers/late-adhd-diagnosis-adults",
+      "destination": "/guides/mental-health-and-adhd#mh-signs",
+      "permanent": true
+    },
+    {
+      "source": "/answers/asrs-adhd-screening-explained",
+      "destination": "/guides/mental-health-and-adhd#mh-screen",
+      "permanent": true
+    },
+    {
+      "source": "/answers/screening-vs-adhd-evaluation",
+      "destination": "/guides/mental-health-and-adhd#mh-screen",
+      "permanent": true
+    },
+    {
+      "source": "/blog/executive-dysfunction-adhd",
+      "destination": "/guides/mental-health-and-adhd#mh-work",
+      "permanent": true
+    },
+    {
+      "source": "/answers/executive-dysfunction-adhd",
+      "destination": "/guides/mental-health-and-adhd#mh-work",
+      "permanent": true
+    },
+    {
+      "source": "/answers/time-blindness-adhd",
+      "destination": "/guides/mental-health-and-adhd#mh-work",
+      "permanent": true
+    },
+    {
+      "source": "/answers/adhd-workplace-accommodations",
+      "destination": "/guides/mental-health-and-adhd#mh-work",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-accommodations-hr-primer",
+      "destination": "/guides/mental-health-and-adhd#mh-work",
+      "permanent": true
+    },
+    {
+      "source": "/answers/adhd-vs-burnout",
+      "destination": "/guides/mental-health-and-adhd#mh-diff",
+      "permanent": true
+    },
+    {
+      "source": "/answers/adhd-vs-anxiety",
+      "destination": "/guides/mental-health-and-adhd#mh-diff",
+      "permanent": true
+    },
+    {
+      "source": "/answers/can-adhd-cause-anxiety",
+      "destination": "/guides/mental-health-and-adhd#mh-diff",
+      "permanent": true
+    },
+    {
+      "source": "/blog/brain-fog-vs-adhd",
+      "destination": "/guides/mental-health-and-adhd#mh-diff",
+      "permanent": true
+    },
+    {
+      "source": "/blog/brain-fog-and-anxiety",
+      "destination": "/guides/mental-health-and-adhd#mh-diff",
+      "permanent": true
+    },
+    {
+      "source": "/answers/rejection-sensitivity-adhd",
+      "destination": "/guides/mental-health-and-adhd#mh-diff",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adult-adhd-symptoms-california",
+      "destination": "/adult-adhd-california",
+      "permanent": true
+    },
+    {
+      "source": "/blog/sleep-apnea-fatigue-metabolic-risk-when-snoring-is-not-benign",
+      "destination": "/guides/sleep#sl-apnea",
+      "permanent": true
+    },
+    {
+      "source": "/answers/signs-of-sleep-apnea-in-adults",
+      "destination": "/guides/sleep#sl-apnea",
+      "permanent": true
+    },
+    {
+      "source": "/answers/can-sleep-apnea-cause-fatigue",
+      "destination": "/guides/sleep#sl-apnea",
+      "permanent": true
+    },
+    {
+      "source": "/answers/poor-sleep-feels-like-adhd",
+      "destination": "/guides/sleep#sl-focus",
+      "permanent": true
+    },
+    {
+      "source": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
+      "destination": "/guides/hormonal-health#ho-free",
+      "permanent": true
+    },
+    {
+      "source": "/answers/what-is-free-testosterone",
+      "destination": "/guides/hormonal-health#ho-free",
+      "permanent": true
+    },
+    {
+      "source": "/answers/high-shbg-low-free-testosterone",
+      "destination": "/guides/hormonal-health#ho-free",
+      "permanent": true
+    },
+    {
+      "source": "/answers/what-does-low-testosterone-feel-like",
+      "destination": "/guides/hormonal-health#ho-symptoms",
+      "permanent": true
+    },
+    {
+      "source": "/answers/testosterone-and-adhd-overlap",
+      "destination": "/guides/hormonal-health#ho-symptoms",
+      "permanent": true
+    },
+    {
+      "source": "/blog/when-is-testosterone-therapy-appropriate",
+      "destination": "/guides/hormonal-health#ho-therapy",
+      "permanent": true
+    },
+    {
+      "source": "/answers/when-is-testosterone-therapy-appropriate",
+      "destination": "/guides/hormonal-health#ho-therapy",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-hormones-women",
+      "destination": "/guides/hormonal-health#ho-women",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-in-women",
+      "destination": "/guides/hormonal-health#ho-women",
+      "permanent": true
+    },
+    {
+      "source": "/answers/adhd-in-women",
+      "destination": "/guides/hormonal-health#ho-women",
       "permanent": true
     },
     {
