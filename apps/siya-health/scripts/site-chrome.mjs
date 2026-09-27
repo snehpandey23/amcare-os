@@ -241,7 +241,7 @@ const BLOG_HUB_FILES = new Set([
 
 const SERVICE_BY_TOPIC = {
   adhd: { path: '/adhd-care', label: 'ADHD evaluation and telehealth care' },
-  metabolic: { path: '/weight-loss-metabolic-health', label: 'Medical weight loss programs' },
+  metabolic: { path: '/weight-loss-metabolic-health', label: 'Personalized care plans' },
   hormone: { path: '/mens-health-longevity', label: "Men's health and longevity care" },
   energy: { path: '/telehealth', label: 'Telehealth and sleep-related care' },
   general: { path: '/telehealth', label: 'Telehealth services' },

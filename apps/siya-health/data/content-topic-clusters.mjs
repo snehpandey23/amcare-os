@@ -267,7 +267,7 @@ export const DEFAULT_TOPIC_LINKING = {
     blog: '/blog/medical-weight-loss-glp1-semaglutide-texas',
     blogLabel: 'Medical weight loss with GLP-1 (full overview)',
     service: '/weight-loss-metabolic-health',
-    serviceLabel: 'Medical weight loss programs',
+    serviceLabel: 'Personalized care plans',
   },
   'mens-health': {
     blog: '/blog/free-testosterone-vs-total-testosterone-what-patients-should-know',
@@ -286,7 +286,7 @@ export const DEFAULT_TOPIC_LINKING = {
 const SERVICE_LABELS = {
   '/adhd-care': 'ADHD evaluation & telehealth care',
   '/adhd-screening': 'Free ADHD screening',
-  '/weight-loss-metabolic-health': 'Medical weight loss programs',
+  '/weight-loss-metabolic-health': 'Personalized care plans',
   '/telehealth': 'Telehealth services',
   '/mens-health-longevity': "Men's health & longevity care",
 };

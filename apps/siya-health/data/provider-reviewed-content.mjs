@@ -5,7 +5,7 @@ import { CLINICAL_REVIEW_APPROVED, isReviewSignOffComplete } from './content-rev
 
 const PAGE_TITLES = {
   'adhd-care': 'ADHD evaluation & care',
-  'weight-loss-metabolic-health': 'Medical weight loss programs',
+  'weight-loss-metabolic-health': 'Personalized care plans',
 };
 
 const BLOG_TITLES = {

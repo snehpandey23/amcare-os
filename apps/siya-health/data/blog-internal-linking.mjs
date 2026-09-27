@@ -23,7 +23,7 @@ export const BLOG_CATEGORIES = {
 
 export const LANDING_BY_TOPIC = {
   adhd: { href: '/adhd-care', label: 'ADHD evaluation & telehealth care' },
-  metabolic: { href: '/weight-loss-metabolic-health', label: 'Medical weight loss programs' },
+  metabolic: { href: '/weight-loss-metabolic-health', label: 'Personalized care plans' },
   hormone: { href: '/mens-health-longevity', label: "Men's health & longevity care" },
   energy: { href: '/telehealth', label: 'Telehealth fatigue & sleep care' },
   telehealth: { href: '/telehealth', label: 'Telehealth services' },
