@@ -464,6 +464,10 @@ ${ctaSection}
 function main() {
   for (const post of POSTS) {
     const out = path.join(BLOG_DIR, `${post.slug}.html`);
+    if (fs.existsSync(out) && fs.readFileSync(out, 'utf8').includes('siya-h2-surface')) {
+      console.log(`  skip blog/${post.slug}.html — hand-maintained homepage2 page`);
+      continue;
+    }
     fs.writeFileSync(out, buildPage(post), 'utf8');
     console.log(`  wrote blog/${post.slug}.html`);
   }
