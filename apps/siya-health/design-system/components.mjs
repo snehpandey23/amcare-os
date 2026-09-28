@@ -432,7 +432,7 @@ export function renderFooterReference() {
  * @param {{ title?: string, text?: string, compliance?: string, label?: string, href?: string }} opts
  */
 export function renderNewsletterBlock({
-  title = 'Join Our Health Guide',
+  title = 'Join Siya Circle',
   text = CTA_SLOTS.newsletter.microcopy ?? 'Weekly evidence-based health insights.',
   compliance = 'General education only—not medical advice or emergency care.',
   label,

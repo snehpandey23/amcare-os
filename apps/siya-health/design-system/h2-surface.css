@@ -2915,8 +2915,22 @@
       body.page-home.siya-h2-surface h1,
       body.page-home.siya-h2-surface h2,
       body.page-home.siya-h2-surface h3,
+      body.page-providers.siya-h2-surface h1,
+      body.page-providers.siya-h2-surface h2,
+      body.page-providers.siya-h2-surface h3,
+      body.page-provider.siya-h2-surface h1,
+      body.page-provider.siya-h2-surface h2,
+      body.page-provider.siya-h2-surface h3,
+      body.page-siya-circle.siya-h2-surface h1,
+      body.page-siya-circle.siya-h2-surface h2,
+      body.page-siya-circle.siya-h2-surface h3,
+      body.page-social.siya-h2-surface h1,
+      body.page-social.siya-h2-surface h2,
+      body.page-social.siya-h2-surface h3,
       body.page-home.siya-h2-surface .hero-merged--abstract .siya-h2-welcome,
-      body.page-home.siya-h2-surface .siya-h2-care-flow__card h3 {
+      body.page-home.siya-h2-surface .siya-h2-care-flow__card h3,
+      body.page-providers.siya-h2-surface .siya-h2-care-flow__card h3,
+      body.page-provider.siya-h2-surface .siya-h2-care-flow__card h3 {
         font-family: Georgia, "Times New Roman", serif;
       }
 

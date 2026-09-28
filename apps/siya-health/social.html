@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
   </head>
-  <body class="siya-h2-surface">
+  <body class="siya-h2-surface page-social">
     <a class="skip-link" href="#main">Skip to content</a>
 <div class="siya-h2-cursor-glow" aria-hidden="true"></div>
     <div class="siya-h2-page-bg" aria-hidden="true">
@@ -68,22 +68,43 @@
             </g>
           </svg>
     </div>
-    <header class="site-header site-header-transparent" id="site-header">
+    <header class="site-header" id="site-header">
       <div class="container">
         <a class="header-logo brand-lockup" href="/" aria-label="Siya Health home">
           <img class="brand-lockup__mark" src="/assets/images/siya-health-mark.png" alt="" width="44" height="44" decoding="async" aria-hidden="true" />
           <span class="brand-lockup__wordmark">Siya Health<sup class="brand-lockup__reg" aria-hidden="true">®</sup></span>
         </a>
+        <nav class="nav-center" aria-label="Primary">
+          <a href="/">Home</a>
+          <div class="nav-dropdown">
+          <button type="button" class="nav-dropdown__toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-about-menu" id="nav-about-toggle">About</button>
+          <div class="nav-dropdown__menu" id="nav-about-menu" role="menu">
+            <a href="/about" role="menuitem">About Us</a>
+            <a href="/providers" role="menuitem">Care Team</a>
+            <a href="/labs" role="menuitem">Labs</a>
+          </div>
+        </div>
+          <a href="/weight-loss-metabolic-health">Weight Loss</a>
+          <a href="/telehealth">Telehealth</a>
+          <a href="/adhd-care">ADHD Care</a>
+          <a href="/employers">Employers</a>
+          <a href="/blog">Blog</a>
+        </nav>
         <div class="nav-cta">
           <a href="/redirect/meet-greet" class="button ds-button ds-button--primary" data-siya-location="nav" data-page-type="about2">Book Free Meet & Greet</a>
         </div>
         <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
         <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
         <div class="nav-mobile">
+          <a href="/">Home</a>
           <a href="/about">About Us</a>
           <a href="/providers">Care Team</a>
           <a href="/labs">Labs</a>
-          <a href="/pricing">Pricing</a>
+          <a href="/weight-loss-metabolic-health">Weight Loss</a>
+          <a href="/telehealth">Telehealth</a>
+          <a href="/adhd-care">ADHD Care</a>
+          <a href="/employers">For Employers</a>
+          <a href="/blog">Blog</a>
         </div>
       </div>
     </header>
@@ -91,16 +112,7 @@
     <section class="section social-page-hero" aria-labelledby="social-heading">
         <div class="container">
           <h1 id="social-heading">Follow Siya Health</h1>
-          <p class="lead">Follow us on Facebook, Instagram, and YouTube for health tips and updates. Content is for education only, not a diagnosis or personal medical advice.</p>
-        </div>
-      </section>
-
-      <section class="section section-tinted" id="follow" aria-labelledby="follow-heading">
-        <div class="container">
-          <div class="section-header">
-            <h2 id="follow-heading">Follow us</h2>
-            <p class="lead">Health tips and updates on Facebook, Instagram, YouTube, and the rest of our accounts.</p>
-          </div>
+          <p class="lead">Facebook, Instagram, YouTube, and LinkedIn. Educational only — not a diagnosis or personal medical advice.</p>
           <ul class="social-follow-grid">
             <li>
               <a href="https://www.facebook.com/siyahealthofficial" target="_blank" rel="noopener noreferrer" data-siya-track="social_follow_click" data-siya-location="social-page" data-platform="facebook">
@@ -145,35 +157,11 @@
       <section class="section" id="siya-circle" aria-labelledby="siya-circle-heading">
         <div class="container">
           <div class="section-header">
-            <p class="siya-circle-eyebrow">Free newsletter</p>
             <h2 id="siya-circle-heading">Join Siya Circle</h2>
-            <p class="lead">Short notes on focus, energy, weight, and everyday health — written for adults with full calendars.</p>
+            <p class="lead">Short notes on focus, energy, weight, and everyday care. You choose what you receive.</p>
           </div>
-          <p>Get useful, clinician-informed explainers from Siya Health, plus early updates on new guides, programs, and practical ways to understand what may be getting in the way.</p>
-          <p>Get practical health insights from Siya Health on focus, energy, weight, metabolic health, hormones, and everyday care.</p>
           <p class="siya-circle-compliance">Siya Circle is for general education only. It does not provide diagnosis, treatment, medication advice, emergency care, or a provider-patient relationship.</p>
-          <p><a class="button ds-button ds-button--primary" href="/siya-circle#siya-circle-signup" data-siya-track="siya_circle_join_click" data-siya-location="social-page">Join Our Health Guide</a></p>
-        </div>
-      </section>
-
-      <section class="section" id="videos" aria-labelledby="videos-heading">
-        <div class="container">
-          <div class="section-header">
-            <h2 id="videos-heading">From the YouTube channel</h2>
-            <p class="lead">Latest from <a href="https://www.youtube.com/@siya.health" target="_blank" rel="noopener noreferrer">youtube.com/@siya.health</a>.</p>
-          </div>
-          <div class="social-video-embed">
-            <iframe
-              src="https://www.youtube.com/embed/zKstgYh25Rc"
-              title="Siya Health — Hair Loss Care"
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen></iframe>
-          </div>
-          <p style="margin:1rem auto 0;max-width:720px;text-align:center;font-size:0.9rem;">
-            <a href="https://www.youtube.com/@siya.health" target="_blank" rel="noopener noreferrer" data-siya-track="youtube_channel_click" data-siya-location="social-page">Browse the full channel</a>
-          </p>
+          <p><a class="button ds-button ds-button--primary" href="/siya-circle#siya-circle-signup" data-siya-track="siya_circle_join_click" data-siya-location="social-page">Join Siya Circle</a></p>
         </div>
       </section>
 
@@ -183,5 +171,6 @@
     <script src="/scripts/h2-footer.js"></script>
     <script src="/scripts/h2-motion.js" defer></script>
     <script src="/scripts/header-scroll.js" defer></script>
+    <script src="/scripts/nav-dropdown.js" defer></script>
   </body>
 </html>

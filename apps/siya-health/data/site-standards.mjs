@@ -75,7 +75,7 @@ export const CTA_SYSTEM = {
   primary: { label: 'Book Free Meet & Greet', url: REDIRECT_MEET_GREET_URL },
   secureChat: { label: 'Start Secure Medical Chat', url: REDIRECT_CHAT_URL },
   newsletter: {
-    label: 'Join Our Health Guide',
+    label: 'Join Siya Circle',
     microcopy: 'Weekly evidence-based health insights from Siya Health physicians.',
     url: SIYA_CIRCLE_GHL_FORM_URL,
   },

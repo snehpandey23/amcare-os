@@ -280,24 +280,34 @@ ${verifiedTestimonials
     <meta property="og:site_name" content="Siya Health" />
     <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
     <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../design-system/h2-surface.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;600;700&display=swap" rel="stylesheet" />
     <script type="application/ld+json">${breadcrumbJson}</script>
     <script type="application/ld+json">${schemaJson}</script>
   </head>
-  <body>
+  <body class="page-provider siya-h2-surface">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header" id="site-header">
       <div class="container">
-        <a class="header-logo" href="/"><img src="../assets/images/siya-health-logo.png" alt="Siya Health" /></a>
+        <a class="header-logo brand-lockup" href="/" aria-label="Siya Health home">
+          <img class="brand-lockup__mark" src="/assets/images/siya-health-mark.png" alt="" width="44" height="44" decoding="async" aria-hidden="true" />
+          <span class="brand-lockup__wordmark">Siya Health<sup class="brand-lockup__reg" aria-hidden="true">®</sup></span>
+        </a>
         <nav class="nav-center" aria-label="Primary">
           <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/providers">Our Care Team</a>
+          <div class="nav-dropdown">
+          <button type="button" class="nav-dropdown__toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-about-menu" id="nav-about-toggle">About</button>
+          <div class="nav-dropdown__menu" id="nav-about-menu" role="menu">
+            <a href="/about" role="menuitem">About Us</a>
+            <a href="/providers" role="menuitem">Care Team</a>
+            <a href="/labs" role="menuitem">Labs</a>
+          </div>
+        </div>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
           <a href="/adhd-care">ADHD Care</a>
-          <a href="/answers">Health Guides</a>
+          <a href="/employers">Employers</a>
           <a href="/blog">Blog</a>
         </nav>
         <div class="nav-cta">
@@ -307,12 +317,13 @@ ${verifiedTestimonials
         <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
         <div class="nav-mobile">
           <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/providers">Our Care Team</a>
+          <a href="/about">About Us</a>
+          <a href="/providers">Care Team</a>
+          <a href="/labs">Labs</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
           <a href="/adhd-care">ADHD Care</a>
-          <a href="/answers">Health Guides</a>
+          <a href="/employers">For Employers</a>
           <a href="/blog">Blog</a>
           ${renderNavCtaMarkup(`providers/${provider.slug}.html`, 'nav-mobile')}
         </div>
@@ -489,20 +500,8 @@ ${testimonialBlock}
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container footer-grid">
-        <div class="footer-logo-col">
-          <a href="/" class="footer-logo-link"><img src="../assets/images/siya-health-logo.png" alt="Siya Health" class="footer-logo-img" /></a>
-        </div>
-        <div class="footer-brand"><p>Licensed clinicians providing telehealth care across California, Texas, Pennsylvania, and Florida.</p></div>
-        <div><h4>Services</h4>
-          <p><a href="/answers">Health Guides</a></p><p><a href="/adhd-care">ADHD Care</a></p><p><a href="/telehealth">Telehealth</a></p></div>
-        <div><h4>Healthcare Services</h4><p><a href="/primary-urgent-care">Primary &amp; urgent care</a></p><p><a href="/labs">Diagnostic labs</a></p><p><a href="/prescriptions">Prescriptions</a></p></div>
-        <div><h4>Contact</h4><p><a href="mailto:care@siya.health">care@siya.health</a></p><p><a href="tel:+12154451244">(215) 445-1244</a></p></div>
-        ${renderLegalFooter()}
-      </div>
-      <div class="container"><p class="footer-notice">For emergencies, call 911. All telehealth services are provided by licensed medical professionals.</p><small>© 2026 Siya Health Inc.</small></div>
-    </footer>
+    <footer class="footer siya-h2-footer-compact" id="siya-h2-footer"></footer>
+    <script src="/scripts/h2-footer.js"></script>
   </body>
 </html>
 `;
@@ -621,6 +620,7 @@ function renderProvidersIndex() {
     <link rel="canonical" href="${BASE_URL}/providers" />
     <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
     <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../design-system/h2-surface.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;600;700&display=swap" rel="stylesheet" />
     <script type="application/ld+json">${breadcrumb}</script>
@@ -642,19 +642,28 @@ function renderProvidersIndex() {
       },
     })}</script>
   </head>
-  <body>
+  <body class="page-providers siya-h2-surface">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header" id="site-header">
       <div class="container">
-        <a class="header-logo" href="/"><img src="../assets/images/siya-health-logo.png" alt="Siya Health" /></a>
+        <a class="header-logo brand-lockup" href="/" aria-label="Siya Health home">
+          <img class="brand-lockup__mark" src="/assets/images/siya-health-mark.png" alt="" width="44" height="44" decoding="async" aria-hidden="true" />
+          <span class="brand-lockup__wordmark">Siya Health<sup class="brand-lockup__reg" aria-hidden="true">®</sup></span>
+        </a>
         <nav class="nav-center" aria-label="Primary">
           <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/providers" aria-current="page">Our Care Team</a>
+          <div class="nav-dropdown">
+          <button type="button" class="nav-dropdown__toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-about-menu" id="nav-about-toggle">About</button>
+          <div class="nav-dropdown__menu" id="nav-about-menu" role="menu">
+            <a href="/about" role="menuitem">About Us</a>
+            <a href="/providers" role="menuitem" aria-current="page">Care Team</a>
+            <a href="/labs" role="menuitem">Labs</a>
+          </div>
+        </div>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
           <a href="/adhd-care">ADHD Care</a>
-          <a href="/answers">Health Guides</a>
+          <a href="/employers">Employers</a>
           <a href="/blog">Blog</a>
         </nav>
         <div class="nav-cta">
@@ -664,12 +673,13 @@ function renderProvidersIndex() {
         <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
         <div class="nav-mobile">
           <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/providers">Our Care Team</a>
+          <a href="/about">About Us</a>
+          <a href="/providers">Care Team</a>
+          <a href="/labs">Labs</a>
           <a href="/weight-loss-metabolic-health">Weight Loss</a>
           <a href="/telehealth">Telehealth</a>
           <a href="/adhd-care">ADHD Care</a>
-          <a href="/answers">Health Guides</a>
+          <a href="/employers">For Employers</a>
           <a href="/blog">Blog</a>
           ${renderNavCtaMarkup('providers/index.html', 'nav-mobile')}
         </div>
@@ -737,19 +747,8 @@ ${advancedCards}
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container footer-grid">
-        <div class="footer-logo-col">
-          <a href="/" class="footer-logo-link"><img src="../assets/images/siya-health-logo.png" alt="Siya Health" class="footer-logo-img" /></a>
-        </div>
-        <div class="footer-brand"><p>Licensed clinicians providing telehealth care across California, Texas, Pennsylvania, and Florida.</p></div>
-        <div><h4>Services</h4>
-          <p><a href="/answers">Health Guides</a></p><p><a href="/adhd-care">ADHD Care</a></p><p><a href="/telehealth">Telehealth</a></p></div>
-        <div><h4>Contact</h4><p><a href="mailto:care@siya.health">care@siya.health</a></p></div>
-        ${renderLegalFooter()}
-      </div>
-      <div class="container"><small>© 2026 Siya Health Inc.</small></div>
-    </footer>
+    <footer class="footer siya-h2-footer-compact" id="siya-h2-footer"></footer>
+    <script src="/scripts/h2-footer.js"></script>
     <script src="../assets/provider-hub-filters.js" defer></script>
   </body>
 </html>
