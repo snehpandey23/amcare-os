@@ -62,7 +62,9 @@ function upsertBlock(rel, block, anchors = []) {
 }
 
 function upsertEmployerRelatedSection() {
-  // Blog and Health Guide links stay off /employers until those articles are finalized.
+  // Only mutation of employers.html in this file. If that id is present, this
+  // deletes the whole section on every build. Phase 3 copy must not use
+  // id="related-workplace-guides".
   const rel = 'employers.html';
   const filePath = path.join(ROOT, rel);
   if (!fs.existsSync(filePath)) return false;

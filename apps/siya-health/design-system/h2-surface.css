@@ -2890,6 +2890,54 @@
         color: rgba(244,239,231,0.58);
         white-space: nowrap;
       }
+      body.siya-h2-surface .employer-sample {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+        margin: 1.25rem 0 0.75rem;
+      }
+      body.siya-h2-surface .employer-sample figure {
+        margin: 0;
+        padding: 1rem 1.1rem 1.15rem;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(0, 24, 120, 0.12);
+        border-radius: 1rem;
+      }
+      body.siya-h2-surface .employer-sample figcaption {
+        margin: 0 0 0.85rem;
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 700;
+        color: #0A246B;
+      }
+      body.siya-h2-surface .employer-sample-row {
+        display: grid;
+        grid-template-columns: 9.5rem 1fr auto;
+        gap: 0.55rem;
+        align-items: center;
+        margin: 0.45rem 0;
+        font-size: 0.92rem;
+        color: #0A246B;
+      }
+      body.siya-h2-surface .employer-sample-track {
+        height: 0.55rem;
+        background: rgba(0, 24, 120, 0.08);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+      body.siya-h2-surface .employer-sample-track span {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+      }
+      body.siya-h2-surface .employer-sample-track span.is-low { width: 28%; background: #D81088; }
+      body.siya-h2-surface .employer-sample-track span.is-high { width: 78%; background: #D81088; }
+      body.siya-h2-surface .employer-sample-track span.is-up { width: 62%; background: #001878; }
+      body.siya-h2-surface .employer-sample-track span.is-down { width: 36%; background: #001878; }
+      @media (max-width: 720px) {
+        body.siya-h2-surface .employer-sample { grid-template-columns: 1fr; }
+        body.siya-h2-surface .employer-sample-row { grid-template-columns: 7.5rem 1fr auto; }
+      }
+
       body.siya-h2-surface #employer-inquiry {
         scroll-margin-top: 5.5rem;
       }
@@ -2924,9 +2972,9 @@
       body.page-siya-circle.siya-h2-surface h1,
       body.page-siya-circle.siya-h2-surface h2,
       body.page-siya-circle.siya-h2-surface h3,
-      body.page-social.siya-h2-surface h1,
-      body.page-social.siya-h2-surface h2,
-      body.page-social.siya-h2-surface h3,
+      body.page-employer.siya-h2-surface h1,
+      body.page-employer.siya-h2-surface h2,
+      body.page-employer.siya-h2-surface h3,
       body.page-home.siya-h2-surface .hero-merged--abstract .siya-h2-welcome,
       body.page-home.siya-h2-surface .siya-h2-care-flow__card h3,
       body.page-providers.siya-h2-surface .siya-h2-care-flow__card h3,
