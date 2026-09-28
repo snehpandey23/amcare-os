@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { careersInquiryButtonHtml, careersInquiryFormHtml } from '../data/careers-config.mjs';
+import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.join(__dirname, '..', 'join-our-team.html');
@@ -122,5 +123,5 @@ const html = `<!DOCTYPE html>
 </html>
 `;
 
-fs.writeFileSync(OUT, html, 'utf8');
+fs.writeFileSync(OUT, applyHomepage2Surface(html), 'utf8');
 console.log('Wrote', OUT);

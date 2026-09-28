@@ -27,6 +27,8 @@ import { getReviewedContentForProvider } from '../data/provider-reviewed-content
 import { getProviderHubPresentation } from '../data/provider-hub-presentation.mjs';
 import { renderLegalFooter } from './site-chrome.mjs';
 import { renderNavCtaMarkup, renderButton, slotToButton, resolveConversion } from '../design-system/components.mjs';
+import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { ensureProviderKlarityReviews } from '../partials/provider-klarity-reviews.mjs';
 
 const STATE_ABBREV = {
   California: 'CA',
@@ -766,10 +768,11 @@ function main() {
   fs.mkdirSync(PROVIDERS_DIR, { recursive: true });
   for (const p of PROVIDERS.map(enrichProvider)) {
     const out = path.join(PROVIDERS_DIR, `${p.slug}.html`);
-    fs.writeFileSync(out, renderProviderPage(p), 'utf8');
+    const rel = `providers/${p.slug}.html`;
+    fs.writeFileSync(out, ensureProviderKlarityReviews(applyHomepage2Surface(renderProviderPage(p)), rel), 'utf8');
     console.log('Wrote', out);
   }
-  fs.writeFileSync(path.join(PROVIDERS_DIR, 'index.html'), renderProvidersIndex(), 'utf8');
+  fs.writeFileSync(path.join(PROVIDERS_DIR, 'index.html'), applyHomepage2Surface(renderProvidersIndex()), 'utf8');
   console.log('Wrote providers/index.html');
   console.log(`Generated ${PROVIDERS.length} provider pages + index`);
 }

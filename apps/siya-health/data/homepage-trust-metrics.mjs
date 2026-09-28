@@ -1,8 +1,14 @@
 /**
  * Homepage trust statistics — single editable source.
  * Owner-supplied figures (do not invent or extrapolate).
- * As of: September 2026 (Google + Klarity confirmed; capacity from employer pilot proof).
- * Used by homepage reviews section and trust-system profiles.
+ *
+ * Google listing last verified: 2026-09-28.
+ * Source: https://maps.app.goo.gl/6vxs6tvGQKvoq6Yg6
+ * Place: Siya Health (place id ChIJ4RHZWUvVZ4IR5OJs8dRJ-Eo).
+ * That check: 4.9 stars, 102 reviews. The figure recorded before this check was 4.90 and 88 reviews.
+ * Klarity was not re-checked on 2026-09-28.
+ *
+ * Used by the homepage reviews section (partials/homepage2-google-reviews.mjs) and trust-system profiles.
  */
 export const HOMEPAGE_TRUST_METRICS = {
   patientsTreated: {
@@ -17,10 +23,13 @@ export const HOMEPAGE_TRUST_METRICS = {
     value: '4.90',
     label: 'Google rating',
     suffix: '★',
+    /** Google shows this as 4.9. Last read from the listing on this date. */
+    lastVerified: '2026-09-28',
   },
   googleReviews: {
-    value: '88',
+    value: '102',
     label: 'Google reviews',
+    lastVerified: '2026-09-28',
   },
   klarityRating: {
     value: '4.66',

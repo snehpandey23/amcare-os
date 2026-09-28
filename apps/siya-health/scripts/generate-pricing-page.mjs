@@ -16,6 +16,7 @@ import {
   CANONICAL_ENTITY_STATEMENT,
 } from '../data/site-standards.mjs';
 import { REDIRECT_MEET_GREET_URL, REDIRECT_CHAT_URL } from '../data/providers-core.mjs';
+import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -206,5 +207,5 @@ const html = `<!DOCTYPE html>
 </html>
 `;
 
-fs.writeFileSync(OUT, html, 'utf8');
+fs.writeFileSync(OUT, applyHomepage2Surface(html), 'utf8');
 console.log('Wrote', OUT);

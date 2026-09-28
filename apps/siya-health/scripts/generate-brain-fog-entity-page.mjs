@@ -16,6 +16,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 import { renderDifferentialSection } from '../data/differential-diagnosis.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -391,5 +392,5 @@ ${faqAccordion(FAQS, 'faq-brain-fog')}
 `;
 }
 
-fs.writeFileSync(OUT, render());
+fs.writeFileSync(OUT, applyHomepage2Surface(render()));
 console.log('Wrote brain-fog.html (canonical brain fog entity page)');

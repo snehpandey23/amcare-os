@@ -5,6 +5,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BLOG_DIR = path.join(__dirname, '..', 'blog');
@@ -468,7 +469,7 @@ function main() {
       console.log(`  skip blog/${post.slug}.html — hand-maintained homepage2 page`);
       continue;
     }
-    fs.writeFileSync(out, buildPage(post), 'utf8');
+    fs.writeFileSync(out, applyHomepage2Surface(buildPage(post)), 'utf8');
     console.log(`  wrote blog/${post.slug}.html`);
   }
   console.log(`generate-workplace-blog-posts: ${POSTS.length} posts`);

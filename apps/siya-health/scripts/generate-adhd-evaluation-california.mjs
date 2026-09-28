@@ -16,6 +16,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -111,7 +112,7 @@ function build() {
     throw new Error('CA ads LP must not hardcode about-team-card (use site-chrome injection)');
   }
 
-  fs.writeFileSync(OUT, html);
+  fs.writeFileSync(OUT, applyHomepage2Surface(html));
   console.log(
     `Wrote ${path.relative(ROOT, OUT)} (lean CA ads LP; care team via site-chrome @ seo-build; SEO hub untouched)`,
   );

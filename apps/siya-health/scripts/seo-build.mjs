@@ -18,6 +18,9 @@ import {
 } from './clinical-entity.mjs';
 import { applySiteChrome } from './site-chrome.mjs';
 import { ALL_REDIRECT_SOURCES } from '../data/redirect-map.mjs';
+import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { ensureHomepageGoogleReviews } from '../partials/homepage2-google-reviews.mjs';
+import { ensureProviderKlarityReviews } from '../partials/provider-klarity-reviews.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -571,8 +574,19 @@ const H2_LIVE_PAGES = new Set([
 
 function processHtml(relPath) {
   const fullPath = path.join(SITE_ROOT, relPath);
-  let html = fs.readFileSync(fullPath, 'utf8');
-  if (html.includes('siya-h2-surface')) {
+  let html = ensureProviderKlarityReviews(
+    ensureHomepageGoogleReviews(fs.readFileSync(fullPath, 'utf8')),
+    relPath,
+  );
+  // Compact homepage2 pages already own their chrome. A generated shell that only
+  // gained the surface class still needs the SEO pass below, or pixels and nav updates drop off.
+  const h2ChromeLocked =
+    html.includes('siya-h2-surface') &&
+    (html.includes('id="siya-h2-footer"') ||
+      html.includes('siya-h2-cursor-glow') ||
+      html.includes('page-homepage2'));
+  if (h2ChromeLocked) {
+    html = applyHomepage2Surface(html);
     html = normalizeRootAssetPaths(html);
     fs.writeFileSync(fullPath, html, 'utf8');
     return;
@@ -649,6 +663,7 @@ function processHtml(relPath) {
   html = syncWebPageJsonDescriptions(html, canonical, description);
 
   html = applySiteChrome(html, relPath, title);
+  html = applyHomepage2Surface(html);
 
   fs.writeFileSync(fullPath, html, 'utf8');
 }

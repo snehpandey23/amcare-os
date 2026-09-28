@@ -43,8 +43,65 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalWebPage","name":"Primary Care — Where Ongoing Health Starts | Siya Health","description":"Primary care is the root of ongoing health at Siya: symptoms, preventive care, labs in context, and specialty lanes under one physician-led telehealth relationship — not a funnel to a single condition.","url":"https://siya.health/primary-care","inLanguage":"en-US","isPartOf":{"@type":"WebSite","name":"Siya Health","url":"https://siya.health"},"about":{"@type":"MedicalTherapy","name":"Primary Care","alternateName":["Family medicine telehealth","Internal medicine telehealth","Ongoing primary care"]},"lastReviewed":"2026-09-27","reviewedBy":{"@type":"Person","name":"Dr. Vanessa Urbina","url":"https://siya.health/providers/dr-vanessa-urbina"},"provider":{"@type":"MedicalOrganization","name":"Siya Health","url":"https://siya.health/"}}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://siya.health/"},{"@type":"ListItem","position":2,"name":"Primary Care","item":"https://siya.health/primary-care"}]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is primary care at Siya?","acceptedAnswer":{"@type":"Answer","text":"It is physician-led telehealth for ongoing adult health: new symptoms, preventive planning, chronic follow-up, lab review, and coordination into specialty lanes when needed. The point is a relationship that knows your baseline — not a one-off visit for a single keyword."}},{"@type":"Question","name":"How is /primary-care different from Primary & Urgent Care?","acceptedAnswer":{"@type":"Answer","text":"This page is the knowledge-graph root: how primary care fits together. Primary & Urgent Care is the operational surface for acute needs, common conditions, and booking logistics. Both belong to the same care relationship."}},{"@type":"Question","name":"Do I start with primary care or a specialty page?","acceptedAnswer":{"@type":"Answer","text":"If you are describing a symptom — fatigue, brain fog, feeling unwell — start with primary care. Specialty lanes (ADHD, weight, men’s or women’s health) become branches once history clarifies what belongs in the plan."}},{"@type":"Question","name":"How does preventive care fit?","acceptedAnswer":{"@type":"Answer","text":"Preventive care is a service under primary care: staying healthy before something goes wrong — wellness rhythm, screenings, vaccines, lifestyle, and labs chosen because they would change a plan."}},{"@type":"Question","name":"Can primary care help with labs?","acceptedAnswer":{"@type":"Answer","text":"Yes. Labs sit under preventive and clinical judgment, not as a catalogue. Your clinician helps decide what is worth measuring and what results mean for you."}},{"@type":"Question","name":"Is ADHD care separate from primary care?","acceptedAnswer":{"@type":"Answer","text":"ADHD evaluation is a specialty lane Siya offers when appropriate. It is related to primary care, not a replacement for it — and symptoms like fatigue or brain fog should not auto-route to ADHD screening."}},{"@type":"Question","name":"Which states is Siya available in?","acceptedAnswer":{"@type":"Answer","text":"Siya Health offers telehealth in California, Texas, Pennsylvania, and Florida. Availability is confirmed when you schedule."}},{"@type":"Question","name":"Do I need insurance?","acceptedAnswer":{"@type":"Answer","text":"No. Siya offers direct-pay telehealth with published pricing so you know the cost before you book."}}]}</script>
+      <link rel="stylesheet" href="/design-system/h2-surface.css" />
   </head>
-  <body class="page-service page-primary-care" data-siya-entity="primary_care" data-siya-entity-family="root_service" data-siya-care-pathway="primary_care">
+  <body class="siya-h2-surface page-service page-primary-care" data-siya-entity="primary_care" data-siya-entity-family="root_service" data-siya-care-pathway="primary_care">
+
+    <div class="siya-h2-page-bg" aria-hidden="true">
+          <svg class="siya-h2-page-bg__svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="presentation">
+            <defs>
+              <linearGradient id="siyaHeroCream" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#F4EFE7"/>
+                <stop offset="55%" stop-color="#E8EEF8"/>
+                <stop offset="100%" stop-color="#F7F2EC"/>
+              </linearGradient>
+              <radialGradient id="siyaHeroGlowA" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#D81088" stop-opacity="0.50"/>
+                <stop offset="45%" stop-color="#D81088" stop-opacity="0.22"/>
+                <stop offset="100%" stop-color="#D81088" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="siyaHeroGlowB" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#001878" stop-opacity="0.42"/>
+                <stop offset="50%" stop-color="#0A246B" stop-opacity="0.18"/>
+                <stop offset="100%" stop-color="#001878" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="siyaHeroGlowC" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#7B2D8E" stop-opacity="0.38"/>
+                <stop offset="55%" stop-color="#0A246B" stop-opacity="0.14"/>
+                <stop offset="100%" stop-color="#0A246B" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="1200" height="800" fill="url(#siyaHeroCream)"/>
+            <g class="siya-hero-drift siya-hero-drift--a">
+              <circle cx="240" cy="220" r="190" fill="url(#siyaHeroGlowA)"/>
+              <circle class="siya-h2-ring" cx="240" cy="220" r="88" fill="none" stroke="#D81088" stroke-width="2.75"/>
+              <circle class="siya-h2-ring siya-h2-ring--outer" cx="240" cy="220" r="132" fill="none" stroke="#D81088" stroke-width="1.6"/>
+            </g>
+            <g class="siya-hero-drift siya-hero-drift--b">
+              <circle cx="940" cy="500" r="230" fill="url(#siyaHeroGlowB)"/>
+              <circle class="siya-h2-ring" cx="940" cy="500" r="108" fill="none" stroke="#001878" stroke-width="2.75"/>
+              <circle class="siya-h2-ring siya-h2-ring--outer" cx="940" cy="500" r="156" fill="none" stroke="#0A246B" stroke-width="1.6"/>
+            </g>
+            <g class="siya-hero-drift siya-hero-drift--c">
+              <circle cx="700" cy="150" r="160" fill="url(#siyaHeroGlowC)"/>
+              <circle class="siya-h2-ring" cx="700" cy="150" r="72" fill="none" stroke="#7B2D8E" stroke-width="2.5"/>
+              <circle class="siya-h2-ring siya-h2-ring--outer" cx="700" cy="150" r="112" fill="none" stroke="#D81088" stroke-width="1.5"/>
+            </g>
+            <g class="siya-hero-drift siya-hero-drift--d">
+              <circle cx="130" cy="680" r="150" fill="url(#siyaHeroGlowB)"/>
+              <circle class="siya-h2-ring" cx="130" cy="680" r="70" fill="none" stroke="#001878" stroke-width="2.25"/>
+              <circle cx="1080" cy="110" r="120" fill="url(#siyaHeroGlowA)"/>
+              <circle class="siya-h2-ring" cx="1080" cy="110" r="58" fill="none" stroke="#D81088" stroke-width="2.25"/>
+            </g>
+            <g class="siya-hero-drift siya-hero-drift--wave">
+              <path d="M40 620 C 220 500, 380 700, 560 560 S 900 480, 1180 380" fill="none" stroke="#D81088" stroke-width="2.75" stroke-linecap="round"/>
+              <path d="M20 300 C 200 380, 360 180, 540 280 S 840 360, 1160 200" fill="none" stroke="#001878" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M60 740 C 300 660, 480 780, 700 680 S 980 620, 1180 540" fill="none" stroke="#C4A574" stroke-width="2.25" stroke-linecap="round"/>
+            </g>
+          </svg>
+    </div>
+
+
     <!-- Meta Pixel noscript -->
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=2150753979117600&ev=PageView&noscript=1"

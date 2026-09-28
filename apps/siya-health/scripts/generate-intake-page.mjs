@@ -10,6 +10,7 @@ import {
   LEGAL_ACCEPTANCE_COPY,
   LEGAL_LINK_PATHS,
 } from '../data/ghl-intake-config.mjs';
+import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -131,5 +132,5 @@ const html = `<!DOCTYPE html>
 </html>`;
 
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
-fs.writeFileSync(OUT, html, 'utf8');
+fs.writeFileSync(OUT, applyHomepage2Surface(html), 'utf8');
 console.log('Wrote intake/index.html');

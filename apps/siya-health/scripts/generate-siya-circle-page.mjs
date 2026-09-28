@@ -9,6 +9,7 @@ import {
   SIYA_CIRCLE_JOIN_TRACK,
   buildSiyaCircleSignupCtaHtml,
 } from '../data/siya-circle-config.mjs';
+import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.join(__dirname, '..', 'siya-circle.html');
@@ -109,5 +110,5 @@ ${buildSiyaCircleSignupCtaHtml()}
 </html>
 `;
 
-fs.writeFileSync(OUT, html, 'utf8');
+fs.writeFileSync(OUT, applyHomepage2Surface(html), 'utf8');
 console.log('Wrote', OUT);

@@ -10,6 +10,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { ADHD_CITY_LANDINGS } from '../data/adhd-city-landings.mjs';
 import { applySiteChrome } from './site-chrome.mjs';
+import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -291,7 +292,7 @@ function main() {
   for (const city of ADHD_CITY_LANDINGS) {
     const rel = `adhd-care/${city.slug}.html`;
     let html = buildPage(city);
-    html = applySiteChrome(html, rel, city.title);
+    html = applyHomepage2Surface(applySiteChrome(html, rel, city.title));
     fs.writeFileSync(path.join(SITE_ROOT, rel), html, 'utf8');
     console.log('wrote', rel);
   }

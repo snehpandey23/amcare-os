@@ -5,6 +5,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 import { applyPricingTokens } from '../data/pricing-display.mjs';
 import { ANSWER_SEEDS, TOPIC_HUBS } from '../data/answer-seeds.mjs';
 import { RETIRED_GUIDE_SLUGS } from '../data/content-consolidation-phase1.mjs';
@@ -727,11 +728,11 @@ function main() {
       skipped += 1;
       continue;
     }
-    fs.writeFileSync(out, applyPricingTokens(buildAnswerPage(seed)), 'utf8');
+    fs.writeFileSync(out, applyHomepage2Surface(applyPricingTokens(buildAnswerPage(seed))), 'utf8');
   }
   const indexOut = path.join(ANSWERS_DIR, 'index.html');
   if (isHandMaintained(indexOut)) skipped += 1;
-  else fs.writeFileSync(indexOut, applyPricingTokens(buildIndexPage()), 'utf8');
+  else fs.writeFileSync(indexOut, applyHomepage2Surface(applyPricingTokens(buildIndexPage())), 'utf8');
   console.log('Wrote answer pages; skipped hand-maintained homepage2 pages:', skipped);
 }
 

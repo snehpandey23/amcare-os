@@ -21,6 +21,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -367,5 +368,5 @@ ${faqAccordion(FAQS, 'faq-preventive')}
 `;
 }
 
-fs.writeFileSync(OUT, render());
+fs.writeFileSync(OUT, applyHomepage2Surface(render()));
 console.log('Wrote preventive-care.html (service canonical entity page)');

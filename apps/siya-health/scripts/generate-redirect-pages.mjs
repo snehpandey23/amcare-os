@@ -11,6 +11,7 @@ import {
   ADHD_EVALUATION_199_LINK,
 } from '../data/providers-core.mjs';
 import { COPY_STANDARDS } from '../data/site-standards.mjs';
+import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -114,6 +115,6 @@ for (const page of PAGES) {
   const dir = path.join(SITE_ROOT, 'redirect', page.slug);
   fs.mkdirSync(dir, { recursive: true });
   const out = path.join(dir, 'index.html');
-  fs.writeFileSync(out, renderPage(page), 'utf8');
+  fs.writeFileSync(out, applyHomepage2Surface(renderPage(page)), 'utf8');
   console.log('Wrote', path.relative(SITE_ROOT, out));
 }

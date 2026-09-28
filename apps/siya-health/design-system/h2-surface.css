@@ -2890,6 +2890,50 @@
         color: rgba(244,239,231,0.58);
         white-space: nowrap;
       }
+      body.siya-h2-surface .employer-research-stage {
+        display: grid;
+        grid-template-columns: minmax(16rem, 0.9fr) minmax(0, 1.15fr);
+        gap: 1rem;
+        align-items: stretch;
+        margin: 1.1rem 0 1.5rem;
+      }
+      body.siya-h2-surface .employer-research-stage .employer-research-grid {
+        margin: 0;
+        grid-template-columns: 1fr;
+      }
+      body.siya-h2-surface .employer-research-feature {
+        margin: 0;
+        padding: 1.35rem 1.3rem 1.15rem;
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid rgba(0, 24, 120, 0.14);
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      body.siya-h2-surface .employer-research-feature__value {
+        display: block;
+        margin: 0 0 0.55rem;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2.15rem, 4.2vw, 3.35rem);
+        line-height: 1.05;
+        font-weight: 700;
+        color: #001878;
+      }
+      body.siya-h2-surface .employer-research-feature p {
+        margin: 0;
+        color: #0A246B;
+      }
+      body.siya-h2-surface .employer-research-cite {
+        display: block;
+        margin-top: 0.65rem;
+        font-size: 0.78rem;
+        line-height: 1.35;
+        color: rgba(10, 36, 107, 0.78);
+      }
+      body.siya-h2-surface .employer-research-cite a {
+        color: inherit;
+      }
       body.siya-h2-surface .employer-research-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2915,16 +2959,6 @@
       body.siya-h2-surface .employer-research-card p {
         margin: 0;
         color: #0A246B;
-      }
-      body.siya-h2-surface .employer-research-card .employer-research-cite {
-        display: block;
-        margin-top: 0.65rem;
-        font-size: 0.78rem;
-        line-height: 1.35;
-        color: rgba(10, 36, 107, 0.78);
-      }
-      body.siya-h2-surface .employer-research-card .employer-research-cite a {
-        color: inherit;
       }
       body.siya-h2-surface .employer-compare {
         margin-top: 0.75rem;
@@ -2967,8 +3001,30 @@
         color: #0A246B;
       }
       @media (max-width: 720px) {
+        body.siya-h2-surface .employer-research-stage { grid-template-columns: 1fr; }
         body.siya-h2-surface .employer-research-grid { grid-template-columns: 1fr; }
         body.siya-h2-surface .employer-research-card strong { font-size: 1.4rem; }
+      }
+
+      body.page-provider .provider-klarity-reviews {
+        margin: 0.45rem 0 0.9rem;
+        color: #0A246B;
+      }
+      body.page-provider .provider-klarity-reviews a {
+        color: #001878;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      body.page-provider .provider-klarity-reviews a:hover {
+        text-decoration: underline;
+      }
+      body.page-provider .provider-klarity-reviews__note {
+        display: block;
+        margin-top: 0.15rem;
+        font-size: 0.82rem;
+        font-weight: 400;
+        line-height: 1.35;
+        color: rgba(10, 36, 107, 0.78);
       }
 
       body.siya-h2-surface #employer-inquiry {

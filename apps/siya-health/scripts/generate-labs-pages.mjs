@@ -16,6 +16,7 @@ import {
 } from '../data/labs-pages.mjs';
 import { REDIRECT_MEET_GREET_URL } from '../data/providers-core.mjs';
 import { COPY_STANDARDS } from '../data/site-standards.mjs';
+import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
@@ -718,7 +719,7 @@ function injectHubIndex() {
     }
   }
 
-  fs.writeFileSync(hubPath, html);
+  fs.writeFileSync(hubPath, applyHomepage2Surface(html));
   console.log('Updated labs.html topic hub index');
 }
 
@@ -915,7 +916,7 @@ ${renderFaqAccordion(faqs, 'faq-how-to-read')}
   </body>
 </html>
 `;
-  fs.writeFileSync(path.join(ROOT, rel), html);
+  fs.writeFileSync(path.join(ROOT, rel), applyHomepage2Surface(html));
   console.log('Wrote', rel);
 }
 
@@ -924,13 +925,13 @@ function main() {
   for (const page of LABS_TOPIC_PAGES) {
     const rel = labsTopicFile(page.slug);
     const full = path.join(ROOT, rel);
-    fs.writeFileSync(full, renderPage(page));
+    fs.writeFileSync(full, applyHomepage2Surface(renderPage(page)));
     console.log('Wrote', rel);
   }
   for (const page of LAB_MARKER_PAGES) {
     const rel = labMarkerFile(page.slug);
     const full = path.join(ROOT, rel);
-    fs.writeFileSync(full, renderMarkerPage(page));
+    fs.writeFileSync(full, applyHomepage2Surface(renderMarkerPage(page)));
     console.log('Wrote', rel);
   }
   writeHowToReadResultsPage();
