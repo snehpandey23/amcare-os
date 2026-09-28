@@ -2890,52 +2890,85 @@
         color: rgba(244,239,231,0.58);
         white-space: nowrap;
       }
-      body.siya-h2-surface .employer-sample {
+      body.siya-h2-surface .employer-research-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1.25rem;
-        margin: 1.25rem 0 0.75rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+        margin: 1.1rem 0 1.5rem;
       }
-      body.siya-h2-surface .employer-sample figure {
+      body.siya-h2-surface .employer-research-card {
         margin: 0;
-        padding: 1rem 1.1rem 1.15rem;
-        background: rgba(255, 255, 255, 0.72);
-        border: 1px solid rgba(0, 24, 120, 0.12);
+        padding: 1.05rem 1.1rem 0.95rem;
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(0, 24, 120, 0.14);
         border-radius: 1rem;
       }
-      body.siya-h2-surface .employer-sample figcaption {
-        margin: 0 0 0.85rem;
+      body.siya-h2-surface .employer-research-card strong {
+        display: block;
+        margin: 0 0 0.35rem;
         font-family: Georgia, "Times New Roman", serif;
+        font-size: 1.65rem;
+        line-height: 1.15;
         font-weight: 700;
+        color: #001878;
+      }
+      body.siya-h2-surface .employer-research-card p {
+        margin: 0;
         color: #0A246B;
       }
-      body.siya-h2-surface .employer-sample-row {
+      body.siya-h2-surface .employer-research-card .employer-research-cite {
+        display: block;
+        margin-top: 0.65rem;
+        font-size: 0.78rem;
+        line-height: 1.35;
+        color: rgba(10, 36, 107, 0.78);
+      }
+      body.siya-h2-surface .employer-research-card .employer-research-cite a {
+        color: inherit;
+      }
+      body.siya-h2-surface .employer-compare {
+        margin-top: 0.75rem;
+      }
+      body.siya-h2-surface .employer-compare-row {
         display: grid;
-        grid-template-columns: 9.5rem 1fr auto;
-        gap: 0.55rem;
+        grid-template-columns: 8.5rem 1fr auto;
+        gap: 0.45rem;
         align-items: center;
-        margin: 0.45rem 0;
-        font-size: 0.92rem;
+        margin: 0.35rem 0;
+        font-size: 0.82rem;
         color: #0A246B;
       }
-      body.siya-h2-surface .employer-sample-track {
-        height: 0.55rem;
+      body.siya-h2-surface .employer-compare-track {
+        height: 0.45rem;
         background: rgba(0, 24, 120, 0.08);
         border-radius: 999px;
         overflow: hidden;
       }
-      body.siya-h2-surface .employer-sample-track span {
+      body.siya-h2-surface .employer-compare-track span {
         display: block;
         height: 100%;
+        background: #001878;
         border-radius: inherit;
       }
-      body.siya-h2-surface .employer-sample-track span.is-low { width: 28%; background: #D81088; }
-      body.siya-h2-surface .employer-sample-track span.is-high { width: 78%; background: #D81088; }
-      body.siya-h2-surface .employer-sample-track span.is-up { width: 62%; background: #001878; }
-      body.siya-h2-surface .employer-sample-track span.is-down { width: 36%; background: #001878; }
+      body.siya-h2-surface .employer-approach {
+        margin: 0 0 1.75rem;
+        padding: 1.15rem 1.25rem 1.2rem;
+        background: #F4EFE7;
+        border-left: 4px solid #D81088;
+        border-radius: 0 1rem 1rem 0;
+      }
+      body.siya-h2-surface .employer-approach h3 {
+        margin: 0 0 0.45rem;
+        font-family: Georgia, "Times New Roman", serif;
+        color: #001878;
+      }
+      body.siya-h2-surface .employer-approach p {
+        margin: 0;
+        color: #0A246B;
+      }
       @media (max-width: 720px) {
-        body.siya-h2-surface .employer-sample { grid-template-columns: 1fr; }
-        body.siya-h2-surface .employer-sample-row { grid-template-columns: 7.5rem 1fr auto; }
+        body.siya-h2-surface .employer-research-grid { grid-template-columns: 1fr; }
+        body.siya-h2-surface .employer-research-card strong { font-size: 1.4rem; }
       }
 
       body.siya-h2-surface #employer-inquiry {
