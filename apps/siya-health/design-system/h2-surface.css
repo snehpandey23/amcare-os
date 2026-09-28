@@ -1794,7 +1794,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 0.95rem 1.25rem;
+        gap: 1.55rem 1.85rem;
         margin-bottom: 0;
         list-style: none;
         padding: 0;
@@ -2742,6 +2742,8 @@
       .siya-h2-story-close {
         margin: 1.75rem auto 0;
         max-width: 40rem;
+        padding-bottom: 2.75rem;
+        border-bottom: 1px solid rgba(0, 24, 120, 0.14);
         text-align: center;
       }
       .siya-h2-story-close h2 {
@@ -2909,6 +2911,15 @@
         margin: 0 auto;
         text-align: center;
       }
+      /* Homepage headings use Georgia. The employer line already did; h1–h3 inherited Poppins from --font-heading. */
+      body.page-home.siya-h2-surface h1,
+      body.page-home.siya-h2-surface h2,
+      body.page-home.siya-h2-surface h3,
+      body.page-home.siya-h2-surface .hero-merged--abstract .siya-h2-welcome,
+      body.page-home.siya-h2-surface .siya-h2-care-flow__card h3 {
+        font-family: Georgia, "Times New Roman", serif;
+      }
+
       body.siya-h2-surface .siya-h2-employer-nudge__title {
         margin: 0 0 0.4rem;
         font-family: Georgia, "Times New Roman", serif;
