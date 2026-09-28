@@ -6,7 +6,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {
-  SIYA_CIRCLE_GHL_FORM_URL,
+  SIYA_CIRCLE_SIGNUP_URL,
   SIYA_CIRCLE_JOIN_TRACK,
 } from '../data/siya-circle-config.mjs';
 
@@ -15,7 +15,7 @@ const INDEX_PATH = path.join(__dirname, '..', 'blog', 'index.html');
 
 function heroCtasHtml() {
   return `          <div class="hero-ctas">
-            <a href="${SIYA_CIRCLE_GHL_FORM_URL}" class="button ds-button ds-button--primary" target="_blank" rel="noopener noreferrer" data-siya-location="hero" data-page-type="blog" data-intent="blog" data-conversion-goal="newsletter" data-cta-slot="newsletter" data-component="button" data-siya-track="${SIYA_CIRCLE_JOIN_TRACK}">Join our newsletter</a>
+            <a href="${SIYA_CIRCLE_SIGNUP_URL}" class="button ds-button ds-button--primary" data-siya-location="hero" data-page-type="blog" data-intent="blog" data-conversion-goal="newsletter" data-cta-slot="newsletter" data-component="button" data-siya-track="${SIYA_CIRCLE_JOIN_TRACK}">Join Siya Circle</a>
             <a href="/answers" class="button ds-button ds-button--secondary secondary" data-siya-location="hero" data-page-type="blog" data-intent="blog" data-conversion-goal="healthGuides" data-cta-slot="healthGuides" data-component="button">Read health guides</a>
           </div>`;
 }

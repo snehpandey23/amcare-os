@@ -2287,6 +2287,8 @@ export function isAdsLandingPage(relPath, html = '') {
 /** Route legacy join CTAs to on-site Siya Circle signup */
 export function normalizeSiyaCircleJoinLinks(html) {
   html = html.replaceAll(SIYA_CIRCLE_GHL_FORM_URL, SIYA_CIRCLE_SIGNUP_URL);
+  html = html.replaceAll('>Join Our Health Guide<', '>Join Siya Circle<');
+  html = html.replaceAll('>Join our newsletter<', '>Join Siya Circle<');
   html = html.replace(
     /<a(\s[^>]*?)href="\/siya-circle"([^>]*)>([^<]*(?:Join|Siya Circle|newsletter|Subscribe|Get updates)[^<]*)<\/a>/gi,
     (_m, before, after, label) => {

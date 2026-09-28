@@ -11,7 +11,7 @@ import {
   ZOCDOC_BOOKING_URL,
 } from '../data/providers-core.mjs';
 import {
-  SIYA_CIRCLE_GHL_FORM_URL,
+  SIYA_CIRCLE_SIGNUP_URL,
   SIYA_CIRCLE_JOIN_TRACK,
 } from '../data/siya-circle-config.mjs';
 
@@ -93,8 +93,8 @@ export const CTA_SLOTS = {
     id: 'newsletter',
     label: CTA_SYSTEM.newsletter.label,
     microcopy: CTA_SYSTEM.newsletter.microcopy,
-    url: SIYA_CIRCLE_GHL_FORM_URL,
-    external: true,
+    url: SIYA_CIRCLE_SIGNUP_URL,
+    external: false,
     track: SIYA_CIRCLE_JOIN_TRACK,
   },
 };

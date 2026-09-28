@@ -4,7 +4,7 @@
 import { LEGAL_HUB, LEGAL_PATHS, LEGAL_EFFECTIVE_DATE as LEGAL_EFFECTIVE_DATE_ISO } from './legal-documents.mjs';
 import { buildProviderAuditCanonical } from './provider-canonical.mjs';
 import { BOOKING_LINK, REDIRECT_CHAT_URL, REDIRECT_MEET_GREET_URL } from './providers-core.mjs';
-import { SIYA_CIRCLE_GHL_FORM_URL } from './siya-circle-config.mjs';
+import { SIYA_CIRCLE_SIGNUP_URL } from './siya-circle-config.mjs';
 
 /** Counsel-approved effective date for published legal documents. */
 export const LEGAL_EFFECTIVE_DATE = LEGAL_EFFECTIVE_DATE_ISO;
@@ -80,7 +80,7 @@ export const CTA_SYSTEM = {
   newsletter: {
     label: 'Join Siya Circle',
     microcopy: 'Weekly evidence-based health insights from Siya Health physicians.',
-    url: SIYA_CIRCLE_GHL_FORM_URL,
+    url: SIYA_CIRCLE_SIGNUP_URL,
   },
   secondary: {
     booking: { label: 'View Telehealth Services', url: '/telehealth' },
