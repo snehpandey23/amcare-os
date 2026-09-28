@@ -52,21 +52,24 @@ export const PRICING = {
     amount: 149,
     display: '$149',
     period: '/month',
-    description: 'One monthly plan after the evaluation.',
+    description:
+      'One monthly plan for patients billed by Siya. Same price whether or not a controlled medication is part of care. Pharmacy cost is separate.',
   },
   nonControlledFollowUp: {
     label: 'Ongoing care',
     amount: 149,
     display: '$149',
     period: '/month',
-    description: 'One monthly plan after the evaluation.',
+    description:
+      'One monthly plan for patients billed by Siya. Same price whether or not a controlled medication is part of care. Pharmacy cost is separate.',
   },
   controlledFollowUp: {
     label: 'Ongoing care',
     amount: 149,
     display: '$149',
     period: '/month',
-    description: 'One monthly plan after the evaluation.',
+    description:
+      'One monthly plan for patients billed by Siya. Same price whether or not a controlled medication is part of care. Pharmacy cost is separate.',
   },
 };
 

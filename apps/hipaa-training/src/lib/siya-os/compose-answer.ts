@@ -4,6 +4,7 @@
 import type { RetrievedChunk } from "./retrieval";
 import { tokenizeForSearch } from "./retrieval";
 import { sanitizeStaffText, staffTopicLabel } from "./staff-voice";
+import { staffPublicPricingLines } from "./facts-lookup";
 
 const VAGUE_ONLY = new Set([
   "human",
@@ -737,15 +738,7 @@ function formatPrimaryAnswer(
   }
 
   if (primary.id === "patient-pricing-public-canonical") {
-    return [
-      "**Public pricing (siya.health):**",
-      "• **Free** — Meet & Greet (sole intro; no invoice; Discovery Call $79 retired)",
-      "• **$149** — initial physician evaluation",
-      "• **$79/mo** — non-controlled follow-up",
-      "• **$149/mo** — controlled-substance follow-up",
-      "",
-      "Other legacy draft numbers → escalate **Billing lead** or **CEO** before patient-facing changes.",
-    ];
+    return staffPublicPricingLines();
   }
 
   const parts: string[] = [];

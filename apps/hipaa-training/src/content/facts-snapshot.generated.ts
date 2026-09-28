@@ -100,7 +100,7 @@ export interface FactsSnapshot {
 }
 
 export const FACTS_SNAPSHOT: FactsSnapshot = {
-  "generated": "2026-09-09",
+  "generated": "2026-09-28",
   "source": "apps/siya-health site-standards + providers + provider-canonical + homepage-trust-metrics + providers-core + service-index.json + founder-locked cancel/hours facts",
   "availableServiceStates": [
     "California",
@@ -124,18 +124,18 @@ export const FACTS_SNAPSHOT: FactsSnapshot = {
       "description": "Structured clinician visit: history, goals, and a clear plan. Applies to ADHD, weight, metabolic, primary care, and telehealth pathways."
     },
     "nonControlledFollowUp": {
-      "label": "Non-Controlled Medication Follow-Up",
-      "amount": 79,
-      "display": "$79",
-      "period": "/month",
-      "description": "Ongoing follow-up for non-controlled medications, lifestyle plans, labs review, and care coordination when appropriate."
-    },
-    "controlledFollowUp": {
-      "label": "Controlled Medication Follow-Up",
+      "label": "Ongoing care",
       "amount": 149,
       "display": "$149",
       "period": "/month",
-      "description": "Ongoing follow-up when controlled medications are part of your plan—including monitoring, dose adjustments, and safety checks per state law."
+      "description": "One monthly plan for patients billed by Siya. Same price whether or not a controlled medication is part of care. Pharmacy cost is separate."
+    },
+    "controlledFollowUp": {
+      "label": "Ongoing care",
+      "amount": 149,
+      "display": "$149",
+      "period": "/month",
+      "description": "One monthly plan for patients billed by Siya. Same price whether or not a controlled medication is part of care. Pharmacy cost is separate."
     },
     "path": "/pricing"
   },
@@ -362,7 +362,7 @@ export const FACTS_SNAPSHOT: FactsSnapshot = {
       ],
       "path": "/adhd-care",
       "url": "https://www.siya.health/adhd-care",
-      "indexTitle": "Adult ADHD Diagnosis Online — Same-Week Evaluation",
+      "indexTitle": "ADHD Care",
       "staffBlurb": "Physician-led adult ADHD evaluation and follow-up via telehealth — structured history, validated tools as appropriate, comorbidity screening, and a documented plan. Diagnosis does not guarantee medication."
     },
     {
@@ -407,7 +407,7 @@ export const FACTS_SNAPSHOT: FactsSnapshot = {
       ],
       "path": "/telehealth",
       "url": "https://www.siya.health/telehealth",
-      "indexTitle": "Virtual Medical Care | Siya Health Telehealth",
+      "indexTitle": "Telehealth",
       "staffBlurb": "Siya Health delivers physician-led virtual medical care (telehealth) in licensed states, with documented visits and secure messaging pathways."
     },
     {

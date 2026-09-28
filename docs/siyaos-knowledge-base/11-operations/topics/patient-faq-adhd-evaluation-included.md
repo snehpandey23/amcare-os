@@ -47,7 +47,7 @@ Patients often assume evaluation = automatic stimulant Rx. Staff need one clear 
 3. Includes (as clinically appropriate): clinical interview / structured history, validated tools when indicated (e.g. ASRS, DIVA, Wender Utah, SWAN, Creyos), comorbidity screening, documented plan.  
 4. **Not every patient gets every instrument** — clinician judgment.  
 5. **Diagnosis does not guarantee medication.** Stimulants/controlled meds only when clinically appropriate and legally permitted.  
-6. Optional follow-up plans (if appropriate): **$79/mo** non-controlled or **$149/mo** controlled follow-up — quote public pricing; do not invent tiers.  
+6. Ongoing care for Siya-billed patients is **$149/month** — same price with or without a controlled medication. Quote it from facts-lookup. Do not offer a $79/month plan.  
 7. Screening quizzes are **not** the evaluation.
 
 ## FAQ
@@ -70,7 +70,7 @@ Meet & Greet is **free**, non-clinical intro (no invoice, no Creyos, no medicati
 
 ## AI Context
 
-$149 · 60–90 min · licensed provider · tools as appropriate · comorbidity screen · plan. Diagnosis ≠ medication. Follow-up $79/$149 mo when applicable. No insurance required. Escalate Clinical for clinical promises.
+$149 evaluation · 60–90 min · licensed provider · tools as appropriate · comorbidity screen · plan. Diagnosis ≠ medication. Ongoing Siya-billed care is $149/month from facts-lookup. No insurance required. Escalate Clinical for clinical promises.
 
 ## Related documents
 

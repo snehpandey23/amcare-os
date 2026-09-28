@@ -126,6 +126,9 @@ export function tryFactsLookup(query: string): FactsLookupHit | null {
   const providerState = matchProviderStateQuestion(q);
   if (providerState) return providerState;
 
+  const billingPrice = matchSiyaBillingPriceQuestions(q);
+  if (billingPrice) return billingPrice;
+
   const skuPrice = matchGenericSkuPrice(q);
   if (skuPrice) return skuPrice;
 
@@ -317,6 +320,39 @@ function matchProviderStateQuestion(q: string): FactsLookupHit | null {
   );
 }
 
+/** Staff-facing lines. Amounts come only from the facts snapshot (site-standards.mjs). */
+export function staffPublicPricingLines(): string[] {
+  const greet = lookupPricing("meetGreet");
+  const evalRow = lookupPricing("initialEvaluation");
+  const monthly = lookupPricing("nonControlledFollowUp");
+  return [
+    "**Siya-billed pricing (siya.health):**",
+    `• **${greet?.display ?? "Free"}** — Meet & Greet`,
+    `• **${evalRow?.display ?? ""}** — ${evalRow?.label ?? "Initial evaluation"} (${evalRow?.period ?? "one-time"})`,
+    `• **${monthly?.display ?? ""}/month** — ongoing care for every patient Siya bills, including when a controlled medication is part of the plan. No cheaper non-controlled plan.`,
+    "Patients who were on $79/month have been moved to this monthly price.",
+    "Marketplace patients pay the price that marketplace displays. Follow that marketplace’s guidelines.",
+  ];
+}
+
+function matchSiyaBillingPriceQuestions(q: string): FactsLookupHit | null {
+  const lower = q.toLowerCase();
+  const aboutOldPlan =
+    /\$79/.test(lower) && /plan|month|why|change/.test(lower);
+  const aboutCheaper =
+    /cheaper/.test(lower) && /plan|month|controlled|medication/.test(lower);
+  const aboutMonthly =
+    /how much/.test(lower) && /month|monthly|ongoing/.test(lower);
+  if (!aboutOldPlan && !aboutCheaper && !aboutMonthly) return null;
+  return hit(
+    staffPublicPricingLines().join("\n"),
+    "facts-pricing-monthly",
+    "Facts · Ongoing care",
+    "Accounts",
+    "Patient pricing",
+  );
+}
+
 function matchGenericSkuPrice(q: string): FactsLookupHit | null {
   const lower = q.toLowerCase();
   if (!/how much|what(?:'s| is) the (price|cost|fee)|pricing for|cost of/.test(lower)) return null;
@@ -325,7 +361,8 @@ function matchGenericSkuPrice(q: string): FactsLookupHit | null {
   if (/no[-\s]?show|late[-\s]?cancel|missed\s+(the\s+)?(visit|appointment)/.test(lower)) return null;
 
   let sku: FactsPricingSku | null = null;
-  if (/controlled|stimulant/.test(lower)) sku = "controlledFollowUp";
+  if (/monthly|ongoing care|a month/.test(lower)) sku = "nonControlledFollowUp";
+  else if (/controlled|stimulant/.test(lower)) sku = "controlledFollowUp";
   else if (/non[-\s]?controlled|follow[-\s]?up/.test(lower)) sku = "nonControlledFollowUp";
   else if (/evaluation|eval\b|initial/.test(lower)) sku = "initialEvaluation";
   if (!sku) return null;

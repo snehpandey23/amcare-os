@@ -35,7 +35,7 @@ Canonical behavior for **Siya Helpdesk (Internal)** — workforce chat at the wo
 
 ## FAQ
 
-**What pricing do staff quote?** Public site: **$149** initial eval; **$79/mo** or **$149/mo** follow-up. Legacy $79 discovery / conflicting drafts → escalate Billing lead or CEO; do not guess.
+**What pricing do staff quote?** Read facts-lookup, which is built from `apps/siya-health/data/site-standards.mjs`. Do not memorize a second monthly tier. Marketplace prices stay as that marketplace displays them.
 
 **Reimbursement SOP?** If no live Accounts topic, say missing and notify Accounts owner.
 
