@@ -59,7 +59,7 @@ export function siyaCircleSignupFormHtml() {
                 </label>
               </div>
               <fieldset class="employer-inquiry-field employer-inquiry-states">
-                <legend>Topics you care about <span class="employer-inquiry-optional">(optional)</span></legend>
+                <legend>What you want to receive <span class="employer-inquiry-optional">(optional)</span></legend>
                 <div class="employer-states-grid siya-circle-topics-grid">
                     ${topicCheckboxes()}
                 </div>
@@ -86,7 +86,7 @@ export function siyaCircleSignupFormHtml() {
 export function buildSiyaCircleSignupCtaHtml() {
   return `            <div class="siya-circle-signup-cta">
               <h2 id="signup-heading">Join Siya Circle</h2>
-              <p class="lead">Get practical health insights from Siya Health on focus, energy, weight, metabolic health, hormones, and everyday care.</p>
+              <p class="lead">Short notes on focus, energy, weight, and everyday care. The topics you check are what you receive.</p>
               <p class="siya-circle-compliance">Siya Circle is for general education only. It does not provide diagnosis, treatment, medication advice, emergency care, or a provider-patient relationship. For personal medical concerns, <a href="/redirect/meet-greet" rel="noopener" data-siya-track="meet_greet_click">Book Free Meet &amp; Greet</a> with a licensed clinician. For emergencies, call 911.</p>
               ${siyaCircleSignupFormHtml()}
             </div>`;

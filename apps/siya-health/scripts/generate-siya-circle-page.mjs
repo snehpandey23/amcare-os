@@ -30,31 +30,60 @@ const html = `<!DOCTYPE html>
     <meta property="og:url" content="${CANONICAL}" />
     <meta property="og:image" content="https://siya.health/assets/images/siya-health-logo.png" />
     <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/design-system/h2-surface.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;600;700&display=swap" rel="stylesheet" />
   </head>
-  <body class="page-siya-circle">
+  <body class="page-siya-circle siya-h2-surface">
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header site-header-transparent">
+    <header class="site-header" id="site-header">
       <div class="container">
         <a class="header-logo brand-lockup" href="/" aria-label="Siya Health home">
           <img class="brand-lockup__mark" src="/assets/images/siya-health-mark.png" alt="" width="44" height="44" decoding="async" aria-hidden="true" />
           <span class="brand-lockup__wordmark">Siya Health<sup class="brand-lockup__reg" aria-hidden="true">&reg;</sup></span>
         </a>
-        <nav class="nav-center" aria-label="Primary"></nav>
-        <div class="nav-cta"></div>
+        <nav class="nav-center" aria-label="Primary">
+          <a href="/">Home</a>
+          <div class="nav-dropdown">
+          <button type="button" class="nav-dropdown__toggle" aria-expanded="false" aria-haspopup="true" aria-controls="nav-about-menu" id="nav-about-toggle">About</button>
+          <div class="nav-dropdown__menu" id="nav-about-menu" role="menu">
+            <a href="/about" role="menuitem">About Us</a>
+            <a href="/providers" role="menuitem">Care Team</a>
+            <a href="/labs" role="menuitem">Labs</a>
+          </div>
+          </div>
+          <a href="/weight-loss-metabolic-health">Weight Loss</a>
+          <a href="/telehealth">Telehealth</a>
+          <a href="/adhd-care">ADHD Care</a>
+          <a href="/employers">Employers</a>
+          <a href="/blog">Blog</a>
+        </nav>
+        <div class="nav-cta">
+          <a class="button ds-button ds-button--primary" href="/siya-circle#siya-circle-signup">Join Siya Circle</a>
+        </div>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" />
+        <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true"></label>
+        <div class="nav-mobile">
+          <a href="/">Home</a>
+          <a href="/about">About Us</a>
+          <a href="/providers">Care Team</a>
+          <a href="/labs">Labs</a>
+          <a href="/weight-loss-metabolic-health">Weight Loss</a>
+          <a href="/telehealth">Telehealth</a>
+          <a href="/adhd-care">ADHD Care</a>
+          <a href="/employers">For Employers</a>
+          <a href="/blog">Blog</a>
+        </div>
       </div>
     </header>
 
     <main id="main">
-      <section class="hero-merged siya-circle-hero" style="background-image: url('/assets/images/healthy-lifestyle.png');">
+      <section class="hero-merged hero-merged--abstract" aria-label="Siya Circle">
         <div class="container hero-inner">
           <div class="hero-merged-content">
-            <p class="siya-circle-eyebrow">Free · General education only</p>
             <h1>Join Siya Circle</h1>
-            <p class="hero-merged-lead">A free health education newsletter for adults working on focus, energy, mood, weight, and everyday health.</p>
-            <p>Get useful, clinician-informed explainers from Siya Health, plus early updates on new guides, programs, and practical ways to understand what may be getting in the way.</p>
+            <p class="hero-merged-lead">Siya Circle is the short note from Siya Health: focus, energy, weight, and everyday care. You choose which of those you want to receive.</p>
             <div class="hero-ctas">
               <a class="button ds-button ds-button--primary" ${SIYA_CIRCLE_JOIN_LINK_ATTRS} data-siya-location="hero" data-page-type="newsletter" data-intent="newsletter" data-conversion-goal="newsletter" data-cta-slot="newsletter" data-component="button">Join Siya Circle</a>
             </div>
@@ -71,11 +100,10 @@ ${buildSiyaCircleSignupCtaHtml()}
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p class="footer-legal-micro">Educational content only — not medical advice. Emergency: call 911.</p>
-      </div>
-    </footer>
+    <footer class="footer siya-h2-footer-compact" id="siya-h2-footer"></footer>
+    <script src="/scripts/h2-footer.js"></script>
+    <script src="/scripts/header-scroll.js" defer></script>
+    <script src="/scripts/nav-dropdown.js" defer></script>
     <script src="/scripts/siya-circle-signup.js" defer></script>
   </body>
 </html>
