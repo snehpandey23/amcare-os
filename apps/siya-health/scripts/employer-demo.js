@@ -4,6 +4,7 @@
  * GTM and siya-tracking.js are inserted by the page only on siya.health.
  */
 (function () {
+  document.documentElement.classList.add('demo-js');
   var slides = Array.prototype.slice.call(document.querySelectorAll('.demo-slide'));
   var back = document.getElementById('demo-back');
   var next = document.getElementById('demo-next');
@@ -67,6 +68,39 @@
       seen[n] = true;
       track('employer_demo_slide_view', { slide: n });
     }
+    playChat(slide);
+  }
+
+  var chatTimer = 0;
+  function playChat(slide) {
+    window.clearInterval(chatTimer);
+    chatTimer = 0;
+    var thread = slide && slide.querySelector('.demo-thread');
+    if (!thread) return;
+    var items = thread.querySelectorAll('.demo-bubble, .demo-note');
+    items.forEach(function (item) { item.classList.remove('is-shown'); });
+    function revealAll() {
+      items.forEach(function (item) { item.classList.add('is-shown'); });
+      thread.scrollTop = thread.scrollHeight;
+    }
+    if (reduce) {
+      revealAll();
+      return;
+    }
+    var step = 0;
+    function tick() {
+      if (step >= items.length) {
+        window.clearInterval(chatTimer);
+        chatTimer = 0;
+        thread.scrollTop = thread.scrollHeight;
+        return;
+      }
+      items[step].classList.add('is-shown');
+      thread.scrollTop = thread.scrollHeight;
+      step += 1;
+    }
+    tick();
+    chatTimer = window.setInterval(tick, 650);
   }
 
   function writeHash(index, replace) {

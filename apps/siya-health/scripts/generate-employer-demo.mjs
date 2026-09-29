@@ -47,6 +47,8 @@ const gtmNoscript = '';
 /** Inject GTM + siya-tracking.js only on production siya.health, and never after ?review=1. No Meta pixel. Do not copy. */
 const analyticsBootstrap = `<script>
 (function () {
+function boot() {
+  if (!document.body) return;
   var q = new URLSearchParams(location.search || '');
   if (q.get('review') === '1') {
     var secure = location.protocol === 'https:' ? '; Secure' : '';
@@ -70,6 +72,9 @@ const analyticsBootstrap = `<script>
   t.src = '/scripts/siya-tracking.js';
   t.defer = true;
   d.body.appendChild(t);
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+else boot();
 })();
 </script>`;
 
@@ -204,17 +209,19 @@ const html = `<!DOCTYPE html>
         <div class="container demo-slide-inner">
           <h2 id="demo-chat-heading" data-demo-in="left" style="--demo-i:0">Secure chat</h2>
           <p class="demo-label" data-demo-in="left" style="--demo-i:1">Illustrative — demo data</p>
-          <div class="demo-thread" aria-label="Illustrative secure chat">
-            <p class="demo-bubble" data-demo-in="left" style="--demo-i:2"><time>Employee</time> I&rsquo;d like to get started.</p>
-            <p class="demo-bubble demo-bubble--reply" data-demo-in="left" style="--demo-i:3"><time>Care team</time> How can we help?</p>
-            <p class="demo-bubble" data-demo-in="left" style="--demo-i:4"><time>Employee</time> I&rsquo;m joining through my employer.</p>
-            <p class="demo-note" data-demo-in="left" style="--demo-i:5">Enrollment details to be finalized.</p>
-            <p class="demo-bubble demo-bubble--reply" data-demo-in="left" style="--demo-i:6"><time>Care team</time> You&rsquo;re enrolled. Same care team from here.</p>
-            <p class="demo-bubble demo-bubble--reply" data-demo-in="left" style="--demo-i:7"><time>Care team</time> Triage and intake forms are in this chat.</p>
-            <p class="demo-bubble" data-demo-in="left" style="--demo-i:8"><time>Employee</time> Forms completed.</p>
-            <p class="demo-bubble demo-bubble--reply" data-demo-in="left" style="--demo-i:9"><time>Care team</time> Thursday at 12:30, or use the booking link in this chat.</p>
-            <p class="demo-bubble demo-bubble--reply" data-demo-in="left" style="--demo-i:10"><time>Care team</time> You&rsquo;re confirmed for Thursday at 12:30.</p>
-            <p class="demo-bubble demo-bubble--reply" data-demo-in="left" style="--demo-i:11"><time>Care team</time> Your video visit link is in this chat.</p>
+          <div class="demo-chat-window">
+          <div class="demo-thread" id="demo-thread" aria-label="Illustrative secure chat">
+            <p class="demo-bubble"><time>Employee</time> I&rsquo;d like to get started.</p>
+            <p class="demo-bubble demo-bubble--reply"><time>Care team</time> How can we help?</p>
+            <p class="demo-bubble"><time>Employee</time> I&rsquo;m joining through my employer.</p>
+            <p class="demo-note">Enrollment details to be finalized.</p>
+            <p class="demo-bubble demo-bubble--reply"><time>Care team</time> You&rsquo;re enrolled. Same care team from here.</p>
+            <p class="demo-bubble demo-bubble--reply"><time>Care team</time> Triage and intake forms are in this chat.</p>
+            <p class="demo-bubble"><time>Employee</time> Forms completed.</p>
+            <p class="demo-bubble demo-bubble--reply"><time>Care team</time> Thursday at 12:30, or use the booking link in this chat.</p>
+            <p class="demo-bubble demo-bubble--reply"><time>Care team</time> You&rsquo;re confirmed for Thursday at 12:30.</p>
+            <p class="demo-bubble demo-bubble--reply"><time>Care team</time> Your video visit link is in this chat.</p>
+          </div>
           </div>
         </div>
       </section>
