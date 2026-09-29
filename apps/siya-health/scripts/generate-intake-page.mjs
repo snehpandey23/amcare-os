@@ -10,7 +10,7 @@ import {
   LEGAL_ACCEPTANCE_COPY,
   LEGAL_LINK_PATHS,
 } from '../data/ghl-intake-config.mjs';
-import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -90,12 +90,7 @@ const html = `<!DOCTYPE html>
       </div>
     </div>
   </main>
-  <footer class="footer">
-    <div class="container">
-      <p class="footer-notice">For emergencies, call 911.</p>
-      <small>© 2026 Siya Health Inc.</small>
-    </div>
-  </footer>
+  ${H2_COMPACT_FOOTER}
   <script>window.SIYA_GHL_INTAKE=${JSON.stringify(config)};</script>
   <script src="/scripts/ghl-legal-acceptance.js" defer></script>
   <script>

@@ -23,7 +23,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 import { renderDifferentialSection } from '../data/differential-diagnosis.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -214,7 +214,7 @@ function render() {
 
     <main id="main">
       <!-- HERO — recognition first; the page's single primary CTA lives here -->
-      <section class="hero-merged" style="background-image: url('/assets/images/healthy-lifestyle.png');">
+      <section class="hero-merged hero-merged--abstract" aria-label="Fatigue">
         <div class="container hero-inner">
           <div class="hero-merged-content">
             <p class="hero-state-line"><a href="/primary-care">Primary Care</a> &middot; Symptom guide</p>
@@ -364,11 +364,7 @@ ${faqAccordion(FAQS, 'faq-fatigue')}
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p><a href="/primary-urgent-care">Primary &amp; Urgent Care</a> &middot; &copy; 2026 Siya Health Inc.</p>
-      </div>
-    </footer>
+    ${H2_COMPACT_FOOTER}
   </body>
 </html>
 `;

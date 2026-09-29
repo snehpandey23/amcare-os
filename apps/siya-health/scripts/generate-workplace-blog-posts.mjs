@@ -5,7 +5,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BLOG_DIR = path.join(__dirname, '..', 'blog');
@@ -455,7 +455,7 @@ ${ctaSection}
         </div>
       </article>
     </main>
-    <footer class="footer"><div class="container"><p>&copy; Siya Health</p></div></footer>
+    ${H2_COMPACT_FOOTER}
     <script src="/scripts/site-header.js" defer></script>
   </body>
 </html>

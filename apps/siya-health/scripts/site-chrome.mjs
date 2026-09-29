@@ -142,13 +142,19 @@ function primaryNavIsSparse(navHtml = '') {
   return !/href="\/adhd-care"/i.test(navHtml);
 }
 
+function stripRetiredNavAnchors(navHtml) {
+  return navHtml
+    .replace(new RegExp(`\\s*<a href="${NAV_MENS_HEALTH.path}">[^<]*</a>`, 'gi'), '')
+    .replace(new RegExp(`\\s*<a href="${NAV_PROVIDERS.path}">[^<]*</a>`, 'gi'), '')
+    .replace(/\s*<a href="\/providers">[^<]*<\/a>/gi, '')
+    .replace(new RegExp(`\\s*<a href="${NAV_JOIN_OUR_TEAM.path}">[^<]*</a>`, 'gi'), '');
+}
+
+/** Nav only. A page-wide strip was deleting body links and leaving empty <strong> wrappers. */
 function normalizeProviderCareersNav(html) {
-  html = html.replace(new RegExp(`\\s*<a href="${NAV_MENS_HEALTH.path}">[^<]*</a>`, 'gi'), '');
-  html = html.replace(new RegExp(`\\s*<a href="${NAV_PROVIDERS.path}">[^<]*</a>`, 'gi'), '');
-  html = html.replace(/\s*<a href="\/providers">[^<]*<\/a>/gi, '');
-  // Careers / Join Our Team: footer only — strip from primary + mobile nav if present.
-  html = html.replace(new RegExp(`\\s*<a href="${NAV_JOIN_OUR_TEAM.path}">[^<]*</a>`, 'gi'), '');
-  return html;
+  return html
+    .replace(/<nav class="nav-center"[\s\S]*?<\/nav>/gi, (nav) => stripRetiredNavAnchors(nav))
+    .replace(/<div class="nav-mobile">[\s\S]*?<\/div>/gi, (nav) => stripRetiredNavAnchors(nav));
 }
 
 function injectSparsePrimaryNav(html) {

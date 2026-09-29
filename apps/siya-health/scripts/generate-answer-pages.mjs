@@ -5,7 +5,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 import { applyPricingTokens } from '../data/pricing-display.mjs';
 import { ANSWER_SEEDS, TOPIC_HUBS } from '../data/answer-seeds.mjs';
 import { RETIRED_GUIDE_SLUGS } from '../data/content-consolidation-phase1.mjs';
@@ -248,20 +248,7 @@ function headerNav(topic = 'general', slug = 'index') {
 }
 
 function footerBlock() {
-  return `    <footer class="footer">
-      <div class="container footer-grid">
-        <div class="footer-logo-col">
-          <a href="/" class="footer-logo-link"><img src="../assets/images/siya-health-logo.png" alt="Siya Health" class="footer-logo-img" /></a>
-        </div>
-        <div class="footer-brand">
-          <p>${FOOTER_STATES_LINE}</p>
-        </div>
-        <div><h4>Services</h4><p><a href="${NAV_HEALTH_GUIDES.path}">${NAV_HEALTH_GUIDES.label}</a></p><p><a href="/adhd-care">ADHD Care</a></p><p><a href="/weight-loss-metabolic-health">Weight Loss</a></p><p><a href="/telehealth">Telehealth</a></p></div>
-        <div><h4>Healthcare Services</h4><p><a href="/primary-urgent-care">Primary &amp; urgent care</a></p><p><a href="/labs">Diagnostic labs</a></p><p><a href="/prescriptions">Prescriptions</a></p></div>
-        <div><h4>Contact</h4><p><a href="mailto:care@siya.health">care@siya.health</a></p><p><a href="tel:+12154451244">(215) 445-1244</a></p></div>
-      </div>
-      <div class="container"><p class="footer-notice">For emergencies, call 911. Educational content only—not medical advice for your specific situation.</p><small>© 2026 Siya Health Inc.</small></div>
-    </footer>`;
+  return `    ${H2_COMPACT_FOOTER}`;
 }
 
 function nextStepsHtml(hub, topic = 'general') {

@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { careersInquiryButtonHtml, careersInquiryFormHtml } from '../data/careers-config.mjs';
-import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.join(__dirname, '..', 'join-our-team.html');
@@ -55,7 +55,7 @@ const html = `<!DOCTYPE html>
     </header>
 
     <main id="main">
-      <section class="hero-merged" style="background-image: url('/assets/images/healthy-lifestyle.png');">
+      <section class="hero-merged hero-merged--abstract" aria-label="Careers">
         <div class="container hero-inner">
           <div class="hero-merged-content">
             <p class="hero-state-line">For licensed clinicians</p>
@@ -113,11 +113,7 @@ const html = `<!DOCTYPE html>
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p class="footer-legal-micro">Recruiting inquiries only — not for patient care or emergencies. Emergency: call 911.</p>
-      </div>
-    </footer>
+    ${H2_COMPACT_FOOTER}
     <script src="/scripts/careers-inquiry.js" defer></script>
   </body>
 </html>

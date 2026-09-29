@@ -13,7 +13,7 @@
     '<span class="siya-h2-footer-sep" aria-hidden="true">·</span>' +
     '<a href="/employers">For Employers</a>' +
     '<span class="siya-h2-footer-sep" aria-hidden="true">·</span>' +
-    '<a href="/social">Social</a>' +
+    '<a href="/redirect/meet-greet" data-siya-track="meet_greet_click">Book Meet &amp; Greet</a>' +
     '<span class="siya-h2-footer-sep" aria-hidden="true">·</span>' +
     '<a href="/legal">Legal</a>' +
     '<span class="siya-h2-footer-sep" aria-hidden="true">·</span>' +

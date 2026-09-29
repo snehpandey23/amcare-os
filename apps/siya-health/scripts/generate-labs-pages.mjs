@@ -16,7 +16,7 @@ import {
 } from '../data/labs-pages.mjs';
 import { REDIRECT_MEET_GREET_URL } from '../data/providers-core.mjs';
 import { COPY_STANDARDS } from '../data/site-standards.mjs';
-import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
@@ -275,7 +275,7 @@ ${page.careFunnel.steps
     </header>
 
     <main id="main">
-      <section class="hero-merged" style="background-image: url('/assets/images/healthy-lifestyle.png');">
+      <section class="hero-merged hero-merged--abstract">
         <div class="container hero-inner">
           <div class="hero-merged-content">
             <p class="hero-state-line"><a href="/labs">Labs &amp; Blood Tests</a> · Topic guide</p>
@@ -388,11 +388,7 @@ ${renderFaqAccordion(page.faqs, `faq-${page.slug}`)}
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p><a href="/labs">Labs &amp; Blood Tests</a> · © 2026 Siya Health Inc.</p>
-      </div>
-    </footer>
+    ${H2_COMPACT_FOOTER}
   </body>
 </html>
 `;
@@ -494,7 +490,7 @@ function renderMarkerPage(page) {
     </header>
 
     <main id="main">
-      <section class="hero-merged" style="background-image: url('/assets/images/healthy-lifestyle.png');">
+      <section class="hero-merged hero-merged--abstract">
         <div class="container hero-inner">
           <div class="hero-merged-content">
             <p class="hero-state-line"><a href="/preventive-care">Preventive Care</a> · <a href="/labs">Labs</a> · Marker guide</p>
@@ -632,11 +628,7 @@ ${renderFaqAccordion(page.faqs, `faq-marker-${page.slug}`)}
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p><a href="/preventive-care">Preventive Care</a> · <a href="/labs">Labs</a> · © 2026 Siya Health Inc.</p>
-      </div>
-    </footer>
+    ${H2_COMPACT_FOOTER}
   </body>
 </html>
 `;
@@ -809,7 +801,7 @@ function writeHowToReadResultsPage() {
     </header>
 
     <main id="main">
-      <section class="hero-merged" style="background-image: url('/assets/images/healthy-lifestyle.png');">
+      <section class="hero-merged hero-merged--abstract">
         <div class="container hero-inner">
           <div class="hero-merged-content">
             <p class="hero-state-line"><a href="/labs">Labs &amp; Blood Tests</a> · Guide</p>
@@ -908,11 +900,7 @@ ${renderFaqAccordion(faqs, 'faq-how-to-read')}
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p><a href="/labs">Labs &amp; Blood Tests</a> · © 2026 Siya Health Inc.</p>
-      </div>
-    </footer>
+    ${H2_COMPACT_FOOTER}
   </body>
 </html>
 `;

@@ -7,7 +7,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 import {
   EMPLOYER_PILOT_FACTS as FACTS,
   proofConciergeLine,
@@ -469,11 +469,7 @@ ${careFlowSvg()}
       </section>
     </main>
 
-    <footer class="footer employer-pitch-footer">
-      <div class="container">
-        <p class="footer-legal-micro">${esc(LEGAL_ENTITY)} · Siya Health · California employer pilot · Invitation-only</p>
-      </div>
-    </footer>
+    ${H2_COMPACT_FOOTER}
   </body>
 </html>
 `;

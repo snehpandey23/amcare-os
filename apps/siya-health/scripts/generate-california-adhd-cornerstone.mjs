@@ -25,7 +25,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -218,7 +218,7 @@ function render() {
 
     <main id="main">
       <!-- HERO — the single primary CTA on this page lives here -->
-      <section class="hero-merged" style="background-image: url('/assets/images/adhd-care.jpg');">
+      <section class="hero-merged hero-merged--abstract" aria-label="Adult ADHD in California">
         <div class="container hero-inner">
           <div class="hero-merged-content">
             <p class="hero-state-line"><a href="/adhd-care">ADHD Care</a> &middot; California</p>
@@ -434,11 +434,7 @@ ${faqAccordion(FAQS, 'faq-ca-adhd')}
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p><a href="/primary-care">Primary Care</a> &middot; <a href="/adhd-care">ADHD Care</a> &middot; &copy; 2026 Siya Health Inc.</p>
-      </div>
-    </footer>
+    ${H2_COMPACT_FOOTER}
   </body>
 </html>
 `;

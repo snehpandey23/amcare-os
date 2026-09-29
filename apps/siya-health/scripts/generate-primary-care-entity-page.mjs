@@ -21,7 +21,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -198,7 +198,7 @@ function render() {
     </header>
 
     <main id="main">
-      <section class="hero-merged" style="background-image: url('/assets/images/concierge-care-v2.jpg');">
+      <section class="hero-merged hero-merged--abstract" aria-label="Primary care">
         <div class="container hero-inner">
           <div class="hero-merged-content">
             <p class="hero-state-line">Root of care &middot; Physician-led telehealth</p>
@@ -336,11 +336,7 @@ ${faqAccordion(FAQS, 'faq-primary-care')}
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p><a href="/primary-care">Primary Care</a> &middot; &copy; 2026 Siya Health Inc.</p>
-      </div>
-    </footer>
+    ${H2_COMPACT_FOOTER}
   </body>
 </html>
 `;

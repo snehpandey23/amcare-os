@@ -16,7 +16,7 @@ import {
   CANONICAL_ENTITY_STATEMENT,
 } from '../data/site-standards.mjs';
 import { REDIRECT_MEET_GREET_URL, REDIRECT_CHAT_URL } from '../data/providers-core.mjs';
-import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -84,7 +84,7 @@ const html = `<!DOCTYPE html>
       </div>
     </header>
     <main id="main">
-      <section class="hero-merged" style="background-image: url('/assets/images/telehealth-visit.png');">
+      <section class="hero-merged hero-merged--abstract" aria-label="Pricing">
         <div class="container hero-inner">
           <div class="hero-merged-content">
             <h1>Transparent pricing for physician-led care</h1>
@@ -184,24 +184,7 @@ const html = `<!DOCTYPE html>
         </div>
       </section>
     </main>
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-brand-bar">
-          <div class="footer-brand-bar__left">
-            <a href="/" class="footer-logo-link footer-logo-link--compact"><img src="/assets/images/siya-health-logo-registered.png" alt="Siya Health" class="footer-logo-img footer-logo-img--compact" /></a>
-            <div class="footer-brand-meta">
-              <p class="footer-brand-tagline">${FOOTER_STATES_LINE}</p>
-              <p><a href="mailto:care@siya.health">care@siya.health</a> · <a href="tel:+12154451244">(215) 445-1244</a></p>
-            </div>
-          </div>
-          <div class="footer-brand-bar__right">
-            <p><a href="/">← Back to homepage</a></p>
-            <p><a href="/telehealth">${COPY_STANDARDS.secondaryCtaTelehealth}</a></p>
-          </div>
-        </div>
-        <p class="cta-microcopy">${CANONICAL_ENTITY_STATEMENT}</p>
-      </div>
-    </footer>
+    ${H2_COMPACT_FOOTER}
       <script src="/scripts/faq-accordion.js" defer></script>
 </body>
 </html>
