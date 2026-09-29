@@ -236,13 +236,13 @@ export const LINK_REGISTRY: Record<string, LinkRecord> = {
     secure_chat: {
         id: 'secure_chat',
         label: 'Join Siya on Spruce',
-        url: 'https://spruce.care/siyahealth',
+        url: 'https://app.sprucehealth.com/?invite=siyahealth',
         kind: 'secure'
     },
     /** @deprecated alias — same Spruce practice join link */ spruce_practice: {
         id: 'spruce_practice',
         label: 'Download Spruce & join Siya',
-        url: 'https://spruce.care/siyahealth',
+        url: 'https://app.sprucehealth.com/?invite=siyahealth',
         kind: 'secure'
     },
     call_siya: {

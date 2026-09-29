@@ -13,6 +13,10 @@ import json
 import os
 import textwrap
 
+from read_spruce_chat_url import spruce_chat_url
+
+SPRUCE_CHAT_URL = spruce_chat_url()
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 HEADER = """    <a class="skip-link" href="#main">Skip to content</a>
@@ -147,25 +151,25 @@ WHY_SIYA = """
         </div>
       </section>"""
 
-PRICING = """
+PRICING = f"""
       <section class="section section-tinted" id="pricing">
         <div class="container">
           <div class="section-header">
             <h2>Transparent pricing</h2>
             <p class="lead">The comprehensive ADHD evaluation is <strong>$149</strong> one-time. Ongoing medication management is available on a monthly plan if clinically appropriate.</p>
           </div>
-          <p style="text-align:center; max-width: 560px; margin: 0 auto;"><a class="button" href="https://spruce.care/siyahealth" target="_blank" rel="noopener">Book ADHD evaluation online</a></p>
+          <p style="text-align:center; max-width: 560px; margin: 0 auto;"><a class="button" href="{SPRUCE_CHAT_URL}" target="_blank" rel="noopener">Book ADHD evaluation online</a></p>
         </div>
       </section>"""
 
-CTA_FINAL = """
+CTA_FINAL = f"""
       <section class="section">
         <div class="container">
           <div class="cta-band">
             <h3>Ready for answers?</h3>
             <p>Book a virtual evaluation or take the free 2-minute screening first.</p>
             <div class="cta-band-buttons">
-              <a class="button" href="https://spruce.care/siyahealth" target="_blank" rel="noopener">Book evaluation ($149)</a>
+              <a class="button" href="{SPRUCE_CHAT_URL}" target="_blank" rel="noopener">Book evaluation ($149)</a>
               <a class="button secondary" href="/adhd-screening">Free screening</a>
             </div>
           </div>
@@ -449,7 +453,7 @@ def render_page(spec: dict) -> str:
             <h1>{spec["h1"]}</h1>
             <p class="hero-merged-lead">{hero_lead}</p>
             <div class="hero-ctas hero-ctas-adhd-primary">
-              <a class="button" href="https://spruce.care/siyahealth" target="_blank" rel="noopener">Book ADHD evaluation</a>
+              <a class="button" href="{SPRUCE_CHAT_URL}" target="_blank" rel="noopener">Book ADHD evaluation</a>
               <p class="hero-secondary-cta"><a href="/adhd-screening">Free 2-minute screening</a></p>
             </div>
           </div>

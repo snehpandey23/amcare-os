@@ -8,6 +8,15 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import {
+  EMPLOYER_PILOT_FACTS as FACTS,
+  proofConciergeLine,
+  proofGoogleLine,
+  proofKlarityLine,
+  proofLead,
+  proofMonthlyLine,
+  proofScaleLine,
+} from '../data/employer-pilot-facts.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
@@ -153,14 +162,14 @@ const html = `<!DOCTYPE html>
         <div class="container">
           <header class="employer-pitch-section-header">
             <h2 id="credibility-heading">Proof points</h2>
-            <p class="employer-pitch-section-lead">Operational scale and published ratings (as of September 2026).</p>
+            <p class="employer-pitch-section-lead">${esc(proofLead())}</p>
           </header>
           <ul class="employer-pitch-included employer-pitch-proof">
-            <li>2,700+ patients treated, 1,200+ clinical evaluations completed</li>
-            <li>Averaging about 180 new patients and 200 returning patients every month (as of September 2026)</li>
-            <li>Google: 4.90/5 average (88 reviews, as of September 2026)</li>
-            <li>Klarity: 4.66/5 average across 589 provider reviews (as of September 2026)</li>
-            <li>Concierge/care-management sessions have grown from 25/month to 50/month over the past quarter — an active care-management team already in place</li>
+            <li>${esc(proofScaleLine())}</li>
+            <li>${esc(proofMonthlyLine())}</li>
+            <li>${esc(proofGoogleLine())}</li>
+            <li>${esc(proofKlarityLine())}</li>
+            <li>${esc(proofConciergeLine())}</li>
           </ul>
         </div>
       </section>
@@ -347,15 +356,15 @@ ${careFlowSvg()}
           <header class="employer-pitch-section-header">
             <p class="employer-pitch-section-label">Section 9 · Care capacity</p>
             <h2 id="care-team-heading">Staffed for continuity — not a rotating clinic list</h2>
-            <p class="employer-pitch-section-lead">We describe capacity, not individual clinician marketing cards. Figures below match the operational snapshot already shown in Proof points (as of September 2026).</p>
+            <p class="employer-pitch-section-lead">We describe capacity, not individual clinician marketing cards. Figures below match the operational snapshot already shown in Proof points (as of ${esc(FACTS.asOf)}).</p>
           </header>
           <ul class="employer-pitch-included">
-            <li><strong>2,700+</strong> patients treated · <strong>1,200+</strong> clinical evaluations completed</li>
-            <li>About <strong>180</strong> new patients and <strong>200</strong> returning patients per month</li>
-            <li>Each dedicated care team stays around <strong>500–600</strong> people — sized so someone can actually know the panel</li>
-            <li>Concierge / care-management sessions grew from <strong>25/month to 50/month</strong> over the past quarter</li>
+            <li><strong>${esc(FACTS.patientsTreated)}</strong> patients treated · <strong>${esc(FACTS.evaluationsCompleted)}</strong> clinical evaluations completed</li>
+            <li>About <strong>${esc(FACTS.newPatientsPerMonth)}</strong> new patients and <strong>${esc(FACTS.returningPatientsPerMonth)}</strong> returning patients per month</li>
+            <li>Each dedicated care team stays around <strong>${esc(FACTS.panelMin)}–${esc(FACTS.panelMax)}</strong> people — sized so someone can actually know the panel</li>
+            <li>Concierge / care-management sessions grew from <strong>${esc(FACTS.conciergeSessionsFrom)}/month to ${esc(FACTS.conciergeSessionsTo)}/month</strong> over the past quarter</li>
             <li>California-licensed clinicians on the dedicated employer panel; additional board-certified clinicians join as enrollment grows</li>
-            <li>Day-to-day: a California-licensed advanced practice clinician is often the first stop for scheduled care (Mon–Fri, 10am–6pm), with physician supervision for complex cases and escalations</li>
+            <li>Day-to-day: a California-licensed advanced practice clinician is often the first stop for scheduled care (${esc(FACTS.scheduledCare)}), with physician supervision for complex cases and escalations</li>
           </ul>
         </div>
       </section>
@@ -365,7 +374,7 @@ ${careFlowSvg()}
           <header class="employer-pitch-section-header">
             <p class="employer-pitch-section-label">Section 10 · Response times</p>
             <h2 id="response-heading">How quickly we respond</h2>
-            <p class="employer-pitch-section-lead">Scheduling and non-urgent questions: concierge team responds within 1 hour during business hours.</p>
+            <p class="employer-pitch-section-lead">Scheduling and non-urgent questions: concierge team responds ${esc(FACTS.responseWithin)}.</p>
           </header>
           <p class="employer-pitch-section-lead">Emergency: call <strong>911</strong>. Mental health crisis: call or text <strong>988</strong>. Do not use this page or messaging for emergencies.</p>
         </div>

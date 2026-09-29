@@ -8,7 +8,7 @@ const SITE_ROOT = path.join(__dirname, '..');
 export const BASE_URL = 'https://siya.health';
 export const CAREPATRON_BASE = 'https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA';
 /** Spruce secure medical chat — questions / not ready to book */
-export const SPRUCE_CHAT_URL = 'https://spruce.care/siyahealth';
+export const SPRUCE_CHAT_URL = 'https://app.sprucehealth.com/?invite=siyahealth';
 /** Internal transition pages (Google Ads conversion tracking) */
 export const REDIRECT_CHAT_URL = '/redirect/chat';
 export const REDIRECT_MEET_GREET_URL = '/redirect/meet-greet';

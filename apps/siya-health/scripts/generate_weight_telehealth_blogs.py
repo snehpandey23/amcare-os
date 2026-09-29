@@ -9,6 +9,8 @@ import json
 import os
 from typing import Literal
 
+from read_spruce_chat_url import spruce_chat_url
+
 BLOG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "blog")
 
 Kind = Literal["weight", "telehealth"]
@@ -225,7 +227,7 @@ def header_for(kind: Kind) -> str:
 
             <p>If you are considering <strong>medically supervised weight loss</strong>, Siya Health offers provider-guided options for eligible adults—always anchored in clinical evaluation rather than trends.</p>
             <div class="cta-block blog-cta">
-              <a class="button" href="https://spruce.care/siyahealth" target="_blank" rel="noopener">Book a free consultation</a>
+              <a class="button" href="{spruce_chat_url}" target="_blank" rel="noopener">Book a free consultation</a>
             </div>
 
             <h2>FAQ</h2>
@@ -340,7 +342,7 @@ def header_for(kind: Kind) -> str:
 
             <p><strong>Consult a licensed provider</strong> to determine if treatment is appropriate for you. Bring questions, medical history, and an open discussion of risks and alternatives.</p>
             <div class="cta-block blog-cta">
-              <a class="button" href="https://spruce.care/siyahealth" target="_blank" rel="noopener">Book a free consultation</a>
+              <a class="button" href="{spruce_chat_url}" target="_blank" rel="noopener">Book a free consultation</a>
             </div>
 
             <h2>FAQ</h2>
@@ -419,6 +421,7 @@ def write_post(
         related=related_html,
         article_json=article_schema(headline=h1, description=description, slug=slug),
         faq_json=faq_schema(faqs),
+        spruce_chat_url=spruce_chat_url(),
     )
     path = os.path.join(BLOG_DIR, f"{slug}.html")
     with open(path, "w", encoding="utf-8") as f:

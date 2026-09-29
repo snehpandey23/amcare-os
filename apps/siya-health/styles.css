@@ -7119,7 +7119,8 @@ img.footer-trust-logo[src*="legitscript"] {
   .provider-index-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 1024px) {
-  .provider-index-grid { grid-template-columns: repeat(3, 1fr); }
+  /* Four physicians at 3 columns left one card alone. Two columns keeps both rosters even. */
+  .provider-index-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 .provider-index-card {
   background: var(--white);

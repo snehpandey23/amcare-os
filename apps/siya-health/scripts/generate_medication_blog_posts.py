@@ -5,7 +5,10 @@ from __future__ import annotations
 import json
 import os
 
+from read_spruce_chat_url import spruce_chat_url
+
 BLOG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "blog")
+SPRUCE_CHAT_URL = spruce_chat_url()
 
 HEADER = """<!DOCTYPE html>
 <html lang="en">
@@ -74,7 +77,7 @@ HEADER = """<!DOCTYPE html>
 
             <p>If you are considering ADHD evaluation, you can start with a licensed provider at <strong>Siya Health</strong>—including structured telehealth visits where clinically appropriate.</p>
             <div class="cta-block blog-cta">
-              <a class="button" href="https://spruce.care/siyahealth" target="_blank" rel="noopener">Book a free consultation</a>
+              <a class="button" href="{spruce_chat_url}" target="_blank" rel="noopener">Book a free consultation</a>
             </div>
 
             <h2>FAQ</h2>
@@ -208,6 +211,7 @@ def write_post(
         related=related_html,
         article_json=article_schema(headline=h1, description=description, slug=slug),
         faq_json=faq_schema(faqs),
+        spruce_chat_url=SPRUCE_CHAT_URL,
     )
     path = os.path.join(BLOG_DIR, f"{slug}.html")
     with open(path, "w", encoding="utf-8") as f:

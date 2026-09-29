@@ -17,6 +17,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { SPRUCE_CHAT_URL } from '../data/providers-core.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
@@ -82,7 +83,7 @@ const VENDOR_DESTINATION_DEFAULTS = [
     id: 'spruce_secure_chat',
     vendor: 'Spruce',
     via_redirect: '/redirect/chat',
-    url: 'https://spruce.care/siyahealth',
+    url: SPRUCE_CHAT_URL,
   },
 ];
 
@@ -104,7 +105,7 @@ function discoverVendorDestinations() {
     if (!m) continue;
     const url = m[1].replace(/&amp;/g, '&');
     const via = toUrl(rel);
-    const vendor = /spruce\.care/i.test(url)
+    const vendor = /spruce\.care|app\.sprucehealth\.com/i.test(url)
       ? 'Spruce'
       : /carepatron/i.test(url)
         ? 'CarePatron'

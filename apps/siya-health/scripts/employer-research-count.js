@@ -3,7 +3,7 @@
  * The final figure stays in the HTML. Reduced-motion keeps that static text.
  */
 (function () {
-  var el = document.querySelector('.employer-research-feature__value');
+  var el = document.querySelector('.employer-research-feature__value[data-count-low]');
   if (!el) return;
   var low = Number(el.getAttribute('data-count-low'));
   var high = Number(el.getAttribute('data-count-high'));

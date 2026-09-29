@@ -2629,7 +2629,16 @@
         border-top: 1px solid rgba(0, 24, 120, 0.14);
       }
 
-      .siya-h2-compare-wrap { overflow-x: auto; }
+      .siya-h2-compare-wrap {
+        overflow-x: auto;
+        max-width: 100%;
+        min-width: 0;
+        -webkit-overflow-scrolling: touch;
+      }
+      body.siya-h2-surface #siya-vs-traditional .container {
+        min-width: 0;
+        max-width: 100%;
+      }
       .siya-h2-compare {
         width: 100%;
         border-collapse: collapse;
@@ -2658,6 +2667,52 @@
       }
       .siya-h2-compare tbody tr:nth-child(odd) td {
         background: rgba(255, 255, 255, 0.72);
+      }
+      @media (max-width: 720px) {
+        .siya-h2-compare-wrap { overflow: visible; }
+        .siya-h2-compare { display: block; min-width: 0; }
+        .siya-h2-compare thead {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          overflow: hidden;
+          clip: rect(0 0 0 0);
+        }
+        .siya-h2-compare tbody,
+        .siya-h2-compare tr,
+        .siya-h2-compare th,
+        .siya-h2-compare td {
+          display: block;
+          width: 100%;
+          min-width: 0;
+          box-sizing: border-box;
+        }
+        .siya-h2-compare tr {
+          margin: 0 0 1rem;
+          padding: 0.85rem 0.95rem 0.35rem;
+          border: 1px solid rgba(0, 24, 120, 0.14);
+          border-radius: 1rem;
+          background: rgba(255, 255, 255, 0.72);
+        }
+        .siya-h2-compare tbody th,
+        .siya-h2-compare td {
+          padding: 0.45rem 0 0.55rem;
+          border: 0;
+          background: transparent;
+        }
+        .siya-h2-compare tbody th { padding-top: 0; }
+        .siya-h2-compare td { border-top: 1px solid rgba(0, 24, 120, 0.08); }
+        .siya-h2-compare td::before {
+          display: block;
+          margin-bottom: 0.15rem;
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.02em;
+          text-transform: uppercase;
+          color: rgba(10, 36, 107, 0.62);
+        }
+        .siya-h2-compare td:nth-child(2)::before { content: "Traditional clinics"; }
+        .siya-h2-compare td:nth-child(3)::before { content: "Siya Health"; }
       }
 
       body.siya-h2-surface #care-team .siya-h2-founder-card {
@@ -2890,16 +2945,15 @@
         color: rgba(244,239,231,0.58);
         white-space: nowrap;
       }
-      body.siya-h2-surface .employer-research-stage {
+      body.siya-h2-surface .employer-research-grid--equal {
         display: grid;
-        grid-template-columns: minmax(16rem, 0.9fr) minmax(0, 1.15fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 1rem;
         align-items: stretch;
         margin: 1.1rem 0 1.5rem;
       }
-      body.siya-h2-surface .employer-research-stage .employer-research-grid {
-        margin: 0;
-        grid-template-columns: 1fr;
+      body.siya-h2-surface .employer-research-grid--equal .employer-research-feature {
+        height: 100%;
       }
       body.siya-h2-surface .employer-research-feature {
         margin: 0;
@@ -3001,7 +3055,8 @@
         color: #0A246B;
       }
       @media (max-width: 720px) {
-        body.siya-h2-surface .employer-research-stage { grid-template-columns: 1fr; }
+        body.siya-h2-surface .employer-research-stage,
+        body.siya-h2-surface .employer-research-grid--equal { grid-template-columns: 1fr; }
         body.siya-h2-surface .employer-research-grid { grid-template-columns: 1fr; }
         body.siya-h2-surface .employer-research-card strong { font-size: 1.4rem; }
       }
@@ -3018,13 +3073,71 @@
       body.page-provider .provider-klarity-reviews a:hover {
         text-decoration: underline;
       }
-      body.page-provider .provider-klarity-reviews__note {
+      body.page-provider.siya-h2-surface .provider-klarity-reviews__note {
         display: block;
         margin-top: 0.15rem;
         font-size: 0.82rem;
         font-weight: 400;
         line-height: 1.35;
         color: rgba(10, 36, 107, 0.78);
+      }
+      /* Profile sections were solid cream/white and hid the motion layer.
+         The SVG is already on these pages. Only the fills were opaque. */
+      body.page-provider.siya-h2-surface .provider-lp-hero,
+      body.page-provider.siya-h2-surface .provider-lp-section,
+      body.page-provider.siya-h2-surface .provider-lp-section.section-tinted {
+        background: transparent !important;
+        background-image: none !important;
+      }
+      body.page-provider.siya-h2-surface .provider-testimonial {
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+      #care-team-roster { scroll-margin-top: 5.5rem; }
+      body.siya-h2-surface .employer-partnership-steps {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+        margin: 0.5rem 0 1.25rem;
+      }
+      body.siya-h2-surface a.employer-partnership-step,
+      body.siya-h2-surface .employer-partnership-step {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        margin: 0;
+        padding: 1.35rem 1.2rem 1.25rem;
+        border-radius: 1rem;
+        background: #001878;
+        color: #F4EFE7;
+        text-decoration: none;
+        min-height: 11rem;
+        box-sizing: border-box;
+      }
+      body.siya-h2-surface a.employer-partnership-step:hover,
+      body.siya-h2-surface a.employer-partnership-step:focus-visible {
+        background: #0A246B;
+      }
+      body.siya-h2-surface .employer-partnership-step__num {
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #D81088;
+        font-weight: 700;
+      }
+      body.siya-h2-surface .employer-partnership-step strong {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(1.45rem, 2vw, 1.85rem);
+        line-height: 1.15;
+        color: #F4EFE7;
+      }
+      body.siya-h2-surface .employer-partnership-step span:last-child {
+        color: rgba(244, 239, 231, 0.88);
+        line-height: 1.4;
+      }
+      @media (max-width: 800px) {
+        body.siya-h2-surface .employer-partnership-steps { grid-template-columns: 1fr; }
       }
 
       body.siya-h2-surface #employer-inquiry {

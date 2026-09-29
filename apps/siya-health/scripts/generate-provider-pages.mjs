@@ -734,7 +734,7 @@ function renderProvidersIndex() {
         </div>
       </section>
 
-      <section class="section section-tinted">
+      <section class="section section-tinted" id="care-team-roster">
         <div class="container">
 ${renderHubFilters()}
           <div class="section-header"><h2>Physicians</h2></div>

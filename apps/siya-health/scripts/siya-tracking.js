@@ -378,7 +378,11 @@
         pushEvent('meet_greet_click', baseParams);
       }
 
-      if (linkHref.indexOf('/redirect/chat') !== -1 || linkHref.indexOf('spruce.care/siyahealth') !== -1) {
+      if (
+        linkHref.indexOf('/redirect/chat') !== -1 ||
+        linkHref.indexOf('spruce.care/siyahealth') !== -1 ||
+        (linkHref.indexOf('app.sprucehealth.com') !== -1 && linkHref.indexOf('invite=siyahealth') !== -1)
+      ) {
         pushEvent('secure_chat_click', baseParams);
       }
 

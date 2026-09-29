@@ -80,6 +80,7 @@ const ALLOWED_URL_HOSTS = new Set([
   'form.carepatron.com',
   'book.carepatron.com',
   'spruce.care',
+  'app.sprucehealth.com',
   'www.zocdoc.com',
   'us.fullscript.com',
 ])

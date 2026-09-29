@@ -5,12 +5,12 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { SPRUCE_CHAT_URL } from '../data/providers-core.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
 
-const BOOKING_CANONICAL =
-  'https://spruce.care/siyahealth';
+const BOOKING_CANONICAL = SPRUCE_CHAT_URL;
 const GHL_CANONICAL = 'https://link.yourmarketingai.com/widget/form/HmvqrDVq3tq3qv6rkCjl';
 
 const RECOMMENDED = {

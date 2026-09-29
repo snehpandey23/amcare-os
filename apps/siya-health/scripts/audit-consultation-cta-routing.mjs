@@ -9,6 +9,7 @@ import {
   REDIRECT_CHAT_URL,
   REDIRECT_ADHD_WALKTHROUGH_URL,
   REDIRECT_ADHD_EVALUATION_URL,
+  SPRUCE_CHAT_URL,
 } from '../data/providers-core.mjs';
 import { isAdhdFunnelPath } from '../design-system/conversion-system.mjs';
 
@@ -86,6 +87,7 @@ function hrefMatchesExpected(href, expected) {
   const h = normalizeHref(href);
   const e = normalizeHref(expected);
   if (expected === '/adhd-screening') return h.includes('/adhd-screening');
+  if (expected === REDIRECT_CHAT_URL && (h.includes(SPRUCE_CHAT_URL) || h.includes('/redirect/chat'))) return true;
   return h === e || h.startsWith(e.split('?')[0]);
 }
 
@@ -122,7 +124,7 @@ for (const rel of files.sort()) {
     const { intent, expected } = classifyIntent(row.text, row.href, rel);
     const ok = expected ? hrefMatchesExpected(row.href, expected) : true;
     const isSpruceMisroute =
-      row.href.includes('spruce.care/siyahealth') &&
+      (row.href.includes('spruce.care/siyahealth') || row.href.includes(SPRUCE_CHAT_URL)) &&
       /schedule consultation|book consultation|book appointment|book free consultation|walkthrough/i.test(row.text);
     const status = isSpruceMisroute || (expected && !ok) ? 'INCORRECT' : expected ? 'OK' : 'REVIEW';
     if (status === 'INCORRECT') incorrect++;
