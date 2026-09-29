@@ -100,7 +100,7 @@ export interface FactsSnapshot {
 }
 
 export const FACTS_SNAPSHOT: FactsSnapshot = {
-  "generated": "2026-09-28",
+  "generated": "2026-09-29",
   "source": "apps/siya-health site-standards + providers + provider-canonical + homepage-trust-metrics + providers-core + service-index.json + founder-locked cancel/hours facts",
   "availableServiceStates": [
     "California",
@@ -486,7 +486,7 @@ export const FACTS_SNAPSHOT: FactsSnapshot = {
       "label": "Spruce secure medical chat",
       "redirectPath": "/redirect/chat",
       "redirectUrl": "https://www.siya.health/redirect/chat",
-      "directUrl": "https://spruce.care/siyahealth",
+      "directUrl": "https://app.sprucehealth.com/?invite=siyahealth",
       "note": "Private clinical messaging via Spruce. Prefer /redirect/chat for ads tracking."
     },
     "evaluation": {
