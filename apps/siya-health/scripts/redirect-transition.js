@@ -191,6 +191,19 @@
     window.location.replace(dest.toString());
   }
 
+  function showFallback() {
+    var card = document.querySelector('.redirect-transition');
+    if (!card) return;
+    card.style.display = 'flex';
+    card.style.alignItems = 'center';
+    card.style.justifyContent = 'center';
+    card.style.minHeight = '70vh';
+    card.style.padding = '2rem 1rem';
+  }
+
+  /* If we are still on this page after 3 seconds, the automatic hop did not happen. */
+  window.setTimeout(showFallback, 3000);
+
   /* Beacon already queued the hit. If the browser refused it, the keepalive
      fetch above needs a short head start — 150ms, not the old 2s spinner. */
   if (beaconOk) leave();
