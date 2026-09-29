@@ -59,6 +59,7 @@ const SITEMAP_EXCLUDE = new Set([
   'telehealth2.html',
   'adhd-care2.html',
   'employers2.html',
+  'employers/demo.html', // invitation preview — noindex, not in sitemap
   'video-cards.html', // local export surface; public URL redirects home
   'homepage2-audit.html',
   'homepage2-care-preview.html',

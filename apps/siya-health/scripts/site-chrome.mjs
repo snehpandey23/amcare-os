@@ -1574,6 +1574,15 @@ export function injectGtmAndTracking(html, relPath = '') {
   html = stripExistingGtag(html);
   html = stripExistingMetaPixel(html);
 
+  // EXCEPTION — /employers/demo.html only. Do not copy this branch to other pages.
+  // Do not inject GTM or siya-tracking.js here. The demo page inserts those scripts
+  // only when the hostname is siya.health, so preview deploys never load them.
+  // No Meta pixel. california-pilot stays pixel-free (branch below).
+  if (/^employers\/demo\.html$/i.test(relPath)) {
+    html = html.replace(/<script src="\/scripts\/siya-tracking\.js"(?:\s+defer)?><\/script>\s*/gi, '');
+    return html;
+  }
+
   // No marketing pixels: invitation-only surfaces + patient intake/scheduling/health-entry
   if (
     /^employers\/california-pilot\.html$/i.test(relPath) ||
