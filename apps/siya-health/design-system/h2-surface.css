@@ -3086,20 +3086,54 @@
         border-radius: inherit;
       }
       body.siya-h2-surface .employer-approach {
+        display: grid;
+        grid-template-columns: 7.5rem minmax(0, 1fr);
+        gap: 1.15rem 1.35rem;
+        align-items: start;
         margin: 0 0 1.75rem;
         padding: 1.15rem 1.25rem 1.2rem;
-        background: #F4EFE7;
+        background: rgba(244, 239, 231, 0.92);
         border-left: 4px solid #D81088;
         border-radius: 0 1rem 1rem 0;
+      }
+      body.siya-h2-surface .employer-approach__photo {
+        width: 7.5rem;
+        height: 9.25rem;
+        object-fit: cover;
+        object-position: center 18%;
+        border-radius: 0.85rem;
+        display: block;
       }
       body.siya-h2-surface .employer-approach h3 {
         margin: 0 0 0.45rem;
         font-family: Georgia, "Times New Roman", serif;
         color: #001878;
       }
+      body.siya-h2-surface .employer-approach blockquote {
+        margin: 0;
+      }
       body.siya-h2-surface .employer-approach p {
         margin: 0;
         color: #0A246B;
+      }
+      body.siya-h2-surface .employer-approach__by {
+        margin-top: 0.85rem !important;
+        font-size: 0.95rem;
+        line-height: 1.35;
+      }
+      body.siya-h2-surface .employer-approach__by a {
+        color: #001878;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      body.siya-h2-surface .employer-approach__by span {
+        display: block;
+        font-weight: 500;
+        color: rgba(10, 36, 107, 0.78);
+      }
+      @media (max-width: 720px) {
+        body.siya-h2-surface .employer-approach { grid-template-columns: 5.5rem minmax(0, 1fr); }
+        body.siya-h2-surface .employer-approach__photo { width: 5.5rem; height: 6.75rem; }
       }
       @media (max-width: 720px) {
         body.siya-h2-surface .employer-research-stage,
