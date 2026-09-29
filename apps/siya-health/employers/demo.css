@@ -198,22 +198,61 @@ html:has(.page-employer-demo) {
   color: #001878;
 }
 
-.demo-paths {
+.demo-choice {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  gap: 0.5rem;
 }
 
-.demo-paths li {
+.demo-choice button {
+  font: inherit;
+  font-size: 1.05rem;
+  font-weight: 650;
+  color: #001878;
   background: #fff;
   border: 2px solid #001878;
   border-radius: 999px;
-  text-align: center;
-  padding: 0.75rem 0.5rem;
+  padding: 0.65rem 0.4rem;
+  cursor: pointer;
+}
+
+.demo-choice button.is-selected {
+  background: #001878;
+  color: #f4efe7;
+}
+
+.demo-choice button.is-dim {
+  opacity: 0.38;
+}
+
+.demo-choice-panel {
+  margin-top: 0.75rem;
+}
+
+.demo-choice-panel ol {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.demo-choice-panel li {
+  line-height: 1.35;
+}
+
+.demo-choice-panel .demo-note {
+  margin-top: 0.5rem;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.demo-choice-same {
+  margin: 0.75rem 0 0;
   font-weight: 650;
+  line-height: 1.35;
 }
 
 .demo-hub {
@@ -345,12 +384,9 @@ html:has(.page-employer-demo) {
   cursor: pointer;
 }
 
-.demo-open,
-a.demo-cta {
-  background: #001878;
-  color: #f4efe7;
-  text-decoration: none;
-  display: inline-block;
+a.demo-cta--secondary {
+  background: #fff;
+  color: #001878;
 }
 
 [data-demo-in] {

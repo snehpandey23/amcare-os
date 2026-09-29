@@ -187,4 +187,23 @@
   document.addEventListener('visibilitychange', function () {
     if (document.visibilityState === 'hidden') pause();
   });
+
+  var startChoices = document.querySelectorAll('[data-start-choice]');
+  startChoices.forEach(function (button) {
+    button.addEventListener('click', function (event) {
+      event.stopPropagation();
+      var id = button.getAttribute('data-start-choice');
+      startChoices.forEach(function (other) {
+        var on = other === button;
+        other.classList.toggle('is-selected', on);
+        other.classList.toggle('is-dim', !on);
+        other.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      document.querySelectorAll('[data-start-panel]').forEach(function (panel) {
+        panel.hidden = panel.getAttribute('data-start-panel') !== id;
+      });
+      var same = document.getElementById('demo-start-same');
+      if (same) same.hidden = false;
+    });
+  });
 })();

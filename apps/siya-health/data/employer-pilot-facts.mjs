@@ -23,6 +23,9 @@ export const EMPLOYER_PILOT_FACTS = {
   scheduledCare: 'Mon–Fri, 10am–6pm',
   /** Concierge response during business hours. */
   responseWithin: 'within 1 hour during business hours',
+  /** Where the employee must be located for the visit. */
+  visitLocationLine:
+    'For employees located in California, Texas, Pennsylvania or Florida at the time of their visit.',
 };
 
 export function proofScaleLine(facts = EMPLOYER_PILOT_FACTS) {

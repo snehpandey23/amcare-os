@@ -14,7 +14,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
-import { GTM_PRODUCTION_HOST_GUARD, TRACKING } from '../data/tracking-config.mjs';
+import { TRACKING } from '../data/tracking-config.mjs';
 import { PROVIDERS } from '../data/providers.mjs';
 import {
   EMPLOYER_PILOT_FACTS as FACTS,
@@ -44,12 +44,20 @@ function esc(s) {
 const gtm = '';
 const gtmNoscript = '';
 
-/** Inject GTM + siya-tracking.js only on production siya.health. Preview hosts load neither. No Meta pixel. Do not copy. */
+/** Inject GTM + siya-tracking.js only on production siya.health, and never after ?review=1. No Meta pixel. Do not copy. */
 const analyticsBootstrap = `<script>
 (function () {
+  var q = new URLSearchParams(location.search || '');
+  if (q.get('review') === '1') {
+    var secure = location.protocol === 'https:' ? '; Secure' : '';
+    document.cookie = 'siya_demo_review=1; Path=/employers; Max-Age=31536000; SameSite=Lax' + secure;
+  }
+  var bits = document.cookie ? document.cookie.split(';') : [];
+  for (var i = 0; i < bits.length; i++) {
+    if (bits[i].trim() === 'siya_demo_review=1') return;
+  }
   var h = String((location && location.hostname) || '').toLowerCase();
   if (!(h === 'siya.health' || /\\.siya\\.health$/.test(h))) return;
-  ${GTM_PRODUCTION_HOST_GUARD}
   var w = window;
   var d = document;
   w.dataLayer = w.dataLayer || [];
@@ -74,6 +82,9 @@ const slides = [
   { id: 'threads', label: 'One conversation' },
   { id: 'curtain', label: 'Behind the curtain' },
   { id: 'founders', label: 'Founders' },
+  { id: 'launch', label: 'Launching is simple' },
+  { id: 'safety', label: 'Safety built in' },
+  { id: 'measure', label: 'How we\u2019ll measure it together' },
   { id: 'hr', label: 'For HR' },
   { id: 'close', label: 'See it live' },
 ];
@@ -148,18 +159,44 @@ const html = `<!DOCTYPE html>
       <section class="demo-slide" id="start" data-demo-chapter="start" aria-labelledby="demo-start-heading">
         <div class="container demo-slide-inner">
           <h2 id="demo-start-heading" data-demo-in="up" style="--demo-i:0">Start however works for you</h2>
-          <ul class="demo-paths">
-            <li data-demo-in="up" style="--demo-i:1">Text</li>
-            <li data-demo-in="up" style="--demo-i:2">Call</li>
-            <li data-demo-in="up" style="--demo-i:3">Email</li>
-            <li data-demo-in="up" style="--demo-i:4">Booking link</li>
-          </ul>
-          <svg class="demo-wave siya-hero-drift siya-hero-drift--wave" viewBox="0 0 1200 120" aria-hidden="true">
-            <path d="M80 20 C 280 90, 480 10, 600 60 S 900 110, 1120 40" fill="none" stroke="#D81088" stroke-width="3" stroke-linecap="round"/>
-            <path d="M40 70 C 260 10, 500 100, 720 40 S 980 20, 1160 80" fill="none" stroke="#001878" stroke-width="2.5" stroke-linecap="round"/>
-          </svg>
-          <p class="demo-lead" data-demo-in="up" style="--demo-i:5">No app required to reach us. Text and calls just work.</p>
-          <p class="demo-hub" data-demo-in="up" style="--demo-i:6">One care team</p>
+          <p class="demo-lead" data-demo-in="up" style="--demo-i:1">Not everyone wants another app. Choose the way that suits you — it all reaches the same care team.</p>
+          <div class="demo-choice" role="group" aria-label="Ways to start" data-demo-in="up" style="--demo-i:2">
+            <button type="button" data-start-choice="call" aria-pressed="false">Call</button>
+            <button type="button" data-start-choice="text" aria-pressed="false">Text</button>
+            <button type="button" data-start-choice="app" aria-pressed="false">Secure app</button>
+            <button type="button" data-start-choice="book" aria-pressed="false">Book online</button>
+          </div>
+          <div class="demo-choice-panel" data-start-panel="call" hidden>
+            <ol>
+              <li>Call our care line.</li>
+              <li>Tell our team what times work.</li>
+              <li>We call you back to set everything up.</li>
+            </ol>
+          </div>
+          <div class="demo-choice-panel" data-start-panel="text" hidden>
+            <ol>
+              <li>Text our number.</li>
+              <li>We reply to coordinate timing.</li>
+              <li>We call or book you in.</li>
+            </ol>
+            <p class="demo-note">Texts are for scheduling. Health details go through secure messaging.</p>
+          </div>
+          <div class="demo-choice-panel" data-start-panel="app" hidden>
+            <ol>
+              <li>Download our secure messaging app from the link we send.</li>
+              <li>Share questions or documents before your visit.</li>
+              <li>Our team replies and books you in.</li>
+            </ol>
+          </div>
+          <div class="demo-choice-panel" data-start-panel="book" hidden>
+            <ol>
+              <li>Book a free meet &amp; greet.</li>
+              <li>Pick a time that works for you.</li>
+              <li>Get your visit link.</li>
+            </ol>
+            <p class="demo-note">The meet &amp; greet is free. Covered visits stay $0 for enrolled employees.</p>
+          </div>
+          <p class="demo-choice-same" id="demo-start-same" hidden>However you start, it&rsquo;s the same team and the same record.</p>
         </div>
       </section>
 
@@ -231,6 +268,42 @@ const html = `<!DOCTYPE html>
         </div>
       </section>
 
+      <section class="demo-slide" id="launch" data-demo-chapter="launch" aria-labelledby="demo-launch-heading">
+        <div class="container demo-slide-inner">
+          <h2 id="demo-launch-heading" data-demo-in="up" style="--demo-i:0">Launching is simple</h2>
+          <ol class="demo-sequence">
+            <li data-demo-in="up" style="--demo-i:1">Share your employee roster.</li>
+            <li data-demo-in="up" style="--demo-i:2">We send your team a launch kit.</li>
+            <li data-demo-in="up" style="--demo-i:3">Employees join the way that suits them.</li>
+            <li data-demo-in="up" style="--demo-i:4">You receive aggregate reports.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="demo-slide" id="safety" data-demo-chapter="safety" aria-labelledby="demo-safety-heading">
+        <div class="container demo-slide-inner">
+          <h2 id="demo-safety-heading" data-demo-in="up" style="--demo-i:0">Safety built in</h2>
+          <p class="demo-lead" data-demo-in="up" style="--demo-i:1">When stimulant medication is clinically appropriate, we follow a structured safety process—not a one-visit prescription.</p>
+          <ol class="demo-sequence">
+            <li data-demo-in="up" style="--demo-i:2">Stimulant medication isn&rsquo;t started at the first visit.</li>
+            <li data-demo-in="up" style="--demo-i:3">You&rsquo;ll review and sign a treatment agreement first.</li>
+            <li data-demo-in="up" style="--demo-i:4">Care includes ongoing monitoring, including drug screening and pill counts when clinically indicated.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="demo-slide" id="measure" data-demo-chapter="measure" aria-labelledby="demo-measure-heading">
+        <div class="container demo-slide-inner">
+          <h2 id="demo-measure-heading" data-demo-in="up" style="--demo-i:0">How we&rsquo;ll measure it together</h2>
+          <ol class="demo-sequence">
+            <li data-demo-in="up" style="--demo-i:1">Checkpoint reviews at month 3 and month 6.</li>
+            <li data-demo-in="up" style="--demo-i:2">PHQ-9, GAD-7, and ASRS, along with other validated screening tools as clinically appropriate.</li>
+            <li data-demo-in="up" style="--demo-i:3">Reports are aggregate only, for groups of 10 or more.</li>
+          </ol>
+          <p class="demo-lead" data-demo-in="up" style="--demo-i:4">Outcomes aren&rsquo;t guaranteed.</p>
+        </div>
+      </section>
+
       <section class="demo-slide" id="hr" data-demo-chapter="hr" aria-labelledby="demo-hr-heading">
         <div class="container demo-slide-inner">
           <h2 id="demo-hr-heading" data-demo-in="up" style="--demo-i:0">You see aggregate results. <span class="siya-em">Never who, or why.</span></h2>
@@ -242,6 +315,7 @@ const html = `<!DOCTYPE html>
             <li data-demo-in="up" style="--demo-i:5">Licensed in ${esc(FACTS.practiceStatesShort)}</li>
           </ul>
           <p class="demo-lead" data-demo-in="up" style="--demo-i:6">Scheduled care ${esc(FACTS.scheduledCare)}. Concierge replies ${esc(FACTS.responseWithin)}.</p>
+          <p class="demo-lead" data-demo-in="up" style="--demo-i:7">${esc(FACTS.visitLocationLine)}</p>
         </div>
       </section>
 
@@ -249,8 +323,8 @@ const html = `<!DOCTYPE html>
         <div class="container demo-slide-inner">
           <h2 id="demo-close-heading" data-demo-in="up" style="--demo-i:0">See it live.</h2>
           <p class="demo-lead" data-demo-in="up" style="--demo-i:1">This tour is a preview. Book a short call and we&rsquo;ll walk you through the real experience.</p>
-          <p data-demo-in="up" style="--demo-i:2"><a class="button ds-button ds-button--accent demo-cta" href="${esc(DEMO_BOOK_CALL_HREF)}" data-siya-track="employer_inquiry_click" data-siya-location="employer-demo-close" data-page-type="employer" data-intent="employer" data-conversion-goal="bookDemo" data-cta-slot="bookDemo" data-component="button">Book a call</a></p>
-          <p data-demo-in="up" style="--demo-i:3"><a href="/employers/california-pilot">Pilot terms</a></p>
+          <p data-demo-in="up" style="--demo-i:2"><a class="button ds-button ds-button--accent demo-cta" href="${esc(DEMO_BOOK_CALL_HREF)}" data-siya-track="employer_inquiry_click" data-siya-location="employer-demo-book" data-page-type="employer" data-intent="employer" data-conversion-goal="bookDemo" data-cta-slot="bookDemo" data-component="button">Book a call</a></p>
+          <p data-demo-in="up" style="--demo-i:3"><a class="button ds-button demo-cta demo-cta--secondary" href="${esc(DEMO_BOOK_CALL_HREF)}" data-siya-track="employer_inquiry_click" data-siya-location="employer-demo-details" data-page-type="employer" data-intent="employer" data-conversion-goal="bookDemo" data-cta-slot="bookDemo" data-component="button">Request pilot details</a></p>
         </div>
       </section>
     </main>
