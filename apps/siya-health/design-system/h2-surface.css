@@ -1696,9 +1696,13 @@
         box-shadow: var(--ds-shadow-button) !important;
         margin-right: 0.35rem;
       }
-      body.siya-h2-surface main .symptoms-transition a[href*="meet-greet"]:hover {
-        filter: brightness(1.05);
-        color: #fff !important;
+      /* The quiet-link rule above wins at rest (navy on the cream page).
+         This hover used to force white, which disappeared on that background. */
+      body.siya-h2-surface main .symptoms-transition a[href*="meet-greet"]:hover,
+      body.siya-h2-surface main .symptoms-transition a[href*="meet-greet"]:focus-visible {
+        filter: none;
+        color: #0A246B !important;
+        text-decoration-color: rgba(10, 36, 107, 0.55) !important;
       }
       body.siya-h2-surface .siya-h2-more-reviews-label {
         color: #0A246B;
@@ -2945,45 +2949,78 @@
         color: rgba(244,239,231,0.58);
         white-space: nowrap;
       }
+      body.page-employer.siya-h2-surface .hero-merged h1,
+      body.page-employer.siya-h2-surface #sample-visit-heading,
+      body.page-employer.siya-h2-surface #employer-research-heading {
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 700;
+        color: #001878;
+        text-align: left;
+        letter-spacing: -0.025em;
+      }
+      body.page-employer.siya-h2-surface #sample-visit .section-header,
+      body.page-employer.siya-h2-surface #sample-visit .section-header .lead {
+        text-align: left;
+        margin-left: 0;
+      }
+      body.page-employer.siya-h2-surface #sample-visit {
+        background: linear-gradient(165deg, #e4e7ee 0%, #d5deef 48%, #c3d0ea 100%) !important;
+      }
+      body.page-employer.siya-h2-surface #sample-visit .lead,
+      body.page-employer.siya-h2-surface #sample-visit .employer-research-feature p {
+        color: #0A246B;
+        font-size: 1.05rem;
+        line-height: 1.5;
+      }
       body.siya-h2-surface .employer-research-grid--equal {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1rem;
-        align-items: stretch;
+        gap: 2.25rem 2.5rem;
+        align-items: start;
         margin: 1.1rem 0 1.5rem;
-      }
-      body.siya-h2-surface .employer-research-grid--equal .employer-research-feature {
-        height: 100%;
       }
       body.siya-h2-surface .employer-research-feature {
         margin: 0;
-        padding: 1.35rem 1.3rem 1.15rem;
-        background: rgba(255, 255, 255, 0.88);
-        border: 1px solid rgba(0, 24, 120, 0.14);
-        border-radius: 1rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        padding: 0;
+        background: none;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
       }
       body.siya-h2-surface .employer-research-feature__value {
         display: block;
-        margin: 0 0 0.55rem;
+        margin: 0 0 0.65rem;
         font-family: Georgia, "Times New Roman", serif;
-        font-size: clamp(2.15rem, 4.2vw, 3.35rem);
-        line-height: 1.05;
+        font-size: clamp(2.15rem, 4.2vw, 3.15rem);
+        line-height: 1.15;
         font-weight: 700;
         color: #001878;
+      }
+      body.siya-h2-surface .employer-em {
+        background: linear-gradient(180deg, rgba(216, 16, 136, 0.16), rgba(0, 24, 120, 0.12));
+        border-radius: 0.28em;
+        padding: 0 0.08em;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+        animation: employerEmFloat 4.8s ease-in-out infinite;
+      }
+      @keyframes employerEmFloat {
+        0%, 100% { box-shadow: 0 0 0 rgba(0, 24, 120, 0); }
+        50% { box-shadow: 0 0.28em 0.9em rgba(0, 24, 120, 0.22); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        body.siya-h2-surface .employer-em { animation: none; }
+      }
+      body.siya-h2-surface .employer-research-cite {
+        display: block;
+        margin-top: 0.75rem;
+        font-size: 0.95rem;
+        line-height: 1.45;
+        color: #0A246B;
       }
       body.siya-h2-surface .employer-research-feature p {
         margin: 0;
         color: #0A246B;
-      }
-      body.siya-h2-surface .employer-research-cite {
-        display: block;
-        margin-top: 0.65rem;
-        font-size: 0.78rem;
-        line-height: 1.35;
-        color: rgba(10, 36, 107, 0.78);
       }
       body.siya-h2-surface .employer-research-cite a {
         color: inherit;

@@ -16,7 +16,7 @@ import {
   getProviderBySlug,
   injectProviderPhysicianSchema,
 } from './clinical-entity.mjs';
-import { applySiteChrome } from './site-chrome.mjs';
+import { injectGtmAndTracking, applySiteChrome } from './site-chrome.mjs';
 import { ALL_REDIRECT_SOURCES } from '../data/redirect-map.mjs';
 import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 import { ensureHomepageGoogleReviews } from '../partials/homepage2-google-reviews.mjs';
@@ -589,6 +589,7 @@ function processHtml(relPath) {
   if (h2ChromeLocked) {
     html = applyHomepage2Surface(html);
     html = normalizeRootAssetPaths(html);
+    html = injectGtmAndTracking(html, relPath);
     fs.writeFileSync(fullPath, html, 'utf8');
     return;
   }

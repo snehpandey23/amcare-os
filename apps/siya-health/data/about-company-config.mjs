@@ -16,7 +16,7 @@ export const ABOUT_COMPANY_STATS = [
 
 export const ABOUT_COMPANY_COPY = {
   heading: 'About the Company',
-    lead: 'Working professionals were doing the job. The system around them was not: offices that close when shifts start, visits too short to hear the whole story, and follow-up that disappears.',
+    lead: 'Busy professionals were doing the job. The system around them was not: offices that close when shifts start, visits too short to hear the whole story, and follow-up that disappears.',
   paragraphs: [
     'Siya Health is the company we built for that problem. Licensed clinicians lead the visit. Scheduling, pharmacy coordination, and follow-up stay with the care team so the appointment is for the person, not the paperwork.',
     'Care is delivered through HIPAA-compliant telehealth in California, Texas, Pennsylvania, and Florida. Patients choose transparent cash-pay pricing for evaluations and ongoing membership options—without insurance maze-finding as the first step.',

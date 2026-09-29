@@ -18,6 +18,12 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { SPRUCE_CHAT_URL } from '../data/providers-core.mjs';
+import {
+  isPatientCareFlowPage,
+  isTrackingHoldPage,
+  marketingTrackingForbidden,
+  trackingBucket,
+} from '../data/tracking-buckets.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
@@ -189,15 +195,14 @@ function scriptsInHtml(text) {
 }
 
 function classify(rel, text) {
+  const bucket = trackingBucket(rel);
   const signals = interactiveHealthSignals(text);
-  const care = isCareFlow(rel);
-  if (care || signals.length) {
-    return {
-      classification: 'health-identifying',
-      why: [...(care ? ['care_flow_gate'] : []), ...signals],
-    };
-  }
-  return { classification: 'generic', why: ['informational_or_marketing'] };
+  const forbidden = marketingTrackingForbidden(rel);
+  return {
+    classification: forbidden ? 'health-identifying' : 'generic',
+    bucket,
+    why: [`bucket_${bucket}`, ...(forbidden && bucket !== 'A' ? ['tracking_forbidden'] : []), ...signals],
+  };
 }
 
 function loadSitemapUrls() {
@@ -576,6 +581,31 @@ function renderMarkdown(report) {
 
 async function main() {
   const args = process.argv.slice(2);
+  if (args.includes('--gate')) {
+    const files = walkHtmlFiles(ROOT).sort();
+    const bad = [];
+    for (const rel of files) {
+      if (
+        trackingBucket(rel) !== 'A' &&
+        !isPatientCareFlowPage(rel) &&
+        !isTrackingHoldPage(rel)
+      ) {
+        continue;
+      }
+      const text = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+      const scripts = scriptsInHtml(text);
+      if (scripts.GTM || scripts.Meta || scripts.siya_tracking) {
+        bad.push(`${rel}  GTM=${scripts.GTM} Meta=${scripts.Meta} siya-tracking=${scripts.siya_tracking}`);
+      }
+    }
+    if (bad.length) {
+      console.error(`tracking gate FAILED (${bad.length} pages):`);
+      for (const line of bad) console.error(`  ${line}`);
+      process.exit(1);
+    }
+    console.log(`tracking gate passed (${files.length} HTML files).`);
+    return;
+  }
   const live = args.includes('--live');
   const outIdx = args.indexOf('--out');
   const stamp = new Date().toISOString().slice(0, 10);

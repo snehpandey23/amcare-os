@@ -38,6 +38,9 @@ import {
 import { SPRUCE_CHAT_URL, MEET_GREET_BOOKING_URL, ADHD_EVALUATION_199_LINK, REDIRECT_CHAT_URL, REDIRECT_MEET_GREET_URL, REDIRECT_ADHD_WALKTHROUGH_URL, REDIRECT_ADHD_EVALUATION_URL, ZOCDOC_BOOKING_URL } from '../data/providers-core.mjs';
 import { applyPricingTokens, initialEvaluationPriceDisplay } from '../data/pricing-display.mjs';
 import { TRACKING, GTM_PRODUCTION_HOST_GUARD } from '../data/tracking-config.mjs';
+import { isPatientCareFlowPage, marketingTrackingForbidden } from '../data/tracking-buckets.mjs';
+
+export { isPatientCareFlowPage };
 import { HOMEPAGE_TRUST_METRICS } from '../data/homepage-trust-metrics.mjs';
 import { ABOUT_COMPANY_COPY, ABOUT_COMPANY_STATS } from '../data/about-company-config.mjs';
 import { getServiceTagline } from '../data/provider-canonical.mjs';
@@ -1485,22 +1488,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','${GTM_ID}');</script>
 <!-- End Google Tag Manager -->`;
 
-const GTM_NOSCRIPT_SNIPPET = `<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}"
-height="0" width="0" style="display:none;visibility:hidden" title="GTM"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->`;
-
-/** Meta Pixel — Facebook standard snippet (head script + body noscript) */
 const META_PIXEL_SNIPPET = `<!-- Meta Pixel Code -->
 <script>window.__SIYA_META_PIXEL_ID='${TRACKING.META_PIXEL_ID}';</script>
 <script src="/scripts/meta-pixel.js"></script>
 <!-- End Meta Pixel Code -->`;
-
-const META_PIXEL_NOSCRIPT = `<!-- Meta Pixel noscript -->
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=${TRACKING.META_PIXEL_ID}&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel noscript -->`;
 
 const SIYA_TRACKING_BLOCK = `<!-- SIYA:TRACKING -->
     <script src="/scripts/siya-tracking.js" defer></script>
@@ -1554,6 +1545,10 @@ export function stripExistingMetaPixel(html) {
     '',
   );
   html = html.replace(
+    /<script>\s*window\.__SIYA_META_PIXEL_ID\s*=\s*['"][^'"]+['"]\s*;?\s*<\/script>\s*/gi,
+    '',
+  );
+  html = html.replace(
     /<script src="\/scripts\/meta-pixel\.js"><\/script>\s*/gi,
     '',
   );
@@ -1587,7 +1582,7 @@ export function injectGtmAndTracking(html, relPath = '') {
   if (
     /^employers\/california-pilot\.html$/i.test(relPath) ||
     /^internal\//i.test(relPath) ||
-    isPatientCareFlowPage(relPath)
+    marketingTrackingForbidden(relPath)
   ) {
     html = html.replace(/<!--\s*SIYA:TRACKING\s*-->[\s\S]*?<!--\s*\/SIYA:TRACKING\s*-->\s*/gi, '');
     html = html.replace(/<script src="\/scripts\/siya-tracking\.js"(?:\s+defer)?><\/script>\s*/gi, '');
@@ -1620,18 +1615,6 @@ export function injectGtmAndTracking(html, relPath = '') {
       );
     } else if (/<head[^>]*>/i.test(html)) {
       html = html.replace(/(<head[^>]*>)/i, `$1\n    ${META_PIXEL_SNIPPET}`);
-    }
-  }
-
-  if (!html.includes(`googletagmanager.com/ns.html?id=${GTM_ID}`)) {
-    if (/<body[^>]*>/i.test(html)) {
-      html = html.replace(/(<body[^>]*>)/i, `$1\n    ${GTM_NOSCRIPT_SNIPPET}\n`);
-    }
-  }
-
-  if (!html.includes(`facebook.com/tr?id=${TRACKING.META_PIXEL_ID}`)) {
-    if (/<body[^>]*>/i.test(html)) {
-      html = html.replace(/(<body[^>]*>)/i, `$1\n    ${META_PIXEL_NOSCRIPT}\n`);
     }
   }
 
@@ -2270,20 +2253,8 @@ export function isRedirectTransitionPage(relPath) {
 
 /**
  * Patient intake / scheduling / health-info entry surfaces.
- * No Meta Pixel, GTM, or marketing analytics on these (CIPA / health-intake risk).
- * Marketing pages keep standard analytics.
+ * Defined in data/tracking-buckets.mjs. Re-exported above.
  */
-export function isPatientCareFlowPage(relPath) {
-  const p = String(relPath || '').replace(/^\.\//, '');
-  return (
-    /^intake(\/|$)/i.test(p) ||
-    /^book-appointment\.html$/i.test(p) ||
-    /^redirect\//i.test(p) ||
-    /^adhd-screening\.html$/i.test(p) ||
-    /^adhd-screening-results\.html$/i.test(p) ||
-    /^online-adhd-test\.html$/i.test(p)
-  );
-}
 
 /** Google Ads / minimal landing pages — skip full nav/footer injection */
 export function isAdsLandingPage(relPath, html = '') {
