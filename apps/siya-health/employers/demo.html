@@ -329,6 +329,15 @@ else boot();
       <button type="button" id="demo-play" aria-pressed="false">Play</button>
     </div>
     </div>
+    <div class="demo-intro" id="demo-intro" hidden>
+      <canvas class="demo-intro-dots" id="demo-intro-dots" aria-hidden="true"></canvas>
+      <button type="button" class="demo-intro-skip" id="demo-intro-skip">Skip intro</button>
+      <div class="demo-intro-copy">
+        <p class="demo-intro-name" id="demo-intro-name"></p>
+        <p class="demo-intro-line" id="demo-intro-line">An integrated care experience for <span class="siya-em">busy professionals</span>.</p>
+      </div>
+    </div>
+    <button type="button" id="demo-mute" class="demo-mute" aria-pressed="false" aria-label="Mute sound">Mute</button>
     <script src="/scripts/employer-demo.js" defer></script>
   </body>
 </html>

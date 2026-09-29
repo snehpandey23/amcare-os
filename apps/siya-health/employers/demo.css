@@ -23,8 +23,9 @@ html:has(.page-employer-demo) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem;
   min-height: 3.75rem;
+  padding-right: 5.25rem;
 }
 
 .demo-kicker {
@@ -92,6 +93,7 @@ body.page-employer-demo .demo-stage > main {
   inset: 0;
   display: none;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
   padding: 0.75rem 1rem 0.5rem;
 }
@@ -493,4 +495,117 @@ html:not(.demo-js) body.page-employer-demo .demo-slide {
 html:not(.demo-js) body.page-employer-demo [data-demo-in] {
   opacity: 1;
   transform: none;
+}
+
+.demo-mute {
+  position: fixed;
+  z-index: 50;
+  top: 0.7rem;
+  right: 0.75rem;
+  font: inherit;
+  font-size: 0.85rem;
+  line-height: 1;
+  border-radius: 999px;
+  border: 1px solid #001878;
+  background: #F4EFE7;
+  color: #001878;
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+}
+
+.demo-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: #001878;
+  color: #0A246B;
+  overflow: hidden;
+  transition: background-color 0.8s ease;
+}
+
+.demo-intro.is-cream {
+  background: #F4EFE7;
+}
+
+.demo-intro[hidden] {
+  display: none;
+}
+
+.demo-intro-dots {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.demo-intro-skip {
+  position: absolute;
+  z-index: 2;
+  top: 0.85rem;
+  left: 0.85rem;
+  font: inherit;
+  font-size: 0.95rem;
+  color: #F4EFE7;
+  background: transparent;
+  border: 0;
+  padding: 0.35rem 0.15rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.demo-intro.is-cream .demo-intro-skip {
+  color: #001878;
+}
+
+.demo-intro-copy {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 1.25rem;
+  pointer-events: none;
+}
+
+.demo-intro-name {
+  margin: 0;
+  min-height: 1.15em;
+  font-family: Poppins, Inter, sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #0A246B;
+}
+
+.demo-intro-line {
+  margin: 0.65rem 0 0;
+  max-width: 18em;
+  font-family: Poppins, Inter, sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: #0A246B;
+  clip-path: inset(0 100% 0 0);
+}
+
+.demo-intro.is-line .demo-intro-line {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.8s ease;
+}
+
+.demo-intro .siya-em {
+  animation: none !important;
+  white-space: nowrap;
+}
+
+@media (min-width: 900px) {
+  .demo-intro-name { font-size: 3.25rem; }
+  .demo-intro-line { font-size: 2rem; }
 }

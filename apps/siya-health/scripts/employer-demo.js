@@ -177,7 +177,8 @@
       event.stopPropagation();
       pause();
       track('tour_start');
-      show(1, false);
+      if (reduce || introSeen()) show(1, false);
+      else beginIntro();
     });
   }
   if (stage) {
@@ -197,6 +198,181 @@
     pause();
     show(event.key === 'ArrowRight' || event.key === 'ArrowDown' ? current + 1 : current - 1, false);
   });
+
+  var intro = document.getElementById('demo-intro');
+  var introSkip = document.getElementById('demo-intro-skip');
+  var introName = document.getElementById('demo-intro-name');
+  var introCanvas = document.getElementById('demo-intro-dots');
+  var muteBtn = document.getElementById('demo-mute');
+  var muted = false;
+  var introRunning = false;
+  var introFrame = 0;
+  var introClock = 0;
+  var chimeTimer = 0;
+  var nameTimer = 0;
+  var SEEN_KEY = 'siya_demo_intro_seen';
+  var NAME = 'Siya Health';
+  var DOT_COLORS = ['#D81088', '#A81490', '#7B2D8E', '#001878'];
+
+  function introSeen() {
+    try { return localStorage.getItem(SEEN_KEY) === '1'; }
+    catch (err) { return false; }
+  }
+
+  function markIntroSeen() {
+    try { localStorage.setItem(SEEN_KEY, '1'); }
+    catch (err) { /* private mode */ }
+  }
+
+  function stopChimeTimers() {
+    window.clearTimeout(chimeTimer);
+    window.clearTimeout(nameTimer);
+    window.clearTimeout(introClock);
+    chimeTimer = 0;
+    nameTimer = 0;
+    introClock = 0;
+  }
+
+  function playChime() {
+    if (muted || !introRunning || !window.AudioContext) return;
+    var ctx = new window.AudioContext();
+    var now = ctx.currentTime;
+    [523.25, 659.25, 783.99].forEach(function (freq, i) {
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      var start = now + i * 0.09;
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.exponentialRampToValueAtTime(0.045, start + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.7);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(start);
+      osc.stop(start + 0.75);
+    });
+    window.setTimeout(function () { ctx.close(); }, 1600);
+  }
+
+  function closeIntro(advance) {
+    introRunning = false;
+    window.cancelAnimationFrame(introFrame);
+    introFrame = 0;
+    stopChimeTimers();
+    if (intro) {
+      intro.hidden = true;
+      intro.classList.remove('is-cream', 'is-line');
+    }
+    if (advance) show(1, false);
+  }
+
+  function beginIntro() {
+    if (!intro || !introCanvas) {
+      show(1, false);
+      return;
+    }
+    markIntroSeen();
+    introRunning = true;
+    intro.hidden = false;
+    intro.classList.remove('is-cream', 'is-line');
+    if (introName) introName.textContent = '';
+    var dots = [];
+    var i;
+    for (i = 0; i < 22; i += 1) {
+      dots.push({
+        x: Math.random(),
+        y: Math.random(),
+        vx: (Math.random() - 0.5) * 0.018,
+        vy: (Math.random() - 0.5) * 0.014,
+        r: 5 + Math.random() * 9,
+        color: DOT_COLORS[i % DOT_COLORS.length],
+        alpha: 0.28 + (i % 4) * 0.16
+      });
+    }
+    var ctx = introCanvas.getContext('2d');
+    var started = performance.now();
+    var chimed = false;
+    function frame(now) {
+      if (!introRunning) return;
+      var t = now - started;
+      var w = intro.clientWidth;
+      var h = intro.clientHeight;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      if (introCanvas.width !== Math.round(w * dpr) || introCanvas.height !== Math.round(h * dpr)) {
+        introCanvas.width = Math.round(w * dpr);
+        introCanvas.height = Math.round(h * dpr);
+      }
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+      var gather = t < 1500 ? 0 : Math.min(1, (t - 1500) / 900);
+      gather = gather * gather * (3 - 2 * gather);
+      var fade = t < 2900 ? 1 : Math.max(0, 1 - (t - 2900) / 500);
+      if (t >= 2000) intro.classList.add('is-cream');
+      dots.forEach(function (dot) {
+        if (gather <= 0) {
+          dot.x += dot.vx * 0.35;
+          dot.y += dot.vy * 0.35;
+          if (dot.x < 0.05 || dot.x > 0.95) dot.vx *= -1;
+          if (dot.y < 0.08 || dot.y > 0.92) dot.vy *= -1;
+        }
+        var x = (dot.x + (0.5 - dot.x) * gather) * w;
+        var y = (dot.y + (0.5 - dot.y) * gather) * h;
+        ctx.beginPath();
+        ctx.fillStyle = dot.color;
+        ctx.globalAlpha = dot.alpha * fade;
+        ctx.shadowColor = dot.color;
+        ctx.shadowBlur = 18;
+        ctx.arc(x, y, dot.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
+      if (!chimed && gather >= 1) {
+        chimed = true;
+        playChime();
+      }
+      if (t < 4700) introFrame = window.requestAnimationFrame(frame);
+    }
+    introFrame = window.requestAnimationFrame(frame);
+    nameTimer = window.setTimeout(function () {
+      var step = 0;
+      function typeName() {
+        if (!introRunning || !introName) return;
+        step += 1;
+        introName.textContent = NAME.slice(0, step);
+        if (step < NAME.length) nameTimer = window.setTimeout(typeName, 64);
+        else {
+          intro.classList.add('is-line');
+          introClock = window.setTimeout(function () {
+            if (introRunning) closeIntro(true);
+          }, 1500);
+        }
+      }
+      typeName();
+    }, 2700);
+  }
+
+  if (muteBtn) {
+    muteBtn.addEventListener('click', function (event) {
+      event.stopPropagation();
+      muted = !muted;
+      muteBtn.setAttribute('aria-pressed', muted ? 'true' : 'false');
+      muteBtn.textContent = muted ? 'Muted' : 'Mute';
+      muteBtn.setAttribute('aria-label', muted ? 'Unmute sound' : 'Mute sound');
+    });
+  }
+  if (introSkip) {
+    introSkip.addEventListener('click', function (event) {
+      event.stopPropagation();
+      markIntroSeen();
+      closeIntro(true);
+    });
+  }
+  if (intro) {
+    intro.addEventListener('click', function (event) {
+      event.stopPropagation();
+    });
+  }
 
   var touchX = 0;
   var touchY = 0;
