@@ -120,33 +120,51 @@ else boot();
     </header>
     <div class="demo-stage" id="demo-stage">
     <main id="main">
-      <section class="demo-slide" id="welcome" data-demo-chapter="welcome" aria-labelledby="demo-welcome-heading">
+      <section class="demo-slide" id="welcome" data-demo-chapter="welcome" data-title="Welcome" data-fx="dissolve" aria-labelledby="demo-welcome-heading">
         <div class="container demo-slide-inner">
-          <p class="demo-kicker" data-demo-in="up" style="--demo-i:0">Welcome — a 2-minute tour for HR and benefits leaders.</p>
-          <h1 id="demo-welcome-heading" data-demo-in="up" style="--demo-i:1">Siya Health. An integrated care experience for <span class="siya-em">busy professionals</span>.</h1>
+          <p class="demo-kicker" data-demo-in="up" style="--demo-i:0">A 2-minute tour for HR and benefits leaders</p>
+          <h1 id="demo-welcome-heading" data-demo-in="up" style="--demo-i:1">Siya Health — an integrated care experience for <span class="siya-em">busy professionals</span>.</h1>
           <p data-demo-in="up" style="--demo-i:2"><button type="button" class="demo-open" id="demo-start-tour">Start the tour</button></p>
         </div>
       </section>
 
-      <section class="demo-slide" id="problem" data-demo-chapter="problem" aria-labelledby="demo-problem-heading">
-        <div class="container demo-slide-inner">
-          <h2 id="demo-problem-heading" data-demo-in="left" style="--demo-i:0">The problem</h2>
-          <ul class="demo-lines">
-            <li data-demo-in="left" style="--demo-i:1">Appointments that don&rsquo;t fit a workday</li>
-            <li data-demo-in="left" style="--demo-i:2">Messages that go unanswered for days</li>
-            <li data-demo-in="left" style="--demo-i:3">Five apps, five logins, no one connecting the dots</li>
-            <li data-demo-in="left" style="--demo-i:4">Care that starts over with every new provider</li>
+      <section class="demo-slide" id="problem" data-demo-chapter="problem" data-title="The problem" data-fx="zoom" aria-labelledby="demo-problem-heading">
+        <div class="container demo-slide-inner demo-infographic">
+          <h2 id="demo-problem-heading" class="demo-sr" data-demo-in="up">The problem</h2>
+          <ul class="demo-info-grid">
+            <li data-demo-in="zoom" style="--demo-i:0">
+              <span class="demo-clock" aria-hidden="true"><span class="demo-clock-work"></span><span class="demo-clock-face"></span></span>
+              <p data-demo-in="up" style="--demo-i:3">Appointments that don&rsquo;t fit a workday</p>
+            </li>
+            <li data-demo-in="zoom" style="--demo-i:1">
+              <span class="demo-bubble-stamp" aria-hidden="true">Seen · 3 days ago</span>
+              <p data-demo-in="up" style="--demo-i:4">Messages that go unanswered for days</p>
+            </li>
+            <li data-demo-in="zoom" style="--demo-i:2">
+              <span class="demo-tangle" aria-hidden="true">
+                <svg viewBox="0 0 160 72" aria-hidden="true"><path d="M16 20 C 40 60, 70 8, 96 40 S 130 10, 148 36" fill="none" stroke="#001878" stroke-width="1.5"/><path d="M20 50 C 50 10, 80 64, 110 24 S 140 58, 152 18" fill="none" stroke="#D81088" stroke-width="1.5"/></svg>
+                <span></span><span></span><span></span><span></span><span></span>
+              </span>
+              <p data-demo-in="up" style="--demo-i:5">Five apps, five logins, no one connecting the dots</p>
+            </li>
           </ul>
         </div>
       </section>
 
-      <section class="demo-slide" id="thesis" data-demo-chapter="thesis" aria-labelledby="demo-thesis-heading">
+      <section class="demo-slide" id="question" data-demo-chapter="question" data-title="The question" data-fx="dissolve" aria-labelledby="demo-question-heading">
+        <div class="container demo-slide-inner">
+          <h2 id="demo-question-heading" data-demo-in="up" style="--demo-i:0">You&rsquo;ve invested in great health coverage for your people.</h2>
+          <p class="demo-question-punch" data-demo-in="up" style="--demo-i:5">But can they actually use it?</p>
+        </div>
+      </section>
+
+      <section class="demo-slide demo-parked" id="thesis" data-demo-chapter="thesis" aria-labelledby="demo-thesis-heading">
         <div class="container demo-slide-inner">
           <h2 id="demo-thesis-heading" data-demo-in="up" style="--demo-i:0">Most people don&rsquo;t lack health coverage. They lack care they can <span class="siya-em">actually use</span>.</h2>
         </div>
       </section>
 
-      <section class="demo-slide" id="start" data-demo-chapter="start" aria-labelledby="demo-start-heading">
+      <section class="demo-slide demo-parked" id="start" data-demo-chapter="start" aria-labelledby="demo-start-heading">
         <div class="container demo-slide-inner">
           <h2 id="demo-start-heading" data-demo-in="up" style="--demo-i:0">Start however works for you</h2>
           <p class="demo-lead" data-demo-in="up" style="--demo-i:1">Not everyone wants another app. Choose the way that suits you — it all reaches the same care team.</p>
@@ -190,7 +208,7 @@ else boot();
         </div>
       </section>
 
-      <section class="demo-slide" id="chat" data-demo-chapter="chat" aria-labelledby="demo-chat-heading">
+      <section class="demo-slide demo-parked" id="chat" data-demo-chapter="chat" aria-labelledby="demo-chat-heading">
         <div class="container demo-slide-inner">
           <h2 id="demo-chat-heading" data-demo-in="left" style="--demo-i:0">Secure chat</h2>
           <p class="demo-label" data-demo-in="left" style="--demo-i:1">Illustrative — demo data</p>
@@ -211,7 +229,7 @@ else boot();
         </div>
       </section>
 
-      <section class="demo-slide" id="threads" data-demo-chapter="threads" aria-labelledby="demo-threads-heading">
+      <section class="demo-slide demo-parked" id="threads" data-demo-chapter="threads" aria-labelledby="demo-threads-heading">
         <div class="container demo-slide-inner">
           <ul class="demo-nodes">
             <li class="demo-node" data-demo-in="up" style="--demo-i:0">Sleep</li>
@@ -228,7 +246,7 @@ else boot();
         </div>
       </section>
 
-      <section class="demo-slide" id="curtain" data-demo-chapter="curtain" aria-labelledby="demo-curtain-heading">
+      <section class="demo-slide demo-parked" id="curtain" data-demo-chapter="curtain" aria-labelledby="demo-curtain-heading">
         <div class="container demo-slide-inner">
           <h2 id="demo-curtain-heading" data-demo-in="left" style="--demo-i:0">Behind the curtain</h2>
           <ol class="demo-sequence">
@@ -240,7 +258,7 @@ else boot();
         </div>
       </section>
 
-      <section class="demo-slide" id="founders" data-demo-chapter="founders" aria-labelledby="demo-founders-heading">
+      <section class="demo-slide demo-parked" id="founders" data-demo-chapter="founders" aria-labelledby="demo-founders-heading">
         <div class="container demo-slide-inner">
           <h2 id="demo-founders-heading" data-demo-in="up" style="--demo-i:0">Founders</h2>
           <div class="demo-founders">
@@ -260,7 +278,7 @@ else boot();
         </div>
       </section>
 
-      <section class="demo-slide" id="launch" data-demo-chapter="launch" aria-labelledby="demo-launch-heading">
+      <section class="demo-slide demo-parked" id="launch" data-demo-chapter="launch" aria-labelledby="demo-launch-heading">
         <div class="container demo-slide-inner">
           <h2 id="demo-launch-heading" data-demo-in="up" style="--demo-i:0">Launching is simple</h2>
           <ol class="demo-sequence">
@@ -272,7 +290,7 @@ else boot();
         </div>
       </section>
 
-      <section class="demo-slide" id="safety" data-demo-chapter="safety" aria-labelledby="demo-safety-heading">
+      <section class="demo-slide demo-parked" id="safety" data-demo-chapter="safety" aria-labelledby="demo-safety-heading">
         <div class="container demo-slide-inner">
           <h2 id="demo-safety-heading" data-demo-in="up" style="--demo-i:0">Safety built in</h2>
           <p class="demo-lead" data-demo-in="up" style="--demo-i:1">When stimulant medication is clinically appropriate, we follow a structured safety process—not a one-visit prescription.</p>
@@ -284,7 +302,7 @@ else boot();
         </div>
       </section>
 
-      <section class="demo-slide" id="measure" data-demo-chapter="measure" aria-labelledby="demo-measure-heading">
+      <section class="demo-slide demo-parked" id="measure" data-demo-chapter="measure" aria-labelledby="demo-measure-heading">
         <div class="container demo-slide-inner">
           <h2 id="demo-measure-heading" data-demo-in="up" style="--demo-i:0">How we&rsquo;ll measure it together</h2>
           <ol class="demo-sequence">
@@ -296,7 +314,7 @@ else boot();
         </div>
       </section>
 
-      <section class="demo-slide" id="hr" data-demo-chapter="hr" aria-labelledby="demo-hr-heading">
+      <section class="demo-slide demo-parked" id="hr" data-demo-chapter="hr" aria-labelledby="demo-hr-heading">
         <div class="container demo-slide-inner">
           <h2 id="demo-hr-heading" data-demo-in="up" style="--demo-i:0">You see aggregate results. <span class="siya-em">Never who, or why.</span></h2>
           <p class="demo-lead" data-demo-in="up" style="--demo-i:1">Reports are aggregate only, for groups of 10 or more.</p>
@@ -311,7 +329,118 @@ else boot();
         </div>
       </section>
 
-      <section class="demo-slide" id="close" data-demo-chapter="close" aria-labelledby="demo-close-heading">
+      <section class="demo-slide" id="bridge" data-demo-chapter="bridge" data-title="See how care works" data-fx="fly" aria-labelledby="demo-bridge-heading">
+        <div class="container demo-slide-inner">
+          <h2 id="demo-bridge-heading" data-demo-in="right" style="--demo-i:0">See how care really works — in real time.</h2>
+        </div>
+      </section>
+
+      <section class="demo-slide" id="chooser" data-demo-chapter="chooser" data-title="How would you like to start?" data-fx="dissolve" aria-labelledby="demo-chooser-heading">
+        <div class="container demo-slide-inner">
+          <h2 id="demo-chooser-heading" data-demo-in="up" style="--demo-i:0">How would you like to start?</h2>
+          <div class="demo-doors" role="group" aria-label="How would you like to start?">
+            <button type="button" data-door="website" data-demo-in="up" style="--demo-i:1">Website</button>
+            <button type="button" data-door="call" data-demo-in="up" style="--demo-i:2">Call</button>
+            <button type="button" data-door="app" data-demo-in="up" style="--demo-i:3">Secure app</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="demo-slide" id="web-ask" data-path="website" data-title="AI concierge" data-fx="zoom" aria-labelledby="demo-web-ask-heading">
+        <div class="container demo-slide-inner">
+          <p class="demo-label">Illustrative — demo data</p>
+          <h2 id="demo-web-ask-heading" data-demo-in="up" style="--demo-i:0">Questions first? Ask our AI concierge or request a call back.</h2>
+          <figure class="demo-shot" data-demo-in="zoom" style="--demo-i:1"><img src="/employers/media/home-hero.png" alt="Siya Health homepage with the AI concierge button" /></figure>
+        </div>
+      </section>
+      <section class="demo-slide" id="web-home" data-path="website" data-title="Homepage" data-fx="zoom" aria-labelledby="demo-web-home-heading">
+        <div class="container demo-slide-inner">
+          <h2 id="demo-web-home-heading" class="demo-sr">Book Free Meet &amp; Greet</h2>
+          <figure class="demo-shot demo-shot--zoom" data-demo-in="zoom" style="--demo-i:0"><img src="/employers/media/home-hero.png" alt="Siya Health homepage" /><span class="demo-zoom-ring" aria-hidden="true"></span></figure>
+        </div>
+      </section>
+      <section class="demo-slide" id="web-book" data-path="website" data-title="Booking your free Meet &amp; Greet" data-fx="zoom">
+        <div class="container demo-slide-inner">
+          <p class="demo-kicker" data-demo-in="up">Booking your free Meet &amp; Greet</p>
+          <p class="demo-lead" data-demo-in="up" style="--demo-i:1">A short, free call to understand what you need and choose the next step. It is not a medical visit.</p>
+        </div>
+      </section>
+
+      <section class="demo-slide" id="call-tap" data-path="call" data-title="Call" data-fx="zoom">
+        <div class="container demo-slide-inner">
+          <p class="demo-label">Illustrative — demo data</p>
+          <figure class="demo-shot" data-demo-in="zoom" style="--demo-i:0"><img src="/employers/media/home-footer.png" alt="Siya Health footer with the phone number" /></figure>
+          <p class="demo-phone" data-demo-in="up" style="--demo-i:1"><a href="tel:+12154451244">(215) 445-1244</a></p>
+        </div>
+      </section>
+      <section class="demo-slide" id="call-line" data-path="call" data-title="We'll call you back" data-fx="dissolve">
+        <div class="container demo-slide-inner">
+          <p class="demo-label">Illustrative — demo data</p>
+          <h2 data-demo-in="up">We&rsquo;ll call you back during business hours to set everything up.</h2>
+        </div>
+      </section>
+
+      <section class="demo-slide" id="app-qr" data-path="app" data-title="Secure app" data-fx="fly">
+        <div class="container demo-slide-inner demo-phone-wrap">
+          <p class="demo-label">Illustrative — demo data</p>
+          <div class="demo-handset" data-demo-in="up">
+            <img src="/employers/media/secure-chat-qr.png" alt="QR code to the Siya secure chat link" width="140" height="140" />
+            <p>Scan to open secure chat</p>
+          </div>
+        </div>
+      </section>
+      <section class="demo-slide" id="app-hi" data-path="app" data-title="How can we help?" data-fx="dissolve">
+        <div class="container demo-slide-inner demo-phone-wrap">
+          <p class="demo-label">Illustrative — demo data</p>
+          <div class="demo-handset" data-demo-in="up">
+            <p class="demo-bubble demo-bubble--reply"><time>Care team</time> Hi, how can we help?</p>
+          </div>
+        </div>
+      </section>
+      <section class="demo-slide" id="app-form" data-path="app" data-title="Form" data-fx="dissolve">
+        <div class="container demo-slide-inner demo-phone-wrap">
+          <p class="demo-label">Illustrative — demo data</p>
+          <div class="demo-handset" data-demo-in="up">
+            <p class="demo-bubble demo-bubble--reply"><time>Care team</time> A short form arrived in this chat. Name, email, and what time works.</p>
+          </div>
+        </div>
+      </section>
+      <section class="demo-slide" id="app-times" data-path="app" data-title="Times offered" data-fx="dissolve">
+        <div class="container demo-slide-inner demo-phone-wrap">
+          <p class="demo-label">Illustrative — demo data</p>
+          <div class="demo-handset" data-demo-in="up">
+            <p class="demo-bubble demo-bubble--reply"><time>Care team</time> Thursday at 12:30, or Friday at 2:00.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="demo-slide" id="end-cal" data-path="shared" data-title="Your care team" data-fx="zoom">
+        <div class="container demo-slide-inner">
+          <p class="demo-label">Illustrative — demo data</p>
+          <h2 data-demo-in="up" style="--demo-i:0">Your care team</h2>
+          <div class="demo-cal" data-demo-in="up" style="--demo-i:1" aria-hidden="true">
+            <p>September</p>
+            <div class="demo-cal-grid"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span></span><span>1</span><span>2</span><span>3</span><span>4</span><span class="is-pick">5</span><span>6</span></div>
+          </div>
+        </div>
+      </section>
+      <section class="demo-slide" id="end-time" data-path="shared" data-title="Pick a time" data-fx="dissolve">
+        <div class="container demo-slide-inner">
+          <p class="demo-label">Illustrative — demo data</p>
+          <h2 data-demo-in="up">Thursday, September 5</h2>
+          <div class="demo-times" data-demo-in="up" style="--demo-i:1">
+            <span>10:30</span><span class="is-pick">12:30</span><span>2:00</span><span>4:30</span>
+          </div>
+        </div>
+      </section>
+      <section class="demo-slide" id="end-done" data-path="shared" data-title="You're booked" data-fx="dissolve">
+        <div class="container demo-slide-inner">
+          <p class="demo-label">Illustrative — demo data</p>
+          <h2 data-demo-in="up">You&rsquo;re booked. Your video visit link is in your confirmation — join from your phone or laptop.</h2>
+        </div>
+      </section>
+
+      <section class="demo-slide" id="close" data-demo-chapter="close" data-title="See it live" data-fx="zoom" aria-labelledby="demo-close-heading">
         <div class="container demo-slide-inner">
           <h2 id="demo-close-heading" data-demo-in="up" style="--demo-i:0">See it live.</h2>
           <p class="demo-lead" data-demo-in="up" style="--demo-i:1">This tour is a preview. Book a short call and we&rsquo;ll walk you through the real experience.</p>
@@ -323,18 +452,21 @@ else boot();
     </div>
     <div class="demo-controls">
       <button type="button" id="demo-back">Back</button>
-      <div class="demo-progress" id="demo-progress" role="progressbar" aria-valuemin="1" aria-valuemax="13" aria-valuenow="1" aria-label="Tour progress"><span id="demo-progress-fill"></span></div>
-      <p id="demo-counter" class="demo-counter">1 / 13</p>
+      <label class="demo-scrub" id="demo-scrub-wrap">
+        <span class="demo-scrub-tip" id="demo-scrub-tip" hidden></span>
+        <input type="range" id="demo-scrub" min="1" max="12" value="1" aria-valuemin="1" aria-valuemax="12" aria-valuenow="1" aria-label="Tour slides" />
+      </label>
+      <p id="demo-counter" class="demo-counter">1 / 12</p>
       <button type="button" id="demo-next">Next</button>
       <button type="button" id="demo-play" aria-pressed="false">Play</button>
     </div>
     </div>
-    <div class="demo-intro" id="demo-intro" hidden>
+    <div class="demo-intro is-gate" id="demo-intro" hidden>
       <canvas class="demo-intro-dots" id="demo-intro-dots" aria-hidden="true"></canvas>
-      <button type="button" class="demo-intro-skip" id="demo-intro-skip">Skip intro</button>
+      <button type="button" class="demo-intro-skip" id="demo-intro-skip">Skip</button>
+      <p class="demo-intro-gate" id="demo-intro-gate">Click to begin</p>
       <div class="demo-intro-copy">
         <p class="demo-intro-name" id="demo-intro-name"></p>
-        <p class="demo-intro-line" id="demo-intro-line">An integrated care experience for <span class="siya-em">busy professionals</span>.</p>
       </div>
     </div>
     <button type="button" id="demo-mute" class="demo-mute" aria-pressed="false" aria-label="Mute sound">Mute</button>

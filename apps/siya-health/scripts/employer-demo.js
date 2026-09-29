@@ -5,13 +5,23 @@
  */
 (function () {
   document.documentElement.classList.add('demo-js');
-  var slides = Array.prototype.slice.call(document.querySelectorAll('.demo-slide'));
+  var allSlides = Array.prototype.slice.call(document.querySelectorAll('.demo-slide:not(.demo-parked)'));
+  var activePath = 'website';
+  function sequence() {
+    return allSlides.filter(function (slide) {
+      var path = slide.getAttribute('data-path');
+      return !path || path === 'shared' || path === activePath;
+    });
+  }
+  var slides = sequence();
   var back = document.getElementById('demo-back');
   var next = document.getElementById('demo-next');
   var play = document.getElementById('demo-play');
   var counter = document.getElementById('demo-counter');
   var progress = document.getElementById('demo-progress');
   var fill = document.getElementById('demo-progress-fill');
+  var scrub = document.getElementById('demo-scrub');
+  var scrubTip = document.getElementById('demo-scrub-tip');
   var stage = document.getElementById('demo-stage');
   var startTour = document.getElementById('demo-start-tour');
   var seen = Object.create(null);
@@ -62,6 +72,14 @@
     if (counter) counter.textContent = n + ' / ' + slides.length;
     if (progress) progress.setAttribute('aria-valuenow', String(n));
     if (fill) fill.style.width = (n / slides.length) * 100 + '%';
+    if (scrub) {
+      scrub.max = String(slides.length);
+      scrub.value = String(n);
+      scrub.setAttribute('aria-valuemax', String(slides.length));
+      scrub.setAttribute('aria-valuenow', String(n));
+      var title = slides[index].getAttribute('data-title') || '';
+      scrub.setAttribute('aria-valuetext', title);
+    }
     if (back) back.disabled = index === 0;
     if (next) next.disabled = index === slides.length - 1;
     if (!seen[n]) {
@@ -116,6 +134,25 @@
     if (!fromHistory) writeHash(index, false);
   }
 
+  function stepBack() {
+    var slide = slides[current];
+    var path = slide && slide.getAttribute('data-path');
+    var first = -1;
+    var i;
+    for (i = 0; i < slides.length; i += 1) {
+      if (slides[i].getAttribute('data-path') === activePath) { first = i; break; }
+    }
+    if (path && path !== 'shared' && current === first) {
+      activePath = 'website';
+      slides = sequence();
+      var chooser = 0;
+      for (i = 0; i < slides.length; i += 1) if (slides[i].id === 'chooser') chooser = i;
+      show(chooser, false);
+      return;
+    }
+    show(current - 1, false);
+  }
+
   function pause() {
     playing = false;
     window.clearInterval(timer);
@@ -155,7 +192,7 @@
     back.addEventListener('click', function (event) {
       event.stopPropagation();
       pause();
-      show(current - 1, false);
+      stepBack();
     });
   }
   if (next) {
@@ -196,7 +233,8 @@
     if (tag === 'INPUT' || tag === 'TEXTAREA') return;
     event.preventDefault();
     pause();
-    show(event.key === 'ArrowRight' || event.key === 'ArrowDown' ? current + 1 : current - 1, false);
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') show(current + 1, false);
+    else stepBack();
   });
 
   var intro = document.getElementById('demo-intro');
@@ -390,13 +428,48 @@
       var dy = t.clientY - touchY;
       if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
       pause();
-      show(dx < 0 ? current + 1 : current - 1, false);
+      if (dx < 0) show(current + 1, false);
+      else stepBack();
     }, { passive: true });
   }
 
   document.addEventListener('visibilitychange', function () {
     if (document.visibilityState === 'hidden') pause();
   });
+
+  document.querySelectorAll('[data-door]').forEach(function (button) {
+    button.addEventListener('click', function (event) {
+      event.stopPropagation();
+      pause();
+      activePath = button.getAttribute('data-door') || 'website';
+      slides = sequence();
+      var idx = 0;
+      var i;
+      for (i = 0; i < slides.length; i += 1) {
+        if (slides[i].getAttribute('data-path') === activePath) { idx = i; break; }
+      }
+      show(idx, false);
+    });
+  });
+  if (scrub) {
+    scrub.addEventListener('input', function (event) {
+      event.stopPropagation();
+      pause();
+      show(Number(scrub.value) - 1, false);
+    });
+    var wrap = document.getElementById('demo-scrub-wrap');
+    if (wrap) {
+      wrap.addEventListener('pointermove', function (event) {
+        if (!scrubTip) return;
+        var rect = scrub.getBoundingClientRect();
+        var ratio = rect.width ? (event.clientX - rect.left) / rect.width : 0;
+        var idx = Math.min(slides.length - 1, Math.max(0, Math.round(ratio * (slides.length - 1))));
+        scrubTip.hidden = false;
+        scrubTip.textContent = slides[idx].getAttribute('data-title') || '';
+      });
+      wrap.addEventListener('pointerleave', function () { if (scrubTip) scrubTip.hidden = true; });
+    }
+  }
 
   var startChoices = document.querySelectorAll('[data-start-choice]');
   startChoices.forEach(function (button) {
