@@ -27,6 +27,8 @@ function shouldSkipRel(rel) {
   if (rel.startsWith('previews/') || rel.includes('/previews/')) return true;
   if (/^preview-home/i.test(path.basename(rel))) return true;
   if (path.basename(rel) === 'homepage2.html') return true;
+  // Internal proof page redirected home. Its media lives under ignored previews/.
+  if (path.basename(rel) === 'homepage2-audit.html') return true;
   return false;
 }
 
