@@ -52,11 +52,14 @@
 
   function paint(index) {
     current = index;
+    allSlides.forEach(function (slide) {
+      slide.classList.remove('is-active', 'is-in');
+      slide.hidden = true;
+    });
     slides.forEach(function (slide, i) {
-      var on = i === index;
-      slide.classList.toggle('is-active', on);
-      slide.hidden = !on;
-      slide.classList.remove('is-in');
+      if (i !== index) return;
+      slide.hidden = false;
+      slide.classList.add('is-active');
     });
     var slide = slides[index];
     if (reduce) {
