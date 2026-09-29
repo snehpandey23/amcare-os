@@ -180,8 +180,14 @@
     }, 8000);
   }
 
-  paint(indexFromHash());
-  writeHash(current, true);
+  if (reduce) {
+    var gate = document.getElementById('demo-intro');
+    if (gate) gate.hidden = true;
+    paint(0);
+    writeHash(0, true);
+  } else {
+    paint(0);
+  }
 
   window.addEventListener('popstate', function () {
     pause();
@@ -214,8 +220,7 @@
       event.stopPropagation();
       pause();
       track('tour_start');
-      if (reduce || introSeen()) show(1, false);
-      else beginIntro();
+      show(current === 0 ? 1 : current + 1, false);
     });
   }
   if (stage) {
@@ -301,7 +306,7 @@
       intro.hidden = true;
       intro.classList.remove('is-cream', 'is-line');
     }
-    if (advance) show(1, false);
+    if (advance) show(0, false);
   }
 
   function beginIntro() {
@@ -309,10 +314,9 @@
       show(1, false);
       return;
     }
-    markIntroSeen();
     introRunning = true;
     intro.hidden = false;
-    intro.classList.remove('is-cream', 'is-line');
+    intro.classList.remove('is-gate', 'is-cream', 'is-line');
     if (introName) introName.textContent = '';
     var dots = [];
     var i;
@@ -402,13 +406,15 @@
   if (introSkip) {
     introSkip.addEventListener('click', function (event) {
       event.stopPropagation();
-      markIntroSeen();
       closeIntro(true);
     });
   }
   if (intro) {
     intro.addEventListener('click', function (event) {
+      if (event.target.closest('#demo-intro-skip, #demo-mute')) return;
       event.stopPropagation();
+      if (!intro.classList.contains('is-gate') || introRunning) return;
+      beginIntro();
     });
   }
 
