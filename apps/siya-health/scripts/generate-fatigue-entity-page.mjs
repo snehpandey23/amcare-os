@@ -23,7 +23,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 import { renderDifferentialSection } from '../data/differential-diagnosis.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -214,7 +214,7 @@ function render() {
 
     <main id="main">
       <!-- HERO — recognition first; the page's single primary CTA lives here -->
-      <section class="hero-merged" style="background-image: url('/assets/images/healthy-lifestyle.png');">
+      <section class="hero-merged hero-merged--abstract">
         <div class="container hero-inner">
           <div class="hero-merged-content">
             <p class="hero-state-line"><a href="/primary-care">Primary Care</a> &middot; Symptom guide</p>
@@ -311,7 +311,7 @@ ${renderDifferentialSection('fatigue')}
             <li><strong>Vitamin B12 and vitamin D</strong> &mdash; nutrient shortfalls that can present as fatigue and fog (<a href="/labs/vitamin-b12">vitamin B12</a>)</li>
             <li><strong>Metabolic panel and A1c</strong> &mdash; kidney, liver, electrolyte, and blood-sugar context (<a href="/labs/a1c-blood-sugar">A1c &amp; blood sugar</a>)</li>
           </ul>
-          <p>Results need interpretation more than they need collection. A value inside the reference range can still be wrong for you, and a mild flag can be meaningless&mdash;which is why <a href="/answers/why-normal-labs-dont-mean-healthy">normal labs do not automatically mean healthy</a>. If you want the fuller picture of fatigue-related testing, the <a href="/labs/fatigue-brain-fog">fatigue and brain fog labs</a> guide goes deeper.</p>
+          <p>Results need interpretation more than they need collection. A value inside the reference range can still be wrong for you, and a mild flag can be meaningless&mdash;which is why <a href="/answers/why-normal-labs-dont-mean-healthy">normal labs do not automatically mean healthy</a>. If you want the fuller picture of fatigue-related testing, the <a href="/labs#labs-fatigue">fatigue and brain fog labs</a> guide goes deeper.</p>
         </div>
       </section>
 
@@ -364,11 +364,7 @@ ${faqAccordion(FAQS, 'faq-fatigue')}
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p><a href="/primary-urgent-care">Primary &amp; Urgent Care</a> &middot; &copy; 2026 Siya Health Inc.</p>
-      </div>
-    </footer>
+${H2_COMPACT_FOOTER}
   </body>
 </html>
 `;

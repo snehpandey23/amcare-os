@@ -11,7 +11,7 @@ import {
   ADHD_EVALUATION_199_LINK,
 } from '../data/providers-core.mjs';
 import { COPY_STANDARDS } from '../data/site-standards.mjs';
-import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -106,6 +106,7 @@ function renderPage(page) {
         <p class="cta-microcopy">If you are not redirected automatically, use the button above.</p>
       </div>
     </main>
+    ${H2_COMPACT_FOOTER}
   </body>
 </html>
 `;

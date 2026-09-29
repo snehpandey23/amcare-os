@@ -160,7 +160,7 @@ export const LABS_TOPIC_PAGES = [
       { href: '/blog/perimenopause-brain-fog', label: 'Perimenopause & brain fog' },
       { href: '/labs/iron-ferritin', label: 'Iron & ferritin testing' },
       { href: '/labs/thyroid', label: 'Thyroid testing' },
-      { href: '/labs/fatigue-brain-fog', label: 'Fatigue & brain fog labs' },
+      { href: '/labs#labs-fatigue', label: 'Fatigue & brain fog labs' },
     ],
     faqs: [
       {
@@ -378,7 +378,7 @@ export const LABS_TOPIC_PAGES = [
     relatedServices: [
       { href: '/adhd-care', label: 'Adult ADHD care' },
       { href: '/adhd-screening', label: 'Free ADHD screening' },
-      { href: '/labs/fatigue-brain-fog', label: 'Fatigue & brain fog labs' },
+      { href: '/labs#labs-fatigue', label: 'Fatigue & brain fog labs' },
       { href: '/labs/iron-ferritin', label: 'Iron & ferritin testing' },
     ],
     relatedGuides: [

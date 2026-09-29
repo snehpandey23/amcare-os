@@ -21,7 +21,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -198,7 +198,7 @@ function render() {
     </header>
 
     <main id="main">
-      <section class="hero-merged" style="background-image: url('/assets/images/concierge-care-v2.jpg');">
+      <section class="hero-merged hero-merged--abstract">
         <div class="container hero-inner">
           <div class="hero-merged-content">
             <p class="hero-state-line">Root of care &middot; Physician-led telehealth</p>
@@ -277,7 +277,7 @@ function render() {
             <h2 id="prevention-and-labs-heading">Prevention and labs</h2>
             <p class="lead">Screenings and markers make sense inside a relationship&mdash;not as a shopping cart.</p>
           </div>
-          <p><a href="/preventive-care">Preventive care</a> owns the forward-looking frame. <a href="/labs/preventive">Preventive labs</a> and marker guides such as <a href="/labs/cbc">CBC</a>, <a href="/labs/thyroid">TSH</a>, and <a href="/labs/vitamin-b12">B12</a> explain what tests broadly measure without interpreting your portal PDF.</p>
+          <p><a href="/preventive-care">Preventive care</a> owns the forward-looking frame. <a href="/labs#labs-preventive">Preventive labs</a> and marker guides such as <a href="/labs/cbc">CBC</a>, <a href="/labs/thyroid">TSH</a>, and <a href="/labs/vitamin-b12">B12</a> explain what tests broadly measure without interpreting your portal PDF.</p>
           <p>Bring results back to primary care when you need meaning, not just numbers. See <a href="/labs/how-to-read-results">how to read lab results</a> and <a href="/answers/why-normal-labs-dont-mean-healthy">why normal labs don&rsquo;t mean healthy</a>.</p>
         </div>
       </section>
@@ -336,11 +336,7 @@ ${faqAccordion(FAQS, 'faq-primary-care')}
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p><a href="/primary-care">Primary Care</a> &middot; &copy; 2026 Siya Health Inc.</p>
-      </div>
-    </footer>
+${H2_COMPACT_FOOTER}
   </body>
 </html>
 `;

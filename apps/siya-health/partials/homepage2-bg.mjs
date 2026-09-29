@@ -4,6 +4,10 @@
  */
 export const H2_SURFACE_CLASS = 'siya-h2-surface';
 
+/** Empty mount. scripts/h2-footer.js is the only footer content. */
+export const H2_COMPACT_FOOTER = `<footer class="footer siya-h2-footer-compact" id="siya-h2-footer"></footer>
+<script src="/scripts/h2-footer.js"></script>`;
+
 export const H2_SURFACE_STYLESHEET =
   '<link rel="stylesheet" href="/design-system/h2-surface.css" />';
 

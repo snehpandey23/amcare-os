@@ -51,8 +51,8 @@ const BRIDGE_PATHS = [
   '/primary-urgent-care',
   '/telehealth',
   '/labs',
-  '/labs/preventive',
-  '/labs/fatigue-brain-fog',
+  '/labs#labs-preventive',
+  '/labs#labs-fatigue',
 ];
 
 const REACHABILITY_NODES = [...new Set([...CANONICAL_PATHS, ...BRIDGE_PATHS])];

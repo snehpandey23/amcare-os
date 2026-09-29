@@ -142,13 +142,19 @@ function primaryNavIsSparse(navHtml = '') {
   return !/href="\/adhd-care"/i.test(navHtml);
 }
 
+function stripRetiredNavAnchors(navHtml) {
+  return navHtml
+    .replace(new RegExp(`\\s*<a href="${NAV_MENS_HEALTH.path}">[^<]*</a>`, 'gi'), '')
+    .replace(new RegExp(`\\s*<a href="${NAV_PROVIDERS.path}">[^<]*</a>`, 'gi'), '')
+    .replace(/\s*<a href="\/providers">[^<]*<\/a>/gi, '')
+    .replace(new RegExp(`\\s*<a href="${NAV_JOIN_OUR_TEAM.path}">[^<]*</a>`, 'gi'), '');
+}
+
+/** Nav only. A page-wide strip was deleting body links and leaving empty <strong> wrappers. */
 function normalizeProviderCareersNav(html) {
-  html = html.replace(new RegExp(`\\s*<a href="${NAV_MENS_HEALTH.path}">[^<]*</a>`, 'gi'), '');
-  html = html.replace(new RegExp(`\\s*<a href="${NAV_PROVIDERS.path}">[^<]*</a>`, 'gi'), '');
-  html = html.replace(/\s*<a href="\/providers">[^<]*<\/a>/gi, '');
-  // Careers / Join Our Team: footer only — strip from primary + mobile nav if present.
-  html = html.replace(new RegExp(`\\s*<a href="${NAV_JOIN_OUR_TEAM.path}">[^<]*</a>`, 'gi'), '');
-  return html;
+  return html
+    .replace(/<nav class="nav-center"[\s\S]*?<\/nav>/gi, (nav) => stripRetiredNavAnchors(nav))
+    .replace(/<div class="nav-mobile">[\s\S]*?<\/div>/gi, (nav) => stripRetiredNavAnchors(nav));
 }
 
 function injectSparsePrimaryNav(html) {
@@ -318,15 +324,15 @@ export const ANCHOR_LABELS = {
   '/answers': 'Browse all health guides',
   '/primary-urgent-care': 'Primary and urgent telehealth care',
   '/labs': 'Labs & blood tests',
-  '/labs/fatigue-brain-fog': 'Fatigue & brain fog labs',
+  '/labs#labs-fatigue': 'Fatigue & brain fog labs',
   '/labs/iron-ferritin': 'Iron & ferritin testing',
   '/labs/thyroid': 'Thyroid testing',
   '/labs/a1c-blood-sugar': 'A1c & blood sugar testing',
-  '/labs/womens-midlife': "Women's midlife labs",
-  '/labs/mens-health': "Men's health labs",
+  '/labs#labs-womens': "Women's midlife labs",
+  '/labs#labs-mens': "Men's health labs",
   '/labs/vitamin-b12': 'Vitamin B12 testing',
-  '/labs/preventive': 'Preventive labs',
-  '/labs/adhd-support': 'Labs & ADHD evaluation support',
+  '/labs#labs-preventive': 'Preventive labs',
+  '/labs#labs-adhd': 'Labs & ADHD evaluation support',
   '/prescriptions': 'Online prescription services',
   '/blog/food-noise-and-glp-1-what-it-means-and-what-helps': 'Food noise and GLP-1 guide',
   '/blog/insulin-resistance-and-weight-loss-clinician-overview': 'Insulin resistance and weight loss',

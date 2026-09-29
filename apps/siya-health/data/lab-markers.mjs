@@ -61,7 +61,7 @@ export const LAB_MARKER_PAGES = [
     ],
     relatedSymptoms: [
       { href: '/fatigue', label: 'Fatigue' },
-      { href: '/labs/fatigue-brain-fog', label: 'Fatigue & brain fog labs overview' },
+      { href: '/labs#labs-fatigue', label: 'Fatigue & brain fog labs overview' },
     ],
     relatedServices: [
       { href: '/preventive-care', label: 'Preventive care' },
@@ -72,7 +72,7 @@ export const LAB_MARKER_PAGES = [
       { href: '/labs/iron-ferritin', label: 'Iron & ferritin' },
       { href: '/labs/vitamin-b12', label: 'Vitamin B12' },
       { href: '/labs/cmp', label: 'CMP' },
-      { href: '/labs/preventive', label: 'Preventive labs overview' },
+      { href: '/labs#labs-preventive', label: 'Preventive labs overview' },
     ],
     faqs: [
       {
@@ -138,7 +138,7 @@ export const LAB_MARKER_PAGES = [
       { href: '/labs/a1c-blood-sugar', label: 'HbA1c & blood sugar' },
       { href: '/labs/lipid-panel', label: 'Lipid panel' },
       { href: '/labs/cbc', label: 'CBC' },
-      { href: '/labs/preventive', label: 'Preventive labs overview' },
+      { href: '/labs#labs-preventive', label: 'Preventive labs overview' },
     ],
     faqs: [
       {
@@ -203,7 +203,7 @@ export const LAB_MARKER_PAGES = [
     relatedLabs: [
       { href: '/labs/a1c-blood-sugar', label: 'HbA1c & blood sugar' },
       { href: '/labs/cmp', label: 'CMP' },
-      { href: '/labs/preventive', label: 'Preventive labs overview' },
+      { href: '/labs#labs-preventive', label: 'Preventive labs overview' },
     ],
     faqs: [
       {
@@ -268,7 +268,7 @@ export const LAB_MARKER_PAGES = [
     relatedLabs: [
       { href: '/labs/lipid-panel', label: 'Lipid panel' },
       { href: '/labs/cmp', label: 'CMP' },
-      { href: '/labs/preventive', label: 'Preventive labs overview' },
+      { href: '/labs#labs-preventive', label: 'Preventive labs overview' },
     ],
     faqs: [
       {
@@ -322,7 +322,7 @@ export const LAB_MARKER_PAGES = [
     ],
     relatedSymptoms: [
       { href: '/fatigue', label: 'Fatigue' },
-      { href: '/labs/fatigue-brain-fog', label: 'Fatigue & brain fog labs' },
+      { href: '/labs#labs-fatigue', label: 'Fatigue & brain fog labs' },
       { href: '/womens-midlife-health', label: "Women's midlife health" },
     ],
     relatedServices: [
@@ -333,7 +333,7 @@ export const LAB_MARKER_PAGES = [
       { href: '/labs/cbc', label: 'CBC' },
       { href: '/labs/iron-ferritin', label: 'Iron & ferritin' },
       { href: '/labs/vitamin-b12', label: 'Vitamin B12' },
-      { href: '/labs/preventive', label: 'Preventive labs overview' },
+      { href: '/labs#labs-preventive', label: 'Preventive labs overview' },
     ],
     faqs: [
       {
@@ -387,7 +387,7 @@ export const LAB_MARKER_PAGES = [
     ],
     relatedSymptoms: [
       { href: '/fatigue', label: 'Fatigue' },
-      { href: '/labs/fatigue-brain-fog', label: 'Fatigue & brain fog labs' },
+      { href: '/labs#labs-fatigue', label: 'Fatigue & brain fog labs' },
       { href: '/blog/iron-deficiency-brain-fog-adhd', label: 'Iron deficiency, brain fog & ADHD' },
     ],
     relatedServices: [
@@ -399,7 +399,7 @@ export const LAB_MARKER_PAGES = [
       { href: '/labs/cbc', label: 'CBC' },
       { href: '/labs/vitamin-b12', label: 'Vitamin B12' },
       { href: '/labs/vitamin-d', label: 'Vitamin D' },
-      { href: '/labs/preventive', label: 'Preventive labs overview' },
+      { href: '/labs#labs-preventive', label: 'Preventive labs overview' },
     ],
     faqs: [
       {
@@ -453,7 +453,7 @@ export const LAB_MARKER_PAGES = [
     ],
     relatedSymptoms: [
       { href: '/fatigue', label: 'Fatigue' },
-      { href: '/labs/fatigue-brain-fog', label: 'Fatigue & brain fog labs' },
+      { href: '/labs#labs-fatigue', label: 'Fatigue & brain fog labs' },
     ],
     relatedServices: [
       { href: '/preventive-care', label: 'Preventive care' },
@@ -463,7 +463,7 @@ export const LAB_MARKER_PAGES = [
       { href: '/labs/cbc', label: 'CBC' },
       { href: '/labs/iron-ferritin', label: 'Iron & ferritin' },
       { href: '/labs/vitamin-d', label: 'Vitamin D' },
-      { href: '/labs/preventive', label: 'Preventive labs overview' },
+      { href: '/labs#labs-preventive', label: 'Preventive labs overview' },
     ],
     faqs: [
       {
@@ -517,7 +517,7 @@ export const LAB_MARKER_PAGES = [
     ],
     relatedSymptoms: [
       { href: '/fatigue', label: 'Fatigue' },
-      { href: '/labs/fatigue-brain-fog', label: 'Fatigue & brain fog labs' },
+      { href: '/labs#labs-fatigue', label: 'Fatigue & brain fog labs' },
     ],
     relatedServices: [
       { href: '/preventive-care', label: 'Preventive care' },
@@ -527,7 +527,7 @@ export const LAB_MARKER_PAGES = [
       { href: '/labs/cbc', label: 'CBC' },
       { href: '/labs/iron-ferritin', label: 'Iron & ferritin' },
       { href: '/labs/vitamin-b12', label: 'Vitamin B12' },
-      { href: '/labs/preventive', label: 'Preventive labs overview' },
+      { href: '/labs#labs-preventive', label: 'Preventive labs overview' },
     ],
     faqs: [
       {

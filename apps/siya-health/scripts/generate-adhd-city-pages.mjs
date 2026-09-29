@@ -10,7 +10,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { ADHD_CITY_LANDINGS } from '../data/adhd-city-landings.mjs';
 import { applySiteChrome } from './site-chrome.mjs';
-import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -181,7 +181,7 @@ function buildPage(city) {
     </header>
 
     <main id="main">
-      <section class="hero-merged" style="background-image: url('/assets/images/adhd-care.jpg');">
+      <section class="hero-merged hero-merged--abstract">
         <div class="container hero-inner">
           <div class="hero-merged-content">
             <p class="hero-kicker"><a href="/adhd-care">ADHD Care</a> · ${esc(city.city)}, ${esc(city.stateAbbr)}</p>
@@ -277,11 +277,7 @@ function buildPage(city) {
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p><a href="/adhd-care">ADHD Care</a> · <a href="/providers">Care Team</a> · <a href="/legal/terms-of-use">Terms of Use</a></p>
-      </div>
-    </footer>
+${H2_COMPACT_FOOTER}
   </body>
 </html>
 `;

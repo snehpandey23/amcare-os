@@ -893,7 +893,7 @@ export const PHASE3_ANSWER_SEEDS = [
       'AACE obesity and cardiometabolic clinical guidance (algorithm summaries)',
     ],
     learnMore: [
-      { href: '/labs/preventive', label: 'Preventive & wellness labs' },
+      { href: '/labs#labs-preventive', label: 'Preventive & wellness labs' },
       { href: '/labs/how-to-read-results', label: 'How to read your lab results' },
       { href: '/primary-urgent-care', label: 'Primary & urgent care' },
       { href: '/pricing', label: 'Follow-up plans & pricing' },
@@ -1027,7 +1027,7 @@ export const PHASE3_ANSWER_SEEDS = [
       { href: '/redirect/meet-greet', label: 'Book Free Meet & Greet' },
       { href: '/pricing', label: 'Follow-up plans & pricing' },
       { href: '/labs', label: 'Labs & blood tests hub' },
-      { href: '/labs/preventive', label: 'Preventive & wellness labs' },
+      { href: '/labs#labs-preventive', label: 'Preventive & wellness labs' },
       { href: '/answers/which-preventive-blood-tests-adults', label: 'Which preventive blood tests adults need' },
       { href: '/answers/why-normal-labs-dont-mean-healthy', label: "Why normal labs don't mean healthy" },
     ],

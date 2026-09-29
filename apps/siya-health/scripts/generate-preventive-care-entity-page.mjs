@@ -11,7 +11,7 @@
  *   /primary-care         → Root Service Entity (taxonomy root)
  *   /primary-urgent-care  → acute + process / booking surface under the root
  *   /preventive-care      → staying well: wellness, screenings, vaccines, lifestyle, labs-in-context
- *   /labs/preventive      → labs topic child (not a competing hub)
+ *   /labs#labs-preventive      → labs topic child (not a competing hub)
  *   /fatigue              → symptom child of the primary-care graph
  *
  * CTA policy: ONE primary = Book a primary care visit. No ADHD / GLP-1 / TRT funnels.
@@ -21,7 +21,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -200,7 +200,7 @@ function render() {
     </header>
 
     <main id="main">
-      <section class="hero-merged" style="background-image: url('/assets/images/healthy-lifestyle.png');">
+      <section class="hero-merged hero-merged--abstract">
         <div class="container hero-inner">
           <div class="hero-merged-content">
             <p class="hero-state-line"><a href="/primary-care">Primary Care</a> &middot; Service guide</p>
@@ -253,7 +253,7 @@ function render() {
             <li><strong>Vaccinations</strong> &mdash; what is due and how to complete it safely where you live</li>
             <li><strong>Cardiometabolic risk</strong> &mdash; blood pressure, lipids, glucose risk, weight, and family history in one conversation</li>
             <li><strong>Lifestyle</strong> &mdash; sleep, movement, alcohol, nicotine, and stress as clinical inputs, not moral lectures</li>
-            <li><strong>Labs in context</strong> &mdash; markers chosen because they would change the plan (<a href="/labs/preventive">preventive labs</a>)</li>
+            <li><strong>Labs in context</strong> &mdash; markers chosen because they would change the plan (<a href="/labs#labs-preventive">preventive labs</a>)</li>
           </ul>
           <p>Symptoms like <a href="/fatigue">fatigue</a> still matter &mdash; they are how many people enter care. Preventive care is the frame that continues after the acute question is sorted.</p>
         </div>
@@ -289,7 +289,7 @@ function render() {
           </div>
           <p>Common markers adults discuss in a preventive frame include a complete blood count, comprehensive metabolic panel, lipid panel, hemoglobin A1c when metabolic risk is present, thyroid testing when indicated, and nutrient studies such as vitamin D, B12, or ferritin when history supports them.</p>
           <ul class="footer-links">
-            <li><a href="/labs/preventive">Preventive &amp; wellness labs overview</a></li>
+            <li><a href="/labs#labs-preventive">Preventive &amp; wellness labs overview</a></li>
             <li><a href="/labs/cbc">CBC</a> · <a href="/labs/cmp">CMP</a> · <a href="/labs/lipid-panel">Lipid panel</a></li>
             <li><a href="/labs/a1c-blood-sugar">HbA1c</a> · <a href="/labs/thyroid">TSH</a> · <a href="/labs/iron-ferritin">Ferritin</a></li>
             <li><a href="/labs/vitamin-b12">Vitamin B12</a> · <a href="/labs/vitamin-d">Vitamin D</a></li>
@@ -358,11 +358,7 @@ ${faqAccordion(FAQS, 'faq-preventive')}
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p><a href="/primary-urgent-care">Primary &amp; Urgent Care</a> &middot; &copy; 2026 Siya Health Inc.</p>
-      </div>
-    </footer>
+${H2_COMPACT_FOOTER}
   </body>
 </html>
 `;

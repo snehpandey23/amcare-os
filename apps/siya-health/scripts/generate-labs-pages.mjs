@@ -16,7 +16,7 @@ import {
 } from '../data/labs-pages.mjs';
 import { REDIRECT_MEET_GREET_URL } from '../data/providers-core.mjs';
 import { COPY_STANDARDS } from '../data/site-standards.mjs';
-import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
@@ -275,7 +275,7 @@ ${page.careFunnel.steps
     </header>
 
     <main id="main">
-      <section class="hero-merged" style="background-image: url('/assets/images/healthy-lifestyle.png');">
+      <section class="hero-merged hero-merged--abstract">
         <div class="container hero-inner">
           <div class="hero-merged-content">
             <p class="hero-state-line"><a href="/labs">Labs &amp; Blood Tests</a> · Topic guide</p>
@@ -388,11 +388,7 @@ ${renderFaqAccordion(page.faqs, `faq-${page.slug}`)}
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p><a href="/labs">Labs &amp; Blood Tests</a> · © 2026 Siya Health Inc.</p>
-      </div>
-    </footer>
+${H2_COMPACT_FOOTER}
   </body>
 </html>
 `;
@@ -494,7 +490,7 @@ function renderMarkerPage(page) {
     </header>
 
     <main id="main">
-      <section class="hero-merged" style="background-image: url('/assets/images/healthy-lifestyle.png');">
+      <section class="hero-merged hero-merged--abstract">
         <div class="container hero-inner">
           <div class="hero-merged-content">
             <p class="hero-state-line"><a href="/preventive-care">Preventive Care</a> · <a href="/labs">Labs</a> · Marker guide</p>
@@ -503,7 +499,7 @@ function renderMarkerPage(page) {
             <p class="hero-state-line">${esc(page.navLabel)} education under primary care — not a catalogue SKU page.</p>
             <div class="hero-ctas hero-ctas-row">
               ${bookPrimaryBtn(`labs-marker-${page.slug}-hero`, 'primary')}
-              <a href="/labs/preventive" class="button ds-button ds-button--secondary secondary">Preventive labs overview</a>
+              <a href="/labs#labs-preventive" class="button ds-button ds-button--secondary secondary">Preventive labs overview</a>
             </div>
             <p class="cta-microcopy">This ${esc(page.navLabel)} page does not interpret your portal numbers. Bring results to a clinician.</p>
           </div>
@@ -601,7 +597,7 @@ function renderMarkerPage(page) {
                   .slice(0, 3)
                   .map((p) => `<a href="${labMarkerPath(p.slug)}">${esc(p.navLabel)}</a>`)
                   .join(' · ')}
-                · <a href="/labs/preventive">overview</a>
+                · <a href="/labs#labs-preventive">overview</a>
               </p>
         </div>
       </section>
@@ -632,11 +628,7 @@ ${renderFaqAccordion(page.faqs, `faq-marker-${page.slug}`)}
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p><a href="/preventive-care">Preventive Care</a> · <a href="/labs">Labs</a> · © 2026 Siya Health Inc.</p>
-      </div>
-    </footer>
+${H2_COMPACT_FOOTER}
   </body>
 </html>
 `;
@@ -648,14 +640,6 @@ function topicHubMarkup() {
               <h3><a href="${labMarkerPath(p.slug)}">${esc(p.h1)}</a></h3>
               <p>${esc(p.lead.slice(0, 140))}${p.lead.length > 140 ? '…' : ''}</p>
               <p class="cta-microcopy"><a href="${labMarkerPath(p.slug)}">Learn more</a></p>
-            </article>`;
-  }).join('\n');
-
-  const cards = LABS_TOPIC_PAGES.map((p) => {
-    return `            <article class="why-choose-card">
-              <h3><a href="${labsTopicPath(p.slug)}">${esc(p.h1)}</a></h3>
-              <p>${esc(p.lead.slice(0, 140))}${p.lead.length > 140 ? '…' : ''}</p>
-              <p class="cta-microcopy"><a href="${labsTopicPath(p.slug)}">Learn more</a></p>
             </article>`;
   }).join('\n');
 
@@ -674,12 +658,34 @@ ${markerCards}
       <section class="section" id="lab-topics" aria-labelledby="lab-topics-heading">
         <div class="container">
           <div class="section-header">
-            <h2 id="lab-topics-heading">Explore labs by clinical topic</h2>
-            <p class="lead">Deeper guides that connect symptoms and thoughtful testing clusters.</p>
+            <h2 id="lab-topics-heading">When labs come up</h2>
+            <p class="lead">Short orientations. Each test still has its own page.</p>
           </div>
-          <div class="why-choose-grid">
-${cards}
-          </div>
+          <article id="labs-fatigue">
+            <h3>Fatigue and brain fog</h3>
+            <p>Fatigue and brain fog have many overlapping causes. Testing can look at some contributors when history suggests it may be useful. Labs do not diagnose burnout, depression, sleep apnea, or ADHD, and a normal panel does not prove nothing is wrong.</p>
+            <p>A focused first look often covers <a href="/labs/cbc">CBC</a>, <a href="/labs/iron-ferritin">ferritin</a>, <a href="/labs/thyroid">TSH</a>, and <a href="/labs/vitamin-b12">B12</a>, with <a href="/labs/cmp">CMP</a>, <a href="/labs/vitamin-d">vitamin D</a>, or <a href="/labs/a1c-blood-sugar">A1C</a> when metabolic risk is part of the story.</p>
+          </article>
+          <article id="labs-preventive">
+            <h3>Preventive labs</h3>
+            <p>Preventive labs establish baselines and watch cardiometabolic risk. The point is thoughtful screening, not ordering every available test. They do not replace history, blood pressure checks, or age-appropriate cancer screening.</p>
+            <p>See <a href="/labs/cbc">CBC</a>, <a href="/labs/cmp">CMP</a>, <a href="/labs/lipid-panel">lipids</a>, <a href="/labs/a1c-blood-sugar">A1C</a>, <a href="/labs/thyroid">TSH</a>, <a href="/labs/iron-ferritin">ferritin</a>, <a href="/labs/vitamin-b12">B12</a>, and <a href="/labs/vitamin-d">vitamin D</a>.</p>
+          </article>
+          <article id="labs-adhd">
+            <h3>Focus, fatigue, and brain fog</h3>
+            <p>Blood tests do not diagnose ADHD. Evaluation is clinical. Selected labs may look for other contributors to fatigue or concentration problems when a clinician judges that useful. Labs are not a substitute for an ADHD evaluation.</p>
+            <p>Those overlaps are the same markers as fatigue: <a href="/labs/cbc">CBC</a>, <a href="/labs/iron-ferritin">ferritin</a>, <a href="/labs/thyroid">TSH</a>, <a href="/labs/vitamin-b12">B12</a>, and sometimes <a href="/labs/a1c-blood-sugar">A1C</a>.</p>
+          </article>
+          <article id="labs-womens">
+            <h3>Women’s midlife</h3>
+            <p>Midlife symptoms often overlap: sleep, fatigue, brain fog, mood, and cycle changes. A hormone panel does not confirm or rule out perimenopause. Testing, when it is useful, usually starts with iron, thyroid, and metabolic markers.</p>
+            <p>See <a href="/labs/cbc">CBC</a>, <a href="/labs/iron-ferritin">ferritin</a>, <a href="/labs/thyroid">TSH</a>, <a href="/labs/a1c-blood-sugar">A1C</a>, <a href="/labs/lipid-panel">lipids</a>, <a href="/labs/vitamin-b12">B12</a>, and <a href="/labs/vitamin-d">vitamin D</a>.</p>
+          </article>
+          <article id="labs-mens">
+            <h3>Men’s health labs</h3>
+            <p>This starts with history, not a single hormone number. A single testosterone value does not explain symptoms or confirm a treatment plan. When testing is discussed, total and free testosterone sit with blood count, metabolic, and cardiovascular markers. PSA is only when age, history, and clinical judgment support it.</p>
+            <p>Related test pages: <a href="/labs/cbc">CBC</a>, <a href="/labs/cmp">CMP</a>, <a href="/labs/lipid-panel">lipids</a>, and <a href="/labs/a1c-blood-sugar">A1C</a>.</p>
+          </article>
         </div>
       </section>
       <!-- /SIYA:LABS-TOPIC-HUB -->`;
@@ -702,17 +708,17 @@ function injectHubIndex() {
   }
 
   const map = [
-    ['Routine &amp; preventive', 'preventive'],
-    ['Thyroid', 'thyroid'],
-    ['Nutritional &amp; fatigue-related', 'fatigue-brain-fog'],
-    ['Metabolic health', 'a1c-blood-sugar'],
-    ['Women&rsquo;s midlife concerns', 'womens-midlife'],
-    ['Men&rsquo;s health', 'mens-health'],
-    ['ADHD evaluation support', 'adhd-support'],
+    ['Routine &amp; preventive', '/labs#labs-preventive'],
+    ['Thyroid', '/labs/thyroid'],
+    ['Nutritional &amp; fatigue-related', '/labs#labs-fatigue'],
+    ['Metabolic health', '/labs/a1c-blood-sugar'],
+    ['Women&rsquo;s midlife concerns', '/labs#labs-womens'],
+    ['Men&rsquo;s health', '/labs#labs-mens'],
+    ['ADHD evaluation support', '/labs#labs-adhd'],
   ];
-  for (const [heading, slug] of map) {
-    const link = `<p class="cta-microcopy"><a href="${labsTopicPath(slug)}">Learn more</a></p>`;
-    if (html.includes(`href="${labsTopicPath(slug)}">Learn more</a>`)) continue;
+  for (const [heading, href] of map) {
+    const link = `<p class="cta-microcopy"><a href="${href}">Learn more</a></p>`;
+    if (html.includes(`href="${href}">Learn more</a>`)) continue;
     const re = new RegExp(`(<h3>${heading}</h3>\\s*<p>[\\s\\S]*?</p>)`, 'i');
     if (re.test(html)) {
       html = html.replace(re, `$1\n              ${link}`);
@@ -809,7 +815,7 @@ function writeHowToReadResultsPage() {
     </header>
 
     <main id="main">
-      <section class="hero-merged" style="background-image: url('/assets/images/healthy-lifestyle.png');">
+      <section class="hero-merged hero-merged--abstract">
         <div class="container hero-inner">
           <div class="hero-merged-content">
             <p class="hero-state-line"><a href="/labs">Labs &amp; Blood Tests</a> · Guide</p>
@@ -871,7 +877,7 @@ function writeHowToReadResultsPage() {
           </div>
           <ul class="footer-links">
             <li><a href="/labs">All Labs &amp; Blood Tests</a></li>
-            <li><a href="/labs/fatigue-brain-fog">Fatigue &amp; brain fog labs</a></li>
+            <li><a href="/labs#labs-fatigue">Fatigue &amp; brain fog labs</a></li>
             <li><a href="/labs/thyroid">Thyroid testing</a></li>
             <li><a href="/labs/iron-ferritin">Iron &amp; ferritin</a></li>
             <li><a href="/labs/a1c-blood-sugar">A1c &amp; blood sugar</a></li>
@@ -908,11 +914,7 @@ ${renderFaqAccordion(faqs, 'faq-how-to-read')}
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p><a href="/labs">Labs &amp; Blood Tests</a> · © 2026 Siya Health Inc.</p>
-      </div>
-    </footer>
+${H2_COMPACT_FOOTER}
   </body>
 </html>
 `;
@@ -922,12 +924,8 @@ ${renderFaqAccordion(faqs, 'faq-how-to-read')}
 
 function main() {
   fs.mkdirSync(LABS_DIR, { recursive: true });
-  for (const page of LABS_TOPIC_PAGES) {
-    const rel = labsTopicFile(page.slug);
-    const full = path.join(ROOT, rel);
-    fs.writeFileSync(full, applyHomepage2Surface(renderPage(page)));
-    console.log('Wrote', rel);
-  }
+  // The five complaint menus live as anchors on /labs. Their HTML files stay
+  // on disk only so the old URLs can 301. Do not regenerate them as full pages.
   for (const page of LAB_MARKER_PAGES) {
     const rel = labMarkerFile(page.slug);
     const full = path.join(ROOT, rel);
@@ -937,7 +935,7 @@ function main() {
   writeHowToReadResultsPage();
   injectHubIndex();
   console.log(
-    `Generated ${LABS_TOPIC_PAGES.length} topic + ${LAB_MARKER_PAGES.length} marker lab pages + how-to-read guide`,
+    `Kept ${LAB_MARKER_PAGES.length} marker lab pages + how-to-read guide; complaint menus are anchors on /labs`,
   );
 }
 

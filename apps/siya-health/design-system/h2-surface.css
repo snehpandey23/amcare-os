@@ -3190,31 +3190,32 @@
         margin: 0;
         padding: 1.35rem 1.2rem 1.25rem;
         border-radius: 1rem;
-        background: linear-gradient(145deg, #0A246B 0%, #001878 55%, #3a1860 140%);
-        color: #F4EFE7;
+        background-color: #e4e7ee;
+        background-image: linear-gradient(160deg, #e4e7ee 0%, #d5deef 52%, #c3d0ea 100%);
+        color: #001878;
+        border: 1px solid rgba(0, 24, 120, 0.18);
         text-decoration: none;
         min-height: 11rem;
         box-sizing: border-box;
       }
       body.siya-h2-surface a.employer-partnership-step:hover,
       body.siya-h2-surface a.employer-partnership-step:focus-visible {
-        background: linear-gradient(145deg, #001878 0%, #0A246B 62%, #D81088 160%);
+        background-image: linear-gradient(160deg, #d5deef 0%, #c3d0ea 55%, #b3c4e2 100%);
       }
       body.page-employer.siya-h2-surface a.button.ds-button--primary,
-      body.page-employer.siya-h2-surface button.button.ds-button,
       body.page-employer.siya-h2-surface .employer-inquiry-form button[type="submit"] {
-        color: #F4EFE7 !important;
-        background-color: #001878 !important;
-        background-image: linear-gradient(135deg, #D81088 0%, #7B2D8E 48%, #001878 115%) !important;
-        border: 0 !important;
+        color: #001878 !important;
+        background-color: #e4e7ee !important;
+        background-image: linear-gradient(160deg, #e4e7ee 0%, #d5deef 52%, #c3d0ea 100%) !important;
+        border: 1px solid rgba(0, 24, 120, 0.22) !important;
         box-shadow: none !important;
       }
       body.page-employer.siya-h2-surface a.button.ds-button--primary:hover,
       body.page-employer.siya-h2-surface a.button.ds-button--primary:focus-visible,
       body.page-employer.siya-h2-surface .employer-inquiry-form button[type="submit"]:hover,
       body.page-employer.siya-h2-surface .employer-inquiry-form button[type="submit"]:focus-visible {
-        color: #F4EFE7 !important;
-        background-image: linear-gradient(135deg, #001878 0%, #7B2D8E 46%, #D81088 120%) !important;
+        color: #001878 !important;
+        background-image: linear-gradient(160deg, #d5deef 0%, #c3d0ea 55%, #b3c4e2 100%) !important;
       }
       body.siya-h2-surface .employer-partnership-step__num {
         font-size: 0.78rem;
@@ -3227,10 +3228,10 @@
         font-family: Georgia, "Times New Roman", serif;
         font-size: clamp(1.45rem, 2vw, 1.85rem);
         line-height: 1.15;
-        color: #F4EFE7;
+        color: #001878;
       }
       body.siya-h2-surface .employer-partnership-step span:last-child {
-        color: rgba(244, 239, 231, 0.88);
+        color: #0A246B;
         line-height: 1.4;
       }
       @media (max-width: 800px) {

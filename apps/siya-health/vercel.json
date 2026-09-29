@@ -515,6 +515,31 @@
       "permanent": true
     },
     {
+      "source": "/labs/fatigue-brain-fog",
+      "destination": "/labs#labs-fatigue",
+      "permanent": true
+    },
+    {
+      "source": "/labs/preventive",
+      "destination": "/labs#labs-preventive",
+      "permanent": true
+    },
+    {
+      "source": "/labs/adhd-support",
+      "destination": "/labs#labs-adhd",
+      "permanent": true
+    },
+    {
+      "source": "/labs/womens-midlife",
+      "destination": "/labs#labs-womens",
+      "permanent": true
+    },
+    {
+      "source": "/labs/mens-health",
+      "destination": "/labs#labs-mens",
+      "permanent": true
+    },
+    {
       "source": "/blog/iron-deficiency-brain-fog-adhd",
       "destination": "/guides/exhausted#ex-iron",
       "permanent": true
@@ -742,6 +767,21 @@
     {
       "source": "/answers/adhd-in-women",
       "destination": "/guides/hormonal-health#ho-women",
+      "permanent": true
+    },
+    {
+      "source": "/answers/ed-telehealth-legitimate",
+      "destination": "/guides/hormonal-health#ho-ed-visit",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-and-binge-eating",
+      "destination": "/guides/weight#wt-food-noise",
+      "permanent": true
+    },
+    {
+      "source": "/answers/adhd-and-weight-loss-connection",
+      "destination": "/guides/weight#wt-food-noise",
       "permanent": true
     },
     {
