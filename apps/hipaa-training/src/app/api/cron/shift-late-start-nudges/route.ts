@@ -4,6 +4,14 @@ import {
   resolveWeekdayEmailMode,
   sendLateStartNudgeEmail,
 } from "@/lib/shift-late-start-nudge-email";
+import {
+  isStaffTeamMailPaused,
+  shouldSendLateStartRecipient,
+} from "@/lib/staff-team-mail-pause";
+import {
+  STAFF_ENGAGEMENT_CRONS_DISABLED,
+  staffEngagementCronDisabledResponse,
+} from "@/lib/staff-engagement-crons";
 
 export const maxDuration = 120;
 
@@ -76,12 +84,21 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  if (STAFF_ENGAGEMENT_CRONS_DISABLED) {
+    return staffEngagementCronDisabledResponse("shift-late-start-nudges");
+  }
   if (!cronAuthorized(req)) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const url = new URL(req.url);
   const mode = resolveWeekdayEmailMode(url.searchParams.get("mode"));
+  const teamMailPaused = isStaffTeamMailPaused();
+  if (teamMailPaused) {
+    console.info(
+      "[cron/shift-late-start-nudges] STAFF_TEAM_MAIL_PAUSED — skipping observer copies; staff primary still sends",
+    );
+  }
   /** Optional: force a synthetic 4-party send for verification (does not invent roster). */
   const simulate = url.searchParams.get("simulate") === "1";
 
@@ -93,6 +110,7 @@ export async function POST(req: Request) {
       return Response.json({
         ok: true,
         mode,
+        teamMailPaused,
         note: "simulate=1 but no live late candidates; insert a roster row >1h late with no Start to test",
         candidateCount: 0,
         results: [],
@@ -112,6 +130,16 @@ export async function POST(req: Request) {
 
       const sendResults = [];
       for (const r of recipients) {
+        if (!shouldSendLateStartRecipient(r.role)) {
+          sendResults.push({
+            sent: false,
+            delivery: "skipped" as const,
+            role: r.role,
+            wouldSendTo: r.email,
+            error: "team_mail_paused_observer",
+          });
+          continue;
+        }
         const send = await sendLateStartNudgeEmail({
           to: r.email,
           role: r.role,
@@ -134,9 +162,9 @@ export async function POST(req: Request) {
           await markSent({
             rosterRowId: c.rosterRowId,
             userId: c.userId,
-            recipientEmails: sendResults.map((s) => s.wouldSendTo || s.to || "").filter(Boolean),
+            recipientEmails: sendResults.map((s) => s.wouldSendTo || ("to" in s ? s.to : "") || "").filter(Boolean),
             recipientRoles: sendResults.map((s) => s.role),
-            resendIds: sendResults.map((s) => s.resendId || "").filter(Boolean),
+            resendIds: sendResults.map((s) => ("resendId" in s ? s.resendId : "") || "").filter(Boolean),
           });
         }
       }
@@ -147,6 +175,7 @@ export async function POST(req: Request) {
         minutesLate: c.minutesLate,
         recipientCount: recipients.length,
         roles: recipients.map((r) => r.role),
+        observerCopiesPaused: teamMailPaused,
         sends: sendResults,
       });
     }
@@ -160,6 +189,7 @@ export async function POST(req: Request) {
     return Response.json({
       ok: true,
       mode,
+      teamMailPaused,
       candidateCount: candidates.length,
       results,
       repeatWouldFire: repeatIds,

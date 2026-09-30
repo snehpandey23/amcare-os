@@ -6,6 +6,11 @@ import {
   type WeekdayEmailMode,
 } from "@/lib/team-weekday-email";
 import type { UsageSegment, WeekdayTheme } from "@/lib/team-weekday-messages";
+import { applyTeamMailPauseMode } from "@/lib/staff-team-mail-pause";
+import {
+  STAFF_ENGAGEMENT_CRONS_DISABLED,
+  staffEngagementCronDisabledResponse,
+} from "@/lib/staff-engagement-crons";
 
 export const maxDuration = 120;
 
@@ -91,12 +96,19 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  if (STAFF_ENGAGEMENT_CRONS_DISABLED) {
+    return staffEngagementCronDisabledResponse("weekday-team-messages");
+  }
   if (!cronAuthorized(req)) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const url = new URL(req.url);
-  const mode = resolveWeekdayEmailMode(url.searchParams.get("mode"));
+  const resolved = applyTeamMailPauseMode(resolveWeekdayEmailMode(url.searchParams.get("mode")));
+  const mode = resolved.mode;
+  if (resolved.teamMailPaused) {
+    console.info("[cron/weekday-team-messages] STAFF_TEAM_MAIL_PAUSED — forcing dry_run (no Resend)");
+  }
   const verifyAllThemes = url.searchParams.get("verifyAllThemes") === "1";
   const themeOverride = url.searchParams.get("theme") as WeekdayTheme | null;
   const sendDateQ = url.searchParams.get("sendDate");
@@ -176,6 +188,7 @@ export async function POST(req: Request) {
   return Response.json({
     ok: true,
     mode,
+    teamMailPaused: resolved.teamMailPaused,
     verifyAllThemes,
     pilotAllowlist: mode === "pilot" ? process.env.SIYA_WEEKDAY_PILOT_TO || "qa-test@siya.health" : undefined,
     resultCount: results.length,

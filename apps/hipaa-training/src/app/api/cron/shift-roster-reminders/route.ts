@@ -4,6 +4,10 @@ import {
   resolveWeekdayEmailMode,
   sendShiftRosterReminderEmail,
 } from "@/lib/shift-roster-reminder-email";
+import {
+  STAFF_ENGAGEMENT_CRONS_DISABLED,
+  staffEngagementCronDisabledResponse,
+} from "@/lib/staff-engagement-crons";
 
 export const maxDuration = 120;
 
@@ -63,6 +67,9 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  if (STAFF_ENGAGEMENT_CRONS_DISABLED) {
+    return staffEngagementCronDisabledResponse("shift-roster-reminders");
+  }
   if (!cronAuthorized(req)) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }

@@ -1,5 +1,10 @@
 import { sendLeadGapDigestEmail } from "@/lib/gap-digest-email";
 import { getTrainingApiUrl } from "@/lib/trainingConfig";
+import { isStaffTeamMailPaused } from "@/lib/staff-team-mail-pause";
+import {
+  STAFF_ENGAGEMENT_CRONS_DISABLED,
+  staffEngagementCronDisabledResponse,
+} from "@/lib/staff-engagement-crons";
 
 export const maxDuration = 60;
 
@@ -29,6 +34,9 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  if (STAFF_ENGAGEMENT_CRONS_DISABLED) {
+    return staffEngagementCronDisabledResponse("lead-gap-digests");
+  }
   if (!cronAuthorized(req)) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -56,7 +64,11 @@ export async function POST(req: Request) {
   }
 
   const digests = listData.digests ?? [];
-  const dryRun = url.searchParams.get("dryRun") === "1";
+  const teamMailPaused = isStaffTeamMailPaused();
+  const dryRun = url.searchParams.get("dryRun") === "1" || teamMailPaused;
+  if (teamMailPaused) {
+    console.info("[cron/lead-gap-digests] STAFF_TEAM_MAIL_PAUSED — forcing dry_run (no Resend)");
+  }
   const results: {
     email: string;
     sent: boolean;
@@ -72,6 +84,7 @@ export async function POST(req: Request) {
       results.push({
         email: d.email,
         sent: false,
+        error: teamMailPaused ? "team_mail_paused" : undefined,
         gapCount: d.gaps.length,
         departments: d.departments,
         gapTasks: d.gaps.map((g) => `${g.department}: ${g.taskLabel}`),
@@ -114,6 +127,7 @@ export async function POST(req: Request) {
   return Response.json({
     ok: true,
     dryRun,
+    teamMailPaused,
     weekStart: listData.weekStart,
     digestCount: digests.length,
     results,

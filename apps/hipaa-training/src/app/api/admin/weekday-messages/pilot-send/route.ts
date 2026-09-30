@@ -5,6 +5,8 @@ import {
   sendWeekdayTeamEmail,
 } from "@/lib/team-weekday-email";
 import type { UsageSegment, WeekdayTheme } from "@/lib/team-weekday-messages";
+import { applyTeamMailPauseMode } from "@/lib/staff-team-mail-pause";
+import { STAFF_ENGAGEMENT_CRONS_DISABLED, staffEngagementCronDisabledResponse } from "@/lib/staff-engagement-crons";
 
 const ALL_THEMES: WeekdayTheme[] = [
   "motivational_monday",
@@ -52,6 +54,9 @@ async function fetchRecipients(auth: string, theme: WeekdayTheme, sendDate?: str
 }
 
 export async function POST(req: Request) {
+  if (STAFF_ENGAGEMENT_CRONS_DISABLED) {
+    return staffEngagementCronDisabledResponse("weekday-team-messages");
+  }
   const gate = await requirePortalAdmin(req);
   if (!gate.ok) return Response.json({ error: gate.error }, { status: gate.status });
 
@@ -63,7 +68,11 @@ export async function POST(req: Request) {
     sendDate?: string;
   };
 
-  const mode = resolveWeekdayEmailMode(body.mode || "pilot");
+  const resolved = applyTeamMailPauseMode(resolveWeekdayEmailMode(body.mode || "pilot"));
+  const mode = resolved.mode;
+  if (resolved.teamMailPaused) {
+    console.info("[admin/weekday-messages/pilot-send] STAFF_TEAM_MAIL_PAUSED — forcing dry_run (no Resend)");
+  }
   const themes: WeekdayTheme[] = body.verifyAllThemes
     ? ALL_THEMES
     : body.theme
@@ -126,6 +135,7 @@ export async function POST(req: Request) {
   return Response.json({
     ok: true,
     mode,
+    teamMailPaused: resolved.teamMailPaused,
     sentCount: results.filter((r) => r.sent).length,
     results,
   });

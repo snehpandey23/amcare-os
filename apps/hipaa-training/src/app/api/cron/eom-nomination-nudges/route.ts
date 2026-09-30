@@ -5,6 +5,11 @@ import {
   sendEomNominationNudgeEmail,
   type WeekdayEmailMode,
 } from "@/lib/eom-nomination-email";
+import { applyTeamMailPauseMode } from "@/lib/staff-team-mail-pause";
+import {
+  STAFF_ENGAGEMENT_CRONS_DISABLED,
+  staffEngagementCronDisabledResponse,
+} from "@/lib/staff-engagement-crons";
 
 export const maxDuration = 120;
 
@@ -79,12 +84,19 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  if (STAFF_ENGAGEMENT_CRONS_DISABLED) {
+    return staffEngagementCronDisabledResponse("eom-nomination-nudges");
+  }
   if (!cronAuthorized(req)) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   const url = new URL(req.url);
-  const mode = resolveWeekdayEmailMode(url.searchParams.get("mode"));
+  const resolved = applyTeamMailPauseMode(resolveWeekdayEmailMode(url.searchParams.get("mode")));
+  const mode = resolved.mode;
+  if (resolved.teamMailPaused) {
+    console.info("[cron/eom-nomination-nudges] STAFF_TEAM_MAIL_PAUSED — forcing dry_run (no Resend)");
+  }
   const sendDateQ = url.searchParams.get("sendDate") || undefined;
   const force = url.searchParams.get("force") === "1";
   const skipMark = url.searchParams.get("skipMark") === "1";
@@ -142,6 +154,7 @@ export async function POST(req: Request) {
     return Response.json({
       ok: true,
       mode,
+      teamMailPaused: resolved.teamMailPaused,
       sendDate,
       monthKey: payload.monthKey,
       monthLabel: payload.monthLabel,

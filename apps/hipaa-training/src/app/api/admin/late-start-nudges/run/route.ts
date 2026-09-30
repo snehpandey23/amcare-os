@@ -10,6 +10,11 @@ import {
   resolveWeekdayEmailMode,
   sendLateStartNudgeEmail,
 } from "@/lib/shift-late-start-nudge-email";
+import {
+  isStaffTeamMailPaused,
+  shouldSendLateStartRecipient,
+} from "@/lib/staff-team-mail-pause";
+import { STAFF_ENGAGEMENT_CRONS_DISABLED, staffEngagementCronDisabledResponse } from "@/lib/staff-engagement-crons";
 
 export const maxDuration = 120;
 
@@ -105,6 +110,9 @@ async function markSent(
 }
 
 export async function POST(req: Request) {
+  if (STAFF_ENGAGEMENT_CRONS_DISABLED) {
+    return staffEngagementCronDisabledResponse("shift-late-start-nudges");
+  }
   const gate = await requirePortalAdmin(req);
   if (!gate.ok) return Response.json({ error: gate.error }, { status: gate.status });
 
@@ -117,6 +125,12 @@ export async function POST(req: Request) {
 
   // Default test_recipient so we don't spam all staff inboxes during founder force-run.
   const mode = resolveWeekdayEmailMode(body.mode || "test_recipient");
+  const teamMailPaused = isStaffTeamMailPaused();
+  if (teamMailPaused) {
+    console.info(
+      "[admin/late-start-nudges/run] STAFF_TEAM_MAIL_PAUSED — skipping observer copies; staff primary still sends",
+    );
+  }
   const lookbackHours =
     typeof body.lookbackHours === "number" && body.lookbackHours > 0
       ? Math.min(168, Math.floor(body.lookbackHours))
@@ -131,6 +145,7 @@ export async function POST(req: Request) {
       return Response.json({
         ok: true,
         mode,
+        teamMailPaused,
         lookbackHours,
         candidateCount: 0,
         note: "No late candidates in lookback (everyone checked in, or no roster starts ≥1h ago). Cron path is live; nothing to nudge right now.",
@@ -144,6 +159,16 @@ export async function POST(req: Request) {
       const recipients = c.recipients || [];
       const sendResults = [];
       for (const r of recipients) {
+        if (!shouldSendLateStartRecipient(r.role)) {
+          sendResults.push({
+            sent: false,
+            delivery: "skipped" as const,
+            role: r.role,
+            wouldSendTo: r.email,
+            error: "team_mail_paused_observer",
+          });
+          continue;
+        }
         const send = await sendLateStartNudgeEmail({
           to: r.email,
           role: r.role,
@@ -178,6 +203,7 @@ export async function POST(req: Request) {
         shiftStart: c.shiftStart,
         recipientCount: recipients.length,
         roles: recipients.map((r) => r.role),
+        observerCopiesPaused: teamMailPaused,
         sends: sendResults,
         mark: markResult,
       });
@@ -186,6 +212,7 @@ export async function POST(req: Request) {
     return Response.json({
       ok: true,
       mode,
+      teamMailPaused,
       lookbackHours,
       candidateCount: candidates.length,
       results,
