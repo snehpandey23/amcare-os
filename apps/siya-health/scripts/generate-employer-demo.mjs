@@ -486,6 +486,11 @@ const html = `<!DOCTYPE html>
       </div>
     </div>
     <button type="button" id="demo-mute" class="demo-mute" aria-pressed="false" aria-label="Mute sound">Mute</button>
+    <style>
+      .demo-intro .siya-em {
+        background-image: linear-gradient(90deg, #FF5CB8 0%, #E12193 46%, #C9A0FF 100%) !important;
+      }
+    </style>
     <script src="/scripts/employer-demo.js" defer></script>
   </body>
 </html>

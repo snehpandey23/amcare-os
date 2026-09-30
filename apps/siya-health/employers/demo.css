@@ -638,7 +638,7 @@ html.demo-reduce .demo-intro {
   font-weight: 500;
   font-size: clamp(1.15rem, 2.4vw, 1.65rem);
   line-height: 1.35;
-  color: rgba(244, 239, 231, 0.92);
+  color: #F4EFE7;
   transition: opacity 0.5s ease;
 }
 

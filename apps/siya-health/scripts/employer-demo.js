@@ -305,13 +305,15 @@
   function makeStars(w, h) {
     var phone = Math.min(w, h) < 700;
     var count = phone ? 350 : 800;
+    var cloud = phone ? 36 : 64;
     var accents = ['#D81088', '#A81490', '#7B2D8E'];
     stars = [];
     var i;
     for (i = 0; i < count; i += 1) {
       var layer = i % 7 === 0 ? 2 : (i % 3 === 0 ? 1 : 0);
       var accent = Math.random() < 0.15;
-      stars.push({
+      var nebula = i >= count - cloud;
+      var star = {
         x: Math.random() * w,
         y: Math.random() * h,
         vx: (Math.random() - 0.5) * (0.12 + layer * 0.08),
@@ -323,8 +325,20 @@
         tw: 0.6 + Math.random() * 0.9,
         color: accent ? accents[i % 3] : '#F4EFE7',
         links: [],
-        letter: false
-      });
+        letter: false,
+        nebula: nebula,
+        released: false
+      };
+      if (nebula) {
+        star.x = w / 2 + (Math.random() - 0.5) * w * 0.26;
+        star.y = h * 0.46 + (Math.random() - 0.5) * h * 0.16;
+        star.r = 0.55 + Math.random() * 0.7;
+        star.base = 0.8 + Math.random() * 0.2;
+        star.color = '#F4EFE7';
+        star.vx *= 0.35;
+        star.vy *= 0.35;
+      }
+      stars.push(star);
     }
   }
 
@@ -366,47 +380,111 @@
     }
   }
 
-  function sampleLetters(w, h) {
-    var c = document.createElement('canvas');
-    c.width = w;
-    c.height = h;
-    var g = c.getContext('2d', { willReadFrequently: true });
-    var size = Math.max(72, Math.min(w * 0.092, 128));
-    g.fillStyle = '#fff';
-    g.font = '700 ' + size + 'px Poppins, sans-serif';
-    g.textAlign = 'center';
-    g.textBaseline = 'middle';
-    g.fillText('Siya Health', w / 2, h * 0.44);
-    var data = g.getImageData(0, 0, w, h).data;
-    var step = Math.max(4, (size / 14) | 0);
-    var pts = [];
-    var y;
-    var x;
-    for (y = 0; y < h; y += step) {
-      for (x = 0; x < w; x += step) {
-        if (data[(y * w + x) * 4 + 3] > 150) pts.push({ x: x, y: y });
+  var inkPath = [];
+  var clickX = 0;
+  var clickY = 0;
+
+  function densify(points, step) {
+    var out = [];
+    var i;
+    for (i = 0; i < points.length - 1; i += 1) {
+      var a = points[i];
+      var b = points[i + 1];
+      var dist = Math.hypot(b[0] - a[0], b[1] - a[1]);
+      var n = Math.max(1, Math.round(dist / step));
+      var k;
+      for (k = 0; k < n; k += 1) {
+        var u = k / n;
+        out.push({ x: a[0] + (b[0] - a[0]) * u, y: a[1] + (b[1] - a[1]) * u });
       }
     }
-    var want = Math.min(pts.length, Math.floor(stars.length * 0.58));
+    if (points.length) out.push({ x: points[points.length - 1][0], y: points[points.length - 1][1] });
+    return out;
+  }
+
+  function buildInk(w, h) {
+    var glyphs = {
+      S: [[[0.92, 0.22], [0.5, 0.04], [0.1, 0.18], [0.12, 0.4], [0.55, 0.5], [0.9, 0.62], [0.78, 0.9], [0.16, 0.92]]],
+      i: [[[0.5, 0.4], [0.5, 0.92]], [[0.5, 0.16], [0.5, 0.22]]],
+      y: [[[0.12, 0.4], [0.48, 0.74]], [[0.88, 0.4], [0.48, 0.74], [0.4, 1.08]]],
+      a: [[[0.82, 0.58], [0.45, 0.4], [0.16, 0.62], [0.22, 0.9], [0.78, 0.88], [0.82, 0.62], [0.82, 0.94]]],
+      H: [[[0.16, 0.08], [0.16, 0.92]], [[0.84, 0.08], [0.84, 0.92]], [[0.16, 0.5], [0.84, 0.5]]],
+      e: [[[0.78, 0.62], [0.18, 0.62], [0.16, 0.46], [0.5, 0.38], [0.86, 0.52], [0.74, 0.9], [0.2, 0.92]]],
+      l: [[[0.42, 0.06], [0.42, 0.86], [0.72, 0.94]]],
+      t: [[[0.48, 0.16], [0.48, 0.86], [0.74, 0.94]], [[0.16, 0.46], [0.84, 0.46]]],
+      h: [[[0.18, 0.06], [0.18, 0.92]], [[0.18, 0.52], [0.5, 0.38], [0.84, 0.55], [0.84, 0.92]]]
+    };
+    var widths = { S: 0.78, i: 0.36, y: 0.7, a: 0.68, ' ': 0.38, H: 0.78, e: 0.66, l: 0.42, t: 0.58, h: 0.74 };
+    var text = 'Siya Health';
+    var total = 0;
+    var c;
+    for (c = 0; c < text.length; c += 1) total += widths[text.charAt(c)] || 0.5;
+    var size = Math.min(w * 0.78 / total, h * 0.22);
+    var origin = (w - total * size) / 2;
+    var baseline = h * 0.48;
+    inkPath = [];
+    var cursor = origin;
+    for (c = 0; c < text.length; c += 1) {
+      var ch = text.charAt(c);
+      var adv = (widths[ch] || 0.5) * size;
+      var strokes = glyphs[ch] || [];
+      var s;
+      for (s = 0; s < strokes.length; s += 1) {
+        var world = strokes[s].map(function (p) {
+          return [cursor + p[0] * size * 0.92, baseline + (p[1] - 0.92) * size];
+        });
+        inkPath = inkPath.concat(densify(world, 4.5));
+      }
+      cursor += adv;
+    }
+    var writers = [];
+    var i;
+    for (i = 0; i < stars.length; i += 1) if (!stars[i].nebula) writers.push(stars[i]);
+    var want = Math.min(inkPath.length, Math.floor(writers.length * 0.62));
+    var stride = Math.max(1, Math.floor(inkPath.length / Math.max(1, want)));
     var chosen = [];
-    var stride = Math.max(1, Math.floor(pts.length / Math.max(1, want)));
-    for (x = 0; x < pts.length && chosen.length < want; x += stride) chosen.push(pts[x]);
-    for (x = 0; x < stars.length; x += 1) {
-      var s = stars[x];
-      s.ox = s.x;
-      s.oy = s.y;
-      if (x < chosen.length) {
-        s.letter = true;
-        s.tx = chosen[x].x;
-        s.ty = chosen[x].y;
-      } else {
-        s.letter = false;
-        var ang = Math.random() * Math.PI * 2;
-        var rad = 0.22 + Math.random() * 0.28;
-        s.tx = w / 2 + Math.cos(ang) * w * rad * 0.42;
-        s.ty = h * 0.44 + Math.sin(ang) * h * rad * 0.32;
-      }
+    for (i = 0; i < inkPath.length && chosen.length < want; i += stride) chosen.push(inkPath[i]);
+    var nPath = Math.max(1, inkPath.length - 1);
+    for (i = 0; i < stars.length; i += 1) {
+      var star = stars[i];
+      star.ox = star.x;
+      star.oy = star.y;
+      var dx = star.x - clickX;
+      var dy = star.y - clickY;
+      var dist = Math.hypot(dx, dy) || 1;
+      star.ripple = Math.min(420, dist * 0.22);
+      star.rvx = dx / dist;
+      star.rvy = dy / dist;
+      star.letter = false;
+      star.released = false;
     }
+    for (i = 0; i < chosen.length; i += 1) {
+      var starW = writers[i];
+      var src = chosen[i];
+      var along = 0;
+      var j;
+      for (j = 0; j < inkPath.length; j += 1) {
+        if (inkPath[j] === src) { along = j / nPath; break; }
+      }
+      starW.letter = true;
+      starW.tx = src.x;
+      starW.ty = src.y;
+      starW.arrive = along * 2500;
+      starW.released = false;
+    }
+  }
+
+  function penAt(t) {
+    if (!inkPath.length) return null;
+    var u = Math.min(1, Math.max(0, t / 2500));
+    var idx = u * (inkPath.length - 1);
+    var i0 = idx | 0;
+    var i1 = Math.min(inkPath.length - 1, i0 + 1);
+    var f = idx - i0;
+    return {
+      x: inkPath[i0].x + (inkPath[i1].x - inkPath[i0].x) * f,
+      y: inkPath[i0].y + (inkPath[i1].y - inkPath[i0].y) * f
+    };
   }
 
   function drawStars(now) {
@@ -437,6 +515,21 @@
     grd.addColorStop(1, 'rgba(10, 36, 107, 0)');
     ctx.fillStyle = grd;
     ctx.fillRect(0, 0, w, h);
+    var cloudT = now / 1000;
+    var cloudX = w / 2 + Math.sin(cloudT * 0.22) * 16;
+    var cloudY = h * 0.46 + Math.cos(cloudT * 0.18) * 10;
+    var cloudR = Math.min(w, h) * 0.42;
+    var neb = ctx.createRadialGradient(cloudX, cloudY, cloudR * 0.08, cloudX, cloudY, cloudR);
+    neb.addColorStop(0, 'rgba(244, 239, 231, 0.18)');
+    neb.addColorStop(0.42, 'rgba(244, 239, 231, 0.12)');
+    neb.addColorStop(1, 'rgba(244, 239, 231, 0)');
+    ctx.fillStyle = neb;
+    ctx.fillRect(0, 0, w, h);
+    var core = ctx.createRadialGradient(w / 2, h * 0.46, 8, w / 2, h * 0.46, Math.min(w, h) * 0.16);
+    core.addColorStop(0, 'rgba(5, 10, 36, 0.82)');
+    core.addColorStop(1, 'rgba(5, 10, 36, 0)');
+    ctx.fillStyle = core;
+    ctx.fillRect(0, 0, w, h);
 
     var t = introRunning ? now - assembleAt : 0;
     var gather = introRunning ? easeInOut(Math.min(1, t / 2500)) : 0;
@@ -461,14 +554,41 @@
         if (s.x > w + 20) s.x = -20;
         if (s.y < -20) s.y = h + 20;
         if (s.y > h + 20) s.y = -20;
-      } else if (t < 2500) {
-        s.x = s.ox + (s.tx - s.ox) * gather;
-        s.y = s.oy + (s.ty - s.oy) * gather;
-      } else if (!s.letter) {
-        s.x += Math.cos(sec * 0.35 + s.phase) * 0.12;
-        s.y += Math.sin(sec * 0.28 + s.phase) * 0.1;
+      } else if (s.letter && t < 2500) {
+        var rip = 0;
+        if (t > s.ripple && t < s.ripple + 260) {
+          rip = Math.sin(((t - s.ripple) / 260) * Math.PI) * 16;
+        }
+        var u = 0;
+        if (t >= s.arrive) u = easeInOut(Math.min(1, (t - s.arrive) / 260));
+        else u = Math.min(0.08, t / 2500);
+        s.x = s.ox + (s.tx - s.ox) * u + s.rvx * rip;
+        s.y = s.oy + (s.ty - s.oy) * u + s.rvy * rip;
+      } else if (s.letter && t >= 2500) {
+        if (!s.released) {
+          s.released = true;
+          var ang = Math.atan2(s.y - h * 0.46, s.x - w / 2);
+          s.rvx = Math.cos(ang) * (0.55 + Math.random() * 0.7);
+          s.rvy = Math.sin(ang) * (0.4 + Math.random() * 0.5);
+        }
+        s.x += s.rvx;
+        s.y += s.rvy;
+        s.rvx *= 0.992;
+        s.rvy *= 0.992;
+      } else if (introRunning && t < 700) {
+        if (t > s.ripple && t < s.ripple + 260) {
+          var push = Math.sin(((t - s.ripple) / 260) * Math.PI) * 0.85;
+          s.x += s.rvx * push;
+          s.y += s.rvy * push;
+        }
+        s.x += s.vx * 0.4;
+        s.y += s.vy * 0.4;
+      } else {
+        s.x += s.vx;
+        s.y += s.vy;
       }
     }
+    void gather;
 
     starLinksReady += 1;
     if (starLinksReady % 5 === 0) rebuildLinks();
@@ -498,12 +618,29 @@
       var star = stars[i];
       var tw = 0.55 + 0.45 * Math.sin(sec * star.tw + star.phase);
       var alpha = star.base * tw * particleFade;
-      if (introRunning && star.letter && t > 2800) alpha *= Math.max(0.25, 1 - (t - 2800) / 2200);
+      if (introRunning && star.letter && star.released) alpha *= Math.max(0.05, 1 - (t - 2500) / 1600);
       ctx.globalAlpha = alpha;
       ctx.fillStyle = star.color;
       ctx.beginPath();
       ctx.arc(star.x + px * (8 + star.layer * 10), star.y + py * (6 + star.layer * 8), star.r, 0, Math.PI * 2);
       ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    if (introRunning && t < 2550) {
+      var pen = penAt(t);
+      if (pen) {
+        ctx.globalAlpha = 0.35;
+        ctx.fillStyle = '#FF5CB8';
+        ctx.beginPath();
+        ctx.arc(pen.x, pen.y, 11, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = '#F4EFE7';
+        ctx.beginPath();
+        ctx.arc(pen.x, pen.y, 2.6, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
     ctx.globalAlpha = 1;
 
@@ -529,7 +666,8 @@
     chimed = false;
     assembleAt = performance.now();
     intro.classList.remove('is-gate');
-    sampleLetters(intro.clientWidth, intro.clientHeight);
+    if (!stars.length) makeStars(intro.clientWidth, intro.clientHeight);
+    buildInk(intro.clientWidth, intro.clientHeight);
   }
 
   if (!reduce && intro && introCanvas) {
@@ -567,6 +705,9 @@
       if (event.target.closest('#demo-intro-skip, #demo-mute')) return;
       event.stopPropagation();
       if (!intro.classList.contains('is-gate') || introRunning) return;
+      var box = intro.getBoundingClientRect();
+      clickX = event.clientX - box.left;
+      clickY = event.clientY - box.top;
       beginIntro();
     });
   }
