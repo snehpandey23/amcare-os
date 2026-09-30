@@ -72,11 +72,11 @@ body = body.replace(
 );
 
 let slideN = 0;
-body = body.replace(/<article class="slide"/g, () => {
+body = body.replace(/<article class="slide( parked)?"/g, (match, parked) => {
   const id = SLIDE_IDS[slideN];
   slideN += 1;
   if (!id) throw new Error('Prototype has more slides than the handoff list');
-  return `<article class="slide" id="${id}" data-slide-id="${id}"`;
+  return `<article class="slide${parked || ''}" id="${id}" data-slide-id="${id}"`;
 });
 if (slideN !== SLIDE_IDS.length) {
   throw new Error(`Expected ${SLIDE_IDS.length} slides, found ${slideN}`);

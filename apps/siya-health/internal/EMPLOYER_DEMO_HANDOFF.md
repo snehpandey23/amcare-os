@@ -106,6 +106,10 @@ The page never scrolls. Every slide must fit the viewport at 1440×900 and 390×
 6. **Don't show vendor UI or logos** (Spruce, CarePatron, app stores). Their terms require written permission. All product visuals are our own HTML mockups, labeled "Illustrative".
 7. **Don't use AI-generated text in video/image assets.** It garbles. All on-screen text is real HTML.
 8. **The tagline appears once** (on the dark intro). The welcome screen says something different.
+9. **Phones get their own layouts, not a shrunk desktop.** On a viewport of 640px or less: hide "Click anywhere to continue"; raise slide padding so copy stays above the Back/Pause/Next bar; after a slide's builds finish, scale `.frame` down until it fits that space. Never let text sit under the bar.
+10. **The AI concierge launcher is hidden on this page only**, with a rule in this page's own CSS (`iframe[title="Siya AI Concierge"]`). Do not change how the widget loads on other pages.
+11. **Node diagrams on phones** (whole person, coordination, Meet Siya) use a taller 1000×900 box, nodes on a tighter ellipse, and smaller tiles (about 84px wide, 10px text, smaller badges). Nothing overlaps the heading, the caption, or another node. On the whole-person slide, specialist tags sit directly under each condition, and the outward split movement is small enough that the tags stay on screen.
+12. **The Time slide on phones** is a vertical day, not the horizontal timeline. Hour labels run 9 AM to 6 PM. Meeting blocks stack with no gaps. The search chip travels down the day and ends on "No free slot", fully on screen. A magenta bracket marks clinic hours 9–5. Desktop keeps the horizontal timeline.
 
 ## 5. Content and compliance guardrails
 
@@ -131,6 +135,8 @@ The page never scrolls. Every slide must fit the viewport at 1440×900 and 390×
 
 ## 7. Slide list (current approved version)
 
+Playing slides only. The progress bar counts these. Parked slides stay in the code and are not shown.
+
 | # | Id | Theme label | Headline | Auto-advance |
 |---|---|---|---|---|
 | 0 | statement | The problem | Healthcare still runs on a schedule your people can't keep. | 4.8s |
@@ -138,16 +144,11 @@ The page never scrolls. Every slide must fit the viewport at 1440×900 and 390×
 | 2 | p-response | Response | Messages that go unanswered for days. | 9.0s |
 | 3 | p-whole | The whole person | It's all connected. Their care isn't. | 10.0s |
 | 4 | p-coord | Coordination | Five apps. Five logins. No one connecting the dots. | 9.0s |
-| 5 | question | — | You've invested in great health coverage… But can they actually use it? | 7.0s |
-| 6 | turn | Introducing | Meet Siya Health. | 8.2s |
-| 7 | f-time | Time, solved | Short video visits that fit between meetings. | 8.6s |
-| 8 | f-response | Response, solved | A real reply, usually within the hour. | 9.0s |
-| 9 | f-whole | The whole person, solved | One team that sees the whole picture. | 10.0s |
-| 10 | start | Getting started | They start however suits them. | 9.0s |
-| 11 | privacy | Privacy | You see the big picture. Never the person. | 8.6s |
-| 12 | experience | Experience | Clinicians who've seen it all. | 9.4s |
-| 13 | hr | For your HR team | Simple for HR. Easy for your people. | 8.0s |
-| 14 | close | Siya Health | See it live. | — |
+| 5 | question | — | You've invested in great health coverage… But is it there when they need it? | 7.0s |
+| 6 | turn | Introducing | Meet Siya Health. One care team your people can actually use, and it fits their working day. | 6.5s |
+| 7 | close | Siya Health | See it live. | — |
+
+Parked (class `parked`, not in the progress bar): `f-time`, `f-response`, `f-whole`, `start`, `privacy`, `experience`, `hr`.
 
 Exact copy, timings and build order are in the prototype. Add a stable `id` to each slide when porting (used for analytics and deep links).
 
@@ -162,7 +163,7 @@ Change requests will arrive as short specs, often with an updated prototype file
 ## 9. Acceptance checklist (every deploy)
 
 - [ ] Intro: stars visibly drift before the click; "Click to begin" is readable; Skip/Mute hidden until play; wordmark stays particles with sparkle; tagline readable; sound plays after the click.
-- [ ] Welcome and all 15 slides fit at 1440×900 and 390×844 with nothing clipped or overlapping.
+- [ ] Welcome and every playing slide fit at 1440×900 and 390×844 with nothing clipped or overlapping. Parked slides are not shown.
 - [ ] Click completes builds, then advances. Back, Pause, Next, arrow keys and Space work.
 - [ ] Numbers match `employer-pilot-facts.mjs`.
 - [ ] Required labels present (section 5).
