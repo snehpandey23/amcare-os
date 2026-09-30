@@ -1,51 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <script src="/scripts/cookie-consent-bootstrap.js"></script>
-    <!-- EXCEPTION: analytics for /employers/demo only, and only on siya.health. No Meta pixel. Do not copy. -->
-    <script>
-(function () {
-function boot() {
-  if (!document.body) return;
-  var q = new URLSearchParams(location.search || '');
-  if (q.get('review') === '1') {
-    var secure = location.protocol === 'https:' ? '; Secure' : '';
-    document.cookie = 'siya_demo_review=1; Path=/employers; Max-Age=31536000; SameSite=Lax' + secure;
-  }
-  var bits = document.cookie ? document.cookie.split(';') : [];
-  for (var i = 0; i < bits.length; i++) {
-    if (bits[i].trim() === 'siya_demo_review=1') return;
-  }
-  var h = String((location && location.hostname) || '').toLowerCase();
-  if (!(h === 'siya.health' || /\.siya\.health$/.test(h))) return;
-  var w = window;
-  var d = document;
-  w.dataLayer = w.dataLayer || [];
-  w.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-  var j = d.createElement('script');
-  j.async = true;
-  j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-PLBD4TTQ';
-  d.head.appendChild(j);
-  var t = d.createElement('script');
-  t.src = '/scripts/siya-tracking.js';
-  t.defer = true;
-  d.body.appendChild(t);
-}
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-else boot();
-})();
-</script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex, nofollow, noarchive" />
-    <title>Employer demo | Siya Health</title>
-    <meta name="description" content="A short, self-paced walkthrough of Siya Health for HR and benefits leaders." />
-    <link rel="canonical" href="https://siya.health/employers/demo" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  </head>
-  <body>
+<title>Siya Intro Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
 <style>
 /* Layout: one full-screen stage. Dark starfield intro → cream welcome → auto-playing tour slides with PowerPoint-style builds and a story-style progress bar. Single committed brand look. */
 :root{
@@ -293,7 +248,6 @@ button:focus-visible{outline:2px solid #FF5CB8;outline-offset:3px}
 }
 @media (prefers-reduced-motion:reduce){.begin button,.wash::before,.wash::after,.blk.visit.in,.me-node.halo.in{animation:none}}
 
-a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
 </style>
 
 <canvas id="stage" aria-label="Animated starfield intro for Siya Health"></canvas>
@@ -309,13 +263,13 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
     <h1>See how Siya Health works <em>for your people</em>.</h1>
     <p>A 2-minute guided tour. Click anywhere to begin.</p>
     <button class="start" id="start" type="button">Start the tour</button>
-    
+    <button class="link" id="replayIntro1" type="button">Replay intro</button>
   </div>
 </section>
 
 <section id="tour" class="wash" hidden aria-live="polite">
   <!-- 0 statement -->
-  <article class="slide" id="statement" data-slide-id="statement" data-dur="4800">
+  <article class="slide" data-dur="4800">
     <div class="frame">
       <div class="eyebrow b" data-at="150">The problem</div>
       <h2 class="big" id="bigline"></h2>
@@ -323,7 +277,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <!-- P1 time -->
-  <article class="slide" id="p-time" data-slide-id="p-time" data-dur="10800">
+  <article class="slide" data-dur="10800">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Time</div>
       <div class="tl">
@@ -341,7 +295,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <!-- P2 response -->
-  <article class="slide" id="p-response" data-slide-id="p-response" data-dur="9000">
+  <article class="slide" data-dur="9000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Response</div>
       <div class="msg">
@@ -369,7 +323,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <!-- P3 connected -->
-  <article class="slide" id="p-whole" data-slide-id="p-whole" data-dur="10000">
+  <article class="slide" data-dur="10000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">The whole person</div>
       <div class="web split" id="webP3" data-at="4600"></div>
@@ -379,7 +333,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <!-- P4 coordination -->
-  <article class="slide" id="p-coord" data-slide-id="p-coord" data-dur="9000">
+  <article class="slide" data-dur="9000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Coordination</div>
       <div class="web jit" id="webP4" data-at="4200"></div>
@@ -388,7 +342,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <!-- question -->
-  <article class="slide" id="question" data-slide-id="question" data-dur="7000">
+  <article class="slide" data-dur="7000">
     <div class="frame">
       <p class="q1 b" data-at="300">You've invested in great health coverage for your people.</p>
       <h2 class="q2 b" data-at="2200">But can they actually <em>use</em> it?</h2>
@@ -396,7 +350,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <!-- turn -->
-  <article class="slide" id="turn" data-slide-id="turn" data-dur="8200">
+  <article class="slide" data-dur="8200">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Introducing</div>
       <div class="web merge" id="webT" data-at="1000"></div>
@@ -406,7 +360,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <!-- F1 time -->
-  <article class="slide" id="f-time" data-slide-id="f-time" data-dur="8600">
+  <article class="slide" data-dur="8600">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Time, solved</div>
       <div class="tl">
@@ -422,7 +376,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <!-- F2 response -->
-  <article class="slide" id="f-response" data-slide-id="f-response" data-dur="9000">
+  <article class="slide" data-dur="9000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Response, solved</div>
       <div class="msg">
@@ -448,7 +402,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <!-- F3 whole picture -->
-  <article class="slide" id="f-whole" data-slide-id="f-whole" data-dur="10000">
+  <article class="slide" data-dur="10000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">The whole person, solved</div>
       <div class="web" id="webF3"></div>
@@ -458,7 +412,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <!-- start -->
-  <article class="slide" id="start" data-slide-id="start" data-dur="9000">
+  <article class="slide" data-dur="9000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Getting started</div>
       <div class="flow">
@@ -486,7 +440,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <!-- privacy -->
-  <article class="slide" id="privacy" data-slide-id="privacy" data-dur="8600">
+  <article class="slide" data-dur="8600">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Privacy</div>
       <div class="priv">
@@ -507,7 +461,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <!-- credibility -->
-  <article class="slide" id="experience" data-slide-id="experience" data-dur="9400">
+  <article class="slide" data-dur="9400">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Experience</div>
       <h2 class="cap b" data-at="300">Clinicians who've <em>seen it all</em>.</h2>
@@ -521,14 +475,14 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
       <div class="stats">
         <div class="stat b" data-at="2600"><b data-count="2700" data-at="2600" data-suf="+">0</b><span>Patients treated at Siya Health</span></div>
         <div class="stat b" data-at="2800"><b data-count="1200" data-at="2800" data-suf="+">0</b><span>Clinical evaluations completed</span></div>
-        <div class="stat b" data-at="3000"><b data-count="4.90" data-dec="2" data-at="3000">0</b><span>Google rating (88 reviews)</span></div>
+        <div class="stat b" data-at="3000"><b data-count="4.9" data-dec="1" data-at="3000">0</b><span>Google rating (88 reviews)</span></div>
         <div class="stat b" data-at="3200"><b data-count="4" data-at="3200">0</b><span>States: CA, TX, PA, FL</span></div>
       </div>
     </div>
   </article>
 
   <!-- HR -->
-  <article class="slide" id="hr" data-slide-id="hr" data-dur="8000">
+  <article class="slide" data-dur="8000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">For your HR team</div>
       <h2 class="cap b" data-at="300">Simple for HR. <em>Easy for your people.</em></h2>
@@ -542,18 +496,18 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <!-- close -->
-  <article class="slide" id="close" data-slide-id="close" data-dur="0">
+  <article class="slide" data-dur="0">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Siya Health</div>
       <h2 class="q2 b" data-at="300">See it <em>live</em>.</h2>
       <p class="sub b" data-at="800">A short call, and we'll walk you through the real experience.</p>
       <div class="row-btns b" data-at="1200">
-        <a class="start" href="/employers#employer-inquiry-form" data-demo-cta="book">Book a call</a>
-        <a class="ghost" href="/employers#employer-inquiry-form" data-demo-cta="details">Request pilot details</a>
+        <button class="start" type="button">Book a call</button>
+        <button class="ghost" type="button">Request pilot details</button>
       </div>
       <div class="mini b" data-at="1600">
         <button class="link" id="replayTour" type="button">Replay tour</button>
-        
+        <button class="link" id="replayIntro2" type="button">Replay intro</button>
       </div>
     </div>
   </article>
@@ -574,15 +528,6 @@ const cv=document.getElementById('stage'),ctx=cv.getContext('2d');
 const $=id=>document.getElementById(id);
 const begin=$('begin'),tag=$('tagline'),bloom=$('bloom'),welcome=$('welcome'),tour=$('tour');
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const seenSlides=Object.create(null);
-function track(name, extra){
-  var payload={event:name};
-  if(extra){Object.keys(extra).forEach(function(k){payload[k]=extra[k];});}
-  if(typeof window.siyaTrack==='function') window.siyaTrack(name, extra||{});
-  window.dataLayer=window.dataLayer||[];
-  window.dataLayer.push(payload);
-}
-
 let W=0,H=0,DPR=1,stars=[],letters=[],shooters=[],phase='idle',t0=0,textBox=null,muted=false,audio=null,timers=[],raf=0,nextShoot=0;
 const ACC=['#D81088','#A81490','#7B2D8E','#FF5CB8'];
 const LET=['#FF5CB8','#E12193','#D81088','#A81490','#9B3FB0','#C9A0FF'];
@@ -730,7 +675,7 @@ function frame(time){
 }
 function at(ms,fn){timers.push(setTimeout(fn,ms));}
 function play(){
-  if(phase!=='idle')return;phase='play';t0=performance.now();track('employer_demo_intro_start');
+  if(phase!=='idle')return;phase='play';t0=performance.now();
   begin.style.opacity=0;begin.style.pointerEvents='none';$('ctrlL').hidden=false;$('ctrlR').hidden=false;
   try{audio=audio||makeAudio();if(audio){audio.ac.resume();audio.master.gain.value=muted?0:.9;swell(audio);}}catch(e){}
   at(2600,()=>{try{audio&&bell(audio);}catch(e){}});
@@ -755,7 +700,7 @@ addEventListener('keydown',e=>{
   if(phase==='idle'&&(e.key==='Enter'||e.key===' ')){e.preventDefault();play();return;}
   if(tourOn){if(e.key==='ArrowRight'){e.preventDefault();advance();}else if(e.key==='ArrowLeft'){e.preventDefault();show(cur-1);}else if(e.key===' '){e.preventDefault();togglePause();}}
 });
-$('skip').addEventListener('click',e=>{e.stopPropagation();track('employer_demo_intro_skip');if(phase==='idle')phase='play';finishIntro();});
+$('skip').addEventListener('click',e=>{e.stopPropagation();if(phase==='idle')phase='play';finishIntro();});
 const muteBtn=$('mute');
 muteBtn.addEventListener('click',e=>{e.stopPropagation();muted=!muted;muteBtn.textContent=muted?'Sound off':'Sound on';muteBtn.setAttribute('aria-pressed',String(muted));
   if(audio)audio.master.gain.setTargetAtTime(muted?0:.9,audio.ac.currentTime,.05);});
@@ -842,10 +787,7 @@ function countUp(el){const to=+el.dataset.count,dec=+(el.dataset.dec||0),suf=el.
 function show(i){
   if(i<0||i>=slides.length)return;cur=i;
   slides.forEach((s,k)=>s.classList.toggle('active',k===i));
-  const s=slides[i];
-  var sid=s.getAttribute('data-slide-id')||s.id||String(i+1);
-  if(!seenSlides[sid]){seenSlides[sid]=1;track('employer_demo_slide_view',{slide:i+1,slide_id:sid});}
-  s.querySelectorAll('[data-at],[data-out]').forEach(el=>el.classList.remove('in','out'));
+  const s=slides[i];s.querySelectorAll('[data-at],[data-out]').forEach(el=>el.classList.remove('in','out'));
   s.querySelectorAll('[data-count]').forEach(el=>el.textContent='0');
   events=[];
   s.querySelectorAll('[data-at]').forEach(el=>{events.push({t:+el.dataset.at,fn:()=>el.classList.add('in')});
@@ -857,7 +799,7 @@ function show(i){
 }
 function fireAll(){while(fired<events.length)events[fired++].fn();if(events.length)elapsed=Math.max(elapsed,events[events.length-1].t);}
 function advance(){if(fired<events.length){fireAll();return;}if(cur<slides.length-1)show(cur+1);}
-function togglePause(){paused=!paused;$('pause').textContent=paused?'Play':'Pause';$('pause').setAttribute('aria-pressed',String(paused));if(paused)track('employer_demo_pause');}
+function togglePause(){paused=!paused;$('pause').textContent=paused?'Play':'Pause';$('pause').setAttribute('aria-pressed',String(paused));}
 function tick(now){
   const dt=Math.min(100,now-last);last=now;
   if(tourOn){
@@ -869,17 +811,18 @@ function tick(now){
 }
 requestAnimationFrame(tick);
 function startTour(){
-  track('employer_demo_tour_start');
   welcome.classList.remove('on');tour.hidden=false;requestAnimationFrame(()=>tour.classList.add('on'));
   tourOn=true;paused=false;$('pause').textContent='Pause';show(0);
 }
 function stopTour(){tourOn=false;tour.classList.remove('on');tour.hidden=true;slides.forEach(s=>s.classList.remove('active'));}
-welcome.addEventListener('click',()=>startTour());
-tour.addEventListener('click',e=>{if(e.target.closest('.bar,button,a'))return;advance();});
+welcome.addEventListener('click',e=>{if(e.target.closest('#replayIntro1'))return;startTour();});
+$('replayIntro1').addEventListener('click',e=>{e.stopPropagation();resetIntro();});
+tour.addEventListener('click',e=>{if(e.target.closest('.bar,button'))return;advance();});
 $('prev').addEventListener('click',()=>show(Math.max(0,cur-1)));
 $('next').addEventListener('click',advance);
 $('pause').addEventListener('click',togglePause);
 $('replayTour').addEventListener('click',()=>{paused=false;$('pause').textContent='Pause';show(0);});
+$('replayIntro2').addEventListener('click',resetIntro);
 
 
 /* boot */
@@ -889,5 +832,3 @@ const boot=()=>{build();
 (document.fonts&&document.fonts.load?Promise.all([document.fonts.load('700 100px Poppins'),document.fonts.load('600 20px Poppins')]).catch(()=>{}):Promise.resolve()).then(boot);
 })();
 </script>
-  </body>
-</html>
