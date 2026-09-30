@@ -3,6 +3,10 @@
 # Git auto-deploy does not promote this project. CLI uploads the working tree,
 # not git HEAD. If apps/siya-health is dirty, this refuses to deploy.
 #
+# Policy: commit the patient-site files before this script runs, then push.
+# A dirty-tree deploy is not allowed. That gap once shipped a shorter
+# /adhd-care and /telehealth than git had, and git only caught up later.
+#
 # Deploy from the monorepo root. The Vercel project's rootDirectory is
 # apps/siya-health; running vercel inside that folder doubles the path.
 
@@ -15,21 +19,24 @@ else
 fi
 cd "$ROOT"
 
-ALLOW_DIRTY=0
 CHECK_ONLY=0
 for arg in "$@"; do
   case "$arg" in
-    --allow-dirty) ALLOW_DIRTY=1 ;;
+    --allow-dirty)
+      echo "Refusing --allow-dirty. Commit apps/siya-health, push, then deploy." >&2
+      exit 1
+      ;;
     --check-only) CHECK_ONLY=1 ;;
     -h|--help)
       cat <<'EOF'
-Usage: bash scripts/deploy-siya-health.sh [--allow-dirty] [--check-only]
+Usage: bash scripts/deploy-siya-health.sh [--check-only]
 
   Deploys the patient site (www.siya.health) from the monorepo root.
 
   Refuses if apps/siya-health has uncommitted or untracked files.
   Other apps (staff portal, Siya Guide) do not block this deploy.
-  Pass --allow-dirty only to ship a dirty patient-site tree on purpose.
+  Commit those patient-site files and push before deploying.
+  --allow-dirty is not accepted.
 
   --check-only  Print branch, commit, and the dirty gate, then exit.
 EOF
@@ -54,16 +61,13 @@ echo "    $(git log -1 --pretty=%s)"
 echo ""
 
 DIRTY="$(git status --porcelain -- apps/siya-health)"
-if [[ -n "$DIRTY" ]]; then
+  if [[ -n "$DIRTY" ]]; then
   echo "==> apps/siya-health is not committed:" >&2
   echo "$DIRTY" >&2
   echo "" >&2
-  if [[ "$ALLOW_DIRTY" -ne 1 ]]; then
-    echo "REFUSING deploy. Disk and git disagree for the patient site." >&2
-    echo "Commit apps/siya-health first, or pass --allow-dirty." >&2
-    exit 1
-  fi
-  echo "Continuing because --allow-dirty was set." >&2
+  echo "REFUSING deploy. Disk and git disagree for the patient site." >&2
+  echo "Commit apps/siya-health and push before deploying." >&2
+  exit 1
 fi
 
 if [[ "$CHECK_ONLY" -eq 1 ]]; then

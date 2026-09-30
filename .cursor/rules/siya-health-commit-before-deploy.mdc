@@ -1,0 +1,24 @@
+---
+description: Commit and push patient-site files before any Vercel deploy
+alwaysApply: true
+---
+
+# Patient site — commit before deploy
+
+Production for https://www.siya.health is promoted only by `bash scripts/deploy-siya-health.sh` from the monorepo root. That script uploads the working tree, not git HEAD. A dirty `apps/siya-health` deploy once replaced the long `/adhd-care` and `/telehealth` pages in production. Git still had the long copy until a later “record the live site” commit (`c56d7bae`) made the short pages official. Uncommitted deploys in the same stretch almost did it again.
+
+## Required order
+
+1. Commit the patient-site files that are about to ship.
+2. Push that commit to `origin/main`.
+3. Run `bash scripts/deploy-siya-health.sh` only when `git status --porcelain -- apps/siya-health` is empty.
+
+If a deploy already went out with those files uncommitted, commit and push them in that same turn before any other work. Do not leave production ahead of `origin/main`.
+
+## Not allowed
+
+- `deploy-siya-health.sh --allow-dirty` — the script rejects this flag.
+- Bare `vercel deploy` of the patient site.
+- Treating “deploy now, commit later” as acceptable.
+
+Staff portal deploys stay on `scripts/deploy-staff-portal.sh`. This rule is the patient site only.
