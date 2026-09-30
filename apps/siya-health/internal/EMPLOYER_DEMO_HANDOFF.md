@@ -14,6 +14,56 @@
 - **Deploy demo-only changes straight to production.** `/employers/demo` is unlinked and noindex, so it's the review environment.
 - **Stop and ask before touching shared files:** `employer-pilot-facts.mjs`, `site-chrome.mjs`, tracking scripts, or any page other than the demo. `/employers/california-pilot` was removed 2026-09-30 and redirects to `/employers`.
 - **After every deploy,** reply with the live URL, a one-line summary of what changed, anything you couldn't match, and screenshots of the affected slides at 1440×900 and 390×844.
+- **Follow the Design QA protocol** below for every change request.
+
+## Design QA protocol
+
+For each feedback item:
+
+1. Restate the intent in one line: what should the viewer understand or feel?
+2. Pick a real-world reference the viewer already knows (a calendar app day view, a phone lock-screen notification, a voicemail list, a chat app) and follow its conventions. Never use abstract chips or floating labels to stand in for a real object.
+3. Write a short design spec before coding: layout, elements, copy, timing, and a separate phone layout (390×844). Reuse the existing build classes and slide engine; no one-off styles.
+4. Build it.
+5. Render screenshots at 1440×900 and 390×844 after all builds on the slide have finished, and inspect them against this checklist:
+   - Nothing overlaps (headings, captions, nodes, cards, the control bar)
+   - Nothing clipped or off-screen
+   - All text readable (size and contrast)
+   - Everything meant to be inside an object (phone, calendar) is inside it
+   - It looks like the real-world reference, not a diagram of it
+   - It matches the intent from step 1
+6. Fix every failure and re-check once.
+7. Deploy. In the reply, include per slide: the intent, the reference used, the checklist results, and anything unsure.
+
+If a request is ambiguous, or there is no good real-world reference, ask before building. Do not guess.
+
+A new or redesigned visual still comes from the prototype when one exists. A text-only request for a new visual is not enough to invent a design: ask for a prototype, or follow this protocol only after the intent and reference are explicit.
+
+## Mobile-first rule
+
+- Design every slide for 390×844 first, then desktop.
+- One idea per screen on phones. If a slide's content does not fit above the control bar at 390×844 without scaling the frame below 90%, split it into two or more slides on phones. Desktop may keep one slide. Do not shrink text to make it fit.
+- Minimum sizes on phones: body text 14px, labels and captions 12px, tap targets 44px.
+
+## Automated checks
+
+Run with Playwright on every slide, at 1440×900 and 390×844, after all builds on the slide have finished.
+
+- **Overlap:** compare bounding boxes of all visible text elements, cards, nodes, phones, calendars, and the control bar. Flag any overlap that is not intentional (text on its own card is fine; a card over a heading is not).
+- **Off-screen or clipping:** flag any visible element that is partly outside the viewport or cut off by its container.
+- **Contrast:** for every visible text element, compute its color against the actual background behind it, including gradients and images. Sample the darkest and lightest point. Flag anything under 4.5:1 for normal text, or under 3:1 for large text (24px or larger, or 19px or larger and bold).
+- **Size:** flag text below the phone minimums above.
+- **Containment:** flag anything meant to be inside a phone, calendar, or card that renders outside it.
+
+## Audit report format
+
+One table per slide: slide name, check, desktop result, phone result, proposed fix. Mark each fix as:
+
+- **fix now:** contrast, size, clipping, and overlap fixes that do not change the design.
+- **needs approval:** splitting a slide, changing layout, or changing copy.
+
+For every slide proposed to split on phones, describe what goes on each screen.
+
+Do the fix-now items. Do not make needs-approval changes until the founder confirms.
 
 ## 2. Structure of the page
 
@@ -140,23 +190,24 @@ All of these play. Care hours and the reply standard come from `employer-pilot-f
 | # | Id | Theme label | Headline | Auto-advance |
 |---|---|---|---|---|
 | 0 | statement | The problem | Healthcare still runs on a schedule your people can't keep. | 4.8s |
-| 1 | p-time | Time | Appointments that don't fit a workday. | 10.8s |
-| 2 | p-response | Response | Voicemail story, all inside the phone. Caption: Messages that go unanswered for days. | 11.5s |
+| 1 | p-time | Time | Shared Monday calendar, 9 AM–6 PM. Appointments that don't fit a workday. | 12.5s |
+| 2 | p-response | Response | Voicemail story, all inside the phone. Caption: Messages that go unanswered for days. | 14.5s |
 | 3 | p-whole | The whole person | It's all connected. Their care isn't. | 10s |
-| 4 | p-coord | Coordination | Five apps. Five logins. No one connecting the dots. | 9s |
+| 4 | p-coord | Coordination | Five apps. Five logins. Badges 1–5 clockwise from the top. | 9s |
 | 5 | question | — | But is it there when they need it? | 7s |
-| 6 | turn | Introducing | Meet Siya Health. | 6.5s |
-| 7 | f-time | How we help | Care that works around their schedule. | 11s |
-| 8 | f-response | How we help | Real replies, from people who know them. | 11s |
-| 9 | f-urgent | How we help | Something urgent? We'll get them seen tonight. | 9s |
-| 10 | f-whole | How we help | One team that sees the whole picture. | 10s |
-| 11 | employer | Getting started as an employer | Four steps, voluntary join. | 9s |
-| 12 | people | How your people get care | Chat with our team, or book it yourself. | 10s |
-| 13 | privacy | Privacy | They get the whole picture. You get the big picture. | 9s |
-| 14 | clinicians | Experience | Clinicians who've seen it all. | 9s |
-| 15 | journey | Our journey so far | Counts from the facts file. No evaluations stat. | 9s |
-| 16 | hr | For your HR team | Inquiry, package, private link. | 8s |
-| 17 | close | Siya Health | See it live. One button: Submit an inquiry. | — |
+| 6 | turn | Introducing | Meet Siya Health. Ring of cards and a travelling light. Tagline is not repeated here. | 6.5s |
+| 7 | f-time | How we help | Same Monday calendar. Care that works around their schedule. | 8s |
+| 8 | f-hours | How we help | Evenings, weekends and holidays too. Hours line from employer-pilot-facts.mjs. | 10s |
+| 9 | f-response | How we help | Real replies, from people who know them. | 11s |
+| 10 | f-urgent | How we help | Something urgent? We'll get them seen tonight. | 9s |
+| 11 | f-whole | How we help | One team that sees the whole picture. | 10s |
+| 12 | employer | Getting started as an employer | Four steps, voluntary join. | 9s |
+| 13 | people | How your people get care | Chat with our team, or book it yourself. | 10s |
+| 14 | privacy | Privacy | They get the whole picture. You get the big picture. | 9s |
+| 15 | clinicians | Experience | Clinicians who've seen it all. | 9s |
+| 16 | journey | Our journey so far | Counts from the facts file. "Most of them busy professionals" stays. | 9s |
+| 17 | hr | For your HR team | Inquiry, package, private link. | 8s |
+| 18 | close | Siya Health | See it live. One button: Submit an inquiry. | — |
 
 Exact copy, timings and build order are in the prototype. Add a stable `id` to each slide when porting (used for analytics and deep links).
 

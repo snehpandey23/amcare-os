@@ -27,6 +27,7 @@ const SLIDE_IDS = [
   'question',
   'turn',
   'f-time',
+  'f-hours',
   'f-response',
   'f-urgent',
   'f-whole',
@@ -104,6 +105,7 @@ body = body.replace(
 
 body = body.replaceAll('__INQUIRY_HREF__', DEMO_BOOK_CALL_HREF);
 body = body.replaceAll('__FACTS_RESPONSE__', FACTS.responseWithin);
+body = body.replaceAll('__FACTS_HOURS__', FACTS.scheduledCare);
 const klarity = countParts(FACTS.klarityScore.split('/')[0]);
 body = body.replace(
   '<!--KLARITY_STAT-->',
