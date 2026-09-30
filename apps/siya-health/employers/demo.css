@@ -531,8 +531,7 @@ html:not(.demo-js) body.page-employer-demo [data-demo-in] {
   background: #F4EFE7;
 }
 
-.demo-intro[hidden],
-html.demo-reduce .demo-intro {
+.demo-intro[hidden] {
   display: none;
 }
 
@@ -568,10 +567,6 @@ html.demo-reduce .demo-intro {
   50% { opacity: 1; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .demo-intro { display: none; }
-}
-
 .demo-intro-dots {
   position: absolute;
   inset: 0;
@@ -582,7 +577,7 @@ html.demo-reduce .demo-intro {
 
 .demo-intro-skip {
   position: absolute;
-  z-index: 2;
+  z-index: 8;
   top: 0.85rem;
   left: 0.85rem;
   font: inherit;

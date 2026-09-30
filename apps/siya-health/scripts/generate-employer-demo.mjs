@@ -117,7 +117,7 @@ const html = `<!DOCTYPE html>
     <script>document.documentElement.classList.add("demo-js");if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("demo-reduce");</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet" />
   </head>
   <body class="page-employer-demo page-service">
     ${gtmNoscript}
@@ -476,21 +476,11 @@ const html = `<!DOCTYPE html>
       <button type="button" id="demo-play" aria-pressed="false">Play</button>
     </div>
     </div>
-    <div class="demo-intro is-gate" id="demo-intro">
-      <canvas class="demo-intro-dots" id="demo-intro-dots" aria-hidden="true"></canvas>
+    <div class="demo-intro" id="demo-intro" data-siya-intro="manual">
       <button type="button" class="demo-intro-skip" id="demo-intro-skip">Skip</button>
-      <p class="demo-intro-gate" id="demo-intro-gate">Click to begin</p>
-      <div class="demo-intro-copy" id="demo-intro-copy">
-        <p class="demo-intro-mark" id="demo-intro-mark">Siya Health</p>
-        <p class="demo-intro-line" id="demo-intro-line">Integrated care for <span class="siya-em">busy professionals</span></p>
-      </div>
     </div>
     <button type="button" id="demo-mute" class="demo-mute" aria-pressed="false" aria-label="Mute sound">Mute</button>
-    <style>
-      .demo-intro .siya-em {
-        background-image: linear-gradient(90deg, #FF5CB8 0%, #E12193 46%, #C9A0FF 100%) !important;
-      }
-    </style>
+    <script src="/scripts/siya-intro.js" defer></script>
     <script src="/scripts/employer-demo.js" defer></script>
   </body>
 </html>
