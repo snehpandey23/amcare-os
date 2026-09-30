@@ -10,7 +10,7 @@ export const EMPLOYER_PILOT_FACTS = {
   newPatientsPerMonth: 180,
   returningPatientsPerMonth: 200,
   googleScore: '4.90/5',
-  googleReviewCount: 88,
+  googleReviewCount: 102,
   klarityScore: '4.66/5',
   klarityReviewCount: 589,
   conciergeSessionsFrom: 25,
@@ -19,10 +19,10 @@ export const EMPLOYER_PILOT_FACTS = {
   panelMax: 600,
   /** Practice service area — not each founder's personal license list. */
   practiceStatesShort: 'CA, TX, PA, FL',
-  /** Scheduled care window — not a messaging cutoff. */
-  scheduledCare: 'Mon–Fri, 10am–6pm',
-  /** Concierge response during business hours. */
-  responseWithin: 'within 1 hour during business hours',
+  /** Care window, founder's local-time standard (Sep 30, 2026). */
+  scheduledCare: "6 AM – 10 PM, 7 days a week (patient's local time), including urgent appointments",
+  /** Concierge replies during that same window. */
+  responseWithin: 'Our team replies within 1 hour, 6 AM – 10 PM.',
   /** Where the employee must be located for the visit. */
   visitLocationLine:
     'For employees located in California, Texas, Pennsylvania or Florida at the time of their visit.',

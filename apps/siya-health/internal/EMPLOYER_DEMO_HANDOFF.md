@@ -125,7 +125,7 @@ The page never scrolls. Every slide must fit the viewport at 1440×900 and 390×
 
 - **Route:** `/employers/demo`, `noindex, nofollow` meta + `X-Robots-Tag` header, excluded from the sitemap, not linked from nav.
 - **Fonts:** Poppins (500/600/700) and Inter (400/500/600), matching the site.
-- **Buttons:** "Book a call" and "Request pilot details" → the employer inquiry form (`/employers#employer-inquiry-form`), read from **one config value** so it can later become a scheduling link.
+- **Button:** the close slide has one button, "Submit an inquiry", to the employer inquiry form (`/employers#employer-inquiry-form`), read from **one config value**. Patients use Meet & Greet; employers use this form; providers use the provider inquiry form.
 - **Prototype-only items to remove:** "Replay intro" on the welcome screen. Keep "Replay tour" on the final slide.
 - **Analytics** (existing GTM exception, **no Meta pixel**, no personal data in parameters): `employer_demo_intro_start`, `employer_demo_intro_skip`, `employer_demo_tour_start`, `employer_demo_slide_view` (slide number + id, once per slide per visit), `employer_demo_pause`, `employer_demo_cta_click` (which button).
 - **`?review=1`** sets a cookie that disables GTM and `siya-tracking.js` in that browser (internal reviewers).
@@ -135,20 +135,28 @@ The page never scrolls. Every slide must fit the viewport at 1440×900 and 390×
 
 ## 7. Slide list (current approved version)
 
-Playing slides only. The progress bar counts these. Parked slides stay in the code and are not shown.
+All of these play. Care hours and the reply standard come from `employer-pilot-facts.mjs` (6 AM – 10 PM, 7 days, patient's local time; replies within 1 hour in that window).
 
 | # | Id | Theme label | Headline | Auto-advance |
 |---|---|---|---|---|
 | 0 | statement | The problem | Healthcare still runs on a schedule your people can't keep. | 4.8s |
 | 1 | p-time | Time | Appointments that don't fit a workday. | 10.8s |
-| 2 | p-response | Response | Messages that go unanswered for days. | 9.0s |
-| 3 | p-whole | The whole person | It's all connected. Their care isn't. | 10.0s |
-| 4 | p-coord | Coordination | Five apps. Five logins. No one connecting the dots. | 9.0s |
-| 5 | question | — | You've invested in great health coverage… But is it there when they need it? | 7.0s |
-| 6 | turn | Introducing | Meet Siya Health. One care team your people can actually use, and it fits their working day. | 6.5s |
-| 7 | close | Siya Health | See it live. | — |
-
-Parked (class `parked`, not in the progress bar): `f-time`, `f-response`, `f-whole`, `start`, `privacy`, `experience`, `hr`.
+| 2 | p-response | Response | Messages that go unanswered for days. | 11s |
+| 3 | p-whole | The whole person | It's all connected. Their care isn't. | 10s |
+| 4 | p-coord | Coordination | Five apps. Five logins. No one connecting the dots. | 9s |
+| 5 | question | — | But is it there when they need it? | 7s |
+| 6 | turn | Introducing | Meet Siya Health. | 6.5s |
+| 7 | f-time | How we help | Care that works around their schedule. | 11s |
+| 8 | f-response | How we help | Real replies, from people who know them. | 11s |
+| 9 | f-urgent | How we help | Something urgent? We'll get them seen tonight. | 9s |
+| 10 | f-whole | How we help | One team that sees the whole picture. | 10s |
+| 11 | employer | Getting started as an employer | Four steps, voluntary join. | 9s |
+| 12 | people | How your people get care | Chat with our team, or book it yourself. | 10s |
+| 13 | privacy | Privacy | They get the whole picture. You get the big picture. | 9s |
+| 14 | clinicians | Experience | Clinicians who've seen it all. | 9s |
+| 15 | journey | Our journey so far | Counts from the facts file. No evaluations stat. | 9s |
+| 16 | hr | For your HR team | Inquiry, package, private link. | 8s |
+| 17 | close | Siya Health | See it live. One button: Submit an inquiry. | — |
 
 Exact copy, timings and build order are in the prototype. Add a stable `id` to each slide when porting (used for analytics and deep links).
 

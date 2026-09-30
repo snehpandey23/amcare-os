@@ -219,6 +219,19 @@ button:focus-visible{outline:2px solid #FF5CB8;outline-offset:3px}
 
 /* hr steps */
 .steps{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;width:min(900px,100%)}
+.steps.four{grid-template-columns:repeat(2,minmax(0,1fr))}
+.help-split{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(180px,.7fr);gap:18px;align-items:center;width:min(980px,100%);text-align:left}
+.side-card{background:#fff;border-radius:16px;padding:14px 16px;box-shadow:0 10px 26px rgba(10,36,107,.1);font:600 14px/1.35 var(--font-display);color:var(--ink)}
+.sat{display:grid;gap:8px;justify-items:center}
+.phone.mini{height:180px;border-radius:24px;padding:8px}
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:min(920px,100%);text-align:left}
+.path{background:#fff;border-radius:18px;padding:16px;box-shadow:0 12px 28px rgba(10,36,107,.1);display:grid;gap:8px}
+.path b{font:600 15px/1.2 var(--font-display);color:var(--ink)}
+.path ol{margin:0;padding-left:1.1rem;font:400 13px/1.45 var(--font-body);color:var(--ink-soft)}
+.end-row{grid-column:1 / -1;background:rgba(216,16,136,.08);border-radius:16px;padding:12px 14px;font:600 14px/1.4 var(--font-display);color:var(--ink);text-align:center}
+.two-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:min(860px,100%);text-align:left}
+.chart{width:100%;height:72px}
+.pack-note{margin:0;font:500 12px/1.4 var(--font-body);color:var(--ink-soft)}
 .steps .rail{position:absolute;left:16%;right:16%;top:38px;height:3px;border-radius:3px;background:linear-gradient(90deg,#D81088,#7B2D8E,#001878)}
 .step{position:relative;display:grid;justify-items:center;gap:12px;text-align:center}
 .step .ic{width:76px;height:76px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 12px 28px rgba(10,36,107,.14);border:2px solid rgba(216,16,136,.3)}
@@ -269,7 +282,8 @@ iframe[title="Siya AI Concierge"]{display:none!important}
   .blk{font-size:10px;padding:0 5px}.tl .lab small{display:none}
   .flow{grid-template-columns:1fr}.flow .links{display:none}.flow{gap:16px}
   .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .steps{grid-template-columns:1fr}.steps .rail{display:none}
+  .steps,.steps.four{grid-template-columns:1fr}.steps .rail{display:none}
+  .help-split,.paths,.two-cards{grid-template-columns:1fr}
   .ppl{grid-template-columns:repeat(8,1fr)}.ppl .p:nth-child(n+33){display:none}
   .bar button{padding:8px 8px}
   .web.tall{width:100%;height:460px;aspect-ratio:auto}
@@ -353,7 +367,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
   </article>
 
   <!-- P2 response -->
-  <article class="slide" data-dur="9000">
+  <article class="slide" data-dur="11000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Response</div>
       <div class="msg">
@@ -376,7 +390,10 @@ iframe[title="Siya AI Concierge"]{display:none!important}
           <div class="count b" data-at="5900">3 days. No reply.</div>
         </div>
       </div>
-      <h2 class="cap b" data-at="6400">Messages that go <em>unanswered for days</em>.</h2>
+      <p class="wait b" data-at="7000">Thursday 2:40 PM · Please call the office to schedule.</p>
+      <div class="chip pop" data-at="7600">In a meeting</div>
+      <h2 class="cap b" data-at="8200">Messages that go <em>unanswered for days</em>.</h2>
+      <p class="sub b" data-at="8800">And when a reply finally comes, it lands mid-meeting, and the loop starts again.</p>
     </div>
   </article>
 
@@ -413,98 +430,149 @@ iframe[title="Siya AI Concierge"]{display:none!important}
       <div class="eyebrow b" data-at="150">Introducing</div>
       <div class="web" id="webT"></div>
       <h2 class="cap b" data-at="4200">Meet <em>Siya Health</em>.</h2>
-      <p class="sub b" data-at="4700">One care team your people can actually use, and it fits their working day.</p>
+      <p class="sub b" data-at="4700">One care team that personalizes care for your people and works around their schedule.</p>
     </div>
   </article>
 
   <!-- F1 time -->
-  <article class="slide parked" data-dur="8600">
+  <article class="slide" data-dur="11000">
     <div class="frame">
-      <div class="eyebrow b" data-at="150">Time, solved</div>
-      <div class="tl">
-        <div class="lane" style="grid-row:1"></div>
-        <div class="lab b" data-at="300" style="grid-row:2;grid-column:1">Their Monday<small>Still back-to-back</small></div>
-        <div class="track b" data-at="300" style="grid-row:2;grid-column:2" id="work2"></div>
-        <div class="axis b" data-at="300" id="axis2" style="grid-row:3"></div>
+      <div class="eyebrow b" data-at="150">How we help</div>
+      <div class="help-split">
+        <div class="tl">
+          <div class="lane" style="grid-row:1"></div>
+          <div class="lab b" data-at="300" style="grid-row:2;grid-column:1">Their Monday<small>Still back-to-back</small></div>
+          <div class="track b" data-at="300" style="grid-row:2;grid-column:2" id="work2"></div>
+          <div class="axis b" data-at="300" id="axis2" style="grid-row:3"></div>
+        </div>
+        <div>
+          <div class="side-card b" data-at="3600">Longer consultations when they have time to talk.</div>
+          <div class="sat b" data-at="4600">
+            <p class="note-s">Saturday, 8:30 PM</p>
+            <div class="phone mini"><div class="screen">
+              <div class="ph-head"><i class="siya"></i><div>Siya Health<small>Video visit</small></div></div>
+              <div class="thread"><div class="bub them">You're booked. Saturday 8:30 PM.</div></div>
+            </div></div>
+          </div>
+        </div>
       </div>
-      <div class="chip pop" data-at="3300">No commute. No waiting room.</div>
-      <h2 class="cap b" data-at="3900">Short video visits that <em>fit between meetings</em>.</h2>
-      <p class="sub b" data-at="4500">15-minute visits, from their desk or their phone.</p>
+      <h2 class="cap b" data-at="5600">Care that works around <em>their schedule</em>.</h2>
+      <p class="sub b" data-at="6200">Quick check-ins between meetings, longer visits when they can slow down, from 6 AM to 10 PM, every day.</p>
     </div>
   </article>
 
   <!-- F2 response -->
-  <article class="slide parked" data-dur="9000">
+  <article class="slide" data-dur="11000">
     <div class="frame">
-      <div class="eyebrow b" data-at="150">Response, solved</div>
+      <div class="eyebrow b" data-at="150">How we help</div>
+      <p class="note-s b" data-at="200">Illustrative · demo data</p>
       <div class="msg">
         <div class="phone b" data-at="300"><div class="screen">
           <div class="ph-head"><i class="siya"></i><div>Siya Health<small>Your care team</small></div></div>
           <div class="thread">
-            <div class="bub me b" data-at="800">Sleep's a bit better, but I'm still foggy after lunch.</div>
-            <div class="meta r b" data-at="1100">Delivered · Mon 12:47 PM</div>
-            <div class="typing b" data-at="1700" data-out="2900"><span></span><span></span><span></span></div>
-            <div class="bub them b" data-at="3000">Thanks, that's helpful. I've shared this with your provider and booked a 15-minute follow-up Thursday at 12:30.</div>
-            <div class="meta l b" data-at="3300">Care team · 1:32 PM</div>
+            <div class="bub me b" data-at="700">Sleep's a bit better, but I'm still foggy after lunch.</div>
+            <div class="meta r b" data-at="1000">Employee · Mon 12:47 PM</div>
+            <div class="bub them b" data-at="1800">Thanks for the update. We've shared this with your provider and will get back to you.</div>
+            <div class="meta l b" data-at="2100">Care team · 1:24 PM</div>
+            <div class="bub them b" data-at="3000">Your provider reviewed it: continue the same dose for now; it should improve over the next few days. We'll check in Friday.</div>
+            <div class="meta l b" data-at="3300">Care team · 4:10 PM</div>
           </div>
         </div></div>
         <div class="ticker">
-          <div class="wait b" data-at="3400">Sent 12:47 PM. Answered 1:32 PM.</div>
-          <div class="bigtime b" data-at="3700"><em>45</em> minutes</div>
-          <div class="wait b" data-at="4100">From people who know their history.</div>
+          <div class="wait b" data-at="3600">Acknowledged in 37 minutes.</div>
+          <div class="wait b" data-at="4100">Provider answer the same day.</div>
         </div>
       </div>
-      <h2 class="cap b" data-at="4800">A real reply, <em>usually within the hour</em>.</h2>
-      <p class="note-s b" data-at="5300">During business hours</p>
+      <h2 class="cap b" data-at="5000">Real replies, from people who <em>know them</em>.</h2>
+      <p class="sub b" data-at="5600">__FACTS_RESPONSE__</p>
+    </div>
+  </article>
+
+  <!-- urgent -->
+  <article class="slide" data-dur="9000">
+    <div class="frame">
+      <div class="eyebrow b" data-at="150">How we help</div>
+      <p class="note-s b" data-at="200">Illustrative · demo data</p>
+      <div class="phone b" data-at="300"><div class="screen">
+        <div class="ph-head"><i class="siya"></i><div>Siya Health<small>Your care team</small></div></div>
+        <div class="thread">
+          <div class="bub me b" data-at="700">I think I have pink eye. It started tonight.</div>
+          <div class="meta r b" data-at="1000">Employee · 9:12 PM</div>
+          <div class="bub them b" data-at="1800">If this is an emergency, call 911. Otherwise, we can arrange an urgent video visit. Would you like us to set that up?</div>
+          <div class="bub me b" data-at="2800">Yes please.</div>
+          <div class="bub them b" data-at="3600">You're booked for an urgent video visit at 9:40 PM.</div>
+        </div>
+      </div></div>
+      <h2 class="cap b" data-at="4600">Something urgent? We'll get them <em>seen tonight</em>.</h2>
     </div>
   </article>
 
   <!-- F3 whole picture -->
-  <article class="slide parked" data-dur="10000">
+  <article class="slide" data-dur="10000">
     <div class="frame">
-      <div class="eyebrow b" data-at="150">The whole person, solved</div>
+      <div class="eyebrow b" data-at="150">How we help</div>
       <div class="web" id="webF3"></div>
       <h2 class="cap b" data-at="4300">One team that sees <em>the whole picture</em>.</h2>
-      <p class="sub b" data-at="4900">Primary care, mental health, cognitive testing, weight, metabolic and hormonal care, including fertility, under one team. We coordinate with specialists near them when they need one.</p>
+      <p class="sub b" data-at="4900">Primary care, mental health, cognitive testing, weight, metabolic and hormonal care, including fertility, under one team.</p>
+      <p class="pack-note b" data-at="5400">We refer to local specialists and coordinate care with them when clinically needed.</p>
     </div>
   </article>
 
-  <!-- start -->
-  <article class="slide parked" data-dur="9000">
+  <!-- employer start -->
+  <article class="slide" data-dur="9000">
     <div class="frame">
-      <div class="eyebrow b" data-at="150">Getting started</div>
-      <div class="flow">
-        <div class="doors">
-          <div class="door pop" data-at="400"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg></span><div><b>Website</b><small>Book a free meet &amp; greet</small></div></div>
-          <div class="door pop" data-at="650"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><path d="M5 4h4l2 5-3 2a11 11 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span><div><b>Call</b><small>Talk to our care team</small></div></div>
-          <div class="door pop" data-at="900"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><path d="M4 5h16v11H9l-5 4z"/><path d="M9 10h6"/></svg></span><div><b>Secure message</b><small>Private chat with the team</small></div></div>
-        </div>
-        <svg class="links" viewBox="0 0 110 260" preserveAspectRatio="none" aria-hidden="true">
-          <path class="draw" data-at="1200" pathLength="1" d="M0 44 C60 44 50 130 110 130" stroke="#D81088" stroke-width="2" fill="none"/>
-          <path class="draw" data-at="1350" pathLength="1" d="M0 130 L110 130" stroke="#A81490" stroke-width="2" fill="none"/>
-          <path class="draw" data-at="1500" pathLength="1" d="M0 216 C60 216 50 130 110 130" stroke="#7B2D8E" stroke-width="2" fill="none"/>
-        </svg>
-        <div class="cal b" data-at="1800">
-          <div class="cal-h"><i></i><div>Your care team<small>Pick a time that works</small></div></div>
-          <div class="dayrow"><span class="d">Mon</span><span class="d">Tue</span><span class="d">Wed</span><span class="d" data-at="2500">Thu</span><span class="d">Fri</span></div>
-          <div class="timerow"><span class="t">10:15 AM</span><span class="t" data-at="3100">12:30 PM</span><span class="t">4:45 PM</span></div>
-          <div class="ok pop" data-at="3700">You're booked. Video visit, Thursday 12:30 PM.</div>
-        </div>
+      <div class="eyebrow b" data-at="150">Getting started as an employer</div>
+      <div class="steps four">
+        <div class="step pop" data-at="400"><b>1</b><small>Submit an inquiry</small></div>
+        <div class="step pop" data-at="900"><b>2</b><small>We meet with your HR and benefits team</small></div>
+        <div class="step pop" data-at="1400"><b>3</b><small>We build a package around your people's needs</small></div>
+        <div class="step pop" data-at="1900"><b>4</b><small>Your organization gets its own private link</small></div>
       </div>
-      <h2 class="cap b" data-at="4400">They start <em>however suits them</em>.</h2>
-      <p class="sub b" data-at="5000">Same team, same record, whichever door they use.</p>
-      <p class="note-s b" data-at="5200">Illustrative · demo data</p>
+      <p class="pack-note b" data-at="2600">Joining is voluntary. We never mass-enroll or email your employees.</p>
+    </div>
+  </article>
+
+  <!-- how people get care -->
+  <article class="slide" data-dur="10000">
+    <div class="frame">
+      <div class="eyebrow b" data-at="150">How your people get care</div>
+      <p class="note-s b" data-at="200">Illustrative</p>
+      <div class="paths">
+        <div class="path b" data-at="500">
+          <b>Chat with our team</b>
+          <ol>
+            <li>Open your organization's link.</li>
+            <li>Join our secure care app: chat, call, video, and share photos and documents.</li>
+            <li>Our team finds a time with you.</li>
+          </ol>
+        </div>
+        <div class="path b" data-at="1100">
+          <b>Book it yourself</b>
+          <ol>
+            <li>Open the booking link.</li>
+            <li>Choose your care team member.</li>
+            <li>Pick a time.</li>
+            <li>Confirm.</li>
+          </ol>
+        </div>
+        <div class="end-row b" data-at="2000">Confirmation email with a video link, then the visit. Our care coordination team takes it from there.</div>
+      </div>
+      <p class="pack-note b" data-at="2600">Services and coverage are tailored to your organization's package.</p>
     </div>
   </article>
 
   <!-- privacy -->
-  <article class="slide parked" data-dur="8600">
+  <article class="slide" data-dur="9000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Privacy</div>
-      <div class="priv">
-        <div class="b" data-at="300"><div class="ppl dim" id="ppl" data-at="2000"></div></div>
-        <div class="report pop" data-at="2300">
-          <h3>Monthly team report <small>Sample</small></h3>
+      <div class="two-cards">
+        <div class="report b" data-at="400" style="position:relative;left:auto;top:auto;translate:none;width:auto">
+          <h3>What your employees get <small>Sample</small></h3>
+          <svg class="chart" viewBox="0 0 240 72" aria-hidden="true"><path d="M8 58 C 50 56, 80 40, 120 34 S 190 16, 228 14" fill="none" stroke="#D81088" stroke-width="3" stroke-linecap="round"/></svg>
+          <div class="rfoot">Attention: 50th → 68th percentile over 3 months<br>Mood: steady improvement<br>Sleep: improving</div>
+        </div>
+        <div class="report b" data-at="900" style="position:relative;left:auto;top:auto;translate:none;width:auto">
+          <h3>What you get <small>Sample</small></h3>
           <div class="rgrid">
             <div><b>40</b><span>Employees enrolled</span></div>
             <div><b>64</b><span>Visits this month</span></div>
@@ -513,42 +581,51 @@ iframe[title="Siya AI Concierge"]{display:none!important}
           <div class="rfoot">Totals only. No names, no reasons for visits.</div>
         </div>
       </div>
-      <h2 class="cap b" data-at="3300">You see the big picture. <em>Never the person.</em></h2>
-      <p class="sub b" data-at="3900">Aggregate reports only, for groups of 10 or more. Never who, or why.</p>
+      <h2 class="cap b" data-at="1800">They get the whole picture. <em>You get the big picture.</em></h2>
+      <p class="sub b" data-at="2300">Aggregate reports only, for groups of 10 or more. Never who, or why.</p>
     </div>
   </article>
 
-  <!-- credibility -->
-  <article class="slide parked" data-dur="9400">
+  <!-- clinicians -->
+  <article class="slide" data-dur="9000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Experience</div>
-      <h2 class="cap b" data-at="300">Clinicians who've <em>seen it all</em>.</h2>
-      <p class="sub b" data-at="800">Physician-led. Our clinicians also practice in direct primary care, community health centers and veterans' care, across every age and walk of life.</p>
+      <h2 class="cap b" data-at="200">Clinicians who've <em>seen it all</em>.</h2>
       <div class="chips">
-        <span class="chip pop" data-at="1500">Direct primary care</span>
-        <span class="chip pop" data-at="1650">Community health centers</span>
-        <span class="chip pop" data-at="1800">Veterans' care</span>
-        <span class="chip pop" data-at="1950">Complex, overlapping conditions</span>
+        <span class="chip pop" data-at="700">Weight and metabolic care</span>
+        <span class="chip pop" data-at="850">Hormones, including fertility</span>
+        <span class="chip pop" data-at="1000">Mental health</span>
+        <span class="chip pop" data-at="1150">Sexual health</span>
+        <span class="chip pop" data-at="1300">Hair loss</span>
+        <span class="chip pop" data-at="1450">ADHD and cognitive care</span>
+        <span class="chip pop" data-at="1600">Primary care</span>
       </div>
+      <p class="sub b" data-at="2200">Our clinicians also practice in direct primary care, community health centers, veterans' care, and academic, teaching and community hospitals, so we know what to manage ourselves and when to refer.</p>
+    </div>
+  </article>
+
+  <!-- journey -->
+  <article class="slide" data-dur="9000">
+    <div class="frame">
+      <div class="eyebrow b" data-at="150">Our journey so far</div>
       <div class="stats">
         <div class="stat b" data-at="2600"><b data-count="2700" data-at="2600" data-suf="+">0</b><span>Patients treated at Siya Health</span></div>
-        <div class="stat b" data-at="2800"><b data-count="1200" data-at="2800" data-suf="+">0</b><span>Clinical evaluations completed</span></div>
+        <div class="stat b" data-at="2900"><span>most of them busy professionals</span></div>
         <div class="stat b" data-at="3000"><b data-count="4.9" data-dec="1" data-at="3000">0</b><span>Google rating (88 reviews)</span></div>
+        <!--KLARITY_STAT-->
         <div class="stat b" data-at="3200"><b data-count="4" data-at="3200">0</b><span>States: CA, TX, PA, FL</span></div>
       </div>
     </div>
   </article>
 
   <!-- HR -->
-  <article class="slide parked" data-dur="8000">
+  <article class="slide" data-dur="8000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">For your HR team</div>
-      <h2 class="cap b" data-at="300">Simple for HR. <em>Easy for your people.</em></h2>
       <div class="steps">
-        <div class="rail grow" data-at="900"></div>
-        <div class="step pop" data-at="1100"><span class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0A246B" stroke-width="2"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><b>Share your roster</b><small>So we can confirm who's enrolled.</small></div>
-        <div class="step pop" data-at="1700"><span class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span><b>We send a launch kit</b><small>Everything your team needs to get started.</small></div>
-        <div class="step pop" data-at="2300"><span class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#7B2D8E" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span><b>Your people start</b><small>By website, phone or secure message.</small></div>
+        <div class="step pop" data-at="500"><b>Submit an inquiry</b><small>Tell us about your organization.</small></div>
+        <div class="step pop" data-at="1100"><b>We build your package</b><small>With your HR team.</small></div>
+        <div class="step pop" data-at="1700"><b>Your people join</b><small>Through your private link.</small></div>
       </div>
     </div>
   </article>
@@ -560,10 +637,10 @@ iframe[title="Siya AI Concierge"]{display:none!important}
       <h2 class="q2 b" data-at="300">See it <em>live</em>.</h2>
       <p class="sub b" data-at="800">A short call, and we'll walk you through the real experience.</p>
       <div class="row-btns b" data-at="1200">
-        <button class="start" type="button">Book a call</button>
-        <button class="ghost" type="button">Request pilot details</button>
+        <a class="start" href="__INQUIRY_HREF__" data-demo-cta="inquiry">Submit an inquiry</a>
       </div>
-      <div class="mini b" data-at="1600">
+      <p class="pack-note b" data-at="1500">Services and coverage are tailored to your organization's package.</p>
+      <div class="mini b" data-at="1700">
         <button class="link" id="replayTour" type="button">Replay tour</button>
         <button class="link" id="replayIntro2" type="button">Replay intro</button>
       </div>
@@ -788,7 +865,7 @@ $('axis').innerHTML=axisHTML;
 const blocks2=[[9,9.5,'Standup'],[9.5,11,'Client call'],[11,12,'Sprint review'],[12.25,12.5,'Lunch'],[12.5,14,'Workshop'],[14,15,'1:1s'],[15,16.5,'Board prep'],[16.5,18,'Deadline push']];
 $('work2').innerHTML=blocks2.map(([a,b,l],i)=>blk(a,b,l,i,400+i*70)).join('')+
   `<div class="blk pop visit" data-at="1500" style="left:${pct(12)}%;width:calc(${pct(12.25)-pct(12)}% - 2px)"></div>`+
-  `<div class="vtag pop" data-at="1900" style="left:${pct(12.125)}%">15-min video visit · 12:00</div>`;
+  `<div class="vtag pop" data-at="1900" style="left:${pct(12.125)}%">15-min check-in · 12:00</div>`;
 $('axis2').innerHTML=axisHTML;
 
 /* app web (problem 4 + turn) */
@@ -850,16 +927,13 @@ const push=phone?[18,12]:[55,40];
   pos.forEach(([x,y],i)=>{f+=`<path class="draw" data-at="${700+i*120}" pathLength="1" d="M500 ${cy0} L${x} ${y}" stroke="rgba(10,36,107,.4)" stroke-width="2" fill="none"/>`;});
   pos.forEach(([x,y],i)=>{const [x2,y2]=pos[(i+1)%pos.length];const mx=(x+x2)/2*0.86+500*0.14,my=(y+y2)/2*0.86+cy0*0.14;
     f+=`<path class="draw" data-at="${1900+i*90}" pathLength="1" d="M${x} ${y} Q${mx} ${my} ${x2} ${y2}" stroke="rgba(216,16,136,.45)" stroke-width="1.6" fill="none"/>`;});
-  f+=`<path class="fade" data-at="3000" d="M500 ${cy0} L975 ${BOX-15}" stroke="rgba(10,36,107,.35)" stroke-width="1.5" stroke-dasharray="5 6" fill="none"/>`;
   f+='</svg>';
   $('webF3').innerHTML=f+`<div class="node" style="left:50%;top:${topPct(cy0)}%"><div class="me-node halo pop" data-at="300">Siya<br>care team</div></div>`+
-    pos.map(([x,y],i)=>`<div class="node" style="left:${x/10}%;top:${topPct(y)}%"><div class="cond pop" data-at="${600+i*120}">${conds[i][0]}</div></div>`).join('')+
-    `<div class="node" style="left:97%;top:97%"><div class="spec-far fade" data-at="3000">Specialists nearby<br>when needed</div></div>`;
+    pos.map(([x,y],i)=>`<div class="node" style="left:${x/10}%;top:${topPct(y)}%"><div class="cond pop" data-at="${600+i*120}">${conds[i][0]}</div></div>`).join('');
 })();
 
 }
-/* privacy people */
-$('ppl').innerHTML=Array.from({length:40},()=>'<div class="p"><i></i><b></b></div>').join('');
+/* privacy grid retired */
 
 /* engine */
 const slides=[...tour.querySelectorAll('.slide:not(.parked)')],segs=$('segs');

@@ -374,7 +374,7 @@ ${careFlowSvg()}
           <header class="employer-pitch-section-header">
             <p class="employer-pitch-section-label">Section 10 · Response times</p>
             <h2 id="response-heading">How quickly we respond</h2>
-            <p class="employer-pitch-section-lead">Scheduling and non-urgent questions: concierge team responds ${esc(FACTS.responseWithin)}.</p>
+            <p class="employer-pitch-section-lead">${esc(FACTS.responseWithin)}</p>
           </header>
           <p class="employer-pitch-section-lead">Emergency: call <strong>911</strong>. Mental health crisis: call or text <strong>988</strong>. Do not use this page or messaging for emergencies.</p>
         </div>

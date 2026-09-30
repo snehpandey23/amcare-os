@@ -28,10 +28,13 @@ const SLIDE_IDS = [
   'turn',
   'f-time',
   'f-response',
+  'f-urgent',
   'f-whole',
-  'start',
+  'employer',
+  'people',
   'privacy',
-  'experience',
+  'clinicians',
+  'journey',
   'hr',
   'close',
 ];
@@ -99,13 +102,12 @@ body = body.replace(
   `<b data-count="${stateList.length}" data-at="3200">0</b><span>States: ${FACTS.practiceStatesShort}</span>`,
 );
 
+body = body.replaceAll('__INQUIRY_HREF__', DEMO_BOOK_CALL_HREF);
+body = body.replaceAll('__FACTS_RESPONSE__', FACTS.responseWithin);
+const klarity = countParts(FACTS.klarityScore.split('/')[0]);
 body = body.replace(
-  '<button class="start" type="button">Book a call</button>',
-  `<a class="start" href="${DEMO_BOOK_CALL_HREF}" data-demo-cta="book">Book a call</a>`,
-);
-body = body.replace(
-  '<button class="ghost" type="button">Request pilot details</button>',
-  `<a class="ghost" href="${DEMO_BOOK_CALL_HREF}" data-demo-cta="details">Request pilot details</a>`,
+  '<!--KLARITY_STAT-->',
+  `<div class="stat b" data-at="3400"><b data-count="${klarity.n}" data-dec="${klarity.dec}" data-at="3400">0</b><span>Third-party marketplace (${FACTS.klarityReviewCount} reviews)</span></div>`,
 );
 
 body = body.replace(
