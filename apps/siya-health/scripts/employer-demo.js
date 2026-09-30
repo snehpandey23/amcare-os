@@ -247,40 +247,28 @@
 
   var intro = document.getElementById('demo-intro');
   var introSkip = document.getElementById('demo-intro-skip');
-  var introName = document.getElementById('demo-intro-name');
   var introCanvas = document.getElementById('demo-intro-dots');
   var muteBtn = document.getElementById('demo-mute');
   var muted = false;
   var introRunning = false;
   var introFrame = 0;
-  var introClock = 0;
-  var chimeTimer = 0;
-  var nameTimer = 0;
-  var SEEN_KEY = 'siya_demo_intro_seen';
-  var NAME = 'Siya Health';
-  var DOT_COLORS = ['#D81088', '#A81490', '#7B2D8E', '#001878'];
+  var soundOn = false;
+  var stars = [];
+  var starLinksReady = 0;
+  var pointerX = 0.5;
+  var pointerY = 0.5;
+  var assembleAt = 0;
+  var chimed = false;
 
-  function introSeen() {
-    try { return localStorage.getItem(SEEN_KEY) === '1'; }
-    catch (err) { return false; }
-  }
-
-  function markIntroSeen() {
-    try { localStorage.setItem(SEEN_KEY, '1'); }
-    catch (err) { /* private mode */ }
-  }
-
-  function stopChimeTimers() {
-    window.clearTimeout(chimeTimer);
-    window.clearTimeout(nameTimer);
-    window.clearTimeout(introClock);
-    chimeTimer = 0;
-    nameTimer = 0;
-    introClock = 0;
+  function stopStarfield() {
+    window.cancelAnimationFrame(introFrame);
+    introFrame = 0;
+    introRunning = false;
+    soundOn = false;
   }
 
   function playChime() {
-    if (muted || !introRunning || !window.AudioContext) return;
+    if (muted || !soundOn || !window.AudioContext) return;
     var ctx = new window.AudioContext();
     var now = ctx.currentTime;
     [523.25, 659.25, 783.99].forEach(function (freq, i) {
@@ -301,100 +289,262 @@
   }
 
   function closeIntro(advance) {
-    introRunning = false;
-    window.cancelAnimationFrame(introFrame);
-    introFrame = 0;
-    stopChimeTimers();
+    stopStarfield();
+    chimed = false;
     if (intro) {
       intro.hidden = true;
-      intro.classList.remove('is-cream', 'is-line');
+      intro.classList.remove('is-lock', 'is-tag', 'is-bloom', 'is-gate');
     }
     if (advance) show(0, false);
   }
 
-  function beginIntro() {
-    if (!intro || !introCanvas) {
-      show(1, false);
+  function easeInOut(t) {
+    return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+  }
+
+  function makeStars(w, h) {
+    var phone = Math.min(w, h) < 700;
+    var count = phone ? 350 : 800;
+    var accents = ['#D81088', '#A81490', '#7B2D8E'];
+    stars = [];
+    var i;
+    for (i = 0; i < count; i += 1) {
+      var layer = i % 7 === 0 ? 2 : (i % 3 === 0 ? 1 : 0);
+      var accent = Math.random() < 0.15;
+      stars.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * (0.12 + layer * 0.08),
+        vy: (Math.random() - 0.5) * (0.08 + layer * 0.05),
+        layer: layer,
+        r: layer === 0 ? 0.7 + Math.random() * 0.6 : (layer === 1 ? 1.15 + Math.random() * 0.7 : 1.8 + Math.random() * 1.1),
+        base: layer === 0 ? 0.18 + Math.random() * 0.22 : (layer === 1 ? 0.35 + Math.random() * 0.25 : 0.55 + Math.random() * 0.35),
+        phase: Math.random() * Math.PI * 2,
+        tw: 0.6 + Math.random() * 0.9,
+        color: accent ? accents[i % 3] : '#F4EFE7',
+        links: [],
+        letter: false
+      });
+    }
+  }
+
+  function rebuildLinks() {
+    var cell = 78;
+    var map = Object.create(null);
+    var i;
+    var p;
+    var key;
+    for (i = 0; i < stars.length; i += 1) {
+      p = stars[i];
+      p.links.length = 0;
+      key = ((p.x / cell) | 0) + ':' + ((p.y / cell) | 0);
+      if (!map[key]) map[key] = [];
+      map[key].push(i);
+    }
+    for (i = 0; i < stars.length; i += 1) {
+      p = stars[i];
+      var cx = (p.x / cell) | 0;
+      var cy = (p.y / cell) | 0;
+      var oy;
+      var ox;
+      for (oy = -1; oy <= 1; oy += 1) {
+        for (ox = -1; ox <= 1; ox += 1) {
+          var list = map[(cx + ox) + ':' + (cy + oy)];
+          if (!list) continue;
+          var j;
+          for (j = 0; j < list.length; j += 1) {
+            if (p.links.length >= 2) break;
+            var o = list[j];
+            if (o <= i) continue;
+            var dx = stars[o].x - p.x;
+            var dy = stars[o].y - p.y;
+            var dist = dx * dx + dy * dy;
+            if (dist < 64 * 64 && dist > 36) p.links.push(o);
+          }
+        }
+      }
+    }
+  }
+
+  function sampleLetters(w, h) {
+    var c = document.createElement('canvas');
+    c.width = w;
+    c.height = h;
+    var g = c.getContext('2d', { willReadFrequently: true });
+    var size = Math.max(72, Math.min(w * 0.092, 128));
+    g.fillStyle = '#fff';
+    g.font = '700 ' + size + 'px Poppins, sans-serif';
+    g.textAlign = 'center';
+    g.textBaseline = 'middle';
+    g.fillText('Siya Health', w / 2, h * 0.44);
+    var data = g.getImageData(0, 0, w, h).data;
+    var step = Math.max(4, (size / 14) | 0);
+    var pts = [];
+    var y;
+    var x;
+    for (y = 0; y < h; y += step) {
+      for (x = 0; x < w; x += step) {
+        if (data[(y * w + x) * 4 + 3] > 150) pts.push({ x: x, y: y });
+      }
+    }
+    var want = Math.min(pts.length, Math.floor(stars.length * 0.58));
+    var chosen = [];
+    var stride = Math.max(1, Math.floor(pts.length / Math.max(1, want)));
+    for (x = 0; x < pts.length && chosen.length < want; x += stride) chosen.push(pts[x]);
+    for (x = 0; x < stars.length; x += 1) {
+      var s = stars[x];
+      s.ox = s.x;
+      s.oy = s.y;
+      if (x < chosen.length) {
+        s.letter = true;
+        s.tx = chosen[x].x;
+        s.ty = chosen[x].y;
+      } else {
+        s.letter = false;
+        var ang = Math.random() * Math.PI * 2;
+        var rad = 0.22 + Math.random() * 0.28;
+        s.tx = w / 2 + Math.cos(ang) * w * rad * 0.42;
+        s.ty = h * 0.44 + Math.sin(ang) * h * rad * 0.32;
+      }
+    }
+  }
+
+  function drawStars(now) {
+    if (!intro || !introCanvas || intro.hidden) return;
+    var w = intro.clientWidth;
+    var h = intro.clientHeight;
+    if (w < 2 || h < 2) {
+      introFrame = window.requestAnimationFrame(drawStars);
       return;
     }
-    introRunning = true;
-    intro.hidden = false;
-    intro.classList.remove('is-gate', 'is-cream', 'is-line');
-    if (introName) introName.textContent = '';
-    var dots = [];
-    var i;
-    for (i = 0; i < 22; i += 1) {
-      dots.push({
-        x: Math.random(),
-        y: Math.random(),
-        vx: (Math.random() - 0.5) * 0.018,
-        vy: (Math.random() - 0.5) * 0.014,
-        r: 5 + Math.random() * 9,
-        color: DOT_COLORS[i % DOT_COLORS.length],
-        alpha: 0.28 + (i % 4) * 0.16
-      });
+    var phone = Math.min(w, h) < 700;
+    var dpr = Math.min(window.devicePixelRatio || 1, phone ? 1.25 : 1.5);
+    if (!stars.length || stars._w !== w || stars._h !== h) {
+      makeStars(w, h);
+      stars._w = w;
+      stars._h = h;
+      rebuildLinks();
+    }
+    if (introCanvas.width !== Math.round(w * dpr) || introCanvas.height !== Math.round(h * dpr)) {
+      introCanvas.width = Math.round(w * dpr);
+      introCanvas.height = Math.round(h * dpr);
     }
     var ctx = introCanvas.getContext('2d');
-    var started = performance.now();
-    var chimed = false;
-    function frame(now) {
-      if (!introRunning) return;
-      var t = now - started;
-      var w = intro.clientWidth;
-      var h = intro.clientHeight;
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
-      if (introCanvas.width !== Math.round(w * dpr) || introCanvas.height !== Math.round(h * dpr)) {
-        introCanvas.width = Math.round(w * dpr);
-        introCanvas.height = Math.round(h * dpr);
-      }
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, w, h);
-      var gather = t < 1500 ? 0 : Math.min(1, (t - 1500) / 900);
-      gather = gather * gather * (3 - 2 * gather);
-      var fade = t < 2900 ? 1 : Math.max(0, 1 - (t - 2900) / 500);
-      if (t >= 2000) intro.classList.add('is-cream');
-      dots.forEach(function (dot) {
-        if (gather <= 0) {
-          dot.x += dot.vx * 0.35;
-          dot.y += dot.vy * 0.35;
-          if (dot.x < 0.05 || dot.x > 0.95) dot.vx *= -1;
-          if (dot.y < 0.08 || dot.y > 0.92) dot.vy *= -1;
-        }
-        var x = (dot.x + (0.5 - dot.x) * gather) * w;
-        var y = (dot.y + (0.5 - dot.y) * gather) * h;
-        ctx.beginPath();
-        ctx.fillStyle = dot.color;
-        ctx.globalAlpha = dot.alpha * fade;
-        ctx.shadowColor = dot.color;
-        ctx.shadowBlur = 18;
-        ctx.arc(x, y, dot.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-      ctx.globalAlpha = 1;
-      ctx.shadowBlur = 0;
-      if (!chimed && gather >= 1) {
-        chimed = true;
-        playChime();
-      }
-      if (t < 4700) introFrame = window.requestAnimationFrame(frame);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    var grd = ctx.createRadialGradient(w / 2, h / 2, 20, w / 2, h / 2, Math.max(w, h) * 0.48);
+    grd.addColorStop(0, 'rgba(10, 36, 107, 0.55)');
+    grd.addColorStop(1, 'rgba(10, 36, 107, 0)');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, w, h);
+
+    var t = introRunning ? now - assembleAt : 0;
+    var gather = introRunning ? easeInOut(Math.min(1, t / 2500)) : 0;
+    var bloom = !introRunning || t < 6500 ? 0 : Math.min(1, (t - 6500) / 1500);
+    var sec = now / 1000;
+
+    if (introRunning && t >= 2500 && !chimed) {
+      chimed = true;
+      playChime();
+      intro.classList.add('is-lock');
     }
-    introFrame = window.requestAnimationFrame(frame);
-    nameTimer = window.setTimeout(function () {
-      var step = 0;
-      function typeName() {
-        if (!introRunning || !introName) return;
-        step += 1;
-        introName.textContent = NAME.slice(0, step);
-        if (step < NAME.length) nameTimer = window.setTimeout(typeName, 64);
-        else {
-          intro.classList.add('is-line');
-          introClock = window.setTimeout(function () {
-            if (introRunning) closeIntro(true);
-          }, 1500);
-        }
+    if (introRunning && t >= 3000) intro.classList.add('is-tag');
+    if (introRunning && t >= 6500) intro.classList.add('is-bloom');
+
+    var i;
+    for (i = 0; i < stars.length; i += 1) {
+      var s = stars[i];
+      if (!introRunning) {
+        s.x += s.vx;
+        s.y += s.vy;
+        if (s.x < -20) s.x = w + 20;
+        if (s.x > w + 20) s.x = -20;
+        if (s.y < -20) s.y = h + 20;
+        if (s.y > h + 20) s.y = -20;
+      } else if (t < 2500) {
+        s.x = s.ox + (s.tx - s.ox) * gather;
+        s.y = s.oy + (s.ty - s.oy) * gather;
+      } else if (!s.letter) {
+        s.x += Math.cos(sec * 0.35 + s.phase) * 0.12;
+        s.y += Math.sin(sec * 0.28 + s.phase) * 0.1;
       }
-      typeName();
-    }, 2700);
+    }
+
+    starLinksReady += 1;
+    if (starLinksReady % 5 === 0) rebuildLinks();
+
+    var px = (pointerX - 0.5);
+    var py = (pointerY - 0.5);
+    ctx.lineWidth = 1;
+    for (i = 0; i < stars.length; i += 1) {
+      var a = stars[i];
+      var k;
+      for (k = 0; k < a.links.length; k += 1) {
+        var b = stars[a.links[k]];
+        var ax = a.x + px * (8 + a.layer * 10);
+        var ay = a.y + py * (6 + a.layer * 8);
+        var bx = b.x + px * (8 + b.layer * 10);
+        var by = b.y + py * (6 + b.layer * 8);
+        ctx.strokeStyle = 'rgba(244, 239, 231, 0.08)';
+        ctx.beginPath();
+        ctx.moveTo(ax, ay);
+        ctx.lineTo(bx, by);
+        ctx.stroke();
+      }
+    }
+
+    var particleFade = 1 - bloom;
+    for (i = 0; i < stars.length; i += 1) {
+      var star = stars[i];
+      var tw = 0.55 + 0.45 * Math.sin(sec * star.tw + star.phase);
+      var alpha = star.base * tw * particleFade;
+      if (introRunning && star.letter && t > 2800) alpha *= Math.max(0.25, 1 - (t - 2800) / 2200);
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = star.color;
+      ctx.beginPath();
+      ctx.arc(star.x + px * (8 + star.layer * 10), star.y + py * (6 + star.layer * 8), star.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    if (bloom > 0) {
+      var light = ctx.createRadialGradient(w / 2, h * 0.46, 10, w / 2, h * 0.46, Math.max(w, h) * 0.72);
+      light.addColorStop(0, 'rgba(244, 239, 231, ' + (0.2 + bloom * 0.8) + ')');
+      light.addColorStop(1, 'rgba(244, 239, 231, ' + (bloom * 0.95) + ')');
+      ctx.fillStyle = light;
+      ctx.fillRect(0, 0, w, h);
+    }
+
+    if (introRunning && t >= 8000) {
+      closeIntro(true);
+      return;
+    }
+    introFrame = window.requestAnimationFrame(drawStars);
+  }
+
+  function beginIntro() {
+    if (!intro || !introCanvas || introRunning) return;
+    introRunning = true;
+    soundOn = true;
+    chimed = false;
+    assembleAt = performance.now();
+    intro.classList.remove('is-gate');
+    sampleLetters(intro.clientWidth, intro.clientHeight);
+  }
+
+  if (!reduce && intro && introCanvas) {
+    intro.addEventListener('pointermove', function (event) {
+      var rect = intro.getBoundingClientRect();
+      if (!rect.width) return;
+      pointerX = (event.clientX - rect.left) / rect.width;
+      pointerY = (event.clientY - rect.top) / rect.height;
+    });
+    window.addEventListener('deviceorientation', function (event) {
+      if (event.gamma == null) return;
+      pointerX = Math.max(0, Math.min(1, 0.5 + event.gamma / 40));
+      pointerY = Math.max(0, Math.min(1, 0.5 + (event.beta || 0) / 70));
+    });
+    introFrame = window.requestAnimationFrame(drawStars);
   }
 
   if (muteBtn) {

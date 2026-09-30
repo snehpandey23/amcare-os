@@ -137,8 +137,8 @@ const html = `<!DOCTYPE html>
     <main id="main">
       <section class="demo-slide" id="welcome" data-demo-chapter="welcome" data-title="Welcome" data-fx="dissolve" aria-labelledby="demo-welcome-heading">
         <div class="container demo-slide-inner">
-          <p class="demo-kicker" data-demo-in="up" style="--demo-i:0">A 2-minute tour for HR and benefits leaders</p>
-          <h1 id="demo-welcome-heading" data-demo-in="up" style="--demo-i:1">Siya Health — an integrated care experience for <span class="siya-em">busy professionals</span>.</h1>
+          <p class="demo-welcome-mark" data-demo-in="up" style="--demo-i:0">Siya Health</p>
+          <h1 id="demo-welcome-heading" class="demo-welcome-line" data-demo-in="up" style="--demo-i:1">A 2-minute tour for HR and benefits leaders</h1>
           <p data-demo-in="up" style="--demo-i:2"><button type="button" class="demo-open" id="demo-start-tour">Start the tour</button></p>
         </div>
       </section>
@@ -480,8 +480,9 @@ const html = `<!DOCTYPE html>
       <canvas class="demo-intro-dots" id="demo-intro-dots" aria-hidden="true"></canvas>
       <button type="button" class="demo-intro-skip" id="demo-intro-skip">Skip</button>
       <p class="demo-intro-gate" id="demo-intro-gate">Click to begin</p>
-      <div class="demo-intro-copy">
-        <p class="demo-intro-name" id="demo-intro-name"></p>
+      <div class="demo-intro-copy" id="demo-intro-copy">
+        <p class="demo-intro-mark" id="demo-intro-mark">Siya Health</p>
+        <p class="demo-intro-line" id="demo-intro-line">Integrated care for <span class="siya-em">busy professionals</span></p>
       </div>
     </div>
     <button type="button" id="demo-mute" class="demo-mute" aria-pressed="false" aria-label="Mute sound">Mute</button>
