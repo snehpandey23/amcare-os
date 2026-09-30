@@ -12,7 +12,7 @@
 - **Cursor owns code and deploys.** Port the prototype into the site, wire it to our shared data and tracking, deploy, and make follow-up changes.
 - **Port, don't redesign.** Match the prototype's visuals, timing, motion, copy and sound exactly. If something can't be matched, say what and why. Don't substitute your own approach.
 - **Deploy demo-only changes straight to production.** `/employers/demo` is unlinked and noindex, so it's the review environment.
-- **Stop and ask before touching shared files:** `employer-pilot-facts.mjs`, `site-chrome.mjs`, tracking scripts, `/employers/california-pilot`, or any other page.
+- **Stop and ask before touching shared files:** `employer-pilot-facts.mjs`, `site-chrome.mjs`, tracking scripts, or any page other than the demo. `/employers/california-pilot` was removed 2026-09-30 and redirects to `/employers`.
 - **After every deploy,** reply with the live URL, a one-line summary of what changed, anything you couldn't match, and screenshots of the affected slides at 1440×900 and 390×844.
 
 ## 2. Structure of the page
@@ -57,7 +57,7 @@ The page never scrolls. Every slide must fit the viewport at 1440×900 and 390×
 | 7.6s | Cream radial bloom expands from center. |
 | 8.7s | Welcome screen. Stop the canvas loop to save battery. |
 
-**Before the click:** a centered, glowing "Click to begin" button with the hint "Sound on for the full experience." Skip and Mute stay **hidden** until the intro plays. Clicking anywhere on the canvas also starts it.
+**Before the click:** a centered, glowing "Click to begin" button with the hint "Sound on for the full experience." Skip and Mute stay **hidden** until the intro plays. Clicking anywhere on the canvas also starts it. After the intro has started, any click, tap, Enter, or Space skips to the cream welcome. The Skip button does the same.
 
 ### 3.4 Sound (Web Audio, synthesized: no audio files, no licensing)
 
@@ -141,7 +141,7 @@ All of these play. Care hours and the reply standard come from `employer-pilot-f
 |---|---|---|---|---|
 | 0 | statement | The problem | Healthcare still runs on a schedule your people can't keep. | 4.8s |
 | 1 | p-time | Time | Appointments that don't fit a workday. | 10.8s |
-| 2 | p-response | Response | Messages that go unanswered for days. | 11s |
+| 2 | p-response | Response | Voicemail story, all inside the phone. Caption: Messages that go unanswered for days. | 11.5s |
 | 3 | p-whole | The whole person | It's all connected. Their care isn't. | 10s |
 | 4 | p-coord | Coordination | Five apps. Five logins. No one connecting the dots. | 9s |
 | 5 | question | — | But is it there when they need it? | 7s |

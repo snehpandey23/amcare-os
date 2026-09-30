@@ -122,6 +122,19 @@ button:focus-visible{outline:2px solid #FF5CB8;outline-offset:3px}
 /* phone */
 .msg{display:flex;gap:clamp(24px,6vw,80px);align-items:center;justify-content:center;flex-wrap:wrap}
 .phone{height:min(46vh,430px);aspect-ratio:9/17;border-radius:34px;background:#0B1133;padding:10px;box-shadow:0 30px 60px rgba(10,36,107,.25)}
+#p-response.slide{padding-bottom:150px}
+#p-response .phone{height:min(46vh,420px)}
+.vm{padding:10px;display:flex;flex-direction:column;gap:8px;text-align:left}
+.vm>.b:not(.in),.vm>.b.out{display:none}
+.vm-row{background:#fff;border-radius:12px;padding:8px 10px;display:grid;gap:3px;box-shadow:0 2px 8px rgba(10,36,107,.08)}
+.vm-row b{font:600 12px/1.25 var(--font-display);color:var(--ink)}
+.vm-time{float:right;font:500 10px/1.3 var(--font-body);color:var(--ink-soft)}
+.vm-row small,.vm-script{font:500 11px/1.35 var(--font-body);color:var(--ink-soft)}
+.vm-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#2F6BFF;margin-right:4px}
+.vm-tag{color:#D81088}
+.vm-row.played{opacity:.7}
+.vm-call{background:#fff;border-radius:12px;padding:14px 12px;text-align:center;font:600 13px/1.4 var(--font-display);color:var(--ink)}
+.vm-call.ended{color:var(--ink-soft)}
 .screen{height:100%;border-radius:26px;background:var(--cream-2);display:grid;grid-template-rows:auto 1fr;overflow:hidden;text-align:left}
 .ph-head{padding:22px 14px 12px;border-bottom:1px solid var(--line);font:600 13px/1.2 var(--font-display);color:var(--ink);display:flex;gap:10px;align-items:center}
 .ph-head i{width:28px;height:28px;border-radius:50%;background:rgba(10,36,107,.12);display:block}
@@ -367,33 +380,43 @@ iframe[title="Siya AI Concierge"]{display:none!important}
   </article>
 
   <!-- P2 response -->
-  <article class="slide" data-dur="11000">
+  <article class="slide" data-dur="14500">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Response</div>
       <div class="msg">
-        <div class="phone b" data-at="350"><div class="screen">
-          <div class="ph-head"><i></i><div>Your clinic<small>Patient portal</small></div></div>
-          <div class="thread">
-            <div class="bub me b" data-at="900">Hi, can someone call me back about my follow-up? I can talk after 6.</div>
-            <div class="meta r b" data-at="1300">Delivered · Mon 9:14 AM</div>
-            <div class="typing b" data-at="2300" data-out="3400"><span></span><span></span><span></span></div>
+        <div class="phone b" data-at="300"><div class="screen vm-screen">
+          <div class="ph-head"><i></i><div>Recents<small>Voicemail</small></div></div>
+          <div class="vm">
+            <div class="vm-row b" data-at="800">
+              <b>Your clinic <span class="vm-time">Mon 9:14 AM</span></b>
+              <small>No answer · You left a voicemail</small>
+              <span class="vm-script">“Hi, can someone call me back about my follow-up?”</span>
+            </div>
+            <div class="vm-row unread b" data-at="6200" data-out="8200">
+              <b><i class="vm-dot"></i> Your clinic <span class="vm-time">Thu 4:02 PM</span></b>
+              <small class="vm-tag">while you were in Board prep</small>
+              <span class="vm-script">“Hi, the doctor would like to discuss your results. Please call our office to schedule an appointment.”</span>
+            </div>
+            <div class="vm-row played b" data-at="8300" data-out="9000">
+              <b>Your clinic <span class="vm-time">Thu 4:02 PM</span></b>
+              <small>Played</small>
+            </div>
+            <div class="vm-call b" data-at="9100" data-out="10000">Calling Your clinic…</div>
+            <div class="vm-call b" data-at="10000" data-out="10800">Our office is now closed. Please call back during business hours.</div>
+            <div class="vm-call ended b" data-at="10800">Call ended</div>
           </div>
         </div></div>
         <div class="ticker">
           <div class="days">
-            <span class="b" data-at="1300" data-out="3800">Monday</span>
-            <span class="b" data-at="3900" data-out="4700">Tuesday</span>
-            <span class="b" data-at="4800" data-out="5600">Wednesday</span>
-            <span class="b" data-at="5700">Thursday</span>
+            <span class="b" data-at="800" data-out="3200">Monday</span>
+            <span class="b" data-at="3300" data-out="4500">Tuesday</span>
+            <span class="b" data-at="4600" data-out="5600">Wednesday</span>
+            <span class="b" data-at="5800">Thursday</span>
           </div>
-          <div class="wait b" data-at="2000">Delivered. Still waiting.</div>
-          <div class="count b" data-at="5900">3 days. No reply.</div>
         </div>
       </div>
-      <p class="wait b" data-at="7000">Thursday 2:40 PM · Please call the office to schedule.</p>
-      <div class="chip pop" data-at="7600">In a meeting</div>
-      <h2 class="cap b" data-at="8200">Messages that go <em>unanswered for days</em>.</h2>
-      <p class="sub b" data-at="8800">And when a reply finally comes, it lands mid-meeting, and the loop starts again.</p>
+      <h2 class="cap b" data-at="200">Messages that go <em>unanswered for days</em>.</h2>
+      <p class="sub b" data-at="10800">And when the reply finally comes, it lands mid-meeting, and the loop starts again.</p>
     </div>
   </article>
 
@@ -683,7 +706,7 @@ function sampleText(){
   o.font=`700 ${fs}px Poppins, ui-sans-serif, system-ui, sans-serif`;
   const cy=H*0.43;o.fillText('Siya Health',W/2,cy);
   textBox={cx:W/2,cy,fs,w:o.measureText('Siya Health').width};
-  const d=o.getImageData(0,0,W,H).data,pts=[],step=Math.max(W<700?2:3,Math.round(fs/(W<700?44:38)));
+  const d=o.getImageData(0,0,W,H).data,pts=[],step=Math.max(2,Math.round(fs/(W<700?44:40)));
   for(let y=0;y<H;y+=step)for(let x=0;x<W;x+=step){if(d[(y*W+x)*4+3]>150)pts.push({x:x+rnd(-.5,.5),y:y+rnd(-.5,.5)});}
   return pts;
 }
@@ -701,7 +724,7 @@ function build(){
     return Object.assign(s,{sx:s.x,sy:s.y,tx:p.x,ty:p.y,
       delay:rnd(0,.5)+(p.x-(textBox.cx-textBox.w/2))/textBox.w*.4,dur:rnd(1.3,1.7),
       cx:(s.x+p.x)/2+side*dist*rnd(.18,.34),cy:(s.y+p.y)/2-dist*rnd(.1,.3),
-      lc:Math.random()<.2?'#FFF4FA':letterColor(p.x),lr:rnd(1.15,2)*scale,flare:Math.random()<.09});
+      lc:letterColor(p.x),lr:rnd(1.45,2.5)*scale,flare:Math.random()<.09});
   });
   tag.style.top=(textBox.cy+textBox.fs*0.74)+'px';
 }
@@ -776,13 +799,6 @@ function frame(time){
   bg();const T=phase==='idle'?0:(time-t0)/1000;
   drift(stars);
   if(textBox)nebula(time,phase==='idle'?0:Math.min(1,Math.max(0,(T-1.2)/1.6)));
-  if(phase!=='idle'&&textBox){
-    ctx.save();ctx.globalCompositeOperation='lighter';ctx.filter='blur(22px)';
-    const gg=ctx.createRadialGradient(textBox.cx,textBox.cy,8,textBox.cx,textBox.cy,textBox.w*.46);
-    gg.addColorStop(0,'rgba(216,16,136,.62)');gg.addColorStop(.55,'rgba(201,160,255,.34)');gg.addColorStop(1,'rgba(216,16,136,0)');
-    ctx.fillStyle=gg;ctx.globalAlpha=1;ctx.beginPath();ctx.ellipse(textBox.cx,textBox.cy,textBox.w*.42,textBox.fs*.72,0,0,Math.PI*2);ctx.fill();
-    ctx.restore();
-  }
   ctx.globalCompositeOperation='lighter';
   lines(stars,W<700?85:120,.14);
   const dim=phase==='idle'?1:1-.3*Math.min(1,T/2.5);
@@ -800,12 +816,13 @@ function frame(time){
       if(p>0&&p<1){ctx.globalAlpha=.22*(1-Math.abs(p-.5)*2);ctx.strokeStyle=s.lc;ctx.lineWidth=s.r*.8;
         const pb=Math.max(0,e-.07),ub=1-pb;ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(ub*ub*s.sx+2*ub*pb*s.cx+pb*pb*s.tx,ub*ub*s.sy+2*ub*pb*s.cy+pb*pb*s.ty);ctx.stroke();}
       if(p<.65){dot(s,time,1);continue;}
-      const tw=.72+.28*Math.sin(time*.0022*s.ts+s.tw);
       let hi=0;if(cyc>=0&&cyc<=1.15)hi=Math.exp(-Math.pow((s.x-sweepX)/46,2));
       const grow=p<1?(p-.65)/.35:1;
-      const lr=s.lr*(W<700?1.35:1);
-      ctx.fillStyle=s.lc;ctx.globalAlpha=Math.min(1,(tw+hi*.35)*grow);diamond(s.x,s.y,lr*(1+hi*.6));
-      if(hi>.25){ctx.fillStyle='#FFFFFF';ctx.globalAlpha=hi*.75;diamond(s.x,s.y,s.lr*.55);}
+      const lr=s.lr*1.25;
+      ctx.globalCompositeOperation='source-over';
+      ctx.fillStyle=s.lc;ctx.globalAlpha=p>=1?1:grow;diamond(s.x,s.y,lr);
+      ctx.fillStyle='#FFFFFF';ctx.globalAlpha=p>=1?1:grow*.9;diamond(s.x,s.y,lr*.42);
+      if(hi>.2){ctx.globalCompositeOperation='lighter';ctx.fillStyle='#FFFFFF';ctx.globalAlpha=Math.min(1,hi);diamond(s.x,s.y,lr*(.55+hi*.4));}
       if(s.flare&&p>=1){const f=Math.max(0,Math.sin(time*.0019+s.tw*5));const fk=Math.pow(f,14);
         if(fk>.05){ctx.strokeStyle='#FFF4FA';ctx.globalAlpha=fk*.9;ctx.lineWidth=1;const L=s.lr*5*fk+2;
           ctx.beginPath();ctx.moveTo(s.x-L,s.y);ctx.lineTo(s.x+L,s.y);ctx.moveTo(s.x,s.y-L);ctx.lineTo(s.x,s.y+L);ctx.stroke();}}
@@ -838,9 +855,9 @@ function resetIntro(){
   phase='idle';build();cancelAnimationFrame(raf);raf=requestAnimationFrame(frame);
 }
 $('beginBtn').addEventListener('click',e=>{e.stopPropagation();play();});
-cv.addEventListener('click',play);
+cv.addEventListener('click',()=>{if(phase==='idle')play();else if(phase==='play')finishIntro();});
 addEventListener('keydown',e=>{
-  if(phase==='idle'&&(e.key==='Enter'||e.key===' ')){e.preventDefault();play();return;}
+  if((e.key==='Enter'||e.key===' ')&&(phase==='idle'||phase==='play')){e.preventDefault();if(phase==='idle')play();else finishIntro();return;}
   if(tourOn){if(e.key==='ArrowRight'){e.preventDefault();advance();}else if(e.key==='ArrowLeft'){e.preventDefault();show(cur-1);}else if(e.key===' '){e.preventDefault();togglePause();}}
 });
 $('skip').addEventListener('click',e=>{e.stopPropagation();if(phase==='idle')phase='play';finishIntro();});
