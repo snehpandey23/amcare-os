@@ -725,19 +725,22 @@ html:not(.demo-js) body.page-employer-demo [data-demo-in] {
 .demo-cal { text-align: center; }
 .demo-cal-grid { display: grid; grid-template-columns: repeat(7, 2rem); gap: 0.25rem; justify-content: center; }
 .demo-cal-grid span { height: 2rem; line-height: 2rem; border-radius: 999px; }
+.demo-cal-grid span.is-sweep, .demo-times span.is-sweep {
+  background: rgba(216, 16, 136, 0.16);
+  color: #001878;
+}
 
 .demo-info-grid { display: grid; gap: 0.8rem; margin: 0; padding: 0; list-style: none; }
 @media (min-width: 900px) { .demo-info-grid { grid-template-columns: repeat(3, 1fr); } }
-.demo-clock, .demo-bubble-stamp, .demo-tangle {
+.demo-info-grid li { text-align: center; }
+.demo-scene {
   display: block;
-  height: 4.5rem;
-  margin-bottom: 0.4rem;
+  width: 100%;
+  height: 7.5rem;
+  margin: 0 auto 0.2rem;
 }
-.demo-clock { width: 4.5rem; border-radius: 50%; border: 3px solid #001878; position: relative; background: conic-gradient(#D81088 0 270deg, transparent 270deg 360deg); }
-.demo-bubble-stamp { font-size: 0.85rem; color: #0A246B; border: 1px solid #001878; border-radius: 1rem 1rem 1rem 0; display: inline-flex; align-items: center; padding: 0.4rem 0.7rem; height: auto; background: #fff; }
-.demo-tangle svg { width: 100%; height: 2.2rem; }
-.demo-tangle span { display: inline-block; width: 0.7rem; height: 0.7rem; margin: 0.1rem; border-radius: 0.2rem; border: 2px solid #001878; }
 
 @media (prefers-reduced-motion: reduce) {
   .demo-shot--zoom img { animation: none; }
+  .demo-times span, .demo-cal-grid span { opacity: 1; transform: none; }
 }

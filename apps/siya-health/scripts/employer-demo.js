@@ -90,6 +90,7 @@
       track('employer_demo_slide_view', { slide: n });
     }
     playChat(slide);
+    if (window.SiyaScenes) window.SiyaScenes.onSlide(slide);
   }
 
   var chatTimer = 0;

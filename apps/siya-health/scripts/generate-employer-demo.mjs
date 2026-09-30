@@ -147,19 +147,16 @@ const html = `<!DOCTYPE html>
         <div class="container demo-slide-inner demo-infographic">
           <h2 id="demo-problem-heading" class="demo-sr" data-demo-in="up">The problem</h2>
           <ul class="demo-info-grid">
-            <li data-demo-in="zoom" style="--demo-i:0">
-              <span class="demo-clock" aria-hidden="true"><span class="demo-clock-work"></span><span class="demo-clock-face"></span></span>
+            <li style="--demo-i:0">
+              <canvas class="demo-scene" data-scene="miss" aria-hidden="true"></canvas>
               <p data-demo-in="up" style="--demo-i:3">Appointments that don&rsquo;t fit a workday</p>
             </li>
-            <li data-demo-in="zoom" style="--demo-i:1">
-              <span class="demo-bubble-stamp" aria-hidden="true">Seen · 3 days ago</span>
+            <li style="--demo-i:1">
+              <canvas class="demo-scene" data-scene="wait" aria-hidden="true"></canvas>
               <p data-demo-in="up" style="--demo-i:4">Messages that go unanswered for days</p>
             </li>
-            <li data-demo-in="zoom" style="--demo-i:2">
-              <span class="demo-tangle" aria-hidden="true">
-                <svg viewBox="0 0 160 72" aria-hidden="true"><path d="M16 20 C 40 60, 70 8, 96 40 S 130 10, 148 36" fill="none" stroke="#001878" stroke-width="1.5"/><path d="M20 50 C 50 10, 80 64, 110 24 S 140 58, 152 18" fill="none" stroke="#D81088" stroke-width="1.5"/></svg>
-                <span></span><span></span><span></span><span></span><span></span>
-              </span>
+            <li style="--demo-i:2">
+              <canvas class="demo-scene" data-scene="apps" aria-hidden="true"></canvas>
               <p data-demo-in="up" style="--demo-i:5">Five apps, five logins, no one connecting the dots</p>
             </li>
           </ul>
@@ -435,7 +432,7 @@ const html = `<!DOCTYPE html>
           <h2 data-demo-in="up" style="--demo-i:0">Your care team</h2>
           <div class="demo-cal" data-demo-in="up" style="--demo-i:1" aria-hidden="true">
             <p>September</p>
-            <div class="demo-cal-grid"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span></span><span>1</span><span>2</span><span>3</span><span>4</span><span class="is-pick">5</span><span>6</span></div>
+            <div class="demo-cal-grid"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span></span><span>1</span><span>2</span><span>3</span><span>4</span><span class="is-pick" data-pick="5">5</span><span>6</span></div>
           </div>
         </div>
       </section>
@@ -444,7 +441,7 @@ const html = `<!DOCTYPE html>
           <p class="demo-label">Illustrative — demo data</p>
           <h2 data-demo-in="up">Thursday, September 5</h2>
           <div class="demo-times" data-demo-in="up" style="--demo-i:1">
-            <span>10:30</span><span class="is-pick">12:30</span><span>2:00</span><span>4:30</span>
+            <span>10:30</span><span class="is-pick" data-pick="12:30">12:30</span><span>2:00</span><span>4:30</span>
           </div>
         </div>
       </section>
@@ -481,6 +478,7 @@ const html = `<!DOCTYPE html>
     </div>
     <button type="button" id="demo-mute" class="demo-mute" aria-pressed="false" aria-label="Mute sound">Mute</button>
     <script src="/scripts/siya-intro.js" defer></script>
+    <script src="/scripts/siya-demo-scenes.js" defer></script>
     <script src="/scripts/employer-demo.js" defer></script>
   </body>
 </html>
