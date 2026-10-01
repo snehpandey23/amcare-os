@@ -65,6 +65,16 @@ For every slide proposed to split on phones, describe what goes on each screen.
 
 Do the fix-now items. Do not make needs-approval changes until the founder confirms.
 
+## Slide design system
+
+Every slide follows this. A slide is never only text on a background.
+
+1. **Structure:** eyebrow, then a headline of at most two lines, then an optional subline of at most two lines, then one hero visual that takes at least 45% of the slide height. A list is never plain text. Each item is a card with an icon.
+2. **Heroes** are objects people already recognize: a form, a calendar invite, a chat thread, a booking page, an email, a video call, a dashboard, a review card. Draw them with the existing cream, navy, and magenta tokens. No vendor logos and no copies of another product's interface.
+3. **Motion, and nothing else:** pop (cards), draw (lines, charts, rails), count-up (numbers), a travelling dot (flows), glow (emphasis), sequential ticks (checklists). Three to five beats, 400–600ms apart. Slides run 7–10 seconds.
+4. **Type.** Desktop: headline 40–46px, subline 17–18px, card titles 15–16px, labels at least 12px. Phone: headline 26–28px, subline 15px, card titles 14px, labels at least 12px.
+5. **Mobile:** design 390×844 first. One idea per screen. If a slide does not fit above the control bar, split it on phones. Desktop may keep one slide. Do not scale the whole slide below 90%. Keep a 120px safe zone above the bar. On phones, lay the hero out with flex or grid so pieces cannot overlap.
+
 ## 2. Structure of the page
 
 One full-screen stage with three layers, shown in this order:
@@ -201,12 +211,12 @@ All of these play. Care hours and the reply standard come from `employer-pilot-f
 | 9 | f-response | How we help | Real replies, from people who know them. | 11s |
 | 10 | f-urgent | How we help | Something urgent? We'll get them seen tonight. | 9s |
 | 11 | f-whole | How we help | One team that sees the whole picture. | 10s |
-| 12 | employer | Getting started as an employer | Four steps, voluntary join. | 9s |
-| 13 | people | How your people get care | Chat with our team, or book it yourself. | 10s |
-| 14 | privacy | Privacy | They get the whole picture. You get the big picture. | 9s |
-| 15 | clinicians | Experience | Clinicians who've seen it all. | 9s |
-| 16 | journey | Our journey so far | Counts from the facts file. "Most of them busy professionals" stays. | 9s |
-| 17 | hr | For your HR team | Inquiry, package, private link. | 8s |
+| 12 | employer | Getting started | Four-card rail. Phone splits into employer-a and employer-b. | 9s |
+| 13 | people | How your people get care | Chat and booking, side by side. Phone uses people-chat then people-book. | 9s |
+| 14 | people-after | How your people get care | Email, video visit, checklist. Same slide on both sizes. | 9s |
+| 15 | privacy | Privacy | Two sample panels. Phone uses privacy-emp then privacy-you. | 9s |
+| 16 | clinicians | Experience | Condition tiles, then practice chips. | 8s |
+| 17 | proof | Proof | Counts, then three homepage reviews. Phone uses proof-nums then proof-revs. | 9s |
 | 18 | close | Siya Health | See it live. One button: Submit an inquiry. | — |
 
 Exact copy, timings and build order are in the prototype. Add a stable `id` to each slide when porting (used for analytics and deep links).

@@ -32,11 +32,19 @@ const SLIDE_IDS = [
   'f-urgent',
   'f-whole',
   'employer',
+  'employer-a',
+  'employer-b',
   'people',
+  'people-chat',
+  'people-book',
+  'people-after',
   'privacy',
+  'privacy-emp',
+  'privacy-you',
   'clinicians',
-  'journey',
-  'hr',
+  'proof',
+  'proof-nums',
+  'proof-revs',
   'close',
 ];
 
@@ -86,7 +94,7 @@ if (slideN !== SLIDE_IDS.length) {
   throw new Error(`Expected ${SLIDE_IDS.length} slides, found ${slideN}`);
 }
 
-body = body.replace(
+body = body.replaceAll(
   '<b data-count="2700" data-at="2600" data-suf="+">0</b><span>Patients treated at Siya Health</span>',
   `<b data-count="${patients.n}" data-at="2600"${patients.suf ? ` data-suf="${patients.suf}"` : ''}>0</b><span>Patients treated at Siya Health</span>`,
 );
@@ -94,11 +102,11 @@ body = body.replace(
   '<b data-count="1200" data-at="2800" data-suf="+">0</b><span>Clinical evaluations completed</span>',
   `<b data-count="${evaluations.n}" data-at="2800"${evaluations.suf ? ` data-suf="${evaluations.suf}"` : ''}>0</b><span>Clinical evaluations completed</span>`,
 );
-body = body.replace(
+body = body.replaceAll(
   `<b data-count="4.9" data-dec="1" data-at="3000">0</b><span>Google rating (88 reviews)</span>`,
   `<b data-count="${google.n}" data-dec="${google.dec}" data-at="3000">0</b><span>Google rating (${FACTS.googleReviewCount} reviews)</span>`,
 );
-body = body.replace(
+body = body.replaceAll(
   '<b data-count="4" data-at="3200">0</b><span>States: CA, TX, PA, FL</span>',
   `<b data-count="${stateList.length}" data-at="3200">0</b><span>States: ${FACTS.practiceStatesShort}</span>`,
 );
@@ -107,7 +115,7 @@ body = body.replaceAll('__INQUIRY_HREF__', DEMO_BOOK_CALL_HREF);
 body = body.replaceAll('__FACTS_RESPONSE__', FACTS.responseWithin);
 body = body.replaceAll('__FACTS_HOURS__', FACTS.scheduledCare);
 const klarity = countParts(FACTS.klarityScore.split('/')[0]);
-body = body.replace(
+body = body.replaceAll(
   '<!--KLARITY_STAT-->',
   `<div class="stat b" data-at="3400"><b data-count="${klarity.n}" data-dec="${klarity.dec}" data-at="3400">0</b><span>Third-party marketplace (${FACTS.klarityReviewCount} reviews)</span></div>`,
 );
