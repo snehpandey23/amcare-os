@@ -86,7 +86,7 @@ export function trackingBucket(relPath) {
 /** Meta, GTM, and siya-tracking must not be present. B stays tracked. */
 export function marketingTrackingForbidden(relPath) {
   const p = norm(relPath);
-  if (p === 'employers/demo.html' || p === 'employers/california-pilot.html') return true;
+  if (p === 'employers/demo.html') return true;
   if (p.startsWith('internal/')) return true;
   if (isPatientCareFlowPage(p)) return true;
   if (isTrackingHoldPage(p)) return true;

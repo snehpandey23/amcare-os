@@ -4,11 +4,21 @@
   "headers": [
     {
       "source": "/employers/demo",
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     },
     {
       "source": "/employers/demo.html",
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ],
   "buildCommand": "npm run build",
@@ -216,7 +226,7 @@
     },
     {
       "source": "/blog/ambien-and-sleep-medications-risks-and-benefits",
-      "destination": "/blog/insomnia-treatment-options-beyond-medication",
+      "destination": "/guides/sleep#sl-insomnia",
       "permanent": true
     },
     {
@@ -782,6 +792,11 @@
     {
       "source": "/answers/adhd-and-weight-loss-connection",
       "destination": "/guides/weight#wt-food-noise",
+      "permanent": true
+    },
+    {
+      "source": "/employers/california-pilot",
+      "destination": "/employers",
       "permanent": true
     },
     {

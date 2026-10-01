@@ -17,10 +17,11 @@ const RAW = {
   '/adhd-evaluation-cost': '/pricing',
   '/adhd-diagnosis-florida': '/adhd-care',
   '/blog/all': '/blog',
-  '/blog/ambien-and-sleep-medications-risks-and-benefits': '/blog/insomnia-treatment-options-beyond-medication',
+  '/blog/ambien-and-sleep-medications-risks-and-benefits': '/guides/sleep#sl-insomnia',
   '/blog/glutathione-and-peptides-what-do-they-actually-do': '/mens-health-longevity',
   // EG-P0-01: garbled California 2026 ADHD article → CA cornerstone (canonical entity)
   '/blog/adult-adhd-treatment-california-2026': '/adult-adhd-california',
+  '/employers/california-pilot': '/employers',
   '/answers/weight-gain-after-stopping-ozempic': '/blog/food-noise-and-glp-1-what-it-means-and-what-helps',
   '/providers/derek-timbs': '/providers',
   '/blog/why-am-i-always-tired-causes-when-to-see-doctor': '/fatigue',

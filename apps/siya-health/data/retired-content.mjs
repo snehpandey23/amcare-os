@@ -60,6 +60,48 @@ export const RETIRED_CONTENT_REDIRECTS = {
     reason:
       'Ozempic cessation / GLP-1 rebound narrative owned by food-noise cornerstone blog (SITE-PRUNING-AUDIT). Guide retired; blog retains long-form depth.',
   },
+  '/employers/california-pilot': {
+    destination: '/employers',
+    entity: 'employers',
+    reason:
+      'Removed 2026-09-30. The $50/$100 per-employee figures on this page were illustrative and are no longer accurate. Employer pricing is scoped per employer and is not a published rate.',
+  },
+  '/blog/insomnia-treatment-options-beyond-medication': {
+    destination: '/guides/sleep#sl-insomnia',
+    entity: 'sleep',
+    reason:
+      'Insomnia is a section of the sleep guide, not a standalone category. Retired 2026-10-01.',
+  },
+  '/blog/adhd-medication-online-california': {
+    destination: '/adhd-care',
+    entity: 'adhd-care',
+    reason:
+      'Acquisition-style “get ADHD medication online” article. Permanent redirect to the service page. Retired 2026-10-01.',
+  },
+  '/blog/adhd-medication-options-california': {
+    destination: '/adhd-care',
+    entity: 'adhd-care',
+    reason:
+      'California medication-options sibling of the online-acquisition cluster. Retired 2026-10-01.',
+  },
+  '/blog/online-adhd-diagnosis-california': {
+    destination: '/adhd-care',
+    entity: 'adhd-care',
+    reason:
+      'California “online ADHD diagnosis” acquisition URL. Retired 2026-10-01.',
+  },
+  '/blog/online-adhd-diagnosis-texas': {
+    destination: '/adhd-care',
+    entity: 'adhd-care',
+    reason:
+      'Texas “online ADHD diagnosis” acquisition URL. Retired 2026-10-01.',
+  },
+  '/blog/adhd-telehealth-california': {
+    destination: '/adhd-care',
+    entity: 'adhd-care',
+    reason:
+      'California ADHD-telehealth acquisition sibling. Retired 2026-10-01.',
+  },
 };
 
 export const RETIRED_CONTENT_STATS = {

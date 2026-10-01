@@ -1,5 +1,6 @@
 /**
- * Shared employer facts for /employers/california-pilot and /employers/demo.
+ * Shared employer facts for /employers/demo.
+ * /employers/california-pilot was removed 2026-09-30. Do not republish a per-employee rate.
  * Do not duplicate these strings in page templates — import this module.
  * Pricing stays on the pilot generator only; the demo must not render rates.
  */

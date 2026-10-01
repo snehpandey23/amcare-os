@@ -163,7 +163,7 @@ export const REMOVED_BLOG_PATHS = {
   // Retargeted to /fatigue when the tiredness blog was retired — keeps this single-hop.
   '/blog/modafinil-for-focus-and-fatigue-is-it-safe': '/fatigue',
   '/blog/glutathione-and-peptides-what-do-they-actually-do': '/mens-health-longevity',
-  '/blog/ambien-and-sleep-medications-risks-and-benefits': '/blog/insomnia-treatment-options-beyond-medication',
+  '/blog/ambien-and-sleep-medications-risks-and-benefits': '/guides/sleep#sl-insomnia',
   '/adhd-evaluation-cost': '/pricing',
 };
 
