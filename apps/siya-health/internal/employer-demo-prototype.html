@@ -301,8 +301,10 @@ button:focus-visible{outline:2px solid #FF5CB8;outline-offset:3px}
 .lanes{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:min(980px,100%);text-align:left}
 .lane{background:#fff;border-radius:18px;padding:12px;box-shadow:0 12px 28px rgba(10,36,107,.12);display:grid;gap:8px;align-content:start}
 .lane h3{margin:0;font:600 15px/1.25 var(--font-display);color:var(--ink)}
-.mini-phone{background:#0B1133;border-radius:22px;padding:8px}
-.mini-phone .screen{height:auto;overflow:visible}
+.mini-phone{background:#0B1133;border-radius:22px;padding:8px;width:min(320px,100%);justify-self:center}
+.mini-phone .screen{display:block;height:auto;overflow:visible}
+.lane{min-width:0}
+.lanes{align-items:start}
 .book{display:grid;gap:8px}
 .pills{display:flex;gap:6px;flex-wrap:wrap}
 .pillstep{font:600 12px/1.2 var(--font-body);color:var(--ink);background:rgba(10,36,107,.06);border-radius:999px;padding:6px 8px}
