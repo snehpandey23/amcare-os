@@ -36,6 +36,7 @@ const SLIDE_IDS = [
   'employer-b',
   'journey',
   'baseline',
+  'outcomes',
   'clinicians',
   'privacy',
   'privacy-emp',
