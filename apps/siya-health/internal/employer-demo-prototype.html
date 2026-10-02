@@ -124,6 +124,24 @@ button:focus-visible{outline:2px solid #FF5CB8;outline-offset:3px}
 .phone{height:min(46vh,430px);aspect-ratio:9/17;border-radius:34px;background:#0B1133;padding:10px;box-shadow:0 30px 60px rgba(10,36,107,.25)}
 #p-response.slide{padding-bottom:150px}
 #p-response .phone{height:min(46vh,420px)}
+article[data-walk] .phone{height:calc(100vh - 120px - 96px - 180px);width:auto;flex:0 0 auto;max-height:calc(100vh - 220px)}
+article[data-walk] .frame{gap:12px}
+article[data-walk] .msg{flex-wrap:nowrap;align-items:center}
+#walkSteps{gap:6px;width:min(420px,100%)}
+#walkSteps .door{padding:8px 12px}
+.walk-now{display:none;margin:0;font:500 15px/1.4 var(--font-body);color:var(--ink)}
+.ch-now{min-height:44px;border:0;background:transparent;font:600 12px/1.2 var(--font-body);color:var(--ink);cursor:pointer;padding:0 8px}
+.ch-track{display:block;height:4px;border-radius:4px;background:rgba(10,36,107,.12);overflow:hidden;min-width:48px}
+.ch-track b{display:block;height:100%;width:0;background:linear-gradient(90deg,#D81088,#7B2D8E)}
+.ch-sheet{position:absolute;left:50%;bottom:calc(100% + 10px);translate:-50% 0;width:min(320px,calc(100vw - 32px));background:#fff;border-radius:16px;box-shadow:0 18px 44px rgba(10,36,107,.18);padding:8px;display:grid;gap:4px;z-index:6}
+.ch-sheet button{min-height:44px;border:0;background:transparent;text-align:left;border-radius:10px;padding:0 12px;font:600 14px/1.2 var(--font-display);color:var(--ink);cursor:pointer}
+.ch-sheet button:hover{background:rgba(10,36,107,.06)}
+.ch-menu{display:grid;justify-items:center;gap:4px;min-width:0}
+@media (max-width:900px){
+  #walkSteps{display:none}
+  .walk-now{display:block}
+  article[data-walk] .msg{flex-wrap:wrap}
+}
 .vm{padding:10px;display:flex;flex-direction:column;gap:8px;text-align:left}
 .vm>.b:not(.in),.vm>.b.out{display:none}
 .vm-row{background:#fff;border-radius:12px;padding:8px 10px;display:grid;gap:3px;box-shadow:0 2px 8px rgba(10,36,107,.08)}
@@ -260,11 +278,13 @@ button:focus-visible{outline:2px solid #FF5CB8;outline-offset:3px}
 .bar{position:absolute;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:min(820px,calc(100% - 32px));
   display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.62);
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 8px 30px rgba(10,36,107,.1),inset 0 0 0 1px var(--line);z-index:3;cursor:default}
-.bar button{flex:none;font:600 12px/1 var(--font-body);color:var(--ink);background:transparent;border:0;border-radius:999px;padding:9px 12px;cursor:pointer}
+.bar button{flex:none;font:600 12px/1 var(--font-body);color:var(--ink);background:transparent;border:0;border-radius:999px;padding:9px 12px;cursor:pointer;min-width:44px;min-height:44px}
 .bar button:hover{background:rgba(10,36,107,.06)}
-.segs{flex:1;display:flex;gap:5px;min-width:0}
-.seg{flex:1;height:4px;border-radius:4px;background:rgba(10,36,107,.12);overflow:hidden}
-.seg i{display:block;height:100%;width:0;background:linear-gradient(90deg,#D81088,#7B2D8E)}
+.segs{flex:1;display:flex;gap:4px;min-width:0}
+.ch{flex:1;min-width:0;display:grid;gap:4px;justify-items:center;align-content:center;background:transparent;border:0;padding:2px;cursor:pointer;font:600 12px/1.15 var(--font-body);color:var(--ink);min-height:44px}
+.ch span{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ch i{display:block;width:100%;height:4px;border-radius:4px;background:rgba(10,36,107,.12);overflow:hidden}
+.ch i b{display:block;height:100%;width:0;background:linear-gradient(90deg,#D81088,#7B2D8E)}
 .hint2{position:absolute;left:0;right:0;bottom:calc(76px + env(safe-area-inset-bottom,0px));text-align:center;font:500 11px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:rgba(10,36,107,.4);pointer-events:none}
 
 .slide.parked{display:none!important}
@@ -340,6 +360,60 @@ button:focus-visible{outline:2px solid #FF5CB8;outline-offset:3px}
 .xchips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:860px}
 .xchip{display:inline-flex;gap:6px;align-items:center;background:#fff;border-radius:999px;padding:8px 12px;box-shadow:0 8px 18px rgba(10,36,107,.1);font:600 13px/1.2 var(--font-display);color:var(--ink)}
 .proof{display:grid;gap:16px;width:min(980px,100%)}
+.walk{display:grid;grid-template-columns:minmax(220px,280px) minmax(0,1fr);gap:18px;align-items:center;width:min(920px,100%);text-align:left}
+.walk-phone{display:grid;justify-items:center;gap:10px;position:relative}
+.tap-here{min-height:44px;min-width:120px;padding:0 16px;border:0;border-radius:999px;background:#D81088;color:#fff;font:600 14px/1 var(--font-body);cursor:pointer;box-shadow:0 0 0 0 rgba(216,16,136,.45);animation:tapulse 1.4s ease-out infinite}
+@keyframes tapulse{70%{box-shadow:0 0 0 12px rgba(216,16,136,0)}100%{box-shadow:0 0 0 0 rgba(216,16,136,0)}}
+.hand{position:absolute;width:18px;height:18px;border-radius:50%;border:2px solid #fff;background:rgba(216,16,136,.85);pointer-events:none;opacity:0}
+.hand.on{animation:handtap .7s ease}
+@keyframes handtap{0%{opacity:0;transform:translate(40px,-20px) scale(1)}40%{opacity:1;transform:translate(0,0) scale(1)}70%{transform:scale(.8)}100%{opacity:0;transform:scale(1)}}
+.walk-steps{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.steprow{display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px;align-items:center;background:#fff;border-radius:12px;padding:8px 10px;box-shadow:0 8px 18px rgba(10,36,107,.08);min-height:44px}
+.steprow b{font:600 14px/1.25 var(--font-display);color:var(--ink)}
+.steprow span{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:rgba(10,36,107,.08);font:700 12px/1 var(--font-body);color:var(--ink)}
+.door.on{box-shadow:0 0 0 2px var(--magenta),0 10px 26px rgba(10,36,107,.1)}
+.steprow.on span{background:#D81088;color:#fff}
+.wscreen{background:#FBF8F3;border-radius:18px;padding:12px;display:grid;gap:8px;min-height:220px;align-content:start}
+.wscreen h3{margin:0;font:600 15px/1.25 var(--font-display);color:var(--ink)}
+.vcall{display:grid;gap:8px;background:#0B1133;color:#fff;border-radius:16px;padding:10px}
+.vbar{font:600 12px/1.3 var(--font-body)}
+.vstage{display:grid;grid-template-columns:1fr 72px;gap:8px;align-items:stretch;min-height:140px}
+.vbig,.vsmall{border-radius:12px;display:grid;place-items:end stretch;text-align:left;overflow:hidden;position:relative}
+.vbig{background:#1C2F86;min-height:150px}
+.vbig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
+.vname{position:relative;z-index:1;margin:auto 8px 8px;background:rgba(10,18,48,.72);color:#fff;border-radius:8px;padding:6px 8px;font:600 13px/1.2 var(--font-display)}
+.vname small{display:block;font:500 12px/1.3 var(--font-body);color:#F4EFE7}
+.vsmall{background:#1C2F86;font:600 12px/1.2 var(--font-display);align-self:end;min-height:84px;color:#fff;display:grid;place-items:center;text-align:center;gap:4px}
+.vsmall svg{width:28px;height:28px}
+.founder-card{position:relative;width:min(640px,100%);aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#0B1133;box-shadow:0 18px 40px rgba(10,36,107,.18)}
+.founder-card img,.founder-card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
+.founder-play{position:absolute;left:50%;top:50%;translate:-50% -50%;width:72px;height:72px;border-radius:50%;border:0;background:#D81088;color:#fff;font:700 22px/1 var(--font-display);cursor:pointer;z-index:2}
+.founder-soon{position:absolute;left:50%;bottom:16px;translate:-50% 0;z-index:2;background:#fff;color:#0A246B;border-radius:999px;padding:8px 12px;font:600 12px/1.2 var(--font-body)}
+.vcontrols{display:flex;justify-content:center;gap:8px}
+.vcontrols i{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.16)}
+.vtime{font:600 12px/1 var(--font-body);text-align:center}
+.gridmem{display:grid;grid-template-columns:repeat(3,28px);gap:6px;justify-content:center}
+.gridmem i{width:28px;height:28px;border-radius:6px;background:rgba(10,36,107,.12)}
+.gridmem.on i{animation:mem 1.6s linear}
+.gridmem.on i:nth-child(1){animation-delay:0s}.gridmem.on i:nth-child(2){animation-delay:.15s}.gridmem.on i:nth-child(3){animation-delay:.3s}
+.gridmem.on i:nth-child(4){animation-delay:.45s}.gridmem.on i:nth-child(5){animation-delay:.6s}.gridmem.on i:nth-child(6){animation-delay:.75s}
+.gridmem.on i:nth-child(7){animation-delay:.9s}.gridmem.on i:nth-child(8){animation-delay:1.05s}.gridmem.on i:nth-child(9){animation-delay:1.2s}
+@keyframes mem{20%{background:#D81088}40%{background:rgba(10,36,107,.12)}}
+.ruler{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;width:min(760px,100%)}
+.ruler div{background:#fff;border-radius:12px;padding:10px;min-height:72px;box-shadow:0 8px 18px rgba(10,36,107,.08);display:grid;gap:4px;align-content:start}
+.ruler b{font:600 14px/1.2 var(--font-display);color:var(--ink)}
+.ruler span{font:500 12px/1.35 var(--font-body);color:var(--ink-soft)}
+.ruler div.in{box-shadow:0 0 0 2px #D81088}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:min(860px,100%);text-align:left;align-items:stretch}
+.compare .panel{min-height:240px}
+.strike{font:500 14px/1.4 var(--font-body);color:var(--ink)}
+.strike.in{text-decoration:line-through;color:var(--ink-soft)}
+.soon{background:#fff;border:1px dashed rgba(10,36,107,.35);border-radius:16px;padding:14px;font:600 14px/1.35 var(--font-display);color:var(--ink);text-align:center}
+.refcard{background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 8px 18px rgba(10,36,107,.08);font:500 14px/1.4 var(--font-body);color:var(--ink);max-width:520px}
+@media (max-width:640px){
+  .walk,.compare,.ruler{grid-template-columns:1fr}
+  #walkSteps .door:not(.on){display:none}
+}
 .rev-stage{position:relative;min-height:168px}
 .rev{position:absolute;inset:0;background:#fff;border-radius:18px;padding:16px 18px;box-shadow:0 14px 32px rgba(10,36,107,.12);text-align:left;display:grid;gap:8px;align-content:start}
 .rev p{margin:0;font:500 16px/1.4 var(--font-display);color:var(--ink)}
@@ -437,6 +511,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
 .siya-core.in{animation:halo 2.4s ease-out .6s infinite}
 
 @media (max-width:640px){
+  .bar button{min-width:44px;min-height:44px}
   .hint2{display:none}
   .slide{padding:14px 12px 120px;align-content:start}
   .frame{transform-origin:center top;width:100%}
@@ -491,7 +566,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
 
 <section id="tour" class="wash" hidden aria-live="polite">
   <!-- 0 statement -->
-  <article class="slide" data-dur="4800">
+  <article class="slide" data-chapter="0" data-dur="4800">
     <div class="frame">
       <div class="eyebrow b" data-at="150">The problem</div>
       <h2 class="big" id="bigline"></h2>
@@ -499,7 +574,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
   </article>
 
   <!-- P1 time -->
-  <article class="slide" data-dur="12500">
+  <article class="slide" data-chapter="0" data-dur="12500">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Time</div>
       <div class="gcal b" data-at="250">
@@ -514,7 +589,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
   </article>
 
   <!-- P2 response -->
-  <article class="slide" data-dur="14500">
+  <article class="slide" data-chapter="0" data-dur="14500">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Response</div>
       <div class="msg">
@@ -555,7 +630,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
   </article>
 
   <!-- P3 connected -->
-  <article class="slide" data-dur="10000">
+  <article class="slide" data-chapter="0" data-dur="10000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">The whole person</div>
       <div class="web" id="webP3" data-at="4600"></div>
@@ -565,7 +640,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
   </article>
 
   <!-- P4 coordination -->
-  <article class="slide" data-dur="9000">
+  <article class="slide" data-chapter="0" data-dur="9000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Coordination</div>
       <div class="web jit" id="webP4" data-at="4200"></div>
@@ -574,7 +649,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
   </article>
 
   <!-- question -->
-  <article class="slide" data-dur="7000">
+  <article class="slide" data-chapter="0" data-dur="7000">
     <div class="frame">
       <p class="q1 b" data-at="300">You've invested in great health coverage for your people.</p>
       <h2 class="q2 b" data-at="2200">But is it there <em>when they need it</em>?</h2>
@@ -582,7 +657,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
   </article>
 
   <!-- turn -->
-  <article class="slide" data-dur="6500">
+  <article class="slide" data-chapter="1" data-dur="6500">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Introducing</div>
       <div class="web" id="webT"></div>
@@ -592,7 +667,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
   </article>
 
   <!-- F1 time -->
-  <article class="slide" data-dur="8000">
+  <article class="slide" data-chapter="2" data-dur="8000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">How we help</div>
       <div class="gcal b" data-at="250">
@@ -608,7 +683,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
   </article>
 
   <!-- F1b evenings — ported week view -->
-  <article class="slide" data-dur="10000">
+  <article class="slide" data-chapter="2" data-dur="10000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">How we help</div>
       <div class="wkwrap">
@@ -629,7 +704,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
   </article>
 
   <!-- F2 response -->
-  <article class="slide" data-dur="11000">
+  <article class="slide" data-chapter="2" data-dur="11000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">How we help</div>
       <p class="note-s b" data-at="200">Illustrative · demo data</p>
@@ -656,7 +731,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
   </article>
 
   <!-- urgent -->
-  <article class="slide" data-dur="9000">
+  <article class="slide" data-chapter="2" data-dur="9000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">How we help</div>
       <p class="note-s b" data-at="200">Illustrative · demo data</p>
@@ -675,7 +750,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
   </article>
 
   <!-- F3 whole picture -->
-  <article class="slide" data-dur="10000">
+  <article class="slide" data-chapter="2" data-dur="10000">
     <div class="frame">
       <div class="eyebrow b" data-at="150">How we help</div>
       <div class="web" id="webF3"></div>
@@ -686,7 +761,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
   </article>
 
   <!-- employer start -->
-  <article class="slide" data-dur="9000" data-surface="desk">
+  <article class="slide" data-chapter="2" data-dur="9000" data-surface="desk">
     <div class="frame">
       <div class="eyebrow b" data-at="200">Getting started</div>
       <h2 class="cap b" data-at="500">As an employer.</h2>
@@ -723,7 +798,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
     </div>
   </article>
 
-  <article class="slide" data-dur="8000" data-surface="phone">
+  <article class="slide" data-chapter="2" data-dur="8000" data-surface="phone">
     <div class="frame">
       <div class="eyebrow b" data-at="200">Getting started</div>
       <h2 class="cap b" data-at="500">Inquiry, then a meeting.</h2>
@@ -744,7 +819,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
     </div>
   </article>
 
-  <article class="slide" data-dur="8000" data-surface="phone">
+  <article class="slide" data-chapter="2" data-dur="8000" data-surface="phone">
     <div class="frame">
       <div class="eyebrow b" data-at="200">Getting started</div>
       <h2 class="cap b" data-at="500">Package, then your link.</h2>
@@ -769,116 +844,47 @@ iframe[title="Siya AI Concierge"]{display:none!important}
     </div>
   </article>
 
-  <article class="slide" data-dur="9000" data-surface="desk">
+  <article class="slide" data-dur="28000" data-chapter="2" data-walk="1">
     <div class="frame">
-      <div class="eyebrow b" data-at="200">How your people get care</div>
-      <h2 class="cap b" data-at="500">Chat with our team, or book it yourself.</h2>
-      <div class="hero lanes">
-        <div class="lane pop" data-at="900">
-          <h3>Chat with our team</h3>
-          <div class="mini-phone"><div class="screen"><div class="thread">
-            <div class="bub me b" data-at="1200">Hi, I'd like to see someone about my sleep.</div>
-            <div class="bub them b" data-at="1800">Happy to help! Would Thursday 12:30 or Friday 5:30 PM work?</div>
-            <div class="bub me b" data-at="2400">Thursday works.</div>
-            <div class="bub them b" data-at="3000">Booked ✓</div>
-          </div></div></div>
-        </div>
-        <div class="lane pop" data-at="1100">
-          <h3>Book it yourself</h3>
-          <div class="book">
-            <div class="pills">
-              <span class="pillstep" data-at="1500">1 Choose your care team member</span>
-              <span class="pillstep" data-at="2500">2 Pick a time</span>
-              <span class="pillstep" data-at="3200">3 Confirm</span>
-            </div>
-            <div class="month" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="on" data-at="2100"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-            <div class="tslot" data-at="2700">Thu 12:30</div>
-            <div class="mock-btn press" data-at="3300">Confirm</div>
-          </div>
-        </div>
+      <div class="eyebrow b" data-at="150">How it works</div>
+      <h2 class="cap b" data-at="400">From their link to <em>the follow-up</em>.</h2>
+      <div class="msg">
+        <div class="phone b" data-at="700"><div class="screen">
+          <div class="ph-head"><i class="siya"></i><div>Siya Health<small>Illustrative · demo data</small></div></div>
+          <div class="thread" id="walkPhone"></div>
+        </div></div>
+        <div class="doors" id="walkSteps"></div>
       </div>
-      <div class="footrow">
-        <p class="note-s b" data-at="3600">Illustrative · demo data</p>
-        <p class="pack-note b" data-at="3800">Services and coverage are tailored to your organization's package.</p>
-      </div>
+      <p class="walk-now" id="walkNow"></p>
+      <button type="button" class="start" id="walkTap" style="animation:ring 1.6s ease-out infinite">Tap here</button>
+      <p class="sub" id="walkCap"></p>
     </div>
   </article>
 
-  <article class="slide" data-dur="8000" data-surface="phone">
+  <article class="slide" data-chapter="3" data-dur="8000">
     <div class="frame">
-      <div class="eyebrow b" data-at="200">How your people get care</div>
-      <h2 class="cap b" data-at="500">Chat with our team.</h2>
-      <div class="hero lane pop" data-at="800">
-        <div class="mini-phone"><div class="screen"><div class="thread">
-          <div class="bub me b" data-at="1100">Hi, I'd like to see someone about my sleep.</div>
-          <div class="bub them b" data-at="1700">Happy to help! Would Thursday 12:30 or Friday 5:30 PM work?</div>
-          <div class="bub me b" data-at="2300">Thursday works.</div>
-          <div class="bub them b" data-at="2900">Booked ✓</div>
-        </div></div></div>
+      <div class="eyebrow b" data-at="200">Experience</div>
+      <h2 class="cap b" data-at="400">Clinicians who've seen it all.</h2>
+      <div class="hero mosaic">
+        <div class="tilecard pop" data-at="800"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9 14h6"/></svg><b>Weight and metabolic</b></div>
+        <div class="tilecard pop" data-at="1000"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><path d="M12 3v18M7 8c2 3 8 3 10 0"/></svg><b>Hormones and fertility</b></div>
+        <div class="tilecard pop" data-at="1200"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M8 13c1.2 1.5 6.8 1.5 8 0"/></svg><b>Mental health</b></div>
+        <div class="tilecard pop" data-at="1400"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.6-7 10-7 10z"/></svg><b>Sexual health</b></div>
+        <div class="tilecard pop" data-at="1600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><path d="M8 4c2 6-2 10 0 16M16 4c-2 6 2 10 0 16"/></svg><b>Hair loss</b></div>
+        <div class="tilecard pop" data-at="1800"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><circle cx="12" cy="10" r="6"/><path d="M12 16v4"/></svg><b>ADHD and cognitive care</b></div>
+        <div class="tilecard pop" data-at="2000"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><path d="M12 3l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg><b>Primary care</b></div>
       </div>
-      <p class="note-s b" data-at="3400">Illustrative · demo data</p>
+      <div class="xchips">
+        <span class="xchip pop" data-at="2600">Direct primary care</span>
+        <span class="xchip pop" data-at="3000">Community health centers</span>
+        <span class="xchip pop" data-at="3400">Veterans' care</span>
+        <span class="xchip pop" data-at="3800">Academic, teaching and community hospitals</span>
+      </div>
+      <p class="sub b" data-at="4200">Our clinicians also practice in these settings, so we know what to manage ourselves and when to refer.</p>
     </div>
   </article>
 
-  <article class="slide" data-dur="8000" data-surface="phone">
-    <div class="frame">
-      <div class="eyebrow b" data-at="200">How your people get care</div>
-      <h2 class="cap b" data-at="500">Book it yourself.</h2>
-      <div class="hero lane pop" data-at="800">
-        <div class="book">
-          <div class="pills">
-            <span class="pillstep" data-at="1200">1 Choose your care team member</span>
-            <span class="pillstep" data-at="2200">2 Pick a time</span>
-            <span class="pillstep" data-at="3000">3 Confirm</span>
-          </div>
-          <div class="month" aria-hidden="true"><i></i><i></i><i></i><i class="on" data-at="1800"></i><i></i><i></i><i></i></div>
-          <div class="tslot" data-at="2400">Thu 12:30</div>
-          <div class="mock-btn press" data-at="3100">Confirm</div>
-        </div>
-      </div>
-      <p class="note-s b" data-at="3600">Illustrative · demo data</p>
-    </div>
-  </article>
-
-  <article class="slide" data-dur="9000">
-    <div class="frame">
-      <div class="eyebrow b" data-at="200">How your people get care</div>
-      <h2 class="cap b" data-at="500">Then the visit, and what follows.</h2>
-      <div class="hero">
-        <div class="jline" aria-hidden="true">
-          <svg viewBox="0 0 1000 8" preserveAspectRatio="none"><path class="draw" data-at="900" pathLength="1" d="M0 4 H1000" stroke="#D81088" stroke-width="4" fill="none"/></svg>
-          <i class="tdot" data-at="1400"></i>
-        </div>
-        <div class="after">
-          <div class="mail pop" data-at="1000">
-            <small>Email</small>
-            <b>Your visit is confirmed · Thursday 12:30</b>
-            <div class="mock-btn">Join video visit</div>
-          </div>
-          <div class="vid pop" data-at="1600">
-            <div class="faces">
-              <div class="face">Clinician</div>
-              <div class="face you">You<i class="livedot"></i></div>
-            </div>
-          </div>
-          <div class="chk pop" data-at="2200">
-            <div class="ticks">
-              <div class="tick" data-at="2600"><i></i>Care plan shared</div>
-              <div class="tick" data-at="3100"><i></i>Labs ordered</div>
-              <div class="tick" data-at="3600"><i></i>Prescription sent to your pharmacy</div>
-              <div class="tick" data-at="4100"><i></i>Follow-up scheduled</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="footrow">
-        <p class="note-s b" data-at="4500">Illustrative · demo data</p>
-        <p class="pack-note b" data-at="4700">Services and coverage are tailored to your organization's package.</p>
-      </div>
-    </div>
-  </article>
-
-  <article class="slide" data-dur="9000" data-surface="desk">
+  <article class="slide" data-chapter="4" data-dur="9000" data-surface="desk">
     <div class="frame">
       <div class="eyebrow b" data-at="200">Privacy</div>
       <h2 class="cap b" data-at="450">They get the whole picture. You get the big picture.</h2>
@@ -906,7 +912,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
     </div>
   </article>
 
-  <article class="slide" data-dur="8000" data-surface="phone">
+  <article class="slide" data-chapter="4" data-dur="8000" data-surface="phone">
     <div class="frame">
       <div class="eyebrow b" data-at="200">Privacy</div>
       <h2 class="cap b" data-at="450">What your employees get.</h2>
@@ -920,7 +926,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
     </div>
   </article>
 
-  <article class="slide" data-dur="8000" data-surface="phone">
+  <article class="slide" data-chapter="4" data-dur="8000" data-surface="phone">
     <div class="frame">
       <div class="eyebrow b" data-at="200">Privacy</div>
       <h2 class="cap b" data-at="450">What you get.</h2>
@@ -938,30 +944,9 @@ iframe[title="Siya AI Concierge"]{display:none!important}
     </div>
   </article>
 
-  <article class="slide" data-dur="8000">
-    <div class="frame">
-      <div class="eyebrow b" data-at="200">Experience</div>
-      <h2 class="cap b" data-at="400">Clinicians who've seen it all.</h2>
-      <div class="hero mosaic">
-        <div class="tilecard pop" data-at="800"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9 14h6"/></svg><b>Weight and metabolic</b></div>
-        <div class="tilecard pop" data-at="1000"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><path d="M12 3v18M7 8c2 3 8 3 10 0"/></svg><b>Hormones and fertility</b></div>
-        <div class="tilecard pop" data-at="1200"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M8 13c1.2 1.5 6.8 1.5 8 0"/></svg><b>Mental health</b></div>
-        <div class="tilecard pop" data-at="1400"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.6-7 10-7 10z"/></svg><b>Sexual health</b></div>
-        <div class="tilecard pop" data-at="1600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><path d="M8 4c2 6-2 10 0 16M16 4c-2 6 2 10 0 16"/></svg><b>Hair loss</b></div>
-        <div class="tilecard pop" data-at="1800"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><circle cx="12" cy="10" r="6"/><path d="M12 16v4"/></svg><b>ADHD and cognitive care</b></div>
-        <div class="tilecard pop" data-at="2000"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><path d="M12 3l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg><b>Primary care</b></div>
-      </div>
-      <div class="xchips">
-        <span class="xchip pop" data-at="2600">Direct primary care</span>
-        <span class="xchip pop" data-at="3000">Community health centers</span>
-        <span class="xchip pop" data-at="3400">Veterans' care</span>
-        <span class="xchip pop" data-at="3800">Academic, teaching and community hospitals</span>
-      </div>
-      <p class="sub b" data-at="4200">Our clinicians also practice in these settings, so we know what to manage ourselves and when to refer.</p>
-    </div>
-  </article>
+  
 
-  <article class="slide" data-dur="9000" data-surface="desk">
+<article class="slide" data-chapter="5" data-dur="9000" data-surface="desk">
     <div class="frame">
       <div class="eyebrow b" data-at="200">Proof</div>
       <h2 class="cap b" data-at="400">Don't just take our word for it.</h2>
@@ -982,7 +967,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
     </div>
   </article>
 
-  <article class="slide" data-dur="7000" data-surface="phone">
+  <article class="slide" data-chapter="5" data-dur="7000" data-surface="phone">
     <div class="frame">
       <div class="eyebrow b" data-at="200">Proof</div>
       <h2 class="cap b" data-at="400">Don't just take our word for it.</h2>
@@ -995,7 +980,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
     </div>
   </article>
 
-  <article class="slide" data-dur="8000" data-surface="phone">
+  <article class="slide" data-chapter="5" data-dur="8000" data-surface="phone">
     <div class="frame">
       <div class="eyebrow b" data-at="200">Proof</div>
       <h2 class="cap b" data-at="400">What patients wrote.</h2>
@@ -1009,7 +994,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
   </article>
 
   <!-- close -->
-  <article class="slide" data-dur="0">
+  <article class="slide" data-chapter="5" data-dur="0">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Siya Health</div>
       <h2 class="q2 b" data-at="300">See it <em>live</em>.</h2>
@@ -1219,7 +1204,7 @@ $('skip').addEventListener('click',e=>{e.stopPropagation();if(phase==='idle')pha
 const muteBtn=$('mute');
 muteBtn.addEventListener('click',e=>{e.stopPropagation();muted=!muted;muteBtn.textContent=muted?'Sound off':'Sound on';muteBtn.setAttribute('aria-pressed',String(muted));
   if(audio)audio.master.gain.setTargetAtTime(muted?0:.9,audio.ac.currentTime,.05);});
-let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(phase==='idle')build();},200);});
+let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(phase==='idle')build();paintChapters();fitWalk();},200);});
 
 /* =============== TOUR =============== */
 const line='Healthcare still runs on a schedule your people can’t keep.';
@@ -1343,6 +1328,8 @@ const push=phone?[18,12]:[55,40];
 /* engine */
 let slides=[];
 const segs=$('segs');
+const CHAPTERS=['The problem','Meet Siya','How it works','The care','Cost & privacy','Proof'];
+const CHAPTER_SHORT=['Problem','Meet','How','Care','Cost','Proof'];
 function collectSlides(){
   const phone=matchMedia('(max-width:640px)').matches;
   slides=[...tour.querySelectorAll('.slide:not(.parked)')].filter(s=>{
@@ -1351,7 +1338,89 @@ function collectSlides(){
     if(surf==='desk')return !phone;
     return true;
   });
-  segs.innerHTML=slides.slice(0,-1).map(()=>'<div class="seg"><i></i></div>').join('');
+  paintChapters();
+}
+const WALK=[
+  ['Open your organization\'s private link','Join'],
+  ['Download the secure care app','Open'],
+  ['Say hi to the care team','Hi'],
+  ['Choose a time','Confirm'],
+  ['Confirmation email','Join video visit'],
+  ['The video visit','Visit'],
+  ['After the visit','Done']
+];
+let walkStep=-1,founderHold=false,founderMissing=true;
+function walkScreen(i){
+  const photo=`<img src="/assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey, MD" style="width:100%;height:46%;object-fit:cover;object-position:center 18%;border-radius:16px;display:block">`;
+  if(i===0)return `<div class="vm-row"><b>Private link</b><small>Your organization's link</small><div class="start" style="margin-top:8px">Join</div></div>`;
+  if(i===1)return `<div class="vm-row"><b>Secure care app</b><small>Download, then open</small><div class="start" style="margin-top:8px">Open</div></div>`;
+  if(i===2)return `<div class="bub them">Hi! How can we help?</div>`;
+  if(i===3)return `<div class="vm-row"><b>Book it yourself</b><small>Thu 12:30</small><div class="start" style="margin-top:8px">Confirm</div></div>`;
+  if(i===4)return `<div class="vm-row"><b>Your visit is confirmed</b><small>Thursday 12:30</small><div class="start" style="margin-top:8px">Join video visit</div></div>`;
+  if(i===5)return `${photo}<div class="vm-row"><b>Dr. Sneh Pandey, MD</b><small>Founder</small></div><div class="meta l"><i class="ph-head" style="display:inline-block;width:28px;height:28px;border-radius:50%;background:rgba(10,36,107,.12);vertical-align:middle"></i> You</div>`;
+  return `<div class="vm-row"><b>Care plan shared</b></div><div class="vm-row"><b>Labs ordered</b></div><div class="vm-row"><b>Prescription sent to your pharmacy</b></div><div class="vm-row"><b>Follow-up booked</b></div>`;
+}
+function renderWalk(i){
+  const phone=$('walkPhone'), list=$('walkSteps'), cap=$('walkCap'), now=$('walkNow');
+  if(!phone||!list)return;
+  walkStep=i;
+  phone.innerHTML=walkScreen(i);
+  list.innerHTML=WALK.map((row,k)=>`<div class="door${k===i?' on':''}"><span class="ic">${k+1}</span><div><b>${row[0]}</b></div></div>`).join('');
+  if(now)now.textContent='Step '+(i+1)+' of 7 · '+WALK[i][0];
+  if(cap)cap.textContent=i===5?'Real clinicians, face to face, from wherever they are.':'';
+  requestAnimationFrame(fitWalk);
+}
+function fitWalk(){
+  const slide=document.querySelector('article[data-walk].active');
+  const phone=slide&&slide.querySelector('.phone');
+  const bar=document.querySelector('.bar');
+  if(!slide||!phone||!bar)return;
+  slide.style.placeItems='start center';
+  slide.style.alignContent='start';
+  slide.style.paddingTop='16px';
+  const frame=slide.querySelector('.frame');
+  phone.style.height='160px';
+  const base=frame.getBoundingClientRect().height-160;
+  const room=bar.getBoundingClientRect().top-120-16;
+  const h=Math.max(160,Math.floor(room-base));
+  phone.style.height=h+'px';
+  phone.style.maxHeight=h+'px';
+}
+function jumpChapter(n){
+  const idx=slides.findIndex(s=>+(s.dataset.chapter||0)===n);
+  const sheet=$('chSheet'); if(sheet)sheet.hidden=true;
+  if(idx>=0)show(idx);
+}
+function paintChapters(forceMenu){
+  const narrow=matchMedia('(max-width:900px)').matches||forceMenu;
+  if(narrow){
+    const curCh=0;
+    segs.innerHTML=`<div class="ch-menu"><button type="button" class="ch-now" id="chNow">${CHAPTERS[curCh]}</button><i class="ch-track"><b></b></i></div>`;
+    $('chNow').addEventListener('click',e=>{
+      e.stopPropagation();
+      let sheet=$('chSheet');
+      if(!sheet){
+        sheet=document.createElement('div');
+        sheet.id='chSheet'; sheet.className='ch-sheet';
+        document.querySelector('.bar').appendChild(sheet);
+      }
+      sheet.innerHTML=CHAPTERS.map((name,i)=>`<button type="button" data-ch="${i}">${name}</button>`).join('');
+      sheet.hidden=!sheet.hidden;
+      sheet.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',ev=>{ev.stopPropagation();jumpChapter(+btn.dataset.ch);}));
+    });
+    return;
+  }
+  segs.innerHTML=CHAPTERS.map((name,i)=>`<button type="button" class="ch" data-ch="${i}"><span>${name}</span><i><b></b></i></button>`).join('');
+  segs.querySelectorAll('.ch').forEach(btn=>btn.addEventListener('click',e=>{
+    e.stopPropagation(); jumpChapter(+btn.dataset.ch);
+  }));
+  if(segs.scrollWidth>segs.clientWidth+4)paintChapters(true);
+}
+function syncWalk(){
+  const s=slides[cur];
+  if(!s||!s.hasAttribute('data-walk'))return;
+  const step=Math.min(6,Math.floor(elapsed/4000));
+  if(step!==walkStep)renderWalk(step);
 }
 collectSlides();
 let cur=-1,elapsed=0,last=performance.now(),paused=false,events=[],fired=0,dur=0,tourOn=false;
@@ -1377,7 +1446,7 @@ function fitFrame(){
 }
 function scheduleFit(){if(fitFor===cur)return;fitFor=cur;clearTimeout(fitTimer);fitTimer=setTimeout(fitFrame,850);}
 function show(i){
-  if(i<0||i>=slides.length)return;cur=i;clearTimeout(fitTimer);fitFor=-1;
+  if(i<0||i>=slides.length)return;cur=i;clearTimeout(fitTimer);fitFor=-1;walkStep=-1;founderHold=false;
   slides.forEach((s,k)=>s.classList.toggle('active',k===i));
   const s=slides[i];s.querySelectorAll('[data-at],[data-out]').forEach(el=>el.classList.remove('in','out'));
   s.querySelectorAll('[data-count]').forEach(el=>el.textContent='0');
@@ -1388,17 +1457,43 @@ function show(i){
   events.sort((a,b)=>a.t-b.t);fired=0;elapsed=0;dur=+s.dataset.dur||0;
   $('hint2').style.opacity=i===slides.length-1?0:1;
   if(reduce)fireAll();
+  if(s.hasAttribute('data-walk'))requestAnimationFrame(()=>{renderWalk(0);fitWalk();});
+  else requestAnimationFrame(fitWalk);
 }
 function fireAll(){while(fired<events.length)events[fired++].fn();if(events.length)elapsed=Math.max(elapsed,events[events.length-1].t);scheduleFit();}
-function advance(){if(fired<events.length){fireAll();return;}if(cur<slides.length-1)show(cur+1);}
+function advance(){
+  const s=slides[cur];
+  if(fired<events.length){fireAll();if(s&&s.hasAttribute('data-walk'))renderWalk(0);return;}
+  if(s&&s.hasAttribute('data-walk')&&walkStep<6){elapsed=(walkStep+1)*4000+20;syncWalk();return;}
+  if(cur<slides.length-1)show(cur+1);
+}
 function togglePause(){paused=!paused;$('pause').textContent=paused?'Play':'Pause';$('pause').setAttribute('aria-pressed',String(paused));}
 function tick(now){
   const dt=Math.min(100,now-last);last=now;
   if(tourOn){
     if(!paused){elapsed+=dt;while(fired<events.length&&events[fired].t<=elapsed)events[fired++].fn();
       if(fired>=events.length)scheduleFit();
-      if(dur>0&&elapsed>=dur)show(cur+1);}
-    segs.querySelectorAll('i').forEach((el,k)=>{el.style.width=(k<cur?100:k===cur?Math.min(100,dur?elapsed/dur*100:100):0)+'%';});
+      if(!founderHold&&dur>0&&elapsed>=dur)show(cur+1);}
+    syncWalk();
+    const ch=slides[cur]?+(slides[cur].dataset.chapter||0):0;
+    const nowBtn=$('chNow'); if(nowBtn)nowBtn.textContent=CHAPTERS[ch];
+    const track=segs.querySelector('.ch-track b');
+    if(track){
+      const group=slides.filter(s=>+(s.dataset.chapter||0)===ch);
+      const pos=group.indexOf(slides[cur]);
+      track.style.width=((pos+Math.min(1,dur?elapsed/Math.max(dur,1):1))/Math.max(1,group.length)*100)+'%';
+    }
+    segs.querySelectorAll('.ch').forEach((el,i)=>{
+      const fill=el.querySelector('b'); if(!fill)return;
+      if(i<ch)fill.style.width='100%';
+      else if(i>ch)fill.style.width='0';
+      else{
+        const group=slides.map((s,k)=>({s,k})).filter(x=>+(x.s.dataset.chapter||0)===ch);
+        const pos=group.findIndex(x=>x.k===cur);
+        const local=(pos+Math.min(1,dur?elapsed/Math.max(dur,1):1))/Math.max(1,group.length);
+        fill.style.width=(local*100)+'%';
+      }
+    });
   }
   requestAnimationFrame(tick);
 }
@@ -1417,6 +1512,31 @@ $('next').addEventListener('click',advance);
 $('pause').addEventListener('click',togglePause);
 $('replayTour').addEventListener('click',()=>{paused=false;$('pause').textContent='Pause';show(0);});
 $('replayIntro2').addEventListener('click',resetIntro);
+document.addEventListener('click',e=>{
+  if(!e.target.closest('#walkTap'))return;
+  e.stopPropagation();
+  if(walkStep<6){elapsed=(walkStep+1)*4000+20;syncWalk();}
+  else if(cur<slides.length-1)show(cur+1);
+});
+const founderVid=$('founderVid'), founderPlay=$('founderPlay'), founderSoon=$('founderSoon');
+if(founderVid){
+  founderVid.addEventListener('error',()=>{founderMissing=true;if(founderSoon)founderSoon.hidden=false;});
+  fetch('/employers/demo/media/founder.mp4',{method:'HEAD'}).then(r=>{
+    founderMissing=!r.ok; if(founderSoon)founderSoon.hidden=r.ok;
+  }).catch(()=>{founderMissing=true;if(founderSoon)founderSoon.hidden=false;});
+  founderPlay.addEventListener('click',e=>{
+    e.stopPropagation();
+    if(founderMissing){founderSoon.hidden=false;return;}
+    founderVid.muted=false;
+    founderHold=true; paused=true; $('pause').textContent='Play';
+    founderPlay.hidden=true;
+    founderVid.play();
+  });
+  founderVid.addEventListener('ended',()=>{
+    founderHold=false; paused=false; $('pause').textContent='Pause';
+    if(cur<slides.length-1)show(cur+1);
+  });
+}
 
 
 /* boot */
