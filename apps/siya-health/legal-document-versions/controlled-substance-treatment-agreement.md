@@ -2,11 +2,11 @@
 
 **Effective: October 31, 2025**
 
-> **Important:** This agreement applies only when controlled-substance treatment is clinically appropriate and offered by a Siya Healthcare, PLLC clinician. Signing this agreement does not guarantee diagnosis, medication, or stimulant prescribing.
+> **Important:** This page is a copy of the Controlled Substance Treatment Agreement. Patients complete and sign the agreement in the medical record during ADHD intake. This page does not record a signature. The agreement applies only when controlled-substance treatment is clinically appropriate and offered by a Siya Healthcare, PLLC clinician. Signing it during intake does not guarantee diagnosis, medication, or stimulant prescribing.
 
 ## Introduction
 
-This agreement outlines the expectations, responsibilities, and policies related to the prescribing of controlled substances through Siya Healthcare, PLLC. By signing below, you agree to comply with all terms as a condition of receiving controlled-substance treatment when clinically appropriate.
+The agreement outlines the expectations, responsibilities, and policies related to the prescribing of controlled substances through Siya Healthcare, PLLC. Completing it during ADHD intake is a condition of receiving controlled-substance treatment when clinically appropriate.
 
 Siya Health Inc. provides administrative and non-clinical support services. Medical services, including controlled-substance prescribing decisions, are provided by Siya Healthcare, PLLC through licensed clinicians **where Siya Healthcare, PLLC offers services and where the treating clinician is authorized to prescribe**.
 
