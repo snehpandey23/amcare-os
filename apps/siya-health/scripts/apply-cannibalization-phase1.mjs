@@ -408,8 +408,11 @@ Generated: ${new Date().toISOString()}
 ${supportingPairs.map((p) => {
   const slug = p.guide.replace('/answers/', '');
   const blogSlug = p.blog.replace('/blog/', '');
-  const gHtml = fs.readFileSync(path.join(ANSWERS_DIR, `${slug}.html`), 'utf8');
-  const bHtml = fs.readFileSync(path.join(BLOG_DIR, `${blogSlug}.html`), 'utf8');
+  const gPath = path.join(ANSWERS_DIR, `${slug}.html`);
+  const bPath = path.join(BLOG_DIR, `${blogSlug}.html`);
+  if (!fs.existsSync(gPath) || !fs.existsSync(bPath)) return `| ${p.guide} | ${p.blog} | missing file | missing file |`;
+  const gHtml = fs.readFileSync(gPath, 'utf8');
+  const bHtml = fs.readFileSync(bPath, 'utf8');
   return `| ${p.guide} | ${p.blog} | ${gHtml.includes(p.blog) ? '✓' : '✗'} | ${bHtml.includes(p.guide) ? '✓' : '✗'} |`;
 }).join('\n')}
 
