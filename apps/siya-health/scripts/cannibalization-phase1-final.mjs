@@ -55,17 +55,32 @@ function main() {
   const titles = new Map();
   const h1s = new Map();
   let jsonLdErrors = 0;
+  const jsonLdDetails = [];
   let brokenLinks = 0;
+  const brokenDetails = [];
 
   if (fs.existsSync(QA_REPORT)) {
     const qa = fs.readFileSync(QA_REPORT, 'utf8');
     const brokenM = qa.match(/Broken internal links[^\d]*(\d+)/i);
     if (brokenM) brokenLinks = Number(brokenM[1]);
+    const listed = qa.match(/^- `([^`]+)` → `([^`]+)`/gm) || [];
+    for (const line of listed) {
+      const m = line.match(/^- `([^`]+)` → `([^`]+)`/);
+      if (m) brokenDetails.push({ from: m[1], href: m[2] });
+    }
   }
 
   for (const rel of files) {
     if (isLegacyLegalPage(rel)) continue;
     const html = fs.readFileSync(path.join(SITE_ROOT, rel), 'utf8');
+    for (const href of html.match(/href="(\/blog\/[^"#?]+)"/g) || []) {
+      const target = href.slice(6, -1).replace(/\/$/, '');
+      const asFile = path.join(SITE_ROOT, target.slice(1) + '.html');
+      const asDir = path.join(SITE_ROOT, target.slice(1), 'index.html');
+      if (!fs.existsSync(asFile) && !fs.existsSync(asDir)) {
+        brokenDetails.push({ from: rel, href: target });
+      }
+    }
     const title = extractTitle(html);
     const h1 = extractH1(html);
     const url = '/' + rel.replace(/index\.html$/, '').replace(/\.html$/, '').replace(/\/$/, '');
@@ -80,7 +95,10 @@ function main() {
       if (!h1s.has(k)) h1s.set(k, []);
       h1s.get(k).push(url);
     }
-    jsonLdErrors += validateJsonLd(html).length;
+    for (const message of validateJsonLd(html)) {
+      jsonLdErrors += 1;
+      jsonLdDetails.push({ rel, message });
+    }
   }
 
   const dupTitles = [...titles.values()].filter((v) => v.length > 1).length;
@@ -171,6 +189,21 @@ See also: \`CANNIBALIZATION-PHASE1-AUDIT.md\`, \`DUPLICATE-PAIR-CHANGES.md\`, \`
 
   fs.writeFileSync(path.join(DOCS, 'CANNIBALIZATION-PHASE1-FINAL.md'), body, 'utf8');
   console.log('Wrote docs/CANNIBALIZATION-PHASE1-FINAL.md');
+  console.log(`Cannibalization Phase 1: broken internal links = ${brokenLinks}`);
+  const seen = new Set();
+  for (const item of brokenDetails) {
+    const key = `${item.from} → ${item.href}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    console.log(`  broken link: ${item.from} → ${item.href}`);
+  }
+  if (brokenLinks > brokenDetails.length) {
+    console.log(`  (${brokenLinks - brokenDetails.length} more broken links were counted but not listed in the QA report sample)`);
+  }
+  console.log(`Cannibalization Phase 1: JSON-LD errors = ${jsonLdErrors}`);
+  for (const item of jsonLdDetails) {
+    console.log(`  JSON-LD: ${item.rel} — ${item.message}`);
+  }
   console.log(pass ? 'Cannibalization Phase 1: PASS' : 'Cannibalization Phase 1: REVIEW (see final report)');
   if (brokenLinks > 0 || jsonLdErrors > 0) process.exitCode = 1;
 }
