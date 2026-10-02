@@ -2,7 +2,7 @@
 
 **Page:** `siya.health/employers/demo`
 **Design source of truth:** `apps/siya-health/internal/employer-demo-prototype.html`
-**Last updated:** 2026-09-30
+**Last updated:** 2026-10-02
 
 ---
 
@@ -74,6 +74,16 @@ Every slide follows this. A slide is never only text on a background.
 3. **Motion, and nothing else:** pop (cards), draw (lines, charts, rails), count-up (numbers), a travelling dot (flows), glow (emphasis), sequential ticks (checklists). Three to five beats, 400–600ms apart. Slides run 7–10 seconds.
 4. **Type.** Desktop: headline 40–46px, subline 17–18px, card titles 15–16px, labels at least 12px. Phone: headline 26–28px, subline 15px, card titles 14px, labels at least 12px.
 5. **Mobile:** design 390×844 first. One idea per screen. If a slide does not fit above the control bar, split it on phones. Desktop may keep one slide. Do not scale the whole slide below 90%. Keep a 120px safe zone above the bar. On phones, lay the hero out with flex or grid so pieces cannot overlap.
+
+## Chapters
+
+The progress bar is six labelled segments. Tap a label to jump to the first slide in that chapter.
+
+1. The problem
+2. Meet Siya
+3. How it works — the click-through employee journey uses the same phone as the voicemail slide. “How your people get care” is removed. “Getting started as an employer” stays. The video step shows the website photo of Dr. Sneh Pandey, MD, Medical Director, and a silhouette labelled You.
+4. The care, 5. Cost & privacy, and the founder video are specified and not in the tour yet. The employee progress chart stays on Privacy until the outcomes slide is built. The founder file, when it exists, is `employers/demo/media/founder.mp4` with `founder.vtt`.
+6. Proof — the numbers and the homepage reviews, then close.
 
 ## 2. Structure of the page
 
