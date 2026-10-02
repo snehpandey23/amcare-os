@@ -439,11 +439,11 @@ article[data-walk] .msg{flex-wrap:nowrap;align-items:center}
 .vtime{font:600 12px/1 var(--font-body);text-align:center}
 .gridmem{display:grid;grid-template-columns:repeat(3,28px);gap:6px;justify-content:center}
 .gridmem i{width:28px;height:28px;border-radius:6px;background:rgba(10,36,107,.12)}
-.gridmem.on i{animation:mem 1.6s linear}
-.gridmem.on i:nth-child(1){animation-delay:0s}.gridmem.on i:nth-child(2){animation-delay:.15s}.gridmem.on i:nth-child(3){animation-delay:.3s}
-.gridmem.on i:nth-child(4){animation-delay:.45s}.gridmem.on i:nth-child(5){animation-delay:.6s}.gridmem.on i:nth-child(6){animation-delay:.75s}
-.gridmem.on i:nth-child(7){animation-delay:.9s}.gridmem.on i:nth-child(8){animation-delay:1.05s}.gridmem.on i:nth-child(9){animation-delay:1.2s}
-@keyframes mem{20%{background:#D81088}40%{background:rgba(10,36,107,.12)}}
+.gridmem.on i,.gridmem.in i{animation:mem 1.6s linear forwards}
+.gridmem.on i:nth-child(1),.gridmem.in i:nth-child(1){animation-delay:0s}.gridmem.on i:nth-child(2),.gridmem.in i:nth-child(2){animation-delay:.15s}.gridmem.on i:nth-child(3),.gridmem.in i:nth-child(3){animation-delay:.3s}
+.gridmem.on i:nth-child(4),.gridmem.in i:nth-child(4){animation-delay:.45s}.gridmem.on i:nth-child(5),.gridmem.in i:nth-child(5){animation-delay:.6s}.gridmem.on i:nth-child(6),.gridmem.in i:nth-child(6){animation-delay:.75s}
+.gridmem.on i:nth-child(7),.gridmem.in i:nth-child(7){animation-delay:.9s}.gridmem.on i:nth-child(8),.gridmem.in i:nth-child(8){animation-delay:1.05s}.gridmem.on i:nth-child(9),.gridmem.in i:nth-child(9){animation-delay:1.2s}
+@keyframes mem{20%{background:#D81088}100%{background:#D81088}}
 .ruler{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;width:min(760px,100%)}
 .ruler div{background:#fff;border-radius:12px;padding:10px;min-height:72px;box-shadow:0 8px 18px rgba(10,36,107,.08);display:grid;gap:4px;align-content:start}
 .ruler b{font:600 14px/1.2 var(--font-display);color:var(--ink)}
@@ -904,6 +904,30 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
       <p class="walk-now" id="walkNow"></p>
       <button type="button" class="start" id="walkTap" style="animation:ring 1.6s ease-out infinite">Tap here</button>
       <p class="sub" id="walkCap"></p>
+    </div>
+  </article>
+
+  <article class="slide" id="baseline" data-slide-id="baseline" data-chapter="3" data-dur="11000">
+    <div class="frame">
+      <div class="eyebrow b" data-at="200">The care</div>
+      <h2 class="cap b" data-at="450">Care that starts with a <em>full picture</em>.</h2>
+      <div class="lanes">
+        <div class="jcard pop" data-at="900">
+          <h3>Cognitive assessment</h3>
+          <div class="gridmem b" data-at="1200" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="jcard pop" data-at="3000">
+          <h3>Questionnaires</h3>
+          <div class="ticks">
+            <div class="tick b" data-at="3400"><i></i>Sleep</div>
+            <div class="tick b" data-at="3900"><i></i>Mood</div>
+            <div class="tick b" data-at="4400"><i></i>Stress</div>
+            <div class="tick b" data-at="4900"><i></i>Focus</div>
+          </div>
+        </div>
+      </div>
+      <div class="jcard pop" data-at="5800"><h3>Baseline set</h3></div>
+      <p class="sub b" data-at="6400">Every member starts with a baseline: validated questionnaires and a cognitive assessment, so care is based on measurement, not guesswork.</p>
     </div>
   </article>
 
