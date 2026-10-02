@@ -82,7 +82,7 @@ The progress bar is six labelled segments. Tap a label to jump to the first slid
 1. The problem
 2. Meet Siya
 3. How it works — the click-through employee journey uses the same phone as the voicemail slide. “How your people get care” is removed. “Getting started as an employer” stays. The video step shows the website photo of Dr. Sneh Pandey, MD, Medical Director, and a silhouette labelled You.
-4. The care now opens with the baseline slide (cognitive grid, then sleep, mood, stress, and focus, then Baseline set). Outcomes, the cost comparison, and the founder video are specified and not in the tour yet. The employee progress chart stays on Privacy until the outcomes slide is built. The founder file, when it exists, is `employers/demo/media/founder.mp4` with `founder.vtt`.
+4. The care opens with the baseline slide, then outcomes: an intake-to-ongoing ruler, the personal-progress charts labelled Sample · illustrative, and the placeholder “Clinical outcomes from our patient population, coming soon.” The `realOutcomes` block stays off. The cost comparison, the privacy rework, and the founder video are specified and not in the tour yet. The employee chart is also still on Privacy until that rework. The founder file, when it exists, is `employers/demo/media/founder.mp4` with `founder.vtt`.
 6. Proof — the numbers and the homepage reviews, then close.
 
 ## 2. Structure of the page
