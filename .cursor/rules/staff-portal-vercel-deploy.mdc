@@ -17,6 +17,10 @@ Use only:
 bash scripts/deploy-staff-portal.sh
 ```
 
+**Dirty-tree gate:** the script prints **branch + commit SHA**, then runs `git status --porcelain`. If anything is dirty, it **exits 1** and prints the listing — it will not deploy. Only an explicit `--allow-dirty` override continues (still prints the dirty list). Use `--check-only` to exercise the gate without promoting.
+
+Do **not** bare-`vercel deploy` the auth API or staff app from the shell — those paths skip this gate. Always use `deploy-staff-portal.sh` so both projects share the same safety check.
+
 Do **not** use Vercel MCP `deploy_to_vercel`, Cursor cloud agent deploy, or bare `vercel deploy --prod` from repo root.
 
 GitHub Actions (`.github/workflows/siya-staff-*.yml`) run **CI/QA only** — they never deploy.

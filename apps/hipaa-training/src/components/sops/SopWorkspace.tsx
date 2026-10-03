@@ -79,7 +79,8 @@ function bucketFor(s: SopRecord): BucketKey {
   return "draft";
 }
 
-function canEditStatus(status: SopRecord["status"]): boolean {
+function canEditStatus(status: SopRecord["status"], isAdmin = false): boolean {
+  if (status === "live") return isAdmin;
   return status === "draft" || status === "needs_review" || status === "pending_review";
 }
 
@@ -252,12 +253,12 @@ export function SopWorkspace() {
       return;
     }
     const match = sops.find((s) => s.id === editId);
-    if (match && canEditDept(match.department) && canEditStatus(match.status)) {
+    if (match && canEditDept(match.department) && canEditStatus(match.status, Boolean(ctx?.isAdmin))) {
       openedEditIdRef.current = editId;
       openEdit(match);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- open once per editId; never on every sops refresh
-  }, [editId, loading, sops, canEditDept, editorOpen, guideOpen]);
+  }, [editId, loading, sops, canEditDept, editorOpen, guideOpen, ctx?.isAdmin]);
 
   // My Day create_sop → ?new=1&department=&purpose= opens guided Knowledge SOP draft (not checklist builder).
   useEffect(() => {
@@ -911,14 +912,18 @@ export function SopWorkspace() {
                               Review / approve
                             </Link>
                           ) : null}
-                          {canEditDept(s.department) && canEditStatus(s.status) ? (
+                          {canEditDept(s.department) && canEditStatus(s.status, Boolean(ctx?.isAdmin)) ? (
                             <>
                               <button
                                 type="button"
-                                className="text-xs font-semibold text-[var(--siya-accent)] underline"
+                                className="rounded-lg border border-[var(--siya-border)] px-3 py-1 text-xs font-semibold text-[var(--siya-primary)]"
                                 onClick={() => openEdit(s)}
                               >
-                                Edit
+                                {s.status === "pending_review"
+                                  ? "Edit submitted SOP"
+                                  : s.status === "live"
+                                    ? "Edit published SOP"
+                                    : "Edit"}
                               </button>
                               {s.status === "draft" || s.status === "needs_review" ? (
                                 <button
@@ -1021,7 +1026,7 @@ export function SopWorkspace() {
                 onChange={(e) => setFormBody(e.target.value)}
               />
             </label>
-            {formTitle.trim() && formBody.trim() && (!editing || canEditStatus(editing.status)) ? (
+            {formTitle.trim() && formBody.trim() && (!editing || canEditStatus(editing.status, Boolean(ctx?.isAdmin))) ? (
               <div className="mt-3 space-y-2 rounded-lg border border-[var(--siya-border)] bg-[var(--siya-bg-subtle)]/40 p-3">
                 <label className="block text-xs font-semibold text-[var(--siya-text-secondary)]">
                   Refine (adjustment to current draft — not a chat thread)
@@ -1092,8 +1097,17 @@ export function SopWorkspace() {
                 disabled={pending || refining}
                 className="rounded-lg border border-[var(--siya-border)] bg-[var(--siya-white)] px-3 py-2 text-sm font-medium disabled:opacity-50"
               >
-                {pending ? "Saving…" : editing?.status === "pending_review" ? "Save changes" : "Save draft"}
+                {pending
+                  ? "Saving…"
+                  : editing?.status === "pending_review" || editing?.status === "live"
+                    ? "Save changes"
+                    : "Save draft"}
               </button>
+              {editing?.status === "live" ? (
+                <p className="w-full text-right text-[11px] text-[var(--siya-text-muted)]">
+                  This SOP is already published. Saving updates it in place. It stays live — staff following it see the new text. There is no separate version history or notice.
+                </p>
+              ) : null}
               {editing == null ||
               editing.status === "draft" ||
               editing.status === "needs_review" ||
@@ -1168,7 +1182,7 @@ export function SopWorkspace() {
                   Open in review queue
                 </Link>
               ) : null}
-              {canEditDept(reading.department) && canEditStatus(reading.status) ? (
+              {canEditDept(reading.department) && canEditStatus(reading.status, Boolean(ctx?.isAdmin)) ? (
                 <button
                   type="button"
                   className="rounded-lg border border-[var(--siya-border)] px-3 py-1.5 text-xs font-semibold"

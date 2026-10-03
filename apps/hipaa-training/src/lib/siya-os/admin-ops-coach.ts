@@ -180,13 +180,21 @@ export function isPresenceStatusHypothesis(message: string): boolean {
  */
 export function isOpsEngagementAsk(message: string): boolean {
   // Normalize loggin→logging so “are staff loggin into OS” matches.
-  const t = normalizePresenceAskText(message);
+  const t = normalizePresenceAskText(message).replace(/\bfast\s+week\b/g, "last week");
   if (!t) return false;
   // How-to “how do I use the OS” is not engagement analytics.
   if (/\bhow\s+(do\s+i|to|can\s+i)\s+use\b/.test(t)) return false;
   if (/\bthumbs?\s*(up|down)?\b/.test(t) && !/\b(team|staff|engagement|usage|ops)\b/.test(t)) return false;
   // Practice drills have their own intent.
   if (isOpsPracticeDrillAsk(message)) return false;
+  // Roster last-login / who logged in last / last week online vs not.
+  if (
+    /\b(last\s+logged|when\s+(?:were|was)\s+(?:they\s+)?last\s+logged|who\s+was\s+logged\s+in)\b/.test(t) ||
+    (/\bteam\s+members?\b/.test(t) && /\blogged\b/.test(t)) ||
+    (/\b(last|past)\s+week\b/.test(t) && /\b(online|logged|attendance)\b/.test(t) && /\bwho\b/.test(t))
+  ) {
+    return true;
+  }
   // Top-user ranking is a specialized engagement answer (same data).
   if (isOpsTopUserAsk(message)) return true;
 
@@ -894,10 +902,13 @@ function opsBriefMessage(snapshot: AdminOpsSnapshot): string {
   return `${planDayMessage(snapshot)}\n\n---\n\n**Board summary:** ${snapshot.boardOpen.length} active · ${snapshot.boardOverdue.length} overdue.`;
 }
 
-/** Live answer for “who’s using the portal” login list. */
-export function opsEngagementMessage(snapshot: AdminOpsSnapshot, windowDays = 7): string {
+/** Login roster. Last-week asks split who logged in vs who did not. This is portal login, not shift hours. */
+export function opsEngagementMessage(snapshot: AdminOpsSnapshot, message = ""): string {
+  const t = normalizePresenceAskText(message).replace(/\bfast\s+week\b/g, "last week");
+  const weekSplit = /\b(last|past)\s+week\b/.test(t);
+  const windowDays = weekSplit ? 7 : 3650;
   const cutoff = Date.now() - windowDays * 24 * 60 * 60 * 1000;
-  const active = snapshot.roster
+  const people = snapshot.roster
     .filter((m) => !m.deactivatedAt)
     .filter((m) => !isOpsTestAccount(m.email))
     .map((m) => {
@@ -905,11 +916,9 @@ export function opsEngagementMessage(snapshot: AdminOpsSnapshot, windowDays = 7)
       const ms = raw ? Date.parse(raw) : NaN;
       return {
         label: (m.name && m.name.trim()) || m.email,
-        email: m.email,
         lastLoginAt: Number.isFinite(ms) ? ms : null,
       };
     })
-    .filter((m) => m.lastLoginAt != null && m.lastLoginAt! >= cutoff)
     .sort((a, b) => (b.lastLoginAt ?? 0) - (a.lastLoginAt ?? 0));
 
   const fmt = (ms: number) =>
@@ -921,28 +930,34 @@ export function opsEngagementMessage(snapshot: AdminOpsSnapshot, windowDays = 7)
       minute: "2-digit",
     });
 
-  if (!active.length) {
+  const line = (m: { label: string; lastLoginAt: number | null }) =>
+    m.lastLoginAt != null
+      ? `• **${m.label}** — last login ${fmt(m.lastLoginAt)} IST`
+      : `• **${m.label}** — no login recorded`;
+
+  if (!people.length) {
+    return "No active staff accounts on this roster.";
+  }
+
+  if (weekSplit) {
+    const on = people.filter((m) => m.lastLoginAt != null && m.lastLoginAt >= cutoff);
+    const off = people.filter((m) => m.lastLoginAt == null || m.lastLoginAt < cutoff);
     return [
-      `**Portal logins (last ${windowDays} days, IST):** no non-test accounts have a recorded login in that window.`,
+      "**Portal login in the last 7 days** (not shift hours). QA/test accounts hidden.",
       "",
-      "Open **Ops → Section A · Staff engagement** for Ask turns and practice activity (not the same as login).",
+      on.length ? `**Logged in (${on.length}):**\n${on.map(line).join("\n")}` : "**Logged in:** none in the last 7 days.",
+      "",
+      off.length ? `**Not logged in (${off.length}):**\n${off.map(line).join("\n")}` : "**Not logged in:** none.",
     ].join("\n");
   }
 
-  const lines = active.slice(0, 20).map((m) => `• **${m.label}** — last login ${fmt(m.lastLoginAt!)} IST`);
-  const more =
-    active.length > 20 ? `\n…and **${active.length - 20}** more (see Ops dashboard).` : "";
-
   return [
-    `**Who used the staff portal in the last ${windowDays} days** (login signal; QA/test accounts hidden):`,
+    "**Team last login** (portal sign-in, IST). QA/test accounts hidden.",
     "",
-    `**${active.length}** people:`,
-    ...lines,
-    more,
-    "",
-    "For **Ask turns / engagement segments**, open **Ops → Section A · Staff engagement** (thumbs 👍/👎 are not team usage).",
+    ...people.slice(0, 40).map(line),
+    people.length > 40 ? `\n…and **${people.length - 40}** more on Ops.` : "",
   ]
-    .filter((l) => l !== "")
+    .filter(Boolean)
     .join("\n");
 }
 
@@ -1373,7 +1388,7 @@ export async function runAdminOpsCoach(
           ? opsPerformanceMessage(rows)
           : opsEngagementPointerMessage();
       } else {
-        messageOut = opsEngagementMessage(snapshot);
+        messageOut = opsEngagementMessage(snapshot, message);
       }
       break;
     }

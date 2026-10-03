@@ -499,7 +499,16 @@ export async function buildLeadGapDigestPayloads(
       createdAt: new Date(row.created_at as string).toISOString(),
     });
   }
-  return [...byUser.values()].filter((p) => p.gaps.length > 0);
+
+  // Per-user gap_digest pref (default ON). Opting out drops only that lead — other leads unaffected.
+  const { isNotificationPrefEnabled } = await import("./notification-prefs-service.js");
+  const out: LeadGapDigestPayload[] = [];
+  for (const p of byUser.values()) {
+    if (p.gaps.length === 0) continue;
+    const enabled = await isNotificationPrefEnabled(pool, p.userId, "gap_digest");
+    if (enabled) out.push(p);
+  }
+  return out;
 }
 
 export type FounderGapRollup = {

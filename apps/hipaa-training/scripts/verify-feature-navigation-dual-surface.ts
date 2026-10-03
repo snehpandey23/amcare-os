@@ -73,6 +73,13 @@ const CASES: Case[] = [
     linkHref: "/memory",
   },
   {
+    id: "pause-notifications",
+    message: "need to pause notifications",
+    mustMatch: /Email notification|Account|late-start|gap digest/i,
+    mustNot: SOFT_STOP,
+    linkHref: "/account",
+  },
+  {
     id: "practice-hub",
     message: "open practice drills",
     mustMatch: /Practice drills|\/learn\/practice/i,

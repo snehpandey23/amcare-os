@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { isPortalAdmin } from "@/lib/portal-role";
-import { approveSop, fetchSopContext, fetchSopReviewQueue, sendBackSop } from "@/lib/sop-api";
+import { approveSop, fetchSopContext, fetchSopReviewQueue, sendBackSop, updateSop } from "@/lib/sop-api";
 import {
   fetchSubmittedSopBuilderSessions,
   type SopBuilderSessionRecord,
@@ -41,6 +41,9 @@ export function SopReviewPanel() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLead, setIsLead] = useState(false);
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editTitle, setEditTitle] = useState("");
+  const [editBody, setEditBody] = useState("");
   const focusRef = useRef<HTMLDivElement | null>(null);
 
   const load = useCallback(async () => {
@@ -95,6 +98,32 @@ export function SopReviewPanel() {
     }, 80);
     return () => window.clearTimeout(t);
   }, [focusId, loading, queue]);
+
+  function startEdit(sop: SopRecord) {
+    setEditingId(sop.id);
+    setEditTitle(sop.title);
+    setEditBody(sop.body);
+    setExpandedId(sop.id);
+    setError(null);
+  }
+
+  async function onSaveEdit(id: string) {
+    if (!editTitle.trim() || !editBody.trim()) {
+      setError("Title and body are required.");
+      return;
+    }
+    setPending(true);
+    setError(null);
+    try {
+      await updateSop(id, { title: editTitle.trim(), body: editBody });
+      setEditingId(null);
+      await load();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Save failed");
+    } finally {
+      setPending(false);
+    }
+  }
 
   async function onApprove(id: string) {
     setPending(true);
@@ -226,7 +255,29 @@ export function SopReviewPanel() {
                       {sop.ownerName || "Author"} · submitted {sop.submittedAt?.slice(0, 10) || "—"}
                     </p>
 
-                    {open ? (
+                    {open && editingId === sop.id ? (
+                      <div className="mt-3 space-y-2">
+                        <label className="block text-xs font-medium text-[var(--siya-text-muted)]">
+                          Title
+                          <input
+                            className="mt-1 w-full rounded-lg border border-[var(--siya-border)] px-3 py-2 text-sm"
+                            value={editTitle}
+                            onChange={(e) => setEditTitle(e.target.value)}
+                          />
+                        </label>
+                        <label className="block text-xs font-medium text-[var(--siya-text-muted)]">
+                          Body
+                          <textarea
+                            className="mt-1 min-h-[240px] w-full rounded-lg border border-[var(--siya-border)] px-3 py-2 text-sm"
+                            value={editBody}
+                            onChange={(e) => setEditBody(e.target.value)}
+                          />
+                        </label>
+                        <p className="text-[11px] text-[var(--siya-text-muted)]">
+                          Saving keeps this SOP in review. It does not publish it.
+                        </p>
+                      </div>
+                    ) : open ? (
                       <article className="mt-3 max-h-[min(70vh,36rem)] overflow-y-auto whitespace-pre-wrap rounded-lg bg-[var(--siya-bg-subtle)] p-4 text-sm leading-relaxed text-[var(--siya-text)]">
                         {sop.body || "—"}
                       </article>
@@ -244,6 +295,33 @@ export function SopReviewPanel() {
                       >
                         {open ? "Collapse" : "Read full SOP"}
                       </button>
+                      {editingId === sop.id ? (
+                        <>
+                          <button
+                            type="button"
+                            disabled={pending}
+                            className={trainingLinkPrimaryClass}
+                            onClick={() => void onSaveEdit(sop.id)}
+                          >
+                            {pending ? "Saving…" : "Save changes"}
+                          </button>
+                          <button
+                            type="button"
+                            className={portalBtnGhostSm}
+                            onClick={() => setEditingId(null)}
+                          >
+                            Cancel edit
+                          </button>
+                        </>
+                      ) : (
+                        <button
+                          type="button"
+                          className="rounded-lg border border-[var(--siya-border)] px-3 py-1.5 text-xs font-semibold"
+                          onClick={() => startEdit(sop)}
+                        >
+                          Edit
+                        </button>
+                      )}
                       <button
                         type="button"
                         disabled={pending}

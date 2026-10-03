@@ -211,12 +211,24 @@ export async function resolveLateStartRecipients(
 
   // Deduplicate by email; keep first role (staff preferred)
   const seen = new Set<string>();
-  const out: LateStartRecipient[] = [];
+  const deduped: LateStartRecipient[] = [];
   for (const r of recipients) {
     const e = r.email.trim().toLowerCase();
     if (!e.includes("@") || seen.has(e)) continue;
     seen.add(e);
-    out.push({ ...r, email: e });
+    deduped.push({ ...r, email: e });
+  }
+
+  // Per-user observer prefs: staff primary is never gated. Lead/HR/admin copies honor late_start_observer (default ON).
+  const { isNotificationPrefEnabled } = await import("./notification-prefs-service.js");
+  const out: LateStartRecipient[] = [];
+  for (const r of deduped) {
+    if (r.role === "staff") {
+      out.push(r);
+      continue;
+    }
+    const enabled = await isNotificationPrefEnabled(pool, r.userId, "late_start_observer");
+    if (enabled) out.push(r);
   }
   return out;
 }

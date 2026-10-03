@@ -465,6 +465,7 @@ function rowToSop(row: Record<string, unknown>): SopRecord {
 }
 
 async function assertCanEditSop(_pool: pg.Pool, _userId: string, role: string, sop: SopRecord): Promise<void> {
+  // Admin may edit in place, including live SOPs. Status is unchanged — no resubmit, no version row.
   if (role === "admin") return;
   // Temporary: any signed-in staff may edit drafts / in-review SOPs (not live).
   if (sop.status !== "draft" && sop.status !== "needs_review" && sop.status !== "pending_review") {

@@ -354,13 +354,36 @@ export const PORTAL_FEATURES: FeatureDef[] = [
     ],
   },
   {
+    id: "notification-prefs",
+    label: "Email notification preferences",
+    href: "/account",
+    section: "Home & chat",
+    blurb:
+      "Pause or turn off **your** admin/lead email copies (late-start alerts, weekly knowledge-gap digest) on **Account → Email notifications**. Defaults stay on until you change them. This never stops the staff member the alert is about from getting their own email. SOP review mail stays on. HR shared-mailbox alerts are managed separately.",
+    patterns: [
+      /\b(pause|stop|mute|disable|turn\s+off|opt\s+out)\s+(my\s+|the\s+)?(email\s+)?notifications?\b/,
+      /\b(notification|email)\s+(preferences?|settings?|toggles?)\b/,
+      /\b(turn\s+off|pause|stop)\s+(late[- ]?start|gap\s+digest|observer)\s+(emails?|alerts?|notifications?)?\b/,
+      /\b(dont|don't|do\s+not)\s+(want|send)\s+(me\s+)?(email\s+)?notifications?\b/,
+      /\bi\s+(wanna|want\s+to)\s+(pause|stop|mute|turn\s+off)\s+notifications?\b/,
+      /\bneed\s+to\s+(pause|stop|mute)\s+notifications?\b/,
+    ],
+    exclude: [
+      /\b(patient|spruce|browser\s+push|desktop\s+notification|phone|sms)\b/,
+      /\bnotify\s+owner\b/,
+    ],
+  },
+  {
     id: "account",
     label: "Account",
     href: "/account",
     section: "Home & chat",
     requiresAuth: true,
-    blurb: "Profile and account settings.",
-    patterns: [/\b(open\s+account|my\s+account|account\s+settings?)\b/],
+    blurb: "Profile, password, and email notification preferences.",
+    patterns: [
+      /\b(open\s+account|my\s+account|account\s+settings?)\b/,
+      /\b(change\s+(my\s+)?password|password\s+settings?)\b/,
+    ],
   },
   {
     id: "start-shift",

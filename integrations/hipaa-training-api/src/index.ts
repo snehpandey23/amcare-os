@@ -729,6 +729,54 @@ app.put("/api/portal/profile", requireAuth, async (req: AuthRequest, res: expres
   return res.json({ ok: true });
 });
 
+/** Per-user admin/lead observer notification prefs (default ON). */
+app.get("/api/me/notification-preferences", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { userId, role } = req.user!;
+  const { buildNotificationPrefsResponse } = await import("./notification-prefs-service.js");
+  const payload = await buildNotificationPrefsResponse(pool, userId, role ?? "trainee");
+  return res.json(payload);
+});
+
+app.put("/api/me/notification-preferences", requireAuth, async (req: AuthRequest, res: express.Response) => {
+  const pool = getPool();
+  if (!pool) return res.status(503).json({ error: "Database not configured." });
+  const { userId, role } = req.user!;
+  const roleSafe = role ?? "trainee";
+  const {
+    setNotificationPrefs,
+    applicableNotificationPrefKeys,
+    NOTIFICATION_PREF_KEYS,
+    buildNotificationPrefsResponse,
+  } = await import("./notification-prefs-service.js");
+  const applicable = await applicableNotificationPrefKeys(pool, userId, roleSafe);
+  if (!applicable.length) {
+    return res.status(403).json({
+      error: "Notification preferences are only available for admins and department leads.",
+    });
+  }
+  const body = req.body;
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return res.status(400).json({ error: "Body must be a JSON object of preference keys." });
+  }
+  const patch: Record<string, boolean> = {};
+  for (const key of NOTIFICATION_PREF_KEYS) {
+    if (!(key in body)) continue;
+    if (!applicable.includes(key)) continue;
+    if (typeof (body as Record<string, unknown>)[key] !== "boolean") {
+      return res.status(400).json({ error: `Preference ${key} must be a boolean.` });
+    }
+    patch[key] = (body as Record<string, boolean>)[key];
+  }
+  if (!Object.keys(patch).length) {
+    return res.status(400).json({ error: "No applicable preference keys to update." });
+  }
+  await setNotificationPrefs(pool, userId, patch);
+  const payload = await buildNotificationPrefsResponse(pool, userId, roleSafe);
+  return res.json(payload);
+});
+
 app.post("/api/shift/ensure-active", requireAuth, async (req: AuthRequest, res: express.Response) => {
   const pool = getPool();
   if (!pool) return res.status(503).json({ error: "Database not configured." });

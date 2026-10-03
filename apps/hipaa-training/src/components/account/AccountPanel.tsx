@@ -6,6 +6,7 @@ import { changePassword } from "@/lib/account-api";
 import { trainingLinkPrimaryClass } from "@/components/training/training-ui";
 import { PasswordInput } from "@/components/ui/PasswordInput";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { NotificationPreferencesPanel } from "@/components/account/NotificationPreferencesPanel";
 
 export function AccountPanel() {
   const { user } = useAuth();
@@ -54,6 +55,8 @@ export function AccountPanel() {
       </header>
 
       <ThemeToggle variant="account" />
+
+      <NotificationPreferencesPanel />
 
       <section className="rounded-2xl border border-[var(--siya-border)] bg-[var(--siya-white)] p-5">
         <h2 className="text-sm font-semibold text-[var(--siya-primary)]">Change password</h2>

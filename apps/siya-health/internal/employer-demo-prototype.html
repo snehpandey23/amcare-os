@@ -411,6 +411,8 @@ article[data-walk] .msg{flex-wrap:nowrap;align-items:center}
 .soon{background:#fff;border:1px dashed rgba(10,36,107,.35);border-radius:16px;padding:14px;font:600 14px/1.35 var(--font-display);color:var(--ink);text-align:center}
 article[data-outcomes] .panel,article[data-outcomes] .soon{width:min(760px,100%)}
 article[data-outcomes] .frame{gap:14px}
+article[data-privacy] .frame{gap:12px}
+article[data-privacy] .refcard{align-self:start;width:min(360px,100%)}
 .refcard{background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 8px 18px rgba(10,36,107,.08);font:500 14px/1.4 var(--font-body);color:var(--ink);max-width:520px}
 @media (max-width:640px){
   .walk,.compare{grid-template-columns:1fr}
@@ -987,19 +989,13 @@ iframe[title="Siya AI Concierge"]{display:none!important}
     </div>
   </article>
 
-  <article class="slide" data-chapter="4" data-dur="9000" data-surface="desk">
+  <article class="slide" data-chapter="4" data-dur="9000" data-surface="desk" data-privacy="1">
     <div class="frame">
       <div class="eyebrow b" data-at="200">Privacy</div>
       <h2 class="cap b" data-at="450">They get the whole picture. You get the big picture.</h2>
       <p class="sub b" data-at="800">Aggregate reports only, for groups of 10 or more. Never who, or why.</p>
       <div class="hero split2">
-        <div class="panel pop" data-at="1100">
-          <h3>What your employees get <small>Sample</small></h3>
-          <div class="spark"><b>Stress</b><svg viewBox="0 0 80 32"><path class="draw" data-at="1600" pathLength="1" d="M2 6 C 24 8, 48 18, 78 28" fill="none" stroke="#D81088" stroke-width="3" stroke-linecap="round"/></svg><span>8 → <b data-count="4" data-at="1600">0</b></span></div>
-          <div class="spark"><b>Focus</b><svg viewBox="0 0 80 32"><path class="draw" data-at="2100" pathLength="1" d="M2 28 C 24 24, 48 12, 78 4" fill="none" stroke="#0A6B3A" stroke-width="3" stroke-linecap="round"/></svg><span>3 → <b data-count="7" data-at="2100">0</b></span></div>
-          <div class="spark"><b>Sleep quality</b><svg viewBox="0 0 80 32"><path class="draw" data-at="2600" pathLength="1" d="M2 26 C 28 22, 50 10, 78 6" fill="none" stroke="#0A6B3A" stroke-width="3" stroke-linecap="round"/></svg><span>4 → <b data-count="8" data-at="2600">0</b></span></div>
-          <div class="spark"><b>Low mood symptoms</b><svg viewBox="0 0 80 32"><path class="draw" data-at="3100" pathLength="1" d="M2 5 C 26 8, 50 18, 78 27" fill="none" stroke="#D81088" stroke-width="3" stroke-linecap="round"/></svg><span>7 → <b data-count="3" data-at="3100">0</b></span></div>
-        </div>
+        <div class="refcard pop" data-at="1100">Personal progress is in The care, labelled Sample · illustrative.</div>
         <div class="lockcol" aria-hidden="true"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A246B" stroke-width="2"><rect x="6" y="11" width="12" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></i></div>
         <div class="panel pop" data-at="1400">
           <h3>What you get <small>Sample</small></h3>
@@ -1019,13 +1015,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
     <div class="frame">
       <div class="eyebrow b" data-at="200">Privacy</div>
       <h2 class="cap b" data-at="450">What your employees get.</h2>
-      <div class="hero panel pop" data-at="800">
-        <h3>Personal progress <small>Sample</small></h3>
-        <div class="spark"><b>Stress</b><svg viewBox="0 0 80 32"><path class="draw" data-at="1200" pathLength="1" d="M2 6 C 24 8, 48 18, 78 28" fill="none" stroke="#D81088" stroke-width="3" stroke-linecap="round"/></svg><span>8 → <b data-count="4" data-at="1200">0</b></span></div>
-        <div class="spark"><b>Focus</b><svg viewBox="0 0 80 32"><path class="draw" data-at="1700" pathLength="1" d="M2 28 C 24 24, 48 12, 78 4" fill="none" stroke="#0A6B3A" stroke-width="3" stroke-linecap="round"/></svg><span>3 → <b data-count="7" data-at="1700">0</b></span></div>
-        <div class="spark"><b>Sleep quality</b><svg viewBox="0 0 80 32"><path class="draw" data-at="2200" pathLength="1" d="M2 26 C 28 22, 50 10, 78 6" fill="none" stroke="#0A6B3A" stroke-width="3" stroke-linecap="round"/></svg><span>4 → <b data-count="8" data-at="2200">0</b></span></div>
-        <div class="spark"><b>Low mood symptoms</b><svg viewBox="0 0 80 32"><path class="draw" data-at="2700" pathLength="1" d="M2 5 C 26 8, 50 18, 78 27" fill="none" stroke="#D81088" stroke-width="3" stroke-linecap="round"/></svg><span>7 → <b data-count="3" data-at="2700">0</b></span></div>
-      </div>
+      <div class="refcard pop" data-at="900">Personal progress is in The care, labelled Sample · illustrative.</div>
     </div>
   </article>
 
@@ -1093,6 +1083,23 @@ iframe[title="Siya AI Concierge"]{display:none!important}
         <div class="rev b" data-at="4800"><p>"Very knowledgeable, friendly, patient-focused and listens very well. Also very fast at helping me when one pharmacy wouldn't fill my prescription!"</p><small>Verified Telehealth Patient</small></div>
       </div>
       <p class="note-s b" data-at="800">Individual experiences vary.</p>
+    </div>
+  </article>
+
+  <article class="slide" data-chapter="5" data-dur="8000">
+    <div class="frame">
+      <div class="eyebrow b" data-at="200">Proof</div>
+      <h2 class="cap b" data-at="400">A word from our founder.</h2>
+      <div class="founder-card b" data-at="700">
+        <img src="/assets/images/dr-sneh-pandey.png" alt="Dr. Sneh Pandey">
+        <video id="founderVid" playsinline preload="none" poster="/assets/images/dr-sneh-pandey.png">
+          <source src="/employers/demo/media/founder.mp4" type="video/mp4">
+          <track kind="captions" src="/employers/demo/media/founder.vtt" srclang="en" label="English" default>
+        </video>
+        <button type="button" class="founder-play" id="founderPlay" aria-label="Play">▶</button>
+        <span class="founder-soon" id="founderSoon" hidden>Video coming soon</span>
+      </div>
+      <p class="sub b" data-at="1100">Dr. Sneh Pandey · Founder, Siya Health</p>
     </div>
   </article>
 
@@ -1624,9 +1631,9 @@ document.addEventListener('click',e=>{
 });
 const founderVid=$('founderVid'), founderPlay=$('founderPlay'), founderSoon=$('founderSoon');
 if(founderVid){
-  founderVid.addEventListener('error',()=>{founderMissing=true;if(founderSoon)founderSoon.hidden=false;});
+  founderVid.addEventListener('error',()=>{founderMissing=true;founderVid.hidden=true;if(founderSoon)founderSoon.hidden=false;});
   fetch('/employers/demo/media/founder.mp4',{method:'HEAD'}).then(r=>{
-    founderMissing=!r.ok; if(founderSoon)founderSoon.hidden=r.ok;
+    founderMissing=!r.ok; founderVid.hidden=!r.ok; if(founderSoon)founderSoon.hidden=r.ok;
   }).catch(()=>{founderMissing=true;if(founderSoon)founderSoon.hidden=false;});
   founderPlay.addEventListener('click',e=>{
     e.stopPropagation();
