@@ -14,7 +14,6 @@ const SITE_ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const UNSITEMAP_FILES = [
   'join-our-team.html',
   'intake/index.html',
-  'employers/california-pilot.html',
   'redirect/meet-greet/index.html',
   'redirect/chat/index.html',
   'redirect/adhd-walkthrough/index.html',

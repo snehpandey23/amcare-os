@@ -215,6 +215,11 @@ ${post.bodyHtml}${appendFaqDetails(post)}
 const RETIRED_SLUGS = new Set([
   // EG-P0-01: garbled prose — 301 → /adhd-care; do not regenerate
   'adult-adhd-treatment-california-2026',
+  // 2026-10-01: acquisition cluster — 301 → /adhd-care; do not regenerate
+  'adhd-medication-online-california',
+  'adhd-medication-options-california',
+  'adhd-telehealth-california',
+  'online-adhd-diagnosis-california',
 ]);
 
 const ALL = [...CALIFORNIA_POSTS, ...CALIFORNIA_POSTS_REST].filter(

@@ -315,8 +315,6 @@ export const ANCHOR_LABELS = {
   '/answers/adhd-and-weight-loss-connection': 'ADHD and weight loss struggles',
   '/creyos-adhd-testing': 'Creyos cognitive testing for ADHD',
   '/pricing': `Transparent care pricing (${initialEvaluationPriceDisplay()} evaluation · $149/month ongoing care)`,
-  '/blog/online-adhd-diagnosis-california': 'Online ADHD diagnosis in California',
-  '/blog/online-adhd-diagnosis-texas': 'Online ADHD diagnosis in Texas',
   '/adhd-care': 'ADHD evaluation and ongoing care',
   '/weight-loss-metabolic-health': 'Medical weight loss program',
   '/adult-adhd-diagnosis': 'Book an adult ADHD evaluation',
@@ -424,8 +422,6 @@ const GEO_PAGE_STATE = {
   'adhd-diagnosis-florida.html': 'FL',
   'adhd-diagnosis-pennsylvania.html': 'PA',
   'adhd-diagnosis-philadelphia.html': 'PA',
-  'blog/online-adhd-diagnosis-texas.html': 'TX',
-  'blog/online-adhd-diagnosis-california.html': 'CA',
 };
 
 function resolveMeetPhysiciansConfig(relPath) {
@@ -1578,7 +1574,7 @@ export function injectGtmAndTracking(html, relPath = '') {
   // EXCEPTION — /employers/demo.html only. Do not copy this branch to other pages.
   // Do not inject GTM or siya-tracking.js here. The demo page inserts those scripts
   // only when the hostname is siya.health, so preview deploys never load them.
-  // No Meta pixel. california-pilot stays pixel-free (branch below).
+  // No Meta pixel.
   if (/^employers\/demo\.html$/i.test(relPath)) {
     html = html.replace(/<script src="\/scripts\/siya-tracking\.js"(?:\s+defer)?><\/script>\s*/gi, '');
     return html;
@@ -1586,7 +1582,6 @@ export function injectGtmAndTracking(html, relPath = '') {
 
   // No marketing pixels: invitation-only surfaces + patient intake/scheduling/health-entry
   if (
-    /^employers\/california-pilot\.html$/i.test(relPath) ||
     /^internal\//i.test(relPath) ||
     marketingTrackingForbidden(relPath)
   ) {

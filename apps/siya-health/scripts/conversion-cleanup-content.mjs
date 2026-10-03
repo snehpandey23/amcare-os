@@ -47,7 +47,7 @@ function pricingNoteFor(variant) {
     return 'Medication costs (including GLP-1s when prescribed) are separate. Availability may vary by state.';
   }
   if (variant === 'telehealth') {
-    return 'Pricing varies by pathway. Medication costs are separate. Book a free Meet &amp; Greet to confirm eligibility.';
+    return 'The visit is a flat $149. Labs, medications, and other services are billed separately. Book a free Meet &amp; Greet to confirm eligibility.';
   }
   if (variant === 'mens') {
     return 'Labs and medication costs are separate when ordered. Availability may vary by state.';
