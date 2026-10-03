@@ -50,7 +50,7 @@ export const CALIFORNIA_POSTS_REST = [
             </section>
 
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
-              <li><a href="/blog/adhd-telehealth-california">ADHD telehealth in California</a></li>
+              <li><a href="/adhd-care">ADHD telehealth in California</a></li>
               <li><a href="/blog/adhd-evaluation-cost-texas">ADHD evaluation cost in California</a></li>
               <li><a href="/adhd-care">ADHD evaluation &amp; care</a></li>
               <li><a href="/providers/dr-sneh-pandey">Meet Medical Director Dr. Pandey</a></li>
@@ -104,7 +104,7 @@ export const CALIFORNIA_POSTS_REST = [
 
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
               <li><a href="/blog/online-adhd-diagnosis-california">Online ADHD diagnosis in California</a></li>
-              <li><a href="/blog/adhd-telehealth-california">ADHD telehealth in California</a></li>
+              <li><a href="/adhd-care">ADHD telehealth in California</a></li>
               <li><a href="/answers/starting-adhd-medication-adults">After diagnosis next steps</a></li>
             </ul></section>
 
@@ -451,7 +451,7 @@ export const CALIFORNIA_POSTS_REST = [
             <div class="cta-block blog-cta"><a class="button" href="https://book.carepatron.com/Siya-Health?p=X9PN3zKZR22FpD8jVPKsOA&amp;i=ftxOxenx" target="_blank" rel="noopener">Book Your Free 15-Minute ADHD Consultation</a></div>
 
             <section class="blog-related" aria-label="Related"><h2>Related articles</h2><ul>
-              <li><a href="/blog/adhd-telehealth-california">ADHD telehealth in California</a></li>
+              <li><a href="/adhd-care">ADHD telehealth in California</a></li>
               <li><a href="/blog/adhd-testing-online-california-screening-vs-evaluation">Testing online: screening versus evaluation</a></li>
               <li><a href="/providers/dr-sneh-pandey">Meet Medical Director Dr. Pandey</a></li>
             </ul></section>

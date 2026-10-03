@@ -68,7 +68,7 @@ export const ADDITIONAL_PROVIDERS = [
     ],
     testimonials: [],
     relatedLinksHtml:
-      'Explore: <a href="/blog/online-adhd-diagnosis-california">state ADHD guides</a>, <a href="/primary-urgent-care">primary telehealth</a>, <a href="/weight-loss-metabolic-health">medical weight loss</a>.',
+      'Explore: <a href="/adhd-care">state ADHD guides</a>, <a href="/primary-urgent-care">primary telehealth</a>, <a href="/weight-loss-metabolic-health">medical weight loss</a>.',
     inlineCtas: [
       { label: 'Primary & urgent care', path: '/primary-urgent-care', primary: true },
       { label: 'Medical weight loss', path: '/weight-loss-metabolic-health', primary: false },
