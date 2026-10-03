@@ -2182,8 +2182,7 @@ function fitFrame(){
   frame.style.transform='none';
   const bar=document.querySelector('.bar');
   if(!bar)return;
-  const topInset=16;
-  const availTop=topInset;
+  const availTop=16;
   const availBottom=bar.getBoundingClientRect().top-8;
   const availMid=(availTop+availBottom)/2;
   if(s.dataset.vcenter==='1'){
@@ -2192,16 +2191,16 @@ function fitFrame(){
     s.style.justifyContent='center';
     s.style.alignItems='center';
     s.style.alignContent='center';
-    /* Prefer centering the CTA / hero; else the whole frame */
-    const anchor=s.querySelector('.row-btns, .start, .web, .q2, .big')||frame;
+    void s.offsetHeight; /* flush flex layout before measuring */
+    const anchor=s.querySelector('.row-btns, a.start, .web, .q2, .big')||frame;
     const ar=anchor.getBoundingClientRect();
-    const anchorMid=ar.top+ar.height/2;
-    let dy=availMid-anchorMid;
-    /* Keep frame inside the available band */
-    const fr=frame.getBoundingClientRect();
-    if(fr.top+dy<availTop) dy=availTop-fr.top;
-    if(fr.bottom+dy>availBottom) dy=availBottom-fr.bottom;
-    frame.style.transform=`translateY(${Math.round(dy)}px)`;
+    let dy=Math.round(availMid-(ar.top+ar.height/2));
+    frame.style.transform=`translateY(${dy}px)`;
+    void s.offsetHeight;
+    /* One refine pass after transform */
+    const ar2=anchor.getBoundingClientRect();
+    const refine=Math.round(availMid-(ar2.top+ar2.height/2));
+    if(refine) frame.style.transform=`translateY(${dy+refine}px)`;
     frame.style.transformOrigin='center center';
     return;
   }
@@ -2215,7 +2214,7 @@ function fitFrame(){
     frame.style.transformOrigin='center center';
   }else frame.style.transform='';
 }
-function scheduleFit(){if(fitFor===cur)return;fitFor=cur;clearTimeout(fitTimer);fitTimer=setTimeout(fitFrame,120);}
+function scheduleFit(){if(fitFor===cur)return;fitFor=cur;clearTimeout(fitTimer);fitTimer=setTimeout(fitFrame,160);}
 function show(i){
   if(i<0||i>=slides.length)return;cur=i;clearTimeout(fitTimer);fitFor=-1;walkStep=-1;founderHold=false;
   try{updatePortraitBackdrop();}catch(e){}
