@@ -16,7 +16,8 @@ import { TRACKING } from '../data/tracking-config.mjs';
 import { EMPLOYER_PILOT_FACTS as FACTS } from '../data/employer-pilot-facts.mjs';
 
 /** Swap for a scheduling URL later. Both close-slide buttons use this. */
-const DEMO_BOOK_CALL_HREF = '/employers#employer-inquiry-form';
+/** Land on the inquiry heading so intro copy above the form is visible. */
+const DEMO_BOOK_CALL_HREF = '/employers#inquiry-heading';
 
 const SLIDE_IDS = [
   'statement',
@@ -99,20 +100,20 @@ if (slideN !== SLIDE_IDS.length) {
 }
 
 body = body.replaceAll(
-  '<b data-count="2700" data-at="2600" data-suf="+">0</b><span>Patients treated at Siya Health</span>',
-  `<b data-count="${patients.n}" data-at="2600"${patients.suf ? ` data-suf="${patients.suf}"` : ''}>0</b><span>Patients treated at Siya Health</span>`,
+  '<b data-count="2700" data-at="2600" data-suf="+">0</b><span>Patients treated</span>',
+  `<b data-count="${patients.n}" data-at="2600"${patients.suf ? ` data-suf="${patients.suf}"` : ''}>0</b><span>Patients treated</span>`,
 );
 body = body.replace(
   '<b data-count="1200" data-at="2800" data-suf="+">0</b><span>Clinical evaluations completed</span>',
   `<b data-count="${evaluations.n}" data-at="2800"${evaluations.suf ? ` data-suf="${evaluations.suf}"` : ''}>0</b><span>Clinical evaluations completed</span>`,
 );
 body = body.replaceAll(
-  `<b data-count="4.9" data-dec="1" data-at="3000">0</b><span>Google rating (88 reviews)</span>`,
-  `<b data-count="${google.n}" data-dec="${google.dec}" data-at="3000">0</b><span>Google rating (${FACTS.googleReviewCount} reviews)</span>`,
+  `<b data-count="4.9" data-dec="1" data-at="2600">0</b><span>Google rating</span>`,
+  `<b data-count="${google.n}" data-dec="${google.dec}" data-at="2600">0</b><span>Google rating (${FACTS.googleReviewCount} reviews)</span>`,
 );
 body = body.replaceAll(
-  '<b data-count="4" data-at="3200">0</b><span>States: CA, TX, PA, FL</span>',
-  `<b data-count="${stateList.length}" data-at="3200">0</b><span>States: ${FACTS.practiceStatesShort}</span>`,
+  '<b data-count="4" data-at="2600">0</b><span>States served</span>',
+  `<b data-count="${stateList.length}" data-at="2600">0</b><span>States served · ${FACTS.practiceStatesShort}</span>`,
 );
 
 body = body.replaceAll('__INQUIRY_HREF__', DEMO_BOOK_CALL_HREF);
@@ -124,7 +125,7 @@ body = body.replaceAll('__FACTS_DOCTOR_CHIP__', FACTS.doctorChip);
 const klarity = countParts(FACTS.klarityScore.split('/')[0]);
 body = body.replaceAll(
   '<!--KLARITY_STAT-->',
-  `<div class="stat b" data-at="3400"><b data-count="${klarity.n}" data-dec="${klarity.dec}" data-at="3400">0</b><span>Third-party marketplace (${FACTS.klarityReviewCount} reviews)</span></div>`,
+  `<div class="stat b" data-at="2600"><b data-count="${klarity.n}" data-dec="${klarity.dec}" data-at="2600" data-count-w="${klarity.n.length + (klarity.dec ? 1 : 0)}">0</b><span>Marketplace rating (${FACTS.klarityReviewCount} reviews)</span></div>`,
 );
 
 body = body.replace(
