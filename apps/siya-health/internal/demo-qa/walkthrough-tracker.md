@@ -46,4 +46,4 @@ Status: `done` · `in progress` · `not started` · `parked` · `hold`.
 | When | Batch | Commit | Notes |
 |------|-------|--------|-------|
 | 2026-10-03 | Step 0 tracker | `b7dc3a2b` | |
-| pending | Step 1 + Group A | pending | hash-stamped shots |
+| 2026-10-03 | Step 1 + Group A | `6d8cd737` | hash-stamped shots |
