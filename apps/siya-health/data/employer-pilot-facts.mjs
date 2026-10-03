@@ -19,10 +19,16 @@ export const EMPLOYER_PILOT_FACTS = {
   panelMax: 600,
   /** Practice service area — not each founder's personal license list. */
   practiceStatesShort: 'CA, TX, PA, FL',
-  /** Care window, founder's local-time standard (Sep 30, 2026). */
-  scheduledCare: "6 AM – 10 PM, 7 days a week (patient's local time), including urgent appointments",
-  /** Concierge replies during that same window. */
-  responseWithin: 'Our team replies within 1 hour, 6 AM – 10 PM.',
+  /**
+   * Care hours and response standards (Oct 3, 2026 — founder-confirmed 24/7 operations,
+   * staffed via new provider network contracts). Demo copy and chips must read these;
+   * do not hardcode hours or response times in templates.
+   */
+  scheduledCare: "Visits available 24/7, including weekends and holidays (patient's local time).",
+  responseWithin: 'Our care team replies within 30 minutes, 24/7.',
+  responseChip: 'Replies within 30 min, 24/7',
+  doctorAvailability: 'A doctor is available within 2 hours, any time, often sooner.',
+  doctorChip: 'A doctor within 2 hrs, any time',
   /** Where the employee must be located for the visit. */
   visitLocationLine:
     'For employees located in California, Texas, Pennsylvania or Florida at the time of their visit.',

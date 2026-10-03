@@ -27,7 +27,8 @@ const SLIDE_IDS = [
   'question',
   'turn',
   'f-time',
-  'f-hours',
+  'f-time-a',
+  'f-time-b',
   'f-response',
   'f-urgent',
   'f-whole',
@@ -117,6 +118,9 @@ body = body.replaceAll(
 body = body.replaceAll('__INQUIRY_HREF__', DEMO_BOOK_CALL_HREF);
 body = body.replaceAll('__FACTS_RESPONSE__', FACTS.responseWithin);
 body = body.replaceAll('__FACTS_HOURS__', FACTS.scheduledCare);
+body = body.replaceAll('__FACTS_DOCTOR__', FACTS.doctorAvailability);
+body = body.replaceAll('__FACTS_RESPONSE_CHIP__', FACTS.responseChip);
+body = body.replaceAll('__FACTS_DOCTOR_CHIP__', FACTS.doctorChip);
 const klarity = countParts(FACTS.klarityScore.split('/')[0]);
 body = body.replaceAll(
   '<!--KLARITY_STAT-->',
@@ -241,6 +245,7 @@ const page = `<!DOCTYPE html>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow, noarchive" />
+    <script>(function(){try{var q=new URLSearchParams(location.search);var embed=q.get('embed')==='1';var w=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);document.documentElement.classList.add('phone-first');if(embed)document.documentElement.classList.add('demo-embed');else if(w>900)document.documentElement.classList.add('demo-desktop-host');}catch(e){}})();</script>
     <title>Employer demo | Siya Health</title>
     <meta name="description" content="A short, self-paced walkthrough of Siya Health for HR and benefits leaders." />
     <link rel="canonical" href="https://siya.health/employers/demo" />

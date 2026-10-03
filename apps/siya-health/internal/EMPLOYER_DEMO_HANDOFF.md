@@ -24,25 +24,33 @@ For each feedback item:
 2. Pick a real-world reference the viewer already knows (a calendar app day view, a phone lock-screen notification, a voicemail list, a chat app) and follow its conventions. Never use abstract chips or floating labels to stand in for a real object.
 3. Write a short design spec before coding: layout, elements, copy, timing, and a separate phone layout (390×844). Reuse the existing build classes and slide engine; no one-off styles.
 4. Build it.
-5. Render screenshots at 1440×900 and 390×844 after all builds on the slide have finished, and inspect them against this checklist:
+5. Render screenshots at 1440×900 and 390×844 **only after the slide’s last build event + 1 second**, with **no transition in progress**. Mid-animation or mid-build captures are not valid QA. Then inspect against this checklist:
    - Nothing overlaps (headings, captions, nodes, cards, the control bar)
    - Nothing clipped or off-screen
    - All text readable (size and contrast)
    - Everything meant to be inside an object (phone, calendar) is inside it
    - It looks like the real-world reference, not a diagram of it
    - It matches the intent from step 1
+   - On desktop, the tour is the phone layout inside a scaled 390×844 frame (pixel-identical to 390×844) — not a separate desktop layout
 6. Fix every failure and re-check once.
-7. Deploy. In the reply, include per slide: the intent, the reference used, the checklist results, and anything unsure.
+7. **Fresh-load phone smoke test (required before every deploy).** At **390×844**, open the page from scratch in each of these user agents — never by resizing a desktop window:
+   - iPhone Safari (current WebKit / iOS Safari UA)
+   - Android Chrome
+   - One in-app browser UA (WhatsApp, LinkedIn, Gmail, or Instagram)
+   For each: load the page cold, wait until the intro is ready, play the intro, then advance **3 slides**. **Fail the deploy** if any console error or pageerror occurs (including script init failures). A resize-from-desktop check does not count.
+8. Deploy. In the reply, include per slide: the intent, the reference used, the checklist results, the smoke-test UAs and pass/fail, and anything unsure.
 
 If a request is ambiguous, or there is no good real-world reference, ask before building. Do not guess.
 
 A new or redesigned visual still comes from the prototype when one exists. A text-only request for a new visual is not enough to invent a design: ask for a prototype, or follow this protocol only after the intent and reference are explicit.
 
-## Mobile-first rule
+## Mobile-first / portrait-default rule
 
-- Design every slide for 390×844 first, then desktop.
-- One idea per screen on phones. If a slide's content does not fit above the control bar at 390×844 without scaling the frame below 90%, split it into two or more slides on phones. Desktop may keep one slide. Do not shrink text to make it fit.
-- Minimum sizes on phones: body text 14px, labels and captions 12px, tap targets 44px.
+- Design every slide for **390×844 only**. Desktop (width > 900px) loads that same phone layout in a **390×844 iframe**, CSS-scaled to ~90% viewport height — not a separate desktop layout.
+- Desk-only (`data-surface="desk"`) slides are **retired from the live build** (HTML may remain in the prototype for git history).
+- One idea per screen. If content does not fit above the control bar at 390×844 without scaling the frame below 90%, split into two or more slides. Do not shrink text to make it fit.
+- Minimum sizes: body text 14px, labels and captions 12px, tap targets 44px.
+- **Screenshot timing:** wait until the slide’s last `[data-at]` / `[data-out]` time **+ 1s**, and confirm `.slide.active` has `filter: none` and full opacity before capturing.
 
 ## Automated checks
 
@@ -53,6 +61,7 @@ Run with Playwright on every slide, at 1440×900 and 390×844, after all builds 
 - **Contrast:** for every visible text element, compute its color against the actual background behind it, including gradients and images. Sample the darkest and lightest point. Flag anything under 4.5:1 for normal text, or under 3:1 for large text (24px or larger, or 19px or larger and bold).
 - **Size:** flag text below the phone minimums above.
 - **Containment:** flag anything meant to be inside a phone, calendar, or card that renders outside it.
+- **Fresh-load smoke (deploy gate):** at 390×844 only, with a **new browser context** per UA (iPhone Safari, Android Chrome, one in-app browser). Cold-load `/employers/demo`, play intro, advance 3 slides. Any `pageerror` or console `error` fails the deploy. Do not emulate phone by resizing a desktop viewport after load.
 
 ## Audit report format
 
@@ -217,7 +226,7 @@ The page never scrolls. Every slide must fit the viewport at 1440×900 and 390×
 
 ## 7. Slide list (current approved version)
 
-All of these play. Care hours and the reply standard come from `employer-pilot-facts.mjs` (6 AM – 10 PM, 7 days, patient's local time; replies within 1 hour in that window).
+All of these play. Care hours and reply/doctor standards come from `employer-pilot-facts.mjs` (visits 24/7; care-team replies within 30 minutes 24/7; a doctor within 2 hours any time).
 
 Desktop plays the `desk`/`both` rows; phone plays the `phone`/`both` rows (employer, cost, privacy, and proof split on phones). Founder is parked while `showFounder=false`.
 
