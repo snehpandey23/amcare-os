@@ -181,8 +181,8 @@ body = body.replace(
 );
 
 body = body.replace(
-  "welcome.addEventListener('click',e=>{if(e.target.closest('#replayIntro1'))return;startTour();});\n$('replayIntro1').addEventListener('click',e=>{e.stopPropagation();resetIntro();});\n",
-  "welcome.addEventListener('click',()=>startTour());\n",
+  /welcome\.addEventListener\('click',e=>\{if\(e\.target\.closest\('#replayIntro1'\)\)return;(?:unlockAudio\(\);)?startTour\(\);\}\);\n\$\('replayIntro1'\)\.addEventListener\('click',e=>\{e\.stopPropagation\(\);resetIntro\(\);\}\);\n/,
+  "welcome.addEventListener('click',()=>{unlockAudio();startTour();});\n",
 );
 
 body = body.replace("$('replayIntro2').addEventListener('click',resetIntro);\n", '');
