@@ -654,21 +654,41 @@ article.slide[data-vcenter="1"] .frame{
   width:100%;margin:0;transform:none!important;transform-origin:center center;
   display:grid;align-content:center;justify-items:center;gap:inherit;
 }
-/* Close: only the CTA is in-flow for flex centering; copy hangs above/below */
+/* Close: copy above CTA; next-steps hero under CTA fills the lower band */
 article.slide[data-close="1"] .frame{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:0;padding:0;width:100%;
 }
 article.slide[data-close="1"] .close-stack{
-  position:relative;display:flex;flex-direction:column;align-items:center;width:min(520px,100%);
+  position:relative;display:flex;flex-direction:column;align-items:center;width:min(640px,100%);gap:0;
 }
 article.slide[data-close="1"] .close-above{
-  position:absolute;left:0;right:0;bottom:100%;margin-bottom:14px;
-  display:grid;gap:clamp(12px,2.5vh,28px);justify-items:center;text-align:center;
+  display:grid;gap:clamp(10px,2vh,22px);justify-items:center;text-align:center;width:100%;
+  margin-bottom:14px;
 }
 article.slide[data-close="1"] .close-foot{
-  position:absolute;left:0;right:0;top:100%;margin-top:14px;
-  display:grid;gap:10px;justify-items:center;text-align:center;
+  display:grid;gap:8px;justify-items:center;text-align:center;margin-top:12px;width:100%;
+}
+.next-steps{width:100%;margin-top:18px;display:grid;gap:10px;justify-items:center}
+.next-steps-label{margin:0;font:600 11px/1 var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--magenta-text)}
+.next-steps-rail{
+  list-style:none;margin:0;padding:0;width:100%;
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;
+}
+.next-steps-rail li{
+  display:grid;gap:6px;justify-items:center;text-align:center;
+  background:#fff;border-radius:14px;padding:10px 8px;
+  box-shadow:0 8px 22px rgba(10,36,107,.08);border:1px solid rgba(10,36,107,.08);
+  font:600 11px/1.25 var(--font-display);color:var(--ink);min-height:88px;align-content:center;
+}
+.next-steps-rail .ns-ic{
+  width:28px;height:28px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(216,16,136,.08);color:var(--magenta);
+}
+.next-steps-rail .ns-ic svg{width:16px;height:16px;display:block}
+@media (max-width:640px){
+  .next-steps-rail{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .next-steps-rail li{min-height:76px;font-size:11px;padding:8px 6px}
 }
 @media (max-width:640px){
   .bar button{min-width:44px;min-height:44px}
@@ -720,6 +740,90 @@ article.slide[data-close="1"] .close-foot{
   .begin button,.wash::before,.wash::after,.me-node.halo.in,.ev.siya.in,.siya-core.in{animation:none}
 }
 
+
+/* ===== DESKTOP STAGE: fixed 1280×720 canvas, uniform scale, letterboxed ===== */
+.desk-canvas{position:relative;width:100%;height:100%;min-height:0}
+html.desk-stage{
+  --desk-w:1280px; --desk-h:720px; --desk-scale:1;
+}
+html.desk-stage body{overflow:hidden;background:#0A1238}
+html.desk-stage #welcome,
+html.desk-stage #tour{
+  background:
+    radial-gradient(120% 80% at 50% 40%, #1a1450 0%, #0A1238 55%, #050A24 100%);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+html.desk-stage #welcome.wash::before,
+html.desk-stage #welcome.wash::after,
+html.desk-stage #tour.wash::before,
+html.desk-stage #tour.wash::after{opacity:.55;filter:blur(72px)}
+html.desk-stage .desk-canvas{
+  width:var(--desk-w);height:var(--desk-h);flex:0 0 auto;
+  background:var(--cream);color:var(--ink);
+  border-radius:18px;overflow:hidden;position:relative;
+  box-shadow:0 30px 80px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.1);
+  transform:scale(var(--desk-scale));transform-origin:center center;
+}
+html.desk-stage #welcome .desk-canvas{display:grid;place-items:center;padding:48px}
+html.desk-stage #tour .desk-canvas{cursor:pointer}
+html.desk-stage #tour .slide{
+  position:absolute;inset:0;padding:36px 48px 96px;box-sizing:border-box;
+  display:grid!important;place-items:stretch;align-content:stretch;
+}
+html.desk-stage #tour article.slide[data-vcenter="1"]{
+  display:grid!important;justify-content:stretch;align-items:stretch;padding:36px 48px 96px;
+}
+html.desk-stage #tour .bar{
+  left:48px;right:48px;bottom:20px;width:auto;transform:none;
+  max-width:none;gap:12px;
+}
+html.desk-stage #tour .segs{
+  flex:1 1 auto;display:flex;justify-content:center;align-items:center;gap:10px;
+  min-width:0;
+}
+html.desk-stage #tour .ch{
+  flex:0 1 auto;min-width:0;padding:2px 8px;
+}
+html.desk-stage #tour .hint2{bottom:78px}
+/* 40/60 copy | hero for design-check slides */
+html.desk-stage #tour article.slide .frame.desk-split{
+  width:100%;max-width:none;height:100%;
+  display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);
+  gap:36px 40px;align-items:center;justify-items:stretch;text-align:left;
+}
+html.desk-stage #tour article.slide .frame.desk-split .desk-copy{
+  grid-column:1;grid-row:1;
+  display:grid;gap:14px;align-content:center;justify-items:start;max-width:440px;
+}
+html.desk-stage #tour article.slide .frame.desk-split .desk-hero{
+  grid-column:2;grid-row:1;
+  display:grid;place-items:center;min-width:0;min-height:0;height:100%;
+}
+html.desk-stage #tour article.slide .frame.desk-split .cap,
+html.desk-stage #tour article.slide .frame.desk-split .sub,
+html.desk-stage #tour article.slide .frame.desk-split .q2{text-align:left;max-width:none}
+html.desk-stage #tour article.slide .frame.desk-split .web{width:100%;max-width:none}
+html.desk-stage #tour article.slide .frame.desk-split .compare{width:100%}
+html.desk-stage #tour article.slide .frame.desk-split .p-time-wrap{width:100%}
+html.desk-stage #tour article[data-close="1"] .frame{
+  width:100%;max-width:none;height:100%;display:grid;
+  grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:32px 40px;align-items:center;
+}
+html.desk-stage #tour article[data-close="1"] .close-stack{
+  width:100%;max-width:420px;align-items:start;text-align:left;
+}
+html.desk-stage #tour article[data-close="1"] .close-above,
+html.desk-stage #tour article[data-close="1"] .close-foot,
+html.desk-stage #tour article[data-close="1"] .row-btns{justify-items:start;justify-content:start;text-align:left}
+html.desk-stage #tour article[data-close="1"] .next-steps{
+  grid-column:2;grid-row:1;align-self:center;margin:0;width:100%;
+}
+html.desk-stage #tour article[data-close="1"] .next-steps-rail li{min-height:110px;font-size:13px;padding:14px 10px}
+html.desk-stage #tour article[data-close="1"] .close-stack{display:contents}
+html.desk-stage #tour article[data-close="1"] .close-above{grid-column:1}
+html.desk-stage #tour article[data-close="1"] .row-btns{grid-column:1}
+html.desk-stage #tour article[data-close="1"] .close-foot{grid-column:1}
 
 /* ===== Desktop host portrait iframe (FEATURE-FLAGGED OFF — enable with ?portrait=1) =====
    Kept for re-enable; A.1 desktop uses native desk surfaces (8e4065c5 layout). */
@@ -800,17 +904,20 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </div>
 </div>
 <section id="welcome" class="wash" aria-live="polite">
-  <div class="card">
-    <div class="kicker">For HR and benefits leaders</div>
-    <h1>See how Siya Health works <em>for your people</em>.</h1>
-    <p>A short guided tour. Click anywhere to begin.</p>
-    <p class="welcome-note">Screens shown are illustrations with sample data.</p>
-    <button class="start" id="start" type="button">Start the tour</button>
-    
+  <div class="desk-canvas" id="welcomeCanvas">
+    <div class="card">
+      <div class="kicker">For HR and benefits leaders</div>
+      <h1>See how Siya Health works <em>for your people</em>.</h1>
+      <p>A short guided tour. Click anywhere to begin.</p>
+      <p class="welcome-note">Screens shown are illustrations with sample data.</p>
+      <button class="start" id="start" type="button">Start the tour</button>
+      
+    </div>
   </div>
 </section>
 
 <section id="tour" class="wash" hidden aria-live="polite">
+  <div class="desk-canvas" id="deskCanvas">
   <p class="illus-note" aria-hidden="true">Illustrative · sample data</p>
   <!-- 0 statement -->
   <article class="slide" id="statement" data-slide-id="statement" data-chapter="0" data-dur="3200" data-vcenter="1">
@@ -822,25 +929,29 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
 
   <!-- P1 time -->
   <article class="slide" id="p-time" data-slide-id="p-time" data-chapter="0" data-dur="12700" data-sample="1">
-    <div class="frame">
-      <div class="eyebrow b" data-at="150">Time</div>
-      <h2 class="cap b" data-at="250">Appointments that <em>don't fit a workday</em>.</h2>
-      <div class="p-time-wrap b" data-at="400">
-        <div class="gcal">
-          <div class="gcal-top"><div><b>Monday</b><small>Their calendar</small></div><span class="pill">Day</span></div>
-          <div class="gcal-body">
-            <div class="gcal-hours" id="calHoursProblem"></div>
-            <div class="gcal-grid" id="calGridProblem"></div>
-          </div>
-        </div>
-        <aside class="appt-callout b" data-at="2800" aria-label="Doctor appointment callout">
-          <b>Doctor's appointment</b>
-          <small>About 2 hrs with travel</small>
-          <em class="fit">Doesn't fit</em>
-          <em class="slot">No free slot</em>
-        </aside>
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="150">Time</div>
+        <h2 class="cap b" data-at="250">Appointments that <em>don't fit a workday</em>.</h2>
+        <p class="sample-cap">Illustrative · sample data</p>
       </div>
-      <p class="sample-cap">Illustrative · sample data</p>
+      <div class="desk-hero">
+        <div class="p-time-wrap b" data-at="400">
+          <div class="gcal">
+            <div class="gcal-top"><div><b>Monday</b><small>Their calendar</small></div><span class="pill">Day</span></div>
+            <div class="gcal-body">
+              <div class="gcal-hours" id="calHoursProblem"></div>
+              <div class="gcal-grid" id="calGridProblem"></div>
+            </div>
+          </div>
+          <aside class="appt-callout b" data-at="2800" aria-label="Doctor appointment callout">
+            <b>Doctor's appointment</b>
+            <small>About 2 hrs with travel</small>
+            <em class="fit">Doesn't fit</em>
+            <em class="slot">No free slot</em>
+          </aside>
+        </div>
+      </div>
     </div>
   </article>
 
@@ -912,13 +1023,17 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
     </div>
   </article>
 
-  <!-- turn -->
+  <!-- turn — hero first in DOM for phone; desk-stage CSS places copy left / hero right -->
   <article class="slide" id="turn" data-slide-id="turn" data-chapter="1" data-dur="6200" data-vcenter="1">
-    <div class="frame">
-      <div class="eyebrow b" data-at="150">Introducing</div>
-      <div class="web" id="webT"></div>
-      <h2 class="cap b" data-at="4200">Meet <em>Siya Health</em>.</h2>
-      <p class="sub b" data-at="4700">One care team that personalizes care for your people and works around their schedule.</p>
+    <div class="frame desk-split">
+      <div class="desk-hero">
+        <div class="web" id="webT"></div>
+      </div>
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="150">Introducing</div>
+        <h2 class="cap b" data-at="4200">Meet <em>Siya Health</em>.</h2>
+        <p class="sub b" data-at="4700">One care team that personalizes care for your people and works around their schedule.</p>
+      </div>
     </div>
   </article>
 
@@ -1226,24 +1341,28 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <article class="slide" id="cost" data-slide-id="cost" data-chapter="4" data-dur="5200" data-cost="1" data-surface="desk">
-    <div class="frame">
-      <div class="eyebrow b" data-at="200">Cost</div>
-      <h2 class="cap b" data-at="400">Simple, predictable, <em>inclusive</em>.</h2>
-      <p class="sub b" data-at="700">So everyone on your team can actually use it.</p>
-      <div class="compare">
-        <div class="panel pop" data-at="1100">
-          <h3>The usual way</h3>
-          <div class="strike b" data-at="1600">Claim forms</div>
-          <div class="strike b" data-at="2100">Copays</div>
-          <div class="strike b" data-at="2600">Prior auth</div>
-          <div class="strike b" data-at="3100">Surprise bills</div>
-        </div>
-        <div class="panel pop" data-at="1600">
-          <h3>With Siya</h3>
-          <div class="tick b" data-at="2200"><i></i>No insurance claims or copays for included care</div>
-          <div class="tick b" data-at="2700"><i></i>One predictable fee set by your package</div>
-          <div class="tick b" data-at="3200"><i></i>HSA-compatible</div>
-          <div class="tick b" data-at="3700"><i></i>Anything extra disclosed before it's ordered</div>
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="200">Cost</div>
+        <h2 class="cap b" data-at="400">Simple, predictable, <em>inclusive</em>.</h2>
+        <p class="sub b" data-at="700">So everyone on your team can actually use it.</p>
+      </div>
+      <div class="desk-hero">
+        <div class="compare">
+          <div class="panel pop" data-at="1100">
+            <h3>The usual way</h3>
+            <div class="strike b" data-at="1600">Claim forms</div>
+            <div class="strike b" data-at="2100">Copays</div>
+            <div class="strike b" data-at="2600">Prior auth</div>
+            <div class="strike b" data-at="3100">Surprise bills</div>
+          </div>
+          <div class="panel pop" data-at="1600">
+            <h3>With Siya</h3>
+            <div class="tick b" data-at="2200"><i></i>No insurance claims or copays for included care</div>
+            <div class="tick b" data-at="2700"><i></i>One predictable fee set by your package</div>
+            <div class="tick b" data-at="3200"><i></i>HSA-compatible</div>
+            <div class="tick b" data-at="3700"><i></i>Anything extra disclosed before it's ordered</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1411,9 +1530,18 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
         <div class="row-btns b" data-at="1200">
           <a class="start" href="/employers#employer-inquiry-form" data-demo-cta="inquiry">Submit an inquiry</a>
         </div>
+        <div class="next-steps b" data-at="1400" aria-label="What happens next">
+          <p class="next-steps-label">What happens next</p>
+          <ol class="next-steps-rail">
+            <li class="pop" data-at="1500"><i class="ns-ic" data-ic="chat"></i><span>Inquiry</span></li>
+            <li class="pop" data-at="1700"><i class="ns-ic" data-ic="cal"></i><span>Short call</span></li>
+            <li class="pop" data-at="1900"><i class="ns-ic" data-ic="shield"></i><span>Package tailored to your&nbsp;team</span></li>
+            <li class="pop" data-at="2100"><i class="ns-ic" data-ic="refer"></i><span>Private link — join voluntarily</span></li>
+          </ol>
+        </div>
         <div class="close-foot">
-          <p class="pack-note b" data-at="1500">Services and coverage are tailored to your organization's&nbsp;package.</p>
-          <div class="mini b" data-at="1700">
+          <p class="pack-note b" data-at="2300">Services and coverage are tailored to your organization's&nbsp;package.</p>
+          <div class="mini b" data-at="2500">
             <button class="link" id="replayTour" type="button">Replay tour</button>
             
           </div>
@@ -1430,6 +1558,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
     <button id="muteTour" type="button" aria-pressed="false">Sound on</button>
     <button id="next" type="button">Next</button>
   </nav>
+  </div><!-- /#deskCanvas -->
 </section>
 
 <script>
@@ -1453,6 +1582,28 @@ function track(name, extra){
 
 /* Phone ≤640px; desktop (≥641) uses native desk surfaces when portrait host is off. */
 function isPhoneLayout(){return matchMedia('(max-width:640px)').matches;}
+/* 16:9 desk stage (≥900, not portrait-host/embed) */
+function wantsDeskStage(){
+  return !demoHost&&!demoEmbed&&matchMedia('(min-width:900px)').matches;
+}
+function syncDeskStage(){
+  const on=wantsDeskStage();
+  document.documentElement.classList.toggle('desk-stage',on);
+  if(on)fitDeskScale();
+  else{
+    document.documentElement.style.removeProperty('--desk-scale');
+    document.querySelectorAll('.desk-canvas').forEach(el=>{el.style.transform='';});
+  }
+}
+function fitDeskScale(){
+  if(!wantsDeskStage())return;
+  const W=1280,H=720;
+  const pad=24;
+  const sw=Math.max(320,innerWidth-pad*2)/W;
+  const sh=Math.max(280,innerHeight-pad*2)/H;
+  const z=Math.min(1,sw,sh);
+  document.documentElement.style.setProperty('--desk-scale',String(z));
+}
 const PORTRAIT_CH_COLORS=[
   ['rgba(216,16,136,.5)','rgba(10,36,107,.45)'],
   ['rgba(216,16,136,.48)','rgba(123,45,142,.42)'],
@@ -1914,6 +2065,7 @@ const muteBtn=$('mute');
 if(muteBtn)muteBtn.addEventListener('click',e=>{e.stopPropagation();applyMute(!muted);});
 let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{
   if(phase==='idle'&&!demoEmbed)build();
+  syncDeskStage();
   if(!demoHost){
     const prevLen=slides.length, prevId=slides[cur]&&slides[cur].id;
     collectSlides();
@@ -1923,6 +2075,7 @@ let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{
     }else{paintChapters();fitWalk();fitFrame();}
   }
 },200);});
+syncDeskStage();
 if(demoEmbed){
   addEventListener('message',function(ev){
     if(ev.origin!==location.origin)return;
@@ -2013,6 +2166,12 @@ const CD=phone?[500,430]:C;
 /* Meet Siya — ported: card-lite, ring, travelling light */
 icons.refer='<path d="M4 13h14M13 7l6 6-6 6" stroke="#0A246B" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
 icons.chat='<path d="M4 5h18v12H11l-5 4v-4H4z" fill="none" stroke="#7B2D8E" stroke-width="2" stroke-linejoin="round"/><path d="M9 11h8" stroke="#D81088" stroke-width="2" stroke-linecap="round"/>';
+(()=>{
+  document.querySelectorAll('.ns-ic[data-ic]').forEach(el=>{
+    const k=el.getAttribute('data-ic');
+    if(icons[k]) el.innerHTML=`<svg viewBox="0 0 26 26" aria-hidden="true">${icons[k]}</svg>`;
+  });
+})();
 (()=>{
   /* Phone/portrait: taller canvas + wider ring so cards clear hub + headline */
   const BOX=phone?780:520;
