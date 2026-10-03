@@ -158,13 +158,13 @@ body = body.replace(
 );
 
 body = body.replace(
-  "$('skip').addEventListener('click',e=>{e.stopPropagation();if(phase==='idle')phase='play';finishIntro();});",
-  "$('skip').addEventListener('click',e=>{e.stopPropagation();track('employer_demo_intro_skip');if(phase==='idle')phase='play';finishIntro();});",
+  /\$\('skip'\)\.addEventListener\('click',e=>\{e\.stopPropagation\(\);(?:unlockAudio\(\);)?if\(phase==='idle'\)phase='play';finishIntro\(\);\}\);/,
+  "$('skip').addEventListener('click',e=>{e.stopPropagation();unlockAudio();track('employer_demo_intro_skip');if(phase==='idle')phase='play';finishIntro();});",
 );
 
 body = body.replace(
-  'function startTour(){\n  welcome.classList.remove(\'on\');',
-  "function startTour(){\n  track('employer_demo_tour_start');\n  welcome.classList.remove('on');",
+  /function startTour\(\)\{\n  collectSlides\(\);\n  try\{ensureMusic\(\);\}catch\(e\)\{\} \/\* every entry into the tour after a click \*\/\n  welcome\.classList\.remove\('on'\);/,
+  "function startTour(){\n  track('employer_demo_tour_start');\n  collectSlides();\n  try{ensureMusic();}catch(e){} /* every entry into the tour after a click */\n  welcome.classList.remove('on');",
 );
 
 body = body.replace(
