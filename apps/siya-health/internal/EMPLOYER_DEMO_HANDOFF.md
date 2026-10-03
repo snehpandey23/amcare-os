@@ -44,13 +44,31 @@ If a request is ambiguous, or there is no good real-world reference, ask before 
 
 A new or redesigned visual still comes from the prototype when one exists. A text-only request for a new visual is not enough to invent a design: ask for a prototype, or follow this protocol only after the intent and reference are explicit.
 
-## Mobile-first / portrait-default rule
+## Layout rule (A.1+)
 
-- Design every slide for **390×844 only**. Desktop (width > 900px) loads that same phone layout in a **390×844 iframe**, CSS-scaled to ~90% viewport height — not a separate desktop layout.
-- Desk-only (`data-surface="desk"`) slides are **retired from the live build** (HTML may remain in the prototype for git history).
-- One idea per screen. If content does not fit above the control bar at 390×844 without scaling the frame below 90%, split into two or more slides. Do not shrink text to make it fit.
-- Minimum sizes: body text 14px, labels and captions 12px, tap targets 44px.
+- **Phone (≤640px):** portrait phone slides (`data-surface="phone"` / `both`). Design for **390×844** and also fit **360×800** (small Android). Short chapter labels; if they still won’t fit, show only the current chapter + segment track (no ellipsis).
+- **Desktop (≥641px):** native desk surfaces (`data-surface="desk"` / `both`). The 390 iframe portrait host is **feature-flagged off** (re-enable with `?portrait=1` only). Do not treat portrait-frame-on-desktop as the default.
+- One idea per screen on phone. If content does not fit above the control bar without scaling the frame below 90%, split into two or more slides. Do not shrink text to make it fit.
+- Minimum sizes: body text 14px, labels and captions 12px, tap targets 44px. Body/caption lines use `text-wrap: balance`.
 - **Screenshot timing:** wait until the slide’s last `[data-at]` / `[data-out]` time **+ 1s**, and confirm `.slide.active` has `filter: none` and full opacity before capturing.
+
+## Planned batches (do not start until the prior batch is promoted / approved)
+
+### A.1 (preview → phone check → promote on “promote A.1”)
+Short chapter labels, text-light vertical centering, portrait iframe off on desktop, tiny phone polish (`text-wrap: balance`, chapter label baseline-aligned with Back/Play/Next).
+
+### DESKTOP STAGE (before B1)
+- Fixed design canvas **1280×720** (16:9), uniformly scaled (`transform: scale`) into the viewport on the blurred brand backdrop. Letterbox as needed. **No responsive reflow inside the stage.**
+- Same slide copy/facts as phone; desktop arrangement = left column ~40% (eyebrow/headline/sub), right ~60% hero (larger than phone), generous whitespace, gradient phrase in every headline, same builds/animations.
+- Control bar + chapter progress designed for the 16:9 stage (bottom, full width): **distribute/center chapter links; no dead gap between chapters and Play.**
+- **Close slide hero:** “What happens next” 4-step strip under the CTA — Inquiry → short call → package tailored to your team → private link employees join voluntarily — existing icon set + build animation. No empty bottom third.
+- Design-check first (5 slides final-state): welcome, problem/time, Meet Siya, cost, close — at **1440×900, 1366×768, 1280×720** and **390×844, 360×800**. Nothing clipped; whole slide visible without scrolling at 1366×768. Then convert the rest.
+
+### B1 (after DESKTOP STAGE)
+Meet Siya differentiators + Part 4 (from `employer-demo-part4-wip` rebased on A.1). Built for **both phone and desktop stage**. Meet Siya redesign must fit cleanly at **360×800** — no cards touching edges or crossing ring lines.
+
+### B2 (hold until B1 ships)
+Missing Part 3 items: “Sound familiar”, whole-person checklist, time-away framing, doctor-joins-chat in urgent pink-eye consult, chat-vs-book path chooser with provider pages/reviews.
 
 ## Automated checks
 

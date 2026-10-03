@@ -132,7 +132,8 @@ article.slide small{font-size:12px}
 .cap{margin:0;font:600 clamp(26px,3.7vw,46px)/1.12 var(--font-display);text-wrap:balance;max-width:920px;color:var(--ink)}
 .cap em,.big em,.q2 em{font-style:normal;background:var(--grad-brand);-webkit-background-clip:text;background-clip:text;color:transparent}
 .sub{margin:0;font:400 clamp(15px,1.4vw,18px)/1.5 var(--font-body);color:var(--ink-soft);max-width:680px;text-wrap:balance}
-.note-s{font:500 12px/1.3 var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.note-s{font:500 12px/1.3 var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);text-wrap:balance}
+.pack-note,.walk-now,.sample-cap,.refcard,.appt-callout p,.vm-row small,.vm-script{text-wrap:balance}
 
 /* build states */
 .b{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
@@ -191,10 +192,21 @@ article[data-walk] .msg{flex-wrap:nowrap;align-items:center}
 #walkSteps{gap:6px;width:min(420px,100%)}
 #walkSteps .door{padding:8px 12px}
 .walk-now{display:none;margin:0;font:500 15px/1.4 var(--font-body);color:var(--ink)}
-.ch-now{min-height:44px;border:0;background:transparent;font:600 11px/1 var(--font-body);color:var(--ink);cursor:pointer;padding:0 6px;white-space:nowrap;overflow:visible;text-overflow:clip;max-width:none}
+/* Current-chapter control: label shares the same 44px row + 12px/1 type as Back/Play/Next; track overlays inside that row */
+.ch-now{
+  box-sizing:border-box;min-height:44px;height:44px;border:0;background:transparent;
+  font:600 12px/1 var(--font-body);color:var(--ink);cursor:pointer;
+  padding:9px 12px;white-space:nowrap;overflow:visible;text-overflow:clip;max-width:none;
+  display:inline-flex;align-items:center;justify-content:center;
+}
 .segs.ch-current{display:flex;align-items:center;justify-content:center;min-width:0;flex:1}
-.segs.ch-current .ch-menu{width:100%;display:grid;justify-items:center;gap:4px}
-.ch-track{display:block;height:4px;border-radius:4px;background:rgba(10,36,107,.12);overflow:hidden;min-width:48px}
+.segs.ch-current .ch-menu{
+  width:100%;min-height:44px;display:grid;place-items:center;position:relative;gap:0;
+}
+.ch-track{
+  position:absolute;left:50%;bottom:6px;translate:-50% 0;width:min(64px,70%);
+  display:block;height:4px;border-radius:4px;background:rgba(10,36,107,.12);overflow:hidden;pointer-events:none;
+}
 .ch-track b{display:block;height:100%;width:0;background:linear-gradient(90deg,#D81088,#7B2D8E)}
 .ch-sheet{position:absolute;left:50%;bottom:calc(100% + 10px);translate:-50% 0;width:min(320px,calc(100vw - 32px));background:#fff;border-radius:16px;box-shadow:0 18px 44px rgba(10,36,107,.18);padding:8px;display:grid;gap:4px;z-index:6}
 .ch-sheet button{min-height:44px;border:0;background:transparent;text-align:left;border-radius:10px;padding:0 12px;font:600 14px/1.2 var(--font-display);color:var(--ink);cursor:pointer}
@@ -325,7 +337,7 @@ article[data-walk] .msg{flex-wrap:nowrap;align-items:center}
 .end-row{grid-column:1 / -1;background:rgba(216,16,136,.08);border-radius:16px;padding:12px 14px;font:600 14px/1.4 var(--font-display);color:var(--ink);text-align:center}
 .two-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:min(860px,100%);text-align:left}
 .chart{width:100%;height:72px}
-.pack-note{margin:0;font:500 12px/1.4 var(--font-body);color:var(--ink-soft)}
+.pack-note{margin:0;font:500 12px/1.4 var(--font-body);color:var(--ink-soft);text-wrap:balance;max-width:36em}
 .steps .rail{position:absolute;left:16%;right:16%;top:38px;height:3px;border-radius:3px;background:linear-gradient(90deg,#D81088,#7B2D8E,#001878)}
 .step{position:relative;display:grid;justify-items:center;gap:12px;text-align:center}
 .step .ic{width:76px;height:76px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 12px 28px rgba(10,36,107,.14);border:2px solid rgba(216,16,136,.3)}
