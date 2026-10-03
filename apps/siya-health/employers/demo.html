@@ -189,7 +189,10 @@ article[data-walk] .msg{flex-wrap:nowrap;align-items:center}
 #walkSteps{gap:6px;width:min(420px,100%)}
 #walkSteps .door{padding:8px 12px}
 .walk-now{display:none;margin:0;font:500 15px/1.4 var(--font-body);color:var(--ink)}
-.ch-now{min-height:44px;border:0;background:transparent;font:600 11px/1 var(--font-body);color:var(--ink);cursor:pointer;padding:0 6px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.ch-now{min-height:44px;border:0;background:transparent;font:600 11px/1 var(--font-body);color:var(--ink);cursor:pointer;padding:0 6px;white-space:nowrap;overflow:visible;text-overflow:clip;max-width:none}
+.ch span{white-space:nowrap;overflow:visible;text-overflow:clip}
+.segs.ch-current{display:flex;align-items:center;justify-content:center;min-width:0;flex:1}
+.segs.ch-current .ch-menu{width:100%;display:grid;justify-items:center;gap:4px}
 .ch-track{display:block;height:4px;border-radius:4px;background:rgba(10,36,107,.12);overflow:hidden;min-width:48px}
 .ch-track b{display:block;height:100%;width:0;background:linear-gradient(90deg,#D81088,#7B2D8E)}
 .ch-sheet{position:absolute;left:50%;bottom:calc(100% + 10px);translate:-50% 0;width:min(320px,calc(100vw - 32px));background:#fff;border-radius:16px;box-shadow:0 18px 44px rgba(10,36,107,.18);padding:8px;display:grid;gap:4px;z-index:6}
@@ -341,7 +344,7 @@ article[data-walk] .msg{flex-wrap:nowrap;align-items:center}
 .bar button:hover{background:rgba(10,36,107,.06)}
 .segs{flex:1;display:flex;gap:4px;min-width:0}
 .ch{flex:1;min-width:0;display:grid;gap:4px;justify-items:center;align-content:center;background:transparent;border:0;padding:2px;cursor:pointer;font:600 12px/1.15 var(--font-body);color:var(--ink);min-height:44px}
-.ch span{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ch span{max-width:100%;white-space:nowrap;overflow:visible;text-overflow:clip}
 .ch i{display:block;width:100%;height:4px;border-radius:4px;background:rgba(10,36,107,.12);overflow:hidden}
 .ch i b{display:block;height:100%;width:0;background:linear-gradient(90deg,#D81088,#7B2D8E)}
 .hint2{position:absolute;left:0;right:0;bottom:calc(76px + env(safe-area-inset-bottom,0px));text-align:center;font:500 11px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:rgba(10,36,107,.4);pointer-events:none}
@@ -625,10 +628,18 @@ article.slide[data-sample="1"].active .sample-cap{display:block}
 .siya-core small{display:block;font:500 12px/1.2 var(--font-body);opacity:.85;margin-top:3px}
 .siya-core.in{animation:halo 2.4s ease-out .6s infinite}
 
+/* Text-light slides: true visual center between top inset and control bar */
+article.slide[data-vcenter="1"]{
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:16px 16px calc(100px + env(safe-area-inset-bottom,0px));
+  box-sizing:border-box;align-content:center;place-items:center;
+}
+article.slide[data-vcenter="1"] .frame{width:100%;margin:0;transform-origin:center center}
 @media (max-width:640px){
   .bar button{min-width:44px;min-height:44px}
   .hint2{display:none}
   .slide{padding:14px 16px 120px;align-content:center;place-items:center}
+  article.slide[data-vcenter="1"]{padding:14px 16px calc(100px + env(safe-area-inset-bottom,0px));justify-content:center}
   .frame{transform-origin:center center;width:100%;max-width:100%;box-sizing:border-box}
   article[data-cost-phone] .frame{padding:0;gap:12px;width:100%}
   article[data-cost-phone] .cost-stack{width:100%;display:grid;gap:12px;padding:0;box-sizing:border-box}
@@ -763,7 +774,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
 <section id="tour" class="wash" hidden aria-live="polite">
   <p class="illus-note" aria-hidden="true">Illustrative · sample data</p>
   <!-- 0 statement -->
-  <article class="slide" id="statement" data-slide-id="statement" data-chapter="0" data-dur="3200">
+  <article class="slide" id="statement" data-slide-id="statement" data-chapter="0" data-dur="3200" data-vcenter="1">
     <div class="frame">
       <div class="eyebrow b" data-at="150">The problem</div>
       <h2 class="big" id="bigline"></h2>
@@ -855,7 +866,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <!-- question -->
-  <article class="slide" id="question" data-slide-id="question" data-chapter="0" data-dur="3700">
+  <article class="slide" id="question" data-slide-id="question" data-chapter="0" data-dur="3700" data-vcenter="1">
     <div class="frame">
       <p class="q1 b" data-at="300">You've invested in great health coverage for your people.</p>
       <h2 class="q2 b" data-at="2200">But is it there <em>when they need it</em>?</h2>
@@ -863,7 +874,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <!-- turn -->
-  <article class="slide" id="turn" data-slide-id="turn" data-chapter="1" data-dur="6200">
+  <article class="slide" id="turn" data-slide-id="turn" data-chapter="1" data-dur="6200" data-vcenter="1">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Introducing</div>
       <div class="web" id="webT"></div>
@@ -1350,7 +1361,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <!-- close -->
-  <article class="slide" id="close" data-slide-id="close" data-chapter="5" data-dur="0">
+  <article class="slide" id="close" data-slide-id="close" data-chapter="5" data-dur="0" data-vcenter="1">
     <div class="frame">
       <div class="eyebrow b" data-at="150">Siya Health</div>
       <h2 class="q2 b" data-at="300">See it <em>live</em>.</h2>
@@ -2000,8 +2011,9 @@ const push=phone?[18,12]:[55,40];
 /* engine */
 let slides=[];
 const segs=$('segs');
-const CHAPTERS=['The problem','Meet Siya','How it works','The care','Cost & privacy','Proof'];
-const CHAPTER_SHORT=['Problem','Meet','How','Care','Cost','Proof'];
+/* Short bar labels — must read fully at 360px with no ellipsis */
+const CHAPTERS=['Problem','Meet Siya','How it works','Care','Cost','Proof'];
+const CHAPTER_SHORT=CHAPTERS;
 /* v1 flags — keep founder + real outcomes in the file; ship with both off */
 const showFounder=false;
 const realOutcomes=false;
@@ -2106,31 +2118,42 @@ function jumpChapter(n){
   const sheet=$('chSheet'); if(sheet)sheet.hidden=true;
   if(idx>=0)show(idx);
 }
+function bindChapterSheet(btn){
+  btn.addEventListener('click',e=>{
+    e.stopPropagation();
+    let sheet=$('chSheet');
+    if(!sheet){
+      sheet=document.createElement('div');
+      sheet.id='chSheet'; sheet.className='ch-sheet';
+      document.querySelector('.bar').appendChild(sheet);
+    }
+    sheet.innerHTML=CHAPTERS.map((name,i)=>`<button type="button" data-ch="${i}">${name}</button>`).join('');
+    sheet.hidden=!sheet.hidden;
+    sheet.querySelectorAll('button').forEach(b=>b.addEventListener('click',ev=>{ev.stopPropagation();jumpChapter(+b.dataset.ch);}));
+  });
+}
+function paintChaptersCurrentOnly(){
+  const idx=(typeof cur==='number'&&cur>=0)?cur:0;
+  const curCh=slides[idx]?+(slides[idx].dataset.chapter||0):0;
+  segs.classList.add('ch-current');
+  segs.innerHTML=`<div class="ch-menu"><button type="button" class="ch-now" id="chNow">${CHAPTERS[curCh]}</button><i class="ch-track"><b></b></i></div>`;
+  bindChapterSheet($('chNow'));
+}
 function paintChapters(forceMenu){
-  const narrow=true||forceMenu; /* phone-first: always the compact chapter control */
-  if(narrow){
-    const idx=(typeof cur==='number'&&cur>=0)?cur:0;
-    const curCh=slides[idx]?+(slides[idx].dataset.chapter||0):0;
-    segs.innerHTML=`<div class="ch-menu"><button type="button" class="ch-now" id="chNow">${CHAPTERS[curCh]}</button><i class="ch-track"><b></b></i></div>`;
-    $('chNow').addEventListener('click',e=>{
-      e.stopPropagation();
-      let sheet=$('chSheet');
-      if(!sheet){
-        sheet=document.createElement('div');
-        sheet.id='chSheet'; sheet.className='ch-sheet';
-        document.querySelector('.bar').appendChild(sheet);
-      }
-      sheet.innerHTML=CHAPTERS.map((name,i)=>`<button type="button" data-ch="${i}">${name}</button>`).join('');
-      sheet.hidden=!sheet.hidden;
-      sheet.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',ev=>{ev.stopPropagation();jumpChapter(+btn.dataset.ch);}));
-    });
-    return;
-  }
-  segs.innerHTML=CHAPTERS.map((name,i)=>`<button type="button" class="ch" data-ch="${i}"><span>${name}</span><i><b></b></i></button>`).join('');
+  const idx=(typeof cur==='number'&&cur>=0)?cur:0;
+  const curCh=slides[idx]?+(slides[idx].dataset.chapter||0):0;
+  if(forceMenu){ paintChaptersCurrentOnly(); return; }
+  segs.classList.remove('ch-current');
+  segs.innerHTML=CHAPTERS.map((name,i)=>`<button type="button" class="ch" data-ch="${i}" aria-current="${i===curCh?'true':'false'}"><span>${name}</span><i><b></b></i></button>`).join('');
   segs.querySelectorAll('.ch').forEach(btn=>btn.addEventListener('click',e=>{
     e.stopPropagation(); jumpChapter(+btn.dataset.ch);
   }));
-  if(segs.scrollWidth>segs.clientWidth+4)paintChapters(true);
+  /* If any label won't fit without clipping, fall back to current chapter + segment track */
+  requestAnimationFrame(()=>{
+    const overflow=segs.scrollWidth>segs.clientWidth+1;
+    const clipped=[...segs.querySelectorAll('.ch span')].some(span=>span.scrollWidth>span.clientWidth+1);
+    if(overflow||clipped) paintChaptersCurrentOnly();
+  });
 }
 function syncWalk(){
   const s=slides[cur];
@@ -2158,6 +2181,12 @@ function fitFrame(){
   const frame=s.querySelector('.frame');if(!frame)return;
   frame.style.transform='none';
   s.style.alignContent='center';
+  if(s.dataset.vcenter==='1'){
+    s.style.display='flex';
+    s.style.flexDirection='column';
+    s.style.justifyContent='center';
+    s.style.alignItems='center';
+  }
   const bar=document.querySelector('.bar');
   const room=bar.getBoundingClientRect().top-frame.getBoundingClientRect().top-8;
   const h=frame.getBoundingClientRect().height;
@@ -2192,6 +2221,7 @@ function show(i){
     renderWalk(0); /* sync — phone must show step 1 content immediately */
     requestAnimationFrame(fitWalk);
   }else requestAnimationFrame(fitWalk);
+  paintChapters();
   /* Guarantee entry blur never sticks (journey + others) */
   requestAnimationFrame(()=>{s.classList.add('active');s.style.filter='none';s.style.opacity='1';});
 }
