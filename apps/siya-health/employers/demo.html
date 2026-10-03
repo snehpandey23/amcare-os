@@ -1258,11 +1258,9 @@ function build(){
   });
   tag.style.top=(textBox.cy+textBox.fs*0.74)+'px';
 }
-/* sound: swell → bell bloom → long fade → soft bed music loop */
-/* MUSIC_LEVEL is the bed bus into master (.9). Oscillator peaks below are pre-bus.
-   Effective pad peak ≈ PAD_PEAK * MUSIC_LEVEL * master ≈ 0.055*0.55*0.9 ≈ 0.027
-   vs bell fundamental peak ≈ 0.12*0.9 ≈ 0.108 → clearly audible background, ~1/4 of bell. */
-const MUSIC_LEVEL=.55;
+/* sound: swell → bell bloom → long fade → soft bed music loop (approved louder + 8-bar lifts) */
+/* MUSIC_LEVEL bus into master (.9). Was 0.55 → 1.0. Intro swell/bell unchanged. */
+const MUSIC_LEVEL=1;
 const MUSIC_PAD_PEAK=.055;
 const MUSIC_ARP_PEAK=.032;
 const MUSIC_PULSE_PEAK=.04;
@@ -1303,34 +1301,55 @@ function startMusic(A){
   const filter=ac.createBiquadFilter();filter.type='lowpass';filter.frequency.value=1400;filter.Q.value=.5;
   musicGain.connect(filter);filter.connect(master);
   const wet=ac.createGain();wet.gain.value=.35;filter.connect(wet);wet.connect(verb);
-  const BPM=96,beat=60/BPM,step=beat/2,chordBars=2,chordLen=beat*4*chordBars;
+  const BPM=96,beat=60/BPM,step=beat/2,chordLen=beat*8;
+  const barEighths=8,cycleBars=8,liftBars=2;
+  const cycleEighths=cycleBars*barEighths,liftStart=(cycleBars-liftBars)*barEighths;
   const progression=[[130.81,196.00,261.63,329.63],[98.00,146.83,196.00,246.94],[110.00,164.81,220.00,261.63],[87.31,130.81,174.61,220.00]];
   const arp=[0,2,1,3,2,0,1,2];
   let nextT=ac.currentTime+.05,chordIdx=0,eighth=0;
+  const voice=(t,freq,type,peak,attack,release)=>{
+    const o=ac.createOscillator(),g=ac.createGain();o.type=type;o.frequency.value=freq;
+    g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(peak,.0002),t+attack);
+    g.gain.exponentialRampToValueAtTime(.0001,t+release);
+    o.connect(g);g.connect(musicGain);o.start(t);o.stop(t+release+.02);
+  };
+  const softAccent=(t)=>{
+    [523.25,659.25,783.99].forEach((hz,i)=>{
+      const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=hz;
+      const peak=.045*(1-i*.18),start=t+i*.04;
+      g.gain.setValueAtTime(.0001,start);g.gain.exponentialRampToValueAtTime(peak,start+.014);
+      g.gain.exponentialRampToValueAtTime(.0001,start+1.6-i*.25);
+      o.connect(g);g.connect(musicGain);g.connect(verb);o.start(start);o.stop(start+2);
+    });
+  };
+  const shimmer=(t,amount)=>{
+    if(amount<.05)return;
+    const o=ac.createOscillator(),g=ac.createGain();o.type='sine';
+    o.frequency.setValueAtTime(660,t);o.frequency.exponentialRampToValueAtTime(1320,t+step*.9);
+    const peak=.018*amount;
+    g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(peak,t+.03);
+    g.gain.exponentialRampToValueAtTime(.0001,t+step*.95);
+    o.connect(g);g.connect(musicGain);o.start(t);o.stop(t+step);
+  };
   const schedule=()=>{
     if(!A.music||A.ac.state!=='running')return;
     const now=ac.currentTime;
     while(nextT<now+.9){
       const ch=progression[chordIdx],t=nextT;
+      const pos=eighth%cycleEighths;
+      const lifting=pos>=liftStart;
+      const amt=lifting?(pos-liftStart+1)/(liftBars*barEighths):0;
+      const dyn=lifting?1+.45*amt:1;
       if(eighth%16===0){
         ch.forEach((hz,i)=>{
-          const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=hz;
-          const peak=i===0?MUSIC_PAD_PEAK:MUSIC_PAD_PEAK*.65;
-          g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(peak,t+.35);
-          g.gain.exponentialRampToValueAtTime(.0001,t+chordLen*.98);
-          o.connect(g);g.connect(musicGain);o.start(t);o.stop(t+chordLen+.02);
+          voice(t,hz,'sine',(i===0?MUSIC_PAD_PEAK:MUSIC_PAD_PEAK*.65)*dyn,.35,chordLen*.98);
+          if(lifting)voice(t,hz*2,'sine',MUSIC_PAD_PEAK*.28*amt,.4,chordLen*.9);
         });
       }
-      {
-        const o=ac.createOscillator(),g=ac.createGain();o.type='triangle';o.frequency.value=ch[arp[eighth%8]]*2;
-        g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(MUSIC_ARP_PEAK,t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+step*.8);
-        o.connect(g);g.connect(musicGain);o.start(t);o.stop(t+step);
-      }
-      if(eighth%8===0||eighth%8===4){ /* beats 1 and 3 */
-        const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=55;
-        g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(MUSIC_PULSE_PEAK,t+.025);g.gain.exponentialRampToValueAtTime(.0001,t+beat*.65);
-        o.connect(g);g.connect(musicGain);o.start(t);o.stop(t+beat);
-      }
+      voice(t,ch[arp[eighth%8]]*2,'triangle',MUSIC_ARP_PEAK*(lifting?1+.35*amt:1),.015,step*.8);
+      if(eighth%8===0||eighth%8===4)voice(t,55,'sine',MUSIC_PULSE_PEAK*(lifting?1+.25*amt:1),.025,beat*.65);
+      if(lifting)shimmer(t,amt);
+      if(pos===cycleEighths-1)softAccent(t+step*.15);
       eighth++; if(eighth%16===0)chordIdx=(chordIdx+1)%4;
       nextT+=step;
     }
