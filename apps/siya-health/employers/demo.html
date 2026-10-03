@@ -40,7 +40,7 @@ else boot();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow, noarchive" />
-    <script>(function(){try{var q=new URLSearchParams(location.search);var embed=q.get('embed')==='1';var w=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);document.documentElement.classList.add('phone-first');if(embed)document.documentElement.classList.add('demo-embed');else if(w>900)document.documentElement.classList.add('demo-desktop-host');}catch(e){}})();</script>
+    <script>(function(){try{var q=new URLSearchParams(location.search);var embed=q.get('embed')==='1';var w=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);var portraitDesktop=q.get('portrait')==='1';document.documentElement.classList.add('phone-first');if(embed)document.documentElement.classList.add('demo-embed');else if(w>900&&portraitDesktop)document.documentElement.classList.add('demo-desktop-host');}catch(e){}})();</script>
     <title>Employer demo | Siya Health</title>
     <meta name="description" content="A short, self-paced walkthrough of Siya Health for HR and benefits leaders." />
     <link rel="canonical" href="https://siya.health/employers/demo" />
@@ -53,9 +53,11 @@ else boot();
   var q=new URLSearchParams(location.search);
   var embed=q.get('embed')==='1';
   var w=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);
+  /* Portrait-frame-on-desktop retired for A.1 — keep code; opt-in with ?portrait=1 */
+  var portraitDesktop=q.get('portrait')==='1';
   document.documentElement.classList.add('phone-first');
   if(embed)document.documentElement.classList.add('demo-embed');
-  else if(w>900)document.documentElement.classList.add('demo-desktop-host');
+  else if(w>900&&portraitDesktop)document.documentElement.classList.add('demo-desktop-host');
 }catch(e){}})();</script>
 <style>
 /* Layout: one full-screen stage. Dark starfield intro → cream welcome → auto-playing tour slides with PowerPoint-style builds and a story-style progress bar. Single committed brand look. */
@@ -349,9 +351,10 @@ article[data-walk] .msg{flex-wrap:nowrap;align-items:center}
 .hint2{position:absolute;left:0;right:0;bottom:calc(76px + env(safe-area-inset-bottom,0px));text-align:center;font:500 11px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:rgba(10,36,107,.4);pointer-events:none}
 
 .slide.parked{display:none!important}
-/* Phone-first: desk-only slides retired from the live build (kept in HTML for git history) */
-article.slide[data-surface="desk"]{display:none!important}
-article.slide[data-surface="phone"]{display:grid!important}
+/* Desk/phone surfaces: desktop (≥641) uses desk layout; phone uses phone slides.
+   Portrait iframe path (demo-desktop-host) kept below, feature-flagged off by default. */
+@media (min-width:641px){article.slide[data-surface="phone"]{display:none!important}}
+@media (max-width:640px){article.slide[data-surface="desk"]{display:none!important}}
 
 .hero{width:min(1080px,100%);min-height:42vh}
 .jrail{display:grid;gap:12px;text-align:left}
@@ -627,18 +630,40 @@ article.slide[data-sample="1"].active .sample-cap{display:block}
 .siya-core small{display:block;font:500 12px/1.2 var(--font-body);opacity:.85;margin-top:3px}
 .siya-core.in{animation:halo 2.4s ease-out .6s infinite}
 
-/* Text-light slides: true visual center between top inset and control bar */
+/* Text-light slides: CSS flex center between top inset and control bar (no JS translate) */
 article.slide[data-vcenter="1"]{
-  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  display:flex!important;flex-direction:column;justify-content:center;align-items:center;
   padding:16px 16px calc(100px + env(safe-area-inset-bottom,0px));
-  box-sizing:border-box;align-content:center;place-items:center;
+  box-sizing:border-box;
 }
-article.slide[data-vcenter="1"] .frame{width:100%;margin:0;transform-origin:center center}
+article.slide[data-vcenter="1"] .frame{
+  width:100%;margin:0;transform:none!important;transform-origin:center center;
+  display:grid;align-content:center;justify-items:center;gap:inherit;
+}
+/* Close: only the CTA is in-flow for flex centering; copy hangs above/below */
+article.slide[data-close="1"] .frame{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:0;padding:0;width:100%;
+}
+article.slide[data-close="1"] .close-stack{
+  position:relative;display:flex;flex-direction:column;align-items:center;width:min(520px,100%);
+}
+article.slide[data-close="1"] .close-above{
+  position:absolute;left:0;right:0;bottom:100%;margin-bottom:14px;
+  display:grid;gap:clamp(12px,2.5vh,28px);justify-items:center;text-align:center;
+}
+article.slide[data-close="1"] .close-foot{
+  position:absolute;left:0;right:0;top:100%;margin-top:14px;
+  display:grid;gap:10px;justify-items:center;text-align:center;
+}
 @media (max-width:640px){
   .bar button{min-width:44px;min-height:44px}
   .hint2{display:none}
   .slide{padding:14px 16px 120px;align-content:center;place-items:center}
-  article.slide[data-vcenter="1"]{padding:14px 16px calc(100px + env(safe-area-inset-bottom,0px));justify-content:center}
+  article.slide[data-vcenter="1"]{
+    padding:14px 16px calc(100px + env(safe-area-inset-bottom,0px));
+    justify-content:center;
+  }
   .frame{transform-origin:center center;width:100%;max-width:100%;box-sizing:border-box}
   article[data-cost-phone] .frame{padding:0;gap:12px;width:100%}
   article[data-cost-phone] .cost-stack{width:100%;display:grid;gap:12px;padding:0;box-sizing:border-box}
@@ -682,7 +707,8 @@ article.slide[data-vcenter="1"] .frame{width:100%;margin:0;transform-origin:cent
 }
 
 
-/* ===== Desktop host: intro full-screen, then 390×844 iframe (phone-identical) scaled ===== */
+/* ===== Desktop host portrait iframe (FEATURE-FLAGGED OFF — enable with ?portrait=1) =====
+   Kept for re-enable; A.1 desktop uses native desk surfaces (8e4065c5 layout). */
 #portraitBackdrop,#portraitColumn,#portraitShell,#portraitFrame{display:none}
 html.demo-desktop-host body{overflow:hidden}
 html.demo-desktop-host #portraitBackdrop{
@@ -1360,18 +1386,24 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
   </article>
 
   <!-- close -->
-  <article class="slide" id="close" data-slide-id="close" data-chapter="5" data-dur="0" data-vcenter="1">
+  <article class="slide" id="close" data-slide-id="close" data-chapter="5" data-dur="0" data-vcenter="1" data-close="1">
     <div class="frame">
-      <div class="eyebrow b" data-at="150">Siya Health</div>
-      <h2 class="q2 b" data-at="300">See it <em>live</em>.</h2>
-      <p class="sub b" data-at="800">A short call, and we'll walk you through the real experience.</p>
-      <div class="row-btns b" data-at="1200">
-        <a class="start" href="/employers#employer-inquiry-form" data-demo-cta="inquiry">Submit an inquiry</a>
-      </div>
-      <p class="pack-note b" data-at="1500">Services and coverage are tailored to your organization's package.</p>
-      <div class="mini b" data-at="1700">
-        <button class="link" id="replayTour" type="button">Replay tour</button>
-        
+      <div class="close-stack">
+        <div class="close-above">
+          <div class="eyebrow b" data-at="150">Siya Health</div>
+          <h2 class="q2 b" data-at="300">See it <em>live</em>.</h2>
+          <p class="sub b" data-at="800">A short call, and we'll walk you through the real experience.</p>
+        </div>
+        <div class="row-btns b" data-at="1200">
+          <a class="start" href="/employers#employer-inquiry-form" data-demo-cta="inquiry">Submit an inquiry</a>
+        </div>
+        <div class="close-foot">
+          <p class="pack-note b" data-at="1500">Services and coverage are tailored to your organization's package.</p>
+          <div class="mini b" data-at="1700">
+            <button class="link" id="replayTour" type="button">Replay tour</button>
+            
+          </div>
+        </div>
       </div>
     </div>
   </article>
@@ -1392,6 +1424,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
 const cv=document.getElementById('stage'),ctx=cv.getContext('2d');
 const $=id=>document.getElementById(id);
 const begin=$('begin'),tag=$('tagline'),bloom=$('bloom'),welcome=$('welcome'),tour=$('tour');
+/* Portrait iframe on desktop: OFF by default (boot adds demo-desktop-host only with ?portrait=1). */
 const demoHost=document.documentElement.classList.contains('demo-desktop-host');
 const demoEmbed=document.documentElement.classList.contains('demo-embed');
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1404,8 +1437,8 @@ function track(name, extra){
   window.dataLayer.push(payload);
 }
 
-/* Phone-first: always the 390 layout (desk slides retired from the live build). */
-function isPhoneLayout(){return true;}
+/* Phone ≤640px; desktop (≥641) uses native desk surfaces when portrait host is off. */
+function isPhoneLayout(){return matchMedia('(max-width:640px)').matches;}
 const PORTRAIT_CH_COLORS=[
   ['rgba(216,16,136,.5)','rgba(10,36,107,.45)'],
   ['rgba(216,16,136,.48)','rgba(123,45,142,.42)'],
@@ -1865,7 +1898,17 @@ function applyMute(next,fromPeer){
 }
 const muteBtn=$('mute');
 if(muteBtn)muteBtn.addEventListener('click',e=>{e.stopPropagation();applyMute(!muted);});
-let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(phase==='idle'&&!demoEmbed)build();if(!demoHost){paintChapters();fitWalk();}},200);});
+let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{
+  if(phase==='idle'&&!demoEmbed)build();
+  if(!demoHost){
+    const prevLen=slides.length, prevId=slides[cur]&&slides[cur].id;
+    collectSlides();
+    if(tourOn&&(slides.length!==prevLen||(prevId&&slides[cur]&&slides[cur].id!==prevId))){
+      const idx=Math.max(0,slides.findIndex(s=>s.id===prevId));
+      show(idx>=0?idx:Math.min(cur,slides.length-1));
+    }else{paintChapters();fitWalk();fitFrame();}
+  }
+},200);});
 if(demoEmbed){
   addEventListener('message',function(ev){
     if(ev.origin!==location.origin)return;
@@ -2057,8 +2100,13 @@ window.__employerDemo={
 };
 function collectSlides(){
   applyDemoFlags();
-  /* Desk-only surfaces retired from the live build */
-  slides=[...tour.querySelectorAll('.slide:not(.parked)')].filter(s=>(s.dataset.surface||'both')!=='desk');
+  const phone=isPhoneLayout();
+  slides=[...tour.querySelectorAll('.slide:not(.parked)')].filter(s=>{
+    const surf=s.dataset.surface||'both';
+    if(surf==='phone')return phone;
+    if(surf==='desk')return !phone;
+    return true;
+  });
   paintChapters();
 }
 const WALK=[
@@ -2176,34 +2224,18 @@ function countUp(el){
 }
 let fitTimer=0,fitFor=-1;
 function fitFrame(){
-  if(!isPhoneLayout()){slides.forEach(s=>{const f=s.querySelector('.frame');if(f)f.style.transform='';});return;}
+  if(!isPhoneLayout()){slides.forEach(s=>{const f=s.querySelector('.frame');if(f){f.style.transform='';}});return;}
   const s=slides[cur];if(!s)return;
   const frame=s.querySelector('.frame');if(!frame)return;
+  /* Text-light slides: CSS flex only — do not translateY (races with builds). */
+  if(s.dataset.vcenter==='1'){
+    frame.style.transform='';
+    return;
+  }
   frame.style.transform='none';
   const bar=document.querySelector('.bar');
   if(!bar)return;
-  const availTop=16;
   const availBottom=bar.getBoundingClientRect().top-8;
-  const availMid=(availTop+availBottom)/2;
-  if(s.dataset.vcenter==='1'){
-    s.style.display='flex';
-    s.style.flexDirection='column';
-    s.style.justifyContent='center';
-    s.style.alignItems='center';
-    s.style.alignContent='center';
-    void s.offsetHeight; /* flush flex layout before measuring */
-    const anchor=s.querySelector('.row-btns, a.start, .web, .q2, .big')||frame;
-    const ar=anchor.getBoundingClientRect();
-    let dy=Math.round(availMid-(ar.top+ar.height/2));
-    frame.style.transform=`translateY(${dy}px)`;
-    void s.offsetHeight;
-    /* One refine pass after transform */
-    const ar2=anchor.getBoundingClientRect();
-    const refine=Math.round(availMid-(ar2.top+ar2.height/2));
-    if(refine) frame.style.transform=`translateY(${dy+refine}px)`;
-    frame.style.transformOrigin='center center';
-    return;
-  }
   s.style.alignContent='center';
   const room=availBottom-frame.getBoundingClientRect().top;
   const h=frame.getBoundingClientRect().height;
