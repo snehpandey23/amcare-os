@@ -312,8 +312,11 @@ article[data-walk] .msg{flex-wrap:nowrap;align-items:center}
 .segs{flex:1;display:flex;gap:4px;min-width:0}
 .ch{flex:1;min-width:0;display:grid;gap:4px;justify-items:center;align-content:center;background:transparent;border:0;padding:2px;cursor:pointer;font:600 12px/1.15 var(--font-body);color:var(--ink);min-height:44px}
 .ch span{max-width:100%;white-space:nowrap;overflow:visible;text-overflow:clip}
+.ch[aria-current="true"] span{color:var(--magenta-text)}
 .ch i{display:block;width:100%;height:4px;border-radius:4px;background:rgba(10,36,107,.12);overflow:hidden}
 .ch i b{display:block;height:100%;width:0;background:linear-gradient(90deg,#D81088,#7B2D8E)}
+.ch.is-done i b{background:rgba(10,36,107,.28)}
+.ch[aria-current="true"] i b{background:linear-gradient(90deg,#D81088,#7B2D8E)}
 .hint2{position:absolute;left:0;right:0;bottom:calc(76px + env(safe-area-inset-bottom,0px));text-align:center;font:500 11px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:rgba(10,36,107,.4);pointer-events:none}
 
 .slide.parked{display:none!important}
@@ -577,6 +580,7 @@ iframe[title="Siya AI Concierge"]{display:none!important}
 .fact-chip{font:600 12px/1.2 var(--font-body);color:var(--ink);background:#fff;border:1px solid rgba(10,36,107,.12);border-radius:999px;padding:8px 12px;box-shadow:0 6px 16px rgba(10,36,107,.08)}
 /* Sample-data caption lives under the slide visual — never on the control bar */
 #tour > .illus-note{display:none!important}
+.desk-canvas > .illus-note{display:none!important}
 .sample-cap{display:none;margin:10px 0 0;font:500 12px/1.3 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:rgba(10,36,107,.45);text-align:center}
 article.slide[data-sample="1"].active .sample-cap{display:block}
 @media (max-width:640px){
@@ -586,11 +590,48 @@ article.slide[data-sample="1"].active .sample-cap{display:block}
   .fact-chip{font-size:12px;padding:7px 10px}
 }
 
-.card-lite{width:clamp(110px,13.5vw,160px);background:#fff;border-radius:16px;padding:12px 10px;display:grid;gap:7px;justify-items:center;text-align:center;
+.card-lite{width:clamp(118px,14vw,168px);background:#fff;border-radius:16px;padding:12px 10px;display:grid;gap:7px;justify-items:center;text-align:center;
   box-shadow:0 12px 28px rgba(10,36,107,.12);border:1.5px solid rgba(10,36,107,.08);transition:box-shadow .6s ease,border-color .6s ease}
 .card-lite svg{width:26px;height:26px;position:static}
-.card-lite b{font:600 clamp(12px,1.05vw,12.5px)/1.25 var(--font-display);color:var(--ink)}
+.card-lite b{font:600 clamp(11px,1.05vw,12.5px)/1.25 var(--font-display);color:var(--ink);text-wrap:balance}
 .card-lite.in{border-color:#D81088;box-shadow:0 0 0 3px rgba(216,16,136,.18),0 14px 32px rgba(216,16,136,.22)}
+.card-lite small{font:500 11px/1.3 var(--font-body);color:var(--ink-soft);text-wrap:balance}
+.meet-phone{width:100%;max-width:420px;display:grid;gap:14px;justify-items:center}
+.meet-grid{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.meet-grid .card-lite{width:100%;max-width:none;box-sizing:border-box}
+.chart-card{width:min(420px,100%);background:#fff;border-radius:18px;padding:16px 16px 14px;box-shadow:0 16px 36px rgba(10,36,107,.12);text-align:left;display:grid;gap:12px}
+.chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.chart-head b{font:700 15px/1.2 var(--font-display);color:var(--ink)}
+.chart-head span{font:600 11px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:var(--magenta-text)}
+.chk-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.chk-row{display:flex;align-items:center;gap:10px;min-height:40px;padding:8px 10px;border-radius:12px;background:var(--cream);font:600 14px/1.3 var(--font-display);color:var(--ink)}
+.chk-row .chk{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid rgba(216,16,136,.35);background:#fff;position:relative}
+.chk-row.in .chk{border-color:#D81088;background:var(--grad-btn)}
+.chk-row.in .chk::after{content:"";position:absolute;left:6px;top:3px;width:6px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.chk-final{margin-top:4px;border-radius:999px;padding:12px 16px;background:var(--grad-btn);color:#fff;font:700 14px/1.3 var(--font-display);text-align:center;transform-origin:left center}
+.body-map{position:relative;width:min(340px,100%);aspect-ratio:3/4;margin:0 auto}
+.body-map svg{width:100%;height:100%;display:block}
+.body-map .hlab{position:absolute;background:#fff;border-radius:12px;padding:7px 9px;box-shadow:0 8px 18px rgba(10,36,107,.12);font:600 11px/1.25 var(--font-body);color:var(--ink);text-align:left;max-width:132px;opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
+.body-map .hlab.in{opacity:1;transform:none}
+.body-map .hlab b{display:block;font:700 10px/1.2 var(--font-display);letter-spacing:.06em;text-transform:uppercase;color:var(--magenta-text);margin-bottom:2px}
+.body-map .pulse{position:absolute;left:50%;top:42%;width:18px;height:18px;border-radius:50%;translate:-50% -50%;background:rgba(216,16,136,.55);opacity:0}
+.body-map .pulse.in{opacity:1;animation:hotPulse 1.8s ease-out infinite}
+@keyframes hotPulse{0%{box-shadow:0 0 0 0 rgba(216,16,136,.45)}100%{box-shadow:0 0 0 22px rgba(216,16,136,0)}}
+.cond-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start;max-width:560px}
+.cpill{display:inline-flex;align-items:center;min-height:36px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid rgba(216,16,136,.22);box-shadow:0 8px 18px rgba(10,36,107,.08);font:600 12px/1.2 var(--font-display);color:var(--ink)}
+.prac-strip{display:flex;flex-wrap:wrap;gap:8px;max-width:560px}
+.prac{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:8px 12px;border-radius:12px;background:rgba(10,36,107,.05);font:600 12px/1.25 var(--font-body);color:var(--ink)}
+.prac i{width:8px;height:8px;border-radius:50%;background:var(--magenta);flex:none}
+html.desk-stage #tour #clinicians .desk-copy,
+html.desk-stage #tour #care-checklist .desk-copy,
+html.desk-stage #tour #care-body .desk-copy,
+html.desk-stage #tour #turn .desk-copy{padding-bottom:8px}
+@media (max-width:640px){
+  .chart-card{width:100%}
+  .chk-row{font-size:13px;min-height:36px}
+  .cond-pills,.prac-strip{justify-content:center}
+  .body-map{width:min(280px,92vw)}
+}
 .siya-core{width:clamp(110px,12vw,140px);aspect-ratio:1;border-radius:50%;background:var(--grad-btn);color:#fff;display:grid;place-items:center;text-align:center;
   font:700 clamp(14px,1.5vw,18px)/1.15 var(--font-display);box-shadow:0 16px 40px rgba(123,45,142,.4)}
 .siya-core small{display:block;font:500 12px/1.2 var(--font-body);opacity:.85;margin-top:3px}
@@ -664,7 +705,7 @@ article.slide[data-close="1"] .close-foot{
   .ppl{grid-template-columns:repeat(8,1fr)}.ppl .p:nth-child(n+33){display:none}
   .bar button{min-height:44px;padding:12px 12px}
   .web.tall{width:100%;height:460px;aspect-ratio:auto}
-  #webT.tall{height:min(48vh,400px);max-height:400px}
+  #webT.tall{height:min(52vh,460px);max-height:460px}
   .app{width:84px;padding:8px 6px;gap:4px;border-radius:14px}
   .app svg{width:20px;height:20px}
   .app b{font-size:12px;line-height:1.2}
@@ -674,9 +715,9 @@ article.slide[data-close="1"] .close-foot{
   .spec{font-size:12px;padding:4px 6px;white-space:normal;text-align:center;max-width:92px}
   .me-node{width:76px;font-size:12px}
   .stress{font-size:14px;padding:10px 14px}
-  .card-lite{width:86px;padding:6px 4px;gap:3px;border-radius:12px}
+  .card-lite{width:min(112px,28vw);padding:8px 6px;gap:4px;border-radius:12px}
   .card-lite svg{width:18px;height:18px}
-  .card-lite b{font-size:12px;line-height:1.15}
+  .card-lite b{font-size:11px;line-height:1.2}
   .siya-core{width:76px;font-size:12px}
   .siya-core small{font-size:10px}
   #f-time-b .lock{display:none}
@@ -717,7 +758,15 @@ html.desk-stage .desk-canvas{
   box-shadow:0 30px 80px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.1);
   transform:scale(var(--desk-scale));transform-origin:center center;
 }
-html.desk-stage #welcome .desk-canvas{display:grid;place-items:center;padding:48px}
+html.welcome-live #stage,
+html.welcome-live #begin,
+html.welcome-live #tagline,
+html.welcome-live #ctrlL,
+html.welcome-live #ctrlR{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+@media (max-width:640px){
+  #welcome .card{gap:14px;padding-top:8px}
+  #welcome .card h1{font-size:clamp(26px,7vw,34px)}
+}
 html.desk-stage #tour .desk-canvas{cursor:pointer}
 html.desk-stage #tour .slide{
   position:absolute;inset:0;padding:36px 48px 96px;box-sizing:border-box;
@@ -758,6 +807,12 @@ html.desk-stage #tour article.slide .frame.desk-split .q2{text-align:left;max-wi
 html.desk-stage #tour article.slide .frame.desk-split .web{width:100%;max-width:none}
 html.desk-stage #tour article.slide .frame.desk-split .compare{width:100%}
 html.desk-stage #tour article.slide .frame.desk-split .p-time-wrap{width:100%}
+html.desk-stage #p-time .desk-callout{display:grid;width:100%;max-width:360px;margin-top:8px}
+html.desk-stage #p-time .phone-callout{display:none!important}
+html.desk-stage #p-time .gcal{--hr:32px;max-height:380px}
+html.desk-stage #p-time .p-time-wrap{align-content:center}
+html:not(.desk-stage) #p-time .desk-callout{display:none!important}
+html:not(.desk-stage) #p-time .phone-callout{display:grid}
 html.desk-stage #tour article[data-close="1"] .frame{
   width:100%;max-width:none;height:100%;display:grid;
   grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:32px 40px;align-items:center;
@@ -862,14 +917,12 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
       <p>A short guided tour. Click anywhere to begin.</p>
       <p class="welcome-note">Screens shown are illustrations with sample data.</p>
       <button class="start" id="start" type="button">Start the tour</button>
-      <button class="link" id="replayIntro1" type="button">Replay intro</button>
     </div>
   </div>
 </section>
 
 <section id="tour" class="wash" hidden aria-live="polite">
   <div class="desk-canvas" id="deskCanvas">
-  <p class="illus-note" aria-hidden="true">Illustrative · sample data</p>
   <!-- 0 statement -->
   <article class="slide" data-chapter="0" data-dur="3200" data-vcenter="1">
     <div class="frame">
@@ -884,6 +937,12 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
       <div class="desk-copy">
         <div class="eyebrow b" data-at="150">Time</div>
         <h2 class="cap b" data-at="250">Appointments that <em>don't fit a workday</em>.</h2>
+        <aside class="appt-callout b desk-callout" data-at="2800" aria-label="Doctor appointment callout">
+          <b>Doctor's appointment</b>
+          <small>About 2 hrs with travel</small>
+          <em class="fit">Doesn't fit</em>
+          <em class="slot">No free slot</em>
+        </aside>
         <p class="sample-cap">Illustrative · sample data</p>
       </div>
       <div class="desk-hero">
@@ -895,7 +954,7 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
               <div class="gcal-grid" id="calGridProblem"></div>
             </div>
           </div>
-          <aside class="appt-callout b" data-at="2800" aria-label="Doctor appointment callout">
+          <aside class="appt-callout b phone-callout" data-at="2800" aria-label="Doctor appointment callout">
             <b>Doctor's appointment</b>
             <small>About 2 hrs with travel</small>
             <em class="fit">Doesn't fit</em>
@@ -974,16 +1033,55 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
     </div>
   </article>
 
-  <!-- turn — hero first in DOM for phone; desk-stage CSS places copy left / hero right -->
-  <article class="slide" data-chapter="1" data-dur="6200" data-vcenter="1">
+  <!-- turn / Meet Siya (A1) -->
+  <article class="slide" data-chapter="1" data-dur="7800" data-vcenter="1">
     <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="150">Introducing</div>
+        <h2 class="cap b" data-at="400">Care that sees the <em>whole person</em>.</h2>
+        <p class="sub b" data-at="900">One care team that personalizes care for your people and works around their schedule.</p>
+      </div>
       <div class="desk-hero">
         <div class="web" id="webT"></div>
       </div>
+    </div>
+  </article>
+
+  <!-- A2 whole-person checklist -->
+  <article class="slide" data-chapter="1" data-dur="9500">
+    <div class="frame desk-split">
       <div class="desk-copy">
-        <div class="eyebrow b" data-at="150">Introducing</div>
-        <h2 class="cap b" data-at="4200">Meet <em>Siya Health</em>.</h2>
-        <p class="sub b" data-at="4700">One care team that personalizes care for your people and works around their schedule.</p>
+        <div class="eyebrow b" data-at="150">The full picture</div>
+        <h2 class="cap b" data-at="300">One visit. The <em>whole picture</em>.</h2>
+        <p class="sub b" data-at="700">Everything that belongs in a first visit — gathered once, used together.</p>
+      </div>
+      <div class="desk-hero">
+        <div class="chart-card b" data-at="500">
+          <div class="chart-head"><b>Your team member</b><span>First visit</span></div>
+          <ul class="chk-list">
+            <li class="chk-row b" data-at="900"><i class="chk"></i><span>History &amp; goals</span></li>
+            <li class="chk-row b" data-at="1400"><i class="chk"></i><span>Screenings</span></li>
+            <li class="chk-row b" data-at="1900"><i class="chk"></i><span>Cognitive testing</span></li>
+            <li class="chk-row b" data-at="2400"><i class="chk"></i><span>Vitals: BMI, blood pressure</span></li>
+            <li class="chk-row b" data-at="2900"><i class="chk"></i><span>Labs ordered</span></li>
+            <li class="chk-row b" data-at="3400"><i class="chk"></i><span>Virtual exam</span></li>
+            <li class="chk-final grow b" data-at="4200"><span>→ One personalised plan</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- A3 head-to-toe / root cause -->
+  <article class="slide" data-chapter="1" data-dur="8200">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="150">Root cause</div>
+        <h2 class="cap b" data-at="300">We look for the <em>cause</em>, not just the symptom.</h2>
+        <p class="sub b" data-at="5600">Stress, sleep, weight and focus are connected. So is our care.</p>
+      </div>
+      <div class="desk-hero">
+        <div class="body-map b" data-at="500" id="bodyMap" aria-hidden="true"></div>
       </div>
     </div>
   </article>
@@ -1268,26 +1366,34 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
     </div>
   </article>
 
-  <article class="slide" data-chapter="3" data-dur="5700">
-    <div class="frame">
-      <div class="eyebrow b" data-at="200">Experience</div>
-      <h2 class="cap b" data-at="400">Clinicians who've seen it all.</h2>
-      <div class="hero mosaic">
-        <div class="tilecard pop" data-at="800"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9 14h6"/></svg><b>Weight and metabolic</b></div>
-        <div class="tilecard pop" data-at="1000"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><path d="M12 3v18M7 8c2 3 8 3 10 0"/></svg><b>Hormones and fertility</b></div>
-        <div class="tilecard pop" data-at="1200"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M8 13c1.2 1.5 6.8 1.5 8 0"/></svg><b>Mental health</b></div>
-        <div class="tilecard pop" data-at="1400"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.6-7 10-7 10z"/></svg><b>Sexual health</b></div>
-        <div class="tilecard pop" data-at="1600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><path d="M8 4c2 6-2 10 0 16M16 4c-2 6 2 10 0 16"/></svg><b>Hair loss</b></div>
-        <div class="tilecard pop" data-at="1800"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><circle cx="12" cy="10" r="6"/><path d="M12 16v4"/></svg><b>ADHD and cognitive care</b></div>
-        <div class="tilecard pop" data-at="2000"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D81088" stroke-width="2"><path d="M12 3l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg><b>Primary care</b></div>
+  <article class="slide" data-chapter="3" data-dur="7200">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="200">Experience</div>
+        <h2 class="cap b" data-at="400">Clinicians who've <em>seen it all</em>.</h2>
+        <p class="sub b" data-at="700">So we know what to manage ourselves, and when to refer.</p>
       </div>
-      <div class="xchips">
-        <span class="xchip pop" data-at="2600">Direct primary care</span>
-        <span class="xchip pop" data-at="3000">Community health centers</span>
-        <span class="xchip pop" data-at="3400">Veterans' care</span>
-        <span class="xchip pop" data-at="3800">Academic, teaching and community hospitals</span>
+      <div class="desk-hero">
+        <div class="cond-pills b" data-at="900">
+          <span class="cpill pop" data-at="1000">Weight &amp; metabolic</span>
+          <span class="cpill pop" data-at="1150">Hormones &amp; fertility</span>
+          <span class="cpill pop" data-at="1300">Mental health</span>
+          <span class="cpill pop" data-at="1450">Sexual health</span>
+          <span class="cpill pop" data-at="1600">Hair loss</span>
+          <span class="cpill pop" data-at="1750">ADHD &amp; cognitive</span>
+          <span class="cpill pop" data-at="1900">Primary care</span>
+        </div>
+        <p class="panel-label b" data-at="2400">Where our clinicians also practise</p>
+        <div class="prac-strip b" data-at="2600">
+          <div class="prac pop" data-at="2700"><i></i><span>Academic &amp; teaching hospitals</span></div>
+          <div class="prac pop" data-at="2900"><i></i><span>Community hospitals</span></div>
+          <div class="prac pop" data-at="3100"><i></i><span>Inpatient</span></div>
+          <div class="prac pop" data-at="3300"><i></i><span>Nursing homes</span></div>
+          <div class="prac pop" data-at="3500"><i></i><span>Concierge practice</span></div>
+          <div class="prac pop" data-at="3700"><i></i><span>Community health centers</span></div>
+          <div class="prac pop" data-at="3900"><i></i><span>Veterans' care</span></div>
+        </div>
       </div>
-      <p class="sub b" data-at="4200">Our clinicians also practice in these settings, so we know what to manage ourselves and when to refer.</p>
     </div>
   </article>
 
@@ -1494,7 +1600,6 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
           <p class="pack-note b" data-at="2300">Services and coverage are tailored to your organization's&nbsp;package.</p>
           <div class="mini b" data-at="2500">
             <button class="link" id="replayTour" type="button">Replay tour</button>
-            <button class="link" id="replayIntro2" type="button">Replay intro</button>
           </div>
         </div>
       </div>
@@ -1961,7 +2066,10 @@ function play(){
 }
 function finishIntro(){
   timers.forEach(clearTimeout);timers=[];
-  tag.classList.remove('on');$('ctrlL').hidden=true;begin.style.opacity=0;begin.style.pointerEvents='none';
+  tag.classList.remove('on');$('ctrlL').hidden=true;
+  begin.hidden=true;begin.style.opacity=0;begin.style.pointerEvents='none';
+  cv.style.opacity='0';cv.style.visibility='hidden';cv.style.pointerEvents='none';
+  document.documentElement.classList.add('welcome-live');
   try{ensureMusic();}catch(e){}
   if(demoHost){
     /* Welcome + tour live in the phone iframe — keep parent chrome for mute + backdrop */
@@ -1977,7 +2085,10 @@ function resetIntro(){
   if(demoEmbed){postToHost('reset');return;}
   stopTour();timers.forEach(clearTimeout);timers=[];
   welcome.classList.remove('on');bloom.classList.remove('on');tag.classList.remove('on');
-  begin.style.opacity='';begin.style.pointerEvents='';$('ctrlL').hidden=true;$('ctrlR').hidden=true;
+  document.documentElement.classList.remove('welcome-live');
+  begin.hidden=false;begin.style.opacity='';begin.style.pointerEvents='';
+  cv.style.opacity='';cv.style.visibility='';cv.style.pointerEvents='';
+  $('ctrlL').hidden=true;$('ctrlR').hidden=true;
   phase='idle';build();cancelAnimationFrame(raf);raf=requestAnimationFrame(frame);
   try{setPortraitLive(false);}catch(e){}
   const frame=$('portraitFrame'); if(frame) frame.src=embedUrl();
@@ -2102,12 +2213,13 @@ const CD=phone?[500,430]:C;
   [[0,2],[1,3],[2,4],[3,0],[4,1],[0,1],[3,4]].forEach(([a,b],k)=>{const A=appsUse[a],B=appsUse[b],mx=(A[0]+B[0])/2+(k%2?40:-40),my=(A[1]+B[1])/2+(k%3?-36:36);
     s+=`<path class="draw" data-at="${2700+k*170}" pathLength="1" d="M${A[0]} ${A[1]} Q${mx} ${my} ${B[0]} ${B[1]}" stroke="rgba(216,16,136,.45)" stroke-width="1.6" fill="none"/>`;});
   s+='</svg>';
-  $('webP4').innerHTML=s+`<div class="node" style="left:50%;top:${topPct(CD[1])}%"><div class="me-node pop" data-at="500">Your<br>employee</div></div>`+
+  $('webP4').innerHTML=s+`<div class="node" style="left:50%;top:${topPct(CD[1])}%"><div class="me-node pop" data-at="500">Your<br>team member</div></div>`+
     appsUse.map(([x,y,n,ic,b],i)=>tile(x,y,n,ic,b,1000+i*260)).join('');
 })();
-/* Meet Siya — ported: card-lite, ring, travelling light */
+/* Meet Siya A1 — hub + 4 differentiated cards; phone = hub + 2×2 grid */
 icons.refer='<path d="M4 13h14M13 7l6 6-6 6" stroke="#0A246B" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
 icons.chat='<path d="M4 5h18v12H11l-5 4v-4H4z" fill="none" stroke="#7B2D8E" stroke-width="2" stroke-linejoin="round"/><path d="M9 11h8" stroke="#D81088" stroke-width="2" stroke-linecap="round"/>';
+icons.brain='<path d="M9 4a3.5 3.5 0 0 0-3.4 4.2A3.2 3.2 0 0 0 4 11.5 3.5 3.5 0 0 0 7 18h1.2M17 4a3.5 3.5 0 0 1 3.4 4.2A3.2 3.2 0 0 1 22 11.5 3.5 3.5 0 0 1 19 18h-1.2M12 4v16M12 8c-1.5.5-2.5 2-2.5 4S10.5 15.5 12 16M12 8c1.5.5 2.5 2 2.5 4S13.5 15.5 12 16" fill="none" stroke="#7B2D8E" stroke-width="1.8" stroke-linecap="round"/>';
 (()=>{
   document.querySelectorAll('.ns-ic[data-ic]').forEach(el=>{
     const k=el.getAttribute('data-ic');
@@ -2115,24 +2227,54 @@ icons.chat='<path d="M4 5h18v12H11l-5 4v-4H4z" fill="none" stroke="#7B2D8E" stro
   });
 })();
 (()=>{
-  /* Phone/portrait: taller canvas + wider ring so cards clear hub + headline */
-  const BOX=phone?780:520;
-  const CX=500, CY=phone?340:262;
-  const items=phone
-    ? [[500,70,'Primary care','cross'],[860,250,'Prescriptions sent to their pharmacy','pill'],[760,610,'Lab orders & results','flask'],[240,610,'Specialist referrals','refer'],[140,250,'Secure messaging','chat']]
-    : [[500,62,'Primary care','cross'],[792,195,'Prescriptions sent to their pharmacy','pill'],[700,452,'Lab orders & results','flask'],[300,452,'Specialist referrals','refer'],[208,195,'Secure messaging','chat']];
-  const rx=phone?340:300, ry=phone?270:205;
+  const cards=[
+    ['Chronic conditions','Blood pressure, diabetes, thyroid: managed, not just refilled.','cross'],
+    ['Weight & metabolic','Including the stress and sleep behind it.','pill'],
+    ['ADHD & mood','Cognitive testing, tracked over time.','brain'],
+    ['Coordination','Labs, referrals and follow-ups, handled end to end.','refer']
+  ];
+  const el=$('webT'); if(!el)return;
+  if(phone){
+    el.classList.add('tall');
+    el.innerHTML=`<div class="meet-phone"><div class="siya-core pop" data-at="1100"><div>Siya<br>Health<small>One care team</small></div></div>
+      <div class="meet-grid">${cards.map(([t,line,ic],i)=>`<div class="card-lite pop" data-at="${1800+i*400}"><svg viewBox="0 0 26 26">${icons[ic]}</svg><b>${t}</b><small>${line}</small></div>`).join('')}</div></div>`;
+    return;
+  }
+  el.classList.remove('tall');
+  const BOX=540, CX=500, CY=270;
+  const pos=[[500,56],[840,270],[500,490],[160,270]];
+  const rx=290, ry=185;
   const ring=`M${CX-rx} ${CY} a${rx} ${ry} 0 1 0 ${rx*2} 0 a${rx} ${ry} 0 1 0 ${-rx*2} 0`;
-  const el=$('webT');
-  if(el)el.classList.toggle('tall',!!phone);
   let s=`<svg viewBox="0 0 1000 ${BOX}" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><defs><filter id="gl"><feGaussianBlur stdDeviation="4"/></filter></defs>`;
-  s+=`<path class="draw" data-at="2300" pathLength="1" d="${ring}" stroke="rgba(216,16,136,.35)" stroke-width="2" fill="none"/>`;
-  items.forEach(([x,y],i)=>{s+=`<path class="draw" data-at="${1400+i*150}" pathLength="1" d="M${CX} ${CY} L${x} ${y}" stroke="rgba(216,16,136,.6)" stroke-width="2.2" fill="none"/>`;});
-  if(!reduce)s+=`<g class="fade" data-at="2800"><circle r="9" fill="#FF5CB8" filter="url(#gl)"><animateMotion dur="5s" repeatCount="indefinite" path="${ring}"/></circle><circle r="4" fill="#fff"><animateMotion dur="5s" repeatCount="indefinite" path="${ring}"/></circle></g>`;
+  s+=`<path class="draw" data-at="1500" pathLength="1" d="${ring}" stroke="rgba(216,16,136,.35)" stroke-width="2" fill="none"/>`;
+  pos.forEach(([x,y],i)=>{s+=`<path class="draw" data-at="${1700+i*120}" pathLength="1" d="M${CX} ${CY} L${x} ${y}" stroke="rgba(216,16,136,.55)" stroke-width="2" fill="none"/>`;});
+  if(!reduce)s+=`<g class="fade" data-at="3600"><circle r="9" fill="#FF5CB8" filter="url(#gl)"><animateMotion dur="5s" repeatCount="indefinite" path="${ring}"/></circle><circle r="4" fill="#fff"><animateMotion dur="5s" repeatCount="indefinite" path="${ring}"/></circle></g>`;
   s+='</svg>';
-  const topPct=y=>(y/BOX*100);
-  el.innerHTML=s+items.map(([x,y,n,ic],i)=>`<div class="node" style="left:${x/10}%;top:${topPct(y)}%"><div class="pop" data-at="${200+i*140}"><div class="card-lite" data-at="${2600+i*260}"><svg viewBox="0 0 26 26">${icons[ic]}</svg><b>${n}</b></div></div></div>`).join('')+
-    `<div class="node" style="left:50%;top:${topPct(CY)}%"><div class="siya-core pop" data-at="1100"><div>Siya<br>Health<small>One care team</small></div></div></div>`;
+  const topPct=y=>y/BOX*100;
+  el.innerHTML=s+`<div class="node" style="left:50%;top:${topPct(CY)}%"><div class="siya-core pop" data-at="900"><div>Siya<br>Health<small>One care team</small></div></div></div>`+
+    cards.map(([t,line,ic],i)=>{
+      const [x,y]=pos[i];
+      return `<div class="node" style="left:${x/10}%;top:${topPct(y)}%"><div class="card-lite pop" data-at="${2000+i*400}"><svg viewBox="0 0 26 26">${icons[ic]}</svg><b>${t}</b><small>${line}</small></div></div>`;
+    }).join('');
+})();
+
+/* A3 body map */
+(()=>{
+  const el=$('bodyMap'); if(!el)return;
+  el.innerHTML=`<svg viewBox="0 0 300 400" aria-hidden="true">
+    <defs><linearGradient id="bodyG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#D81088"/><stop offset="55%" stop-color="#7B2D8E"/><stop offset="100%" stop-color="#001878"/></linearGradient></defs>
+    <path class="draw" data-at="800" pathLength="1" d="M150 48c22 0 36 16 36 38 0 18-10 30-22 36v18c28 10 46 36 46 70v36c0 22-12 36-30 42l-8 54c-2 12-10 20-22 20h-0c-12 0-20-8-22-20l-8-54c-18-6-30-20-30-42v-36c0-34 18-60 46-70v-18c-12-6-22-18-22-36 0-22 14-38 36-38z" fill="none" stroke="url(#bodyG)" stroke-width="3.2" stroke-linejoin="round"/>
+    <path class="draw" data-at="1400" pathLength="1" d="M150 122 L72 110" stroke="rgba(216,16,136,.45)" stroke-width="1.6" fill="none"/>
+    <path class="draw" data-at="1800" pathLength="1" d="M168 190 L250 170" stroke="rgba(216,16,136,.45)" stroke-width="1.6" fill="none"/>
+    <path class="draw" data-at="2200" pathLength="1" d="M150 250 L70 280" stroke="rgba(216,16,136,.45)" stroke-width="1.6" fill="none"/>
+    <path class="draw" data-at="2600" pathLength="1" d="M175 230 L255 250" stroke="rgba(216,16,136,.45)" stroke-width="1.6" fill="none"/>
+  </svg>
+  <div class="hlab pop" data-at="1500" style="left:2%;top:18%"><b>Head</b>Focus, mood, sleep</div>
+  <div class="hlab pop" data-at="1900" style="right:2%;top:34%"><b>Heart</b>Blood pressure</div>
+  <div class="hlab pop" data-at="2300" style="left:2%;top:62%"><b>Gut / metabolism</b>Weight, energy</div>
+  <div class="hlab pop" data-at="2700" style="right:2%;top:58%"><b>Hormones</b></div>
+  <div class="pulse fade" data-at="3400"></div>
+  <div class="hlab pop" data-at="3600" style="left:50%;top:8%;translate:-50% 0;text-align:center;max-width:160px"><b>Stress</b>Connecting all</div>`;
 })();
 
 /* connected-conditions web (problem 3 + fix 3) */
@@ -2179,6 +2321,10 @@ function applyDemoFlags(){
   document.querySelectorAll('article.slide[data-founder]').forEach(el=>el.classList.toggle('parked',!showFounder));
   const soon=$('outcomesSoon'); if(soon) soon.hidden=true;
   const real=$('realOutcomes'); if(real) real.hidden=!realOutcomes;
+  if(!showFounder){
+    const vid=$('founderVid');
+    if(vid){vid.removeAttribute('poster');vid.querySelectorAll('source,track').forEach(n=>n.remove());vid.hidden=true;}
+  }
 }
 window.__employerDemo={
   showFounder,realOutcomes,applyDemoFlags,WALK_MS,isPhoneLayout,demoHost,demoEmbed,
@@ -2417,6 +2563,8 @@ function tick(now){
     }
     segs.querySelectorAll('.ch').forEach((el,i)=>{
       const fill=el.querySelector('b'); if(!fill)return;
+      el.setAttribute('aria-current',i===ch?'true':'false');
+      el.classList.toggle('is-done',i<ch);
       if(i<ch)fill.style.width='100%';
       else if(i>ch)fill.style.width='0';
       else{
@@ -2440,8 +2588,7 @@ function startTour(){
   postToHost('tour');
 }
 function stopTour(){tourOn=false;tour.classList.remove('on');tour.hidden=true;slides.forEach(s=>s.classList.remove('active'));}
-welcome.addEventListener('click',e=>{if(e.target.closest('#replayIntro1'))return;unlockAudio();startTour();});
-$('replayIntro1').addEventListener('click',e=>{e.stopPropagation();resetIntro();});
+welcome.addEventListener('click',()=>{unlockAudio();startTour();});
 tour.addEventListener('click',e=>{if(e.target.closest('.bar,button'))return;advance();});
 $('prev').addEventListener('click',()=>show(Math.max(0,cur-1)));
 $('next').addEventListener('click',advance);
@@ -2449,7 +2596,6 @@ $('pause').addEventListener('click',togglePause);
 const muteTourBtn=$('muteTour');
 if(muteTourBtn)muteTourBtn.addEventListener('click',e=>{e.stopPropagation();applyMute(!muted);});
 $('replayTour').addEventListener('click',()=>{paused=false;$('pause').textContent='Pause';show(0);});
-$('replayIntro2').addEventListener('click',resetIntro);
 document.addEventListener('click',e=>{
   if(!e.target.closest('#walkTap'))return;
   e.stopPropagation();
@@ -2459,9 +2605,13 @@ document.addEventListener('click',e=>{
 const founderVid=$('founderVid'), founderPlay=$('founderPlay'), founderSoon=$('founderSoon');
 if(founderVid){
   founderVid.addEventListener('error',()=>{founderMissing=true;founderVid.hidden=true;if(founderSoon)founderSoon.hidden=false;});
-  fetch('/employers/demo/media/founder.mp4',{method:'HEAD'}).then(r=>{
-    founderMissing=!r.ok; founderVid.hidden=!r.ok; if(founderSoon)founderSoon.hidden=r.ok;
-  }).catch(()=>{founderMissing=true;if(founderSoon)founderSoon.hidden=false;});
+  if(showFounder){
+    fetch('/employers/demo/media/founder.mp4',{method:'HEAD'}).then(r=>{
+      founderMissing=!r.ok; founderVid.hidden=!r.ok; if(founderSoon)founderSoon.hidden=r.ok;
+    }).catch(()=>{founderMissing=true;if(founderSoon)founderSoon.hidden=false;});
+  }else{
+    founderMissing=true; founderVid.hidden=true; if(founderSoon)founderSoon.hidden=false;
+  }
   founderPlay.addEventListener('click',e=>{
     e.stopPropagation();
     if(founderMissing){founderSoon.hidden=false;return;}

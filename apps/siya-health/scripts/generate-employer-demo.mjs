@@ -26,6 +26,8 @@ const SLIDE_IDS = [
   'p-coord',
   'question',
   'turn',
+  'care-checklist',
+  'care-body',
   'f-time',
   'f-time-a',
   'f-time-b',

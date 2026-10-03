@@ -1,69 +1,49 @@
 # Employer demo walkthrough tracker
 
-Branch: `employer-demo-journey-prod` · Preview only until all four groups reviewed.  
-Screenshots: `internal/demo-qa/walkthrough/` (gitignored); paths below relative to that folder.  
-Update this table with every batch. Status: `done` · `in progress` · `not started` · `parked`.
+Branch: `employer-demo-journey-prod` · Preview only until groups reviewed.  
+Screenshots: `internal/demo-qa/walkthrough/` (gitignored); paths relative to that folder.  
+Status: `done` · `in progress` · `not started` · `parked` · `hold`.
 
 ## STEP 1 — Stage bugs
 
 | # | Note | Slide id(s) | Status | Screenshot |
 |---|------|-------------|--------|------------|
-| 1a | Welcome: remove intro gate ghost; phone one CTA, no Skip/Sound collision | `welcome` | not started | — |
-| 1b | Remove unstyled top-left “Illustrative · sample data”; keep styled caption only | all `data-sample` | not started | — |
-| 1c | Problem/time desk: callout fully above bar (shrink cal or left-column callout) | `p-time` | not started | — |
-| 1d | Meet Siya phone: all care items clean at 360 & 390 (superseded by A1 redesign) | `turn` | not started | — |
-| 1e | Chapter highlight matches current slide | bar / all | not started | — |
-| 1f | Do not request founder.mp4/.vtt when `showFounder=false` | `founder` | not started | — |
+| 1a | Welcome: remove intro gate ghost; phone one CTA | `welcome` | done | `wt-s1-welcome-*` |
+| 1b | Remove unstyled top-left Illustrative duplicate | all | done | (absent in shots) |
+| 1c | Problem/time desk: callout above bar | `p-time` | done | `wt-s1-p-time-*` |
+| 1d | Meet Siya phone: all cards clean at 360/390 | `turn` | done | `wt-a1-meet-siya-390*` |
+| 1e | Chapter highlight matches current slide | bar | done | (aria-current + is-done) |
+| 1f | No founder.mp4/.vtt when showFounder=false | `founder` | done | (0 requests) |
+| 1g | Clinicians body not under bar; no empty 8th slot | `clinicians` | done | `wt-a4-clinicians-*` |
 
 ## GROUP A — Meet Siya + Care
 
 | # | Note | Slide id(s) | Status | Screenshot |
 |---|------|-------------|--------|------------|
-| A1 | Meet Siya: differentiated care cards (chronic, obesity/stress+NP, ADHD/depression+cognitive over time, end-to-end coordination); ring/hub + travelling light | `turn` | not started | — |
-| A2 | Whole-person “so what” checklist build (history→…→one plan); longer dwell | `baseline` (reshape) / `care-checklist` | not started | — |
-| A3 | Full-picture body / head-to-toe: root cause incl. stress | `f-whole` / `care-body` (from part4-wip) | not started | — |
-| A4 | Clinicians: gradient headline + imagery; settings list (no hospital names) | `clinicians` | not started | — |
-| A5 | Wording: “Your team member” (not employee/patient) throughout | copy global | not started | — |
+| A1 | Meet Siya differentiated 4 cards + hub/ring | `turn` | done | `wt-a1-meet-siya-*` |
+| A2 | Whole-person checklist first-visit chart | `care-checklist` | done | `wt-a2-checklist-*` |
+| A3 | Head-to-toe root-cause body map | `care-body` | done | `wt-a3-body-*` |
+| A4 | Clinicians pills + practise strip | `clinicians` | done | `wt-a4-clinicians-*` |
+| A5 | “Your team member” wording throughout | copy global | hold | — |
 
-## GROUP B — Problem chapter
+## GROUP B–D
 
-| # | Note | Slide id(s) | Status | Screenshot |
-|---|------|-------------|--------|------------|
-| B6 | “Sound familiar?” common conditions HR recognises | `p-familiar` (new) | not started | — |
-| B7 | Time-away / days-off: 2-hour clinic visit vs workday | `p-time` / `p-time-away` | not started | — |
-| B8 | Eyebrows name the problem (TIME, ACCESS, COST, …) | problem slides | not started | — |
-| B9 | Starfield subtler; intro sound timed to wordmark lock | `#stage` intro | not started | — |
-
-## GROUP C — How it works
-
-| # | Note | Slide id(s) | Status | Screenshot |
-|---|------|-------------|--------|------------|
-| C10 | Choose-your-path: chat vs booking; booking shows provider pages + real reviews; no fake login | `journey` / `f-paths` (new) | not started | — |
-| C11 | Response personal: Alex → Care team → Dr. Pandey; “Real people, not AI chat”; 30 min / 2 hr | `f-response` | not started | — |
-| C12 | Urgent pink-eye: photo+message → doctor joins chat → plan; no video | `f-urgent` | not started | — |
-| C13 | Phone notification: no overflow; “Extended 45-minute visit with Dr. Pandey” | `f-time` / `f-time-a` | not started | — |
-| C14 | Join anytime / preventive care (not only when sick) | `f-time-b` / new beat | not started | — |
-| C15 | Employer invite flow (keep); voluntary private link | `employer`, `employer-a/b` | not started | — |
-
-## GROUP D — Cost, privacy, proof
-
-| # | Note | Slide id(s) | Status | Screenshot |
-|---|------|-------------|--------|------------|
-| D16 | Cost access lines (no waitlists / network confusion / surprise bills); no prices | `cost`, `cost-usual` | not started | — |
-| D17 | Outcomes: two panels, team-level trends only, 10+, sample labelled | `outcomes` | not started | — |
-| D18 | Privacy funnel: team member details → care team; employer → aggregates only | `privacy`, `privacy-you` | not started | — |
-| D19 | Proof: 2×2 equal cards; “+” inside box | `proof`, `proof-nums` | not started | — |
-| D20 | Inquiry link → exact “Request employer information” heading | `close` CTA | not started | — |
+| Group | Status |
+|-------|--------|
+| B Problem | hold — specs after A review |
+| C How it works | hold |
+| D Cost / privacy / proof | hold |
 
 ## PARKED
 
 | # | Note | Status |
 |---|------|--------|
-| P1 | Founder monologue video | parked (not recorded) |
-| P2 | Cognitive-test vendor demo link | parked (compliance/terms) |
+| P1 | Founder monologue video | parked |
+| P2 | Cognitive-test vendor demo link | parked |
 
 ## Batch log
 
 | When | Batch | Commit | Notes |
 |------|-------|--------|-------|
-| — | tracker created | pending | Step 0 only |
+| 2026-10-03 | Step 0 tracker | `b7dc3a2b` | |
+| pending | Step 1 + Group A | pending | hash-stamped shots |
