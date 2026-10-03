@@ -2044,6 +2044,7 @@ window.__employerDemo={
       el.textContent=dec?Number(n).toFixed(dec)+suf:Number(n).toLocaleString('en-US')+suf;
     });
     s.style.filter='none';
+    fitFor=-1; scheduleFit();
   },
   lastBuildMs(){
     const s=slides[cur]; if(!s)return 0;
@@ -2179,15 +2180,33 @@ function fitFrame(){
   const s=slides[cur];if(!s)return;
   const frame=s.querySelector('.frame');if(!frame)return;
   frame.style.transform='none';
-  s.style.alignContent='center';
+  const bar=document.querySelector('.bar');
+  if(!bar)return;
+  const topInset=16;
+  const availTop=topInset;
+  const availBottom=bar.getBoundingClientRect().top-8;
+  const availMid=(availTop+availBottom)/2;
   if(s.dataset.vcenter==='1'){
     s.style.display='flex';
     s.style.flexDirection='column';
     s.style.justifyContent='center';
     s.style.alignItems='center';
+    s.style.alignContent='center';
+    /* Prefer centering the CTA / hero; else the whole frame */
+    const anchor=s.querySelector('.row-btns, .start, .web, .q2, .big')||frame;
+    const ar=anchor.getBoundingClientRect();
+    const anchorMid=ar.top+ar.height/2;
+    let dy=availMid-anchorMid;
+    /* Keep frame inside the available band */
+    const fr=frame.getBoundingClientRect();
+    if(fr.top+dy<availTop) dy=availTop-fr.top;
+    if(fr.bottom+dy>availBottom) dy=availBottom-fr.bottom;
+    frame.style.transform=`translateY(${Math.round(dy)}px)`;
+    frame.style.transformOrigin='center center';
+    return;
   }
-  const bar=document.querySelector('.bar');
-  const room=bar.getBoundingClientRect().top-frame.getBoundingClientRect().top-8;
+  s.style.alignContent='center';
+  const room=availBottom-frame.getBoundingClientRect().top;
   const h=frame.getBoundingClientRect().height;
   if(h>room&&room>70){
     const scale=room/h;
@@ -2196,7 +2215,7 @@ function fitFrame(){
     frame.style.transformOrigin='center center';
   }else frame.style.transform='';
 }
-function scheduleFit(){if(fitFor===cur)return;fitFor=cur;clearTimeout(fitTimer);fitTimer=setTimeout(fitFrame,850);}
+function scheduleFit(){if(fitFor===cur)return;fitFor=cur;clearTimeout(fitTimer);fitTimer=setTimeout(fitFrame,120);}
 function show(i){
   if(i<0||i>=slides.length)return;cur=i;clearTimeout(fitTimer);fitFor=-1;walkStep=-1;founderHold=false;
   try{updatePortraitBackdrop();}catch(e){}
