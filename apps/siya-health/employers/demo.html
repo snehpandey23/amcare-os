@@ -131,9 +131,11 @@ button:focus-visible{outline:2px solid #FF5CB8;outline-offset:3px}
 article.slide small{font-size:12px}
 .cap{margin:0;font:600 clamp(26px,3.7vw,46px)/1.12 var(--font-display);text-wrap:balance;max-width:920px;color:var(--ink)}
 .cap em,.big em,.q2 em{font-style:normal;background:var(--grad-brand);-webkit-background-clip:text;background-clip:text;color:transparent}
-.sub{margin:0;font:400 clamp(15px,1.4vw,18px)/1.5 var(--font-body);color:var(--ink-soft);max-width:680px;text-wrap:balance}
+.sub{margin:0;font:400 clamp(15px,1.4vw,18px)/1.5 var(--font-body);color:var(--ink-soft);max-width:680px;text-wrap:balance;text-wrap:pretty}
 .note-s{font:500 12px/1.3 var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);text-wrap:balance}
-.pack-note,.walk-now,.sample-cap,.refcard,.appt-callout p,.vm-row small,.vm-script{text-wrap:balance}
+.pack-note,.walk-now,.sample-cap,.refcard,.appt-callout p,.vm-row small,.vm-script{
+  text-wrap:balance;text-wrap:pretty;
+}
 
 /* build states */
 .b{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
@@ -337,7 +339,7 @@ article[data-walk] .msg{flex-wrap:nowrap;align-items:center}
 .end-row{grid-column:1 / -1;background:rgba(216,16,136,.08);border-radius:16px;padding:12px 14px;font:600 14px/1.4 var(--font-display);color:var(--ink);text-align:center}
 .two-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:min(860px,100%);text-align:left}
 .chart{width:100%;height:72px}
-.pack-note{margin:0;font:500 12px/1.4 var(--font-body);color:var(--ink-soft);text-wrap:balance;max-width:36em}
+.pack-note{margin:0;font:500 12px/1.4 var(--font-body);color:var(--ink-soft);text-wrap:balance;text-wrap:pretty;max-width:34em}
 .steps .rail{position:absolute;left:16%;right:16%;top:38px;height:3px;border-radius:3px;background:linear-gradient(90deg,#D81088,#7B2D8E,#001878)}
 .step{position:relative;display:grid;justify-items:center;gap:12px;text-align:center}
 .step .ic{width:76px;height:76px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 12px 28px rgba(10,36,107,.14);border:2px solid rgba(216,16,136,.3)}
@@ -1015,7 +1017,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
       </div>
       <h2 class="cap b" data-at="5000">Real replies from real people who <em>know them</em>.</h2>
       <p class="sub b" data-at="5600">Not a chatbot. A care team that knows their history.</p>
-      <p class="pack-note b" data-at="6200">Response times and availability depend on your organization's package.</p>
+      <p class="pack-note b" data-at="6200">Response times and availability depend on your organization's&nbsp;package.</p>
     </div>
   </article>
 
@@ -1035,7 +1037,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
       </div></div>
       <h2 class="cap b" data-at="4600">Something urgent? A doctor within 2 hours, <em>day or night</em>, often sooner.</h2>
       <p class="sub b" data-at="5200">A doctor is available within 2 hours, any time, often sooner.</p>
-      <p class="pack-note b" data-at="5600">Response times and availability depend on your organization's package.</p>
+      <p class="pack-note b" data-at="5600">Response times and availability depend on your organization's&nbsp;package.</p>
     </div>
   </article>
 
@@ -1410,7 +1412,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
           <a class="start" href="/employers#employer-inquiry-form" data-demo-cta="inquiry">Submit an inquiry</a>
         </div>
         <div class="close-foot">
-          <p class="pack-note b" data-at="1500">Services and coverage are tailored to your organization's package.</p>
+          <p class="pack-note b" data-at="1500">Services and coverage are tailored to your organization's&nbsp;package.</p>
           <div class="mini b" data-at="1700">
             <button class="link" id="replayTour" type="button">Replay tour</button>
             
