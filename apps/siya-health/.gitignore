@@ -16,3 +16,5 @@ internal/demo-qa/
 # Local music design preview (not deployed)
 internal/music-preview.html
 internal/music-ref/
+
+docs/POST-CLEANUP-HUMAN-REVIEW.md
