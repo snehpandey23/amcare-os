@@ -12,3 +12,7 @@ data/ads-landing-smoke-latest.json
 
 # Local Design QA screenshots / clips (not deployed)
 internal/demo-qa/
+
+# Local music design preview (not deployed)
+internal/music-preview.html
+internal/music-ref/
