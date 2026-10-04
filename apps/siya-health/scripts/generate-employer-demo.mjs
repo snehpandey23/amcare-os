@@ -20,7 +20,9 @@ const DEMO_BOOK_CALL_HREF = '/employers#employer-inquiry-form';
 
 const SLIDE_IDS = [
   'statement',
+  'p-familiar',
   'p-time',
+  'p-away',
   'p-response',
   'p-whole',
   'p-coord',
