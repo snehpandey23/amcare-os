@@ -638,47 +638,103 @@ article.slide[data-sample="1"].active .sample-cap{display:block}
   .fact-chip{font-size:12px;padding:7px 10px}
 }
 
-.card-lite{width:clamp(118px,14vw,168px);background:#fff;border-radius:16px;padding:12px 10px;display:grid;gap:7px;justify-items:center;text-align:center;
-  box-shadow:0 12px 28px rgba(10,36,107,.12);border:1.5px solid rgba(10,36,107,.08);transition:box-shadow .6s ease,border-color .6s ease}
-.card-lite svg{width:26px;height:26px;position:static}
+.card-lite{width:clamp(118px,14vw,168px);background:#fff;border-radius:16px;padding:12px 10px;display:grid;gap:8px;justify-items:center;text-align:center;
+  box-shadow:0 8px 20px rgba(10,36,107,.10);border:1px solid rgba(10,36,107,.08);transition:box-shadow .6s ease,border-color .6s ease}
+.card-lite svg{width:24px;height:24px;position:static;color:#0A246B}
+.card-lite svg *{stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 .card-lite b{font:600 clamp(11px,1.05vw,12.5px)/1.25 var(--font-display);color:var(--ink);text-wrap:balance}
-.card-lite.in{border-color:#D81088;box-shadow:0 0 0 3px rgba(216,16,136,.18),0 14px 32px rgba(216,16,136,.22)}
+.card-lite.in{border-color:#D81088;box-shadow:0 0 0 3px rgba(216,16,136,.16),0 10px 24px rgba(216,16,136,.18)}
+.card-lite.in svg{color:#D81088}
 .card-lite small{font:500 11px/1.3 var(--font-body);color:var(--ink-soft);text-wrap:balance}
-.meet-phone{width:100%;max-width:420px;display:grid;gap:14px;justify-items:center}
-.meet-grid{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.meet-grid .card-lite{width:100%;max-width:none;box-sizing:border-box}
-.chart-card{width:min(420px,100%);background:#fff;border-radius:18px;padding:16px 16px 14px;box-shadow:0 16px 36px rgba(10,36,107,.12);text-align:left;display:grid;gap:12px}
-.chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.meet-phone{width:100%;max-width:400px;height:100%;min-height:0;display:grid;place-items:center}
+.meet-stage{position:relative;width:min(100%,380px);aspect-ratio:1;max-height:min(62vh,480px);
+  display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:28px 16px;padding:4px;box-sizing:border-box}
+.meet-stage > svg.meet-ring{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.meet-stage .siya-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:84px;font-size:12px;margin:0}
+.meet-stage .siya-core small{font-size:10px}
+.meet-grid{display:contents}
+.meet-stage .card-lite{position:relative;z-index:1;width:auto;max-width:none;min-width:0;box-sizing:border-box;padding:10px 8px;gap:6px;align-content:center}
+.meet-stage .card-lite svg{width:20px;height:20px}
+.meet-stage .card-lite b{font-size:11px}
+.meet-stage .card-lite small{font-size:10px;line-height:1.25}
+.chart-card{width:min(400px,100%);background:#fff;border-radius:16px;padding:16px 16px 12px;box-shadow:0 8px 20px rgba(10,36,107,.10);text-align:left;display:grid;gap:8px;max-height:100%}
+.chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:0 4px 8px;border-bottom:1px solid rgba(10,36,107,.08)}
 .chart-head b{font:700 15px/1.2 var(--font-display);color:var(--ink)}
 .chart-head span{font:600 11px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:var(--magenta-text)}
-.chk-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.chk-row{display:flex;align-items:center;gap:10px;min-height:40px;padding:8px 10px;border-radius:12px;background:var(--cream);font:600 14px/1.3 var(--font-display);color:var(--ink)}
-.chk-row .chk{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid rgba(216,16,136,.35);background:#fff;position:relative}
-.chk-row.in .chk{border-color:#D81088;background:var(--grad-btn)}
-.chk-row.in .chk::after{content:"";position:absolute;left:6px;top:3px;width:6px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
-.chk-final{margin-top:4px;border-radius:999px;padding:12px 16px;background:var(--grad-btn);color:#fff;font:700 14px/1.3 var(--font-display);text-align:center;transform-origin:left center}
-.body-map{position:relative;width:min(340px,100%);aspect-ratio:3/4;margin:0 auto}
-.body-map svg{width:100%;height:100%;display:block}
-.body-map .hlab{position:absolute;background:#fff;border-radius:12px;padding:7px 9px;box-shadow:0 8px 18px rgba(10,36,107,.12);font:600 11px/1.25 var(--font-body);color:var(--ink);text-align:left;max-width:132px;opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
+.chk-list{list-style:none;margin:0;padding:0;display:grid;gap:0;background:#fff;border-radius:8px}
+.chk-row{display:flex;align-items:center;gap:12px;height:52px;padding:0 4px;background:#fff!important;font:600 14px/1.3 var(--font-display);color:var(--ink);border-bottom:1px solid rgba(10,36,107,.10)}
+.chk-list .chk-row:last-child{border-bottom:none}
+.chk-row .chk-mark{flex:none;width:28px;height:28px;border-radius:50%;border:1.75px solid rgba(216,16,136,.4);background:#fff;
+  display:inline-flex!important;align-items:center;justify-content:center;box-sizing:border-box;padding:0;margin:0;font-style:normal;line-height:0;
+  position:relative;gap:0;color:transparent;transition:background .35s ease,border-color .35s ease,box-shadow .35s ease}
+.chk-row .chk-mark::after{content:"";width:7px;height:12px;border:solid transparent;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) scale(0);transform-origin:center;margin-top:-2px;transition:transform .35s cubic-bezier(.3,1.4,.5,1),border-color .2s}
+.chk-row.in .chk-mark{border-color:transparent;background:var(--grad-btn);box-shadow:0 4px 12px rgba(216,16,136,.28)}
+.chk-row.in .chk-mark::after{border-color:#fff;transform:rotate(45deg) scale(1)}
+.chk-final{margin-top:8px;border-radius:999px;padding:12px 16px;background:var(--grad-btn);color:#fff;font:700 14px/1.3 var(--font-display);text-align:center;transform-origin:center;box-shadow:0 0 0 0 rgba(216,16,136,.0)}
+.chk-final.in{box-shadow:0 8px 28px rgba(216,16,136,.45),0 0 24px rgba(123,45,142,.35)}
+.body-map{position:relative;width:min(360px,100%);aspect-ratio:3/4;margin:0 auto;display:grid;place-items:center}
+.body-map > svg{width:100%;height:100%;display:block;position:relative;z-index:1}
+.body-map .body-aura{position:absolute;left:18%;right:18%;top:10%;bottom:8%;border-radius:50% 50% 46% 46%;z-index:0;pointer-events:none;opacity:0;
+  background:radial-gradient(ellipse at 50% 45%, rgba(216,16,136,.34) 0%, rgba(123,45,142,.16) 42%, rgba(0,24,120,.0) 72%)}
+.body-map .body-aura.in{opacity:1;animation:stressAura 2.2s ease-out infinite}
+@keyframes stressAura{0%{transform:scale(.9);opacity:.65}60%{transform:scale(1.14);opacity:.3}100%{transform:scale(1.22);opacity:0}}
+.body-map .hlab{position:absolute;z-index:2;background:#fff;border-radius:12px;padding:8px 10px;box-shadow:0 8px 18px rgba(10,36,107,.12);font:600 11px/1.25 var(--font-body);color:var(--ink);text-align:left;max-width:124px;opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
 .body-map .hlab.in{opacity:1;transform:none}
 .body-map .hlab b{display:block;font:700 10px/1.2 var(--font-display);letter-spacing:.06em;text-transform:uppercase;color:var(--magenta-text);margin-bottom:2px}
-.body-map .pulse{position:absolute;left:50%;top:42%;width:18px;height:18px;border-radius:50%;translate:-50% -50%;background:rgba(216,16,136,.55);opacity:0}
-.body-map .pulse.in{opacity:1;animation:hotPulse 1.8s ease-out infinite}
-@keyframes hotPulse{0%{box-shadow:0 0 0 0 rgba(216,16,136,.45)}100%{box-shadow:0 0 0 22px rgba(216,16,136,0)}}
-.cond-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start;max-width:560px}
-.cpill{display:inline-flex;align-items:center;min-height:36px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid rgba(216,16,136,.22);box-shadow:0 8px 18px rgba(10,36,107,.08);font:600 12px/1.2 var(--font-display);color:var(--ink)}
-.prac-strip{display:flex;flex-wrap:wrap;gap:8px;max-width:560px}
-.prac{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:8px 12px;border-radius:12px;background:rgba(10,36,107,.05);font:600 12px/1.25 var(--font-body);color:var(--ink)}
-.prac i{width:8px;height:8px;border-radius:50%;background:var(--magenta);flex:none}
+.body-map .body-cap{position:absolute;left:50%;bottom:0;translate:-50% 0;z-index:2;margin:0;font:600 12px/1.3 var(--font-body);color:var(--magenta-text);text-align:center;white-space:nowrap}
+.clin-stack{width:min(520px,100%);display:grid;gap:16px;align-content:center}
+.panel-card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 8px 20px rgba(10,36,107,.10);display:grid;gap:12px;text-align:left}
+.panel-card h3{margin:0;font:700 13px/1.2 var(--font-display);color:var(--ink);letter-spacing:.02em}
+.cond-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
+.cpill{display:inline-flex;align-items:center;min-height:32px;padding:8px 12px;border-radius:999px;background:#fff;border:1.5px solid transparent;
+  background-image:linear-gradient(#fff,#fff),var(--grad-btn);background-origin:border-box;background-clip:padding-box,border-box;
+  font:600 12px/1.2 var(--font-display);color:var(--ink)}
+.prac-list{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px}
+.prac{display:flex;align-items:center;gap:8px;min-height:36px;padding:8px;border-radius:12px;background:#fff;font:600 12px/1.25 var(--font-body);color:var(--ink)}
+.prac svg{width:18px;height:18px;flex:none;color:#D81088}
+.prac svg *{stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 html.desk-stage #tour #clinicians .desk-copy,
 html.desk-stage #tour #care-checklist .desk-copy,
 html.desk-stage #tour #care-body .desk-copy,
 html.desk-stage #tour #turn .desk-copy{padding-bottom:8px}
+html.desk-stage #tour #care-checklist .desk-hero,
+html.desk-stage #tour #care-body .desk-hero,
+html.desk-stage #tour #clinicians .desk-hero,
+html.desk-stage #tour #turn .desk-hero{padding-bottom:8px;align-content:center}
+html.desk-stage #tour #care-checklist .chart-card{width:min(380px,100%)}
 @media (max-width:640px){
   .chart-card{width:100%}
-  .chk-row{font-size:13px;min-height:36px}
-  .cond-pills,.prac-strip{justify-content:center}
-  .body-map{width:min(280px,92vw)}
+  .chk-row{font-size:13px;height:44px}
+  .chk-row .chk-mark{width:26px;height:26px}
+  .cond-pills{justify-content:center}
+  .prac-list{grid-template-columns:1fr 1fr;gap:6px 8px}
+  .body-map{width:min(300px,94vw)}
+  .body-map .hlab{max-width:108px;padding:6px 8px;font-size:10px}
+  .body-map .body-cap{font-size:11px;bottom:0}
+  #turn.slide{padding:12px 14px 100px;align-content:stretch;align-items:stretch}
+  #turn .frame{height:100%;grid-template-rows:auto minmax(0,1fr);gap:8px;align-content:stretch}
+  #turn .desk-copy{display:grid;gap:6px;justify-items:center}
+  #turn .desk-copy .cap{font-size:clamp(22px,6.2vw,28px)}
+  #turn .desk-copy .sub{font-size:14px}
+  #turn .desk-hero{min-height:0;height:100%;display:grid;place-items:center;align-content:center;padding-bottom:8px}
+  #turn .meet-phone{height:100%;max-height:none;align-content:center}
+  #turn .meet-stage{width:100%;max-height:min(100%,520px);height:min(100vw - 32px, min(100%,520px));aspect-ratio:1}
+  #turn .web.tall,#turn #webT.meet-web,#turn #webT.tall{width:100%;height:100%;max-height:none;aspect-ratio:auto}
+  #care-checklist.slide{padding:14px 16px 108px;align-content:start}
+  #care-checklist .frame{gap:10px}
+  #care-checklist .chart-card{padding:12px 12px 10px}
+  #care-body.slide{padding:14px 16px 108px;align-content:start}
+  #clinicians.slide{padding:12px 14px 108px;align-content:start}
+  #clinicians .frame{gap:8px}
+  #clinicians .cap{font-size:clamp(22px,6vw,28px)}
+  #clinicians .sub{font-size:14px}
+  #clinicians .clin-stack{gap:8px;width:100%}
+  #clinicians .panel-card{padding:10px;gap:8px}
+  #clinicians .panel-card h3{font-size:12px}
+  #clinicians .cpill{min-height:28px;padding:6px 10px;font-size:11px}
+  #clinicians .prac{min-height:30px;padding:4px 6px;font-size:11px;gap:6px}
+  #clinicians .prac svg{width:16px;height:16px}
+  #care-checklist .desk-hero,#care-body .desk-hero,#clinicians .desk-hero{padding-bottom:4px}
 }
 .siya-core{width:clamp(110px,12vw,140px);aspect-ratio:1;border-radius:50%;background:var(--grad-btn);color:#fff;display:grid;place-items:center;text-align:center;
   font:700 clamp(14px,1.5vw,18px)/1.15 var(--font-display);box-shadow:0 16px 40px rgba(123,45,142,.4)}
@@ -763,11 +819,13 @@ article.slide[data-close="1"] .close-foot{
   .spec{font-size:12px;padding:4px 6px;white-space:normal;text-align:center;max-width:92px}
   .me-node{width:76px;font-size:12px}
   .stress{font-size:14px;padding:10px 14px}
-  .card-lite{width:min(112px,28vw);padding:8px 6px;gap:4px;border-radius:12px}
-  .card-lite svg{width:18px;height:18px}
-  .card-lite b{font-size:11px;line-height:1.2}
+  .card-lite{border-radius:16px}
+  #webT:not(.meet-web) .card-lite{width:min(112px,28vw);padding:8px 6px;gap:4px;border-radius:12px}
+  #webT:not(.meet-web) .card-lite svg{width:18px;height:18px}
+  #webT:not(.meet-web) .card-lite b{font-size:11px;line-height:1.2}
   .siya-core{width:76px;font-size:12px}
   .siya-core small{font-size:10px}
+  #webT.meet-web{width:100%;height:100%}
   #f-time-b .lock{display:none}
   #f-time-b .week{--wh:10px;width:min(100%,340px)}
   #f-time-b .sub{font-size:14px;margin:0}
@@ -1088,7 +1146,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
       <div class="desk-copy">
         <div class="eyebrow b" data-at="150">Introducing</div>
         <h2 class="cap b" data-at="400">Care that sees the <em>whole person</em>.</h2>
-        <p class="sub b" data-at="900">One care team that personalizes care for your people and works around their schedule.</p>
+        <p class="sub b" data-at="900">Physical health, mental health and everything in between — one team that connects it.</p>
       </div>
       <div class="desk-hero">
         <div class="web" id="webT"></div>
@@ -1108,13 +1166,13 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
         <div class="chart-card b" data-at="500">
           <div class="chart-head"><b>Your team member</b><span>First visit</span></div>
           <ul class="chk-list">
-            <li class="chk-row b" data-at="900"><i class="chk"></i><span>History &amp; goals</span></li>
-            <li class="chk-row b" data-at="1400"><i class="chk"></i><span>Screenings</span></li>
-            <li class="chk-row b" data-at="1900"><i class="chk"></i><span>Cognitive testing</span></li>
-            <li class="chk-row b" data-at="2400"><i class="chk"></i><span>Vitals: BMI, blood pressure</span></li>
-            <li class="chk-row b" data-at="2900"><i class="chk"></i><span>Labs ordered</span></li>
-            <li class="chk-row b" data-at="3400"><i class="chk"></i><span>Virtual exam</span></li>
-            <li class="chk-final grow b" data-at="4200"><span>→ One personalised plan</span></li>
+            <li class="chk-row b" data-at="900"><i class="chk-mark" aria-hidden="true"></i><span>History &amp; goals</span></li>
+            <li class="chk-row b" data-at="1400"><i class="chk-mark" aria-hidden="true"></i><span>Screenings</span></li>
+            <li class="chk-row b" data-at="1900"><i class="chk-mark" aria-hidden="true"></i><span>Cognitive testing</span></li>
+            <li class="chk-row b" data-at="2400"><i class="chk-mark" aria-hidden="true"></i><span>Vitals: BMI, blood pressure</span></li>
+            <li class="chk-row b" data-at="2900"><i class="chk-mark" aria-hidden="true"></i><span>Labs ordered</span></li>
+            <li class="chk-row b" data-at="3400"><i class="chk-mark" aria-hidden="true"></i><span>Virtual exam</span></li>
+            <li class="chk-final pop b" data-at="4200"><span>→ One personalized plan</span></li>
           </ul>
         </div>
       </div>
@@ -1127,7 +1185,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
       <div class="desk-copy">
         <div class="eyebrow b" data-at="150">Root cause</div>
         <h2 class="cap b" data-at="300">We look for the <em>cause</em>, not just the symptom.</h2>
-        <p class="sub b" data-at="5600">Stress, sleep, weight and focus are connected. So is our care.</p>
+        <p class="sub b" data-at="700">Sleep, mood, weight and blood pressure share pathways — we treat the shared ones.</p>
       </div>
       <div class="desk-hero">
         <div class="body-map b" data-at="500" id="bodyMap" aria-hidden="true"></div>
@@ -1423,24 +1481,31 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
         <p class="sub b" data-at="700">So we know what to manage ourselves, and when to refer.</p>
       </div>
       <div class="desk-hero">
-        <div class="cond-pills b" data-at="900">
-          <span class="cpill pop" data-at="1000">Weight &amp; metabolic</span>
-          <span class="cpill pop" data-at="1150">Hormones &amp; fertility</span>
-          <span class="cpill pop" data-at="1300">Mental health</span>
-          <span class="cpill pop" data-at="1450">Sexual health</span>
-          <span class="cpill pop" data-at="1600">Hair loss</span>
-          <span class="cpill pop" data-at="1750">ADHD &amp; cognitive</span>
-          <span class="cpill pop" data-at="1900">Primary care</span>
-        </div>
-        <p class="panel-label b" data-at="2400">Where our clinicians also practise</p>
-        <div class="prac-strip b" data-at="2600">
-          <div class="prac pop" data-at="2700"><i></i><span>Academic &amp; teaching hospitals</span></div>
-          <div class="prac pop" data-at="2900"><i></i><span>Community hospitals</span></div>
-          <div class="prac pop" data-at="3100"><i></i><span>Inpatient</span></div>
-          <div class="prac pop" data-at="3300"><i></i><span>Nursing homes</span></div>
-          <div class="prac pop" data-at="3500"><i></i><span>Concierge practice</span></div>
-          <div class="prac pop" data-at="3700"><i></i><span>Community health centers</span></div>
-          <div class="prac pop" data-at="3900"><i></i><span>Veterans' care</span></div>
+        <div class="clin-stack">
+          <div class="panel-card b" data-at="900">
+            <h3>What we treat</h3>
+            <div class="cond-pills">
+              <span class="cpill pop" data-at="1000">Weight &amp; metabolic</span>
+              <span class="cpill pop" data-at="1150">Hormones &amp; fertility</span>
+              <span class="cpill pop" data-at="1300">Mental health</span>
+              <span class="cpill pop" data-at="1450">Sexual health</span>
+              <span class="cpill pop" data-at="1600">Hair loss</span>
+              <span class="cpill pop" data-at="1750">ADHD &amp; cognitive</span>
+              <span class="cpill pop" data-at="1900">Primary care</span>
+            </div>
+          </div>
+          <div class="panel-card b" data-at="2400">
+            <h3>Where our clinicians also practice</h3>
+            <div class="prac-list">
+            <div class="prac pop" data-at="2700"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/><path d="M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></svg><span>Academic &amp; teaching hospitals</span></div>
+            <div class="prac pop" data-at="2900"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7v4M14 9h-4"/><path d="M18 11h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h2"/><path d="M18 21V5a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16"/><path d="M14 21v-3a2 2 0 0 0-4 0v3"/></svg><span>Community hospitals</span></div>
+            <div class="prac pop" data-at="3100"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg><span>Inpatient</span></div>
+            <div class="prac pop" data-at="3300"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M8.62 13.8A2.25 2.25 0 1 1 12 10.836a2.25 2.25 0 1 1 3.38 2.966l-2.626 2.856a.998.998 0 0 1-1.507 0z"/></svg><span>Nursing homes</span></div>
+            <div class="prac pop" data-at="3500"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 2v2M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg><span>Concierge practice</span></div>
+            <div class="prac pop" data-at="3700"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg><span>Community health centers</span></div>
+            <div class="prac pop" data-at="3900"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528"/></svg><span>Veterans' care</span></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2274,31 +2339,45 @@ const CD=phone?[500,430]:C;
   $('webP4').innerHTML=s+`<div class="node" style="left:50%;top:${topPct(CD[1])}%"><div class="me-node pop" data-at="500">Your<br>team member</div></div>`+
     appsUse.map(([x,y,n,ic,b],i)=>tile(x,y,n,ic,b,1000+i*260)).join('');
 })();
-/* Meet Siya A1 — hub + 4 differentiated cards; phone = hub + 2×2 grid */
-icons.refer='<path d="M4 13h14M13 7l6 6-6 6" stroke="#0A246B" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
-icons.chat='<path d="M4 5h18v12H11l-5 4v-4H4z" fill="none" stroke="#7B2D8E" stroke-width="2" stroke-linejoin="round"/><path d="M9 11h8" stroke="#D81088" stroke-width="2" stroke-linecap="round"/>';
-icons.brain='<path d="M9 4a3.5 3.5 0 0 0-3.4 4.2A3.2 3.2 0 0 0 4 11.5 3.5 3.5 0 0 0 7 18h1.2M17 4a3.5 3.5 0 0 1 3.4 4.2A3.2 3.2 0 0 1 22 11.5 3.5 3.5 0 0 1 19 18h-1.2M12 4v16M12 8c-1.5.5-2.5 2-2.5 4S10.5 15.5 12 16M12 8c1.5.5 2.5 2 2.5 4S13.5 15.5 12 16" fill="none" stroke="#7B2D8E" stroke-width="1.8" stroke-linecap="round"/>';
+/* Meet Siya A1 — Lucide icons + hub/ring; phone keeps ring behind 2×2 */
+icons.heartPulse='<path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/>';
+icons.scale='<path d="M12 3v18"/><path d="m19 8 3 8a5 5 0 0 1-6 0zV7"/><path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1"/><path d="m5 8 3 8a5 5 0 0 1-6 0zV7"/><path d="M7 21h10"/>';
+icons.brain='<path d="M12 18V5"/><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"/><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"/><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"/><path d="M18 18a4 4 0 0 0 2-7.464"/><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"/><path d="M6 18a4 4 0 0 1-2-7.464"/><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"/>';
+icons.route='<circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/>';
+icons.chat='<path d="M4 5h18v12H11l-5 4v-4H4z"/><path d="M9 11h8"/>';
+icons.refer='<path d="M4 13h14"/><path d="m13 7 6 6-6 6"/>';
+const lucSvg=(ic)=>`<svg viewBox="0 0 24 24" aria-hidden="true">${icons[ic]}</svg>`;
 (()=>{
   document.querySelectorAll('.ns-ic[data-ic]').forEach(el=>{
     const k=el.getAttribute('data-ic');
-    if(icons[k]) el.innerHTML=`<svg viewBox="0 0 26 26" aria-hidden="true">${icons[k]}</svg>`;
+    if(icons[k]) el.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${icons[k]}</svg>`;
   });
 })();
 (()=>{
   const cards=[
-    ['Chronic conditions','Blood pressure, diabetes, thyroid: managed, not just refilled.','cross'],
-    ['Weight & metabolic','Including the stress and sleep behind it.','pill'],
+    ['Chronic conditions','Blood pressure, diabetes, thyroid: managed, not just refilled.','heartPulse'],
+    ['Weight & metabolic','Including the stress and sleep behind it.','scale'],
     ['ADHD & mood','Cognitive testing, tracked over time.','brain'],
-    ['Coordination','Labs, referrals and follow-ups, handled end to end.','refer']
+    ['Coordination','Labs, referrals and follow-ups, handled end to end.','route']
   ];
   const el=$('webT'); if(!el)return;
+  const cardHtml=(t,line,ic,at)=>`<div class="card-lite pop" data-at="${at}">${lucSvg(ic)}<b>${t}</b><small>${line}</small></div>`;
   if(phone){
-    el.classList.add('tall');
-    el.innerHTML=`<div class="meet-phone"><div class="siya-core pop" data-at="1100"><div>Siya<br>Health<small>One care team</small></div></div>
-      <div class="meet-grid">${cards.map(([t,line,ic],i)=>`<div class="card-lite pop" data-at="${1800+i*400}"><svg viewBox="0 0 26 26">${icons[ic]}</svg><b>${t}</b><small>${line}</small></div>`).join('')}</div></div>`;
+    el.classList.add('tall','meet-web');
+    const BOX=500, CX=250, CY=250;
+    const pos=[[115,115],[385,115],[115,385],[385,385]];
+    const rx=132, ry=132;
+    const ring=`M${CX-rx} ${CY} a${rx} ${ry} 0 1 0 ${rx*2} 0 a${rx} ${ry} 0 1 0 ${-rx*2} 0`;
+    let s=`<svg class="meet-ring" viewBox="0 0 ${BOX} ${BOX}" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><defs><filter id="glP"><feGaussianBlur stdDeviation="3"/></filter></defs>`;
+    s+=`<path class="draw" data-at="1400" pathLength="1" d="${ring}" stroke="rgba(216,16,136,.55)" stroke-width="2.25" fill="none"/>`;
+    pos.forEach(([x,y],i)=>{s+=`<path class="draw" data-at="${1600+i*100}" pathLength="1" d="M${CX} ${CY} L${x} ${y}" stroke="rgba(216,16,136,.65)" stroke-width="2" fill="none"/>`;});
+    if(!reduce)s+=`<g class="fade" data-at="3400"><circle r="7" fill="#FF5CB8" filter="url(#glP)"><animateMotion dur="5s" repeatCount="indefinite" path="${ring}"/></circle><circle r="3" fill="#fff"><animateMotion dur="5s" repeatCount="indefinite" path="${ring}"/></circle></g>`;
+    s+='</svg>';
+    el.innerHTML=`<div class="meet-phone"><div class="meet-stage">${s}<div class="siya-core pop" data-at="1100"><div>Siya<br>Health<small>One care team</small></div></div>
+      ${cards.map(([t,line,ic],i)=>cardHtml(t,line,ic,1800+i*400)).join('')}</div></div>`;
     return;
   }
-  el.classList.remove('tall');
+  el.classList.remove('tall','meet-web');
   const BOX=540, CX=500, CY=270;
   const pos=[[500,56],[840,270],[500,490],[160,270]];
   const rx=290, ry=185;
@@ -2312,27 +2391,60 @@ icons.brain='<path d="M9 4a3.5 3.5 0 0 0-3.4 4.2A3.2 3.2 0 0 0 4 11.5 3.5 3.5 0 
   el.innerHTML=s+`<div class="node" style="left:50%;top:${topPct(CY)}%"><div class="siya-core pop" data-at="900"><div>Siya<br>Health<small>One care team</small></div></div></div>`+
     cards.map(([t,line,ic],i)=>{
       const [x,y]=pos[i];
-      return `<div class="node" style="left:${x/10}%;top:${topPct(y)}%"><div class="card-lite pop" data-at="${2000+i*400}"><svg viewBox="0 0 26 26">${icons[ic]}</svg><b>${t}</b><small>${line}</small></div></div>`;
+      return `<div class="node" style="left:${x/10}%;top:${topPct(y)}%">${cardHtml(t,line,ic,2000+i*400)}</div>`;
     }).join('');
 })();
 
-/* A3 body map */
+/* A3 body map — outline adapted from Health Icons "body" (CC0, healthicons.org); leaders on anatomy; stress aura */
 (()=>{
   const el=$('bodyMap'); if(!el)return;
-  el.innerHTML=`<svg viewBox="0 0 300 400" aria-hidden="true">
-    <defs><linearGradient id="bodyG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#D81088"/><stop offset="55%" stop-color="#7B2D8E"/><stop offset="100%" stop-color="#001878"/></linearGradient></defs>
-    <path class="draw" data-at="800" pathLength="1" d="M150 48c22 0 36 16 36 38 0 18-10 30-22 36v18c28 10 46 36 46 70v36c0 22-12 36-30 42l-8 54c-2 12-10 20-22 20h-0c-12 0-20-8-22-20l-8-54c-18-6-30-20-30-42v-36c0-34 18-60 46-70v-18c-12-6-22-18-22-36 0-22 14-38 36-38z" fill="none" stroke="url(#bodyG)" stroke-width="3.2" stroke-linejoin="round"/>
-    <path class="draw" data-at="1400" pathLength="1" d="M150 122 L72 110" stroke="rgba(216,16,136,.45)" stroke-width="1.6" fill="none"/>
-    <path class="draw" data-at="1800" pathLength="1" d="M168 190 L250 170" stroke="rgba(216,16,136,.45)" stroke-width="1.6" fill="none"/>
-    <path class="draw" data-at="2200" pathLength="1" d="M150 250 L70 280" stroke="rgba(216,16,136,.45)" stroke-width="1.6" fill="none"/>
-    <path class="draw" data-at="2600" pathLength="1" d="M175 230 L255 250" stroke="rgba(216,16,136,.45)" stroke-width="1.6" fill="none"/>
+  /* Front-view outline with outstretched arms and two legs.
+     Pose/proportions adapted from Health Icons body.svg (CC0, healthicons.org). */
+  const head='M150 48m-25 0a25 25 0 1 0 50 0a25 25 0 1 0 -50 0';
+  const body=`M150 73 L150 98
+    M100 118
+    C118 106 134 100 150 100
+    C166 100 182 106 200 118
+    L255 145
+    C275 156 278 178 258 190
+    L210 160
+    L204 230
+    C204 248 192 262 176 268
+    L170 330
+    C168 352 172 368 182 372
+    C192 376 198 368 196 350
+    L188 275
+    L150 268
+    L112 275
+    L104 350
+    C102 368 108 376 118 372
+    C128 368 132 352 130 330
+    L124 268
+    C108 262 96 248 96 230
+    L90 160
+    L42 190
+    C22 178 25 156 45 145
+    Z`;
+  const headPt=[150,48], heartPt=[168,158], gutPt=[136,228], hormPt=[160,255];
+  el.innerHTML=`<div class="body-aura fade" data-at="3800"></div>
+  <svg viewBox="0 0 300 400" aria-hidden="true">
+    <defs><linearGradient id="bodyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#D81088"/><stop offset="55%" stop-color="#7B2D8E"/><stop offset="100%" stop-color="#001878"/></linearGradient></defs>
+    <path class="draw" data-at="700" pathLength="1" d="${head}" fill="none" stroke="url(#bodyG)" stroke-width="2.8"/>
+    <path class="draw" data-at="950" pathLength="1" d="${body}" fill="none" stroke="url(#bodyG)" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+    <path class="draw" data-at="1400" pathLength="1" d="M${headPt[0]} ${headPt[1]} L44 60" stroke="rgba(216,16,136,.55)" stroke-width="1.6" fill="none"/>
+    <path class="draw" data-at="1800" pathLength="1" d="M${heartPt[0]} ${heartPt[1]} L256 150" stroke="rgba(216,16,136,.55)" stroke-width="1.6" fill="none"/>
+    <path class="draw" data-at="2200" pathLength="1" d="M${gutPt[0]} ${gutPt[1]} L44 232" stroke="rgba(216,16,136,.55)" stroke-width="1.6" fill="none"/>
+    <path class="draw" data-at="2600" pathLength="1" d="M${hormPt[0]} ${hormPt[1]} L256 262" stroke="rgba(216,16,136,.55)" stroke-width="1.6" fill="none"/>
+    <circle cx="${headPt[0]}" cy="${headPt[1]}" r="2.8" fill="#D81088" class="fade" data-at="1400"/>
+    <circle cx="${heartPt[0]}" cy="${heartPt[1]}" r="2.8" fill="#D81088" class="fade" data-at="1800"/>
+    <circle cx="${gutPt[0]}" cy="${gutPt[1]}" r="2.8" fill="#D81088" class="fade" data-at="2200"/>
+    <circle cx="${hormPt[0]}" cy="${hormPt[1]}" r="2.8" fill="#D81088" class="fade" data-at="2600"/>
   </svg>
-  <div class="hlab pop" data-at="1500" style="left:2%;top:18%"><b>Head</b>Focus, mood, sleep</div>
-  <div class="hlab pop" data-at="1900" style="right:2%;top:34%"><b>Heart</b>Blood pressure</div>
-  <div class="hlab pop" data-at="2300" style="left:2%;top:62%"><b>Gut / metabolism</b>Weight, energy</div>
-  <div class="hlab pop" data-at="2700" style="right:2%;top:58%"><b>Hormones</b></div>
-  <div class="pulse fade" data-at="3400"></div>
-  <div class="hlab pop" data-at="3600" style="left:50%;top:8%;translate:-50% 0;text-align:center;max-width:160px"><b>Stress</b>Connecting all</div>`;
+  <div class="hlab pop" data-at="1500" style="left:0;top:8%"><b>Head</b>Focus, mood, sleep</div>
+  <div class="hlab pop" data-at="1900" style="right:0;top:28%"><b>Heart</b>Blood pressure</div>
+  <div class="hlab pop" data-at="2300" style="left:0;top:48%"><b>Gut / metabolism</b>Weight, energy</div>
+  <div class="hlab pop" data-at="2700" style="right:0;top:58%"><b>Hormones</b></div>
+  <p class="body-cap fade" data-at="4000">Stress connects them all.</p>`;
 })();
 
 /* connected-conditions web (problem 3 + fix 3) */

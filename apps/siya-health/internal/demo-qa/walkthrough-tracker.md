@@ -20,11 +20,15 @@ Status: `done` · `in progress` · `not started` · `parked` · `hold`.
 
 | # | Note | Slide id(s) | Status | Screenshot |
 |---|------|-------------|--------|------------|
-| A1 | Meet Siya differentiated 4 cards + hub/ring | `turn` | done | `wt-a1-meet-siya-*` |
-| A2 | Whole-person checklist first-visit chart | `care-checklist` | done | `wt-a2-checklist-*` |
-| A3 | Head-to-toe root-cause body map | `care-body` | done | `wt-a3-body-*` |
-| A4 | Clinicians pills + practise strip | `clinicians` | done | `wt-a4-clinicians-*` |
+| A1 | Hub/ring + Lucide icons (heart-pulse, scale, brain, route); phone keeps ring | `turn` | done | `wt-a1-meet-siya-*` |
+| A2 | Checklist: 28px ticks, white rows, hairline dividers, personalized pill | `care-checklist` | done | `wt-a2-checklist-*` |
+| A3 | Head-to-toe body map (see source below) + stress aura | `care-body` | done | `wt-a3-body-*` |
+| A4 | Two stacked white cards: What we treat + Where clinicians practice | `clinicians` | done | `wt-a4-clinicians-*` |
 | A5 | “Your team member” wording throughout | copy global | hold | — |
+
+### A3 body silhouette source
+
+Front-view outline with arms and legs. Pose and proportions adapted from **Health Icons** `body.svg` ([healthicons.org](https://healthicons.org/), **CC0** / Resolve to Save Lives). Single-weight brand-gradient stroke; leaders terminate on head, chest/heart, abdomen, lower abdomen. Stress = soft gradient aura + caption “Stress connects them all.”
 
 ## GROUP B–D
 
@@ -47,3 +51,4 @@ Status: `done` · `in progress` · `not started` · `parked` · `hold`.
 |------|-------|--------|-------|
 | 2026-10-03 | Step 0 tracker | `b7dc3a2b` | |
 | 2026-10-03 | Step 1 + Group A | `6d8cd737` | hash-stamped shots |
+| 2026-10-04 | Group A polish | pending | US English, Lucide icons, A3 Health Icons CC0, A4 stacked cards |
