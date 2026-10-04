@@ -1,5 +1,10 @@
 /**
- * Differential Recognition — reusable symptom-hub pattern (Governance v1.0).
+ * Differential Recognition — reusable block for Canonical Entity Pages (Governance v1.0).
+ *
+ * Scope note (2026-10-04): For /guides/* symptom-hub pillars (e.g. exhausted), see
+ * docs/GUIDE-PAGE-TEMPLATE.md — those pages intentionally include ranked,
+ * cited cause maps, validated instruments, and self-tracking. This module is
+ * for entity-page SIYA:DIFFERENTIAL-RECOGNITION blocks only.
  *
  * NOT diagnosis. NOT ranked. NOT percentages. NOT self-assessment.
  * The job of this block is to teach one idea: "this symptom has many possible
@@ -8,7 +13,7 @@
  * Reused across symptom Canonical Entity Pages (fatigue, brain fog, low
  * motivation, poor concentration). Each row links to ONE existing resource.
  *
- * Clinical rules:
+ * Clinical rules (entity-page block only):
  *   - No likelihood language ("most common", "usually", "70% of cases").
  *   - No instruction to test or treat.
  *   - Ordering is neutral (grouped, not ranked).
