@@ -57,4 +57,4 @@ Render: intro-style diamond particles (~1800 desk / ~900 phone) sampled from the
 | 2026-10-03 | Step 0 tracker | `b7dc3a2b` | |
 | 2026-10-03 | Step 1 + Group A | `6d8cd737` | hash-stamped shots |
 | 2026-10-04 | Group A polish | `278dfdd4` | US English, Lucide icons, A3 Health Icons CC0, A4 stacked cards |
-| 2026-10-04 | A3 particle rebuild + deep link | pending | CC0 silhouette; `slide=root-cause` |
+| 2026-10-04 | A3 particle rebuild + deep link |  | CC0 silhouette; `slide=root-cause` |
