@@ -20,9 +20,9 @@ const DEMO_BOOK_CALL_HREF = '/employers#inquiry-heading';
 
 const SLIDE_IDS = [
   'statement',
-  'p-familiar',
   'p-time',
   'p-away',
+  'p-familiar',
   'p-response',
   'p-whole',
   'p-coord',

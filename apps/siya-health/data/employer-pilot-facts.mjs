@@ -34,7 +34,7 @@ export const EMPLOYER_PILOT_FACTS = {
   doctorChip: 'A doctor within 2 hours, any time',
   /** Schedule slide copy (desk). */
   scheduleSubline:
-    'Quick check-ins between meetings, or longer visits evenings, weekends and holidays. Bookable 24/7.',
+    'At Siya, they can book a quick check-in on a busy workday, or a longer visit after hours, on weekends, or on holidays. Bookable 24/7.',
   weekLegendCare: 'Siya care · 24/7',
   /** Cost slide Siya column + footnote (no discount brand names). */
   costDoctorRow: 'A doctor within 2 hours, any time',
