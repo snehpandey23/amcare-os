@@ -195,7 +195,7 @@ export const SUPPORTING_CLUSTER_BATCH1 = [
             </ul>
             <h2>How to use the graph</h2>
             <p>Return to the <a href="/fatigue">fatigue</a> entity for the symptom frame. Review <a href="/preventive-care">preventive care</a> and marker guides when labs are part of the story. Then continue with <a href="/primary-care">primary care</a>—the visit is about your whole timeline, not a single PDF.</p>
-            <p>Related reading: <a href="/answers/why-normal-labs-dont-mean-healthy">why normal labs don’t mean healthy</a>.</p>
+            <p>Related reading: <a href="/guides/exhausted#ex-opener">why normal labs don’t mean healthy</a>.</p>
             <p><em>Educational only—not an interpretation of your personal results.</em></p>`,
     faqs: [
       [

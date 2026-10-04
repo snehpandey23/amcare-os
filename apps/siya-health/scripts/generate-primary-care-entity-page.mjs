@@ -282,7 +282,7 @@ function render() {
             <p class="lead">Screenings and markers make sense inside a relationship&mdash;not as a shopping cart.</p>
           </div>
           <p><a href="/preventive-care">Preventive care</a> owns the forward-looking frame. <a href="/labs#labs-preventive">Preventive labs</a> and marker guides such as <a href="/labs/cbc">CBC</a>, <a href="/labs/thyroid">TSH</a>, and <a href="/labs/vitamin-b12">B12</a> explain what tests broadly measure without interpreting your portal PDF.</p>
-          <p>Bring results back to primary care when you need meaning, not just numbers. See <a href="/labs/how-to-read-results">how to read lab results</a> and <a href="/answers/why-normal-labs-dont-mean-healthy">why normal labs don&rsquo;t mean healthy</a>.</p>
+          <p>Bring results back to primary care when you need meaning, not just numbers. See <a href="/labs/how-to-read-results">how to read lab results</a> and <a href="/guides/exhausted#ex-opener">why normal labs don&rsquo;t mean healthy</a>.</p>
         </div>
       </section>
 

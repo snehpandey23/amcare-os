@@ -207,7 +207,7 @@ export const PROVIDERS = [
       { quote: 'I cried after the visit—in a good way. Someone finally connected the dots.', cite: 'Behavioral health follow-up (verified)', needsVerification: true },
     ],
     relatedLinksHtml:
-      'Dig deeper: <a href="/guides/mental-health-and-adhd#mh-signs">overlooked symptoms</a>, <a href="/blog/is-online-adhd-diagnosis-legit">legitimate online diagnosis</a>, <a href="/blog/non-stimulant-adhd-medications-explained">non-stimulant options</a>.',
+      'Dig deeper: <a href="/guides/mental-health-and-adhd#mh-signs">overlooked symptoms</a>, <a href="/blog/is-online-adhd-diagnosis-legit">legitimate online diagnosis</a>, <a href="/guides/mental-health-and-adhd#mh-screen">non-stimulant options</a>.',
     inlineCtas: [
       { label: 'ADHD care overview', path: '/adhd-care', primary: true },
       { label: 'Read: “You’re not lazy”', path: '/blog/youre-not-lazy-signs-undiagnosed-adult-adhd', primary: false },
@@ -309,7 +309,7 @@ export const PROVIDERS = [
       { quote: 'Finally someone who reads charts before throwing meds at symptoms.', cite: 'Complex medication history patient (verified)', needsVerification: true },
     ],
     relatedLinksHtml:
-      'Further reading: <a href="/blog/how-adhd-medication-is-prescribed-online">how online prescribing is regulated</a>, <a href="/blog/is-adhd-medication-safe-long-term">long-term medication themes</a>, <a href="/blog/adhd-medication-side-effects-what-to-expect">side effects to know</a>.',
+      'Further reading: <a href="/blog/how-adhd-medication-is-prescribed-online">how online prescribing is regulated</a>, <a href="/guides/mental-health-and-adhd#mh-screen">long-term medication themes</a>, <a href="/guides/mental-health-and-adhd#mh-screen">side effects to know</a>.',
     inlineCtas: [
       { label: 'ADHD evaluation info', path: '/adhd-care', primary: true },
       { label: 'Medication options (education)', path: '/blog/adhd-medication-options-for-adults', primary: false },

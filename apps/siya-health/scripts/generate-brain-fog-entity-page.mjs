@@ -350,10 +350,10 @@ ${renderDifferentialSection('brain_fog')}
             <li><a href="/fatigue">Fatigue: when tired stops being normal</a></li>
             <li><a href="/primary-care">Primary care</a></li>
             <li><a href="/guides/mental-health-and-adhd#mh-diff">Brain fog vs ADHD</a></li>
-            <li><a href="/blog/brain-fog-and-sleep">Brain fog and sleep</a></li>
-            <li><a href="/blog/brain-fog-at-work">Brain fog at work</a></li>
-            <li><a href="/blog/brain-fog-after-covid">Brain fog after COVID</a></li>
-            <li><a href="/blog/perimenopause-brain-fog">Perimenopause brain fog</a></li>
+            <li><a href="/guides/sleep#sl-focus">Brain fog and sleep</a></li>
+            <li><a href="/guides/exhausted#ex-opener">Brain fog at work</a></li>
+            <li><a href="/guides/exhausted#ex-opener">Brain fog after COVID</a></li>
+            <li><a href="/guides/perimenopause#pe-mood">Perimenopause brain fog</a></li>
             <li><a href="/adult-adhd-california">Adult ADHD California</a></li>
           </ul>
         </div>

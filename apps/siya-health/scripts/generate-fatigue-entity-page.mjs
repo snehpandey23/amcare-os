@@ -315,7 +315,7 @@ ${renderDifferentialSection('fatigue')}
             <li><strong>Vitamin B12 and vitamin D</strong> &mdash; nutrient shortfalls that can present as fatigue and fog (<a href="/labs/vitamin-b12">vitamin B12</a>)</li>
             <li><strong>Metabolic panel and A1c</strong> &mdash; kidney, liver, electrolyte, and blood-sugar context (<a href="/labs/a1c-blood-sugar">A1c &amp; blood sugar</a>)</li>
           </ul>
-          <p>Results need interpretation more than they need collection. A value inside the reference range can still be wrong for you, and a mild flag can be meaningless&mdash;which is why <a href="/answers/why-normal-labs-dont-mean-healthy">normal labs do not automatically mean healthy</a>. If you want the fuller picture of fatigue-related testing, the <a href="/labs#labs-fatigue">fatigue and brain fog labs</a> guide goes deeper.</p>
+          <p>Results need interpretation more than they need collection. A value inside the reference range can still be wrong for you, and a mild flag can be meaningless&mdash;which is why <a href="/guides/exhausted#ex-opener">normal labs do not automatically mean healthy</a>. If you want the fuller picture of fatigue-related testing, the <a href="/labs#labs-fatigue">fatigue and brain fog labs</a> guide goes deeper.</p>
         </div>
       </section>
 
@@ -329,12 +329,12 @@ ${renderDifferentialSection('fatigue')}
           <ul class="footer-links">
             <li><a href="/brain-fog">Brain fog</a></li>
             <li><a href="/primary-care">Primary care</a></li>
-            <li><a href="/blog/fatigue-despite-normal-labs">Fatigue despite normal labs</a></li>
-            <li><a href="/blog/iron-deficiency-and-fatigue">Iron deficiency and fatigue</a></li>
+            <li><a href="/guides/exhausted#ex-iron">Fatigue despite normal labs</a></li>
+            <li><a href="/guides/exhausted#ex-iron">Iron deficiency and fatigue</a></li>
             <li><a href="/guides/exhausted#ex-thyroid">Thyroid and fatigue</a></li>
-            <li><a href="/blog/morning-fatigue">Morning fatigue</a></li>
-            <li><a href="/blog/fatigue-after-illness">Fatigue after illness</a></li>
-            <li><a href="/blog/chronic-fatigue-vs-everyday-tiredness">Chronic vs everyday tiredness</a></li>
+            <li><a href="/guides/exhausted#ex-sleep-link">Morning fatigue</a></li>
+            <li><a href="/guides/exhausted#ex-opener">Fatigue after illness</a></li>
+            <li><a href="/guides/exhausted#ex-opener">Chronic vs everyday tiredness</a></li>
           </ul>
         </div>
       </section>
