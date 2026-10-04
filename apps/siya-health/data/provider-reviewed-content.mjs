@@ -6,6 +6,9 @@ import { CLINICAL_REVIEW_APPROVED, isReviewSignOffComplete } from './content-rev
 const PAGE_TITLES = {
   'adhd-care': 'ADHD evaluation & care',
   'weight-loss-metabolic-health': 'Personalized care plans',
+  'guides/sleep': 'Sleep health guide',
+  'guides/testosterone': "Men's hormonal health: testosterone",
+  'guides/perimenopause': 'Perimenopause & mid-life hormonal health',
 };
 
 const BLOG_TITLES = {
