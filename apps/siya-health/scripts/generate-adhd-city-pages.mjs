@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 import { ADHD_CITY_LANDINGS } from '../data/adhd-city-landings.mjs';
 import { applySiteChrome } from './site-chrome.mjs';
 import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { exitIfContentGenerationPaused } from './content-generation-pause.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_ROOT = path.join(__dirname, '..');
@@ -294,4 +295,5 @@ function main() {
   }
 }
 
+exitIfContentGenerationPaused('generate-adhd-city-pages.mjs');
 main();

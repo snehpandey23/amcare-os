@@ -10,6 +10,7 @@ import { applyPricingTokens } from '../data/pricing-display.mjs';
 import { ANSWER_SEEDS, TOPIC_HUBS } from '../data/answer-seeds.mjs';
 import { RETIRED_GUIDE_SLUGS } from '../data/content-consolidation-phase1.mjs';
 import { GUIDE_CANNIBALIZATION_OVERRIDES } from '../data/cannibalization-phase1.mjs';
+import { exitIfContentGenerationPaused } from './content-generation-pause.mjs';
 import {
   ADHD_TOPIC_CLUSTERS,
   ASK_SIYA_CHAT_PATH,
@@ -723,4 +724,5 @@ function main() {
   console.log('Wrote answer pages; skipped hand-maintained homepage2 pages:', skipped);
 }
 
+exitIfContentGenerationPaused('generate-answer-pages.mjs');
 main();

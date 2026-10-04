@@ -6,6 +6,7 @@ import json
 import os
 
 from read_spruce_chat_url import spruce_chat_url
+from content_generation_pause import exit_if_content_generation_paused
 
 BLOG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "blog")
 SPRUCE_CHAT_URL = spruce_chat_url()
@@ -726,4 +727,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    exit_if_content_generation_paused("generate_medication_blog_posts.py")
     main()

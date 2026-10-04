@@ -6,6 +6,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { H2_COMPACT_FOOTER, applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { exitIfContentGenerationPaused } from './content-generation-pause.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BLOG_DIR = path.join(__dirname, '..', 'blog');
@@ -475,4 +476,5 @@ function main() {
   console.log(`generate-workplace-blog-posts: ${POSTS.length} posts`);
 }
 
+exitIfContentGenerationPaused('generate-workplace-blog-posts.mjs');
 main();
