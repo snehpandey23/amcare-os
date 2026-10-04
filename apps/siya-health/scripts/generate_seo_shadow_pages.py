@@ -14,6 +14,7 @@ import os
 import textwrap
 
 from read_spruce_chat_url import spruce_chat_url
+from content_generation_pause import exit_if_content_generation_paused
 
 SPRUCE_CHAT_URL = spruce_chat_url()
 
@@ -528,4 +529,5 @@ def main():
 
 
 if __name__ == "__main__":
+    exit_if_content_generation_paused("generate_seo_shadow_pages.py")
     main()

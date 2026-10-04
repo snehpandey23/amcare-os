@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 import re
+from content_generation_pause import exit_if_content_generation_paused
 
 BLOG = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "blog")
 
@@ -246,4 +247,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    exit_if_content_generation_paused("patch_existing_blog_seo.py")
     main()

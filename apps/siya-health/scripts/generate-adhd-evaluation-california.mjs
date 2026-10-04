@@ -17,6 +17,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { applyHomepage2Surface } from '../partials/homepage2-bg.mjs';
+import { exitIfContentGenerationPaused } from './content-generation-pause.mjs';
+
+
+exitIfContentGenerationPaused('generate-adhd-evaluation-california.mjs');
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');

@@ -1,0 +1,7 @@
+{
+  "paused": true,
+  "pausedAt": "2026-10-04",
+  "reason": "Founder pause — stop automatic publishing of guide/blog/answer (and related educational) HTML until explicitly resumed.",
+  "resume": "Set paused=false in this file, or temporarily export SIYA_ALLOW_CONTENT_GENERATION=1 for a single intentional run.",
+  "note": "Scripts and seed data are retained. Generators exit without writing HTML while paused."
+}

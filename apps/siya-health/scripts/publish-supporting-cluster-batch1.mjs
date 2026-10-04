@@ -9,6 +9,10 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { SUPPORTING_CLUSTER_BATCH1 } from './supporting-cluster-batch1-data.mjs';
+import { exitIfContentGenerationPaused } from './content-generation-pause.mjs';
+
+
+exitIfContentGenerationPaused('publish-supporting-cluster-batch1.mjs');
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BLOG_DIR = path.join(__dirname, '..', 'blog');

@@ -10,6 +10,7 @@ import os
 from typing import Literal
 
 from read_spruce_chat_url import spruce_chat_url
+from content_generation_pause import exit_if_content_generation_paused
 
 BLOG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "blog")
 
@@ -447,4 +448,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    exit_if_content_generation_paused("generate_weight_telehealth_blogs.py")
     main()

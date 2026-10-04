@@ -5,6 +5,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { exitIfContentGenerationPaused } from './content-generation-pause.mjs';
 import {
   LABS_TOPIC_PAGES,
   LABS_STOREFRONT_URL,
@@ -939,4 +940,5 @@ function main() {
   );
 }
 
+exitIfContentGenerationPaused('generate-labs-pages.mjs');
 main();
