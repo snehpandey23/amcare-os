@@ -127,6 +127,9 @@ body = body.replaceAll('__FACTS_SCHEDULE_SUB__', FACTS.scheduleSubline);
 body = body.replaceAll('__FACTS_WEEK_LEGEND__', FACTS.weekLegendCare);
 body = body.replaceAll('__FACTS_COST_DOCTOR__', FACTS.costDoctorRow);
 body = body.replaceAll('__FACTS_COST_FOOT__', FACTS.costFootnote);
+body = body.replaceAll('__FACTS_MD_TITLE_CARD__', FACTS.medicalDirectorTitleCard);
+body = body.replaceAll('__FACTS_MD_TITLE_SHORT__', FACTS.medicalDirectorTitleShort);
+body = body.replaceAll('__FACTS_MD_BYLINE__', FACTS.medicalDirectorByline);
 const klarity = countParts(FACTS.klarityScore.split('/')[0]);
 body = body.replaceAll(
   '<!--KLARITY_STAT-->',

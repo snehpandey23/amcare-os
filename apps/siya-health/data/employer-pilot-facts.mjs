@@ -43,6 +43,14 @@ export const EMPLOYER_PILOT_FACTS = {
   /** Where the employee must be located for the visit. */
   visitLocationLine:
     'For employees located in California, Texas, Pennsylvania or Florida at the time of their visit.',
+  /**
+   * Dr. Sneh Pandey titles (Oct 4, 2026 — founder-confirmed; match care-team /providers page).
+   * Cards/booking: full credentials line. Short contexts: surname + Medical Director.
+   */
+  medicalDirectorName: 'Dr. Sneh Pandey',
+  medicalDirectorTitleCard: 'Medical Director · Internal Medicine Physician',
+  medicalDirectorTitleShort: 'Dr. Pandey, Medical Director',
+  medicalDirectorByline: 'Dr. Sneh Pandey · Medical Director, Siya Health',
 };
 
 export function proofScaleLine(facts = EMPLOYER_PILOT_FACTS) {

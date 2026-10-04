@@ -906,10 +906,11 @@ html.desk-stage #tour #p-coord .web{max-height:min(480px,70%)}
 .tap-hl{position:absolute;left:50%;width:72%;height:36px;border-radius:999px;border:2px solid #D81088;box-shadow:0 0 0 6px rgba(216,16,136,.22);transform:translate(-50%,0);pointer-events:none;opacity:0;transition:opacity .25s}
 .tap-hl.on{opacity:1;animation:tapPulse 1.1s ease-out infinite}
 @keyframes tapPulse{0%{box-shadow:0 0 0 0 rgba(216,16,136,.45)}100%{box-shadow:0 0 0 12px rgba(216,16,136,0)}}
-.tap-hl.book{top:58%}
+.tap-hl.book{top:82%} /* homepage-top crop: Book Free Meet & Greet near bottom */
 .tap-hl.doc{top:42%}
 .wm-book{padding:12px;display:grid;gap:10px;height:100%;align-content:start;background:#fff}
 .wm-book h4{margin:0;font:700 13px/1.2 var(--font-display);color:var(--ink)}
+.wm-md-title{margin:0;font:600 11px/1.3 var(--font-body);color:var(--ink-soft)}
 .wm-dates{display:flex;gap:6px;overflow:auto}
 .wm-dates span{flex:none;min-width:44px;padding:8px 6px;border-radius:10px;background:#F4F1EA;font:700 11px/1.2 var(--font-display);text-align:center}
 .wm-dates span.on{background:linear-gradient(135deg,#D81088,#7B2D8E);color:#fff}
@@ -1659,7 +1660,7 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
               <img src="/assets/images/dr-sneh-pandey.png" width="64" height="64" alt="Dr. Sneh Pandey" loading="lazy">
               <div>
                 <b>Dr. Sneh Pandey</b>
-                <small>Founder</small>
+                <small>__FACTS_MD_TITLE_CARD__</small>
                 <a href="/providers/dr-sneh-pandey">View provider page</a>
               </div>
             </div>
@@ -1695,7 +1696,7 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
             <div class="meta r b" data-at="900">Alex · 9:02 AM</div>
             <div class="msg-line them b" data-at="1600"><span class="avatar care" aria-hidden="true">C</span><div class="bub them">Thanks, I've shared this with Dr. Pandey.</div></div>
             <div class="meta l b" data-at="1800">Care team · 9:24 AM</div>
-            <div class="join-chip b" data-at="2800"><span class="avatar doc" aria-hidden="true">DP</span> Dr. Pandey joined</div>
+            <div class="join-chip b" data-at="2800"><span class="avatar doc" aria-hidden="true">DP</span> Dr. Pandey, Medical Director joined</div>
             <div class="msg-line them b" data-at="3000"><span class="avatar doc" aria-hidden="true">DP</span><div class="bub them">Let's adjust your plan. I've sent a note with next steps.</div></div>
             <div class="meta l b" data-at="3200">Dr. Pandey · 10:40 AM</div>
           </div>
@@ -1724,7 +1725,7 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
             </div>
             <div class="msg-line them b" data-at="2000"><span class="avatar care" aria-hidden="true">C</span><div class="bub them">Got it, a doctor is reviewing now.</div></div>
             <div class="meta l b" data-at="2200">Care team · 9:20 PM</div>
-            <div class="join-chip b" data-at="3000"><span class="avatar doc" aria-hidden="true">DP</span> Dr. Pandey joined</div>
+            <div class="join-chip b" data-at="3000"><span class="avatar doc" aria-hidden="true">DP</span> Dr. Pandey, Medical Director joined</div>
             <div class="msg-line them b" data-at="3200"><span class="avatar doc" aria-hidden="true">DP</span><div class="bub them">This looks like conjunctivitis. I've sent a care note with what to do and what to watch for.</div></div>
             <div class="meta l b" data-at="3400">Dr. Pandey · 10:05 PM</div>
             <div class="rx-chip b" data-at="3600">Care note sent</div>
@@ -2055,7 +2056,7 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
         <button type="button" class="founder-play" id="founderPlay" aria-label="Play">▶</button>
         <span class="founder-soon" id="founderSoon" hidden>Video coming soon</span>
       </div>
-      <p class="sub b" data-at="1100">Dr. Sneh Pandey · Founder, Siya Health</p>
+      <p class="sub b" data-at="1100">__FACTS_MD_BYLINE__</p>
     </div>
   </article>
 
@@ -2273,12 +2274,13 @@ function build(){
   });
   tag.style.top=(textBox.cy+textBox.fs*0.74)+'px';
 }
-/* sound: swell → bell bloom → long fade → soft bed music loop (approved louder + 8-bar lifts) */
-/* MUSIC_LEVEL bus into master (.9). Was 0.55 → 1.0. Intro swell/bell unchanged. */
-const MUSIC_LEVEL=1;
-const MUSIC_PAD_PEAK=.055;
-const MUSIC_ARP_PEAK=.032;
-const MUSIC_PULSE_PEAK=.04;
+/* sound: swell → bell bloom → long fade → soft bed music loop
+   Founder pick 2026-10-04: music-preview B (brighter arp, 112 BPM, +30% level). */
+const MUSIC_LEVEL=1.3;
+const MUSIC_PAD_PEAK=.068;
+const MUSIC_ARP_PEAK=.058;
+const MUSIC_PULSE_PEAK=.048;
+const MUSIC_BRIGHT=1.15;
 let pausedTourMusic=false;
 function makeAudio(){
   const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;
@@ -2328,10 +2330,10 @@ function startMusic(A,opts){
   const holdUntil=opts&&opts.holdUntil!=null?+opts.holdUntil:0; /* seconds of silence before fade-in (phone gesture unlock) */
   const {ac,master,verb}=A;
   const musicGain=ac.createGain();musicGain.gain.value=.0001;
-  const filter=ac.createBiquadFilter();filter.type='lowpass';filter.frequency.value=1400;filter.Q.value=.5;
+  const filter=ac.createBiquadFilter();filter.type='lowpass';filter.frequency.value=2200;filter.Q.value=.5;
   musicGain.connect(filter);filter.connect(master);
-  const wet=ac.createGain();wet.gain.value=.35;filter.connect(wet);wet.connect(verb);
-  const BPM=96,beat=60/BPM,step=beat/2,chordLen=beat*8;
+  const wet=ac.createGain();wet.gain.value=.32;filter.connect(wet);wet.connect(verb);
+  const BPM=112,beat=60/BPM,step=beat/2,chordLen=beat*8;
   const barEighths=8,cycleBars=8,liftBars=2;
   const cycleEighths=cycleBars*barEighths,liftStart=(cycleBars-liftBars)*barEighths;
   const progression=[[130.81,196.00,261.63,329.63],[98.00,146.83,196.00,246.94],[110.00,164.81,220.00,261.63],[87.31,130.81,174.61,220.00]];
@@ -2345,21 +2347,12 @@ function startMusic(A,opts){
   };
   const softAccent=(t)=>{
     [523.25,659.25,783.99].forEach((hz,i)=>{
-      const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=hz;
-      const peak=.045*(1-i*.18),start=t+i*.04;
+      const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=hz*1.01;
+      const peak=.05*(1-i*.18)*MUSIC_BRIGHT,start=t+i*.04;
       g.gain.setValueAtTime(.0001,start);g.gain.exponentialRampToValueAtTime(peak,start+.014);
-      g.gain.exponentialRampToValueAtTime(.0001,start+1.6-i*.25);
+      g.gain.exponentialRampToValueAtTime(.0001,start+1.5-i*.25);
       o.connect(g);g.connect(musicGain);g.connect(verb);o.start(start);o.stop(start+2);
     });
-  };
-  const shimmer=(t,amount)=>{
-    if(amount<.05)return;
-    const o=ac.createOscillator(),g=ac.createGain();o.type='sine';
-    o.frequency.setValueAtTime(660,t);o.frequency.exponentialRampToValueAtTime(1320,t+step*.9);
-    const peak=.018*amount;
-    g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(peak,t+.03);
-    g.gain.exponentialRampToValueAtTime(.0001,t+step*.95);
-    o.connect(g);g.connect(musicGain);o.start(t);o.stop(t+step);
   };
   const schedule=()=>{
     if(!A.music||A.ac.state!=='running')return;
@@ -2380,13 +2373,12 @@ function startMusic(A,opts){
       const dyn=lifting?1+.45*amt:1;
       if(eighth%16===0){
         ch.forEach((hz,i)=>{
-          voice(t,hz,'sine',(i===0?MUSIC_PAD_PEAK:MUSIC_PAD_PEAK*.65)*dyn,.35,chordLen*.98);
-          if(lifting)voice(t,hz*2,'sine',MUSIC_PAD_PEAK*.28*amt,.4,chordLen*.9);
+          voice(t,hz,i%2?'square':'sawtooth',(i===0?MUSIC_PAD_PEAK:MUSIC_PAD_PEAK*.6)*dyn,.32,chordLen*.98);
+          if(lifting)voice(t,hz*2,'sine',MUSIC_PAD_PEAK*.3*amt*MUSIC_BRIGHT,.35,chordLen*.9);
         });
       }
-      voice(t,ch[arp[eighth%8]]*2,'triangle',MUSIC_ARP_PEAK*(lifting?1+.35*amt:1),.015,step*.8);
-      if(eighth%8===0||eighth%8===4)voice(t,55,'sine',MUSIC_PULSE_PEAK*(lifting?1+.25*amt:1),.025,beat*.65);
-      if(lifting)shimmer(t,amt);
+      voice(t,ch[arp[eighth%8]]*2.02,'sawtooth',MUSIC_ARP_PEAK*(lifting?1+.4*amt:1)*MUSIC_BRIGHT,.012,step*.7);
+      if(eighth%8===0||eighth%8===4)voice(t,55,'sine',MUSIC_PULSE_PEAK*(lifting?1+.25*amt:1),.02,beat*.65);
       if(pos===cycleEighths-1)softAccent(t+step*.15);
       eighth++; if(eighth%16===0)chordIdx=(chordIdx+1)%4;
       nextT+=step;
@@ -2938,11 +2930,11 @@ function walkScreen(i){
   if(i===2)return `<div class="msg-line me"><span class="avatar alex">A</span><div class="bub me">${intent}</div></div>`;
   if(i===3)return `<div class="msg-line them"><span class="avatar care">C</span><div class="bub them">On it — we'll take care of this for you.</div></div><div class="meta l">Care team</div>`;
   if(i===4)return `<div class="vm-row"><b>siya.health</b><small>Book appointment</small><div class="start" style="margin-top:8px">Book</div></div>`;
-  if(i===5)return `<div class="prov-card" style="margin:8px"><img src="/assets/images/dr-sneh-pandey.png" width="48" height="48" alt=""><div><b>Dr. Sneh Pandey</b><small>Founder</small></div></div><div class="slots" style="padding:8px"><span class="slot-chip on">Sat 10:00</span></div>`;
+  if(i===5)return `<div class="prov-card" style="margin:8px"><img src="/assets/images/dr-sneh-pandey.png" width="48" height="48" alt=""><div><b>Dr. Sneh Pandey</b><small>Medical Director · Internal Medicine Physician</small></div></div><div class="slots" style="padding:8px"><span class="slot-chip on">Sat 10:00</span></div>`;
   return `<div class="vm-row"><b>Visit confirmed</b><small>Saturday 10:00</small><div class="start" style="margin-top:8px">Add to calendar</div></div>`;
 }
-/* Real production screenshots (390px). Refresh when homepage or /providers changes. */
-const SITE_HOME='/employers/demo/media/site/homepage-2026-10-04.webp';
+/* Real production screenshots (390px). homepage-top = hero → Book Free Meet & Greet (no prices). */
+const SITE_HOME='/employers/demo/media/site/homepage-top-2026-10-04.webp';
 const SITE_TEAM='/employers/demo/media/site/care-team-2026-10-04.webp';
 function paintWebMock(i){
   const body=$('webMockBody'); const pathEl=$('wmPath'); if(!body)return;
@@ -2953,10 +2945,10 @@ function paintWebMock(i){
   }
   if(i===4){
     if(pathEl)pathEl.textContent='Home';
+    /* Top crop already ends on Book — no scroll; highlight only. */
     body.innerHTML=`<div class="site-shot-wrap"><img class="site-shot" src="${SITE_HOME}" alt="siya.health homepage" width="390" decoding="async"><i class="tap-hl book" aria-hidden="true"></i></div>`;
-    const img=body.querySelector('.site-shot'); const hl=body.querySelector('.tap-hl');
-    requestAnimationFrame(()=>{if(img)img.classList.add('scroll-mid');});
-    setTimeout(()=>{if(hl)hl.classList.add('on');},2000);
+    const hl=body.querySelector('.tap-hl');
+    setTimeout(()=>{if(hl)hl.classList.add('on');},1800);
     return;
   }
   if(i===5){
@@ -2970,7 +2962,8 @@ function paintWebMock(i){
   /* Booking: Siya-styled recreation — not a vendor screenshot */
   if(pathEl)pathEl.textContent='Book';
   body.innerHTML=`<div class="wm-book">
-    <h4>Dr. Sneh Pandey, MD</h4>
+    <h4>Dr. Sneh Pandey</h4>
+    <p class="wm-md-title">Medical Director · Internal Medicine Physician</p>
     <div class="wm-dates" aria-label="Dates"><span>Fri<br>10</span><span class="on">Sat<br>11</span><span>Sun<br>12</span><span>Mon<br>13</span></div>
     <div class="wm-slots" aria-label="Times"><button type="button">9:00</button><button type="button" class="on">10:00</button><button type="button">11:30</button><button type="button">2:00</button></div>
     <button type="button" class="wm-confirm">Confirm</button>

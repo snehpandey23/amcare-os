@@ -87,6 +87,9 @@ function pass(gate, note) {
     weekLegendCare: pick(/weekLegendCare:\s*'([^']+)'/),
     costDoctorRow: pick(/costDoctorRow:\s*'([^']+)'/),
     costFootnote: pick(/costFootnote:\s*'([^']+)'/),
+    medicalDirectorTitleCard: pick(/medicalDirectorTitleCard:\s*'([^']+)'/),
+    medicalDirectorTitleShort: pick(/medicalDirectorTitleShort:\s*'([^']+)'/),
+    medicalDirectorByline: pick(/medicalDirectorByline:\s*'([^']+)'/),
   };
   const list = [];
   const checks = [
@@ -105,6 +108,10 @@ function pass(gate, note) {
     ['cost doctor row', html.includes(facts.costDoctorRow || 'A doctor within 2 hours, any time')],
     ['cost footnote pharmacy', html.includes('own pharmacy') && html.includes('Lab prices are shown upfront')],
     ['no guarantee wording', !/\bguarante+d?\b/i.test(html)],
+    ['MD title card', facts.medicalDirectorTitleCard === 'Medical Director · Internal Medicine Physician' && html.includes('Medical Director · Internal Medicine Physician')],
+    ['MD title short', facts.medicalDirectorTitleShort === 'Dr. Pandey, Medical Director' && html.includes('Dr. Pandey, Medical Director')],
+    ['MD byline', facts.medicalDirectorByline === 'Dr. Sneh Pandey · Medical Director, Siya Health' && html.includes('Medical Director, Siya Health')],
+    ['no Founder title on cards', !/<small>Founder<\/small>/.test(html) && !/· Founder, Siya Health/.test(html)],
   ];
   for (const [name, ok] of checks) {
     list.push({ name, ok: !!ok });

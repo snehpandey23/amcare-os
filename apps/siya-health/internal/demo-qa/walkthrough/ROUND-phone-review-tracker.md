@@ -29,20 +29,24 @@ Commit `e1424fd0`. Gate report: `transition-check-AFTER.md` — **PASS** (0 over
 | 20 | Cost → Why Siya cards | done |
 | 21 | Privacy one slide | done |
 | 22 | Welcome halo premium | done |
-| 23 | Music preview A/B — **awaiting founder pick** | preview ready |
+| 23 | Music preview A/B — **founder picked B** | done (shipped into demo bed) |
+
+## Title + site pathway (2026-10-04)
+- Dr. Pandey title: **Medical Director** confirmed. Cards: `Medical Director · Internal Medicine Physician`; short: `Dr. Pandey, Medical Director`; byline: `Dr. Sneh Pandey · Medical Director, Siya Health`. Facts + facts-audit wired.
+- Journey website pathway: `homepage-top-2026-10-04.webp` (hero → Book Free Meet & Greet; no prices / no Zocdoc). Book highlight only (no mid-scroll). Care-team WebP unchanged.
 
 ## 17B screenshot refresh note
 Production captures live under `employers/demo/media/site/`:
-- `homepage-YYYY-MM-DD.webp` from `https://siya.health/` @ 390px
+- `homepage-top-YYYY-MM-DD.webp` — hero → Book Free Meet & Greet (pathway; use `capture-homepage-top.mjs`)
+- `homepage-YYYY-MM-DD.webp` / `homepage-full-…` — full-page QA refs
 - `care-team-YYYY-MM-DD.webp` from `https://siya.health/providers` @ 390px
 
-**Refresh these WebPs whenever the homepage or care team (`/providers`) page changes.** Re-run `node internal/demo-qa/capture-site-shots.mjs` and update `SITE_HOME` / `SITE_TEAM` paths in the prototype. No live iframes; no GTM from demo.
+**Refresh these WebPs whenever the homepage or care team (`/providers`) page changes.** Re-run capture scripts and update `SITE_HOME` / `SITE_TEAM` paths in the prototype. No live iframes; no GTM from demo.
 
 ## 23 Music
-Preview only: `apps/siya-health/internal/music-preview.html`
-- **A** ~108 BPM synth-keyboard lead
-- **B** ~112 BPM brighter arpeggio
-Both +30% volume vs current; same chord progression + lifts. **Do not ship into demo until founder picks A or B.**
+Preview: `apps/siya-health/internal/music-preview.html`
+- **A** ~108 BPM synth-keyboard lead (reference only)
+- **B** ~112 BPM brighter arpeggio — **SHIPPED** into demo (`MUSIC_LEVEL=1.3`, BPM 112, sawtooth arp)
 
 ## Heading exceptions (item 12)
 - `statement` / `question`: centered big-type, no left column (intentional).
