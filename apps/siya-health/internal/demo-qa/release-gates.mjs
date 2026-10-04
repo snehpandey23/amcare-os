@@ -51,10 +51,12 @@ function pass(gate, note) {
     [/save money/i, 'save money'],
     [/\bfree\b(?![\w-])/i, 'free'],
     [/surprise bills?/i, 'surprise bills'],
+    [/\bguarante+d?\b/i, 'guarantee'],
     [/\boptimise\b|\borganise\b|\bcolour\b|\bpractise\b|\bcentre\b/i, 'British spelling'],
     [/shutterstock|getty images|istock/i, 'stock watermark'],
+    [/GoodRx|SingleCare|RxSaver/i, 'discount brand'],
   ];
-  // Allow "free slot" in calendar? User banned "free" - check context. Calendar has "No free slot" - that's ok-ish. Ban "free" only as product claim.
+  // Allow "free slot" / "15 min free" in calendar UI; ban free-care product claims.
   for (const [re, label] of banned) {
     if (label === 'free') {
       if (/\b(free care|it's free|for free|completely free)\b/i.test(html)) fail('content-grep', label);
@@ -68,15 +70,23 @@ function pass(gate, note) {
 
 /* Gate 3: facts audit */
 {
+  const pick = (re) => (FACTS_SRC.match(re) || [])[1];
   const facts = {
-    patientsTreated: (FACTS_SRC.match(/patientsTreated:\s*'([^']+)'/) || [])[1],
-    googleScore: (FACTS_SRC.match(/googleScore:\s*'([^']+)'/) || [])[1],
-    googleReviewCount: (FACTS_SRC.match(/googleReviewCount:\s*(\d+)/) || [])[1],
-    klarityScore: (FACTS_SRC.match(/klarityScore:\s*'([^']+)'/) || [])[1],
-    klarityReviewCount: (FACTS_SRC.match(/klarityReviewCount:\s*(\d+)/) || [])[1],
-    practiceStatesShort: (FACTS_SRC.match(/practiceStatesShort:\s*'([^']+)'/) || [])[1],
-    responseChip: (FACTS_SRC.match(/responseChip:\s*'([^']+)'/) || [])[1],
-    doctorChip: (FACTS_SRC.match(/doctorChip:\s*'([^']+)'/) || [])[1],
+    patientsTreated: pick(/patientsTreated:\s*'([^']+)'/),
+    googleScore: pick(/googleScore:\s*'([^']+)'/),
+    googleReviewCount: pick(/googleReviewCount:\s*(\d+)/),
+    klarityScore: pick(/klarityScore:\s*'([^']+)'/),
+    klarityReviewCount: pick(/klarityReviewCount:\s*(\d+)/),
+    practiceStatesShort: pick(/practiceStatesShort:\s*'([^']+)'/),
+    responseChip: pick(/responseChip:\s*'([^']+)'/),
+    doctorChip: pick(/doctorChip:\s*'([^']+)'/),
+    booking24_7: pick(/booking24_7:\s*'([^']+)'/),
+    careTeam24_7: pick(/careTeam24_7:\s*'([^']+)'/),
+    responseWithin: pick(/responseWithin:\s*'([^']+)'/),
+    scheduleSubline: pick(/scheduleSubline:\s*'([^']+)'/),
+    weekLegendCare: pick(/weekLegendCare:\s*'([^']+)'/),
+    costDoctorRow: pick(/costDoctorRow:\s*'([^']+)'/),
+    costFootnote: pick(/costFootnote:\s*'([^']+)'/),
   };
   const list = [];
   const checks = [
@@ -86,8 +96,15 @@ function pass(gate, note) {
     ['Marketplace 4.66', facts.klarityScore?.startsWith('4.66') && html.includes('4.66')],
     ['589 reviews', facts.klarityReviewCount === '589' && html.includes('589')],
     ['CA, TX, PA, FL', facts.practiceStatesShort === 'CA, TX, PA, FL' && html.includes('CA, TX, PA, FL')],
-    ['response chip', html.includes(facts.responseChip || 'Replies within 30 min')],
-    ['doctor chip', html.includes(facts.doctorChip || 'A doctor within 2 hrs')],
+    ['booking 24/7', /book visits 24\/7/i.test(facts.booking24_7 || '')],
+    ['care team 24/7', /24\/7/.test(facts.careTeam24_7 || '')],
+    ['response 30 min', /30 minutes/.test(facts.responseWithin || '') && html.includes(facts.responseChip || 'Replies within 30 min')],
+    ['doctor 2 hours', /2 hours/.test(facts.doctorChip || '') && html.includes(facts.doctorChip || 'A doctor within 2 hours')],
+    ['schedule subline', html.includes('Bookable 24/7')],
+    ['week legend 24/7', html.includes(facts.weekLegendCare || 'Siya care · 24/7')],
+    ['cost doctor row', html.includes(facts.costDoctorRow || 'A doctor within 2 hours, any time')],
+    ['cost footnote pharmacy', html.includes('own pharmacy') && html.includes('Lab prices are shown upfront')],
+    ['no guarantee wording', !/\bguarante+d?\b/i.test(html)],
   ];
   for (const [name, ok] of checks) {
     list.push({ name, ok: !!ok });

@@ -2,6 +2,11 @@
  * Shared employer facts for /employers/california-pilot and /employers/demo.
  * Do not duplicate these strings in page templates — import this module.
  * Pricing stays on the pilot generator only; the demo must not render rates.
+ *
+ * Care hours / response (Oct 4, 2026 — founder-confirmed):
+ * - Employees can book visits 24/7. Care team: 24/7.
+ * - Care team replies within 30 minutes; a doctor within 2 hours, any time.
+ * Never use “guaranteed” / “guarantee” in demo copy.
  */
 export const EMPLOYER_PILOT_FACTS = {
   asOf: 'September 2026',
@@ -19,16 +24,22 @@ export const EMPLOYER_PILOT_FACTS = {
   panelMax: 600,
   /** Practice service area — not each founder's personal license list. */
   practiceStatesShort: 'CA, TX, PA, FL',
-  /**
-   * Care hours and response standards (Oct 3, 2026 — founder-confirmed 24/7 operations,
-   * staffed via new provider network contracts). Demo copy and chips must read these;
-   * do not hardcode hours or response times in templates.
-   */
+  /** Booking + care-team hours (founder-confirmed). */
+  booking24_7: 'Employees can book visits 24/7.',
+  careTeam24_7: 'Care team available 24/7.',
   scheduledCare: "Visits available 24/7, including weekends and holidays (patient's local time).",
   responseWithin: 'Our care team replies within 30 minutes, 24/7.',
   responseChip: 'Replies within 30 min, 24/7',
   doctorAvailability: 'A doctor is available within 2 hours, any time, often sooner.',
-  doctorChip: 'A doctor within 2 hrs, any time',
+  doctorChip: 'A doctor within 2 hours, any time',
+  /** Schedule slide copy (desk). */
+  scheduleSubline:
+    'Quick check-ins between meetings, or longer visits evenings, weekends and holidays. Bookable 24/7.',
+  weekLegendCare: 'Siya care · 24/7',
+  /** Cost slide Siya column + footnote (no discount brand names). */
+  costDoctorRow: 'A doctor within 2 hours, any time',
+  costFootnote:
+    'Medications are filled at their own pharmacy; we can help find discount coupons. Labs and outside specialists are billed separately. Lab prices are shown upfront when ordered through our lab portal.',
   /** Where the employee must be located for the visit. */
   visitLocationLine:
     'For employees located in California, Texas, Pennsylvania or Florida at the time of their visit.',

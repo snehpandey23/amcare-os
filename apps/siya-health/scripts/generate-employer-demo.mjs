@@ -125,6 +125,10 @@ body = body.replaceAll('__FACTS_HOURS__', FACTS.scheduledCare);
 body = body.replaceAll('__FACTS_DOCTOR__', FACTS.doctorAvailability);
 body = body.replaceAll('__FACTS_RESPONSE_CHIP__', FACTS.responseChip);
 body = body.replaceAll('__FACTS_DOCTOR_CHIP__', FACTS.doctorChip);
+body = body.replaceAll('__FACTS_SCHEDULE_SUB__', FACTS.scheduleSubline);
+body = body.replaceAll('__FACTS_WEEK_LEGEND__', FACTS.weekLegendCare);
+body = body.replaceAll('__FACTS_COST_DOCTOR__', FACTS.costDoctorRow);
+body = body.replaceAll('__FACTS_COST_FOOT__', FACTS.costFootnote);
 const klarity = countParts(FACTS.klarityScore.split('/')[0]);
 body = body.replaceAll(
   '<!--KLARITY_STAT-->',
