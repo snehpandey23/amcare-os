@@ -676,9 +676,24 @@ article.slide[data-sample="1"].active .sample-cap{display:block}
 .chk-row.in .chk-mark::after{border-color:#fff;transform:rotate(45deg) scale(1)}
 .chk-final{margin-top:8px;border-radius:999px;padding:12px 16px;background:var(--grad-btn);color:#fff;font:700 14px/1.3 var(--font-display);text-align:center;transform-origin:center;box-shadow:0 0 0 0 rgba(216,16,136,.0)}
 .chk-final.in{box-shadow:0 8px 28px rgba(216,16,136,.45),0 0 24px rgba(123,45,142,.35)}
+/* B1 team chat */
+.hr-chat{width:min(420px,100%);background:#fff;border-radius:16px;box-shadow:0 8px 24px rgba(10,36,107,.12);overflow:hidden;text-align:left}
+.hr-chat-top{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(10,36,107,.08);background:#FAFBFE}
+.hr-chat-top b{font:700 13px/1.2 var(--font-display);color:var(--ink)}
+.hr-chat-top small{display:block;font:500 11px/1.2 var(--font-body);color:var(--ink-soft);margin-top:2px}
+.hr-chat-body{display:grid;gap:10px;padding:14px;min-height:280px}
+.hr-msg{display:flex;gap:10px;align-items:flex-start;opacity:0;transform:translateY(10px) scale(.98);transition:opacity .45s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
+.hr-msg.in,.hr-msg.pop.in{opacity:1;transform:none}
+.hr-av{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:700 11px/1 var(--font-display);color:#fff;background:var(--grad-btn);box-shadow:0 4px 12px rgba(216,16,136,.28)}
+.hr-bub{background:rgba(10,36,107,.05);border-radius:12px;padding:9px 12px;font:500 13px/1.35 var(--font-body);color:var(--ink);max-width:100%}
+.vm-screen{/* voicemail phone screen uses shared .screen */}
+.vm-row.unread{box-shadow:0 2px 8px rgba(10,36,107,.08), inset 3px 0 0 #2F6BFF}
+html.desk-stage #tour #p-familiar .hr-chat{width:100%;max-width:440px}
+html.desk-stage #tour #p-familiar .desk-hero{align-content:center}
 /* B2 time-away dual timeline (same 120m scale) */
 .away-stack{width:100%;max-width:560px;display:grid;gap:14px;text-align:left;align-content:center}
 .away-row{display:grid;gap:8px}
+.away-siya{/* With Siya row */}
 .away-row-lab{font:700 12px/1.2 var(--font-display);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft)}
 .away-track{display:flex;height:56px;border-radius:14px;overflow:hidden;background:rgba(10,36,107,.05);box-shadow:inset 0 0 0 1px rgba(10,36,107,.06);position:relative}
 .away-seg{display:flex;align-items:center;justify-content:center;padding:0 8px;font:700 12px/1.15 var(--font-display);color:#fff;text-align:center;min-width:0;
@@ -746,6 +761,7 @@ html.desk-stage #tour #care-checklist .chart-card{width:min(380px,100%)}
   .away-ghost b{font-size:10px}
   .away-siya-visit{height:48px;font-size:11px;white-space:normal;padding:0 6px;line-height:1.15}
   .away-legend{display:flex}
+  #p-familiar.slide,#p-away.slide{padding-bottom:108px}
   #p-familiar .frame.desk-split,#p-away .frame.desk-split{display:grid;grid-template-rows:auto auto;gap:12px;align-content:start}
   #p-familiar .desk-copy,#p-away .desk-copy{display:grid;gap:6px;justify-items:center}
   #p-familiar .desk-hero,#p-away .desk-hero{width:100%;min-width:0}
@@ -1184,13 +1200,13 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
       </div>
       <div class="desk-hero">
         <div class="hr-chat b" data-at="500">
-          <div class="hr-chat-top"><div><b>Team chat</b><small>Today</small></div></div>
+          <div class="hr-chat-top"><div><b>Team chat · Today</b></div></div>
           <div class="hr-chat-body">
             <div class="hr-msg pop" data-at="900"><span class="hr-av">JL</span><div class="hr-bub">Out today. Doctor's appointment.</div></div>
-            <div class="hr-msg pop" data-at="1500"><span class="hr-av">AK</span><div class="hr-bub">Can't focus lately, not sleeping.</div></div>
-            <div class="hr-msg pop" data-at="2100"><span class="hr-av">MR</span><div class="hr-bub">My blood pressure meds ran out.</div></div>
-            <div class="hr-msg pop" data-at="2700"><span class="hr-av">TS</span><div class="hr-bub">Leaving early, migraine again.</div></div>
-            <div class="hr-msg pop" data-at="3300"><span class="hr-av">DP</span><div class="hr-bub">Still waiting for a psychiatrist appointment.</div></div>
+            <div class="hr-msg pop" data-at="1400"><span class="hr-av">AK</span><div class="hr-bub">Can't focus lately, not sleeping.</div></div>
+            <div class="hr-msg pop" data-at="1900"><span class="hr-av">MR</span><div class="hr-bub">My blood pressure meds ran out.</div></div>
+            <div class="hr-msg pop" data-at="2400"><span class="hr-av">TS</span><div class="hr-bub">Leaving early, migraine again.</div></div>
+            <div class="hr-msg pop" data-at="2900"><span class="hr-av">DP</span><div class="hr-bub">Still waiting for a psychiatrist appointment.</div></div>
           </div>
         </div>
       </div>
