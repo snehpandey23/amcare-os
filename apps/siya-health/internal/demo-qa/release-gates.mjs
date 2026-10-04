@@ -166,6 +166,19 @@ const browser = await chromium.launch();
   }
 }
 
+/* Gate 1b: transition overlap (autoplay sample + Next/Back spam) */
+{
+  try {
+    const out = execSync('node internal/demo-qa/transition-check.mjs', {
+      cwd: ROOT, encoding: 'utf8', timeout: 360000,
+    });
+    pass('transition', out.trim().split('\n').find((l) => l.includes('PASS')) || 'PASS');
+  } catch (e) {
+    const msg = String(e.stdout || e.stderr || e.message || e).slice(0, 800);
+    fail('transition', msg.slice(0, 400));
+  }
+}
+
 /* Gate 2: UA smoke */
 {
   const uas = [
