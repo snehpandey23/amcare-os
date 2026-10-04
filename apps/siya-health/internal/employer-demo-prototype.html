@@ -2941,12 +2941,41 @@ function walkScreen(i){
   if(i===5)return `<div class="prov-card" style="margin:8px"><img src="/assets/images/dr-sneh-pandey.png" width="48" height="48" alt=""><div><b>Dr. Sneh Pandey</b><small>Founder</small></div></div><div class="slots" style="padding:8px"><span class="slot-chip on">Sat 10:00</span></div>`;
   return `<div class="vm-row"><b>Visit confirmed</b><small>Saturday 10:00</small><div class="start" style="margin-top:8px">Add to calendar</div></div>`;
 }
+/* Real production screenshots (390px). Refresh when homepage or /providers changes. */
+const SITE_HOME='/employers/demo/media/site/homepage-2026-10-04.webp';
+const SITE_TEAM='/employers/demo/media/site/care-team-2026-10-04.webp';
 function paintWebMock(i){
-  const body=$('webMockBody'); if(!body)return;
-  if(i<4){body.innerHTML=`<div class="wm-hero"><b>Care that fits busy professionals</b><span class="wm-cta">Book appointment</span></div>`;return;}
-  if(i===4){body.innerHTML=`<div class="wm-hero"><b>Care that fits busy professionals</b><span class="wm-cta on">Book appointment</span></div><div class="wm-card"><b>Dr. Sneh Pandey</b><small>Founder · Video visit</small></div>`;return;}
-  if(i===5){body.innerHTML=`<div class="wm-card"><b>Dr. Sneh Pandey</b><small>Founder</small></div><div class="slots"><span class="slot-chip">Sat 9:00</span><span class="slot-chip on">Sat 10:00</span><span class="slot-chip">Sat 11:30</span></div>`;return;}
-  body.innerHTML=`<div class="wm-card ok"><b>You're booked</b><small>Sat 10:00 · Confirmation sent</small></div>`;
+  const body=$('webMockBody'); const pathEl=$('wmPath'); if(!body)return;
+  if(i<=3){
+    if(pathEl)pathEl.textContent='Home';
+    body.innerHTML=`<div class="site-shot-wrap"><img class="site-shot" src="${SITE_HOME}" alt="siya.health homepage" width="390" decoding="async"></div>`;
+    return;
+  }
+  if(i===4){
+    if(pathEl)pathEl.textContent='Home';
+    body.innerHTML=`<div class="site-shot-wrap"><img class="site-shot" src="${SITE_HOME}" alt="siya.health homepage" width="390" decoding="async"><i class="tap-hl book" aria-hidden="true"></i></div>`;
+    const img=body.querySelector('.site-shot'); const hl=body.querySelector('.tap-hl');
+    requestAnimationFrame(()=>{if(img)img.classList.add('scroll-mid');});
+    setTimeout(()=>{if(hl)hl.classList.add('on');},2000);
+    return;
+  }
+  if(i===5){
+    if(pathEl)pathEl.textContent='Care team';
+    body.innerHTML=`<div class="site-shot-wrap"><img class="site-shot" src="${SITE_TEAM}" alt="siya.health care team" width="390" decoding="async"><i class="tap-hl doc" aria-hidden="true"></i></div>`;
+    const img=body.querySelector('.site-shot'); const hl=body.querySelector('.tap-hl');
+    requestAnimationFrame(()=>{if(img)img.classList.add('scroll-deep');});
+    setTimeout(()=>{if(hl)hl.classList.add('on');},2000);
+    return;
+  }
+  /* Booking: Siya-styled recreation — not a vendor screenshot */
+  if(pathEl)pathEl.textContent='Book';
+  body.innerHTML=`<div class="wm-book">
+    <h4>Dr. Sneh Pandey, MD</h4>
+    <div class="wm-dates" aria-label="Dates"><span>Fri<br>10</span><span class="on">Sat<br>11</span><span>Sun<br>12</span><span>Mon<br>13</span></div>
+    <div class="wm-slots" aria-label="Times"><button type="button">9:00</button><button type="button" class="on">10:00</button><button type="button">11:30</button><button type="button">2:00</button></div>
+    <button type="button" class="wm-confirm">Confirm</button>
+    <div class="wm-done"><b>Visit booked</b><small>Sat 10:00 · Confirmation sent</small></div>
+  </div>`;
 }
 function renderWalk(i){
   const phone=$('walkPhone'), list=$('walkSteps'), cap=$('walkCap'), now=$('walkNow');
