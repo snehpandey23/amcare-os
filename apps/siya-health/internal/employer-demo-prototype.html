@@ -814,6 +814,29 @@ html.desk-stage #tour #p-coord .web{max-height:min(480px,70%)}
 .funnel-box{background:#fff;border-radius:14px;padding:18px 14px;box-shadow:0 8px 20px rgba(10,36,107,.10);text-align:center;font:600 14px/1.3 var(--font-display);color:var(--ink)}
 .funnel-box small{display:block;margin-top:6px;font:500 12px/1.3 var(--font-body);color:var(--ink-soft)}
 .funnel-arrow{font:700 22px/1 var(--font-display);color:var(--magenta-text);text-align:center}
+
+/* D1 cost — paired problem/answer rows */
+.cost-pair{width:100%;max-width:560px;display:grid;gap:0;text-align:left}
+.cost-pair-head{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
+.cost-pair-head span{font:700 12px/1.2 var(--font-display);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);display:inline-flex;align-items:center;gap:6px}
+.cost-pair-head .uh i,.cost-pair-head .sh i{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font:700 11px/1 var(--font-display);flex:none}
+.cost-pair-head .uh i{background:rgba(10,36,107,.10);color:var(--ink-soft)}
+.cost-pair-head .sh i{background:var(--grad-btn);color:#fff;box-shadow:0 4px 10px rgba(216,16,136,.28)}
+.cost-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;min-height:56px;align-items:stretch;margin-bottom:8px}
+.cost-cell{display:flex;align-items:center;padding:12px 14px;border-radius:12px;font:600 13px/1.3 var(--font-body);min-height:56px;box-sizing:border-box}
+.cost-cell.prob{background:rgba(10,36,107,.04);color:var(--ink-soft);border:1px solid rgba(10,36,107,.06);
+  opacity:0;transform:translateX(-10px);transition:opacity .45s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
+.cost-cell.ans{background:#fff;color:var(--ink);border:1px solid rgba(216,16,136,.18);box-shadow:0 6px 16px rgba(10,36,107,.08);
+  opacity:0;transform:translateX(14px);transition:opacity .45s ease,transform .55s cubic-bezier(.2,.7,.2,1)}
+.cost-cell.prob.in,.cost-cell.ans.in{opacity:1;transform:none}
+.cost-foot{margin:10px 0 0;font:500 11px/1.35 var(--font-body);color:var(--ink-soft)}
+html.desk-stage #tour #cost .cost-pair,html.desk-stage #tour #cost-usual .cost-pair{max-width:none;width:100%}
+@media (max-width:640px){
+  .cost-pair-head,.cost-row{grid-template-columns:1fr;gap:6px}
+  .cost-cell{min-height:48px;font-size:12px;padding:10px 12px}
+  .cost-cell.ans{transform:translateY(10px)}
+  .cost-cell.ans.in{transform:none}
+}
 /* D proof 2x2 */
 .proof-grid{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .proof-card{background:#fff;border-radius:16px;padding:16px 14px;box-shadow:0 8px 22px rgba(10,36,107,.10);display:grid;gap:6px;align-content:center;min-height:110px;text-align:left}
@@ -1748,23 +1771,27 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
     <div class="frame desk-split">
       <div class="desk-copy">
         <div class="eyebrow b" data-at="200">Cost</div>
-        <h2 class="cap b" data-at="400">Clearer than the <em>usual way.</em></h2>
-        <p class="sub b" data-at="700">Meds, labs and outside specialists are billed separately — disclosed before they're ordered.</p>
+        <h2 class="cap b" data-at="400">One team. <em>No network maze.</em></h2>
+        <p class="sub b" data-at="700">Your team member sees one care team, without checking who's in network or waiting months to start.</p>
+        <p class="cost-foot b" data-at="5200">Medications, labs and outside specialists are billed separately.</p>
       </div>
       <div class="desk-hero">
-        <div class="compare">
-          <div class="panel pop" data-at="1100">
-            <h3>The usual way</h3>
-            <div class="strike b" data-at="1600">Psychiatrist waitlists</div>
-            <div class="strike b" data-at="2100">In/out-of-network confusion</div>
-            <div class="strike b" data-at="2600">Separate copays per specialist</div>
-            <div class="strike b" data-at="3100">Paperwork</div>
+        <div class="cost-pair b" data-at="900">
+          <div class="cost-pair-head">
+            <span class="uh"><i aria-hidden="true">✕</i> The usual way</span>
+            <span class="sh"><i aria-hidden="true">✓</i> With Siya</span>
           </div>
-          <div class="panel pop" data-at="1600">
-            <h3>With Siya</h3>
-            <div class="tick b" data-at="2200"><i></i>One team, no waitlist to start</div>
-            <div class="tick b" data-at="2700"><i></i>No network guessing</div>
-            <div class="tick b" data-at="3200"><i></i>Clear on what's included in your package</div>
+          <div class="cost-row">
+            <div class="cost-cell prob b" data-at="1200">Months-long psychiatrist waitlists</div>
+            <div class="cost-cell ans b" data-at="1500">Fast first appointment</div>
+          </div>
+          <div class="cost-row">
+            <div class="cost-cell prob b" data-at="2000">In/out-of-network guessing</div>
+            <div class="cost-cell ans b" data-at="2300">No network guessing</div>
+          </div>
+          <div class="cost-row">
+            <div class="cost-cell prob b" data-at="2800">Separate portals and providers</div>
+            <div class="cost-cell ans b" data-at="3100">One team, one place</div>
           </div>
         </div>
       </div>
@@ -1775,23 +1802,28 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
     <div class="frame desk-split">
       <div class="desk-copy">
         <div class="eyebrow b" data-at="200">Cost</div>
-        <h2 class="cap b" data-at="400">Clearer than the <em>usual way.</em></h2>
+        <h2 class="cap b" data-at="400">One team. <em>No network maze.</em></h2>
+        <p class="sub b" data-at="700">Your team member sees one care team, without checking who's in network or waiting months to start.</p>
       </div>
       <div class="desk-hero">
-        <div class="cost-stack">
-          <div class="panel pop" data-at="800">
-            <h3>The usual way</h3>
-            <div class="strike b" data-at="1200">Psychiatrist waitlists</div>
-            <div class="strike b" data-at="1600">In/out-of-network confusion</div>
-            <div class="strike b" data-at="2000">Separate copays per specialist</div>
-            <div class="strike b" data-at="2400">Paperwork</div>
+        <div class="cost-pair b" data-at="900">
+          <div class="cost-pair-head">
+            <span class="uh"><i aria-hidden="true">✕</i> The usual way</span>
+            <span class="sh"><i aria-hidden="true">✓</i> With Siya</span>
           </div>
-          <div class="panel pop" data-at="3000">
-            <h3>With Siya</h3>
-            <div class="tick b" data-at="3400"><i></i>One team, no waitlist to start</div>
-            <div class="tick b" data-at="3800"><i></i>No network guessing</div>
-            <div class="tick b" data-at="4200"><i></i>Clear on what's included in your package</div>
+          <div class="cost-row">
+            <div class="cost-cell prob b" data-at="1200">Months-long psychiatrist waitlists</div>
+            <div class="cost-cell ans b" data-at="1500">Fast first appointment</div>
           </div>
+          <div class="cost-row">
+            <div class="cost-cell prob b" data-at="2000">In/out-of-network guessing</div>
+            <div class="cost-cell ans b" data-at="2300">No network guessing</div>
+          </div>
+          <div class="cost-row">
+            <div class="cost-cell prob b" data-at="2800">Separate portals and providers</div>
+            <div class="cost-cell ans b" data-at="3100">One team, one place</div>
+          </div>
+          <p class="cost-foot b" data-at="3600">Medications, labs and outside specialists are billed separately.</p>
         </div>
       </div>
     </div>
