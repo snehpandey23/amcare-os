@@ -939,26 +939,51 @@ html.desk-stage #tour #p-coord .web{max-height:min(480px,70%)}
 .start-seq{display:grid;gap:10px;width:min(420px,100%);min-height:240px;position:relative}
 .start-seq .jcard{width:100%}
 .start-seq .jcard.out{opacity:0;transform:translateY(-10px);pointer-events:none;position:absolute;inset:0}
-.path-dual{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
-.path-col{display:grid;gap:8px;justify-items:center}
-.path-col h3{margin:0;font:700 14px/1.2 var(--font-display);color:var(--ink)}
-.path-phone{width:min(200px,100%);height:280px}
+.path-dual{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(640px,100%)}
+.path-col{display:grid;gap:6px;justify-items:center;align-content:start}
+.path-col h3{margin:0;font:700 13px/1.2 var(--font-display);color:var(--ink)}
+/* Dual-path phones must NOT inherit the tall single-walk phone calc. */
+.path-phone,.path-phone.phone,article[data-walk] .path-phone{
+  width:min(168px,100%);height:220px;max-height:220px;aspect-ratio:9/17;flex:none;padding:8px;border-radius:28px
+}
+.path-steps{display:grid;gap:6px;width:min(200px,100%);margin:0;padding:0;list-style:none}
+.path-steps .door{padding:6px 10px}
 .web-mock .screen{background:#fff;display:grid;grid-template-rows:auto 1fr;overflow:hidden}
 .wm-top{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-bottom:1px solid rgba(10,36,107,.08);font:700 11px/1 var(--font-display);background:#fff;z-index:2}
 .wm-top span{color:#D81088}
 .wm-body{position:relative;overflow:hidden;min-height:0;background:#F7F5F0}
 .site-shot-wrap{position:absolute;inset:0;overflow:hidden}
-.site-shot{display:block;width:100%;height:auto;transform:translate3d(0,0,0);will-change:transform;transition:transform 2s cubic-bezier(.4,.0,.2,1)}
-.site-shot.scroll-mid{transform:translate3d(0,-28%,0)}
-.site-shot.scroll-deep{transform:translate3d(0,-52%,0)}
-.tap-hl{position:absolute;left:50%;width:72%;height:36px;border-radius:999px;border:2px solid #D81088;box-shadow:0 0 0 6px rgba(216,16,136,.22);transform:translate(-50%,0);pointer-events:none;opacity:0;transition:opacity .25s}
+/* Stack matches image box so covers % coords are relative to the WebP, not the phone clip. */
+.site-shot-stack{position:relative;width:100%;transform:translate3d(0,0,0);will-change:transform;transition:transform 2s cubic-bezier(.4,.0,.2,1)}
+.site-shot{display:block;width:100%;height:auto}
+.site-shot-stack.scroll-mid{transform:translate3d(0,-28%,0)}
+.site-shot-stack.scroll-deep{transform:translate3d(0,-52%,0)}
+/* Bring CARE THAT COVERS card into the phone clip (~card at 49% of homepage-top). */
+.site-shot-stack.show-covers{transform:translate3d(0,-44%,0)}
+.site-shot-stack.show-covers.scroll-book{transform:translate3d(0,-62%,0)} /* Book CTA band */
+.tap-hl{position:absolute;left:50%;width:72%;height:36px;border-radius:999px;border:2px solid #D81088;box-shadow:0 0 0 6px rgba(216,16,136,.22);transform:translate(-50%,0);pointer-events:none;opacity:0;transition:opacity .25s;z-index:3}
 .tap-hl.on{opacity:1;animation:tapPulse 1.1s ease-out infinite}
 @keyframes tapPulse{0%{box-shadow:0 0 0 0 rgba(216,16,136,.45)}100%{box-shadow:0 0 0 12px rgba(216,16,136,0)}}
-.tap-hl.book{top:82%} /* homepage-top crop: Book Free Meet & Greet near bottom */
+.tap-hl.book{top:78%}
 .tap-hl.doc{top:42%}
+/* CARE THAT COVERS overlay — 4 settled frames; crossfade 1.2s each (no blank mid-transition). */
+.covers-cycle{position:absolute;left:19.179%;top:49.419%;width:61.639%;height:17.409%;pointer-events:none;z-index:2}
+.covers-cycle img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;opacity:0;animation:coversFade 4.8s linear infinite}
+.covers-cycle img:nth-child(1){animation-delay:0s}
+.covers-cycle img:nth-child(2){animation-delay:1.2s}
+.covers-cycle img:nth-child(3){animation-delay:2.4s}
+.covers-cycle img:nth-child(4){animation-delay:3.6s}
+@keyframes coversFade{
+  /* Hold fully visible ~1.0s, crossfade ~0.2s; never blank (next frame starts at delay). */
+  0%{opacity:1}
+  20.8%{opacity:1}
+  25%{opacity:0}
+  100%{opacity:0}
+}
 .wm-book{padding:12px;display:grid;gap:10px;height:100%;align-content:start;background:#fff}
 .wm-book h4{margin:0;font:700 13px/1.2 var(--font-display);color:var(--ink)}
 .wm-md-title{margin:0;font:600 11px/1.3 var(--font-body);color:var(--ink-soft)}
+.wm-org{margin:0;font:600 11px/1.35 var(--font-body);color:var(--ink-soft)}
 .wm-dates{display:flex;gap:6px;overflow:auto}
 .wm-dates span{flex:none;min-width:44px;padding:8px 6px;border-radius:10px;background:#F4F1EA;font:700 11px/1.2 var(--font-display);text-align:center}
 .wm-dates span.on{background:linear-gradient(135deg,#D81088,#7B2D8E);color:#fff}
@@ -970,10 +995,21 @@ html.desk-stage #tour #p-coord .web{max-height:min(480px,70%)}
 .wm-done b{font:700 14px/1.2 var(--font-display);color:#0A6B3A}
 .wm-done small{font:600 12px/1.3 var(--font-body);color:var(--ink-soft)}
 .spark-cap{margin:0 0 6px;font:600 12px/1.3 var(--font-body);color:var(--ink-soft)}
+/* Desk-stage: keep dual path inside the canvas above the bar */
+html.desk-stage #tour article[data-walk] .path-phone{
+  height:min(200px,38%);max-height:200px;width:min(150px,100%)
+}
+html.desk-stage #tour article[data-walk] .cap{font-size:clamp(22px,2.4vw,32px)}
+html.desk-stage #tour article[data-walk] #walkTap,
+html.desk-stage #tour article[data-walk] #walkCap{display:none}
+html.desk-stage #tour article[data-walk] .path-dual{gap:10px}
 @media (max-width:640px){
   .priv-cols{grid-template-columns:1fr}
-  .path-dual{grid-template-columns:1fr;gap:14px}
-  .path-phone{height:220px}
+  .path-dual{grid-template-columns:1fr 1fr;gap:8px;width:100%}
+  .path-phone,.path-phone.phone,article[data-walk] .path-phone{height:180px;max-height:180px;width:min(140px,100%);padding:6px;border-radius:24px}
+  article[data-walk] .cap{font-size:22px}
+  article[data-walk] .frame{gap:8px}
+  #walkTap{min-height:40px;padding:10px 18px;font-size:13px}
 }
 /* D privacy funnel (legacy phone cards) + separation visual */
 .funnel{width:100%;max-width:420px;display:grid;gap:10px;justify-items:stretch;margin:0 auto}
@@ -2976,9 +3012,9 @@ const WALK=[
   ['Open the secure care app','Open'],
   ['Message the concierge','Send'],
   ['Concierge replies','Reply'],
-  ['Book on the website','Book'],
-  ['Pick a slot','Confirm'],
-  ['Visit confirmed','Done']
+  ['Browse siya.health','Book'],
+  ['Meet the care team','View'],
+  ['Book through your organization\'s private link','Confirm']
 ];
 let walkStep=-1,founderHold=false,founderMissing=true;
 function walkScreen(i){
@@ -2987,39 +3023,50 @@ function walkScreen(i){
   if(i===1)return `<div class="vm-row"><b>Secure care app</b><small>Download, then open</small><div class="start" style="margin-top:8px">Open</div></div>`;
   if(i===2)return `<div class="msg-line me"><span class="avatar alex">A</span><div class="bub me">${intent}</div></div>`;
   if(i===3)return `<div class="msg-line them"><span class="avatar care">C</span><div class="bub them">On it — we'll take care of this for you.</div></div><div class="meta l">Care team</div>`;
-  if(i===4)return `<div class="vm-row"><b>siya.health</b><small>Book appointment</small><div class="start" style="margin-top:8px">Book</div></div>`;
-  if(i===5)return `<div class="prov-card" style="margin:8px"><img src="/assets/images/dr-sneh-pandey.png" width="48" height="48" alt=""><div><b>Dr. Sneh Pandey</b><small>Medical Director · Internal Medicine Physician</small></div></div><div class="slots" style="padding:8px"><span class="slot-chip on">Sat 10:00</span></div>`;
-  return `<div class="vm-row"><b>Visit confirmed</b><small>Saturday 10:00</small><div class="start" style="margin-top:8px">Add to calendar</div></div>`;
+  if(i===4)return `<div class="vm-row"><b>siya.health</b><small>Homepage</small><div class="start" style="margin-top:8px">Explore</div></div>`;
+  if(i===5)return `<div class="prov-card" style="margin:8px"><img src="/assets/images/dr-sneh-pandey.png" width="48" height="48" alt=""><div><b>Dr. Sneh Pandey</b><small>Medical Director · Internal Medicine Physician</small></div></div>`;
+  return `<div class="vm-row"><b>Visit booked</b><small>Through your organization's private link</small><div class="start" style="margin-top:8px">Add to calendar</div></div>`;
 }
 /* Real production screenshots (390px). homepage-top = hero → Book Free Meet & Greet (no prices). */
 const SITE_HOME='/employers/demo/media/site/homepage-top-2026-10-04.webp';
 const SITE_TEAM='/employers/demo/media/site/care-team-2026-10-04.webp';
+const SITE_COVERS=[
+  '/employers/demo/media/site/covers/covers-primary-care.webp',
+  '/employers/demo/media/site/covers/covers-mental-health.webp',
+  '/employers/demo/media/site/covers/covers-adhd.webp',
+  '/employers/demo/media/site/covers/covers-sexual-health.webp',
+];
+function coversOverlayHtml(){
+  return `<div class="covers-cycle" aria-hidden="true">${SITE_COVERS.map((src,i)=>`<img src="${src}" alt="" width="240" height="168" decoding="async"${i===0?' fetchpriority="high"':''}>`).join('')}</div>`;
+}
 function paintWebMock(i){
   const body=$('webMockBody'); const pathEl=$('wmPath'); if(!body)return;
   if(i<=3){
     if(pathEl)pathEl.textContent='Home';
-    body.innerHTML=`<div class="site-shot-wrap"><img class="site-shot" src="${SITE_HOME}" alt="siya.health homepage" width="390" decoding="async"></div>`;
+    body.innerHTML=`<div class="site-shot-wrap"><div class="site-shot-stack show-covers"><img class="site-shot" src="${SITE_HOME}" alt="siya.health homepage" width="390" decoding="async">${coversOverlayHtml()}</div></div>`;
     return;
   }
   if(i===4){
     if(pathEl)pathEl.textContent='Home';
-    /* Top crop already ends on Book — no scroll; highlight only. */
-    body.innerHTML=`<div class="site-shot-wrap"><img class="site-shot" src="${SITE_HOME}" alt="siya.health homepage" width="390" decoding="async"><i class="tap-hl book" aria-hidden="true"></i></div>`;
-    const hl=body.querySelector('.tap-hl');
-    setTimeout(()=>{if(hl)hl.classList.add('on');},1800);
+    /* Carousel on card, then scroll to Book Free Meet & Greet highlight. */
+    body.innerHTML=`<div class="site-shot-wrap"><div class="site-shot-stack show-covers"><img class="site-shot" src="${SITE_HOME}" alt="siya.health homepage" width="390" decoding="async">${coversOverlayHtml()}</div><i class="tap-hl book" aria-hidden="true"></i></div>`;
+    const stack=body.querySelector('.site-shot-stack'); const hl=body.querySelector('.tap-hl');
+    setTimeout(()=>{if(stack)stack.classList.add('scroll-book');},1400);
+    setTimeout(()=>{if(hl)hl.classList.add('on');},2200);
     return;
   }
   if(i===5){
     if(pathEl)pathEl.textContent='Care team';
-    body.innerHTML=`<div class="site-shot-wrap"><img class="site-shot" src="${SITE_TEAM}" alt="siya.health care team" width="390" decoding="async"><i class="tap-hl doc" aria-hidden="true"></i></div>`;
-    const img=body.querySelector('.site-shot'); const hl=body.querySelector('.tap-hl');
-    requestAnimationFrame(()=>{if(img)img.classList.add('scroll-deep');});
+    body.innerHTML=`<div class="site-shot-wrap"><div class="site-shot-stack"><img class="site-shot" src="${SITE_TEAM}" alt="siya.health care team" width="390" decoding="async"></div><i class="tap-hl doc" aria-hidden="true"></i></div>`;
+    const stack=body.querySelector('.site-shot-stack'); const hl=body.querySelector('.tap-hl');
+    requestAnimationFrame(()=>{if(stack)stack.classList.add('scroll-deep');});
     setTimeout(()=>{if(hl)hl.classList.add('on');},2000);
     return;
   }
-  /* Booking: Siya-styled recreation — not a vendor screenshot */
+  /* Booking through org private link — Siya-styled recreation (not a vendor screenshot) */
   if(pathEl)pathEl.textContent='Book';
   body.innerHTML=`<div class="wm-book">
+    <p class="wm-org">Booking through your organization's private link</p>
     <h4>Dr. Sneh Pandey</h4>
     <p class="wm-md-title">Medical Director · Internal Medicine Physician</p>
     <div class="wm-dates" aria-label="Dates"><span>Fri<br>10</span><span class="on">Sat<br>11</span><span>Sun<br>12</span><span>Mon<br>13</span></div>
@@ -3036,30 +3083,38 @@ function renderWalk(i){
   paintWebMock(i);
   list.innerHTML=WALK.map((row,k)=>`<div class="door${k===i?' on':''}"><span class="ic">${k+1}</span><div><b>${row[0]}</b></div></div>`).join('');
   if(now)now.textContent='Step '+(i+1)+' of 7 · '+WALK[i][0];
-  if(cap)cap.textContent=i>=4?'Same care on the website — book a slot yourself.':'One message to the concierge team.';
+  if(cap){
+    if(i<=3)cap.textContent='One message to the concierge team.';
+    else if(i===4)cap.textContent='Same care on the website — browse, then book.';
+    else if(i===5)cap.textContent='Dr. Pandey, Medical Director — pick who you see.';
+    else cap.textContent='Booking through your organization\'s private link.';
+  }
   requestAnimationFrame(fitWalk);
 }
 function fitWalk(){
   const slide=document.querySelector('article[data-walk].active');
-  const phone=slide&&slide.querySelector('.phone');
+  const phones=slide?[...slide.querySelectorAll('.path-phone')]:[];
   const bar=document.querySelector('.bar');
-  if(!slide||!phone||!bar)return;
-  /* On wide desktop the CSS height is enough; only reflow on phone / portrait shell */
-  if(!isPhoneLayout()&&!document.documentElement.classList.contains('portrait-desktop')){
-    phone.style.height=''; phone.style.maxHeight='';
+  if(!slide||!phones.length||!bar)return;
+  const clear=()=>{
+    phones.forEach(p=>{p.style.height='';p.style.maxHeight='';});
     slide.style.placeItems=''; slide.style.alignContent=''; slide.style.paddingTop='';
+  };
+  /* Desk-stage / wide: CSS caps dual-path phones; clear any leftover inline. */
+  if(!isPhoneLayout()&&!document.documentElement.classList.contains('portrait-desktop')){
+    clear();
     return;
   }
   slide.style.placeItems='start center';
   slide.style.alignContent='start';
-  slide.style.paddingTop='16px';
+  slide.style.paddingTop='12px';
   const frame=slide.querySelector('.frame');
-  phone.style.height='160px';
-  const base=frame.getBoundingClientRect().height-160;
+  if(!frame)return;
+  phones.forEach(p=>{p.style.height='140px';p.style.maxHeight='140px';});
+  const base=frame.getBoundingClientRect().height-140;
   const room=bar.getBoundingClientRect().top-frame.getBoundingClientRect().top-8;
-  const h=Math.max(180,Math.floor(room-base));
-  phone.style.height=h+'px';
-  phone.style.maxHeight=h+'px';
+  const h=Math.max(150,Math.min(200,Math.floor(room-base)));
+  phones.forEach(p=>{p.style.height=h+'px';p.style.maxHeight=h+'px';});
 }
 function jumpChapter(n){
   const idx=slides.findIndex(s=>+(s.dataset.chapter||0)===n);

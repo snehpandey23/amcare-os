@@ -34,6 +34,9 @@ Commit `e1424fd0`. Gate report: `transition-check-AFTER.md` — **PASS** (0 over
 ## Title + site pathway (2026-10-04)
 - Dr. Pandey title: **Medical Director** confirmed. Cards: `Medical Director · Internal Medicine Physician`; short: `Dr. Pandey, Medical Director`; byline: `Dr. Sneh Pandey · Medical Director, Siya Health`. Facts + facts-audit wired.
 - Journey website pathway: `homepage-top-2026-10-04.webp` (hero → Book Free Meet & Greet; no prices / no Zocdoc). Book highlight only (no mid-scroll). Care-team WebP unchanged.
+- **CARE THAT COVERS carousel:** base homepage-top was captured mid-transition (blank service). Demo overlays 4 settled WebP frames (`employers/demo/media/site/covers/covers-{primary-care,mental-health,adhd,sexual-health}.webp`) and crossfades ~1.2s each while Home is on screen. Capture via `capture-covers-carousel.mjs` (opacity≥0.995 only).
+- **Website-team flag (do NOT fix on this branch):** live rotator uses `siya-h2-chip-settle` from opacity 0→1 (~0.65s), so a brief empty card is visible between items on siya.health. Demo intentionally avoids showing that blank.
+- 17B beat order (website column): homepage (+covers cycle) → Book highlight → care team → Dr. Pandey, Medical Director → **Booking through your organization's private link**.
 
 ## 17B screenshot refresh note
 Production captures live under `employers/demo/media/site/`:
