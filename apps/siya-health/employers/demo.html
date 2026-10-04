@@ -996,13 +996,24 @@ html.desk-stage #tour #p-coord .web{max-height:min(480px,70%)}
 .wm-done small{font:600 12px/1.3 var(--font-body);color:var(--ink-soft)}
 .spark-cap{margin:0 0 6px;font:600 12px/1.3 var(--font-body);color:var(--ink-soft)}
 /* Desk-stage: keep dual path inside the canvas above the bar */
-html.desk-stage #tour article[data-walk] .path-phone{
-  height:min(200px,38%);max-height:200px;width:min(150px,100%)
+html.desk-stage #tour article[data-walk]{
+  padding:24px 40px 88px;align-content:start;
 }
-html.desk-stage #tour article[data-walk] .cap{font-size:clamp(22px,2.4vw,32px)}
+html.desk-stage #tour article[data-walk] .frame{
+  gap:8px;align-content:start;justify-items:center;max-height:100%;overflow:hidden;
+}
+html.desk-stage #tour article[data-walk] .eyebrow{font-size:11px}
+html.desk-stage #tour article[data-walk] .cap{font-size:clamp(20px,2.1vw,28px);max-width:640px}
+html.desk-stage #tour article[data-walk] .path-phone,
+html.desk-stage #tour article[data-walk] .phone.path-phone{
+  height:160px;max-height:160px;width:120px;padding:6px;border-radius:24px
+}
 html.desk-stage #tour article[data-walk] #walkTap,
-html.desk-stage #tour article[data-walk] #walkCap{display:none}
-html.desk-stage #tour article[data-walk] .path-dual{gap:10px}
+html.desk-stage #tour article[data-walk] #walkCap,
+html.desk-stage #tour article[data-walk] #walkSteps,
+html.desk-stage #tour article[data-walk] #walkNow{display:none}
+html.desk-stage #tour article[data-walk] .path-dual{gap:8px;width:min(520px,100%)}
+html.desk-stage #tour article[data-walk] .path-col h3{font-size:12px}
 @media (max-width:640px){
   .priv-cols{grid-template-columns:1fr}
   .path-dual{grid-template-columns:1fr 1fr;gap:8px;width:100%}

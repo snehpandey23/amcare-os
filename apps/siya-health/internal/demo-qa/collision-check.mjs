@@ -117,9 +117,29 @@ async function check(page, slideId, viewport) {
 
     const pad = 2;
     const stageBottomCap = Math.min(stageBox.bottom, barTop);
+    /** Intersect with nearest overflow:hidden ancestor (e.g. site-shot-wrap pans). */
+    const clippedRect = (el, r) => {
+      let x1 = r.left, y1 = r.top, x2 = r.right, y2 = r.bottom;
+      let p = el.parentElement;
+      while (p && p !== slide) {
+        const st = getComputedStyle(p);
+        if (/(auto|scroll|hidden)/.test(st.overflow + st.overflowX + st.overflowY)) {
+          const pr = p.getBoundingClientRect();
+          x1 = Math.max(x1, pr.left);
+          y1 = Math.max(y1, pr.top);
+          x2 = Math.min(x2, pr.right);
+          y2 = Math.min(y2, pr.bottom);
+        }
+        p = p.parentElement;
+      }
+      if (x2 - x1 < 1 || y2 - y1 < 1) return null; /* fully clipped — ignore */
+      return { left: x1, top: y1, right: x2, bottom: y2, width: x2 - x1, height: y2 - y1 };
+    };
     const overflowHits = [];
     for (const el of descendants) {
-      const r = el.getBoundingClientRect();
+      const raw = el.getBoundingClientRect();
+      const r = clippedRect(el, raw);
+      if (!r) continue;
       const underBar = r.bottom > barTop + pad;
       const pastStage =
         r.left < stageBox.left - pad ||
