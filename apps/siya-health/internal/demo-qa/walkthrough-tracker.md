@@ -22,13 +22,18 @@ Status: `done` · `in progress` · `not started` · `parked` · `hold`.
 |---|------|-------------|--------|------------|
 | A1 | Hub/ring + Lucide icons (heart-pulse, scale, brain, route); phone keeps ring | `turn` | done | `wt-a1-meet-siya-*` |
 | A2 | Checklist: 28px ticks, white rows, hairline dividers, personalized pill | `care-checklist` | done | `wt-a2-checklist-*` |
-| A3 | Head-to-toe body map (see source below) + stress aura | `care-body` | done | `wt-a3-body-*` |
+| A3 | Particle figure from CC0 silhouette + neural/vessels (see source) | `care-body` | done | `wt-a3-body-*` |
 | A4 | Two stacked white cards: What we treat + Where clinicians practice | `clinicians` | done | `wt-a4-clinicians-*` |
 | A5 | “Your team member” wording throughout | copy global | hold | — |
 
 ### A3 body silhouette source
 
-Front-view outline with arms and legs. Pose and proportions adapted from **Health Icons** `body.svg` ([healthicons.org](https://healthicons.org/), **CC0** / Resolve to Save Lives). Single-weight brand-gradient stroke; leaders terminate on head, chest/heart, abdomen, lower abdomen. Stress = soft gradient aura + caption “Stress connects them all.”
+**Source:** [Wikimedia Commons — Human silhouette gender neutral front.svg](https://commons.wikimedia.org/wiki/File:Human_silhouette_gender_neutral_front.svg)  
+**License:** CC0 1.0 Universal (Public Domain Dedication)  
+**Artist:** Sebastian Wallroth (based on Wallace Rule of Nines.svg)  
+**Local file:** `employers/demo/media/body-silhouette-cc0.svg`  
+
+Render: intro-style diamond particles (~1800 desk / ~900 phone) sampled from the silhouette; neural network (head/spine) + vessel Beziers from heart; labels + stress aura finale. Deep link: `?review=1&slide=root-cause`.
 
 ## GROUP B–D
 
@@ -52,3 +57,4 @@ Front-view outline with arms and legs. Pose and proportions adapted from **Healt
 | 2026-10-03 | Step 0 tracker | `b7dc3a2b` | |
 | 2026-10-03 | Step 1 + Group A | `6d8cd737` | hash-stamped shots |
 | 2026-10-04 | Group A polish | `278dfdd4` | US English, Lucide icons, A3 Health Icons CC0, A4 stacked cards |
+| 2026-10-04 | A3 particle rebuild + deep link | pending | CC0 silhouette; `slide=root-cause` |

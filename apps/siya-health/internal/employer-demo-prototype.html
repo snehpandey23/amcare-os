@@ -624,25 +624,27 @@ article.slide[data-sample="1"].active .sample-cap{display:block}
 .chk-row.in .chk-mark::after{border-color:#fff;transform:rotate(45deg) scale(1)}
 .chk-final{margin-top:8px;border-radius:999px;padding:12px 16px;background:var(--grad-btn);color:#fff;font:700 14px/1.3 var(--font-display);text-align:center;transform-origin:center;box-shadow:0 0 0 0 rgba(216,16,136,.0)}
 .chk-final.in{box-shadow:0 8px 28px rgba(216,16,136,.45),0 0 24px rgba(123,45,142,.35)}
-.body-map{position:relative;width:min(360px,100%);aspect-ratio:3/4;margin:0 auto;display:grid;place-items:center}
-.body-map > svg{width:100%;height:100%;display:block;position:relative;z-index:1}
-.body-map .body-aura{position:absolute;left:18%;right:18%;top:10%;bottom:8%;border-radius:50% 50% 46% 46%;z-index:0;pointer-events:none;opacity:0;
-  background:radial-gradient(ellipse at 50% 45%, rgba(216,16,136,.34) 0%, rgba(123,45,142,.16) 42%, rgba(0,24,120,.0) 72%)}
-.body-map .body-aura.in{opacity:1;animation:stressAura 2.2s ease-out infinite}
-@keyframes stressAura{0%{transform:scale(.9);opacity:.65}60%{transform:scale(1.14);opacity:.3}100%{transform:scale(1.22);opacity:0}}
-.body-map .hlab{position:absolute;z-index:2;background:#fff;border-radius:12px;padding:8px 10px;box-shadow:0 8px 18px rgba(10,36,107,.12);font:600 11px/1.25 var(--font-body);color:var(--ink);text-align:left;max-width:124px;opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
+.body-map{position:relative;width:min(340px,100%);max-height:75%;aspect-ratio:3/4.2;margin:0 auto}
+.body-map canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
+.body-map .body-aura{position:absolute;left:12%;right:12%;top:6%;bottom:4%;border-radius:50% 50% 46% 46%;z-index:0;pointer-events:none;opacity:0;
+  background:radial-gradient(ellipse at 50% 42%, rgba(216,16,136,.38) 0%, rgba(123,45,142,.18) 40%, rgba(0,24,120,.0) 70%)}
+.body-map .body-aura.in{opacity:1;animation:stressAura 2.4s ease-out 1 forwards}
+@keyframes stressAura{0%{transform:scale(.88);opacity:.7}55%{transform:scale(1.16);opacity:.35}100%{transform:scale(1.28);opacity:0}}
+.body-map .hlab{position:absolute;z-index:3;background:#fff;border-radius:12px;padding:8px 10px;box-shadow:0 8px 18px rgba(10,36,107,.12);font:600 11px/1.25 var(--font-body);color:var(--ink);text-align:left;max-width:118px;opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .5s cubic-bezier(.2,.7,.2,1);pointer-events:none}
 .body-map .hlab.in{opacity:1;transform:none}
 .body-map .hlab b{display:block;font:700 10px/1.2 var(--font-display);letter-spacing:.06em;text-transform:uppercase;color:var(--magenta-text);margin-bottom:2px}
-.body-map .body-cap{position:absolute;left:50%;bottom:0;translate:-50% 0;z-index:2;margin:0;font:600 12px/1.3 var(--font-body);color:var(--magenta-text);text-align:center;white-space:nowrap}
-.clin-stack{width:min(520px,100%);display:grid;gap:16px;align-content:center}
-.panel-card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 8px 20px rgba(10,36,107,.10);display:grid;gap:12px;text-align:left}
+.body-map .body-cap{position:absolute;left:50%;bottom:2%;transform:translate(-50%,0);z-index:3;margin:0;font:600 12px/1.3 var(--font-body);color:var(--magenta-text);text-align:center;white-space:nowrap;opacity:0;transition:opacity .6s ease}
+.body-map .body-cap.in{opacity:1}
+html.desk-stage #tour #care-body .body-map{width:min(320px,100%);max-height:min(480px,75%)}
+.clin-stack{width:min(520px,100%);display:grid;gap:12px;align-content:center}
+.panel-card{background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 8px 20px rgba(10,36,107,.10);display:grid;gap:8px;text-align:left}
 .panel-card h3{margin:0;font:700 13px/1.2 var(--font-display);color:var(--ink);letter-spacing:.02em}
 .cond-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
 .cpill{display:inline-flex;align-items:center;min-height:32px;padding:8px 12px;border-radius:999px;background:#fff;border:1.5px solid transparent;
   background-image:linear-gradient(#fff,#fff),var(--grad-btn);background-origin:border-box;background-clip:padding-box,border-box;
   font:600 12px/1.2 var(--font-display);color:var(--ink)}
-.prac-list{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px}
-.prac{display:flex;align-items:center;gap:8px;min-height:36px;padding:8px;border-radius:12px;background:#fff;font:600 12px/1.25 var(--font-body);color:var(--ink)}
+.prac-list{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.prac{display:flex;align-items:center;gap:8px;height:44px;min-height:44px;padding:0 6px;border-radius:10px;background:#fff;font:600 12px/1.25 var(--font-body);color:var(--ink);box-sizing:border-box}
 .prac svg{width:18px;height:18px;flex:none;color:#D81088}
 .prac svg *{stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 html.desk-stage #tour #clinicians .desk-copy,
@@ -1130,8 +1132,8 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
     </div>
   </article>
 
-  <!-- A3 head-to-toe / root cause -->
-  <article class="slide" data-chapter="1" data-dur="8200">
+  <!-- A3 head-to-toe / root cause — particle figure from CC0 silhouette -->
+  <article class="slide" data-chapter="1" data-dur="12000" data-root-cause="1">
     <div class="frame desk-split">
       <div class="desk-copy">
         <div class="eyebrow b" data-at="150">Root cause</div>
@@ -1139,7 +1141,15 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
         <p class="sub b" data-at="700">Sleep, mood, weight and blood pressure share pathways — we treat the shared ones.</p>
       </div>
       <div class="desk-hero">
-        <div class="body-map b" data-at="500" id="bodyMap" aria-hidden="true"></div>
+        <div class="body-map" id="bodyMap" aria-hidden="true">
+          <div class="body-aura" id="bodyAura"></div>
+          <canvas id="bodyCanvas" width="360" height="504"></canvas>
+          <div class="hlab" data-lab="head" style="left:0;top:8%"><b>Head</b>Focus, mood, sleep</div>
+          <div class="hlab" data-lab="heart" style="right:0;top:28%"><b>Heart</b>Blood pressure</div>
+          <div class="hlab" data-lab="meta" style="left:0;top:50%"><b>Metabolism</b>Weight, energy</div>
+          <div class="hlab" data-lab="horm" style="right:0;top:60%"><b>Hormones</b></div>
+          <p class="body-cap" id="bodyCap">Stress connects them all.</p>
+        </div>
       </div>
     </div>
   </article>
@@ -2337,58 +2347,6 @@ const lucSvg=(ic)=>`<svg viewBox="0 0 24 24" aria-hidden="true">${icons[ic]}</sv
     }).join('');
 })();
 
-/* A3 body map — outline adapted from Health Icons "body" (CC0, healthicons.org); leaders on anatomy; stress aura */
-(()=>{
-  const el=$('bodyMap'); if(!el)return;
-  /* Front-view outline with outstretched arms and two legs.
-     Pose/proportions adapted from Health Icons body.svg (CC0, healthicons.org). */
-  const head='M150 48m-25 0a25 25 0 1 0 50 0a25 25 0 1 0 -50 0';
-  const body=`M150 73 L150 98
-    M100 118
-    C118 106 134 100 150 100
-    C166 100 182 106 200 118
-    L255 145
-    C275 156 278 178 258 190
-    L210 160
-    L204 230
-    C204 248 192 262 176 268
-    L170 330
-    C168 352 172 368 182 372
-    C192 376 198 368 196 350
-    L188 275
-    L150 268
-    L112 275
-    L104 350
-    C102 368 108 376 118 372
-    C128 368 132 352 130 330
-    L124 268
-    C108 262 96 248 96 230
-    L90 160
-    L42 190
-    C22 178 25 156 45 145
-    Z`;
-  const headPt=[150,48], heartPt=[168,158], gutPt=[136,228], hormPt=[160,255];
-  el.innerHTML=`<div class="body-aura fade" data-at="3800"></div>
-  <svg viewBox="0 0 300 400" aria-hidden="true">
-    <defs><linearGradient id="bodyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#D81088"/><stop offset="55%" stop-color="#7B2D8E"/><stop offset="100%" stop-color="#001878"/></linearGradient></defs>
-    <path class="draw" data-at="700" pathLength="1" d="${head}" fill="none" stroke="url(#bodyG)" stroke-width="2.8"/>
-    <path class="draw" data-at="950" pathLength="1" d="${body}" fill="none" stroke="url(#bodyG)" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
-    <path class="draw" data-at="1400" pathLength="1" d="M${headPt[0]} ${headPt[1]} L44 60" stroke="rgba(216,16,136,.55)" stroke-width="1.6" fill="none"/>
-    <path class="draw" data-at="1800" pathLength="1" d="M${heartPt[0]} ${heartPt[1]} L256 150" stroke="rgba(216,16,136,.55)" stroke-width="1.6" fill="none"/>
-    <path class="draw" data-at="2200" pathLength="1" d="M${gutPt[0]} ${gutPt[1]} L44 232" stroke="rgba(216,16,136,.55)" stroke-width="1.6" fill="none"/>
-    <path class="draw" data-at="2600" pathLength="1" d="M${hormPt[0]} ${hormPt[1]} L256 262" stroke="rgba(216,16,136,.55)" stroke-width="1.6" fill="none"/>
-    <circle cx="${headPt[0]}" cy="${headPt[1]}" r="2.8" fill="#D81088" class="fade" data-at="1400"/>
-    <circle cx="${heartPt[0]}" cy="${heartPt[1]}" r="2.8" fill="#D81088" class="fade" data-at="1800"/>
-    <circle cx="${gutPt[0]}" cy="${gutPt[1]}" r="2.8" fill="#D81088" class="fade" data-at="2200"/>
-    <circle cx="${hormPt[0]}" cy="${hormPt[1]}" r="2.8" fill="#D81088" class="fade" data-at="2600"/>
-  </svg>
-  <div class="hlab pop" data-at="1500" style="left:0;top:8%"><b>Head</b>Focus, mood, sleep</div>
-  <div class="hlab pop" data-at="1900" style="right:0;top:28%"><b>Heart</b>Blood pressure</div>
-  <div class="hlab pop" data-at="2300" style="left:0;top:48%"><b>Gut / metabolism</b>Weight, energy</div>
-  <div class="hlab pop" data-at="2700" style="right:0;top:58%"><b>Hormones</b></div>
-  <p class="body-cap fade" data-at="4000">Stress connects them all.</p>`;
-})();
-
 /* connected-conditions web (problem 3 + fix 3) */
 const conds=[['Sleep','Sleep clinic'],['Focus','ADHD clinic'],['Weight','Weight clinic'],['Blood pressure','Cardiologist'],['Blood sugar','Endocrinologist'],['Hormones','Hormone specialist'],['Mood','Psychiatrist'],['Hair loss','Dermatologist']];
 const pos=conds.map((_,i)=>{const a=-Math.PI/2+i*Math.PI*2/conds.length;
@@ -2417,6 +2375,262 @@ const push=phone?[18,12]:[55,40];
 })();
 
 }
+
+/* A3 body map — CC0 silhouette → intro-style diamond particles + neural/vessel overlays */
+const BODY_SVG = '/employers/demo/media/body-silhouette-cc0.svg';
+const BODY_SRC_NOTE = 'Wikimedia Commons File:Human silhouette gender neutral front.svg (CC0)';
+function bodyParticleBudget(){
+  const phone = typeof isPhoneLayout==='function' ? isPhoneLayout() : (innerWidth<=640);
+  const low = (navigator.deviceMemory && navigator.deviceMemory<=4) || phone;
+  return low ? 900 : 1800;
+}
+function lerp(a,b,t){return a+(b-a)*t;}
+function easeOutCubic(t){return 1-Math.pow(1-t,3);}
+function brandColorAtX(nx){
+  /* Match intro wordmark gradient-by-x */
+  const stops=[[0,[216,16,136]],[.4,[168,20,144]],[.8,[10,36,107]],[1,[0,24,120]]];
+  let i=0; while(i<stops.length-1 && nx>stops[i+1][0]) i++;
+  const a=stops[i], b=stops[Math.min(i+1,stops.length-1)];
+  const u=(nx-a[0])/Math.max(.0001,b[0]-a[0]);
+  const c=a[1].map((v,k)=>Math.round(v+(b[1][k]-v)*u));
+  return `rgb(${c[0]},${c[1]},${c[2]})`;
+}
+async function sampleBodySilhouette(count){
+  const img=new Image();
+  img.decoding='async';
+  await new Promise((res,rej)=>{img.onload=()=>res();img.onerror=()=>rej(new Error('body silhouette load failed'));img.src=BODY_SVG;});
+  const sw=220, sh=Math.round(220*(img.naturalHeight/Math.max(1,img.naturalWidth)));
+  const c=document.createElement('canvas'); c.width=sw; c.height=sh;
+  const g=c.getContext('2d',{willReadFrequently:true});
+  g.clearRect(0,0,sw,sh);
+  g.fillStyle='#000'; g.fillRect(0,0,sw,sh);
+  g.drawImage(img,0,0,sw,sh);
+  const data=g.getImageData(0,0,sw,sh).data;
+  const hits=[];
+  for(let y=0;y<sh;y+=1){
+    for(let x=0;x<sw;x+=1){
+      const i=(y*sw+x)*4;
+      /* White silhouette on black — pick bright pixels */
+      if(data[i]+data[i+1]+data[i+2]>420) hits.push([x/sw,y/sh]);
+    }
+  }
+  if(hits.length<80) throw new Error('silhouette sample too sparse');
+  const step=Math.max(1,Math.floor(hits.length/count));
+  const pts=[];
+  for(let i=0;i<hits.length && pts.length<count;i+=step) pts.push({nx:hits[i][0], ny:hits[i][1]});
+  while(pts.length<count){const h=hits[(Math.random()*hits.length)|0]; pts.push({nx:h[0],ny:h[1]});}
+  return pts;
+}
+function makeBodyFigure(root){
+  const canvas=$('bodyCanvas'); if(!root||!canvas) return null;
+  const ctx=canvas.getContext('2d');
+  let particles=[], neural=[], vessels=[], running=false, rafId=0, t0=0, settled=false;
+  let pulseT=0, pulsePath=null, pulseU=0, heartScale=1;
+  const labs=[...root.querySelectorAll('.hlab')];
+  const aura=$('bodyAura'), cap=$('bodyCap');
+  const anchors={
+    head:{nx:.5,ny:.08}, heart:{nx:.52,ny:.30}, meta:{nx:.48,ny:.48}, horm:{nx:.52,ny:.58}
+  };
+  function resize(){
+    const r=root.getBoundingClientRect();
+    const dpr=Math.min(2,window.devicePixelRatio||1);
+    const w=Math.max(200,Math.floor(r.width)), h=Math.max(280,Math.floor(r.height));
+    canvas.width=Math.floor(w*dpr); canvas.height=Math.floor(h*dpr);
+    canvas.style.width=w+'px'; canvas.style.height=h+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    return {w,h};
+  }
+  function buildGraph(pts, w, h){
+    const padX=w*.18, padY=h*.04, fw=w*.64, fh=h*.88;
+    particles=pts.map((p,i)=>{
+      const tx=padX+p.nx*fw, ty=padY+p.ny*fh;
+      const lr=1.1+Math.random()*.9;
+      return {
+        sx:tx+(Math.random()-.5)*w*1.2, sy:ty+(Math.random()-.5)*h*1.2,
+        tx,ty,x:0,y:0, lr, lc:brandColorAtX(p.nx), delay:Math.random()*.35, nx:p.nx, ny:p.ny, i
+      };
+    });
+    /* neural: head + spine band */
+    const head=particles.filter(p=>p.ny<.16);
+    const spine=particles.filter(p=>Math.abs(p.nx-.5)<.07 && p.ny>=.14 && p.ny<.62);
+    const pool=[...head,...spine];
+    neural=[];
+    for(let i=0;i<pool.length;i++){
+      const a=pool[i]; let best=null,bd=1e9;
+      for(let j=0;j<pool.length;j++){
+        if(i===j)continue; const b=pool[j];
+        const d=Math.hypot(a.tx-b.tx,a.ty-b.ty);
+        if(d>6 && d<28 && d<bd){bd=d;best=b;}
+      }
+      if(best) neural.push([a,best]);
+    }
+    neural=neural.slice(0,Math.min(neural.length,140));
+    const heart=particles.reduce((b,p)=>Math.hypot(p.nx-.52,p.ny-.30)<Math.hypot(b.nx-.52,b.ny-.30)?p:b,particles[0]);
+    const ends=[
+      particles.reduce((b,p)=>p.ny<b.ny?p:b,particles[0]), /* head */
+      particles.reduce((b,p)=>p.nx<b.nx && p.ny<.4?p:b,particles[0]), /* L arm */
+      particles.reduce((b,p)=>p.nx>b.nx && p.ny<.4?p:b,particles[0]), /* R arm */
+      particles.reduce((b,p)=>p.nx<.45 && p.ny>b.ny?p:b,particles[0]), /* L leg */
+      particles.reduce((b,p)=>p.nx>.55 && p.ny>b.ny?p:b,particles[0]), /* R leg */
+      particles.reduce((b,p)=>Math.hypot(p.nx-.5,p.ny-.22)<Math.hypot(b.nx-.5,b.ny-.22)?p:b,particles[0]),
+      particles.reduce((b,p)=>Math.hypot(p.nx-.35,p.ny-.55)<Math.hypot(b.nx-.35,b.ny-.55)?p:b,particles[0]),
+      particles.reduce((b,p)=>Math.hypot(p.nx-.65,p.ny-.55)<Math.hypot(b.nx-.65,b.ny-.55)?p:b,particles[0]),
+    ];
+    vessels=ends.map((e,k)=>{
+      const c1x=heart.tx+(e.tx-heart.tx)*.35+(k%2?-18:18);
+      const c1y=heart.ty+(e.ty-heart.ty)*.25;
+      const c2x=heart.tx+(e.tx-heart.tx)*.7+(k%2?14:-14);
+      const c2y=heart.ty+(e.ty-heart.ty)*.7;
+      return {hx:heart.tx,hy:heart.ty,c1x,c1y,c2x,c2y,ex:e.tx,ey:e.ty,u:Math.random(),spd:.08+.04*(k%3)};
+    });
+    return heart;
+  }
+  function bez(v,u){
+    const t=u, mt=1-t;
+    return {
+      x: mt*mt*mt*v.hx + 3*mt*mt*t*v.c1x + 3*mt*t*t*v.c2x + t*t*t*v.ex,
+      y: mt*mt*mt*v.hy + 3*mt*mt*t*v.c1y + 3*mt*t*t*v.c2y + t*t*t*v.ey
+    };
+  }
+  function diamond(x,y,r){ctx.beginPath();ctx.moveTo(x,y-r);ctx.lineTo(x+r,y);ctx.lineTo(x,y+r);ctx.lineTo(x-r,y);ctx.closePath();ctx.fill();}
+  function drawLeaders(w,h){
+    const padX=w*.18, padY=h*.04, fw=w*.64, fh=h*.88;
+    const map={head:anchors.head,heart:anchors.heart,meta:anchors.meta,horm:anchors.horm};
+    ctx.save(); ctx.strokeStyle='rgba(216,16,136,.55)'; ctx.fillStyle='#D81088'; ctx.lineWidth=1.4;
+    labs.forEach(lab=>{
+      if(!lab.classList.contains('in')) return;
+      const key=lab.getAttribute('data-lab'); const a=map[key]; if(!a) return;
+      const ax=padX+a.nx*fw, ay=padY+a.ny*fh;
+      const br=lab.getBoundingClientRect(), rr=root.getBoundingClientRect();
+      const lx=br.left-rr.left+(lab.style.left==='0px'||lab.style.left===''||getComputedStyle(lab).left==='0px'?br.width:0);
+      const side=lab.style.right==='0px'||lab.getAttribute('style')?.includes('right') ? 'right':'left';
+      const lx2=side==='left' ? (br.right-rr.left) : (br.left-rr.left);
+      const ly=br.top-rr.top+br.height*.45;
+      ctx.beginPath(); ctx.moveTo(lx2,ly); ctx.lineTo(ax,ay); ctx.stroke();
+      ctx.beginPath(); ctx.arc(ax,ay,2.6,0,Math.PI*2); ctx.fill();
+    });
+    ctx.restore();
+  }
+  function frame(now){
+    if(!running) return;
+    const r=root.getBoundingClientRect(); const w=r.width, h=r.height;
+    const T=(now-t0)/1000;
+    const dpr=Math.min(2,window.devicePixelRatio||1);
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    /* settle 0–2s */
+    const settle=reduce?1:easeOutCubic(Math.min(1,T/2));
+    for(const p of particles){
+      const local=reduce?1:easeOutCubic(Math.min(1,Math.max(0,(T-p.delay)/1.65)));
+      p.x=lerp(p.sx,p.tx,local); p.y=lerp(p.sy,p.ty,local);
+    }
+    if(!reduce && settle>.55){
+      ctx.save(); ctx.globalCompositeOperation='lighter'; ctx.strokeStyle='rgba(244,239,231,.25)'; ctx.lineWidth=.7;
+      for(const [a,b] of neural){ ctx.globalAlpha=.25; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); }
+      ctx.restore();
+      /* neural pulse every ~0.6s */
+      if(!pulsePath || pulseU>=1){
+        if(T-pulseT>0.6 && neural.length){
+          pulseT=T; pulseU=0;
+          const start=neural[(Math.random()*neural.length)|0][0];
+          const chain=[start];
+          let cur=start;
+          for(let k=0;k<7;k++){
+            let next=null,bd=1e9;
+            for(const [a,b] of neural){
+              const o=a===cur?b:b===cur?a:null; if(!o) continue;
+              if(chain.includes(o)) continue;
+              const d=Math.hypot(o.tx-cur.tx,o.ty-cur.ty);
+              if(d<bd){bd=d;next=o;}
+            }
+            if(!next) break; chain.push(next); cur=next;
+          }
+          pulsePath=chain;
+        }
+      }else{
+        pulseU=Math.min(1,pulseU+0.018);
+        const idx=Math.min(pulsePath.length-1.001, pulseU*(pulsePath.length-1));
+        const i0=idx|0, i1=Math.min(pulsePath.length-1,i0+1), u=idx-i0;
+        const a=pulsePath[i0], b=pulsePath[i1];
+        const x=lerp(a.x,b.x,u), y=lerp(a.y,b.y,u);
+        ctx.save(); ctx.globalCompositeOperation='lighter';
+        ctx.fillStyle='#FFF4FA'; ctx.globalAlpha=.95; diamond(x,y,3.2);
+        ctx.globalAlpha=.35; diamond(x,y,7); ctx.restore();
+        if(pulseU>=1) pulsePath=null;
+      }
+      /* vessels */
+      ctx.save(); ctx.globalCompositeOperation='lighter'; ctx.strokeStyle='rgba(216,16,136,.28)'; ctx.lineWidth=1.1;
+      for(const v of vessels){
+        ctx.beginPath(); ctx.moveTo(v.hx,v.hy); ctx.bezierCurveTo(v.c1x,v.c1y,v.c2x,v.c2y,v.ex,v.ey); ctx.stroke();
+        v.u=(v.u+v.spd*0.016)%1;
+        const pt=bez(v,v.u);
+        ctx.fillStyle='#FF5CB8'; ctx.globalAlpha=.9; diamond(pt.x,pt.y,2.4);
+        ctx.fillStyle='#fff'; ctx.globalAlpha=.75; diamond(pt.x,pt.y,1.1);
+      }
+      ctx.restore();
+      heartScale=1+0.15*Math.abs(Math.sin(T*Math.PI*2)); /* 1 Hz */
+    }else heartScale=1;
+    /* particles */
+    for(const p of particles){
+      const isHeart=Math.hypot(p.nx-.52,p.ny-.30)<.045;
+      const lr=p.lr*(isHeart?heartScale:1)*(reduce?1.15:1);
+      ctx.globalCompositeOperation='source-over';
+      ctx.fillStyle=p.lc; ctx.globalAlpha=settle; diamond(p.x,p.y,lr);
+      ctx.fillStyle='#FFFFFF'; ctx.globalAlpha=settle*.9; diamond(p.x,p.y,lr*.42);
+    }
+    if(settled || T>=2.05){
+      if(!settled){
+        settled=true;
+        const times={head:2200,heart:2600,meta:3000,horm:3400};
+        labs.forEach(lab=>{
+          const k=lab.getAttribute('data-lab');
+          setTimeout(()=>lab.classList.add('in'), reduce?0:(times[k]||2200));
+        });
+        setTimeout(()=>{ if(aura) aura.classList.add('in'); }, reduce?200:4200);
+        setTimeout(()=>{ if(cap) cap.classList.add('in'); }, reduce?300:4600);
+      }
+      drawLeaders(w,h);
+    }
+    if(running) rafId=requestAnimationFrame(frame);
+  }
+  async function start(){
+    stop();
+    labs.forEach(l=>l.classList.remove('in'));
+    if(aura) aura.classList.remove('in');
+    if(cap) cap.classList.remove('in');
+    settled=false; pulsePath=null; pulseU=0; pulseT=0;
+    const {w,h}=resize();
+    try{
+      const pts=await sampleBodySilhouette(bodyParticleBudget());
+      buildGraph(pts,w,h);
+    }catch(e){
+      console.warn(BODY_SRC_NOTE, e);
+      return;
+    }
+    running=true; t0=performance.now();
+    if(reduce){
+      for(const p of particles){p.x=p.tx;p.y=p.ty;}
+      settled=true; labs.forEach(l=>l.classList.add('in')); if(cap) cap.classList.add('in');
+      running=true; t0=performance.now()-5000; /* force settled timeline */
+      rafId=requestAnimationFrame(function once(now){ frame(now); stop(); });
+      return;
+    }
+    rafId=requestAnimationFrame(frame);
+  }
+  function stop(){
+    running=false;
+    if(rafId){cancelAnimationFrame(rafId); rafId=0;}
+  }
+  return {start,stop,resize};
+}
+let bodyFigure=null;
+(()=>{
+  const el=$('bodyMap'); if(!el) return;
+  bodyFigure=makeBodyFigure(el);
+  window.__bodyFigure=bodyFigure;
+})();
+
 /* privacy grid retired */
 
 /* engine */
@@ -2438,11 +2652,34 @@ function applyDemoFlags(){
     if(vid){vid.removeAttribute('poster');vid.querySelectorAll('source,track').forEach(n=>n.remove());vid.hidden=true;}
   }
 }
+const SLIDE_ALIASES={
+  'root-cause':'care-body','care-body':'care-body','meet-siya':'turn','turn':'turn',
+  'checklist':'care-checklist','care-checklist':'care-checklist','clinicians':'clinicians'
+};
+function playSlideDeepLink(raw,{playBuild=true}={}){
+  const id=SLIDE_ALIASES[String(raw||'').toLowerCase()]||String(raw||'');
+  collectSlides();
+  const i=slides.findIndex(s=>s.id===id);
+  if(i<0) return false;
+  try{phase='done';cancelAnimationFrame(raf);}catch(e){}
+  if(begin) begin.hidden=true;
+  welcome.classList.remove('on');
+  tour.hidden=false; tour.classList.add('on');
+  tourOn=true;
+  if(playBuild){
+    paused=false; pausedTourMusic=false; $('pause').textContent='Pause';
+    try{ensureMusic();}catch(e){}
+    show(i);
+  }else{
+    window.__employerDemo.showSlide(id);
+  }
+  return true;
+}
 window.__employerDemo={
   showFounder,realOutcomes,applyDemoFlags,WALK_MS,isPhoneLayout,demoHost,demoEmbed,
   getAudio:()=>audio,
   MUSIC_LEVEL,MUSIC_PAD_PEAK,MUSIC_ARP_PEAK,MUSIC_PULSE_PEAK,
-  ensureMusic,
+  ensureMusic,playSlideDeepLink,SLIDE_ALIASES,
   /* review/QA helper — finishes builds on the target slide */
   showSlide(id){
     collectSlides();
@@ -2644,6 +2881,13 @@ function show(i){
     requestAnimationFrame(fitWalk);
   }else requestAnimationFrame(fitWalk);
   paintChapters();
+  try{
+    const bf=window.__bodyFigure;
+    if(bf){
+      if(s && (s.id==='care-body' || s.hasAttribute('data-root-cause'))) bf.start();
+      else bf.stop();
+    }
+  }catch(e){console.warn(e);}
   /* Guarantee entry blur never sticks (journey + others) */
   requestAnimationFrame(()=>{s.classList.add('active');s.style.filter='none';s.style.opacity='1';});
 }
@@ -2767,13 +3011,24 @@ const boot=()=>{
       phase='done';
       buildWebs();
       collectSlides();
-      welcome.classList.add('on');
+      const deepE=new URLSearchParams(location.search).get('slide');
       document.documentElement.dataset.siyaReady='1';
       postToHost('ready');
+      if(deepE){ setTimeout(()=>{ try{playSlideDeepLink(deepE,{playBuild:true});}catch(e){} }, 40); }
+      else welcome.classList.add('on');
       return;
     }
     buildWebs();
     build();
+    const deep=new URLSearchParams(location.search).get('slide');
+    if(deep){
+      try{phase='done';cancelAnimationFrame(raf);}catch(e){}
+      if(begin) begin.hidden=true;
+      document.documentElement.dataset.siyaReady='1';
+      /* Jump straight into the slide and play its build (review deep-link). */
+      setTimeout(()=>{ try{playSlideDeepLink(deep,{playBuild:true});}catch(e){console.warn(e);} }, 40);
+      return;
+    }
     /* Reduced-motion: calm static intro (same timing), never skip straight to welcome. */
     raf=requestAnimationFrame(frame);
     document.documentElement.dataset.siyaReady='1';
