@@ -142,7 +142,7 @@ function writeLlmsTxt(pages) {
     `- General ADHD care (service page): ${BASE}/adhd-care`,
     `- California evaluation (Ads): ${BASE}/adhd-evaluation-california`,
     `- Texas evaluation (Ads): ${BASE}/adhd-evaluation-texas`,
-    `- Texas ADHD treatment (statewide): ${BASE}/blog/adhd-treatment-texas`,
+    `- Texas ADHD treatment (statewide): ${BASE}/adhd-diagnosis-texas`,
     `- Texas ADHD diagnosis (statewide): ${BASE}/adhd-diagnosis-texas`,
     '',
     '## Labs by common marker (educational topic pages — not a catalogue)',

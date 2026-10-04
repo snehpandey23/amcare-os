@@ -6,7 +6,7 @@
  * or distinct navigation value). Mail-merge city-name swaps do NOT qualify.
  *
  * Retained state owners:
- *   TX treatment  → /blog/adhd-treatment-texas
+ *   TX treatment  → /adhd-diagnosis-texas (former /blog/adhd-treatment-texas retired)
  *   TX diagnosis  → /adhd-diagnosis-texas
  *   CA Ads eval   → /adhd-evaluation-california (lean Ads LP; screening LPs retired)
  *   National care → /adhd-care
@@ -30,11 +30,11 @@ export const GEO_CLONE_REDIRECTS = {
   '/blog/adhd-evaluation-cost-california': '/adult-adhd-california',
 
   // Texas city treatment clones → statewide TX treatment owner
-  '/blog/adhd-treatment-houston-tx': '/blog/adhd-treatment-texas',
-  '/blog/adhd-treatment-austin-tx': '/blog/adhd-treatment-texas',
-  '/blog/adhd-treatment-dallas-tx': '/blog/adhd-treatment-texas',
-  '/blog/adhd-treatment-fort-worth-tx': '/blog/adhd-treatment-texas',
-  '/blog/adhd-treatment-san-antonio-tx': '/blog/adhd-treatment-texas',
+  '/blog/adhd-treatment-houston-tx': '/adhd-diagnosis-texas',
+  '/blog/adhd-treatment-austin-tx': '/adhd-diagnosis-texas',
+  '/blog/adhd-treatment-dallas-tx': '/adhd-diagnosis-texas',
+  '/blog/adhd-treatment-fort-worth-tx': '/adhd-diagnosis-texas',
+  '/blog/adhd-treatment-san-antonio-tx': '/adhd-diagnosis-texas',
 
   // Florida / Pennsylvania city treatment clones → national care
   '/blog/adhd-treatment-miami-fl': '/adhd-care',
@@ -51,7 +51,7 @@ export const GEO_CLONE_REDIRECTS = {
 
 /** State / product pages we keep (not stubs). */
 export const GEO_RETAINED = [
-  '/blog/adhd-treatment-texas',
+  '/adhd-diagnosis-texas',
   '/adhd-diagnosis-texas',
   '/adhd-evaluation-california',
   '/adhd-evaluation-texas',

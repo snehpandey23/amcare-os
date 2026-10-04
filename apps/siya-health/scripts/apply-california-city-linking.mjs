@@ -130,7 +130,7 @@ if (exists('blog/adhd.html')) {
   for (const m of STRIP_MARKERS) html = softStrip(html, m);
   html = html.replace(/href="\/blog\/adhd-treatment-(los-angeles|san-diego|san-francisco|san-jose|sacramento|oakland|orange-county)-ca"/g, 'href="/adult-adhd-california"');
   // Soft-replace TX/FL/PA city treatment links too (retired)
-  html = html.replace(/href="\/blog\/adhd-treatment-(houston|austin|dallas|fort-worth|san-antonio)-tx"/g, 'href="/blog/adhd-treatment-texas"');
+  html = html.replace(/href="\/blog\/adhd-treatment-(houston|austin|dallas|fort-worth|san-antonio)-tx"/g, 'href="/adhd-diagnosis-texas"');
   html = html.replace(/href="\/blog\/adhd-treatment-(miami|orlando)-fl"/g, 'href="/adhd-care"');
   html = html.replace(/href="\/blog\/adhd-treatment-philadelphia-pa"/g, 'href="/adhd-care"');
   write('blog/adhd.html', html);
