@@ -106,4 +106,4 @@ Status: `done` · `in review` · `cut` · `parked` · `hold`.
 |------|-------|--------|-------|
 | 2026-10-03 | Step 1 + Group A | `6d8cd737` | |
 | 2026-10-04 | A3 medical-scan + Group B | `bbe8ac56` | later cut |
-| 2026-10-04 | Cut A3 + B2 + problem fixes + C/D |  | full finish run |
+| 2026-10-04 | Cut A3 + B2 + problem fixes + C/D |  | `bdbfba29` | full finish run |
