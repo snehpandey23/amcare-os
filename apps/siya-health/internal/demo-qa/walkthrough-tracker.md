@@ -82,14 +82,14 @@ Status: `done` · `in review` · `cut` · `parked` · `hold`.
 | employer | yes | |
 | employer-a / b | phone | |
 | journey | hold | walk surface |
-| baseline | hold | |
-| outcomes | yes | |
+| baseline | cut | folded into outcomes subline + Baseline markers |
+| outcomes | yes | dual panels + baseline markers |
 | clinicians | yes | |
-| cost / cost-usual | yes | |
+| cost / cost-usual | yes | phone: Usual/Siya per pair |
 | cost-siya | parked | |
-| privacy* | yes | |
+| privacy* | yes | phone separation visual |
 | proof / proof-nums | yes | |
-| proof-revs | phone reviews | |
+| proof-revs | cut | no marketplace source+date in tracker |
 | founder | parked | |
 | close | yes | close layout |
 

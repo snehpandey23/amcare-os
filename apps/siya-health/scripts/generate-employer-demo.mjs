@@ -40,7 +40,6 @@ const SLIDE_IDS = [
   'employer-a',
   'employer-b',
   'journey',
-  'baseline',
   'outcomes',
   'clinicians',
   'cost',
@@ -51,7 +50,6 @@ const SLIDE_IDS = [
   'privacy-you',
   'proof',
   'proof-nums',
-  'proof-revs',
   'founder',
   'close',
 ];

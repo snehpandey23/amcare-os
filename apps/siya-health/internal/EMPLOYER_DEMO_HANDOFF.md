@@ -109,7 +109,7 @@ The progress bar is six labelled segments. Tap a label to jump to the first slid
 1. The problem
 2. Meet Siya
 3. How it works — “Getting started as an employer” stays; “How your people get care” is removed. The click-through employee journey uses the same phone as the voicemail slide. The video step shows the website photo of Dr. Sneh Pandey, MD, and a silhouette labelled You.
-4. The care — baseline, then outcomes (intake-to-ongoing ruler + personal-progress charts labelled Sample · illustrative). The “coming soon” card stays in the HTML (`#outcomesSoon`) but is hidden. `realOutcomes=false` keeps `#realOutcomes` hidden. Then the clinicians / experience slide.
+4. The care — outcomes (baseline folded into the subline + Baseline markers on each trend line; charts labelled Sample · illustrative). The “coming soon” card stays in the HTML (`#outcomesSoon`) but is hidden. `realOutcomes=false` keeps `#realOutcomes` hidden. Then the clinicians / experience slide.
 5. Cost & privacy — cost comparison on desktop; on phones “The usual way” then “With Siya.” Privacy points employees to The care for personal progress (Sample · illustrative) and shows the employer aggregate sample only. No employee charts on Privacy.
 6. Proof — the numbers and the homepage reviews, then close. The founder slide stays in the code behind `showFounder=false` (parked). When enabled: “A word from our founder”; `employers/demo/media/founder.mp4` + `founder.vtt` when they exist, otherwise poster + “Video coming soon.”
 
@@ -266,20 +266,19 @@ Desktop plays the `desk`/`both` rows; phone plays the `phone`/`both` rows (emplo
 | 12a | employer-a | phone | Getting started | Inquiry, then a meeting. | 3.1s |
 | 12b | employer-b | phone | Getting started | Package, then your link. | 5.1s |
 | 13 | journey | both | How it works | From their link to the follow-up. (7 steps × 3s) | 21s |
-| 14 | baseline | both | The care | Care that starts with a full picture. | 7.9s |
-| 15 | outcomes | both | The care | Outcomes we track, and report to you. | 6.6s |
-| 16 | clinicians | both | Experience | Clinicians who've seen it all. | 5.7s |
-| 17 | cost | desk | Cost | Simple, predictable, inclusive. | 5.2s |
-| 17a | cost-usual | phone | Cost | The usual way. | 4.2s |
-| 17b | cost-siya | phone | Cost | With Siya. | 4.8s |
-| 18 | privacy | desk | Privacy | They get the whole picture. You get the big picture. | 5.3s |
-| 18a | privacy-emp | phone | Privacy | What your employees get. (refcard → The care) | 2.4s |
-| 18b | privacy-you | phone | Privacy | What you get. | 5.2s |
-| 19 | proof | desk | Proof | Don't just take our word for it. | 9.0s |
-| 19a | proof-nums | phone | Proof | Don't just take our word for it. | 4.7s |
-| 19b | proof-revs | phone | Proof | What patients wrote. | 6.3s |
+| 14 | outcomes | both | The care | Progress they feel. Trends you can see. (baseline in subline) | 8.2s |
+| 15 | clinicians | both | Experience | Clinicians who've seen it all. | 5.7s |
+| 16 | cost | desk | Cost | One team. No network maze. | 8.2s |
+| 16a | cost-usual | phone | Cost | One team. No network maze. | 8.2s |
+| 16b | cost-siya | phone | Cost | Parked — merged into cost-usual. | — |
+| 17 | privacy | desk | Privacy | They get the whole picture. You get the big picture. | 7.0s |
+| 17a | privacy-emp | phone | Privacy | Health details stay with the care team. | 5.2s |
+| 17b | privacy-you | phone | Privacy | Aggregate trends only (10+). | 5.6s |
+| 18 | proof | desk | Proof | Don't just take our word for it. | 8.0s |
+| 18a | proof-nums | phone | Proof | Don't just take our word for it. | 7.0s |
+| — | proof-revs | — | Proof | **Removed** — quotes lacked marketplace source + date for health marketing. | — |
 | — | founder | both | Proof | A word from our founder. (**parked**, `showFounder=false`) | 2.6s |
-| 20 | close | both | Siya Health | See it live. One button: Submit an inquiry → `/employers#employer-inquiry-form`. | — |
+| 19 | close | both | Siya Health | See it live. One button: Submit an inquiry → `/employers#employer-inquiry-form`. | — |
 
 Exact copy, timings and build order are in the prototype. Stable `id` / `data-slide-id` on each slide for analytics and deep links.
 
