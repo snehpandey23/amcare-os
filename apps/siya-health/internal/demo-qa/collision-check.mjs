@@ -42,9 +42,10 @@ const STRUCT_SKIP = new Set([
 
 const DEFAULT_SLIDES = [
   'statement', 'p-familiar', 'p-time', 'p-away', 'p-response', 'p-whole', 'p-coord',
-  'question', 'care-checklist',
-  'f-time', 'f-time-a', 'f-time-b',
-  'privacy', 'cost',
+  'question', 'care-checklist', 'turn',
+  'f-time', 'f-time-a', 'f-time-b', 'f-ways', 'f-response', 'f-urgent', 'f-whole',
+  'employer', 'journey', 'baseline', 'outcomes', 'clinicians',
+  'cost', 'privacy', 'proof', 'close',
 ];
 
 const argSlides = process.argv.slice(2).filter((a) => !a.startsWith('-'));

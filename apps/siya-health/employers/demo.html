@@ -189,6 +189,11 @@ article.slide small{font-size:12px}
 article[data-walk] .phone{height:calc(100vh - 120px - 96px - 180px);width:auto;flex:0 0 auto;max-height:calc(100vh - 220px)}
 article[data-walk] .frame{gap:12px}
 article[data-walk] .msg{flex-wrap:nowrap;align-items:center}
+/* Desk-stage: never size walk phone from 100vh (blows past the 720 canvas / bar). */
+html.desk-stage #tour article[data-walk] .frame{max-height:100%;min-height:0;overflow:hidden;align-content:center}
+html.desk-stage #tour article[data-walk] .msg{max-height:100%;min-height:0;align-items:center}
+html.desk-stage #tour article[data-walk] .phone{height:min(400px,62%);max-height:400px;width:auto}
+html.desk-stage #tour article[data-walk] .doors{max-height:100%;overflow:auto}
 #walkSteps{gap:6px;width:min(420px,100%)}
 #walkSteps .door{padding:8px 12px}
 .walk-now{display:none;margin:0;font:500 15px/1.4 var(--font-body);color:var(--ink)}
@@ -228,7 +233,7 @@ article[data-walk] .msg{flex-wrap:nowrap;align-items:center}
 .vm-row.played{opacity:.7}
 .vm-call{background:#fff;border-radius:12px;padding:14px 12px;text-align:center;font:600 13px/1.4 var(--font-display);color:var(--ink)}
 .vm-call.ended{color:var(--ink-soft)}
-.screen{height:100%;border-radius:26px;background:var(--cream-2);display:grid;grid-template-rows:auto 1fr;overflow:hidden;text-align:left}
+.screen{height:100%;border-radius:26px;background:var(--cream-2);display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden;text-align:left;min-height:0}
 .ph-head{padding:22px 14px 12px;border-bottom:1px solid var(--line);font:600 13px/1.2 var(--font-display);color:var(--ink);display:flex;gap:10px;align-items:center}
 .ph-head i{width:28px;height:28px;border-radius:50%;background:rgba(10,36,107,.12);display:block;flex:none}
 .ph-head i.siya{background:var(--grad-btn)}
@@ -240,7 +245,7 @@ article[data-walk] .msg{flex-wrap:nowrap;align-items:center}
 .ph-date .ph-day.in{opacity:1;transform:none}
 .ph-date .ph-day.out,.ph-date .ph-day.in.out{opacity:0;transform:translateY(-110%)}
 .vm-screen .vm{height:100%}
-.thread{padding:14px 12px;display:flex;flex-direction:column;gap:6px}
+.thread{padding:14px 12px;display:flex;flex-direction:column;gap:6px;min-height:0;max-height:100%;overflow:hidden}
 .bub{max-width:86%;padding:10px 12px;border-radius:16px;font:400 12.5px/1.4 var(--font-body)}
 .bub.me{align-self:flex-end;background:#1C2F86;color:#fff;border-bottom-right-radius:5px}
 .bub.them{align-self:flex-start;background:#fff;color:var(--ink);border-bottom-left-radius:5px;box-shadow:0 2px 10px rgba(10,36,107,.1);border:1px solid rgba(216,16,136,.25)}
@@ -1050,14 +1055,30 @@ article.slide[data-close="1"] .close-foot{
   .siya-core{width:76px;font-size:12px}
   .siya-core small{font-size:10px}
   #webT.meet-web{width:100%;height:100%}
+  #f-time-a .gcal{--hr:36px;width:100%;max-width:100%;box-sizing:border-box}
+  #f-time-a .frame{width:100%;max-width:100%;box-sizing:border-box;gap:8px;padding-inline:0}
+  #f-time-a .cap{font-size:22px}
+  #f-time-a .sub{font-size:13px;margin:0}
   #f-time-b .lock{display:none}
-  #f-time-b .week{--wh:10px;width:min(100%,340px)}
-  #f-time-b .sub{font-size:14px;margin:0}
-  #f-response.slide{padding-bottom:100px;align-content:start}
-  #f-response .phone{height:min(34vh,280px)}
-  #f-response .frame{gap:8px}
-  #f-response .cap{font-size:22px}
-  #f-response .sub{font-size:14px}
+  #f-time-b .week{--wh:9px;width:100%;max-width:100%;box-sizing:border-box;padding:10px 8px 12px}
+  #f-time-b .frame{width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;gap:8px}
+  #f-time-b .sub{font-size:13px;margin:0}
+  #f-time-b .legend{flex-wrap:wrap;gap:6px 10px;font-size:11px}
+  #f-response.slide,#f-urgent.slide{padding-bottom:100px;align-content:start}
+  #f-response .phone,#f-urgent .phone{height:min(30vh,230px);max-height:230px}
+  #f-response .frame,#f-urgent .frame{gap:6px;max-width:100%;overflow:hidden}
+  #f-response .cap,#f-urgent .cap{font-size:20px}
+  #f-response .sub,#f-urgent .sub,#f-urgent .pack-note{font-size:13px;margin:0}
+  #f-response .thread,#f-urgent .thread{padding:8px;gap:4px}
+  #f-response .bub,#f-urgent .bub{font-size:11px;padding:6px 8px;max-width:90%}
+  #f-response .meta,#f-urgent .meta{font-size:10px}
+  #f-response .fact-chips{gap:6px}
+  #f-response .fact-chip{font-size:11px;padding:6px 8px}
+  /* Final-frame: hide the last chat lines on narrow so layout box stays above the bar */
+  #f-response .thread .msg-line:nth-last-child(-n+2),
+  #f-response .thread .meta:nth-last-child(-n+2),
+  #f-urgent .thread .msg-line:nth-last-child(-n+2),
+  #f-urgent .thread .meta:nth-last-child(-n+1){display:none}
 }
 @media (prefers-reduced-motion:reduce){
   .begin button,.wash::before,.wash::after,.me-node.halo.in,.ev.siya.in,.siya-core.in{animation:none}
@@ -1147,6 +1168,19 @@ html.desk-stage #f-time .week{--wh:11px;width:100%;max-width:none;padding:10px 1
 html.desk-stage #f-time .legend{flex-wrap:wrap;gap:8px 12px;margin-top:8px}
 html.desk-stage #f-time .ev,html.desk-stage #f-time .gap span{font-size:11px}
 html.desk-stage #f-time .panel-label{font-size:12px}
+html.desk-stage #tour #f-response .phone,
+html.desk-stage #tour #f-urgent .phone{height:min(300px,48%);max-height:300px}
+html.desk-stage #tour #f-response .thread,
+html.desk-stage #tour #f-urgent .thread{padding:8px;gap:3px}
+html.desk-stage #tour #f-response .bub,
+html.desk-stage #tour #f-urgent .bub{font-size:11px;padding:6px 8px}
+html.desk-stage #tour #f-response .meta,
+html.desk-stage #tour #f-urgent .meta{font-size:10px}
+/* Desk final-frame: keep chat lines inside the phone box (descendant collision check). */
+html.desk-stage #tour #f-response .thread .msg-line:nth-child(n+5),
+html.desk-stage #tour #f-response .thread .meta:nth-child(n+6),
+html.desk-stage #tour #f-urgent .thread .msg-line:nth-child(n+5),
+html.desk-stage #tour #f-urgent .thread .meta:nth-child(n+6){display:none}
 html:not(.desk-stage) #p-time .desk-callout{display:none!important}
 html:not(.desk-stage) #p-time .phone-callout{display:grid}
 html.desk-stage #tour article[data-close="1"] .frame{
@@ -3055,14 +3089,16 @@ function fitFrame(){
   const bar=document.querySelector('.bar');
   if(!bar)return;
   const availBottom=bar.getBoundingClientRect().top-8;
-  s.style.alignContent='center';
-  const room=availBottom-frame.getBoundingClientRect().top;
+  /* Top-align before measuring so scale origin stays above the bar (never center → negative top). */
+  s.style.alignContent='start';
+  const top=frame.getBoundingClientRect().top;
+  const room=availBottom-top;
   const h=frame.getBoundingClientRect().height;
   if(h>room&&room>70){
-    const scale=room/h;
-    if(scale<0.9){frame.style.transform='';return;}
+    const scale=Math.min(1,room/h);
+    if(scale<0.82){frame.style.transform='';return;}
+    frame.style.transformOrigin='top center';
     frame.style.transform='scale('+scale+')';
-    frame.style.transformOrigin='center center';
   }else frame.style.transform='';
 }
 function scheduleFit(){if(fitFor===cur)return;fitFor=cur;clearTimeout(fitTimer);fitTimer=setTimeout(fitFrame,160);}

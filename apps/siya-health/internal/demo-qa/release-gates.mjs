@@ -146,82 +146,24 @@ const server = await new Promise((r) => {
 const port = server.address().port;
 const browser = await chromium.launch();
 
-const VIEWS = [[1440, 900], [1366, 768], [1280, 720], [390, 844], [360, 800]];
-const CORE_DESK = [
-  'statement', 'p-familiar', 'p-time', 'p-away', 'p-response', 'p-whole', 'p-coord', 'question',
-  'turn', 'care-checklist', 'f-ways', 'f-response', 'f-urgent', 'f-whole', 'employer',
-  'outcomes', 'clinicians', 'cost', 'privacy', 'proof', 'close',
-];
-const CORE_PHONE = [
-  'statement', 'p-familiar', 'p-time', 'p-away', 'p-response', 'p-whole', 'p-coord', 'question',
-  'turn', 'care-checklist', 'f-ways', 'f-response', 'f-urgent', 'f-whole', 'employer-a',
-  'outcomes', 'clinicians', 'cost-usual', 'privacy-emp', 'proof-nums', 'close',
-];
-
-/* Gate 1: collisions on core slides */
+/* Gate 1: collisions — delegate to descendant getBoundingClientRect check
+   (catches .frame/.week/.thread/absolute/transform; includes f-time-a/b + journey). */
 {
-  const fails = [];
-  for (const [w, h] of VIEWS) {
-    const CORE = w < 500 ? CORE_PHONE : CORE_DESK;
-    for (const id of CORE) {
-      const ctx = await browser.newContext({ viewport: { width: w, height: h }, isMobile: w < 500, hasTouch: w < 500 });
-      const page = await ctx.newPage();
-      await page.goto(`http://127.0.0.1:${port}/employers/demo.html?review=1`, { waitUntil: 'domcontentloaded' });
-      await page.waitForFunction(() => document.documentElement.dataset.siyaReady === '1').catch(() => {});
-      await page.evaluate(() => {
-        const b = document.getElementById('begin'); if (b) b.hidden = true;
-        document.documentElement.classList.add('welcome-live');
-        document.getElementById('welcome')?.classList.remove('on');
-        const tour = document.getElementById('tour');
-        if (tour) { tour.hidden = false; tour.classList.add('on'); }
-      });
-      const ok = await page.evaluate((id) => {
-        try { window.__employerDemo.showSlide(id); return true; } catch { return false; }
-      }, id);
-      if (!ok) { fails.push({ id, viewport: `${w}x${h}`, type: 'missing' }); await ctx.close(); continue; }
-      await page.waitForTimeout(id === 'p-away' || id === 'f-ways' ? 5500 : 2800);
-      const f = await page.evaluate(({ id, viewport }) => {
-        const out = [];
-        const barTop = document.querySelector('.bar')?.getBoundingClientRect().top || innerHeight;
-        const stage = document.querySelector('.desk-canvas') || document.getElementById('tour');
-        const sb = stage?.getBoundingClientRect() || { left: 0, top: 0, right: innerWidth, bottom: innerHeight };
-        const slide = document.querySelector('article.slide.active');
-        if (!slide) return [{ id, viewport, type: 'no-slide' }];
-        const sel = 'h2,.cap,.sub,.eyebrow,.q1,.q2,.proof-card,.panel h3,.ways-card h3,.yt-item b,.funnel-box,.chk-final,.appt-callout,.hr-bub,.away-total,.notif b,.prov-card b';
-        const nodes = [...slide.querySelectorAll(sel)].filter((el) => {
-          const st = getComputedStyle(el);
-          if (st.display === 'none' || st.visibility === 'hidden' || +st.opacity < 0.05) return false;
-          const r = el.getBoundingClientRect();
-          return r.width > 2 && r.height > 2;
-        });
-        const boxes = nodes.map((el) => {
-          const r = el.getBoundingClientRect();
-          return { el, t: (el.textContent || '').trim().slice(0, 36), r };
-        });
-        for (let i = 0; i < boxes.length; i++) {
-          for (let j = i + 1; j < boxes.length; j++) {
-            const A = boxes[i], B = boxes[j];
-            if (A.el.contains(B.el) || B.el.contains(A.el)) continue;
-            const ox = Math.min(A.r.right, B.r.right) - Math.max(A.r.left, B.r.left);
-            const oy = Math.min(A.r.bottom, B.r.bottom) - Math.max(A.r.top, B.r.top);
-            if (ox > 6 && oy > 6) out.push({ id, viewport, type: 'overlap', a: A.t, b: B.t });
-          }
-        }
-        for (const b of boxes) {
-          if (b.r.bottom > barTop + 3) out.push({ id, viewport, type: 'under-bar', t: b.t });
-          if (b.r.left < sb.left - 3 || b.r.right > sb.right + 3) out.push({ id, viewport, type: 'edge', t: b.t });
-        }
-        const days = [...slide.querySelectorAll('.days .day')].filter((el) => el.classList.contains('in') && !el.classList.contains('out') && +getComputedStyle(el).opacity > 0.5);
-        if (days.length > 1) out.push({ id, viewport, type: 'days-stacked', n: days.length });
-        return out;
-      }, { id, viewport: `${w}x${h}` });
-      fails.push(...f);
-      await ctx.close();
-    }
+  try {
+    const out = execSync(
+      'node internal/demo-qa/collision-check.mjs journey f-time-a f-time-b f-response f-urgent f-time p-response cost privacy p-familiar',
+      { cwd: ROOT, encoding: 'utf8', timeout: 180000 },
+    );
+    const n = Number((out.match(/FAILURES\s+(\d+)/) || [])[1] || 0);
+    report.collision = { count: n, sample: out.trim().split('\n').slice(0, 40) };
+    if (n) fail('collision', `descendant-check FAILURES ${n}`);
+    else pass('collision', 'zero failures (descendant getBoundingClientRect vs stage+bar)');
+  } catch (e) {
+    const msg = String(e.stdout || e.message || e).slice(0, 800);
+    const n = Number((msg.match(/FAILURES\s+(\d+)/) || [])[1] || 1);
+    report.collision = { count: n, sample: msg.split('\n').slice(0, 40) };
+    fail('collision', `descendant-check failed: ${msg.slice(0, 300)}`);
   }
-  report.collision = { count: fails.length, sample: fails.slice(0, 40) };
-  if (fails.length) fails.slice(0, 30).forEach((f) => fail('collision', JSON.stringify(f)));
-  else pass('collision', 'zero failures on core slides');
 }
 
 /* Gate 2: UA smoke */
