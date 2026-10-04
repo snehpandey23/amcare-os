@@ -16,7 +16,7 @@ import { TRACKING } from '../data/tracking-config.mjs';
 import { EMPLOYER_PILOT_FACTS as FACTS } from '../data/employer-pilot-facts.mjs';
 
 /** Swap for a scheduling URL later. Both close-slide buttons use this. */
-const DEMO_BOOK_CALL_HREF = '/employers#employer-inquiry-form';
+const DEMO_BOOK_CALL_HREF = '/employers#inquiry-heading';
 
 const SLIDE_IDS = [
   'statement',
@@ -29,10 +29,10 @@ const SLIDE_IDS = [
   'question',
   'turn',
   'care-checklist',
-  'care-body',
   'f-time',
   'f-time-a',
   'f-time-b',
+  'f-ways',
   'f-response',
   'f-urgent',
   'f-whole',
@@ -129,6 +129,10 @@ const klarity = countParts(FACTS.klarityScore.split('/')[0]);
 body = body.replaceAll(
   '<!--KLARITY_STAT-->',
   `<div class="stat b" data-at="2600"><b data-count="${klarity.n}" data-dec="${klarity.dec}" data-at="2600">0</b><span>Marketplace rating (${FACTS.klarityReviewCount} reviews)</span></div>`,
+);
+body = body.replaceAll(
+  '<!--KLARITY_STAT_CARD-->',
+  `<div class="proof-card b" data-at="1200"><b data-count="${klarity.n}" data-dec="${klarity.dec}" data-at="1200">0</b><span>Marketplace rating (${FACTS.klarityReviewCount} reviews)</span></div>`,
 );
 
 body = body.replace(

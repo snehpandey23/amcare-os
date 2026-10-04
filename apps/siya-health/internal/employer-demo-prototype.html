@@ -138,8 +138,6 @@ article.slide small{font-size:12px}
 /* phone */
 .msg{display:flex;gap:clamp(24px,6vw,80px);align-items:center;justify-content:center;flex-wrap:wrap}
 .phone{height:min(46vh,430px);aspect-ratio:9/17;border-radius:34px;background:#0B1133;padding:10px;box-shadow:0 30px 60px rgba(10,36,107,.25)}
-#p-response.slide{padding-bottom:150px}
-#p-response .phone{height:min(46vh,420px)}
 article[data-walk] .phone{height:calc(100vh - 120px - 96px - 180px);width:auto;flex:0 0 auto;max-height:calc(100vh - 220px)}
 article[data-walk] .frame{gap:12px}
 article[data-walk] .msg{flex-wrap:nowrap;align-items:center}
@@ -196,9 +194,12 @@ article[data-walk] .msg{flex-wrap:nowrap;align-items:center}
 .typing span{width:6px;height:6px;border-radius:50%;background:rgba(10,36,107,.45);animation:dot 1s infinite}
 .typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
 @keyframes dot{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-3px);opacity:1}}
-.ticker{display:grid;gap:10px;justify-items:start;text-align:left;min-width:240px}
-.days{position:relative;height:1.15em;width:6.2em;font:600 clamp(42px,6.4vw,80px)/1 var(--font-display);color:var(--ink)}
-.days .b{position:absolute;left:0;top:0}
+.ticker{display:grid;gap:10px;justify-items:start;text-align:left;min-width:0}
+.days{position:relative;height:1.2em;width:12ch;overflow:hidden;font:700 clamp(36px,4.2vw,64px)/1.15 var(--font-display);color:var(--ink)}
+.days .day{position:absolute;left:0;top:0;width:100%;white-space:nowrap;opacity:0;transform:translateY(110%);
+  transition:opacity .45s ease,transform .55s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.days .day.in{opacity:1;transform:none}
+.days .day.out,.days .day.in.out{opacity:0;transform:translateY(-110%)}
 .wait{font:500 15px/1.3 var(--font-body);color:var(--ink-soft)}
 .count{font:600 18px/1 var(--font-display);color:var(--magenta)}
 .bigtime{font:600 clamp(40px,6vw,76px)/1 var(--font-display);color:var(--ink)}
@@ -224,7 +225,10 @@ article[data-walk] .msg{flex-wrap:nowrap;align-items:center}
 @keyframes halo{0%{box-shadow:0 0 0 0 rgba(216,16,136,.45),0 14px 36px rgba(123,45,142,.35)}100%{box-shadow:0 0 0 38px rgba(216,16,136,0),0 14px 36px rgba(123,45,142,.35)}}
 .stress{font:600 clamp(13px,1.4vw,16px)/1 var(--font-display);color:#fff;background:#0A246B;border-radius:999px;padding:14px 22px;box-shadow:0 12px 30px rgba(10,36,107,.3)}
 .cond{font:600 clamp(11px,1.15vw,14px)/1 var(--font-display);color:var(--ink);background:#fff;border-radius:999px;padding:11px 16px;white-space:nowrap;box-shadow:0 8px 22px rgba(10,36,107,.12);border:1px solid rgba(216,16,136,.25)}
-.spec{font:500 clamp(10px,1vw,12px)/1 var(--font-body);color:#fff;background:#6B7394;border-radius:6px;padding:6px 9px;white-space:nowrap}
+.spec{font:600 clamp(10px,1vw,12px)/1 var(--font-body);color:var(--ink);background:#fff;border-radius:8px;padding:7px 10px;white-space:nowrap;
+  border:1.5px solid #0A246B;display:inline-flex;align-items:center;gap:5px;box-shadow:0 4px 12px rgba(10,36,107,.08)}
+.spec svg{width:12px;height:12px;flex:none;color:#0A246B}
+.spec svg *{stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .spec-far{font:500 12px/1.2 var(--font-body);color:var(--ink-soft);background:rgba(10,36,107,.06);border:1px dashed rgba(10,36,107,.3);border-radius:10px;padding:8px 10px;white-space:nowrap}
 .jit.in .app{animation:jit .32s ease-in-out 4}
 @keyframes jit{25%{transform:translate(-2px,1px) rotate(-1.2deg)}75%{transform:translate(2px,-1px) rotate(1.2deg)}}
@@ -624,46 +628,43 @@ article.slide[data-sample="1"].active .sample-cap{display:block}
 .chk-row.in .chk-mark::after{border-color:#fff;transform:rotate(45deg) scale(1)}
 .chk-final{margin-top:8px;border-radius:999px;padding:12px 16px;background:var(--grad-btn);color:#fff;font:700 14px/1.3 var(--font-display);text-align:center;transform-origin:center;box-shadow:0 0 0 0 rgba(216,16,136,.0)}
 .chk-final.in{box-shadow:0 8px 28px rgba(216,16,136,.45),0 0 24px rgba(123,45,142,.35)}
-.scan-panel{position:relative;width:min(360px,100%);max-height:75%;aspect-ratio:3/4.1;margin:0 auto;border-radius:20px;overflow:hidden;
-  background:radial-gradient(120% 90% at 50% 42%, #0B1440 0%, #060B26 70%, #04071A 100%);
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08), 0 16px 40px rgba(5,10,36,.35)}
-.body-map{position:absolute;inset:0;width:100%;height:100%;margin:0;max-height:none;aspect-ratio:auto}
-.body-map canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
-.body-map .body-aura{position:absolute;left:14%;right:14%;top:8%;bottom:6%;border-radius:50% 50% 46% 46%;z-index:0;pointer-events:none;opacity:0;
-  background:radial-gradient(ellipse at 50% 42%, rgba(216,16,136,.42) 0%, rgba(123,45,142,.2) 40%, rgba(0,24,120,.0) 70%)}
-.body-map .body-aura.in{opacity:1;animation:stressAura 2.4s ease-out 1 forwards}
-@keyframes stressAura{0%{transform:scale(.88);opacity:.7}55%{transform:scale(1.16);opacity:.35}100%{transform:scale(1.28);opacity:0}}
-.body-map .hlab{position:absolute;z-index:3;background:rgba(255,255,255,.96);border-radius:12px;padding:8px 10px;box-shadow:0 8px 18px rgba(0,0,0,.28);font:600 11px/1.25 var(--font-body);color:var(--ink);text-align:left;max-width:118px;opacity:0;transform:translateY(6px);transition:opacity .45s ease,transform .5s cubic-bezier(.2,.7,.2,1);pointer-events:none}
-.body-map .hlab.in{opacity:1;transform:none}
-.body-map .hlab b{display:block;font:700 10px/1.2 var(--font-display);letter-spacing:.06em;text-transform:uppercase;color:var(--magenta-text);margin-bottom:2px}
-.body-map .body-cap{position:absolute;left:50%;bottom:4%;transform:translate(-50%,0);z-index:3;margin:0;font:600 12px/1.3 var(--font-body);color:#FFD1F0;text-align:center;white-space:nowrap;opacity:0;transition:opacity .6s ease;text-shadow:0 0 18px rgba(216,16,136,.55)}
-.body-map .body-cap.in{opacity:1}
-html.desk-stage #tour #care-body .scan-panel{width:min(340px,100%);aspect-ratio:3/4.1;height:auto;max-height:min(500px,70vh);min-height:380px}
-html.desk-stage #tour #care-body .desk-hero{width:100%;min-height:400px;align-self:stretch}
-/* B1 team chat */
-.hr-chat{width:min(420px,100%);background:#fff;border-radius:16px;box-shadow:0 8px 24px rgba(10,36,107,.12);overflow:hidden;text-align:left}
-.hr-chat-top{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(10,36,107,.08);background:#FAFBFE}
-.hr-chat-top b{font:700 13px/1.2 var(--font-display);color:var(--ink)}
-.hr-chat-top small{display:block;font:500 11px/1.2 var(--font-body);color:var(--ink-soft)}
-.hr-chat-body{display:grid;gap:10px;padding:14px;min-height:280px}
-.hr-msg{display:flex;gap:10px;align-items:flex-start;opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
-.hr-msg.in{opacity:1;transform:none}
-.hr-av{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font:700 11px/1 var(--font-display);color:#fff;background:var(--grad-btn)}
-.hr-bub{background:rgba(10,36,107,.05);border-radius:12px;padding:9px 12px;font:500 13px/1.35 var(--font-body);color:var(--ink);max-width:100%}
-/* B2 time-away bars */
-.away-stack{width:min(520px,100%);display:grid;gap:16px;text-align:left}
-.away-bar{display:flex;height:44px;border-radius:12px;overflow:hidden;background:rgba(10,36,107,.06);box-shadow:inset 0 0 0 1px rgba(10,36,107,.06)}
-.away-seg{display:flex;align-items:center;justify-content:center;padding:0 4px;font:700 10px/1.1 var(--font-display);color:#fff;text-align:center;transform:scaleX(0);transform-origin:left center;transition:transform .7s cubic-bezier(.5,0,.2,1);min-width:0}
+/* B2 time-away dual timeline (same 120m scale) */
+.away-stack{width:100%;max-width:560px;display:grid;gap:14px;text-align:left;align-content:center}
+.away-row{display:grid;gap:8px}
+.away-row-lab{font:700 12px/1.2 var(--font-display);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft)}
+.away-track{display:flex;height:56px;border-radius:14px;overflow:hidden;background:rgba(10,36,107,.05);box-shadow:inset 0 0 0 1px rgba(10,36,107,.06);position:relative}
+.away-seg{display:flex;align-items:center;justify-content:center;padding:0 8px;font:700 12px/1.15 var(--font-display);color:#fff;text-align:center;min-width:0;
+  transform:scaleX(0);transform-origin:left center;transition:transform .65s cubic-bezier(.5,0,.2,1),opacity .5s ease,filter .5s ease,background .5s ease,box-shadow .5s ease;white-space:nowrap}
 .away-seg.in{transform:scaleX(1)}
-.away-seg:nth-child(1){background:#7B2D8E;flex:40}
-.away-seg:nth-child(2){background:#A81490;flex:45}
-.away-seg:nth-child(3){background:#D81088;flex:20}
-.away-seg:nth-child(4){background:#9B0A63;flex:30}
-.away-seg:nth-child(5){background:#0A246B;flex:40}
-.away-total{font:700 22px/1.2 var(--font-display);color:var(--ink)}
-.away-siya{height:36px;border-radius:12px;background:var(--grad-btn);color:#fff;display:flex;align-items:center;padding:0 14px;font:600 13px/1.2 var(--font-display);
-  transform:scaleX(0);transform-origin:left center;transition:transform .8s cubic-bezier(.5,0,.2,1);width:min(280px,70%)}
-.away-siya.in{transform:scaleX(1)}
+.away-seg.t-travel{background:#7B2D8E;flex:20 1 0}
+.away-seg.t-wait{background:#A81490;flex:60 1 0}
+.away-seg.t-visit{background:#D81088;flex:20 1 0}
+.away-seg.t-back{background:#0A246B;flex:20 1 0}
+.away-total{font:700 18px/1.25 var(--font-display);color:var(--ink);min-height:1.25em}
+.away-phase{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden}
+.away-stack:has(.away-phase.in) .away-usual .away-seg.t-visit{opacity:.22;filter:saturate(.6)}
+/* Siya row */
+.away-siya-track{background:transparent;box-shadow:none;overflow:visible;gap:0}
+.away-ghost{flex:20 1 0;height:56px;border-radius:12px;box-shadow:inset 0 0 0 1.5px dashed rgba(10,36,107,.28);
+  display:flex;align-items:center;justify-content:center;gap:4px;font:600 11px/1.1 var(--font-display);color:var(--ink-soft);
+  opacity:0;transform:scaleX(0);transform-origin:left center;transition:opacity .5s ease,transform .55s cubic-bezier(.5,0,.2,1);margin:0 2px;background:rgba(255,255,255,.35)}
+.away-ghost.w60{flex:60 1 0}
+.away-ghost.in{opacity:1;transform:scaleX(1)}
+.away-ghost span{text-decoration:line-through;text-decoration-color:rgba(10,36,107,.45)}
+.away-ghost b{font-weight:700;color:var(--magenta-text)}
+.away-siya-visit{flex:20 1 0;height:56px;border-radius:12px;background:var(--grad-btn);color:#fff;
+  display:flex;align-items:center;justify-content:center;padding:0 10px;font:700 12px/1.15 var(--font-display);text-align:center;
+  opacity:0;transform:translateY(-64px) scaleX(.92);transform-origin:center;transition:opacity .55s ease,transform .7s cubic-bezier(.2,.8,.2,1);
+  box-shadow:0 8px 22px rgba(216,16,136,.28);margin:0 2px;white-space:nowrap}
+.away-siya-visit.in{opacity:1;transform:none}
+.away-rx{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border-radius:12px;background:rgba(10,36,107,.04);
+  border:1px solid rgba(10,36,107,.08);font:500 12px/1.35 var(--font-body);color:var(--ink)}
+.away-rx::before{content:"";flex:none;width:8px;height:8px;margin-top:5px;border-radius:50%;background:var(--grad-btn)}
+.away-src{margin:0;font:500 11px/1.35 var(--font-body);color:var(--ink-soft)}
+.away-legend{display:none;flex-wrap:wrap;gap:6px 10px;font:600 11px/1.2 var(--font-body);color:var(--ink-soft)}
+.away-legend i{font-style:normal;color:var(--ink)}
+html.desk-stage #tour #p-away .desk-hero{align-content:center;width:100%}
+html.desk-stage #tour #p-away .away-stack{max-width:none;width:100%}
 .clin-stack{width:min(520px,100%);display:grid;gap:12px;align-content:center}
 .panel-card{background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 8px 20px rgba(10,36,107,.10);display:grid;gap:8px;text-align:left}
 .panel-card h3{margin:0;font:700 13px/1.2 var(--font-display);color:var(--ink);letter-spacing:.02em}
@@ -677,10 +678,8 @@ html.desk-stage #tour #care-body .desk-hero{width:100%;min-height:400px;align-se
 .prac svg *{stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 html.desk-stage #tour #clinicians .desk-copy,
 html.desk-stage #tour #care-checklist .desk-copy,
-html.desk-stage #tour #care-body .desk-copy,
 html.desk-stage #tour #turn .desk-copy{padding-bottom:8px}
 html.desk-stage #tour #care-checklist .desk-hero,
-html.desk-stage #tour #care-body .desk-hero,
 html.desk-stage #tour #clinicians .desk-hero,
 html.desk-stage #tour #turn .desk-hero{padding-bottom:8px;align-content:center}
 html.desk-stage #tour #care-checklist .chart-card{width:min(380px,100%)}
@@ -690,19 +689,28 @@ html.desk-stage #tour #care-checklist .chart-card{width:min(380px,100%)}
   .chk-row .chk-mark{width:26px;height:26px}
   .cond-pills{justify-content:center}
   .prac-list{grid-template-columns:1fr 1fr;gap:6px 8px}
-  .scan-panel{width:100%;max-width:100%;height:min(48vh,380px);max-height:min(48vh,380px);aspect-ratio:auto;min-height:260px}
-  .body-map .hlab{max-width:100px;padding:6px 8px;font-size:10px}
-  .body-map .body-cap{font-size:11px;bottom:3%}
   .hr-chat-body{min-height:220px}
-  .away-seg{font-size:9px}
-  #care-body .frame.desk-split{display:grid;grid-template-rows:auto minmax(0,1fr);gap:10px;height:100%;align-content:stretch}
-  #care-body .desk-copy{display:grid;gap:6px;justify-items:center}
-  #care-body .desk-copy .cap{font-size:clamp(22px,6.2vw,28px)}
-  #care-body .desk-copy .sub{font-size:13px}
-  #care-body .desk-hero{min-width:0;width:100%;min-height:0;height:100%;display:grid;place-items:center}
+  .away-track{height:48px}
+  .away-seg{font-size:0;padding:0} /* labels move below on phone */
+  .away-seg::after{display:none!important}
+  .away-ghost{height:48px}
+  .away-ghost span{display:none}
+  .away-ghost b{font-size:10px}
+  .away-siya-visit{height:48px;font-size:11px;white-space:normal;padding:0 6px;line-height:1.15}
+  .away-legend{display:flex}
   #p-familiar .frame.desk-split,#p-away .frame.desk-split{display:grid;grid-template-rows:auto auto;gap:12px;align-content:start}
   #p-familiar .desk-copy,#p-away .desk-copy{display:grid;gap:6px;justify-items:center}
   #p-familiar .desk-hero,#p-away .desk-hero{width:100%;min-width:0}
+  #p-response .frame.desk-split,#p-whole .frame.desk-split,#p-coord .frame.desk-split{display:grid;grid-template-rows:auto auto;gap:12px;align-content:start}
+  #p-response .desk-copy,#p-whole .desk-copy,#p-coord .desk-copy{display:grid;gap:6px;justify-items:center;text-align:center}
+  #p-response .desk-hero,#p-whole .desk-hero,#p-coord .desk-hero{width:100%;min-width:0}
+  #p-coord .frame.desk-split{grid-template-rows:auto auto}
+  #p-coord .desk-hero{order:1}
+  #p-coord .desk-copy{order:2}
+  #p-coord .cap{font-size:clamp(22px,6vw,28px)}
+  #p-away .away-total{font-size:16px}
+  #p-away .desk-copy .cap{font-size:clamp(22px,6.2vw,28px)}
+  #p-away .desk-copy .sub{font-size:13px}
   #turn.slide{padding:12px 14px 100px;align-content:stretch;align-items:stretch}
   #turn .frame{height:100%;grid-template-rows:auto minmax(0,1fr);gap:8px;align-content:stretch}
   #turn .desk-copy{display:grid;gap:6px;justify-items:center}
@@ -715,8 +723,6 @@ html.desk-stage #tour #care-checklist .chart-card{width:min(380px,100%)}
   #care-checklist.slide{padding:14px 16px 108px;align-content:start}
   #care-checklist .frame{gap:10px}
   #care-checklist .chart-card{padding:12px 12px 10px}
-  #care-body.slide{padding:12px 14px 100px;align-content:stretch;align-items:stretch}
-  #care-body .frame{height:100%}
   #clinicians.slide{padding:12px 14px 108px;align-content:start}
   #clinicians .frame{gap:8px}
   #clinicians .cap{font-size:clamp(22px,6vw,28px)}
@@ -727,7 +733,95 @@ html.desk-stage #tour #care-checklist .chart-card{width:min(380px,100%)}
   #clinicians .cpill{min-height:28px;padding:6px 10px;font-size:11px}
   #clinicians .prac{min-height:30px;padding:4px 6px;font-size:11px;gap:6px}
   #clinicians .prac svg{width:16px;height:16px}
-  #care-checklist .desk-hero,#care-body .desk-hero,#clinicians .desk-hero{padding-bottom:4px}
+  #care-checklist .desk-hero,#clinicians .desk-hero{padding-bottom:4px}
+}
+
+/* Continuity phone: 2-col pairs under Stress chip */
+.cont-phone{width:100%;display:grid;gap:12px;justify-items:center}
+.cont-phone .stress{position:relative;z-index:1}
+.cont-grid{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:10px 12px}
+.cont-pair{display:grid;gap:6px;justify-items:center;text-align:center;position:relative;padding-top:10px}
+.cont-pair::before{content:"";position:absolute;top:0;left:50%;width:1.5px;height:10px;background:rgba(216,16,136,.45);transform:translateX(-50%)}
+.cont-pair .cond{font-size:12px;padding:8px 10px}
+.cont-pair .spec{font-size:11px;padding:6px 8px}
+/* Five apps phone stack */
+.apps-stack{width:100%;display:grid;gap:10px;position:relative}
+.apps-stack .app-row{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:12px 14px;
+  box-shadow:0 8px 20px rgba(10,36,107,.10);opacity:0;transform:translateY(12px);transition:opacity .45s ease,transform .5s cubic-bezier(.2,.7,.2,1);position:relative;z-index:1}
+.apps-stack .app-row.in{opacity:1;transform:none}
+.apps-stack .app-row .badge{position:static;min-width:24px;height:24px;border-radius:12px;display:grid;place-items:center;font:700 12px/1 var(--font-display);flex:none}
+.apps-stack .app-row svg{width:22px;height:22px;flex:none}
+.apps-stack .app-row b{font:700 13px/1.2 var(--font-display);color:var(--ink);flex:1;text-align:left;white-space:nowrap}
+.apps-stack .app-row small{font:500 11px/1 var(--font-body);color:var(--ink-soft);display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.apps-scribble{position:absolute;inset:-6px 8px;pointer-events:none;opacity:0;transition:opacity .35s ease;z-index:0}
+.apps-scribble.on{opacity:1}
+.apps-scribble svg{width:100%;height:100%}
+html.desk-stage #tour #p-whole .web{max-height:min(480px,70%);margin:0 auto}
+html.desk-stage #tour #p-response .phone{height:min(520px,72%)}
+html.desk-stage #tour #p-response .days{width:12ch;font-size:clamp(40px,3.6vw,56px)}
+html.desk-stage #tour #p-coord .web{max-height:min(480px,70%)}
+@media (max-width:640px){
+  #p-response .phone{height:min(42vh,360px)}
+  #p-response .days{font-size:36px;width:11ch;margin:0 auto}
+  #p-response .ticker{justify-items:center;width:100%}
+  #p-whole .cont-phone{max-width:100%}
+  #p-coord .apps-stack{max-width:100%}
+}
+
+/* C1 two ways */
+.ways{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
+.ways-card{background:#fff;border-radius:16px;padding:12px;box-shadow:0 8px 22px rgba(10,36,107,.10);display:grid;gap:10px;text-align:left;min-width:0}
+.ways-card h3{margin:0;font:700 13px/1.2 var(--font-display);color:var(--ink)}
+.ways-card .mini-phone{border-radius:14px;background:#0B1133;padding:8px;min-height:220px}
+.ways-card .mini-phone .screen{border-radius:10px;min-height:200px}
+.prov-card{display:grid;grid-template-columns:64px 1fr;gap:10px;align-items:center;padding:10px;border-radius:12px;background:rgba(10,36,107,.04);border:1px solid rgba(10,36,107,.08)}
+.prov-card img{width:64px;height:64px;border-radius:50%;object-fit:cover}
+.prov-card b{display:block;font:700 13px/1.2 var(--font-display);color:var(--ink)}
+.prov-card small{display:block;font:500 11px/1.3 var(--font-body);color:var(--ink-soft)}
+.prov-card a{font:600 11px/1.2 var(--font-body);color:var(--magenta-text);text-decoration:none}
+.rate-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:rgba(216,16,136,.08);font:600 11px/1 var(--font-display);color:var(--ink)}
+.slots{display:flex;flex-wrap:wrap;gap:6px}
+.slot-chip{padding:8px 10px;border-radius:10px;border:1.5px solid rgba(10,36,107,.14);background:#fff;font:600 12px/1 var(--font-display);color:var(--ink);transition:background .3s,color .3s,border-color .3s}
+.slot-chip.on{background:var(--grad-btn);color:#fff;border-color:transparent}
+.photo-tile{display:flex;align-items:center;gap:8px;padding:10px;border-radius:12px;background:#fff;border:1px dashed rgba(10,36,107,.2);font:600 12px/1.2 var(--font-body);color:var(--ink);max-width:86%}
+.photo-tile svg{width:20px;height:20px;color:#0A246B;flex:none}
+/* C5 year timeline */
+.year-tl{width:100%;display:grid;gap:0;position:relative;padding:8px 0}
+.year-tl::before{content:"";position:absolute;left:14px;top:8px;bottom:8px;width:3px;border-radius:2px;background:rgba(216,16,136,.2)}
+.yt-item{display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start;padding:10px 0;opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
+.yt-item.in{opacity:1;transform:none}
+.yt-item i{width:30px;height:30px;border-radius:50%;background:var(--grad-btn);color:#fff;display:grid;place-items:center;font:700 11px/1 var(--font-display);position:relative;z-index:1;box-shadow:0 4px 12px rgba(216,16,136,.3)}
+.yt-item b{display:block;font:700 14px/1.25 var(--font-display);color:var(--ink)}
+.yt-item span{font:500 12px/1.35 var(--font-body);color:var(--ink-soft)}
+/* D privacy funnel */
+.funnel{width:100%;max-width:420px;display:grid;gap:10px;justify-items:stretch;margin:0 auto}
+.funnel-box{background:#fff;border-radius:14px;padding:18px 14px;box-shadow:0 8px 20px rgba(10,36,107,.10);text-align:center;font:600 14px/1.3 var(--font-display);color:var(--ink)}
+.funnel-box small{display:block;margin-top:6px;font:500 12px/1.3 var(--font-body);color:var(--ink-soft)}
+.funnel-arrow{font:700 22px/1 var(--font-display);color:var(--magenta-text);text-align:center}
+/* D proof 2x2 */
+.proof-grid{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.proof-card{background:#fff;border-radius:16px;padding:16px 14px;box-shadow:0 8px 22px rgba(10,36,107,.10);display:grid;gap:6px;align-content:center;min-height:110px;text-align:left}
+.proof-card b{font:700 clamp(28px,3vw,36px)/1 var(--font-display);color:var(--ink);letter-spacing:-.02em}
+.proof-card span{font:500 12px/1.3 var(--font-body);color:var(--ink-soft)}
+/* D outcomes dual */
+.out-dual{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.out-dual .panel{min-height:0}
+.out-dual .panel h3 small{display:inline;margin-left:6px;font:600 10px/1 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+@media (max-width:640px){
+  .ways{grid-template-columns:1fr}
+  .out-dual{grid-template-columns:1fr;width:100%;max-width:100%}
+  .out-dual .panel{width:100%;max-width:100%;box-sizing:border-box;overflow:hidden}
+  .out-dual .panel h3{font-size:12px;line-height:1.25}
+  .out-dual .panel h3 small{display:block;margin:4px 0 0}
+  #outcomes .desk-copy,#outcomes .desk-hero{width:100%;max-width:100%;min-width:0}
+  #outcomes .frame.desk-split{display:grid;grid-template-rows:auto auto;gap:10px;width:100%}
+  .proof-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .proof-card{min-height:90px;padding:12px}
+  .proof-card b{font-size:26px}
+  .notif b{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;max-width:100%}
+  .notif span{font-size:11px}
+  .lock-s{max-width:100%;overflow:hidden}
+  .notif{max-width:100%;box-sizing:border-box}
 }
 .siya-core{width:clamp(110px,12vw,140px);aspect-ratio:1;border-radius:50%;background:var(--grad-btn);color:#fff;display:grid;place-items:center;text-align:center;
   font:700 clamp(14px,1.5vw,18px)/1.15 var(--font-display);box-shadow:0 16px 40px rgba(123,45,142,.4)}
@@ -1061,7 +1155,7 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
         <h2 class="cap b" data-at="250">Appointments that <em>don't fit a workday</em>.</h2>
         <aside class="appt-callout b desk-callout" data-at="2800" aria-label="Doctor appointment callout">
           <b>Doctor's appointment</b>
-          <small>About 2 hrs with travel</small>
+          <small>≈ 2 hours, for a 20-minute visit</small>
           <em class="fit">Doesn't fit</em>
           <em class="slot">No free slot</em>
         </aside>
@@ -1078,7 +1172,7 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
           </div>
           <aside class="appt-callout b phone-callout" data-at="2800" aria-label="Doctor appointment callout">
             <b>Doctor's appointment</b>
-            <small>About 2 hrs with travel</small>
+            <small>≈ 2 hours, for a 20-minute visit</small>
             <em class="fit">Doesn't fit</em>
             <em class="slot">No free slot</em>
           </aside>
@@ -1089,33 +1183,60 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
 
 
   <!-- B2 Time away -->
-  <article class="slide" data-chapter="0" data-dur="8200" data-sample="1">
+  <article class="slide" data-chapter="0" data-dur="10500">
     <div class="frame desk-split">
       <div class="desk-copy">
         <div class="eyebrow b" data-at="150">Time away</div>
-        <h2 class="cap b" data-at="300">A 20-minute visit. <em>Half a day</em> gone.</h2>
-        <p class="sample-cap b" data-at="700">Illustrative · sample data</p>
+        <h2 class="cap b" data-at="300">A 20-minute visit. <em>Two hours</em> gone.</h2>
+        <p class="sub b" data-at="700">On average, a US doctor's visit takes about 2 hours of a patient's time — for about 20 minutes with the doctor.</p>
       </div>
       <div class="desk-hero">
-        <div class="away-stack">
-          <div class="away-bar b" data-at="800">
-            <div class="away-seg grow" data-at="1000">Drive<br>40m</div>
-            <div class="away-seg grow" data-at="1400">Waiting<br>45m</div>
-            <div class="away-seg grow" data-at="1800">Visit<br>20m</div>
-            <div class="away-seg grow" data-at="2200">Pharmacy<br>30m</div>
-            <div class="away-seg grow" data-at="2600">Drive<br>40m</div>
+        <div class="away-stack" id="awayStack">
+          <div class="away-row away-usual">
+            <div class="away-row-lab b" data-at="800">The usual way</div>
+            <div class="away-track">
+              <div class="away-seg t-travel grow" data-at="1000">Travel there 20m</div>
+              <div class="away-seg t-wait grow" data-at="1400">Check-in &amp; waiting 60m</div>
+              <div class="away-seg t-visit grow" data-at="1800">Visit 20m</div>
+              <div class="away-seg t-back grow" data-at="2200">Travel back 20m</div>
+            </div>
+            <div class="away-legend b" data-at="1000"><i>Travel 20m</i><i>Waiting 60m</i><i>Visit 20m</i><i>Travel 20m</i></div>
+            <div class="away-total b" data-at="2700">≈ 2 hours away from work</div>
           </div>
-          <div class="away-total b" data-at="3200">≈ 3 hours</div>
-          <div class="away-siya grow b" data-at="4000">Siya: 20-minute video visit, from their desk.</div>
+          <div class="away-phase b" data-at="3400" aria-hidden="true">siya</div>
+          <div class="away-row away-siya">
+            <div class="away-row-lab b" data-at="3400">With Siya</div>
+            <div class="away-track away-siya-track">
+              <div class="away-ghost b" data-at="3600"><span>Travel</span><b>Not needed</b></div>
+              <div class="away-ghost w60 b" data-at="3800"><span>Waiting</span><b>Not needed</b></div>
+              <div class="away-siya-visit b" data-at="4000">Video visit, from their desk</div>
+              <div class="away-ghost b" data-at="4200"><span>Travel</span><b>Not needed</b></div>
+            </div>
+            <div class="away-total b" data-at="4600">≈ 20 minutes</div>
+          </div>
+          <div class="away-rx b" data-at="5200">Prescription sent to their pharmacy of choice, ready to pick up when it suits them.</div>
+          <p class="away-src b" data-at="5600">Source: Ray et al., American Journal of Managed Care, 2015.</p>
         </div>
       </div>
     </div>
   </article>
   <!-- P2 response -->
   <article class="slide" data-chapter="0" data-dur="12300">
-    <div class="frame">
-      <div class="eyebrow b" data-at="150">Access</div>
-      <div class="msg">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="150">Access</div>
+        <h2 class="cap b" data-at="200">Messages that go <em>unanswered for days</em>.</h2>
+        <div class="ticker b" data-at="700">
+          <div class="days" aria-live="polite">
+            <span class="day" data-at="800" data-out="3200">Monday</span>
+            <span class="day" data-at="3300" data-out="4500">Tuesday</span>
+            <span class="day" data-at="4600" data-out="5600">Wednesday</span>
+            <span class="day" data-at="5800">Thursday</span>
+          </div>
+        </div>
+        <p class="sub b" data-at="10800">And when the reply finally comes, it lands mid-meeting, and the loop starts again.</p>
+      </div>
+      <div class="desk-hero">
         <div class="phone b" data-at="300"><div class="screen vm-screen">
           <div class="ph-head"><i></i><div>Recents<small>Voicemail</small></div></div>
           <div class="vm">
@@ -1138,36 +1259,34 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
             <div class="vm-call ended b" data-at="10800">Call ended</div>
           </div>
         </div></div>
-        <div class="ticker">
-          <div class="days">
-            <span class="b" data-at="800" data-out="3200">Monday</span>
-            <span class="b" data-at="3300" data-out="4500">Tuesday</span>
-            <span class="b" data-at="4600" data-out="5600">Wednesday</span>
-            <span class="b" data-at="5800">Thursday</span>
-          </div>
-        </div>
       </div>
-      <h2 class="cap b" data-at="200">Messages that go <em>unanswered for days</em>.</h2>
-      <p class="sub b" data-at="10800">And when the reply finally comes, it lands mid-meeting, and the loop starts again.</p>
     </div>
   </article>
 
   <!-- P3 connected -->
   <article class="slide" data-chapter="0" data-dur="8400">
-    <div class="frame">
-      <div class="eyebrow b" data-at="150">Continuity</div>
-      <div class="web" id="webP3" data-at="4600"></div>
-      <h2 class="cap b" data-at="6300">It's all connected. <em>Their care isn't.</em></h2>
-      <p class="sub b" data-at="6900">Sleep, stress, weight, hormones and focus often show up together, then get split across doctors who never compare notes.</p>
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="150">Continuity</div>
+        <h2 class="cap b" data-at="300">It's all connected. <em>Their care isn't.</em></h2>
+        <p class="sub b" data-at="700">Sleep, stress, weight, hormones and focus often show up together, then get split across doctors who never compare notes.</p>
+      </div>
+      <div class="desk-hero">
+        <div class="web" id="webP3" data-at="400"></div>
+      </div>
     </div>
   </article>
 
   <!-- P4 coordination -->
-  <article class="slide" data-chapter="0" data-dur="6700">
-    <div class="frame">
-      <div class="eyebrow b" data-at="150">Cost</div>
-      <div class="web jit" id="webP4" data-at="4200"></div>
-      <h2 class="cap b" data-at="5200">Five apps. Five logins. <em>No one connecting the dots.</em></h2>
+  <article class="slide" data-chapter="0" data-dur="7800">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="150">Coordination</div>
+        <h2 class="cap b" data-at="3600">Five apps. Five logins. <em>No one connecting the dots.</em></h2>
+      </div>
+      <div class="desk-hero">
+        <div class="web jit" id="webP4" data-at="400"></div>
+      </div>
     </div>
   </article>
 
@@ -1199,7 +1318,7 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
       <div class="desk-copy">
         <div class="eyebrow b" data-at="150">The full picture</div>
         <h2 class="cap b" data-at="300">One visit. The <em>whole picture</em>.</h2>
-        <p class="sub b" data-at="700">Everything that belongs in a first visit — gathered once, used together.</p>
+        <p class="sub b" data-at="700">Stress, sleep, weight and focus are connected, so we look at them together.</p>
       </div>
       <div class="desk-hero">
         <div class="chart-card b" data-at="500">
@@ -1218,35 +1337,15 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
     </div>
   </article>
 
-  <!-- A3 root cause — medical-scan figure (CC0 silhouette + structured nerves) -->
-  <article class="slide" data-chapter="1" data-dur="11000" data-root-cause="1">
-    <div class="frame desk-split">
-      <div class="desk-copy">
-        <div class="eyebrow b" data-at="150">Root cause</div>
-        <h2 class="cap b" data-at="300">We look for the <em>cause</em>, not just the symptom.</h2>
-        <p class="sub b" data-at="700">Sleep, mood, weight and blood pressure share pathways — we treat the shared ones.</p>
-      </div>
-      <div class="desk-hero">
-        <div class="scan-panel b" data-at="400">
-          <div class="body-map" id="bodyMap" aria-hidden="true">
-            <div class="body-aura" id="bodyAura"></div>
-            <canvas id="bodyCanvas" width="360" height="504"></canvas>
-            <div class="hlab" data-lab="head" style="left:2%;top:6%"><b>Head</b>Focus, mood, sleep</div>
-            <div class="hlab" data-lab="heart" style="right:2%;top:26%"><b>Heart</b>Blood pressure</div>
-            <div class="hlab" data-lab="meta" style="left:2%;top:48%"><b>Metabolism</b>Weight, energy</div>
-            <div class="hlab" data-lab="horm" style="right:2%;top:58%"><b>Hormones</b></div>
-            <p class="body-cap" id="bodyCap">Stress connects them all.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </article>
-
   <!-- F1 time — desktop: day + week together -->
   <article class="slide" data-chapter="2" data-dur="9200" data-surface="desk">
-    <div class="frame">
-      <div class="eyebrow b" data-at="150">How we help · Time</div>
-      <h2 class="cap b" data-at="300">Care that works around <em>their schedule</em>.</h2>
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="150">How we help · Time</div>
+        <h2 class="cap b" data-at="300">Care that works around <em>their schedule</em>.</h2>
+        <p class="sub b" data-at="5600">10–15 minute check-ins between meetings, or longer visits in the evening, on weekends and holidays.</p>
+      </div>
+      <div class="desk-hero">
       <div class="time-panels">
         <div class="time-panel b" data-at="500">
           <p class="panel-label">Quick check-ins</p>
@@ -1268,12 +1367,12 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
             </div>
             <div class="lock b" data-at="4200"><div class="lock-s">
               <div class="clock">7:02</div><div class="date">Saturday</div>
-              <div class="notif pop" data-at="4600"><div class="nh"><i></i>Siya Health · now</div><b>Appointment confirmed</b><span>Your extended 45-minute visit with Dr. Pandey is scheduled for Saturday at 10:00 AM. Your video link is in your email.</span></div>
+              <div class="notif pop" data-at="4600"><div class="nh"><i></i>Siya Health · now</div><b>Extended 45-minute visit with Dr. Pandey</b><span>Saturday 10:00 AM · Link in email</span></div>
             </div></div>
           </div>
         </div>
       </div>
-      <p class="sub b" data-at="5600">10–15 minute check-ins between meetings, or longer visits in the evening, on weekends and holidays.</p>
+      </div>
     </div>
   </article>
 
@@ -1307,76 +1406,142 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
         </div>
         <div class="lock b" data-at="2800"><div class="lock-s">
           <div class="clock">7:02</div><div class="date">Saturday</div>
-          <div class="notif pop" data-at="3200"><div class="nh"><i></i>Siya Health · now</div><b>Appointment confirmed</b><span>Your extended 45-minute visit with Dr. Pandey is scheduled for Saturday at 10:00 AM. Your video link is in your email.</span></div>
+          <div class="notif pop" data-at="3200"><div class="nh"><i></i>Siya Health · now</div><b>Extended 45-minute visit with Dr. Pandey</b><span>Saturday 10:00 AM · Link in email</span></div>
         </div></div>
       </div>
       <p class="sub b" data-at="4800">Longer visits in the evening, on weekends and holidays.</p>
     </div>
   </article>
 
-  <!-- F2 response -->
-  <article class="slide" data-chapter="2" data-dur="8600">
-    <div class="frame">
-      <div class="eyebrow b" data-at="150">How we help · Response</div>
-      <div class="msg">
-        <div class="phone b" data-at="300"><div class="screen">
+
+  <!-- C1 Two ways in -->
+  <article class="slide" data-chapter="2" data-dur="9800">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="150">How we help · Access</div>
+        <h2 class="cap b" data-at="300">Two ways in. <em>Both human.</em></h2>
+        <p class="sub b" data-at="700">Message the care team anytime, or book a visit with a real clinician.</p>
+      </div>
+      <div class="desk-hero">
+        <div class="ways">
+          <div class="ways-card b" data-at="500">
+            <h3>Message the care team</h3>
+            <div class="mini-phone"><div class="screen">
+              <div class="ph-head"><i class="siya"></i><div>Siya Health<small>Care team</small></div></div>
+              <div class="thread">
+                <div class="msg-line me b" data-at="900"><span class="avatar alex" aria-hidden="true">A</span><div class="bub me">Can I get my BP meds refilled?</div></div>
+                <div class="meta r b" data-at="1100">Alex · just now</div>
+                <div class="msg-line them b" data-at="1800"><span class="avatar" aria-hidden="true">C</span><div class="bub them">On it — checking your chart and will confirm shortly.</div></div>
+                <div class="meta l b" data-at="2000">Care team</div>
+              </div>
+            </div></div>
+          </div>
+          <div class="ways-card b" data-at="900">
+            <h3>Book a visit</h3>
+            <div class="prov-card b" data-at="1200">
+              <img src="/assets/images/dr-sneh-pandey.png" width="64" height="64" alt="Dr. Sneh Pandey" loading="lazy">
+              <div>
+                <b>Dr. Sneh Pandey</b>
+                <small>Founder</small>
+                <a href="/providers/dr-sneh-pandey">View provider page</a>
+              </div>
+            </div>
+            <div class="rate-chip b" data-at="1600">★ 4.90 on Google · 102 reviews</div>
+            <div class="slots b" data-at="2000">
+              <span class="slot-chip">Sat 9:00</span>
+              <span class="slot-chip on b" data-at="2800">Sat 10:00</span>
+              <span class="slot-chip">Sat 11:30</span>
+              <span class="slot-chip">Sun 2:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+  <!-- F2 / C2 response -->
+  <article class="slide" data-chapter="2" data-dur="9200">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="150">How we help · Response</div>
+        <h2 class="cap b" data-at="300">Real people. <em>Not AI chat.</em></h2>
+        <div class="fact-chips b" data-at="4200">
+          <span class="fact-chip">__FACTS_RESPONSE_CHIP__</span>
+          <span class="fact-chip">__FACTS_DOCTOR_CHIP__</span>
+        </div>
+        <p class="pack-note b" data-at="5000">Response times and availability depend on your organization's&nbsp;package.</p>
+      </div>
+      <div class="desk-hero">
+        <div class="phone b" data-at="400"><div class="screen">
           <div class="ph-head"><i class="siya"></i><div>Siya Health<small>Your care team</small></div></div>
           <div class="thread">
             <div class="msg-line me b" data-at="700"><span class="avatar alex" aria-hidden="true">A</span><div class="bub me">Sleep's a bit better, but I'm still foggy after lunch.</div></div>
-            <div class="meta r b" data-at="1000">Alex · Mon 12:47 PM</div>
-            <div class="msg-line them b" data-at="1800"><span class="avatar" aria-hidden="true">C</span><div class="bub them">Thanks for the update. I've shared this with Dr. Pandey and will get back to you.</div></div>
-            <div class="meta l b" data-at="2100">Care team · 1:24 PM</div>
-            <div class="msg-line them b" data-at="3000"><span class="avatar" aria-hidden="true">C</span><div class="bub them">Dr. Pandey reviewed it and recommends continuing the same dose for now. Let us know if things don't improve in a few days. We'll check in on Friday.</div></div>
-            <div class="meta l b" data-at="3300">Care team · 4:10 PM</div>
+            <div class="meta r b" data-at="900">Alex · 9:02 AM</div>
+            <div class="msg-line them b" data-at="1600"><span class="avatar" aria-hidden="true">C</span><div class="bub them">Thanks — I've shared this with Dr. Pandey and will get back to you.</div></div>
+            <div class="meta l b" data-at="1800">Care team · 9:24 AM · within 30 minutes</div>
+            <div class="msg-line them b" data-at="3000"><span class="avatar" aria-hidden="true">C</span><div class="bub them">Dr. Pandey reviewed it and recommends continuing the same dose for now. We'll check in on Friday.</div></div>
+            <div class="meta l b" data-at="3200">Dr. Pandey joins · 10:40 AM · a doctor within 2 hours, any time</div>
           </div>
         </div></div>
       </div>
-      <div class="fact-chips b" data-at="4000">
-        <span class="fact-chip">__FACTS_RESPONSE_CHIP__</span>
-        <span class="fact-chip">__FACTS_DOCTOR_CHIP__</span>
+    </div>
+  </article>
+
+  <!-- urgent / C3 -->
+  <article class="slide" data-chapter="2" data-dur="9000">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="150">How we help · Urgent care</div>
+        <h2 class="cap b" data-at="300">Urgent? Handled in the <em>chat.</em></h2>
+        <p class="sub b" data-at="700">No video required when a photo and a few questions are enough.</p>
+        <p class="pack-note b" data-at="5600">Response times and availability depend on your organization's&nbsp;package.</p>
       </div>
-      <h2 class="cap b" data-at="5000">Real replies from real people who <em>know them</em>.</h2>
-      <p class="sub b" data-at="5600">Not a chatbot. A care team that knows their history.</p>
-      <p class="pack-note b" data-at="6200">Response times and availability depend on your organization's&nbsp;package.</p>
+      <div class="desk-hero">
+        <div class="phone b" data-at="400"><div class="screen">
+          <div class="ph-head"><i class="siya"></i><div>Siya Health<small>Your care team</small></div></div>
+          <div class="thread">
+            <div class="msg-line me b" data-at="700"><span class="avatar alex" aria-hidden="true">A</span><div class="bub me">I think I have pink eye. It started tonight.</div></div>
+            <div class="meta r b" data-at="900">Alex · 9:12 PM</div>
+            <div class="msg-line me b" data-at="1300"><span class="avatar alex" aria-hidden="true">A</span>
+              <div class="photo-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="m21 15-4.5-4.5L9 18"/></svg>Photo attached</div>
+            </div>
+            <div class="msg-line them b" data-at="2000"><span class="avatar" aria-hidden="true">C</span><div class="bub them">Got it — triage started. If this is an emergency, call 911. Otherwise we'll have a clinician review shortly.</div></div>
+            <div class="msg-line them b" data-at="3200"><span class="avatar" aria-hidden="true">C</span><div class="bub them">Dr. Pandey reviewed your photo and history. Plan sent — prescription sent to their pharmacy.</div></div>
+            <div class="meta l b" data-at="3400">Dr. Pandey · in chat</div>
+          </div>
+        </div></div>
+      </div>
     </div>
   </article>
 
-  <!-- urgent -->
-  <article class="slide" data-chapter="2" data-dur="6800">
-    <div class="frame">
-      <div class="eyebrow b" data-at="150">How we help · Urgent care</div>
-      <div class="phone b" data-at="300"><div class="screen">
-        <div class="ph-head"><i class="siya"></i><div>Siya Health<small>Your care team</small></div></div>
-        <div class="thread">
-          <div class="msg-line me b" data-at="700"><span class="avatar alex" aria-hidden="true">A</span><div class="bub me">I think I have pink eye. It started tonight.</div></div>
-          <div class="meta r b" data-at="1000">Alex · 9:12 PM</div>
-          <div class="msg-line them b" data-at="1800"><span class="avatar" aria-hidden="true">C</span><div class="bub them">If this is an emergency, call 911. Otherwise, we can arrange an urgent video visit. Would you like us to set that up?</div></div>
-          <div class="msg-line me b" data-at="2800"><span class="avatar alex" aria-hidden="true">A</span><div class="bub me">Yes please.</div></div>
-          <div class="msg-line them b" data-at="3600"><span class="avatar" aria-hidden="true">C</span><div class="bub them">You're booked for an urgent video visit at 9:40 PM.</div></div>
+  <!-- F3 / C5 year care -->
+  <article class="slide" data-chapter="2" data-dur="9000">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="150">How we help · Continuity</div>
+        <h2 class="cap b" data-at="300">Not just when they're <em>sick.</em></h2>
+        <p class="sub b" data-at="700">Ongoing care across the year — join anytime.</p>
+      </div>
+      <div class="desk-hero">
+        <div class="year-tl">
+          <div class="yt-item b" data-at="900"><i>1</i><div><b>First visit</b><span>Full picture, personalized plan</span></div></div>
+          <div class="yt-item b" data-at="1600"><i>2</i><div><b>Labs</b><span>Ordered and reviewed with them</span></div></div>
+          <div class="yt-item b" data-at="2300"><i>3</i><div><b>3-month check-in</b><span>Adjust, celebrate progress</span></div></div>
+          <div class="yt-item b" data-at="3000"><i>4</i><div><b>Annual screenings</b><span>Preventive care on schedule</span></div></div>
+          <div class="yt-item b" data-at="3700"><i>5</i><div><b>Cognitive re-test</b><span>Track focus over time</span></div></div>
         </div>
-      </div></div>
-      <h2 class="cap b" data-at="4600">Something urgent? A doctor within 2 hours, <em>day or night</em>, often sooner.</h2>
-      <p class="sub b" data-at="5200">__FACTS_DOCTOR__</p>
-      <p class="pack-note b" data-at="5600">Response times and availability depend on your organization's&nbsp;package.</p>
+      </div>
     </div>
   </article>
 
-  <!-- F3 whole picture -->
-  <article class="slide" data-chapter="2" data-dur="6900">
-    <div class="frame">
-      <div class="eyebrow b" data-at="150">How we help · The whole person</div>
-      <div class="web" id="webF3"></div>
-      <h2 class="cap b" data-at="4300">One team that sees <em>the whole picture</em>.</h2>
-      <p class="sub b" data-at="4900">Primary care, mental health, cognitive testing, weight, metabolic and hormonal care, including fertility, under one team.</p>
-      <p class="pack-note b" data-at="5400">We refer to local specialists and coordinate care with them when clinically needed.</p>
-    </div>
-  </article>
-
-  <!-- employer start -->
+  <!-- employer start / C6 -->
   <article class="slide" data-chapter="2" data-dur="6300" data-surface="desk">
-    <div class="frame">
-      <div class="eyebrow b" data-at="200">Getting started</div>
-      <h2 class="cap b" data-at="500">As an employer.</h2>
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="200">Getting started</div>
+        <h2 class="cap b" data-at="500">As an <em>employer.</em></h2>
+        <p class="pack-note b" data-at="4800">Joining is voluntary. We never mass-enroll or email your employees.</p>
+      </div>
+      <div class="desk-hero">
       <div class="hero jrail">
         <div class="jline" aria-hidden="true">
           <svg viewBox="0 0 1000 8" preserveAspectRatio="none"><path class="draw" data-at="900" pathLength="1" d="M0 4 H1000" stroke="#D81088" stroke-width="4" fill="none"/></svg>
@@ -1406,7 +1571,7 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
           </div>
         </div>
       </div>
-      <p class="pack-note b" data-at="4800">Joining is voluntary. We never mass-enroll or email your employees.</p>
+      </div>
     </div>
   </article>
 
@@ -1498,27 +1663,30 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
     </div>
   </article>
 
-  <article class="slide" data-chapter="3" data-dur="6600" data-outcomes="1" data-sample="1">
-    <div class="frame">
-      <div class="eyebrow b" data-at="200">The care</div>
-      <h2 class="cap b" data-at="400">Outcomes we track, <em>and report to you</em>.</h2>
-      <p class="sub b" data-at="700">Results vary by person. Outcomes are reported to employers only as de-identified aggregates.</p>
-      <div class="ruler">
-        <div class="b" data-at="1100"><b>Intake</b><span>Baseline</span></div>
-        <div class="b" data-at="1600"><b>4 weeks</b><span>Sleep, mood, stress, focus</span></div>
-        <div class="b" data-at="2100"><b>12 weeks</b><span>The same four again</span></div>
-        <div class="b" data-at="2600"><b>Ongoing</b><span>Check-ins</span></div>
+  <article class="slide" data-chapter="3" data-dur="8200" data-outcomes="1" data-sample="1">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="200">The care</div>
+        <h2 class="cap b" data-at="400">Progress they feel. Trends <em>you</em> can see.</h2>
+        <p class="sub b" data-at="700">Individual health data is never shared with employers.</p>
+        <p class="sample-cap b" data-at="900">Sample data</p>
       </div>
-      <div class="panel pop" data-at="3200">
-        <h3>Personal progress <small>Sample · illustrative</small></h3>
-        <div class="spark"><b>Stress</b><svg viewBox="0 0 80 32"><path class="draw" data-at="3600" pathLength="1" d="M2 6 C 24 8, 48 18, 78 28" fill="none" stroke="#D81088" stroke-width="3" stroke-linecap="round"/></svg><span>8 → <b data-count="4" data-at="3600">0</b></span></div>
-        <div class="spark"><b>Focus</b><svg viewBox="0 0 80 32"><path class="draw" data-at="4100" pathLength="1" d="M2 28 C 24 24, 48 12, 78 4" fill="none" stroke="#0A6B3A" stroke-width="3" stroke-linecap="round"/></svg><span>3 → <b data-count="7" data-at="4100">0</b></span></div>
-        <div class="spark"><b>Sleep quality</b><svg viewBox="0 0 80 32"><path class="draw" data-at="4600" pathLength="1" d="M2 26 C 28 22, 50 10, 78 6" fill="none" stroke="#0A6B3A" stroke-width="3" stroke-linecap="round"/></svg><span>4 → <b data-count="8" data-at="4600">0</b></span></div>
-        <div class="spark"><b>Low mood symptoms</b><svg viewBox="0 0 80 32"><path class="draw" data-at="5100" pathLength="1" d="M2 5 C 26 8, 50 18, 78 27" fill="none" stroke="#D81088" stroke-width="3" stroke-linecap="round"/></svg><span>7 → <b data-count="3" data-at="5100">0</b></span></div>
+      <div class="desk-hero">
+        <div class="out-dual">
+          <div class="panel pop" data-at="1100">
+            <h3>What your team member gets <small>Sample data</small></h3>
+            <div class="spark"><b>Stress</b><svg viewBox="0 0 80 32"><path class="draw" data-at="1600" pathLength="1" d="M2 6 C 24 8, 48 18, 78 28" fill="none" stroke="#D81088" stroke-width="3" stroke-linecap="round"/></svg><span>Improving</span></div>
+            <div class="spark"><b>Focus</b><svg viewBox="0 0 80 32"><path class="draw" data-at="2100" pathLength="1" d="M2 28 C 24 24, 48 12, 78 4" fill="none" stroke="#0A6B3A" stroke-width="3" stroke-linecap="round"/></svg><span>Improving</span></div>
+          </div>
+          <div class="panel pop" data-at="1400">
+            <h3>What you see <small>Sample data</small></h3>
+            <div class="spark"><b>Team stress</b><svg viewBox="0 0 80 32"><path class="draw" data-at="2400" pathLength="1" d="M2 8 C 28 10, 52 20, 78 26" fill="none" stroke="#D81088" stroke-width="3" stroke-linecap="round"/></svg><span>Groups of 10+</span></div>
+            <div class="spark"><b>Team focus</b><svg viewBox="0 0 80 32"><path class="draw" data-at="2900" pathLength="1" d="M2 26 C 28 22, 50 12, 78 6" fill="none" stroke="#0A6B3A" stroke-width="3" stroke-linecap="round"/></svg><span>Aggregate only</span></div>
+          </div>
+        </div>
+        <div class="soon b" data-at="5600" id="outcomesSoon" hidden>Clinical outcomes from our patient population, coming soon.</div>
+        <div id="realOutcomes" hidden></div>
       </div>
-      <div class="soon b" data-at="5600" id="outcomesSoon" hidden>Clinical outcomes from our patient population, coming soon.</div>
-      <div id="realOutcomes" hidden></div>
-      <p class="sample-cap">Illustrative · sample data</p>
     </div>
   </article>
 
@@ -1560,55 +1728,56 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
     </div>
   </article>
 
-  <article class="slide" data-chapter="4" data-dur="5200" data-cost="1" data-surface="desk">
+  <article class="slide" data-chapter="4" data-dur="8200" data-cost="1" data-surface="desk">
     <div class="frame desk-split">
       <div class="desk-copy">
         <div class="eyebrow b" data-at="200">Cost</div>
-        <h2 class="cap b" data-at="400">Simple, predictable, <em>inclusive</em>.</h2>
-        <p class="sub b" data-at="700">So everyone on your team can actually use it.</p>
+        <h2 class="cap b" data-at="400">Clearer than the <em>usual way.</em></h2>
+        <p class="sub b" data-at="700">Meds, labs and outside specialists are billed separately — disclosed before they're ordered.</p>
       </div>
       <div class="desk-hero">
         <div class="compare">
           <div class="panel pop" data-at="1100">
             <h3>The usual way</h3>
-            <div class="strike b" data-at="1600">Claim forms</div>
-            <div class="strike b" data-at="2100">Copays</div>
-            <div class="strike b" data-at="2600">Prior auth</div>
-            <div class="strike b" data-at="3100">Surprise bills</div>
+            <div class="strike b" data-at="1600">Psychiatrist waitlists</div>
+            <div class="strike b" data-at="2100">In/out-of-network confusion</div>
+            <div class="strike b" data-at="2600">Separate copays per specialist</div>
+            <div class="strike b" data-at="3100">Paperwork</div>
           </div>
           <div class="panel pop" data-at="1600">
             <h3>With Siya</h3>
-            <div class="tick b" data-at="2200"><i></i>No insurance claims or copays for included care</div>
-            <div class="tick b" data-at="2700"><i></i>One predictable fee set by your package</div>
-            <div class="tick b" data-at="3200"><i></i>HSA-compatible</div>
-            <div class="tick b" data-at="3700"><i></i>Anything extra disclosed before it's ordered</div>
+            <div class="tick b" data-at="2200"><i></i>One team, no waitlist to start</div>
+            <div class="tick b" data-at="2700"><i></i>No network guessing</div>
+            <div class="tick b" data-at="3200"><i></i>Clear on what's included in your package</div>
           </div>
         </div>
       </div>
     </div>
   </article>
 
-  <article class="slide" data-chapter="4" data-dur="7200" data-surface="phone" data-cost-phone="1">
-    <div class="frame">
-      <div class="eyebrow b" data-at="200">Cost</div>
-      <h2 class="cap b" data-at="400">Simple, predictable, <em>inclusive</em>.</h2>
-      <div class="cost-stack">
-        <div class="panel pop" data-at="800">
-          <h3>The usual way</h3>
-          <div class="strike b" data-at="1200">Claim forms</div>
-          <div class="strike b" data-at="1600">Copays</div>
-          <div class="strike b" data-at="2000">Prior auth</div>
-          <div class="strike b" data-at="2400">Surprise bills</div>
-        </div>
-        <div class="panel pop" data-at="3000">
-          <h3>With Siya</h3>
-          <div class="tick b" data-at="3400"><i></i>No insurance claims or copays for included care</div>
-          <div class="tick b" data-at="3800"><i></i>One predictable fee set by your package</div>
-          <div class="tick b" data-at="4200"><i></i>HSA-compatible</div>
-          <div class="tick b" data-at="4600"><i></i>Anything extra disclosed before it's ordered</div>
+  <article class="slide" data-chapter="4" data-dur="8200" data-surface="phone" data-cost-phone="1">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="200">Cost</div>
+        <h2 class="cap b" data-at="400">Clearer than the <em>usual way.</em></h2>
+      </div>
+      <div class="desk-hero">
+        <div class="cost-stack">
+          <div class="panel pop" data-at="800">
+            <h3>The usual way</h3>
+            <div class="strike b" data-at="1200">Psychiatrist waitlists</div>
+            <div class="strike b" data-at="1600">In/out-of-network confusion</div>
+            <div class="strike b" data-at="2000">Separate copays per specialist</div>
+            <div class="strike b" data-at="2400">Paperwork</div>
+          </div>
+          <div class="panel pop" data-at="3000">
+            <h3>With Siya</h3>
+            <div class="tick b" data-at="3400"><i></i>One team, no waitlist to start</div>
+            <div class="tick b" data-at="3800"><i></i>No network guessing</div>
+            <div class="tick b" data-at="4200"><i></i>Clear on what's included in your package</div>
+          </div>
         </div>
       </div>
-      <p class="sub b" data-at="5200">So everyone on your team can actually use it.</p>
     </div>
   </article>
 
@@ -1620,91 +1789,80 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
     </div>
   </article>
 
-  <article class="slide" data-chapter="4" data-dur="5300" data-surface="desk" data-privacy="1">
-    <div class="frame">
-      <div class="eyebrow b" data-at="200">Privacy</div>
-      <h2 class="cap b" data-at="450">They get the whole picture. You get the big picture.</h2>
-      <p class="sub b" data-at="800">Aggregate reports only, for groups of 10 or more. Never who, or why.</p>
-      <div class="hero split2">
-        <div class="refcard pop" data-at="1100">Personal progress is in The care, labelled Sample · illustrative.</div>
-        <div class="lockcol" aria-hidden="true"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A246B" stroke-width="2"><rect x="6" y="11" width="12" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></i></div>
-        <div class="panel pop" data-at="1400">
-          <h3>What you get <small>Sample</small></h3>
-          <div class="rgrid">
-            <div><b data-count="40" data-at="2000">0</b><span>Employees enrolled</span></div>
-            <div><b data-count="64" data-at="2400">0</b><span>Visits this month</span></div>
-            <div><b data-count="92" data-at="2800" data-suf="%">0</b><span>Check-ins completed</span></div>
-          </div>
-          <div class="bars" aria-hidden="true"><i class="grow" data-at="3200" style="--h:46%"></i><i class="grow" data-at="3400" style="--h:62%"></i><i class="grow" data-at="3600" style="--h:78%"></i><i class="grow" data-at="3800" style="--h:70%"></i></div>
-          <div class="rfoot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0A246B" stroke-width="2" style="vertical-align:-2px"><rect x="6" y="11" width="12" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> No names. No reasons for visits.</div>
+  <article class="slide" data-chapter="4" data-dur="7000" data-surface="desk" data-privacy="1">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="200">Privacy</div>
+        <h2 class="cap b" data-at="400">They get the whole picture. You get the <em>big picture.</em></h2>
+        <p class="sub b" data-at="700">Aggregate reports only, for groups of 10 or more. Never who, or why.</p>
+      </div>
+      <div class="desk-hero">
+        <div class="funnel b" data-at="1000">
+          <div class="funnel-box pop" data-at="1200">Health details<small>Stay with the care team</small></div>
+          <div class="funnel-arrow b" data-at="1800">↓</div>
+          <div class="funnel-box pop" data-at="2200">You see<small>Aggregate trends only (10+)</small></div>
         </div>
       </div>
     </div>
   </article>
 
   <article class="slide" data-chapter="4" data-dur="2400" data-surface="phone">
-    <div class="frame">
-      <div class="eyebrow b" data-at="200">Privacy</div>
-      <h2 class="cap b" data-at="450">What your employees get.</h2>
-      <div class="refcard pop" data-at="900">Personal progress is in The care, labelled Sample · illustrative.</div>
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="200">Privacy</div>
+        <h2 class="cap b" data-at="450">Health details stay with the <em>care team.</em></h2>
+      </div>
+      <div class="desk-hero">
+        <div class="funnel-box pop b" data-at="900">Never who, or why</div>
+      </div>
     </div>
   </article>
 
-  <article class="slide" data-chapter="4" data-dur="5200" data-surface="phone" data-privacy-you="1" data-sample="1">
-    <div class="frame">
-      <div class="eyebrow b" data-at="200">Privacy</div>
-      <h2 class="cap b" data-at="450">What you get.</h2>
-      <p class="sub b" data-at="700">Aggregate reports only, for groups of 10 or more. Never who, or why.</p>
-      <div class="hero panel pop" data-at="1000">
-        <h3>Employer report <small>Sample</small></h3>
-        <div class="rgrid">
-          <div><b data-count="40" data-at="1400">0</b><span>Employees enrolled</span></div>
-          <div><b data-count="64" data-at="1900">0</b><span>Visits this month</span></div>
-          <div><b data-count="92" data-at="2400" data-suf="%">0</b><span>Check-ins completed</span></div>
-        </div>
-        <div class="bars" aria-hidden="true"><i class="grow" data-at="2800" style="--h:46%"></i><i class="grow" data-at="3100" style="--h:62%"></i><i class="grow" data-at="3400" style="--h:78%"></i><i class="grow" data-at="3700" style="--h:70%"></i></div>
-        <div class="rfoot">No names. No reasons for visits.</div>
+  <article class="slide" data-chapter="4" data-dur="5200" data-surface="phone" data-privacy-you="1">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="200">Privacy</div>
+        <h2 class="cap b" data-at="450">You see aggregate trends <em>only (10+).</em></h2>
       </div>
-      <p class="sample-cap">Illustrative · sample data</p>
+      <div class="desk-hero">
+        <div class="funnel-box pop b" data-at="900">No names. No reasons for visits.</div>
+      </div>
     </div>
   </article>
 
   
 
-<article class="slide" data-chapter="5" data-dur="9000" data-surface="desk">
-    <div class="frame">
-      <div class="eyebrow b" data-at="200">Proof</div>
-      <h2 class="cap b" data-at="400">Don't just take our word for it.</h2>
-      <div class="hero proof">
-        <div class="stats">
-          <div class="stat b" data-at="2600"><b data-count="2700" data-at="2600" data-suf="+">0</b><span>Patients treated</span></div>
-          <div class="stat b" data-at="2600"><b data-count="4.9" data-dec="1" data-at="2600">0</b><span>Google rating</span></div>
-          <!--KLARITY_STAT-->
-          <div class="stat b" data-at="2600"><b data-count="4" data-at="2600">0</b><span>States served</span></div>
+<article class="slide" data-chapter="5" data-dur="8000" data-surface="desk">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="200">Proof</div>
+        <h2 class="cap b" data-at="400">Don't just take our <em>word</em> for it.</h2>
+      </div>
+      <div class="desk-hero">
+        <div class="proof-grid">
+          <div class="proof-card b" data-at="800"><b data-count="2700" data-at="800" data-suf="+">0</b><span>Patients treated — most of them busy professionals</span></div>
+          <div class="proof-card b" data-at="1000"><b data-count="4.9" data-dec="1" data-at="1000">0</b><span>Google rating (102 reviews)</span></div>
+          <!--KLARITY_STAT_CARD-->
+          <div class="proof-card b" data-at="1400"><b data-count="4" data-at="1400">0</b><span>States served · CA, TX, PA, FL</span></div>
         </div>
-        <p class="proof-note b" data-at="2600">most of them busy professionals</p>
-        <div class="rev-stage">
-          <div class="rev b" data-at="3600" data-out="5400"><p>"I feel a personal connection and genuine empathy even through the screen... It's like someone really understood my pain and knew what to do about it."</p><small>Verified Telehealth Patient</small></div>
-          <div class="rev b" data-at="5400" data-out="7200"><p>"Finally found a telehealth practice that feels thorough and respectful. I never feel rushed—the clinicians actually listen."</p><small>Verified Telehealth Patient</small></div>
-          <div class="rev b" data-at="7200"><p>"Very knowledgeable, friendly, patient-focused and listens very well. Also very fast at helping me when one pharmacy wouldn't fill my prescription!"</p><small>Verified Telehealth Patient</small></div>
-        </div>
-        <p class="note-s">Individual experiences vary.</p>
       </div>
     </div>
   </article>
 
-  <article class="slide" data-chapter="5" data-dur="4700" data-surface="phone" data-sample="1">
-    <div class="frame">
-      <div class="eyebrow b" data-at="200">Proof</div>
-      <h2 class="cap b" data-at="400">Don't just take our word for it.</h2>
-      <div class="hero stats">
-        <div class="stat b" data-at="2600"><b data-count="2700" data-at="2600" data-suf="+">0</b><span>Patients treated</span></div>
-        <div class="stat b" data-at="2600"><b data-count="4.9" data-dec="1" data-at="2600">0</b><span>Google rating</span></div>
-        <!--KLARITY_STAT-->
-        <div class="stat b" data-at="2600"><b data-count="4" data-at="2600">0</b><span>States served</span></div>
+  <article class="slide" data-chapter="5" data-dur="7000" data-surface="phone">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="200">Proof</div>
+        <h2 class="cap b" data-at="400">Don't just take our <em>word</em> for it.</h2>
       </div>
-      <p class="proof-note b" data-at="2600">most of them busy professionals</p>
-      <p class="sample-cap">Illustrative · sample data</p>
+      <div class="desk-hero">
+        <div class="proof-grid">
+          <div class="proof-card b" data-at="800"><b data-count="2700" data-at="800" data-suf="+">0</b><span>Patients treated</span></div>
+          <div class="proof-card b" data-at="1000"><b data-count="4.9" data-dec="1" data-at="1000">0</b><span>Google (102)</span></div>
+          <!--KLARITY_STAT_CARD-->
+          <div class="proof-card b" data-at="1400"><b data-count="4" data-at="1400">0</b><span>States · CA, TX, PA, FL</span></div>
+        </div>
+      </div>
     </div>
   </article>
 
@@ -1748,7 +1906,7 @@ html.demo-desktop-host.portrait-live #ctrlR{display:none!important}
           <p class="sub b" data-at="800">A short call, and we'll walk you through the real experience.</p>
         </div>
         <div class="row-btns b" data-at="1200">
-          <a class="start" href="__INQUIRY_HREF__" data-demo-cta="inquiry">Submit an inquiry</a>
+          <a class="start" href="__INQUIRY_HREF__" data-demo-cta="inquiry">Request employer information</a>
         </div>
         <div class="next-steps b" data-at="1400" aria-label="What happens next">
           <p class="next-steps-label">What happens next</p>
@@ -2364,21 +2522,36 @@ const C=[500,262];
 const lockI='<svg width="10" height="10" viewBox="0 0 10 10"><rect x="1.5" y="4.5" width="7" height="5" rx="1" fill="currentColor"/><path d="M3 4.5V3a2 2 0 0 1 4 0v1.5" stroke="currentColor" fill="none"/></svg>';
 function buildWebs(){
 const phone=isPhoneLayout();
-if(!phone)$('webP3').classList.add('split');
+const elP3=$('webP3'), elP4=$('webP4');
+if(!phone && elP3) elP3.classList.add('split');
 const BOX=phone?900:520;
 const topPct=y=>y/BOX*100;
-if(phone)['webP3','webP4'].forEach(id=>{const el=$(id);if(el)el.classList.add('tall');});
+if(phone){if(elP3)elP3.classList.remove('tall'); if(elP4){elP4.classList.remove('tall'); elP4.classList.add('apps-host');}}
+else {if(elP4)elP4.classList.remove('apps-host');}
+icons.stethoscope='<path d="M6 2v6a3 3 0 0 0 6 0V2"/><path d="M9 14.5V16a5 5 0 0 1-10 0"/><circle cx="19" cy="11" r="2.5"/><path d="M19 8.5V5.5A2.5 2.5 0 0 0 16.5 3H14"/>';
+const stethSvg=`<svg viewBox="0 0 24 24" aria-hidden="true">${icons.stethoscope}</svg>`;
 const tile=(x,y,n,ic,bdg,at,extra='',plain=false,glow=0)=>`<div class="node ${extra}" style="left:${x/10}%;top:${topPct(y)}%">${plain?`<div class="app-wrap glow" data-at="${glow}">`:''}<div class="app pop${plain?' care':''}" data-at="${at}">
   <svg viewBox="0 0 26 26">${icons[ic]}</svg><b>${n}</b>${plain?'':`<small>${lockI} Log in</small><span class="badge">${bdg}</span>`}</div>${plain?'</div>':''}</div>`;
-const appsD=phone?[[500,150],[730,300],[640,620],[360,620],[270,300]]:[null,null,null,null,null];
-const appsUse=apps.map((a,i)=>phone?[appsD[i][0],appsD[i][1],a[2],a[3],a[4]]:a);
-const CD=phone?[500,430]:C;
-(()=>{let s=`<svg viewBox="0 0 1000 ${BOX}" aria-hidden="true">`;
+/* P4 five apps — desk: radial web; phone: vertical stack + scribble tangle */
+(()=>{
+  if(!elP4) return;
+  if(phone){
+    elP4.className='apps-stack';
+    const scribble=`<div class="apps-scribble" id="appsScribble" aria-hidden="true"><svg viewBox="0 0 320 280" preserveAspectRatio="none"><path d="M40 30 C120 60,80 100,160 90 S260 40,280 80 S200 140,120 150 S40 200,100 230 S260 210,290 250" fill="none" stroke="rgba(216,16,136,.45)" stroke-width="2.2" stroke-linecap="round"/><path d="M60 50 C180 20,220 120,140 160 S80 220,200 240" fill="none" stroke="rgba(123,45,142,.35)" stroke-width="1.6" stroke-linecap="round"/></svg></div>`;
+    elP4.innerHTML=scribble+apps.map(([,,n,ic,b],i)=>`<div class="app-row b" data-at="${600+i*280}">
+      <span class="badge">${b}</span><svg viewBox="0 0 26 26">${icons[ic]}</svg><b>${n}</b><small>${lockI} Log in</small></div>`).join('');
+    /* scribble on after last tile, then off before headline already shown */
+    return;
+  }
+  elP4.className='web jit';
+  const appsUse=apps;
+  const CD=C;
+  let s=`<svg viewBox="0 0 1000 ${BOX}" aria-hidden="true">`;
   appsUse.forEach(([x,y],i)=>{s+=`<path class="draw" data-at="${1100+i*260}" pathLength="1" d="M${CD[0]} ${CD[1]} L${x} ${y}" stroke="rgba(10,36,107,.35)" stroke-width="2" fill="none"/>`;});
   [[0,2],[1,3],[2,4],[3,0],[4,1],[0,1],[3,4]].forEach(([a,b],k)=>{const A=appsUse[a],B=appsUse[b],mx=(A[0]+B[0])/2+(k%2?40:-40),my=(A[1]+B[1])/2+(k%3?-36:36);
     s+=`<path class="draw" data-at="${2700+k*170}" pathLength="1" d="M${A[0]} ${A[1]} Q${mx} ${my} ${B[0]} ${B[1]}" stroke="rgba(216,16,136,.45)" stroke-width="1.6" fill="none"/>`;});
   s+='</svg>';
-  $('webP4').innerHTML=s+`<div class="node" style="left:50%;top:${topPct(CD[1])}%"><div class="me-node pop" data-at="500">Your<br>team member</div></div>`+
+  elP4.innerHTML=s+`<div class="node" style="left:50%;top:${topPct(CD[1])}%"><div class="me-node pop" data-at="500">Your<br>team member</div></div>`+
     appsUse.map(([x,y,n,ic,b],i)=>tile(x,y,n,ic,b,1000+i*260)).join('');
 })();
 /* Meet Siya A1 — Lucide icons + hub/ring; phone keeps ring behind 2×2 */
@@ -2440,374 +2613,52 @@ const lucSvg=(ic)=>`<svg viewBox="0 0 24 24" aria-hidden="true">${icons[ic]}</sv
 /* connected-conditions web (problem 3 + fix 3) */
 const conds=[['Sleep','Sleep clinic'],['Focus','ADHD clinic'],['Weight','Weight clinic'],['Blood pressure','Cardiologist'],['Blood sugar','Endocrinologist'],['Hormones','Hormone specialist'],['Mood','Psychiatrist'],['Hair loss','Dermatologist']];
 const pos=conds.map((_,i)=>{const a=-Math.PI/2+i*Math.PI*2/conds.length;
-  const rx=phone?300:365,ry=phone?340:200,cy=phone?450:262;
+  const rx=365,ry=200,cy=262;
   return [500+Math.cos(a)*rx,cy+Math.sin(a)*ry,Math.cos(a),Math.sin(a)];});
-const cy0=phone?430:262;
-const push=phone?[18,12]:[55,40];
+const cy0=262;
+const push=[55,40];
 (()=>{
-  // problem 3
-  let s=`<svg viewBox="0 0 1000 ${BOX}" aria-hidden="true"><g class="grp" data-out="4600">`;
-  pos.forEach(([x,y],i)=>{s+=`<path class="draw" data-at="${900+i*160}" pathLength="1" d="M500 ${cy0} L${x} ${y}" stroke="rgba(216,16,136,.55)" stroke-width="2" fill="none"/>`;});
-  pos.forEach(([x,y],i)=>{const [x2,y2]=pos[(i+1)%pos.length];const mx=(x+x2)/2*0.86+500*0.14,my=(y+y2)/2*0.86+cy0*0.14;
-    s+=`<path class="draw" data-at="${2500+i*120}" pathLength="1" d="M${x} ${y} Q${mx} ${my} ${x2} ${y2}" stroke="rgba(123,45,142,.35)" stroke-width="1.4" fill="none"/>`;});
-  s+='</g></svg>';
-  $('webP3').innerHTML=s+`<div class="node" style="left:50%;top:${topPct(cy0)}%"><div class="stress pop" data-at="400">Stress</div></div>`+
-    pos.map(([x,y,cx,cy],i)=>`<div class="node" style="left:${x/10}%;top:${topPct(y)}%"><div class="mv" style="--dx:${Math.round(cx*push[0])}px;--dy:${Math.round(cy*push[1])}px">
-      <div class="cond pop" data-at="${800+i*160}">${conds[i][0]}</div><div class="spec pop" data-at="${4900+i*120}">${conds[i][1]}</div></div></div>`).join('');
-  // fix 3
-  let f=`<svg viewBox="0 0 1000 ${BOX}" aria-hidden="true">`;
-  pos.forEach(([x,y],i)=>{f+=`<path class="draw" data-at="${700+i*120}" pathLength="1" d="M500 ${cy0} L${x} ${y}" stroke="rgba(10,36,107,.4)" stroke-width="2" fill="none"/>`;});
-  pos.forEach(([x,y],i)=>{const [x2,y2]=pos[(i+1)%pos.length];const mx=(x+x2)/2*0.86+500*0.14,my=(y+y2)/2*0.86+cy0*0.14;
-    f+=`<path class="draw" data-at="${1900+i*90}" pathLength="1" d="M${x} ${y} Q${mx} ${my} ${x2} ${y2}" stroke="rgba(216,16,136,.45)" stroke-width="1.6" fill="none"/>`;});
-  f+='</svg>';
-  $('webF3').innerHTML=f+`<div class="node" style="left:50%;top:${topPct(cy0)}%"><div class="me-node halo pop" data-at="300">Siya<br>care team</div></div>`+
-    pos.map(([x,y],i)=>`<div class="node" style="left:${x/10}%;top:${topPct(y)}%"><div class="cond pop" data-at="${600+i*120}">${conds[i][0]}</div></div>`).join('');
+  if(!elP3) return;
+  if(phone){
+    /* Phone: Stress chip + 2-col condition→specialist pairs, no ring overlap */
+    elP3.className='cont-phone';
+    elP3.innerHTML=`<div class="stress pop b" data-at="400">Stress</div><div class="cont-grid">`+
+      conds.map(([c,s],i)=>`<div class="cont-pair b" data-at="${700+i*120}">
+        <div class="cond">${c}</div>
+        <div class="spec">${stethSvg}${s}</div>
+      </div>`).join('')+`</div>`;
+  }else{
+    elP3.className='web split';
+    let s=`<svg viewBox="0 0 1000 ${BOX}" aria-hidden="true"><g class="grp" data-out="4600">`;
+    pos.forEach(([x,y],i)=>{s+=`<path class="draw" data-at="${900+i*160}" pathLength="1" d="M500 ${cy0} L${x} ${y}" stroke="rgba(216,16,136,.55)" stroke-width="2" fill="none"/>`;});
+    pos.forEach(([x,y],i)=>{const [x2,y2]=pos[(i+1)%pos.length];const mx=(x+x2)/2*0.86+500*0.14,my=(y+y2)/2*0.86+cy0*0.14;
+      s+=`<path class="draw" data-at="${2500+i*120}" pathLength="1" d="M${x} ${y} Q${mx} ${my} ${x2} ${y2}" stroke="rgba(123,45,142,.35)" stroke-width="1.4" fill="none"/>`;});
+    s+='</g></svg>';
+    elP3.innerHTML=s+`<div class="node" style="left:50%;top:${topPct(cy0)}%"><div class="stress pop" data-at="400">Stress</div></div>`+
+      pos.map(([x,y,cx,cy],i)=>`<div class="node" style="left:${x/10}%;top:${topPct(y)}%"><div class="mv" style="--dx:${Math.round(cx*push[0])}px;--dy:${Math.round(cy*push[1])}px">
+        <div class="cond pop" data-at="${800+i*160}">${conds[i][0]}</div><div class="spec pop" data-at="${4900+i*120}">${stethSvg}${conds[i][1]}</div></div></div>`).join('');
+  }
+  // fix 3 (desk ring of conditions only)
+  const elF3=$('webF3');
+  if(elF3){
+    const fpos=conds.map((_,i)=>{const a=-Math.PI/2+i*Math.PI*2/conds.length;
+      const rx=phone?300:365,ry=phone?340:200,cy=phone?450:262;
+      return [500+Math.cos(a)*rx,cy+Math.sin(a)*ry];});
+    const fcy=phone?430:262;
+    const fBOX=phone?900:520;
+    const fTop=y=>y/fBOX*100;
+    if(phone) elF3.classList.add('tall');
+    let f=`<svg viewBox="0 0 1000 ${fBOX}" aria-hidden="true">`;
+    fpos.forEach(([x,y],i)=>{f+=`<path class="draw" data-at="${700+i*120}" pathLength="1" d="M500 ${fcy} L${x} ${y}" stroke="rgba(10,36,107,.4)" stroke-width="2" fill="none"/>`;});
+    fpos.forEach(([x,y],i)=>{const [x2,y2]=fpos[(i+1)%fpos.length];const mx=(x+x2)/2*0.86+500*0.14,my=(y+y2)/2*0.86+fcy*0.14;
+      f+=`<path class="draw" data-at="${1900+i*90}" pathLength="1" d="M${x} ${y} Q${mx} ${my} ${x2} ${y2}" stroke="rgba(216,16,136,.45)" stroke-width="1.6" fill="none"/>`;});
+    f+='</svg>';
+    elF3.innerHTML=f+`<div class="node" style="left:50%;top:${fTop(fcy)}%"><div class="me-node halo pop" data-at="300">Siya<br>care team</div></div>`+
+      fpos.map(([x,y],i)=>`<div class="node" style="left:${x/10}%;top:${fTop(y)}%"><div class="cond pop" data-at="${600+i*120}">${conds[i][0]}</div></div>`).join('');
+  }
 })();
 
 }
-
-/* A3 body map — CC0 gender-neutral silhouette + structured nervous system (medical-scan) */
-const BODY_SVG = '/employers/demo/media/body-silhouette-cc0.svg';
-const BODY_SRC_NOTE = 'Wikimedia Commons File:Human silhouette gender neutral front.svg (CC0)';
-function lerp(a,b,t){return a+(b-a)*t;}
-function easeOutCubic(t){return 1-Math.pow(1-t,3);}
-function bezPoint(p0,p1,p2,p3,t){
-  const u=1-t;
-  return {x:u*u*u*p0.x+3*u*u*t*p1.x+3*u*t*t*p2.x+t*t*t*p3.x, y:u*u*u*p0.y+3*u*u*t*p1.y+3*u*t*t*p2.y+t*t*t*p3.y};
-}
-async function loadBodyMask(){
-  const img=new Image(); img.decoding='async';
-  await new Promise((res,rej)=>{img.onload=()=>res();img.onerror=()=>rej(new Error('body silhouette load failed'));img.src=BODY_SVG;});
-  return img;
-}
-function makeBodyFigure(root){
-  const canvas=$('bodyCanvas'); if(!root||!canvas) return null;
-  const ctx=canvas.getContext('2d');
-  let img=null, nerves=[], vessels=[], running=false, rafId=0, t0=0, settled=false;
-  let pulseT=0, pulsePath=null, pulseU=0, layout=null, labTimers=[];
-  const labs=[...root.querySelectorAll('.hlab')];
-  const aura=$('bodyAura'), cap=$('bodyCap');
-  const anchors={head:{nx:.5,ny:.10}, heart:{nx:.50,ny:.30}, meta:{nx:.48,ny:.48}, horm:{nx:.52,ny:.58}};
-
-  function resize(){
-    const r=root.getBoundingClientRect();
-    const dpr=Math.min(2,window.devicePixelRatio||1);
-    const w=Math.max(200,Math.floor(r.width)), h=Math.max(280,Math.floor(r.height));
-    canvas.width=Math.floor(w*dpr); canvas.height=Math.floor(h*dpr);
-    canvas.style.width=w+'px'; canvas.style.height=h+'px';
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    return {w,h};
-  }
-  function figBox(w,h){
-    /* silhouette sits in center with room for labels */
-    const fw=w*.42, fh=h*.82;
-    const ox=(w-fw)/2, oy=h*.06;
-    return {ox,oy,fw,fh};
-  }
-  function toXY(nx,ny,box){return {x:box.ox+nx*box.fw, y:box.oy+ny*box.fh};}
-
-  function buildNerves(box){
-    /* Normalized silhouette coords (CC0 gender-neutral front figure). */
-    const spine=[{nx:.50,ny:.16},{nx:.50,ny:.22},{nx:.50,ny:.30},{nx:.50,ny:.38},{nx:.50,ny:.46},{nx:.50,ny:.54},{nx:.50,ny:.60}];
-    const paths=[];
-    const BUDGET=60;
-    const add=(pts,w,kind,delay)=>{
-      if(paths.length>=BUDGET) return;
-      paths.push({pts:pts.map(p=>toXY(p.nx,p.ny,box)), w, kind, delay, grow:0});
-    };
-    /* Brain network first (grow starts here) — capped filament count */
-    const brainNodes=[];
-    for(let i=0;i<12;i++){
-      const a=i/12*Math.PI*2;
-      brainNodes.push({nx:.50+Math.cos(a)*.065, ny:.095+Math.sin(a)*.05});
-    }
-    brainNodes.push({nx:.50,ny:.09},{nx:.47,ny:.115},{nx:.53,ny:.115},{nx:.50,ny:.135});
-    let brainN=0;
-    for(let i=0;i<brainNodes.length && brainN<18;i++){
-      for(let j=i+1;j<brainNodes.length && brainN<18;j++){
-        const a=brainNodes[i], b=brainNodes[j];
-        const d=Math.hypot(a.nx-b.nx,a.ny-b.ny);
-        if(d>.025 && d<.085){ add([a,b], .7, 'brain', .02*(brainN%5)); brainN++; }
-      }
-    }
-    /* Spinal cord — one bright continuous line */
-    add(spine, 2.2, 'spine', .12);
-    /* Intercostal pairs ~10, mirrored */
-    for(let i=0;i<10;i++){
-      const y=.22+i*.028;
-      const reach=.11+Math.sin(i*.45)*.03;
-      const d=.35+i*.04;
-      add([{nx:.50,ny:y},{nx:.50-reach*.55,ny:y-.004},{nx:.50-reach,ny:y+.012}], 1.2-i*.05, 'rib', d);
-      add([{nx:.50,ny:y},{nx:.50+reach*.55,ny:y-.004},{nx:.50+reach,ny:y+.012}], 1.2-i*.05, 'rib', d);
-    }
-    /* Arms — shoulder → hand + elbow/finger branches (mirrored) */
-    const armL=[{nx:.42,ny:.22},{nx:.30,ny:.28},{nx:.20,ny:.36},{nx:.14,ny:.44}];
-    const armR=armL.map(p=>({nx:1-p.nx,ny:p.ny}));
-    add(armL, 1.6, 'arm', .85); add(armR, 1.6, 'arm', .85);
-    add([{nx:.30,ny:.28},{nx:.26,ny:.31},{nx:.24,ny:.34}], .9, 'arm', 1.0);
-    add([{nx:.70,ny:.28},{nx:.74,ny:.31},{nx:.76,ny:.34}], .9, 'arm', 1.0);
-    add([{nx:.14,ny:.44},{nx:.11,ny:.46}], .7, 'arm', 1.15);
-    add([{nx:.14,ny:.44},{nx:.12,ny:.47}], .65, 'arm', 1.18);
-    add([{nx:.86,ny:.44},{nx:.89,ny:.46}], .7, 'arm', 1.15);
-    add([{nx:.86,ny:.44},{nx:.88,ny:.47}], .65, 'arm', 1.18);
-    /* Legs — sciatic path + knee/foot branches */
-    const legL=[{nx:.47,ny:.60},{nx:.44,ny:.70},{nx:.42,ny:.80},{nx:.41,ny:.90}];
-    const legR=legL.map(p=>({nx:1-p.nx,ny:p.ny}));
-    add(legL, 1.7, 'leg', 1.2); add(legR, 1.7, 'leg', 1.2);
-    add([{nx:.44,ny:.70},{nx:.40,ny:.72},{nx:.38,ny:.74}], .85, 'leg', 1.35);
-    add([{nx:.56,ny:.70},{nx:.60,ny:.72},{nx:.62,ny:.74}], .85, 'leg', 1.35);
-    add([{nx:.41,ny:.90},{nx:.38,ny:.92}], .7, 'leg', 1.45);
-    add([{nx:.41,ny:.90},{nx:.43,ny:.93}], .65, 'leg', 1.48);
-    add([{nx:.59,ny:.90},{nx:.62,ny:.92}], .7, 'leg', 1.45);
-    add([{nx:.59,ny:.90},{nx:.57,ny:.93}], .65, 'leg', 1.48);
-
-    nerves = paths;
-    /* Vessels from heart */
-    const heart={nx:.50,ny:.30};
-    const ends=[
-      {nx:.50,ny:.12}, {nx:.18,ny:.40}, {nx:.82,ny:.40},
-      {nx:.42,ny:.88}, {nx:.58,ny:.88}, {nx:.50,ny:.50}
-    ];
-    vessels = ends.map((e,k)=>{
-      const mid={nx:lerp(heart.nx,e.nx,.5)+(k%2?-0.04:0.04), ny:lerp(heart.ny,e.ny,.45)};
-      return {
-        p0:toXY(heart.nx,heart.ny,box),
-        p1:toXY(lerp(heart.nx,mid.nx,.5), lerp(heart.ny,mid.ny,.3), box),
-        p2:toXY(mid.nx, mid.ny, box),
-        p3:toXY(e.nx,e.ny,box),
-        u:Math.random(), spd:.07+.03*(k%3)
-      };
-    });
-    layout = {box, heart:toXY(heart.nx,heart.ny,box)};
-  }
-
-  function strokePath(pts, width, alpha, glow){
-    if(pts.length<2) return;
-    ctx.save();
-    if(glow){
-      ctx.globalCompositeOperation='lighter';
-      ctx.strokeStyle=`rgba(216,16,136,${.22*alpha})`;
-      ctx.lineWidth=width*3.2;
-      ctx.lineCap='round'; ctx.lineJoin='round';
-      ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y);
-      for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x,pts[i].y);
-      ctx.stroke();
-      ctx.strokeStyle=`rgba(123,45,142,${.18*alpha})`;
-      ctx.lineWidth=width*2;
-      ctx.stroke();
-    }
-    ctx.globalCompositeOperation='lighter';
-    ctx.strokeStyle=`rgba(255,209,240,${.55*alpha})`;
-    ctx.lineWidth=width;
-    ctx.lineCap='round'; ctx.lineJoin='round';
-    ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y);
-    for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x,pts[i].y);
-    ctx.stroke();
-    ctx.strokeStyle=`rgba(255,255,255,${.75*alpha})`;
-    ctx.lineWidth=Math.max(.4, width*.35);
-    ctx.stroke();
-    ctx.restore();
-  }
-
-  function drawBodyFill(w,h,box,heartBeat){
-    if(!img) return;
-    const {ox,oy,fw,fh}=box;
-    /* Soft translucent body clipped to silhouette */
-    ctx.save();
-    ctx.beginPath();
-    /* Use silhouette as clip via destination-in after drawing glow */
-    /* Single heart-centered wash — avoid dual-lobe / gendered reading */
-    const cx=layout.box.ox+layout.box.fw*.5, cy=layout.box.oy+layout.box.fh*.38;
-    const g=ctx.createRadialGradient(cx, cy, 6, cx, cy, fh*.58);
-    g.addColorStop(0, `rgba(255,92,184,${.20*heartBeat})`);
-    g.addColorStop(.4, 'rgba(168,20,144,.16)');
-    g.addColorStop(.75, 'rgba(123,45,142,.10)');
-    g.addColorStop(1, 'rgba(10,36,107,.03)');
-    ctx.fillStyle=g;
-    ctx.fillRect(0,0,w,h);
-    ctx.globalCompositeOperation='destination-in';
-    ctx.drawImage(img, ox, oy, fw, fh);
-    ctx.restore();
-    /* Thin luminous rim light (no hard stroke) */
-    ctx.save();
-    ctx.globalCompositeOperation='lighter';
-    ctx.shadowColor='rgba(255,209,240,.85)';
-    ctx.shadowBlur=10;
-    ctx.globalAlpha=.22;
-    ctx.drawImage(img, ox, oy, fw, fh);
-    ctx.shadowBlur=3;
-    ctx.globalAlpha=.18;
-    ctx.drawImage(img, ox, oy, fw, fh);
-    ctx.restore();
-  }
-
-  function visiblePts(path, grow){
-    if(grow>=1) return path.pts;
-    const n=path.pts.length;
-    if(n<2) return path.pts;
-    const total=n-1;
-    const f=grow*total;
-    const i0=Math.min(total-1, f|0);
-    const u=f-i0;
-    const out=path.pts.slice(0, i0+1);
-    const a=path.pts[i0], b=path.pts[i0+1];
-    out.push({x:lerp(a.x,b.x,u), y:lerp(a.y,b.y,u)});
-    return out;
-  }
-
-  function drawLeaders(w,h){
-    if(!layout) return;
-    const map=anchors;
-    ctx.save(); ctx.strokeStyle='rgba(255,209,240,.55)'; ctx.fillStyle='#FFD1F0'; ctx.lineWidth=1.3;
-    labs.forEach(lab=>{
-      if(!lab.classList.contains('in')) return;
-      const key=lab.getAttribute('data-lab'); const a=map[key]; if(!a) return;
-      const ax=layout.box.ox+a.nx*layout.box.fw, ay=layout.box.oy+a.ny*layout.box.fh;
-      const br=lab.getBoundingClientRect(), rr=root.getBoundingClientRect();
-      const side=(lab.getAttribute('style')||'').includes('right') ? 'right':'left';
-      const lx=side==='left' ? (br.right-rr.left) : (br.left-rr.left);
-      const ly=br.top-rr.top+br.height*.45;
-      ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(ax,ay); ctx.stroke();
-      ctx.beginPath(); ctx.arc(ax,ay,2.5,0,Math.PI*2); ctx.fill();
-    });
-    ctx.restore();
-  }
-
-  function frame(now){
-    if(!running) return;
-    let {w,h}=(()=>{const r=root.getBoundingClientRect();return {w:r.width,h:r.height};})();
-    if((w>80&&h>120) && (!layout || Math.abs(layout.box.fw - w*.42)>10)){
-      resize(); buildNerves(figBox(w,h));
-    }
-    const T=(now-t0)/1000;
-    const dpr=Math.min(2,window.devicePixelRatio||1);
-    ctx.setTransform(1,0,0,1,0,0);
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    ({w,h}=(()=>{const r=root.getBoundingClientRect();return {w:Math.max(1,r.width),h:Math.max(1,r.height)};})());
-
-    const heartBeat=1+0.12*Math.abs(Math.sin(T*Math.PI*2));
-    if(layout) drawBodyFill(w,h,layout.box,heartBeat);
-
-    /* Nerve grow 0–2.5s from brain down */
-    const growT=reduce?1:easeOutCubic(Math.min(1,T/2.5));
-    for(const n of nerves){
-      const local=reduce?1:easeOutCubic(Math.min(1,Math.max(0,(T-n.delay)/1.8)));
-      n.grow=local*growT;
-      if(n.grow<=0.01) continue;
-      const pts=visiblePts(n, n.grow);
-      strokePath(pts, n.w, .9, true);
-      /* nodes on brain */
-      if(n.kind==='brain' && n.grow>.6){
-        const p=pts[pts.length-1];
-        ctx.save(); ctx.globalCompositeOperation='lighter';
-        ctx.fillStyle='rgba(255,255,255,.85)'; ctx.beginPath(); ctx.arc(p.x,p.y,1.4,0,Math.PI*2); ctx.fill();
-        ctx.restore();
-      }
-    }
-
-    /* Heart glow */
-    if(layout){
-      ctx.save(); ctx.globalCompositeOperation='lighter';
-      const hg=ctx.createRadialGradient(layout.heart.x,layout.heart.y,0,layout.heart.x,layout.heart.y,18*heartBeat);
-      hg.addColorStop(0,`rgba(255,209,240,${.55*heartBeat})`);
-      hg.addColorStop(.4,`rgba(216,16,136,${.28*heartBeat})`);
-      hg.addColorStop(1,'rgba(216,16,136,0)');
-      ctx.fillStyle=hg; ctx.beginPath(); ctx.arc(layout.heart.x,layout.heart.y,18*heartBeat,0,Math.PI*2); ctx.fill();
-      ctx.restore();
-    }
-
-    /* Vessels secondary after nerves started */
-    if(!reduce && T>1.2){
-      ctx.save(); ctx.globalCompositeOperation='lighter';
-      for(const v of vessels){
-        ctx.strokeStyle='rgba(168,20,144,.28)'; ctx.lineWidth=.9; ctx.lineCap='round';
-        ctx.beginPath(); ctx.moveTo(v.p0.x,v.p0.y); ctx.bezierCurveTo(v.p1.x,v.p1.y,v.p2.x,v.p2.y,v.p3.x,v.p3.y); ctx.stroke();
-        v.u=(v.u+v.spd*0.016)%1;
-        const pt=bezPoint(v.p0,v.p1,v.p2,v.p3,v.u);
-        ctx.fillStyle='rgba(255,92,184,.9)'; ctx.beginPath(); ctx.arc(pt.x,pt.y,1.6,0,Math.PI*2); ctx.fill();
-        ctx.fillStyle='rgba(255,255,255,.7)'; ctx.beginPath(); ctx.arc(pt.x,pt.y,.7,0,Math.PI*2); ctx.fill();
-      }
-      ctx.restore();
-    }
-
-    /* Pulses along spine → limb every ~0.7s after grow */
-    if(!reduce && T>2.6){
-      if(!pulsePath || pulseU>=1){
-        if(T-pulseT>0.7){
-          pulseT=T; pulseU=0;
-          const spineN=nerves.find(n=>n.kind==='spine');
-          const limbPool=nerves.filter(n=>n.kind==='arm'||n.kind==='leg');
-          const limb=limbPool[(Math.random()*limbPool.length)|0];
-          pulsePath=[...(spineN?spineN.pts:[]), ...(limb?limb.pts:[])];
-        }
-      }else if(pulsePath && pulsePath.length>1){
-        pulseU=Math.min(1, pulseU+0.02);
-        const idx=Math.min(pulsePath.length-1.001, pulseU*(pulsePath.length-1));
-        const i0=idx|0, i1=Math.min(pulsePath.length-1,i0+1), u=idx-i0;
-        const x=lerp(pulsePath[i0].x,pulsePath[i1].x,u);
-        const y=lerp(pulsePath[i0].y,pulsePath[i1].y,u);
-        ctx.save(); ctx.globalCompositeOperation='lighter';
-        ctx.fillStyle='#fff'; ctx.globalAlpha=.95; ctx.beginPath(); ctx.arc(x,y,3,0,Math.PI*2); ctx.fill();
-        ctx.fillStyle='rgba(255,209,240,.5)'; ctx.beginPath(); ctx.arc(x,y,7,0,Math.PI*2); ctx.fill();
-        ctx.restore();
-        if(pulseU>=1) pulsePath=null;
-      }
-    }
-
-    if(settled || T>=2.6) drawLeaders(w,h);
-    if(running) rafId=requestAnimationFrame(frame);
-  }
-
-  async function start(){
-    stop();
-    labs.forEach(l=>l.classList.remove('in'));
-    if(aura) aura.classList.remove('in');
-    if(cap) cap.classList.remove('in');
-    settled=false; pulsePath=null; pulseU=0; pulseT=0;
-    try{ if(!img) img=await loadBodyMask(); }catch(e){ console.warn(BODY_SRC_NOTE, e); return; }
-    /* Wait a frame so phone desk-hero has real width after slide layout. */
-    await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
-    let {w,h}=resize();
-    if(w<80||h<120){
-      /* Fallback if layout still collapsed */
-      const slide=root.closest('.slide');
-      const hero=slide&&slide.querySelector('.desk-hero');
-      if(hero){ hero.style.width='100%'; hero.style.minHeight='260px'; }
-      ({w,h}=resize());
-    }
-    buildNerves(figBox(w,h));
-    running=true; t0=performance.now();
-    if(reduce){
-      nerves.forEach(n=>n.grow=1);
-      settled=true; labs.forEach(l=>l.classList.add('in')); if(aura)aura.classList.add('in'); if(cap) cap.classList.add('in');
-      t0=performance.now()-6000;
-      rafId=requestAnimationFrame(function once(now){ frame(now); running=false; if(rafId){cancelAnimationFrame(rafId);rafId=0;} });
-      return;
-    }
-    scheduleLabels();
-    rafId=requestAnimationFrame(frame);
-  }
-  function clearLabTimers(){ labTimers.forEach(clearTimeout); labTimers=[]; }
-  function scheduleLabels(){
-    clearLabTimers();
-    const times={head:2800,heart:3200,meta:3600,horm:4000};
-    labs.forEach(lab=>{
-      const k=lab.getAttribute('data-lab');
-      labTimers.push(setTimeout(()=>lab.classList.add('in'), reduce?0:(times[k]||2800)));
-    });
-    labTimers.push(setTimeout(()=>{ settled=true; if(aura) aura.classList.add('in'); }, reduce?200:4600));
-    labTimers.push(setTimeout(()=>{ if(cap) cap.classList.add('in'); }, reduce?300:5000));
-  }
-  function stop(){ running=false; if(rafId){cancelAnimationFrame(rafId); rafId=0;} clearLabTimers(); }
-  return {start,stop,resize};
-}
-let bodyFigure=null;
-(()=>{
-  const el=$('bodyMap'); if(!el) return;
-  bodyFigure=makeBodyFigure(el);
-  window.__bodyFigure=bodyFigure;
-})();
 
 /* privacy grid retired */
 
@@ -2831,7 +2682,7 @@ function applyDemoFlags(){
   }
 }
 const SLIDE_ALIASES={
-  'root-cause':'care-body','care-body':'care-body','meet-siya':'turn','turn':'turn',
+  'meet-siya':'turn','turn':'turn',
   'checklist':'care-checklist','care-checklist':'care-checklist','clinicians':'clinicians',
   'sound-familiar':'p-familiar','p-familiar':'p-familiar','time-away':'p-away','p-away':'p-away'
 };
@@ -2870,11 +2721,18 @@ window.__employerDemo={
     tourOn=true;paused=true;$('pause').textContent='Play';
     show(i);
     const s=slides[i];
+    const dur=+s.dataset.dur||0;
     s.querySelectorAll('[data-at]').forEach(el=>el.classList.add('in'));
+    /* Final-frame outs so rotating slots (days) don't stack all words */
+    s.querySelectorAll('[data-out]').forEach(el=>{
+      const o=+el.dataset.out; if(o>0 && (dur<=0 || o<dur)) el.classList.add('out');
+    });
     s.querySelectorAll('[data-count]').forEach(el=>{
       const n=el.getAttribute('data-count'),suf=el.getAttribute('data-suf')||'',dec=+(el.getAttribute('data-dec')||0);
       el.textContent=dec?Number(n).toFixed(dec)+suf:Number(n).toLocaleString('en-US')+suf;
     });
+    const scrib=$('appsScribble');
+    if(scrib && s.id==='p-coord') scrib.classList.add('on');
     s.style.filter='none';
     fitFor=-1; scheduleFit();
   },
@@ -3061,12 +2919,16 @@ function show(i){
   }else requestAnimationFrame(fitWalk);
   paintChapters();
   try{
-    const bf=window.__bodyFigure;
-    if(bf){
-      if(s && (s.id==='care-body' || s.hasAttribute('data-root-cause'))) bf.start();
-      else bf.stop();
+    const scrib=$('appsScribble');
+    if(scrib){
+      scrib.classList.remove('on');
+      if(s.id==='p-coord' && isPhoneLayout()){
+        /* after last tile (~600+4*280=1720), tangle 1s, then leave soft */
+        setTimeout(()=>{if(slides[cur]&&slides[cur].id==='p-coord')scrib.classList.add('on');}, 2000);
+        setTimeout(()=>{if(slides[cur]&&slides[cur].id==='p-coord')scrib.classList.remove('on');}, 3200);
+      }
     }
-  }catch(e){console.warn(e);}
+  }catch(e){}
   /* Guarantee entry blur never sticks (journey + others) */
   requestAnimationFrame(()=>{s.classList.add('active');s.style.filter='none';s.style.opacity='1';});
 }
