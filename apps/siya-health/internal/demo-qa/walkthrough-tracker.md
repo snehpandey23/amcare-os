@@ -51,4 +51,4 @@ Front-view outline with arms and legs. Pose and proportions adapted from **Healt
 |------|-------|--------|-------|
 | 2026-10-03 | Step 0 tracker | `b7dc3a2b` | |
 | 2026-10-03 | Step 1 + Group A | `6d8cd737` | hash-stamped shots |
-| 2026-10-04 | Group A polish | pending | US English, Lucide icons, A3 Health Icons CC0, A4 stacked cards |
+| 2026-10-04 | Group A polish | `278dfdd4` | US English, Lucide icons, A3 Health Icons CC0, A4 stacked cards |
