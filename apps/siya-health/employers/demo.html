@@ -1131,6 +1131,14 @@ html.desk-stage #tour{
   display:flex;align-items:center;justify-content:center;
   overflow:hidden;
 }
+/* desk-stage display:flex must not revive [hidden] / pre-start layers — that blocks Click to begin */
+html.desk-stage #tour[hidden],
+html.desk-stage #tour:not(.on),
+#tour[hidden],
+#tour:not(.on){
+  display:none!important;pointer-events:none!important;visibility:hidden!important;
+}
+html.desk-stage #welcome:not(.on){pointer-events:none!important}
 html.desk-stage #welcome.wash::before,
 html.desk-stage #welcome.wash::after,
 html.desk-stage #tour.wash::before,
