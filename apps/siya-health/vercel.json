@@ -441,27 +441,27 @@
     },
     {
       "source": "/blog/adhd-treatment-houston-tx",
-      "destination": "/blog/adhd-treatment-texas",
+      "destination": "/adhd-diagnosis-texas",
       "permanent": true
     },
     {
       "source": "/blog/adhd-treatment-austin-tx",
-      "destination": "/blog/adhd-treatment-texas",
+      "destination": "/adhd-diagnosis-texas",
       "permanent": true
     },
     {
       "source": "/blog/adhd-treatment-dallas-tx",
-      "destination": "/blog/adhd-treatment-texas",
+      "destination": "/adhd-diagnosis-texas",
       "permanent": true
     },
     {
       "source": "/blog/adhd-treatment-fort-worth-tx",
-      "destination": "/blog/adhd-treatment-texas",
+      "destination": "/adhd-diagnosis-texas",
       "permanent": true
     },
     {
       "source": "/blog/adhd-treatment-san-antonio-tx",
-      "destination": "/blog/adhd-treatment-texas",
+      "destination": "/adhd-diagnosis-texas",
       "permanent": true
     },
     {
@@ -827,6 +827,11 @@
     {
       "source": "/blog/adhd-telehealth-california",
       "destination": "/adhd-care",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-treatment-texas",
+      "destination": "/adhd-diagnosis-texas",
       "permanent": true
     },
     {

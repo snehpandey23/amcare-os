@@ -157,7 +157,7 @@ function main() {
   if (
     upsertMarker(
       'adhd-diagnosis-texas.html',
-      `      <p class="symptoms-transition"><a href="/adhd-evaluation-texas">Same-week Texas ADHD evaluation</a> · <a href="/blog/adhd-treatment-texas">Texas treatment hub</a></p>`,
+      `      <p class="symptoms-transition"><a href="/adhd-evaluation-texas">Same-week Texas ADHD evaluation</a> · <a href="/adhd-diagnosis-texas">Texas treatment hub</a></p>`,
       ['<section class="section faq-accordion-section"', 'id="meet-physicians"'],
     )
   ) {

@@ -96,6 +96,11 @@ export const RETIRED_CONTENT_REDIRECTS = {
     entity: 'adhd-care',
     reason: 'California ADHD-telehealth acquisition sibling. Retired 2026-10-01.',
   },
+  '/blog/adhd-treatment-texas': {
+    destination: '/adhd-diagnosis-texas',
+    entity: 'adhd-care',
+    reason: 'Retired 2026-10-04. Page incorrectly listed Dr. Natasha Desai as medical reviewer with pending sign-off. Traffic goes to the live Texas ADHD landing.',
+  },
 };
 
 export const RETIRED_CONTENT_STATS = {

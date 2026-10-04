@@ -42,7 +42,7 @@ export const ADHD_SERVICE_LINKS = [
  */
 export const ADHD_GEO_LINKS = [
   { href: '/adhd-diagnosis-texas', label: 'Texas ADHD diagnosis', region: 'TX' },
-  { href: '/blog/adhd-treatment-texas', label: 'Texas ADHD treatment', region: 'TX' },
+  { href: '/adhd-diagnosis-texas', label: 'Texas ADHD treatment', region: 'TX' },
   { href: '/blog/online-adhd-diagnosis-california', label: 'California ADHD diagnosis', region: 'CA' },
   { href: '/adhd-evaluation-california', label: 'California ADHD evaluation', region: 'CA' },
 ];
