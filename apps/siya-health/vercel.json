@@ -571,7 +571,7 @@
     },
     {
       "source": "/answers/food-noise-returned-on-glp-1",
-      "destination": "/guides/weight#wt-glp1",
+      "destination": "/guides/weight#wt-food-noise",
       "permanent": true
     },
     {
@@ -670,11 +670,6 @@
       "permanent": true
     },
     {
-      "source": "/blog/adhd-accommodations-hr-primer",
-      "destination": "/guides/mental-health-and-adhd#mh-work",
-      "permanent": true
-    },
-    {
       "source": "/answers/adhd-vs-burnout",
       "destination": "/guides/mental-health-and-adhd#mh-diff",
       "permanent": true
@@ -701,12 +696,7 @@
     },
     {
       "source": "/answers/rejection-sensitivity-adhd",
-      "destination": "/guides/mental-health-and-adhd#mh-diff",
-      "permanent": true
-    },
-    {
-      "source": "/blog/adult-adhd-symptoms-california",
-      "destination": "/adult-adhd-california",
+      "destination": "/guides/mental-health-and-adhd#mh-signs",
       "permanent": true
     },
     {
@@ -731,57 +721,52 @@
     },
     {
       "source": "/blog/free-testosterone-vs-total-testosterone-what-patients-should-know",
-      "destination": "/guides/hormonal-health#ho-free",
+      "destination": "/guides/testosterone#te-free",
       "permanent": true
     },
     {
       "source": "/answers/what-is-free-testosterone",
-      "destination": "/guides/hormonal-health#ho-free",
+      "destination": "/guides/testosterone#te-free",
       "permanent": true
     },
     {
       "source": "/answers/high-shbg-low-free-testosterone",
-      "destination": "/guides/hormonal-health#ho-free",
+      "destination": "/guides/testosterone#te-free",
       "permanent": true
     },
     {
       "source": "/answers/what-does-low-testosterone-feel-like",
-      "destination": "/guides/hormonal-health#ho-symptoms",
+      "destination": "/guides/testosterone#te-symptoms",
       "permanent": true
     },
     {
       "source": "/answers/testosterone-and-adhd-overlap",
-      "destination": "/guides/hormonal-health#ho-symptoms",
+      "destination": "/guides/testosterone#te-opener",
       "permanent": true
     },
     {
       "source": "/blog/when-is-testosterone-therapy-appropriate",
-      "destination": "/guides/hormonal-health#ho-therapy",
+      "destination": "/guides/testosterone#te-therapy",
       "permanent": true
     },
     {
       "source": "/answers/when-is-testosterone-therapy-appropriate",
-      "destination": "/guides/hormonal-health#ho-therapy",
+      "destination": "/guides/testosterone#te-therapy",
       "permanent": true
     },
     {
       "source": "/blog/adhd-hormones-women",
-      "destination": "/guides/hormonal-health#ho-women",
+      "destination": "/guides/perimenopause#pe-opener",
       "permanent": true
     },
     {
       "source": "/blog/adhd-in-women",
-      "destination": "/guides/hormonal-health#ho-women",
+      "destination": "/guides/perimenopause#pe-opener",
       "permanent": true
     },
     {
       "source": "/answers/adhd-in-women",
-      "destination": "/guides/hormonal-health#ho-women",
-      "permanent": true
-    },
-    {
-      "source": "/answers/ed-telehealth-legitimate",
-      "destination": "/guides/hormonal-health#ho-ed-visit",
+      "destination": "/guides/perimenopause#pe-opener",
       "permanent": true
     },
     {
@@ -791,7 +776,7 @@
     },
     {
       "source": "/answers/adhd-and-weight-loss-connection",
-      "destination": "/guides/weight#wt-food-noise",
+      "destination": "/guides/weight#wt-opener",
       "permanent": true
     },
     {
@@ -832,6 +817,226 @@
     {
       "source": "/blog/adhd-treatment-texas",
       "destination": "/adhd-diagnosis-texas",
+      "permanent": true
+    },
+    {
+      "source": "/answers/adderall-vs-vyvanse-adults",
+      "destination": "/guides/mental-health-and-adhd#mh-screen",
+      "permanent": true
+    },
+    {
+      "source": "/answers/adhd-medication-every-day",
+      "destination": "/guides/mental-health-and-adhd#mh-work",
+      "permanent": true
+    },
+    {
+      "source": "/answers/adhd-medication-side-effects",
+      "destination": "/guides/mental-health-and-adhd#mh-screen",
+      "permanent": true
+    },
+    {
+      "source": "/answers/afternoon-energy-crash-after-lunch",
+      "destination": "/guides/exhausted#ex-opener",
+      "permanent": true
+    },
+    {
+      "source": "/answers/brain-fog-after-eating",
+      "destination": "/guides/weight#wt-insulin",
+      "permanent": true
+    },
+    {
+      "source": "/answers/compounded-vs-branded-glp-1",
+      "destination": "/guides/weight#wt-glp1",
+      "permanent": true
+    },
+    {
+      "source": "/answers/is-adhd-medication-safe-long-term",
+      "destination": "/guides/mental-health-and-adhd#mh-screen",
+      "permanent": true
+    },
+    {
+      "source": "/answers/medical-weight-loss-vs-dieting",
+      "destination": "/guides/weight#wt-opener",
+      "permanent": true
+    },
+    {
+      "source": "/answers/oral-vs-topical-minoxidil",
+      "destination": "/guides/testosterone#te-opener",
+      "permanent": true
+    },
+    {
+      "source": "/answers/semaglutide-weight-loss-how-it-works",
+      "destination": "/guides/weight#wt-glp1",
+      "permanent": true
+    },
+    {
+      "source": "/answers/starting-adhd-medication-adults",
+      "destination": "/guides/mental-health-and-adhd#mh-work",
+      "permanent": true
+    },
+    {
+      "source": "/answers/trt-monitoring-requirements",
+      "destination": "/guides/testosterone#te-therapy",
+      "permanent": true
+    },
+    {
+      "source": "/answers/what-is-food-noise",
+      "destination": "/guides/weight#wt-food-noise",
+      "permanent": true
+    },
+    {
+      "source": "/answers/why-am-i-tired-even-after-sleeping",
+      "destination": "/guides/exhausted#ex-sleep-link",
+      "permanent": true
+    },
+    {
+      "source": "/answers/why-normal-labs-dont-mean-healthy",
+      "destination": "/guides/exhausted#ex-opener",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adderall-for-adhd-how-it-works",
+      "destination": "/guides/mental-health-and-adhd#mh-screen",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-brain-imaging-subtypes",
+      "destination": "/guides/mental-health-and-adhd#mh-signs",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-medication-daily-or-as-needed-adults",
+      "destination": "/guides/mental-health-and-adhd#mh-work",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-medication-options-for-adults",
+      "destination": "/guides/mental-health-and-adhd#mh-screen",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adhd-medication-side-effects-what-to-expect",
+      "destination": "/guides/mental-health-and-adhd#mh-screen",
+      "permanent": true
+    },
+    {
+      "source": "/blog/brain-fog-after-covid",
+      "destination": "/guides/exhausted#ex-opener",
+      "permanent": true
+    },
+    {
+      "source": "/blog/brain-fog-and-sleep",
+      "destination": "/guides/sleep#sl-focus",
+      "permanent": true
+    },
+    {
+      "source": "/blog/brain-fog-at-work",
+      "destination": "/guides/exhausted#ex-opener",
+      "permanent": true
+    },
+    {
+      "source": "/blog/chronic-fatigue-and-work-performance",
+      "destination": "/guides/exhausted#ex-opener",
+      "permanent": true
+    },
+    {
+      "source": "/blog/chronic-fatigue-vs-everyday-tiredness",
+      "destination": "/guides/exhausted#ex-opener",
+      "permanent": true
+    },
+    {
+      "source": "/blog/compounded-vs-branded-glp1-medications",
+      "destination": "/guides/weight#wt-glp1",
+      "permanent": true
+    },
+    {
+      "source": "/blog/fatigue-after-illness",
+      "destination": "/guides/exhausted#ex-opener",
+      "permanent": true
+    },
+    {
+      "source": "/blog/fatigue-despite-normal-labs",
+      "destination": "/guides/exhausted#ex-iron",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-mental-health-affects-weight-loss-outcomes",
+      "destination": "/guides/weight#wt-opener",
+      "permanent": true
+    },
+    {
+      "source": "/blog/iron-deficiency-and-fatigue",
+      "destination": "/guides/exhausted#ex-iron",
+      "permanent": true
+    },
+    {
+      "source": "/blog/is-adhd-medication-safe-long-term",
+      "destination": "/guides/mental-health-and-adhd#mh-screen",
+      "permanent": true
+    },
+    {
+      "source": "/blog/medical-weight-loss-vs-dieting-what-actually-works",
+      "destination": "/guides/weight#wt-opener",
+      "permanent": true
+    },
+    {
+      "source": "/blog/minoxidil-for-hair-loss-does-it-work",
+      "destination": "/guides/testosterone#te-opener",
+      "permanent": true
+    },
+    {
+      "source": "/blog/morning-fatigue",
+      "destination": "/guides/exhausted#ex-sleep-link",
+      "permanent": true
+    },
+    {
+      "source": "/blog/non-stimulant-adhd-medications-explained",
+      "destination": "/guides/mental-health-and-adhd#mh-screen",
+      "permanent": true
+    },
+    {
+      "source": "/blog/oral-vs-injectable-weight-loss-medications",
+      "destination": "/guides/weight#wt-glp1",
+      "permanent": true
+    },
+    {
+      "source": "/blog/oral-vs-topical-minoxidil-which-is-right",
+      "destination": "/guides/testosterone#te-opener",
+      "permanent": true
+    },
+    {
+      "source": "/blog/perimenopause-brain-fog",
+      "destination": "/guides/perimenopause#pe-mood",
+      "permanent": true
+    },
+    {
+      "source": "/blog/phentermine-for-weight-loss-safety-and-effectiveness",
+      "destination": "/guides/weight#wt-opener",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pots-and-adhd",
+      "destination": "/guides/mental-health-and-adhd#mh-diff",
+      "permanent": true
+    },
+    {
+      "source": "/blog/semaglutide-for-weight-loss-how-it-works",
+      "destination": "/guides/weight#wt-glp1",
+      "permanent": true
+    },
+    {
+      "source": "/blog/sleep-and-focus-at-work",
+      "destination": "/guides/sleep#sl-focus",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tirzepatide-vs-semaglutide-which-is-better",
+      "destination": "/guides/weight#wt-glp1",
+      "permanent": true
+    },
+    {
+      "source": "/blog/vyvanse-vs-adderall-differences",
+      "destination": "/guides/mental-health-and-adhd#mh-screen",
       "permanent": true
     },
     {

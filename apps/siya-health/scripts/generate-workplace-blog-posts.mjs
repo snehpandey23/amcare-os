@@ -85,7 +85,7 @@ const POSTS = [
             <h2>Patterns that suggest more than “busy season”</h2>
             <ul>
               <li>Post-exertional crashes after routine tasks</li>
-              <li>Brain fog paired with <a href="/blog/brain-fog-at-work">concentration problems on the job</a></li>
+              <li>Brain fog paired with <a href="/guides/exhausted#ex-opener">concentration problems on the job</a></li>
               <li>Exercise that used to energize you now flattens you</li>
               <li>Months of unrefreshing sleep</li>
               <li>Symptoms that predate a single stressful project</li>
@@ -219,7 +219,7 @@ const POSTS = [
             <h2>Common HR questions—clinical angle only</h2>
             <p><strong>“Can online ADHD evaluation support accommodations?”</strong> Proper documentation from a licensed clinician—telehealth or in person—is often accepted for accommodation requests. Employers may have their own forms and renewal timelines; check internal policy.</p>
             <p><strong>“Should we require a specific test?”</strong> Clinical standards vary. Responsible evaluation includes history and functional impairment review—not a single checklist score in isolation.</p>
-            <p><strong>“What if sleep or fatigue looks like ADHD?”</strong> See <a href="/blog/sleep-and-focus-at-work">sleep and focus at work</a> and <a href="/blog/brain-fog-at-work">brain fog at work</a>. Evaluation should consider overlapping causes before assumptions harden on either side.</p>
+            <p><strong>“What if sleep or fatigue looks like ADHD?”</strong> See <a href="/guides/sleep#sl-focus">sleep and focus at work</a> and <a href="/guides/exhausted#ex-opener">brain fog at work</a>. Evaluation should consider overlapping causes before assumptions harden on either side.</p>
             <h2>How structured employer programs help—without replacing HR</h2>
             <p>Benefits teams can offer clearer pathways to screening and physician-led follow-up so employees get answers sooner. That may reduce ad hoc crises—but it does not remove the employer’s obligation to run lawful accommodation processes. <a href="/employers">Request employer information</a> for program scope; employees can <a href="/redirect/meet-greet" data-siya-track="meet_greet_click">Book Free Meet &amp; Greet</a> individually.</p>
             <p><em>Educational only—not legal, HR, or medical advice. Consult counsel for accommodation decisions.</em></p>
@@ -278,7 +278,7 @@ const POSTS = [
               <li>Remote workers blaming distractions—when the issue followed them home</li>
               <li>Post-illness teams that never fully “bounced back”</li>
             </ul>
-            <p>Employee-facing depth: <a href="/blog/brain-fog-at-work">brain fog at work</a>, <a href="/blog/sleep-and-focus-at-work">sleep and focus at work</a>, and <a href="/blog/chronic-fatigue-and-work-performance">chronic fatigue and work performance</a>.</p>
+            <p>Employee-facing depth: <a href="/guides/exhausted#ex-opener">brain fog at work</a>, <a href="/guides/sleep#sl-focus">sleep and focus at work</a>, and <a href="/guides/exhausted#ex-opener">chronic fatigue and work performance</a>.</p>
             <h2>Why wellness apps hit a ceiling</h2>
             <p>Meditation subscriptions and step challenges have a role. They do not diagnose sleep apnea, prescribe when appropriate, or interpret labs. When symptoms are persistent, employees need licensed clinicians—not another gamified streak.</p>
             <h2>What benefits teams can structure instead</h2>
