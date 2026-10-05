@@ -50,6 +50,22 @@ function validateJsonLd(html) {
   return errors;
 }
 
+function loadRedirectSources() {
+  const srcs = new Set();
+  const vercelPath = path.join(SITE_ROOT, 'vercel.json');
+  if (!fs.existsSync(vercelPath)) return srcs;
+  try {
+    const cfg = JSON.parse(fs.readFileSync(vercelPath, 'utf8'));
+    for (const r of cfg.redirects || []) {
+      const source = '/' + String(r.source || '').replace(/^\//, '').split('?')[0].split('#')[0].replace(/\/$/, '');
+      if (source) srcs.add(source);
+    }
+  } catch {
+    /* ignore */
+  }
+  return srcs;
+}
+
 function main() {
   const files = walkHtml(SITE_ROOT);
   const titles = new Map();
@@ -58,28 +74,19 @@ function main() {
   const jsonLdDetails = [];
   let brokenLinks = 0;
   const brokenDetails = [];
-
-  if (fs.existsSync(QA_REPORT)) {
-    const qa = fs.readFileSync(QA_REPORT, 'utf8');
-    const brokenM = qa.match(/Broken internal links[^\d]*(\d+)/i);
-    if (brokenM) brokenLinks = Number(brokenM[1]);
-    const listed = qa.match(/^- `([^`]+)` → `([^`]+)`/gm) || [];
-    for (const line of listed) {
-      const m = line.match(/^- `([^`]+)` → `([^`]+)`/);
-      if (m) brokenDetails.push({ from: m[1], href: m[2] });
-    }
-  }
+  const redirectSources = loadRedirectSources();
 
   for (const rel of files) {
     if (isLegacyLegalPage(rel)) continue;
     const html = fs.readFileSync(path.join(SITE_ROOT, rel), 'utf8');
-    for (const href of html.match(/href="(\/blog\/[^"#?]+)"/g) || []) {
+    for (const href of html.match(/href="(\/(?:blog|answers)\/[^"#?]+)"/g) || []) {
       const target = href.slice(6, -1).replace(/\/$/, '');
       const asFile = path.join(SITE_ROOT, target.slice(1) + '.html');
       const asDir = path.join(SITE_ROOT, target.slice(1), 'index.html');
-      if (!fs.existsSync(asFile) && !fs.existsSync(asDir)) {
-        brokenDetails.push({ from: rel, href: target });
+      if (fs.existsSync(asFile) || fs.existsSync(asDir) || redirectSources.has(target)) {
+        continue;
       }
+      brokenDetails.push({ from: rel, href: target });
     }
     const title = extractTitle(html);
     const h1 = extractH1(html);
@@ -104,9 +111,29 @@ function main() {
   const dupTitles = [...titles.values()].filter((v) => v.length > 1).length;
   const dupH1s = [...h1s.values()].filter((v) => v.length > 1).length;
 
+  // Deduplicate and count only true missing targets (redirects already filtered)
+  {
+    const seen = new Set();
+    const unique = [];
+    for (const item of brokenDetails) {
+      const key = `${item.from} → ${item.href}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      unique.push(item);
+    }
+    brokenDetails.length = 0;
+    brokenDetails.push(...unique);
+    brokenLinks = unique.length;
+  }
+
   const guideSlugs = Object.keys(GUIDE_CANNIBALIZATION_OVERRIDES);
   const guidesWithPointer = guideSlugs.filter((slug) => {
-    const html = fs.readFileSync(path.join(SITE_ROOT, 'answers', `${slug}.html`), 'utf8');
+    const fp = path.join(SITE_ROOT, 'answers', `${slug}.html`);
+    if (!fs.existsSync(fp)) {
+      console.warn(`[cannibalization-final] skip missing answers/${slug}.html`);
+      return false;
+    }
+    const html = fs.readFileSync(fp, 'utf8');
     return html.includes('answer-canonical-pointer') && html.includes('answer-full-guide-cta');
   });
 

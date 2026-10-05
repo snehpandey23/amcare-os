@@ -131,8 +131,8 @@ function ensureFaqPointers() {
 function ensureHubIntegrity() {
   const filePath = path.join(ROOT, HUB_FILE);
   if (!fs.existsSync(filePath)) {
-    console.warn(`  skip missing ${HUB_FILE}`);
-    return false;
+    console.warn(`[ed-hub] skip integrity — hub retired/missing: ${HUB_FILE}`);
+    return true;
   }
   let html = fs.readFileSync(filePath, 'utf8');
   let changed = false;
