@@ -16,18 +16,23 @@ import { TRACKING } from '../data/tracking-config.mjs';
 import { EMPLOYER_PILOT_FACTS as FACTS } from '../data/employer-pilot-facts.mjs';
 
 /** Swap for a scheduling URL later. Both close-slide buttons use this. */
-const DEMO_BOOK_CALL_HREF = '/employers#employer-inquiry-form';
+const DEMO_BOOK_CALL_HREF = '/employers#inquiry-heading';
 
 const SLIDE_IDS = [
   'statement',
   'p-time',
+  'p-away',
+  'p-familiar',
   'p-response',
   'p-whole',
   'p-coord',
   'question',
   'turn',
+  'care-checklist',
   'f-time',
-  'f-hours',
+  'f-time-a',
+  'f-time-b',
+  'f-ways',
   'f-response',
   'f-urgent',
   'f-whole',
@@ -35,13 +40,17 @@ const SLIDE_IDS = [
   'employer-a',
   'employer-b',
   'journey',
+  'outcomes',
   'clinicians',
+  'cost',
+  'cost-usual',
+  'cost-siya',
   'privacy',
   'privacy-emp',
   'privacy-you',
   'proof',
   'proof-nums',
-  'proof-revs',
+  'founder',
   'close',
 ];
 
@@ -92,29 +101,43 @@ if (slideN !== SLIDE_IDS.length) {
 }
 
 body = body.replaceAll(
-  '<b data-count="2700" data-at="2600" data-suf="+">0</b><span>Patients treated at Siya Health</span>',
-  `<b data-count="${patients.n}" data-at="2600"${patients.suf ? ` data-suf="${patients.suf}"` : ''}>0</b><span>Patients treated at Siya Health</span>`,
+  '<b data-count="2700" data-at="2600" data-suf="+">0</b><span>Patients treated</span>',
+  `<b data-count="${patients.n}" data-at="2600"${patients.suf ? ` data-suf="${patients.suf}"` : ''}>0</b><span>Patients treated</span>`,
 );
 body = body.replace(
   '<b data-count="1200" data-at="2800" data-suf="+">0</b><span>Clinical evaluations completed</span>',
   `<b data-count="${evaluations.n}" data-at="2800"${evaluations.suf ? ` data-suf="${evaluations.suf}"` : ''}>0</b><span>Clinical evaluations completed</span>`,
 );
 body = body.replaceAll(
-  `<b data-count="4.9" data-dec="1" data-at="3000">0</b><span>Google rating (88 reviews)</span>`,
-  `<b data-count="${google.n}" data-dec="${google.dec}" data-at="3000">0</b><span>Google rating (${FACTS.googleReviewCount} reviews)</span>`,
+  `<b data-count="4.9" data-dec="1" data-at="2600">0</b><span>Google rating</span>`,
+  `<b data-count="${google.n}" data-dec="${google.dec}" data-at="2600">0</b><span>Google rating (${FACTS.googleReviewCount} reviews)</span>`,
 );
 body = body.replaceAll(
-  '<b data-count="4" data-at="3200">0</b><span>States: CA, TX, PA, FL</span>',
-  `<b data-count="${stateList.length}" data-at="3200">0</b><span>States: ${FACTS.practiceStatesShort}</span>`,
+  '<b data-count="4" data-at="2600">0</b><span>States served</span>',
+  `<b data-count="${stateList.length}" data-at="2600">0</b><span>States served · ${FACTS.practiceStatesShort}</span>`,
 );
 
 body = body.replaceAll('__INQUIRY_HREF__', DEMO_BOOK_CALL_HREF);
 body = body.replaceAll('__FACTS_RESPONSE__', FACTS.responseWithin);
 body = body.replaceAll('__FACTS_HOURS__', FACTS.scheduledCare);
+body = body.replaceAll('__FACTS_DOCTOR__', FACTS.doctorAvailability);
+body = body.replaceAll('__FACTS_RESPONSE_CHIP__', FACTS.responseChip);
+body = body.replaceAll('__FACTS_DOCTOR_CHIP__', FACTS.doctorChip);
+body = body.replaceAll('__FACTS_SCHEDULE_SUB__', FACTS.scheduleSubline);
+body = body.replaceAll('__FACTS_WEEK_LEGEND__', FACTS.weekLegendCare);
+body = body.replaceAll('__FACTS_COST_DOCTOR__', FACTS.costDoctorRow);
+body = body.replaceAll('__FACTS_COST_FOOT__', FACTS.costFootnote);
+body = body.replaceAll('__FACTS_MD_TITLE_CARD__', FACTS.medicalDirectorTitleCard);
+body = body.replaceAll('__FACTS_MD_TITLE_SHORT__', FACTS.medicalDirectorTitleShort);
+body = body.replaceAll('__FACTS_MD_BYLINE__', FACTS.medicalDirectorByline);
 const klarity = countParts(FACTS.klarityScore.split('/')[0]);
 body = body.replaceAll(
   '<!--KLARITY_STAT-->',
-  `<div class="stat b" data-at="3400"><b data-count="${klarity.n}" data-dec="${klarity.dec}" data-at="3400">0</b><span>Third-party marketplace (${FACTS.klarityReviewCount} reviews)</span></div>`,
+  `<div class="stat b" data-at="2600"><b data-count="${klarity.n}" data-dec="${klarity.dec}" data-at="2600">0</b><span>Marketplace rating (${FACTS.klarityReviewCount} reviews)</span></div>`,
+);
+body = body.replaceAll(
+  '<!--KLARITY_STAT_CARD-->',
+  `<div class="proof-card b" data-at="1200"><b data-count="${klarity.n}" data-dec="${klarity.dec}" data-at="1200">0</b><span>Marketplace rating (${FACTS.klarityReviewCount} reviews)</span></div>`,
 );
 
 body = body.replace(
@@ -152,13 +175,13 @@ body = body.replace(
 );
 
 body = body.replace(
-  "$('skip').addEventListener('click',e=>{e.stopPropagation();if(phase==='idle')phase='play';finishIntro();});",
-  "$('skip').addEventListener('click',e=>{e.stopPropagation();track('employer_demo_intro_skip');if(phase==='idle')phase='play';finishIntro();});",
+  /\$\('skip'\)\.addEventListener\('click',e=>\{e\.stopPropagation\(\);(?:unlockAudio\(\);)?if\(phase==='idle'\)phase='play';finishIntro\(\);\}\);/,
+  "$('skip').addEventListener('click',e=>{e.stopPropagation();unlockAudio();track('employer_demo_intro_skip');if(phase==='idle')phase='play';finishIntro();});",
 );
 
 body = body.replace(
-  'function startTour(){\n  welcome.classList.remove(\'on\');',
-  "function startTour(){\n  track('employer_demo_tour_start');\n  welcome.classList.remove('on');",
+  /function startTour\(\)\{\n  collectSlides\(\);\n  try\{ensureMusic\(\);\}catch\(e\)\{\} \/\* every entry into the tour after a click \*\/\n  welcome\.classList\.remove\('on'\);/,
+  "function startTour(){\n  track('employer_demo_tour_start');\n  collectSlides();\n  try{ensureMusic();}catch(e){} /* every entry into the tour after a click */\n  welcome.classList.remove('on');",
 );
 
 body = body.replace(
@@ -175,8 +198,8 @@ body = body.replace(
 );
 
 body = body.replace(
-  "welcome.addEventListener('click',e=>{if(e.target.closest('#replayIntro1'))return;startTour();});\n$('replayIntro1').addEventListener('click',e=>{e.stopPropagation();resetIntro();});\n",
-  "welcome.addEventListener('click',()=>startTour());\n",
+  /welcome\.addEventListener\('click',e=>\{if\(e\.target\.closest\('#replayIntro1'\)\)return;(?:unlockAudio\(\);)?startTour\(\);\}\);\n\$\('replayIntro1'\)\.addEventListener\('click',e=>\{e\.stopPropagation\(\);resetIntro\(\);\}\);\n/,
+  "welcome.addEventListener('click',()=>{unlockAudio();startTour();});\n",
 );
 
 body = body.replace("$('replayIntro2').addEventListener('click',resetIntro);\n", '');
@@ -207,6 +230,8 @@ function boot() {
     if (bits[i].trim() === 'siya_demo_review=1') return;
   }
   var h = String((location && location.hostname) || '').toLowerCase();
+  /* Never fire GTM on Vercel previews or any non-production host */
+  if (h.indexOf('vercel.app') !== -1 || h === 'localhost' || h === '127.0.0.1') return;
   if (!(h === 'siya.health' || /\\.siya\\.health$/.test(h))) return;
   var w = window;
   var d = document;
@@ -235,6 +260,7 @@ const page = `<!DOCTYPE html>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow, noarchive" />
+    <script>(function(){try{var q=new URLSearchParams(location.search);var embed=q.get('embed')==='1';document.documentElement.classList.add('phone-first');if(embed)document.documentElement.classList.add('demo-embed');}catch(e){}})();</script>
     <title>Employer demo | Siya Health</title>
     <meta name="description" content="A short, self-paced walkthrough of Siya Health for HR and benefits leaders." />
     <link rel="canonical" href="https://siya.health/employers/demo" />

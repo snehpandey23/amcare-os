@@ -1,0 +1,410 @@
+{
+  "HASH": "2d1da2b3",
+  "failures": [],
+  "tables": [
+    {
+      "label": "desk-1440",
+      "rows": [
+        {
+          "id": "statement",
+          "handDur": 3200,
+          "lastAt": 1710,
+          "buildEnd": 2410,
+          "advance": 4910,
+          "ok": true
+        },
+        {
+          "id": "p-time",
+          "handDur": 12700,
+          "lastAt": 10400,
+          "buildEnd": 11200,
+          "advance": 14057,
+          "ok": true
+        },
+        {
+          "id": "p-away",
+          "handDur": 10500,
+          "lastAt": 5600,
+          "buildEnd": 6400,
+          "advance": 17829,
+          "ok": true
+        },
+        {
+          "id": "p-familiar",
+          "handDur": 7800,
+          "lastAt": 4200,
+          "buildEnd": 5000,
+          "advance": 9286,
+          "ok": true
+        },
+        {
+          "id": "p-response",
+          "handDur": 12500,
+          "lastAt": 11200,
+          "buildEnd": 12000,
+          "advance": 18286,
+          "ok": true
+        },
+        {
+          "id": "p-whole",
+          "handDur": 8400,
+          "lastAt": 3040,
+          "buildEnd": 3740,
+          "advance": 11169,
+          "ok": true
+        },
+        {
+          "id": "p-coord",
+          "handDur": 9000,
+          "lastAt": 5200,
+          "buildEnd": 5900,
+          "advance": 8400,
+          "ok": true
+        },
+        {
+          "id": "question",
+          "handDur": 3700,
+          "lastAt": 2200,
+          "buildEnd": 3000,
+          "advance": 7857,
+          "ok": true
+        },
+        {
+          "id": "turn",
+          "handDur": 7800,
+          "lastAt": 3600,
+          "buildEnd": 4400,
+          "advance": 10114,
+          "ok": true
+        },
+        {
+          "id": "care-checklist",
+          "handDur": 9500,
+          "lastAt": 4200,
+          "buildEnd": 4900,
+          "advance": 10900,
+          "ok": true
+        },
+        {
+          "id": "f-time",
+          "handDur": 7800,
+          "lastAt": 2800,
+          "buildEnd": 3500,
+          "advance": 14071,
+          "ok": true
+        },
+        {
+          "id": "f-ways",
+          "handDur": 9800,
+          "lastAt": 2800,
+          "buildEnd": 3600,
+          "advance": 9886,
+          "ok": true
+        },
+        {
+          "id": "f-response",
+          "handDur": 9200,
+          "lastAt": 5000,
+          "buildEnd": 5800,
+          "advance": 10943,
+          "ok": true
+        },
+        {
+          "id": "f-urgent",
+          "handDur": 9000,
+          "lastAt": 5600,
+          "buildEnd": 6400,
+          "advance": 15257,
+          "ok": true
+        },
+        {
+          "id": "f-whole",
+          "handDur": 9000,
+          "lastAt": 4200,
+          "buildEnd": 5000,
+          "advance": 11857,
+          "ok": true
+        },
+        {
+          "id": "employer",
+          "handDur": 9000,
+          "lastAt": 7800,
+          "buildEnd": 8600,
+          "advance": 13457,
+          "ok": true
+        },
+        {
+          "id": "journey",
+          "handDur": 18000,
+          "lastAt": 900,
+          "buildEnd": 21800,
+          "advance": 26371,
+          "ok": true
+        },
+        {
+          "id": "outcomes",
+          "handDur": 8200,
+          "lastAt": 5600,
+          "buildEnd": 6400,
+          "advance": 13257,
+          "ok": true
+        },
+        {
+          "id": "clinicians",
+          "handDur": 7200,
+          "lastAt": 3900,
+          "buildEnd": 4600,
+          "advance": 9457,
+          "ok": true
+        },
+        {
+          "id": "cost",
+          "handDur": 11000,
+          "lastAt": 8600,
+          "buildEnd": 9400,
+          "advance": 13971,
+          "ok": true
+        },
+        {
+          "id": "privacy",
+          "handDur": 7800,
+          "lastAt": 2800,
+          "buildEnd": 3600,
+          "advance": 7029,
+          "ok": true
+        },
+        {
+          "id": "proof",
+          "handDur": 8000,
+          "lastAt": 1400,
+          "buildEnd": 2200,
+          "advance": 4700,
+          "ok": true
+        },
+        {
+          "id": "close",
+          "handDur": 0,
+          "lastAt": 2500,
+          "buildEnd": 3300,
+          "advance": 0,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "label": "phone-390",
+      "rows": [
+        {
+          "id": "statement",
+          "handDur": 3200,
+          "lastAt": 1710,
+          "buildEnd": 2410,
+          "advance": 4910,
+          "ok": true
+        },
+        {
+          "id": "p-time",
+          "handDur": 12700,
+          "lastAt": 10400,
+          "buildEnd": 11200,
+          "advance": 14057,
+          "ok": true
+        },
+        {
+          "id": "p-away",
+          "handDur": 10500,
+          "lastAt": 5600,
+          "buildEnd": 6400,
+          "advance": 17829,
+          "ok": true
+        },
+        {
+          "id": "p-familiar",
+          "handDur": 7800,
+          "lastAt": 4200,
+          "buildEnd": 5000,
+          "advance": 9286,
+          "ok": true
+        },
+        {
+          "id": "p-response",
+          "handDur": 12500,
+          "lastAt": 11200,
+          "buildEnd": 12000,
+          "advance": 18286,
+          "ok": true
+        },
+        {
+          "id": "p-whole",
+          "handDur": 8400,
+          "lastAt": 2800,
+          "buildEnd": 3500,
+          "advance": 10929,
+          "ok": true
+        },
+        {
+          "id": "p-coord",
+          "handDur": 9000,
+          "lastAt": 5200,
+          "buildEnd": 5900,
+          "advance": 8400,
+          "ok": true
+        },
+        {
+          "id": "question",
+          "handDur": 3700,
+          "lastAt": 2200,
+          "buildEnd": 3000,
+          "advance": 7857,
+          "ok": true
+        },
+        {
+          "id": "turn",
+          "handDur": 7800,
+          "lastAt": 3400,
+          "buildEnd": 4200,
+          "advance": 9914,
+          "ok": true
+        },
+        {
+          "id": "care-checklist",
+          "handDur": 9500,
+          "lastAt": 4200,
+          "buildEnd": 4900,
+          "advance": 10900,
+          "ok": true
+        },
+        {
+          "id": "f-time",
+          "handDur": 7800,
+          "lastAt": 2800,
+          "buildEnd": 3500,
+          "advance": 14071,
+          "ok": true
+        },
+        {
+          "id": "f-ways",
+          "handDur": 9800,
+          "lastAt": 2800,
+          "buildEnd": 3600,
+          "advance": 9886,
+          "ok": true
+        },
+        {
+          "id": "f-response",
+          "handDur": 9200,
+          "lastAt": 5000,
+          "buildEnd": 5800,
+          "advance": 10943,
+          "ok": true
+        },
+        {
+          "id": "f-urgent",
+          "handDur": 9000,
+          "lastAt": 5600,
+          "buildEnd": 6400,
+          "advance": 15257,
+          "ok": true
+        },
+        {
+          "id": "f-whole",
+          "handDur": 9000,
+          "lastAt": 4200,
+          "buildEnd": 5000,
+          "advance": 11857,
+          "ok": true
+        },
+        {
+          "id": "employer",
+          "handDur": 9000,
+          "lastAt": 7800,
+          "buildEnd": 8600,
+          "advance": 13457,
+          "ok": true
+        },
+        {
+          "id": "journey",
+          "handDur": 18000,
+          "lastAt": 900,
+          "buildEnd": 21800,
+          "advance": 26371,
+          "ok": true
+        },
+        {
+          "id": "outcomes",
+          "handDur": 8200,
+          "lastAt": 5600,
+          "buildEnd": 6400,
+          "advance": 13257,
+          "ok": true
+        },
+        {
+          "id": "clinicians",
+          "handDur": 7200,
+          "lastAt": 3900,
+          "buildEnd": 4600,
+          "advance": 9457,
+          "ok": true
+        },
+        {
+          "id": "cost",
+          "handDur": 11000,
+          "lastAt": 8600,
+          "buildEnd": 9400,
+          "advance": 13971,
+          "ok": true
+        },
+        {
+          "id": "privacy",
+          "handDur": 7800,
+          "lastAt": 2800,
+          "buildEnd": 3600,
+          "advance": 7029,
+          "ok": true
+        },
+        {
+          "id": "proof-nums",
+          "handDur": 7000,
+          "lastAt": 1400,
+          "buildEnd": 2200,
+          "advance": 4700,
+          "ok": true
+        },
+        {
+          "id": "close",
+          "handDur": 0,
+          "lastAt": 2500,
+          "buildEnd": 3300,
+          "advance": 0,
+          "ok": true
+        }
+      ]
+    }
+  ],
+  "desk": {
+    "overlapEvents": [],
+    "afterSpam": {
+      "visibleCount": 1,
+      "visibleIds": [
+        "p-whole"
+      ],
+      "curId": "p-whole",
+      "chapter": "Problem",
+      "tx": "idle"
+    },
+    "errs": []
+  },
+  "phone": {
+    "overlapEvents": [],
+    "afterSpam": {
+      "visibleCount": 1,
+      "visibleIds": [
+        "p-whole"
+      ],
+      "curId": "p-whole",
+      "chapter": "Problem",
+      "tx": "idle"
+    },
+    "errs": []
+  }
+}
