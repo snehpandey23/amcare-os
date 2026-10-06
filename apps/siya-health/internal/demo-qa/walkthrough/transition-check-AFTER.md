@@ -1,6 +1,4 @@
-# Transition check AFTER `e162838c`
-
-_Generated on cleanup tree immediately before commit `e162838c` (demo.html identical to pre-commit tip)._
+# Transition check AFTER `4ef2730e`
 
 ## Diagnose summary (fixed)
 - Leave/enter state machine (LEAVING 280ms → hide/reset → ENTERING); builds start only on enter.
@@ -29,10 +27,10 @@ _Generated on cleanup tree immediately before commit `e162838c` (demo.html ident
 | f-urgent | 9000 | 5600 | 6400 | 15257 |
 | f-whole | 9000 | 4200 | 5000 | 11857 |
 | employer | 9000 | 7800 | 8600 | 13457 |
-| journey | 16000 | 900 | 21800 | 24300 |
+| journey | 18000 | 900 | 21800 | 26371 |
 | outcomes | 8200 | 5600 | 6400 | 13257 |
 | clinicians | 7200 | 3900 | 4600 | 9457 |
-| cost | 9800 | 7200 | 8000 | 12571 |
+| cost | 11000 | 8600 | 9400 | 13971 |
 | privacy | 7800 | 2800 | 3600 | 7029 |
 | proof | 8000 | 1400 | 2200 | 4700 |
 | close | 0 | 2500 | 3300 | 0 |
@@ -57,10 +55,10 @@ _Generated on cleanup tree immediately before commit `e162838c` (demo.html ident
 | f-urgent | 9000 | 5600 | 6400 | 15257 |
 | f-whole | 9000 | 4200 | 5000 | 11857 |
 | employer | 9000 | 7800 | 8600 | 13457 |
-| journey | 16000 | 900 | 21800 | 24300 |
+| journey | 18000 | 900 | 21800 | 26371 |
 | outcomes | 8200 | 5600 | 6400 | 13257 |
 | clinicians | 7200 | 3900 | 4600 | 9457 |
-| cost | 9800 | 7200 | 8000 | 12571 |
+| cost | 11000 | 8600 | 9400 | 13971 |
 | privacy | 7800 | 2800 | 3600 | 7029 |
 | proof-nums | 7000 | 1400 | 2200 | 4700 |
 | close | 0 | 2500 | 3300 | 0 |

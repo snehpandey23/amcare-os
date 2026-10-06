@@ -1,5 +1,5 @@
 {
-  "HASH": "debb1a07",
+  "HASH": "4ef2730e",
   "failures": [],
   "tables": [
     {
@@ -135,10 +135,10 @@
         },
         {
           "id": "journey",
-          "handDur": 16000,
+          "handDur": 18000,
           "lastAt": 900,
           "buildEnd": 21800,
-          "advance": 24300,
+          "advance": 26371,
           "ok": true
         },
         {
@@ -159,10 +159,10 @@
         },
         {
           "id": "cost",
-          "handDur": 9800,
-          "lastAt": 7200,
-          "buildEnd": 8000,
-          "advance": 12571,
+          "handDur": 11000,
+          "lastAt": 8600,
+          "buildEnd": 9400,
+          "advance": 13971,
           "ok": true
         },
         {
@@ -324,10 +324,10 @@
         },
         {
           "id": "journey",
-          "handDur": 16000,
+          "handDur": 18000,
           "lastAt": 900,
           "buildEnd": 21800,
-          "advance": 24300,
+          "advance": 26371,
           "ok": true
         },
         {
@@ -348,10 +348,10 @@
         },
         {
           "id": "cost",
-          "handDur": 9800,
-          "lastAt": 7200,
-          "buildEnd": 8000,
-          "advance": 12571,
+          "handDur": 11000,
+          "lastAt": 8600,
+          "buildEnd": 9400,
+          "advance": 13971,
           "ok": true
         },
         {

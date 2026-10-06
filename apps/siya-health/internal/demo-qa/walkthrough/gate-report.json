@@ -1,5 +1,5 @@
 {
-  "commit": "pending-cleanup-commit",
+  "commit": "4ef2730e",
   "gates": {
     "css-coverage": {
       "ok": true,
@@ -29,7 +29,7 @@
     "transition": {
       "ok": true,
       "notes": [
-        "TRANSITION PASS (standalone; release-gates timeout raised to 900s)"
+        "TRANSITION PASS"
       ]
     },
     "smoke": {
@@ -137,5 +137,12 @@
       "name": "no Founder title on cards",
       "ok": true
     }
-  ]
+  ],
+  "collision": {
+    "count": 0,
+    "sample": [
+      "FAILURES 0"
+    ]
+  },
+  "analyticsReqs": []
 }

@@ -1,6 +1,6 @@
 # CSS coverage
 
-Used: 170
+Used: 173
 Missing: 0
 
 _Zero missing._

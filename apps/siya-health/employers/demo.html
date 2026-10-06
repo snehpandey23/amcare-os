@@ -191,7 +191,7 @@ article[data-walk] .msg{flex-wrap:nowrap;align-items:center}
 /* Desk-stage: never size walk phone from 100vh (blows past the 720 canvas / bar). */
 html.desk-stage #tour article[data-walk] .frame{max-height:100%;min-height:0;overflow:hidden;align-content:center}
 html.desk-stage #tour article[data-walk] .msg{max-height:100%;min-height:0;align-items:center}
-html.desk-stage #tour article[data-walk] .phone{height:min(400px,62%);max-height:400px;width:auto}
+html.desk-stage #tour article[data-walk] .phone:not(.path-phone){height:min(400px,62%);max-height:400px;width:auto}
 html.desk-stage #tour article[data-walk] .doors{max-height:100%;overflow:auto}
 #walkSteps{gap:6px;width:min(420px,100%)}
 #walkSteps .door{padding:8px 12px}
@@ -723,18 +723,19 @@ html.desk-stage #tour #p-familiar .desk-hero{align-content:center}
 .away-phase{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden}
 .away-stack:has(.away-phase.in) .away-usual .away-seg.t-visit{opacity:.22;filter:saturate(.6)}
 /* Siya row */
-.away-siya-track{background:transparent;box-shadow:none;overflow:visible;gap:0}
-.away-ghost{flex:20 1 0;height:56px;border-radius:12px;box-shadow:inset 0 0 0 1.5px dashed rgba(10,36,107,.28);
-  opacity:0;transform:scaleX(0);transform-origin:left center;transition:opacity .5s ease,transform .55s cubic-bezier(.5,0,.2,1);margin:0 2px;background:rgba(255,255,255,.35)}
-.away-ghost.w60{flex:60 1 0}
-.away-ghost.in{opacity:1;transform:scaleX(1)}
-.away-siya-visit{flex:20 1 0;height:56px;border-radius:12px;background:var(--grad-btn);color:#fff;
+.away-siya-track{background:transparent;box-shadow:none;overflow:visible;gap:6px;align-items:stretch}
+.away-not-needed{flex:80 1 0;min-width:0;height:56px;border-radius:12px;box-shadow:inset 0 0 0 1.5px dashed rgba(10,36,107,.32);
+  background:rgba(255,255,255,.25);opacity:0;transform:scaleX(0);transform-origin:left center;
+  transition:opacity .5s ease,transform .55s cubic-bezier(.5,0,.2,1);
+  display:flex;align-items:center;justify-content:center;padding:0 10px;text-align:center}
+.away-not-needed.in{opacity:1;transform:scaleX(1)}
+.away-not-needed span{font:600 12px/1.25 var(--font-display);color:var(--ink-soft)}
+.away-siya-visit{flex:20 1 0;min-width:0;height:56px;border-radius:12px;background:var(--grad-btn);color:#fff;
   opacity:0;transform:translateY(-64px) scaleX(.92);transform-origin:center;transition:opacity .55s ease,transform .7s cubic-bezier(.2,.8,.2,1);
-  box-shadow:0 8px 22px rgba(216,16,136,.28);margin:0 2px}
+  box-shadow:0 8px 22px rgba(216,16,136,.28);
+  display:flex;align-items:center;justify-content:center;padding:0 8px;text-align:center}
 .away-siya-visit.in{opacity:1;transform:none}
-.away-siya-labs{display:grid;gap:4px;padding:0 2px}
-.away-siya-labs .ghost-lab,.away-siya-labs .visit-lab{font:600 12px/1.25 var(--font-display);color:var(--ink-soft);white-space:nowrap}
-.away-siya-labs .visit-lab{color:var(--magenta-text);font-weight:700}
+.away-siya-visit span{font:700 11px/1.2 var(--font-display);color:#fff}
 .away-rx{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border-radius:12px;background:rgba(10,36,107,.04);
   border:1px solid rgba(10,36,107,.08);font:500 12px/1.35 var(--font-body);color:var(--ink)}
 .away-rx::before{content:"";flex:none;width:8px;height:8px;margin-top:5px;border-radius:50%;background:var(--grad-btn)}
@@ -771,8 +772,9 @@ html.desk-stage #tour #care-checklist .chart-card{width:min(380px,100%)}
   .away-track{height:48px}
   .away-seg{font-size:0;padding:0} /* labels move below on phone */
   .away-seg::after{display:none!important}
-  .away-ghost,.away-siya-visit{height:48px}
-  .away-siya-labs .ghost-lab,.away-siya-labs .visit-lab{font-size:12px;white-space:nowrap}
+  .away-not-needed,.away-siya-visit{height:48px}
+  .away-not-needed span{font-size:11px}
+  .away-siya-visit span{font-size:10px}
   .away-legend{display:flex}
   #p-familiar.slide,#p-away.slide{padding-bottom:108px}
   #p-familiar .frame.desk-split,#p-away .frame.desk-split{display:grid;grid-template-rows:auto auto;gap:12px;align-content:start}
@@ -926,12 +928,35 @@ html.desk-stage #tour #p-coord .web{max-height:min(480px,70%)}
 /* Why Siya flip cards */
 .why-cards{display:grid;gap:12px;width:min(520px,100%);min-height:220px;align-content:center;position:relative}
 .why-card{background:#fff;border-radius:16px;padding:14px;box-shadow:0 10px 28px rgba(10,36,107,.12);display:grid;gap:10px;text-align:left}
-.why-card.out{opacity:0;transform:translateY(-8px);pointer-events:none;position:absolute;inset:0 auto auto 0;width:100%}
+.why-card.out{opacity:0;transform:translateY(-8px);pointer-events:none;position:absolute;inset:0 auto auto 0;width:100%;z-index:0}
+.why-recap{position:relative;z-index:1}
+.why-recap.in{animation:none}
 .why-usual,.why-siya{display:grid;gap:4px;padding:10px 12px;border-radius:12px}
 .why-usual{background:#F4F1EA}
 .why-siya{background:linear-gradient(135deg,rgba(216,16,136,.08),rgba(123,45,142,.08));border:1.5px solid rgba(216,16,136,.22)}
 .why-usual span,.why-siya span{font:700 11px/1 var(--font-display);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft)}
 .why-usual b,.why-siya b{font:600 15px/1.3 var(--font-display);color:var(--ink)}
+.why-recap{background:#fff;border-radius:16px;padding:16px;box-shadow:0 10px 28px rgba(10,36,107,.12);display:grid;gap:10px;text-align:left;width:100%;max-width:100%;min-width:0;box-sizing:border-box;min-height:220px;align-content:center}
+.why-row{display:grid;grid-template-columns:18px minmax(0,1.1fr) 16px 18px minmax(0,1fr);gap:8px;align-items:center;padding:10px 10px;border-radius:12px;background:#F7F5F0}
+.why-row .wx{font:700 13px/1 var(--font-display);color:rgba(10,36,107,.45);text-align:center}
+.why-row .ok{font:700 14px/1 var(--font-display);color:#0A6B3A;text-align:center}
+.why-row .arrow{color:var(--ink-soft);text-align:center;font-weight:700}
+.why-row b{font:600 13px/1.3 var(--font-display);color:var(--ink-soft)}
+.why-row em{font:700 13px/1.3 var(--font-display);color:var(--ink);font-style:normal}
+.why-cards{min-height:260px;width:min(560px,100%)}
+html.desk-stage #tour #cost .why-cards{width:100%;max-width:none}
+html.desk-stage #tour #cost .why-recap{min-height:280px}
+@media (max-width:640px){
+  #cost .why-cards{width:100%;max-width:100%;min-width:0;box-sizing:border-box;padding:0 2px}
+  #cost .why-recap{width:100%;max-width:100%;min-width:0;box-sizing:border-box;padding:10px;min-height:0;gap:8px}
+  #cost .why-row{grid-template-columns:14px minmax(0,1fr);grid-template-rows:auto auto;gap:2px 6px;padding:8px;box-sizing:border-box;width:100%;max-width:100%;min-width:0}
+  #cost .why-row .arrow{display:none}
+  #cost .why-row .ok{grid-column:1;grid-row:2}
+  #cost .why-row em{grid-column:2;grid-row:2;font-size:12px;min-width:0;overflow-wrap:anywhere}
+  #cost .why-row b{font-size:12px;min-width:0;overflow-wrap:anywhere}
+  #cost .cost-foot{font-size:11px;max-width:100%;padding:0 2px;box-sizing:border-box}
+}
+
 /* Privacy two columns */
 .priv-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(640px,100%)}
 .priv-col{background:#fff;border-radius:16px;padding:14px;box-shadow:0 8px 22px rgba(10,36,107,.10);text-align:left}
@@ -943,13 +968,26 @@ html.desk-stage #tour #p-coord .web{max-height:min(480px,70%)}
 .start-seq{display:grid;gap:10px;width:min(420px,100%);min-height:240px;position:relative}
 .start-seq .jcard{width:100%}
 .start-seq .jcard.out{opacity:0;transform:translateY(-10px);pointer-events:none;position:absolute;inset:0}
+.link-url{display:grid;gap:4px;padding:10px 12px;border-radius:12px;background:#F4F1EA;border:1px solid rgba(10,36,107,.08)}
+.link-url code{font:700 13px/1.3 ui-monospace,Menlo,monospace;color:var(--ink);word-break:break-all}
+.link-url small{font:600 10px/1.2 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.start-trail{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
+.start-trail li{display:flex;align-items:center;gap:8px;font:600 12px/1.25 var(--font-display);color:var(--ink)}
+.start-trail li i{flex:none;width:18px;height:18px;border-radius:50%;background:rgba(10,107,58,.12);position:relative}
+.start-trail li i::after{content:"";position:absolute;left:5px;top:3px;width:5px;height:9px;border:solid #0A6B3A;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.start-seq .jcard.linkcard{display:grid;gap:10px;align-content:start;min-height:240px}
+
 .path-dual{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(640px,100%)}
 .path-col{display:grid;gap:6px;justify-items:center;align-content:start}
 .path-col h3{margin:0;font:700 13px/1.2 var(--font-display);color:var(--ink)}
 /* Dual-path phones must NOT inherit the tall single-walk phone calc. */
 .path-phone,.path-phone.phone,article[data-walk] .path-phone{
-  width:min(168px,100%);height:220px;max-height:220px;aspect-ratio:9/17;flex:none;padding:8px;border-radius:28px
+  width:min(200px,100%);height:320px;max-height:320px;aspect-ratio:9/17;flex:none;padding:8px;border-radius:28px
 }
+#journey .desk-copy{max-width:40%}
+#journey .desk-hero{min-width:0;width:100%}
+#journey .path-dual{width:100%;max-width:none;gap:16px;align-items:start}
+#journey .path-col{width:100%}
 .path-steps{display:grid;gap:6px;width:min(200px,100%);margin:0;padding:0;list-style:none}
 .path-steps .door{padding:6px 10px}
 .web-mock .screen{background:#fff;display:grid;grid-template-rows:auto 1fr;overflow:hidden}
@@ -998,33 +1036,46 @@ html.desk-stage #tour #p-coord .web{max-height:min(480px,70%)}
 .wm-done{padding:14px;border-radius:14px;background:rgba(10,107,58,.08);border:1.5px solid rgba(10,107,58,.25);display:grid;gap:4px}
 .wm-done b{font:700 14px/1.2 var(--font-display);color:#0A6B3A}
 .wm-done small{font:600 12px/1.3 var(--font-body);color:var(--ink-soft)}
+.wm-book .wm-done{display:none}
+.wm-book.is-done .wm-confirm{display:none}
+.wm-book.is-done .wm-done{display:grid}
+#walkTap,#walkCap,#walkNow,#walkSteps{display:none!important}
+
 .spark-cap{margin:0 0 6px;font:600 12px/1.3 var(--font-body);color:var(--ink-soft)}
 /* Desk-stage: keep dual path inside the canvas above the bar */
 html.desk-stage #tour article[data-walk]{
-  padding:24px 40px 88px;align-content:start;
+  padding:28px 40px 88px;align-content:center;
 }
-html.desk-stage #tour article[data-walk] .frame{
-  gap:8px;align-content:start;justify-items:center;max-height:100%;overflow:hidden;
+html.desk-stage #tour article[data-walk] .frame.desk-split{
+  gap:20px;align-items:center;max-height:100%;overflow:hidden;width:100%;
+  grid-template-columns:minmax(0,.4fr) minmax(0,.6fr);
 }
-html.desk-stage #tour article[data-walk] .eyebrow{font-size:11px}
-html.desk-stage #tour article[data-walk] .cap{font-size:clamp(20px,2.1vw,28px);max-width:640px}
+html.desk-stage #tour article[data-walk] .desk-copy{align-content:center;padding-right:8px}
+html.desk-stage #tour article[data-walk] .desk-hero{min-height:0;align-content:center}
+html.desk-stage #tour article[data-walk] .eyebrow{font-size:12px}
+html.desk-stage #tour article[data-walk] .cap{font-size:clamp(26px,2.6vw,36px);max-width:none;text-align:left}
+html.desk-stage #tour article[data-walk] .sub{text-align:left}
 html.desk-stage #tour article[data-walk] .path-phone,
 html.desk-stage #tour article[data-walk] .phone.path-phone{
-  height:160px;max-height:160px;width:120px;padding:6px;border-radius:24px
+  height:min(340px,52vh);max-height:340px;width:auto;min-height:300px;padding:8px;border-radius:28px
 }
 html.desk-stage #tour article[data-walk] #walkTap,
 html.desk-stage #tour article[data-walk] #walkCap,
 html.desk-stage #tour article[data-walk] #walkSteps,
-html.desk-stage #tour article[data-walk] #walkNow{display:none}
-html.desk-stage #tour article[data-walk] .path-dual{gap:8px;width:min(520px,100%)}
-html.desk-stage #tour article[data-walk] .path-col h3{font-size:12px}
+html.desk-stage #tour article[data-walk] #walkNow{display:none!important}
+html.desk-stage #tour article[data-walk] .path-dual{gap:18px;width:100%;max-width:none}
+html.desk-stage #tour article[data-walk] .path-col h3{font-size:13px}
 @media (max-width:640px){
   .priv-cols{grid-template-columns:1fr}
-  .path-dual{grid-template-columns:1fr 1fr;gap:8px;width:100%}
-  .path-phone,.path-phone.phone,article[data-walk] .path-phone{height:180px;max-height:180px;width:min(140px,100%);padding:6px;border-radius:24px}
-  article[data-walk] .cap{font-size:22px}
+  article[data-walk] .frame.desk-split{display:grid;grid-template-columns:1fr;gap:10px;width:100%}
+  article[data-walk] .desk-copy{width:100%;max-width:100%}
+  article[data-walk] .path-dual{grid-template-columns:1fr 1fr;gap:10px;width:100%}
+  .path-phone,.path-phone.phone,article[data-walk] .path-phone{
+    height:min(280px,46vh);max-height:280px;width:100%;min-width:0;padding:7px;border-radius:26px
+  }
+  article[data-walk] .cap{font-size:22px;text-align:left}
   article[data-walk] .frame{gap:8px}
-  #walkTap{min-height:40px;padding:10px 18px;font-size:13px}
+  #walkTap,#walkCap,#walkNow,#walkSteps{display:none!important}
 }
 /* D privacy funnel (legacy phone cards) + separation visual */
 .funnel{width:100%;max-width:420px;display:grid;gap:10px;justify-items:stretch;margin:0 auto}
@@ -1099,12 +1150,18 @@ html.desk-stage #tour #cost .cost-cell{font-size:13px;padding:11px 12px}
 .proof-card b{font:700 clamp(28px,3vw,36px)/1 var(--font-display);color:var(--ink);letter-spacing:-.02em}
 .proof-card span{font:500 12px/1.3 var(--font-body);color:var(--ink-soft)}
 /* D outcomes dual */
-.out-dual{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:stretch}
-.out-dual .panel{min-height:0;min-width:0;overflow:hidden;gap:10px}
+.out-dual{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:stretch}
+.out-dual .panel{min-height:0;min-width:45%;overflow:hidden;gap:12px;flex:1 1 45%}
 .out-dual .panel h3{flex-wrap:wrap}
 .out-dual .panel h3 small{display:inline;margin-left:6px;font:600 10px/1 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
-html.desk-stage #tour #outcomes .out-dual{gap:18px}
-html.desk-stage #tour #outcomes .out-dual .panel{padding:14px}
+html.desk-stage #tour #outcomes .out-dual{gap:24px;width:100%}
+html.desk-stage #tour #outcomes .out-dual .panel{padding:16px;min-width:0}
+html.desk-stage #tour #outcomes .spark svg{height:150px;min-height:140px}
+html.desk-stage #tour #outcomes .spark-top b{font-size:14px}
+#outcomes .spark svg{height:140px;min-height:140px}
+@media (max-width:640px){
+  #outcomes .spark svg{height:120px;min-height:120px}
+}
 @media (max-width:640px){
   .ways{grid-template-columns:1fr}
   .out-dual{grid-template-columns:1fr;width:100%;max-width:100%;gap:10px}
@@ -1373,6 +1430,28 @@ html.demo-embed .slide,
 html.demo-embed .slide.active{filter:none!important}
 html.demo-embed #tour .hint2{display:none}
 
+
+/* Phone polish: employer linkcard + outcomes */
+@media (max-width:640px){
+  #employer .start-seq{width:100%;max-width:100%;min-width:0;box-sizing:border-box;min-height:0}
+  #employer .start-seq .jcard{width:100%;max-width:100%;min-width:0;box-sizing:border-box}
+  #employer .start-seq .jcard.linkcard{min-height:0;padding:12px;gap:8px}
+  #employer .link-url{padding:8px 10px;box-sizing:border-box;max-width:100%}
+  #employer .link-url code{font-size:11px;word-break:break-all}
+  #employer .start-trail{gap:4px;margin-top:6px}
+  #employer .start-trail li{font-size:11px}
+  #outcomes .frame.desk-split{gap:6px}
+  #outcomes .desk-copy{gap:4px}
+  #outcomes .desk-copy .sub,#outcomes .sample-cap{display:none}
+  #outcomes .out-dual{gap:8px}
+  #outcomes .panel{padding:8px;gap:4px}
+  #outcomes .spark-cap{display:none}
+  #outcomes .spark{gap:2px}
+  #outcomes .spark-top b,#outcomes .spark-top span{font-size:11px}
+  #outcomes .spark svg{height:120px;min-height:120px}
+  #outcomes .panel h3{font-size:12px}
+}
+
 a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
 </style>
 
@@ -1466,14 +1545,8 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
           <div class="away-row away-siya">
             <div class="away-row-lab b" data-at="3400">With Siya</div>
             <div class="away-track away-siya-track" aria-hidden="true">
-              <div class="away-ghost b" data-at="3600"></div>
-              <div class="away-ghost w60 b" data-at="3800"></div>
-              <div class="away-siya-visit b" data-at="4000"></div>
-              <div class="away-ghost b" data-at="4200"></div>
-            </div>
-            <div class="away-siya-labs b" data-at="4000">
-              <span class="ghost-lab">Travel and waiting: not needed</span>
-              <span class="visit-lab">Video visit, from their desk</span>
+              <div class="away-not-needed b" data-at="3600"><span>Travel and waiting: not needed</span></div>
+              <div class="away-siya-visit b" data-at="4000"><span>Video visit, from their desk</span></div>
             </div>
             <div class="away-total b" data-at="4600">≈ 20 minutes</div>
           </div>
@@ -1831,7 +1904,14 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
           </div>
           <div class="jcard pop linkcard" data-at="6600">
             <h3>Your organization's private care link</h3>
+            <div class="link-url"><code>siya.health/join/your-organization</code><small>Illustrative</small></div>
             <div class="mock-btn">Copy link</div>
+            <ul class="start-trail" aria-label="Launch steps complete">
+              <li><i aria-hidden="true"></i><span>Inquiry</span></li>
+              <li><i aria-hidden="true"></i><span>Meet the Siya team</span></li>
+              <li><i aria-hidden="true"></i><span>Package finalized</span></li>
+              <li><i aria-hidden="true"></i><span>Private care link</span></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -1846,30 +1926,36 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
     <div class="frame"><p class="sub">Parked — merged into getting started.</p></div>
   </article>
 
-  <article class="slide" id="journey" data-slide-id="journey" data-dur="16000" data-chapter="2" data-walk="1">
-    <div class="frame">
-      <div class="eyebrow b" data-at="150">How it works</div>
-      <h2 class="cap b" data-at="300">Two ways to seek <em>care</em>.</h2>
-      <div class="path-dual" id="pathDual">
-        <div class="path-col b" data-at="500">
-          <h3>Secure app</h3>
-          <div class="phone path-phone"><div class="screen">
-            <div class="ph-head"><i class="siya"></i><div>Siya Health<small>Secure care app</small></div></div>
-            <div class="thread" id="walkPhone"></div>
-          </div></div>
-          <ol class="path-steps" id="walkSteps"></ol>
-        </div>
-        <div class="path-col b" data-at="900">
-          <h3>Website</h3>
-          <div class="phone path-phone web-mock"><div class="screen" id="webMock">
-            <div class="wm-top"><b>siya.health</b><span id="wmPath">Home</span></div>
-            <div class="wm-body" id="webMockBody"></div>
-          </div></div>
+  <article class="slide" id="journey" data-slide-id="journey" data-dur="18000" data-chapter="2" data-walk="1">
+    <div class="frame desk-split">
+      <div class="desk-copy">
+        <div class="eyebrow b" data-at="150">How it works</div>
+        <h2 class="cap b" data-at="300">Two ways to seek <em>care</em>.</h2>
+        <p class="sub b" data-at="500">Private app or website — same team, same care.</p>
+      </div>
+      <div class="desk-hero">
+        <div class="path-dual" id="pathDual">
+          <div class="path-col b" data-at="700">
+            <h3>Secure app</h3>
+            <div class="phone path-phone"><div class="screen">
+              <div class="ph-head"><i class="siya"></i><div>Siya Health<small>Secure care app</small></div></div>
+              <div class="thread" id="walkPhone"></div>
+            </div></div>
+          </div>
+          <div class="path-col b" data-at="900">
+            <h3>Website</h3>
+            <div class="phone path-phone web-mock"><div class="screen" id="webMock">
+              <div class="wm-top"><b>siya.health</b><span id="wmPath">Home</span></div>
+              <div class="wm-body" id="webMockBody"></div>
+            </div></div>
+          </div>
         </div>
       </div>
-      <p class="walk-now" id="walkNow"></p>
-      <button type="button" class="start" id="walkTap" style="animation:ring 1.6s ease-out infinite">Tap here</button>
-      <p class="sub" id="walkCap"></p>
+      <!-- Hidden chrome: autoplay drives both paths; taps still skip via #walkTap if present -->
+      <ol class="path-steps" id="walkSteps" hidden></ol>
+      <p class="walk-now" id="walkNow" hidden></p>
+      <button type="button" class="start" id="walkTap" hidden>Tap here</button>
+      <p class="sub" id="walkCap" hidden></p>
     </div>
   </article>
 
@@ -1887,25 +1973,25 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
             <h3>What your team member feels <small>Sample data</small></h3>
             <div class="spark">
               <div class="spark-top"><b>Stress</b><span>↓ over time</span></div>
-              <svg viewBox="0 0 100 44" aria-hidden="true">
-                <line x1="14" y1="6" x2="14" y2="36" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
-                <line x1="14" y1="36" x2="94" y2="36" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
-                <text x="2" y="12" fill="#0A246B" font-size="5.5" font-weight="600">Stress</text>
-                <text x="78" y="42" fill="#0A246B" font-size="5.5" font-weight="600">Time</text>
+              <svg viewBox="0 0 100 52" aria-hidden="true">
+                <line x1="14" y1="6" x2="14" y2="40" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+                <line x1="14" y1="36" x2="94" y2="40" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+                <text x="2" y="12" fill="#0A246B" font-size="8" font-weight="600">Stress</text>
+                <text x="78" y="50" fill="#0A246B" font-size="8" font-weight="600">Time</text>
                 <circle class="base-mark pop" data-at="1400" cx="18" cy="10" r="2.2" fill="#D81088"/>
-                <text x="22" y="8" fill="#0A246B" font-size="5" font-weight="600">Start</text>
+                <text x="22" y="8" fill="#0A246B" font-size="7" font-weight="600">Start</text>
                 <path class="draw" data-at="1500" pathLength="1" d="M18 10 C 40 14, 62 24, 90 32" fill="none" stroke="#D81088" stroke-width="2.5" stroke-linecap="round"/>
               </svg>
             </div>
             <div class="spark">
               <div class="spark-top"><b>Focus</b><span>↑ over time</span></div>
-              <svg viewBox="0 0 100 44" aria-hidden="true">
-                <line x1="14" y1="6" x2="14" y2="36" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
-                <line x1="14" y1="36" x2="94" y2="36" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
-                <text x="2" y="12" fill="#0A246B" font-size="5.5" font-weight="600">Focus</text>
-                <text x="78" y="42" fill="#0A246B" font-size="5.5" font-weight="600">Time</text>
-                <circle class="base-mark pop" data-at="1900" cx="18" cy="32" r="2.2" fill="#0A6B3A"/>
-                <text x="22" y="36" fill="#0A246B" font-size="5" font-weight="600">Start</text>
+              <svg viewBox="0 0 100 52" aria-hidden="true">
+                <line x1="14" y1="6" x2="14" y2="40" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+                <line x1="14" y1="36" x2="94" y2="40" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+                <text x="2" y="12" fill="#0A246B" font-size="8" font-weight="600">Focus</text>
+                <text x="78" y="50" fill="#0A246B" font-size="8" font-weight="600">Time</text>
+                <circle class="base-mark pop" data-at="1900" cx="18" cy="36" r="2.2" fill="#0A6B3A"/>
+                <text x="22" y="40" fill="#0A246B" font-size="7" font-weight="600">Start</text>
                 <path class="draw" data-at="2000" pathLength="1" d="M18 32 C 40 28, 62 16, 90 8" fill="none" stroke="#0A6B3A" stroke-width="2.5" stroke-linecap="round"/>
               </svg>
             </div>
@@ -1915,19 +2001,23 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
             <p class="spark-cap">Aggregate trends, groups of 10+.</p>
             <div class="spark">
               <div class="spark-top"><b>Team stress</b><span>Groups of 10+</span></div>
-              <svg viewBox="0 0 100 44" aria-hidden="true">
-                <line x1="14" y1="6" x2="14" y2="36" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
-                <line x1="14" y1="36" x2="94" y2="36" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+              <svg viewBox="0 0 100 52" aria-hidden="true">
+                <line x1="14" y1="6" x2="14" y2="40" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+                <line x1="14" y1="36" x2="94" y2="40" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+                <text x="2" y="12" fill="#0A246B" font-size="8" font-weight="600">Stress</text>
+                <text x="78" y="50" fill="#0A246B" font-size="8" font-weight="600">Time</text>
                 <circle class="base-mark pop" data-at="2300" cx="18" cy="12" r="2.2" fill="#D81088"/>
                 <path class="draw" data-at="2400" pathLength="1" d="M18 12 C 42 14, 66 24, 90 30" fill="none" stroke="#D81088" stroke-width="2.5" stroke-linecap="round"/>
               </svg>
             </div>
             <div class="spark">
               <div class="spark-top"><b>Team focus</b><span>Aggregate only</span></div>
-              <svg viewBox="0 0 100 44" aria-hidden="true">
-                <line x1="14" y1="6" x2="14" y2="36" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
-                <line x1="14" y1="36" x2="94" y2="36" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
-                <circle class="base-mark pop" data-at="2800" cx="18" cy="30" r="2.2" fill="#0A6B3A"/>
+              <svg viewBox="0 0 100 52" aria-hidden="true">
+                <line x1="14" y1="6" x2="14" y2="40" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+                <line x1="14" y1="36" x2="94" y2="40" stroke="rgba(10,36,107,.25)" stroke-width="1"/>
+                <text x="2" y="12" fill="#0A246B" font-size="8" font-weight="600">Focus</text>
+                <text x="78" y="50" fill="#0A246B" font-size="8" font-weight="600">Time</text>
+                <circle class="base-mark pop" data-at="2800" cx="18" cy="34" r="2.2" fill="#0A6B3A"/>
                 <path class="draw" data-at="2900" pathLength="1" d="M18 30 C 42 26, 66 14, 90 8" fill="none" stroke="#0A6B3A" stroke-width="2.5" stroke-linecap="round"/>
               </svg>
             </div>
@@ -1977,7 +2067,7 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
     </div>
   </article>
 
-  <article class="slide" id="cost" data-slide-id="cost" data-chapter="4" data-dur="9800" data-cost="1">
+  <article class="slide" id="cost" data-slide-id="cost" data-chapter="4" data-dur="11000" data-cost="1">
     <div class="frame desk-split">
       <div class="desk-copy">
         <div class="eyebrow b" data-at="200">Why Siya</div>
@@ -1994,11 +2084,16 @@ a.start,a.ghost{text-decoration:none;display:inline-flex;align-items:center;just
             <div class="why-usual"><span>Usual</span><b>Network guessing</b></div>
             <div class="why-siya b" data-at="4000"><span>Siya</span><b>No network maze</b></div>
           </div>
-          <div class="why-card b" data-at="5800">
+          <div class="why-card b" data-at="5800" data-out="7400">
             <div class="why-usual"><span>Usual</span><b>Five apps</b></div>
             <div class="why-siya b" data-at="6400"><span>Siya</span><b>One concierge team</b></div>
           </div>
-          <p class="cost-foot b" data-at="7200">Medications are filled at their own pharmacy; we can help find discount coupons. Labs and outside specialists are billed separately. Lab prices are shown upfront when ordered through our lab portal.</p>
+          <div class="why-recap b" data-at="7600">
+            <div class="why-row"><span class="wx" aria-hidden="true">✕</span><b>Months-long psychiatrist waitlists</b><span class="arrow" aria-hidden="true">→</span><span class="ok" aria-hidden="true">✓</span><em>A doctor within 2 hours, any time</em></div>
+            <div class="why-row"><span class="wx" aria-hidden="true">✕</span><b>Network guessing</b><span class="arrow" aria-hidden="true">→</span><span class="ok" aria-hidden="true">✓</span><em>No network maze</em></div>
+            <div class="why-row"><span class="wx" aria-hidden="true">✕</span><b>Five apps</b><span class="arrow" aria-hidden="true">→</span><span class="ok" aria-hidden="true">✓</span><em>One concierge team</em></div>
+          </div>
+          <p class="cost-foot b" data-at="8600">Medications are filled at their own pharmacy; we can help find discount coupons. Labs and outside specialists are billed separately. Lab prices are shown upfront when ordered through our lab portal.</p>
         </div>
       </div>
     </div>
@@ -2809,6 +2904,7 @@ const CHAPTER_SHORT=CHAPTERS;
 const showFounder=false;
 const realOutcomes=false;
 const WALK_MS=3000;
+const WALK_LAST=6;
 function applyDemoFlags(){
   document.querySelectorAll('article.slide[data-founder]').forEach(el=>el.classList.toggle('parked',!showFounder));
   const soon=$('outcomesSoon'); if(soon) soon.hidden=true;
@@ -2843,7 +2939,7 @@ function playSlideDeepLink(raw,{playBuild=true}={}){
   return true;
 }
 window.__employerDemo={
-  showFounder,realOutcomes,applyDemoFlags,WALK_MS,isPhoneLayout,demoHost,demoEmbed,
+  showFounder,realOutcomes,applyDemoFlags,WALK_MS,WALK_LAST,isPhoneLayout,demoHost,demoEmbed,
   getAudio:()=>audio,
   MUSIC_LEVEL,MUSIC_PAD_PEAK,MUSIC_ARP_PEAK,MUSIC_PULSE_PEAK,
   ensureMusic,playSlideDeepLink,SLIDE_ALIASES,
@@ -2861,6 +2957,11 @@ window.__employerDemo={
     slides.forEach(s=>{s.classList.remove('active','leaving','entering'); resetSlideBuilds(s);});
     enterSlide(i,{final:true});
     const s=slides[i];
+    if(s.hasAttribute('data-walk')){
+      elapsed=Math.max(elapsed,(WALK_LAST+1)*WALK_MS);
+      walkIntentSub=0;
+      renderWalk(WALK_LAST,{instant:true,final:true});
+    }
     const dur=computeAdvanceMs(s);
     s.querySelectorAll('[data-at]').forEach(el=>el.classList.add('in'));
     /* Final-frame outs so rotating slots (days) don't stack all words */
@@ -2905,16 +3006,17 @@ const WALK=[
   ['Meet the care team','View'],
   ['Book through your organization\'s private link','Confirm']
 ];
-let walkStep=-1,founderHold=false,founderMissing=true;
-function walkScreen(i){
-  const intent=WALK_INTENTS[Math.floor(Date.now()/8000)%WALK_INTENTS.length];
-  if(i===0)return `<div class="vm-row"><b>Private link</b><small>Your organization's link</small><div class="start" style="margin-top:8px">Join</div></div>`;
-  if(i===1)return `<div class="vm-row"><b>Secure care app</b><small>Download, then open</small><div class="start" style="margin-top:8px">Open</div></div>`;
-  if(i===2)return `<div class="msg-line me"><span class="avatar alex">A</span><div class="bub me">${intent}</div></div>`;
-  if(i===3)return `<div class="msg-line them"><span class="avatar care">C</span><div class="bub them">On it — we'll take care of this for you.</div></div><div class="meta l">Care team</div>`;
-  if(i===4)return `<div class="vm-row"><b>siya.health</b><small>Homepage</small><div class="start" style="margin-top:8px">Explore</div></div>`;
-  if(i===5)return `<div class="prov-card" style="margin:8px"><img src="/assets/images/dr-sneh-pandey.png" width="48" height="48" alt=""><div><b>Dr. Sneh Pandey</b><small>Medical Director · Internal Medicine Physician</small></div></div>`;
-  return `<div class="vm-row"><b>Visit booked</b><small>Through your organization's private link</small><div class="start" style="margin-top:8px">Add to calendar</div></div>`;
+let walkStep=-1,walkIntentSub=-1,founderHold=false,founderMissing=true;
+/* Path A (secure app): steps 0–3, then holds on reply while Path B continues. */
+function walkScreenA(i){
+  const a=Math.min(3,i);
+  const intent=WALK_INTENTS[Math.max(0,walkIntentSub)%WALK_INTENTS.length];
+  if(a===0)return `<div class="vm-row"><b>Private link</b><small>Your organization's link</small><div class="start" style="margin-top:8px">Join</div></div>`;
+  if(a===1)return `<div class="vm-row"><b>Secure care app</b><small>Download, then open</small><div class="start" style="margin-top:8px">Open</div></div>`;
+  if(a===2)return `<div class="msg-line me"><span class="avatar alex">A</span><div class="bub me">${intent}</div></div>`;
+  return `<div class="msg-line me"><span class="avatar alex">A</span><div class="bub me">${intent}</div></div>
+    <div class="msg-line them"><span class="avatar care">C</span><div class="bub them">On it — we'll take care of this for you.</div></div>
+    <div class="meta l">Care team</div>`;
 }
 /* Real production screenshots (390px). homepage-top = hero → Book Free Meet & Greet (no prices). */
 const SITE_HOME='/employers/demo/media/site/homepage-top-2026-10-04.webp';
@@ -2928,8 +3030,10 @@ const SITE_COVERS=[
 function coversOverlayHtml(){
   return `<div class="covers-cycle" aria-hidden="true">${SITE_COVERS.map((src,i)=>`<img src="${src}" alt="" width="240" height="168" decoding="async"${i===0?' fetchpriority="high"':''}>`).join('')}</div>`;
 }
-function paintWebMock(i){
+function paintWebMock(i,opts){
+  opts=opts||{};
   const body=$('webMockBody'); const pathEl=$('wmPath'); if(!body)return;
+  const instant=!!opts.instant;
   if(i<=3){
     if(pathEl)pathEl.textContent='Home';
     body.innerHTML=`<div class="site-shot-wrap"><div class="site-shot-stack show-covers"><img class="site-shot" src="${SITE_HOME}" alt="siya.health homepage" width="390" decoding="async">${coversOverlayHtml()}</div></div>`;
@@ -2937,24 +3041,29 @@ function paintWebMock(i){
   }
   if(i===4){
     if(pathEl)pathEl.textContent='Home';
-    /* Carousel on card, then scroll to Book Free Meet & Greet highlight. */
     body.innerHTML=`<div class="site-shot-wrap"><div class="site-shot-stack show-covers"><img class="site-shot" src="${SITE_HOME}" alt="siya.health homepage" width="390" decoding="async">${coversOverlayHtml()}</div><i class="tap-hl book" aria-hidden="true"></i></div>`;
     const stack=body.querySelector('.site-shot-stack'); const hl=body.querySelector('.tap-hl');
-    setTimeout(()=>{if(stack)stack.classList.add('scroll-book');},1400);
-    setTimeout(()=>{if(hl)hl.classList.add('on');},2200);
+    if(instant){if(stack)stack.classList.add('scroll-book');if(hl)hl.classList.add('on');}
+    else{
+      setTimeout(()=>{if(stack)stack.classList.add('scroll-book');},900);
+      setTimeout(()=>{if(hl)hl.classList.add('on');},1600);
+    }
     return;
   }
   if(i===5){
     if(pathEl)pathEl.textContent='Care team';
     body.innerHTML=`<div class="site-shot-wrap"><div class="site-shot-stack"><img class="site-shot" src="${SITE_TEAM}" alt="siya.health care team" width="390" decoding="async"></div><i class="tap-hl doc" aria-hidden="true"></i></div>`;
     const stack=body.querySelector('.site-shot-stack'); const hl=body.querySelector('.tap-hl');
-    requestAnimationFrame(()=>{if(stack)stack.classList.add('scroll-deep');});
-    setTimeout(()=>{if(hl)hl.classList.add('on');},2000);
+    if(instant){if(stack)stack.classList.add('scroll-deep');if(hl)hl.classList.add('on');}
+    else{
+      requestAnimationFrame(()=>{if(stack)stack.classList.add('scroll-deep');});
+      setTimeout(()=>{if(hl)hl.classList.add('on');},1400);
+    }
     return;
   }
-  /* Booking through org private link — Siya-styled recreation (not a vendor screenshot) */
+  /* Path B final: private-link booking → slot → Visit booked */
   if(pathEl)pathEl.textContent='Book';
-  body.innerHTML=`<div class="wm-book">
+  body.innerHTML=`<div class="wm-book${instant?' is-done':''}">
     <p class="wm-org">Booking through your organization's private link</p>
     <h4>Dr. Sneh Pandey</h4>
     <p class="wm-md-title">Medical Director · Internal Medicine Physician</p>
@@ -2963,21 +3072,23 @@ function paintWebMock(i){
     <button type="button" class="wm-confirm">Confirm</button>
     <div class="wm-done"><b>Visit booked</b><small>Sat 10:00 · Confirmation sent</small></div>
   </div>`;
-}
-function renderWalk(i){
-  const phone=$('walkPhone'), list=$('walkSteps'), cap=$('walkCap'), now=$('walkNow');
-  if(!phone||!list)return;
-  walkStep=i;
-  phone.innerHTML=walkScreen(i);
-  paintWebMock(i);
-  list.innerHTML=WALK.map((row,k)=>`<div class="door${k===i?' on':''}"><span class="ic">${k+1}</span><div><b>${row[0]}</b></div></div>`).join('');
-  if(now)now.textContent='Step '+(i+1)+' of 7 · '+WALK[i][0];
-  if(cap){
-    if(i<=3)cap.textContent='One message to the concierge team.';
-    else if(i===4)cap.textContent='Same care on the website — browse, then book.';
-    else if(i===5)cap.textContent='Dr. Pandey, Medical Director — pick who you see.';
-    else cap.textContent='Booking through your organization\'s private link.';
+  if(!instant){
+    const book=body.querySelector('.wm-book');
+    setTimeout(()=>{if(book)book.classList.add('is-done');},1200);
   }
+}
+function renderWalk(i,opts){
+  opts=opts||{};
+  const phone=$('walkPhone'), list=$('walkSteps'), cap=$('walkCap'), now=$('walkNow');
+  if(!phone)return;
+  walkStep=i;
+  if(i<=2)walkIntentSub=Math.max(0,walkIntentSub);
+  if(i>=3)walkIntentSub=Math.max(0,walkIntentSub);
+  phone.innerHTML=walkScreenA(i);
+  paintWebMock(i,{instant:!!opts.instant||i===WALK_LAST&&opts.final});
+  if(list)list.innerHTML=WALK.map((row,k)=>`<div class="door${k===i?' on':''}"><span class="ic">${k+1}</span><div><b>${row[0]}</b></div></div>`).join('');
+  if(now)now.textContent='';
+  if(cap)cap.textContent='';
   requestAnimationFrame(fitWalk);
 }
 function fitWalk(){
@@ -2986,24 +3097,23 @@ function fitWalk(){
   const bar=document.querySelector('.bar');
   if(!slide||!phones.length||!bar)return;
   const clear=()=>{
-    phones.forEach(p=>{p.style.height='';p.style.maxHeight='';});
+    phones.forEach(p=>{p.style.height='';p.style.maxHeight='';p.style.width='';});
     slide.style.placeItems=''; slide.style.alignContent=''; slide.style.paddingTop='';
   };
-  /* Desk-stage / wide: CSS caps dual-path phones; clear any leftover inline. */
+  /* Desk-stage / wide: CSS sizes dual-path phones; clear leftover inline. */
   if(!isPhoneLayout()){
     clear();
     return;
   }
   slide.style.placeItems='start center';
   slide.style.alignContent='start';
-  slide.style.paddingTop='12px';
+  slide.style.paddingTop='10px';
   const frame=slide.querySelector('.frame');
   if(!frame)return;
-  phones.forEach(p=>{p.style.height='140px';p.style.maxHeight='140px';});
-  const base=frame.getBoundingClientRect().height-140;
-  const room=bar.getBoundingClientRect().top-frame.getBoundingClientRect().top-8;
-  const h=Math.max(150,Math.min(200,Math.floor(room-base)));
-  phones.forEach(p=>{p.style.height=h+'px';p.style.maxHeight=h+'px';});
+  const room=Math.max(180,bar.getBoundingClientRect().top-frame.getBoundingClientRect().top-12);
+  const copyH=(slide.querySelector('.desk-copy')||{getBoundingClientRect:()=>({height:0})}).getBoundingClientRect().height;
+  const h=Math.max(220,Math.min(300,Math.floor(room-copyH-36)));
+  phones.forEach(p=>{p.style.height=h+'px';p.style.maxHeight=h+'px';p.style.width='';});
 }
 function jumpChapter(n){
   const idx=slides.findIndex(s=>+(s.dataset.chapter||0)===n);
@@ -3050,8 +3160,20 @@ function paintChapters(forceMenu){
 function syncWalk(){
   const s=slides[cur];
   if(!s||!s.hasAttribute('data-walk'))return;
-  const step=Math.min(6,Math.floor(elapsed/WALK_MS));
-  if(step!==walkStep)renderWalk(step);
+  const step=Math.min(WALK_LAST,Math.floor(elapsed/WALK_MS));
+  if(step!==walkStep){
+    renderWalk(step,{instant:step===WALK_LAST && paused});
+    return;
+  }
+  /* Rotate concierge intents while Path A is on the message frame. */
+  if(step===2){
+    const sub=Math.floor((elapsed%WALK_MS)/900)%WALK_INTENTS.length;
+    if(sub!==walkIntentSub){
+      walkIntentSub=sub;
+      const phone=$('walkPhone');
+      if(phone)phone.innerHTML=walkScreenA(2);
+    }
+  }
 }
 /* Must initialize before collectSlides→paintChapters (phone narrow path reads cur). */
 let cur=-1,elapsed=0,last=performance.now(),paused=false,events=[],fired=0,dur=0,tourOn=false;
@@ -3181,8 +3303,14 @@ function enterSlide(i,opts){
   s.style.opacity='';s.style.visibility='';
   if(reduce||opts.final)fireAll();
   if(s.hasAttribute('data-walk')){
-    if(opts.final)renderWalk(6);
-    else renderWalk(0);
+    if(opts.final){
+      elapsed=Math.max(elapsed,(WALK_LAST+1)*WALK_MS);
+      walkIntentSub=0;
+      renderWalk(WALK_LAST,{instant:true,final:true});
+    }else{
+      walkIntentSub=0;
+      renderWalk(0);
+    }
     requestAnimationFrame(fitWalk);
   }else requestAnimationFrame(fitWalk);
   paintChapters();
@@ -3235,8 +3363,8 @@ function fireAll(){while(fired<events.length)events[fired++].fn();if(events.leng
 function advance(){
   if(tx!=='idle')return;
   const s=slides[cur];
-  if(fired<events.length){fireAll();if(s&&s.hasAttribute('data-walk'))renderWalk(Math.min(6,walkStep));return;}
-  if(s&&s.hasAttribute('data-walk')&&walkStep<6){elapsed=(walkStep+1)*WALK_MS+20;syncWalk();return;}
+  if(fired<events.length){fireAll();if(s&&s.hasAttribute('data-walk')&&walkStep<0)renderWalk(0);return;}
+  if(s&&s.hasAttribute('data-walk')&&walkStep<WALK_LAST){elapsed=(walkStep+1)*WALK_MS+20;syncWalk();return;}
   if(cur<slides.length-1)goTo(cur+1,{});
 }
 function togglePause(){
@@ -3352,7 +3480,7 @@ document.addEventListener('click',e=>{
   if(!e.target.closest('#walkTap'))return;
   e.stopPropagation();
   if(tx!=='idle')return;
-  if(walkStep<6){elapsed=(walkStep+1)*WALK_MS+20;syncWalk();}
+  if(walkStep<WALK_LAST){elapsed=(walkStep+1)*WALK_MS+20;syncWalk();}
   else if(cur<slides.length-1)goTo(cur+1,{});
 });
 const founderVid=$('founderVid'), founderPlay=$('founderPlay'), founderSoon=$('founderSoon');
