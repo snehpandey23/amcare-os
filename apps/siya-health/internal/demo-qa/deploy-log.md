@@ -10,3 +10,4 @@ branch == `SIYA_HEALTH_RELEASE_BRANCH` (default `main`), and
 | 2026-10-06 06:40 IST | `employer-demo-journey-prod` | `71d73ea8` | check | sp | CHECK_ONLY | no --prod |
 | 2026-10-06 06:40 IST | `employer-demo-journey-prod` | `71d73ea8` | production | sp | REFUSED | branch!=main (dirty mid-check; re-verified below) |
 | 2026-10-06 06:39 IST | `employer-demo-journey-prod` | `c35bfae5` | production | sp | REFUSED | branch!=main |
+| 2026-10-06 17:49 IST | `release/2026-10-06` | `72bb6271` | production | sp | CHECK_ONLY | gates ok |
