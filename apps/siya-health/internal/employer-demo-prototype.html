@@ -888,8 +888,8 @@ html.desk-stage #tour #p-coord .web{max-height:min(480px,70%)}
 .why-siya{background:linear-gradient(135deg,rgba(216,16,136,.08),rgba(123,45,142,.08));border:1.5px solid rgba(216,16,136,.22)}
 .why-usual span,.why-siya span{font:700 11px/1 var(--font-display);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft)}
 .why-usual b,.why-siya b{font:600 15px/1.3 var(--font-display);color:var(--ink)}
-.why-recap{background:#fff;border-radius:16px;padding:16px;box-shadow:0 10px 28px rgba(10,36,107,.12);display:grid;gap:10px;text-align:left;width:100%;max-width:100%;min-width:0;box-sizing:border-box;min-height:220px;align-content:center}
-.why-row{display:grid;grid-template-columns:18px minmax(0,1.1fr) 16px 18px minmax(0,1fr);gap:8px;align-items:center;padding:10px 10px;border-radius:12px;background:#F7F5F0}
+.why-recap{background:#fff;border-radius:16px;padding:20px;box-shadow:0 10px 28px rgba(10,36,107,.12);display:grid;gap:12px;text-align:left;width:100%;max-width:100%;min-width:0;box-sizing:border-box;min-height:280px;height:100%;align-content:center}
+.why-row{display:grid;grid-template-columns:22px minmax(0,1.15fr) 18px 22px minmax(0,1fr);gap:10px;align-items:center;padding:14px 12px;border-radius:12px;background:#F7F5F0}
 .why-row .wx{font:700 13px/1 var(--font-display);color:rgba(10,36,107,.45);text-align:center}
 .why-row .ok{font:700 14px/1 var(--font-display);color:#0A6B3A;text-align:center}
 .why-row .arrow{color:var(--ink-soft);text-align:center;font-weight:700}
@@ -897,7 +897,10 @@ html.desk-stage #tour #p-coord .web{max-height:min(480px,70%)}
 .why-row em{font:700 13px/1.3 var(--font-display);color:var(--ink);font-style:normal}
 .why-cards{min-height:260px;width:min(560px,100%)}
 html.desk-stage #tour #cost .why-cards{width:100%;max-width:none}
-html.desk-stage #tour #cost .why-recap{min-height:280px}
+html.desk-stage #tour #cost .why-cards{height:100%;align-content:stretch}
+html.desk-stage #tour #cost .why-recap{min-height:320px;height:min(420px,62vh);padding:22px}
+html.desk-stage #tour #cost .why-row{padding:16px 14px}
+html.desk-stage #tour #cost .why-row b,html.desk-stage #tour #cost .why-row em{font-size:15px}
 @media (max-width:640px){
   #cost .why-cards{width:100%;max-width:100%;min-width:0;box-sizing:border-box;padding:0 2px}
   #cost .why-recap{width:100%;max-width:100%;min-width:0;box-sizing:border-box;padding:10px;min-height:0;gap:8px}
