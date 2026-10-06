@@ -90,7 +90,12 @@ async function check(page, slideId, viewport) {
     const bar = document.querySelector('.bar');
     const barBox = bar ? bar.getBoundingClientRect() : null;
     const barTop = barBox ? barBox.top : innerHeight;
-    const stage = document.querySelector('.desk-canvas') || document.getElementById('tour');
+    /* Prefer the active tour canvas — never #welcomeCanvas (first .desk-canvas in DOM). */
+    const stage =
+      document.querySelector('#tour.on #deskCanvas') ||
+      document.querySelector('#tour #deskCanvas') ||
+      document.querySelector('#tour .desk-canvas') ||
+      document.getElementById('tour');
     const stageBox = stage
       ? stage.getBoundingClientRect()
       : { left: 0, top: 0, right: innerWidth, bottom: innerHeight, width: innerWidth, height: innerHeight };

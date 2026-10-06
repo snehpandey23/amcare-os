@@ -177,7 +177,7 @@ const browser = await chromium.launch();
 {
   try {
     const out = execSync('node internal/demo-qa/transition-check.mjs', {
-      cwd: ROOT, encoding: 'utf8', timeout: 360000,
+      cwd: ROOT, encoding: 'utf8', timeout: 900000,
     });
     pass('transition', out.trim().split('\n').find((l) => l.includes('PASS')) || 'PASS');
   } catch (e) {

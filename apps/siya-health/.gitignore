@@ -10,8 +10,22 @@ data/ads-landing-smoke-latest.json
 # Phase 0 live HTML + git archive backups (local only; do not commit)
 .site-snapshots/
 
-# Local Design QA screenshots / clips (not deployed)
-internal/demo-qa/
+# Local Design QA screenshots / clips (not deployed).
+# Keep scripts + markdown reports tracked; ignore generated media.
+internal/demo-qa/**
+!internal/demo-qa/**/
+!internal/demo-qa/**/*.mjs
+!internal/demo-qa/**/*.md
+!internal/demo-qa/**/*.json
+!internal/demo-qa/**/*.html
+internal/demo-qa/**/_cs_*/
+internal/demo-qa/**/*.png
+internal/demo-qa/**/*.jpg
+internal/demo-qa/**/*.jpeg
+internal/demo-qa/**/*.webp
+internal/demo-qa/**/*.mp4
+internal/demo-qa/**/*.webm
+internal/demo-qa/**/*.wav
 
 # Local music design preview (not deployed)
 internal/music-preview.html

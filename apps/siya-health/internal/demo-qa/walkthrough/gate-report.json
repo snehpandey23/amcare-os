@@ -1,0 +1,141 @@
+{
+  "commit": "pending-cleanup-commit",
+  "gates": {
+    "css-coverage": {
+      "ok": true,
+      "notes": [
+        "MISSING 0"
+      ]
+    },
+    "content-grep": {
+      "ok": true,
+      "notes": [
+        "no free-care claims",
+        "ok"
+      ]
+    },
+    "facts-audit": {
+      "ok": true,
+      "notes": [
+        "[{\"name\":\"2,700+\",\"ok\":true},{\"name\":\"Google 4.90\",\"ok\":true},{\"name\":\"102 reviews\",\"ok\":true},{\"name\":\"Marketplace 4.66\",\"ok\":true},{\"name\":\"589 reviews\",\"ok\":true},{\"name\":\"CA, TX, PA, FL\",\"ok\":true},{\"name\":\"booking 24/7\",\"ok\":true},{\"name\":\"care team 24/7\",\"ok\":true},{\"name\":\"response 30 min\",\"ok\":true},{\"name\":\"doctor 2 hours\",\"ok\":true},{\"name\":\"schedule subline\",\"ok\":true},{\"name\":\"week legend 24/7\",\"ok\":true},{\"name\":\"cost doctor row\",\"ok\":true},{\"name\":\"cost footnote pharmacy\",\"ok\":true},{\"name\":\"no guarantee wording\",\"ok\":true},{\"name\":\"MD title card\",\"ok\":true},{\"name\":\"MD title short\",\"ok\":true},{\"name\":\"MD byline\",\"ok\":true},{\"name\":\"no Founder title on cards\",\"ok\":true}]"
+      ]
+    },
+    "collision": {
+      "ok": true,
+      "notes": [
+        "zero failures (descendant getBoundingClientRect vs stage+bar)"
+      ]
+    },
+    "transition": {
+      "ok": true,
+      "notes": [
+        "TRANSITION PASS (standalone; release-gates timeout raised to 900s)"
+      ]
+    },
+    "smoke": {
+      "ok": true,
+      "notes": [
+        "iPhone Safari",
+        "Android Chrome",
+        "Instagram"
+      ]
+    },
+    "reduced-motion": {
+      "ok": true,
+      "notes": [
+        "ok"
+      ]
+    },
+    "a3-cut": {
+      "ok": true,
+      "notes": [
+        "no care-body / silhouette / makeBodyFigure"
+      ]
+    },
+    "analytics-runtime": {
+      "ok": true,
+      "notes": [
+        "gtm-ish requests under review=1: 0"
+      ]
+    }
+  },
+  "failures": [],
+  "facts": [
+    {
+      "name": "2,700+",
+      "ok": true
+    },
+    {
+      "name": "Google 4.90",
+      "ok": true
+    },
+    {
+      "name": "102 reviews",
+      "ok": true
+    },
+    {
+      "name": "Marketplace 4.66",
+      "ok": true
+    },
+    {
+      "name": "589 reviews",
+      "ok": true
+    },
+    {
+      "name": "CA, TX, PA, FL",
+      "ok": true
+    },
+    {
+      "name": "booking 24/7",
+      "ok": true
+    },
+    {
+      "name": "care team 24/7",
+      "ok": true
+    },
+    {
+      "name": "response 30 min",
+      "ok": true
+    },
+    {
+      "name": "doctor 2 hours",
+      "ok": true
+    },
+    {
+      "name": "schedule subline",
+      "ok": true
+    },
+    {
+      "name": "week legend 24/7",
+      "ok": true
+    },
+    {
+      "name": "cost doctor row",
+      "ok": true
+    },
+    {
+      "name": "cost footnote pharmacy",
+      "ok": true
+    },
+    {
+      "name": "no guarantee wording",
+      "ok": true
+    },
+    {
+      "name": "MD title card",
+      "ok": true
+    },
+    {
+      "name": "MD title short",
+      "ok": true
+    },
+    {
+      "name": "MD byline",
+      "ok": true
+    },
+    {
+      "name": "no Founder title on cards",
+      "ok": true
+    }
+  ]
+}

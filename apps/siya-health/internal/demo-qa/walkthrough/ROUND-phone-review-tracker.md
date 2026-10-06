@@ -3,7 +3,7 @@
 Branch: `employer-demo-journey-prod` · Preview only · ONE deploy · No prod
 
 ## Transition-overlap (prerequisite) — DONE
-Commit `e1424fd0`. Gate report: `transition-check-AFTER.md` — **PASS** (0 overlaps desk+phone; leave→enter state machine; per-slide timers; `computeAdvanceMs`; Back = previous slide final state).
+Commit `e1424fd0` (machine). Re-verified on cleanup tip — gate report: `transition-check-AFTER.md` — **PASS** (0 overlaps desk+phone; leave→enter state machine; per-slide timers; `computeAdvanceMs`; Back = previous slide final state).
 
 | # | Item | Status |
 |---|---|---|
@@ -18,7 +18,7 @@ Commit `e1424fd0`. Gate report: `transition-check-AFTER.md` — **PASS** (0 over
 | 9 | p-whole STRESS HUB | done |
 | 10 | p-coord headline top + apps + collapse | done |
 | 11 | Checklist "Personalized plan" | done |
-| 12 | Headings standard audit | pending list |
+| 12 | Headings standard audit | done (see Heading exceptions below) |
 | 13 | Schedule one slide / one message | done |
 | 14 | f-urgent care-note copy | done |
 | 15 | f-whole continuity beats | done |
@@ -51,7 +51,18 @@ Preview: `apps/siya-health/internal/music-preview.html`
 - **A** ~108 BPM synth-keyboard lead (reference only)
 - **B** ~112 BPM brighter arpeggio — **SHIPPED** into demo (`MUSIC_LEVEL=1.3`, BPM 112, sawtooth arp)
 
-## Heading exceptions (item 12)
-- `statement` / `question`: centered big-type, no left column (intentional).
-- Journey: dual pathway columns; eyebrow+headline still top.
-- Close: checklist layout (intentional).
+## Heading exceptions (item 12) — audited 2026-10-06 on tip
+Standard (handoff): eyebrow → headline ≤2 lines → optional sub ≤2 lines → hero.
+
+**Pass (standard eyebrow + `h2.cap`):** p-time, p-away, p-familiar, p-response, p-whole, p-coord, turn, care-checklist, f-time, f-ways, f-response, f-urgent, f-whole, employer, journey, outcomes, clinicians, cost, privacy, proof, proof-nums.
+
+**Intentional exceptions (keep):**
+- `statement` / `question`: centered big-type (`data-vcenter`), no left column; statement headline is JS-filled `#bigline`.
+- `close`: checklist / next-steps layout (not desk-split); eyebrow `Siya Health` + `h2.q2`.
+- `journey`: dual pathway columns (walk surface); eyebrow+headline still top; no long sub (pathways are the body).
+- `founder`: parked (`showFounder=false`); no media files until video ships.
+- Phone-only companions (`f-time-a/b`, `employer-a/b`, `cost-usual`/`cost-siya`, `privacy-emp`/`privacy-you`): surface splits of the parent slide; inherit parent eyebrow/headline pattern.
+
+**Subs that wrap long on narrow phones (accepted; not copy bugs):** p-away, p-response, p-whole, turn, care-checklist, f-time, outcomes — keep as written; desk stays ≤2 lines.
+
+No heading copy fixes required this pass.

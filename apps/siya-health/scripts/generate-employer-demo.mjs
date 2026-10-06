@@ -260,7 +260,7 @@ const page = `<!DOCTYPE html>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow, noarchive" />
-    <script>(function(){try{var q=new URLSearchParams(location.search);var embed=q.get('embed')==='1';var w=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);var portraitDesktop=q.get('portrait')==='1';document.documentElement.classList.add('phone-first');if(embed)document.documentElement.classList.add('demo-embed');else if(w>900&&portraitDesktop)document.documentElement.classList.add('demo-desktop-host');}catch(e){}})();</script>
+    <script>(function(){try{var q=new URLSearchParams(location.search);var embed=q.get('embed')==='1';document.documentElement.classList.add('phone-first');if(embed)document.documentElement.classList.add('demo-embed');}catch(e){}})();</script>
     <title>Employer demo | Siya Health</title>
     <meta name="description" content="A short, self-paced walkthrough of Siya Health for HR and benefits leaders." />
     <link rel="canonical" href="https://siya.health/employers/demo" />
